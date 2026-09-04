@@ -13,8 +13,15 @@
   const DATA = window.CEO_BENCHMARK_DATA;
   if (!DATA) throw new Error("Benchmark data did not load.");
   const PREDICTIVE_MODEL = DATA.predictiveModel;
-  if (!PREDICTIVE_MODEL || PREDICTIVE_MODEL.schemaVersion !== 1 || PREDICTIVE_MODEL.training?.rpExcluded !== true) {
+  if (!PREDICTIVE_MODEL || PREDICTIVE_MODEL.schemaVersion !== 2 || PREDICTIVE_MODEL.training?.rpExcluded !== true) {
     throw new Error("Validated predictive-model data did not load.");
+  }
+  if (!Array.isArray(PREDICTIVE_MODEL.training.records)) {
+    throw new Error("Predictive-model training-record provenance did not load.");
+  }
+  const MODEL_TRAINING_BY_ID = new Map(PREDICTIVE_MODEL.training.records.map((record) => [record.id, record]));
+  if (MODEL_TRAINING_BY_ID.size !== PREDICTIVE_MODEL.training.records.length) {
+    throw new Error("Predictive-model training-record IDs are not unique.");
   }
 
   const $ = (selector) => document.querySelector(selector);
@@ -170,7 +177,7 @@
     sortDirection: "asc",
     filters: {
       title: null, sourceType: null, tier: null, topic: null, location: null,
-      eaAffinity: null, structure: null,
+      eaAffinity: null, structure: null, remoteCategory: null, fiscalSponsorCategory: null,
     },
     ranges: {
       salary: { min: null, max: null, low: null, high: null },
@@ -245,9 +252,12 @@
     modelSettings: $("#model-settings"), modelMethod: $("#model-method"),
     modelUseAdRanges: $("#model-use-ad-ranges"), modelAdRangesField: $("#model-ad-ranges-field"),
     modelResetProfile: $("#model-reset-profile"), modelExpenses: $("#model-expenses"),
-    modelRevenue: $("#model-revenue"), modelStaff: $("#model-staff"), modelYear: $("#model-year"),
+    modelRevenue: $("#model-revenue"), modelStaff: $("#model-staff"),
+    modelHighestOther: $("#model-highest-other"), modelYear: $("#model-year"),
     modelFocus: $("#model-focus"), modelEa: $("#model-ea"), modelOrganizationType: $("#model-organization-type"),
-    modelTitle: $("#model-title"), modelLocation: $("#model-location"), modelCategoryInputs: $("#model-category-inputs"),
+    modelTitle: $("#model-title"), modelLocation: $("#model-location"),
+    modelRemote: $("#model-remote"), modelFiscalSponsor: $("#model-fiscal-sponsor"),
+    modelCategoryInputs: $("#model-category-inputs"),
     modelSettingsNote: $("#model-settings-note"), modelDiagnostics: $("#model-diagnostics"),
     modelCvError: $("#model-cv-error"), modelCvCoverage: $("#model-cv-coverage"),
     modelProfileSupport: $("#model-profile-support"), modelProfileReasons: $("#model-profile-reasons"),
@@ -289,6 +299,7 @@
     matchScoreMin: $("#match-score-range-min"), matchScoreMax: $("#match-score-range-max"),
     matchScoreRangeValue: $("#match-score-range-value"), matchScoreFilterSummary: $("#match-score-filter-summary"),
     matchScoreFilterStatus: $("#match-score-filter-status"),
+    weightColumnSort: $("#weight-column-sort"), weightColumnLabel: $("#weight-column-label"),
     adjustedCompensationSort: $("#adjusted-compensation-sort"),
     adjustedCompensationTerm: $("#adjusted-compensation-term"),
     reportedCompensationSort: $("#reported-compensation-sort"),
@@ -667,7 +678,7 @@
   function clearAnalyticalFilters() {
     state.filters = {
       title: null, sourceType: null, tier: null, topic: null, location: null,
-      eaAffinity: null, structure: null,
+      eaAffinity: null, structure: null, remoteCategory: null, fiscalSponsorCategory: null,
     };
   }
 
@@ -684,11 +695,15 @@
   function rowModifiedWeights(row) { return modifiedWeightIds[rowStream(row)]; }
   function roleHolder(row) { return row.executive || row.personName || ""; }
 
-  const DISCRETE_WEIGHT_KEYS = ["tier", "eaAffinity", "sourceType", "topic", "titleGroup", "structure"];
+  const DISCRETE_WEIGHT_KEYS = [
+    "tier", "eaAffinity", "sourceType", "topic", "titleGroup", "structure",
+    "remoteCategory", "fiscalSponsorCategory",
+  ];
   const WEIGHT_LABELS = {
     comparability: "Automatic weights", size: "Expenses", staff: "Staff", recency: "Recency",
     tier: "Peer group", eaAffinity: "Effective Altruism", sourceType: "Pay source", topic: "Area",
     titleGroup: "Title", structure: "Organization type", streamBalanced: "Balance pay sources",
+    remoteCategory: "Work model", fiscalSponsorCategory: "Fiscal sponsor",
   };
   const DISCRETE_WEIGHT_NOTES = {
     tier: "Suggested values give the closest peer groups more influence and broader comparison groups less.",
@@ -697,6 +712,8 @@
     topic: "Suggested values give more influence to RP cause areas and research, evidence, evaluation, policy, or advisory work.",
     titleGroup: "Suggested values give CEO roles full influence, followed by Executive Director, President, other executive, and unreported titles.",
     structure: "Suggested values give more influence to independent, board-accountable nonprofits and less to affiliates, sponsored projects, unclear organizations, or subordinate roles.",
+    remoteCategory: "Suggested values give fully remote or distributed organizations more influence because RP operates remotely; unknown cases remain close to neutral.",
+    fiscalSponsorCategory: "Suggested values give organizations that themselves host fiscally sponsored projects more influence because RP also provides fiscal sponsorship; unknown cases remain close to neutral.",
   };
 
   function defaultDiscreteWeight(key, value, positionKey = state.position) {
@@ -721,6 +738,16 @@
       if (normalized.includes("core") || normalized.includes("aligned")) return 1;
       if (normalized.includes("adjacent")) return 0.85;
       return normalized.includes("functional") ? 0.65 : 0.6;
+    }
+    if (key === "remoteCategory") {
+      if (normalized === "remote") return 1;
+      if (normalized.includes("in-person") || normalized.includes("hybrid")) return 0.75;
+      return 0.85;
+    }
+    if (key === "fiscalSponsorCategory") {
+      if (normalized === "yes") return 1;
+      if (normalized === "no") return 0.8;
+      return 0.85;
     }
     if (key === "sourceType") return normalized.includes("form 990") ? 1 : normalized.includes("job posting") ? 0.8 : 0.7;
     if (key === "titleGroup") {
@@ -828,6 +855,18 @@
         "not extracted": "The preserved evidence did not yield a reliable governance or reporting structure; this is missing information, not an affirmative structure classification.",
       };
       explanation = structures[normalized] || "This organization and leadership type was recorded to show how closely the role resembles RP's top-executive structure.";
+    } else if (key === "remoteCategory") {
+      explanation = normalized === "remote"
+        ? "An official source describes this organization as fully remote, remote-first, or distributed without a regular shared office."
+        : normalized.includes("in-person") || normalized.includes("hybrid")
+          ? "An official source describes a regular office, work site, or hybrid arrangement; this category does not mean every employee works on site every day."
+          : "The reviewed official sources did not establish an organization-wide remote or office-based work model.";
+    } else if (key === "fiscalSponsorCategory") {
+      explanation = normalized === "yes"
+        ? "Official materials show that this organization legally or administratively hosts projects for other groups."
+        : normalized === "no"
+          ? "Reviewed official legal or program materials support that this organization does not itself offer fiscal sponsorship. Being sponsored by another organization is not the same as serving as a sponsor."
+          : "The reviewed official sources did not establish whether this organization itself hosts fiscally sponsored projects.";
     } else {
       const weight = defaultDiscreteWeight(key, category);
       let rationale = "This mission and operating category is used to assess similarity to RP.";
@@ -941,7 +980,10 @@
 
   function salaryForBasis(row, inflationAdjusted) {
     const values = inflationAdjusted ? row.salary : row.nominalSalary;
-    const measure = rowStream(row) === "jobAds" || state.view === "model" ? "base" : state.measure;
+    const modelRecord = state.view === "model" ? MODEL_TRAINING_BY_ID.get(row.id) : null;
+    const measure = modelRecord?.observation === "cash_proxy"
+      ? "cash"
+      : rowStream(row) === "jobAds" || state.view === "model" ? "base" : state.measure;
     const value = values?.[measure];
     return Number.isFinite(value) && value > 0 ? value : null;
   }
@@ -1229,18 +1271,25 @@
   function plotEligibility(row) {
     if (state.view === "model") {
       if (!isCeoPosition()) return { eligible: false, reason: "The predictive model is currently validated only for CEO pay." };
-      if (!row.defaultIncluded || salaryForBasis(row, true) == null) {
-        return { eligible: false, reason: "This record is outside the model's fixed recommended training cohort." };
+      const trainingRecord = MODEL_TRAINING_BY_ID.get(row.id);
+      if (!trainingRecord) {
+        return { eligible: false, reason: "This record is outside the model's reviewed training cohort." };
       }
-      if (rowStream(row) === "jobAds" && (state.modelMethod === "gam" || !state.modelUseAdRanges)) {
+      if (state.modelMethod === "gam" && trainingRecord.observation !== "exact_base") {
         return {
           eligible: false,
-          reason: state.modelMethod === "gam"
-            ? "The scale GAM was trained on Form 990 salaries only."
-            : "Advertised ranges are switched off for this model prediction.",
+          reason: "The numeric-input GAM uses exact Form 990 base salaries only.",
         };
       }
-      return { eligible: true, reason: "Included in the model's fixed training cohort." };
+      if (trainingRecord.source === "job_ad" && !state.modelUseAdRanges) {
+        return { eligible: false, reason: "Advertised ranges are switched off for this model prediction." };
+      }
+      const reason = trainingRecord.observation === "cash_proxy"
+        ? "Included through the model's separate cash-to-base measurement layer."
+        : trainingRecord.source === "job_ad"
+          ? "Included through the model's advertised-range likelihood."
+          : "Included as an exact Form 990 base-salary observation.";
+      return { eligible: true, reason, trainingRecord };
     }
     if (state.view === "histogram") return axisEligibility("histogram", row);
     const horizontal = axisEligibility("scatterX", row);
@@ -1862,9 +1911,15 @@
     return valid ? [...new Set(tokens)].sort((a, b) => a - b) : [];
   }
 
-  function appendCurveQuantileMarks(svg, model, percentiles, xScale, yScale, margin, sumWeight, binWidthAxis, axisMin, axisMax, formatter, geometry) {
+  function appendOutlinedDensityPath(svg, path) {
+    svg.append(svgElement("path", { d: path, class: "density-line-outline" }));
+    svg.append(svgElement("path", { d: path, class: "density-line" }));
+  }
+
+  function appendCurveQuantileMarks(svg, model, percentiles, xScale, yScale, margin, sumWeight, binWidthAxis, axisMin, axisMax, formatter, geometry, curveYForValue = null) {
     if (!state.markCurve || !model || !percentiles.length || percentiles.length >= 21) return;
     const expectedWeight = (value) => model.density(value) * geometry.jacobian(value) * sumWeight * binWidthAxis;
+    const curveY = curveYForValue || ((value) => margin.top + yScale(expectedWeight(value)));
     const delta = Math.max((axisMax - axisMin) / 1500, Number.EPSILON);
     const candidates = [];
     percentiles.forEach((percentile) => {
@@ -1873,11 +1928,11 @@
       const position = geometry.transform(value);
       if (position < axisMin || position > axisMax) return;
       const x = xScale(value);
-      const y = margin.top + yScale(expectedWeight(value));
+      const y = curveY(value);
       const before = geometry.inverse(Math.max(axisMin, position - delta));
       const after = geometry.inverse(Math.min(axisMax, position + delta));
       const tangentAngle = Math.atan2(
-        margin.top + yScale(expectedWeight(after)) - (margin.top + yScale(expectedWeight(before))),
+        curveY(after) - curveY(before),
         xScale(after) - xScale(before),
       );
       let normalX = -Math.sin(tangentAngle);
@@ -2318,8 +2373,7 @@
         const y = margin.top + yScale(point.expectedWeight);
         return `${index ? "L" : "M"}${x.toFixed(2)},${y.toFixed(2)}`;
       }).join("");
-      svg.append(svgElement("path", { d: path, class: "density-line-outline" }));
-      svg.append(svgElement("path", { d: path, class: "density-line" }));
+      appendOutlinedDensityPath(svg, path);
       appendCurveQuantileMarks(
         svg, model, percentiles, xScale, yScale, margin,
         sumWeight, binWidthAxis, axisMin, axisMax, descriptor.format, geometry,
@@ -2429,6 +2483,10 @@
     if (key === "tier") return peerCategoryLabel(value);
     if (key === "eaAffinity") return eaAffinityLabel(value);
     if (key === "titleGroup" && !isCeoPosition()) return humanizeCategory(value);
+    if (key === "fiscalSponsorCategory") {
+      return { Yes: "Serves as sponsor", No: "Does not serve as sponsor", Unknown: "Unknown" }[value]
+        || String(value || "Unknown");
+    }
     return String(value || "Not reported");
   }
 
@@ -2786,14 +2844,14 @@
 
   function modelContinuousVector(model) {
     const preprocessing = modelPreprocessing(model);
-    const standardized = ["expenses", "revenue", "staff", "compensation_year"].map((key) => {
+    const standardized = ["expenses", "revenue", "staff", "highest_other_base", "compensation_year"].map((key) => {
       const definition = preprocessing.get(key);
       const raw = Number(state.modelProfile[key]);
       if (!definition || !Number.isFinite(raw) || raw <= 0) return NaN;
       const transformed = definition.transform === "log" ? Math.log(raw) : raw;
       return (transformed - definition.center) / definition.scale;
     });
-    return [...standardized, 0, 0, 0];
+    return [...standardized, 0, 0, 0, 0];
   }
 
   function modelCategoryDefinition(key) {
@@ -2830,10 +2888,13 @@
   function gamModelPrediction() {
     const model = PREDICTIVE_MODEL.models.gam;
     const vector = modelContinuousVector(model);
-    if (vector.slice(0, 4).some((value) => !Number.isFinite(value))) return null;
-    const keys = ["expenses", "revenue", "staff", "year"];
+    if (vector.slice(0, 5).some((value) => !Number.isFinite(value))) return null;
+    const keys = ["expenses", "revenue", "staff", "highestOther", "year"];
     const contributions = keys.map((key, index) => ({
-      label: { expenses: "Expenses", revenue: "Revenue", staff: "Employees", year: "Pay year" }[key],
+      label: {
+        expenses: "Expenses", revenue: "Revenue", staff: "Employees",
+        highestOther: "Non-CEO highest base pay", year: "Pay year",
+      }[key],
       value: interpolateModelEffect(model.effects[key], vector[index]),
     }));
     const mu = model.baseline + contributions.reduce((sum, contribution) => sum + contribution.value, 0);
@@ -2849,13 +2910,15 @@
   function bayesianModelPrediction() {
     const model = state.modelUseAdRanges ? PREDICTIVE_MODEL.models.bayesianRanges : PREDICTIVE_MODEL.models.bayesian;
     const vector = modelContinuousVector(model);
-    if (vector.slice(0, 4).some((value) => !Number.isFinite(value))) return null;
+    if (vector.slice(0, 5).some((value) => !Number.isFinite(value))) return null;
     const draws = model.draws;
     const categoryIndexes = {
       focus: modelCategoryIndex("focus_area", state.modelProfile.focus_area),
       organizationType: modelCategoryIndex("organization_type", state.modelProfile.organization_type),
       title: modelCategoryIndex("title_group", state.modelProfile.title_group),
       location: modelCategoryIndex("location_scope", state.modelProfile.location_scope),
+      remote: modelCategoryIndex("remote_category", state.modelProfile.remote_category),
+      fiscalSponsor: modelCategoryIndex("fiscal_sponsor_category", state.modelProfile.fiscal_sponsor_category),
       ea: state.modelProfile.ea_relationship === "__average__"
         ? -1 : PREDICTIVE_MODEL.eaLevels.indexOf(state.modelProfile.ea_relationship),
     };
@@ -2875,12 +2938,15 @@
       ["Expenses", () => draws.beta.map((row) => row[0] * vector[0])],
       ["Revenue", () => draws.beta.map((row) => row[1] * vector[1])],
       ["Employees", () => draws.beta.map((row) => row[2] * vector[2])],
-      ["Pay year", () => draws.beta.map((row) => row[3] * vector[3])],
+      ["Non-CEO highest base pay", () => draws.beta.map((row) => row[3] * vector[3])],
+      ["Pay year", () => draws.beta.map((row) => row[4] * vector[4])],
       ["Focus area", () => categoryIndexes.focus < 0 ? [0] : draws.focus.map((row) => row[categoryIndexes.focus])],
       ["Effective Altruism", () => categoryIndexes.ea < 0 ? [0] : draws.ea.map((row) => row[categoryIndexes.ea])],
       ["Organization type", () => categoryIndexes.organizationType < 0 ? [0] : draws.organizationType.map((row) => row[categoryIndexes.organizationType])],
       ["Title group", () => categoryIndexes.title < 0 ? [0] : draws.title.map((row) => row[categoryIndexes.title])],
       ["Location", () => categoryIndexes.location < 0 ? [0] : draws.location.map((row) => row[categoryIndexes.location])],
+      ["Work model", () => categoryIndexes.remote < 0 ? [0] : draws.remote.map((row) => row[categoryIndexes.remote])],
+      ["Fiscal sponsor", () => categoryIndexes.fiscalSponsor < 0 ? [0] : draws.fiscalSponsor.map((row) => row[categoryIndexes.fiscalSponsor])],
     ];
     return {
       methodKey: state.modelUseAdRanges ? "bayesian_ranges" : "bayesian",
@@ -2900,12 +2966,20 @@
     return PREDICTIVE_MODEL.comparison.find((row) => row.key === key);
   }
 
+  function activeModelTrainingRecords() {
+    return PREDICTIVE_MODEL.training.records.filter((record) => {
+      if (state.modelMethod === "gam") return record.observation === "exact_base";
+      if (state.modelUseAdRanges) return true;
+      return record.source === "filing";
+    });
+  }
+
   function modelProfileCoverage() {
     const warnings = [];
     const active = state.modelMethod === "gam" ? PREDICTIVE_MODEL.models.gam
       : state.modelUseAdRanges ? PREDICTIVE_MODEL.models.bayesianRanges : PREDICTIVE_MODEL.models.bayesian;
     const preprocessing = modelPreprocessing(active);
-    ["expenses", "revenue", "staff", "compensation_year"].forEach((key) => {
+    ["expenses", "revenue", "staff", "highest_other_base", "compensation_year"].forEach((key) => {
       const definition = preprocessing.get(key);
       const value = Number(state.modelProfile[key]);
       if (!Number.isFinite(value) || value <= 0) warnings.push(`${key} is invalid`);
@@ -2956,7 +3030,7 @@
     refs.modelProfileReasons.hidden = !coverage.warnings.length;
     refs.modelProfileReasons.textContent = coverage.warnings.length
       ? `Limited support: ${coverage.warnings.join("; ")}.` : "";
-    refs.modelTrainingCount.textContent = `${PREDICTIVE_MODEL.training.exactFilings + (prediction.model.includeAdvertisedRanges ? PREDICTIVE_MODEL.training.advertisedRecords : 0)}`;
+    refs.modelTrainingCount.textContent = `${activeModelTrainingRecords().length}`;
     refs.modelMethodDescription.textContent = `${PREDICTIVE_MODEL.method[state.modelMethod]} ${PREDICTIVE_MODEL.method.validation}`;
     refs.modelComparisonBody.replaceChildren();
     PREDICTIVE_MODEL.comparison.forEach((row) => {
@@ -2992,7 +3066,6 @@
     [["model-legend-50", "50% prediction interval"], ["model-legend-80", "80% prediction interval"], ["model-legend-95", "95% prediction interval"]].forEach(([className, label]) => {
       const item = document.createElement("span"); item.innerHTML = `<i class="swatch ${className}"></i> ${label}`; refs.chartLegend.append(item);
     });
-    const reference = document.createElement("span"); reference.innerHTML = '<i class="line-swatch model-reference-swatch"></i> Current RP filing salary · not trained'; refs.chartLegend.append(reference);
   }
 
   function renderModel() {
@@ -3043,26 +3116,35 @@
     const areaPath = [`M${xScale(points[0].value)},${bottom}`, ...points.map((point) => `L${xScale(point.value).toFixed(2)},${yScale(point.density).toFixed(2)}`), `L${xScale(points.at(-1).value)},${bottom}Z`].join(" ");
     const linePath = points.map((point, index) => `${index ? "L" : "M"}${xScale(point.value).toFixed(2)},${yScale(point.density).toFixed(2)}`).join(" ");
     svg.append(svgElement("path", { d: areaPath, class: "model-density-area" }));
-    svg.append(svgElement("path", { d: linePath, class: "model-density-line" }));
+    appendOutlinedDensityPath(svg, linePath);
     const medianValue = sampleQuantile(samples, .5);
     svg.append(svgElement("line", { x1: xScale(medianValue), x2: xScale(medianValue), y1: yScale(density(medianValue)), y2: bottom, class: "model-median-line" }));
-    if (referenceSalary >= xMin && referenceSalary <= xMax) {
-      const referenceX = xScale(referenceSalary);
-      svg.append(svgElement("line", { x1: referenceX, x2: referenceX, y1: margin.top, y2: bottom, class: "model-reference-line" }));
-      const label = svgElement("text", { x: referenceX + 4, y: margin.top + 11, class: "model-reference-label" });
-      label.textContent = `RP ${compactMoney(referenceSalary)}`; svg.append(label);
-    }
-    if (state.markCurve && quantilePercentiles().length < 21) {
-      quantilePercentiles().forEach((percentile) => {
-        const value = sampleQuantile(samples, percentile / 100);
-        if (!(value >= xMin && value <= xMax)) return;
-        const x = xScale(value); const y = yScale(density(value));
-        svg.append(svgElement("line", { x1: x, x2: x, y1: y - 5, y2: y + 5, class: "curve-quantile-tick" }));
-      });
-    }
+    appendCurveQuantileMarks(
+      svg,
+      { density, quantile: (probability) => sampleQuantile(samples, probability) },
+      quantilePercentiles(), xScale, null, margin, 1, 1, xMin, xMax, compactMoney,
+      { transform: (value) => value, inverse: (value) => value, jacobian: () => 1 },
+      (value) => yScale(density(value)),
+    );
     if (state.hoverQuantile != null) {
       const x = xScale(state.hoverQuantile);
       svg.append(svgElement("line", { x1: x, x2: x, y1: margin.top, y2: bottom, class: "quantile-guide" }));
+    }
+    if (referenceSalary >= xMin && referenceSalary <= xMax) {
+      const referenceX = xScale(referenceSalary);
+      const rpLogoY = margin.top + 14;
+      svg.append(svgElement("line", {
+        x1: referenceX, x2: referenceX, y1: rpLogoY + 14, y2: bottom,
+        class: "rp-reference-guide", "aria-hidden": "true",
+      }));
+      const predictivePercentile = samples.filter((value) => value < referenceSalary).length / samples.length * 100;
+      appendRpMarker(svg, referenceX, rpLogoY, {
+        row: DATA.rpReference, value: referenceSalary, weight: 0,
+      }, {
+        primaryLabel: "RP filing salary", primaryFormat: money,
+        chartDetail: ["Model reference", "Excluded from model fitting"],
+        rankDetails: [["Predictive percentile", `${predictivePercentile.toFixed(1)} (model distribution)`]],
+      });
     }
     const tickCount = clamp(Math.floor(innerWidth / 100), 3, 7);
     for (let index = 0; index <= tickCount; index += 1) {
@@ -3099,6 +3181,7 @@
     const colorLabel = {
       topic: "Area", eaAffinity: "Effective Altruism", sourceType: "Pay source",
       titleGroup: "Title group", structure: "Organization type",
+      remoteCategory: "Work model", fiscalSponsorCategory: "Fiscal sponsor",
     }[state.chartColor];
     const plottedAxisKeys = state.view === "scatter" ? ["scatterX", "scatterY"] : ["histogram"];
     const usesHighestPaidOther = plottedAxisKeys.some((axisKey) => {
@@ -3160,8 +3243,8 @@
     if (state.view === "model") {
       const prediction = currentModelPrediction();
       refs.quantileBasis.textContent = state.modelMethod === "gam"
-        ? "Predicted from the scale GAM with held-out residual calibration"
-        : `Predicted for the selected profile using Bayesian partial pooling${state.modelUseAdRanges ? " with advertised ranges" : ""}`;
+        ? "Predicted from the numeric-input GAM with held-out residual calibration"
+        : `Predicted for the selected profile using Bayesian multilevel modeling${state.modelUseAdRanges ? " with advertised ranges" : ""}`;
       refs.customQuantilesField.hidden = state.quantileGranularity !== "custom";
       const percentiles = quantilePercentiles();
       if (state.quantileGranularity === "custom") {
@@ -3228,7 +3311,10 @@
   }
 
   function tableRows(weightMap = new Map(), eligibilityMap = new Map()) {
-    const filtered = rows().filter((row) => salary(row) != null && (state.view === "model" || passesFilters(row)));
+    const filtered = rows().filter((row) => (
+      (state.view === "model" ? MODEL_TRAINING_BY_ID.has(row.id) : salary(row) != null)
+      && (state.view === "model" || passesFilters(row))
+    ));
     const direction = state.sortDirection === "asc" ? 1 : -1;
     return filtered.sort((a, b) => {
       const value = (row) => {
@@ -3274,6 +3360,7 @@
       const label = {
         title: "Title", sourceType: "Pay source", tier: "Peer group", topic: "Focus Area",
         location: "Location", eaAffinity: "Effective Altruism", structure: "Organization type",
+        remoteCategory: "Work model", fiscalSponsorCategory: "Fiscal sponsor",
       }[key] || key;
       const values = [...new Set(rows().map((row) => String(row[key] || "Not reported")))].sort((a, b) => a.localeCompare(b));
       const selected = state.filters[key];
@@ -3380,14 +3467,15 @@
     tr.setAttribute("aria-label", `Rethink Priorities ${reference.title || positionDefinition().label} reference row; shown for context, not included in peer results`);
     const values = [
       "", reference.organization, reference.title, compactMoney(salaryForBasis(reference, true)),
-      compactMoney(reference.expenses), reference.staff == null ? "—" : String(reference.staff), "", "", reference.tier || "Reference", "—", reference.location || "—", "—", reference.structure || "—",
+      compactMoney(reference.expenses), reference.staff == null ? "—" : String(reference.staff), "", "", reference.tier || "Reference", "—", reference.location || "—",
+      reference.remoteCategory || "Unknown", reference.fiscalSponsorCategory || "Unknown", "—", reference.structure || "—",
       reference.compensationYear == null ? "—" : String(reference.compensationYear), reference.sourceType || "Form 990", reportedSalaryDisplay(reference),
     ];
     const cellClasses = [
       "check-column", "org-cell rp-reference-name", "title-cell",
       "money-cell adjusted-salary-cell", "money-cell", "number-cell",
       "weight-cell", "number-cell", "tier-cell", "topic-cell",
-      "metadata-cell", "metadata-cell", "metadata-cell", "number-cell",
+      "metadata-cell", "metadata-cell", "metadata-cell", "metadata-cell", "metadata-cell", "number-cell",
       "evidence-cell", "money-cell reported-salary-cell",
     ];
     values.forEach((value, index) => {
@@ -3422,6 +3510,11 @@
   }
 
   function renderTable() {
+    refs.weightColumnLabel.textContent = state.view === "model" ? "Model data" : "Weight";
+    refs.weightColumnSort.disabled = state.view === "model";
+    refs.weightColumnSort.setAttribute("aria-label", state.view === "model"
+      ? "Model observation type"
+      : "Sort by weight");
     refs.tableBody.replaceChildren();
     activeRpReferences().forEach(appendRpReferenceRow);
     const eligibilityMap = new Map(rows().map((row) => [row.id, plotEligibility(row)]));
@@ -3430,7 +3523,7 @@
       ? new Map([...eligibilityMap].filter(([, eligibility]) => eligibility.eligible).map(([id]) => [id, 1]))
       : new Map(selection.map((item) => [item.row.id, item.weight]));
     tableRows(weightMap, eligibilityMap).forEach((row) => {
-      const available = salary(row) != null;
+      const available = state.view === "model" ? MODEL_TRAINING_BY_ID.has(row.id) : salary(row) != null;
       const eligibility = eligibilityMap.get(row.id);
       const tr = document.createElement("tr");
       if (state.view !== "model" && !rowInclusion(row).get(row.id)) tr.classList.add("is-excluded");
@@ -3514,9 +3607,14 @@
       if (state.view === "model") {
         const status = document.createElement("span");
         status.className = "model-training-status";
-        status.textContent = eligibility.eligible ? "Training" : "—";
+        const modelRecord = MODEL_TRAINING_BY_ID.get(row.id);
+        status.textContent = eligibility.eligible
+          ? modelRecord.observation === "cash_proxy" ? "Cash proxy"
+            : modelRecord.source === "job_ad" ? modelRecord.observation === "interval" ? "Ad range" : "Ad amount"
+              : "Base"
+          : "—";
         status.title = eligibility.eligible
-          ? "This record is in the fixed training cohort. The predictive model does not use table weights."
+          ? `${eligibility.reason} The predictive model does not use table weights.`
           : eligibility.reason;
         weightCell.append(status);
       } else {
@@ -3552,6 +3650,18 @@
       const topic = document.createElement("td"); topic.className = "topic-cell"; topic.title = row.topic || ""; topic.textContent = row.topic || "—";
       const expenses = document.createElement("td"); expenses.className = "money-cell"; expenses.textContent = compactMoney(row.expenses);
       const location = document.createElement("td"); location.className = "metadata-cell"; location.textContent = row.location || "—";
+      const remote = document.createElement("td"); remote.className = "metadata-cell has-explainer";
+      const remoteButton = document.createElement("button"); remoteButton.type = "button"; remoteButton.className = "metadata-evidence-button";
+      remoteButton.textContent = row.remoteCategory || "Unknown";
+      remoteButton.title = row.operatingMetadata?.remoteEvidence || "No organization-wide work-model classification could be established from the reviewed official sources.";
+      remoteButton.setAttribute("aria-label", `View work-model evidence for ${row.organization}: ${remoteButton.textContent}`);
+      remoteButton.addEventListener("click", () => openOperatingMetadataDialog(row, "remote")); remote.append(remoteButton);
+      const fiscalSponsor = document.createElement("td"); fiscalSponsor.className = "metadata-cell has-explainer";
+      const fiscalSponsorButton = document.createElement("button"); fiscalSponsorButton.type = "button"; fiscalSponsorButton.className = "metadata-evidence-button";
+      fiscalSponsorButton.textContent = categoryDisplayLabel("fiscalSponsorCategory", row.fiscalSponsorCategory || "Unknown");
+      fiscalSponsorButton.title = row.operatingMetadata?.fiscalSponsorEvidence || "No fiscal-sponsorship classification could be established from the reviewed official sources.";
+      fiscalSponsorButton.setAttribute("aria-label", `View fiscal-sponsor evidence for ${row.organization}: ${fiscalSponsorButton.textContent}`);
+      fiscalSponsorButton.addEventListener("click", () => openOperatingMetadataDialog(row, "fiscalSponsor")); fiscalSponsor.append(fiscalSponsorButton);
       const staff = document.createElement("td"); staff.className = "number-cell"; staff.textContent = row.staff ?? "—";
       const ea = document.createElement("td"); ea.className = "metadata-cell"; ea.textContent = eaAffinityLabel(row.eaAffinity);
       const structure = document.createElement("td"); structure.className = "metadata-cell"; structure.textContent = row.structure || "—";
@@ -3573,7 +3683,7 @@
       if (row.sourceUrl) {
         const link = document.createElement("a"); link.className = "source-link"; link.href = row.sourceUrl; link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = "Open ↗"; source.append(link);
       }
-      tr.append(toggleCell, org, title, adjustedSalaryCell, expenses, staff, weightCell, comparability, tier, topic, location, ea, structure, year, evidenceType, reportedSalaryCell, source);
+      tr.append(toggleCell, org, title, adjustedSalaryCell, expenses, staff, weightCell, comparability, tier, topic, location, remote, fiscalSponsor, ea, structure, year, evidenceType, reportedSalaryCell, source);
       refs.tableBody.append(tr);
     });
     document.querySelectorAll("thead button[data-sort]").forEach((button) => {
@@ -3754,6 +3864,46 @@
     const secondaryExternal = $("#dialog-secondary-external");
     secondaryExternal.hidden = !row.secondarySourceUrl; secondaryExternal.href = row.secondarySourceUrl || "#";
     secondaryExternal.textContent = row.secondarySourceLabel ? `Open ${row.secondarySourceLabel} ↗` : "Open additional source ↗";
+    refs.dialog.showModal();
+  }
+
+  function openOperatingMetadataDialog(row, field) {
+    const metadata = row.operatingMetadata || {};
+    const remote = field === "remote";
+    const label = remote ? "Work model" : "Fiscal sponsor";
+    const value = remote
+      ? row.remoteCategory || "Unknown"
+      : categoryDisplayLabel("fiscalSponsorCategory", row.fiscalSponsorCategory || "Unknown");
+    const evidence = remote ? metadata.remoteEvidence : metadata.fiscalSponsorEvidence;
+    const sourceUrl = remote ? metadata.remoteSourceUrl : metadata.fiscalSponsorSourceUrl;
+    const localPath = remote ? metadata.remoteLocalPath : metadata.fiscalSponsorLocalPath;
+    $("#dialog-source-type").textContent = `Organization metadata · ${humanizeCategory(metadata.confidence || "Unspecified")} confidence`;
+    $("#dialog-title").textContent = row.organization;
+    $("#dialog-measure-label").textContent = label;
+    $("#dialog-value").textContent = value;
+    $("#dialog-evidence").textContent = evidence || `No organization-wide ${label.toLowerCase()} classification could be established.`;
+    const meta = $("#dialog-meta");
+    meta.replaceChildren();
+    [
+      ["Classification", value],
+      ["Reviewed", metadata.retrievedAt || "Not reported"],
+      ["Confidence", humanizeCategory(metadata.confidence || "Unspecified")],
+      ["Review note", metadata.caveats || "None recorded"],
+      ["Local audit copy", localPath || "No local source was available"],
+    ].forEach(([term, description]) => {
+      const dt = document.createElement("dt"); dt.textContent = term;
+      const dd = document.createElement("dd"); dd.textContent = description;
+      meta.append(dt, dd);
+    });
+    const details = $("#dialog-category-provenance");
+    details.hidden = true; details.open = false;
+    const cached = $("#dialog-cached");
+    const publishedLocalPath = localPath && localPath.startsWith("evidence/") ? localPath : "";
+    cached.hidden = !publishedLocalPath; cached.href = publishedLocalPath || "#";
+    const external = $("#dialog-external");
+    external.hidden = !sourceUrl; external.href = sourceUrl || "#";
+    $("#dialog-secondary-cached").hidden = true;
+    $("#dialog-secondary-external").hidden = true;
     refs.dialog.showModal();
   }
 
@@ -4245,6 +4395,8 @@
         ? "A broad category used for navigation; job titles remain exactly as written in the source."
         : "A reviewed role and seniority category; job titles remain exactly as written in the source.",
       structure: "Organization and leadership type recorded during source review.",
+      remoteCategory: "Whether official sources describe the organization as fully remote/distributed, office-based/hybrid, or leave the organization-wide work model unknown.",
+      fiscalSponsorCategory: "Whether official sources show that the organization itself hosts fiscally sponsored projects; this is distinct from being sponsored by another organization.",
     }[state.chartColor];
     refs.expenseBandwidthValue.value = `${state.expenseBandwidth.toFixed(2)}×`;
     refs.staffBandwidthValue.value = `${state.staffBandwidth.toFixed(2)}×`;
@@ -4281,8 +4433,12 @@
   const URL_WEIGHT_CODES = Object.freeze({
     comparability: "c", size: "e", staff: "s", recency: "r", tier: "t", eaAffinity: "a",
     sourceType: "v", topic: "o", titleGroup: "j", structure: "u", streamBalanced: "b",
+    remoteCategory: "w", fiscalSponsorCategory: "f",
   });
-  const URL_FILTER_CODES = Object.freeze({ title: "h", sourceType: "v", tier: "t", topic: "o", location: "l", eaAffinity: "a", structure: "u" });
+  const URL_FILTER_CODES = Object.freeze({
+    title: "h", sourceType: "v", tier: "t", topic: "o", location: "l",
+    eaAffinity: "a", structure: "u", remoteCategory: "w", fiscalSponsorCategory: "c",
+  });
   const URL_STREAM_CODES = Object.freeze({ incumbents: "i", jobAds: "j", combined: "a" });
   const URL_MEASURE_CODES = Object.freeze({ base: "b", cash: "c", total: "t" });
   const URL_SAMPLE_CODES = Object.freeze({ primary: "p", sensitivity: "s", clean: "c", tierA: "a", observed: "o" });
@@ -4302,13 +4458,17 @@
   const URL_QUANTILE_KEYS = reverseCodes(URL_QUANTILE_CODES);
   const URL_VARIABLE_KEYS = reverseCodes(URL_VARIABLE_CODES);
   const MODEL_PROFILE_URL_FIELDS = Object.freeze({
-    expenses: "e", revenue: "r", staff: "s", compensation_year: "y",
+    expenses: "e", revenue: "r", staff: "s", highest_other_base: "h", compensation_year: "y",
     focus_area: "f", ea_relationship: "a", organization_type: "o",
-    title_group: "t", location_scope: "l",
+    title_group: "t", location_scope: "l", remote_category: "w", fiscal_sponsor_category: "c",
   });
+  const MODEL_CATEGORY_KEYS = Object.freeze([
+    "focus_area", "ea_relationship", "organization_type", "title_group", "location_scope",
+    "remote_category", "fiscal_sponsor_category",
+  ]);
   const MODEL_PROFILE_BOUNDS = Object.freeze({
     expenses: [1, Number.MAX_SAFE_INTEGER], revenue: [1, Number.MAX_SAFE_INTEGER],
-    staff: [1, 1_000_000], compensation_year: [2020, 2030],
+    staff: [1, 1_000_000], highest_other_base: [1, Number.MAX_SAFE_INTEGER], compensation_year: [2020, 2030],
   });
   function encodeVariableKey(key) {
     if (URL_VARIABLE_CODES[key]) return URL_VARIABLE_CODES[key];
@@ -4348,7 +4508,7 @@
     if (state.modelMethod !== "bayesian") compact.m = "g";
     if (state.modelMethod === "bayesian" && state.modelUseAdRanges) compact.d = 1;
     Object.entries(MODEL_PROFILE_URL_FIELDS).forEach(([key, code]) => {
-      const categorical = ["focus_area", "ea_relationship", "organization_type", "title_group", "location_scope"].includes(key);
+      const categorical = MODEL_CATEGORY_KEYS.includes(key);
       if (state.modelMethod === "gam" && categorical) return;
       const value = state.modelProfile[key];
       if (!categorical && !Number.isFinite(value)) return;
@@ -4595,11 +4755,11 @@
       const values = [0.25, 0.5, 0.75].map((probability) => sampleQuantile(prediction.samples, probability));
       const reference = Number(PREDICTIVE_MODEL.rpProfile.reference_salary);
       const referencePercentile = prediction.samples.filter((value) => value <= reference).length / prediction.samples.length * 100;
-      const trainingRows = rows().filter((row) => plotEligibility(row).eligible);
+      const trainingRows = activeModelTrainingRecords();
       const trainingOrganizations = new Set(trainingRows.map((row) => String(row.organization || row.id).trim().toLowerCase()));
       const method = state.modelMethod === "gam"
-        ? "Scale GAM"
-        : `Bayesian partial pooling${state.modelUseAdRanges ? " + ad ranges" : ""}`;
+        ? "Numeric-input GAM"
+        : `Bayesian multilevel${state.modelUseAdRanges ? " + ad ranges" : ""}`;
       return {
         axisSignature: `model|${JSON.stringify(compactModelState())}`,
         axisLabel: "Predicted CEO Salary", formatKind: "money", position: "CEO",
@@ -6358,6 +6518,8 @@
     populateModelSelect(refs.modelOrganizationType, modelCategoryLevels("organization_type"));
     populateModelSelect(refs.modelTitle, modelCategoryLevels("title_group"));
     populateModelSelect(refs.modelLocation, modelCategoryLevels("location_scope"));
+    populateModelSelect(refs.modelRemote, modelCategoryLevels("remote_category"));
+    populateModelSelect(refs.modelFiscalSponsor, modelCategoryLevels("fiscal_sponsor_category"));
   }
 
   function syncModelControls() {
@@ -6365,25 +6527,28 @@
     refs.modelExpenses.value = state.modelProfile.expenses;
     refs.modelRevenue.value = state.modelProfile.revenue;
     refs.modelStaff.value = state.modelProfile.staff;
+    refs.modelHighestOther.value = state.modelProfile.highest_other_base;
     refs.modelYear.value = state.modelProfile.compensation_year;
     refs.modelFocus.value = state.modelProfile.focus_area;
     refs.modelEa.value = state.modelProfile.ea_relationship;
     refs.modelOrganizationType.value = state.modelProfile.organization_type;
     refs.modelTitle.value = state.modelProfile.title_group;
     refs.modelLocation.value = state.modelProfile.location_scope;
+    refs.modelRemote.value = state.modelProfile.remote_category;
+    refs.modelFiscalSponsor.value = state.modelProfile.fiscal_sponsor_category;
     const gam = state.modelMethod === "gam";
     refs.modelUseAdRanges.checked = !gam && state.modelUseAdRanges;
     refs.modelCategoryInputs.hidden = gam;
     refs.modelUseAdRanges.disabled = gam;
     refs.modelAdRangesField.classList.toggle("is-disabled", gam);
     refs.modelSettingsNote.textContent = gam
-      ? "The GAM uses expenses, revenue, employees, and pay year. It was fit to Form 990 records only."
-      : `The model uses a fixed reviewed cohort; table filters do not refit it. ${state.modelUseAdRanges ? "Advertised ranges contribute as intervals." : "Only Form 990 salaries are used."}`;
+      ? "The GAM uses expenses, revenue, employees, non-CEO highest reported base pay, and pay year. It was fit to exact Form 990 base-pay records only."
+      : `The model uses a fixed reviewed cohort; table filters do not refit it. Cash-only filings use a separate measurement model. ${state.modelUseAdRanges ? "Advertised ranges contribute as intervals." : "Recruitment postings are excluded."}`;
   }
 
   function syncControlsFromState() {
     refs.position.value = state.position;
-    refs.positionSelectedLabel.textContent = positionDefinition().label;
+    refs.positionSelectedLabel.textContent = positionDefinition().pageLabel;
     refs.stream.value = state.stream;
     refs.measure.value = state.measure;
     refs.sample.value = state.sample;
@@ -6500,7 +6665,7 @@
     Object.entries(MODEL_PROFILE_URL_FIELDS).forEach(([key, code]) => {
       if (!Object.hasOwn(analysis.pm || {}, code)) return;
       const value = analysis.pm[code];
-      if (["focus_area", "ea_relationship", "organization_type", "title_group", "location_scope"].includes(key)) {
+      if (MODEL_CATEGORY_KEYS.includes(key)) {
         state.modelProfile[key] = decodeModelCategory(key, value, MODEL_PROFILE_DEFAULTS[key]);
       } else {
         const [minimum, maximum] = MODEL_PROFILE_BOUNDS[key];
@@ -6532,7 +6697,11 @@
     if (analysis.x && numericVariables[analysis.x]) state.scatterXAxis.numerator = analysis.x;
     normalizeAxisExpressions();
     Object.keys(state.axisScales).forEach((axisKey) => { state.axisScales[axisKey] = recommendedAxisScale(axisKey); });
-    state.chartColor = enumValue(analysis.c, ["tier", "topic", "eaAffinity", "sourceType", "titleGroup", "structure"], state.chartColor);
+    state.chartColor = enumValue(
+      analysis.c,
+      ["tier", "topic", "eaAffinity", "sourceType", "titleGroup", "structure", "remoteCategory", "fiscalSponsorCategory"],
+      state.chartColor,
+    );
     state.showContours = analysis.co !== 0;
     state.quantileGranularity = enumValue(analysis.q, ["quintiles", "deciles", "percentiles", "custom"], state.quantileGranularity);
     state.customQuantiles = typeof analysis.qq === "string" ? analysis.qq : state.customQuantiles;
@@ -6609,7 +6778,8 @@
       sortKey: "tier", sortDirection: "asc",
       filters: {
         title: null, sourceType: null, tier: null, topic: null, location: null,
-        eaAffinity: null, structure: null,
+        eaAffinity: null, structure: null, remoteCategory: null,
+        fiscalSponsorCategory: null,
       },
       ranges: {
         salary: { min: null, max: null, low: null, high: null },
@@ -6622,7 +6792,7 @@
       modifiedWeightIds[stream].clear();
       streamRows.forEach((row) => { inclusion[stream].set(row.id, Boolean(row.defaultIncluded)); customWeights[stream].set(row.id, 1); });
     });
-    refs.position.value = state.position; refs.positionSelectedLabel.textContent = positionDefinition().label;
+    refs.position.value = state.position; refs.positionSelectedLabel.textContent = positionDefinition().pageLabel;
     refs.stream.value = state.stream; refs.measure.value = state.measure; refs.sample.value = state.sample;
     refs.dollarBasis.forEach((radio) => { radio.checked = radio.value === "adjusted"; });
     refs.fit.forEach((radio) => { radio.checked = radio.value === state.fit; });
@@ -6798,6 +6968,7 @@
     [refs.modelExpenses, "expenses"],
     [refs.modelRevenue, "revenue"],
     [refs.modelStaff, "staff"],
+    [refs.modelHighestOther, "highest_other_base"],
     [refs.modelYear, "compensation_year"],
   ].forEach(([input, key]) => {
     const [minimum, maximum] = MODEL_PROFILE_BOUNDS[key];
@@ -6828,7 +6999,8 @@
   [
     [refs.modelFocus, "focus_area"], [refs.modelEa, "ea_relationship"],
     [refs.modelOrganizationType, "organization_type"], [refs.modelTitle, "title_group"],
-    [refs.modelLocation, "location_scope"],
+    [refs.modelLocation, "location_scope"], [refs.modelRemote, "remote_category"],
+    [refs.modelFiscalSponsor, "fiscal_sponsor_category"],
   ].forEach(([select, key]) => select.addEventListener("change", () => {
     state.modelProfile[key] = select.value;
     renderAll();

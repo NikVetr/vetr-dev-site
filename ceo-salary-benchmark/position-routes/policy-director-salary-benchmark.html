@@ -109,10 +109,10 @@ layout: null
           <button id="model-reset-profile" class="text-button" type="button">Reset RP inputs</button>
         </div>
         <label class="field compact">
-          <span>Method <button class="info-tooltip" type="button" aria-label="About prediction methods" data-tooltip="Bayesian partial pooling combines organization scale with regularized category effects. The scale GAM is a nonlinear challenger using only expenses, revenue, staff, and year. Both were evaluated on held-out organizations. Why these methods perform differently is shown under Model details.">?</button></span>
+          <span>Method <button class="info-tooltip" type="button" aria-label="About prediction methods" data-tooltip="Bayesian multilevel modeling combines organization scale, non-CEO pay, and regularized category effects. The numeric-input GAM is a nonlinear challenger using only continuous inputs. Both were evaluated on held-out organizations; details appear below the plot.">?</button></span>
           <select id="model-method">
-            <option value="bayesian">Bayesian partial pooling</option>
-            <option value="gam">Scale GAM</option>
+            <option value="bayesian">Bayesian multilevel</option>
+            <option value="gam">Numeric-input GAM</option>
           </select>
         </label>
         <span id="model-ad-ranges-field" class="model-option">
@@ -123,6 +123,7 @@ layout: null
           <label><span>Expenses</span><input id="model-expenses" type="number" min="1" step="100000" inputmode="numeric"></label>
           <label><span>Revenue</span><input id="model-revenue" type="number" min="1" step="100000" inputmode="numeric"></label>
           <label><span>Employees</span><input id="model-staff" type="number" min="1" step="1" inputmode="numeric"></label>
+          <label><span>Highest other reported base pay <button class="info-tooltip" type="button" aria-label="About highest other reported base pay" data-tooltip="The highest eligible Schedule J base-pay amount reported for someone other than the CEO or organization-wide co-leader in the same filing. It can exceed CEO pay; Form 990 is not a complete employee census.">?</button></span><input id="model-highest-other" type="number" min="1" step="1000" inputmode="numeric"></label>
           <label><span>Pay year</span><input id="model-year" type="number" min="2020" max="2030" step="1" inputmode="numeric"></label>
         </div>
         <div id="model-category-inputs" class="model-category-inputs">
@@ -131,6 +132,8 @@ layout: null
           <label><span>Organization type</span><select id="model-organization-type"></select></label>
           <label><span>Title group</span><select id="model-title"></select></label>
           <label><span>Location</span><select id="model-location"></select></label>
+          <label><span>Work model</span><select id="model-remote"></select></label>
+          <label><span>Fiscal sponsor</span><select id="model-fiscal-sponsor"></select></label>
         </div>
         <p id="model-settings-note" class="field-description"></p>
       </section>
@@ -188,6 +191,8 @@ layout: null
           <option value="sourceType">Pay source</option>
           <option value="titleGroup">Title group</option>
           <option value="structure">Organization type</option>
+          <option value="remoteCategory">Work model</option>
+          <option value="fiscalSponsorCategory">Fiscal sponsor</option>
         </select>
         <small id="color-description" class="field-description"></small>
       </label>
@@ -209,6 +214,8 @@ layout: null
           <label><input type="checkbox" value="topic"> Area</label>
           <label><input type="checkbox" value="titleGroup"> Title</label>
           <label><input type="checkbox" value="structure"> Organization type</label>
+          <label><input type="checkbox" value="remoteCategory"> Work model</label>
+          <label><input type="checkbox" value="fiscalSponsorCategory"> Fiscal sponsor</label>
         </div>
         <div class="stream-balance-rule">
           <label><input type="checkbox" value="streamBalanced"> Balance pay sources (50/50)</label>
@@ -267,7 +274,7 @@ layout: null
     <div id="settings-panel-resizer" class="panel-resizer panel-resizer-vertical" data-resizer="settings" role="separator" aria-orientation="vertical" aria-label="Resize settings and chart panels" aria-controls="settings-panel analysis-column" aria-valuemin="0" aria-valuemax="100" aria-valuenow="16" tabindex="0"></div>
 
     <section id="analysis-column" class="analysis-column" aria-label="Distribution analysis">
-      <section id="chart-panel" class="chart-panel panel">
+      <section id="chart-panel" class="chart-panel">
         <div id="chart-view-tabs" class="chart-view-tabs" role="tablist" aria-label="Analysis view">
           <button id="chart-tab-histogram" class="chart-view-tab" type="button" role="tab" data-chart-view="histogram" aria-selected="true" aria-controls="chart-view-content" tabindex="0">Histogram</button>
           <button id="chart-tab-scatter" class="chart-view-tab" type="button" role="tab" data-chart-view="scatter" aria-selected="false" aria-controls="chart-view-content" tabindex="-1">Scatterplot</button>
@@ -461,7 +468,7 @@ layout: null
                 </div>
               </th>
               <th><button type="button" data-sort="staff" aria-label="Sort by staff; Rethink Priorities reports 43 individuals employed on its 2023 Form 990">Staff</button></th>
-              <th class="weight-column"><button type="button" data-sort="weight">Weight</button></th>
+              <th class="weight-column"><button id="weight-column-sort" type="button" data-sort="weight"><span id="weight-column-label">Weight</span></button></th>
               <th class="filterable-column">
                 <div class="header-controls">
                   <button type="button" data-sort="comparabilityScore">Score</button>
@@ -498,6 +505,18 @@ layout: null
                 <div class="header-controls">
                   <button type="button" data-sort="location">Location</button>
                   <div class="filter-menu header-filter-menu" data-filter-menu="location"></div>
+                </div>
+              </th>
+              <th class="filterable-column">
+                <div class="header-controls">
+                  <button type="button" class="stacked-sort" data-sort="remoteCategory"><span><span>Work </span><span>Model</span></span></button>
+                  <div class="filter-menu header-filter-menu" data-filter-menu="remoteCategory"></div>
+                </div>
+              </th>
+              <th class="filterable-column">
+                <div class="header-controls">
+                  <button type="button" class="stacked-sort" data-sort="fiscalSponsorCategory"><span><span>Fiscal </span><span>Sponsor</span></span></button>
+                  <div class="filter-menu header-filter-menu" data-filter-menu="fiscalSponsorCategory"></div>
                 </div>
               </th>
               <th class="filterable-column">

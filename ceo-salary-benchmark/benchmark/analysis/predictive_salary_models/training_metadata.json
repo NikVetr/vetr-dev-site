@@ -1,74 +1,94 @@
 {
-  "schemaVersion": 1,
-  "generatedAt": "2026-09-04T03:36:58+00:00",
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-04T19:23:40+00:00",
   "seed": 20260903,
-  "trainingInputSha256": "6038b49de864111d0f82d46a144d692f80659bdb2d7de4db4c0c3f2dcfe3c5ef",
+  "trainingInputSha256": "6b5d88d273f3597882c9eb5da688ba9a5537216730d12cafee297aa9313d2528",
   "target": "log July 2026-adjusted annual base salary",
   "foldRule": "Ten deterministic organization-grouped folds; filing and posting records with the same normalized organization name share a fold.",
   "counts": {
-    "records": 131,
-    "organizations": 128,
+    "records": 153,
+    "organizations": 149,
     "exactFilings": 114,
-    "advertisedRecords": 17,
-    "advertisedRanges": 16,
-    "advertisedPointAmounts": 1
+    "cashProxyFilings": 12,
+    "advertisedRecords": 27,
+    "advertisedRanges": 25,
+    "advertisedPointAmounts": 2
   },
   "categoryCounts": {
     "focus_area": {
-      "AI / technology": 26,
-      "Animal welfare / food": 6,
-      "Climate / environment": 17,
-      "Education / public engagement": 1,
-      "Global health / development": 17,
-      "Philanthropy / nonprofit support": 45,
-      "Research / evidence": 13,
-      "Security / governance": 6
+      "AI / technology": 16,
+      "Animal welfare / food": 14,
+      "Climate / environment": 16,
+      "Education / public engagement": 5,
+      "Global health / development": 24,
+      "Philanthropy / nonprofit support": 16,
+      "Research / evidence": 37,
+      "Security / governance": 25
     },
     "ea_relationship": {
-      "EA-adjacent": 67,
-      "EA-core": 1,
-      "Functional overlap": 63
+      "EA-adjacent": 76,
+      "EA-core": 5,
+      "Functional overlap": 72
     },
     "organization_type": {
-      "Affiliated group": 2,
-      "Fiscally sponsored / umbrella": 4,
-      "Independent nonprofit": 119,
+      "Affiliated group": 3,
+      "Fiscal sponsor / umbrella": 3,
+      "Fiscally sponsored project": 2,
+      "Independent nonprofit": 135,
       "Membership / network": 5,
-      "Other organization type": 1
+      "Other organization type": 5
     },
     "title_group": {
-      "CEO": 68,
-      "Executive Director": 38,
-      "Other executive title": 5,
-      "President": 20
+      "CEO": 74,
+      "Co-leadership": 2,
+      "Executive Director": 47,
+      "Other executive title": 9,
+      "President": 21
     },
     "location_scope": {
-      "International / multi-country": 45,
-      "Outside United States": 2,
-      "United States": 84
+      "International / multi-country": 51,
+      "Location not reported": 2,
+      "Outside United States": 3,
+      "United States": 97
+    },
+    "remote_category": {
+      "In-person / hybrid": 53,
+      "Remote": 38,
+      "Unknown": 62
+    },
+    "fiscal_sponsor_category": {
+      "Does not serve as fiscal sponsor": 3,
+      "Serves as fiscal sponsor": 12,
+      "Unknown": 138
     }
   },
   "missingContinuous": {
-    "expenses": 10,
-    "revenue": 10,
-    "staff": 10
+    "expenses": 19,
+    "revenue": 27,
+    "staff": 18,
+    "highest_other_base": 57
   },
   "rpProfile": {
     "expenses": 20378936.0,
     "revenue": 20599841.0,
     "staff": 43.0,
+    "highest_other_base": 136142.69,
     "compensation_year": 2024,
     "focus_area": "Research / evidence",
     "ea_relationship": "EA-core",
     "organization_type": "Independent nonprofit",
     "title_group": "CEO",
     "location_scope": "International / multi-country",
+    "remote_category": "Remote",
+    "fiscal_sponsor_category": "Serves as fiscal sponsor",
     "reference_salary": 155230.03
   },
   "provenance": {
-    "trainingCsvSha256": "87d2982a7c9008863eef1de611aef7d070a5f464e813966069c5110b4e6e6085",
-    "prepareScriptSha256": "5250c2f6902c91951017a7cfc6ee6fbdcee3dc0f3c9ecd6ccf42d62f4676ba6e",
-    "fitScriptSha256": "325f4b3f9f6ce912503409a3c6308b9845dbc5f9196f9822edb27e839d9edb93",
-    "stanModelSha256": "1372c4f8ed8892330f894894ac747d04d22f998fba45d9ad9fcc6c199bdf8d8c"
+    "trainingCsvSha256": "870c6f0f7cfe3076650c8c36f282e4a65255a755a13e1836e359149ce2509098",
+    "prepareScriptSha256": "8c75f281055c06a857ac02cef27f76d5a612765ab67ea712d93471c65811a308",
+    "fitScriptSha256": "522b5172df5631a3a3b4bc9786463afffac1d90d752382572819b8d70a4e38f3",
+    "stanModelSha256": "0bef0528706587492ca2ba13ddb8bf25993cdacbbc12eca3974d7557c4ed3fd5",
+    "utilsScriptSha256": "81c97f6aba827471a2085831c80479c294d8c91122590d20d47c2045d205c235",
+    "contractScriptSha256": "1ded4695c45d38ba78c2a8c2c8a5d8042fed7d34f709c9ce90c6af2bd983f129"
   }
 }

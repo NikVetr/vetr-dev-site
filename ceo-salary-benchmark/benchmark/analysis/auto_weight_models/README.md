@@ -27,7 +27,7 @@ kernel can be offered only as **Model-informed (experimental)**.
 - Main Python run: 3 repeated 10-fold outer CV; all ridge penalties, categorical
   shrinkage, and kernel bandwidths selected only in inner 5-fold grouped CV.
 - Independent R check: 20 repeated 10-fold grouped CV; linear, robust, GAM/REML,
-  and `lmer` partial-pooling models.
+  and `lmer` multilevel models.
 - Regression uncertainty: training-only cross-fitted 90% residual intervals;
   paired 4,000-draw organization bootstrap for MSE differences.
 - Distribution weighting: nested-CV CRPS on weighted empirical distributions,
@@ -43,18 +43,18 @@ kernel can be offered only as **Model-informed (experimental)**.
 | log expenses + log staff | 0.344 | 0.161 | 23.2% | 90.9% |
 | scale + year | 0.339 | 0.189 | 22.1% | 90.0% |
 | nonlinear scale ridge | 0.356 | 0.103 | 24.6% | 88.2% |
-| regularized partial-pool core | **0.320** | **0.273** | **22.0%** | 90.0% |
-| robust partial-pool core | 0.322 | 0.266 | 22.5% | 90.0% |
+| regularized multilevel core | **0.320** | **0.273** | **22.0%** | 90.0% |
+| robust multilevel core | 0.322 | 0.266 | 22.5% | 90.0% |
 | full taxonomy (diagnostic only) | 0.318 | 0.282 | 21.3% | 90.9% |
 
 The paired bootstrap 95% CI for the change in log-MSE versus the mean-only model
-was `[-0.047, -0.006]` for scale and `[-0.071, -0.015]` for core partial pooling.
+was `[-0.047, -0.006]` for scale and `[-0.071, -0.015]` for the core multilevel model.
 For the frozen score alone it was `[-0.012, +0.004]`: no demonstrated OOS gain.
 
 The independent R run agreed. Scale LM had RMSE 0.342; GAM/REML 0.344; robust LM
 0.343. Core `lmer` reached 0.324 and topic `lmer` 0.317, but the fits were singular
 in 188/200 and 177/200 folds respectively. Ridge is the right computational form
-for partial pooling here; the random effects are not separately well identified.
+for multilevel modeling here; the random effects are not separately well identified.
 
 Cash-proxy results preserved the ordering (scale OOS R2 0.236; core 0.337; full
 taxonomy 0.387), but cash is not exact base salary. Combined-stream results should

@@ -1,0 +1,2 @@
+organization,url,reason,requested_artifact,proposed_local_path,retrieved_at
+"Social Science Research Council","https://www.ssrc.org/how-we-work/","Direct command-line retrieval returned HTTP 403 although the page was readable through indexed web access.","Official How We Work page documenting the current Fiscal Sponsorship program","benchmark/sources/native/organization_metadata/batch_3/ssrc_how_we_work.html","2026-09-04"

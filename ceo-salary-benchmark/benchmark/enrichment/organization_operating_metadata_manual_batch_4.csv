@@ -1,0 +1,2 @@
+organization,url,reason,requested_artifact,proposed_local_path,retrieved_at
+"Center for Economic and Policy Research","https://cepr.net/about/careers/","Direct command-line retrieval returned HTTP 403 although the current official page was readable through indexed web access.","Current official careers page documenting the Washington, DC preference and consideration of remote applicants","benchmark/sources/native/organization_metadata/batch_4/cepr_careers.html","2026-09-04"

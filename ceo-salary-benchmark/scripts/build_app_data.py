@@ -12,7 +12,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from xml.etree import ElementTree
 
-from predictive_model_contract import predictive_model_input_sha256
+from predictive_model_contract import predictive_model_input_sha256, predictive_training_eligible
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -34,6 +34,8 @@ LINGERING_ORG_PEER_REVIEW = ENRICHMENT / "lingering_org_peer_eligibility_review.
 LINGERING_ORG_APP_ADDITIONS = ENRICHMENT / "lingering_org_app_position_additions.csv"
 EA_ROSTER_CANDIDATE_REVIEW = ENRICHMENT / "ea_roster_candidate_review.csv"
 PREDICTIVE_MODEL_ARTIFACT = BENCHMARK / "analysis" / "predictive_salary_models" / "model_artifact.json"
+ORGANIZATION_OPERATING_METADATA = ENRICHMENT / "organization_operating_metadata.csv"
+ORGANIZATION_OPERATING_METADATA_MANIFEST = ENRICHMENT / "organization_operating_metadata_source_manifest.csv"
 EXPECTED_LIVING_PEER_REVIEW_IDS = {
     "SRC-990-EXT-CENTER-FOR-AI-SAFETY",
     "SRC-990-EXT-INSTITUTE-FOR-WOMEN-S-POLICY-RESEARCH",
@@ -93,23 +95,187 @@ def rows(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(handle))
 
 
+def tristate(value: object) -> bool | None:
+    normalized = text(value).casefold()
+    if normalized in {"true", "yes", "1"}:
+        return True
+    if normalized in {"false", "no", "0"}:
+        return False
+    if normalized in {"", "unknown", "not reported", "unclear"}:
+        return None
+    raise ValueError(f"Invalid three-state value: {value}")
+
+
+def attach_organization_operating_metadata(app_rows: list[dict]) -> dict[str, int]:
+    metadata_rows = rows(ORGANIZATION_OPERATING_METADATA)
+    manifest_rows = rows(ORGANIZATION_OPERATING_METADATA_MANIFEST)
+    manifest_by_claim = {
+        (text(manifest["organization"]), text(manifest["claim"])): manifest
+        for manifest in manifest_rows
+    }
+    if len(manifest_by_claim) != len(manifest_rows):
+        raise ValueError("Operating-metadata source manifest contains duplicate claims")
+    by_organization: dict[str, dict[str, str]] = {}
+    for metadata in metadata_rows:
+        organization = text(metadata["organization"])
+        if not organization or organization in by_organization:
+            raise ValueError(f"Blank or duplicate operating-metadata organization: {organization!r}")
+        by_organization[organization] = metadata
+    required = {text(row.get("organization")) for row in app_rows}
+    missing = sorted(required - by_organization.keys())
+    if missing:
+        raise ValueError(f"Operating metadata is missing app organizations: {missing}")
+
+    published_by_local_path: dict[str, str] = {}
+    for row in app_rows:
+        local_path = text(row.get("localPath"))
+        cached_path = text(row.get("cachedSource"))
+        if local_path and cached_path:
+            published_by_local_path[local_path.removeprefix("benchmark/")] = cached_path
+
+    def published_claim_source(organization: str, claim: str, metadata: dict[str, str]) -> str:
+        manifest = manifest_by_claim.get((organization, claim))
+        if not manifest:
+            raise ValueError(f"Operating metadata lacks a source-manifest row: {organization}/{claim}")
+        prefix = "remote" if claim == "work_model" else "fiscal_sponsor"
+        source_url = text(metadata[f"{prefix}_source_url"])
+        local_path = text(metadata[f"{prefix}_local_path"])
+        if source_url != text(manifest["source_url"]) or local_path != text(manifest["local_path"]):
+            raise ValueError(f"Operating-metadata source manifest is stale: {organization}/{claim}")
+        if not local_path:
+            if any(text(manifest[field]) for field in ("mime_type", "byte_length", "sha256")):
+                raise ValueError(f"URL-only operating source has unexpected file metadata: {organization}/{claim}")
+            return ""
+        source = ROOT / local_path
+        if not source.is_file():
+            raise FileNotFoundError(f"Missing operating-metadata source: {source}")
+        content = source.read_bytes()
+        if len(content) != int(manifest["byte_length"]):
+            raise ValueError(f"Operating-metadata source size changed: {organization}/{claim}")
+        if hashlib.sha256(content).hexdigest() != text(manifest["sha256"]):
+            raise ValueError(f"Operating-metadata source hash changed: {organization}/{claim}")
+        benchmark_path = local_path.removeprefix("benchmark/")
+        if benchmark_path not in published_by_local_path:
+            source_id = f"ORG-META-{Path(benchmark_path).stem}-{hashlib.sha256(benchmark_path.encode()).hexdigest()[:10]}"
+            published = cache_source(source_id, benchmark_path)
+            if not published:
+                raise FileNotFoundError(f"Could not publish operating-metadata source: {source}")
+            published_by_local_path[benchmark_path] = published
+        return published_by_local_path[benchmark_path]
+
+    counts = {"remote": 0, "inPersonHybrid": 0, "remoteUnknown": 0,
+              "fiscalSponsor": 0, "notFiscalSponsor": 0, "fiscalSponsorUnknown": 0}
+    counted_organizations: set[str] = set()
+    for row in app_rows:
+        organization = text(row.get("organization"))
+        metadata = by_organization[organization]
+        remote = tristate(metadata["is_remote"])
+        remote_category = text(metadata["remote_category"]).casefold()
+        expected_remote_category = "remote" if remote is True else "in-person / hybrid" if remote is False else "unknown"
+        if remote_category != expected_remote_category:
+            raise ValueError(
+                f"Remote flag/category mismatch for {row['organization']}: "
+                f"{metadata['is_remote']!r}/{metadata['remote_category']!r}"
+            )
+        sponsor = tristate(metadata["serves_as_fiscal_sponsor"])
+        row["isRemote"] = remote
+        row["remoteCategory"] = remote_category.title() if remote is not False else "In-person / hybrid"
+        row["servesAsFiscalSponsor"] = sponsor
+        row["fiscalSponsorCategory"] = "Yes" if sponsor is True else "No" if sponsor is False else "Unknown"
+        remote_cached_source = published_claim_source(organization, "work_model", metadata)
+        fiscal_sponsor_cached_source = published_claim_source(organization, "fiscal_sponsor", metadata)
+        row["operatingMetadata"] = {
+            "remoteEvidence": text(metadata["remote_evidence"]),
+            "remoteSourceUrl": text(metadata["remote_source_url"]),
+            "remoteLocalPath": remote_cached_source,
+            "fiscalSponsorEvidence": text(metadata["fiscal_sponsor_evidence"]),
+            "fiscalSponsorSourceUrl": text(metadata["fiscal_sponsor_source_url"]),
+            "fiscalSponsorLocalPath": fiscal_sponsor_cached_source,
+            "confidence": text(metadata["confidence"]),
+            "caveats": text(metadata["caveats"]),
+            "retrievedAt": text(metadata["retrieved_at"]),
+        }
+        if organization not in counted_organizations:
+            counted_organizations.add(organization)
+            counts["remote" if remote is True else "inPersonHybrid" if remote is False else "remoteUnknown"] += 1
+            counts["fiscalSponsor" if sponsor is True else "notFiscalSponsor" if sponsor is False else "fiscalSponsorUnknown"] += 1
+    return counts
+
+
+def require_finite_number(value: object, label: str, *, positive: bool = False) -> float:
+    if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
+        raise ValueError(f"Predictive-model {label} is not finite")
+    if positive and value <= 0:
+        raise ValueError(f"Predictive-model {label} must be positive")
+    return float(value)
+
+
+def require_finite_vector(value: object, length: int, label: str) -> list[float]:
+    if not isinstance(value, list) or len(value) != length:
+        raise ValueError(f"Predictive-model {label} has the wrong length")
+    return [require_finite_number(item, f"{label}[{index}]") for index, item in enumerate(value)]
+
+
+def require_finite_matrix(value: object, rows: int, columns: int, label: str) -> None:
+    if not isinstance(value, list) or len(value) != rows:
+        raise ValueError(f"Predictive-model {label} has the wrong row count")
+    for index, row in enumerate(value):
+        require_finite_vector(row, columns, f"{label}[{index}]")
+
+
 def load_predictive_model_artifact(
     expected_exact: int,
+    expected_cash_proxy: int,
     expected_ads: int,
     training_inputs: dict,
 ) -> dict:
     if not PREDICTIVE_MODEL_ARTIFACT.is_file():
         raise FileNotFoundError(f"Missing predictive-model artifact: {PREDICTIVE_MODEL_ARTIFACT}")
     artifact = json.loads(PREDICTIVE_MODEL_ARTIFACT.read_text(encoding="utf-8"))
-    if artifact.get("schemaVersion") != 1:
+    if artifact.get("schemaVersion") != 2:
         raise ValueError("Unsupported predictive-model artifact schema")
+    if artifact.get("production") is not True:
+        raise ValueError("Predictive-model artifact is a quick/smoke-test fit, not a production fit")
+    fit_configuration = artifact.get("fitConfiguration") or {}
+    if fit_configuration != {
+        "cvChains": 4,
+        "cvWarmupPerChain": 400,
+        "cvSamplingPerChain": 500,
+        "fullChains": 4,
+        "fullWarmupPerChain": 800,
+        "fullSamplingPerChain": 1000,
+        "exportedPosteriorDraws": 512,
+    }:
+        raise ValueError("Predictive-model artifact has an unsupported production fit configuration")
     training = artifact.get("training") or {}
     if training.get("rpExcluded") is not True:
         raise ValueError("Predictive-model artifact does not prove RP was excluded from training")
     if training.get("exactFilings") != expected_exact:
         raise ValueError("Predictive-model exact-filing cohort is stale")
+    if training.get("cashProxyFilings") != expected_cash_proxy:
+        raise ValueError("Predictive-model cash-proxy cohort is stale")
     if training.get("advertisedRecords") != expected_ads:
         raise ValueError("Predictive-model recruitment cohort is stale")
+    records = training.get("records")
+    expected_record_count = expected_exact + expected_cash_proxy + expected_ads
+    if not isinstance(records, list) or len(records) != expected_record_count:
+        raise ValueError("Predictive-model training-record provenance is incomplete")
+    record_ids = [text(record.get("id")) for record in records if isinstance(record, dict)]
+    if len(record_ids) != expected_record_count or any(not record_id for record_id in record_ids):
+        raise ValueError("Predictive-model training-record provenance contains an invalid ID")
+    if len(set(record_ids)) != len(record_ids):
+        raise ValueError("Predictive-model training-record provenance contains duplicate IDs")
+    app_ids = {
+        text(row.get("id"))
+        for row in [*training_inputs.get("incumbents", []), *training_inputs.get("jobAds", [])]
+    }
+    if not set(record_ids).issubset(app_ids):
+        raise ValueError("Predictive-model training-record provenance references an unknown app row")
+    for index, record in enumerate(records):
+        if record.get("source") not in {"filing", "job_ad"}:
+            raise ValueError(f"Predictive-model training record {index} has an invalid source")
+        if record.get("observation") not in {"exact_base", "cash_proxy", "interval", "advertised_point"}:
+            raise ValueError(f"Predictive-model training record {index} has an invalid observation type")
     provenance = artifact.get("provenance") or {}
     if provenance.get("trainingInputSha256") != predictive_model_input_sha256(training_inputs):
         raise ValueError("Predictive-model input values are stale")
@@ -118,6 +284,8 @@ def load_predictive_model_artifact(
         "prepareScriptSha256": model_dir / "prepare_model_data.py",
         "fitScriptSha256": model_dir / "fit_salary_models.R",
         "stanModelSha256": model_dir / "ceo_salary_model.stan",
+        "utilsScriptSha256": model_dir / "model_utils.R",
+        "contractScriptSha256": ROOT / "scripts" / "predictive_model_contract.py",
     }
     for key, path in expected_scripts.items():
         if provenance.get(key) != hashlib.sha256(path.read_bytes()).hexdigest():
@@ -125,8 +293,107 @@ def load_predictive_model_artifact(
     training_csv = PREDICTIVE_MODEL_ARTIFACT.parent / "training_data.csv"
     if provenance.get("trainingCsvSha256") != hashlib.sha256(training_csv.read_bytes()).hexdigest():
         raise ValueError("Predictive-model artifact does not match the archived training cohort")
+    archived_records = [
+        {
+            "id": text(row.get("id")),
+            "organization": text(row.get("organization")),
+            "source": text(row.get("source")),
+            "observation": text(row.get("observation")),
+        }
+        for row in rows(training_csv)
+    ]
+    artifact_records = [
+        {
+            "id": text(record.get("id")),
+            "organization": text(record.get("organization")),
+            "source": text(record.get("source")),
+            "observation": text(record.get("observation")),
+        }
+        for record in records
+    ]
+    if artifact_records != archived_records:
+        raise ValueError("Predictive-model training-record labels do not match the archived training cohort")
     if set((artifact.get("models") or {})) != {"bayesian", "bayesianRanges", "gam"}:
         raise ValueError("Predictive-model artifact is missing a required model")
+    rp_profile = artifact.get("rpProfile") or {}
+    for key in ("expenses", "revenue", "staff", "highest_other_base", "compensation_year", "reference_salary"):
+        require_finite_number(rp_profile.get(key), f"RP profile {key}", positive=True)
+
+    categorical_features = artifact.get("categoricalFeatures") or []
+    expected_categorical_keys = {
+        "focus_area", "organization_type", "title_group", "location_scope",
+        "remote_category", "fiscal_sponsor_category",
+    }
+    categorical_by_key = {
+        feature.get("key"): feature for feature in categorical_features if isinstance(feature, dict)
+    }
+    if set(categorical_by_key) != expected_categorical_keys or len(categorical_by_key) != len(categorical_features):
+        raise ValueError("Predictive-model categorical feature schema is malformed")
+    category_widths: dict[str, int] = {}
+    for key, feature in categorical_by_key.items():
+        levels = feature.get("levels")
+        if not isinstance(levels, list) or not levels or len(set(levels)) != len(levels) or any(not text(level) for level in levels):
+            raise ValueError(f"Predictive-model {key} levels are malformed")
+        category_widths[key] = len(levels)
+        for count_key in ("counts", "exactCounts"):
+            counts = feature.get(count_key)
+            if not isinstance(counts, list) or len(counts) != len(levels) or any(
+                isinstance(value, bool) or not isinstance(value, int) or value < 0 for value in counts
+            ):
+                raise ValueError(f"Predictive-model {key} {count_key} are malformed")
+
+    comparison = artifact.get("comparison") or []
+    expected_comparison_keys = {"intercept", "linear", "gam", "bayesian", "bayesian_ranges"}
+    if {row.get("key") for row in comparison if isinstance(row, dict)} != expected_comparison_keys or len(comparison) != len(expected_comparison_keys):
+        raise ValueError("Predictive-model comparison table is incomplete")
+    for row in comparison:
+        for metric in (
+            "logRmse", "logMae", "oosR2", "medianAbsPercentError", "coverage80",
+            "coverage90", "cvElpd", "meanLogPredictiveDensity",
+        ):
+            require_finite_number(row.get(metric), f"comparison {row.get('key')} {metric}")
+        if row.get("key") == "bayesian_ranges":
+            require_finite_number(row.get("advertisedIntervalMeanLogScore"), "range-model interval log score")
+            require_finite_number(row.get("advertisedPointMeanLogScore"), "range-model point log score")
+        if row.get("key") in {"bayesian", "bayesian_ranges"}:
+            require_finite_number(row.get("cashProxyMeanLogScore"), f"{row.get('key')} cash-proxy log score")
+
+    draw_count = fit_configuration["exportedPosteriorDraws"]
+    category_draw_keys = {
+        "focus": "focus_area", "organizationType": "organization_type", "title": "title_group",
+        "location": "location_scope", "remote": "remote_category",
+        "fiscalSponsor": "fiscal_sponsor_category",
+    }
+    for model_key in ("bayesian", "bayesianRanges"):
+        model = artifact["models"][model_key]
+        preprocessing = model.get("preprocessing") or []
+        preprocessing_by_key = {item.get("key"): item for item in preprocessing if isinstance(item, dict)}
+        expected_preprocessing = {"expenses", "revenue", "staff", "highest_other_base", "compensation_year"}
+        if set(preprocessing_by_key) != expected_preprocessing or len(preprocessing_by_key) != len(preprocessing):
+            raise ValueError(f"Predictive-model {model_key} preprocessing is malformed")
+        for key, item in preprocessing_by_key.items():
+            for field in ("center", "scale", "impute", "minimum", "maximum"):
+                require_finite_number(item.get(field), f"{model_key} {key} {field}", positive=field == "scale")
+            if item.get("minimum") > item.get("maximum"):
+                raise ValueError(f"Predictive-model {model_key} {key} support is reversed")
+            expected_transform = "identity" if key == "compensation_year" else "log"
+            if item.get("transform") != expected_transform:
+                raise ValueError(f"Predictive-model {model_key} {key} transform is invalid")
+        draws = model.get("draws") or {}
+        for key in ("alpha", "adOffset", "residualZ"):
+            require_finite_vector(draws.get(key), draw_count, f"{model_key} draws {key}")
+        require_finite_matrix(draws.get("beta"), draw_count, 9, f"{model_key} draws beta")
+        require_finite_matrix(draws.get("sigma"), draw_count, 2, f"{model_key} draws sigma")
+        for row_index, row in enumerate(draws["sigma"]):
+            if any(value <= 0 for value in row):
+                raise ValueError(f"Predictive-model {model_key} draws sigma[{row_index}] is not positive")
+        for draw_key, category_key in category_draw_keys.items():
+            require_finite_matrix(
+                draws.get(draw_key), draw_count, category_widths[category_key],
+                f"{model_key} draws {draw_key}",
+            )
+        require_finite_matrix(draws.get("ea"), draw_count, 3, f"{model_key} draws ea")
+
     gam = artifact["models"]["gam"]
     gam_preprocessing = {
         item.get("key"): item for item in (gam.get("preprocessing") or [])
@@ -135,6 +402,7 @@ def load_predictive_model_artifact(
         "expenses": "expenses",
         "revenue": "revenue",
         "staff": "staff",
+        "highestOther": "highest_other_base",
         "year": "compensation_year",
     }.items():
         preprocessing = gam_preprocessing.get(preprocessing_key) or {}
@@ -155,6 +423,8 @@ def load_predictive_model_artifact(
             required.append((transformed - preprocessing["center"]) / preprocessing["scale"])
         if grid[0] > min(required) + 1e-7 or grid[-1] < max(required) - 1e-7:
             raise ValueError(f"Predictive-model GAM {effect_key} grid does not cover observed support")
+    require_finite_number(gam.get("baseline"), "GAM baseline")
+    require_finite_vector(gam.get("residuals"), expected_exact, "GAM residuals")
     validation = artifact.get("validationDiagnostics") or {}
     if validation.get("crossValidationFits") != 20:
         raise ValueError("Predictive-model artifact lacks all 20 Bayesian CV fit diagnostics")
@@ -162,8 +432,24 @@ def load_predictive_model_artifact(
         raise ValueError("Predictive-model cross-validation contains sampler failures")
     if not isinstance(validation.get("crossValidationMinEbfmi"), (int, float)) or validation["crossValidationMinEbfmi"] < 0.2:
         raise ValueError("Predictive-model cross-validation has inadequate energy diagnostics")
+    if not isinstance(validation.get("crossValidationMaxRhat"), (int, float)) or validation["crossValidationMaxRhat"] > 1.05:
+        raise ValueError("Predictive-model cross-validation has inadequate R-hat convergence")
+    if not isinstance(validation.get("crossValidationMinBulkEss"), (int, float)) or validation["crossValidationMinBulkEss"] < 100:
+        raise ValueError("Predictive-model cross-validation has inadequate bulk ESS")
+    if not isinstance(validation.get("crossValidationMinTailEss"), (int, float)) or validation["crossValidationMinTailEss"] < 100:
+        raise ValueError("Predictive-model cross-validation has inadequate tail ESS")
     for key in ("bayesian", "bayesianRanges"):
         diagnostics = artifact["models"][key].get("diagnostics") or {}
+        if diagnostics.get("chains") != 4 or diagnostics.get("drawsPerChain") != 1000:
+            raise ValueError(f"Predictive-model full fit {key} lacks the required four-chain run")
+        if diagnostics.get("posteriorDraws") != 512:
+            raise ValueError(f"Predictive-model full fit {key} lacks the required exported draws")
+        if not isinstance(diagnostics.get("maxRhat"), (int, float)) or diagnostics["maxRhat"] > 1.01:
+            raise ValueError(f"Predictive-model full fit {key} has inadequate R-hat convergence")
+        if not isinstance(diagnostics.get("minBulkEss"), (int, float)) or diagnostics["minBulkEss"] < 400:
+            raise ValueError(f"Predictive-model full fit {key} has inadequate bulk ESS")
+        if not isinstance(diagnostics.get("minTailEss"), (int, float)) or diagnostics["minTailEss"] < 400:
+            raise ValueError(f"Predictive-model full fit {key} has inadequate tail ESS")
         if diagnostics.get("divergences") or diagnostics.get("maxTreedepthHits"):
             raise ValueError(f"Predictive-model full fit {key} contains sampler failures")
         if not isinstance(diagnostics.get("minEbfmi"), (int, float)) or diagnostics["minEbfmi"] < 0.2:
@@ -275,12 +561,12 @@ def title_group(value: str) -> str:
     normalized = normalize_title(value).lower()
     if normalized == "not reported":
         return "Not reported"
+    if re.search(r"\bco[- ]?(?:ceo|executive director|director)\b", normalized):
+        return "Co-leadership"
     if re.search(r"\bceo\b", normalized):
         return "CEO"
     if "executive director" in normalized:
         return "Executive Director"
-    if "co-director" in normalized or "co director" in normalized:
-        return "Co-leadership"
     if "president" in normalized:
         return "President"
     return "Other executive titles"
@@ -1808,7 +2094,7 @@ def build_job_ads(by_source: dict[tuple[str, str], dict]) -> list[dict]:
             "structure": text(enrichment["expected_structure"]),
             "sourceMissionOperatingModel": text(job["mission_operating_model"]),
             "sourceReportingRelationship": text(job["reporting_relationship"]),
-            "revenue": number(job["annual_budget_or_expense"]),
+            "revenue": None,
             "expenses": number(job["annual_budget_or_expense"]),
             "staff": number(job["staff_count"]),
             "comparabilityScore": 100 if text(job["tier"]) == "strict_primary" else 70,
@@ -2333,6 +2619,9 @@ def main() -> None:
         incumbents + position_app_rows + position_rp_rows + [rp_reference]
     )
     app_rows = incumbents + jobs + position_app_rows + position_job_rows
+    operating_metadata_summary = attach_organization_operating_metadata(
+        app_rows + position_rp_rows + [rp_reference]
+    )
     wikipedia_profiles = load_wikipedia_profiles({row["organization"] for row in app_rows})
     for row in app_rows:
         profile = wikipedia_profiles[row["organization"]]
@@ -2343,11 +2632,17 @@ def main() -> None:
         row["wikipediaUrl"] = ""
     predictive_model = load_predictive_model_artifact(
         expected_exact=sum(
-            row["defaultIncluded"] and row["salary"]["base"] is not None
+            predictive_training_eligible("filing", row) and row["salary"]["base"] is not None
+            for row in incumbents
+        ),
+        expected_cash_proxy=sum(
+            predictive_training_eligible("filing", row) and row["salary"]["base"] is None
+            and row["salary"]["cash"] is not None
             for row in incumbents
         ),
         expected_ads=sum(
-            row["defaultIncluded"] and row["salary"]["base"] is not None
+            predictive_training_eligible("job_ad", row)
+            and row["salary"]["base"] is not None
             for row in jobs
         ),
         training_inputs={"incumbents": incumbents, "jobAds": jobs, "rpReference": rp_reference},
@@ -2392,6 +2687,10 @@ def main() -> None:
             "lingeringOrgPeerReviewPath": "benchmark/enrichment/lingering_org_peer_eligibility_review.csv",
             "lingeringOrgAppAdditionsPath": "benchmark/enrichment/lingering_org_app_position_additions.csv",
             "lingeringOrgSourceManifestPath": "benchmark/enrichment/lingering_org_original_source_manifest.csv",
+            "operatingMetadataPath": "benchmark/enrichment/organization_operating_metadata.csv",
+            "operatingMetadataMethodologyPath": "benchmark/enrichment/organization_operating_metadata_methodology.md",
+            "operatingMetadataSourceManifestPath": "benchmark/enrichment/organization_operating_metadata_source_manifest.csv",
+            "operatingMetadataManualRequestsPath": "benchmark/enrichment/organization_operating_metadata_manual_requests.csv",
             "lingeringOrgManualRequestsPath": "benchmark/enrichment/lingering_org_remaining_manual_save_requests.csv",
             "eaScreened109AuditPath": "benchmark/enrichment/ea_screened109_audit.md",
             "eaScreened109CandidateReviewPath": "benchmark/enrichment/ea_screened109_candidate_review.csv",
@@ -2405,6 +2704,7 @@ def main() -> None:
             "positionTaxonomyPath": "benchmark/enrichment/form990_position_taxonomy.csv",
             "positionSupportingSourcesPath": "benchmark/enrichment/form990_position_supporting_sources.csv",
             "autoWeightAnalysisPath": "benchmark/analysis/auto_weight_models/README.md",
+            "organizationOperatingMetadataPath": "benchmark/enrichment/organization_operating_metadata.csv",
         },
         "summary": {
             "selectedReferenceOrganizations": len({row["organization"] for row in incumbents}),
@@ -2423,6 +2723,7 @@ def main() -> None:
                 len(family_rows) for family_rows in lingering_position_rows.values()
             ),
             "livingPeerReviewedObservations": living_review_summary["reviewedObservations"],
+            "organizationOperatingMetadata": operating_metadata_summary,
             "livingPeerPromotedObservations": living_review_summary["promotedObservations"],
             "positionCatalogSize": len(position_catalog),
             "positionCatalogObservations": len(position_app_rows),

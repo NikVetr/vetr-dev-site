@@ -1,0 +1,920 @@
+
+
+<!DOCTYPE html><html lang="en" prefix="og: http://ogp.me/ns#">
+
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+  <head>
+    <title>Conservancy's Remote Work Tools - Conservancy Blog - Software Freedom Conservancy</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="The Software Freedom Conservancy provides a non-profit home and services to Free, Libre and Open Source Software (FLOSS) projects." />
+    <meta name="keywords" content="software, freedom, conservancy, open source, gnu, GNU, Open Source, Free and Open Source, Free and Open Source Software, FLOSS, FOSS, protect, protection, help, policy, linux, non-profit" />
+    <link rel="shortcut icon" href="/static/favicon.641dcd867f20.ico" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="/static/css/tachyons.min.b08933e143e6.css"/>
+    <link rel="stylesheet" type="text/css" media="(min-width: 67em)" href="/static/css/conservancy-bigscreen.0ac8bcb524e0.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/static/css/conservancy.4befd0e530fb.css" />
+    <script src="/static/js/conservancy.0701dc242404.js" ></script>
+    
+
+
+
+<meta property="twitter:card" content="summary">
+<meta property="twitter:site" content="@conservancy">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Software Freedom Conservancy">
+
+
+
+<meta property="og:url" content="https://sfconservancy.org/blog/2020/mar/17/remotetools/">
+
+
+
+<meta property="og:title" content="Conservancy's Remote Work Tools">
+
+
+
+<meta property="og:description" content="Conservancy has been a 100% remote organization for over 5 years and is now a remote organization by design. We are dedicated to empowering users through software freedom and we always use free software tools to do our work wherever possible. As many folks are newly switching to remote work or collaboration as part of "social distancing," it seems like a good time to share the "free as in freedom" tools we use and tell you how they work for us.">
+
+
+
+
+
+
+
+<meta property="og:image" content="https://sfconservancy.org/static/img/conservancy-logo.png">
+
+
+
+
+
+
+
+
+
+
+
+  </head>
+
+  <body class="conservancy-blog">
+
+<!--  <a class="notification-bar" href="/copyleft-compliance/vizio.html" role="alert" aria-label="Important notification: Get the latest update on our Vizio court case">Get the latest update on our Vizio court case <svg class="arrow-right" aria-hidden="true"><use href="/static/img/font_awesome_subset.8fba61a09652.svg#arrow-right"></use></svg></a> -->
+
+  <header class="header-container">
+      <div class="header-inner"> 
+
+        <nav id="primary-nav-bar">
+          <a href="/" class="header-logo-link">
+            <img src="/static/img/conservancy-header-logo.322da8acaa91.svg" alt="Software Freedom Conservancy" class="header-logo" width="284" height="90" />
+          </a>
+
+          <button id="mobile-menu-toggle" class="dn-ns bg-transparent bn pa2 pointer" aria-expanded="false" aria-controls="main-mobile-nav">
+              <svg style="color: var(--orange); width: 30px; height: 30px;"><use href="/static/img/font_awesome_subset.8fba61a09652.svg#bars"></use></svg>
+              <span class="sr-only">Toggle navigation menu</span>
+          </button>
+
+          <ul id="main-desktop-list" role="menu"> 
+
+            <li class="News"><a href="/news/" role="menuitem" aria-haspopup="true">News <svg class="menu-arrow"><use href="/static/img/font_awesome_subset.8fba61a09652.svg#chevron-down"></use></svg></a> 
+              <ul class="dropdown-menu-list">
+ 
+ <li>
+  <a class_="dropdown-item-link" href="/news/">
+   <h3>
+    Press Releases
+   </h3>
+  </a>
+ </li>
+ <li>
+  <a class_="dropdown-item-link" href="/press/">
+   <h3>
+    Press
+   </h3>
+  </a>
+ </li>
+ <li>
+  <a class_="dropdown-item-link" href="/blog/">
+   <h3>
+    Blog
+   </h3>
+  </a>
+ </li>
+ <li>
+  <a class_="dropdown-item-link" href="/press/vizio-coverage.html">
+   <h3>
+    Vizio Lawsuit in the News
+   </h3>
+  </a>
+ </li>
+ <li>
+  <a class_="dropdown-item-link" href="/press/inthenews.html">
+   <h3>
+    Our Issues in the News
+   </h3>
+  </a>
+ </li>
+</ul>
+
+            </li>
+            <li class="About"><a href="/about/" role="menuitem" aria-haspopup="true">About <svg class="menu-arrow"><use href="/static/img/font_awesome_subset.8fba61a09652.svg#chevron-down"></use></svg></a> 
+              <ul class="dropdown-menu-list">
+ 
+ <li class="Sponsors">
+  <a class_="dropdown-item-link" href="/sponsors/">
+   <h3>
+    Sponsors
+   </h3>
+  </a>
+ </li>
+ <li class="Sustainers">
+  <a class_="dropdown-item-link" href="/sustainer/">
+   <h3>
+    Sustainers
+   </h3>
+  </a>
+ </li>
+ <li class="Directors">
+  <a class_="dropdown-item-link" href="/about/board/">
+   <h3>
+    Board of Directors
+   </h3>
+  </a>
+ </li>
+ <li class="Staff">
+  <a class_="dropdown-item-link" href="/about/staff/">
+   <h3>
+    Staff
+   </h3>
+  </a>
+ </li>
+ <li class="Eval">
+  <a class_="dropdown-item-link" href="/about/eval-committee/">
+   <h3>
+    Evaluation Committee
+   </h3>
+  </a>
+ </li>
+ <li class="Outside">
+  <a class_="dropdown-item-link" href="/about/outside/">
+   <h3>
+    Outside Counsel, et alia
+   </h3>
+  </a>
+ </li>
+ <li class="Transparency">
+  <a class_="dropdown-item-link" href="/about/transparency">
+   <h3>
+    Transparency
+   </h3>
+  </a>
+ </li>
+ <li class="Contact">
+  <a class_="dropdown-item-link" href="/about/contact/">
+   <h3>
+    Contact
+   </h3>
+  </a>
+ </li>
+</ul>
+ 
+            </li>
+            <li class="OurWork"><a href="/activities" role="menuitem" aria-haspopup="true">Our Work <svg class="menu-arrow" ><use href="/static/img/font_awesome_subset.8fba61a09652.svg#chevron-down"></use></svg></a> 
+              <ul class="dropdown-menu-list">
+ 
+ <li class="CopyleftCompliance">
+  <a class_="dropdown-item-link" href="/copyleft-compliance/">
+   <h3>
+    Copyleft Compliance
+   </h3>
+   <p class_="dropdown-description">
+    We defend &amp; uphold the rights enshrined in copyleft licenses.
+   </p>
+  </a>
+ </li>
+ <li class="ImpactLitigaton">
+  <a class_="dropdown-item-link" href="/copyleft-compliance/past-lawsuits.html">
+   <h3>
+    Impact Litigation
+   </h3>
+   <p class_="dropdown-description">
+    We defend the legal rights of software users in Court when needed.
+   </p>
+  </a>
+ </li>
+ <li class="LLMGenAI">
+  <a class_="dropdown-item-link" href="/llm-gen-ai/">
+   <h3>
+    LLM-Gen-AI in FOSS
+   </h3>
+   <p class_="dropdown-description">
+    We help FOSS contributors navigate this ongoing conundrum.
+   </p>
+  </a>
+ </li>
+ <li class="FOSSY">
+  <a class_="dropdown-item-link" href="https://fossy.ca">
+   <h3>
+    FOSSY
+   </h3>
+   <p class_="dropdown-description">
+    Our annual community-oriented conference.
+   </p>
+  </a>
+ </li>
+<!-- <li class="GiveUpGitHub">
+  <a class_="dropdown-item-link" href="https://GiveUpGitHub.org">
+   <h3>
+    Give Up GitHub
+   </h3>
+   <p class_="dropdown-description">
+    <em>Leave GitHub <strong>today</strong>!</em>  Learn why &amp; how.
+   </p>
+  </a>
+ </li>-->
+ <li class="Outreachy">
+  <a class_="dropdown-item-link" href="https://outreachy.org">
+   <h3>
+    Outreachy
+   </h3>
+   <p class_="dropdown-description">
+    Internships for those who face under&shy;representation, systemic bias, or discrimination in tech.
+   </p>
+  </a>
+ </li>
+ <li class="Hiring">
+  <a class_="dropdown-item-link" href="/hiring">
+   <h3>
+    Hiring
+   </h3>
+   <p class_="dropdown-description">
+    SFC is hiring!
+   </p>
+  </a>
+ </li>
+</ul>
+
+            </li>
+            <li class="Tools"><a href="#" role="menuitem" aria-haspopup="true">Tools <svg class="menu-arrow" ><use href="/static/img/font_awesome_subset.8fba61a09652.svg#chevron-down"></use></svg></a>
+              <ul class="dropdown-menu-list">
+ 
+ <li class="MemberProjects">
+  <a class_="dropdown-item-link" href="/projects/">
+   <h3>
+    Member Projects
+   </h3>
+   <p class_="dropdown-description">
+    We provide non-profit infrastructure and services to our members creating Free/Libre and Open Source Software.
+   </p>
+  </a>
+ </li>
+ <li class="UseTheSource">
+  <a class_="dropdown-item-link" href="/usethesource/">
+   <h3>
+    Use The Source
+   </h3>
+   <p class_="dropdown-description">
+    Our tool for evaluating the source code candidates companies must provide for GPLed software.
+   </p>
+  </a>
+ </li>
+ <li class="OpenWrtOneRouter">
+  <a class_="dropdown-item-link" href="/activities/openwrt-one.html">
+   <h3>
+    OpenWrt One
+   </h3>
+   <p class_="dropdown-description">
+    We designed and built the first ever wireless Internet router designed with software freedom and right to repair in mind.
+   </p>
+  </a>
+ </li>
+</ul>
+
+            </li>
+            <li class="Learn"><a href="/learn" role="menuitem" aria-haspopup="true">Learn <svg class="menu-arrow" ><use href="/static/img/font_awesome_subset.8fba61a09652.svg#chevron-down"></use></svg></a>
+              <ul class="dropdown-menu-list">
+ 
+ <li>
+  <a class_="dropdown-item-link" href="/casts/the-corresponding-source/">
+   <h3>
+    The Corresponding Source
+   </h3>
+   <p class_="dropdown-description">
+    A bi-weekly oggcast about legal, policy, and many other issues in the Free, Libre, and Open Source Software (FLOSS) world. 
+   </p>
+  </a>
+ </li>
+ <li>
+  <a class_="dropdown-item-link" href="/copyleft-compliance/glossary.html">
+   <h3>
+    Glossary of Terms
+   </h3>
+   <p class_="dropdown-description">
+    A list of terms you might be unfamiliar with but occur frequently in our work.
+   </p>
+  </a>
+ </li>
+ <li>
+  <a class_="dropdown-item-link" href="/press/qanda.html">
+   <h3>
+    FAQ About the Vizio Lawsuit
+   </h3>
+   <p class_="dropdown-description">
+    Your most frequently asked questions about the Vizio lawsuit, answered in one place.
+   </p>
+  </a>
+ </li>
+</ul>
+
+            </li>
+            <li>
+              <a href="/sustainer/" class="desktop-donate-btn">Donate</a> 
+            </li>
+          </ul>
+        </nav>
+
+
+      </div>
+    </header>
+
+    <div id="main-mobile-nav" class="mobile-nav-overlay" aria-hidden="true">
+        <div class="mobile-nav-header">
+            <a href="/" class="mobile-logo-link">
+                <img src="/static/img/conservancy-header-logo.322da8acaa91.svg" alt="Software Freedom Conservancy" width="200" />
+            </a>
+            <button id="mobile-nav-close" class="bg-transparent bn pa2 pointer">
+                <svg style="color: var(--navy); width: 30px; height: 30px;"><use href="/static/img/font_awesome_subset.8fba61a09652.svg#xmark"></use></svg>
+                <span class="sr-only">Close navigation menu</span>
+            </button>
+        </div>
+
+        <nav class="mobile-nav-content" aria-label="Main Mobile Navigation">
+            <ul class="mobile-main-menu list" role="menu">
+                <li class="News"><a href="/news/" role="menuitem" aria-haspopup="true">News <svg class="menu-arrow" ><use href="/static/img/font_awesome_subset.8fba61a09652.svg#chevron-down"></use></svg></a>
+                    <ul class="dropdown-menu-list">
+ 
+ <li>
+  <a class_="dropdown-item-link" href="/news/">
+   <h3>
+    Press Releases
+   </h3>
+  </a>
+ </li>
+ <li>
+  <a class_="dropdown-item-link" href="/press/">
+   <h3>
+    Press
+   </h3>
+  </a>
+ </li>
+ <li>
+  <a class_="dropdown-item-link" href="/blog/">
+   <h3>
+    Blog
+   </h3>
+  </a>
+ </li>
+ <li>
+  <a class_="dropdown-item-link" href="/press/vizio-coverage.html">
+   <h3>
+    Vizio Lawsuit in the News
+   </h3>
+  </a>
+ </li>
+ <li>
+  <a class_="dropdown-item-link" href="/press/inthenews.html">
+   <h3>
+    Our Issues in the News
+   </h3>
+  </a>
+ </li>
+</ul>
+
+                </li>
+                <li class="About"><a href="/about/" role="menuitem" aria-haspopup="true">About <svg class="menu-arrow" ><use href="/static/img/font_awesome_subset.8fba61a09652.svg#chevron-down"></use></svg></a>
+                    <ul class="dropdown-menu-list">
+ 
+ <li class="Sponsors">
+  <a class_="dropdown-item-link" href="/sponsors/">
+   <h3>
+    Sponsors
+   </h3>
+  </a>
+ </li>
+ <li class="Sustainers">
+  <a class_="dropdown-item-link" href="/sustainer/">
+   <h3>
+    Sustainers
+   </h3>
+  </a>
+ </li>
+ <li class="Directors">
+  <a class_="dropdown-item-link" href="/about/board/">
+   <h3>
+    Board of Directors
+   </h3>
+  </a>
+ </li>
+ <li class="Staff">
+  <a class_="dropdown-item-link" href="/about/staff/">
+   <h3>
+    Staff
+   </h3>
+  </a>
+ </li>
+ <li class="Eval">
+  <a class_="dropdown-item-link" href="/about/eval-committee/">
+   <h3>
+    Evaluation Committee
+   </h3>
+  </a>
+ </li>
+ <li class="Outside">
+  <a class_="dropdown-item-link" href="/about/outside/">
+   <h3>
+    Outside Counsel, et alia
+   </h3>
+  </a>
+ </li>
+ <li class="Transparency">
+  <a class_="dropdown-item-link" href="/about/transparency">
+   <h3>
+    Transparency
+   </h3>
+  </a>
+ </li>
+ <li class="Contact">
+  <a class_="dropdown-item-link" href="/about/contact/">
+   <h3>
+    Contact
+   </h3>
+  </a>
+ </li>
+</ul>
+
+                </li>
+                <li class="OurWork"><a href="/activities" role="menuitem" aria-haspopup="true">Our Work <svg class="menu-arrow" ><use href="/static/img/font_awesome_subset.8fba61a09652.svg#chevron-down"></use></svg></a>
+                    <ul class="dropdown-menu-list">
+ 
+ <li class="CopyleftCompliance">
+  <a class_="dropdown-item-link" href="/copyleft-compliance/">
+   <h3>
+    Copyleft Compliance
+   </h3>
+   <p class_="dropdown-description">
+    We defend &amp; uphold the rights enshrined in copyleft licenses.
+   </p>
+  </a>
+ </li>
+ <li class="ImpactLitigaton">
+  <a class_="dropdown-item-link" href="/copyleft-compliance/past-lawsuits.html">
+   <h3>
+    Impact Litigation
+   </h3>
+   <p class_="dropdown-description">
+    We defend the legal rights of software users in Court when needed.
+   </p>
+  </a>
+ </li>
+ <li class="LLMGenAI">
+  <a class_="dropdown-item-link" href="/llm-gen-ai/">
+   <h3>
+    LLM-Gen-AI in FOSS
+   </h3>
+   <p class_="dropdown-description">
+    We help FOSS contributors navigate this ongoing conundrum.
+   </p>
+  </a>
+ </li>
+ <li class="FOSSY">
+  <a class_="dropdown-item-link" href="https://fossy.ca">
+   <h3>
+    FOSSY
+   </h3>
+   <p class_="dropdown-description">
+    Our annual community-oriented conference.
+   </p>
+  </a>
+ </li>
+<!-- <li class="GiveUpGitHub">
+  <a class_="dropdown-item-link" href="https://GiveUpGitHub.org">
+   <h3>
+    Give Up GitHub
+   </h3>
+   <p class_="dropdown-description">
+    <em>Leave GitHub <strong>today</strong>!</em>  Learn why &amp; how.
+   </p>
+  </a>
+ </li>-->
+ <li class="Outreachy">
+  <a class_="dropdown-item-link" href="https://outreachy.org">
+   <h3>
+    Outreachy
+   </h3>
+   <p class_="dropdown-description">
+    Internships for those who face under&shy;representation, systemic bias, or discrimination in tech.
+   </p>
+  </a>
+ </li>
+ <li class="Hiring">
+  <a class_="dropdown-item-link" href="/hiring">
+   <h3>
+    Hiring
+   </h3>
+   <p class_="dropdown-description">
+    SFC is hiring!
+   </p>
+  </a>
+ </li>
+</ul>
+
+                </li>
+                <li class="Tools"><a href="/tools" role="menuitem" aria-haspopup="true">Tools <svg class="menu-arrow" ><use href="/static/img/font_awesome_subset.8fba61a09652.svg#chevron-down"></use></svg></a>
+                    <ul class="dropdown-menu-list">
+ 
+ <li class="MemberProjects">
+  <a class_="dropdown-item-link" href="/projects/">
+   <h3>
+    Member Projects
+   </h3>
+   <p class_="dropdown-description">
+    We provide non-profit infrastructure and services to our members creating Free/Libre and Open Source Software.
+   </p>
+  </a>
+ </li>
+ <li class="UseTheSource">
+  <a class_="dropdown-item-link" href="/usethesource/">
+   <h3>
+    Use The Source
+   </h3>
+   <p class_="dropdown-description">
+    Our tool for evaluating the source code candidates companies must provide for GPLed software.
+   </p>
+  </a>
+ </li>
+ <li class="OpenWrtOneRouter">
+  <a class_="dropdown-item-link" href="/activities/openwrt-one.html">
+   <h3>
+    OpenWrt One
+   </h3>
+   <p class_="dropdown-description">
+    We designed and built the first ever wireless Internet router designed with software freedom and right to repair in mind.
+   </p>
+  </a>
+ </li>
+</ul>
+
+                </li>
+                <li class="Learn"><a href="/learn" role="menuitem" aria-haspopup="true">Learn <svg class="menu-arrow" ><use href="/static/img/font_awesome_subset.8fba61a09652.svg#chevron-down"></use></svg></a>
+                    <ul class="dropdown-menu-list">
+ 
+ <li>
+  <a class_="dropdown-item-link" href="/casts/the-corresponding-source/">
+   <h3>
+    The Corresponding Source
+   </h3>
+   <p class_="dropdown-description">
+    A bi-weekly oggcast about legal, policy, and many other issues in the Free, Libre, and Open Source Software (FLOSS) world. 
+   </p>
+  </a>
+ </li>
+ <li>
+  <a class_="dropdown-item-link" href="/copyleft-compliance/glossary.html">
+   <h3>
+    Glossary of Terms
+   </h3>
+   <p class_="dropdown-description">
+    A list of terms you might be unfamiliar with but occur frequently in our work.
+   </p>
+  </a>
+ </li>
+ <li>
+  <a class_="dropdown-item-link" href="/press/qanda.html">
+   <h3>
+    FAQ About the Vizio Lawsuit
+   </h3>
+   <p class_="dropdown-description">
+    Your most frequently asked questions about the Vizio lawsuit, answered in one place.
+   </p>
+  </a>
+ </li>
+</ul>
+
+                </li>
+                
+                <li class="mobile-donate"><a href="/sustainer/" role="menuitem">Donate</a></li>
+            </ul>
+        </nav>
+    </div>
+
+
+
+  
+
+
+
+
+
+
+    <div>
+      
+ <div id="container" class="mw8 center ph2 ph3">
+     <div id="mainContent">
+<div class="breadcrumbs">
+  <p><a href="/">Home</a> / <a href="/news/">News</a> / <a href="/blog/">Blog</a></p>
+</div>
+
+
+
+<div class="blog-entry">
+
+<h2 class="clear"
+  >Conservancy's Remote Work Tools</h2>
+
+
+<p class="date">by <span class="author">Deb Nicholson</span>
+  on March 17, 2020
+</p>
+
+
+
+
+<p>Conservancy has been a 100% remote organization for over 5 years and is now a remote organization by design. We are dedicated to empowering users through software freedom and <a href="https://www.youtube.com/watch?v=n55WClalwHo">we always use free software tools to do our work wherever possible</a>. As many folks are newly switching to remote work or collaboration as part of "social distancing," it seems like a good time to share the "free as in freedom" tools we use and tell you how they work for us.</p>
+
+<p><a href="https://etherpad.org/">Etherpad!</a> It's a Conservancy member project and a handy way to write collaboratively. We use Etherpad all the time when we want to collect notes on something, write news items or blog posts (this post was written in Etherpad!) or co-author something with one of our member projects. We also use them to take notes and minutes in meetings, like our Evaluation Committee meetings and our Board meetings. We have a handy plugin enabled where you can enter your email address and be notified when other people are editing the pad, so that you can jump in when your co-authors are ready. You can use <a href="https://pad.sfconservancy.org/">our instance</a> or set up your own. </p>
+
+<p>We all use various clients (<a href="https://wiki.gnome.org/Apps/Empathy">Empathy</a>, <a href="https://www.pidgin.im/">Pidgin</a>, <a href="https://conversations.im/">Conversations</a>) to talk to each other on Conservancy's Jabber server during the work day, both from our desktops and phones. We use group chats to coordinate handing off work, to discuss news items or share links. It's perfect for when you need to talk individually or as a group but don't need to start a big email chain. We use email too, but for less ephemeral conversations.</p>
+
+<p>On the other end of the spectrum, sometimes you need a clear record of a task as it make its way through your organization. That's when <a href="https://bestpractical.com/request-tracker/">Request Tracker</a> (aka RT) is key. We moved a lot of our work to RT around eighteen months ago and it's been fantastic for clarity and productivity, especially when there are several different phases to a shared task.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Internet_Relay_Chat">Internet Relay Chat (IRC)</a> may be old school but it's easy to start using it because you don't need an account, and you can use web clients that don't need any setup at all. As a bonus, it's not much of a bandwidth hog, which is especially nice when your connection doesn't have a lot of bandwidth. Plus, you can always swing by <a href="https://webchat.freenode.net/#conservancy">our channel</a> to chat with us about software freedom and adjacent topics. </p>
+
+<p><a href="https://zulipchat.com/">Zulip</a> is another chat service that we and some of our member projects use (our Outreachy organizers, mentors and participants use it, for example). Zulip is more modern by design than IRC, with emojis and reactions built in and does a good job of organizing different discussions. There's email notification when someone is trying to reach you directly, which is nice if you're not always on Zulip. It's also accessible via web or by installing a local client.</p>
+
+<p><a href="https://www.asterisk.org/">Asterisk</a> helps us self-manage several phone lines and teleconference rooms. We hold our daily stand-up on the phone and schedule calls with member projects, volunteers, and contractors throughout the day, in different "rooms."</p>
+
+<p><a href="https://www.mumble.com/">Mumble</a> is a great tool for holding international phone meetings which can otherwise quickly become expensive for folks outside the hosting country. You set up a room and then everyone connects via the internet through their own machine, preferably with a headset. </p>
+
+<p><a href="https://jitsi.org/">Jitsi</a> is a free software video calling tool for when everyone wants to get dressed and see each other. The Outreachy organizers often use this for their meetings and Karen and Bradley use this as a part of their remote Free as in Freedom recording set up. Jitsi is particularly helpful to propose as an alternative when others want to use Zoom. It can be really nice when you want to share screens or when folks want to be able to see each other. You do need a decent internet connection for video calling.</p>
+
+<p><a href="https://send.firefox.com/">Firefox Send</a> is a handy way to send files to people that's encrypted and that expires after you use it. This is useful so you can avoid using proprietary services that may be collecting information about the files you are sharing with other people. This works even with large files and requires no technical knowledge, local client or account setup to use.</p>
+ 
+<p>These are weird and uncertain times. Tools are only a small part of making remote work effective. We're in this together and we're happy to talk about the remote work experience with you anytime. In particular, you can join us at 2pm Eastern/6pm UTC on Thursdays in our IRC channel #conservancy on freenode, when we plan to be around to shoot the breeze.</p>
+
+
+
+
+<p class="permalink"><a href="/blog/2020/mar/17/remotetools/">[permalink]</a></p>
+
+
+
+<p class="blog-tags">Tags:
+  
+  <a href="/blog/?tag=conservancy">conservancy</a>, 
+  <a href="/blog/?tag=FreedomforEveryone">software freedom for everyone</a></p>
+
+
+
+
+
+</div>
+
+
+<p class="blog-comments">Please email any comments on this entry to
+  <a href="mailto:info@sfconservancy.org">info@sfconservancy.org</a>.</p>
+
+<p><span class="continued"><a href="/blog/">Other Conservancy Blog entries&hellip;</a></span></p>
+
+</div>
+         <div id="sidebar" class="">
+
+
+<h2><a href="/blog/">See all blog posts&hellip;</a></h2>
+<!-- <p><a href="/blog/query/">Query...</a></p> -->
+
+<h2>Blog Index by Year</h2>
+<ul>
+<li><a href="/blog/2026/">2026</a></li><li><a href="/blog/2025/">2025</a></li><li><a href="/blog/2024/">2024</a></li><li><a href="/blog/2023/">2023</a></li><li><a href="/blog/2022/">2022</a></li><li><a href="/blog/2021/">2021</a></li><li><a href="/blog/2020/">2020</a></li><li><a href="/blog/2019/">2019</a></li><li><a href="/blog/2018/">2018</a></li><li><a href="/blog/2017/">2017</a></li><li><a href="/blog/2016/">2016</a></li><li><a href="/blog/2015/">2015</a></li><li><a href="/blog/2014/">2014</a></li><li><a href="/blog/2013/">2013</a></li><li><a href="/blog/2012/">2012</a></li><li><a href="/blog/2011/">2011</a></li><li><a href="/blog/2010/">2010</a></li>
+</ul>
+
+
+<h2>Blogs by Tag</h2>
+<ul>
+
+<li><a href="/blog/?tag=conservancy">conservancy</a></li>
+
+<li><a href="/blog/?tag=gpl">GPL</a></li>
+
+<li><a href="/blog/?tag=supporter">supporter</a></li>
+
+<li><a href="/blog/?tag=licensing">licensing</a></li>
+
+<li><a href="/blog/?tag=conferences">conferences</a></li>
+
+<li><a href="/blog/?tag=law">law</a></li>
+
+<li><a href="/blog/?tag=events">events</a></li>
+
+<li><a href="/blog/?tag=FreedomforEveryone">software freedom for everyone</a></li>
+
+<li><a href="/blog/?tag=member-projects">Member Projects</a></li>
+
+<li><a href="/blog/?tag=outreachy">Outreachy</a></li>
+
+<li><a href="/blog/?tag=sustainability">FOSS Sustainability</a></li>
+
+<li><a href="/blog/?tag=diversity">diversity</a></li>
+
+<li><a href="/blog/?tag=resources">resources</a></li>
+
+<li><a href="/blog/?tag=copyleftconf">Copyleft Conf</a></li>
+
+<li><a href="/blog/?tag=ContractPatch">ContractPatch</a></li>
+
+<li><a href="/blog/?tag=filings">Filings</a></li>
+
+<li><a href="/blog/?tag=godot">Godot</a></li>
+
+<li><a href="/blog/?tag=reproducible-builds">Reproducible Builds</a></li>
+
+<li><a href="/blog/?tag=yir-2016">Year In Review 2016</a></li>
+
+<li><a href="/blog/?tag=fundraiser">fundraiser</a></li>
+
+<li><a href="/blog/?tag=cla">CLA</a></li>
+
+<li><a href="/blog/?tag=wine">Wine</a></li>
+
+<li><a href="/blog/?tag=yir-2015">Year In Review 2015</a></li>
+
+<li><a href="/blog/?tag=kallithea">Kallithea</a></li>
+
+<li><a href="/blog/?tag=qemu">QEMU</a></li>
+
+<li><a href="/blog/?tag=selenium">Selenium</a></li>
+
+<li><a href="/blog/?tag=security">security</a></li>
+
+<li><a href="/blog/?tag=Git">Git</a></li>
+
+<li><a href="/blog/?tag=gsoc">Google Summer of Code</a></li>
+
+<li><a href="/blog/?tag=homebrew">Homebrew</a></li>
+
+<li><a href="/blog/?tag=inkscape">inkscape</a></li>
+
+<li><a href="/blog/?tag=patent">patent</a></li>
+
+<li><a href="/blog/?tag=clojars">Clojars</a></li>
+
+<li><a href="/blog/?tag=hackfests">Hackfests</a></li>
+
+<li><a href="/blog/?tag=racket">Racket</a></li>
+
+<li><a href="/blog/?tag=cyborg">cyborg</a></li>
+
+<li><a href="/blog/?tag=inclusion">inclusion</a></li>
+
+<li><a href="/blog/?tag=phpmyadmin">phpMyAdmin</a></li>
+
+<li><a href="/blog/?tag=pypy">pypy</a></li>
+
+<li><a href="/blog/?tag=volunteer">volunteer</a></li>
+
+<li><a href="/blog/?tag=accounting">Accounting</a></li>
+
+<li><a href="/blog/?tag=librehealth">LibreHealth</a></li>
+
+<li><a href="/blog/?tag=Shotwell">Shotwell</a></li>
+
+<li><a href="/blog/?tag=jquery">jQuery</a></li>
+
+<li><a href="/blog/?tag=microblocks">microblocks</a></li>
+
+<li><a href="/blog/?tag=sourceware">sourceware</a></li>
+
+</ul>
+
+<h2>Blogs by Author</h2>
+<ul>
+
+<li><a href="/blog/?author=Vladimir Bejdo">Vladimir Bejdo</a></li>
+
+<li><a href="/blog/?author=kate">Kate Chapman</a></li>
+
+<li><a href="/blog/?author=pchestek">Pamela Chestek</a></li>
+
+<li><a href="/blog/?author=denver">Denver Gingerich</a></li>
+
+<li><a href="/blog/?author=denverandbkuhn">Bradley M. Kühn and Denver Gingerich</a></li>
+
+<li><a href="/blog/?author=hawkinsw">Will Hawkins</a></li>
+
+<li><a href="/blog/?author=esquiring">Fred Jennings</a></li>
+
+<li><a href="/blog/?author=debandkaren">Deb and Karen</a></li>
+
+<li><a href="/blog/?author=JeffKing">Jeff King</a></li>
+
+<li><a href="/blog/?author=bkuhn">Bradley M. Kühn</a></li>
+
+<li><a href="/blog/?author=conservancybrolt">Conservancy + Bro LT</a></li>
+
+<li><a href="/blog/?author=cwebber">Christine Lemmer-Webber</a></li>
+
+<li><a href="/blog/?author=deb">Deb Nicholson</a></li>
+
+<li><a href="/blog/?author=Sourceware PLC">Sourceware PLC</a></li>
+
+<li><a href="/blog/?author=rick">Rick Sanders</a></li>
+
+<li><a href="/blog/?author=bkuhnandkaren">Bradley M. Kühn and Karen M. Sandler</a></li>
+
+<li><a href="/blog/?author=karen">Karen Sandler</a></li>
+
+<li><a href="/blog/?author=tony">Tony Sebro</a></li>
+
+<li><a href="/blog/?author=sage">Sage A. Sharp</a></li>
+
+<li><a href="/blog/?author=brett">Brett Smith</a></li>
+
+<li><a href="/blog/?author=allstaff">Conservancy&#x27;s Staff</a></li>
+
+<li><a href="/blog/?author=pono">Daniel Takamori</a></li>
+
+<li><a href="/blog/?author=Outreachy Team">Outreachy Team</a></li>
+
+<li><a href="/blog/?author=marina">Marina Zhurakhinskaya</a></li>
+
+<li><a href="/blog/?author=mollydb">Molly deBlanc</a></li>
+
+</ul>
+         </div>
+   </div>
+
+    </div>
+
+    <footer class="footer-container" role="contentinfo">
+      <div class="footer-inner">
+       
+        <a href="/" id="footer-logo-link">
+          <img class="footer-logo" src="/static/img/conservancy-header-logo.322da8acaa91.svg" alt="Software Freedom Conservancy" />
+        </a>
+
+        
+        <div class="social-links">
+          <a class="social-x" href="https://x.com/conservancy" aria-label="X">
+            <svg class="fa-icon" aria-hidden="true"><use href="/static/img/font_awesome_subset.8fba61a09652.svg#x-twitter"></use></svg>
+          </a>
+          <a class="social-facebook" href="https://www.facebook.com/SoftwareFreedomConservancy/" aria-label="Facebook">
+            <svg class="fa-icon" aria-hidden="true"><use href="/static/img/font_awesome_subset.8fba61a09652.svg#facebook-f"></use></svg>
+          </a>
+          <a class="social-youtube" href="https://www.youtube.com/channel/UCUEeuNvX2UyTTyTYXR9dm_A" aria-label="YouTube">
+            <svg class="fa-icon" aria-hidden="true"><use href="/static/img/font_awesome_subset.8fba61a09652.svg#youtube"></use></svg>
+          </a>
+          <a class="social-mastodon" href="https://social.sfconservancy.org/conservancy" aria-label="Fediverse">
+            <svg class="fa-icon" aria-hidden="true"><use href="/static/img/font_awesome_subset.8fba61a09652.svg#mastodon"></use></svg>
+          </a>
+        </div>
+
+        
+        <div class="footer-nav">
+          <nav aria-label="Footer navigation">
+            <ul>
+              <li><a href="/">Main Page</a></li>
+              <li><a href="/about/">Contact</a></li>
+              <li><a href="/sponsors/">Sponsors</a></li>
+              <li><a href="/feeds/omnibus/">RSS Feed</a></li>
+              <li><a href="/sustainer/" id="footer-donate-btn" aria-label="Donate to Software Freedom Conservancy">Donate</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        
+        <div class="charity-info">
+          <p>Software Freedom Conservancy is a 501(c)(3) non-profit charity.</p>
+        </div>
+
+      </div>
+      
+      
+      
+      <div class="site-footer-info">
+        <div class="privacy-policy">
+          <p><a href="/privacy-policy/">Privacy Policy</a> last updated 22 December 2020.</p>
+        </div>
+        <div class="cc-license">
+          <p>This page and its contents are licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0"> Creative Commons Attribution-Share Alike 4.0 International License</a>.</p>
+        </div>
+        <a class="cc-logo" rel="license" href="https://creativecommons.org/licenses/by-sa/4.0">
+          <img src="/static/img/creative-commons-footer-icons.42c681015296.svg" alt="Creative Commons Attribution-Share Alike 4.0 International License" />
+        </a>
+      </div>
+
+
+    </footer>
+
+    <script src="/static/js/mobile-nav.ed67bf382581.js"></script> 
+  </body>
+</html>
