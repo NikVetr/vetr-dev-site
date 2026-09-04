@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-04T03:32:46+00:00",
+  "seed": 20260903,
+  "trainingInputSha256": "6038b49de864111d0f82d46a144d692f80659bdb2d7de4db4c0c3f2dcfe3c5ef",
+  "target": "log July 2026-adjusted annual base salary",
+  "foldRule": "Ten deterministic organization-grouped folds; filing and posting records with the same normalized organization name share a fold.",
+  "counts": {
+    "records": 131,
+    "organizations": 128,
+    "exactFilings": 114,
+    "advertisedRecords": 17,
+    "advertisedRanges": 16,
+    "advertisedPointAmounts": 1
+  },
+  "categoryCounts": {
+    "focus_area": {
+      "AI / technology": 26,
+      "Animal welfare / food": 6,
+      "Climate / environment": 17,
+      "Education / public engagement": 1,
+      "Global health / development": 17,
+      "Philanthropy / nonprofit support": 45,
+      "Research / evidence": 13,
+      "Security / governance": 6
+    },
+    "ea_relationship": {
+      "EA-adjacent": 67,
+      "EA-core": 1,
+      "Functional overlap": 63
+    },
+    "organization_type": {
+      "Affiliated group": 2,
+      "Fiscally sponsored / umbrella": 4,
+      "Independent nonprofit": 119,
+      "Membership / network": 5,
+      "Other organization type": 1
+    },
+    "title_group": {
+      "CEO": 68,
+      "Executive Director": 38,
+      "Other executive title": 5,
+      "President": 20
+    },
+    "location_scope": {
+      "International / multi-country": 45,
+      "Outside United States": 2,
+      "United States": 84
+    }
+  },
+  "missingContinuous": {
+    "expenses": 10,
+    "revenue": 10,
+    "staff": 10
+  },
+  "rpProfile": {
+    "expenses": 20378936.0,
+    "revenue": 20599841.0,
+    "staff": 43.0,
+    "compensation_year": 2024,
+    "focus_area": "Research / evidence",
+    "ea_relationship": "EA-core",
+    "organization_type": "Independent nonprofit",
+    "title_group": "CEO",
+    "location_scope": "International / multi-country",
+    "reference_salary": 155230.03
+  },
+  "provenance": {
+    "trainingCsvSha256": "cbe3366098004129cd0b494786ed5fb0b100e1eddd0e1ff76d36d0f46d54e480",
+    "prepareScriptSha256": "86be36882ef9ab3276f06c095ee1c876a229cdde1c24e07e4aedfec1e2bd494b",
+    "fitScriptSha256": "325f4b3f9f6ce912503409a3c6308b9845dbc5f9196f9822edb27e839d9edb93",
+    "stanModelSha256": "1372c4f8ed8892330f894894ac747d04d22f998fba45d9ad9fcc6c199bdf8d8c"
+  }
+}

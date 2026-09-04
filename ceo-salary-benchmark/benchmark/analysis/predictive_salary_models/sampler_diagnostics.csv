@@ -1,0 +1,23 @@
+"phase","model","fold","chains","draws_per_chain","divergences","max_treedepth_hits","min_ebfmi"
+"cross_validation","Bayesian partial pooling",1,1,250,0,0,0.621084304177533
+"cross_validation","Bayesian partial pooling",2,1,250,0,0,0.698565726823034
+"cross_validation","Bayesian partial pooling",3,1,250,0,0,0.859934325498244
+"cross_validation","Bayesian partial pooling",4,1,250,0,0,0.753813747943515
+"cross_validation","Bayesian partial pooling",5,1,250,0,0,0.78041155031406
+"cross_validation","Bayesian partial pooling",6,1,250,0,0,0.705249668558901
+"cross_validation","Bayesian partial pooling",7,1,250,0,0,0.661592484583383
+"cross_validation","Bayesian partial pooling",8,1,250,0,0,0.927713541718196
+"cross_validation","Bayesian partial pooling",9,1,250,0,0,0.790160541733316
+"cross_validation","Bayesian partial pooling",10,1,250,0,0,1.00269535431551
+"cross_validation","Bayesian partial pooling + ad ranges",1,1,250,0,0,0.611153414100402
+"cross_validation","Bayesian partial pooling + ad ranges",2,1,250,0,0,0.638821368804229
+"cross_validation","Bayesian partial pooling + ad ranges",3,1,250,0,0,0.736154459701341
+"cross_validation","Bayesian partial pooling + ad ranges",4,1,250,0,0,0.715732618911278
+"cross_validation","Bayesian partial pooling + ad ranges",5,1,250,0,0,0.746088503621554
+"cross_validation","Bayesian partial pooling + ad ranges",6,1,250,0,0,0.69992905934925
+"cross_validation","Bayesian partial pooling + ad ranges",7,1,250,0,0,0.700308602994375
+"cross_validation","Bayesian partial pooling + ad ranges",8,1,250,0,0,0.784499268884497
+"cross_validation","Bayesian partial pooling + ad ranges",9,1,250,0,0,0.865339020300839
+"cross_validation","Bayesian partial pooling + ad ranges",10,1,250,0,0,0.800615880575924
+"full","Bayesian partial pooling",NA,4,600,0,0,0.714428847000645
+"full","Bayesian partial pooling + ad ranges",NA,4,600,0,0,0.665427954135603
