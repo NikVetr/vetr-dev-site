@@ -3,6 +3,7 @@
  */
 
 const STORAGE_KEY = 'autochair_layout_splits_v6';
+const KEYBOARD_STEP = 16;
 
 const RESIZER_DEFS = [
     {
@@ -10,6 +11,8 @@ const RESIZER_DEFS = [
         axis: 'y',
         containerSelector: '.workspace-panels',
         cssVar: '--main-top-height',
+        beforeLabel: 'Top panels',
+        afterLabel: 'Lower panels',
         minPrev: 220,
         minNext: 300
     },
@@ -18,6 +21,8 @@ const RESIZER_DEFS = [
         axis: 'x',
         containerSelector: '.top-section',
         cssVar: '--top-left-width',
+        beforeLabel: 'Input panel',
+        afterLabel: 'Right-side panels',
         minPrev: 360,
         minNext: 280
     },
@@ -26,6 +31,8 @@ const RESIZER_DEFS = [
         axis: 'x',
         containerSelector: '.right-side',
         cssVar: '--right-export-width',
+        beforeLabel: 'Import and Export panel',
+        afterLabel: 'Status panels',
         minPrev: 190,
         minNext: 200
     },
@@ -34,6 +41,8 @@ const RESIZER_DEFS = [
         axis: 'y',
         containerSelector: '.status-column',
         cssVar: '--status-overall-height',
+        beforeLabel: 'Overall Status panel',
+        afterLabel: 'Item controls',
         minPrev: 140,
         minNext: 110
     },
@@ -42,6 +51,8 @@ const RESIZER_DEFS = [
         axis: 'x',
         containerSelector: '.next-item-controls',
         cssVar: '--next-prev-width',
+        beforeLabel: 'Previous Item control',
+        afterLabel: 'Next Item control',
         minPrev: 72,
         minNext: 130
     },
@@ -50,6 +61,8 @@ const RESIZER_DEFS = [
         axis: 'x',
         containerSelector: '.tracker-section',
         cssVar: '--tracker-left-width',
+        beforeLabel: 'Tracker panel',
+        afterLabel: 'Current Status panel',
         minPrev: 360,
         minNext: 260
     },
@@ -58,6 +71,8 @@ const RESIZER_DEFS = [
         axis: 'y',
         containerSelector: '.lower-panels',
         cssVar: '--main-bottom-height',
+        beforeLabel: 'Tracker row',
+        afterLabel: 'Bottom panels',
         anchor: 'next',
         minPrev: 120,
         minNext: 120
@@ -67,6 +82,8 @@ const RESIZER_DEFS = [
         axis: 'x',
         containerSelector: '.bottom-section',
         cssVar: '--bottom-left-width',
+        beforeLabel: 'Staging panel',
+        afterLabel: 'Current Item panel',
         minPrev: 320,
         minNext: 280
     }
@@ -135,7 +152,98 @@ function applyValue(def, container, rawValue) {
     const clamped = clamp(rawValue, minPrev, maxPrev);
     const stored = getStoredValueFromPrev(def, total, splitter, clamped);
     container.style.setProperty(def.cssVar, `${Math.round(stored)}px`);
+    updateHandleAria(def, container);
     return clamped;
+}
+
+function getCurrentPrevValue(def, container, handle = document.getElementById(def.handleId)) {
+    const rect = container.getBoundingClientRect();
+    const splitter = getSplitterSize(container);
+    const total = def.axis === 'x' ? rect.width : rect.height;
+    const { minPrev, maxPrev } = getFeasibleBounds(def, total, splitter);
+    const storedCssValue = container.style.getPropertyValue(def.cssVar).trim();
+    if (/^-?\d+(?:\.\d+)?px$/.test(storedCssValue)) {
+        const storedValue = Number.parseFloat(storedCssValue);
+        return clamp(getPrevValueFromStored(def, total, splitter, storedValue), minPrev, maxPrev);
+    }
+
+    if (handle) {
+        const handleRect = handle.getBoundingClientRect();
+        const geometricValue = def.axis === 'x'
+            ? handleRect.left - rect.left
+            : handleRect.top - rect.top;
+        if (Number.isFinite(geometricValue) && (handleRect.width > 0 || handleRect.height > 0)) {
+            return clamp(geometricValue, minPrev, maxPrev);
+        }
+    }
+
+    return minPrev + ((maxPrev - minPrev) / 2);
+}
+
+function updateHandleAria(def, container, handle = document.getElementById(def.handleId)) {
+    if (!handle) throw new Error(`Layout resize handle is missing: #${def.handleId}`);
+    const rect = container.getBoundingClientRect();
+    const splitter = getSplitterSize(container);
+    const total = def.axis === 'x' ? rect.width : rect.height;
+    const available = Math.max(0, total - splitter);
+    const { minPrev, maxPrev } = getFeasibleBounds(def, total, splitter);
+    const current = getCurrentPrevValue(def, container, handle);
+    const asPercent = value => available > 0 ? Math.round((value / available) * 100) : 0;
+    const minimum = asPercent(minPrev);
+    const maximum = asPercent(maxPrev);
+    const now = clamp(asPercent(current), minimum, maximum);
+    const isUnavailable = window.matchMedia('(max-width: 1024px)').matches;
+
+    handle.setAttribute('role', 'separator');
+    handle.tabIndex = isUnavailable ? -1 : 0;
+    handle.setAttribute('aria-disabled', String(isUnavailable));
+    handle.setAttribute('aria-orientation', def.axis === 'x' ? 'vertical' : 'horizontal');
+    handle.setAttribute('aria-label', `Resize ${def.beforeLabel} and ${def.afterLabel}`);
+    handle.setAttribute('aria-valuemin', String(minimum));
+    handle.setAttribute('aria-valuemax', String(maximum));
+    handle.setAttribute('aria-valuenow', String(now));
+    handle.setAttribute(
+        'aria-valuetext',
+        `${def.beforeLabel} ${now} percent; ${def.afterLabel} ${100 - now} percent`
+    );
+    handle.setAttribute(
+        'aria-keyshortcuts',
+        def.axis === 'x' ? 'ArrowLeft ArrowRight Home End' : 'ArrowUp ArrowDown Home End'
+    );
+}
+
+function updateAllHandleAria() {
+    RESIZER_DEFS.forEach(def => {
+        const container = document.querySelector(def.containerSelector);
+        if (!container) throw new Error(`Layout resize container is missing: ${def.containerSelector}`);
+        updateHandleAria(def, container);
+    });
+}
+
+function handleKeyboardResize(event, def, handle, container) {
+    if (window.matchMedia('(max-width: 1024px)').matches) return;
+    const decreaseKey = def.axis === 'x' ? 'ArrowLeft' : 'ArrowUp';
+    const increaseKey = def.axis === 'x' ? 'ArrowRight' : 'ArrowDown';
+    if (![decreaseKey, increaseKey, 'Home', 'End'].includes(event.key)) return;
+
+    event.preventDefault();
+    const rect = container.getBoundingClientRect();
+    const splitter = getSplitterSize(container);
+    const total = def.axis === 'x' ? rect.width : rect.height;
+    const { minPrev, maxPrev } = getFeasibleBounds(def, total, splitter);
+    const current = getCurrentPrevValue(def, container, handle);
+    const step = event.shiftKey ? KEYBOARD_STEP * 3 : KEYBOARD_STEP;
+    let nextValue = current;
+    if (event.key === decreaseKey) nextValue -= step;
+    else if (event.key === increaseKey) nextValue += step;
+    else if (event.key === 'Home') nextValue = minPrev;
+    else if (event.key === 'End') nextValue = maxPrev;
+
+    applyValue(def, container, nextValue);
+    clampAll();
+    persistValues();
+    updateAllHandleAria();
+    window.dispatchEvent(new Event('autochair:layout-resized'));
 }
 
 function handlePointerMove(event) {
@@ -203,7 +311,7 @@ function persistValues() {
     try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
     } catch (err) {
-        // Ignore storage failures.
+        console.error('Failed to save layout split sizes:', err);
     }
 }
 
@@ -414,8 +522,9 @@ function updateCornerPreviewFromPointer(event, def, handle) {
 }
 
 function startDrag(event, def, handle, container) {
-    if (window.matchMedia('(max-width: 768px)').matches) return;
+    if (window.matchMedia('(max-width: 1024px)').matches) return;
     event.preventDefault();
+    handle.focus({ preventScroll: true });
     clearCornerPreview();
 
     let primaryDef = def;
@@ -464,6 +573,7 @@ function loadPersistedValues() {
     try {
         parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
     } catch (err) {
+        console.error('Failed to read saved layout split sizes:', err);
         parsed = {};
     }
 
@@ -477,6 +587,7 @@ function loadPersistedValues() {
 }
 
 function clampAll() {
+    if (window.matchMedia('(max-width: 1024px)').matches) return;
     RESIZER_DEFS.forEach(def => {
         const container = document.querySelector(def.containerSelector);
         if (!container) return;
@@ -499,8 +610,10 @@ export function initLayoutResizers() {
     RESIZER_DEFS.forEach(def => {
         const handle = document.getElementById(def.handleId);
         const container = document.querySelector(def.containerSelector);
-        if (!handle || !container) return;
+        if (!handle) throw new Error(`Layout resize handle is missing: #${def.handleId}`);
+        if (!container) throw new Error(`Layout resize container is missing: ${def.containerSelector}`);
         handle.addEventListener('pointerdown', (event) => startDrag(event, def, handle, container));
+        handle.addEventListener('keydown', (event) => handleKeyboardResize(event, def, handle, container));
         handle.addEventListener('pointermove', (event) => updateCornerPreviewFromPointer(event, def, handle));
         handle.addEventListener('pointerleave', () => {
             if (cornerPreview && cornerPreview.handles.includes(handle)) {
@@ -512,7 +625,9 @@ export function initLayoutResizers() {
     window.addEventListener('resize', () => {
         clampAll();
         refreshCornerCoupling();
+        updateAllHandleAria();
     });
     clampAll();
     refreshCornerCoupling();
+    updateAllHandleAria();
 }

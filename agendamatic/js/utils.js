@@ -12,22 +12,22 @@ export function parseDuration(durationStr) {
 
     const str = durationStr.toString().trim().toLowerCase();
 
-    // Check for hours and minutes format (e.g., "1h30m")
-    const hourMinMatch = str.match(/^(\d+)h\s*(\d+)m?$/);
+    // Check for hours and minutes format (e.g., "1h30m" or "1h30.5m")
+    const hourMinMatch = str.match(/^(\d+)h\s*(\d+(?:\.\d+)?)m?$/);
     if (hourMinMatch) {
-        return parseInt(hourMinMatch[1], 10) * 60 + parseInt(hourMinMatch[2], 10);
+        return Number(hourMinMatch[1]) * 60 + Number(hourMinMatch[2]);
     }
 
-    // Check for hours only (e.g., "1h")
-    const hourMatch = str.match(/^(\d+)h$/);
+    // Check for hours only (e.g., "1h" or "1.5h")
+    const hourMatch = str.match(/^(\d+(?:\.\d+)?)h$/);
     if (hourMatch) {
-        return parseInt(hourMatch[1], 10) * 60;
+        return Number(hourMatch[1]) * 60;
     }
 
-    // Check for minutes (e.g., "30m" or "30")
-    const minMatch = str.match(/^(\d+)m?$/);
+    // Check for minutes (e.g., "30m", "30", or "30.5m")
+    const minMatch = str.match(/^(\d+(?:\.\d+)?)m?$/);
     if (minMatch) {
-        return parseInt(minMatch[1], 10);
+        return Number(minMatch[1]);
     }
 
     return 0;
@@ -39,10 +39,15 @@ export function parseDuration(durationStr) {
  * @returns {string} - Formatted duration string
  */
 export function formatDuration(minutes) {
-    if (!minutes || minutes <= 0) return '0m';
+    const numericMinutes = Number(minutes);
+    if (!Number.isFinite(numericMinutes) || numericMinutes <= 0) return '0m';
 
-    const hours = Math.floor(minutes / 60);
-    const mins = minutes % 60;
+    // Work in tenths so fractional adjusted durations never expose floating-point noise.
+    const totalTenths = Math.round(numericMinutes * 10);
+    if (totalTenths <= 0) return '0m';
+    const hours = Math.floor(totalTenths / 600);
+    const minuteTenths = totalTenths - (hours * 600);
+    const mins = minuteTenths / 10;
 
     if (hours > 0 && mins > 0) {
         return `${hours}h${mins}m`;
@@ -237,7 +242,11 @@ export function renderMarkdownToHtml(markdown) {
         result = result.replace(/`([^`]+)`/g, '<code>$1</code>');
         result = result.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
         result = result.replace(/\*([^*]+)\*/g, '<em>$1</em>');
-        result = result.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+        result = result.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, label, target) => {
+            const protocol = target.trim().match(/^([a-z][a-z0-9+.-]*):/i)?.[1]?.toLowerCase();
+            if (!['http', 'https', 'mailto'].includes(protocol)) return `${label} (${target})`;
+            return `<a href="${target}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+        });
         return result;
     };
 

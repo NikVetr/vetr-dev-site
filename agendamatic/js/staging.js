@@ -9,6 +9,7 @@ import {
     unstageItem,
     reorderStagedItems
 } from './state.js';
+import { applyItemColorStyles } from './colors.js';
 
 let container = null;
 let draggedElement = null;
@@ -130,13 +131,38 @@ function renderStaging(state) {
         const card = document.createElement('div');
         const themeNumber = item.themeColor || ((index % 8) + 1);
         card.className = `staging-item theme-${themeNumber}`;
+        applyItemColorStyles(card, item);
         card.draggable = true;
         card.dataset.id = item.id;
         card.dataset.index = index.toString();
         card.innerHTML = `
-            <div class="staging-item-name">${escapeHtml(item.name)}</div>
-            <div class="staging-item-meta">${escapeHtml(item.lead || 'TBD')} • ${escapeHtml(item.duration || '10m')}</div>
+            <div class="staging-item-copy">
+                <div class="staging-item-name">${escapeHtml(item.name)}</div>
+                <div class="staging-item-meta">${escapeHtml(item.lead || 'TBD')} • ${escapeHtml(item.duration || '10m')}</div>
+            </div>
+            <div class="staging-item-actions">
+                <button type="button" data-action="up" aria-label="Move ${escapeHtml(item.name)} up" ${index === 0 ? 'disabled' : ''}>↑</button>
+                <button type="button" data-action="down" aria-label="Move ${escapeHtml(item.name)} down" ${index === stagedItems.length - 1 ? 'disabled' : ''}>↓</button>
+                <button type="button" data-action="return" aria-label="Return ${escapeHtml(item.name)} to agenda">↩</button>
+            </div>
         `;
+
+        card.querySelector('.staging-item-actions').addEventListener('click', event => {
+            const button = event.target.closest('button[data-action]');
+            if (!button) return;
+            if (button.dataset.action === 'up') reorderStagedItems(index, index - 1);
+            else if (button.dataset.action === 'down') reorderStagedItems(index, index + 1);
+            else if (button.dataset.action === 'return') {
+                unstageItem(item.id);
+                requestAnimationFrame(() => {
+                    document.querySelector(`.agenda-row[data-id="${CSS.escape(item.id)}"] .btn-stage`)?.focus();
+                });
+                return;
+            }
+            requestAnimationFrame(() => {
+                container.querySelector(`.staging-item[data-id="${CSS.escape(item.id)}"] button[data-action="${button.dataset.action}"]`)?.focus();
+            });
+        });
 
         card.addEventListener('dragstart', (e) => {
             draggedElement = card;
@@ -166,7 +192,8 @@ function renderStaging(state) {
             clearDragIndicators();
         });
 
-        card.addEventListener('dblclick', () => {
+        card.addEventListener('dblclick', event => {
+            if (event.target.closest('button')) return;
             unstageItem(item.id);
         });
 

@@ -19,28 +19,41 @@
                 <span class="visually-hidden">autoCHAIR</span>
                 <img class="page-title-name" src="assets/autoChair-name.png" alt="autoCHAIR">
             </h1>
-            <button id="btn-header-logo" class="header-logo-button" aria-label="Spin autoCHAIR logo">
-                <span class="header-logo-stack" aria-hidden="true">
-                    <video
-                        id="header-logo-video-forward"
-                        class="page-title-logo logo-video header-logo-variant"
-                        muted
-                        playsinline
-                        preload="auto"
-                    >
-                        <source src="assets/animation/logo_spin_128.webm" type="video/webm">
-                    </video>
-                    <video
-                        id="header-logo-video-reverse"
-                        class="page-title-logo logo-video header-logo-variant is-hidden"
-                        muted
-                        playsinline
-                        preload="auto"
-                    >
-                        <source src="assets/animation/logo_spin_reversed_128.webm" type="video/webm">
-                    </video>
-                </span>
-            </button>
+            <div class="page-title-actions">
+                <button
+                    type="button"
+                    id="btn-settings-toggle"
+                    class="settings-toggle-button"
+                    aria-controls="settings-sidebar"
+                    aria-expanded="false"
+                    data-tooltip="Open settings"
+                >
+                    <span aria-hidden="true">&#9881;</span>
+                    <span class="settings-toggle-label">Settings</span>
+                </button>
+                <button id="btn-header-logo" class="header-logo-button" aria-label="Spin autoCHAIR logo">
+                    <span class="header-logo-stack" aria-hidden="true">
+                        <video
+                            id="header-logo-video-forward"
+                            class="page-title-logo logo-video header-logo-variant"
+                            muted
+                            playsinline
+                            preload="auto"
+                        >
+                            <source src="assets/animation/logo_spin_128.webm" type="video/webm">
+                        </video>
+                        <video
+                            id="header-logo-video-reverse"
+                            class="page-title-logo logo-video header-logo-variant is-hidden"
+                            muted
+                            playsinline
+                            preload="auto"
+                        >
+                            <source src="assets/animation/logo_spin_reversed_128.webm" type="video/webm">
+                        </video>
+                    </span>
+                </button>
+            </div>
         </div>
 
         <div class="workspace-panels">
@@ -61,8 +74,8 @@
                         <div><button type="button" class="bulk-column-button" data-bulk-field="themeColor">Color</button></div>
                         <div><button type="button" class="bulk-column-button" data-bulk-field="duration">Duration</button></div>
                         <div>Time</div>
-                        <div data-tooltip="Lock duration (won't adjust when running late)">&#128274;</div>
-                        <div data-tooltip="Item notes">&#128221;</div>
+                        <div><button type="button" class="bulk-column-button" data-bulk-field="locked" data-tooltip="Bulk edit locked items" aria-label="Bulk edit Locked">&#128274;</button></div>
+                        <div><button type="button" class="bulk-column-button" data-bulk-field="notes" data-tooltip="Bulk edit item notes" aria-label="Bulk edit Notes">&#128221;</button></div>
                         <div></div>
                     </div>
 
@@ -167,7 +180,7 @@
                         </div>
 
                         <div class="next-item-controls">
-                            <button id="btn-prev-item" class="next-item-btn prev-item-btn" data-tooltip="Shift focus to the previous agenda item">
+                            <button id="btn-prev-item" class="next-item-btn prev-item-btn" data-tooltip="Shift focus to the previous agenda item" aria-label="Previous agenda item" aria-keyshortcuts="Backspace">
                                 <span class="next-item-text">
                                     PREV
                                     <video
@@ -194,7 +207,7 @@
                                 <span class="panel-corner corner-start" aria-hidden="true"></span>
                                 <span class="panel-corner corner-end" aria-hidden="true"></span>
                             </div>
-                            <button id="btn-next-item" class="next-item-btn main-next-btn" data-tooltip="Advance to the next agenda item">
+                            <button id="btn-next-item" class="next-item-btn main-next-btn" data-tooltip="Advance to the next agenda item" aria-label="Next agenda item" aria-keyshortcuts="Space">
                                 <span class="next-item-text">
                                     NEXT
                                     <video
@@ -322,13 +335,13 @@
                         </div>
                         <div class="notes-editor" id="notes-editor">
                             <div class="editor-toolbar notes-toolbar">
-                                <button data-action="bold" data-tooltip="Bold (Ctrl+B)"><b>B</b></button>
-                                <button data-action="italic" data-tooltip="Italic (Ctrl+I)"><i>I</i></button>
-                                <button data-action="heading" data-tooltip="Heading">H</button>
-                                <button data-action="bullet" data-tooltip="Bullet list">&#8226; List</button>
-                                <button data-action="numbered" data-tooltip="Numbered list">1. List</button>
-                                <button data-action="link" data-tooltip="Insert link">Link</button>
-                                <button data-action="code" data-tooltip="Code block">&lt;/&gt;</button>
+                                <button type="button" data-action="bold" data-tooltip="Bold (Ctrl+B)" aria-label="Bold"><b>B</b></button>
+                                <button type="button" data-action="italic" data-tooltip="Italic (Ctrl+I)" aria-label="Italic"><i>I</i></button>
+                                <button type="button" data-action="heading" data-tooltip="Heading" aria-label="Heading">H</button>
+                                <button type="button" data-action="bullet" data-tooltip="Bullet list" aria-label="Bullet list">&#8226; List</button>
+                                <button type="button" data-action="numbered" data-tooltip="Numbered list" aria-label="Numbered list">1. List</button>
+                                <button type="button" data-action="link" data-tooltip="Insert link" aria-label="Insert link">Link</button>
+                                <button type="button" data-action="code" data-tooltip="Code block" aria-label="Code block">&lt;/&gt;</button>
                             </div>
                             <textarea
                                 id="notes-area"
@@ -364,8 +377,11 @@
     </div>
 
     <!-- Settings Sidebar -->
-    <div class="settings-sidebar">
-        <h3>Settings</h3>
+    <aside id="settings-sidebar" class="settings-sidebar" aria-label="Application settings">
+        <div class="settings-sidebar-header">
+            <h3>Settings</h3>
+            <button type="button" id="btn-settings-close" class="settings-close-button" aria-label="Close settings">&times;</button>
+        </div>
 
         <!-- Time Settings -->
         <div class="setting-group">
@@ -376,8 +392,8 @@
                     <div class="settings-time-wrapper">
                         <input type="time" id="start-time" value="16:00">
                         <div class="settings-time-spinner">
-                            <button data-action="settings-time-up" data-tooltip="Increase time">&#9650;</button>
-                            <button data-action="settings-time-down" data-tooltip="Decrease time">&#9660;</button>
+                            <button type="button" data-action="settings-time-up" data-tooltip="Increase time" aria-label="Increase start time">&#9650;</button>
+                            <button type="button" data-action="settings-time-down" data-tooltip="Decrease time" aria-label="Decrease start time">&#9660;</button>
                         </div>
                     </div>
                 </label>
@@ -487,40 +503,82 @@
                 <button id="btn-reset" data-tooltip="Reset all items and settings to defaults">Reset All</button>
             </div>
         </div>
-    </div>
+    </aside>
+
+    <div id="settings-backdrop" class="settings-backdrop" aria-hidden="true"></div>
 
     <!-- Notes Editor Modal -->
-    <div class="modal-overlay" id="notes-modal">
-        <div class="modal">
+    <div class="modal-overlay" id="notes-modal" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
             <div class="modal-header">
                 <h3 id="modal-title">Edit Notes</h3>
-                <button class="modal-close" id="modal-close">&times;</button>
+                <button type="button" class="modal-close" id="modal-close" aria-label="Close item details">&times;</button>
             </div>
             <div class="modal-body">
+                <label for="editor-context"><strong>Context</strong></label>
+                <textarea class="editor-textarea" id="editor-context" rows="2" style="min-height: 72px; flex: 0 0 auto; margin: 5px 0 15px;" placeholder="Add context or background for this item..."></textarea>
+                <label for="editor-textarea"><strong>Notes</strong></label>
                 <div class="editor-toolbar">
-                    <button data-action="bold" data-tooltip="Bold (Ctrl+B)"><b>B</b></button>
-                    <button data-action="italic" data-tooltip="Italic (Ctrl+I)"><i>I</i></button>
-                    <button data-action="heading" data-tooltip="Heading">H</button>
-                    <button data-action="bullet" data-tooltip="Bullet list">&#8226; List</button>
-                    <button data-action="numbered" data-tooltip="Numbered list">1. List</button>
-                    <button data-action="link" data-tooltip="Insert link">Link</button>
-                    <button data-action="code" data-tooltip="Code block">&lt;/&gt;</button>
+                    <button type="button" data-action="bold" data-tooltip="Bold (Ctrl+B)" aria-label="Bold"><b>B</b></button>
+                    <button type="button" data-action="italic" data-tooltip="Italic (Ctrl+I)" aria-label="Italic"><i>I</i></button>
+                    <button type="button" data-action="heading" data-tooltip="Heading" aria-label="Heading">H</button>
+                    <button type="button" data-action="bullet" data-tooltip="Bullet list" aria-label="Bullet list">&#8226; List</button>
+                    <button type="button" data-action="numbered" data-tooltip="Numbered list" aria-label="Numbered list">1. List</button>
+                    <button type="button" data-action="link" data-tooltip="Insert link" aria-label="Insert link">Link</button>
+                    <button type="button" data-action="code" data-tooltip="Code block" aria-label="Code block">&lt;/&gt;</button>
                 </div>
                 <textarea class="editor-textarea" id="editor-textarea" placeholder="Enter your notes here..."></textarea>
+                <label for="editor-prep" style="margin-top: 15px;"><strong>Preparation</strong></label>
+                <textarea class="editor-textarea" id="editor-prep" rows="2" style="min-height: 72px; flex: 0 0 auto; margin-top: 5px;" placeholder="Add preparation needed for this item..."></textarea>
             </div>
             <div class="modal-footer">
-                <button class="btn-cancel" id="modal-cancel">Cancel</button>
-                <button class="btn-save" id="modal-save">Save</button>
+                <button type="button" class="btn-cancel" id="modal-cancel">Cancel</button>
+                <button type="button" class="btn-save" id="modal-save">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Agenda Item Color Picker -->
+    <div class="modal-overlay" id="item-color-modal" aria-hidden="true">
+        <div class="modal item-color-modal" role="dialog" aria-modal="true" aria-labelledby="item-color-title" aria-describedby="item-color-help">
+            <div class="modal-header">
+                <h3 id="item-color-title">Item Color</h3>
+                <button type="button" class="modal-close" id="item-color-close" aria-label="Close color picker">&times;</button>
+            </div>
+            <div class="modal-body item-color-body">
+                <div class="item-color-preview">
+                    <div class="item-color-preview-summary">
+                        <span id="item-color-swatch" class="item-color-preview-swatch" aria-hidden="true"></span>
+                        <output id="item-color-value" class="item-color-value" aria-live="polite">#2196f3</output>
+                    </div>
+                    <div id="item-color-preview-card" class="item-color-preview-card" aria-hidden="true">
+                        <strong>Agenda item preview</strong>
+                        <span>Lead · 10m</span>
+                    </div>
+                </div>
+                <label class="item-color-slider" for="item-color-hue">
+                    <span>Hue <output id="item-color-hue-value" for="item-color-hue">210&deg;</output></span>
+                    <input type="range" id="item-color-hue" min="0" max="359" step="1" value="210">
+                </label>
+                <label class="item-color-slider" for="item-color-saturation">
+                    <span>Saturation <output id="item-color-saturation-value" for="item-color-saturation">90%</output></span>
+                    <input type="range" id="item-color-saturation" min="0" max="100" step="1" value="90">
+                </label>
+                <p class="item-color-help" id="item-color-help">Lightness stays at 48% so item text and controls remain readable.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="item-color-cancel">Cancel</button>
+                <button type="button" id="item-color-apply" class="primary">Apply</button>
             </div>
         </div>
     </div>
 
     <!-- Bulk Agenda Editor Modal -->
-    <div class="modal-overlay" id="bulk-edit-modal">
+    <div class="modal-overlay" id="bulk-edit-modal" aria-hidden="true">
         <div class="modal bulk-edit-modal" role="dialog" aria-modal="true" aria-labelledby="bulk-edit-title">
             <div class="modal-header">
                 <h3 id="bulk-edit-title">Edit Agenda Column</h3>
-                <button class="modal-close" id="bulk-edit-close" aria-label="Close">&times;</button>
+                <button type="button" class="modal-close" id="bulk-edit-close" aria-label="Close bulk editor">&times;</button>
             </div>
             <div class="modal-body">
                 <div id="bulk-edit-format" class="bulk-edit-format">
@@ -529,7 +587,7 @@
                     <label><input type="radio" name="bulk-format" value="comma"> Commas</label>
                 </div>
                 <div id="bulk-edit-warning" class="bulk-edit-warning" role="alert"></div>
-                <textarea id="bulk-edit-text" rows="14" spellcheck="false"></textarea>
+                <textarea id="bulk-edit-text" rows="14" spellcheck="false" aria-labelledby="bulk-edit-title"></textarea>
                 <div id="bulk-edit-bad-rows" class="bulk-edit-bad-rows"></div>
             </div>
             <div class="modal-footer">
@@ -540,7 +598,7 @@
     </div>
 
     <!-- Meeting Metadata Modal -->
-    <div class="modal-overlay" id="metadata-modal">
+    <div class="modal-overlay" id="metadata-modal" aria-hidden="true">
         <div class="modal metadata-modal" role="dialog" aria-modal="true" aria-labelledby="metadata-title-heading">
             <div class="modal-header">
                 <h3 id="metadata-title-heading">Meeting Metadata</h3>
@@ -551,13 +609,16 @@
                 <label>Date <input type="date" id="metadata-date"></label>
                 <label>Location <input type="text" id="metadata-location" placeholder="Room or address"></label>
                 <label>Meeting URL <input type="url" id="metadata-url" placeholder="https://..."></label>
-                <label>Attendee Type <input type="text" id="metadata-attendee-group"></label>
-                <div class="metadata-attendees-header"><strong>Attendance</strong><span>Present</span></div>
-                <div id="metadata-attendees" class="metadata-attendees"></div>
-                <div class="metadata-add-attendee">
-                    <input type="text" id="metadata-new-attendee" placeholder="Add attendee">
-                    <button type="button" id="metadata-add-attendee">+ Add</button>
+                <div class="metadata-section-header">
+                    <strong>Attendance</strong>
+                    <button type="button" id="metadata-add-group">+ Group</button>
                 </div>
+                <div id="metadata-attendee-groups" class="metadata-attendee-groups"></div>
+                <div class="metadata-section-header">
+                    <strong>Action Items</strong>
+                    <button type="button" id="metadata-add-action">+ Action</button>
+                </div>
+                <div id="metadata-action-items" class="metadata-action-items"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" id="metadata-done" class="primary">Done</button>

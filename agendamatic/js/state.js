@@ -3,6 +3,12 @@
  */
 
 import { generateId, deepClone, parseDuration, formatDuration, addMinutes, parseTime } from './utils.js';
+import {
+    colorsMatch,
+    getSeparatedColor,
+    LEGACY_PALETTE,
+    normalizeHexColor
+} from './colors.js';
 
 // LZ-String compression library (inline minimal implementation)
 const LZString = {
@@ -25,8 +31,8 @@ const LZString = {
         let i, value, context_dictionary = {}, context_dictionaryToCreate = {},
             context_c = "", context_wc = "", context_w = "", context_enlargeIn = 2,
             context_dictSize = 3, context_numBits = 2, context_data = [], context_data_val = 0, context_data_position = 0;
-        for (i = 0; i < uncompressed.length; i++) {
-            context_c = uncompressed.charAt(i);
+        for (let inputIndex = 0; inputIndex < uncompressed.length; inputIndex++) {
+            context_c = uncompressed.charAt(inputIndex);
             if (!Object.prototype.hasOwnProperty.call(context_dictionary, context_c)) {
                 context_dictionary[context_c] = context_dictSize++;
                 context_dictionaryToCreate[context_c] = true;
@@ -292,6 +298,7 @@ const LZString = {
 
 // Default state
 const DEFAULT_STATE = {
+    schemaVersion: 2,
     items: [],
     stagedItems: [],
     settings: {
@@ -325,15 +332,20 @@ const DEFAULT_STATE = {
         date: '',
         location: '',
         url: '',
-        attendeeGroup: 'Attendees',
-        attendees: [],
+        attendeeGroups: [],
+        actionItems: [],
         initialized: false
     },
     tracker: {
         isRunning: false,
         startedAt: null,
+        scheduledStartAt: null,
         pausedAt: null,
+        accumulatedPauseMs: 0,
         activeItemIndex: 0,
+        activeItemId: null,
+        activeStartedAt: null,
+        completedAt: null,
         completedDiffById: {},
         overallDeltaMinutes: 0,
         expectedSnapshot: null,
@@ -353,7 +365,9 @@ const DEFAULT_ITEMS = [
 
 const STORAGE_KEY = 'agendamatic_state';
 const STORAGE_URL_KEY = 'agendamatic_last_url_state';
+const SESSION_ISOLATION_KEY = 'agendamatic_isolated_share_v1';
 const HISTORY_LIMIT = 100;
+const STATE_SCHEMA_VERSION = 2;
 
 // State subscribers
 let subscribers = [];
@@ -363,6 +377,387 @@ let redoStack = [];
 let historyTransaction = null;
 let lastHistoryGroup = null;
 let lastHistoryTime = 0;
+let useSessionPersistence = false;
+
+function validDate(value) {
+    if (!value) return null;
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function roundToTenth(value) {
+    return Math.round((Number(value) + Number.EPSILON) * 10) / 10;
+}
+
+function timeOnReferenceDate(timeValue, referenceValue = new Date()) {
+    const reference = validDate(referenceValue) || new Date();
+    const parsed = parseTime(timeValue);
+    return new Date(
+        reference.getFullYear(),
+        reference.getMonth(),
+        reference.getDate(),
+        parsed.getHours(),
+        parsed.getMinutes(),
+        0,
+        0
+    );
+}
+
+function normalizeString(value, fallback = '') {
+    if (value === undefined || value === null) return fallback;
+    return typeof value === 'string' ? value : String(value);
+}
+
+function normalizeBoolean(value, fallback) {
+    if (typeof value === 'boolean') return value;
+    if (value === 1) return true;
+    if (value === 0) return false;
+    return fallback;
+}
+
+function normalizeEnum(value, allowed, fallback) {
+    return allowed.includes(value) ? value : fallback;
+}
+
+function normalizeClockTime(value, fallback) {
+    const match = normalizeString(value).trim().match(/^(\d{1,2}):(\d{2})\s*(am|pm)?$/i);
+    if (!match) return fallback;
+    let hours = Number(match[1]);
+    const minutes = Number(match[2]);
+    const period = match[3]?.toLowerCase();
+    if (minutes > 59 || (period ? hours < 1 || hours > 12 : hours > 23)) return fallback;
+    if (period === 'pm' && hours < 12) hours += 12;
+    if (period === 'am' && hours === 12) hours = 0;
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+}
+
+function normalizeDuration(value, fallback = '10m') {
+    const minutes = parseDuration(value);
+    return Number.isFinite(minutes) && Math.round(minutes * 10) > 0 && minutes <= 525600
+        ? formatDuration(minutes)
+        : fallback;
+}
+
+function normalizeSettings(settings = {}) {
+    const source = settings && typeof settings === 'object' ? settings : {};
+    const bufferValue = Number(source.buffer);
+    const rawAlertOffsets = Array.isArray(source.alertOffsetsSeconds)
+        ? source.alertOffsetsSeconds
+        : DEFAULT_STATE.settings.alertOffsetsSeconds;
+    const alertOffsetsSeconds = [...new Set(rawAlertOffsets
+        .map(value => Number(value))
+        .filter(value => Number.isFinite(value) && value >= 0)
+        .map(value => Math.round(value)))]
+        .sort((a, b) => b - a);
+    return {
+        startTime: normalizeClockTime(source.startTime, DEFAULT_STATE.settings.startTime),
+        pinStartTime: normalizeBoolean(source.pinStartTime, DEFAULT_STATE.settings.pinStartTime),
+        pinEndTime: normalizeBoolean(source.pinEndTime, DEFAULT_STATE.settings.pinEndTime),
+        darkMode: normalizeBoolean(source.darkMode, DEFAULT_STATE.settings.darkMode),
+        soundEffects: normalizeBoolean(source.soundEffects, DEFAULT_STATE.settings.soundEffects),
+        syncSystemTime: normalizeBoolean(source.syncSystemTime, DEFAULT_STATE.settings.syncSystemTime),
+        density: normalizeEnum(
+            source.density,
+            ['comfortable', 'compact', 'presentation'],
+            DEFAULT_STATE.settings.density
+        ),
+        showProgressBar: normalizeBoolean(source.showProgressBar, DEFAULT_STATE.settings.showProgressBar),
+        buffer: Number.isFinite(bufferValue)
+            ? Math.max(0, Math.min(30, Math.round(bufferValue)))
+            : DEFAULT_STATE.settings.buffer,
+        timerMode: normalizeEnum(
+            source.timerMode,
+            ['countdown', 'elapsed'],
+            DEFAULT_STATE.settings.timerMode
+        ),
+        oneMinWarning: normalizeBoolean(source.oneMinWarning, DEFAULT_STATE.settings.oneMinWarning),
+        overtimeFlash: normalizeBoolean(source.overtimeFlash, DEFAULT_STATE.settings.overtimeFlash),
+        alertOffsetsSeconds: alertOffsetsSeconds.length > 0
+            ? alertOffsetsSeconds
+            : [...DEFAULT_STATE.settings.alertOffsetsSeconds],
+        alertSound: normalizeEnum(
+            source.alertSound,
+            ['chime', 'beep', 'double'],
+            DEFAULT_STATE.settings.alertSound
+        ),
+        alertVisual: normalizeEnum(
+            source.alertVisual,
+            ['both', 'banner', 'pulse'],
+            DEFAULT_STATE.settings.alertVisual
+        ),
+        desktopNotifications: normalizeBoolean(
+            source.desktopNotifications,
+            DEFAULT_STATE.settings.desktopNotifications
+        ),
+        separateAdjacentColors: normalizeBoolean(
+            source.separateAdjacentColors,
+            DEFAULT_STATE.settings.separateAdjacentColors
+        )
+    };
+}
+
+function normalizeExportOptions(exportOptions = {}) {
+    const source = exportOptions && typeof exportOptions === 'object' ? exportOptions : {};
+    return Object.fromEntries(Object.entries(DEFAULT_STATE.exportOptions).map(([key, fallback]) => [
+        key,
+        normalizeBoolean(source[key], fallback)
+    ]));
+}
+
+function normalizeItems(items, seenIds = new Set()) {
+    if (!Array.isArray(items)) return [];
+    return items.map((rawItem, index) => {
+        const item = rawItem && typeof rawItem === 'object' ? rawItem : {};
+        const normalizedCustomColor = normalizeHexColor(item.customColor);
+        const presetIndex = normalizedCustomColor
+            ? LEGACY_PALETTE.indexOf(normalizedCustomColor)
+            : -1;
+        const fallbackThemeColor = Number.isInteger(Number(item.themeColor)) &&
+            Number(item.themeColor) >= 1 && Number(item.themeColor) <= 8
+            ? Number(item.themeColor)
+            : ((index % 8) + 1);
+        let id = item.id === undefined || item.id === null || item.id === ''
+            ? generateId()
+            : String(item.id);
+        while (seenIds.has(id)) id = generateId();
+        seenIds.add(id);
+        return {
+            ...item,
+            id,
+            name: normalizeString(item.name, `Item ${index + 1}`),
+            lead: normalizeString(item.lead),
+            duration: normalizeDuration(item.duration),
+            locked: normalizeBoolean(item.locked, false),
+            notes: normalizeString(item.notes),
+            ...(Object.prototype.hasOwnProperty.call(item, 'context')
+                ? { context: normalizeString(item.context) }
+                : {}),
+            ...(Object.prototype.hasOwnProperty.call(item, 'prep')
+                ? { prep: normalizeString(item.prep) }
+                : {}),
+            customColor: presetIndex >= 0 ? null : normalizedCustomColor,
+            themeColor: presetIndex >= 0 ? presetIndex + 1 : fallbackThemeColor
+        };
+    });
+}
+
+function normalizeCalendarDate(value) {
+    const date = normalizeString(value).trim();
+    const match = date.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (!match) return '';
+
+    const year = Number(match[1]);
+    const month = Number(match[2]);
+    const day = Number(match[3]);
+    const leapYear = year % 400 === 0 || (year % 4 === 0 && year % 100 !== 0);
+    const daysInMonth = [31, leapYear ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    return year >= 1 && month >= 1 && month <= 12 && day >= 1 && day <= daysInMonth[month - 1]
+        ? date
+        : '';
+}
+
+function normalizeMetadata(metadata = {}) {
+    const source = metadata && typeof metadata === 'object' ? metadata : {};
+    const legacyAttendees = Array.isArray(source.attendees) ? source.attendees : [];
+    const hasLegacyAttendeeData = legacyAttendees.length > 0 || !!source.attendeeGroup;
+    const rawGroups = Array.isArray(source.attendeeGroups) &&
+        (source.attendeeGroups.length > 0 || !hasLegacyAttendeeData)
+        ? source.attendeeGroups
+        : (hasLegacyAttendeeData
+            ? [{ name: source.attendeeGroup || 'Attendees', attendees: legacyAttendees }]
+            : []);
+    const groupIds = new Set();
+    const attendeeIds = new Set();
+    const attendeeGroups = rawGroups.map((rawGroup, groupIndex) => {
+        const group = rawGroup && typeof rawGroup === 'object' ? rawGroup : {};
+        const attendees = Array.isArray(group.attendees) ? group.attendees : [];
+        let groupId = normalizeString(group.id, `attendee-group-${groupIndex + 1}`);
+        while (groupIds.has(groupId)) groupId = generateId();
+        groupIds.add(groupId);
+        return {
+            id: groupId,
+            name: normalizeString(group.name, 'Attendees'),
+            attendees: attendees.map((rawAttendee, attendeeIndex) => {
+                const attendee = rawAttendee && typeof rawAttendee === 'object' ? rawAttendee : {};
+                let attendeeId = normalizeString(attendee.id, `${groupId}-attendee-${attendeeIndex + 1}`);
+                while (attendeeIds.has(attendeeId)) attendeeId = generateId();
+                attendeeIds.add(attendeeId);
+                return {
+                    id: attendeeId,
+                    name: normalizeString(attendee.name),
+                    present: normalizeBoolean(attendee.present, false)
+                };
+            })
+        };
+    });
+    const actionIds = new Set();
+    const actionItems = (Array.isArray(source.actionItems) ? source.actionItems : [])
+        .map((rawAction, index) => {
+            const action = rawAction && typeof rawAction === 'object' ? rawAction : {};
+            let id = normalizeString(action.id, `action-item-${index + 1}`);
+            while (actionIds.has(id)) id = generateId();
+            actionIds.add(id);
+            return {
+                id,
+                text: normalizeString(action.text),
+                owner: normalizeString(action.owner),
+                done: normalizeBoolean(action.done, false)
+            };
+        });
+    return {
+        title: normalizeString(source.title, DEFAULT_STATE.metadata.title),
+        date: normalizeCalendarDate(source.date),
+        location: normalizeString(source.location),
+        url: normalizeString(source.url),
+        attendeeGroups,
+        actionItems,
+        initialized: normalizeBoolean(source.initialized, false)
+    };
+}
+
+function plannedItemStart(items, itemIndex, scheduledStartAt, buffer) {
+    const start = validDate(scheduledStartAt);
+    if (!start) return null;
+    const minutesBefore = items.slice(0, itemIndex).reduce((sum, item) => {
+        return sum + parseDuration(item.duration) + Number(buffer || 0);
+    }, 0);
+    return addMinutes(start, minutesBefore);
+}
+
+function planStartFromActiveAnchor(items, tracker, buffer) {
+    const fallback = validDate(tracker?.scheduledStartAt);
+    if (!tracker?.startedAt || tracker.completedAt || items.length === 0) return fallback;
+
+    const idIndex = tracker.activeItemId
+        ? items.findIndex(item => item.id === String(tracker.activeItemId))
+        : -1;
+    const activeIndex = idIndex >= 0
+        ? idIndex
+        : Math.max(0, Math.min(items.length - 1, tracker.activeItemIndex || 0));
+    const activeStartedAt = validDate(tracker.activeStartedAt);
+    if (!activeStartedAt) return fallback;
+
+    const minutesBefore = items.slice(0, activeIndex).reduce((sum, item) => {
+        return sum + parseDuration(item.duration) + Number(buffer || 0);
+    }, 0);
+    return addMinutes(activeStartedAt, -minutesBefore);
+}
+
+function normalizeExpectedSnapshot(snapshot, scheduledStart, settings) {
+    if (!snapshot || typeof snapshot !== 'object' || !Array.isArray(snapshot.items) || snapshot.items.length === 0) {
+        return null;
+    }
+    const snapshotItems = normalizeItems(snapshot.items);
+    if (snapshotItems.length === 0) return null;
+    const buffer = Number(snapshot.buffer);
+    return {
+        capturedAt: validDate(snapshot.capturedAt)?.toISOString() || null,
+        startTime: normalizeClockTime(snapshot.startTime, settings.startTime),
+        scheduledStartAt: validDate(snapshot.scheduledStartAt || scheduledStart)?.toISOString() || null,
+        buffer: Number.isFinite(buffer)
+            ? Math.max(0, Math.min(30, Math.round(buffer)))
+            : settings.buffer,
+        items: snapshotItems
+    };
+}
+
+function normalizeTracker(tracker, items, settings) {
+    const source = tracker && typeof tracker === 'object' ? tracker : {};
+    const normalized = { ...DEFAULT_STATE.tracker, ...source };
+    const startedAt = validDate(normalized.startedAt);
+    const rawCompletedAt = validDate(normalized.completedAt);
+    const completedAt = startedAt && rawCompletedAt && rawCompletedAt >= startedAt
+        ? rawCompletedAt
+        : null;
+    const scheduledStart = startedAt
+        ? (validDate(normalized.scheduledStartAt) || timeOnReferenceDate(settings.startTime, startedAt))
+        : null;
+
+    let activeItemIndex = Number.isFinite(normalized.activeItemIndex)
+        ? Math.trunc(normalized.activeItemIndex)
+        : 0;
+    const requestedActiveId = normalized.activeItemId === undefined || normalized.activeItemId === null
+        ? null
+        : String(normalized.activeItemId);
+    const idIndex = requestedActiveId === null
+        ? -1
+        : items.findIndex(item => item.id === requestedActiveId);
+    const activeIdentityWasLost = requestedActiveId !== null && idIndex < 0;
+
+    let activeItemId = null;
+    if (completedAt) {
+        activeItemIndex = items.length;
+    } else if (startedAt && items.length > 0) {
+        activeItemIndex = idIndex >= 0
+            ? idIndex
+            : Math.max(0, Math.min(items.length - 1, activeItemIndex));
+        activeItemId = items[activeItemIndex].id;
+    } else {
+        activeItemIndex = 0;
+    }
+
+    let activeStartedAt = startedAt && (completedAt || (activeItemId && !activeIdentityWasLost))
+        ? validDate(normalized.activeStartedAt)
+        : null;
+    if (!activeStartedAt && scheduledStart && activeItemId) {
+        activeStartedAt = plannedItemStart(items, activeItemIndex, scheduledStart, settings.buffer);
+    }
+
+    const isRunning = normalizeBoolean(normalized.isRunning, false) &&
+        !!startedAt && !completedAt && items.length > 0;
+    const pausedAt = !isRunning && startedAt && !completedAt
+        ? validDate(normalized.pausedAt)
+        : null;
+    const expectedSnapshot = normalizeExpectedSnapshot(normalized.expectedSnapshot, scheduledStart, settings);
+    const varianceMode = !!expectedSnapshot && normalizeBoolean(normalized.varianceMode, false);
+
+    return {
+        ...normalized,
+        isRunning,
+        startedAt: startedAt?.toISOString() || null,
+        scheduledStartAt: scheduledStart?.toISOString() || null,
+        pausedAt: pausedAt?.toISOString() || null,
+        accumulatedPauseMs: Number.isFinite(Number(normalized.accumulatedPauseMs))
+            ? Math.max(0, Number(normalized.accumulatedPauseMs))
+            : 0,
+        activeItemIndex,
+        activeItemId,
+        activeStartedAt: activeStartedAt?.toISOString() || null,
+        completedAt: completedAt?.toISOString() || null,
+        completedDiffById: normalized.completedDiffById && typeof normalized.completedDiffById === 'object'
+            ? normalized.completedDiffById
+            : {},
+        overallDeltaMinutes: Number.isFinite(Number(normalized.overallDeltaMinutes))
+            ? Number(normalized.overallDeltaMinutes)
+            : 0,
+        expectedSnapshot,
+        varianceMode,
+        varianceActivatedAt: varianceMode
+            ? validDate(normalized.varianceActivatedAt)?.toISOString() || null
+            : null
+    };
+}
+
+function normalizeState(state) {
+    const source = state && typeof state === 'object' ? state : {};
+    const seenIds = new Set();
+    const items = normalizeItems(source.items, seenIds);
+    const stagedItems = normalizeItems(source.stagedItems, seenIds);
+    const settings = normalizeSettings(source.settings);
+    const exportOptions = normalizeExportOptions(source.exportOptions);
+    const metadata = normalizeMetadata(source.metadata);
+    return {
+        ...deepClone(DEFAULT_STATE),
+        ...source,
+        schemaVersion: STATE_SCHEMA_VERSION,
+        items,
+        stagedItems,
+        settings,
+        exportOptions,
+        metadata,
+        tracker: normalizeTracker(source.tracker, items, settings)
+    };
+}
 
 /**
  * Get the current state
@@ -396,7 +791,7 @@ function notifySubscribers() {
  * @param {Object} updates - Partial state updates
  */
 export function setState(updates, options = {}) {
-    const nextState = options.replace ? updates : { ...currentState, ...updates };
+    const nextState = normalizeState(options.replace ? updates : { ...currentState, ...updates });
     if (JSON.stringify(nextState) === JSON.stringify(currentState)) return false;
 
     if (!historyTransaction) {
@@ -476,25 +871,98 @@ export function updateItem(itemId, updates) {
     setState({ items, stagedItems }, { historyGroup: `item:${itemId}:${fields}` });
 }
 
+function getOpenRunActiveIndex(state = currentState) {
+    const items = state?.items || [];
+    const tracker = state?.tracker || {};
+    if (!tracker.startedAt || tracker.completedAt || items.length === 0) return -1;
+
+    const idIndex = tracker.activeItemId
+        ? items.findIndex(item => item.id === String(tracker.activeItemId))
+        : -1;
+    return idIndex >= 0
+        ? idIndex
+        : Math.max(0, Math.min(items.length - 1, tracker.activeItemIndex || 0));
+}
+
+function assertLiveReplacementOrder(items) {
+    const activeIndex = getOpenRunActiveIndex();
+    if (activeIndex < 0) return;
+
+    const activeId = currentState.items[activeIndex].id;
+    const completedIds = new Set(currentState.items.slice(0, activeIndex).map(item => item.id));
+    const ids = items.map(item => String(item.id));
+    if (new Set(ids).size !== ids.length) {
+        throw new Error('Agenda item IDs must remain unique during a live meeting.');
+    }
+
+    const nextActiveIndex = ids.indexOf(activeId);
+    if (nextActiveIndex < 0) {
+        throw new Error('The active item cannot be removed by bulk editing during a live meeting.');
+    }
+
+    ids.forEach((id, index) => {
+        if (index < nextActiveIndex && !completedIds.has(id)) {
+            throw new Error('Future and new items must remain after the active item during a live meeting.');
+        }
+        if (index > nextActiveIndex && completedIds.has(id)) {
+            throw new Error('Completed items must remain before the active item during a live meeting.');
+        }
+    });
+}
+
 /** Replace all agenda items in one undoable state update. */
 export function replaceItems(items) {
     if (!Array.isArray(items)) throw new TypeError('Agenda items must be an array.');
-    const normalized = items.map(item => ({
-        id: item.id || generateId(),
-        name: item.name || 'New Item',
-        lead: item.lead || '',
-        duration: item.duration || '10m',
-        locked: !!item.locked,
-        notes: item.notes || '',
-        themeColor: Number(item.themeColor) >= 1 && Number(item.themeColor) <= 8
-            ? Number(item.themeColor)
-            : 1
-    }));
+    const normalized = items.map(item => ({ ...item, id: item?.id || generateId() }));
+    assertLiveReplacementOrder(normalized);
     setState({ items: normalized });
 }
 
-// Track next theme color to assign
+// Track the palette cursor for newly created items.
 let nextThemeColor = 1;
+
+function separateColorAt(items, index) {
+    if (!currentState.settings.separateAdjacentColors || !items[index]) return;
+    const item = items[index];
+    const before = items[index - 1];
+    const after = items[index + 1];
+    if (!colorsMatch(item, before) && !colorsMatch(item, after)) return;
+
+    const involvesCustomColor = [item, before, after]
+        .some(entry => normalizeHexColor(entry?.customColor));
+    if (involvesCustomColor) {
+        items[index] = { ...item, ...getSeparatedColor(item, [before, after]) };
+        return;
+    }
+    const replacement = Array.from({ length: 8 }, (_, paletteIndex) => paletteIndex + 1)
+        .find(color => color !== before?.themeColor && color !== after?.themeColor);
+    items[index] = { ...item, customColor: null, themeColor: replacement };
+}
+
+function separateColorsAroundMovedItem(items, movedIndex) {
+    if (!currentState.settings.separateAdjacentColors || !items[movedIndex]) return;
+    const movedItem = items[movedIndex];
+    [movedIndex - 1, movedIndex + 1].forEach(neighborIndex => {
+        const neighbor = items[neighborIndex];
+        if (!neighbor || !colorsMatch(movedItem, neighbor)) return;
+
+        const before = items[neighborIndex - 1];
+        const after = items[neighborIndex + 1];
+        const involvesCustomColor = [neighbor, before, after]
+            .some(entry => normalizeHexColor(entry?.customColor));
+        if (involvesCustomColor) {
+            items[neighborIndex] = {
+                ...neighbor,
+                ...getSeparatedColor(neighbor, [before, after])
+            };
+            return;
+        }
+
+        const replacement = Array.from({ length: 8 }, (_, paletteIndex) => paletteIndex + 1)
+            .find(color => color !== before?.themeColor && color !== after?.themeColor);
+        items[neighborIndex] = { ...neighbor, customColor: null, themeColor: replacement };
+    });
+}
 
 /**
  * Add a new agenda item
@@ -513,19 +981,63 @@ export function addItem(item = {}, index = -1) {
         duration: item.duration || '10m',
         locked: item.locked || false,
         notes: item.notes || '',
+        customColor: normalizeHexColor(item.customColor),
         themeColor: themeColor
     };
 
+    const activeIndex = getOpenRunActiveIndex();
+    const insertionIndex = activeIndex >= 0 && index >= 0
+        ? Math.max(activeIndex + 1, index)
+        : index;
     let items;
-    if (index >= 0 && index < currentState.items.length) {
+    if (insertionIndex >= 0 && insertionIndex < currentState.items.length) {
         items = [...currentState.items];
-        items.splice(index, 0, newItem);
+        items.splice(insertionIndex, 0, newItem);
     } else {
         items = [...currentState.items, newItem];
     }
 
+    const insertedIndex = items.indexOf(newItem);
+    separateColorAt(items, insertedIndex);
+
     setState({ items });
-    return newItem;
+    return currentState.items[insertedIndex];
+}
+
+function transitionTrackerAfterActiveRemoval(items, removedItemId, removedIndex) {
+    const tracker = currentState.tracker || {};
+    if (!tracker.startedAt || tracker.completedAt) return tracker;
+
+    const activeIndex = tracker.activeItemId
+        ? currentState.items.findIndex(item => item.id === String(tracker.activeItemId))
+        : Math.max(0, Math.min(currentState.items.length - 1, tracker.activeItemIndex || 0));
+    const removedActiveItem = tracker.activeItemId
+        ? String(tracker.activeItemId) === String(removedItemId)
+        : activeIndex === removedIndex;
+    if (!removedActiveItem) return tracker;
+
+    const pausedTime = !tracker.isRunning ? validDate(tracker.pausedAt) : null;
+    const effectiveTime = pausedTime || new Date();
+    const nextItem = items[removedIndex] || null;
+    if (nextItem) {
+        return {
+            ...tracker,
+            activeItemIndex: removedIndex,
+            activeItemId: nextItem.id,
+            activeStartedAt: effectiveTime.toISOString(),
+            completedAt: null
+        };
+    }
+
+    return {
+        ...tracker,
+        isRunning: false,
+        pausedAt: null,
+        activeItemIndex: items.length,
+        activeItemId: null,
+        activeStartedAt: effectiveTime.toISOString(),
+        completedAt: effectiveTime.toISOString()
+    };
 }
 
 /**
@@ -533,8 +1045,13 @@ export function addItem(item = {}, index = -1) {
  * @param {string} itemId - Item ID to delete
  */
 export function deleteItem(itemId) {
-    const items = currentState.items.filter(item => item.id !== itemId);
-    setState({ items });
+    const fromIndex = currentState.items.findIndex(item => item.id === itemId);
+    if (fromIndex < 0) return false;
+    const items = [...currentState.items];
+    items.splice(fromIndex, 1);
+    const tracker = transitionTrackerAfterActiveRemoval(items, itemId, fromIndex);
+    setState({ items, tracker });
+    return true;
 }
 
 /**
@@ -544,18 +1061,23 @@ export function deleteItem(itemId) {
  */
 export function reorderItems(fromIndex, toIndex) {
     const items = [...currentState.items];
+    if (!Number.isInteger(fromIndex) || fromIndex < 0 || fromIndex >= items.length) return false;
+    if (!Number.isInteger(toIndex)) return false;
+    toIndex = Math.max(0, Math.min(items.length - 1, toIndex));
+
+    const activeIndex = getOpenRunActiveIndex();
+    if (activeIndex >= 0) {
+        if (fromIndex === activeIndex) return false;
+        toIndex = fromIndex < activeIndex
+            ? Math.min(toIndex, activeIndex - 1)
+            : Math.max(toIndex, activeIndex + 1);
+    }
+
     const [removed] = items.splice(fromIndex, 1);
     items.splice(toIndex, 0, removed);
-    if (currentState.settings.separateAdjacentColors) {
-        const before = items[toIndex - 1]?.themeColor;
-        const after = items[toIndex + 1]?.themeColor;
-        if (removed.themeColor === before || removed.themeColor === after) {
-            const replacement = Array.from({ length: 8 }, (_, index) => index + 1)
-                .find(color => color !== before && color !== after);
-            items[toIndex] = { ...removed, themeColor: replacement };
-        }
-    }
+    separateColorsAroundMovedItem(items, toIndex);
     setState({ items });
+    return true;
 }
 
 /**
@@ -570,6 +1092,7 @@ export function reorderStagedItems(fromIndex, toIndex) {
     if (toIndex >= stagedItems.length) toIndex = stagedItems.length - 1;
     const [removed] = stagedItems.splice(fromIndex, 1);
     stagedItems.splice(toIndex, 0, removed);
+    separateColorsAroundMovedItem(stagedItems, toIndex);
     setState({ stagedItems });
     return true;
 }
@@ -587,13 +1110,18 @@ export function stageItem(itemId, toIndex = -1) {
     if (fromIndex < 0) return false;
 
     const [moved] = items.splice(fromIndex, 1);
+    let insertedIndex;
     if (toIndex < 0 || toIndex > stagedItems.length) {
         stagedItems.push(moved);
+        insertedIndex = stagedItems.length - 1;
     } else {
         stagedItems.splice(toIndex, 0, moved);
+        insertedIndex = toIndex;
     }
 
-    setState({ items, stagedItems });
+    separateColorsAroundMovedItem(stagedItems, insertedIndex);
+    const tracker = transitionTrackerAfterActiveRemoval(items, itemId, fromIndex);
+    setState({ items, stagedItems, tracker });
     return true;
 }
 
@@ -610,11 +1138,20 @@ export function unstageItem(itemId, toIndex = -1) {
     if (fromIndex < 0) return false;
 
     const [moved] = stagedItems.splice(fromIndex, 1);
-    if (toIndex < 0 || toIndex > items.length) {
+    const activeIndex = getOpenRunActiveIndex();
+    const insertionIndex = activeIndex >= 0 && toIndex >= 0
+        ? Math.max(activeIndex + 1, toIndex)
+        : toIndex;
+    let insertedIndex;
+    if (insertionIndex < 0 || insertionIndex > items.length) {
         items.push(moved);
+        insertedIndex = items.length - 1;
     } else {
-        items.splice(toIndex, 0, moved);
+        items.splice(insertionIndex, 0, moved);
+        insertedIndex = insertionIndex;
     }
+
+    separateColorsAroundMovedItem(items, insertedIndex);
 
     setState({ items, stagedItems });
     return true;
@@ -625,9 +1162,26 @@ export function unstageItem(itemId, toIndex = -1) {
  * @param {Object} settings - Settings updates
  */
 export function updateSettings(settings) {
-    setState({
-        settings: { ...currentState.settings, ...settings }
-    });
+    const nextSettings = normalizeSettings({ ...currentState.settings, ...settings });
+    const updates = { settings: nextSettings };
+    if (
+        Object.prototype.hasOwnProperty.call(settings, 'startTime') &&
+        currentState.tracker?.startedAt &&
+        currentState.tracker?.scheduledStartAt
+    ) {
+        const previousStart = validDate(currentState.tracker.scheduledStartAt);
+        const nextStart = timeOnReferenceDate(nextSettings.startTime, previousStart);
+        const deltaMs = previousStart ? nextStart.getTime() - previousStart.getTime() : 0;
+        const previousActiveStart = validDate(currentState.tracker.activeStartedAt);
+        updates.tracker = {
+            ...currentState.tracker,
+            scheduledStartAt: nextStart.toISOString(),
+            activeStartedAt: previousActiveStart
+                ? new Date(previousActiveStart.getTime() + deltaMs).toISOString()
+                : currentState.tracker.activeStartedAt
+        };
+    }
+    setState(updates);
 }
 
 /**
@@ -657,11 +1211,12 @@ export function updateTracker(tracker) {
     });
 }
 
-function createExpectedSnapshotFromState() {
-    const { items, settings } = currentState;
+function createExpectedSnapshotFromState(scheduledStartAt = null) {
+    const { items, settings, tracker } = currentState;
     return {
         capturedAt: new Date().toISOString(),
         startTime: settings.startTime,
+        scheduledStartAt: validDate(scheduledStartAt || tracker?.scheduledStartAt)?.toISOString() || null,
         buffer: settings.buffer || 0,
         items: (items || []).map(item => ({
             id: item.id,
@@ -670,19 +1225,20 @@ function createExpectedSnapshotFromState() {
             duration: item.duration || '1m',
             locked: !!item.locked,
             notes: item.notes || '',
+            customColor: normalizeHexColor(item.customColor),
             themeColor: item.themeColor || 1
         }))
     };
 }
 
-function ensureExpectedSnapshotInTracker(tracker) {
+function ensureExpectedSnapshotInTracker(tracker, scheduledStartAt = null) {
     if (tracker?.expectedSnapshot) {
         return { tracker, changed: false };
     }
     return {
         tracker: {
             ...(tracker || {}),
-            expectedSnapshot: createExpectedSnapshotFromState()
+            expectedSnapshot: createExpectedSnapshotFromState(scheduledStartAt)
         },
         changed: true
     };
@@ -692,9 +1248,9 @@ function ensureExpectedSnapshotInTracker(tracker) {
  * Ensure an expected-plan snapshot exists for this run.
  * @returns {boolean} Whether a snapshot was created
  */
-export function ensureExpectedSnapshot() {
+export function ensureExpectedSnapshot(scheduledStartAt = null) {
     const currentTracker = currentState.tracker || {};
-    const { tracker, changed } = ensureExpectedSnapshotInTracker(currentTracker);
+    const { tracker, changed } = ensureExpectedSnapshotInTracker(currentTracker, scheduledStartAt);
     if (changed) {
         setState({ tracker });
     }
@@ -712,240 +1268,38 @@ export function advanceToNextItem(currentTime = new Date()) {
     if (!items || items.length === 0) return false;
 
     const tracker = currentState.tracker || {};
-    if (tracker.isRunning || tracker.startedAt) {
-        const scheduledIntervals = calculateIntervals();
-        if (scheduledIntervals.length === 0) return false;
-
-        let currentIndex = Math.max(0, Math.min(
-            items.length - 1,
-            Number.isFinite(tracker.activeItemIndex) ? tracker.activeItemIndex : 0
-        ));
-        if (currentIndex >= items.length - 1) return false;
-
-        let nextTracker = tracker;
-        let trackerChanged = false;
-        const snapshotResult = ensureExpectedSnapshotInTracker(nextTracker);
-        nextTracker = snapshotResult.tracker;
-        trackerChanged = snapshotResult.changed;
-
-        const scheduledCurrent = scheduledIntervals[currentIndex];
-        if (!scheduledCurrent) return false;
-        const originalDuration = parseDuration(items[currentIndex].duration);
-        const elapsedExact = Math.max(0, (currentTime - scheduledCurrent.startTime) / 60000);
-        let newCurrentDuration = Math.max(1, Math.round(elapsedExact));
-        if (items[currentIndex].locked) {
-            newCurrentDuration = Math.max(originalDuration, newCurrentDuration);
-        }
-
-        const scheduledEnd = scheduledIntervals[scheduledIntervals.length - 1].endTime;
-        const remainingTotal = Math.max(0, Math.round((scheduledEnd - currentTime) / 60000));
-        const buffer = settings.buffer || 0;
-
-        const futureItems = items.slice(currentIndex + 1);
-        const futureCount = futureItems.length;
-        const totalFutureBuffer = Math.max(0, (futureCount - 1) * buffer);
-        const remainingForFuture = Math.max(0, remainingTotal - totalFutureBuffer);
-        const futureDurations = futureItems.map(item => parseDuration(item.duration));
-        const totalFutureDuration = futureDurations.reduce((sum, duration) => sum + duration, 0);
-        const lockedTotal = futureItems.reduce((sum, item, idx) => {
-            return item.locked ? sum + futureDurations[idx] : sum;
-        }, 0);
-        const unlockedTotal = totalFutureDuration - lockedTotal;
-
-        let newFutureDurations;
-        if (remainingForFuture >= totalFutureDuration) {
-            const scale = totalFutureDuration > 0 ? remainingForFuture / totalFutureDuration : 1;
-            newFutureDurations = futureDurations.map(duration => Math.max(1, Math.round(duration * scale)));
-        } else {
-            const availableForUnlocked = Math.max(0, remainingForFuture - lockedTotal);
-            const scale = unlockedTotal > 0 ? availableForUnlocked / unlockedTotal : 0;
-            newFutureDurations = futureDurations.map((duration, idx) => {
-                if (futureItems[idx].locked) return duration;
-                return Math.max(1, Math.round(duration * scale));
-            });
-        }
-
-        let durationSum = newFutureDurations.reduce((sum, duration) => sum + duration, 0);
-        let diff = remainingForFuture - durationSum;
-        const adjustable = futureItems
-            .map((item, idx) => ({ idx, locked: item.locked }))
-            .filter(entry => !entry.locked);
-
-        if (diff !== 0 && adjustable.length > 0) {
-            let safety = 0;
-            while (diff !== 0 && safety < 5000) {
-                for (const entry of adjustable) {
-                    if (diff === 0) break;
-                    if (diff > 0) {
-                        newFutureDurations[entry.idx] += 1;
-                        diff -= 1;
-                    } else if (newFutureDurations[entry.idx] > 1) {
-                        newFutureDurations[entry.idx] -= 1;
-                        diff += 1;
-                    }
-                }
-                if (diff < 0 && adjustable.every(entry => newFutureDurations[entry.idx] <= 1)) {
-                    break;
-                }
-                safety += 1;
-            }
-        }
-
-        const updatedItems = items.map((item, index) => {
-            if (index < currentIndex) return item;
-            if (index === currentIndex) {
-                return { ...item, duration: formatDuration(newCurrentDuration) };
-            }
-            const futureIndex = index - currentIndex - 1;
-            const nextDuration = newFutureDurations[futureIndex] ?? parseDuration(item.duration);
-            return { ...item, duration: formatDuration(nextDuration) };
-        });
-
-        const deltaExact = elapsedExact - originalDuration;
-        const completedDiffById = {
-            ...(nextTracker.completedDiffById || {}),
-            [items[currentIndex].id]: deltaExact
-        };
-        const overallDeltaMinutes = Object.values(completedDiffById)
-            .reduce((sum, value) => sum + (Number.isFinite(value) ? value : 0), 0);
-
-        if (!nextTracker.varianceMode && Math.abs(deltaExact) > 1) {
-            nextTracker = {
-                ...nextTracker,
-                varianceMode: true,
-                varianceActivatedAt: new Date().toISOString()
-            };
-            trackerChanged = true;
-        }
-
-        nextTracker = {
-            ...nextTracker,
-            activeItemIndex: Math.min(items.length - 1, currentIndex + 1),
-            completedDiffById,
-            overallDeltaMinutes
-        };
-        trackerChanged = true;
-
-        const updates = { items: updatedItems };
-        if (trackerChanged) {
-            updates.tracker = nextTracker;
-        }
-        setState(updates);
-        return true;
+    if (!tracker.startedAt || tracker.completedAt) return false;
+    if (!tracker.isRunning && tracker.pausedAt) {
+        const pausedTime = new Date(tracker.pausedAt);
+        if (!Number.isNaN(pausedTime.getTime())) currentTime = pausedTime;
     }
-
     const scheduledIntervals = calculateIntervals();
     if (scheduledIntervals.length === 0) return false;
 
-    let nextTracker = currentState.tracker || {};
-    let trackerChanged = false;
-    if (nextTracker.isRunning) {
-        const snapshotResult = ensureExpectedSnapshotInTracker(nextTracker);
-        nextTracker = snapshotResult.tracker;
-        trackerChanged = snapshotResult.changed;
-
-        const adjustedBeforeAdvance = calculateAdjustedIntervals(currentTime);
-        if (
-            adjustedBeforeAdvance.status !== 'on-time' &&
-            adjustedBeforeAdvance.difference > 1 &&
-            !nextTracker.varianceMode
-        ) {
-            nextTracker = {
-                ...nextTracker,
-                varianceMode: true,
-                varianceActivatedAt: new Date().toISOString()
-            };
-            trackerChanged = true;
-        }
-    }
-
-    let currentIndex = -1;
-    for (let i = 0; i < scheduledIntervals.length; i++) {
-        const interval = scheduledIntervals[i];
-        if (currentTime >= interval.startTime && currentTime < interval.endTime) {
-            currentIndex = i;
-            break;
-        }
-        if (currentTime >= interval.startTime) {
-            currentIndex = i;
-        }
-    }
-
-    if (currentIndex < 0) currentIndex = 0;
-    if (currentIndex >= items.length - 1) return false;
-
+    const idIndex = tracker.activeItemId
+        ? items.findIndex(item => item.id === String(tracker.activeItemId))
+        : -1;
+    const currentIndex = idIndex >= 0
+        ? idIndex
+        : Math.max(0, Math.min(items.length - 1, tracker.activeItemIndex || 0));
     const scheduledCurrent = scheduledIntervals[currentIndex];
     if (!scheduledCurrent) return false;
 
-    if (currentTime < scheduledCurrent.startTime) {
-        return false;
-    }
-
     const originalDuration = parseDuration(items[currentIndex].duration);
-    const elapsedMinutes = Math.floor((currentTime - scheduledCurrent.startTime) / 60000);
-    let newCurrentDuration = Math.max(1, elapsedMinutes);
-    if (items[currentIndex].locked) {
-        if (elapsedMinutes < originalDuration) {
-            return false;
-        }
-        newCurrentDuration = Math.max(originalDuration, newCurrentDuration);
-    }
+    const activeStartedAt = validDate(tracker.activeStartedAt) || scheduledCurrent.startTime;
+    const elapsedExact = Math.max(0, (currentTime - activeStartedAt) / 60000);
+    if (items[currentIndex].locked && elapsedExact < originalDuration) return false;
+    const newCurrentDuration = Math.max(1, roundToTenth(elapsedExact));
 
     const scheduledEnd = scheduledIntervals[scheduledIntervals.length - 1].endTime;
-    const remainingTotal = Math.max(0, Math.round((scheduledEnd - currentTime) / 60000));
+    const remainingTotal = Math.max(0, roundToTenth((scheduledEnd - currentTime) / 60000));
     const buffer = settings.buffer || 0;
 
     const futureItems = items.slice(currentIndex + 1);
     const futureCount = futureItems.length;
-    const totalFutureBuffer = Math.max(0, (futureCount - 1) * buffer);
-    let remainingForFuture = Math.max(0, remainingTotal - totalFutureBuffer);
-
-    const futureDurations = futureItems.map(item => parseDuration(item.duration));
-    const totalFutureDuration = futureDurations.reduce((sum, duration) => sum + duration, 0);
-    const lockedTotal = futureItems.reduce((sum, item, idx) => {
-        return item.locked ? sum + futureDurations[idx] : sum;
-    }, 0);
-    const unlockedTotal = totalFutureDuration - lockedTotal;
-
-    let newFutureDurations;
-    if (remainingForFuture >= totalFutureDuration) {
-        const scale = totalFutureDuration > 0 ? remainingForFuture / totalFutureDuration : 1;
-        newFutureDurations = futureDurations.map(duration => Math.max(1, Math.round(duration * scale)));
-    } else {
-        const availableForUnlocked = Math.max(0, remainingForFuture - lockedTotal);
-        const scale = unlockedTotal > 0 ? availableForUnlocked / unlockedTotal : 0;
-        newFutureDurations = futureDurations.map((duration, idx) => {
-            if (futureItems[idx].locked) return duration;
-            return Math.max(1, Math.round(duration * scale));
-        });
-    }
-
-    // Adjust for rounding differences where possible
-    let durationSum = newFutureDurations.reduce((sum, duration) => sum + duration, 0);
-    let diff = remainingForFuture - durationSum;
-    const adjustable = futureItems
-        .map((item, idx) => ({ idx, locked: item.locked }))
-        .filter(entry => !entry.locked);
-
-    if (diff !== 0 && adjustable.length > 0) {
-        let safety = 0;
-        while (diff !== 0 && safety < 5000) {
-            for (const entry of adjustable) {
-                if (diff === 0) break;
-                if (diff > 0) {
-                    newFutureDurations[entry.idx] += 1;
-                    diff -= 1;
-                } else if (newFutureDurations[entry.idx] > 1) {
-                    newFutureDurations[entry.idx] -= 1;
-                    diff += 1;
-                }
-            }
-            if (diff < 0 && adjustable.every(entry => newFutureDurations[entry.idx] <= 1)) {
-                break;
-            }
-            safety += 1;
-        }
-    }
+    const totalFutureBuffer = Math.max(0, futureCount * buffer);
+    const remainingForFuture = Math.max(0, remainingTotal - totalFutureBuffer);
+    const newFutureDurations = scaleDurationsToTarget(futureItems, remainingForFuture);
 
     const updatedItems = items.map((item, index) => {
         if (index < currentIndex) return item;
@@ -957,11 +1311,40 @@ export function advanceToNextItem(currentTime = new Date()) {
         return { ...item, duration: formatDuration(nextDuration) };
     });
 
-    const updates = { items: updatedItems };
-    if (trackerChanged) {
-        updates.tracker = nextTracker;
-    }
-    setState(updates);
+    const snapshotResult = ensureExpectedSnapshotInTracker(tracker, tracker.scheduledStartAt);
+    const expectedCurrent = snapshotResult.tracker.expectedSnapshot?.items
+        ?.find(item => item.id === items[currentIndex].id);
+    const expectedDuration = expectedCurrent
+        ? parseDuration(expectedCurrent.duration || '1m')
+        : originalDuration;
+    const completedDifference = roundToTenth(newCurrentDuration - expectedDuration);
+    const completedDiffById = {
+        ...(snapshotResult.tracker.completedDiffById || {}),
+        [items[currentIndex].id]: completedDifference
+    };
+    const overallDeltaMinutes = roundToTenth(Object.values(completedDiffById)
+        .reduce((sum, value) => sum + (Number.isFinite(value) ? value : 0), 0));
+    const varianceMode = snapshotResult.tracker.varianceMode || Math.abs(overallDeltaMinutes) > 1;
+    const isFinalItem = currentIndex === items.length - 1;
+    const nextItem = items[currentIndex + 1] || null;
+    const nextActiveStart = nextItem ? addMinutes(currentTime, buffer) : null;
+    const nextTracker = {
+        ...snapshotResult.tracker,
+        isRunning: isFinalItem ? false : tracker.isRunning,
+        pausedAt: isFinalItem ? null : tracker.pausedAt,
+        activeItemIndex: isFinalItem ? items.length : currentIndex + 1,
+        activeItemId: nextItem?.id || null,
+        activeStartedAt: nextActiveStart?.toISOString() || activeStartedAt.toISOString(),
+        completedAt: isFinalItem ? currentTime.toISOString() : null,
+        completedDiffById,
+        overallDeltaMinutes,
+        varianceMode,
+        varianceActivatedAt: !snapshotResult.tracker.varianceMode && varianceMode
+            ? currentTime.toISOString()
+            : snapshotResult.tracker.varianceActivatedAt
+    };
+
+    setState({ items: updatedItems, tracker: nextTracker });
     return true;
 }
 
@@ -974,35 +1357,38 @@ export function retreatToPreviousItem() {
     if (!items || items.length === 0) return false;
     if (!tracker || (!tracker.isRunning && !tracker.startedAt)) return false;
 
-    const activeItemIndex = Math.max(0, Math.min(
-        items.length - 1,
-        Number.isFinite(tracker.activeItemIndex) ? tracker.activeItemIndex : 0
-    ));
+    const idIndex = tracker.activeItemId
+        ? items.findIndex(item => item.id === String(tracker.activeItemId))
+        : -1;
+    const activeItemIndex = tracker.completedAt
+        ? items.length
+        : (idIndex >= 0
+            ? idIndex
+            : Math.max(0, Math.min(items.length - 1, tracker.activeItemIndex || 0)));
     if (activeItemIndex <= 0) return false;
 
     const prevIndex = activeItemIndex - 1;
     const prevItem = items[prevIndex];
-    const completedDiffById = { ...(tracker.completedDiffById || {}) };
-    if (prevItem?.id && Object.prototype.hasOwnProperty.call(completedDiffById, prevItem.id)) {
-        delete completedDiffById[prevItem.id];
-    }
-    const overallDeltaMinutes = Object.values(completedDiffById)
-        .reduce((sum, value) => sum + (Number.isFinite(value) ? value : 0), 0);
+    const intervals = calculateIntervals();
+    const completedAt = validDate(tracker.completedAt);
 
     setState({
         tracker: {
             ...tracker,
+            isRunning: completedAt ? false : tracker.isRunning,
+            pausedAt: completedAt?.toISOString() || tracker.pausedAt,
             activeItemIndex: prevIndex,
-            completedDiffById,
-            overallDeltaMinutes
+            activeItemId: prevItem.id,
+            activeStartedAt: intervals[prevIndex]?.startTime?.toISOString() || tracker.activeStartedAt,
+            completedAt: null
         }
     });
     return true;
 }
 
-function calculateIntervalsFromPlan(planItems, startTimeValue, bufferValue) {
+function calculateIntervalsFromPlan(planItems, startTimeValue, bufferValue, scheduledStartAt = null) {
     if (!planItems || planItems.length === 0) return [];
-    const startTime = parseTime(startTimeValue);
+    const startTime = validDate(scheduledStartAt) || parseTime(startTimeValue);
     const buffer = bufferValue || 0;
 
     let currentTime = new Date(startTime);
@@ -1046,23 +1432,23 @@ export function updateIntervalTime(index, position, targetTime) {
     if (position === 'start') {
         if (index === 0) {
             const newStartValue = formatTimeValue(targetTime);
-            setState({ settings: { ...settings, startTime: newStartValue } });
+            updateSettings({ startTime: newStartValue });
             return true;
         }
 
         const oldBoundary = intervals[index].startTime;
 
         if (!pinStart) {
-            const currentStart = parseTime(settings.startTime);
+            const currentStart = intervals[0].startTime;
             const deltaMinutes = Math.round((targetTime - oldBoundary) / 60000);
             const newStart = addMinutes(currentStart, deltaMinutes);
             const newStartValue = formatTimeValue(newStart);
-            setState({ settings: { ...settings, startTime: newStartValue } });
+            updateSettings({ startTime: newStartValue });
             return true;
         }
 
-        const currentStart = parseTime(settings.startTime);
-        const buffersBefore = Math.max(0, index - 1);
+        const currentStart = intervals[0].startTime;
+        const buffersBefore = index;
         let targetTotal = Math.round((targetTime - currentStart) / 60000) - buffersBefore * buffer;
         targetTotal = Math.max(0, targetTotal);
 
@@ -1122,8 +1508,15 @@ export function updateIntervalTime(index, position, targetTime) {
  * @returns {Array} Items with calculated start and end times
  */
 export function calculateIntervals() {
-    const { items, settings } = currentState;
-    return calculateIntervalsFromPlan(items, settings.startTime, settings.buffer || 0);
+    const { items, settings, tracker } = currentState;
+    return calculateIntervalsFromPlan(
+        items,
+        settings.startTime,
+        settings.buffer || 0,
+        tracker?.startedAt
+            ? planStartFromActiveAnchor(items, tracker, settings.buffer)
+            : null
+    );
 }
 
 /**
@@ -1134,14 +1527,15 @@ export function calculateIntervals() {
 export function getExpectedVsActualData() {
     const tracker = currentState.tracker || {};
     const snapshot = tracker.expectedSnapshot;
-    if (!tracker.varianceMode || !snapshot || !snapshot.items || snapshot.items.length === 0) {
+    if (!tracker.varianceMode || !snapshot || !Array.isArray(snapshot.items) || snapshot.items.length === 0) {
         return null;
     }
 
     const expectedIntervals = calculateIntervalsFromPlan(
         snapshot.items,
         snapshot.startTime || currentState.settings.startTime,
-        snapshot.buffer ?? currentState.settings.buffer ?? 0
+        snapshot.buffer ?? currentState.settings.buffer ?? 0,
+        snapshot.scheduledStartAt || null
     );
     const actualIntervals = calculateIntervals();
     const expectedById = new Map(expectedIntervals.map(item => [item.id, item]));
@@ -1152,7 +1546,7 @@ export function getExpectedVsActualData() {
         const expectedDurationMinutes = expected ? parseDuration(expected.duration || '1m') : null;
         const durationDifferenceMinutes = expectedDurationMinutes === null
             ? null
-            : actualDurationMinutes - expectedDurationMinutes;
+            : roundToTenth(actualDurationMinutes - expectedDurationMinutes);
 
         return {
             id: actual.id,
@@ -1197,36 +1591,44 @@ function scaleDurationsToTarget(items, targetTotal) {
 
     let newDurations;
     if (targetTotal >= totalDuration) {
-        const scale = totalDuration > 0 ? targetTotal / totalDuration : 1;
-        newDurations = durations.map(duration => Math.max(1, Math.round(duration * scale)));
+        const availableForUnlocked = Math.max(0, targetTotal - lockedTotal);
+        const scale = unlockedTotal > 0 ? availableForUnlocked / unlockedTotal : 1;
+        newDurations = durations.map((duration, idx) => {
+            if (locked[idx]) return duration;
+            return Math.max(1, roundToTenth(duration * scale));
+        });
     } else {
         const availableForUnlocked = Math.max(0, targetTotal - lockedTotal);
         const scale = unlockedTotal > 0 ? availableForUnlocked / unlockedTotal : 0;
         newDurations = durations.map((duration, idx) => {
             if (locked[idx]) return duration;
-            return Math.max(1, Math.round(duration * scale));
+            return Math.max(1, roundToTenth(duration * scale));
         });
     }
 
-    let diff = targetTotal - newDurations.reduce((sum, duration) => sum + duration, 0);
+    let diffTenths = Math.round(targetTotal * 10) - newDurations
+        .reduce((sum, duration) => sum + Math.round(duration * 10), 0);
     const adjustable = items.map((item, idx) => ({
         idx,
-        min: minDurations[idx],
+        minTenths: Math.round(minDurations[idx] * 10),
         locked: item.locked
-    }));
+    })).filter(entry => !entry.locked);
+    const durationTenths = newDurations.map(duration => Math.round(duration * 10));
 
     let safety = 0;
-    while (diff !== 0 && safety < 10000) {
+    while (diffTenths !== 0 && safety < 10000) {
         let moved = false;
         for (const entry of adjustable) {
-            if (diff === 0) break;
-            if (diff > 0) {
-                newDurations[entry.idx] += 1;
-                diff -= 1;
+            if (diffTenths === 0) break;
+            if (diffTenths > 0) {
+                const step = Math.min(10, diffTenths);
+                durationTenths[entry.idx] += step;
+                diffTenths -= step;
                 moved = true;
-            } else if (newDurations[entry.idx] > entry.min) {
-                newDurations[entry.idx] -= 1;
-                diff += 1;
+            } else if (durationTenths[entry.idx] > entry.minTenths) {
+                const step = Math.min(10, -diffTenths, durationTenths[entry.idx] - entry.minTenths);
+                durationTenths[entry.idx] -= step;
+                diffTenths += step;
                 moved = true;
             }
         }
@@ -1234,7 +1636,7 @@ function scaleDurationsToTarget(items, targetTotal) {
         safety += 1;
     }
 
-    return newDurations;
+    return durationTenths.map(duration => duration / 10);
 }
 
 function scaleLiveFutureDurations(items, targetTotal) {
@@ -1277,7 +1679,10 @@ function scaleLiveFutureDurations(items, targetTotal) {
  */
 export function calculateAdjustedIntervals(currentTime = new Date()) {
     const { items, settings, tracker } = currentState;
-    const scheduledStart = parseTime(settings.startTime);
+    if (!tracker.isRunning && tracker.pausedAt) {
+        const pausedTime = new Date(tracker.pausedAt);
+        if (!Number.isNaN(pausedTime.getTime())) currentTime = pausedTime;
+    }
     const buffer = settings.buffer || 0;
 
     if (!items || items.length === 0) {
@@ -1296,13 +1701,35 @@ export function calculateAdjustedIntervals(currentTime = new Date()) {
     }
 
     const scheduledItems = calculateIntervals();
-    const currentItemIndex = Math.max(0, Math.min(
-        items.length - 1,
-        Number.isFinite(tracker.activeItemIndex) ? tracker.activeItemIndex : 0
-    ));
+    const scheduledStart = scheduledItems[0]?.startTime || (tracker.startedAt
+        ? (validDate(tracker.scheduledStartAt) || parseTime(settings.startTime))
+        : parseTime(settings.startTime));
+    if (tracker.completedAt) {
+        const signedDifference = Number(tracker.overallDeltaMinutes) || 0;
+        return {
+            items: scheduledItems,
+            status: signedDifference > 0.05 ? 'behind' : (signedDifference < -0.05 ? 'ahead' : 'on-time'),
+            difference: Math.abs(signedDifference),
+            signedDifference,
+            currentItemIndex: items.length,
+            currentOverrun: 0,
+            currentRemaining: 0
+        };
+    }
+    const idIndex = tracker.activeItemId
+        ? items.findIndex(item => item.id === String(tracker.activeItemId))
+        : -1;
+    const currentItemIndex = idIndex >= 0
+        ? idIndex
+        : Math.max(0, Math.min(
+            items.length - 1,
+            Number.isFinite(tracker.activeItemIndex) ? tracker.activeItemIndex : 0
+        ));
     const plannedDurations = items.map(item => parseDuration(item.duration || '1m'));
 
-    const currentScheduledStart = scheduledItems[currentItemIndex]?.startTime || new Date(currentTime);
+    const currentScheduledStart = validDate(tracker.activeStartedAt) ||
+        scheduledItems[currentItemIndex]?.startTime ||
+        new Date(currentTime);
     const currentPlannedDuration = plannedDurations[currentItemIndex] || 1;
     const elapsedOnCurrent = Math.max(0, (currentTime - currentScheduledStart) / 60000);
     const currentActualDuration = Math.max(currentPlannedDuration, elapsedOnCurrent);
@@ -1361,39 +1788,34 @@ export function calculateAdjustedIntervals(currentTime = new Date()) {
  */
 export function encodeStateToURL() {
     const stateToEncode = {
-        i: currentState.items.map(item => ({
-            n: item.name,
-            l: item.lead,
-            d: item.duration,
-            k: item.locked ? 1 : 0,
-            o: item.notes,
-            c: item.themeColor || 1
+        v: STATE_SCHEMA_VERSION,
+        items: currentState.items.map(item => ({
+            id: item.id,
+            name: item.name,
+            lead: item.lead,
+            duration: item.duration,
+            locked: !!item.locked,
+            notes: item.notes,
+            themeColor: item.themeColor || 1,
+            ...(normalizeHexColor(item.customColor) ? { customColor: normalizeHexColor(item.customColor) } : {}),
+            ...(item.context ? { context: item.context } : {}),
+            ...(item.prep ? { prep: item.prep } : {})
         })),
-        g: currentState.stagedItems.map(item => ({
-            n: item.name,
-            l: item.lead,
-            d: item.duration,
-            k: item.locked ? 1 : 0,
-            o: item.notes,
-            c: item.themeColor || 1
+        stagedItems: currentState.stagedItems.map(item => ({
+            id: item.id,
+            name: item.name,
+            lead: item.lead,
+            duration: item.duration,
+            locked: !!item.locked,
+            notes: item.notes,
+            themeColor: item.themeColor || 1,
+            ...(normalizeHexColor(item.customColor) ? { customColor: normalizeHexColor(item.customColor) } : {}),
+            ...(item.context ? { context: item.context } : {}),
+            ...(item.prep ? { prep: item.prep } : {})
         })),
-        s: {
-            t: currentState.settings.startTime,
-            dm: currentState.settings.darkMode ? 1 : 0,
-            se: currentState.settings.soundEffects ? 1 : 0,
-            st: currentState.settings.syncSystemTime ? 1 : 0,
-            dn: currentState.settings.density,
-            sp: currentState.settings.showProgressBar ? 1 : 0,
-            b: currentState.settings.buffer,
-            tm: currentState.settings.timerMode,
-            ow: currentState.settings.oneMinWarning ? 1 : 0,
-            of: currentState.settings.overtimeFlash ? 1 : 0,
-            ao: currentState.settings.alertOffsetsSeconds,
-            as: currentState.settings.alertSound,
-            av: currentState.settings.alertVisual,
-            nt: currentState.settings.desktopNotifications ? 1 : 0,
-            sc: currentState.settings.separateAdjacentColors ? 1 : 0
-        }
+        settings: { ...currentState.settings },
+        exportOptions: { ...currentState.exportOptions },
+        metadata: deepClone(currentState.metadata)
     };
 
     const json = JSON.stringify(stateToEncode);
@@ -1411,8 +1833,20 @@ export function decodeStateFromURL(encoded) {
         if (!json) return null;
 
         const decoded = JSON.parse(json);
+        if (decoded?.v === STATE_SCHEMA_VERSION) {
+            if (!Array.isArray(decoded.items)) return null;
+            return normalizeState({
+                schemaVersion: STATE_SCHEMA_VERSION,
+                items: decoded.items,
+                stagedItems: Array.isArray(decoded.stagedItems) ? decoded.stagedItems : [],
+                settings: decoded.settings,
+                exportOptions: decoded.exportOptions,
+                metadata: decoded.metadata,
+                tracker: deepClone(DEFAULT_STATE.tracker)
+            });
+        }
 
-        return {
+        const legacyState = {
             items: decoded.i.map((item, index) => ({
                 id: generateId(),
                 name: item.n || '',
@@ -1453,9 +1887,16 @@ export function decodeStateFromURL(encoded) {
                 alertSound: decoded.s?.as || DEFAULT_STATE.settings.alertSound,
                 alertVisual: decoded.s?.av || DEFAULT_STATE.settings.alertVisual,
                 desktopNotifications: decoded.s?.nt === 1,
-                separateAdjacentColors: decoded.s?.sc === 1
+                separateAdjacentColors: decoded.s?.sc === 1,
+                pinStartTime: decoded.s?.ps === undefined
+                    ? DEFAULT_STATE.settings.pinStartTime
+                    : decoded.s.ps === 1,
+                pinEndTime: decoded.s?.pe === undefined
+                    ? DEFAULT_STATE.settings.pinEndTime
+                    : decoded.s.pe === 1
             }
         };
+        return normalizeState(legacyState);
     } catch (e) {
         console.error('Failed to decode state from URL:', e);
         return null;
@@ -1471,7 +1912,8 @@ export function updateURL() {
     url.searchParams.set('s', encoded);
     window.history.replaceState({}, '', url.toString());
     try {
-        localStorage.setItem(STORAGE_URL_KEY, encoded);
+        const storage = useSessionPersistence ? sessionStorage : localStorage;
+        storage.setItem(STORAGE_URL_KEY, encoded);
     } catch (e) {
         console.error('Failed to remember URL state:', e);
     }
@@ -1491,30 +1933,35 @@ export function loadFromURL() {
 }
 
 /**
- * Save state to localStorage
+ * Save state to the active tab/origin persistence scope.
  */
 function persistState() {
     try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(currentState));
-        // Also update URL
+        const storage = useSessionPersistence ? sessionStorage : localStorage;
+        storage.setItem(STORAGE_KEY, JSON.stringify(currentState));
+    } catch (e) {
+        console.error('Failed to persist state to localStorage:', e);
+    }
+    try {
         updateURL();
     } catch (e) {
-        console.error('Failed to persist state:', e);
+        console.error('Failed to persist state to URL:', e);
     }
 }
 
 /**
- * Load state from localStorage
- * @returns {Object|null} State from localStorage or null
+ * Load state from the active tab/origin persistence scope.
+ * @returns {Object|null} Persisted state or null
  */
-function loadFromLocalStorage() {
+function loadFromPersistenceStorage() {
     try {
-        const stored = localStorage.getItem(STORAGE_KEY);
+        const storage = useSessionPersistence ? sessionStorage : localStorage;
+        const stored = storage.getItem(STORAGE_KEY);
         if (stored) {
             return JSON.parse(stored);
         }
     } catch (e) {
-        console.error('Failed to load from localStorage:', e);
+        console.error('Failed to load persisted state:', e);
     }
     return null;
 }
@@ -1523,40 +1970,52 @@ function loadFromLocalStorage() {
  * Initialize state from URL, localStorage, or defaults
  */
 export function initializeState() {
-    // A URL different from the last URL generated in this browser is a shared
-    // agenda and takes priority. Otherwise prefer the fuller local state, which
-    // includes tracker runtime details omitted from compact share URLs.
+    // Explicit share links get a tab-scoped working copy. Ordinary sessions
+    // prefer their fuller persisted state, including runtime details omitted
+    // from compact URLs.
     const url = new URL(window.location.href);
     const encodedURLState = url.searchParams.get('s');
-    let lastLocalURLState = null;
+    const isExplicitShare = url.searchParams.get('share') === '1';
+    let rememberedShareSession = false;
     try {
-        lastLocalURLState = localStorage.getItem(STORAGE_URL_KEY);
+        if (isExplicitShare) sessionStorage.setItem(SESSION_ISOLATION_KEY, '1');
+        rememberedShareSession = sessionStorage.getItem(SESSION_ISOLATION_KEY) === '1';
+        if (!isExplicitShare && !encodedURLState && rememberedShareSession) {
+            sessionStorage.removeItem(SESSION_ISOLATION_KEY);
+            sessionStorage.removeItem(STORAGE_KEY);
+            sessionStorage.removeItem(STORAGE_URL_KEY);
+            rememberedShareSession = false;
+        }
+    } catch (e) {
+        console.error('Failed to isolate shared agenda state:', e);
+    }
+    useSessionPersistence = isExplicitShare || rememberedShareSession;
+    if (isExplicitShare && rememberedShareSession) {
+        url.searchParams.delete('share');
+        window.history.replaceState(window.history.state, '', url.toString());
+    }
+    let lastPersistedURLState = null;
+    try {
+        const storage = useSessionPersistence ? sessionStorage : localStorage;
+        lastPersistedURLState = storage.getItem(STORAGE_URL_KEY);
     } catch (e) {
         console.error('Failed to read remembered URL state:', e);
     }
 
-    const hasExternalURLState = !!encodedURLState && encodedURLState !== lastLocalURLState;
-    let state = hasExternalURLState ? loadFromURL() : loadFromLocalStorage();
-    if (!state && encodedURLState) state = loadFromURL();
+    const hasExternalURLState = !!encodedURLState &&
+        (isExplicitShare || encodedURLState !== lastPersistedURLState);
+    let state = hasExternalURLState ? loadFromURL() : loadFromPersistenceStorage();
+    if (!state && encodedURLState && !hasExternalURLState) state = loadFromURL();
+    if (!state && hasExternalURLState) state = loadFromPersistenceStorage();
 
     if (!state) {
         state = {
             ...deepClone(DEFAULT_STATE),
             items: deepClone(DEFAULT_ITEMS)
         };
-    } else {
-        // Merge with defaults to ensure all properties exist
-        state = {
-            ...deepClone(DEFAULT_STATE),
-            ...state,
-            settings: { ...DEFAULT_STATE.settings, ...state.settings },
-            exportOptions: { ...DEFAULT_STATE.exportOptions, ...state.exportOptions },
-            metadata: { ...DEFAULT_STATE.metadata, ...state.metadata },
-            tracker: { ...DEFAULT_STATE.tracker, ...state.tracker }
-        };
     }
 
-    currentState = state;
+    currentState = normalizeState(state);
     undoStack = [];
     redoStack = [];
     historyTransaction = null;
@@ -1589,27 +2048,7 @@ export function importFromJSON(json) {
             throw new Error('Invalid state: missing items array');
         }
 
-        // Ensure all items have IDs
-        imported.items = imported.items.map(item => ({
-            ...item,
-            id: item.id || generateId()
-        }));
-        imported.stagedItems = (imported.stagedItems || []).map(item => ({
-            ...item,
-            id: item.id || generateId()
-        }));
-
-        // Merge with defaults
-        const nextState = {
-            ...deepClone(DEFAULT_STATE),
-            ...imported,
-            settings: { ...DEFAULT_STATE.settings, ...imported.settings },
-            exportOptions: { ...DEFAULT_STATE.exportOptions, ...imported.exportOptions },
-            metadata: { ...DEFAULT_STATE.metadata, ...imported.metadata },
-            tracker: { ...DEFAULT_STATE.tracker, ...imported.tracker }
-        };
-
-        setState(nextState, { replace: true });
+        setState(imported, { replace: true });
         return true;
     } catch (e) {
         console.error('Failed to import JSON:', e);

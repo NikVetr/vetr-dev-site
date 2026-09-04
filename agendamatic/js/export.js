@@ -2,11 +2,25 @@
  * export.js - Export functionality for JSON, Markdown, Text, and DOCX formats
  */
 
-import { getState, exportToJSON, importFromJSON, calculateIntervals, getExpectedVsActualData } from './state.js';
+import {
+    getState,
+    exportToJSON,
+    importFromJSON,
+    calculateIntervals,
+    calculateAdjustedIntervals,
+    getExpectedVsActualData
+} from './state.js';
 import { formatTime, formatInterval, formatDuration, parseDuration } from './utils.js';
 
-function escapeMarkdownTableCell(value) {
+function escapeMarkdownHtml(value) {
     return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+}
+
+function escapeMarkdownTableCell(value) {
+    return escapeMarkdownHtml(value)
         .replace(/\|/g, '\\|')
         .replace(/\r?\n/g, ' ')
         .trim();
@@ -18,6 +32,14 @@ function formatAgendaDateLine(date = new Date()) {
         day: 'numeric',
         year: 'numeric'
     }).format(date);
+}
+
+function formatFileDate(date = new Date()) {
+    return [
+        date.getFullYear(),
+        String(date.getMonth() + 1).padStart(2, '0'),
+        String(date.getDate()).padStart(2, '0')
+    ].join('-');
 }
 
 function formatAgendaTimeWithZone(date) {
@@ -33,13 +55,65 @@ function formatAgendaTimeWithZone(date) {
     return `${time}${tz ? ` ${tz}` : ''}`;
 }
 
-function splitLeads(leads, maxPerGroup = 5) {
-    const unique = [...new Set((leads || []).filter(Boolean).map(v => String(v).trim()).filter(Boolean))];
-    const board = unique.slice(0, maxPerGroup);
-    const staff = unique.slice(maxPerGroup, maxPerGroup * 2);
-    while (board.length < maxPerGroup) board.push('');
-    while (staff.length < maxPerGroup) staff.push('');
-    return { board, staff };
+function getAttendeeGroups(metadata, fallbackLeads = []) {
+    if (Array.isArray(metadata?.attendeeGroups) && metadata.attendeeGroups.length) {
+        return metadata.attendeeGroups;
+    }
+    const attendees = Array.isArray(metadata?.attendees) ? metadata.attendees : [];
+    if (attendees.length) {
+        return [{ name: metadata.attendeeGroup || 'Attendees', attendees }];
+    }
+    const uniqueLeads = [...new Set(fallbackLeads.map(value => String(value || '').trim()).filter(Boolean))];
+    return uniqueLeads.length
+        ? [{ name: 'Attendees', attendees: uniqueLeads.map(name => ({ name, present: false })) }]
+        : [];
+}
+
+function getActionItems(metadata) {
+    return Array.isArray(metadata?.actionItems)
+        ? metadata.actionItems.filter(item => String(item?.text || '').trim())
+        : [];
+}
+
+function safeMeetingUrl(value) {
+    if (!value) return '';
+    try {
+        const url = new URL(String(value));
+        return ['http:', 'https:'].includes(url.protocol) ? url.href : '';
+    } catch {
+        return '';
+    }
+}
+
+function hostMatches(host, domain) {
+    return host === domain || host.endsWith(`.${domain}`);
+}
+
+function meetingLinkDetails(value) {
+    const url = safeMeetingUrl(value);
+    if (!url) return null;
+    const host = new URL(url).hostname.toLowerCase();
+    const label = ['zoom.us', 'zoom.com', 'zoomgov.com'].some(domain => hostMatches(host, domain))
+        ? 'Zoom'
+        : ['teams.microsoft.com', 'teams.live.com'].some(domain => hostMatches(host, domain))
+            ? 'Microsoft Teams'
+            : hostMatches(host, 'meet.google.com')
+                ? 'Google Meet'
+                : 'Meeting link';
+    return { label, url };
+}
+
+function authoredValue(value) {
+    return String(value ?? '').trim();
+}
+
+function formatPlainDetail(value) {
+    return authoredValue(value).replace(/\r?\n/g, '\n      ');
+}
+
+function docDetailRow(label, value, columnCount) {
+    const content = escapeHtml(authoredValue(value)).replace(/\r?\n/g, '<br>');
+    return `<tr><td colspan="${columnCount}"><strong>${label}:</strong> ${content}</td></tr>\n`;
 }
 
 function getDocumentKind(state = getState()) {
@@ -50,18 +124,29 @@ function getExportStem(state = getState()) {
     return getDocumentKind(state).toLowerCase();
 }
 
-function formatMeetingLink(url) {
-    if (!url) return '';
-    try {
-        const host = new URL(url).hostname.toLowerCase();
-        const label = host.includes('zoom') ? 'Zoom'
-            : host.includes('teams') ? 'Microsoft Teams'
-                : host.includes('meet.google') ? 'Google Meet'
-                    : 'Meeting link';
-        return `[${label}](${url})`;
-    } catch {
-        return url;
+function getExportItems(state = getState()) {
+    return state.tracker?.startedAt ? calculateAdjustedIntervals().items : calculateIntervals();
+}
+
+function getActualityLabel(itemId, state = getState()) {
+    if (!state.tracker?.completedAt && state.tracker?.activeItemId === itemId) {
+        return 'live';
     }
+    if (state.tracker?.completedAt || Object.prototype.hasOwnProperty.call(state.tracker?.completedDiffById || {}, itemId)) {
+        return 'actual';
+    }
+    return 'projected';
+}
+
+function getItemDuration(item) {
+    return item.adjustedDuration === undefined
+        ? (item.duration || '0m')
+        : formatDuration(item.adjustedDuration);
+}
+
+function formatMeetingLink(url) {
+    const link = meetingLinkDetails(url);
+    return link ? `[${link.label}](<${escapeMarkdownHtml(link.url)}>)` : '';
 }
 
 /**
@@ -82,7 +167,7 @@ export function generateMarkdown(options = {}) {
         ...options
     };
 
-    const items = calculateIntervals();
+    const items = getExportItems(state);
     const stagedItems = state.stagedItems || [];
     const varianceData = getExpectedVsActualData();
     const varianceById = varianceData?.byId || {};
@@ -91,7 +176,7 @@ export function generateMarkdown(options = {}) {
     const kind = getDocumentKind(state);
     const metadata = state.metadata || {};
     const leads = items.map(item => item.lead);
-    const leadGroups = splitLeads(leads);
+    const attendeeGroups = getAttendeeGroups(metadata, leads);
     const tzName = new Intl.DateTimeFormat([], { timeZoneName: 'short' })
         .formatToParts(now)
         .find(part => part.type === 'timeZoneName')?.value || 'local';
@@ -100,21 +185,25 @@ export function generateMarkdown(options = {}) {
         const startTime = items.length > 0 ? formatAgendaTimeWithZone(items[0].startTime) : 'TBD';
         const endTime = items.length > 0 ? formatAgendaTimeWithZone(items[items.length - 1].endTime) : 'TBD';
         lines.push('autoCHAIR');
-        lines.push(`${metadata.title || 'Meeting'} ${kind}`);
-        lines.push(metadata.date || formatAgendaDateLine(now));
+        lines.push(`${escapeMarkdownHtml(metadata.title || 'Meeting')} ${kind}`);
+        lines.push(escapeMarkdownHtml(metadata.date || formatAgendaDateLine(now)));
         lines.push('');
         lines.push('| Location |  | Date |  | Time |  |');
         lines.push('| :---- | :---- | :---- | :---- | :---- | :---- |');
         lines.push(`| ${escapeMarkdownTableCell(metadata.location || 'TBD')} | ${formatMeetingLink(metadata.url)} | ${escapeMarkdownTableCell(metadata.date || formatAgendaDateLine(now))} |  | ${escapeMarkdownTableCell(`${startTime} - ${endTime}`)} |  |`);
-        if (metadata.attendees?.length) {
-            lines.push(`| ${escapeMarkdownTableCell(metadata.attendeeGroup || 'Attendees')}: | ${metadata.attendees.map(person => `${person.present ? '☑' : '☐'} ${escapeMarkdownTableCell(person.name)}`).join(' | ')} |`);
-        } else {
-            lines.push(`| Attendees: | ${escapeMarkdownTableCell(leadGroups.board.filter(Boolean).join(', '))} |  |  |  |  |`);
-        }
+        attendeeGroups.forEach(group => {
+            const people = (group.attendees || [])
+                .map(person => `${person.present ? '☑' : '☐'} ${person.name || ''}`)
+                .join(', ');
+            lines.push(`| ${escapeMarkdownTableCell(group.name || 'Attendees')}: | ${escapeMarkdownTableCell(people)} |  |  |  |  |`);
+        });
         lines.push('');
     }
 
-    lines.push(`${kind} *(times are ${kind === 'Agenda' ? 'estimates' : 'recorded'} and in the ${tzName} time zone)*`);
+    const timeDescription = kind === 'Agenda'
+        ? 'estimates'
+        : (state.tracker?.completedAt ? 'recorded' : 'recorded, live, or projected as labeled');
+    lines.push(`${kind} *(times are ${timeDescription} and in the ${tzName} time zone)*`);
     lines.push('');
     lines.push('| Start Time | End Time | Agenda Item | Time Allotted | Leader |');
     lines.push('| ----- | ----- | ----- | ----- | ----- |');
@@ -123,16 +212,18 @@ export function generateMarkdown(options = {}) {
         const start = formatAgendaTimeWithZone(item.startTime);
         const end = formatAgendaTimeWithZone(item.endTime);
         const leader = item.lead || 'TBD';
-        const allotted = item.duration || formatDuration(parseDuration(item.duration || '0m'));
-        const contextValue = includeContext ? (item.context || '') : '';
-        const prepValue = includePrep ? (item.prep || '') : '';
+        const allotted = getItemDuration(item);
         const notesValue = includeNotes ? (item.notes || '') : '';
+        const contextValue = includeContext ? authoredValue(item.context) : '';
+        const prepValue = includePrep ? authoredValue(item.prep) : '';
 
+        if (contextValue) lines.push(`| Context: ${escapeMarkdownTableCell(contextValue)} |  |  |  |  |`);
         lines.push(`| ${escapeMarkdownTableCell(start)} | ${escapeMarkdownTableCell(end)} | ${escapeMarkdownTableCell(item.name)} | ${escapeMarkdownTableCell(allotted)} | ${escapeMarkdownTableCell(leader)} |`);
-        lines.push(`| Context: ${escapeMarkdownTableCell(contextValue || 'N/A')}  Preparation: ${escapeMarkdownTableCell(prepValue || 'N/A')} |  |  |  |  |`);
-        lines.push(`| Notes: ${escapeMarkdownTableCell(notesValue)} |  |  |  |  |`);
+        if (prepValue) lines.push(`| Preparation: ${escapeMarkdownTableCell(prepValue)} |  |  |  |  |`);
+        if (notesValue) lines.push(`| Notes: ${escapeMarkdownTableCell(notesValue)} |  |  |  |  |`);
 
         if (varianceData) {
+            const actuality = getActualityLabel(item.id, state);
             const expectedInterval = varianceRow?.expected
                 ? `${formatAgendaTimeWithZone(varianceRow.expected.startTime)} - ${formatAgendaTimeWithZone(varianceRow.expected.endTime)}`
                 : '-';
@@ -140,10 +231,14 @@ export function generateMarkdown(options = {}) {
                 ? '-'
                 : formatDuration(varianceRow.expectedDurationMinutes);
             const actualInterval = `${start} - ${end}`;
-            const difference = varianceRow?.durationDifferenceMinutes === null || varianceRow?.durationDifferenceMinutes === undefined
+            const actualDuration = item.adjustedDuration ?? parseDuration(item.duration || '0m');
+            const differenceMinutes = varianceRow?.expectedDurationMinutes === null || varianceRow?.expectedDurationMinutes === undefined
+                ? null
+                : actualDuration - varianceRow.expectedDurationMinutes;
+            const difference = differenceMinutes === null
                 ? '-'
-                : `${varianceRow.durationDifferenceMinutes > 0 ? '+' : ''}${varianceRow.durationDifferenceMinutes}m`;
-            lines.push(`| Actual vs Expected: expected ${escapeMarkdownTableCell(expectedInterval)} (${escapeMarkdownTableCell(expectedDuration)}), actual ${escapeMarkdownTableCell(actualInterval)} (${escapeMarkdownTableCell(allotted)}), difference ${escapeMarkdownTableCell(difference)} |  |  |  |  |`);
+                : `${differenceMinutes > 0 ? '+' : ''}${Number(differenceMinutes.toFixed(1))}m`;
+            lines.push(`| ${escapeMarkdownTableCell(actuality[0].toUpperCase() + actuality.slice(1))} vs Expected: expected ${escapeMarkdownTableCell(expectedInterval)} (${escapeMarkdownTableCell(expectedDuration)}), ${escapeMarkdownTableCell(actuality)} ${escapeMarkdownTableCell(actualInterval)} (${escapeMarkdownTableCell(formatDuration(actualDuration))}), difference ${escapeMarkdownTableCell(difference)} |  |  |  |  |`);
         }
     });
 
@@ -165,9 +260,9 @@ export function generateMarkdown(options = {}) {
     if (includeActionItems) {
         lines.push('Action items (after meeting)');
         lines.push('');
-        const actionLeads = [...new Set(leads.filter(Boolean).map(v => String(v).trim()).filter(Boolean))];
-        if (actionLeads.length > 0) {
-            actionLeads.forEach(name => lines.push(`- [ ] ${escapeMarkdownTableCell(name)}`));
+        const actionItems = getActionItems(metadata);
+        if (actionItems.length > 0) {
+            actionItems.forEach(item => lines.push(`- [${item.done ? 'x' : ' '}] ${escapeMarkdownTableCell(item.text)}${item.owner ? ` — ${escapeMarkdownTableCell(item.owner)}` : ''}`));
         } else {
             lines.push('- [ ] ');
         }
@@ -196,7 +291,7 @@ export function generatePlainText(options = {}) {
         ...options
     };
 
-    const items = calculateIntervals();
+    const items = getExportItems(state);
     const stagedItems = state.stagedItems || [];
     const varianceData = getExpectedVsActualData();
     const varianceById = varianceData?.byId || {};
@@ -204,28 +299,21 @@ export function generatePlainText(options = {}) {
 
     const kind = getDocumentKind(state);
     const metadata = state.metadata || {};
-    lines.push(`${(metadata.title || 'MEETING').toUpperCase()} ${kind.toUpperCase()}`);
-    lines.push('='.repeat(50));
-    lines.push('');
-
     if (includeHeader) {
+        lines.push(`${(metadata.title || 'MEETING').toUpperCase()} ${kind.toUpperCase()}`);
+        lines.push('='.repeat(50));
+        lines.push('');
         const startTime = items.length > 0 ? formatTime(items[0].startTime) : 'TBD';
         const endTime = items.length > 0 ? formatTime(items[items.length - 1].endTime) : 'TBD';
 
         lines.push(`Date: ${metadata.date || new Date().toLocaleDateString()}`);
         lines.push(`Time: ${startTime} - ${endTime}`);
         if (metadata.location) lines.push(`Location: ${metadata.location}`);
-        if (metadata.url) lines.push(`Meeting URL: ${metadata.url}`);
-        if (metadata.attendees?.length) {
-            lines.push(`${metadata.attendeeGroup || 'Attendees'}: ${metadata.attendees.map(person => `[${person.present ? 'x' : ' '}] ${person.name}`).join(', ')}`);
-        }
-        lines.push('');
-    }
-
-    if (includeContext) {
-        lines.push('CONTEXT');
-        lines.push('-'.repeat(50));
-        lines.push('[Add meeting context here]');
+        const link = meetingLinkDetails(metadata.url);
+        if (link) lines.push(`${link.label}: ${link.url}`);
+        getAttendeeGroups(metadata, items.map(item => item.lead)).forEach(group => {
+            lines.push(`${group.name || 'Attendees'}: ${(group.attendees || []).map(person => `[${person.present ? 'x' : ' '}] ${person.name || ''}`).join(', ')}`);
+        });
         lines.push('');
     }
 
@@ -236,26 +324,37 @@ export function generatePlainText(options = {}) {
     items.forEach((item, index) => {
         const interval = formatInterval(item.startTime, item.endTime);
         const varianceRow = varianceById[item.id];
+        const contextValue = includeContext ? authoredValue(item.context) : '';
+        const prepValue = includePrep ? authoredValue(item.prep) : '';
+        if (contextValue) lines.push(`Context: ${formatPlainDetail(contextValue)}`);
         lines.push(`${index + 1}. ${item.name}`);
         if (varianceData) {
+            const actuality = getActualityLabel(item.id, state);
             const expectedInterval = varianceRow?.expected
                 ? formatInterval(varianceRow.expected.startTime, varianceRow.expected.endTime)
                 : '-';
             const expectedDuration = varianceRow?.expectedDurationMinutes === null || varianceRow?.expectedDurationMinutes === undefined
                 ? '-'
                 : formatDuration(varianceRow.expectedDurationMinutes);
-            const difference = varianceRow?.durationDifferenceMinutes === null || varianceRow?.durationDifferenceMinutes === undefined
+            const actualDuration = item.adjustedDuration ?? parseDuration(item.duration || '0m');
+            const differenceMinutes = varianceRow?.expectedDurationMinutes === null || varianceRow?.expectedDurationMinutes === undefined
+                ? null
+                : actualDuration - varianceRow.expectedDurationMinutes;
+            const difference = differenceMinutes === null
                 ? '-'
-                : `${varianceRow.durationDifferenceMinutes > 0 ? '+' : ''}${varianceRow.durationDifferenceMinutes}m`;
+                : `${differenceMinutes > 0 ? '+' : ''}${Number(differenceMinutes.toFixed(1))}m`;
             lines.push(`   Expected: ${expectedInterval} (${expectedDuration})`);
-            lines.push(`   Actual:   ${interval} (${item.duration})`);
+            lines.push(`   ${actuality[0].toUpperCase() + actuality.slice(1)}:   ${interval} (${formatDuration(actualDuration)})`);
             lines.push(`   Difference: ${difference}`);
         } else {
-            lines.push(`   Time: ${interval} (${item.duration})`);
+            lines.push(`   Time: ${interval} (${getItemDuration(item)})`);
         }
         lines.push(`   Lead: ${item.lead || 'TBD'}`);
         if (item.locked) {
             lines.push('   [LOCKED]');
+        }
+        if (prepValue) {
+            lines.push(`   Preparation: ${formatPlainDetail(prepValue)}`);
         }
         if (includeNotes && item.notes) {
             lines.push(`   Notes: ${item.notes}`);
@@ -274,19 +373,15 @@ export function generatePlainText(options = {}) {
         });
     }
 
-    if (includePrep) {
-        lines.push('PREPARATION');
-        lines.push('-'.repeat(50));
-        lines.push('[ ] Review previous meeting notes');
-        lines.push('[ ] Prepare materials for each agenda item');
-        lines.push('[ ] Confirm attendance');
-        lines.push('');
-    }
-
     if (includeActionItems) {
         lines.push('ACTION ITEMS');
         lines.push('-'.repeat(50));
-        [...new Set(items.map(item => item.lead).filter(Boolean))].forEach(name => lines.push(`[ ] ${name}`));
+        const actionItems = getActionItems(metadata);
+        if (actionItems.length) {
+            actionItems.forEach(item => lines.push(`[${item.done ? 'x' : ' '}] ${item.text}${item.owner ? ` — ${item.owner}` : ''}`));
+        } else {
+            lines.push('[ ] ');
+        }
         lines.push('');
     }
 
@@ -315,7 +410,7 @@ export function generateDocx(options = {}) {
         ...options
     };
 
-    const items = calculateIntervals();
+    const items = getExportItems(state);
     const stagedItems = state.stagedItems || [];
     const varianceData = getExpectedVsActualData();
     const varianceById = varianceData?.byId || {};
@@ -345,35 +440,33 @@ hr { border: none; border-top: 1pt solid #ccc; margin: 18pt 0; }
 
     const kind = getDocumentKind(state);
     const metadata = state.metadata || {};
-    html += `\n<h1>${escapeHtml(metadata.title || 'Meeting')} ${kind}</h1>\n`;
-
     if (includeHeader) {
+        html += `\n<h1>${escapeHtml(metadata.title || 'Meeting')} ${kind}</h1>\n`;
         const startTime = items.length > 0 ? formatTime(items[0].startTime) : 'TBD';
         const endTime = items.length > 0 ? formatTime(items[items.length - 1].endTime) : 'TBD';
-        const totalDuration = items.reduce((sum, item) => sum + parseDuration(item.duration), 0);
+        const totalDuration = items.length
+            ? (items[items.length - 1].endTime - items[0].startTime) / 60000
+            : 0;
 
         html += `<p class="meta"><strong>Date:</strong> ${escapeHtml(metadata.date || new Date().toLocaleDateString())}</p>\n`;
         html += `<p class="meta"><strong>Time:</strong> ${startTime} - ${endTime}</p>\n`;
         html += `<p class="meta"><strong>Duration:</strong> ${formatDuration(totalDuration)}</p>\n`;
         if (metadata.location) html += `<p class="meta"><strong>Location:</strong> ${escapeHtml(metadata.location)}</p>\n`;
-        if (metadata.url) html += `<p class="meta"><strong>Meeting URL:</strong> <a href="${escapeHtml(metadata.url)}">${escapeHtml(metadata.url)}</a></p>\n`;
-        if (metadata.attendees?.length) {
-            html += `<p class="meta"><strong>${escapeHtml(metadata.attendeeGroup || 'Attendees')}:</strong> ${metadata.attendees.map(person => `${person.present ? '☑' : '☐'} ${escapeHtml(person.name)}`).join(', ')}</p>\n`;
-        }
+        const link = meetingLinkDetails(metadata.url);
+        if (link) html += `<p class="meta"><strong>${escapeHtml(link.label)}:</strong> <a href="${escapeHtml(link.url)}">${escapeHtml(link.url)}</a></p>\n`;
+        getAttendeeGroups(metadata, items.map(item => item.lead)).forEach(group => {
+            html += `<p class="meta"><strong>${escapeHtml(group.name || 'Attendees')}:</strong> ${(group.attendees || []).map(person => `${person.present ? '☑' : '☐'} ${escapeHtml(person.name)}`).join(', ')}</p>\n`;
+        });
         html += '<hr>\n';
     }
 
-    if (includeContext) {
-        html += '<h2>Context</h2>\n';
-        html += '<p><em>Add meeting context and background information here.</em></p>\n';
-    }
-
-    html += '<h2>Agenda Items</h2>\n';
+    html += `<h2>${kind === 'Minutes' ? 'Minutes' : 'Agenda Items'}</h2>\n`;
     html += '<table>\n';
     if (varianceData) {
-        html += '<tr><th>Expected Time</th><th>Actual Time</th><th>Item</th><th>Lead</th><th>Expected Duration</th><th>Actual Duration</th><th>Difference</th></tr>\n';
+        html += '<tr><th>Expected Time</th><th>Actual / Projected Time</th><th>Item</th><th>Lead</th><th>Expected Duration</th><th>Actual / Projected Duration</th><th>Difference</th></tr>\n';
         items.forEach(item => {
             const varianceRow = varianceById[item.id];
+            const actuality = getActualityLabel(item.id, state);
             const expectedInterval = varianceRow?.expected
                 ? formatInterval(varianceRow.expected.startTime, varianceRow.expected.endTime)
                 : '-';
@@ -381,17 +474,33 @@ hr { border: none; border-top: 1pt solid #ccc; margin: 18pt 0; }
             const expectedDuration = varianceRow?.expectedDurationMinutes === null || varianceRow?.expectedDurationMinutes === undefined
                 ? '-'
                 : formatDuration(varianceRow.expectedDurationMinutes);
-            const difference = varianceRow?.durationDifferenceMinutes === null || varianceRow?.durationDifferenceMinutes === undefined
+            const actualDuration = item.adjustedDuration ?? parseDuration(item.duration || '0m');
+            const differenceMinutes = varianceRow?.expectedDurationMinutes === null || varianceRow?.expectedDurationMinutes === undefined
+                ? null
+                : actualDuration - varianceRow.expectedDurationMinutes;
+            const difference = differenceMinutes === null
                 ? '-'
-                : `${varianceRow.durationDifferenceMinutes > 0 ? '+' : ''}${varianceRow.durationDifferenceMinutes}m`;
-            html += `<tr><td>${expectedInterval}</td><td>${actualInterval}</td><td>${escapeHtml(item.name)}</td><td>${escapeHtml(item.lead) || '-'}</td><td>${expectedDuration}</td><td>${item.duration}</td><td>${difference}</td></tr>\n`;
+                : `${differenceMinutes > 0 ? '+' : ''}${Number(differenceMinutes.toFixed(1))}m`;
+            if (includeContext && authoredValue(item.context)) {
+                html += docDetailRow('Context', item.context, 7);
+            }
+            html += `<tr><td>${escapeHtml(expectedInterval)}</td><td>${escapeHtml(`${actuality}: ${actualInterval}`)}</td><td>${escapeHtml(item.name)}</td><td>${escapeHtml(item.lead) || '-'}</td><td>${escapeHtml(expectedDuration)}</td><td>${escapeHtml(formatDuration(actualDuration))}</td><td>${escapeHtml(difference)}</td></tr>\n`;
+            if (includePrep && authoredValue(item.prep)) {
+                html += docDetailRow('Preparation', item.prep, 7);
+            }
         });
     } else {
         html += '<tr><th>Time</th><th>Item</th><th>Lead</th><th>Duration</th></tr>\n';
         items.forEach(item => {
             const interval = formatInterval(item.startTime, item.endTime);
             const locked = item.locked ? ' (locked)' : '';
-            html += `<tr><td>${interval}</td><td>${escapeHtml(item.name)}</td><td>${escapeHtml(item.lead) || '-'}</td><td>${item.duration}${locked}</td></tr>\n`;
+            if (includeContext && authoredValue(item.context)) {
+                html += docDetailRow('Context', item.context, 4);
+            }
+            html += `<tr><td>${escapeHtml(interval)}</td><td>${escapeHtml(item.name)}</td><td>${escapeHtml(item.lead) || '-'}</td><td>${escapeHtml(getItemDuration(item))}${locked}</td></tr>\n`;
+            if (includePrep && authoredValue(item.prep)) {
+                html += docDetailRow('Preparation', item.prep, 4);
+            }
         });
     }
 
@@ -418,20 +527,16 @@ hr { border: none; border-top: 1pt solid #ccc; margin: 18pt 0; }
         }
     }
 
-    if (includePrep) {
-        html += '<h2>Preparation</h2>\n';
-        html += '<ul>\n';
-        html += '<li>Review previous meeting notes</li>\n';
-        html += '<li>Prepare materials for each agenda item</li>\n';
-        html += '<li>Confirm attendance</li>\n';
-        html += '</ul>\n';
-    }
-
     if (includeActionItems) {
         html += '<h2>Action Items</h2><ul>\n';
-        [...new Set(items.map(item => item.lead).filter(Boolean))].forEach(name => {
-            html += `<li>☐ ${escapeHtml(name)}</li>\n`;
-        });
+        const actionItems = getActionItems(metadata);
+        if (actionItems.length) {
+            actionItems.forEach(item => {
+                html += `<li>${item.done ? '☑' : '☐'} ${escapeHtml(item.text)}${item.owner ? ` — ${escapeHtml(item.owner)}` : ''}</li>\n`;
+            });
+        } else {
+            html += '<li>☐ </li>\n';
+        }
         html += '</ul>\n';
     }
 
@@ -448,8 +553,8 @@ hr { border: none; border-top: 1pt solid #ccc; margin: 18pt 0; }
  * @returns {string} Escaped string
  */
 function escapeHtml(str) {
-    if (!str) return '';
-    return str
+    if (str === null || str === undefined) return '';
+    return String(str)
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
@@ -482,7 +587,7 @@ function downloadFile(content, filename, mimeType) {
  */
 export function exportAsMarkdown() {
     const content = generateMarkdown();
-    const date = new Date().toISOString().split('T')[0];
+    const date = formatFileDate();
     downloadFile(content, `${getExportStem()}-${date}.md`, 'text/markdown');
 }
 
@@ -491,7 +596,7 @@ export function exportAsMarkdown() {
  */
 export function exportAsJSON() {
     const content = exportToJSON();
-    const date = new Date().toISOString().split('T')[0];
+    const date = formatFileDate();
     downloadFile(content, `${getExportStem()}-${date}.json`, 'application/json');
 }
 
@@ -500,7 +605,7 @@ export function exportAsJSON() {
  */
 export function exportAsText() {
     const content = generatePlainText();
-    const date = new Date().toISOString().split('T')[0];
+    const date = formatFileDate();
     downloadFile(content, `${getExportStem()}-${date}.txt`, 'text/plain');
 }
 
@@ -509,7 +614,7 @@ export function exportAsText() {
  */
 export function exportAsDocx() {
     const content = generateDocx();
-    const date = new Date().toISOString().split('T')[0];
+    const date = formatFileDate();
     // Use .doc extension with HTML content - Word will open it correctly
     downloadFile(content, `${getExportStem()}-${date}.doc`, 'application/msword');
 }
@@ -550,23 +655,58 @@ export function importFromJSONFile(file) {
     });
 }
 
+function copyWithExecCommand(value) {
+    if (typeof document.execCommand !== 'function') return false;
+    const previousFocus = document.activeElement;
+    const input = document.createElement('textarea');
+    input.value = value;
+    input.readOnly = true;
+    input.setAttribute('aria-hidden', 'true');
+    input.style.position = 'fixed';
+    input.style.opacity = '0';
+    document.body.appendChild(input);
+    input.select();
+    input.setSelectionRange(0, input.value.length);
+
+    let copied = false;
+    try {
+        copied = document.execCommand('copy') === true;
+    } catch {
+        copied = false;
+    } finally {
+        input.remove();
+        if (previousFocus instanceof HTMLElement && previousFocus.isConnected) {
+            previousFocus.focus({ preventScroll: true });
+        }
+    }
+    return copied;
+}
+
 /**
  * Copy shareable link to clipboard
+ * @returns {Promise<boolean>} Whether a clipboard method reported success
  */
-export function copyShareLink() {
-    const url = window.location.href;
-    navigator.clipboard.writeText(url).then(() => {
-        showNotification('Link copied to clipboard!', 'success');
-    }).catch(() => {
-        // Fallback for older browsers
-        const input = document.createElement('input');
-        input.value = url;
-        document.body.appendChild(input);
-        input.select();
-        document.execCommand('copy');
-        document.body.removeChild(input);
-        showNotification('Link copied to clipboard!', 'success');
-    });
+export async function copyShareLink() {
+    const shareUrl = new URL(window.location.href);
+    shareUrl.searchParams.set('share', '1');
+    const url = shareUrl.toString();
+    let copied = false;
+
+    if (globalThis.navigator?.clipboard && typeof navigator.clipboard.writeText === 'function') {
+        try {
+            await navigator.clipboard.writeText(url);
+            copied = true;
+        } catch {
+            copied = false;
+        }
+    }
+    if (!copied) copied = copyWithExecCommand(url);
+
+    showNotification(
+        copied ? 'Link copied to clipboard!' : 'Unable to copy link. Copy the address from your browser.',
+        copied ? 'success' : 'warning'
+    );
+    return copied;
 }
 
 /**

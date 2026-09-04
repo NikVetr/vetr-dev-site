@@ -10,11 +10,18 @@ import {
     updateItem,
     updateIntervalTime,
     reorderItems,
+    stageItem,
     unstageItem,
     calculateIntervals,
     getExpectedVsActualData
 } from './state.js';
 import { formatTime, parseTime, addMinutes, debounce, parseDuration, formatDuration } from './utils.js';
+import {
+    applyItemColorStyles,
+    getItemColor,
+    openColorPicker,
+    parseItemColor
+} from './colors.js';
 
 let container = null;
 let draggedElement = null;
@@ -25,7 +32,27 @@ let lastIndicatorIndex = null; // Track last indicator position to avoid showing
 let notesModal = null;
 let modalTitle = null;
 let editorTextarea = null;
+let contextTextarea = null;
+let prepTextarea = null;
 let currentEditingItem = null;
+let notesReturnFocus = null;
+
+function focusAfterModalTransition(modalElement, resolveTarget) {
+    const focusTarget = () => {
+        if (!modalElement.classList.contains('visible')) return;
+        resolveTarget()?.focus({ preventScroll: true });
+    };
+    if (getComputedStyle(modalElement).visibility === 'visible') {
+        setTimeout(focusTarget, 0);
+        return;
+    }
+    const onTransitionEnd = event => {
+        if (event.target !== modalElement) return;
+        modalElement.removeEventListener('transitionend', onTransitionEnd);
+        focusTarget();
+    };
+    modalElement.addEventListener('transitionend', onTransitionEnd);
+}
 
 function setGlobalDragCursor(active) {
     const value = active ? 'grabbing' : '';
@@ -44,6 +71,8 @@ export function initAgenda(containerElement) {
     notesModal = document.getElementById('notes-modal');
     modalTitle = document.getElementById('modal-title');
     editorTextarea = document.getElementById('editor-textarea');
+    contextTextarea = document.getElementById('editor-context');
+    prepTextarea = document.getElementById('editor-prep');
 
     // Set up modal event listeners
     setupModalListeners();
@@ -65,7 +94,7 @@ function setupModalListeners() {
     const closeBtn = document.getElementById('modal-close');
     const cancelBtn = document.getElementById('modal-cancel');
     const saveBtn = document.getElementById('modal-save');
-    const toolbar = document.querySelector('.editor-toolbar');
+    const toolbar = notesModal?.querySelector('.editor-toolbar');
 
     if (closeBtn) {
         closeBtn.addEventListener('click', closeNotesModal);
@@ -114,12 +143,47 @@ function setupModalListeners() {
                     saveNotes();
                 }
             }
-            // Escape to close
-            if (e.key === 'Escape') {
-                closeNotesModal();
-            }
         });
     }
+
+    document.addEventListener('keydown', handleNotesModalKeydown);
+}
+
+function getModalFocusableElements(modalElement) {
+    return [...modalElement.querySelectorAll(
+        'button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'
+    )].filter(element => element.getClientRects().length > 0 && element.getAttribute('aria-hidden') !== 'true');
+}
+
+function handleNotesModalKeydown(event) {
+    if (!notesModal?.classList.contains('visible')) return;
+    if (event.key === 'Escape') {
+        event.preventDefault();
+        closeNotesModal();
+        return;
+    }
+    if (event.key !== 'Tab') return;
+
+    const focusable = getModalFocusableElements(notesModal);
+    if (focusable.length === 0) {
+        event.preventDefault();
+        return;
+    }
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && (document.activeElement === first || !notesModal.contains(document.activeElement))) {
+        event.preventDefault();
+        last.focus();
+    } else if (!event.shiftKey && (document.activeElement === last || !notesModal.contains(document.activeElement))) {
+        event.preventDefault();
+        first.focus();
+    }
+}
+
+function findAgendaRowControl(itemId, selector) {
+    return [...(container?.querySelectorAll('.agenda-row') || [])]
+        .find(row => row.dataset.id === itemId)
+        ?.querySelector(selector) || null;
 }
 
 /**
@@ -190,15 +254,19 @@ function handleToolbarAction(action) {
  * Open the notes modal for an item
  * @param {Object} item - Item to edit notes for
  */
-export function openNotesModal(item) {
-    if (!notesModal || !editorTextarea || !modalTitle) return;
+export function openNotesModal(item, trigger = document.activeElement) {
+    if (!notesModal || !editorTextarea || !contextTextarea || !prepTextarea || !modalTitle) return;
 
     currentEditingItem = item;
-    modalTitle.textContent = `Notes: ${item.name}`;
+    notesReturnFocus = trigger instanceof HTMLElement ? trigger : null;
+    modalTitle.textContent = `Item details: ${item.name}`;
+    contextTextarea.value = item.context || '';
     editorTextarea.value = item.notes || '';
+    prepTextarea.value = item.prep || '';
 
     notesModal.classList.add('visible');
-    editorTextarea.focus();
+    notesModal.setAttribute('aria-hidden', 'false');
+    focusAfterModalTransition(notesModal, () => editorTextarea);
 }
 
 /**
@@ -207,17 +275,32 @@ export function openNotesModal(item) {
 function closeNotesModal() {
     if (!notesModal) return;
 
+    const itemId = currentEditingItem?.id;
+    const returnFocus = notesReturnFocus;
     notesModal.classList.remove('visible');
+    notesModal.setAttribute('aria-hidden', 'true');
     currentEditingItem = null;
+    notesReturnFocus = null;
+
+    requestAnimationFrame(() => {
+        const focusTarget = returnFocus?.isConnected
+            ? returnFocus
+            : findAgendaRowControl(itemId, '[data-action="notes"]');
+        focusTarget?.focus({ preventScroll: true });
+    });
 }
 
 /**
  * Save notes from modal
  */
 function saveNotes() {
-    if (!currentEditingItem || !editorTextarea) return;
+    if (!currentEditingItem || !editorTextarea || !contextTextarea || !prepTextarea) return;
 
-    updateItem(currentEditingItem.id, { notes: editorTextarea.value });
+    updateItem(currentEditingItem.id, {
+        context: contextTextarea.value,
+        notes: editorTextarea.value,
+        prep: prepTextarea.value
+    });
     closeNotesModal();
 }
 
@@ -382,7 +465,7 @@ export function renderAgenda(state) {
             ?.querySelector(`input[data-field="${activeInputState.field}"]`);
         if (restored) {
             restored.focus({ preventScroll: true });
-            if (typeof restored.setSelectionRange === 'function') {
+            if (['text', 'search', 'tel', 'url', 'password'].includes(restored.type)) {
                 restored.setSelectionRange(activeInputState.selectionStart, activeInputState.selectionEnd);
             }
         }
@@ -405,8 +488,8 @@ function renderAgendaHeader(varianceMode) {
             <div class="header-split"><span class="header-main">Time</span><span class="header-sub">Expected</span></div>
             <div class="header-split"><span class="header-main">Time</span><span class="header-sub">Actual</span></div>
             <div class="header-split"><span class="header-main">Difference</span><span class="header-sub">Actual-Expected</span></div>
-            <div data-tooltip="Lock duration (won't adjust when running late)">&#128274;</div>
-            <div data-tooltip="Item notes">&#128221;</div>
+            <div><button type="button" class="bulk-column-button" data-bulk-field="locked" data-tooltip="Bulk edit locked items" aria-label="Bulk edit Locked">&#128274;</button></div>
+            <div><button type="button" class="bulk-column-button" data-bulk-field="notes" data-tooltip="Bulk edit item notes" aria-label="Bulk edit Notes">&#128221;</button></div>
             <div></div>
         `;
         return;
@@ -419,8 +502,8 @@ function renderAgendaHeader(varianceMode) {
         <div><button type="button" class="bulk-column-button" data-bulk-field="themeColor">Color</button></div>
         <div><button type="button" class="bulk-column-button" data-bulk-field="duration">Duration</button></div>
         <div>Time</div>
-        <div data-tooltip="Lock duration (won't adjust when running late)">&#128274;</div>
-        <div data-tooltip="Item notes">&#128221;</div>
+        <div><button type="button" class="bulk-column-button" data-bulk-field="locked" data-tooltip="Bulk edit locked items" aria-label="Bulk edit Locked">&#128274;</button></div>
+        <div><button type="button" class="bulk-column-button" data-bulk-field="notes" data-tooltip="Bulk edit item notes" aria-label="Bulk edit Notes">&#128221;</button></div>
         <div></div>
     `;
 }
@@ -434,6 +517,7 @@ function renderAgendaHeader(varianceMode) {
 function createAgendaRow(item, index, varianceMode, varianceRow) {
     const row = document.createElement('div');
     row.className = `agenda-grid agenda-row theme-${item.themeNumber}`;
+    applyItemColorStyles(row, item);
     if (varianceMode) {
         row.classList.add('variance-grid');
     }
@@ -442,10 +526,13 @@ function createAgendaRow(item, index, varianceMode, varianceRow) {
     row.dataset.index = index;
 
     // Grip handle
-    const grip = document.createElement('div');
+    const grip = document.createElement('button');
+    grip.type = 'button';
     grip.className = 'grip';
     grip.innerHTML = '&#8942;&#8942;';
     grip.setAttribute('data-tooltip', 'Drag to reorder this agenda item');
+    grip.setAttribute('aria-label', `Reorder ${item.name}; use the up and down arrow keys`);
+    grip.setAttribute('aria-keyshortcuts', 'ArrowUp ArrowDown');
 
     // Name input
     const nameInput = document.createElement('input');
@@ -454,6 +541,7 @@ function createAgendaRow(item, index, varianceMode, varianceRow) {
     nameInput.dataset.field = 'name';
     nameInput.placeholder = 'Item name';
     nameInput.setAttribute('data-tooltip', 'Enter the agenda item title');
+    nameInput.setAttribute('aria-label', `Agenda item name: ${item.name}`);
 
     // Lead input
     const leadInput = document.createElement('input');
@@ -462,15 +550,21 @@ function createAgendaRow(item, index, varianceMode, varianceRow) {
     leadInput.dataset.field = 'lead';
     leadInput.placeholder = 'Lead';
     leadInput.setAttribute('data-tooltip', 'Who is leading this agenda item');
+    leadInput.setAttribute('aria-label', `Lead for ${item.name}`);
 
-    const themeColors = ['#2196f3', '#9c27b0', '#4caf50', '#ff9800', '#e91e63', '#009688', '#795548', '#607d8b'];
-    const colorInput = document.createElement('input');
-    colorInput.type = 'color';
-    colorInput.className = 'agenda-color-input';
-    colorInput.value = themeColors[(item.themeNumber || 1) - 1] || themeColors[0];
-    colorInput.dataset.field = 'themeColor';
-    colorInput.setAttribute('aria-label', `Color for ${item.name}`);
-    colorInput.setAttribute('data-tooltip', 'Choose an item color; lightness is normalized to match the agenda palette');
+    const colorButton = document.createElement('button');
+    colorButton.type = 'button';
+    colorButton.className = 'agenda-color-button';
+    colorButton.dataset.field = 'themeColor';
+    const itemColor = getItemColor(item, index);
+    colorButton.setAttribute('aria-label', `Choose color for ${item.name}; current color ${itemColor}`);
+    colorButton.setAttribute('aria-haspopup', 'dialog');
+    colorButton.setAttribute('data-tooltip', 'Choose a custom item hue and saturation');
+    const colorSwatch = document.createElement('span');
+    colorSwatch.className = 'agenda-color-swatch';
+    colorSwatch.style.backgroundColor = itemColor;
+    colorSwatch.setAttribute('aria-hidden', 'true');
+    colorButton.appendChild(colorSwatch);
 
     // Duration input with time spinner
     const durationWrapper = document.createElement('div');
@@ -482,13 +576,21 @@ function createAgendaRow(item, index, varianceMode, varianceRow) {
     durationInput.dataset.field = 'duration';
     durationInput.placeholder = '10m';
     durationInput.setAttribute('data-tooltip', 'Duration (e.g., 5m, 1h) - scroll to adjust');
+    durationInput.setAttribute('aria-label', `Duration for ${item.name}`);
 
     const durationSpinner = document.createElement('div');
     durationSpinner.className = 'time-spinner';
-    durationSpinner.innerHTML = `
-        <button data-action="duration-up">&#9650;</button>
-        <button data-action="duration-down">&#9660;</button>
-    `;
+    const durationUp = document.createElement('button');
+    durationUp.type = 'button';
+    durationUp.dataset.action = 'duration-up';
+    durationUp.innerHTML = '&#9650;';
+    durationUp.setAttribute('aria-label', `Increase duration for ${item.name}`);
+    const durationDown = document.createElement('button');
+    durationDown.type = 'button';
+    durationDown.dataset.action = 'duration-down';
+    durationDown.innerHTML = '&#9660;';
+    durationDown.setAttribute('aria-label', `Decrease duration for ${item.name}`);
+    durationSpinner.append(durationUp, durationDown);
 
     durationWrapper.appendChild(durationInput);
     durationWrapper.appendChild(durationSpinner);
@@ -504,6 +606,7 @@ function createAgendaRow(item, index, varianceMode, varianceRow) {
     startBtn.dataset.position = 'start';
     startBtn.dataset.index = index.toString();
     startBtn.setAttribute('data-tooltip', 'Click to change start time');
+    startBtn.setAttribute('aria-label', `Change start time for ${item.name}, currently ${startBtn.textContent}`);
 
     const separator = document.createElement('span');
     separator.className = 'interval-separator';
@@ -516,6 +619,7 @@ function createAgendaRow(item, index, varianceMode, varianceRow) {
     endBtn.dataset.position = 'end';
     endBtn.dataset.index = index.toString();
     endBtn.setAttribute('data-tooltip', 'Click to change end time');
+    endBtn.setAttribute('aria-label', `Change end time for ${item.name}, currently ${endBtn.textContent}`);
 
     intervalSpan.appendChild(startBtn);
     intervalSpan.appendChild(separator);
@@ -565,26 +669,43 @@ function createAgendaRow(item, index, varianceMode, varianceRow) {
     lockCheckbox.checked = item.locked;
     lockCheckbox.dataset.field = 'locked';
     lockCheckbox.setAttribute('data-tooltip', 'Lock this item\'s duration (won\'t shrink/stretch when running late)');
+    lockCheckbox.setAttribute('aria-label', `Lock duration for ${item.name}`);
 
     // Notes button
     const notesBtn = document.createElement('button');
+    notesBtn.type = 'button';
     notesBtn.className = 'btn-icon';
     notesBtn.innerHTML = '&#128221;';
     notesBtn.dataset.action = 'notes';
     notesBtn.setAttribute('data-tooltip', 'Click to edit notes for this item');
+    notesBtn.setAttribute('aria-label', `Edit notes for ${item.name}`);
+
+    const stageBtn = document.createElement('button');
+    stageBtn.type = 'button';
+    stageBtn.className = 'btn-stage';
+    stageBtn.textContent = '↓';
+    stageBtn.dataset.action = 'stage';
+    stageBtn.setAttribute('aria-label', `Move ${item.name} to staging`);
+    stageBtn.setAttribute('data-tooltip', 'Move this item to staging');
 
     // Delete button
     const deleteBtn = document.createElement('button');
+    deleteBtn.type = 'button';
     deleteBtn.className = 'btn-delete';
     deleteBtn.innerHTML = '&times;';
     deleteBtn.dataset.action = 'delete';
     deleteBtn.setAttribute('data-tooltip', 'Remove this agenda item');
+    deleteBtn.setAttribute('aria-label', `Delete ${item.name}`);
+
+    const rowActions = document.createElement('div');
+    rowActions.className = 'agenda-row-actions';
+    rowActions.append(stageBtn, deleteBtn);
 
     // Append all elements
     row.appendChild(grip);
     row.appendChild(nameInput);
     row.appendChild(leadInput);
-    row.appendChild(colorInput);
+    row.appendChild(colorButton);
     if (varianceMode) {
         row.appendChild(expectedDurationCell);
         row.appendChild(durationWrapper);
@@ -597,7 +718,7 @@ function createAgendaRow(item, index, varianceMode, varianceRow) {
     }
     row.appendChild(lockCheckbox);
     row.appendChild(notesBtn);
-    row.appendChild(deleteBtn);
+    row.appendChild(rowActions);
 
     // Add event listeners
     setupRowEventListeners(row, item);
@@ -636,36 +757,21 @@ function setupRowEventListeners(row, item) {
         }
     });
 
-    const colorInput = row.querySelector('.agenda-color-input');
-    if (colorInput) {
-        const palette = ['#2196f3', '#9c27b0', '#4caf50', '#ff9800', '#e91e63', '#009688', '#795548', '#607d8b'];
-        const hexToRgb = hex => [1, 3, 5].map(offset => parseInt(hex.slice(offset, offset + 2), 16));
-        const closestTheme = hex => {
-            const rgb = hexToRgb(hex);
-            let bestIndex = 0;
-            let bestDistance = Infinity;
-            palette.forEach((color, index) => {
-                const candidate = hexToRgb(color);
-                const distance = candidate.reduce((sum, value, channel) => sum + ((value - rgb[channel]) ** 2), 0);
-                if (distance < bestDistance) {
-                    bestDistance = distance;
-                    bestIndex = index;
+    const colorButton = row.querySelector('.agenda-color-button');
+    if (colorButton) {
+        colorButton.addEventListener('click', () => {
+            openColorPicker({
+                color: getItemColor(item),
+                itemName: item.name,
+                trigger: colorButton,
+                onApply: selectedColor => {
+                    updateItem(item.id, parseItemColor(selectedColor));
+                    requestAnimationFrame(() => {
+                        findAgendaRowControl(item.id, '.agenda-color-button')?.focus({ preventScroll: true });
+                    });
                 }
             });
-            return bestIndex + 1;
-        };
-        const previewColor = () => {
-            const themeColor = closestTheme(colorInput.value);
-            row.className = row.className.replace(/theme-\d+/, `theme-${themeColor}`);
-            return themeColor;
-        };
-        const applyColor = () => {
-            const themeColor = previewColor();
-            colorInput.value = palette[themeColor - 1];
-            updateItem(item.id, { themeColor });
-        };
-        colorInput.addEventListener('input', previewColor);
-        colorInput.addEventListener('change', applyColor);
+        });
     }
 
     // Duration spinner buttons
@@ -678,6 +784,9 @@ function setupRowEventListeners(row, item) {
             } else if (action === 'duration-down') {
                 adjustDuration(item, -5);
             }
+            requestAnimationFrame(() => {
+                findAgendaRowControl(item.id, `[data-action="${action}"]`)?.focus({ preventScroll: true });
+            });
         });
     });
 
@@ -693,10 +802,37 @@ function setupRowEventListeners(row, item) {
             const action = btn.dataset.action;
 
             if (action === 'delete') {
+                const currentItems = getState().items;
+                const currentIndex = currentItems.findIndex(entry => entry.id === item.id);
+                const nextFocusId = currentItems[currentIndex + 1]?.id || currentItems[currentIndex - 1]?.id;
                 deleteItem(item.id);
+                requestAnimationFrame(() => {
+                    if (nextFocusId) {
+                        findAgendaRowControl(nextFocusId, '[data-action="delete"]')?.focus({ preventScroll: true });
+                    } else {
+                        document.getElementById('btn-add-item')?.focus({ preventScroll: true });
+                    }
+                });
+            } else if (action === 'stage') {
+                stageItem(item.id);
+                requestAnimationFrame(() => {
+                    document.querySelector(`.staging-item[data-id="${CSS.escape(item.id)}"] [data-action="return"]`)?.focus({ preventScroll: true });
+                });
             } else if (action === 'notes') {
-                openNotesModal(item);
+                openNotesModal(item, btn);
             }
+        });
+    });
+
+    row.querySelector('.grip')?.addEventListener('keydown', event => {
+        if (!['ArrowUp', 'ArrowDown'].includes(event.key)) return;
+        event.preventDefault();
+        const items = getState().items;
+        const fromIndex = items.findIndex(entry => entry.id === item.id);
+        const toIndex = fromIndex + (event.key === 'ArrowUp' ? -1 : 1);
+        if (toIndex < 0 || toIndex >= items.length || !reorderItems(fromIndex, toIndex)) return;
+        requestAnimationFrame(() => {
+            container.querySelector(`.agenda-row[data-id="${CSS.escape(item.id)}"] .grip`)?.focus();
         });
     });
 
@@ -710,6 +846,10 @@ function setupRowEventListeners(row, item) {
             e.preventDefault();
             const delta = e.deltaY < 0 ? 5 : -5;
             adjustIntervalTimeByDelta(btn, delta);
+            requestAnimationFrame(() => {
+                const position = btn.dataset.position || 'start';
+                findAgendaRowControl(item.id, `.interval-time-btn[data-position="${position}"]`)?.focus({ preventScroll: true });
+            });
         });
     });
 
@@ -727,6 +867,7 @@ function openIntervalTimeEditor(button) {
     if (!button) return;
     const position = button.dataset.position || 'start';
     const index = parseInt(button.dataset.index || '0', 10);
+    const itemId = button.closest('.agenda-row')?.dataset.id;
 
     const intervals = calculateIntervals();
     const interval = intervals[index];
@@ -758,6 +899,11 @@ function openIntervalTimeEditor(button) {
         if (parsed && !Number.isNaN(parsed.getTime())) {
             updateIntervalTime(index, position, parsed);
         }
+        requestAnimationFrame(() => {
+            if (itemId) {
+                findAgendaRowControl(itemId, `.interval-time-btn[data-position="${position}"]`)?.focus({ preventScroll: true });
+            }
+        });
     };
 
     input.addEventListener('blur', commit);

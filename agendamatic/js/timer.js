@@ -19,8 +19,15 @@ import {
     beginHistoryTransaction,
     endHistoryTransaction
 } from './state.js';
-import { formatTime, getMinutesDiff, clamp, parseDuration, formatDuration, renderMarkdownToHtml } from './utils.js';
+import { formatTime, getMinutesDiff, clamp, parseDuration, parseTime, formatDuration, renderMarkdownToHtml } from './utils.js';
 import { processAlertTick } from './alerts.js';
+import {
+    applyItemColorStyles,
+    clearItemColorStyles,
+    colorRgb,
+    getItemAccentColor,
+    getItemColor
+} from './colors.js';
 
 let timelineTrack = null;
 let timelineAxis = null;
@@ -36,6 +43,27 @@ let activeItemGlow = null;
 let tickerTape = null;
 let tickInterval = null;
 let popoutResizeTimeout = null;
+
+const KEYBOARD_CONTROL_SELECTOR = [
+    'input',
+    'textarea',
+    'select',
+    'button',
+    'a[href]',
+    'summary',
+    '[contenteditable]:not([contenteditable="false"])',
+    '[role="button"]',
+    '[role="checkbox"]',
+    '[role="radio"]',
+    '[role="switch"]',
+    '[role="slider"]',
+    '[role="textbox"]',
+    '[tabindex]:not([tabindex="-1"])'
+].join(',');
+
+function isKeyboardControl(target, view = window) {
+    return target instanceof view.HTMLElement && !!target.closest(KEYBOARD_CONTROL_SELECTOR);
+}
 let popoutTrackerSignature = null;
 let popoutOverallSignature = null;
 let popoutCurrentSignature = null;
@@ -139,10 +167,7 @@ export function initTimer(elements) {
     setupTrackerDragDrop();
 
     document.addEventListener('keydown', (e) => {
-        const target = e.target;
-        const isEditable = target instanceof HTMLElement &&
-            (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable);
-        if (isEditable) return;
+        if (isKeyboardControl(e.target)) return;
         const isSpace = e.code === 'Space' || e.key === ' ' || e.key === 'Spacebar';
         if (isSpace && !e.repeat) {
             e.preventDefault();
@@ -182,11 +207,25 @@ export function initTimer(elements) {
 function onStateChange(state) {
     renderTimeline();
     renderAxisTicks();
+    updateCurrentTimeMarker();
     updateStatusDisplay();
     updateCurrentItemPanel();
     updateCurrentStatusPanel();
     updateProgressBar();
     updateButtonStates();
+}
+
+function getTrackerDisplayTime() {
+    const tracker = getState().tracker || {};
+    if (tracker.completedAt) {
+        const completedTime = new Date(tracker.completedAt);
+        if (!Number.isNaN(completedTime.getTime())) return completedTime;
+    }
+    if (!tracker.isRunning && tracker.pausedAt) {
+        const pausedTime = new Date(tracker.pausedAt);
+        if (!Number.isNaN(pausedTime.getTime())) return pausedTime;
+    }
+    return new Date();
 }
 
 function getLiveLayoutKey(adjusted) {
@@ -241,42 +280,84 @@ function stopTickInterval() {
 export function startTimer() {
     beginHistoryTransaction();
     let state = getState();
-    if (state.settings.syncSystemTime && !state.tracker.startedAt) {
-        const now = new Date();
+    if (state.tracker.completedAt) {
+        endHistoryTransaction();
+        return false;
+    }
+    const now = new Date();
+    const syncInitialStart = state.settings.syncSystemTime && !state.tracker.startedAt;
+    if (syncInitialStart) {
         updateSettings({
             startTime: `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`
         });
         state = getState();
     }
-    if (!state.tracker.expectedSnapshot) {
-        ensureExpectedSnapshot();
-    }
     const items = calculateIntervals();
+    if (items.length === 0) {
+        endHistoryTransaction();
+        updateButtonStates();
+        return false;
+    }
     const hasStartedBefore = !!state.tracker.startedAt;
+    const activeIdIndex = state.tracker.activeItemId
+        ? state.items.findIndex(item => item.id === String(state.tracker.activeItemId))
+        : -1;
     const activeItemIndex = hasStartedBefore
-        ? Math.max(0, Math.min(items.length - 1, state.tracker.activeItemIndex ?? 0))
+        ? (activeIdIndex >= 0
+            ? activeIdIndex
+            : Math.max(0, Math.min(items.length - 1, state.tracker.activeItemIndex ?? 0)))
         : 0;
+    let scheduledStartAt = state.tracker.scheduledStartAt
+        ? new Date(state.tracker.scheduledStartAt)
+        : (syncInitialStart ? new Date(now) : parseTime(state.settings.startTime));
+    if (Number.isNaN(scheduledStartAt.getTime())) scheduledStartAt = parseTime(state.settings.startTime);
+    let activeStartedAt = state.tracker.activeStartedAt
+        ? new Date(state.tracker.activeStartedAt)
+        : (syncInitialStart ? new Date(now) : (items[activeItemIndex]?.startTime || scheduledStartAt));
+    if (Number.isNaN(activeStartedAt.getTime())) activeStartedAt = items[activeItemIndex]?.startTime || scheduledStartAt;
+    let accumulatedPauseMs = Number(state.tracker.accumulatedPauseMs) || 0;
+    if (hasStartedBefore && state.tracker.pausedAt) {
+        const pausedAt = new Date(state.tracker.pausedAt);
+        if (!Number.isNaN(pausedAt.getTime())) {
+            const pauseMs = Math.max(0, now.getTime() - pausedAt.getTime());
+            scheduledStartAt = new Date(scheduledStartAt.getTime() + pauseMs);
+            activeStartedAt = new Date(activeStartedAt.getTime() + pauseMs);
+            accumulatedPauseMs += pauseMs;
+        }
+    }
+    if (!state.tracker.expectedSnapshot) {
+        ensureExpectedSnapshot(scheduledStartAt.toISOString());
+        state = getState();
+    }
     updateTracker({
         isRunning: true,
-        startedAt: state.tracker.startedAt || new Date().toISOString(),
+        startedAt: state.tracker.startedAt || now.toISOString(),
+        scheduledStartAt: scheduledStartAt.toISOString(),
         pausedAt: null,
+        accumulatedPauseMs,
         activeItemIndex: Math.max(0, activeItemIndex),
+        activeItemId: state.items[activeItemIndex]?.id || null,
+        activeStartedAt: activeStartedAt.toISOString(),
+        completedAt: null,
         completedDiffById: hasStartedBefore ? (state.tracker.completedDiffById || {}) : {},
         overallDeltaMinutes: hasStartedBefore ? (state.tracker.overallDeltaMinutes || 0) : 0
     });
     endHistoryTransaction();
     updateButtonStates();
+    return true;
 }
 
 /**
  * Stop/pause the timer
  */
 export function stopTimer() {
+    if (!getState().tracker.isRunning) return false;
     updateTracker({
         isRunning: false,
         pausedAt: new Date().toISOString()
     });
     updateButtonStates();
+    return true;
 }
 
 /**
@@ -286,8 +367,13 @@ export function resetTimer() {
     updateTracker({
         isRunning: false,
         startedAt: null,
+        scheduledStartAt: null,
         pausedAt: null,
+        accumulatedPauseMs: 0,
         activeItemIndex: 0,
+        activeItemId: null,
+        activeStartedAt: null,
+        completedAt: null,
         completedDiffById: {},
         overallDeltaMinutes: 0,
         expectedSnapshot: null,
@@ -307,9 +393,10 @@ function updateButtonStates() {
     if (startButton) {
         startButton.classList.toggle('active', isRunning);
         startButton.textContent = isRunning ? '▶ Running' : '▶ Start';
+        startButton.disabled = !!state.tracker.completedAt;
     }
     if (stopButton) {
-        stopButton.disabled = !isRunning && !state.tracker.startedAt;
+        stopButton.disabled = !isRunning;
     }
 }
 
@@ -545,7 +632,8 @@ function getTrackerStructureSignature() {
             id: block.dataset.id,
             className: block.className.replace(' label-overflow', ''),
             text: block.textContent,
-            glowRgb: block.dataset.glowRgb
+            glowRgb: block.dataset.glowRgb,
+            colorStyle: block.style.cssText
         }))
     });
 }
@@ -555,10 +643,10 @@ function getSemanticDomSignature(element) {
     const descendants = [...element.querySelectorAll('*')]
         .map(node => {
             const text = node.classList.contains('ticker-number') ? '#' : node.textContent;
-            return `${node.tagName}.${node.className}:${node.childElementCount ? '' : text}`;
+            return `${node.tagName}.${node.className}[${node.style.cssText}]:${node.childElementCount ? '' : text}`;
         })
         .join('|');
-    return `${element.tagName}.${element.className}|${descendants}`;
+    return `${element.tagName}.${element.className}[${element.style.cssText}]|${descendants}`;
 }
 
 function syncPopoutTicker(sourceTape, targetTape) {
@@ -651,11 +739,15 @@ function syncPopoutDynamicTracker(trackerHost) {
     if (sourceBlocks.length === targetBlocks.length) {
         sourceBlocks.forEach((sourceBlock, index) => {
             const targetBlock = targetBlocks[index];
-            if (targetBlock.style.width !== sourceBlock.style.width) {
+            if (
+                targetBlock.style.left !== sourceBlock.style.left ||
+                targetBlock.style.width !== sourceBlock.style.width
+            ) {
+                targetBlock.style.left = sourceBlock.style.left;
                 targetBlock.style.width = sourceBlock.style.width;
-                targetBlock.title = sourceBlock.title;
                 blockGeometryChanged = true;
             }
+            targetBlock.title = sourceBlock.title;
         });
     }
 
@@ -714,12 +806,14 @@ function syncPopoutStatusPanel(source, host, selectors) {
     }
 
     target.className = source.className;
+    target.style.cssText = source.style.cssText;
     let changed = false;
     selectors.forEach(selector => {
         const sourceNode = source.querySelector(selector);
         const targetNode = target.querySelector(selector);
         if (!sourceNode || !targetNode) return;
         targetNode.className = sourceNode.className;
+        targetNode.style.cssText = sourceNode.style.cssText;
         if (targetNode.innerHTML !== sourceNode.innerHTML) {
             targetNode.innerHTML = sourceNode.innerHTML;
             changed = true;
@@ -752,14 +846,14 @@ function openTrackerPopout() {
   <link rel="stylesheet" href="css/styles.css">
   <style>
     * { box-sizing: border-box; }
-    body { margin: 0; padding: 10px; background: #f7f7f7; font-family: 'Courier New', monospace; overflow: auto; }
+    body { display: block; grid-template-columns: none; width: 100%; min-height: 100vh; margin: 0; padding: 10px; background: var(--bg-secondary); color: var(--text-color); font-family: 'Courier New', monospace; overflow: auto; }
     .popout-layout { display: grid; grid-template-columns: minmax(520px, 3fr) minmax(210px, 1fr) minmax(240px, 1fr); grid-template-rows: minmax(220px, 1fr) 118px; gap: 10px; width: 100%; min-width: 990px; min-height: 390px; height: calc(100vh - 20px); }
-    .popout-pane { border: 2px solid #333; border-radius: 4px; background: #fff; min-width: 0; display: flex; flex-direction: column; overflow: hidden; }
+    .popout-pane { border: 2px solid var(--border-color); border-radius: 4px; background: var(--bg-color); min-width: 0; display: flex; flex-direction: column; overflow: hidden; }
     .popout-tracker-pane { grid-column: 1; grid-row: 1 / 3; }
     .popout-overall-pane { grid-column: 2; grid-row: 1; }
     .popout-current-pane { grid-column: 3; grid-row: 1; }
     .popout-control-pane { grid-column: 2 / 4; grid-row: 2; min-height: 118px; }
-    .popout-pane h3 { margin: 0; padding: 8px 10px; border-bottom: 1px solid #ddd; font-size: 0.85rem; text-transform: uppercase; }
+    .popout-pane h3 { margin: 0; padding: 8px 10px; border-bottom: 1px solid var(--border-color); font-size: 0.85rem; text-transform: uppercase; }
     .popout-content { position: relative; padding: 8px; min-height: 0; min-width: 0; flex: 1; overflow: auto; }
     .popout-tracker-pane .popout-content { overflow: hidden; }
     .popout-content .timeline-header { display: none; }
@@ -775,12 +869,12 @@ function openTrackerPopout() {
     .popout-content .current-status-next { font-size: 0.72rem; margin-top: 1px; }
     .popout-controls-wrap { flex: 1; min-height: 0; padding: 8px; }
     .popout-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; height: 100%; }
-    .popout-action { min-width: 0; border: 2px solid #555; border-radius: 6px; font: inherit; font-weight: 800; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 8px 14px; }
+    .popout-action { min-width: 0; border: 2px solid var(--border-color); border-radius: 6px; background: var(--bg-color); color: var(--text-color); font: inherit; font-weight: 800; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 8px 14px; }
     .popout-action-prev { background: rgba(52, 152, 219, 0.12); }
     .popout-action-next { background: rgba(231, 76, 60, 0.12); }
     .popout-action:hover { filter: brightness(0.96); }
     .popout-action:disabled { opacity: 0.6; cursor: not-allowed; }
-    .popout-action kbd { border: 1px solid #777; border-radius: 5px; background: #fff; color: #555; padding: 3px 8px; font: 0.68rem 'Courier New', monospace; font-weight: 400; }
+    .popout-action kbd { border: 1px solid var(--border-color); border-radius: 5px; background: var(--bg-color); color: var(--text-muted); padding: 3px 8px; font: 0.68rem 'Courier New', monospace; font-weight: 400; }
   </style>
 </head>
 <body>
@@ -807,6 +901,7 @@ function openTrackerPopout() {
 </body>
 </html>`);
     popoutWindow.document.close();
+    syncPopoutAppearance(popoutWindow.document);
     popoutWindow.addEventListener('beforeunload', cleanupPopoutWindow);
 
     const popoutPrev = popoutWindow.document.getElementById('btn-popout-prev');
@@ -818,10 +913,7 @@ function openTrackerPopout() {
         popoutNext.addEventListener('click', triggerAdvanceToNextItem);
     }
     popoutWindow.addEventListener('keydown', (e) => {
-        const target = e.target;
-        const isEditable = target instanceof popoutWindow.HTMLElement &&
-            (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable);
-        if (isEditable) return;
+        if (isKeyboardControl(e.target, popoutWindow)) return;
         const isSpace = e.code === 'Space' || e.key === ' ' || e.key === 'Spacebar';
         if (isSpace && !e.repeat) {
             e.preventDefault();
@@ -848,6 +940,17 @@ function openTrackerPopout() {
     }
 }
 
+function syncPopoutAppearance(doc) {
+    if (!doc?.documentElement) return;
+    const settings = getState().settings || {};
+    if (settings.darkMode) {
+        doc.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+        doc.documentElement.removeAttribute('data-theme');
+    }
+    doc.documentElement.setAttribute('data-density', settings.density || 'comfortable');
+}
+
 function syncPopoutWindow() {
     if (!popoutWindow || popoutWindow.closed) {
         cleanupPopoutWindow();
@@ -856,6 +959,7 @@ function syncPopoutWindow() {
 
     const doc = popoutWindow.document;
     if (doc.readyState !== 'complete') return;
+    syncPopoutAppearance(doc);
     const trackerHost = doc.getElementById('popout-tracker');
     const overallHost = doc.getElementById('popout-overall');
     const currentHost = doc.getElementById('popout-current');
@@ -959,20 +1063,21 @@ function getTimelineBlockData(items) {
     const totalMinutes = (
         items[items.length - 1].endTime.getTime() - items[0].startTime.getTime()
     ) / 60000;
-    let runningPosition = 0;
-
     return items.map(item => {
         const duration = (item.endTime.getTime() - item.startTime.getTime()) / 60000;
         const widthPercent = totalMinutes > 0 ? (duration / totalMinutes) * 100 : 0;
-        const block = {
+        const startPercent = totalMinutes > 0
+            ? ((item.startTime.getTime() - items[0].startTime.getTime()) / 60000 / totalMinutes) * 100
+            : 0;
+        return {
             name: item.name,
             themeNumber: item.themeNumber,
-            startPercent: runningPosition,
+            themeColor: item.themeColor,
+            customColor: item.customColor,
+            startPercent,
             widthPercent,
-            centerPercent: runningPosition + widthPercent / 2
+            centerPercent: startPercent + widthPercent / 2
         };
-        runningPosition += widthPercent;
-        return block;
     });
 }
 
@@ -983,7 +1088,7 @@ function renderTimeline() {
     const items = adjusted.items;
     lastLiveLayoutKey = getLiveLayoutKey(adjusted);
     if (items.length === 0) {
-        timelineTrack.innerHTML = '<div class="timeline-block" style="width: 100%; background: #ddd;">No items</div>';
+        timelineTrack.innerHTML = '<div class="timeline-block" style="left: 0; width: 100%; background: #ddd;">No items</div>';
         if (activeItemGlow) activeItemGlow.style.display = 'none';
         if (overflowLabelsContainer) {
             overflowLabelsContainer.innerHTML = '';
@@ -1016,12 +1121,14 @@ function renderTimeline() {
 
         const block = document.createElement('div');
         block.className = `timeline-block block-${item.themeNumber}`;
+        block.style.left = `${blockData[index].startPercent}%`;
         block.style.width = `${widthPercent}%`;
         block.textContent = item.name;
         block.title = `${item.name} (${formatTime(item.startTime)} - ${formatTime(item.endTime)})`;
         block.dataset.index = index;
         block.dataset.id = item.id;
         block.draggable = true;
+        const hasCustomColor = applyItemColorStyles(block, item);
         const outlineColors = {
             1: '#2196f3',
             2: '#9c27b0',
@@ -1032,20 +1139,12 @@ function renderTimeline() {
             7: '#795548',
             8: '#607d8b'
         };
-        block.style.setProperty('--block-outline', outlineColors[item.themeNumber] || '#666');
-        const glowColors = {
-            1: '33 150 243',
-            2: '156 39 176',
-            3: '76 175 80',
-            4: '255 152 0',
-            5: '233 30 99',
-            6: '0 150 136',
-            7: '121 85 72',
-            8: '96 125 139'
-        };
-        block.dataset.glowRgb = glowColors[item.themeNumber] || '102 102 102';
+        if (!hasCustomColor) {
+            block.style.setProperty('--block-outline', outlineColors[item.themeNumber] || '#666');
+        }
+        block.dataset.glowRgb = colorRgb(getItemColor(item, index));
 
-        if (index < currentItemIndex) {
+        if (getState().tracker.completedAt || index < currentItemIndex) {
             block.classList.add('completed');
         } else if (index === currentItemIndex) {
             block.classList.add('active');
@@ -1217,6 +1316,7 @@ function renderOverflowLabels(
     const labels = overflowItems.map(item => {
         const label = ownerDocument.createElement('div');
         label.className = `overflow-label theme-text-${item.themeNumber}${item.completed ? ' completed' : ''}`;
+        applyItemColorStyles(label, item);
         label.textContent = item.name;
         labelsContainer.appendChild(label);
         return label;
@@ -1251,17 +1351,8 @@ function renderOverflowLabels(
             // Anchor just above the label to avoid colored strokes intruding on text.
             const endY = Math.max(0, labelTop - 2);
 
-            const colors = {
-                1: '#2196f3',
-                2: '#9c27b0',
-                3: '#4caf50',
-                4: '#ff9800',
-                5: '#e91e63',
-                6: '#009688',
-                7: '#795548',
-                8: '#607d8b'
-            };
-            const strokeColor = colors[item.themeNumber] || '#666';
+            const darkMode = ownerDocument.documentElement.dataset.theme === 'dark';
+            const strokeColor = getItemAccentColor(item, item.index, darkMode);
 
             const path = ownerDocument.createElementNS('http://www.w3.org/2000/svg', 'path');
             path.setAttribute('d', getVerticalConnectorPath(startX, startY, endX, endY));
@@ -1433,40 +1524,27 @@ function boundedIsotonicRegression(values, lower, upper) {
     return out;
 }
 
-function getThemeStrokeColor(themeNumber) {
-    const colors = {
-        1: '#2196f3',
-        2: '#9c27b0',
-        3: '#4caf50',
-        4: '#ff9800',
-        5: '#e91e63',
-        6: '#009688',
-        7: '#795548',
-        8: '#607d8b'
-    };
-    return colors[themeNumber] || '#555';
-}
-
 function getFollowingItemColor(items, boundaryTime) {
     if (!items || items.length === 0) return '#222';
     const boundaryMs = boundaryTime.getTime();
     const toleranceMs = 30000;
+    const darkMode = document.documentElement.dataset.theme === 'dark';
 
     if (boundaryMs <= items[0].startTime.getTime() + toleranceMs) {
-        return getThemeStrokeColor(items[0].themeNumber);
+        return getItemAccentColor(items[0], 0, darkMode);
     }
 
     for (let i = 0; i < items.length - 1; i += 1) {
         const boundary = items[i].endTime.getTime();
         if (Math.abs(boundaryMs - boundary) <= toleranceMs) {
-            return getThemeStrokeColor(items[i + 1].themeNumber);
+            return getItemAccentColor(items[i + 1], i + 1, darkMode);
         }
         if (boundaryMs < boundary) {
-            return getThemeStrokeColor(items[i].themeNumber);
+            return getItemAccentColor(items[i], i, darkMode);
         }
     }
 
-    return getThemeStrokeColor(items[items.length - 1].themeNumber);
+    return getItemAccentColor(items[items.length - 1], items.length - 1, darkMode);
 }
 
 function getMinorLabelInterval(totalMinutes) {
@@ -1692,7 +1770,7 @@ function updateCurrentTimeMarker() {
     }
 
     const state = getState();
-    const now = new Date();
+    const now = getTrackerDisplayTime();
     const firstStart = items[0].startTime;
     const lastEnd = items[items.length - 1].endTime;
     const totalMinutes = getMinutesDiff(firstStart, lastEnd);
@@ -1944,7 +2022,7 @@ function updateCurrentItemPanel() {
     let currentItem = null;
     if (currentItemIndex >= 0 && currentItemIndex < items.length) {
         currentItem = items[currentItemIndex];
-    } else if (items.length > 0) {
+    } else if (items.length > 0 && !getState().tracker.completedAt) {
         // Before meeting starts, show first item
         currentItem = items[0];
     }
@@ -1952,9 +2030,10 @@ function updateCurrentItemPanel() {
     if (currentItem) {
         // Update theme class on the panel
         currentItemPanel.className = `box current-item-box theme-${currentItem.themeNumber}`;
+        applyItemColorStyles(currentItemPanel, currentItem);
 
         nameEl.textContent = currentItem.name;
-        applyThemeText(nameEl, currentItem.themeNumber);
+        applyThemeText(nameEl, currentItem);
         leadEl.textContent = `{ ${currentItem.lead || 'TBD'} }`;
 
         if (notesEl) {
@@ -2017,11 +2096,31 @@ function updateCurrentStatusPanel() {
         return;
     }
 
-    const now = new Date();
+    const now = getTrackerDisplayTime();
     const adjusted = calculateAdjustedIntervals(now);
     const state = getState();
     const trackerState = state.tracker || {};
     const trackerActive = trackerState.isRunning || trackerState.startedAt;
+    if (trackerState.completedAt) {
+        if (currentStatusLabelEl) currentStatusLabelEl.textContent = 'MEETING COMPLETE';
+        if (currentStatusUnitEl) currentStatusUnitEl.textContent = '';
+        const doneTicker = document.createElement('span');
+        doneTicker.className = 'ticker-on-time';
+        doneTicker.textContent = 'DONE';
+        currentStatusTape.classList.remove('continuous-ticker');
+        currentStatusTape.replaceChildren(doneTicker);
+        const statusLine = currentStatusBox.querySelector('.current-status-line');
+        if (statusLine) statusLine.textContent = '';
+        currentStatusItemEl = null;
+        currentStatusNextLineEl.textContent = '(and then you are done!)';
+        currentStatusNextItemEl = null;
+        applyThemeText(currentStatusTape, null);
+        fitTickerToContainer(currentStatusTape);
+        if (nextItemButton) nextItemButton.disabled = true;
+        if (prevItemButton) prevItemButton.disabled = items.length === 0;
+        syncPopoutWindow();
+        return;
+    }
     let currentIndex = adjusted.currentItemIndex;
 
     if (currentIndex < 0) {
@@ -2074,18 +2173,18 @@ function updateCurrentStatusPanel() {
     }
 
     if (currentStatusItemEl) {
-        applyThemeText(currentStatusItemEl, currentItem?.themeNumber);
+        applyThemeText(currentStatusItemEl, currentItem);
     }
     if (currentStatusNextItemEl) {
-        applyThemeText(currentStatusNextItemEl, nextItem?.themeNumber);
+        applyThemeText(currentStatusNextItemEl, nextItem);
     }
-    applyThemeText(currentStatusTape, currentItem?.themeNumber);
+    applyThemeText(currentStatusTape, currentItem);
 
     if (nextItemButton) {
-        nextItemButton.disabled = !nextItem;
+        nextItemButton.disabled = !trackerActive;
     }
     if (prevItemButton) {
-        prevItemButton.disabled = currentIndex <= 0;
+        prevItemButton.disabled = !trackerActive || currentIndex <= 0;
     }
 
     syncPopoutWindow();
@@ -2106,13 +2205,18 @@ function updateStatusClock() {
 /**
  * Apply a theme text class to an element
  * @param {HTMLElement} element - Target element
- * @param {number} themeNumber - Theme number
+ * @param {Object|null} item - Agenda item, including its legacy or custom color
  */
-function applyThemeText(element, themeNumber) {
+function applyThemeText(element, item) {
     if (!element) return;
     element.classList.remove(...Array.from({ length: 8 }, (_, index) => `theme-text-${index + 1}`));
-    if (themeNumber) {
-        element.classList.add(`theme-text-${themeNumber}`);
+    element.classList.remove('item-color-text');
+    clearItemColorStyles(element);
+    if (!item) return;
+    if (applyItemColorStyles(element, item)) {
+        element.classList.add('item-color-text');
+    } else if (item.themeNumber) {
+        element.classList.add(`theme-text-${item.themeNumber}`);
     }
 }
 
@@ -2229,7 +2333,7 @@ function updateProgressBar() {
         return;
     }
 
-    const now = new Date();
+    const now = getTrackerDisplayTime();
     const firstStart = items[0].startTime;
     const lastEnd = items[items.length - 1].endTime;
     const totalMinutes = getMinutesDiff(firstStart, lastEnd);
@@ -2250,7 +2354,7 @@ export function getMeetingProgress() {
         return { progress: 0, elapsed: 0, remaining: 0, total: 0 };
     }
 
-    const now = new Date();
+    const now = getTrackerDisplayTime();
     const firstStart = items[0].startTime;
     const lastEnd = items[items.length - 1].endTime;
     const total = getMinutesDiff(firstStart, lastEnd);

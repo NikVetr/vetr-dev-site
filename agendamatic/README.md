@@ -7,21 +7,22 @@ A real-time meeting agenda tracker with visual timeline, state persistence, and 
 - **Dynamic Agenda Management**: Add, edit, delete, and reorder agenda items with drag-and-drop
 - **Automatic Time Calculation**: Durations automatically calculate start/end intervals
 - **Visual Timeline**: Gantt-style horizontal bar chart showing agenda items
-- **Real-time Tracking**: Current time marker moves across the timeline
+- **Real-time Tracking**: Current time marker moves across the timeline, with pause/resume and explicit completion
 - **Smart Time Adjustment**: Unlocked items proportionally resize when running behind/ahead
 - **Locked Items**: Lock specific items to prevent their duration from being adjusted
 - **Status Monitor**: Clear display of whether you're on time, behind, or ahead
-- **State Persistence**: State saved to URL and localStorage
+- **State Persistence**: Ordinary work persists in the URL and localStorage; opened share links use isolated tab storage
 - **Undo/Redo**: Use Ctrl/Cmd-Z and Ctrl/Cmd-Shift-Z outside text editors
 - **Panel Layouts**: Drag panel headers to swap slots; panel order and splitter sizes persist locally
-- **Bulk Editing**: Edit Item, Lead, Color, or Duration columns as lists, or edit the whole agenda as escaped CSV
-- **Item Colors**: Eight-color palette, per-item color picker, current-item header tint, and optional adjacent-color separation
+- **Bulk Editing**: Edit Item, Lead, Color, Duration, Locked, or Notes as lists, or edit all nine CSV columns with stable IDs; former six-column CSV remains import-compatible
+- **Item Colors**: An arbitrary fixed-lightness HSL picker, eight compatible preset values, readable light/dark tokens, and optional adjacent-color separation
 - **Configurable Alerts**: Multiple warning offsets, sound/visual styles, previews, overtime pulses, and optional desktop notifications
-- **Meeting Metadata**: Persist title, date, location, meeting URL, attendees, and attendance
-- **Shareable Links**: Copy URL to share your agenda with others
+- **Meeting Metadata**: Persist title, local date, location, safe meeting URL, multiple attendee groups, attendance, and structured action items
+- **Shareable Links**: Copy a versioned URL containing the complete agenda configuration and metadata
 - **Export Options**: Export to Markdown, text, Word-compatible HTML, or JSON; completed runs export as minutes
 - **Import/Export**: Full JSON import/export for backup and transfer
-- **Customizable Settings**: Dark mode, density, buffer time, and more
+- **Responsive Layout**: Usable stacked panels and an accessible Settings drawer on phones and tablets
+- **Customizable Settings**: Dark mode, density, buffer time, pinned boundaries, and more
 - **Tooltips**: Helpful tooltips explain each feature
 
 ## Running Locally
@@ -63,10 +64,11 @@ agendamatic/
 ├── js/
 │   ├── main.js         # Entry point, initialization
 │   ├── state.js        # State management, URL/localStorage
+│   ├── colors.js       # Preset/custom color normalization and theme tokens
 │   ├── agenda.js       # Agenda CRUD, drag-drop
 │   ├── alerts.js       # Warning scheduler and alert presentation
 │   ├── bulk-edit.js    # Column-list and CSV editing
-│   ├── metadata.js     # Meeting details and attendance
+│   ├── metadata.js     # Meeting details, attendee groups, and action items
 │   ├── panel-swap.js   # Persistent panel-slot swapping
 │   ├── staging.js      # Carry-forward item workflow
 │   ├── layout-resize.js # Persistent panel split resizing
@@ -74,6 +76,9 @@ agendamatic/
 │   ├── tooltips.js     # Tooltip engine
 │   ├── utils.js        # Time formatting helpers
 │   └── export.js       # JSON/Markdown export
+├── tests/              # Playwright state and browser regressions
+├── package.json        # Test tooling only; the app has no build step
+├── playwright.config.js
 ├── example/
 │   └── inspiration.html # Original design reference
 └── README.md
@@ -85,9 +90,9 @@ agendamatic/
 
 - **Add Items**: Click "+ Add Item" to add new agenda entries
 - **Edit**: Click any field to edit item name, lead, or duration
-- **Bulk Edit**: Click a column heading or the "Edit CSV" button
-- **Colors**: Use the color swatch in each row; enable adjacent-color separation in Settings if desired
-- **Duration Format**: Enter duration as `5m`, `1h`, `1h30m`, or just `30`
+- **Bulk Edit**: Click a column heading or the "Edit CSV" button; whole-agenda CSV uses `ID,Item,Lead,Color,Duration,Locked,Context,Preparation,Notes`, preserving item identity through reorders
+- **Colors**: Click a row swatch to choose hue and saturation at a fixed readable lightness. The bulk Color editor also accepts preset numbers `1`–`8` or six-digit hex colors
+- **Duration Format**: Enter duration as `5m`, `2.5m`, `1.5h`, `1h30.5m`, or just `30`; calculations retain tenths of a minute
 - **Reorder**: Drag items by the grip handle (⋮⋮) to reorder
 - **Undo/Redo**: Press Ctrl/Cmd-Z to undo an app action and Ctrl/Cmd-Shift-Z to redo it; focused text fields keep native text undo behavior
 - **Lock**: Check the lock icon to prevent duration adjustment when running late
@@ -96,19 +101,19 @@ agendamatic/
 ### Timeline Tracker
 
 - **Start**: Click "Start" to begin tracking the meeting
-- **Stop**: Click "Stop" to pause tracking
+- **Stop/Resume**: Pause without counting stopped time toward the schedule or current item
 - **Current Time**: Red triangle marker shows current position
 - **Active Item**: Current item is highlighted on the timeline
-- **Advance/Rewind**: Use Next Item/Space and Previous Item/Backspace to control completion explicitly
+- **Advance/Rewind**: Use Next Item/Space and Previous Item/Backspace to control completion explicitly; Next on the final item completes the meeting
 - **Pop Out**: Open the tracker/status display in a separate projector-friendly window
 
 ### Export & Share
 
-- **Metadata**: Add meeting details and check attendance before export
+- **Metadata**: Add meeting details, attendee groups, attendance, and assigned action items before export
 - **.md/.txt/.doc**: Download an agenda before a run or minutes after tracking starts
 - **.json**: Download full state as JSON
 - **Import**: Load a previously exported JSON file
-- **Share Link**: Copy URL with encoded state to share
+- **Share Link**: Copy a versioned URL with agenda items, staging, metadata, export choices, and settings; opening that link creates an isolated tab session, while live run state and personal panel layout stay local
 
 ### Settings
 
@@ -123,13 +128,24 @@ agendamatic/
 
 ## State Persistence
 
-autoCHAIR saves your agenda in three ways:
+autoCHAIR preserves or transfers your agenda in three ways:
 
-1. **URL Parameters**: State is compressed and encoded in the URL query string
-2. **Local Storage**: Automatically saved as you make changes
+1. **URL Parameters**: Portable configuration is compressed and encoded in the URL query string
+2. **Browser Storage**: Ordinary work is saved in localStorage; an explicitly shared link uses isolated sessionStorage so it cannot replace that browser's local workspace
 3. **JSON Export**: Manual backup/restore via JSON files
 
-The URL is automatically updated as you edit, making it easy to bookmark or share specific agendas.
+The URL is automatically updated as you edit. Share links omit live tracker anchors and local layout preferences; the recipient can edit and reload the shared agenda in its tab without overwriting the browser's ordinary working copy.
+
+## Tests
+
+Install the test dependency once, then run the browser suite:
+
+```bash
+npm install
+npm test
+```
+
+The Playwright suite covers state migration and normalization, URL and isolated-share persistence, tracker lifecycle and timing math, buffers and pins, live agenda mutations, responsive and keyboard-accessible layouts, metadata, exports, stable-ID CSV editing, fractional durations, custom colors, pop-out synchronization, and the parent-site link.
 
 ## Deployment
 
@@ -149,6 +165,7 @@ Works in all modern browsers that support:
 - CSS Custom Properties (Variables)
 - CSS Grid
 - LocalStorage
+- SessionStorage
 - History API
 
 ## License

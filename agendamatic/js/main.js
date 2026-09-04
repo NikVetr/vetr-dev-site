@@ -225,11 +225,6 @@ function init() {
     // Initialize tooltip system
     initTooltips();
 
-    // Request location once to prompt timezone permissions
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(() => {}, () => {});
-    }
-
     // Get DOM elements
     const elements = getElements();
     setupLogoAnimations(elements);
@@ -273,6 +268,7 @@ function init() {
 
     // Set up event listeners
     setupEventListeners(elements);
+    setupSettingsDrawer(elements);
     setupUndoRedoShortcuts();
     initPanelSwaps();
 
@@ -304,6 +300,7 @@ function setupUndoRedoShortcuts() {
         const target = event.target;
         const isNativeEditor = target instanceof HTMLElement && (
             target.tagName === 'TEXTAREA' ||
+            target.tagName === 'INPUT' ||
             target.isContentEditable
         );
         if (isNativeEditor) return;
@@ -339,7 +336,12 @@ function syncControlsFromState(state, elements) {
         [elements.includeActionItemsCheckbox, exportOptions.includeActionItems]
     ];
     checkboxValues.forEach(([element, value]) => {
-        if (element) element.checked = !!value;
+        if (!element) return;
+        if (
+            element === elements.desktopNotificationsCheckbox &&
+            element.dataset.permissionPending === 'true'
+        ) return;
+        element.checked = !!value;
     });
 
     if (elements.densitySelect) elements.densitySelect.value = settings.density;
@@ -434,8 +436,105 @@ function getElements() {
         headerLogoVideoForward: document.getElementById('header-logo-video-forward'),
         headerLogoVideoReverse: document.getElementById('header-logo-video-reverse'),
         prevItemLogoVideo: document.getElementById('prev-item-logo-video'),
-        nextItemLogoVideo: document.getElementById('next-item-logo-video')
+        nextItemLogoVideo: document.getElementById('next-item-logo-video'),
+        settingsSidebar: document.getElementById('settings-sidebar'),
+        settingsToggleButton: document.getElementById('btn-settings-toggle'),
+        settingsCloseButton: document.getElementById('btn-settings-close'),
+        settingsBackdrop: document.getElementById('settings-backdrop')
     };
+}
+
+function setupSettingsDrawer(elements) {
+    const {
+        settingsSidebar,
+        settingsToggleButton,
+        settingsCloseButton,
+        settingsBackdrop
+    } = elements;
+    if (!settingsSidebar || !settingsToggleButton || !settingsCloseButton || !settingsBackdrop) return;
+
+    const mobileQuery = window.matchMedia('(max-width: 1280px)');
+    let returnFocus = null;
+
+    const closeDrawer = ({ restoreFocus = true } = {}) => {
+        const wasOpen = settingsSidebar.classList.contains('mobile-open');
+        settingsSidebar.classList.remove('mobile-open');
+        settingsBackdrop.classList.remove('visible');
+        document.body.classList.remove('settings-drawer-open');
+        settingsToggleButton.setAttribute('aria-expanded', 'false');
+        if (mobileQuery.matches) {
+            settingsSidebar.setAttribute('aria-hidden', 'true');
+            settingsSidebar.inert = true;
+        }
+        if (restoreFocus && wasOpen && returnFocus instanceof HTMLElement) {
+            returnFocus.focus({ preventScroll: true });
+        }
+        returnFocus = null;
+    };
+
+    const openDrawer = () => {
+        if (!mobileQuery.matches) return;
+        returnFocus = document.activeElement instanceof HTMLElement
+            ? document.activeElement
+            : settingsToggleButton;
+        settingsSidebar.inert = false;
+        settingsSidebar.setAttribute('aria-hidden', 'false');
+        settingsSidebar.classList.add('mobile-open');
+        settingsBackdrop.classList.add('visible');
+        document.body.classList.add('settings-drawer-open');
+        settingsToggleButton.setAttribute('aria-expanded', 'true');
+        settingsCloseButton.focus({ preventScroll: true });
+    };
+
+    const syncMode = () => {
+        closeDrawer({ restoreFocus: false });
+        if (mobileQuery.matches) {
+            settingsSidebar.setAttribute('role', 'dialog');
+            settingsSidebar.setAttribute('aria-modal', 'true');
+            settingsSidebar.setAttribute('aria-hidden', 'true');
+            settingsSidebar.inert = true;
+        } else {
+            settingsSidebar.removeAttribute('role');
+            settingsSidebar.removeAttribute('aria-modal');
+            settingsSidebar.removeAttribute('aria-hidden');
+            settingsSidebar.inert = false;
+        }
+    };
+
+    settingsToggleButton.addEventListener('click', () => {
+        if (settingsSidebar.classList.contains('mobile-open')) {
+            closeDrawer();
+        } else {
+            openDrawer();
+        }
+    });
+    settingsCloseButton.addEventListener('click', () => closeDrawer());
+    settingsBackdrop.addEventListener('click', () => closeDrawer());
+    document.addEventListener('keydown', (event) => {
+        if (!settingsSidebar.classList.contains('mobile-open')) return;
+        if (event.key === 'Escape') {
+            event.preventDefault();
+            closeDrawer();
+            return;
+        }
+        if (event.key !== 'Tab') return;
+
+        const focusable = [...settingsSidebar.querySelectorAll(
+            'button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'
+        )].filter(element => element.getClientRects().length > 0);
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+        }
+    });
+    mobileQuery.addEventListener('change', syncMode);
+    syncMode();
 }
 
 /**
@@ -723,19 +822,31 @@ function setupSettingsListeners(elements) {
         });
     }
 
+    let desktopPermissionRequestVersion = 0;
     if (elements.desktopNotificationsCheckbox) {
         elements.desktopNotificationsCheckbox.checked = state.settings.desktopNotifications;
         elements.desktopNotificationsCheckbox.addEventListener('change', async (e) => {
+            const requestVersion = ++desktopPermissionRequestVersion;
             if (!e.target.checked) {
+                delete e.target.dataset.permissionPending;
+                e.target.removeAttribute('aria-busy');
                 updateSettings({ desktopNotifications: false });
                 return;
             }
+            e.target.dataset.permissionPending = 'true';
+            e.target.setAttribute('aria-busy', 'true');
             try {
                 const permission = await requestDesktopNotificationPermission();
+                if (requestVersion !== desktopPermissionRequestVersion) return;
+                delete e.target.dataset.permissionPending;
+                e.target.removeAttribute('aria-busy');
                 const enabled = permission === 'granted';
                 updateSettings({ desktopNotifications: enabled });
                 if (!enabled) showNotification('Desktop notification permission was not granted', 'warning');
             } catch (error) {
+                if (requestVersion !== desktopPermissionRequestVersion) return;
+                delete e.target.dataset.permissionPending;
+                e.target.removeAttribute('aria-busy');
                 updateSettings({ desktopNotifications: false });
                 showNotification(error.message, 'warning');
             }

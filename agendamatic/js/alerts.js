@@ -8,10 +8,14 @@ let previousSample = null;
 let bannerTimeout = null;
 let pulseTimeout = null;
 let audioContext = null;
+let alertRunKey = null;
+let firedThresholds = new Set();
 
-function getItemKey(adjusted) {
+function getItemKey(adjusted, state) {
     const item = adjusted.items[adjusted.currentItemIndex];
-    return item ? `${item.id}:${adjusted.currentItemIndex}` : null;
+    return item
+        ? `${state.tracker.startedAt || 'pending'}:${item.id}`
+        : null;
 }
 
 function formatOffset(seconds) {
@@ -87,13 +91,8 @@ function playTone(frequency, start, duration, gain = 0.055) {
     oscillator.stop(start + duration);
 }
 
-function playAlertSound(style) {
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    if (!AudioContext) return;
-    audioContext ||= new AudioContext();
+function scheduleAlertSound(style) {
     const now = audioContext.currentTime;
-    if (audioContext.state === 'suspended') audioContext.resume();
-
     if (style === 'beep') {
         playTone(660, now, 0.32);
     } else if (style === 'double') {
@@ -106,9 +105,44 @@ function playAlertSound(style) {
     }
 }
 
+function playAlertSound(style) {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+
+    try {
+        if (!audioContext || audioContext.state === 'closed') {
+            audioContext = new AudioContext();
+        }
+        if (audioContext.state === 'suspended') {
+            const resumeResult = audioContext.resume();
+            if (resumeResult && typeof resumeResult.then === 'function') {
+                resumeResult
+                    .then(() => {
+                        try {
+                            scheduleAlertSound(style);
+                        } catch (error) {
+                            audioContext = null;
+                        }
+                    })
+                    .catch(() => {
+                        audioContext = null;
+                    });
+                return;
+            }
+        }
+        scheduleAlertSound(style);
+    } catch (error) {
+        audioContext = null;
+    }
+}
+
 function sendDesktopNotification(message, itemName) {
     if (!('Notification' in window) || Notification.permission !== 'granted') return;
-    new Notification(message, { body: itemName, tag: 'agendamatic-meeting-alert' });
+    try {
+        new Notification(message, { body: itemName, tag: 'agendamatic-meeting-alert' });
+    } catch (error) {
+        // Notification delivery is optional and must not interrupt the timer.
+    }
 }
 
 export function triggerAlert({ seconds = 60, itemName = 'Current item', preview = false } = {}) {
@@ -127,30 +161,47 @@ export function triggerAlert({ seconds = 60, itemName = 'Current item', preview 
 
 export function processAlertTick() {
     const state = getState();
+    const nextRunKey = state.tracker.startedAt || null;
+    if (nextRunKey !== alertRunKey) {
+        alertRunKey = nextRunKey;
+        firedThresholds = new Set();
+    }
     if (!state.tracker.isRunning) {
         previousSample = null;
         return;
     }
 
     const adjusted = calculateAdjustedIntervals(new Date());
-    const itemKey = getItemKey(adjusted);
+    const itemKey = getItemKey(adjusted, state);
     const remainingSeconds = Math.round((adjusted.currentRemaining ?? 0) * 60);
     if (!itemKey) return;
 
+    const offsets = [...(state.settings.alertOffsetsSeconds || [60, 0])];
+    if (state.settings.overtimeFlash && !offsets.includes(0)) offsets.push(0);
+    const fireOnce = (seconds) => {
+        const thresholdKey = `${itemKey}:${seconds}`;
+        if (firedThresholds.has(thresholdKey)) return;
+        firedThresholds.add(thresholdKey);
+        triggerAlert({ seconds, itemName: adjusted.items[adjusted.currentItemIndex].name });
+    };
+
     if (!previousSample || previousSample.itemKey !== itemKey || remainingSeconds > previousSample.remainingSeconds + 2) {
         previousSample = { itemKey, remainingSeconds };
+        offsets.forEach(seconds => {
+            if (remainingSeconds === seconds) fireOnce(seconds);
+        });
         return;
     }
 
-    const item = adjusted.items[adjusted.currentItemIndex];
-    const offsets = [...(state.settings.alertOffsetsSeconds || [60, 0])];
-    if (state.settings.overtimeFlash && !offsets.includes(0)) offsets.push(0);
-    offsets.forEach(seconds => {
-        if (previousSample.remainingSeconds > seconds && remainingSeconds <= seconds) {
-            triggerAlert({ seconds, itemName: item.name });
-        }
-    });
-    previousSample = { itemKey, remainingSeconds };
+    try {
+        offsets.forEach(seconds => {
+            if (previousSample.remainingSeconds > seconds && remainingSeconds <= seconds) {
+                fireOnce(seconds);
+            }
+        });
+    } finally {
+        previousSample = { itemKey, remainingSeconds };
+    }
 }
 
 export function previewAlert() {
