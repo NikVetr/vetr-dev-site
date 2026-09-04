@@ -140,16 +140,17 @@ async function main() {
 
   attachPanelResizers(/** @type {HTMLElement} */ (document.querySelector('.studio')));
 
+  // The banner lives in the header now rather than in a bar of its own, so it is one
+  // line among the controls and there is nothing to hide it *from* -- the Hide button
+  // is gone with the bar. It still hides itself once the quiz has been through, since
+  // at that point it has been answered.
   if (localStorage.getItem(BANNER_KEY) === '1') $('banner').hidden = true;
-  $('banner-hide').addEventListener('click', () => {
-    $('banner').hidden = true;
-    localStorage.setItem(BANNER_KEY, '1');
-  });
   $('quiz-open').addEventListener('click', async () => {
     const answers = await openQuiz();
     if (!answers) return;
     spec = applyQuiz(spec, ctx.corpus, answers);
     $('banner').hidden = true;
+    localStorage.setItem(BANNER_KEY, '1');
     schedule();
   });
 
@@ -238,6 +239,20 @@ async function main() {
           schedule();
         },
         onHover: (id) => highlight($('face-area'), id),
+        // The mirror of the canvas's own `onPick`, which brings a row in the tree
+        // into view: a click in the tree brings the row on the *card* into view.
+        // Only the focused face carries a hit layer, so a row on another face needs
+        // that face focused first -- which the plan can answer and the DOM cannot.
+        onPick: (id) => {
+          const at = plan?.faces.findIndex(
+            (face) => face.hits.some((hit) => hit.conceptId === id),
+          ) ?? -1;
+          if (at >= 0 && at !== focused) {
+            focused = at;
+            renderCanvas();
+          }
+          highlight($('face-area'), id);
+        },
       });
     }
     updateTree(spec, blocks, marked);
@@ -316,7 +331,6 @@ async function main() {
     if (flip && plan.faces.length) {
       const cards = splitCards(plan, { flip });
       const sides = faceSvgs({ plan: cards, manifest, icons, stacks: [], name: 'x' });
-      $('canvas-note').textContent = t('studio.duplexChecking');
       renderFaces({
         root: $('face-area'),
         plan: cards,
@@ -330,16 +344,19 @@ async function main() {
       return;
     }
 
-    // "Click" would now be wrong: both are keyboard actions too.
-    $('canvas-note').textContent = focused === null
-      ? t('studio.chooseFace')
-      : t('studio.chooseRow');
     renderFaces({
       root: $('face-area'),
       plan,
       svgs,
       focused,
       onFocus: (i) => { focused = i; renderCanvas(); },
+      // From the button that leads the thumbnail strip, where "All faces" now lives.
+      onGrid: () => {
+        if (!svgs.length) return;
+        gridByChoice = true;
+        focused = null;
+        renderCanvas();
+      },
       onPick: (id) => revealItem($('tree'), id),
       onHover: (id) => highlight($('face-area'), id),
     });
@@ -355,13 +372,6 @@ async function main() {
       },
     });
   }
-
-  $('grid-toggle').addEventListener('click', () => {
-    if (!svgs.length) return;
-    gridByChoice = focused !== null;
-    focused = gridByChoice ? null : 0;
-    renderCanvas();
-  });
 
   // --- content ------------------------------------------------------------
 

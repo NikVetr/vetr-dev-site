@@ -288,3 +288,24 @@ test('a sheet the reader has looked at is kept across visits', async ({ page }) 
   });
   expect(keys[0]).toMatch(/__sheet\/.+__.+\?v=[0-9a-f]{6,}/);
 });
+
+  test('the card does not resize when the thumbnails arrive', async ({ page }) => {
+    // The strip and the two buttons appear after the faces are typeset, and the card
+    // is sized from the height left over -- so the foot arriving used to take that
+    // height away and resize the card under the reader. Reserving a *floor* was not
+    // enough: a thumbnail's height depends on how many there are, so the foot still
+    // moved once the face count was known. The strip is now exactly as tall as the
+    // tallest a thumbnail may be, and they fit inside it.
+    await page.goto('/');
+    await expect(page.locator('.card').first()).toBeVisible();
+    await page.locator('.card-thumb-button').first().click();
+    const face = page.locator('.lightbox-face');
+    await expect(face).toBeVisible();
+    const before = /** @type {{height:number}} */ (await face.boundingBox());
+    await expect(page.locator('.lightbox-thumb').nth(3)).toBeVisible({ timeout: 180_000 });
+    await page.waitForTimeout(400);
+    const after = /** @type {{height:number}} */ (await face.boundingBox());
+    expect(Math.abs(after.height - before.height),
+      `card moved ${(after.height - before.height).toFixed(0)}px when the foot filled`)
+      .toBeLessThan(2);
+  });

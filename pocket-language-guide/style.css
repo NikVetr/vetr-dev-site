@@ -287,7 +287,18 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
   max-block-size: 100%;
 }
 .face.focused svg { inline-size: 100%; block-size: 100%; }
-.face-strip { display: flex; gap: var(--space-1); flex: none; }
+.face-strip { display: flex; gap: var(--space-1); flex: none; align-items: stretch; }
+/* "All faces" leads the strip, where the other faces are. Sized to the thumbnails
+   beside it rather than to its own text, so the row reads as one control. */
+.face-all {
+  flex: none; padding: 0 var(--space-2); white-space: nowrap;
+  font-size: var(--fs--1); cursor: pointer;
+  border: 1px solid var(--line); border-radius: var(--radius-sm);
+  background: var(--paper); color: var(--muted);
+}
+.face-all:hover, .face-all:focus-visible {
+  color: var(--accent); border-color: var(--accent); outline: none;
+}
 .face-strip .face { flex: 1; cursor: pointer; }
 .face.current { outline: 2px solid var(--accent); }
 /* Colour alone should not say "you are here": the tick survives greyscale. */
@@ -326,7 +337,10 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
 .tree summary .count { color: var(--muted); font-size: 0.9em; margin-inline-start: auto; }
 .tree .dot { width: 8px; height: 8px; border-radius: 2px; flex: none; }
 .items { list-style: none; margin: 0; padding: 0 0 var(--space-1) var(--space-2); }
-.items li { display: flex; gap: var(--space-1); align-items: baseline; font-size: var(--fs--1); }
+.items li {
+  display: flex; flex-wrap: wrap; gap: var(--space-1);
+  align-items: baseline; font-size: var(--fs--1);
+}
 /* `flex: 1` so the label fills the row: without it the label was only as wide as its
    own text, and the `margin-inline-start: auto` that is supposed to drive the
    importance number to the panel edge stopped wherever the gloss happened to end. */
@@ -372,14 +386,20 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
 }
 /* The swatch is a button inside a <summary>, so it needs to look like the dot it
    replaced until the pointer is on it. */
+/* A filled chip with a hairline round it, which is what a colour control looks like.
+   This used to be the section's own icon, and being an icon it did not read as a
+   button -- the control was reported missing three separate times. */
 .tree-color {
-  padding: 0; border: 0; background: none; display: inline-flex; align-items: center;
-  cursor: pointer; border-radius: 3px; flex: none;
+  padding: 1px; border: 1px solid var(--line); background: var(--paper);
+  display: inline-flex; align-items: center;
+  cursor: pointer; border-radius: 4px; flex: none;
 }
 .tree-color:hover, .tree-color:focus-visible {
-  outline: 2px solid var(--accent); outline-offset: 1px;
+  border-color: var(--accent); outline: none;
 }
-
+.tree-color .chip-fill {
+  inline-size: 0.85em; block-size: 0.85em; border-radius: 2px; display: block;
+}
 .warnings { list-style: none; margin: 0 0 var(--space-2); padding: 0; font-size: var(--fs--1); }
 .warnings li { padding: 0.3em 0.5em; border-radius: var(--radius-sm); margin-bottom: 2px; }
 .warnings li.error { background: #fdecea; color: #7d1b15; }
@@ -667,6 +687,17 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
   min-inline-size: 0;
   display: flex; align-items: stretch; justify-content: space-between;
   gap: var(--space-3);
+  /* **Reserved before anything is in it, and a constant.** The strip and the two
+     buttons arrive after the faces are typeset, and the card above is sized from the
+     height left over -- so the foot appearing took that height away and resized the
+     card under the reader's eyes. Reserving a *floor* was not enough, because a
+     thumbnail's height depends on how many there are: ten faces give ten narrow
+     short thumbs and two give two wide tall ones, so the foot still changed once the
+     count was known. The strip is exactly as tall as the widest a thumbnail is ever
+     allowed to be, and the thumbnails fit inside it by height. Now nothing about the
+     content can move it. */
+  block-size: calc(8rem / var(--card-aspect, 1.4) + 2px);
+  flex: none;
 }
 /* Every thumbnail fits, rather than eight of them scrolling.
    A grid of equal fractions, so the row is exactly as wide as the space the buttons
@@ -677,6 +708,7 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
 .lightbox-strip {
   display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr);
   gap: 0.4rem; min-inline-size: 0; flex: 1 1 0;
+  align-items: center; justify-items: center;
 }
 .lightbox-thumb {
   padding: 0; border: 1px solid rgb(255 255 255 / 25%); border-radius: 3px;
@@ -684,6 +716,9 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
   /* No width of its own: the grid track decides, capped so two faces do not become
      two enormous thumbnails. */
   inline-size: 100%; max-inline-size: 8rem; aspect-ratio: var(--card-aspect, 1.4);
+  /* The strip's height is fixed, so a thumbnail fits inside it rather than setting
+     it -- which is what keeps the foot from resizing when the face count is known. */
+  max-block-size: 100%;
 }
 .lightbox-thumb > svg { display: block; inline-size: 100%; block-size: 100%; }
 .lightbox-thumb:hover { border-color: rgb(255 255 255 / 70%); }
@@ -930,7 +965,10 @@ svg.glyph .g-count {
 svg.glyph .g-letter { fill: #55606b; font-weight: 700; text-anchor: middle; font-family: var(--ui); }
 svg.glyph .g-bracket { stroke: var(--accent); stroke-width: 1; fill: none; }
 
-.tree-icon { width: 13px; height: 13px; flex: none; }
+/* The section's own pictogram, beside its colour chip. 13px was too small to read as
+   a picture at all -- and these are the marks the sheet prints at the head of each
+   section, so the tree is where you match one to the other. */
+.tree-icon { width: 17px; height: 17px; flex: none; }
 
 /* --- add a term ---------------------------------------------------------- */
 
@@ -1102,8 +1140,12 @@ button.big { justify-content: center; padding: 0.6em 1em; font-size: var(--fs-1)
    checkbox answers whether a row is on the sheet, and what it *says* was only
    editable through a CSV round trip. One field per shown column, so the respelling
    is correctable where a reader notices it is wrong. */
+/* Its own line. As a flex item beside the label it took the full width and squeezed
+   the label to nothing, which collapsed every cell to one character per line -- the
+   text ran vertically down the panel. `.items li` wraps now, so the form drops below
+   the row it belongs to instead of competing with it for width. */
 .item-edit {
-  flex-basis: 100%; display: grid; gap: 0.3em;
+  flex: 0 0 100%; display: grid; gap: 0.3em;
   grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
   margin: 0.35em 0 0.5em; padding: var(--space-1);
   background: var(--surface-2); border: 1px solid var(--line);
@@ -1113,24 +1155,33 @@ button.big { justify-content: center; padding: 0.6em 1em; font-size: var(--fs-1)
 .item-edit input { width: 100%; font-size: var(--fs--1); }
 .item-edit .row { grid-column: 1 / -1; display: flex; gap: var(--space-1); }
 .item-edit button { font-size: var(--fs--1); padding: 0.2em 0.7em; }
-/* A row is a pointer target now, so it should say so. */
+/* Clicking a row shows it on the card, so the row should say it is a target. */
 .items label:hover .cell { text-decoration: 1px dotted underline; text-underline-offset: 2px; }
 
-/* Three words rather than three glyph buttons: what an item's box does is a
-   property of the *page*, not a shape you can draw at 30px, and the row sits inside
-   the background field where the swatch and the slider already are. */
-.rows-mode { display: flex; gap: 2px; flex: none; }
-.rows-mode .chip {
-  font-size: 0.7rem; padding: 0.2em 0.55em; border: 1px solid var(--line);
-  background: var(--paper); color: var(--muted); cursor: pointer;
-  border-radius: var(--radius-sm);
+/* The pencil opens the row's editor -- a separate gesture from clicking the row,
+   because "show me this on the page" is what a click is for and is the commoner
+   ask. Double-clicking the row does the same thing. Faint until the row is under
+   the pointer, so a long list is not a column of icons. */
+.item-edit-open {
+  flex: none; padding: 0; border: 0; background: none; cursor: pointer;
+  line-height: 0; border-radius: 3px; opacity: 0.28;
 }
-.rows-mode .chip:hover, .rows-mode .chip:focus-visible {
-  color: var(--ink); border-color: var(--muted); outline: none;
+.items li:hover .item-edit-open, .item-edit-open:focus-visible { opacity: 1; }
+.item-edit-open:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.item-edit-open .pencil { inline-size: 0.85em; block-size: 0.85em; display: block; }
+.item-edit-open .pencil path {
+  fill: none; stroke: var(--muted); stroke-width: 1.6;
+  stroke-linejoin: round; stroke-linecap: round;
 }
-.rows-mode .chip.current {
-  color: var(--accent); border-color: var(--accent); font-weight: 600;
-}
+.item-edit-open:hover .pencil path { stroke: var(--accent); }
+
+/* The item-shading slider, under the background's own. It replaced three named
+   chips -- Shaded / See-through / None -- because the settings worth having are the
+   ones between them: the reference card's shading at 1, a hint of it over a flag
+   wash at 0.3, nothing at 0. The shade colour is still the theme's; this is only how
+   much of it there is. */
+.rows-shading { gap: var(--space-1); }
+.rows-shading > span { flex: none; }
 
 /* Three positions in the furniture band, each taking any number of slots. Checkboxes
    because the question is "which of these five", not "one of these five" -- it used

@@ -415,21 +415,24 @@ function itemAtoms(ctx, block, rows, withPaint) {
     /** @type {Rect[]} */ const rects = [];
     /** @type {TextRun[]} */ const runs = [];
     // **A row's own box, and only when it is one.** An unshaded row used to draw a
-    // paper-coloured rect, which is invisible on white paper and, once the page has
-    // a background, is the one thing standing between the wash and the reader: it
-    // painted paper straight over it. `rows` is what the reader says about that --
-    // `shade` alternates as before, `soft` lets the wash through the shaded rows too,
-    // and `none` drops the boxes entirely.
+    // paper-coloured rect, which is invisible on white paper and, once the page has a
+    // background, is the one thing standing between the wash and the reader: it
+    // painted paper straight over it.
+    //
+    // `rowShading` is how much of the shade colour there is, 0 to 1. It is a
+    // continuous value rather than three named modes because the useful settings are
+    // the ones in between: the reference card's own shading at 1, a hint of it over a
+    // flag wash at 0.3, nothing at 0.
     const shaded = template.shadeAlternate && (startRow + i) % 2 === 1;
-    const rowMode = ctx.spec.background?.rows ?? 'shade';
-    if (shaded && rowMode !== 'none') {
+    const alpha = ctx.spec.background?.rowShading ?? 1;
+    if (shaded && alpha > 0) {
       rects.push({
         x: 0,
         y: 0,
         w: ctx.colWidth,
         h: height,
         fill: ctx.palette.shade,
-        ...(rowMode === 'soft' ? { opacity: 0.45 } : {}),
+        ...(alpha < 1 ? { opacity: alpha } : {}),
       });
     }
     rects.push({ x: 0, y: 0, w: template.accentPt, h: height, fill: ctx.palette.roles[block.colorRole] });

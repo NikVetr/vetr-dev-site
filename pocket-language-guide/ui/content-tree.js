@@ -12,6 +12,21 @@
 import { number, t } from './i18n.js';
 import { nextIndex } from './keys.js';
 
+/** A pencil, for the button that opens a row's editor. Inline rather than an entry in
+ * `data/icons.json`, because that file is the set the *sheet* can draw and this is
+ * interface chrome. */
+function pencilGlyph() {
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('viewBox', '0 0 16 16');
+  svg.setAttribute('aria-hidden', 'true');
+  svg.setAttribute('class', 'pencil');
+  const path = document.createElementNS(NS, 'path');
+  path.setAttribute('d', 'M11.2 1.8a1.7 1.7 0 0 1 2.4 2.4L5.3 12.5l-3 .8.8-3z');
+  svg.append(path);
+  return svg;
+}
+
 /** The sheet's own field order, so a tree row reads the way the printed row does. */
 const TREE_FIELDS = /** @type {import('../core/types.js').FieldId[]} */ ([
   'script', 'script_alt', 'roman', 'ipa', 'gloss', 'literal', 'respell',
@@ -69,6 +84,7 @@ function el(tag, attrs = {}, kids = []) {
  * @property {import('../core/types.js').SheetSpec} spec
  * @property {any} theme
  * @property {(patch:{sections?:Record<string,boolean>, items?:Record<string,boolean>, sectionColors?:Record<string,string>})=>void} onToggle
+ * @property {(conceptId:string)=>void} onPick  bring this row into view on the card
  * @property {(conceptId:string, values:Record<string,string>)=>void} [onEdit]  what
  *   the reader typed into a row, to go in the same `overrides` layer the CSV import
  *   writes
@@ -90,7 +106,7 @@ export function createTree(input) {
   const { root, corpus, theme, spec } = input;
 
   /** @type {{sectionId:string, box:HTMLInputElement, count:HTMLElement,
-   *          swatch:HTMLElement, menu:HTMLElement, role:string,
+   *          swatch:HTMLElement, menu:HTMLElement, icon:Element|null, role:string,
    *          items:{conceptId:string, box:HTMLInputElement,
    *                  cells:Record<string,HTMLElement>, row:HTMLElement}[]}[]} */
   const sections = [];
@@ -141,12 +157,19 @@ export function createTree(input) {
     // colour and the section's contents are in front of you at once.
     const role = spec.sectionColors?.[section.section_id] ?? section.color_role;
     const color = theme.colors.roles[role];
+    // **A swatch of its own, not the section's icon.** The icon *was* the button, and
+    // it was reported as missing three times: a clock or a fork does not look like
+    // something you can press, and nothing distinguished it from the icons the sheet
+    // draws. So the icon stays an icon and the colour becomes a filled chip beside
+    // it, which is the one shape that reads as "this is the colour, press to change
+    // it" without a label.
     const icon = section.icon ? sectionIcon(input.icons, section.icon, color) : null;
+    const chip = el('span', { class: 'chip-fill', style: `background:${color}` });
     const swatch = el('button', {
       type: 'button', class: 'tree-color',
       'aria-label': t('tree.recolour', { section: title }),
       title: t('tree.recolour', { section: title }),
-    }, [icon ?? el('span', { class: 'dot', style: `background:${color}` })]);
+    }, [chip]);
     // **A menu, not a cycle.** This used to advance to the next role on each click,
     // which is a control you cannot use: the swatch is the section's own icon and
     // does not read as a button, and even once you find it you are cycling blind
@@ -206,8 +229,11 @@ export function createTree(input) {
       /** @type {HTMLElement} */ (options[to]).focus();
     });
     const summary = el('summary', {}, [
-      sectionBox, el('span', { class: 'tree-color-wrap' }, [swatch, menu]),
-      el('span', { text: title }), count,
+      sectionBox,
+      el('span', { class: 'tree-color-wrap' }, [swatch, menu]),
+      ...(icon ? [icon] : []),
+      el('span', { text: title }),
+      count,
     ]);
 
     /** @type {{conceptId:string, box:HTMLInputElement,
@@ -232,9 +258,15 @@ export function createTree(input) {
           lang: TARGET_FIELDS.has(field) ? spec.target : spec.source,
         });
       }
+      // Next to the checkbox, where the row's own controls are.
+      const pencil = el('button', {
+        type: 'button', class: 'item-edit-open',
+        'aria-label': t('tree.editRow'), title: t('tree.editRow'),
+      }, [pencilGlyph()]);
       const li = el('li', { 'data-concept': concept.conceptId }, [
         el('label', {}, [
           box,
+          pencil,
           ...Object.values(cells),
           ...(concept.custom ? [el('span', { class: 'tag mine', text: t('tree.mine') })] : []),
           // Two decimals, right-justified against the panel edge, because it is a
@@ -249,15 +281,15 @@ export function createTree(input) {
       li.addEventListener('mouseenter', () => input.onHover(concept.conceptId));
       li.addEventListener('mouseleave', () => input.onHover(null));
 
-      // **Clicking the row edits it.** The checkbox says whether the row is on the
-      // sheet, which is a different question from what it says, and the tree used to
-      // answer only the first -- so correcting a generated respelling meant a CSV
-      // round trip. An edit is an entry in `edits.overrides`, the same layer the CSV
+      // **Three different questions, three different gestures.** The checkbox says
+      // whether the row is on the sheet. A click on the row says "show me this one on
+      // the card", which is the same thing clicking a row on the card does in the
+      // other direction. And the pencil -- or a double-click -- says "let me change
+      // what it says", which is an entry in `edits.overrides`, the same layer the CSV
       // import writes, so it survives a reload and exports with everything else.
       //
-      // On the label, not the `li`: the checkbox is inside the label and must keep
-      // its own click. And a `pointerdown` on the label would beat the checkbox to
-      // it, so this listens for `click` and lets the checkbox stop its own.
+      // A single click used to open the editor, which made the commonest gesture the
+      // most disruptive one and gave no way to just look at a row on the page.
       const openEditor = () => {
         if (li.querySelector('.item-edit')) return;
         const fields = Object.keys(cells);
@@ -293,8 +325,22 @@ export function createTree(input) {
         li.append(form);
         /** @type {HTMLElement} */ (form.querySelector('input'))?.focus();
       };
-      li.querySelector('label')?.addEventListener('click', (event) => {
-        if (/** @type {Element} */ (event.target).closest('input[type="checkbox"]')) return;
+      pencil.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        openEditor();
+      });
+
+      const label = /** @type {HTMLElement} */ (li.querySelector('label'));
+      label.addEventListener('click', (event) => {
+        const target = /** @type {Element} */ (event.target);
+        if (target.closest('input[type="checkbox"], .item-edit-open, .item-edit')) return;
+        // The label would otherwise toggle the checkbox it wraps.
+        event.preventDefault();
+        input.onPick(concept.conceptId);
+      });
+      label.addEventListener('dblclick', (event) => {
+        if (/** @type {Element} */ (event.target).closest('.item-edit')) return;
         event.preventDefault();
         openEditor();
       });
@@ -310,6 +356,7 @@ export function createTree(input) {
       items,
       swatch,
       menu,
+      icon,
       role: section.color_role,
     });
     nodes.push(el('li', {}, [el('details', { open: '' }, [summary, list])]));
@@ -335,8 +382,10 @@ export function createTree(input) {
       const role = nextSpec.sectionColors?.[section.sectionId] ?? section.role;
       const next = theme.colors.roles[role];
       const mark = section.swatch.firstElementChild;
-      if (mark instanceof SVGElement) mark.setAttribute('stroke', next);
-      else if (mark instanceof HTMLElement) mark.style.background = next;
+      if (mark instanceof HTMLElement) mark.style.background = next;
+      // The icon takes the colour too, since it is the mark the sheet prints.
+      const drawn = section.icon;
+      if (drawn instanceof SVGElement) drawn.setAttribute('stroke', next);
       // And the menu's own mark, which is what says *which* of the five is in
       // effect. Without this the swatch changed colour and the menu went on
       // pointing at the role the section started with.

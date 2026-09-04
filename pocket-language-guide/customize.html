@@ -18,19 +18,17 @@
     <a class="brand" href="./" data-i18n="nav.brand">Pocket Language Guide</a>
     <span class="muted small" id="pair"></span>
     <div class="spacer"></div>
+    <span class="banner" id="banner">
+      <span data-i18n="studio.bannerQuestion">Too many options?</span>
+      <button type="button" class="ghost" id="quiz-open" data-i18n="studio.helpMeDecide">Help me decide.</button>
+    </span>
+    <div class="spacer"></div>
     <span class="status" id="status"></span>
     <button type="button" class="primary" id="pdf" data-i18n="common.exportPdf">Export PDF</button>
     <button type="button" id="png" data-i18n="common.png">PNG</button>
     <a class="btn ghost back-link" href="./" data-i18n="nav.back">← All languages</a>
   </div>
 </header>
-
-<div class="banner" id="banner">
-  <span data-i18n="studio.bannerQuestion">Too many options?</span>
-  <button type="button" class="ghost" id="quiz-open" style="text-decoration: underline;" data-i18n="studio.helpMeDecide">Help me decide.</button>
-  <div class="spacer"></div>
-  <button type="button" class="ghost" id="banner-hide" data-i18n="studio.hide" data-i18n-label="studio.hideBanner" aria-label="Hide this banner">Hide</button>
-</div>
 
 <main class="studio">
   <h1 class="visually-hidden" data-i18n="studio.heading">Customise a pocket language guide</h1>
@@ -53,11 +51,6 @@
        tabindex="0" data-i18n-label="studio.resizeFormat" aria-label="Resize the format panel"></div>
 
   <section class="canvas" data-i18n-label="studio.pagesLabel" aria-label="Pages">
-    <div class="row">
-      <button type="button" id="grid-toggle" data-i18n="studio.allFaces">⊞ All faces</button>
-      <span class="spacer"></span>
-      <span class="small muted" id="canvas-note"></span>
-    </div>
     <div id="face-area" tabindex="-1">
       <p class="muted loading" data-i18n="quick.typesetting">Typesetting your sheet…</p>
     </div>
@@ -84,7 +77,6 @@
 
 <a class="donate" href="https://www.givewell.org/donate"
    target="_blank" rel="noopener noreferrer external"
-   data-i18n-title="nav.donateTitle" title="Goes to GiveWell, a charity evaluator"
 ><span data-i18n="nav.donate">Donate</span></a>
 
 <script type="module" src="ui/studio.js"></script>

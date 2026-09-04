@@ -26,7 +26,7 @@ test.describe('studio', () => {
     await page.goto(STUDIO);
     const faces = await faceCount(page);
     await expect(page.locator('.face.focused')).toHaveCount(1);
-    await page.locator('#grid-toggle').click();
+    await page.locator('.face-strip .face-all').click();
     await expect(page.locator('.face-grid .face')).toHaveCount(faces);
     await expect(page.locator('.face.focused')).toHaveCount(0);
     await page.locator('.face-grid .face').nth(2).click();

@@ -200,9 +200,11 @@
  * @property {'none'|'tint'|'flag'|'sections'} mode
  * @property {string} [color]
  * @property {number} [strength]
- * @property {'shade'|'soft'|'none'} [rows]  what an item's own box does. `shade` is
- *   the alternating shading the reference card has; `soft` lets the page background
- *   through it; `none` drops the boxes so only the page shows.
+ * @property {number} [rowShading]  how opaque the alternating item shading is, 0 to
+ *   1, default 1. The shade colour is the theme's own; this is only how much of it
+ *   there is, so a page background shows through as it comes down and at 0 the boxes
+ *   are gone. A slider rather than three named modes, because the useful values are
+ *   in between and naming them was guessing which ones.
  */
 
 /** Text already broken to a single line and positioned. Renderers do not re-wrap.

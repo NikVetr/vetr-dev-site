@@ -67,8 +67,7 @@ test.describe('the quick export page', () => {
 test('the donate link is a corner overlay on every page', async ({ page }) => {
   // A small fixed pill in the bottom-right rather than a footer band -- the band cost
   // the studio's canvas a strip of room for one link. The label is bare "Donate" and
-  // where it goes is in the `title` and the accessible name, which is ordinary
-  // practice for an external link.
+  // that is all it says: no mark, no tooltip. Where it goes is in the href.
   await page.setViewportSize({ width: 1200, height: 900 });
   for (const path of ['/', '/sheet.html?target=es&source=en', '/customize.html?target=es&source=en']) {
     await page.goto(path);
@@ -76,7 +75,6 @@ test('the donate link is a corner overlay on every page', async ({ page }) => {
     await expect(link).toBeVisible();
     await expect(link).toHaveAttribute('href', 'https://www.givewell.org/donate');
     await expect(link).toHaveText('Donate');
-    await expect(link).toHaveAttribute('title', /GiveWell/);
     // A new tab, and no window handle back to the opener.
     await expect(link).toHaveAttribute('rel', /noopener/);
     // In the corner, and small: a whole band is what this replaced.

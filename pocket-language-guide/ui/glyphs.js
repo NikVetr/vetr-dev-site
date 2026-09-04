@@ -1358,7 +1358,7 @@ export function backgroundControl({ value, roleColours, flagColours, onChange })
     mode: value?.mode ?? 'none',
     color: value?.color ?? '#F6F2EA',
     strength: value?.strength ?? 0.06,
-    rows: value?.rows ?? 'shade',
+    rowShading: value?.rowShading ?? 1,
   };
 
   const swatch = /** @type {HTMLInputElement} */ (document.createElement('input'));
@@ -1375,45 +1375,40 @@ export function backgroundControl({ value, roleColours, flagColours, onChange })
   strength.setAttribute('aria-label', t('format.backgroundStrength'));
   strength.title = t('format.backgroundStrength');
 
-  // What an item's own box does, which is the other half of a page background: an
-  // unshaded row used to paint paper straight over the wash, and a shaded one still
-  // does unless it is told to let it through.
-  /** @type {('shade'|'soft'|'none')[]} */
-  const ROWS = ['shade', 'soft', 'none'];
-  const rows = document.createElement('div');
-  rows.className = 'segmented rows-mode';
-  rows.setAttribute('role', 'radiogroup');
-  rows.setAttribute('aria-label', t('format.backgroundRows'));
-  /** @type {HTMLButtonElement[]} */ const rowButtons = [];
-  for (const mode of ROWS) {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'chip';
-    button.setAttribute('role', 'radio');
-    button.textContent = t(`format.backgroundRows.${mode}`);
-    button.title = t(`format.backgroundRowsTitle.${mode}`);
-    button.addEventListener('click', () => push({ rows: mode }));
-    rowButtons.push(button);
-    rows.append(button);
-  }
+  // How much of the alternating item shading there is -- the other half of a page
+  // background, since an unshaded row used to paint paper straight over the wash and
+  // a shaded one still covers it. A slider rather than three named modes, because the
+  // useful settings are the ones in between and naming three was picking which.
+  const shading = /** @type {HTMLInputElement} */ (document.createElement('input'));
+  shading.type = 'range';
+  shading.min = '0';
+  shading.max = '1';
+  shading.step = '0.05';
+  shading.setAttribute('aria-label', t('format.backgroundRows'));
+  shading.title = t('format.backgroundRows');
+  shading.addEventListener('input', () => push({ rowShading: Number(shading.value) }));
 
   const custom = document.createElement('div');
   custom.className = 'numeric-custom';
-  custom.append(swatch, strength, rows);
+  custom.append(swatch, strength);
+  // Under the background's own slider, and always offered: the item shading is worth
+  // turning down on white paper too, where it is simply a cleaner card.
+  const rowsField = document.createElement('div');
+  rowsField.className = 'numeric-custom rows-shading';
+  rowsField.append(
+    Object.assign(document.createElement('span'), {
+      className: 'small muted', textContent: t('format.backgroundRows'),
+    }),
+    shading,
+  );
 
   const paint = () => {
     swatch.value = state.color;
     strength.value = String(state.strength);
     swatch.hidden = state.mode !== 'tint';
     strength.hidden = state.mode === 'tint' || state.mode === 'none';
-    // The row boxes are worth choosing even on white paper -- `none` is a cleaner
-    // card -- so unlike the swatch and the slider they are always offered.
-    custom.hidden = false;
-    rowButtons.forEach((b, i) => {
-      b.classList.toggle('current', ROWS[i] === state.rows);
-      b.setAttribute('aria-checked', String(ROWS[i] === state.rows));
-      b.tabIndex = ROWS[i] === state.rows ? 0 : -1;
-    });
+    custom.hidden = state.mode === 'none';
+    shading.value = String(state.rowShading);
   };
 
   /** @param {Partial<typeof state>} patch */
@@ -1445,13 +1440,14 @@ export function backgroundControl({ value, roleColours, flagColours, onChange })
   return {
     group: group.group,
     custom,
+    rowsField,
     /** @param {import('../core/types.js').SheetSpec['background']} next */
     sync(next) {
       state = {
         mode: next?.mode ?? 'none',
         color: next?.color ?? state.color,
         strength: next?.strength ?? state.strength,
-        rows: next?.rows ?? state.rows,
+        rowShading: next?.rowShading ?? state.rowShading,
       };
       paint();
       group.select(state.mode);

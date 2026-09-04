@@ -43,7 +43,16 @@ const SCALE_STEP = 0.01;
 // stepping in twos from there gives 1, 3, 5: still one image per face, none of them
 // half-used.
 const FACE_STEP = 2;
-const MAX_AUTO_FACES = 24;
+/** The ceiling on the auto face search.
+ *
+ * It was 24, which is generous for paper -- twelve sheets for one card set -- and far
+ * too low for the case that actually needs the room: a phone screen is one narrow
+ * column and no paper at all, so the whole 784-concept bank wants three dozen faces
+ * and there is nothing to spend by giving them. Below the ceiling the search reported
+ * `no-fit` and offered to shed sections instead, which is a worse answer than more
+ * faces for a sheet nobody prints. The search is one cheap monotone test per
+ * candidate, so the higher ceiling costs nothing. */
+const MAX_AUTO_FACES = 64;
 
 // Below this the type is close enough to its floor to read as squeezed, so auto
 // spends another pair of faces instead. Set under the Japanese reference sheet's
@@ -722,6 +731,12 @@ function findFixes(input, box, scaleFloor) {
   for (const section of ranked) {
     dropped[section.section_id] = false;
     const kept = blocks.filter((b) => dropped[b.sectionId] !== false);
+    // **Never offer to drop everything.** `breakColumns` treats no content as a valid
+    // assignment -- every column empty and entirely slack, which is the right answer
+    // for a sheet with nothing selected -- so a card too small to hold even one
+    // section satisfied this loop's success test by shedding all of them, and the fix
+    // it then offered emptied the sheet. A blank card is not a remedy for a full one.
+    if (!kept.some((b) => b.kind === 'items')) break;
     const atoms = buildAtoms({
       blocks: kept, theme, spec, corpus, measurer, registry,
       colWidth: box.colWidth, scale: scaleFloor, withPaint: false,

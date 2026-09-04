@@ -21,6 +21,8 @@ import { nextIndex } from './keys.js';
  * @property {string[]} svgs
  * @property {number|null} focused        face index, or null for the grid
  * @property {(index:number|null)=>void} onFocus
+ * @property {() => void} [onGrid]  back to the grid of every face, from the button
+ *   that leads the thumbnail strip
  * @property {(conceptId:string)=>void} onPick
  * @property {(conceptId:string|null)=>void} onHover
  * @property {string[]} [duplex]  card sides, front and back interleaved: when
@@ -76,7 +78,18 @@ export function renderFaces(input) {
       }
       return node;
     });
-    strip.append(...faces);
+    // "All faces" leads the strip, which is where the other faces already are. It
+    // used to sit in a toolbar row above the card, and that row -- one button and a
+    // sentence of hint text -- was costing a viewport-height canvas 57px of the card
+    // it is there to show. It appears only when a face is focused, which is the only
+    // time it does anything.
+    const all = document.createElement('button');
+    all.type = 'button';
+    all.className = 'face-all';
+    all.textContent = t('studio.allFaces');
+    all.title = t('studio.allFaces');
+    all.addEventListener('click', () => input.onGrid?.());
+    strip.append(all, ...faces);
     faceChooser(strip, faces, focused);
     root.append(strip);
   }
