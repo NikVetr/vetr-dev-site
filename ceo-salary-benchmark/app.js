@@ -12,6 +12,10 @@
 
   const DATA = window.CEO_BENCHMARK_DATA;
   if (!DATA) throw new Error("Benchmark data did not load.");
+  const PREDICTIVE_MODEL = DATA.predictiveModel;
+  if (!PREDICTIVE_MODEL || PREDICTIVE_MODEL.schemaVersion !== 1 || PREDICTIVE_MODEL.training?.rpExcluded !== true) {
+    throw new Error("Validated predictive-model data did not load.");
+  }
 
   const $ = (selector) => document.querySelector(selector);
   const SVG_NS = "http://www.w3.org/2000/svg";
@@ -40,6 +44,7 @@
     throw new Error("The same-source RP Form 990 scale profile is unavailable.");
   }
   const AUTO_WEIGHT_TOOLTIP = `Automatic weights never use salary. Form 990 records receive more weight when their reported expenses and employee counts are closer to RP's Form 990 values (${compactMoney(RP_FORM990_PROFILE.expenses)} and ${RP_FORM990_PROFILE.staff} employees). Job postings use a separate similarity score based only on non-pay information. Missing organization-size information reduces a record's weight. The target effective sample size controls how concentrated the Form 990 weights may become; pay-source balancing and your adjustments are applied afterward.`;
+  const MODEL_PROFILE_DEFAULTS = Object.freeze({ ...PREDICTIVE_MODEL.rpProfile });
   const DEFAULT_POSITION = Object.freeze({
     key: "ceo", label: "CEO", pageLabel: "CEO", defaultMeasure: "base",
     description: "Reviewed CEO pay benchmark using Form 990 filings and job postings.",
@@ -154,6 +159,10 @@
     scatterYAxis: { numerator: "salary", denominator: "expenses" },
     chartColor: "tier",
     showContours: true,
+    showJobAdIntervals: true,
+    modelMethod: "bayesian",
+    modelUseAdRanges: false,
+    modelProfile: { ...MODEL_PROFILE_DEFAULTS },
     quantileGranularity: "quintiles",
     customQuantiles: "5, 25, 50, 75, 95",
     markCurve: true,
@@ -176,7 +185,7 @@
   const DEFAULT_LAYOUT = Object.freeze({ settings: 0.156, table: 0.348, results: 0.25 });
   const PANEL_MINIMUMS = Object.freeze({
     settings: 218, analysisDesktop: 360, analysisMedium: 420, table: 350,
-    chart: 326, results: 112, shortChart: 210, shortCompactChart: 246, shortResults: 92,
+    chart: 368, results: 112, shortChart: 247, shortCompactChart: 283, shortResults: 60,
   });
 
   const inclusion = {
@@ -203,10 +212,11 @@
     appTitle: $("#app-title"), appDescription: $("#app-description"),
     position: $("#position-select"), positionSelectedLabel: $("#position-selected-label"),
     positionDescription: $("#position-description"),
-    stream: $("#stream-select"), streamDescription: $("#stream-description"),
+    stream: $("#stream-select"), streamField: $("#stream-field"), streamDescription: $("#stream-description"),
     measure: $("#measure-select"), measureField: $("#measure-field"),
-    dollarBasis: [...document.querySelectorAll('input[name="dollar-basis"]')], priceBasisStatus: $("#price-basis-status"),
-    sample: $("#sample-select"), fit: [...document.querySelectorAll('input[name="distribution"]')],
+    dollarBasis: [...document.querySelectorAll('input[name="dollar-basis"]')], dollarBasisField: $("#dollar-basis-field"),
+    priceBasisStatus: $("#price-basis-status"), sample: $("#sample-select"), sampleField: $("#sample-field"),
+    fit: [...document.querySelectorAll('input[name="distribution"]')], distributionField: $("#distribution-field"),
     weightingComponents: [...document.querySelectorAll('.weighting-field input[type="checkbox"]')],
     sizeControls: $("#size-controls"), expenseTargetField: $("#expense-target-field"), staffTargetField: $("#staff-target-field"),
     recencyField: $("#recency-field"), targetExpense: $("#target-expense"), targetStaff: $("#target-staff"),
@@ -214,7 +224,8 @@
     expenseBandwidthValue: $("#expense-bandwidth-value"), staffBandwidthValue: $("#staff-bandwidth-value"),
     recencyHalfLifeValue: $("#recency-halflife-value"), discreteWeightEditors: $("#discrete-weight-editors"),
     binField: $("#bin-field"), bins: $("#bin-count"), binValue: $("#bin-value"),
-    view: [...document.querySelectorAll('input[name="chart-view"]')],
+    chartViewTabs: [...document.querySelectorAll('.chart-view-tab[data-chart-view]')],
+    chartViewTablist: $("#chart-view-tabs"), chartViewContent: $("#chart-view-content"),
     axisModes: {
       histogram: [...document.querySelectorAll('input[name="histogram-axis-mode"]')],
       scatterX: [...document.querySelectorAll('input[name="scatter-x-axis-mode"]')],
@@ -225,9 +236,24 @@
       scatterX: [...document.querySelectorAll('input[name="scatter-x-axis-scale"]')],
       scatterY: [...document.querySelectorAll('input[name="scatter-y-axis-scale"]')],
     },
-    histogramAxisSettings: $("#histogram-axis-settings"), scatterAxisSettings: $("#scatter-axis-settings"),
-    scatterControls: $("#scatter-controls"), contourField: $("#contour-field"),
-    chartColor: $("#chart-color"), colorDescription: $("#color-description"), showContours: $("#show-contours"),
+    axisSettings: $("#axis-settings"), histogramAxisSettings: $("#histogram-axis-settings"), scatterAxisSettings: $("#scatter-axis-settings"),
+    scatterControls: $("#scatter-controls"), scatterDisplaySettings: $("#scatter-display-settings"),
+    contourField: $("#contour-field"), jobAdIntervalField: $("#job-ad-interval-field"),
+    chartColor: $("#chart-color"), chartColorField: $("#chart-color-field"), colorDescription: $("#color-description"), showContours: $("#show-contours"),
+    weightingField: $("#weighting-field"),
+    showJobAdIntervals: $("#show-job-ad-intervals"),
+    modelSettings: $("#model-settings"), modelMethod: $("#model-method"),
+    modelUseAdRanges: $("#model-use-ad-ranges"), modelAdRangesField: $("#model-ad-ranges-field"),
+    modelResetProfile: $("#model-reset-profile"), modelExpenses: $("#model-expenses"),
+    modelRevenue: $("#model-revenue"), modelStaff: $("#model-staff"), modelYear: $("#model-year"),
+    modelFocus: $("#model-focus"), modelEa: $("#model-ea"), modelOrganizationType: $("#model-organization-type"),
+    modelTitle: $("#model-title"), modelLocation: $("#model-location"), modelCategoryInputs: $("#model-category-inputs"),
+    modelSettingsNote: $("#model-settings-note"), modelDiagnostics: $("#model-diagnostics"),
+    modelCvError: $("#model-cv-error"), modelCvCoverage: $("#model-cv-coverage"),
+    modelProfileSupport: $("#model-profile-support"), modelProfileReasons: $("#model-profile-reasons"),
+    modelTrainingCount: $("#model-training-count"),
+    modelMethodDescription: $("#model-method-description"), modelComparisonBody: $("#model-comparison-body"),
+    modelContributions: $("#model-contributions"), modelLimitations: $("#model-limitations"),
     comparabilityProfileField: $("#comparability-profile-field"),
     autoTargetEssField: $("#auto-target-ess-field"),
     autoTargetEss: $("#auto-target-ess"), autoTargetEssValue: $("#auto-target-ess-value"),
@@ -239,7 +265,8 @@
     axisSelector: $("#axis-selector-popover"), axisSelectorTitle: $("#axis-selector-title"),
     axisNumerator: $("#axis-numerator"), axisNumeratorLabel: $("#axis-numerator-label"), axisDenominator: $("#axis-denominator"),
     axisDenominatorField: $("#axis-denominator-field"), axisSelectorClose: $("#axis-selector-close"),
-    statN: $("#stat-n"), statNUnit: $("#stat-n-unit"), statNeff: $("#stat-neff"), statCenter: $("#stat-center"),
+    statN: $("#stat-n"), statNUnit: $("#stat-n-unit"), statNeff: $("#stat-neff"),
+    statNeffUnit: $("#stat-neff-unit"), statCenter: $("#stat-center"), statCenterUnit: $("#stat-center-unit"),
     quantileGranularity: $("#quantile-granularity"), markCurve: $("#mark-curve"), quantileGrid: $("#quantile-grid"),
     customQuantilesField: $("#custom-quantiles-field"), customQuantiles: $("#custom-quantiles"),
     customQuantilesError: $("#custom-quantiles-error"), chartLegend: $("#chart-legend"),
@@ -609,6 +636,7 @@
   function rows() {
     const incumbents = positionIncumbents();
     const jobAds = positionJobAds();
+    if (state.view === "model") return [...incumbents, ...jobAds];
     if (state.stream === "combined") return [...incumbents, ...jobAds];
     return state.stream === "incumbents" ? incumbents : jobAds;
   }
@@ -913,7 +941,8 @@
 
   function salaryForBasis(row, inflationAdjusted) {
     const values = inflationAdjusted ? row.salary : row.nominalSalary;
-    const value = rowStream(row) === "jobAds" ? values?.base : values?.[state.measure];
+    const measure = rowStream(row) === "jobAds" || state.view === "model" ? "base" : state.measure;
+    const value = values?.[measure];
     return Number.isFinite(value) && value > 0 ? value : null;
   }
 
@@ -1104,6 +1133,32 @@
     };
   }
 
+  function axisUsesSalary(axisKey) {
+    const expression = axisExpression(axisKey);
+    return expression.numerator === "salary"
+      || (axisMode(axisKey) === "ratio" && expression.denominator === "salary");
+  }
+
+  function axisValueAtSalary(axisKey, row, salaryValue) {
+    const expression = axisExpression(axisKey);
+    const valueFor = (key) => key === "salary" ? salaryValue : numericVariables[key]?.value(row);
+    const numerator = valueFor(expression.numerator);
+    if (axisMode(axisKey) === "value") return numerator;
+    const denominator = valueFor(expression.denominator);
+    return Number.isFinite(numerator) && Number.isFinite(denominator) && numerator > 0 && denominator > 0
+      ? numerator / denominator : null;
+  }
+
+  function axisInterval(axisKey, row) {
+    if (!state.showJobAdIntervals || !axisUsesSalary(axisKey)) return null;
+    const range = salaryRange(row);
+    if (!(range?.low > 0) || !(range?.high > range.low)) return null;
+    const first = axisValueAtSalary(axisKey, row, range.low);
+    const second = axisValueAtSalary(axisKey, row, range.high);
+    if (!Number.isFinite(first) || !Number.isFinite(second) || first <= 0 || second <= 0) return null;
+    return { low: Math.min(first, second), high: Math.max(first, second), atLowSalary: first, atHighSalary: second };
+  }
+
   function axisGeometry(descriptor) {
     return descriptor.logarithmic
       ? { transform: Math.log, inverse: Math.exp, jacobian: (value) => value }
@@ -1172,6 +1227,21 @@
   }
 
   function plotEligibility(row) {
+    if (state.view === "model") {
+      if (!isCeoPosition()) return { eligible: false, reason: "The predictive model is currently validated only for CEO pay." };
+      if (!row.defaultIncluded || salaryForBasis(row, true) == null) {
+        return { eligible: false, reason: "This record is outside the model's fixed recommended training cohort." };
+      }
+      if (rowStream(row) === "jobAds" && (state.modelMethod === "gam" || !state.modelUseAdRanges)) {
+        return {
+          eligible: false,
+          reason: state.modelMethod === "gam"
+            ? "The scale GAM was trained on Form 990 salaries only."
+            : "Advertised ranges are switched off for this model prediction.",
+        };
+      }
+      return { eligible: true, reason: "Included in the model's fixed training cohort." };
+    }
     if (state.view === "histogram") return axisEligibility("histogram", row);
     const horizontal = axisEligibility("scatterX", row);
     if (!horizontal.eligible) return { ...horizontal, reason: `Horizontal axis: ${horizontal.reason}` };
@@ -1188,6 +1258,7 @@
 
   function currentPlotItems() {
     if (state.view === "histogram") return axisItems("histogram");
+    if (state.view === "model") return [];
     const xDescriptor = axisDescriptor("scatterX");
     const yDescriptor = axisDescriptor("scatterY");
     return selectedRows((row) => plotEligibility(row).eligible)
@@ -1199,8 +1270,8 @@
       }));
   }
 
-  function analysisAxisKey() { return state.view === "scatter" ? "scatterY" : "histogram"; }
-  function analysisItems() { return state.view === "scatter" ? currentPlotItems() : axisItems(analysisAxisKey()); }
+  function analysisAxisKey() { return state.view === "scatter" ? "scatterY" : state.view === "histogram" ? "histogram" : null; }
+  function analysisItems() { return state.view === "model" ? [] : state.view === "scatter" ? currentPlotItems() : axisItems("histogram"); }
 
   function sampleQuantile(values, probability) {
     const sorted = values.filter(Number.isFinite).sort((a, b) => a - b);
@@ -2420,9 +2491,14 @@
     refs.chartLegend.append(legend);
   }
 
-  function renderScatterLegend(colorMap, contoursShown, items) {
+  function renderScatterLegend(colorMap, contoursShown, items, intervalsShown = false) {
     refs.chartLegend.replaceChildren();
     appendCategoryLegend(colorMap);
+    if (intervalsShown) {
+      const interval = document.createElement("span");
+      interval.innerHTML = '<i class="interval-swatch"></i> Advertised range · point is midpoint';
+      refs.chartLegend.append(interval);
+    }
     if (contoursShown) {
       const contour = document.createElement("span"); contour.innerHTML = '<i class="contour-swatch"></i> Approximate spread: 50 / 80 / 95%';
       refs.chartLegend.append(contour);
@@ -2543,6 +2619,19 @@
     const yTransform = yGeometry.transform;
     const transformedX = items.map((item) => xTransform(item.xValue));
     const transformedY = items.map((item) => yTransform(item.yValue));
+    const advertisedIntervals = items.map((item) => ({
+      item,
+      x: axisInterval("scatterX", item.row),
+      y: axisInterval("scatterY", item.row),
+    })).filter((interval) => interval.x || interval.y);
+    if (advertisedIntervals.length) {
+      $("#chart-description").textContent += " Advertised low-to-high ranges are drawn around job-posting midpoints.";
+    }
+    const advertisedIntervalsById = new Map(advertisedIntervals.map((interval) => [interval.item.row.id, interval]));
+    advertisedIntervals.forEach((interval) => {
+      if (interval.x) transformedX.push(xTransform(interval.x.low), xTransform(interval.x.high));
+      if (interval.y) transformedY.push(yTransform(interval.y.low), yTransform(interval.y.high));
+    });
     rpItems.forEach((item) => {
       transformedX.push(xTransform(item.xValue));
       transformedY.push(yTransform(item.yValue));
@@ -2576,6 +2665,45 @@
     clip.append(svgElement("rect", { x: margin.left, y: margin.top, width: innerWidth, height: innerHeight }));
     defs.append(clip); svg.append(defs);
     const points = items.map((item) => ({ item, x: xScale(item.xValue), y: yScale(item.yValue) }));
+    const intervalGroup = svgElement("g", { class: "job-ad-intervals", "clip-path": `url(#${clipId})`, "aria-hidden": "true" });
+    advertisedIntervals.forEach(({ item, x: xInterval, y: yInterval }) => {
+      const midpointX = xScale(item.xValue);
+      const midpointY = yScale(item.yValue);
+      if (xInterval && yInterval) {
+        const range = salaryRange(item.row);
+        const locus = Array.from({ length: 25 }, (_, index) => {
+          const salaryValue = range.low + index / 24 * (range.high - range.low);
+          return {
+            x: axisValueAtSalary("scatterX", item.row, salaryValue),
+            y: axisValueAtSalary("scatterY", item.row, salaryValue),
+          };
+        }).filter((point) => Number.isFinite(point.x) && Number.isFinite(point.y));
+        if (locus.length > 1) {
+          const path = locus.map((point, index) => `${index ? "L" : "M"}${xScale(point.x).toFixed(2)},${yScale(point.y).toFixed(2)}`).join(" ");
+          intervalGroup.append(svgElement("path", { d: path, class: "job-ad-interval" }));
+          [locus[0], locus.at(-1)].forEach((point) => {
+            intervalGroup.append(svgElement("circle", {
+              cx: xScale(point.x), cy: yScale(point.y), r: 2.2,
+              class: "job-ad-interval job-ad-interval-endpoint",
+            }));
+          });
+        }
+        return;
+      }
+      if (xInterval) {
+        const x1 = xScale(xInterval.low); const x2 = xScale(xInterval.high);
+        intervalGroup.append(svgElement("line", { x1, x2, y1: midpointY, y2: midpointY, class: "job-ad-interval" }));
+        intervalGroup.append(svgElement("line", { x1, x2: x1, y1: midpointY - 3, y2: midpointY + 3, class: "job-ad-interval job-ad-interval-cap" }));
+        intervalGroup.append(svgElement("line", { x1: x2, x2, y1: midpointY - 3, y2: midpointY + 3, class: "job-ad-interval job-ad-interval-cap" }));
+      }
+      if (yInterval) {
+        const y1 = yScale(yInterval.low); const y2 = yScale(yInterval.high);
+        intervalGroup.append(svgElement("line", { x1: midpointX, x2: midpointX, y1, y2, class: "job-ad-interval" }));
+        intervalGroup.append(svgElement("line", { x1: midpointX - 3, x2: midpointX + 3, y1, y2: y1, class: "job-ad-interval job-ad-interval-cap" }));
+        intervalGroup.append(svgElement("line", { x1: midpointX - 3, x2: midpointX + 3, y1: y2, y2, class: "job-ad-interval job-ad-interval-cap" }));
+      }
+    });
+    svg.append(intervalGroup);
     const contoursShown = appendCovarianceContours(svg, points, clipId);
     if (state.hoverQuantile != null && state.hoverQuantile > 0) {
       const y = yScale(state.hoverQuantile);
@@ -2585,22 +2713,44 @@
     const correlations = weightedCorrelations(items, (item) => xTransform(item.xValue), (item) => yTransform(item.yValue));
     points.forEach(({ item, x, y }) => {
       const category = chartCategory(item.row);
+      const advertisedInterval = advertisedIntervalsById.get(item.row.id);
+      const advertisedRangeLabel = [
+        advertisedInterval?.y
+          ? `${yDescriptor.label} advertised range ${yDescriptor.fullFormat(advertisedInterval.y.low)} to ${yDescriptor.fullFormat(advertisedInterval.y.high)}` : "",
+        advertisedInterval?.x
+          ? `${xDescriptor.label} advertised range ${xDescriptor.fullFormat(advertisedInterval.x.low)} to ${xDescriptor.fullFormat(advertisedInterval.x.high)}` : "",
+      ].filter(Boolean).join(", ");
       const baseRadius = 4.5;
       const radius = baseRadius * Math.sqrt(clamp(item.weight, 0.16, 10));
       const point = svgElement("circle", {
         cx: x, cy: y, r: radius, fill: colors.get(category), "data-weight": item.weight.toFixed(6),
         class: `scatter-point${state.focusedId === item.row.id ? " is-focused" : ""}`, tabindex: "0", role: "button",
-        "aria-label": `${item.row.organization}, ${item.row.title || "reported role"}, ${yDescriptor.label} ${yDescriptor.fullFormat(item.yValue)}, ${xDescriptor.label} ${xDescriptor.fullFormat(item.xValue)}`,
+        "aria-label": [
+          item.row.organization, item.row.title || "reported role",
+          `${yDescriptor.label}${advertisedInterval?.y ? " midpoint" : ""} ${yDescriptor.fullFormat(item.yValue)}`,
+          `${xDescriptor.label}${advertisedInterval?.x ? " midpoint" : ""} ${xDescriptor.fullFormat(item.xValue)}`,
+          advertisedRangeLabel,
+        ].filter(Boolean).join(", "),
       });
-      point.addEventListener("pointerenter", (event) => showTooltip(event, item, {
+      const tooltipContext = {
         category, primaryLabel: yDescriptor.primaryLabel(item.row), primaryFormat: yDescriptor.fullFormat,
         chartDetail: [xDescriptor.label, xDescriptor.fullFormat(item.xValue)],
         rankDetails: [
           [`${yDescriptor.shortLabel} percentile`, percentilePositionLabel(items, item.yValue, (candidate) => candidate.yValue)],
           [`${xDescriptor.shortLabel} percentile`, percentilePositionLabel(items, item.xValue, (candidate) => candidate.xValue)],
         ],
-      }));
+      };
+      const showPointTooltip = (event) => {
+        if (Number.isFinite(event.clientX) && Number.isFinite(event.clientY) && (event.clientX || event.clientY)) {
+          showTooltip(event, item, tooltipContext);
+          return;
+        }
+        const bounds = point.getBoundingClientRect();
+        showTooltip({ clientX: bounds.left + bounds.width / 2, clientY: bounds.top + bounds.height / 2 }, item, tooltipContext);
+      };
+      point.addEventListener("pointerenter", showPointTooltip);
       point.addEventListener("pointermove", positionTooltip); point.addEventListener("pointerleave", hideTooltip);
+      point.addEventListener("focus", showPointTooltip); point.addEventListener("blur", hideTooltip);
       point.addEventListener("click", () => focusRow(item.row.id));
       point.addEventListener("keydown", (event) => { if (event.key === "Enter" || event.key === " ") focusRow(item.row.id); });
       svg.append(point);
@@ -2622,7 +2772,7 @@
     appendAxisControl(svg, "scatterY", axisDisplayLabel(yDescriptor), {
       x: 14, y: margin.top + innerHeight / 2, transform: `rotate(-90 14 ${margin.top + innerHeight / 2})`, "text-anchor": "middle",
     });
-    renderScatterLegend(colors, contoursShown, items);
+    renderScatterLegend(colors, contoursShown, items, advertisedIntervals.length > 0);
     const totalWeight = items.reduce((sum, item) => sum + item.weight, 0);
     const squared = items.reduce((sum, item) => sum + item.weight ** 2, 0);
     refs.statN.textContent = items.length;
@@ -2630,8 +2780,311 @@
     refs.statCenter.textContent = yDescriptor.format(distributionQuantile(items, 0.5));
   }
 
+  function modelPreprocessing(model) {
+    return new Map(model.preprocessing.map((item) => [item.key, item]));
+  }
+
+  function modelContinuousVector(model) {
+    const preprocessing = modelPreprocessing(model);
+    const standardized = ["expenses", "revenue", "staff", "compensation_year"].map((key) => {
+      const definition = preprocessing.get(key);
+      const raw = Number(state.modelProfile[key]);
+      if (!definition || !Number.isFinite(raw) || raw <= 0) return NaN;
+      const transformed = definition.transform === "log" ? Math.log(raw) : raw;
+      return (transformed - definition.center) / definition.scale;
+    });
+    return [...standardized, 0, 0, 0];
+  }
+
+  function modelCategoryDefinition(key) {
+    return PREDICTIVE_MODEL.categoricalFeatures.find((feature) => feature.key === key);
+  }
+
+  function modelCategoryIndex(key, value) {
+    if (value === "__average__") return -1;
+    const index = modelCategoryDefinition(key)?.levels.indexOf(value) ?? -1;
+    if (index < 0) throw new Error(`Unknown predictive-model category: ${key}=${value}`);
+    return index;
+  }
+
+  function median(values) { return sampleQuantile(values, 0.5); }
+
+  function medianAcrossDraws(values) {
+    return median(values.filter(Number.isFinite));
+  }
+
+  function interpolateModelEffect(effect, value) {
+    const x = effect.z; const y = effect.effect;
+    if (!x.length || x.length !== y.length) throw new Error("Invalid GAM effect grid");
+    if (value <= x[0]) return y[0];
+    if (value >= x.at(-1)) return y.at(-1);
+    let low = 0; let high = x.length - 1;
+    while (high - low > 1) {
+      const middle = Math.floor((low + high) / 2);
+      if (x[middle] <= value) low = middle; else high = middle;
+    }
+    const fraction = (value - x[low]) / (x[high] - x[low]);
+    return y[low] + fraction * (y[high] - y[low]);
+  }
+
+  function gamModelPrediction() {
+    const model = PREDICTIVE_MODEL.models.gam;
+    const vector = modelContinuousVector(model);
+    if (vector.slice(0, 4).some((value) => !Number.isFinite(value))) return null;
+    const keys = ["expenses", "revenue", "staff", "year"];
+    const contributions = keys.map((key, index) => ({
+      label: { expenses: "Expenses", revenue: "Revenue", staff: "Employees", year: "Pay year" }[key],
+      value: interpolateModelEffect(model.effects[key], vector[index]),
+    }));
+    const mu = model.baseline + contributions.reduce((sum, contribution) => sum + contribution.value, 0);
+    const samples = model.residuals.map((residual) => Math.exp(mu + residual)).filter((value) => Number.isFinite(value) && value > 0);
+    return {
+      methodKey: "gam", model, mu, samples,
+      expected: samples.reduce((sum, value) => sum + value, 0) / samples.length,
+      median: sampleQuantile(samples, 0.5),
+      contributions,
+    };
+  }
+
+  function bayesianModelPrediction() {
+    const model = state.modelUseAdRanges ? PREDICTIVE_MODEL.models.bayesianRanges : PREDICTIVE_MODEL.models.bayesian;
+    const vector = modelContinuousVector(model);
+    if (vector.slice(0, 4).some((value) => !Number.isFinite(value))) return null;
+    const draws = model.draws;
+    const categoryIndexes = {
+      focus: modelCategoryIndex("focus_area", state.modelProfile.focus_area),
+      organizationType: modelCategoryIndex("organization_type", state.modelProfile.organization_type),
+      title: modelCategoryIndex("title_group", state.modelProfile.title_group),
+      location: modelCategoryIndex("location_scope", state.modelProfile.location_scope),
+      ea: state.modelProfile.ea_relationship === "__average__"
+        ? -1 : PREDICTIVE_MODEL.eaLevels.indexOf(state.modelProfile.ea_relationship),
+    };
+    if (categoryIndexes.ea < -1) throw new Error(`Unknown EA model category: ${state.modelProfile.ea_relationship}`);
+    const mu = []; const samples = []; const analyticMeans = [];
+    for (let index = 0; index < draws.alpha.length; index += 1) {
+      let value = draws.alpha[index] + vector.reduce((sum, item, column) => sum + item * draws.beta[index][column], 0);
+      Object.entries(categoryIndexes).forEach(([key, categoryIndex]) => {
+        if (categoryIndex >= 0) value += draws[key][index][categoryIndex];
+      });
+      const sigma = draws.sigma[index][0];
+      mu.push(value);
+      samples.push(Math.exp(value + sigma * draws.residualZ[index]));
+      analyticMeans.push(Math.exp(value + sigma ** 2 / 2));
+    }
+    const contributionSpecs = [
+      ["Expenses", () => draws.beta.map((row) => row[0] * vector[0])],
+      ["Revenue", () => draws.beta.map((row) => row[1] * vector[1])],
+      ["Employees", () => draws.beta.map((row) => row[2] * vector[2])],
+      ["Pay year", () => draws.beta.map((row) => row[3] * vector[3])],
+      ["Focus area", () => categoryIndexes.focus < 0 ? [0] : draws.focus.map((row) => row[categoryIndexes.focus])],
+      ["Effective Altruism", () => categoryIndexes.ea < 0 ? [0] : draws.ea.map((row) => row[categoryIndexes.ea])],
+      ["Organization type", () => categoryIndexes.organizationType < 0 ? [0] : draws.organizationType.map((row) => row[categoryIndexes.organizationType])],
+      ["Title group", () => categoryIndexes.title < 0 ? [0] : draws.title.map((row) => row[categoryIndexes.title])],
+      ["Location", () => categoryIndexes.location < 0 ? [0] : draws.location.map((row) => row[categoryIndexes.location])],
+    ];
+    return {
+      methodKey: state.modelUseAdRanges ? "bayesian_ranges" : "bayesian",
+      model, mu, samples: samples.filter((value) => Number.isFinite(value) && value > 0),
+      expected: analyticMeans.reduce((sum, value) => sum + value, 0) / analyticMeans.length,
+      median: sampleQuantile(samples, 0.5),
+      contributions: contributionSpecs.map(([label, accessor]) => ({ label, value: medianAcrossDraws(accessor()) })),
+    };
+  }
+
+  function currentModelPrediction() {
+    if (!isCeoPosition()) return null;
+    return state.modelMethod === "gam" ? gamModelPrediction() : bayesianModelPrediction();
+  }
+
+  function modelComparisonRow(key) {
+    return PREDICTIVE_MODEL.comparison.find((row) => row.key === key);
+  }
+
+  function modelProfileCoverage() {
+    const warnings = [];
+    const active = state.modelMethod === "gam" ? PREDICTIVE_MODEL.models.gam
+      : state.modelUseAdRanges ? PREDICTIVE_MODEL.models.bayesianRanges : PREDICTIVE_MODEL.models.bayesian;
+    const preprocessing = modelPreprocessing(active);
+    ["expenses", "revenue", "staff", "compensation_year"].forEach((key) => {
+      const definition = preprocessing.get(key);
+      const value = Number(state.modelProfile[key]);
+      if (!Number.isFinite(value) || value <= 0) warnings.push(`${key} is invalid`);
+      else if (value < definition.minimum || value > definition.maximum) warnings.push(`${key.replace("compensation_", "")} is outside the training range`);
+    });
+    if (state.modelMethod === "bayesian") {
+      PREDICTIVE_MODEL.categoricalFeatures.forEach((definition) => {
+        const value = state.modelProfile[definition.key];
+        if (value === "__average__") return;
+        const index = definition.levels.indexOf(value);
+        const count = definition.exactCounts[index] || 0;
+        if (count < 3) warnings.push(`${value} has ${count} filing examples`);
+      });
+      const eaIndex = PREDICTIVE_MODEL.eaLevels.indexOf(state.modelProfile.ea_relationship);
+      const eaCounts = PREDICTIVE_MODEL.eaExactCounts || [];
+      if (eaIndex >= 0 && (eaCounts[eaIndex] || 0) < 3) warnings.push(`${state.modelProfile.ea_relationship} has ${eaCounts[eaIndex] || 0} filing examples`);
+    }
+    return { label: warnings.length ? "Sparse" : "Typical", warnings };
+  }
+
+  function renderModelContributions(prediction) {
+    refs.modelContributions.replaceChildren();
+    const maximum = Math.max(...prediction.contributions.map((item) => Math.abs(item.value)), 0.01);
+    prediction.contributions.forEach((item) => {
+      const row = document.createElement("div");
+      row.className = `model-contribution${item.value < 0 ? " is-negative" : ""}`;
+      const label = document.createElement("span"); label.textContent = item.label; label.title = item.label;
+      const track = document.createElement("span"); track.className = "model-contribution-track";
+      const bar = document.createElement("i"); bar.className = "model-contribution-bar";
+      const width = Math.max(1, Math.abs(item.value) / maximum * 50);
+      bar.style.width = `${width}%`;
+      bar.style.left = item.value < 0 ? `${50 - width}%` : "50%";
+      track.append(bar);
+      const value = document.createElement("output"); value.textContent = `${item.value >= 0 ? "+" : ""}${item.value.toFixed(2)}`;
+      row.append(label, track, value); refs.modelContributions.append(row);
+    });
+  }
+
+  function renderModelDiagnostics(prediction) {
+    const metric = modelComparisonRow(prediction.methodKey);
+    const coverage = modelProfileCoverage();
+    refs.modelCvError.textContent = `${(metric.medianAbsPercentError * 100).toFixed(0)}%`;
+    refs.modelCvCoverage.textContent = `${(metric.coverage90 * 100).toFixed(0)}%`;
+    refs.modelProfileSupport.textContent = coverage.label;
+    refs.modelProfileSupport.classList.toggle("model-profile-warning", coverage.warnings.length > 0);
+    refs.modelProfileSupport.title = coverage.warnings.join("; ");
+    refs.modelProfileSupport.setAttribute("aria-describedby", "model-profile-reasons");
+    refs.modelProfileReasons.hidden = !coverage.warnings.length;
+    refs.modelProfileReasons.textContent = coverage.warnings.length
+      ? `Limited support: ${coverage.warnings.join("; ")}.` : "";
+    refs.modelTrainingCount.textContent = `${PREDICTIVE_MODEL.training.exactFilings + (prediction.model.includeAdvertisedRanges ? PREDICTIVE_MODEL.training.advertisedRecords : 0)}`;
+    refs.modelMethodDescription.textContent = `${PREDICTIVE_MODEL.method[state.modelMethod]} ${PREDICTIVE_MODEL.method.validation}`;
+    refs.modelComparisonBody.replaceChildren();
+    PREDICTIVE_MODEL.comparison.forEach((row) => {
+      const tr = document.createElement("tr");
+      tr.classList.toggle("is-selected", row.key === prediction.methodKey);
+      tr.innerHTML = `<td>${escapeHtml(row.label)}</td><td>${row.logRmse.toFixed(3)}</td><td>${(row.medianAbsPercentError * 100).toFixed(0)}%</td><td>${(row.coverage90 * 100).toFixed(0)}%</td><td>${row.meanLogPredictiveDensity.toFixed(3)}</td>`;
+      refs.modelComparisonBody.append(tr);
+    });
+    renderModelContributions(prediction);
+    const warningText = coverage.warnings.length
+      ? `This target profile has limited support: ${coverage.warnings.join("; ")}. ` : "";
+    refs.modelLimitations.textContent = `${warningText}${PREDICTIVE_MODEL.exclusions.join(" ")} Prediction intervals describe uncertainty among modeled peer salaries, not a recommended salary range.`;
+  }
+
+  function modelDensity(samples) {
+    const logs = samples.map(Math.log);
+    const mean = logs.reduce((sum, value) => sum + value, 0) / logs.length;
+    const variance = logs.reduce((sum, value) => sum + (value - mean) ** 2, 0) / Math.max(1, logs.length - 1);
+    const bandwidth = Math.max(0.04, 1.06 * Math.sqrt(variance) * logs.length ** -0.2);
+    return (value) => {
+      if (!(value > 0)) return 0;
+      const logValue = Math.log(value);
+      const total = logs.reduce((sum, observation) => {
+        const z = (logValue - observation) / bandwidth;
+        return sum + Math.exp(-0.5 * z * z);
+      }, 0);
+      return total / (logs.length * bandwidth * Math.sqrt(2 * Math.PI) * value);
+    };
+  }
+
+  function renderModelLegend() {
+    refs.chartLegend.replaceChildren();
+    [["model-legend-50", "50% prediction interval"], ["model-legend-80", "80% prediction interval"], ["model-legend-95", "95% prediction interval"]].forEach(([className, label]) => {
+      const item = document.createElement("span"); item.innerHTML = `<i class="swatch ${className}"></i> ${label}`; refs.chartLegend.append(item);
+    });
+    const reference = document.createElement("span"); reference.innerHTML = '<i class="line-swatch model-reference-swatch"></i> Current RP filing salary · not trained'; refs.chartLegend.append(reference);
+  }
+
+  function renderModel() {
+    const svg = refs.chart;
+    svg.replaceChildren();
+    const prediction = currentModelPrediction();
+    const { width, height } = measuredChartSize();
+    svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+    refs.chartLegend.replaceChildren();
+    if (!prediction || prediction.samples.length < 20) {
+      refs.modelDiagnostics.hidden = true;
+      const empty = svgElement("text", { x: width / 2, y: height / 2, "text-anchor": "middle", fill: "#52879E", "font-size": 13 });
+      empty.textContent = isCeoPosition() ? "Enter positive model inputs to generate a prediction." : "The predictive model is currently validated only for CEO pay.";
+      svg.append(empty);
+      $("#chart-description").textContent = empty.textContent;
+      refs.statN.textContent = "—"; refs.statNeff.textContent = "—"; refs.statCenter.textContent = "—";
+      return;
+    }
+    refs.modelDiagnostics.hidden = false;
+    renderModelDiagnostics(prediction);
+    const samples = [...prediction.samples].sort((a, b) => a - b);
+    const intervals = {
+      95: [sampleQuantile(samples, .025), sampleQuantile(samples, .975)],
+      80: [sampleQuantile(samples, .1), sampleQuantile(samples, .9)],
+      50: [sampleQuantile(samples, .25), sampleQuantile(samples, .75)],
+    };
+    const referenceSalary = Number(PREDICTIVE_MODEL.rpProfile.reference_salary);
+    const compactWidth = width < 480; const compactHeight = height < 230;
+    const margin = { top: compactHeight ? 10 : 15, right: compactWidth ? 10 : 18, bottom: compactHeight ? 38 : 48, left: compactWidth ? 58 : 68 };
+    const innerWidth = width - margin.left - margin.right; const innerHeight = height - margin.top - margin.bottom;
+    const domainValues = [intervals[95][0], intervals[95][1], referenceSalary].filter((value) => value > 0);
+    const [xMin, xMax] = paddedDomain(domainValues, 0.08, true);
+    const xScale = (value) => margin.left + ((value - xMin) / (xMax - xMin)) * innerWidth;
+    const density = modelDensity(samples);
+    const points = Array.from({ length: 181 }, (_, index) => {
+      const value = xMin + index / 180 * (xMax - xMin);
+      return { value, density: density(value) };
+    });
+    const peak = Math.max(...points.map((point) => point.density));
+    const yScale = (value) => margin.top + innerHeight - value / peak * innerHeight * .92;
+    const bottom = margin.top + innerHeight;
+    Object.entries(intervals).sort((a, b) => Number(b[0]) - Number(a[0])).forEach(([level, interval]) => {
+      svg.append(svgElement("rect", {
+        x: xScale(interval[0]), y: margin.top, width: Math.max(1, xScale(interval[1]) - xScale(interval[0])), height: innerHeight,
+        class: `model-interval-${level}`, "aria-hidden": "true",
+      }));
+    });
+    const areaPath = [`M${xScale(points[0].value)},${bottom}`, ...points.map((point) => `L${xScale(point.value).toFixed(2)},${yScale(point.density).toFixed(2)}`), `L${xScale(points.at(-1).value)},${bottom}Z`].join(" ");
+    const linePath = points.map((point, index) => `${index ? "L" : "M"}${xScale(point.value).toFixed(2)},${yScale(point.density).toFixed(2)}`).join(" ");
+    svg.append(svgElement("path", { d: areaPath, class: "model-density-area" }));
+    svg.append(svgElement("path", { d: linePath, class: "model-density-line" }));
+    const medianValue = sampleQuantile(samples, .5);
+    svg.append(svgElement("line", { x1: xScale(medianValue), x2: xScale(medianValue), y1: yScale(density(medianValue)), y2: bottom, class: "model-median-line" }));
+    if (referenceSalary >= xMin && referenceSalary <= xMax) {
+      const referenceX = xScale(referenceSalary);
+      svg.append(svgElement("line", { x1: referenceX, x2: referenceX, y1: margin.top, y2: bottom, class: "model-reference-line" }));
+      const label = svgElement("text", { x: referenceX + 4, y: margin.top + 11, class: "model-reference-label" });
+      label.textContent = `RP ${compactMoney(referenceSalary)}`; svg.append(label);
+    }
+    if (state.markCurve && quantilePercentiles().length < 21) {
+      quantilePercentiles().forEach((percentile) => {
+        const value = sampleQuantile(samples, percentile / 100);
+        if (!(value >= xMin && value <= xMax)) return;
+        const x = xScale(value); const y = yScale(density(value));
+        svg.append(svgElement("line", { x1: x, x2: x, y1: y - 5, y2: y + 5, class: "curve-quantile-tick" }));
+      });
+    }
+    if (state.hoverQuantile != null) {
+      const x = xScale(state.hoverQuantile);
+      svg.append(svgElement("line", { x1: x, x2: x, y1: margin.top, y2: bottom, class: "quantile-guide" }));
+    }
+    const tickCount = clamp(Math.floor(innerWidth / 100), 3, 7);
+    for (let index = 0; index <= tickCount; index += 1) {
+      const value = xMin + index / tickCount * (xMax - xMin); const x = xScale(value);
+      const label = svgElement("text", { x, y: bottom + 19, "text-anchor": "middle", fill: "#52879E", "font-size": 10 });
+      label.textContent = compactMoney(value); svg.append(label);
+    }
+    const xTitle = svgElement("text", { x: margin.left + innerWidth / 2, y: height - 6, "text-anchor": "middle", fill: "#3E454A", "font-size": 10, "font-weight": 700 });
+    xTitle.textContent = "Predicted CEO Salary (July 2026 USD)"; svg.append(xTitle);
+    const yTitle = svgElement("text", { x: 14, y: margin.top + innerHeight / 2, transform: `rotate(-90 14 ${margin.top + innerHeight / 2})`, "text-anchor": "middle", fill: "#3E454A", "font-size": 10, "font-weight": 700 });
+    yTitle.textContent = "Predictive density"; svg.append(yTitle);
+    $("#chart-description").textContent = "A posterior predictive distribution for CEO salary at the selected organization profile. Shaded regions show 50%, 80%, and 95% prediction intervals.";
+    renderModelLegend();
+    refs.statN.textContent = compactMoney(prediction.expected); refs.statNUnit.textContent = "expected salary";
+    refs.statNeff.textContent = compactMoney(prediction.median); refs.statNeffUnit.textContent = "median";
+    refs.statCenter.textContent = `${compactMoney(intervals[80][0])}–${compactMoney(intervals[80][1])}`; refs.statCenterUnit.textContent = "80% prediction range";
+  }
+
   function renderChart() {
-    if (state.view === "scatter") renderScatter(); else renderHistogram();
+    if (state.view === "model") renderModel();
+    else if (state.view === "scatter") renderScatter();
+    else renderHistogram();
   }
 
   function showTooltip(event, item, context = {}) {
@@ -2704,6 +3157,33 @@
   function hideTooltip() { refs.tooltip.hidden = true; }
 
   function renderQuantiles() {
+    if (state.view === "model") {
+      const prediction = currentModelPrediction();
+      refs.quantileBasis.textContent = state.modelMethod === "gam"
+        ? "Predicted from the scale GAM with held-out residual calibration"
+        : `Predicted for the selected profile using Bayesian partial pooling${state.modelUseAdRanges ? " with advertised ranges" : ""}`;
+      refs.customQuantilesField.hidden = state.quantileGranularity !== "custom";
+      const percentiles = quantilePercentiles();
+      if (state.quantileGranularity === "custom") {
+        refs.customQuantilesError.textContent = percentiles.length
+          ? "" : "Enter comma-separated values greater than 0 and less than 100.";
+      } else refs.customQuantilesError.textContent = "";
+      refs.quantileGrid.replaceChildren();
+      refs.quantileGrid.classList.toggle("is-percentiles", percentiles.length > 20);
+      percentiles.forEach((percentile) => {
+        const value = prediction ? sampleQuantile(prediction.samples, percentile / 100) : NaN;
+        const button = document.createElement("button"); button.type = "button"; button.className = "quantile-cell";
+        const label = percentileParts(percentile);
+        button.innerHTML = `<span>${label.number}<sup>${label.suffix}</sup> percentile</span><strong>${compactMoney(value)}</strong>`;
+        button.setAttribute("aria-label", `${formatPercentile(percentile)}: ${money(value)}`);
+        button.addEventListener("pointerenter", () => { state.hoverQuantile = value; renderChart(); });
+        button.addEventListener("pointerleave", () => { state.hoverQuantile = null; renderChart(); });
+        button.addEventListener("focus", () => { state.hoverQuantile = value; renderChart(); });
+        button.addEventListener("blur", () => { state.hoverQuantile = null; renderChart(); });
+        refs.quantileGrid.append(button);
+      });
+      return;
+    }
     const descriptor = axisDescriptor(analysisAxisKey());
     const items = analysisItems();
     const model = fitModel(items);
@@ -2748,7 +3228,7 @@
   }
 
   function tableRows(weightMap = new Map(), eligibilityMap = new Map()) {
-    const filtered = rows().filter((row) => salary(row) != null && passesFilters(row));
+    const filtered = rows().filter((row) => salary(row) != null && (state.view === "model" || passesFilters(row)));
     const direction = state.sortDirection === "asc" ? 1 : -1;
     return filtered.sort((a, b) => {
       const value = (row) => {
@@ -2944,14 +3424,16 @@
   function renderTable() {
     refs.tableBody.replaceChildren();
     activeRpReferences().forEach(appendRpReferenceRow);
-    const selection = currentPlotItems();
-    const weightMap = new Map(selection.map((item) => [item.row.id, item.weight]));
     const eligibilityMap = new Map(rows().map((row) => [row.id, plotEligibility(row)]));
+    const selection = state.view === "model" ? [] : currentPlotItems();
+    const weightMap = state.view === "model"
+      ? new Map([...eligibilityMap].filter(([, eligibility]) => eligibility.eligible).map(([id]) => [id, 1]))
+      : new Map(selection.map((item) => [item.row.id, item.weight]));
     tableRows(weightMap, eligibilityMap).forEach((row) => {
       const available = salary(row) != null;
       const eligibility = eligibilityMap.get(row.id);
       const tr = document.createElement("tr");
-      if (!rowInclusion(row).get(row.id)) tr.classList.add("is-excluded");
+      if (state.view !== "model" && !rowInclusion(row).get(row.id)) tr.classList.add("is-excluded");
       if (!available) tr.classList.add("is-unavailable");
       if (!eligibility.eligible) tr.classList.add("is-plot-ineligible");
       if (state.focusedId === row.id) tr.classList.add("is-focused");
@@ -2964,16 +3446,21 @@
       const toggleCell = document.createElement("td");
       toggleCell.className = "check-column";
       const toggle = document.createElement("input");
-      toggle.type = "checkbox"; toggle.className = "row-toggle"; toggle.checked = available && rowInclusion(row).get(row.id);
-      toggle.disabled = !available;
+      toggle.type = "checkbox";
+      toggle.className = "row-toggle";
+      toggle.checked = state.view === "model" ? eligibility.eligible : available && rowInclusion(row).get(row.id);
+      toggle.disabled = !available || state.view === "model";
       const defaultExclusionReason = plainAnalysisStatus(row.analysisStatus || row.auditStatus);
       const inclusionHelp = !available
         ? `${row.organization} has no usable pay record for ${measureLabel(row)}. ${defaultExclusionReason}.`
         : row.defaultIncluded
           ? `Include ${row.organization}`
           : `${row.organization} is not in the recommended peer group: ${defaultExclusionReason}. Select to include it.`;
-      toggle.setAttribute("aria-label", inclusionHelp);
-      toggle.title = inclusionHelp;
+      const toggleHelp = state.view === "model"
+        ? `${row.organization}: the model uses a fixed reviewed training cohort; table selections are preserved but do not refit it.`
+        : inclusionHelp;
+      toggle.setAttribute("aria-label", toggleHelp);
+      toggle.title = toggleHelp;
       toggle.addEventListener("change", () => { rowInclusion(row).set(row.id, toggle.checked); renderAll(); });
       toggleCell.append(toggle);
 
@@ -3024,6 +3511,15 @@
 
       const weightCell = document.createElement("td");
       weightCell.className = "weight-cell";
+      if (state.view === "model") {
+        const status = document.createElement("span");
+        status.className = "model-training-status";
+        status.textContent = eligibility.eligible ? "Training" : "—";
+        status.title = eligibility.eligible
+          ? "This record is in the fixed training cohort. The predictive model does not use table weights."
+          : eligibility.reason;
+        weightCell.append(status);
+      } else {
       const weightInput = document.createElement("input");
       weightInput.type = "number"; weightInput.min = "0"; weightInput.max = "10"; weightInput.step = "0.1";
       const isModified = rowModifiedWeights(row).has(row.id);
@@ -3048,6 +3544,7 @@
         renderAll();
       });
       weightCell.append(weightInput);
+      }
 
       const comparability = document.createElement("td");
       comparability.className = "number-cell"; comparability.textContent = row.comparabilityScore ?? "—";
@@ -3685,20 +4182,52 @@
 
   function updateHeadings() {
     updatePositionControls();
+    syncModelControls();
+    const isModel = state.view === "model";
     const isJobs = state.stream === "jobAds";
     const isCombined = state.stream === "combined";
-    refs.measureField.hidden = isJobs || isCombined;
-    const plotted = axisDescriptor(analysisAxisKey());
-    refs.chartTitle.textContent = state.view === "scatter"
-      ? `${plotted.shortLabel} by ${axisDescriptor("scatterX").shortLabel}`
-      : `Distribution of ${plotted.shortLabel}`;
-    refs.statNUnit.textContent = isCombined || !isCeoPosition() ? "records" : "organizations";
+    refs.measureField.hidden = isModel || isJobs || isCombined;
+    refs.streamField.hidden = isModel;
+    refs.dollarBasisField.hidden = isModel;
+    refs.sampleField.hidden = isModel;
+    refs.distributionField.hidden = isModel;
+    refs.axisSettings.hidden = isModel;
+    refs.chartColorField.hidden = isModel;
+    refs.weightingField.hidden = isModel;
+    refs.settingsPanel.classList.toggle("is-model-view", isModel);
+    refs.tablePanel.classList.toggle("is-model-view", isModel);
+    refs.modelSettings.hidden = !isModel;
+    if (isModel) {
+      refs.chartTitle.textContent = isCeoPosition() ? "Predicted CEO Salary for Selected Profile" : "CEO Prediction Model Unavailable";
+    } else {
+      const plotted = axisDescriptor(analysisAxisKey());
+      refs.chartTitle.textContent = state.view === "scatter"
+        ? `${plotted.shortLabel} by ${axisDescriptor("scatterX").shortLabel}`
+        : `Distribution of ${plotted.shortLabel}`;
+      refs.statNUnit.textContent = isCombined || !isCeoPosition() ? "records" : "organizations";
+      refs.statNeffUnit.textContent = "effective sample size";
+      refs.statCenterUnit.textContent = "median";
+    }
     refs.priceBasisStatus.textContent = priceBasisLabel();
     refs.scatterControls.hidden = state.view !== "scatter";
-    refs.contourField.hidden = state.view !== "scatter";
+    refs.scatterDisplaySettings.hidden = state.view !== "scatter";
+    refs.modelDiagnostics.hidden = !isModel || !isCeoPosition();
     refs.binField.hidden = state.view !== "histogram";
     refs.histogramAxisSettings.hidden = state.view !== "histogram";
     refs.scatterAxisSettings.hidden = state.view !== "scatter";
+    refs.chartViewTabs.forEach((tab) => {
+      const selected = tab.dataset.chartView === state.view;
+      tab.setAttribute("aria-selected", String(selected));
+      tab.tabIndex = selected ? 0 : -1;
+      if (tab.dataset.chartView === "model") {
+        tab.setAttribute("aria-disabled", String(!isCeoPosition()));
+        tab.setAttribute("aria-label", isCeoPosition()
+          ? "Model"
+          : "Model, unavailable because the predictive model is currently validated only for CEO pay");
+        tab.title = isCeoPosition() ? "Predict salary from organization characteristics" : "The predictive model is currently validated only for CEO pay";
+      }
+    });
+    refs.chartViewContent.setAttribute("aria-labelledby", `chart-tab-${state.view}`);
     const roleLabel = positionDefinition().pageLabel;
     refs.sampleDescription.textContent = {
       primary: `Reviewed full-year ${roleLabel} pay records used in the main benchmark.`,
@@ -3724,7 +4253,31 @@
     refs.binValue.value = state.bins;
   }
 
-  const URL_STATE_VERSION = 7;
+  function activateChartView(view, { focus = false } = {}) {
+    if (!["histogram", "scatter", "model"].includes(view)) return;
+    if (view === "model" && !isCeoPosition()) return;
+    state.view = view;
+    state.focusedId = "";
+    state.hoverQuantile = null;
+    closeAxisSelector();
+    hideTooltip();
+    renderWeightControls();
+    renderAll();
+    if (focus) refs.chartViewTabs.find((tab) => tab.dataset.chartView === view)?.focus();
+  }
+
+  function chartViewKeyFromKeyboard(event) {
+    const available = refs.chartViewTabs.filter((tab) => tab.getAttribute("aria-disabled") !== "true");
+    const current = available.indexOf(event.currentTarget);
+    if (event.key === "Home") return available[0]?.dataset.chartView || "";
+    if (event.key === "End") return available.at(-1)?.dataset.chartView || "";
+    if (!["ArrowLeft", "ArrowRight"].includes(event.key) || current < 0) return "";
+    const direction = event.key === "ArrowRight" ? 1 : -1;
+    return available[(current + direction + available.length) % available.length]?.dataset.chartView || "";
+  }
+
+  const URL_STATE_VERSION = 8;
+  const SUPPORTED_URL_STATE_VERSIONS = Object.freeze([2, 3, 4, 5, 6, 7, URL_STATE_VERSION]);
   const URL_WEIGHT_CODES = Object.freeze({
     comparability: "c", size: "e", staff: "s", recency: "r", tier: "t", eaAffinity: "a",
     sourceType: "v", topic: "o", titleGroup: "j", structure: "u", streamBalanced: "b",
@@ -3748,6 +4301,15 @@
   const URL_FIT_KEYS = reverseCodes(URL_FIT_CODES);
   const URL_QUANTILE_KEYS = reverseCodes(URL_QUANTILE_CODES);
   const URL_VARIABLE_KEYS = reverseCodes(URL_VARIABLE_CODES);
+  const MODEL_PROFILE_URL_FIELDS = Object.freeze({
+    expenses: "e", revenue: "r", staff: "s", compensation_year: "y",
+    focus_area: "f", ea_relationship: "a", organization_type: "o",
+    title_group: "t", location_scope: "l",
+  });
+  const MODEL_PROFILE_BOUNDS = Object.freeze({
+    expenses: [1, Number.MAX_SAFE_INTEGER], revenue: [1, Number.MAX_SAFE_INTEGER],
+    staff: [1, 1_000_000], compensation_year: [2020, 2030],
+  });
   function encodeVariableKey(key) {
     if (URL_VARIABLE_CODES[key]) return URL_VARIABLE_CODES[key];
     if (key.startsWith("position:") && POSITION_BY_KEY.has(key.slice("position:".length))) {
@@ -3760,6 +4322,42 @@
     if (typeof token !== "string" || !token.startsWith("p:")) return "";
     const key = token.slice(2);
     return POSITION_BY_KEY.has(key) ? `position:${key}` : "";
+  }
+
+  function modelCategoryLevels(key) {
+    if (key === "ea_relationship") return PREDICTIVE_MODEL.eaLevels;
+    return modelCategoryDefinition(key)?.levels || [];
+  }
+
+  function encodeModelCategory(key, value) {
+    if (value === "__average__") return 0;
+    const index = modelCategoryLevels(key).indexOf(value);
+    if (index < 0) throw new Error(`Unknown predictive-model category: ${key}=${value}`);
+    return index + 1;
+  }
+
+  function decodeModelCategory(key, code, fallback) {
+    if (code === 0) return "__average__";
+    const index = Number(code) - 1;
+    return Number.isInteger(index) && modelCategoryLevels(key)[index] != null
+      ? modelCategoryLevels(key)[index] : fallback;
+  }
+
+  function compactModelState() {
+    const compact = {};
+    if (state.modelMethod !== "bayesian") compact.m = "g";
+    if (state.modelMethod === "bayesian" && state.modelUseAdRanges) compact.d = 1;
+    Object.entries(MODEL_PROFILE_URL_FIELDS).forEach(([key, code]) => {
+      const categorical = ["focus_area", "ea_relationship", "organization_type", "title_group", "location_scope"].includes(key);
+      if (state.modelMethod === "gam" && categorical) return;
+      const value = state.modelProfile[key];
+      if (!categorical && !Number.isFinite(value)) return;
+      const reference = MODEL_PROFILE_DEFAULTS[key];
+      if (value === reference) return;
+      compact[code] = categorical
+        ? encodeModelCategory(key, value) : value;
+    });
+    return compact;
   }
   const allShareRows = [...allRowsByStream.incumbents, ...allRowsByStream.jobAds];
   const shareRowCodes = new Map();
@@ -3814,6 +4412,14 @@
   }
 
   function sharePayload() {
+    if (state.view === "model") {
+      const payload = { v: URL_STATE_VERSION, l: 2 };
+      const modelState = compactModelState();
+      if (Object.keys(modelState).length) payload.y = modelState;
+      if (state.quantileGranularity !== "quintiles") payload.q = URL_QUANTILE_CODES[state.quantileGranularity];
+      if (state.quantileGranularity === "custom") payload.z = state.customQuantiles;
+      return payload;
+    }
     const filterState = {};
     Object.entries(state.filters).forEach(([key, values]) => {
       if (values != null) filterState[URL_FILTER_CODES[key]] = [...values].map(String).sort((a, b) => a.localeCompare(b));
@@ -3983,6 +4589,35 @@
   }
 
   function scenarioSummary() {
+    if (state.view === "model") {
+      const prediction = currentModelPrediction();
+      if (!prediction?.samples.length) throw new Error("The selected model profile does not produce a prediction.");
+      const values = [0.25, 0.5, 0.75].map((probability) => sampleQuantile(prediction.samples, probability));
+      const reference = Number(PREDICTIVE_MODEL.rpProfile.reference_salary);
+      const referencePercentile = prediction.samples.filter((value) => value <= reference).length / prediction.samples.length * 100;
+      const trainingRows = rows().filter((row) => plotEligibility(row).eligible);
+      const trainingOrganizations = new Set(trainingRows.map((row) => String(row.organization || row.id).trim().toLowerCase()));
+      const method = state.modelMethod === "gam"
+        ? "Scale GAM"
+        : `Bayesian partial pooling${state.modelUseAdRanges ? " + ad ranges" : ""}`;
+      return {
+        axisSignature: `model|${JSON.stringify(compactModelState())}`,
+        axisLabel: "Predicted CEO Salary", formatKind: "money", position: "CEO",
+        source: state.modelUseAdRanges && state.modelMethod === "bayesian" ? "Form 990s + job-ad ranges" : "Form 990s",
+        measure: "Modeled base salary", basis: "July 2026 USD", sample: "Fixed reviewed training cohort",
+        distribution: method, weighting: "Predictive model", filters: "Not applied to model training",
+        peerOverrides: "0 rows", weightEdits: "0 edits", weightParameters: "Model profile inputs",
+        records: trainingRows.length,
+        organizations: trainingOrganizations.size,
+        effectiveN: prediction.samples.length,
+        rpValue: reference, rpPercentile: referencePercentile,
+        p25: values[0], p50: values[1], p75: values[2],
+        formatted: {
+          p25: compactMoney(values[0]), p50: compactMoney(values[1]), p75: compactMoney(values[2]),
+          rpValue: compactMoney(reference),
+        },
+      };
+    }
     const items = analysisItems();
     const axisKey = analysisAxisKey();
     const descriptor = axisDescriptor(axisKey);
@@ -4050,7 +4685,7 @@
       && value.summary.formatted && typeof value.summary.formatted === "object";
     if (!structurallyValid) return false;
     try {
-      return decodeUrlState(value.encodedState)?.v === URL_STATE_VERSION;
+      return SUPPORTED_URL_STATE_VERSIONS.includes(decodeUrlState(value.encodedState)?.v);
     } catch {
       return false;
     }
@@ -4183,6 +4818,7 @@
     return {
       view: state.view, bins: state.bins, autoBins: state.autoBins, chartColor: state.chartColor,
       axisScales: { ...state.axisScales }, showContours: state.showContours,
+      showJobAdIntervals: state.showJobAdIntervals,
       markCurve: state.markCurve, sortKey: state.sortKey, sortDirection: state.sortDirection,
       scatterXAxis: { ...state.scatterXAxis }, scatterXMode: state.axisModes.scatterX,
     };
@@ -4195,6 +4831,7 @@
     state.chartColor = presentation.chartColor;
     state.axisScales = { ...presentation.axisScales };
     state.showContours = presentation.showContours;
+    state.showJobAdIntervals = presentation.showJobAdIntervals !== false;
     state.markCurve = presentation.markCurve;
     state.sortKey = presentation.sortKey;
     state.sortDirection = presentation.sortDirection;
@@ -4344,7 +4981,7 @@
   }
 
   function applyAnalysisPayloadTransaction(nextPayload, nextPosition) {
-    if (nextPayload?.v !== URL_STATE_VERSION || !POSITION_BY_KEY.has(nextPosition)) {
+    if (!SUPPORTED_URL_STATE_VERSIONS.includes(nextPayload?.v) || !POSITION_BY_KEY.has(nextPosition)) {
       return { ok: false, error: new Error("Unsupported analysis state.") };
     }
     const presentation = presentationState();
@@ -4393,7 +5030,7 @@
     let nextPayload;
     try {
       nextPayload = decodeUrlState(scenario.encodedState);
-      if (nextPayload?.v !== URL_STATE_VERSION) throw new Error("Unsupported saved-state version.");
+      if (!SUPPORTED_URL_STATE_VERSIONS.includes(nextPayload?.v)) throw new Error("Unsupported saved-state version.");
     } catch (error) {
       refs.scenarioStatus.textContent = scenario.name + " could not be read and was not applied.";
       console.warn("Unable to decode saved benchmark scenario", error);
@@ -5607,16 +6244,25 @@
     const sourceInput = refs.robustnessSourceOption.querySelector("input");
     const postingInput = refs.robustnessPostingOption.querySelector("input");
     const ceo = isCeoPosition();
-    weightingInput.disabled = !ceo;
+    const modelView = state.view === "model";
+    const robustnessTab = refs.resultsTabs.find((tab) => resultsTabKey(tab) === "robustness");
+    robustnessTab.hidden = modelView;
+    if (modelView && activeResultsTab === "robustness") activateResultsTab("quantiles");
+    refs.robustnessRun.disabled = modelView;
+    weightingInput.disabled = !ceo || modelView;
     refs.robustnessWeightingOption.title = ceo ? "" : "Automatic weights are available only for the CEO benchmark.";
-    sourceInput.disabled = !ceo;
+    sourceInput.disabled = !ceo || modelView;
     refs.robustnessSourceOption.title = ceo ? "" : positionJobAds().length
       ? "This position has too few job-posting organizations for a stable pay-source comparison."
       : "This position currently has only Form 990 records.";
-    postingInput.disabled = !ceo;
+    postingInput.disabled = !ceo || modelView;
     refs.robustnessPostingOption.title = ceo ? "" : positionJobAds().length
       ? "This position has too few job-posting organizations for a stable lower/midpoint/upper comparison."
       : "No source-validated job-posting ranges are available for this position.";
+    if (modelView) {
+      refs.robustnessStatus.textContent = "Robustness checks for the fixed predictive model are reported in Model details.";
+      return;
+    }
     if (robustnessReport && robustnessReport.positionKey !== state.position) {
       robustnessReport = null;
       robustnessResultWidth = 0;
@@ -5670,6 +6316,7 @@
   }
 
   function finiteNumber(value, fallback, minimum = -Infinity, maximum = Infinity) {
+    if (value == null || value === "") return fallback;
     return Number.isFinite(Number(value)) ? clamp(Number(value), minimum, maximum) : fallback;
   }
 
@@ -5689,6 +6336,51 @@
     });
   }
 
+  function populateModelSelect(select, levels, { includeAverage = true } = {}) {
+    select.replaceChildren();
+    if (includeAverage) {
+      const average = document.createElement("option");
+      average.value = "__average__";
+      average.textContent = "Average category effect";
+      select.append(average);
+    }
+    levels.forEach((level) => {
+      const option = document.createElement("option");
+      option.value = level;
+      option.textContent = level;
+      select.append(option);
+    });
+  }
+
+  function populateModelControls() {
+    populateModelSelect(refs.modelFocus, modelCategoryLevels("focus_area"));
+    populateModelSelect(refs.modelEa, modelCategoryLevels("ea_relationship"), { includeAverage: false });
+    populateModelSelect(refs.modelOrganizationType, modelCategoryLevels("organization_type"));
+    populateModelSelect(refs.modelTitle, modelCategoryLevels("title_group"));
+    populateModelSelect(refs.modelLocation, modelCategoryLevels("location_scope"));
+  }
+
+  function syncModelControls() {
+    refs.modelMethod.value = state.modelMethod;
+    refs.modelExpenses.value = state.modelProfile.expenses;
+    refs.modelRevenue.value = state.modelProfile.revenue;
+    refs.modelStaff.value = state.modelProfile.staff;
+    refs.modelYear.value = state.modelProfile.compensation_year;
+    refs.modelFocus.value = state.modelProfile.focus_area;
+    refs.modelEa.value = state.modelProfile.ea_relationship;
+    refs.modelOrganizationType.value = state.modelProfile.organization_type;
+    refs.modelTitle.value = state.modelProfile.title_group;
+    refs.modelLocation.value = state.modelProfile.location_scope;
+    const gam = state.modelMethod === "gam";
+    refs.modelUseAdRanges.checked = !gam && state.modelUseAdRanges;
+    refs.modelCategoryInputs.hidden = gam;
+    refs.modelUseAdRanges.disabled = gam;
+    refs.modelAdRangesField.classList.toggle("is-disabled", gam);
+    refs.modelSettingsNote.textContent = gam
+      ? "The GAM uses expenses, revenue, employees, and pay year. It was fit to Form 990 records only."
+      : `The model uses a fixed reviewed cohort; table filters do not refit it. ${state.modelUseAdRanges ? "Advertised ranges contribute as intervals." : "Only Form 990 salaries are used."}`;
+  }
+
   function syncControlsFromState() {
     refs.position.value = state.position;
     refs.positionSelectedLabel.textContent = positionDefinition().label;
@@ -5697,10 +6389,11 @@
     refs.sample.value = state.sample;
     refs.dollarBasis.forEach((radio) => { radio.checked = radio.value === (state.inflationAdjusted ? "adjusted" : "nominal"); });
     refs.fit.forEach((radio) => { radio.checked = radio.value === state.fit; });
-    refs.view.forEach((radio) => { radio.checked = radio.value === state.view; });
     syncAxisControls();
+    syncModelControls();
     refs.chartColor.value = state.chartColor;
     refs.showContours.checked = state.showContours;
+    refs.showJobAdIntervals.checked = state.showJobAdIntervals;
     refs.targetExpense.value = state.targetExpense / 1_000_000;
     refs.targetStaff.value = state.targetStaff;
     refs.expenseBandwidth.value = state.expenseBandwidth;
@@ -5721,7 +6414,7 @@
   }
 
   function expandCompactUrlState(payload, semanticPosition = "") {
-    if (![2, 3, 4, 5, 6, URL_STATE_VERSION].includes(payload?.v)) return payload;
+    if (!SUPPORTED_URL_STATE_VERSIONS.includes(payload?.v)) return payload;
     const version = payload.v;
     const custom = {};
     (payload.c || []).forEach(([code, value]) => {
@@ -5750,7 +6443,8 @@
         ia: payload.n !== 1,
         d: URL_FIT_KEYS[payload.g],
         am: payload.a === 1 ? "ratio" : "value",
-        vw: payload.l === 1 ? "scatter" : "histogram", hx: payload.h, sx: payload.j, sy: payload.k,
+        vw: payload.l === 2 ? "model" : payload.l === 1 ? "scatter" : "histogram",
+        hx: payload.h, sx: payload.j, sy: payload.k, pm: payload.y,
         w: [...String(payload.w || "")].map((code) => URL_WEIGHT_KEYS[code]).filter(Boolean),
         te: payload.x?.e, ts: payload.x?.s, eb: payload.x?.b, sb: payload.x?.f, rh: payload.x?.r, ae: payload.x?.a,
         q: URL_QUANTILE_KEYS[payload.q], qq: payload.z,
@@ -5765,7 +6459,7 @@
 
   function restoreUrlState(payload, semanticPosition = "") {
     const sourceVersion = payload?.v;
-    const compactVersion = [2, 3, 4, 5, 6, URL_STATE_VERSION].includes(payload?.v);
+    const compactVersion = SUPPORTED_URL_STATE_VERSIONS.includes(payload?.v);
     payload = expandCompactUrlState(payload, semanticPosition);
     if (!payload || payload.v !== 1 || typeof payload.a !== "object") throw new Error("Unsupported or incomplete state version.");
     const analysis = payload.a;
@@ -5798,7 +6492,21 @@
     state.autoTargetEss = Math.round(finiteNumber(analysis.ae, state.autoTargetEss, 20, 60));
     state.bins = Math.round(finiteNumber(analysis.b, state.bins, 2, 200));
     state.autoBins = compactVersion;
-    state.view = enumValue(analysis.vw, ["histogram", "scatter"], state.view);
+    state.view = enumValue(analysis.vw, ["histogram", "scatter", "model"], state.view);
+    if (state.view === "model" && !isCeoPosition()) state.view = "histogram";
+    state.modelMethod = analysis.pm?.m === "g" ? "gam" : "bayesian";
+    state.modelUseAdRanges = analysis.pm?.d === 1;
+    state.modelProfile = { ...MODEL_PROFILE_DEFAULTS };
+    Object.entries(MODEL_PROFILE_URL_FIELDS).forEach(([key, code]) => {
+      if (!Object.hasOwn(analysis.pm || {}, code)) return;
+      const value = analysis.pm[code];
+      if (["focus_area", "ea_relationship", "organization_type", "title_group", "location_scope"].includes(key)) {
+        state.modelProfile[key] = decodeModelCategory(key, value, MODEL_PROFILE_DEFAULTS[key]);
+      } else {
+        const [minimum, maximum] = MODEL_PROFILE_BOUNDS[key];
+        state.modelProfile[key] = finiteNumber(value, MODEL_PROFILE_DEFAULTS[key], minimum, maximum);
+      }
+    });
     const restoredAxisMode = enumValue(analysis.am, ["value", "ratio"], "value");
     state.axisModes = { histogram: "value", scatterX: "value", scatterY: "value" };
     state.axisScales = { histogram: "linear", scatterX: "log", scatterY: "linear" };
@@ -5894,7 +6602,9 @@
       histogramAxis: { numerator: "salary", denominator: "expenses" },
       scatterXAxis: { numerator: "expenses", denominator: "staff" },
       scatterYAxis: { numerator: "salary", denominator: "expenses" },
-      chartColor: "tier", showContours: true,
+      chartColor: "tier", showContours: true, showJobAdIntervals: true,
+      modelMethod: "bayesian", modelUseAdRanges: false,
+      modelProfile: { ...MODEL_PROFILE_DEFAULTS },
       quantileGranularity: "quintiles", customQuantiles: "5, 25, 50, 75, 95", markCurve: true,
       sortKey: "tier", sortDirection: "asc",
       filters: {
@@ -5916,9 +6626,9 @@
     refs.stream.value = state.stream; refs.measure.value = state.measure; refs.sample.value = state.sample;
     refs.dollarBasis.forEach((radio) => { radio.checked = radio.value === "adjusted"; });
     refs.fit.forEach((radio) => { radio.checked = radio.value === state.fit; });
-    refs.view.forEach((radio) => { radio.checked = radio.value === state.view; });
     syncAxisControls();
-    refs.chartColor.value = state.chartColor; refs.showContours.checked = true;
+    syncModelControls();
+    refs.chartColor.value = state.chartColor; refs.showContours.checked = true; refs.showJobAdIntervals.checked = true;
     refs.targetExpense.value = RP_WEIGHT_TARGET.expenses / 1_000_000; refs.targetStaff.value = RP_WEIGHT_TARGET.staff;
     refs.expenseBandwidth.value = 0.7; refs.staffBandwidth.value = 0.7; refs.recencyHalfLife.value = 4; refs.bins.value = state.bins;
     refs.autoTargetEss.value = 35; refs.autoTargetEssValue.value = 35;
@@ -5938,6 +6648,7 @@
   function activatePosition(key) {
     if (!POSITION_BY_KEY.has(key)) return;
     state.position = key;
+    if (state.view === "model" && key !== "ceo") state.view = "histogram";
     state.stream = defaultPositionStream(key);
     state.measure = positionDefinition().defaultMeasure;
     state.sample = "primary";
@@ -5968,6 +6679,15 @@
       if (!key) return;
       event.preventDefault();
       activateResultsTab(key, { focus: true });
+    });
+  });
+  refs.chartViewTabs.forEach((tab) => {
+    tab.addEventListener("click", () => activateChartView(tab.dataset.chartView));
+    tab.addEventListener("keydown", (event) => {
+      const view = chartViewKeyFromKeyboard(event);
+      if (!view) return;
+      event.preventDefault();
+      activateChartView(view, { focus: true });
     });
   });
   refs.scenarioSave.addEventListener("click", saveCurrentScenario);
@@ -6066,7 +6786,58 @@
   refs.quantileGranularity.addEventListener("change", () => { state.quantileGranularity = refs.quantileGranularity.value; renderQuantiles(); renderChart(); });
   refs.customQuantiles.addEventListener("input", () => { state.customQuantiles = refs.customQuantiles.value; renderQuantiles(); renderChart(); });
   refs.markCurve.addEventListener("change", () => { state.markCurve = refs.markCurve.checked; renderChart(); });
-  refs.view.forEach((radio) => radio.addEventListener("change", () => { if (radio.checked) { state.view = radio.value; renderAll(); } }));
+  refs.modelMethod.addEventListener("change", () => {
+    state.modelMethod = refs.modelMethod.value === "gam" ? "gam" : "bayesian";
+    renderAll();
+  });
+  refs.modelUseAdRanges.addEventListener("change", () => {
+    state.modelUseAdRanges = refs.modelUseAdRanges.checked;
+    renderAll();
+  });
+  [
+    [refs.modelExpenses, "expenses"],
+    [refs.modelRevenue, "revenue"],
+    [refs.modelStaff, "staff"],
+    [refs.modelYear, "compensation_year"],
+  ].forEach(([input, key]) => {
+    const [minimum, maximum] = MODEL_PROFILE_BOUNDS[key];
+    input.addEventListener("input", () => {
+      const value = Number(input.value);
+      const valid = input.value !== "" && Number.isFinite(value) && value >= minimum && value <= maximum;
+      input.setAttribute("aria-invalid", String(!valid));
+      if (!valid) {
+        state.modelProfile[key] = null;
+        renderChart();
+        renderQuantiles();
+        return;
+      }
+      state.modelProfile[key] = value;
+      renderChart();
+      renderQuantiles();
+      scheduleUrlState();
+    });
+    input.addEventListener("change", () => {
+      const value = Number(input.value);
+      state.modelProfile[key] = Number.isFinite(value) && value >= minimum && value <= maximum
+        ? value : MODEL_PROFILE_DEFAULTS[key];
+      input.value = state.modelProfile[key];
+      input.setAttribute("aria-invalid", "false");
+      renderAll();
+    });
+  });
+  [
+    [refs.modelFocus, "focus_area"], [refs.modelEa, "ea_relationship"],
+    [refs.modelOrganizationType, "organization_type"], [refs.modelTitle, "title_group"],
+    [refs.modelLocation, "location_scope"],
+  ].forEach(([select, key]) => select.addEventListener("change", () => {
+    state.modelProfile[key] = select.value;
+    renderAll();
+  }));
+  refs.modelResetProfile.addEventListener("click", () => {
+    state.modelProfile = { ...MODEL_PROFILE_DEFAULTS };
+    syncModelControls();
+    renderAll();
+  });
   Object.entries(refs.axisModes).forEach(([axisKey, radios]) => radios.forEach((radio) => radio.addEventListener("change", () => {
     if (!radio.checked) return;
     state.axisModes[axisKey] = radio.value;
@@ -6101,6 +6872,10 @@
   });
   refs.chartColor.addEventListener("change", () => { state.chartColor = refs.chartColor.value; renderAll(); });
   refs.showContours.addEventListener("change", () => { state.showContours = refs.showContours.checked; renderChart(); });
+  refs.showJobAdIntervals.addEventListener("change", () => {
+    state.showJobAdIntervals = refs.showJobAdIntervals.checked;
+    renderChart();
+  });
   refs.salaryMin.addEventListener("input", () => updateRange("salary", "low"));
   refs.salaryMax.addEventListener("input", () => updateRange("salary", "high"));
   refs.expenseMin.addEventListener("input", () => updateRange("expenses", "low"));
@@ -6113,7 +6888,10 @@
   }, true);
   refs.tableScroll.addEventListener("scroll", alignOpenHeaderFilterPopovers);
   document.addEventListener("change", scheduleUrlState);
-  document.addEventListener("input", scheduleUrlState);
+  document.addEventListener("input", (event) => {
+    if (event.target.matches?.('#model-settings input[type="number"][aria-invalid="true"]')) return;
+    scheduleUrlState();
+  });
   document.querySelectorAll("thead button[data-sort]").forEach((button) => button.addEventListener("click", () => {
     const key = button.dataset.sort;
     if (state.sortKey === key) state.sortDirection = state.sortDirection === "asc" ? "desc" : "asc";
@@ -6122,6 +6900,7 @@
     scheduleUrlState();
   }));
   document.addEventListener("input", (event) => {
+    if (event.target.matches?.('#model-settings input[type="number"][aria-invalid="true"]')) return;
     recordBenchmarkHistory(historyControlKey(event.target));
   });
   document.addEventListener("change", (event) => {
@@ -6171,6 +6950,7 @@
   refs.organizationPreview.addEventListener("pointerenter", () => window.clearTimeout(organizationPreviewHideTimer));
   refs.organizationPreview.addEventListener("pointerleave", scheduleOrganizationPreviewHide);
   populatePositionSelect();
+  populateModelControls();
   loadSavedScenarios();
   activateResultsTab("quantiles");
   const initialUrl = new URL(window.location.href);

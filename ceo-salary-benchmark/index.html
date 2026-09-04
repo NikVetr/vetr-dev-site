@@ -49,7 +49,7 @@
         <small id="stream-description" class="field-description"></small>
       </label>
 
-      <fieldset class="choice-group field dollar-basis-setting">
+      <fieldset id="dollar-basis-field" class="choice-group field dollar-basis-setting">
         <legend>Dollar basis <button class="info-tooltip" type="button" aria-label="About inflation adjustment" data-tooltip="Inflation-adjusted pay uses the U.S. Bureau of Labor Statistics CPI-U (CUUR0000SA0; July 2026 target index 333.918). Form 990 pay is adjusted from the compensation year's annual average; job postings use the posting month when known. Original reported dollars match the filing amount or advertised-range midpoint. Expenses and staff are not adjusted.">?</button></legend>
         <label><input type="radio" name="dollar-basis" value="adjusted" checked> Inflation Adj.</label>
         <label><input type="radio" name="dollar-basis" value="nominal"> Original USD</label>
@@ -64,7 +64,7 @@
         </select>
       </label>
 
-      <label class="field">
+      <label id="sample-field" class="field">
         <span>Sample <button class="info-tooltip" type="button" aria-label="About samples" data-tooltip="Choose a starting group of organizations. Recommended peers pass the main source, role, and reporting-period checks. Broader cases add usable records with known differences. The similar-organization group removes records whose governance or legal setup differs from RP. All usable salaries includes records normally left out. Salary level is never used to assign a group.">?</button></span>
         <select id="sample-select">
           <option value="primary">Recommended peers</option>
@@ -76,24 +76,60 @@
         <small id="sample-description" class="field-description"></small>
       </label>
 
-      <fieldset class="choice-group field">
+      <fieldset id="distribution-field" class="choice-group field">
         <legend>Distribution <button class="info-tooltip" type="button" aria-label="About distribution models" data-tooltip="Empirical uses the weighted records directly. Lognormal and gamma fit smooth, right-skewed probability models and overlay their expected histogram density.">?</button></legend>
         <label><input type="radio" name="distribution" value="empirical"> Empirical</label>
         <label><input type="radio" name="distribution" value="lognormal" checked> Lognormal</label>
         <label><input type="radio" name="distribution" value="gamma"> Gamma</label>
       </fieldset>
 
-      <fieldset class="choice-group field view-setting">
-        <legend>Chart view</legend>
-        <label><input type="radio" name="chart-view" value="histogram" checked> Histogram</label>
-        <label><input type="radio" name="chart-view" value="scatter"> Scatterplot</label>
-        <span id="contour-field" class="contour-toggle" hidden>
-          <label><input id="show-contours" type="checkbox" checked> Spread contours</label>
-          <button class="info-tooltip" type="button" aria-label="About spread contours" data-tooltip="Show ellipses containing about 50%, 80%, and 95% of the selected points. They summarize spread and association; they are not confidence intervals or evidence of causation.">?</button>
-        </span>
+      <fieldset id="scatter-display-settings" class="scatter-display-settings field" hidden>
+        <legend>Scatterplot</legend>
+        <div class="scatter-display-options">
+          <span id="contour-field" class="scatter-display-option">
+            <label><input id="show-contours" type="checkbox" checked> Spread contours</label>
+            <button class="info-tooltip" type="button" aria-label="About spread contours" data-tooltip="Show ellipses containing about 50%, 80%, and 95% of the selected points. They summarize spread and association; they are not confidence intervals or evidence of causation.">?</button>
+          </span>
+          <span id="job-ad-interval-field" class="scatter-display-option">
+            <label><input id="show-job-ad-intervals" type="checkbox" checked> Ad salary ranges</label>
+            <button class="info-tooltip" type="button" aria-label="About advertised salary ranges" data-tooltip="Draw each job posting's advertised low-to-high salary range through its midpoint. The midpoint remains the value used for correlations, contours, and summary statistics.">?</button>
+          </span>
+        </div>
       </fieldset>
 
-      <section class="axis-settings field" aria-label="Chart axis settings">
+      <section id="model-settings" class="model-settings field" hidden aria-labelledby="model-settings-title">
+        <div class="model-settings-heading">
+          <strong id="model-settings-title">Prediction model</strong>
+          <button id="model-reset-profile" class="text-button" type="button">Reset RP inputs</button>
+        </div>
+        <label class="field compact">
+          <span>Method <button class="info-tooltip" type="button" aria-label="About prediction methods" data-tooltip="Bayesian partial pooling combines organization scale with regularized category effects. The scale GAM is a nonlinear challenger using only expenses, revenue, staff, and year. Both were evaluated on held-out organizations. Why these methods perform differently is shown under Model details.">?</button></span>
+          <select id="model-method">
+            <option value="bayesian">Bayesian partial pooling</option>
+            <option value="gam">Scale GAM</option>
+          </select>
+        </label>
+        <span id="model-ad-ranges-field" class="model-option">
+          <label><input id="model-use-ad-ranges" type="checkbox"> Include ad ranges</label>
+          <button class="info-tooltip" type="button" aria-label="About advertised ranges in the model" data-tooltip="Experimental: advertised low-to-high ranges enter the Bayesian model as intervals, never as midpoint salaries. A separate posting adjustment recognizes that advertised and realized pay are different. The GAM does not use postings.">?</button>
+        </span>
+        <div class="model-input-grid">
+          <label><span>Expenses</span><input id="model-expenses" type="number" min="1" step="100000" inputmode="numeric"></label>
+          <label><span>Revenue</span><input id="model-revenue" type="number" min="1" step="100000" inputmode="numeric"></label>
+          <label><span>Employees</span><input id="model-staff" type="number" min="1" step="1" inputmode="numeric"></label>
+          <label><span>Pay year</span><input id="model-year" type="number" min="2020" max="2030" step="1" inputmode="numeric"></label>
+        </div>
+        <div id="model-category-inputs" class="model-category-inputs">
+          <label><span>Focus area</span><select id="model-focus"></select></label>
+          <label><span>Effective Altruism</span><select id="model-ea"></select></label>
+          <label><span>Organization type</span><select id="model-organization-type"></select></label>
+          <label><span>Title group</span><select id="model-title"></select></label>
+          <label><span>Location</span><select id="model-location"></select></label>
+        </div>
+        <p id="model-settings-note" class="field-description"></p>
+      </section>
+
+      <section id="axis-settings" class="axis-settings field" aria-label="Chart axis settings">
         <div id="histogram-axis-settings" class="axis-view-settings">
           <fieldset class="choice-group axis-control-setting">
             <legend>Axis Value <button class="info-tooltip" type="button" aria-label="About axis values" data-tooltip="Show one measure, such as salary or expenses, or a ratio of two positive measures, such as salary divided by expenses. Click the axis label on the chart to choose the measure or measures.">?</button></legend>
@@ -137,7 +173,7 @@
         <input id="bin-count" type="range" min="2" max="200" step="1" value="20">
       </label>
 
-      <label class="field">
+      <label id="chart-color-field" class="field">
         <span>Color by <button class="info-tooltip" type="button" aria-label="About chart colors" data-tooltip="Peer groups run from closest to broader and broadest comparisons. Other choices color records by the matching table category. Mission area and organization type can contain many categories, so the chart uses lighter and darker versions of the RP palette.">?</button></span>
         <select id="chart-color">
           <option value="tier">Peer group</option>
@@ -150,7 +186,7 @@
         <small id="color-description" class="field-description"></small>
       </label>
 
-      <section class="weighting-field field" role="group" aria-labelledby="weighting-components-title">
+      <section id="weighting-field" class="weighting-field field" role="group" aria-labelledby="weighting-components-title">
         <div id="weighting-components-title" class="weighting-title">Weights <button class="info-tooltip" type="button" aria-label="About weighting" data-tooltip="Weights control how much each record affects the chart and quantiles. Automatic weights compare Form 990 organizations with RP by expenses and staff, and job postings by a separately reviewed non-pay similarity score. Salary is never used. You can instead combine optional adjustments or edit an individual row's weight.">?</button></div>
         <div class="auto-weight-rule">
           <label><input type="checkbox" value="comparability"> Automatic weights</label>
@@ -226,34 +262,70 @@
 
     <section id="analysis-column" class="analysis-column" aria-label="Distribution analysis">
       <section id="chart-panel" class="chart-panel panel">
-        <div class="chart-heading">
-          <div>
-            <h2 id="chart-title">Validated Schedule J base salaries</h2>
-          </div>
-          <div class="live-stats" aria-live="polite">
-            <span><b id="stat-n">0</b> <i id="stat-n-unit">organizations</i></span>
-            <span><b id="stat-neff">0</b> effective sample size</span>
-            <span><b id="stat-center">—</b> median</span>
-          </div>
+        <div id="chart-view-tabs" class="chart-view-tabs" role="tablist" aria-label="Analysis view">
+          <button id="chart-tab-histogram" class="chart-view-tab" type="button" role="tab" data-chart-view="histogram" aria-selected="true" aria-controls="chart-view-content" tabindex="0">Histogram</button>
+          <button id="chart-tab-scatter" class="chart-view-tab" type="button" role="tab" data-chart-view="scatter" aria-selected="false" aria-controls="chart-view-content" tabindex="-1">Scatterplot</button>
+          <button id="chart-tab-model" class="chart-view-tab" type="button" role="tab" data-chart-view="model" aria-selected="false" aria-controls="chart-view-content" tabindex="-1">Model</button>
         </div>
-        <div id="scatter-controls" class="scatter-controls" hidden>
-          <output id="scatter-correlations" class="scatter-correlations" aria-live="polite" title="Weighted Pearson r measures linear association; weighted Spearman ρ measures rank association. Both range from −1 to +1, and association does not imply causation.">Weighted r = —, ρ = —</output>
-          <button class="info-tooltip" type="button" aria-label="About correlation statistics" data-tooltip="Weighted Pearson r measures linear association; weighted Spearman ρ measures rank association. Both range from −1 to +1. The sign shows direction, values farther from zero indicate stronger association, and association does not imply causation.">?</button>
-        </div>
-        <div id="chart-wrap" class="chart-wrap">
-          <svg id="salary-chart" role="img" aria-labelledby="chart-title chart-description"></svg>
-          <p id="chart-description" class="sr-only">A weighted histogram in which each block represents one organization.</p>
-          <div id="chart-tooltip" class="chart-tooltip" role="tooltip" hidden></div>
-          <div id="axis-selector-popover" class="axis-selector-popover" role="dialog" aria-modal="false" aria-labelledby="axis-selector-title" hidden>
-            <div class="axis-selector-heading">
-              <strong id="axis-selector-title">Choose axis</strong>
-              <button id="axis-selector-close" type="button" aria-label="Close axis selector">×</button>
+        <div id="chart-view-content" class="chart-view-content" role="tabpanel" aria-labelledby="chart-tab-histogram">
+          <div class="chart-heading">
+            <div>
+              <h2 id="chart-title">Validated Schedule J base salaries</h2>
             </div>
-            <label><span id="axis-numerator-label">Measure</span><select id="axis-numerator"></select></label>
-            <label id="axis-denominator-field" hidden><span>Denominator</span><select id="axis-denominator"></select></label>
+            <div class="live-stats" aria-live="polite">
+              <span><b id="stat-n">0</b> <i id="stat-n-unit">organizations</i></span>
+              <span><b id="stat-neff">0</b> <i id="stat-neff-unit">effective sample size</i></span>
+              <span><b id="stat-center">—</b> <i id="stat-center-unit">median</i></span>
+            </div>
           </div>
+          <div id="scatter-controls" class="scatter-controls" hidden>
+            <output id="scatter-correlations" class="scatter-correlations" aria-live="polite" title="Weighted Pearson r measures linear association; weighted Spearman ρ measures rank association. Both range from −1 to +1, and association does not imply causation.">Weighted r = —, ρ = —</output>
+            <button class="info-tooltip" type="button" aria-label="About correlation statistics" data-tooltip="Weighted Pearson r measures linear association; weighted Spearman ρ measures rank association. Both range from −1 to +1. The sign shows direction, values farther from zero indicate stronger association, and association does not imply causation.">?</button>
+          </div>
+          <section id="model-diagnostics" class="model-diagnostics" hidden aria-label="Prediction-model validation">
+            <div class="model-diagnostic-strip">
+              <span><b id="model-cv-error">—</b> held-out typical error</span>
+              <span><b id="model-cv-coverage">—</b> 90% coverage</span>
+              <span><b id="model-profile-support">—</b> profile coverage</span>
+              <span><b id="model-training-count">—</b> training records</span>
+            </div>
+            <p id="model-profile-reasons" class="model-profile-reasons" role="status" hidden></p>
+            <details id="model-details">
+              <summary>Model details and comparison</summary>
+              <p id="model-method-description"></p>
+              <div class="model-details-grid">
+                <div>
+                  <h3>Grouped 10-fold validation</h3>
+                  <div class="model-comparison-scroll">
+                    <table class="model-comparison-table">
+                      <thead><tr><th>Method</th><th>Log RMSE</th><th>Typical error</th><th>90% coverage</th><th>CV log score</th></tr></thead>
+                      <tbody id="model-comparison-body"></tbody>
+                    </table>
+                  </div>
+                </div>
+                <div>
+                  <h3>Prediction drivers <button class="info-tooltip" type="button" aria-label="About prediction drivers" data-tooltip="Shows how each input moves the expected log salary relative to a typical modeled organization. These are predictive associations, not causal effects or board recommendations.">?</button></h3>
+                  <div id="model-contributions" class="model-contributions"></div>
+                </div>
+              </div>
+              <p id="model-limitations" class="model-limitations"></p>
+            </details>
+          </section>
+          <div id="chart-wrap" class="chart-wrap">
+            <svg id="salary-chart" role="img" aria-labelledby="chart-title chart-description"></svg>
+            <p id="chart-description" class="sr-only">A weighted histogram in which each block represents one organization.</p>
+            <div id="chart-tooltip" class="chart-tooltip" role="tooltip" hidden></div>
+            <div id="axis-selector-popover" class="axis-selector-popover" role="dialog" aria-modal="false" aria-labelledby="axis-selector-title" hidden>
+              <div class="axis-selector-heading">
+                <strong id="axis-selector-title">Choose axis</strong>
+                <button id="axis-selector-close" type="button" aria-label="Close axis selector">×</button>
+              </div>
+              <label><span id="axis-numerator-label">Measure</span><select id="axis-numerator"></select></label>
+              <label id="axis-denominator-field" hidden><span>Denominator</span><select id="axis-denominator"></select></label>
+            </div>
+          </div>
+          <div id="chart-legend" class="chart-legend" aria-label="Chart legend"></div>
         </div>
-        <div id="chart-legend" class="chart-legend" aria-label="Chart legend"></div>
       </section>
 
       <div id="results-panel-resizer" class="panel-resizer panel-resizer-horizontal" data-resizer="results" role="separator" aria-orientation="horizontal" aria-label="Resize chart and results panels" aria-controls="chart-panel results-panel" aria-valuemin="0" aria-valuemax="100" aria-valuenow="55" tabindex="0"></div>

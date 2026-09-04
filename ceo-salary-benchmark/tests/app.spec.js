@@ -1,5 +1,14 @@
 const { test, expect } = require("@playwright/test");
 
+const chartViewTab = (page, view) => page.locator(`[role="tab"][data-chart-view="${view}"]`);
+
+async function selectChartView(page, view) {
+  const tab = chartViewTab(page, view);
+  await tab.click();
+  await expect(tab).toHaveAttribute("aria-selected", "true");
+  await expect(page.locator("#chart-view-content")).toHaveAttribute("aria-labelledby", `chart-tab-${view}`);
+}
+
 test("benchmark interactions and validated sources", async ({ page }) => {
   test.setTimeout(60_000);
   const errors = [];
@@ -376,7 +385,8 @@ test("benchmark interactions and validated sources", async ({ page }) => {
       Number(line.getAttribute("y1")) === baseline && Number(line.getAttribute("y2")) === baseline + 4).length;
   });
   expect(histogramTickLines).toBe(0);
-  await expect(page.locator("aside.settings-panel").locator('input[name="chart-view"]')).toHaveCount(2);
+  await expect(page.locator("aside.settings-panel").locator('[data-chart-view]')).toHaveCount(0);
+  await expect(page.locator("#chart-view-tabs").locator('[role="tab"][data-chart-view]')).toHaveCount(3);
   await page.locator("#chart-color").selectOption("eaAffinity");
   await expect(page.locator("#color-description")).toContainText("effective altruism");
   expect(new Set(await page.locator(".bar-block").evaluateAll((blocks) => blocks.map((block) => block.getAttribute("fill")))).size).toBeGreaterThan(1);
@@ -621,9 +631,9 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(titleHeader.locator("xpath=ancestor::th")).toHaveAttribute("aria-sort", "ascending");
   const tierHeaderWidth = await page.locator("thead .tier-column").first().evaluate((cell) => cell.getBoundingClientRect().width);
   expect(tierHeaderWidth).toBeLessThanOrEqual(80);
-  await expect(page.locator("thead tr")).toHaveCount(1);
+  await expect(page.locator("#organization-table thead tr")).toHaveCount(1);
   await expect(page.locator("#table-rp-reference-layer")).toHaveCount(0);
-  const filterPlacements = await page.locator("thead th.filterable-column").evaluateAll((headers) => headers.map((header) => {
+  const filterPlacements = await page.locator("#organization-table thead th.filterable-column").evaluateAll((headers) => headers.map((header) => {
     const controls = header.querySelector(".header-controls").getBoundingClientRect();
     const sortButton = header.querySelector("button[data-sort]");
     const sort = sortButton.getBoundingClientRect();
@@ -909,7 +919,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#help-tooltip")).toContainText("each receive half of the total influence");
   await page.locator('.stream-balance-rule input[value="streamBalanced"]').check();
   await expect(page.locator("#weighting-description")).toContainText("receive equal total influence");
-  await page.locator('input[name="chart-view"][value="scatter"]').check();
+  await selectChartView(page, "scatter");
   await expect(page.locator("#scatter-controls")).toBeVisible();
   await expect(page.locator(".scatter-point")).not.toHaveCount(0);
   await expect(page.locator(".rp-reference-guide")).toHaveCount(0);
@@ -954,6 +964,274 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#table-search")).toHaveCount(0);
   await expect(page.locator('thead button[data-sort="remoteStatus"]')).toHaveCount(0);
 
+  expect(errors).toEqual([]);
+});
+
+test("chart folder tabs expose accessible mouse and keyboard navigation", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/ceo-salary-benchmark/");
+
+  const tablist = page.getByRole("tablist", { name: "Analysis view" });
+  const histogram = chartViewTab(page, "histogram");
+  const scatter = chartViewTab(page, "scatter");
+  const model = chartViewTab(page, "model");
+  await expect(tablist).toBeVisible();
+  await expect(tablist.getByRole("tab")).toHaveCount(3);
+  await expect(histogram).toHaveAttribute("aria-selected", "true");
+  await expect(histogram).toHaveAttribute("tabindex", "0");
+  await expect(scatter).toHaveAttribute("tabindex", "-1");
+  await expect(model).toHaveAttribute("aria-disabled", "false");
+
+  await histogram.focus();
+  await histogram.press("ArrowRight");
+  await expect(scatter).toBeFocused();
+  await expect(scatter).toHaveAttribute("aria-selected", "true");
+  await expect(page.locator("#scatter-display-settings")).toBeVisible();
+  await expect(page.locator("#chart-view-content")).toHaveAttribute("aria-labelledby", "chart-tab-scatter");
+
+  await scatter.press("End");
+  await expect(model).toBeFocused();
+  await expect(model).toHaveAttribute("aria-selected", "true");
+  await expect(page.locator("#model-settings")).toBeVisible();
+  await expect(page.locator("#chart-view-content")).toHaveAttribute("aria-labelledby", "chart-tab-model");
+
+  await model.press("ArrowRight");
+  await expect(histogram).toBeFocused();
+  await expect(histogram).toHaveAttribute("aria-selected", "true");
+  await expect(page.locator("#histogram-axis-settings")).toBeVisible();
+  expect(errors).toEqual([]);
+});
+
+test("model view starts from the RP profile and renders predictions, quantiles, and validation", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/ceo-salary-benchmark/");
+
+  const defaults = await page.evaluate(() => {
+    const model = window.CEO_BENCHMARK_DATA.predictiveModel;
+    return {
+      expenses: String(model.rpProfile.expenses),
+      revenue: String(model.rpProfile.revenue),
+      staff: String(model.rpProfile.staff),
+      year: String(model.rpProfile.compensation_year),
+      focus: model.rpProfile.focus_area,
+      ea: model.rpProfile.ea_relationship,
+      type: model.rpProfile.organization_type,
+      title: model.rpProfile.title_group,
+      location: model.rpProfile.location_scope,
+      exactFilings: model.training.exactFilings,
+      advertisedRecords: model.training.advertisedRecords,
+      comparisonRows: model.comparison.length,
+    };
+  });
+  await page.locator("#stream-select").selectOption("incumbents");
+  await page.locator("#measure-select").selectOption("total");
+  await selectChartView(page, "model");
+
+  await expect(page.locator("#model-method")).toHaveValue("bayesian");
+  await expect(page.locator("#model-use-ad-ranges")).not.toBeChecked();
+  await expect(page.locator("#model-expenses")).toHaveValue(defaults.expenses);
+  await expect(page.locator("#model-revenue")).toHaveValue(defaults.revenue);
+  await expect(page.locator("#model-staff")).toHaveValue(defaults.staff);
+  await expect(page.locator("#model-year")).toHaveValue(defaults.year);
+  await expect(page.locator("#model-focus")).toHaveValue(defaults.focus);
+  await expect(page.locator("#model-ea")).toHaveValue(defaults.ea);
+  await expect(page.locator("#model-organization-type")).toHaveValue(defaults.type);
+  await expect(page.locator("#model-title")).toHaveValue(defaults.title);
+  await expect(page.locator("#model-location")).toHaveValue(defaults.location);
+
+  await expect(page.locator("#chart-title")).toHaveText("Predicted CEO Salary for Selected Profile");
+  await expect(page.locator("#chart-description")).toContainText("posterior predictive distribution");
+  await expect(page.locator(".model-density-line")).toHaveCount(1);
+  await expect(page.locator(".model-interval-50")).toHaveCount(1);
+  await expect(page.locator(".model-interval-80")).toHaveCount(1);
+  await expect(page.locator(".model-interval-95")).toHaveCount(1);
+  await expect(page.locator(".model-reference-line")).toHaveCount(1);
+  await expect(page.locator("#stat-n-unit")).toHaveText("expected salary");
+  await expect(page.locator("#stat-neff-unit")).toHaveText("median");
+  await expect(page.locator("#stat-center-unit")).toHaveText("80% prediction range");
+  for (const statistic of ["#stat-n", "#stat-neff", "#stat-center"]) {
+    await expect(page.locator(statistic)).toContainText("$");
+  }
+
+  await expect(page.locator("#quantile-basis")).toContainText("Bayesian partial pooling");
+  await expect(page.locator(".quantile-cell")).toHaveCount(4);
+  expect(await page.locator(".quantile-cell strong").allTextContents()).toEqual(
+    expect.arrayContaining([expect.stringMatching(/^\$[\d,.]+[KMB]?$/)]),
+  );
+  await expect(page.locator("#model-diagnostics")).toBeVisible();
+  await expect(page.locator("#model-cv-error")).toHaveText(/^\d+%$/);
+  await expect(page.locator("#model-cv-coverage")).toHaveText(/^\d+%$/);
+  await expect(page.locator("#model-training-count")).toHaveText(String(defaults.exactFilings));
+  await expect(page.locator('tbody tr[data-id^="SRC-AD"]')).not.toHaveCount(0);
+  await expect(page.locator("#organization-table .header-filter-menu:visible")).toHaveCount(0);
+  await expect(page.locator("#model-profile-support")).toHaveText(/^(Typical|Sparse)$/);
+  await expect(page.locator("#model-profile-reasons")).toContainText("EA-core has 0 filing examples");
+  await page.locator("#model-details summary").click();
+  await expect(page.locator("#model-method-description")).toBeVisible();
+  await expect(page.locator("#model-comparison-body tr")).toHaveCount(defaults.comparisonRows);
+  await expect(page.locator("#model-comparison-body tr.is-selected")).toHaveCount(1);
+  await expect(page.locator("#model-contributions .model-contribution")).not.toHaveCount(0);
+
+  const filingOnlyExpected = await page.locator("#stat-n").textContent();
+  await page.locator("#model-use-ad-ranges").check();
+  await expect(page.locator("#model-training-count")).toHaveText(String(defaults.exactFilings + defaults.advertisedRecords));
+  await expect(page.locator("#quantile-basis")).toContainText("with advertised ranges");
+  await expect(page.locator("#stat-n")).not.toHaveText(filingOnlyExpected);
+  await page.locator("#model-method").selectOption("gam");
+  await expect(page.locator("#model-category-inputs")).toBeHidden();
+  await expect(page.locator("#model-use-ad-ranges")).toBeDisabled();
+  await expect(page.locator("#model-use-ad-ranges")).not.toBeChecked();
+  await expect(page.locator("#model-training-count")).toHaveText(String(defaults.exactFilings));
+  await expect(page.locator("#quantile-basis")).toContainText("scale GAM");
+  await expect(page.locator(".model-density-line")).toHaveCount(1);
+  await expect.poll(() => {
+    const encoded = new URL(page.url()).searchParams.get("s");
+    return encoded ? JSON.parse(Buffer.from(encoded, "base64url").toString()).y : null;
+  }).toMatchObject({ m: "g" });
+  const gamUrlModelState = JSON.parse(Buffer.from(
+    new URL(page.url()).searchParams.get("s"), "base64url",
+  ).toString()).y;
+  expect(gamUrlModelState).not.toHaveProperty("d");
+
+  const expectedBefore = await page.locator("#stat-n").textContent();
+  await page.locator("#model-expenses").fill(String(Number(defaults.expenses) * 2));
+  await expect.poll(() => page.locator("#stat-n").textContent()).not.toBe(expectedBefore);
+  expect(errors).toEqual([]);
+});
+
+test("model state round-trips through the compact URL and participates in undo and redo", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/ceo-salary-benchmark/");
+  await selectChartView(page, "model");
+
+  const defaultExpenses = Number(await page.locator("#model-expenses").inputValue());
+  const changedExpenses = defaultExpenses + 1_234_567;
+  const alternativeFocus = await page.locator("#model-focus option").evaluateAll((options, current) =>
+    options.map((option) => option.value).find((value) => value && value !== current),
+  await page.locator("#model-focus").inputValue());
+  await page.locator("#model-expenses").fill(String(changedExpenses));
+  await page.locator("#model-expenses").blur();
+  await page.locator("#model-focus").selectOption(alternativeFocus);
+  await page.locator("#model-use-ad-ranges").check();
+  await page.locator("#quantile-granularity").selectOption("deciles");
+  await expect.poll(() => new URL(page.url()).searchParams.has("s")).toBe(true);
+  await page.waitForTimeout(100);
+  const sharedUrl = page.url();
+  const predictionBeforeReload = await page.locator("#stat-n").textContent();
+  expect(sharedUrl.length).toBeLessThan(500);
+
+  await page.reload();
+  await expect(chartViewTab(page, "model")).toHaveAttribute("aria-selected", "true");
+  await expect(page.locator("#model-expenses")).toHaveValue(String(changedExpenses));
+  await expect(page.locator("#model-focus")).toHaveValue(alternativeFocus);
+  await expect(page.locator("#model-use-ad-ranges")).toBeChecked();
+  await expect(page.locator("#quantile-granularity")).toHaveValue("deciles");
+  await expect(page.locator("#stat-n")).toHaveText(predictionBeforeReload);
+
+  const originalStaff = Number(await page.locator("#model-staff").inputValue());
+  const changedStaff = originalStaff + 7;
+  await page.locator("#model-staff").fill(String(changedStaff));
+  await page.locator("#model-staff").blur();
+  await chartViewTab(page, "model").focus();
+  await page.keyboard.press("Control+z");
+  await expect(page.locator("#model-staff")).toHaveValue(String(originalStaff));
+  await page.keyboard.press("Control+Shift+z");
+  await expect(page.locator("#model-staff")).toHaveValue(String(changedStaff));
+  expect(errors).toEqual([]);
+});
+
+test("Model is unavailable outside the CEO benchmark without entering an invalid view", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/coo-salary-benchmark/");
+
+  const histogram = chartViewTab(page, "histogram");
+  const scatter = chartViewTab(page, "scatter");
+  const model = chartViewTab(page, "model");
+  await expect(model).toHaveAttribute("aria-disabled", "true");
+  await expect(model).toHaveAttribute("aria-label", /unavailable.*only for CEO pay/i);
+  await model.evaluate((element) => element.click());
+  await expect(histogram).toHaveAttribute("aria-selected", "true");
+  await expect(page.locator("#model-settings")).toBeHidden();
+
+  await histogram.focus();
+  await histogram.press("End");
+  await expect(scatter).toBeFocused();
+  await expect(scatter).toHaveAttribute("aria-selected", "true");
+  await expect(model).toHaveAttribute("aria-selected", "false");
+  expect(errors).toEqual([]);
+});
+
+test("scatter advertised ranges are presentation-only and preserve results", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/ceo-salary-benchmark/");
+  await page.locator("#stream-select").selectOption("jobAds");
+  await selectChartView(page, "scatter");
+
+  await page.locator('.axis-variable-control[aria-label^="Change horizontal"]').click();
+  await page.locator("#axis-numerator").selectOption("salary");
+  await expect(page.locator("#show-job-ad-intervals")).toBeChecked();
+  await expect(page.locator(".job-ad-intervals .job-ad-interval")).not.toHaveCount(0);
+  await expect(page.locator("#chart-legend")).toContainText("Advertised range · point is midpoint");
+  const rangePoint = page.locator('.scatter-point[aria-label*="advertised range"]').first();
+  await expect(rangePoint).toHaveAttribute("aria-label", /advertised range .+ to .+/);
+  expect(await page.locator(".job-ad-interval").first().evaluate((interval) => getComputedStyle(interval).pointerEvents)).toBe("none");
+  await rangePoint.focus();
+  await expect(page.locator("#chart-tooltip")).toBeVisible();
+  await expect(page.locator("#chart-tooltip")).toContainText("Advertised range");
+  const pointCount = await page.locator(".scatter-point").count();
+  const statistics = await page.locator("#stat-n, #stat-neff, #stat-center, #scatter-correlations").allTextContents();
+  const quantiles = await page.locator("#quantile-grid").textContent();
+
+  await page.locator("#show-job-ad-intervals").uncheck();
+  await expect(page.locator(".job-ad-intervals .job-ad-interval")).toHaveCount(0);
+  await expect(page.locator("#chart-legend")).not.toContainText("Advertised range");
+  await expect(page.locator(".scatter-point")).toHaveCount(pointCount);
+  expect(await page.locator("#stat-n, #stat-neff, #stat-center, #scatter-correlations").allTextContents()).toEqual(statistics);
+  expect(await page.locator("#quantile-grid").textContent()).toBe(quantiles);
+  expect(errors).toEqual([]);
+});
+
+test("chart tabs and model chart reflow within narrow and short containers", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/ceo-salary-benchmark/");
+  await selectChartView(page, "model");
+
+  const narrowGeometry = await page.locator("#chart-view-tabs").evaluate((tablist) => {
+    const bounds = tablist.getBoundingClientRect();
+    return {
+      overflow: tablist.scrollWidth - tablist.clientWidth,
+      tabs: [...tablist.querySelectorAll('[role="tab"]')].map((tab) => {
+        const tabBounds = tab.getBoundingClientRect();
+        return { left: tabBounds.left - bounds.left, right: tabBounds.right - bounds.left };
+      }),
+    };
+  });
+  expect(narrowGeometry.overflow).toBeLessThanOrEqual(1);
+  expect(narrowGeometry.tabs.every((tab) => tab.left >= -1 && tab.right <= 391)).toBe(true);
+  await expect.poll(() => page.locator("#salary-chart").evaluate((svg) => {
+    const wrap = document.querySelector("#chart-wrap").getBoundingClientRect();
+    const viewBox = svg.getAttribute("viewBox").split(/\s+/).map(Number);
+    return Math.abs(viewBox[2] - wrap.width) <= 2 && Math.abs(viewBox[3] - wrap.height) <= 2;
+  })).toBe(true);
+  await expect(page.locator("#salary-chart")).toContainText("Predicted CEO Salary");
+
+  await page.setViewportSize({ width: 1024, height: 486 });
+  await expect.poll(() => page.locator("#salary-chart").evaluate((svg) => {
+    const wrap = document.querySelector("#chart-wrap").getBoundingClientRect();
+    const viewBox = svg.getAttribute("viewBox").split(/\s+/).map(Number);
+    const svgBounds = svg.getBoundingClientRect();
+    return Math.abs(viewBox[2] - wrap.width) <= 2
+      && Math.abs(viewBox[3] - wrap.height) <= 2
+      && svgBounds.width <= wrap.width + 1
+      && svgBounds.height <= wrap.height + 1;
+  })).toBe(true);
   expect(errors).toEqual([]);
 });
 
@@ -1190,7 +1468,7 @@ test("desktop and narrow layouts render", async ({ page }) => {
   await scrollingPanel.screenshot({ path: "tmp/app-sticky-weight-components.png" });
   await page.locator("#reset-settings").click();
   await page.locator("#stream-select").selectOption("combined");
-  await page.locator('input[name="chart-view"][value="scatter"]').check();
+  await selectChartView(page, "scatter");
   await expect(page.locator(".point-size-legend")).toHaveCount(0);
   await page.locator("#chart-color").selectOption("sourceType");
   await page.screenshot({ path: "tmp/app-scatter.png", fullPage: true });
@@ -1341,7 +1619,7 @@ test("panel dividers resize, persist, and make charts reflow to their containers
     window.dispatchEvent(new Event("resize"));
   });
 
-  await page.locator('input[name="chart-view"][value="scatter"]').check();
+  await selectChartView(page, "scatter");
   await page.locator("#chart-color").selectOption("topic");
   const desktopSettingsHandle = await settingsDivider.boundingBox();
   await page.mouse.move(desktopSettingsHandle.x + desktopSettingsHandle.width / 2, desktopSettingsHandle.y + desktopSettingsHandle.height / 2);
@@ -1361,7 +1639,7 @@ test("panel dividers resize, persist, and make charts reflow to their containers
   await page.keyboard.press("Home");
   await resultsDivider.focus();
   await page.keyboard.press("Home");
-  await page.locator('input[name="chart-view"][value="histogram"]').check();
+  await selectChartView(page, "histogram");
 
   await page.setViewportSize({ width: 1024, height: 486 });
   await expect(settingsDivider).toBeVisible();
@@ -1399,7 +1677,7 @@ test("panel dividers resize, persist, and make charts reflow to their containers
   await dragResultsDividerTo(compactAnalysis.y + 1);
   await expect.poll(chartChildrenAreContained).toBe(true);
 
-  await page.locator('input[name="chart-view"][value="scatter"]').check();
+  await selectChartView(page, "scatter");
   await page.locator("#chart-color").selectOption("topic");
   await expect.poll(async () => page.locator("#salary-chart").evaluate((svg) => {
     const wrap = document.querySelector("#chart-wrap").getBoundingClientRect();
@@ -1517,8 +1795,8 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   await expect(page.locator(".plot-status-cell, .plot-status")).toHaveCount(0);
   await expect(page.locator('tbody tr[data-id][data-plot-eligible="false"] .organization-name').first()).toHaveCSS("color", "rgb(123, 137, 143)");
   await expect(page.locator('tbody tr[data-id][data-plot-eligible="false"] .weight-input').first()).toHaveValue("");
-  expect(await page.locator("thead th").count()).toBe(await page.locator("tbody tr[data-id]").first().locator("td").count());
-  expect(await page.locator("thead th").count()).toBe(await page.locator("tbody .rp-reference-row").first().locator("td").count());
+  expect(await page.locator("#organization-table thead th").count()).toBe(await page.locator("tbody tr[data-id]").first().locator("td").count());
+  expect(await page.locator("#organization-table thead th").count()).toBe(await page.locator("tbody .rp-reference-row").first().locator("td").count());
   await page.locator(".table-panel").screenshot({ path: "tmp/app-plot-eligibility-table.png" });
   await page.locator(".chart-panel").screenshot({ path: "tmp/app-ceo-coo-ratio.png" });
   await horizontalAxis().click();
@@ -1561,7 +1839,7 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   await expect(page.locator('input[name="histogram-axis-scale"][value="log"]')).toBeChecked();
   await page.locator(".chart-panel").screenshot({ path: "tmp/app-ratio-histogram-log.png" });
 
-  await page.locator('input[name="chart-view"][value="scatter"]').check();
+  await selectChartView(page, "scatter");
   await expect(page.locator("#axis-settings-context")).toHaveCount(0);
   await expect(horizontalAxis()).toHaveCount(1);
   await expect(verticalAxis()).toHaveCount(1);
@@ -1605,7 +1883,7 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   await page.locator("#axis-selector-close").click();
   await page.locator(".chart-panel").screenshot({ path: "tmp/app-ratio-scatter.png" });
 
-  await page.locator('input[name="chart-view"][value="histogram"]').check();
+  await selectChartView(page, "histogram");
   await horizontalAxis().click();
   await page.locator("#axis-denominator").selectOption("staff");
   await expect(horizontalAxis()).toContainText("CEO Salary / Staff");
@@ -1618,7 +1896,7 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   await expect(page.locator('input[name="histogram-axis-scale"][value="log"]')).toBeChecked();
   await expect(horizontalAxis()).toContainText("CEO Salary / Staff");
   await expect(horizontalAxis()).not.toContainText("log scale");
-  await page.locator('input[name="chart-view"][value="scatter"]').check();
+  await selectChartView(page, "scatter");
   await expect(page.locator('input[name="scatter-x-axis-mode"][value="value"]')).toBeChecked();
   await expect(page.locator('input[name="scatter-y-axis-mode"][value="value"]')).toBeChecked();
   await expect(page.locator('input[name="scatter-x-axis-scale"][value="log"]')).toBeChecked();
@@ -1634,7 +1912,7 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   const scatterShareUrl = page.url();
   await page.reload();
   expect(page.url()).toBe(scatterShareUrl);
-  await expect(page.locator('input[name="chart-view"][value="scatter"]')).toBeChecked();
+  await expect(chartViewTab(page, "scatter")).toHaveAttribute("aria-selected", "true");
   await expect(page.locator('input[name="scatter-y-axis-mode"][value="ratio"]')).toBeChecked();
   await expect(page.locator('input[name="scatter-y-axis-scale"][value="log"]')).toBeChecked();
   await expect(verticalAxis()).toContainText("CEO Salary / Revenue");
@@ -1775,7 +2053,7 @@ test("weights and compact shared URLs round-trip", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/ceo-salary-benchmark/");
-  await page.locator('input[name="chart-view"][value="scatter"]').check();
+  await selectChartView(page, "scatter");
   await page.locator("#chart-color").selectOption("structure");
   await page.locator("#mark-curve").uncheck();
   await page.waitForTimeout(100);
@@ -1797,7 +2075,7 @@ test("weights and compact shared URLs round-trip", async ({ page }) => {
   await rowWeight.blur();
   await expect(rowWeight).toHaveClass(/is-user-modified/);
   await firstRow.locator(".row-toggle").uncheck();
-  await page.locator('input[name="chart-view"][value="scatter"]').check();
+  await selectChartView(page, "scatter");
   await page.locator("#chart-color").selectOption("structure");
   await page.locator("#mark-curve").uncheck();
   await page.waitForTimeout(100);
@@ -1814,7 +2092,7 @@ test("weights and compact shared URLs round-trip", async ({ page }) => {
 
   await page.reload();
   await expect(page.locator('input[name="distribution"][value="gamma"]')).toBeChecked();
-  await expect(page.locator('input[name="chart-view"][value="histogram"]')).toBeChecked();
+  await expect(chartViewTab(page, "histogram")).toHaveAttribute("aria-selected", "true");
   await expect(page.locator("#chart-color")).toHaveValue("tier");
   await expect(page.locator('#weighting-components input[value="size"]')).toBeChecked();
   await expect(page.locator("#sample-select")).toHaveValue("sensitivity");
@@ -1870,7 +2148,7 @@ test("weights and compact shared URLs round-trip", async ({ page }) => {
   const legacyV4 = Buffer.from(JSON.stringify({ v: 4, a: 1 })).toString("base64url");
   await page.goto(`/ceo-salary-benchmark/?s=${legacyV4}`);
   await expect(page.locator('input[name="histogram-axis-mode"][value="ratio"]')).toBeChecked();
-  await page.locator('input[name="chart-view"][value="scatter"]').check();
+  await selectChartView(page, "scatter");
   await expect(page.locator('input[name="scatter-x-axis-mode"][value="ratio"]')).toBeChecked();
   await expect(page.locator('input[name="scatter-y-axis-mode"][value="ratio"]')).toBeChecked();
   const legacyV5 = Buffer.from(JSON.stringify({ v: 5 })).toString("base64url");
@@ -2013,7 +2291,7 @@ test("plot eligibility isolates weights while preserving row intent", async ({ p
   await expect(restoredRow.locator(".weight-input")).toHaveValue("2");
   await expect(restoredRow.locator(".weight-input")).toHaveClass(/is-user-modified/);
 
-  await page.locator('input[name="chart-view"][value="scatter"]').check();
+  await selectChartView(page, "scatter");
   const checkedEligible = await page.locator('tbody tr[data-id][data-plot-eligible="true"] .row-toggle:checked').count();
   await expect(page.locator(".scatter-point")).toHaveCount(checkedEligible);
   await expect(page.locator('tbody tr[data-id][data-plot-eligible="false"] .row-toggle:checked')).not.toHaveCount(0);
@@ -2467,14 +2745,14 @@ test("named scenarios preserve analytical snapshots and compare side by side", a
 
   await page.locator("#bin-count").fill("47");
   await page.locator("#chart-color").selectOption("topic");
-  await page.locator('input[name="chart-view"][value="scatter"]').check();
+  await selectChartView(page, "scatter");
   await expect(page.locator(".scenario-table thead th").nth(2)).toContainText("Current analysis");
 
   await page.getByRole("button", { name: "Apply Recommended model" }).click();
   await expect(page.locator("#sample-select")).toHaveValue("primary");
   await expect(page.locator('input[name="distribution"][value="lognormal"]')).toBeChecked();
   await expect(page.locator('.weighting-field input[value="comparability"]')).not.toBeChecked();
-  await expect(page.locator('input[name="chart-view"][value="scatter"]')).toBeChecked();
+  await expect(chartViewTab(page, "scatter")).toHaveAttribute("aria-selected", "true");
   await expect(page.locator("#bin-count")).toHaveValue("47");
   await expect(page.locator("#chart-color")).toHaveValue("topic");
 
@@ -2593,7 +2871,7 @@ test("each completed robustness check expands results once without overriding la
   await expect(analysis).toHaveClass(/is-animating-results-size/);
   await expect.poll(async () => analysis.evaluate((column) => getComputedStyle(column).transitionDuration)).toBe("0.4s");
   await expect(analysis).not.toHaveClass(/is-animating-results-size/);
-  await expect.poll(async () => (await results.boundingBox()).height).toBeGreaterThanOrEqual(495);
+  await expect.poll(async () => (await results.boundingBox()).height).toBeGreaterThanOrEqual(485);
   expect((await results.boundingBox()).height).toBeLessThanOrEqual(505);
   await page.locator("#analysis-column").screenshot({ path: "tmp/app-robustness-auto-expanded.png" });
 
@@ -2634,7 +2912,7 @@ test("each completed robustness check expands results once without overriding la
   await page.getByRole("button", { name: "Run check" }).click();
   await expect(analysis).toHaveClass(/is-animating-results-size/);
   await expect(analysis).not.toHaveClass(/is-animating-results-size/);
-  await expect.poll(async () => (await results.boundingBox()).height).toBeGreaterThanOrEqual(495);
+  await expect.poll(async () => (await results.boundingBox()).height).toBeGreaterThanOrEqual(485);
   expect((await results.boundingBox()).height).toBeLessThanOrEqual(505);
 
   await page.reload();
@@ -2653,7 +2931,7 @@ test("robustness auto-expansion is immediate when reduced motion is requested", 
   await expect(page.locator("#robustness-status")).toContainText(/specifications produced usable results/);
   await expect(page.locator("#analysis-column")).not.toHaveClass(/is-animating-results-size/);
   const resultsHeight = (await page.locator("#results-panel").boundingBox()).height;
-  expect(resultsHeight).toBeGreaterThanOrEqual(495);
+  expect(resultsHeight).toBeGreaterThanOrEqual(485);
   expect(resultsHeight).toBeLessThanOrEqual(505);
   expect(errors).toEqual([]);
 });
@@ -2926,7 +3204,7 @@ test("benchmark changes can be undone and redone without replacing native field 
   const selectedRowToggle = () => page.locator(`tbody tr[data-id="${selectedRowId}"] .row-toggle`);
 
   await page.locator('input[name="distribution"][value="gamma"]').check();
-  await page.locator('input[name="chart-view"][value="scatter"]').check();
+  await selectChartView(page, "scatter");
   await page.locator('thead button[data-sort="expenses"]').click();
   await selectedRowToggle().uncheck();
   await expect(selectedRowToggle()).not.toBeChecked();
@@ -2937,14 +3215,14 @@ test("benchmark changes can be undone and redone without replacing native field 
   await expect(page.locator('thead button[data-sort="tier"]').locator("xpath=ancestor::th"))
     .toHaveAttribute("aria-sort", "ascending");
   await undo();
-  await expect(page.locator('input[name="chart-view"][value="histogram"]')).toBeChecked();
+  await expect(chartViewTab(page, "histogram")).toHaveAttribute("aria-selected", "true");
   await undo();
   await expect(page.locator('input[name="distribution"][value="lognormal"]')).toBeChecked();
 
   await redo();
   await expect(page.locator('input[name="distribution"][value="gamma"]')).toBeChecked();
   await redo();
-  await expect(page.locator('input[name="chart-view"][value="scatter"]')).toBeChecked();
+  await expect(chartViewTab(page, "scatter")).toHaveAttribute("aria-selected", "true");
   await redo();
   await expect(page.locator('thead button[data-sort="expenses"]').locator("xpath=ancestor::th"))
     .toHaveAttribute("aria-sort", "ascending");
@@ -2958,7 +3236,7 @@ test("benchmark changes can be undone and redone without replacing native field 
   await expect(page.locator("#sample-select")).toHaveValue("clean");
   await expect(selectedRowToggle()).toBeChecked();
 
-  await page.locator('input[name="chart-view"][value="histogram"]').check();
+  await selectChartView(page, "histogram");
   const originalBins = await page.locator("#bin-count").inputValue();
   await page.locator("#bin-count").evaluate((input) => {
     [41, 42, 43].forEach((value) => {
@@ -2971,7 +3249,7 @@ test("benchmark changes can be undone and redone without replacing native field 
   await undo();
   await expect(page.locator("#bin-count")).toHaveValue(originalBins);
   await undo();
-  await expect(page.locator('input[name="chart-view"][value="scatter"]')).toBeChecked();
+  await expect(chartViewTab(page, "scatter")).toHaveAttribute("aria-selected", "true");
 
   const editableWeight = page.locator("tbody .weight-input:not(:disabled)").first();
   const weightBefore = await editableWeight.inputValue();
@@ -2982,11 +3260,11 @@ test("benchmark changes can be undone and redone without replacing native field 
 
   await page.locator("#sample-select").focus();
   await page.keyboard.press("Control+y");
-  await expect(page.locator('input[name="chart-view"][value="histogram"]')).toBeChecked();
+  await expect(chartViewTab(page, "histogram")).toHaveAttribute("aria-selected", "true");
   await page.keyboard.press("Meta+z");
-  await expect(page.locator('input[name="chart-view"][value="scatter"]')).toBeChecked();
+  await expect(chartViewTab(page, "scatter")).toHaveAttribute("aria-selected", "true");
   await page.keyboard.press("Meta+Shift+z");
-  await expect(page.locator('input[name="chart-view"][value="histogram"]')).toBeChecked();
+  await expect(chartViewTab(page, "histogram")).toHaveAttribute("aria-selected", "true");
 
   await page.goto("/ceo-salary-benchmark/");
   await page.locator("#quantile-granularity").selectOption("custom");
