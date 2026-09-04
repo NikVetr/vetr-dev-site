@@ -5,7 +5,7 @@ for a pair of languages, and exports them as vector PDF, high-resolution PNG or
 SVG. Everything runs client-side, so it works with the network off — which is the
 actual use case: someone abroad without a data plan.
 
-Live at `/pocket-language-guide/` on vetr.dev. Not linked from the site index yet.
+Live at `/pocket-language-guide/` on vetr.dev, and linked from the site index.
 
 ## What it produces
 
@@ -425,6 +425,34 @@ a colour. Five sections had none and fell back to an 8pt coloured square, which 
 the one place the coding *was* colour alone. Those five are level-2 headings, which
 the reference sheet prints without a mark, so their icons appear in the studio and
 not on the page.
+
+### The paper's own colour
+
+`spec.background` washes the page behind the columns. White is the default and stays
+it: the reference card is white, a wash costs ink on a sheet someone prints at home,
+and `low-ink` and `mono` drop it outright the way they drop row shading.
+
+Four modes. `tint` is one flat rect and **takes its swatch literally** — the reader
+names the paper colour, so diluting it would make the picker lie about itself; the
+first version mixed it toward paper and the default came out at (254,254,254), a
+control that appeared to do nothing. `flag` reads the colours off the flags of the
+countries that speak the target language, which is a fact about the language rather
+than a decoration: `regions.csv` carries them for the 28 countries the seventeen
+languages name. `sections` reads them off the sheet's own section colours and places
+them where those sections landed, weighted by inverse-square distance, so the wash
+under `emergency` is red because emergency is there — and it is computed per face,
+because a different section is there on the next one.
+
+**The two gradients are a grid of flat rects, not a gradient primitive.** The plan
+carries absolute positions and flat fills, which is what lets three renderers agree
+by construction, and `pdf-lib` reaches a real gradient only through a raw shading
+dictionary. Approximating one with cells would normally band — but every wash here
+sits a few percent off white by design, so the step between adjacent cells is well
+under a just noticeable difference. Measured out of the PDF at 150dpi, adjacent
+samples differ by one or two units in 255. The constraint and the design point the
+same way, which is the only reason this is the right answer rather than a
+compromise. It also means imposition, rotation and the card cut need to know
+nothing: a background is rects like any other, first in the list.
 
 ### Right-to-left
 

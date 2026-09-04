@@ -147,6 +147,8 @@
  *   variant falls back to its plain stack, which is why a condensed Mandarin sheet
  *   is condensed Latin against unchanged Han
  * @property {'full'|'low-ink'|'mono'} inkMode
+ * @property {BackgroundSpec} [background]  the paper's own colour. Absent or `none`
+ *   is white, which is the default and what the reference card is.
  * @property {boolean} autoFaces  let the solver add or drop pairs of faces
  * @property {number} padding  extra breathing room around every text element, in
  *   points at nominal type size. Named for what it does: larger means more space.
@@ -170,6 +172,17 @@
  */
 
 /** @typedef {{x:number,y:number,w:number,h:number,fill:string,r?:number}} Rect */
+
+/**
+ * A wash behind the columns. `tint` takes `color`; `flag` reads the countries that
+ * speak the target language and `sections` the sheet's own section colours, so
+ * neither needs one. `strength` is how far from paper it goes, 0 to 1 -- the default
+ * is 0.06, and much past 0.15 the muted 5pt type starts to lose contrast.
+ * @typedef {Object} BackgroundSpec
+ * @property {'none'|'tint'|'flag'|'sections'} mode
+ * @property {string} [color]
+ * @property {number} [strength]
+ */
 
 /** Text already broken to a single line and positioned. Renderers do not re-wrap.
  * @typedef {Object} TextRun

@@ -49,6 +49,9 @@ const MAX_STRETCH_SECTION = 7;
  * @typedef {Object} Atom
  * @property {'heading'|'item'|'note'} kind
  * @property {string} sectionId
+ * @property {string} colorRole  the section's colour, carried on the atom so a
+ *   `sections` background knows what colour landed where once the breaker has
+ *   placed it -- `core/solve/background.js`
  * @property {number} height
  * @property {{natural:number, stretch:number, max:number}} gapBefore
  * @property {number} breakCost
@@ -296,6 +299,7 @@ function headingAtom(ctx, block) {
   return {
     kind: 'heading',
     sectionId: block.sectionId,
+    colorRole: block.colorRole,
     height,
     gapBefore: {
       natural: ctx.theme.sectionSep.natural * s,
@@ -456,6 +460,7 @@ function atomShell(ctx, block, height, i, template) {
   return {
     kind: 'item',
     sectionId: block.sectionId,
+    colorRole: block.colorRole,
     height,
     gapBefore: { natural: 0, stretch: template.stretch, max: MAX_STRETCH_ROW * ctx.spacingRatio },
     breakCost: i === 0 ? BREAK_BLOCK : BREAK_IN_GROUP,
@@ -500,6 +505,7 @@ function noteAtom(ctx, block, withPaint) {
   return {
     kind: 'note',
     sectionId: block.sectionId,
+    colorRole: block.colorRole,
     height,
     gapBefore: {
       natural: n.spaceBefore * s, stretch: n.stretch, max: MAX_STRETCH_ROW * ctx.spacingRatio,

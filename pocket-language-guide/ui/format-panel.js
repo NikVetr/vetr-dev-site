@@ -15,7 +15,7 @@ import {
   itemGlyph, cutGlyph, priorityOptions,
   customGlyph, numericChoice, fieldGlyph, toggles, cardSizeControl, paletteControl,
   redrawGlyphs, relabelGlyphs, reserveControl, phoneControl, splitGlyph, headGlyph,
-  typeGlyph, typefaceGlyph, dpiGlyph, segmented, panelField,
+  typeGlyph, typefaceGlyph, dpiGlyph, segmented, panelField, backgroundControl,
 } from './glyphs.js';
 import { familyFor } from '../render/fonts.js';
 import { languageName, t } from './i18n.js';
@@ -222,6 +222,20 @@ function sampleValues(targetRows, sourceRows, respell, spec) {
  */
 
 /**
+ * The flag colours of the countries a language is spoken in, first two only -- past
+ * that the corners of a 6% wash stop being distinguishable. Empty where the registry
+ * has no colours for them, which is what lets the control hide a dead option.
+ * @param {any} corpus @param {string} target
+ */
+function flagColoursFor(corpus, target) {
+  const codes = (corpus.languages[target]?.regions ?? '').split(';').filter(Boolean).slice(0, 2);
+  return codes
+    .flatMap((/** @type {string} */ code) => (corpus.regions[code]?.flag_colors ?? '').split(';'))
+    .map((/** @type {string} */ c) => c.trim())
+    .filter(Boolean);
+}
+
+/**
  * Build the panel. Returns a `sync` to call after each solve, so changes made
  * elsewhere -- a warning's fix button, the quiz, a dragged margin -- show up here.
  * @param {PanelInput} input
@@ -408,6 +422,16 @@ export function createFormatPanel(input) {
     themes,
     themeId: spec.themeId,
     themeColors: spec.themeColors,
+    onChange: emit,
+  });
+
+  // The paper's own colour. After the palette, because `sections` washes with the
+  // section colours the palette above it sets, and before ink mode, because ink mode
+  // is what turns it off.
+  const background = backgroundControl({
+    value: spec.background,
+    roleColours: () => theme.colours(),
+    flagColours: flagColoursFor(corpus, spec.target),
     onChange: emit,
   });
 
@@ -659,6 +683,7 @@ export function createFormatPanel(input) {
     headField,
     panelField(t('format.textPadding'), [padding.group]),
     panelField(t('format.colours'), [theme.group, theme.custom]),
+    panelField(t('format.background'), [background.group, background.custom]),
     panelField(t('format.ink'), [ink.group]),
     cutField,
     reserveField,
@@ -712,6 +737,7 @@ export function createFormatPanel(input) {
       headText.hidden = next.head?.left !== 'custom' && next.head?.right !== 'custom';
       theme.sync(next);
       ink.select(next.inkMode);
+      background.sync(next.background);
       paper.select.value = next.paper.presetId;
       if (region) region.select.value = next.region;
       source.select.value = next.source;

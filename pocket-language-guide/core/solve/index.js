@@ -8,6 +8,7 @@ import { resolveField } from '../fonts.js';
 import { emergencyNote } from '../pack.js';
 import { buildAtoms } from './atoms.js';
 import { breakColumns } from './columnbreak.js';
+import { backgroundRects } from './background.js';
 import { placeColumn } from './justify.js';
 
 // Scale 0 puts every field at the smallest size its own script can carry, so the
@@ -428,6 +429,10 @@ export function layout(input) {
   for (let f = 0; f < faces; f += 1) {
     /** @type {import('../types.js').Face} */
     const face = { rects: [], runs: [], icons: [], hits: [] };
+    // Where each atom landed, for a `sections` background: the wash follows the
+    // columns, so it needs the placed rectangles rather than the block list.
+    /** @type {{colorRole:string, x:number, y:number, w:number, h:number}[]} */
+    const placed = [];
     for (let c = 0; c < spec.geometry.columns; c += 1) {
       const bin = f * spec.geometry.columns + c;
       const indices = broken.columns[bin] ?? [];
@@ -447,6 +452,11 @@ export function layout(input) {
       const drop = spec.geometry.columns === 1 ? residual / 2 : 0;
       columnAtoms.forEach((atom, k) => {
         const dy = offsets[k] + drop;
+        if (atom.colorRole) {
+          placed.push({
+            colorRole: atom.colorRole, x, y: dy, w: box.colWidth, h: atom.height,
+          });
+        }
         if (!atom.paint) return;
         for (const r of atom.paint.rects) face.rects.push({ ...r, x: r.x + x, y: r.y + dy });
         for (const r of atom.paint.runs) face.runs.push({ ...r, x: r.x + x, y: r.y + dy });
@@ -507,6 +517,18 @@ export function layout(input) {
         });
       }
     }
+    // Behind everything, so it goes on the front of the list rather than the back.
+    // Per face, not per sheet: a `sections` wash follows the sections that landed on
+    // *this* face, which is the whole point of it.
+    face.rects.unshift(...backgroundRects({
+      spec,
+      theme,
+      pageW: spec.geometry.pageW,
+      pageH: spec.geometry.pageH,
+      placed,
+      regions: corpus.regions,
+      languageRegions: (corpus.languages[spec.target]?.regions ?? '').split(';').filter(Boolean),
+    }));
     faceList.push(face);
   }
 

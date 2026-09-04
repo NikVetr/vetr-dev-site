@@ -63,3 +63,22 @@ test.describe('the quick export page', () => {
     );
   });
 });
+
+test('the donate link goes to GiveWell, and only from the working pages', async ({ page }) => {
+  // Named for GiveWell in the visible text rather than left as a bare "Donate": a
+  // donate button on a personal site reads as "pay the author", and this one does not
+  // do that, so saying where it goes is the whole point of having it.
+  for (const path of ['/sheet.html?target=es&source=en', '/customize.html?target=es&source=en']) {
+    await page.goto(path);
+    const link = page.locator('.page-footer a.donate');
+    await expect(link).toBeVisible();
+    await expect(link).toHaveAttribute('href', 'https://www.givewell.org/donate');
+    await expect(link).toContainText('GiveWell');
+    // A new tab, and no window handle back to the opener.
+    await expect(link).toHaveAttribute('rel', /noopener/);
+  }
+  // The gallery is the front door and keeps its own counsel.
+  await page.goto('/');
+  await expect(page.locator('.card').first()).toBeVisible();
+  await expect(page.locator('.page-footer')).toHaveCount(0);
+});

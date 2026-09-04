@@ -570,3 +570,42 @@ test('a header or footer can carry a folio, the pair, or your own text', async (
   await expect.poll(async () => (await texts()).some((s) => s.includes('555 0100')),
     { timeout: 120_000 }).toBe(true);
 });
+
+test('the paper takes a colour of its own, and low ink takes it away', async ({ page }) => {
+  // Four modes, and the two gradients are a grid of flat cells rather than a real
+  // gradient: the plan carries flat fills, which is what lets the DOM preview and the
+  // PDF agree, and `pdf-lib` reaches a gradient only through a raw shading
+  // dictionary. It is invisible because every wash here is a few percent off white.
+  await page.goto('/customize.html?target=sw&source=en');
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+  const rects = () => page.locator('.face.focused svg rect').count();
+  const plain = await rects();
+
+  // `tint` is one flat rect and is taken literally -- the swatch *is* the paper
+  // colour, not a colour to dilute, which is what the first version got wrong.
+  await page.getByRole('radio', { name: 'Tint', exact: true }).click();
+  await expect.poll(rects).toBe(plain + 1);
+  const swatch = page.locator('input[type="color"]:visible').last();
+  await expect(swatch).toBeVisible();
+  const chosen = (await swatch.inputValue()).toUpperCase();
+  // Not the *first* rect: `render/svg.js` lays a white paper rect down before
+  // anything from the plan, so the wash is the one after it.
+  await expect.poll(async () => page.locator('.face.focused svg rect')
+    .evaluateAll((nodes) => nodes.map((n) => n.getAttribute('fill'))))
+    .toContain(chosen);
+
+  // Both gradients cover the page in cells, and each cell is a different colour.
+  for (const mode of ['Flag', 'Sections']) {
+    await page.getByRole('radio', { name: mode, exact: true }).click();
+    await expect.poll(rects, { timeout: 60_000 }).toBeGreaterThan(plain + 50);
+    const fills = await page.locator('.face.focused svg rect').evaluateAll(
+      (nodes) => nodes.slice(0, 60).map((n) => n.getAttribute('fill')));
+    expect(new Set(fills).size, `${mode} should vary across the page`).toBeGreaterThan(8);
+  }
+
+  // And it is the first thing ink mode drops, for the same reason row shading is:
+  // many printers render a 3% tint as nothing and the rest spend colour on the whole
+  // page to do it.
+  await page.getByRole('radio', { name: 'Low ink', exact: true }).click();
+  await expect.poll(rects, { timeout: 60_000 }).toBe(plain);
+});

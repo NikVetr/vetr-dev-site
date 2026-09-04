@@ -1288,3 +1288,143 @@ export function reserveControl({ value, onChange }) {
     },
   };
 }
+
+/** Gradient ids have to be document-unique, and reproducible: the same input drawing
+ * the same output is the property the whole pipeline rests on, so a counter rather
+ * than a random suffix. */
+let gradientSeq = 0;
+
+/**
+ * The four backgrounds, each drawn as the wash it produces.
+ *
+ * A real gradient here, where the sheet itself uses a grid of flat cells: this is one
+ * 30px icon the browser draws, not something three renderers have to agree on, so
+ * approximating it would buy nothing.
+ * @param {'none'|'tint'|'flag'|'sections'} mode
+ * @param {string[]} colours  the section-role colours, for `sections`
+ * @param {string[]} flag     the target language's flag colours, for `flag`
+ * @param {string} tint
+ */
+export function backgroundGlyph(mode, colours, flag, tint) {
+  const box = 30;
+  const svg = frame(box, box);
+  const page = { x: 4, y: 3, width: 22, height: 24 };
+  svg.append(svgEl('rect', { ...page, class: 'g-page' }));
+  if (mode !== 'none') {
+    gradientSeq += 1;
+    const id = `bg-${mode}-${gradientSeq}`;
+    const stops = (mode === 'tint' ? [tint, tint]
+      : (mode === 'flag' ? flag : colours)).filter(Boolean);
+    const list = stops.length ? stops : ['#FFFFFF'];
+    const grad = svgEl('linearGradient', { id, x1: '0', y1: '0', x2: '0.6', y2: '1' });
+    list.forEach((c, i) => grad.append(svgEl('stop', {
+      offset: String(list.length === 1 ? i : i / (list.length - 1)),
+      'stop-color': c,
+      // `tint` is taken literally on the sheet, so it is opaque here; the two
+      // gradients are pulled most of the way to white, so they are faint.
+      'stop-opacity': mode === 'tint' ? '1' : '0.34',
+    })));
+    const defs = svgEl('defs');
+    defs.append(grad);
+    svg.append(defs, svgEl('rect', { ...page, fill: `url(#${id})` }));
+  }
+  // Two lines of type, so the wash reads as being *behind* something.
+  for (const y of [11, 19]) {
+    svg.append(svgEl('rect', { x: 8, y, width: 14, height: 1.6, class: 'g-rule' }));
+  }
+  return svg;
+}
+
+/**
+ * The paper's own colour: four modes, plus one sub-control that depends on which.
+ *
+ * White is the default and stays it. A wash costs ink on a sheet someone prints at
+ * home, the reference card is white, and `low-ink` and `mono` drop it entirely --
+ * `core/solve/background.js` is where that happens.
+ *
+ * **The swatch belongs to `tint` and the slider to the two gradients, never both.**
+ * `tint` *is* the swatch: the reader names the paper colour outright, and there is
+ * nothing left for a strength to mean. A flag's red and a section's blue are the
+ * opposite case -- saturated, and useless as a background until they are pulled
+ * almost to white, which is what there is to tune.
+ * @param {Object} config
+ * @param {import('../core/types.js').SheetSpec['background']} config.value
+ * @param {() => string[]} config.roleColours
+ * @param {string[]} config.flagColours
+ * @param {(patch:{background:import('../core/types.js').BackgroundSpec})=>void} config.onChange
+ */
+export function backgroundControl({ value, roleColours, flagColours, onChange }) {
+  let state = {
+    mode: value?.mode ?? 'none',
+    color: value?.color ?? '#F6F2EA',
+    strength: value?.strength ?? 0.06,
+  };
+
+  const swatch = /** @type {HTMLInputElement} */ (document.createElement('input'));
+  swatch.type = 'color';
+  swatch.className = 'swatch';
+  swatch.setAttribute('aria-label', t('format.backgroundColour'));
+  swatch.title = t('format.backgroundColour');
+
+  const strength = /** @type {HTMLInputElement} */ (document.createElement('input'));
+  strength.type = 'range';
+  strength.min = '0.01';
+  strength.max = '0.16';
+  strength.step = '0.01';
+  strength.setAttribute('aria-label', t('format.backgroundStrength'));
+  strength.title = t('format.backgroundStrength');
+
+  const custom = document.createElement('div');
+  custom.className = 'numeric-custom';
+  custom.append(swatch, strength);
+
+  const paint = () => {
+    swatch.value = state.color;
+    strength.value = String(state.strength);
+    swatch.hidden = state.mode !== 'tint';
+    strength.hidden = state.mode === 'tint' || state.mode === 'none';
+    custom.hidden = state.mode === 'none';
+  };
+
+  /** @param {Partial<typeof state>} patch */
+  const push = (patch) => {
+    state = { ...state, ...patch };
+    paint();
+    onChange({ background: state.mode === 'none' ? { mode: 'none' } : { ...state } });
+  };
+  swatch.addEventListener('input', () => push({ color: swatch.value }));
+  strength.addEventListener('input', () => push({ strength: Number(strength.value) }));
+
+  /** @type {('none'|'tint'|'flag'|'sections')[]} */
+  const MODES = ['none', 'tint', 'flag', 'sections'];
+  const options = () => MODES.map((mode) => ({
+    value: mode,
+    caption: t(`format.background.${mode}`),
+    title: t(`format.backgroundTitle.${mode}`),
+    glyph: backgroundGlyph(mode, roleColours(), flagColours, state.color),
+  }));
+
+  const group = segmented({
+    label: t('format.backgroundLong'),
+    value: state.mode,
+    options: options(),
+    onChange: (mode) => push({ mode }),
+  });
+  paint();
+
+  return {
+    group: group.group,
+    custom,
+    /** @param {import('../core/types.js').SheetSpec['background']} next */
+    sync(next) {
+      state = {
+        mode: next?.mode ?? 'none',
+        color: next?.color ?? state.color,
+        strength: next?.strength ?? state.strength,
+      };
+      paint();
+      group.select(state.mode);
+      redrawGlyphs(group.group, options().map((o) => o.glyph));
+    },
+  };
+}
