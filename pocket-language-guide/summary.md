@@ -25,13 +25,15 @@ everything tiny, which nobody wants. So it moves off the anchor only for a reaso
 
 The comfort threshold is set below the Japanese reference sheet's own 0.478, which
 is a deliberately tight layout that should not be second-guessed. On 7×5in, 167 of
-the 272 shipped pairs settle on eight faces and 105 on ten; none now fits six. The
+the 272 pairs the seventeenth language shipped settle on eight faces and 105 on ten;
+none now fits six. Greek, the eighteenth, is the second-longest language in the set
+after Russian and takes ten against every source. The
 tens are the scripts that need the most vertical room: **every** Japanese, Arabic and
 Devanagari sheet takes ten, Russian eleven of sixteen and Thai nine, while no English
 or Vietnamese sheet needs one. The reference sheets reached four by hand against a
 bank of 413 concepts. It is 776 now; the divider defaults to one position per section
 rather than one per row, which costs type size; and — the largest of the three — the
-respelling column has content on all 272 pairs rather than 16, so there is a third
+respelling column has content on all 306 pairs rather than 16, so there is a third
 line of type on every entry that used to have two. Eight is the same answer as four
 was, at the new size, the new default and the new column. A credit-card sheet takes
 sixteen rather than printing at minimum size.
@@ -117,8 +119,8 @@ A respelling is written *for a reader* — `nee HOW` is Chinese for someone who 
 English and nothing else — so curating them by hand is O(N²), and for a long time
 only the 16 pairs glossed into English had one while the other 256 printed an empty
 column. The way out is two O(N) inputs instead: the `ipa` column of the language
-being learned, and one rule table per language doing the reading. **All seventeen
-reader tables now exist and every one of the 272 pairs prints a respelling.**
+being learned, and one rule table per language doing the reading. **All eighteen
+reader tables now exist and every one of the 306 pairs prints a respelling.**
 `node scripts/respell_check.mjs <reader> --gaps` counts IPA symbols that reach the
 page because no rule matched, and every reader is at zero. Sixteen of the tables
 derive from a published pronunciation key for that language (`content/RESPELL-SYSTEMS.md`
@@ -157,7 +159,7 @@ look:
   The phrase means "do you speak *the traveller's* language", so a Spanish traveller
   in France was holding up a card asking whether the waiter spoke English.
 - **The gloss named the reader's own language.** `Je ne parle pas français` glossed
-  as `Ich spreche kein Deutsch` — false, on 135 of the 272 pairs, rather than merely
+  as `Ich spreche kein Deutsch` — false, on 153 of the 306 pairs, rather than merely
   vague.
 
 `{target}` and `{source}` fill from the pair, under one rule, and the narrower
@@ -437,7 +439,7 @@ names the paper colour, so diluting it would make the picker lie about itself; t
 first version mixed it toward paper and the default came out at (254,254,254), a
 control that appeared to do nothing. `flag` reads the colours off the flags of the
 countries that speak the target language, which is a fact about the language rather
-than a decoration: `regions.csv` carries them for the 28 countries the seventeen
+than a decoration: `regions.csv` carries them for the 29 countries the eighteen
 languages name. `sections` reads them off the sheet's own section colours and places
 them where those sections landed, weighted by inverse-square distance, so the wash
 under `emergency` is red because emergency is there — and it is computed per face,
@@ -655,7 +657,7 @@ in the distribution that still fills a real card:
 | Everything | 0 | 776 | 6–8 faces of 7×5 |
 | Broad | 0.74 | 306 | four faces — what both hand-built originals settled on |
 | Core | 0.82 | 147 | one sheet |
-| Essential | 0.95 | 11 | **one phone face at full nominal type, in all seventeen languages** |
+| Essential | 0.95 | 11 | **one phone face at full nominal type, in all eighteen languages** |
 
 There is a cliff above the top step, which is why it is where it is: the next rung
 down is 35 phrases under *twelve* headings, and it overflows one phone face even at
@@ -735,8 +737,8 @@ normalised English gloss, against the exact section first and then its group,
 because two sheets can file the same phrase under different panels ("Can I charge
 my phone?" is hotel basics in one and hotel requests in the other).
 
-The bank is now **771 concepts across 57 sections in sixteen languages**, which is
-**272 ordered pairs** — every one of which renders, and two of which anyone wrote a
+The bank is now **776 concepts across 57 sections in eighteen languages**, which is
+**306 ordered pairs** — every one of which renders, and two of which anyone wrote a
 sheet for. That ratio is the whole argument for joining on `concept_id` instead of
 storing pairs: the sixteenth language added 745 rows and 30 new pairs.
 
@@ -902,7 +904,7 @@ the reader's own Emergency heading. It now takes its frame and its ten service w
 from `data/registry/emergency-labels/<source>.csv` -- registry rather than
 `data/i18n/`, because `core/` renders the sheet and must not reach into the
 interface's catalogues -- and the country name from `Intl.DisplayNames`, checked
-against all 49 regions in all sixteen languages.
+against all 52 regions in all eighteen languages.
 
 **Every language refused the preposition.** `In {region}` was wrong for three of the
 49 English names ("In United States"); Portuguese counted 41 of 49 taking an article
@@ -917,7 +919,7 @@ nominative -- the same trick its pack used on sixteen slot rows. Hindi took
 Two validator rules keep the source side honest: every `note` needs text in every
 ready language except the ones it is scoped to (a language is never its own sheet's
 source), and every service word in `regions.csv` needs a row in every language's
-label file. All sixteen languages now pass both.
+label file. All eighteen languages now pass both.
 
 ### Tofu, and why a range table cannot catch it
 
@@ -972,17 +974,32 @@ Four fixes came out of it, none of them in the data:
 
 Named so nobody has to rediscover the gap:
 
-- **Corpus beyond the sixteen shipped languages.** Every language in the registry
+- **Corpus beyond the eighteen shipped languages.** Every language in the registry
   now has a pack, so there is nothing in the "help translate" state -- which the
   gallery and the studio still have to handle, and which their specs now reach by
   serving a coverage report with one language hollowed out rather than by naming a
-  real one. Adding the seventeenth means a registry row, a `scripts.csv` entry if its
+  real one. Adding the nineteenth means a registry row, a `scripts.csv` entry if its
   script is new, a font stack if the Latin faces do not cover it, and
   `python3 scripts/make_todo.py <code>`, then the two task templates in
   `content/PROMPTS/`: `translate-section.md` for the rows, and
   `reader-side-notes.md` for the notes and the emergency labels -- the second of
-  which carries what all sixteen languages learned about the `_frame`, so nobody
+  which carries what all eighteen languages learned about the `_frame`, so nobody
   rediscovers that a preposition cannot work.
+
+  Four things the eighteenth found that the templates do not yet say. **`make_todo.py`
+  omits exactly the rows a new language needs most of the reader-side prompt**: it
+  filters on `applies_to`, which is right for a target row and wrong for a `note`,
+  whose scope names the language it is *about* -- so the four notes are absent from
+  every todo and the validator warns about them immediately afterwards. **A `ref`,
+  `refphrase` or `num` row's `literal` draws nothing**, because no reference template
+  defines the field, so a caveat parked there is invisible on the card. **`applies_to`
+  has to be widened when a new language joins an existing scope**, which nobody did
+  for the seventeenth: `numbers-money.euro` was scoped `de;fr;es;pt`, so the Italian
+  pack shipped without the euro while four other eurozone packs had it. And **the
+  subsetter's `ALL_LANGS` has to be widened too** -- `it` was missing from it, so the
+  Italian corpus, its section titles and its emergency labels were outside the font
+  union entirely. That one printed nothing wrong only because Italian is Latin; the
+  same omission for Greek would have been a sheet of empty boxes.
 - **Digits inside right-to-left text.** The renderer shapes a run right-to-left as
   a whole and nothing here implements the bidi algorithm's rule that digits stay
   left-to-right inside it, so Arabic-Indic `١٠` printed as `٠١` and `١/٢` as `٢/١`.
@@ -1004,7 +1021,8 @@ Named so nobody has to rediscover the gap:
   a number that does not answer is worse than a blank, so it stays withheld with
   the FCDO values recorded for a future reviewer.
 
-  What is left on the respelling side is now **19 rows of 12,837**, about one per
+  What is left on the respelling side is now **29 rows of 13,593**, about one and a
+  half per
   sheet, and every one of them is a Latin acronym or brand embedded in a non-Latin
   sentence: `Wi-Fi`, `eSIM`, `ATM`. They are left rather than unfinished, because the
   human evidence disagrees with itself — the Mandarin and Thai curators respelled

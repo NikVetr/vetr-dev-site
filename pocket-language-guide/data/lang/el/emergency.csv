@@ -1,0 +1,138 @@
+concept_id,text,text_alt,romanization_elot,ipa,literal,confidence,provenance
+emergency-medical.help,Βοήθεια!,,Voitheia!,voˈiθça,,2,el-agent-v1;roman=elot743;ipa=espeak
+emergency-medical.please-call-an-ambulance,"Καλέστε ασθενοφόρο, παρακαλώ",Πάρτε το 166 (ΕΚΑΒ),"Kaleste asthenoforo, parakalo","kalˈeste ˌasθenofˈoɾo, pˌaɾakalˈo",Ambulance is 166; 112 also works,2,el-agent-v1;roman=elot743;ipa=espeak
+emergency-medical.i-need-a-doctor,Χρειάζομαι γιατρό,,Chreiazomai giatro,xɾçˈazomˌe jatɾˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+emergency-medical.i-am-sick,Είμαι άρρωστος / άρρωστη,Δεν είμαι καλά,Eimai arrostos / arrosti,ˈime ˈaɾostˌos / ˈaɾostˌi,,2,el-agent-v1;roman=elot743;ipa=espeak
+emergency-medical.i-am-injured,Έχω τραυματιστεί,Τραυματίστηκα,Echo travmatistei,ˈexo tɾˌavmatistˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
+emergency-medical.it-hurts-here,Πονάει εδώ,Πονάω εδώ,Ponaei edo,ponˈai eðˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+emergency-medical.where-is-a-pharmacy,Πού υπάρχει φαρμακείο;,Πού είναι το φαρμακείο;,Pou yparchei farmakeio;,pˈu ipˈaɾçi fˌaɾmacˈio,,2,el-agent-v1;roman=elot743;ipa=espeak
+emergency-medical.please-take-me-to-a-hospital,"Πηγαίνετέ με στο νοσοκομείο, παρακαλώ",Μπορείτε να με πάτε σε νοσοκομείο;,"Pigainete me sto nosokomeio, parakalo","pijˈenete me sto nˌosokomˈio, pˌaɾakalˈo",,2,el-agent-v1;roman=elot743;ipa=espeak
+emergency-medical.i-feel-unwell,Δεν αισθάνομαι καλά,Δεν νιώθω καλά,Den aisthanomai kala,ðˈen esθˈanomˌe kalˈa,,2,el-agent-v1;roman=elot743;ipa=espeak
+emergency-medical.this-is-an-emergency,Είναι επείγον!,Πρόκειται για επείγον περιστατικό,Einai epeigon!,ˈine epˈiɣon,,2,el-agent-v1;roman=elot743;ipa=espeak
+emergency-medical.i-am-having-a-severe-allergic-reaction,"Παθαίνω αναφυλαξία, σοβαρή αλλεργική αντίδραση",Έχω αναφυλακτικό σοκ,"Pathaino anafylaxia, sovari allergiki antidrasi","paθˈeno ˌanafˌilaksˈia, sˌovaɾˈi ˌaleɾjicˈi adˈiðɾasˌi",Anaphylaxis: severe allergic reaction,2,el-agent-v1;roman=elot743;ipa=espeak
+emergency-medical.i-cannot-breathe,Δεν μπορώ να αναπνεύσω,Έχω δύσπνοια,Den boro na anapnefso,ðˈen boɾˈo n ˌanapnˈefso,,2,el-agent-v1;roman=elot743;ipa=espeak
+emergency-medical.i-am-bleeding-badly,Αιμορραγώ πολύ,Έχω σοβαρή αιμορραγία,Aimorrago poly,ˌemoɾaɣˈo polˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
+emergency-medical.i-have-chest-pain,Έχω πόνο στο στήθος,,Echo pono sto stithos,ˈexo pˈono sto stˈiθos,,2,el-agent-v1;roman=elot743;ipa=espeak
+emergency-medical.this-person-is-unconscious,Αυτό το άτομο είναι αναίσθητο,Έχει λιποθυμήσει,Afto to atomo einai anaisthito,aftˈo to ˈatomˌo ˈine anˈesθitˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+emergency-medical.where-is-the-nearest-hospital,Πού είναι το πλησιέστερο νοσοκομείο;,Πού είναι το πιο κοντινό νοσοκομείο;,Pou einai to plisiestero nosokomeio;,pˈu ˈine to plisjˈesteɾˌo nˌosokomˈio,,2,el-agent-v1;roman=elot743;ipa=espeak
+emergency-medical.what-is-the-emergency-number,Ποιο είναι το τηλέφωνο ανάγκης;,Ποιος είναι ο αριθμός έκτακτης ανάγκης;,Poio einai to tilefono anagkis;,pˈio ˈine to tilˈefonˌo anˈaŋɡis,"In Greece 112, or 166 for an ambulance",2,el-agent-v1;roman=elot743;ipa=espeak
+emergency-medical.is-there-a-doctor-who-speaks-english,Υπάρχει γιατρός που μιλάει {source};,,Yparchei giatros pou milaei {source};,ipˈaɾçi jatɾˈos pu milˈai {source},,2,el-agent-v1;roman=elot743;ipa=espeak
+emergency-medical.i-think-a-bone-is-broken,Νομίζω ότι έχω σπάσει κάποιο κόκαλο,Μπορεί να έχω κάταγμα,Nomizo oti echo spasei kapoio kokalo,nomˈizo ˈoti ˈexo spˈasi kˈapiˌo kˈokalˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+emergency-medical.please-call-my-emergency-contact,Καλέστε το άτομο επικοινωνίας μου για επείγοντα,"Παρακαλώ, καλέστε τον συγγενή μου",Kaleste to atomo epikoinonias mou gia epeigonta,kalˈeste to ˈatomˌo ˌepicˌinonˈiaz mu jˈa epˈiɣodˌa,,2,el-agent-v1;roman=elot743;ipa=espeak
+emergency-medical.i-have-travel-insurance,Έχω ταξιδιωτική ασφάλιση,,Echo taxidiotiki asfalisi,ˈexo tˌaksiðˌioticˈi asfˈalisˌi,,2,el-agent-v1;roman=elot743;ipa=espeak
+medical-conditions.i-am-diabetic,Έχω διαβήτη,Έχω σακχαρώδη διαβήτη,Echo diaviti,ˈexo ðˌiavˈiti,,2,el-agent-v1;roman=elot743;ipa=espeak
+medical-conditions.i-need-insulin,Χρειάζομαι ινσουλίνη,,Chreiazomai insoulini,xɾçˈazomˌe ˌinsulˈini,,2,el-agent-v1;roman=elot743;ipa=espeak
+medical-conditions.i-have-asthma,Έχω άσθμα,,Echo asthma,ˈexo ˈasθma,,2,el-agent-v1;roman=elot743;ipa=espeak
+medical-conditions.i-have-a-heart-condition,Έχω καρδιακή πάθηση,Έχω πρόβλημα στην καρδιά,Echo kardiaki pathisi,ˈexo kˌaɾðiacˈi pˈaθisˌi,,2,el-agent-v1;roman=elot743;ipa=espeak
+medical-conditions.i-am-allergic-to-penicillin,Έχω αλλεργία στην πενικιλίνη,,Echo allergia stin penikilini,ˈexo ˌaleɾjˈia stim bˌenicilˈini,,2,el-agent-v1;roman=elot743;ipa=espeak
+medical-conditions.i-have-epilepsy,Έχω επιληψία,,Echo epilipsia,ˈexo ˌepilipsˈia,,2,el-agent-v1;roman=elot743;ipa=espeak
+medical-conditions.my-blood-sugar-is-low,"Έπεσε το σάκχαρό μου, έχω υπογλυκαιμία",Έχω χαμηλό σάκχαρο,"Epese to sakcharo mou, echo ypoglykaimia","ˈepesˌe to sˈakxaɾo mu, ˈexo ˌipoɣlˌicemˈia",My blood sugar has dropped; hypoglycaemia,2,el-agent-v1;roman=elot743;ipa=espeak
+medical-conditions.i-need-my-inhaler,Χρειάζομαι το σπρέι μου για το άσθμα,Χρειάζομαι τον εισπνευστήρα μου,Chreiazomai to sprei mou gia to asthma,xɾçˈazomˌe to spɾˈei mu jˈa to ˈasθma,,2,el-agent-v1;roman=elot743;ipa=espeak
+medical-conditions.i-am-pregnant,Είμαι έγκυος,,Eimai egkyos,ˈime ˈeŋɡiˌos,,2,el-agent-v1;roman=elot743;ipa=espeak
+medical-conditions.i-carry-an-adrenaline-injector,Έχω μαζί μου αυτόματη σύριγγα αδρεναλίνης,Έχω αυτοενέσιμη αδρεναλίνη,Echo mazi mou aftomati syringa adrenalinis,ˈexo mazˈi mu aftˈomatˌi sˈiɾiŋɡ ˌaðɾenalˈinis,,2,el-agent-v1;roman=elot743;ipa=espeak
+medical-conditions.i-take-medicine-for,Παίρνω φάρμακα για: {},,Pairno farmaka gia: {},pˈeɾno fˈaɾmakˌa jˈa {},I take medicine for: {} (fill needs no case),2,el-agent-v1;roman=elot743;ipa=espeak
+medical-conditions.i-take-blood-thinners,Παίρνω αντιπηκτικά φάρμακα,Παίρνω φάρμακα που αραιώνουν το αίμα,Pairno antipiktika farmaka,pˈeɾno ˌadipˌiktikˈa fˈaɾmakˌa,,2,el-agent-v1;roman=elot743;ipa=espeak
+medical-conditions.medicine-allergy,Αλλεργία σε φάρμακο: {},,Allergia se farmako: {},ˌaleɾjˈia se fˈaɾmakˌo {},Medicine allergy: {} (label; fill needs no case),2,el-agent-v1;roman=elot743;ipa=espeak
+medical-conditions.this-card-lists-my-conditions,Αυτή η κάρτα αναφέρει τις παθήσεις μου,Η κάρτα γράφει τα προβλήματα υγείας μου,Afti i karta anaferei tis pathiseis mou,aftˈi i kˈaɾt ˌanafˈeɾi tis paθˈisiz mu,,2,el-agent-v1;roman=elot743;ipa=espeak
+medical-conditions.this-is-my-medicine,Αυτό είναι το φάρμακό μου,Αυτά είναι τα φάρμακά μου,Afto einai to farmako mou,aftˈo ˈine to fˈaɾmako mu,,2,el-agent-v1;roman=elot743;ipa=espeak
+medical-conditions.please-give-me-sugar-or-juice,"Δώστε μου ζάχαρη ή χυμό, παρακαλώ",,"Doste mou zachari i chymo, parakalo","ðˈoste mu zˈaxaɾˌi ˈi çimˈo, pˌaɾakalˈo",,2,el-agent-v1;roman=elot743;ipa=espeak
+medical-conditions.inject-it-into-my-outer-thigh,Κάντε την ένεση στο μέσο του εξωτερικού μηρού,Κάντε την ένεση στο εξωτερικό μέρος του μηρού,Kante tin enesi sto meso tou exoterikou mirou,kˈade tin ˈenesˌi sto mˈeso tu ˌeksotˌeɾikˈu miɾˈu,Inject in the middle of the outer thigh,2,el-agent-v1;roman=elot743;ipa=espeak
+medical-conditions.my-blood-type-is,Η ομάδα αίματός μου είναι {},,I omada aimatos mou einai {},i omˈaða ˈematoz mu ˈine {},,2,el-agent-v1;roman=elot743;ipa=espeak
+medical-conditions.do-not-give-me,Μη μου δίνετε: {},,Mi mou dinete: {},mˈi mu ðˈinetˌe {},Do not give me: {} (colon; fill needs no case),2,el-agent-v1;roman=elot743;ipa=espeak
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,Έχω αλλεργία στην ασπιρίνη και στην ιβουπροφαίνη,Αλλεργία στα μη στεροειδή αντιφλεγμονώδη (ΜΣΑΦ),Echo allergia stin aspirini kai stin ivouprofaini,ˈexo ˌaleɾjˈia stin ˌaspiɾˈini ke stin ˌivupɾofˈeni,,2,el-agent-v1;roman=elot743;ipa=espeak
+medical-conditions.my-injector-is-in-my-bag,Η σύριγγα αδρεναλίνης είναι στην τσάντα μου,Η σύριγγά μου είναι στην τσάντα μου,I syringa adrenalinis einai stin tsanta mou,i sˈiɾiŋɡ ˌaðɾenalˈinis ˈine stin dzˈada mu,My adrenaline syringe is in my bag,2,el-agent-v1;roman=elot743;ipa=espeak
+medical-conditions.i-am-allergic-to-sulfa-drugs,Έχω αλλεργία στις σουλφοναμίδες,Αλλεργία στα σουλφοναμιδικά αντιβιοτικά,Echo allergia stis soulfonamides,ˈexo ˌaleɾjˈia stis sˌulfonamˈiðes,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.which-pharmacy-is-open-now,Ποιο φαρμακείο είναι ανοιχτό τώρα;,Ποιο φαρμακείο εφημερεύει;,Poio farmakeio einai anoichto tora;,pˈio fˌaɾmacˈio ˈine ˌanixtˈo tˈoɾa,Which pharmacy is on duty now (rota)?,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.i-need-medicine-for,Χρειάζομαι φάρμακο για: {},,Chreiazomai farmako gia: {},xɾçˈazomˌe fˈaɾmakˌo jˈa {},I need medicine for: {} (fill needs no case),2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.i-have-a-fever,Έχω πυρετό,,Echo pyreto,ˈexo pˌiɾetˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.i-have-diarrhea,Έχω διάρροια,,Echo diarroia,ˈexo ðiˈaɾiˌa,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.where-is-an-all-night-pharmacy,Πού είναι το διανυκτερεύον φαρμακείο;,Ποιο φαρμακείο διανυκτερεύει;,Pou einai to dianykterevon farmakeio;,pˈu ˈine to ðˌianˌikteɾˈevon fˌaɾmacˈio,Where is the all-night duty pharmacy?,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.painkiller,παυσίπονο,,pafsipono,pafsˈiponˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.do-i-need-a-prescription,Χρειάζομαι συνταγή;,Χρειάζεται ιατρική συνταγή;,Chreiazomai syntagi;,xɾçˈazomˌe sˌidajˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.i-have-a-headache,Έχω πονοκέφαλο,,Echo ponokefalo,ˈexo pˌonocˈefalˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.paracetamol-acetaminophen,παρακεταμόλη,Ντεπόν,paraketamoli,pˌaɾacˌetamˈoli,Depon is the usual Greek brand name,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.how-much-should-i-take,Πόσο πρέπει να πάρω;,Πόση δόση πρέπει να πάρω;,Poso prepei na paro;,pˈoso pɾˈepi na pˈaɾo,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.i-am-vomiting,Κάνω εμετό,Έχω εμετούς,Kano emeto,kˈano ˌemetˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.rehydration-salts,ηλεκτρολύτες,διάλυμα ηλεκτρολυτών,ilektrolytes,ˌilektɾolˈites,electrolytes (oral rehydration sachets),2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.how-many-times-a-day,Πόσες φορές την ημέρα;,,Poses fores tin imera;,pˈoses foɾˈes tin imˈeɾa,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.i-have-a-stomach-ache,Έχω στομαχόπονο,,Echo stomachopono,ˈexo stˌomaxˈoponˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.i-have-a-cough,Έχω βήχα,,Echo vicha,ˈexo vˈixa,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.antihistamine,αντιισταμινικό,,antiistaminiko,ˌadiˌistamˌinikˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.anti-diarrhea-medicine,φάρμακο για τη διάρροια,λοπεραμίδη,farmako gia ti diarroia,fˈaɾmakˌo jˈa ti ðiˈaɾiˌa,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.is-this-safe-to-take-with,Είναι ασφαλές να το πάρω μαζί με αυτό: {};,,Einai asfales na to paro mazi me afto: {};,ˈine ˌasfalˈez na to pˈaɾo mazˈi me aftˈo {},Safe to take with this: {}? (fill needs no case),2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.i-feel-dizzy,Ζαλίζομαι,Έχω ζαλάδα,Zalizomai,zalˈizomˌe,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.ibuprofen,ιβουπροφαίνη,,ivouprofaini,ˌivupɾofˈeni,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.i-have-a-sore-throat,Έχω πονόλαιμο,,Echo ponolaimo,ˈexo ponˈolemˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.can-i-get-this-medicine-here,Μπορώ να βρω αυτό το φάρμακο εδώ;,Υπάρχει αυτό το φάρμακο εδώ;,Boro na vro afto to farmako edo;,boɾˈo na vɾˈo aftˈo to fˈaɾmakˌo eðˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.bandage,επίδεσμος,,epidesmos,epˈiðesmˌos,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.the-pain-is-severe,Ο πόνος είναι έντονος,Πονάω πάρα πολύ,O ponos einai entonos,o pˈonos ˈine ˈedonˌos,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.antiseptic,αντισηπτικό,,antisiptiko,ˌadisˌiptikˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.i-feel-nauseous,Έχω ναυτία,Ανακατεύομαι,Echo naftia,ˈexo naftˈia,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.i-have-a-rash,Έχω εξάνθημα,,Echo exanthima,ˈexo eksˈanθimˌa,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.before-or-after-food,Πριν ή μετά το φαγητό;,,Prin i meta to fagito;,pɾˈin ˈi metˈa to fˌajitˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.i-think-it-is-infected,Νομίζω ότι έχει μόλυνση,,Nomizo oti echei molynsi,nomˈizo ˈoti ˈeçi mˈolinsˌi,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.motion-sickness-tablets,χάπια για τη ναυτία,,chapia gia ti naftia,xˈapça jˈa ti naftˈia,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.i-have-a-cut,Κόπηκα,Έχω ένα κόψιμο,Kopika,kˈopikˌa,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.antacid,αντιόξινο,για τις καούρες,antioxino,ˌadiˈoksinˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.i-have-a-burn,Έχω έγκαυμα,Κάηκα,Echo egkavma,ˈexo ˈeŋɡavmˌa,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.it-started-days-ago,Άρχισε πριν από {} μέρες,,Archise prin apo {} meres,ˈaɾçisˌe pɾˈin apˈo {} mˈeɾes,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.cough-medicine,σιρόπι για τον βήχα,,siropi gia ton vicha,siɾˈopi jˈa ton vˈixa,cough syrup,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.is-this-safe-during-pregnancy,Είναι ασφαλές στην εγκυμοσύνη;,,Einai asfales stin egkymosyni;,ˈine ˌasfalˈes stin ˌeŋɡimosˈini,,2,el-agent-v1;roman=elot743;ipa=espeak
+body-parts.head,κεφάλι,,kefali,cefˈali,,2,el-agent-v1;roman=elot743;ipa=espeak
+body-parts.stomach,στομάχι / κοιλιά,,stomachi / koilia,stomˈaçi / ciʎˈa,"stomach / belly, abdomen",2,el-agent-v1;roman=elot743;ipa=espeak
+body-parts.back,πλάτη / μέση,,plati / mesi,plˈati / mˈesi,upper back / lower back,2,el-agent-v1;roman=elot743;ipa=espeak
+body-parts.throat,λαιμός,,laimos,lemˈos,throat (also means neck),2,el-agent-v1;roman=elot743;ipa=espeak
+body-parts.tooth,δόντι,,donti,ðˈodi,,2,el-agent-v1;roman=elot743;ipa=espeak
+body-parts.chest,στήθος,,stithos,stˈiθos,,2,el-agent-v1;roman=elot743;ipa=espeak
+body-parts.eye,μάτι,,mati,mˈati,,2,el-agent-v1;roman=elot743;ipa=espeak
+body-parts.ear,αυτί,,afti,aftˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
+body-parts.leg,πόδι,,podi,pˈoði,leg (the same word also means foot),2,el-agent-v1;roman=elot743;ipa=espeak
+body-parts.arm,χέρι,,cheri,çˈeɾi,arm (the same word also means hand),2,el-agent-v1;roman=elot743;ipa=espeak
+body-parts.foot,πόδι,πατούσα,podi,pˈoði,foot; the same word also means leg,2,el-agent-v1;roman=elot743;ipa=espeak
+body-parts.hand,χέρι,παλάμη,cheri,çˈeɾi,hand; the same word also means arm,2,el-agent-v1;roman=elot743;ipa=espeak
+body-parts.knee,γόνατο,,gonato,ɣˈonatˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+body-parts.ankle,αστράγαλος,,astragalos,astɾˈaɣalˌos,,2,el-agent-v1;roman=elot743;ipa=espeak
+body-parts.skin,δέρμα,,derma,ðˈeɾma,,2,el-agent-v1;roman=elot743;ipa=espeak
+lost-rescue.i-lost-my-passport,Έχασα το διαβατήριό μου,Μου χάθηκε το διαβατήριο,Echasa to diavatirio mou,ˈexasˌa to ðˌiavatˈiɾio mu,,2,el-agent-v1;roman=elot743;ipa=espeak
+lost-rescue.i-lost-my-phone,Έχασα το κινητό μου,,Echasa to kinito mou,ˈexasˌa to cˌinitˈo mu,,2,el-agent-v1;roman=elot743;ipa=espeak
+lost-rescue.please-call-the-police,"Καλέστε την αστυνομία, παρακαλώ",Πάρτε το 100,"Kaleste tin astynomia, parakalo","kalˈeste tin ˌastinomˈia, pˌaɾakalˈo",Police is 100; 112 also works,2,el-agent-v1;roman=elot743;ipa=espeak
+lost-rescue.we-are-here,Είμαστε εδώ,,Eimaste edo,ˈimastˌe eðˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+lost-rescue.please-look-at-my-location-pin,Δείτε τη θέση μου στον χάρτη,Κοιτάξτε το σημείο στον χάρτη,Deite ti thesi mou ston charti,ðˈite ti θˈesi mu ston xˈaɾti,Look at my location on the map,2,el-agent-v1;roman=elot743;ipa=espeak
+lost-rescue.i-cannot-walk,Δεν μπορώ να περπατήσω,,Den boro na perpatiso,ðˈen boɾˈo na pˌeɾpatˈiso,,2,el-agent-v1;roman=elot743;ipa=espeak
+lost-rescue.i-sprained-my-ankle,Στραμπούληξα τον αστράγαλό μου,Έπαθα διάστρεμμα στον αστράγαλο,Strampoulixa ton astragalo mou,stɾabˈuliksˌa ton astɾˈaɣalo mu,,2,el-agent-v1;roman=elot743;ipa=espeak
+lost-rescue.please-contact-rescue,"Καλέστε ομάδα διάσωσης, παρακαλώ","Ειδοποιήστε την πυροσβεστική, το 199","Kaleste omada diasosis, parakalo","kalˈeste omˈaða ðiˈasosˌis, pˌaɾakalˈo","Rescue: call 112, or 199 (fire service)",2,el-agent-v1;roman=elot743;ipa=espeak
+lost-rescue.my-companion-is-missing,Χάθηκε το άτομο που είναι μαζί μου,Αγνοείται ο συνοδός μου,Chathike to atomo pou einai mazi mou,xˈaθicˌe to ˈatomˌo pu ˈine mazˈi mu,The person with me is missing,2,el-agent-v1;roman=elot743;ipa=espeak
+lost-rescue.please-look-at-my-current-location,Δείτε πού βρίσκομαι τώρα,Δείτε την τρέχουσα τοποθεσία μου,Deite pou vriskomai tora,ðˈite pˈu vɾˈiskomˌe tˈoɾa,Look at where I am now,2,el-agent-v1;roman=elot743;ipa=espeak
+lost-rescue.my-child-is-missing,Χάθηκε το παιδί μου,Αγνοείται το παιδί μου,Chathike to paidi mou,xˈaθicˌe to peðˈi mu,,2,el-agent-v1;roman=elot743;ipa=espeak
+lost-rescue.i-do-not-know-where-i-am,Δεν ξέρω πού βρίσκομαι,,Den xero pou vriskomai,ðˈeŋ ɡzˈeɾo pˈu vɾˈiskomˌe,,2,el-agent-v1;roman=elot743;ipa=espeak
+lost-rescue.my-friend-is-hurt,Τραυματίστηκε ο φίλος μου / η φίλη μου,,Travmatistike o filos mou / i fili mou,tɾˌavmatˈisticˌe o fˈiloz mu / i fˈili mu,My friend is injured (male / female),2,el-agent-v1;roman=elot743;ipa=espeak
+lost-rescue.i-lost-my-wallet,Έχασα το πορτοφόλι μου,,Echasa to portofoli mou,ˈexasˌa to pˌoɾtofˈoli mu,,2,el-agent-v1;roman=elot743;ipa=espeak
+lost-rescue.i-lost-my-bag,Έχασα την τσάντα μου,,Echasa tin tsanta mou,ˈexasˌa tin dzˈada mu,,2,el-agent-v1;roman=elot743;ipa=espeak
+lost-rescue.where-is-lost-and-found,Πού είναι το γραφείο απολεσθέντων;,Πού είναι τα χαμένα αντικείμενα;,Pou einai to grafeio apolesthenton;,pˈu ˈine to ɣɾafˈio ˌapolesθˈedon,Where is the lost property office?,2,el-agent-v1;roman=elot743;ipa=espeak
+lost-rescue.i-cannot-find-my-hotel,Δεν μπορώ να βρω το ξενοδοχείο μου,,Den boro na vro to xenodocheio mou,ðˈen boɾˈo na vɾˈo to ksˌenoðoçˈio mu,,2,el-agent-v1;roman=elot743;ipa=espeak
+lost-rescue.i-left-it-on-the-train,Το ξέχασα στο τρένο,Το ξέχασα στο λεωφορείο ή στο ταξί,To xechasa sto treno,to ksˈexasˌa sto tɾˈeno,,2,el-agent-v1;roman=elot743;ipa=espeak
+lost-rescue.i-cannot-get-down,Δεν μπορώ να κατεβώ,"Έχω αποκλειστεί, δεν μπορώ να κατεβώ",Den boro na katevo,ðˈen boɾˈo na kˌatevˈo,I am stuck and cannot get down,2,el-agent-v1;roman=elot743;ipa=espeak
+police-consulate.where-is-the-police-station,Πού είναι το αστυνομικό τμήμα;,Πού είναι η Τουριστική Αστυνομία;,Pou einai to astynomiko tmima;,pˈu ˈine to ˌastinˌomikˈo tmˈima,Tourist police (alt) answer on 1571,2,el-agent-v1;roman=elot743;ipa=espeak
+police-consulate.i-want-to-report-a-theft,Θέλω να κάνω δήλωση κλοπής,Θέλω να καταγγείλω μια κλοπή,Thelo na kano dilosi klopis,θˈelo na kˈano ðˈilosˌi klopˈis,I want to file a theft declaration,2,el-agent-v1;roman=elot743;ipa=espeak
+police-consulate.my-bag-was-stolen,Μου έκλεψαν την τσάντα,,Mou eklepsan tin tsanta,mu ˈeklepsˌan din dzˈada,They stole my bag,2,el-agent-v1;roman=elot743;ipa=espeak
+police-consulate.my-passport-was-stolen,Μου έκλεψαν το διαβατήριο,,Mou eklepsan to diavatirio,mu ˈeklepsˌan do ðˌiavatˈiɾiˌo,They stole my passport,2,el-agent-v1;roman=elot743;ipa=espeak
+police-consulate.someone-is-following-me,Με ακολουθεί κάποιος,,Me akolouthei kapoios,me ˌakoluθˈi kˈapiˌos,,2,el-agent-v1;roman=elot743;ipa=espeak
+police-consulate.i-need-a-written-police-report,Χρειάζομαι έγγραφη βεβαίωση από το αστυνομικό τμήμα,Χρειάζομαι αντίγραφο της δήλωσης κλοπής,Chreiazomai engrafi vevaiosi apo to astynomiko tmima,xɾçˈazomˌe ˈeŋɡɾafˌi vevˈeosˌi apˈo to ˌastinˌomikˈo tmˈima,A written certificate from the police station,2,el-agent-v1;roman=elot743;ipa=espeak
+police-consulate.i-want-to-contact-my-embassy,Θέλω να επικοινωνήσω με την πρεσβεία μου,,Thelo na epikoinoniso me tin presveia mou,θˈelo na ˌepicˌinonˈiso me tim bɾesvˈia mu,,2,el-agent-v1;roman=elot743;ipa=espeak
+police-consulate.i-need-it-for-my-insurance,Το χρειάζομαι για την ασφάλισή μου,Το χρειάζομαι για την ασφαλιστική μου εταιρεία,To chreiazomai gia tin asfalisi mou,to xɾçˈazomˌe jˈa tin asfˈalisi mu,,2,el-agent-v1;roman=elot743;ipa=espeak
+police-consulate.i-need-an-interpreter,Χρειάζομαι διερμηνέα,,Chreiazomai dierminea,xɾçˈazomˌe ðˌieɾminˈea,,2,el-agent-v1;roman=elot743;ipa=espeak
+police-consulate.please-leave-me-alone,"Παρακαλώ, μη με ενοχλείτε",Αφήστε με ήσυχο / ήσυχη,"Parakalo, mi me enochleite","pˌaɾakalˈo, mˈi me ˌenoxlˈite",Please do not bother me,2,el-agent-v1;roman=elot743;ipa=espeak
+police-consulate.i-was-robbed,Με λήστεψαν,Έπεσα θύμα ληστείας,Me listepsan,me lˈistepsˌan,,2,el-agent-v1;roman=elot743;ipa=espeak
+police-consulate.i-want-a-lawyer,Θέλω δικηγόρο,,Thelo dikigoro,θˈelo ðˌiciɣˈoɾo,,2,el-agent-v1;roman=elot743;ipa=espeak
+police-consulate.please-notify-my-consulate,"Παρακαλώ, ειδοποιήστε το προξενείο μου",,"Parakalo, eidopoiiste to proxeneio mou","pˌaɾakalˈo, ˌiðopiˈiste to pɾˌoksenˈio mu",,2,el-agent-v1;roman=elot743;ipa=espeak
+police-consulate.i-am-calling-the-police,Καλώ την αστυνομία,Θα καλέσω την αστυνομία,Kalo tin astynomia,kalˈo tin ˌastinomˈia,,2,el-agent-v1;roman=elot743;ipa=espeak
+police-consulate.am-i-under-arrest,Με συλλαμβάνετε;,Είμαι υπό κράτηση;,Me syllamvanete;,me sˌilamvˈanetˌe,Are you arresting me?,2,el-agent-v1;roman=elot743;ipa=espeak
+police-consulate.no-thank-you-i-am-not-interested,"Όχι, ευχαριστώ, δεν με ενδιαφέρει",,"Ochi, efcharisto, den me endiaferei","ˈoçi, ˌefxaɾistˈo, ðˈen me ˌenðiafˈeɾi",,2,el-agent-v1;roman=elot743;ipa=espeak
+police-consulate.someone-attacked-me,Μου επιτέθηκε κάποιος,Δέχτηκα επίθεση,Mou epitethike kapoios,mu ˌepitˈeθicˌe kˈapiˌos,,2,el-agent-v1;roman=elot743;ipa=espeak
+police-consulate.i-did-not-agree-to-this-price,Δεν συμφώνησα σε αυτήν την τιμή,,Den symfonisa se aftin tin timi,ðˈen simfˈonisˌa se aftˈin din dimˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
+police-consulate.please-write-the-report-number,Γράψτε μου τον αριθμό πρωτοκόλλου,Γράψτε μου τον αριθμό της δήλωσης,Grapste mou ton arithmo protokollou,ɣɾˈapste mu ton ˌaɾiθmˈo pɾˌotokˈolu,Please write the protocol (file) number,2,el-agent-v1;roman=elot743;ipa=espeak
+police-consulate.it-happened-here,Έγινε εδώ,Συνέβη εδώ,Egine edo,ˈejinˌe eðˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+police-consulate.may-i-have-a-copy-of-the-report,Μπορώ να έχω αντίγραφο της βεβαίωσης;,Μπορώ να έχω αντίγραφο της δήλωσης;,Boro na echo antigrafo tis vevaiosis;,boɾˈo na ˈexo adˈiɣɾafˌo tiz vevˈeosˌis,May I have a copy of the certificate?,2,el-agent-v1;roman=elot743;ipa=espeak
+police-consulate.i-will-not-sign-anything-i-cannot-read,Δεν θα υπογράψω κάτι που δεν μπορώ να διαβάσω,,Den tha ypograpso kati pou den boro na diavaso,ðˈen θa ˌipoɣɾˈapso kˈati pu ðˈen boɾˈo na ðˌiavˈaso,,2,el-agent-v1;roman=elot743;ipa=espeak
+police-consulate.am-i-free-to-go,Μπορώ να φύγω;,Είμαι ελεύθερος/η να φύγω;,Boro na fygo;,boɾˈo na fˈiɣo,,2,el-agent-v1;roman=elot743;ipa=espeak
+police-consulate.i-do-not-want-to-go-with-you,Δεν θέλω να έρθω μαζί σας,,Den thelo na ertho mazi sas,ðˈen θˈelo na ˈeɾθo mazˈi sas,I do not want to come with you,2,el-agent-v1;roman=elot743;ipa=espeak

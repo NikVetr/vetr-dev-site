@@ -1,0 +1,47 @@
+concept_id,text,text_alt,romanization_elot,ipa,literal,confidence,provenance
+pronouns-verbs.i-me,εγώ / εμένα,,ego / emena,eɣˈo / emˈena,I / me; the form you hear before a verb is με,2,el-agent-v1;roman=elot743;ipa=espeak
+pronouns-verbs.we-us,εμείς / εμάς,,emeis / emas,emˈis / emˈas,,2,el-agent-v1;roman=elot743;ipa=espeak
+pronouns-verbs.you,εσύ / εσένα,,esy / esena,esˈi / esˈena,"you (one person, informal)",2,el-agent-v1;roman=elot743;ipa=espeak
+pronouns-verbs.you-polite,εσείς / εσάς,,eseis / esas,esˈis / esˈas,"you (polite, or more than one person)",2,el-agent-v1;roman=elot743;ipa=espeak
+pronouns-verbs.he-him,αυτός / αυτόν,,aftos / afton,aftˈos / aftˈon,,2,el-agent-v1;roman=elot743;ipa=espeak
+pronouns-verbs.she-her,αυτή / αυτήν,,afti / aftin,aftˈi / aftˈin,,2,el-agent-v1;roman=elot743;ipa=espeak
+pronouns-verbs.they-them,αυτοί / αυτούς,αυτές / αυτά,aftoi / aftous,aftˈi / aftˈus,"they (m.); f. αυτές, n. αυτά",2,el-agent-v1;roman=elot743;ipa=espeak
+pronouns-verbs.my-mine,μου / δικό μου,,mou / diko mou,mu / ðikˈo mu,goes after the noun: το δωμάτιό μου,2,el-agent-v1;roman=elot743;ipa=espeak
+pronouns-verbs.your-yours,σας / δικό σας,σου / δικό σου,sas / diko sas,sas / ðikˈo sas,your (polite); informal σου,2,el-agent-v1;roman=elot743;ipa=espeak
+pronouns-verbs.be-called-call,με λένε / λέγεται,,me lene / legetai,me lˈene / lˈejetˌe,my name is… / it is called…,2,el-agent-v1;roman=elot743;ipa=espeak
+pronouns-verbs.have,έχω,,echo,ˈexo,I have,2,el-agent-v1;roman=elot743;ipa=espeak
+pronouns-verbs.do-not-have,δεν έχω,,den echo,ðˈen ˈexo,I do not have,2,el-agent-v1;roman=elot743;ipa=espeak
+pronouns-verbs.go,πάω,πηγαίνω,pao,pˈao,I go,2,el-agent-v1;roman=elot743;ipa=espeak
+pronouns-verbs.come,έρχομαι,,erchomai,ˈeɾxomˌe,I come,2,el-agent-v1;roman=elot743;ipa=espeak
+pronouns-verbs.would-like,θα ήθελα,,tha ithela,θa ˈiθelˌa,I would like,2,el-agent-v1;roman=elot743;ipa=espeak
+pronouns-verbs.want,θέλω,,thelo,θˈelo,I want,2,el-agent-v1;roman=elot743;ipa=espeak
+pronouns-verbs.look-for,ψάχνω,,psachno,psˈaxno,I look for,2,el-agent-v1;roman=elot743;ipa=espeak
+pronouns-verbs.buy,αγοράζω,,agorazo,ˌaɣoɾˈazo,I buy,2,el-agent-v1;roman=elot743;ipa=espeak
+pronouns-verbs.like,μου αρέσει,,mou aresei,mu aɾˈesi,I like it (lit. it pleases me),2,el-agent-v1;roman=elot743;ipa=espeak
+pronouns-verbs.need,χρειάζομαι,,chreiazomai,xɾçˈazomˌe,I need,2,el-agent-v1;roman=elot743;ipa=espeak
+pronouns-verbs.there-is-have,υπάρχει / έχει,,yparchei / echei,ipˈaɾçi / ˈeçi,there is; έχει is the spoken form,2,el-agent-v1;roman=elot743;ipa=espeak
+pronouns-verbs.there-is-not-do-not-have,δεν υπάρχει / δεν έχει,,den yparchei / den echei,ðˈen ipˈaɾçi / ðˈen ˈeçi,there is not,2,el-agent-v1;roman=elot743;ipa=espeak
+pronouns-verbs.want-to-verb,θέλω να…,,thelo na…,θˈelo na,I want to… (να + verb),2,el-agent-v1;roman=elot743;ipa=espeak
+pronouns-verbs.want-thing,θέλω…,,thelo…,θˈelo,I want… (the thing takes the accusative),2,el-agent-v1;roman=elot743;ipa=espeak
+pronouns-verbs.need-thing,χρειάζομαι…,,chreiazomai…,xɾçˈazomˌe,I need… (accusative),2,el-agent-v1;roman=elot743;ipa=espeak
+pronouns-verbs.looking-for-thing,ψάχνω…,ψάχνω για…,psachno…,psˈaxno,I am looking for… (accusative),2,el-agent-v1;roman=elot743;ipa=espeak
+question-words.what,τι,,ti,tˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
+question-words.where,πού,,pou,pˈu,"where? accented πού, not the relative που",2,el-agent-v1;roman=elot743;ipa=espeak
+question-words.who,ποιος,ποια / ποιο,poios,pˈios,"who (m.); f. ποια, n. ποιο",2,el-agent-v1;roman=elot743;ipa=espeak
+question-words.which-one,ποιο,ποιος / ποια,poio,pˈio,"which (n.); m. ποιος, f. ποια",2,el-agent-v1;roman=elot743;ipa=espeak
+question-words.when,πότε,,pote,pˈote,when? πότε; ποτέ means never,2,el-agent-v1;roman=elot743;ipa=espeak
+question-words.how,πώς,,pos,pˈos,"how? accented πώς, not the relative πως",2,el-agent-v1;roman=elot743;ipa=espeak
+question-words.how-much-many,πόσο / πόσα,,poso / posa,pˈoso / pˈosa,how much / how many,2,el-agent-v1;roman=elot743;ipa=espeak
+question-words.how-many,πόσα,πόσοι / πόσες,posa,pˈosa,"how many (n.); m. πόσοι, f. πόσες",2,el-agent-v1;roman=elot743;ipa=espeak
+question-words.why,γιατί,,giati,jatˈi,why; the same word also means because,2,el-agent-v1;roman=elot743;ipa=espeak
+question-words.this,αυτό,αυτός / αυτή,afto,aftˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+question-words.that,εκείνο,εκείνος / εκείνη,ekeino,ecˈino,,2,el-agent-v1;roman=elot743;ipa=espeak
+question-words.here,εδώ,,edo,eðˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+question-words.there,εκεί,,ekei,ecˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
+question-words.a-little,λίγο,,ligo,lˈiɣo,,2,el-agent-v1;roman=elot743;ipa=espeak
+question-words.some,μερικά,λίγο,merika,mˌeɾikˈa,some (countable); uncountable λίγο,2,el-agent-v1;roman=elot743;ipa=espeak
+question-words.very,πολύ,,poly,polˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
+question-words.too,πάρα πολύ,,para poly,pˈaɾa polˈi,"too much, excessively",2,el-agent-v1;roman=elot743;ipa=espeak
+question-words.also,επίσης,και,episis,epˈisis,"also, as well",2,el-agent-v1;roman=elot743;ipa=espeak
+question-words.all-both,όλα / και τα δύο,,ola / kai ta dyo,ˈola / ke ta ðˈio,all / both,2,el-agent-v1;roman=elot743;ipa=espeak
+question-words.how-much-what-price,Πόσο κάνει;,Πόσο κοστίζει;,Poso kanei;,pˈoso kˈani,How much does it cost?,2,el-agent-v1;roman=elot743;ipa=espeak

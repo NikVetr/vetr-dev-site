@@ -1,14 +1,14 @@
-# Respelling systems in seventeen languages
+# Respelling systems in eighteen languages
 
 The say-it-like column is hand-curated per language *pair*, which is why it exists for
-16 of 272 pairs and will never exist for the other 256. The replacement is O(N): one
+16 of 306 pairs and will never exist for the other 290. The replacement is O(N): one
 `ipa` column per target language and one rule set per source language and accent, with
 `respell(ipa, sourceLang, accent)` generating every pair. This file answers the
-question that decides how expensive that is — for each of the seventeen reader
+question that decides how expensive that is — for each of the eighteen reader
 languages, is there already a system to borrow, and is it the right *kind* of system?
 
-Six of the seventeen hand us a usable system. Four hand us one doing a neighbouring job
-that has to be bent. Seven hand us nothing — and of those seven, three are cheap to
+Six of the eighteen hand us a usable system. Four hand us one doing a neighbouring job
+that has to be bent. Eight hand us nothing — and of those seven, three are cheap to
 invent because their orthographies are nearly phonemic, while four are expensive because
 the reader's own spelling rules fight a naive substitution. Two findings cut across all
 of them. **The capitals-for-stress convention in the
@@ -152,6 +152,7 @@ record.
 | `hi` | Central Hindi Directorate standard (nativisation); Bhargava's dictionary (a real respelling) | both, opposed | spelling | **Invent**, on Bhargava's pattern, against the standard |
 | `ar` | sound-based practice, no table; ar.wikipedia's parenthetical policy | practice | — | **Invent**, with a reviewer |
 | `pt` `de` `fr` | IPA-only lexicography | — | — | **Invent** (`pt` cheap, `de` and `fr` not) |
+| `el` | nothing sound-keyed; Babiniotis LNEG §7(δ)'s parenthetical pronunciations, ELETO Ορόγραμμα 62, el.wikipedia's Ονοματοδοσία σελίδων, the EU guide §10.5 | worked examples, not a table | — | **Invent** on those four patterns. ΕΛΟΤ 743 is the wrong direction |
 | `id` `sw` | spelling-adaptation standards that say so in writing | — | — | **Invent**, cheaply — near-phonemic orthographies |
 
 ## The typographic constraint that settles the stress question
@@ -1577,3 +1578,51 @@ questions are open. Each of these would change a detail rather than a verdict.
 - **Turkish `Nevyork`** as an official prescription — no source found; treat as false
   until shown otherwise.
 - **The AP Stylebook's pronunciation notation**, documented only behind its paywall.
+
+
+## The eighteenth: Greek, and why it is in the invent tier
+
+Searched properly before the table was written, and the negative is the finding. Greece's
+normative literature on foreign words is a **spelling** argument — απλογράφηση against
+αντιστρεψιμότητα — rather than a pronunciation-hinting tradition, and its one official
+standard, **ΕΛΟΤ 743, runs the other way**: Greek to Latin, which is the direction this
+project needs for the *romanisation* column and not for this one. Three plausible sources
+were checked and are not it: the Academy of Athens' **Χρηστικό Λεξικό** marks pronunciation
+only for synizesis (and its *μεταγραφή* means polytonic respelling of a Greek headword);
+**ΛΚΝ** uses IPA rather than Greek letters; **Τριανταφυλλίδης (1941)** is spelling-based
+(Μασσαχουσέττη, Σίλλερ). There is no dedicated Greek Wikipedia μεταγραφή guideline either
+— the rule is one section of *Βικιπαίδεια:Ονοματοδοσία σελίδων*.
+
+What does exist is four patterns, and the table derives from them:
+
+1. **Babiniotis, ΛΝΕΓ §7(δ), σ. 26** — *«σημειώνεται σε παρένθεση πώς προφέρονται»*, used
+   about 128 times: `de jure (ντε γιούρε)`, `Zeppelin (Τσέπελιν)`, `alter ego (άλτερ έγκο)`.
+   Note that the same dictionary's *headword* policy is the opposite — σ. 37–38,
+   *«ίσχυσε, κατά κανόνα, η αρχή τής αντιστρεψιμότητας»* (Βολταίρος, Ρουσσώ, Γκαίτε) — so
+   only the minority device is borrowed, and the deviation list says so.
+2. **ΕΛΕΤΟ, Ορόγραμμα 62** — transcribe *«με τη μεγαλύτερη δυνατή προσέγγιση της προφοράς
+   του»*: `George Bush → Τζορτζ Μπους`, `Facebook → Φέισμπουκ`.
+3. **Βικιπαίδεια:Ονοματοδοσία σελίδων** — an explicit sound-first hierarchy with a
+   Προφορά column: `Άιζαακ Νιούτον`, `Πλέη Στέησιον`, `Νέντερλαντ`.
+4. **The EU Interinstitutional style guide §10.5**, which *«απορρίπτει την επιλογή της
+   αντιστρεψιμότητας και τάσσεται υπέρ της απλογράφησης»* and supplies the one hard
+   orthographic rule taken here: /ŋɡ/ is **νγκ**, never γκ — *«Χονγκ Κονγκ και όχι Χογκ
+   Κογκ, Σένγκεν και όχι Σέγκεν»*.
+
+**Two things Greek hands us that no other reader did.** Stress is free and obligatory: the
+monotonic orthography accents every polysyllable exactly once, and all four sources above
+put the τόνος on the *source*-stressed syllable, so `stress: acute` is not a device the
+table chooses but one the script insists on — an unaccented Greek respelling is an
+impossible word, not merely an unmarked one. And the **μπ/ντ/γκ prenasalisation problem has
+a published fix that costs nothing**: Babiniotis separates the digraph with a hyphen
+(`α κον-τράριο`, `ντε προφούν-τις`), ΕΛΕΤΟ does the same (`Λίνκτ-ιν`), and our syllable
+separator *is* that hyphen — a medial voiced stop opens its own syllable, so the fix falls
+out of the syllabification.
+
+**One thing it takes away, and it has no answer anywhere.** /ʃ/ is **σ** in every Greek
+source (σοφέρ, Σέξπιρ, `Station → Στέησιον`); none of them uses σι or ς. So /ʃ/ and /s/
+merge, and with /ʒ/ → ζ that costs Mandarin the s/sh/x three-way, English *sea*/*she*, and
+Japanese, Korean and Thai their postalveolars. el.wikipedia's own *Οδηγός προφοράς ΔΦΑ*
+confirms the vowel side of the same gap by printing a literal `-` against ɪ, e, æ, y, yː,
+ʏ, ø, øː, œ, ɨ and ə. Those are documented approximations in the table's own
+`approximations` block rather than gaps: `--gaps` is zero.

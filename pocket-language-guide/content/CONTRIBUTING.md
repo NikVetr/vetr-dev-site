@@ -58,11 +58,11 @@ whatever that language's own table declares.
 
 ## Writing a rule table
 
-A curated sheet is written per *pair*, so it is O(N²) and only sixteen of the 272
-pairs have one. A rule table is written per *reader*, and turns on sixteen pairs at
+A curated sheet is written per *pair*, so it is O(N²) and only sixteen of the 306
+pairs have one. A rule table is written per *reader*, and turns on seventeen pairs at
 once. `content/RESPELL-SYSTEMS.md` surveys what to derive each one from: six
 languages have a published, sound-keyed key to borrow, four have a tradition to
-re-key, and seven have to be invented. Start there, not from a blank file.
+re-key, and eight have to be invented. Start there, not from a blank file.
 
 **A table declares when it is finished, with `status: "ready"`.** It is worked on
 in place, because `respell_check.mjs` reads the rules directory so a table can be
@@ -87,7 +87,7 @@ question a reader will eventually ask.
 |---|---|---|
 | `syllable_separator` | any string | see the table above; not a hyphen everywhere |
 | `word_separator` | any string | |
-| `stress` | `caps` `acute` `prime` `none` | `caps` for a Latin script with no native mark, `acute` where one exists (Spanish, Italian, Portuguese, Russian), `prime` for caseless Devanagari |
+| `stress` | `caps` `acute` `grave` `prime` `none` | `caps` for a Latin script with no native mark, `acute` where one exists (Spanish, Portuguese, Russian, Greek -- where it is not a choice but the orthography), `grave` for Italian, `prime` for caseless Devanagari |
 | `stress_min_syllables` | integer | a monosyllable that shouts has stopped saying anything |
 | `length` | `none` `double` `colon` | `double` doubles a Latin vowel; Turkish takes the colon, since a doubled vowel there reads as two syllables. A non-Latin script writes length in the `phonemes` table instead, by giving `oː` its own rule |
 | `tone` | `keep` `drop` | `zh-Hans`, `th` and `vi` carry Chao tone letters, because tone is lexical there |
@@ -148,6 +148,22 @@ node scripts/respell_check.mjs es --gaps     # every IPA symbol still reaching t
 node scripts/respell_check.mjs en --score    # agreement, where a curated sheet exists
 npm run respell:charset                      # after any table changes, for the font build
 ```
+
+**Check your own vowels against `VOWEL_LETTERS` and `ACCENTED` in `core/respell.js`
+before choosing `acute`, `grave` or a `length` device.** Those two patterns list every
+letter a diacritic may land on, in every script that uses one, and a script missing
+from them makes the device a byte-identical no-op over the whole language -- which is
+what `stress: 'acute'` was for Russian until the Cyrillic vowels were added, and for
+Greek until the Greek ones were. The Greek case is the sharpest reason to look: the
+tonos is not one device among several there, it is the orthography, and an unaccented
+Greek polysyllable is not a possible word.
+
+**A digraph orthography can be told the wrong sound by a correct-looking spelling.**
+Greek `αι` is /e/ and `ει` `οι` are /i/, so spelling /aɪ/ as `αι` prints the opposite
+of what it means. The repair is the reader's own disambiguating mark -- Greek's
+diaeresis -- applied by an `after_out` condition listing the vowel letters. Any reader
+whose script has vowel digraphs should look for the same trap before trusting output
+that reads plausibly.
 
 `--gaps` is the completeness bar. An unmapped symbol passes through rather than
 vanishing, so a gap in the table is an IPA character printed on the card -- and

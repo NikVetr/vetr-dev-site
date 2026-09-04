@@ -1,0 +1,100 @@
+concept_id,text,text_alt,romanization_elot,ipa,literal,confidence,provenance
+social-basics.hello,Γεια σας,,Geia sas,jˈa sas,Polite plural; the safe form with strangers,2,el-agent-v1;roman=elot743;ipa=espeak
+social-basics.hello-polite,Χαίρετε,,Chairete,çˈeɾetˌe,"Formal greeting, any time of day",2,el-agent-v1;roman=elot743;ipa=espeak
+social-basics.good-morning,Καλημέρα,,Kalimera,kˌalimˈeɾa,,2,el-agent-v1;roman=elot743;ipa=espeak
+social-basics.good-evening,Καλησπέρα,,Kalispera,kˌalispˈeɾa,Used from midday onward,2,el-agent-v1;roman=elot743;ipa=espeak
+social-basics.goodbye,Αντίο,Γεια σας,Antio,adˈio,,2,el-agent-v1;roman=elot743;ipa=espeak
+social-basics.thank-you,Ευχαριστώ,Ευχαριστώ πολύ,Efcharisto,ˌefxaɾistˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+social-basics.you-are-welcome,Παρακαλώ,,Parakalo,pˌaɾakalˈo,"Same word as ""please"" and ""pardon?""",2,el-agent-v1;roman=elot743;ipa=espeak
+social-basics.excuse-me-sorry,Με συγχωρείτε,Συγγνώμη,Me synchoreite,me sˌiŋxoɾˈite,Forgive me; use to get attention,2,el-agent-v1;roman=elot743;ipa=espeak
+social-basics.sorry,Συγγνώμη,,Syngnomi,siŋɡnˈomi,"Also serves as ""excuse me""",2,el-agent-v1;roman=elot743;ipa=espeak
+social-basics.no-problem,Δεν πειράζει,Κανένα πρόβλημα,Den peirazei,ðˈem biɾˈazi,It does not matter,2,el-agent-v1;roman=elot743;ipa=espeak
+social-basics.i-do-not-know,Δεν ξέρω,,Den xero,ðˈeŋ ɡzˈeɾo,,2,el-agent-v1;roman=elot743;ipa=espeak
+social-basics.good-night,Καληνύχτα,,Kalinychta,kˌalinˈixta,"Said on parting or at bedtime, not on arrival",2,el-agent-v1;roman=elot743;ipa=espeak
+social-basics.okay-fine-i-am-okay,Εντάξει / Είμαι καλά,Ωραία,Entaxei / Eimai kala,edˈaksi / ˈime kalˈa,,2,el-agent-v1;roman=elot743;ipa=espeak
+communication.i-do-not-speak-this-language,Δεν μιλάω {target},,Den milao {target},ðˈen milˈao {target},,2,el-agent-v1;roman=elot743;ipa=espeak
+communication.i-speak-only-a-little-of-this,Μιλάω λίγο {target},,Milao ligo {target},milˈao lˈiɣo {target},,2,el-agent-v1;roman=elot743;ipa=espeak
+communication.do-you-speak-english,Μιλάτε {source};,,Milate {source};,milˈate {source},,2,el-agent-v1;roman=elot743;ipa=espeak
+communication.please-speak-more-slowly,"Μιλάτε πιο αργά, παρακαλώ",,"Milate pio arga, parakalo","milˈate pçˈo aɾɣˈa, pˌaɾakalˈo",,2,el-agent-v1;roman=elot743;ipa=espeak
+communication.i-do-not-understand-spoken,Δεν σας καταλαβαίνω,,Den sas katalavaino,ðˈen sas kˌatalavˈeno,I do not understand you (speaking),2,el-agent-v1;roman=elot743;ipa=espeak
+communication.i-cannot-read-understand,Δεν μπορώ να το διαβάσω / δεν καταλαβαίνω,,Den boro na to diavaso / den katalavaino,ðˈen boɾˈo na to ðˌiavˈaso / ðˈeŋ ɡˌatalavˈeno,,2,el-agent-v1;roman=elot743;ipa=espeak
+communication.please-say-it-again,"Πείτε το ξανά, παρακαλώ",Μπορείτε να το επαναλάβετε;,"Peite to xana, parakalo","pˈite to ksanˈa, pˌaɾakalˈo",,2,el-agent-v1;roman=elot743;ipa=espeak
+communication.please-write-it-down,"Γράψτε το, παρακαλώ",,"Grapste to, parakalo","ɣɾˈapste to, pˌaɾakalˈo",,2,el-agent-v1;roman=elot743;ipa=espeak
+communication.please-wait-a-moment,"Μια στιγμή, παρακαλώ",,"Mia stigmi, parakalo","mɲa stiɣmˈi, pˌaɾakalˈo","One moment, please",2,el-agent-v1;roman=elot743;ipa=espeak
+communication.can-you-help-me,Μπορείτε να με βοηθήσετε;,,Boreite na me voithisete;,boɾˈite na me voɪθˈisetˌe,,2,el-agent-v1;roman=elot743;ipa=espeak
+communication.please-show-me-the-text,Δείξτε μου το κείμενο στα {target},,Deixte mou to keimeno sta {target},ðˈikste mu to cˈimenˌo sta {target},,2,el-agent-v1;roman=elot743;ipa=espeak
+communication.i-cannot-make-out-what-you-are-saying,Δεν καταλαβαίνω τι λέτε,Δεν σας ακούω καθαρά,Den katalavaino ti lete,ðˈeŋ ɡˌatalavˈeno tˈi lˈete,,2,el-agent-v1;roman=elot743;ipa=espeak
+communication.i-do-not-understand,Δεν καταλαβαίνω,,Den katalavaino,ðˈeŋ ɡˌatalavˈeno,,2,el-agent-v1;roman=elot743;ipa=espeak
+communication.i-cannot-read-it,Δεν μπορώ να το διαβάσω,,Den boro na to diavaso,ðˈen boɾˈo na to ðˌiavˈaso,,2,el-agent-v1;roman=elot743;ipa=espeak
+quick-responses.please-go-ahead,Παρακαλώ,,Parakalo,pˌaɾakalˈo,"Please; also ""go ahead"", ""you're welcome""",2,el-agent-v1;roman=elot743;ipa=espeak
+quick-responses.yes-right,Ναι / σωστά,,Nai / sosta,nˈe / sostˈa,,2,el-agent-v1;roman=elot743;ipa=espeak
+quick-responses.no-not,Όχι / δεν,,Ochi / den,ˈoçi / ðˈen,The second word negates a verb,2,el-agent-v1;roman=elot743;ipa=espeak
+quick-responses.okay-can,Εντάξει / γίνεται,,Entaxei / ginetai,edˈaksi / jˈinetˌe,Okay / it can be done,2,el-agent-v1;roman=elot743;ipa=espeak
+quick-responses.cannot-not-allowed,Απαγορεύεται,Δεν επιτρέπεται,Apagorevetai,ˌapaɣoɾˈevetˌe,It is forbidden,2,el-agent-v1;roman=elot743;ipa=espeak
+quick-responses.works-okay,Δουλεύει / εντάξει,Λειτουργεί,Doulevei / entaxei,ðulˈevi / edˈaksi,,2,el-agent-v1;roman=elot743;ipa=espeak
+quick-responses.does-not-work-no,Δεν δουλεύει / όχι,Δεν λειτουργεί,Den doulevei / ochi,ðˈen ðulˈevi / ˈoçi,,2,el-agent-v1;roman=elot743;ipa=espeak
+quick-responses.can-possible,Μπορεί / γίνεται,,Borei / ginetai,boɾˈi / jˈinetˌe,It is possible / it can be done,2,el-agent-v1;roman=elot743;ipa=espeak
+quick-responses.cannot-not-possible,Δεν γίνεται,Δεν μπορεί,Den ginetai,ðˈen jˈinetˌe,It cannot be done,2,el-agent-v1;roman=elot743;ipa=espeak
+quick-responses.okay-fine,Εντάξει / ωραία,,Entaxei / oraia,edˈaksi / oɾˈea,,2,el-agent-v1;roman=elot743;ipa=espeak
+quick-responses.no-good-not-allowed-will-not-work,Δεν κάνει / δεν γίνεται,,Den kanei / den ginetai,ðˈeŋ ɡˈani / ðˈen jˈinetˌe,It won't do / it can't be done,2,el-agent-v1;roman=elot743;ipa=espeak
+phone-translation.i-am-using-phone-translation,Χρησιμοποιώ μετάφραση στο κινητό,Μεταφράζω με το κινητό,Chrisimopoio metafrasi sto kinito,xɾˌisimˌopiˈo metˈafɾasˌi sto cˌinitˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+phone-translation.please-speak-toward-the-phone,"Μιλήστε προς το κινητό, παρακαλώ",,"Miliste pros to kinito, parakalo","milˈiste pɾˈos to cˌinitˈo, pˌaɾakalˈo",,2,el-agent-v1;roman=elot743;ipa=espeak
+phone-translation.please-write-the-place-name,Γράψτε το όνομα του τόπου στα {target},,Grapste to onoma tou topou sta {target},ɣɾˈapste to ˈonomˌa tu tˈopu sta {target},,2,el-agent-v1;roman=elot743;ipa=espeak
+phone-translation.one-sentence-at-a-time-please,"Μια πρόταση τη φορά, παρακαλώ",,"Mia protasi ti fora, parakalo","mɲa pɾˈotasˌi ti foɾˈa, pˌaɾakalˈo",,2,el-agent-v1;roman=elot743;ipa=espeak
+phone-translation.please-type-it-and-show-me,Γράψτε το στο κινητό και δείξτε μου,,Grapste to sto kinito kai deixte mou,ɣɾˈapste to sto cˌinitˈo ke ðˈikste mu,,2,el-agent-v1;roman=elot743;ipa=espeak
+phone-translation.please-look-at-the-screen,"Κοιτάξτε την οθόνη, παρακαλώ","Δείτε την οθόνη, παρακαλώ","Koitaxte tin othoni, parakalo","citˈakste tin oθˈoni, pˌaɾakalˈo",,2,el-agent-v1;roman=elot743;ipa=espeak
+phone-text-power.please-type-it-for-me,"Πληκτρολογήστε το εδώ, παρακαλώ","Γράψτε το στο κινητό, παρακαλώ","Pliktrologiste to edo, parakalo","plˌiktɾolojˈiste to eðˈo, pˌaɾakalˈo",,2,el-agent-v1;roman=elot743;ipa=espeak
+phone-text-power.please-use-simple-words,"Μιλήστε με απλά λόγια, παρακαλώ",,"Miliste me apla logia, parakalo","milˈiste me aplˈa lˈoja, pˌaɾakalˈo","Speak in simple words, please",2,el-agent-v1;roman=elot743;ipa=espeak
+phone-text-power.my-phone-battery-is-low,Η μπαταρία του κινητού μου τελειώνει,Έχω λίγη μπαταρία,I bataria tou kinitou mou teleionei,i bˌataɾˈia tu cˌinitˈu mu teʎˈoni,My phone battery is running out,2,el-agent-v1;roman=elot743;ipa=espeak
+phone-text-power.do-you-have-a-power-bank,Έχετε φορητό φορτιστή;,Έχετε power bank;,Echete forito fortisti;,ˈeçetˌe fˌoɾitˈo fˌoɾtistˈi,Do you have a portable charger?,2,el-agent-v1;roman=elot743;ipa=espeak
+phone-text-power.the-translation-may-be-inaccurate,Η μετάφραση μπορεί να μην είναι σωστή,,I metafrasi borei na min einai sosti,i metˈafɾasˌi boɾˈi na mˈin ˈine sostˈi,The translation may not be correct,2,el-agent-v1;roman=elot743;ipa=espeak
+phone-text-power.please-confirm,"Επιβεβαιώστε, παρακαλώ",Μπορείτε να το επιβεβαιώσετε;,"Epivevaioste, parakalo","ˌepivˌeveˈoste, pˌaɾakalˈo",,2,el-agent-v1;roman=elot743;ipa=espeak
+phone-text-power.may-i-charge-my-phone-here,Μπορώ να φορτίσω το κινητό μου εδώ;,,Boro na fortiso to kinito mou edo;,boɾˈo na foɾtˈiso to cˌinitˈo mu eðˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+sim-data.i-would-like-a-tourist-sim,Θα ήθελα μια κάρτα SIM για τουρίστες,Θα ήθελα μια τουριστική κάρτα SIM,Tha ithela mia karta SIM gia touristes,,,2,el-agent-v1;roman=elot743
+sim-data.may-i-use-your-wifi,Μπορώ να χρησιμοποιήσω το Wi-Fi σας;,,Boro na chrisimopoiiso to Wi-Fi sas;,,,2,el-agent-v1;roman=elot743
+sim-data.how-much-data-is-included,Πόσα δεδομένα περιλαμβάνει;,,Posa dedomena perilamvanei;,pˈosa ðˌeðomˈena pˌeɾilamvˈani,,2,el-agent-v1;roman=elot743;ipa=espeak
+sim-data.do-you-need-my-passport,Θέλετε το διαβατήριό μου;,Χρειάζεστε το διαβατήριό μου;,Thelete to diavatirio mou;,θˈeletˌe to ðˌiavatˈiɾio mu,Do you want my passport?,2,el-agent-v1;roman=elot743;ipa=espeak
+sim-data.how-long-is-it-valid,Πόσο καιρό ισχύει;,,Poso kairo ischyei;,pˈoso ceɾˈo isçˈii,,2,el-agent-v1;roman=elot743;ipa=espeak
+sim-data.please-activate-it,Ενεργοποιήστε την κάρτα,"Ενεργοποιήστε την, παρακαλώ",Energopoiiste tin karta,ˌeneɾɣˌopiˈiste tiŋ ɡˈaɾta,Please activate the card,2,el-agent-v1;roman=elot743;ipa=espeak
+sim-data.do-you-have-an-esim,Έχετε eSIM;,,Echete eSIM;,,,2,el-agent-v1;roman=elot743
+sim-data.my-data-is-not-working,Τα δεδομένα μου δεν δουλεύουν,Δεν λειτουργούν τα δεδομένα,Ta dedomena mou den doulevoun,ta ðˌeðomˈena mu ðˈen ðulˈevun,,2,el-agent-v1;roman=elot743;ipa=espeak
+sim-data.does-it-need-registration,Χρειάζεται καταχώρηση στοιχείων;,Χρειάζεται εγγραφή;,Chreiazetai katachorisi stoicheion;,xɾçˈazetˌe kˌataxˈoɾisˌi stiçˈion,Do my details have to be registered?,2,el-agent-v1;roman=elot743;ipa=espeak
+sim-data.i-have-no-signal,Δεν έχω σήμα,,Den echo sima,ðˈen ˈexo sˈima,,2,el-agent-v1;roman=elot743;ipa=espeak
+sim-data.please-write-the-wifi-password,Γράψτε μου τον κωδικό του Wi-Fi,,Grapste mou ton kodiko tou Wi-Fi,,Write me the Wi-Fi code,2,el-agent-v1;roman=elot743
+sim-data.sim-card,κάρτα SIM,,karta SIM,,,2,el-agent-v1;roman=elot743
+sim-data.where-can-i-buy-a-plug-adapter,Πού μπορώ να αγοράσω αντάπτορα πρίζας;,,Pou boro na agoraso antaptora prizas;,pˈu boɾˈo n ˌaɣoɾˈaso adˈaptoɾˌa pɾˈizas,Where can I buy a socket adapter?,2,el-agent-v1;roman=elot743;ipa=espeak
+sim-data.mobile-data,κινητά δεδομένα,δεδομένα,kinita dedomena,cˌinitˈa ðˌeðomˈena,,2,el-agent-v1;roman=elot743;ipa=espeak
+sim-data.can-i-top-up-this-sim,Γίνεται ανανέωση;,Μπορώ να ανανεώσω την κάρτα;,Ginetai ananeosi;,jˈinetˌe ˌananˈeosˌi,Can this card be topped up?,2,el-agent-v1;roman=elot743;ipa=espeak
+sim-data.top-up,ανανέωση χρόνου,ανανέωση,ananeosi chronou,ˌananˈeosˌi xɾˈonu,Renewal of airtime,2,el-agent-v1;roman=elot743;ipa=espeak
+sim-data.is-there-coverage-in,Υπάρχει κάλυψη στην περιοχή: {};,,Yparchei kalypsi stin periochi: {};,ipˈaɾçi kˈalipsˌi stim bˌeɾioçˈi {},Coverage in the area: {}? (fill takes no case),2,el-agent-v1;roman=elot743;ipa=espeak
+sim-data.signal,σήμα / κάλυψη,,sima / kalypsi,sˈima / kˈalipsˌi,,2,el-agent-v1;roman=elot743;ipa=espeak
+sim-data.esim,eSIM,,eSIM,,Kept as the Latin abbreviation in Greek too,2,el-agent-v1;roman=elot743
+sim-data.prepaid,καρτοκινητή,προπληρωμένη,kartokiniti,kˌaɾtocˌinitˈi,"Prepaid mobile, lit. ""card mobile""",2,el-agent-v1;roman=elot743;ipa=espeak
+sim-data.roaming,περιαγωγή,roaming,periagogi,pˌeɾiˌaɣojˈi,The term used on Greek phone bills,2,el-agent-v1;roman=elot743;ipa=espeak
+etiquette.is-this-allowed,Επιτρέπεται αυτό;,,Epitrepetai afto;,ˌepitɾˈepetˌe aftˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+etiquette.is-tipping-expected,Συνηθίζεται το φιλοδώρημα;,,Synithizetai to filodorima;,sˌiniθˈizetˌe to fˌiloðˈoɾimˌa,Is a tip customary?,2,el-agent-v1;roman=elot743;ipa=espeak
+etiquette.is-service-included,Περιλαμβάνεται το φιλοδώρημα στον λογαριασμό;,Περιλαμβάνεται η εξυπηρέτηση;,Perilamvanetai to filodorima ston logariasmo;,pˌeɾilamvˈanetˌe to fˌiloðˈoɾimˌa ston lˌoɣaɾˌiasmˈo,Is the tip already on the bill?,2,el-agent-v1;roman=elot743;ipa=espeak
+etiquette.may-i-enter,Μπορώ να μπω;,Επιτρέπεται να μπω;,Boro na bo;,boɾˈo na bˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+etiquette.remove-shoes,Να βγάλω τα παπούτσια μου;,,Na vgalo ta papoutsia mou;,na vɣˈalo ta papˈutsiˌa mu,Shall I take my shoes off?,2,el-agent-v1;roman=elot743;ipa=espeak
+etiquette.photo-of-you,Μπορώ να σας βγάλω μια φωτογραφία;,Επιτρέπετε μια φωτογραφία;,Boro na sas vgalo mia fotografia;,boɾˈo na saz vɣˈalo mɲa fˌotoɣɾafˈia,,2,el-agent-v1;roman=elot743;ipa=espeak
+etiquette.may-i-sit-here,Μπορώ να καθίσω εδώ;,,Boro na kathiso edo;,boɾˈo na kaθˈiso eðˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+etiquette.queue-for,Αυτή είναι η σειρά για: {};,,Afti einai i seira gia: {};,aftˈi ˈine i siɾˈa jˈa {},Is this the queue for: {}? (fill takes no case),2,el-agent-v1;roman=elot743;ipa=espeak
+etiquette.dressed-appropriately,Είναι κατάλληλα τα ρούχα μου;,,Einai katallila ta roucha mou;,ˈine katˈalilˌa ta ɾˈuxa mu,Are my clothes appropriate here?,2,el-agent-v1;roman=elot743;ipa=espeak
+etiquette.did-not-mean-to-offend,Δεν ήθελα να σας προσβάλω,"Συγγνώμη, δεν ήθελα να σας προσβάλω",Den ithela na sas prosvalo,ðˈen ˈiθelˌa na sas pɾosvˈalo,,2,el-agent-v1;roman=elot743;ipa=espeak
+etiquette.what-is-customary,Τι συνηθίζεται εδώ;,,Ti synithizetai edo;,tˈi sˌiniθˈizetˌe eðˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+etiquette.keep-the-change,Κρατήστε τα ρέστα,"Κρατήστε τα ρέστα, παρακαλώ",Kratiste ta resta,kɾatˈiste ta ɾˈesta,,2,el-agent-v1;roman=elot743;ipa=espeak
+children.cannot-find-my-child,"Δεν μπορώ να βρω το παιδί μου, βοηθήστε με",,"Den boro na vro to paidi mou, voithiste me","ðˈen boɾˈo na vɾˈo to peðˈi mu, voɪθˈiste me","I cannot find my child, help me",2,el-agent-v1;roman=elot743;ipa=espeak
+children.make-an-announcement,"Κάντε μια ανακοίνωση, παρακαλώ",Μπορείτε να κάνετε μια ανακοίνωση;,"Kante mia anakoinosi, parakalo","kˈade mɲ ˌanacˈinosˌi, pˌaɾakalˈo",,2,el-agent-v1;roman=elot743;ipa=espeak
+children.child-age,Το παιδί μου είναι {} χρονών,,To paidi mou einai {} chronon,to peðˈi mu ˈine {} xɾonˈon,Years old; the number needs no agreement,2,el-agent-v1;roman=elot743;ipa=espeak
+children.high-chair,Έχετε παιδική καρέκλα;,Έχετε καρεκλάκι για μωρό;,Echete paidiki karekla;,ˈeçetˌe pˌeðicˈi kaɾˈekla,Do you have a child's chair?,2,el-agent-v1;roman=elot743;ipa=espeak
+children.baby-changing-room,Πού είναι ο χώρος αλλαγής βρεφών;,Πού έχει αλλαξιέρα;,Pou einai o choros allagis vrefon;,pˈu ˈine o xˈoɾos ˌalajˈiz vɾefˈon,Where is the baby changing area?,2,el-agent-v1;roman=elot743;ipa=espeak
+children.childrens-menu,Υπάρχει παιδικό μενού;,,Yparchei paidiko menou;,ipˈaɾçi pˌeðikˈo menˈu,,2,el-agent-v1;roman=elot743;ipa=espeak
+children.suitable-for-children,Είναι κατάλληλο για παιδιά;,,Einai katallilo gia paidia;,ˈine katˈalilˌo jˈa pˌeðiˈa,,2,el-agent-v1;roman=elot743;ipa=espeak
+children.minimum-age,Ποιο είναι το κατώτατο όριο ηλικίας;,Από τι ηλικία επιτρέπεται;,Poio einai to katotato orio ilikias;,pˈio ˈine to katˈotatˌo ˈoɾiˌo ˌilicˈias,,2,el-agent-v1;roman=elot743;ipa=espeak
+children.do-children-pay,Πληρώνουν τα παιδιά;,,Plironoun ta paidia;,pliɾˈonun da pˌeðiˈa,,2,el-agent-v1;roman=elot743;ipa=espeak
+children.crib,Έχετε κούνια για το μωρό;,Έχετε βρεφικό κρεβατάκι;,Echete kounia gia to moro;,ˈeçetˌe kˈuɲa jˈa to moɾˈo,Do you have a baby cot?,2,el-agent-v1;roman=elot743;ipa=espeak
+children.warm-this-bottle,Μπορείτε να ζεστάνετε αυτό το μπιμπερό;,"Ζεστάνετε λίγο το μπιμπερό, παρακαλώ",Boreite na zestanete afto to bimpero;,boɾˈite na zestˈanetˌe aftˈo to bˌibeɾˈo,"Warm, not boil, this baby's bottle",2,el-agent-v1;roman=elot743;ipa=espeak
+children.car-seat,Χρειαζόμαστε παιδικό κάθισμα αυτοκινήτου,,Chreiazomaste paidiko kathisma aftokinitou,xɾçazˈomastˌe pˌeðikˈo kˈaθism ˌaftocinˈitu,,2,el-agent-v1;roman=elot743;ipa=espeak
+children.stroller,καρότσι μωρού,καροτσάκι,karotsi morou,kaɾˈotsi moɾˈu,,2,el-agent-v1;roman=elot743;ipa=espeak
+children.playground,Υπάρχει παιδική χαρά;,,Yparchei paidiki chara;,ipˈaɾçi pˌeðicˈi xaɾˈa,,2,el-agent-v1;roman=elot743;ipa=espeak
+social-basics.politeness-particles,"Ευγένεια στα Ταϊλανδικά: σχεδόν κάθε φράση κλείνει με μόριο ευγένειας, khrap αν μιλάει άντρας, kha αν μιλάει γυναίκα. Στην ερώτηση ο άντρας κρατάει το khrap, ενώ η γυναίκα λέει kha με ανοδικό τόνο. Οι φράσεις της κάρτας δεν το περιλαμβάνουν, γιατί εξαρτάται από το ποιος μιλάει: προσθέστε το δικό σας.",,,,,2,el-notes-v1

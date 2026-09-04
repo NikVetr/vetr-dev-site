@@ -1,11 +1,11 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 time-scheduling.what-time-is-it,Quelle heure est-il ?,,kɛl œʁ ɛtˈil,,2,fr-agent-v1;ipa=espeak
 time-scheduling.how-many-minutes,Combien de minutes ?,,kɔ̃bjɛ̃ də minˈyt,,2,fr-agent-v1;ipa=espeak
-time-scheduling.what-time-should-we-meet,À quelle heure se retrouve-t-on ?,,a kɛl œʁ sə ʁətʁˈuvtˈɔ̃,,2,fr-agent-v1;ipa=espeak
+time-scheduling.what-time-should-we-meet,À quelle heure se retrouve-t-on ?,,a kɛl œʁ sə ʁətʁuvtˈɔ̃,,2,fr-agent-v1;ipa=espeak
 time-scheduling.can-we-change-the-time,Peut-on changer l'heure ?,,pøtɔ̃ ʃɑ̃ʒe lˈœʁ,,2,fr-agent-v1;ipa=espeak
-time-scheduling.when-is-convenient,Quand cela vous convient-il ?,,kɑ̃ səla vu kɔ̃vjˈɛ̃tˈil,,2,fr-agent-v1;ipa=espeak
+time-scheduling.when-is-convenient,Quand cela vous convient-il ?,,kɑ̃ səla vu kɔ̃vjɛ̃tˈil,,2,fr-agent-v1;ipa=espeak
 time-scheduling.what-is-today-s-date,Quelle est la date aujourd'hui ?,,kɛl ɛ la dat oʒuʁdyˈi,,2,fr-agent-v1;ipa=espeak
-time-scheduling.what-day-is-it-today,Quel jour sommes-nous ?,,kɛl ʒuʁ sˈɔmnˈu,,2,fr-agent-v1;ipa=espeak
+time-scheduling.what-day-is-it-today,Quel jour sommes-nous ?,,kɛl ʒuʁ sɔmnˈu,,2,fr-agent-v1;ipa=espeak
 time-scheduling.what-time-does-it-open,À quelle heure ça ouvre ?,,a kɛl œʁ sa ˈuvʁ,,2,fr-agent-v1;ipa=espeak
 time-scheduling.what-time-does-it-close,À quelle heure ça ferme ?,,a kɛl œʁ sa fˈɛʁm,,2,fr-agent-v1;ipa=espeak
 time-scheduling.how-long-does-it-take,Combien de temps faut-il ?,,kɔ̃bjɛ̃ də tɑ̃ fotˈil,,2,fr-agent-v1;ipa=espeak

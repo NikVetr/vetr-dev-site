@@ -1,6 +1,6 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 toilets.where-toilet,Où sont les toilettes ?,,u sɔ̃ le twalˈɛt,,2,fr-agent-v1;ipa=espeak
-accessibility.step-free,Y a-t-il un accès de plain-pied ?,accès sans marches,i atil œ̃n aksɛ də plˈɛ̃pjˈe,,2,fr-agent-v1;ipa=espeak
+accessibility.step-free,Y a-t-il un accès de plain-pied ?,accès sans marches,i atil œ̃n aksɛ də plɛ̃pjˈe,,2,fr-agent-v1;ipa=espeak
 toilets.where-public-toilet,Où y a-t-il des toilettes publiques ?,,u i atil de twalɛt pyblˈik,,2,fr-agent-v1;ipa=espeak
 accessibility.wheelchair-access,C'est accessible en fauteuil roulant ?,,sɛt aksɛsibl ɑ̃ fotœj ʁulˈɑ̃,,2,fr-agent-v1;ipa=espeak
 toilets.may-i-use-the-toilet,Puis-je utiliser les toilettes ?,,pyiʒ ytilize le twalˈɛt,,2,fr-agent-v1;ipa=espeak

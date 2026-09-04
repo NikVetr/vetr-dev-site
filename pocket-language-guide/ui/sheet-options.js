@@ -18,7 +18,7 @@ import {
 import { familyFor } from '../render/fonts.js';
 import { regionRow } from './flags.js';
 import {
-  warningText, applyStatic, languageName, loadUiLanguage, number, t,
+  warningText, applyStatic, languageName, loadUiLanguage, number, regionList, t,
 } from './i18n.js';
 
 // Module scope, so the words cannot be looked up here: the keys are, and the
@@ -66,7 +66,7 @@ async function main() {
   });
   const flags = regionRow(target.regions, {
     label: t('gallery.spokenIn', {
-      language: targetName, regions: target.regions.split(';').join(', '),
+      language: targetName, regions: regionList(target.regions),
     }),
   });
   if (flags) $('pair-flags').append(flags);

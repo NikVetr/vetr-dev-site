@@ -12,7 +12,7 @@ import {
 import { regionRow } from './flags.js';
 import { languagePicker } from './language-picker.js';
 import { openLightbox } from './lightbox.js';
-import { applyStatic, languageName, loadUiLanguage, t } from './i18n.js';
+import { applyStatic, languageName, loadUiLanguage, regionList, t } from './i18n.js';
 
 /** @param {string} tag @param {Record<string,string>} attrs @param {(Node|string)[]} kids */
 function el(tag, attrs = {}, kids = []) {
@@ -47,7 +47,7 @@ function card(lang, gallery) {
   const query = `?target=${encodeURIComponent(lang.bcp47)}&source=${encodeURIComponent(reader)}`;
 
   const flags = regionRow(lang.regions, {
-    label: t('gallery.spokenIn', { language: name, regions: lang.regions.split(';').join(', ') }),
+    label: t('gallery.spokenIn', { language: name, regions: regionList(lang.regions) }),
   });
   const head = el('div', { class: 'card-head' }, [
     el('span', { class: 'card-badge', 'aria-hidden': 'true', text: lang.badge }),

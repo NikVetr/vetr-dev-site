@@ -28,16 +28,23 @@ OUT = ROOT / "data" / "fonts"
 # stack gets these: the gloss column is Latin whatever the target script is.
 LATIN_RANGES = [(0x20, 0x24F), (0x250, 0x2AF), (0x2B0, 0x2FF), (0x300, 0x36F),
                 (0x2000, 0x206F), (0x20A0, 0x20BF), (0x2100, 0x214F), (0x2190, 0x21FF)]
-# Cyrillic and Latin Extended Additional, for the `latin` stacks only.
+# Greek, Cyrillic and Latin Extended Additional, for the `latin` stacks only.
 #
 # These are here rather than left to the corpus union because the add-your-own-term
 # editor lets someone type a word the corpus never contained, offline, with no font
-# left to fall back to. Russian needs the first block and Vietnamese the second, and
-# together they cost about 16KB a face. They are kept off the CJK and Arabic stacks
-# because `scripts.csv` routes Cyrillic and Vietnamese to `latin` -- a Mandarin card
-# glossed in Russian sets the Russian in the Latin face, so the CJK face would carry
-# 500 glyphs it can never be asked to draw, in the largest files here.
-LATIN_EXTRA_RANGES = [(0x400, 0x4FF), (0x1E00, 0x1EFF)]
+# left to fall back to. Greek needs the first block, Russian the second and
+# Vietnamese the third, and together they cost about 20KB a face. They are kept off
+# the CJK and Arabic stacks because `scripts.csv` routes Greek, Cyrillic and
+# Vietnamese to `latin` -- a Mandarin card glossed in Russian sets the Russian in
+# the Latin face, so the CJK face would carry 500 glyphs it can never be asked to
+# draw, in the largest files here.
+#
+# Greek needs no stack of its own, unlike Devanagari and Thai: all four static Noto
+# Sans faces and both variable ones carry the whole of U+0370-03FF, 354 codepoints
+# apiece, so `Grek` can name the `latin` stack in `scripts.csv` and be drawn by it.
+# That was checked against the shipped subsets rather than inferred from the family
+# name, which is the mistake the Devanagari note above records.
+LATIN_EXTRA_RANGES = [(0x370, 0x3FF), (0x400, 0x4FF), (0x1E00, 0x1EFF)]
 CJK_PUNCT = [(0x3000, 0x303F), (0xFF00, 0xFFEF), (0x2E80, 0x2EFF)]
 KANA = [(0x3040, 0x30FF), (0x31F0, 0x31FF)]
 # Jamo, so a Hangul syllable that is stored decomposed still has parts to shape.
@@ -132,7 +139,7 @@ LATIN_DONOR = {"NotoSansArabic-Regular.ttf": "NotoSans-Regular.ttf",
 
 # Which language directories feed each stack's corpus-character union.
 ALL_LANGS = ["en", "es", "fr", "de", "ko", "ar", "zh-Hans", "ja",
-             "pt", "ru", "tr", "vi", "hi", "id", "sw", "th"]
+             "pt", "ru", "tr", "vi", "hi", "id", "sw", "th", "it", "el"]
 STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                "latin-serif": ALL_LANGS, "latin-cond-serif": ALL_LANGS,
                "cjk-sc": ["zh-Hans"], "cjk-sc-serif": ["zh-Hans"],

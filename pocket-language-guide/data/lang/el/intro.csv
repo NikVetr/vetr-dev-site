@@ -1,0 +1,13 @@
+concept_id,text,text_alt,romanization_elot,ipa,literal,confidence,provenance
+introductions.my-name-is,Με λένε {},,Me lene {},me lˈene {},They call me {}; the name goes in as written,2,el-agent-v1;roman=elot743;ipa=espeak
+introductions.nice-to-meet-you,Χαίρω πολύ,,Chairo poly,çˈeɾo polˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
+introductions.what-is-your-name,Πώς σας λένε;,Πώς λέγεστε;,Pos sas lene;,pˈos saz lˈene,,2,el-agent-v1;roman=elot743;ipa=espeak
+introductions.we-are-traveling-together,Ταξιδεύουμε μαζί,,Taxidevoume mazi,tˌaksiðˈevumˌe mazˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
+introductions.this-is-my-friend,Από εδώ ο φίλος μου / η φίλη μου,,Apo edo o filos mou / i fili mou,apˈo eðˈo o fˈiloz mu / i fˈili mu,"Lit. ""from here"": the Greek way to introduce",2,el-agent-v1;roman=elot743;ipa=espeak
+introductions.i-am-from,Καταγωγή: {},Είμαι από: {},Katagogi: {},kˌataɣojˈi {},Origin: {} (Greek needs no case on the fill),2,el-agent-v1;roman=elot743;ipa=espeak
+introductions.where-are-you-from,Από πού είστε;,,Apo pou eiste;,apˈo pˈu ˈiste,,2,el-agent-v1;roman=elot743;ipa=espeak
+introductions.how-are-you,Τι κάνετε;,Πώς είστε;,Ti kanete;,tˈi kˈanetˌe,"Lit. ""what are you doing?"": the usual greeting",2,el-agent-v1;roman=elot743;ipa=espeak
+introductions.i-am-a-tourist,Είμαι εδώ για τουρισμό,Είμαι τουρίστας/τρια,Eimai edo gia tourismo,ˈime eðˈo jˈa tˌuɾismˈo,I am here as a tourist,2,el-agent-v1;roman=elot743;ipa=espeak
+introductions.this-is-my-husband-wife,Από εδώ ο άντρας μου / η γυναίκα μου,Από εδώ ο σύζυγός μου / η σύζυγός μου,Apo edo o antras mou / i gynaika mou,apˈo eðˈo o ˈadɾaz mu / i jinˈeka mu,,2,el-agent-v1;roman=elot743;ipa=espeak
+introductions.this-is-my-daughter-son,Από εδώ η κόρη μου / ο γιος μου,,Apo edo i kori mou / o gios mou,apˈo eðˈo i kˈoɾi mu / o jˈoz mu,,2,el-agent-v1;roman=elot743;ipa=espeak
+introductions.i-am-traveling-alone,Ταξιδεύω μόνος / μόνη,Ταξιδεύω χωρίς παρέα,Taxidevo monos / moni,tˌaksiðˈevo mˈonos / mˈoni,Female speaker says the form after the slash,2,el-agent-v1;roman=elot743;ipa=espeak

@@ -1,0 +1,60 @@
+concept_id,text,text_alt,romanization_elot,ipa,literal,confidence,provenance
+building-help.what-room-number-is-this,Τι αριθμό έχει αυτό το δωμάτιο;,Τι νούμερο είναι αυτό το δωμάτιο;,Ti arithmo echei afto to domatio;,tˈi ˌaɾiθmˈo ˈeçi aftˈo to ðomˈatiˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+building-help.i-am-lost,Έχω χαθεί,,Echo chathei,ˈexo xaθˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
+building-help.where-is-reception,Πού είναι η ρεσεψιόν;,Πού είναι η υποδοχή;,Pou einai i resepsion;,pˈu ˈine i ɾˌesepsiˈon,,2,el-agent-v1;roman=elot743;ipa=espeak
+building-help.where-is-a-power-outlet,Πού υπάρχει πρίζα;,Πού είναι η πρίζα;,Pou yparchei priza;,pˈu ipˈaɾçi pɾˈiza,,2,el-agent-v1;roman=elot743;ipa=espeak
+accessibility.step-free,Υπάρχει πρόσβαση χωρίς σκαλιά;,Υπάρχει ισόπεδη πρόσβαση;,Yparchei prosvasi choris skalia;,ipˈaɾçi pɾˈosvasˌi xoɾˈis skaʎˈa,,2,el-agent-v1;roman=elot743;ipa=espeak
+accessibility.wheelchair-access,Είναι προσβάσιμο με αναπηρικό αμαξίδιο;,,Einai prosvasimo me anapiriko amaxidio;,ˈine pɾosvˈasimˌo me ˌanapˌiɾikˈo ˌamaksˈiðiˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+accessibility.elevator,Υπάρχει ασανσέρ;,Υπάρχει ανελκυστήρας;,Yparchei asanser;,ipˈaɾçi ˌasansˈeɾ,spoken ασανσέρ; the sign reads ανελκυστήρας,2,el-agent-v1;roman=elot743;ipa=espeak
+accessibility.ramp,Υπάρχει ράμπα;,,Yparchei rampa;,ipˈaɾçi ɾˈaba,,2,el-agent-v1;roman=elot743;ipa=espeak
+accessibility.how-many-steps,Πόσα σκαλιά έχει;,Πόσα σκαλιά είναι;,Posa skalia echei;,pˈosa skaʎˈa ˈeçi,,2,el-agent-v1;roman=elot743;ipa=espeak
+accessibility.cannot-climb-stairs,Δεν μπορώ να ανεβώ σκάλες,,Den boro na anevo skales,ðˈen boɾˈo n ˌanevˈo skˈales,,2,el-agent-v1;roman=elot743;ipa=espeak
+accessibility.need-to-sit-down,Πρέπει να καθίσω,Χρειάζομαι μια θέση να καθίσω,Prepei na kathiso,pɾˈepi na kaθˈiso,,2,el-agent-v1;roman=elot743;ipa=espeak
+accessibility.accessible-restroom,Υπάρχει τουαλέτα για ΑμεΑ;,Υπάρχει προσβάσιμη τουαλέτα;,Yparchei toualeta gia Amea;,ipˈaɾçi tˌualˈeta jˈa ˈame ˈalfa,"ΑμεΑ = people with disabilities, the sign term",2,el-agent-v1;roman=elot743;ipa=espeak
+accessibility.station-assistance,Υπάρχει βοήθεια για ΑμεΑ στον σταθμό;,Υπάρχει προσωπικό να βοηθήσει στον σταθμό;,Yparchei voitheia gia Amea ston stathmo;,ipˈaɾçi voˈiθça jˈa ˈame ˈalfa ston staθmˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+accessibility.help-me-carry,Μπορείτε να με βοηθήσετε να το κουβαλήσω;,"Βοηθήστε με να το μεταφέρω, παρακαλώ",Boreite na me voithisete na to kouvaliso;,boɾˈite na me voɪθˈisetˌe na to kˌuvalˈiso,,2,el-agent-v1;roman=elot743;ipa=espeak
+accessibility.board-first,Μπορώ να επιβιβαστώ πριν από τους άλλους;,Μπορώ να μπω πρώτος / πρώτη;,Boro na epivivasto prin apo tous allous;,boɾˈo na ˌepivˌivastˈo pɾˈin apˈo tus ˈalus,May I board before the others?,2,el-agent-v1;roman=elot743;ipa=espeak
+accessibility.door-width,Πόσο πλάτος έχει η πόρτα;,Πόσα εκατοστά είναι η πόρτα;,Poso platos echei i porta;,pˈoso plˈatos ˈeçi i pˈoɾta,,2,el-agent-v1;roman=elot743;ipa=espeak
+accessibility.wheelchair-width,Το αμαξίδιό μου έχει πλάτος {} εκ.,,To amaxidio mou echei platos {} ek.,to ˌamaksˈiðio mu ˈeçi plˈatos {} ek,My wheelchair is {} cm wide (εκ. = cm),2,el-agent-v1;roman=elot743;ipa=espeak
+accessibility.hard-of-hearing,Έχω πρόβλημα ακοής,Δεν ακούω καλά,Echo provlima akois,ˈexo pɾˈovlim ˌakoˈis,,2,el-agent-v1;roman=elot743;ipa=espeak
+accessibility.speak-louder,"Μιλάτε πιο δυνατά, παρακαλώ",,"Milate pio dynata, parakalo","milˈate pçˈo ðˌinatˈa, pˌaɾakalˈo",,2,el-agent-v1;roman=elot743;ipa=espeak
+accessibility.visually-impaired,Έχω πρόβλημα όρασης,Δεν βλέπω καλά,Echo provlima orasis,ˈexo pɾˈovlimˌa ˈoɾasˌis,,2,el-agent-v1;roman=elot743;ipa=espeak
+accessibility.take-your-arm,Μπορώ να κρατηθώ από το μπράτσο σας;,,Boro na kratitho apo to bratso sas;,boɾˈo na kɾˌatiθˈo apˈo to bɾˈatso sas,May I hold on to your arm?,2,el-agent-v1;roman=elot743;ipa=espeak
+accessibility.guide-dog,Αυτός είναι ο σκύλος οδηγός μου,Είναι σκύλος οδηγός για τυφλούς,Aftos einai o skylos odigos mou,aftˈos ˈine o scˈilos ˌoðiɣˈoz mu,,2,el-agent-v1;roman=elot743;ipa=espeak
+in-a-building.is-this-the-correct-entrance,Είναι αυτή η σωστή είσοδος;,,Einai afti i sosti eisodos;,ˈine aftˈi i sostˈi ˈisoðˌos,,2,el-agent-v1;roman=elot743;ipa=espeak
+in-a-building.do-you-have-wi-fi,Έχετε Wi-Fi;,Έχετε ασύρματο δίκτυο;,Echete Wi-Fi;,,,2,el-agent-v1;roman=elot743
+in-a-building.what-is-the-wi-fi-password,Ποιος είναι ο κωδικός του Wi-Fi;,Ποιος είναι ο κωδικός για το ασύρματο;,Poios einai o kodikos tou Wi-Fi;,,,2,el-agent-v1;roman=elot743
+in-a-building.which-floor,Σε ποιον όροφο;,Ποιος όροφος;,Se poion orofo;,se pˈion ˈoɾofˌo,"Which floor? Ground floor = ισόγειο, button 0",2,el-agent-v1;roman=elot743;ipa=espeak
+toilets.where-toilet,Πού είναι η τουαλέτα;,Πού έχει τουαλέτα;,Pou einai i toualeta;,pˈu ˈine i tˌualˈeta,,2,el-agent-v1;roman=elot743;ipa=espeak
+toilets.where-public-toilet,Πού είναι μια δημόσια τουαλέτα;,Υπάρχει δημόσια τουαλέτα εδώ κοντά;,Pou einai mia dimosia toualeta;,pˈu ˈine mɲa ðimˈosja tˌualˈeta,,2,el-agent-v1;roman=elot743;ipa=espeak
+toilets.may-i-use-the-toilet,Μπορώ να χρησιμοποιήσω την τουαλέτα;,"Μπορώ να πάω στην τουαλέτα, παρακαλώ;",Boro na chrisimopoiiso tin toualeta;,boɾˈo na xɾˌisimˌopiˈiso tin dˌualˈeta,,2,el-agent-v1;roman=elot743;ipa=espeak
+toilets.is-it-only-for-customers,Είναι μόνο για πελάτες;,,Einai mono gia pelates;,ˈine mˈono jˈa pelˈates,,2,el-agent-v1;roman=elot743;ipa=espeak
+toilets.toilet-wc,Τουαλέτα,W.C.,Toualeta,tˌualˈeta,the sign usually reads W.C.,2,el-agent-v1;roman=elot743;ipa=espeak
+toilets.is-it-free,Είναι δωρεάν;,,Einai dorean;,ˈine ðˌoɾeˈan,Is it free of charge?,2,el-agent-v1;roman=elot743;ipa=espeak
+toilets.do-i-need-a-coin,Χρειάζεται κέρμα ή μάρκα;,Πληρώνω για την τουαλέτα;,Chreiazetai kerma i marka;,xɾçˈazetˌe cˈeɾma ˈi mˈaɾka,Is a coin or token needed? (μάρκα = token),2,el-agent-v1;roman=elot743;ipa=espeak
+toilets.is-the-tap-water-safe-to-drink,Το νερό της βρύσης είναι πόσιμο;,Πίνεται το νερό της βρύσης;,To nero tis vrysis einai posimo;,to neɾˈo tiz vɾˈisis ˈine pˈosimˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+toilets.it-is-urgent,Είναι επείγον,,Einai epeigon,ˈine epˈiɣon,,2,el-agent-v1;roman=elot743;ipa=espeak
+toilets.may-i-have-the-toilet-key,Μου δίνετε το κλειδί της τουαλέτας;,Μπορώ να έχω το κλειδί της τουαλέτας;,Mou dinete to kleidi tis toualetas;,mu ðˈinetˌe to kliðˈi tis tˌualˈetas,,2,el-agent-v1;roman=elot743;ipa=espeak
+toilets.there-is-no-toilet-paper,Δεν υπάρχει χαρτί υγείας,,Den yparchei charti ygeias,ðˈen ipˈaɾçi xaɾtˈi ijˈias,,2,el-agent-v1;roman=elot743;ipa=espeak
+toilets.toilet-paper,χαρτί υγείας,,charti ygeias,xaɾtˈi ijˈias,,2,el-agent-v1;roman=elot743;ipa=espeak
+toilets.it-is-out-of-order,Δεν λειτουργεί,Είναι χαλασμένο,Den leitourgei,ðˈen lˌituɾjˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
+toilets.out-of-order,Εκτός λειτουργίας,Δεν λειτουργεί,Ektos leitourgias,ektˈoz lˌituɾjˈias,,2,el-agent-v1;roman=elot743;ipa=espeak
+toilets.mens-toilet,Ανδρών,Τουαλέτα ανδρών,Andron,anðɾˈon,men's - the word printed on the door,2,el-agent-v1;roman=elot743;ipa=espeak
+toilets.womens-toilet,Γυναικών,Τουαλέτα γυναικών,Gynaikon,jˌinekˈon,women's - the word printed on the door,2,el-agent-v1;roman=elot743;ipa=espeak
+toilets.drinking-water,Πόσιμο νερό,,Posimo nero,pˈosimˌo neɾˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+toilets.not-for-drinking,Μη πόσιμο νερό,Ακατάλληλο για πόση,Mi posimo nero,mˈi pˈosimˌo neɾˈo,NOT drinking water,2,el-agent-v1;roman=elot743;ipa=espeak
+toilets.accessible-toilet,Τουαλέτα ΑμεΑ,Προσβάσιμη τουαλέτα,Toualeta Amea,tˌualˈet ˈame ˈalfa,toilet for people with disabilities,2,el-agent-v1;roman=elot743;ipa=espeak
+toilets.where-can-i-wash-my-hands,Πού μπορώ να πλύνω τα χέρια μου;,,Pou boro na plyno ta cheria mou;,pˈu boɾˈo na plˈino ta çˈeɾiˌa mu,,2,el-agent-v1;roman=elot743;ipa=espeak
+toilets.can-i-flush-the-paper,Μπορώ να ρίξω το χαρτί στη λεκάνη;,Μην πετάτε χαρτί στη λεκάνη,Boro na rixo to charti sti lekani;,boɾˈo na ɾˈikso to xaɾtˈi sti lekˈani,the sign in reply: do not put paper in the bowl,2,el-agent-v1;roman=elot743;ipa=espeak
+toilets.is-there-a-toilet-on-board,Υπάρχει τουαλέτα μέσα;,Υπάρχει τουαλέτα στο λεωφορείο ή στο πλοίο;,Yparchei toualeta mesa;,ipˈaɾçi tˌualˈeta mˈesa,Is there a toilet on board (inside)?,2,el-agent-v1;roman=elot743;ipa=espeak
+toilets.the-toilet-will-not-flush,Το καζανάκι δεν λειτουργεί,Η τουαλέτα δεν τραβάει,To kazanaki den leitourgei,to kˌazanˈaci ðˈen lˌituɾjˈi,The cistern (flush) does not work,2,el-agent-v1;roman=elot743;ipa=espeak
+toilets.baby-change,Αλλαγή βρεφών,αλλαξιέρα,Allagi vrefon,ˌalajˈi vɾefˈon,baby changing; αλλαξιέρα = changing table,2,el-agent-v1;roman=elot743;ipa=espeak
+toilets.squat-toilet,τουρκική τουαλέτα,τουαλέτα δαπέδου,tourkiki toualeta,tˌuɾcicˈi tˌualˈeta,"squat toilet, lit. Turkish toilet",2,el-agent-v1;roman=elot743;ipa=espeak
+building-words.elevator,ανελκυστήρας,ασανσέρ,anelkystiras,ˌanelcistˈiɾas,lift; people say ασανσέρ,2,el-agent-v1;roman=elot743;ipa=espeak
+building-words.stairs,σκάλα,κλιμακοστάσιο,skala,skˈala,stairs; κλιμακοστάσιο = stairwell,2,el-agent-v1;roman=elot743;ipa=espeak
+building-words.entrance,Είσοδος,,Eisodos,ˈisoðˌos,,2,el-agent-v1;roman=elot743;ipa=espeak
+building-words.exit,Έξοδος,Έξοδος κινδύνου,Exodos,ˈeksoðˌos,exit; alt = emergency exit,2,el-agent-v1;roman=elot743;ipa=espeak
+building-words.men,Άνδρες,Ανδρών,Andres,ˈanðɾes,men; Ανδρών is the form on doors,2,el-agent-v1;roman=elot743;ipa=espeak
+building-words.women,Γυναίκες,Γυναικών,Gynaikes,jinˈeces,women; Γυναικών is the form on doors,2,el-agent-v1;roman=elot743;ipa=espeak
+building-words.door,πόρτα,θύρα,porta,pˈoɾta,,2,el-agent-v1;roman=elot743;ipa=espeak
+building-words.key,κλειδί,,kleidi,kliðˈi,key; hotel keycard = κάρτα,2,el-agent-v1;roman=elot743;ipa=espeak

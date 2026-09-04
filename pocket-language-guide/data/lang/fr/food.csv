@@ -20,9 +20,9 @@ food-ordering.i-want-this,Je voudrais ceci,,ʒə vudʁɛ səsˈi,,2,fr-agent-v1;
 food-ordering.do-you-have-drinking-water,Avez-vous de l'eau potable ?,,avevu də lo potˈabl,,2,fr-agent-v1;ipa=espeak
 food-ordering.to-go-please,"À emporter, s'il vous plaît",,"a ɑ̃pɔʁtˈe, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
 food-ordering.check-please,"L'addition, s'il vous plaît",,"ladisjˈɔ̃, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
-food-ordering.does-it-contain,Cela contient-il {} ?,,səla kɔ̃tjˈɛ̃tˈil {},,2,fr-agent-v1;ipa=espeak
+food-ordering.does-it-contain,Cela contient-il {} ?,,səla kɔ̃tjɛ̃tˈil {},,2,fr-agent-v1;ipa=espeak
 food-ordering.is-this-vegetarian,C'est végétarien ?,,sɛ veʒetaʁjˈɛ̃,,2,fr-agent-v1;ipa=espeak
-food-ordering.what-do-you-recommend,Que recommandez-vous ?,,kə ʁəkɔmɑ̃dˈevˈu,,2,fr-agent-v1;ipa=espeak
+food-ordering.what-do-you-recommend,Que recommandez-vous ?,,kə ʁəkɔmɑ̃devˈu,,2,fr-agent-v1;ipa=espeak
 food-ordering.water-please,"De l'eau, s'il vous plaît",,"də lˈo, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
 food-ordering.can-a-vegetarian-eat-this,Un végétarien peut-il manger ça ?,,œ̃ veʒetaʁjɛ̃ pøtil mɑ̃ʒe sˈa,,2,fr-agent-v1;ipa=espeak
 dietary-needs.no-pork,Sans porc ni lardons,sans porc ni charcuterie,sɑ̃ pɔʁk ni laʁdˈɔ̃,lardons = bacon bits,2,fr-gaps-v1;ipa=espeak

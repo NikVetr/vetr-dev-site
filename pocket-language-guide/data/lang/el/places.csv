@@ -1,0 +1,8 @@
+concept_id,text,text_alt,romanization_elot,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,Πού μπορώ να αγοράσω εισιτήρια;,,Pou boro na agoraso eisitiria;,pˈu boɾˈo n ˌaɣoɾˈaso ˌisitˈiɾiˌa,,2,el-agent-v1;roman=elot743;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,Χρειάζεται κράτηση;,,Chreiazetai kratisi;,xɾçˈazetˌe kɾˈatisˌi,,2,el-agent-v1;roman=elot743;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,Μέχρι τι ώρα γίνεται η είσοδος;,Ποια είναι η τελευταία ώρα εισόδου;,Mechri ti ora ginetai i eisodos;,mˈexɾi tˈi ˈoɾa jˈinetˌe i ˈisoðˌos,Until what time is entry allowed?,2,el-agent-v1;roman=elot743;ipa=espeak
+attractions-tickets.are-there-lockers,Υπάρχουν θυρίδες φύλαξης;,Υπάρχει φύλαξη αποσκευών;,Yparchoun thyrides fylaxis;,ipˈaɾxun θiɾˈiðes fˈilaksˌis,,2,el-agent-v1;roman=elot743;ipa=espeak
+attractions-tickets.may-i-take-photos,Επιτρέπεται η φωτογράφιση;,,Epitrepetai i fotografisi;,ˌepitɾˈepetˌe i fˌotoɣɾˈafisˌi,,2,el-agent-v1;roman=elot743;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,"Βγάλτε μας μια φωτογραφία, παρακαλώ",,"Vgalte mas mia fotografia, parakalo","vɣˈalte maz mɲa fˌotoɣɾafˈia, pˌaɾakalˈo",,2,el-agent-v1;roman=elot743;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,Μπορείτε να μας βγάλετε μια φωτογραφία;,,Boreite na mas vgalete mia fotografia;,boɾˈite na maz vɣˈaletˌe mɲa fˌotoɣɾafˈia,,2,el-agent-v1;roman=elot743;ipa=espeak

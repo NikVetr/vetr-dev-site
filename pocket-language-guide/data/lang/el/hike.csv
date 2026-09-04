@@ -1,0 +1,66 @@
+concept_id,text,text_alt,romanization_elot,ipa,literal,confidence,provenance
+trail-words.trail,μονοπάτι,διαδρομή,monopati,mˌonopˈati,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-words.trailhead,αρχή μονοπατιού,αφετηρία,archi monopatiou,aɾçˈi mˌonopˌatiˈu,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-words.summit,κορυφή,,koryfi,kˌoɾifˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-words.viewpoint,πανοραμική θέα,σημείο θέασης,panoramiki thea,pˌanoɾˌamicˈi θˈea,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-words.cableway,τελεφερίκ,αναβατήρας,teleferik,tˌelefeɾˈik,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-words.shuttle-bus,λεωφορείο μεταφοράς,,leoforeio metaforas,lˌeofoɾˈio mˌetafoɾˈas,transfer bus; signs often read Shuttle Bus,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-words.park-shuttle,λεωφορείο πάρκου,,leoforeio parkou,lˌeofoɾˈio pˈaɾku,the park's own bus,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-words.steps,σκαλιά,,skalia,skaʎˈa,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-words.up-uphill,πάνω / ανηφόρα,,pano / anifora,pˈano / ˌanifˈoɾa,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-words.down-downhill,κάτω / κατηφόρα,,kato / katifora,kˈato / kˌatifˈoɾa,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-words.one-way,απλή διαδρομή,χωρίς επιστροφή,apli diadromi,aplˈi ðˌiaðɾomˈi,"one way, no return",2,el-agent-v1;roman=elot743;ipa=espeak
+trail-words.round-trip,μετ' επιστροφής,διαδρομή με επιστροφή,met' epistrofis,mˈet ˌepistɾofˈis,,2,el-agent-v1;roman=elot743;ipa=espeak
+weather.forecast,Ποια είναι η πρόγνωση του καιρού;,Τι καιρό θα κάνει;,Poia einai i prognosi tou kairou;,pˈia ˈine i pɾˈoɣnosˌi tu ceɾˈu,,2,el-agent-v1;roman=elot743;ipa=espeak
+weather.will-it-rain,Θα βρέξει σήμερα;,,Tha vrexei simera;,θa vɾˈeksi sˈimeɾˌa,,2,el-agent-v1;roman=elot743;ipa=espeak
+weather.is-it-safe-today,Είναι ασφαλές σήμερα;,Είναι ασφαλής η διαδρομή σήμερα;,Einai asfales simera;,ˈine ˌasfalˈes sˈimeɾˌa,,2,el-agent-v1;roman=elot743;ipa=espeak
+weather.how-cold-at-night,Πόσο κρύο κάνει τη νύχτα;,Πόσους βαθμούς έχει τη νύχτα;,Poso kryo kanei ti nychta;,pˈoso kɾˈio kˈani ti nˈixta,,2,el-agent-v1;roman=elot743;ipa=espeak
+weather.rain,βροχή,,vrochi,vɾoçˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
+weather.snow,χιόνι,,chioni,çˈoni,,2,el-agent-v1;roman=elot743;ipa=espeak
+weather.wind,άνεμος,αέρας,anemos,ˈanemˌos,wind; the summer north wind is μελτέμι,2,el-agent-v1;roman=elot743;ipa=espeak
+weather.storm,καταιγίδα,θύελλα,kataigida,kˌatejˈiða,"thunderstorm; θύελλα = gale, storm at sea",2,el-agent-v1;roman=elot743;ipa=espeak
+weather.ice,πάγος,παγετός,pagos,pˈaɣos,ice on the ground; παγετός on warnings,2,el-agent-v1;roman=elot743;ipa=espeak
+weather.fog,ομίχλη,,omichli,omˈixli,,2,el-agent-v1;roman=elot743;ipa=espeak
+weather.heat,ζέστη / καύσωνας,,zesti / kafsonas,zˈesti / kˈafsonˌas,heat / heatwave,2,el-agent-v1;roman=elot743;ipa=espeak
+weather.cold,κρύο,,kryo,kɾˈio,,2,el-agent-v1;roman=elot743;ipa=espeak
+weather.humid,υγρασία,υγρός,ygrasia,ˌiɣɾasˈia,humidity,2,el-agent-v1;roman=elot743;ipa=espeak
+weather.sunrise,ανατολή ηλίου,,anatoli iliou,ˌanatolˈi ilˈiu,,2,el-agent-v1;roman=elot743;ipa=espeak
+weather.flood,πλημμύρα,,plimmyra,plimˈiɾa,,2,el-agent-v1;roman=elot743;ipa=espeak
+weather.avalanche-risk,κίνδυνος χιονοστιβάδας,χιονοστιβάδα,kindynos chionostivadas,cˈinðinˌos çˌonostivˈaðas,,2,el-agent-v1;roman=elot743;ipa=espeak
+hiking-parks.is-this-the-way-to,Προορισμός: {}. Αυτός ο δρόμος;,,Proorismos: {}. Aftos o dromos;,pɾˌooɾismˈos {} aftˈos o ðɾˈomos,Destination: {}. This road? (fill needs no case),2,el-agent-v1;roman=elot743;ipa=espeak
+hiking-parks.where-is-the-trailhead,Πού είναι η αρχή του μονοπατιού;,Από πού ξεκινάει το μονοπάτι;,Pou einai i archi tou monopatiou;,pˈu ˈine i aɾçˈi tu mˌonopˌatiˈu,,2,el-agent-v1;roman=elot743;ipa=espeak
+hiking-parks.how-long-to-the-summit,Πόση ώρα θέλει μέχρι την κορυφή;,Σε πόση ώρα φτάνουμε στην κορυφή;,Posi ora thelei mechri tin koryfi;,pˈosi ˈoɾa θˈeli mˈexɾi tiŋ ɡˌoɾifˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
+hiking-parks.how-long-to-the-viewpoint,Πόση ώρα θέλει μέχρι το σημείο θέασης;,Πόση ώρα θέλει μέχρι τη θέα;,Posi ora thelei mechri to simeio theasis;,pˈosi ˈoɾa θˈeli mˈexɾi to simˈio θˈeasˌis,,2,el-agent-v1;roman=elot743;ipa=espeak
+hiking-parks.which-route-is-easier,Ποια διαδρομή είναι πιο εύκολη;,,Poia diadromi einai pio efkoli;,pˈia ðˌiaðɾomˈi ˈine pçˈo ˈefkolˌi,,2,el-agent-v1;roman=elot743;ipa=espeak
+hiking-parks.is-this-trail-suitable-for-beginners,Είναι αυτό το μονοπάτι κατάλληλο για αρχάριους;,,Einai afto to monopati katallilo gia archarious;,ˈine aftˈo to mˌonopˈati katˈalilˌo jˈa aɾxˈaɾiˌus,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-conditions.how-long-is-the-full-route,Πόσο διαρκεί η διαδρομή;,Πόσα χιλιόμετρα είναι όλη η διαδρομή;,Poso diarkei i diadromi;,pˈoso ðˌiaɾcˈi i ðˌiaðɾomˈi,How long does the route take?,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-conditions.can-we-return-the-same-way,Γυρίζουμε από τον ίδιο δρόμο;,,Gyrizoume apo ton idio dromo;,jiɾˈizumˌe apˈo ton ˈiðiˌo ðɾˈomo,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-conditions.can-we-return-before-dark,Γυρίζουμε πριν νυχτώσει;,Προλαβαίνουμε να γυρίσουμε πριν σκοτεινιάσει;,Gyrizoume prin nychtosei;,jiɾˈizumˌe pɾˈin nixtˈosi,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-conditions.is-the-trail-open,Είναι ανοιχτό το μονοπάτι;,,Einai anoichto to monopati;,ˈine ˌanixtˈo to mˌonopˈati,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-conditions.is-the-route-steep,Είναι απότομη η διαδρομή;,Έχει πολλή ανηφόρα;,Einai apotomi i diadromi;,ˈine apˈotomˌi i ðˌiaðɾomˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-conditions.is-the-path-slippery,Γλιστράει το μονοπάτι;,Είναι ολισθηρό το μονοπάτι;,Glistraei to monopati;,ɣlistɾˈai to mˌonopˈati,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-transport.how-long-is-the-queue,Πόση ουρά έχει;,Πόσο περιμένουμε στην ουρά;,Posi oura echei;,pˈosi uɾˈa ˈeçi,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-transport.what-time-is-the-last-shuttle,Τι ώρα το τελευταίο λεωφορείο;,Τι ώρα φεύγει το τελευταίο λεωφορείο;,Ti ora to teleftaio leoforeio;,tˈi ˈoɾa to tˌeleftˈeo lˌeofoɾˈio,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-transport.when-does-the-cableway-stop,Τι ώρα κλείνει το τελεφερίκ;,,Ti ora kleinei to teleferik;,tˈi ˈoɾa klˈini to tˌelefeɾˈik,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-transport.where-can-we-buy-water,Πού αγοράζουμε νερό;,Πού μπορούμε να αγοράσουμε νερό;,Pou agorazoume nero;,pˈu ˌaɣoɾˈazumˌe neɾˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-transport.where-can-we-refill-water,Πού γεμίζουμε νερό;,Υπάρχει βρύση ή πηγή εδώ;,Pou gemizoume nero;,pˈu jemˈizumˌe neɾˈo,Where do we fill up water? (πηγή = spring),2,el-agent-v1;roman=elot743;ipa=espeak
+trail-transport.is-there-cell-signal-here,Έχει σήμα εδώ;,Υπάρχει σήμα κινητού εδώ;,Echei sima edo;,ˈeçi sˈima eðˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-transport.do-you-have-a-map,Έχετε χάρτη;,,Echete charti;,ˈeçetˌe xˈaɾti,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-transport.how-long-is-the-wait,Πόση ώρα θα περιμένουμε;,Πόση ώρα είναι η αναμονή;,Posi ora tha perimenoume;,pˈosi ˈoɾa θa pˌeɾimˈenumˌe,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-warnings.open,Ανοιχτό,Ανοικτό,Anoichto,ˌanixtˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-warnings.closed,Κλειστό,,Kleisto,klistˈo,closed; fire ban sign: Απαγόρευση κυκλοφορίας,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-warnings.maintenance,Συντήρηση,Έργα συντήρησης,Syntirisi,sidˈiɾisˌi,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-warnings.steep-slope,Απότομη κλίση,Επικίνδυνη κατηφόρα,Apotomi klisi,apˈotomˌi klˈisi,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-warnings.caution-slippery,"Προσοχή, ολισθηρό","Προσοχή, γλιστράει","Prosochi, olisthiro","pɾˌosoçˈi, ˌolisθiɾˈo",,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-warnings.danger,Κίνδυνος,Προσοχή,Kindynos,cˈinðinˌos,danger; fire danger = Κίνδυνος πυρκαγιάς,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-warnings.beware-falling-rocks,"Προσοχή, πτώση βράχων",Καταπτώσεις,"Prosochi, ptosi vrachon","pɾˌosoçˈi, ptˈosi vɾˈaxon",falling rocks; landslide = κατολίσθηση,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-warnings.first-aid-station,Πρώτες βοήθειες,Σταθμός πρώτων βοηθειών,Protes voitheies,pɾˈotez voˈiθçes,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-warnings.service-suspended,Διακοπή λειτουργίας,Δεν λειτουργεί,Diakopi leitourgias,ðˌiakopˈi lˌituɾjˈias,"service suspended, not running",2,el-agent-v1;roman=elot743;ipa=espeak
+trail-landmarks.trail-marker,σήμανση μονοπατιού,σηματοδότηση,simansi monopatiou,sˈimansˌi mˌonopˌatiˈu,waymarking,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-landmarks.fork-junction,διακλάδωση / διασταύρωση,,diakladosi / diastavrosi,ðˌiaklˈaðosˌi / ðˌiastˈavɾosˌi,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-landmarks.boardwalk-cliff-path,ξύλινος διάδρομος / μονοπάτι σε γκρεμό,,xylinos diadromos / monopati se gkremo,ksˈilinˌoz ðiˈaðɾomˌos / mˌonopˈati se ɡɾemˈo,boardwalk / path along a cliff (γκρεμός),2,el-agent-v1;roman=elot743;ipa=espeak
+trail-landmarks.start,αρχή,αφετηρία,archi,aɾçˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-landmarks.end,τέλος,,telos,tˈelos,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-landmarks.elevation,υψόμετρο,,ypsometro,ipsˈometɾˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-landmarks.sunset,ηλιοβασίλεμα,δύση ηλίου,iliovasilema,ˌiʎovasˈilemˌa,,2,el-agent-v1;roman=elot743;ipa=espeak
+trail-landmarks.water-point,βρύση / πηγή,σημείο υδροδότησης,vrysi / pigi,vɾˈisi / pijˈi,tap / spring,2,el-agent-v1;roman=elot743;ipa=espeak

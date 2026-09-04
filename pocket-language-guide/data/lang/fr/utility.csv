@@ -1,9 +1,9 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 utility-templates.i-want-to-go-to,Je voudrais aller à {},,ʒə vudʁɛz ale ˌaaksɑ̃ɡʁˈav {},,2,fr-agent-v1;ipa=espeak
-utility-templates.please-give-me,"Donnez-moi {}, s'il vous plaît",,"dɔnˈemwˈa {}, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
+utility-templates.please-give-me,"Donnez-moi {}, s'il vous plaît",,"dɔnemwˈa {}, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
 utility-templates.may-i,Puis-je {} ?,,pyˈiʒ {},,2,fr-agent-v1;ipa=espeak
 utility-templates.please-do-not-add,"Sans {}, s'il vous plaît",,"sˈɑ̃ {}, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
-utility-templates.do-you-have,Avez-vous {} ?,,avˈevˈu {},,2,fr-agent-v1;ipa=espeak
+utility-templates.do-you-have,Avez-vous {} ?,,avevˈu {},,2,fr-agent-v1;ipa=espeak
 utility-templates.please-write-the-number,"Écrivez le chiffre, s'il vous plaît",,"ekʁive lə ʃˈifʁ, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
 utility-templates.i-need,J'ai besoin de {},,ʒe bəzwɛ̃ də {},,2,fr-agent-v1;ipa=espeak
 utility-templates.is-there-nearby,Y a-t-il un {} près d'ici ?,,i atil ˈœ̃ {} pʁɛ disˈi,,2,fr-agent-v1;ipa=espeak
@@ -11,6 +11,6 @@ utility-templates.how-much-is,Combien coûte {} ?,,kɔ̃bjɛ̃ kˈut {},,2,fr-a
 utility-templates.is-this,C'est bien {} ?,,sɛ bjˈɛ̃ {},,2,fr-agent-v1;ipa=espeak
 utility-templates.please,"{}, s'il vous plaît",,"{}, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
 utility-templates.i-am-looking-for,Je cherche {},,ʒə ʃˈɛʁʃ {},,2,fr-agent-v1;ipa=espeak
-utility-templates.do-you-accept,Acceptez-vous {} ?,,aksɛptˈevˈu {},,2,fr-agent-v1;ipa=espeak
+utility-templates.do-you-accept,Acceptez-vous {} ?,,aksɛptevˈu {},,2,fr-agent-v1;ipa=espeak
 utility-templates.i-cannot-find,Je ne trouve pas {},,ʒə nə tʁuv pˈa {},,2,fr-agent-v1;ipa=espeak
 utility-templates.there-is-a-problem-with,Il y a un problème avec {},,il i a œ̃ pʁɔblɛm avˈɛk {},,2,fr-agent-v1;ipa=espeak

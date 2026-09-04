@@ -1,0 +1,45 @@
+concept_id,text,text_alt,romanization_elot,ipa,literal,confidence,provenance
+numbers-money.l-ng,μηδέν,,miden,miðˈen,,2,el-agent-v1;roman=elot743;ipa=espeak
+numbers-money.y,ένα,ένας / μία / ένα,ena,ˈena,,2,el-agent-v1;roman=elot743;ipa=espeak
+numbers-money.r,δύο,,dyo,ðˈio,,2,el-agent-v1;roman=elot743;ipa=espeak
+numbers-money.s-n,τρία,τρεις / τρία,tria,tɾˈia,,2,el-agent-v1;roman=elot743;ipa=espeak
+numbers-money.s,τέσσερα,τέσσερις / τέσσερα,tessera,tˈeseɾˌa,,2,el-agent-v1;roman=elot743;ipa=espeak
+numbers-money.w,πέντε,,pente,pˈede,,2,el-agent-v1;roman=elot743;ipa=espeak
+numbers-money.li,έξι,,exi,ˈeksi,,2,el-agent-v1;roman=elot743;ipa=espeak
+numbers-money.q,επτά,εφτά,epta,eptˈa,,2,el-agent-v1;roman=elot743;ipa=espeak
+numbers-money.b,οκτώ,οχτώ,okto,oktˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+numbers-money.ji,εννέα,εννιά,ennea,enˈea,,2,el-agent-v1;roman=elot743;ipa=espeak
+numbers-money.sh,δέκα,,deka,ðˈeka,,2,el-agent-v1;roman=elot743;ipa=espeak
+numbers-money.y-b-i,εκατό,εκατόν,ekato,ˌekatˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+numbers-money.y-qi-n,χίλια,,chilia,çˈiʎa,,2,el-agent-v1;roman=elot743;ipa=espeak
+numbers-money.y-w-n,δέκα χιλιάδες,,deka chiliades,ðˈeka çiʎˈaðes,,2,el-agent-v1;roman=elot743;ipa=espeak
+numbers-money.b-n,μισό,,miso,misˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+atm-cash.where-is-an-atm,Πού υπάρχει ΑΤΜ;,Πού υπάρχει μηχάνημα ανάληψης;,Pou yparchei ATM;,pˈu ipˈaɾçi ˌalfatˌafmˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
+atm-cash.does-this-atm-take-foreign-cards,Δέχεται αυτό το ΑΤΜ ξένες κάρτες;,,Dechetai afto to ATM xenes kartes;,ðˈeçetˌe aftˈo to ˌalfatˌafmˈi ksˈenes kˈaɾtes,,2,el-agent-v1;roman=elot743;ipa=espeak
+atm-cash.the-atm-kept-my-card,Το ΑΤΜ κράτησε την κάρτα μου,,To ATM kratise tin karta mou,to ˌalfatˌafmˈi kɾˈatisˌe tiŋ ɡˈaɾta mu,,2,el-agent-v1;roman=elot743;ipa=espeak
+atm-cash.is-there-a-fee,Υπάρχει χρέωση;,,Yparchei chreosi;,ipˈaɾçi xɾˈeosˌi,,2,el-agent-v1;roman=elot743;ipa=espeak
+atm-cash.the-card-was-declined,Η κάρτα δεν έγινε δεκτή,,I karta den egine dekti,i kˈaɾta ðˈen ˈejinˌe ðektˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
+atm-cash.what-is-the-exchange-rate,Ποια είναι η ισοτιμία;,,Poia einai i isotimia;,pˈia ˈine i ˌisotimˈia,,2,el-agent-v1;roman=elot743;ipa=espeak
+atm-cash.no-money-came-out,Δεν βγήκαν χρήματα,,Den vgikan chrimata,ðˈen vjˈikan xɾˈimatˌa,,2,el-agent-v1;roman=elot743;ipa=espeak
+atm-cash.where-can-i-change-money,Πού μπορώ να αλλάξω χρήματα;,,Pou boro na allaxo chrimata;,pˈu boɾˈo n alˈakso xɾˈimatˌa,,2,el-agent-v1;roman=elot743;ipa=espeak
+atm-cash.the-machine-is-out-of-service,Το μηχάνημα δεν λειτουργεί,,To michanima den leitourgei,to mixˈanimˌa ðˈen lˌituɾjˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
+atm-cash.please-give-me-smaller-notes,"Μου δίνετε μικρότερα χαρτονομίσματα, παρακαλώ;",,"Mou dinete mikrotera chartonomismata, parakalo;","mu ðˈinetˌe mikɾˈoteɾˌa xˌaɾtonomˈismatˌa, pˌaɾakalˈo",,2,el-agent-v1;roman=elot743;ipa=espeak
+atm-cash.do-you-have-change,Έχετε ψιλά;,,Echete psila;,ˈeçetˌe psilˈa,,2,el-agent-v1;roman=elot743;ipa=espeak
+atm-cash.may-i-pay-in,Μπορώ να πληρώσω σε: {};,,Boro na pliroso se: {};,boɾˈo na pliɾˈoso se {},Can I pay in: {}?,2,el-agent-v1;roman=elot743;ipa=espeak
+atm-cash.please-charge-in-local-currency,"Χρεώστε σε τοπικό νόμισμα, παρακαλώ",,"Chreoste se topiko nomisma, parakalo","xɾeˈoste se tˌopikˈo nˈomismˌa, pˌaɾakalˈo",,2,el-agent-v1;roman=elot743;ipa=espeak
+atm-cash.where-can-i-get-coins,Πού μπορώ να βρω κέρματα;,,Pou boro na vro kermata;,pˈu boɾˈo na vɾˈo cˈeɾmatˌa,,2,el-agent-v1;roman=elot743;ipa=espeak
+atm-cash.is-there-a-minimum-for-cards,Ελάχιστο ποσό με κάρτα;,,Elachisto poso me karta;,elˈaçistˌo posˈo me kˈaɾta,,2,el-agent-v1;roman=elot743;ipa=espeak
+atm-cash.atm,ΑΤΜ,μηχάνημα ανάληψης,ATM,ˈatm,,2,el-agent-v1;roman=elot743;ipa=espeak
+atm-cash.banknote,χαρτονόμισμα,,chartonomisma,xˌaɾtonˈomismˌa,,2,el-agent-v1;roman=elot743;ipa=espeak
+atm-cash.coin,κέρμα,,kerma,cˈeɾma,,2,el-agent-v1;roman=elot743;ipa=espeak
+atm-cash.cash-only,μόνο μετρητά,,mono metrita,mˈono mˌetɾitˈa,,2,el-agent-v1;roman=elot743;ipa=espeak
+atm-cash.fee,χρέωση / προμήθεια,,chreosi / promitheia,xɾˈeosˌi / pɾomˈiθça,,2,el-agent-v1;roman=elot743;ipa=espeak
+atm-cash.change,ρέστα / ψιλά,,resta / psila,ɾˈesta / psilˈa,,2,el-agent-v1;roman=elot743;ipa=espeak
+atm-cash.exchange-rate,ισοτιμία,,isotimia,ˌisotimˈia,,2,el-agent-v1;roman=elot743;ipa=espeak
+atm-cash.bank,τράπεζα,,trapeza,tɾˈapezˌa,,2,el-agent-v1;roman=elot743;ipa=espeak
+atm-cash.money-exchange,ανταλλακτήριο,,antallaktirio,ˌadalaktˈiɾiˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+atm-cash.pin,κωδικός PIN,PIN,kodikos PIN,,,2,el-agent-v1;roman=elot743
+numbers-money.euro,ευρώ,,evro,evɾˈo,,2,euro-scope-v1;ipa=espeak
+numbers-money.euro-symbol,€,,evro,,,2,euro-scope-v1
+numbers-money.number-and-classifier-notes,"Οι αριθμοί συντίθενται: 11 = shíyī, 20 = èrshí, 21 = èrshíyī. Στο τηλέφωνο το 1 λέγεται yāo. Ανάμεσα σε αριθμό και ουσιαστικό μπαίνει υποχρεωτικά μετρική λέξη: gè (γενική), wèi (πρόσωπα), zhāng (εισιτήρια, επίπεδα), bēi (κούπες), píng (μπουκάλια). Πριν από μετρική λέξη το 2 είναι liǎng, όχι èr: liǎng zhāng piào, δύο εισιτήρια. Ο τόνος στο φωνήεν δηλώνει ύψος, όχι έμφαση. Χρήματα: kuài = γιουάν προφορικά, jiǎo / máo = 0,1 γιουάν, fēn = 0,01 γιουάν.",,,,,2,el-notes-v1
+numbers-money.number-and-classifier-notes-2,"Οι αριθμοί συντίθενται: 11 = jūichi, 20 = nijū, 21 = nijūichi. Ο μετρικός δείκτης ακολουθεί υποχρεωτικά τον αριθμό: -tsu (αντικείμενα), -mai (επίπεδα), -hon (μακρόστενα), -nin (πρόσωπα), -hai (κούπες). Στο τηλέφωνο: 0 = zero ή maru, 4 = yon, 7 = nana, 9 = kyū, και η παύλα διαβάζεται no. Το φωνήεν με γραμμή από πάνω είναι μακρό, δεν τονίζεται.",,,,,2,el-notes-v1

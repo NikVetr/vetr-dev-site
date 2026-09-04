@@ -207,6 +207,20 @@ function regionName(code) {
 }
 
 /**
+ * A `;`-separated `regions` cell as a readable list in the interface language.
+ *
+ * `gallery.spokenIn` is the accessible name of the flag row, and it is the only
+ * place the country list is ever *said* rather than drawn -- so it was the one
+ * place the raw codes reached a reader: "English is spoken in GB, US, CA, AU".
+ * Both callers pass the registry cell straight through, so the join belongs here
+ * beside `regionName` rather than in each of them.
+ * @param {string} regions the `regions` cell of `data/registry/languages.csv`
+ */
+export function regionList(regions) {
+  return regions.split(';').filter(Boolean).map(regionName).join(', ');
+}
+
+/**
  * Translate static markup. `data-i18n` sets text; `data-i18n-title` and
  * `data-i18n-label` set the `title` and `aria-label` attributes, which need
  * translating just as much and are the ones people forget.

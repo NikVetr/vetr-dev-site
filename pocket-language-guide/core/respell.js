@@ -172,8 +172,18 @@ const STRESS = { 'ˈ': 1, 'ˌ': 2 };
  * Unicode default. Without it both length devices were silent no-ops on Turkish's
  * /ɯː əː ɤː/. **A new table using `stress: 'acute'` or `length` should check its
  * own vowels are in here before designing around the behaviour.**
+ *
+ * The Greek vowels are here for the same reason the Cyrillic ones are, and Greek is
+ * the sharpest case of it: the acute *is* the orthography. Monotonic Greek accents
+ * every polysyllable exactly once, and every source that writes a foreign
+ * pronunciation in Greek letters puts the tonos on the source-stressed syllable, so
+ * a Greek respelling with no mark is not a possible Greek word rather than merely
+ * an unmarked one. `ι` and `υ` both appear because both spell /i/, and `ϊ ϋ` because
+ * the diaeresis is what keeps a vowel pair from being read as a digraph -- `αϊ` is
+ * two syllables where `αι` is /e/. NFC composes each of them with U+0301 into the
+ * single tonos codepoint the corpus is normalised to.
  */
-const VOWEL_LETTERS = /[aeiouáéíóúàèìòùâêîôûäëïöüãõẽĩũıywаеёиоуыэюя]+/iu;
+const VOWEL_LETTERS = /[aeiouáéíóúàèìòùâêîôûäëïöüãõẽĩũıywаеёиоуыэюяαεηιουωάέήίόύώϊϋΐΰ]+/iu;
 /**
  * Letters that already carry the mark, so a second one would produce a character
  * no orthography has.
@@ -185,7 +195,7 @@ const VOWEL_LETTERS = /[aeiouáéíóúàèìòùâêîôûäëïöüãõẽĩũ
  * Portuguese never stacks a mark on a tilde, so 59 rows were printing `ã-fã́` and
  * `a-nṍs`.
  */
-const ACCENTED = /[áéíóúàèìòùёãõẽĩũâêîôû]/i;
+const ACCENTED = /[áéíóúàèìòùёãõẽĩũâêîôûάέήίόύώΐΰ]/i;
 /** A mark of either kind, for stripping one back off. */
 const MARKS = /[\u0300-\u036f]/gu;
 

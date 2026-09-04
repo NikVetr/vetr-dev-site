@@ -1,0 +1,12 @@
+label,text
+_frame,{region}: {numbers}
+all services,ενιαίος αριθμός
+police,αστυνομία
+ambulance,ασθενοφόρο
+fire,πυροσβεστική
+also works,ισχύει επίσης
+fire and ambulance,πυροσβεστική + ασθενοφόρο
+medical,ιατρική βοήθεια
+tourist police,τουριστική αστυνομία
+police and ambulance,αστυνομία + ασθενοφόρο
+gendarmerie,χωροφυλακή

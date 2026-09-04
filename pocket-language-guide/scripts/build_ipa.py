@@ -317,7 +317,7 @@ DATA = ROOT / "data"
 # and `fr`/`pt` without a region raise "not supported".
 VOICES = {"en": "en-us", "es": "es-419", "fr": "fr-fr", "de": "de", "pt": "pt-br",
           "it": "it", "id": "id", "sw": "sw", "tr": "tr", "ru": "ru", "hi": "hi",
-          "ar": "ar", "vi": "vi"}
+          "ar": "ar", "vi": "vi", "el": "el"}
 
 # Languages read off a curated romanisation column instead, and which column.
 ROMANISED = {"zh-Hans": "romanization_pinyin", "ja": "romanization_hepburn",
@@ -336,7 +336,7 @@ ROMANISED = {"zh-Hans": "romanization_pinyin", "ja": "romanization_hepburn",
 STRESS = {"fr": "phrase", "ko": "none", "vi": "none", "ja": "none",
           "zh-Hans": "none", "th": "none"}
 
-NON_LATIN = {"zh-Hans", "ja", "ko", "th", "hi", "ar", "ru"}
+NON_LATIN = {"zh-Hans", "ja", "ko", "th", "hi", "ar", "ru", "el"}
 
 
 # ------------------------------------------------------------------- alphabet
@@ -412,6 +412,22 @@ REPAIR = {
     # and Furcht. Long /uː/ is unaffected (Kurs kˈuːɾs, Durst dˈuːɾst). So `??` is
     # `ʊɾ`, written the same way espeak writes the rest of the series.
     "de": [("??", "ʊɾ")],
+    # Greek writes a few consonants double and pronounces every one of them single
+    # -- and espeak follows the spelling for exactly one of them. Of the doubles in
+    # the corpus (λλ, μμ, ππ, ββ, νν, γγ, κκ, ττ) it correctly gives a single
+    # consonant for all but σσ: `θάλασσα` comes out `θˈalassˌa` and `τέσσερα`
+    # `tˈesserˌa`. Modern Greek has no geminate, so a doubled `s` here is
+    # orthography leaking through, and it would put a reader's respelling one
+    # syllable out on `περισσότερο`.
+    # And espeak writes the rhotic as `r`, the trill, where Modern Greek has a
+    # single rhotic phoneme realised as an alveolar *tap*. The symbol is free for
+    # Greek -- there is no contrast for it to carry -- and it is not free for the
+    # readers: the English table spells a non-initial `r` as `rr`, fitted against
+    # the curated Italian sheet where the trill is real, so 677 Greek rows were
+    # telling an English reader to roll a tap (`kah-lee-MEH-rra`), and a Spanish or
+    # Italian reader got their own doubled rhotic for the same reason. `ɾ` is what
+    # the Spanish, Portuguese and Turkish columns already carry for the same sound.
+    "el": [("ss", "s"), ("r", "ɾ")],
     # Vietnamese's three centring diphthongs -- ia/iê/yê, ưa/ươ, ua/uô -- are
     # *falling*: Kirby (2011: 384) gives the inventory as nine vowel qualities and
     # "three falling diphthongs /iə ɯə uə/", the nucleus first and a centring
@@ -874,9 +890,21 @@ def apply_stress(ipa, policy):
         # French stress is phrasal: the last word of the run carries it and the
         # others carry nothing. Marking each word is wrong by design, not by error
         # -- 177 of 466 French words in the curated sheets have no capital at all.
-        words = ["".join(c for c in w if c not in STRESS_MARKS) for w in words[:-1]] \
-            + words[-1:]
-        return " ".join(words)
+        #
+        # And the word that keeps its mark keeps exactly one, the *last*. espeak
+        # renders a hyphenated compound as a single IPA word and marks both halves
+        # -- `sèche-linge` is `sˈɛʃlˈɛ̃ʒ`, `venez-vous` is `vənˈevˈu` -- and this
+        # branch used to return before the one-primary-per-word pass below, so 26
+        # rows carried two. Every reader saw it: two capitals for an English reader,
+        # two acutes for a Spanish, Russian or Greek one, which is a spelling no
+        # orthography has. The last rather than the first, because a phrasal accent
+        # falls at the end of its group, which is where these compounds put it.
+        head = ["".join(c for c in w if c not in STRESS_MARKS) for w in words[:-1]]
+        tail = words[-1]
+        last = tail.rfind("ˈ")
+        if last >= 0:
+            tail = tail[:last].replace("ˈ", "") + tail[last:]
+        return " ".join(head + [tail])
     # espeak occasionally marks two primaries in one word. Keep the first.
     out = []
     for word in words:
@@ -887,13 +915,79 @@ def apply_stress(ipa, policy):
     return " ".join(out)
 
 
-def normalise(ipa, code):
+# ---------------------------------------------------------------- Greek stress
+# espeak's Greek dictionary flags a closed class of function words as unstressable
+# and gives them a *secondary* mark and no primary one at all: `είμαι` is `ˌime`,
+# `έχετε` is `ˌeçetˌe`, `από` is `apˌo`. In connected speech that is defensible --
+# they are clitic-like -- but a Greek word with no stress at all is not a possible
+# Greek word: monotonic orthography accents every polysyllable, exactly once. So
+# `Έχετε` printed with no capital for an English reader and no acute for a Russian
+# one, on 8.5% of the words in the pack and specifically the most frequent ones.
+#
+# The position is recoverable, and not from espeak: it is in the *spelling*, which
+# marks it unambiguously. Counting nuclei from the end of the Greek word gives the
+# syllable, and Greek IPA has one vowel character per syllable -- no length marks,
+# no phonemic diphthongs, glides written `j`/`w` -- so the same count lands on the
+# right vowel in the transcription. The mark goes immediately before that vowel
+# rather than before the onset, which is where espeak itself puts it (`θˈelo`,
+# `apˈo`), so the column stays internally consistent.
+EL_ACCENTED = "άέήίόύώΐΰ"
+EL_VOWELS = "αεηιουω" + EL_ACCENTED + "ϊϋ"
+# A vowel digraph is one nucleus. An accent on its *first* element breaks it
+# (`ρολόι` is ro-LO-i), on its second does not (`είναι` is EE-neh), so only the
+# unaccented-first forms are listed.
+EL_DIGRAPHS = {a + b for a in "αεουηω" for b in "ιυίύ"} - {"ηι", "ωι", "ηί", "ωί"}
+
+
+def el_nucleus_from_end(word):
+    """How many nuclei follow the accented one, or None if the word has no accent."""
+    low = word.lower()
+    nuclei, i = [], 0
+    while i < len(low):
+        if low[i:i + 2] in EL_DIGRAPHS:
+            nuclei.append(low[i:i + 2])
+            i += 2
+        elif low[i] in EL_VOWELS:
+            nuclei.append(low[i])
+            i += 1
+        else:
+            i += 1
+    marked = [n for n, v in enumerate(nuclei) if any(c in EL_ACCENTED for c in v)]
+    return len(nuclei) - 1 - marked[0] if marked else None
+
+
+def el_stress(text, ipa):
+    """Put back the primary stress espeak's function-word entries dropped.
+
+    Word-aligned, and it declines to guess: if espeak returned a different number
+    of words than the text has, or the vowel count cannot reach the syllable the
+    spelling names, the transcription is left exactly as it came.
+    """
+    words, out = text.split(), []
+    if len(words) != len(ipa.split()):
+        return ipa
+    for word, unit in zip(words, ipa.split()):
+        k = el_nucleus_from_end(word)
+        vowels = [n for n, c in enumerate(unit) if c in VOWELS]
+        if "ˈ" in unit or k is None or len(vowels) <= k:
+            out.append(unit)
+            continue
+        at = vowels[-1 - k]
+        if at and unit[at - 1] == "ˌ":                 # replace, never stack
+            unit, at = unit[:at - 1] + unit[at:], at - 1
+        out.append(unit[:at] + "ˈ" + unit[at:])
+    return " ".join(out)
+
+
+def normalise(ipa, code, text=""):
     for old, new in REPAIR.get(code, []):
         ipa = ipa.replace(old, new)
     for old, new in FOLD:
         ipa = ipa.replace(old, new)
     if code == "vi":
         ipa = " ".join(vi_tone(t) for t in ipa.split())
+    if code == "el":
+        ipa = el_stress(text, ipa)
     return apply_stress(ipa, STRESS.get(code, "keep"))
 
 
@@ -1080,7 +1174,7 @@ def language_name_ipa(locales, subjects, rows):
         transcribe, method = route(locale, [v for one in parts.values()
                                             for kind, v in one if kind == "text"])
         for subject, one in parts.items():
-            ipa = assemble([(kind, normalise(transcribe(value) or "", locale)
+            ipa = assemble([(kind, normalise(transcribe(value) or "", locale, value)
                              if kind == "text" else value)
                             for kind, value in one])
             ipa = unicodedata.normalize("NFC", re.sub(r"\s+", " ", ipa).strip())
@@ -1179,6 +1273,9 @@ GRADE = {
     "id": ("A", "near-phonemic; stress 92.3%"),
     "sw": ("A", "near-phonemic; the syllable gap is prenasalised onsets (n-JEE-ah), a reader's rule"),
     "de": ("A", "shallow and stress 92.6%; the coda-r rows this build refused are repaired in REPAIR"),
+    "el": ("A", "shallow in the direction that matters: Greek spelling is many-to-one for /i/ and /o/ "
+           "but reading it is deterministic, and the accent marks the stress. No curated sheet, so "
+           "the syllable column is blank; the two espeak artefacts are repaired above"),
     "tr": ("B", "phonemic orthography, but espeak's Turkish stress is 68.1%"),
     "pt": ("B", "pt-br; vowel reduction is phonetic detail the curated sheet smooths away"),
     "en": ("B", "en-us; deep orthography, but espeak's English lexicon is its best"),
@@ -1247,8 +1344,8 @@ def build(code):
     bad = Counter()
     flagged = []                                  # rows a reviewer should read first
     for path, index, row, parts in plan:
-        ipa = assemble([(kind, normalise(transcribe(value) or "", code) if kind == "text"
-                         else value) for kind, value in parts])
+        ipa = assemble([(kind, normalise(transcribe(value) or "", code, value)
+                         if kind == "text" else value) for kind, value in parts])
         ipa = unicodedata.normalize("NFC", re.sub(r"\s+", " ", ipa).strip())
         # `check_alphabet` is a whitelist of what is IPA; `check_route` is what this
         # route can never legitimately produce. Both refuse the row, because a

@@ -1,0 +1,29 @@
+concept_id,text,text_alt,romanization_elot,ipa,literal,confidence,provenance
+dietary-needs.no-meat,Χωρίς κρέας,,Choris kreas,xoɾˈis kɾˈeas,,2,el-agent-v1;roman=elot743;ipa=espeak
+dietary-needs.no-eggs,Χωρίς αυγά,,Choris avga,xoɾˈis avɣˈa,,2,el-agent-v1;roman=elot743;ipa=espeak
+dietary-needs.not-spicy,Όχι πικάντικο,,Ochi pikantiko,ˈoçi pikˈadikˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+dietary-needs.less-spicy,Λιγότερο πικάντικο,,Ligotero pikantiko,liɣˈoteɾˌo pikˈadikˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+dietary-needs.no-peanuts,Χωρίς αράπικα φιστίκια,Χωρίς φιστίκια αράπικα,Choris arapika fistikia,xoɾˈis aɾˈapikˌa fistˈica,"peanuts, not pistachios",2,el-agent-v1;roman=elot743;ipa=espeak
+dietary-needs.no-nuts,Χωρίς ξηρούς καρπούς,,Choris xirous karpous,xoɾˈis ksiɾˈus kaɾpˈus,includes peanuts in Greek,2,el-agent-v1;roman=elot743;ipa=espeak
+dietary-needs.no-seafood,Χωρίς ψάρι και θαλασσινά,,Choris psari kai thalassina,xoɾˈiz psˈaɾi ke θˌalasinˈa,θαλασσινά alone excludes fish,2,el-agent-v1;roman=elot743;ipa=espeak
+dietary-needs.i-am-vegetarian,Είμαι χορτοφάγος,,Eimai chortofagos,ˈime xˌoɾtofˈaɣos,,2,el-agent-v1;roman=elot743;ipa=espeak
+dietary-needs.i-am-vegan,Είμαι βίγκαν: δεν τρώω κανένα ζωικό προϊόν,Είμαι αυστηρά χορτοφάγος,Eimai vigkan: den troo kanena zoiko proion,ˈime vˈiŋɡan ðˈen dɾˈoo kanˈena zˌoikˈo pɾoɪˈon,no animal product at all,2,el-agent-v1;roman=elot743;ipa=espeak
+dietary-needs.i-do-not-eat,Δεν τρώω: {},,Den troo: {},ðˈen dɾˈoo {},I do not eat: {},2,el-agent-v1;roman=elot743;ipa=espeak
+dietary-needs.i-am-allergic-to,Έχω αλλεργία σε: {},,Echo allergia se: {},ˈexo ˌaleɾjˈia se {},I am allergic to: {},2,el-agent-v1;roman=elot743;ipa=espeak
+dietary-needs.does-it-contain-fish-stock,Έχει ζωμό ψαριού;,,Echei zomo psariou;,ˈeçi zomˈo psˌaɾiˈu,,2,el-agent-v1;roman=elot743;ipa=espeak
+dietary-needs.does-it-contain-pork-stock,Έχει ζωμό ή λίπος χοιρινού;,,Echei zomo i lipos choirinou;,ˈeçi zomˈo ˈi lˈipos çˌiɾinˈu,,2,el-agent-v1;roman=elot743;ipa=espeak
+dietary-needs.i-have-a-severe-allergy-to,Έχω σοβαρή αλλεργία (αναφυλαξία) σε: {},,Echo sovari allergia (anafylaxia) se: {},ˈexo sˌovaɾˈi ˌaleɾjˈi ˌanafˌilaksˈia se {},"anaphylaxis, not mild allergy",2,el-agent-v1;roman=elot743;ipa=espeak
+food-ordering.table-for-two,Ένα τραπέζι για δύο,,Ena trapezi gia dyo,ˈena tɾapˈezi jˈa ðˈio,,2,el-agent-v1;roman=elot743;ipa=espeak
+food-ordering.is-a-table-available,Υπάρχει ελεύθερο τραπέζι;,,Yparchei elefthero trapezi;,ipˈaɾçi elˈefθeɾˌo tɾapˈezi,,2,el-agent-v1;roman=elot743;ipa=espeak
+food-ordering.menu-please,"Τον κατάλογο, παρακαλώ",,"Ton katalogo, parakalo","toŋ ɡatˈaloɣˌo, pˌaɾakalˈo",,2,el-agent-v1;roman=elot743;ipa=espeak
+food-ordering.i-want-this,Θέλω αυτό,,Thelo afto,θˈelo aftˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+food-ordering.do-you-have-drinking-water,Έχετε πόσιμο νερό;,,Echete posimo nero;,ˈeçetˌe pˈosimˌo neɾˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+food-ordering.to-go-please,"Σε πακέτο, παρακαλώ",,"Se paketo, parakalo","se pacˈeto, pˌaɾakalˈo",in a packet = takeaway,2,el-agent-v1;roman=elot743;ipa=espeak
+food-ordering.check-please,"Τον λογαριασμό, παρακαλώ",,"Ton logariasmo, parakalo","ton lˌoɣaɾˌiasmˈo, pˌaɾakalˈo",,2,el-agent-v1;roman=elot743;ipa=espeak
+food-ordering.does-it-contain,Περιέχει: {};,,Periechei: {};,pˌeɾiˈeçi {},Does it contain: {}?,2,el-agent-v1;roman=elot743;ipa=espeak
+food-ordering.is-this-vegetarian,Είναι χορτοφαγικό αυτό;,,Einai chortofagiko afto;,ˈine xˌoɾtofˌajikˈo aftˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+food-ordering.what-do-you-recommend,Τι προτείνετε;,,Ti proteinete;,tˈi pɾotˈinetˌe,,2,el-agent-v1;roman=elot743;ipa=espeak
+food-ordering.water-please,"Νερό, παρακαλώ",,"Nero, parakalo","neɾˈo, pˌaɾakalˈo",,2,el-agent-v1;roman=elot743;ipa=espeak
+food-ordering.can-a-vegetarian-eat-this,Μπορεί να το φάει χορτοφάγος;,,Borei na to faei chortofagos;,boɾˈi na to fˈai xˌoɾtofˈaɣos,,2,el-agent-v1;roman=elot743;ipa=espeak
+dietary-needs.no-pork,Χωρίς χοιρινό και αλλαντικά,,Choris choirino kai allantika,xoɾˈis çˌiɾinˈo ke ˌaladikˈa,also no ham or cured meat,2,el-agent-v1;roman=elot743;ipa=espeak
+dietary-needs.is-this-halal,Είναι χαλάλ αυτό;,,Einai chalal afto;,ˈine xalˈal aftˈo,,2,el-agent-v1;roman=elot743;ipa=espeak

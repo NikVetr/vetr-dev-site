@@ -41,3 +41,5 @@ atm-cash.exchange-rate,il tasso di cambio,il cambio,il tˈasso dɪ kˈambio,,2,i
 atm-cash.bank,la banca,,la bˈanka,,2,it-agent-v1;ipa=espeak
 atm-cash.money-exchange,Cambio valuta,,kˈambio vˈalʊta,,2,it-agent-v1;ipa=espeak
 atm-cash.pin,il PIN,il codice PIN,il pˈin,,2,it-agent-v1;ipa=espeak
+numbers-money.euro,euro,,ˈɛʊro,,2,euro-scope-v1;ipa=espeak
+numbers-money.euro-symbol,€,,,,2,euro-scope-v1

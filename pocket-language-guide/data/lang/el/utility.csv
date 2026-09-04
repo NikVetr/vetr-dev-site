@@ -1,0 +1,16 @@
+concept_id,text,text_alt,romanization_elot,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,Θέλω να πάω εδώ: {},,Thelo na pao edo: {},θˈelo na pˈao eðˈo {},I want to go here: {},2,el-agent-v1;roman=elot743;ipa=espeak
+utility-templates.please-give-me,"Δώστε μου, παρακαλώ: {}",,"Doste mou, parakalo: {}","ðˈoste mu, pˌaɾakalˈo {}",Please give me: {},2,el-agent-v1;roman=elot743;ipa=espeak
+utility-templates.may-i,Επιτρέπεται: {};,,Epitrepetai: {};,ˌepitɾˈepetˌe {},Is {} allowed?,2,el-agent-v1;roman=elot743;ipa=espeak
+utility-templates.please-do-not-add,Μην βάλετε: {},,Min valete: {},mˈin vˈaletˌe {},Do not put in: {},2,el-agent-v1;roman=elot743;ipa=espeak
+utility-templates.do-you-have,Έχετε: {};,,Echete: {};,ˈeçetˌe {},Do you have: {}?,2,el-agent-v1;roman=elot743;ipa=espeak
+utility-templates.please-write-the-number,"Γράψτε τον αριθμό, παρακαλώ",,"Grapste ton arithmo, parakalo","ɣɾˈapste ton ˌaɾiθmˈo, pˌaɾakalˈo",,2,el-agent-v1;roman=elot743;ipa=espeak
+utility-templates.i-need,Χρειάζομαι: {},,Chreiazomai: {},xɾçˈazomˌe {},I need: {},2,el-agent-v1;roman=elot743;ipa=espeak
+utility-templates.is-there-nearby,Υπάρχει εδώ κοντά: {};,,Yparchei edo konta: {};,ipˈaɾçi eðˈo kodˈa {},Is there nearby: {}?,2,el-agent-v1;roman=elot743;ipa=espeak
+utility-templates.how-much-is,Πόσο κάνει: {};,,Poso kanei: {};,pˈoso kˈani {},How much is: {}?,2,el-agent-v1;roman=elot743;ipa=espeak
+utility-templates.is-this,Αυτό είναι: {};,,Afto einai: {};,aftˈo ˈine {},Is this: {}?,2,el-agent-v1;roman=elot743;ipa=espeak
+utility-templates.please,"{}, παρακαλώ",,"{}, parakalo","{}, pˌaɾakalˈo",,2,el-agent-v1;roman=elot743;ipa=espeak
+utility-templates.i-am-looking-for,Ψάχνω: {},,Psachno: {},psˈaxno {},I am looking for: {},2,el-agent-v1;roman=elot743;ipa=espeak
+utility-templates.do-you-accept,Δέχεστε: {};,,Decheste: {};,ðˈeçestˌe {},Do you accept: {}?,2,el-agent-v1;roman=elot743;ipa=espeak
+utility-templates.i-cannot-find,Δεν βρίσκω: {},,Den vrisko: {},ðˈen vɾˈisko {},I cannot find: {},2,el-agent-v1;roman=elot743;ipa=espeak
+utility-templates.there-is-a-problem-with,Υπάρχει πρόβλημα με: {},,Yparchei provlima me: {},ipˈaɾçi pɾˈovlimˌa me {},There is a problem with: {},2,el-agent-v1;roman=elot743;ipa=espeak

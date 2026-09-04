@@ -1,0 +1,32 @@
+concept_id,text,text_alt,romanization_elot,ipa,literal,confidence,provenance
+payment-receipt.pay-by-card,Με κάρτα;,,Me karta;,me kˈaɾta,,2,el-agent-v1;roman=elot743;ipa=espeak
+payment-receipt.pay-cash,Με μετρητά;,,Me metrita;,me mˌetɾitˈa,,2,el-agent-v1;roman=elot743;ipa=espeak
+payment-receipt.pay-by-qr-code,Με κωδικό QR;,,Me kodiko QR;,,,2,el-agent-v1;roman=elot743
+payment-receipt.a-receipt-please,"Απόδειξη, παρακαλώ",,"Apodeixi, parakalo","apˈoðiksˌi, pˌaɾakalˈo",,2,el-agent-v1;roman=elot743;ipa=espeak
+payment-receipt.please-write-the-number,Γράψτε τον αριθμό,,Grapste ton arithmo,ɣɾˈapste ton ˌaɾiθmˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+payment-receipt.how-much-in-total,Πόσο κάνει συνολικά;,,Poso kanei synolika;,pˈoso kˈani sˌinolikˈa,,2,el-agent-v1;roman=elot743;ipa=espeak
+payment-receipt.can-we-pay-separately,Χωριστοί λογαριασμοί;,,Choristoi logariasmoi;,xˌoɾistˈi lˌoɣaɾˌiasmˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
+payment-receipt.is-tax-included,Με ΦΠΑ;,Περιλαμβάνεται ο ΦΠΑ;,Me FPA;,me fpˈa,VAT included?,2,el-agent-v1;roman=elot743;ipa=espeak
+payment-receipt.my-card-was-declined,Η κάρτα μου απορρίφθηκε,,I karta mou aporrifthike,i kˈaɾta mu ˌapoɾˈifθicˌe,,2,el-agent-v1;roman=elot743;ipa=espeak
+payment-receipt.the-bill-is-wrong,Ο λογαριασμός είναι λάθος,,O logariasmos einai lathos,o lˌoɣaɾˌiasmˈos ˈine lˈaθos,,2,el-agent-v1;roman=elot743;ipa=espeak
+payment-receipt.i-already-paid,Έχω πληρώσει ήδη,,Echo plirosei idi,ˈexo pliɾˈosi ˈiði,,2,el-agent-v1;roman=elot743;ipa=espeak
+shopping.i-am-just-looking,Απλώς κοιτάζω,,Aplos koitazo,aplˈos citˈazo,,2,el-agent-v1;roman=elot743;ipa=espeak
+shopping.how-much-is-this,Πόσο κάνει αυτό;,,Poso kanei afto;,pˈoso kˈani aftˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+shopping.that-is-too-expensive,Είναι πολύ ακριβό,,Einai poly akrivo,ˈine polˈi ˌakɾivˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+shopping.can-it-be-a-little-cheaper,Γίνεται λίγο φθηνότερα;,,Ginetai ligo fthinotera;,jˈinetˌe lˈiɣo fθinˈoteɾˌa,,2,el-agent-v1;roman=elot743;ipa=espeak
+shopping.is-there-a-discount,Υπάρχει έκπτωση;,,Yparchei ekptosi;,ipˈaɾçi ˈekptosˌi,,2,el-agent-v1;roman=elot743;ipa=espeak
+shopping.where-do-i-pay,Πού πληρώνω;,,Pou plirono;,pˈu pliɾˈono,,2,el-agent-v1;roman=elot743;ipa=espeak
+shopping.i-will-take-this,Θα πάρω αυτό,,Tha paro afto,θa pˈaɾo aftˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+shopping.what-is-this,Τι είναι αυτό;,,Ti einai afto;,tˈi ˈine aftˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+shopping.where-can-i-buy,Πού μπορώ να αγοράσω: {};,,Pou boro na agoraso: {};,pˈu boɾˈo n ˌaɣoɾˈaso {},Where can I buy: {}?,2,el-agent-v1;roman=elot743;ipa=espeak
+shopping.do-you-have-this-in-stock,Το έχετε διαθέσιμο;,,To echete diathesimo;,to ˈeçetˌe ðˌiaθˈesimˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+shopping.two-of-these,"Δύο από αυτά, παρακαλώ",,"Dyo apo afta, parakalo","ðˈio apˈo aftˈa, pˌaɾakalˈo",,2,el-agent-v1;roman=elot743;ipa=espeak
+shopping.what-is-it-made-of,Από τι είναι φτιαγμένο;,,Apo ti einai ftiagmeno;,apˈo tˈi ˈine ftˌiaɣmˈeno,,2,el-agent-v1;roman=elot743;ipa=espeak
+color-size-returns.do-you-have-another-color,Έχετε άλλο χρώμα;,,Echete allo chroma;,ˈeçetˌe ˈalo xɾˈoma,,2,el-agent-v1;roman=elot743;ipa=espeak
+color-size-returns.do-you-have-another-size,Έχετε άλλο μέγεθος;,,Echete allo megethos;,ˈeçetˌe ˈalo mˈejeθˌos,,2,el-agent-v1;roman=elot743;ipa=espeak
+color-size-returns.may-i-try-it-on,Μπορώ να το δοκιμάσω;,,Boro na to dokimaso;,boɾˈo na to ðˌocimˈaso,,2,el-agent-v1;roman=elot743;ipa=espeak
+color-size-returns.can-i-return-it,Μπορώ να το επιστρέψω;,,Boro na to epistrepso;,boɾˈo na to ˌepistɾˈepso,,2,el-agent-v1;roman=elot743;ipa=espeak
+color-size-returns.can-i-exchange-it,Μπορώ να το αλλάξω;,,Boro na to allaxo;,boɾˈo na to alˈakso,,2,el-agent-v1;roman=elot743;ipa=espeak
+color-size-returns.do-you-have-a-bag,Έχετε μια σακούλα;,,Echete mia sakoula;,ˈeçetˌe mɲa sakˈula,,2,el-agent-v1;roman=elot743;ipa=espeak
+tax-refund.can-i-get-a-tax-refund,Μπορώ να πάρω επιστροφή ΦΠΑ;,,Boro na paro epistrofi FPA;,boɾˈo na pˈaɾo ˌepistɾofˈi fˌipˌiˈalfa,refund of VAT,2,el-agent-v1;roman=elot743;ipa=espeak
+tax-refund.is-tax-free-shopping-available,Κάνετε αφορολόγητες αγορές;,,Kanete aforologites agores;,kˈanetˌe ˌafoɾolˈojitˌes ˌaɣoɾˈes,,2,el-agent-v1;roman=elot743;ipa=espeak

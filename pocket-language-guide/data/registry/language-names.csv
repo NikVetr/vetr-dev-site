@@ -1,6 +1,7 @@
 locale,bcp47,name,romanization,ipa
 ar,ar,العربية,al-ʿarabīyah,ʔalʕaɹˈabiːjˌa
 ar,de,,al-almānīyah,ʔalʔlmaːnˈijjah
+ar,el,,al-yūnānīyah,ʔaljˌuːnaːnˈijjah
 ar,en,,al-injilīzīyah,ʔalʔˌinɡliˈizijˌah
 ar,es,,al-isbānīyah,ʔalʔsbaːnˈijjah
 ar,fr,,al-faransīyah,ʔalfrnsˈijjah
@@ -18,6 +19,7 @@ ar,vi,,al-fītnāmīyah,ʔalfˌiːatnaːmˈijjah
 ar,zh-Hans,,al-ṣīnīyah,ʔas̪s̪ˈiːniːjˌa
 de,ar,,,arˈɑbɪʃ
 de,de,Deutsch,,dˈɔøtʃ
+de,el,,,ɡɾˈiːçɪʃ
 de,en,,,ˈɛŋlɪʃ
 de,es,,,ʃpˈɑnɪʃ
 de,fr,,,frantsˈøːzɪʃ
@@ -33,8 +35,27 @@ de,th,,,tˈaɪlˌɛndɪʃ
 de,tr,,,tˈyɾkɪʃ
 de,vi,,,vˌɪɛtnamˈeːzɪʃ
 de,zh-Hans,,,çiːnˈeːzɪʃ
+el,ar,,Aravika,ˌaɾavikˈa
+el,de,,Germanika,jˌeɾmanikˈa
+el,el,Ελληνικά,Ellinika,ˌelinikˈa
+el,en,,Anglika,ˌaŋɡlikˈa
+el,es,,Ispanika,ˌispanikˈa
+el,fr,,Gallika,ɣˌalikˈa
+el,hi,,Chinti,çˈidi
+el,id,,Indonisiaka,ˌinðonˌisjakˈa
+el,it,,Italika,ˌitalikˈa
+el,ja,,Iaponika,ˌiapˌonikˈa
+el,ko,,Koreatika,kˌoɾeˌatikˈa
+el,pt,,Portogalika,pˌoɾtoɣˌalikˈa
+el,ru,,Rosika,ɾˌosikˈa
+el,sw,,Souachili,sˌuaçˈili
+el,th,,Tailandika,tˌaɪlanðikˈa
+el,tr,,Tourkika,tˌuɾcikˈa
+el,vi,,Vietnamika,vˌietnˌamikˈa
+el,zh-Hans,,Kinezika,cˌinezikˈa
 en,ar,,,ˈæɹɐbˌɪk
 en,de,,,dʒˈɜːmən
+en,el,,,ɡɹˈiːk
 en,en,English,,ˈɪŋɡlɪʃ
 en,es,,,spˈænɪʃ
 en,fr,,,fɹˈɛntʃ
@@ -52,6 +73,7 @@ en,vi,,,vˌiːɛtnəmˈiːz
 en,zh-Hans,,,tʃaɪnˈiːz
 es,ar,,,ˈaɾabe
 es,de,,,ˌalemˈan
+es,el,,,ɡɾiˈeɡo
 es,en,,,iŋɡlˈes
 es,es,español,,ˌespaɲˈol
 es,fr,,,fɾansˈes
@@ -69,6 +91,7 @@ es,vi,,,bjˌetnamˈita
 es,zh-Hans,,,tʃˈino
 fr,ar,,,aʁˈab
 fr,de,,,almˈɑ̃
+fr,el,,,ɡʁˈɛk
 fr,en,,,ɑ̃ɡlˈɛ
 fr,es,,,ɛspanjˈɔl
 fr,fr,français,,fʁɑ̃sˈɛ
@@ -86,6 +109,7 @@ fr,vi,,,vjɛtnamjˈɛ̃
 fr,zh-Hans,,,ʃinwˈa
 hi,ar,,arbī,ˈʌɾbˌi
 hi,de,,jarman,ɟˈʌrmən
+hi,el,,yūnānī,juːnˈaːni
 hi,en,,aṁgrezī,ʌŋɡɾˈeːzi
 hi,es,,speniś,spˈeːnɪʃ
 hi,fr,,freṁc,fɾˈẽːc
@@ -103,6 +127,7 @@ hi,vi,,viyatnāmī,ʋˌɪjətnˈaːmi
 hi,zh-Hans,,cīnī,cˈiːni
 id,ar,,,ˈarab
 id,de,,,dʒˈɛrman
+id,el,,,junˈani
 id,en,,,ˈiŋɡris
 id,es,,,spˈaɲol
 id,fr,,,prˈantʃis
@@ -120,6 +145,7 @@ id,vi,,,vˈitnam
 id,zh-Hans,Mandarin,,mandˈarin
 it,ar,,,ˈaɾabo
 it,de,,,tedˈesko
+it,el,,,ɡrˈɛko
 it,en,,,iŋɡlˈeze
 it,es,,,spaɲˈɔlo
 it,fr,,,frantʃˈeze
@@ -137,6 +163,7 @@ it,vi,,,vjetnamˈita
 it,zh-Hans,,,tʃinˈeze
 ja,ar,,arabiago,aɾabiaɡo
 ja,de,,doitsugo,doitsɯɡo
+ja,el,,girishago,ɡiɾiɕaɡo
 ja,en,,eigo,eiɡo
 ja,es,,supeingo,sɯpeiɴɡo
 ja,fr,,furansugo,ɸɯɾaɴsɯɡo
@@ -154,6 +181,7 @@ ja,vi,,betonamugo,betonamɯɡo
 ja,zh-Hans,,chūgokugo,tɕɯːɡokɯɡo
 ko,ar,,arabeo,aɾabʌ
 ko,de,,dogireo,toɡiɾʌ
+ko,el,,geuriseu-eo,kɯɾisɯʌ
 ko,en,,yeongeo,jʌŋʌ
 ko,es,,seupeineo,sɯpʰeinʌ
 ko,fr,,peurangseu-eo,pʰɯɾaŋsɯʌ
@@ -171,6 +199,7 @@ ko,vi,,beteunameo,petʰɯnamʌ
 ko,zh-Hans,,jungugeo,tɕuŋuɡʌ
 pt,ar,,,ˈaɾæby
 pt,de,,,ˌalemˈɐ̃ʊ̃
+pt,el,,,ɡrˈeɡʊ
 pt,en,,,iŋɡlˈes
 pt,es,,,ˌespɐ̃ɲˈɔl
 pt,fr,,,frɐ̃ŋsˈes
@@ -188,6 +217,7 @@ pt,vi,,,vˌietnæmˈitæ
 pt,zh-Hans,,,ʃinˈes
 ru,ar,арабском,arabskom,arˈɑpskʌm
 ru,de,немецком,nemetskom,nʲimʲˈetskʌm
+ru,el,греческом,grecheskom,ɡrʲˈetʃʲiskʌm
 ru,en,английском,angliyskom,anɡɭʲˈijskʌm
 ru,es,испанском,ispanskom,ɪspˈɑnskʌm
 ru,fr,французском,frantsuzskom,frantsˈusskʌm
@@ -205,6 +235,7 @@ ru,vi,вьетнамском,vʼyetnamskom,vjjitnˈɑmskʌm
 ru,zh-Hans,китайском,kitayskom,kʲitˈɑjskʌm
 sw,ar,,,kˌiarˈabu
 sw,de,,,kˌiɟerumˈani
+sw,el,,,kˌiɡirˈiki
 sw,en,,,kˌiiŋɡerˈeza
 sw,es,,,kˌihispanˈia
 sw,fr,,,kˌifarˈansa
@@ -222,6 +253,7 @@ sw,vi,,,kˌiviˌetinˈamu
 sw,zh-Hans,,,kitʃˈina
 th,ar,,arap,ʔaː˧rap˨˩
 th,de,,yoeraman,jɤːn˧man˧
+th,el,,krik,kriːk˨˩
 th,en,,angkrit,ʔaŋ˧kri˨˩
 th,es,,sapen,sa˨˩peːn˧
 th,fr,,farangset,fa˨˩raŋ˨˩seːt˨˩
@@ -239,6 +271,7 @@ th,vi,,wiatnam,wia̯t˥˩naːm˧
 th,zh-Hans,,chin,tɕiːn˧
 tr,ar,,,aɾaptʃˈa
 tr,de,,,aɫmandʒˈa
+tr,el,,,junandʒˈa
 tr,en,,,ɪnɟˈilɪzdʒɛ
 tr,es,,,ɪspanjɔɫdʒˈa
 tr,fr,,,fransɯzdʒˈa
@@ -256,6 +289,7 @@ tr,vi,,,viɛtnamdʒˈa
 tr,zh-Hans,,,tʃˈɪndʒɛ
 vi,ar,Ả Rập,,aː˧˩˧ zəp˨˩ˀ
 vi,de,Đức,,ɗyc˧˥
+vi,el,Hy Lạp,,hi˧ laːp˨˩ˀ
 vi,en,Anh,,aɲ˧
 vi,es,Tây Ban Nha,,t̪əɪ˧ baːn˧ ɲaː˧
 vi,fr,Pháp,,faːp˧˥
@@ -273,6 +307,7 @@ vi,vi,Việt,,viɛ̯t̪˨˩ˀ
 vi,zh-Hans,Trung,,tʃuŋ˧
 zh-Hans,ar,,Ālābóyǔ,a˥la˥pwɔ˧˥y˧˩˧
 zh-Hans,de,,Déyǔ,tɤ˧˥y˧˩˧
+zh-Hans,el,,Xīlàyǔ,ɕi˥la˥˩y˧˩˧
 zh-Hans,en,,Yīngyǔ,iŋ˥y˧˩˧
 zh-Hans,es,,Xībānyáyǔ,ɕi˥pan˥ja˧˥y˧˩˧
 zh-Hans,fr,,Fǎyǔ,fa˧˩˧y˧˩˧

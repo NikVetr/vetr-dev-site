@@ -49,8 +49,8 @@ atm-cash.money-exchange,atm-cash,ref,word,money-exchange,24,0.520,atm-cash.money
 atm-cash.pin,atm-cash,ref,word,pin,25,0.500,atm-cash.pin,0,0,neutral,,Keypad prompt. Most machines abroad accept only four digits.
 numbers-money.won,numbers-money,ref,word,won,1020,0.800,numbers-money.currency,0,0,neutral,ko,Korean currency.
 numbers-money.won-symbol,numbers-money,ref,word,won-symbol,1021,0.740,numbers-money.currency,1,0,neutral,ko,The symbol as printed on a price.
-numbers-money.euro,numbers-money,ref,word,euro,1022,0.800,numbers-money.currency,0,0,neutral,de;fr;es;pt,Pronounced differently in each of the three.
-numbers-money.euro-symbol,numbers-money,ref,word,euro-symbol,1023,0.740,numbers-money.currency,1,0,neutral,de;fr;es;pt,The symbol as printed on a price.
+numbers-money.euro,numbers-money,ref,word,euro,1022,0.800,numbers-money.currency,0,0,neutral,de;fr;es;pt;it;el,Pronounced differently in each of the six.
+numbers-money.euro-symbol,numbers-money,ref,word,euro-symbol,1023,0.740,numbers-money.currency,1,0,neutral,de;fr;es;pt;it;el,The symbol as printed on a price.
 numbers-money.lira,numbers-money,ref,word,lira,1024,0.800,numbers-money.currency,0,0,neutral,tr,Turkish currency.
 numbers-money.lira-symbol,numbers-money,ref,word,lira-symbol,1025,0.740,numbers-money.currency,1,0,neutral,tr,The symbol as printed on a price.
 numbers-money.dong,numbers-money,ref,word,dong,1026,0.800,numbers-money.currency,0,0,neutral,vi,Vietnamese currency.

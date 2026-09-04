@@ -1,0 +1,53 @@
+concept_id,text,text_alt,romanization_elot,ipa,literal,confidence,provenance
+hotel-words.passport,Διαβατήριο,,Diavatirio,ðˌiavatˈiɾiˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-words.room-key-card,Κάρτα δωματίου,Κλειδί δωματίου,Karta domatiou,kˈaɾta ðˌomatˈiu,,2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-words.check-in,Άφιξη,Τσεκ ιν,Afixi,ˈafiksˌi,arrival,2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-words.check-out,Αναχώρηση,Τσεκ άουτ,Anachorisi,ˌanaxˈoɾisˌi,departure,2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-words.luggage-storage,Φύλαξη αποσκευών,,Fylaxi aposkevon,fˈilaksˌi ˌaposcevˈon,,2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-basics.are-any-rooms-available,Έχετε ελεύθερα δωμάτια;,,Echete elefthera domatia;,ˈeçetˌe elˈefθeɾˌa ðomˈatiˌa,Do you have any free rooms?,2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-basics.there-are-two-of-us,Είμαστε δύο,Είμαστε δύο άτομα,Eimaste dyo,ˈimastˌe ðˈio,,2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-basics.i-have-a-reservation,Έχω κάνει κράτηση,Έχω κράτηση,Echo kanei kratisi,ˈexo kˈani kɾˈatisˌi,,2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-basics.can-i-charge-my-phone,Μπορώ να φορτίσω το κινητό μου;,,Boro na fortiso to kinito mou;,boɾˈo na foɾtˈiso to cˌinitˈo mu,,2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-basics.i-would-like-a-non-smoking-room,Θα ήθελα δωμάτιο για μη καπνιστές,,Tha ithela domatio gia mi kapnistes,θa ˈiθelˌa ðomˈatiˌo jˈa mˈi kˌapnistˈes,,2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-basics.i-would-like-a-quiet-room,Θα ήθελα ένα ήσυχο δωμάτιο,,Tha ithela ena isycho domatio,θa ˈiθelˌa ˈena ˈisixˌo ðomˈatiˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-basics.is-there-a-washing-machine,Υπάρχει πλυντήριο ρούχων;,,Yparchei plyntirio rouchon;,ipˈaɾçi plidˈiɾiˌo ɾˈuxon,Is there a clothes washer?,2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-basics.is-wi-fi-free,Το ασύρματο δίκτυο είναι δωρεάν;,Έχει δωρεάν ίντερνετ;,To asyrmato diktyo einai dorean;,to asˈiɾmatˌo ðˈiktiˌo ˈine ðˌoɾeˈan,Is the wireless network (Wi-Fi) free?,2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-basics.how-much-per-night,Πόσο κάνει η διανυκτέρευση;,Πόσο κάνει τη βραδιά;,Poso kanei i dianykterefsi;,pˈoso kˈani i ðˌianiktˈeɾefsˌi,How much for one night's stay?,2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-basics.is-breakfast-included,Το πρωινό περιλαμβάνεται;,,To proino perilamvanetai;,to pɾˌoinˈo pˌeɾilamvˈanetˌe,,2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-basics.may-i-see-the-room,Μπορώ να δω το δωμάτιο;,,Boro na do to domatio;,boɾˈo na ðˈo to ðomˈatiˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-basics.for-nights,Για {} νύχτες,,Gia {} nychtes,jˈa {} nˈixtes,For {} nights (write a number),2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-basics.two-beds,"Δύο χωριστά κρεβάτια, παρακαλώ",,"Dyo chorista krevatia, parakalo","ðˈio xˌoɾistˈa kɾevˈatiˌa, pˌaɾakalˈo","Two separate beds, please",2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-basics.is-there-air-conditioning,Υπάρχει κλιματισμός;,Έχει κλιματιστικό;,Yparchei klimatismos;,ipˈaɾçi klˌimatismˈos,,2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-requests.can-i-check-out-later,Μπορώ να αναχωρήσω αργότερα;,,Boro na anachoriso argotera;,boɾˈo n ˌanaxoɾˈiso aɾɣˈoteɾˌa,,2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-requests.what-time-does-breakfast-start,Τι ώρα αρχίζει το πρωινό;,,Ti ora archizei to proino;,tˈi ˈoɾ aɾçˈizi to pɾˌoinˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-requests.can-i-store-my-luggage,Μπορώ να αφήσω τις αποσκευές μου εδώ;,,Boro na afiso tis aposkeves mou edo;,boɾˈo n afˈiso tis ˌaposcevˈez mu eðˈo,Can I leave my luggage here?,2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-requests.no-housekeeping,Δεν χρειάζεται καθαριότητα σήμερα,"Χωρίς καθαριότητα, ευχαριστώ",Den chreiazetai kathariotita simera,ðˈen xɾçˈazetˌe kˌaθaɾiˈotitˌa sˈimeɾˌa,No cleaning needed today,2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-requests.another-towel-please,"Μια πετσέτα ακόμα, παρακαλώ",,"Mia petseta akoma, parakalo","mɲa petsˈet akˈoma, pˌaɾakalˈo","One more towel, please",2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-requests.what-time-is-check-out,Τι ώρα είναι η αναχώρηση;,Μέχρι τι ώρα πρέπει να φύγουμε;,Ti ora einai i anachorisi;,tˈi ˈoɾa ˈine i ˌanaxˈoɾisˌi,,2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-requests.can-i-check-in-early,Μπορώ να μπω στο δωμάτιο πιο νωρίς;,,Boro na bo sto domatio pio noris;,boɾˈo na bˈo sto ðomˈatiˌo pçˈo noɾˈis,Can I get into the room earlier?,2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-requests.another-night,Μπορώ να μείνω μία νύχτα ακόμα;,,Boro na meino mia nychta akoma;,boɾˈo na mˈino mˈia nˈixt akˈoma,,2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-requests.is-there-a-safe,Υπάρχει χρηματοκιβώτιο;,Υπάρχει σέιφ;,Yparchei chrimatokivotio;,ipˈaɾçi xɾˌimatˌocivˈotiˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-requests.another-blanket,"Μια κουβέρτα ακόμα, παρακαλώ",,"Mia kouverta akoma, parakalo","mɲa kuvˈeɾt akˈoma, pˌaɾakalˈo","One more blanket, please",2,el-agent-v1;roman=elot743;ipa=espeak
+hotel-requests.wake-up-call,Παρακαλώ ξυπνήστε με. Ώρα: {},,Parakalo xypniste me. Ora: {},pˌaɾakalˈo ksipnˈiste me ˈoɾa {},Please wake me. Time: {},2,el-agent-v1;roman=elot743;ipa=espeak
+room-problems.there-is-a-problem-with-the-room,Υπάρχει ένα πρόβλημα στο δωμάτιο,,Yparchei ena provlima sto domatio,ipˈaɾçi ˈena pɾˈovlimˌa sto ðomˈatiˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+room-problems.the-air-conditioning-is-broken,Ο κλιματισμός δεν λειτουργεί,Το κλιματιστικό είναι χαλασμένο,O klimatismos den leitourgei,o klˌimatismˈoz ðˈen lˌituɾjˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
+room-problems.there-is-no-hot-water,Δεν έχει ζεστό νερό,Δεν υπάρχει ζεστό νερό,Den echei zesto nero,ðˈen ˈeçi zestˈo neɾˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+room-problems.can-i-change-rooms,Μπορώ να αλλάξω δωμάτιο;,,Boro na allaxo domatio;,boɾˈo n alˈakso ðomˈatiˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+room-problems.the-room-is-too-noisy,Το δωμάτιο έχει πολύ θόρυβο,Το δωμάτιο είναι πολύ θορυβώδες,To domatio echei poly thoryvo,to ðomˈatiˌo ˈeçi polˈi θˈoɾivˌo,There is too much noise in the room,2,el-agent-v1;roman=elot743;ipa=espeak
+room-problems.the-key-does-not-work,Το κλειδί δεν λειτουργεί,Η κάρτα δεν ανοίγει την πόρτα,To kleidi den leitourgei,to kliðˈi ðˈen lˌituɾjˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
+room-problems.the-toilet-will-not-flush,Το καζανάκι δεν λειτουργεί,,To kazanaki den leitourgei,to kˌazanˈaci ðˈen lˌituɾjˈi,The cistern does not work,2,el-agent-v1;roman=elot743;ipa=espeak
+room-problems.the-light-does-not-work,Το φως δεν λειτουργεί,Η λάμπα είναι καμένη,To fos den leitourgei,to fˈoz ðˈen lˌituɾjˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
+room-problems.please-send-someone,"Στείλτε κάποιον να το φτιάξει, παρακαλώ",,"Steilte kapoion na to ftiaxei, parakalo","stˈilte kˈapiˌon na to ftiˈaksi, pˌaɾakalˈo",,2,el-agent-v1;roman=elot743;ipa=espeak
+room-problems.the-heating-does-not-work,Η θέρμανση δεν λειτουργεί,,I thermansi den leitourgei,i θˈeɾmansˌi ðˈen lˌituɾjˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
+laundry.please-wash-these-clothes,Πλύνετε αυτά τα ρούχα,"Πλύνετε αυτά τα ρούχα, παρακαλώ",Plynete afta ta roucha,plˈinetˌe aftˈa ta ɾˈuxa,,2,el-agent-v1;roman=elot743;ipa=espeak
+laundry.where-is-a-laundromat,Πού έχει καθαριστήριο;,Πού έχει αυτόματο πλυντήριο;,Pou echei katharistirio;,pˈu ˈeçi kˌaθaɾistˈiɾiˌo,Where is there a laundry shop?,2,el-agent-v1;roman=elot743;ipa=espeak
+laundry.when-will-it-be-ready,Πότε θα είναι έτοιμο;,,Pote tha einai etoimo;,pˈote θa ˈine ˈetimˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+laundry.how-much-per-kilo,Πόσο κάνει το κιλό;,,Poso kanei to kilo;,pˈoso kˈani to cilˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+laundry.can-it-be-ready-today,Θα είναι έτοιμο σήμερα;,,Tha einai etoimo simera;,θa ˈine ˈetimˌo sˈimeɾˌa,Will it be ready today?,2,el-agent-v1;roman=elot743;ipa=espeak
+laundry.please-do-not-use-bleach,"Χωρίς χλωρίνη, παρακαλώ",,"Choris chlorini, parakalo","xoɾˈis xloɾˈini, pˌaɾakalˈo","Without bleach, please",2,el-agent-v1;roman=elot743;ipa=espeak
+laundry.laundromat,καθαριστήριο,αυτόματο πλυντήριο,katharistirio,kˌaθaɾistˈiɾiˌo,laundry shop; also does dry cleaning,2,el-agent-v1;roman=elot743;ipa=espeak
+laundry.please-iron-this,"Σιδερώστε το, παρακαλώ",,"Sideroste to, parakalo","sˌiðeɾˈoste to, pˌaɾakalˈo",,2,el-agent-v1;roman=elot743;ipa=espeak
+laundry.detergent,απορρυπαντικό,,aporrypantiko,ˌapoɾˌipadikˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+laundry.dry-cleaning,στεγνό καθάρισμα,στεγνοκαθαριστήριο,stegno katharisma,steɣnˈo kaθˈaɾismˌa,dry cleaning; the shop is στεγνοκαθαριστήριο,2,el-agent-v1;roman=elot743;ipa=espeak
+laundry.dryer,στεγνωτήριο,,stegnotirio,stˌeɣnotˈiɾiˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+laundry.coin-operated,με κέρματα,Λειτουργεί με κέρματα,me kermata,me cˈeɾmatˌa,,2,el-agent-v1;roman=elot743;ipa=espeak

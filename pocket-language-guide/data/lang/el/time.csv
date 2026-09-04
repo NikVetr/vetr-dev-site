@@ -1,0 +1,44 @@
+concept_id,text,text_alt,romanization_elot,ipa,literal,confidence,provenance
+time-scheduling.what-time-is-it,Τι ώρα είναι;,,Ti ora einai;,tˈi ˈoɾa ˈine,,2,el-agent-v1;roman=elot743;ipa=espeak
+time-scheduling.how-many-minutes,Πόσα λεπτά;,,Posa lepta;,pˈosa leptˈa,,2,el-agent-v1;roman=elot743;ipa=espeak
+time-scheduling.what-time-should-we-meet,Τι ώρα να συναντηθούμε;,,Ti ora na synantithoume;,tˈi ˈoɾa na sˌinadiθˈume,,2,el-agent-v1;roman=elot743;ipa=espeak
+time-scheduling.can-we-change-the-time,Μπορούμε να αλλάξουμε την ώρα;,,Boroume na allaxoume tin ora;,boɾˈume n alˈaksumˌe tin ˈoɾa,,2,el-agent-v1;roman=elot743;ipa=espeak
+time-scheduling.when-is-convenient,Πότε σας βολεύει;,Πότε σας εξυπηρετεί;,Pote sas volevei;,pˈote saz volˈevi,When suits you?,2,el-agent-v1;roman=elot743;ipa=espeak
+time-scheduling.what-is-today-s-date,Τι ημερομηνία έχουμε σήμερα;,Πόσες του μηνός έχουμε;,Ti imerominia echoume simera;,tˈi ˌimeɾˌominˈia ˈexumˌe sˈimeɾˌa,The answer comes in the genitive: 15 Ιανουαρίου,2,el-agent-v1;roman=elot743;ipa=espeak
+time-scheduling.what-day-is-it-today,Τι μέρα είναι σήμερα;,,Ti mera einai simera;,tˈi mˈeɾa ˈine sˈimeɾˌa,,2,el-agent-v1;roman=elot743;ipa=espeak
+time-scheduling.what-time-does-it-open,Τι ώρα ανοίγει;,,Ti ora anoigei;,tˈi ˈoɾ anˈiji,,2,el-agent-v1;roman=elot743;ipa=espeak
+time-scheduling.what-time-does-it-close,Τι ώρα κλείνει;,Κλείνει το μεσημέρι;,Ti ora kleinei;,tˈi ˈoɾa klˈini,also: does it close at midday? (siesta),2,el-agent-v1;roman=elot743;ipa=espeak
+time-scheduling.how-long-does-it-take,Πόση ώρα κάνει;,Πόσο διαρκεί;,Posi ora kanei;,pˈosi ˈoɾa kˈani,,2,el-agent-v1;roman=elot743;ipa=espeak
+time-words.today,σήμερα,,simera,sˈimeɾˌa,,2,el-agent-v1;roman=elot743;ipa=espeak
+time-words.tomorrow,αύριο,,avrio,ˈavɾiˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+time-words.yesterday,χθες,χτες,chthes,xθˈes,,2,el-agent-v1;roman=elot743;ipa=espeak
+time-words.this-week,αυτή την εβδομάδα,,afti tin evdomada,aftˈi tin ˌevðomˈaða,,2,el-agent-v1;roman=elot743;ipa=espeak
+time-words.next-week,την επόμενη εβδομάδα,την άλλη εβδομάδα,tin epomeni evdomada,tin epˈomenˌi ˌevðomˈaða,,2,el-agent-v1;roman=elot743;ipa=espeak
+time-words.morning,πρωί,το πρωί,proi,pɾoˈi,morning; in the morning = το πρωί,2,el-agent-v1;roman=elot743;ipa=espeak
+time-words.afternoon,απόγευμα,μεσημέρι,apogevma,apˈojimˌa,late afternoon; noon to about 5pm is μεσημέρι,2,el-agent-v1;roman=elot743;ipa=espeak
+time-words.evening,βράδυ,το βράδυ,vrady,vɾˈaði,,2,el-agent-v1;roman=elot743;ipa=espeak
+time-words.spring,άνοιξη,,anoixi,ˈaniksˌi,,2,el-agent-v1;roman=elot743;ipa=espeak
+time-words.summer,καλοκαίρι,,kalokairi,kˌalocˈeɾi,,2,el-agent-v1;roman=elot743;ipa=espeak
+time-words.fall,φθινόπωρο,,fthinoporo,fθinˈopoɾˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+time-words.winter,χειμώνας,,cheimonas,çimˈonas,,2,el-agent-v1;roman=elot743;ipa=espeak
+time-words.night,νύχτα,τη νύχτα,nychta,nˈixta,,2,el-agent-v1;roman=elot743;ipa=espeak
+days-of-week.monday,Δευτέρα,,Deftera,ðeftˈeɾa,,2,el-agent-v1;roman=elot743;ipa=espeak
+days-of-week.tuesday,Τρίτη,,Triti,tɾˈiti,,2,el-agent-v1;roman=elot743;ipa=espeak
+days-of-week.wednesday,Τετάρτη,,Tetarti,tetˈaɾti,,2,el-agent-v1;roman=elot743;ipa=espeak
+days-of-week.thursday,Πέμπτη,,Pempti,pˈebti,,2,el-agent-v1;roman=elot743;ipa=espeak
+days-of-week.friday,Παρασκευή,,Paraskevi,pˌaɾascevˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
+days-of-week.saturday,Σάββατο,,Savvato,sˈavatˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+days-of-week.sunday,Κυριακή,,Kyriaki,cˌiɾiacˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
+months.january,Ιανουάριος,Ιανουαρίου,Ianouarios,ˌianuˈaɾiˌos,January; dates use the genitive: 15 Ιανουαρίου,2,el-agent-v1;roman=elot743;ipa=espeak
+months.february,Φεβρουάριος,Φεβρουαρίου,Fevrouarios,fˌevɾuˈaɾiˌos,,2,el-agent-v1;roman=elot743;ipa=espeak
+months.march,Μάρτιος,Μαρτίου,Martios,mˈaɾtiˌos,,2,el-agent-v1;roman=elot743;ipa=espeak
+months.april,Απρίλιος,Απριλίου,Aprilios,apɾˈiʎos,,2,el-agent-v1;roman=elot743;ipa=espeak
+months.may,Μάιος,Μαΐου,Maios,mˈaɪos,,2,el-agent-v1;roman=elot743;ipa=espeak
+months.june,Ιούνιος,Ιουνίου,Iounios,iˈuɲos,,2,el-agent-v1;roman=elot743;ipa=espeak
+months.july,Ιούλιος,Ιουλίου,Ioulios,iˈuʎos,,2,el-agent-v1;roman=elot743;ipa=espeak
+months.august,Αύγουστος,Αυγούστου,Avgoustos,ˈavɣustˌos,,2,el-agent-v1;roman=elot743;ipa=espeak
+months.september,Σεπτέμβριος,Σεπτεμβρίου,Septemvrios,septˈemvɾiˌos,,2,el-agent-v1;roman=elot743;ipa=espeak
+months.october,Οκτώβριος,Οκτωβρίου,Oktovrios,oktˈovɾiˌos,,2,el-agent-v1;roman=elot743;ipa=espeak
+months.november,Νοέμβριος,Νοεμβρίου,Noemvrios,noˈemvɾiˌos,,2,el-agent-v1;roman=elot743;ipa=espeak
+months.december,Δεκέμβριος,Δεκεμβρίου,Dekemvrios,ðecˈemvɾiˌos,,2,el-agent-v1;roman=elot743;ipa=espeak
+time-words.clock-offset,"Στα Σουαχίλι το ρολόι αρχίζει με την ανατολή και μετράει έξι ώρες λιγότερες από το δικό σας: προσθέστε έξι στον αριθμό που ακούτε. saa moja είναι 7:00, saa sita το μεσημέρι, saa kumi 16:00. Πιο ασφαλές είναι να λέτε την ώρα με ψηφία ή να ρωτάτε saa ngapi za kizungu, την ώρα του δυτικού ρολογιού.",,,,,2,el-notes-v1
