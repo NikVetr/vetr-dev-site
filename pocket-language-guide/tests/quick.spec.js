@@ -64,21 +64,28 @@ test.describe('the quick export page', () => {
   });
 });
 
-test('the donate link goes to GiveWell, and only from the working pages', async ({ page }) => {
-  // Named for GiveWell in the visible text rather than left as a bare "Donate": a
-  // donate button on a personal site reads as "pay the author", and this one does not
-  // do that, so saying where it goes is the whole point of having it.
-  for (const path of ['/sheet.html?target=es&source=en', '/customize.html?target=es&source=en']) {
+test('the donate link is a corner overlay on every page', async ({ page }) => {
+  // A small fixed pill in the bottom-right rather than a footer band -- the band cost
+  // the studio's canvas a strip of room for one link. The label is bare "Donate" and
+  // where it goes is in the `title` and the accessible name, which is ordinary
+  // practice for an external link.
+  await page.setViewportSize({ width: 1200, height: 900 });
+  for (const path of ['/', '/sheet.html?target=es&source=en', '/customize.html?target=es&source=en']) {
     await page.goto(path);
-    const link = page.locator('.page-footer a.donate');
+    const link = page.locator('a.donate');
     await expect(link).toBeVisible();
     await expect(link).toHaveAttribute('href', 'https://www.givewell.org/donate');
-    await expect(link).toContainText('GiveWell');
+    await expect(link).toHaveText('Donate');
+    await expect(link).toHaveAttribute('title', /GiveWell/);
     // A new tab, and no window handle back to the opener.
     await expect(link).toHaveAttribute('rel', /noopener/);
+    // In the corner, and small: a whole band is what this replaced.
+    const box = /** @type {{x:number,y:number,width:number,height:number}} */ (
+      await link.boundingBox());
+    expect(900 - box.y - box.height, `${path}: sits ${box.y}px down`).toBeLessThan(30);
+    expect(1200 - box.x - box.width, `${path}: sits ${box.x}px across`).toBeLessThan(30);
+    expect(box.height, `${path}: ${box.height}px tall`).toBeLessThan(40);
   }
-  // The gallery is the front door and keeps its own counsel.
-  await page.goto('/');
-  await expect(page.locator('.card').first()).toBeVisible();
+  // And no footer band is left behind on any of them.
   await expect(page.locator('.page-footer')).toHaveCount(0);
 });

@@ -13,7 +13,7 @@ import { faceSvgs, exportPdf, exportPng, exportSvg, loadIcons } from './export.j
 import {
   typefaceGlyph, inkGlyph, dpiGlyph, paddingGlyph, PADDING_CHOICES, customGlyph,
   priorityOptions, segmented, numericChoice, panelField,
-  cardSizeControl, paletteControl, reserveControl,
+  cardSizeControl, paletteControl, reserveControl, backgroundControl, headControl,
 } from './glyphs.js';
 import { familyFor } from '../render/fonts.js';
 import { regionRow } from './flags.js';
@@ -34,6 +34,19 @@ const AUDIENCES = [
 ];
 
 const $ = (/** @type {string} */ id) => /** @type {HTMLElement} */ (document.getElementById(id));
+
+/**
+ * The flag colours of the countries a language is spoken in, first two only. Empty
+ * where the registry has none, which lets the `flag` background fall back to paper.
+ * @param {any} corpus @param {string} target
+ */
+function flagColoursFor(corpus, target) {
+  const codes = (corpus.languages[target]?.regions ?? '').split(';').filter(Boolean).slice(0, 2);
+  return codes
+    .flatMap((/** @type {string} */ code) => (corpus.regions[code]?.flag_colors ?? '').split(';'))
+    .map((/** @type {string} */ c) => c.trim())
+    .filter(Boolean);
+}
 
 async function main() {
   const { languages, coverage } = await loadLanguages();
@@ -176,6 +189,19 @@ async function main() {
     onChange: set,
   });
 
+  // Two settings the studio grew after this page was written, so their absence here
+  // was an omission rather than a decision. Both are choices about how the finished
+  // card *looks* rather than about how the solver packs it, which is the line this
+  // page draws: the columns, the face count, the divider, the entry layout and which
+  // columns appear are all still studio decisions.
+  const background = backgroundControl({
+    value: spec.background,
+    roleColours: () => theme.colours(),
+    flagColours: flagColoursFor(ctx.corpus, spec.target),
+    onChange: set,
+  });
+  const head = headControl({ spec, onChange: set });
+
   const ink = segmented({
     label: t('format.ink'),
     value: /** @type {'full'|'low-ink'|'mono'} */ ('full'),
@@ -228,6 +254,8 @@ async function main() {
     panelField(t('format.typeface'), [typeface.group]),
     panelField(t('format.textPadding'), [padding.group]),
     panelField(t('format.colours'), [theme.group, theme.custom]),
+    panelField(t('format.background'), [background.group, background.custom]),
+    head.field,
     panelField(t('format.ink'), [ink.group]),
     menu('paper', t('format.paper'), paper),
     menu('preset', t('format.whatToInclude'), preset),

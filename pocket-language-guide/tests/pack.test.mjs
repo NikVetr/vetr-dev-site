@@ -207,3 +207,19 @@ test('a section shows one row shape at a time', async () => {
     }
   }
 });
+
+test('every corpus file keeps its CRLF line endings', async () => {
+  // `load_rows` in `scripts/build_ipa.py` splits on `\r\n` so that it can keep every
+  // untouched line byte-identical and leave a diff of exactly the cells that
+  // changed. A corpus file rewritten with bare LF therefore becomes one enormous
+  // "line" and `csv.reader` refuses the whole file — which is a confusing way to
+  // find out, since the error names a newline rather than a file. Nothing enforced
+  // it until seven files were rewritten with LF and the generator stopped.
+  const { glob } = await import('node:fs/promises');
+  /** @type {string[]} */ const wrong = [];
+  for await (const path of glob('data/lang/*/*.csv')) {
+    const raw = await readFile(path);
+    if (!raw.includes('\r\n')) wrong.push(path);
+  }
+  assert.deepEqual(wrong, [], `these want CRLF: ${wrong.join(', ')}`);
+});

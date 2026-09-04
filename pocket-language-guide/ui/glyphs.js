@@ -1459,3 +1459,111 @@ export function backgroundControl({ value, roleColours, flagColours, onChange })
     },
   };
 }
+
+/**
+ * The running head: where the band goes, and what each of its three positions holds.
+ *
+ * Extracted so the quick page and the studio share one implementation rather than
+ * two — the band is a *printing* choice as much as a layout one, and the quick page
+ * had no way to reach it at all.
+ *
+ * Three positions, each taking any number of slots joined with a bullet by the
+ * solver. It was two positions of one slot each, chosen from a `<select>`, so a folio
+ * and the pair could not both print, the middle of the band was unreachable, and
+ * nothing said the two sides were independent. Checkboxes because the question is
+ * "which of these five" and not "one of these five".
+ * @param {Object} config
+ * @param {import('../core/types.js').SheetSpec} config.spec
+ * @param {(patch:{head:import('../core/types.js').RunningHead})=>void} config.onChange
+ */
+export function headControl({ spec, onChange }) {
+  const AT = /** @type {const} */ (['none', 'top', 'bottom']);
+  /** @type {import('../core/types.js').HeadSlot[]} */
+  const SLOTS = ['page', 'pair', 'region', 'legend', 'custom'];
+  const SIDES = /** @type {const} */ (['left', 'center', 'right']);
+  /** A position may hold a bare slot in a spec saved before it became a list. */
+  const listOf = (/** @type {any} */ held) => new Set(
+    (Array.isArray(held) ? held : [held]).filter(Boolean));
+
+  let held = spec;
+  const text = /** @type {HTMLInputElement} */ (document.createElement('input'));
+  text.type = 'text';
+  text.id = 'head-text';
+  text.className = 'text-box';
+  text.placeholder = t('format.headTextPlaceholder');
+  text.value = spec.head?.text ?? '';
+
+  /** @param {Partial<import('../core/types.js').RunningHead>} patch */
+  const push = (patch) => onChange({
+    head: {
+      at: 'none', left: [], center: [], right: [], ...held.head, ...patch, text: text.value,
+    },
+  });
+  text.addEventListener('change', () => push({}));
+
+  const at = segmented({
+    label: t('format.headLong'),
+    value: spec.head?.at ?? 'none',
+    options: AT.map((id) => ({
+      value: id,
+      caption: t(`format.head.${id}`),
+      title: t(`format.headTitle.${id}`),
+      glyph: headGlyph(id),
+    })),
+    onChange: (next) => push({ at: next }),
+  });
+
+  const sides = SIDES.map((side) => {
+    const on = listOf(spec.head?.[side]);
+    /** @type {{id:import('../core/types.js').HeadSlot, box:HTMLInputElement}[]} */
+    const boxes = SLOTS.map((id) => {
+      const box = /** @type {HTMLInputElement} */ (document.createElement('input'));
+      box.type = 'checkbox';
+      box.id = `head-${side}-${id}`;
+      box.checked = on.has(id);
+      box.addEventListener('change', () => {
+        push({ [side]: boxes.filter((b) => b.box.checked).map((b) => b.id) });
+      });
+      return { id, box };
+    });
+    const wrap = document.createElement('fieldset');
+    wrap.className = 'head-side';
+    const caption = document.createElement('legend');
+    caption.textContent = t(`format.head.${side}`);
+    wrap.append(caption, ...boxes.map(({ id, box }) => {
+      const label = document.createElement('label');
+      label.title = t(`format.headSlot.${id}`);
+      const span = document.createElement('span');
+      span.textContent = t(`format.headSlot.${id}`);
+      label.append(box, span);
+      return label;
+    }));
+    return { side, boxes, wrap };
+  });
+
+  const slots = document.createElement('div');
+  slots.className = 'head-slots';
+  slots.append(...sides.map((s) => s.wrap), text);
+
+  /** @param {import('../core/types.js').SheetSpec} from */
+  const paint = (from) => {
+    held = from;
+    slots.hidden = (from.head?.at ?? 'none') === 'none';
+    // The free-text box is only useful where a position asks for the reader's text.
+    text.hidden = !SIDES.some((side) => listOf(from.head?.[side]).has('custom'));
+    for (const { side, boxes } of sides) {
+      const on = listOf(from.head?.[side]);
+      for (const { id, box } of boxes) box.checked = on.has(id);
+    }
+  };
+  paint(spec);
+
+  return {
+    field: panelField(t('format.head'), [at.group, slots]),
+    /** @param {import('../core/types.js').SheetSpec} next */
+    sync(next) {
+      at.select(next.head?.at ?? 'none');
+      paint(next);
+    },
+  };
+}

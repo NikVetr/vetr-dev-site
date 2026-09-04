@@ -1013,7 +1013,42 @@ button.big { justify-content: center; padding: 0.6em 1em; font-size: var(--fs-1)
 #paper { unicode-bidi: plaintext; }
 .sheet-options .field select { font-size: var(--fs--1); }
 
-/* --- the donate link ------------------------------------------------------ */
+/* --- the donate link ---------------------------------------------------- */
+
+/* A small fixed overlay in the bottom-right corner rather than a footer. It was a
+   centred pill in a band of its own, which on the studio's full-height layout meant
+   the canvas gave up a strip of room for it -- a lot of a page for one link. Fixed
+   position costs nothing: the studio is a viewport-height grid and the two other
+   pages scroll under it.
+   
+   The label is just "Donate" now. Where it goes is in the `title` and the accessible
+   name rather than the visible text, which is what the requester asked for and is
+   ordinary practice for an external link. */
+.donate {
+  position: fixed; inset-block-end: var(--space-2); inset-inline-end: var(--space-2);
+  z-index: 20;
+  display: inline-flex; align-items: center;
+  font-size: var(--fs--1); line-height: 1;
+  color: var(--muted); text-decoration: none;
+  border: 1px solid var(--line); border-radius: 999px;
+  padding: 0.3em 0.8em;
+  /* Translucent, because it sits over the sheet: at rest it reads as chrome and on
+     hover it comes forward. */
+  background: rgb(255 255 255 / 82%);
+  backdrop-filter: blur(2px);
+}
+.donate:hover, .donate:focus-visible {
+  color: var(--ink); border-color: var(--muted); background: var(--paper);
+  outline: none;
+}
+/* On a narrow screen it would sit on top of the last row of content, so it goes back
+   into the flow at the end of the page. */
+@media (max-width: 640px) {
+  .donate {
+    position: static; display: inline-flex;
+    margin: var(--space-2) auto var(--space-3); background: var(--paper);
+  }
+}
 
 /* On the two working pages, not the gallery: the gallery is the front door and has
    its own business. Named for GiveWell in the label rather than left as a bare

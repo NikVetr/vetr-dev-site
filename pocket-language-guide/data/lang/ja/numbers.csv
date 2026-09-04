@@ -47,27 +47,27 @@ numbers-money.2-items,二つ,,futatsu,ɸɯtatsɯ,,2,japanese-reviewed-v6;ipa=hep
 numbers-money.yen,円,,en,eɴ,,2,japanese-reviewed-v6;ipa=hepburn
 numbers-money.yen-symbol,￥,,en,eɴ,,2,japanese-reviewed-v6;ipa=hepburn
 numbers-money.number-and-classifier-notes-2,,,,,,2,japanese-reviewed-v6
-numbers-money.forint,フォリント,,,,,2,reader-gloss-v1
-numbers-money.forint-symbol,フォリント記号,,,,,2,reader-gloss-v1
-numbers-money.rupee,ルピー,,,,,2,reader-gloss-v1
-numbers-money.rupee-symbol,ルピー記号,,,,,2,reader-gloss-v1
-numbers-money.won,ウォン,,,,,2,reader-gloss-v1
-numbers-money.won-symbol,ウォン記号,,,,,2,reader-gloss-v1
-numbers-money.baht,バーツ,,,,,2,reader-gloss-v1
-numbers-money.baht-symbol,バーツ記号,,,,,2,reader-gloss-v1
-numbers-money.lira,リラ,,,,,2,reader-gloss-v1
-numbers-money.lira-symbol,リラ記号,,,,,2,reader-gloss-v1
-numbers-money.dong,ドン,,,,,2,reader-gloss-v1
-numbers-money.dong-symbol,ドン記号,,,,,2,reader-gloss-v1
-numbers-money.ruble,ルーブル,,,,,2,reader-gloss-v1
-numbers-money.ruble-symbol,ルーブル記号,,,,,2,reader-gloss-v1
-numbers-money.rupiah,ルピア,,,,,2,reader-gloss-v1
-numbers-money.rupiah-symbol,ルピア記号,,,,,2,reader-gloss-v1
-numbers-money.shilling,シリング,,,,,2,reader-gloss-v1
-numbers-money.shilling-symbol,シリング記号,,,,,2,reader-gloss-v1
-numbers-money.euro,ユーロ,,,,,2,reader-gloss-v1
-numbers-money.euro-symbol,ユーロ記号,,,,,2,reader-gloss-v1
-numbers-money.dollar,ドル,,,,,2,reader-gloss-v1
-numbers-money.dollar-symbol,ドル記号,,,,,2,reader-gloss-v1
-numbers-money.pound,ポンド,,,,,2,reader-gloss-v1
-numbers-money.pound-symbol,ポンド記号,,,,,2,reader-gloss-v1
+numbers-money.forint,フォリント,,forinto,ɸoɾiɴto,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.forint-symbol,フォリント記号,,forinto kigō,ɸoɾiɴto kiɡoː,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.rupee,ルピー,,rupī,ɾɯpiː,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.rupee-symbol,ルピー記号,,rupī kigō,ɾɯpiː kiɡoː,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.won,ウォン,,uon,ɯoɴ,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.won-symbol,ウォン記号,,uon kigō,ɯoɴ kiɡoː,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.baht,バーツ,,bātsu,baːtsɯ,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.baht-symbol,バーツ記号,,bātsu kigō,baːtsɯ kiɡoː,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.lira,リラ,,rira,ɾiɾa,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.lira-symbol,リラ記号,,rira kigō,ɾiɾa kiɡoː,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.dong,ドン,,don,doɴ,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.dong-symbol,ドン記号,,don kigō,doɴ kiɡoː,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.ruble,ルーブル,,rūburu,ɾɯːbɯɾɯ,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.ruble-symbol,ルーブル記号,,rūburu kigō,ɾɯːbɯɾɯ kiɡoː,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.rupiah,ルピア,,rupia,ɾɯpia,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.rupiah-symbol,ルピア記号,,rupia kigō,ɾɯpia kiɡoː,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.shilling,シリング,,shiringu,ɕiɾiɴɡɯ,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.shilling-symbol,シリング記号,,shiringu kigō,ɕiɾiɴɡɯ kiɡoː,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.euro,ユーロ,,yūro,jɯːɾo,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.euro-symbol,ユーロ記号,,yūro kigō,jɯːɾo kiɡoː,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.dollar,ドル,,doru,doɾɯ,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.dollar-symbol,ドル記号,,doru kigō,doɾɯ kiɡoː,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.pound,ポンド,,pondo,poɴdo,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.pound-symbol,ポンド記号,,pondo kigō,poɴdo kiɡoː,,2,reader-gloss-v1;roman=generated;ipa=hepburn

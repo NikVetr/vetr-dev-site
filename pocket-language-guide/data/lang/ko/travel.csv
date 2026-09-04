@@ -58,7 +58,7 @@ taxi.can-you-wait-for-me-here,여기서 기다려 줄 수 있어요?,,yeogiseo g
 taxi.we-need-to-catch-the-high-speed-train,고속열차 타야 해요,KTX 타야 해요,gosongnyeolcha taya haeyo,kosoŋnjʌltɕʰa tʰaja hɛjo,,2,ko-agent-v1;ipa=rr
 taxi.please-use-the-meter,미터기로 가 주세요,,miteogiro ga juseyo,mitʰʌɡiɾo ka tɕusejo,,2,ko-agent-v1;ipa=rr
 taxi.i-will-get-off-here,여기서 내릴게요,,yeogiseo naerilgeyo,jʌɡisʌ nɛɾilɡejo,,2,ko-agent-v1;ipa=rr
-taxi.please-get-me-there-in-time-for-the-shinkansen,신칸센 시간에 맞춰 주세요,,,,,1,reader-gloss-v1
+taxi.please-get-me-there-in-time-for-the-shinkansen,신칸센 시간에 맞춰 주세요,,sinkansen sigane matchwo juseyo,sinkʰansen siɡane mattɕʰwʌ tɕusejo,,1,reader-gloss-v1;roman=generated;ipa=rr
 transit-rides.two-tickets,표 두 장이요,,pyo du jangiyo,pʰjo tu tɕaŋijo,,2,ko-agent-v1;ipa=rr
 transit-rides.where-is-the-subway-station,지하철역이 어디예요?,,jihacheollyeogi eodiyeyo?,tɕihatɕʰʌlljʌɡi ʌdijejo,,2,ko-agent-v1;ipa=rr
 transit-rides.does-this-bus-train-go-to,이거 {} 가요?,,igeo {} gayo?,iɡʌ {} kajo,,2,ko-agent-v1;ipa=rr
@@ -79,7 +79,7 @@ place-words.service-desk,안내데스크,,annaedeseukeu,annɛdesɯkʰɯ,,2,ko-ag
 place-words.bus-stop,버스정류장,,beoseujeongnyujang,pʌsɯdʑʌŋnjudʑaŋ,,2,ko-agent-v1;ipa=rr
 place-words.luggage-storage,짐 보관소,,jim bogwanso,tɕim poɡwanso,,2,ko-agent-v1;ipa=rr
 place-words.tourist-spot-sightseeing-area,관광지,,gwangwangji,kwanɡwaŋdʑi,,2,ko-agent-v1;ipa=rr
-place-words.scenic-area,관광지,경승지,,,,1,reader-gloss-v1
+place-words.scenic-area,관광지,경승지,gwangwangji,kwanɡwaŋdʑi,,1,reader-gloss-v1;roman=generated;ipa=rr
 pickup-meeting.where-is-the-pickup-point,픽업 장소 어디예요?,,pigeop jangso eodiyeyo?,pʰiɡʌp tɕaŋso ʌdijejo,,2,ko-agent-v1;ipa=rr
 pickup-meeting.please-send-me-the-pickup-point,픽업 장소를 보내 주세요,,pigeop jangsoreul bonae juseyo,pʰiɡʌp tɕaŋsoɾɯl ponɛ tɕusejo,,2,ko-agent-v1;ipa=rr
 pickup-meeting.please-pick-us-up-here,여기로 와 주세요,,yeogiro wa juseyo,jʌɡiɾo wa tɕusejo,,2,ko-agent-v1;ipa=rr
@@ -113,4 +113,4 @@ common-signs.closed,영업 종료,휴업,yeongeop jongnyo,jʌŋʌp tɕoŋnjo,,2,
 common-signs.stopped-stop,정지,,jeongji,tɕʌŋdʑi,,2,ko-agent-v1;ipa=rr
 transit-rides.do-i-need-to-validate,이 표 개찰해야 해요?,,i pyo gaechalhaeya haeyo?,i pʰjo kɛtɕʰalhɛja hɛjo,,2,ko-agent-v1;ipa=rr
 rail-station-words.ticket-validator,개찰기,검표기,gaechalgi,kɛtɕʰalɡi,,2,ko-agent-v1;ipa=rr
-rail-station-words.maglev,자기부상열차,,,,,1,reader-gloss-v1
+rail-station-words.maglev,자기부상열차,,jagibusangyeolcha,tɕaɡibusaŋjʌltɕʰa,,1,reader-gloss-v1;roman=generated;ipa=rr

@@ -43,31 +43,31 @@ numbers-money.won,원,,won,wʌn,,2,ko-agent-v1;ipa=rr
 numbers-money.won-symbol,₩,,won,wʌn,,2,ko-agent-v1;ipa=rr
 numbers-money.number-and-classifier-notes,"수는 십일, 이십처럼 쌓아요: 11 = shíyī, 20 = èrshí. 단 백, 천, 만 앞에는 yī가 붙고(yìbǎi, yíwàn), 중간이 비면 líng을 넣어요(101 = yìbǎi líng yī). 단위명사 앞의 2는 èr이 아니라 liǎng이에요, 둘이 두가 되는 것과 같아요. gè = 개, zhāng = 장, píng = 병은 그대로지만, 사람은 명이 아니라 gè, 높이면 wèi, 잔은 bēi예요. 전화에서 1은 yāo. 말할 때 yuán은 kuài, jiǎo / máo = 0.1위안, fēn = 0.01위안.",,,,,2,ko-notes-v1
 numbers-money.number-and-classifier-notes-2,"수는 십일, 이십처럼 쌓아요: 11 = jūichi, 20 = nijū. 단 만은 ichi를 붙여 ichiman이에요. 세는 말: -tsu(물건), -mai(납작한 것), -hon(긴 것), -nin(사람), -hai(잔). 고유수사가 붙는 자리가 우리와 달라서 -tsu는 hitotsu, futatsu처럼 아홉까지고, 사람은 hitori, futari 다음이 sannin이에요. 전화는 0 = zero/maru, 4 = yon, 7 = nana, 9 = kyū.",,,,,2,ko-notes-v1
-numbers-money.forint,포린트,,,,,2,reader-gloss-v1
-numbers-money.forint-symbol,포린트 기호,,,,,2,reader-gloss-v1
-numbers-money.rupee,루피,,,,,2,reader-gloss-v1
-numbers-money.rupee-symbol,루피 기호,,,,,2,reader-gloss-v1
-numbers-money.baht,바트,,,,,2,reader-gloss-v1
-numbers-money.baht-symbol,바트 기호,,,,,2,reader-gloss-v1
-numbers-money.lira,리라,,,,,2,reader-gloss-v1
-numbers-money.lira-symbol,리라 기호,,,,,2,reader-gloss-v1
-numbers-money.dong,동,,,,,2,reader-gloss-v1
-numbers-money.dong-symbol,동 기호,,,,,2,reader-gloss-v1
-numbers-money.ruble,루블,,,,,2,reader-gloss-v1
-numbers-money.ruble-symbol,루블 기호,,,,,2,reader-gloss-v1
-numbers-money.rupiah,루피아,,,,,2,reader-gloss-v1
-numbers-money.rupiah-symbol,루피아 기호,,,,,2,reader-gloss-v1
-numbers-money.shilling,실링,,,,,2,reader-gloss-v1
-numbers-money.shilling-symbol,실링 기호,,,,,2,reader-gloss-v1
-numbers-money.euro,유로,,,,,2,reader-gloss-v1
-numbers-money.euro-symbol,유로 기호,,,,,2,reader-gloss-v1
-numbers-money.dollar,달러,,,,,2,reader-gloss-v1
-numbers-money.dollar-symbol,달러 기호,,,,,2,reader-gloss-v1
-numbers-money.pound,파운드,,,,,2,reader-gloss-v1
-numbers-money.pound-symbol,파운드 기호,,,,,2,reader-gloss-v1
-numbers-money.yen,엔,,,,,2,reader-gloss-v1
+numbers-money.forint,포린트,,porinteu,pʰoɾintʰɯ,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.forint-symbol,포린트 기호,,porinteu giho,pʰoɾintʰɯ kiho,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.rupee,루피,,rupi,ɾupʰi,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.rupee-symbol,루피 기호,,rupi giho,ɾupʰi kiho,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.baht,바트,,bateu,patʰɯ,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.baht-symbol,바트 기호,,bateu giho,patʰɯ kiho,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.lira,리라,,rira,ɾiɾa,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.lira-symbol,리라 기호,,rira giho,ɾiɾa kiho,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.dong,동,,dong,toŋ,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.dong-symbol,동 기호,,dong giho,toŋ kiho,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.ruble,루블,,rubeul,ɾubɯl,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.ruble-symbol,루블 기호,,rubeul giho,ɾubɯl kiho,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.rupiah,루피아,,rupia,ɾupʰia,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.rupiah-symbol,루피아 기호,,rupia giho,ɾupʰia kiho,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.shilling,실링,,silring,silɾiŋ,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.shilling-symbol,실링 기호,,silring giho,silɾiŋ kiho,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.euro,유로,,yuro,juɾo,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.euro-symbol,유로 기호,,yuro giho,juɾo kiho,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.dollar,달러,,dalreo,talɾʌ,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.dollar-symbol,달러 기호,,dalreo giho,talɾʌ kiho,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.pound,파운드,,paundeu,pʰaundɯ,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.pound-symbol,파운드 기호,,paundeu giho,pʰaundɯ kiho,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.yen,엔,,en,en,,2,reader-gloss-v1;roman=generated;ipa=rr
 numbers-money.yen-symbol,¥,,,,,2,reader-gloss-v1
-numbers-money.yu-n,위안,,,,,2,reader-gloss-v1
-numbers-money.ku-i,위안 (구어),,,,,1,reader-gloss-v1
-numbers-money.li-ng,2 + 단위명사,,,,,1,reader-gloss-v1
-numbers-money.2-items,2개,,,,,1,reader-gloss-v1
+numbers-money.yu-n,위안,,wian,wian,,2,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.ku-i,위안 (구어),,wian (gueo),wian kuʌ,,1,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.li-ng,2 + 단위명사,,2 + danwimyeongsa,,,1,reader-gloss-v1;roman=generated
+numbers-money.2-items,2개,,2gae,,,1,reader-gloss-v1;roman=generated
