@@ -11,7 +11,7 @@ A real-time meeting agenda tracker with visual timeline, state persistence, and 
 - **Smart Time Adjustment**: Unlocked items proportionally resize when running behind/ahead
 - **Locked Items**: Lock specific items to prevent their duration from being adjusted
 - **Status Monitor**: Clear display of whether you're on time, behind, or ahead
-- **State Persistence**: Ordinary work persists in the URL and localStorage; opened share links use isolated tab storage
+- **State Persistence**: Ordinary work persists in the URL and localStorage; opened share links, including legacy unmarked links, use isolated tab storage
 - **Undo/Redo**: Use Ctrl/Cmd-Z and Ctrl/Cmd-Shift-Z outside text editors
 - **Panel Layouts**: Drag panel headers to swap slots; panel order and splitter sizes persist locally
 - **Bulk Editing**: Edit Item, Lead, Color, Duration, Locked, or Notes as lists, or edit all nine CSV columns with stable IDs; former six-column CSV remains import-compatible
@@ -131,7 +131,7 @@ agendamatic/
 autoCHAIR preserves or transfers your agenda in three ways:
 
 1. **URL Parameters**: Portable configuration is compressed and encoded in the URL query string
-2. **Browser Storage**: Ordinary work is saved in localStorage; an explicitly shared link uses isolated sessionStorage so it cannot replace that browser's local workspace
+2. **Browser Storage**: Ordinary work is saved in localStorage; explicit share links and unmarked legacy payloads that differ from the remembered local URL use isolated sessionStorage so they cannot replace that browser's local workspace
 3. **JSON Export**: Manual backup/restore via JSON files
 
 The URL is automatically updated as you edit. Share links omit live tracker anchors and local layout preferences; the recipient can edit and reload the shared agenda in its tab without overwriting the browser's ordinary working copy.

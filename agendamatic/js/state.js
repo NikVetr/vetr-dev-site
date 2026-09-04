@@ -1950,12 +1950,12 @@ function persistState() {
 }
 
 /**
- * Load state from the active tab/origin persistence scope.
+ * Load state from a browser persistence scope.
+ * @param {Storage} storage - Storage scope to read, defaulting to the active scope
  * @returns {Object|null} Persisted state or null
  */
-function loadFromPersistenceStorage() {
+function loadFromPersistenceStorage(storage = useSessionPersistence ? sessionStorage : localStorage) {
     try {
-        const storage = useSessionPersistence ? sessionStorage : localStorage;
         const stored = storage.getItem(STORAGE_KEY);
         if (stored) {
             return JSON.parse(stored);
@@ -1976,10 +1976,25 @@ export function initializeState() {
     const url = new URL(window.location.href);
     const encodedURLState = url.searchParams.get('s');
     const isExplicitShare = url.searchParams.get('share') === '1';
-    let rememberedShareSession = false;
+    let lastLocalURLState = null;
     try {
-        if (isExplicitShare) sessionStorage.setItem(SESSION_ISOLATION_KEY, '1');
+        lastLocalURLState = localStorage.getItem(STORAGE_URL_KEY);
+    } catch (e) {
+        console.error('Failed to read remembered local URL state:', e);
+    }
+    const isUnmarkedExternalShare = !!encodedURLState &&
+        !isExplicitShare &&
+        encodedURLState !== lastLocalURLState;
+    let rememberedShareSession = false;
+    let startedIsolatedSession = false;
+    try {
         rememberedShareSession = sessionStorage.getItem(SESSION_ISOLATION_KEY) === '1';
+        startedIsolatedSession = (isExplicitShare || isUnmarkedExternalShare) &&
+            !rememberedShareSession;
+        if (isExplicitShare || isUnmarkedExternalShare) {
+            sessionStorage.setItem(SESSION_ISOLATION_KEY, '1');
+            rememberedShareSession = sessionStorage.getItem(SESSION_ISOLATION_KEY) === '1';
+        }
         if (!isExplicitShare && !encodedURLState && rememberedShareSession) {
             sessionStorage.removeItem(SESSION_ISOLATION_KEY);
             sessionStorage.removeItem(STORAGE_KEY);
@@ -1989,7 +2004,7 @@ export function initializeState() {
     } catch (e) {
         console.error('Failed to isolate shared agenda state:', e);
     }
-    useSessionPersistence = isExplicitShare || rememberedShareSession;
+    useSessionPersistence = isExplicitShare || isUnmarkedExternalShare || rememberedShareSession;
     if (isExplicitShare && rememberedShareSession) {
         url.searchParams.delete('share');
         window.history.replaceState(window.history.state, '', url.toString());
@@ -2003,10 +2018,11 @@ export function initializeState() {
     }
 
     const hasExternalURLState = !!encodedURLState &&
-        (isExplicitShare || encodedURLState !== lastPersistedURLState);
+        (isExplicitShare || startedIsolatedSession || encodedURLState !== lastPersistedURLState);
     let state = hasExternalURLState ? loadFromURL() : loadFromPersistenceStorage();
     if (!state && encodedURLState && !hasExternalURLState) state = loadFromURL();
     if (!state && hasExternalURLState) state = loadFromPersistenceStorage();
+    if (!state && isUnmarkedExternalShare) state = loadFromPersistenceStorage(localStorage);
 
     if (!state) {
         state = {

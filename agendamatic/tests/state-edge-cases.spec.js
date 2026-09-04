@@ -132,7 +132,7 @@ test('metadata accepts real calendar dates and rejects impossible ones', async (
     });
 });
 
-test('share marker overrides matching local runtime while ordinary reload resumes', async ({ page, context }) => {
+test('explicit and legacy share URLs isolate while ordinary reload resumes', async ({ page, context }) => {
     await loadFresh(page);
     const sourceUrl = await page.evaluate(async () => {
         const state = await import('/agendamatic/js/state.js');
@@ -218,6 +218,51 @@ test('share marker overrides matching local runtime while ordinary reload resume
         isolated: '1'
     });
 
+    const legacyRecipient = await context.newPage();
+    await legacyRecipient.goto(recipient.url());
+    const legacyReceived = await legacyRecipient.evaluate(async () => {
+        const { getState } = await import('/agendamatic/js/state.js');
+        return {
+            title: getState().metadata.title,
+            tracker: getState().tracker,
+            isolated: sessionStorage.getItem('agendamatic_isolated_share_v1')
+        };
+    });
+    expect(legacyReceived).toMatchObject({
+        title: 'Recipient copy',
+        tracker: {
+            isRunning: false,
+            startedAt: null,
+            activeItemId: null
+        },
+        isolated: '1'
+    });
+    await legacyRecipient.evaluate(async () => {
+        const state = await import('/agendamatic/js/state.js');
+        state.updateMetadata({ title: 'Legacy recipient copy' });
+        state.updateTracker({
+            isRunning: true,
+            startedAt: '2026-09-03T18:00:00.000Z',
+            scheduledStartAt: '2026-09-03T18:00:00.000Z',
+            activeItemIndex: 0,
+            activeItemId: 'running',
+            activeStartedAt: '2026-09-03T18:00:00.000Z'
+        });
+    });
+    await legacyRecipient.reload();
+    const legacyReload = await legacyRecipient.evaluate(async () => {
+        const { getState } = await import('/agendamatic/js/state.js');
+        return { title: getState().metadata.title, tracker: getState().tracker };
+    });
+    expect(legacyReload).toMatchObject({
+        title: 'Legacy recipient copy',
+        tracker: {
+            isRunning: true,
+            startedAt: '2026-09-03T18:00:00.000Z',
+            activeItemId: 'running'
+        }
+    });
+
     await page.reload();
     const sourceReload = await page.evaluate(async () => {
         const { getState } = await import('/agendamatic/js/state.js');
@@ -250,6 +295,7 @@ test('share marker overrides matching local runtime while ordinary reload resume
         },
         isolated: null
     });
+    await legacyRecipient.close();
     await recipient.close();
 });
 
