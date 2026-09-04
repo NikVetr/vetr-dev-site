@@ -1,19 +1,19 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-payment-receipt.pay-by-card,Quẹt thẻ được không ạ?,,kwɛt̪˨˩ˀ tɛ˧˩˧ ɗyəc˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-payment-receipt.pay-cash,Trả tiền mặt ạ?,,tʃaː˧˩˧ t̪iɛn˨˩ mat̪˨˩ˀ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-payment-receipt.pay-by-qr-code,Quét mã QR được không ạ?,,kwɛt̪˧˥ maː˧ˀ˥ kwiɛʐəː˨˩ ɗyəc˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+payment-receipt.pay-by-card,Quẹt thẻ được không ạ?,,kwɛt̪˨˩ˀ tɛ˧˩˧ ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+payment-receipt.pay-cash,Trả tiền mặt ạ?,,tʃaː˧˩˧ t̪iɛ̯n˨˩ mat̪˨˩ˀ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+payment-receipt.pay-by-qr-code,Quét mã QR được không ạ?,,kwɛt̪˧˥ maː˧ˀ˥ kwiɛʐəː˨˩ ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 payment-receipt.a-receipt-please,Cho tôi hóa đơn ạ,,tʃɔ˧ t̪oj˧ hwaː˧˥ ɗəːn˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 payment-receipt.please-write-the-number,Xin ghi số ra giấy,,sin˧ ɣi˧ so˧˥ zaː˧ zəɪ˧˥,,2,vi-agent-v1;ipa=espeak
-payment-receipt.how-much-in-total,Tổng cộng bao nhiêu ạ?,,t̪oŋ˧˩˧ koŋ˨˩ˀ baːw˧ ɲiɛw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-payment-receipt.can-we-pay-separately,Trả riêng được không ạ?,,tʃaː˧˩˧ ziɛŋ˧ ɗyəc˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-payment-receipt.is-tax-included,Đã gồm thuế chưa ạ?,,ɗaː˧ˀ˥ ɣom˨˩ twe˧˥ tʃyə˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-payment-receipt.my-card-was-declined,Thẻ của tôi bị từ chối,,tɛ˧˩˧ kuə˧˩˧ t̪oj˧ bi˨˩ˀ t̪y˨˩ tʃoj˧˥,,2,vi-agent-v1;ipa=espeak
+payment-receipt.how-much-in-total,Tổng cộng bao nhiêu ạ?,,t̪oŋ˧˩˧ koŋ˨˩ˀ baːw˧ ɲiɛ̯w˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+payment-receipt.can-we-pay-separately,Trả riêng được không ạ?,,tʃaː˧˩˧ ziɛ̯ŋ˧ ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+payment-receipt.is-tax-included,Đã gồm thuế chưa ạ?,,ɗaː˧ˀ˥ ɣom˨˩ twe˧˥ tʃyə̯˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+payment-receipt.my-card-was-declined,Thẻ của tôi bị từ chối,,tɛ˧˩˧ kuə̯˧˩˧ t̪oj˧ bi˨˩ˀ t̪y˨˩ tʃoj˧˥,,2,vi-agent-v1;ipa=espeak
 payment-receipt.the-bill-is-wrong,Hóa đơn hình như nhầm ạ,,hwaː˧˥ ɗəːn˧ hiɲ˨˩ ɲy˧ ɲəm˨˩ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 payment-receipt.i-already-paid,Tôi trả rồi ạ,,t̪oj˧ tʃaː˧˩˧ zoj˨˩ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 shopping.i-am-just-looking,Tôi xem thôi ạ,,t̪oj˧ sɛm˧ toj˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-shopping.how-much-is-this,Cái này bao nhiêu ạ?,,kaːj˧˥ naj˨˩ baːw˧ ɲiɛw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+shopping.how-much-is-this,Cái này bao nhiêu ạ?,,kaːj˧˥ naj˨˩ baːw˧ ɲiɛ̯w˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 shopping.that-is-too-expensive,Đắt quá,Mắc quá,ɗat̪˧˥ kwaː˧˥,,2,vi-agent-v1;ipa=espeak
-shopping.can-it-be-a-little-cheaper,Bớt chút được không ạ?,,bəːt̪˧˥ tʃut̪˧˥ ɗyəc˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+shopping.can-it-be-a-little-cheaper,Bớt chút được không ạ?,,bəːt̪˧˥ tʃut̪˧˥ ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 shopping.is-there-a-discount,Có giảm giá không ạ?,,kɔ˧˥ zaːm˧˩˧ zaː˧˥ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 shopping.where-do-i-pay,Trả tiền ở đâu ạ?,,,,2,vi-agent-v1
 shopping.i-will-take-this,Tôi lấy cái này,,t̪oj˧ ləɪ˧˥ kaːj˧˥ naj˨˩,,2,vi-agent-v1;ipa=espeak
@@ -25,8 +25,8 @@ shopping.what-is-it-made-of,Cái này làm bằng gì ạ?,,kaːj˧˥ naj˨˩ la
 color-size-returns.do-you-have-another-color,Có màu khác không ạ?,,kɔ˧˥ maw˨˩ xaːc˧˥ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 color-size-returns.do-you-have-another-size,Có cỡ khác không ạ?,,kɔ˧˥ kəː˧ˀ˥ xaːc˧˥ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 color-size-returns.may-i-try-it-on,Cho tôi mặc thử ạ,,tʃɔ˧ t̪oj˧ mac˨˩ˀ ty˧˩˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-color-size-returns.can-i-return-it,Trả lại được không ạ?,,tʃaː˧˩˧ laːj˨˩ˀ ɗyəc˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-color-size-returns.can-i-exchange-it,Đổi được không ạ?,,ɗoj˧˩˧ ɗyəc˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+color-size-returns.can-i-return-it,Trả lại được không ạ?,,tʃaː˧˩˧ laːj˨˩ˀ ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+color-size-returns.can-i-exchange-it,Đổi được không ạ?,,ɗoj˧˩˧ ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 color-size-returns.do-you-have-a-bag,Cho tôi cái túi ạ,,tʃɔ˧ t̪oj˧ kaːj˧˥ t̪uj˧˥ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-tax-refund.can-i-get-a-tax-refund,Tôi được hoàn thuế không ạ?,,t̪oj˧ ɗyəc˨˩ˀ hwaːn˨˩ twe˧˥ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+tax-refund.can-i-get-a-tax-refund,Tôi được hoàn thuế không ạ?,,t̪oj˧ ɗyə̯c˨˩ˀ hwaːn˨˩ twe˧˥ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 tax-refund.is-tax-free-shopping-available,Ở đây có hoàn thuế VAT không ạ?,,əː˧˩˧ ɗəɪ˧ kɔ˧˥ hwaːn˨˩ twe˧˥ veaːte˧ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak

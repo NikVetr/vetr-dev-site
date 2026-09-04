@@ -57,7 +57,34 @@ export function breakColumns(atoms, height, bins) {
         + `${atoms[tooTall].height.toFixed(1)}pt tall but a column holds only ${height.toFixed(1)}pt`,
     };
   }
-  if (bins > n) return { ...empty, failure: `${bins} columns but only ${n} blocks to fill them` };
+  // Fewer blocks than columns: fill the ones that can be filled and leave the rest
+  // empty. This used to be a failure, and the failure was worse than the ragged
+  // sheet it was avoiding -- `solveFaces` answers a failure by *adding* faces, which
+  // adds bins, so the one move it has made the shortage worse at every step until it
+  // hit the ceiling and reported "even 24 faces will not hold this" about a sheet
+  // holding one row. Two clicks in the studio reach it: add your own term, untick
+  // everything else, and the canvas went blank.
+  //
+  // The DP itself needs no special case -- it is the same search into `n` bins, and
+  // the trailing columns are exactly the all-empty shape the no-atoms path above
+  // already returns. `loose-columns` then reports the whitespace, which is the true
+  // thing to say: the sheet is short of content for this many columns.
+  // The bound is not the atom count but the number of atoms that may *open* a
+  // column, which is fewer: a heading is bound to the rows it introduces, so the atom
+  // after it cannot start one. A sheet of one section is two atoms and exactly one
+  // legal start, and asking it to fill even two columns is unsatisfiable however tall
+  // they are.
+  let starts = 1;
+  for (let i = 1; i < n; i += 1) if (!atoms[i - 1].keepWithNext) starts += 1;
+  if (bins > starts) {
+    const partial = breakColumns(atoms, height, starts);
+    if (partial.failure) return partial;
+    return {
+      ...partial,
+      columns: [...partial.columns, ...Array.from({ length: bins - starts }, () => [])],
+      slack: [...partial.slack, ...Array.from({ length: bins - starts }, () => height)],
+    };
+  }
 
   // cost[k][i]: best cost for placing atoms [0, i) into exactly k columns.
   const cost = Array.from({ length: bins + 1 }, () => new Float64Array(n + 1).fill(Infinity));

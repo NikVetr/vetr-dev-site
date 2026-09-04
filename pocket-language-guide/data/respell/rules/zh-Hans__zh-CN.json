@@ -1,0 +1,2096 @@
+{
+  "source": "zh-Hans",
+  "accent": "zh-CN",
+  "status": "ready",
+  "version": "1",
+  "derives_from": "汉语拼音方案 (adopted by the 1st NPC, 5th session, 11 February 1958; text as published by 教育部) for the notation, and the *sound correspondences* of the 译音表 tradition for the inventory. From the 方案 itself: the letter values of the 声母表 and 韵母表, and two of its spelling rules verbatim -- 「i 行的韵母，前面没有声母的时候，写成 yi, ya, ye, yao, you, yan, yin, yang, ying, yong」 with its u- and ü- counterparts (so a rime with no initial takes y/w: yi, wu, yu), and 「ü 行的韵母跟声母 j, q, x 拼的时候，写成 ju, qu, xu」. Article 18 of the 国家通用语言文字法 (2001) makes the 方案 the state's 「拼写和注音工具」 -- spelling *and phonetic-annotation* tool -- and 义务教育语文课程标准 puts it in grade one, so it is the one notation every mainland reader has already been taught for exactly this job. The inventory is the other half: the 译音表 appended to 世界人名翻译大辞典 and the GB/T 17693 series are consonant x vowel matrices whose cells hold a semantically neutral character, and whose column for a consonant with no vowel of its own is the one this table needed -- /s/ alone is 斯 si, /t/ 特 te, /k/ 克 ke, /b/ 布 bu, /p/ 普 pu, /f/ 弗 fu, /m/ 姆 mu, /d/ 德 de, /ɡ/ 格 ge, /l/ 勒 le, /h/ 赫 he, /z/ 兹 zi, /ʃ/ 什 shi, and a coda rhotic 尔 er. That is a fact about which Mandarin syllable answers which foreign sound, and it is what this table encodes, in pinyin. **No table was copied.** The 世界人名翻译大辞典 is a commercial book; the copyright status of a *recommended* national standard (GB/T, as against a mandatory GB) under article 5 of the 著作权法 was not resolved and is carried as unverified in content/RESPELL-SYSTEMS.md, so GB/T 17693 and zh.wikipedia's Wikipedia:外語譯音表 were used as a cross-check on the correspondences and neither's text is reproduced. Where a choice was open it was settled by a rendering that is common knowledge rather than by a table: 巴黎, 柏林, 华盛顿, 莎士比亚, 斯特拉霍夫卡, 希特勒, 悉尼, 西班牙, 阿司匹林, 塔克西.",
+  "deviations": [
+    {
+      "rule": "Both traditions write the result in Chinese characters: the 译音表 in a restricted set of semantically neutral graphs, 谐音 in whatever homophones a phrasebook author likes (ありがとう as 阿里嘎脱, こんにちは as 口你七哇)",
+      "why": "OVERRULED -- this table emits Hanyu Pinyin, which is the survey's call and is right for four reasons that survived the reading pass. (1) A character carries its own meaning and its own tone whether or not you want them, so 你好 respelt into characters reads as words and reads with Mandarin tones that the source did not have; pinyin is sound-only. (2) The syllable inventory is the same either way -- a 译音表 cell and a 谐音 character are both just a Mandarin syllable -- but pinyin can be pushed slightly past Mandarin phonotactics, which is where `set`, `mer` and `kart` come from and which no character can do. (3) Case comes back, so the one stress device available to a caseless reader is available here. (4) It sets in the condensed Latin face at a 4.4pt floor rather than the CJK stack's 5.0, and its hyphens are break opportunities. The honest cost is that 谐音 is what a Chinese reader expects in a phrasebook, so this column will read as schoolroom rather than street; and pinyin's letters are transparent only to a pinyin reader -- q x c zh ü are opaque to anyone reading them as English. That is the right trade here, because the reader is by construction a mainland reader who was taught the 方案 in grade one. It is not the right trade for a 注音符號 reader, and this file is `zh-Hans__zh-CN` for that reason."
+    },
+    {
+      "rule": "Every cell of the 译音表 is a full Mandarin syllable, so a foreign consonant that has no vowel of its own gets a syllable: Mike is 麦克 mai-ke, Shakespeare 莎士比亚 sha-shi-bi-ya, /st/ is 斯特 si-te",
+      "why": "Kept in the onset and relaxed in the coda, and the line is drawn where a Mandarin reader can and cannot follow. **Onset**: kept in full. A Mandarin syllable admits exactly one initial consonant and pinyin never writes a cluster, so a reader shown `strit` has nothing to read; every onset consonant therefore keeps its own vowel (`si-te-rit` for *street*, `pu-liz` for *please*, `mu-to-to` for *mtoto*), which is the 译音表's own procedure and 斯特里特 exactly. **Coda**: relaxed, and this is the survey's licence to push slightly past Mandarin phonotactics. A syllable may end in one letter beyond pinyin's own finals -n -ng -r, so `set`, `mer`, `kart`, `want`, `nord`, `gud` stand rather than becoming 塞特 se-te. A *second* such letter gets its own syllable again, because two is not \"slightly\": `est` is `es-te`, `ks` is `k-si` (埃克斯), `mp` is `m-pu`, `lafst` is `laf-sit`. The letters that cannot end a syllable at all -- j, q and x, which pinyin requires a following i or ü for -- always take a syllable: German *nicht* is `ni-xit` (尼希特), *Hochstuhl* `ho-he-shi-tul`. Measured: 4.4% of the corpus's syllables have a cluster onset and 2.6% a cluster coda, so this rule decides about 4,800 syllables."
+    },
+    {
+      "rule": "汉语拼音方案 admits only the ~400 syllables of its own 音节表: no ki gi hi, no pü tü, no oi or eu rime, and [uo] after any initial but b p m f is written uo (多 duo, 罗 luo, 托 tuo)",
+      "why": "Departed from deliberately, and only in one direction. **Where a letter sequence has no pinyin syllable at all, it is left to be read letter by letter**, because that reading is the correct one: `ki` read k+i is [kʰi], which is what the target has, while 基 ji would instruct [tɕi]; likewise `hi` (希 would be xi), `pü` for French *puis*, `oi`, `eu`, `o` after d t n l g k h (`do` rather than `duo`, which would insert a glide the target does not have). 140 rows carry a `ü` after an initial pinyin never combines it with, and every one of them is closer than the legal alternative. **Where a sequence IS a legal pinyin syllable with the wrong value, we do not use it.** That is exactly si, zi and ci, which read [sɨ tsɨ tsʰɨ] with pinyin's empty rime rather than [si tsi tsʰi]; before [i] and [y] the dental sibilants therefore take their palatal letters, which is also the universal tradition -- 西班牙, 悉尼 for Sydney, 辛辛那提 for Cincinnati, 津巴布韦 for Zimbabwe. So /si/ is `xi` and /tsi/ is `ji`, while Russian сы stays `si`, the empty rime being exactly [sɨ]. The retroflex series is left alone (shi zhi chi ri, 什 芝 as the tradition has them), its own vowel being closer to what follows [ʂ ʈʂ] anyway."
+    },
+    {
+      "rule": "No Chinese transcription convention marks the source's tone. The 译音表 has no notion of tone at all -- each of its characters simply has one -- and 谐音 inherits whatever tones its characters carry",
+      "why": "OVERRULED: `policy.tone` is `keep`, and the four pinyin tone marks are written on the two tonal targets (th and vi, 1,331 rows). The case is not that the mapping is good -- Mandarin has four contours plus a neutral tone against Thai's five and Vietnamese's six, so it cannot be. It is that **the mark degrades gracefully and its absence does not**. A Mandarin reader will impose *some* tone on every syllable whatever we print, exactly as a 谐音 character forces one; if the mark is legible they impose one that is close, and if it is illegible at 5.22pt italic muted they impose their own default, which is precisely what `drop` would have given them. So `keep` weakly dominates `drop`, and the only real risk is a caron misread as an acute. Mapped by contour, not by category: ˧˥ → á (35 = 35, exact, Vietnamese sắc), ˥˩ → à (51 = 51, exact, Thai falling), ˧˩˧ → ǎ (Mandarin's 214 is the same dipping shape as Vietnamese hỏi), ˦˥ → ā (both high and level-ish, Thai high), ˩˩˦ → á (both rises, Thai rising), ˨˩ → à for Vietnamese and ǎ for Thai in a targets block (both source tones are [21]; Mandarin's 半三声 [21] is the better match, and Thai gets it because Vietnamese needs the caron for hỏi and Thai needs the grave for its own [51]), ˧ → unmarked. **The unmarked category is the weak point and is worth stating plainly**: pinyin's unmarked syllable is 轻声, which is short and reduced rather than mid-level, so Thai mid and Vietnamese ngang are being written with a mark that means something slightly different. Every other mark in the set was already taken by a closer match, and for Vietnamese there is a compensation -- ngang is the unmarked tone in Vietnamese orthography too, so unmarked answers unmarked. Two Vietnamese tones are unreachable and merge: `ˀ` is not a tone letter, so it separates from ˨˩ˀ and ˧ˀ˥ and lands in the coda, leaving nặng identical to huyền and ngã to sắc."
+    },
+    {
+      "rule": "汉语拼音正词法基本规则 writes the syllables of a word solid and uses an apostrophe only to disambiguate: Xi'an, but Beijing and pinyin",
+      "why": "Departed from: every syllable boundary takes a hyphen. Three reasons, and content/RESPELL-SYSTEMS.md's per-source table already reaches the same answer for a different one. (1) The respelling is not a word and must not look like one -- it is a pronunciation hint for a foreign phrase, and solid `aositeliya` is unreadable where `ost-rei-li-e` is not. (2) A row in this corpus is a phrase rather than a name, and the hyphens are line-break opportunities in a column the solver is fighting for width; pinyin's own convention would give the measurer nothing to break on. (3) The epenthetic syllables this table generates have to be *visible* as syllables, and the separator is what makes them so. The apostrophe was considered and rejected: it is pinyin's own device, but it appears only at the one boundary that needs disambiguating, so using it everywhere would misrepresent it, and it is the wrong shape for a break opportunity."
+    },
+    {
+      "rule": "Neither tradition marks stress, and Mandarin has no lexical stress to borrow a device from",
+      "why": "`policy.stress` is `caps` anyway, which content/RESPELL-SYSTEMS.md's two-argument table already prescribes -- of the six caseless sources, Chinese-in-pinyin is the only one that gets a stress device, and it gets it because pinyin is Latin. It fires on the twelve targets whose `ipa` column carries ˈ; the five that carry none (ja ko th vi, and zh-Hans itself) are unmarked whatever the policy says. Two costs, both measured. (1) A capital is a *new instruction* for a Mandarin reader, not a borrowed convention -- the same weak position `id` and `fr` are in -- so it needs the legend, and all-caps pinyin risks reading as an initialism (GB, HSK). (2) Because one target syllable can expand into several output syllables, a capitalised run sometimes covers more than one: 1,149 of 14,310 capitalised runs (8.0%) span two or more syllables, and the worst of them are on the 73 Arabic rows whose short vowels the G2P lost (`LE-LE-MU-BU-TE-DI-na`). That is honest -- the run is exactly the extent of the target's stressed syllable -- but it reads as shouting rather than as marking, and it is the single strongest argument anyone could make for `stress: none` here. The two devices that would collide, capitals and tone marks, provably never meet: the ˈ-bearing targets and the tone-bearing targets are disjoint sets in this corpus, and the output charset confirms it (no uppercase vowel in it carries a tone mark)."
+    },
+    {
+      "rule": "The 译音表 answers a foreign /r/ with the l- row: 巴黎 for Paris, 柏林 for Berlin, 罗伯特 for Robert, 里根 for Reagan",
+      "why": "Kept for every rhotic but one, and overruled for that one. A tap, a trill or a uvular fricative (/ɾ r ʁ ɽ/, and /ɹ/ where the target is Arabic) is `l`, which is the tradition and is also the better sound: pinyin's r is [ʐ~ɻ], a retroflex fricative, and no Mandarin reader produces a trill from it. But the **English** approximant [ɹ] is very nearly what pinyin's r already is, so English /ɹ/ is `r` -- guarded typologically on the target having a rhotic vowel (`if_inventory: \"ɚ\"`), which only English does. This matters more than it looks: `l` for English /r/ is the one substitution that turns *right* into *light*. A coda rhotic is always `r`, which is pinyin's -r and the 尔 of every transliterated name (`mer`, `kart`, `wum-er`)."
+    },
+    {
+      "rule": "汉语拼音方案 has no letter for [v], and the 译音表 answers /v/ with its w- row before a vowel (瓦 wa, 韦 wei, 维 wei, 沃 wo, 武 wu) and with 夫 fu elsewhere",
+      "why": "Kept as the standard has it, which needs saying because it looks like a mistake: onset /v/ is `w` and coda /v/ is `f`. The reason it is not a mistake is that Beijing Mandarin realises initial w as [ʋ] before a low vowel (万 [ʋan]), so `w` genuinely can be a labiodental approximant, while a syllable-final [ʋ] does not exist and `f` is the nearest thing there. Same treatment for /ʋ/ (Hindi व)."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "vowel length -- /ː/ on 7,655 cells, most of it Hindi (2,314), Thai (1,208), Arabic (1,198) and German (1,006)",
+      "out": "dropped; `policy.length` is `none` and the table maps `ː` to nothing",
+      "why": "Mandarin has no length contrast and pinyin has no device for one. Doubling is unavailable in a way it is not for Swahili or German: `aa` is not a pinyin rime, and a Mandarin reader shown one reads two syllables. The macron, which is the only mark that would suggest length, is tone 1. So this is a real and unrecoverable loss, and it is the largest single one in the file -- Hindi's ि/ी and Thai's short/long pairs are merged throughout."
+    },
+    {
+      "sounds": "the front rounded vowels /y ø œ/ (907, 167 and 200 cells; of the /y/, 486 are the Portuguese reduced final and the Vietnamese ư that espeak mis-writes, and are remapped in targets blocks)",
+      "out": "/y/ is `ü`; /ø/ and /œ/ are `e`",
+      "why": "Pinyin has ü and it is exactly [y], so /y/ costs nothing (`ju-nai-DUN` for Günaydın is pinyin ju = [tɕy] against Turkish gü = [ɟy], sound for sound). The mid pair has no letter: üe [yɛ] is the right vowel but combines with almost nothing, so /ø œ/ take `e`, losing the rounding and keeping the height -- which is the tradition too (歌德 for Goethe, 科隆 for Köln, 厄 for Turkish ö)."
+    },
+    {
+      "sounds": "/ɯ/ (1,788 cells: Japanese 956, Turkish 482, Korean 225, Thai 93)",
+      "out": "`u`",
+      "why": "Rounding lost. Free for Japanese, which has no /u/ to collide with, and a real merger for Korean (ㅡ with ㅜ) and Turkish (ı with u) on 707 cells. `e` [ɤ] was tried as the alternative -- it is unrounded and one step lower -- but it collides with Korean ㅓ, which is the vowel `e` fits best, and giving ㅓ anything else costs more than merging ㅡ with ㅜ. Korean /ʌ/ therefore takes `e` in a targets block."
+    },
+    {
+      "sounds": "voicing on the obstruents",
+      "out": "/z/ → z [ts], /ʒ/ → r [ʐ], /v/ → w, /ð/ → d, /dʒ/ → zh, /dz/ → z, /ʑ/ → j",
+      "why": "Mandarin has no voiced obstruent except the approximants, so every voiced fricative is answered by the nearest voiceless or affricated letter. Two of these are better than they look: pinyin r is [ʐ], which is a voiced fricative and very close to /ʒ/ (让 for Jean, 日瓦戈 for Zhivago), and pinyin z is [ts], which is the standard answer for /z/ (赞比亚)."
+    },
+    {
+      "sounds": "aspiration where the target has three series rather than two",
+      "out": "the two unaspirated series merge",
+      "why": "Pinyin writes an aspiration contrast (b/p, d/t, g/k, j/q, zh/ch, z/c) and no voicing contrast, so which letter a target's /p/ takes is decided by the target's own inventory -- `if_inventory: \"pʰ\"` gives /p/ the letter `b`, because a language that contrasts /p/ with /pʰ/ has no voiced stop for b to collide with. Thai and Hindi have all three of /b p pʰ/, and there the /b/ and /p/ series both come out `b`; the contrast pinyin can write is the one it keeps. In a coda the letter simply follows the symbol (/p/ → p, /b/ → b), aspiration being inaudible there."
+    },
+    {
+      "sounds": "the Hindi series pinyin has no place for: retroflex /ʈ ɖ ɳ/, breathy /bʰ dʰ ɡʰ ɟʰ ɖʰ ɽʰ/ (142 cells)",
+      "out": "merged with the dentals; breathiness dropped",
+      "why": "Mandarin's retroflexes are all affricates or fricatives (zh ch sh r), so a retroflex *stop* has no letter; ट and त both become d/t. Breathy voice has no notation in any Latin orthography the reader knows."
+    },
+    {
+      "sounds": "Russian palatalisation (1,556 cells over fourteen phonemes)",
+      "out": "an `i` inserted between the consonant and the rime: ти → ti, ни → ni, ли → li, сь → xi, чь → qi",
+      "why": "This is how Mandarin itself writes palatalisation -- j q x are the palatalised coronals and are always followed by i or ü -- and it is what the 译音表's Russian tables do (西伯利亚 for Сибирь, 契 for Че). Where the letter is already palatal the i is pinyin's own spelling; where it is not (mi, bi, pi, wi, ti, di) the i is the palatalisation itself, and the syllable that results is sometimes outside pinyin's inventory (`mia`) and correct read letter by letter."
+    },
+    {
+      "sounds": "the Arabic consonants with no Mandarin counterpart: /q ħ ʕ dˤ θ ð/, and /ʔ/ in every language",
+      "out": "/q/ → k (卡塔尔), /ħ/ → h, /ʕ/ → nothing, /dˤ/ → d, /θ/ → s (史密斯), /ð/ → d, /ʔ/ → nothing",
+      "why": "Uvular, pharyngeal and emphatic articulations are outside the pinyin inventory entirely, and the 译音表 answers them the same way. Dropping /ʕ/ and /ʔ/ rather than approximating them is deliberate: they are the two segments a Mandarin reader would produce spuriously from any letter we gave them. The one place it visibly costs something is English *written* /ɹˈɪʔn̩/, which comes out `rin` -- one row, where espeak wrote a glottal stop for a flapped t."
+    },
+    {
+      "sounds": "lexical tone: five Thai tones and six Vietnamese ones",
+      "out": "four pinyin tone marks plus unmarked",
+      "why": "Thai keeps all five distinct (mid → unmarked, low → ǎ, falling → à, high → ā, rising → á). Vietnamese loses two, and not to the mark inventory but to the engine: `ˀ` is not a Chao letter, so nặng arrives looking like huyền and ngã like sắc. See the tone deviation for the contour-by-contour argument."
+    }
+  ],
+  "syllable_construction": "How an alphabetic script that has no consonant clusters is written in a format that spells onset, nucleus and coda separately.\n\nPinyin needs no help joining an initial to a rime -- it is alphabetic, so `t` + `a` is `ta` and the Japanese table's whole contraction problem does not arise here. What it needs help with is the opposite: **a Mandarin syllable admits exactly one initial consonant**, and the corpus is full of clusters. So every consonant rule emits its initial *plus the vowel it takes when it stands alone* plus the syllable separator -- /s/ is `si-`, /t/ is `te-`, /p/ is `pu-`, /ʃ/ is `shi-`, /tɕ/ is `ji-` -- and one fixup deletes that vowel and separator again wherever a real rime follows. So /t/ + /a/ is `te-` + `a` → `ta`, while /s/ + /t/ + /a/ is `si-` + `te-` + `a` → `si-ta`, and /str/ + /iː/ is `si-te-re-` + `i` → `si-te-rit`. The `out` column of the consonant rules is therefore, read down, the 译音表's own consonant-alone column written in pinyin (斯特普布姆弗德格勒赫兹什) -- which is the point: the epenthesis is not an invention, it is what the standard does, and the deletion is what makes it stop doing it when a vowel is available.\n\nThe same mechanism runs backwards in the coda, where the epenthetic form is prefixed rather than suffixed (`-te`, `-si`, `-shi`, `-xi`) and is used only when the licence to write a bare final letter has run out -- see the second deviation. Which is decided by `after_out`: a coda consonant that sees one of `b p m f d t k s z l ng` already on the page is the second consonant of a coda and takes a syllable of its own. `ng` is on that list for every consonant but a nasal, because a nasal vowel is written with its own -ng and a nasal coda after one is the same segment twice -- French *mon* /mɔ̃n/ is `mong`, not `mong-ne`.\n\n`policy.fixups` must be `all`, and this is measured rather than assumed: with `first`, 627 rows change and every one of them is worse (`daun` for `daon`, `si-eing` for `seing`, `PAU-er` for `PAO-er`), because a syllable routinely needs two of these repairs at once. The order of the eight is load-bearing and changing it will corrupt output silently:\n  1. `i([iīíǐì])` -- a palatal medial that runs into an [i] rime: /ɲi/ is `ni`, not `nii`.\n  2. `([aeouü])\\1` -- a doubled vowel is one vowel; /uw/ and /iːj/ level out, and `aa` would read as two syllables.\n  3. the epenthetic-vowel deletion. It has to run after 1 and 2 and before everything else, and its character class has to include the tone-marked vowels, because the engine normalises to NFC *before* the fixups run and by this point the mark is composed into the letter.\n  4-5. `ngn` and `nn`, the nasal-vowel repairs.\n  6. `([aāáǎà])u` → ao. Pinyin writes [au] as ao, and this has to run after the deletion so that /baʊ/ (`bu-` + `a` + `u`) is `bao` rather than `bu-ao`.\n  7. `([jqxy])ü` → u, which is the 方案's own rule and has to run after any rule that can put a ü behind a j q x y.\n  8. a trailing separator, which a word with no vowel in it leaves behind (`he-mu-mu` for /hmm/).\nWhat is *not* in the fixups is the sibilant palatalisation before [i]. It was written as a fixup first and moved into the phoneme rules with `if_nucleus_head`, because a fixup cannot tell the epenthetic i of `si-` from a real [i] rime and got Indonesian *kasih* wrong (`ka-si-he` for `ka-xi-he`). Asking the question of the *phoneme* instead is both correct and cheaper, and it costs 34 syllables in the whole corpus -- an onset cluster that opens with a sibilant and whose rime is [i] palatalises when it should not (`xi-pik` for *speak*). Russian ы is answered correctly this way and cannot be by a fixup: `if_nucleus_head` sees /ɨ/, so сы stays `si`.",
+  "legend": "无需说明：写的都是普通汉语拼音的字母和声调符号，按拼音读法读即可。少数音节不在拼音音节表里（set、mer、ki、pü、o 不写作 uo），这时按字母逐个读。",
+  "policy": {
+    "syllable_separator": "-",
+    "word_separator": " ",
+    "stress": "caps",
+    "stress_min_syllables": 2,
+    "length": "none",
+    "tone": "keep",
+    "max_onset": 1,
+    "fixups": "all",
+    "locale": "zh-CN"
+  },
+  "policy_note": "Everything the policy block decides, measured over all 11,776 rows with a filled `ipa` column across the sixteen targets.\n\n**max_onset: 1.** 1 against 2 differs on 1,292 rows, 2 against 3 on 25. 1 is right for the reason Korean found and for one more of its own: a Mandarin onset holds exactly one consonant, so any cluster the syllabifier hands to an onset has to be broken by epenthesis anyway, and epenthesis *adds* a syllable where max_onset 1 leaves the consonant in the coda for a single licensed letter to hold. `an-ders-TAND` against `an-der-SI-TAND`, `nou PU-RAB-lem` against `nou PU-RA-bu-lem`, `ek-si-KIUS` against `ek-XI-KIUS` -- the last one because at max_onset 2 the /s/ becomes an onset before a front rime and palatalises. Onset maximisation is a claim about the reader, and this reader maximises nothing.\n\n**reader_onsets: absent, and inert if it were present.** `syllabify` consults the cluster table only in the `maxOnset >= 3` and `maxOnset >= 2` branches, so at max_onset 1 the field cannot be read at all. Measured to confirm rather than argued from the source: a 25-cluster list of the C+liquid and s+stop onsets moves 0 rows at max_onset 1 and 958 rows at max_onset 2. The field is therefore omitted rather than written and explained, since a policy line that does nothing is worse than no line.\n\n**fixups: all.** 627 rows differ from `first`, all of them worse. See syllable_construction.\n\n**stress: caps.** 7,898 rows differ from `none`. Kept, with the 8.0% multi-syllable capitalised run as its documented cost -- see the stress deviation, which is also where the argument against it is written down.\n\n**tone: keep.** 1,331 rows differ from `drop`, all of them Thai or Vietnamese. See the tone deviation.\n\n**length: none.** Forced: `double` would produce `aa`, which is not a pinyin rime, and the only mark that reads as length is tone 1.\n\n**Two targets blocks exist for the reasons content/CONTRIBUTING.md licenses them and no others.** `tr` /æ/ → e and `pt` /y/ → e are the two documented espeak defects that a typological guard cannot separate (Turkish's /æ/ is /e/ before a coda liquid or nasal on 96 cells; Portuguese's /y/ is the reduced final [ɨ] on 287, where /y/ is a real front rounded vowel elsewhere in the corpus). `vi` has four: /y/ is ư [ɯ] rather than [y], which also means the sibilants must not palatalise before it; /t̪/ is the unaspirated t against /t/ for th, which the usual `if_inventory: \"tʰ\"` guard cannot see because the Vietnamese column has no /tʰ/ in it at all; /tʃ/ is ch and tr, both unaspirated, so it takes zh rather than ch; and /c/ is the final -c/-ch, a coda [k̚], not an onset palatal. `ko` has one: /ʌ/ is ㅓ, a mid back unrounded vowel, where every other /ʌ/ in the corpus is low and central. `th` has one, the tone conflict on ˨˩.",
+  "phonemes": [
+    {
+      "slot": "onset",
+      "ipa": "p",
+      "out": "bu-",
+      "if_inventory": "pʰ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "p",
+      "out": "pu-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "p",
+      "out": "-pu",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "p",
+      "out": "p"
+    },
+    {
+      "slot": "onset",
+      "ipa": "pʰ",
+      "out": "pu-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "pʰ",
+      "out": "-pu",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "pʰ",
+      "out": "p"
+    },
+    {
+      "slot": "onset",
+      "ipa": "b",
+      "out": "bu-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "b",
+      "out": "-bu",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "b",
+      "out": "b"
+    },
+    {
+      "slot": "onset",
+      "ipa": "bʰ",
+      "out": "bu-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "bʰ",
+      "out": "-bu",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "bʰ",
+      "out": "b"
+    },
+    {
+      "slot": "onset",
+      "ipa": "p͈",
+      "out": "bu-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "p͈",
+      "out": "-bu",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "p͈",
+      "out": "b"
+    },
+    {
+      "slot": "onset",
+      "ipa": "β",
+      "out": "bu-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "β",
+      "out": "-bu",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "β",
+      "out": "b"
+    },
+    {
+      "slot": "onset",
+      "ipa": "t",
+      "out": "de-",
+      "if_inventory": "tʰ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "t",
+      "out": "te-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "t",
+      "out": "-te",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "t",
+      "out": "t"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tʰ",
+      "out": "te-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʰ",
+      "out": "-te",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʰ",
+      "out": "t"
+    },
+    {
+      "slot": "onset",
+      "ipa": "d",
+      "out": "de-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "d",
+      "out": "-de",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "d",
+      "out": "d"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɗ",
+      "out": "de-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɗ",
+      "out": "-de",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɗ",
+      "out": "d"
+    },
+    {
+      "slot": "onset",
+      "ipa": "dʰ",
+      "out": "de-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʰ",
+      "out": "-de",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʰ",
+      "out": "d"
+    },
+    {
+      "slot": "onset",
+      "ipa": "t͈",
+      "out": "de-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "t͈",
+      "out": "-de",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "t͈",
+      "out": "d"
+    },
+    {
+      "slot": "onset",
+      "ipa": "t̪",
+      "out": "te-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "t̪",
+      "out": "-te",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "t̪",
+      "out": "t"
+    },
+    {
+      "slot": "onset",
+      "ipa": "dˤ",
+      "out": "de-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dˤ",
+      "out": "-de",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dˤ",
+      "out": "d"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʈ",
+      "out": "de-",
+      "if_inventory": "ʈʰ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʈ",
+      "out": "te-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʈ",
+      "out": "-te",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʈ",
+      "out": "t"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʈʰ",
+      "out": "te-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʈʰ",
+      "out": "-te",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʈʰ",
+      "out": "t"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɖ",
+      "out": "de-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɖ",
+      "out": "-de",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɖ",
+      "out": "d"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɖʰ",
+      "out": "de-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɖʰ",
+      "out": "-de",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɖʰ",
+      "out": "d"
+    },
+    {
+      "slot": "onset",
+      "ipa": "k",
+      "out": "ge-",
+      "if_inventory": "kʰ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "k",
+      "out": "ke-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "k",
+      "out": "-ke",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "k",
+      "out": "k"
+    },
+    {
+      "slot": "onset",
+      "ipa": "kʰ",
+      "out": "ke-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "kʰ",
+      "out": "-ke",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "kʰ",
+      "out": "k"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɡ",
+      "out": "ge-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɡ",
+      "out": "-ge",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɡ",
+      "out": "g"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɡʰ",
+      "out": "ge-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɡʰ",
+      "out": "-ge",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɡʰ",
+      "out": "g"
+    },
+    {
+      "slot": "onset",
+      "ipa": "k͈",
+      "out": "ge-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "k͈",
+      "out": "-ge",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "k͈",
+      "out": "g"
+    },
+    {
+      "slot": "onset",
+      "ipa": "q",
+      "out": "ke-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "q",
+      "out": "-ke",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "q",
+      "out": "k"
+    },
+    {
+      "slot": "onset",
+      "ipa": "c",
+      "out": "ji-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "c",
+      "out": "-ji"
+    },
+    {
+      "slot": "onset",
+      "ipa": "cʰ",
+      "out": "qi-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "cʰ",
+      "out": "-qi"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɟ",
+      "out": "ji-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɟ",
+      "out": "-ji"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɟʰ",
+      "out": "ji-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɟʰ",
+      "out": "-ji"
+    },
+    {
+      "slot": "onset",
+      "ipa": "m",
+      "out": "mu-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "m",
+      "out": "-mu",
+      "after_out": "b p m f d t k s z l"
+    },
+    {
+      "slot": "coda",
+      "ipa": "m",
+      "out": "m"
+    },
+    {
+      "slot": "onset",
+      "ipa": "m̩",
+      "out": "mu-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "m̩",
+      "out": "-mu",
+      "after_out": "b p m f d t k s z l"
+    },
+    {
+      "slot": "coda",
+      "ipa": "m̩",
+      "out": "m"
+    },
+    {
+      "slot": "onset",
+      "ipa": "n",
+      "out": "ne-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "n",
+      "out": "-ne",
+      "after_out": "b p m f d t k s z l"
+    },
+    {
+      "slot": "coda",
+      "ipa": "n",
+      "out": "n"
+    },
+    {
+      "slot": "onset",
+      "ipa": "n̩",
+      "out": "ne-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "n̩",
+      "out": "-ne",
+      "after_out": "b p m f d t k s z l"
+    },
+    {
+      "slot": "coda",
+      "ipa": "n̩",
+      "out": "n"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɳ",
+      "out": "ne-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɳ",
+      "out": "-ne",
+      "after_out": "b p m f d t k s z l"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɳ",
+      "out": "n"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɴ",
+      "out": "ne-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɴ",
+      "out": "-ne",
+      "after_out": "b p m f d t k s z l"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɴ",
+      "out": "n"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɲ",
+      "out": "ni"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɲ",
+      "out": "-ni",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɲ",
+      "out": "n"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ŋ",
+      "out": "ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ŋ",
+      "out": "-ng",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ŋ",
+      "out": "ng"
+    },
+    {
+      "slot": "onset",
+      "ipa": "l",
+      "out": "le-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "l",
+      "out": "-le",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "l",
+      "out": "l"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɫ",
+      "out": "le-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɫ",
+      "out": "-le",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɫ",
+      "out": "l"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɭ",
+      "out": "le-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɭ",
+      "out": "-le",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɭ",
+      "out": "l"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʎ",
+      "out": "li"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʎ",
+      "out": "-li",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʎ",
+      "out": "l"
+    },
+    {
+      "slot": "onset",
+      "ipa": "r",
+      "out": "le-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "r",
+      "out": "-er",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "r",
+      "out": "r"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɾ",
+      "out": "le-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɾ",
+      "out": "-er",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɾ",
+      "out": "r"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʁ",
+      "out": "le-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʁ",
+      "out": "-er",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʁ",
+      "out": "r"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɽ",
+      "out": "le-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɽ",
+      "out": "-er",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɽ",
+      "out": "r"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɽʰ",
+      "out": "le-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɽʰ",
+      "out": "-er",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɽʰ",
+      "out": "r"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɹ",
+      "out": "ri-",
+      "if_inventory": "ɚ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɹ",
+      "out": "le-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɹ",
+      "out": "-er",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɹ",
+      "out": "r"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɻ",
+      "out": "ri-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɻ",
+      "out": "-er",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɻ",
+      "out": "r"
+    },
+    {
+      "slot": "onset",
+      "ipa": "f",
+      "out": "fu-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "f",
+      "out": "-fu",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "f",
+      "out": "f"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɸ",
+      "out": "fu-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɸ",
+      "out": "-fu",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɸ",
+      "out": "f"
+    },
+    {
+      "slot": "onset",
+      "ipa": "pf",
+      "out": "fu-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "pf",
+      "out": "-fu",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "pf",
+      "out": "f"
+    },
+    {
+      "slot": "onset",
+      "ipa": "v",
+      "out": "wu-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "v",
+      "out": "-wu",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "v",
+      "out": "f"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʋ",
+      "out": "wu-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʋ",
+      "out": "-wu",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʋ",
+      "out": "f"
+    },
+    {
+      "slot": "onset",
+      "ipa": "s",
+      "out": "xi-",
+      "if_nucleus_head": "i ɪ y j ɥ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "s",
+      "out": "si-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "s",
+      "out": "-si",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "s",
+      "out": "s"
+    },
+    {
+      "slot": "onset",
+      "ipa": "s͈",
+      "out": "xi-",
+      "if_nucleus_head": "i ɪ y j ɥ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "s͈",
+      "out": "si-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "s͈",
+      "out": "-si",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "s͈",
+      "out": "s"
+    },
+    {
+      "slot": "onset",
+      "ipa": "s̪",
+      "out": "xi-",
+      "if_nucleus_head": "i ɪ y j ɥ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "s̪",
+      "out": "si-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "s̪",
+      "out": "-si",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "s̪",
+      "out": "s"
+    },
+    {
+      "slot": "onset",
+      "ipa": "θ",
+      "out": "xi-",
+      "if_nucleus_head": "i ɪ y j ɥ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "θ",
+      "out": "si-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "θ",
+      "out": "-si",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "θ",
+      "out": "s"
+    },
+    {
+      "slot": "onset",
+      "ipa": "z",
+      "out": "ji-",
+      "if_nucleus_head": "i ɪ y j ɥ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "z",
+      "out": "zi-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "z",
+      "out": "-zi",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "z",
+      "out": "z"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ð",
+      "out": "de-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ð",
+      "out": "-de",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ð",
+      "out": "d"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʃ",
+      "out": "shi-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʃ",
+      "out": "-shi"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʂ",
+      "out": "shi-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʂ",
+      "out": "-shi"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʒ",
+      "out": "ri-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʒ",
+      "out": "-ri"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʐ",
+      "out": "ri-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʐ",
+      "out": "-ri"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʑ",
+      "out": "ji-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʑ",
+      "out": "-ji"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɕ",
+      "out": "xi-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɕ",
+      "out": "-xi"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ç",
+      "out": "xi-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ç",
+      "out": "-xi"
+    },
+    {
+      "slot": "onset",
+      "ipa": "x",
+      "out": "he-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "x",
+      "out": "-he"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɣ",
+      "out": "he-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɣ",
+      "out": "-he"
+    },
+    {
+      "slot": "onset",
+      "ipa": "h",
+      "out": "he-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "h",
+      "out": "-he"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ħ",
+      "out": "he-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ħ",
+      "out": "-he"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ts",
+      "out": "ji-",
+      "if_nucleus_head": "i ɪ y j ɥ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ts",
+      "out": "zi-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ts",
+      "out": "-zi",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ts",
+      "out": "z"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ts̪",
+      "out": "ji-",
+      "if_nucleus_head": "i ɪ y j ɥ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ts̪",
+      "out": "zi-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ts̪",
+      "out": "-zi",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ts̪",
+      "out": "z"
+    },
+    {
+      "slot": "onset",
+      "ipa": "dz",
+      "out": "ji-",
+      "if_nucleus_head": "i ɪ y j ɥ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "dz",
+      "out": "zi-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dz",
+      "out": "-zi",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dz",
+      "out": "z"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tsʰ",
+      "out": "qi-",
+      "if_nucleus_head": "i ɪ y j ɥ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tsʰ",
+      "out": "ci-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tsʰ",
+      "out": "-ci"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tɕ",
+      "out": "ji-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tɕ",
+      "out": "-ji"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tɕ͈",
+      "out": "ji-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tɕ͈",
+      "out": "-ji"
+    },
+    {
+      "slot": "onset",
+      "ipa": "dʑ",
+      "out": "ji-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʑ",
+      "out": "-ji"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tɕʰ",
+      "out": "qi-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tɕʰ",
+      "out": "-qi"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tʃ",
+      "out": "chi-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʃ",
+      "out": "-chi"
+    },
+    {
+      "slot": "onset",
+      "ipa": "dʒ",
+      "out": "zhi-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʒ",
+      "out": "-zhi"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʈʂ",
+      "out": "zhi-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʈʂ",
+      "out": "-zhi"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɖʐ",
+      "out": "zhi-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɖʐ",
+      "out": "-zhi"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʈʂʰ",
+      "out": "chi-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʈʂʰ",
+      "out": "-chi"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tʲ",
+      "out": "ti"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʲ",
+      "out": "-ti"
+    },
+    {
+      "slot": "onset",
+      "ipa": "dʲ",
+      "out": "di"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʲ",
+      "out": "-di"
+    },
+    {
+      "slot": "onset",
+      "ipa": "nʲ",
+      "out": "ni"
+    },
+    {
+      "slot": "coda",
+      "ipa": "nʲ",
+      "out": "-ni"
+    },
+    {
+      "slot": "onset",
+      "ipa": "mʲ",
+      "out": "mi"
+    },
+    {
+      "slot": "coda",
+      "ipa": "mʲ",
+      "out": "-mi"
+    },
+    {
+      "slot": "onset",
+      "ipa": "pʲ",
+      "out": "pi"
+    },
+    {
+      "slot": "coda",
+      "ipa": "pʲ",
+      "out": "-pi"
+    },
+    {
+      "slot": "onset",
+      "ipa": "bʲ",
+      "out": "bi"
+    },
+    {
+      "slot": "coda",
+      "ipa": "bʲ",
+      "out": "-bi"
+    },
+    {
+      "slot": "onset",
+      "ipa": "fʲ",
+      "out": "fi"
+    },
+    {
+      "slot": "coda",
+      "ipa": "fʲ",
+      "out": "-fi"
+    },
+    {
+      "slot": "onset",
+      "ipa": "vʲ",
+      "out": "wi"
+    },
+    {
+      "slot": "coda",
+      "ipa": "vʲ",
+      "out": "-wi"
+    },
+    {
+      "slot": "onset",
+      "ipa": "sʲ",
+      "out": "xi"
+    },
+    {
+      "slot": "coda",
+      "ipa": "sʲ",
+      "out": "-xi"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɭʲ",
+      "out": "li"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɭʲ",
+      "out": "-li"
+    },
+    {
+      "slot": "onset",
+      "ipa": "rʲ",
+      "out": "li"
+    },
+    {
+      "slot": "coda",
+      "ipa": "rʲ",
+      "out": "-li"
+    },
+    {
+      "slot": "onset",
+      "ipa": "kʲ",
+      "out": "ki"
+    },
+    {
+      "slot": "coda",
+      "ipa": "kʲ",
+      "out": "-ki"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɡʲ",
+      "out": "gi"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɡʲ",
+      "out": "-gi"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tʃʲ",
+      "out": "qi"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʃʲ",
+      "out": "-qi"
+    },
+    {
+      "slot": "onset",
+      "ipa": "j",
+      "out": "yi-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "j",
+      "out": "-yi",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "j",
+      "out": "i"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʝ",
+      "out": "yi-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʝ",
+      "out": "-yi",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʝ",
+      "out": "i"
+    },
+    {
+      "slot": "onset",
+      "ipa": "w",
+      "out": "wu-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "w",
+      "out": "-wu",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "w",
+      "out": "u"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɥ",
+      "out": "yu-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɥ",
+      "out": "-yu",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɥ",
+      "out": "ü"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʕ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "a",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɑ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʌ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "æ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɶ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "o",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɔ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɒ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɵ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "e",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ə",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɜ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɤ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ø",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "œ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "i",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɪ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɨ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "u",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʊ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɯ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʉ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "y",
+      "out": "ü"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɚ",
+      "out": "er"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɝ",
+      "out": "er"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "i",
+      "out": "yi",
+      "after_out": ""
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɪ",
+      "out": "yi",
+      "after_out": ""
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɨ",
+      "out": "yi",
+      "after_out": ""
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "u",
+      "out": "wu",
+      "after_out": ""
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʊ",
+      "out": "wu",
+      "after_out": ""
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯ",
+      "out": "wu",
+      "after_out": ""
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʉ",
+      "out": "wu",
+      "after_out": ""
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "y",
+      "out": "yu",
+      "after_out": ""
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "j",
+      "out": "y",
+      "after_out": ""
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "w",
+      "out": "w",
+      "after_out": ""
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɥ",
+      "out": "yu",
+      "after_out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ã",
+      "out": "an"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ̃",
+      "out": "an"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛ̃",
+      "out": "an"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɑ̃",
+      "out": "ang"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ̃ʊ̃",
+      "out": "ang"
+    },
+    {
+      "slot": "any",
+      "ipa": "õ",
+      "out": "ong"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɔ̃",
+      "out": "ong"
+    },
+    {
+      "slot": "any",
+      "ipa": "ũ",
+      "out": "un"
+    },
+    {
+      "slot": "any",
+      "ipa": "ĩ",
+      "out": "in"
+    },
+    {
+      "slot": "any",
+      "ipa": "ẽ",
+      "out": "en"
+    },
+    {
+      "slot": "any",
+      "ipa": "œ̃",
+      "out": "en"
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "˧",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "˧˥",
+      "out": "́"
+    },
+    {
+      "slot": "any",
+      "ipa": "˧˩˧",
+      "out": "̌"
+    },
+    {
+      "slot": "any",
+      "ipa": "˨˩",
+      "out": "̀"
+    },
+    {
+      "slot": "any",
+      "ipa": "˥˩",
+      "out": "̀"
+    },
+    {
+      "slot": "any",
+      "ipa": "˦˥",
+      "out": "̄"
+    },
+    {
+      "slot": "any",
+      "ipa": "˩˩˦",
+      "out": "́"
+    },
+    {
+      "slot": "any",
+      "ipa": "˩˩˦˥",
+      "out": "́"
+    },
+    {
+      "slot": "any",
+      "ipa": "˧˥˨˩",
+      "out": "̀"
+    },
+    {
+      "slot": "any",
+      "ipa": "˥",
+      "out": "̄"
+    },
+    {
+      "slot": "any",
+      "ipa": "˦",
+      "out": "̄"
+    },
+    {
+      "slot": "any",
+      "ipa": "˨",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "˩",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "əɪ˧˥",
+      "out": "éi"
+    },
+    {
+      "slot": "any",
+      "ipa": "əɪ˧˩˧",
+      "out": "ěi"
+    },
+    {
+      "slot": "any",
+      "ipa": "əɪ˨˩",
+      "out": "èi"
+    },
+    {
+      "slot": "any",
+      "ipa": "ː",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̯",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˀ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̩",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̪",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "͈",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˤ",
+      "out": ""
+    }
+  ],
+  "syllable_fixups": [
+    {
+      "match": "i([iīíǐì])",
+      "out": "\\1"
+    },
+    {
+      "match": "([aeouü])\\1",
+      "out": "\\1"
+    },
+    {
+      "match": "[iue]-(?=[aeiouüāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ])",
+      "out": ""
+    },
+    {
+      "match": "ngn",
+      "out": "ng"
+    },
+    {
+      "match": "nn",
+      "out": "n"
+    },
+    {
+      "match": "([aāáǎà])u",
+      "out": "\\1o"
+    },
+    {
+      "match": "([jqxy])ü",
+      "out": "\\1u"
+    },
+    {
+      "match": "-$",
+      "out": ""
+    }
+  ],
+  "targets": {
+    "th": {
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "˨˩",
+          "out": "̌"
+        }
+      ]
+    },
+    "vi": {
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "y",
+          "out": "u"
+        },
+        {
+          "slot": "onset",
+          "ipa": "s",
+          "out": "si-",
+          "if_nucleus_head": "y"
+        },
+        {
+          "slot": "onset",
+          "ipa": "z",
+          "out": "zi-",
+          "if_nucleus_head": "y"
+        },
+        {
+          "slot": "nucleus",
+          "ipa": "y",
+          "out": "wu",
+          "after_out": ""
+        },
+        {
+          "slot": "onset",
+          "ipa": "t̪",
+          "out": "de-"
+        },
+        {
+          "slot": "coda",
+          "ipa": "t̪",
+          "out": "-de",
+          "after_out": "b p m f d t k s z l ng"
+        },
+        {
+          "slot": "coda",
+          "ipa": "t̪",
+          "out": "d"
+        },
+        {
+          "slot": "onset",
+          "ipa": "tʃ",
+          "out": "zhi-"
+        },
+        {
+          "slot": "coda",
+          "ipa": "tʃ",
+          "out": "-zhi"
+        },
+        {
+          "slot": "coda",
+          "ipa": "c",
+          "out": "k"
+        }
+      ]
+    },
+    "ko": {
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "ʌ",
+          "out": "e"
+        }
+      ]
+    },
+    "tr": {
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "æ",
+          "out": "e"
+        }
+      ]
+    },
+    "pt": {
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "y",
+          "out": "e"
+        }
+      ]
+    }
+  },
+  "note": "What was checked, and what is left.\n\n**Gaps: zero, before and after.** The first complete run reported one unmapped symbol (Vietnamese /ɗ/, 236 rows) and it has a rule; every run since has printed `none`. The stronger bar the other twelve non-English tables hold is also met -- the output charset is 78 characters and every one of them is a Latin letter, a pinyin tone mark, `ü`, a space, a hyphen, or a punctuation mark the corpus itself contains (`{} , /`). No IPA character reaches the page from any of the sixteen targets. `--units` reports 0 phonemes spelt by decomposition against 167 rule keys: all 44 multi-character phonemes in the sixteen targets have a rule of their own, so nothing here was spelt by accident. There is no curated Mandarin sheet and therefore no agreement score; the obligations met instead are faithfulness to the derivation, zero gaps, a clean `--units`, and reading the output.\n\n**One engine limitation, with numbers, and it is not mine to fix.** `offglide()` in core/respell.js tests `unit.endsWith('\\u032F')`, but `syllabify` appends a Chao tone letter to the vowel unit *before* the spans are computed, so a Thai centring diphthong whose offglide carries a tone no longer ends with U+032F and is read as a second nucleus: `tɕʰua̯j˥˩` becomes `qu-ài` rather than `quài`, `kʰia̯n˩˩˦` becomes `ki-án`. That is 152 extra syllables on 127 of Thai's 736 rows -- the same figure the function's own docstring reports, because it does fix them for a reader who drops tone (the tone letters are stripped before tokenisation) and not for one who keeps it. Two of the fourteen tables keep tone, `vi` and this one, and both are affected. The rule I could not express: *an offglide is an offglide whatever binds to it after the mark* -- one character, `includes` for `endsWith`, which is the same fix GLIDES already got for Vietnamese `jˀ`. It was not applied here because core/respell.js is out of scope for this table.\n\n**One `ipa`-column defect worth logging beside the ones in scripts/build_ipa.py.** Vietnamese writes its three centring diphthongs iê ươ uô as two full vowels (`biɛt̪`, `ɗyəc`, `buəj`), where Thai writes the same shapes with U+032F on the offglide. Nothing in a rule table can rejoin them, so every reader's table splits one Vietnamese syllable into two: 380 extra syllables on 287 of Vietnamese's 673 rows (`bi-èd` for biết, `du-èk` for được, `bu-ěi` for buổi). This is not the espeak /y/ defect already logged for Vietnamese; it is a separate one in the same column, and it is the biggest single quality problem in this file's output.\n\n**The ten outputs I am least happy with**, in order, all read as a Mandarin reader:\n  1. `bi-èd` / `du-èk` / `bu-ěi` / `li-èu` / `mu-én` -- the 287 Vietnamese rows above. One syllable printed as two, with the tone mark on the wrong half of it.\n  2. `qu-ài` / `ki-án` -- the 127 Thai rows above, the same failure from the engine side.\n  3. `LE-LE-MU-BU-TE-DI-na` (Arabic للمبتدئين) -- a capitalised run seven syllables long, because the row lost its short vowels to the G2P and the whole onset became one stressed syllable. The 73 vowel-less Arabic rows all look like this.\n  4. `HO-HE-SHI-tul` (German Hochstuhl) and `SI-TE-LA-SHI-na-wa` (Russian страшного) -- correct, and still shouting.\n  5. `le-CHEP-tion` (Italian reception) -- `tion` is t+i+o+n read as pinyin, which is right, but a Latin-literate Mandarin reader may well apply the English value [ʃən] instead. There are a handful of these sequences and no way to write them that is not either wrong or longer.\n  6. `wum-er` (Arabic عمر) -- pinyin `wu` for a syllable-initial /ʕu/ is as close as this inventory gets, and it is not close.\n  7. `pü-yi-ri` (French puis-je) -- three syllables for one, from `pyiʒ`; the `y` is espeak's and the split is the syllabifier's.\n  8. `sang-ke` (thank), `sub-le-BAD` (Hindi सुप्रभात) -- /θ/ as s and the aspiration-conditioned coda letters are both defensible one at a time and read oddly together.\n  9. `zung` for Vietnamese dùng -- /z/ answered by pinyin z [ts] affricates a fricative. 兹 is the tradition and `r` [ʐ] was the alternative; z keeps the place of articulation, r keeps the manner, and neither is right.\n  10. `di` for Thai ดี and `du` for ดู -- correct, and an unmarked mid tone that a Mandarin reader will read as 轻声. The unmarked category is the weakest link in the tone mapping and there was no fifth mark to give it.\n\n**Where the survey was wrong or incomplete.** Its Mandarin section is right about the verdict and right about the licensing, and two things in it needed correcting. (1) It offers `mer`, `set`, `bur` as evidence that pinyin can be pushed past Mandarin phonotactics, and every one of those examples is a *coda*; the section does not notice that the same licence cannot extend to onsets, where pinyin has no cluster at all and where a reader has nothing to read. Half of this table is that distinction. (2) Its stress table says \"Chinese in pinyin has capitals, because pinyin is Latin -- one of the reasons to prefer it\", and treats that as free. It is not free once epenthesis exists: a capitalised run covers a whole target syllable, which after epenthesis can be four output syllables, and 8.0% of the runs in this corpus are longer than one. The device is still worth having; the survey should record that it is not free. A third item is an omission rather than an error: the section does not mention that pinyin's legal-but-mis-valued syllables (si, zi, ci) are a *different* problem from its illegal ones (ki, hi, pü), and that the two want opposite treatments. That distinction decides several hundred rows and is the third deviation in this file."
+}

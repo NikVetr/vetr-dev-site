@@ -12,8 +12,8 @@ social-basics.no-problem,Hakuna shida,Hamna shida,hakˈuna ʃˈida,,2,sw-agent-v
 social-basics.i-do-not-know,Sijui,,siɟˈui,,2,sw-agent-v1;ipa=espeak
 social-basics.good-night,Usiku mwema,Lala salama,usˈiku mwˈema,,2,sw-agent-v1;ipa=espeak
 social-basics.okay-fine-i-am-okay,Niko sawa,Sawa,nˈiko sˈawa,,2,sw-agent-v1;ipa=espeak
-communication.i-do-not-speak-this-language,Sisemi {target},,,,2,language-slots-v1
-communication.i-speak-only-a-little-of-this,Nasema {target} kidogo tu,,,,2,language-slots-v1
+communication.i-do-not-speak-this-language,Sisemi {target},,sisˈemi {target},,2,language-slots-v1;ipa=espeak
+communication.i-speak-only-a-little-of-this,Nasema {target} kidogo tu,,nasˈema {target} kidˈoɡo tˈu,,2,language-slots-v1;ipa=espeak
 communication.do-you-speak-english,Unasema {source}?,,,,2,language-slots-v1
 communication.please-speak-more-slowly,Tafadhali sema polepole,,tˌafaðˈali sˈema pˌolepˈole,,2,sw-agent-v1;ipa=espeak
 communication.i-do-not-understand-spoken,Sielewi,,sˌielˈewi,,2,sw-agent-v1;ipa=espeak
@@ -22,7 +22,7 @@ communication.please-say-it-again,Tafadhali sema tena,,tˌafaðˈali sˈema tˈe
 communication.please-write-it-down,Tafadhali andika,,tˌafaðˈali andˈika,,2,sw-agent-v1;ipa=espeak
 communication.please-wait-a-moment,Tafadhali subiri kidogo,,tˌafaðˈali subˈiri kidˈoɡo,,2,sw-agent-v1;ipa=espeak
 communication.can-you-help-me,Unaweza kunisaidia?,,ˌunawˈeza kˌunisˌaidˈia,,2,sw-agent-v1;ipa=espeak
-communication.please-show-me-the-text,Tafadhali nionyeshe maandishi kwa {target},,,,2,language-slots-v1
+communication.please-show-me-the-text,Tafadhali nionyeshe maandishi kwa {target},,tˌafaðˈali nˌioɲˈeʃe mˌaandˈiʃi kwa {target},,2,language-slots-v1;ipa=espeak
 communication.i-cannot-make-out-what-you-are-saying,Sipati unachosema,,sipˈati ˌunatʃosˈema,I do not catch what you say,2,sw-agent-v1;ipa=espeak
 communication.i-do-not-understand,Sifahamu,,sˌifahˈamu,,2,sw-agent-v1;ipa=espeak
 communication.i-cannot-read-it,Siwezi kusoma hii,,siwˈezi kusˈoma hˌii,,2,sw-agent-v1;ipa=espeak
@@ -39,7 +39,7 @@ quick-responses.okay-fine,Nzuri,,nzˈuri,,2,sw-agent-v1;ipa=espeak
 quick-responses.no-good-not-allowed-will-not-work,Haifai,,hˌaifˈai,it will not do,2,sw-agent-v1;ipa=espeak
 phone-translation.i-am-using-phone-translation,Natumia tafsiri ya simu,,nˌatumˈia tafsˈiri ja sˈimu,,2,sw-agent-v1;ipa=espeak
 phone-translation.please-speak-toward-the-phone,Tafadhali sema kwenye simu,,tˌafaðˈali sˈema kwˈeɲe sˈimu,,2,sw-agent-v1;ipa=espeak
-phone-translation.please-write-the-place-name,Tafadhali andika jina la mahali kwa {target},,,,2,language-slots-v1
+phone-translation.please-write-the-place-name,Tafadhali andika jina la mahali kwa {target},,tˌafaðˈali andˈika ɟˈina la mahˈali kwa {target},,2,language-slots-v1;ipa=espeak
 phone-translation.one-sentence-at-a-time-please,"Sentensi moja kwa wakati, tafadhali",,"sentˈensi mˈoɟa kwa wakˈati, tˌafaðˈali",,2,sw-agent-v1;ipa=espeak
 phone-translation.please-type-it-and-show-me,Tafadhali chapa na unionyeshe,,tˌafaðˈali tʃˈapa na ˌunioɲˈeʃe,,2,sw-agent-v1;ipa=espeak
 phone-translation.please-look-at-the-screen,Tafadhali tazama skrini,,tˌafaðˈali tazˈama skrˈini,,2,sw-agent-v1;ipa=espeak

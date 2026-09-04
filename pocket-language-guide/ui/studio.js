@@ -21,7 +21,9 @@ import { openQuiz, applyQuiz } from './quiz.js';
 import { attachHandles } from './handles.js';
 import { attachPanelResizers } from './panels.js';
 import { createAddTerm } from './add-term.js';
-import { warningText, applyStatic, languageName, loadUiLanguage, t } from './i18n.js';
+import {
+  warningText, applyStatic, languageName, loadUiLanguage, number, t,
+} from './i18n.js';
 
 const BANNER_KEY = 'plg.banner-hidden';
 // A full solve is a few hundred milliseconds of synchronous work, so the debounce
@@ -178,7 +180,7 @@ async function main() {
     });
     $('status').dataset.busy = '0';
     $('status').textContent = plan.faces.length
-      ? t('studio.status', { faces: plan.faces.length, scale: plan.scale.toFixed(2) })
+      ? t('studio.status', { faces: plan.faces.length, scale: number(plan.scale, 2) })
       : t('studio.nothingToLayOut');
     $('warnings').replaceChildren(...plan.warnings.map(renderWarning));
 

@@ -9,7 +9,7 @@
 // a solve is debounced -- would swap the checkbox out from under a reader who is
 // working through a list of them.
 
-import { t } from './i18n.js';
+import { number, t } from './i18n.js';
 import { appliesTo } from '../core/pack.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
@@ -160,8 +160,8 @@ export function createTree(input) {
           // number to compare down a column rather than to read in a sentence.
           el('span', {
             class: 'weight',
-            title: t('tree.importanceTitle', { value: concept.weight.toFixed(2) }),
-            text: concept.weight.toFixed(2),
+            title: t('tree.importanceTitle', { value: number(concept.weight, 2) }),
+            text: number(concept.weight, 2),
           }),
         ]),
       ]);

@@ -1,8 +1,10 @@
 [
+  "ar__ar-MSA",
   "de__de-DE",
   "en__en-US",
   "es__es-419",
   "fr__fr-FR",
+  "hi__hi-IN",
   "id__id-ID",
   "it__it-IT",
   "ja__ja-JP",
@@ -10,6 +12,8 @@
   "pt__pt-BR",
   "ru__ru-RU",
   "sw__sw-KE",
+  "th__th-TH",
   "tr__tr-TR",
-  "vi__vi-VN"
+  "vi__vi-VN",
+  "zh-Hans__zh-CN"
 ]

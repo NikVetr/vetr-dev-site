@@ -6,7 +6,7 @@ weather.how-cold-at-night,Wie kalt wird es nachts?,,viː kˈalt vˌɪɾt ɛs nˈ
 weather.rain,Regen,,rˈeːɡən,,2,de-agent-v1;ipa=espeak
 weather.snow,Schnee,,ʃnˈeː,,2,de-agent-v1;ipa=espeak
 weather.wind,Wind,,vˈɪnt,,2,de-agent-v1;ipa=espeak
-weather.storm,Sturm,Gewitter,,,2,de-agent-v1
+weather.storm,Sturm,Gewitter,ʃtˈʊɾm,,2,de-agent-v1;ipa=espeak
 weather.ice,Glatteis,Eisglätte,ɡlˈataɪs,,2,de-agent-v1;ipa=espeak
 weather.fog,Nebel,,nˈeːbəl,,2,de-agent-v1;ipa=espeak
 weather.heat,Hitze,heiß,hˈɪtsə,,2,de-agent-v1;ipa=espeak

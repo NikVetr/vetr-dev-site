@@ -12,8 +12,8 @@ social-basics.no-problem,Sorun değil,,soɾˈʊn dˈejɪl,,2,tr-agent-v1;ipa=esp
 social-basics.i-do-not-know,Bilmiyorum,,bɪlmˈijoɾʊm,,2,tr-agent-v1;ipa=espeak
 social-basics.good-night,İyi geceler,,ijˈi ɟˈedʒɛlɛr,,2,tr-agent-v1;ipa=espeak
 social-basics.okay-fine-i-am-okay,İyiyim,Tamam,ijˈijɪm,,2,tr-agent-v1;ipa=espeak
-communication.i-do-not-speak-this-language,{target} bilmiyorum.,,,,2,language-slots-v1
-communication.i-speak-only-a-little-of-this,{target} biraz biliyorum.,,,,2,language-slots-v1
+communication.i-do-not-speak-this-language,{target} bilmiyorum.,,{target} bɪlmˈijoɾʊm,,2,language-slots-v1;ipa=espeak
+communication.i-speak-only-a-little-of-this,{target} biraz biliyorum.,,{target} biɾˈaz bilˈijoɾʊm,,2,language-slots-v1;ipa=espeak
 communication.do-you-speak-english,{source} biliyor musunuz?,,,,2,language-slots-v1
 communication.please-speak-more-slowly,"Daha yavaş konuşun, lütfen.",,"dahˈa javˈaʃ konuʃˈʊn, løtfˈæn",,2,tr-agent-v1;ipa=espeak
 communication.i-do-not-understand-spoken,Anlamıyorum.,,anɫamˈɯjoɾʊm,,2,tr-agent-v1;ipa=espeak
@@ -22,7 +22,7 @@ communication.please-say-it-again,Tekrar eder misiniz?,,tɛkrˈar edˈɛr mˈisi
 communication.please-write-it-down,Yazar mısınız?,,jazˈar mˈɯsɯnɯz,,2,tr-agent-v1;ipa=espeak
 communication.please-wait-a-moment,"Bir dakika, lütfen.",,"bɪr dakikˈa, løtfˈæn",,2,tr-agent-v1;ipa=espeak
 communication.can-you-help-me,Yardım eder misiniz?,,jardˈɯm edˈɛr mˈisinɪz,,2,tr-agent-v1;ipa=espeak
-communication.please-show-me-the-text,"{target} yazıyı gösterin, lütfen.",,,,2,language-slots-v1
+communication.please-show-me-the-text,"{target} yazıyı gösterin, lütfen.",,"{target} jazɯjˈɯ ɟœsteɾˈɪn, løtfˈæn",,2,language-slots-v1;ipa=espeak
 communication.i-cannot-make-out-what-you-are-saying,Ne dediğinizi anlayamıyorum.,,nˈɛ dedˈijinizɪ anɫajamˈɯjoɾʊm,,2,tr-agent-v1;ipa=espeak
 communication.i-do-not-understand,Anlamadım.,,anɫˈamadɯm,,2,tr-agent-v1;ipa=espeak
 communication.i-cannot-read-it,Bunu okuyamıyorum.,,bunˈʊ okujamˈɯjoɾʊm,,2,tr-agent-v1;ipa=espeak
@@ -39,7 +39,7 @@ quick-responses.okay-fine,tamam,peki,tamˈam,,2,tr-agent-v1;ipa=espeak
 quick-responses.no-good-not-allowed-will-not-work,olmaz / yasak / uygun değil,,ɔɫmˈaz / jˈasak / ʊjɡˈʊn dˈejɪl,,2,tr-agent-v1;ipa=espeak
 phone-translation.i-am-using-phone-translation,Telefonla çeviri kullanıyorum.,,telefˈɔnɫa tʃeviɾˈɪ kʊɫɫanˈɯjoɾʊm,,2,tr-agent-v1;ipa=espeak
 phone-translation.please-speak-toward-the-phone,Telefona doğru konuşun.,,telefonˈa doːɾˈʊ konuʃˈʊn,,2,tr-agent-v1;ipa=espeak
-phone-translation.please-write-the-place-name,Yer adını {target} yazın.,,,,2,language-slots-v1
+phone-translation.please-write-the-place-name,Yer adını {target} yazın.,,jˈɛr adɯnˈɯ {target} jazˈɯn,,2,language-slots-v1;ipa=espeak
 phone-translation.one-sentence-at-a-time-please,"Tek cümle söyleyin, lütfen.",,"tˈɛk dʒˈømlɛ sœjlejˈɪn, løtfˈæn",,2,tr-agent-v1;ipa=espeak
 phone-translation.please-type-it-and-show-me,Yazıp bana gösterin.,,jazˈɯp banˈa ɟœsteɾˈɪn,,2,tr-agent-v1;ipa=espeak
 phone-translation.please-look-at-the-screen,"Ekrana bakın, lütfen.",,"ɛkranˈa bakˈɯn, løtfˈæn",,2,tr-agent-v1;ipa=espeak

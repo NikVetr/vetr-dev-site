@@ -1,6 +1,6 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 introductions.my-name-is,Tôi tên là {},,t̪oj˧ t̪en˧ laː˨˩ {},,2,vi-agent-v1;ipa=espeak
-introductions.nice-to-meet-you,Rất vui được gặp,Hân hạnh được gặp,zət̪˧˥ vuj˧ ɗyəc˨˩ˀ ɣap˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,Rất vui được gặp,Hân hạnh được gặp,zət̪˧˥ vuj˧ ɗyə̯c˨˩ˀ ɣap˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 introductions.what-is-your-name,Xin cho hỏi tên gì ạ?,,sin˧ tʃɔ˧ hɔj˧˩˧ t̪en˧ zi˨˩ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 introductions.we-are-traveling-together,Chúng tôi đi cùng nhau,,tʃuŋ˧˥ t̪oj˧ ɗi˧ kuŋ˨˩ ɲaw˧,,2,vi-agent-v1;ipa=espeak
 introductions.this-is-my-friend,Đây là bạn tôi,,ɗəɪ˧ laː˨˩ baːn˨˩ˀ t̪oj˧,,2,vi-agent-v1;ipa=espeak

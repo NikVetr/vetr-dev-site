@@ -64,6 +64,23 @@ export async function loadUiLanguage(code, loadText) {
  * differs between languages: "4 faces at 0.87x" cannot be assembled from parts and
  * still read correctly in Japanese or Arabic.
  *
+ * **An insert that carries letters is bidi-isolated; one that is only digits is not.**
+ * What fills a placeholder is often a language, region or script name, written in its
+ * own script, so it routinely runs the other way from the sentence around it. Left
+ * alone the bidi algorithm resolves the two as one paragraph and punctuation
+ * migrates: `Spoken in {language}` with a Latin-script insert in an Arabic sentence
+ * put the full stop at the far end of the line, and `{target} → {source}` with two
+ * right-to-left names swallowed the arrow into the run and drew it pointing the wrong
+ * way. FSI/PDI says the insert settles its own direction from its own first strong
+ * character while the sentence keeps its own.
+ *
+ * A number needs none of that and is worse for having it. Digits are bidi class EN --
+ * weak, and already resolved sensibly against the surrounding direction -- so the
+ * isolates buy nothing, and they are real characters in the string: `8 faces at 0.65x`
+ * became `⁨8⁩ faces at ⁨0.65⁩x`, which reads the same and matches nothing, breaking
+ * seventeen tests that quite reasonably looked for the number they had asked for.
+ * Testing for a letter is the same question as "could this be in another script".
+ *
  * @param {string} key
  * @param {Record<string, string|number>} [vars]
  */
@@ -77,7 +94,7 @@ export function t(key, vars) {
   }
   if (!vars) return template;
   return template.replace(/\{(\w+)\}/g, (whole, name) => (
-    name in vars ? String(vars[name]) : whole
+    name in vars ? isolate(String(vars[name])) : whole
   ));
 }
 
@@ -104,6 +121,36 @@ export const PERCENT_FIRST = new Set(['tr']);
 
 export function uiDirection() {
   return direction;
+}
+
+/** Wrap an insert in FSI/PDI if it carries letters. See `t` for why only then. */
+/** @param {string} value */
+function isolate(value) {
+  return /\p{L}/u.test(value) ? `\u2068${value}\u2069` : value;
+}
+
+/**
+ * A number, in the interface language's own notation.
+ *
+ * `toFixed` is not a formatter, it is a stringifier, and it always writes a dot: an
+ * importance of `0.85` and a fitted scale of `0.76x` printed with a decimal point on
+ * every Spanish, Portuguese, French, German, Italian, Russian and Turkish sheet,
+ * where the separator is a comma. Here rather than at each call site because `active`
+ * is here, and the call sites -- the content tree, the studio's status line, the quick
+ * page and the drag readouts -- have no business knowing the locale.
+ *
+ * Not for coordinates or cache keys: those are machine-readable and `toFixed` is
+ * exactly right for them.
+ * @param {number} value @param {number} digits
+ */
+export function number(value, digits) {
+  try {
+    return new Intl.NumberFormat([active], {
+      minimumFractionDigits: digits, maximumFractionDigits: digits,
+    }).format(value);
+  } catch {
+    return value.toFixed(digits);
+  }
 }
 
 /**

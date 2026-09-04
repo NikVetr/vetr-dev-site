@@ -12,8 +12,8 @@ social-basics.no-problem,Não há problema,Não faz mal,nˌɐ̃ʊ̃ a prˌoblˈe
 social-basics.i-do-not-know,Não sei,,nˌɐ̃ʊ̃ sˈeɪ,,2,pt-agent-v1;ipa=espeak
 social-basics.good-night,Boa noite,Durma bem,bˈoæ nˈoɪtʃy,,2,pt-agent-v1;ipa=espeak
 social-basics.okay-fine-i-am-okay,Estou bem,,estˌow bˈeɪŋ,,2,pt-agent-v1;ipa=espeak
-communication.i-do-not-speak-this-language,Não falo {target},,,,2,language-slots-v1
-communication.i-speak-only-a-little-of-this,Falo só um pouco de {target},,,,2,language-slots-v1
+communication.i-do-not-speak-this-language,Não falo {target},,nˌɐ̃ʊ̃ fˈalʊ {target},,2,language-slots-v1;ipa=espeak
+communication.i-speak-only-a-little-of-this,Falo só um pouco de {target},,fˈalʊ sˈɔ ũŋ pˈowkʊ dʒy {target},,2,language-slots-v1;ipa=espeak
 communication.do-you-speak-english,Fala {source}?,,,,2,language-slots-v1
 communication.please-speak-more-slowly,"Fale mais devagar, por favor",,"fˈaly mˈaɪz dˌevaɡˈar, por favˈor",,2,pt-agent-v1;ipa=espeak
 communication.i-do-not-understand-spoken,Não entendo o que diz,Não percebo o que diz,nˌɐ̃ʊ̃ ˌeɪŋtˈeɪŋdw ʊ ky dʒˈis,,2,pt-agent-v1;ipa=espeak
@@ -22,7 +22,7 @@ communication.please-say-it-again,"Repita, por favor",,"xˌepˈitæ, por favˈor
 communication.please-write-it-down,"Escreva, por favor",,"ˌeskrˈevæ, por favˈor",,2,pt-agent-v1;ipa=espeak
 communication.please-wait-a-moment,"Um momento, por favor",,"ũŋ mˌomˈeɪŋtʊ, por favˈor",,2,pt-agent-v1;ipa=espeak
 communication.can-you-help-me,Pode ajudar-me?,Pode me ajudar?,pˌɔdʒj ˌaʒudˈarmy,,2,pt-agent-v1;ipa=espeak
-communication.please-show-me-the-text,"Mostre-me o texto em {target}, por favor",Me mostre o texto em {target},,,2,language-slots-v1
+communication.please-show-me-the-text,"Mostre-me o texto em {target}, por favor",Me mostre o texto em {target},"mˈɔstrymj ʊ tˈestw ˈeɪŋ {target}, por favˈor",,2,language-slots-v1;ipa=espeak
 communication.i-cannot-make-out-what-you-are-saying,Não consigo perceber o que diz,Não consigo entender,nˌɐ̃ʊ̃ kˌoŋsˈiɡʊ pˌeɾəsebˈeɾ ʊ ky dʒˈis,,2,pt-agent-v1;ipa=espeak
 communication.i-do-not-understand,Não entendo,Não percebo,nˌɐ̃ʊ̃ ˌeɪŋtˈeɪŋdʊ,,2,pt-agent-v1;ipa=espeak
 communication.i-cannot-read-it,Não consigo ler isto,,nˌɐ̃ʊ̃ kˌoŋsˈiɡʊ lˈeɾ ˈistʊ,,2,pt-agent-v1;ipa=espeak
@@ -39,7 +39,7 @@ quick-responses.okay-fine,Está bem,Tudo bem,estˌa bˈeɪŋ,,2,pt-agent-v1;ipa=
 quick-responses.no-good-not-allowed-will-not-work,Não é permitido,,nˌɐ̃ʊ̃ ɛ pˌeɾəmitʃˈidʊ,,2,pt-agent-v1;ipa=espeak
 phone-translation.i-am-using-phone-translation,Estou a usar um tradutor automático,Estou usando um tradutor automático,estˌow a uzˈaɾ ũŋ trˌadutˈoɾ ˌaʊtomˈatʃikʊ,,2,pt-agent-v1;ipa=espeak
 phone-translation.please-speak-toward-the-phone,"Fale para o telemóvel, por favor",Fale para o celular,"fˈaly pˌaɾæ ʊ tˌelemˈɔvɛʊ, por favˈor",,2,pt-agent-v1;ipa=espeak
-phone-translation.please-write-the-place-name,Escreva o nome do lugar em {target},,,,2,language-slots-v1
+phone-translation.please-write-the-place-name,Escreva o nome do lugar em {target},,ˌeskrˈevæ ʊ nˈomy dʊ luɡˈaɾ ˈeɪŋ {target},,2,language-slots-v1;ipa=espeak
 phone-translation.one-sentence-at-a-time-please,"Uma frase de cada vez, por favor",,"ˌumæ frˈazy dʒy kˈadæ vˈes, por favˈor",,2,pt-agent-v1;ipa=espeak
 phone-translation.please-type-it-and-show-me,"Escreva e mostre-me, por favor",Digite e me mostre,"ˌeskrˈevæ i mˈɔstrymy, por favˈor",,2,pt-agent-v1;ipa=espeak
 phone-translation.please-look-at-the-screen,"Olhe para o ecrã, por favor",Olhe para a tela,"ˈɔljy pˌaɾæ u ekrˈɐ̃, por favˈor",,2,pt-agent-v1;ipa=espeak

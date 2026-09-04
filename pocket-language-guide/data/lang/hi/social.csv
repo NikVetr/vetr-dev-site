@@ -12,8 +12,8 @@ social-basics.no-problem,कोई दिक्कत नहीं,,koī dikkat 
 social-basics.i-do-not-know,मुझे नहीं पता,,mujhe nahīṁ patā,mˌʊɟʰeː nˈʌhĩ pˈʌtaː,,2,hi-agent-v1;ipa=espeak
 social-basics.good-night,शुभ रात्रि,गुड नाइट,śubh rātri,ʃˈʊbʰ ɾˈaːtɾɪ,,2,hi-agent-v1;ipa=espeak
 social-basics.okay-fine-i-am-okay,ठीक है,,ṭhīk hai,ʈʰˈiːk hɛː,,2,hi-agent-v1;ipa=espeak
-communication.i-do-not-speak-this-language,मुझे {target} नहीं आती,,mujhe {target} nahīṁ ātī,,,2,language-slots-v1
-communication.i-speak-only-a-little-of-this,मुझे {target} थोड़ी-सी आती है,,mujhe {target} thoṛī-sī ātī hai,,,2,language-slots-v1
+communication.i-do-not-speak-this-language,मुझे {target} नहीं आती,,mujhe {target} nahīṁ ātī,mˌʊɟʰeː {target} nˈʌhĩ ˈaːti,,2,language-slots-v1;ipa=espeak
+communication.i-speak-only-a-little-of-this,मुझे {target} थोड़ी-सी आती है,,mujhe {target} thoṛī-sī ātī hai,mˌʊɟʰeː {target} tʰˈoːɽisi ˈaːti hɛː,,2,language-slots-v1;ipa=espeak
 communication.do-you-speak-english,क्या आपको {source} आती है?,,kyā āpko {source} ātī hai?,,,2,language-slots-v1
 communication.please-speak-more-slowly,ज़रा धीरे बोलिए,,zarā dhīre bolie,zˈʌɾaː dʰˈiːɾeː bˈoːlɪˌeː,,2,hi-agent-v1;ipa=espeak
 communication.i-do-not-understand-spoken,मुझे समझ नहीं आ रहा,,mujhe samajh nahīṁ ā rahā,mˌʊɟʰeː sˈʌməɟʰ nˈʌhĩ ˈaː ɾˌəhaː,,2,hi-agent-v1;ipa=espeak
@@ -22,7 +22,7 @@ communication.please-say-it-again,फिर से कहिए,,phir se kahie,p
 communication.please-write-it-down,लिख दीजिए,,likh dījie,lˈɪkʰ dˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
 communication.please-wait-a-moment,ज़रा रुकिए,,zarā rukie,zˈʌɾaː ɾˈʊkɪˌeː,,2,hi-agent-v1;ipa=espeak
 communication.can-you-help-me,मेरी मदद कीजिए,,merī madad kījie,mˌeːɾi mˈʌdəd kˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
-communication.please-show-me-the-text,वह {target} में लिखा हुआ दिखाइए,,vah {target} meṁ likhā huā dikhāie,,,2,language-slots-v1
+communication.please-show-me-the-text,वह {target} में लिखा हुआ दिखाइए,,vah {target} meṁ likhā huā dikhāie,ʋˌəh {target} mẽː lˈɪkʰaː hˈʊaː dɪkʰˈaːɪˌeː,,2,language-slots-v1;ipa=espeak
 communication.i-cannot-make-out-what-you-are-saying,आपकी बात समझ नहीं आ रही,,āpkī bāt samajh nahīṁ ā rahī,ˌaːpkˌi bˈaːt sˈʌməɟʰ nˈʌhĩ ˈaː ɾˌəhi,,2,hi-agent-v1;ipa=espeak
 communication.i-do-not-understand,मुझे समझ नहीं आया,,mujhe samajh nahīṁ āyā,mˌʊɟʰeː sˈʌməɟʰ nˈʌhĩ ˈaːjaː,,2,hi-agent-v1;ipa=espeak
 communication.i-cannot-read-it,मुझे यह पढ़ना नहीं आता,,mujhe yah paṛhnā nahīṁ ātā,mˌʊɟʰeː jˌəh pˈʌɽʰənˌaː nˈʌhĩ ˈaːtaː,,2,hi-agent-v1;ipa=espeak
@@ -39,7 +39,7 @@ quick-responses.okay-fine,बिल्कुल,,bilkul,bˈɪlkʊl,absolutely,2,
 quick-responses.no-good-not-allowed-will-not-work,नहीं होगा,,nahīṁ hogā,nˈʌhĩ hˈoːɡaː,,2,hi-agent-v1;ipa=espeak
 phone-translation.i-am-using-phone-translation,फ़ोन से अनुवाद हो रहा है,,fon se anuvād ho rahā hai,fˈoːn seː ˌʌnʊʋˈaːd hoː ɾˌəhaː hɛː,translating by phone,2,hi-agent-v1;ipa=espeak
 phone-translation.please-speak-toward-the-phone,फ़ोन की तरफ़ बोलिए,,fon kī taraf bolie,fˈoːn ki tˈʌɾəf bˈoːlɪˌeː,,2,hi-agent-v1;ipa=espeak
-phone-translation.please-write-the-place-name,जगह का नाम {target} में लिख दीजिए,,jagah kā nām {target} meṁ likh dījie,,,2,language-slots-v1
+phone-translation.please-write-the-place-name,जगह का नाम {target} में लिख दीजिए,,jagah kā nām {target} meṁ likh dījie,ɟˈʌɡəh kaː nˈaːm {target} mẽː lˈɪkʰ dˈiːɟɪˌeː,,2,language-slots-v1;ipa=espeak
 phone-translation.one-sentence-at-a-time-please,एक-एक वाक्य बोलिए,,ek-ek vākya bolie,ˈeːkeːk ʋˈaːkːjə bˈoːlɪˌeː,,2,hi-agent-v1;ipa=espeak
 phone-translation.please-type-it-and-show-me,टाइप करके दिखाइए,,ṭāip karke dikhāie,ʈˈaːɪp kˈʌɾkˌeː dɪkʰˈaːɪˌeː,,2,hi-agent-v1;ipa=espeak
 phone-translation.please-look-at-the-screen,स्क्रीन देखिए,,skrīn dekhie,skɾˈiːn dˈeːkʰɪˌeː,,2,hi-agent-v1;ipa=espeak

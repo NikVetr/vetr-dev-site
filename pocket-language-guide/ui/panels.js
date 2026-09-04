@@ -66,6 +66,8 @@ function attach(studio, seams) {
 
     // A seam is a separator, so the arrow keys are its documented control.
     seam.handle.addEventListener('keydown', (event) => {
+      // Visual keys on a visual control: right always moves the seam right, and
+      // `sign` already carries which panel that grows in this direction.
       const step = event.key === 'ArrowLeft' ? -16 : event.key === 'ArrowRight' ? 16 : 0;
       if (!step) return;
       event.preventDefault();
@@ -83,8 +85,13 @@ export function attachPanelResizers(studio) {
   const left = /** @type {HTMLElement|null} */ (document.getElementById('resize-format'));
   const right = /** @type {HTMLElement|null} */ (document.getElementById('resize-content'));
   if (!format || !content || !left || !right) return;
+  // Which way a drag grows a panel depends on which side of it the seam sits, and
+  // for a reader of Arabic the settings panel is the *right* one -- the grid is
+  // laid out in logical order, so it mirrors. Without this, dragging a seam moved
+  // it away from the pointer.
+  const dir = /** @type {1|-1} */ (document.documentElement.dir === 'rtl' ? -1 : 1);
   attach(studio, [
-    { handle: left, panel: format, prop: '--col-format', sign: 1 },
-    { handle: right, panel: content, prop: '--col-content', sign: -1 },
+    { handle: left, panel: format, prop: '--col-format', sign: dir },
+    { handle: right, panel: content, prop: '--col-content', sign: /** @type {1|-1} */ (-dir) },
   ]);
 }

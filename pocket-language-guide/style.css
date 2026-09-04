@@ -253,8 +253,21 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
    (`ui/preview.js`), the width takes what the panel offers, and the height cap is
    what keeps a portrait card on screen -- the phone preset is 2.2 times as tall as
    it is wide, so fitting it to the width alone made it twice the canvas's height. */
+/* The face and the strip live in here, so this is what has to take the panel's
+   height for their auto margins to have anything to share out. */
+#face-area {
+  flex: 1; min-block-size: 0; display: flex; flex-direction: column; gap: var(--space-2);
+}
+
+/* `margin: auto` on both axes, and on the strip below it, because whose space the
+   leftover is depends on which axis binds. A 7x5 card is limited by the panel's
+   width, so there is height to spare and it used to pile up under the strip; a phone
+   card is limited by the height and the spare is at the sides. Three auto margins
+   share whatever is going, so the card sits in the middle of the room above the
+   strip and the strip stays on the floor, whichever case it is. The way to give the
+   card more room is to widen the panel, which the seams either side of it now do. */
 .face.focused {
-  display: block; cursor: default; margin-inline: auto;
+  display: block; cursor: default; margin-inline: auto; margin-block: auto;
   aspect-ratio: var(--face-aspect, 1.4);
   inline-size: min(100%, calc(74vh * var(--face-aspect, 1.4)));
 }
@@ -702,6 +715,11 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
   background: none; border: 0; color: rgb(255 255 255 / 65%);
 }
 .lightbox-swap svg { inline-size: 1.9rem; block-size: 1.2rem; }
+/* The carets either side of the card need no help -- U+2039 is Bidi_Mirrored, so it
+   draws the other way round on its own, and `grid-column: 1` is already the side a
+   reader of Arabic starts from. An SVG path is not text and gets neither, so the
+   one arrow drawn rather than typed has to be turned over here. */
+[dir="rtl"] .lightbox-swap svg { transform: scaleX(-1); }
 .lightbox-swap path { fill: none; stroke: currentColor; stroke-width: 1.6; }
 .lightbox-swap .swap-two { display: none; }
 /* One head normally, because that is what the pair means; two on hover, because
@@ -848,6 +866,14 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
   max-width: 9em; overflow-wrap: break-word;
 }
 .segment.current .segment-caption { color: var(--accent); font-weight: 600; }
+/* A fact rather than a name, so it is set apart from the caption and stays a fact
+   when the caption goes bold on selection. Tabular figures because these are read
+   against each other -- 2.17:1 and 2.22:1 differ in one digit. */
+.segment-sub {
+  font-size: 0.65rem; line-height: 1; margin-top: -0.35em;
+  color: var(--muted); text-align: center;
+  font-variant-numeric: tabular-nums;
+}
 
 svg.glyph { display: block; }
 svg.glyph .g-page { fill: #fff; stroke: var(--muted); stroke-width: 0.8; }
@@ -947,4 +973,12 @@ button.big { justify-content: center; padding: 0.6em 1em; font-size: var(--fs-1)
 
 /* A long printer name should wrap in its own menu rather than being cut off. */
 .field select { text-overflow: ellipsis; }
+/* The printer presets are the one control whose text is *data* rather than interface
+   copy: the names come from `data/registry/paper.csv` and are English regardless of
+   who is reading, so in an Arabic interface a name like `Epson ET-8550 · 5x7 photo,
+   bordered` was laid out right-to-left and ellipsised from its own beginning, which
+   cut the brand off and left `...on ET-8550`. `plaintext` lets each option settle its
+   direction from its own first strong character, which is the same rule the sheet's
+   own runs use and for the same reason. */
+#paper { unicode-bidi: plaintext; }
 .sheet-options .field select { font-size: var(--fs--1); }

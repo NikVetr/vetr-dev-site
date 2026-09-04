@@ -39,9 +39,23 @@ function num(n) {
 export function faceToSvg(face, plan, opts) {
   const { pageW, pageH } = plan;
   /** @type {string[]} */ const out = [];
+  // **`direction: ltr` on the root, and it is load-bearing.** Every run's `x` is its
+  // left edge -- that is the contract the plan and `render/pdf.js` share -- and SVG
+  // reads `x` through `text-anchor: start`, which under an inherited
+  // `direction: rtl` means the *right* edge instead. The gallery sets
+  // `document.documentElement.dir` from the reader's language, so an Arabic reader
+  // turned every run's anchor around: the whole sheet mirrored, columns landed on
+  // each other and the leftmost one ran off the card. It never showed in a dev
+  // render, because `scripts/render_preview.mjs` builds a page with no `dir` at all
+  // and so inherited `ltr` by accident.
+  //
+  // This is the *frame's* direction, not the text's. Each run still carries
+  // `unicode-bidi: plaintext`, which resolves its own ordering from its own first
+  // strong character, so Arabic still shapes and orders right-to-left inside the
+  // box it was given.
   out.push(
     `<svg xmlns="http://www.w3.org/2000/svg" width="${num(pageW)}pt" height="${num(pageH)}pt" `
-    + `viewBox="0 0 ${num(pageW)} ${num(pageH)}">`,
+    + `viewBox="0 0 ${num(pageW)} ${num(pageH)}" direction="ltr">`,
   );
   out.push(`<rect x="0" y="0" width="${num(pageW)}" height="${num(pageH)}" fill="${opts.background ?? '#FFFFFF'}"/>`);
   if (face.rotate) {

@@ -9,11 +9,11 @@ police-consulate.i-want-to-report-a-theft,Ich möchte einen Diebstahl anzeigen.,
 body-parts.stomach,Bauch,,bˈaʊx,,2,de-agent-v1;ipa=espeak
 medical-conditions.i-have-asthma,Ich habe Asthma.,,ɪç hɑːbə ˈastmɑː,,2,de-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-fever,Ich habe Fieber.,,ɪç hɑːbə fˈiːbɜ,,2,de-agent-v1;ipa=espeak
-police-consulate.my-bag-was-stolen,Meine Tasche wurde gestohlen.,,,,2,de-agent-v1
+police-consulate.my-bag-was-stolen,Meine Tasche wurde gestohlen.,,mˌaɪnə tˈaʃə vˌʊɾdə ɡəʃtˈoːlən,,2,de-agent-v1;ipa=espeak
 body-parts.back,Rücken,,rˈykən,,2,de-agent-v1;ipa=espeak
 medical-conditions.i-have-a-heart-condition,Ich habe eine Herzerkrankung.,Ich bin herzkrank.,ɪç hɑːbə ˌaɪnə hˈɛɾtsɛɾkɾˌankʊŋ,,2,de-agent-v1;ipa=espeak
-pharmacy-symptoms.i-have-diarrhea,Ich habe Durchfall.,,,,2,de-agent-v1
-police-consulate.my-passport-was-stolen,Mein Pass wurde gestohlen.,,,,2,de-agent-v1
+pharmacy-symptoms.i-have-diarrhea,Ich habe Durchfall.,,ɪç hɑːbə dʊɾçfˈal,,2,de-agent-v1;ipa=espeak
+police-consulate.my-passport-was-stolen,Mein Pass wurde gestohlen.,,maɪn pˈas vˌʊɾdə ɡəʃtˈoːlən,,2,de-agent-v1;ipa=espeak
 body-parts.throat,Hals,,hˈɑːls,,2,de-agent-v1;ipa=espeak
 medical-conditions.i-am-allergic-to-penicillin,Ich bin allergisch gegen Penicillin.,,ɪç bɪn ˈalɜɡˌɪʃ ɡˌeːɡən pˌeːniːkɪlˈiːn,,2,de-agent-v1;ipa=espeak
 pharmacy-symptoms.where-is-an-all-night-pharmacy,Wo ist die Notdienstapotheke?,Wo ist die diensthabende Apotheke?,vˌoː ɪst diː nˌɔtdiːnstˌapoːtˈeːkə,,2,de-agent-v1;ipa=espeak
@@ -41,7 +41,7 @@ police-consulate.please-leave-me-alone,Lassen Sie mich bitte in Ruhe.,,lˈasən 
 body-parts.arm,Arm,,ˈaɾm,,2,de-agent-v1;ipa=espeak
 medical-conditions.i-take-medicine-for,Ich nehme Medikamente gegen {}.,,ɪç nˈeːmə mˌeːdiːkamˈɛntə ɡˈeːɡən {},,2,de-agent-v1;ipa=espeak
 pharmacy-symptoms.i-am-vomiting,Ich erbreche mich.,Ich muss mich übergeben.,ɪç ɛɾbɾˈɛçə mɪç,,2,de-agent-v1;ipa=espeak
-police-consulate.i-was-robbed,Ich wurde beraubt.,,,,2,de-agent-v1
+police-consulate.i-was-robbed,Ich wurde beraubt.,,ɪç vˌʊɾdə bərˈaʊpt,,2,de-agent-v1;ipa=espeak
 body-parts.foot,Fuß,,fˈuːs,,2,de-agent-v1;ipa=espeak
 medical-conditions.i-take-blood-thinners,Ich nehme Blutverdünner.,Ich nehme Gerinnungshemmer.,ɪç nˈeːmə blˈʊtfɜdˌynɜ,,2,de-agent-v1;ipa=espeak
 pharmacy-symptoms.rehydration-salts,Elektrolytpulver,Elektrolytlösung,eːlˈɛktɾoːlˌytpʊlvɜ,,2,de-agent-v1;ipa=espeak
@@ -63,8 +63,8 @@ medical-conditions.please-give-me-sugar-or-juice,Bitte geben Sie mir Zucker oder
 pharmacy-symptoms.antihistamine,Antihistaminikum,Antiallergikum,ˌantiːhˈɪstamˌiːniːkˌʊm,,2,de-agent-v1;ipa=espeak
 police-consulate.no-thank-you-i-am-not-interested,"Nein danke, kein Interesse.",,"nˈaɪn dˈaŋkə, kˈaɪn ˌɪntərˈɛsə",,2,de-agent-v1;ipa=espeak
 medical-conditions.inject-it-into-my-outer-thigh,Bitte in den äußeren Oberschenkel spritzen.,,bˈɪtə ɪn deːn ˈɔøsərən ˌoːbɜʃˈɛŋkəl ʃpɾˈɪtsən,,2,de-agent-v1;ipa=espeak
-pharmacy-symptoms.anti-diarrhea-medicine,Mittel gegen Durchfall,Loperamid,,,2,de-agent-v1
-police-consulate.someone-attacked-me,Ich wurde angegriffen.,,,,2,de-agent-v1
+pharmacy-symptoms.anti-diarrhea-medicine,Mittel gegen Durchfall,Loperamid,mˈɪtəl ɡˌeːɡən dʊɾçfˈal,,2,de-agent-v1;ipa=espeak
+police-consulate.someone-attacked-me,Ich wurde angegriffen.,,ɪç vˌʊɾdə ˈanɡəɡɾˌɪfən,,2,de-agent-v1;ipa=espeak
 medical-conditions.my-blood-type-is,Meine Blutgruppe ist {}.,,mˌaɪnə blˈʊtɡɾʊpə ɪst {},,2,de-agent-v1;ipa=espeak
 pharmacy-symptoms.is-this-safe-to-take-with,Kann ich das zusammen mit {} nehmen?,,kˌan ɪç das tsuːzˈamən mˈɪt {} nˈeːmən,,2,de-agent-v1;ipa=espeak
 police-consulate.i-did-not-agree-to-this-price,Diesen Preis habe ich nicht vereinbart.,,dˌiːzən pɾˈaɪs hɑːbə ɪç nˈɪçt fɛɾˈaɪnbˌaɾt,,2,de-agent-v1;ipa=espeak

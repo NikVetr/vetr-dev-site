@@ -16,6 +16,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import fontkit from '@pdf-lib/fontkit';
+import { parseTable } from '../core/csv.js';
 
 const manifest = JSON.parse(await readFile('data/fonts/manifest.json', 'utf8'));
 
@@ -96,5 +97,42 @@ for (const face of manifest.faces) {
     });
     assert.deepEqual(missing, [], `${missing.length} characters have no glyph in this face `
       + 'and would print as boxes in the PDF');
+  });
+}
+
+
+// Every character a reader's respelling can emit, in the face that would draw it.
+//
+// The respelling column is the reader's own script -- `FIELD_SIDE.respell` is
+// `source` in `core/fonts.js` -- so a Korean reader's Japanese sheet draws Hangul in
+// the CJK-KR face and a Hindi reader's draws Devanagari. The faces are subset per
+// script from what the corpus actually contains, and a rule table emits characters
+// the *corpus* never does: the Korean table reaches 1,004 syllable blocks, 42 of them
+// outside KS X 1001, and the Arabic one uses `پ ڤ گ چ ژ`, which no Arabic row writes.
+//
+// A character the subset missed does not fail anything at build time. It draws a box
+// in the exported PDF, on a card someone is holding in a foreign country, which is
+// the worst place in this project for a silent failure -- so it is asserted here,
+// from `data/respell/charset.json`, which `scripts/respell_check.mjs --charset`
+// derives from the tables' real output over all sixteen targets.
+const charset = JSON.parse(await readFile('data/respell/charset.json', 'utf8'));
+const byKey = (/** @type {Record<string,string>[]} */ rows, /** @type {string} */ key) => (
+  Object.fromEntries(rows.map((r) => [r[key], r])));
+const languages = byKey(parseTable(await readFile('data/registry/languages.csv', 'utf8')), 'bcp47');
+const scripts = byKey(parseTable(await readFile('data/registry/scripts.csv', 'utf8')), 'iso15924');
+
+for (const [reader, chars] of Object.entries(charset)) {
+  test(`${reader}: every character its respellings emit has a glyph`, async () => {
+    const iso = languages[reader]?.script;
+    const stack = scripts[iso]?.font_stack;
+    assert.ok(stack, `no font stack for ${reader} (script ${iso})`);
+    const file = manifest.faces.find((/** @type {any} */ f) => f.stack === stack
+      && f.weight === 400 && !f.italic)?.file;
+    assert.ok(file, `no regular face in stack ${stack}`);
+    const font = fontkit.create(await readFile(`data/fonts/${file}.ttf`));
+    const missing = [.../** @type {string} */ (chars)].filter((c) => !/\s/.test(c)
+      && !font.hasGlyphForCodePoint(/** @type {number} */ (c.codePointAt(0))));
+    assert.deepEqual(missing, [], `${stack} cannot draw ${missing.map(
+      (c) => `${c} U+${(c.codePointAt(0) ?? 0).toString(16).toUpperCase()}`).join(', ')}`);
   });
 }

@@ -12,8 +12,8 @@ social-basics.no-problem,ไม่มีปัญหา,,mai mi panha,maj˥˩ mi
 social-basics.i-do-not-know,ไม่รู้,,mai ru,maj˥˩ ruː˦˥,,2,th-agent-v1;ipa=thaig2p
 social-basics.good-night,ราตรีสวัสดิ์,ฝันดี,ratri sawat,raː˧triː˧sa˨˩wat˨˩,,2,th-agent-v1;ipa=thaig2p
 social-basics.okay-fine-i-am-okay,สบายดี,โอเค,sabai di,sa˧baːj˧diː˧,,2,th-agent-v1;ipa=thaig2p
-communication.i-do-not-speak-this-language,พูดภาษา{target}ไม่ได้,,phut phasa {target} mai dai,,,2,language-slots-v1
-communication.i-speak-only-a-little-of-this,พูด{target}ได้นิดเดียว,,phut {target} dai nit diao,,,2,language-slots-v1
+communication.i-do-not-speak-this-language,พูดภาษา{target}ไม่ได้,,phut phasa {target} mai dai,pʰuːt˥˩ pʰaː˧saː˩˩˦ {target} maj˥˩ daːj˥˩,,2,language-slots-v1;ipa=thaig2p
+communication.i-speak-only-a-little-of-this,พูด{target}ได้นิดเดียว,,phut {target} dai nit diao,pʰuːt˥˩ {target} daːj˥˩ nit˦˥dia̯w˧,,2,language-slots-v1;ipa=thaig2p
 communication.do-you-speak-english,พูด{source}ได้ไหม,,phut {source} dai mai,,,2,language-slots-v1
 communication.please-speak-more-slowly,พูดช้าๆหน่อย,,phut cha cha noi,pʰuːt˥˩ tɕʰaː˦˥ŋɔː˧ nɔj˨˩,,2,th-agent-v1;ipa=thaig2p
 communication.i-do-not-understand-spoken,ฟังไม่เข้าใจ,,fang mai khaochai,faŋ˧ maj˥˩ kʰaw˥˩tɕaj˧,,2,th-agent-v1;ipa=thaig2p
@@ -22,7 +22,7 @@ communication.please-say-it-again,พูดอีกครั้ง,,phut ik khr
 communication.please-write-it-down,ช่วยเขียนให้,,chuai khian hai,tɕʰua̯j˥˩ kʰia̯n˩˩˦ haj˥˩,,2,th-agent-v1;ipa=thaig2p
 communication.please-wait-a-moment,รอสักครู่,,ro sak khru,rɔː˧ sak˨˩kʰruː˥˩,,2,th-agent-v1;ipa=thaig2p
 communication.can-you-help-me,ช่วยหน่อยได้ไหม,,chuai noi dai mai,tɕʰua̯j˥˩ nɔj˨˩ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
-communication.please-show-me-the-text,ขอดูข้อความภาษา{target},,kho du khokhwam phasa {target},,,2,language-slots-v1
+communication.please-show-me-the-text,ขอดูข้อความภาษา{target},,kho du khokhwam phasa {target},kʰɔː˩˩˦ duː˧ kʰɔː˥˩kʰwaːm˧ pʰaː˧saː˩˩˦ {target},,2,language-slots-v1;ipa=thaig2p
 communication.i-cannot-make-out-what-you-are-saying,ฟังไม่ทัน,,fang mai than,faŋ˧ maj˥˩ tʰan˧,,2,th-agent-v1;ipa=thaig2p
 communication.i-do-not-understand,ไม่เข้าใจ,,mai khaochai,maj˥˩ kʰaw˥˩tɕaj˧,,2,th-agent-v1;ipa=thaig2p
 communication.i-cannot-read-it,อ่านไม่ออก,,an mai ok,ʔaːn˨˩maj˥˩ʔɔːk˨˩,,2,th-agent-v1;ipa=thaig2p
@@ -39,7 +39,7 @@ quick-responses.okay-fine,โอเค,ตกลง,oke,ʔoː˧kʰeː˧,,2,th-ag
 quick-responses.no-good-not-allowed-will-not-work,ห้าม,ไม่ดี,ham,haːm˥˩,,2,th-agent-v1;ipa=thaig2p
 phone-translation.i-am-using-phone-translation,ใช้แอปแปลภาษา,,chai aep plae phasa,tɕʰaj˦˥ ʔɛː˧ pɔː˧ plɛː˧ pʰaː˧saː˩˩˦,,2,th-agent-v1;ipa=thaig2p
 phone-translation.please-speak-toward-the-phone,พูดใส่มือถือหน่อย,,phut sai muethue noi,pʰuːt˥˩ saj˨˩ mɯː˧tʰɯː˩˩˦ nɔj˨˩,,2,th-agent-v1;ipa=thaig2p
-phone-translation.please-write-the-place-name,ช่วยเขียนชื่อสถานที่เป็นภาษา{target},,chuai khian chue sathanthi pen phasa {target},,,2,language-slots-v1
+phone-translation.please-write-the-place-name,ช่วยเขียนชื่อสถานที่เป็นภาษา{target},,chuai khian chue sathanthi pen phasa {target},tɕʰua̯j˥˩ kʰia̯n˩˩˦ tɕʰɯː˥˩ sa˨˩tʰaː˩˩˦tʰiː˥˩ pen˧ pʰaː˧saː˩˩˦ {target},,2,language-slots-v1;ipa=thaig2p
 phone-translation.one-sentence-at-a-time-please,พูดทีละประโยค,,phut thi la prayok,pʰuːt˥˩ tʰiː˧laʔ˦˥ pra˨˩raʔ˨˩joːk˥˩,,2,th-agent-v1;ipa=thaig2p
 phone-translation.please-type-it-and-show-me,พิมพ์ให้ดูหน่อย,,phim hai du noi,pʰim˧ haj˥˩ duː˧ nɔj˨˩,,2,th-agent-v1;ipa=thaig2p
 phone-translation.please-look-at-the-screen,ดูหน้าจอหน่อย,,du nacho noi,duː˧ naː˥˩tɕɔː˧ nɔj˨˩,,2,th-agent-v1;ipa=thaig2p

@@ -1,0 +1,3764 @@
+{
+  "source": "th",
+  "accent": "th-TH",
+  "status": "ready",
+  "version": 1,
+  "derives_from": "หลักเกณฑ์การทับศัพท์ภาษาอังกฤษ, the Royal Institute's transcription criteria announced by the Prime Minister's Office in the Royal Gazette vol. 106 pt. 153 (14 September 1989), together with the 1992 announcement covering French, German, Italian, Spanish, Russian, Japanese, Arabic and Malay (vol. 109 pt. 56, 1 May 1992). Public: s. 7 of the Copyright Act B.E. 2537 excludes notifications and orders of government units. What is taken is its *inventory* -- which Thai letter for which foreign sound -- and above all its ตารางเทียบพยัญชนะ, whose two columns are พยัญชนะต้น and ตัวสะกด: p = พ/ป, t = ท/ต, c and k = ค/ก, s = ซ/ส, g before e i y = จ, v = ว/ฟ, th = ท/ท, f and ph = ฟ, sh and ch = ช, j = จ, y = ย, w = ว, z = ซ, h = ฮ, q = ก, m n ng l r = ม น ง ล ร. That column split is a phonetic statement, not a convention: rule 6 makes it explicit with pattern = แพตเทิร์น, Missouri = มิสซูรี and broccoli = บรอกโคลี, the same consonant twice with a different letter each side of the syllable break. So this table writes it with slot: \"onset\" against slot: \"coda\" and gets the standard's behaviour for free. The vowel table is taken the same way, re-keyed from English digraph to IPA: a = แอ (badminton = แบดมินตัน), u = อะ (Hungary = ฮังการี), oo = อุ/อู (foot = ฟุต, wood = วูด), ai = เอ (Spain = สเปน), oi = ออย (thyroid = ไทรอยด์), ou = เอา (counter = เคาน์เตอร์), ow = โอ (bowling = โบว์ลิง), er/ir/ur/yr = เออ (Canberra = แคนเบอร์รา), ia = เอีย (India = อินเดีย), eo = เอียว (Borneo = บอร์เนียว), iew = อิว (view = วิว), u = อิว (Cuba = คิวบา). Rule 4's ไม้ไต่คู้ (log = ล็อก) is kept as the short-vowel sign for a closed syllable. The *form* of the column is Thai's own and the survey missed it: a คำอ่าน -- a respelling of a word in ordinary Thai letters, syllable by syllable, with ยัติภังค์ between the syllables -- is the standard Thai way to write down how something is read (ประวัติศาสตร์ อ่านว่า ประ-วัด-ติ-สาด), taught in school and used in dictionaries. This column is a คำอ่าน of a foreign phrase, so the hyphen is native rather than borrowed. Tone is not in the standard at all and is derived instead from the Thai tone rules themselves, which are deterministic in four inputs -- consonant class, tone mark, vowel length, and live or dead syllable -- so writing a chosen pitch means choosing a letter and a mark together.",
+  "deviations": [
+    {
+      "rule": "๑. “การทับศัพท์ให้ถอดอักษรในภาษาเดิมพอควรแก่การแสดงที่มาของรูปศัพท์ และให้เขียนในรูปที่อ่านได้สะดวกในภาษาไทย” -- transcription shall transliterate the letters of the original language sufficiently to show the origin of the word form, and be written so as to read conveniently in Thai",
+      "why": "Overruled, and it is the deviation every other one follows from: provenance is the first clause of the standard's purpose and it is not in ours at all. The whole standard is indexed on the source language's *letters* -- the consonant table's left column is c+a, c+e, gh, gn, ph, ti, wh -- which fails the respelling test outright: change an English spelling without changing its sound and the standard's output changes. This table is indexed on the ipa column, so the second clause of rule 1 is the only one it keeps, and the letters chosen to satisfy it are the standard's own."
+    },
+    {
+      "rule": "๕. “การเขียนคำทับศัพท์ ไม่ต้องใส่เครื่องหมายวรรณยุกต์ ยกเว้นในกรณีที่คำนั้นมีเสียงซ้ำกับคำไทย จนทำให้เกิดความสับสน” -- do not write tone marks, except where the result collides with an existing Thai word (coke = โค้ก, coma = โคม่า)",
+      "why": "Overruled, and this is the substantial work in the file. A Thai syllable cannot be toneless: pitch is fully determined by consonant class, tone mark, vowel length and live/dead syllable, so declining to write a mark does not leave the tone open -- it assigns whatever the letters happen to give. Rule 5 therefore does not withhold information, it emits a pitch nobody chose. Note that the standard concedes the point twice over: rule 5's own exception exists because a tone mark is the thing that keeps a loanword off an existing Thai word, and the words rule 3 of the preamble grandfathers in -- ก๊าซ, แก๊ส, เชิ้ต, ช็อกโกแลต -- all carry a mark or a ไม้ไต่คู้. So: policy.tone is keep, the two tonal targets get their contours mapped to the five Thai tones, and a stress-language target gets a falling tone on its stressed syllable. Because the mark is not free-standing, the consonant letter is chosen with it -- see the tone note."
+    },
+    {
+      "rule": "๓.๑-๓.๓. ทัณฑฆาต over consonants not pronounced in Thai: horn = ฮอร์น, Windsor = วินด์เซอร์, Okhotsk = โอค็อตสก์, world = เวิลด์, first = เฟิสต์",
+      "why": "Dropped, as the survey says, and for a simpler reason than the survey gives: we derive from sound, so a letter that is not pronounced never arrives. There is nothing to kill. What the mark really does in the standard is absorb a coda Thai cannot say, and this table absorbs it by not writing it -- one written coda consonant, chosen by the standard's own ตัวสะกด column, and nothing after it (last = ลัส, Okhotsk = โอค็อต). A rime already closed by its own offglide takes no coda at all, which is exactly the standard's ไนต์ and เคาน์เตอร์ with the killer mark removed. if_coda could reverse that choice -- write เ-ีย plus the /m/ of al-yawm rather than เ-ียว and no /m/ -- and it should not: the offglide is part of the vowel and the coda is not, so where Thai can carry only one, the vowel wins. Every attested form agrees, since ไนต์, เคาน์เตอร์, พอยต์ and อัลเยาม์ all write the coda letter and silence it, which is the sound this table gets by not writing it. The phonetic result is identical: ฮอร์น and ฮอน are both /hɔːn/, and the reader is not shown a letter they must know not to say. The survey is wrong on one detail here -- it offers ทับศัพท์ of *knight* as the transliteration example, but the consonant table's own closing note says a silent initial is simply not written (gnat = แนต, knight = ไนต์, psycho = ไซโค, pneumonia = นิวมอเนีย), so the standard already agrees with us at the front of the word and only differs at the back."
+    },
+    {
+      "rule": "๖. a doubled letter in a technical term or proper noun keeps both consonants, the last under ทัณฑฆาต (cell = เซลล์, James Watt = เจมส์ วัตต์)",
+      "why": "Not done, same reason. A geminate arrives as /kː/ or /tː/, which is one Thai letter, and gemination across a syllable break is already written by the syllabifier as a coda plus an onset (Jumanne = จุ-มั่น-เน, チップ = จิป-ปุ), which is rule 6's own middle case."
+    },
+    {
+      "rule": "๗.๑. where the first syllable's vowel is สระอะ written with ไม้หันอากาศ, double the coda consonant to carry the next syllable (couple = คัปเปิล, double = ดับเบิล)",
+      "why": "Not done, and it cannot be: /ˈkʌpəl/ has no coda in its first syllable, so there is no consonant to double. The rule exists because ไม้หันอากาศ needs a following letter, and this table meets that need the other way -- an orphaned ั falls back to its open form ะ (ค่ะ-เปิล), which is ordinary Thai and one letter shorter. Same for ็ and ็อ where the coda was a rhotic and was dropped."
+    },
+    {
+      "rule": "the lexical exception lists: p is พ except in super-, -pa, -pean, -per, -pia, -pic, -ping, -po, -pus, -py; t is ท except in anti-, auto-, inter-, multi-, photo-, -ta, -ter, -ti, -to, -ton, -tor, -ty; k is ก when it opens the last syllable (bunker = บังเกอร์, market = มาร์เกต)",
+      "why": "Not done, because they are keyed on English spelling and morphology, which the ipa column does not carry. They are also groping at something real: พ ท ค are aspirated and ป ต ก are not, and English is only sometimes aspirated where its spelling says p t k. So the distinction is made where it is a fact about the *target*: ป ต ก by default, which is exact for the unaspirated majority (Spanish, Italian, French, Japanese, Arabic, Vietnamese) and exact for the aspirating three's own unaspirated series (Mandarin b d g, Korean ㄱㄷㅂ, Hindi क त प), and พ ท ค in a targets block for en, de and tr, whose voiceless stops are aspirated. คอมพิวเตอร์ -- พ for the aspirated p, ต for the unaspirated t of -ter -- comes out of the general rule plus the English block, which is what the exception lists were for."
+    },
+    {
+      "rule": "the vowel table's เออ for a vowel followed by r: Edward = เอดเวิร์ด, Canberra = แคนเบอร์รา, hurricane = เฮอร์ริเคน, zircon = เซอร์คอน, bar = บาร์, corruption = คอร์รัปชัน, Pamir = ปามีร์",
+      "why": "Kept, and it is the one rule in this file that needed a new engine predicate. The coda rhotic is not written, so the vowel has to carry the rime alone, and the standard's answer is to lengthen it: er/ir/ur/yr = เออ, ar = อา, or = ออ, ir = อี, oor = อู. That is a fact about the *coda*, which a nucleus rule could not see -- so this table asked for if_coda and now uses it on 2,803 rhotic-headed codas, moving 1,948 rows: Merhaba is เม่อ-ฮะ-บะ where it was เม่ะ-ฮะ-บะ, gunler is เกิน-เล่อ, Arrivederci is อา-ริ-เว-เด้อ-ชิ, passport is แพ่ส-พอต, tourist is ทู่-ริส, la tarde is ละ ต้า-เด. One guard is needed and was found by reading the diff: espeak writes English's intervocalic flap as /ɾ/ (say it again is sˈeɪ ɪɾ ɐɡˈɛn), so /ɾ/ counts as a rhotic only where the target has no /ɹ/ of its own, which is the eight languages whose /ɾ/ really is one. Without the guard English it came out อี."
+    },
+    {
+      "rule": "๔. ไม้ไต่คู้ is written to distinguish a transcription from an existing Thai word, or to help the reader divide syllables (log = ล็อก, Okhotsk = โอค็อตสก์)",
+      "why": "Kept, but re-keyed from that purpose to vowel *length*: ็ is written wherever the target's vowel is short and the syllable is closed (/ɛ e/ เ-็, /ɔ ɒ/ -็อ, /æ/ แ-, per the standard's own แบดมินตัน). The standard's purpose cannot be computed, since it needs a lexicon of Thai words to collide with; length is in the ipa column. Where a tone mark also falls on the syllable the ไม้ไต่คู้ yields to it, because Thai writes one or the other and not both (ช็อป against ช้อป), and the syllable reads long."
+    },
+    {
+      "rule": "the standard is sixteen separate announcements, one per source language, each with its own table",
+      "why": "Not reproducible and not needed. One table serves all sixteen targets, and the places where the separate announcements would differ are exactly the places where the target's own inventory decides: /k/ is ค where the target contrasts it with /ɡ/ and ก where it contrasts it with /kʰ/; /x/ is ฮ where the target has no /h/ of its own (Spanish j, Mandarin h, Russian х) and ค where it does (German ch, Vietnamese kh); /ɕ/ is ซ in Mandarin and ช in Japanese, told apart by whether the target also has a retroflex series; /ts/ is จ where it contrasts with /tsʰ/ and ซ otherwise (pizza, tsunami); /ɟ/ is ก for Turkish's palatal g and จ for Swahili's and Hindi's j. Five typological guards in place of five announcements."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "lexical tone (zh-Hans, vi)",
+      "out": "the five Thai tones, by contour",
+      "why": "Mandarin 55 -> สามัญ (mid, unmarked), 35 -> จัตวา (rising), 214 -> เอก (low), 51 -> โท (falling); Vietnamese ngang -> สามัญ, sắc -> จัตวา, hỏi -> เอก, huyền -> โท. Four distinct tones out of four in both, which is the best any reader in this project gets. Tone 1 is unmarked rather than ตรี because Thai has no high *level* tone -- ตรี rises -- and because unmarked is what Thai practice writes for it: 中国 is จงกั๋ว, with tone 1 bare and tone 2 on ๋. The rest of the mapping is the same practice: 你好 หนิ่เห่า, 请 ฉิ่ง, 我 หว่อ, 是 ซื่อ, 这个 เจ้อเกอ, 小费 เสี่ยวเฟ่, 流量 หลิวเลี่ยง. Two Vietnamese pairs merge before the table sees them: `ˀ` is not a tone letter, so it separates from ˨˩ˀ and ˧ˀ˥ and lands in the coda, which makes nặng identical to huyền and ngã identical to sắc. The vi table documents the same artifact from the other side. ตรี is therefore never written and ไม้ตรี never reaches the page."
+    },
+    {
+      "sounds": "an open syllable in a target that writes tone",
+      "out": "the long vowel, so the syllable is live",
+      "why": "A Thai syllable ending in a short vowel is *dead*, and a dead syllable cannot carry the mid tone -- it takes low or high by rule, whichever the consonant class dictates, whatever the target wanted. So every open syllable in a tone-writing target takes the long vowel, which makes it live and lets the tone rules reach all five pitches. 609 rows: 一 is อี rather than อิ, 吗 is มา rather than มะ, 你好 is หนี่ เห่า rather than หนิ่ เห่า, 打字 is ต่า-จื้อ, nghe is แง rather than เงะ. Guarded on the target contrasting the two lengths itself -- Vietnamese does for /a/ and /u/ and keeps them short, Mandarin has no long vowel anywhere in its column -- so no length contrast is spent to buy the tone. This was the tenth item on this table's own least-confident list and it needed no new predicate, only reading the output."
+    },
+    {
+      "sounds": "a centring diphthong written with U+032F (Vietnamese iê, uô, ươ)",
+      "out": "Thai's own เ-ีย, -ัว and เ-ือ",
+      "why": "These three are the same three, and they correspond exactly: /iə/ เ-ีย, /uə/ -ัว, /ɯə/ เ-ือ. So the rime a Thai reader would write is the rime the target has -- biệt is เบี้ยต, hiểu is เหี่ยว, buổi is บ่วย, and -ัว keeps only its ว before an offglide the way Thai writes ด้วย. 288 rows. Before the generator marked these vowels non-syllabic they were two syllables apiece and this table listed them as a loss; the mark itself spells nothing, since putting the vowel in the rime already says it is not a syllable of its own."
+    },
+    {
+      "sounds": "stress, on the twelve targets whose ipa carries ˈ",
+      "out": "a falling tone (โท) on the stressed syllable of a polysyllable",
+      "why": "Thai's stress device is a tone mark, as RESPELL-SYSTEMS.md says, and falling is the one tone writable on every consonant class and in both live and dead syllables -- mid class ้, high and low class ่ -- so it never forces a letter change. It is also the most prominent Thai tone. Unstressed syllables take no mark, which for an open syllable is mid and for a dead one is whatever the class gives; that is not neutrality, but it is the reading Thai loanword phonology already assigns (แท็กซี่, เค้ก, ฟุตบอล). A monosyllable is never marked, which is stress_min_syllables: 2 expressed as a pair of fixups, since a fixup cannot count syllables. 26% of all syllables end up marked (17,675 of 67,437) -- 18% for English, 0% for Japanese and Korean, which carry neither stress nor tone and so are written entirely unmarked. The weakest case is Indonesian at 40%: Malay stress is neither phonemic nor predictable, so a mark there asserts a prominence the language may not have. It is kept because the ipa column carries the mark, because the alternative is a flat reading, and because it is at worst a plausible pitch on a syllable a Thai reader has to give *some* pitch to."
+    },
+    {
+      "sounds": "/p t k/ against /b d ɡ/",
+      "out": "ป ต ก against บ ด ก, with ค for /k/ where the target contrasts it with /ɡ/",
+      "why": "Thai has ป/บ and ต/ด but no voiced velar, so /k/ and /ɡ/ are the one stop pair with nowhere to go. Where the target contrasts them, /k/ borrows the aspirate ค and /ɡ/ keeps ก -- which is the standard's own k = ค, g = ก (Kansas = แคนซัส, galaxy = กาแล็กซี) and modern practice throughout (เค้ก, คอมพิวเตอร์, เกม, กอล์ฟ). Where the target instead contrasts /k/ with /kʰ/ -- Mandarin, Korean, Hindi -- ค is spent on /kʰ/ and /k/ takes ก, so Hindi loses its क/ग distinction and keeps its क/ख one. That is the right way round: aspiration is lexical in all three and Thai writes it."
+    },
+    {
+      "sounds": "a coda Thai does not have",
+      "out": "the standard's ตัวสะกด letter, read by Thai's own final rules",
+      "why": "Thai admits one final consonant and reads it by rule, so a foreign coda fricative keeps its own letter and comes out as the stop at its place: /s/ ส and /z/ ซ both read /t/ (Lagos = ลากอส), /f v/ ฟ reads /p/ (love = เลิฟ), /ʃ tʃ dʒ/ ช and จ read /t/, /ç x/ ก. That is the standard's answer and it costs nothing, because the letter a Thai reader sees is the one they would have written and the sound they give it is the one a Thai speaker makes. Everything after the first coda consonant is dropped; a coda rhotic is dropped outright, which is what the standard does audibly (horn = ฮอร์น is /hɔːn/) and this table does visibly."
+    },
+    {
+      "sounds": "the /j/ onglide (Mandarin -i-, Japanese -y-, Korean -ㅕ-, Spanish -i-, Russian -ь-)",
+      "out": "Thai's เ-ีย family, or ย where the syllable has no onset",
+      "why": "The standard's vowel table already answers this and answers it better than a split would: ia = เอีย, eo = เอียว, iew and u = อิว, ure = เอียว. So /Cja/ is C + เ-ีย (gracias = กราเซียส, xiè = เซี่ย), /Cjo/ is เ-ียว (Borneo = บอร์เนียว, jiào = เจี้ยว), /Cju/ is -ิว (Cuba = คิวบา, liù = หลิ่ว), /Cji/ is -ี, and an onsetless /ju/ is just ยู (Union = ยูเนียน). policy.splits is therefore empty: breaking a rising diphthong into its own syllable is what a reader with no such rime needs, and Thai has the rime."
+    },
+    {
+      "sounds": "/ɲ ʎ/ and Russian's palatalised series",
+      "out": "นย and ลย; the plain letter",
+      "why": "Thai has no palatal nasal or lateral letter that is still read as one -- ญ is /j/ today -- so /ɲ/ is นย, which is what the tradition writes (Kenya = เคนยา) and reads as /na-j/, close enough to be recognised. Before a front vowel the glide letter is redundant and dropped, so Japanese に is นิ rather than นยิ. Russian's fourteen palatalised consonants take the plain letter and lose the palatalisation: an i-onglide would mean rewriting the rime, which a consonant rule cannot do, and นย for /nʲ/ would put a syllable break inside Russian's softest consonant."
+    },
+    {
+      "sounds": "/ə/ and /ʌ/",
+      "out": "ะ/ั, or เ-อ/เ-ิ where the target has a real mid-central vowel",
+      "why": "The standard's own choice for both (Hungary = ฮังการี, Washington = วอชิงตัน, thermocouple = เทอร์โมคัปเปิล), and it keeps an unstressed syllable short, which is what a schwa is. Three guards move it. A target that contrasts /ə/ with /əː/ writes Thai's own schwa letter instead, which is exact for Vietnamese â against ơ. A target with /ʌ/ and no /ə/ at all -- Korean, by that guard alone -- gets เ-อ for ㅓ, a full vowel there and not a reduction. And a target with no word-final /ə/ has a full vowel rather than a reduction wherever it does have one, so before a nasal coda it takes เ-ิ: that is Mandarin's en and eng, which Thai writes เ-ิน and เ-ิง (人 เหริน, 什么 เสิน-เมอ, 温 เวิน), and it moved 74 rows off -ัน. English, German, French, Hindi, Russian and Indonesian all have a word-final schwa and keep สระอะ, which is the standard's own choice for them."
+    },
+    {
+      "sounds": "/ɯ/, /y/, /ɨ/",
+      "out": "ึ, ุ/ู, ือ/ื",
+      "why": "Thai has /ɯ/ exactly (ึ ื), so Turkish ı and Korean ㅡ are free. Japanese う is written /ɯ/ by the generator but is the language's only high back vowel, so it takes the rounded ุ ู that Thai practice gives it (ซูชิ) -- guarded on the target having no /u/ of its own, which only Japanese satisfies. /y/ has no Thai vowel and takes the rounded ู (Zürich = ซูริก); the generator's three false /y/s are handled per target, ิ for Portuguese's reduced final [ɨ] and ึ for Vietnamese ư. /ɨ/ is Mandarin's -i and Russian ы, both long, and takes ือ (是 = ซื่อ)."
+    },
+    {
+      "sounds": "the pharyngeals and the glottal stop (Arabic ح ع ء, Korean ㅢ)",
+      "out": "ฮ; อ where the syllable has nothing else, nothing where it does",
+      "why": "อ is Thai's own zero consonant, so it is exact for a syllable-initial glottal stop and for Arabic's hamza, and silent everywhere else. /ħ/ takes ฮ, /ʕ/ nothing -- Thai has neither and no letter approximates them; the survey is right that Arabic needs a reviewer more than a table."
+    },
+    {
+      "sounds": "a nasal vowel that also has a coda of its own",
+      "out": "the coda carries the nasality, at its own place",
+      "why": "A nasal vowel writes its nasality as a coda (ัง for /ɑ̃/), so a syllable that already has a nasal coda was getting ง written over its own /n/ or /m/. With if_coda the ง is written only where the coda is not itself a nasal: /ɔ̃n/ is มอน rather than มอง, /ɐ̃m/ is ัม rather than ัง. 51 rows across French, Portuguese and Hindi. Measured over the corpus, 815 nasal vowels have no coda, 170 have a nasal one and 121 an obstruent -- and the obstruent case deliberately keeps the old behaviour, ง written and the obstruent dropped, because that is what Thai itself does with the pair (France = ฟรานซ์, read [fraŋ])."
+    },
+    {
+      "sounds": "vowel length in a closed syllable with /ə/ or /o/",
+      "out": "lost",
+      "why": "Thai writes short and long with different signs everywhere except two places, and both are structural rather than avoidable: เ-ิ is the closed form of both /ə/ and /əː/, and a closed short /o/ has no written form at all in Thai (นก is spelt with no vowel), so /o/ takes โ- and reads long. Everywhere else length is written, which is why policy.length is none and every long vowel has its own rule."
+    }
+  ],
+  "legend": "None. Every glyph in the output is ordinary Thai used for its ordinary sound, and the hyphen is the ยัติภังค์ of a คำอ่าน, which is what a Thai reader already reads it as. The one thing worth a reader knowing is not a glyph but a habit: the tone marks are real instructions, not decoration, because this column writes the tone that rule 5 of the standard leaves out.",
+  "policy": {
+    "syllable_separator": "-",
+    "word_separator": " ",
+    "stress": "none",
+    "stress_min_syllables": 2,
+    "length": "none",
+    "tone": "keep",
+    "max_onset": 2,
+    "fixups": "all",
+    "locale": "th",
+    "reader_onsets": "pr pɾ pɹ pʁ pɽ pɻ pʰr pʰɾ pʰɹ pʰʁ pʰɽ pʰɻ br bɾ bɹ bʁ bɽ bɻ tr tɾ tɹ tʁ tɽ tɻ tʰr tʰɾ tʰɹ tʰʁ tʰɽ tʰɻ dr dɾ dɹ dʁ dɽ dɻ kr kɾ kɹ kʁ kɽ kɻ kʰr kʰɾ kʰɹ kʰʁ kʰɽ kʰɻ ɡr ɡɾ ɡɹ ɡʁ ɡɽ ɡɻ fr fɾ fɹ fʁ fɽ fɻ pl pɫ pɭ pʰl pʰɫ pʰɭ bl bɫ bɭ kl kɫ kɭ kʰl kʰɫ kʰɭ ɡl ɡɫ ɡɭ fl fɫ fɭ kw kʰw ɡw xw sw tw tʰw dw hw"
+  },
+  "splits": [],
+  "phonemes": [
+    {
+      "slot": "any",
+      "ipa": "˧˩˧",
+      "out": "²"
+    },
+    {
+      "slot": "any",
+      "ipa": "˧˥˨˩",
+      "out": "³"
+    },
+    {
+      "slot": "any",
+      "ipa": "˨˩ˀ",
+      "out": "³"
+    },
+    {
+      "slot": "any",
+      "ipa": "˧˥",
+      "out": "⁵"
+    },
+    {
+      "slot": "any",
+      "ipa": "˥˩",
+      "out": "³"
+    },
+    {
+      "slot": "any",
+      "ipa": "˨˩",
+      "out": "³"
+    },
+    {
+      "slot": "any",
+      "ipa": "˧˩",
+      "out": "³"
+    },
+    {
+      "slot": "any",
+      "ipa": "˩˩˦",
+      "out": "⁵"
+    },
+    {
+      "slot": "any",
+      "ipa": "˦˥",
+      "out": "⁵"
+    },
+    {
+      "slot": "any",
+      "ipa": "˥",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "˦",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "˧",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "˨",
+      "out": "²"
+    },
+    {
+      "slot": "any",
+      "ipa": "˩",
+      "out": "²"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "i",
+      "out": "ี",
+      "when": [
+        "open"
+      ],
+      "if_inventory": "˧",
+      "unless_inventory": "iː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "u",
+      "out": "ู",
+      "when": [
+        "open"
+      ],
+      "if_inventory": "˧",
+      "unless_inventory": "uː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "a",
+      "out": "า",
+      "when": [
+        "open"
+      ],
+      "if_inventory": "˧",
+      "unless_inventory": "aː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "y",
+      "out": "ู",
+      "when": [
+        "open"
+      ],
+      "if_inventory": "˧",
+      "unless_inventory": "yː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯ",
+      "out": "ือ",
+      "when": [
+        "open"
+      ],
+      "if_inventory": "˧",
+      "unless_inventory": "ɯː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ",
+      "out": "แ",
+      "when": [
+        "open"
+      ],
+      "if_inventory": "˧",
+      "unless_inventory": "ɛː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ə",
+      "out": "เอ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ə",
+      "out": "เอ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌ",
+      "out": "เอ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌ",
+      "out": "เอ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ",
+      "out": "เอ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ",
+      "out": "เอ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "e",
+      "out": "เอ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "e",
+      "out": "เอ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ",
+      "out": "เอ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ",
+      "out": "เอ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ø",
+      "out": "เอ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ø",
+      "out": "เอ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ",
+      "out": "เอ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ",
+      "out": "เอ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "a",
+      "out": "า",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "a",
+      "out": "า",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "æ",
+      "out": "า",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "æ",
+      "out": "า",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "i",
+      "out": "ี",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "i",
+      "out": "ี",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɪ",
+      "out": "ี",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɪ",
+      "out": "ี",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "u",
+      "out": "ู",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "u",
+      "out": "ู",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʊ",
+      "out": "ู",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʊ",
+      "out": "ู",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "y",
+      "out": "ู",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "y",
+      "out": "ู",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "o",
+      "out": "อ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "o",
+      "out": "อ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oː",
+      "out": "อ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oː",
+      "out": "อ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ",
+      "out": "อ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ",
+      "out": "อ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "a",
+      "out": "ะ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "a",
+      "out": "ั",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ",
+      "out": "ะ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ",
+      "out": "ั",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aː",
+      "out": "า"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑ",
+      "out": "า"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑː",
+      "out": "า"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "æ",
+      "out": "แะ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "æ",
+      "out": "แ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "e",
+      "out": "เ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "eː",
+      "out": "เ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ",
+      "out": "เะ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ",
+      "out": "เ็",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛː",
+      "out": "แ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "i",
+      "out": "ิ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɪ",
+      "out": "ิ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "iː",
+      "out": "ี"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "o",
+      "out": "โ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oː",
+      "out": "โ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɵ",
+      "out": "โ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ",
+      "out": "อ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ",
+      "out": "็อ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔː",
+      "out": "อ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɒ",
+      "out": "อ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "u",
+      "out": "ุ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʊ",
+      "out": "ุ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "uː",
+      "out": "ู"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʉ",
+      "out": "ู"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "y",
+      "out": "ุ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "yː",
+      "out": "ู"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯː",
+      "out": "ือ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯː",
+      "out": "ื",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɨ",
+      "out": "ือ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɨ",
+      "out": "ื",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɜ",
+      "out": "เอ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɜ",
+      "out": "เิ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɜː",
+      "out": "เอ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɜː",
+      "out": "เิ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɚ",
+      "out": "เอ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɚ",
+      "out": "เิ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɝ",
+      "out": "เอ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɝ",
+      "out": "เิ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɤ",
+      "out": "เอ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɤ",
+      "out": "เิ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ø",
+      "out": "เอ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ø",
+      "out": "เิ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ",
+      "out": "เอ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ",
+      "out": "เิ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "əː",
+      "out": "เอ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "əː",
+      "out": "เิ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɤː",
+      "out": "เอ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɤː",
+      "out": "เิ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ə",
+      "out": "เอ",
+      "when": [
+        "open"
+      ],
+      "if_inventory": "əː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ə",
+      "out": "เิ",
+      "when": [
+        "closed"
+      ],
+      "if_inventory": "əː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ə",
+      "out": "เิ",
+      "if_coda": "n m ŋ ɴ",
+      "unless_inventory": "ə#"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ə",
+      "out": "ะ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ə",
+      "out": "ั",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌ",
+      "out": "เอ",
+      "when": [
+        "open"
+      ],
+      "unless_inventory": "ə"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌ",
+      "out": "เิ",
+      "when": [
+        "closed"
+      ],
+      "unless_inventory": "ə"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌ",
+      "out": "ะ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌ",
+      "out": "ั",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯ",
+      "out": "ุ",
+      "unless_inventory": "u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯ",
+      "out": "ึ"
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "",
+      "if_coda": "n m ŋ ɴ ɲ nʲ mʲ ɳ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ã",
+      "out": "ั",
+      "if_coda": "n m ŋ ɴ ɲ nʲ mʲ ɳ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑ̃",
+      "out": "ั",
+      "if_coda": "n m ŋ ɴ ɲ nʲ mʲ ɳ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ̃",
+      "out": "ั",
+      "if_coda": "n m ŋ ɴ ɲ nʲ mʲ ɳ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ã",
+      "out": "ั",
+      "if_coda": "n m ŋ ɴ ɲ nʲ mʲ ɳ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ̃",
+      "out": "แ",
+      "if_coda": "n m ŋ ɴ ɲ nʲ mʲ ɳ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ũ",
+      "out": "ุ",
+      "if_coda": "n m ŋ ɴ ɲ nʲ mʲ ɳ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ̃",
+      "out": "เิ",
+      "if_coda": "n m ŋ ɴ ɲ nʲ mʲ ɳ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ̃",
+      "out": "อ",
+      "if_coda": "n m ŋ ɴ ɲ nʲ mʲ ɳ"
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "ง"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ã",
+      "out": "ัง"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑ̃",
+      "out": "ัง"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ̃",
+      "out": "ัง"
+    },
+    {
+      "slot": "any",
+      "ipa": "ã",
+      "out": "ัง"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ̃",
+      "out": "แง"
+    },
+    {
+      "slot": "any",
+      "ipa": "ẽ",
+      "out": "เง"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ẽː",
+      "out": "เง"
+    },
+    {
+      "slot": "any",
+      "ipa": "ĩ",
+      "out": "ิง"
+    },
+    {
+      "slot": "any",
+      "ipa": "õ",
+      "out": "อง"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ̃",
+      "out": "อง"
+    },
+    {
+      "slot": "any",
+      "ipa": "ũ",
+      "out": "ุง"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ̃",
+      "out": "เิง"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ̃ʊ̃",
+      "out": "เา"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aɪ",
+      "out": "ไ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aj",
+      "out": "ไ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑɪ",
+      "out": "ไ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aːj",
+      "out": "าย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aːɪ",
+      "out": "าย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aʊ",
+      "out": "เา"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aw",
+      "out": "เา"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑʊ",
+      "out": "เา"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑw",
+      "out": "เา"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aːw",
+      "out": "าว"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aːʊ",
+      "out": "าว"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "eɪ",
+      "out": "เ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ej",
+      "out": "เ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "eːj",
+      "out": "เย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oːw",
+      "out": "โว"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oj",
+      "out": "อย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oɪ",
+      "out": "อย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔj",
+      "out": "อย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔɪ",
+      "out": "อย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔːj",
+      "out": "อย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "eʊ",
+      "out": "เว"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ew",
+      "out": "เว"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛʊ",
+      "out": "เว"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛw",
+      "out": "เว"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "uj",
+      "out": "ุย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "uɪ",
+      "out": "ุย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "uːj",
+      "out": "ูย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "iw",
+      "out": "ิว"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "iʊ",
+      "out": "ิว"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "iːw",
+      "out": "ีว"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "iːj",
+      "out": "ี"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ij",
+      "out": "ี"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "əɪ",
+      "out": "เย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "əj",
+      "out": "เย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "əːj",
+      "out": "เย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "əːɪ",
+      "out": "เย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯɪ",
+      "out": "ึย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯj",
+      "out": "ึย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɨɪ",
+      "out": "ึย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌɪ",
+      "out": "ัย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌj",
+      "out": "ัย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɪʊ",
+      "out": "ิว"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʊɪ",
+      "out": "ุย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "yɪ",
+      "out": "ุย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "æɪ",
+      "out": "ไ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛɪ",
+      "out": "เ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "eːɪ",
+      "out": "เ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "iːɪ",
+      "out": "ี"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "uːɪ",
+      "out": "ูย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oːɪ",
+      "out": "อย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "õj",
+      "out": "อง"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aɪʊ",
+      "out": "ไ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aɪw",
+      "out": "ไ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "eɪʊ",
+      "out": "เ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oʊɪ",
+      "out": "โ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jeɪ",
+      "out": "เีย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oʊ",
+      "out": "โว",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oʊ",
+      "out": "โ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ow",
+      "out": "โว",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ow",
+      "out": "โ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "əʊ",
+      "out": "โว",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "əʊ",
+      "out": "โ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oːʊ",
+      "out": "โว",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oːʊ",
+      "out": "โ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oːw",
+      "out": "โว",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oːw",
+      "out": "โ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "iɛ̯",
+      "out": "เีย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "iə̯",
+      "out": "เีย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "uə̯",
+      "out": "ัว",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "uə̯",
+      "out": "ว",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "yə̯",
+      "out": "เือ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯə̯",
+      "out": "เือ"
+    },
+    {
+      "slot": "any",
+      "ipa": "̯",
+      "out": ""
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ja",
+      "out": "เีย",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jaː",
+      "out": "เีย",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɑ",
+      "out": "เีย",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɑː",
+      "out": "เีย",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɐ",
+      "out": "เีย",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jʌ",
+      "out": "เีย",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jə",
+      "out": "เีย",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jæ",
+      "out": "เีย",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɛ",
+      "out": "เีย",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɛː",
+      "out": "เีย",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "je",
+      "out": "เีย",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jeː",
+      "out": "เีย",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɪ",
+      "out": "เีย",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jã",
+      "out": "เีย",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɛ̃",
+      "out": "เีย",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɑ̃",
+      "out": "เีย",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ji",
+      "out": "ี",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jiː",
+      "out": "ี",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ju",
+      "out": "ิว",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "juː",
+      "out": "ิว",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jʊ",
+      "out": "ิว",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jy",
+      "out": "ิว",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jyː",
+      "out": "ิว",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "joʊ",
+      "out": "ิว",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jũ",
+      "out": "ิว",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jo",
+      "out": "เียว",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "joː",
+      "out": "เียว",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɔ",
+      "out": "เียว",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɔː",
+      "out": "เียว",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɤ",
+      "out": "เียว",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jø",
+      "out": "เียว",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jœ",
+      "out": "เียว",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɵ",
+      "out": "เียว",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɑʊ",
+      "out": "เียว",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jaʊ",
+      "out": "เียว",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɔ̃",
+      "out": "เียว",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "j",
+      "out": "ย"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "w",
+      "out": "ว"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɥ",
+      "out": "ว"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "ช"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "ช"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂʰ",
+      "out": "ช"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ͈",
+      "out": "จ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts̪",
+      "out": "ซ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃʲ",
+      "out": "ช"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰ",
+      "out": "ค"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰ",
+      "out": "ท"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʰ",
+      "out": "พ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʰ",
+      "out": "ท"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʰ",
+      "out": "ท"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʰ",
+      "out": "พ"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʰ",
+      "out": "ท"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡʰ",
+      "out": "ค"
+    },
+    {
+      "slot": "any",
+      "ipa": "cʰ",
+      "out": "ช"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟʰ",
+      "out": "ช"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽʰ",
+      "out": "ร"
+    },
+    {
+      "slot": "any",
+      "ipa": "pf",
+      "out": "ฟ"
+    },
+    {
+      "slot": "any",
+      "ipa": "s͈",
+      "out": "ซ"
+    },
+    {
+      "slot": "any",
+      "ipa": "dz",
+      "out": "ซ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "ช"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒ",
+      "out": "จ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "จ"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʑ",
+      "out": "จ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "จ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʐ",
+      "out": "จ"
+    },
+    {
+      "slot": "any",
+      "ipa": "m̩",
+      "out": "ม"
+    },
+    {
+      "slot": "any",
+      "ipa": "n̩",
+      "out": "น"
+    },
+    {
+      "slot": "any",
+      "ipa": "t̪",
+      "out": "ต"
+    },
+    {
+      "slot": "any",
+      "ipa": "s̪",
+      "out": "ซ"
+    },
+    {
+      "slot": "any",
+      "ipa": "dˤ",
+      "out": "ด"
+    },
+    {
+      "slot": "any",
+      "ipa": "k͈",
+      "out": "ก"
+    },
+    {
+      "slot": "any",
+      "ipa": "t͈",
+      "out": "ต"
+    },
+    {
+      "slot": "any",
+      "ipa": "p͈",
+      "out": "ป"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʲ",
+      "out": "ต"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʲ",
+      "out": "ด"
+    },
+    {
+      "slot": "any",
+      "ipa": "nʲ",
+      "out": "น"
+    },
+    {
+      "slot": "any",
+      "ipa": "sʲ",
+      "out": "ซ"
+    },
+    {
+      "slot": "any",
+      "ipa": "rʲ",
+      "out": "ร"
+    },
+    {
+      "slot": "any",
+      "ipa": "mʲ",
+      "out": "ม"
+    },
+    {
+      "slot": "any",
+      "ipa": "vʲ",
+      "out": "ว"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʲ",
+      "out": "ป"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʲ",
+      "out": "บ"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʲ",
+      "out": "ค"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡʲ",
+      "out": "ก"
+    },
+    {
+      "slot": "any",
+      "ipa": "fʲ",
+      "out": "ฟ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭʲ",
+      "out": "ล"
+    },
+    {
+      "slot": "any",
+      "ipa": "b",
+      "out": "บ"
+    },
+    {
+      "slot": "any",
+      "ipa": "d",
+      "out": "ด"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɗ",
+      "out": "ด"
+    },
+    {
+      "slot": "any",
+      "ipa": "g",
+      "out": "ก"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡ",
+      "out": "ก"
+    },
+    {
+      "slot": "any",
+      "ipa": "q",
+      "out": "ก"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɣ",
+      "out": "ก"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈ",
+      "out": "ต"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖ",
+      "out": "ด"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɳ",
+      "out": "น"
+    },
+    {
+      "slot": "any",
+      "ipa": "ħ",
+      "out": "ฮ"
+    },
+    {
+      "slot": "any",
+      "ipa": "h",
+      "out": "ฮ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "ฮ"
+    },
+    {
+      "slot": "any",
+      "ipa": "f",
+      "out": "ฟ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɸ",
+      "out": "ฟ"
+    },
+    {
+      "slot": "any",
+      "ipa": "v",
+      "out": "ว"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʋ",
+      "out": "ว"
+    },
+    {
+      "slot": "any",
+      "ipa": "θ",
+      "out": "ท"
+    },
+    {
+      "slot": "any",
+      "ipa": "ð",
+      "out": "ด"
+    },
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "ซ"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "ซ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "ช"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒ",
+      "out": "ช"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʑ",
+      "out": "ช"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʂ",
+      "out": "ซ"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "ช"
+    },
+    {
+      "slot": "any",
+      "ipa": "m",
+      "out": "ม"
+    },
+    {
+      "slot": "any",
+      "ipa": "n",
+      "out": "น"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "ง"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɴ",
+      "out": "ง"
+    },
+    {
+      "slot": "any",
+      "ipa": "l",
+      "out": "ล"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɫ",
+      "out": "ล"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭ",
+      "out": "ล"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "ล"
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
+      "out": "ร"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾ",
+      "out": "ร"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɹ",
+      "out": "ร"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "ร"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽ",
+      "out": "ร"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɻ",
+      "out": "ร"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʐ",
+      "out": "ร"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "ย"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "ย"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "ว"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɥ",
+      "out": "ว"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɲ",
+      "out": "น",
+      "if_nucleus_head": "i iː ɪ j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "นย"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "ป"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "ต"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "ค",
+      "if_inventory": "ɡ",
+      "unless_inventory": "kʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "ก"
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "ฮ",
+      "unless_inventory": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "ค"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "ซ",
+      "if_inventory": "ʂ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "ช"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "จ",
+      "if_inventory": "tsʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "ซ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "ก",
+      "if_inventory": "dʒ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "จ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʔ",
+      "out": "อ",
+      "after_out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔ",
+      "out": ""
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʕ",
+      "out": "อ",
+      "after_out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʕ",
+      "out": ""
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɰ",
+      "out": "อ",
+      "after_out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʷ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˤ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˀ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʼ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ː",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "͈",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̩",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̪",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̚",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̥",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̬",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̹",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̜",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̺",
+      "out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "t̪ˀ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "t̪ˀ",
+      "out": "ต"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ts̪",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ts̪",
+      "out": "ซ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tsʰ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tsʰ",
+      "out": "ซ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʃʲ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʃʲ",
+      "out": "ช"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tɕʰ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tɕʰ",
+      "out": "ช"
+    },
+    {
+      "slot": "coda",
+      "ipa": "pʰ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "pʰ",
+      "out": "ป"
+    },
+    {
+      "slot": "coda",
+      "ipa": "bʰ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "bʰ",
+      "out": "ป"
+    },
+    {
+      "slot": "coda",
+      "ipa": "pʲ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "pʲ",
+      "out": "ป"
+    },
+    {
+      "slot": "coda",
+      "ipa": "bʲ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "bʲ",
+      "out": "ป"
+    },
+    {
+      "slot": "coda",
+      "ipa": "p͈",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "p͈",
+      "out": "ป"
+    },
+    {
+      "slot": "coda",
+      "ipa": "pf",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "pf",
+      "out": "ฟ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "fʲ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "fʲ",
+      "out": "ฟ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "vʲ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "vʲ",
+      "out": "ฟ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʰ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʰ",
+      "out": "ต"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʈʰ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʈʰ",
+      "out": "ต"
+    },
+    {
+      "slot": "coda",
+      "ipa": "t̪",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "t̪",
+      "out": "ต"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʲ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʲ",
+      "out": "ต"
+    },
+    {
+      "slot": "coda",
+      "ipa": "t͈",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "t͈",
+      "out": "ต"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʰ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʰ",
+      "out": "ด"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʲ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʲ",
+      "out": "ด"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dˤ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dˤ",
+      "out": "ด"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɖʰ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɖʰ",
+      "out": "ด"
+    },
+    {
+      "slot": "coda",
+      "ipa": "kʰ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "kʰ",
+      "out": "ก"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɡʰ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɡʰ",
+      "out": "ก"
+    },
+    {
+      "slot": "coda",
+      "ipa": "kʲ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "kʲ",
+      "out": "ก"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɡʲ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɡʲ",
+      "out": "ก"
+    },
+    {
+      "slot": "coda",
+      "ipa": "k͈",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "k͈",
+      "out": "ก"
+    },
+    {
+      "slot": "coda",
+      "ipa": "cˀ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "cˀ",
+      "out": "ก"
+    },
+    {
+      "slot": "coda",
+      "ipa": "s̪",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "s̪",
+      "out": "ส"
+    },
+    {
+      "slot": "coda",
+      "ipa": "sʲ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "sʲ",
+      "out": "ส"
+    },
+    {
+      "slot": "coda",
+      "ipa": "s͈",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "s͈",
+      "out": "ส"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ts",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ts",
+      "out": "ซ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dz",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dz",
+      "out": "ซ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʃ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʃ",
+      "out": "ช"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tɕ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tɕ",
+      "out": "ช"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʈʂ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʈʂ",
+      "out": "ช"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʒ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʒ",
+      "out": "จ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʑ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʑ",
+      "out": "จ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "mʲ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "mʲ",
+      "out": "ม"
+    },
+    {
+      "slot": "coda",
+      "ipa": "m̩",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "m̩",
+      "out": "ม"
+    },
+    {
+      "slot": "coda",
+      "ipa": "nʲ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "nʲ",
+      "out": "น"
+    },
+    {
+      "slot": "coda",
+      "ipa": "n̩",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "n̩",
+      "out": "น"
+    },
+    {
+      "slot": "coda",
+      "ipa": "nˀ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "nˀ",
+      "out": "น"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ŋˀ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ŋˀ",
+      "out": "ง"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɭʲ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɭʲ",
+      "out": "ล"
+    },
+    {
+      "slot": "coda",
+      "ipa": "rʲ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "rʲ",
+      "out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "p",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "p",
+      "out": "ป"
+    },
+    {
+      "slot": "coda",
+      "ipa": "b",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "b",
+      "out": "ป"
+    },
+    {
+      "slot": "coda",
+      "ipa": "f",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "f",
+      "out": "ฟ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "v",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "v",
+      "out": "ฟ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɸ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɸ",
+      "out": "ฟ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʋ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʋ",
+      "out": "ฟ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "t",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "t",
+      "out": "ต"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʈ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʈ",
+      "out": "ต"
+    },
+    {
+      "slot": "coda",
+      "ipa": "θ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "θ",
+      "out": "ต"
+    },
+    {
+      "slot": "coda",
+      "ipa": "d",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "d",
+      "out": "ด"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɗ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɗ",
+      "out": "ด"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɖ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɖ",
+      "out": "ด"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ð",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ð",
+      "out": "ด"
+    },
+    {
+      "slot": "coda",
+      "ipa": "k",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "k",
+      "out": "ก"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɡ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɡ",
+      "out": "ก"
+    },
+    {
+      "slot": "coda",
+      "ipa": "x",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "x",
+      "out": "ก"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ç",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ç",
+      "out": "ก"
+    },
+    {
+      "slot": "coda",
+      "ipa": "q",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "q",
+      "out": "ก"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɣ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɣ",
+      "out": "ก"
+    },
+    {
+      "slot": "coda",
+      "ipa": "c",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "c",
+      "out": "ก"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɟ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɟ",
+      "out": "ก"
+    },
+    {
+      "slot": "coda",
+      "ipa": "s",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "s",
+      "out": "ส"
+    },
+    {
+      "slot": "coda",
+      "ipa": "z",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "z",
+      "out": "ซ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʃ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʃ",
+      "out": "ช"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʒ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʒ",
+      "out": "ช"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɕ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɕ",
+      "out": "ช"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʑ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʑ",
+      "out": "ช"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʂ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʂ",
+      "out": "ช"
+    },
+    {
+      "slot": "coda",
+      "ipa": "m",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "m",
+      "out": "ม"
+    },
+    {
+      "slot": "coda",
+      "ipa": "n",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "n",
+      "out": "น"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɲ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɲ",
+      "out": "น"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɳ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɳ",
+      "out": "น"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ŋ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ŋ",
+      "out": "ง"
+    },
+    {
+      "slot": "coda",
+      "ipa": "l",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "l",
+      "out": "ล"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɫ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɫ",
+      "out": "ล"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɭ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɭ",
+      "out": "ล"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʎ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʎ",
+      "out": "ล"
+    },
+    {
+      "slot": "coda",
+      "ipa": "j",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "j",
+      "out": "ย"
+    },
+    {
+      "slot": "coda",
+      "ipa": "w",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "w",
+      "out": "ว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "r",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "r",
+      "out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɾ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɾ",
+      "out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɹ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɹ",
+      "out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʁ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʁ",
+      "out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɽ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɽ",
+      "out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɻ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɻ",
+      "out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʐ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʐ",
+      "out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "h",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "h",
+      "out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ħ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ħ",
+      "out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʕ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʕ",
+      "out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʔ",
+      "out": "",
+      "after_out": "ป ต ด ก ม น ง ล ส ซ ช จ ฟ ไ ใ ำ เา าว าย ุย ูย ิว ีว อย ัย ึย เย โย โว ียว เว"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʔ",
+      "out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɴ",
+      "out": "น",
+      "before_onset": "d t n s z ts dʑ tɕ ɕ ɾ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɴ",
+      "out": "ม",
+      "before_onset": "b p m"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɴ",
+      "out": "ง"
+    }
+  ],
+  "syllable_fixups": [
+    {
+      "match": "^(?=[เแโใไัิีึืุู็ํะาำอฤ])",
+      "out": "ย",
+      "when": [
+        "no_onset"
+      ],
+      "after_nucleus": "i iː ɪ"
+    },
+    {
+      "match": "^(?=[เแโใไัิีึืุู็ํะาำอฤ])",
+      "out": "ว",
+      "when": [
+        "no_onset"
+      ],
+      "after_nucleus": "u uː ʊ"
+    },
+    {
+      "match": "^(?=[เแโใไัิีึืุู็ํะาำอฤ])",
+      "out": "อ",
+      "when": [
+        "no_onset"
+      ]
+    },
+    {
+      "match": "^(?=[ัิีึืุู็ํ])",
+      "out": "อ"
+    },
+    {
+      "match": "เะ([²³⁵]?)([ยว])",
+      "out": "เ\\1\\2"
+    },
+    {
+      "match": "แะ([²³⁵]?)([ยว])",
+      "out": "แ\\1\\2"
+    },
+    {
+      "match": "ะ([²³⁵]?)ย",
+      "out": "ไ\\1"
+    },
+    {
+      "match": "ะ([²³⁵]?)ว",
+      "out": "เ\\1า"
+    },
+    {
+      "match": "ะ([²³⁵]?)([ก-ฮ])",
+      "out": "\\1\\2"
+    },
+    {
+      "match": "^([^เแโใไ]*?)((?:[กขคตปผพบดฟ][รล]|[ก-ฮ]ว)|[ก-ฮ])([เแโใไ])",
+      "out": "\\1\\3\\2"
+    },
+    {
+      "match": "^([เแโใไ]?(?:[กขคตปผพบดฟ][รล]|[กขคตปผพบดฟ]ว(?=[ัิีึืุู็ํะาำอฤ])|[ก-ฮ])[ัิีึืุู็ํ]*)(?![เแโใไ])",
+      "out": "\\1³",
+      "when": [
+        "stressed",
+        "not_word_initial"
+      ]
+    },
+    {
+      "match": "^([เแโใไ]?(?:[กขคตปผพบดฟ][รล]|[กขคตปผพบดฟ]ว(?=[ัิีึืุู็ํะาำอฤ])|[ก-ฮ])[ัิีึืุู็ํ]*)(?![เแโใไ])",
+      "out": "\\1³",
+      "when": [
+        "stressed",
+        "word_initial",
+        "not_word_final"
+      ]
+    },
+    {
+      "match": "็อ([²³⁵]?)(?=[,/{}]*$)",
+      "out": "อ\\1"
+    },
+    {
+      "match": "ั([²³⁵]?)(?=[,/{}]*$)",
+      "out": "ะ\\1"
+    },
+    {
+      "match": "็([²³⁵]?)(?=[,/{}]*$)",
+      "out": "ะ\\1"
+    },
+    {
+      "match": "^([เแโใไ]?(?:[กขคตปผพบดฟ][รล]|[กขคตปผพบดฟ]ว(?=[ัิีึืุู็ํะาำอฤ])|[ก-ฮ])[ัิีึืุู็ํ]*[ยว]*)([ะาำอฤ][ะาำอวยฤ]*)([²³⁵])",
+      "out": "\\1\\3\\2"
+    },
+    {
+      "match": "^([เแโใไ]?(?:[กขคตปผพบดฟ][รล]|[ก-ฮ])[ัิีึืุู็ํ]*)([ยว]+)([²³⁵])",
+      "out": "\\1\\3\\2"
+    },
+    {
+      "match": "^([เแโใไ]?[กจดตบปอ])([^²]*)²",
+      "out": "\\1\\2่"
+    },
+    {
+      "match": "^([เแโใไ]?[กจดตบปอ])([^³]*)³",
+      "out": "\\1\\2้"
+    },
+    {
+      "match": "^([เแโใไ]?[กจดตบปอ])([^⁵]*)⁵",
+      "out": "\\1\\2๋"
+    },
+    {
+      "match": "^([เแโใไ]?[คทชซฟฮพงนมยรลว])([^³]*)³",
+      "out": "\\1\\2่"
+    },
+    {
+      "match": "^([เแโใไ]?)([งนมยรลว])([^²]*)²",
+      "out": "\\1ห\\2\\3่"
+    },
+    {
+      "match": "^([เแโใไ]?)([งนมยรลว])([^⁵]*)⁵",
+      "out": "\\1ห\\2\\3"
+    },
+    {
+      "match": "^([เแโใไ]?)ค([^²]*)²",
+      "out": "\\1ข\\2่"
+    },
+    {
+      "match": "^([เแโใไ]?)ค([^⁵]*)⁵",
+      "out": "\\1ข\\2"
+    },
+    {
+      "match": "^([เแโใไ]?)ท([^²]*)²",
+      "out": "\\1ถ\\2่"
+    },
+    {
+      "match": "^([เแโใไ]?)ท([^⁵]*)⁵",
+      "out": "\\1ถ\\2"
+    },
+    {
+      "match": "^([เแโใไ]?)ช([^²]*)²",
+      "out": "\\1ฉ\\2่"
+    },
+    {
+      "match": "^([เแโใไ]?)ช([^⁵]*)⁵",
+      "out": "\\1ฉ\\2"
+    },
+    {
+      "match": "^([เแโใไ]?)ซ([^²]*)²",
+      "out": "\\1ส\\2่"
+    },
+    {
+      "match": "^([เแโใไ]?)ซ([^⁵]*)⁵",
+      "out": "\\1ส\\2"
+    },
+    {
+      "match": "^([เแโใไ]?)ฟ([^²]*)²",
+      "out": "\\1ฝ\\2่"
+    },
+    {
+      "match": "^([เแโใไ]?)ฟ([^⁵]*)⁵",
+      "out": "\\1ฝ\\2"
+    },
+    {
+      "match": "^([เแโใไ]?)ฮ([^²]*)²",
+      "out": "\\1ห\\2่"
+    },
+    {
+      "match": "^([เแโใไ]?)ฮ([^⁵]*)⁵",
+      "out": "\\1ห\\2"
+    },
+    {
+      "match": "^([เแโใไ]?)พ([^²]*)²",
+      "out": "\\1ผ\\2่"
+    },
+    {
+      "match": "^([เแโใไ]?)พ([^⁵]*)⁵",
+      "out": "\\1ผ\\2"
+    },
+    {
+      "match": "([ัิีึืุู็ํะาำ][²³⁵]?)[ัิีึืุู็ํ]",
+      "out": "\\1"
+    },
+    {
+      "match": "ั([²³⁵่-๋]?ว[ยว])",
+      "out": "\\1"
+    },
+    {
+      "match": "็([่-๋])",
+      "out": "\\1"
+    },
+    {
+      "match": "[²³⁵]",
+      "out": ""
+    }
+  ],
+  "targets": {
+    "en": {
+      "phonemes": [
+        {
+          "slot": "onset",
+          "ipa": "p",
+          "out": "พ"
+        },
+        {
+          "slot": "onset",
+          "ipa": "t",
+          "out": "ท"
+        }
+      ]
+    },
+    "de": {
+      "phonemes": [
+        {
+          "slot": "onset",
+          "ipa": "p",
+          "out": "พ"
+        },
+        {
+          "slot": "onset",
+          "ipa": "t",
+          "out": "ท"
+        }
+      ]
+    },
+    "tr": {
+      "phonemes": [
+        {
+          "slot": "onset",
+          "ipa": "p",
+          "out": "พ"
+        },
+        {
+          "slot": "onset",
+          "ipa": "t",
+          "out": "ท"
+        },
+        {
+          "slot": "nucleus",
+          "ipa": "æ",
+          "out": "เะ",
+          "when": [
+            "open"
+          ]
+        },
+        {
+          "slot": "nucleus",
+          "ipa": "æ",
+          "out": "เ็",
+          "when": [
+            "closed"
+          ]
+        }
+      ]
+    },
+    "pt": {
+      "phonemes": [
+        {
+          "slot": "nucleus",
+          "ipa": "æ",
+          "out": "ะ",
+          "when": [
+            "open"
+          ]
+        },
+        {
+          "slot": "nucleus",
+          "ipa": "æ",
+          "out": "ั",
+          "when": [
+            "closed"
+          ]
+        },
+        {
+          "slot": "nucleus",
+          "ipa": "y",
+          "out": "ิ"
+        },
+        {
+          "slot": "any",
+          "ipa": "x",
+          "out": "ร"
+        }
+      ]
+    },
+    "vi": {
+      "phonemes": [
+        {
+          "slot": "nucleus",
+          "ipa": "y",
+          "out": "ึ"
+        },
+        {
+          "slot": "nucleus",
+          "ipa": "yː",
+          "out": "ื"
+        }
+      ]
+    }
+  },
+  "note": "How tone is written, which is the whole of the design. A tone mark in Thai is not a free-standing pitch: the pitch is a function of the tone mark *and* the initial consonant's class *and* the vowel's length *and* whether the syllable is live or dead. So a table that wants to write a chosen pitch has to choose the consonant letter and the mark together, which is more than a phoneme table can do on its own -- the onset rule cannot see the tone, because if_nucleus is an exact match on the whole nucleus string and enumerating vowel x tone there would be hundreds of rules.\n\nIt is done in two stages instead. The tone rules emit a placeholder rather than a mark -- ² เอก, ³ โท, ⁵ จัตวา, in the ordinary Thai tone numbering, with สามัญ emitting nothing -- and the syllable_fixups then read the class off the letter in hand and write the mark that reaches the wanted pitch, changing the letter where the class it belongs to cannot get there:\n  * mid class (ก จ ด ต บ ป อ) reaches all five tones with a mark: ่ ้ ๊ ๋. Nothing to change.\n  * low class reaches mid unmarked, โท with ่ and ตรี with ้, but cannot write เอก or จัตวา at all. For the sonorants ง น ม ย ร ล ว the fix is the class-raising ห digraph, which is one fixup for all seven because ห is a prefix and a backreference can carry the letter: 我 wǒ is หว่อ, sáu is เสา. For the seven low obstruents it is a letter substitution, ค->ข ท->ถ ช->ฉ ซ->ส ฟ->ฝ ฮ->ห พ->ผ, which cannot be written with a character class because a fixup's output is a literal -- so fourteen rules, one per letter per unreachable tone. That is where 请 ฉิ่ง, 服 ฝุ and 孩 ไห come from.\n  * high class is never a default. It exists only as the output of those switches, which keeps the unmarked reading of every syllable this table writes at mid rather than rising.\n\nWhere no combination reaches the pitch, the pitch is dropped rather than approximated with a wrong mark, and there is exactly one such case: **mid tone is unwritable on a dead syllable**. A syllable closed by /p t k/ takes low (mid class), high (low class, short) or falling (low class, long) and nothing else, so an unstressed one reads low or high rather than mid. It is left unmarked, which is what Thai does with its own loanwords (ฟุตบอล is fút-bɔn, with a high tone nobody chose either). The *other* half of that problem is fixed rather than documented: an open syllable would be dead too, so in a tone-writing target it takes the long vowel and is live -- see the approximations. The other structural loss is that a written sC -- สโต, สแตน, which is how the standard writes an s-cluster -- is read as two syllables by a Thai reader, and the class of the second one is the second letter's, while the class rules here read the first letter. A tone on such a syllable therefore gets the right position and the wrong class; there are few of them, since sC survives only word-initially, and the alternative was to leave it unmarked.\n\nTwo other things the fixups do, both forced by the script rather than chosen. **A vowel sign needs a consonant to hang on**, so a syllable with no onset takes อ, Thai's zero consonant (India = อินเดีย) -- or ย/ว where the syllable before it ended in the matching glide, which is the tradition's own spelling (María = มาริยา, Januari = จะ-นุ-ว่ะ-ริ). **And เ แ โ ใ ไ are written before the consonant they are read after**, so the nucleus emits them in speech order and one fixup moves them: in front of the syllable's own consonant, or of a true cluster's liquid (เปร-, เกล-), but not past an s that is read as its own syllable -- สโต, not โสต. That is the standard's Wisconsin = วิสคอนซิน rule, which says in as many words that an s before a consonant closes the syllable in front of it.",
+  "policy_note": "max_onset, measured over all 11,854 rows with a filled ipa column: 1 against 2 differs on 584 rows across thirteen targets, and 2 against 3 on none, since reader_onsets names no three-phoneme cluster for the third setting to admit. 2 is not a close call, and the reason is specific to this table: a coda cluster keeps only its first consonant, so at max_onset 1 the second consonant of a C+liquid onset is not moved to the coda, it is *deleted* -- children is ชิ่ล-ดรัน at 2 and ชิ่ล-รัน at 1, with the /d/ gone. Thai's own clusters are C+ร/ล/ว, so 2 is also the honest declaration.\n\nreader_onsets names those clusters in IPA with every rhotic and lateral the corpus writes, plus the C+ว group, and deliberately omits sC. Against no reader_onsets at all it moves 905 rows, and every difference read was an improvement: Swahili's prenasals split (นะ-โอ้ม-บะ, not นะ-โอ้-มบะ, which a Thai reader would give three syllables), Arabic's ال attaches to the syllable in front of it (อัล-บั้ก, not อะ-ล่บัก), and English sC divides as the standard says (อัน-เดิส-แท่น, not อัน-เดอ-ซแทน). That is the mirror of the Swahili table's own decision: BAKITA requires ng'o-mbe because Swahili has a prenasal onset, and Thai has none, so the same cluster has to be split for one reader and kept for the other. It is also the one measurement here that RESPELL-SYSTEMS.md would not have predicted.\n\nfixups: all is not a preference, it is a requirement -- against fixups: first the table breaks on 9,668 of 11,854 rows, and breaks visibly: the placeholder that carries the tone reaches the page (ม³อ-นิง for morning), because placing it and then spelling it are two separate rules. The kana table's reason for all was a transliteration chart; this one's is a pipeline, and every syllable walks the whole of it.\n\npolicy.tone: keep moves 1,366 rows -- 721 Mandarin and 645 Vietnamese, every row of both that has a tone letter. Dropping tone here would not produce a toneless respelling, only a differently toned one: 你好 would be นิ เฮา, which is mid-mid, a pitch pattern as specific as หนิ่ เห่า and wrong. There is no neutral option for this reader, which is the argument for keep in one line.\n\npolicy.stress is none because no STRESS_DEVICE can emit a Thai mark: caps and grave/acute need a case or a Latin vowel, and prime U+02B9 is a Latin modifier letter that would be the only non-Thai glyph on the card. Stress is written in syllable_fixups instead, as a tone.\n\nif_coda, which this table asked for and which landed, is used in two places and both were measured. (1) The standard's เออ for a vowel before a coda /r/, on 2,803 rhotic-headed codas: 1,948 rows, every target but the four with no coda rhotic at all. It needs the /ɾ/ guard described in the deviations, since espeak spells English's flap with the same symbol as eight other languages' rhotic. (2) The nasal vowels, which emit their own ง: with if_coda the ง is written only where nothing else closes the syllable, and a real nasal coda carries the nasality at its own place instead of being overwritten by ง. Measured over the corpus, that is 815 nasal vowels with no coda, 170 with a nasal coda and 121 with an obstruent one; the obstruent case deliberately keeps the old behaviour, because writing ง and dropping the obstruent is what Thai itself does (France = ฟรานซ์, read [fraŋ]). Those two uses move 1,948 and 51 rows.\n\nTwo things found by re-running the checks rather than by reasoning, both worth leaving in the record. `g` U+0067 was the only character in the whole corpus with no rule in this table: the ipa column writes ASCII g beside IPA ɡ, and a bare Latin letter in a Thai run is worse than a wrong Thai letter, since the Thai subset has no glyph for it at all. It is mapped to ก, the same as ɡ. And the `{target}` placeholder that now appears in four rows of every language is spelt rather than passed through -- {ทา-เกต} -- because unlike `{}` its letters are all legal IPA. That is not a Thai problem: every one of the seventeen readers transcribes it, and the fix belongs in the data or in a token rule in the engine, not in sixteen tables.\n\nTwo smaller notes from reading the output, neither mine to fix. The intervocalic-consonant rule moves a Mandarin coda into the next syllable (翻译 is ฟะ-นิ่ rather than ฟาน-อี้), which core/respell.js documents as measured and rejected -- but it costs a Thai reader more than an English one, because Thai writes the coda and so the syllable a reader sees is the wrong shape rather than merely hyphenated in the wrong place. And a vowel-vowel sequence that is one syllable in the target becomes two here (Vietnamese biệt is บิ-เย่ต, Italian ciao is ช่ะ-โอ), which puts Thai's เ-ีย, เ-ือ and -ัว out of reach for exactly the rimes they were made for."
+}

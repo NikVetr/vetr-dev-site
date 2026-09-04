@@ -326,12 +326,15 @@ export async function loadRespellRules(loadText, source, accent) {
  * `locale` is the language doing the naming -- the language of the cell the name
  * will be written into -- and `bcp47` is the language being named.
  * @param {Record<string,string>[]} rows
- * @returns {Record<string, Record<string,{name:string, roman:string}>>}
+ * @returns {Record<string, Record<string,{name:string, roman:string, ipa:string}>>}
  */
 function languageNameTable(rows) {
-  /** @type {Record<string, Record<string,{name:string, roman:string}>>} */ const out = {};
+  /** @type {Record<string, Record<string,{name:string, roman:string, ipa:string}>>} */
+  const out = {};
   for (const row of rows) {
-    (out[row.locale] ??= {})[row.bcp47] = { name: row.name, roman: row.romanization };
+    (out[row.locale] ??= {})[row.bcp47] = {
+      name: row.name, roman: row.romanization, ipa: row.ipa ?? '',
+    };
   }
   return out;
 }
@@ -341,14 +344,21 @@ const baseLanguage = (bcp47) => bcp47.split('-')[0];
 
 /**
  * What to write where a cell says `{target}` or `{source}`.
+ *
+ * Three columns rather than two, because the sheet names a language in three
+ * alphabets at once: its own script, its romanisation, and -- since the respelling
+ * column is generated from the `ipa` cell -- IPA. Only the registry can answer the
+ * last two; `Intl` knows names, not transcriptions, which is why `ipa` has no
+ * fallback and an absent one blanks the cell rather than guessing.
  * @param {string} subject the language being named
  * @param {string} locale  the language doing the naming
- * @param {Record<string,{name:string, roman:string}>} overrides
- * @param {boolean} romanised  take the romanisation rather than the name
+ * @param {Record<string,{name:string, roman:string, ipa:string}>} overrides
+ * @param {'name'|'roman'|'ipa'} which
  */
-function languageName(subject, locale, overrides, romanised) {
+function languageName(subject, locale, overrides, which) {
   const own = overrides[subject];
-  if (romanised) return own?.roman || '';
+  if (which === 'roman') return own?.roman || '';
+  if (which === 'ipa') return own?.ipa || '';
   if (own?.name) return own.name;
   try {
     return new Intl.DisplayNames([locale], { type: 'language' }).of(baseLanguage(subject))
@@ -361,8 +371,14 @@ function languageName(subject, locale, overrides, romanised) {
 /** Which cells can carry a placeholder. Respellings cannot: they are already
  * curated per pair, so the local word for the reader's language is written into
  * them directly -- and it has to be, because French `par-lay voo zahn-GLEH` carries
- * a liaison that vanishes the moment the language changes. */
-const SLOT_FIELDS = ['text', 'text_alt', 'literal'];
+ * a liaison that vanishes the moment the language changes.
+ *
+ * `ipa` can, and has to. The respelling column for the other 256 pairs is generated
+ * from this cell, so a slot row with no `ipa` printed a blank respelling: a Russian
+ * reader's Japanese sheet showed the kana and the romanisation for
+ * `{target}の文を見せてください` and nothing in Cyrillic. `scripts/build_ipa.py` now
+ * leaves `{target}` in the transcription and the name's own IPA goes in here. */
+const SLOT_FIELDS = ['text', 'text_alt', 'literal', 'ipa'];
 const LANGUAGE_SLOT = /\{(target|source)\}/g;
 
 /**
@@ -392,21 +408,25 @@ const LANGUAGE_SLOT = /\{(target|source)\}/g;
  * @param {string} args.locale  the language these rows are written in
  * @param {string} args.target
  * @param {string} args.source
- * @param {Record<string,{name:string, roman:string}>} [args.names] the `locale` row
- *   of the registry table, where it has one
+ * @param {Record<string,{name:string, roman:string, ipa:string}>} [args.names] the
+ *   `locale` row of the registry table, where it has one
  */
 export function fillLanguageSlots(rows, { locale, target, source, names = {} }) {
   for (const row of Object.values(rows)) {
     for (const [field, value] of Object.entries(row)) {
       if (!value || !value.includes('{')) continue;
-      const romanised = field.startsWith('romanization_');
-      if (!romanised && !SLOT_FIELDS.includes(field)) continue;
-      row[field] = value.replace(
+      const which = field.startsWith('romanization_') ? 'roman'
+        : /** @type {'name'|'roman'|'ipa'} */ (field === 'ipa' ? 'ipa' : 'name');
+      if (which === 'name' && !SLOT_FIELDS.includes(field)) continue;
+      const filled = value.replace(
         LANGUAGE_SLOT,
         (/** @type {string} */ _, /** @type {string} */ side) => languageName(
-          side === 'target' ? target : source, locale, names, romanised,
+          side === 'target' ? target : source, locale, names, which,
         ),
       );
+      // A transcription with an unfilled slot must not reach the respeller, which
+      // would spell the braces out letter by letter. No name, no cell.
+      row[field] = which === 'ipa' && filled.includes('{') ? '' : filled;
     }
   }
   return rows;

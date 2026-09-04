@@ -10,8 +10,8 @@ social-basics.excuse-me-sorry,Mi scusi,Scusi,mɪ skˈuzɪ,,2,it-agent-v1;ipa=esp
 social-basics.sorry,Mi dispiace,,mɪ dispɪˈaːtʃe,,2,it-agent-v1;ipa=espeak
 social-basics.no-problem,Non c'è problema,,non tʃe problˈɛma,,2,it-agent-v1;ipa=espeak
 social-basics.i-do-not-know,Non lo so,,non lo sˈɔ,,2,it-agent-v1;ipa=espeak
-communication.i-do-not-speak-this-language,Non parlo {target},,,,2,language-slots-v1
-communication.i-speak-only-a-little-of-this,Parlo poco {target},,,,2,language-slots-v1
+communication.i-do-not-speak-this-language,Non parlo {target},,non pˈarlo {target},,2,language-slots-v1;ipa=espeak
+communication.i-speak-only-a-little-of-this,Parlo poco {target},,pˈarlo pˈɔko {target},,2,language-slots-v1;ipa=espeak
 communication.do-you-speak-english,Parla {source}?,,,,2,language-slots-v1
 communication.please-speak-more-slowly,"Parli più lentamente, per favore",,"pˈarlɪ pjʊ lentamˈente, per favˈore",,2,it-agent-v1;ipa=espeak
 communication.i-do-not-understand-spoken,Non capisco,,non kapˈisko,,2,it-agent-v1;ipa=espeak
@@ -20,7 +20,7 @@ communication.please-say-it-again,"Ripeta, per favore",,"ripˈeta, per favˈore"
 communication.please-write-it-down,"Lo scriva, per favore",,"lo skrˈiva, per favˈore",,2,it-agent-v1;ipa=espeak
 communication.please-wait-a-moment,"Un momento, per favore",,"ʊn momˈento, per favˈore",,2,it-agent-v1;ipa=espeak
 communication.can-you-help-me,Mi può aiutare?,,mɪ pʊˈɔ ajʊtˈare,,2,it-agent-v1;ipa=espeak
-communication.please-show-me-the-text,Mi mostri il testo in {target},,,,2,language-slots-v1
+communication.please-show-me-the-text,Mi mostri il testo in {target},,mɪ mˈostrɪ il tˈɛsto ˈiːn {target},,2,language-slots-v1;ipa=espeak
 quick-responses.please-go-ahead,prego,si accomodi,prˈɛɡo,,2,it-agent-v1;ipa=espeak
 quick-responses.yes-right,sì / esatto,,sˈiː / ezˈatːo,,2,it-agent-v1;ipa=espeak
 quick-responses.no-not,no / non,,nˈɔ / non,,2,it-agent-v1;ipa=espeak
@@ -32,7 +32,7 @@ phone-translation.i-am-using-phone-translation,Sto usando un traduttore sul tele
 phone-translation.please-speak-toward-the-phone,Parli verso il telefono,,pˈarlɪ vˌɛrso il telˈɛfono,,2,it-agent-v1;ipa=espeak
 phone-translation.one-sentence-at-a-time-please,"Una frase alla volta, per favore",,"ˌʊna frˈaze ˌalla vˈɔlta, per favˈore",,2,it-agent-v1;ipa=espeak
 phone-text-power.please-type-it-for-me,"Lo scriva sul telefono, per favore",,"lo skrˈiva sʊl telˈɛfono, per favˈore",,2,it-agent-v1;ipa=espeak
-phone-translation.please-write-the-place-name,Scriva il nome del posto in {target},,,,2,language-slots-v1
+phone-translation.please-write-the-place-name,Scriva il nome del posto in {target},,skrˈiva il nˈome del pˈosto ˈiːn {target},,2,language-slots-v1;ipa=espeak
 phone-text-power.please-use-simple-words,"Usi parole semplici, per favore",,"ˈuzɪ paɾˈɔle sˈemplitʃɪ, per favˈore",,2,it-agent-v1;ipa=espeak
 phone-text-power.my-phone-battery-is-low,Il telefono ha poca batteria,,il telˈɛfono a pˈɔka batːerˈia,,2,it-agent-v1;ipa=espeak
 phone-text-power.do-you-have-a-power-bank,Ha un power bank?,Ha una batteria portatile?,a ʊn pˈaːwer bˈaŋk,,2,it-agent-v1;ipa=espeak

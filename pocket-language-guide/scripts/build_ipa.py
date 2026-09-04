@@ -94,8 +94,7 @@ a schema limit rather than a G2P one.
 Every route ends at `check_alphabet`, which is a whitelist: if a row's output
 contains one character outside the IPA repertoire, the row is refused and counted
 instead of being written. That one gate catches everything the G2P could not do --
-espeak's German r-vocalisation, which this version renders as a literal `??`
-(`wurde` -> `vˌ??də`); a Latin-script loanword inside a non-Latin language, which
+a Latin-script loanword inside a non-Latin language, which
 the Hepburn and Pinyin tables pass through unchanged; a pinyin syllable
 `dragonmapper` does not know; a currency symbol -- without a list of things to look
 for. Two routes add one gate of their own:
@@ -196,6 +195,34 @@ distrust the column as a whole.
   written **/æ/ on 410 cells** -- `nˈadæ`, `bˈoæ`, `dʒˈiæ` -- a vowel no variety of
   Portuguese has.
   Three rule tables have had to work around this with `targets` blocks.
+- **`vi`'s centring diphthongs are marked now, and the mark goes on the *second*
+  element** -- see the `vi` entry in `REPAIR`. This entry used to say the column
+  split every Vietnamese syllable in two and to propose `biɛ̯t̪`, `ɗy̯əc`, `bu̯əj`;
+  the diagnosis was right and two of the three spellings were wrong. ia/iê, ưa/ươ
+  and ua/uô are *falling* diphthongs -- Kirby (2011: 384) -- so the nucleus is the
+  first element and U+032F belongs on the offglide after it, uniformly:
+  `biɛ̯t̪`, `ɗyə̯c`, `buə̯j`. Marking the first element instead would have made ə the
+  nucleus of ươ and uô, which is backwards, and would have left the offglide in the
+  syllable's *onset* rather than its nucleus.
+  The measured cost was **349 extra syllables on 282 of vi's 677 filled rows**, not
+  the 380 on 287 this entry used to claim; `syllabify` puts every one of the 349
+  marks on a vowel that was starting a syllable of its own, so each removes exactly
+  one and no row's count went up. The four rows where espeak spells an
+  acronym out letter by letter (`kwˌiˈɛʐəː` QR, `ˌɛɜsˌiˈɛməː` SIM) keep their two
+  syllables and should: there the `i` and the `ɛ` are different letter names.
+- **What still prints is now a reader's problem rather than this column's.** A table
+  whose orthography has no way to write a one-syllable /uə̯/ used to get the hyphen
+  for free from the split. Thai gains its own native spelling (`buə̯j` -> `บ่วย`,
+  `biɛ̯t̪` -> `เบี้ยต`) and Mandarin gains a legal syllable shape (`bi-èd` ->
+  `bièd`), but English now piles letters: `mùa` is `moouh` where the curated sheet
+  says `moo-uh`, on 8 rows of `vi__en__en-US.csv` -- the only 8 rows in the corpus
+  this fix scored worse on, and all 8 differ from the curated sheet in the hyphen
+  alone. Arabic is the same problem in a script that cannot absorb it at all: two
+  harakat now stack on one consonant (`buə̯j` -> `بَُيْ`) on 282 rows, where the
+  split used to give each vowel its own carrier. That is the `split_rising` case in
+  `syllable_count` -- a fact about the reader, not about Vietnamese -- so it wants a
+  nucleus or `splits` rule in `en__en-US.json` and `ar__ar-MSA.json`, not a change
+  here.
 """
 import argparse
 import csv
@@ -258,7 +285,8 @@ ALPHABET = IPA_BLOCKS | IPA_LETTERS | IPA_GREEK | set("".join(MARKS))
 
 VOWELS = set("iyɨʉɯuɪʏʊeøɘɵɤoəɛœɜɞʌɔæɐaɶɑɒ")
 GLIDES = set("jwɥ")
-TAIL = set("ːˑ̯̃")          # length, nasalisation, non-syllabic
+NONSYLLABIC = "\u032F"        # "this vowel is not a syllable" -- so, an offglide
+TAIL = set("ːˑ̃") | {NONSYLLABIC}          # length, nasalisation, non-syllabic
 STRESS_MARKS = set("ˈˌ")
 TONE = set("˥˦˧˨˩ˀ")
 
@@ -297,6 +325,39 @@ REPAIR = {
     # Russian has no such phoneme, so a bare `y` can only be /ɨ/, and leaving it
     # would have `добрый` respelled with the vowel of French `tu`.
     "ru": [("u\"", "ʉ"), ("ɪ^", "ʲ"), ("y", "ɨ")],
+    # This version of espeak emits a literal `??` for German short /ʊ/ before a
+    # coda r -- `wurde` is `vˌ??də`, `Sturm` is `ʃtˈ??m` -- and `check_alphabet`
+    # then refuses the whole row, which is why *Durchsage*, *Durchfall*, *gestohlen*
+    # and *Sturm* had no `ipa` at all and so printed a blank respelling column.
+    #
+    # The substitution is not a guess. Probing the series shows `??` stands for
+    # exactly one thing: every other vowel before a coda r comes out as `Vɾ` and is
+    # correct -- Karte kˈaɾtə, Wort vˈɔɾt, Werk vˈɛɾk, Herz hˈɛɾts, warm vˈaɾm,
+    # hart hˈaɾt -- and the mark appears only after a short u, in wurde, Sturm, Burg
+    # and Furcht. Long /uː/ is unaffected (Kurs kˈuːɾs, Durst dˈuːɾst). So `??` is
+    # `ʊɾ`, written the same way espeak writes the rest of the series.
+    "de": [("??", "ʊɾ")],
+    # Vietnamese's three centring diphthongs -- ia/iê/yê, ưa/ươ, ua/uô -- are
+    # *falling*: Kirby (2011: 384) gives the inventory as nine vowel qualities and
+    # "three falling diphthongs /iə ɯə uə/", the nucleus first and a centring
+    # offglide second, which is also the direction of travel in his Figure 1. So the
+    # second element is the one that is not a syllable, and U+032F belongs on it --
+    # exactly where the `th` route already puts it (`tɕʰua̯j˥˩`, `plia̯n˨˩`).
+    #
+    # espeak spells the same phoneme two ways, following the orthography rather than
+    # the phonology: `iə` in an open syllable (kia `kˈiə`, phía `fˈiəɜ`) and `iɛ` in
+    # a closed one (biết `bˈiɛɜt̪`, tiếng `t̪ˈiɛŋ`). Both get the mark; correcting
+    # the second element of the closed form to a schwa is a separate question about
+    # vowel quality, not about syllabicity, and is not done here.
+    #
+    # Safe as a substring, and that is measured rather than assumed: espeak writes
+    # the tone digit after the *whole* diphthong in all three (`bˈiɛɜt̪`, `mˈyə6n`,
+    # `bˈuə2m`), never between the elements, so the pair is contiguous here and
+    # still contiguous after `vi_tone`. The corpus's other vowel pairs are untouched
+    # -- vi's own falling `əɪ aɪ` already syllabify correctly, and `iːɛ eɪ əʊ eɛ ea`
+    # belong to English loanwords espeak read with English rules (ATM `eɪtiːɛm`,
+    # data `deɪtə`), where the length mark keeps `iːɛ` from matching.
+    "vi": [("iɛ", "iɛ̯"), ("iə", "iə̯"), ("yə", "yə̯"), ("uə", "uə̯")],
 }
 
 
@@ -501,18 +562,29 @@ def syllable_count(ipa, split_rising=False):
     /kwanto/. It is a source-side reader preference rather than a fact about the
     target, so it is a second column rather than folded into the first.
     """
-    ph = [c for c in ipa if c not in TAIL and c not in STRESS_MARKS and c not in TONE]
+    # U+032F binds to the vowel before it rather than being stripped with the rest
+    # of `TAIL`, because it is the one tail mark that changes the *count*: to
+    # `syllabify` it says "this vowel is not a syllable", so the vowel can neither
+    # begin a nucleus nor be one. Stripping it counted every Thai and Vietnamese
+    # centring diphthong as two syllables.
+    ph = []
+    for c in ipa:
+        if c == NONSYLLABIC and ph:
+            ph[-1] += c
+        elif c not in TAIL and c not in STRESS_MARKS and c not in TONE:
+            ph.append(c)
     n, i, count = len(ph), 0, 0
     while i < n:
-        if ph[i] not in VOWELS:
-            if split_rising and ph[i] == "j" and i and ph[i - 1] not in VOWELS:
+        if ph[i][0] not in VOWELS or NONSYLLABIC in ph[i]:
+            if split_rising and ph[i] == "j" and i and ph[i - 1][0] not in VOWELS:
                 count += 1
             i += 1
             continue
         hi = i
-        while hi + 1 < n and (ph[hi + 1] in GLIDES or ph[hi + 1] in "ɪʊ"):
+        while hi + 1 < n and (ph[hi + 1][0] in GLIDES or ph[hi + 1][0] in "ɪʊ"
+                              or NONSYLLABIC in ph[hi + 1]):
             hi += 1
-        while hi > i and ph[hi] in GLIDES and hi + 1 < n and ph[hi + 1] in VOWELS:
+        while hi > i and ph[hi][0] in GLIDES and hi + 1 < n and ph[hi + 1][0] in VOWELS:
             hi -= 1
         count += 1
         i = hi + 1
@@ -528,8 +600,9 @@ def curated_syllables(respell):
 # ------------------------------------------------------------------- the text
 # `{}` is a blank the reader fills and `/` separates two alternatives; both are
 # carried into the IPA, and a comma is attached to the word before it.
-MARKER = re.compile(r"(\{\}|/|[,，、])")
+MARKER = re.compile(r"(\{\}|\{target\}|/|[,，、])")
 LANGUAGE_SLOT = re.compile(r"\{(?:target|source)\}")
+SOURCE_SLOT = re.compile(r"\{source\}")
 # An all-capital Latin run is an acronym or a loanword, and espeak spells one out
 # letter by letter in the target language. Sometimes that is right -- `QR` really is
 # *cu-erre* in Spanish -- and sometimes it is the one thing worse than a blank cell:
@@ -565,10 +638,19 @@ def clean(chunk):
 
 
 def pieces(text):
-    """`text` as a list of ('text'|'marker', value), splitting on `{}`, `/`, `,`."""
+    """`text` as a list of ('text'|'marker', value), splitting on `{}`, `{target}`,
+    `/`, `,`.
+
+    `{target}` rides through as a marker rather than being phonemised, and the
+    renderer substitutes the IPA of the language's name for it -- see the `ipa`
+    column of `data/registry/language-names.csv`. It can be handled here, and
+    `{source}` cannot, because a cell only ever names a language *in its own
+    language*: `{target}` in a Japanese row is Japanese naming itself, which is one
+    fixed string, where `{source}` names whichever of sixteen languages is reading.
+    """
     out = []
     for part in MARKER.split(text):
-        if part in ("{}", "/"):
+        if part in ("{}", "{target}", "/"):
             out.append(("marker", part))
         elif part in (",", "，", "、"):
             out.append(("marker", ","))
@@ -654,6 +736,10 @@ def check_alphabet(ipa):
     that -- ã ẽ ĩ õ ũ -- and `core/respell.js` will need them in its `VOWELS` set,
     because to it they are one character and not a vowel plus a tail.
     """
+    # `{target}` is a placeholder the renderer fills with the IPA of a language's
+    # name, not a transcription, so its own letters are not up for review here --
+    # the same licence `{}` already has, and for the same reason.
+    ipa = SOURCE_SLOT.sub("", LANGUAGE_SLOT.sub("", ipa))
     return sorted({c for c in unicodedata.normalize("NFD", ipa) if c not in ALPHABET})
 
 
@@ -758,7 +844,7 @@ GRADE = {
     "it": ("A", "near-phonemic; stress 98.2%, and this curator keeps the medial glide"),
     "id": ("A", "near-phonemic; stress 92.3%"),
     "sw": ("A", "near-phonemic; the syllable gap is prenasalised onsets (n-JEE-ah), a reader's rule"),
-    "de": ("B", "shallow, stress 92.6%, but this espeak build cannot vocalise <r>: 11 rows refused"),
+    "de": ("A", "shallow and stress 92.6%; the coda-r rows this build refused are repaired in REPAIR"),
     "tr": ("B", "phonemic orthography, but espeak's Turkish stress is 68.1%"),
     "pt": ("B", "pt-br; vowel reduction is phonetic detail the curated sheet smooths away"),
     "en": ("B", "en-us; deep orthography, but espeak's English lexicon is its best"),
@@ -798,14 +884,20 @@ def build(code):
             if not row["text"].strip():
                 skipped["no text"] += 1
                 continue
-            if LANGUAGE_SLOT.search(row["text"]):
-                skipped["names a language"] += 1
+            # `{source}` only. A `{target}` slot is one fixed string per language and
+            # rides through `pieces` as a marker, so those rows now get an `ipa` --
+            # and so a respelling, where before they printed a blank cell.
+            if SOURCE_SLOT.search(row["text"]):
+                skipped["names the reader"] += 1
                 continue
             text = row[source] if source else row["text"]
             if source and not text.strip():
                 skipped[f"no {source}"] += 1
                 continue
-            if code in NON_LATIN and LATIN_WORD.search(row["text"]):
+            # The slot's own name is Latin and is not part of the sentence, so it has
+            # to come out before this asks whether a Latin loanword is present --
+            # `{target}の文を見せてください` was being refused for the word "target".
+            if code in NON_LATIN and LATIN_WORD.search(LANGUAGE_SLOT.sub("", row["text"])):
                 skipped["latin loanword"] += 1
                 continue
             if code == "ko" and not ko_ng_is_unambiguous(row["text"], text):

@@ -531,7 +531,13 @@ export function fieldGlyph(field, sample) {
  * One glyph button: the icon, the caption underneath, and an optional tooltip.
  * Shared by the radio group and the multi-select group below, which differ only in
  * their ARIA role and in whether choosing one clears the others.
- * @param {{caption:string, glyph:SVGElement, title?:string}} option
+ *
+ * `sub` is a second line under the caption, for a fact about the option that the
+ * reader needs in order to choose between them rather than a name for it. Only the
+ * phone models use it, and they need it: the whole difference between one phone and
+ * the next here is its aspect ratio, so a list of model names with the ratios hidden
+ * in the tooltips is a list you cannot choose from.
+ * @param {{caption:string, sub?:string, glyph:SVGElement, title?:string}} option
  * @param {string} role
  */
 function glyphButton(option, role) {
@@ -545,6 +551,12 @@ function glyphButton(option, role) {
   caption.className = 'segment-caption';
   caption.textContent = option.caption;
   button.append(caption);
+  if (option.sub) {
+    const sub = document.createElement('span');
+    sub.className = 'segment-sub';
+    sub.textContent = option.sub;
+    button.append(sub);
+  }
   return button;
 }
 
@@ -603,7 +615,7 @@ export function toggles({ label, options, values, onChange }) {
  * @template T
  * @param {Object} config
  * @param {string} config.label
- * @param {{value:T, caption:string, glyph:SVGElement, title?:string}[]} config.options
+ * @param {{value:T, caption:string, sub?:string, glyph:SVGElement, title?:string}[]} config.options
  * @param {T} config.value
  * @param {(value:T)=>void} config.onChange
  */
@@ -1046,12 +1058,21 @@ export function phoneControl({ geometry, value, onChange }) {
   const group = segmented({
     label: t('format.phoneLong'),
     value: idOf(value),
-    options: models.map(([id, g]) => ({
-      value: id,
-      caption: g.name.split('·')[0].trim(),
-      title: `${g.name} — ${g.note}`,
-      glyph: pageGlyph({ pageW: g.pageW, pageH: g.pageH, columns: g.columns }),
-    })),
+    // The name is `model · model · ratio`: the models are what the reader recognises
+    // and the ratio is what actually differs, and 2.17:1 against 2.22:1 is not a
+    // difference the glyph can draw at 30px. Both lines, rather than the ratio in a
+    // tooltip nobody opens.
+    options: models.map(([id, g]) => {
+      const parts = g.name.split('·').map((/** @type {string} */ part) => part.trim());
+      const ratio = /:\d|column/.test(parts[parts.length - 1]) ? parts.pop() : '';
+      return {
+        value: id,
+        caption: parts[0],
+        sub: ratio,
+        title: `${g.name} — ${g.note}`,
+        glyph: pageGlyph({ pageW: g.pageW, pageH: g.pageH, columns: g.columns }),
+      };
+    }),
     onChange: (id) => onChange({ geometry: { ...geometry[id] } }),
   });
 

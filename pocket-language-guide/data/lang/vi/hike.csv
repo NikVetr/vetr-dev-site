@@ -1,66 +1,66 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-trail-words.trail,Đường mòn,,ɗyəŋ˨˩ mɔn˨˩,,2,vi-agent-v1;ipa=espeak
-trail-words.trailhead,Điểm xuất phát,,ɗiɛm˧˩˧ swət̪˧˥ faːt̪˧˥,,2,vi-agent-v1;ipa=espeak
+trail-words.trail,Đường mòn,,ɗyə̯ŋ˨˩ mɔn˨˩,,2,vi-agent-v1;ipa=espeak
+trail-words.trailhead,Điểm xuất phát,,ɗiɛ̯m˧˩˧ swət̪˧˥ faːt̪˧˥,,2,vi-agent-v1;ipa=espeak
 trail-words.summit,Đỉnh núi,,ɗiɲ˧˩˧ nuj˧˥,,2,vi-agent-v1;ipa=espeak
 trail-words.viewpoint,Điểm ngắm cảnh,,,,2,vi-agent-v1
 trail-words.cableway,Cáp treo,,kaːp˧˥ tʃɛw˧,,2,vi-agent-v1;ipa=espeak
-trail-words.shuttle-bus,Xe trung chuyển,,sɛ˧ tʃuŋ˧ tʃwiɛn˧˩˧,,2,vi-agent-v1;ipa=espeak
-trail-words.park-shuttle,Xe điện tham quan,Xe trung chuyển,sɛ˧ ɗiɛn˨˩ˀ taːm˧ kwaːn˧,,2,vi-agent-v1;ipa=espeak
+trail-words.shuttle-bus,Xe trung chuyển,,sɛ˧ tʃuŋ˧ tʃwiɛ̯n˧˩˧,,2,vi-agent-v1;ipa=espeak
+trail-words.park-shuttle,Xe điện tham quan,Xe trung chuyển,sɛ˧ ɗiɛ̯n˨˩ˀ taːm˧ kwaːn˧,,2,vi-agent-v1;ipa=espeak
 trail-words.steps,Bậc thang,,bəc˨˩ˀ taːŋ˧,,2,vi-agent-v1;ipa=espeak
 trail-words.up-uphill,Lên dốc,,len˧ zok˧˥,,2,vi-agent-v1;ipa=espeak
-trail-words.down-downhill,Xuống dốc,,suəŋ˧˥ zok˧˥,,2,vi-agent-v1;ipa=espeak
-trail-words.one-way,Một chiều,,mot̪˨˩ˀ tʃiɛw˨˩,,2,vi-agent-v1;ipa=espeak
+trail-words.down-downhill,Xuống dốc,,suə̯ŋ˧˥ zok˧˥,,2,vi-agent-v1;ipa=espeak
+trail-words.one-way,Một chiều,,mot̪˨˩ˀ tʃiɛ̯w˨˩,,2,vi-agent-v1;ipa=espeak
 trail-words.round-trip,Khứ hồi,,xy˧˥ hoj˨˩,,2,vi-agent-v1;ipa=espeak
-weather.forecast,Dự báo thời tiết thế nào ạ?,,zy˨˩ˀ baːw˧˥ təːj˨˩ t̪iɛt̪˧˥ te˧˥ naːw˨˩ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-weather.will-it-rain,Hôm nay có mưa không ạ?,,hom˧ naj˧ kɔ˧˥ myə˧ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+weather.forecast,Dự báo thời tiết thế nào ạ?,,zy˨˩ˀ baːw˧˥ təːj˨˩ t̪iɛ̯t̪˧˥ te˧˥ naːw˨˩ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+weather.will-it-rain,Hôm nay có mưa không ạ?,,hom˧ naj˧ kɔ˧˥ myə̯˧ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 weather.is-it-safe-today,Hôm nay có an toàn không ạ?,,hom˧ naj˧ kɔ˧˥ aːn˧ t̪waːn˨˩ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 weather.how-cold-at-night,Ban đêm lạnh bao nhiêu độ ạ?,,,,2,vi-agent-v1
-weather.rain,Mưa,,myə˧,,2,vi-agent-v1;ipa=espeak
-weather.snow,Tuyết,,t̪wiɛt̪˧˥,,2,vi-agent-v1;ipa=espeak
+weather.rain,Mưa,,myə̯˧,,2,vi-agent-v1;ipa=espeak
+weather.snow,Tuyết,,t̪wiɛ̯t̪˧˥,,2,vi-agent-v1;ipa=espeak
 weather.wind,Gió,,zɔ˧˥,,2,vi-agent-v1;ipa=espeak
 weather.storm,Bão,,baːw˧ˀ˥,typhoon / storm,2,vi-agent-v1;ipa=espeak
 weather.ice,Băng,Đóng băng,baŋ˧,,2,vi-agent-v1;ipa=espeak
-weather.fog,Sương mù,,syəŋ˧ mu˨˩,,2,vi-agent-v1;ipa=espeak
+weather.fog,Sương mù,,syə̯ŋ˧ mu˨˩,,2,vi-agent-v1;ipa=espeak
 weather.heat,Nóng,Nắng nóng,nɔŋ˧˥,,2,vi-agent-v1;ipa=espeak
 weather.cold,Lạnh,,,,2,vi-agent-v1
 weather.humid,Ẩm,Ẩm ướt,əm˧˩˧,,2,vi-agent-v1;ipa=espeak
 weather.sunrise,Bình minh,Mặt trời mọc,biɲ˨˩ miɲ˧,,2,vi-agent-v1;ipa=espeak
 weather.flood,Lũ lụt,Ngập lụt,lu˧ˀ˥ lut̪˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-weather.avalanche-risk,Nguy cơ lở tuyết,,ŋwi˧ kəː˧ ləː˧˩˧ t̪wiɛt̪˧˥,,2,vi-agent-v1;ipa=espeak
-hiking-parks.is-this-the-way-to,Đường này đi {} phải không ạ?,,ɗyəŋ˨˩ naj˨˩ ɗi˧ {} faːj˧˩˧ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+weather.avalanche-risk,Nguy cơ lở tuyết,,ŋwi˧ kəː˧ ləː˧˩˧ t̪wiɛ̯t̪˧˥,,2,vi-agent-v1;ipa=espeak
+hiking-parks.is-this-the-way-to,Đường này đi {} phải không ạ?,,ɗyə̯ŋ˨˩ naj˨˩ ɗi˧ {} faːj˧˩˧ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 hiking-parks.where-is-the-trailhead,Điểm xuất phát ở đâu ạ?,,,,2,vi-agent-v1
 hiking-parks.how-long-to-the-summit,Lên đỉnh mất bao lâu ạ?,,,,2,vi-agent-v1
 hiking-parks.how-long-to-the-viewpoint,Đến điểm ngắm cảnh mất bao lâu ạ?,,,,2,vi-agent-v1
-hiking-parks.which-route-is-easier,Đường nào dễ đi hơn ạ?,,ɗyəŋ˨˩ naːw˨˩ ze˧ˀ˥ ɗi˧ həːn˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-hiking-parks.is-this-trail-suitable-for-beginners,Đường này hợp với người mới không ạ?,,ɗyəŋ˨˩ naj˨˩ həːp˨˩ˀ vəːj˧˥ ŋyəj˨˩ məːj˧˥ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-trail-conditions.how-long-is-the-full-route,Cả tuyến dài bao nhiêu ạ?,,kaː˧˩˧ t̪wiɛn˧˥ zaːj˨˩ baːw˧ ɲiɛw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-trail-conditions.can-we-return-the-same-way,Về theo đường cũ được không ạ?,,ve˨˩ tɛw˧ ɗyəŋ˨˩ ku˧ˀ˥ ɗyəc˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-trail-conditions.can-we-return-before-dark,Về kịp trước tối không ạ?,,ve˨˩ kip˨˩ˀ tʃyəc˧˥ t̪oj˧˥ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-trail-conditions.is-the-trail-open,Đường mòn có mở không ạ?,,ɗyəŋ˨˩ mɔn˨˩ kɔ˧˥ məː˧˩˧ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-trail-conditions.is-the-route-steep,Đường có dốc không ạ?,,ɗyəŋ˨˩ kɔ˧˥ zok˧˥ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-trail-conditions.is-the-path-slippery,Đường có trơn không ạ?,,ɗyəŋ˨˩ kɔ˧˥ tʃəːn˧ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+hiking-parks.which-route-is-easier,Đường nào dễ đi hơn ạ?,,ɗyə̯ŋ˨˩ naːw˨˩ ze˧ˀ˥ ɗi˧ həːn˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+hiking-parks.is-this-trail-suitable-for-beginners,Đường này hợp với người mới không ạ?,,ɗyə̯ŋ˨˩ naj˨˩ həːp˨˩ˀ vəːj˧˥ ŋyə̯j˨˩ məːj˧˥ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+trail-conditions.how-long-is-the-full-route,Cả tuyến dài bao nhiêu ạ?,,kaː˧˩˧ t̪wiɛ̯n˧˥ zaːj˨˩ baːw˧ ɲiɛ̯w˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+trail-conditions.can-we-return-the-same-way,Về theo đường cũ được không ạ?,,ve˨˩ tɛw˧ ɗyə̯ŋ˨˩ ku˧ˀ˥ ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+trail-conditions.can-we-return-before-dark,Về kịp trước tối không ạ?,,ve˨˩ kip˨˩ˀ tʃyə̯c˧˥ t̪oj˧˥ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+trail-conditions.is-the-trail-open,Đường mòn có mở không ạ?,,ɗyə̯ŋ˨˩ mɔn˨˩ kɔ˧˥ məː˧˩˧ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+trail-conditions.is-the-route-steep,Đường có dốc không ạ?,,ɗyə̯ŋ˨˩ kɔ˧˥ zok˧˥ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+trail-conditions.is-the-path-slippery,Đường có trơn không ạ?,,ɗyə̯ŋ˨˩ kɔ˧˥ tʃəːn˧ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 trail-transport.how-long-is-the-queue,Xếp hàng bao lâu ạ?,,,,2,vi-agent-v1
-trail-transport.what-time-is-the-last-shuttle,Chuyến xe cuối lúc mấy giờ ạ?,,tʃwiɛn˧˥ sɛ˧ kuəj˧˥ luc˧˥ məɪ˧˥ zəː˨˩ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+trail-transport.what-time-is-the-last-shuttle,Chuyến xe cuối lúc mấy giờ ạ?,,tʃwiɛ̯n˧˥ sɛ˧ kuə̯j˧˥ luc˧˥ məɪ˧˥ zəː˨˩ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 trail-transport.when-does-the-cableway-stop,Cáp treo dừng lúc mấy giờ ạ?,,kaːp˧˥ tʃɛw˧ zyŋ˨˩ luc˧˥ məɪ˧˥ zəː˨˩ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 trail-transport.where-can-we-buy-water,Mua nước ở đâu ạ?,,,,2,vi-agent-v1
 trail-transport.where-can-we-refill-water,Lấy thêm nước ở đâu ạ?,,,,2,vi-agent-v1
 trail-transport.is-there-cell-signal-here,Ở đây có sóng không ạ?,,əː˧˩˧ ɗəɪ˧ kɔ˧˥ sɔŋ˧˥ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 trail-transport.do-you-have-a-map,Có bản đồ không ạ?,,kɔ˧˥ baːn˧˩˧ ɗo˨˩ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 trail-transport.how-long-is-the-wait,Phải chờ bao lâu ạ?,,,,2,vi-agent-v1
-trail-warnings.open,Mở cửa,,məː˧˩˧ kyə˧˩˧,,2,vi-agent-v1;ipa=espeak
-trail-warnings.closed,Đóng cửa,,ɗɔŋ˧˥ kyə˧˩˧,,2,vi-agent-v1;ipa=espeak
+trail-warnings.open,Mở cửa,,məː˧˩˧ kyə̯˧˩˧,,2,vi-agent-v1;ipa=espeak
+trail-warnings.closed,Đóng cửa,,ɗɔŋ˧˥ kyə̯˧˩˧,,2,vi-agent-v1;ipa=espeak
 trail-warnings.maintenance,Đang bảo trì,,ɗaːŋ˧ baːw˧˩˧ tʃi˨˩,,2,vi-agent-v1;ipa=espeak
 trail-warnings.steep-slope,Dốc đứng,Dốc nguy hiểm,zok˧˥ ɗyŋ˧˥,,2,vi-agent-v1;ipa=espeak
-trail-warnings.caution-slippery,Cẩn thận trơn trượt,,kən˧˩˧ tən˨˩ˀ tʃəːn˧ tʃyət̪˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-trail-warnings.danger,Nguy hiểm,,ŋwi˧ hiɛm˧˩˧,,2,vi-agent-v1;ipa=espeak
+trail-warnings.caution-slippery,Cẩn thận trơn trượt,,kən˧˩˧ tən˨˩ˀ tʃəːn˧ tʃyə̯t̪˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+trail-warnings.danger,Nguy hiểm,,ŋwi˧ hiɛ̯m˧˩˧,,2,vi-agent-v1;ipa=espeak
 trail-warnings.beware-falling-rocks,Cẩn thận đá rơi,Đá lở,kən˧˩˧ tən˨˩ˀ ɗaː˧˥ zəːj˧,,2,vi-agent-v1;ipa=espeak
 trail-warnings.first-aid-station,Trạm sơ cứu,,tʃaːm˨˩ˀ səː˧ kiw˧˥,,2,vi-agent-v1;ipa=espeak
 trail-warnings.service-suspended,Tạm ngừng phục vụ,,t̪aːm˨˩ˀ ŋyŋ˨˩ fuc˨˩ˀ vu˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-trail-landmarks.trail-marker,Mốc chỉ đường,,mok˧˥ tʃi˧˩˧ ɗyəŋ˨˩,,2,vi-agent-v1;ipa=espeak
+trail-landmarks.trail-marker,Mốc chỉ đường,,mok˧˥ tʃi˧˩˧ ɗyə̯ŋ˨˩,,2,vi-agent-v1;ipa=espeak
 trail-landmarks.fork-junction,Ngã ba,,ŋaː˧ˀ˥ baː˧,,2,vi-agent-v1;ipa=espeak
 trail-landmarks.boardwalk-cliff-path,Đường ván gỗ / vách đá,,,,2,vi-agent-v1
-trail-landmarks.start,Điểm bắt đầu,,ɗiɛm˧˩˧ bat̪˧˥ ɗəw˨˩,,2,vi-agent-v1;ipa=espeak
-trail-landmarks.end,Điểm kết thúc,,ɗiɛm˧˩˧ ket̪˧˥ tuc˧˥,,2,vi-agent-v1;ipa=espeak
+trail-landmarks.start,Điểm bắt đầu,,ɗiɛ̯m˧˩˧ bat̪˧˥ ɗəw˨˩,,2,vi-agent-v1;ipa=espeak
+trail-landmarks.end,Điểm kết thúc,,ɗiɛ̯m˧˩˧ ket̪˧˥ tuc˧˥,,2,vi-agent-v1;ipa=espeak
 trail-landmarks.elevation,Độ cao,,ɗo˨˩ˀ kaːw˧,,2,vi-agent-v1;ipa=espeak
 trail-landmarks.sunset,Hoàng hôn,Mặt trời lặn,hwaːŋ˨˩ hon˧,,2,vi-agent-v1;ipa=espeak
-trail-landmarks.water-point,Điểm lấy nước,,ɗiɛm˧˩˧ ləɪ˧˥ nyəc˧˥,,2,vi-agent-v1;ipa=espeak
+trail-landmarks.water-point,Điểm lấy nước,,ɗiɛ̯m˧˩˧ ləɪ˧˥ nyə̯c˧˥,,2,vi-agent-v1;ipa=espeak

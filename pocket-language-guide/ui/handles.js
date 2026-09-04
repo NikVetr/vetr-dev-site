@@ -12,7 +12,7 @@
 // does not make it obvious that the text is being reflowed.
 
 import { contentBox } from '../core/solve/index.js';
-import { t } from './i18n.js';
+import { number, t } from './i18n.js';
 
 /** Smallest margin worth offering; the printer's own limit is applied on top. */
 const MIN_MARGIN_PT = 2;
@@ -123,11 +123,11 @@ export function attachHandles({ face, spec, onCommit }) {
           // What the reader cares about is not the gutter but what it does to the
           // columns, so say both.
           ? t('handles.gapReadout', {
-            gap: value.toFixed(1),
-            width: boxFor({ columnGap: value }).colWidth.toFixed(1),
+            gap: number(value, 1),
+            width: number(boxFor({ columnGap: value }).colWidth, 1),
           })
           : t('handles.marginReadout', {
-            name: title, inches: (value / 72).toFixed(3), points: value.toFixed(1),
+            name: title, inches: number(value / 72, 3), points: number(value, 1),
           });
         if (kind === 'columnGap') {
           for (const placeGutter of gutterPlacers) placeGutter(value);

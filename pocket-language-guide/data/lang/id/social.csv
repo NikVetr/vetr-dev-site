@@ -12,8 +12,8 @@ social-basics.no-problem,Tidak apa-apa,Nggak apa-apa,tˈidak ˈapaapa,,2,id-agen
 social-basics.i-do-not-know,Saya tidak tahu,,sˈaja tˈidak tˈahu,,2,id-agent-v1;ipa=espeak
 social-basics.good-night,Selamat tidur,Selamat malam,səlˈamat tˈidur,,2,id-agent-v1;ipa=espeak
 social-basics.okay-fine-i-am-okay,Saya baik-baik saja,Oke,sˈaja bˈaɪkbaɪk sˈadʒa,,2,id-agent-v1;ipa=espeak
-communication.i-do-not-speak-this-language,Saya tidak bisa bahasa {target},,,,2,language-slots-v1
-communication.i-speak-only-a-little-of-this,Saya bisa sedikit bahasa {target},,,,2,language-slots-v1
+communication.i-do-not-speak-this-language,Saya tidak bisa bahasa {target},,sˈaja tˈidak bˈisa bahˈasa {target},,2,language-slots-v1;ipa=espeak
+communication.i-speak-only-a-little-of-this,Saya bisa sedikit bahasa {target},,sˈaja bˈisa sədˈikit bahˈasa {target},,2,language-slots-v1;ipa=espeak
 communication.do-you-speak-english,Bisa bahasa {source}?,,,,2,language-slots-v1
 communication.please-speak-more-slowly,Tolong bicara lebih lambat,,tˈoloŋ bitʃˈara lˈɛbih lˈambat,,2,id-agent-v1;ipa=espeak
 communication.i-do-not-understand-spoken,Saya tidak paham,Saya nggak paham,sˈaja tˈidak pˈaham,,2,id-agent-v1;ipa=espeak
@@ -22,7 +22,7 @@ communication.please-say-it-again,Tolong ulangi,,tˈoloŋ ulˈaŋi,,2,id-agent-v
 communication.please-write-it-down,Tolong tuliskan,,tˈoloŋ tulˈiskan,,2,id-agent-v1;ipa=espeak
 communication.please-wait-a-moment,"Tunggu sebentar, ya",Mohon tunggu sebentar,"tˈuŋɡu səbəntar, jˈa",,2,id-agent-v1;ipa=espeak
 communication.can-you-help-me,Bisa bantu saya?,,bˈisa bˈantu sˈaja,,2,id-agent-v1;ipa=espeak
-communication.please-show-me-the-text,Tolong tunjukkan tulisannya dalam bahasa {target},,,,2,language-slots-v1
+communication.please-show-me-the-text,Tolong tunjukkan tulisannya dalam bahasa {target},,tˈoloŋ tundʒˈukkan tˌulisˈanɲa dˈalam bahˈasa {target},,2,language-slots-v1;ipa=espeak
 communication.i-cannot-make-out-what-you-are-saying,Saya tidak menangkap ucapannya,,sˈaja tˈidak mənˈaŋkap ˌutʃapˈanɲa,,2,id-agent-v1;ipa=espeak
 communication.i-do-not-understand,Saya tidak mengerti,,sˈaja tˈidak məŋˈɛrti,,2,id-agent-v1;ipa=espeak
 communication.i-cannot-read-it,Saya tidak bisa membacanya,,sˈaja tˈidak bˈisa məmbatʃˈaɲa,,2,id-agent-v1;ipa=espeak
@@ -39,7 +39,7 @@ quick-responses.okay-fine,Baik,Oke,bˈaɪk,,2,id-agent-v1;ipa=espeak
 quick-responses.no-good-not-allowed-will-not-work,Tidak boleh,Jangan,tˈidak bˈoləh,,2,id-agent-v1;ipa=espeak
 phone-translation.i-am-using-phone-translation,Saya pakai penerjemah di HP,,sˈaja pˈakaɪ pənərdʒˈɛmah di hˌapˈe,,2,id-agent-v1;ipa=espeak
 phone-translation.please-speak-toward-the-phone,Tolong bicara ke arah HP,,tˈoloŋ bitʃˈara kə ˈarah hˌapˈe,,2,id-agent-v1;ipa=espeak
-phone-translation.please-write-the-place-name,Tolong tulis nama tempatnya dalam bahasa {target},,,,2,language-slots-v1
+phone-translation.please-write-the-place-name,Tolong tulis nama tempatnya dalam bahasa {target},,tˈoloŋ tˈulis nˈama təmpˈatɲa dˈalam bahˈasa {target},,2,language-slots-v1;ipa=espeak
 phone-translation.one-sentence-at-a-time-please,Tolong satu kalimat dulu,,tˈoloŋ sˈatu kalˈimat dˈulu,,2,id-agent-v1;ipa=espeak
 phone-translation.please-type-it-and-show-me,Tolong ketik dan tunjukkan,,tˈoloŋ kˈɛtik dan tundʒˈukkan,,2,id-agent-v1;ipa=espeak
 phone-translation.please-look-at-the-screen,Tolong lihat layarnya,,tˈoloŋ lˈihat lajˈarɲa,,2,id-agent-v1;ipa=espeak

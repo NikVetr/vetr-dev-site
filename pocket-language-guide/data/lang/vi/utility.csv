@@ -1,13 +1,13 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-utility-templates.i-want-to-go-to,Tôi muốn đi {},,t̪oj˧ muən˧˥ ɗi˧ {},,2,vi-agent-v1;ipa=espeak
+utility-templates.i-want-to-go-to,Tôi muốn đi {},,t̪oj˧ muə̯n˧˥ ɗi˧ {},,2,vi-agent-v1;ipa=espeak
 utility-templates.please-give-me,Xin cho tôi {},,sin˧ tʃɔ˧ t̪oj˧ {},,2,vi-agent-v1;ipa=espeak
-utility-templates.may-i,Tôi {} được không ạ?,,t̪oj˧ {} ɗyəc˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+utility-templates.may-i,Tôi {} được không ạ?,,t̪oj˧ {} ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 utility-templates.please-do-not-add,Xin đừng cho {},,sin˧ ɗyŋ˨˩ tʃɔ˧ {},,2,vi-agent-v1;ipa=espeak
 utility-templates.do-you-have,Có {} không ạ?,,kɔ˧˥ {} xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 utility-templates.please-write-the-number,Xin ghi số ra giấy,,sin˧ ɣi˧ so˧˥ zaː˧ zəɪ˧˥,,2,vi-agent-v1;ipa=espeak
 utility-templates.i-need,Tôi cần {},,t̪oj˧ kən˨˩ {},,2,vi-agent-v1;ipa=espeak
 utility-templates.is-there-nearby,Gần đây có {} không ạ?,,ɣən˨˩ ɗəɪ˧ kɔ˧˥ {} xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
-utility-templates.how-much-is,{} bao nhiêu tiền ạ?,,{} baːw˧ ɲiɛw˧ t̪iɛn˨˩ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+utility-templates.how-much-is,{} bao nhiêu tiền ạ?,,{} baːw˧ ɲiɛ̯w˧ t̪iɛ̯n˨˩ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 utility-templates.is-this,Đây là {} phải không ạ?,,ɗəɪ˧ laː˨˩ {} faːj˧˩˧ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 utility-templates.please,Cho tôi {} ạ,,tʃɔ˧ t̪oj˧ {} aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 utility-templates.i-am-looking-for,Tôi đang tìm {},,t̪oj˧ ɗaːŋ˧ t̪im˨˩ {},,2,vi-agent-v1;ipa=espeak

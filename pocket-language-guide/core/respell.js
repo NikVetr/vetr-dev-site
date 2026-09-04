@@ -62,8 +62,16 @@ const isGlide = (/** @type {string} */ unit) => GLIDES.has(unit[0]);
  * definition -- so it belongs to the nucleus before it and can never start one.
  * Thai writes `ua̯ ia̯ ɯa̯` and they were splitting into two syllables apiece,
  * inflating a monosyllabic language's syllable count on 152 rows.
+ *
+ * `includes`, not `endsWith`, and for the same reason `isGlide` reads only the base
+ * character: the mark is not the last thing on the unit once something else binds
+ * after it. A Chao tone letter does, and it is bound before the spans are computed,
+ * so `tɕʰua̯j˥˩` stopped matching and Thai's centring diphthongs split again -- but
+ * only for a reader whose table *keeps* tone, since a dropping one strips the letter
+ * before tokenisation. That is why the 152 rows this was written to fix came back on
+ * exactly the two tables that keep it.
  */
-const offglide = (/** @type {string} */ unit) => unit.endsWith('\u032F');
+const offglide = (/** @type {string} */ unit) => unit.includes('\u032F');
 /**
  * Length, nasalisation, the non-syllabic mark and tone all belong to their vowel.
  *
@@ -509,6 +517,27 @@ function holds(rule, ctx, emitted) {
   // fired and only looked as though it did.
   if (rule.before_onset && !rule.before_onset.split(' ').includes(ctx.nextPhoneme)) return false;
   if (rule.after_nucleus && !rule.after_nucleus.split(' ').includes(ctx.prevNucleus)) return false;
+  // **This syllable's own coda, which a nucleus rule could not see.** `open` and
+  // `closed` say whether there is one; `before_onset` sees the *next* syllable's
+  // onset. Neither answers "what closes this syllable", and two tables asked for it
+  // independently, which is the bar for a change here.
+  //
+  // Thai needs it because its standard spells a vowel differently before a coda /r/
+  // -- `Merhaba` is เม่อ-ฮะ-บะ, not เม่ะ-, which turned out to be **1,948 rows** across
+  // twelve targets -- and Hindi needs the same rule to keep English START apart from
+  // LOT, where /ɑː/ takes आ before /ɹ/ and ऑ elsewhere: 43 rows are START (*card*,
+  // *charge*, *pharmacy*) and 105 are LOT (*not*, *doctor*, *sorry*).
+  //
+  // `sorry` is the case that settles the shape of this predicate. Its /ɹ/ opens the
+  // *next* syllable, so `before_onset` would have caught it and given it the START
+  // vowel; only a question about this syllable's own coda gets it right.
+  //
+  // The head, not the whole coda, because that is what both tables want to ask and a
+  // second whole-string form would be built for nobody. `if_coda: ""` is the useful
+  // negative -- "nothing closes this syllable" -- so this tests for the key rather
+  // than for a truthy value, the same way `after_out: ""` does.
+  if (rule.if_coda !== undefined
+    && !rule.if_coda.split(' ').includes(ctx.codaHead)) return false;
   for (const w of rule.when ?? []) {
     const negated = w.startsWith('not_');
     if (ctx[negated ? w.slice(4) : w] === negated) return false;
@@ -671,6 +700,7 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
         nextOnset: syls[i + 1]?.onset ?? '',
         nextPhoneme: phonemesOf(syls[i + 1]?.onset ?? '')[0] ?? '',
         nucleusHead: phonemesOf(s.nucleus)[0] ?? '',
+        codaHead: phonemesOf(s.coda)[0] ?? '',
         prevNucleus: syls[i - 1]?.nucleus ?? '',
       };
       let text = spellSlot(s.onset, 'onset', phonemes, ctx);

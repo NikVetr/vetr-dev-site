@@ -9,7 +9,8 @@ const ID = 'communication.do-you-speak-english';
 /**
  * One cell through the real substitution.
  * @param {string} text @param {{locale:string, target:string, source:string,
- *   names?:Record<string,{name:string, roman:string}>}} args @param {string} [roman]
+ *   names?:Record<string,{name:string, roman:string, ipa:string}>}} args
+ * @param {string} [roman]
  */
 function fill(text, args, roman) {
   /** @type {Record<string,Record<string,string>>} */
@@ -69,7 +70,7 @@ test('the registry supplies what ICU cannot: a romanised name', () => {
       locale: 'zh-Hans',
       target: 'zh-Hans',
       source: 'en',
-      names: { en: { name: '英语', roman: 'yingyu' } },
+      names: { en: { name: '英语', roman: 'yingyu', ipa: 'iŋy' } },
     },
     'ni hui shuo {source} ma?',
   );

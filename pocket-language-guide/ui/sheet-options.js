@@ -17,7 +17,9 @@ import {
 } from './glyphs.js';
 import { familyFor } from '../render/fonts.js';
 import { regionRow } from './flags.js';
-import { warningText, applyStatic, languageName, loadUiLanguage, t } from './i18n.js';
+import {
+  warningText, applyStatic, languageName, loadUiLanguage, number, t,
+} from './i18n.js';
 
 // Module scope, so the words cannot be looked up here: the keys are, and the
 // menu resolves them when it is built.
@@ -294,7 +296,7 @@ async function main() {
     const counts = {
       faces: plan.faces.length,
       sheets: plan.faces.length / 2,
-      scale: plan.scale.toFixed(2),
+      scale: number(plan.scale, 2),
     };
     $('status').textContent = plan.faces.length
       ? (spec.geometry.screen ? t('quick.statusScreen', counts) : t('quick.status', counts))

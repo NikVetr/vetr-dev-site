@@ -478,17 +478,47 @@ test('a column with nothing to print says so, and stops once it is filled', asyn
   assert.ok(filled.plan.faces.flatMap((f) => f.runs).some((r) => r.text === ipa),
     'an imported IPA value should reach the page');
 
-  // The other silent column, on default settings -- and this pair keeps moving as
-  // the readers land. It was `de <- tr`, then `de <- id`, and both of those have a
-  // rule table now. Thirteen of the seventeen reading languages do, which fills 208
-  // of the 272 pairs; Hindi is one of the four that do not. `roman` is empty on this
-  // sheet too and is *not* reported -- German declares no romanisation system, so
-  // it is inapplicable rather than unfilled.
-  const quiet = await buildSheet(ctx, {
-    ...(await referenceSpec('de', 'hi')),
-    selection: { sections: only, items: {} },
+  // And the warning firing at all, which is the half that actually matters.
+  //
+  // **Constructed, not found, and that is the point.** This assertion used to name a
+  // pair whose reader had no respelling table -- `de <- tr`, then `de <- id`, then
+  // `de <- hi` -- and it broke every time one of those tables landed, three times,
+  // because the premise was a gap in the data rather than a property of the code.
+  // Sixteen of the seventeen readers have a table now and the seventeenth is being
+  // written, so there will shortly be no pair in the corpus that satisfies it and
+  // repointing it a fourth time is not available.
+  //
+  // A sheet holding one custom item is the honest construction: an imported term
+  // carries whatever fields the person typed, so a term with a script and a gloss and
+  // no respelling is exactly the case the warning's own text answers -- "fill it in
+  // with the CSV import, or switch the column off". It cannot expire, because nothing
+  // about the corpus decides it.
+  const one = /** @type {Record<string, boolean>} */ ({});
+  for (const s of ctx.corpus.sections) one[s.section_id] = false;
+  const noItems = /** @type {Record<string, boolean>} */ ({});
+  for (const c of Object.values(ctx.corpus.concepts)) noItems[c.concept_id] = false;
+  const custom = await buildSheet(ctx, {
+    ...(await referenceSpec('ja', 'en')),
+    selection: { sections: { ...one, 'social-basics': true }, items: noItems },
+  }, {
+    overrides: {},
+    extras: [{
+      conceptId: 'custom.no-respell',
+      sectionId: 'social-basics',
+      template: 'entry',
+      weight: 1,
+      values: { script: 'こんばんは', gloss: 'good evening' },
+    }],
   });
-  assert.deepEqual(dead(quiet.plan), ['respell']);
+  const texts = custom.plan.faces.flatMap((f) => f.runs).map((r) => r.text);
+  // Concatenated for the Japanese, because a CJK run breaks between every character
+  // -- `scripts.csv` gives Japanese `word_break: any`, so each kana is its own run by
+  // the time it is drawn, while the English breaks at its spaces into whole words.
+  assert.ok(texts.join('').includes('こんばんは'), 'the custom item should be the sheet');
+  assert.ok(texts.includes('good') && texts.includes('evening'), 'with the gloss typed for it');
+  // `roman` comes with it: Japanese declares a romanisation system, so the column is
+  // applicable, and a typed term has no Hepburn either.
+  assert.deepEqual(dead(custom.plan).sort(), ['respell', 'roman']);
 });
 
 test('an empty selection reports itself instead of measuring as NaN', async () => {

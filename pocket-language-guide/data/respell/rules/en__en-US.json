@@ -11,21 +11,275 @@
     "tone": "drop",
     "length": "none"
   },
-  "splits": [
+  "phonemes": [
     {
-      "glide": "j",
-      "out": "ee",
-      "after_consonant": true,
-      "except_after": "tɕ tɕʰ ɕ ʈʂ ʈʂʰ ʂ ʐ"
+      "slot": "nucleus",
+      "ipa": "aː",
+      "out": "ah"
     },
     {
-      "glide": "w",
-      "out": "oo",
-      "after_consonant": true,
-      "only_after": "ʝ"
-    }
-  ],
-  "phonemes": [
+      "slot": "any",
+      "ipa": "ˀ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˤ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̪",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̯",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̩",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "͈",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃʲ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʕ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ħ",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "q",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɹ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɫ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɳ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʋ",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɗ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʑ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʑ",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "kh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɸ",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɴ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰ",
+      "out": ""
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ̃ʊ̃",
+      "out": "owng"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ̃",
+      "out": "uhng"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑ̃",
+      "out": "ahng"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ̃",
+      "out": "awng"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ̃",
+      "out": "ang"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ̃",
+      "out": "uhng"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʊ̃",
+      "out": "oong"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ã",
+      "out": "ahng"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ẽ",
+      "out": "ehng"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ĩ",
+      "out": "eeng"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "õ",
+      "out": "ohng"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ũ",
+      "out": "oong"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌ",
+      "out": "u",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌ",
+      "out": "uh"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɜ",
+      "out": "uh"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ",
+      "out": "uh"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "æ",
+      "out": "a"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ø",
+      "out": "ur"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɒ",
+      "out": "aw"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɵ",
+      "out": "oh"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʉ",
+      "out": "oo"
+    },
     {
       "slot": "any",
       "ipa": "ʈʂʰ",
@@ -560,14 +814,6 @@
     {
       "slot": "nucleus",
       "ipa": "ʊ",
-      "out": "o",
-      "when": [
-        "closed"
-      ]
-    },
-    {
-      "slot": "nucleus",
-      "ipa": "ʊ",
       "out": "oo"
     }
   ],
@@ -593,6 +839,14 @@
     "zh-Hans": {
       "splits": [],
       "phonemes": [
+        {
+          "slot": "nucleus",
+          "ipa": "ʊ",
+          "out": "o",
+          "when": [
+            "closed"
+          ]
+        },
         {
           "slot": "nucleus",
           "ipa": "a",
@@ -633,6 +887,188 @@
           "out": "ma"
         }
       ]
+    },
+    "ja": {
+      "note": "The base table spells the alveolo-palatals for Mandarin, where pinyin j q x are j ch sy. Japanese is romanised the other way and an English reader already knows it: konnichiwa, not konnyeejeewa, and sumimasen, not syumimasen.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "tɕ",
+          "out": "ch"
+        },
+        {
+          "slot": "any",
+          "ipa": "ɕ",
+          "out": "sh"
+        },
+        {
+          "slot": "any",
+          "ipa": "ç",
+          "out": "h"
+        }
+      ]
+    },
+    "ko": {
+      "note": "Korean 시 is [ɕi] and Revised Romanisation writes it si, but an English reader says that as \"see\". \"shee\" is the sound.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "ɕ",
+          "out": "sh"
+        }
+      ],
+      "splits": []
+    },
+    "tr": {
+      "note": "Two of these correct the ipa column rather than the reader: espeak writes Turkish /e/ as /æ/ before a coda liquid or nasal, and its palatal stops are the plain velars an English reader wants for *gelmek* and *Cuma*.",
+      "phonemes": [
+        {
+          "slot": "nucleus",
+          "ipa": "æ",
+          "out": "e"
+        },
+        {
+          "slot": "any",
+          "ipa": "ɟ",
+          "out": "g"
+        },
+        {
+          "slot": "any",
+          "ipa": "c",
+          "out": "j"
+        }
+      ]
+    },
+    "pt": {
+      "note": "espeak writes Brazilian final [ɐ] as /æ/, a vowel no variety of Portuguese has. *nada* is NAH-duh, not NAH-da.",
+      "phonemes": [
+        {
+          "slot": "coda",
+          "ipa": "n",
+          "out": "",
+          "after_out": "ng"
+        },
+        {
+          "slot": "coda",
+          "ipa": "m",
+          "out": "",
+          "after_out": "ng"
+        },
+        {
+          "slot": "nucleus",
+          "ipa": "æ",
+          "out": "uh"
+        }
+      ],
+      "splits": []
+    },
+    "vi": {
+      "note": "Vietnamese final c is [k]: *được* ends in a stop, not an affricate.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "c",
+          "out": "k"
+        }
+      ]
+    },
+    "de": {
+      "note": "The base spells `œ` for Mandarin üe, where it is half of a rising diphthong. Standing alone in *peur* and *möchte* it is the vowel of *hurt*.",
+      "phonemes": [
+        {
+          "slot": "nucleus",
+          "ipa": "œ",
+          "out": "ur"
+        }
+      ]
+    },
+    "fr": {
+      "note": "The base spells `œ` for Mandarin üe, where it is half of a rising diphthong. Standing alone in *peur* and *möchte* it is the vowel of *hurt*.",
+      "phonemes": [
+        {
+          "slot": "coda",
+          "ipa": "n",
+          "out": "",
+          "after_out": "ng"
+        },
+        {
+          "slot": "coda",
+          "ipa": "m",
+          "out": "",
+          "after_out": "ng"
+        },
+        {
+          "slot": "nucleus",
+          "ipa": "œ",
+          "out": "ur"
+        }
+      ]
+    },
+    "hi": {
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "pʰ",
+          "out": "ph"
+        },
+        {
+          "slot": "any",
+          "ipa": "tʰ",
+          "out": "th"
+        },
+        {
+          "slot": "any",
+          "ipa": "kʰ",
+          "out": "kh"
+        },
+        {
+          "slot": "any",
+          "ipa": "ʰ",
+          "out": "h"
+        },
+        {
+          "slot": "nucleus",
+          "ipa": "ã",
+          "out": "ahn"
+        },
+        {
+          "slot": "nucleus",
+          "ipa": "ẽ",
+          "out": "ehn"
+        },
+        {
+          "slot": "nucleus",
+          "ipa": "ĩ",
+          "out": "een"
+        },
+        {
+          "slot": "nucleus",
+          "ipa": "õ",
+          "out": "ohn"
+        },
+        {
+          "slot": "nucleus",
+          "ipa": "ũ",
+          "out": "oon"
+        }
+      ],
+      "note": "Hindi nasal vowels take a plain n. The base spells them with `ng` for French and Portuguese, where the velar is what English print writes. Aspiration is written rather than dropped: Hindi contrasts it, and the base rules are pinyin's, where p t k are aspirated already and the plain series takes b d g -- so both halves of the Hindi contrast were landing on the same letter."
+    },
+    "ru": {
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "ʲ",
+          "out": "",
+          "if_nucleus_head": "i ɪ"
+        },
+        {
+          "slot": "any",
+          "ipa": "ʑ",
+          "out": "zy"
+        }
+      ],
+      "note": "Palatalisation is dropped before a front vowel and written `y` elsewhere, which is what English respelling of Russian does: spasibo, but dyen."
     }
   },
   "note": "Read off the 12,001 curated respellings in data/respell/overrides, not from a published pronunciation key. See content/RESPELL-PILOT.md.",
@@ -653,6 +1089,20 @@
     {
       "rule": "the plain series is written voiced wherever the target aspirates",
       "why": "Guarded on whether the voiced stop can start a *word*, not on whether it occurs at all. The claim is that a language contrasting /p/ with /pʰ/ has no voiced stop for `b` to collide with, which is true of Mandarin and false three ways. Hindi contrasts all four and was printing `soo-bruh-BʰAD` against a curated `su-pra-BHAAT`. Korean's `ipa` carries `b d ɡ` as the Revised Romanization allophones of the lenis series -- 0 of them word-initial in 1,519 words -- so testing for bare presence cost Korean 1.4 points. And Thai contrasts บ /b/ with ป /p/, with 41 word-initial /b/, so guarding on breathy voice instead cost Thai 0.8. `#b` asks the question the phonology actually turns on and gets all four right at once."
+    }
+  ],
+  "splits": [
+    {
+      "glide": "j",
+      "out": "ee",
+      "after_consonant": true,
+      "except_after": "tɕ tɕʰ ɕ ʈʂ ʈʂʰ ʂ ʐ"
+    },
+    {
+      "glide": "w",
+      "out": "oo",
+      "after_consonant": true,
+      "only_after": "ʝ"
     }
   ]
 }

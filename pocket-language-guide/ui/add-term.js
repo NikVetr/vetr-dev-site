@@ -5,7 +5,7 @@
 // not require exporting a file and importing it back. This writes the same
 // `edits.extras` entry that an import would, so the two paths agree.
 
-import { t } from './i18n.js';
+import { languageName, t } from './i18n.js';
 
 /** @param {string} tag @param {Record<string,string>} attrs @param {(Node|string)[]} kids */
 function el(tag, attrs = {}, kids = []) {
@@ -60,13 +60,21 @@ export function createAddTerm(input) {
   const fields = /** @type {const} */ ([
     {
       key: 'script',
-      label: t('addTerm.inLanguage', { language: input.corpus.languages[spec.target].exonym_en }),
+      // `languageName`, not the registry's English exonym: every other insert in the
+      // panel goes through it, so this dialog was the one place a Spanish interface
+      // said "En Chinese (Simplified)" while the tree beside it said "chino
+      // simplificado".
+      label: t('addTerm.inLanguage', {
+        language: languageName(spec.target, input.corpus.languages[spec.target].exonym_en),
+      }),
       lang: spec.target,
     },
     { key: 'roman', label: t('addTerm.optional', { label: t('field.roman') }), lang: '' },
     {
       key: 'gloss',
-      label: t('addTerm.inLanguage', { language: input.corpus.languages[spec.source].exonym_en }),
+      label: t('addTerm.inLanguage', {
+        language: languageName(spec.source, input.corpus.languages[spec.source].exonym_en),
+      }),
       lang: spec.source,
     },
     { key: 'respell', label: t('addTerm.optional', { label: t('field.respell') }), lang: '' },
@@ -135,10 +143,10 @@ export function createAddTerm(input) {
       const next = input.spec();
       const labels = details.querySelectorAll('.field label span');
       labels[1].textContent = t('addTerm.inLanguage', {
-        language: input.corpus.languages[next.target].exonym_en,
+        language: languageName(next.target, input.corpus.languages[next.target].exonym_en),
       });
       labels[3].textContent = t('addTerm.inLanguage', {
-        language: input.corpus.languages[next.source].exonym_en,
+        language: languageName(next.source, input.corpus.languages[next.source].exonym_en),
       });
       inputs.script.lang = next.target;
       inputs.gloss.lang = next.source;

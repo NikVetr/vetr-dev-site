@@ -10,8 +10,8 @@ social-basics.excuse-me-sorry,Excuse me / sorry,,ɛkskjˈuːs mˌiː / sˈɑːɹ
 social-basics.sorry,Sorry,,sˈɑːɹi,,2,latex-reference-v2;ipa=espeak
 social-basics.no-problem,No problem,,nˈoʊ pɹˈɑːbləm,,2,latex-reference-v2;ipa=espeak
 social-basics.i-do-not-know,I do not know,,aɪ duːnˌɑːt nˈoʊ,,2,latex-reference-v2;ipa=espeak
-communication.i-do-not-speak-this-language,I do not speak {target},,,,2,language-slots-v1
-communication.i-speak-only-a-little-of-this,I speak only a little {target},,,,2,language-slots-v1
+communication.i-do-not-speak-this-language,I do not speak {target},,aɪ duːnˌɑːt spˈiːk {target},,2,language-slots-v1;ipa=espeak
+communication.i-speak-only-a-little-of-this,I speak only a little {target},,aɪ spˈiːk ˈoʊnli ɐ lˈɪɾəl {target},,2,language-slots-v1;ipa=espeak
 communication.do-you-speak-english,Do you speak {source}?,,,,2,language-slots-v1
 communication.please-speak-more-slowly,Please speak more slowly,,plˈiːz spˈiːk mˈoːɹ slˈoʊli,,2,latex-reference-v2;ipa=espeak
 communication.i-do-not-understand-spoken,I do not understand (spoken),,aɪ duːnˌɑːt ˌʌndɚstˈænd spˈoʊkən,,2,latex-reference-v2;ipa=espeak
@@ -20,7 +20,7 @@ communication.please-say-it-again,Please say it again,,plˈiːz sˈeɪ ɪɾ ɐɡ
 communication.please-write-it-down,Please write it down,,plˈiːz ɹˈaɪt ɪt dˈaʊn,,2,latex-reference-v2;ipa=espeak
 communication.please-wait-a-moment,Please wait a moment,,plˈiːz wˈeɪt ɐ mˈoʊmənt,,2,latex-reference-v2;ipa=espeak
 communication.can-you-help-me,Can you help me?,,kæn juː hˈɛlp mˌiː,,2,latex-reference-v2;ipa=espeak
-communication.please-show-me-the-text,Please show me the text in {target},,,,2,language-slots-v1
+communication.please-show-me-the-text,Please show me the text in {target},,plˈiːz ʃˈoʊ mˌiː ðə tˈɛkst ˈɪn {target},,2,language-slots-v1;ipa=espeak
 quick-responses.please-go-ahead,please / go ahead,,plˈiːz / ɡˌoʊ ɐhˈɛd,,2,latex-reference-v2;ipa=espeak
 quick-responses.yes-right,yes / right,,jˈɛs / ɹˈaɪt,,2,latex-reference-v2;ipa=espeak
 quick-responses.no-not,no / not,,nˈoʊ / nˈɑːt,,2,latex-reference-v2;ipa=espeak
@@ -32,7 +32,7 @@ phone-translation.i-am-using-phone-translation,I am using phone translation,,aɪ
 phone-translation.please-speak-toward-the-phone,Please speak toward the phone,,plˈiːz spˈiːk təwˈɔːɹd ðə fˈoʊn,,2,latex-reference-v2;ipa=espeak
 phone-translation.one-sentence-at-a-time-please,"One sentence at a time, please",,"wˈʌn sˈɛntəns æɾə tˈaɪm, plˈiːz",,2,latex-reference-v2;ipa=espeak
 phone-text-power.please-type-it-for-me,Please type it for me,,plˈiːz tˈaɪp ɪt fɔːɹ mˌiː,,2,latex-reference-v2;ipa=espeak
-phone-translation.please-write-the-place-name,Please write the place name in {target},,,,2,language-slots-v1
+phone-translation.please-write-the-place-name,Please write the place name in {target},,plˈiːz ɹˈaɪt ðə plˈeɪs nˈeɪm ˈɪn {target},,2,language-slots-v1;ipa=espeak
 phone-text-power.please-use-simple-words,Please use simple words,,plˈiːz jˈuːs sˈɪmpəl wˈɜːdz,,2,latex-reference-v2;ipa=espeak
 phone-text-power.my-phone-battery-is-low,My phone battery is low,,maɪ fˈoʊn bˈæɾɚɹi ɪz lˈoʊ,,2,latex-reference-v2;ipa=espeak
 phone-text-power.do-you-have-a-power-bank,Do you have a power bank?,,dˈuː juː hæv ɐ pˈaʊɚ bˈæŋk,,2,latex-reference-v2;ipa=espeak

@@ -7,7 +7,7 @@ payment-receipt.please-write-the-number,Bitte die Zahl aufschreiben.,,bˈɪtə d
 payment-receipt.how-much-in-total,Was macht das zusammen?,,vˈas mˈaxt das tsuːzˈamən,,2,de-agent-v1;ipa=espeak
 payment-receipt.can-we-pay-separately,Können wir getrennt zahlen?,,kˌœnən viːɾ ɡətɾˈɛnt tsˈɑːlən,,2,de-agent-v1;ipa=espeak
 payment-receipt.is-tax-included,Ist die MwSt. inklusive?,Ist die Mehrwertsteuer dabei?,ɪst diː ˌɛmvˈeː ˌɛstˈeː ɪnkluːzˈiːvə,,2,de-agent-v1;ipa=espeak
-payment-receipt.my-card-was-declined,Meine Karte wurde abgelehnt.,,,,2,de-agent-v1
+payment-receipt.my-card-was-declined,Meine Karte wurde abgelehnt.,,mˌaɪnə kˈaɾtə vˌʊɾdə ˈapɡəlˌeːnt,,2,de-agent-v1;ipa=espeak
 payment-receipt.the-bill-is-wrong,Die Rechnung stimmt wohl nicht.,"Ich glaube, die Rechnung stimmt nicht.",diː rˈɛçnʊŋ ʃtˈɪmt vˈoːl nˈɪçt,,2,de-agent-v1;ipa=espeak
 payment-receipt.i-already-paid,Ich habe schon bezahlt.,,ɪç hɑːbə ʃˌoːn bətsˈɑːlt,,2,de-agent-v1;ipa=espeak
 shopping.i-am-just-looking,Ich schaue nur.,,ɪç ʃˈaʊə nˈuːɾ,,2,de-agent-v1;ipa=espeak

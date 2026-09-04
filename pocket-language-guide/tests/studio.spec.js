@@ -335,7 +335,14 @@ test('changing the gloss language changes the interface language with it', async
   // A label in the same panel as the control that was just used.
   await expect(page.locator('label[for="source"]')).toHaveText('Übersetzungssprache');
   // The pair, which named both languages in English whatever the interface said.
-  await expect(page.locator('#pair')).toHaveText('Japanisch nach Deutsch');
+  //
+  // The isolates are stripped rather than expected, because they are not content.
+  // `t()` wraps a letter-bearing insert in FSI/PDI so a language name written in
+  // another script cannot drag the sentence's punctuation around it -- which is
+  // exactly what these two inserts are -- and the marks are invisible. Asserting on
+  // them would tie this test to a bidi decision it is not about.
+  await expect.poll(async () => (await page.locator('#pair').textContent() ?? '')
+    .replace(/[\u2068\u2069]/g, '')).toBe('Japanisch nach Deutsch');
   // And the column toggles, which name the two languages themselves.
   await expect(page.getByRole('checkbox', { name: 'Japanisch', exact: true })).toBeVisible();
   await expect(page.getByRole('checkbox', { name: 'Deutsch', exact: true })).toBeVisible();

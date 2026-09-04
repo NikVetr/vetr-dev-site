@@ -20,7 +20,9 @@
 // other reader there is no labelled set, so the obligation is different and the
 // script says so rather than printing a meaningless zero.
 import { readFile, readdir, writeFile } from 'node:fs/promises';
-import { loadCorpus, loadLanguage, loadRespellOverrides, loadRespellRules } from '../core/pack.js';
+import {
+  fillLanguageSlots, loadCorpus, loadLanguage, loadRespellOverrides, loadRespellRules,
+} from '../core/pack.js';
 import { createRespeller, phonemesOf } from '../core/respell.js';
 
 const loadText = (/** @type {string} */ rel) => readFile(rel, 'utf8');
@@ -48,7 +50,17 @@ const tables = (await readdir('data/respell/rules'))
   .map((f) => f.replace(/\.json$/, '').split('__'))
   .map(([src, acc]) => ({ source: src, accent: acc }));
 
-/** Rows the reader can actually judge: a filled `ipa` cell, in row order. */
+/**
+ * Rows the reader can actually judge: a filled `ipa` cell, in row order.
+ *
+ * The slots are filled first, exactly as `core/sheet.js` fills them, because this is
+ * meant to measure what prints. Without it four rows a language carry a literal
+ * `{target}` into the respeller -- and unlike `{}`, every letter of it is legal IPA,
+ * so no rule declines to match and no `--gaps` entry appears: the Thai table
+ * transcribed it as `{ทา-เกต}` and the Arabic one as `{تَرْgِتْ}`, quietly, on every
+ * table author's screen. The sheet was always right; the harness was not looking at
+ * the same string the sheet does.
+ */
 async function rowsFor(/** @type {{source:string, accent:string, rules:any}} */ table,
   /** @type {string} */ target) {
   const [rows, curated] = await Promise.all([
@@ -56,6 +68,9 @@ async function rowsFor(/** @type {{source:string, accent:string, rules:any}} */ 
     loadRespellOverrides(loadText, target, table.source, table.accent)
       .catch(() => /** @type {Record<string,string>} */ ({})),
   ]);
+  fillLanguageSlots(rows, {
+    locale: target, target, source: table.source, names: corpus.languageNames[target],
+  });
   const ipa = Object.entries(rows)
     .map(([id, row]) => ({ id, text: row.text ?? '', ipa: (row.ipa ?? '').trim() }))
     .filter((r) => r.ipa);
