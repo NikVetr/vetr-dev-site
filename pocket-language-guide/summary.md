@@ -24,16 +24,19 @@ everything tiny, which nobody wants. So it moves off the anchor only for a reaso
 - it takes a pair while the type would otherwise sit near its floor.
 
 The comfort threshold is set below the Japanese reference sheet's own 0.478, which
-is a deliberately tight layout that should not be second-guessed. On 7×5in, 167 of
-the 272 pairs the seventeenth language shipped settle on eight faces and 105 on ten;
-none now fits six. Greek, the eighteenth, is the second-longest language in the set
-after Russian and takes ten against every source. The
+is a deliberately tight layout that should not be second-guessed. On 7×5in, 205 of
+the 342 shipped pairs settle on eight faces and 136 on ten; none now fits six, and
+exactly one needs twelve — `el ← hi`, where Devanagari respellings force the column
+above the theme's size and the solver reports it rather than clipping. Greek is the
+second-longest language in the set after Russian and takes ten against most sources;
+Hungarian is ordinary, eight against a Latin or Cyrillic source and ten against the
+scripts that need vertical room. The
 tens are the scripts that need the most vertical room: **every** Japanese, Arabic and
 Devanagari sheet takes ten, Russian eleven of sixteen and Thai nine, while no English
 or Vietnamese sheet needs one. The reference sheets reached four by hand against a
 bank of 413 concepts. It is 776 now; the divider defaults to one position per section
 rather than one per row, which costs type size; and — the largest of the three — the
-respelling column has content on all 306 pairs rather than 16, so there is a third
+respelling column has content on all 342 pairs rather than 16, so there is a third
 line of type on every entry that used to have two. Eight is the same answer as four
 was, at the new size, the new default and the new column. A credit-card sheet takes
 sixteen rather than printing at minimum size.
@@ -119,14 +122,23 @@ A respelling is written *for a reader* — `nee HOW` is Chinese for someone who 
 English and nothing else — so curating them by hand is O(N²), and for a long time
 only the 16 pairs glossed into English had one while the other 256 printed an empty
 column. The way out is two O(N) inputs instead: the `ipa` column of the language
-being learned, and one rule table per language doing the reading. **All eighteen
-reader tables now exist and every one of the 306 pairs prints a respelling.**
+being learned, and one rule table per language doing the reading. **All nineteen
+reader tables now exist and every one of the 342 pairs prints a respelling.**
 `node scripts/respell_check.mjs <reader> --gaps` counts IPA symbols that reach the
-page because no rule matched, and every reader is at zero. Sixteen of the tables
+page because no rule matched, and every reader is at zero. Seventeen of the tables
 derive from a published pronunciation key for that language (`content/RESPELL-SYSTEMS.md`
 records which, and what had to be adapted where no key existed); the English one was
 read off the 12,001 curated respellings already in the corpus, which is a better
 source, because it records what a person actually chose for each sound in context.
+
+**The nineteenth reader has the best key of the nineteen, and its author says he built
+it the way we do.** Magay's *Idegen nevek kiejtési szótára* (Akadémiai Kiadó, 1974)
+transcribes 40,000 foreign names into Hungarian letters, and its introduction records
+that the manuscript carried **IPA for every entry, used as the pivot into Hungarian**,
+suppressed in print for a general readership with a scholarly IPA edition promised and
+never published. `respell(ipa, 'hu')` is that edition. The Academy prints the column
+itself — AkH. 12 rule 13 is `Greenwich [grinics], joule [dzsúl]` — and Kontra's 1975
+*Magyar Nyelvőr* article supplies an English chart already keyed on IPA.
 
 Generated respellings sit *under* the curated ones, never over them: the sixteen
 curated sheets are not mutually consistent — Mandarin's /ɕ/ is `sh` 103 times and
@@ -159,7 +171,7 @@ look:
   The phrase means "do you speak *the traveller's* language", so a Spanish traveller
   in France was holding up a card asking whether the waiter spoke English.
 - **The gloss named the reader's own language.** `Je ne parle pas français` glossed
-  as `Ich spreche kein Deutsch` — false, on 153 of the 306 pairs, rather than merely
+  as `Ich spreche kein Deutsch` — false, on 153 of the 306 pairs then shipped, rather than merely
   vague.
 
 `{target}` and `{source}` fill from the pair, under one rule, and the narrower
@@ -439,7 +451,7 @@ names the paper colour, so diluting it would make the picker lie about itself; t
 first version mixed it toward paper and the default came out at (254,254,254), a
 control that appeared to do nothing. `flag` reads the colours off the flags of the
 countries that speak the target language, which is a fact about the language rather
-than a decoration: `regions.csv` carries them for the 29 countries the eighteen
+than a decoration: `regions.csv` carries them for the 30 countries the nineteen
 languages name. `sections` reads them off the sheet's own section colours and places
 them where those sections landed, weighted by inverse-square distance, so the wash
 under `emergency` is red because emergency is there — and it is computed per face,
@@ -657,7 +669,7 @@ in the distribution that still fills a real card:
 | Everything | 0 | 776 | 6–8 faces of 7×5 |
 | Broad | 0.74 | 306 | four faces — what both hand-built originals settled on |
 | Core | 0.82 | 147 | one sheet |
-| Essential | 0.95 | 11 | **one phone face at full nominal type, in all eighteen languages** |
+| Essential | 0.95 | 11 | **one phone face at full nominal type, in all nineteen languages** |
 
 There is a cliff above the top step, which is why it is where it is: the next rung
 down is 35 phrases under *twelve* headings, and it overflows one phone face even at
@@ -737,8 +749,8 @@ normalised English gloss, against the exact section first and then its group,
 because two sheets can file the same phrase under different panels ("Can I charge
 my phone?" is hotel basics in one and hotel requests in the other).
 
-The bank is now **776 concepts across 57 sections in eighteen languages**, which is
-**306 ordered pairs** — every one of which renders, and two of which anyone wrote a
+The bank is now **780 concepts across 57 sections in nineteen languages**, which is
+**342 ordered pairs** — every one of which renders, and two of which anyone wrote a
 sheet for. That ratio is the whole argument for joining on `concept_id` instead of
 storing pairs: the sixteenth language added 745 rows and 30 new pairs.
 
@@ -770,9 +782,18 @@ term (tree nuts are `frutos de casca rija`, and peanut is legally separate);
 Turkish `fıstık` alone means pistachio, so peanut has to be `yer fıstığı`; Russian
 `Регидрон` is the brand a pharmacist answers to where the descriptive phrase gets a
 blank look; and Vietnamese fish sauce is in enough dishes that "does this contain
-fish stock" is better asked as `Món này có nước mắm không ạ?`.
+fish stock" is better asked as `Món này có nước mắm không ạ?`. Hungarian repeats the
+Turkish trap exactly -- **`mogyoró` on its own is hazelnut**, so peanut has to be
+`földimogyoró`, and the EU labelling term for tree nuts is a third word again
+(`csonthéjas`) -- and adds one of its own: **`zsír`, lard, is a default cooking fat in
+Hungary**, so "no pork" has to name it beside the ham and the sausage
+(`Sertéshús, sonka, kolbász, szalonna és zsír nélkül`) and the pork-stock question has
+to ask about the fat rather than the broth. `tenger gyümölcsei` excludes fish the way
+`Meeresfrüchte` does, so "no seafood" enumerates. And the duty-pharmacy rota has a name
+a pharmacist answers to -- `ügyeletes gyógyszertár` -- where "all-night pharmacy" gets
+a blank look, which is the `pharmacie de garde` case one country further east.
 
-Third, three of the four newest packs had to answer a question their language
+Third, four of the five newest packs had to answer a question their language
 forces on any phrasebook, and the answer shapes hundreds of rows rather than one.
 Portuguese chose the European variety as primary and carries Brazilian forms in
 `text_alt`, because `banheiro` means *lifeguard* in Portugal while `casa de banho`
@@ -785,6 +806,22 @@ istiyorum` wrong for many fills. Russian could not do the same everywhere and sa
 so: twenty-one slot rows are listed in the pack's own notes as correct for some
 fills and not others, on the grounds that a Russian hearing *«Я из Америка»*
 understands it, whereas a stilted case-proof frame would read as broken.
+
+Hungarian is the hardest case of that kind the project has met, and it could not take
+Russian's way out. It is agglutinative with **vowel-harmonic** suffixes, so `-ul/-ül`
+(speaking a language), `-ban/-ben` (in a place), `-ra/-re` and `-hoz/-hez/-höz` all
+choose their vowel from the *insert's* last one -- and the definite article `a`/`az`
+chooses from its first sound, so even `Hol van a {}?` is wrong half the time. A
+placeholder is a plain string substitution and knows neither. So **all 44 slot rows
+were restructured**, not sixteen: a demonstrative or a head noun of ours carries the
+grammar and the insert follows a colon in the bare nominative — `Nem eszem a
+következőt: {}`, `Allergiás vagyok a következőre: {}`, `Hol van ez: {}?`,
+`Fizethetek ezzel a pénznemmel: {}?`. Six rows needed nothing at all, because a
+Hungarian numeral leaves the noun after it uninflected (`{} éjszakára`, `{} napig`,
+`{} éves`, `{} nappal ezelőtt`). And all six language-slot cells take one noun,
+`nyelven`: `Nem beszélek {target} nyelven`, `Beszél {source} nyelven?` — which works
+because ICU hands Hungarian a bare lowercase adjective (`angol`, `hindi`,
+`szuahéli`) and every one of them stands in front of `nyelv`.
 
 ### One word, two concepts
 
@@ -904,7 +941,7 @@ the reader's own Emergency heading. It now takes its frame and its ten service w
 from `data/registry/emergency-labels/<source>.csv` -- registry rather than
 `data/i18n/`, because `core/` renders the sheet and must not reach into the
 interface's catalogues -- and the country name from `Intl.DisplayNames`, checked
-against all 52 regions in all eighteen languages.
+against all 53 regions in all nineteen languages.
 
 **Every language refused the preposition.** `In {region}` was wrong for three of the
 49 English names ("In United States"); Portuguese counted 41 of 49 taking an article
@@ -916,10 +953,28 @@ apposition. Turkish took `{region} için:`, a postposition governing the bare
 nominative -- the same trick its pack used on sixteen slot rows. Hindi took
 `{region} में:`, which works because Hindi does not oblique-mark proper nouns.
 
-Two validator rules keep the source side honest: every `note` needs text in every
+Three validator rules keep the source side honest: every `note` needs text in every
 ready language except the ones it is scoped to (a language is never its own sheet's
 source), and every service word in `regions.csv` needs a row in every language's
-label file. All eighteen languages now pass both.
+label file. All nineteen languages pass both.
+
+**The third is new with the nineteenth and nothing passes it yet.** A concept with an
+`applies_to` renders only on the targets it names -- but on those pairs the *gloss*
+still comes from whichever of the other eighteen languages is the source, and
+`buildBlocks` drops a row with no source row at all. Nothing looked: coverage is
+scored against a language as a sheet's *target*, and a concept scoped away from it is
+not in its applicable set, so a missing gloss was invisible from both directions.
+**28 scoped concepts are short their reader-side rows, and the arithmetic is worse
+than it sounds.** `numbers-money.baht` is scoped to `th` and has an English gloss and
+no other, so it prints on `th <- en` and on **1 of its 18 pairs**; the same is true of
+the won, the lira, the dong, the ruble, the rupiah, the shilling and the euro, all
+added in one batch that filled the target side and not the source. The two malaria
+rows -- the ones the Swahili translator called the biggest gap in that pack -- print on
+1 of 12. The Chinese and Japanese concepts of the same shape have their rows, at 6 of
+18, which is what makes this an omission rather than a design. `Intl.DisplayNames`
+with `type: 'currency'` closes fourteen of the twenty-eight mechanically, which is how
+the forint and the rupee were filled; the rest -- measure words, counters, the maglev,
+`please-write-it-in-roman-letters` -- want a translator.
 
 ### Tofu, and why a range table cannot catch it
 
@@ -974,17 +1029,44 @@ Four fixes came out of it, none of them in the data:
 
 Named so nobody has to rediscover the gap:
 
-- **Corpus beyond the eighteen shipped languages.** Every language in the registry
+- **Corpus beyond the nineteen shipped languages.** Every language in the registry
   now has a pack, so there is nothing in the "help translate" state -- which the
   gallery and the studio still have to handle, and which their specs now reach by
   serving a coverage report with one language hollowed out rather than by naming a
-  real one. Adding the nineteenth means a registry row, a `scripts.csv` entry if its
+  real one. Adding the twentieth means a registry row, a `scripts.csv` entry if its
   script is new, a font stack if the Latin faces do not cover it, and
   `python3 scripts/make_todo.py <code>`, then the two task templates in
   `content/PROMPTS/`: `translate-section.md` for the rows, and
   `reader-side-notes.md` for the notes and the emergency labels -- the second of
-  which carries what all eighteen languages learned about the `_frame`, so nobody
+  which carries what all nineteen languages learned about the `_frame`, so nobody
   rediscovers that a preposition cannot work.
+
+  **Two build steps are not optional and neither is checked by `npm run validate`.**
+  A new language is a new *target* for the other eighteen reader tables, so their
+  respelling output grows characters nothing has shipped a glyph for -- and the
+  nineteenth proved it: the Korean table spells Hungarian's front rounded vowels into
+  **37 Hangul syllables `charset.json` had never seen, five of which are outside the
+  KS X 1001 set the Korean faces carry** (`겍 퇵 퇼 푈 퓍`, over eleven rows including
+  `dietary-needs.no-peanuts`). In the browser a system font hides it; in the PDF it is
+  an empty box on a peanut-allergy card. So `npm run respell:charset` and then
+  `python3 scripts/subset_fonts.py` have to run after any new language, in that order,
+  and `subset_fonts.py`'s own `ALL_LANGS` has to name it first.
+
+  **And the interpolation hazard is a per-language design decision, not a mechanism.**
+  Hungarian is the worst case the project has met: it is agglutinative with
+  vowel-harmonic suffixes, so `-ul/-ül` (in a language), `-ban/-ben` (in a place) and
+  `-ra/-re` all choose by the *insert's* last vowel, and the definite article `a`/`az`
+  chooses by its first sound. A placeholder is a plain string substitution and knows
+  neither. The escape is the one Turkish and Greek found and Hungarian needs
+  everywhere: **put a head noun of your own in front of the insert so the grammar
+  attaches to your word.** All six language-slot cells take `{target} nyelven` or
+  `{source} nyelven` -- one noun, six cells -- and 44 of the corpus's slot rows were
+  restructured into a demonstrative in the required case plus a colon: `Nem eszem a
+  következőt: {}`, `Allergiás vagyok a következőre: {}`, `Hol van ez: {}?`. Six more
+  needed nothing at all, because a Hungarian numeral does not inflect the noun after
+  it (`{} éjszakára`, `{} napig`, `{} éves`). Hungarian also joins the validator's
+  `LOWERCASE_LANGUAGE_NAMES`: `magyar`, `angol` and `német` are lowercase adjectives,
+  as are the days and the months.
 
   Four things the eighteenth found that the templates do not yet say. **`make_todo.py`
   omits exactly the rows a new language needs most of the reader-side prompt**: it

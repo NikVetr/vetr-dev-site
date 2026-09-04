@@ -11,6 +11,6 @@ utility-templates.how-much-is,Quanto costa {}?,,kwˈanto kˈɔsta {},,2,it-agent
 utility-templates.is-this,Questo è {}?,,kwˈesto ˌɛ {},,2,it-agent-v1;ipa=espeak
 utility-templates.please,"{}, per favore",,"{}, per favˈore",,2,it-agent-v1;ipa=espeak
 utility-templates.i-am-looking-for,Cerco {},,tʃˈerko {},,2,it-agent-v1;ipa=espeak
-utility-templates.do-you-accept,Accettate {}?,,atʃːetːˈate {},,2,it-agent-v1;ipa=espeak
+utility-templates.do-you-accept,Accettate {}?,,atʃtʃettˈate {},,2,it-agent-v1;ipa=espeak
 utility-templates.i-cannot-find,Non trovo {},,non trˈɔvo {},,2,it-agent-v1;ipa=espeak
 utility-templates.there-is-a-problem-with,C'è un problema con {},,tʃe ʊn problˈɛma kˈon {},,2,it-agent-v1;ipa=espeak

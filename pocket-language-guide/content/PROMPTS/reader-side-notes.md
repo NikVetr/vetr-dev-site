@@ -76,7 +76,18 @@ Turkish `{region} için:`, a **postposition governing the bare nominative**, and
 `{region} में:`, which works because Hindi does not oblique-mark proper nouns.
 Vietnamese `Tại {region}:` needs no agreement either. Spanish kept `En {region}:`
 deliberately, on the grounds that Spanish label register drops the articles English
-cannot. **Say what you chose and why.**
+cannot. Hungarian took bare apposition and had two reasons rather than one: the
+inessive `-ban/-ben` picks its vowel from the region name's *last* vowel and the
+definite article `a`/`az` from its *first sound*, so `a Magyarországon` and `az
+Egyesült Államokban` cannot come from one frame. **Say what you chose and why.**
+
+**If your language inflects, the escape is a head noun of your own, not a cleverer
+preposition.** Put a word you control immediately before the insert and let the
+grammar attach to that: Thai's frame supplies `ภาษา`, Indonesian's `bahasa`, and the
+Hungarian pack uses `nyelven` for all six language-slot cells (`Nem beszélek {target}
+nyelven`) and a demonstrative in the required case plus a colon for its 44 blank-slot
+rows (`Allergiás vagyok a következőre: {}`). It reads a little more formally than a
+suffixed form would, and it is right for every fill instead of some.
 
 One trap: ICU's name for Côte d'Ivoire contains U+2019, so any punctuation you attach
 to `{region}` lands next to an apostrophe already in the string.

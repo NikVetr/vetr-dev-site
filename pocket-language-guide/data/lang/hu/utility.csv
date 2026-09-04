@@ -1,0 +1,16 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,Ide szeretnék menni: {},,ˈidɛ sˈɛrɛtneːk mˈɛnni {},,2,hu-agent-v1;ipa=espeak
+utility-templates.please-give-me,"Kérem, adja ide ezt: {}",,"kˈeːrɛm, ˈɑɟɟɑ ˈidɛ ˈɛst {}",,2,hu-agent-v1;ipa=espeak
+utility-templates.may-i,Szabad ezt: {}?,,sˈɑbɑd ˈɛst {},,2,hu-agent-v1;ipa=espeak
+utility-templates.please-do-not-add,"Kérem, ezt ne tegye bele: {}",,"kˈeːrɛm, ˈɛst nˈɛ tˈɛɟɛ bˈɛlɛ {}",,2,hu-agent-v1;ipa=espeak
+utility-templates.do-you-have,Van ilyen: {}?,,vˈɑn ˈijɛn {},,2,hu-agent-v1;ipa=espeak
+utility-templates.please-write-the-number,"Kérem, írja le a számot",,"kˈeːrɛm, ˈiːrjɑ lˈɛ ˈɑ sˈaːmot",,2,hu-agent-v1;ipa=espeak
+utility-templates.i-need,Erre van szükségem: {},,ˈɛrrɛ vˈɑn sˈykʃeːɡɛm {},,2,hu-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,Van a közelben ilyen: {}?,,vˈɑn ˈɑ kˈøzɛlbɛn ˈijɛn {},,2,hu-agent-v1;ipa=espeak
+utility-templates.how-much-is,Mennyibe kerül ez: {}?,,mˈɛɲɲibɛ kˈɛryl ˈɛz {},,2,hu-agent-v1;ipa=espeak
+utility-templates.is-this,Ez {}?,,ˈɛz {},,2,hu-agent-v1;ipa=espeak
+utility-templates.please,"{}, kérem",,"{}, kˈeːrɛm",,2,hu-agent-v1;ipa=espeak
+utility-templates.i-am-looking-for,Ezt keresem: {},,ˈɛst kˈɛrɛʃɛm {},,2,hu-agent-v1;ipa=espeak
+utility-templates.do-you-accept,Ezt elfogadják: {}?,,ˈɛst ˈɛlfoɡɑɟɟaːk {},,2,hu-agent-v1;ipa=espeak
+utility-templates.i-cannot-find,Ezt nem találom: {},,ˈɛst nˈɛm tˈɑlaːlom {},,2,hu-agent-v1;ipa=espeak
+utility-templates.there-is-a-problem-with,Ezzel van egy probléma: {},,ˈɛzzɛl vˈɑn ˈɛɟ prˈobleːmɑ {},,2,hu-agent-v1;ipa=espeak

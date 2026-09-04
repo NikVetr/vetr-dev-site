@@ -139,7 +139,7 @@ LATIN_DONOR = {"NotoSansArabic-Regular.ttf": "NotoSans-Regular.ttf",
 
 # Which language directories feed each stack's corpus-character union.
 ALL_LANGS = ["en", "es", "fr", "de", "ko", "ar", "zh-Hans", "ja",
-             "pt", "ru", "tr", "vi", "hi", "id", "sw", "th", "it", "el"]
+             "pt", "ru", "tr", "vi", "hi", "id", "sw", "th", "it", "el", "hu"]
 STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                "latin-serif": ALL_LANGS, "latin-cond-serif": ALL_LANGS,
                "cjk-sc": ["zh-Hans"], "cjk-sc-serif": ["zh-Hans"],

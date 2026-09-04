@@ -1,0 +1,1532 @@
+{
+  "source": "hu",
+  "accent": "hu-HU",
+  "status": "ready",
+  "version": "1",
+  "derives_from": "Hungary is the one reader in this set with a published, normative, sound-keyed pronunciation key, and this table borrows two of them. (1) Magay Tamas (szerk.), *Idegen nevek kiejtesi szotara*, Akademiai Kiado, Budapest 1974 (lektorok Deme Laszlo, Fabian Pal, Orszagh Laszlo; 40,000 names from 25 Latin-script languages, in Hungarian letters), which is the inventory: /th/ -> sz and /dh/ -> d ('a magyarban megkozelitoen sem visszaadhato hangok'), /w/ -> v consonantal and u as a diphthong's weaker half (Passau pásszau, Howard háuárd, Dupuis düpüi), /ae/ -> e (Cagney kegni, Albee elbi), schwa -> e (Brennan brenen, Glossop gloszop), /3:/ -> o-umlaut (Jersey dzsorzi, Galsworthy gólzvordi), /ng/ -> ng (Bingley bingli), /x/ -> h, and the nasal vowels written with their nasal consonant (France frá(n)sz, Chopin sopé(n), Mont Blanc mo(n) bla(n)). (2) The Academy's transcription volumes AkH. 12 rule 220 delegates to -- Ligeti Lajos (foszerk.), *Keleti nevek magyar helyesirasa*, Akademiai Kiado 1981, and Hadrovics Laszlo (foszerk.), *A cirill betus szlav nyelvek neveinek magyar helyesirasa* / *Az ujgorog nevek magyar helyesirasa*, Akademiai Kiado 1985 -- which supply the non-Latin half: the Arabic emphatics and the pharyngeals dropped ('van azonban az arabban ket olyan hang, amelyet egyaltalan nem tudunk atirni'), gh -> g, q -> k, Russian palatalisation as Hungarian's own palatals (tya, gya, ny, ly), Mandarin x -> hsz (Hszian, Hszincsiang) against sh -> s (Sanghaj) and s -> sz (Szecsuan), Japanese shi -> si (Hirosima), and the retroflexes of Hindi written plain. (3) The *shape* of the feature and its typography come from AkH. 12 itself, which prints exactly this column in rule 13 -- 'angol: Greenwich [grinics], joule [dzsúl]; cseh: Dvorak [dvorzsák]; francia: Eugene [özsen]; nemet: Schafer [séfer]; olasz: Bologna [bolonya]; roman: Sighisoara [szigisoára]' -- and in rules 12, 74, 86 and 229; AkH. 11 wrote the same thing as [e.: grinics], 'ejtsd'. The reading contract is AkH. 12 rule 219: 'a bennuk szereplo betuk magyar hangertéke szerint kell olvasni'. (4) The restriction to the plain Hungarian alphabet is KNMH's own stated principle: 'Mi nem kevesekhez, de mindenkihez akarunk szolni, olyan egyszeru irasmoddal, amelynek megertesehez anyanyelvunk ismerete egymagaban elegseges... a nyelvunkbol hianyzo maganhangzok es massalhangzok helyett a hozzajuk kozel allo magyar megfeleloket valasztottuk'. (5) The syllable division is AkH. 12 rules 224-231. (6) Only conventions are taken, never text: AkH., Magay and both MTA volumes are in copyright (the volumes are freely readable on the MTA library's REAL-EOD repository, real-eod.mtak.hu, under no reuse licence), and Szjt. 1999. evi LXXVI. tv. 1. par. (6) puts an 'eljaras, mukodesi modszer' outside copyright, which is what a phoneme-to-letter correspondence is.",
+  "deviations": [
+    {
+      "rule": "Magay marks no stress at all, and says why: 'A magyar szoveg epsegenek erdekeben mondtunk le a hangsuly jeloleserol is. Rendkivul szaggatotta tenne ugyanis a folyamatos magyar beszedet a tole idegen hangsulyozas... A magyar nyelvmuveles hagyomanyos es mai allasfoglalasa szerint a magyar szovegbe kerulo idegen szavaknak es neveknek a magyaros hangsulyformat kell viselniuk.' The MTA volumes mark none either -- 'a helyes magyar kiejtesre nincs hatasa az orosz hangsulynak: az orosz neveket a magyarban elso szotagjukon hangsulyozva, magyarosan ejtjuk ki' -- and neither do AkH. rule 13's brackets or hu.wikipedia's 1,356 '(ejtsd: ...)' notes.",
+      "why": "This is the sharpest departure in the table and it is a departure about the *use*, not about the sound. Every one of those four sources is governing a foreign name embedded in a Hungarian sentence, where imposing foreign stress on one word makes the surrounding Hungarian 'szaggatott'. This column is a whole foreign phrase said to a foreign speaker, with no Hungarian around it, and the target's own stress is the difference between being understood and not. `policy.stress` is one field, so a reviewer who reads it the other way can set it to `none` and the Hungarian sources will be satisfied. Capitals rather than the acute because in Hungarian the acute *is* the length mark: `a` is a rounded [o-ish] and `á` an unrounded [a:], two different vowels rather than one vowel twice, so an acute for stress would print a different word."
+    },
+    {
+      "rule": "AkH. 12 rule 214 forbids respelling a Latin-script name in place of its own spelling; AkH. 11's wording was blunter -- 'a nevnek fonetikus vagy eppen eltorzitott atirasa teljessegel helytelen'.",
+      "why": "That rule governs how to *write* a name. Rule 13 of the same book prints a bracketed pronunciation beside the correctly-spelled name, which is what this column is: the target's own spelling is in the column beside it. The prohibition and the sanction are compatible and both are honoured."
+    },
+    {
+      "rule": "Magay's notation adds seven symbols to the Hungarian alphabet: a with a dot for short unrounded [a], a and e with macrons for the two marginal long vowels, u and u-umlaut with an inverted breve for a diphthong's weaker half, and a *boldface* h for [x] against a plain h for [h].",
+      "why": "None of them is taken, and the reason is the card rather than the notation: a respelling here sets at 5.22pt italic muted, which is the worst home in the sheet for a mark, and RESPELL-SYSTEMS.md's rule is that a legend longer than one line means the notation is wrong. Seven symbols is seven lines. KNMH's 'szukebb magyar abece' principle is the warrant for dropping them, and it is the *other* Academy answer to the same question rather than a convenience: short unrounded [a] becomes plain `a` exactly as the Greek and Hebrew chapters prescribe ('a rovid gorog illabialis a hangot a magyarban rovid labialis a-val irjuk at'), and the boldface h is replaced by a device Magay could not use in a single typeface -- word-final /x/ takes the digraph `ch`, per AkH. 228."
+    },
+    {
+      "rule": "Magay's schwa, English non-prevocalic /r/ and nasalisation are parenthesised: brenen becomes bren(e)n, Butler batle(r), France fra(n)sz. The parentheses mean 'imperfectly formed', not 'optional'.",
+      "why": "Dropped, on Magay's own instruction to exactly our reader: 'Aki a kerdeses nyelvet nem ismeri, vagy aki magyar kornyezetben akarja kimondani a nevet, a zarojelbe tett betut vagy betuket ejtse ugy, mintha a zarojel ott sem lenne.' Reading them as absent is what the key tells a non-specialist to do, so removing them is following the key rather than overruling it."
+    },
+    {
+      "rule": "KNMH's Modern Greek chapter writes theta as `th` and delta as `d`, 'mivel jelentestani kulonbseg van tobb hasonlo hangzasu szo th-s es t-s formaja kozott'.",
+      "why": "That is a reversibility argument about a permanent spelling, and it is the one place the Hungarian tradition disagrees with itself: the Arabic chapter of the same volume writes thaa as `sz` and Magay writes English /th/ as `sz` too. `sz` is taken everywhere, because Hungarian `th` is not a digraph -- it reads as two segments [t]+[h], which is further from a voiceless dental fricative than [s] is. The cost is that /th/ and /s/ merge for a Greek target, which is the mirror of the merger Greek's own table takes on /sh/."
+    },
+    {
+      "rule": "KNMH's Chinese chart maps both pinyin series to the voiceless letters -- Beijing is Peking, Mao Zedong is Mao Ce-tung -- so `b` and `p` both come out `p`.",
+      "why": "Phonetically that is defensible, since Hungarian /p t k/ are unaspirated and so are pinyin b/d/g. But it merges two phonemes, and Hungarian cannot aspirate to tell them apart again. The `if_inventory` split every other table in this set uses gives two producible Hungarian sounds for two phonemes instead: a language that contrasts /p/ with /ph/ has no voiced stop for `b` to collide with, so the unaspirated series takes `b d g` and the aspirated `p t k`. A slight voicing error beats a merger."
+    },
+    {
+      "rule": "AkH. 12 rule 226 f) writes a split doubled multigraph out in full on both sides of the break -- osz-sze, meny-nyi, pogy-gyasz.",
+      "why": "Honoured for free rather than overruled, and worth recording because it falls out of the engine: a geminate the corpus writes as two phonemes is a coda plus an onset, so `s`+`s` spells `sz-sz` at the syllable boundary exactly as the rule requires. Only a geminate the corpus writes as one unit with a length mark (Italian `kː`, Arabic `tː`) has to be doubled inside one syllable, and there the hyphen lands before the pair (`a-kkor` rather than `ak-kor`), which is the sound right and the division wrong."
+    },
+    {
+      "rule": "Magay writes geminates freely -- Picasso is pikásszo, Coulommiers kulommijé -- even though Hungarian reads a doubled consonant as long.",
+      "why": "Followed for a real length contrast and avoided otherwise. Nothing in this table doubles a letter except the geminate and Korean-tense rules, so an incidental `ll` or `tt` can only arise from two phonemes that really are two."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "/w/ (Mandarin, Swahili, Vietnamese, English, Korean, Japanese, Thai, Arabic)",
+      "out": "v as a consonant, u as a diphthong's weaker half",
+      "why": "Hungarian has no /w/. `v` is Magay's answer and KNMH's, and it is firmly [v] rather than [w] -- the single largest loss in this table. As the weaker half of a diphthong `u` is both closer and native, because Hungarian `autó` and `augusztus` already carry exactly that glide."
+    },
+    {
+      "sounds": "/th/ /dh/ (English think and this, Arabic thaa and dhaal, Greek theta and delta, Swahili)",
+      "out": "sz and d",
+      "why": "Magay files both under 'a magyarban megkozelitoen sem visszaadhato hangok' -- sounds Hungarian cannot even approximate -- and then gives these two letters anyway. /th/ therefore merges with /s/ and /dh/ with /d/."
+    },
+    {
+      "sounds": "/ng/ (Mandarin, Vietnamese, Portuguese, Thai, Korean, German, English, Spanish, Italian, Greek)",
+      "out": "ng",
+      "why": "Hungarian has [ng] as an allophone of /n/ before /k/ and /g/ and no letter of its own for it, so `ng` is where the sound already lives -- and it buys an audible [g] that is not in the target. Before a velar the reader supplies [ng] for a bare `n` anyway, but nothing here relies on it."
+    },
+    {
+      "sounds": "aspiration (Mandarin, Korean, Hindi, Thai)",
+      "out": "the voiceless letter for the aspirated series, the voiced letter for the unaspirated one",
+      "why": "Hungarian has no aspirated stops and no way to write one: `ph` and `kh` are not Hungarian letter sequences and would read as two segments. So the contrast survives and the aspiration does not. Hindi's breathy-voiced series (bh, dh, gh) has nowhere to go at all and folds into the plain one."
+    },
+    {
+      "sounds": "Korean's tense series (pp, tt, kk, ss, jj)",
+      "out": "a doubled letter",
+      "why": "There is no third stop series in Hungarian. A doubled letter is the reader's own length mark, and a longer, tenser closure is close to what a tense consonant is -- but a Hungarian reader will produce length rather than tension, and word-initially Hungarian has no geminate to produce at all."
+    },
+    {
+      "sounds": "the glottal stop, ain, the Arabic emphatics, Vietnamese glottalisation",
+      "out": "dropped",
+      "why": "KNMH says it outright about the first two -- 'van azonban az arabban ket olyan hang, amelyet egyaltalan nem tudunk atirni a magyarban hasznalt irasjelek segitsegevel' -- and the emphatics follow the same chapter, which writes them with the plain letters."
+    },
+    {
+      "sounds": "Russian palatalisation",
+      "out": "Hungarian's own palatals: ty, gy, ny, ly",
+      "why": "Not an approximation at all, and worth listing for the opposite reason. Hungarian is the only reader in this set whose orthography has palatal stops, so KNMH's Cyrillic chart maps them one to one. What is lost is the palatalisation of the labials and of /r/, which Hungarian cannot write."
+    },
+    {
+      "sounds": "the marginal vowels: short unrounded /a/, /ae/, schwa, /3:/",
+      "out": "a, e, e, o-umlaut",
+      "why": "Hungarian `a` is a rounded vowel and `á` its unrounded long partner, so there is no letter for a short unrounded [a] and Spanish *casa* comes out with the wrong vowel quality. Magay solves it with a dotted a; the MTA volumes accept the mismatch and write plain `a`, which is the answer taken here. /ae/ and schwa both land on `e`, so English *bad* and *about* share a vowel."
+    },
+    {
+      "sounds": "Mandarin's /x/ (pinyin x) against /sh/ and /s/",
+      "out": "hsz against s and sz",
+      "why": "Listed because it is a gain rather than a loss: `hsz` is KNMH's own spelling (Hszian, Hszincsiang) and keeps the three-way that a reader with only two sibilant letters has to merge. It costs an audible [h]."
+    },
+    {
+      "sounds": "word-final /x/ and /h/",
+      "out": "ch and h",
+      "why": "AkH. 74 makes a word-final `h` ambiguous three ways -- [h], [x] or nothing -- and says the choice is lexical rather than predictable (cseh, méh, düh against doh, Allah). `ch` is unambiguous for /x/, which is most of the cases; a word-final /h/ still has to take `h` and inherits the ambiguity."
+    }
+  ],
+  "policy": {
+    "syllable_separator": "-",
+    "word_separator": " ",
+    "stress": "caps",
+    "stress_min_syllables": 2,
+    "length": "none",
+    "tone": "drop",
+    "max_onset": 1,
+    "fixups": "all",
+    "locale": "hu"
+  },
+  "legend": "A NAGYBETŰS szótagot kell megnyomni.",
+  "phonemes": [
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "sz",
+      "after_out": "sz"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "s",
+      "after_out": "sz"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "z",
+      "after_out": "dzs cs zs"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "-z",
+      "after_out": "s d"
+    },
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "-sz",
+      "after_out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "-s",
+      "after_out": "z c"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒ",
+      "out": "-zs",
+      "after_out": "d"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aː",
+      "out": "á"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑː",
+      "out": "á"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐː",
+      "out": "á"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌː",
+      "out": "á"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "æː",
+      "out": "é"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "eː",
+      "out": "é"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛː",
+      "out": "é"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɤː",
+      "out": "é"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "əː",
+      "out": "é"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɜː",
+      "out": "ő"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "iː",
+      "out": "í"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɪː",
+      "out": "í"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɨː",
+      "out": "í"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oː",
+      "out": "ó"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔː",
+      "out": "ó"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɒː",
+      "out": "ó"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "uː",
+      "out": "ú"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʊː",
+      "out": "ú"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯː",
+      "out": "ú"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʉː",
+      "out": "ú"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "øː",
+      "out": "ő"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œː",
+      "out": "ő"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɵː",
+      "out": "ő"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "yː",
+      "out": "ű"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ẽː",
+      "out": "én"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ãː",
+      "out": "án"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "õː",
+      "out": "ón"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ũː",
+      "out": "ún"
+    },
+    {
+      "slot": "any",
+      "ipa": "pː",
+      "out": "pp"
+    },
+    {
+      "slot": "any",
+      "ipa": "bː",
+      "out": "bb"
+    },
+    {
+      "slot": "any",
+      "ipa": "tː",
+      "out": "tt"
+    },
+    {
+      "slot": "any",
+      "ipa": "t̪ː",
+      "out": "tt"
+    },
+    {
+      "slot": "any",
+      "ipa": "dː",
+      "out": "dd"
+    },
+    {
+      "slot": "any",
+      "ipa": "cː",
+      "out": "tty"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟː",
+      "out": "ggy"
+    },
+    {
+      "slot": "any",
+      "ipa": "kː",
+      "out": "kk"
+    },
+    {
+      "slot": "any",
+      "ipa": "qː",
+      "out": "kk"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡː",
+      "out": "gg"
+    },
+    {
+      "slot": "any",
+      "ipa": "fː",
+      "out": "ff"
+    },
+    {
+      "slot": "any",
+      "ipa": "vː",
+      "out": "vv"
+    },
+    {
+      "slot": "any",
+      "ipa": "sː",
+      "out": "ssz"
+    },
+    {
+      "slot": "any",
+      "ipa": "s̪ː",
+      "out": "ssz"
+    },
+    {
+      "slot": "any",
+      "ipa": "zː",
+      "out": "zz"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃː",
+      "out": "ss"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒː",
+      "out": "zzs"
+    },
+    {
+      "slot": "any",
+      "ipa": "xː",
+      "out": "hh"
+    },
+    {
+      "slot": "any",
+      "ipa": "hː",
+      "out": "hh"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsː",
+      "out": "cc"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃː",
+      "out": "ccs"
+    },
+    {
+      "slot": "any",
+      "ipa": "dzː",
+      "out": "ddz"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒː",
+      "out": "ddzs"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕː",
+      "out": "ccs"
+    },
+    {
+      "slot": "any",
+      "ipa": "mː",
+      "out": "mm"
+    },
+    {
+      "slot": "any",
+      "ipa": "nː",
+      "out": "nn"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲː",
+      "out": "nny"
+    },
+    {
+      "slot": "any",
+      "ipa": "lː",
+      "out": "ll"
+    },
+    {
+      "slot": "any",
+      "ipa": "rː",
+      "out": "rr"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾː",
+      "out": "rr"
+    },
+    {
+      "slot": "any",
+      "ipa": "jː",
+      "out": "jj"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰː",
+      "out": "tt"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʰː",
+      "out": "dd"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰː",
+      "out": "kk"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "b",
+      "if_inventory": "pʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʰ",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "d",
+      "if_inventory": "tʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "g",
+      "if_inventory": "kʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰ",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "gy",
+      "if_inventory": "cʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "cʰ",
+      "out": "ty"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "b",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "t̪",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʲ",
+      "out": "ty"
+    },
+    {
+      "slot": "any",
+      "ipa": "d",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɗ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "dˤ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʲ",
+      "out": "gy"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "ty"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "gy"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟʰ",
+      "out": "gy"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "q",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡʰ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʰ",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "pf",
+      "out": "pf"
+    },
+    {
+      "slot": "any",
+      "ipa": "p͈",
+      "out": "pp"
+    },
+    {
+      "slot": "any",
+      "ipa": "t͈",
+      "out": "tt"
+    },
+    {
+      "slot": "any",
+      "ipa": "k͈",
+      "out": "kk"
+    },
+    {
+      "slot": "any",
+      "ipa": "s͈",
+      "out": "ssz"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ͈",
+      "out": "ccs"
+    },
+    {
+      "slot": "any",
+      "ipa": "f",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɸ",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "v",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʋ",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰ",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "sz"
+    },
+    {
+      "slot": "any",
+      "ipa": "s̪",
+      "out": "sz"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʂ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒ",
+      "out": "zs"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʐ",
+      "out": "zs"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʑ",
+      "out": "zs"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "hsz",
+      "if_inventory": "ʈʂ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "θ",
+      "out": "sz"
+    },
+    {
+      "slot": "any",
+      "ipa": "ð",
+      "out": "d"
+    },
+    {
+      "slot": "coda",
+      "ipa": "x",
+      "out": "ch",
+      "when": [
+        "word_final"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "h"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ç",
+      "out": "ch",
+      "when": [
+        "word_final"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɣ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ħ",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "h",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʕ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˀ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "dz",
+      "if_inventory": "tsʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts̪",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "dz",
+      "out": "dz"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "dzs",
+      "if_inventory": "ʈʂʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂʰ",
+      "out": "cs"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "cs"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "dzs",
+      "if_inventory": "tɕʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "cs"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "cs"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "cs"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃʲ",
+      "out": "cs"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒ",
+      "out": "dzs"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʑ",
+      "out": "dzs"
+    },
+    {
+      "slot": "any",
+      "ipa": "m",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "m̩",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "n",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "n̩",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɳ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɴ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "nʲ",
+      "out": "ny"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "ny"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "ng"
+    },
+    {
+      "slot": "any",
+      "ipa": "l",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɫ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "lʲ",
+      "out": "ly"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭʲ",
+      "out": "ly"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "ly"
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɹ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽʰ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɻ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈr",
+      "out": "tr"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "j"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "w",
+      "out": "u",
+      "if_nucleus_head": "w",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "w",
+      "out": "v",
+      "if_nucleus_head": "w"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "u"
+    },
+    {
+      "slot": "onset",
+      "ipa": "w",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɥ",
+      "out": "ü"
+    },
+    {
+      "slot": "onset",
+      "ipa": "pʲ",
+      "out": "pj",
+      "if_nucleus_head": "a á o ó u ú ɑ ʌ ɐ ə ɵ ʉ ã ɑ̃ õ ɔ ɔ̃ ũ ʊ ɯ"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʲ",
+      "out": "p"
+    },
+    {
+      "slot": "onset",
+      "ipa": "bʲ",
+      "out": "bj",
+      "if_nucleus_head": "a á o ó u ú ɑ ʌ ɐ ə ɵ ʉ ã ɑ̃ õ ɔ ɔ̃ ũ ʊ ɯ"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʲ",
+      "out": "b"
+    },
+    {
+      "slot": "onset",
+      "ipa": "mʲ",
+      "out": "mj",
+      "if_nucleus_head": "a á o ó u ú ɑ ʌ ɐ ə ɵ ʉ ã ɑ̃ õ ɔ ɔ̃ ũ ʊ ɯ"
+    },
+    {
+      "slot": "any",
+      "ipa": "mʲ",
+      "out": "m"
+    },
+    {
+      "slot": "onset",
+      "ipa": "vʲ",
+      "out": "vj",
+      "if_nucleus_head": "a á o ó u ú ɑ ʌ ɐ ə ɵ ʉ ã ɑ̃ õ ɔ ɔ̃ ũ ʊ ɯ"
+    },
+    {
+      "slot": "any",
+      "ipa": "vʲ",
+      "out": "v"
+    },
+    {
+      "slot": "onset",
+      "ipa": "fʲ",
+      "out": "fj",
+      "if_nucleus_head": "a á o ó u ú ɑ ʌ ɐ ə ɵ ʉ ã ɑ̃ õ ɔ ɔ̃ ũ ʊ ɯ"
+    },
+    {
+      "slot": "any",
+      "ipa": "fʲ",
+      "out": "f"
+    },
+    {
+      "slot": "onset",
+      "ipa": "sʲ",
+      "out": "szj",
+      "if_nucleus_head": "a á o ó u ú ɑ ʌ ɐ ə ɵ ʉ ã ɑ̃ õ ɔ ɔ̃ ũ ʊ ɯ"
+    },
+    {
+      "slot": "any",
+      "ipa": "sʲ",
+      "out": "sz"
+    },
+    {
+      "slot": "onset",
+      "ipa": "zʲ",
+      "out": "zj",
+      "if_nucleus_head": "a á o ó u ú ɑ ʌ ɐ ə ɵ ʉ ã ɑ̃ õ ɔ ɔ̃ ũ ʊ ɯ"
+    },
+    {
+      "slot": "any",
+      "ipa": "zʲ",
+      "out": "z"
+    },
+    {
+      "slot": "onset",
+      "ipa": "rʲ",
+      "out": "rj",
+      "if_nucleus_head": "a á o ó u ú ɑ ʌ ɐ ə ɵ ʉ ã ɑ̃ õ ɔ ɔ̃ ũ ʊ ɯ"
+    },
+    {
+      "slot": "any",
+      "ipa": "rʲ",
+      "out": "r"
+    },
+    {
+      "slot": "onset",
+      "ipa": "kʲ",
+      "out": "kj",
+      "if_nucleus_head": "a á o ó u ú ɑ ʌ ɐ ə ɵ ʉ ã ɑ̃ õ ɔ ɔ̃ ũ ʊ ɯ"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʲ",
+      "out": "k"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɡʲ",
+      "out": "gj",
+      "if_nucleus_head": "a á o ó u ú ɑ ʌ ɐ ə ɵ ʉ ã ɑ̃ õ ɔ ɔ̃ ũ ʊ ɯ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡʲ",
+      "out": "g"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aɪ",
+      "out": "áj"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "eɪ",
+      "out": "é"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oʊ",
+      "out": "ó"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aʊ",
+      "out": "áu"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔɪ",
+      "out": "oj"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ̃ʊ̃",
+      "out": "aun"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɪ",
+      "out": "j",
+      "after_out": "a á e é i í o ó ö ő u ú ü ű"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "a",
+      "out": "a"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑ",
+      "out": "a"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɒ",
+      "out": "a"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ",
+      "out": "a"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌ",
+      "out": "á"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "æ",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "e",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ə",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɤ",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɜ",
+      "out": "ö"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "i",
+      "out": "i"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɪ",
+      "out": "i"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɨ",
+      "out": "i"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "o",
+      "out": "o"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ",
+      "out": "o"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɵ",
+      "out": "o"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "u",
+      "out": "u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʊ",
+      "out": "u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯ",
+      "out": "u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʉ",
+      "out": "u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ø",
+      "out": "ö"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ",
+      "out": "ö"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "y",
+      "out": "ü"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ã",
+      "out": "an"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑ̃",
+      "out": "an"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ̃",
+      "out": "an"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ẽ",
+      "out": "en"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ̃",
+      "out": "en"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ĩ",
+      "out": "in"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "õ",
+      "out": "on"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ̃",
+      "out": "on"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ũ",
+      "out": "un"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ̃",
+      "out": "ön"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʊ̃",
+      "out": "un"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɚ",
+      "out": "er"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɝ",
+      "out": "er"
+    },
+    {
+      "slot": "any",
+      "ipa": "ː",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̯",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʱ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʼ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˤ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʷ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ˠ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̩",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̪",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̺",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "͈",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̚",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̥",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̬",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̹",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̜",
+      "out": ""
+    }
+  ],
+  "targets": {
+    "ko": {
+      "phonemes": [
+        {
+          "slot": "nucleus",
+          "ipa": "ʌ",
+          "out": "ö"
+        }
+      ]
+    },
+    "ru": {
+      "phonemes": [
+        {
+          "slot": "nucleus",
+          "ipa": "ʌ",
+          "out": "o"
+        },
+        {
+          "slot": "nucleus",
+          "ipa": "ə",
+          "out": "a"
+        },
+        {
+          "slot": "nucleus",
+          "ipa": "ɐ",
+          "out": "a"
+        }
+      ]
+    },
+    "hi": {
+      "phonemes": [
+        {
+          "slot": "nucleus",
+          "ipa": "ə",
+          "out": "a"
+        },
+        {
+          "slot": "nucleus",
+          "ipa": "ʌ",
+          "out": "a"
+        }
+      ]
+    }
+  },
+  "syllable_fixups": [
+    {
+      "match": "szsz",
+      "out": "ssz"
+    },
+    {
+      "match": "zszs",
+      "out": "zzs"
+    },
+    {
+      "match": "cscs",
+      "out": "ccs"
+    },
+    {
+      "match": "nyny",
+      "out": "nny"
+    },
+    {
+      "match": "tyty",
+      "out": "tty"
+    },
+    {
+      "match": "gygy",
+      "out": "ggy"
+    },
+    {
+      "match": "dzsdzs",
+      "out": "ddzs"
+    },
+    {
+      "match": "dzdz",
+      "out": "ddz"
+    },
+    {
+      "match": "ngg",
+      "out": "ng"
+    },
+    {
+      "match": "ngk",
+      "out": "nk"
+    }
+  ],
+  "note": "Hungarian is the only reader in this set with a published pronunciation key that is both normative and keyed on the sound, and the Academy prints the column itself: AkH. 12 rule 13 is 'Greenwich [grinics], joule [dzsúl]'. So this table is derived rather than invented, which is the opposite of Greek's position one language earlier. What it still has to decide is what the key declines to say. The key is silent on stress on purpose and this table marks it anyway; the key adds seven glyphs to the alphabet and this table adds none, on the other Academy volume's own principle. Both are in `deviations`.\n\nThree things Hungarian hands a reader that nothing else in this set does. Its orthography has *palatal stops*, so Russian palatalisation transcribes one to one -- `tya`, `gya`, `ny`, `ly` are KNMH's chart and they are ordinary Hungarian letters. It has `sz` for /s/ and `s` for /sh/ and `hsz` for Mandarin /x/, which keeps the sibilant three-way that a Greek or Spanish reader has to collapse. And vowel length is written with full-size letters that the reader was taught in school, so `á é í ó ú ő ű` cost nothing at 5.22pt where an acute-as-stress-mark would have been the first thing to go in bad light.\n\nTwo hazards are Hungarian's own. Every digraph -- `cs gy ly ny sz ty zs dz dzs` -- is a place where two correct letters spell a third sound, and `syllable_fixups` carries the three collisions the corpus actually produces. And a doubled letter is a *long* consonant, phonemically, so nothing here doubles by accident.",
+  "policy_note": "`max_onset: 1` is AkH. 226 rather than a taste: a Hungarian reader parses `-str-` as `st|r` and will do so whatever the hyphens say, and the rule reproduces the book's own examples (prog-ram, cent-rum, ost-rom, abszt-rakt). It also makes `reader_onsets` moot, which is why there is none -- Hungarian's word-initial clusters are an appendix rather than an onset, so there is nothing for a syllable-opening predicate to be told."
+}

@@ -43,3 +43,7 @@ atm-cash.money-exchange,Kubadilisha fedha,Forex bureau,kˌubadilˈiʃa fˈeða,,
 atm-cash.pin,Namba ya siri,PIN,nˈamba ja sˈiri,,2,sw-agent-v1;ipa=espeak
 numbers-money.shilling,Shilingi,,ʃilˈiŋɡi,,2,sw-gaps-v1;ipa=espeak
 numbers-money.shilling-symbol,TSh · KSh · USh,/=,tˌiˌesˈetʃi kˌeˌesˈetʃi ˈuʃ,TZ · KE · UG,2,sw-gaps-v1;ipa=espeak
+numbers-money.forint,Forint ya Hungaria,,fˈorint ja hˌuŋɡarˈia,,2,hu-agent-v1;ipa=espeak
+numbers-money.forint-symbol,Forint ya Hungaria,,fˈorint ja hˌuŋɡarˈia,,2,hu-agent-v1;ipa=espeak
+numbers-money.rupee,Rupia ya India,,rupˈia ja indˈia,,2,hu-agent-v1;ipa=espeak
+numbers-money.rupee-symbol,Rupia ya India,,rupˈia ja indˈia,,2,hu-agent-v1;ipa=espeak

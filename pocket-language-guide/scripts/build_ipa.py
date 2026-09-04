@@ -254,6 +254,38 @@ distrust the column as a whole.
 - `it` has no word-initial /ts/ in the whole column, so `onsetClusters` never
   learns that Italian can open a word with it and *Grazie* breaks as `grats-ie`.
   Italian orthography writes it `z`; the G2P is giving something else.
+- **espeak's `hu` voice fuses a proclitic into the word after it**, so `nem
+  beszélek` is the single token `nˈɛmbɛseːlɛk` -- and so are `nem értem`, `nem
+  tudom`, `nem kérek`, `ez az` and `elnézést kérek`. `nem` is the most frequent word
+  in a phrasebook's negatives, and a respelling then prints one unbroken word where
+  the card shows two. It is also the *only* thing phrase-level phonemisation buys
+  Hungarian: every phrase in the pack was phonemised both ways and the only
+  differences are this fusion and stress demotion, never a segment. So `hu` is
+  phonemised one word at a time -- see `WORD_AT_A_TIME` -- which fixes the boundaries
+  and introduces exactly one artefact, the bare definite article `a` read as the
+  *letter* and returned as `ˈɑː`, a long back rounded vowel Hungarian does not have.
+  Repaired in `REPAIR["hu"]`.
+- **espeak reads Hungarian `lj` as a palatal lateral.** Standard Hungarian has none:
+  the yod-merger completed around 1800, AkH. rule 88 says the letter `ly` survives
+  for a sound that does not, and `melyik` does come back correctly as `mˈɛjik`. But
+  an orthographic `lj` -- `forduljon`, `aktiválja`, `használjon` -- comes back as
+  `ʎj` on eleven rows, where the standard pronunciation is a long [jː]. One
+  substitution fixes the phoneme and the length together.
+- **espeak declines Hungarian's cross-morpheme assimilation** and reads the spelling
+  instead: `nagysebességű` and `egyszerű` come back as `nˈɑɟʃɛbɛʃːeːɡyː` and
+  `ˈɛɟsɛryː` where the usual readings are [nɑccɛ-] and [ɛccɛryː], and a geminate
+  before a consonant is shortened on some rows (`jobbra`, `mellkasi`, `otthon`) and
+  not others. All three are careful-speech readings rather than errors, so they are
+  left. It does get the *within-word* assimilations right, which are the ones that
+  change a letter: `biztosítás` is `bistoʃiːtaːʃ`, `segítség` is `ʃɛɡiːtʃːeːɡ`,
+  `ezt` is `ɛst`. The one it drops outright is `egészség`, returned with a single
+  `ʃ` where the length is the whole point of the word.
+- **Hungarian stress is not read off espeak at all**, and does not need to be: it is
+  on the first syllable of every word, without exception and without lexical
+  contrast, so `hu_stress` writes it from the position. Which is as well -- even one
+  word at a time espeak demotes some words to a secondary mark and no primary
+  (`vagyok` is `vˌɑɟok`), and a word with no primary mark prints unmarked, which for
+  an accented script is not a possible word.
 - 73 `ar` rows have no short vowels at all, because espeak read unvocalised text.
   `hal imknni istijdam` is what a respelling of one looks like, and no rule table
   can recover the vowels. Vocalising the Arabic source text is the fix. A further
@@ -317,7 +349,24 @@ DATA = ROOT / "data"
 # and `fr`/`pt` without a region raise "not supported".
 VOICES = {"en": "en-us", "es": "es-419", "fr": "fr-fr", "de": "de", "pt": "pt-br",
           "it": "it", "id": "id", "sw": "sw", "tr": "tr", "ru": "ru", "hi": "hi",
-          "ar": "ar", "vi": "vi", "el": "el"}
+          "ar": "ar", "vi": "vi", "el": "el", "hu": "hu"}
+
+# Phonemised one word at a time rather than a phrase at a time, which every other
+# espeak language is.
+#
+# Phrase-level is deliberate elsewhere: French liaison and Spanish cross-word
+# assimilation only appear if the words are given to espeak together. Hungarian gets
+# nothing from it and loses two things. Measured rather than assumed -- every phrase
+# in the pack was phonemised both ways, and the *only* differences are word fusion
+# and stress demotion, never a segment: `hat gyerek`, `vonat jegy` and every other
+# assimilation environment come out identical.
+#
+# What it loses is word boundaries. espeak's Hungarian dictionary fuses a proclitic
+# into the word after it -- `nem beszélek` is one token `nˈɛmbɛseːlɛk`, and so are
+# `nem értem`, `nem tudom`, `nem kérek`, `ez az` and `elnézést kérek` -- and `nem` is
+# the most frequent word in a phrasebook's negatives. A respelling then prints one
+# unbroken word where the card shows two, so the two columns stop lining up.
+WORD_AT_A_TIME = {"hu"}
 
 # Languages read off a curated romanisation column instead, and which column.
 ROMANISED = {"zh-Hans": "romanization_pinyin", "ja": "romanization_hepburn",
@@ -428,6 +477,19 @@ REPAIR = {
     # Italian reader got their own doubled rhotic for the same reason. `ɾ` is what
     # the Spanish, Portuguese and Turkish columns already carry for the same sound.
     "el": [("ss", "s"), ("r", "ɾ")],
+    # Asked for one word at a time -- see `WORD_AT_A_TIME` -- espeak reads the bare
+    # definite article `a` as the *letter* and returns `ˈɑː`. Hungarian has no such
+    # vowel: the long partner of /ɒ/ is the unrounded /aː/, written `á`, which espeak
+    # writes `aː` everywhere it belongs (`három` hˈaːrom, `kívánok` kˈiːvaːnok). So a
+    # long back rounded vowel is only ever this artefact, and `a` is in a great many
+    # rows of the pack.
+    # And it reads `lj` as a palatal lateral. Standard Hungarian has none: the
+    # yod-merger is complete, `ly` is /j/ everywhere (`melyik` comes back correctly
+    # as mˈɛjik), and an orthographic `lj` assimilates to a long [jː] -- `forduljon`
+    # is [fordujjon], `aktiválja` [ɑktivaːjjɑ]. espeak writes that as `ʎj` on eleven
+    # rows and as `jj` on others (`álljon` ˈaːjjon), so one substitution fixes both
+    # the phoneme and the length: `ʎj` becomes `jj` by rewriting the `ʎ` alone.
+    "hu": [("ɑː", "ɑ"), ("ʎ", "j")],
     # Vietnamese's three centring diphthongs -- ia/iê/yê, ưa/ươ, ua/uô -- are
     # *falling*: Kirby (2011: 384) gives the inventory as nine vowel qualities and
     # "three falling diphthongs /iə ɯə uə/", the nucleus first and a centring
@@ -979,6 +1041,70 @@ def el_stress(text, ipa):
     return " ".join(out)
 
 
+# -------------------------------------------------------------------- geminates
+# **A long consonant is two letters, not a letter and a length mark**, in every
+# language here that writes gemination at all -- and espeak splits its own notation
+# by manner rather than by phonology. Hungarian comes back with the stops and
+# affricates as `Cː` (`kettő` kˈɛtːøː, `jobb` jˈobː, `meggy` mˈɛɟː) and the sonorants
+# and fricatives as `CC` (`holló` hˈolloː, `össze` ˈøssɛ, `könnyű` kˈøɲɲyː); Italian
+# is the same mixture, 158 rows of `Cː` beside 165 of `CC`. One phoneme, two
+# spellings, and the corpus would carry both.
+#
+# `CC` is the form to keep, for two reasons that point the same way. Every reader's
+# table maps a bare `ː` to nothing, so `Cː` silently *erases* a phonemic contrast for
+# eighteen readers -- Hungarian `hal` fish against `hall` hears, Italian `fato`
+# against `fatto` -- while `CC` survives as a coda plus an onset. And `syllabify`
+# treats `Cː` as one unit between two vowels, which opens the next syllable: an
+# English reader got `KEH-tur` for `kettő` where the doubled form gives `KET-tur`,
+# and `ghè-ttee` for the Italian one where it gives `ghèt-tee`. Doubled is also the
+# division both orthographies make themselves (`ket-tő`, `ott-hon`, `asz-szony`;
+# `fat-to`).
+#
+# **Measured, and only where it measures.** Folding Italian raises the English
+# reader's agreement with the curated Italian sheet from 7.3% to 8.3% exact and 7.9%
+# to 9.3% loose. `ar`, `hi` and `tr` also carry `Cː` -- 56, 144 and 18 rows -- and
+# folding them moves nothing at all (0.5%, 2.7%, 3.8%, unchanged to three figures),
+# because their curated English respellings do not record gemination either. The
+# length would still reach the other seventeen readers, so this is a live proposal
+# rather than a closed question; it is left out because there is no evidence for it
+# here and the four packs would all need re-rendering to find out.
+#
+# The affricates are captured whole so that `tsː` becomes `tsts` rather than `tss`,
+# which `phonemesOf` would read as /t/ + /s/ + /s/.
+GEMINATE = re.compile(r"(ts|tʃ|dz|dʒ|tɕ|ʈʂ|[pbtdkɡcɟqfvszʃʒçxhmnɲŋlrɾjʋ])ː")
+GEMINATE_DOUBLES = {"hu", "it"}
+
+
+# ------------------------------------------------------------- Hungarian stress
+# Hungarian stress is on the **first syllable of every word**, without exception and
+# without lexical contrast, so it does not have to be recovered from espeak at all --
+# it is a property of the word's position, and the generator can simply write it.
+#
+# Which is as well, because espeak does not supply it. Even asked one word at a time
+# it demotes some words to a secondary mark and no primary (`vagyok` is `vˌɑɟok`), and
+# asked a phrase at a time it demotes most non-initial words. A word with no primary
+# mark prints unmarked -- no capital for an English reader, no acute for a Spanish,
+# Russian or Greek one -- and for the accented scripts an unmarked polysyllable is not
+# a possible word.
+#
+# Marking every word slightly over-marks: Hungarian clitics -- the article `a`/`az`, a
+# postposition after its noun, the verb after negative `nem` -- are prosodically weak.
+# Monosyllables are filtered downstream by each reader's `stress_min_syllables`, which
+# covers the articles; the rest is a prosodic nicety against a missing mark, and a
+# missing mark is the worse error.
+#
+# Immediately before the vowel rather than before the onset, which is where espeak
+# itself puts it (`kˈeːrɛm`, `ʃˈɛɡiːtʃːeːɡ`), so the column stays internally
+# consistent with the other eighteen.
+def hu_stress(ipa):
+    out = []
+    for word in ipa.split():
+        bare = "".join(c for c in word if c not in STRESS_MARKS)
+        at = next((i for i, c in enumerate(bare) if c in VOWELS), None)
+        out.append(bare if at is None else f"{bare[:at]}ˈ{bare[at:]}")
+    return " ".join(out)
+
+
 def normalise(ipa, code, text=""):
     for old, new in REPAIR.get(code, []):
         ipa = ipa.replace(old, new)
@@ -988,6 +1114,10 @@ def normalise(ipa, code, text=""):
         ipa = " ".join(vi_tone(t) for t in ipa.split())
     if code == "el":
         ipa = el_stress(text, ipa)
+    if code in GEMINATE_DOUBLES:
+        ipa = GEMINATE.sub(r"\1\1", ipa)
+    if code == "hu":
+        ipa = hu_stress(ipa)
     return apply_stress(ipa, STRESS.get(code, "keep"))
 
 
@@ -1060,6 +1190,9 @@ def route(code, chunks):
     the substituted cell would be in a different phonology than the sentence
     around it.
     """
+    if code in VOICES and code in WORD_AT_A_TIME:
+        lexicon = espeak_lexicon(VOICES[code], [w for c in chunks for w in c.split()])
+        return lambda chunk: " ".join(lexicon.get(w) or "" for w in chunk.split()), "espeak"
     if code in VOICES:
         lexicon = espeak_lexicon(VOICES[code], chunks)
         return lexicon.get, "espeak"
@@ -1269,13 +1402,24 @@ GRADE = {
     "ja": ("A", "mechanical transform of the reviewed Hepburn column; the 49% is 74% final /ɯ/ devoicing"),
     "ko": ("A-", "reviewed RR read against the Hangul's own blocks; no cross-boundary tensification"),
     "es": ("A", "es-419, near-phonemic; 72% -> 97% once the curator's /j/ hiatus is allowed for"),
-    "it": ("A", "near-phonemic; stress 98.2%, and this curator keeps the medial glide"),
+    "it": ("A", "near-phonemic; stress 98.2%, and this curator keeps the medial glide. "
+           "espeak's two notations for a geminate are folded to the doubled one, which is "
+           "what Italian orthography writes and what survives a reader table: +1.0 point "
+           "exact and +1.4 loose against the curated sheet, on 158 rows"),
     "id": ("A", "near-phonemic; stress 92.3%"),
     "sw": ("A", "near-phonemic; the syllable gap is prenasalised onsets (n-JEE-ah), a reader's rule"),
     "de": ("A", "shallow and stress 92.6%; the coda-r rows this build refused are repaired in REPAIR"),
     "el": ("A", "shallow in the direction that matters: Greek spelling is many-to-one for /i/ and /o/ "
            "but reading it is deterministic, and the accent marks the stress. No curated sheet, so "
            "the syllable column is blank; the two espeak artefacts are repaired above"),
+    "hu": ("A", "phonemic orthography read one word at a time, and stress is positional rather "
+           "than looked up -- first syllable, always, written by hu_stress -- so the one thing "
+           "espeak gets wrong for every other language cannot be wrong here. No curated sheet, so "
+           "the syllable column is blank; the three artefacts are repaired above. What is left is "
+           "assimilation espeak declines to apply across a morpheme boundary: `nagysebessegu` and "
+           "`egyszeru` come back read off the spelling rather than as [nɑccɛ-] and [ɛccɛryː], and "
+           "a geminate before a consonant is shortened on some rows (`jobbra`, `mellkasi`) and not "
+           "others. All three are careful-speech readings rather than errors"),
     "tr": ("B", "phonemic orthography, but espeak's Turkish stress is 68.1%"),
     "pt": ("B", "pt-br; vowel reduction is phonetic detail the curated sheet smooths away"),
     "en": ("B", "en-us; deep orthography, but espeak's English lexicon is its best"),

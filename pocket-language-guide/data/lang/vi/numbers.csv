@@ -43,3 +43,7 @@ numbers-money.dong,đồng,VNĐ,ɗoŋ˨˩,,2,coordinator-gaps-v2;ipa=espeak
 numbers-money.dong-symbol,₫,VNĐ,,,2,coordinator-gaps-v2
 numbers-money.number-and-classifier-notes,"Số ghép như tiếng Việt: 11 = shíyī, 20 = èrshí, 21 = èrshíyī; 101 = yìbǎi líng yī (líng = linh). Điện thoại: 1 đọc là yāo. Trước loại từ, 2 là liǎng chứ không phải èr: liǎng zhāng piào = hai vé. gè (cái, cả cho người), wèi (vị, lịch sự), zhāng (tờ, tấm), bēi (ly), wǎn (bát), píng (chai), běn (quyển). Tiền: nói yuán là kuài; jiǎo / máo = 0,1 yuán; fēn = 0,01 yuán.",,,,2,vi-notes-v1
 numbers-money.number-and-classifier-notes-2,"Số ghép: 11 = jūichi, 20 = nijū, 21 = nijūichi; đếm theo vạn: 10.000 = ichiman. Loại từ đi sau số: -tsu (đồ vật), -mai (tờ, tấm), -hon (vật dài), -nin (người), -hai (ly), -satsu (quyển), -dai (xe, máy). Dạng ghép hay biến đổi: -tsu là hitotsu, futatsu… kokonotsu; -nin là hitori, futari, sannin; -hon là ippon, nihon, sanbon. Điện thoại: 0 = zero / maru, 4 = yon, 7 = nana, 9 = kyū; dấu gạch đọc là no.",,,,2,vi-notes-v1
+numbers-money.forint,Forint Hungary,,fɔːɹɪnt˧ hʌŋɡəɹi˧,,2,hu-agent-v1;ipa=espeak
+numbers-money.forint-symbol,Forint Hungary,,fɔːɹɪnt˧ hʌŋɡəɹi˧,,2,hu-agent-v1;ipa=espeak
+numbers-money.rupee,Rupee Ấn Độ,,ɹuːpiː˧ ən˧˥ ɗo˨˩ˀ,,2,hu-agent-v1;ipa=espeak
+numbers-money.rupee-symbol,Rupee Ấn Độ,,ɹuːpiː˧ ən˧˥ ɗo˨˩ˀ,,2,hu-agent-v1;ipa=espeak

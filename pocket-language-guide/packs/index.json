@@ -390,6 +390,26 @@
       ]
     },
     {
+      "target": "en",
+      "source": "hu",
+      "scale": 0.68,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 616,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
       "target": "es",
       "source": "en",
       "scale": 0.5,
@@ -750,6 +770,26 @@
       "pageW": 504,
       "pageH": 360,
       "items": 613,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "es",
+      "source": "hu",
+      "scale": 0.56,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 611,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -1152,6 +1192,26 @@
       ]
     },
     {
+      "target": "zh-Hans",
+      "source": "hu",
+      "scale": 0.68,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 606,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
       "target": "ja",
       "source": "en",
       "scale": 0.69,
@@ -1525,6 +1585,26 @@
       ]
     },
     {
+      "target": "ja",
+      "source": "hu",
+      "scale": 0.7,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 616,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
       "target": "ar",
       "source": "en",
       "scale": 0.73,
@@ -1878,6 +1958,26 @@
       "target": "ar",
       "source": "el",
       "scale": 0.66,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "ar",
+      "source": "hu",
+      "scale": 0.7,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -2276,6 +2376,26 @@
       ]
     },
     {
+      "target": "fr",
+      "source": "hu",
+      "scale": 0.6,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 614,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
       "target": "de",
       "source": "en",
       "scale": 0.47,
@@ -2644,6 +2764,26 @@
       "pageW": 504,
       "pageH": 360,
       "items": 617,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "de",
+      "source": "hu",
+      "scale": 0.53,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -3030,6 +3170,26 @@
       ]
     },
     {
+      "target": "pt",
+      "source": "hu",
+      "scale": 0.53,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 613,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
       "target": "ko",
       "source": "en",
       "scale": 0.46,
@@ -3403,13 +3563,33 @@
       ]
     },
     {
+      "target": "ko",
+      "source": "hu",
+      "scale": 0.52,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 610,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
       "target": "hi",
       "source": "en",
-      "scale": 0.66,
+      "scale": 0.65,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 616,
+      "items": 618,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -3429,7 +3609,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 616,
+      "items": 618,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -3449,7 +3629,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 614,
+      "items": 616,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -3469,7 +3649,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 614,
+      "items": 616,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -3489,7 +3669,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 614,
+      "items": 616,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -3520,7 +3700,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 614,
+      "items": 616,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -3540,7 +3720,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 614,
+      "items": 616,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -3556,11 +3736,11 @@
     {
       "target": "hi",
       "source": "pt",
-      "scale": 0.69,
+      "scale": 0.68,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 616,
+      "items": 618,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -3580,7 +3760,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 614,
+      "items": 616,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -3596,11 +3776,11 @@
     {
       "target": "hi",
       "source": "th",
-      "scale": 0.68,
+      "scale": 0.67,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 616,
+      "items": 618,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -3627,46 +3807,6 @@
     {
       "target": "hi",
       "source": "ru",
-      "scale": 0.66,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 614,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "hi",
-      "source": "id",
-      "scale": 0.72,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 616,
-      "warnings": [
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "hi",
-      "source": "sw",
       "scale": 0.65,
       "faces": 10,
       "pageW": 504,
@@ -3686,12 +3826,52 @@
     },
     {
       "target": "hi",
+      "source": "id",
+      "scale": 0.72,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 618,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "hi",
+      "source": "sw",
+      "scale": 0.65,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 618,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "hi",
       "source": "tr",
       "scale": 0.73,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 614,
+      "items": 616,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -3707,11 +3887,11 @@
     {
       "target": "hi",
       "source": "vi",
-      "scale": 0.76,
+      "scale": 0.73,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 616,
+      "items": 618,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -3731,7 +3911,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 614,
+      "items": 616,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -3751,7 +3931,27 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 614,
+      "items": 616,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "hi",
+      "source": "hu",
+      "scale": 0.68,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 616,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -4271,6 +4471,34 @@
       ]
     },
     {
+      "target": "th",
+      "source": "hu",
+      "scale": 0.46,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 613,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
       "target": "ru",
       "source": "en",
       "scale": 0.69,
@@ -4635,6 +4863,26 @@
       "target": "ru",
       "source": "el",
       "scale": 0.65,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 616,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "ru",
+      "source": "hu",
+      "scale": 0.71,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -5041,6 +5289,26 @@
       ]
     },
     {
+      "target": "id",
+      "source": "hu",
+      "scale": 0.63,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 610,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
       "target": "sw",
       "source": "en",
       "scale": 0.46,
@@ -5422,6 +5690,26 @@
       ]
     },
     {
+      "target": "sw",
+      "source": "hu",
+      "scale": 0.54,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
       "target": "tr",
       "source": "en",
       "scale": 0.53,
@@ -5778,6 +6066,26 @@
       "target": "tr",
       "source": "el",
       "scale": 0.57,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 614,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "tr",
+      "source": "hu",
+      "scale": 0.63,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -6176,6 +6484,26 @@
       ]
     },
     {
+      "target": "vi",
+      "source": "hu",
+      "scale": 0.7,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 614,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
       "target": "it",
       "source": "en",
       "scale": 0.46,
@@ -6198,7 +6526,7 @@
     {
       "target": "it",
       "source": "es",
-      "scale": 0.55,
+      "scale": 0.54,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -6258,7 +6586,7 @@
     {
       "target": "it",
       "source": "ar",
-      "scale": 0.98,
+      "scale": 0.95,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -6309,7 +6637,7 @@
     {
       "target": "it",
       "source": "de",
-      "scale": 0.49,
+      "scale": 0.48,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -6349,7 +6677,7 @@
     {
       "target": "it",
       "source": "ko",
-      "scale": 0.65,
+      "scale": 0.64,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -6400,7 +6728,7 @@
     {
       "target": "it",
       "source": "th",
-      "scale": 0.76,
+      "scale": 0.75,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -6536,6 +6864,26 @@
       "pageW": 504,
       "pageH": 360,
       "items": 615,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "it",
+      "source": "hu",
+      "scale": 0.55,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 613,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -6933,6 +7281,427 @@
       "pageW": 504,
       "pageH": 360,
       "items": 616,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "el",
+      "source": "hu",
+      "scale": 0.61,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 614,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "hu",
+      "source": "en",
+      "scale": 0.52,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "hu",
+      "source": "es",
+      "scale": 0.55,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "hu",
+      "source": "zh-Hans",
+      "scale": 0.67,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "hu",
+      "source": "ja",
+      "scale": 0.69,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "hu",
+      "source": "ar",
+      "scale": 0.86,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "hu",
+      "source": "fr",
+      "scale": 0.47,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "hu",
+      "source": "de",
+      "scale": 0.47,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "hu",
+      "source": "pt",
+      "scale": 0.56,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "hu",
+      "source": "ko",
+      "scale": 0.65,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "hu",
+      "source": "hi",
+      "scale": 0.64,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Devanagari",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Devanagari text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "hu",
+      "source": "th",
+      "scale": 0.72,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Thai",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Thai text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
+      "target": "hu",
+      "source": "ru",
+      "scale": 0.51,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "hu",
+      "source": "id",
+      "scale": 0.58,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "hu",
+      "source": "sw",
+      "scale": 0.51,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "hu",
+      "source": "tr",
+      "scale": 0.63,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "hu",
+      "source": "vi",
+      "scale": 0.59,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "hu",
+      "source": "it",
+      "scale": 0.52,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "hu",
+      "source": "el",
+      "scale": 0.5,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
       "warnings": [
         {
           "code": "margin-below-safe-area",

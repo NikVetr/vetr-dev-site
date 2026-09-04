@@ -1,4 +1,4 @@
-# Respelling systems in eighteen languages
+# Respelling systems in nineteen languages
 
 The say-it-like column is hand-curated per language *pair*, which is why it exists for
 16 of 306 pairs and will never exist for the other 290. The replacement is O(N): one
@@ -153,6 +153,7 @@ record.
 | `ar` | sound-based practice, no table; ar.wikipedia's parenthetical policy | practice | — | **Invent**, with a reviewer |
 | `pt` `de` `fr` | IPA-only lexicography | — | — | **Invent** (`pt` cheap, `de` and `fr` not) |
 | `el` | nothing sound-keyed; Babiniotis LNEG §7(δ)'s parenthetical pronunciations, ELETO Ορόγραμμα 62, el.wikipedia's Ονοματοδοσία σελίδων, the EU guide §10.5 | worked examples, not a table | — | **Invent** on those four patterns. ΕΛΟΤ 743 is the wrong direction |
+| `hu` | Magay, *Idegen nevek kiejtési szótára* (Akadémiai 1974); AkH. 12 rule 13's own brackets; the MTA's *Keleti nevek magyar helyesírása* and the Cyrillic/Modern-Greek volume; **Kontra, *Magyar Nyelvőr* 99 (1975)** | respelling in Hungarian letters | **sounds** — and Kontra's chart is keyed on **IPA** | **Borrow.** The best key of any reader here, and the only one whose author says he built it from IPA |
 | `id` `sw` | spelling-adaptation standards that say so in writing | — | — | **Invent**, cheaply — near-phonemic orthographies |
 
 ## The typographic constraint that settles the stress question
@@ -1626,3 +1627,199 @@ Japanese, Korean and Thai their postalveolars. el.wikipedia's own *Οδηγός 
 confirms the vowel side of the same gap by printing a literal `-` against ɪ, e, æ, y, yː,
 ʏ, ø, øː, œ, ɨ and ə. Those are documented approximations in the table's own
 `approximations` block rather than gaps: `--gaps` is zero.
+
+
+## The nineteenth: Hungarian, and the best key in the set
+
+Hungarian is the reverse of Greek's position one language earlier. Greek had nothing
+sound-keyed and went in the invent tier; Hungarian has **a normative, sound-keyed,
+Academy-published pronunciation dictionary, and the Academy prints this very column
+itself.** AkH. 12 rule 13 is, verbatim and in full:
+
+> angol: **Greenwich [grinics], joule [dzsúl]** · cseh: **Dvořák [dvorzsák], Škoda
+> [skoda]** · francia: **Eugène [özsen], Nîmes [nim]** · német: **Schäfer [séfer],
+> Werther [verter]** · olasz: **Bologna [bolonya], quattrocento [kvatrocsentó]** ·
+> portugál: **Guimarães [gimarajs], você [vuszé]** · román: **Sighişoara [szigisoára],
+> piaţa [piaca]**
+
+Square brackets, all lowercase, vowel length by the ordinary acute, no stress mark.
+AkH. 11 wrote the same thing as `[e.: grinics]` — *ejtsd*, "say it as" — and the idiom
+is alive: `insource:/ejtsd:/` returns **1,356 hu.wikipedia articles**, `Sydney (ejtsd:
+szidni)`, `Marseille (ejtsd: marszej)`, `The Times (ejtsd: dö tájmz)`. Rule 219 states
+the reading contract the whole feature needs: a Hungarian transcription is to be read
+*«a bennük szereplő betűk magyar hangértéke szerint»*.
+
+**Four sources, and the order they are used in matters.**
+
+1. **Magay Tamás (szerk.), *Idegen nevek kiejtési szótára*, Akadémiai Kiadó 1974** —
+   40,000 names from 25 Latin-script languages, in Hungarian letters, lektorált by
+   Deme, Fábián and Országh. This is the inventory. And its Bevezető §3(d) is the
+   single best find in the survey:
+
+   > „A szótár eredeti kéziratában minden egyes névnek a kiejtését **a ma
+   > leghasználatosabb nemzetközi hangjelölési rendszer, az APhI jeleivel is
+   > leírtuk. Ez képezte — a magyar hangképzési lehetőségek figyelembevételével — a
+   > helyes kiejtés megállapításának, a magyarra való »áthangolásnak« az alapját.**
+   > […] úgy döntöttünk, hogy ebben a kiadásban az APhI-jelölés közlésétől
+   > eltekintünk. Egy későbbi, tudományos igényű kiadványban azonban már az
+   > APhI-rendszer szerinti fonetikus átírási formákat is fel fogjuk tüntetni."
+
+   **IPA for every one of the 40,000 entries, used as the pivot into Hungarian, then
+   suppressed in print for a general readership — and a promised IPA edition that
+   never appeared.** `respell(ipa, 'hu')` is that edition. No other reader in this set
+   has a key whose author states the pipeline.
+2. **Kontra Miklós, "Javaslat orvosi nyelvünk angol szavainak fonetikai átírására",
+   *Magyar Nyelvőr* 99 (1975), 29–33**, written *«az Idegen nevek kiejtési szótárát
+   szerkesztő Magay Tamás tanácsaira támaszkodva»* and free from the Academy's own
+   journal archive. **A complete English-phoneme → Hungarian-letter chart, indexed on
+   IPA.** It is where /ʌ/ → `á`, /ɜː/ → `őr`, /eɪ aɪ oʊ aʊ/ → `é áj ó áu` and the
+   uniform /ə/ → `e` come from, against the Hungarian tendency to spell the schwa
+   (`dollár`, `Byron`). His §4 — *«csak rövid mássalhangzókat lehet az átírásban
+   használni»* — is the one rule taken and then put back; see below.
+3. **The MTA transcription volumes AkH. 12 rule 220 delegates to**: Ligeti (főszerk.),
+   *Keleti nevek magyar helyesírása* (1981), and Hadrovics (főszerk.), *A cirill betűs
+   szláv nyelvek neveinek magyar helyesírása / Az újgörög nevek magyar helyesírása*
+   (1985). These cover the non-Latin half, and KNMH's Előszó supplies the design
+   principle the whole table is restricted by:
+
+   > „Mi nem kevesekhez, de mindenkihez akarunk szólni, olyan egyszerű írásmóddal,
+   > **amelynek megértéséhez anyanyelvünk ismerete egymagában elégséges.** […] a
+   > nyelvünkből hiányzó magánhangzók és mássalhangzók helyett a hozzájuk közel álló
+   > magyar megfelelőket választottuk."
+
+   That is the argument for the plain alphabet, and it is *the other Academy answer to
+   the same question* rather than a convenience.
+4. **`Wikipédia:Újind nevek átírása`** (CC BY-SA 4.0), whose columns are literally
+   `Átírás (Tud. | IPA | Magyar)` — 76 IPA rows, and the only openly-licensed
+   IPA-to-Hungarian table anywhere. With `IPA magyar nyelvre` for the 40 letters.
+
+**Three things Hungarian hands a reader that nothing else in the set does.**
+
+- **Palatal stops.** `ty` is /c/ and `gy` is /ɟ/, and `ny` and `ly` are there too — so
+  KNMH's Cyrillic chart maps Russian palatalisation *one to one*, in ordinary letters:
+  `день` is `gyen`, `Рязань` `Rjazany`, `Вася` `Vaszja`. Every other reader spells that
+  contrast away. The glide is written only before a back vowel, which is why `Szibir`
+  and `Szergej` carry none.
+- **A three-way sibilant.** `sz` is /s/, `s` is /ʃ/, and KNMH's Chinese chapter gives
+  `hsz` for /ɕ/ — `Hszian`, `Hszincsiang`. That keeps the Mandarin *s / sh / x*
+  distinction a Greek or Spanish reader has to collapse, and it costs an audible [h].
+- **Vowel length in full-size letters.** `á é í ó ú ö ő ü ű` are what a Hungarian was
+  taught in school, so length survives 5.22pt italic muted where a mark would not.
+
+**And one it takes away, which is the sharpest judgment call in the set.** *Every*
+Hungarian source refuses to mark stress, and Magay devotes a titled section to why:
+
+> „**A magyar szöveg épségének érdekében mondtunk le a hangsúly jelöléséről is.
+> Rendkívül szaggatottá tenné ugyanis a folyamatos magyar beszédet a tőle idegen
+> hangsúlyozás.** […] A magyar nyelvművelés hagyományos és mai állásfoglalása szerint
+> a magyar szövegbe kerülő idegen szavaknak és neveknek **a magyaros hangsúlyformát
+> kell viselniük.**"
+
+Kontra's §1 agrees, the MTA volumes never mark it across some 35 languages (`hangsúly`
+occurs eleven times in KNMH and never as a marking rule), and AkH. rule 13's brackets
+and hu.wikipedia's 1,356 notes carry no mark either. There is also a phonetic reason:
+**Hungarian avoids duration as a prominence cue precisely because length is phonemic**
+(Vogel, Athanasopoulou & Pincus 2015; Kallio, Suni & Šimko 2022), and the acute is
+therefore unavailable — `a` is a rounded [ɒ] and `á` an unrounded [aː], two different
+vowels rather than one vowel twice, so an acute for stress would print a different word.
+
+The table marks it anyway, with capitals, and the warrant is the one Hungarian source
+whose situation is ours. **Tótfalusi's *Kiejtési szótár* (Tinta 2006) does mark
+stress — by italicising the stressed vowel — and only for multi-word foreign phrases,
+and only where the stress is not initial:** *«dőlt betű jelzi a hangsúlyos szótag
+magánhangzóját – már ha a hangsúly nem az első szótagra esik»*. For single names he
+follows Magay. Every source that refuses is governing a foreign *name embedded in a
+Hungarian sentence*; this column is a multi-word foreign phrase with no Hungarian
+around it. Italics are unavailable because the whole field is already italic, and
+`RESPELL-SYSTEMS.md` already carries the cited precedent for capitals as the fallback
+when the native mark cannot be set. `policy.stress` is one field, so a reviewer who
+reads the balance the other way can set it to `none`.
+
+One caveat on capitals that is Hungarian's own: Szigetvári's practice on *nyest.hu*
+uses **capitals as extra symbols** rather than for stress — `cause` [kóz] against `cos`
+[kOsz] — so a reader who has met that page has been taught a different meaning for
+the same device. It is a small readership and a divergent notation, but it is the
+Turkish `Yardım:Telaffuz` problem in miniature.
+
+**What was borrowed and put back.** Magay's notation adds seven symbols to the
+alphabet — `ȧ` for short unrounded [a], `ā` and `ē` for the two marginal long vowels,
+`u̯`/`ü̯` for a diphthong's weaker half, and a **boldface** `h` for [x] against a plain
+one for [h]. None is taken: seven symbols is a seven-line legend, and the rule here is
+that a legend longer than one line means the notation is wrong. KNMH's "szűkebb magyar
+ábécé" is the warrant, and one substitution is better than the original — Magay could
+only separate [x] from [h] with a second weight, where **`ch` is a Hungarian letter
+(AkH. 228) that every loanword reads as [x]** (`pech`, `Bach`, `technika`). Word-final
+`h` needs it: AkH. 74 makes a final `h` ambiguous three ways and says the choice is
+lexical, and Siptár shows the silent class is down to one live item (`cseh`) while
+every new `h`-final loan is [x] (`Hezbollah`, `APEH`). Magay's parentheses go too, on
+his own instruction to exactly our reader: *«aki magyar környezetben akarja kimondani a
+nevet, a zárójelbe tett betűt vagy betűket ejtse úgy, mintha a zárójel ott sem lenne»*.
+
+Kontra's no-geminates rule (§4) was taken and then put back, and the reason is the
+input. His source is English *spelling*, where a doubled consonant marks the vowel
+before it and no length is there to lose; ours is a phonemic `ipa` column, where a
+geminate can only have come from a real length contrast — Italian `fatto`, Arabic
+`mudarris`. Hungarian writes length by doubling and reads it that way, so the
+information survives. What *is* borrowed from that neighbourhood is AkH. 7b's
+simplified doubling — `ssz`, `ccs`, `zzs`, `ddzs`, never `szsz` — and AkH. 226 f)'s
+full form across a break, `ösz-sze`, which falls out of the engine for free because a
+two-phoneme geminate is a coda plus an onset.
+
+**Syllabification is prescribed and it is not onset-maximising.** AkH. 224: *«A szótag
+magánhangzóval vagy – legalábbis szó belsejében – egyetlen rövid mássalhangzóval
+kezdődik»*. Two medial consonants split VC.CV (226 d: `am-per`, `mor-zsa`), three split
+VCC.CV (226 g: `cent-rum`, `ost-rom`, `prog-ram`, `abszt-rakt`). So `max_onset: 1`, and
+`reader_onsets` is left out rather than filled in: Hungarian's word-initial clusters are
+an *appendix* rather than an onset in Siptár & Törkenczy's analysis — Törkenczy 1994
+argues the other way, so the representation is contested, but both agree on the medial
+facts, which is what the predicate would be asked about.
+
+**Licensing.** Conventions only, and the reason is statutory rather than cautious:
+**Szjt. 1999. évi LXXVI. tv. 1. § (6)** puts an *«ötlet, elv, elgondolás, eljárás,
+működési módszer»* outside copyright, which is exactly what a phoneme-to-letter
+correspondence is; §1 (4) exempts *jogszabály* text, and AkH. is not one, so its prose
+**is** protected. Magay, KNMH and the 1985 volume are all `© Akadémiai Kiadó` and
+freely *readable* on the MTA library's REAL-EOD repository under a policy that permits
+personal, educational and not-for-profit reproduction *«provided the content is not
+changed in any way»* and forbids commercial sale and robot harvesting — so read, cite,
+re-implement, never copy. Kontra 1975 is on the Academy's own open journal archive.
+The MEK/Wikisource copy of AkH. 11 carries a **non-commercial, no-derivatives** notice
+despite living on Wikisource; do not treat it as CC. hu.wikipedia is CC BY-SA 4.0 and
+is the only openly-licensed source in the list.
+
+**Two hu.wikipedia pages are wrong and one is right.** `IPA magyar nyelvre` and
+`Wikipédia:Újind nevek átírása` are usable. **`Magyar hangtan` lists /ŋ/ and /ʎ/ as
+phonemes**, which contradicts every scholarly source — /ŋ/ is an allophone of /n/
+before /k g/ with no letter of its own, and `ly` has been /j/ since about 1800.
+
+**Sources.** [AkH. 12](https://helyesiras.mta.hu/helyesiras/default/akh12) ·
+[Magay 1974, REAL-EOD](https://real-eod.mtak.hu/15195/) ·
+[Kontra 1975, *Magyar Nyelvőr* 99](https://real-j.mtak.hu/6042/1/MagyarNyelvor_1975.pdf) ·
+[*Keleti nevek magyar helyesírása* (1981)](https://real-eod.mtak.hu/12204/) ·
+[the Cyrillic and Modern-Greek volume (1985)](https://real-eod.mtak.hu/15460/) ·
+[REAL-EOD terms of use](https://real-eod.mtak.hu/policies.html) ·
+[Tótfalusi, *Kiejtési szótár* (Tinta 2006)](https://tinta.hu/Kiejtesi_szotar) ·
+[Szigetvári, *Hogy írjunk át?*](https://www.nyest.hu/hirek/hogy-irjunk-at) ·
+[Kenesei–Vago–Fenyvesi, *Hungarian*](https://publicatio.bibl.u-szeged.hu/4969/1/) ·
+[Siptár & Törkenczy, *The Phonology of Hungarian*](https://global.oup.com/academic/product/the-phonology-of-hungarian-9780199228904) ·
+[IPA magyar nyelvre](https://hu.wikipedia.org/wiki/IPA_magyar_nyelvre) ·
+[Wikipédia:Újind nevek átírása](https://hu.wikipedia.org/wiki/Wikip%C3%A9dia:%C3%9Ajind_nevek_%C3%A1t%C3%ADr%C3%A1sa) ·
+[Szjt. 1999. évi LXXVI. tv.](https://net.jogtar.hu/jogszabaly?docid=99900076.tv)
+
+### Still unverified, carried forward
+
+- **The Magyar Rádió Nyelvi Bizottság's *Az idegen szavak és betűszók ejtése.
+  Irányelvek az idegen szavak kiejtéséhez.*** The title and the committee are
+  confirmed; the text is not online. KNMH's own preface says it was written *for*
+  announcers, which may be why no separate guide was needed.
+- **Országh László's dictionaries** — whether the pronunciation column is IPA. The
+  claim is secondhand; the scans are lending-restricted and szotar.net is login-gated.
+- **Bakos, *Idegen szavak és kifejezések szótára*** uses `[e.: …]` with no diacritics,
+  no parentheses and no stress marks — coarser than Magay, and the reference for
+  foreign *common nouns* rather than names. Not read in full.
+- **Three works named in earlier briefs do not appear to exist**: Fábián–Szathmári–
+  Terestyéni *Hogy is mondjuk?*, a Bőzsöny Ferenc pronunciation guide, and a Magay
+  edition after 1986. Treat all three as false until shown otherwise.
+- **Whether Hungarian avoids duration as a prominence cue** is established for F0 by
+  two studies and contradicted by a third (Szalontai et al. 2016); what is not in
+  doubt is that stress position is fixed and length is phonemic.

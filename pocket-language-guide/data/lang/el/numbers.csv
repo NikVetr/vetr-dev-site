@@ -43,3 +43,7 @@ numbers-money.euro,ευρώ,,evro,evɾˈo,,2,euro-scope-v1;ipa=espeak
 numbers-money.euro-symbol,€,,evro,,,2,euro-scope-v1
 numbers-money.number-and-classifier-notes,"Οι αριθμοί συντίθενται: 11 = shíyī, 20 = èrshí, 21 = èrshíyī. Στο τηλέφωνο το 1 λέγεται yāo. Ανάμεσα σε αριθμό και ουσιαστικό μπαίνει υποχρεωτικά μετρική λέξη: gè (γενική), wèi (πρόσωπα), zhāng (εισιτήρια, επίπεδα), bēi (κούπες), píng (μπουκάλια). Πριν από μετρική λέξη το 2 είναι liǎng, όχι èr: liǎng zhāng piào, δύο εισιτήρια. Ο τόνος στο φωνήεν δηλώνει ύψος, όχι έμφαση. Χρήματα: kuài = γιουάν προφορικά, jiǎo / máo = 0,1 γιουάν, fēn = 0,01 γιουάν.",,,,,2,el-notes-v1
 numbers-money.number-and-classifier-notes-2,"Οι αριθμοί συντίθενται: 11 = jūichi, 20 = nijū, 21 = nijūichi. Ο μετρικός δείκτης ακολουθεί υποχρεωτικά τον αριθμό: -tsu (αντικείμενα), -mai (επίπεδα), -hon (μακρόστενα), -nin (πρόσωπα), -hai (κούπες). Στο τηλέφωνο: 0 = zero ή maru, 4 = yon, 7 = nana, 9 = kyū, και η παύλα διαβάζεται no. Το φωνήεν με γραμμή από πάνω είναι μακρό, δεν τονίζεται.",,,,,2,el-notes-v1
+numbers-money.forint,Φιορίνι Ουγγαρίας,,,fˌioɾˈini ˌuŋɡaɾˈias,,2,hu-agent-v1;ipa=espeak
+numbers-money.forint-symbol,Φιορίνι Ουγγαρίας,,,fˌioɾˈini ˌuŋɡaɾˈias,,2,hu-agent-v1;ipa=espeak
+numbers-money.rupee,Ρουπία Ινδίας,,,ɾupˈia inðˈias,,2,hu-agent-v1;ipa=espeak
+numbers-money.rupee-symbol,Ρουπία Ινδίας,,,ɾupˈia inðˈias,,2,hu-agent-v1;ipa=espeak

@@ -1,0 +1,8 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,Hol lehet jegyet venni?,,hˈol lˈɛhɛt jˈɛɟɛt vˈɛnni,,2,hu-agent-v1;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,Kell hozzá előzetes helyfoglalás?,,kˈɛll hˈozzaː ˈɛløːzɛtɛʃ hˈɛjfoɡlɑlaːʃ,,2,hu-agent-v1;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,Meddig lehet még bemenni?,,mˈɛddiɡ lˈɛhɛt mˈeːɡ bˈɛmɛnni,,2,hu-agent-v1;ipa=espeak
+attractions-tickets.are-there-lockers,Van csomagmegőrző szekrény?,,vˈɑn tʃˈomɑɡmɛɡøːrzøː sˈɛkreːɲ,,2,hu-agent-v1;ipa=espeak
+attractions-tickets.may-i-take-photos,Fényképezhetek?,,fˈeːɲkeːpɛzhɛtɛk,,2,hu-agent-v1;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,"Kérem, fényképezzen le minket",,"kˈeːrɛm, fˈeːɲkeːpɛzzɛn lˈɛ mˈinkɛt",,2,hu-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,Lefényképezne minket?,,lˈɛfeːɲkeːpɛznɛ mˈinkɛt,,2,hu-agent-v1;ipa=espeak

@@ -63,3 +63,7 @@ numbers-money.shilling,numbers-money,ref,word,shilling,1032,0.800,numbers-money.
 numbers-money.shilling-symbol,numbers-money,ref,word,shilling-symbol,1033,0.740,numbers-money.currency,1,0,neutral,sw,The abbreviation as printed on a price.
 numbers-money.baht,numbers-money,ref,word,baht,1034,0.800,numbers-money.currency,0,0,neutral,th,Thai currency.
 numbers-money.baht-symbol,numbers-money,ref,word,baht-symbol,1035,0.740,numbers-money.currency,1,0,neutral,th,The symbol as printed on a price.
+numbers-money.forint,numbers-money,ref,word,forint,1036,0.800,numbers-money.currency,0,0,neutral,hu,Hungarian currency. Hungary is in the EU and does not use the euro.
+numbers-money.forint-symbol,numbers-money,ref,word,forint-symbol,1037,0.740,numbers-money.currency,1,0,neutral,hu,The abbreviation as printed on a price.
+numbers-money.rupee,numbers-money,ref,word,rupee,1038,0.800,numbers-money.currency,0,0,neutral,hi,Indian currency.
+numbers-money.rupee-symbol,numbers-money,ref,word,rupee-symbol,1039,0.740,numbers-money.currency,1,0,neutral,hi,The symbol as printed on a price.

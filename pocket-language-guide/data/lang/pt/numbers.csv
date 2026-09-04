@@ -43,3 +43,7 @@ numbers-money.euro,euro,,ˈeʊɾʊ,,2,coordinator-gaps-v2;ipa=espeak
 numbers-money.euro-symbol,€,euro,,,2,coordinator-gaps-v2
 numbers-money.number-and-classifier-notes,"Formar números: 11 = shi yi; 20 = er shi; 21 = er shi yi. Ao telefone, o 1 lê-se muitas vezes yao. Entre o número e o nome entra sempre um classificador: ge (geral), wei (pessoas), zhang (bilhetes e coisas planas), bei (copos), ping (garrafas). Dinheiro: kuai = yuan na fala; jiao ou mao = 0,1 yuan; fen = 0,01 yuan.",,,,2,pt-notes-v1
 numbers-money.number-and-classifier-notes-2,"Formar números: 11 = juuichi; 20 = nijuu; 21 = nijuuichi. Contadores, que seguem o número: -tsu (coisas), -mai (planas), -hon (compridas), -nin (pessoas), -hai (copos). Ao telefone: 0 = zero ou maru, 4 = yon, 7 = nana, 9 = kyuu; o hífen entre blocos lê-se no.",,,,2,pt-notes-v1
+numbers-money.forint,Florim húngaro,,floɾˈiŋ ˈũŋɡæɾʊ,,2,hu-agent-v1;ipa=espeak
+numbers-money.forint-symbol,Florim húngaro,,floɾˈiŋ ˈũŋɡæɾʊ,,2,hu-agent-v1;ipa=espeak
+numbers-money.rupee,Rupia indiana,,xˌupˈiæ ˌiŋdʒiˈɐ̃næ,,2,hu-agent-v1;ipa=espeak
+numbers-money.rupee-symbol,Rupia indiana,,xˌupˈiæ ˌiŋdʒiˈɐ̃næ,,2,hu-agent-v1;ipa=espeak

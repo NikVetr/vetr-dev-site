@@ -43,3 +43,7 @@ atm-cash.money-exchange,Money changer,Penukaran uang,mˈonəj xˈaŋər,what the
 atm-cash.pin,PIN,,pˈin,,2,id-agent-v1;ipa=espeak
 numbers-money.rupiah,rupiah,,rupˈiah,,2,coordinator-gaps-v2;ipa=espeak
 numbers-money.rupiah-symbol,Rp,rupiah,ˌɛrpˈe,,2,coordinator-gaps-v2;ipa=espeak
+numbers-money.forint,Forint Hungaria,,fˈɔrint hˌuŋarˈia,,2,hu-agent-v1;ipa=espeak
+numbers-money.forint-symbol,Forint Hungaria,,fˈɔrint hˌuŋarˈia,,2,hu-agent-v1;ipa=espeak
+numbers-money.rupee,Rupee India,,rupˈɛə indˈia,,2,hu-agent-v1;ipa=espeak
+numbers-money.rupee-symbol,Rupee India,,rupˈɛə indˈia,,2,hu-agent-v1;ipa=espeak

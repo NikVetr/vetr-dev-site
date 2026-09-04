@@ -1,0 +1,12 @@
+label,text
+_frame,{region}: {numbers}
+all services,egységes segélyhívó
+police,rendőrség
+ambulance,mentők
+fire,tűzoltóság
+also works,ez is működik
+fire and ambulance,tűzoltóság + mentők
+medical,orvosi segítség
+tourist police,turistarendőrség
+police and ambulance,rendőrség + mentők
+gendarmerie,csendőrség

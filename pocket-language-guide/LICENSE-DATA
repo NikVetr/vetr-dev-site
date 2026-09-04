@@ -14,6 +14,16 @@ speakers of the languages they describe.
 
 The application code is MIT-licensed (see the repository root).
 
+The respelling rule tables (`data/respell/rules/`) are our own expression of
+published pronunciation conventions, and each file's `derives_from` names the
+standards it was written against. **Only conventions are taken -- which letter for
+which sound -- never anyone's text or entry data**; `content/RESPELL-SYSTEMS.md`
+carries the per-source licensing table and the reasoning, and several sources
+(TDK's dictionary, the Akademiai Kiado volumes behind the Hungarian table, Osiris's
+OH., Zanichelli's Italian dictionaries, Bhargava, the commercial Swahili
+dictionaries) are readable but not redistributable. The tables here are CC BY-SA 4.0
+like the rest of `data/`; the standards they describe are not ours to relicense.
+
 Bundled third-party assets keep their own licenses:
 
 - Noto Sans, Noto Sans SC, Noto Sans JP, Noto Sans Arabic (`data/fonts/`)

@@ -1,0 +1,13 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+introductions.my-name-is,A nevem: {},,ˈɑ nˈɛvɛm {},,2,hu-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,"Örülök, hogy megismerhetem",,"ˈøryløk, hˈoɟ mˈɛɡiʃmɛrhɛtɛm",,2,hu-agent-v1;ipa=espeak
+introductions.what-is-your-name,Hogy hívják?,,hˈoɟ hˈiːvjaːk,,2,hu-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,Együtt utazunk,,ˈɛɟɟytt ˈutɑzunk,,2,hu-agent-v1;ipa=espeak
+introductions.this-is-my-friend,Ő a barátom,,ˈøː ˈɑ bˈɑraːtom,,2,hu-agent-v1;ipa=espeak
+introductions.i-am-from,Innen jöttem: {},,ˈinnɛn jˈøttɛm {},,2,hu-agent-v1;ipa=espeak
+introductions.where-are-you-from,Ön honnan jött?,,ˈøn hˈonnɑn jˈøtt,,2,hu-agent-v1;ipa=espeak
+introductions.how-are-you,Hogy van?,,hˈoɟ vˈɑn,,2,hu-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,Turista vagyok,,tˈuriʃtɑ vˈɑɟok,,2,hu-agent-v1;ipa=espeak
+introductions.this-is-my-husband-wife,Ő a férjem / a feleségem,,ˈøː ˈɑ fˈeːrjɛm / ˈɑ fˈɛlɛʃeːɡɛm,,2,hu-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,Ő a lányom / a fiam,,ˈøː ˈɑ lˈaːɲom / ˈɑ fˈiɑm,,2,hu-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,Egyedül utazom,,ˈɛɟɛdyl ˈutɑzom,,2,hu-agent-v1;ipa=espeak

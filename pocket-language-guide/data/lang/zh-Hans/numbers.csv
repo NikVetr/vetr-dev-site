@@ -47,3 +47,7 @@ numbers-money.2-items,两个,,liǎng gè,ljɑŋ˧˩˧ kɤ˥˩,,2,zh-Hans-agent-v
 numbers-money.yen,日元,,Rìyuán,ʐɨ˥˩ɥœn˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
 numbers-money.yen-symbol,￥,,Rìyuán,ʐɨ˥˩ɥœn˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
 numbers-money.number-and-classifier-notes-2,日语数字的构成和汉语一样：11 = juuichi，20 = nijuu。只是 100 说 hyaku、1000 说 sen，前面不加 ichi，10000 却要 ichiman。量词紧跟数字，多半能对上汉语的量词：-mai 张，-hon 根或瓶，-nin 人，-hai 杯。-tsu 相当于个，只用到九：hitotsu、futatsu；人也特殊：hitori、futari，三人起才是 sannin。念号码：0 = zero 或 maru，4 = yon，7 = nana，9 = kyuu，横线读 no。,,,,,2,zh-Hans-notes-v1
+numbers-money.forint,匈牙利福林,,,,,2,hu-agent-v1
+numbers-money.forint-symbol,匈牙利福林,,,,,2,hu-agent-v1
+numbers-money.rupee,印度卢比,,,,,2,hu-agent-v1
+numbers-money.rupee-symbol,印度卢比,,,,,2,hu-agent-v1

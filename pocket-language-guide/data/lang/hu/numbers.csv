@@ -1,0 +1,47 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+numbers-money.l-ng,nulla,,nˈullɑ,,2,hu-agent-v1;ipa=espeak
+numbers-money.y,egy,,ˈɛɟ,,2,hu-agent-v1;ipa=espeak
+numbers-money.r,kettő,két,kˈɛttøː,kettő stands alone; két goes before a noun,2,hu-agent-v1;ipa=espeak
+numbers-money.s-n,három,,hˈaːrom,,2,hu-agent-v1;ipa=espeak
+numbers-money.s,négy,,nˈeːɟ,,2,hu-agent-v1;ipa=espeak
+numbers-money.w,öt,,ˈøt,,2,hu-agent-v1;ipa=espeak
+numbers-money.li,hat,,hˈɑt,,2,hu-agent-v1;ipa=espeak
+numbers-money.q,hét,,hˈeːt,hét also means week,2,hu-agent-v1;ipa=espeak
+numbers-money.b,nyolc,,ɲˈolts,,2,hu-agent-v1;ipa=espeak
+numbers-money.ji,kilenc,,kˈilɛnts,,2,hu-agent-v1;ipa=espeak
+numbers-money.sh,tíz,,tˈiːz,,2,hu-agent-v1;ipa=espeak
+numbers-money.y-b-i,száz,,sˈaːz,,2,hu-agent-v1;ipa=espeak
+numbers-money.y-qi-n,ezer,,ˈɛzɛr,,2,hu-agent-v1;ipa=espeak
+numbers-money.y-w-n,tízezer,,tˈiːzɛzɛr,,2,hu-agent-v1;ipa=espeak
+numbers-money.b-n,fél,,fˈeːl,fél precedes a noun; és fél follows a number,2,hu-agent-v1;ipa=espeak
+numbers-money.number-and-classifier-notes,"A számok felépítése: 11 = shí yī, 20 = èr shí, 21 = èr shí yī. Telefonszámban az 1 gyakran yāo. A szám és a főnév között kötelező az osztályozószó: gè (általános), wèi (személy), zhāng (jegy, lapos tárgy), bēi (pohár), píng (üveg). Osztályozószó előtt a kettő liǎng, nem èr: liǎng zhāng piào, két jegy. jiǎo / máo = 0,1 yuan; fēn = 0,01 yuan.",,,,2,hu-agent-v1
+numbers-money.number-and-classifier-notes-2,"A számok felépítése: 11 = juuichi, 20 = nijuu, 21 = nijuuichi. A számlálószó a szám után áll: -tsu (tárgy), -mai (lapos), -hon (hosszú), -nin (személy), -hai (pohár). Telefonban: 0 = zero vagy maru, 4 = yon, 7 = nana, 9 = kyuu. A kettőzött magánhangzó hosszú magánhangzót jelöl.",,,,2,hu-agent-v1
+atm-cash.where-is-an-atm,Hol van egy bankautomata?,Hol van egy ATM?,hˈol vˈɑn ˈɛɟ bˈɑnkɑutomɑtɑ,,2,hu-agent-v1;ipa=espeak
+atm-cash.does-this-atm-take-foreign-cards,Elfogadja ez az automata a külföldi kártyákat?,,ˈɛlfoɡɑɟɟɑ ˈɛz ˈɑz ˈɑutomɑtɑ ˈɑ kˈylføldi kˈaːrcaːkɑt,,2,hu-agent-v1;ipa=espeak
+atm-cash.the-atm-kept-my-card,Az automata bent tartotta a kártyámat,,ˈɑz ˈɑutomɑtɑ bˈɛnt tˈɑrtottɑ ˈɑ kˈaːrcaːmɑt,,2,hu-agent-v1;ipa=espeak
+atm-cash.is-there-a-fee,Van rá díj?,,vˈɑn rˈaː dˈiːj,,2,hu-agent-v1;ipa=espeak
+atm-cash.the-card-was-declined,A kártyát elutasította,,ˈɑ kˈaːrcaːt ˈɛlutɑʃiːtottɑ,,2,hu-agent-v1;ipa=espeak
+atm-cash.what-is-the-exchange-rate,Mi az átváltási árfolyam?,,mˈi ˈɑz ˈaːtvaːltaːʃi ˈaːrfojɑm,,2,hu-agent-v1;ipa=espeak
+atm-cash.no-money-came-out,Nem jött ki pénz,,nˈɛm jˈøtt kˈi pˈeːnz,,2,hu-agent-v1;ipa=espeak
+atm-cash.where-can-i-change-money,Hol tudok pénzt váltani?,,hˈol tˈudok pˈeːnst vˈaːltɑni,,2,hu-agent-v1;ipa=espeak
+atm-cash.the-machine-is-out-of-service,Az automata nem működik,,ˈɑz ˈɑutomɑtɑ nˈɛm mˈyːkødik,,2,hu-agent-v1;ipa=espeak
+atm-cash.please-give-me-smaller-notes,"Kérem, kisebb bankjegyeket adjon",,"kˈeːrɛm, kˈiʃʃɛbb bˈɑnkjɛɟɛkɛt ˈɑɟɟon",,2,hu-agent-v1;ipa=espeak
+atm-cash.do-you-have-change,Van aprójuk?,,vˈɑn ˈɑproːjuk,,2,hu-agent-v1;ipa=espeak
+atm-cash.may-i-pay-in,Fizethetek ezzel a pénznemmel: {}?,,fˈizɛthɛtɛk ˈɛzzɛl ˈɑ pˈeːnznɛmmɛl {},,2,hu-agent-v1;ipa=espeak
+atm-cash.please-charge-in-local-currency,"Kérem, forintban terhelje",,"kˈeːrɛm, fˈorintbɑn tˈɛrhɛjjɛ",declines dynamic currency conversion,2,hu-agent-v1;ipa=espeak
+atm-cash.where-can-i-get-coins,Hol kaphatok érmét?,,hˈol kˈɑphɑtok ˈeːrmeːt,,2,hu-agent-v1;ipa=espeak
+atm-cash.is-there-a-minimum-for-cards,Van kártyás minimum?,,vˈɑn kˈaːrcaːʃ mˈinimum,,2,hu-agent-v1;ipa=espeak
+atm-cash.atm,bankautomata,,bˈɑnkɑutomɑtɑ,,2,hu-agent-v1;ipa=espeak
+atm-cash.banknote,bankjegy,,bˈɑnkjɛɟ,,2,hu-agent-v1;ipa=espeak
+atm-cash.coin,érme,,ˈeːrmɛ,,2,hu-agent-v1;ipa=espeak
+atm-cash.cash-only,csak készpénz,,tʃˈɑk kˈeːspeːnz,,2,hu-agent-v1;ipa=espeak
+atm-cash.fee,díj / kezelési költség,,dˈiːj / kˈɛzɛleːʃi kˈøltʃeːɡ,,2,hu-agent-v1;ipa=espeak
+atm-cash.change,visszajáró,,vˈissɑjaːroː,,2,hu-agent-v1;ipa=espeak
+atm-cash.exchange-rate,árfolyam,,ˈaːrfojɑm,,2,hu-agent-v1;ipa=espeak
+atm-cash.bank,bank,,bˈɑnk,,2,hu-agent-v1;ipa=espeak
+atm-cash.money-exchange,pénzváltó,,pˈeːnzvaːltoː,,2,hu-agent-v1;ipa=espeak
+atm-cash.pin,PIN-kód,,pˈinkoːd,,2,hu-agent-v1;ipa=espeak
+numbers-money.forint,forint,,fˈorint,,2,hu-agent-v1;ipa=espeak
+numbers-money.forint-symbol,Ft,HUF,fˈorint,written after the amount: 500 Ft,2,hu-agent-v1;ipa=espeak
+numbers-money.rupee,indiai rúpia,,ˈindiɑi rˈuːpiɑ,,2,hu-agent-v1;ipa=espeak
+numbers-money.rupee-symbol,indiai rúpia,,ˈindiɑi rˈuːpiɑ,,2,hu-agent-v1;ipa=espeak

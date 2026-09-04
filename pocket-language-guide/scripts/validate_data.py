@@ -77,8 +77,10 @@ warnings = []
 LANGUAGE_SLOT = re.compile(r"\{(?:target|source)\}")
 
 # Languages whose CLDR names are lowercase, so a placeholder must not open a
-# sentence in them. Italian joined this set with the seventeenth pack.
-LOWERCASE_LANGUAGE_NAMES = {"fr", "es", "pt", "ru", "it"}
+# sentence in them. Italian joined this set with the seventeenth pack, Hungarian with
+# the nineteenth -- `magyar`, `angol`, `német` are adjectives and Hungarian
+# capitalises neither them nor the days and months.
+LOWERCASE_LANGUAGE_NAMES = {"fr", "es", "pt", "ru", "it", "hu"}
 
 
 def check_drawable(text, stack, where, fatal=False):
@@ -444,6 +446,35 @@ def main():
         if blank:
             warnings.append(f"concepts: the note {cid!r} has no text for "
                             f"{', '.join(blank)}, so those readers do not get it")
+
+    # **The mirror of the note rule, for the other kind of source-side row.** A
+    # concept with an `applies_to` renders only on the targets it names -- but on
+    # those pairs the *gloss* is read from whichever of the other eighteen languages
+    # is the source, and `buildBlocks` drops a row with no source row at all. So a
+    # scoped concept needs text in every ready language *outside* its scope, and
+    # nothing checked it: coverage is scored against a language as a sheet's target,
+    # and a concept scoped away from it is not in its applicable set.
+    #
+    # The eight currencies the `coordinator-gaps-v2` batch added -- the won, the
+    # euro, the lira, the dong, the ruble, the rupiah, the shilling, the baht -- got
+    # an English gloss row and no other, so `numbers-money.baht` at importance 0.80
+    # prints on `th <- en` and on none of the seventeen other Thai pairs. The
+    # zh-Hans and ja concepts of the same shape do have their rows, which is what
+    # makes this an omission rather than a design.
+    for cid, concept in concepts.items():
+        scope = {c.strip() for c in (concept.get("applies_to") or "").split(";") if c.strip()}
+        if not scope or concept["default_template"] == "note":
+            continue                              # notes have their own rule above
+        group = sections[concept["section_id"]]["group"]
+        blank = [code for code in sorted(set(ready) - scope)
+                 if not (DATA / f"lang/{code}/{group}.csv").exists()
+                 or not next((r for r in load(f"lang/{code}/{group}.csv")
+                              if r["concept_id"] == cid and r["text"].strip()), None)]
+        if blank:
+            warnings.append(f"concepts: {cid!r} is scoped to {'/'.join(sorted(scope))} "
+                            f"but has no gloss in {', '.join(blank)}, so it prints on "
+                            f"{len(ready) - len(scope) - len(blank)} of its "
+                            f"{len(ready) - len(scope)} pairs")
 
     # The emergency note's service words and its frame come from the registry in the
     # reader's language. Absent, they fall back to English, which is what every

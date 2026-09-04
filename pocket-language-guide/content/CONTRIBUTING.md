@@ -58,9 +58,9 @@ whatever that language's own table declares.
 
 ## Writing a rule table
 
-A curated sheet is written per *pair*, so it is O(N²) and only sixteen of the 306
-pairs have one. A rule table is written per *reader*, and turns on seventeen pairs at
-once. `content/RESPELL-SYSTEMS.md` surveys what to derive each one from: six
+A curated sheet is written per *pair*, so it is O(N²) and only sixteen of the 342
+pairs have one. A rule table is written per *reader*, and turns on eighteen pairs at
+once. `content/RESPELL-SYSTEMS.md` surveys what to derive each one from: seven
 languages have a published, sound-keyed key to borrow, four have a tradition to
 re-key, and eight have to be invented. Start there, not from a blank file.
 
@@ -89,7 +89,7 @@ question a reader will eventually ask.
 | `word_separator` | any string | |
 | `stress` | `caps` `acute` `grave` `prime` `none` | `caps` for a Latin script with no native mark, `acute` where one exists (Spanish, Portuguese, Russian, Greek -- where it is not a choice but the orthography), `grave` for Italian, `prime` for caseless Devanagari |
 | `stress_min_syllables` | integer | a monosyllable that shouts has stopped saying anything |
-| `length` | `none` `double` `colon` | `double` doubles a Latin vowel; Turkish takes the colon, since a doubled vowel there reads as two syllables. A non-Latin script writes length in the `phonemes` table instead, by giving `oː` its own rule |
+| `length` | `none` `double` `colon` | `double` doubles a Latin vowel; Turkish takes the colon, since a doubled vowel there reads as two syllables. A script that writes length with a *different letter* puts it in the `phonemes` table instead, by giving `oː` its own rule -- that is every non-Latin one, and Hungarian, where `ó` is not `o` twice |
 | `tone` | `keep` `drop` | `zh-Hans`, `th` and `vi` carry Chao tone letters, because tone is lexical there |
 | `max_onset` | 1, 2, 3 | onset maximisation is a claim about the *reader*. The TDK prescribes `prog-ram` over `pro-gram` for exactly the Western vocabulary this corpus is full of. Counted in phonemes, so an affricate or an aspirated stop is one consonant |
 | `reader_onsets` | IPA clusters | which multi-phoneme onsets the *reader's* orthography permits, intersected with the target's. See below |
@@ -103,8 +103,11 @@ stress can be marked on them whatever the policy says. A table only chooses the
 device.
 
 `phonemes` is the table proper: `{slot, ipa, out}` plus conditions, where `slot` is
-`onset`, `nucleus`, `coda` or `any`. **Longest `ipa` wins**, sorted by the engine,
-so file order is irrelevant -- and getting that wrong silently spells /tɕʰ/ as /t/.
+`onset`, `nucleus`, `coda` or `any`. **Longest `ipa` wins, then the narrower slot** --
+the engine sorts on those two keys and on nothing else, and getting the first wrong
+silently spells /tɕʰ/ as /t/. File order is therefore irrelevant *between* rules that
+differ on either key, and decisive between rules that do not: see "a conditioned rule
+has to be written before the unconditioned one it narrows" below.
 
 The two conditions worth understanding before writing anything are `if_inventory`
 and `unless_inventory`, which ask about the *target's* phoneme inventory rather
@@ -164,6 +167,27 @@ of what it means. The repair is the reader's own disambiguating mark -- Greek's
 diaeresis -- applied by an `after_out` condition listing the vowel letters. Any reader
 whose script has vowel digraphs should look for the same trap before trusting output
 that reads plausibly.
+
+Hungarian has the *consonant* version of it, nine times over: `cs gy ly ny sz ty zs
+dz dzs`. Two adjacent phonemes can spell a third, so /ʃ/+/z/ writes `s`+`z` and reads
+as `sz` = /s/, and /d/+/ʒ/ writes the trigraph for /dʒ/. Its repair is the reader's own
+too -- Magay's blocking hyphen, `rá-ul` for *Raoul* -- and the same `after_out`
+condition supplies it.
+
+**A repair like that has to be a `phonemes` rule, not a `syllable_fixups` pattern.**
+A fixup sees only the emitted text, so a Hungarian fixup matching `sz` cannot tell the
+/ʃ/+/z/ sequence it wants to break from the ordinary spelling of /s/, and would fire on
+every row in the corpus. `after_out` asks what this syllable has emitted *so far*,
+which is the same question with the provenance still attached.
+
+**And a conditioned rule has to be written before the unconditioned one it narrows.**
+`createRespeller` sorts the table by IPA length and then by slot specificity, and by
+nothing else -- so two rules for the same phoneme in the same slot are separated only
+by the order they appear in the file, and the conditioned one written second never
+fires. Three of the Hungarian table's conditions were silently dead for exactly that
+reason. The same tie is why a `targets` override must use the *same slot* as the
+global rule it replaces: `slot: 'any'` sorts after `slot: 'nucleus'`, so a per-target
+`any` rule loses to a global `nucleus` one and the block appears to do nothing.
 
 `--gaps` is the completeness bar. An unmapped symbol passes through rather than
 vanishing, so a gap in the table is an IPA character printed on the card -- and

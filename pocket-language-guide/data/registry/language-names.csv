@@ -6,6 +6,7 @@ ar,en,,al-injilīzīyah,ʔalʔˌinɡliˈizijˌah
 ar,es,,al-isbānīyah,ʔalʔsbaːnˈijjah
 ar,fr,,al-faransīyah,ʔalfrnsˈijjah
 ar,hi,,al-hindīyah,ʔalhindˈijjah
+ar,hu,,al-hunghārīyah,ʔalhnɣaːɹˈijjah
 ar,id,,al-indūnīsīyah,ʔalʔndˌuːniːsˈijjah
 ar,it,,al-īṭālīyah,ʔalʔˌiːt̪aːlˈijjah
 ar,ja,,al-yābānīyah,ʔaljˌaːbaːnˈijjah
@@ -24,6 +25,7 @@ de,en,,,ˈɛŋlɪʃ
 de,es,,,ʃpˈɑnɪʃ
 de,fr,,,frantsˈøːzɪʃ
 de,hi,,,hˈɪndiː
+de,hu,,,ˈʊnɡˌɑrɪʃ
 de,id,,,ˌɪndoːnˈeːzɪʃ
 de,it,,,ˌiːtalɪˈeːnɪʃ
 de,ja,,,japˈɑnɪʃ
@@ -42,6 +44,7 @@ el,en,,Anglika,ˌaŋɡlikˈa
 el,es,,Ispanika,ˌispanikˈa
 el,fr,,Gallika,ɣˌalikˈa
 el,hi,,Chinti,çˈidi
+el,hu,,Oungrika,ˌuŋɡɾikˈa
 el,id,,Indonisiaka,ˌinðonˌisjakˈa
 el,it,,Italika,ˌitalikˈa
 el,ja,,Iaponika,ˌiapˌonikˈa
@@ -60,6 +63,7 @@ en,en,English,,ˈɪŋɡlɪʃ
 en,es,,,spˈænɪʃ
 en,fr,,,fɹˈɛntʃ
 en,hi,,,hˈɪndi
+en,hu,,,hʌŋɡˈɛɹiən
 en,id,,,ɪndoʊnˈiːʒən
 en,it,,,ɪtˈæliən
 en,ja,,,dʒˌæpənˈiːz
@@ -78,6 +82,7 @@ es,en,,,iŋɡlˈes
 es,es,español,,ˌespaɲˈol
 es,fr,,,fɾansˈes
 es,hi,,,ˈindi
+es,hu,,,ˈuŋɡaɾo
 es,id,,,ˌindonˈesjo
 es,it,,,ˌitaljˈano
 es,ja,,,xˌaponˈes
@@ -96,6 +101,7 @@ fr,en,,,ɑ̃ɡlˈɛ
 fr,es,,,ɛspanjˈɔl
 fr,fr,français,,fʁɑ̃sˈɛ
 fr,hi,,,indˈi
+fr,hu,,,ɔ̃ɡʁwˈa
 fr,id,,,ɛ̃donezjˈɛ̃
 fr,it,,,italjˈɛ̃
 fr,ja,,,ʒaponˈɛ
@@ -114,6 +120,7 @@ hi,en,,aṁgrezī,ʌŋɡɾˈeːzi
 hi,es,,speniś,spˈeːnɪʃ
 hi,fr,,freṁc,fɾˈẽːc
 hi,hi,हिन्दी,hindī,hˈɪndi
+hi,hu,,haṁgeriyāī,hˌəŋɡeːɾɪjˈaːi
 hi,id,,iṁḍoneśiyāī,ˌĩɖoːnˌeːʃɪjˈaːi
 hi,it,,itālvī,ɪtˈaːlʋˌi
 hi,ja,,jāpānī,ɟaːpˈaːni
@@ -125,6 +132,25 @@ hi,th,,thāī,tʰˈaːi
 hi,tr,,turkī,tˈʊɾki
 hi,vi,,viyatnāmī,ʋˌɪjətnˈaːmi
 hi,zh-Hans,,cīnī,cˈiːni
+hu,ar,,,ˈɑrɑb
+hu,de,,,nˈeːmɛt
+hu,el,,,ɡˈørøɡ
+hu,en,,,ˈɑnɡol
+hu,es,,,ʃpˈɑɲol
+hu,fr,,,frˈɑntsiɑ
+hu,hi,,,hˈindi
+hu,hu,magyar,,mˈɑɟɑr
+hu,id,,,ˈindoneːz
+hu,it,,,ˈolɑs
+hu,ja,,,jˈɑpaːn
+hu,ko,,,kˈorɛɑi
+hu,pt,,,pˈortuɡaːl
+hu,ru,,,ˈoros
+hu,sw,,,sˈuɑheːli
+hu,th,,,thˈɑi
+hu,tr,,,tˈørøk
+hu,vi,,,vˈiɛtnaːmi
+hu,zh-Hans,,,kˈiːnɑi
 id,ar,,,ˈarab
 id,de,,,dʒˈɛrman
 id,el,,,junˈani
@@ -132,6 +158,7 @@ id,en,,,ˈiŋɡris
 id,es,,,spˈaɲol
 id,fr,,,prˈantʃis
 id,hi,,,hˈindi
+id,hu,,,hˌuŋarˈia
 id,id,Indonesia,,ˌindonəsˈia
 id,it,,,ˌitalˈia
 id,ja,,,dʒˈɛpaŋ
@@ -150,9 +177,10 @@ it,en,,,iŋɡlˈeze
 it,es,,,spaɲˈɔlo
 it,fr,,,frantʃˈeze
 it,hi,,,ˈindɪ
+it,hu,,,ʊŋɡerˈeze
 it,id,,,indonezjˈano
 it,it,italiano,,italiˈano
-it,ja,,,dʒapːonˈeze
+it,ja,,,dʒapponˈeze
 it,ko,,,koreˈano
 it,pt,,,portoɡˈeze
 it,ru,,,rˈusso
@@ -168,6 +196,7 @@ ja,en,,eigo,eiɡo
 ja,es,,supeingo,sɯpeiɴɡo
 ja,fr,,furansugo,ɸɯɾaɴsɯɡo
 ja,hi,,hindīgo,çiɴdiːɡo
+ja,hu,,hangarīgo,haɴɡaɾiːɡo
 ja,id,,indoneshiago,iɴdoneɕiaɡo
 ja,it,,itariago,itaɾiaɡo
 ja,ja,日本語,nihongo,ɲihoɴɡo
@@ -186,6 +215,7 @@ ko,en,,yeongeo,jʌŋʌ
 ko,es,,seupeineo,sɯpʰeinʌ
 ko,fr,,peurangseu-eo,pʰɯɾaŋsɯʌ
 ko,hi,,hindi-eo,hindiʌ
+ko,hu,,heonggari-eo,hʌŋɡaɾiʌ
 ko,id,,indonesia-eo,indonesiaʌ
 ko,it,,itallia-eo,itʰalliaʌ
 ko,ja,,ilboneo,ilbonʌ
@@ -204,6 +234,7 @@ pt,en,,,iŋɡlˈes
 pt,es,,,ˌespɐ̃ɲˈɔl
 pt,fr,,,frɐ̃ŋsˈes
 pt,hi,,,iŋdʒˈi
+pt,hu,,,ˈũŋɡæɾʊ
 pt,id,,,ˌiŋdonˈɛzjʊ
 pt,it,,,ˌitaliˈɐ̃nʊ
 pt,ja,,,ʒˌaponˈes
@@ -222,6 +253,7 @@ ru,en,английском,angliyskom,anɡɭʲˈijskʌm
 ru,es,испанском,ispanskom,ɪspˈɑnskʌm
 ru,fr,французском,frantsuzskom,frantsˈusskʌm
 ru,hi,хинди,khindi,xˈindʲɪ
+ru,hu,венгерском,vengerskom,vʲinɡʲˈerskʌm
 ru,id,индонезийском,indoneziyskom,ɪndʌnʲˈeʑijskʌm
 ru,it,итальянском,italʼyanskom,ɪtaɭjˈjanskʌm
 ru,ja,японском,yaponskom,japˈonskʌm
@@ -240,6 +272,7 @@ sw,en,,,kˌiiŋɡerˈeza
 sw,es,,,kˌihispanˈia
 sw,fr,,,kˌifarˈansa
 sw,hi,,,kihˈindi
+sw,hu,,,kˌihuŋɡarˈia
 sw,id,,,kˌiindˌonesˈia
 sw,it,,,kˌiitˌaliˈano
 sw,ja,,,kˌiɟapˈani
@@ -258,6 +291,7 @@ th,en,,angkrit,ʔaŋ˧kri˨˩
 th,es,,sapen,sa˨˩peːn˧
 th,fr,,farangset,fa˨˩raŋ˨˩seːt˨˩
 th,hi,,hindi,hin˧diː˧
+th,hu,,hangkari,haŋ˧kaː˧riː˧
 th,id,,indonisia,ʔin˧doː˧niː˧sia̯˧
 th,it,,itali,ʔiʔ˨˩taː˧liː˧
 th,ja,,yipun,jiː˥˩pun˨˩
@@ -276,6 +310,7 @@ tr,en,,,ɪnɟˈilɪzdʒɛ
 tr,es,,,ɪspanjɔɫdʒˈa
 tr,fr,,,fransɯzdʒˈa
 tr,hi,,,hˈɪnttʃɛ
+tr,hu,,,madʒardʒˈa
 tr,id,,,ændonˈɛzdʒɛ
 tr,it,,,itaɫjandʒˈa
 tr,ja,,,ʒapɔndʒˈa
@@ -294,6 +329,7 @@ vi,en,Anh,,aɲ˧
 vi,es,Tây Ban Nha,,t̪əɪ˧ baːn˧ ɲaː˧
 vi,fr,Pháp,,faːp˧˥
 vi,hi,Hindi,,hɪndi˧
+vi,hu,Hungary,,hʌŋɡəɹi˧
 vi,id,Indonesia,,ɪndəʊniːziə̯˧
 vi,it,Ý,,i˧˥
 vi,ja,Nhật,,ɲət̪˨˩ˀ
@@ -312,6 +348,7 @@ zh-Hans,en,,Yīngyǔ,iŋ˥y˧˩˧
 zh-Hans,es,,Xībānyáyǔ,ɕi˥pan˥ja˧˥y˧˩˧
 zh-Hans,fr,,Fǎyǔ,fa˧˩˧y˧˩˧
 zh-Hans,hi,,Yìndìyǔ,in˥˩ti˥˩y˧˩˧
+zh-Hans,hu,,Xiōngyálìyǔ,ɕjʊŋ˥ja˧˥li˥˩y˧˩˧
 zh-Hans,id,,Yìndùníxīyàyǔ,in˥˩tu˥˩ni˧˥ɕi˥ja˥˩y˧˩˧
 zh-Hans,it,,Yìdàlìyǔ,i˥˩ta˥˩li˥˩y˧˩˧
 zh-Hans,ja,,Rìyǔ,ʐɨ˥˩y˧˩˧

@@ -63,3 +63,7 @@ numbers-money.shilling,shilling,,ʃˈɪlɪŋ,,2,coordinator-gaps-v2;ipa=espeak
 numbers-money.shilling-symbol,shilling (symbol),,ʃˈɪlɪŋ sˈɪmbəl,,2,coordinator-gaps-v2;ipa=espeak
 numbers-money.baht,baht,,bˈɑːt,,2,coordinator-gaps-v2;ipa=espeak
 numbers-money.baht-symbol,baht (symbol),,bˈɑːt sˈɪmbəl,,2,coordinator-gaps-v2;ipa=espeak
+numbers-money.forint,Hungarian Forint,,hʌŋɡˈɛɹiən fˈɔːɹɪnt,,2,hu-agent-v1;ipa=espeak
+numbers-money.forint-symbol,Hungarian Forint,,hʌŋɡˈɛɹiən fˈɔːɹɪnt,,2,hu-agent-v1;ipa=espeak
+numbers-money.rupee,Indian Rupee,,ˈɪndiən ɹˈuːpiː,,2,hu-agent-v1;ipa=espeak
+numbers-money.rupee-symbol,Indian Rupee,,ˈɪndiən ɹˈuːpiː,,2,hu-agent-v1;ipa=espeak

@@ -49,3 +49,7 @@ numbers-money.yen-symbol,¥,yen,,,2,es-agent-v1
 numbers-money.number-and-classifier-notes-2,"Para formar números: 11 = juuichi; 20 = nijuu; 21 = nijuuichi. Contadores: -tsu (objetos), -mai (cosas planas), -hon (cosas largas), -nin (personas), -hai (tazas). Al leer un teléfono: 0 = zero o maru, 4 = yon, 7 = nana, 9 = kyuu.",,,,2,es-notes-v1
 numbers-money.euro,el euro,,el ˈeʊɾo,,2,es-agent-v1;ipa=espeak
 numbers-money.euro-symbol,€,euro,,,2,es-agent-v1
+numbers-money.forint,forinto húngaro,,foɾˈinto ˈuŋɡaɾo,,2,hu-agent-v1;ipa=espeak
+numbers-money.forint-symbol,forinto húngaro,,foɾˈinto ˈuŋɡaɾo,,2,hu-agent-v1;ipa=espeak
+numbers-money.rupee,rupia india,,rˈupja ˈindja,,2,hu-agent-v1;ipa=espeak
+numbers-money.rupee-symbol,rupia india,,rˈupja ˈindja,,2,hu-agent-v1;ipa=espeak
