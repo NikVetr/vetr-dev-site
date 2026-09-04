@@ -33,6 +33,7 @@ taxi.can-you-wait-for-me-here,Meg tudna itt várni?,,mˈɛɡ tˈudnɑ ˈitt vˈa
 taxi.we-need-to-catch-the-high-speed-train,El kell érnünk a nagysebességű vonatot,,ˈɛl kˈɛll ˈeːrnynk ˈɑ nˈɑɟʃɛbɛʃʃeːɡyː vˈonɑtot,,2,hu-agent-v1;ipa=espeak
 taxi.please-use-the-meter,"Kérem, kapcsolja be a taxamétert",,"kˈeːrɛm, kˈɑptʃojjɑ bˈɛ ˈɑ tˈɑksɑmeːtɛrt",,2,hu-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,Itt szállok ki,,ˈitt sˈaːllok kˈi,,2,hu-agent-v1;ipa=espeak
+taxi.please-get-me-there-in-time-for-the-shinkansen,"Időben a sinkanszenhez, kérem",,"ˈidøːbɛn ˈɑ ʃˈinkɑnsɛnhɛz, kˈeːrɛm",,1,reader-gloss-v1;ipa=espeak
 transit-rides.two-tickets,Két jegyet kérek,,kˈeːt jˈɛɟɛt kˈeːrɛk,,2,hu-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,Hol van a metróállomás?,,hˈol vˈɑn ˈɑ mˈɛtroːaːllomaːʃ,,2,hu-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,Ez a busz / vonat ide megy: {}?,,ˈɛz ˈɑ bˈus / vˈonɑt ˈidɛ mˈɛɟ {},,2,hu-agent-v1;ipa=espeak
@@ -53,6 +54,7 @@ place-words.service-desk,információs pult,,ˈinformaːtsioːʃ pˈult,,2,hu-ag
 place-words.bus-stop,buszmegálló,,bˈusmɛɡaːlloː,,2,hu-agent-v1;ipa=espeak
 place-words.luggage-storage,csomagmegőrző,,tʃˈomɑɡmɛɡøːrzøː,,2,hu-agent-v1;ipa=espeak
 place-words.tourist-spot-sightseeing-area,látnivaló,,lˈaːtnivɑloː,,2,hu-agent-v1;ipa=espeak
+place-words.scenic-area,látnivaló,természeti látnivaló,lˈaːtnivɑloː,,1,reader-gloss-v1;ipa=espeak
 border-customs.i-am-a-tourist,Turista vagyok,,tˈuriʃtɑ vˈɑɟok,,2,hu-agent-v1;ipa=espeak
 border-customs.here-is-my-passport,"Tessék, az útlevelem",,"tˈɛʃʃeːk, ˈɑz ˈuːtlɛvɛlɛm",,2,hu-agent-v1;ipa=espeak
 border-customs.i-am-staying-for-days,{} napig maradok,,{} nˈɑpiɡ mˈɑrɑdok,,2,hu-agent-v1;ipa=espeak
@@ -111,3 +113,4 @@ common-signs.closed,zárva,,zˈaːrvɑ,,2,hu-agent-v1;ipa=espeak
 common-signs.stopped-stop,leállt,,lˈɛaːlt,,2,hu-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Kell érvényesíteni ezt a jegyet?,,kˈɛll ˈeːrveːɲɛʃiːtɛni ˈɛst ˈɑ jˈɛɟɛt,Hungary fines an unvalidated ticket,2,hu-agent-v1;ipa=espeak
 rail-station-words.ticket-validator,jegykezelő,,jˈɛɟkɛzɛløː,,2,hu-agent-v1;ipa=espeak
+rail-station-words.maglev,mágnesvasút,maglev,mˈaːɡnɛʃvɑʃuːt,,1,reader-gloss-v1;ipa=espeak

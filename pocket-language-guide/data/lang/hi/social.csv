@@ -26,6 +26,7 @@ communication.please-show-me-the-text,वह {target} में लिखा ह
 communication.i-cannot-make-out-what-you-are-saying,आपकी बात समझ नहीं आ रही,,āpkī bāt samajh nahīṁ ā rahī,ˌaːpkˌi bˈaːt sˈʌməɟʰ nˈʌhĩ ˈaː ɾˌəhi,,2,hi-agent-v1;ipa=espeak
 communication.i-do-not-understand,मुझे समझ नहीं आया,,mujhe samajh nahīṁ āyā,mˌʊɟʰeː sˈʌməɟʰ nˈʌhĩ ˈaːjaː,,2,hi-agent-v1;ipa=espeak
 communication.i-cannot-read-it,मुझे यह पढ़ना नहीं आता,,mujhe yah paṛhnā nahīṁ ātā,mˌʊɟʰeː jˌəh pˈʌɽʰənˌaː nˈʌhĩ ˈaːtaː,,2,hi-agent-v1;ipa=espeak
+communication.please-write-it-in-roman-letters,रोमन अक्षरों में लिख दीजिए,,,ɾˈoːmən ˈʌkʃəɾˌõ mẽː lˈɪkʰ dˈiːɟɪˌeː,,1,reader-gloss-v1;ipa=espeak
 quick-responses.please-go-ahead,कहिए,जी,kahie,kˈʌhɪˌeː,go ahead / please,2,hi-agent-v1;ipa=espeak
 quick-responses.yes-right,हाँ / जी हाँ,,hāṁ / jī hāṁ,hˈã / ɟˈi hˈã,,2,hi-agent-v1;ipa=espeak
 quick-responses.no-not,नहीं,,nahīṁ,nˈʌhĩ,,2,hi-agent-v1;ipa=espeak

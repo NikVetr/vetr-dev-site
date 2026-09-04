@@ -2,7 +2,32 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { fillLanguageSlots, loadCorpus, loadLanguage } from '../core/pack.js';
+import {
+  buildBlocks, fillLanguageSlots, loadCorpus, loadLanguage, loadRespellOverrides,
+} from '../core/pack.js';
+import { referenceSpec } from '../scripts/spec.mjs';
+
+/** The corpus, once. */
+let held;
+const context = async () => {
+  held ??= await loadCorpus((rel) => readFile(rel, 'utf8'));
+  return held;
+};
+
+/** The blocks a pair produces, slots filled the way `core/sheet.js` fills them.
+ * @param {any} corpus @param {string} target @param {string} source */
+const blocksFor = async (corpus, target, source) => {
+  const spec = await referenceSpec(target, source);
+  const load = (/** @type {string} */ code) => loadLanguage(
+    (rel) => readFile(rel, 'utf8'), code, corpus.groups);
+  const [targetRows, sourceRows] = await Promise.all([load(target), load(source)]);
+  const pair = { target, source };
+  fillLanguageSlots(targetRows, { ...pair, locale: target, names: corpus.languageNames[target] });
+  fillLanguageSlots(sourceRows, { ...pair, locale: source, names: corpus.languageNames[source] });
+  const respell = await loadRespellOverrides(
+    (rel) => readFile(rel, 'utf8'), target, source, spec.accent).catch(() => ({}));
+  return buildBlocks({ corpus, targetRows, sourceRows, respell, spec });
+};
 
 const ID = 'communication.do-you-speak-english';
 
@@ -154,4 +179,31 @@ test('every pack agrees on which slots a concept takes', async () => {
   // not speak / please write *the local* language".
   const slotted = [...byConcept.entries()].filter(([, seen]) => [...seen.keys()].some(Boolean));
   assert.ok(slotted.length >= 6, `${slotted.length} concepts carry a language slot`);
+});
+
+test('a section shows one row shape at a time', async () => {
+  // A row's template comes from its concept and a section mixes them freely --
+  // `toilets` is fifteen phrases and ten words -- so in rank order the two shapes
+  // alternated row by row: a phrase in two columns with its respelling underneath,
+  // then a word in a three-column grid with the respelling beside it, then another
+  // phrase. `buildBlocks` already groups *consecutive* rows of one template into a
+  // run, so the fix was to stop rank order interleaving them.
+  //
+  // Asserted as "no template appears in two separate runs", which is the property,
+  // rather than as an expected sequence, which would be a snapshot of the corpus.
+  const ctx = await context();
+  for (const [target, source] of [['es', 'en'], ['ja', 'en'], ['el', 'hu']]) {
+    const blocks = await blocksFor(ctx, target, source);
+    /** @type {Record<string, string[]>} */ const seq = {};
+    let section = null;
+    for (const b of blocks) {
+      if (b.kind === 'heading') { section = b.sectionId; seq[section] = []; continue; }
+      if (b.kind === 'items' && section) seq[section].push(b.templateId ?? 'entry');
+    }
+    for (const [id, list] of Object.entries(seq)) {
+      const runs = list.filter((v, i) => i === 0 || v !== list[i - 1]);
+      assert.equal(runs.length, new Set(list).size,
+        `${target}<-${source} ${id} interleaves its templates: ${runs.join(' > ')}`);
+    }
+  }
 });

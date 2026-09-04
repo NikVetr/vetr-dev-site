@@ -10,6 +10,14 @@
 // working through a list of them.
 
 import { number, t } from './i18n.js';
+import { nextIndex } from './keys.js';
+
+/** The sheet's own field order, so a tree row reads the way the printed row does. */
+const TREE_FIELDS = /** @type {import('../core/types.js').FieldId[]} */ ([
+  'script', 'script_alt', 'roman', 'ipa', 'gloss', 'literal', 'respell',
+]);
+/** Which of them are the target language's, and so take its font and lang tag. */
+const TARGET_FIELDS = new Set(['script', 'script_alt', 'roman', 'ipa', 'literal']);
 import { appliesTo } from '../core/pack.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
@@ -61,6 +69,9 @@ function el(tag, attrs = {}, kids = []) {
  * @property {import('../core/types.js').SheetSpec} spec
  * @property {any} theme
  * @property {(patch:{sections?:Record<string,boolean>, items?:Record<string,boolean>, sectionColors?:Record<string,string>})=>void} onToggle
+ * @property {(conceptId:string, values:Record<string,string>)=>void} [onEdit]  what
+ *   the reader typed into a row, to go in the same `overrides` layer the CSV import
+ *   writes
  * @property {(conceptId:string|null)=>void} onHover
  * @property {any} icons                     data/icons.json
  * @property {Record<string,string>} [sectionTitles] headings in the source
@@ -79,11 +90,17 @@ export function createTree(input) {
   const { root, corpus, theme, spec } = input;
 
   /** @type {{sectionId:string, box:HTMLInputElement, count:HTMLElement,
-   *          swatch:HTMLElement, role:string,
-   *          items:{conceptId:string, box:HTMLInputElement, target:HTMLElement,
-   *                  gloss:HTMLElement, row:HTMLElement}[]}[]} */
+   *          swatch:HTMLElement, menu:HTMLElement, role:string,
+   *          items:{conceptId:string, box:HTMLInputElement,
+   *                  cells:Record<string,HTMLElement>, row:HTMLElement}[]}[]} */
   const sections = [];
   /** @type {Node[]} */ const nodes = [];
+  /** The one colour menu that is open, if any. One at a time, and one listener for
+   * the whole tree rather than fifty. */
+  /** @type {(() => void)|null} */ let open = null;
+  root.addEventListener('pointerdown', (event) => {
+    if (open && !(/** @type {Element} */ (event.target).closest('.tree-color-wrap'))) open();
+  });
 
   for (const section of corpus.sections) {
     const title = input.sectionTitles?.[section.section_id] || section.title_en;
@@ -130,31 +147,95 @@ export function createTree(input) {
       'aria-label': t('tree.recolour', { section: title }),
       title: t('tree.recolour', { section: title }),
     }, [icon ?? el('span', { class: 'dot', style: `background:${color}` })]);
+    // **A menu, not a cycle.** This used to advance to the next role on each click,
+    // which is a control you cannot use: the swatch is the section's own icon and
+    // does not read as a button, and even once you find it you are cycling blind
+    // through five colours to reach the one you want. The five are in front of you
+    // now, the current one is marked, and the section's colour is the sheet's whole
+    // category cue -- so choosing it deliberately is the point.
+    const roles = Object.keys(theme.colors.roles);
+    const menu = el('div', { class: 'role-menu', hidden: 'hidden', role: 'menu' },
+      roles.map((r) => {
+        const option = el('button', {
+          type: 'button',
+          class: `role-option${r === role ? ' current' : ''}`,
+          role: 'menuitemradio',
+          'aria-checked': String(r === role),
+          'aria-label': r,
+          title: r,
+        }, [el('span', { class: 'dot', style: `background:${theme.colors.roles[r]}` })]);
+        option.addEventListener('click', (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          closeMenu();
+          input.onToggle({ sectionColors: { [section.section_id]: r } });
+        });
+        return option;
+      }));
+
+    function closeMenu(focus = false) {
+      if (menu.hidden) return;
+      menu.hidden = true;
+      swatch.setAttribute('aria-expanded', 'false');
+      if (focus) swatch.focus();
+      if (open === closeMenu) open = null;
+    }
+
+    swatch.setAttribute('aria-haspopup', 'true');
+    swatch.setAttribute('aria-expanded', 'false');
     swatch.addEventListener('click', (event) => {
       // Inside a <summary>, so the click would otherwise fold the section.
       event.preventDefault();
       event.stopPropagation();
-      const roles = Object.keys(theme.colors.roles);
-      const next = roles[(roles.indexOf(role) + 1) % roles.length];
-      input.onToggle({ sectionColors: { [section.section_id]: next } });
+      const show = menu.hidden;
+      if (open) open();
+      menu.hidden = !show;
+      swatch.setAttribute('aria-expanded', String(show));
+      if (show) {
+        open = closeMenu;
+        /** @type {HTMLElement} */ (menu.firstElementChild)?.focus();
+      }
     });
-    const summary = el('summary', {}, [sectionBox, swatch, el('span', { text: title }), count]);
+    menu.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') { event.preventDefault(); closeMenu(true); return; }
+      const options = [...menu.children];
+      const to = nextIndex(event.key, options.indexOf(/** @type {Element} */ (event.target)),
+        options.length);
+      if (to < 0) return;
+      event.preventDefault();
+      /** @type {HTMLElement} */ (options[to]).focus();
+    });
+    const summary = el('summary', {}, [
+      sectionBox, el('span', { class: 'tree-color-wrap' }, [swatch, menu]),
+      el('span', { text: title }), count,
+    ]);
 
-    /** @type {{conceptId:string, box:HTMLInputElement, target:HTMLElement,
-     *          gloss:HTMLElement, row:HTMLElement}[]} */
+    /** @type {{conceptId:string, box:HTMLInputElement,
+     *          cells:Record<string,HTMLElement>, row:HTMLElement}[]} */
     const items = [];
     const list = el('ul', { class: 'items' }, concepts.map((concept) => {
       const box = /** @type {HTMLInputElement} */ (el('input', { type: 'checkbox' }));
       box.addEventListener('change', () => {
         input.onToggle({ items: { [concept.conceptId]: box.checked } });
       });
-      const target = el('span', { class: 'target', lang: spec.target });
-      const gloss = el('span', { class: 'gloss', lang: spec.source });
+      // **Every column the sheet shows, in the sheet's own order.** The row used to
+      // carry the script and the gloss alone, so a reader checking a romanisation or
+      // a respelling had to find the row on the page instead -- and the respelling is
+      // the column most likely to be wrong, since it is generated. `TREE_FIELDS` is
+      // the sheet's order (`core/solve/arrange.js`), and `numeral` is left out
+      // because it is the gloss cell under another name.
+      /** @type {Record<string, HTMLElement>} */ const cells = {};
+      for (const field of TREE_FIELDS) {
+        if (!spec.fieldSet.includes(field) || field === 'numeral') continue;
+        cells[field] = el('span', {
+          class: `cell ${field}`,
+          lang: TARGET_FIELDS.has(field) ? spec.target : spec.source,
+        });
+      }
       const li = el('li', { 'data-concept': concept.conceptId }, [
         el('label', {}, [
           box,
-          target,
-          gloss,
+          ...Object.values(cells),
           ...(concept.custom ? [el('span', { class: 'tag mine', text: t('tree.mine') })] : []),
           // Two decimals, right-justified against the panel edge, because it is a
           // number to compare down a column rather than to read in a sentence.
@@ -167,12 +248,69 @@ export function createTree(input) {
       ]);
       li.addEventListener('mouseenter', () => input.onHover(concept.conceptId));
       li.addEventListener('mouseleave', () => input.onHover(null));
-      items.push({ conceptId: concept.conceptId, box, target, gloss, row: li });
+
+      // **Clicking the row edits it.** The checkbox says whether the row is on the
+      // sheet, which is a different question from what it says, and the tree used to
+      // answer only the first -- so correcting a generated respelling meant a CSV
+      // round trip. An edit is an entry in `edits.overrides`, the same layer the CSV
+      // import writes, so it survives a reload and exports with everything else.
+      //
+      // On the label, not the `li`: the checkbox is inside the label and must keep
+      // its own click. And a `pointerdown` on the label would beat the checkbox to
+      // it, so this listens for `click` and lets the checkbox stop its own.
+      const openEditor = () => {
+        if (li.querySelector('.item-edit')) return;
+        const fields = Object.keys(cells);
+        /** @type {Record<string, HTMLInputElement>} */ const boxes = {};
+        const form = el('form', { class: 'item-edit' });
+        for (const field of fields) {
+          const id = `edit-${concept.conceptId}-${field}`;
+          const box2 = /** @type {HTMLInputElement} */ (el('input', {
+            type: 'text', id, value: cells[field].textContent ?? '',
+            lang: TARGET_FIELDS.has(/** @type {any} */ (field)) ? spec.target : spec.source,
+          }));
+          boxes[field] = box2;
+          form.append(el('label', { for: id }, [
+            el('span', { class: 'small muted', text: t(`field.${field}`) }), box2,
+          ]));
+        }
+        const close = () => form.remove();
+        form.append(el('div', { class: 'row' }, [
+          el('button', { type: 'submit', text: t('tree.saveEdit') }),
+          el('button', { type: 'button', class: 'ghost', text: t('quiz.cancel') }),
+        ]));
+        form.querySelector('.ghost')?.addEventListener('click', close);
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          /** @type {Record<string,string>} */ const values = {};
+          for (const [field, b] of Object.entries(boxes)) values[field] = b.value.trim();
+          close();
+          input.onEdit?.(concept.conceptId, values);
+        });
+        form.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') { event.preventDefault(); close(); }
+        });
+        li.append(form);
+        /** @type {HTMLElement} */ (form.querySelector('input'))?.focus();
+      };
+      li.querySelector('label')?.addEventListener('click', (event) => {
+        if (/** @type {Element} */ (event.target).closest('input[type="checkbox"]')) return;
+        event.preventDefault();
+        openEditor();
+      });
+
+      items.push({ conceptId: concept.conceptId, box, cells, row: li });
       return li;
     }));
 
     sections.push({
-      sectionId: section.section_id, box: sectionBox, count, items, swatch, role: section.color_role,
+      sectionId: section.section_id,
+      box: sectionBox,
+      count,
+      items,
+      swatch,
+      menu,
+      role: section.color_role,
     });
     nodes.push(el('li', {}, [el('details', { open: '' }, [summary, list])]));
   }
@@ -194,12 +332,19 @@ export function createTree(input) {
       section.box.checked = on;
       // The swatch is state, not shape, so it changes here rather than by rebuilding
       // the tree -- which would cost every open section and the scroll position.
-      const next = theme.colors.roles[
-        nextSpec.sectionColors?.[section.sectionId] ?? section.role
-      ];
+      const role = nextSpec.sectionColors?.[section.sectionId] ?? section.role;
+      const next = theme.colors.roles[role];
       const mark = section.swatch.firstElementChild;
       if (mark instanceof SVGElement) mark.setAttribute('stroke', next);
       else if (mark instanceof HTMLElement) mark.style.background = next;
+      // And the menu's own mark, which is what says *which* of the five is in
+      // effect. Without this the swatch changed colour and the menu went on
+      // pointing at the role the section started with.
+      for (const option of section.menu.children) {
+        const on = option.getAttribute('aria-label') === role;
+        option.classList.toggle('current', on);
+        option.setAttribute('aria-checked', String(on));
+      }
       let included = 0;
       for (const item of section.items) {
         const row = shown.get(item.conceptId);
@@ -219,11 +364,20 @@ export function createTree(input) {
         item.row.classList.toggle('added', change === true);
         item.row.classList.toggle('removed', change === false);
         if (row) {
-          item.target.textContent = row.values.script ?? '';
-          item.gloss.textContent = row.values.gloss ?? '';
-        } else if (!item.target.textContent) {
-          item.target.textContent = input.targetRows[item.conceptId]?.text ?? '';
-          item.gloss.textContent = input.sourceRows[item.conceptId]?.text ?? '';
+          const values = /** @type {Record<string,string>} */ (row.values);
+          for (const [field, cell] of Object.entries(item.cells)) {
+            cell.textContent = values[field] ?? '';
+          }
+        } else if (!item.cells.script?.textContent) {
+          // A row the solve dropped still has to say what it is, or switching a
+          // section off empties its labels. The corpus is the fallback, which has
+          // the two sides and none of the generated columns.
+          if (item.cells.script) {
+            item.cells.script.textContent = input.targetRows[item.conceptId]?.text ?? '';
+          }
+          if (item.cells.gloss) {
+            item.cells.gloss.textContent = input.sourceRows[item.conceptId]?.text ?? '';
+          }
         }
       }
       section.count.textContent = `${included}/${section.items.length}`;

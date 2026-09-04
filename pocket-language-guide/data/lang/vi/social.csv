@@ -26,6 +26,7 @@ communication.please-show-me-the-text,Xin cho tôi xem chữ tiếng {target},,s
 communication.i-cannot-make-out-what-you-are-saying,Tôi không nghe rõ,,t̪oj˧ xoŋ˧ ŋɛ˧ zɔ˧ˀ˥,,2,vi-agent-v1;ipa=espeak
 communication.i-do-not-understand,Tôi không hiểu,,t̪oj˧ xoŋ˧ hiɛ̯w˧˩˧,,2,vi-agent-v1;ipa=espeak
 communication.i-cannot-read-it,Tôi không đọc được,,t̪oj˧ xoŋ˧ ɗɔk˨˩ˀ ɗyə̯c˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+communication.please-write-it-in-roman-letters,Xin viết bằng chữ Latinh,,sin˧ viɛ̯t̪˧˥ baŋ˨˩ tʃy˧ˀ˥ latɪn˧,,1,reader-gloss-v1;ipa=espeak
 quick-responses.please-go-ahead,Xin mời,,sin˧ məːj˨˩,,2,vi-agent-v1;ipa=espeak
 quick-responses.yes-right,Vâng,Dạ,vəŋ˧,,2,vi-agent-v1;ipa=espeak
 quick-responses.no-not,Không,,xoŋ˧,,2,vi-agent-v1;ipa=espeak

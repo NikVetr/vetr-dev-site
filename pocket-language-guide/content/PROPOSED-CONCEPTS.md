@@ -126,6 +126,62 @@ Thai and Chinese readers read any superscript mark as a tone, which is why both
 dropped macron Hepburn in favour of doubled vowels. A legend would let those packs
 keep the standard romanisation instead of routing around the ambiguity.
 
+### Every currency concept, checked against `regions.csv`
+
+The euro was scoped `de;fr;es;pt` and shipped the Italian pack without it; the Indian
+rupee did not exist. Both were found by reading a concept's `applies_to` against the
+countries the registry gives its language, so the whole table was read that way once.
+Two gaps were filled -- **English had no currency concept at all**, which is the
+Swahili shilling's case exactly and worse for being the most-used target: eighteen
+pairs, eight countries, six currencies, nothing. `numbers-money.dollar` covers the
+US, Canada, Australia and New Zealand, which all write `$`, and
+`numbers-money.pound` covers the UK. The rest are staged here, worst first:
+
+- **`ar` has no currency concept either**, and cannot take one the way English did:
+  its six countries use four different words (`ريال` SAR, `جنيه` EGP, `درهم` AED and
+  MAD, `دينار` JOD and IQD). This is the shilling's shape rather than the dollar's --
+  one scoped concept whose `text` enumerates, as `TSh · KSh · USh` does -- and it
+  wants an Arabic speaker to choose the order.
+- **`es` has the euro and not the peso**, which is four of its six countries (MX, AR,
+  CO, CL). Peru is a fifth word again (`sol`). This is the Italian euro case with the
+  scope pointing the other way: the concept that exists covers the one country the
+  language is *not* mostly spoken in.
+- **`pt` has the euro and not the real**, and Brazil is the larger half of the
+  readership. AOA and MZN are a third and fourth word.
+- **`de`, `fr` and `it` all name Switzerland**, and none of them has the franc.
+- **`ru` has the ruble only**; BYN, KZT and KGS are its other three countries.
+  **`zh-Hans` has the yuan only**; SGD and MYR are the other two.
+- **`tr` names Cyprus, and is not in the euro scope.** Arguable rather than wrong --
+  the north uses the lira -- but it is the one remaining scope that a reading of
+  `regions.csv` flags.
+
+### `numbers-money.lakh` and `.crore`
+
+The unit gap of the same kind, and the corpus already accepts the shape: `万` is
+`numbers-money.y-w-n`, universal, glossed "ten thousand", because a myriad-grouped
+number is a thing a Western reader cannot parse. India groups the same way and one
+step further up. The Hindi pack stops at `दस हज़ार`, so a reader who can count to
+ten thousand still cannot read `₹5 लाख` on a price board, which is how every Indian
+price above about a hundred thousand is written -- along with the digit grouping
+that goes with it, `1,00,000` rather than `100,000`.
+
+Scope `hi`. The gloss is the awkward part rather than the target text: most languages
+have no word for either, so the reader side is a numeral -- and Arabic cannot print
+one, because the validator refuses more than one digit in a right-to-left row. So
+`مئة ألف` spelled out, which is the same repair the five existing Arabic numeral rows
+took.
+
+### `pharmacy-symptoms.i-think-i-have-dengue`
+
+The disease gap beside the malaria pair, and it reaches more of the corpus than
+malaria does: dengue is endemic in Thailand, Vietnam, Indonesia and India, has been
+transmitted locally in Italy and Greece, and its first days are indistinguishable
+from malaria's, which is exactly why naming it separately gets the right test. Unlike
+malaria there is no treatment to ask for, so the second row would be the warning
+rather than the test -- the standard advice is paracetamol and *not* ibuprofen or
+aspirin, which the bank already has words for in `pharmacy-symptoms.analgesic`.
+Scope roughly `th;vi;id;hi;pt;es`, with `it` and `el` a judgement call.
+
 ## Worth doing, lower urgency
 
 ### `dietary-needs.jain` and `dietary-needs.no-onion-garlic`

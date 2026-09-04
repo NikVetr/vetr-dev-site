@@ -113,6 +113,8 @@ pharmacy-symptoms.i-have-a-burn,やけどをしました,,yakedo o shimashita,ja
 pharmacy-symptoms.it-started-days-ago,{}日前からです,,{} nichi mae kara desu,{} ɲitɕi mae kaɾa desɯ,,2,ja-agent-v1;ipa=hepburn
 pharmacy-symptoms.cough-medicine,咳止め,,sekidome,sekidome,,2,ja-agent-v1;ipa=hepburn
 pharmacy-symptoms.is-this-safe-during-pregnancy,妊娠中でも飲めますか？,,ninshinchū demo nomemasu ka?,ɲiɴɕiɴtɕɯː demo nomemasɯ ka,,2,ja-agent-v1;ipa=hepburn
+pharmacy-symptoms.i-think-i-have-malaria,マラリアかもしれません,,,,,2,malaria-reader-v1
+pharmacy-symptoms.i-need-a-malaria-test,マラリアの検査が必要です,,,,,2,malaria-reader-v1
 emergency-medical.i-feel-unwell,具合が悪いです,,guai ga warui desu,ɡɯai ɡa waɾɯi desɯ,,2,japanese-reviewed-v6;ipa=hepburn
 lost-rescue.please-look-at-my-current-location,現在地を見てください,,genzaichi o mite kudasai,ɡeɴzaitɕi o mite kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
 emergency-medical.this-is-an-emergency,緊急です,,kinkyū desu,kiɴkjɯː desɯ,,2,ja-agent-v1;ipa=hepburn

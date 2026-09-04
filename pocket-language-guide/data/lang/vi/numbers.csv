@@ -43,7 +43,31 @@ numbers-money.dong,đồng,VNĐ,ɗoŋ˨˩,,2,coordinator-gaps-v2;ipa=espeak
 numbers-money.dong-symbol,₫,VNĐ,,,2,coordinator-gaps-v2
 numbers-money.number-and-classifier-notes,"Số ghép như tiếng Việt: 11 = shíyī, 20 = èrshí, 21 = èrshíyī; 101 = yìbǎi líng yī (líng = linh). Điện thoại: 1 đọc là yāo. Trước loại từ, 2 là liǎng chứ không phải èr: liǎng zhāng piào = hai vé. gè (cái, cả cho người), wèi (vị, lịch sự), zhāng (tờ, tấm), bēi (ly), wǎn (bát), píng (chai), běn (quyển). Tiền: nói yuán là kuài; jiǎo / máo = 0,1 yuán; fēn = 0,01 yuán.",,,,2,vi-notes-v1
 numbers-money.number-and-classifier-notes-2,"Số ghép: 11 = jūichi, 20 = nijū, 21 = nijūichi; đếm theo vạn: 10.000 = ichiman. Loại từ đi sau số: -tsu (đồ vật), -mai (tờ, tấm), -hon (vật dài), -nin (người), -hai (ly), -satsu (quyển), -dai (xe, máy). Dạng ghép hay biến đổi: -tsu là hitotsu, futatsu… kokonotsu; -nin là hitori, futari, sannin; -hon là ippon, nihon, sanbon. Điện thoại: 0 = zero / maru, 4 = yon, 7 = nana, 9 = kyū; dấu gạch đọc là no.",,,,2,vi-notes-v1
-numbers-money.forint,Forint Hungary,,fɔːɹɪnt˧ hʌŋɡəɹi˧,,2,hu-agent-v1;ipa=espeak
-numbers-money.forint-symbol,Forint Hungary,,fɔːɹɪnt˧ hʌŋɡəɹi˧,,2,hu-agent-v1;ipa=espeak
-numbers-money.rupee,Rupee Ấn Độ,,ɹuːpiː˧ ən˧˥ ɗo˨˩ˀ,,2,hu-agent-v1;ipa=espeak
-numbers-money.rupee-symbol,Rupee Ấn Độ,,ɹuːpiː˧ ən˧˥ ɗo˨˩ˀ,,2,hu-agent-v1;ipa=espeak
+numbers-money.forint,forint,,fɔːɹɪnt˧,,2,reader-gloss-v1;ipa=espeak
+numbers-money.forint-symbol,forint (ký hiệu),,fɔːɹɪnt˧ ki˧˥ hiɛ̯w˨˩ˀ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupee,rupee,,ɹuːpiː˧,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupee-symbol,rupee (ký hiệu),,ɹuːpiː˧ ki˧˥ hiɛ̯w˨˩ˀ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.won,won,,wʌn˧,,2,reader-gloss-v1;ipa=espeak
+numbers-money.won-symbol,won (ký hiệu),,wʌn˧ ki˧˥ hiɛ̯w˨˩ˀ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.baht,bạt,,baːt̪˨˩ˀ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.baht-symbol,bạt (ký hiệu),,baːt̪˨˩ˀ ki˧˥ hiɛ̯w˨˩ˀ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.lira,lira,,liə̯ɹə˧,,2,reader-gloss-v1;ipa=espeak
+numbers-money.lira-symbol,lira (ký hiệu),,liə̯ɹə˧ ki˧˥ hiɛ̯w˨˩ˀ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.ruble,rúp,,zup˧˥,,2,reader-gloss-v1;ipa=espeak
+numbers-money.ruble-symbol,rúp (ký hiệu),,zup˧˥ ki˧˥ hiɛ̯w˨˩ˀ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupiah,rupiah,,ɹuːpaɪə˧,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupiah-symbol,rupiah (ký hiệu),,ɹuːpaɪə˧ ki˧˥ hiɛ̯w˨˩ˀ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.shilling,shilling,,ʃɪlɪŋ˧,,2,reader-gloss-v1;ipa=espeak
+numbers-money.shilling-symbol,shilling (ký hiệu),,ʃɪlɪŋ˧ ki˧˥ hiɛ̯w˨˩ˀ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.euro,euro,,jʊəɹəʊ˧,,2,reader-gloss-v1;ipa=espeak
+numbers-money.euro-symbol,euro (ký hiệu),,jʊəɹəʊ˧ ki˧˥ hiɛ̯w˨˩ˀ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dollar,đô la,,ɗo˧ laː˧,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dollar-symbol,đô la (ký hiệu),,ɗo˧ laː˧ ki˧˥ hiɛ̯w˨˩ˀ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.pound,bảng,,baːŋ˧˩˧,,2,reader-gloss-v1;ipa=espeak
+numbers-money.pound-symbol,bảng (ký hiệu),,baːŋ˧˩˧ ki˧˥ hiɛ̯w˨˩ˀ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.yen,yên,,iɛ̯n˧,,2,reader-gloss-v1;ipa=espeak
+numbers-money.yen-symbol,¥,,,,2,reader-gloss-v1
+numbers-money.yu-n,nhân dân tệ,,ɲən˧ zən˧ t̪e˨˩ˀ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.ku-i,nhân dân tệ (nói),,ɲən˧ zən˧ t̪e˨˩ˀ nɔj˧˥,,1,reader-gloss-v1;ipa=espeak
+numbers-money.li-ng,2 + lượng từ,,haːɪ˧ lyə̯ŋ˨˩ˀ t̪y˨˩,,1,reader-gloss-v1;ipa=espeak
+numbers-money.2-items,2 cái,,haːɪ˧ kaːj˧˥,,1,reader-gloss-v1;ipa=espeak

@@ -73,7 +73,12 @@ export async function planToPdf(plan, opts) {
         });
       } else {
         page.drawRectangle({
-          x: r.x, y: flip(r.y + r.h), width: r.w, height: r.h, color: color(r.fill),
+          x: r.x,
+          y: flip(r.y + r.h),
+          width: r.w,
+          height: r.h,
+          color: color(r.fill),
+          ...(r.opacity === undefined ? {} : { opacity: r.opacity }),
         });
       }
     }

@@ -1,7 +1,7 @@
 concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
 payment-receipt.pay-by-card,Картой?,,Kartoy?,kˈɑrtʌj,,2,ru-agent-v1;ipa=espeak
 payment-receipt.pay-cash,Наличными?,,Nalichnymi?,naɭʲˈitʃʲnɨmʲɪ,,2,ru-agent-v1;ipa=espeak
-payment-receipt.pay-by-qr-code,По QR-коду?,,Po QR-kodu?,,,2,ru-agent-v1
+payment-receipt.pay-by-qr-code,По QR-коду?,,Po QR-kodu?,pˈo kʲjuˈɑr kˈodu,,2,ru-agent-v1;ipa=espeak+loan
 payment-receipt.a-receipt-please,"Чек, пожалуйста.",,"Chek, pozhaluysta.","tʃʲˈek, pʌʒˈɑɭujsta",,2,ru-agent-v1;ipa=espeak
 payment-receipt.please-write-the-number,Напишите сумму.,,Napishite summu.,nʌpʲiʃˈɨtʲi sˈummu,,2,ru-agent-v1;ipa=espeak
 payment-receipt.how-much-in-total,Сколько всего?,,Skolʼko vsego?,skˈoɭkʌ fsʲivˈo,,2,ru-agent-v1;ipa=espeak

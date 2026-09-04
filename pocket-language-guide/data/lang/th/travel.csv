@@ -33,6 +33,7 @@ taxi.can-you-wait-for-me-here,รอที่นี่ได้ไหม,,ro thi
 taxi.we-need-to-catch-the-high-speed-train,ต้องขึ้นรถไฟ ความเร็วสูง,,tong khuen rotfai khwam reo sung,tɔŋ˥˩ kʰɯn˥˩ rot˦˥faj˧ kʰwaːm˧rew˧ suːŋ˩˩˦,,2,th-agent-v1;ipa=thaig2p
 taxi.please-use-the-meter,เปิดมิเตอร์ด้วย,กดมิเตอร์,poet mitoe duai,pɤːt˨˩ miʔ˦˥tɤː˧ dua̯j˥˩,,2,th-agent-v1;ipa=thaig2p
 taxi.i-will-get-off-here,ลงที่นี่,,long thi ni,loŋ˧ tʰiː˥˩niː˥˩,,2,th-agent-v1;ipa=thaig2p
+taxi.please-get-me-there-in-time-for-the-shinkansen,ขอให้ทันรถไฟชินคันเซ็ง,,,kʰɔː˩˩˦haj˥˩ tʰan˧ rot˦˥faj˧ tɕʰin˧ kʰan˧ seŋ˧,,1,reader-gloss-v1;ipa=thaig2p
 transit-rides.two-tickets,ขอตั๋วสองใบ,,kho tua song bai,kʰɔː˩˩˦ tua̯˩˩˦ sɔːŋ˩˩˦ baj˧,,2,th-agent-v1;ipa=thaig2p
 transit-rides.where-is-the-subway-station,สถานีรถไฟฟ้าอยู่ไหน,MRT อยู่ไหน,sathani rotfaifa yu nai,sa˨˩tʰaː˩˩˦niː˧ rot˦˥faj˧faː˦˥ juː˨˩ naj˩˩˦,,2,th-agent-v1;ipa=thaig2p
 transit-rides.does-this-bus-train-go-to,คันนี้ไป{}ไหม,,khan ni pai {} mai,kʰan˧ niː˦˥ paj˧ {} maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
@@ -53,6 +54,7 @@ place-words.service-desk,จุดบริการ,เคาน์เตอร
 place-words.bus-stop,ป้ายรถเมล์,ป้ายรถประจำทาง,pai rotme,paːj˥˩rot˦˥meː˧,,2,th-agent-v1;ipa=thaig2p
 place-words.luggage-storage,ที่ฝากกระเป๋า,,thi fak krapao,tʰiː˥˩ faːk˨˩ kra˨˩raʔ˨˩paw˩˩˦,,2,th-agent-v1;ipa=thaig2p
 place-words.tourist-spot-sightseeing-area,สถานที่ท่องเที่ยว,,sathanthi thongthiao,sa˨˩tʰaː˩˩˦tʰiː˥˩tʰɔŋ˥˩tʰia̯w˥˩,,2,th-agent-v1;ipa=thaig2p
+place-words.scenic-area,แหล่งท่องเที่ยว,,,lɛŋ˨˩tʰɔŋ˥˩tʰia̯w˥˩,,1,reader-gloss-v1;ipa=thaig2p
 border-customs.i-am-a-tourist,มาเที่ยว,,ma thiao,maː˧ tʰia̯w˥˩,,2,th-agent-v1;ipa=thaig2p
 border-customs.here-is-my-passport,นี่พาสปอร์ต,,ni phatpot,niː˥˩ pʰaː˧sa˨˩pɔːt˨˩,,2,th-agent-v1;ipa=thaig2p
 border-customs.i-am-staying-for-days,อยู่ {} วัน,,yu {} wan,juː˨˩ {} wan˧,,2,th-agent-v1;ipa=thaig2p
@@ -111,3 +113,4 @@ common-signs.closed,ปิดให้บริการ,,pit hai borikan,pit˨�
 common-signs.stopped-stop,หยุด,,yut,jut˨˩,,2,th-agent-v1;ipa=thaig2p
 transit-rides.do-i-need-to-validate,ต้องแตะบัตรก่อนไหม,,tong tae bat kon mai,tɔŋ˥˩ tɛʔ˨˩ bat˨˩ kɔːn˨˩ maj˩˩˦,tap the card first?,2,th-agent-v1;ipa=thaig2p
 rail-station-words.ticket-validator,เครื่องตรวจตั๋ว,เครื่องอ่านบัตร,khrueang truat tua,kʰrɯa̯ŋ˥˩ trua̯t˨˩ tua̯˩˩˦,,1,th-agent-v1;ipa=thaig2p
+rail-station-words.maglev,รถไฟแม่เหล็ก,,,rot˦˥faj˧ mɛː˥˩lek˨˩,,1,reader-gloss-v1;ipa=thaig2p

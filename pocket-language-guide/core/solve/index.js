@@ -65,7 +65,11 @@ export const LOOSE_FRACTION = 0.06;
  * How tall a running head or foot is, as a multiple of the theme's smallest type.
  * One line plus the air that keeps it off the first row.
  */
-const HEAD_LINES = 2.1;
+/** How tall the furniture band is, in multiples of the type it is set in. It was
+ * 2.1 -- a whole blank line above the text and most of one below -- which is a lot
+ * of a 360pt card to spend on a folio. 1.5 leaves a half-line of air on each side,
+ * which is what furniture needs and no more. */
+const HEAD_LINES = 1.5;
 
 /**
  * @param {import('../types.js').Geometry} g
@@ -178,6 +182,9 @@ function emptyColumns({ blocks, theme, spec, corpus }) {
  * @property {Awaited<ReturnType<import('../pack.js').loadCorpus>>} corpus
  * @property {ReturnType<import('../measure.js').createMeasurer>} measurer
  * @property {ReturnType<import('../fonts.js').createFontRegistry>} registry
+ * @property {string} [respellLegend]  the reader's own key to the respelling column,
+ *   from the `legend` field of their rule table. Passed in rather than read here,
+ *   because the solver does not load files.
  */
 
 /**
@@ -216,15 +223,62 @@ function headSize(theme) {
 function headText(input, face, faces) {
   const { spec, corpus } = input;
   const name = (/** @type {string} */ code) => corpus.languages[code]?.exonym_en ?? code;
-  /** @param {import('../types.js').HeadSlot} [slot] */
+
+  /** @param {import('../types.js').HeadSlot} [slot] @returns {import('../types.js').HeadPart[]} */
   const one = (slot) => {
-    if (slot === 'page') return `${face + 1} / ${faces}`;
-    if (slot === 'pair') return `${name(spec.target)} \u2192 ${name(spec.source)}`;
-    if (slot === 'region') return emergencyNote(corpus, spec.region)?.text ?? '';
-    if (slot === 'custom') return (spec.head?.text ?? '').trim();
-    return '';
+    if (slot === 'page') return [{ text: `${face + 1} / ${faces}`, bold: false }];
+    if (slot === 'pair') {
+      return [{ text: `${name(spec.target)} \u2192 ${name(spec.source)}`, bold: false }];
+    }
+    if (slot === 'region') {
+      const text = emergencyNote(corpus, spec.region)?.text ?? '';
+      if (!text) return [];
+      // The digits bold and the service words plain. This is the one piece of
+      // furniture somebody reads in an emergency, and a number set in the same
+      // 5.2pt muted grey as everything else is a number nobody finds -- so the part
+      // that has to be found is the part that is emphasised.
+      return text.split(/(\d[\d\s/-]*)/).filter(Boolean)
+        .map((part) => ({ text: part, bold: /\d/.test(part) }));
+    }
+    // The reader's own respelling key, which the rule table carries in the reader's
+    // own language -- `legend` in `data/respell/rules/<reader>__<accent>.json`. It is
+    // the one thing on the card that explains the card, so it belongs in furniture
+    // rather than taking a column.
+    if (slot === 'legend') return [{ text: (input.respellLegend ?? '').trim(), bold: false }];
+    if (slot === 'custom') return [{ text: (spec.head?.text ?? '').trim(), bold: false }];
+    return [];
   };
-  return { left: one(spec.head?.left), right: one(spec.head?.right) };
+
+  /** A position's slots, joined with a bullet. A saved spec may hold a bare slot. */
+  /** @param {import('../types.js').HeadSlot|import('../types.js').HeadSlot[]} [at] */
+  const position = (at) => {
+    const slots = (Array.isArray(at) ? at : [at]).filter(Boolean);
+    /** @type {import('../types.js').HeadPart[]} */ const out = [];
+    for (const slot of slots) {
+      const parts = one(slot).filter((p) => p.text);
+      if (!parts.length) continue;
+      if (out.length) out.push({ text: ' \u2022 ', bold: false });
+      out.push(...parts);
+    }
+    // **A part may not end in a space.** `measurer.width` drops a trailing space --
+    // `"110 "` measures exactly as wide as `"110"` -- so advancing the pen by each
+    // part's own width closed up every gap between them and the emergency line came
+    // out as `China:110police·119fire·120ambulance`. A leading space *is* counted, so
+    // the space moves to the front of the part that follows it and the widths sum.
+    for (let i = 0; i < out.length - 1; i += 1) {
+      const spaces = /\s+$/.exec(out[i].text);
+      if (!spaces) continue;
+      out[i].text = out[i].text.slice(0, -spaces[0].length);
+      out[i + 1].text = spaces[0] + out[i + 1].text;
+    }
+    return out.filter((part) => part.text);
+  };
+
+  return {
+    left: position(spec.head?.left),
+    center: position(spec.head?.center),
+    right: position(spec.head?.right),
+  };
 }
 
 /**
@@ -469,7 +523,7 @@ export function layout(input) {
     // so by here the space is already its own.
     if (band !== 0) {
       const size = headSize(theme);
-      const { left, right } = headText(input, f, faces);
+      const { left, center, right } = headText(input, f, faces);
       const y = band > 0
         ? box.top - size * 0.9
         : box.top + box.height + size * 1.35;
@@ -484,37 +538,69 @@ export function layout(input) {
         wordBreak: /** @type {'space'|'any'|'dict'} */ (corpus.scripts[sourceIso].word_break),
         slotAsRule: false,
       };
-      // The right slot is a folio or a short label and the left is prose, so when
-      // the two do not both fit the left one gives way. Trimming rather than
-      // dropping, because half a label still says which sheet this is -- and a
-      // phone card is 180pt wide, where the emergency line alone is wider.
-      const rightW = right ? measurer.width(right, style) + size : 0;
-      const room = box.width - rightW;
-      let trimmed = left;
-      while (trimmed && measurer.width(trimmed, style) > room) {
-        trimmed = trimmed.slice(0, -2);
-      }
-      if (trimmed && trimmed !== left) trimmed = `${trimmed}\u2026`;
+      /** @param {import('../types.js').HeadPart[]} parts */
+      const widthOf = (parts) => parts.reduce(
+        (sum, part) => sum + measurer.width(part.text, { ...style, weight: part.bold ? 700 : 400 }),
+        0,
+      );
+      /** @param {import('../types.js').HeadPart[]} parts @param {number} room */
+      const fit = (parts, room) => {
+        // Trimmed from the end rather than dropped, because half a label still says
+        // which sheet this is -- and a phone card is 180pt wide, where the emergency
+        // line alone is wider than the whole band.
+        const out = parts.map((part) => ({ ...part }));
+        while (out.length && widthOf(out) > room) {
+          const last = out[out.length - 1];
+          if (last.text.length > 2) last.text = last.text.slice(0, -2);
+          else out.pop();
+        }
+        if (out.length && widthOf(out) < widthOf(parts)) {
+          out[out.length - 1].text += '\u2026';
+        }
+        return out;
+      };
 
-      for (const [text, x, align] of /** @type {[string, number, 'start'|'end'][]} */ ([
-        [trimmed, box.left, 'start'],
-        [right, box.left + box.width, 'end'],
-      ])) {
-        if (!text) continue;
-        const width = measurer.width(text, style);
-        face.runs.push({
-          text,
-          x: align === 'end' ? x - width : x,
-          y,
-          // The resolved face, not the stack: a run's `fontId` keys the renderer's
-          // face table, and a stack name is not in it.
-          fontId: measurer.faceKey(style),
-          size,
-          fill: theme.colors.muted,
-          bold: false,
-          italic: false,
-          dir: style.dir,
-        });
+      // The corners are folios and short labels; the middle is where the emergency
+      // line goes and is the one that gives way, because it is also the only one
+      // whose absence loses nothing a reader can see is missing. Sized in that
+      // order: corners first, then whatever is left over for the centre.
+      const leftW = widthOf(left);
+      const rightW = widthOf(right);
+      const gap = size;
+      const placedHead = /** @type {[import('../types.js').HeadPart[], number, 'start'|'end'|'mid'][]} */ ([
+        [fit(left, Math.max(0, box.width - rightW - gap)), box.left, 'start'],
+        [fit(right, Math.max(0, box.width - leftW - gap)), box.left + box.width, 'end'],
+        [
+          fit(center, Math.max(0, box.width - leftW - rightW - gap * 2)),
+          box.left + box.width / 2,
+          'mid',
+        ],
+      ]);
+
+      for (const [parts, anchor, align] of placedHead) {
+        if (!parts.length) continue;
+        const total = widthOf(parts);
+        let x = align === 'end' ? anchor - total : align === 'mid' ? anchor - total / 2 : anchor;
+        for (const part of parts) {
+          const partStyle = { ...style, weight: /** @type {number} */ (part.bold ? 700 : 400) };
+          face.runs.push({
+            text: part.text,
+            x,
+            y,
+            // The resolved face, not the stack: a run's `fontId` keys the renderer's
+            // face table, and a stack name is not in it.
+            fontId: measurer.faceKey(partStyle),
+            size,
+            // Emphasis is carried by weight *and* ink: the band is set in the muted
+            // grey, and a bold grey number at 5.2pt is not much louder than a plain
+            // one, so an emphasised part takes the body colour too.
+            fill: part.bold ? theme.colors.ink : theme.colors.muted,
+            bold: part.bold,
+            italic: false,
+            dir: style.dir,
+          });
+          x += measurer.width(part.text, partStyle);
+        }
       }
     }
     // Behind everything, so it goes on the front of the list rather than the back.

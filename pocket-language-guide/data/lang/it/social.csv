@@ -47,6 +47,7 @@ quick-responses.no-good-not-allowed-will-not-work,non è permesso,vietato,non e 
 communication.i-cannot-make-out-what-you-are-saying,Non capisco quello che dice,,non kapˈisko kwˈɛllo ke dˈitʃe,,2,it-agent-v1;ipa=espeak
 communication.i-do-not-understand,Non capisco,,non kapˈisko,,2,it-agent-v1;ipa=espeak
 communication.i-cannot-read-it,Non riesco a leggerlo,,non riˈesko a lˈedʒdʒerlo,,2,it-agent-v1;ipa=espeak
+communication.please-write-it-in-roman-letters,Lo scriva in caratteri latini,,lo skrˈiva in kaɾˈatterɪ latˈinɪ,,1,reader-gloss-v1;ipa=espeak
 phone-translation.please-type-it-and-show-me,Lo scriva sul telefono e me lo mostri,,lo skrˈiva sʊl telˈɛfono e me lo mˈostrɪ,,2,it-agent-v1;ipa=espeak
 phone-translation.please-look-at-the-screen,"Guardi lo schermo, per favore",,"ɡwˈardɪ lo skˈermo, per favˈore",,2,it-agent-v1;ipa=espeak
 phone-text-power.may-i-charge-my-phone-here,Posso caricare il telefono qui?,,pˈɔsso karikˈare il telˈɛfono kwˈi,,2,it-agent-v1;ipa=espeak

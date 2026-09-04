@@ -113,6 +113,8 @@ pharmacy-symptoms.i-have-a-burn,我烫伤了,,wǒ tàngshāng le,wɔ˧˩˧ tʰɑ
 pharmacy-symptoms.it-started-days-ago,{}天前开始的,,{} tiān qián kāishǐ de,{} tʰjɛn˥ tɕʰjɛn˧˥ kʰaɪ˥ʂɨ˧˩˧ tɤ,,2,zh-Hans-agent-v1;ipa=pinyin
 pharmacy-symptoms.cough-medicine,止咳药,,zhǐkéyào,ʈʂɨ˧˩˧kʰɤ˧˥jɑʊ˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
 pharmacy-symptoms.is-this-safe-during-pregnancy,怀孕能吃吗？,,huáiyùn néng chī ma?,xwaɪ˧˥yn˥˩ nɤŋ˧˥ ʈʂʰɨ˥ ma,,2,zh-Hans-agent-v1;ipa=pinyin
+pharmacy-symptoms.i-think-i-have-malaria,好像得了疟疾,,,,,2,malaria-reader-v1
+pharmacy-symptoms.i-need-a-malaria-test,我需要做疟疾检查,,,,,2,malaria-reader-v1
 emergency-medical.i-feel-unwell,我不舒服,,wǒ bù shūfu,wɔ˧˩˧ pu˥˩ ʂu˥fu,,2,zh-Hans-agent-v1;ipa=pinyin
 emergency-medical.this-is-an-emergency,这是紧急情况,,zhè shì jǐnjí qíngkuàng,ʈʂɤ˥˩ ʂɨ˥˩ tɕin˧˩˧tɕi˧˥ tɕʰiŋ˧˥kʰwɑŋ˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
 lost-rescue.please-look-at-my-current-location,请看我现在的位置,,qǐng kàn wǒ xiànzài de wèizhi,tɕʰiŋ˧˩˧ kʰan˥˩ wɔ˧˩˧ ɕjɛn˥˩tsaɪ˥˩ tɤ weɪ˥˩ʈʂɨ,,2,zh-Hans-agent-v1;ipa=pinyin

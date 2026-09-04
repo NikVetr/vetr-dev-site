@@ -64,8 +64,10 @@ export function faceToSvg(face, plan, opts) {
 
   for (const r of face.rects) {
     const radius = r.r ? ` rx="${num(r.r)}"` : '';
+    const alpha = r.opacity === undefined ? '' : ` fill-opacity="${num(r.opacity)}"`;
     out.push(
-      `<rect x="${num(r.x)}" y="${num(r.y)}" width="${num(r.w)}" height="${num(r.h)}"${radius} fill="${r.fill}"/>`,
+      `<rect x="${num(r.x)}" y="${num(r.y)}" width="${num(r.w)}" height="${num(r.h)}"${radius}`
+      + ` fill="${r.fill}"${alpha}/>`,
     );
   }
 

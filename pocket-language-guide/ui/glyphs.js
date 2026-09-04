@@ -1358,6 +1358,7 @@ export function backgroundControl({ value, roleColours, flagColours, onChange })
     mode: value?.mode ?? 'none',
     color: value?.color ?? '#F6F2EA',
     strength: value?.strength ?? 0.06,
+    rows: value?.rows ?? 'shade',
   };
 
   const swatch = /** @type {HTMLInputElement} */ (document.createElement('input'));
@@ -1374,23 +1375,52 @@ export function backgroundControl({ value, roleColours, flagColours, onChange })
   strength.setAttribute('aria-label', t('format.backgroundStrength'));
   strength.title = t('format.backgroundStrength');
 
+  // What an item's own box does, which is the other half of a page background: an
+  // unshaded row used to paint paper straight over the wash, and a shaded one still
+  // does unless it is told to let it through.
+  /** @type {('shade'|'soft'|'none')[]} */
+  const ROWS = ['shade', 'soft', 'none'];
+  const rows = document.createElement('div');
+  rows.className = 'segmented rows-mode';
+  rows.setAttribute('role', 'radiogroup');
+  rows.setAttribute('aria-label', t('format.backgroundRows'));
+  /** @type {HTMLButtonElement[]} */ const rowButtons = [];
+  for (const mode of ROWS) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'chip';
+    button.setAttribute('role', 'radio');
+    button.textContent = t(`format.backgroundRows.${mode}`);
+    button.title = t(`format.backgroundRowsTitle.${mode}`);
+    button.addEventListener('click', () => push({ rows: mode }));
+    rowButtons.push(button);
+    rows.append(button);
+  }
+
   const custom = document.createElement('div');
   custom.className = 'numeric-custom';
-  custom.append(swatch, strength);
+  custom.append(swatch, strength, rows);
 
   const paint = () => {
     swatch.value = state.color;
     strength.value = String(state.strength);
     swatch.hidden = state.mode !== 'tint';
     strength.hidden = state.mode === 'tint' || state.mode === 'none';
-    custom.hidden = state.mode === 'none';
+    // The row boxes are worth choosing even on white paper -- `none` is a cleaner
+    // card -- so unlike the swatch and the slider they are always offered.
+    custom.hidden = false;
+    rowButtons.forEach((b, i) => {
+      b.classList.toggle('current', ROWS[i] === state.rows);
+      b.setAttribute('aria-checked', String(ROWS[i] === state.rows));
+      b.tabIndex = ROWS[i] === state.rows ? 0 : -1;
+    });
   };
 
   /** @param {Partial<typeof state>} patch */
   const push = (patch) => {
     state = { ...state, ...patch };
     paint();
-    onChange({ background: state.mode === 'none' ? { mode: 'none' } : { ...state } });
+    onChange({ background: { ...state } });
   };
   swatch.addEventListener('input', () => push({ color: swatch.value }));
   strength.addEventListener('input', () => push({ strength: Number(strength.value) }));
@@ -1421,6 +1451,7 @@ export function backgroundControl({ value, roleColours, flagColours, onChange })
         mode: next?.mode ?? 'none',
         color: next?.color ?? state.color,
         strength: next?.strength ?? state.strength,
+        rows: next?.rows ?? state.rows,
       };
       paint();
       group.select(state.mode);

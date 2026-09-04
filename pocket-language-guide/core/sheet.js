@@ -211,6 +211,15 @@ export async function buildSheet(ctx, spec, edits) {
   const blocks = buildBlocks({
     corpus, targetRows, sourceRows, respell, spec, edits, sectionTitles, emergencyLabels,
   });
+  // The reader's key to the respelling column, written in the reader's own language
+  // by whoever wrote their rule table. Only fetched when a head slot asks for it,
+  // since it is a second file read on a path that is otherwise already loaded.
+  const wants = [spec.head?.left, spec.head?.center, spec.head?.right]
+    .flatMap((at) => (Array.isArray(at) ? at : [at]))
+    .includes('legend');
+  const legend = wants && ctx.corpus.respellRules.has(`${spec.source}__${spec.accent}`)
+    ? (await loadRespellRules(ctx.loadText, spec.source, spec.accent)).legend
+    : undefined;
   return {
     blocks,
     theme,
@@ -218,6 +227,8 @@ export async function buildSheet(ctx, spec, edits) {
     targetRows,
     sourceRows,
     respell,
-    plan: layout({ blocks, theme, spec, corpus, measurer, registry }),
+    plan: layout({
+      blocks, theme, spec, corpus, measurer, registry, respellLegend: legend,
+    }),
   };
 }

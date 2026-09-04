@@ -97,6 +97,8 @@ pharmacy-symptoms.i-have-a-burn,Ho un'ustione,,o ʊnʊstjˈone,,2,it-agent-v1;ip
 pharmacy-symptoms.it-started-days-ago,È iniziato {} giorni fa,,e initsjˈato {} dʒˈornɪ fˈa,,2,it-agent-v1;ipa=espeak
 pharmacy-symptoms.cough-medicine,uno sciroppo per la tosse,,ˈuno ʃirˈɔppo per la tˈosse,,2,it-agent-v1;ipa=espeak
 pharmacy-symptoms.is-this-safe-during-pregnancy,Si può prendere in gravidanza?,,sɪ pʊˈɔ prˈɛndere in ɡravidˈantsa,,2,it-agent-v1;ipa=espeak
+pharmacy-symptoms.i-think-i-have-malaria,Credo di avere la malaria,,krˈɛdo dɪ avˈere la malˈaria,,2,malaria-reader-v1;ipa=espeak
+pharmacy-symptoms.i-need-a-malaria-test,Mi serve un test per la malaria,,mɪ sˈɛrve ʊn tˈɛst per la malˈaria,,2,malaria-reader-v1;ipa=espeak
 police-consulate.where-is-the-police-station,Dov'è il commissariato?,Dov'è la stazione dei carabinieri?,dovˈɛ il kommissariˈato,,2,it-agent-v1;ipa=espeak
 police-consulate.i-want-to-report-a-theft,Voglio denunciare un furto,,vˈoʎo denʊntʃˈare ʊn fˈurto,,2,it-agent-v1;ipa=espeak
 police-consulate.my-bag-was-stolen,Mi hanno rubato la borsa,,mɪ ˌanno rʊbˈato la bˈorsa,,2,it-agent-v1;ipa=espeak

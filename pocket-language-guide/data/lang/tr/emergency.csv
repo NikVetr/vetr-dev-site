@@ -78,6 +78,8 @@ pharmacy-symptoms.i-have-a-burn,Yanığım var.,,janˈɯɯɯm vˈar,,2,tr-agent-
 pharmacy-symptoms.it-started-days-ago,{} gün önce başladı.,,{} ɟˈøn ˈœndʒɛ bˈaʃɫadɯ,,2,tr-agent-v1;ipa=espeak
 pharmacy-symptoms.cough-medicine,öksürük şurubu,,œksyɾˈøk ʃuɾubˈʊ,,2,tr-agent-v1;ipa=espeak
 pharmacy-symptoms.is-this-safe-during-pregnancy,Hamilelikte güvenli mi?,,hamilelɪktˈɛ ɟyvænlˈɪ mɪ,,2,tr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-think-i-have-malaria,Sanırım sıtma oldum.,Sıtmaya yakalandım.,sanˈɯɾɯm sˈɯtma ɔɫdˈʊm,,2,malaria-reader-v1;ipa=espeak
+pharmacy-symptoms.i-need-a-malaria-test,Sıtma testi lazım.,,sˈɯtma tɛstˈɪ ɫˈazɯm,,2,malaria-reader-v1;ipa=espeak
 body-parts.head,baş,kafa,bˈaʃ,,2,tr-agent-v1;ipa=espeak
 body-parts.stomach,karın,mide,kaɾˈɯn,,2,tr-agent-v1;ipa=espeak
 body-parts.back,sırt,,sˈɯrt,,2,tr-agent-v1;ipa=espeak

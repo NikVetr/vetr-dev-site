@@ -26,6 +26,7 @@ communication.please-show-me-the-text,Tafadhali nionyeshe maandishi kwa {target}
 communication.i-cannot-make-out-what-you-are-saying,Sipati unachosema,,sipˈati ˌunatʃosˈema,I do not catch what you say,2,sw-agent-v1;ipa=espeak
 communication.i-do-not-understand,Sifahamu,,sˌifahˈamu,,2,sw-agent-v1;ipa=espeak
 communication.i-cannot-read-it,Siwezi kusoma hii,,siwˈezi kusˈoma hˌii,,2,sw-agent-v1;ipa=espeak
+communication.please-write-it-in-roman-letters,Tafadhali andika kwa herufi za Kilatini,,tˌafaðˈali andˈika kwa herˈufi za kˌilatˈini,,1,reader-gloss-v1;ipa=espeak
 quick-responses.please-go-ahead,Tafadhali,Endelea,tˌafaðˈali,,2,sw-agent-v1;ipa=espeak
 quick-responses.yes-right,Ndiyo,,n̩dˈijo,,2,sw-agent-v1;ipa=espeak
 quick-responses.no-not,Hapana,La,hapˈana,,2,sw-agent-v1;ipa=espeak

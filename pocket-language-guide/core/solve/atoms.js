@@ -414,8 +414,24 @@ function itemAtoms(ctx, block, rows, withPaint) {
 
     /** @type {Rect[]} */ const rects = [];
     /** @type {TextRun[]} */ const runs = [];
+    // **A row's own box, and only when it is one.** An unshaded row used to draw a
+    // paper-coloured rect, which is invisible on white paper and, once the page has
+    // a background, is the one thing standing between the wash and the reader: it
+    // painted paper straight over it. `rows` is what the reader says about that --
+    // `shade` alternates as before, `soft` lets the wash through the shaded rows too,
+    // and `none` drops the boxes entirely.
     const shaded = template.shadeAlternate && (startRow + i) % 2 === 1;
-    rects.push({ x: 0, y: 0, w: ctx.colWidth, h: height, fill: shaded ? ctx.palette.shade : ctx.palette.paper });
+    const rowMode = ctx.spec.background?.rows ?? 'shade';
+    if (shaded && rowMode !== 'none') {
+      rects.push({
+        x: 0,
+        y: 0,
+        w: ctx.colWidth,
+        h: height,
+        fill: ctx.palette.shade,
+        ...(rowMode === 'soft' ? { opacity: 0.45 } : {}),
+      });
+    }
     rects.push({ x: 0, y: 0, w: template.accentPt, h: height, fill: ctx.palette.roles[block.colorRole] });
     rects.push({ x: 0, y: height - template.rulePt, w: ctx.colWidth, h: template.rulePt, fill: ctx.palette.rule });
 

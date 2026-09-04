@@ -24,10 +24,10 @@ everything tiny, which nobody wants. So it moves off the anchor only for a reaso
 - it takes a pair while the type would otherwise sit near its floor.
 
 The comfort threshold is set below the Japanese reference sheet's own 0.478, which
-is a deliberately tight layout that should not be second-guessed. On 7×5in, 205 of
-the 342 shipped pairs settle on eight faces and 136 on ten; none now fits six, and
-exactly one needs twelve — `el ← hi`, where Devanagari respellings force the column
-above the theme's size and the solver reports it rather than clipping. Greek is the
+is a deliberately tight layout that should not be second-guessed. On 7×5in, 192 of
+the 342 shipped pairs settle on eight faces and 148 on ten; none now fits six, and
+two need twelve — `el ← hi` and `ru ← hi`, where Devanagari respellings force the
+column above the theme's size and the solver reports it rather than clipping. Greek is the
 second-longest language in the set after Russian and takes ten against most sources;
 Hungarian is ordinary, eight against a Latin or Cyrillic source and ten against the
 scripts that need vertical room. The
@@ -440,11 +440,76 @@ the one place the coding *was* colour alone. Those five are level-2 headings, wh
 the reference sheet prints without a mark, so their icons appear in the studio and
 not on the page.
 
+### The focused card, and two symptoms with one cause
+
+The face in the studio carries the *page's* aspect, and its overlays -- the hit boxes
+and the drag handles -- are positioned as percentages of it. A `viewBox` inside an
+element of a different aspect letterboxes, so if the box's aspect drifts the drawn
+ink moves inside the element and the overlays do not follow. That produced two
+complaints that read as unrelated: white bands down the outer edges of the card, and
+row highlights offset from the rows they name.
+
+The cause was `74vh` — a guess at how much height the card had, which knew nothing
+about the toolbar above it or the thumbnail strip below. At the default panel widths
+the *width* binds and the guess is never tested; drag the seams wide and the height
+binds, the flex item is squeezed to the real height, and `aspect-ratio` loses. Then
+the box is 1.546 where the page is 1.400 and the ink sits 56px from its own hit box.
+The face now measures the room instead: a `.face-fit` wrapper is a size container and
+the card takes `min(100%, 100cqh * aspect)`. `tests/studio.spec.js` asserts the aspect
+and the ink-to-hit offset both at the default widths and after dragging both seams,
+and fails on the old rule.
+
+### Furniture
+
+`spec.head` puts a line along the top or the bottom, in **three** positions, each
+taking any number of slots joined with a bullet. It was two positions of one slot
+each, chosen from a `<select>`, so a folio and the pair could not both print and the
+middle of the band was unreachable. A saved spec may still hold a bare slot rather
+than a list, and is read as a list of one.
+
+Five slots: the folio, the pair, the region's emergency numbers, the reader's own
+text, and the reader's **pronunciation key** -- which the respelling tables already
+carry, in the reader's own language, in their `legend` field. The emergency line
+breaks its digits out as separate runs and sets them bold and in the body ink: it is
+the one piece of furniture somebody reads in a hurry, and a number in 5.2pt muted
+grey is a number nobody finds. A part may not end in a space, because `measurer.width`
+drops a trailing one -- `"110 "` measures exactly as wide as `"110"` -- so the spaces
+are moved to the front of the following part, where they are counted.
+
+**The band is off by default, with the folio already ticked inside it.** Turning it on
+was measured rather than assumed: it costs 1.5 lines of the smallest type on the
+sheet, the fit search pays about 0.05 of type scale on most pairs, `es <- en` takes a
+whole extra *pair* of faces -- one more sheet of photo paper per card set, for a page
+number -- and the Devanagari, Arabic and Thai respellings drop under their own 5.4pt
+legibility floor, which `tests/solve.test.mjs` asserts as a safety property. So the
+choice is one click away and not made for the reader.
+
+### One shape at a time inside a section
+
+A row's template comes from its concept, and a section mixes them freely -- `toilets`
+is fifteen phrases and ten words. `buildBlocks` already grouped *consecutive* rows of
+one template into a run, so in rank order the two shapes alternated row by row: a
+phrase in two columns with its respelling underneath, then a word in a three-column
+grid with the respelling beside it, then another phrase. The concepts are now stably
+sorted by template within their section, `entry` first, so a section reads as its
+phrases followed by its reference words. Rank still orders the rows inside each group,
+so the priority ladder is untouched. Forcing one template on a whole section was the
+other option and is worse both ways: the reference grid is much the more compact, and
+a long phrase does not fit it.
+
 ### The paper's own colour
 
 `spec.background` washes the page behind the columns. White is the default and stays
 it: the reference card is white, a wash costs ink on a sheet someone prints at home,
 and `low-ink` and `mono` drop it outright the way they drop row shading.
+
+An item's own box is the other half of it, and `background.rows` says what it does:
+`shade` alternates as the reference card does, `soft` lets the wash through, `none`
+drops the boxes. An *unshaded* row used to draw a paper-coloured rect, which is
+invisible on white paper and, once the page has a background, is the one thing
+standing between the wash and the reader -- it painted paper straight over it. Those
+are gone. `soft` uses real alpha rather than pre-blending, because a `sections` or
+`flag` wash is a different colour under every row; both renderers take it natively.
 
 Four modes. `tint` is one flat rect and **takes its swatch literally** — the reader
 names the paper colour, so diluting it would make the picker lie about itself; the
@@ -1103,19 +1168,44 @@ Named so nobody has to rediscover the gap:
   a number that does not answer is worse than a blank, so it stays withheld with
   the FCDO values recorded for a future reviewer.
 
-  What is left on the respelling side is now **29 rows of 13,593**, about one and a
-  half per
-  sheet, and every one of them is a Latin acronym or brand embedded in a non-Latin
-  sentence: `Wi-Fi`, `eSIM`, `ATM`. They are left rather than unfinished, because the
-  human evidence disagrees with itself — the Mandarin and Thai curators respelled
-  them natively (`wee-fye`, `ee-sim`) while the Russian and Korean ones left the
-  Latin standing (`oo vas yest Wi-Fi`) — and neither is derivable from the other.
-  Carrying the Latin run through the way `{}` is carried *is* expressible, and it is
-  the smaller half of the decision: it would put ASCII letters into the respelling
-  charset of the six readers (ar hi ja ko ru th) that have **none** today, which is a
-  choice about what a reader is shown, not a transcription. A further 76 rows are
-  blank *correctly*: 64 are prose notes, where a respelling of a paragraph would be
-  meaningless, and 12 are bare symbols like `¥`.
+  **The respelling side of this list is closed, and how it closed is the useful
+  part.** What was left was 29 rows: 26 where a Latin acronym stands inside a
+  non-Latin sentence — `Wi-Fi`, `eSIM`, `SIM`, `PIN`, `QR`, `cm` — and three where
+  `thaig2p` looped. The curators appeared to disagree: the Mandarin and Thai sheets
+  respell the acronym natively (`wee-fye`, `ee-sim`) and the Russian and Korean ones
+  leave the letters standing (`oo vas yest Wi-Fi`, `{}cm-yeh-yo`). They are not
+  disagreeing about the same question. An override file is
+  `<target>__en__en-US.csv`, a respelling **for an English reader**, so "say Wi-Fi"
+  is a true instruction to somebody who reads English and no instruction at all to
+  the six readers whose tables emit no Latin letter — and those files are exactly the
+  pairs where the curated layer already wins, so the Russian curator's `Wi-Fi` still
+  prints on ru←en either way. The Mandarin and Thai curators wrote down a *sound*,
+  which is a fact about the target and generalises; the other two wrote down a
+  presentation, which does not. So `LOANWORDS` in `scripts/build_ipa.py` gives the
+  token a reading, per token and per language, and every reader spells it in its own
+  script. `data/respell/charset.json` gained **no ASCII letter in any reader**.
+
+  Three details worth keeping. The reading is IPA rather than the target's own
+  spelling of the sound, because **Mandarin cannot be spelt**: `fai` is not a
+  Mandarin syllable, so there is no Pinyin for `Wi-Fi` and `pinyin_to_ipa` refuses
+  it. Each value was chosen so the English table reproduces the curated string
+  where there is one — `wifaɪ` respells to `wee-fye`, the Mandarin curator's own
+  spelling, where the Pinyin-legal `weɪ` gives `way-fye` — which is the only
+  independent check available. And the row carries `ipa=<route>+loan`, so
+  `npm run validate` counts the 26 cells no route produced instead of hiding them.
+
+  The three Thai rows were a different fault: the decoder loops on `ธรรม` and `บบ`,
+  which are dictionary *syllables* that are not words, and asked for the word the
+  same model answers cleanly. `thai_syllables` retries per word, which matches the
+  curated `KAH tam-niam` and `ra-bop` exactly and leaves the other 746 rows
+  untouched.
+
+  What is blank now is blank *correctly*: 76 prose notes, where a respelling of a
+  paragraph would be meaningless, and 29 bare symbols like `¥`. The only other
+  blanks are rows whose romanisation column is not written yet — Japanese, Korean
+  and Mandarin are read off `romanization_hepburn`, `romanization_rr` and
+  `romanization_pinyin`, so a new row in one of those three has no `ipa` until a
+  translator fills the column and `npm run ipa` runs again.
 - **Dictionary line breaking** for Thai and Khmer. `scripts.csv` marks them
   `word_break: dict`; the measurer falls back to breaking anywhere and the solver
   raises a warning, rather than pretending. It does hold each *character cluster*

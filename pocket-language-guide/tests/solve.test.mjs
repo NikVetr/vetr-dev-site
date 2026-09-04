@@ -739,22 +739,66 @@ test('a running head takes its band from the margin, not from the columns', asyn
   // seam a printer's dead zone and a lock screen's clock go through -- so the
   // breaker, the fit search and all three renderers need no knowledge of it.
   const base = await referenceSpec('zh-Hans', 'en');
-  const plain = await buildSheet(ctx, base);
+  const plain = await buildSheet(ctx, { ...base, head: { at: 'none' } });
   const footed = await buildSheet(ctx, {
-    ...base, head: { at: 'bottom', left: 'region', right: 'page' },
+    ...base,
+    head: { at: 'bottom', left: ['region'], center: ['pair'], right: ['page'] },
   });
   assert.equal(footed.plan.faces.length, plain.plan.faces.length,
     'a line of furniture should not cost a face');
 
   const runs = footed.plan.faces[0].runs;
   const lowest = Math.max(...runs.map((r) => r.y));
-  const foot = runs.filter((r) => Math.abs(r.y - lowest) < 0.5);
-  assert.equal(foot.length, 2, 'two slots, left and right');
-  assert.match(foot[0].text, /police/, 'the region supplies its own emergency line');
-  assert.match(foot[1].text, /^1 \/ \d+$/, 'and the folio counts the faces');
-  // The right slot ends at the box's right edge rather than starting there.
+  const foot = runs.filter((r) => Math.abs(r.y - lowest) < 0.5).sort((a, b) => a.x - b.x);
+  const said = foot.map((r) => r.text).join('');
+  assert.match(said, /police/, 'the region supplies its own emergency line');
+  assert.match(said, /Chinese/, 'the middle names the pair');
+  assert.match(said, /1 \/ \d+/, 'and the folio counts the faces');
+
+  // The emergency *number* is emphasised and the words around it are not. It is the
+  // one thing on the card somebody reads in a hurry, and 5.2pt muted grey is not
+  // where you put a number that has to be found.
+  const emphasised = foot.filter((r) => r.bold);
+  assert.ok(emphasised.length >= 2, 'the emergency line should break out its numbers');
+  assert.ok(emphasised.every((r) => /^[\d\s/-]+$/.test(r.text)),
+    `only digits take emphasis, got ${emphasised.map((r) => r.text).join('|')}`);
+  assert.ok(foot.some((r) => /police/.test(r.text) && !r.bold), 'but not the service word');
+  // The folio starts with a digit and is *not* emphasised: emphasis marks the thing
+  // a stranger has to find, and a page number is not that.
+  assert.ok(foot.some((r) => /^1 \/ \d+$/.test(r.text) && !r.bold));
+
+  // Three positions: outer corners at the edges, and the middle in the middle.
   const box = contentBox(base.geometry, base.paper);
-  assert.ok(foot[1].x > box.left + box.width * 0.8, 'the folio sits in the corner');
+  const mid = box.left + box.width / 2;
+  assert.ok(foot[0].x < box.left + box.width * 0.2, 'the region opens at the left edge');
+  assert.ok(foot[foot.length - 1].x > mid, 'the folio sits in the right corner');
+  assert.ok(foot.some((r) => /Chinese/.test(r.text) && Math.abs(r.x - mid) < box.width * 0.3),
+    'and the pair is near the centre line');
+});
+
+test('a head position takes several slots, joined with a bullet', async () => {
+  // One slot per position was the shape at first, chosen from a `<select>`, so a
+  // folio and the pair could not both print and the middle of the band was
+  // unreachable. A position is a list now, and the solver joins it.
+  const base = await referenceSpec('zh-Hans', 'en');
+  const { plan } = await buildSheet(ctx, {
+    ...base, head: { at: 'top', left: ['pair', 'page'] },
+  });
+  const runs = plan.faces[0].runs;
+  const highest = Math.min(...runs.map((r) => r.y));
+  const band = runs.filter((r) => Math.abs(r.y - highest) < 0.5).sort((a, b) => a.x - b.x);
+  const said = band.map((r) => r.text).join('');
+  assert.match(said, /Chinese/);
+  assert.match(said, /1 \/ \d+/);
+  assert.match(said, /\u2022/, 'joined with a bullet');
+  // A bare slot is still accepted, so a spec saved before this keeps working.
+  const old = await buildSheet(ctx, {
+    ...base, head: /** @type {any} */ ({ at: 'top', left: 'page' }),
+  });
+  const first = old.plan.faces[0].runs;
+  const top = Math.min(...first.map((r) => r.y));
+  assert.match(first.filter((r) => Math.abs(r.y - top) < 0.5).map((r) => r.text).join(''),
+    /1 \/ \d+/, 'a scalar slot reads as a list of one');
 });
 
 test('the narrow face is a smaller sheet, not only a different one', async () => {

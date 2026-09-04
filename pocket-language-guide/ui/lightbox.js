@@ -225,8 +225,12 @@ export function openLightbox({ languages, solved, target, source, onReaderChange
   // --- the thumbnails, and the two things you can do with the card ---------
   const strip = el('div', { class: 'lightbox-strip', role: 'tablist' });
   strip.setAttribute('aria-label', t('gallery.previewStrip'));
-  const exportLink = el('a', { class: 'btn primary', text: t('gallery.export') });
-  const customiseLink = el('a', { class: 'btn', text: t('gallery.customise') });
+  // Classed as well as labelled, because the label is translated: swapping the pair
+  // makes the language being learned the *reader*, which switches the interface --
+  // so on an Arabic card these say تصدير and تخصيص, and anything looking for the
+  // English word stops finding them.
+  const exportLink = el('a', { class: 'btn primary lightbox-export', text: t('gallery.export') });
+  const customiseLink = el('a', { class: 'btn lightbox-customise', text: t('gallery.customise') });
   const foot = el('div', { class: 'lightbox-foot' }, [
     strip,
     el('div', { class: 'lightbox-do' }, [exportLink, customiseLink]),

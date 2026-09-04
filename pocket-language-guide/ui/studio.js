@@ -209,6 +209,22 @@ async function main() {
         theme,
         icons,
         edits,
+        // An edit lands in `edits.overrides`, the layer the CSV import writes, so it
+        // persists across a reload and leaves with an export. `include` is preserved
+        // where the row already had one, because switching a row off and correcting
+        // its text are separate decisions.
+        onEdit: (conceptId, values) => {
+          const held = edits.overrides[conceptId];
+          edits = {
+            ...edits,
+            overrides: {
+              ...edits.overrides,
+              [conceptId]: { values, include: held?.include ?? true },
+            },
+          };
+          saveEdits(spec.target, spec.source, edits);
+          schedule();
+        },
         onToggle: (patch) => {
           marked = null;
           spec = {

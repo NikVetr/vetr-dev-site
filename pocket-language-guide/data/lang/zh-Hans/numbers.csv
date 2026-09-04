@@ -47,7 +47,27 @@ numbers-money.2-items,两个,,liǎng gè,ljɑŋ˧˩˧ kɤ˥˩,,2,zh-Hans-agent-v
 numbers-money.yen,日元,,Rìyuán,ʐɨ˥˩ɥœn˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
 numbers-money.yen-symbol,￥,,Rìyuán,ʐɨ˥˩ɥœn˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
 numbers-money.number-and-classifier-notes-2,日语数字的构成和汉语一样：11 = juuichi，20 = nijuu。只是 100 说 hyaku、1000 说 sen，前面不加 ichi，10000 却要 ichiman。量词紧跟数字，多半能对上汉语的量词：-mai 张，-hon 根或瓶，-nin 人，-hai 杯。-tsu 相当于个，只用到九：hitotsu、futatsu；人也特殊：hitori、futari，三人起才是 sannin。念号码：0 = zero 或 maru，4 = yon，7 = nana，9 = kyuu，横线读 no。,,,,,2,zh-Hans-notes-v1
-numbers-money.forint,匈牙利福林,,,,,2,hu-agent-v1
-numbers-money.forint-symbol,匈牙利福林,,,,,2,hu-agent-v1
-numbers-money.rupee,印度卢比,,,,,2,hu-agent-v1
-numbers-money.rupee-symbol,印度卢比,,,,,2,hu-agent-v1
+numbers-money.forint,福林,,,,,2,reader-gloss-v1
+numbers-money.forint-symbol,福林符号,,,,,2,reader-gloss-v1
+numbers-money.rupee,卢比,,,,,2,reader-gloss-v1
+numbers-money.rupee-symbol,卢比符号,,,,,2,reader-gloss-v1
+numbers-money.won,韩元,,,,,2,reader-gloss-v1
+numbers-money.won-symbol,韩元符号,,,,,2,reader-gloss-v1
+numbers-money.baht,泰币,,,,泰铢 needs U+94E2 in cjk-sc,1,reader-gloss-v1
+numbers-money.baht-symbol,泰币符号,,,,泰铢 needs U+94E2 in cjk-sc,1,reader-gloss-v1
+numbers-money.lira,里拉,,,,,2,reader-gloss-v1
+numbers-money.lira-symbol,里拉符号,,,,,2,reader-gloss-v1
+numbers-money.dong,越南盾,,,,,2,reader-gloss-v1
+numbers-money.dong-symbol,越南盾符号,,,,,2,reader-gloss-v1
+numbers-money.ruble,卢布,,,,,2,reader-gloss-v1
+numbers-money.ruble-symbol,卢布符号,,,,,2,reader-gloss-v1
+numbers-money.rupiah,印尼盾,,,,,2,reader-gloss-v1
+numbers-money.rupiah-symbol,印尼盾符号,,,,,2,reader-gloss-v1
+numbers-money.shilling,先令,,,,,2,reader-gloss-v1
+numbers-money.shilling-symbol,先令符号,,,,,2,reader-gloss-v1
+numbers-money.euro,欧元,,,,,2,reader-gloss-v1
+numbers-money.euro-symbol,欧元符号,,,,,2,reader-gloss-v1
+numbers-money.dollar,美元,,,,,2,reader-gloss-v1
+numbers-money.dollar-symbol,美元符号,,,,,2,reader-gloss-v1
+numbers-money.pound,英镑,,,,,2,reader-gloss-v1
+numbers-money.pound-symbol,英镑符号,,,,,2,reader-gloss-v1

@@ -24,7 +24,7 @@ accessibility.board-first,먼저 타도 될까요?,,meonjeo tado doelkkayo?,mʌn
 toilets.toilet-paper,휴지,화장지,hyuji,hjudʑi,,2,ko-agent-v1;ipa=rr
 accessibility.door-width,문 폭이 얼마예요?,,mun pogi eolmayeyo?,mun pʰoɡi ʌlmajejo,,2,ko-agent-v1;ipa=rr
 toilets.it-is-out-of-order,고장났어요,,gojangnasseoyo,kodʑaŋnas͈ʌjo,,2,ko-agent-v1;ipa=rr
-accessibility.wheelchair-width,휠체어 너비가 {}cm예요,,hwilcheeo neobiga {}cmyeyo,,,2,ko-agent-v1
+accessibility.wheelchair-width,휠체어 너비가 {}cm예요,,hwilcheeo neobiga {}cmyeyo,hwiltɕʰeʌ nʌbiɡa {} sentʰimitʰʌ jejo,,2,ko-agent-v1;ipa=rr+loan
 toilets.out-of-order,고장,사용 금지,gojang,kodʑaŋ,,2,ko-agent-v1;ipa=rr
 accessibility.hard-of-hearing,귀가 잘 안 들려요,,gwiga jal an deullyeoyo,kwiɡa tɕal an tɯlljʌjo,,2,ko-agent-v1;ipa=rr
 toilets.mens-toilet,남자 화장실,남성용,namja hwajangsil,namdʑa hwadʑaŋsil,,2,ko-agent-v1;ipa=rr

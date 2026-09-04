@@ -11,7 +11,7 @@ hotel-basics.can-i-charge-my-phone,Можно зарядить телефон?,,
 hotel-basics.i-would-like-a-non-smoking-room,Нужен номер для некурящих.,,Nuzhen nomer dlya nekuryashchikh.,nˈuʒɨn nˈomʲir dɭʲɑ nʲikurʲˈɑɕix,,2,ru-agent-v1;ipa=espeak
 hotel-basics.i-would-like-a-quiet-room,Нужен тихий номер.,,Nuzhen tikhiy nomer.,nˈuʒɨn tʲˈixij nˈomʲir,,2,ru-agent-v1;ipa=espeak
 hotel-basics.is-there-a-washing-machine,Есть стиральная машина?,,Yestʼ stiralʼnaya mashina?,jestʲ sʲtʲirˈɑɭnʌja maʃˈɨna,,2,ru-agent-v1;ipa=espeak
-hotel-basics.is-wi-fi-free,Wi-Fi бесплатный?,,Wi-Fi besplatnyy?,,,2,ru-agent-v1
+hotel-basics.is-wi-fi-free,Wi-Fi бесплатный?,,Wi-Fi besplatnyy?,vajˈfɑj bʲispɭˈɑtnɨj,,2,ru-agent-v1;ipa=espeak+loan
 hotel-basics.how-much-per-night,Сколько за ночь?,,Skolʼko za nochʼ?,skˈoɭkʌ zˈɑ nˈotʃʲ,,2,ru-agent-v1;ipa=espeak
 hotel-basics.is-breakfast-included,Завтрак включён?,,Zavtrak vklyuchën?,zˈɑftrʌk fkɭʲʉtʃʲˈɵn,,2,ru-agent-v1;ipa=espeak
 hotel-basics.may-i-see-the-room,Можно посмотреть номер?,,Mozhno posmotretʼ nomer?,mˈoʒnʌ pʌsmʌtrʲˈetʲ nˈomʲir,,2,ru-agent-v1;ipa=espeak

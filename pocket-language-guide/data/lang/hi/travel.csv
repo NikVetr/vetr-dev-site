@@ -33,6 +33,7 @@ taxi.can-you-wait-for-me-here,ज़रा यहाँ रुक जाइए,,
 taxi.we-need-to-catch-the-high-speed-train,हमें तेज़ ट्रेन पकड़नी है,,hameṁ tez ṭren pakaṛnī hai,hˈʌmẽː tˈeːz ʈɾˈeːn pˈʌkəɽni hɛː,,2,hi-agent-v1;ipa=espeak
 taxi.please-use-the-meter,मीटर से चलिए,,mīṭar se calie,mˈiːʈəɾ seː cˈʌlɪˌeː,go by the meter,2,hi-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,मुझे यहाँ उतरना है,,mujhe yahāṁ utarnā hai,mˌʊɟʰeː jˈʌhã ˈʊtəɾnaː hɛː,,2,hi-agent-v1;ipa=espeak
+taxi.please-get-me-there-in-time-for-the-shinkansen,शिंकानसेन के लिए समय पर पहुँचाइए,,,ʃˌĩkaːnsˈeːn keː lˈɪeː sˈʌmˌɛj pˈʌɾ pəhˈũncaːˌɪeː,,1,reader-gloss-v1;ipa=espeak
 transit-rides.two-tickets,दो टिकट दीजिए,,do ṭikaṭ dījie,dˈoː ʈˈɪkəʈ dˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,मेट्रो स्टेशन कहाँ है?,,meṭro sṭeśan kahāṁ hai?,mˈeːʈɾoː sʈˈeːʃən kˈʌhã hɛː,,2,hi-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,क्या यह {} जाती है?,,kyā yah {} jātī hai?,kːjaː jˌəh {} ɟˈaːti hɛː,,2,hi-agent-v1;ipa=espeak
@@ -53,6 +54,7 @@ place-words.service-desk,पूछताछ,सूचना केंद्र,p
 place-words.bus-stop,बस स्टॉप,बस अड्डा,bas sṭop,bˈʌs sʈˈɔp,,2,hi-agent-v1;ipa=espeak
 place-words.luggage-storage,क्लॉक रूम,अमानती सामान घर,klok rūm,klˈɔk ɾˈuːm,,2,hi-agent-v1;ipa=espeak
 place-words.tourist-spot-sightseeing-area,पर्यटन स्थल,,paryaṭan sthal,pˈʌrjəʈˌən stʰˈʌl,,2,hi-agent-v1;ipa=espeak
+place-words.scenic-area,दर्शनीय स्थल,,,dˌərʃənˈiːj stʰˈʌl,,1,reader-gloss-v1;ipa=espeak
 border-customs.i-am-a-tourist,मैं पर्यटक हूँ,,maiṁ paryaṭak hūṁ,mɛ̃ pˈʌrjəʈˌək hũ,,2,hi-agent-v1;ipa=espeak
 border-customs.here-is-my-passport,यह मेरा पासपोर्ट है,,yah merā pāsporṭ hai,jˌəh mˌeːɾaː pˌaːspˈoːɾʈ hɛː,,2,hi-agent-v1;ipa=espeak
 border-customs.i-am-staying-for-days,मुझे {} दिन रुकना है,,mujhe {} din ruknā hai,mˌʊɟʰeː {} dˈɪn ɾˈʊknˌaː hɛː,,2,hi-agent-v1;ipa=espeak
@@ -111,3 +113,4 @@ common-signs.closed,बंद है,,baṁd hai,bˈʌnd hɛː,,2,hi-agent-v1;ip
 common-signs.stopped-stop,रुकिए,रुका हुआ,rukie,ɾˈʊkɪˌeː,stop / stopped,2,hi-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,क्या टिकट पंच कराना पड़ेगा?,,kyā ṭikaṭ paṁc karānā paṛegā?,kːjaː ʈˈɪkəʈ pˈʌɲc kəɾˈaːnaː pəɽˈeːɡaː,must it be punched,1,hi-agent-v1;ipa=espeak
 rail-station-words.ticket-validator,टिकट पंच मशीन,,ṭikaṭ paṁc maśīn,ʈˈɪkəʈ pˈʌɲc məʃˈiːn,punching machine,1,hi-agent-v1;ipa=espeak
+rail-station-words.maglev,मैग्लेव,चुंबकीय रेल,,mˈɛːɡleːʋ,,1,reader-gloss-v1;ipa=espeak

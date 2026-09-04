@@ -78,6 +78,8 @@ pharmacy-symptoms.i-have-a-burn,У меня ожог.,,U menya ozhog.,ˈu mʲin�
 pharmacy-symptoms.it-started-days-ago,Это началось {} дней назад.,,Eto nachalosʼ {} dney nazad.,ˈɛtʌ nʌtʃʲaɭˈosʲ {} dnʲˈej nazˈɑt,,2,ru-agent-v1;ipa=espeak
 pharmacy-symptoms.cough-medicine,средство от кашля,,sredstvo ot kashlya,srʲˈedstvʌ ot kˈɑʃɭʲʌ,,2,ru-agent-v1;ipa=espeak
 pharmacy-symptoms.is-this-safe-during-pregnancy,Это можно при беременности?,,Eto mozhno pri beremennosti?,ˈɛtʌ mˈoʒnʌ prʲˈi bʲirʲˈemʲinnʌsʲtʲɪ,,2,ru-agent-v1;ipa=espeak
+pharmacy-symptoms.i-think-i-have-malaria,"Кажется, у меня малярия.",,,"kˈɑʒɨtsʌ, ˈu mʲinʲˈɑ mʌɭʲarʲˈija",,2,malaria-reader-v1;ipa=espeak
+pharmacy-symptoms.i-need-a-malaria-test,Мне нужен анализ на малярию.,,,mnʲˈe nˈuʒɨn anˈɑɭʲis nə mʌɭʲarʲˈiju,,2,malaria-reader-v1;ipa=espeak
 body-parts.head,голова,,golova,ɡʌɭʌvˈɑ,,2,ru-agent-v1;ipa=espeak
 body-parts.stomach,живот,,zhivot,ʒɨvˈot,,2,ru-agent-v1;ipa=espeak
 body-parts.back,спина,,spina,spʲinˈɑ,,2,ru-agent-v1;ipa=espeak

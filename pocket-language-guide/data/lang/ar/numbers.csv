@@ -47,7 +47,27 @@ numbers-money.2-items,قطعتان,قطعتين,qiṭʿatān,qt̪ʕtˈaːn,two p
 numbers-money.yen,ين,,yin,jˈin,Japanese yen,2,ar-agent-v1;ipa=espeak
 numbers-money.yen-symbol,¥,,yin,,,2,ar-agent-v1
 numbers-money.number-and-classifier-notes-2,الأعداد مركّبة: جو عشرة وإيتشي واحد وني اثنان، فأحد عشر جو إيتشي، وعشرون ني جو، وواحد وعشرون ني جو إيتشي. وعند العد تلحق العدد لاحقة تختلف بحسب شكل المعدود ولا تُحذف: للأشياء عمومًا تسو، وللمسطحات ماي، وللطويل هون، وللأشخاص نين، وللأكواب هاي. وفي الهاتف يقال للصفر زيرو أو مارو، وللأربعة يون، وللسبعة نانا، وللتسعة كيو، وتُقرأ الشرطة نو.,,,,,2,ar-notes-v1
-numbers-money.forint,فورينت هنغاري,,,fuːɹˌiːnt hˈunɣaːɹˌiːj,,2,hu-agent-v1;ipa=espeak
-numbers-money.forint-symbol,فورينت هنغاري,,,fuːɹˌiːnt hˈunɣaːɹˌiːj,,2,hu-agent-v1;ipa=espeak
-numbers-money.rupee,روبية هندي,,,ɹˈuːbiːjˌa hˈindiːj,,2,hu-agent-v1;ipa=espeak
-numbers-money.rupee-symbol,روبية هندي,,,ɹˈuːbiːjˌa hˈindiːj,,2,hu-agent-v1;ipa=espeak
+numbers-money.forint,فورينت,,,fuːɹˌiːnt,,2,reader-gloss-v1;ipa=espeak
+numbers-money.forint-symbol,رمز الفورينت,,,ɹˈamz ʔalfuːɹˌiːnt,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupee,روبية,,,ɹˈuːbiːjˌa,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupee-symbol,رمز الروبية,,,ɹˈamz ʔarɹˈuːbiːjˌa,,2,reader-gloss-v1;ipa=espeak
+numbers-money.won,وون,,,waˈuːna,,2,reader-gloss-v1;ipa=espeak
+numbers-money.won-symbol,رمز الوون,,,ɹˈamz ʔalwaˈuːna,,2,reader-gloss-v1;ipa=espeak
+numbers-money.baht,بات,,,bˈaːt,,2,reader-gloss-v1;ipa=espeak
+numbers-money.baht-symbol,رمز البات,,,ɹˈamz ʔalbˈaːt,,2,reader-gloss-v1;ipa=espeak
+numbers-money.lira,ليرة,,,lˈiːɹa,,2,reader-gloss-v1;ipa=espeak
+numbers-money.lira-symbol,رمز الليرة,,,ɹˈamz ʔallˈiːɹa,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dong,دونغ,,,dˈuːnɣ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dong-symbol,رمز الدونغ,,,ɹˈamz ʔaddˈuːnɣ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.ruble,روبل,,,ɹˈuːbil,,2,reader-gloss-v1;ipa=espeak
+numbers-money.ruble-symbol,رمز الروبل,,,ɹˈamz ʔarɹˈuːbil,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupiah,روبية,,,ɹˈuːbiːjˌa,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupiah-symbol,رمز الروبية,,,ɹˈamz ʔarɹˈuːbiːjˌa,,2,reader-gloss-v1;ipa=espeak
+numbers-money.shilling,شلن,,,ʃˈilin,,2,reader-gloss-v1;ipa=espeak
+numbers-money.shilling-symbol,رمز الشلن,,,ɹˈamz ʔaʃʃˈilin,,2,reader-gloss-v1;ipa=espeak
+numbers-money.euro,يورو,,,jˈuːɹuː,,2,reader-gloss-v1;ipa=espeak
+numbers-money.euro-symbol,رمز اليورو,,,ɹˈamz ʔaljˈuːɹuː,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dollar,دولار,,,dˈuːlaːr,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dollar-symbol,رمز الدولار,,,ɹˈamz ʔaddˈuːlaːr,,2,reader-gloss-v1;ipa=espeak
+numbers-money.pound,جنيه,,,dʒˈunajh,,2,reader-gloss-v1;ipa=espeak
+numbers-money.pound-symbol,رمز الجنيه,,,ɹˈamz ʔaldʒˈunajh,,2,reader-gloss-v1;ipa=espeak

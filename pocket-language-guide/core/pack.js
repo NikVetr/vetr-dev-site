@@ -506,6 +506,34 @@ export function buildBlocks({
       .filter((c) => Number(c.importance) >= spec.priority
         || selection.items[c.concept_id] === true)
       .filter((c) => c.custom === '1' || (targetRows[c.concept_id] && sourceRows[c.concept_id]));
+
+    // **One shape at a time inside a section.** A row's template comes from its
+    // concept, and a section mixes them freely -- `toilets` is fifteen phrases and
+    // ten words -- so in rank order the two shapes alternate row by row: a phrase
+    // laid out in two columns with its respelling underneath, then a word in a
+    // three-column grid with the respelling beside it, then another phrase. The run
+    // loop below already groups *consecutive* rows of one template, so all that was
+    // needed was to stop rank order from interleaving them.
+    //
+    // A stable sort by template, phrases first. Rank still orders the rows inside
+    // each group, so nothing about the priority ladder changes; the section simply
+    // reads as a block of phrases followed by a block of reference words instead of
+    // the two shuffled together. Forcing one template on the whole section was the
+    // other option and it is worse both ways: the reference grid is much the more
+    // compact of the two, and a long phrase does not fit it.
+    // Grouped by the *whole* template name, not just entry-versus-rest: `toilets`
+    // and `pharmacy-symptoms` alternate `refphrase` with `ref`, which are two
+    // different grids and read as two different shapes. `entry` leads because the
+    // phrases are the substance of a section and the reference words are its
+    // appendix; the rest keep the order they first appear in, so the arrangement is
+    // still the corpus's and not this function's.
+    const order = new Map([['entry', 0]]);
+    for (const c of concepts) {
+      if (!order.has(c.default_template)) order.set(c.default_template, order.size);
+    }
+    concepts.sort((a, b) => (order.get(a.default_template) ?? 0)
+      - (order.get(b.default_template) ?? 0));
+
     // No rows, no heading. A section is only as wide as the concepts that survive
     // every filter above, and importance is not spread evenly across them --
     // `emergency-medical` is dense with high-importance rows where `hike` has

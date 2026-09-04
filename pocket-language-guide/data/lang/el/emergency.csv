@@ -78,6 +78,8 @@ pharmacy-symptoms.i-have-a-burn,Έχω έγκαυμα,Κάηκα,Echo egkavma,ˈ
 pharmacy-symptoms.it-started-days-ago,Άρχισε πριν από {} μέρες,,Archise prin apo {} meres,ˈaɾçisˌe pɾˈin apˈo {} mˈeɾes,,2,el-agent-v1;roman=elot743;ipa=espeak
 pharmacy-symptoms.cough-medicine,σιρόπι για τον βήχα,,siropi gia ton vicha,siɾˈopi jˈa ton vˈixa,cough syrup,2,el-agent-v1;roman=elot743;ipa=espeak
 pharmacy-symptoms.is-this-safe-during-pregnancy,Είναι ασφαλές στην εγκυμοσύνη;,,Einai asfales stin egkymosyni;,ˈine ˌasfalˈes stin ˌeŋɡimosˈini,,2,el-agent-v1;roman=elot743;ipa=espeak
+pharmacy-symptoms.i-think-i-have-malaria,Νομίζω ότι έχω ελονοσία,,,nomˈizo ˈoti ˈexo ˌelonosˈia,,2,malaria-reader-v1;ipa=espeak
+pharmacy-symptoms.i-need-a-malaria-test,Χρειάζομαι τεστ για ελονοσία,,,xɾçˈazomˌe tˈest jˈa ˌelonosˈia,,2,malaria-reader-v1;ipa=espeak
 body-parts.head,κεφάλι,,kefali,cefˈali,,2,el-agent-v1;roman=elot743;ipa=espeak
 body-parts.stomach,στομάχι / κοιλιά,,stomachi / koilia,stomˈaçi / ciʎˈa,"stomach / belly, abdomen",2,el-agent-v1;roman=elot743;ipa=espeak
 body-parts.back,πλάτη / μέση,,plati / mesi,plˈati / mˈesi,upper back / lower back,2,el-agent-v1;roman=elot743;ipa=espeak

@@ -39,6 +39,14 @@ export async function referenceSpec(target = 'zh-Hans', source = 'en', overrides
     autoFaces: true,
     padding: DEFAULT_PADDING,
     arrangement: 'mixed',
+    // A folio in the outer corner of the footer, on by default. Eight faces cut into
+    // four double-sided cards is a set someone has to keep in order, and a card with
+    // no number on it is a card you cannot put back in the right place. The band
+    // costs 1.5 lines of the smallest type on the sheet, which is the cheapest
+    // furniture there is; every other slot stays off, because the pair, the
+    // emergency line and the pronunciation key are all things a reader should choose
+    // rather than find.
+    head: { at: 'none', left: [], center: [], right: ['page'], text: '' },
     // 0 means fit: with faces on auto too, that resolves to the fewest pairs of
     // faces at the largest legible type -- the same answer the reference sheet
     // arrived at by hand.

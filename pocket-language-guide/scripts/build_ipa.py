@@ -859,8 +859,88 @@ ACRONYM = re.compile(r"(?<![A-Za-z])[A-Z]{2,5}(?![A-Za-z])")
 # `s i m` is legal IPA.
 LATIN_RUN = re.compile(r"[A-Za-z]+")
 
+# The reading a non-Latin language gives a Latin acronym its own orthography keeps
+# in Latin letters. Per token and per language, because that is the only shape the
+# evidence has: the reviewed Japanese Hepburn column, which already fills these
+# same rows, reads `SIM` as a word (`shimu`), `ATM` letter by letter (`ētīemu`) and
+# `Wi-Fi` as the brand (`wai-fai`) -- one language doing all three things depending
+# on the token, which no rule over either axis alone can express.
+#
+# **Why these rows get a reading rather than carrying the Latin through, which is
+# the other thing the curators did.** The sixteen curated sheets disagree, and it
+# takes reading all of them to see that they are not answering the same question.
+# `zh-Hans__en` respells `Wi-Fi` as `wee-fye` and `eSIM` as `ee-sim`; `th__en` gives
+# `ee-sim`; `ja__en` gives `wah-i-fah-i`, `ehh-tee-eh-mu`, `shih-mu` and
+# `kyoo aah-ru` across fourteen rows. `ru__en` leaves the letters standing --
+# `oo vas yest Wi-Fi`, `pa QR-KOH-doo` -- and so does `ko__en`, with `{}cm-yeh-yo`.
+#
+# But an override file is `<target>__en__en-US.csv`: a respelling *of* the target
+# *for an English reader*. "Say Wi-Fi" is a true and useful instruction to somebody
+# who reads English and no instruction at all to the Arabic, Hindi, Japanese,
+# Korean, Russian and Thai readers whose tables emit no Latin letter -- and those
+# sixteen files are exactly the pairs where the curated layer already wins, so the
+# Russian curator's `Wi-Fi` still prints on ru<-en whatever this table says. What
+# the generated column has to serve is the other eighteen readers. The Mandarin and
+# Thai curators wrote down a sound; the Russian and Korean ones wrote down a
+# presentation. Only the first is a fact about the target, so only the first
+# generalises past the reader it was written for.
+#
+# IPA rather than the target's own spelling of the sound, which was the other
+# candidate and would have been reviewable by more people: Mandarin cannot be
+# spelt. `fai` is not a Mandarin syllable, so there is no Pinyin for `Wi-Fi` at all
+# and `pinyin_to_ipa` refuses it. One mechanism for five languages beats an
+# orthographic one for four plus a hand-written exception.
+#
+# Each value is checked twice. `check_alphabet` reviews it like any other cell, and
+# the reading is chosen so that the *English* table reproduces the curated string
+# where there is one: `wifaɪ` respells to `wee-fye`, which is the Mandarin
+# curator's own spelling, where the Pinyin-legal `weɪfaɪ` (`wēi`) gives `way-fye`,
+# which is not. One IPA word each, because that is what the curators' hyphens say.
+LOANWORDS = {
+    "el": {
+        # γουάι-φάι, but `ου` before a vowel is Greek's digraph for /w/ --
+        # Ουάσιγκτον is [ˈwasiŋgton] -- so espeak's letter reading `ɣuˈaɪ fˈaɪ`
+        # hands every reader a syllable nobody says: `goo-ay-FYE`, `гу-ай-фа́й`.
+        "Wi-Fi": "waɪˈfaɪ",
+        "eSIM": "isˈim",                          # ισίμ
+        "SIM": "sˈim",                            # σιμ
+        "PIN": "pˈin",                            # πιν
+        # κιου-αρ. Greek /k/ before a front glide is [c] and this column writes
+        # espeak's `c` throughout, but that is the allophone and `core/respell.js`
+        # is given phonemes: `cjuˈaɾ` comes out `chee-oo-AR` for an English reader
+        # and `추-아르` for a Korean one, and neither of those is a Q.
+        "QR": "kjuˈaɾ",
+    },
+    "ru": {
+        "Wi-Fi": "vajˈfɑj",                       # вай-фа́й
+        "eSIM": "iˈsʲim",                         # и-си́м
+        "QR": "kʲjuˈɑr",                          # кью-а́р
+    },
+    "th": {"eSIM": "ʔiː˧sim˧"},                   # อีซิม, straight out of thaig2p
+    # No tone letters: the loan has no lexical tone to carry, and the readers who
+    # keep tone would otherwise be shown one that was invented here.
+    "zh-Hans": {"Wi-Fi": "wifaɪ", "eSIM": "isim"},
+    # 센티미터. The one entry that is not an acronym, and the one place a curator's
+    # Latin is left in on purpose elsewhere: `cm` is a unit symbol glued to the `{}`
+    # the traveller fills, and Korean reads it out in full.
+    "ko": {"cm": "sentʰimitʰʌ"},
+}
 
-def latin_survives(text, source):
+
+def loan_pattern(loans):
+    """One regex over `loans`' tokens, longest first so `eSIM` is not read as `SIM`.
+
+    The seam hyphen comes out with the token, because it joins the acronym to the
+    word after it and is not a sound: Russian writes `QR-коду` and the two halves
+    are transcribed separately.
+    """
+    if not loans:
+        return None
+    return re.compile("-?(" + "|".join(re.escape(t) for t in
+                                       sorted(loans, key=len, reverse=True)) + ")-?")
+
+
+def latin_survives(text, source, loans=()):
     """Whether a Latin run of `text` is still Latin in the string a route will read.
 
     The gate this replaces asked whether `text` contains a Latin letter, which is
@@ -873,7 +953,15 @@ def latin_survives(text, source):
     the refusal exactly where the loanword really does survive: the Pinyin column
     leaves `Wi-Fi` and `eSIM` in Latin, the RR column leaves `cm`, and Thai and
     Russian have no romanisation column, so their route reads `text` itself.
+
+    A token `LOANWORDS` has a reading for is not a survivor: `pieces` takes it out
+    of the chunk before any route sees it. So what is left after they are stripped
+    is the honest question -- a Latin run this language has no reading for -- and
+    the refusal stays exactly there.
     """
+    pattern = loan_pattern(loans)
+    if pattern:
+        text = pattern.sub(" ", text)
     lower = source.lower()
     return any(run.lower() in lower
                for run in LATIN_RUN.findall(LANGUAGE_SLOT.sub("", text)))
@@ -898,9 +986,9 @@ def clean(chunk):
                    or c in "'-").strip()
 
 
-def pieces(text):
-    """`text` as a list of ('text'|'marker', value), splitting on `{}`, `{target}`,
-    `{source}`, `/`, `,`.
+def pieces(text, loans=()):
+    """`text` as a list of ('text'|'loan'|'marker', value), splitting on `{}`,
+    `{target}`, `{source}`, `/`, `,` and on any `loans` token.
 
     Both language slots ride through as markers rather than being phonemised, and
     the renderer substitutes the IPA of the language's name -- see the `ipa` column
@@ -908,15 +996,25 @@ def pieces(text):
     are the same mechanism and different amounts of table: `{target}` in a Japanese
     row is Japanese naming itself, one string per language, where `{source}` names
     whichever of the other sixteen is reading, so it wants the whole matrix.
+
+    A `loan` piece carries its IPA already -- it is the `LOANWORDS` value, not
+    something to transcribe -- so the route never sees the Latin, which is the whole
+    point: espeak language-switches on `Wi-Fi` and returns English phonology inside
+    a Russian sentence, and the table routes pass the letters through as IPA.
     """
     out = []
+    pattern = loan_pattern(loans)
     for part in MARKER.split(text):
         if part in ("{}", "{target}", "{source}", "/"):
             out.append(("marker", part))
         elif part in (",", "，", "、"):
             out.append(("marker", ","))
-        elif clean(part):
-            out.append(("text", clean(part)))
+        else:
+            for i, chunk in enumerate(pattern.split(part) if pattern else [part]):
+                if pattern and i % 2:
+                    out.append(("loan", loans[chunk]))
+                elif clean(chunk):
+                    out.append(("text", clean(chunk)))
     return out
 
 
@@ -1161,18 +1259,31 @@ def thai_syllables():
     from pythainlp.transliterate import transliterate
     cache = {}
 
+    def g2p(unit):
+        if unit not in cache:
+            raw = [p.strip() for p in
+                   transliterate(unit, engine="thaig2p").split(".") if p.strip()]
+            stuck = any(raw[i] == raw[i + 1] == raw[i + 2] for i in range(len(raw) - 2))
+            cache[unit] = DECODER_STUCK if stuck else "".join(raw).replace(" ", "")
+        return cache[unit]
+
     def one(word):
-        out = ""
-        for syllable in syllable_tokenize(word, engine="dict"):
-            if not any(c.isalpha() for c in syllable):
-                continue
-            if syllable not in cache:
-                raw = [p.strip() for p in
-                       transliterate(syllable, engine="thaig2p").split(".") if p.strip()]
-                stuck = any(raw[i] == raw[i + 1] == raw[i + 2] for i in range(len(raw) - 2))
-                cache[syllable] = DECODER_STUCK if stuck else "".join(raw).replace(" ", "")
-            out += cache[syllable]
-        return out
+        out = "".join(g2p(s) for s in syllable_tokenize(word, engine="dict")
+                      if any(c.isalpha() for c in s))
+        # **A syllable the decoder loops on is usually a syllable it was never
+        # meant to be given.** `ธรรม` and `บบ` are dictionary syllables that are
+        # not words, and asked for the *word* the same model answers cleanly:
+        # `ค่าธรรมเนียม` is `kʰaː˥˩ tʰam˧ nia̯m˧` and `ระบบ` is `ra˦˥ bop˨˩`,
+        # which are the three syllables and two syllables the curated Thai sheet
+        # writes as `KAH tam-niam` and `ra-bop`. So the unit was the fault rather
+        # than the model, and this closes the three rows Thai was refusing --
+        # `ค่าธรรมเนียม` twice and `ระบบเติมเงิน` -- without touching the other
+        # 746, which never reach this line.
+        #
+        # The retry is per word, not per row: given the whole string the model
+        # loops on `มีค่าธรรมเนียมไหม` and drops a syllable from `ระบบเติมเงิน`,
+        # and `word_tokenize` already hands this function the right unit.
+        return g2p(word) if DECODER_STUCK in out else out
 
     def chunk(text):
         return " ".join(filter(None, (one(w) for w in word_tokenize(text, engine="newmm")
@@ -1442,6 +1553,7 @@ def build(code):
 
     files = sorted((DATA / "lang" / code).glob("*.csv"))
     source = ROMANISED.get(code)
+    loans = LOANWORDS.get(code, {})
     plan = []                                     # (path, index, row, pieces)
     skipped = Counter()
     for path in files:
@@ -1468,7 +1580,7 @@ def build(code):
             # also where the answer already is. The slot's own name comes out of the
             # question first, being Latin and no part of the sentence -- otherwise
             # `{target}の文を見せてください` is refused for the word "target".
-            if code in NON_LATIN and latin_survives(row["text"], text):
+            if code in NON_LATIN and latin_survives(row["text"], text, loans):
                 skipped["latin loanword"] += 1
                 continue
             if code == "ko":
@@ -1476,21 +1588,27 @@ def build(code):
                 if text is None:
                     skipped["rr not aligned"] += 1
                     continue
-            parts = pieces(text)
-            if not any(kind == "text" for kind, _ in parts):
+            parts = pieces(text, loans)
+            # A row that is nothing but an acronym -- `eSIM` is its own entry in
+            # four languages -- has a loan piece and no text piece, and is not
+            # nothing to say.
+            if not any(kind in ("text", "loan") for kind, _ in parts):
                 skipped["nothing to say"] += 1
                 continue
             plan.append((path, index, row, parts))
 
     transcribe, method = route(code, [v for _, _, _, parts in plan
                                       for kind, v in parts if kind == "text"])
-    filled = {}                                   # (path, index) -> ipa
+    filled = {}                                   # (path, index) -> (ipa, method)
     bad = Counter()
     flagged = []                                  # rows a reviewer should read first
     for path, index, row, parts in plan:
-        ipa = assemble([(kind, normalise(transcribe(value) or "", code, value)
-                         if kind == "text" else value) for kind, value in parts])
-        ipa = unicodedata.normalize("NFC", re.sub(r"\s+", " ", ipa).strip())
+        # A loan piece is already IPA and already in this column's conventions, so
+        # it skips `normalise` for the same reason a marker does: there is no route
+        # output to repair and no stress for `apply_stress` to find.
+        sounds = [(kind, normalise(transcribe(value) or "", code, value)
+                   if kind == "text" else value) for kind, value in parts]
+        ipa = unicodedata.normalize("NFC", re.sub(r"\s+", " ", assemble(sounds)).strip())
         # `check_alphabet` is a whitelist of what is IPA; `check_route` is what this
         # route can never legitimately produce. Both refuse the row, because a
         # characterless failure and an unconverted mora are the same fault.
@@ -1514,16 +1632,22 @@ def build(code):
         # one block and two syllables, and `₩` is none and one. The language slot
         # comes out of the count as well -- it is one word of Latin standing in for a
         # name whose syllables are not this row's, so counting its letters refused
-        # every Korean row that names a language.
+        # every Korean row that names a language. A loan piece comes out for exactly
+        # the same reason -- `{}cm예요` has eight blocks and its reading has
+        # thirteen syllables, because five of them belong to `cm`.
+        blocks = LANGUAGE_SLOT.sub("", assemble([p for p in sounds if p[0] != "loan"]))
         if code == "ko" and hangul_blocks(row["text"]) \
                 and not any(c.isdigit() for c in row["text"]) \
-                and syllable_count(LANGUAGE_SLOT.sub("", ipa)) \
-                != hangul_blocks(row["text"]):
+                and syllable_count(blocks) != hangul_blocks(row["text"]):
             skipped["syllable count"] += 1
             continue
         if ACRONYM.search(row["text"]):
             flagged.append(row["concept_id"])
-        filled[(path, index)] = ipa
+        # `+loan` on the row's own provenance, because a hand-written reading is the
+        # one thing in this column no route produced: `npm run validate` counts the
+        # cells per method, so the precedent is visible rather than buried here.
+        loaned = any(kind == "loan" for kind, _ in parts)
+        filled[(path, index)] = (ipa, f"{method}+loan" if loaned else method)
     return filled, skipped, bad, method, flagged
 
 
@@ -1581,7 +1705,7 @@ def main():
                 row = dict(zip(columns, fields))
                 if ipa_method(row["provenance"]) == "reviewed":
                     continue
-                ipa = filled.get((path, index), "")
+                ipa, how = filled.get((path, index), ("", None))
                 if ipa:
                     by_cid[row["concept_id"]] = ipa
                     repertoire.update(ipa)
@@ -1590,7 +1714,7 @@ def main():
                     continue                      # already empty and undeclared
                 fields[columns.index("ipa")] = ipa
                 fields[columns.index("provenance")] = provenance_with(
-                    row["provenance"], method if ipa else None)
+                    row["provenance"], how)
                 rows[index] = (None, fields)
             text = write_rows(header, rows)
             on_disk = path.read_bytes().decode("utf-8")

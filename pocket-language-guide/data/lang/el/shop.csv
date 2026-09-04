@@ -1,7 +1,7 @@
 concept_id,text,text_alt,romanization_elot,ipa,literal,confidence,provenance
 payment-receipt.pay-by-card,Με κάρτα;,,Me karta;,me kˈaɾta,,2,el-agent-v1;roman=elot743;ipa=espeak
 payment-receipt.pay-cash,Με μετρητά;,,Me metrita;,me mˌetɾitˈa,,2,el-agent-v1;roman=elot743;ipa=espeak
-payment-receipt.pay-by-qr-code,Με κωδικό QR;,,Me kodiko QR;,,,2,el-agent-v1;roman=elot743
+payment-receipt.pay-by-qr-code,Με κωδικό QR;,,Me kodiko QR;,me kˌoðikˈo kjuˈaɾ,,2,el-agent-v1;roman=elot743;ipa=espeak+loan
 payment-receipt.a-receipt-please,"Απόδειξη, παρακαλώ",,"Apodeixi, parakalo","apˈoðiksˌi, pˌaɾakalˈo",,2,el-agent-v1;roman=elot743;ipa=espeak
 payment-receipt.please-write-the-number,Γράψτε τον αριθμό,,Grapste ton arithmo,ɣɾˈapste ton ˌaɾiθmˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
 payment-receipt.how-much-in-total,Πόσο κάνει συνολικά;,,Poso kanei synolika;,pˈoso kˈani sˌinolikˈa,,2,el-agent-v1;roman=elot743;ipa=espeak

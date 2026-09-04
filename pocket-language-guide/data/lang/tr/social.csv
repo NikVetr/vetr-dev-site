@@ -26,6 +26,7 @@ communication.please-show-me-the-text,"{target} yazıyı gösterin, lütfen.",,"
 communication.i-cannot-make-out-what-you-are-saying,Ne dediğinizi anlayamıyorum.,,nˈɛ dedˈijinizɪ anɫajamˈɯjoɾʊm,,2,tr-agent-v1;ipa=espeak
 communication.i-do-not-understand,Anlamadım.,,anɫˈamadɯm,,2,tr-agent-v1;ipa=espeak
 communication.i-cannot-read-it,Bunu okuyamıyorum.,,bunˈʊ okujamˈɯjoɾʊm,,2,tr-agent-v1;ipa=espeak
+communication.please-write-it-in-roman-letters,Latin harfleriyle yazar mısınız?,,ɫatˈɪn harfleɾˈɪjlɛ jazˈar mˈɯsɯnɯz,,1,reader-gloss-v1;ipa=espeak
 quick-responses.please-go-ahead,Buyurun,,bujuɾˈʊn,,2,tr-agent-v1;ipa=espeak
 quick-responses.yes-right,evet / doğru,,evˈɛt / doːɾˈʊ,,2,tr-agent-v1;ipa=espeak
 quick-responses.no-not,hayır / değil,,hajˈɯr / dˈejɪl,,2,tr-agent-v1;ipa=espeak

@@ -67,3 +67,7 @@ numbers-money.forint,numbers-money,ref,word,forint,1036,0.800,numbers-money.curr
 numbers-money.forint-symbol,numbers-money,ref,word,forint-symbol,1037,0.740,numbers-money.currency,1,0,neutral,hu,The abbreviation as printed on a price.
 numbers-money.rupee,numbers-money,ref,word,rupee,1038,0.800,numbers-money.currency,0,0,neutral,hi,Indian currency.
 numbers-money.rupee-symbol,numbers-money,ref,word,rupee-symbol,1039,0.740,numbers-money.currency,1,0,neutral,hi,The symbol as printed on a price.
+numbers-money.dollar,numbers-money,ref,word,dollar,1040,0.800,numbers-money.currency,0,0,neutral,en,"One concept for four of the eight countries the registry gives English: US, Canada, Australia and New Zealand all write $. Sits beside the pound the way the shilling sits beside nothing -- English was the last ready language with no currency concept at all."
+numbers-money.dollar-symbol,numbers-money,ref,word,dollar-symbol,1041,0.740,numbers-money.currency,1,0,neutral,en,The symbol as printed on a price.
+numbers-money.pound,numbers-money,ref,word,pound,1042,0.790,numbers-money.currency,0,0,neutral,en,British currency. Separate from the dollar because the two words share no sound and half the readers of an English card are going to one country or the other.
+numbers-money.pound-symbol,numbers-money,ref,word,pound-symbol,1043,0.730,numbers-money.currency,1,0,neutral,en,The symbol as printed on a price.

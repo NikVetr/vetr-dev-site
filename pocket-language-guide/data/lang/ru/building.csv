@@ -22,8 +22,8 @@ accessibility.visually-impaired,Я слабовидящий,Я слабовид�
 accessibility.take-your-arm,Можно взять вас под руку?,,Mozhno vzyatʼ vas pod ^ruku?,mˈoʒnʌ vʑˈɑtʲ vˈɑs pˈot rˈuku,,2,ru-agent-v1;ipa=espeak
 accessibility.guide-dog,Это моя собака-поводырь.,,Eto moya sobaka-povodyrʼ.,ˈɛtʌ mˈoja sʌbˈɑkapʌvʌdɨrʲ,,2,ru-agent-v1;ipa=espeak
 in-a-building.is-this-the-correct-entrance,Это правильный вход?,,Eto pravilʼnyy vkhod?,ˈɛtʌ prˈɑvʲiɭnɨj fxˈot,,2,ru-agent-v1;ipa=espeak
-in-a-building.do-you-have-wi-fi,У вас есть Wi-Fi?,,U vas yestʼ Wi-Fi?,,,2,ru-agent-v1
-in-a-building.what-is-the-wi-fi-password,Какой пароль от Wi-Fi?,,Kakoy parolʼ ot Wi-Fi?,,,2,ru-agent-v1
+in-a-building.do-you-have-wi-fi,У вас есть Wi-Fi?,,U vas yestʼ Wi-Fi?,ˈu vˈɑs jestʲ vajˈfɑj,,2,ru-agent-v1;ipa=espeak+loan
+in-a-building.what-is-the-wi-fi-password,Какой пароль от Wi-Fi?,,Kakoy parolʼ ot Wi-Fi?,kakˈoj parˈoɭʲ ot vajˈfɑj,,2,ru-agent-v1;ipa=espeak+loan
 in-a-building.which-floor,Какой этаж?,,Kakoy etazh?,kakˈoj ɛtˈɑʃ,,2,ru-agent-v1;ipa=espeak
 toilets.where-toilet,Где туалет?,,Gde tualet?,ɡdʲˈe tuaɭʲˈet,,2,ru-agent-v1;ipa=espeak
 toilets.where-public-toilet,Где общественный туалет?,,Gde obshchestvennyy tualet?,ɡdʲˈe ʌpɕˈestvʲinnɨj tuaɭʲˈet,,2,ru-agent-v1;ipa=espeak

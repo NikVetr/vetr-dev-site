@@ -33,6 +33,7 @@ taxi.can-you-wait-for-me-here,Chờ tôi ở đây được không ạ?,,tʃəː
 taxi.we-need-to-catch-the-high-speed-train,Chúng tôi phải kịp tàu cao tốc,,tʃuŋ˧˥ t̪oj˧ faːj˧˩˧ kip˨˩ˀ t̪aw˨˩ kaːw˧ t̪ok˧˥,,2,vi-agent-v1;ipa=espeak
 taxi.please-use-the-meter,Xin bật đồng hồ,,sin˧ bət̪˨˩ˀ ɗoŋ˨˩ ho˨˩,,2,vi-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,Cho tôi xuống đây,,tʃɔ˧ t̪oj˧ suə̯ŋ˧˥ ɗəɪ˧,,2,vi-agent-v1;ipa=espeak
+taxi.please-get-me-there-in-time-for-the-shinkansen,Xin cho kịp tàu Shinkansen,,sin˧ tʃɔ˧ kip˨˩ˀ t̪aw˨˩ ʃɪŋkansən˧,,1,reader-gloss-v1;ipa=espeak
 transit-rides.two-tickets,Cho tôi hai vé,,tʃɔ˧ t̪oj˧ haːj˧ vɛ˧˥,,2,vi-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,Ga tàu điện ngầm ở đâu ạ?,Ga metro ở đâu ạ?,ɣaː˧ t̪aw˨˩ ɗiɛ̯n˨˩ˀ ŋəm˨˩ əː˧˩˧ ɗəw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,Xe này có đi {} không ạ?,,sɛ˧ naj˨˩ kɔ˧˥ ɗi˧ {} xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
@@ -53,6 +54,7 @@ place-words.service-desk,Quầy dịch vụ,,kwəɪ˨˩ zic˨˩ˀ vu˨˩ˀ,,2,vi
 place-words.bus-stop,Trạm xe buýt,Bến xe buýt,tʃaːm˨˩ˀ sɛ˧ bwit̪˧˥,,2,vi-agent-v1;ipa=espeak
 place-words.luggage-storage,Nơi gửi hành lý,,nəːj˧ ɣyj˧˩˧ haɲ˨˩ li˧˥,,2,vi-agent-v1;ipa=espeak
 place-words.tourist-spot-sightseeing-area,Khu du lịch,Điểm tham quan,xu˧ zu˧ lic˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+place-words.scenic-area,Khu thắng cảnh,,xu˧ taŋ˧˥ kaɲ˧˩˧,,1,reader-gloss-v1;ipa=espeak
 border-customs.i-am-a-tourist,Tôi đi du lịch,,t̪oj˧ ɗi˧ zu˧ lic˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 border-customs.here-is-my-passport,Hộ chiếu của tôi đây,,ho˨˩ˀ tʃiɛ̯w˧˥ kuə̯˧˩˧ t̪oj˧ ɗəɪ˧,,2,vi-agent-v1;ipa=espeak
 border-customs.i-am-staying-for-days,Tôi ở {} ngày,,t̪oj˧ əː˧˩˧ {} ŋaj˨˩,,2,vi-agent-v1;ipa=espeak
@@ -111,3 +113,4 @@ common-signs.closed,Đóng cửa,,ɗɔŋ˧˥ kyə̯˧˩˧,,2,vi-agent-v1;ipa=esp
 common-signs.stopped-stop,Dừng,Ngừng,zyŋ˨˩,,2,vi-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Có cần quét vé trước không ạ?,,kɔ˧˥ kən˨˩ kwɛt̪˧˥ vɛ˧˥ tʃyə̯c˧˥ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 rail-station-words.ticket-validator,Máy soát vé,Cổng soát vé,maj˧˥ swaːt̪˧˥ vɛ˧˥,,2,vi-agent-v1;ipa=espeak
+rail-station-words.maglev,Tàu đệm từ,,t̪aw˨˩ ɗem˨˩ˀ t̪y˨˩,,1,reader-gloss-v1;ipa=espeak

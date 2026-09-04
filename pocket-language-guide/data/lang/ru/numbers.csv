@@ -43,7 +43,31 @@ numbers-money.ruble,рубль,,rublʼ,rˈubɭ,,2,ru-agent-v1;ipa=espeak
 numbers-money.ruble-symbol,₽,рубль,rublʼ,,,2,ru-agent-v1
 numbers-money.number-and-classifier-notes,"Числа собираются из частей: 11 = shíyī; 20 = èrshí; 21 = èrshíyī. По телефону 1 обычно читают как yāo. Между числом и существительным обязательно стоит счётное слово, которого в русском нет: gè (общее), wèi (люди), zhāng (билеты, плоское), bēi (чашки), píng (бутылки). Деньги: kuài = юань в речи; jiǎo / máo = 0,1 юаня; fēn = 0,01 юаня.",,,,,2,ru-notes-v1
 numbers-money.number-and-classifier-notes-2,"Числа собираются из частей: 11 = jūichi; 20 = nijū; 21 = nijūichi. Счётные суффиксы идут после числа: -tsu (предметы), -mai (плоское), -hon (длинное), -nin (люди), -hai (чашки). По телефону: 0 = zero или maru, 4 = yon, 7 = nana, 9 = kyū; дефис между блоками читают как no.",,,,,2,ru-notes-v1
-numbers-money.forint,венгерский форинт,,,vʲinɡʲˈerskʲij fʌrʲˈint,,2,hu-agent-v1;ipa=espeak
-numbers-money.forint-symbol,венгерский форинт,,,vʲinɡʲˈerskʲij fʌrʲˈint,,2,hu-agent-v1;ipa=espeak
-numbers-money.rupee,индийская рупия,,,ɪndʲˈijskʌja rˈupʲija,,2,hu-agent-v1;ipa=espeak
-numbers-money.rupee-symbol,индийская рупия,,,ɪndʲˈijskʌja rˈupʲija,,2,hu-agent-v1;ipa=espeak
+numbers-money.forint,форинт,,,fʌrʲˈint,,2,reader-gloss-v1;ipa=espeak
+numbers-money.forint-symbol,форинт (символ),,,fʌrʲˈint sʲˈimvʌɭ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupee,рупия,,,rˈupʲija,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupee-symbol,рупия (символ),,,rˈupʲija sʲˈimvʌɭ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.won,вона,,,vˈona,,2,reader-gloss-v1;ipa=espeak
+numbers-money.won-symbol,вона (символ),,,vˈona sʲˈimvʌɭ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.baht,бат,,,bˈɑt,,2,reader-gloss-v1;ipa=espeak
+numbers-money.baht-symbol,бат (символ),,,bˈɑt sʲˈimvʌɭ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.lira,лира,,,ɭʲˈira,,2,reader-gloss-v1;ipa=espeak
+numbers-money.lira-symbol,лира (символ),,,ɭʲˈira sʲˈimvʌɭ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dong,донг,,,dˈonk,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dong-symbol,донг (символ),,,dˈonk sʲˈimvʌɭ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupiah,рупия,,,rˈupʲija,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupiah-symbol,рупия (символ),,,rˈupʲija sʲˈimvʌɭ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.shilling,шиллинг,,,ʃˈɨɭɭʲink,,2,reader-gloss-v1;ipa=espeak
+numbers-money.shilling-symbol,шиллинг (символ),,,ʃˈɨɭɭʲink sʲˈimvʌɭ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.euro,евро,,,jˈevrʌ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.euro-symbol,евро (символ),,,jˈevrʌ sʲˈimvʌɭ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dollar,доллар,,,dˈoɭɭʌr,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dollar-symbol,доллар (символ),,,dˈoɭɭʌr sʲˈimvʌɭ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.pound,фунт,,,fˈunt,,2,reader-gloss-v1;ipa=espeak
+numbers-money.pound-symbol,фунт (символ),,,fˈunt sʲˈimvʌɭ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.yen,иена,,,ɪjˈena,,2,reader-gloss-v1;ipa=espeak
+numbers-money.yen-symbol,¥,,,,,2,reader-gloss-v1
+numbers-money.yu-n,юань,,,juˈɑn,,2,reader-gloss-v1;ipa=espeak
+numbers-money.ku-i,юань (в речи),,,juˈɑn v rʲˈetʃʲɪ,,1,reader-gloss-v1;ipa=espeak
+numbers-money.li-ng,2 + счётное слово,,,dvˈɑ ɕˈɵtnʌjɪ sɭˈovʌ,,1,reader-gloss-v1;ipa=espeak
+numbers-money.2-items,2 штуки,,,dvˈɑ ʃtˈukʲɪ,,1,reader-gloss-v1;ipa=espeak

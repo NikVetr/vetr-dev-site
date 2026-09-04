@@ -49,7 +49,25 @@ numbers-money.yen-symbol,¥,,,,2,de-agent-v1
 numbers-money.number-and-classifier-notes-2,"Zahlen bauen: 11 = jūichi, 20 = nijū, 21 = nijūichi. Zählsuffixe: -tsu (Dinge), -mai (Flaches), -hon (Langes), -nin (Personen), -hai (Tassen). Am Telefon: 0 = zero oder maru, 4 = yon, 7 = nana, 9 = kyū.",,,,2,de-notes-v1
 numbers-money.euro,Euro,,ˈɔøroː,,2,coordinator-gaps-v2;ipa=espeak
 numbers-money.euro-symbol,€,Euro,,,2,coordinator-gaps-v2
-numbers-money.forint,Ungarischer Forint,,ˈʊnɡˌɑrɪʃɜ fˈoːrɪnt,,2,hu-agent-v1;ipa=espeak
-numbers-money.forint-symbol,Ungarischer Forint,,ˈʊnɡˌɑrɪʃɜ fˈoːrɪnt,,2,hu-agent-v1;ipa=espeak
-numbers-money.rupee,Indische Rupie,,ˈɪndɪʃə rˈuːpɪə,,2,hu-agent-v1;ipa=espeak
-numbers-money.rupee-symbol,Indische Rupie,,ˈɪndɪʃə rˈuːpɪə,,2,hu-agent-v1;ipa=espeak
+numbers-money.forint,Forint,,fˈoːrɪnt,,2,reader-gloss-v1;ipa=espeak
+numbers-money.forint-symbol,Forint (Zeichen),,fˈoːrɪnt tsˈaɪçən,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupee,Rupie,,rˈuːpɪə,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupee-symbol,Rupie (Zeichen),,rˈuːpɪə tsˈaɪçən,,2,reader-gloss-v1;ipa=espeak
+numbers-money.won,Won,,vˈoːn,,2,reader-gloss-v1;ipa=espeak
+numbers-money.won-symbol,Won (Zeichen),,vˈoːn tsˈaɪçən,,2,reader-gloss-v1;ipa=espeak
+numbers-money.baht,Baht,,bˈɑːt,,2,reader-gloss-v1;ipa=espeak
+numbers-money.baht-symbol,Baht (Zeichen),,bˈɑːt tsˈaɪçən,,2,reader-gloss-v1;ipa=espeak
+numbers-money.lira,Lira,,lˈiːrɑː,,2,reader-gloss-v1;ipa=espeak
+numbers-money.lira-symbol,Lira (Zeichen),,lˈiːrɑː tsˈaɪçən,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dong,Dong,,dˈɔŋ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dong-symbol,Dong (Zeichen),,dˈɔŋ tsˈaɪçən,,2,reader-gloss-v1;ipa=espeak
+numbers-money.ruble,Rubel,,rˈuːbəl,,2,reader-gloss-v1;ipa=espeak
+numbers-money.ruble-symbol,Rubel (Zeichen),,rˈuːbəl tsˈaɪçən,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupiah,Rupiah,,rˈuːpiːˌɑː,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupiah-symbol,Rupiah (Zeichen),,rˈuːpiːˌɑː tsˈaɪçən,,2,reader-gloss-v1;ipa=espeak
+numbers-money.shilling,Schilling,,ʃˈɪlɪŋ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.shilling-symbol,Schilling (Zeichen),,ʃˈɪlɪŋ tsˈaɪçən,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dollar,Dollar,,dɔlˈɑːɾ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dollar-symbol,Dollar (Zeichen),,dɔlˈɑːɾ tsˈaɪçən,,2,reader-gloss-v1;ipa=espeak
+numbers-money.pound,Pfund,,pfˈʊnt,,2,reader-gloss-v1;ipa=espeak
+numbers-money.pound-symbol,Pfund (Zeichen),,pfˈʊnt tsˈaɪçən,,2,reader-gloss-v1;ipa=espeak

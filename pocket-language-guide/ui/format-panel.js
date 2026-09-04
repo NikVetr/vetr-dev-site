@@ -601,7 +601,8 @@ export function createFormatPanel(input) {
   // because the useful shape is a label on one side and a folio on the other -- and
   // a folio belongs in a corner.
   const HEAD_AT = /** @type {const} */ (['none', 'top', 'bottom']);
-  const HEAD_SLOTS = /** @type {const} */ (['none', 'page', 'pair', 'region', 'custom']);
+  const HEAD_SLOTS = /** @type {const} */ (['page', 'pair', 'region', 'legend', 'custom']);
+  const HEAD_SIDES = /** @type {const} */ (['left', 'center', 'right']);
   const headText = /** @type {HTMLInputElement} */ (el('input', {
     type: 'text', id: 'head-text', class: 'text-box',
     placeholder: t('format.headTextPlaceholder'),
@@ -609,7 +610,7 @@ export function createFormatPanel(input) {
   headText.value = spec.head?.text ?? '';
   const pushHead = (/** @type {Partial<import('../core/types.js').RunningHead>} */ patch) => emit({
     head: {
-      at: 'none', left: 'none', right: 'none', ...spec.head, ...patch, text: headText.value,
+      at: 'none', left: [], center: [], right: [], ...spec.head, ...patch, text: headText.value,
     },
   });
   headText.addEventListener('change', () => pushHead({}));
@@ -625,22 +626,56 @@ export function createFormatPanel(input) {
     })),
     onChange: (at) => pushHead({ at }),
   });
-  const slotMenu = (/** @type {'left'|'right'} */ side) => menu(
-    `head-${side}`, t(`format.head.${side}`),
-    HEAD_SLOTS.map((id) => ({ value: id, text: t(`format.headSlot.${id}`) })),
-    spec.head?.[side] ?? 'none',
-    (value) => pushHead({ [side]: /** @type {any} */ (value) }),
-  );
-  const headLeft = slotMenu('left');
-  const headRight = slotMenu('right');
+  // **Three positions, and each takes any number of slots.** It was two positions of
+  // one slot each, chosen from a `<select>` -- so a folio and the pair could not both
+  // print, the middle of the band was unreachable, and nothing said the two sides
+  // were independent. Checkboxes rather than menus, because the question is "which
+  // of these five" and not "one of these five", and the solver joins whatever is
+  // ticked with a bullet.
+  const slotBoxes = HEAD_SIDES.map((side) => {
+    const held = spec.head?.[side];
+    const on = new Set(Array.isArray(held) ? held : [held].filter(Boolean));
+    /** @type {{id:import('../core/types.js').HeadSlot, box:HTMLInputElement}[]} */
+    const boxes = HEAD_SLOTS.map((id) => {
+      const box = /** @type {HTMLInputElement} */ (el('input', {
+        type: 'checkbox', id: `head-${side}-${id}`,
+      }));
+      box.checked = on.has(id);
+      box.addEventListener('change', () => {
+        pushHead({ [side]: boxes.filter((b) => b.box.checked).map((b) => b.id) });
+      });
+      return { id, box };
+    });
+    const wrap = el('fieldset', { class: 'head-side' }, [
+      el('legend', { text: t(`format.head.${side}`) }),
+      ...boxes.map(({ id, box }) => el('label', { title: t(`format.headSlot.${id}`) }, [
+        box, el('span', { text: t(`format.headSlot.${id}`) }),
+      ])),
+    ]);
+    return { side, boxes, wrap };
+  });
   const headSlots = el('div', { class: 'head-slots' }, [
-    headLeft.wrap, headRight.wrap, headText,
+    ...slotBoxes.map((s) => s.wrap), headText,
   ]);
   const headField = panelField(t('format.head'), [headAt.group, headSlots]);
-  headSlots.hidden = (spec.head?.at ?? 'none') === 'none';
-  headText.hidden = spec.head?.left !== 'custom' && spec.head?.right !== 'custom';
-  headSlots.hidden = (spec.head?.at ?? 'none') === 'none';
-  headText.hidden = spec.head?.left !== 'custom' && spec.head?.right !== 'custom';
+  /** Whether any position asks for the reader's own text, which is the only slot
+   * with something to type. */
+  const wantsText = (/** @type {import('../core/types.js').SheetSpec} */ from) => HEAD_SIDES
+    .flatMap((side) => {
+      const held = from.head?.[side];
+      return Array.isArray(held) ? held : [held];
+    })
+    .includes('custom');
+  const paintHead = (/** @type {import('../core/types.js').SheetSpec} */ from) => {
+    headSlots.hidden = (from.head?.at ?? 'none') === 'none';
+    headText.hidden = !wantsText(from);
+    for (const { side, boxes } of slotBoxes) {
+      const held = from.head?.[side];
+      const on = new Set(Array.isArray(held) ? held : [held].filter(Boolean));
+      for (const { id, box } of boxes) box.checked = on.has(id);
+    }
+  };
+  paintHead(spec);
 
   // --- which columns appear ----------------------------------------------
 
@@ -730,11 +765,8 @@ export function createFormatPanel(input) {
       arrangement.select(next.arrangement);
       split.select(next.split ?? 'consistent');
       headAt.select(next.head?.at ?? 'none');
-      headLeft.select.value = next.head?.left ?? 'none';
-      headRight.select.value = next.head?.right ?? 'none';
       // The slots and the free-text box are only useful once there is a band.
-      headSlots.hidden = (next.head?.at ?? 'none') === 'none';
-      headText.hidden = next.head?.left !== 'custom' && next.head?.right !== 'custom';
+      paintHead(next);
       theme.sync(next);
       ink.select(next.inkMode);
       background.sync(next.background);

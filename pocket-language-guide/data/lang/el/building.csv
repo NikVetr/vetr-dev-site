@@ -22,8 +22,8 @@ accessibility.visually-impaired,Έχω πρόβλημα όρασης,Δεν βλ
 accessibility.take-your-arm,Μπορώ να κρατηθώ από το μπράτσο σας;,,Boro na kratitho apo to bratso sas;,boɾˈo na kɾˌatiθˈo apˈo to bɾˈatso sas,May I hold on to your arm?,2,el-agent-v1;roman=elot743;ipa=espeak
 accessibility.guide-dog,Αυτός είναι ο σκύλος οδηγός μου,Είναι σκύλος οδηγός για τυφλούς,Aftos einai o skylos odigos mou,aftˈos ˈine o scˈilos ˌoðiɣˈoz mu,,2,el-agent-v1;roman=elot743;ipa=espeak
 in-a-building.is-this-the-correct-entrance,Είναι αυτή η σωστή είσοδος;,,Einai afti i sosti eisodos;,ˈine aftˈi i sostˈi ˈisoðˌos,,2,el-agent-v1;roman=elot743;ipa=espeak
-in-a-building.do-you-have-wi-fi,Έχετε Wi-Fi;,Έχετε ασύρματο δίκτυο;,Echete Wi-Fi;,,,2,el-agent-v1;roman=elot743
-in-a-building.what-is-the-wi-fi-password,Ποιος είναι ο κωδικός του Wi-Fi;,Ποιος είναι ο κωδικός για το ασύρματο;,Poios einai o kodikos tou Wi-Fi;,,,2,el-agent-v1;roman=elot743
+in-a-building.do-you-have-wi-fi,Έχετε Wi-Fi;,Έχετε ασύρματο δίκτυο;,Echete Wi-Fi;,ˈeçetˌe waɪˈfaɪ,,2,el-agent-v1;roman=elot743;ipa=espeak+loan
+in-a-building.what-is-the-wi-fi-password,Ποιος είναι ο κωδικός του Wi-Fi;,Ποιος είναι ο κωδικός για το ασύρματο;,Poios einai o kodikos tou Wi-Fi;,pˈios ˈine o kˌoðikˈos tu waɪˈfaɪ,,2,el-agent-v1;roman=elot743;ipa=espeak+loan
 in-a-building.which-floor,Σε ποιον όροφο;,Ποιος όροφος;,Se poion orofo;,se pˈion ˈoɾofˌo,"Which floor? Ground floor = ισόγειο, button 0",2,el-agent-v1;roman=elot743;ipa=espeak
 toilets.where-toilet,Πού είναι η τουαλέτα;,Πού έχει τουαλέτα;,Pou einai i toualeta;,pˈu ˈine i tˌualˈeta,,2,el-agent-v1;roman=elot743;ipa=espeak
 toilets.where-public-toilet,Πού είναι μια δημόσια τουαλέτα;,Υπάρχει δημόσια τουαλέτα εδώ κοντά;,Pou einai mia dimosia toualeta;,pˈu ˈine mɲa ðimˈosja tˌualˈeta,,2,el-agent-v1;roman=elot743;ipa=espeak

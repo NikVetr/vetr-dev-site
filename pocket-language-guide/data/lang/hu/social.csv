@@ -26,6 +26,7 @@ communication.please-show-me-the-text,"Kérem, mutassa meg a szöveget {target} 
 communication.i-cannot-make-out-what-you-are-saying,"Nem tudom kivenni, amit mond",,"nˈɛm tˈudom kˈivɛnni, ˈɑmit mˈond",,2,hu-agent-v1;ipa=espeak
 communication.i-do-not-understand,Nem értem,,nˈɛm ˈeːrtɛm,,2,hu-agent-v1;ipa=espeak
 communication.i-cannot-read-it,Nem tudom elolvasni,,nˈɛm tˈudom ˈɛlolvɑʃni,,2,hu-agent-v1;ipa=espeak
+communication.please-write-it-in-roman-letters,"Kérem, írja le latin betűkkel",,"kˈeːrɛm, ˈiːrjɑ lˈɛ lˈɑtin bˈɛtyːkkɛl",,1,reader-gloss-v1;ipa=espeak
 quick-responses.please-go-ahead,kérem / tessék,,kˈeːrɛm / tˈɛʃʃeːk,tessék also answers a knock or hands something over,2,hu-agent-v1;ipa=espeak
 quick-responses.yes-right,igen / így van,,ˈiɡɛn / ˈiːɟ vˈɑn,,2,hu-agent-v1;ipa=espeak
 quick-responses.no-not,nem,,nˈɛm,,2,hu-agent-v1;ipa=espeak

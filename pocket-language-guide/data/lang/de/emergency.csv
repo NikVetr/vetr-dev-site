@@ -96,6 +96,8 @@ pharmacy-symptoms.i-have-a-burn,Ich habe eine Verbrennung.,,ɪç hɑːbə ˌaɪn
 pharmacy-symptoms.it-started-days-ago,Es hat vor {} Tagen angefangen.,,ɛs hat fˈɔɾ {} tˈɑːɡən ˈanɡəfˌaŋən,,2,de-agent-v1;ipa=espeak
 pharmacy-symptoms.cough-medicine,Hustensaft,Hustenmittel,hˈʊstənzˌaft,,2,de-agent-v1;ipa=espeak
 pharmacy-symptoms.is-this-safe-during-pregnancy,Ist das in der Schwangerschaft sicher?,,ɪst das ɪn dɛɾ ʃvˈaŋɜʃˌaft zˈɪçɜ,,2,de-agent-v1;ipa=espeak
+pharmacy-symptoms.i-think-i-have-malaria,"Ich glaube, ich habe Malaria.",,"ɪç ɡlˈaʊbə, ɪç hɑːbə mˈɑlarˌiːɑː",,2,malaria-reader-v1;ipa=espeak
+pharmacy-symptoms.i-need-a-malaria-test,Ich brauche einen Malaria-Test.,,ɪç bɾˈaʊxə ˌaɪnən mˈɑlarˌiːɑːtɛst,,2,malaria-reader-v1;ipa=espeak
 emergency-medical.help,Hilfe!,,hˈɪlfə,,2,de-agent-v1;ipa=espeak
 emergency-medical.please-call-an-ambulance,Rufen Sie bitte einen Rettungswagen!,Rufen Sie bitte den Notarzt!,rˈuːfən ziː bˈɪtə ˌaɪnən rˈɛtʊŋsvˌɑːɡən,,2,de-agent-v1;ipa=espeak
 emergency-medical.i-need-a-doctor,Ich brauche einen Arzt.,,ɪç bɾˈaʊxə ˌaɪnən ˈaɾtst,,2,de-agent-v1;ipa=espeak

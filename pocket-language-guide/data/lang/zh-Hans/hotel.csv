@@ -36,7 +36,7 @@ laundry.dry-cleaning,干洗,乾洗,gānxǐ,kan˥ɕi˧˩˧,,2,zh-Hans-agent-v1;ip
 room-problems.the-heating-does-not-work,暖气坏了,,nuǎnqì huài le,nwan˧˩˧tɕʰi˥˩ xwaɪ˥˩ lɤ,,2,zh-Hans-agent-v1;ipa=pinyin
 laundry.dryer,烘干机,烘乾機,hōnggānjī,xʊŋ˥kan˥tɕi˥,,2,zh-Hans-agent-v1;ipa=pinyin
 laundry.coin-operated,投币,投幣,tóubì,tʰoʊ˧˥pi˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
-hotel-basics.is-wi-fi-free,Wi-Fi 免费吗？,,Wi-Fi miǎnfèi ma?,,,2,zh-Hans-agent-v1
+hotel-basics.is-wi-fi-free,Wi-Fi 免费吗？,,Wi-Fi miǎnfèi ma?,wifaɪ mjɛn˧˩˧feɪ˥˩ ma,,2,zh-Hans-agent-v1;ipa=pinyin+loan
 hotel-requests.another-towel-please,请再给一条毛巾,,qǐng zài gěi yì tiáo máojīn,tɕʰiŋ˧˩˧ tsaɪ˥˩ keɪ˧˩˧ i˥˩ tʰjɑʊ˧˥ mɑʊ˧˥tɕin˥,,2,zh-Hans-agent-v1;ipa=pinyin
 hotel-words.luggage-storage,行李寄存,,xíngli jìcún,ɕiŋ˧˥li tɕi˥˩tsʰwən˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
 hotel-basics.how-much-per-night,一晚多少钱？,,yì wǎn duōshao qián?,i˥˩ wan˧˩˧ twɔ˥ʂɑʊ tɕʰjɛn˧˥,,2,zh-Hans-agent-v1;ipa=pinyin

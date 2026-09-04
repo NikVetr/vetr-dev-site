@@ -26,6 +26,7 @@ communication.please-show-me-the-text,ขอดูข้อความภาษ
 communication.i-cannot-make-out-what-you-are-saying,ฟังไม่ทัน,,fang mai than,faŋ˧ maj˥˩ tʰan˧,,2,th-agent-v1;ipa=thaig2p
 communication.i-do-not-understand,ไม่เข้าใจ,,mai khaochai,maj˥˩ kʰaw˥˩tɕaj˧,,2,th-agent-v1;ipa=thaig2p
 communication.i-cannot-read-it,อ่านไม่ออก,,an mai ok,ʔaːn˨˩maj˥˩ʔɔːk˨˩,,2,th-agent-v1;ipa=thaig2p
+communication.please-write-it-in-roman-letters,ช่วยเขียนเป็นอักษรโรมัน,,,tɕʰua̯j˥˩ kʰia̯n˩˩˦ pen˧ ʔak˨˩sɔːn˩˩˦ roː˧man˧,,1,reader-gloss-v1;ipa=thaig2p
 quick-responses.please-go-ahead,เชิญ,,choen,tɕʰɤːn˧,,2,th-agent-v1;ipa=thaig2p
 quick-responses.yes-right,ใช่,,chai,tɕʰaj˥˩,,2,th-agent-v1;ipa=thaig2p
 quick-responses.no-not,ไม่,,mai,maj˥˩,,2,th-agent-v1;ipa=thaig2p
@@ -56,7 +57,7 @@ sim-data.how-much-data-is-included,ได้เน็ตเท่าไร,,dai 
 sim-data.do-you-need-my-passport,ต้องใช้พาสปอร์ตไหม,,tong chai phatpot mai,tɔŋ˥˩ tɕʰaj˦˥ pʰaː˧sa˨˩pɔːt˨˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
 sim-data.how-long-is-it-valid,ใช้ได้กี่วัน,,chai dai ki wan,tɕʰaj˦˥daːj˥˩ kiː˨˩ wan˧,,2,th-agent-v1;ipa=thaig2p
 sim-data.please-activate-it,ช่วยเปิดใช้งานให้,,chuai poet chai ngan hai,tɕʰua̯j˥˩ pɤːt˨˩ tɕʰaj˦˥ŋaːn˧ haj˥˩,,2,th-agent-v1;ipa=thaig2p
-sim-data.do-you-have-an-esim,มี eSIM ไหม,มีอีซิมไหม,mi esim mai,,,2,th-agent-v1
+sim-data.do-you-have-an-esim,มี eSIM ไหม,มีอีซิมไหม,mi esim mai,miː˧ ʔiː˧sim˧ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p+loan
 sim-data.my-data-is-not-working,เน็ตใช้ไม่ได้,,net chai mai dai,net˨˩ tɕʰaj˦˥maj˥˩daːj˥˩,,2,th-agent-v1;ipa=thaig2p
 sim-data.does-it-need-registration,ต้องลงทะเบียนไหม,,tong long thabian mai,tɔŋ˥˩ loŋ˧tʰaʔ˦˥bia̯n˧ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
 sim-data.i-have-no-signal,ไม่มีสัญญาณ,,mai mi sanyan,maj˥˩ miː˧ san˩˩˦˥jaː˧na˦˥,,2,th-agent-v1;ipa=thaig2p
@@ -68,8 +69,8 @@ sim-data.can-i-top-up-this-sim,เติมเงินซิมนี้ได�
 sim-data.top-up,เติมเงิน,,toem ngoen,tɤːm˧ ŋɤn˧,,2,th-agent-v1;ipa=thaig2p
 sim-data.is-there-coverage-in,ที่{}มีสัญญาณไหม,,thi {} mi sanyan mai,tʰiː˥˩ {} miː˧ san˩˩˦˥jaː˧na˦˥ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
 sim-data.signal,สัญญาณ,,sanyan,san˩˩˦˥jaː˧na˦˥,,2,th-agent-v1;ipa=thaig2p
-sim-data.esim,eSIM,อีซิม,esim,,,2,th-agent-v1
-sim-data.prepaid,ระบบเติมเงิน,,rabop toem ngoen,,,2,th-agent-v1
+sim-data.esim,eSIM,อีซิม,esim,ʔiː˧sim˧,,2,th-agent-v1;ipa=thaig2p+loan
+sim-data.prepaid,ระบบเติมเงิน,,rabop toem ngoen,ra˦˥bop˨˩ tɤːm˧ ŋɤn˧,,2,th-agent-v1;ipa=thaig2p
 sim-data.roaming,โรมมิ่ง,ข้ามแดน,romming,roːm˧ miŋ˥˩,,2,th-agent-v1;ipa=thaig2p
 etiquette.is-this-allowed,อันนี้ทำได้ไหม,,an ni tham dai mai,ʔan˧niː˦˥ tʰam˧daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
 etiquette.is-tipping-expected,ต้องให้ทิปไหม,,tong hai thip mai,tɔŋ˥˩ haj˥˩ tʰip˦˥ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p

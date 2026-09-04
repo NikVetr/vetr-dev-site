@@ -78,6 +78,8 @@ pharmacy-symptoms.i-have-a-burn,Megégettem magam,,mˈɛɡeːɡɛttɛm mˈɑɡɑ
 pharmacy-symptoms.it-started-days-ago,{} nappal ezelőtt kezdődött,,{} nˈɑppɑl ˈɛzɛløːtt kˈɛzdøːdøtt,,2,hu-agent-v1;ipa=espeak
 pharmacy-symptoms.cough-medicine,köhögés elleni szirup,,kˈøhøɡeːʃ ˈɛllɛni sˈirup,,2,hu-agent-v1;ipa=espeak
 pharmacy-symptoms.is-this-safe-during-pregnancy,Terhesség alatt szedhető?,,tˈɛrhɛʃʃeːɡ ˈɑlɑtt sˈɛdhɛtøː,,2,hu-agent-v1;ipa=espeak
+pharmacy-symptoms.i-think-i-have-malaria,Szerintem maláriás vagyok,,sˈɛrintɛm mˈɑlaːriaːʃ vˈɑɟok,,2,malaria-reader-v1;ipa=espeak
+pharmacy-symptoms.i-need-a-malaria-test,Maláriatesztet kérek,,mˈɑlaːriɑtɛstɛt kˈeːrɛk,,2,malaria-reader-v1;ipa=espeak
 body-parts.head,fej,,fˈɛj,,2,hu-agent-v1;ipa=espeak
 body-parts.stomach,has,,hˈɑʃ,"belly, not the organ",2,hu-agent-v1;ipa=espeak
 body-parts.back,hát,,hˈaːt,,2,hu-agent-v1;ipa=espeak

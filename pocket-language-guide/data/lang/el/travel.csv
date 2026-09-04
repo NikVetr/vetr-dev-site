@@ -33,6 +33,7 @@ taxi.can-you-wait-for-me-here,Μπορείτε να με περιμένετε ε
 taxi.we-need-to-catch-the-high-speed-train,Πρέπει να προλάβουμε το τρένο υψηλής ταχύτητας,Πρέπει να προλάβουμε την ταχεία,Prepei na prolavoume to treno ypsilis tachytitas,pɾˈepi na pɾolˈavumˌe to tɾˈeno ˌipsilˈis taçˈititˌas,Greek fast trains are marked Ταχεία or Ιντερσίτι,2,el-agent-v1;roman=elot743;ipa=espeak
 taxi.please-use-the-meter,"Βάλτε το ταξίμετρο, παρακαλώ","Με το ταξίμετρο, παρακαλώ","Valte to taximetro, parakalo","vˈalte to taksˈimetɾˌo, pˌaɾakalˈo",Fare = κόμιστρο; tolls (διόδια) cost extra,2,el-agent-v1;roman=elot743;ipa=espeak
 taxi.i-will-get-off-here,Θα κατεβώ εδώ,"Θα κατεβώ εδώ. Την απόδειξη, παρακαλώ",Tha katevo edo,θa kˌatevˈo eðˈo,Receipt = απόδειξη,2,el-agent-v1;roman=elot743;ipa=espeak
+taxi.please-get-me-there-in-time-for-the-shinkansen,Να προλάβω το Σινκανσέν,,,na pɾolˈavo to sˌinkansˈen,,1,reader-gloss-v1;ipa=espeak
 transit-rides.two-tickets,Δύο εισιτήρια,"Δύο εισιτήρια, παρακαλώ",Dyo eisitiria,ðˈio ˌisitˈiɾiˌa,,2,el-agent-v1;roman=elot743;ipa=espeak
 transit-rides.where-is-the-subway-station,Πού είναι ο σταθμός του μετρό;,Πού είναι το μετρό;,Pou einai o stathmos tou metro;,pˈu ˈine o staθmˈos tu metɾˈo,Athens line 1 is called ο Ηλεκτρικός,2,el-agent-v1;roman=elot743;ipa=espeak
 transit-rides.does-this-bus-train-go-to,Αυτό το λεωφορείο / τρένο πάει εδώ: {};,Προορισμός: {}. Πάει εκεί;,Afto to leoforeio / treno paei edo: {};,aftˈo to lˌeofoɾˈio / tɾˈeno pˈai eðˈo {},Does this bus / train go here: {}? (no case on fill),2,el-agent-v1;roman=elot743;ipa=espeak
@@ -53,6 +54,7 @@ place-words.service-desk,Εξυπηρέτηση,Γραφείο πληροφορ�
 place-words.bus-stop,Στάση λεωφορείου,Στάση,Stasi leoforeiou,stˈasi lˌeofoɾˈiu,,2,el-agent-v1;roman=elot743;ipa=espeak
 place-words.luggage-storage,Φύλαξη αποσκευών,,Fylaxi aposkevon,fˈilaksˌi ˌaposcevˈon,,2,el-agent-v1;roman=elot743;ipa=espeak
 place-words.tourist-spot-sightseeing-area,Αξιοθέατο,Τουριστική περιοχή,Axiotheato,ˌaksioθˈeatˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+place-words.scenic-area,Φυσικό τοπίο,,,fˌisikˈo topˈio,,1,reader-gloss-v1;ipa=espeak
 border-customs.i-am-a-tourist,Είμαι εδώ για τουρισμό,,Eimai edo gia tourismo,ˈime eðˈo jˈa tˌuɾismˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
 border-customs.here-is-my-passport,Ορίστε το διαβατήριο,,Oriste to diavatirio,oɾˈiste to ðˌiavatˈiɾiˌo,Here is the passport,2,el-agent-v1;roman=elot743;ipa=espeak
 border-customs.i-am-staying-for-days,Μέρες παραμονής: {},Θα μείνω {} μέρες,Meres paramonis: {},mˈeɾes pˌaɾamonˈis {},Days of stay: {} (write a figure),2,el-agent-v1;roman=elot743;ipa=espeak
@@ -111,3 +113,4 @@ common-signs.closed,Κλειστό,Δεν λειτουργεί,Kleisto,klistˈo,
 common-signs.stopped-stop,Εκτός λειτουργίας,Στοπ,Ektos leitourgias,ektˈoz lˌituɾjˈias,Out of service; the road sign is ΣΤΟΠ,2,el-agent-v1;roman=elot743;ipa=espeak
 transit-rides.do-i-need-to-validate,Πρέπει να ακυρώσω το εισιτήριο;,Πρέπει να ακυρώσω το εισιτήριο στο ακυρωτικό;,Prepei na akyroso to eisitirio;,pɾˈepi n ˌaciɾˈoso to ˌisitˈiɾiˌo,Validating is ακύρωση; unstamped tickets are fined,2,el-agent-v1;roman=elot743;ipa=espeak
 rail-station-words.ticket-validator,Ακυρωτικό μηχάνημα,Ακυρωτικό,Akyrotiko michanima,ˌaciɾˌotikˈo mixˈanimˌa,The machine that validates (cancels) tickets,2,el-agent-v1;roman=elot743;ipa=espeak
+rail-station-words.maglev,Μαγνητικό τρένο,,,mˌaɣnitikˈo tɾˈeno,,1,reader-gloss-v1;ipa=espeak

@@ -33,6 +33,7 @@ taxi.can-you-wait-for-me-here,Unaweza kunisubiri hapa?,,ˌunawˈeza kˌunisubˈi
 taxi.we-need-to-catch-the-high-speed-train,Tunahitaji kupata treni ya SGR,Treni ya mwendo kasi,tˌunahitˈaɟi kupˈata trˈeni ja ˌesɟˌiˈar,,2,sw-agent-v1;ipa=espeak
 taxi.please-use-the-meter,Tafadhali tumia mita,,tˌafaðˈali tumˈia mˈita,,2,sw-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,Nashuka hapa,,naʃˈuka hˈapa,,2,sw-agent-v1;ipa=espeak
+taxi.please-get-me-there-in-time-for-the-shinkansen,Nifikishe kwa wakati wa Shinkansen,,nˌifikˈiʃe kwa wakˈati wa ʃiŋkˈansen,,1,reader-gloss-v1;ipa=espeak
 transit-rides.two-tickets,Tiketi mbili,,tikˈeti mbˈili,,2,sw-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,Kituo cha treni ni wapi?,Kituo cha mwendokasi ni wapi?,kitˈuo tʃa trˈeni ni wˈapi,mwendokasi = Dar BRT,2,sw-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,"Je, hii inakwenda {}?",Basi hili linakwenda {}?,"ɟˈe, hˌii ˌinakwˈenda {}",does this one go to {},2,sw-agent-v1;ipa=espeak
@@ -53,6 +54,7 @@ place-words.service-desk,Dawati la huduma,,dawˈati la hudˈuma,,2,sw-agent-v1;i
 place-words.bus-stop,Kituo cha basi,Stendi,kitˈuo tʃa bˈasi,,2,sw-agent-v1;ipa=espeak
 place-words.luggage-storage,Sehemu ya kuweka mizigo,,sehˈemu ja kuwˈeka mizˈiɡo,,2,sw-agent-v1;ipa=espeak
 place-words.tourist-spot-sightseeing-area,Sehemu ya kutembelea,Kivutio cha watalii,sehˈemu ja kˌutembelˈea,,2,sw-agent-v1;ipa=espeak
+place-words.scenic-area,Eneo la mandhari,,enˈeo la manðˈari,,1,reader-gloss-v1;ipa=espeak
 border-customs.i-am-a-tourist,Mimi ni mtalii,,mˌimi ni mtalˈii,,2,sw-agent-v1;ipa=espeak
 border-customs.here-is-my-passport,Hii ni pasipoti yangu,,hˌii ni pˌasipˈoti jˈaŋɡu,,2,sw-agent-v1;ipa=espeak
 border-customs.i-am-staying-for-days,Nakaa siku {},,nakˈaa sˈiku {},,2,sw-agent-v1;ipa=espeak
@@ -111,3 +113,4 @@ common-signs.closed,Tumefunga,,tˌumefˈuŋɡa,we are closed,2,sw-agent-v1;ipa=e
 common-signs.stopped-stop,Simama,Imesimama,simˈama,stop; stopped,2,sw-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Nahitaji kugonga tiketi kwenye mashine?,,nˌahitˈaɟi kuɡˈoŋɡa tikˈeti kwˈeɲe maʃˈine,tap the ticket on the machine,1,sw-agent-v1;ipa=espeak
 rail-station-words.ticket-validator,Mashine ya tiketi,Validator,maʃˈine ja tikˈeti,,1,sw-agent-v1;ipa=espeak
+rail-station-words.maglev,Treni ya sumaku,,trˈeni ja sumˈaku,,1,reader-gloss-v1;ipa=espeak

@@ -307,7 +307,9 @@ test('the tree, the sheet and the term picker all call a section the same thing'
   await page.goto('/customize.html?target=ja&source=de');
   await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
 
-  const inTree = await page.locator('.tree summary span:not(.count)').first().textContent();
+  // `.tree-color-wrap` is a span too, so the title is the one that is not a wrapper.
+  const inTree = await page.locator(
+    '.tree summary > span:not(.count):not(.tree-color-wrap)').first().textContent();
   expect(inTree).toBe('Sozial + Basics');
 
   await page.locator('details.add-term summary').click();
@@ -476,7 +478,8 @@ test('a section can be recoloured, and every term shows its importance', async (
   await expect(weights.first()).toHaveText(/^[01]\.\d\d$/);
 
   // Colour is how the sheet codes its sections, so which section takes which is an
-  // editorial choice. Clicking the swatch cycles it, and the sheet follows.
+  // editorial choice. The swatch opens a menu of the five roles -- it used to advance
+  // to the next one on each click, which is a control you can neither find nor aim.
   const swatch = page.locator('.tree-color').first();
   const shade = () => swatch.evaluate((b) => {
     const mark = b.firstElementChild;
@@ -484,10 +487,18 @@ test('a section can be recoloured, and every term shows its importance', async (
   });
   const before = await shade();
   await swatch.click();
+  const menu = page.locator('.role-menu').first();
+  await expect(menu).toBeVisible();
+  await expect(menu.locator('.role-option')).toHaveCount(5);
+  await expect(menu.locator('.role-option.current')).toHaveCount(1);
+  // Pick one that is not the current one, and the swatch and the sheet both follow.
+  await menu.locator('.role-option:not(.current)').first().click();
+  await expect(menu).toBeHidden();
   await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
   await expect.poll(shade).not.toBe(before);
+  await expect.poll(async () => menu.locator('.role-option.current').count()).toBe(1);
 
-  // And clicking it did not fold the section, which a <summary> click would.
+  // And none of that folded the section, which a <summary> click would.
   await expect(page.locator('.tree details').first()).toHaveAttribute('open', '');
 });
 
@@ -552,8 +563,11 @@ test('a header or footer can carry a folio, the pair, or your own text', async (
 
   await field.getByRole('radio', { name: 'Footer' }).click();
   await expect(field.locator('.head-slots')).toBeVisible();
-  await page.selectOption('#head-left', 'pair');
-  await page.selectOption('#head-right', 'page');
+  // Checkboxes, not menus: a position takes any number of slots, so the question is
+  // "which of these five" rather than "one of these five". The folio arrives already
+  // ticked, so turning the band on prints a page number without hunting for one.
+  await expect(page.locator('#head-right-page')).toBeChecked();
+  await page.locator('#head-left-pair').check();
 
   const texts = () => page.locator('.face.focused svg text')
     .evaluateAll((ns) => ns.map((n) => n.textContent));
@@ -563,7 +577,7 @@ test('a header or footer can carry a folio, the pair, or your own text', async (
     { timeout: 120_000 }).toBe(true);
 
   // Custom text reveals the box and reaches the page.
-  await page.selectOption('#head-left', 'custom');
+  await page.locator('#head-left-custom').check();
   await expect(page.locator('#head-text')).toBeVisible();
   await page.locator('#head-text').fill('If found, call +1 555 0100');
   await page.locator('#head-text').press('Enter');
@@ -608,4 +622,81 @@ test('the paper takes a colour of its own, and low ink takes it away', async ({ 
   // page to do it.
   await page.getByRole('radio', { name: 'Low ink', exact: true }).click();
   await expect.poll(rects, { timeout: 60_000 }).toBe(plain);
+});
+
+test('the furniture band takes three positions, several slots each', async ({ page }) => {
+  await page.goto('/customize.html?target=zh-Hans&source=en');
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+  // Off by default, but the folio is already ticked -- so turning the band on gives
+  // a page number without hunting for one.
+  await expect(page.locator('.head-slots')).toBeHidden();
+  await page.getByRole('radio', { name: 'Footer', exact: true }).click();
+  await expect(page.locator('.head-slots')).toBeVisible();
+  await expect(page.locator('#head-right-page')).toBeChecked();
+  await expect.poll(async () => (await page.locator('.face.focused svg text').allTextContents())
+    .some((s) => /^\d+ \/ \d+$/.test(s)), { timeout: 60_000 }).toBe(true);
+
+  // Three positions, and a position takes more than one slot.
+  await page.locator('#head-left-region').check();
+  await page.locator('#head-center-pair').check();
+  await page.locator('#head-left-page').check();
+  await expect.poll(async () => {
+    const said = (await page.locator('.face.focused svg text').allTextContents()).join('');
+    return said.includes('•') && /police/.test(said) && /Chinese/.test(said);
+  }, { timeout: 60_000 }).toBe(true);
+
+  // The emergency number is emphasised; the words around it are not.
+  const bold = await page.locator('.face.focused svg text[font-weight="700"], '
+    + '.face.focused svg text[style*="bold"]').allTextContents();
+  expect(bold.join('')).toMatch(/\d/);
+});
+
+test('the card keeps the page aspect however the panels are sized', async ({ page }) => {
+  // The face's aspect is the *page's*, and a `viewBox` inside an element of a
+  // different aspect letterboxes: white bands down the sides of the card, and every
+  // hit box -- which is positioned against the face -- offset from the ink it
+  // annotates, because the ink had moved inside the element and the hits had not.
+  //
+  // It held at the default sizes and broke once the panel seams were dragged wide,
+  // which is why it survived two reports. The cause was `74vh`: a guess at the
+  // available height that did not know about the toolbar above the card or the
+  // thumbnail strip below it, so the flex item was squeezed to the real height and
+  // the aspect lost. The height is measured now, from a size container.
+  await page.setViewportSize({ width: 1920, height: 1080 });
+  await page.goto('/customize.html?target=es&source=en');
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+  await page.waitForTimeout(1500);
+
+  /** The face's aspect, and how far the first ink is from the first hit box. */
+  const check = () => page.evaluate(() => {
+    const face = document.querySelector('.face.focused');
+    const svg = face.querySelector('svg');
+    const sb = svg.getBoundingClientRect();
+    const fb = face.getBoundingClientRect();
+    const hit = Math.min(...[...face.querySelectorAll('.hit')]
+      .map((h) => h.getBoundingClientRect().left - sb.left));
+    const ink = Math.min(...[...svg.querySelectorAll('text')]
+      .map((t) => t.getBoundingClientRect().left - sb.left));
+    return { aspect: fb.width / fb.height, offset: ink - hit };
+  });
+
+  for (const stage of ['default', 'dragged']) {
+    if (stage === 'dragged') {
+      for (const [id, dx] of [['resize-format', -400], ['resize-content', 400]]) {
+        const b = await page.locator(`#${id}`).boundingBox();
+        await page.mouse.move(b.x + b.width / 2, b.y + b.height / 2);
+        await page.mouse.down();
+        await page.mouse.move(b.x + b.width / 2 + dx, b.y + b.height / 2, { steps: 10 });
+        await page.mouse.up();
+      }
+      await page.waitForTimeout(3000);
+    }
+    const { aspect, offset } = await check();
+    expect(Math.abs(aspect - 1.4), `${stage}: aspect ${aspect.toFixed(3)}`).toBeLessThan(0.02);
+    // A hit opens at its column's edge and the ink a few points inside it, past the
+    // section rule and the cell padding. Tens of pixels means the two have come
+    // apart, which is the bug.
+    expect(offset, `${stage}: ink sits ${offset.toFixed(0)}px from its hit box`)
+      .toBeLessThan(14);
+  }
 });

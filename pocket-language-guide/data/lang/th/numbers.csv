@@ -17,7 +17,7 @@ numbers-money.b-n,ครึ่ง,,khrueng,kʰrɯŋ˥˩,,2,th-agent-v1;ipa=thaig
 atm-cash.where-is-an-atm,ตู้เอทีเอ็มอยู่ไหน,ตู้ ATM อยู่ไหน,tu ethiem yu nai,tuː˥˩ʔeː˧tʰiː˧ʔem˧ juː˨˩ naj˩˩˦,,2,th-agent-v1;ipa=thaig2p
 atm-cash.does-this-atm-take-foreign-cards,ใช้บัตรต่างประเทศ ได้ไหม,,chai bat tang prathet dai mai,tɕʰaj˦˥ bat˨˩ taːŋ˨˩pra˨˩raʔ˨˩tʰeːt˥˩ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
 atm-cash.the-atm-kept-my-card,ตู้กินบัตร,ตู้ยึดบัตร,tu kin bat,tuː˥˩ kin˧ bat˨˩,the machine ate my card,2,th-agent-v1;ipa=thaig2p
-atm-cash.is-there-a-fee,มีค่าธรรมเนียมไหม,,mi kha thamniam mai,,,2,th-agent-v1
+atm-cash.is-there-a-fee,มีค่าธรรมเนียมไหม,,mi kha thamniam mai,miː˧ kʰaː˥˩tʰam˧nia̯m˧ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
 atm-cash.the-card-was-declined,บัตรใช้ไม่ได้,,bat chai mai dai,bat˨˩ tɕʰaj˦˥maj˥˩daːj˥˩,,2,th-agent-v1;ipa=thaig2p
 atm-cash.what-is-the-exchange-rate,อัตราแลกเปลี่ยน เท่าไร,เรทเท่าไร,attra laekplian thaorai,ʔat˨˩ta˨˩raː˧lɛːk˥˩plia̯n˨˩ tʰaw˥˩raj˧,,2,th-agent-v1;ipa=thaig2p
 atm-cash.no-money-came-out,เงินไม่ออก,,ngoen mai ok,ŋɤn˧ maj˥˩ ʔɔːk˨˩,,2,th-agent-v1;ipa=thaig2p
@@ -33,7 +33,7 @@ atm-cash.atm,ตู้เอทีเอ็ม,ATM,tu ethiem,tuː˥˩ʔeː˧tʰi
 atm-cash.banknote,แบงก์,ธนบัตร,bang,bɛŋ˦,,2,th-agent-v1;ipa=thaig2p
 atm-cash.coin,เหรียญ,,rian,ria̯n˩˩˦,,2,th-agent-v1;ipa=thaig2p
 atm-cash.cash-only,รับเงินสดเท่านั้น,,rap ngoen sot thaonan,rap˦˥ ŋɤn˧sot˨˩ tʰaw˥˩nan˦˥,,2,th-agent-v1;ipa=thaig2p
-atm-cash.fee,ค่าธรรมเนียม,,kha thamniam,,,2,th-agent-v1
+atm-cash.fee,ค่าธรรมเนียม,,kha thamniam,kʰaː˥˩tʰam˧nia̯m˧,,2,th-agent-v1;ipa=thaig2p
 atm-cash.change,เงินทอน,,ngoen thon,ŋɤn˧tʰɔːn˧,,2,th-agent-v1;ipa=thaig2p
 atm-cash.exchange-rate,อัตราแลกเปลี่ยน,เรท,attra laekplian,ʔat˨˩ta˨˩raː˧lɛːk˥˩plia̯n˨˩,,2,th-agent-v1;ipa=thaig2p
 atm-cash.bank,ธนาคาร,,thanakhan,tʰa˦˥naː˧kʰaː˧ra˦˥,,2,th-agent-v1;ipa=thaig2p
@@ -43,7 +43,31 @@ numbers-money.baht,บาท,,bat,baːt˨˩,,2,th-gaps-v1;ipa=thaig2p
 numbers-money.baht-symbol,฿,บาท,bat,,,2,th-gaps-v1
 numbers-money.number-and-classifier-notes,"ประกอบตัวเลข: 11 = shi yi, 20 = er shi, 21 = er shi yi บอกเบอร์โทร 1 มักอ่านว่า yao ลักษณนามจีน เรียงต่างจากไทย คือ จำนวน + ลักษณนาม + คำนาม เช่น liang zhang piao = ตั๋ว 2 ใบ ที่ใช้บ่อย: ge (ทั่วไป), wei (คน), zhang (ตั๋วและของแบน), bei (ถ้วย), wan (ชาม), ping (ขวด) เงิน: ภาษาพูดเรียก yuan ว่า kuai, jiao หรือ mao = 0.1 yuan, fen = 0.01 yuan",,,,,2,th-notes-v1
 numbers-money.number-and-classifier-notes-2,"ประกอบตัวเลข: 11 = juuichi, 20 = nijuu, 21 = nijuuichi ลักษณนามญี่ปุ่น เป็นคำต่อท้ายตัวเลข: -tsu (ของทั่วไป), -mai (ของแบน), -hon (ของยาว), -nin (คน), -hai (ถ้วย) บอกเบอร์โทร: 0 = zero หรือ maru, 4 = yon, 7 = nana, 9 = kyuu ขีดคั่นอ่านว่า no",,,,,2,th-notes-v1
-numbers-money.forint,ฟอรินต์ฮังการี,,,fɔː˧ rin˧ haŋ˧kaː˧riː˧,,2,hu-agent-v1;ipa=thaig2p
-numbers-money.forint-symbol,ฟอรินต์ฮังการี,,,fɔː˧ rin˧ haŋ˧kaː˧riː˧,,2,hu-agent-v1;ipa=thaig2p
-numbers-money.rupee,รูปีอินเดีย,,,ruː˧piː˧ʔin˧dia̯w˧,,2,hu-agent-v1;ipa=thaig2p
-numbers-money.rupee-symbol,รูปีอินเดีย,,,ruː˧piː˧ʔin˧dia̯w˧,,2,hu-agent-v1;ipa=thaig2p
+numbers-money.forint,ฟอรินต์,,,fɔː˧ rin˧,,2,reader-gloss-v1;ipa=thaig2p
+numbers-money.forint-symbol,สัญลักษณ์ฟอรินต์,,,san˩˩˦˥lak˦˥ fɔː˧ rin˧,,2,reader-gloss-v1;ipa=thaig2p
+numbers-money.rupee,รูปี,,,ruː˧piː˧,,2,reader-gloss-v1;ipa=thaig2p
+numbers-money.rupee-symbol,สัญลักษณ์รูปี,,,san˩˩˦˥lak˦˥ ruː˧piː˧,,2,reader-gloss-v1;ipa=thaig2p
+numbers-money.won,วอน,,,wɔːn˧,,2,reader-gloss-v1;ipa=thaig2p
+numbers-money.won-symbol,สัญลักษณ์วอน,,,san˩˩˦˥lak˦˥ wɔːn˧,,2,reader-gloss-v1;ipa=thaig2p
+numbers-money.lira,ลีรา,,,liː˧ raː˧,,2,reader-gloss-v1;ipa=thaig2p
+numbers-money.lira-symbol,สัญลักษณ์ลีรา,,,san˩˩˦˥lak˦˥ liː˧ raː˧,,2,reader-gloss-v1;ipa=thaig2p
+numbers-money.dong,ดอง,,,dɔːŋ˧,,2,reader-gloss-v1;ipa=thaig2p
+numbers-money.dong-symbol,สัญลักษณ์ดอง,,,san˩˩˦˥lak˦˥ dɔːŋ˧,,2,reader-gloss-v1;ipa=thaig2p
+numbers-money.ruble,รูเบิล,,,ruː˧ bɤn˧,,2,reader-gloss-v1;ipa=thaig2p
+numbers-money.ruble-symbol,สัญลักษณ์รูเบิล,,,san˩˩˦˥lak˦˥ ruː˧ bɤn˧,,2,reader-gloss-v1;ipa=thaig2p
+numbers-money.rupiah,รูเปียห์,,,ruː˧ pia̯˧,,2,reader-gloss-v1;ipa=thaig2p
+numbers-money.rupiah-symbol,สัญลักษณ์รูเปียห์,,,san˩˩˦˥lak˦˥ ruː˧ pia̯˧,,2,reader-gloss-v1;ipa=thaig2p
+numbers-money.shilling,ชิลลิง,,,tɕʰin˧la˦˥ liŋ˧,,2,reader-gloss-v1;ipa=thaig2p
+numbers-money.shilling-symbol,สัญลักษณ์ชิลลิง,,,san˩˩˦˥lak˦˥ tɕʰin˧la˦˥ liŋ˧,,2,reader-gloss-v1;ipa=thaig2p
+numbers-money.euro,ยูโร,,,juː˧roː˧,,2,reader-gloss-v1;ipa=thaig2p
+numbers-money.euro-symbol,สัญลักษณ์ยูโร,,,san˩˩˦˥lak˦˥ juː˧roː˧,,2,reader-gloss-v1;ipa=thaig2p
+numbers-money.dollar,ดอลลาร์,,,dɔn˧laː˧,,2,reader-gloss-v1;ipa=thaig2p
+numbers-money.dollar-symbol,สัญลักษณ์ดอลลาร์,,,san˩˩˦˥lak˦˥ dɔn˧laː˧,,2,reader-gloss-v1;ipa=thaig2p
+numbers-money.pound,ปอนด์,,,pɔːn˧,,2,reader-gloss-v1;ipa=thaig2p
+numbers-money.pound-symbol,สัญลักษณ์ปอนด์,,,san˩˩˦˥lak˦˥ pɔːn˧,,2,reader-gloss-v1;ipa=thaig2p
+numbers-money.yen,เยน,,,jeːn˧,,2,reader-gloss-v1;ipa=thaig2p
+numbers-money.yen-symbol,¥,,,,,2,reader-gloss-v1
+numbers-money.yu-n,หยวน,,,jua̯n˩˩˦,,2,reader-gloss-v1;ipa=thaig2p
+numbers-money.ku-i,หยวน (ภาษาพูด),,,jua̯n˩˩˦ pʰaː˧saː˩˩˦pʰuːt˥˩,,1,reader-gloss-v1;ipa=thaig2p
+numbers-money.li-ng,2 + ลักษณนาม,,,lak˦˥ka˨˩naʔ˦˥naːm˧,,1,reader-gloss-v1;ipa=thaig2p
+numbers-money.2-items,2 ชิ้น,,,tɕʰin˦˥,,1,reader-gloss-v1;ipa=thaig2p

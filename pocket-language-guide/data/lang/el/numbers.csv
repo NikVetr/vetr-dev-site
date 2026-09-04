@@ -38,12 +38,36 @@ atm-cash.change,ρέστα / ψιλά,,resta / psila,ɾˈesta / psilˈa,,2,el-ag
 atm-cash.exchange-rate,ισοτιμία,,isotimia,ˌisotimˈia,,2,el-agent-v1;roman=elot743;ipa=espeak
 atm-cash.bank,τράπεζα,,trapeza,tɾˈapezˌa,,2,el-agent-v1;roman=elot743;ipa=espeak
 atm-cash.money-exchange,ανταλλακτήριο,,antallaktirio,ˌadalaktˈiɾiˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
-atm-cash.pin,κωδικός PIN,PIN,kodikos PIN,,,2,el-agent-v1;roman=elot743
+atm-cash.pin,κωδικός PIN,PIN,kodikos PIN,kˌoðikˈos pˈin,,2,el-agent-v1;roman=elot743;ipa=espeak+loan
 numbers-money.euro,ευρώ,,evro,evɾˈo,,2,euro-scope-v1;ipa=espeak
 numbers-money.euro-symbol,€,,evro,,,2,euro-scope-v1
 numbers-money.number-and-classifier-notes,"Οι αριθμοί συντίθενται: 11 = shíyī, 20 = èrshí, 21 = èrshíyī. Στο τηλέφωνο το 1 λέγεται yāo. Ανάμεσα σε αριθμό και ουσιαστικό μπαίνει υποχρεωτικά μετρική λέξη: gè (γενική), wèi (πρόσωπα), zhāng (εισιτήρια, επίπεδα), bēi (κούπες), píng (μπουκάλια). Πριν από μετρική λέξη το 2 είναι liǎng, όχι èr: liǎng zhāng piào, δύο εισιτήρια. Ο τόνος στο φωνήεν δηλώνει ύψος, όχι έμφαση. Χρήματα: kuài = γιουάν προφορικά, jiǎo / máo = 0,1 γιουάν, fēn = 0,01 γιουάν.",,,,,2,el-notes-v1
 numbers-money.number-and-classifier-notes-2,"Οι αριθμοί συντίθενται: 11 = jūichi, 20 = nijū, 21 = nijūichi. Ο μετρικός δείκτης ακολουθεί υποχρεωτικά τον αριθμό: -tsu (αντικείμενα), -mai (επίπεδα), -hon (μακρόστενα), -nin (πρόσωπα), -hai (κούπες). Στο τηλέφωνο: 0 = zero ή maru, 4 = yon, 7 = nana, 9 = kyū, και η παύλα διαβάζεται no. Το φωνήεν με γραμμή από πάνω είναι μακρό, δεν τονίζεται.",,,,,2,el-notes-v1
-numbers-money.forint,Φιορίνι Ουγγαρίας,,,fˌioɾˈini ˌuŋɡaɾˈias,,2,hu-agent-v1;ipa=espeak
-numbers-money.forint-symbol,Φιορίνι Ουγγαρίας,,,fˌioɾˈini ˌuŋɡaɾˈias,,2,hu-agent-v1;ipa=espeak
-numbers-money.rupee,Ρουπία Ινδίας,,,ɾupˈia inðˈias,,2,hu-agent-v1;ipa=espeak
-numbers-money.rupee-symbol,Ρουπία Ινδίας,,,ɾupˈia inðˈias,,2,hu-agent-v1;ipa=espeak
+numbers-money.forint,φιορίνι,,,fˌioɾˈini,,2,reader-gloss-v1;ipa=espeak
+numbers-money.forint-symbol,φιορίνι (σύμβολο),,,fˌioɾˈini sˈimvolˌo,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupee,ρουπία,,,ɾupˈia,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupee-symbol,ρουπία (σύμβολο),,,ɾupˈia sˈimvolˌo,,2,reader-gloss-v1;ipa=espeak
+numbers-money.won,γουόν,,,ɣuˈon,,2,reader-gloss-v1;ipa=espeak
+numbers-money.won-symbol,γουόν (σύμβολο),,,ɣuˈon sˈimvolˌo,,2,reader-gloss-v1;ipa=espeak
+numbers-money.baht,μπατ,,,bˈat,,2,reader-gloss-v1;ipa=espeak
+numbers-money.baht-symbol,μπατ (σύμβολο),,,bˈat sˈimvolˌo,,2,reader-gloss-v1;ipa=espeak
+numbers-money.lira,λίρα,,,lˈiɾa,,2,reader-gloss-v1;ipa=espeak
+numbers-money.lira-symbol,λίρα (σύμβολο),,,lˈiɾa sˈimvolˌo,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dong,ντονγκ,,,dˈonɡ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dong-symbol,ντονγκ (σύμβολο),,,dˈonɡ sˈimvolˌo,,2,reader-gloss-v1;ipa=espeak
+numbers-money.ruble,ρούβλι,,,ɾˈuvli,,2,reader-gloss-v1;ipa=espeak
+numbers-money.ruble-symbol,ρούβλι (σύμβολο),,,ɾˈuvli sˈimvolˌo,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupiah,ρουπία,,,ɾupˈia,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupiah-symbol,ρουπία (σύμβολο),,,ɾupˈia sˈimvolˌo,,2,reader-gloss-v1;ipa=espeak
+numbers-money.shilling,σελίνι,,,selˈini,,2,reader-gloss-v1;ipa=espeak
+numbers-money.shilling-symbol,σελίνι (σύμβολο),,,selˈini sˈimvolˌo,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dollar,δολάριο,,,ðolˈaɾiˌo,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dollar-symbol,δολάριο (σύμβολο),,,ðolˈaɾiˌo sˈimvolˌo,,2,reader-gloss-v1;ipa=espeak
+numbers-money.pound,λίρα,,,lˈiɾa,,2,reader-gloss-v1;ipa=espeak
+numbers-money.pound-symbol,λίρα (σύμβολο),,,lˈiɾa sˈimvolˌo,,2,reader-gloss-v1;ipa=espeak
+numbers-money.yen,γιεν,,,jˈen,,2,reader-gloss-v1;ipa=espeak
+numbers-money.yen-symbol,¥,,,,,2,reader-gloss-v1
+numbers-money.yu-n,γιουάν,,,juˈan,,2,reader-gloss-v1;ipa=espeak
+numbers-money.ku-i,γιουάν (προφορικά),,,juˈam bɾˌofoɾikˈa,,1,reader-gloss-v1;ipa=espeak
+numbers-money.li-ng,2 + μετρική λέξη,,,ðˈio mˌetɾicˈi lˈeksi,,1,reader-gloss-v1;ipa=espeak
+numbers-money.2-items,2 τεμάχια,,,ðˈio temˈaça,,1,reader-gloss-v1;ipa=espeak

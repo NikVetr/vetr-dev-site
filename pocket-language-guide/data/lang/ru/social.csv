@@ -26,6 +26,7 @@ communication.please-show-me-the-text,Покажите мне текст на {t
 communication.i-cannot-make-out-what-you-are-saying,"Я не разбираю, что вы говорите.",,"Ya ne razbirayu, chto vy govorite.","ˈja nʲe rʌzbʲirˈɑju, ʃto vˈɨ ɡʌvʌrʲˈitʲi",,2,ru-agent-v1;ipa=espeak
 communication.i-do-not-understand,Я не понимаю.,,Ya ne ponimayu.,ˈja nʲe pʌnʲimˈɑju,,2,ru-agent-v1;ipa=espeak
 communication.i-cannot-read-it,Я не могу это прочитать.,,Ya ne mogu eto prochitatʼ.,ˈja nʲe mʌɡˌu ˈɛtʌ prʌtʃʲitˈɑtʲ,,2,ru-agent-v1;ipa=espeak
+communication.please-write-it-in-roman-letters,Напишите латинскими буквами.,,,nʌpʲiʃˈɨtʲi ɭatʲˈinskʲimʲɪ bˈukvʌmʲɪ,,1,reader-gloss-v1;ipa=espeak
 quick-responses.please-go-ahead,пожалуйста,,pozhaluysta,pʌʒˈɑɭujsta,,2,ru-agent-v1;ipa=espeak
 quick-responses.yes-right,да / верно,,da / verno,dˈɑ / vʲˈernʌ,,2,ru-agent-v1;ipa=espeak
 quick-responses.no-not,нет / не,,net / ne,nʲˈet / nʲe,,2,ru-agent-v1;ipa=espeak
@@ -51,16 +52,16 @@ phone-text-power.the-translation-may-be-inaccurate,Перевод может б�
 phone-text-power.please-confirm,"Подтвердите, пожалуйста.",,"Podtverdite, pozhaluysta.","pʌdtvʲirdʲˈitʲi, pʌʒˈɑɭujsta",,2,ru-agent-v1;ipa=espeak
 phone-text-power.may-i-charge-my-phone-here,Можно здесь зарядить телефон?,,Mozhno zdesʼ zaryaditʼ telefon?,mˈoʒnʌ ʑdʲˈesʲ zʌrʲadʲˈitʲ tʲiɭʲifˈon,,2,ru-agent-v1;ipa=espeak
 sim-data.i-would-like-a-tourist-sim,Нужна сим-карта для туристов.,,Nuzhna sim-karta dlya turistov.,nuʒnˈɑ sʲˈimkɑrta dɭʲɑ turʲˈistʌf,,2,ru-agent-v1;ipa=espeak
-sim-data.may-i-use-your-wifi,Можно воспользоваться вашим Wi-Fi?,,Mozhno vospolʼzovatʼsya vashim Wi-Fi?,,,2,ru-agent-v1
+sim-data.may-i-use-your-wifi,Можно воспользоваться вашим Wi-Fi?,,Mozhno vospolʼzovatʼsya vashim Wi-Fi?,mˈoʒnʌ vʌspˈoɭzʌvʌtʲsʲʌ vˈɑʃɨm vajˈfɑj,,2,ru-agent-v1;ipa=espeak+loan
 sim-data.how-much-data-is-included,Сколько гигабайт включено?,,Skolʼko gigabayt vklyucheno?,skˈoɭkʌ ɡʲiɡabˈɑjt fkɭʲʉtʃʲinˈo,,2,ru-agent-v1;ipa=espeak
 sim-data.do-you-need-my-passport,Вам нужен мой паспорт?,,Vam nuzhen moy pasport?,vˈɑm nˈuʒɨn mˈoj pˈɑspʌrt,,2,ru-agent-v1;ipa=espeak
 sim-data.how-long-is-it-valid,Сколько действует?,,Skolʼko deystvuyet?,skˈoɭkʌ dʲˈejstvujit,,2,ru-agent-v1;ipa=espeak
 sim-data.please-activate-it,"Активируйте, пожалуйста.",,"Aktiviruyte, pozhaluysta.","aktʲivʲˈirujtʲi, pʌʒˈɑɭujsta",,2,ru-agent-v1;ipa=espeak
-sim-data.do-you-have-an-esim,У вас есть eSIM?,,U vas yestʼ eSIM?,,,2,ru-agent-v1
+sim-data.do-you-have-an-esim,У вас есть eSIM?,,U vas yestʼ eSIM?,ˈu vˈɑs jestʲ iˈsʲim,,2,ru-agent-v1;ipa=espeak+loan
 sim-data.my-data-is-not-working,У меня не работает интернет.,,U menya ne rabotayet internet.,ˈu mʲinʲˈɑ nʲe rabˈotʌjit ɪntɛrnˈɛt,,2,ru-agent-v1;ipa=espeak
 sim-data.does-it-need-registration,Нужна регистрация?,,Nuzhna registratsiya?,nuʒnˈɑ rʲiɡʲistrˈɑtsɨja,,2,ru-agent-v1;ipa=espeak
 sim-data.i-have-no-signal,Нет связи.,,Net svyazi.,nʲˈet svʲˈɑʑɪ,,2,ru-agent-v1;ipa=espeak
-sim-data.please-write-the-wifi-password,Напишите пароль от Wi-Fi.,,Napishite parolʼ ot Wi-Fi.,,,2,ru-agent-v1
+sim-data.please-write-the-wifi-password,Напишите пароль от Wi-Fi.,,Napishite parolʼ ot Wi-Fi.,nʌpʲiʃˈɨtʲi parˈoɭʲ ot vajˈfɑj,,2,ru-agent-v1;ipa=espeak+loan
 sim-data.sim-card,сим-карта,,sim-karta,sʲˈimkɑrta,,2,ru-agent-v1;ipa=espeak
 sim-data.where-can-i-buy-a-plug-adapter,Где купить переходник для розетки?,,Gde kupitʼ perekhodnik dlya rozetki?,ɡdʲˈe kupʲˈitʲ pʲirʲixʌdnʲˈik dɭʲɑ rʌʑˈetkʲɪ,,2,ru-agent-v1;ipa=espeak
 sim-data.mobile-data,мобильный интернет,,mobilʼnyy internet,mʌbʲˈiɭnɨj ɪntɛrnˈɛt,,2,ru-agent-v1;ipa=espeak
@@ -68,7 +69,7 @@ sim-data.can-i-top-up-this-sim,Можно пополнить эту сим-ка�
 sim-data.top-up,пополнение счёта,,popolneniye schëta,pʌpʌɭnʲˈenʲijɪ ɕˈɵta,,2,ru-agent-v1;ipa=espeak
 sim-data.is-there-coverage-in,{} — там есть связь?,,{} — tam yestʼ svyazʼ?,{} tˈɑm jestʲ svʲˈɑʑ,,2,ru-agent-v1;ipa=espeak
 sim-data.signal,связь / сигнал,,svyazʼ / signal,svʲˈɑʑ / sʲiɡnˈɑɭ,,2,ru-agent-v1;ipa=espeak
-sim-data.esim,eSIM,,eSIM,,,2,ru-agent-v1
+sim-data.esim,eSIM,,eSIM,iˈsʲim,,2,ru-agent-v1;ipa=espeak+loan
 sim-data.prepaid,предоплата,,predoplata,prʲidʌpɭˈɑta,,2,ru-agent-v1;ipa=espeak
 sim-data.roaming,роуминг,,rouming,rˈoumʲink,,2,ru-agent-v1;ipa=espeak
 etiquette.is-this-allowed,Это можно?,,Eto mozhno?,ˈɛtʌ mˈoʒnʌ,,2,ru-agent-v1;ipa=espeak

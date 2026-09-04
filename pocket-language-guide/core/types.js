@@ -117,14 +117,28 @@
  * side and a folio on the other -- and a folio belongs in a corner. `custom` takes
  * `text`; the rest are derived, so they stay right when the pair or the region
  * changes.
- * @typedef {'none'|'page'|'pair'|'region'|'custom'} HeadSlot
+ * @typedef {'none'|'page'|'pair'|'region'|'legend'|'custom'} HeadSlot
  *
+ * A line of furniture along the top or bottom, in three positions.
+ *
+ * Each position takes a *list* of slots, joined with a bullet, because the useful
+ * shapes are combinations: a folio in one corner, the pair in the other, and the
+ * local emergency number in the middle where a stranger can find it. A single slot
+ * is still accepted and read as a list of one, so a spec saved before this -- in
+ * `localStorage`, in an exported sheet.json, or in `data/presets.json` -- keeps
+ * working.
  * @typedef {Object} RunningHead
  * @property {'none'|'top'|'bottom'} at
- * @property {HeadSlot} [left]
- * @property {HeadSlot} [right]
+ * @property {HeadSlot|HeadSlot[]} [left]
+ * @property {HeadSlot|HeadSlot[]} [center]
+ * @property {HeadSlot|HeadSlot[]} [right]
  * @property {string} [text]  for a `custom` slot
  */
+
+/** One run of head furniture: its text and whether it carries emphasis. A part is
+ * bold where the thing it names is what a stranger has to read first -- the digits
+ * of an emergency number, and nothing else so far.
+ * @typedef {{text:string, bold:boolean}} HeadPart */
 
 /**
  * @typedef {Object} SheetSpec
@@ -171,7 +185,11 @@
  * @property {{sections:Record<string,boolean>, items:Record<string,boolean>}} selection
  */
 
-/** @typedef {{x:number,y:number,w:number,h:number,fill:string,r?:number}} Rect */
+/** `opacity` is only ever set by a `soft` row box, which is what lets a page
+ * background show through the row shading. Both renderers take it natively -- SVG as
+ * `fill-opacity`, `pdf-lib` as `opacity` -- so nothing has to pre-blend, which
+ * matters because a `sections` or `flag` wash is a different colour under every row.
+ * @typedef {{x:number,y:number,w:number,h:number,fill:string,r?:number,opacity?:number}} Rect */
 
 /**
  * A wash behind the columns. `tint` takes `color`; `flag` reads the countries that
@@ -182,6 +200,9 @@
  * @property {'none'|'tint'|'flag'|'sections'} mode
  * @property {string} [color]
  * @property {number} [strength]
+ * @property {'shade'|'soft'|'none'} [rows]  what an item's own box does. `shade` is
+ *   the alternating shading the reference card has; `soft` lets the page background
+ *   through it; `none` drops the boxes so only the page shows.
  */
 
 /** Text already broken to a single line and positioned. Renderers do not re-wrap.

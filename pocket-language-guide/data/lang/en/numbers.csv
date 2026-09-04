@@ -63,7 +63,11 @@ numbers-money.shilling,shilling,,ʃˈɪlɪŋ,,2,coordinator-gaps-v2;ipa=espeak
 numbers-money.shilling-symbol,shilling (symbol),,ʃˈɪlɪŋ sˈɪmbəl,,2,coordinator-gaps-v2;ipa=espeak
 numbers-money.baht,baht,,bˈɑːt,,2,coordinator-gaps-v2;ipa=espeak
 numbers-money.baht-symbol,baht (symbol),,bˈɑːt sˈɪmbəl,,2,coordinator-gaps-v2;ipa=espeak
-numbers-money.forint,Hungarian Forint,,hʌŋɡˈɛɹiən fˈɔːɹɪnt,,2,hu-agent-v1;ipa=espeak
-numbers-money.forint-symbol,Hungarian Forint,,hʌŋɡˈɛɹiən fˈɔːɹɪnt,,2,hu-agent-v1;ipa=espeak
-numbers-money.rupee,Indian Rupee,,ˈɪndiən ɹˈuːpiː,,2,hu-agent-v1;ipa=espeak
-numbers-money.rupee-symbol,Indian Rupee,,ˈɪndiən ɹˈuːpiː,,2,hu-agent-v1;ipa=espeak
+numbers-money.forint,forint,,fˈɔːɹɪnt,,2,reader-gloss-v1;ipa=espeak
+numbers-money.forint-symbol,forint (symbol),,fˈɔːɹɪnt sˈɪmbəl,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupee,rupee,,ɹˈuːpiː,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupee-symbol,rupee (symbol),,ɹˈuːpiː sˈɪmbəl,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dollar,dollar,$,dˈɑːlɚ,US · CA · AU · NZ,2,reader-gloss-v1;ipa=espeak
+numbers-money.dollar-symbol,$,dollar,,US · CA · AU · NZ,2,reader-gloss-v1
+numbers-money.pound,pound,£,pˈaʊnd,GB,2,reader-gloss-v1;ipa=espeak
+numbers-money.pound-symbol,£,pound,,GB,2,reader-gloss-v1

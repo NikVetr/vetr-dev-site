@@ -96,6 +96,8 @@ pharmacy-symptoms.i-have-a-burn,عندي حرق,,ʿindī ḥarq,ʕndˈiː ħˈar
 pharmacy-symptoms.it-started-days-ago,بدأ قبل {} أيام,,badaʾ qabl {} ayyām,bˈadaʔ qˈabl {} ʔˈiːaːm,,2,ar-agent-v1;ipa=espeak
 pharmacy-symptoms.cough-medicine,دواء للسعال,دواء للكحّة,dawāʾ lil-suʿāl,dˈawaːʔ llsʕaːl,,2,ar-agent-v1;ipa=espeak
 pharmacy-symptoms.is-this-safe-during-pregnancy,هل هذا آمن للحامل؟,,hal hādhā āmin lil-ḥāmil?,hˈal haˈaðaˌa ʔˈaːman llħaːml,,2,ar-agent-v1;ipa=espeak
+pharmacy-symptoms.i-think-i-have-malaria,أظنّ أنّني مصاب بالملاريا,عندي ملاريا,,ʔðnn ʔnnnˈiː mˈus̪aːb bilmalˈaːɹiːˌaː,,2,malaria-reader-v1;ipa=espeak
+pharmacy-symptoms.i-need-a-malaria-test,أحتاج إلى تحليل الملاريا,فحص الملاريا,,ʔħtˈaːdʒ ʔˈilaː tˈaħliːl ʔalmalˈaːɹiːˌaː,,2,malaria-reader-v1;ipa=espeak
 emergency-medical.help,النجدة!,ساعدوني!,al-najdah!,ʔannˈadʒda,,2,ar-agent-v1;ipa=espeak
 emergency-medical.please-call-an-ambulance,اتصل بالإسعاف من فضلك,,ittaṣil bi-al-isʿāf min faḍlak,ˈitːas̪ˌal bilʔˈisʕaːf mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
 emergency-medical.i-need-a-doctor,أحتاج إلى طبيب,,aḥtāj ilá ṭabīb,ʔħtˈaːdʒ ʔˈilaː t̪ˈabiːb,,2,ar-agent-v1;ipa=espeak

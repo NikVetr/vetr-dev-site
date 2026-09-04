@@ -96,6 +96,8 @@ pharmacy-symptoms.i-have-a-burn,J'ai une brûlure,,ʒe yn bʁylˈyʁ,,2,fr-agent
 pharmacy-symptoms.it-started-days-ago,Ça a commencé il y a {} jours,,sa a kɔmɑ̃se il i ˈa {} ʒˈuʁ,,2,fr-agent-v1;ipa=espeak
 pharmacy-symptoms.cough-medicine,sirop contre la toux,,siʁo kɔ̃tʁ la tˈu,,2,fr-agent-v1;ipa=espeak
 pharmacy-symptoms.is-this-safe-during-pregnancy,Est-ce sans danger pendant la grossesse ?,,ɛs sɑ̃ dɑ̃ʒe pɑ̃dɑ̃ la ɡʁosˈɛs,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.i-think-i-have-malaria,Je pense que j'ai le paludisme,,ʒə pɑ̃s kə ʒe lə palydˈism,,2,malaria-reader-v1;ipa=espeak
+pharmacy-symptoms.i-need-a-malaria-test,J'ai besoin d'un test de paludisme,,ʒe bəzwɛ̃ dœ̃ tɛst də palydˈism,,2,malaria-reader-v1;ipa=espeak
 emergency-medical.help,Au secours !,,o səkˈuʁ,,2,fr-agent-v1;ipa=espeak
 emergency-medical.please-call-an-ambulance,"Appelez une ambulance, s'il vous plaît",Appelez le SAMU,"aplez yn ɑ̃bylˈɑ̃s, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
 emergency-medical.i-need-a-doctor,J'ai besoin d'un médecin,,ʒe bəzwɛ̃ dœ̃ medəsˈɛ̃,,2,fr-agent-v1;ipa=espeak

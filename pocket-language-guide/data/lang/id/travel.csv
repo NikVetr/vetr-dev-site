@@ -33,6 +33,7 @@ taxi.can-you-wait-for-me-here,Bisa tunggu saya di sini?,,bˈisa tˈuŋɡu sˈaja
 taxi.we-need-to-catch-the-high-speed-train,Kami harus naik kereta cepat,,kˈami hˈarus nˈaɪk kərˈɛta tʃˈɛpat,,2,id-agent-v1;ipa=espeak
 taxi.please-use-the-meter,Tolong pakai argo,,tˈoloŋ pˈakaɪ ˈarɡo,argo = the taxi meter,2,id-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,Saya turun di sini,,sˈaja tˈurun di sˈini,,2,id-agent-v1;ipa=espeak
+taxi.please-get-me-there-in-time-for-the-shinkansen,Tolong tepat waktu untuk Shinkansen,,tˈoloŋ tˈɛpat wˈaktu ˌuntuk shinkˈansən,,1,reader-gloss-v1;ipa=espeak
 transit-rides.two-tickets,Dua tiket,,dˈua tˈikət,,2,id-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,Stasiun MRT di mana?,,stasˈiun ˌɛmˌɛrtˈe di mˈana,,2,id-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,Bus / kereta ini ke {}?,,bˈus / kərˈɛta ˈini kə {},,2,id-agent-v1;ipa=espeak
@@ -53,6 +54,7 @@ place-words.service-desk,Customer service,Layanan pelanggan,tʃustˈomər sərv�
 place-words.bus-stop,Halte bus,,hˈaltə bˈus,,2,id-agent-v1;ipa=espeak
 place-words.luggage-storage,Penitipan barang,,pənitˈipan bˈaraŋ,,2,id-agent-v1;ipa=espeak
 place-words.tourist-spot-sightseeing-area,Tempat wisata,,tˈɛmpat wisˈata,,2,id-agent-v1;ipa=espeak
+place-words.scenic-area,Kawasan wisata,kawasan wisata alam,kawˈasan wisˈata,,1,reader-gloss-v1;ipa=espeak
 border-customs.i-am-a-tourist,Saya turis,,sˈaja tˈuris,,2,id-agent-v1;ipa=espeak
 border-customs.here-is-my-passport,Ini paspor saya,,ˈini pˈaspɔr sˈaja,,2,id-agent-v1;ipa=espeak
 border-customs.i-am-staying-for-days,Saya tinggal {} hari,,sˈaja tˈiŋɡal {} hˈari,,2,id-agent-v1;ipa=espeak
@@ -111,3 +113,4 @@ common-signs.closed,Tutup,Libur,tˈutup,,2,id-agent-v1;ipa=espeak
 common-signs.stopped-stop,Berhenti,Stop,bərhˈɛnti,,2,id-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Ini perlu tap in dulu?,,ˈini pˈɛrlu tˈap ˈin dˈulu,"tap in / tap out, not a stamp",2,id-agent-v1;ipa=espeak
 rail-station-words.ticket-validator,Mesin validasi,Gate,mˈɛsin vˌalidˈasi,bus: mesin validasi; rail: gate,2,id-agent-v1;ipa=espeak
+rail-station-words.maglev,Maglev,kereta magnet,mˈaɡləv,,1,reader-gloss-v1;ipa=espeak

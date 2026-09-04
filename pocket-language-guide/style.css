@@ -266,13 +266,28 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
    share whatever is going, so the card sits in the middle of the room above the
    strip and the strip stays on the floor, whichever case it is. The way to give the
    card more room is to widen the panel, which the seams either side of it now do. */
+/* The room the focused face has, and a size container so the face can *ask* how much
+   height that is. `74vh` was the earlier answer and it was a guess: it did not know
+   about the toolbar above or the thumbnail strip below, so once the panel seams were
+   dragged wide it exceeded the real height, the flex item was squeezed to fit, and
+   the aspect ratio lost. A `viewBox` in an element of the wrong aspect letterboxes
+   -- which is where the white bands down the sides of the card came from, and why
+   every hit box was offset from the ink, since a hit is positioned against the face
+   and the ink had moved inside it. */
+.face-fit {
+  flex: 1; min-block-size: 0; display: flex;
+  container-type: size;
+}
 .face.focused {
-  display: block; cursor: default; margin-inline: auto; margin-block: auto;
+  display: block; cursor: default; margin: auto;
   aspect-ratio: var(--face-aspect, 1.4);
-  inline-size: min(100%, calc(74vh * var(--face-aspect, 1.4)));
+  /* Whichever binds first: the width available, or the height available turned into
+     a width by the page's own aspect. Both are the container's, measured. */
+  inline-size: min(100%, calc(100cqh * var(--face-aspect, 1.4)));
+  max-block-size: 100%;
 }
 .face.focused svg { inline-size: 100%; block-size: 100%; }
-.face-strip { display: flex; gap: var(--space-1); margin-top: auto; }
+.face-strip { display: flex; gap: var(--space-1); flex: none; }
 .face-strip .face { flex: 1; cursor: pointer; }
 .face.current { outline: 2px solid var(--accent); }
 /* Colour alone should not say "you are here": the tick survives greyscale. */
@@ -312,7 +327,13 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
 .tree .dot { width: 8px; height: 8px; border-radius: 2px; flex: none; }
 .items { list-style: none; margin: 0; padding: 0 0 var(--space-1) var(--space-2); }
 .items li { display: flex; gap: var(--space-1); align-items: baseline; font-size: var(--fs--1); }
-.items label { display: flex; gap: 0.4em; align-items: baseline; cursor: pointer; }
+/* `flex: 1` so the label fills the row: without it the label was only as wide as its
+   own text, and the `margin-inline-start: auto` that is supposed to drive the
+   importance number to the panel edge stopped wherever the gloss happened to end. */
+.items label {
+  display: flex; gap: 0.4em; align-items: baseline; cursor: pointer;
+  flex: 1; min-width: 0; flex-wrap: wrap;
+}
 .items li.flash { background: var(--accent-soft); }
 /* What the last balance did, until the reader touches anything else. A bar down the
    inside edge rather than a fill, so it does not fight the row's own text or the
@@ -331,8 +352,17 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
 }
 .items li.added::after { content: 'added'; color: #B3261E; }
 .items li.removed::after { content: 'off'; color: #0B67A3; }
-.items .target { font-weight: 600; }
-.items .gloss { color: var(--muted); }
+/* One span per shown column, distinguished the way the printed row distinguishes
+   them: the target's own script bold, the reader's gloss plain, and the two
+   generated columns -- romanisation and respelling -- italic and muted, which is
+   exactly what the sheet does with them. */
+.items .cell { min-width: 0; overflow-wrap: anywhere; }
+.items .cell:empty { display: none; }
+.items .script, .items .script_alt { font-weight: 600; }
+.items .gloss, .items .literal { color: var(--muted); }
+.items .roman, .items .respell, .items .ipa {
+  color: var(--muted); font-style: italic; font-size: 0.92em;
+}
 /* Right against the panel edge, so the numbers line up as a column to scan rather
    than sitting where the gloss happens to end. Tabular figures for the same
    reason. */
@@ -1010,3 +1040,78 @@ button.big { justify-content: center; padding: 0.6em 1em; font-size: var(--fs-1)
 /* The heart is the only coloured thing in the bar, which is what keeps the link
    subtle while still reading as a donate button. */
 .donate-mark { color: #b3261e; font-size: 1.05em; line-height: 1; }
+
+/* The section colour menu. Five roles, the current one marked, opened from the
+   section's own icon -- which used to advance to the next role on each click, a
+   control nobody could find and nobody could aim. */
+.tree-color-wrap { position: relative; display: inline-flex; flex: none; }
+.role-menu {
+  position: absolute; inset-block-start: calc(100% + 3px); inset-inline-start: 0;
+  z-index: 5; display: flex; gap: 2px; padding: 3px;
+  background: var(--paper); border: 1px solid var(--line);
+  border-radius: var(--radius-sm); box-shadow: 0 2px 8px rgb(17 24 32 / 14%);
+}
+.role-menu[hidden] { display: none; }
+.role-option {
+  padding: 2px; border: 0; background: none; cursor: pointer;
+  border-radius: 3px; display: inline-flex; line-height: 1;
+}
+.role-option:hover, .role-option:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: -1px;
+}
+/* The one in effect, said with a ring rather than colour, since every option in
+   here is already a colour. */
+.role-option.current { box-shadow: inset 0 0 0 2px var(--ink); }
+
+/* The row editor. Opened by clicking a row, which used to do nothing -- the
+   checkbox answers whether a row is on the sheet, and what it *says* was only
+   editable through a CSV round trip. One field per shown column, so the respelling
+   is correctable where a reader notices it is wrong. */
+.item-edit {
+  flex-basis: 100%; display: grid; gap: 0.3em;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  margin: 0.35em 0 0.5em; padding: var(--space-1);
+  background: var(--surface-2); border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+.item-edit label { display: flex; flex-direction: column; gap: 0.15em; cursor: text; }
+.item-edit input { width: 100%; font-size: var(--fs--1); }
+.item-edit .row { grid-column: 1 / -1; display: flex; gap: var(--space-1); }
+.item-edit button { font-size: var(--fs--1); padding: 0.2em 0.7em; }
+/* A row is a pointer target now, so it should say so. */
+.items label:hover .cell { text-decoration: 1px dotted underline; text-underline-offset: 2px; }
+
+/* Three words rather than three glyph buttons: what an item's box does is a
+   property of the *page*, not a shape you can draw at 30px, and the row sits inside
+   the background field where the swatch and the slider already are. */
+.rows-mode { display: flex; gap: 2px; flex: none; }
+.rows-mode .chip {
+  font-size: 0.7rem; padding: 0.2em 0.55em; border: 1px solid var(--line);
+  background: var(--paper); color: var(--muted); cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+.rows-mode .chip:hover, .rows-mode .chip:focus-visible {
+  color: var(--ink); border-color: var(--muted); outline: none;
+}
+.rows-mode .chip.current {
+  color: var(--accent); border-color: var(--accent); font-weight: 600;
+}
+
+/* Three positions in the furniture band, each taking any number of slots. Checkboxes
+   because the question is "which of these five", not "one of these five" -- it used
+   to be two `<select>`s of one slot each, so a folio and the pair could not both
+   print and nothing said the sides were independent. */
+.head-slots { display: grid; gap: var(--space-1); margin-top: var(--space-1); }
+/* `display: grid` above outranks the user agent's `[hidden] { display: none }`, the
+   same trap `.numeric-custom` documents a few rules up -- without this the three
+   position fieldsets sat under the band control whether there was a band or not. */
+.head-slots[hidden] { display: none; }
+.head-side {
+  border: 1px solid var(--line); border-radius: var(--radius-sm);
+  margin: 0; padding: 0.2em 0.5em 0.4em;
+}
+.head-side legend { font-size: 0.7rem; color: var(--muted); padding: 0 0.3em; }
+.head-side label {
+  display: flex; align-items: center; gap: 0.35em;
+  font-size: var(--fs--1); cursor: pointer; padding: 0.05em 0;
+}

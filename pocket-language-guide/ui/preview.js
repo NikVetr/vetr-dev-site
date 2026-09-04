@@ -52,7 +52,17 @@ export function renderFaces(input) {
     return;
   }
 
-  root.append(faceNode(input, svgs[focused], focused, true));
+  // The focused face goes in a box of its own, which is the room it has to fit in.
+  // The face's aspect is the *page's*, and it can only hold that if something states
+  // how much height is available -- `74vh` was a guess at it, and once the panel
+  // seams were dragged wide the guess was too large: the flex item was squeezed to
+  // the real height, the aspect broke, and the SVG letterboxed inside its own
+  // element. That put white bands down both sides of the card and left every hit box
+  // -- which is positioned against the face -- offset from the ink it annotates.
+  const fit = document.createElement('div');
+  fit.className = 'face-fit';
+  fit.append(faceNode(input, svgs[focused], focused, true));
+  root.append(fit);
 
   if (svgs.length > 1) {
     const strip = document.createElement('div');

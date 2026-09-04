@@ -43,7 +43,31 @@ numbers-money.euro,euro,,ˈeʊɾʊ,,2,coordinator-gaps-v2;ipa=espeak
 numbers-money.euro-symbol,€,euro,,,2,coordinator-gaps-v2
 numbers-money.number-and-classifier-notes,"Formar números: 11 = shi yi; 20 = er shi; 21 = er shi yi. Ao telefone, o 1 lê-se muitas vezes yao. Entre o número e o nome entra sempre um classificador: ge (geral), wei (pessoas), zhang (bilhetes e coisas planas), bei (copos), ping (garrafas). Dinheiro: kuai = yuan na fala; jiao ou mao = 0,1 yuan; fen = 0,01 yuan.",,,,2,pt-notes-v1
 numbers-money.number-and-classifier-notes-2,"Formar números: 11 = juuichi; 20 = nijuu; 21 = nijuuichi. Contadores, que seguem o número: -tsu (coisas), -mai (planas), -hon (compridas), -nin (pessoas), -hai (copos). Ao telefone: 0 = zero ou maru, 4 = yon, 7 = nana, 9 = kyuu; o hífen entre blocos lê-se no.",,,,2,pt-notes-v1
-numbers-money.forint,Florim húngaro,,floɾˈiŋ ˈũŋɡæɾʊ,,2,hu-agent-v1;ipa=espeak
-numbers-money.forint-symbol,Florim húngaro,,floɾˈiŋ ˈũŋɡæɾʊ,,2,hu-agent-v1;ipa=espeak
-numbers-money.rupee,Rupia indiana,,xˌupˈiæ ˌiŋdʒiˈɐ̃næ,,2,hu-agent-v1;ipa=espeak
-numbers-money.rupee-symbol,Rupia indiana,,xˌupˈiæ ˌiŋdʒiˈɐ̃næ,,2,hu-agent-v1;ipa=espeak
+numbers-money.forint,florim,,floɾˈiŋ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.forint-symbol,florim (símbolo),,floɾˈiŋ sˈimbolʊ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupee,rupia,,xˌupˈiæ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupee-symbol,rupia (símbolo),,xˌupˈiæ sˈimbolʊ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.won,won,,wˈoŋ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.won-symbol,won (símbolo),,wˈoŋ sˈimbolʊ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.baht,baht,,bˈatʃ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.baht-symbol,baht (símbolo),,bˈatʃ sˈimbolʊ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.lira,lira,,lˈiɾæ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.lira-symbol,lira (símbolo),,lˈiɾæ sˈimbolʊ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dong,dong,,dˈoŋɡ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dong-symbol,dong (símbolo),,dˈoŋɡ sˈimbolʊ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.ruble,rublo,,xˈublʊ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.ruble-symbol,rublo (símbolo),,xˈublʊ sˈimbolʊ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupiah,rupia,,xˌupˈiæ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupiah-symbol,rupia (símbolo),,xˌupˈiæ sˈimbolʊ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.shilling,xelim,,ʃelˈiŋ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.shilling-symbol,xelim (símbolo),,ʃelˈiŋ sˈimbolʊ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dollar,dólar,,dˈɔlar,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dollar-symbol,dólar (símbolo),,dˈɔlar sˈimbolʊ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.pound,libra,,lˈibræ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.pound-symbol,libra (símbolo),,lˈibræ sˈimbolʊ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.yen,iene,,ˌiˈeny,,2,reader-gloss-v1;ipa=espeak
+numbers-money.yen-symbol,¥,,,,2,reader-gloss-v1
+numbers-money.yu-n,yuan,,juˈɐ̃ŋ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.ku-i,yuan (na fala),,juˈɐ̃ŋ na fˈalæ,,1,reader-gloss-v1;ipa=espeak
+numbers-money.li-ng,2 + classificador,,dˈoɪs klˌasifˌikadˈor,,1,reader-gloss-v1;ipa=espeak
+numbers-money.2-items,2 unidades,,dˈoɪz ˌunidˈadʒys,,1,reader-gloss-v1;ipa=espeak

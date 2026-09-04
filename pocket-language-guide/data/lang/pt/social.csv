@@ -26,6 +26,7 @@ communication.please-show-me-the-text,"Mostre-me o texto em {target}, por favor"
 communication.i-cannot-make-out-what-you-are-saying,Não consigo perceber o que diz,Não consigo entender,nˌɐ̃ʊ̃ kˌoŋsˈiɡʊ pˌeɾəsebˈeɾ ʊ ky dʒˈis,,2,pt-agent-v1;ipa=espeak
 communication.i-do-not-understand,Não entendo,Não percebo,nˌɐ̃ʊ̃ ˌeɪŋtˈeɪŋdʊ,,2,pt-agent-v1;ipa=espeak
 communication.i-cannot-read-it,Não consigo ler isto,,nˌɐ̃ʊ̃ kˌoŋsˈiɡʊ lˈeɾ ˈistʊ,,2,pt-agent-v1;ipa=espeak
+communication.please-write-it-in-roman-letters,Escreva em letras latinas,,ˌeskrˈevæ ˈeɪŋ lˈetræz lˌatʃˈinæs,,1,reader-gloss-v1;ipa=espeak
 quick-responses.please-go-ahead,Faz favor,Pode passar,fas favˈor,,2,pt-agent-v1;ipa=espeak
 quick-responses.yes-right,Sim,Certo,sˈiŋ,,2,pt-agent-v1;ipa=espeak
 quick-responses.no-not,Não,,nˈɐ̃ʊ̃,,2,pt-agent-v1;ipa=espeak

@@ -43,7 +43,31 @@ numbers-money.lira,lira,Türk lirası,liɾˈa,,2,coordinator-gaps-v2;ipa=espeak
 numbers-money.lira-symbol,₺,TL,,,2,coordinator-gaps-v2
 numbers-money.number-and-classifier-notes,"Sayı kurma: 11 = shi yi; 20 = er shi; 21 = er shi yi. Telefonda 1 çoğu zaman yao okunur. Ölçü sözcükleri: ge (genel), wei (kişi), zhang (bilet, yassı şeyler), bei (bardak), ping (şişe). Para: jiao / mao = 0,1 yuan; fen = 0,01 yuan.",,,,2,tr-notes-v1
 numbers-money.number-and-classifier-notes-2,"Sayı kurma: 11 = juuichi; 20 = nijuu; 21 = nijuuichi. Sayma ekleri: -tsu (nesne), -mai (yassı), -hon (uzun), -nin (kişi), -hai (bardak). Telefonda: 0 = zero ya da maru, 4 = yon, 7 = nana, 9 = kyuu.",,,,2,tr-notes-v1
-numbers-money.forint,Macar forinti,,madʒˈar foɾɪntˈɪ,,2,hu-agent-v1;ipa=espeak
-numbers-money.forint-symbol,Macar forinti,,madʒˈar foɾɪntˈɪ,,2,hu-agent-v1;ipa=espeak
-numbers-money.rupee,Hindistan rupisi,,hɪndɪstˈan rupisˈɪ,,2,hu-agent-v1;ipa=espeak
-numbers-money.rupee-symbol,Hindistan rupisi,,hɪndɪstˈan rupisˈɪ,,2,hu-agent-v1;ipa=espeak
+numbers-money.forint,forint,,foɾˈɪnt,,2,reader-gloss-v1;ipa=espeak
+numbers-money.forint-symbol,forint (simge),,foɾˈɪnt sɪmɡˈɛ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupee,rupi,,rupˈɪ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupee-symbol,rupi (simge),,rupˈɪ sɪmɡˈɛ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.won,won,,wˈɔn,,2,reader-gloss-v1;ipa=espeak
+numbers-money.won-symbol,won (simge),,wˈɔn sɪmɡˈɛ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.baht,baht,,bˈaht,,2,reader-gloss-v1;ipa=espeak
+numbers-money.baht-symbol,baht (simge),,bˈaht sɪmɡˈɛ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dong,dong,,dˈɔnɡ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dong-symbol,dong (simge),,dˈɔnɡ sɪmɡˈɛ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.ruble,ruble,,rˈʊblɛ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.ruble-symbol,ruble (simge),,rˈʊblɛ sɪmɡˈɛ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupiah,rupiah,,rupiˈah,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupiah-symbol,rupiah (simge),,rupiˈah sɪmɡˈɛ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.shilling,şilin,,ʃilˈɪn,,2,reader-gloss-v1;ipa=espeak
+numbers-money.shilling-symbol,şilin (simge),,ʃilˈɪn sɪmɡˈɛ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.euro,euro,,euɾˈɔ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.euro-symbol,euro (simge),,euɾˈɔ sɪmɡˈɛ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dollar,dolar,,doɫˈar,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dollar-symbol,dolar (simge),,doɫˈar sɪmɡˈɛ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.pound,sterlin,,stɛrlˈɪn,,2,reader-gloss-v1;ipa=espeak
+numbers-money.pound-symbol,sterlin (simge),,stɛrlˈɪn sɪmɡˈɛ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.yen,yen,,jˈæn,,2,reader-gloss-v1;ipa=espeak
+numbers-money.yen-symbol,¥,,,,2,reader-gloss-v1
+numbers-money.yu-n,yuan,,juˈan,,2,reader-gloss-v1;ipa=espeak
+numbers-money.ku-i,yuan (konuşmada),,juˈan konˈʊʃmada,,1,reader-gloss-v1;ipa=espeak
+numbers-money.li-ng,2 + ölçü sözcüğü,,icˈi œltʃˈø sœzdʒˈøː,,1,reader-gloss-v1;ipa=espeak
+numbers-money.2-items,2 adet,,icˈi adˈɛt,,1,reader-gloss-v1;ipa=espeak

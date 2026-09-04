@@ -33,6 +33,7 @@ taxi.can-you-wait-for-me-here,Можете меня здесь подождат�
 taxi.we-need-to-catch-the-high-speed-train,Нам нужно успеть на скоростной поезд.,,Nam nuzhno uspetʼ na skorostnoy poyezd.,nˈɑm nˈuʒnʌ uspʲˈetʲ nə skʌrʌstnˈoj pˈojist,,2,ru-agent-v1;ipa=espeak
 taxi.please-use-the-meter,"Включите счётчик, пожалуйста.",,"Vklyuchite schëtchik, pozhaluysta.","fkɭʲʉtʃʲˈitʲi ɕˈɵttʃʲik, pʌʒˈɑɭujsta",,2,ru-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,Я выйду здесь.,,Ya vyydu zdesʼ.,ˈja vˈɨjdu ʑdʲˈesʲ,,2,ru-agent-v1;ipa=espeak
+taxi.please-get-me-there-in-time-for-the-shinkansen,Мне нужно успеть на синкансэн.,,,mnʲˈe nˈuʒnʌ uspʲˈetʲ nə sʲˈinkʌnsɛn,,1,reader-gloss-v1;ipa=espeak
 transit-rides.two-tickets,Два билета.,,Dva bileta.,dvˈɑ bʲiɭʲˈeta,,2,ru-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,Где станция метро?,,Gde stantsiya metro?,ɡdʲˈe stˈɑntsɨja mʲitrˈo,,2,ru-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,Этот автобус идёт до {} ?,,Etot avtobus idët do {} ?,ˈɛtʌt aftˈobus ɪdʲˈɵt dˈo {},,2,ru-agent-v1;ipa=espeak
@@ -53,6 +54,7 @@ place-words.service-desk,справочная,информация,spravochnaya,
 place-words.bus-stop,остановка,,ostanovka,ʌstanˈofka,,2,ru-agent-v1;ipa=espeak
 place-words.luggage-storage,камера хранения,,kamera khraneniya,kˈɑmʲira xranʲˈenʲija,,2,ru-agent-v1;ipa=espeak
 place-words.tourist-spot-sightseeing-area,достопримечательность,,dostoprimechatelʼnostʼ,dʌstʌprʲimʲitʃʲˈɑtʲiɭnʌstʲ,,2,ru-agent-v1;ipa=espeak
+place-words.scenic-area,живописное место,,,ʒɨvʌpʲˈisnʌjɪ mʲˈestʌ,,1,reader-gloss-v1;ipa=espeak
 border-customs.i-am-a-tourist,Я турист,,Ya turist,ˈja turʲˈist,,2,ru-agent-v1;ipa=espeak
 border-customs.here-is-my-passport,Вот мой паспорт.,,Vot moy pasport.,vˈot mˈoj pˈɑspʌrt,,2,ru-agent-v1;ipa=espeak
 border-customs.i-am-staying-for-days,Я на {} дней.,,Ya na {} dney.,ˈja nˈɑ {} dnʲˈej,,2,ru-agent-v1;ipa=espeak
@@ -111,3 +113,4 @@ common-signs.closed,закрыто,,zakryto,zakrˈɨtʌ,,2,ru-agent-v1;ipa=espea
 common-signs.stopped-stop,стоп,остановитесь,stop,stˈop,,2,ru-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Нужно приложить билет к валидатору?,Билет нужно компостировать?,Nuzhno prilozhitʼ bilet k validatoru?,nˈuʒnʌ prʲiɭʌʒˈɨtʲ bʲiɭʲˈet kˈɑ vʌɭʲidˈɑtʌru,,2,ru-agent-v1;ipa=espeak
 rail-station-words.ticket-validator,валидатор,компостер,validator,vʌɭʲidˈɑtʌr,,2,ru-agent-v1;ipa=espeak
+rail-station-words.maglev,маглев,поезд на магнитной подушке,,mˈɑɡɭʲif,,1,reader-gloss-v1;ipa=espeak

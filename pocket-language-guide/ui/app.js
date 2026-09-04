@@ -192,6 +192,17 @@ export function makeSpec(ctx, presets, choice) {
     autoFaces: true,
     padding: DEFAULT_PADDING,
     arrangement: 'mixed',
+    // The band is off, and the folio is already ticked inside it -- so choosing
+    // Header or Footer prints a page number without hunting for one.
+    //
+    // Off rather than on, and measured rather than assumed. The band costs 1.5 lines
+    // of the smallest type on the sheet, and the fit search pays for that: the type
+    // scale drops about 0.05 on most pairs, and `es <- en` takes a *whole extra pair
+    // of faces* -- one more sheet of photo paper per card set, for a page number.
+    // Worse, it pushed the Devanagari, Arabic and Thai respellings under their own
+    // 5.4pt legibility floor, which `tests/solve.test.mjs` asserts as a safety
+    // property. A folio is not worth either of those by default.
+    head: { at: 'none', left: [], center: [], right: ['page'], text: '' },
     scale: 0,
     priority: 0,
     selection: defaultSelection(ctx.corpus),

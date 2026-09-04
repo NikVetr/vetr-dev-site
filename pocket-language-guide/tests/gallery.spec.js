@@ -119,7 +119,7 @@ test.describe('gallery', () => {
     await expect(thumbs.nth(2)).toHaveAttribute('aria-selected', 'true');
 
     // The two things you would want next are right there.
-    await expect(dialog.getByRole('link', { name: 'Export' })).toBeVisible();
+    await expect(dialog.locator('.lightbox-export')).toBeVisible();
 
     await page.keyboard.press('Escape');
     await expect(page.locator('dialog.lightbox')).toHaveCount(0);
@@ -132,17 +132,21 @@ test.describe('gallery', () => {
     await expect(dialog.locator('.lightbox-thumb').first()).toBeVisible({ timeout: 180_000 });
 
     // Reads the way the pair is spoken: the language you read, then the one being
-    // learned. The card behind is the first in the grid, whatever that is today.
+    // learned. The card behind is the first in the grid, whatever that is today --
+    // and the swap below makes *that* language the reader, which switches the whole
+    // interface into it. So the export link is found by class: on an Arabic card its
+    // label is تصدير, and looking for the English word stops working the moment the
+    // gallery reorders.
     const pair = dialog.locator('.lightbox-pair .lang-picker-button');
     await expect(pair.first()).toHaveText('English');
     const learning = await pair.nth(1).textContent();
-    const before = await dialog.getByRole('link', { name: 'Export' }).getAttribute('href');
+    const before = await dialog.locator('.lightbox-export').getAttribute('href');
 
     // The arrow reverses the pair, and the export it offers follows.
     await dialog.locator('.lightbox-swap').click();
     await expect(pair.first()).toHaveText(learning ?? '');
     await expect(pair.nth(1)).toHaveText('English');
-    await expect(dialog.getByRole('link', { name: 'Export' })).not.toHaveAttribute('href', before ?? '');
+    await expect(dialog.locator('.lightbox-export')).not.toHaveAttribute('href', before ?? '');
     await expect(dialog.locator('.lightbox-thumb').first()).toBeVisible({ timeout: 180_000 });
 
     // Changing the reader's language here changes it for the grid behind too, so

@@ -33,6 +33,7 @@ taxi.can-you-wait-for-me-here,Pode esperar por mim aqui?,,pˌɔdʒj ˌespeɾˈar
 taxi.we-need-to-catch-the-high-speed-train,Temos de apanhar o comboio rápido,Precisamos pegar o trem rápido,tˌemʊz dʒj ˌapɐ̃ɲˈaɾ ʊ kˌombˈoɪʊ xˈapidʊ,,2,pt-agent-v1;ipa=espeak
 taxi.please-use-the-meter,"Ligue o taxímetro, por favor",,"lˈiɡj ʊ tˌaksˈimetrʊ, por favˈor",,2,pt-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,Saio aqui,,sˈaɪw akˈi,,2,pt-agent-v1;ipa=espeak
+taxi.please-get-me-there-in-time-for-the-shinkansen,Leve-me a tempo para o Shinkansen,,lˈɛvymj a tˈeɪmpʊ pˌaɾæ ʊ ʃˌiŋkˈɐ̃ŋseɪŋ,,1,reader-gloss-v1;ipa=espeak
 transit-rides.two-tickets,Dois bilhetes,Duas passagens,dˈoɪz bˌiljˈetʃys,,2,pt-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,Onde fica a estação de metro?,estação de metrô,ˌoŋdʒy fˈikæ a ˌestasˈɐ̃ʊ̃ dʒy mˈɛtrʊ,,2,pt-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,Este autocarro ou comboio vai para {}?,Este ônibus ou trem vai para {}?,ˌestʃy ˌaʊtokˈaxw ow kˌombˈoɪʊ vaɪ pˌaɾæ {},,2,pt-agent-v1;ipa=espeak
@@ -53,6 +54,7 @@ place-words.service-desk,o balcão de atendimento,,ʊ baʊkˈɐ̃ʊ̃ dʒj ˌate
 place-words.bus-stop,a paragem de autocarro,o ponto de ônibus,a pˌaɾˈaʒeɪŋ dʒj ˌaʊtokˈaxʊ,,2,pt-agent-v1;ipa=espeak
 place-words.luggage-storage,o depósito de bagagem,o guarda-volumes,ʊ dˌepˈɔzitʊ dʒy bˌaɡˈaʒeɪŋ,,2,pt-agent-v1;ipa=espeak
 place-words.tourist-spot-sightseeing-area,a zona turística,,a zˈonæ tˌuɾˈistʃikæ,,2,pt-agent-v1;ipa=espeak
+place-words.scenic-area,a zona panorâmica,,a zˈonæ pˌænoɾˈɐ̃mikæ,,1,reader-gloss-v1;ipa=espeak
 border-customs.i-am-a-tourist,Sou turista,,sow tˌuɾˈistæ,,2,pt-agent-v1;ipa=espeak
 border-customs.here-is-my-passport,Aqui está o meu passaporte,,akˈi estˌa ʊ meʊ pˌasapˈɔɾətʃy,,2,pt-agent-v1;ipa=espeak
 border-customs.i-am-staying-for-days,Fico {} dias,,fˈikʊ {} dʒˈiæs,,2,pt-agent-v1;ipa=espeak
@@ -111,3 +113,4 @@ common-signs.closed,Fechado,Encerrado,fˌeʃˈadʊ,,2,pt-agent-v1;ipa=espeak
 common-signs.stopped-stop,Parado,Fora de serviço,pˌaɾˈadʊ,,2,pt-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Tenho de validar este bilhete?,Preciso validar esta passagem?,tˌeɲʊ dʒy vˌalidˈaɾ ˌestʃy bˌiljˈetʃy,,2,pt-agent-v1;ipa=espeak
 rail-station-words.ticket-validator,o validador,a máquina de validação,ʊ vˌalidadˈor,,2,pt-agent-v1;ipa=espeak
+rail-station-words.maglev,o maglev,o trem de levitação magnética,ʊ maɡlˈev,,1,reader-gloss-v1;ipa=espeak
