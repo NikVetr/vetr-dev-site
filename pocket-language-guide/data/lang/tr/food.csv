@@ -27,3 +27,4 @@ food-ordering.water-please,"Su, lütfen.",,"sˈʊ, løtfˈæn",,2,tr-agent-v1;ip
 food-ordering.can-a-vegetarian-eat-this,Vejetaryen bunu yiyebilir mi?,,veʒetarjˈæn bunˈʊ jijebilˈɪr mɪ,,2,tr-agent-v1;ipa=espeak
 dietary-needs.no-pork,Domuz eti olmasın.,Domuz eti yok.,dˈomʊz etˈɪ ɔɫmasˈɯn,,2,tr-gaps-v1;ipa=espeak
 dietary-needs.is-this-halal,Bu helal mi?,Helal sertifikalı mı?,bʊ heɫˈaɫ mɪ,,2,tr-gaps-v1;ipa=espeak
+dietary-needs.does-it-contain-pork-fat,İçinde domuz yağı var mı?,Domuz yağıyla mı pişti?,itʃɪndˈɛ dˈomʊz jaːˈɯ vˈar mɯ,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak

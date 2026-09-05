@@ -1,12 +1,12 @@
-label,text
-_frame,{region}: {numbers}
-all services,Hoch QaH
-police,ghan'Iq
-ambulance,chach Duj
-fire,qul
-also works,Qap je
-fire and ambulance,qul chach Duj je
-medical,Qel
-tourist police,meb ghan'Iq
-police and ambulance,ghan'Iq chach Duj je
-gendarmerie,mangghom ghan'Iq
+label,text,text_roman
+_frame,{region}: {numbers},{region}: {numbers}
+all services, ,Hoch QaH
+police,,ghan'Iq
+ambulance, ,chach Duj
+fire,,qul
+also works, ,Qap je
+fire and ambulance,   ,qul chach Duj je
+medical,,Qel
+tourist police, ,meb ghan'Iq
+police and ambulance,   ,ghan'Iq chach Duj je
+gendarmerie, ,mangghom ghan'Iq

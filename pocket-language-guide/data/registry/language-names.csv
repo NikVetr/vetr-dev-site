@@ -5,6 +5,7 @@ ar,el,,al-yūnānīyah,ʔaljˌuːnaːnˈijjah
 ar,en,,al-injilīzīyah,ʔalʔˌinɡliˈizijˌah
 ar,es,,al-isbānīyah,ʔalʔsbaːnˈijjah
 ar,fr,,al-faransīyah,ʔalfrnsˈijjah
+ar,he,,al-ʿibrīyah,ʔalʕabɹˈijjah
 ar,hi,,al-hindīyah,ʔalhindˈijjah
 ar,hu,,al-hunghārīyah,ʔalhnɣaːɹˈijjah
 ar,id,,al-indūnīsīyah,ʔalʔndˌuːniːsˈijjah
@@ -26,6 +27,7 @@ de,el,,,ɡɾˈiːçɪʃ
 de,en,,,ˈɛŋlɪʃ
 de,es,,,ʃpˈɑnɪʃ
 de,fr,,,frantsˈøːzɪʃ
+de,he,,,hɛbɾˈɛːɪʃ
 de,hi,,,hˈɪndiː
 de,hu,,,ˈʊnɡˌɑrɪʃ
 de,id,,,ˌɪndoːnˈeːzɪʃ
@@ -47,6 +49,7 @@ el,el,Ελληνικά,Ellinika,ˌelinikˈa
 el,en,,Anglika,ˌaŋɡlikˈa
 el,es,,Ispanika,ˌispanikˈa
 el,fr,,Gallika,ɣˌalikˈa
+el,he,,Evraika,ˌevɾaɪkˈa
 el,hi,,Chinti,çˈidi
 el,hu,,Oungrika,ˌuŋɡɾikˈa
 el,id,,Indonisiaka,ˌinðonˌisjakˈa
@@ -68,6 +71,7 @@ en,el,,,ɡɹˈiːk
 en,en,English,,ˈɪŋɡlɪʃ
 en,es,,,spˈænɪʃ
 en,fr,,,fɹˈɛntʃ
+en,he,,,hˈiːbɹuː
 en,hi,,,hˈɪndi
 en,hu,,,hʌŋɡˈɛɹiən
 en,id,,,ɪndoʊnˈiːʒən
@@ -89,6 +93,7 @@ es,el,,,ɡɾiˈeɡo
 es,en,,,iŋɡlˈes
 es,es,español,,ˌespaɲˈol
 es,fr,,,fɾansˈes
+es,he,,,ebɾˈeo
 es,hi,,,ˈindi
 es,hu,,,ˈuŋɡaɾo
 es,id,,,ˌindonˈesjo
@@ -110,6 +115,7 @@ fr,el,,,ɡʁˈɛk
 fr,en,,,ɑ̃ɡlˈɛ
 fr,es,,,ɛspanjˈɔl
 fr,fr,français,,fʁɑ̃sˈɛ
+fr,he,,,ebʁˈø
 fr,hi,,,indˈi
 fr,hu,,,ɔ̃ɡʁwˈa
 fr,id,,,ɛ̃donezjˈɛ̃
@@ -125,12 +131,35 @@ fr,tlh,,,klɛ̃ɡˈɔ̃
 fr,tr,,,tˈyʁk
 fr,vi,,,vjɛtnamjˈɛ̃
 fr,zh-Hans,,,ʃinwˈa
+he,ar,,‘arvit,aʁvˈit
+he,de,,germanit,ɡeʁmanˈit
+he,el,,yevanit,jevanˈit
+he,en,,anglit,anɡlˈit
+he,es,,sefaradit,sefaʁadˈit
+he,fr,,tsarfatit,tsaʁfatˈit
+he,he,,‘ivrit,ivʁˈit
+he,hi,,híndi,hˈindi
+he,hu,,hungarit,hunɡaʁˈit
+he,id,,indonezit,indonezˈit
+he,it,,italqit,italkˈit
+he,ja,,yapanit,japanˈit
+he,ko,,qore’anit,koʁeanˈit
+he,pt,,portugezit,poʁtuɡezˈit
+he,qya,קווניה,qvénya,kvˈenja
+he,ru,,rusit,ʁusˈit
+he,sw,,sevahíli,sevahˈili
+he,th,,ta’it,taˈit
+he,tlh,,qlingonit,klinɡonˈit
+he,tr,,turqit,tuʁkˈit
+he,vi,,vyetnamit,vjetnamˈit
+he,zh-Hans,,sinit,sinˈit
 hi,ar,,arbī,ˈʌɾbˌi
 hi,de,,jarman,ɟˈʌrmən
 hi,el,,yūnānī,juːnˈaːni
 hi,en,,aṁgrezī,ʌŋɡɾˈeːzi
 hi,es,,speniś,spˈeːnɪʃ
 hi,fr,,freṁc,fɾˈẽːc
+hi,he,,hibrū,hˈɪbɾuː
 hi,hi,हिन्दी,hindī,hˈɪndi
 hi,hu,,haṁgeriyāī,hˌəŋɡeːɾɪjˈaːi
 hi,id,,iṁḍoneśiyāī,ˌĩɖoːnˌeːʃɪjˈaːi
@@ -152,6 +181,7 @@ hu,el,,,ɡˈørøɡ
 hu,en,,,ˈɑnɡol
 hu,es,,,ʃpˈɑɲol
 hu,fr,,,frˈɑntsiɑ
+hu,he,,,hˈeːbɛr
 hu,hi,,,hˈindi
 hu,hu,magyar,,mˈɑɟɑr
 hu,id,,,ˈindoneːz
@@ -173,6 +203,7 @@ id,el,,,junˈani
 id,en,,,ˈiŋɡris
 id,es,,,spˈaɲol
 id,fr,,,prˈantʃis
+id,he,,,ibrˈani
 id,hi,,,hˈindi
 id,hu,,,hˌuŋarˈia
 id,id,Indonesia,,ˌindonəsˈia
@@ -194,6 +225,7 @@ it,el,,,ɡrˈɛko
 it,en,,,iŋɡlˈeze
 it,es,,,spaɲˈɔlo
 it,fr,,,frantʃˈeze
+it,he,,,ebrˈaɪko
 it,hi,,,ˈindɪ
 it,hu,,,ʊŋɡerˈeze
 it,id,,,indonezjˈano
@@ -215,6 +247,7 @@ ja,el,,girishago,ɡiɾiɕaɡo
 ja,en,,eigo,eiɡo
 ja,es,,supeingo,sɯpeiɴɡo
 ja,fr,,furansugo,ɸɯɾaɴsɯɡo
+ja,he,,heburaigo,hebɯɾaiɡo
 ja,hi,,hindīgo,çiɴdiːɡo
 ja,hu,,hangarīgo,haɴɡaɾiːɡo
 ja,id,,indoneshiago,iɴdoneɕiaɡo
@@ -236,6 +269,7 @@ ko,el,,geuriseu-eo,kɯɾisɯʌ
 ko,en,,yeongeo,jʌŋʌ
 ko,es,,seupeineo,sɯpʰeinʌ
 ko,fr,,peurangseu-eo,pʰɯɾaŋsɯʌ
+ko,he,,hibeurieo,hibɯɾiʌ
 ko,hi,,hindi-eo,hindiʌ
 ko,hu,,heonggari-eo,hʌŋɡaɾiʌ
 ko,id,,indonesia-eo,indonesiaʌ
@@ -257,6 +291,7 @@ pt,el,,,ɡrˈeɡʊ
 pt,en,,,iŋɡlˈes
 pt,es,,,ˌespɐ̃ɲˈɔl
 pt,fr,,,frɐ̃ŋsˈes
+pt,he,,,ˌebrˈaɪkʊ
 pt,hi,,,iŋdʒˈi
 pt,hu,,,ˈũŋɡæɾʊ
 pt,id,,,ˌiŋdonˈɛzjʊ
@@ -272,33 +307,14 @@ pt,tlh,,,kliŋɡˈoŋ
 pt,tr,,,tˈuɾəkʊ
 pt,vi,,,vˌietnæmˈitæ
 pt,zh-Hans,,,ʃinˈes
-qya,ar,,,
-qya,de,,,
-qya,el,,,
-qya,en,,,
-qya,es,,,
-qya,fr,,,
-qya,hi,,,
-qya,hu,,,
-qya,id,,,
-qya,it,,,
-qya,ja,,,
-qya,ko,,,
-qya,pt,,,
-qya,qya,Quenya,,kwˈenja
-qya,ru,,,
-qya,sw,,,
-qya,th,,,
-qya,tlh,,,
-qya,tr,,,
-qya,vi,,,
-qya,zh-Hans,,,
+qya,qya,,Quenya,kwˈenja
 ru,ar,арабском,arabskom,arˈɑpskʌm
 ru,de,немецком,nemetskom,nʲimʲˈetskʌm
 ru,el,греческом,grecheskom,ɡrʲˈetʃʲiskʌm
 ru,en,английском,angliyskom,anɡɭʲˈijskʌm
 ru,es,испанском,ispanskom,ɪspˈɑnskʌm
 ru,fr,французском,frantsuzskom,frantsˈusskʌm
+ru,he,иврите,ivrite,ɪvrʲˈitʲi
 ru,hi,хинди,khindi,xˈindʲɪ
 ru,hu,венгерском,vengerskom,vʲinɡʲˈerskʌm
 ru,id,индонезийском,indoneziyskom,ɪndʌnʲˈeʑijskʌm
@@ -320,6 +336,7 @@ sw,el,,,kˌiɡirˈiki
 sw,en,,,kˌiiŋɡerˈeza
 sw,es,,,kˌihispanˈia
 sw,fr,,,kˌifarˈansa
+sw,he,,,kˌiebranˈia
 sw,hi,,,kihˈindi
 sw,hu,,,kˌihuŋɡarˈia
 sw,id,,,kˌiindˌonesˈia
@@ -341,6 +358,7 @@ th,el,,krik,kriːk˨˩
 th,en,,angkrit,ʔaŋ˧kri˨˩
 th,es,,sapen,sa˨˩peːn˧
 th,fr,,farangset,fa˨˩raŋ˨˩seːt˨˩
+th,he,,hibru,hiʔ˦˥bɔː˧
 th,hi,,hindi,hin˧diː˧
 th,hu,,hangkari,haŋ˧kaː˧riː˧
 th,id,,indonisia,ʔin˧doː˧niː˧sia̯˧
@@ -356,33 +374,35 @@ th,tlh,,khlingngon,kʰliʔ˦˥ŋɔː˧ ŋɔːn˧
 th,tr,,turaki,tuʔ˨˩ra˦˥kiː˧
 th,vi,,wiatnam,wia̯t˥˩naːm˧
 th,zh-Hans,,chin,tɕiːn˧
-tlh,ar,'arab Hol,,ʔɑrɑb xol
-tlh,de,DoyIchlan Hol,,ɖojɪtʃlɑn xol
-tlh,el,'elaDya' Hol,,ʔɛlɑɖjɑʔ xol
-tlh,en,DIvI' Hol,,ɖɪvɪʔ xol
-tlh,es,'eSpanya' Hol,,ʔɛʂpʰɑnjɑʔ xol
-tlh,fr,vIraS Hol,,vɪrɑʂ xol
-tlh,hi,HInDIy Hol,,xɪnɖɪj xol
-tlh,hu,maDyar Hol,,mɑɖjɑr xol
-tlh,id,'InDoneSya' Hol,,ʔɪnɖonɛʂjɑʔ xol
-tlh,it,'Italya' Hol,,ʔɪtʰɑljɑʔ xol
-tlh,ja,nIpon Hol,,nɪpʰon xol
-tlh,ko,Hanghuq Hol,,xɑnɣuqʰ xol
-tlh,pt,portughal Hol,,pʰortʰuɣɑl xol
-tlh,qya,quwenya' Hol,,qʰuwɛnjɑʔ xol
-tlh,ru,raSya' Hol,,rɑʂjɑʔ xol
-tlh,sw,,,
-tlh,th,mangtay Hol,,mɑŋtʰɑj xol
-tlh,tlh,tlhIngan Hol,,tɬɪŋɑn xol
-tlh,tr,turIqya' Hol,,tʰurɪqʰjɑʔ xol
-tlh,vi,vIyetnam Hol,,vɪjɛtʰnɑm xol
-tlh,zh-Hans,jungwoq Hol,,dʒuŋwoqʰ xol
+tlh,ar, ,'arab Hol,ʔɑrɑb xol
+tlh,de, ,DoyIchlan Hol,ɖojɪtʃlɑn xol
+tlh,el, ,'elaDya' Hol,ʔɛlɑɖjɑʔ xol
+tlh,en, ,DIvI' Hol,ɖɪvɪʔ xol
+tlh,es, ,'eSpanya' Hol,ʔɛʂpʰɑnjɑʔ xol
+tlh,fr, ,vIraS Hol,vɪrɑʂ xol
+tlh,he, ,'IvghIt Hol,ʔɪvɣɪtʰ xol
+tlh,hi, ,HInDIy Hol,xɪnɖɪj xol
+tlh,hu, ,maDyar Hol,mɑɖjɑr xol
+tlh,id, ,'InDoneSya' Hol,ʔɪnɖonɛʂjɑʔ xol
+tlh,it, ,'Italya' Hol,ʔɪtʰɑljɑʔ xol
+tlh,ja, ,nIpon Hol,nɪpʰon xol
+tlh,ko, ,Hanghuq Hol,xɑnɣuqʰ xol
+tlh,pt, ,portughal Hol,pʰortʰuɣɑl xol
+tlh,qya, ,quwenya' Hol,qʰuwɛnjɑʔ xol
+tlh,ru, ,raSya' Hol,rɑʂjɑʔ xol
+tlh,sw, ,qISuwaHIlI Hol,qʰɪʂuwɑxɪlɪ xol
+tlh,th, ,mangtay Hol,mɑŋtʰɑj xol
+tlh,tlh, ,tlhIngan Hol,tɬɪŋɑn xol
+tlh,tr, ,turIqya' Hol,tʰurɪqʰjɑʔ xol
+tlh,vi, ,vIyetnam Hol,vɪjɛtʰnɑm xol
+tlh,zh-Hans, ,jungwoq Hol,dʒuŋwoqʰ xol
 tr,ar,,,aɾaptʃˈa
 tr,de,,,aɫmandʒˈa
 tr,el,,,junandʒˈa
 tr,en,,,ɪnɟˈilɪzdʒɛ
 tr,es,,,ɪspanjɔɫdʒˈa
 tr,fr,,,fransɯzdʒˈa
+tr,he,,,ɪbranˈidʒɛ
 tr,hi,,,hˈɪnttʃɛ
 tr,hu,,,madʒardʒˈa
 tr,id,,,ændonˈɛzdʒɛ
@@ -404,6 +424,7 @@ vi,el,Hy Lạp,,hi˧ laːp˨˩ˀ
 vi,en,Anh,,aɲ˧
 vi,es,Tây Ban Nha,,t̪əɪ˧ baːn˧ ɲaː˧
 vi,fr,Pháp,,faːp˧˥
+vi,he,Do Thái,,zɔ˧ taːj˧˥
 vi,hi,Hindi,,hɪndi˧
 vi,hu,Hungary,,hʌŋɡəɹi˧
 vi,id,Indonesia,,ɪndəʊniːziə̯˧
@@ -425,6 +446,7 @@ zh-Hans,el,,Xīlàyǔ,ɕi˥la˥˩y˧˩˧
 zh-Hans,en,,Yīngyǔ,iŋ˥y˧˩˧
 zh-Hans,es,,Xībānyáyǔ,ɕi˥pan˥ja˧˥y˧˩˧
 zh-Hans,fr,,Fǎyǔ,fa˧˩˧y˧˩˧
+zh-Hans,he,,Xībóláiyǔ,ɕi˥pwɔ˧˥laɪ˧˥y˧˩˧
 zh-Hans,hi,,Yìndìyǔ,in˥˩ti˥˩y˧˩˧
 zh-Hans,hu,,Xiōngyálìyǔ,ɕjʊŋ˥ja˧˥li˥˩y˧˩˧
 zh-Hans,id,,Yìndùníxīyàyǔ,in˥˩tu˥˩ni˧˥ɕi˥ja˥˩y˧˩˧

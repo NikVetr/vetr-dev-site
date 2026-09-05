@@ -114,3 +114,5 @@ common-signs.stopped-stop,Parado,Fora de serviço,pˌaɾˈadʊ,,2,pt-agent-v1;ip
 transit-rides.do-i-need-to-validate,Tenho de validar este bilhete?,Preciso validar esta passagem?,tˌeɲʊ dʒy vˌalidˈaɾ ˌestʃy bˌiljˈetʃy,,2,pt-agent-v1;ipa=espeak
 rail-station-words.ticket-validator,o validador,a máquina de validação,ʊ vˌalidadˈor,,2,pt-agent-v1;ipa=espeak
 rail-station-words.maglev,o maglev,o trem de levitação magnética,ʊ maɡlˈev,,1,reader-gloss-v1;ipa=espeak
+common-signs.pork-code,códigos de porco,,kˈɔdʒiɡʊz dʒy pˈoɾəkʊ,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
+rail-station-words.fare,a tarifa,o preço do bilhete,a tˌaɾˈifæ,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak

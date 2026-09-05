@@ -27,3 +27,4 @@ food-ordering.water-please,"Water, please",,"wˈɔːɾɚ, plˈiːz",,2,japanese-
 food-ordering.can-a-vegetarian-eat-this,Can a vegetarian eat this?,,kæn ɐ vˌɛdʒɪtˈɛɹiən ˈiːt ðˈɪs,,2,japanese-reviewed-v6;ipa=espeak
 dietary-needs.no-pork,No pork,,nˈoʊ pˈoːɹk,,2,coordinator-gaps-v2;ipa=espeak
 dietary-needs.is-this-halal,Is this halal?,,ɪz ðɪs hˈæləl,,2,coordinator-gaps-v2;ipa=espeak
+dietary-needs.does-it-contain-pork-fat,Does it contain pork fat?,Does it contain lard?,dˈʌz ɪt kəntˈeɪn pˈoːɹk fˈæt,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak

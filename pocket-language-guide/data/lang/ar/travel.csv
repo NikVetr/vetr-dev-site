@@ -114,3 +114,5 @@ common-signs.closed,مغلق,,mughlaq,mˈuɣlaq,,2,ar-agent-v1;ipa=espeak
 common-signs.stopped-stop,متوقّف,توقّف,mutawaqqif,mtˈuːqːf,,2,ar-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,هل يجب تمرير التذكرة قبل الصعود؟,هل يجب تأشير التذكرة؟,hal yajib tamrīr al-tadhkirah qabl al-ṣuʿūd?,hˈal jdʒb tˈamɹiːr ʔattˈaðkaɹˌa qˈabl ʔas̪s̪ˈuʕuːd,must the ticket be swiped before boarding,1,ar-gaps-v1;ipa=espeak
 rail-station-words.ticket-validator,قارئ البطاقات,جهاز التأشير,qāriʾ al-biṭāqāt,qˈaːɹiʔ ʔalbt̪aːqˌaːt,card reader,1,ar-gaps-v1;ipa=espeak
+common-signs.pork-code,رموز لحم الخنزير,,rumūz laḥm al-khinzīr,rmˈuːz lˈaħm ʔalxˈinziːr,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
+rail-station-words.fare,أجرة,ثمن التذكرة,ujrah,ʔˈudʒɹa,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak

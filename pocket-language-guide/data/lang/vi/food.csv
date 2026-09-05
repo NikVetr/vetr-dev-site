@@ -27,3 +27,4 @@ food-ordering.water-please,Cho tôi nước ạ,,tʃɔ˧ t̪oj˧ nyə̯c˧˥ aː
 food-ordering.can-a-vegetarian-eat-this,Người ăn chay ăn được không ạ?,,ŋyə̯j˨˩ an˧ tʃaj˧ an˧ ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 dietary-needs.no-pork,Không thịt lợn,Không thịt heo,xoŋ˧ tit̪˨˩ˀ ləːn˨˩ˀ,,2,vi-gaps-v1;ipa=espeak
 dietary-needs.is-this-halal,Đây có phải đồ Halal không ạ?,Món này có phải Halal không ạ?,ɗəɪ˧ kɔ˧˥ faːj˧˩˧ ɗo˨˩ haləl˧ xoŋ˧ aː˨˩ˀ,,2,vi-gaps-v1;ipa=espeak
+dietary-needs.does-it-contain-pork-fat,Món này có mỡ lợn không ạ?,Món này có mỡ heo không ạ?,mɔn˧˥ naj˨˩ kɔ˧˥ məː˧ˀ˥ ləːn˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak

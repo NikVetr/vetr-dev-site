@@ -138,3 +138,4 @@ lost-rescue.where-is-lost-and-found,Wo ist das Fundbüro?,,vˌoː ɪst das fˈʊ
 lost-rescue.i-cannot-find-my-hotel,Ich finde mein Hotel nicht.,,ɪç fˈɪndə maɪn hˈoːtəl nˈɪçt,,2,de-agent-v1;ipa=espeak
 lost-rescue.i-left-it-on-the-train,Ich habe es im Zug liegen lassen.,,ɪç hɑːbə ɛs ɪm tsˈuːk lˈiːɡən lˈasən,,2,de-agent-v1;ipa=espeak
 lost-rescue.i-cannot-get-down,Ich komme nicht mehr herunter.,,ɪç kˈɔmə nˈɪçt mˌeːɾ hɛrˈʊntɜ,,2,de-agent-v1;ipa=espeak
+pharmacy-symptoms.i-think-i-have-dengue,"Ich glaube, ich habe Dengue-Fieber.",,"ɪç ɡlˈaʊbə, ɪç hɑːbə dɛŋˈyːfiːbɜ",,2,dengue-agent-v1;in-pack-frame;ipa=espeak

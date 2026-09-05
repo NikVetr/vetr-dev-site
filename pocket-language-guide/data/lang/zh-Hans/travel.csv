@@ -114,3 +114,5 @@ pickup-meeting.please-call-a-taxi,请帮我叫出租车,,qǐng bāng wǒ jiào c
 taxi.please-get-me-there-in-time-for-the-shinkansen,我要赶新干线，请快点,,"wǒ yào gǎn Xīngànxiàn, qǐng kuài diǎn","wɔ˧˩˧ jɑʊ˥˩ kan˧˩˧ ɕin˥kan˥˩ɕjɛn˥˩, tɕʰiŋ˧˩˧ kʰwaɪ˥˩ tjɛn˧˩˧",,2,zh-Hans-agent-v1;ipa=pinyin
 transit-rides.do-i-need-to-validate,上车前需要验票吗？,,shàng chē qián xūyào yànpiào ma?,ʂɑŋ˥˩ ʈʂʰɤ˥ tɕʰjɛn˧˥ ɕy˥jɑʊ˥˩ jɛn˥˩pʰjɑʊ˥˩ ma,,2,zh-Hans-agent-v1;ipa=pinyin
 rail-station-words.ticket-validator,闸机,閘機,zhájī,ʈʂa˧˥tɕi˥,,2,zh-Hans-agent-v1;ipa=pinyin
+common-signs.pork-code,猪肉代号,,zhūròu dàihào,ʈʂu˥ʐoʊ˥˩ taɪ˥˩xɑʊ˥˩,,2,pork-code-agent-v1;lppom-mui;ipa=pinyin
+rail-station-words.fare,车费,票价,chēfèi,ʈʂʰɤ˥feɪ˥˩,,2,fare-agent-v1;in-pack-neighbour;ipa=pinyin

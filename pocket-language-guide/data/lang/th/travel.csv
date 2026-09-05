@@ -114,3 +114,5 @@ common-signs.stopped-stop,หยุด,,yut,jut˨˩,,2,th-agent-v1;ipa=thaig2p
 transit-rides.do-i-need-to-validate,ต้องแตะบัตรก่อนไหม,,tong tae bat kon mai,tɔŋ˥˩ tɛʔ˨˩ bat˨˩ kɔːn˨˩ maj˩˩˦,tap the card first?,2,th-agent-v1;ipa=thaig2p
 rail-station-words.ticket-validator,เครื่องตรวจตั๋ว,เครื่องอ่านบัตร,khrueang truat tua,kʰrɯa̯ŋ˥˩ trua̯t˨˩ tua̯˩˩˦,,1,th-agent-v1;ipa=thaig2p
 rail-station-words.maglev,รถไฟแม่เหล็ก,,,rot˦˥faj˧ mɛː˥˩lek˨˩,,1,reader-gloss-v1;ipa=thaig2p
+common-signs.pork-code,รหัสหมู,,rahat mu,ra˦˥hat˨˩ muː˩˩˦,,2,pork-code-agent-v1;lppom-mui;ipa=thaig2p
+rail-station-words.fare,ค่ารถ,ค่าโดยสาร,kha rot,kʰaː˥˩rot˦˥,,2,fare-agent-v1;in-pack-neighbour;ipa=thaig2p

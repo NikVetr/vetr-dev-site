@@ -27,3 +27,4 @@ food-ordering.can-a-vegetarian-eat-this,吃素的能吃吗？,,chī sù de néng
 dietary-needs.i-have-a-severe-allergy-to,我对{}严重过敏,,wǒ duì {} yánzhòng guòmǐn,wɔ˧˩˧ tweɪ˥˩ {} jɛn˧˥ʈʂʊŋ˥˩ kwɔ˥˩min˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
 dietary-needs.no-pork,不要猪肉,,bú yào zhūròu,pu˧˥ jɑʊ˥˩ ʈʂu˥ʐoʊ˥˩,,2,zh-Hans-gaps-v1;ipa=pinyin
 dietary-needs.is-this-halal,这个是清真的吗？,,zhège shì qīngzhēn de ma?,ʈʂɤ˥˩kɤ ʂɨ˥˩ tɕʰiŋ˥ʈʂən˥ tɤ ma,,2,zh-Hans-gaps-v1;ipa=pinyin
+dietary-needs.does-it-contain-pork-fat,里面有猪油吗？,用猪油炒的吗？,lǐmiàn yǒu zhūyóu ma?,li˧˩˧mjɛn˥˩ joʊ˧˩˧ ʈʂu˥joʊ˧˥ ma,,2,pork-fat-agent-v1;in-pack-frame;ipa=pinyin

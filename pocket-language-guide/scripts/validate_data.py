@@ -82,6 +82,12 @@ LANGUAGE_SLOT = re.compile(r"\{(?:target|source)\}")
 # capitalises neither them nor the days and months.
 LOWERCASE_LANGUAGE_NAMES = {"fr", "es", "pt", "ru", "it", "hu"}
 
+# Every Hebrew point: the vowels, the dagesh, the shin/sin dots and the two qamats
+# forms. Not the geresh U+05F3, which is a letter-modifying character the unpointed
+# spelling keeps -- `ג׳` is /dʒ/ in both columns.
+NIQQUD = {chr(c) for c in range(0x05B0, 0x05BE)} | {chr(c) for c in (
+    0x05BF, 0x05C1, 0x05C2, 0x05C4, 0x05C5, 0x05C7)}
+
 
 def check_drawable(text, stack, where, fatal=False):
     """Complain about anything in `text` the stack that renders it cannot draw."""
@@ -222,6 +228,23 @@ def main():
                     errors.append(f"{rel}: {cid} has empty text")
                 if text != unicodedata.normalize("NFC", text):
                     errors.append(f"{rel}: {cid} text is not NFC-normalised")
+                # **The Hebrew pack's two columns are one string.** `text` is the
+                # unpointed spelling the card prints and `text_alt` is the same
+                # letters with the vowels written, so one is the other with the
+                # points stripped -- which is what makes the pointed column a
+                # reading of the printed one rather than a second, differently
+                # spelt phrase. It is worth a rule because the relationship is
+                # invisible to anyone editing one column: pointing the *defective*
+                # spelling, which is what the Academy prescribes for prose, gives
+                # `תִּקְוָה` for `תקווה` -- one vav against two -- and nothing else
+                # here would notice. See tmp/hebrew.md for why this pack points the
+                # full spelling instead.
+                if code == "he" and row["text_alt"].strip():
+                    bare = "".join(c for c in row["text_alt"] if c not in NIQQUD)
+                    if bare != text:
+                        errors.append(f"{rel}: {cid} text_alt is not text with the "
+                                      f"points added -- stripping them gives {bare!r} "
+                                      f"against {text!r}")
                 slots = int(concepts[cid]["slots"] or 0)
                 if text.strip() and text.count("{}") != slots:
                     errors.append(f"{rel}: {cid} has {text.count('{}')} slots, "

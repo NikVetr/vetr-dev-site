@@ -1,0 +1,1751 @@
+{
+ "source": "he",
+ "accent": "he-IL",
+ "status": "ready",
+ "version": 1,
+ "derives_from": "The Academy of the Hebrew Language's own rules for transcribing from foreign languages into Hebrew -- כללי התעתיק מלועזית לעברית, redebated in the plenum's 5764-5767 sessions, approved 4 Sivan 5767 (21 May 2007) and amended in session 355 on 30 October 2017. **It is already the right shape, which is rare here**: the principle the rules are built on is that a name is transcribed אין מתעתקים את השמות על פי כתיבם במקורם כי אם על פי הגייתם הנשמעת לנו -- not by its spelling in the source but by how it sounds to us -- which is this column's job in the Academy's own words. So the letters here are its letters: `ג׳` /dʒ/, `צ׳` /tʃ/, `ז׳` /ʒ/, `ת׳` /θ/, `ד׳` /ð/, `נג` /ŋ/, `ו` for /v/ and /w/ alike, `ט` for /t/ and `ק` for /k/ (the rules reserve `ת` and `כּ` for etymology), `י` as the mater for /i/, `ו` for /o/ and /u/, and `א` as the seat for a syllable that opens with a vowel -- הברה הנפתחת בתנועה תיכתב בא׳.",
+ "deviations": [
+  {
+   "rule": "The rules leave the niqqud optional and are written for names in running text, which is unpointed",
+   "why": "**Pointed, always.** Unpointed Hebrew does not write /a/ or /e/ at all and writes /i/ and /e/ with the same `י` and /o/ and /u/ with the same `ו`, so the rules' own output cannot tell `ken` from `kin` -- which is fine for a name a reader already knows and useless for a pronunciation. The Academy permits the pointing as an option and this table takes it, on the same argument the Arabic table makes for its harakat: full pointing is the marked, pedagogical register in Hebrew as full vocalisation is in Arabic, so a pointed string reads unmistakably as a pronunciation guide rather than as a spelling. The letters stay the rules' full spelling -- `ו` for /o/, `י` for /i/ -- so this is ktiv male menuqad, which is also what the `he` pack's own `text_alt` column is."
+  },
+  {
+   "rule": "The rules write a foreign /x/ as `ח׳`, to keep it apart from Hebrew's own `ח`",
+   "why": "**Plain `ח`**, which the rules give as the permitted alternative. Hebrew's `ח` *is* [χ] in Modern Israeli Hebrew, so the plain letter is what makes a reader say the sound; the geresh exists to protect the etymology of a name, which a disposable hint has none of. The three geresh letters that are everyday Hebrew -- `ג׳ צ׳ ז׳` -- are kept, and so are `ת׳` and `ד׳`, which are the only notation Hebrew has for /θ/ and /ð/."
+  },
+  {
+   "rule": "No stress device",
+   "why": "**None, and it is not for want of looking.** The script is caseless, so `caps` is out. `acute` and `grave` are byte-identical no-ops: `VOWEL_LETTERS` in core/respell.js lists the letters a diacritic may land on and Hebrew's vowels are not letters at all -- they are marks on the consonant, and the slots above and below it are already taken. `prime` is available and is rejected on collision: U+02B9 is indistinguishable from the geresh at 5pt, and this table uses the geresh on five letters to mean *this is a foreign consonant*, so a prime would read as one. The meteg U+05BD is Hebrew's own dictionary mark for stress and was the closest call; it needs a new device in core/respell.js for one reader, and a general Israeli reader does not decode it. Arabic reached the same answer for the same kind of reason."
+  },
+  {
+   "rule": "CONTRIBUTING.md's separator table gives Arabic no hyphen, because it breaks the cursive join",
+   "why": "**Hebrew takes the hyphen.** It is the other right-to-left script here and the reasoning does not carry: Hebrew is not cursive, has no joining forms and loses nothing to a break. Israeli teaching material divides syllables with exactly this hyphen, and `core/measure.js` treats it as a line-break opportunity, which a column setting a four-syllable Russian word at 5pt needs. The maqaf U+05BE was the alternative and is rejected twice over: it is Hebrew's mark for *joining* two words rather than dividing one, and it sits at letter-top height, where at 5pt it reads as another mark on the letter before it."
+  }
+ ],
+ "approximations": [
+  {
+   "sound": "/θ/ /ð/",
+   "spelt": "ת׳ ד׳",
+   "why": "The Academy's own letters. A reader who has not met them says [t] and [d], which is the nearest Hebrew has."
+  },
+  {
+   "sound": "/w/",
+   "spelt": "ו",
+   "why": "Hebrew has no /w/ and `ו` is /v/. The Academy writes /w/ with it regardless -- וושינגטון -- so a reader says [v], as Israelis do in every borrowed word."
+  },
+  {
+   "sound": "the twelve vowel qualities Hebrew has no letter for",
+   "why": "Five vowels take fifty. /æ ɑ ʌ ɐ/ all become patach, /ɛ ə œ ø/ segol, /ɪ y ɨ ɯ/ hiriq, /ɔ ɤ/ holam and /ʊ ʉ/ shuruk -- so München is מִינְכֶן and Köln is קֶלְן, which is what Hebrew print writes for both. Length is not written at all, because Modern Hebrew has none."
+  },
+  {
+   "sound": "/ɲ/ /ʎ/ /c/ /ɟ/",
+   "why": "Written consonant plus `י`, which is how Hebrew renders a palatal it lacks: `ניו` for Spanish ñ. The reader says [nj], [lj], [tj], [dj]."
+  },
+  {
+   "sound": "Russian palatalisation, aspiration, ejectives, the retroflexes",
+   "why": "Nothing is written. Hebrew contrasts none of them and the script has no mark for any of them; the plain consonant is what a reader can say."
+  }
+ ],
+ "legend": "הכתיב כאן מנוקד בכוונה: הניקוד הוא ההגייה. ג׳ = j, צ׳ = ch, ז׳ = zh, ת׳ = th, ד׳ = the th של that, נג = ng. המקף מפריד הברות.",
+ "note": "תעתיק הגייה בלבד, לא כתיב.",
+ "policy": {
+  "syllable_separator": "-",
+  "word_separator": " ",
+  "stress": "none",
+  "stress_min_syllables": 2,
+  "length": "none",
+  "tone": "drop",
+  "max_onset": 2,
+  "fixups": "all",
+  "locale": "he"
+ },
+ "phonemes": [
+  {
+   "slot": "nucleus",
+   "ipa": "aɪ",
+   "out": "אַי",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "aɪ",
+   "out": "ַי"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "aj",
+   "out": "אַי",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "aj",
+   "out": "ַי"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "aːɪ",
+   "out": "אַי",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "aːɪ",
+   "out": "ַי"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɑɪ",
+   "out": "אַי",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɑɪ",
+   "out": "ַי"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʌɪ",
+   "out": "אַי",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʌɪ",
+   "out": "ַי"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "əɪ",
+   "out": "אַי",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "əɪ",
+   "out": "ַי"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɐɪ",
+   "out": "אַי",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɐɪ",
+   "out": "ַי"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "eɪ",
+   "out": "אֵי",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "eɪ",
+   "out": "ֵי"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ej",
+   "out": "אֵי",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ej",
+   "out": "ֵי"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "eːɪ",
+   "out": "אֵי",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "eːɪ",
+   "out": "ֵי"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɛɪ",
+   "out": "אֵי",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɛɪ",
+   "out": "ֵי"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɔɪ",
+   "out": "אוֹי",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɔɪ",
+   "out": "וֹי"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "oɪ",
+   "out": "אוֹי",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "oɪ",
+   "out": "וֹי"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "oj",
+   "out": "אוֹי",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "oj",
+   "out": "וֹי"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "oːɪ",
+   "out": "אוֹי",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "oːɪ",
+   "out": "וֹי"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "aʊ",
+   "out": "אַאוּ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "aʊ",
+   "out": "ַאוּ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "aw",
+   "out": "אַאוּ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "aw",
+   "out": "ַאוּ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "aːʊ",
+   "out": "אַאוּ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "aːʊ",
+   "out": "ַאוּ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɑʊ",
+   "out": "אַאוּ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɑʊ",
+   "out": "ַאוּ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "oʊ",
+   "out": "אוֹ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "oʊ",
+   "out": "וֹ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ow",
+   "out": "אוֹ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ow",
+   "out": "וֹ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "oːʊ",
+   "out": "אוֹ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "oːʊ",
+   "out": "וֹ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "əʊ",
+   "out": "אוֹ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "əʊ",
+   "out": "וֹ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "eʊ",
+   "out": "אֶאוּ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "eʊ",
+   "out": "ֶאוּ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɛʊ",
+   "out": "אֶאוּ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɛʊ",
+   "out": "ֶאוּ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "iʊ",
+   "out": "אִיאוּ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "iʊ",
+   "out": "ִיאוּ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ua̯",
+   "out": "אוּאַ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ua̯",
+   "out": "וּאַ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "uə̯",
+   "out": "אוּאַ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "uə̯",
+   "out": "וּאַ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɯə̯",
+   "out": "אוּאַ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɯə̯",
+   "out": "וּאַ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɯa̯",
+   "out": "אוּאַ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɯa̯",
+   "out": "וּאַ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ia̯",
+   "out": "אִיאַ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ia̯",
+   "out": "ִיאַ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "iə̯",
+   "out": "אִיאַ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "iə̯",
+   "out": "ִיאַ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "iɛ̯",
+   "out": "אִיאַ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "iɛ̯",
+   "out": "ִיאַ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "iːə̯",
+   "out": "אִיאַ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "iːə̯",
+   "out": "ִיאַ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "yə̯",
+   "out": "אִיאֶ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "yə̯",
+   "out": "ִיאֶ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɚ",
+   "out": "אֶר",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɚ",
+   "out": "ֶר"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɝ",
+   "out": "אֶר",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɝ",
+   "out": "ֶר"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ã",
+   "out": "אַנ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ã",
+   "out": "ַנ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɑ̃",
+   "out": "אַנ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɑ̃",
+   "out": "ַנ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɐ̃",
+   "out": "אַנ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɐ̃",
+   "out": "ַנ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "æ̃",
+   "out": "אַנ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "æ̃",
+   "out": "ַנ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ẽ",
+   "out": "אֶנ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ẽ",
+   "out": "ֶנ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɛ̃",
+   "out": "אֶנ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɛ̃",
+   "out": "ֶנ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "œ̃",
+   "out": "אֶנ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "œ̃",
+   "out": "ֶנ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ĩ",
+   "out": "אִינ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ĩ",
+   "out": "ִינ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "õ",
+   "out": "אוֹנ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "õ",
+   "out": "וֹנ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɔ̃",
+   "out": "אוֹנ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɔ̃",
+   "out": "וֹנ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ũ",
+   "out": "אוּנ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ũ",
+   "out": "וּנ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "a",
+   "out": "אַ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "a",
+   "out": "ַ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɑ",
+   "out": "אַ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɑ",
+   "out": "ַ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʌ",
+   "out": "אַ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʌ",
+   "out": "ַ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "æ",
+   "out": "אַ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "æ",
+   "out": "ַ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɐ",
+   "out": "אַ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɐ",
+   "out": "ַ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɶ",
+   "out": "אַ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɶ",
+   "out": "ַ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɒ",
+   "out": "אַ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɒ",
+   "out": "ַ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "e",
+   "out": "אֶ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "e",
+   "out": "ֶ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɛ",
+   "out": "אֶ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɛ",
+   "out": "ֶ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ə",
+   "out": "אֶ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ə",
+   "out": "ֶ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "œ",
+   "out": "אֶ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "œ",
+   "out": "ֶ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɘ",
+   "out": "אֶ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɘ",
+   "out": "ֶ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɜ",
+   "out": "אֶ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɜ",
+   "out": "ֶ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɞ",
+   "out": "אֶ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɞ",
+   "out": "ֶ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ø",
+   "out": "אֶ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ø",
+   "out": "ֶ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "i",
+   "out": "אִי",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "i",
+   "out": "ִ",
+   "after_out": "י"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "i",
+   "out": "ִי"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɪ",
+   "out": "אִי",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɪ",
+   "out": "ִ",
+   "after_out": "י"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɪ",
+   "out": "ִי"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɨ",
+   "out": "אִי",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɨ",
+   "out": "ִ",
+   "after_out": "י"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɨ",
+   "out": "ִי"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "y",
+   "out": "אִי",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "y",
+   "out": "ִ",
+   "after_out": "י"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "y",
+   "out": "ִי"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʏ",
+   "out": "אִי",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʏ",
+   "out": "ִ",
+   "after_out": "י"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʏ",
+   "out": "ִי"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɯ",
+   "out": "אִי",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɯ",
+   "out": "ִ",
+   "after_out": "י"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɯ",
+   "out": "ִי"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "o",
+   "out": "אוֹ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "o",
+   "out": "וֹ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɔ",
+   "out": "אוֹ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɔ",
+   "out": "וֹ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɤ",
+   "out": "אוֹ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɤ",
+   "out": "וֹ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɵ",
+   "out": "אוֹ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɵ",
+   "out": "וֹ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "u",
+   "out": "אוּ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "u",
+   "out": "וּ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʊ",
+   "out": "אוּ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʊ",
+   "out": "וּ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʉ",
+   "out": "אוּ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʉ",
+   "out": "וּ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "p",
+   "out": "פְּ"
+  },
+  {
+   "slot": "any",
+   "ipa": "p",
+   "out": "פּ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "b",
+   "out": "בְּ"
+  },
+  {
+   "slot": "any",
+   "ipa": "b",
+   "out": "בּ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "t",
+   "out": "טְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "t",
+   "out": "ט"
+  },
+  {
+   "slot": "coda",
+   "ipa": "d",
+   "out": "דְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "d",
+   "out": "ד"
+  },
+  {
+   "slot": "coda",
+   "ipa": "k",
+   "out": "קְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "k",
+   "out": "ק"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɡ",
+   "out": "גְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɡ",
+   "out": "ג"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʔ",
+   "out": "אְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʔ",
+   "out": "א"
+  },
+  {
+   "slot": "coda",
+   "ipa": "f",
+   "out": "פְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "f",
+   "out": "פ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "v",
+   "out": "וְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "v",
+   "out": "ו"
+  },
+  {
+   "slot": "coda",
+   "ipa": "s",
+   "out": "סְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "s",
+   "out": "ס"
+  },
+  {
+   "slot": "coda",
+   "ipa": "z",
+   "out": "זְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "z",
+   "out": "ז"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʃ",
+   "out": "שְׁ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʃ",
+   "out": "שׁ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʒ",
+   "out": "ז׳ְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʒ",
+   "out": "ז׳"
+  },
+  {
+   "slot": "coda",
+   "ipa": "x",
+   "out": "חְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "x",
+   "out": "ח"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɣ",
+   "out": "גְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɣ",
+   "out": "ג"
+  },
+  {
+   "slot": "coda",
+   "ipa": "h",
+   "out": "הְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "h",
+   "out": "ה"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ħ",
+   "out": "חְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ħ",
+   "out": "ח"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʕ",
+   "out": "עְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʕ",
+   "out": "ע"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ts",
+   "out": "צְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ts",
+   "out": "צ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "dz",
+   "out": "דזְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "dz",
+   "out": "דז"
+  },
+  {
+   "slot": "coda",
+   "ipa": "tʃ",
+   "out": "צ׳ְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tʃ",
+   "out": "צ׳"
+  },
+  {
+   "slot": "coda",
+   "ipa": "dʒ",
+   "out": "ג׳ְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "dʒ",
+   "out": "ג׳"
+  },
+  {
+   "slot": "coda",
+   "ipa": "tɕ",
+   "out": "צ׳ְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tɕ",
+   "out": "צ׳"
+  },
+  {
+   "slot": "coda",
+   "ipa": "dʑ",
+   "out": "ג׳ְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "dʑ",
+   "out": "ג׳"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʈʂ",
+   "out": "צ׳ְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʈʂ",
+   "out": "צ׳"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɖʐ",
+   "out": "ג׳ְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɖʐ",
+   "out": "ג׳"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɕ",
+   "out": "שְׁ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɕ",
+   "out": "שׁ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʂ",
+   "out": "שְׁ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʂ",
+   "out": "שׁ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʑ",
+   "out": "ז׳ְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʑ",
+   "out": "ז׳"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʐ",
+   "out": "ז׳ְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʐ",
+   "out": "ז׳"
+  },
+  {
+   "slot": "coda",
+   "ipa": "θ",
+   "out": "ת׳ְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "θ",
+   "out": "ת׳"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ð",
+   "out": "ד׳ְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ð",
+   "out": "ד׳"
+  },
+  {
+   "slot": "coda",
+   "ipa": "m",
+   "out": "מְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "m",
+   "out": "מ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "n",
+   "out": "נְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "n",
+   "out": "נ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɲ",
+   "out": "ניְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɲ",
+   "out": "ני"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ŋ",
+   "out": "נגְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ŋ",
+   "out": "נג"
+  },
+  {
+   "slot": "coda",
+   "ipa": "l",
+   "out": "לְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "l",
+   "out": "ל"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɬ",
+   "out": "לְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɬ",
+   "out": "ל"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʎ",
+   "out": "ליְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʎ",
+   "out": "לי"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɭ",
+   "out": "לְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɭ",
+   "out": "ל"
+  },
+  {
+   "slot": "coda",
+   "ipa": "r",
+   "out": "רְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "r",
+   "out": "ר"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɾ",
+   "out": "רְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɾ",
+   "out": "ר"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʁ",
+   "out": "רְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʁ",
+   "out": "ר"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɹ",
+   "out": "רְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɹ",
+   "out": "ר"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɻ",
+   "out": "רְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɻ",
+   "out": "ר"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʀ",
+   "out": "רְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʀ",
+   "out": "ר"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɽ",
+   "out": "רְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɽ",
+   "out": "ר"
+  },
+  {
+   "slot": "coda",
+   "ipa": "j",
+   "out": "יְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "j",
+   "out": "י"
+  },
+  {
+   "slot": "coda",
+   "ipa": "w",
+   "out": "וְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "w",
+   "out": "ו"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɥ",
+   "out": "וְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɥ",
+   "out": "ו"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʝ",
+   "out": "יְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʝ",
+   "out": "י"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ç",
+   "out": "חְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ç",
+   "out": "ח"
+  },
+  {
+   "slot": "coda",
+   "ipa": "β",
+   "out": "בְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "β",
+   "out": "ב"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʋ",
+   "out": "וְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʋ",
+   "out": "ו"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʈ",
+   "out": "טְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʈ",
+   "out": "ט"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɖ",
+   "out": "דְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɖ",
+   "out": "ד"
+  },
+  {
+   "slot": "coda",
+   "ipa": "q",
+   "out": "קְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "q",
+   "out": "ק"
+  },
+  {
+   "slot": "coda",
+   "ipa": "c",
+   "out": "טיְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "c",
+   "out": "טי"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɟ",
+   "out": "דיְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɟ",
+   "out": "די"
+  },
+  {
+   "slot": "coda",
+   "ipa": "pf",
+   "out": "פּפְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "pf",
+   "out": "פּפ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɴ",
+   "out": "נְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɴ",
+   "out": "נ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɸ",
+   "out": "פְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɸ",
+   "out": "פ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɗ",
+   "out": "דְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɗ",
+   "out": "ד"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɫ",
+   "out": "לְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɫ",
+   "out": "ל"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɳ",
+   "out": "נְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɳ",
+   "out": "נ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɰ",
+   "out": "ְ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɰ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ʰ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ʱ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ʲ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ʷ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ˤ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ˠ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ˀ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ʼ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̩",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̪",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̺",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "͈",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̚",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̥",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̬",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̹",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̜",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̃",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ː",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ˑ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̯",
+   "out": ""
+  }
+ ],
+ "syllable_fixups": [
+  {
+   "match": "^([בגדהוזחטיכלמנסעפצקרשת][ּׁׂ׳]?)(?!ו[ֹּ])([אבגדהוזחטיכלמנסעפצקרשת][ּׁׂ׳]?)(?!ו[ֹּ])([אבגדהוזחטיכלמנסעפצקרשת])",
+   "out": "\\1ְ\\2ְ\\3"
+  },
+  {
+   "match": "^([בגדהוזחטיכלמנסעפצקרשת][ּׁׂ׳]?)(?!ו[ֹּ])([אבגדהוזחטיכלמנסעפצקרשת])",
+   "out": "\\1ְ\\2"
+  },
+  {
+   "match": "ְ$",
+   "out": "",
+   "when": [
+    "word_final"
+   ]
+  },
+  {
+   "match": "מ$",
+   "out": "ם",
+   "when": [
+    "word_final"
+   ]
+  },
+  {
+   "match": "נ$",
+   "out": "ן",
+   "when": [
+    "word_final"
+   ]
+  },
+  {
+   "match": "פ$",
+   "out": "ף",
+   "when": [
+    "word_final"
+   ]
+  },
+  {
+   "match": "צ$",
+   "out": "ץ",
+   "when": [
+    "word_final"
+   ]
+  },
+  {
+   "match": "([אבגדהוזחטיכלמנסעפצקרשת])$",
+   "out": "\\1ְ",
+   "if_nucleus": " "
+  }
+ ]
+}

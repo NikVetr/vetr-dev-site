@@ -1,44 +1,44 @@
-concept_id,text,text_alt,ipa,literal,confidence,provenance
-pronouns-verbs.i-me,jIH,,dʒɪx,,3,tlh-attested-v1;src=TKD;ipa=okrand
-pronouns-verbs.we-us,maH,,mɑx,,3,tlh-attested-v1;src=TKD;ipa=okrand
-pronouns-verbs.you,SoH,,ʂox,one person,3,tlh-attested-v1;src=TKD;ipa=okrand
-pronouns-verbs.you-polite,SoH,,ʂox,Klingon has one pronoun for both,3,tlh-attested-v1;src=TKD;ipa=okrand
-pronouns-verbs.he-him,ghaH,,ɣɑx,,3,tlh-attested-v1;src=TKD;ipa=okrand
-pronouns-verbs.she-her,ghaH,,ɣɑx,one pronoun for he and she,3,tlh-attested-v1;src=TKD;ipa=okrand
-pronouns-verbs.they-them,chaH,bIH,tʃɑx,chaH of people; bIH of things,3,tlh-attested-v1;src=TKD;ipa=okrand
-pronouns-verbs.my-mine,-wIj / -wI',,wɪdʒ / wɪʔ,goes on the noun: -wI' if it can speak,3,tlh-attested-v1;src=TKD 3.3.4;ipa=okrand
-pronouns-verbs.your-yours,-lIj / -lI',,lɪdʒ / lɪʔ,goes on the noun: -lI' if it can speak,3,tlh-attested-v1;src=TKD 3.3.4;ipa=okrand
-pronouns-verbs.be-called-call,pong,,pʰoŋ,name / call,3,tlh-attested-v1;src=TKD;ipa=okrand
-pronouns-verbs.have,ghaj,,ɣɑdʒ,,3,tlh-attested-v1;src=TKD;ipa=okrand
-pronouns-verbs.do-not-have,Hutlh,,xutɬ,lack / be without,3,tlh-attested-v1;src=TKD;ipa=okrand
-pronouns-verbs.go,jaH,,dʒɑx,,3,tlh-attested-v1;src=TKD;ipa=okrand
-pronouns-verbs.come,ghoS,,ɣoʂ,approach / proceed; takes the destination as object,3,tlh-attested-v1;src=TKD;ipa=okrand
-pronouns-verbs.want,neH,,nɛx,,3,tlh-attested-v1;src=TKD 6.2.5;ipa=okrand
-pronouns-verbs.look-for,nej,,nɛdʒ,look for / seek,3,tlh-attested-v1;src=TKD;ipa=okrand
-pronouns-verbs.buy,je',,dʒɛʔ,,3,tlh-attested-v1;src=TKD;ipa=okrand
-pronouns-verbs.like,parHa',,pʰɑrxɑʔ,,3,tlh-attested-v1;src=TKD;ipa=okrand
-pronouns-verbs.need,-nIS,,nɪʂ,goes on the verb: vIjatlhnIS = I need to speak,3,tlh-attested-v1;src=TKD 4.2.2;ipa=okrand
-pronouns-verbs.there-is-have,tu'lu',,tʰuʔluʔ,there is / there are,3,tlh-attested-v1;src=CK;ipa=okrand
-pronouns-verbs.there-is-not-do-not-have,tu'lu'be',,tʰuʔluʔbɛʔ,there is not,1,tlh-composed-v1;lex=CK + TKD 4.3;grammar=TKD;ipa=okrand
-pronouns-verbs.want-to-verb,vIneH,,vɪnɛx,verb first: qalegh vIneH = I want to see you,3,tlh-attested-v1;src=TKD 6.2.5;ipa=okrand
-pronouns-verbs.want-thing,vIneH,,vɪnɛx,thing first: bIQ vIneH = I want water,3,tlh-attested-v1;src=TKD 6.2.5;ipa=okrand
-pronouns-verbs.need-thing,vIpoQ,,vɪpʰoqx,thing first; poQ = demand / require,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
-pronouns-verbs.looking-for-thing,vInej,,vɪnɛdʒ,thing first,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
-question-words.what,nuq,,nuqʰ,,3,tlh-attested-v1;src=TKD 6.4;ipa=okrand
-question-words.where,nuqDaq,,nuqʰɖɑqʰ,,3,tlh-attested-v1;src=TKD;ipa=okrand
-question-words.who,'Iv,,ʔɪv,,3,tlh-attested-v1;src=TKD 6.4;ipa=okrand
-question-words.when,ghorgh,,ɣorɣ,,3,tlh-attested-v1;src=TKD 6.4;ipa=okrand
-question-words.how,chay',,tʃɑjʔ,,3,tlh-attested-v1;src=TKD 6.4;ipa=okrand
-question-words.how-much-many,'ar,,ʔɑr,,3,tlh-attested-v1;src=TKD 6.4;ipa=okrand
-question-words.how-many,'ar,,ʔɑr,one word for both,3,tlh-attested-v1;src=TKD 6.4;ipa=okrand
-question-words.why,qatlh,,qʰɑtɬ,,3,tlh-attested-v1;src=TKD 6.4;ipa=okrand
-question-words.this,-vam,,vɑm,goes on the noun: Dochvam = this thing,3,tlh-attested-v1;src=TKD 3.3.4;ipa=okrand
-question-words.that,-vetlh,,vɛtɬ,goes on the noun: Dochvetlh = that thing,3,tlh-attested-v1;src=TKD 3.3.4;ipa=okrand
-question-words.here,naDev,,nɑɖɛv,here / hereabouts,3,tlh-attested-v1;src=TKD;ipa=okrand
-question-words.there,pa',,pʰɑʔ,there / over there,3,tlh-attested-v1;src=TKD;ipa=okrand
-question-words.a-little,puS,,pʰuʂ,be few / be several,3,tlh-attested-v1;src=TKD;ipa=okrand
-question-words.some,'op,,ʔopʰ,"some, an unspecified amount",3,tlh-attested-v1;src=KGT;ipa=okrand
-question-words.very,-qu',,qʰuʔ,goes on the verb: QaQqu' = very good,3,tlh-attested-v1;src=TKD 4.3;ipa=okrand
-question-words.also,je,,dʒɛ,follows what it adds to,3,tlh-attested-v1;src=TKD;ipa=okrand
-question-words.all-both,Hoch,,xotʃ,all / everyone / each,3,tlh-attested-v1;src=TKD;ipa=okrand
-question-words.how-much-what-price,DIlmeH Huch 'ar,,ɖɪlmɛx xutʃ ʔɑr,how much money to pay,1,tlh-composed-v1;lex=TKD p.171;grammar=TKD;ipa=okrand
+concept_id,text,text_alt,romanization_okrand,ipa,literal,confidence,provenance
+pronouns-verbs.i-me,,,jIH,dʒɪx,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+pronouns-verbs.we-us,,,maH,mɑx,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+pronouns-verbs.you,,,SoH,ʂox,one person,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+pronouns-verbs.you-polite,,,SoH,ʂox,Klingon has one pronoun for both,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+pronouns-verbs.he-him,,,ghaH,ɣɑx,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+pronouns-verbs.she-her,,,ghaH,ɣɑx,one pronoun for he and she,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+pronouns-verbs.they-them,,bIH,chaH,tʃɑx,chaH of people; bIH of things,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+pronouns-verbs.my-mine,- / -,,-wIj / -wI',wɪdʒ / wɪʔ,goes on the noun: -wI' if it can speak,3,tlh-attested-v1;src=TKD 3.3.4;native=piqad-csur;ipa=okrand
+pronouns-verbs.your-yours,- / -,,-lIj / -lI',lɪdʒ / lɪʔ,goes on the noun: -lI' if it can speak,3,tlh-attested-v1;src=TKD 3.3.4;native=piqad-csur;ipa=okrand
+pronouns-verbs.be-called-call,,,pong,pʰoŋ,name / call,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+pronouns-verbs.have,,,ghaj,ɣɑdʒ,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+pronouns-verbs.do-not-have,,,Hutlh,xutɬ,lack / be without,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+pronouns-verbs.go,,,jaH,dʒɑx,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+pronouns-verbs.come,,,ghoS,ɣoʂ,approach / proceed; takes the destination as object,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+pronouns-verbs.want,,,neH,nɛx,,3,tlh-attested-v1;src=TKD 6.2.5;native=piqad-csur;ipa=okrand
+pronouns-verbs.look-for,,,nej,nɛdʒ,look for / seek,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+pronouns-verbs.buy,,,je',dʒɛʔ,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+pronouns-verbs.like,,,parHa',pʰɑrxɑʔ,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+pronouns-verbs.need,-,,-nIS,nɪʂ,goes on the verb: vIjatlhnIS = I need to speak,3,tlh-attested-v1;src=TKD 4.2.2;native=piqad-csur;ipa=okrand
+pronouns-verbs.there-is-have,,,tu'lu',tʰuʔluʔ,there is / there are,3,tlh-attested-v1;src=CK;native=piqad-csur;ipa=okrand
+pronouns-verbs.there-is-not-do-not-have,,,tu'lu'be',tʰuʔluʔbɛʔ,there is not,1,tlh-composed-v1;lex=CK + TKD 4.3;grammar=TKD;native=piqad-csur;ipa=okrand
+pronouns-verbs.want-to-verb,,,vIneH,vɪnɛx,verb first: qalegh vIneH = I want to see you,3,tlh-attested-v1;src=TKD 6.2.5;native=piqad-csur;ipa=okrand
+pronouns-verbs.want-thing,,,vIneH,vɪnɛx,thing first: bIQ vIneH = I want water,3,tlh-attested-v1;src=TKD 6.2.5;native=piqad-csur;ipa=okrand
+pronouns-verbs.need-thing,,,vIpoQ,vɪpʰoqx,thing first; poQ = demand / require,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+pronouns-verbs.looking-for-thing,,,vInej,vɪnɛdʒ,thing first,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+question-words.what,,,nuq,nuqʰ,,3,tlh-attested-v1;src=TKD 6.4;native=piqad-csur;ipa=okrand
+question-words.where,,,nuqDaq,nuqʰɖɑqʰ,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+question-words.who,,,'Iv,ʔɪv,,3,tlh-attested-v1;src=TKD 6.4;native=piqad-csur;ipa=okrand
+question-words.when,,,ghorgh,ɣorɣ,,3,tlh-attested-v1;src=TKD 6.4;native=piqad-csur;ipa=okrand
+question-words.how,,,chay',tʃɑjʔ,,3,tlh-attested-v1;src=TKD 6.4;native=piqad-csur;ipa=okrand
+question-words.how-much-many,,,'ar,ʔɑr,,3,tlh-attested-v1;src=TKD 6.4;native=piqad-csur;ipa=okrand
+question-words.how-many,,,'ar,ʔɑr,one word for both,3,tlh-attested-v1;src=TKD 6.4;native=piqad-csur;ipa=okrand
+question-words.why,,,qatlh,qʰɑtɬ,,3,tlh-attested-v1;src=TKD 6.4;native=piqad-csur;ipa=okrand
+question-words.this,-,,-vam,vɑm,goes on the noun: Dochvam = this thing,3,tlh-attested-v1;src=TKD 3.3.4;native=piqad-csur;ipa=okrand
+question-words.that,-,,-vetlh,vɛtɬ,goes on the noun: Dochvetlh = that thing,3,tlh-attested-v1;src=TKD 3.3.4;native=piqad-csur;ipa=okrand
+question-words.here,,,naDev,nɑɖɛv,here / hereabouts,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+question-words.there,,,pa',pʰɑʔ,there / over there,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+question-words.a-little,,,puS,pʰuʂ,be few / be several,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+question-words.some,,,'op,ʔopʰ,"some, an unspecified amount",3,tlh-attested-v1;src=KGT;native=piqad-csur;ipa=okrand
+question-words.very,-,,-qu',qʰuʔ,goes on the verb: QaQqu' = very good,3,tlh-attested-v1;src=TKD 4.3;native=piqad-csur;ipa=okrand
+question-words.also,,,je,dʒɛ,follows what it adds to,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+question-words.all-both,,,Hoch,xotʃ,all / everyone / each,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+question-words.how-much-what-price,  ,,DIlmeH Huch 'ar,ɖɪlmɛx xutʃ ʔɑr,how much money to pay,1,tlh-composed-v1;lex=TKD p.171;grammar=TKD;native=piqad-csur;ipa=okrand

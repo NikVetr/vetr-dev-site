@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "serve": "npx http-server . -p 8080 -c-1",
-    "check": "tsc -p jsconfig.json && node scripts/build_shell.mjs --check && node scripts/check_i18n.mjs --check && python3 scripts/build_ipa.py --check && node scripts/respell_check.mjs --charset --check",
+    "check": "tsc -p jsconfig.json && node scripts/build_shell.mjs --check && node scripts/check_i18n.mjs --check && python3 scripts/transliterate_native.py --check && python3 scripts/build_ipa.py --check && node scripts/respell_check.mjs --charset --check",
     "respell:charset": "node scripts/respell_check.mjs --charset",
     "fonts": "python3 scripts/subset_fonts.py",
     "validate": "python3 scripts/validate_data.py",
@@ -19,7 +19,8 @@
     "preview": "node scripts/render_preview.mjs",
     "shell": "node scripts/build_shell.mjs",
     "i18n": "node scripts/check_i18n.mjs",
-    "ipa": "python3 scripts/build_ipa.py"
+    "ipa": "python3 scripts/build_ipa.py",
+    "native": "python3 scripts/transliterate_native.py"
   },
   "devDependencies": {
     "@pdf-lib/fontkit": "^1.1.1",

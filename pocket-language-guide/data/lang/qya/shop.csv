@@ -1,2 +1,2 @@
-concept_id,text,text_alt,ipa,literal,confidence,provenance
-shopping.what-is-this,mana sina,,mˈana sˈina,what is this?,1,qya-composed-v1;lex=PE23/135.0514 + PE23/135.1413;grammar=PE22;ipa=appendix-e
+concept_id,text,text_alt,romanization_appendix-e,ipa,literal,confidence,provenance
+shopping.what-is-this, ,,mana sina,mˈana sˈina,what is this?,1,qya-composed-v1;lex=PE23/135.0514 + PE23/135.1413;grammar=PE22;native=quenya-classical;ipa=appendix-e

@@ -43,12 +43,36 @@ SOURCES = {
     # where `scripts.csv` used to route Devanagari, have zero. Hindi would have
     # printed as tofu, and the Hindi translator caught it by testing the shipped
     # subsets rather than the sources.
+    # Hebrew is the second right-to-left script here and it is not the Arabic case.
+    # Noto Sans Arabic ships no Latin at all, which is why `LATIN_DONOR` exists; both
+    # Hebrew faces carry 273 codepoints of U+0020-024F including the whole of ASCII,
+    # so the emergency line's digits and its U+00B7 separators draw without a graft.
+    # Checked against these files rather than assumed -- that is the same mistake the
+    # Devanagari note below records, in the other direction.
+    "NotoSansHebrew-var.ttf": f"{GFONTS}/notosanshebrew/NotoSansHebrew%5Bwdth,wght%5D.ttf",
+    "NotoSerifHebrew-var.ttf": f"{GFONTS}/notoserifhebrew/NotoSerifHebrew%5Bwdth,wght%5D.ttf",
     "NotoSansThai-var.ttf": f"{GFONTS}/notosansthai/NotoSansThai%5Bwdth,wght%5D.ttf",
     "NotoSerifThai-var.ttf": f"{GFONTS}/notoserifthai/NotoSerifThai%5Bwdth,wght%5D.ttf",
     "NotoSansDevanagari-var.ttf":
         f"{GFONTS}/notosansdevanagari/NotoSansDevanagari%5Bwdth,wght%5D.ttf",
     "NotoSerifDevanagari-var.ttf":
         f"{GFONTS}/notoserifdevanagari/NotoSerifDevanagari%5Bwdth,wght%5D.ttf",
+    # Klingon pIqaD and Tengwar, which no Noto face has and which are not in Unicode
+    # at all -- they are Private Use Area allocations from the ConScript Unicode
+    # Registry, U+F8D0..U+F8FF and U+E000..U+E07F. Constructium is a fork of SIL
+    # Gentium that carries both, under the same OFL 1.1 as everything else here
+    # (`Constructium/OFL.txt` in the repository below: "Copyright (c) 2008-2020
+    # Kreative Software. This Font Software is licensed under the SIL Open Font
+    # License, Version 1.1", with no Reserved Font Name declared, so a subset may
+    # keep the name).
+    #
+    # It is the only redistributable face found that covers *both*, and for tengwar
+    # it is the only one that survives this project's PDF path -- see the note at
+    # `PUA_DONOR` in subset_fonts.py, which is a measurement rather than a
+    # preference.
+    "Constructium.ttf":
+        "https://raw.githubusercontent.com/kreativekorp/open-relay/master"
+        "/Constructium/Constructium.ttf",
 }
 
 DEST = Path(__file__).resolve().parent.parent / "tmp" / "fonts-src"

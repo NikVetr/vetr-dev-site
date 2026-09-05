@@ -1,0 +1,8 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,איפה אפשר לקנות כרטיסים?,אֵיפֹה אֶפְשָׁר לִקְנוֹת כַּרְטִיסִים?,éyfo efshar liqnot kartisim?,ˈejfo efʃˈaʁ liknˈot kaʁtisˈim,where is it possible to buy tickets?,2,he-agent-v1;ipa=bgn
+attractions-tickets.do-i-need-a-reservation,צריך הזמנה מראש?,צָרִיךְ הַזְמָנָה מֵרֹאשׁ?,tsarikh hazmana merosh?,tsaʁˈix hazmanˈa meʁˈoʃ,is a reservation in advance needed?,2,he-agent-v1;ipa=bgn
+attractions-tickets.what-is-the-latest-entry-time,מה שעת הכניסה האחרונה?,מָה שְׁעַת הַכְּנִיסָה הָאַחֲרוֹנָה?,ma she‘at haknisa ha’aẖarona?,mˈa ʃeˈat haknisˈa haaxaʁonˈa,what is the last entry hour?,2,he-agent-v1;ipa=bgn
+attractions-tickets.are-there-lockers,יש תאי אחסנה?,יֵשׁ תָּאֵי אַחְסָנָה?,yesh ta’ey aẖsana?,jˈeʃ tˈaej axsanˈa,are there storage lockers?,2,he-agent-v1;ipa=bgn
+attractions-tickets.may-i-take-photos,מתר לצלם?,מֻתָּר לְצַלֵּם?,mutar letsalem?,mutˈaʁ letsalˈem,is photographing permitted?,2,he-agent-v1;ipa=bgn
+attractions-tickets.please-take-a-photo-of-us,"אפשר לצלם אותנו, בבקשה?","אֶפְשָׁר לְצַלֵּם אוֹתָנוּ, בְּבַקָּשָׁה?","efshar letsalem otánu, bevaqasha?","efʃˈaʁ letsalˈem otˈanu, bevakaʃˈa","can you photograph us, please?",2,he-agent-v1;ipa=bgn
+attractions-tickets.could-you-take-a-photo-for-us,אפשר לצלם אותנו עם הטלפון שלי?,אֶפְשָׁר לְצַלֵּם אוֹתָנוּ עִם הַטֶּלֶפוֹן שֶׁלִּי?,efshar letsalem otánu ‘im hatélefon sheli?,efʃˈaʁ letsalˈem otˈanu ˈim hatˈelefon ʃelˈi,can you photograph us with my phone?,2,he-agent-v1;ipa=bgn

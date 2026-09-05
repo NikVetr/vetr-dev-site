@@ -71,3 +71,14 @@ numbers-money.dollar,el dólar,,el dˈolaɾ,,2,reader-gloss-v1;ipa=espeak
 numbers-money.dollar-symbol,dólar (símbolo),,dˈolaɾ sˈimbolo,,2,reader-gloss-v1;ipa=espeak
 numbers-money.pound,la libra,,la lˈibɾa,,2,reader-gloss-v1;ipa=espeak
 numbers-money.pound-symbol,libra (símbolo),,lˈibɾa sˈimbolo,,2,reader-gloss-v1;ipa=espeak
+numbers-money.franc,el franco,,el fɾˈanko,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.franc-symbol,franco (símbolo),,fɾˈanko sˈimbolo,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.peso,el peso,el sol (Perú),el pˈeso,MX · AR · CO · CL,2,currency-agent-v1;banxico-bcra-banrep-bcch;ipa=espeak
+numbers-money.peso-symbol,$,peso,,MX · AR · CO · CL,2,currency-agent-v1;banxico-bcra-banrep-bcch
+numbers-money.real,el real,,el reˈal,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.real-symbol,real (símbolo),,reˈal sˈimbolo,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.local-currency,moneda local,,monˈeda lokˈal,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.lakh,cien mil,,sjˈen mˈil,,2,lakh-crore-agent-v1;cldr;ipa=espeak
+numbers-money.crore,diez millones,,djˈes miʝˈones,,2,lakh-crore-agent-v1;cldr;ipa=espeak
+numbers-money.shekel,el séquel,,el sˈekel,,2,shekel-gloss-v1;cldr;ipa=espeak
+numbers-money.shekel-symbol,séquel (símbolo),,sˈekel sˈimbolo,,2,shekel-gloss-v1;cldr;ipa=espeak

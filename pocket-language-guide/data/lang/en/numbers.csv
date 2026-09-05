@@ -66,8 +66,19 @@ numbers-money.baht-symbol,baht (symbol),,bˈɑːt sˈɪmbəl,,2,coordinator-gaps
 numbers-money.forint,forint,,fˈɔːɹɪnt,,2,reader-gloss-v1;ipa=espeak
 numbers-money.forint-symbol,forint (symbol),,fˈɔːɹɪnt sˈɪmbəl,,2,reader-gloss-v1;ipa=espeak
 numbers-money.rupee,rupee,,ɹˈuːpiː,,2,reader-gloss-v1;ipa=espeak
-numbers-money.rupee-symbol,rupee (symbol),,ɹˈuːpiː sˈɪmbəl,,2,reader-gloss-v1;ipa=espeak
+numbers-money.rupee-symbol,₹,rupee,,,2,currency-agent-v1;rbi
 numbers-money.dollar,dollar,$,dˈɑːlɚ,US · CA · AU · NZ,2,reader-gloss-v1;ipa=espeak
 numbers-money.dollar-symbol,$,dollar,,US · CA · AU · NZ,2,reader-gloss-v1
 numbers-money.pound,pound,£,pˈaʊnd,GB,2,reader-gloss-v1;ipa=espeak
 numbers-money.pound-symbol,£,pound,,GB,2,reader-gloss-v1
+numbers-money.franc,franc,,fɹˈæŋk,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.franc-symbol,franc (symbol),,fɹˈæŋk sˈɪmbəl,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.peso,peso,,pˈeɪsoʊ,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.peso-symbol,peso (symbol),,pˈeɪsoʊ sˈɪmbəl,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.real,real,Brazilian real,ɹˈiːəl,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.real-symbol,real (symbol),,ɹˈiːəl sˈɪmbəl,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.local-currency,local currency,,lˈoʊkəl kˈɜːɹənsi,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.lakh,"100,000",,"wˈʌnhʌndɹɪd, zˈiəɹoʊziəɹoʊ zˈiəɹoʊ",,2,lakh-crore-agent-v1;cldr;ipa=espeak
+numbers-money.crore,"10,000,000",,"tˈɛn, zˈiəɹoʊziəɹoʊ zˈiəɹoʊ, zˈiəɹoʊziəɹoʊ zˈiəɹoʊ",,2,lakh-crore-agent-v1;cldr;ipa=espeak
+numbers-money.shekel,shekel,,ʃˈɛkəl,,2,shekel-gloss-v1;cldr;ipa=espeak
+numbers-money.shekel-symbol,shekel (symbol),,ʃˈɛkəl sˈɪmbəl,,2,shekel-gloss-v1;cldr;ipa=espeak

@@ -33,6 +33,16 @@ const ENTRY_FILES = [
   'vendor/fontkit.esm.js', 'vendor/pdf-lib.esm.js',
   'data/presets.json', 'data/icons.json', 'data/coverage.json',
   'data/fonts/manifest.json',
+  // The only *face* in the shell, and only because of two cards. Every other
+  // script-glyph badge in the gallery is drawn by the reader's own system font --
+  // that is the whole reason the badge can be a character rather than an image --
+  // but pIqaD and tengwar are not in Unicode, so no operating system anywhere
+  // has a glyph for U+F8E4 or U+E003 and the Klingon and Quenya cards would show
+  // two boxes. `style.css` reaches this file through a `unicode-range`-scoped
+  // `@font-face`, so a page with no conscript character on it never fetches it;
+  // offline there is no such thing as "never", so it is precached. 89KB against
+  // a 4.4MB shell, and it is the same file either pack downloads anyway.
+  'data/fonts/latin-400.woff2',
   'packs/index.json',
   'data/respell/overrides/index.json',
 ];

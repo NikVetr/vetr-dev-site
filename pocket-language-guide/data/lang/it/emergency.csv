@@ -138,3 +138,4 @@ body-parts.hand,la mano,,la mˈano,,2,it-agent-v1;ipa=espeak
 body-parts.knee,il ginocchio,,il dʒinˈɔkkio,,2,it-agent-v1;ipa=espeak
 body-parts.ankle,la caviglia,,la kavˈiʎa,,2,it-agent-v1;ipa=espeak
 body-parts.skin,la pelle,,la pˈɛlle,,2,it-agent-v1;ipa=espeak
+pharmacy-symptoms.i-think-i-have-dengue,Credo di avere la dengue,,krˈɛdo dɪ avˈere la dˈeŋɡwe,,2,dengue-agent-v1;in-pack-frame;ipa=espeak

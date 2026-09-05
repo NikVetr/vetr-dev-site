@@ -114,3 +114,5 @@ common-signs.stopped-stop,Εκτός λειτουργίας,Στοπ,Ektos leito
 transit-rides.do-i-need-to-validate,Πρέπει να ακυρώσω το εισιτήριο;,Πρέπει να ακυρώσω το εισιτήριο στο ακυρωτικό;,Prepei na akyroso to eisitirio;,pɾˈepi n ˌaciɾˈoso to ˌisitˈiɾiˌo,Validating is ακύρωση; unstamped tickets are fined,2,el-agent-v1;roman=elot743;ipa=espeak
 rail-station-words.ticket-validator,Ακυρωτικό μηχάνημα,Ακυρωτικό,Akyrotiko michanima,ˌaciɾˌotikˈo mixˈanimˌa,The machine that validates (cancels) tickets,2,el-agent-v1;roman=elot743;ipa=espeak
 rail-station-words.maglev,Μαγνητικό τρένο,,,mˌaɣnitikˈo tɾˈeno,,1,reader-gloss-v1;ipa=espeak
+common-signs.pork-code,κωδικοί χοιρινού,,kodikoi choirinou,kˌoðicˈi çˌiɾinˈu,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
+rail-station-words.fare,Κόμιστρο,,Komistro,kˈomistɾˌo,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak

@@ -1,13 +1,13 @@
-concept_id,text,text_alt,ipa,literal,confidence,provenance
-slang.thats-good,QaQ,,qxɑqx,it is good,3,tlh-attested-v1;src=TKD;ipa=okrand
-slang.thats-great,majQa',,mɑdʒqxɑʔ,well done! very good!,3,tlh-attested-v1;src=TKD;ipa=okrand
-slang.i-love-it,vItIvqu',,vɪtʰɪvqʰuʔ,I greatly enjoy it,1,tlh-composed-v1;lex=KGT + TKD 4.3;grammar=TKD;ipa=okrand
-slang.thats-bad,qab,,qʰɑb,it is bad,3,tlh-attested-v1;src=TKD;ipa=okrand
-slang.delicious,'ey,,ʔɛj,it is delicious / tasty,3,tlh-attested-v1;src=KGT;ipa=okrand
-slang.thats-pricey,waghqu',,wɑɣqʰuʔ,it is very expensive,1,tlh-composed-v1;lex=KGT + TKD 4.3;grammar=TKD;ipa=okrand
-slang.exactly,bIlugh,,bɪluɣ,you are right,3,tlh-attested-v1;src=TKD p.170;ipa=okrand
-slang.no-worries,qay'be',,qʰɑjʔbɛʔ,no problem,3,tlh-attested-v1;src=TKD p.170;ipa=okrand
-slang.seriously,chay',,tʃɑjʔ,how did this happen? what's going on?,3,tlh-attested-v1;src=TKD p.170;ipa=okrand
-slang.im-good-thanks,qay'be',,qʰɑjʔbɛʔ,no problem,3,tlh-attested-v1;src=TKD p.170;ipa=okrand
-slang.lets-go,Ha',,xɑʔ,let's go! come on!,3,tlh-attested-v1;src=TKD;ipa=okrand
-slang.cheers,'IwlIj jachjaj,,ʔɪwlɪdʒ dʒɑtʃdʒɑdʒ,may your blood scream! -- the usual Klingon toast,3,tlh-attested-v1;src=CK;ipa=okrand
+concept_id,text,text_alt,romanization_okrand,ipa,literal,confidence,provenance
+slang.thats-good,,,QaQ,qxɑqx,it is good,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+slang.thats-great,,,majQa',mɑdʒqxɑʔ,well done! very good!,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+slang.i-love-it,,,vItIvqu',vɪtʰɪvqʰuʔ,I greatly enjoy it,1,tlh-composed-v1;lex=KGT + TKD 4.3;grammar=TKD;native=piqad-csur;ipa=okrand
+slang.thats-bad,,,qab,qʰɑb,it is bad,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+slang.delicious,,,'ey,ʔɛj,it is delicious / tasty,3,tlh-attested-v1;src=KGT;native=piqad-csur;ipa=okrand
+slang.thats-pricey,,,waghqu',wɑɣqʰuʔ,it is very expensive,1,tlh-composed-v1;lex=KGT + TKD 4.3;grammar=TKD;native=piqad-csur;ipa=okrand
+slang.exactly,,,bIlugh,bɪluɣ,you are right,3,tlh-attested-v1;src=TKD p.170;native=piqad-csur;ipa=okrand
+slang.no-worries,,,qay'be',qʰɑjʔbɛʔ,no problem,3,tlh-attested-v1;src=TKD p.170;native=piqad-csur;ipa=okrand
+slang.seriously,,,chay',tʃɑjʔ,how did this happen? what's going on?,3,tlh-attested-v1;src=TKD p.170;native=piqad-csur;ipa=okrand
+slang.im-good-thanks,,,qay'be',qʰɑjʔbɛʔ,no problem,3,tlh-attested-v1;src=TKD p.170;native=piqad-csur;ipa=okrand
+slang.lets-go,,,Ha',xɑʔ,let's go! come on!,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+slang.cheers, ,,'IwlIj jachjaj,ʔɪwlɪdʒ dʒɑtʃdʒɑdʒ,may your blood scream! -- the usual Klingon toast,3,tlh-attested-v1;src=CK;native=piqad-csur;ipa=okrand

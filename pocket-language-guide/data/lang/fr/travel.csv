@@ -114,3 +114,5 @@ common-signs.closed,Fermé,,fɛʁmˈe,,2,fr-agent-v1;ipa=espeak
 common-signs.stopped-stop,Arrêt,,aʁˈɛ,,2,fr-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Je dois valider mon billet ?,Faut-il composter ?,ʒə dwa valide mɔ̃ bijˈɛ,,2,coordinator-gaps-v2;ipa=espeak
 rail-station-words.ticket-validator,valideur,composteur,validˈœʁ,,2,coordinator-gaps-v2;ipa=espeak
+common-signs.pork-code,codes pour le porc,,kod puʁ lə pˈɔʁk,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
+rail-station-words.fare,tarif,prix du billet,taʁˈif,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak

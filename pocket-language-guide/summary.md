@@ -24,26 +24,30 @@ everything tiny, which nobody wants. So it moves off the anchor only for a reaso
 - it takes a pair while the type would otherwise sit near its floor.
 
 The comfort threshold is set below the Japanese reference sheet's own 0.478, which
-is a deliberately tight layout that should not be second-guessed. On 7×5in, 192 of
-the 342 pairs between the nineteen full packs settle on eight faces and 148 on ten;
+is a deliberately tight layout that should not be second-guessed. On 7×5in, 200 of
+the 380 pairs between the twenty full packs settle on eight faces and 178 on ten;
 none now fits six, and two need twelve — `el ← hi` and `ru ← hi`, where Devanagari
 respellings force the column above the theme's size and the solver reports it rather
 than clipping. Greek is the second-longest language in the set after Russian and takes
 ten against every source; Hungarian is ordinary, eight against a Latin or Cyrillic
 source and ten against the scripts that need vertical room. The tens are the scripts
 that need the most vertical room: **every** Japanese, Arabic, Devanagari and Greek
-sheet takes ten, Russian fifteen of eighteen and Thai fourteen, while no English or
-Vietnamese sheet needs one.
+sheet takes ten, and Hebrew seventeen of its nineteen — which the 1.20 leading factor
+its pointed column pays for predicts — while no English or Vietnamese sheet needs one.
 
-**Those three numbers did not move when the corpus went to twenty-one languages**,
-which is the check that face count follows content rather than the language list: all
-78 pairs that involve Klingon or Quenya land at two or four faces — 28 and 50 — because
-a partial pack has less to lay out, on either side of the join. A sheet whose *reader*
-is Klingon is short for the same reason a sheet whose subject is: a row with no gloss
-in the reading language cannot print. The reference sheets reached four by hand against a
-bank of 413 concepts. It is 798 now; the divider defaults to one position per section
+**The twelves have not moved through three language additions**, which is the check
+that face count follows content rather than the language list — and the pairs that
+*do* move show why. All 82 pairs involving Klingon or Quenya land at two or four
+faces, because a partial pack has less to lay out on either side of the join: a sheet
+whose *reader* is Klingon is short for the same reason a sheet whose subject is, since
+a row with no gloss in the reading language cannot print. Those pairs were 28 at two
+faces and 50 at four while both packs were still written in Latin; they are 2 and 80
+now. **The native scripts cost them a face pair each**, and the number that did it is
+`scripts.csv`'s `leading_factor` — 1.30 for tengwar against Latin's 1.02, measured off
+the tehtar's own ink extents rather than chosen. The reference sheets reached four by hand against a
+bank of 413 concepts. It is 813 now; the divider defaults to one position per section
 rather than one per row, which costs type size; and — the largest of the three — the
-respelling column has content on all 420 pairs rather than 16, so there is a third
+respelling column has content on all 462 pairs rather than 16, so there is a third
 line of type on every entry that used to have two. Eight is the same answer as four
 was, at the new size, the new default and the new column. A credit-card sheet takes
 sixteen rather than printing at minimum size.
@@ -129,10 +133,10 @@ A respelling is written *for a reader* — `nee HOW` is Chinese for someone who 
 English and nothing else — so curating them by hand is O(N²), and for a long time
 only the 16 pairs glossed into English had one while the other 256 printed an empty
 column. The way out is two O(N) inputs instead: the `ipa` column of the language
-being learned, and one rule table per language doing the reading. **All twenty-one
-reader tables now exist and every one of the 420 pairs prints a respelling.**
+being learned, and one rule table per language doing the reading. **All twenty-two
+reader tables now exist and every one of the 462 pairs prints a respelling.**
 `node scripts/respell_check.mjs <reader> --gaps` counts IPA symbols that reach the
-page because no rule matched, and every reader is at zero. Nineteen of the tables
+page because no rule matched, and every reader is at zero. Twenty of the tables
 derive from a published pronunciation key for that language (`content/RESPELL-SYSTEMS.md`
 records which, and what had to be adapted where no key existed); the English one was
 read off the 12,001 curated respellings already in the corpus, which is a better
@@ -341,8 +345,8 @@ and offline on a phone without paying for the solver, `pdf-lib` or a CJK font.
 
   Shipping whole sheets is still not affordable, and the reason the split works is
   that **SVG gzips about fourteen times**. A sheet is 1.5MB raw and ~118KB compressed,
-  so 420 ordered pairs is 50MB even at best — but one face is 13KB, and 420 first
-  faces is **5.5MB**. That is `packs/<pair>/face-1.svg.gz`, compressed in the
+  so 462 ordered pairs is 55MB even at best — but one face is 13KB, and 462 first
+  faces is **6.0MB**. That is `packs/<pair>/face-1.svg.gz`, compressed in the
   repository rather than only on the wire, because these files are rewritten wholesale
   whenever the corpus or the theme moves and git would keep every revision. The
   browser inflates it with `DecompressionStream`, and since it is the same renderer
@@ -536,7 +540,8 @@ it fit the corpus at all: a concept has to be language-independent to join on
 `concept_id`, and "casual way to say X" is, while "the Spanish word *guay*" is not.
 
 Fourteen concepts survived the requirement that a commonality actually exist across
-twenty-one languages, and they are the intensity ladder the brief named plus the
+twenty-one languages — Hebrew, the twenty-second, took all fourteen — and they are
+the intensity ladder the brief named plus the
 register-marked moves that turned out to travel with it: agreement (`exactly`),
 reassurance (`no worries`, `you're welcome`), surprise (`seriously`), a *refusal*
 (`I'm good, thanks`), and the four social ones every language marks casually —
@@ -566,7 +571,7 @@ a published phonology, an ISO 639 code and a documented lexicon, so the same sou
 discipline applies — and applying it honestly is what produces the findings.
 
 **Neither pack fills, and that is recorded rather than papered over.** Klingon covers
-317 of 798 concepts and Quenya 206, because the bank is pharmacy symptoms and ATM
+317 of 813 concepts and Quenya 206, because the bank is pharmacy symptoms and ATM
 vocabulary and neither lexicon was built for that. Nothing is coined: a row is either
 verbatim from a named source, a canon frame with a slot substituted, or assembled from
 attested lexemes by documented affixes, and `provenance` says which per row. A
@@ -598,7 +603,100 @@ emergency section at all** on any sheet. That is the gate working, not failing.
 IPA route does not lowercase its input the way the other table routes do, and a
 Klingon reader's table can carry **no stress device at all**: `stress: caps` would
 turn every `q` into a different consonant, and the language has no diacritic to use
-instead. Its badge is `qQ`.
+instead.
+
+#### Both write their own script, and the Latin is a romanisation column
+
+Klingon prints in **pIqaD** and Quenya in **tengwar**, with the Latin demoted to the
+romanisation slot under it. Neither script is in Unicode -- both proposals were
+rejected -- so both live in the Private Use Area by allocation of the ConScript
+Unicode Registry: `Piqd` at U+F8D0-F8FF and `Teng` at U+E000-E07F, ISO 15924 codes
+293 and 290. `scripts/transliterate_native.py` derives `text` from
+`romanization_okrand` and `romanization_appendix-e`, and `--check` re-derives it.
+
+**These two packs run the other way round from every other one, and that is the
+fact everything else follows from.** Elsewhere a language's own writing is authored
+and a romanisation sits beside it; here every source publishes the *romanisation and
+nothing else* -- TKD, Appendix E, the Plotz letter, Eldamo. So the romanised cell is
+the attested one and the native cell is derived, which is why the transliteration is
+a script rather than a one-time hand edit: a native cell is a claim about a scheme,
+and a claim a script re-derives is one nobody can quietly break. The two schemes
+assert very different amounts. **pIqaD is a relabelling** -- one codepoint per TKD
+letter, case-significant pairs included, so a pIqaD cell is exactly as attested as
+the Latin it came from. **Tengwar is a reconstruction**, marked as one by a
+`native=quenya-classical` element in `provenance`: no source writes these 206
+phrases in tengwar, so what is borrowed is the *mode*.
+
+The mode is the **classical mode**, from Appendix E and the two Namárië manuscripts
+(DTS 20, DTS 55) as surveyed in Björkman's *Amanye Tenceli*. It is an abugida whose
+vowel tehta rides on the **preceding** consonant, which is what separates it from
+the general use (following consonant) and from the mode of Beleriand (full vowel
+letters) -- and it is the mode that fits, because Quenya words mostly end in a vowel
+so nearly every tehta finds a consonant to its left. A long vowel takes a long
+carrier of its own, a vowel with nothing before it takes a short carrier, a diphthong
+is written backwards inside itself (the tehta rides on yanta or úre), palatalisation
+is two dots below, a doubled consonant is one tengwa under a bar, and silme and esse
+invert when a tehta lands on top of them. **o is the left curl and u the right one**,
+which is the single easiest thing to get wrong here: the Ring inscription reverses
+them, it is the most reproduced tengwar text there is, and most fonts' keyboards are
+mapped for it.
+
+**The `{target}` slot needed the same move, and finding that was the point of doing
+it properly.** `data/registry/language-names.csv` is what each language calls the
+others, and `fillLanguageSlots` substitutes its `name` column into a cell *in the
+language of that cell*. The moment a Klingon cell is pIqaD, `'eSpanya' Hol` in that
+column makes `core/pack.js`'s own guarantee impossible -- "a substituted cell can
+never contain a script its own font stack cannot draw". So the 22 `tlh` rows and the
+one `qya` row hold the native form and their romanisation beside it, and
+`build_ipa.py` reads the romanisation, which is what `ROMANISED` was already for.
+Twenty of the Klingon names are Okrand's own; the last two are derived by putting
+each language's *endonym* through his key — `'IvghIt Hol` from `‘ivrit`,
+`qISuwaHIlI Hol` from `Kiswahili` — which is the same key the respelling column uses
+and the same thing he does himself with `DoyIchlan` and `maDyar`. Where key and
+author disagree the author wins: re-deriving Hungarian gives `majar` against his
+`maDyar`, so the attested twenty were left alone.
+
+**Quenya is named by nobody, and the gap is closed at the other end.** There are no
+Quenya names for the other twenty-one languages, and this is the fourth time the pack
+has hit that wall — no interrogative for "where", no emergency section, a 29%
+interface catalogue — so it gets the same answer. The reason is sharper than "no
+source": the Quenya reader table deliberately spells /b d ɡ/ as `b d g` and says of
+`thl` that it "is not a possible Quenya cluster", which is right for a *respelling*
+and fatal for a name, because Quenya's orthography has none of those letters. The
+obvious repair is worse — the CSUR block does have ando, anga and thúle, but **in the
+classical mode those spell `nd`, `ng` and `s`**, so borrowing their general-use values
+would make `Deutsch` read as `ndooty`. A mode is a mapping and half a mapping is not a
+transcription, so "transcribe rather than coin" is not on offer here; it would be
+twenty-one coinages.
+
+So `languageName` was fixed instead. It fell through to `Intl.DisplayNames`, and for a
+locale ICU has no display data *for* — `tlh` and `qya` are CLDR subjects and neither
+is a display locale — that answers in **English**, which is how English in Latin
+letters was going to arrive inside a tengwar cell. It now returns nothing for such a
+locale and `fillLanguageSlots` blanks the cell, which is the rule its own comment
+already made for `ipa`. `scripts/build_ipa.py` had refused that fallback all along and
+says so at length; **the two disagreeing was the defect**, and the renderer is now in
+line with the pipeline. Nothing changes today, which is the point. The twenty-one
+hollow `qya` rows are gone, restoring the invariant `write_names` states — "the file
+never grows a row of five empty cells".
+
+**`text_alt` was the obvious home for the Latin and it was already taken.** Thirty-one
+rows carry an attested *lexical variant* there -- `fendë`/`ando` for door,
+`ná`/`nása` for yes -- the same use Portuguese makes of the column, and like
+Portuguese these leave `script_alt` empty so it never prints. The Latin therefore
+goes in a romanisation column, which is where it belongs on the merits anyway: Okrand's
+transcription is TKD's notation *for pIqaD* and Tolkien's is Appendix E's *for
+tengwar*, `scripts/spec.mjs` already shows `roman` by default so the Latin is demoted
+rather than hidden, and `FIELD_SIDE.roman` is `latin` so Noto Sans draws it. Had it
+gone in `script_alt`, `resolveField` would have drawn it in the *target's* stack.
+
+Their badges are their own scripts now, `` and ``, and that needed
+one thing the badge mechanism never had. Every other badge -- 中, あ, ع, 한, अ, ก --
+is a plain character in the page's own font, which works because every real script
+has a system font somewhere; nothing on earth has a glyph for U+F8E4, so `style.css`
+declares a `unicode-range`-scoped `@font-face` over the shipped Latin subset. The
+range is what keeps it free: only a page that actually contains one of these
+codepoints fetches the face.
 
 Two hazards were raised against this pack and both were measured rather than acted on,
 because the measurement said not to. The first was that Klingon's case-significant `I`
@@ -613,6 +711,51 @@ read `Spain: 112 Hoch QaH`, since `regionName` has no registry override the way
 word for Spain, `Intl.DisplayNames` falls back to the English name for both locales
 rather than to a bare `ES`, and inventing one would fail the same sourcing rule that
 kept the emergency numbers out.
+
+#### One font, and the measurement that chose it
+
+**pIqaD and tengwar are grafted into the four Latin stacks rather than given stacks
+of their own**, which is the Greek argument and not a shortcut: `scripts.csv` already
+routes `Grek` and `Cyrl` to `latin` because the Noto Sans faces draw them, and `Piqd`
+and `Teng` route there too once these ~85 glyphs are in it. Own stacks would have cost
+eight faces of ~85KB each, because every one of them would still have had to carry the
+whole Latin repertoire — `literal` is read from the *target* row and is English on
+both packs, and a Klingon or Quenya *reader*'s respelling column is Latin as well —
+and worse, they would have doubled a Klingon sheet's font download, since the gloss,
+the romanisation and the IPA are all `latin`. The graft costs about 5KB a face and
+reuses `merge_donor`, which now rescales the em square (`scale_upem`) because
+Constructium is 2048 units and Noto is 1000.
+
+**Constructium is the only redistributable face covering both, and for tengwar it is
+the only one that survives this project's PDF path.** SIL OFL 1.1, no Reserved Font
+Name, a Gentium fork with all 41 assigned pIqaD codepoints and 117 of the 128 CSUR
+tengwar ones. The PDF is what decides it: `pdf-lib` keeps only the *glyph ids* fontkit
+hands it and drops the GPOS offsets, so a mark has to be correct on its own advance.
+Constructium draws its tehtar as zero-advance glyphs whose outlines are already offset
+back over the preceding tengwa — U+E040's bbox runs x −815..−215 at 2048/em — so they
+land on the right letter with no positioning at all and GPOS merely refines them.
+Alcarin Tengwar, which is OFL, better drawn and has a real Bold, puts its tehtar at
+x +20..+356 and relies wholly on a GPOS xOffset of about −0.5em: perfect in the
+browser, and in the exported PDF every Quenya vowel would print over the *following*
+consonant. It also follows the Free Tengwar Project's codepoint assignment rather than
+CSUR's, and the two disagree at several letters. Tengwar Telcontar is GPL v3 with a
+font-embedding exception — genuinely redistributable, but neither OFL nor a
+public-domain dedication, so a subset would be a GPL derivative in this repository.
+The cost of the choice is that Constructium is single-weight, so the `script` field's
+`bold` falls back to 400 and the native column prints at regular weight.
+
+**Both scripts' `scripts.csv` numbers are measured, and one of them is a surprise.**
+Ink extents over every row of each pack, shaped through fontkit: pIqaD is 0.954em
+tall against English Latin's 1.005em — every letter between the baseline and 0.615em,
+no ascenders, no descenders, no marks — so it takes Latin's own `1.02` leading and
+Latin's own `4.4pt` floor, and at that size its median stroke is *twice* Latin's.
+Tengwar is 1.270em, between Devanagari and Thai, so it takes `1.30`, above its own
+worst case, and `5.4pt`, where its stroke profile matches Arabic's, Devanagari's and
+Thai's at their floors. 6.0pt was rejected on measurement: the finest feature is not
+the stroke but the 0.009em gap between the two lower dots of the `a` tehta, which is
+under one device pixel at 600dpi even at 12pt, so the five vowels are told apart by
+the mark's *width* — 13px against 4px at 5.4pt — and raising the floor buys nothing
+for it.
 
 **What the twenty-one-language corpus cost the other nineteen tables.** Klingon writes
 /t͡ɬ/ as `tɬ`, which `phonemesOf` splits into `t` + `ɬ` — and `ɬ` was the first lateral
@@ -636,8 +779,127 @@ nineteen cluster rules written for it were dead code and are gone. It composes i
 — `tl`, `τλ`, `тл`, `تل`, `तल`, `ตล`, `トル`, `te-le-`, `thl` for Quenya, and `tlh` for
 a Klingon reader, which is the canonical spelling arrived at without a special case.
 Japanese also turned out to be the only one of the nineteen with no rule for a bare
-`ʰ`, which the other eighteen all map to nothing. All twenty-one readers are at zero
+`ʰ`, which the other eighteen all map to nothing. All twenty-two readers are at zero
 gaps.
+
+### Hebrew, and where the vowels go
+
+Hebrew (`he`) is the twenty-second language and the second right-to-left one, and it
+arrives with a question none of the other twenty-one had to answer: **Hebrew does not
+write its vowels.** A card is read by somebody who does not know the language, so the
+column that a Hebrew reader has to find natural and the column a learner has to be
+able to *read* are not the same string.
+
+**Both, in two columns, with a mechanical relationship between them.** `text` is the
+unpointed full spelling — what is on every sign, menu and form in Israel — and
+`text_alt` is the same letters with the niqqud added, on all 813 rows. The pointing
+earns a column of its own rather than being dropped because it is a second
+orthography a reader meets in the wild, in children's books, dictionaries, poetry and
+the partial pointing a newspaper puts on an ambiguous word: the same argument that
+puts Traditional Chinese in `zh-Hans`'s `text_alt`. The Devanagari and CJK packs spend
+their second column on a romanisation instead (`iast`, `hepburn`, `kunrei`) and are
+right to, because their scripts write their own vowels and have no gap to fill.
+
+**`script_alt` in `languages.csv` stays empty**, which is the one place this decision
+touches the interface. Its only consumer is the format panel's caption, and
+`field.title.script_alt` reads "The same phrase written in {script}" — pointing is not
+another script, and `Hebr` there would caption the pointed column "Hebrew" beside a
+column already captioned "Hebrew".
+
+Three things fall out of the relationship between the two columns, and all three are
+load-bearing:
+
+- **`text` is `text_alt` with the points stripped, and `validate_data.py` enforces
+  it.** That is what makes the pointed column a *reading of the printed one* rather
+  than a second, differently spelt phrase — and the trap is real: the Academy of the
+  Hebrew Language prescribes pointing the *defective* spelling, so the correct pointed
+  form of `תקווה` is `תִּקְוָה`, with one vav where the printed column has two. This pack
+  points the full spelling instead, which is what Israeli textbooks and children's
+  books do, and says so.
+- **The unpointed column is genderless where the pointed one cannot be.** Hebrew
+  inflects the present tense for the *speaker's* gender, and for the whole `-e/-a`
+  class the two forms are the same unpointed string: `rotse` and `rotsa` are both
+  רוצה. So `text` — the column a traveller holds up — commits to nothing on those
+  rows, and only the pointed column has to choose. It chooses masculine, as the Arabic
+  pack does, and `literal` records the other reading. Where a single unpointed string
+  has two readings that both deserve printing — שלך is both `shelkha` and `shelakh` —
+  the row prints one, because printing both would print the same string twice.
+- **The pack's answer to the gender problem is a frame rather than a form.** `efshar
+  la‘azor li?` — "is it possible to help me?" — is impersonal, is what an Israeli says
+  to a stranger anyway, and inflects for neither the speaker nor the addressee. It
+  replaces the second person in every request in the pack, and `medabrim kan {source}?`
+  ("is X spoken here?") does the same for `do-you-speak-english`. That is Vietnamese's
+  solution to the same problem in a different part of the grammar.
+
+**The romanisation is BGN/PCGN 2018, which is the Academy's own 2006/2011 system
+tabulated for names.** ISO 259 was rejected as a graphemic transliteration that writes
+distinctions Modern Hebrew does not make, and the Academy's *simplified* popular
+variant was rejected because it writes `ח` as `h` and so merges it with `ה` — fatal
+here, since this column is what the `ipa` route reads and /χ/ against /h/ is `ẖam`
+(hot) against `ham` (they). Three named departures, all for the same reason: an acute
+marks non-final stress, which is lexical in Hebrew (`bóqer` morning, `boqér` cowboy)
+and written by neither orthography; `ey` writes the [ej] diphthong where BGN writes
+`e`; and a strong dagesh is not doubled, because Modern Hebrew has no geminate and
+`bevaqqasha` would tell twenty-one reader tables to spell one.
+
+**There is no espeak Hebrew voice**, so the `ipa` column is read off that romanisation
+the way Japanese, Korean and Mandarin are read off theirs — one authored string per
+row (the pointed form), with `text` and the romanisation derived from it and the IPA
+derived from the romanisation. `GRADE["he"]` is `A-` and names the weakness: BGN
+resolves a shva by a morphological test the route cannot perform, so the rule is `e`
+word-initially and nothing elsewhere, and the twelve forms where Modern Hebrew
+disagrees are corrected by hand in the pack's own word list.
+
+**Final letter forms are the hazard a composing reader table has, and it is closed
+structurally.** ך ם ן ף ץ are positional and must never appear mid-word. Nothing in
+the corpus can produce one out of place, since `text` is authored Hebrew with the
+points removed. In `he__he-IL.json` the four that can arise live in four
+`syllable_fixups`, each anchored to the end of the syllable with `$` and gated on
+`word_final`, and every `phonemes` rule emits only the non-final form — so a mid-word
+`ם` is not unlikely, it is unreachable. The fifth, `ך`, has no rule that could produce
+it at all: /x/ is written `ח`, which is the Academy's own permitted alternative, so no
+`כ` is ever emitted.
+
+**Two measurements settled `scripts.csv`, and one of them settled a column nothing
+reads.** `leading_factor` is 1.20 because the largest positioned ink height over the
+four shipped Hebrew faces on real rows is 1.149em — Noto Serif Hebrew, a lamed's
+ascender over a below-mark — where the sans faces reach 0.997em and unpointed Hebrew
+alone is 0.915em, less than Latin's typical. So the pointed column is what the factor
+pays for. `min_size_pt` is 5.0: the letter body is 536/1000 em, which is exactly Noto
+Sans Latin's x-height, so the letters are no smaller than Latin at the same size — but
+six pairs are told apart by one small stroke (ב/כ, ד/ר, ה/ח/ת, ו/ז/ן, ם/ס, ג/נ) and a
+hiriq is a 56-unit dot, which at 4.4pt is 0.25pt of ink against the 0.20pt this paper
+can hold. It sits below Arabic's 5.4 because Hebrew is not cursive: no joining strokes
+to lose and no stacked marks. And `needs_shaping` is 1 for the opposite reason to
+Arabic's — **nothing in the repository reads that column**, fontkit's `layout()`
+shapes unconditionally, so the value is documentation, and what is true of Hebrew is
+that it needs no joining and does need GPOS mark attachment: eleven of the twelve
+glyphs of `בְּבַקָּשָׁה` are positioned by GPOS, and even unpointed `שלום` takes a kern.
+
+**The first pack whose emergency frame takes a preposition**, after twenty-one that
+refused one. `ב{region}:` is right for all 54 regions, and the reason is orthographic
+rather than grammatical: Hebrew's preposition is a single letter whose vowel *is not
+written*, so the agreement that defeated Portuguese's `na`/`no`/`nos` and French's
+`en`/`au` simply does not surface. ICU's Hebrew region names help by carrying no
+definite article — the two that begin with `ה` are `הודו` and `הונגריה`, where the
+letter is part of the name.
+
+**Digits in a right-to-left line are safe here for a reason worth writing down.**
+fontkit reverses a run only when the string contains a right-to-left character, so
+`100` on its own is laid out left to right and `100 משטרה` as one string is not —
+measured. `paintField` emits one run per *piece*, and pieces break at spaces, so every
+number in `ב{region}: 100 משטרה · 101 אמבולנס` is its own run and its digits keep their
+order. The deferred bidi problem is therefore bounded to digits *glued* to letters
+inside one piece, which is exactly what the validator's one-digit rule forbids in a
+corpus row. Hebrew needed no numeral rows anyway: Israel writes 0–9 as Europe does, so
+the number rows carry the Hebrew word — the feminine counting series — where Arabic
+and Thai carry their own digits.
+
+Hebrew also brought the corpus the fifteenth currency: **`numbers-money.shekel` and
+its symbol ₪ (U+20AA), which no shipped face carried**. It was the Italian-euro case
+exactly — a ready language with a country, a currency in `regions.csv` and no row for
+it — and the reason it is a named row rather than the generic `local-currency` that
+Arabic and Russian take is that Israel is one country with one currency.
 
 ### The paper's own colour
 
@@ -886,10 +1148,10 @@ in the distribution that still fills a real card:
 
 | step | floor | phrases | fits |
 |---|---|---|---|
-| Everything | 0 | 798 | 6–8 faces of 7×5 |
-| Broad | 0.74 | 314 | four faces — what both hand-built originals settled on |
-| Core | 0.82 | 147 | one sheet |
-| Essential | 0.95 | 10 | **one phone face at full nominal type, in all nineteen natural languages** |
+| Everything | 0 | 813 | 6–8 faces of 7×5 |
+| Broad | 0.74 | 326 | four faces — what both hand-built originals settled on |
+| Core | 0.82 | 148 | one sheet |
+| Essential | 0.95 | 10 | **one phone face at full nominal type, in all twenty natural languages** |
 
 **The top step is the one place the two constructed languages fall short of a
 preset**, and it is worth stating plainly rather than leaving to the coverage table:
@@ -986,6 +1248,8 @@ npm run prerender   # solve + render → packs/  (after any corpus or engine cha
                     #   fifth-bit palette: 240 pairs in 8.6MB rather than 27MB
 npm run shell       # data/shell.json + the respell index + sw.js VERSION
 python3 scripts/fetch_fonts.py && python3 scripts/subset_fonts.py   # data/fonts/
+python3 scripts/transliterate_native.py   # tlh -> pIqaD, qya -> tengwar,
+                    #   packs plus the two card-facing registry files
 ```
 
 The Python side needs `fontTools` for the fonts and `Pillow` for the thumbnails.
@@ -1007,8 +1271,8 @@ normalised English gloss, against the exact section first and then its group,
 because two sheets can file the same phrase under different panels ("Can I charge
 my phone?" is hotel basics in one and hotel requests in the other).
 
-The bank is now **798 concepts across 58 sections in twenty-one languages**, which is
-**420 ordered pairs** — every one of which renders, and two of which anyone wrote a
+The bank is now **813 concepts across 58 sections in twenty-two languages**, which is
+**462 ordered pairs** — every one of which renders, and two of which anyone wrote a
 sheet for. That ratio is the whole argument for joining on `concept_id` instead of
 storing pairs: the sixteenth language added 745 rows and 30 new pairs, and the
 twenty-first added 40 more pairs on its own.
@@ -1117,6 +1381,40 @@ thirty-two entries saying the same thing. They are now one concept each, glossed
 "I do not speak this language", and every pack renders it self-referentially.
 Before the merge the Korean sheet had no way to say "I do not speak Korean" at all.
 
+**Reading `applies_to` against `regions.csv` is a routine audit, not a one-off.** A
+concept's scope is a claim about which countries need it, and the registry already
+says which countries a language serves — so the two can be read against each other,
+and every time they have been, they disagreed. The euro was scoped `de;fr;es;pt` and
+shipped the Italian pack without it. Reading the whole table once found that
+**English and Arabic had no currency concept at all** — the most-used target and the
+second RTL one, eighteen and six pairs respectively.
+
+Thirteen concepts came out of that reading and the translators' backlog: `franc`
+(`de;fr;it;sw` — three of them name Switzerland and the fourth serves the DRC),
+`peso` (`es`, four of its six countries), `real` (`pt`, the larger half of that
+readership), `local-currency` (`ar;ru`), `lakh` and `crore` (`hi`, because every
+Indian price above about a hundred thousand is written `₹5 लाख` with `1,00,000`
+grouping), `does-it-contain-pork-fat`, `pork-code` (`id`), `i-think-i-have-dengue`
+and `fare`.
+
+**The reading beat the prose twice**, which is the argument for doing it against the
+data rather than from the notes. BYN *is* a ruble, so Russian's gap is two countries
+and two words rather than three; and Singapore prices are 元/块 in Chinese exactly as
+China's are, so Mandarin's gap is the ringgit alone.
+
+**`local-currency` has no symbol row, alone among the currencies, and that was
+measured.** A symbol row's respelling is blank for a bare sign and *junk* for an
+abbreviation: espeak read `ر.س · ج.م · د.إ · د.أ` as `rs dʒˈamm dʔ dʔ`, with the two
+dinars indistinguishable, and `₸ · с` as `ˈɛs`. Both would have printed on 36 pairs.
+The abbreviations ride in `text_alt` instead, which takes no IPA by design.
+
+Two requests failed the check and stayed out. `rail-station-words.conductor` is the
+half of the Swahili translator's pair that does not survive translation — a fare names
+one thing in nineteen languages and a conductor does not, since the minibus
+fare-collector and the rail ticket *inspector* are different jobs. And an English euro
+row was declined on the gloss trade: English is the source on eighteen pairs and
+Ireland is one of its eight countries, where Cyprus is one of Turkish's two.
+
 `default_on: 0` on a *section* keeps it off the default card while leaving it one
 click away. A pocket sheet holds less than the corpus does, and it should: seven of
 the thirteen new sections are things a traveler needs once (customs, buying a SIM)
@@ -1217,7 +1515,7 @@ nominative -- the same trick its pack used on sixteen slot rows. Hindi took
 Three validator rules keep the source side honest: every `note` needs text in every
 ready language except the ones it is scoped to (a language is never its own sheet's
 source), and every service word in `regions.csv` needs a row in every language's
-label file. All twenty-one languages pass both.
+label file. All twenty-two languages pass both.
 
 **The third is new with the nineteenth and nothing passes it yet.** A concept with an
 `applies_to` renders only on the targets it names -- but on those pairs the *gloss*
@@ -1236,6 +1534,91 @@ rows -- the ones the Swahili translator called the biggest gap in that pack -- p
 with `type: 'currency'` closes fourteen of the twenty-eight mechanically, which is how
 the forint and the rupee were filled; the rest -- measure words, counters, the maglev,
 `please-write-it-in-roman-letters` -- want a translator.
+
+### The graft moves outlines, so the copyright moves with them
+
+Two faces here are built from more than one donor. A face whose family ships no Latin
+borrows Latin from Noto Sans — Noto Sans Arabic has none at all — and the four Latin
+faces borrow the two conscript blocks from Constructium, because `scripts.csv` points
+both `Piqd` and `Teng` at the `latin` stack rather than giving two languages a font
+stack each.
+
+Every donor is OFL 1.1, which asks that a redistributed copy carry the notice — and a
+font carries its own, in nameID 0. The subset faces already did, inherited from
+whichever face `subset_source` started from. The graft broke that quietly: the Latin
+faces came to hold Kreative Software's pIqaD and tengwar outlines under a notice
+naming only the Noto authors. That is a licence gap rather than untidiness, so
+`add_copyright` now appends the donor's own notice to every nameID 0 record of the
+merged face, and `data/fonts/manifest.json` carries a `copyright` roll-up gathered
+from the built faces rather than hardcoded — so a new donor cannot arrive without
+appearing there. `tests/fonts.test.mjs` asserts both.
+
+### The headings were still romanised, which is the same bug in a different file
+
+The Klingon and Quenya packs went native and their **section headings and emergency
+service words did not**, so a Klingon sheet read pIqaD under Latin panel titles. The
+files are `data/registry/section-titles/<code>.csv` and
+`emergency-labels/<code>.csv`, and they had nowhere to keep the citable Latin, which
+is why they were left.
+
+They now follow the packs' own discipline: the romanised cell is the authored one and
+lives in a `title_roman` / `text_roman` column beside the native one, which
+`transliterate_native.py` derives. Nothing in either file is hand-written in pIqaD or
+tengwar. That column exists only in those four files, and both readers take the table
+by header name, so the other twenty languages neither need it nor notice it. Two
+details the corpus route did not have to think about: **the registry is LF where the
+corpus is CRLF**, so `build_registry` reads with its own loader rather than
+`load_rows`, which splits on CRLF by contract and reads one of these files as a single
+line; and the colon joined the pass-through set for the emergency `_frame`, which is
+the one string here that is a sentence frame rather than a word. The frame itself
+stays ASCII — `{region}: {numbers}` is furniture.
+
+`validate_data.py` already checked both columns with `check_drawable`, so the fonts
+were confirmed to carry every glyph as a side effect of the move rather than by a new
+check. What is still romanised is `data/i18n/{tlh,qya}.json`, the interface chrome
+around the card, and the blocker there is real rather than effort: those strings
+interpolate numbers formatted at runtime by `Intl.NumberFormat`, which no
+transliteration reaches, so a pIqaD interface would set pIqaD words around Western
+digits.
+
+### The PDF never applied a mark offset, and Hebrew is where that showed
+
+`pdf-lib` emits **one `Tj` of glyph ids and no positioning at all**. Inflate a page's
+content stream and a run is `1 0 0 1 x y Tm` followed by `<0001…0007> Tj` — so every
+glyph is placed by its own advance and every GPOS `xOffset`/`yOffset` fontkit computed
+is discarded. That had been true since the renderer was written and had never cost
+anything, because for twenty of the twenty-two languages the marks are drawn near
+their own origin: Noto Sans Thai's tone marks come back at −3/1000 and land right
+where they fall.
+
+**Hebrew's niqqud are the opposite.** They are zero-advance glyphs whose outlines sit
+at *positive* x — 52 to 228 of 1000 — and they rely wholly on the `mark` feature.
+Pointed `shalom` asks for +539 and +227, more than half a letter each, so with the
+offsets dropped every point sat over the next consonant along. It is the pointed
+column that is affected, which is the learner's column, on the artifact that gets
+printed. This is the same failure mode that ruled out Alcarin Tengwar for Quenya, met
+from the other direction: there the font was rejected for needing a −0.5em GPOS shift,
+and here a shipped font needed one and did not get it.
+
+**So `drawRun` places each offset glyph itself, and the guard is a proof rather than a
+list of scripts.** A glyph is redrawn on its own only if laying out its codepoints
+alone returns the same glyph id. That holds for Hebrew, which has no contextual forms,
+and fails for Arabic, where an isolated codepoint comes back as the isolated form and
+would undo the joining — so an Arabic run is drawn whole, exactly as before. Measured
+across seven targets at 300dpi: `ar`, `ja` and `en` differ by **zero pixels**; `he`
+by 0.87%, which is the fix; `th` 0.14%, `hi` 0.003% and `qya` 0.10%, which are the
+same correction arriving where nobody had noticed it was needed. Arabic carries
+offsets up to a full em and renders correctly regardless, which is why the guard
+spares it rather than the other way round.
+
+Consecutive *unoffset* glyphs are flushed as one block, because each `drawText` is a
+whole `BT`/`Tf`/`Tm`/`Tj`/`ET` of its own. Without that, a pointed Hebrew sheet grew
+25%; with it, 16%. Tengwar pays the most, 32%, because nearly every tehta is offset.
+
+Two things worth knowing if you read the content stream. Each block gets its own font
+*resource name*, but `pdffonts` reports one embedded font — pdf-lib coalesces the
+aliases at save. And the streams are deflated even under `useObjectStreams: false`, so
+`tests/render.spec.js` inflates before matching operators.
 
 ### Tofu, and why a range table cannot catch it
 
@@ -1426,23 +1809,33 @@ Named so nobody has to rediscover the gap:
   threaded through `atoms.js`.
 - **Whole sheets as shipped assets.** The first face of every pair is committed and
   the rest are typeset on open. Committing all of them was the other option and the
-  numbers ruled it out: 420 pairs is 50MB gzipped and 670MB raw, against 5.5MB for the
+  numbers ruled it out: 462 pairs is 55MB gzipped and 737MB raw, against 6.0MB for the
   first faces alone. So a reader gets sharp vector immediately and the remaining seven
   or nine faces about a second later, which is the point at which they would want the
   second one.
 - **A reviewer queue.** `content/CONTRIBUTING.md` defines the confidence tiers and
   the validator enforces the safety gate, but there is no review UI.
-- **Eleven concepts the translators asked for**, staged in
-  `content/PROPOSED-CONCEPTS.md` with the argument and the sources for each rather
-  than added. The strongest are a malaria pair (the Swahili translator's "biggest gap
-  in this pack" — it is the most likely serious illness for a visitor to any of the
-  four countries Swahili serves), a pork-stock question that Japanese, Korean and
-  Mandarin all want separately from `no-pork` because 豚骨 and 猪油 are not 豚肉, and
-  an Indonesian `common-signs` row for the codes that stand in for the word `babi` —
-  a reader can follow `Tanpa babi` perfectly and still walk into a place signed
-  `Lapo B2`. Staged rather than added because a universal concept costs every one of
-  the fifteen packs a row, and the two that *were* added this round took thirteen
-  agents to fill.
+- **The rest of the translators' backlog**, still staged in
+  `content/PROPOSED-CONCEPTS.md` with the argument and the sources for each. The
+  strong cases have shipped — the malaria pair, both pork-stock questions, the
+  Indonesian pork codes, dengue and the currency table are in the bank now — and what
+  is left is deliberate: the currency rows whose gloss cost outweighs the country they
+  cover (English's euro, Spanish's sol, Portuguese's kwanza and metical, Mandarin's
+  ringgit), `rail-station-words.conductor`, and Italy and Greece in the dengue scope.
+- **A legend for the romanisation column's own diacritics**, which the Vietnamese
+  translator asked for and which is a design question rather than a translation.
+  Pinyin's caron `ǎ` and Vietnamese's breve `ă` are near-identical at 5pt and pinyin's
+  macron is not a Vietnamese mark at all, so a Vietnamese reader is uniquely primed to
+  read tone marks as vowel-quality marks — they will not misread the words, they will
+  misread the *tones*, silently. Researched and rejected in two forms: a fifth `note`
+  concept is wrong because a note is a *section* device and this is a card fact, and
+  because `applies_to` on a note names the language it is *about* while the row is read
+  from the source, so it would cost eight concepts times twenty-one paragraphs.
+  `spec.head`'s `legend` slot is the card-level place for it. Doing it means writing
+  the thirteen missing reader `legend` fields, then a target-keyed second part in the
+  same slot — which also repairs a live defect, since that slot prints the respelling
+  key even when `proficiency: 'reading'` has dropped the respelling column and kept
+  the romanisation.
 
 ## Notes worth keeping
 

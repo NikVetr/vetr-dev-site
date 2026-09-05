@@ -71,3 +71,14 @@ numbers-money.yu-n,위안,,wian,wian,,2,reader-gloss-v1;roman=generated;ipa=rr
 numbers-money.ku-i,위안 (구어),,wian (gueo),wian kuʌ,,1,reader-gloss-v1;roman=generated;ipa=rr
 numbers-money.li-ng,2 + 단위명사,,2 + danwimyeongsa,,,1,reader-gloss-v1;roman=generated
 numbers-money.2-items,2개,,2gae,,,1,reader-gloss-v1;roman=generated
+numbers-money.franc,프랑,,peurang,pʰɯɾaŋ,,2,currency-agent-v1;cldr;ipa=rr
+numbers-money.franc-symbol,프랑 기호,,peurang giho,pʰɯɾaŋ kiho,,2,currency-agent-v1;cldr;ipa=rr
+numbers-money.peso,페소,,peso,pʰeso,,2,currency-agent-v1;cldr;ipa=rr
+numbers-money.peso-symbol,페소 기호,,peso giho,pʰeso kiho,,2,currency-agent-v1;cldr;ipa=rr
+numbers-money.real,레알,,real,ɾeal,,2,currency-agent-v1;cldr;ipa=rr
+numbers-money.real-symbol,레알 기호,,real giho,ɾeal kiho,,2,currency-agent-v1;cldr;ipa=rr
+numbers-money.local-currency,현지 통화,,hyeonji tonghwa,hjʌndʑi tʰoŋhwa,,2,currency-agent-v1;cldr;ipa=rr
+numbers-money.lakh,십만,,simman,simman,,2,lakh-crore-agent-v1;cldr;ipa=rr
+numbers-money.crore,천만,,cheonman,tɕʰʌnman,,2,lakh-crore-agent-v1;cldr;ipa=rr
+numbers-money.shekel,세켈,,sekel,sekʰel,,2,shekel-gloss-v1;cldr;roman=generated;ipa=rr
+numbers-money.shekel-symbol,세켈 기호,,sekel giho,sekʰel kiho,,2,shekel-gloss-v1;cldr;roman=generated;ipa=rr

@@ -18,6 +18,7 @@ from pathlib import Path
 from fontTools import subset
 from fontTools.merge import Merger
 from fontTools.ttLib import TTFont
+from fontTools.ttLib.scaleUpem import scale_upem
 from fontTools.varLib import instancer
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -59,7 +60,34 @@ ARABIC_RANGES = [(0x600, 0x6FF), (0x750, 0x77F), (0x8A0, 0x8FF),
 # the static faces behind `latin` have none of it. Adding `hi` to `ALL_LANGS` would
 # have looked like a fix and produced a subset request the source could not fill.
 THAI_RANGES = [(0x0E00, 0x0E7F)]
+# The whole Hebrew block: 88 of its 135 codepoints are in both Hebrew faces, and the
+# subsetter intersects with the cmap anyway. The Alphabetic Presentation Forms block
+# is deliberately *not* here -- U+FB2A shin-with-dot and U+FB31 bet-with-dagesh are
+# compatibility characters, NFC leaves the corpus's letter+mark sequences decomposed,
+# so nothing can ask for one; the shaper reaches its own ligature glyphs through GSUB,
+# which `layout_features` keeps.
+HEBREW_RANGES = [(0x0590, 0x05FF)]
 DEVA_RANGES = [(0x0900, 0x097F), (0xA8E0, 0xA8FF)]
+
+# Klingon pIqaD and Tengwar. These are the two scripts here that are **not in
+# Unicode**: both proposals were rejected, so they live in the Private Use Area by
+# allocation of the ConScript Unicode Registry, and nothing about them can be
+# inferred from a codepoint. The registry is therefore cited rather than the script:
+#   https://www.evertype.com/standards/csur/klingon.html   (revised 2004-01-15)
+#   https://www.evertype.com/standards/csur/tengwar.html   (revised 1998-01-10)
+#
+# The whole pIqaD block, but only the tengwar the classical Quenya mode uses. pIqaD
+# is an alphabet of 26 letters, ten digits and two marks, and a complete alphabet is
+# the useful unit -- the same argument `LATIN_EXTRA_RANGES` makes for Greek. CSUR
+# tengwar is 117 codepoints of which the mode needs 35; the rest are Sindarin-only
+# forms, Rúmilian numerals and hexadecimal digits that no cell in the corpus can
+# reach, and they cost real bytes in eight faces. The 35 are exactly what
+# `scripts/transliterate_native.py` emits, and `tests/fonts.test.mjs` is what fails
+# if that table grows and this list does not.
+PIQAD_RANGES = [(0xF8D0, 0xF8E9), (0xF8F0, 0xF8F9), (0xF8FD, 0xF8FE)]
+TENGWAR_RANGES = [(0xE000, 0xE00B), (0xE00C, 0xE026),
+                  (0xE040, 0xE040), (0xE043, 0xE044), (0xE046, 0xE046),
+                  (0xE048, 0xE048), (0xE04A, 0xE04A), (0xE04D, 0xE04D)]
 
 # Faces: (stack, weight, italic) -> source file. CJK and Arabic have no italic in
 # these families, and the sheet only ever italicises romanisation, which is Latin.
@@ -112,6 +140,10 @@ FACES = {
     ("thai", 700, False): "NotoSansThai-var.ttf",
     ("thai-serif", 400, False): "NotoSerifThai-var.ttf",
     ("thai-serif", 700, False): "NotoSerifThai-var.ttf",
+    ("hebrew", 400, False): "NotoSansHebrew-var.ttf",
+    ("hebrew", 700, False): "NotoSansHebrew-var.ttf",
+    ("hebrew-serif", 400, False): "NotoSerifHebrew-var.ttf",
+    ("hebrew-serif", 700, False): "NotoSerifHebrew-var.ttf",
     ("deva", 400, False): "NotoSansDevanagari-var.ttf",
     ("deva", 700, False): "NotoSansDevanagari-var.ttf",
     ("deva-serif", 400, False): "NotoSerifDevanagari-var.ttf",
@@ -137,24 +169,63 @@ FACES = {
 LATIN_DONOR = {"NotoSansArabic-Regular.ttf": "NotoSans-Regular.ttf",
                "NotoSansArabic-Bold.ttf": "NotoSans-Bold.ttf"}
 
+# The same graft in the other direction, for the two conscripts. No Noto face has a
+# pIqaD or a tengwar glyph -- neither script is in Unicode -- so the four Latin
+# stacks borrow them from Constructium, a fork of SIL Gentium that carries both under
+# the same OFL 1.1 (no Reserved Font Name, so the subset may keep its own names).
+#
+# **Grafting into `latin` rather than giving each script a stack of its own is the
+# decision worth recording, and it is the Greek argument, not a shortcut.**
+# `scripts.csv` already routes `Grek` and `Cyrl` to `latin` because the Noto Sans
+# faces draw them; `Piqd` and `Teng` route there too, once these glyphs are in it.
+# A stack of their own would have cost eight more faces of ~85KB, because every one
+# of them would still have had to carry the whole Latin repertoire: `literal` is
+# read from the *target* row and is English on both packs, and the respelling column
+# of a Klingon or Quenya *reader* is Latin as well. Worse, it would have doubled a
+# Klingon sheet's font download -- the gloss, the romanisation and the IPA are all
+# `latin`, so such a sheet would fetch both stacks where it now fetches one.
+#
+# **Constructium is also the only tengwar face that survives this project's PDF
+# path, and that is a measurement.** Tengwar is an abugida: the vowel is a tehta
+# riding on the consonant. pdf-lib's `encodeText` keeps only the glyph *ids* fontkit
+# hands it and drops the GPOS offsets, so a mark has to land correctly on its own
+# advance. Constructium draws its tehtar as zero-advance glyphs whose outlines are
+# already offset back over the preceding tengwa (U+E040's bbox runs x -815..-215 at
+# 2048/em), so they sit on the right letter with no positioning at all and GPOS only
+# refines them. Alcarin Tengwar -- also OFL, and a better-drawn face -- puts its
+# tehtar at x +20..+356 and relies entirely on a GPOS xOffset of about -0.5em: in
+# the browser it is perfect and in the exported PDF every vowel would print one
+# letter to the right of the consonant it belongs to. Alcarin also follows the Free
+# Tengwar Project's codepoint assignment rather than CSUR's, which disagree at
+# several letters, so the two are not interchangeable at all.
+PUA_DONOR = "Constructium.ttf"
+
 # Which language directories feed each stack's corpus-character union.
 ALL_LANGS = ["en", "es", "fr", "de", "ko", "ar", "zh-Hans", "ja",
              "pt", "ru", "tr", "vi", "hi", "id", "sw", "th", "it", "el", "hu",
-             # Klingon and Quenya are Latin-script and so need no stack of their
-             # own, but they still have to be in this union: it is what puts their
-             # own characters, their section titles and their emergency-service
-             # labels into the subset. Italian was left out of it for a whole
-             # language generation and only escaped a sheet of empty boxes because
-             # it is Latin too, which is luck rather than design. Quenya brings the
-             # o-diaeresis and the a-diaeresis, which no other pack writes.
-             "tlh", "qya"]
+             # Klingon and Quenya, whose `text` is now pIqaD and tengwar. They still
+             # belong in this union rather than in a stack of their own -- see
+             # `PUA_DONOR` -- and they still need it for their romanised columns,
+             # their section titles and their emergency-service labels, all of which
+             # are Latin. Italian was left out of this list for a whole language
+             # generation and only escaped a sheet of empty boxes because it is Latin
+             # too, which is luck rather than design. Quenya brings the o-diaeresis
+             # and the a-diaeresis, which no other pack writes.
+             "tlh", "qya",
+             # Hebrew, whose own stack is below. It is in this Latin union as well
+             # because its section titles and emergency labels are Hebrew but its
+             # corpus quotes `Wi-Fi`, `SIM` and `PIN` in Latin, and because the four
+             # `latin` faces draw the romanisation and the IPA of every pair whose
+             # target is Hebrew.
+             "he"]
 STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                "latin-serif": ALL_LANGS, "latin-cond-serif": ALL_LANGS,
                "cjk-sc": ["zh-Hans"], "cjk-sc-serif": ["zh-Hans"],
                "cjk-jp": ["ja"], "cjk-jp-serif": ["ja"],
                "cjk-kr": ["ko"], "cjk-kr-serif": ["ko"],
                "arabic": ["ar"], "thai": ["th"], "thai-serif": ["th"],
-               "deva": ["hi"], "deva-serif": ["hi"]}
+               "deva": ["hi"], "deva-serif": ["hi"],
+               "hebrew": ["he"], "hebrew-serif": ["he"]}
 
 
 def expand(ranges):
@@ -228,7 +299,7 @@ def coverage(stack):
     # tables of the languages it draws -- the same scoping `corpus_chars` uses.
     chars |= respell_chars(STACK_LANGS[stack])
     if stack.startswith("latin"):
-        chars |= expand(LATIN_EXTRA_RANGES)
+        chars |= expand(LATIN_EXTRA_RANGES) | expand(PIQAD_RANGES) | expand(TENGWAR_RANGES)
     if stack in ("latin-cond", "latin-serif", "latin-cond-serif"):
         return chars
     if stack in ("cjk-sc", "cjk-sc-serif"):
@@ -252,6 +323,8 @@ def coverage(stack):
         chars |= expand(THAI_RANGES)
     elif stack.startswith("deva"):
         chars |= expand(DEVA_RANGES)
+    elif stack.startswith("hebrew"):
+        chars |= expand(HEBREW_RANGES)
     return chars
 
 
@@ -294,6 +367,12 @@ def merge_donor(font, donor):
     face's value carries over instead.
     """
     created = font["head"].created
+    # `Merger` copies outlines verbatim, so the two halves have to agree on the em
+    # square or the donor's glyphs come out at the wrong size. Noto and Constructium
+    # do not: 1000 against 2048. `scale_upem` rewrites `glyf`, `hmtx` and the GPOS
+    # values together, which is the whole reason the graft is possible at all.
+    if donor["head"].unitsPerEm != font["head"].unitsPerEm:
+        scale_upem(donor, font["head"].unitsPerEm)
     buffers = []
     for half in (font, donor):
         buf = io.BytesIO()
@@ -305,16 +384,48 @@ def merge_donor(font, donor):
     return merged
 
 
+def add_copyright(font, credit):
+    """Append a donor's copyright notice to every record of the font's own nameID 0.
+
+    Every record, because the name table can hold the same string once per platform
+    and a reader may consult either. Appending rather than replacing: the primary
+    face's outlines are still most of the file.
+    """
+    table = font["name"]
+    for record in table.names:
+        if record.nameID != 0:
+            continue
+        own = record.toUnicode()
+        if credit in own:
+            continue
+        record.string = f"{own}  {credit}"
+
+
 def build_face(stack, weight, italic, source, chars):
     font = subset_source(source, stack, weight, chars)
-    donor = LATIN_DONOR.get(source)
+    # At most one graft per face, and which one follows from the stack: a Latin face
+    # borrows the two conscript blocks, a face of a family that ships no Latin
+    # borrows Latin, and no face here needs both.
+    donor = PUA_DONOR if stack.startswith("latin") else LATIN_DONOR.get(source)
     if donor:
         # Only the codepoints the primary face is missing. Taking the overlap too
         # would store nineteen glyphs twice and let the donor's Latin reading of
         # U+204F and U+2E41 -- reversed semicolon and comma, which Arabic draws the
         # other way round -- compete in the merged cmap for no gain.
-        font = merge_donor(font, subset_source(
-            donor, stack, weight, chars - set(font.getBestCmap())))
+        donor_font = subset_source(
+            donor, stack, weight, chars - set(font.getBestCmap()))
+        credit = donor_font["name"].getDebugName(0)
+        font = merge_donor(font, donor_font)
+        # **The graft moves outlines, so it has to move the copyright with them.**
+        #
+        # The OFL asks that a redistributed copy carry the notice, and a font carries
+        # its own: nameID 0. Grafting Constructium's conscript blocks into the Latin
+        # faces put Kreative Software's outlines inside a file whose notice named only
+        # the Noto authors, which is a licence gap rather than an oversight to tidy
+        # later. Both donors used here are OFL and neither declares a Reserved Font
+        # Name, so nothing else about the merge needs permission -- only the credit.
+        if credit:
+            add_copyright(font, credit)
 
     # Pad every glyph out to a four-byte boundary.
     #
@@ -351,13 +462,21 @@ def build_face(stack, weight, italic, source, chars):
     font.save(OUT / f"{stem}.woff2")
     font.close()
 
-    glyphs = len(TTFont(ttf).getGlyphOrder())
+    built = TTFont(ttf)
+    glyphs = len(built.getGlyphOrder())
+    notice = built["name"].getDebugName(0) or ""
     return {
         "stack": stack, "weight": weight, "italic": italic, "file": stem,
         "glyphs": glyphs,
         "ttfBytes": ttf.stat().st_size,
         "woff2Bytes": (OUT / f"{stem}.woff2").stat().st_size,
         "source": source,
+        # Consumed by the manifest's roll-up and then dropped from the face entry,
+        # where it would be the same few strings repeated fifty times.
+        # Split on the double space `add_copyright` joins with, and collapse the
+        # internal whitespace: Constructium's own notice contains a newline, which
+        # would otherwise put a line break inside a JSON string in the manifest.
+        "copyright": [" ".join(part.split()) for part in notice.split("  ") if part.strip()],
     }
 
 
@@ -374,8 +493,17 @@ def main():
         print(f"  {face['file']:<14} {face['glyphs']:>5} glyphs  "
               f"ttf {face['ttfBytes']//1024:>5} KB  woff2 {face['woff2Bytes']//1024:>4} KB")
 
+    # Every donor here is OFL 1.1 and each shipped face carries its own notices in its
+    # name table, which is where the licence actually asks for them. This is the
+    # human-readable roll-up, gathered from the faces rather than hardcoded, so a new
+    # donor cannot be added without appearing here.
+    notices = set()
+    for face in faces:
+        notices.update(face.pop("copyright", []))
+
     manifest = {
         "license": "SIL Open Font License 1.1",
+        "copyright": sorted(notices),
         "note": "Generated by scripts/subset_fonts.py. Do not edit.",
         "faces": faces,
     }

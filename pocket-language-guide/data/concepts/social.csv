@@ -26,7 +26,7 @@ communication.please-show-me-the-text,communication,entry,phrase,please-show-me-
 communication.i-cannot-make-out-what-you-are-saying,communication,entry,phrase,i-cannot-make-out-what-you-are-saying,1005,0.833,communication.i-cannot-make-out-what-you-are-saying,0,0,neutral,,
 communication.i-do-not-understand,communication,entry,phrase,i-do-not-understand,1006,0.833,communication.i-do-not-understand,0,0,neutral,,
 communication.i-cannot-read-it,communication,entry,phrase,i-cannot-read-it,1007,0.833,communication.i-cannot-read-it,0,0,neutral,,
-communication.please-write-it-in-roman-letters,communication,entry,phrase,please-write-it-in-roman-letters,1013,0.833,communication.please-write-it-in-roman-letters,0,0,neutral,zh-Hans;ja;ko;ar,
+communication.please-write-it-in-roman-letters,communication,entry,phrase,please-write-it-in-roman-letters,1013,0.833,communication.please-write-it-in-roman-letters,0,0,neutral,zh-Hans;ja;ko;ar;he,"Scoped to the non-Latin targets a traveller cannot sound out at all. `he` joined with the Hebrew pack. Four more belong here on the same reading and are not in it -- hi, th, ru and el -- which is the shape of the Italian-euro omission: the scope is the four packs that were ported first, not a decision about which scripts are opaque."
 quick-responses.please-go-ahead,quick-responses,ref,phrase,please-go-ahead,1,0.900,quick-responses.please-go-ahead,0,0,neutral,,
 quick-responses.yes-right,quick-responses,ref,word,yes-right,2,0.863,quick-responses.yes-right,0,0,neutral,,
 quick-responses.no-not,quick-responses,ref,word,no-not,3,0.825,quick-responses.no-not,0,0,neutral,,

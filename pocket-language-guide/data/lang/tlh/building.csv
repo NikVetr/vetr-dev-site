@@ -1,31 +1,31 @@
-concept_id,text,text_alt,ipa,literal,confidence,provenance
-building-help.i-am-lost,DaqwIj vISovbe',,ɖɑqʰwɪdʒ vɪʂovbɛʔ,I do not know my location,3,tlh-attested-v1;src=PK;ipa=okrand
-building-help.where-is-a-power-outlet,nuqDaq 'oH 'ul'e',,nuqʰɖɑqʰ ʔox ʔulʔɛʔ,where is the electricity?,1,tlh-composed-v1;lex=KGT + TKD p.170;grammar=TKD;ipa=okrand
-accessibility.elevator,tut Duj tu'lu''a',,tʰutʰ ɖudʒ tʰuʔluʔʔɑʔ,is there an elevator?,1,tlh-composed-v1;lex=qep'a' 25 (2018) + CK;grammar=TKD;ipa=okrand
-accessibility.need-to-sit-down,jIba'nIS,,dʒɪbɑʔnɪʂ,I need to sit,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
-accessibility.help-me-carry,HIboQ,,xɪboqx,assist me,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
-accessibility.speak-louder,yIjach,,jɪdʒɑtʃ,shout!,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
-in-a-building.is-this-the-correct-entrance,lugh'a' lojmItvam,,luɣʔɑʔ lodʒmɪtʰvɑm,is this door right?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
-in-a-building.which-floor,'ar patlh,,ʔɑr pʰɑtɬ,which level?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
-toilets.where-toilet,nuqDaq 'oH puchpa''e',,nuqʰɖɑqʰ ʔox pʰutʃpʰɑʔʔɛʔ,where is the bathroom?,3,tlh-attested-v1;src=TKD p.170;ipa=okrand
-toilets.where-public-toilet,nuqDaq 'oH puchpa''e',,nuqʰɖɑqʰ ʔox pʰutʃpʰɑʔʔɛʔ,where is the bathroom?,3,tlh-attested-v1;src=TKD p.170;ipa=okrand
-toilets.may-i-use-the-toilet,puch vIlo'laH'a',,pʰutʃ vɪloʔlɑxʔɑʔ,can I use the toilet?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
-toilets.toilet-wc,puch,,pʰutʃ,,3,tlh-attested-v1;src=TKD;ipa=okrand
-toilets.is-it-free,tlhab'a',,tɬɑbʔɑʔ,is it free?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
-toilets.it-is-urgent,pav,,pʰɑv,it is urgent,3,tlh-attested-v1;src=TKD;ipa=okrand
-toilets.toilet-paper,nav,,nɑv,paper,3,tlh-attested-v1;src=TKD;ipa=okrand
-toilets.it-is-out-of-order,QapHa',,qxɑpʰxɑʔ,it malfunctions,1,tlh-composed-v1;lex=KGT + TKD 4.3;grammar=TKD;ipa=okrand
-toilets.out-of-order,QapHa',,qxɑpʰxɑʔ,it malfunctions,1,tlh-composed-v1;lex=KGT + TKD 4.3;grammar=TKD;ipa=okrand
-toilets.mens-toilet,loD,,loɖ,male / man,3,tlh-attested-v1;src=TKD;ipa=okrand
-toilets.womens-toilet,be',,bɛʔ,female / woman,3,tlh-attested-v1;src=TKD;ipa=okrand
-toilets.drinking-water,bIQ,,bɪqx,water,3,tlh-attested-v1;src=TKD;ipa=okrand
-toilets.accessible-toilet,puchpa',,pʰutʃpʰɑʔ,washroom / bathroom,3,tlh-attested-v1;src=TKD;ipa=okrand
-toilets.where-can-i-wash-my-hands,nuqDaq ghopDu'wIj vISay'moHlaH,,nuqʰɖɑqʰ ɣopʰɖuʔwɪdʒ vɪʂɑjʔmoxlɑx,where can I clean my hands?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
-building-words.elevator,tut Duj,,tʰutʰ ɖudʒ,,3,tlh-attested-v1;src=qep'a' 25 (2018);ipa=okrand
-building-words.stairs,ngep'oS,,ŋɛpʰʔoʂ,,3,tlh-attested-v1;src=KGT;ipa=okrand
-building-words.entrance,lojmIt,,lodʒmɪtʰ,door / gate,3,tlh-attested-v1;src=TKD;ipa=okrand
-building-words.exit,'elHa'meH lojmIt,,ʔɛlxɑʔmɛx lodʒmɪtʰ,the door for going out,1,tlh-composed-v1;lex=Saarbruecken qepHom'a' 2023 + TKD;grammar=TKD;ipa=okrand
-building-words.men,loD,,loɖ,,3,tlh-attested-v1;src=TKD;ipa=okrand
-building-words.women,be',,bɛʔ,,3,tlh-attested-v1;src=TKD;ipa=okrand
-building-words.door,lojmIt,,lodʒmɪtʰ,door / gate,3,tlh-attested-v1;src=TKD;ipa=okrand
-building-words.key,ngaQHa'moHwI',,ŋɑqxxɑʔmoxwɪʔ,,3,tlh-attested-v1;src=TNK;ipa=okrand
+concept_id,text,text_alt,romanization_okrand,ipa,literal,confidence,provenance
+building-help.i-am-lost, ,,DaqwIj vISovbe',ɖɑqʰwɪdʒ vɪʂovbɛʔ,I do not know my location,3,tlh-attested-v1;src=PK;native=piqad-csur;ipa=okrand
+building-help.where-is-a-power-outlet,  ,,nuqDaq 'oH 'ul'e',nuqʰɖɑqʰ ʔox ʔulʔɛʔ,where is the electricity?,1,tlh-composed-v1;lex=KGT + TKD p.170;grammar=TKD;native=piqad-csur;ipa=okrand
+accessibility.elevator,  ,,tut Duj tu'lu''a',tʰutʰ ɖudʒ tʰuʔluʔʔɑʔ,is there an elevator?,1,tlh-composed-v1;lex=qep'a' 25 (2018) + CK;grammar=TKD;native=piqad-csur;ipa=okrand
+accessibility.need-to-sit-down,,,jIba'nIS,dʒɪbɑʔnɪʂ,I need to sit,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+accessibility.help-me-carry,,,HIboQ,xɪboqx,assist me,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+accessibility.speak-louder,,,yIjach,jɪdʒɑtʃ,shout!,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+in-a-building.is-this-the-correct-entrance, ,,lugh'a' lojmItvam,luɣʔɑʔ lodʒmɪtʰvɑm,is this door right?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+in-a-building.which-floor, ,,'ar patlh,ʔɑr pʰɑtɬ,which level?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+toilets.where-toilet,  ,,nuqDaq 'oH puchpa''e',nuqʰɖɑqʰ ʔox pʰutʃpʰɑʔʔɛʔ,where is the bathroom?,3,tlh-attested-v1;src=TKD p.170;native=piqad-csur;ipa=okrand
+toilets.where-public-toilet,  ,,nuqDaq 'oH puchpa''e',nuqʰɖɑqʰ ʔox pʰutʃpʰɑʔʔɛʔ,where is the bathroom?,3,tlh-attested-v1;src=TKD p.170;native=piqad-csur;ipa=okrand
+toilets.may-i-use-the-toilet, ,,puch vIlo'laH'a',pʰutʃ vɪloʔlɑxʔɑʔ,can I use the toilet?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+toilets.toilet-wc,,,puch,pʰutʃ,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+toilets.is-it-free,,,tlhab'a',tɬɑbʔɑʔ,is it free?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+toilets.it-is-urgent,,,pav,pʰɑv,it is urgent,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+toilets.toilet-paper,,,nav,nɑv,paper,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+toilets.it-is-out-of-order,,,QapHa',qxɑpʰxɑʔ,it malfunctions,1,tlh-composed-v1;lex=KGT + TKD 4.3;grammar=TKD;native=piqad-csur;ipa=okrand
+toilets.out-of-order,,,QapHa',qxɑpʰxɑʔ,it malfunctions,1,tlh-composed-v1;lex=KGT + TKD 4.3;grammar=TKD;native=piqad-csur;ipa=okrand
+toilets.mens-toilet,,,loD,loɖ,male / man,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+toilets.womens-toilet,,,be',bɛʔ,female / woman,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+toilets.drinking-water,,,bIQ,bɪqx,water,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+toilets.accessible-toilet,,,puchpa',pʰutʃpʰɑʔ,washroom / bathroom,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+toilets.where-can-i-wash-my-hands,  ,,nuqDaq ghopDu'wIj vISay'moHlaH,nuqʰɖɑqʰ ɣopʰɖuʔwɪdʒ vɪʂɑjʔmoxlɑx,where can I clean my hands?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+building-words.elevator, ,,tut Duj,tʰutʰ ɖudʒ,,3,tlh-attested-v1;src=qep'a' 25 (2018);native=piqad-csur;ipa=okrand
+building-words.stairs,,,ngep'oS,ŋɛpʰʔoʂ,,3,tlh-attested-v1;src=KGT;native=piqad-csur;ipa=okrand
+building-words.entrance,,,lojmIt,lodʒmɪtʰ,door / gate,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+building-words.exit, ,,'elHa'meH lojmIt,ʔɛlxɑʔmɛx lodʒmɪtʰ,the door for going out,1,tlh-composed-v1;lex=Saarbruecken qepHom'a' 2023 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+building-words.men,,,loD,loɖ,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+building-words.women,,,be',bɛʔ,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+building-words.door,,,lojmIt,lodʒmɪtʰ,door / gate,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+building-words.key,,,ngaQHa'moHwI',ŋɑqxxɑʔmoxwɪʔ,,3,tlh-attested-v1;src=TNK;native=piqad-csur;ipa=okrand

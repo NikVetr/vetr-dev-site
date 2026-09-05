@@ -114,3 +114,5 @@ common-signs.stopped-stop,стоп,остановитесь,stop,stˈop,,2,ru-ag
 transit-rides.do-i-need-to-validate,Нужно приложить билет к валидатору?,Билет нужно компостировать?,Nuzhno prilozhitʼ bilet k validatoru?,nˈuʒnʌ prʲiɭʌʒˈɨtʲ bʲiɭʲˈet kˈɑ vʌɭʲidˈɑtʌru,,2,ru-agent-v1;ipa=espeak
 rail-station-words.ticket-validator,валидатор,компостер,validator,vʌɭʲidˈɑtʌr,,2,ru-agent-v1;ipa=espeak
 rail-station-words.maglev,маглев,поезд на магнитной подушке,,mˈɑɡɭʲif,,1,reader-gloss-v1;ipa=espeak
+common-signs.pork-code,коды свинины,,kody svininy,kˈodɨ svʲinʲˈinɨ,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
+rail-station-words.fare,стоимость проезда,проезд,stoimostʼ proyezda,stˈoimʌstʲ prʌjˈezda,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak

@@ -25,6 +25,15 @@ There is no per-pair file to write and none to keep in sync.
    language with no rows never offers a button that would produce an empty sheet.
 4. Run `npm run validate`, then `npm run prerender` if the language is complete.
 
+**Two packs run backwards, and if you are editing them you have to know which
+column to write.** Klingon and Quenya are published only in a romanisation --
+Okrand's Latin transcription and Tolkien's -- so for `tlh` and `qya` the
+*attested* cell is `romanization_okrand` / `romanization_appendix-e` and `text`
+is derived from it by `scripts/transliterate_native.py`, which writes the pIqaD
+or tengwar form. Write the romanised cell, run `npm run native`, and leave `text`
+alone; `npm run check` fails if the two disagree. `data/registry/language-names.csv`
+works the same way for rows whose *locale* is one of those two.
+
 ## Safety-critical content
 
 `emergency-medical`, `lost-rescue` and `dietary-needs` require
@@ -55,6 +64,12 @@ dot instead; and a Swahili respelling may hyphenate but never lead with one. So 
 separator is a `policy` field of the reading language's rule table
 (`data/respell/rules/<source>__<accent>.json`), and a curated sheet should use
 whatever that language's own table declares.
+
+Hebrew is the counter-example to the Arabic rule and shows what the reason was doing:
+it is the other right-to-left script here and it **takes the hyphen**, because it is
+not cursive, has no joining forms and loses nothing to a break -- and because Israeli
+teaching material divides syllables with exactly this hyphen. Direction was never the
+question; the join was.
 
 ## Writing a rule table
 
@@ -160,6 +175,18 @@ what `stress: 'acute'` was for Russian until the Cyrillic vowels were added, and
 Greek until the Greek ones were. The Greek case is the sharpest reason to look: the
 tonos is not one device among several there, it is the orthography, and an unaccented
 Greek polysyllable is not a possible word.
+
+**Hebrew is the case those two patterns do not cover, and it is worth reading before
+you assume a diacritic device is available.** Its vowels are not letters at all --
+they are marks *under* the consonant -- so no entry in `VOWEL_LETTERS` could make
+`acute` fire, and both the slot above the letter and the slot below it are already
+occupied by the vowel itself. `prime` works mechanically and collides: U+02B9 is
+indistinguishable at 5pt from the geresh, which the Hebrew table uses on five letters
+to mean *this is a foreign consonant*. So `he` takes `stress: none`, and the only
+device it could have had -- the meteg U+05BD, which is Hebrew's own dictionary mark
+for stress -- is not in `STRESS_DEVICE` because it would be a device in shared code
+for one reader whose general audience does not decode it. A script whose vowels are
+diacritics should expect to reach the same place.
 
 **A digraph orthography can be told the wrong sound by a correct-looking spelling.**
 Greek `αι` is /e/ and `ει` `οι` are /i/, so spelling /aɪ/ as `αι` prints the opposite

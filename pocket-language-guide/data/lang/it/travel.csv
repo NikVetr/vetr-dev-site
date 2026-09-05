@@ -114,3 +114,5 @@ directions.west,ovest,,ˈɔvest,,2,it-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Devo convalidare il biglietto?,Devo obliterare il biglietto?,dˈɛvo konvalidˈare il biʎˈetto,,2,it-agent-v1;ipa=espeak
 rail-station-words.ticket-validator,obliteratrice,validatrice,obliteratrˈitʃe,,2,it-agent-v1;ipa=espeak
 rail-station-words.maglev,maglev,treno a levitazione magnetica,mˈaɡlev,,1,reader-gloss-v1;ipa=espeak
+common-signs.pork-code,codici del maiale,,kˈɔditʃɪ del majˈale,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
+rail-station-words.fare,tariffa,prezzo del biglietto,tarˈiffa,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak

@@ -114,3 +114,5 @@ common-signs.stopped-stop,leállt,,lˈɛaːlt,,2,hu-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Kell érvényesíteni ezt a jegyet?,,kˈɛll ˈeːrveːɲɛʃiːtɛni ˈɛst ˈɑ jˈɛɟɛt,Hungary fines an unvalidated ticket,2,hu-agent-v1;ipa=espeak
 rail-station-words.ticket-validator,jegykezelő,,jˈɛɟkɛzɛløː,,2,hu-agent-v1;ipa=espeak
 rail-station-words.maglev,mágnesvasút,maglev,mˈaːɡnɛʃvɑʃuːt,,1,reader-gloss-v1;ipa=espeak
+common-signs.pork-code,sertéshús-kódok,,ʃˈɛrteːʃhuːʃkoːdok,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
+rail-station-words.fare,viteldíj,,vˈitɛldiːj,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak

@@ -1,0 +1,15 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+slang.thats-good,נחמד,נֶחְמָד,neẖmad,nexmˈad,nice,2,he-agent-v1;ipa=bgn
+slang.thats-great,סבבה!,סַבַּבָּה!,sabába!,sabˈaba,"great! -- from Arabic, entirely ordinary Hebrew now",2,he-agent-v1;ipa=bgn
+slang.i-love-it,אני מת על זה,אֲנִי מֵת עַל זֶה,ani met ‘al ze,anˈi mˈet ˈal zˈe,I am dying over it,2,he-agent-v1;ipa=bgn
+slang.thats-bad,לא קשה,לֹא קָשֶׁה,lo qashe,lˈo kaʃˈe,"not hard -- a hedge, meaning unimpressive",2,he-agent-v1;ipa=bgn
+slang.delicious,סחטן!,סַחְטֵן!,saẖten!,saxtˈen,"praise for food, from Arabic saẖtein",2,he-agent-v1;ipa=bgn
+slang.thats-pricey,זה מלחיץ,זֶה מַלְחִיץ,ze malẖits,zˈe malxˈits,that is stressful -- said of a price,2,he-agent-v1;ipa=bgn
+slang.exactly,בדיוק!,בְּדִיּוּק!,bediyuq!,bedijˈuk,exactly!,2,he-agent-v1;ipa=bgn
+slang.no-worries,סמוך עלי,סְמוֹךְ עָלַי,semokh ‘alay,semˈox ˈalaj,count on me -- to a woman smokhi,2,he-agent-v1;ipa=bgn
+slang.youre-welcome,בכיף!,בְּכֵיף!,bekheyf!,bˈexejf,with pleasure!,2,he-agent-v1;ipa=bgn
+slang.seriously,חי בקופסה?,חַי בְּקוּפְסָה?,ẖay bequfsa?,xaj bekufsˈa,living in a box? -- said to news you disbelieve,2,he-agent-v1;ipa=bgn
+slang.im-good-thanks,"לא, תודה, אני בסדר","לֹא, תּוֹדָה, אֲנִי בְּסֵדֶר","lo, toda, ani beséder","lˈo, todˈa, anˈi besˈedeʁ","no thanks, I am fine",2,he-agent-v1;ipa=bgn
+slang.lets-go,"יאללה, נזוז!","יַאלְלָה, נִזּוּז!","yálla, nizuz!","jˈalla, nizˈuz","come on, let us move",2,he-agent-v1;ipa=bgn
+slang.cheers,לחיים!,לְחַיִּים!,leẖáyim!,lexˈajim,to life!,2,he-agent-v1;ipa=bgn
+slang.see-you,נתראה!,נִתְרָאֶה!,nitra’e!,nitʁaˈe,we shall see each other,2,he-agent-v1;ipa=bgn

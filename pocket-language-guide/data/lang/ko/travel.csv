@@ -114,3 +114,5 @@ common-signs.stopped-stop,정지,,jeongji,tɕʌŋdʑi,,2,ko-agent-v1;ipa=rr
 transit-rides.do-i-need-to-validate,이 표 개찰해야 해요?,,i pyo gaechalhaeya haeyo?,i pʰjo kɛtɕʰalhɛja hɛjo,,2,ko-agent-v1;ipa=rr
 rail-station-words.ticket-validator,개찰기,검표기,gaechalgi,kɛtɕʰalɡi,,2,ko-agent-v1;ipa=rr
 rail-station-words.maglev,자기부상열차,,jagibusangyeolcha,tɕaɡibusaŋjʌltɕʰa,,1,reader-gloss-v1;roman=generated;ipa=rr
+common-signs.pork-code,돼지고기 은어,,dwaejigogi euneo,twɛdʑiɡoɡi ɯnʌ,,2,pork-code-agent-v1;lppom-mui;ipa=rr
+rail-station-words.fare,요금,,yogeum,joɡɯm,,2,fare-agent-v1;in-pack-neighbour;ipa=rr

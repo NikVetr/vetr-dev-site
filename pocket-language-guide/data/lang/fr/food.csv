@@ -27,3 +27,4 @@ food-ordering.water-please,"De l'eau, s'il vous plaît",,"də lˈo, sil vu plˈ�
 food-ordering.can-a-vegetarian-eat-this,Un végétarien peut-il manger ça ?,,œ̃ veʒetaʁjɛ̃ pøtil mɑ̃ʒe sˈa,,2,fr-agent-v1;ipa=espeak
 dietary-needs.no-pork,Sans porc ni lardons,sans porc ni charcuterie,sɑ̃ pɔʁk ni laʁdˈɔ̃,lardons = bacon bits,2,fr-gaps-v1;ipa=espeak
 dietary-needs.is-this-halal,C'est halal ?,C'est certifié halal ?,sɛ alˈal,ask who certifies it,2,fr-gaps-v1;ipa=espeak
+dietary-needs.does-it-contain-pork-fat,Y a-t-il du saindoux ou des lardons ?,graisse de porc,i atil dy sɛ̃du u de laʁdˈɔ̃,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak

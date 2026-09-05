@@ -70,8 +70,9 @@ because the frame never sees the name it is filling in:
 | German | 7 ungrammatical; ICU returns bare nominatives, German wants article + case |
 | Turkish | five surface forms of the locative suffix, two names not decidable at all |
 | Russian | prepositional case on a name supplied in the nominative |
+| Hebrew | **the exception.** `ב{region}:` is right for all 54 regions, because Hebrew's preposition is one letter whose vowel is not written -- the agreement that defeats every language above simply does not surface -- and ICU's Hebrew names carry no definite article |
 
-Most took apposition. Two found something better and you may be able to as well:
+Most took apposition. **One language can just use a preposition, and it is worth knowing why before you copy it:** Hebrew, where the preposition is the single letter `ב` and its vowel is not written at all, so nothing has to agree with the name the frame never sees. If your script writes its vowels, that escape is not available to you. Two more found something better and you may be able to as well:
 Turkish `{region} için:`, a **postposition governing the bare nominative**, and Hindi
 `{region} में:`, which works because Hindi does not oblique-mark proper nouns.
 Vietnamese `Tại {region}:` needs no agreement either. Spanish kept `En {region}:`

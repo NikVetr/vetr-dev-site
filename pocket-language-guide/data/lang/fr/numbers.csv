@@ -68,6 +68,17 @@ numbers-money.rupiah-symbol,roupie (symbole),,ʁupi sɛ̃bˈɔl,,2,reader-gloss-
 numbers-money.shilling,shilling,,ʃˈɪlɪŋ,,2,reader-gloss-v1;ipa=espeak
 numbers-money.shilling-symbol,shilling (symbole),,ʃɪlɪŋ sɛ̃bˈɔl,,2,reader-gloss-v1;ipa=espeak
 numbers-money.dollar,dollar,,dɔlˈaʁ,,2,reader-gloss-v1;ipa=espeak
-numbers-money.dollar-symbol,dollar (symbole),,dɔlaʁ sɛ̃bˈɔl,,2,reader-gloss-v1;ipa=espeak
+numbers-money.dollar-symbol,$,dollar,,,2,currency-agent-v1;boc
 numbers-money.pound,livre,,lˈivʁ,,2,reader-gloss-v1;ipa=espeak
 numbers-money.pound-symbol,livre (symbole),,livʁ sɛ̃bˈɔl,,2,reader-gloss-v1;ipa=espeak
+numbers-money.franc,franc,franc CFA,fʁˈɑ̃,CH · SN/CI,2,currency-agent-v1;snb-bceao;ipa=espeak
+numbers-money.franc-symbol,CHF · F CFA,Fr.,seaʃɛf ɛf kfˈa,CH · SN/CI,2,currency-agent-v1;snb-bceao;ipa=espeak
+numbers-money.peso,peso,,pəzˈo,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.peso-symbol,peso (symbole),,pəzo sɛ̃bˈɔl,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.real,réal,,ʁeˈal,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.real-symbol,réal (symbole),,ʁeal sɛ̃bˈɔl,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.local-currency,monnaie locale,,mɔnɛ lokˈal,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.lakh,cent mille,,sɑ̃ mˈil,,2,lakh-crore-agent-v1;cldr;ipa=espeak
+numbers-money.crore,dix millions,,di miljˈɔ̃,,2,lakh-crore-agent-v1;cldr;ipa=espeak
+numbers-money.shekel,shekel,,ʃəkˈɛl,,2,shekel-gloss-v1;cldr;ipa=espeak
+numbers-money.shekel-symbol,shekel (symbole),,ʃəkɛl sɛ̃bˈɔl,,2,shekel-gloss-v1;cldr;ipa=espeak

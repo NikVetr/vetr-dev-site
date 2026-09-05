@@ -138,3 +138,4 @@ police-consulate.may-i-have-a-copy-of-the-report,Можно копию заяв�
 police-consulate.i-will-not-sign-anything-i-cannot-read,"Не подпишу то, что не могу прочитать.",,"Ne podpishu to, chto ne mogu prochitatʼ.","nʲe pʌtpʲiʃˈu tˈo, ʃto nʲe mʌɡˌu prʌtʃʲitˈɑtʲ",,2,ru-agent-v1;ipa=espeak
 police-consulate.am-i-free-to-go,Я могу идти?,,Ya mogu idti?,ˈja mʌɡˌu ɪtʲtʲˈi,,2,ru-agent-v1;ipa=espeak
 police-consulate.i-do-not-want-to-go-with-you,Я не хочу идти с вами.,,Ya ne khochu idti s vami.,ˈja nʲe xʌtʃʲˈu ɪtʲtʲˈi s vˈɑmʲɪ,,2,ru-agent-v1;ipa=espeak
+pharmacy-symptoms.i-think-i-have-dengue,"Кажется, у меня лихорадка денге.",,"Kazhetsya, u menya likhoradka denge.","kˈɑʒɨtsʌ, ˈu mʲinʲˈɑ ɭʲixʌrˈɑdka dʲˈenɡʲi",,2,dengue-agent-v1;in-pack-frame;ipa=espeak

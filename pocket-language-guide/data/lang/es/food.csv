@@ -27,3 +27,4 @@ food-ordering.water-please,"Agua, por favor",,"ˈaɡwa, poɾ fabˈoɾ",,2,es-age
 food-ordering.can-a-vegetarian-eat-this,¿Un vegetariano puede comer esto?,,ˈum bˌexetaɾjˈano pwˈede komˈeɾ ˈesto,,2,es-agent-v1;ipa=espeak
 dietary-needs.no-pork,Sin cerdo ni jamón ni embutidos,Sin chancho ni puerco,sin sˈeɾdo nˈi xamˈon nˈi ˌembutˈidos,also no lard or broth,2,es-gaps-v1;ipa=espeak
 dietary-needs.is-this-halal,¿Esto es halal?,¿Tiene certificación halal?,ˈesto ˈes alˈal,,2,es-gaps-v1;ipa=espeak
+dietary-needs.does-it-contain-pork-fat,¿Lleva manteca de cerdo?,¿Lleva grasa de cerdo?,ʝˈeba mantˈeka de sˈeɾdo,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak

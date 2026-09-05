@@ -114,3 +114,5 @@ common-signs.stopped-stop,रुकिए,रुका हुआ,rukie,ɾˈʊkɪ
 transit-rides.do-i-need-to-validate,क्या टिकट पंच कराना पड़ेगा?,,kyā ṭikaṭ paṁc karānā paṛegā?,kːjaː ʈˈɪkəʈ pˈʌɲc kəɾˈaːnaː pəɽˈeːɡaː,must it be punched,1,hi-agent-v1;ipa=espeak
 rail-station-words.ticket-validator,टिकट पंच मशीन,,ṭikaṭ paṁc maśīn,ʈˈɪkəʈ pˈʌɲc məʃˈiːn,punching machine,1,hi-agent-v1;ipa=espeak
 rail-station-words.maglev,मैग्लेव,चुंबकीय रेल,,mˈɛːɡleːʋ,,1,reader-gloss-v1;ipa=espeak
+common-signs.pork-code,सूअर के कोड,,sūar ke koḍ,sˈuːəɾ keː kˈoːɖ,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
+rail-station-words.fare,किराया,,kirāyā,kɪɾˈaːjaː,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak

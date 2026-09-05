@@ -18,5 +18,6 @@ vi,Tiếng Việt,Vietnamese,Latn,,,vi-VN,Ệ,ready,VN,Tôi nói
 it,Italiano,Italian,Latn,,,it-IT,Èù,ready,IT;CH;SM,Parlo
 el,Ελληνικά,Greek,Grek,,elot,el-GR,Αω,ready,GR;CY,Μιλάω
 hu,Magyar,Hungarian,Latn,,,hu-HU,Őű,ready,HU,Nyelvem
-tlh,tlhIngan Hol,Klingon,Latn,,,tlh-TA,qQ,ready,,jIjatlh
-qya,Quenya,Quenya,Latn,,,qya-EX,áë,ready,,quetin
+tlh,tlhIngan Hol,Klingon,Piqd,,okrand,tlh-TA,,ready,,jIjatlh
+qya,Quenya,Quenya,Teng,,appendix-e,qya-EX,,ready,,quetin
+he,עברית,Hebrew,Hebr,,bgn,he-IL,אב,ready,IL,השפה שלי

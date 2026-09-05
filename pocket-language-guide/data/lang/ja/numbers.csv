@@ -71,3 +71,14 @@ numbers-money.dollar,ドル,,doru,doɾɯ,,2,reader-gloss-v1;roman=generated;ipa=
 numbers-money.dollar-symbol,ドル記号,,doru kigō,doɾɯ kiɡoː,,2,reader-gloss-v1;roman=generated;ipa=hepburn
 numbers-money.pound,ポンド,,pondo,poɴdo,,2,reader-gloss-v1;roman=generated;ipa=hepburn
 numbers-money.pound-symbol,ポンド記号,,pondo kigō,poɴdo kiɡoː,,2,reader-gloss-v1;roman=generated;ipa=hepburn
+numbers-money.franc,フラン,,furan,ɸɯɾaɴ,,2,currency-agent-v1;cldr;ipa=hepburn
+numbers-money.franc-symbol,フラン記号,,furan kigō,ɸɯɾaɴ kiɡoː,,2,currency-agent-v1;cldr;ipa=hepburn
+numbers-money.peso,ペソ,,peso,peso,,2,currency-agent-v1;cldr;ipa=hepburn
+numbers-money.peso-symbol,ペソ記号,,peso kigō,peso kiɡoː,,2,currency-agent-v1;cldr;ipa=hepburn
+numbers-money.real,レアル,,rearu,ɾeaɾɯ,,2,currency-agent-v1;cldr;ipa=hepburn
+numbers-money.real-symbol,レアル記号,,rearu kigō,ɾeaɾɯ kiɡoː,,2,currency-agent-v1;cldr;ipa=hepburn
+numbers-money.local-currency,現地通貨,,genchi tsūka,ɡeɴtɕi tsɯːka,,2,currency-agent-v1;cldr;ipa=hepburn
+numbers-money.lakh,十万,,jūman,dʑɯːmaɴ,,2,lakh-crore-agent-v1;cldr;ipa=hepburn
+numbers-money.crore,一千万,,issenman,isseɴmaɴ,,2,lakh-crore-agent-v1;cldr;ipa=hepburn
+numbers-money.shekel,シェケル,,shekeru,ɕekeɾɯ,,2,shekel-gloss-v1;cldr;roman=generated;ipa=hepburn
+numbers-money.shekel-symbol,シェケル記号,,shekeru kigō,ɕekeɾɯ kiɡoː,,2,shekel-gloss-v1;cldr;roman=generated;ipa=hepburn

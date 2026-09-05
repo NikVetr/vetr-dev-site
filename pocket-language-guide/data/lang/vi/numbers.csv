@@ -71,3 +71,14 @@ numbers-money.yu-n,nhân dân tệ,,ɲən˧ zən˧ t̪e˨˩ˀ,,2,reader-gloss-v1
 numbers-money.ku-i,nhân dân tệ (nói),,ɲən˧ zən˧ t̪e˨˩ˀ nɔj˧˥,,1,reader-gloss-v1;ipa=espeak
 numbers-money.li-ng,2 + lượng từ,,haːɪ˧ lyə̯ŋ˨˩ˀ t̪y˨˩,,1,reader-gloss-v1;ipa=espeak
 numbers-money.2-items,2 cái,,haːɪ˧ kaːj˧˥,,1,reader-gloss-v1;ipa=espeak
+numbers-money.franc,franc,,fɹaŋk˧,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.franc-symbol,franc (ký hiệu),,fɹaŋk˧ ki˧˥ hiɛ̯w˨˩ˀ,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.peso,peso,,peɪsəʊ˧,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.peso-symbol,peso (ký hiệu),,peɪsəʊ˧ ki˧˥ hiɛ̯w˨˩ˀ,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.real,real,,ɹiə̯l˧,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.real-symbol,real (ký hiệu),,ɹiə̯l˧ ki˧˥ hiɛ̯w˨˩ˀ,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.local-currency,nội tệ,,noj˨˩ˀ t̪e˨˩ˀ,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.lakh,một trăm nghìn,một trăm ngàn,mot̪˨˩ˀ tʃam˧ ŋin˨˩,,2,lakh-crore-agent-v1;cldr;ipa=espeak
+numbers-money.crore,mười triệu,,myə̯j˨˩ tʃiɛ̯w˨˩ˀ,,2,lakh-crore-agent-v1;cldr;ipa=espeak
+numbers-money.shekel,shekel,,ʃɛkəl˧,,2,shekel-gloss-v1;cldr;ipa=espeak
+numbers-money.shekel-symbol,shekel (ký hiệu),,ʃɛkəl˧ ki˧˥ hiɛ̯w˨˩ˀ,,2,shekel-gloss-v1;cldr;ipa=espeak

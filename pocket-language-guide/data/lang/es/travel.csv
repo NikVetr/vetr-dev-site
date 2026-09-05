@@ -114,3 +114,5 @@ common-signs.closed,Cerrado,,serˈado,,2,es-agent-v1;ipa=espeak
 common-signs.stopped-stop,Detenido,Fuera de servicio,dˌetenˈido,,2,es-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,¿Tengo que validar este boleto?,este billete,tˈeŋɡo ke bˌalidˈaɾ ˈeste bolˈeto,,2,es-agent-v1;ipa=espeak
 rail-station-words.ticket-validator,validadora,canceladora · validador,bˌalidadˈoɾa,,2,es-agent-v1;ipa=espeak
+common-signs.pork-code,códigos de cerdo,,kˈodiɡos de sˈeɾdo,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
+rail-station-words.fare,tarifa,pasaje,taɾˈifa,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak

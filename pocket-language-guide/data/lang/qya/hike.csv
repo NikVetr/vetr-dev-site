@@ -1,33 +1,33 @@
-concept_id,text,text_alt,ipa,literal,confidence,provenance
-trail-words.trail,tië,,tˈie,path / road / way,3,qya-attested-v1;src=LotR/0377.3803;eldamo=q;ipa=appendix-e
-trail-words.trailhead,tië yesta,,tˈie jˈesta,the beginning of the path,1,qya-composed-v1;lex=LotR/0377.3803 + PE17/120.2302;grammar=PE22;ipa=appendix-e
-trail-words.summit,ingor,,ˈiŋɡor,summit of a mountain,3,qya-attested-v1;src=PM/340.3006;eldamo=q;ipa=appendix-e
-trail-words.up-uphill,or,,or,above,3,qya-attested-v1;src=UT/305.1605;eldamo=q;ipa=appendix-e
-trail-words.down-downhill,nu,,nu,under / beneath,3,qya-attested-v1;src=LotR/0377.3301;eldamo=q;ipa=appendix-e
-weather.will-it-rain,uluva,,ˈuluva,it will rain,1,qya-composed-v1;lex=PE22/167.2806;grammar=PE22;ipa=appendix-e
-weather.is-it-safe-today,raxë ëa síra,,rˈakse ˈea sˈiːra,is there danger today?,1,qya-composed-v1;lex=VT44/09.2401 + VT43/18.0702;grammar=PE22;ipa=appendix-e
-weather.rain,ulo,rossë,ˈulo,,3,qya-attested-v1;src=PE22/167.2714;eldamo=q;ipa=appendix-e
-weather.snow,hrissë,,rˈisse,fall of snow,3,qya-attested-v1;src=PE17/168.1904;eldamo=q;ipa=appendix-e
-weather.wind,súrë,váva,sˈuːre,,3,qya-attested-v1;src=LotR/0377.2805;eldamo=q;ipa=appendix-e
-weather.storm,raumo,,rˈawmo,the noise of a storm,3,qya-attested-v1;src=MC/222.1801;eldamo=q;ipa=appendix-e
-weather.ice,nixë,helca,nˈikse,frost / ice-flake; helca is the adjective icy,3,qya-attested-v1;src=WJ/417.0801;eldamo=q;ipa=appendix-e
-weather.fog,hísië,,hˈiːsie,mist / mistiness,3,qya-attested-v1;src=LotR/0377.4006;eldamo=q;ipa=appendix-e
-weather.heat,úrë,,ˈuːre,heat,3,qya-attested-v1;src=LotR/1123.0507;eldamo=q;ipa=appendix-e
-weather.cold,ringa,niquë,rˈiŋɡa,ringa is the adjective,3,qya-attested-v1;src=MC/222.0101;eldamo=q;ipa=appendix-e
-weather.humid,nenda,,nˈenda,wet,3,qya-attested-v1;src=PE17/052.2913;eldamo=q;ipa=appendix-e
-weather.sunrise,rómen,,rˈoːmen,east / uprising / sunrise,3,qya-attested-v1;src=LotR/0377.4204;eldamo=q;ipa=appendix-e
-weather.flood,luimë,,lˈujme,flood / floodwater,3,qya-attested-v1;src=VT48/23.1501;eldamo=q;ipa=appendix-e
-weather.avalanche-risk,raxë,,rˈakse,danger,1,qya-deduced-v1;src=VT44/09.2401;eldamo=q#;ipa=appendix-e
-hiking-parks.which-route-is-easier,mana tië ancárima,,mˈana tˈie ankˈaːrima,which path is easy?,1,qya-composed-v1;lex=PE22/155.3203 + LotR/0377.3803;grammar=PE22;ipa=appendix-e
-trail-warnings.open,latina,,lˈatina,free of obstacles,3,qya-attested-v1;src=PE17/159.1304;eldamo=q;ipa=appendix-e
-trail-warnings.closed,pahta,,pˈaxta,closed / shut,3,qya-attested-v1;src=PE17/171.1108;eldamo=q;ipa=appendix-e
-trail-warnings.steep-slope,pendë,,pˈende,steep incline / hill side,3,qya-attested-v1;src=PE17/171.3508;eldamo=q;ipa=appendix-e
-trail-warnings.danger,raxë,,rˈakse,danger,1,qya-deduced-v1;src=VT44/09.2401;eldamo=q#;ipa=appendix-e
-trail-landmarks.trail-marker,tengwa,,tˈeŋɡwa,sign / token / indicator,3,qya-attested-v1;src=LotR/1117.2701;eldamo=q;ipa=appendix-e
-trail-landmarks.fork-junction,langa,,lˈaŋɡa,a thing that crosses / crossway,3,qya-attested-v1;src=PE17/065.2506;eldamo=q;ipa=appendix-e
-trail-landmarks.boardwalk-cliff-path,pendë,,pˈende,steep incline / hill side,3,qya-attested-v1;src=PE17/024.0407;eldamo=q;ipa=appendix-e
-trail-landmarks.start,yesta,,jˈesta,beginning,3,qya-attested-v1;src=VT48/08.2603;eldamo=q;ipa=appendix-e
-trail-landmarks.end,metta,,mˈetta,end / ending,3,qya-attested-v1;src=LotR/0967.3701;eldamo=q;ipa=appendix-e
-trail-landmarks.elevation,tára,,tˈaːra,lofty / tall / high,3,qya-attested-v1;src=PE17/186.1006;eldamo=q;ipa=appendix-e
-trail-landmarks.sunset,andúnë,,andˈuːne,sunset / evening,3,qya-attested-v1;src=LotR/1116.3911;eldamo=q;ipa=appendix-e
-trail-landmarks.water-point,nén,,neːn,water,3,qya-attested-v1;src=PE17/052.2911;eldamo=q;ipa=appendix-e
+concept_id,text,text_alt,romanization_appendix-e,ipa,literal,confidence,provenance
+trail-words.trail,,,tië,tˈie,path / road / way,3,qya-attested-v1;src=LotR/0377.3803;eldamo=q;native=quenya-classical;ipa=appendix-e
+trail-words.trailhead, ,,tië yesta,tˈie jˈesta,the beginning of the path,1,qya-composed-v1;lex=LotR/0377.3803 + PE17/120.2302;grammar=PE22;native=quenya-classical;ipa=appendix-e
+trail-words.summit,,,ingor,ˈiŋɡor,summit of a mountain,3,qya-attested-v1;src=PM/340.3006;eldamo=q;native=quenya-classical;ipa=appendix-e
+trail-words.up-uphill,,,or,or,above,3,qya-attested-v1;src=UT/305.1605;eldamo=q;native=quenya-classical;ipa=appendix-e
+trail-words.down-downhill,,,nu,nu,under / beneath,3,qya-attested-v1;src=LotR/0377.3301;eldamo=q;native=quenya-classical;ipa=appendix-e
+weather.will-it-rain,,,uluva,ˈuluva,it will rain,1,qya-composed-v1;lex=PE22/167.2806;grammar=PE22;native=quenya-classical;ipa=appendix-e
+weather.is-it-safe-today,  ,,raxë ëa síra,rˈakse ˈea sˈiːra,is there danger today?,1,qya-composed-v1;lex=VT44/09.2401 + VT43/18.0702;grammar=PE22;native=quenya-classical;ipa=appendix-e
+weather.rain,,rossë,ulo,ˈulo,,3,qya-attested-v1;src=PE22/167.2714;eldamo=q;native=quenya-classical;ipa=appendix-e
+weather.snow,,,hrissë,rˈisse,fall of snow,3,qya-attested-v1;src=PE17/168.1904;eldamo=q;native=quenya-classical;ipa=appendix-e
+weather.wind,,váva,súrë,sˈuːre,,3,qya-attested-v1;src=LotR/0377.2805;eldamo=q;native=quenya-classical;ipa=appendix-e
+weather.storm,,,raumo,rˈawmo,the noise of a storm,3,qya-attested-v1;src=MC/222.1801;eldamo=q;native=quenya-classical;ipa=appendix-e
+weather.ice,,helca,nixë,nˈikse,frost / ice-flake; helca is the adjective icy,3,qya-attested-v1;src=WJ/417.0801;eldamo=q;native=quenya-classical;ipa=appendix-e
+weather.fog,,,hísië,hˈiːsie,mist / mistiness,3,qya-attested-v1;src=LotR/0377.4006;eldamo=q;native=quenya-classical;ipa=appendix-e
+weather.heat,,,úrë,ˈuːre,heat,3,qya-attested-v1;src=LotR/1123.0507;eldamo=q;native=quenya-classical;ipa=appendix-e
+weather.cold,,niquë,ringa,rˈiŋɡa,ringa is the adjective,3,qya-attested-v1;src=MC/222.0101;eldamo=q;native=quenya-classical;ipa=appendix-e
+weather.humid,,,nenda,nˈenda,wet,3,qya-attested-v1;src=PE17/052.2913;eldamo=q;native=quenya-classical;ipa=appendix-e
+weather.sunrise,,,rómen,rˈoːmen,east / uprising / sunrise,3,qya-attested-v1;src=LotR/0377.4204;eldamo=q;native=quenya-classical;ipa=appendix-e
+weather.flood,,,luimë,lˈujme,flood / floodwater,3,qya-attested-v1;src=VT48/23.1501;eldamo=q;native=quenya-classical;ipa=appendix-e
+weather.avalanche-risk,,,raxë,rˈakse,danger,1,qya-deduced-v1;src=VT44/09.2401;eldamo=q#;native=quenya-classical;ipa=appendix-e
+hiking-parks.which-route-is-easier,  ,,mana tië ancárima,mˈana tˈie ankˈaːrima,which path is easy?,1,qya-composed-v1;lex=PE22/155.3203 + LotR/0377.3803;grammar=PE22;native=quenya-classical;ipa=appendix-e
+trail-warnings.open,,,latina,lˈatina,free of obstacles,3,qya-attested-v1;src=PE17/159.1304;eldamo=q;native=quenya-classical;ipa=appendix-e
+trail-warnings.closed,,,pahta,pˈaxta,closed / shut,3,qya-attested-v1;src=PE17/171.1108;eldamo=q;native=quenya-classical;ipa=appendix-e
+trail-warnings.steep-slope,,,pendë,pˈende,steep incline / hill side,3,qya-attested-v1;src=PE17/171.3508;eldamo=q;native=quenya-classical;ipa=appendix-e
+trail-warnings.danger,,,raxë,rˈakse,danger,1,qya-deduced-v1;src=VT44/09.2401;eldamo=q#;native=quenya-classical;ipa=appendix-e
+trail-landmarks.trail-marker,,,tengwa,tˈeŋɡwa,sign / token / indicator,3,qya-attested-v1;src=LotR/1117.2701;eldamo=q;native=quenya-classical;ipa=appendix-e
+trail-landmarks.fork-junction,,,langa,lˈaŋɡa,a thing that crosses / crossway,3,qya-attested-v1;src=PE17/065.2506;eldamo=q;native=quenya-classical;ipa=appendix-e
+trail-landmarks.boardwalk-cliff-path,,,pendë,pˈende,steep incline / hill side,3,qya-attested-v1;src=PE17/024.0407;eldamo=q;native=quenya-classical;ipa=appendix-e
+trail-landmarks.start,,,yesta,jˈesta,beginning,3,qya-attested-v1;src=VT48/08.2603;eldamo=q;native=quenya-classical;ipa=appendix-e
+trail-landmarks.end,,,metta,mˈetta,end / ending,3,qya-attested-v1;src=LotR/0967.3701;eldamo=q;native=quenya-classical;ipa=appendix-e
+trail-landmarks.elevation,,,tára,tˈaːra,lofty / tall / high,3,qya-attested-v1;src=PE17/186.1006;eldamo=q;native=quenya-classical;ipa=appendix-e
+trail-landmarks.sunset,,,andúnë,andˈuːne,sunset / evening,3,qya-attested-v1;src=LotR/1116.3911;eldamo=q;native=quenya-classical;ipa=appendix-e
+trail-landmarks.water-point,,,nén,neːn,water,3,qya-attested-v1;src=PE17/052.2911;eldamo=q;native=quenya-classical;ipa=appendix-e

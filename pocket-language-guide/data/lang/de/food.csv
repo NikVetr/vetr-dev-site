@@ -27,3 +27,4 @@ food-ordering.water-please,"Wasser, bitte.",,"vˈasɜ, bˈɪtə",,2,de-agent-v1;
 food-ordering.can-a-vegetarian-eat-this,Können Vegetarier das essen?,,kˌœnən vˌeːɡeːtˈɑːriːɜ das ˈɛsən,,2,de-agent-v1;ipa=espeak
 dietary-needs.no-pork,"Kein Schweinefleisch, kein Speck.","Kein Schweinefleisch, kein Speck, kein Schmalz, keine Gelatine.","kˈaɪn ʃvˈaɪnɛflˌaɪʃ, kˈaɪn ʃpˈɛk","no pork, no bacon",2,de-gaps-v1;ipa=espeak
 dietary-needs.is-this-halal,Ist das halal?,Haben Sie ein Halal-Zertifikat?,ɪst das hˈɑlɑːl,shop signs: HELAL (Turkish),2,de-gaps-v1;ipa=espeak
+dietary-needs.does-it-contain-pork-fat,Ist Schweineschmalz darin?,Ist Speck oder Schmalz darin?,ɪst ʃvˈaɪnɛʃmˌalts dɑːrˈɪn,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak

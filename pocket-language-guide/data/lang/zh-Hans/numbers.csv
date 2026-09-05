@@ -71,3 +71,14 @@ numbers-money.dollar,美元,,měiyuán,meɪ˧˩˧ɥœn˧˥,,2,reader-gloss-v1;ro
 numbers-money.dollar-symbol,美元符号,,měiyuán fúhào,meɪ˧˩˧ɥœn˧˥ fu˧˥xɑʊ˥˩,,2,reader-gloss-v1;roman=generated;ipa=pinyin
 numbers-money.pound,英镑,,yīngbàng,iŋ˥pɑŋ˥˩,,2,reader-gloss-v1;roman=generated;ipa=pinyin
 numbers-money.pound-symbol,英镑符号,,yīngbàng fúhào,iŋ˥pɑŋ˥˩ fu˧˥xɑʊ˥˩,,2,reader-gloss-v1;roman=generated;ipa=pinyin
+numbers-money.franc,法郎,,fǎláng,fa˧˩˧lɑŋ˧˥,,2,currency-agent-v1;cldr;ipa=pinyin
+numbers-money.franc-symbol,法郎符号,,fǎláng fúhào,fa˧˩˧lɑŋ˧˥ fu˧˥xɑʊ˥˩,,2,currency-agent-v1;cldr;ipa=pinyin
+numbers-money.peso,比索,,bǐsuǒ,pi˧˩˧swɔ˧˩˧,,2,currency-agent-v1;cldr;ipa=pinyin
+numbers-money.peso-symbol,比索符号,,bǐsuǒ fúhào,pi˧˩˧swɔ˧˩˧ fu˧˥xɑʊ˥˩,,2,currency-agent-v1;cldr;ipa=pinyin
+numbers-money.real,雷亚尔,,léiyà'ěr,leɪ˧˥ja˥˩ɑɻ˧˩˧,,2,currency-agent-v1;cldr;ipa=pinyin
+numbers-money.real-symbol,雷亚尔符号,,léiyà'ěr fúhào,leɪ˧˥ja˥˩ɑɻ˧˩˧ fu˧˥xɑʊ˥˩,,2,currency-agent-v1;cldr;ipa=pinyin
+numbers-money.local-currency,当地货币,,dāngdì huòbì,tɑŋ˥ti˥˩ xwɔ˥˩pi˥˩,,2,currency-agent-v1;cldr;ipa=pinyin
+numbers-money.lakh,十万,,shíwàn,ʂɨ˧˥wan˥˩,,2,lakh-crore-agent-v1;cldr;ipa=pinyin
+numbers-money.crore,一千万,,yīqiānwàn,i˥tɕʰjɛn˥wan˥˩,,2,lakh-crore-agent-v1;cldr;ipa=pinyin
+numbers-money.shekel,谢克尔,,xièkè'ěr,ɕjɛ˥˩kʰɤ˥˩ɑɻ˧˩˧,,2,shekel-gloss-v1;cldr;roman=generated;ipa=pinyin
+numbers-money.shekel-symbol,谢克尔符号,,xièkè'ěr fúhào,ɕjɛ˥˩kʰɤ˥˩ɑɻ˧˩˧ fu˧˥xɑʊ˥˩,,2,shekel-gloss-v1;cldr;roman=generated;ipa=pinyin

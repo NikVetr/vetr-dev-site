@@ -27,3 +27,4 @@ food-ordering.water-please,पानी दीजिए,,pānī dījie,pˈaːni 
 food-ordering.can-a-vegetarian-eat-this,क्या शाकाहारी यह खा सकता है?,,kyā śākāhārī yah khā saktā hai?,kːjaː ʃˌaːkaːhˈaːɾi jˌəh kʰˈaː sˈʌktˌaː hɛː,,2,hi-agent-v1;ipa=espeak
 dietary-needs.no-pork,सूअर का मांस नहीं,पोर्क नहीं,sūar kā māṁs nahīṁ,sˈuːəɾ kaː mˈãs nˈʌhĩ,no pig meat,2,hi-gaps-v1;ipa=espeak
 dietary-needs.is-this-halal,क्या यह हलाल है?,क्या हलाल सर्टिफ़िकेट है?,kyā yah halāl hai?,kːjaː jˌəh həlˈaːl hɛː,,2,hi-gaps-v1;ipa=espeak
+dietary-needs.does-it-contain-pork-fat,क्या इसमें सूअर की चर्बी है?,क्या इसमें लार्ड है?,kyā ismeṁ sūar kī carbī hai?,kːjaː ˈɪsmˌẽː sˈuːəɾ ki cˈʌɾbi hɛː,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak

@@ -1,7 +1,7 @@
-concept_id,text,text_alt,ipa,literal,confidence,provenance
-introductions.my-name-is,essenya ná {},,ˈessenja naː {},my name is,1,qya-composed-v1;lex=LotR/1123.0701;grammar=PE22;ipa=appendix-e
-introductions.nice-to-meet-you,elen síla lúmenn' omentielvo,,ˈelen sˈiːla lˈuːmenn omentiˈelvo,a star shines on the hour of our meeting,3,qya-attested-v1;src=Let/265.0107;eldamo=q;ipa=appendix-e
-introductions.what-is-your-name,mana essetya,,mˈana ˈessetja,what is your name?,1,qya-composed-v1;lex=LotR/1123.0701 + PE23/135;grammar=PE22;ipa=appendix-e
-introductions.this-is-my-friend,sina ná málonya,,sˈina naː mˈaːlonja,this is my friend,1,qya-composed-v1;lex=PE18/096.1502;grammar=PE22;ipa=appendix-e
-introductions.i-am-from,nányë {}llo,,nˈaːnje {} llo,I am from it,1,qya-composed-v1;lex=LotR/0377.4203 + PE17/074;grammar=PE22;ipa=appendix-e
-introductions.how-are-you,manen nalyë,,mˈanen nˈalje,how are you?,1,qya-composed-v1;lex=PM/395.1209 + PE17/075;grammar=PE22;ipa=appendix-e
+concept_id,text,text_alt,romanization_appendix-e,ipa,literal,confidence,provenance
+introductions.my-name-is,  {},,essenya ná {},ˈessenja naː {},my name is,1,qya-composed-v1;lex=LotR/1123.0701;grammar=PE22;native=quenya-classical;ipa=appendix-e
+introductions.nice-to-meet-you,  ' ,,elen síla lúmenn' omentielvo,ˈelen sˈiːla lˈuːmenn omentiˈelvo,a star shines on the hour of our meeting,3,qya-attested-v1;src=Let/265.0107;eldamo=q;native=quenya-classical;ipa=appendix-e
+introductions.what-is-your-name, ,,mana essetya,mˈana ˈessetja,what is your name?,1,qya-composed-v1;lex=LotR/1123.0701 + PE23/135;grammar=PE22;native=quenya-classical;ipa=appendix-e
+introductions.this-is-my-friend,  ,,sina ná málonya,sˈina naː mˈaːlonja,this is my friend,1,qya-composed-v1;lex=PE18/096.1502;grammar=PE22;native=quenya-classical;ipa=appendix-e
+introductions.i-am-from, {},,nányë {}llo,nˈaːnje {} llo,I am from it,1,qya-composed-v1;lex=LotR/0377.4203 + PE17/074;grammar=PE22;native=quenya-classical;ipa=appendix-e
+introductions.how-are-you, ,,manen nalyë,mˈanen nˈalje,how are you?,1,qya-composed-v1;lex=PM/395.1209 + PE17/075;grammar=PE22;native=quenya-classical;ipa=appendix-e

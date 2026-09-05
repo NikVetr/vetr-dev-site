@@ -155,6 +155,7 @@ record.
 | `el` | nothing sound-keyed; Babiniotis LNEG §7(δ)'s parenthetical pronunciations, ELETO Ορόγραμμα 62, el.wikipedia's Ονοματοδοσία σελίδων, the EU guide §10.5 | worked examples, not a table | — | **Invent** on those four patterns. ΕΛΟΤ 743 is the wrong direction |
 | `hu` | Magay, *Idegen nevek kiejtési szótára* (Akadémiai 1974); AkH. 12 rule 13's own brackets; the MTA's *Keleti nevek magyar helyesírása* and the Cyrillic/Modern-Greek volume; **Kontra, *Magyar Nyelvőr* 99 (1975)** | respelling in Hungarian letters | **sounds** — and Kontra's chart is keyed on **IPA** | **Borrow.** The best key of any reader here, and the only one whose author says he built it from IPA |
 | `id` `sw` | spelling-adaptation standards that say so in writing | — | — | **Invent**, cheaply — near-phonemic orthographies |
+| `he` | **כללי התעתיק מלועזית לעברית** (Academy of the Hebrew Language, approved 21 May 2007, amended 30 October 2017) | respelling in Hebrew letters | **sounds** — the rules' own founding principle | **Borrow.** The second key in the set whose authority states the method this column needs, in its own words |
 
 ## The typographic constraint that settles the stress question
 
@@ -1823,3 +1824,82 @@ before /k g/ with no letter of its own, and `ly` has been /j/ since about 1800.
 - **Whether Hungarian avoids duration as a prominence cue** is established for F0 by
   two studies and contradicted by a third (Szalontai et al. 2016); what is not in
   doubt is that stress position is fixed and length is phonemic.
+
+
+## The twentieth reader: Hebrew, and a key that states the method itself
+
+Hebrew is in the borrow tier, and its key says the thing the survey usually has to
+argue for. **כללי התעתיק מלועזית לעברית** — the Academy of the Hebrew Language's rules
+for transcribing from foreign languages, redebated in the plenum's 5764–5767 sessions,
+approved on 4 Sivan 5767 (21 May 2007) and amended in session 355 on 30 October 2017 —
+is built on one stated principle:
+
+> אין מתעתקים את השמות על פי כתיבם במקורם כי אם על פי הגייתם הנשמעת לנו
+
+*Names are not transcribed by their spelling in the source but by how they sound to
+us.* That is a sound-keyed respelling standard, published by a national academy, for
+exactly the direction this column runs. Only Korean, Hungarian and Vietnamese arrived
+with that much. Where the Academy's rules and this table differ, the four departures
+are in the table's own `deviations` block; the two that matter are recorded here
+because they are general questions rather than Hebrew ones.
+
+**The vowels have to be pointed, and the argument is the same one Arabic made.**
+Hebrew's rules are written for names in *running text*, which is unpointed, and
+unpointed Hebrew writes /a/ and /e/ with nothing at all while `י` writes both /i/ and
+/e/ and `ו` writes both /o/ and /u/. So the rules' own output cannot tell `ken` from
+`kin` — perfectly good for a name a reader already knows, useless as a pronunciation.
+The Academy permits the niqqud as an option and this table takes it, on the register
+argument the Arabic entry sets out: full pointing is the marked, pedagogical form in
+Hebrew as full vocalisation is in Arabic, so a pointed string reads unmistakably as a
+pronunciation rather than as a spelling. What Hebrew has that Arabic does not is
+**mid vowels** — segol is /e/ and holam is /o/ — so the ceiling that caps Arabic at
+three vowel qualities does not apply, and Hebrew gets five.
+
+**The hyphen: Arabic's reason does not generalise to the other right-to-left script.**
+`content/CONTRIBUTING.md`'s separator table gives Arabic no hyphen because it breaks
+the cursive join. Hebrew is not cursive, has no joining forms and loses nothing to a
+break; Israeli teaching material divides syllables with exactly this hyphen, and
+`core/measure.js` treats it as a line-break opportunity, which a column setting a
+four-syllable Russian word at 5pt needs. The maqaf U+05BE was the native alternative
+and was rejected twice: it is Hebrew's mark for *joining* two words rather than
+dividing one, and it sits at letter-top height, where at 5pt it reads as one more mark
+on the letter before it.
+
+**Stress has no device, and the reasoning is worth keeping because three candidates
+looked available.** The script is caseless, so `caps` is out. `acute` and `grave` are
+byte-identical no-ops: `VOWEL_LETTERS` in core/respell.js is a list of *letters* a
+diacritic may land on, and a Hebrew vowel is not a letter but a mark under the
+consonant — with both the slot above and the slot below already occupied. `prime`
+would work mechanically and is rejected on collision: U+02B9 is indistinguishable
+from the geresh at 5pt, and this table puts a geresh on five letters to mean *this is
+a foreign consonant*. The closest call was the **meteg** U+05BD, which is Hebrew's own
+dictionary mark for stress; it needs a new device in `core/respell.js` for one reader,
+and a general Israeli reader does not decode it. Arabic reached `stress: none` by a
+different route and the same conclusion.
+
+**What Hebrew costs the corpus: six Hangul syllables.** Every earlier language added as
+a target grew somebody's charset. Hungarian gave the Korean table 37 new syllables,
+five of them outside KS X 1001. Hebrew gives it six — 묵 욤 촛 헴 효 힛 — and gives no
+other reader anything at all, because its phoneme inventory is a subset of what the
+corpus already carried: /ʔ b v ɡ d h z x t j k l m n s p f ts ʁ ʃ/ over /a e i o u/,
+with /dʒ tʃ ʒ/ from loanwords. `respell_check he --gaps` was zero on the second draft
+and the first was ten symbols, every one of them found by running the table over the
+real column rather than by reading the format.
+
+**Sources.** [כללי התעתיק, האקדמיה ללשון העברית](https://hebrew-academy.org.il/%D7%9B%D7%9C%D7%9C%D7%99-%D7%94%D7%AA%D7%A2%D7%AA%D7%99%D7%A7/) ·
+[התעתיק מלועזית לעברית (2020 PDF)](https://hebrew-academy.org.il/wp-content/uploads/taatik-loazit-2020.pdf) ·
+[התעתיק מלועזית לעברית, ויקיפדיה](https://he.wikipedia.org/wiki/%D7%94%D7%AA%D7%A2%D7%AA%D7%99%D7%A7_%D7%9E%D7%9C%D7%95%D7%A2%D7%96%D7%99%D7%AA_%D7%9C%D7%A2%D7%91%D7%A8%D7%99%D7%AA) ·
+[BGN/PCGN 2018 Romanization of Hebrew](https://assets.publishing.service.gov.uk/media/5e4d10d886650c10ee32f51f/ROMANIZATION_OF_HEBREW.pdf),
+which is the same Academy system in the other direction and is what the pack's
+`romanization_bgn` column and its `ipa` route read.
+
+### Still unverified, carried forward
+
+- **The 2020 PDF of the transcription rules would not download** (HTTP 403 to a
+  non-browser client), so the letter table here is from the Academy's own summary
+  pages and the Hebrew Wikipedia article that reproduces it. The five letters this
+  table uses that a reader might question -- `ת׳` /θ/, `ד׳` /ð/, `נג` /ŋ/, `ט` for /t/
+  and `ק` for /k/ -- are consistent across both, but the *optional* variants the rules
+  admit (`דז׳` for /dʒ/, `טש` for /tʃ/, `ח׳` for /x/) are known only from the summary.
+- **Whether a general Israeli reader decodes a meteg as stress** is the question the
+  stress decision turns on, and it is a reviewer question rather than a search one.

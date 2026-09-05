@@ -114,3 +114,5 @@ common-signs.stopped-stop,Dừng,Ngừng,zyŋ˨˩,,2,vi-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Có cần quét vé trước không ạ?,,kɔ˧˥ kən˨˩ kwɛt̪˧˥ vɛ˧˥ tʃyə̯c˧˥ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 rail-station-words.ticket-validator,Máy soát vé,Cổng soát vé,maj˧˥ swaːt̪˧˥ vɛ˧˥,,2,vi-agent-v1;ipa=espeak
 rail-station-words.maglev,Tàu đệm từ,,t̪aw˨˩ ɗem˨˩ˀ t̪y˨˩,,1,reader-gloss-v1;ipa=espeak
+common-signs.pork-code,mã thịt lợn,,maː˧ˀ˥ tit̪˨˩ˀ ləːn˨˩ˀ,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
+rail-station-words.fare,Giá vé,,zaː˧˥ vɛ˧˥,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak

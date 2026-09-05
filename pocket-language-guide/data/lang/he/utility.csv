@@ -1,0 +1,16 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,אני רוצה להגיע אל {},אֲנִי רוֹצֶה לְהַגִּיעַ אֶל {},ani rotse lehagía‘ el {},anˈi ʁotsˈe lehaɡˈia ˈel {},I want to get to {},2,he-agent-v1;ipa=bgn
+utility-templates.please-give-me,"אפשר לקבל {}, בבקשה?","אֶפְשָׁר לְקַבֵּל {}, בְּבַקָּשָׁה?","efshar leqabel {}, bevaqasha?","efʃˈaʁ lekabˈel {}, bevakaʃˈa","may I have {}, please?",2,he-agent-v1;ipa=bgn
+utility-templates.may-i,אפשר {}?,אֶפְשָׁר {}?,efshar {}?,efʃˈaʁ {},is it possible to {}?,2,he-agent-v1;ipa=bgn
+utility-templates.please-do-not-add,"בלי {}, בבקשה","בְּלִי {}, בְּבַקָּשָׁה","beli {}, bevaqasha","belˈi {}, bevakaʃˈa","without {}, please",2,he-agent-v1;ipa=bgn
+utility-templates.do-you-have,יש {}?,יֵשׁ {}?,yesh {}?,jˈeʃ {},is there {}?,2,he-agent-v1;ipa=bgn
+utility-templates.please-write-the-number,אפשר לכתב את המספר?,אֶפְשָׁר לִכְתֹּב אֶת הַמִּסְפָּר?,efshar likhtov et hamispar?,efʃˈaʁ lixtˈov ˈet hamispˈaʁ,can the number be written?,2,he-agent-v1;ipa=bgn
+utility-templates.i-need,אני צריך {},אֲנִי צָרִיךְ {},ani tsarikh {},anˈi tsaʁˈix {},I need {} -- a woman says tsrikha,2,he-agent-v1;ipa=bgn
+utility-templates.is-there-nearby,יש {} בסביבה?,יֵשׁ {} בַּסְּבִיבָה?,yesh {} basviva?,jˈeʃ {} basvivˈa,is there {} in the vicinity?,2,he-agent-v1;ipa=bgn
+utility-templates.how-much-is,כמה עולה {}?,כַּמָּה עוֹלֶה {}?,káma ‘ole {}?,kˈama olˈe {},how much does {} cost?,2,he-agent-v1;ipa=bgn
+utility-templates.is-this,זה {}?,זֶה {}?,ze {}?,zˈe {},is this {}?,2,he-agent-v1;ipa=bgn
+utility-templates.please,"{}, בבקשה","{}, בְּבַקָּשָׁה","{}, bevaqasha","{}, bevakaʃˈa","{}, please",2,he-agent-v1;ipa=bgn
+utility-templates.i-am-looking-for,אני מחפש {},אֲנִי מְחַפֵּשׂ {},ani meẖapes {},anˈi mexapˈes {},I am looking for {},2,he-agent-v1;ipa=bgn
+utility-templates.do-you-accept,אפשר לשלם עם {}?,אֶפְשָׁר לְשַׁלֵּם עִם {}?,efshar leshalem ‘im {}?,efʃˈaʁ leʃalˈem ˈim {},is it possible to pay with {}?,2,he-agent-v1;ipa=bgn
+utility-templates.i-cannot-find,אני לא מוצא {},אֲנִי לֹא מוֹצֵא {},ani lo motse {},anˈi lˈo motsˈe {},I do not find {},2,he-agent-v1;ipa=bgn
+utility-templates.there-is-a-problem-with,יש בעיה עם {},יֵשׁ בְּעָיָה עִם {},yesh be‘aya ‘im {},jˈeʃ beajˈa ˈim {},there is a problem with {},2,he-agent-v1;ipa=bgn

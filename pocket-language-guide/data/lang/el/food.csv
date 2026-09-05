@@ -11,7 +11,7 @@ dietary-needs.i-am-vegan,Είμαι βίγκαν: δεν τρώω κανένα �
 dietary-needs.i-do-not-eat,Δεν τρώω: {},,Den troo: {},ðˈen dɾˈoo {},I do not eat: {},2,el-agent-v1;roman=elot743;ipa=espeak
 dietary-needs.i-am-allergic-to,Έχω αλλεργία σε: {},,Echo allergia se: {},ˈexo ˌaleɾjˈia se {},I am allergic to: {},2,el-agent-v1;roman=elot743;ipa=espeak
 dietary-needs.does-it-contain-fish-stock,Έχει ζωμό ψαριού;,,Echei zomo psariou;,ˈeçi zomˈo psˌaɾiˈu,,2,el-agent-v1;roman=elot743;ipa=espeak
-dietary-needs.does-it-contain-pork-stock,Έχει ζωμό ή λίπος χοιρινού;,,Echei zomo i lipos choirinou;,ˈeçi zomˈo ˈi lˈipos çˌiɾinˈu,,2,el-agent-v1;roman=elot743;ipa=espeak
+dietary-needs.does-it-contain-pork-stock,Έχει ζωμό χοιρινού;,,Echei zomo choirinou;,ˈeçi zomˈo çˌiɾinˈu,,2,el-agent-v1;narrowed-by-pork-fat-agent-v1;ipa=espeak
 dietary-needs.i-have-a-severe-allergy-to,Έχω σοβαρή αλλεργία (αναφυλαξία) σε: {},,Echo sovari allergia (anafylaxia) se: {},ˈexo sˌovaɾˈi ˌaleɾjˈi ˌanafˌilaksˈia se {},"anaphylaxis, not mild allergy",2,el-agent-v1;roman=elot743;ipa=espeak
 food-ordering.table-for-two,Ένα τραπέζι για δύο,,Ena trapezi gia dyo,ˈena tɾapˈezi jˈa ðˈio,,2,el-agent-v1;roman=elot743;ipa=espeak
 food-ordering.is-a-table-available,Υπάρχει ελεύθερο τραπέζι;,,Yparchei elefthero trapezi;,ipˈaɾçi elˈefθeɾˌo tɾapˈezi,,2,el-agent-v1;roman=elot743;ipa=espeak
@@ -27,3 +27,4 @@ food-ordering.water-please,"Νερό, παρακαλώ",,"Nero, parakalo","neɾ�
 food-ordering.can-a-vegetarian-eat-this,Μπορεί να το φάει χορτοφάγος;,,Borei na to faei chortofagos;,boɾˈi na to fˈai xˌoɾtofˈaɣos,,2,el-agent-v1;roman=elot743;ipa=espeak
 dietary-needs.no-pork,Χωρίς χοιρινό και αλλαντικά,,Choris choirino kai allantika,xoɾˈis çˌiɾinˈo ke ˌaladikˈa,also no ham or cured meat,2,el-agent-v1;roman=elot743;ipa=espeak
 dietary-needs.is-this-halal,Είναι χαλάλ αυτό;,,Einai chalal afto;,ˈine xalˈal aftˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
+dietary-needs.does-it-contain-pork-fat,Έχει χοιρινό λίπος ή λαρδί;,,Echei choirino lipos i lardi;,ˈeçi çˌiɾinˈo lˈipos ˈi laɾðˈi,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak

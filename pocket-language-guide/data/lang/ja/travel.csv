@@ -114,3 +114,5 @@ pickup-meeting.please-call-a-taxi,タクシーを呼んでください,,takushī
 taxi.please-get-me-there-in-time-for-the-shinkansen,新幹線に間に合うようにお願いします,,shinkansen ni maniau yō ni onegaishimasu,ɕiɴkaɴseɴ ɲi maɲiaɯ joː ɲi oneɡaiɕimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
 transit-rides.do-i-need-to-validate,この切符は自動改札を通れますか？,ICカードはどこにタッチしますか？,kono kippu wa jidō kaisatsu o tōremasu ka?,kono kippɯ wa dʑidoː kaisatsɯ o toːɾemasɯ ka,,1,ja-gaps-v1;ipa=hepburn
 rail-station-words.ticket-validator,自動改札機,改札機,jidō kaisatsuki,dʑidoː kaisatsɯki,,2,ja-gaps-v1;ipa=hepburn
+common-signs.pork-code,豚肉の隠語,,butaniku no ingo,bɯtaɲikɯ no iɴɡo,,2,pork-code-agent-v1;lppom-mui;ipa=hepburn
+rail-station-words.fare,運賃,,unchin,ɯɴtɕiɴ,,2,fare-agent-v1;in-pack-neighbour;ipa=hepburn

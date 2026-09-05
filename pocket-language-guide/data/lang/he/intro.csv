@@ -1,0 +1,13 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+introductions.my-name-is,קוראים לי {},קוֹרְאִים לִי {},qor’im li {},koʁˈim lˈi {},they call me {},2,he-agent-v1;ipa=bgn
+introductions.nice-to-meet-you,נעים להכיר,נָעִים לְהַכִּיר,na‘im lehakir,naˈim lehakˈiʁ,pleasant to become acquainted,2,he-agent-v1;ipa=bgn
+introductions.what-is-your-name,איך קוראים לך?,אֵיךְ קוֹרְאִים לְךָ?,eykh qor’im lekha?,ejx koʁˈim lexˈa,to a man; to a woman lakh,2,he-agent-v1;ipa=bgn
+introductions.we-are-traveling-together,אנחנו מטיילים ביחד,אֲנַחְנוּ מְטַיְּילִים בְּיַחַד,anáẖnu metaylim beyáẖad,anˈaxnu metajlˈim bejˈaxad,we are travelling together,2,he-agent-v1;ipa=bgn
+introductions.this-is-my-friend,זה חבר שלי,זֶה חָבֵר שֶׁלִּי,ze ẖaver sheli,zˈe xavˈeʁ ʃelˈi,"of a woman, ẖavera",2,he-agent-v1;ipa=bgn
+introductions.i-am-from,אני מ{},אֲנִי מ{},ani m{},anˈi m {},I am from {},2,he-agent-v1;ipa=bgn
+introductions.where-are-you-from,מאיפה אתה?,מֵאֵיפֹה אַתָּה?,me’éyfo ata?,meˈejfo atˈa,to a man; to a woman at,2,he-agent-v1;ipa=bgn
+introductions.how-are-you,מה המצב?,מָה הַמַּצָּב?,ma hamatsav?,mˈa hamatsˈav,how is the situation? -- the everyday greeting,2,he-agent-v1;ipa=bgn
+introductions.i-am-a-tourist,אני תייר,אֲנִי תַּיָּיר,ani tayar,anˈi tajˈaʁ,a woman says tayeret,2,he-agent-v1;ipa=bgn
+introductions.this-is-my-husband-wife,זה בעלי / זאת אשתי,זֶה בַּעֲלִי / זֹאת אִשְׁתִּי,ze ba‘ali / zot ishti,zˈe baalˈi / zˈot iʃtˈi,this is my husband / this is my wife,2,he-agent-v1;ipa=bgn
+introductions.this-is-my-daughter-son,זאת הבת שלי / זה הבן שלי,זֹאת הַבַּת שֶׁלִּי / זֶה הַבֵּן שֶׁלִּי,zot habat sheli / ze háben sheli,zˈot habˈat ʃelˈi / zˈe hˈaben ʃelˈi,this is my daughter / this is my son,2,he-agent-v1;ipa=bgn
+introductions.i-am-traveling-alone,אני מטייל לבד,אֲנִי מְטַיֵּיל לְבַד,ani metayel levad,anˈi metajˈel levˈad,a woman says metayelet,2,he-agent-v1;ipa=bgn

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { createSheetContext, buildSheet, loadFontsFor } from '../core/sheet.js';
 import {
-  loadLanguage, loadRespellOverrides, buildBlocks, PRIORITY_STEPS,
+  loadLanguage, loadRespellOverrides, buildBlocks, fillLanguageSlots, PRIORITY_STEPS,
 } from '../core/pack.js';
 import { buildAtoms } from '../core/solve/atoms.js';
 import { breakColumns } from '../core/solve/columnbreak.js';
@@ -22,6 +22,20 @@ await loadFontsFor(ctx, spec.target, spec.source);
 const theme = await ctx.theme(spec.themeId);
 const targetRows = await loadLanguage(ctx.loadText, spec.target, ctx.corpus.groups);
 const sourceRows = await loadLanguage(ctx.loadText, spec.source, ctx.corpus.groups);
+// `buildSheet` fills `{target}` and `{source}` from the pair immediately after its
+// own two `loadLanguage` calls, and this file *measures* the rows it loads -- so
+// skipping it measures the seven language-slot cells at the wrong width. Measured on
+// the default sheet: 26.6pt taller across the same 666 atoms, which is enough to fail
+// the packing at the scale the plan itself settled on. The plan was right and the
+// reconstruction was wrong, which is the same class of bug as `solve/weights.js`
+// offering a row of the wrong height.
+const pair = { target: spec.target, source: spec.source };
+fillLanguageSlots(targetRows, {
+  ...pair, locale: spec.target, names: ctx.corpus.languageNames[spec.target],
+});
+fillLanguageSlots(sourceRows, {
+  ...pair, locale: spec.source, names: ctx.corpus.languageNames[spec.source],
+});
 const respell = await loadRespellOverrides(ctx.loadText, spec.target, spec.source, spec.accent);
 const blocks = buildBlocks({ corpus: ctx.corpus, targetRows, sourceRows, respell, spec });
 // The spec asks for auto faces, so the resolved count comes back on the plan.
@@ -243,12 +257,24 @@ test('no field prints below its own script’s legibility floor', async () => {
   // The respelling is injected rather than read, because no non-English reader has
   // one on disk yet: without that this test passes by having nothing to check,
   // which is the failure mode three other tests in this file have already had.
-  const byStack = Object.fromEntries(Object.values(ctx.corpus.scripts)
-    .map((r) => [r.font_stack, Number(r.min_size_pt)]));
   const shown = /** @type {any} */ (['script', 'roman', 'gloss', 'respell', 'numeral']);
   /** @type {Record<string, number>} */ const checked = {};
 
-  for (const [source, sample] of [['ar', 'كيتاب'], ['hi', 'किताब'], ['th', 'หนังสือ']]) {
+  for (const [source, sample] of [['ar', 'كيتاب'], ['hi', 'किताب'], ['th', 'หนังสือ']]) {
+    // A font stack serves several scripts with different floors -- `latin` draws
+    // Latin, Cyrillic, Greek and, through the subsetter's PUA donor, Klingon pIqaD
+    // and tengwar -- so a floor map keyed on the stack cannot say which floor a run
+    // has to clear. One built from the whole registry silently kept whichever script
+    // came last in `scripts.csv`, which is how a tengwar row's 5.4pt came to be
+    // asserted against every 4.4pt Latin run on the sheet. Keyed on the scripts this
+    // sheet can actually contain instead: the target's, this source's, and Latin,
+    // which sets every romanisation and respelling whatever the target is.
+    /** @type {Record<string, number>} */ const byStack = {};
+    for (const iso of ['Latn', ctx.corpus.languages[spec.target].script,
+      ctx.corpus.languages[source].script]) {
+      const script = ctx.corpus.scripts[iso];
+      byStack[script.font_stack] = Number(script.min_size_pt);
+    }
     const { plan } = await buildSheet(
       ctx,
       { ...spec, source, fieldSet: shown, scale: 0 },

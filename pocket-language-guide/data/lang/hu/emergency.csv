@@ -138,3 +138,4 @@ police-consulate.may-i-have-a-copy-of-the-report,Kaphatok egy példányt a jegyz
 police-consulate.i-will-not-sign-anything-i-cannot-read,"Nem írok alá semmit, amit nem tudok elolvasni",,"nˈɛm ˈiːrok ˈɑlaː ʃˈɛmmit, ˈɑmit nˈɛm tˈudok ˈɛlolvɑʃni",,2,hu-agent-v1;ipa=espeak
 police-consulate.am-i-free-to-go,Elmehetek?,,ˈɛlmɛhɛtɛk,,2,hu-agent-v1;ipa=espeak
 police-consulate.i-do-not-want-to-go-with-you,Nem akarok önökkel menni,,nˈɛm ˈɑkɑrok ˈønøkkɛl mˈɛnni,,2,hu-agent-v1;ipa=espeak
+pharmacy-symptoms.i-think-i-have-dengue,Szerintem dengue-lázam van,,sˈɛrintɛm dˈɛnɡuɛlaːzɑm vˈɑn,,2,dengue-agent-v1;in-pack-frame;ipa=espeak

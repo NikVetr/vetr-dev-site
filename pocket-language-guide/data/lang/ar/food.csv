@@ -27,3 +27,4 @@ food-ordering.water-please,ماء من فضلك,,māʾ min faḍlak,mˈaːʔ mˈ
 food-ordering.can-a-vegetarian-eat-this,هل يصلح هذا للنباتيين؟,,hal yaṣluḥ hādhā lil-nabātīyīn?,hˈal js̪lħ haˈaðaˌa llmbaːtˈijjiːn,,2,ar-agent-v1;ipa=espeak
 dietary-needs.no-pork,بدون لحم خنزير,بدون خنزير ومشتقاته,bidūn laḥm khinzīr,budːˈuːna lˈaħm xˈinziːr,,2,ar-gaps-v1;ipa=espeak
 dietary-needs.is-this-halal,هل هذا حلال؟,هل يحتوي على خنزير أو كحول؟,hal hādhā ḥalāl?,hˈal haˈaðaˌa ħˈalaːl,,2,ar-gaps-v1;ipa=espeak
+dietary-needs.does-it-contain-pork-fat,هل يحتوي على شحم الخنزير؟,هل مطبوخ بشحم الخنزير؟,hal yaḥtawī ʿalá shaḥm al-khinzīr?,hˈal jħtˈuːi ʕˈalaː ʃˈaħm ʔalxˈinziːr,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak

@@ -60,7 +60,7 @@ numbers-money.rupiah-symbol,rupiah (simge),,rupiˈah sɪmɡˈɛ,,2,reader-gloss-
 numbers-money.shilling,şilin,,ʃilˈɪn,,2,reader-gloss-v1;ipa=espeak
 numbers-money.shilling-symbol,şilin (simge),,ʃilˈɪn sɪmɡˈɛ,,2,reader-gloss-v1;ipa=espeak
 numbers-money.euro,euro,,euɾˈɔ,,2,reader-gloss-v1;ipa=espeak
-numbers-money.euro-symbol,euro (simge),,euɾˈɔ sɪmɡˈɛ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.euro-symbol,€,euro,,,2,currency-agent-v1;ecb
 numbers-money.dollar,dolar,,doɫˈar,,2,reader-gloss-v1;ipa=espeak
 numbers-money.dollar-symbol,dolar (simge),,doɫˈar sɪmɡˈɛ,,2,reader-gloss-v1;ipa=espeak
 numbers-money.pound,sterlin,,stɛrlˈɪn,,2,reader-gloss-v1;ipa=espeak
@@ -71,3 +71,14 @@ numbers-money.yu-n,yuan,,juˈan,,2,reader-gloss-v1;ipa=espeak
 numbers-money.ku-i,yuan (konuşmada),,juˈan konˈʊʃmada,,1,reader-gloss-v1;ipa=espeak
 numbers-money.li-ng,2 + ölçü sözcüğü,,icˈi œltʃˈø sœzdʒˈøː,,1,reader-gloss-v1;ipa=espeak
 numbers-money.2-items,2 adet,,icˈi adˈɛt,,1,reader-gloss-v1;ipa=espeak
+numbers-money.franc,frank,,frˈank,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.franc-symbol,frank (simge),,frˈank sɪmɡˈɛ,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.peso,peso,,pesˈɔ,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.peso-symbol,peso (simge),,pesˈɔ sɪmɡˈɛ,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.real,real,,reˈaɫ,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.real-symbol,real (simge),,reˈaɫ sɪmɡˈɛ,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.local-currency,yerel para birimi,,jeɾˈæl paɾˈa bˈiɾimɪ,,2,currency-agent-v1;cldr;ipa=espeak
+numbers-money.lakh,yüz bin,,jˈøz bˈɪn,,2,lakh-crore-agent-v1;cldr;ipa=espeak
+numbers-money.crore,on milyon,,ˈɔn mɪljˈɔn,,2,lakh-crore-agent-v1;cldr;ipa=espeak
+numbers-money.shekel,şekel,,ʃekˈæl,,2,shekel-gloss-v1;cldr;ipa=espeak
+numbers-money.shekel-symbol,şekel (simge),,ʃekˈæl sɪmɡˈɛ,,2,shekel-gloss-v1;cldr;ipa=espeak

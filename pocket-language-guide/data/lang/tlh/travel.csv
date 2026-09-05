@@ -1,59 +1,59 @@
-concept_id,text,text_alt,ipa,literal,confidence,provenance
-directions.where-is,nuqDaq 'oH {}'e',,nuqʰɖɑqʰ ʔox {} ʔɛʔ,,3,tlh-attested-v1;src=TKD p.170;slot-substituted;ipa=okrand
-directions.how-do-i-get-to,chay' {} vIghoS,,tʃɑjʔ {} vɪɣoʂ,how do I proceed to it?,1,tlh-composed-v1;lex=TKD p.172;grammar=TKD;ipa=okrand
-directions.is-it-far,Hop'a',,xopʰʔɑʔ,is it far?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
-directions.where-am-i,nuqDaq jIH,,nuqʰɖɑqʰ dʒɪx,where am I?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
-directions.which-way,nuq He,,nuqʰ xɛ,which course?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
-directions.can-i-walk-there,pa' jIyItlaH'a',,pʰɑʔ dʒɪjɪtʰlɑxʔɑʔ,can I walk there?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
-directions.how-far-is-it,Hop'a',,xopʰʔɑʔ,is it far?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
-directions.east,chan,,tʃɑn,the direction of sunrise,3,tlh-attested-v1;src=HQ 8.4 p.6;ipa=okrand
-directions.west,tIng 'ev,,tʰɪŋ ʔɛv,midway between tIng and 'ev,3,tlh-attested-v1;src=HQ 8.4 p.6;ipa=okrand
-quick-directions.go-straight,yIghoStaH,,jɪɣoʂtʰɑx,keep proceeding,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
-quick-directions.this-way,naDev,,nɑɖɛv,here / this way,3,tlh-attested-v1;src=TKD;ipa=okrand
-quick-directions.that-way,pa',,pʰɑʔ,there / that way,3,tlh-attested-v1;src=TKD;ipa=okrand
-quick-directions.on-the-left,poS,,pʰoʂ,left side,3,tlh-attested-v1;src=TKD;ipa=okrand
-quick-directions.on-the-right,nIH,,nɪx,right side,3,tlh-attested-v1;src=TKD;ipa=okrand
-quick-directions.in-front,tlhop,,tɬopʰ,the area in front,3,tlh-attested-v1;src=KGT;ipa=okrand
-quick-directions.behind,'em,,ʔɛm,the area behind,3,tlh-attested-v1;src=KGT;ipa=okrand
-taxi.please-take-me-here,naDev HIghoSmoH,,nɑɖɛv xɪɣoʂmox,make me proceed here,1,tlh-composed-v1;lex=TKD p.170;grammar=TKD;ipa=okrand
-taxi.please-stop-here,naDev yImev,,nɑɖɛv jɪmɛv,stop here,1,tlh-composed-v1;lex=KCD + TKD;grammar=TKD;ipa=okrand
-taxi.can-you-wait-for-me-here,naDev choloSlaH'a',,nɑɖɛv tʃoloʂlɑxʔɑʔ,can you wait for me here?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
-taxi.i-will-get-off-here,naDev jImej,,nɑɖɛv dʒɪmɛdʒ,I leave here,1,tlh-composed-v1;lex=TNK + TKD;grammar=TKD;ipa=okrand
-transit-rides.two-tickets,cha' 'elmeH chaw',,tʃɑʔ ʔɛlmɛx tʃɑwʔ,two entry passes,1,tlh-composed-v1;lex=KLI 2011.09.30 + TKD 5.4;grammar=TKD;ipa=okrand
-transit-rides.where-is-the-subway-station,nuqDaq 'oH manggha'e',,nuqʰɖɑqʰ ʔox mɑŋɣɑʔɛʔ,where is the station?,1,tlh-composed-v1;lex=qep'a' 26 (2019) + TKD p.170;grammar=TKD;ipa=okrand
-transit-rides.does-this-bus-train-go-to,{} ghoS'a' lupwI'vam,,{} ɣoʂʔɑʔ lupʰwɪʔvɑm,does this bus proceed to it?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
-transit-rides.is-it-delayed,paS'a',,pʰɑʂʔɑʔ,is it late?,1,tlh-composed-v1;lex=KGT;grammar=TKD;ipa=okrand
-transit-rides.i-am-in-a-hurry,jImoD,,dʒɪmoɖ,I hurry,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
-transit-rides.what-time-is-the-next-one,ghorgh paw latlh,,ɣorɣ pʰɑw lɑtɬ,when does the next one arrive?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
-place-words.scenic-area,jorchan,,dʒortʃɑn,view / scene / scenery,3,tlh-attested-v1;src=qep'a' 25 (2018);ipa=okrand
-place-words.railway-station,manggha,,mɑŋɣɑ,train station,3,tlh-attested-v1;src=qep'a' 26 (2019);ipa=okrand
-place-words.airport,vergh,,vɛrɣ,dock / port,3,tlh-attested-v1;src=TKD;ipa=okrand
-place-words.service-desk,QaHmeH Daq,,qxɑxmɛx ɖɑqʰ,the place for helping,1,tlh-composed-v1;lex=TKD + TKDA;grammar=TKD;ipa=okrand
-place-words.bus-stop,lupwI' Daq,,lupʰwɪʔ ɖɑqʰ,the jitney's place,1,tlh-composed-v1;lex=TNK + TKD;grammar=TKD;ipa=okrand
-place-words.luggage-storage,leng buq,,lɛŋ buqʰ,suitcase,3,tlh-attested-v1;src=TNK;ipa=okrand
-border-customs.i-am-a-tourist,jIleng,,dʒɪlɛŋ,I travel,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
-border-customs.here-is-my-passport,leng chaw'wIj 'oH,,lɛŋ tʃɑwʔwɪdʒ ʔox,this is my travel permit,1,tlh-composed-v1;lex=TNK + TKD;grammar=TKD;ipa=okrand
-border-customs.i-am-staying-for-days,{} jaj naDev jIratlh,,{} dʒɑdʒ nɑɖɛv dʒɪrɑtɬ,I remain here for {} days,1,tlh-composed-v1;lex=KCD + TKD;grammar=TKD;ipa=okrand
-border-customs.visa,'elmeH chaw',,ʔɛlmɛx tʃɑwʔ,entry pass,3,tlh-attested-v1;src=KLI 2011.09.30;ipa=okrand
-border-customs.passport-control,leng chaw',,lɛŋ tʃɑwʔ,travel permit,3,tlh-attested-v1;src=TNK;ipa=okrand
-border-customs.baggage-claim,leng buq,,lɛŋ buqʰ,suitcase,3,tlh-attested-v1;src=TNK;ipa=okrand
-border-customs.transit,leng,,lɛŋ,voyage / travel,3,tlh-attested-v1;src=TKD;ipa=okrand
-pickup-meeting.meet-us-at,{}Daq maghom,,{} ɖɑqʰ mɑɣom,we meet at it,3,tlh-attested-v1;src=TKD p.170;slot-substituted;ipa=okrand
-pickup-meeting.please-call-a-taxi,ra'wI' lupwI' yIrIt,,rɑʔwɪʔ lupʰwɪʔ jɪrɪtʰ,summon a taxi,1,tlh-composed-v1;lex=TNK + Klingon Monopoly;grammar=TKD;ipa=okrand
-rail-station-words.high-speed-rail,lupwI' mIr nom,,lupʰwɪʔ mɪr nom,the fast train,1,tlh-composed-v1;lex=TNK + TKD;grammar=TKD;ipa=okrand
-rail-station-words.platform,yaH,,jɑx,duty station,3,tlh-attested-v1;src=TKD;ipa=okrand
-rail-station-words.ticket-office,'elmeH chaw' pa',,ʔɛlmɛx tʃɑwʔ pʰɑʔ,the entry-pass room,1,tlh-composed-v1;lex=KLI 2011.09.30 + TKD;grammar=TKD;ipa=okrand
-rail-station-words.waiting-room,loSmeH pa',,loʂmɛx pʰɑʔ,the room for waiting,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
-rail-station-words.train-number,lupwI' mIr mI',,lupʰwɪʔ mɪr mɪʔ,the train's number,1,tlh-composed-v1;lex=TNK + TNK;grammar=TKD;ipa=okrand
-rail-station-words.seat,quS,,qʰuʂ,chair,3,tlh-attested-v1;src=TKD;ipa=okrand
-rail-station-words.last-train,lupwI' mIr Qav,,lupʰwɪʔ mɪr qxɑv,the final train,1,tlh-composed-v1;lex=TNK + TKD;grammar=TKD;ipa=okrand
-common-signs.open-on,poS,,pʰoʂ,be open,3,tlh-attested-v1;src=TKD;ipa=okrand
-common-signs.closed-off,SoQ,,ʂoqx,be closed,3,tlh-attested-v1;src=TKD;ipa=okrand
-common-signs.occupied,teblu',,tʰɛbluʔ,one has filled it,1,tlh-composed-v1;lex=TKD + TKD 4.2.5;grammar=TKD;ipa=okrand
-common-signs.vacant,chIm,,tʃɪm,be empty / be deserted,3,tlh-attested-v1;src=TKD;ipa=okrand
-common-signs.caution,yIqIm,,jɪqʰɪm,pay attention!,3,tlh-attested-v1;src=CK;ipa=okrand
-common-signs.no-entry,yI'elQo',,jɪʔɛlqxoʔ,do not enter!,1,tlh-composed-v1;lex=TKD 4.3;grammar=TKD;ipa=okrand
-common-signs.do-not-touch,yIHotQo',,jɪxotʰqxoʔ,do not touch!,1,tlh-composed-v1;lex=TKD 4.3;grammar=TKD;ipa=okrand
-common-signs.open-operating,Qap,,qxɑpʰ,be in operation,3,tlh-attested-v1;src=KGT;ipa=okrand
-common-signs.closed,SoQ,,ʂoqx,be closed,3,tlh-attested-v1;src=TKD;ipa=okrand
-common-signs.stopped-stop,mev,,mɛv,stop / cease,3,tlh-attested-v1;src=TKD;ipa=okrand
+concept_id,text,text_alt,romanization_okrand,ipa,literal,confidence,provenance
+directions.where-is,  {},,nuqDaq 'oH {}'e',nuqʰɖɑqʰ ʔox {} ʔɛʔ,,3,tlh-attested-v1;src=TKD p.170;slot-substituted;native=piqad-csur;ipa=okrand
+directions.how-do-i-get-to, {} ,,chay' {} vIghoS,tʃɑjʔ {} vɪɣoʂ,how do I proceed to it?,1,tlh-composed-v1;lex=TKD p.172;grammar=TKD;native=piqad-csur;ipa=okrand
+directions.is-it-far,,,Hop'a',xopʰʔɑʔ,is it far?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+directions.where-am-i, ,,nuqDaq jIH,nuqʰɖɑqʰ dʒɪx,where am I?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+directions.which-way, ,,nuq He,nuqʰ xɛ,which course?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+directions.can-i-walk-there, ,,pa' jIyItlaH'a',pʰɑʔ dʒɪjɪtʰlɑxʔɑʔ,can I walk there?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+directions.how-far-is-it,,,Hop'a',xopʰʔɑʔ,is it far?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+directions.east,,,chan,tʃɑn,the direction of sunrise,3,tlh-attested-v1;src=HQ 8.4 p.6;native=piqad-csur;ipa=okrand
+directions.west, ,,tIng 'ev,tʰɪŋ ʔɛv,midway between tIng and 'ev,3,tlh-attested-v1;src=HQ 8.4 p.6;native=piqad-csur;ipa=okrand
+quick-directions.go-straight,,,yIghoStaH,jɪɣoʂtʰɑx,keep proceeding,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+quick-directions.this-way,,,naDev,nɑɖɛv,here / this way,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+quick-directions.that-way,,,pa',pʰɑʔ,there / that way,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+quick-directions.on-the-left,,,poS,pʰoʂ,left side,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+quick-directions.on-the-right,,,nIH,nɪx,right side,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+quick-directions.in-front,,,tlhop,tɬopʰ,the area in front,3,tlh-attested-v1;src=KGT;native=piqad-csur;ipa=okrand
+quick-directions.behind,,,'em,ʔɛm,the area behind,3,tlh-attested-v1;src=KGT;native=piqad-csur;ipa=okrand
+taxi.please-take-me-here, ,,naDev HIghoSmoH,nɑɖɛv xɪɣoʂmox,make me proceed here,1,tlh-composed-v1;lex=TKD p.170;grammar=TKD;native=piqad-csur;ipa=okrand
+taxi.please-stop-here, ,,naDev yImev,nɑɖɛv jɪmɛv,stop here,1,tlh-composed-v1;lex=KCD + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+taxi.can-you-wait-for-me-here, ,,naDev choloSlaH'a',nɑɖɛv tʃoloʂlɑxʔɑʔ,can you wait for me here?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+taxi.i-will-get-off-here, ,,naDev jImej,nɑɖɛv dʒɪmɛdʒ,I leave here,1,tlh-composed-v1;lex=TNK + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+transit-rides.two-tickets,  ,,cha' 'elmeH chaw',tʃɑʔ ʔɛlmɛx tʃɑwʔ,two entry passes,1,tlh-composed-v1;lex=KLI 2011.09.30 + TKD 5.4;grammar=TKD;native=piqad-csur;ipa=okrand
+transit-rides.where-is-the-subway-station,  ,,nuqDaq 'oH manggha'e',nuqʰɖɑqʰ ʔox mɑŋɣɑʔɛʔ,where is the station?,1,tlh-composed-v1;lex=qep'a' 26 (2019) + TKD p.170;grammar=TKD;native=piqad-csur;ipa=okrand
+transit-rides.does-this-bus-train-go-to,{}  ,,{} ghoS'a' lupwI'vam,{} ɣoʂʔɑʔ lupʰwɪʔvɑm,does this bus proceed to it?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+transit-rides.is-it-delayed,,,paS'a',pʰɑʂʔɑʔ,is it late?,1,tlh-composed-v1;lex=KGT;grammar=TKD;native=piqad-csur;ipa=okrand
+transit-rides.i-am-in-a-hurry,,,jImoD,dʒɪmoɖ,I hurry,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+transit-rides.what-time-is-the-next-one,  ,,ghorgh paw latlh,ɣorɣ pʰɑw lɑtɬ,when does the next one arrive?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+place-words.scenic-area,,,jorchan,dʒortʃɑn,view / scene / scenery,3,tlh-attested-v1;src=qep'a' 25 (2018);native=piqad-csur;ipa=okrand
+place-words.railway-station,,,manggha,mɑŋɣɑ,train station,3,tlh-attested-v1;src=qep'a' 26 (2019);native=piqad-csur;ipa=okrand
+place-words.airport,,,vergh,vɛrɣ,dock / port,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+place-words.service-desk, ,,QaHmeH Daq,qxɑxmɛx ɖɑqʰ,the place for helping,1,tlh-composed-v1;lex=TKD + TKDA;grammar=TKD;native=piqad-csur;ipa=okrand
+place-words.bus-stop, ,,lupwI' Daq,lupʰwɪʔ ɖɑqʰ,the jitney's place,1,tlh-composed-v1;lex=TNK + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+place-words.luggage-storage, ,,leng buq,lɛŋ buqʰ,suitcase,3,tlh-attested-v1;src=TNK;native=piqad-csur;ipa=okrand
+border-customs.i-am-a-tourist,,,jIleng,dʒɪlɛŋ,I travel,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+border-customs.here-is-my-passport,  ,,leng chaw'wIj 'oH,lɛŋ tʃɑwʔwɪdʒ ʔox,this is my travel permit,1,tlh-composed-v1;lex=TNK + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+border-customs.i-am-staying-for-days,{}   ,,{} jaj naDev jIratlh,{} dʒɑdʒ nɑɖɛv dʒɪrɑtɬ,I remain here for {} days,1,tlh-composed-v1;lex=KCD + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+border-customs.visa, ,,'elmeH chaw',ʔɛlmɛx tʃɑwʔ,entry pass,3,tlh-attested-v1;src=KLI 2011.09.30;native=piqad-csur;ipa=okrand
+border-customs.passport-control, ,,leng chaw',lɛŋ tʃɑwʔ,travel permit,3,tlh-attested-v1;src=TNK;native=piqad-csur;ipa=okrand
+border-customs.baggage-claim, ,,leng buq,lɛŋ buqʰ,suitcase,3,tlh-attested-v1;src=TNK;native=piqad-csur;ipa=okrand
+border-customs.transit,,,leng,lɛŋ,voyage / travel,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+pickup-meeting.meet-us-at,{} ,,{}Daq maghom,{} ɖɑqʰ mɑɣom,we meet at it,3,tlh-attested-v1;src=TKD p.170;slot-substituted;native=piqad-csur;ipa=okrand
+pickup-meeting.please-call-a-taxi,  ,,ra'wI' lupwI' yIrIt,rɑʔwɪʔ lupʰwɪʔ jɪrɪtʰ,summon a taxi,1,tlh-composed-v1;lex=TNK + Klingon Monopoly;grammar=TKD;native=piqad-csur;ipa=okrand
+rail-station-words.high-speed-rail,  ,,lupwI' mIr nom,lupʰwɪʔ mɪr nom,the fast train,1,tlh-composed-v1;lex=TNK + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+rail-station-words.platform,,,yaH,jɑx,duty station,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+rail-station-words.ticket-office,  ,,'elmeH chaw' pa',ʔɛlmɛx tʃɑwʔ pʰɑʔ,the entry-pass room,1,tlh-composed-v1;lex=KLI 2011.09.30 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+rail-station-words.waiting-room, ,,loSmeH pa',loʂmɛx pʰɑʔ,the room for waiting,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+rail-station-words.train-number,  ,,lupwI' mIr mI',lupʰwɪʔ mɪr mɪʔ,the train's number,1,tlh-composed-v1;lex=TNK + TNK;grammar=TKD;native=piqad-csur;ipa=okrand
+rail-station-words.seat,,,quS,qʰuʂ,chair,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+rail-station-words.last-train,  ,,lupwI' mIr Qav,lupʰwɪʔ mɪr qxɑv,the final train,1,tlh-composed-v1;lex=TNK + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+common-signs.open-on,,,poS,pʰoʂ,be open,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+common-signs.closed-off,,,SoQ,ʂoqx,be closed,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+common-signs.occupied,,,teblu',tʰɛbluʔ,one has filled it,1,tlh-composed-v1;lex=TKD + TKD 4.2.5;grammar=TKD;native=piqad-csur;ipa=okrand
+common-signs.vacant,,,chIm,tʃɪm,be empty / be deserted,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+common-signs.caution,,,yIqIm,jɪqʰɪm,pay attention!,3,tlh-attested-v1;src=CK;native=piqad-csur;ipa=okrand
+common-signs.no-entry,,,yI'elQo',jɪʔɛlqxoʔ,do not enter!,1,tlh-composed-v1;lex=TKD 4.3;grammar=TKD;native=piqad-csur;ipa=okrand
+common-signs.do-not-touch,,,yIHotQo',jɪxotʰqxoʔ,do not touch!,1,tlh-composed-v1;lex=TKD 4.3;grammar=TKD;native=piqad-csur;ipa=okrand
+common-signs.open-operating,,,Qap,qxɑpʰ,be in operation,3,tlh-attested-v1;src=KGT;native=piqad-csur;ipa=okrand
+common-signs.closed,,,SoQ,ʂoqx,be closed,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+common-signs.stopped-stop,,,mev,mɛv,stop / cease,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand

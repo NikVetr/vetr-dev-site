@@ -27,3 +27,4 @@ food-ordering.can-a-vegetarian-eat-this,これはベジタリアンでも食べ�
 dietary-needs.i-have-a-severe-allergy-to,{}に重いアレルギーがあります,,{} ni omoi arerugī ga arimasu,{} ɲi omoi aɾeɾɯɡiː ɡa aɾimasɯ,,2,japanese-reviewed-v6;ipa=hepburn
 dietary-needs.no-pork,豚肉なしでお願いします,豚由来のものはすべてなしでお願いします,butaniku nashi de onegaishimasu,bɯtaɲikɯ naɕi de oneɡaiɕimasɯ,,2,ja-gaps-v1;ipa=hepburn
 dietary-needs.is-this-halal,これはハラールですか？,ハラール認証はありますか？,kore wa harāru desu ka?,koɾe wa haɾaːɾɯ desɯ ka,,2,ja-gaps-v1;ipa=hepburn
+dietary-needs.does-it-contain-pork-fat,ラードは入っていますか？,豚の脂は入っていますか？,rādo wa haitteimasu ka?,ɾaːdo wa haitteimasɯ ka,,2,pork-fat-agent-v1;in-pack-frame;ipa=hepburn

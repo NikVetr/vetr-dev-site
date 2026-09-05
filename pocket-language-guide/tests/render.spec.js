@@ -6,6 +6,8 @@ import { planToSvg } from '../render/svg.js';
 import { planToPdf } from '../render/pdf.js';
 import { cssFaces, fontFaceCss } from '../render/fonts.js';
 import { referenceSpec } from '../scripts/spec.mjs';
+import { inflateSync } from 'node:zlib';
+import * as fontkit from '../vendor/fontkit.esm.js';
 
 /** Mean intensity of a PNG, 0 = black, 1 = white. More ink means a lower number. */
 function meanInk(path) {
@@ -77,5 +79,160 @@ test.describe('renderers', () => {
     expect(text).toContain('你好');
     expect(text).toContain('nǐ hǎo');
     expect(text).toContain('Social + basics');
+  });
+});
+
+/** Every `x` a text-showing operation was placed at, in order. */
+function drawnAt(bytes) {
+  // The page's content stream is deflated -- `useObjectStreams: false` keeps the
+  // object structure plain but not the streams -- so it has to be inflated before the
+  // operators are readable.
+  const raw = Buffer.from(bytes);
+  const text = [...raw.toString('binary').matchAll(/stream\r?\n/g)]
+    .map((m) => {
+      const start = (m.index ?? 0) + m[0].length;
+      const end = raw.indexOf('endstream', start, 'binary');
+      try {
+        return inflateSync(raw.subarray(start, end)).toString('binary');
+      } catch {
+        return raw.subarray(start, end).toString('binary');
+      }
+    })
+    .find((body) => body.includes('Tj')) ?? '';
+  /** @type {{x:number, glyphs:string}[]} */ const out = [];
+  // pdf-lib writes an uncompressed `1 0 0 1 x y Tm` before each `<...> Tj`.
+  const re = /1 0 0 1 (-?[\d.]+) (-?[\d.]+) Tm\s*\n?<([0-9A-Fa-f]+)> Tj/g;
+  for (let m = re.exec(text); m; m = re.exec(text)) {
+    out.push({ x: Number(m[1]), glyphs: m[3] });
+  }
+  return out;
+}
+
+test.describe('mark positioning in the PDF', () => {
+  /**
+   * **`pdf-lib` emits one `Tj` of glyph ids and no positioning**, so every GPOS
+   * offset it is handed is discarded. Twenty of the twenty-two languages do not care:
+   * their marks are drawn near their own origin. Hebrew's niqqud are zero-advance
+   * glyphs whose outlines sit at positive x and rely wholly on the `mark` feature, so
+   * the points landed under the next letter along -- on the pointed column, which is
+   * the learner's column, in the artifact that gets printed.
+   */
+  test('a mark the shaper offset is drawn where it asked, letter by letter', async () => {
+    const font = fontkit.create(await readFile('data/fonts/hebrew-400.ttf'));
+    const size = 12;
+    const laid = font.layout('שָׁלוֹם');
+    expect(laid.positions.some((/** @type {any} */ p) => p.xOffset),
+      'this string is only a test if the shaper does offset something').toBeTruthy();
+
+    // One run, so every drawn position can be checked against the arithmetic.
+    const plan = {
+      pageW: 200,
+      pageH: 60,
+      scale: 1,
+      looseness: [],
+      warnings: [],
+      geometry: /** @type {any} */ ({}),
+      faces: [{
+        rects: [],
+        icons: [],
+        hits: [],
+        runs: [{ x: 20, y: 30, size, text: 'שָׁלוֹם', fontId: 'hebrew-400', fill: '#000000' }],
+      }],
+    };
+    const bytes = await planToPdf(/** @type {any} */ (plan), {
+      loadFont: (file) => readFile(`data/fonts/${file}`),
+      icons: JSON.parse(await readFile('data/icons.json', 'utf8')),
+      date: new Date(0),
+    });
+
+    // One block per *offset* glyph, plus one for each stretch of unoffset ones. On this
+    // word that is all seven, because no two unpointed letters are adjacent in
+    // `shalom` pointed -- the saving shows on ordinary text, not here. What matters is
+    // that it is more than the single block the run would otherwise take and never
+    // more than one per glyph.
+    const drawn = drawnAt(bytes);
+    expect(drawn.length).toBeGreaterThan(1);
+    expect(drawn.length).toBeLessThanOrEqual(laid.glyphs.length);
+
+    // Every offset glyph is drawn at exactly the position the shaper asked for.
+    const em = size / font.unitsPerEm;
+    let pen = 0;
+    /** @type {number[]} */ const wanted = [];
+    laid.positions.forEach((/** @type {any} */ pos) => {
+      if (pos.xOffset || pos.yOffset) wanted.push(20 + (pen + pos.xOffset) * em);
+      pen += pos.xAdvance;
+    });
+    for (const x of wanted) {
+      expect(drawn.some((d) => Math.abs(d.x - x) < 0.01),
+        `nothing was drawn at ${x.toFixed(3)}`).toBeTruthy();
+    }
+    // The last two glyphs of `shalom` pointed are the shin dot and the qamats, which
+    // ask for +539 and +227 of an em -- more than half a letter. Dropping that is what
+    // put them over the wrong consonant, and it is the number this test exists for.
+    const worst = Math.max(...laid.positions.map((/** @type {any} */ p) => Math.abs(p.xOffset)));
+    expect(worst, 'the offset being applied is a large one').toBeGreaterThan(400);
+  });
+
+  test('a script whose glyphs change shape in context is left whole', async () => {
+    // Arabic is the counter-case and the reason the guard is a proof rather than a
+    // list: drawing an Arabic glyph alone would hand back the isolated form and undo
+    // the joining, so a run whose glyphs do not survive being drawn alone keeps the
+    // single-call path -- and Arabic's rendering is unchanged by any of this.
+    const font = fontkit.create(await readFile('data/fonts/arabic-400.ttf'));
+    const text = 'مرحباً';
+    const laid = font.layout(text);
+    expect(laid.positions.some((/** @type {any} */ p) => p.xOffset || p.yOffset),
+      'Arabic does carry offsets, so the guard is what spares it').toBeTruthy();
+
+    const plan = {
+      pageW: 200,
+      pageH: 60,
+      scale: 1,
+      looseness: [],
+      warnings: [],
+      geometry: /** @type {any} */ ({}),
+      faces: [{
+        rects: [],
+        icons: [],
+        hits: [],
+        runs: [{ x: 20, y: 30, size: 12, text, fontId: 'arabic-400', fill: '#000000' }],
+      }],
+    };
+    const bytes = await planToPdf(/** @type {any} */ (plan), {
+      loadFont: (file) => readFile(`data/fonts/${file}`),
+      icons: JSON.parse(await readFile('data/icons.json', 'utf8')),
+      date: new Date(0),
+    });
+    expect(drawnAt(bytes).length, 'one draw for the whole run').toBe(1);
+  });
+
+  test('a run the shaper does not offset is still one draw', async () => {
+    // The short-circuit, which is what keeps this off the twenty languages that do not
+    // need it: Latin, Cyrillic, Greek and all three CJK faces come back at zero offset
+    // throughout, so they take the single-call path and their PDFs are byte-identical
+    // to before. Measured across seven targets, `ar`, `ja` and `en` differ by zero
+    // pixels at 300dpi.
+    const plan = {
+      pageW: 200,
+      pageH: 60,
+      scale: 1,
+      looseness: [],
+      warnings: [],
+      geometry: /** @type {any} */ ({}),
+      faces: [{
+        rects: [],
+        icons: [],
+        hits: [],
+        runs: [{
+          x: 20, y: 30, size: 12, text: 'Where is the pharmacy?', fontId: 'latin-400', fill: '#000000',
+        }],
+      }],
+    };
+    const bytes = await planToPdf(/** @type {any} */ (plan), {
+      loadFont: (file) => readFile(`data/fonts/${file}`),
+      icons: JSON.parse(await readFile('data/icons.json', 'utf8')),
+      date: new Date(0),
+    });
+    expect(drawnAt(bytes).length).toBe(1);
   });
 });

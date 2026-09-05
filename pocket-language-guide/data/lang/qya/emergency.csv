@@ -1,8 +1,8 @@
-concept_id,text,text_alt,ipa,literal,confidence,provenance
-body-parts.head,cas,cára,kas,,3,qya-attested-v1;src=PE17/188.2502;eldamo=q;ipa=appendix-e
-body-parts.eye,hen,hendu,hen,hendu is the pair,1,qya-deduced-v1;src=WJ/337.2405-1;eldamo=q#;ipa=appendix-e
-body-parts.ear,hlas,,las,,3,qya-attested-v1;src=PE17/062.0714;eldamo=q;ipa=appendix-e
-body-parts.leg,telco,,tˈelko,leg / stem,3,qya-attested-v1;src=LotR/1118.4009;eldamo=q;ipa=appendix-e
-body-parts.foot,tál,,taːl,,3,qya-attested-v1;src=PE19/103.4312;eldamo=q;ipa=appendix-e
-body-parts.hand,má,cambë,maː,cambë is the cupped hand,3,qya-attested-v1;src=LotR/0377.3703;eldamo=q;ipa=appendix-e
-police-consulate.please-leave-me-alone,heca,,hˈeka,be gone! stand aside! -- Quenya has no softer form,3,qya-attested-v1;src=WJ/364.3703;eldamo=q;ipa=appendix-e
+concept_id,text,text_alt,romanization_appendix-e,ipa,literal,confidence,provenance
+body-parts.head,,cára,cas,kas,,3,qya-attested-v1;src=PE17/188.2502;eldamo=q;native=quenya-classical;ipa=appendix-e
+body-parts.eye,,hendu,hen,hen,hendu is the pair,1,qya-deduced-v1;src=WJ/337.2405-1;eldamo=q#;native=quenya-classical;ipa=appendix-e
+body-parts.ear,,,hlas,las,,3,qya-attested-v1;src=PE17/062.0714;eldamo=q;native=quenya-classical;ipa=appendix-e
+body-parts.leg,,,telco,tˈelko,leg / stem,3,qya-attested-v1;src=LotR/1118.4009;eldamo=q;native=quenya-classical;ipa=appendix-e
+body-parts.foot,,,tál,taːl,,3,qya-attested-v1;src=PE19/103.4312;eldamo=q;native=quenya-classical;ipa=appendix-e
+body-parts.hand,,cambë,má,maː,cambë is the cupped hand,3,qya-attested-v1;src=LotR/0377.3703;eldamo=q;native=quenya-classical;ipa=appendix-e
+police-consulate.please-leave-me-alone,,,heca,hˈeka,be gone! stand aside! -- Quenya has no softer form,3,qya-attested-v1;src=WJ/364.3703;eldamo=q;native=quenya-classical;ipa=appendix-e

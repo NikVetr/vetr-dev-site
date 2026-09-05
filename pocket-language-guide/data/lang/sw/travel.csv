@@ -114,3 +114,5 @@ common-signs.stopped-stop,Simama,Imesimama,simˈama,stop; stopped,2,sw-agent-v1;
 transit-rides.do-i-need-to-validate,Nahitaji kugonga tiketi kwenye mashine?,,nˌahitˈaɟi kuɡˈoŋɡa tikˈeti kwˈeɲe maʃˈine,tap the ticket on the machine,1,sw-agent-v1;ipa=espeak
 rail-station-words.ticket-validator,Mashine ya tiketi,Validator,maʃˈine ja tikˈeti,,1,sw-agent-v1;ipa=espeak
 rail-station-words.maglev,Treni ya sumaku,,trˈeni ja sumˈaku,,1,reader-gloss-v1;ipa=espeak
+common-signs.pork-code,Misimbo ya nguruwe,,misˈimbo ja ŋɡurˈuwe,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
+rail-station-words.fare,Nauli,,naˈuli,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak

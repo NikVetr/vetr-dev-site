@@ -1,20 +1,20 @@
-concept_id,text,text_alt,ipa,literal,confidence,provenance
-emergency-medical.help,ghoQaH,,ɣoqxɑx,help us! -- the canon form is plural,3,tlh-attested-v1;src=Star Trek VI;ipa=okrand
-pharmacy-symptoms.i-have-a-headache,jIwuQ,,dʒɪwuqx,,3,tlh-attested-v1;src=TKD p.171;ipa=okrand
-body-parts.head,nach,,nɑtʃ,,3,tlh-attested-v1;src=TKD;ipa=okrand
-body-parts.stomach,burgh,,burɣ,,3,tlh-attested-v1;src=TKD;ipa=okrand
-body-parts.back,Dub,,ɖub,,3,tlh-attested-v1;src=TKD;ipa=okrand
-body-parts.throat,Hugh,,xuɣ,,3,tlh-attested-v1;src=TKD;ipa=okrand
-body-parts.tooth,Ho',,xoʔ,,3,tlh-attested-v1;src=TKD;ipa=okrand
-body-parts.chest,logh'ob,,loɣʔob,,3,tlh-attested-v1;src=qep'a' 25 (2018);ipa=okrand
-body-parts.eye,mIn,,mɪn,,3,tlh-attested-v1;src=TKD;ipa=okrand
-body-parts.ear,qogh,,qʰoɣ,the outer ear; teS is the inner one,3,tlh-attested-v1;src=KGT;ipa=okrand
-body-parts.leg,'uS,,ʔuʂ,,3,tlh-attested-v1;src=TKD;ipa=okrand
-body-parts.arm,DeS,,ɖɛʂ,,3,tlh-attested-v1;src=TKD;ipa=okrand
-body-parts.foot,qam,,qʰɑm,,3,tlh-attested-v1;src=TKD;ipa=okrand
-body-parts.hand,ghop,,ɣopʰ,,3,tlh-attested-v1;src=TKD;ipa=okrand
-body-parts.knee,qIv,,qʰɪv,,3,tlh-attested-v1;src=TKD;ipa=okrand
-body-parts.ankle,ngIb,,ŋɪb,,3,tlh-attested-v1;src=KGT;ipa=okrand
-body-parts.skin,DIr,,ɖɪr,,3,tlh-attested-v1;src=TKD;ipa=okrand
-lost-rescue.i-do-not-know-where-i-am,DaqwIj vISovbe',,ɖɑqʰwɪdʒ vɪʂovbɛʔ,I do not know my location,3,tlh-attested-v1;src=PK;ipa=okrand
-police-consulate.please-leave-me-alone,naDevvo' yIghoS,,nɑɖɛvvoʔ jɪɣoʂ,go away! -- Klingon has no softer form,3,tlh-attested-v1;src=TKD p.172;ipa=okrand
+concept_id,text,text_alt,romanization_okrand,ipa,literal,confidence,provenance
+emergency-medical.help,,,ghoQaH,ɣoqxɑx,help us! -- the canon form is plural,3,tlh-attested-v1;src=Star Trek VI;native=piqad-csur;ipa=okrand
+pharmacy-symptoms.i-have-a-headache,,,jIwuQ,dʒɪwuqx,,3,tlh-attested-v1;src=TKD p.171;native=piqad-csur;ipa=okrand
+body-parts.head,,,nach,nɑtʃ,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+body-parts.stomach,,,burgh,burɣ,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+body-parts.back,,,Dub,ɖub,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+body-parts.throat,,,Hugh,xuɣ,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+body-parts.tooth,,,Ho',xoʔ,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+body-parts.chest,,,logh'ob,loɣʔob,,3,tlh-attested-v1;src=qep'a' 25 (2018);native=piqad-csur;ipa=okrand
+body-parts.eye,,,mIn,mɪn,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+body-parts.ear,,,qogh,qʰoɣ,the outer ear; teS is the inner one,3,tlh-attested-v1;src=KGT;native=piqad-csur;ipa=okrand
+body-parts.leg,,,'uS,ʔuʂ,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+body-parts.arm,,,DeS,ɖɛʂ,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+body-parts.foot,,,qam,qʰɑm,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+body-parts.hand,,,ghop,ɣopʰ,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+body-parts.knee,,,qIv,qʰɪv,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+body-parts.ankle,,,ngIb,ŋɪb,,3,tlh-attested-v1;src=KGT;native=piqad-csur;ipa=okrand
+body-parts.skin,,,DIr,ɖɪr,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+lost-rescue.i-do-not-know-where-i-am, ,,DaqwIj vISovbe',ɖɑqʰwɪdʒ vɪʂovbɛʔ,I do not know my location,3,tlh-attested-v1;src=PK;native=piqad-csur;ipa=okrand
+police-consulate.please-leave-me-alone, ,,naDevvo' yIghoS,nɑɖɛvvoʔ jɪɣoʂ,go away! -- Klingon has no softer form,3,tlh-attested-v1;src=TKD p.172;native=piqad-csur;ipa=okrand

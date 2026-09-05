@@ -156,7 +156,28 @@ label { display: block; }
 .card-head {
   display: flex; align-items: flex-start; gap: var(--space-2); padding: var(--space-2);
 }
+/* The two badges no operating system can draw.
+ *
+ * Every other script-glyph badge is a plain character in the page's own font, and
+ * that works because every real script has a system font somewhere: 中, あ, ع, 한,
+ * अ, ก all resolve without this app shipping anything. Klingon pIqaD and tengwar
+ * are not in Unicode at all -- they are ConScript Unicode Registry allocations in
+ * the Private Use Area -- so nothing has a glyph for them and those two cards drew
+ * boxes. `unicode-range` is what keeps this from being a tax on everyone: the
+ * browser fetches the face only for a page that actually contains one of these
+ * codepoints, which is the gallery and the studio, and never `sheet.html`.
+ *
+ * It is the shipped Latin subset rather than a face of its own because that is
+ * where `scripts/subset_fonts.py` grafts the two blocks -- see `PUA_DONOR` -- and
+ * because it is the file a Klingon or Quenya pack downloads in any case. */
+@font-face {
+  font-family: "plg-conscript";
+  src: url("data/fonts/latin-400.woff2") format("woff2");
+  unicode-range: U+E000-E07F, U+F8D0-F8FF;
+  font-display: block;
+}
 .card-badge {
+  font-family: "plg-conscript", var(--ui);
   font-size: 1.25rem; line-height: 1; min-width: 1.6em; text-align: center; color: var(--accent);
 }
 .card-name { font-weight: 600; }

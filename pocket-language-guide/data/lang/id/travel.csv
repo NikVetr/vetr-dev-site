@@ -114,3 +114,5 @@ common-signs.stopped-stop,Berhenti,Stop,bərhˈɛnti,,2,id-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Ini perlu tap in dulu?,,ˈini pˈɛrlu tˈap ˈin dˈulu,"tap in / tap out, not a stamp",2,id-agent-v1;ipa=espeak
 rail-station-words.ticket-validator,Mesin validasi,Gate,mˈɛsin vˌalidˈasi,bus: mesin validasi; rail: gate,2,id-agent-v1;ipa=espeak
 rail-station-words.maglev,Maglev,kereta magnet,mˈaɡləv,,1,reader-gloss-v1;ipa=espeak
+common-signs.pork-code,B2 · BPK · samcan · bakut · cu nyuk,siobak · saksang · char siu,bˈe dˈua bˌepˌekˈa sˈamtʃan bˈakut tʃˈu ɲˈuk,"B1 is dog (Batak biang), not pork; bak- in bakso/bakmi/bakpao is Hokkien for meat",2,pork-code-agent-v1;lppom-mui;ipa=espeak
+rail-station-words.fare,Tarif,Ongkos,tˈarif,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak

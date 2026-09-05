@@ -1,27 +1,27 @@
-concept_id,text,text_alt,ipa,literal,confidence,provenance
-social-basics.hello,aiya,aia,ˈajja,hail / behold,3,qya-attested-v1;src=LotR/0720.2512-1;eldamo=q;ipa=appendix-e
-social-basics.hello-polite,alla,,ˈalla,welcome / hail,3,qya-attested-v1;src=PE17/146.1111;eldamo=q;ipa=appendix-e
-social-basics.good-morning,aurë,,ˈawre,day / daylight / morning,3,qya-attested-v1;src=MC/222.3402;eldamo=q;ipa=appendix-e
-social-basics.goodbye,namárië,,namˈaːrie,farewell -- be well,3,qya-attested-v1;src=LotR/0378.0201;eldamo=q;ipa=appendix-e
-social-basics.thank-you,hantalë,,hˈantale,thanksgiving -- Quenya has no attested formula for thank you,1,qya-deduced-v1;src=UT/214.2402-2;eldamo=q#;ipa=appendix-e
-social-basics.i-do-not-know,lá istan,,laː ˈistan,I do not know,1,qya-composed-v1;lex=PE17/052.0405 + PE22/153;grammar=PE22;ipa=appendix-e
-social-basics.good-night,lómë,,lˈoːme,night / dusk,3,qya-attested-v1;src=PE17/081.0102;eldamo=q;ipa=appendix-e
-social-basics.okay-fine-i-am-okay,mára ná,,mˈaːra naː,it is good,3,qya-attested-v1;src=PE17/093.1817;eldamo=q;ipa=appendix-e
-communication.i-do-not-understand-spoken,lá istan,,laː ˈistan,I do not know,1,qya-composed-v1;lex=PE17/052.0405 + PE22/153;grammar=PE22;ipa=appendix-e
-communication.please-say-it-again,á enquetë,,aː ˈenkwete,say it again,1,qya-composed-v1;lex=PE17/167.0712 + Let/448.3604-1;grammar=PE22;ipa=appendix-e
-communication.please-wait-a-moment,á harë,,aː hˈare,sit / stay,1,qya-composed-v1;lex=PE17/162.3911 + Let/448.3604-1;grammar=PE22;ipa=appendix-e
-communication.i-do-not-understand,lá istan,,laː ˈistan,I do not know,1,qya-composed-v1;lex=PE17/052.0405 + PE22/153;grammar=PE22;ipa=appendix-e
-communication.i-cannot-read-it,lá polin henta,,laː pˈolin hˈenta,I cannot read it,1,qya-composed-v1;lex=PE17/155.3304 + PE17/077.1602;grammar=PE22;ipa=appendix-e
-quick-responses.please-go-ahead,mecin,,mˈekin,please,3,qya-attested-v1;src=PE22/166.2001;eldamo=q;ipa=appendix-e
-quick-responses.yes-right,ná,nása,naː,yes -- it is so,3,qya-attested-v1;src=PE22/166.2109;eldamo=q;ipa=appendix-e
-quick-responses.no-not,lá,ui,laː,no / not,3,qya-attested-v1;src=PE22/153.1903;eldamo=q;ipa=appendix-e
-quick-responses.okay-can,pol-,,pol,can / to be able to,3,qya-attested-v1;src=PE17/155.3304;eldamo=q;ipa=appendix-e
-quick-responses.cannot-not-allowed,ála,,ˈaːla,do not,3,qya-attested-v1;src=VT43/22.0109;eldamo=q;ipa=appendix-e
-quick-responses.works-okay,mára,,mˈaːra,good / proper,3,qya-attested-v1;src=PE17/016.1806;eldamo=q;ipa=appendix-e
-quick-responses.does-not-work-no,urra,,ˈurra,bad,3,qya-attested-v1;src=PE22/168.0314;eldamo=q;ipa=appendix-e
-quick-responses.can-possible,ec-,,ek,to have a chance of / may / can,3,qya-attested-v1;src=VT49/20.0814;eldamo=q;ipa=appendix-e
-quick-responses.cannot-not-possible,lá pol-,,laː pol,cannot,1,qya-composed-v1;lex=PE17/155.3304 + PE22/153;grammar=PE22;ipa=appendix-e
-quick-responses.okay-fine,mára,,mˈaːra,good / proper,3,qya-attested-v1;src=PE17/016.1806;eldamo=q;ipa=appendix-e
-quick-responses.no-good-not-allowed-will-not-work,vá,áva,vaː,will not / do not,3,qya-attested-v1;src=PE17/143.3003;eldamo=q;ipa=appendix-e
-etiquette.may-i-enter,ecë nin tulë,,ˈeke nin tˈule,may I come?,1,qya-composed-v1;lex=VT49/20.0907 + LotR/0967.3504;grammar=PE22;ipa=appendix-e
-etiquette.may-i-sit-here,ecë nin harë sinomë,,ˈeke nin hˈare sˈinome,may I sit here?,1,qya-composed-v1;lex=VT49/20.0907 + PE17/162.3911;grammar=PE22;ipa=appendix-e
+concept_id,text,text_alt,romanization_appendix-e,ipa,literal,confidence,provenance
+social-basics.hello,,aia,aiya,ˈajja,hail / behold,3,qya-attested-v1;src=LotR/0720.2512-1;eldamo=q;native=quenya-classical;ipa=appendix-e
+social-basics.hello-polite,,,alla,ˈalla,welcome / hail,3,qya-attested-v1;src=PE17/146.1111;eldamo=q;native=quenya-classical;ipa=appendix-e
+social-basics.good-morning,,,aurë,ˈawre,day / daylight / morning,3,qya-attested-v1;src=MC/222.3402;eldamo=q;native=quenya-classical;ipa=appendix-e
+social-basics.goodbye,,,namárië,namˈaːrie,farewell -- be well,3,qya-attested-v1;src=LotR/0378.0201;eldamo=q;native=quenya-classical;ipa=appendix-e
+social-basics.thank-you,,,hantalë,hˈantale,thanksgiving -- Quenya has no attested formula for thank you,1,qya-deduced-v1;src=UT/214.2402-2;eldamo=q#;native=quenya-classical;ipa=appendix-e
+social-basics.i-do-not-know, ,,lá istan,laː ˈistan,I do not know,1,qya-composed-v1;lex=PE17/052.0405 + PE22/153;grammar=PE22;native=quenya-classical;ipa=appendix-e
+social-basics.good-night,,,lómë,lˈoːme,night / dusk,3,qya-attested-v1;src=PE17/081.0102;eldamo=q;native=quenya-classical;ipa=appendix-e
+social-basics.okay-fine-i-am-okay, ,,mára ná,mˈaːra naː,it is good,3,qya-attested-v1;src=PE17/093.1817;eldamo=q;native=quenya-classical;ipa=appendix-e
+communication.i-do-not-understand-spoken, ,,lá istan,laː ˈistan,I do not know,1,qya-composed-v1;lex=PE17/052.0405 + PE22/153;grammar=PE22;native=quenya-classical;ipa=appendix-e
+communication.please-say-it-again, ,,á enquetë,aː ˈenkwete,say it again,1,qya-composed-v1;lex=PE17/167.0712 + Let/448.3604-1;grammar=PE22;native=quenya-classical;ipa=appendix-e
+communication.please-wait-a-moment, ,,á harë,aː hˈare,sit / stay,1,qya-composed-v1;lex=PE17/162.3911 + Let/448.3604-1;grammar=PE22;native=quenya-classical;ipa=appendix-e
+communication.i-do-not-understand, ,,lá istan,laː ˈistan,I do not know,1,qya-composed-v1;lex=PE17/052.0405 + PE22/153;grammar=PE22;native=quenya-classical;ipa=appendix-e
+communication.i-cannot-read-it,  ,,lá polin henta,laː pˈolin hˈenta,I cannot read it,1,qya-composed-v1;lex=PE17/155.3304 + PE17/077.1602;grammar=PE22;native=quenya-classical;ipa=appendix-e
+quick-responses.please-go-ahead,,,mecin,mˈekin,please,3,qya-attested-v1;src=PE22/166.2001;eldamo=q;native=quenya-classical;ipa=appendix-e
+quick-responses.yes-right,,nása,ná,naː,yes -- it is so,3,qya-attested-v1;src=PE22/166.2109;eldamo=q;native=quenya-classical;ipa=appendix-e
+quick-responses.no-not,,ui,lá,laː,no / not,3,qya-attested-v1;src=PE22/153.1903;eldamo=q;native=quenya-classical;ipa=appendix-e
+quick-responses.okay-can,-,,pol-,pol,can / to be able to,3,qya-attested-v1;src=PE17/155.3304;eldamo=q;native=quenya-classical;ipa=appendix-e
+quick-responses.cannot-not-allowed,,,ála,ˈaːla,do not,3,qya-attested-v1;src=VT43/22.0109;eldamo=q;native=quenya-classical;ipa=appendix-e
+quick-responses.works-okay,,,mára,mˈaːra,good / proper,3,qya-attested-v1;src=PE17/016.1806;eldamo=q;native=quenya-classical;ipa=appendix-e
+quick-responses.does-not-work-no,,,urra,ˈurra,bad,3,qya-attested-v1;src=PE22/168.0314;eldamo=q;native=quenya-classical;ipa=appendix-e
+quick-responses.can-possible,-,,ec-,ek,to have a chance of / may / can,3,qya-attested-v1;src=VT49/20.0814;eldamo=q;native=quenya-classical;ipa=appendix-e
+quick-responses.cannot-not-possible, -,,lá pol-,laː pol,cannot,1,qya-composed-v1;lex=PE17/155.3304 + PE22/153;grammar=PE22;native=quenya-classical;ipa=appendix-e
+quick-responses.okay-fine,,,mára,mˈaːra,good / proper,3,qya-attested-v1;src=PE17/016.1806;eldamo=q;native=quenya-classical;ipa=appendix-e
+quick-responses.no-good-not-allowed-will-not-work,,áva,vá,vaː,will not / do not,3,qya-attested-v1;src=PE17/143.3003;eldamo=q;native=quenya-classical;ipa=appendix-e
+etiquette.may-i-enter,  ,,ecë nin tulë,ˈeke nin tˈule,may I come?,1,qya-composed-v1;lex=VT49/20.0907 + LotR/0967.3504;grammar=PE22;native=quenya-classical;ipa=appendix-e
+etiquette.may-i-sit-here,   ,,ecë nin harë sinomë,ˈeke nin hˈare sˈinome,may I sit here?,1,qya-composed-v1;lex=VT49/20.0907 + PE17/162.3911;grammar=PE22;native=quenya-classical;ipa=appendix-e

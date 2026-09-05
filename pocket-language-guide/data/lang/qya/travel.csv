@@ -1,30 +1,30 @@
-concept_id,text,text_alt,ipa,literal,confidence,provenance
-directions.is-it-far,anda ná,,ˈanda naː,is it long / far?,1,qya-composed-v1;lex=Minor-Doc/1955-CT.0103 + LotR/0377.4203;grammar=PE22;ipa=appendix-e
-directions.which-way,mana men,,mˈana men,what way?,1,qya-composed-v1;lex=PE23/135.0514 + SA/men.001;grammar=PE22;ipa=appendix-e
-directions.how-far-is-it,anda ná,,ˈanda naː,is it long / far?,1,qya-composed-v1;lex=Minor-Doc/1955-CT.0103 + LotR/0377.4203;grammar=PE22;ipa=appendix-e
-directions.north,formen,,fˈormen,,3,qya-attested-v1;src=LotR/1123.0105;eldamo=q;ipa=appendix-e
-directions.south,hyarmen,,hjˈarmen,left-hand direction,3,qya-attested-v1;src=LotR/1115.0513;eldamo=q;ipa=appendix-e
-directions.east,rómen,,rˈoːmen,uprising / sunrise,3,qya-attested-v1;src=LotR/0377.4204;eldamo=q;ipa=appendix-e
-directions.west,númen,,nˈuːmen,direction of the sunset,3,qya-attested-v1;src=LotR/1123.0201;eldamo=q;ipa=appendix-e
-quick-directions.this-way,sinomë,,sˈinome,in this place,3,qya-attested-v1;src=LotR/0967.3505;eldamo=q;ipa=appendix-e
-quick-directions.that-way,tanomë,,tˈanome,in the place referred to,3,qya-attested-v1;src=VT49/11.4102;eldamo=q;ipa=appendix-e
-quick-directions.on-the-left,hyarma,,hjˈarma,left-hand side,3,qya-attested-v1;src=VT47/06.3701;eldamo=q;ipa=appendix-e
-quick-directions.on-the-right,forma,,fˈorma,right-hand side,3,qya-attested-v1;src=VT47/06.3612;eldamo=q;ipa=appendix-e
-quick-directions.in-front,pó,opo,poː,in front of,3,qya-attested-v1;src=VT49/12.2002;eldamo=q;ipa=appendix-e
-quick-directions.behind,ca,cata,ka,behind / at the back of,3,qya-attested-v1;src=VT43/29.1305;eldamo=q;ipa=appendix-e
-place-words.airport,londë,,lˈonde,haven -- the nearest attested word,3,qya-attested-v1;src=SA/londë.001;eldamo=q;ipa=appendix-e
-border-customs.transit,lenda,,lˈenda,journey,3,qya-attested-v1;src=PE17/060.2201;eldamo=q;ipa=appendix-e
-rail-station-words.ticket-gate,ando,,ˈando,gate / great door,3,qya-attested-v1;src=LotR/1122.4605;eldamo=q;ipa=appendix-e
-rail-station-words.carriage,raxa,,rˈaksa,wain / wagon,3,qya-attested-v1;src=PE17/028.4207;eldamo=q;ipa=appendix-e
-rail-station-words.seat,hanwa,,hˈaŋwa,seat,3,qya-attested-v1;src=PE22/148.0404;eldamo=q;ipa=appendix-e
-rail-station-words.last-train,métima,,mˈeːtima,last / final,3,qya-attested-v1;src=MC/222.3401;eldamo=q;ipa=appendix-e
-rail-station-words.final-stop,metta,,mˈetta,end / ending,3,qya-attested-v1;src=LotR/0967.3602;eldamo=q;ipa=appendix-e
-common-signs.open-on,latina,,lˈatina,free of obstacles / unencumbered,3,qya-attested-v1;src=PE17/159.1304;eldamo=q;ipa=appendix-e
-common-signs.closed-off,pahta,,pˈaxta,closed / shut,3,qya-attested-v1;src=PE17/171.1108;eldamo=q;ipa=appendix-e
-common-signs.vacant,latina,,lˈatina,free of obstacles / unencumbered,3,qya-attested-v1;src=PE17/159.1304;eldamo=q;ipa=appendix-e
-common-signs.caution,á tirë,,aː tˈire,watch! -- the attested imperative frame is a plus the verb,1,qya-composed-v1;lex=Let/448.3604-1 + MC/222;grammar=PE22;ipa=appendix-e
-common-signs.no-entry,ála tulë,,ˈaːla tˈule,do not come,1,qya-composed-v1;lex=VT43/22.0109 + LotR/0967.3504;grammar=PE22;ipa=appendix-e
-common-signs.do-not-touch,ála appa,,ˈaːla ˈappa,do not touch,1,qya-composed-v1;lex=VT43/22.0109 + VT44/26.3804;grammar=PE22;ipa=appendix-e
-common-signs.open-operating,latina,,lˈatina,free of obstacles,3,qya-attested-v1;src=PE17/159.1304;eldamo=q;ipa=appendix-e
-common-signs.closed,pahta,,pˈaxta,closed / shut,3,qya-attested-v1;src=PE17/171.1108;eldamo=q;ipa=appendix-e
-common-signs.stopped-stop,metta,,mˈetta,end / ending,3,qya-attested-v1;src=LotR/0967.3602;eldamo=q;ipa=appendix-e
+concept_id,text,text_alt,romanization_appendix-e,ipa,literal,confidence,provenance
+directions.is-it-far, ,,anda ná,ˈanda naː,is it long / far?,1,qya-composed-v1;lex=Minor-Doc/1955-CT.0103 + LotR/0377.4203;grammar=PE22;native=quenya-classical;ipa=appendix-e
+directions.which-way, ,,mana men,mˈana men,what way?,1,qya-composed-v1;lex=PE23/135.0514 + SA/men.001;grammar=PE22;native=quenya-classical;ipa=appendix-e
+directions.how-far-is-it, ,,anda ná,ˈanda naː,is it long / far?,1,qya-composed-v1;lex=Minor-Doc/1955-CT.0103 + LotR/0377.4203;grammar=PE22;native=quenya-classical;ipa=appendix-e
+directions.north,,,formen,fˈormen,,3,qya-attested-v1;src=LotR/1123.0105;eldamo=q;native=quenya-classical;ipa=appendix-e
+directions.south,,,hyarmen,hjˈarmen,left-hand direction,3,qya-attested-v1;src=LotR/1115.0513;eldamo=q;native=quenya-classical;ipa=appendix-e
+directions.east,,,rómen,rˈoːmen,uprising / sunrise,3,qya-attested-v1;src=LotR/0377.4204;eldamo=q;native=quenya-classical;ipa=appendix-e
+directions.west,,,númen,nˈuːmen,direction of the sunset,3,qya-attested-v1;src=LotR/1123.0201;eldamo=q;native=quenya-classical;ipa=appendix-e
+quick-directions.this-way,,,sinomë,sˈinome,in this place,3,qya-attested-v1;src=LotR/0967.3505;eldamo=q;native=quenya-classical;ipa=appendix-e
+quick-directions.that-way,,,tanomë,tˈanome,in the place referred to,3,qya-attested-v1;src=VT49/11.4102;eldamo=q;native=quenya-classical;ipa=appendix-e
+quick-directions.on-the-left,,,hyarma,hjˈarma,left-hand side,3,qya-attested-v1;src=VT47/06.3701;eldamo=q;native=quenya-classical;ipa=appendix-e
+quick-directions.on-the-right,,,forma,fˈorma,right-hand side,3,qya-attested-v1;src=VT47/06.3612;eldamo=q;native=quenya-classical;ipa=appendix-e
+quick-directions.in-front,,opo,pó,poː,in front of,3,qya-attested-v1;src=VT49/12.2002;eldamo=q;native=quenya-classical;ipa=appendix-e
+quick-directions.behind,,cata,ca,ka,behind / at the back of,3,qya-attested-v1;src=VT43/29.1305;eldamo=q;native=quenya-classical;ipa=appendix-e
+place-words.airport,,,londë,lˈonde,haven -- the nearest attested word,3,qya-attested-v1;src=SA/londë.001;eldamo=q;native=quenya-classical;ipa=appendix-e
+border-customs.transit,,,lenda,lˈenda,journey,3,qya-attested-v1;src=PE17/060.2201;eldamo=q;native=quenya-classical;ipa=appendix-e
+rail-station-words.ticket-gate,,,ando,ˈando,gate / great door,3,qya-attested-v1;src=LotR/1122.4605;eldamo=q;native=quenya-classical;ipa=appendix-e
+rail-station-words.carriage,,,raxa,rˈaksa,wain / wagon,3,qya-attested-v1;src=PE17/028.4207;eldamo=q;native=quenya-classical;ipa=appendix-e
+rail-station-words.seat,,,hanwa,hˈaŋwa,seat,3,qya-attested-v1;src=PE22/148.0404;eldamo=q;native=quenya-classical;ipa=appendix-e
+rail-station-words.last-train,,,métima,mˈeːtima,last / final,3,qya-attested-v1;src=MC/222.3401;eldamo=q;native=quenya-classical;ipa=appendix-e
+rail-station-words.final-stop,,,metta,mˈetta,end / ending,3,qya-attested-v1;src=LotR/0967.3602;eldamo=q;native=quenya-classical;ipa=appendix-e
+common-signs.open-on,,,latina,lˈatina,free of obstacles / unencumbered,3,qya-attested-v1;src=PE17/159.1304;eldamo=q;native=quenya-classical;ipa=appendix-e
+common-signs.closed-off,,,pahta,pˈaxta,closed / shut,3,qya-attested-v1;src=PE17/171.1108;eldamo=q;native=quenya-classical;ipa=appendix-e
+common-signs.vacant,,,latina,lˈatina,free of obstacles / unencumbered,3,qya-attested-v1;src=PE17/159.1304;eldamo=q;native=quenya-classical;ipa=appendix-e
+common-signs.caution, ,,á tirë,aː tˈire,watch! -- the attested imperative frame is a plus the verb,1,qya-composed-v1;lex=Let/448.3604-1 + MC/222;grammar=PE22;native=quenya-classical;ipa=appendix-e
+common-signs.no-entry, ,,ála tulë,ˈaːla tˈule,do not come,1,qya-composed-v1;lex=VT43/22.0109 + LotR/0967.3504;grammar=PE22;native=quenya-classical;ipa=appendix-e
+common-signs.do-not-touch, ,,ála appa,ˈaːla ˈappa,do not touch,1,qya-composed-v1;lex=VT43/22.0109 + VT44/26.3804;grammar=PE22;native=quenya-classical;ipa=appendix-e
+common-signs.open-operating,,,latina,lˈatina,free of obstacles,3,qya-attested-v1;src=PE17/159.1304;eldamo=q;native=quenya-classical;ipa=appendix-e
+common-signs.closed,,,pahta,pˈaxta,closed / shut,3,qya-attested-v1;src=PE17/171.1108;eldamo=q;native=quenya-classical;ipa=appendix-e
+common-signs.stopped-stop,,,metta,mˈetta,end / ending,3,qya-attested-v1;src=LotR/0967.3602;eldamo=q;native=quenya-classical;ipa=appendix-e

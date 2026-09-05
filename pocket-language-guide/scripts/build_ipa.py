@@ -383,8 +383,18 @@ VOICES = {"en": "en-us", "es": "es-419", "fr": "fr-fr", "de": "de", "pt": "pt-br
 WORD_AT_A_TIME = {"hu"}
 
 # Languages read off a curated romanisation column instead, and which column.
+#
+# Klingon and Quenya are here for the opposite reason from the first three. Those
+# have a native orthography a letter-by-letter route cannot read, so the
+# romanisation is a *convenience*. These two have no published native text at all:
+# every source prints Okrand's or Tolkien's Latin transcription, so the romanisation
+# is the attested cell and `text` is transliterated *out* of it by
+# `scripts/transliterate_native.py`. Reading `text` here would ask the `okrand` and
+# `appendix-e` routes to phonemise pIqaD and tengwar codepoints, which is not what
+# either of them is a table of.
 ROMANISED = {"zh-Hans": "romanization_pinyin", "ja": "romanization_hepburn",
-             "ko": "romanization_rr"}
+             "ko": "romanization_rr", "he": "romanization_bgn",
+             "tlh": "romanization_okrand", "qya": "romanization_appendix-e"}
 
 # Whether espeak's word-level stress marks are kept.
 #   keep    the language has lexical stress and espeak finds it
@@ -399,7 +409,12 @@ ROMANISED = {"zh-Hans": "romanization_pinyin", "ja": "romanization_hepburn",
 STRESS = {"fr": "phrase", "ko": "none", "vi": "none", "ja": "none",
           "zh-Hans": "none", "th": "none", "tlh": "none"}
 
-NON_LATIN = {"zh-Hans", "ja", "ko", "th", "hi", "ar", "ru", "el"}
+# Which packs write `text` in something other than the Latin alphabet, so that a
+# Latin run left in one is a loanword rather than the language. `tlh` and `qya` are
+# in here because their `text` is pIqaD and tengwar; the gate finds nothing to
+# refuse in either -- neither pack quotes a Latin loanword -- and they are named
+# anyway so that the next row that does quote one is asked the same question.
+NON_LATIN = {"zh-Hans", "ja", "ko", "th", "hi", "ar", "ru", "el", "tlh", "qya", "he"}
 
 
 # ------------------------------------------------------------------- alphabet
@@ -938,6 +953,11 @@ LOANWORDS = {
     # Latin is left in on purpose elsewhere: `cm` is a unit symbol glued to the `{}`
     # the traveller fills, and Korean reads it out in full.
     "ko": {"cm": "sentʰimitʰʌ"},
+    # Israeli Hebrew writes these three in Latin letters -- on the router, on the
+    # sign in the phone shop, in the newspaper -- so the pack keeps them there and
+    # gives the reading. `w` is not a Hebrew consonant: `Wi-Fi` is [vajfaj], which
+    # is also how it is spelt when somebody does write it out, ווי-פיי.
+    "he": {"Wi-Fi": "vajˈfaj", "eSIM": "iˈsim", "QR": "kjuˈar"},
 }
 
 
@@ -1233,6 +1253,95 @@ def normalise(ipa, code, text=""):
     return apply_stress(ipa, STRESS.get(code, "keep"))
 
 
+# ------------------------------------------- Hebrew romanisation -> IPA
+# Hebrew has **no espeak voice in this build** -- `EspeakBackend.supported_languages()`
+# lists 109 and none of them is Hebrew -- so it is the `th`/`ja`/`ko`/`zh-Hans` case
+# and, specifically, the romanised one: the route reads a column a human wrote.
+#
+# That column is `romanization_bgn`, the BGN/PCGN 2018 agreement, which is the
+# Academy of the Hebrew Language's 2006 and 2011 systems tabulated for names. Read
+# in this direction it is very nearly a phonemic notation for Modern Israeli
+# Hebrew, and the three places it is not are the pack's three named departures:
+# an acute marks non-final stress (BGN marks none, and Hebrew stress is lexical and
+# unwritten in both orthographies), `ey` writes the [ej] diphthong where BGN writes
+# `e`, and a strong dagesh is not doubled, because Modern Hebrew has no geminate to
+# double and `bevaqqasha` would have to be undone here anyway.
+#
+# **Why the romanisation and not the pointed column**, which is the pack's own
+# native orthography and would be the more faithful thing to read: `language_name_ipa`
+# feeds a locale in `ROMANISED` its `romanization` cell out of
+# `data/registry/language-names.csv`, and that column prints. Pointing it would put
+# a pointed string in the romanisation column of every language-slot row. One input
+# per language beats two, and the pointed column is authored from the same string.
+#
+# Three merges are correct rather than lossy, and all three are Modern Israeli
+# Hebrew rather than the standard's graphemics: `ẖ` (ח) and `kh` (כ) are both /x/,
+# `q` (ק) and `k` (כּ) are both /k/, and `t` covers ת and ט alike.
+HE = {
+    "kh": "x", "sh": "ʃ", "ts": "ts", "ey": "ej", "ay": "aj", "oy": "oj",
+    "b": "b", "v": "v", "g": "ɡ", "d": "d", "h": "h", "z": "z", "t": "t",
+    "y": "j", "k": "k", "l": "l", "m": "m", "n": "n", "s": "s", "p": "p",
+    "f": "f", "q": "k", "r": "ʁ", "ẖ": "x", "ǧ": "dʒ", "ž": "ʒ", "č": "tʃ",
+    "a": "a", "e": "e", "i": "i", "o": "o", "u": "u",
+}
+# **א and ע are not in that table and do not need to be.** BGN writes them `’` and
+# `‘`, and `clean` takes both out before any route sees a chunk -- they are Unicode
+# Pi/Pf, not letters -- so what reaches here is the hiatus: `hake’ev` arrives as
+# `hakeev` and transcribes /hakeev/, `‘ivrit` as /ivʁit/, `shavua‘` as /ʃavua/.
+# That is the right answer rather than a lucky one: both letters are silent in
+# Modern Israeli Hebrew, and `syllabify` reads two adjacent vowels as two
+# syllables, which is what a reader needs to be told. Anything else in this column
+# is carried out and refused by `check_alphabet` rather than guessed at.
+# The five acute vowels the stress departure adds, and what they stand for.
+HE_STRESSED = {"á": "a", "é": "e", "í": "i", "ó": "o", "ú": "u"}
+HE_VOWELS = set("aeiou") | set(HE_STRESSED)
+
+
+def he_to_ipa(word):
+    """One BGN-romanised Hebrew word, with the stress written on its nucleus.
+
+    Final stress is Hebrew's default and is unmarked in the romanisation, so the
+    mark goes on the last nucleus unless an acute says otherwise. Immediately
+    *before* the nucleus rather than before its onset, which is where `syllabify`
+    in core/respell.js reads it from and where every other route here puts it.
+
+    The three digraphs can in principle span two letters -- `ts` from ת+ס, `sh`
+    from ס+ה, `kh` from כ+ה -- and over this corpus they never do ambiguously:
+    the only two rows where a digraph spans a letter boundary are `lehatshir` and
+    `hatsharat`, where `ts` wins at its own position and leaves the `h` to be read
+    on its own, which is the right answer.
+    """
+    out, marks, i = [], [], 0
+    while i < len(word):
+        if word[i] == "-":
+            # Hebrew's hyphen joins a one-letter clitic to what follows it -- `ba-Wi-Fi`,
+            # `čeq-in` -- and is not a sound. `clean` keeps it because it is
+            # load-bearing for French elision and Pinyin, so it is dropped here, as
+            # the Klingon route drops its suffix boundary.
+            i += 1
+            continue
+        letter = longest(HE, word, i)
+        if letter:
+            out.append(HE[letter])
+            marks.append(letter in HE_VOWELS)
+            i += len(letter)
+            continue
+        if word[i] in HE_STRESSED:
+            out.append(HE[HE_STRESSED[word[i]]])
+            marks.append("stress")
+            i += 1
+            continue
+        out.append(word[i])                       # carried out, so a gate names it
+        marks.append(False)
+        i += 1
+    at = next((n for n, m in enumerate(marks) if m == "stress"), None)
+    if at is None:
+        at = next((n for n in range(len(marks) - 1, -1, -1) if marks[n] is True), None)
+    if at is not None:
+        out.insert(at, "ˈ")
+    return "".join(out)
+
+
 # ---------------------------------------------- Klingon orthography -> IPA
 # Klingon is written in a Latin transcription of Okrand's own devising, and TKD
 # section 1.1 describes each letter's sound one at a time -- so this is a table
@@ -1458,6 +1567,11 @@ ROUTE_FORBIDS = {
     # where the table expected it: a bare `q` with no `u` after it, most likely a
     # typo for `qu`.
     "appendix-e": set("cqy"),
+    # Every one of these is legal IPA and none of them is a sound Modern Hebrew
+    # has, so one surviving means a BGN letter went unconverted: `q` for ק, `y`
+    # for י, `c` and `w` for nothing at all. `HE` is a whitelist and an unmatched
+    # character is carried out, which is what makes the gate necessary.
+    "bgn": set("cqwy"),
 }
 
 
@@ -1562,6 +1676,10 @@ def route(code, chunks):
         return lambda chunk: " ".join(tlh_to_ipa(w) for w in chunk.split()), "okrand"
     if code == "qya":
         return lambda chunk: " ".join(qya_to_ipa(w) for w in chunk.split()), "appendix-e"
+    if code == "he":
+        # Lowercased like the other romanisation routes: a capital in this column is
+        # a sentence opening, not a sound.
+        return lambda chunk: " ".join(he_to_ipa(w.lower()) for w in chunk.split()), "bgn"
     raise SystemExit(f"no route for {code}")
 
 
@@ -1812,6 +1930,22 @@ GRADE = {
             "worked examples exactly. The one judgement in it is that the palatal digraphs "
             "count as one consonant for weight while being spelt C+j, which is stated in "
             "`QYA_C`"),
+    "he": ("A-", "a letter-by-letter table over the BGN/PCGN 2018 agreement, which is "
+           "the Academy of the Hebrew Language's own 2006/2011 transliteration read in "
+           "reverse -- so the only thing that can be wrong is the table, and it is 31 "
+           "entries over a five-vowel, twenty-consonant inventory. Two things are "
+           "authored rather than derived and both are named departures from BGN: the "
+           "stress, which is lexical in Hebrew and written by neither orthography, is "
+           "carried by an acute on the non-final case and is therefore only as good as "
+           "the pack's own word list (137 of 1,033 forms are marked, and two positions "
+           "-- a final furtive patach and the `-ayim` dual -- are rule-derived rather "
+           "than listed); and `ey`, because BGN writes [ej] as `e`. The known weakness "
+           "is the shva: BGN note 3 resolves it by a morphological test this cannot "
+           "perform, so the rule here is `e` word-initially and nothing elsewhere, and "
+           "the twelve forms where Modern Hebrew disagrees (`solela`, `tikhtevu`, "
+           "`umetsiot`) are corrected in the pack's own word list. It also means the "
+           "column writes the careful `seliẖa` where Israelis say [sliˈχa], which is "
+           "what BGN prescribes and is one syllable more than colloquial speech"),
     "tr": ("B", "phonemic orthography, but espeak's Turkish stress is 68.1%"),
     "pt": ("B", "pt-br; vowel reduction is phonetic detail the curated sheet smooths away"),
     "en": ("B", "en-us; deep orthography, but espeak's English lexicon is its best"),

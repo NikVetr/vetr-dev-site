@@ -27,3 +27,4 @@ food-ordering.water-please,"Maji, tafadhali",,"mˈaɟi, tˌafaðˈali",,2,sw-age
 food-ordering.can-a-vegetarian-eat-this,"Je, hii ina nyama au samaki?",,"ɟˈe, hˌii ˈina ɲˈama ˌau samˈaki",does this have meat or fish,2,sw-agent-v1;ipa=espeak
 dietary-needs.no-pork,Bila nyama ya nguruwe,,bˌila ɲˈama ja ŋɡurˈuwe,without pig meat,2,sw-agent-v1;ipa=espeak
 dietary-needs.is-this-halal,"Je, hii ni halali?",,"ɟˈe, hˌii ni halˈali",,2,sw-agent-v1;ipa=espeak
+dietary-needs.does-it-contain-pork-fat,"Je, kuna mafuta ya nguruwe ndani?",,"ɟˈe, kˈuna mafˈuta ja ŋɡurˈuwe ndˈani",,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak

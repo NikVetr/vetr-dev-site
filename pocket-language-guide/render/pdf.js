@@ -28,6 +28,87 @@ function roundedRect(w, h, r) {
 }
 
 /**
+ * Draw one run, moving any mark the shaper offset into place.
+ *
+ * **`pdf-lib` emits one `Tj` of glyph ids and no positioning at all.** Read the
+ * content stream and a run is `<0001000200030004> Tj` -- so every glyph is placed by
+ * its own advance and every GPOS `xOffset`/`yOffset` is discarded. For twenty of the
+ * twenty-two languages that costs nothing, because their marks are drawn near their
+ * own origin and need no shift: Noto Sans Thai's tone marks come back at an offset of
+ * -3/1000 and are right where they fall. Hebrew's niqqud are the opposite. They are
+ * zero-advance glyphs whose outlines sit at *positive* x, 52..228, and they rely
+ * wholly on the `mark` feature: `shalom` pointed asks for +539 and +227, so dropping
+ * the offsets put every point under the next letter along. A pointed column is the
+ * learner's column, so wrong vowels there are worse than no vowels, and it is printed
+ * -- which is this project's worst place for a silent failure.
+ *
+ * So each glyph the shaper offset is drawn on its own, at the position it asked for.
+ * **Guarded by proof rather than by a list of scripts:** a glyph is only redrawn alone
+ * if laying out its own codepoints alone yields the same glyph id. That is true of
+ * Hebrew, which has no contextual forms, and false of Arabic, where an isolated
+ * codepoint would come back as the isolated form and undo the joining -- and there the
+ * run is drawn whole, exactly as before. Runs whose glyphs all sit at zero offset,
+ * which is almost all of them, take the single-call path untouched.
+ *
+ * @param {any} page @param {any} font @param {any} shaper
+ * @param {import('../core/types.js').TextRun} run
+ * @param {number} y  already flipped into PDF space
+ * @param {any} paint
+ */
+function drawRun(page, font, shaper, run, y, paint) {
+  const laid = shaper ? shaper.layout(run.text) : null;
+  const shifted = laid?.positions.some((/** @type {any} */ p) => p.xOffset || p.yOffset);
+  if (!laid || !shifted) {
+    page.drawText(run.text, { x: run.x, y, size: run.size, font, color: paint });
+    return;
+  }
+
+  // Every glyph has to survive being drawn alone, or none of them are: half a run
+  // repositioned and half not would be worse than the misplacement it is fixing.
+  const pieces = laid.glyphs.map((/** @type {any} */ glyph, /** @type {number} */ i) => {
+    const text = String.fromCodePoint(...(glyph.codePoints ?? []));
+    const alone = shaper.layout(text);
+    return alone.glyphs.length === 1 && alone.glyphs[0].id === glyph.id
+      ? { text, pos: laid.positions[i] } : null;
+  });
+  if (pieces.some((/** @type {any} */ piece) => piece === null)) {
+    page.drawText(run.text, { x: run.x, y, size: run.size, font, color: paint });
+    return;
+  }
+
+  // **Only the offset glyphs are drawn alone.** Each `drawText` is its own
+  // `BT`/`Tf`/`Tm`/`Tj`/`ET` block, about forty bytes of operators, and a glyph at
+  // zero offset does not need one: it lands where its predecessor's advance put it.
+  // So consecutive unoffset glyphs are flushed together, which is almost all of them
+  // -- a pointed Hebrew word is a handful of marks among its letters. Grouping is safe
+  // for the same reason the per-glyph path is: every glyph here has been shown to keep
+  // its identity out of context, so a group of them does too.
+  const em = run.size / shaper.unitsPerEm;
+  /** @type {{text:string, x:number, y:number, open:boolean}[]} */ const blocks = [];
+  let pen = 0;
+  for (const piece of /** @type {{text:string, pos:any}[]} */ (pieces)) {
+    const flat = !piece.pos.xOffset && !piece.pos.yOffset;
+    const last = blocks[blocks.length - 1];
+    // Extend the open block only if it is also unoffset and ends where this begins.
+    if (flat && last?.open) last.text += piece.text;
+    else {
+      blocks.push({
+        text: piece.text,
+        x: run.x + (pen + piece.pos.xOffset) * em,
+        // The plan's y grows downward and PDF's upward, and this one is already in
+        // PDF space -- so a mark the shaper pushes *down* moves toward smaller y.
+        y: y + piece.pos.yOffset * em,
+        open: flat,
+      });
+    }
+    pen += piece.pos.xAdvance;
+  }
+  for (const block of blocks) {
+    page.drawText(block.text, { x: block.x, y: block.y, size: run.size, font, color: paint });
+  }
+}
+
+/**
  * @typedef {Object} PdfOptions
  * @property {(file:string)=>Promise<Uint8Array>} loadFont  resolves `<id>.ttf`
  * @property {{viewBox:number, strokeWidth:number, paths:Record<string,string[]>}} icons
@@ -47,8 +128,15 @@ export async function planToPdf(plan, opts) {
 
   const used = new Set(plan.faces.flatMap((f) => f.runs.map((r) => r.fontId)));
   /** @type {Record<string, import('../vendor/pdf-lib.esm.js').PDFFont>} */ const fonts = {};
+  // The same faces again as fontkit objects. `pdf-lib` keeps its embedder's shaper
+  // private and `drawRun` needs the positions it threw away, so this reads each file
+  // once more -- a few hundred kilobytes for the life of one export, against
+  // re-parsing per run.
+  /** @type {Record<string, any>} */ const shapers = {};
   for (const id of [...used].sort()) {
-    fonts[id] = await doc.embedFont(await opts.loadFont(`${id}.ttf`), { subset: true });
+    const bytes = await opts.loadFont(`${id}.ttf`);
+    fonts[id] = await doc.embedFont(bytes, { subset: true });
+    shapers[id] = fontkit.create(bytes);
   }
 
   doc.setTitle(opts.title ?? 'Pocket language guide');
@@ -102,9 +190,7 @@ export async function planToPdf(plan, opts) {
     for (const run of face.runs) {
       const font = fonts[run.fontId];
       if (!font) throw new Error(`font ${run.fontId} was not embedded`);
-      page.drawText(run.text, {
-        x: run.x, y: flip(run.y), size: run.size, font, color: color(run.fill),
-      });
+      drawRun(page, font, shapers[run.fontId], run, flip(run.y), color(run.fill));
     }
   }
 

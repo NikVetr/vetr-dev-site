@@ -114,3 +114,5 @@ common-signs.closed,geschlossen,Ruhetag,ɡəʃlˈɔsən,,2,de-agent-v1;ipa=espea
 common-signs.stopped-stop,Halt,außer Betrieb,hˈalt,,2,de-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Muss ich das Ticket entwerten?,Muss ich die Fahrkarte abstempeln?,mˈʊs ɪç das tˈɪkət ɛntvˈɛɾtən,,2,coordinator-gaps-v2;ipa=espeak
 rail-station-words.ticket-validator,Entwerter,Fahrscheinentwerter,ɛntvˈɛɾtɜ,,2,coordinator-gaps-v2;ipa=espeak
+common-signs.pork-code,Schweinefleisch-Codes,,ʃvˈaɪnɛflˌaɪʃkoːts,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
+rail-station-words.fare,Fahrpreis,Fahrgeld,fˈɑːɾpɾaɪs,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak

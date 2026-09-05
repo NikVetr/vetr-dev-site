@@ -27,3 +27,4 @@ food-ordering.water-please,"Воду, пожалуйста.",,"Vodu, pozhaluysta
 food-ordering.can-a-vegetarian-eat-this,Это можно вегетарианцу?,,Eto mozhno vegetariantsu?,ˈɛtʌ mˈoʒnʌ vʲiɡʲitʌrʲiˈɑntsu,,2,ru-agent-v1;ipa=espeak
 dietary-needs.no-pork,Без свинины.,свинина,Bez svininy.,bʲˈes svʲinʲˈinɨ,,2,ru-gaps-v1;ipa=espeak
 dietary-needs.is-this-halal,Это халяль?,Это халяльное?,Eto khalyalʼ?,ˈɛtʌ xˈɑɭʲʌɭ,,2,ru-gaps-v1;ipa=espeak
+dietary-needs.does-it-contain-pork-fat,Здесь есть свиной жир или сало?,Готовили на свином сале?,Zdesʼ yestʼ svinoy zhir ili salo?,ʑdʲˈesʲ jestʲ svʲinˈoj ʒˈɨr ˈiɭʲɪ sˈɑɭʌ,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak

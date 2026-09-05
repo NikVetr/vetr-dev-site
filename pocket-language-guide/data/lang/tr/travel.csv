@@ -114,3 +114,5 @@ common-signs.stopped-stop,dur,durdu,dˈʊr,,2,tr-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Bileti okutmam gerekiyor mu?,Kartı okutmam gerekiyor mu?,biletˈɪ okʊtmˈam ɟeɾekˈijɔr mʊ,,2,tr-agent-v1;ipa=espeak
 rail-station-words.ticket-validator,validatör,turnike,validatˈœr,,2,tr-agent-v1;ipa=espeak
 rail-station-words.maglev,maglev,manyetik tren,maɡlˈɛv,,1,reader-gloss-v1;ipa=espeak
+common-signs.pork-code,domuz kodları,,dˈomʊz kɔdɫaɾˈɯ,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
+rail-station-words.fare,bilet ücreti,ücret,bilˈɛt ødʒretˈɪ,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak

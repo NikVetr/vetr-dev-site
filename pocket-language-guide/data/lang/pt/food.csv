@@ -27,3 +27,4 @@ food-ordering.water-please,"Água, por favor",,"ˈaɡwæ, por favˈor",,2,pt-age
 food-ordering.can-a-vegetarian-eat-this,Um vegetariano pode comer isto?,,ũŋ vˌeʒetˌaɾiˈɐ̃nʊ pˌɔdʒy komˈeɾ ˈistʊ,,2,pt-agent-v1;ipa=espeak
 dietary-needs.no-pork,Sem carne de porco,"Sem porco, presunto nem chouriço",sˈeɪŋ kˈaɾəny dʒy pˈoɾəkʊ,also ham + sausage,2,pt-gaps-v1;ipa=espeak
 dietary-needs.is-this-halal,Isto é halal?,Tem certificação halal?,ˈistw ɛ alˈaʊ,,2,pt-gaps-v1;ipa=espeak
+dietary-needs.does-it-contain-pork-fat,Leva banha de porco?,Leva gordura de porco?,lˈɛvæ bˈɐ̃ɲæ dʒy pˈoɾəkʊ,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak

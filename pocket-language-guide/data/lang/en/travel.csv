@@ -114,3 +114,5 @@ directions.east,east,,ˈiːst,,2,expansion-v1;ipa=espeak
 directions.west,west,,wˈɛst,,2,expansion-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Do I need to validate this ticket?,,dˈuː aɪ nˈiːd tə vˈælɪdˌeɪt ðɪs tˈɪkɪt,,2,coordinator-gaps-v1;ipa=espeak
 rail-station-words.ticket-validator,ticket validator,,tˈɪkɪt vˈælɪdˌeɪɾɚ,,2,coordinator-gaps-v1;ipa=espeak
+common-signs.pork-code,pork codes on signs,B1 = dog,pˈoːɹk kˈoʊdz ˌɔn sˈaɪnz,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
+rail-station-words.fare,fare,,fˈɛɹ,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak

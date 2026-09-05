@@ -27,3 +27,4 @@ food-ordering.water-please,ขอน้ำเปล่า,,kho nam plao,kʰɔː�
 food-ordering.can-a-vegetarian-eat-this,คนมังสวิรัติกินได้ไหม,คนกินเจกินได้ไหม,khon mangsawirat kin dai mai,kʰon˧ maŋ˧sa˨˩wiʔ˦˥rat˦˥ kin˧ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
 dietary-needs.no-pork,ไม่ใส่หมู น้ำมันหมู น้ำซุปหมู,,"mai sai mu, namman mu, nam sup mu",maj˥˩ saj˨˩ muː˩˩˦ naːm˦˥man˧muː˩˩˦ naːm˦˥ sup˦˥ muː˩˩˦,,2,th-gaps-v1;ipa=thaig2p
 dietary-needs.is-this-halal,อันนี้ฮาลาลไหม,มีตราฮาลาลไหม,an ni halan mai,ʔan˧niː˦˥ haː˧laː˧lɔː˧ maj˩˩˦,look for the diamond mark,2,th-gaps-v1;ipa=thaig2p
+dietary-needs.does-it-contain-pork-fat,ใส่น้ำมันหมูไหม,ผัดด้วยน้ำมันหมูไหม,sai namman mu mai,saj˨˩ naːm˦˥man˧muː˩˩˦ maj˩˩˦,,2,pork-fat-agent-v1;in-pack-frame;ipa=thaig2p

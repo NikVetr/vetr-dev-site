@@ -361,8 +361,19 @@ function languageName(subject, locale, overrides, which) {
   if (which === 'ipa') return own?.ipa || '';
   if (own?.name) return own.name;
   try {
-    return new Intl.DisplayNames([locale], { type: 'language' }).of(baseLanguage(subject))
-      || baseLanguage(subject);
+    const display = new Intl.DisplayNames([locale], { type: 'language' });
+    // **A locale ICU cannot display in gets no fallback at all**, and this is the
+    // one place that had to be told so. `tlh` and `qya` are in CLDR as subjects and
+    // neither is a display locale, so asking either of them for a name silently
+    // answers in *English* -- and since these two now write pIqaD and tengwar, the
+    // answer was English in Latin letters dropped into a cell of a different
+    // script, which is the one thing `fillLanguageSlots` promises cannot happen.
+    // `resolvedOptions().locale` is what tells them apart: it reports the locale
+    // ICU actually fell back to. `cldr_names` in `scripts/build_ipa.py` asks the
+    // identical question, and the two disagreeing is why the `ipa` column already
+    // refused this fallback while the rendered cell still took it.
+    if (display.resolvedOptions().locale.split('-')[0] !== baseLanguage(locale)) return '';
+    return display.of(baseLanguage(subject)) || baseLanguage(subject);
   } catch {
     return baseLanguage(subject);
   }
@@ -437,7 +448,14 @@ export function fillLanguageSlots(rows, { locale, target, source, names = {} }) 
       // blank one: `xoŋ˧ aː˨˩ˀ` respells as a fluent question with the language
       // silently missing, where an empty cell prints the blank column these rows
       // print today.
-      row[field] = which === 'ipa' && missing ? '' : filled;
+      //
+      // It applies to the written cell as well as to the `ipa`, now that a name can
+      // genuinely be absent: `languageName` no longer invents one for a locale ICU
+      // cannot display in, so a Klingon or Quenya cell whose registry row is missing
+      // would otherwise print ` lambë?` -- the sentence with a hole where the
+      // language should be. Nothing reaches it today; `tlh` has all twenty-two names
+      // and no Quenya cell carries a placeholder.
+      row[field] = missing ? '' : filled;
     }
   }
   return rows;

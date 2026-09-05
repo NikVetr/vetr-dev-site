@@ -27,3 +27,4 @@ food-ordering.water-please,Minta air putih,,mˈinta ˈair pˈutih,,2,id-agent-v1
 food-ordering.can-a-vegetarian-eat-this,"Ini pakai daging, ikan, atau terasi?",,"ˈini pˈakaɪ dˈaɡiŋ, ˈikan, ˌataʊ tərˈasi",,2,id-agent-v1;ipa=espeak
 dietary-needs.no-pork,Tanpa babi,Tanpa babi dan lemak babi,tˈanpa bˈabi,lemak babi = lard,2,id-gaps-v1;ipa=espeak
 dietary-needs.is-this-halal,Ini halal?,Ada sertifikat halal?,ˈini hˈalal,logo: BPJPH (was MUI),2,id-gaps-v1;ipa=espeak
+dietary-needs.does-it-contain-pork-fat,Masaknya pakai lemak babi?,Ada minyak babi atau lemak babi?,masˈakɲa pˈakaɪ lˈɛmak bˈabi,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak

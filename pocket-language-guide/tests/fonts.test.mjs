@@ -136,3 +136,33 @@ for (const [reader, chars] of Object.entries(charset)) {
       (c) => `${c} U+${(c.codePointAt(0) ?? 0).toString(16).toUpperCase()}`).join(', ')}`);
   });
 }
+
+test('a grafted face credits the font it borrowed glyphs from', async () => {
+  // **The graft moves outlines, so the copyright has to move with them.** Two faces
+  // here are built from more than one donor: a Latin face borrows the two conscript
+  // blocks from Constructium, and a face whose family ships no Latin borrows Latin
+  // from Noto Sans. Every donor is OFL 1.1, which asks that a redistributed copy
+  // carry the notice -- and a font carries its own, in nameID 0. For a while the
+  // Latin faces held Kreative Software's pIqaD and tengwar outlines under a notice
+  // naming only the Noto authors, which is a licence gap rather than untidiness.
+  const notices = async (/** @type {string} */ file) => {
+    const font = fontkit.create(await readFile(`data/fonts/${file}.ttf`));
+    return String(font.copyright ?? '');
+  };
+
+  // The conscript graft. `latin` is where it lands, because `scripts.csv` points both
+  // `Piqd` and `Teng` at that stack rather than giving two languages a stack each.
+  const latin = await notices('latin-400');
+  assert.match(latin, /Noto/, 'the primary donor');
+  assert.match(latin, /Kreative Software/, 'and the one the conscript blocks came from');
+
+  // And the manifest rolls them up, gathered from the faces rather than hardcoded, so
+  // a new donor cannot arrive without appearing there.
+  assert.equal(manifest.license, 'SIL Open Font License 1.1');
+  assert.ok(Array.isArray(manifest.copyright) && manifest.copyright.length > 1,
+    'the manifest should list every notice');
+  assert.ok(manifest.copyright.some((/** @type {string} */ c) => c.includes('Kreative Software')),
+    'including the conscript donor');
+  assert.ok(manifest.copyright.every((/** @type {string} */ c) => !c.includes('\n')),
+    'one line each, or the roll-up is unreadable');
+});

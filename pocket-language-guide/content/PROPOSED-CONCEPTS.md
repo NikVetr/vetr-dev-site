@@ -6,10 +6,15 @@ of them flagged a concept that does not exist, with a reason and usually a sourc
 This file is where those go, so the finding is not lost between the report and the
 next batch.
 
-Adding a concept is not free: a universal one costs every one of the fifteen packs a
-row, and until they have it the validator names them in its coverage warning. So
-these are staged rather than added, and the note beside each is the argument for
-where it belongs.
+Adding a concept is not free: a universal one costs every one of the twenty-two
+packs a row, and until they have it the validator names them in its coverage
+warning. So these are staged rather than added, and the note beside each is the
+argument for where it belongs.
+
+An entry that has landed keeps its argument and gains a `— shipped` heading, because
+the argument is the record of why the row is shaped the way it is. Everything under
+`## Strong cases` is now shipped except the romanisation legend, which turned out to
+be a decision rather than a row and carries a recommendation instead.
 
 Four are already in the bank rather than staged here. `dietary-needs.no-pork` and
 `dietary-needs.is-this-halal` were raised by the Indonesian translator, are universal
@@ -22,7 +27,7 @@ here.
 
 ## Strong cases
 
-### The pork rows are three concepts wearing one hat
+### ~~The pork rows are three concepts wearing one hat~~ — shipped
 
 Worth stating together, because five translators arrived at it independently and the
 shape is now clear. `dietary-needs.no-pork` names the *meat*, and three different
@@ -46,7 +51,25 @@ kept the short form. A `does-it-contain-pork-stock` concept and a
 `does-it-contain-pork-fat` concept would let every pack carry the local words in
 printed `text` instead of choosing between length and safety on one row.
 
-### `pharmacy-symptoms.i-think-i-have-malaria` and `.i-need-a-malaria-test`
+**Both exist now.** `dietary-needs.does-it-contain-pork-stock` went in with the
+malaria pair, universal, rank 1009 beside the fish-stock row at 1008.
+`dietary-needs.does-it-contain-pork-fat` is in as well, universal, rank 1010, and the
+two share the cluster `dietary-needs.hidden-pork`: they are the same question about a
+different vector, so a card that already has one gains less from the second, and
+stock sits above fat on importance because broth reaches more of the countries this
+corpus covers than lard does. The third vector, cured pork as seasoning, stays inside
+`no-pork`'s own `text` under the rule that only `text` is guaranteed to print --
+`Senza maiale, salumi, pancetta o guanciale` is the model.
+
+Two rows were **narrowed** rather than added, and they are the rows a reviewer should
+read first. Greek and Hungarian had already folded the fat into their stock row
+(`Έχει ζωμό ή λίπος χοιρινού;` and `Van benne sertésalaplé vagy zsír?`) because there
+was nowhere else to put it; leaving them would have printed "broth or fat" and "fat"
+as two rows of one card, which reads as a mistake. They ask about the broth now, and
+the fat rows (`Έχει χοιρινό λίπος ή λαρδί;`, `Van benne sertészsír vagy szalonna?`)
+carry what they gave up.
+
+### ~~`pharmacy-symptoms.i-think-i-have-malaria` and `.i-need-a-malaria-test`~~ — shipped
 
 Raised by the Swahili translator, who called it the biggest gap in that pack.
 Malaria is the most likely serious illness for a visitor to any of the four
@@ -65,7 +88,13 @@ diagnostic):
 - `Nadhani nina malaria` — `nah-THAH-nee NEE-nah mah-LAH-ree-ah`
 - `Nahitaji kipimo cha malaria` — `nah-hee-TAH-jee kee-PEE-moh chah mah-LAH-ree-ah`
 
-### `dietary-needs.does-it-contain-pork-stock`
+**Shipped** at that scope, ranks 4 and 5 straight after `i-have-a-fever`, cluster
+`pharmacy-symptoms.malaria` at ranks 0 and 1 so a card with the claim gains less from
+the test row. Rows are in all nineteen natural packs, sourced per language against
+health ministries and national programmes; the reader-side glosses carry
+`malaria-reader-v1`.
+
+### ~~`dietary-needs.does-it-contain-pork-stock`~~ — shipped
 
 Raised independently by the Japanese and Korean translators, and the Mandarin one
 was asked the same question. `no-pork` names the *meat*; it does not reach 豚骨
@@ -84,7 +113,10 @@ Japanese row ready: 豚のだしは入っていますか？ *buta no dashi wa ha
 respell `bu-tah noh dah-shih wah hah-it-teh-i-mahss kah?`. Universal, next to rank
 1008 with the fish-stock row.
 
-### `common-signs.pork-code`
+**Shipped** exactly there, with that Japanese row. See the pork entry above for what
+the fat row did to its cluster.
+
+### ~~`common-signs.pork-code`~~ — shipped
 
 Raised by the Indonesian translator, then verified in depth. In Indonesia pork is
 routinely signed with a **code rather than the word**: `B2` (from *babi*, two B's),
@@ -105,7 +137,17 @@ Two warnings that belong with it, because both are easy to get backwards:
 This is a `common-signs` concept, scoped `id`, and probably wants `text_alt` and a
 short ASCII `literal` doing the disambiguation rather than a second row.
 
-### A `note` explaining the romanisation column's own diacritics
+**Shipped** at that scope, rank 1004, importance 0.700. `text` is
+`B2 · BPK · samcan · bakut · cu nyuk` with `siobak · saksang · char siu` in
+`text_alt`. The two warnings went to the id row's `literal` and to the gloss rather
+than into `text`, which needed one thing checked first: a `ref` row draws neither
+`literal` nor `text_alt`, so nothing parked there reaches the card. That is
+acceptable *here specifically* because both warnings prevent over-avoidance rather
+than exposure -- a reader who wrongly reads `B1` as pork, or `bak-` as pork, avoids
+food they did not need to avoid. Had either warning pointed the other way it would
+have had to go in `text`.
+
+### A `note` explaining the romanisation column's own diacritics — **recommendation below, not built**
 
 Raised by the Vietnamese translator, and it is the one request none of the four
 existing `note` concepts can absorb. Pinyin's caron `ǎ` and Vietnamese's breve `ă`
@@ -126,7 +168,67 @@ Thai and Chinese readers read any superscript mark as a tone, which is why both
 dropped macron Hepburn in favour of doubled vowels. A legend would let those packs
 keep the standard romanisation instead of routing around the ambiguity.
 
-### Every currency concept, checked against `regions.csv`
+**Recommendation: neither a fifth `note` nor a template change. The card already has
+a card-level slot for this, and what is missing is two data fields and one default.**
+
+*A `note` is a section device and this is a card fact.* `noteAtom` draws a note in a
+bordered box at the head of its section, and all four existing notes are about their
+own section's content -- Chinese classifiers and Japanese counters in `numbers-money`,
+Thai particles in `social-basics`, the Swahili clock in `time-words`. The
+romanisation column is on every row of every section, so a note about it would be
+parked under one arbitrary heading. That is the objection the requester raised against
+smuggling it into the numbers note, and giving it its own concept does not answer it.
+
+*And a note is scoped the wrong way round for this.* `applies_to` on a note names the
+language the note is *about*, while the row is read from the **source**, so a fifth
+note scoped `zh-Hans` costs a paragraph of prose in all 21 other packs -- the rule the
+validator now enforces, and the one nothing passed for a while -- plus a bordered box
+on every Chinese sheet. The trap is not Chinese-only either: Hepburn's macron and
+IAST's macron-and-dots collide with a Vietnamese reader's own marks the same way. As
+notes that is eight concepts and 168 paragraphs.
+
+*The slot exists.* `spec.head`'s `legend` prints the reader's own pronunciation key,
+in the reader's own language, from the `legend` field of
+`data/respell/rules/<reader>__<accent>.json`. `core/solve/index.js` says why in its
+own comment: "It is the one thing on the card that explains the card, so it belongs
+in furniture rather than taking a column." Three concrete steps, in order of cost:
+
+1. **Write the thirteen missing `legend` fields, `vi` first.** Only 8 of the 21 reader
+   tables have one at all -- `ar hi hu ko th zh-Hans tlh qya` -- and `vi`, the table
+   whose reader raised this, is among the thirteen that do not. This is one JSON string per reader and it is already
+   rendered. The `zh-Hans` legend is the model, and it already does this job in the
+   other direction: 写的都是普通汉语拼音的字母和声调符号，按拼音读法读即可.
+2. **Then a second part in the same slot, keyed on the target.** The reader's legend
+   cannot say "the macron on this card is tone 1", because it is keyed on the reader
+   and the marks belong to the target. The band already joins any number of parts per
+   position with a bullet, so this wants a `roman_legend` string keyed on the
+   romanisation system in the registry, joined into the `legend` slot beside the
+   reader's own -- an additive change to `core/sheet.js` and the registry, and no
+   template change. It also repairs something that is wrong today: the `legend` slot
+   prints the *respelling* key whether or not the respelling column is shown, so a
+   reader who answered "I can read the script" in the quiz (`proficiency: 'reading'`,
+   which drops `respell` and keeps `roman`) gets a key for a column that is not on
+   their card and none for the column that is. Selecting the parts by `fieldSet` fixes
+   both at once.
+3. **Have the quiz tick the slot.** The band is off by default and that should not
+   change: turning it on was measured at 1.5 lines of the smallest type, about 0.05
+   of type scale on most pairs, a whole extra *pair* of faces on `es ← en`, and the
+   Devanagari, Arabic and Thai respellings drop under their 5.4pt floor, which
+   `tests/solve.test.mjs` asserts. But `ui/quiz.js` already asks the question that
+   identifies the reader who needs a key, and already spends that answer on
+   `fieldSet`; spending it on `spec.head` as well costs nothing on the cards that
+   do not want it.
+
+*One cheaper answer exists for some targets and not for this one.* The romanisation
+system is already a control -- `languages.csv` carries `romanizations` per language
+and the format panel offers the menu, so `ja` has `hepburn;kunrei` and `ko` has
+`rr;mccune`. Where a system's marks are the problem, a mark-free system for that
+target is a data answer rather than an explanation, which is what the Thai and Chinese
+packs did by hand when they dropped macron Hepburn for doubled vowels. It cannot
+answer pinyin, because the tone marks *are* pinyin -- which is why the legend is still
+the right fix for the case that was actually raised.
+
+### ~~Every currency concept, checked against `regions.csv`~~ — shipped, with four left staged
 
 The euro was scoped `de;fr;es;pt` and shipped the Italian pack without it; the Indian
 rupee did not exist. Both were found by reading a concept's `applies_to` against the
@@ -155,7 +257,64 @@ US, Canada, Australia and New Zealand, which all write `$`, and
   the north uses the lira -- but it is the one remaining scope that a reading of
   `regions.csv` flags.
 
-### `numbers-money.lakh` and `.crore`
+**The table was re-read row by row against `regions.csv` and mostly shipped.** Two
+places where the reading disagrees with the list above, and the reading wins:
+
+- **BYN is a ruble.** The Belarusian ruble is `рубль` and `numbers-money.ruble`
+  already covers it, so Russian's gap is two countries rather than three -- and they
+  are two different words, `тенге` and `сом`.
+- **Singapore prices are 元 and 块 in Chinese** exactly as China's are, so
+  `numbers-money.yu-n` and `.ku-i` already reach SGD and the Chinese gap is MYR alone.
+
+Four new concepts, and three widened scopes:
+
+| concept | scope | covers |
+|---|---|---|
+| `numbers-money.franc` + `.franc-symbol` | `de;fr;it;sw` | CHF for all three European packs, XOF for French (SN, CI), CDF for Swahili (CD). One word, five countries, four languages -- the shilling's shape, with the per-country abbreviation in the symbol row |
+| `numbers-money.peso` + `.peso-symbol` | `es` | MX, AR, CO, CL. `sol` for Peru rides in `text_alt` |
+| `numbers-money.real` + `.real-symbol` | `pt` | BR |
+| `numbers-money.local-currency` | `ar;ru` | the enumerating shape: `ريال · جنيه · درهم · دينار` and `тенге · сом` |
+| `numbers-money.euro` + symbol | `+tr` | CY |
+| `numbers-money.rupee` + symbol | `+en` | IN, which is one of the eight countries the registry gives English |
+| `numbers-money.dollar` + symbol | `+fr` | CA, which is one of the six it gives French |
+
+Three things that came out of doing it, all of which would otherwise be rediscovered:
+
+- **`numbers-money.local-currency` has no symbol row**, alone among the currencies,
+  and the reason is measured. A symbol row's respelling is blank where the text is a
+  bare sign (`€`, `₹`, `$` -- twelve such cells in this batch), and *junk* where it is
+  an abbreviation: espeak read `ر.س · ج.م · د.إ · د.أ` as `rs dʒˈamm dʔ dʔ`, with the
+  two dinars indistinguishable, and `₸ · с` as `ˈɛs`, a respelling of one Cyrillic
+  letter. Both would have printed on 36 pairs. `text_alt` gets no IPA by design, so
+  the abbreviations ship there.
+- **Widening a scope is not free.** An in-scope symbol row carries the symbol (`€`)
+  and an out-of-scope one carries the gloss (`euro (symbol)`), so the three widenings
+  each flipped one row's shape -- and on the pairs where that language is the *source*,
+  the gloss column loses the words and shows the symbol twice. That is already the
+  status quo among the six euro packs, and it is the reason **`en` was left out of the
+  euro scope** (below) while `tr` went in: Ireland is one of eight English countries
+  and English is the source on eighteen pairs, so the trade runs the other way.
+- **Hebrew joined `languages.csv` while this was being written**, with `regions=IL`
+  and ILS in `regions.csv`, so **the Hebrew pack has no currency concept at all** --
+  the Arabic case again. `numbers-money.shekel` is not added, because the target rows
+  have to be Hebrew and that pack belongs to another author; the note is in
+  `tmp/new-concepts.md` for them. `₪` U+20AA is in none of the shipped faces today.
+
+**Left staged, with the reading recorded so nobody has to redo it:**
+
+- **`en` and the euro (IE), and a `rand` for South Africa (ZA).** English serves eight
+  countries and five currency words; the dollar covers four countries and the pound
+  one, and the rupee now covers India. Ireland and South Africa are each one of eight.
+  The euro is declined on the gloss trade above; the rand would be a new concept and
+  38 rows for one country of eight, on the pack that pays for every row eighteen times.
+- **`es` and the sol (PE).** In `text_alt` on the peso row rather than a concept: it
+  is one country of six and a different currency, not a variant of the peso.
+- **`pt` and the kwanza (AO) and metical (MZ).** Two more words for two more countries,
+  neither of which is the larger half of anything.
+- **`zh-Hans` and the ringgit (MY).** 令吉 is real and 1 of 3 countries; 元 and 块
+  already reach Singapore, so this is the smallest remaining gap in the table.
+
+### ~~`numbers-money.lakh` and `.crore`~~ — shipped
 
 The unit gap of the same kind, and the corpus already accepts the shape: `万` is
 `numbers-money.y-w-n`, universal, glossed "ten thousand", because a myriad-grouped
@@ -171,7 +330,25 @@ one, because the validator refuses more than one digit in a right-to-left row. S
 `مئة ألف` spelled out, which is the same repair the five existing Arabic numeral rows
 took.
 
-### `pharmacy-symptoms.i-think-i-have-dengue`
+**Shipped** at ranks 16 and 17 -- in the number line, between 一万 at 15 and 半, which
+moved to 18 along with 元 and 块 -- because 100,000 and 10,000,000 belong in the
+sequence rather than at the end of the section. `1,00,000` and `1,00,00,000` ride in
+the Hindi rows' `text_alt`, so the digit grouping ships with the words.
+
+Three details worth keeping. The gloss turned out **not** to be a numeral in most
+languages: the number line's own rows are words (`dix mille`, `zehntausend`,
+`десять тысяч`), and only English uses digits, from the reference sheet -- so lakh is
+`cien mil`, `十万`, `십만`, `แสน`, and `100,000` in English alone, matching each pack.
+Arabic took the spelled-out repair as predicted. And Swahili already had the word:
+**`laki` is the Hindi lakh**, borrowed, and `Laki moja` is ordinary Tanzanian and
+Kenyan Swahili for a hundred thousand.
+
+They are in their own cluster rather than `numbers-money.misc`, which is the number
+line: eighteen items of cluster decay would have made `solve/weights.js` value a lakh
+at nothing, which is the same trap the priority ladder avoids by not using the decayed
+score at all.
+
+### ~~`pharmacy-symptoms.i-think-i-have-dengue`~~ — shipped
 
 The disease gap beside the malaria pair, and it reaches more of the corpus than
 malaria does: dengue is endemic in Thailand, Vietnam, Indonesia and India, has been
@@ -181,6 +358,21 @@ malaria there is no treatment to ask for, so the second row would be the warning
 rather than the test -- the standard advice is paracetamol and *not* ibuprofen or
 aspirin, which the bank already has words for in `pharmacy-symptoms.analgesic`.
 Scope roughly `th;vi;id;hi;pt;es`, with `it` and `el` a judgement call.
+
+**Shipped** at exactly `th;vi;id;hi;pt;es`, rank 6 -- directly after the malaria pair,
+which pushed the rest of `pharmacy-symptoms` up one -- importance 0.862, and its **own
+cluster** rather than a third rung of `pharmacy-symptoms.malaria`. That is the load-
+bearing choice: the two diseases are complements, not alternatives, since the first
+days are indistinguishable and naming the second is what gets the right test, so a
+card that already carries the malaria pair must not value this row at 55% of itself.
+
+`it` and `el` are **out**, and that is the judgement rather than an oversight: local
+transmission in Italy and Greece is sporadic where it is endemic in the six, and a
+scoped concept still costs a row on every card in its scope. One row rather than two,
+for the reason the entry gives -- there is nothing to ask for.
+
+Each row is its own pack's reviewed malaria frame with the name the country's health
+service uses: ไข้เลือดออก, sốt xuất huyết, demam berdarah, डेंगू, dengue, dengue.
 
 ## Worth doing, lower urgency
 
@@ -192,11 +384,28 @@ reachable by filling `utility-templates.please-do-not-add {}` with प्या�
 which works but buries it. Scope `hi`, possibly `hi;th;id` for the Buddhist
 vegetarian overlap.
 
-### `rail-station-words.fare` and `.conductor`
+### ~~`rail-station-words.fare`~~ — shipped. `.conductor` staged, and the split is the finding
 
 Raised by the Swahili translator: `nauli` and `kondakta` are the two words you need
 on a *daladala* or a *matatu*, and there is nowhere to put them. Universal — a fare
 and a conductor exist everywhere this corpus goes.
+
+**`fare` shipped**, universal, rank 15, importance 0.700. **`conductor` did not**, and
+the reason is the half of the argument that does not hold: a fare names the same thing
+in all nineteen, and a conductor does not. The person the Swahili request means is the
+one you hand money to on a minibus -- `kondakta`, `kondektur`, `cobrador` -- and in
+Japan, Korea, Germany and Italy that person does not exist; the nearest word is a
+ticket *inspector* (`車掌`, `Schaffner`, `controllore`, `revisor`), who checks what you
+already bought. Printing 車掌 glossed "conductor" teaches a word for an interaction the
+traveller will never have, and printing `cobrador` in Spain is wrong the way `manteca`
+is wrong in Argentina. It wants either a scope, which would be arbitrary, or a
+different concept -- "who do I pay on the bus?" is a phrase rather than a word, and it
+would earn its row.
+
+One incidental finding from filling `fare`: the Thai printed term `ค่าโดยสาร` triggers
+the `thaig2p` phantom-syllable defect (`kʰaː˥˩doːj˧saːn˩˩˦ra˦˥`, four syllables where
+Thai has three), the same class as `ขอบคุณ` → *kop-kun-na*. `ค่ารถ` is what a passenger
+says, comes back clean, and carries `ค่าโดยสาร` in `text_alt`.
 
 ### `payment-receipt.can-i-pay-by-mobile-money`
 
@@ -204,7 +413,7 @@ Also Swahili. Mobile money is how East Africa pays, and it sits next to a QR-cod
 row that the region barely uses. Scope `sw` at minimum; Indonesian and Indian
 readers would use it too.
 
-### `dietary-needs.does-it-contain-pork-fat`
+### ~~`dietary-needs.does-it-contain-pork-fat`~~ — shipped
 
 Raised by the Spanish translator, and it is the European half of the pork problem
 the Japanese and Korean ones raised for stock. `manteca`, `grasa de cerdo`,
@@ -215,6 +424,11 @@ exact shape once already, for fish, in `dietary-needs.does-it-contain-fish-stock
 Note the translator's warning about `manteca`: it means *lard* in Spain and *butter*
 in Argentina and Uruguay, so the Spanish row cannot simply name it. That is an
 argument for a concept each pack fills locally rather than a longer shared string.
+
+**Shipped**, universal, rank 1010, cluster `dietary-needs.hidden-pork` beside the
+stock row -- see the pork entry at the top of this file for what that clustering
+buys and for the two rows it narrowed. The `manteca` warning is why the Spanish row
+is `¿Lleva manteca de cerdo?` and not `¿Lleva manteca?`.
 
 ### `dietary-needs.no-dried-fish`
 
@@ -489,3 +703,25 @@ Named because each looks obviously right until you try to fill nineteen cells.
   and `aw` where the diphthong wants `oy`. It already prints on the shipped
   `shopping.that-is-too-expensive`, so this is a `data/respell/rules/en__en-US.json`
   nucleus rule rather than anything about the data.
+
+## Two the Hebrew pack asked for
+
+Both are Israel's version of a trap the bank already handles for somewhere else, and
+both are staged rather than added for the usual reason: a universal concept costs
+every one of the twenty-two packs a row, and a scoped one costs twenty-one gloss rows.
+
+- **`dietary-needs.is-this-kosher`, the mirror of `is-this-halal`.** The halal row is
+  *universal* and argues for itself: "askable anywhere -- a traveller who needs it
+  needs it in Japan too". Every word of that applies to kosher, which is also a
+  certification with a visible mark (a הכשר badge) rather than a judgement a cook
+  makes, so the answer is checkable and the question is worth asking. Scoping it to
+  `he` would be wrong for the same reason scoping halal would be. The Hebrew is
+  `זֶה כָּשֵׁר?` and the other twenty-one need a word they mostly already have as a
+  loan (`kosher`, `коше́рный`, `コーシャ`, `کوشر`).
+- **`dietary-needs.no-sesame`.** Sesame is one of the fourteen allergens Israeli
+  labelling names, and tehina is in or beside a very large share of what a visitor
+  is served -- the same shape as the Vietnamese fish-sauce case that got
+  `does-it-contain-fish-stock` its own row, and as the Hungarian `zsír` case. It is
+  also the one major allergen with no row of its own: `no-nuts` and `no-peanuts`
+  have one each, and sesame has to go through `i-am-allergic-to {}`, which is a slot
+  the traveller has to fill in a language they do not write. `בְּלִי שֻׁמְשוֹם`.
