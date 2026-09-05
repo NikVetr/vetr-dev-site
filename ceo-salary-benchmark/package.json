@@ -7,7 +7,7 @@
     "build": "npm run build:data && npm run build:routes",
     "serve": "python3 scripts/serve_local.py --port 4173 --bind 127.0.0.1",
     "test": "playwright test",
-    "test:statistics": "node --test tests/statistics.cjs && Rscript tests/test_salary_model_numerics.R && Rscript tests/test_salary_model_calibration.R",
+    "test:statistics": "node --test tests/statistics.cjs && Rscript tests/test_salary_model_numerics.R && Rscript tests/test_salary_model_calibration.R && Rscript tests/test_salary_model_missing_inputs.R",
     "test:data": "python3 -m unittest discover -s tests -p 'test_*.py' && python3 scripts/audit_form990_position_outputs.py && python3 scripts/validate_living_peer_universe.py && python3 scripts/validate_ea_roster_additions.py && python3 benchmark/scripts/test_validation_audits.py"
   },
   "devDependencies": {

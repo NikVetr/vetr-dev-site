@@ -41,9 +41,12 @@ RP-relative judgments assembled from overlapping inputs.
 The combined cohort has 19 missing expense values, 27 missing revenue values, 18
 missing staff values, and 57 missing highest-other-base values. Recruitment
 budgets are kept as expense proxies and are not duplicated into revenue. In the
-Bayesian fit, each missing transformed continuous value is a latent standardized
-parameter with a standard-normal prior. This integrates over missing-value
-uncertainty instead of filling every gap with one median. The GAM remains a
+Bayesian fit, observed and missing standardized log inputs follow a joint normal
+distribution with a learned location, scales, and regularized correlation matrix.
+Missing values remain latent parameters. Held-out imputations condition jointly
+on that record's observed continuous inputs, using each training-posterior draw;
+the held-out salary is never used. This propagates conditional imputation and
+covariance uncertainty into salary predictions. The GAM remains a
 deterministic challenger and uses the fold-specific transformed center plus active
 missingness indicators. Browser profiles require positive numeric inputs.
 
@@ -90,7 +93,10 @@ tau_focus/type/title/location ~ half-Normal(0, 0.25)
 tau_remote/fiscal sponsor     ~ half-Normal(0, 0.20)
 raw category effects          ~ Normal(0, 1)
 EA increments                 ~ Normal(0, 0.2)
-missing standardized values   ~ Normal(0, 1)
+input location[k]             ~ Normal(0, 0.5)
+input scale[k]                ~ Lognormal(0, 0.35)
+input correlation             ~ LKJ(2), Cholesky parameterization
+complete standardized inputs  ~ Multivariate Normal(input location, input covariance)
 ```
 
 Each categorical effect is `tau * (raw - mean(raw))`, giving a centered
@@ -99,6 +105,15 @@ current EA taxonomy has two levels: Functional overlap is the zero point and a
 single signed increment represents EA-adjacent organizations. Historical input
 files retain their finer labels, which are collapsed at model ingress. The
 increment remains signed, so the coding does not impose a salary direction.
+
+The joint input likelihood includes observed covariates as well as latent missing
+values. Its covariance is `diag(scale) * correlation * diag(scale)`; the LKJ prior
+regularizes correlations toward zero ([Stan documentation](https://mc-stan.org/docs/functions-reference/correlation_matrix_distributions.html)).
+Salary and missingness-indicator coefficients retain their existing priors. The
+input model shares one distribution across the included records. Recruitment
+budgets still proxy expenses, and recruitment revenue is entirely missing: this
+model transports the observed financial relationship to those records rather
+than identifying an advertisement-specific revenue distribution.
 
 Exact filings contribute
 
@@ -134,6 +149,11 @@ tree-depth, and E-BFMI gates,
 but they do not resolve the substantive sparsity and evidence-stream limitations
 described below.
 
+The joint-input production run passes all 44 fit gates: zero divergences and
+tree-depth hits, maximum R-hat 1.0194, minimum bulk ESS 287.7, minimum tail ESS
+203.8, and minimum E-BFMI 0.658. Posterior mean expense/revenue correlations
+range from 0.873 to 0.881 across the four full fits.
+
 ## Comparison models
 
 The audit also fits five exact-filing comparators:
@@ -162,7 +182,11 @@ or alias-resolution system.
 `fit_salary_models.R` then performs one organization-grouped 10-fold run.
 
 For each held-out fold, continuous imputation, centering, and scaling are learned
-from the other nine folds. GAM smoothing is fit by REML within the training fold.
+from the other nine folds. This includes all joint-input location, scale, and
+correlation parameters. Conditional Gaussian draws use the observed coordinates
+and the Schur-complement conditional covariance, so simultaneous missing values
+remain correlated. No held-out outcome enters this calculation. GAM smoothing is
+fit by REML within the training fold.
 The Bayesian priors and model form are fixed rather than selected against the
 held-out outcomes. The broad categorical vocabulary is fixed for the prepared
 cohort and is outcome-blind; no salary-derived category construction or target
@@ -182,6 +206,45 @@ the browser's residual distribution. These are empirically validated intervals,
 not a distribution-free coverage guarantee. This is cross-validated ELPD, not in-sample
 lppd. The generated `cross_validation_results.csv` is the canonical results
 table and reports all nine specifications in paired order.
+
+### Joint missing-input comparison
+
+`compare_missing_input_models.py` compares the current OOF predictions with the
+independent-input baseline at git commit `b871665`. It requires byte-identical
+prepared training data and matched model/record keys, folds, observations, and
+outcomes. `missing_input_comparison.csv` reports exact-salary RMSE, 90% coverage,
+and log scores by complete/incomplete input status, with cash-proxy and ad scores
+kept separate. Positive changes in summed log score favor the joint model; the
+number of improving folds is descriptive, not a significance test.
+
+All four Bayesian specifications improve exact-filing RMSE and log score on
+this split. Deterministic comparator results reproduce unchanged.
+
+| Bayesian specification | Independent log-RMSE | Joint log-RMSE | Change in filing ELPD | Folds with higher log score |
+| --- | ---: | ---: | ---: | ---: |
+| Filings, without other pay | 0.3457 | 0.3435 | +0.63 | 7/10 |
+| Filings, with other pay | 0.3378 | 0.3256 | +5.49 | 9/10 |
+| Filings + ads, without other pay | 0.3404 | 0.3338 | +1.67 | 8/10 |
+| Filings + ads, with other pay | 0.3321 | 0.3195 | +5.25 | 8/10 |
+
+For the default filing model with other pay, complete-record RMSE changes from
+0.2932 to 0.2834 and incomplete-record RMSE from 0.5139 to 0.4931. Overall 90%
+coverage rises from 89.5% to 93.9%; incomplete-record coverage rises from 14/18
+to 17/18. These coverage changes do not establish nominal calibration.
+For the ad-augmented model with other pay, incomplete-record ELPD changes by only
++0.07, so almost all its filing log-score gain comes from complete records.
+
+Cash-proxy mean log scores improve in all four models, but ad scores worsen:
+mean interval scores change from -2.201 to -2.276 without other pay and -2.374
+to -2.393 with it. The two ad point scores also deteriorate. The retained model
+targets filing-source salary; these mixed stream results strengthen the case
+for checking input-distribution transport and ad measurement separately.
+
+Only one of the 114 exact-salary filings has an incomplete three-input profile;
+18 are incomplete when highest-other pay is included. All 27 ads lack revenue.
+These subgroup sizes limit evidence about performance on naturally missing
+inputs. The toy-data tests verify the conditional model's mathematics and Stan
+implementation; they do not validate its transport or disclosure assumptions.
 
 ## Browser artifact semantics
 
@@ -209,6 +272,11 @@ the browser uses the analytic mixture instead. For a browser profile, the app:
 4. computes its density and inverts its CDF for all displayed quantiles; and
 5. computes expected salary analytically as the draw-average of
    `exp(mu + sigma_filing^2 / 2)`.
+
+Each Bayesian artifact also records its missing-input specification, feature
+order, and posterior mean correlation matrix. Covariance parameters participate
+in the same sampler convergence gates as salary parameters. Browser profiles
+require complete positive inputs, so no browser-side imputation is needed.
 
 The job-ad offset is never added to an RP/profile prediction: ads can inform the
 range-augmented fit, but the prediction target remains filing-source CEO pay.
@@ -257,6 +325,11 @@ in application history.
   a handful of records.
 - Revenue and expenses are strongly related, and conditional coefficient signs
   should not be read as independent causal effects.
+- The joint Gaussian input model assumes that observed input relationships
+  transport to missing values. Missingness indicators allow salary shifts but do
+  not identify a nonignorable disclosure mechanism. Source-specific measurement
+  error, heavy-tailed inputs, and the ad-budget/filing-expense difference remain
+  sensitivity targets.
 - The four organization groups with repeated records are held together in
   cross-validation, but the likelihood does not add a separately identifiable
   organization random effect; repeated rows remain conditionally independent.
@@ -288,6 +361,8 @@ From the repository root:
 ```bash
 python3 benchmark/analysis/predictive_salary_models/prepare_model_data.py
 Rscript benchmark/analysis/predictive_salary_models/fit_salary_models.R .
+python3 benchmark/analysis/predictive_salary_models/compare_missing_input_models.py
+Rscript tests/test_salary_model_missing_inputs.R --stan
 ```
 
 The R run requires `cmdstanr`, CmdStan, `jsonlite`, and `mgcv`. Together the two

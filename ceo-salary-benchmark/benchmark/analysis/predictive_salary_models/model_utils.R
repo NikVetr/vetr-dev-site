@@ -48,6 +48,24 @@ log_interval_probability <- function(lower, upper, mean, sd) {
   result
 }
 
+conditional_missing_normal <- function(values, missing, location, covariance) {
+  p <- length(location)
+  if (length(values) != p || length(missing) != p || !is.logical(missing) ||
+      anyNA(missing) || !identical(dim(covariance), c(p, p)) ||
+      any(!is.finite(location)) || any(!is.finite(covariance)) ||
+      any(!is.finite(values[!missing]))) stop("Invalid conditional-normal inputs")
+  if (!any(missing)) return(list(mean = numeric(), covariance = matrix(numeric(), 0, 0)))
+  conditional_mean <- location[missing]
+  conditional_covariance <- covariance[missing, missing, drop = FALSE]
+  if (any(!missing)) {
+    regression <- t(solve(covariance[!missing, !missing, drop = FALSE],
+                          covariance[!missing, missing, drop = FALSE]))
+    conditional_mean <- conditional_mean + as.numeric(regression %*% (values[!missing] - location[!missing]))
+    conditional_covariance <- conditional_covariance - regression %*% covariance[!missing, missing, drop = FALSE]
+  }
+  list(mean = conditional_mean, covariance = conditional_covariance)
+}
+
 residual_bandwidth <- function(residuals) {
   if (length(residuals) < 2L || any(!is.finite(residuals))) stop("Invalid calibration residuals")
   max(0.04, 1.06 * sd(residuals) * length(residuals)^(-0.2))

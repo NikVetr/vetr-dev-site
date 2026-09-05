@@ -26,6 +26,23 @@ def load_app_data():
 
 
 class PredictiveModelContractTest(unittest.TestCase):
+    def test_bayesian_models_export_joint_missing_input_provenance(self):
+        artifact = json.loads(
+            (ROOT / "benchmark" / "analysis" / "predictive_salary_models" / "model_artifact.json")
+            .read_text(encoding="utf-8")
+        )
+        for key, model in artifact["models"].items():
+            if not key.startswith("bayesian"):
+                continue
+            missing = model["missingInputs"]
+            features = [item["key"] for item in model["preprocessing"]]
+            self.assertEqual(missing["featureKeys"], features)
+            self.assertEqual(missing["distribution"], "joint_normal_standardized_log_inputs")
+            self.assertEqual(missing["correlationPrior"], "LKJ(2)")
+            self.assertEqual(len(missing["posteriorMeanCorrelation"]), len(features))
+            # The fitted input model must learn the strong observed financial association.
+            self.assertGreater(missing["posteriorMeanCorrelation"][0][1], .5)
+
     def test_generated_app_uses_collapsed_ea_taxonomy(self):
         data = load_app_data()
         self.assertNotIn("EA-core", json.dumps(data))

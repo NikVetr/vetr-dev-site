@@ -16,10 +16,11 @@ functions {
 data {
   int<lower=1> N;
   int<lower=1> K;
+  int<lower=1, upper=K> P;
   matrix[N, K] X;
   int<lower=0> N_missing;
   array[N_missing] int<lower=1, upper=N> missing_row;
-  array[N_missing] int<lower=1, upper=K> missing_col;
+  array[N_missing] int<lower=1, upper=P> missing_col;
   vector[N] log_salary_midpoint;
   vector[N] log_salary_lower;
   vector[N] log_salary_upper;
@@ -51,6 +52,9 @@ parameters {
   real alpha;
   vector[K] beta;
   vector[N_missing] x_missing;
+  vector[P] x_location;
+  vector<lower=0>[P] x_scale;
+  cholesky_factor_corr[P] x_cholesky;
   real ad_offset;
   // Bounds cover median positive cash increments from 0.7% to 139% while
   // preventing numerically extreme exponentially-modified-normal proposals.
@@ -78,6 +82,7 @@ parameters {
 
 transformed parameters {
   matrix[N, K] X_complete = X;
+  matrix[P, P] x_cov_cholesky = diag_pre_multiply(x_scale, x_cholesky);
   vector[J_focus] focus_effect = tau_focus * (focus_raw - mean(focus_raw));
   vector[J_structure] structure_effect = tau_structure * (structure_raw - mean(structure_raw));
   vector[J_title] title_effect = tau_title * (title_raw - mean(title_raw));
@@ -111,7 +116,13 @@ transformed parameters {
 model {
   alpha ~ normal(12.5, 1);
   beta ~ normal(0, 0.3);
-  x_missing ~ std_normal();
+  x_location ~ normal(0, 0.5);
+  x_scale ~ lognormal(0, 0.35);
+  x_cholesky ~ lkj_corr_cholesky(2);
+  // Observed and latent inputs jointly identify covariance in each training fold.
+  for (n in 1:N) {
+    to_vector(X_complete[n, 1:P]) ~ multi_normal_cholesky(x_location, x_cov_cholesky);
+  }
   ad_offset ~ normal(0, 0.35);
   cash_increment_rate ~ lognormal(log(10), 0.6);
   cash_zero_probability ~ beta(2, 2);

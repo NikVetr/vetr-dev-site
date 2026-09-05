@@ -465,6 +465,18 @@ def load_predictive_model_artifact(
         ]
         if model.get("designColumns") != expected_design:
             raise ValueError(f"Predictive-model {model_key} design columns are malformed")
+        missing_inputs = model.get("missingInputs") or {}
+        if (missing_inputs.get("distribution") != "joint_normal_standardized_log_inputs"
+                or missing_inputs.get("conditioning") != "observed continuous inputs; training-fold posterior only"
+                or missing_inputs.get("correlationPrior") != "LKJ(2)"
+                or missing_inputs.get("featureKeys") != expected_keys):
+            raise ValueError(f"Predictive-model {model_key} missing-input specification is stale")
+        correlation = missing_inputs.get("posteriorMeanCorrelation")
+        require_finite_matrix(correlation, len(expected_keys), len(expected_keys), f"{model_key} input correlation")
+        for i, row in enumerate(correlation):
+            if (abs(row[i] - 1) > 1e-6 or any(abs(value) > 1 for value in row)
+                    or any(abs(row[j] - correlation[j][i]) > 1e-6 for j in range(len(row)))):
+                raise ValueError(f"Predictive-model {model_key} input correlation is malformed")
         draws = model.get("draws") or {}
         for key in ("alpha", "adOffset", "residualZ"):
             require_finite_vector(draws.get(key), draw_count, f"{model_key} draws {key}")

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-05T01:38:47+00:00",
+  "generatedAt": "2026-09-05T13:37:24+00:00",
   "seed": 20260903,
   "trainingInputSha256": "3048a670856dfb8120e5575035f9b3a23af1b88d3e501d26bef7ce85a5477bae",
   "target": "log July 2026-adjusted annual base salary",
@@ -84,9 +84,9 @@
   "provenance": {
     "trainingCsvSha256": "92f6d8e96fa14febc40db3b98e9a64c7d70c49db4c7ac822c4abed9a03b58594",
     "prepareScriptSha256": "11d9a08d9a2b326b3959c7980afb2e23b35b524a56bfcb5b4fea8ff02295d306",
-    "fitScriptSha256": "7f21e92e6027c722771a3759f77373c6b7b66ba4a5efb18423feb0eb4bd20339",
-    "stanModelSha256": "9739524cef70c80b32a6d738c8f55702ab0060a077efb882bf69f42525f44e75",
-    "utilsScriptSha256": "33541668edc3aeafe96871a9e504442664dbfd88f83caf712dc8dd145bf65646",
+    "fitScriptSha256": "285e52da58d1a47b2deb7995f8b821bab33edd1ef14499185ca2194bcd2b1c2b",
+    "stanModelSha256": "021d4eab7040f2afc272073526d577ec9ed03d5e90dee7b137cc4aae25b96dfb",
+    "utilsScriptSha256": "afef3bd73787e768ae4c827a1828b969e80e201796b27a901cde14d7af1a2bd7",
     "contractScriptSha256": "778cc04d2187fe2b7e6a44c7c9e3e1631ad3908bc99cceab4f9a8a07fd2ab1d8"
   }
 }

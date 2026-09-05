@@ -173,7 +173,7 @@ make_stan_data <- function(rows, preprocessing, feature_keys) {
   design <- make_design(rows, preprocessing, feature_keys)
   missing_locations <- which(design$missing, arr.ind = TRUE)
   list(
-    N = nrow(rows), K = ncol(design$X), X = design$X,
+    N = nrow(rows), K = ncol(design$X), P = length(feature_keys), X = design$X,
     N_missing = nrow(missing_locations),
     missing_row = as.integer(missing_locations[, "row"]),
     missing_col = as.integer(missing_locations[, "col"]),
@@ -212,6 +212,8 @@ fit_stan <- function(rows, seed, include_highest_other_pay, full = FALSE) {
   initial_values <- list(
     alpha = mean(rows$log_mid), beta = rep(0, stan_data$K),
     x_missing = rep(0, stan_data$N_missing), ad_offset = 0,
+    x_location = rep(0, stan_data$P), x_scale = rep(1, stan_data$P),
+    x_cholesky = diag(stan_data$P),
     cash_increment_rate = 10, cash_zero_probability = 0.5,
     sigma = c(0.35, 0.45),
     tau_focus = 0.1, tau_structure = 0.1, tau_title = 0.1, tau_location = 0.1,
@@ -255,6 +257,7 @@ sampler_diagnostic_summary <- function(fit, n_missing, max_treedepth = 13L) {
     mean(diff(energy)^2) / denominator
   })
   convergence_variables <- c(
+    "x_location", "x_scale", "x_cholesky",
     "alpha", "beta", if (n_missing > 0L) "x_missing", "ad_offset", "cash_increment_rate",
     "cash_zero_probability", "sigma",
     "tau_focus", "tau_structure", "tau_title", "tau_location", "tau_remote", "tau_fiscal_sponsor",
@@ -286,13 +289,19 @@ draw_columns <- function(draws, prefix, count) {
 
 posterior_components <- function(fit, feature_keys) {
   variables <- c(
+    "x_location", "x_cov_cholesky",
     "alpha", "beta", "ad_offset", "cash_increment_rate", "cash_zero_probability", "sigma",
     "focus_effect", "structure_effect", "title_effect", "location_effect",
     "remote_effect", "fiscal_sponsor_effect", "ea_effect"
   )
   draws <- as.matrix(fit$draws(variables = variables, format = "draws_matrix"))
+  p <- length(feature_keys)
+  covariance_columns <- unlist(lapply(seq_len(p), function(j) paste0("x_cov_cholesky[", seq_len(p), ",", j, "]")))
+  covariance_draws <- draws[, covariance_columns, drop = FALSE]
   list(
     matrix = draws,
+    x_location = draw_columns(draws, "x_location", p),
+    x_covariance = lapply(seq_len(nrow(draws)), function(i) tcrossprod(matrix(covariance_draws[i, ], p, p))),
     alpha = as.numeric(draws[, "alpha"]),
     beta = draw_columns(draws, "beta", 2L * length(feature_keys)),
     ad_offset = as.numeric(draws[, "ad_offset"]),
@@ -315,13 +324,16 @@ posterior_mu <- function(components, design) {
   n <- nrow(design$X)
   d <- length(components$alpha)
   mu <- design$X %*% t(components$beta)
-  missing_locations <- which(design$missing, arr.ind = TRUE)
-  if (nrow(missing_locations)) {
-    for (m in seq_len(nrow(missing_locations))) {
-      row_index <- missing_locations[m, "row"]
-      column_index <- missing_locations[m, "col"]
-      latent_value <- rnorm(d)
-      mu[row_index, ] <- mu[row_index, ] + latent_value * components$beta[, column_index]
+  for (i in which(rowSums(design$missing) > 0)) {
+    missing <- design$missing[i, ]
+    columns <- which(missing)
+    for (s in seq_len(d)) {
+      conditional <- conditional_missing_normal(
+        design$X[i, seq_along(missing)], missing,
+        components$x_location[s, ], components$x_covariance[[s]]
+      )
+      latent <- conditional$mean + as.numeric(t(chol(conditional$covariance)) %*% rnorm(length(columns)))
+      mu[i, s] <- mu[i, s] + sum((latent - design$X[i, columns]) * components$beta[s, columns])
     }
   }
   mu <- mu + matrix(components$alpha, nrow = n, ncol = d, byrow = TRUE)
@@ -754,6 +766,7 @@ thin_components <- function(fitted, include_ads, maximum_draws = if (quick) 80L 
   keep <- unique(round(seq(1, total, length.out = min(total, maximum_draws))))
   set.seed(if (include_ads) 20264903 else 20265903)
   summary_table <- fitted$fit$summary(variables = c(
+    "x_location", "x_scale", "x_cholesky",
     "alpha", "beta", if (fitted$n_missing > 0L) "x_missing", "ad_offset", "cash_increment_rate",
     "cash_zero_probability", "sigma",
     "tau_focus", "tau_structure", "tau_title", "tau_location", "tau_remote", "tau_fiscal_sponsor",
@@ -767,6 +780,13 @@ thin_components <- function(fitted, include_ads, maximum_draws = if (quick) 80L 
     includeHighestOtherPay = fitted$include_highest_other_pay,
     designColumns = design_columns_for(fitted$feature_keys),
     preprocessing = json_preprocessing(fitted$preprocessing),
+    missingInputs = list(
+      distribution = "joint_normal_standardized_log_inputs",
+      conditioning = "observed continuous inputs; training-fold posterior only",
+      correlationPrior = "LKJ(2)",
+      featureKeys = unname(fitted$feature_keys),
+      posteriorMeanCorrelation = unname(Reduce(`+`, lapply(components$x_covariance, cov2cor)) / total)
+    ),
     draws = list(
       alpha = unname(components$alpha[keep]),
       beta = unname(components$beta[keep, , drop = FALSE]),
@@ -935,7 +955,7 @@ artifact <- list(
   exclusions = list(
     "Peer group and similarity score are excluded because they are RP-relative judgments built from overlapping inputs.",
     "Partial-year, transition, part-time, unresolved-measurement, and nonpositive records are excluded because they do not share the annual organization-leadership-pay target.",
-    "Missing continuous inputs are estimated as latent standardized values rather than filled with a single fixed number.",
+    "Missing continuous inputs follow a regularized joint normal model on standardized logs; held-out imputations condition on observed inputs using only the training-fold posterior.",
     "Cash-only filing observations (Form 990 Part VII and one Form 990-EZ officer-compensation record) inform latent base pay through a separately estimated cash-to-base measurement model; they are never relabeled as base salary.",
     "Remote-work and fiscal-sponsor categories reflect reviewed current status, which can differ from status in older compensation years; their effects are descriptive rather than causal.",
     "Advertised policy ranges are experimental evidence about a role's intended pay, not classical censoring intervals for realized incumbent compensation.",
@@ -979,7 +999,7 @@ artifact <- list(
     intercept = "Exact-filing comparison model with one mean log base salary and no organization predictors. Predictive uncertainty uses organization-grouped out-of-fold residuals.",
     linear = "Exact-filing linear model for log base salary using standardized log expenses, revenue, staff, and non-CEO highest reported base pay plus active missing-value indicators. Predictive uncertainty uses organization-grouped out-of-fold residuals.",
     linearNoHighest = "Exact-filing linear model for log base salary using standardized log expenses, revenue, and staff plus active missing-value indicators; non-CEO pay and its missingness indicator are omitted. Predictive uncertainty uses organization-grouped out-of-fold residuals.",
-    bayesian = "Filing-only multilevel normal model for log base salary with signed regularized scale and non-CEO-pay slopes; multilevel focus, type, title, location, remote-work, and fiscal-sponsor effects; a signed EA effect; latent missing continuous inputs; and a cash-proxy measurement model.",
+    bayesian = "Filing-only multilevel normal model for log base salary with signed regularized scale and non-CEO-pay slopes; multilevel focus, type, title, location, remote-work, and fiscal-sponsor effects; a signed EA effect; jointly modeled missing continuous inputs conditional on observed inputs; and a cash-proxy measurement model.",
     bayesianNoHighest = "Filing-only multilevel normal model matching the main Bayesian specification but omitting non-CEO pay and its missingness indicator.",
     bayesianRanges = "Range-augmented multilevel normal model matching the main Bayesian specification and incorporating advertised salary points and intervals through a separate posting measurement model.",
     bayesianRangesNoHighest = "Range-augmented multilevel normal model incorporating advertised salary evidence while omitting non-CEO pay and its missingness indicator.",

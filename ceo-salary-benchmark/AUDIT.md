@@ -14,7 +14,7 @@ The project has substantial safeguards: source-native evidence, explicit compens
 
 The full R pipeline regenerated all 40 Bayesian CV fits, four full Bayesian fits, deterministic results, and artifact provenance. Point-error metrics and Bayesian results reproduce unchanged; deterministic 90% coverage is now 92.1% for intercept, 91.2%/93.0% for linear without/with other pay, and 91.2%/92.1% for GAM without/with other pay. These remain empirical coverage estimates, not distribution-free guarantees.
 
-`npm run build`, `npm run test:data` (17 Python unit tests plus four data audits), `npm run test:statistics` (three Node tests, R numerical checks, and five calibration-independence checks), and `git diff --check` pass. The browser suite plus focused reruns pass all 35 distinct checks: an old test requiring weights to cancel was replaced with checks for the corrected staff-weight behavior, and a new category-multiplier test was added. Model checks were rerun against the rebuilt artifact. Scientific improvements A–F remain follow-up research, outside these focused correctness fixes.
+`npm run build`, `npm run test:data` (17 Python unit tests plus four data audits), `npm run test:statistics` (three Node tests, R numerical checks, and five calibration-independence checks), and `git diff --check` pass. The browser suite plus focused reruns pass all 35 distinct checks: an old test requiring weights to cancel was replaced with checks for the corrected staff-weight behavior, and a new category-multiplier test was added. Model checks were rerun against the rebuilt artifact. Scientific improvements A–F were outside those focused correctness fixes. Joint missing-input modeling in B is now implemented and evaluated below; its measurement sensitivities and the other scientific recommendations remain follow-ups.
 
 ## Original confirmed findings
 
@@ -100,6 +100,20 @@ Schedule J reporting is conditional on reporting rules and compensation threshol
 The current cash-to-base measurement model is useful, but it learns its increment distribution from exact-base disclosures and transports it to a much lower-pay group. Exact-only validation cannot directly validate the latent base salaries in that group. Prioritize independently verified low-pay base records, describe the target as the reviewed disclosed-peer population, and run sensitivities to the cash-increment distribution and disclosure mechanism. Non-CEO percentiles need particularly prominent selection caveats: disclosure minima and top-earner reporting can make them poor estimates of the full occupation's salary distribution.
 
 ### B. Model missing predictors jointly and respect measurement definitions
+
+**Implemented 2026-09-05:** the Bayesian models now learn a regularized joint
+normal distribution for standardized log inputs within each training fold.
+Held-out imputations condition jointly on observed inputs. Matched validation
+against `b871665` improves filing log-RMSE in all four specifications; the default
+with-other-pay model changes from 0.338 to 0.326. Ad scores worsen, and
+source-specific input measurement and disclosure assumptions remain follow-ups.
+The [model README](benchmark/analysis/predictive_salary_models/README.md#joint-missing-input-comparison)
+and `missing_input_comparison.csv` report the paired results and limitations.
+All 44 production fits pass sampler gates, with no divergences or tree-depth
+hits and maximum R-hat 1.0194. The Stan toy fit, conditional-imputation and
+leakage tests, `npm run build`, `npm run test:data` (18 unit tests and four
+audits), numerical statistics tests, and six focused Model browser tests pass.
+The original recommendation below describes the audited baseline.
 
 At `ceo_salary_model.stan:114`, missing standardized predictors have independent standard-normal priors. `fit_salary_models.R:319–326` draws missing held-out predictors independently too. Observed log expenses and revenue have correlation **0.889** in the training cohort. Independent imputation fails to use this information and can create implausible expense/revenue combinations, especially because recruitment revenue is systematically missing.
 
