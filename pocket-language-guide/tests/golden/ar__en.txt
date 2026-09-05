@@ -1,0 +1,176 @@
+# pocket-language-guide golden layout signature -- ar <- en
+#
+# right to left, and cursive -- a glyph drawn alone would lose its joining.
+#
+# Written by tests/golden.test.mjs. Do not edit by hand; rewrite it deliberately:
+#   env UPDATE_GOLDEN=1 npm run test:unit
+#
+# The fit is pinned and the selection is eight named sections, so nothing here moves
+# when the corpus grows. Every position is in points from the top-left of the item's
+# own box, so an item is described independently of where on the sheet it landed.
+# What does move these numbers is a theme size, a leading, a pad, a rule weight, a
+# change in a committed font subset's advances, or a solver change -- which is the
+# point. `split: adaptive` means an `entry` row solves its own divider, so its
+# geometry does not depend on its neighbours either; the three table templates share
+# one split across their group by design, so a row joining `quick-responses` or
+# `numbers-money` will move those.
+#
+#   run     dx  dy(baseline)  advance  face size  fill  dir  text
+#   rect    dx  dy(top)       w x h    fill
+#   icon    dx  dy(top)       size     name  fill
+#   glyphs  one line per target-script run: how many blocks render/pdf.js drew it in,
+#           and where. The only place a dropped GPOS mark offset is visible.
+
+spec     ar <- en   theme latex-reference   paper print-shop-bleed
+spec     faces 4 pinned   scale 1.000 pinned   padding 0.00   split adaptive   arrangement mixed
+spec     fields script roman gloss respell numeral
+spec     sections social-basics quick-responses payment-receipt numbers-money time-words trail-words emergency-medical utility-templates
+box      left 7.20   top 4.68   width 489.60   height 347.76   colWidth 119.66
+column   x 7.20  130.51  253.83  377.14
+
+item     heading:social-basics              box 119.66 x 10.20
+  rect    0.00    8.68  119.66 x 0.90  #0B67A3
+  icon    0.00    0.83  6.92  messages-square  #0B67A3
+  run     9.32    6.48   21.78  latin-700 7.54  #111820 ltr  "Social"
+  run    33.06    6.48    4.31  latin-700 7.54  #111820 ltr  "+"
+  run    39.33    6.48   23.00  latin-700 7.54  #111820 ltr  "basics"
+
+item     social-basics.hello                box 119.66 x 15.01
+  rect    0.00    0.00  0.92 x 15.01  #0B67A3
+  rect    0.00   14.79  119.66 x 0.22  #BCC6CF
+  run     1.78    6.27   18.11  latin-700 7.01  #111820 ltr  "Hello"
+  run     1.78   11.69   11.95  latin-400i 5.22  #3F4A55 ltr  "MAR-"
+  run    13.73   11.69    7.62  latin-400i 5.22  #3F4A55 ltr  "ha-"
+  run    21.35   11.69    9.01  latin-400i 5.22  #3F4A55 ltr  "ban"
+  run   101.76    6.27   16.96  arabic-700 7.30  #111820 rtl  "مرحباً"
+  run    92.65   13.71   26.07  latin-400i 5.53  #111820 ltr  "marḥaban"
+
+item     social-basics.excuse-me-sorry      box 119.66 x 15.01
+  rect    0.00    0.00  119.66 x 15.01  #F4F6F8
+  rect    0.00    0.00  0.92 x 15.01  #0B67A3
+  rect    0.00   14.79  119.66 x 0.22  #BCC6CF
+  run     1.78    6.27   23.71  latin-700 7.01  #111820 ltr  "Excuse"
+  run    27.32    6.27   11.02  latin-700 7.01  #111820 ltr  "me"
+  run    40.16    6.27    2.91  latin-700 7.01  #111820 ltr  "/"
+  run    44.89    6.27   18.17  latin-700 7.01  #111820 ltr  "sorry"
+  run     1.78   11.69    7.96  latin-400i 5.22  #3F4A55 ltr  "low"
+  run    11.09   11.69    6.85  latin-400i 5.22  #3F4A55 ltr  "sa-"
+  run    17.95   11.69   13.49  latin-400i 5.22  #3F4A55 ltr  "MAHT"
+  run   112.73    6.27    5.99  arabic-700 7.30  #111820 rtl  "لو"
+  run    86.23    6.27   24.60  arabic-700 7.30  #111820 rtl  "سمحت"
+  run    90.17   13.71    8.57  latin-400i 5.53  #111820 ltr  "law"
+  run   100.17   13.71   18.55  latin-400i 5.53  #111820 ltr  "samaḥt"
+
+item     heading:quick-responses            box 119.66 x 8.89
+  rect    0.00    8.35  119.66 x 0.40  #0B67A3
+  run     0.00    5.66   17.49  latin-700 6.08  #111820 ltr  "Quick"
+  run    19.07    5.66   30.61  latin-700 6.08  #111820 ltr  "responses"
+
+item     quick-responses.yes-right          box 119.66 x 9.14
+  rect    0.00    0.00  119.66 x 9.14  #F4F6F8
+  rect    0.00    0.00  0.92 x 9.14  #0B67A3
+  rect    0.00    8.92  119.66 x 0.22  #BCC6CF
+  run     1.72    6.09    7.45  latin-cond-400i 5.20  #3F4A55 ltr  "NA-"
+  run     9.17    6.09    6.73  latin-cond-400i 5.20  #3F4A55 ltr  "am"
+  run    36.21    6.47    9.91  latin-cond-700 6.50  #111820 ltr  "yes"
+  run    47.62    6.47    2.67  latin-cond-700 6.50  #111820 ltr  "/"
+  run    51.79    6.47   14.72  latin-cond-700 6.50  #111820 ltr  "right"
+  run    76.34    6.15   13.48  latin-cond-400i 5.40  #111820 ltr  "naʿam"
+  run   108.71    5.85   10.10  arabic-700 6.60  #111820 rtl  "نعم"
+
+item     heading:payment-receipt            box 119.66 x 8.97
+  rect    0.00    8.35  119.66 x 0.48  #B45100
+  icon    0.00    1.20  5.36  credit-card  #B45100
+  run     7.46    5.66   27.30  latin-700 6.14  #111820 ltr  "Payment"
+  run    36.36    5.66    3.51  latin-700 6.14  #111820 ltr  "+"
+  run    41.47    5.66   21.50  latin-700 6.14  #111820 ltr  "receipt"
+
+item     payment-receipt.how-much-in-total  box 119.66 x 18.39
+  rect    0.00    0.00  119.66 x 18.39  #F4F6F8
+  rect    0.00    0.00  0.92 x 18.39  #B45100
+  rect    0.00   18.17  119.66 x 0.22  #BCC6CF
+  run     1.72    5.27    9.22  latin-cond-400i 5.30  #3F4A55 ltr  "kam"
+  run    12.15    5.27    5.52  latin-cond-400i 5.30  #3F4A55 ltr  "al-"
+  run     1.72   10.74    9.65  latin-cond-400i 5.30  #3F4A55 ltr  "maj-"
+  run     1.72   16.21   10.85  latin-cond-400i 5.30  #3F4A55 ltr  "MOO"
+  run    25.54    7.68   13.83  latin-cond-700 6.75  #111820 ltr  "How"
+  run    40.92    7.68   17.24  latin-cond-700 6.75  #111820 ltr  "much"
+  run    32.95   14.65    5.90  latin-cond-700 6.75  #111820 ltr  "in"
+  run    40.41   14.65   17.76  latin-cond-700 6.75  #111820 ltr  "total?"
+  run    71.11    7.96    9.57  latin-cond-400i 5.50  #111820 ltr  "kam"
+  run    81.93    7.96    5.73  latin-cond-400i 5.50  #111820 ltr  "al-"
+  run    69.10   13.64   18.56  latin-cond-400i 5.50  #111820 ltr  "majmūʿ?"
+  run   111.17    6.07    7.64  arabic-700 6.85  #111820 rtl  "كم"
+  run    90.88   14.98   27.93  arabic-700 6.85  #111820 rtl  "المجموع؟"
+
+item     numbers-money.s-n                  box 119.66 x 9.16
+  rect    0.00    0.00  119.66 x 9.16  #F4F6F8
+  rect    0.00    0.00  0.92 x 9.16  #B45100
+  rect    0.00    8.94  119.66 x 0.22  #BCC6CF
+  run     1.72    6.09    8.44  latin-cond-400i 5.20  #3F4A55 ltr  "tha-"
+  run    10.16    6.09    8.98  latin-cond-400i 5.20  #3F4A55 ltr  "LAA-"
+  run    19.14    6.09    6.92  latin-cond-400i 5.20  #3F4A55 ltr  "tha"
+  run    44.71    6.15   21.20  latin-cond-400i 5.40  #111820 ltr  "thalāthah"
+  run    80.69    5.85    3.78  arabic-700 6.60  #111820 rtl  "٣"
+  run   107.28    6.50    3.50  latin-cond-700 6.60  #111820 ltr  "3"
+
+item     heading:emergency-medical          box 119.66 x 10.20
+  rect    0.00    8.68  119.66 x 0.90  #B3261E
+  icon    0.00    0.83  6.92  briefcase-medical  #B3261E
+  run     9.32    6.48   41.73  latin-700 7.54  #111820 ltr  "Emergency"
+  run    53.01    6.48    4.31  latin-700 7.54  #111820 ltr  "+"
+  run    59.29    6.48   29.53  latin-700 7.54  #111820 ltr  "medical"
+
+item     note:emergency-medical             box 119.66 x 14.15
+  rect    0.00    0.00  119.66 x 14.15  #F4F6F8  r 1.20
+  run     1.75    5.69   13.63  latin-400 5.24  #3F4A55 ltr  "Saudi"
+  run    16.74    5.69   17.27  latin-400 5.24  #3F4A55 ltr  "Arabia:"
+  run    35.37    5.69    8.99  latin-400 5.24  #3F4A55 ltr  "911"
+  run    45.72    5.69    5.64  latin-400 5.24  #3F4A55 ltr  "all"
+  run    52.73    5.69   19.62  latin-400 5.24  #3F4A55 ltr  "services"
+  run    73.72    5.69    1.40  latin-400 5.24  #3F4A55 ltr  "·"
+  run    76.48    5.69    8.99  latin-400 5.24  #3F4A55 ltr  "999"
+  run    86.84    5.69   14.57  latin-400 5.24  #3F4A55 ltr  "police"
+  run   102.77    5.69    1.40  latin-400 5.24  #3F4A55 ltr  "·"
+  run   105.53    5.69    8.99  latin-400 5.24  #3F4A55 ltr  "997"
+  run     1.75   12.24   27.30  latin-400 5.24  #3F4A55 ltr  "ambulance"
+  run    30.41   12.24    1.40  latin-400 5.24  #3F4A55 ltr  "·"
+  run    33.18   12.24    8.99  latin-400 5.24  #3F4A55 ltr  "998"
+  run    43.53   12.24    8.17  latin-400 5.24  #3F4A55 ltr  "fire"
+
+item     utility-templates.i-want-to-go-to  box 119.66 x 25.48
+  rect    0.00    0.00  0.92 x 25.48  #0B67A3
+  rect    0.00   25.26  119.66 x 0.22  #BCC6CF
+  rect   85.14   16.35  31.57 x 0.40  #111820
+  rect   93.28   23.64  23.91 x 0.35  #111820
+  run     1.78    6.27    2.73  latin-700 7.01  #111820 ltr  "I"
+  run     6.33    6.27   17.80  latin-700 7.01  #111820 ltr  "want"
+  run    25.95    6.27    7.42  latin-700 7.01  #111820 ltr  "to"
+  run    35.20    6.27    8.81  latin-700 7.01  #111820 ltr  "go"
+  run     1.78   13.45    7.42  latin-700 7.01  #111820 ltr  "to"
+  run    11.03   13.45    5.99  latin-700 7.01  #111820 ltr  "…"
+  run     1.78   18.87    7.51  latin-400i 5.22  #3F4A55 ltr  "oo-"
+  run     9.29   18.87   11.84  latin-400i 5.22  #3F4A55 ltr  "REED"
+  run    22.49   18.87    9.35  latin-400i 5.22  #3F4A55 ltr  "ath-"
+  run    31.84   18.87    9.35  latin-400i 5.22  #3F4A55 ltr  "tha-"
+  run     1.78   24.24   12.55  latin-400i 5.22  #3F4A55 ltr  "HAAB"
+  run    15.69   24.24    2.98  latin-400i 5.22  #3F4A55 ltr  "i-"
+  run    18.67   24.24    4.31  latin-400i 5.22  #3F4A55 ltr  "la"
+  run   107.19    6.27   11.53  arabic-700 7.30  #111820 rtl  "أريد"
+  run    82.49    6.27   22.81  arabic-700 7.30  #111820 rtl  "الذهاب"
+  run    70.59    6.27   10.00  arabic-700 7.30  #111820 rtl  "إلى"
+  run    47.56   23.20   10.03  latin-400i 5.53  #111820 ltr  "urīd"
+  run    59.03   23.20    6.30  latin-400i 5.53  #111820 ltr  "al-"
+  run    65.32   23.20   19.09  latin-400i 5.53  #111820 ltr  "dhahāb"
+  run    85.85   23.20    5.99  latin-400i 5.53  #111820 ltr  "ilá"
+
+glyphs   arabic-700 7.30   1 block   +0.00  "مرحباً"
+glyphs   arabic-700 7.30   1 block   +0.00  "لو"
+glyphs   arabic-700 7.30   1 block   +0.00  "سمحت"
+glyphs   arabic-700 6.60   1 block   +0.00  "نعم"
+glyphs   arabic-700 6.85   1 block   +0.00  "كم"
+glyphs   arabic-700 6.85   1 block   +0.00  "المجموع؟"
+glyphs   arabic-700 6.60   1 block   +0.00  "٣"
+glyphs   arabic-700 7.30   1 block   +0.00  "أريد"
+glyphs   arabic-700 7.30   1 block   +0.00  "الذهاب"
+glyphs   arabic-700 7.30   1 block   +0.00  "إلى"

@@ -22,6 +22,10 @@
       "why": "Klingon has no long vowels and, more to the point, no two vowels may be adjacent in a syllable at all (TKD 1.2), so a doubled vowel is not a possible Klingon spelling. Length is dropped outright and a fixup collapses any pair the tables produce by accident. Hindi, Arabic, Thai, Japanese, German, Italian and Hungarian length is lost."
     },
     {
+      "rule": "policy.script -- the twenty-one other tables emit the letters their rules are written in.",
+      "why": "This one relabels its finished output into pIqaD, and it is the only table that can: it has no notation of its own to lose. stress is 'none', length is 'none' and syllable_separator is empty, all three for reasons stated above, so a Klingon respelling is Klingon letters and word spaces and nothing else -- which is what this table's own note already says ('no diacritic, no capital that means anything but a consonant, and no separator'). pIqaD is a bijection with TKD's orthography, so relabelling costs exactly nothing. Measured: all 16,347 respellings this table produces over its twenty-one targets come out byte-identical to piqad() in scripts/transliterate_native.py applied to the same table's Latin output, and none passes an unmapped character through. The column reaches 24 of pIqaD's 26 letters plus the space, comma, slash and the open-slot braces. The two it never reaches are Q and tlh, both for the reason recorded elsewhere in this file: /qʰχ/ and /t͡ɬ/ occur in no target's ipa column except Klingon's own, and Klingon is not a target for itself. The rules stay in Okrand's own orthography, where derives_from can cite them and --score, --diff and --units can be read; only the last step moves. Contrast Quenya, where the same move loses half the corpus -- see data/respell/rules/qya__qya-EX.json."
+    },
+    {
       "rule": "Q is a letter of the Klingon alphabet.",
       "why": "Never emitted, and the reason is worth stating because it is not squeamishness about the glyph: /q͡χ/ occurs in no target's ipa column except Klingon's own, and Klingon is not a target for itself. /q/ and /k/ both take q, which is the key's own choice throughout ('amerI'qa', qa'naDa', gharlIq, Hanghuq, turIqya'). Verified in the output: 0 rows contain Q."
     },
@@ -121,7 +125,8 @@
     "tone": "drop",
     "max_onset": 1,
     "locale": "tlh",
-    "fixups": "all"
+    "fixups": "all",
+    "script": "piqad"
   },
   "splits": [],
   "phonemes": [

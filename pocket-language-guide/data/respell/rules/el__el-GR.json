@@ -974,5 +974,6 @@
       ]
     }
   ],
+  "legend": "Ο τόνος δείχνει την τονισμένη συλλαβή, το ενωτικό χωρίζει τις συλλαβές και τα διαλυτικά δείχνουν φωνήεντα που διαβάζονται χωριστά.",
   "note": "Reader's legend: two conventions to learn, and both are already Greek. The tonos marks the stressed syllable, which is what the orthography does anyway and what every Greek pronunciation-in-parentheses does. The hyphen separates syllables, and it is doing a second job Babiniotis introduced it for: it keeps a medial mp, nt or gk from being read with its nasal. The diaeresis appears wherever a vowel pair would otherwise be read as a Greek digraph -- see the deviation above; a Greek reader already knows that mark and already knows why it is there."
 }

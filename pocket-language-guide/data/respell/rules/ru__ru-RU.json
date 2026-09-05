@@ -1161,5 +1161,6 @@
       ]
     }
   },
+  "legend": "Ничего нового: всё написано обычными русскими буквами, а знак ударения стоит над ударным слогом.",
   "note": "Reader's legend, per RESPELL-SYSTEMS.md: none needed. Every letter here is ordinary Russian and the only convention to learn is the acute, which the orthography rules already prescribe for this register. The sanctioned fallback if the acute is unavailable for technical reasons is policy.stress = caps, which Russian lexicography documents in exactly those terms. Both devices are live: acute puts the znak udareniya on the nucleus and caps gives mer-SI. One nit worth knowing: the acute stacks on yo on 115 rows, and yo is inherently stressed in Russian, so the mark there is redundant. --units was read entry by entry: the seventeen remaining are all deliberate, being either a two-letter Russian digraph (dzh, dz, pf) or a diacritic dropped on purpose (dental, pharyngealised, syllabic) or the GUGK India aspirate series (bx dx gx chx)."
 }

@@ -421,11 +421,39 @@ test('auto reproduces the hand-built originals at their own spacing', async () =
       else items[cid] = false;
     }
     assert.ok(original > 300, `${target}: only ${original} reviewed rows`);
-    const { plan } = await buildSheet(ctx, {
-      ...spec0, selection: { sections: {}, items },
+    const selection = { sections: {}, items };
+
+    // **Reaching four faces is the criterion; choosing four is a separate claim.**
+    // This asserted `faces.length === 4` under auto, which conflated them, and the
+    // baseline fix pulled them apart: aligning a row's headwords costs height, so
+    // `ja <- en` now needs 0.420 to hold the original's content on four faces where
+    // it needed 0.460 before, and `COMFORT` is 0.45. Auto therefore takes six and
+    // gets full size, which is exactly the rule it is documented to follow.
+    //
+    // Four faces are still reachable, with every original row on them and nothing
+    // below a legibility floor -- Japanese at 4.74pt against the original's own
+    // 4.44pt, so this reproduction is if anything the more legible of the two. That
+    // is what "at their own spacing" means, and it is what is asserted here.
+    const pinned = await buildSheet(ctx, {
+      ...spec0, selection, autoFaces: false, geometry: { ...spec0.geometry, faces: 4 },
     });
-    assert.equal(plan.faces.length, 4, `${target} <- ${source}`);
+    assert.equal(pinned.plan.faces.length, 4, `${target} <- ${source} pinned`);
+    assert.deepEqual(pinned.plan.warnings.filter((w) => w.severity === 'error'), [],
+      `${target} <- ${source} should hold the original content on four faces`);
+    const placed = pinned.plan.faces.reduce(
+      (n, f) => n + f.hits.filter((h) => h.conceptId).length, 0,
+    );
+    assert.ok(placed > 300, `${target} <- ${source} placed only ${placed} of ${original}`);
+
+    // And auto never does *worse* than the hand-built answer: it may spend a pair of
+    // faces the original did not, but only to buy type size, never to shed content.
+    const { plan } = await buildSheet(ctx, { ...spec0, selection });
+    assert.ok(plan.faces.length >= 4, `${target} <- ${source} auto fell below four faces`);
     assert.deepEqual(plan.warnings.filter((w) => w.severity === 'error'), []);
+    if (plan.faces.length > 4) {
+      assert.ok(plan.scale > pinned.plan.scale,
+        `${target} <- ${source} took ${plan.faces.length} faces without gaining type`);
+    }
   }
 });
 
@@ -846,6 +874,78 @@ test('a head position takes several slots, joined with a bullet', async () => {
   const top = Math.min(...first.map((r) => r.y));
   assert.match(first.filter((r) => Math.abs(r.y - top) < 0.5).map((r) => r.text).join(''),
     /1 \/ \d+/, 'a scalar slot reads as a list of one');
+});
+
+test('the legend slot keys the columns that are on, and only those', async () => {
+  // Two halves in one slot, because the two columns it explains are keyed
+  // differently: the respelling is written for the reader and lives in their rule
+  // table, the marks in the romanisation belong to the target and live in the
+  // registry. Selecting them by `fieldSet` is what repairs the defect this grew out
+  // of -- the slot printed the respelling key whether or not the respelling column
+  // was shown, so a reader who answered "I can read the script" in the quiz got a key
+  // for a column that was not on their card and none for the column that was.
+  //
+  // `zh-Hans <- hi` is the pair that exercises both: pinyin has a legend row, and the
+  // Hindi reader's table has a legend of its own in Devanagari.
+  const base = await referenceSpec('zh-Hans', 'hi');
+  const band = async (/** @type {import('../core/types.js').FieldId[]} */ fieldSet) => {
+    const { plan } = await buildSheet(ctx, {
+      ...base, fieldSet, head: { at: 'bottom', center: ['legend'] },
+    });
+    const runs = plan.faces[0].runs;
+    const lowest = Math.max(...runs.map((r) => r.y));
+    return runs.filter((r) => Math.abs(r.y - lowest) < 0.5).sort((a, b) => a.x - b.x);
+  };
+
+  const both = await band(['script', 'roman', 'gloss', 'respell', 'numeral']);
+  assert.match(both.map((r) => r.text).join(''), /ǎ à = 1 2 3 4/,
+    'the tone marks are named as tones');
+  assert.ok(both.some((r) => /देवनागरी/.test(r.text)), "and the reader's own key is there too");
+
+  const reading = await band(['script', 'roman', 'gloss', 'numeral']);
+  assert.match(reading.map((r) => r.text).join(''), /ǎ à = 1 2 3 4/);
+  assert.ok(!reading.some((r) => /देवनागरी/.test(r.text)),
+    'no respelling column, no respelling key');
+
+  const none = await band(['script', 'gloss', 'respell', 'numeral']);
+  assert.ok(none.some((r) => /देवनागरी/.test(r.text)));
+  assert.ok(!none.some((r) => /1 2 3 4/.test(r.text)),
+    'no romanisation column, no romanisation key');
+
+  // And the romanisation half is set in the Latin face rather than the reader's.
+  // Noto Sans Devanagari, Thai and Hebrew draw none of `ǎ ǐ ǒ ǔ`, and the band is
+  // otherwise one run in the reader's own stack -- so in the PDF, where there is no
+  // system font to fall back to, the tone marks would have been empty boxes.
+  const key = both.find((r) => /1 2 3 4/.test(r.text));
+  assert.ok(key && key.fontId.startsWith('latin-'), `the key is Latin, got ${key?.fontId}`);
+  assert.ok(both.some((r) => r.fontId.startsWith('deva-')),
+    "while the reader's own half stays in the reader's face");
+});
+
+test('the head band is never set below the reader script’s own floor', async () => {
+  // `headSize` was the theme's smallest field size flat, which is 5.22pt where
+  // `scripts.csv` asks 5.4 for Arabic, Devanagari and Thai. It cost nothing while
+  // every slot that shipped was effectively ASCII -- a folio, an emergency number, a
+  // Latin exonym -- and `legend` is the first one that sets reader-language prose
+  // there. The floor test above misses this by construction: every spec it solves has
+  // `head.at: 'none'`, so the band it would check is not on the sheet.
+  for (const source of ['ar', 'hi', 'th']) {
+    const base = await referenceSpec('zh-Hans', source);
+    const { plan } = await buildSheet(ctx, {
+      ...base, head: { at: 'bottom', center: ['legend'], right: ['page'] },
+    });
+    const stack = ctx.corpus.scripts[ctx.corpus.languages[source].script];
+    const floor = Number(stack.min_size_pt) + Number(base.paper.minSizeDelta);
+    const runs = plan.faces[0].runs;
+    const lowest = Math.max(...runs.map((r) => r.y));
+    const band = runs.filter((r) => Math.abs(r.y - lowest) < 0.5);
+    const own = band.filter((r) => r.fontId.startsWith(`${stack.font_stack}-`));
+    assert.ok(own.length, `nothing in the band is set in ${source}'s own face`);
+    for (const run of own) {
+      assert.ok(run.size >= floor - 0.01,
+        `a ${source} band run at ${run.size}pt is under its ${floor}pt floor`);
+    }
+  }
 });
 
 test('the narrow face is a smaller sheet, not only a different one', async () => {

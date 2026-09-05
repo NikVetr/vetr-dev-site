@@ -138,7 +138,11 @@
 /** One run of head furniture: its text and whether it carries emphasis. A part is
  * bold where the thing it names is what a stranger has to read first -- the digits
  * of an emergency number, and nothing else so far.
- * @typedef {{text:string, bold:boolean}} HeadPart */
+ *
+ * `latin` sets the part in the Latin face rather than the reader's, which the
+ * romanisation half of the `legend` slot needs: it quotes the target's own marks, and
+ * Noto Sans Thai, Devanagari and Hebrew draw none of `ǎ ǐ ǒ ǔ ṭ ḍ ṇ ṣ`.
+ * @typedef {{text:string, bold:boolean, latin?:boolean}} HeadPart */
 
 /**
  * @typedef {Object} SheetSpec

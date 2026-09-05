@@ -28,6 +28,11 @@ const INTERESTS = [
  * @property {'pocket'|'large'} print
  */
 
+/** A head position may hold a bare slot in a spec saved before it became a list.
+ * @param {import('../core/types.js').HeadSlot|import('../core/types.js').HeadSlot[]} [held] */
+const listOf = (held) => /** @type {import('../core/types.js').HeadSlot[]} */ (
+  (Array.isArray(held) ? held : [held]).filter(Boolean));
+
 /** @param {string} tag @param {Record<string,string>} attrs @param {(Node|string)[]} kids */
 function el(tag, attrs = {}, kids = []) {
   const node = document.createElement(tag);
@@ -131,9 +136,41 @@ export function applyQuiz(spec, corpus, answers) {
   if (answers.proficiency !== 'reading') fields.push('respell');
   if (answers.proficiency !== 'none') fields.push('roman');
 
+  // Whether the card's romanisation carries a mark the reader will read as something
+  // else. Four of the twenty-two targets do -- pinyin's tones, Hepburn's macron,
+  // IAST's and ALA-LC's macron-and-dots -- and where it happens the mistake is
+  // silent: the Vietnamese translator's point is that a reader primed by their own
+  // breve `ă` reads pinyin's caron `ǎ` confidently and says the wrong tone. That is
+  // worth the band; being merely unfamiliar with the respelling column's devices is
+  // not, because those tables were built so that ignoring a device loses information
+  // rather than adding error.
+  //
+  // Measured, which is why the band stays off in the default spec, in
+  // `data/presets.json` and in the shipped packs, and is only ticked here: it costs
+  // 1.5 lines of the smallest type on the sheet, about 0.05-0.09 of type scale on
+  // most pairs, and a whole extra *pair* of faces on `es <- en` -- one more sheet of
+  // photo paper per card set. `es` has no romanisation at all, so it never pays this.
+  // The respelling key rides along in the same slot when the band is on, and either
+  // half stays one click away in the format panel for a reader who wants it anyway.
+  const marked = fields.includes('roman')
+    && !!corpus.romanLegends[`${spec.target}__${spec.romanization}`];
+  // Added to the band rather than replacing it: unlike the field set and the
+  // selection, which this deliberately resets, the other slots are things a reader
+  // chose deliberately -- and one of them is the local emergency number.
+  /** @type {import('../core/types.js').HeadSlot[]} */
+  const centre = listOf(spec.head?.center);
+  if (!centre.includes('legend')) centre.push('legend');
+
   return {
     ...spec,
     fieldSet: fields,
+    head: marked
+      ? {
+        ...spec.head,
+        at: spec.head?.at && spec.head.at !== 'none' ? spec.head.at : 'bottom',
+        center: centre,
+      }
+      : spec.head,
     // Large print means fewer, bigger items rather than the same content shrunk.
     scale: answers.print === 'large' ? 1.3 : 0,
     selection: answers.interests.length

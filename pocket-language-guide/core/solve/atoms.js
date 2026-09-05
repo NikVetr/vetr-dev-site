@@ -398,14 +398,50 @@ function itemAtoms(ctx, block, rows, withPaint) {
     const rowStretch = template.rowStretch ?? 1;
     const stacks = grid.map((cells, j) => {
       const live = cells.filter((c) => c.text !== '');
+      // Distance from the top of the column's material to its **first line's**
+      // baseline, which is the point the row is aligned on -- a `\vtop`'s reference
+      // point, in the original. A column with nothing live has no first line and so
+      // takes no part in the alignment, which is also the answer to "what is the same
+      // grid row when one column has fewer live cells": the shared baseline is each
+      // column's first live cell, whatever field that happens to be.
+      const ascent = live.length ? ctx.measurer.baselineOffset(live[0].style) : 0;
       const height = live.reduce(
         (sum, c, k) => sum + ctx.measurer.wrap(c.text, widths[j], c.style).height
           + (k > 0 ? rowGap : 0),
         0,
       );
-      return { live, height };
+      return { live, ascent, height };
     });
-    const gridHeight = Math.max(0, ...stacks.map((st) => st.height)) * rowStretch;
+    // **The two item shapes are set by two different mechanisms in the original, and
+    // each has its own vertical rule.** Measured off
+    // `mandarin_travel_cheatsheet_generic_full_verified_v2.tex` and its PDF:
+    //
+    // - `\entry` is `\hbox{\vtop{...}\hfil\vtop{...}}`, and a `\vtop`'s reference
+    //   point is its first line's baseline, so both halves sit on one baseline
+    //   whatever their leadings are. On page 1 the target and the gloss share 333.70
+    //   exactly while their second lines land 5.00 and 5.30 below it -- so *only* the
+    //   first line is shared, and everything under it flows in its own column's
+    //   leading. An hbox of vtops is `max(height) + max(depth)` tall, which is what
+    //   `ascent + below` is.
+    // - The reference tables are `array`'s `m{width}` columns, i.e. `\parbox[c]`,
+    //   vertically centred. The original means it: on page 2 a two-line respelling
+    //   sits at 173.15 and 167.45 against its row's shared 170.30, which is centred to
+    //   the digit. So `valign: 'middle'` is a faithful transcription and keeps both
+    //   its centring and its `max(height)` row height.
+    //
+    // Aligning them by baseline instead would move a one-line gloss up beside a
+    // four-line respelling, which is a change away from the sheet this reproduces.
+    // There is a residual there -- the original's `\baselineskip` is uniform within a
+    // row, so its one-line cells are boxes of equal height and centring leaves their
+    // baselines coincident, where the per-script leading floor makes ours unequal by
+    // 0.2-0.4pt. Reproducing that needs a row-uniform leading, which was measured and
+    // rejected: on a row whose respelling wraps to four 5.37pt lines, taking the row's
+    // leading up to the `script` cell's 6.81 costs 22.3pt -> 28.3pt, +27%.
+    const centred = template.valign === 'middle';
+    const ascent = Math.max(0, ...stacks.map((st) => st.ascent));
+    const gridHeight = (centred
+      ? Math.max(0, ...stacks.map((st) => st.height))
+      : ascent + Math.max(0, ...stacks.map((st) => st.height - st.ascent))) * rowStretch;
     const height = pad[0] + gridHeight + pad[2];
 
     if (!withPaint) {
@@ -464,9 +500,12 @@ function itemAtoms(ctx, block, rows, withPaint) {
 
     let x = pad[3];
     grid.forEach((cells, j) => {
-      const live = cells.filter((c) => c.text !== '');
-      const stackHeight = stacks[j].height;
-      let y = pad[0] + (template.valign === 'middle' ? (gridHeight - stackHeight) / 2 : 0);
+      const { live, ascent: cellAscent, height: stackHeight } = stacks[j];
+      // A centred column carries the grid's whole slack above it. A baseline-aligned
+      // one is dropped by just the difference between the row's ascent and its own,
+      // which is what puts every column's first line on one baseline: the deepest
+      // first line does not move, and the rest come down to meet it.
+      let y = pad[0] + (centred ? (gridHeight - stackHeight) / 2 : ascent - cellAscent);
       live.forEach((cell, k) => {
         if (k > 0) y += rowGap;
         const painted = paintField(ctx, cell.text, cell.style, {

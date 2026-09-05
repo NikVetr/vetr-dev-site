@@ -152,6 +152,24 @@ def main():
     if not papers:
         errors.append("registry/paper.csv: no presets")
 
+    # The key to the romanisation column, one line per (target, system). It prints in
+    # the `latin` stack rather than the reader's own, because it quotes the target's
+    # marks and Noto Sans Thai, Devanagari and Hebrew draw none of the tone-marked
+    # pinyin vowels -- which is the asymmetry the `latin` argument here records, and
+    # the reason this is checked against that stack and not against twenty-two.
+    for line, row in enumerate(load("registry/romanizations.csv"), start=2):
+        where = f"registry/romanizations.csv:{line}"
+        declared = (languages.get(row["target"], {}).get("romanizations") or "").split(";")
+        if row["target"] not in languages:
+            errors.append(f"{where}: unknown target {row['target']!r}")
+        elif row["system"] not in declared:
+            errors.append(f"{where}: {row['target']} does not declare romanisation "
+                          f"{row['system']!r}, so this line can never print")
+        if not row["legend"].strip():
+            errors.append(f"{where}: no legend -- a system with no mark worth explaining "
+                          "should have no row at all")
+        check_drawable(row["legend"], "latin", f"{where} {row['system']} legend")
+
     for code, region in regions.items():
         if len(code) != 2 or code != code.upper() or not code.isalpha():
             errors.append(f"regions.csv: bad code {code!r} (want ISO 3166-1 alpha-2)")
@@ -362,7 +380,13 @@ def main():
     POLICY_VALUES = {"stress": {"caps", "acute", "grave", "prime", "none"},
                      "length": {"none", "double", "colon"},
                      "tone": {"keep", "drop"},
-                     "fixups": {"first", "all"}}
+                     "fixups": {"first", "all"},
+                     # `script` relabels the finished respelling into a writing system
+                     # the rules cannot be authored in, which today is Klingon pIqaD.
+                     # A typo here would be silent -- an unknown device is simply not
+                     # applied and the column prints Latin -- which is the same class
+                     # of failure the other four are listed for.
+                     "script": {"none", "piqad"}}
     listed = set(json.loads((DATA / "respell/rules/index.json").read_text(encoding="utf-8")))
     for path in sorted((DATA / "respell/rules").glob("*.json")):
         if path.name == "index.json":
@@ -424,6 +448,15 @@ def main():
             if target not in languages:
                 errors.append(f"respell/rules/{where}: targets block for unknown "
                               f"language {target!r}")
+        # The reader's own key to the respelling column, which the `legend` head slot
+        # prints in the reader's face -- so it is checked against the reader's stack,
+        # the same asymmetry the section titles and emergency labels are checked for.
+        # Nothing checked this until the slot grew a second half, and the nine tables
+        # that already had a legend had never been read by a face.
+        src = table.get("source")
+        if table.get("legend") and src in languages:
+            stack = scripts.get(languages[src]["script"], {}).get("font_stack", "")
+            check_drawable(table["legend"], stack, f"respell/rules/{where} legend")
     for key in sorted(listed):
         if not (DATA / f"respell/rules/{key}.json").exists():
             errors.append(f"respell/rules/index.json lists {key}, which does not exist")

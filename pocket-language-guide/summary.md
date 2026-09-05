@@ -24,10 +24,10 @@ everything tiny, which nobody wants. So it moves off the anchor only for a reaso
 - it takes a pair while the type would otherwise sit near its floor.
 
 The comfort threshold is set below the Japanese reference sheet's own 0.478, which
-is a deliberately tight layout that should not be second-guessed. On 7×5in, 200 of
-the 380 pairs between the twenty full packs settle on eight faces and 178 on ten;
-none now fits six, and two need twelve — `el ← hi` and `ru ← hi`, where Devanagari
-respellings force the column above the theme's size and the solver reports it rather
+is a deliberately tight layout that should not be second-guessed. On 7×5in, 196 of
+the 380 pairs between the twenty full packs settle on eight faces and 181 on ten;
+none now fits six, and three need twelve — `el ← hi`, `ru ← hi` and `hi ← ja`, where
+Devanagari forces the column above the theme's size and the solver reports it rather
 than clipping. Greek is the second-longest language in the set after Russian and takes
 ten against every source; Hungarian is ordinary, eight against a Latin or Cyrillic
 source and ten against the scripts that need vertical room. The tens are the scripts
@@ -502,21 +502,96 @@ middle of the band was unreachable. A saved spec may still hold a bare slot rath
 than a list, and is read as a list of one.
 
 Five slots: the folio, the pair, the region's emergency numbers, the reader's own
-text, and the reader's **pronunciation key** -- which the respelling tables already
-carry, in the reader's own language, in their `legend` field. The emergency line
+text, and the **pronunciation key**. The emergency line
 breaks its digits out as separate runs and sets them bold and in the body ink: it is
 the one piece of furniture somebody reads in a hurry, and a number in 5.2pt muted
 grey is a number nobody finds. A part may not end in a space, because `measurer.width`
 drops a trailing one -- `"110 "` measures exactly as wide as `"110"` -- so the spaces
 are moved to the front of the following part, where they are counted.
 
+**The band is set in the reader's face, and never below the reader script's own
+floor.** `headSize` was the theme's smallest field size flat, which is 5.22pt where
+`scripts.csv` asks 5.4 for Arabic, Devanagari, Thai and tengwar. That cost nothing
+while every slot that shipped was effectively ASCII -- a folio, an emergency number, a
+Latin exonym -- and the pronunciation key is the first one that sets reader-language
+prose there, which is exactly what the floor is for. The floor test in
+`tests/solve.test.mjs` missed it because every spec it solves has `head.at: 'none'`,
+so a second test asserts the band itself.
+
 **The band is off by default, with the folio already ticked inside it.** Turning it on
-was measured rather than assumed: it costs 1.5 lines of the smallest type on the
-sheet, the fit search pays about 0.05 of type scale on most pairs, `es <- en` takes a
-whole extra *pair* of faces -- one more sheet of photo paper per card set, for a page
-number -- and the Devanagari, Arabic and Thai respellings drop under their own 5.4pt
-legibility floor, which `tests/solve.test.mjs` asserts as a safety property. So the
-choice is one click away and not made for the reader.
+was measured rather than assumed, and re-measured when the pronunciation key gave it
+something worth carrying: it costs 1.5 lines of the smallest type on the sheet, the
+fit search pays 0.05-0.09 of type scale on most pairs, and `es <- en` takes a whole
+extra *pair* of faces -- one more sheet of photo paper per card set, for a page
+number. On an Arabic, Devanagari or Thai reader's sheet it cannot be paid for in type
+size at all, because that reader's respelling is already sitting on its own 5.4pt
+floor -- so it is paid for in faces instead, and `zh-Hans <- ar` goes from eight to
+ten. So the choice is one click away and not made for the reader.
+
+**What the quiz does instead is tick it where the card's romanisation carries a mark.**
+That is four of the twenty-two targets, so eighteen pay nothing, and `es` -- the pair
+that costs a face pair -- has no romanisation at all and therefore never pays. The
+respelling key rides along in the same slot when the band is on for that reason. The
+band is *added* to whatever the reader had rather than replacing it: unlike the field
+set and the selection, which the quiz deliberately resets, the other slots are
+choices, and one of them is the local emergency number.
+
+### The pronunciation key is two keys, and only the columns that are on get one
+
+The card has two columns nobody can read unaided, and they are keyed in opposite
+directions. The **respelling** is written *for the reader* and comes from the `legend`
+field of `data/respell/rules/<reader>__<accent>.json`, in the reader's own language.
+The **marks in the romanisation** belong to the *target* and come from
+`data/registry/romanizations.csv`. One slot carries both, joined with the same bullet
+the band joins slots with, and each half prints only when its own column does -- which
+repaired a live defect: the slot printed the respelling key whether or not the
+respelling column was shown, so a reader who answered "I can read the script" in the
+quiz (`proficiency: 'reading'`, which drops `respell` and keeps `roman`) got a key for
+a column that was not on their card and none for the column that was.
+
+Raised by the Vietnamese translator, and the hazard is specific: pinyin's caron `ǎ` and
+Vietnamese's breve `ă` are near-identical at 5pt and pinyin's macron is not a
+Vietnamese mark at all, so a Vietnamese reader is uniquely primed to read a tone mark
+as a vowel-quality mark. **They will not misread the words; they will misread the
+tones, silently.** The same shape runs the other way -- Thai and Chinese readers read
+any superscript mark as a tone, which is why both packs dropped macron Hepburn for
+doubled vowels -- so a legend lets those packs keep the standard romanisation instead
+of routing around it.
+
+Three things about the shape are decisions rather than details.
+
+- **The romanisation line is a prose-free glyph equation**, so one string serves all
+  twenty-two readers: `ā á ǎ à = 1 2 3 4` for pinyin, `ā ī ū ē ō = aa ii uu ee oo` for
+  Hepburn. A per-reader prose line is six systems by twenty-two readers, it is longer
+  in a band whose cost is the whole issue, and it cannot be reviewed in most of the
+  languages it would ship in. It is also the project's own precedent: Bhargava's
+  four-word legend, which `content/RESPELL-SYSTEMS.md` holds up as *the* pattern for
+  this, is a glyph equation and not a sentence. The right-hand side is what to say if
+  you cannot make the distinction, which for `iast` is the mark-free Hunterian the
+  registry already names as Hindi's second system.
+- **It is keyed on (target, system), not on the system.** `bgn` names two different
+  systems in `languages.csv` and, read off the corpus, they share no mark: Russian's
+  `ʼ ˮ ë` against Hebrew's `ẖ ‘ ’` and its acute. Rows exist only for the four systems
+  whose marks carry a *misreading* hazard -- `pinyin`, `hepburn`, `iast`, `ala-lc`. The
+  Russian and Hebrew `bgn` marks and Quenya's `appendix-e` were left out on purpose:
+  they are native stress or vowel-quality marks that a reader misreads in the benign
+  direction, dropping information rather than adding error, and a line for them would
+  have to introduce a word for "stress" -- which is what breaks the prose-free
+  property. `elot`, `rr`, `rtgs` and `okrand` carry no diacritic at all.
+- **That half is drawn in the Latin face rather than the reader's**, which is the fifth
+  instance of the tofu class below and is why `HeadPart` carries a `latin` flag. It
+  costs nothing, because `stacksFor` loads `latin` for every pair anyway to set the
+  romanisation and the IPA.
+
+Nine of the twenty-two reader tables had a `legend`; the other thirteen have one now.
+Each is a transcription of a decision already recorded in that table's own `note`
+rather than a new one, held to RESPELL-SYSTEMS.md's rule that a legend teaches only
+the glyphs that are not already ordinary orthography and that anything needing a
+second line means the notation is wrong. **`th`'s was English prose *about* the legend
+rather than a legend**, so a Thai reader's band read "None. Every glyph in the output
+is ordinary Thai used for its ordinary sound…" in English; it is Thai now.
+`validate_data.py` checks every one of them against the stack that draws it, which
+nothing did before -- the nine that already existed had never been read by a face.
 
 ### One shape at a time inside a section
 
@@ -690,13 +765,34 @@ tengwar*, `scripts/spec.mjs` already shows `roman` by default so the Latin is de
 rather than hidden, and `FIELD_SIDE.roman` is `latin` so Noto Sans draws it. Had it
 gone in `script_alt`, `resolveField` would have drawn it in the *target's* stack.
 
-Their badges are their own scripts now, `` and ``, and that needed
-one thing the badge mechanism never had. Every other badge -- 中, あ, ع, 한, अ, ก --
-is a plain character in the page's own font, which works because every real script
-has a system font somewhere; nothing on earth has a glyph for U+F8E4, so `style.css`
-declares a `unicode-range`-scoped `@font-face` over the shipped Latin subset. The
-range is what keeps it free: only a page that actually contains one of these
-codepoints fetches the face.
+Their badges are their own scripts now, and that needed one thing the badge mechanism
+never had. Every other badge — 中, あ, ع, 한, अ, ก — is a plain character in the page's
+own font, which works because every real script has a system font somewhere; nothing on
+earth has a glyph for U+F8D0, so `style.css` declares a `unicode-range`-scoped
+`@font-face` over the shipped Latin subset. The range is what keeps it free: only a page
+that actually contains one of these codepoints fetches the face — which is also why
+`--ui` can lead with that family, so *any* chrome text may carry a conscript glyph
+rather than only the element that named it.
+
+**What the badge is for decided which glyphs**, and `git log` settled it: the column is
+a one- or two-character sample of the *orthography*, not the language's name — `Aa`,
+`Şğ`, `Яж`, `Αω`, `אב`. The whole name is ruled out by measurement, since existing
+badges span 1.12–1.44em and `tlhIngan Hol` is 4.98em against a header whose width must
+not be set by a long name. So Klingon is `ab`, the first two letters, on the Hebrew
+badge's precedent — and not `qQ`, the literal translation of the badge it replaced,
+because **pIqaD is caseless** and those are two unrelated letters chosen for a property
+of the romanisation. Quenya is `ná`, and *not* the two first tengwar: tinco and parma
+are both a stem with a bow, so side by side they read as `pp` to anyone who does not
+know the script, which is the opposite of what a preview is for. A tehta is what makes
+tengwar recognisable at a glance. It also has to differ from the endonym beside it,
+which is now `Quenya` in tengwar — the first pass made badge and endonym the same five
+glyphs, printed twice with the English name between them.
+
+Both are derived rather than typed: `badge_roman` and `endonym_roman` hold the authored
+Latin and `transliterate_native.py` writes the native cell, the same discipline as the
+packs and the two card-facing registry files. Re-deriving the first pass's Quenya badge
+from `Quenya` came back byte-identical, which re-verified a five-codepoint string that
+had previously been checked by hand against the CSUR chart.
 
 Two hazards were raised against this pack and both were measured rather than acted on,
 because the measurement said not to. The first was that Klingon's case-significant `I`
@@ -720,9 +816,10 @@ routes `Grek` and `Cyrl` to `latin` because the Noto Sans faces draw them, and `
 and `Teng` route there too once these ~85 glyphs are in it. Own stacks would have cost
 eight faces of ~85KB each, because every one of them would still have had to carry the
 whole Latin repertoire — `literal` is read from the *target* row and is English on
-both packs, and a Klingon or Quenya *reader*'s respelling column is Latin as well —
-and worse, they would have doubled a Klingon sheet's font download, since the gloss,
-the romanisation and the IPA are all `latin`. The graft costs about 5KB a face and
+both packs, the `gloss`, `roman` and `ipa` columns are Latin on both, and a Quenya
+*reader*'s respelling column is Latin too — and worse, they would have doubled a
+Klingon sheet's font download, since the gloss, the romanisation and the IPA are all
+`latin`. The graft costs about 5KB a face and
 reuses `merge_donor`, which now rescales the em square (`scale_upem`) because
 Constructium is 2048 units and Noto is 1000.
 
@@ -1455,7 +1552,181 @@ atom placed exactly once in authored order, columns flush within a point at the
 fitted scale, identical output for identical input. Browser specs drive the real
 pages, including a PDF export with the network switched off. `tests/render.spec.js`
 renders the same plan through both renderers and compares ink, which is how a
-dropped glyph or an unloaded font gets caught.
+dropped glyph or an unloaded font gets caught. `tests/golden.test.mjs` freezes the
+geometry of eleven probe items across four pairs, and compares the Mandarin pack
+against the original XeLaTeX sheet's own content stream — both discussed below.
+
+### The romanisation legend, and three defects found by building it
+
+The Vietnamese translator's request: pinyin's caron `ǎ` and Vietnamese's breve `ă` are
+near-identical at 5pt and pinyin's macron is not a Vietnamese mark at all, so a
+Vietnamese reader is primed to read tone marks as vowel-quality marks. **They will not
+misread the words; they will misread the tones, silently.** It lives in `spec.head`'s
+`legend` slot, which is the card-level place for a card-level fact — a `note` is a
+*section* device, and `applies_to` on a note names the language it is *about* while the
+row is read from the source, so the note route would have cost eight concepts times
+twenty-two paragraphs.
+
+The slot now carries two parts: the reader's own respelling key, which all
+twenty-two tables have, and a **target-keyed** second part naming the marks of the
+romanisation actually being printed. Two things about that second part were not
+obvious:
+
+- **The key is (target, system), not the system.** `bgn` names two different systems
+  in `languages.csv`, and read off the corpus they share no mark at all: Russian's
+  `ʼ ˮ ë` against Hebrew's `ẖ ‘ ’`.
+- **A quoted mark set in the reader's own face is a tofu box.** The band is one run in
+  the source script's stack, and Noto Sans Thai, Devanagari and Hebrew draw none of
+  `ǎ ǐ ǒ ǔ ṭ ḍ ṇ ṣ` — so the pinyin caron this whole request is about would have
+  printed as an empty box, in the PDF, for three of the readers who most need it.
+  `HeadPart` gained a `latin` flag, which costs nothing because `stacksFor` always
+  loads `latin`.
+
+The line is a **prose-free glyph equation** — `ā á ǎ à = 1 2 3 4` — so one string
+serves all twenty-two readers. Per-reader prose was costed and rejected: 132 strings,
+longer in the band whose cost is the entire issue, and unreviewable in most of its
+languages. Rows exist only where a mark carries a *misreading* hazard: `pinyin`,
+`hepburn`, `iast`, `ala-lc`. `bgn` and `appendix-e` were rejected as
+benign-direction misreadings whose legend would need a word for "stress", which breaks
+the prose-free property; `elot`, `rr`, `rtgs` and `okrand` carry no diacritic at all,
+measured rather than assumed.
+
+**Three defects surfaced while building it, all of them already shipping.** Thai's
+existing legend was English prose *about* the legend — "None. Every glyph in the output
+is ordinary Thai used for its ordinary sound…" — printing in English in the band of
+every sheet a Thai reader built. `headSize` applied no legibility floor at all, so an
+Arabic, Hindi or Thai reader's band set at 5.20pt against its own 5.40 minimum; the
+existing floor test could not see it because every spec it solves has
+`head.at: 'none'`. And nothing had ever run a drawability check over the nine
+pre-existing legends, which is how the tofu above went unnoticed.
+
+**Measured cost, which is why the band stays off by default.** 84 of 462 pairs can be
+ticked at all and 378 pay nothing. Of the 84, **81 keep their face count**, giving up
+0.02 to 0.09 of type scale, median 0.04. Three take an extra face pair and *gain* type
+size for it: `zh-Hans ← ar` from 8 faces at 0.47 to 10 at 1.00, `ja ← hi` and `hi ← ja`
+from 10 at 0.48 to 12 at 0.88. So the twelves go from two pairs to four. Notably
+`es ← en` — the pair whose extra face pair is the reason the band is off by default —
+is never ticked, because Spanish declares no romanisation.
+
+### A row's headwords now sit on one baseline
+
+`tests/golden.test.mjs` found this on its first run, which is the argument for the
+whole exercise: **461 of 462 pairs printed a row's target headword below its own
+gloss.** Worst 1.813pt; Hebrew 1.222pt, which at its fitted 0.69 is about a quarter of
+the type size and plainly visible. Two things combined. `atoms.js` gives each field
+`max(theme leading ratio, the script's leading_factor)`, a per-script floor that exists
+because the reference's 1.02× clips Devanagari and Thai — so the two sides of a row can
+have different line-box heights. And the placement loop aligned line-box *tops*, while
+`paintField` puts the baseline at a different depth inside each box.
+
+It is not only a cross-script problem, which is where the first measurement was wrong:
+`es ← en` shows 0.110pt, because the two headwords are 7.30 and 7.01pt and their boxes
+differ at one leading factor. `leading_factor` amplifies it rather than causing it.
+
+**The original answers this, and answers it differently for the two item shapes.**
+`\entry` is `\hbox{\vtop…\vtop}`, and a `\vtop`'s reference point is its first
+line's baseline — on page 1 of the reference PDF the target and the gloss share 333.70
+exactly while their second lines land 5.00 and 5.30 below, so *only* the first line is
+shared. The reference tables are `array`'s `m{}` columns, i.e. `\parbox[c]`, and the
+original means it: a two-line respelling sits at 173.15 and 167.45 against its row's
+shared 170.30, centred to the digit. So `valign: 'middle'` is a faithful transcription
+and keeps both its centring and its `max(height)` row height, and only the entry shapes
+became `ascent + max(below)`. Reproducing the original *exactly* in the tables would
+need a row-uniform leading, measured and rejected at **+27%** on a row whose respelling
+wraps to four lines.
+
+**The result is exact, not within a tolerance**: 113,571 of 113,571 rows put their two
+cells on one first baseline, and the worst delta across all 462 pairs is 0.
+
+**What it cost.** 298 of 457 measurable pairs do not move at all. Five gain a face pair,
+and every one of them was sitting at exactly scale 0.450 — the comfort threshold — so
+they trade a sheet of paper for a great deal of type: `hu ← de` and `ru ← tr` from
+8 faces at 0.450 to 10 at 0.74–0.76, `th ← tr` and `th ← vi` to 10 at 0.860, and
+`hi ← ja` from 10 at 0.460 to 12 at 0.870, which is what makes the third twelve. Item
+counts are identical throughout, so nothing was shed to pay for it. The worst scale
+regression is `hi ← ar`, 0.660 → 0.580; in points that is a headword going 6.65 → 6.50,
+**−0.15pt to remove 0.85pt of misalignment on the same sheet** — five to one in the
+fix's favour, on the worst pair of 462. Every legibility floor holds, and
+`loose-columns` warnings fall from 62 pairs to 56.
+
+**The acceptance criterion had to be rewritten, and it was conflating two claims.**
+`auto reproduces the hand-built originals at their own spacing` asserted
+`faces.length === 4` under autofit, which is both "four faces are reachable" and
+"autofit prefers four". Aligning the baselines costs height, so `ja ← en` now needs
+0.420 to hold the original's content on four faces where it needed 0.460, and `COMFORT`
+is 0.45 — so autofit takes six and gets full nominal size, which is precisely the rule
+it is documented to follow. Lowering `COMFORT` to keep the old answer would have been
+tuning a constant to make a number look better, and would have cost those five pairs
+their type gain. The test now asserts what its name claims: pinned to four faces, all
+three reproductions place every original row with no errors and nothing below a floor —
+Japanese at 4.74pt against the original's own 4.44pt, so this reproduction is the more
+legible of the two — and separately that autofit never falls below four faces, and
+never spends a pair without gaining type.
+
+### Golden signatures, and why they are geometry rather than pixels
+
+The suite asserts invariants — no overflow, every atom placed once, columns flush to a
+point — and those catch a great deal. What they cannot catch is a change that is
+structurally legal and visually wrong: the PDF's dropped mark offsets sat *inside*
+every legal run for the whole life of the renderer, and the card-aspect
+letterboxing produced two separate complaints before anyone found the one cause.
+
+**A signature is plan geometry in local coordinates.** For each of four pairs — one
+Latin, one CJK, one RTL, one mark-positioned — eleven probe items covering every
+template, every heading level, a `note` and an open slot, with every run, rect and
+icon inside the item's own hit box, expressed relative to that box, at a pinned fit.
+Plus one `glyphs` line per target-script run recording how many blocks
+`render/pdf.js` drew it in and at what offsets, which is the only place the GPOS
+offsets are observable. Local coordinates and a pinned fit are what stop the files
+churning every time the corpus grows — the standing complaint that
+`tests/counts.js` exists to answer.
+
+**Rasters were rejected by measurement, and the numbers are not close.** The *same*
+PDF through poppler's splash and cairo backends on one machine differs in **23.1% of
+pixels at 72dpi**, 15.7% at 150 and 8.0% at 300 — lower resolution is worse, not
+better. The signal these tests exist to catch is 0.87% for the Hebrew mark offsets
+and 0.003% for Devanagari. A tolerance that survives a rasteriser upgrade is 18 to
+200 times too loose to see the bug. Per-glyph dumps were rejected as 10,000 glyphs a
+face carrying no information the font subsets do not already pin; SVG snapshots as
+freezing serialisation rather than layout.
+
+46KB committed across four signatures and one digest, 0.2% of `packs/`.
+`env UPDATE_GOLDEN=1 npm run test:unit` regenerates them, a missing baseline fails
+naming that command, and a changed one names the first line that moved.
+
+### The reference-PDF test is exact, and a perceptual diff provably cannot work
+
+The plan called for perceptually diffing the Mandarin pack under
+`data/themes/latex-reference.json` against the original XeLaTeX sheet's page rasters.
+That is not achievable, and the measurement is unusually clean: reference page 1
+against our page 1 is RMSE 0.3124, while reference page 1 against **page 2 of
+itself** is 0.2964. Any threshold that accepts the matched pair accepts a mismatched
+one, and *prefers* it. Four faces of the same card at 4.5pt are simply more similar to
+each other than to anything.
+
+So the test reads both PDFs' content streams and compares what genuinely should still
+hold: the page box, the four column edges, the column width, the ink bounds, all four
+rule weights, the accent bar, the palette, the intra-row baseline steps and the
+section colour coding. Every one an equality rather than a tolerance, once the TeX
+point is converted (72/72.27) — which is what turns them into equalities within
+0.001pt instead of percentages tuned until they pass.
+
+**Three things that comparison established about the original**, all of which had been
+guessed at before:
+
+- **Its type is set at 0.787 of its own declared `\fontsize`**, read off its `Tf`
+  operators — `Scale=MatchLowercase` acting on the fallback faces. Its
+  `\baselineskip` was *not* rescaled, which is exactly why the leadings compare as
+  equalities and the sizes cannot. So this project's "scale 1.0" is 1.27× the size the
+  original actually printed at.
+- **The shipped reference PDF does embed Inter and Noto Sans Condensed.** What is true
+  is that neither is installed on this machine now. The real differences are that it
+  uses no `Inter-Regular` at all — its Latin regular is the condensed face throughout
+  — and that its Han is Noto Sans CJK **JP**, not SC.
+- **Every rule and leading in `latex-reference.json` is 0.374% heavy**, from TeX points
+  read as PostScript points. That is 0.0008pt on a hairline, so it is recorded rather
+  than corrected: changing it would move every row in every pack for less than a
+  thousandth of a point.
 
 ## When a load fails
 
@@ -1662,6 +1933,13 @@ Four fixes came out of it, none of them in the data:
   *target* row, and 41 Korean literals quote Hangul while 56 Arabic ones are in
   Arabic, so drawn in the source's stack they were boxes for every reader but their
   own.
+- **The head band is one run in the reader's face, and the pronunciation key quotes
+  the target's marks.** This is the Thai-note case above, arrived at from the other
+  end: the band's slots had all been effectively ASCII, so nothing had ever asked a
+  Thai, Devanagari or Hebrew face to draw `ǎ ǐ ǒ ǔ` or `ṭ ḍ ṇ ṣ`, and none of them
+  can. A part therefore carries a `latin` flag and the romanisation half of the
+  `legend` slot sets it, so the caron that the whole request is about is drawn by a
+  face that has one.
 - **A note breaks the way its own language does.** `noteAtom` hardcoded
   `wordBreak: 'space'`, which is silently wrong for every reader whose script has
   none: a Japanese or Chinese note was one unbreakable run and painted straight past
@@ -1822,20 +2100,6 @@ Named so nobody has to rediscover the gap:
   is left is deliberate: the currency rows whose gloss cost outweighs the country they
   cover (English's euro, Spanish's sol, Portuguese's kwanza and metical, Mandarin's
   ringgit), `rail-station-words.conductor`, and Italy and Greece in the dengue scope.
-- **A legend for the romanisation column's own diacritics**, which the Vietnamese
-  translator asked for and which is a design question rather than a translation.
-  Pinyin's caron `ǎ` and Vietnamese's breve `ă` are near-identical at 5pt and pinyin's
-  macron is not a Vietnamese mark at all, so a Vietnamese reader is uniquely primed to
-  read tone marks as vowel-quality marks — they will not misread the words, they will
-  misread the *tones*, silently. Researched and rejected in two forms: a fifth `note`
-  concept is wrong because a note is a *section* device and this is a card fact, and
-  because `applies_to` on a note names the language it is *about* while the row is read
-  from the source, so it would cost eight concepts times twenty-one paragraphs.
-  `spec.head`'s `legend` slot is the card-level place for it. Doing it means writing
-  the thirteen missing reader `legend` fields, then a target-keyed second part in the
-  same slot — which also repairs a live defect, since that slot prints the respelling
-  key even when `proficiency: 'reading'` has dropped the respelling column and kept
-  the romanisation.
 
 ## Notes worth keeping
 

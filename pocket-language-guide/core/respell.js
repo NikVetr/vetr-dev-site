@@ -265,6 +265,73 @@ const STRESS_DEVICE = {
 };
 
 /**
+ * Klingon pIqaD, from the ConScript Unicode Registry's block at U+F8D0..U+F8FF
+ * (<https://www.evertype.com/standards/csur/klingon.html>, revised 2004-01-15).
+ *
+ * **The same table as `PIQAD` in `scripts/transliterate_native.py`**, which is where
+ * the scheme is documented at length and which cannot be shared across the Python
+ * boundary. Two copies of one mapping would draw the same Klingon letter as two
+ * different glyphs on one card -- in the gloss and in the respelling under it -- so
+ * `transliterate_native.py --check` reads this object and fails on any difference.
+ * Edit both or neither.
+ *
+ * Longest match, and case-significant in exactly the way TKD's orthography is: `q`
+ * U+F8DF and `Q` U+F8E0 are different consonants, and `D H I S` are letters in their
+ * own right rather than capitals. `ngh` is the one sequence a greedy longest match
+ * gets wrong -- it reads as `ng` plus a bare `h`, which is not a letter at all -- so
+ * it is listed as its only legal parse, `n` + `gh`.
+ *
+ * @type {Record<string,string>}
+ */
+const PIQAD = {
+  ngh: '\uf8db\uf8d5',
+  a: '\uf8d0', b: '\uf8d1', ch: '\uf8d2', D: '\uf8d3', e: '\uf8d4',
+  gh: '\uf8d5', H: '\uf8d6', I: '\uf8d7', j: '\uf8d8', l: '\uf8d9',
+  m: '\uf8da', n: '\uf8db', ng: '\uf8dc', o: '\uf8dd', p: '\uf8de',
+  q: '\uf8df', Q: '\uf8e0', r: '\uf8e1', S: '\uf8e2', t: '\uf8e3',
+  tlh: '\uf8e4', u: '\uf8e5', v: '\uf8e6', w: '\uf8e7', y: '\uf8e8',
+  "'": '\uf8e9',
+};
+const PIQAD_KEYS = Object.keys(PIQAD).sort((a, b) => b.length - a.length);
+
+/**
+ * The reader's own **script**, for a reader whose language is written in one the rule
+ * table cannot be authored in.
+ *
+ * Two packs run the other way round from every other one: every published Klingon and
+ * Quenya source prints a romanisation and nothing else, so the corpus derives `text`
+ * from the romanised cell rather than the reverse (`scripts/transliterate_native.py`).
+ * A respelling is *generated* rather than authored, so the same move belongs here --
+ * the rules stay in the orthography Okrand's key is written in, where they can be
+ * read, scored and argued with, and the finished string is relabelled once.
+ *
+ * It runs last, after the syllables are joined, and that is the only place it can:
+ * `after_out` predicates, the `syllable_fixups` and both diacritic devices all match
+ * on output *letters*, so anything earlier would have to move the whole table into the
+ * Private Use Area with it.
+ *
+ * **An unmapped character passes through unchanged**, which is deliberate. The one
+ * character that can reach here without a mapping is an IPA symbol no rule matched,
+ * and that is exactly what `respell_check.mjs --gaps` counts -- so it has to arrive at
+ * the harness as itself. Raising instead would turn a missing rule into a thrown
+ * error in the middle of a solve, taking out the whole sheet rather than one cell.
+ * Every reader is at zero gaps today, so nothing currently reaches it.
+ *
+ * @type {Record<string, (text: string) => string>}
+ */
+const SCRIPT_DEVICE = {
+  piqad: (text) => {
+    let out = '';
+    for (let i = 0; i < text.length;) {
+      const key = PIQAD_KEYS.find((k) => text.startsWith(k, i));
+      out += key ? PIQAD[key] : text[i];
+      i += key ? key.length : 1;
+    }
+    return out;
+  },
+};
+
+/**
  * A voiced fricative that is a stop's allophone counts as that stop when deciding
  * what may open a syllable. Without this, Spanish `hablar` -- which espeak gives
  * as `aβlaɾ` -- syllabifies as `ahb-LAR` instead of `ah-BLAR`.
@@ -732,8 +799,10 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
   const splits = only.splits ?? rules.splits ?? [];
   const policy = { stress: 'none', stress_min_syllables: 2, length: 'none', tone: 'keep',
     syllable_separator: '-', word_separator: ' ', max_onset: 3, fixups: 'first',
-    locale: rules.source ?? 'en', ...(rules.policy ?? {}), ...(only.policy ?? {}) };
+    script: 'none', locale: rules.source ?? 'en',
+    ...(rules.policy ?? {}), ...(only.policy ?? {}) };
   const stressDevice = STRESS_DEVICE[policy.stress];
+  const scriptDevice = SCRIPT_DEVICE[policy.script];
 
   /** @param {Syllable[]} syllables */
   const word = (syllables) => {
@@ -844,10 +913,11 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
       const raw = (ipa ?? '').trim();
       const trimmed = policy.tone === 'drop' ? raw.replace(TONE, '') : raw;
       if (!trimmed) return '';
-      return trimmed
+      const out = trimmed
         .split(/\s+/)
         .map((w) => word(syllabify(w, clusters, maxOnset)))
         .join(policy.word_separator);
+      return scriptDevice ? scriptDevice(out) : out;
     },
   };
 }

@@ -2143,5 +2143,6 @@
       ]
     }
   },
+  "legend": "新しい記号はありません。外来語と同じ片仮名で書いてあり、「・」は音節の区切りです。",
   "note": "Reader's legend, per RESPELL-SYSTEMS.md: none needed. Every glyph this table emits is ordinary katakana a Japanese reader meets in loanword spelling, including the 第2表 series (ヴ, ティ, トゥ, ウィ, クァ); nothing here has to be looked up. Two typographic notes for the sheet. (1) The divider is 中黒 U+30FB rather than the hyphen the survey's table assigns -- see `deviations`; the hyphen is the one divider katakana cannot use, because it is confusable with ー and 12% of rows put the two adjacent. (2) The output is wider than a Latin respelling: CJK floors at 5.0pt with no condensed face, and epenthesis adds morae, so a Japanese respelling of an English phrase is routinely half again as long as the English one."
 }

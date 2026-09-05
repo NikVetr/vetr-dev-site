@@ -1,0 +1,185 @@
+# pocket-language-guide golden layout signature -- es <- en
+#
+# Latin both sides -- the case with no shaping and no direction to get wrong.
+#
+# Written by tests/golden.test.mjs. Do not edit by hand; rewrite it deliberately:
+#   env UPDATE_GOLDEN=1 npm run test:unit
+#
+# The fit is pinned and the selection is eight named sections, so nothing here moves
+# when the corpus grows. Every position is in points from the top-left of the item's
+# own box, so an item is described independently of where on the sheet it landed.
+# What does move these numbers is a theme size, a leading, a pad, a rule weight, a
+# change in a committed font subset's advances, or a solver change -- which is the
+# point. `split: adaptive` means an `entry` row solves its own divider, so its
+# geometry does not depend on its neighbours either; the three table templates share
+# one split across their group by design, so a row joining `quick-responses` or
+# `numbers-money` will move those.
+#
+#   run     dx  dy(baseline)  advance  face size  fill  dir  text
+#   rect    dx  dy(top)       w x h    fill
+#   icon    dx  dy(top)       size     name  fill
+#   glyphs  one line per target-script run: how many blocks render/pdf.js drew it in,
+#           and where. The only place a dropped GPOS mark offset is visible.
+
+spec     es <- en   theme latex-reference   paper print-shop-bleed
+spec     faces 4 pinned   scale 1.000 pinned   padding 0.00   split adaptive   arrangement mixed
+spec     fields script roman gloss respell numeral
+spec     sections social-basics quick-responses payment-receipt numbers-money time-words trail-words emergency-medical utility-templates
+box      left 7.20   top 4.68   width 489.60   height 347.76   colWidth 119.66
+column   x 7.20  130.51  253.83  377.14
+
+item     heading:social-basics              box 119.66 x 10.20
+  rect    0.00    8.68  119.66 x 0.90  #0B67A3
+  icon    0.00    0.83  6.92  messages-square  #0B67A3
+  run     9.32    6.48   21.78  latin-700 7.54  #111820 ltr  "Social"
+  run    33.06    6.48    4.31  latin-700 7.54  #111820 ltr  "+"
+  run    39.33    6.48   23.00  latin-700 7.54  #111820 ltr  "basics"
+
+item     social-basics.hello                box 119.66 x 12.62
+  rect    0.00    0.00  0.92 x 12.62  #0B67A3
+  rect    0.00   12.40  119.66 x 0.22  #BCC6CF
+  run     1.78    5.96   16.70  latin-700 7.30  #111820 ltr  "Hola"
+  run   100.62    5.96   18.11  latin-700 7.01  #111820 ltr  "Hello"
+  run   105.46   11.38    8.95  latin-400i 5.22  #3F4A55 ltr  "OH-"
+  run   114.41   11.38    4.31  latin-400i 5.22  #3F4A55 ltr  "la"
+
+item     social-basics.excuse-me-sorry      box 119.66 x 12.62
+  rect    0.00    0.00  0.92 x 12.62  #0B67A3
+  rect    0.00   12.40  119.66 x 0.22  #BCC6CF
+  run     1.78    5.96   25.93  latin-700 7.30  #111820 ltr  "Perdón"
+  run    57.44    5.96   23.71  latin-700 7.01  #111820 ltr  "Excuse"
+  run    82.98    5.96   11.02  latin-700 7.01  #111820 ltr  "me"
+  run    95.82    5.96    2.91  latin-700 7.01  #111820 ltr  "/"
+  run   100.55    5.96   18.17  latin-700 7.01  #111820 ltr  "sorry"
+  run    98.45   11.38    9.34  latin-400i 5.22  #3F4A55 ltr  "per-"
+  run   107.79   11.38   10.94  latin-400i 5.22  #3F4A55 ltr  "DON"
+
+item     heading:quick-responses            box 119.66 x 8.89
+  rect    0.00    8.35  119.66 x 0.40  #0B67A3
+  run     0.00    5.66   17.49  latin-700 6.08  #111820 ltr  "Quick"
+  run    19.07    5.66   30.61  latin-700 6.08  #111820 ltr  "responses"
+
+item     quick-responses.yes-right          box 119.66 x 7.30
+  rect    0.00    0.00  119.66 x 7.30  #F4F6F8
+  rect    0.00    0.00  0.92 x 7.30  #0B67A3
+  rect    0.00    7.08  119.66 x 0.22  #BCC6CF
+  run     1.72    5.58    5.17  latin-cond-700 6.60  #111820 ltr  "Sí"
+  run    43.11    5.55    9.91  latin-cond-700 6.50  #111820 ltr  "yes"
+  run    54.52    5.55    2.67  latin-cond-700 6.50  #111820 ltr  "/"
+  run    58.68    5.55   14.72  latin-cond-700 6.50  #111820 ltr  "right"
+  run   112.05    5.17    6.77  latin-cond-400i 5.20  #3F4A55 ltr  "see"
+
+item     heading:payment-receipt            box 119.66 x 8.97
+  rect    0.00    8.35  119.66 x 0.48  #B45100
+  icon    0.00    1.20  5.36  credit-card  #B45100
+  run     7.46    5.66   27.30  latin-700 6.14  #111820 ltr  "Payment"
+  run    36.36    5.66    3.51  latin-700 6.14  #111820 ltr  "+"
+  run    41.47    5.66   21.50  latin-700 6.14  #111820 ltr  "receipt"
+
+item     payment-receipt.how-much-in-total  box 119.66 x 14.64
+  rect    0.00    0.00  119.66 x 14.64  #F4F6F8
+  rect    0.00    0.00  0.92 x 14.64  #B45100
+  rect    0.00   14.42  119.66 x 0.22  #BCC6CF
+  run     1.72    5.79   25.56  latin-cond-700 6.85  #111820 ltr  "¿Cuánto"
+  run    28.86    5.79    6.86  latin-cond-700 6.85  #111820 ltr  "es"
+  run     1.72   12.86    7.82  latin-cond-700 6.85  #111820 ltr  "en"
+  run    11.11   12.86   18.02  latin-cond-700 6.85  #111820 ltr  "total?"
+  run    47.85    5.81   13.83  latin-cond-700 6.75  #111820 ltr  "How"
+  run    63.24    5.81   17.24  latin-cond-700 6.75  #111820 ltr  "much"
+  run    47.85   12.78    5.90  latin-cond-700 6.75  #111820 ltr  "in"
+  run    55.31   12.78   17.76  latin-cond-700 6.75  #111820 ltr  "total?"
+  run    85.41    6.13   14.36  latin-cond-400i 5.30  #3F4A55 ltr  "KWAN-"
+  run    99.77    6.13    7.00  latin-cond-400i 5.30  #3F4A55 ltr  "toh"
+  run   107.97    6.13    4.48  latin-cond-400i 5.30  #3F4A55 ltr  "es"
+  run   113.66    6.13    5.16  latin-cond-400i 5.30  #3F4A55 ltr  "en"
+  run   103.19   11.60    8.55  latin-cond-400i 5.30  #3F4A55 ltr  "toh-"
+  run   111.74   11.60    7.07  latin-cond-400i 5.30  #3F4A55 ltr  "TAL"
+
+item     numbers-money.s-n                  box 119.66 x 7.32
+  rect    0.00    0.00  119.66 x 7.32  #F4F6F8
+  rect    0.00    0.00  0.92 x 7.32  #B45100
+  rect    0.00    7.10  119.66 x 0.22  #BCC6CF
+  run    15.14    5.58    3.50  latin-cond-700 6.60  #111820 ltr  "3"
+  run    45.30    5.58   11.82  latin-cond-700 6.60  #111820 ltr  "tres"
+  run   111.11    5.17    7.70  latin-cond-400i 5.20  #3F4A55 ltr  "tres"
+
+item     heading:emergency-medical          box 119.66 x 10.20
+  rect    0.00    8.68  119.66 x 0.90  #B3261E
+  icon    0.00    0.83  6.92  briefcase-medical  #B3261E
+  run     9.32    6.48   41.73  latin-700 7.54  #111820 ltr  "Emergency"
+  run    53.01    6.48    4.31  latin-700 7.54  #111820 ltr  "+"
+  run    59.29    6.48   29.53  latin-700 7.54  #111820 ltr  "medical"
+
+item     note:emergency-medical             box 119.66 x 7.60
+  rect    0.00    0.00  119.66 x 7.60  #F4F6F8  r 1.20
+  run     1.75    5.69   15.03  latin-400 5.24  #3F4A55 ltr  "Spain:"
+  run    18.15    5.69    8.99  latin-400 5.24  #3F4A55 ltr  "112"
+  run    28.50    5.69    5.64  latin-400 5.24  #3F4A55 ltr  "all"
+  run    35.51    5.69   19.62  latin-400 5.24  #3F4A55 ltr  "services"
+
+item     utility-templates.i-want-to-go-to  box 119.66 x 15.12
+  rect    0.00    0.00  0.92 x 15.12  #0B67A3
+  rect    0.00   14.90  119.66 x 0.22  #BCC6CF
+  rect    1.78   14.02  31.57 x 0.40  #111820
+  run     1.78    5.96   24.74  latin-700 7.30  #111820 ltr  "Quiero"
+  run    28.42    5.96    5.45  latin-700 7.30  #111820 ltr  "ir"
+  run    35.76    5.96    4.37  latin-700 7.30  #111820 ltr  "a"
+  run    59.43    5.96    2.73  latin-700 7.01  #111820 ltr  "I"
+  run    63.98    5.96   17.80  latin-700 7.01  #111820 ltr  "want"
+  run    83.60    5.96    7.42  latin-700 7.01  #111820 ltr  "to"
+  run    92.85    5.96    8.81  latin-700 7.01  #111820 ltr  "go"
+  run   103.48    5.96    7.42  latin-700 7.01  #111820 ltr  "to"
+  run   112.73    5.96    5.99  latin-700 7.01  #111820 ltr  "…"
+  run    78.28   11.38    9.32  latin-400i 5.22  #3F4A55 ltr  "kee-"
+  run    87.61   11.38    7.87  latin-400i 5.22  #3F4A55 ltr  "EH-"
+  run    95.47   11.38    4.91  latin-400i 5.22  #3F4A55 ltr  "ro"
+  run   101.74   11.38    7.29  latin-400i 5.22  #3F4A55 ltr  "eer"
+  run   110.39   11.38    2.96  latin-400i 5.22  #3F4A55 ltr  "a"
+  run   114.71   11.38    4.01  latin-400i 5.22  #3F4A55 ltr  "…"
+
+glyphs   latin-700 7.30   1 block   +0.00  "Hola"
+glyphs   latin-700 7.01   1 block   +0.00  "Hello"
+glyphs   latin-400i 5.22   1 block   +0.00  "OH-"
+glyphs   latin-400i 5.22   1 block   +0.00  "la"
+glyphs   latin-700 7.30   1 block   +0.00  "Perdón"
+glyphs   latin-700 7.01   1 block   +0.00  "Excuse"
+glyphs   latin-700 7.01   1 block   +0.00  "me"
+glyphs   latin-700 7.01   1 block   +0.00  "/"
+glyphs   latin-700 7.01   1 block   +0.00  "sorry"
+glyphs   latin-400i 5.22   1 block   +0.00  "per-"
+glyphs   latin-400i 5.22   1 block   +0.00  "DON"
+glyphs   latin-cond-700 6.60   1 block   +0.00  "Sí"
+glyphs   latin-cond-700 6.50   1 block   +0.00  "yes"
+glyphs   latin-cond-700 6.50   1 block   +0.00  "/"
+glyphs   latin-cond-700 6.50   1 block   +0.00  "right"
+glyphs   latin-cond-400i 5.20   1 block   +0.00  "see"
+glyphs   latin-cond-700 6.85   1 block   +0.00  "¿Cuánto"
+glyphs   latin-cond-700 6.85   1 block   +0.00  "es"
+glyphs   latin-cond-700 6.85   1 block   +0.00  "en"
+glyphs   latin-cond-700 6.75   1 block   +0.00  "total?"
+glyphs   latin-cond-700 6.75   1 block   +0.00  "How"
+glyphs   latin-cond-700 6.75   1 block   +0.00  "much"
+glyphs   latin-cond-700 6.75   1 block   +0.00  "in"
+glyphs   latin-cond-400i 5.30   1 block   +0.00  "KWAN-"
+glyphs   latin-cond-400i 5.30   1 block   +0.00  "toh"
+glyphs   latin-cond-400i 5.30   1 block   +0.00  "es"
+glyphs   latin-cond-400i 5.30   1 block   +0.00  "en"
+glyphs   latin-cond-400i 5.30   1 block   +0.00  "toh-"
+glyphs   latin-cond-400i 5.30   1 block   +0.00  "TAL"
+glyphs   latin-cond-700 6.60   1 block   +0.00  "3"
+glyphs   latin-cond-700 6.60   1 block   +0.00  "tres"
+glyphs   latin-cond-400i 5.20   1 block   +0.00  "tres"
+glyphs   latin-700 7.30   1 block   +0.00  "Quiero"
+glyphs   latin-700 7.30   1 block   +0.00  "ir"
+glyphs   latin-700 7.30   1 block   +0.00  "a"
+glyphs   latin-700 7.01   1 block   +0.00  "I"
+glyphs   latin-700 7.01   1 block   +0.00  "want"
+glyphs   latin-700 7.01   1 block   +0.00  "to"
+glyphs   latin-700 7.01   1 block   +0.00  "go"
+glyphs   latin-700 7.01   1 block   +0.00  "…"
+glyphs   latin-400i 5.22   1 block   +0.00  "kee-"
+glyphs   latin-400i 5.22   1 block   +0.00  "EH-"
+glyphs   latin-400i 5.22   1 block   +0.00  "ro"
+glyphs   latin-400i 5.22   1 block   +0.00  "eer"
+glyphs   latin-400i 5.22   1 block   +0.00  "a"
+glyphs   latin-400i 5.22   1 block   +0.00  "…"

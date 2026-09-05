@@ -40,6 +40,7 @@ throughout.
 import argparse
 import csv
 import io
+import re
 import sys
 from pathlib import Path
 
@@ -442,27 +443,60 @@ def build(code, check):
     return stale, written
 
 
-def build_names(check):
-    """The same move on `data/registry/language-names.csv`, for the rows whose
-    *locale* is one of these two.
+# The two registry tables that hold one row per language rather than one file per
+# language, so one pass serves both: the file, the column naming the language, the
+# native column and the romanisation beside it.
+#
+# `language-names.csv` is what each language calls the *others*, and its `name` column
+# is what `fillLanguageSlots` substitutes into a `{target}` or `{source}` slot -- in
+# the language of the cell the slot sits in. So the moment a Klingon cell is pIqaD,
+# `'eSpanya' Hol` in that column makes the one thing `core/pack.js` promises
+# impossible: "a substituted cell can never contain a script its own font stack can
+# draw". `romanization` is also the column `build_ipa.py` reads for these two locales
+# and the column the sheet's own romanisation field substitutes from. Only the
+# `locale` side is transliterated: a row like `en,tlh` is English naming Klingon.
+#
+# `languages.csv`'s `endonym` is what a language calls *itself*, and it is the one
+# native cell a reader meets before any card is drawn -- the gallery card prints it
+# under its English title and the "I speak..." picker's own row is nothing else. Both
+# were Latin on two cards whose every other cell had gone native. `exonym_en` carries
+# "Klingon" and "Quenya" for the title above it, so a native endonym strands nobody,
+# and `speak_label` in the same row stays romanised on purpose: that is interface
+# chrome, and `data/i18n/{tlh,qya}.json` is romanised end to end for the same reason.
+#
+# `endonym_roman` and `badge_roman` are new and empty on the other twenty rows, which
+# costs them nothing: every consumer reads this table by header name -- `parseTable`
+# in `core/csv.js` for the app and its tests, `csv.DictReader` in `validate_data.py`
+# and `build_ipa.py`.
+#
+# The `badge` pass is here for readability rather than for correctness. A badge is a
+# choice of two codepoints, not a transliteration of anything, and the two conscript
+# ones were hand-written into the CSV -- where nobody can read them, so checking that
+# the Quenya badge spells what it claims to meant decoding five Private Use Area
+# codepoints against the CSUR chart by hand. `badge_roman` makes that a glance and
+# `--check` keeps the two in step. `languages.csv` therefore appears twice: each entry
+# rewrites the whole file, and the second pass reads what the first wrote.
+ROW_TABLES = [("language-names.csv", "locale", "name", "romanization"),
+              ("languages.csv", "bcp47", "endonym", "endonym_roman"),
+              ("languages.csv", "bcp47", "badge", "badge_roman")]
 
-    That file is the table of what each language calls the others, and its `name`
-    column is what `fillLanguageSlots` substitutes into a `{target}` or `{source}`
-    slot -- in the language of the cell the slot sits in. So the moment a Klingon
-    cell is pIqaD, `'eSpanya' Hol` in that column makes the one thing `core/pack.js`
-    promises impossible: "a substituted cell can never contain a script its own font
-    stack cannot draw". `name` therefore holds the native form and `romanization`
-    the Latin, which is also the column `build_ipa.py` reads for these two locales
-    and the column the sheet's own romanisation field substitutes from.
 
-    Only the `locale` side is transliterated. A row like `en,tlh` is English naming
-    Klingon and stays English.
+def build_rows(filename, code_column, native, roman_column, check):
+    """Derive the native column of one whole-file registry table.
+
+    Newline-delimited and rewritten whole, matching `write_names` in
+    `scripts/build_ipa.py`, which is the other writer of `language-names.csv`. The
+    corpus helpers above cannot be reused: `data/lang` is CRLF and kept byte-exact
+    line by line, and neither of these files is.
+
+    The romanisation is *seeded* rather than hand-authored, which is what `build`
+    does for the packs: it is filled from the native cell on the first run and read
+    from thereafter, so the Latin that was in `endonym` becomes `endonym_roman` once
+    and every run after that is a no-op. `build_registry` refuses to seed for the same
+    reason it cannot -- a per-language file has no row to tell one language's cells
+    from another's -- and here the code column does.
     """
-    path = DATA / "registry" / "language-names.csv"
-    # Newline-delimited and whole-file rewritten, matching `write_names` in
-    # `scripts/build_ipa.py`, which is the other writer of this file. The corpus
-    # helpers above cannot be reused: `data/lang` is CRLF and kept byte-exact
-    # line by line, and this is not.
+    path = DATA / "registry" / filename
     with path.open(encoding="utf-8-sig", newline="") as fh:
         reader = csv.DictReader(fh)
         header = reader.fieldnames
@@ -470,19 +504,21 @@ def build_names(check):
     stale = []
     written = 0
     for row in rows:
-        if row["locale"] not in ROUTES:
+        if row[code_column] not in ROUTES:
             continue
-        _, convert, _ = ROUTES[row["locale"]]
-        roman = row["romanization"] or row["name"]
+        convert = ROUTES[row[code_column]][1]
+        roman = row[roman_column] or row[native]
         if not roman:
             continue
         want = convert(roman)
-        if (row["name"], row["romanization"]) == (want, roman):
+        if (row[native], row[roman_column]) == (want, roman):
             continue
         if check:
-            stale.append(f"  {path.relative_to(ROOT)}: {row['locale']} names {row['bcp47']}")
+            # The romanisation names the row, and it is the cell a human would open
+            # the file to look at.
+            stale.append(f"  {path.relative_to(ROOT)}: {roman}")
             continue
-        row["name"], row["romanization"] = want, roman
+        row[native], row[roman_column] = want, roman
         written += 1
     if written:
         out = io.StringIO(newline="")
@@ -544,6 +580,36 @@ def build_registry(code, check):
     return stale
 
 
+# `core/respell.js` carries this table a second time, because a Klingon *reader*'s
+# respelling column is pIqaD too and a respelling is generated at load time from the
+# target's `ipa` column -- so it is spelt by the engine rather than derived here. The
+# scheme cannot be shared across the Python boundary, and two copies of one mapping is
+# a real failure rather than untidiness: the same Klingon letter would be drawn as two
+# different glyphs on one card, in the gloss and in the respelling under it. This is
+# what makes that unreachable, and it is here rather than in `tests/respell.test.mjs`
+# because this file is where the mapping is documented and cited.
+ENGINE = ROOT / "core" / "respell.js"
+JS_ENTRY = re.compile(r"(\S+?)\s*:\s*'((?:\\u[0-9a-f]{4})+)'")
+
+
+def check_engine_table():
+    """Every difference between this file's `PIQAD` and `core/respell.js`'s."""
+    src = ENGINE.read_text(encoding="utf-8")
+    at = src.index("const PIQAD = {")
+    block = src[at:src.index("};", at)]
+
+    def unquote(key):
+        # One quote off each end, not `strip`: the glottal stop's key is written `"'"`
+        # there, and stripping both quote characters would leave it empty.
+        return key[1:-1] if key[:1] in ("'", '"') and key[-1:] == key[:1] else key
+
+    theirs = {unquote(key): value.encode().decode("unicode_escape")
+              for key, value in JS_ENTRY.findall(block)}
+    return [f"  core/respell.js: {key!r} is {theirs.get(key)!r}, not {PIQAD.get(key)!r}"
+            for key in sorted(PIQAD.keys() | theirs.keys())
+            if theirs.get(key) != PIQAD.get(key)]
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true",
@@ -559,10 +625,12 @@ def main():
         if not args.check:
             print(f"{code}: {written} rows written")
         stale += build_registry(code, args.check)
-    found, written = build_names(args.check)
-    stale += found
-    if not args.check:
-        print(f"language-names.csv: {written} rows written")
+    for filename, code_column, native, roman_column in ROW_TABLES:
+        found, written = build_rows(filename, code_column, native, roman_column, args.check)
+        stale += found
+        if not args.check:
+            print(f"{filename}: {written} rows written")
+    stale += check_engine_table()
     if stale:
         print(f"{len(stale)} cells are not what scripts/transliterate_native.py "
               "would write:", file=sys.stderr)

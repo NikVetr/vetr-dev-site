@@ -1,0 +1,200 @@
+# pocket-language-guide golden layout signature -- he <- en
+#
+# GPOS mark attachment -- niqqud are zero-advance glyphs whose outlines sit at positive x.
+#
+# Written by tests/golden.test.mjs. Do not edit by hand; rewrite it deliberately:
+#   env UPDATE_GOLDEN=1 npm run test:unit
+#
+# The fit is pinned and the selection is eight named sections, so nothing here moves
+# when the corpus grows. Every position is in points from the top-left of the item's
+# own box, so an item is described independently of where on the sheet it landed.
+# What does move these numbers is a theme size, a leading, a pad, a rule weight, a
+# change in a committed font subset's advances, or a solver change -- which is the
+# point. `split: adaptive` means an `entry` row solves its own divider, so its
+# geometry does not depend on its neighbours either; the three table templates share
+# one split across their group by design, so a row joining `quick-responses` or
+# `numbers-money` will move those.
+#
+#   run     dx  dy(baseline)  advance  face size  fill  dir  text
+#   rect    dx  dy(top)       w x h    fill
+#   icon    dx  dy(top)       size     name  fill
+#   glyphs  one line per target-script run: how many blocks render/pdf.js drew it in,
+#           and where. The only place a dropped GPOS mark offset is visible.
+
+spec     he <- en   theme latex-reference   paper print-shop-bleed
+spec     faces 4 pinned   scale 1.000 pinned   padding 0.00   split adaptive   arrangement mixed
+spec     fields script roman gloss respell numeral script_alt
+spec     sections social-basics quick-responses payment-receipt numbers-money time-words trail-words emergency-medical utility-templates
+box      left 7.20   top 4.68   width 489.60   height 347.76   colWidth 119.66
+column   x 7.20  130.51  253.83  377.14
+
+item     heading:social-basics              box 119.66 x 10.20
+  rect    0.00    8.68  119.66 x 0.90  #0B67A3
+  icon    0.00    0.83  6.92  messages-square  #0B67A3
+  run     9.32    6.48   21.78  latin-700 7.54  #111820 ltr  "Social"
+  run    33.06    6.48    4.31  latin-700 7.54  #111820 ltr  "+"
+  run    39.33    6.48   23.00  latin-700 7.54  #111820 ltr  "basics"
+
+item     social-basics.hello                box 119.66 x 21.02
+  rect    0.00    0.00  0.92 x 21.02  #0B67A3
+  rect    0.00   20.80  119.66 x 0.22  #BCC6CF
+  run     1.78    6.98   18.11  latin-700 7.01  #111820 ltr  "Hello"
+  run     1.78   12.40   12.90  latin-400i 5.22  #3F4A55 ltr  "shah-"
+  run    14.68   12.40   10.54  latin-400i 5.22  #3F4A55 ltr  "LOM"
+  run   101.40    6.98   17.32  hebrew-700 7.30  #111820 rtl  "שלום"
+  run   105.58   14.08   13.14  hebrew-400 5.90  #3F4A55 rtl  "שָׁלוֹם"
+  run   100.61   19.72   18.11  latin-400i 5.53  #111820 ltr  "shalom"
+
+item     social-basics.excuse-me-sorry      box 119.66 x 21.02
+  rect    0.00    0.00  119.66 x 21.02  #F4F6F8
+  rect    0.00    0.00  0.92 x 21.02  #0B67A3
+  rect    0.00   20.80  119.66 x 0.22  #BCC6CF
+  run     1.78    6.98   23.71  latin-700 7.01  #111820 ltr  "Excuse"
+  run    27.32    6.98   11.02  latin-700 7.01  #111820 ltr  "me"
+  run    40.16    6.98    2.91  latin-700 7.01  #111820 ltr  "/"
+  run    44.89    6.98   18.17  latin-700 7.01  #111820 ltr  "sorry"
+  run     1.78   12.40    9.52  latin-400i 5.22  #3F4A55 ltr  "seh-"
+  run    11.30   12.40    8.19  latin-400i 5.22  #3F4A55 ltr  "lee-"
+  run    19.49   12.40    6.48  latin-400i 5.22  #3F4A55 ltr  "HA"
+  run    97.62    6.98   21.10  hebrew-700 7.30  #111820 rtl  "סליחה"
+  run   102.57   14.08   16.15  hebrew-400 5.90  #3F4A55 rtl  "סְלִיחָה"
+  run   104.38   19.72   14.34  latin-400i 5.53  #111820 ltr  "seliẖa"
+
+item     heading:quick-responses            box 119.66 x 8.89
+  rect    0.00    8.35  119.66 x 0.40  #0B67A3
+  run     0.00    5.66   17.49  latin-700 6.08  #111820 ltr  "Quick"
+  run    19.07    5.66   30.61  latin-700 6.08  #111820 ltr  "responses"
+
+item     quick-responses.yes-right          box 119.66 x 11.81
+  rect    0.00    0.00  119.66 x 11.81  #F4F6F8
+  rect    0.00    0.00  0.92 x 11.81  #0B67A3
+  rect    0.00   11.59  119.66 x 0.22  #BCC6CF
+  run     1.72    4.74    7.31  latin-cond-400i 5.20  #3F4A55 ltr  "ken"
+  run    10.21    4.74    1.81  latin-cond-400i 5.20  #3F4A55 ltr  "/"
+  run    13.20    4.74    9.58  latin-cond-400i 5.20  #3F4A55 ltr  "nah-"
+  run     1.72   10.11    9.79  latin-cond-400i 5.20  #3F4A55 ltr  "HON"
+  run    35.65    7.80    9.91  latin-cond-700 6.50  #111820 ltr  "yes"
+  run    47.05    7.80    2.67  latin-cond-700 6.50  #111820 ltr  "/"
+  run    51.22    7.80   14.72  latin-cond-700 6.50  #111820 ltr  "right"
+  run    81.40    4.69    7.59  latin-cond-400i 5.40  #111820 ltr  "ken"
+  run    90.21    4.69    1.88  latin-cond-400i 5.40  #111820 ltr  "/"
+  run    75.80   10.26   16.30  latin-cond-400i 5.40  #111820 ltr  "nakhon"
+  run   112.98    8.15    5.83  hebrew-700 6.60  #111820 rtl  "כן"
+  run   108.48    8.15    2.72  hebrew-700 6.60  #111820 rtl  "/"
+  run    96.04    8.15   10.66  hebrew-700 6.60  #111820 rtl  "נכון"
+
+item     heading:payment-receipt            box 119.66 x 8.97
+  rect    0.00    8.35  119.66 x 0.48  #B45100
+  icon    0.00    1.20  5.36  credit-card  #B45100
+  run     7.46    5.66   27.30  latin-700 6.14  #111820 ltr  "Payment"
+  run    36.36    5.66    3.51  latin-700 6.14  #111820 ltr  "+"
+  run    41.47    5.66   21.50  latin-700 6.14  #111820 ltr  "receipt"
+
+item     payment-receipt.how-much-in-total  box 119.66 x 22.54
+  rect    0.00    0.00  119.66 x 22.54  #F4F6F8
+  rect    0.00    0.00  0.92 x 22.54  #B45100
+  rect    0.00   22.32  119.66 x 0.22  #BCC6CF
+  run     1.72    4.61   10.12  latin-cond-400i 5.30  #3F4A55 ltr  "KAH-"
+  run    11.84    4.61    6.86  latin-cond-400i 5.30  #3F4A55 ltr  "ma"
+  run     1.72   10.08    7.20  latin-cond-400i 5.30  #3F4A55 ltr  "zeh"
+  run    10.13   10.08    9.47  latin-cond-400i 5.30  #3F4A55 ltr  "beh-"
+  run     1.72   15.55    8.32  latin-cond-400i 5.30  #3F4A55 ltr  "SAH"
+  run    11.24   15.55    9.76  latin-cond-400i 5.30  #3F4A55 ltr  "hah-"
+  run     1.72   21.02    8.23  latin-cond-400i 5.30  #3F4A55 ltr  "KOL"
+  run    27.15    9.76   13.83  latin-cond-700 6.75  #111820 ltr  "How"
+  run    42.53    9.76   17.24  latin-cond-700 6.75  #111820 ltr  "much"
+  run    34.56   16.73    5.90  latin-cond-700 6.75  #111820 ltr  "in"
+  run    42.01   16.73   17.76  latin-cond-700 6.75  #111820 ltr  "total?"
+  run    68.08    7.20   12.40  latin-cond-400i 5.50  #111820 ltr  "káma"
+  run    81.74    7.20    4.63  latin-cond-400i 5.50  #111820 ltr  "ze"
+  run    70.73   12.88   15.64  latin-cond-400i 5.50  #111820 ltr  "besakh"
+  run    72.17   18.56   14.20  latin-cond-400i 5.50  #111820 ltr  "hakol?"
+  run   105.96    9.49   12.85  hebrew-700 6.85  #111820 rtl  "כמה"
+  run    97.06    9.49    7.05  hebrew-700 6.85  #111820 rtl  "זה"
+  run   106.56   17.71   12.25  hebrew-700 6.85  #111820 rtl  "בסך"
+  run    89.47   17.71   15.23  hebrew-700 6.85  #111820 rtl  "הכל?"
+
+item     numbers-money.s-n                  box 119.66 x 8.48
+  rect    0.00    0.00  119.66 x 8.48  #F4F6F8
+  rect    0.00    0.00  0.92 x 8.48  #B45100
+  rect    0.00    8.26  119.66 x 0.22  #BCC6CF
+  run     1.72    5.75   11.60  latin-cond-400i 5.20  #3F4A55 ltr  "shah-"
+  run    13.32    5.75   10.98  latin-cond-400i 5.20  #3F4A55 ltr  "LOSH"
+  run    42.24    5.81   16.56  latin-cond-400i 5.40  #111820 ltr  "shalosh"
+  run    71.01    6.48   16.29  hebrew-700 6.60  #111820 rtl  "שלוש"
+  run   107.40    6.16    3.50  latin-cond-700 6.60  #111820 ltr  "3"
+
+item     heading:emergency-medical          box 119.66 x 10.20
+  rect    0.00    8.68  119.66 x 0.90  #B3261E
+  icon    0.00    0.83  6.92  briefcase-medical  #B3261E
+  run     9.32    6.48   41.73  latin-700 7.54  #111820 ltr  "Emergency"
+  run    53.01    6.48    4.31  latin-700 7.54  #111820 ltr  "+"
+  run    59.29    6.48   29.53  latin-700 7.54  #111820 ltr  "medical"
+
+item     note:emergency-medical             box 119.66 x 7.60
+  rect    0.00    0.00  119.66 x 7.60  #F4F6F8  r 1.20
+  run     1.75    5.69   15.00  latin-400 5.24  #3F4A55 ltr  "Israel:"
+  run    18.11    5.69    8.99  latin-400 5.24  #3F4A55 ltr  "100"
+  run    28.46    5.69   14.57  latin-400 5.24  #3F4A55 ltr  "police"
+  run    44.39    5.69    1.40  latin-400 5.24  #3F4A55 ltr  "·"
+  run    47.16    5.69    8.99  latin-400 5.24  #3F4A55 ltr  "101"
+  run    57.51    5.69   27.30  latin-400 5.24  #3F4A55 ltr  "ambulance"
+  run    86.18    5.69    1.40  latin-400 5.24  #3F4A55 ltr  "·"
+  run    88.94    5.69    8.99  latin-400 5.24  #3F4A55 ltr  "102"
+  run    99.30    5.69    8.17  latin-400 5.24  #3F4A55 ltr  "fire"
+
+item     utility-templates.i-want-to-go-to  box 119.66 x 31.55
+  rect    0.00    0.00  0.92 x 31.55  #0B67A3
+  rect    0.00   31.33  119.66 x 0.22  #BCC6CF
+  rect   85.14   16.32  31.57 x 0.40  #111820
+  rect   44.94   23.31  25.51 x 0.35  #3F4A55
+  rect   93.28   28.92  23.91 x 0.35  #111820
+  run     1.78    6.98    2.73  latin-700 7.01  #111820 ltr  "I"
+  run     6.33    6.98   17.80  latin-700 7.01  #111820 ltr  "want"
+  run    25.95    6.98    7.42  latin-700 7.01  #111820 ltr  "to"
+  run     1.78   14.16    8.81  latin-700 7.01  #111820 ltr  "go"
+  run    12.41   14.16    7.42  latin-700 7.01  #111820 ltr  "to"
+  run    21.66   14.16    5.99  latin-700 7.01  #111820 ltr  "…"
+  run     1.78   19.58    7.62  latin-400i 5.22  #3F4A55 ltr  "ah-"
+  run     9.40   19.58    9.06  latin-400i 5.22  #3F4A55 ltr  "NEE"
+  run    19.82   19.58    6.55  latin-400i 5.22  #3F4A55 ltr  "ro-"
+  run    26.36   19.58   11.48  latin-400i 5.22  #3F4A55 ltr  "TSEH"
+  run     1.78   24.95    8.61  latin-400i 5.22  #3F4A55 ltr  "leh-"
+  run    10.39   24.95   10.64  latin-400i 5.22  #3F4A55 ltr  "hah-"
+  run    21.03   24.95   14.09  latin-400i 5.22  #3F4A55 ltr  "GHEE-"
+  run    35.12   24.95    2.96  latin-400i 5.22  #3F4A55 ltr  "a"
+  run     1.78   30.32    3.95  latin-400i 5.22  #3F4A55 ltr  "el"
+  run     7.09   30.32    4.01  latin-400i 5.22  #3F4A55 ltr  "…"
+  run   108.54    6.98   10.18  hebrew-700 7.30  #111820 rtl  "אני"
+  run    91.02    6.98   15.55  hebrew-700 7.30  #111820 rtl  "רוצה"
+  run    70.34    6.98   18.71  hebrew-700 7.30  #111820 rtl  "להגיע"
+  run    59.39    6.98    8.98  hebrew-700 7.30  #111820 rtl  "אל"
+  run   111.10   22.84    7.62  hebrew-400 5.90  #3F4A55 rtl  "אֲנִי"
+  run    97.67   22.84   11.84  hebrew-400 5.90  #3F4A55 rtl  "רוֹצֶה"
+  run    82.04   22.84   14.04  hebrew-400 5.90  #3F4A55 rtl  "לְהַגִּיעַ"
+  run    73.67   22.84    6.77  hebrew-400 5.90  #3F4A55 rtl  "אֶל"
+  run    44.13   28.48    7.77  latin-400i 5.53  #111820 ltr  "ani"
+  run    53.34   28.48   12.19  latin-400i 5.53  #111820 ltr  "rotse"
+  run    66.96   28.48   19.26  latin-400i 5.53  #111820 ltr  "lehagía‘"
+  run    87.66   28.48    4.19  latin-400i 5.53  #111820 ltr  "el"
+
+glyphs   hebrew-700 7.30   3 blocks  +0.00 +5.05 +7.52  "שלום"
+glyphs   hebrew-400 5.90   7 blocks  +0.00 +3.98 +4.52 +5.75 +8.83 +10.17 +12.01  "שָׁלוֹם"
+glyphs   hebrew-700 7.30   4 blocks  +0.00 +9.71 +12.13 +16.14  "סליחה"
+glyphs   hebrew-400 5.90   8 blocks  +0.00 +3.70 +4.87 +7.56 +9.30 +10.25 +12.36 +13.82  "סְלִיחָה"
+glyphs   hebrew-700 6.60   1 block   +0.00  "כן"
+glyphs   hebrew-700 6.60   1 block   +0.00  "/"
+glyphs   hebrew-700 6.60   2 blocks  +0.00 +7.99  "נכון"
+glyphs   hebrew-700 6.85   2 blocks  +0.00 +9.23  "כמה"
+glyphs   hebrew-700 6.85   1 block   +0.00  "זה"
+glyphs   hebrew-700 6.85   3 blocks  +0.00 +3.70 +8.19  "בסך"
+glyphs   hebrew-700 6.85   1 block   +0.00  "הכל?"
+glyphs   hebrew-700 6.60   1 block   +0.00  "שלוש"
+glyphs   hebrew-700 7.30   3 blocks  +0.00 +2.30 +5.25  "אני"
+glyphs   hebrew-700 7.30   1 block   +0.00  "רוצה"
+glyphs   hebrew-700 7.30   3 blocks  +0.00 +6.84 +9.85  "להגיע"
+glyphs   hebrew-700 7.30   2 blocks  +0.00 +4.04  "אל"
+glyphs   hebrew-400 5.90   5 blocks  +0.00 +1.66 +2.16 +3.89 +4.59  "אֲנִי"
+glyphs   hebrew-400 5.90   5 blocks  +0.00 +3.70 +4.32 +6.98 +7.52  "רוֹצֶה"
+glyphs   hebrew-400 5.90   8 blocks  +0.00 +0.84 +5.05 +5.76 +7.26 +8.19 +10.96 +11.91  "לְהַגִּיעַ"
+glyphs   hebrew-400 5.90   3 blocks  +0.00 +3.04 +4.05  "אֶל"

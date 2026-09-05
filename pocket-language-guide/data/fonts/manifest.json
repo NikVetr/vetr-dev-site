@@ -138,9 +138,9 @@
       "weight": 400,
       "italic": false,
       "file": "arabic-400",
-      "glyphs": 2821,
-      "ttfBytes": 262780,
-      "woff2Bytes": 98008,
+      "glyphs": 2823,
+      "ttfBytes": 262888,
+      "woff2Bytes": 98048,
       "source": "NotoSansArabic-Regular.ttf"
     },
     {
@@ -148,9 +148,9 @@
       "weight": 700,
       "italic": false,
       "file": "arabic-700",
-      "glyphs": 2821,
-      "ttfBytes": 264632,
-      "woff2Bytes": 101756,
+      "glyphs": 2823,
+      "ttfBytes": 264740,
+      "woff2Bytes": 101760,
       "source": "NotoSansArabic-Bold.ttf"
     },
     {

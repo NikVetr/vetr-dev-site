@@ -193,30 +193,46 @@ function emptyColumns({ blocks, theme, spec, corpus }) {
  * @property {ReturnType<import('../fonts.js').createFontRegistry>} registry
  * @property {string} [respellLegend]  the reader's own key to the respelling column,
  *   from the `legend` field of their rule table. Passed in rather than read here,
- *   because the solver does not load files.
+ *   because the solver does not load files. The romanisation half of the same slot
+ *   needs no parameter: it is keyed on the target, so it is already in `corpus`.
  */
 
 /**
  * How tall the head's band is for this spec, signed: positive at the top, negative
  * at the bottom, zero when there is none. The sign is what lets `contentBox` take
  * it out of the right margin without a second parameter.
- * @param {import('../types.js').SheetSpec} spec
- * @param {any} theme
+ * @param {SolveInput} input
  */
-function headBand(spec, theme) {
-  const at = spec.head?.at ?? 'none';
+function headBand(input) {
+  const at = input.spec.head?.at ?? 'none';
   if (at === 'none') return 0;
-  const pt = headSize(theme) * HEAD_LINES;
+  const pt = headSize(input) * HEAD_LINES;
   return at === 'top' ? pt : -pt;
 }
 
-/** The smallest type the theme uses, which is what furniture is set in.
- * @param {any} theme */
-function headSize(theme) {
+/**
+ * The type furniture is set in: the smallest the theme uses, but never below the
+ * *reader's* own script floor.
+ *
+ * The band is one line in the reader's face, and the theme's smallest field is
+ * 5.22pt where `scripts.csv` asks 5.4 for Arabic, Devanagari, Thai and tengwar. That
+ * cost nothing while every slot that shipped was effectively ASCII -- a folio, an
+ * emergency number, a Latin exonym -- and the `legend` slot is the first one that
+ * sets reader-language prose there, which is exactly what the floor is for. Measured:
+ * without this, an `ar`, `hi` or `th` reader's band prints at 5.20 against its own
+ * 5.40, and `tests/solve.test.mjs` misses it because every spec it solves has
+ * `head.at: 'none'`.
+ * @param {SolveInput} input
+ */
+function headSize({ theme, spec, corpus }) {
   const sizes = Object.values(theme.templates)
     .flatMap((/** @type {any} */ tmpl) => (tmpl.fields ?? []).map((/** @type {any} */ f) => f.size))
     .filter((/** @type {any} */ n) => typeof n === 'number');
-  return sizes.length ? Math.min(...sizes) : 5.2;
+  const script = corpus.scripts[corpus.languages[spec.source].script];
+  return Math.max(
+    sizes.length ? Math.min(...sizes) : 5.2,
+    Number(script.min_size_pt) + Number(spec.paper.minSizeDelta),
+  );
 }
 
 /**
@@ -249,11 +265,36 @@ function headText(input, face, faces) {
       return text.split(/(\d[\d\s/-]*)/).filter(Boolean)
         .map((part) => ({ text: part, bold: /\d/.test(part) }));
     }
-    // The reader's own respelling key, which the rule table carries in the reader's
-    // own language -- `legend` in `data/respell/rules/<reader>__<accent>.json`. It is
-    // the one thing on the card that explains the card, so it belongs in furniture
-    // rather than taking a column.
-    if (slot === 'legend') return [{ text: (input.respellLegend ?? '').trim(), bold: false }];
+    // The card's own key, and the only slot with two parts, because the two columns
+    // it explains are keyed differently: a respelling is written for the *reader* and
+    // comes from their rule table, while the marks in a romanisation belong to the
+    // *target* and come from the registry. Each part prints only when its own column
+    // does. Before that gate the slot printed the respelling key whether or not the
+    // respelling column was shown, so a reader who answered "I can read the script"
+    // in the quiz -- `proficiency: 'reading'`, which drops `respell` and keeps
+    // `roman` -- got a key for a column that was not on their card and none for the
+    // column that was.
+    //
+    // Romanisation first, because `fit()` trims the band from the end and the part
+    // that has to survive the trim is the one whose absence is a *positive* error: a
+    // reader who has never met pinyin reads `ǎ` as a short vowel and says the wrong
+    // tone with confidence, where a reader who misses the respelling key drops a
+    // device and loses information, which is what those tables were built to degrade
+    // into.
+    if (slot === 'legend') {
+      const shown = new Set(spec.fieldSet);
+      /** @type {import('../types.js').HeadPart[]} */ const parts = [];
+      const roman = shown.has('roman')
+        ? corpus.romanLegends[`${spec.target}__${spec.romanization}`] : '';
+      const respell = shown.has('respell') ? (input.respellLegend ?? '').trim() : '';
+      if (roman) parts.push({ text: roman, bold: false, latin: true });
+      // The bullet rides on the front of the second part rather than being a part of
+      // its own, so trimming the band cannot leave a dangling separator behind.
+      if (respell) {
+        parts.push({ text: parts.length ? ` \u2022 ${respell}` : respell, bold: false });
+      }
+      return parts;
+    }
     if (slot === 'custom') return [{ text: (spec.head?.text ?? '').trim(), bold: false }];
     return [];
   };
@@ -296,7 +337,7 @@ function headText(input, face, faces) {
  */
 export function layout(input) {
   const { blocks, theme, spec, corpus, measurer, registry } = input;
-  const band = headBand(spec, theme);
+  const band = headBand(input);
   const box = contentBox(spec.geometry, spec.paper, band);
   /** @type {import('../types.js').Warning[]} */ const warnings = [];
 
@@ -531,7 +572,7 @@ export function layout(input) {
     // breaker has to reason about: its band came out of the margin in `contentBox`,
     // so by here the space is already its own.
     if (band !== 0) {
-      const size = headSize(theme);
+      const size = headSize(input);
       const { left, center, right } = headText(input, f, faces);
       const y = band > 0
         ? box.top - size * 0.9
@@ -547,9 +588,29 @@ export function layout(input) {
         wordBreak: /** @type {'space'|'any'|'dict'} */ (corpus.scripts[sourceIso].word_break),
         slotAsRule: false,
       };
+      // Two things a part may vary from the band's own style. Emphasis, and being set
+      // in Latin: the romanisation half of the `legend` slot quotes the *target's*
+      // marks, and the reader's own face may not draw them -- Noto Sans Thai,
+      // Devanagari and Hebrew carry none of `ǎ ǐ ǒ ǔ ṭ ḍ ṇ ṣ`, so in the PDF, where
+      // there is no system font to fall back to, they would be empty boxes. Free,
+      // because `stacksFor` loads `latin` for every pair to set the romanisation and
+      // IPA columns.
+      const latin = resolveField(
+        'roman', corpus.languages[spec.target].script, sourceIso, corpus.scripts,
+      );
+      /** @param {import('../types.js').HeadPart} part */
+      const styleOf = (part) => ({
+        ...style,
+        weight: /** @type {number} */ (part.bold ? 700 : 400),
+        ...(part.latin ? {
+          stack: registry.stackFor(latin.stack, spec.typeface),
+          dir: latin.dir,
+          wordBreak: /** @type {'space'|'any'|'dict'} */ (corpus.scripts[latin.iso].word_break),
+        } : {}),
+      });
       /** @param {import('../types.js').HeadPart[]} parts */
       const widthOf = (parts) => parts.reduce(
-        (sum, part) => sum + measurer.width(part.text, { ...style, weight: part.bold ? 700 : 400 }),
+        (sum, part) => sum + measurer.width(part.text, styleOf(part)),
         0,
       );
       /** @param {import('../types.js').HeadPart[]} parts @param {number} room */
@@ -591,7 +652,7 @@ export function layout(input) {
         const total = widthOf(parts);
         let x = align === 'end' ? anchor - total : align === 'mid' ? anchor - total / 2 : anchor;
         for (const part of parts) {
-          const partStyle = { ...style, weight: /** @type {number} */ (part.bold ? 700 : 400) };
+          const partStyle = styleOf(part);
           face.runs.push({
             text: part.text,
             x,
@@ -606,7 +667,7 @@ export function layout(input) {
             fill: part.bold ? theme.colors.ink : theme.colors.muted,
             bold: part.bold,
             italic: false,
-            dir: style.dir,
+            dir: partStyle.dir,
           });
           x += measurer.width(part.text, partStyle);
         }

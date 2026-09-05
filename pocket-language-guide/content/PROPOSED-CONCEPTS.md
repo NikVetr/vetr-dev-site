@@ -13,8 +13,8 @@ argument for where it belongs.
 
 An entry that has landed keeps its argument and gains a `— shipped` heading, because
 the argument is the record of why the row is shaped the way it is. Everything under
-`## Strong cases` is now shipped except the romanisation legend, which turned out to
-be a decision rather than a row and carries a recommendation instead.
+`## Strong cases` is now shipped, the romanisation legend included -- that one turned
+out to be a decision rather than a row, and its entry records the decision.
 
 Four are already in the bank rather than staged here. `dietary-needs.no-pork` and
 `dietary-needs.is-this-halal` were raised by the Indonesian translator, are universal
@@ -147,7 +147,7 @@ than exposure -- a reader who wrongly reads `B1` as pork, or `bak-` as pork, avo
 food they did not need to avoid. Had either warning pointed the other way it would
 have had to go in `text`.
 
-### A `note` explaining the romanisation column's own diacritics — **recommendation below, not built**
+### ~~A `note` explaining the romanisation column's own diacritics~~ — shipped, as furniture rather than a note
 
 Raised by the Vietnamese translator, and it is the one request none of the four
 existing `note` concepts can absorb. Pinyin's caron `ǎ` and Vietnamese's breve `ă`
@@ -168,8 +168,10 @@ Thai and Chinese readers read any superscript mark as a tone, which is why both
 dropped macron Hepburn in favour of doubled vowels. A legend would let those packs
 keep the standard romanisation instead of routing around the ambiguity.
 
-**Recommendation: neither a fifth `note` nor a template change. The card already has
-a card-level slot for this, and what is missing is two data fields and one default.**
+**Shipped as neither a fifth `note` nor a template change.** The card already had a
+card-level slot for it, and what was missing was two data fields and one default. The
+argument for that shape is kept below because it is the record of why the feature is
+where it is.
 
 *A `note` is a section device and this is a card fact.* `noteAtom` draws a note in a
 bordered box at the head of its section, and all four existing notes are about their
@@ -191,33 +193,72 @@ notes that is eight concepts and 168 paragraphs.
 in the reader's own language, from the `legend` field of
 `data/respell/rules/<reader>__<accent>.json`. `core/solve/index.js` says why in its
 own comment: "It is the one thing on the card that explains the card, so it belongs
-in furniture rather than taking a column." Three concrete steps, in order of cost:
+in furniture rather than taking a column." What shipped, in the order it was costed:
 
-1. **Write the thirteen missing `legend` fields, `vi` first.** Only 8 of the 21 reader
-   tables have one at all -- `ar hi hu ko th zh-Hans tlh qya` -- and `vi`, the table
-   whose reader raised this, is among the thirteen that do not. This is one JSON string per reader and it is already
-   rendered. The `zh-Hans` legend is the model, and it already does this job in the
-   other direction: 写的都是普通汉语拼音的字母和声调符号，按拼音读法读即可.
-2. **Then a second part in the same slot, keyed on the target.** The reader's legend
-   cannot say "the macron on this card is tone 1", because it is keyed on the reader
-   and the marks belong to the target. The band already joins any number of parts per
-   position with a bullet, so this wants a `roman_legend` string keyed on the
-   romanisation system in the registry, joined into the `legend` slot beside the
-   reader's own -- an additive change to `core/sheet.js` and the registry, and no
-   template change. It also repairs something that is wrong today: the `legend` slot
-   prints the *respelling* key whether or not the respelling column is shown, so a
-   reader who answered "I can read the script" in the quiz (`proficiency: 'reading'`,
-   which drops `respell` and keeps `roman`) gets a key for a column that is not on
-   their card and none for the column that is. Selecting the parts by `fieldSet` fixes
-   both at once.
-3. **Have the quiz tick the slot.** The band is off by default and that should not
-   change: turning it on was measured at 1.5 lines of the smallest type, about 0.05
-   of type scale on most pairs, a whole extra *pair* of faces on `es ← en`, and the
-   Devanagari, Arabic and Thai respellings drop under their 5.4pt floor, which
-   `tests/solve.test.mjs` asserts. But `ui/quiz.js` already asks the question that
-   identifies the reader who needs a key, and already spends that answer on
-   `fieldSet`; spending it on `spec.head` as well costs nothing on the cards that
-   do not want it.
+1. **The thirteen missing reader `legend` fields.** Nine tables had one --
+   `ar he hi hu ko th zh-Hans tlh qya`, one more than the survey found -- and the
+   thirteen that did not (`de el en es fr id it ja pt ru sw tr vi`) now do, `vi`, whose
+   reader raised this, included. Each is a transcription of a decision already taken
+   rather than a new one: every table's own `note` already states what its legend
+   should say, per RESPELL-SYSTEMS.md's rule that a legend teaches only the glyphs that
+   are not already ordinary orthography and that anything needing a second line means
+   the notation is wrong. **They are authored here from those notes and want a native
+   speaker's pass**, the same as any other string in a pack.
+
+   **And `th`'s existing legend was English prose *about* the legend rather than a
+   legend** -- "None. Every glyph in the output is ordinary Thai used for its ordinary
+   sound…" -- so it printed in English in the head band of every sheet a Thai reader
+   built. It is Thai now, and `th__th-TH.json`'s `note` records what it said.
+
+2. **A target-keyed second part in the same slot**, from
+   `data/registry/romanizations.csv`, joined into the `legend` slot beside the reader's
+   own and selected by `fieldSet`, which repairs the defect recorded above: the slot
+   printed the respelling key whether or not the respelling column was shown.
+
+   **Keyed on (target, system), not on the system alone.** `bgn` names two different
+   systems in `languages.csv`, and read off the corpus they share no mark: Russian's
+   `ʼ ˮ ë` against Hebrew's `ẖ ‘ ’` and its acute. That is the same ambiguity
+   `romanization_bgn` already has in `data/lang/ru` and `data/lang/he`.
+
+   **And the line is a prose-free glyph equation, so one string serves all twenty-two
+   readers** -- `ā á ǎ à = 1 2 3 4`, `ā ī ū ē ō = aa ii uu ee oo`. A per-reader prose
+   line was costed and rejected: six systems by twenty-two readers is 132 strings, it
+   would be longer in a band whose cost is the whole issue, and it could not be
+   reviewed in most of the languages it would ship in. The equation is also this
+   project's own precedent -- Bhargava's four-word legend, which RESPELL-SYSTEMS.md
+   holds up as *the* pattern, is a glyph equation and not a sentence. The right-hand
+   side is what to say when you cannot make the distinction, which for `iast` is the
+   mark-free Hunterian the registry already names as Hindi's second system.
+
+   Rows exist only where a mark carries a *misreading* hazard: `pinyin`, `hepburn`,
+   `iast`, `ala-lc`. **Rejected: `bgn` (ru and he) and `appendix-e` (qya).** Their marks
+   are native stress or vowel-quality marks that a reader misreads in the benign
+   direction -- dropping information rather than adding error -- and a line for them
+   would have to introduce a word for "stress", which is exactly what breaks the
+   prose-free property. `elot`, `rr`, `rtgs` and `okrand` carry no diacritic at all,
+   which was measured off the corpus rather than assumed.
+
+   **The romanisation half is set in the Latin face, not the reader's**, which the
+   recommendation did not anticipate: the band is one run in the source script's stack,
+   and Noto Sans Thai, Devanagari and Hebrew draw none of `ǎ ǐ ǒ ǔ ṭ ḍ ṇ ṣ` -- so the
+   pinyin caron, the glyph this whole request is about, would have been an empty box in
+   the PDF for three of the readers who most need it. It costs nothing, because
+   `stacksFor` already loads `latin` for every pair to set the romanisation and IPA.
+
+3. **The quiz ticks the slot**, and the band's default stays off. Re-measured rather
+   than taken on trust: 1.5 lines of the smallest type, 0.05-0.09 of type scale on most
+   pairs, and a whole extra *pair* of faces on `es ← en` -- one more sheet of photo
+   paper per card set. So the quiz ticks it only where the card's romanisation carries a
+   mark, which is four of the twenty-two targets; `es` has no romanisation at all and
+   therefore never pays. It is added to the band rather than replacing it, so a reader
+   who had put the local emergency number in the middle keeps it.
+
+   **A third defect came out of that measurement.** `headSize` was the theme's smallest
+   field size flat, with no floor, so an `ar`, `hi` or `th` reader's band printed at
+   5.20pt against its own 5.40pt -- and `tests/solve.test.mjs`'s floor test missed it
+   because every spec it solves has `head.at: 'none'`, which is the "passes by having
+   nothing to check" failure mode that test's own comment warns about. It is floored on
+   the reader's script now, and a test asserts the band specifically.
 
 *One cheaper answer exists for some targets and not for this one.* The romanisation
 system is already a control -- `languages.csv` carries `romanizations` per language

@@ -212,8 +212,16 @@ export async function buildSheet(ctx, spec, edits) {
     corpus, targetRows, sourceRows, respell, spec, edits, sectionTitles, emergencyLabels,
   });
   // The reader's key to the respelling column, written in the reader's own language
-  // by whoever wrote their rule table. Only fetched when a head slot asks for it,
-  // since it is a second file read on a path that is otherwise already loaded.
+  // by whoever wrote their rule table. The slot's other half, the key to the
+  // romanisation column, needs nothing here: it is keyed on the target, so it is
+  // already in the corpus.
+  //
+  // Fetched on the slot alone and *not* on `fieldSet` as well, although the slot only
+  // prints this half when the `respell` column is on. `headText` owns that rule and
+  // stating it here too meant neither gate was load-bearing -- muting either one left
+  // the tests green. Nor is the read worth being clever about: `generatedRespellings`
+  // has already loaded this exact file on every solve, so this is a second parse of a
+  // cached response rather than a round trip.
   const wants = [spec.head?.left, spec.head?.center, spec.head?.right]
     .flatMap((at) => (Array.isArray(at) ? at : [at]))
     .includes('legend');

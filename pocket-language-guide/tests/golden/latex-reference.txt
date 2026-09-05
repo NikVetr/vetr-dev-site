@@ -1,0 +1,55 @@
+# The hand-built XeLaTeX Mandarin sheet this project was derived from, reduced to
+# the facts about it that can still be compared.
+#
+# Read out of the PDF's own content stream by tests/pdfgeom.mjs. Nothing here comes
+# from a raster, because a raster comparison against this document is measurably
+# meaningless: page 1 of it against our page 1 is RMSE 0.3124 at 150dpi, while page 1
+# of it against page 2 *of itself* is 0.2964 -- so any threshold that accepts the
+# matched pair also accepts a mismatched one, and prefers it. See the acceptance test.
+#
+# The PDF is not in the repository and cannot be rebuilt here: extarticle.cls, Inter,
+# Noto Sans Condensed and TeX Gyre Heros are all absent, so xelatex cannot get past
+# its preamble. Hence this digest.
+#
+# Source:  mandarin_travel_cheatsheet_generic_full_verified_v2.pdf
+# Rewrite: env UPDATE_GOLDEN=1 GOLDEN_REFERENCE_PDF=<that pdf> npm run test:unit
+#
+# What legitimately differs, and is therefore not recorded here:
+#  - the page count: 4 against our 8, because the concept bank went from 413 to 813
+#  - the fitted type scale, and which row lands in which column
+#  - the type sizes. **Every fontspec face in this document is set at 0.787 of the
+#    size its own preamble asks for** -- measured: the entry row's 7.30/7.01/5.53/5.22
+#    are drawn at 5.7726/5.5139/4.3497/4.1059 and the 7.54 heading at 5.9307, one
+#    ratio throughout -- because `\defaultfontfeatures{...Scale=MatchLowercase}`
+#    rescales every face it loads. The theme transcribed the preamble's nominal
+#    numbers, so "scale 1.0" here is 1.27x what this sheet printed. It comes out even
+#    on the page because Noto Sans's x-height is about three quarters of Inter's.
+#  - the glyphs: Inter and Noto Sans Condensed against our Noto Sans, Noto Sans CJK
+#    *JP* against our SC, FontAwesome 5 against Lucide
+#  - the bottom edge of the ink: this sheet stops 3 to 10pt short of its bottom
+#    margin and ours flushes, which is a difference in our favour
+
+page      504.00 360.00
+column    x 7.20 130.51 253.82 377.14 width 119.66
+ink       x 7.20 496.80 top 355.32
+rule      0.219 0.399 0.478 0.897
+accent    0.917
+baseline  0.000 5.011 5.320
+palette   #000000 #0B67A3 #237547 #6D3AA5 #B3261E #B45100 #BCC6CF #F4F6F8 #FFFFFF
+
+# Section colour coding, from the original's own \colorlet table: one colour per
+# content group, which is the mapping a reader of either sheet learns.
+group     building move
+group     core comm
+group     emergency alert
+group     food money
+group     hike move
+group     hotel stay
+group     intro stay
+group     numbers money
+group     places stay
+group     shop money
+group     social comm
+group     time stay
+group     travel move
+group     utility comm

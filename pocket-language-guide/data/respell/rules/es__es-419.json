@@ -797,6 +797,7 @@
       ]
     }
   },
+  "legend": "sh como en «shampoo»; h aspirada como en el inglés «home». Lo demás es español corriente.",
   "note": "Reader's legend, per RESPELL-SYSTEMS.md: two glyphs only -- [sh] as in shampoo, [h] an aspirate as in home. Everything else is ordinary Spanish. There is no curated Spanish sheet, so this table is not scored; it is held to zero --gaps and to being read aloud.",
   "policy_note": "max_onset 2 restricted by reader_onsets is the RAE division-de-palabras rule: Spanish admits only a single consonant or a C+liquid group as a syllable onset, and the engine's cluster table is the target's, not Spanish's. Measured over every unique word, bare max_onset 2 builds 333 onsets legal in Spanish and 513 that are not (st 135, ng 41, mb 23, nd 23, lm 22, sk 20), and its errors are worse in kind -- a Spanish reader cannot begin an-der-stand or a-lmu-tad and repairs them unpredictably, where max_onset 1 merely lenites a coda stop (prab-lem for pra-blem). reader_onsets gets both. The list is derived rather than guessed: every cluster the engine learns from any of the sixteen targets whose spelling lands in the RAE's thirteen groups, which is why it carries all four rhotic realisations (r ɾ ɹ ʁ, since German writes pɾ where Russian writes pr and French pʁ) and the aspirated and retroflex onsets of Thai, Mandarin and Hindi (kʰr, ʈɾ). Anything absent simply splits, which is the safe default."
 }

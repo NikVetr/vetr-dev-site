@@ -51,6 +51,17 @@ export async function loadCorpus(loadText) {
   const respellRules = new Set(
     /** @type {string[]} */ (JSON.parse(await loadText('data/respell/rules/index.json'))),
   );
+  // The key to the *romanisation* column, one line per (target, system), for the
+  // `legend` head slot. Keyed on the pair rather than on the system alone because
+  // `bgn` names two different systems in `languages.csv`: Russian's ʼ ˮ ë
+  // and Hebrew's ẖ ‘ ’ share no mark, exactly as `romanization_bgn` means two
+  // different things in `data/lang/ru` and `data/lang/he`. A system with no row here
+  // has no mark worth explaining, which is most of them -- Korean's `rr`, Thai's
+  // `rtgs` and Klingon's `okrand` carry no diacritic at all.
+  const romanLegends = Object.fromEntries(
+    (await read('data/registry/romanizations.csv'))
+      .map((r) => [`${r.target}__${r.system}`, r.legend]),
+  );
   sectionRows.sort((a, b) => Number(a.rank) - Number(b.rank));
 
   const groups = [...new Set(sectionRows.map((s) => s.group))];
@@ -68,6 +79,7 @@ export async function loadCorpus(loadText) {
     respellOverrides,
     respellRules,
     languageNames,
+    romanLegends,
     paper,
     regions,
     sections: sectionRows,

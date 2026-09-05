@@ -44,6 +44,32 @@ test.describe('help me decide', () => {
     await expect(page.getByRole('checkbox', { name: 'English', exact: true }))
       .toBeVisible();
     await expect(page.locator('.face.focused')).toBeVisible();
+
+    // This card's romanisation is pinyin, and a reader who has never met pinyin reads
+    // its caron as a vowel-quality mark and says the wrong tone with confidence -- so
+    // the quiz turns the furniture band on and names the marks. `reading` dropped the
+    // respelling column, so the band carries the romanisation key alone, which is the
+    // defect this repaired: the slot used to print a key for the column that was gone
+    // and none for the column that was there.
+    await expect(page.locator('#head-center-legend')).toBeChecked();
+    await expect(page.locator('.face.focused svg')).toContainText('ǎ à = 1 2 3 4');
+  });
+
+  test('a card with no marks in its romanisation is not charged for a legend', async ({ page }) => {
+    // The band is not free -- 1.5 lines of the smallest type, and a whole extra pair
+    // of faces on this very pair -- so it is ticked only where there is a mark to
+    // explain. Spanish declares no romanisation at all, so there is nothing to say
+    // and nothing to pay.
+    await page.goto('/customize.html?target=es&source=en');
+    await expect(page.locator('.face.focused')).toBeVisible();
+    await page.locator('#quiz-open').click();
+    await page.locator('dialog.quiz').getByRole('button', { name: 'Build my sheet' }).click();
+    await expect(page.locator('dialog.quiz')).toHaveCount(0);
+    await expect(page.locator('.face.focused')).toBeVisible();
+    // The slot's checkbox is always in the panel -- it is a control, not a
+    // consequence -- so what has to be untouched is its state and the band itself.
+    await expect(page.locator('#head-center-legend')).not.toBeChecked();
+    await expect(page.locator('.head-slots')).toBeHidden();
   });
 
   test('cancelling changes nothing', async ({ page }) => {

@@ -1,0 +1,177 @@
+# pocket-language-guide golden layout signature -- zh-Hans <- en
+#
+# Han -- em-wide advances, a script that breaks anywhere, and the original's own pair.
+#
+# Written by tests/golden.test.mjs. Do not edit by hand; rewrite it deliberately:
+#   env UPDATE_GOLDEN=1 npm run test:unit
+#
+# The fit is pinned and the selection is eight named sections, so nothing here moves
+# when the corpus grows. Every position is in points from the top-left of the item's
+# own box, so an item is described independently of where on the sheet it landed.
+# What does move these numbers is a theme size, a leading, a pad, a rule weight, a
+# change in a committed font subset's advances, or a solver change -- which is the
+# point. `split: adaptive` means an `entry` row solves its own divider, so its
+# geometry does not depend on its neighbours either; the three table templates share
+# one split across their group by design, so a row joining `quick-responses` or
+# `numbers-money` will move those.
+#
+#   run     dx  dy(baseline)  advance  face size  fill  dir  text
+#   rect    dx  dy(top)       w x h    fill
+#   icon    dx  dy(top)       size     name  fill
+#   glyphs  one line per target-script run: how many blocks render/pdf.js drew it in,
+#           and where. The only place a dropped GPOS mark offset is visible.
+
+spec     zh-Hans <- en   theme latex-reference   paper print-shop-bleed
+spec     faces 4 pinned   scale 1.000 pinned   padding 0.00   split adaptive   arrangement mixed
+spec     fields script roman gloss respell numeral
+spec     sections social-basics quick-responses payment-receipt numbers-money time-words trail-words emergency-medical utility-templates
+box      left 7.20   top 4.68   width 489.60   height 347.76   colWidth 119.66
+column   x 7.20  130.51  253.83  377.14
+
+item     heading:social-basics              box 119.66 x 10.20
+  rect    0.00    8.68  119.66 x 0.90  #0B67A3
+  icon    0.00    0.83  6.92  messages-square  #0B67A3
+  run     9.32    6.48   21.78  latin-700 7.54  #111820 ltr  "Social"
+  run    33.06    6.48    4.31  latin-700 7.54  #111820 ltr  "+"
+  run    39.33    6.48   23.00  latin-700 7.54  #111820 ltr  "basics"
+
+item     social-basics.hello                box 119.66 x 12.99
+  rect    0.00    0.00  0.92 x 12.99  #0B67A3
+  rect    0.00   12.77  119.66 x 0.22  #BCC6CF
+  run     1.78    6.08    7.30  cjk-sc-700 7.30  #111820 ltr  "你"
+  run     9.08    6.08    7.30  cjk-sc-700 7.30  #111820 ltr  "好"
+  run     1.78   11.69    4.63  latin-400i 5.53  #111820 ltr  "nǐ"
+  run     7.85   11.69    9.46  latin-400i 5.53  #111820 ltr  "hǎo"
+  run   100.62    6.08   18.11  latin-700 7.01  #111820 ltr  "Hello"
+  run    99.50   11.50    8.23  latin-400i 5.22  #3F4A55 ltr  "nee"
+  run   109.09   11.50    9.63  latin-400i 5.22  #3F4A55 ltr  "how"
+
+item     social-basics.excuse-me-sorry      box 119.66 x 12.99
+  rect    0.00    0.00  119.66 x 12.99  #F4F6F8
+  rect    0.00    0.00  0.92 x 12.99  #0B67A3
+  rect    0.00   12.77  119.66 x 0.22  #BCC6CF
+  run     1.78    6.08    7.30  cjk-sc-700 7.30  #111820 ltr  "不"
+  run     9.08    6.08    7.30  cjk-sc-700 7.30  #111820 ltr  "好"
+  run    16.38    6.08    7.30  cjk-sc-700 7.30  #111820 ltr  "意"
+  run    23.68    6.08    7.30  cjk-sc-700 7.30  #111820 ltr  "思"
+  run     1.78   11.69    6.40  latin-400i 5.53  #111820 ltr  "bù"
+  run     9.62   11.69    9.46  latin-400i 5.53  #111820 ltr  "hǎo"
+  run    20.52   11.69    7.82  latin-400i 5.53  #111820 ltr  "yìsi"
+  run    57.44    6.08   23.71  latin-700 7.01  #111820 ltr  "Excuse"
+  run    82.98    6.08   11.02  latin-700 7.01  #111820 ltr  "me"
+  run    95.82    6.08    2.91  latin-700 7.01  #111820 ltr  "/"
+  run   100.55    6.08   18.17  latin-700 7.01  #111820 ltr  "sorry"
+  run    82.33   11.50    8.90  latin-400i 5.22  #3F4A55 ltr  "boo"
+  run    92.59   11.50    9.63  latin-400i 5.22  #3F4A55 ltr  "how"
+  run   103.58   11.50    6.84  latin-400i 5.22  #3F4A55 ltr  "ee-"
+  run   110.42   11.50    8.30  latin-400i 5.22  #3F4A55 ltr  "suh"
+
+item     heading:quick-responses            box 119.66 x 8.89
+  rect    0.00    8.35  119.66 x 0.40  #0B67A3
+  run     0.00    5.66   17.49  latin-700 6.08  #111820 ltr  "Quick"
+  run    19.07    5.66   30.61  latin-700 6.08  #111820 ltr  "responses"
+
+item     quick-responses.yes-right          box 119.66 x 7.30
+  rect    0.00    0.00  119.66 x 7.30  #F4F6F8
+  rect    0.00    0.00  0.92 x 7.30  #0B67A3
+  rect    0.00    7.08  119.66 x 0.22  #BCC6CF
+  run     1.72    5.69    6.60  cjk-sc-700 6.60  #111820 ltr  "是"
+  run    21.78    5.23    6.16  latin-cond-400i 5.40  #111820 ltr  "shì"
+  run    38.98    5.55    9.91  latin-cond-700 6.50  #111820 ltr  "yes"
+  run    50.39    5.55    2.67  latin-cond-700 6.50  #111820 ltr  "/"
+  run    54.56    5.55   14.72  latin-cond-700 6.50  #111820 ltr  "right"
+  run   111.05    5.17    7.76  latin-cond-400i 5.20  #3F4A55 ltr  "shir"
+
+item     heading:payment-receipt            box 119.66 x 8.97
+  rect    0.00    8.35  119.66 x 0.48  #B45100
+  icon    0.00    1.20  5.36  credit-card  #B45100
+  run     7.46    5.66   27.30  latin-700 6.14  #111820 ltr  "Payment"
+  run    36.36    5.66    3.51  latin-700 6.14  #111820 ltr  "+"
+  run    41.47    5.66   21.50  latin-700 6.14  #111820 ltr  "receipt"
+
+item     payment-receipt.how-much-in-total  box 119.66 x 17.60
+  rect    0.00    0.00  119.66 x 17.60  #F4F6F8
+  rect    0.00    0.00  0.92 x 17.60  #B45100
+  rect    0.00   17.38  119.66 x 0.22  #BCC6CF
+  run     1.72    7.38    6.85  cjk-sc-700 6.85  #111820 ltr  "一"
+  run     8.57    7.38    6.85  cjk-sc-700 6.85  #111820 ltr  "共"
+  run    15.42    7.38    6.85  cjk-sc-700 6.85  #111820 ltr  "多"
+  run     1.72   14.45    6.85  cjk-sc-700 6.85  #111820 ltr  "少"
+  run     8.57   14.45   13.70  cjk-sc-700 6.85  #111820 ltr  "钱？"
+  run    25.64    4.73   14.97  latin-cond-400i 5.50  #111820 ltr  "yígòng"
+  run    25.64   10.41   19.10  latin-cond-400i 5.50  #111820 ltr  "duōshao"
+  run    25.64   16.09   11.91  latin-cond-400i 5.50  #111820 ltr  "qián?"
+  run    50.34    7.29   13.83  latin-cond-700 6.75  #111820 ltr  "How"
+  run    65.73    7.29   17.24  latin-cond-700 6.75  #111820 ltr  "much"
+  run    50.34   14.26    5.90  latin-cond-700 6.75  #111820 ltr  "in"
+  run    57.79   14.26   17.76  latin-cond-700 6.75  #111820 ltr  "total?"
+  run   101.47    4.88    6.39  latin-cond-400i 5.30  #3F4A55 ltr  "ee-"
+  run   107.86    4.88   10.96  latin-cond-400i 5.30  #3F4A55 ltr  "gong"
+  run    91.19   10.35   14.01  latin-cond-400i 5.30  #3F4A55 ltr  "dwaw-"
+  run   105.20   10.35   13.62  latin-cond-400i 5.30  #3F4A55 ltr  "shaow"
+  run   106.55   15.82   12.26  latin-cond-400i 5.30  #3F4A55 ltr  "chyen"
+
+item     numbers-money.s-n                  box 119.66 x 7.32
+  rect    0.00    0.00  0.92 x 7.32  #B45100
+  rect    0.00    7.10  119.66 x 0.22  #BCC6CF
+  run    27.08    5.58    3.50  latin-cond-700 6.60  #111820 ltr  "3"
+  run    62.16    5.69    6.60  cjk-sc-700 6.60  #111820 ltr  "三"
+  run    74.98    5.23    7.67  latin-cond-400i 5.40  #111820 ltr  "sān"
+  run   108.73    5.17   10.08  latin-cond-400i 5.20  #3F4A55 ltr  "sahn"
+
+item     heading:emergency-medical          box 119.66 x 10.20
+  rect    0.00    8.68  119.66 x 0.90  #B3261E
+  icon    0.00    0.83  6.92  briefcase-medical  #B3261E
+  run     9.32    6.48   41.73  latin-700 7.54  #111820 ltr  "Emergency"
+  run    53.01    6.48    4.31  latin-700 7.54  #111820 ltr  "+"
+  run    59.29    6.48   29.53  latin-700 7.54  #111820 ltr  "medical"
+
+item     note:emergency-medical             box 119.66 x 7.60
+  rect    0.00    0.00  119.66 x 7.60  #F4F6F8  r 1.20
+  run     1.75    5.69   15.48  latin-400 5.24  #3F4A55 ltr  "China:"
+  run    18.60    5.69    8.99  latin-400 5.24  #3F4A55 ltr  "110"
+  run    28.95    5.69   14.57  latin-400 5.24  #3F4A55 ltr  "police"
+  run    44.88    5.69    1.40  latin-400 5.24  #3F4A55 ltr  "·"
+  run    47.65    5.69    8.99  latin-400 5.24  #3F4A55 ltr  "119"
+  run    58.00    5.69    8.17  latin-400 5.24  #3F4A55 ltr  "fire"
+  run    67.53    5.69    1.40  latin-400 5.24  #3F4A55 ltr  "·"
+  run    70.30    5.69    8.99  latin-400 5.24  #3F4A55 ltr  "120"
+  run    80.65    5.69   27.30  latin-400 5.24  #3F4A55 ltr  "ambulance"
+
+item     utility-templates.i-want-to-go-to  box 119.66 x 19.92
+  rect    0.00    0.00  0.92 x 19.92  #0B67A3
+  rect    0.00   19.70  119.66 x 0.22  #BCC6CF
+  rect   23.68    6.67  31.57 x 0.40  #111820
+  rect   33.25   12.13  23.91 x 0.35  #111820
+  run     1.78    6.08    7.30  cjk-sc-700 7.30  #111820 ltr  "我"
+  run     9.08    6.08    7.30  cjk-sc-700 7.30  #111820 ltr  "想"
+  run    16.38    6.08    7.30  cjk-sc-700 7.30  #111820 ltr  "去"
+  run     1.78   11.69    7.11  latin-400i 5.53  #111820 ltr  "wǒ"
+  run    10.33   11.69   13.64  latin-400i 5.53  #111820 ltr  "xiǎng"
+  run    25.41   11.69    6.40  latin-400i 5.53  #111820 ltr  "qù"
+  run    67.25    6.08    2.73  latin-700 7.01  #111820 ltr  "I"
+  run    71.80    6.08   17.80  latin-700 7.01  #111820 ltr  "want"
+  run    91.42    6.08    7.42  latin-700 7.01  #111820 ltr  "to"
+  run   100.66    6.08    8.81  latin-700 7.01  #111820 ltr  "go"
+  run   111.30    6.08    7.42  latin-700 7.01  #111820 ltr  "to"
+  run   112.73   13.26    5.99  latin-700 7.01  #111820 ltr  "…"
+  run    66.67   18.68   10.51  latin-400i 5.22  #3F4A55 ltr  "waw"
+  run    78.54   18.68   19.75  latin-400i 5.22  #3F4A55 ltr  "shyahng"
+  run    99.65   18.68   13.70  latin-400i 5.22  #3F4A55 ltr  "chyoo"
+  run   114.71   18.68    4.01  latin-400i 5.22  #3F4A55 ltr  "…"
+
+glyphs   cjk-sc-700 7.30   1 block   +0.00  "你"
+glyphs   cjk-sc-700 7.30   1 block   +0.00  "好"
+glyphs   cjk-sc-700 7.30   1 block   +0.00  "不"
+glyphs   cjk-sc-700 7.30   1 block   +0.00  "意"
+glyphs   cjk-sc-700 7.30   1 block   +0.00  "思"
+glyphs   cjk-sc-700 6.60   1 block   +0.00  "是"
+glyphs   cjk-sc-700 6.85   1 block   +0.00  "一"
+glyphs   cjk-sc-700 6.85   1 block   +0.00  "共"
+glyphs   cjk-sc-700 6.85   1 block   +0.00  "多"
+glyphs   cjk-sc-700 6.85   1 block   +0.00  "少"
+glyphs   cjk-sc-700 6.85   1 block   +0.00  "钱？"
+glyphs   cjk-sc-700 6.60   1 block   +0.00  "三"
+glyphs   cjk-sc-700 7.30   1 block   +0.00  "我"
+glyphs   cjk-sc-700 7.30   1 block   +0.00  "想"
+glyphs   cjk-sc-700 7.30   1 block   +0.00  "去"

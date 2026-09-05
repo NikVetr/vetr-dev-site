@@ -1076,6 +1076,7 @@
       "note": "Palatalisation is dropped before a front vowel and written `y` elsewhere, which is what English respelling of Russian does: spasibo, but dyen."
     }
   },
+  "legend": "Nothing new to learn: ordinary English spelling, hyphens between syllables, CAPITALS on the stressed one.",
   "note": "Read off the 12,001 curated respellings in data/respell/overrides, not from a published pronunciation key. See content/RESPELL-PILOT.md.",
   "derives_from": "Wikipedia's pronunciation respelling key (Help:Pronunciation respelling key, Template:Respell, Module:Respell), CC BY-SA 4.0 -- an IPA-keyed table that hyphenates syllables and capitalises primary stress. Two ideas are taken from the BBC Pronunciation Unit's text spelling rather than its table, which is under OUP's scheme.",
   "deviations": [
