@@ -3901,6 +3901,10 @@ body.popout-body .popout-content:is(.overall-status-box, .current-status-box) {
         padding-bottom: 1px;
     }
 
+    .agenda-row-actions .btn-delete {
+        font-size: inherit;
+    }
+
     .agenda-row input[type="text"],
     .agenda-row input[type="number"] {
         padding-top: 1px;
@@ -3945,6 +3949,7 @@ body.popout-body .popout-content:is(.overall-status-box, .current-status-box) {
 
     .agenda-row.variance-grid {
         flex-shrink: 0;
+        flex-basis: auto;
         min-height: 84px;
         max-height: none;
     }

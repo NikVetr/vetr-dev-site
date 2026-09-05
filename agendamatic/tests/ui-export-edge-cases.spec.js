@@ -544,7 +544,13 @@ test('agenda controls keep accessible semantics and focus without page errors', 
     await expect(durationUp).toBeFocused();
 
     const lock = page.locator('.agenda-row input[data-field="locked"]').first();
-    await lock.focus();
+    await lock.evaluate(element => {
+        // Moving to the next control before the next frame must not let a stepper steal focus back.
+        element.closest('.agenda-row').querySelector('[data-action="duration-up"]').click();
+        element.focus();
+        return new Promise(resolve => requestAnimationFrame(resolve));
+    });
+    await expect(lock).toBeFocused();
     await page.keyboard.press('Space');
     await expect(lock).toBeFocused();
 

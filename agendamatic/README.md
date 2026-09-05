@@ -145,6 +145,13 @@ npm install
 npm test
 ```
 
+For Chromium, Firefox, and WebKit coverage, install their browsers and Linux dependencies as needed, then run:
+
+```bash
+npx playwright install --with-deps chromium firefox webkit
+npm run test:cross-browser
+```
+
 The Playwright suite covers state and timing, persistence and sharing, editing and exports, meeting-control phases, responsive/swappable layouts, tracker and pop-out geometry, accessibility, colors, and the parent-site route. Tests favor user-visible behavior over implementation details.
 
 ## Deployment

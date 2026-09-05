@@ -754,9 +754,7 @@ function setupRowEventListeners(row, item) {
             } else if (action === 'duration-down') {
                 adjustDuration(item, -5);
             }
-            requestAnimationFrame(() => {
-                findAgendaRowControl(item.id, `[data-action="${action}"]`)?.focus({ preventScroll: true });
-            });
+            findAgendaRowControl(item.id, `[data-action="${action}"]`)?.focus({ preventScroll: true });
         });
     });
 

@@ -47,4 +47,4 @@ Bulk column editing supports Item, Lead, Color, Duration, Locked, and Notes. Who
 
 The Playwright suite is organized around user-visible behavior. State tests cover persistence, imports, timing math, lifecycle, and run guards; browser tests cover editing and exports, phase controls, responsive/swappable layouts, tracker and pop-out geometry, accessibility, colors, alerts, and the parent-site route. Overlapping cases are consolidated to keep the suite readable.
 
-Playwright serves the repository root through `playwright.config.js`; `npm test` runs the complete browser suite against Chromium.
+Playwright serves the repository root through `playwright.config.js`; `npm test` runs the complete browser suite against Chromium, and `npm run test:cross-browser` runs it against Chromium, Firefox, and WebKit. Timeline tick and label density is bounded by the available width so restoring an old running meeting remains responsive. Compact agenda controls and narrow variance rows fit their content across the three engines.

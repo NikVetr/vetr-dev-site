@@ -1,5 +1,32 @@
 import { test, expect } from '@playwright/test';
 
+test('an old running meeting renders a bounded timeline and remains controllable', async ({ page }) => {
+    await page.clock.setFixedTime(new Date('2026-09-05T12:00:00Z'));
+    await page.goto('/agendamatic/');
+    await page.evaluate(async () => {
+        const state = await import('/agendamatic/js/state.js');
+        state.importFromJSON(JSON.stringify({
+            items: [{ id: 'old', name: 'Old meeting', duration: '10m' }],
+            tracker: {
+                isRunning: true,
+                startedAt: '2026-01-02T10:00:00Z',
+                scheduledStartAt: '2026-01-02T10:00:00Z',
+                activeStartedAt: '2026-01-02T10:00:00Z',
+                activeItemId: 'old'
+            }
+        }));
+    });
+    const axis = page.locator('#timeline-axis');
+    const geometry = await axis.evaluate(element => ({
+        width: element.getBoundingClientRect().width,
+        minorTicks: element.querySelectorAll('.axis-tick.minor').length
+    }));
+    expect(geometry.minorTicks).toBeGreaterThan(0);
+    expect(geometry.minorTicks).toBeLessThanOrEqual(Math.ceil(geometry.width / 5) + 1);
+    await page.getByRole('button', { name: 'Pause meeting', exact: true }).click();
+    await expect(page.getByRole('button', { name: 'Resume meeting', exact: true })).toBeVisible();
+});
+
 async function loadFresh(page) {
     await page.goto('/agendamatic/');
     await expect(page.locator('.agenda-row')).toHaveCount(5);

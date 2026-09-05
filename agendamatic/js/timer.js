@@ -1578,8 +1578,10 @@ function renderAxisTicks() {
         addTick(item.endTime, true);
     });
 
-    // Minor ticks every 5 minutes
-    for (let minute = 0; minute <= totalMinutes; minute += 5) {
+    // Old running meetings can span months; don't create ticks finer than the viewport can show.
+    const axisWidth = timelineAxis.getBoundingClientRect().width;
+    const minorTickInterval = Math.max(5, Math.ceil(totalMinutes / Math.max(1, axisWidth / 5) / 5) * 5);
+    for (let minute = 0; minute <= totalMinutes; minute += minorTickInterval) {
         const time = new Date(firstStart.getTime() + minute * 60000);
         addTick(time, false);
     }
@@ -1599,7 +1601,10 @@ function renderAxisTicks() {
     axisWrapper.appendChild(labelLayer);
 
     const labelEntries = [];
-    const minorLabelInterval = getMinorLabelInterval(totalMinutes);
+    const minorLabelInterval = Math.max(
+        getMinorLabelInterval(totalMinutes),
+        Math.ceil(totalMinutes / Math.max(1, axisWidth / 80) / minorTickInterval) * minorTickInterval
+    );
 
     ticks.forEach(tick => {
         const tickEl = document.createElement('div');
