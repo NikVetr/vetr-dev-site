@@ -158,11 +158,20 @@ export function number(value, digits) {
  * these for every locale the browser supports, which is a better answer than
  * carrying sixteen language names in eight catalogues and keeping them in step.
  * Falls back to the registry's English exonym where the browser has no opinion.
+ *
+ * **`fallback: 'none'` is what makes that last sentence true.** The default is
+ * `fallback: 'code'`, under which `of()` returns *the code itself* rather than
+ * `undefined` when CLDR has no name -- so `?? fallback` never fired and the registry
+ * exonym was unreachable. CLDR has no name for Klingon or Quenya in any locale, and
+ * headless Chrome has none for them even in English, so the gallery printed `tlh` and
+ * `qya` as those two cards' titles while `exonym_en` sat in the registry saying
+ * "Klingon" and "Quenya". Nothing in the codebase wanted the code-as-name behaviour:
+ * every caller passes a real fallback.
  * @param {string} code @param {string} fallback
  */
 export function languageName(code, fallback) {
   try {
-    const names = new Intl.DisplayNames([active], { type: 'language' });
+    const names = new Intl.DisplayNames([active], { type: 'language', fallback: 'none' });
     return names.of(code) ?? fallback;
   } catch {
     return fallback;

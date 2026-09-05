@@ -33,7 +33,13 @@
   --fs-2: clamp(1.2rem, 1rem + 0.8vw, 1.5rem);
   --fs-3: clamp(1.5rem, 1.15rem + 1.6vw, 2.1rem);
 
-  --ui: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* `plg-conscript` leads the stack and costs nothing to everyone else. Its
+     `@font-face` below carries a `unicode-range` of the two Private Use Area blocks,
+     so the browser consults it only for a pIqaD or tengwar codepoint and fetches the
+     file only for a page that contains one. Putting it first is what lets any chrome
+     text hold those glyphs -- a card's endonym, a picker row, a heading -- rather than
+     only the one element that named the family. */
+  --ui: "plg-conscript", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -174,10 +180,17 @@ label { display: block; }
   font-family: "plg-conscript";
   src: url("data/fonts/latin-400.woff2") format("woff2");
   unicode-range: U+E000-E07F, U+F8D0-F8FF;
+  /* `block` rather than `swap`, and the difference is the whole point: the fallback
+     for these codepoints is a box, so showing it early is worse than showing nothing.
+     `block` hides the text for up to three seconds instead -- but it does eventually
+     give up, which on a cold load over a slow connection is exactly the boxes it
+     exists to prevent. `<link rel="preload">` in the three page heads is what closes
+     that: the fetch starts with the stylesheet rather than after the first layout
+     that happens to contain one of these characters. */
   font-display: block;
 }
 .card-badge {
-  font-family: "plg-conscript", var(--ui);
+  font-family: var(--ui);
   font-size: 1.25rem; line-height: 1; min-width: 1.6em; text-align: center; color: var(--accent);
 }
 .card-name { font-weight: 600; }

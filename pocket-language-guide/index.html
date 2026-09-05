@@ -7,6 +7,10 @@
 <meta name="description" content="Free, printable pocket-sized vocabulary and phrase guides. Pick a language, customise it, export a high-resolution PDF or PNG. Works offline.">
 <meta name="color-scheme" content="light">
 <link rel="icon" href="favicon.svg">
+<!-- The conscript face, ahead of first layout. `font-display: block` hides pIqaD and
+     tengwar until it arrives and then falls back to boxes, so a cold load on a slow
+     connection showed boxes for the three seconds it waited. -->
+<link rel="preload" href="data/fonts/latin-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
 <link rel="manifest" href="manifest.webmanifest">
 </head>

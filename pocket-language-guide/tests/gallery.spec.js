@@ -297,6 +297,39 @@ test('both carets are visible before hover and neither has a box', async ({ page
   }
 });
 
+test('a language CLDR cannot name falls back to the registry, not to its code',
+  async ({ page }) => {
+    // `Intl.DisplayNames.of()` defaults to `fallback: 'code'` and returns *the code
+    // itself* when CLDR has no name -- so `?? fallback` never fired and the registry's
+    // `exonym_en` was unreachable. CLDR has no name for Quenya in any locale, and
+    // headless Chrome has none for Klingon even in English, so these two cards were
+    // titled `qya` and `tlh` while the registry sat there saying otherwise.
+    await page.goto('/?reader=en');
+    await expect(page.locator('.card').first()).toBeVisible();
+    const titles = await page.locator('.card-name').allInnerTexts();
+    expect(titles).toContain('Quenya');
+    expect(titles.filter((t) => /^(qya|tlh)$/.test(t)),
+      'no card should be titled with a bare language code').toEqual([]);
+
+    // And the conscript face leads the interface stack, so a Private Use Area glyph
+    // renders wherever chrome text carries one rather than only in the badge.
+    const drawn = await page.evaluate(async () => {
+      await document.fonts.ready;
+      const span = document.createElement('span');
+      span.style.cssText = 'position:absolute;visibility:hidden;font-size:100px';
+      document.body.append(span);
+      const width = (family) => {
+        span.style.fontFamily = family;
+        span.textContent = '\uF8E4\uF8D7';
+        return span.getBoundingClientRect().width;
+      };
+      return { ui: width('var(--ui)'), plain: width('serif') };
+    });
+    expect(drawn.ui).toBeGreaterThan(0);
+    expect(drawn.ui, 'the conscript face should win for these codepoints')
+      .not.toBeCloseTo(drawn.plain, 0);
+  });
+
 test('a sheet the reader has looked at is kept across visits', async ({ page }) => {
   // Only the *first* face is a shipped asset. Faces two onward are solved in the
   // browser, and shipping them too would be 50MB gzipped across 420 pairs — so this
