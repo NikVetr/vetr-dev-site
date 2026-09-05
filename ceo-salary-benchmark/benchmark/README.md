@@ -4,7 +4,7 @@
 
 This directory contains the analytical model, extracted evidence tables, calculations, report, and a strict source-acquisition framework. An independent source audit has now preserved all 135 peer IRS XML returns, plus RP's reference filing, and found a material Schedule J omission plus one Part VII extraction error. Use `analysis/source_validation/methodology_audit.md` and the `validated_*_compensation.csv` deliverables for subsequent work; the original report is retained as the artifact that was audited.
 
-The local archive now contains all 353 manifest records. Remote acquisition is complete: user-supplied browser captures recovered H-CAP, Marine Science Institute, and the formerly undefined supporting records; RP's own 2024 filing was added from the official IRS TEOS bulk archive. The strict source-complete release gate still fails because it also checks the original expected extraction fields, which retain the documented Schedule J omissions, the Center for AI Safety discrepancy, and two non-primary job-ad validation issues.
+The local archive now contains all 366 manifest records. Remote acquisition is complete: user-supplied browser captures recovered H-CAP, Marine Science Institute, and the formerly undefined supporting records; RP's own 2024 filing was added from the official IRS TEOS bulk archive. The strict source-complete release gate still fails because it also checks the original expected extraction fields, which retain the documented Schedule J omissions, the Center for AI Safety discrepancy, and two non-primary job-ad validation issues.
 
 The earlier file named `rp_ceo_expanded_rebenchmark_complete.zip` contained derivative text snapshots and source identifiers, but no complete IRS XML returns. That filename was misleading. The corrected ordinary release is therefore named:
 
@@ -33,9 +33,9 @@ These are decision ranges, not estimated population percentiles.
 - 450 frozen expansion candidates plus two legacy-only original-protocol peers: **452 documented organizations**.
 - **144 historically frozen selected reference organizations**: 79 Tier A, 39 Tier B, and 26 Tier C.
 - **116 historically frozen primary-use Form 990 incumbent observations**, including **79 structurally clean** observations.
-- **15 current quantitative CEO/ED recruitment advertisements**.
+- **17 current quantitative CEO/ED recruitment advertisements**.
 - **110 independently recovered exact Schedule J base observations among the 116 historically frozen primary-use rows**. The original evidence table omitted these fields; `deliverables/validated_form990_compensation.csv` contains the reparsed values. Form 990 Part VII reportable compensation remains a cash/W-2 proxy, not exact base salary.
-- **152 organizations and 153 incumbent rows in the current app inventory** after source-validated post-freeze additions. The dated living review admits **122 incumbent cash observations**, of which **114 report Schedule J base**; together with the 15 postings, the initial base view contains **129 observations across 126 organizations**. The frozen files remain unchanged, while `enrichment/living_peer_universe_review.csv` records every amended disposition.
+- **152 organizations and 153 incumbent rows in the current app inventory** after source-validated post-freeze additions. The dated living review admits **122 incumbent cash observations**, of which **114 report Schedule J base**; together with the 17 postings, the initial base view contains **131 observations across 128 organizations**. The frozen files remain unchanged, while `enrichment/living_peer_universe_review.csv` records every amended disposition.
 
 ## Two different reproduction commands
 
@@ -62,7 +62,7 @@ Run this command in a normal network-enabled environment:
 The command:
 
 1. Rebuilds the analytical outputs and derivative provenance layer.
-2. Creates the 353-row source-acquisition manifest.
+2. Recreates the historical source-acquisition manifest; the current app manifest additionally includes reviewed later sources.
 3. Downloads complete official IRS XML returns first, using a declared raw-XML mirror only when needed.
 4. Downloads employer/recruiter job materials and supporting public sources without bypassing access controls.
 5. Creates response-metadata sidecars containing requested/resolved URLs, retrieval timestamps, MIME type, byte length, HTTP headers, and SHA-256.

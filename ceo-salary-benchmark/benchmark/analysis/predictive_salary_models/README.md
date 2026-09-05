@@ -173,12 +173,13 @@ observations, so adding job ads is judged by whether it improves prediction of
 the same filing-pay estimand. `cv_elpd` is the sum of held-out filing log
 predictive densities, and `mean_log_predictive_density` is its per-filing mean.
 Ad-range log scores are reported separately. Bayesian coverage uses held-out
-posterior-predictive intervals. Deterministic coverage uses empirical residual
-quantiles calibrated from the other nine folds, matching the browser's
-residual-calibrated prediction without reusing the target fold. Gaussian
-training-fold residual scales remain the basis for deterministic log predictive
-density, since empirical residuals do not define a continuous density without
-an additional smoothing choice. This is cross-validated ELPD, not in-sample
+posterior-predictive intervals. Deterministic coverage and log predictive density
+use a Gaussian KDE of log residuals from inner organization-grouped fits within
+each outer training set. The nine remaining outer groups serve as inner folds;
+neither their fitted models nor their calibration residuals use the outer test
+outcomes. The bandwidth is `max(0.04, 1.06 * sd(residuals) * n^(-0.2))`, matching
+the browser's residual distribution. These are empirically validated intervals,
+not a distribution-free coverage guarantee. This is cross-validated ELPD, not in-sample
 lppd. The generated `cross_validation_results.csv` is the canonical results
 table and reports all nine specifications in paired order.
 
@@ -199,13 +200,13 @@ auditing how much of that support uses the direct base-salary estimand.
 
 For each of the four Bayesian fits, the artifact exports 512 evenly spaced posterior draws of
 the intercept, slopes, category effects, source offset, and source-specific
-residual scales. It also exports one seeded standard-normal residual draw per
-posterior draw. For a browser profile, the app:
+residual scales. Seeded residual draws remain in the artifact for reproducibility;
+the browser uses the analytic mixture instead. For a browser profile, the app:
 
 1. transforms inputs using the full-fit preprocessing constants;
 2. calculates one filing-source `mu` per posterior draw;
-3. forms a posterior-predictive draw as `exp(mu + sigma_filing * residual_z)`;
-4. computes displayed quantiles from those positive draws; and
+3. constructs the equal-weight mixture of the corresponding lognormal distributions;
+4. computes its density and inverts its CDF for all displayed quantiles; and
 5. computes expected salary analytically as the draw-average of
    `exp(mu + sigma_filing^2 / 2)`.
 
@@ -220,8 +221,9 @@ decompositions.
 For each GAM, the artifact exports the full-fit baseline, effect grids with at
 least 141 points spanning standardized values from -3.5 to 3.5 and all observed
 training support, and the 114 organization-grouped out-of-fold residuals. The
-browser linearly interpolates each effect grid and
-forms predictive draws as `exp(mu + residual)`. Values beyond an effect grid are
+browser linearly interpolates each effect grid and adds a Gaussian KDE of the
+log residuals to the profile prediction. Its density, quantiles, and expected
+salary all use that same mixture distribution. Values beyond an effect grid are
 clamped at its endpoint and separately flagged as outside training support.
 
 For the intercept-only model, the artifact exports the full-fit mean log salary
@@ -231,8 +233,7 @@ active, and explicitly dropped design columns, intercept, and coefficient
 vector. Constant or collinear columns are removed deterministically instead of
 being retained with a silently replaced non-finite coefficient. The with-pay
 candidate schema has eight columns and the without-pay schema has six. Both
-comparators form browser predictive draws as
-`exp(mu + residual)`. Residual and training-record IDs are retained explicitly
+comparators use the same residual KDE as the GAM. Residual and training-record IDs are retained explicitly
 so the app-data build can prove that each exact filing contributes exactly one
 held-out residual and that no other record enters either comparator.
 

@@ -301,7 +301,7 @@ def validate_generated_app(reviewed: list[dict[str, str]]) -> None:
     expected_summary = {
         "primaryIncumbentObservations": 122,
         "validatedBaseObservations": 114,
-        "quantitativeJobAds": 15,
+        "quantitativeJobAds": 17,
         "livingPeerReviewedObservations": 16,
         "livingPeerPromotedObservations": 6,
     }

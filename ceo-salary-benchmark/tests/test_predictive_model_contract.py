@@ -128,7 +128,7 @@ class PredictiveModelContractTest(unittest.TestCase):
             self.assertEqual(len(model["coefficients"]), len(model["designColumns"]))
             self.assertEqual(
                 model["intervalCalibration"],
-                "leave-one-fold-out empirical OOF residual quantiles",
+                "nested organization-fold residual KDE",
             )
 
     def test_model_comparison_pairs_highest_other_pay_specs(self):

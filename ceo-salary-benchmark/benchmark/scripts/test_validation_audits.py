@@ -29,7 +29,15 @@ def main() -> None:
     assert len(sources) == 350 and sources.source_id.is_unique
     assert sources.retrieval_status.ne("missing").sum() == 350
     assert sources.query("evidence_stream == 'form990'").retrieval_status.ne("missing").all()
-    assert len(acquisition) == 358 and acquisition.source_id.is_unique
+    assert len(acquisition) == 366 and acquisition.source_id.is_unique
+    position_sources = acquisition[acquisition.evidence_stream.eq("position_job_ad")]
+    assert set(position_sources.source_id) == {
+        "SRC-AD-CAIS-COS-2026", "SRC-AD-CAIS-DEVELOPMENT-2026",
+        "SRC-AD-GIVEWELL-SENIOR-RESEARCHER-2026", "SRC-AD-LEEP-COS-2025",
+        "SRC-AD-LAWAI-COO-2026", "SRC-AD-LAWAI-COS-2026",
+        "SRC-AD-NEWROOTS-COS-2026", "SRC-AD-NEWROOTS-RESEARCH-2026",
+    }
+    assert position_sources.current_status.eq("present_verified_source_native").all()
     new_job_ids = {
         "SRC-AD-CAIF-2026", "SRC-AD-ALLFED-2026", "SRC-AD-AAPO-2026",
         "SRC-AD-TAIMAKA-2025", "SRC-AD-EAD-2026", "SRC-AD-SCREWWORM-2025",

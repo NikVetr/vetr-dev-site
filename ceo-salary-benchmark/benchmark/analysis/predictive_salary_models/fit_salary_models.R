@@ -494,32 +494,7 @@ fit_gam_design <- function(y, x, feature_keys) {
   )
 }
 
-calibrate_simple_intervals <- function(oof) {
-  residuals <- oof$observed_log_salary - oof$predicted_log_salary
-  if (any(!is.finite(residuals))) stop("Deterministic out-of-fold residuals are not finite")
-  for (fold in unique(oof$fold)) {
-    held_out <- oof$fold == fold
-    calibration <- residuals[!held_out]
-    if (length(calibration) < 2L) stop("Insufficient cross-fold residuals for empirical interval calibration")
-    bounds <- quantile(calibration, c(.05, .1, .9, .95), names = FALSE, type = 8)
-    oof$predicted_log_lower90[held_out] <- oof$predicted_log_salary[held_out] + bounds[[1]]
-    oof$predicted_log_lower80[held_out] <- oof$predicted_log_salary[held_out] + bounds[[2]]
-    oof$predicted_log_upper80[held_out] <- oof$predicted_log_salary[held_out] + bounds[[3]]
-    oof$predicted_log_upper90[held_out] <- oof$predicted_log_salary[held_out] + bounds[[4]]
-  }
-  oof$coverage80 <- oof$observed_log_salary >= oof$predicted_log_lower80 &
-    oof$observed_log_salary <= oof$predicted_log_upper80
-  oof$coverage90 <- oof$observed_log_salary >= oof$predicted_log_lower90 &
-    oof$observed_log_salary <= oof$predicted_log_upper90
-  oof
-}
-
-evaluate_simple_model <- function(kind, include_highest_other_pay = FALSE) {
-  feature_keys <- feature_keys_for(include_highest_other_pay)
-  output <- list()
-  for (fold in sort(unique(z$outer_fold))) {
-    training <- z[z$outer_fold != fold & z$observation == "exact_base", ]
-    test <- z[z$outer_fold == fold & z$observation == "exact_base", ]
+predict_simple_model <- function(training, test, kind, feature_keys) {
     if (kind == "intercept") {
       fit <- lm(training$log_mid ~ 1)
       predicted <- rep(unname(coef(fit)[[1]]), nrow(test))
@@ -538,10 +513,31 @@ evaluate_simple_model <- function(kind, include_highest_other_pay = FALSE) {
         sigma <- sqrt(summary(fit$fit)$scale)
       } else stop("Unknown simple model: ", kind)
     }
-    lower80 <- predicted + qnorm(.1) * sigma
-    upper80 <- predicted + qnorm(.9) * sigma
-    lower90 <- predicted + qnorm(.05) * sigma
-    upper90 <- predicted + qnorm(.95) * sigma
+    as.numeric(predicted)
+}
+
+evaluate_simple_model <- function(kind, include_highest_other_pay = FALSE) {
+  feature_keys <- feature_keys_for(include_highest_other_pay)
+  output <- list()
+  for (fold in sort(unique(z$outer_fold))) {
+    training <- z[z$outer_fold != fold & z$observation == "exact_base", ]
+    test <- z[z$outer_fold == fold & z$observation == "exact_base", ]
+    predicted <- predict_simple_model(training, test, kind, feature_keys)
+    # Inner fits and residuals must exclude the entire outer test fold.
+    calibration <- unlist(lapply(sort(unique(training$outer_fold)), function(inner_fold) {
+      inner_test <- training[training$outer_fold == inner_fold, ]
+      inner_train <- training[training$outer_fold != inner_fold, ]
+      inner_test$log_mid - predict_simple_model(inner_train, inner_test, kind, feature_keys)
+    }), use.names = FALSE)
+    bounds <- residual_quantiles(calibration, c(.05, .1, .9, .95))
+    lower80 <- predicted + bounds[[2]]
+    upper80 <- predicted + bounds[[3]]
+    lower90 <- predicted + bounds[[1]]
+    upper90 <- predicted + bounds[[4]]
+    bandwidth <- residual_bandwidth(calibration)
+    log_density <- vapply(test$log_mid - predicted, function(residual) {
+      log_mean_exp(dnorm(residual, calibration, bandwidth, log = TRUE))
+    }, numeric(1))
     output[[length(output) + 1L]] <- data.frame(
       id = test$id, organization = test$organization, source = test$source,
       observation = test$observation, fold = test$outer_fold,
@@ -551,13 +547,13 @@ evaluate_simple_model <- function(kind, include_highest_other_pay = FALSE) {
       predicted_log_salary = as.numeric(predicted),
       predicted_log_lower80 = lower80, predicted_log_upper80 = upper80,
       predicted_log_lower90 = lower90, predicted_log_upper90 = upper90,
-      log_predictive_density = dnorm(test$log_mid, predicted, sigma, log = TRUE),
+      log_predictive_density = log_density,
       coverage80 = test$log_mid >= lower80 & test$log_mid <= upper80,
       coverage90 = test$log_mid >= lower90 & test$log_mid <= upper90,
       stringsAsFactors = FALSE
     )
   }
-  calibrate_simple_intervals(do.call(rbind, output))
+  do.call(rbind, output)
 }
 
 message("Compiling Bayesian salary model")
@@ -816,7 +812,7 @@ serialize_linear_model <- function(result) {
     residuals = result$oof$residuals,
     residualRecordIds = result$oof$ids,
     trainingRecordIds = unname(exact$id),
-    intervalCalibration = "leave-one-fold-out empirical OOF residual quantiles",
+    intervalCalibration = "nested organization-fold residual KDE",
     diagnostics = list(
       trainingN = nrow(exact), residualScale = fitted$sigma, rank = fitted$rank
     )
@@ -838,7 +834,7 @@ serialize_gam_model <- function(result) {
     residuals = result$oof$residuals,
     residualRecordIds = result$oof$ids,
     trainingRecordIds = unname(exact$id),
-    intervalCalibration = "leave-one-fold-out empirical OOF residual quantiles",
+    intervalCalibration = "nested organization-fold residual KDE",
     diagnostics = list(
       trainingN = nrow(exact), edf = sum(fitted$fit$edf),
       residualScale = sqrt(summary(fitted$fit)$scale)
@@ -972,7 +968,7 @@ artifact <- list(
         residualScale = unname(summary(intercept_fit)$sigma),
         rank = unname(intercept_fit$rank)
       ),
-      intervalCalibration = "leave-one-fold-out empirical OOF residual quantiles"
+      intervalCalibration = "nested organization-fold residual KDE"
     ),
     linear = serialize_linear_model(linear_with_highest),
     linearNoHighest = serialize_linear_model(linear_no_highest),

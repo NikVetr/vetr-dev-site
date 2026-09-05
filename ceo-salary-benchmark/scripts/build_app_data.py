@@ -555,7 +555,7 @@ def load_predictive_model_artifact(
         require_finite_number(
             diagnostics.get("residualScale"), f"{model_key} residual scale", positive=True
         )
-        if model.get("intervalCalibration") != "leave-one-fold-out empirical OOF residual quantiles":
+        if model.get("intervalCalibration") != "nested organization-fold residual KDE":
             raise ValueError(f"Predictive-model {model_key} interval calibration is malformed")
         if require_rank:
             rank = diagnostics.get("rank")

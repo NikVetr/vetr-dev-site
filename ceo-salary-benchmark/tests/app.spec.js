@@ -1103,6 +1103,27 @@ test("organization work-model and fiscal-sponsor evidence stays connected to cha
   expect(errors).toEqual([]);
 });
 
+test("non-CEO category multipliers change weights and survive robustness evaluation", async ({ page }) => {
+  await page.goto("/cfo-salary-benchmark/");
+  await page.locator("#measure-select").selectOption("base");
+  const readWeights = () => page.locator("tbody tr:not(.is-excluded) .weight-input")
+    .evaluateAll((inputs) => inputs.map((input) => input.value));
+  const equalWeights = await readWeights();
+  await page.locator('#weighting-components input[value="eaAffinity"]').check();
+  const weighted = await readWeights();
+  expect(weighted).not.toEqual(equalWeights);
+  const input = page.getByLabel("Effective Altruism multiplier for Connected to effective altruism", { exact: true });
+  await input.fill("2");
+  await input.press("Tab");
+  expect(await readWeights()).not.toEqual(weighted);
+  await expect(page.locator("#weighting-description")).toContainText("multipliers and custom row adjustments then change");
+  const quantiles = await page.locator("#quantile-grid").textContent();
+  await page.getByRole("tab", { name: "Robustness" }).click();
+  await page.getByRole("button", { name: "Run check", exact: true }).click();
+  await page.getByRole("tab", { name: "Quantiles" }).click();
+  await expect(page.locator("#quantile-grid")).toHaveText(quantiles);
+});
+
 test("chart folder tabs expose accessible mouse and keyboard navigation", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
@@ -3044,8 +3065,12 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
       expect(unweightedTotals.length).toBeLessThan(expected.defaultCash);
       expect(Math.max(...unweightedTotals) - Math.min(...unweightedTotals)).toBeLessThanOrEqual(0.04);
       await page.locator('#weighting-components input[value="staff"]').check();
-      const staffWeightedTotals = Object.values(await automaticOrganizationTotals());
-      expect(Math.max(...staffWeightedTotals) - Math.min(...staffWeightedTotals)).toBeLessThanOrEqual(0.04);
+      const staffWeightedTotals = await automaticOrganizationTotals();
+      expect(staffWeightedTotals["National Academy for State Health Policy"])
+        .toBeGreaterThan(staffWeightedTotals["Brennan Center for Justice"]);
+      // Equal staff sizes retain equal organization influence despite repeated roles.
+      expect(Math.abs(staffWeightedTotals["Center for a New American Security"]
+        - staffWeightedTotals["Environmental Law Institute"])).toBeLessThanOrEqual(0.04);
       await page.locator('#weighting-components input[value="staff"]').uncheck();
       await page.locator(".settings-panel").evaluate((panel) => { panel.scrollTop = 0; });
       await page.locator(".table-scroll").evaluate((panel) => { panel.scrollLeft = 0; });

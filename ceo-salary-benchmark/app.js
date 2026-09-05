@@ -1559,7 +1559,7 @@
       const organizationTotals = new Map();
       selected.forEach((item) => {
         const organization = String(item.row.organization || "Not reported");
-        organizationTotals.set(organization, (organizationTotals.get(organization) || 0) + item.automaticWeight);
+        organizationTotals.set(organization, (organizationTotals.get(organization) || 0) + 1);
       });
       selected.forEach((item) => {
         const organization = String(item.row.organization || "Not reported");
@@ -1784,26 +1784,45 @@
     return 0.5 * Math.log(2 * Math.PI) + (z + 0.5) * Math.log(t) - t + Math.log(x);
   }
 
+  function gammaDeviance(delta) {
+    return Math.abs(delta) < 0.001
+      ? delta ** 2 * (0.5 - delta / 3 + delta ** 2 / 4 - delta ** 3 / 5 + delta ** 4 / 6)
+      : delta - Math.log1p(delta);
+  }
+
   function gammaP(shape, x) {
     if (x <= 0) return 0;
-    const epsilon = 1e-10;
+    // Temme's large-shape expansion (DLMF 8.12); avoid the slow central series.
+    if (shape >= 100000) {
+      const delta = (x - shape) / shape;
+      const deviance = gammaDeviance(delta);
+      const eta = Math.sign(delta) * Math.sqrt(2 * deviance);
+      const correction = Math.abs(delta) < 0.001
+        ? -1 / 3 + delta / 12 - 23 * delta ** 2 / 540
+        : 1 / delta - 1 / eta;
+      return clamp(normalCdf(eta * Math.sqrt(shape))
+        - Math.exp(-shape * deviance) * correction / Math.sqrt(2 * Math.PI * shape), 0, 1);
+    }
+    const epsilon = 1e-12;
+    let converged = false;
     if (x < shape + 1) {
       let sum = 1 / shape;
       let term = sum;
       let ap = shape;
-      for (let n = 1; n < 200; n += 1) {
+      for (let n = 1; n < 10000; n += 1) {
         ap += 1;
         term *= x / ap;
         sum += term;
-        if (Math.abs(term) < Math.abs(sum) * epsilon) break;
+        if (Math.abs(term) < Math.abs(sum) * epsilon) { converged = true; break; }
       }
+      if (!converged) throw new Error("Gamma CDF series did not converge.");
       return sum * Math.exp(-x + shape * Math.log(x) - logGamma(shape));
     }
     let b = x + 1 - shape;
     let c = 1 / 1e-30;
     let d = 1 / b;
     let h = d;
-    for (let i = 1; i < 200; i += 1) {
+    for (let i = 1; i < 10000; i += 1) {
       const an = -i * (i - shape);
       b += 2;
       d = an * d + b;
@@ -1813,13 +1832,14 @@
       d = 1 / d;
       const delta = d * c;
       h *= delta;
-      if (Math.abs(delta - 1) < epsilon) break;
+      if (Math.abs(delta - 1) < epsilon) { converged = true; break; }
     }
+    if (!converged) throw new Error("Gamma CDF continued fraction did not converge.");
     return 1 - Math.exp(-x + shape * Math.log(x) - logGamma(shape)) * h;
   }
 
   function fitModel(items, fit = state.fit) {
-    if (items.length < 2) return null;
+    if (items.length < 2 || items.every((item) => item.value === items[0].value)) return null;
     const totalWeight = items.reduce((sum, item) => sum + item.weight, 0);
     if (fit === "lognormal") {
       const mu = items.reduce((sum, item) => sum + Math.log(item.value) * item.weight, 0) / totalWeight;
@@ -1840,16 +1860,24 @@
       const scale = Math.max(stableVariance / mean, Number.EPSILON);
       return {
         quantile: (p) => {
-          let low = 0;
+          let low = Math.log(Number.MIN_VALUE);
           let high = Math.max(mean * 4, 1);
           while (gammaP(shape, high / scale) < p) high *= 2;
+          high = Math.log(high);
           for (let i = 0; i < 80; i += 1) {
             const mid = (low + high) / 2;
-            if (gammaP(shape, mid / scale) < p) low = mid; else high = mid;
+            if (gammaP(shape, Math.exp(mid) / scale) < p) low = mid; else high = mid;
           }
-          return (low + high) / 2;
+          return Math.exp((low + high) / 2);
         },
-        density: (x) => x <= 0 ? 0 : Math.exp((shape - 1) * Math.log(x) - x / scale - logGamma(shape) - shape * Math.log(scale)),
+        density: (x) => {
+          if (x <= 0) return 0;
+          if (shape < 100000) return Math.exp((shape - 1) * Math.log(x) - x / scale - logGamma(shape) - shape * Math.log(scale));
+          const delta = (x - mean) / mean;
+          const deviance = gammaDeviance(delta);
+          return Math.exp(-shape * deviance - Math.log(x)
+            + 0.5 * Math.log(shape / (2 * Math.PI)) - 1 / (12 * shape));
+        },
         cdf: (x) => x <= 0 ? 0 : gammaP(shape, x / scale),
       };
     }
@@ -1859,6 +1887,43 @@
   function distributionQuantile(items, p, fit = state.fit) {
     const model = fitModel(items, fit);
     return model ? model.quantile(p) : weightedQuantile(items, p);
+  }
+
+  function logNormalMixture(means, scales) {
+    if (!means.length || means.length !== scales.length
+      || means.some((value) => !Number.isFinite(value))
+      || scales.some((value) => !Number.isFinite(value) || value <= 0)) {
+      throw new Error("Invalid predictive distribution components.");
+    }
+    const cdfLog = (value) => means.reduce((sum, mean, index) => (
+      sum + normalCdf((value - mean) / scales[index])
+    ), 0) / means.length;
+    const densityLog = (value) => means.reduce((sum, mean, index) => (
+      sum + Math.exp(-0.5 * ((value - mean) / scales[index]) ** 2)
+        / (scales[index] * Math.sqrt(2 * Math.PI))
+    ), 0) / means.length;
+    const density = (value) => value > 0 ? densityLog(Math.log(value)) / value : 0;
+    density.logarithmic = densityLog;
+    const quantiles = new Map();
+    return {
+      count: means.length,
+      density,
+      cdf: (value) => value > 0 ? cdfLog(Math.log(value)) : 0,
+      expected: means.reduce((sum, mean, index) => sum + Math.exp(mean + scales[index] ** 2 / 2), 0) / means.length,
+      quantile: (probability) => {
+        if (!(probability > 0 && probability < 1)) throw new Error("Invalid predictive quantile probability.");
+        if (!quantiles.has(probability)) {
+          let low = Math.min(...means.map((mean, index) => mean - 12 * scales[index]));
+          let high = Math.max(...means.map((mean, index) => mean + 12 * scales[index]));
+          for (let i = 0; i < 60; i += 1) {
+            const middle = (low + high) / 2;
+            if (cdfLog(middle) < probability) low = middle; else high = middle;
+          }
+          quantiles.set(probability, Math.exp((low + high) / 2));
+        }
+        return quantiles.get(probability);
+      },
+    };
   }
 
   function svgElement(name, attributes = {}) {
@@ -2975,23 +3040,19 @@
       value: interpolateModelEffect(model.effects[effectKeys[key]], vector[index]),
     }));
     const mu = model.baseline + contributions.reduce((sum, contribution) => sum + contribution.value, 0);
-    const samples = model.residuals.map((residual) => Math.exp(mu + residual)).filter((value) => Number.isFinite(value) && value > 0);
-    return {
-      methodKey: currentModelComparisonRow()?.key || "gam", model, mu, samples,
-      expected: samples.reduce((sum, value) => sum + value, 0) / samples.length,
-      median: sampleQuantile(samples, 0.5),
-      contributions,
-    };
+    return residualCalibratedPrediction(currentModelComparisonRow()?.key || "gam", model, mu, contributions);
   }
 
   function residualCalibratedPrediction(methodKey, model, mu, contributions = []) {
-    const samples = model.residuals
-      .map((residual) => Math.exp(mu + residual))
-      .filter((value) => Number.isFinite(value) && value > 0);
+    const residuals = model.residuals;
+    const mean = residuals.reduce((sum, value) => sum + value, 0) / residuals.length;
+    const variance = residuals.reduce((sum, value) => sum + (value - mean) ** 2, 0) / (residuals.length - 1);
+    const bandwidth = Math.max(0.04, 1.06 * Math.sqrt(variance) * residuals.length ** -0.2);
+    const distribution = logNormalMixture(residuals.map((residual) => mu + residual), residuals.map(() => bandwidth));
     return {
-      methodKey, model, mu, samples,
-      expected: samples.reduce((sum, value) => sum + value, 0) / samples.length,
-      median: sampleQuantile(samples, 0.5),
+      methodKey, model, mu, distribution,
+      expected: distribution.expected,
+      median: distribution.quantile(0.5),
       contributions,
     };
   }
@@ -3039,16 +3100,13 @@
         ? -1 : PREDICTIVE_MODEL.eaLevels.indexOf(state.modelProfile.ea_relationship),
     };
     if (categoryIndexes.ea < -1) throw new Error(`Unknown EA model category: ${state.modelProfile.ea_relationship}`);
-    const mu = []; const samples = []; const analyticMeans = [];
+    const mu = [];
     for (let index = 0; index < draws.alpha.length; index += 1) {
       let value = draws.alpha[index] + vector.reduce((sum, item, column) => sum + item * draws.beta[index][column], 0);
       Object.entries(categoryIndexes).forEach(([key, categoryIndex]) => {
         if (categoryIndex >= 0) value += draws[key][index][categoryIndex];
       });
-      const sigma = draws.sigma[index][0];
       mu.push(value);
-      samples.push(Math.exp(value + sigma * draws.residualZ[index]));
-      analyticMeans.push(Math.exp(value + sigma ** 2 / 2));
     }
     const contributionSpecs = [
       ...continuousKeys.map((key, column) => [MODEL_CONTINUOUS_LABELS[key], () => draws.beta.map((row) => row[column] * vector[column])]),
@@ -3060,11 +3118,12 @@
       ["Work model", () => categoryIndexes.remote < 0 ? [0] : draws.remote.map((row) => row[categoryIndexes.remote])],
       ["Fiscal sponsor", () => categoryIndexes.fiscalSponsor < 0 ? [0] : draws.fiscalSponsor.map((row) => row[categoryIndexes.fiscalSponsor])],
     ];
+    const distribution = logNormalMixture(mu, draws.sigma.map((row) => row[0]));
     return {
       methodKey: currentModelComparisonRow()?.key || (state.modelUseAdRanges ? "bayesian_ranges" : "bayesian"),
-      model, mu, samples: samples.filter((value) => Number.isFinite(value) && value > 0),
-      expected: analyticMeans.reduce((sum, value) => sum + value, 0) / analyticMeans.length,
-      median: sampleQuantile(samples, 0.5),
+      model, mu, distribution,
+      expected: distribution.expected,
+      median: distribution.quantile(0.5),
       contributions: contributionSpecs.map(([label, accessor]) => ({ label, value: medianAcrossDraws(accessor()) })),
     };
   }
@@ -3253,23 +3312,6 @@
     refs.modelLimitations.textContent = `${warningText}${PREDICTIVE_MODEL.exclusions.join(" ")} Prediction intervals describe uncertainty among modeled peer salaries, not a recommended salary range.`;
   }
 
-  function modelDensity(samples) {
-    const logs = samples.map(Math.log);
-    const mean = logs.reduce((sum, value) => sum + value, 0) / logs.length;
-    const variance = logs.reduce((sum, value) => sum + (value - mean) ** 2, 0) / Math.max(1, logs.length - 1);
-    const bandwidth = Math.max(0.04, 1.06 * Math.sqrt(variance) * logs.length ** -0.2);
-    const densityOnLogScale = (logValue) => {
-      const total = logs.reduce((sum, observation) => {
-        const z = (logValue - observation) / bandwidth;
-        return sum + Math.exp(-0.5 * z * z);
-      }, 0);
-      return total / (logs.length * bandwidth * Math.sqrt(2 * Math.PI));
-    };
-    const density = (value) => value > 0 ? densityOnLogScale(Math.log(value)) / value : 0;
-    density.logarithmic = densityOnLogScale;
-    return density;
-  }
-
   function modelChartGeometry(domainValues) {
     const values = domainValues.filter((value) => Number.isFinite(value) && value > 0);
     if (values.length < 2) throw new Error("Predictive-chart domain requires at least two positive values");
@@ -3338,7 +3380,7 @@
     const { width, height } = measuredChartSize();
     svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
     refs.chartLegend.replaceChildren();
-    if (!prediction || prediction.samples.length < 20) {
+    if (!prediction || prediction.distribution.count < 20) {
       refs.modelDiagnostics.hidden = true;
       clearModelDetailsForInvalidPrediction();
       const empty = svgElement("text", { x: width / 2, y: height / 2, "text-anchor": "middle", fill: "#52879E", "font-size": 13 });
@@ -3350,11 +3392,11 @@
     }
     refs.modelDiagnostics.hidden = false;
     renderModelDiagnostics(prediction);
-    const samples = [...prediction.samples].sort((a, b) => a - b);
+    const distribution = prediction.distribution;
     const intervals = {
-      95: [sampleQuantile(samples, .025), sampleQuantile(samples, .975)],
-      80: [sampleQuantile(samples, .1), sampleQuantile(samples, .9)],
-      50: [sampleQuantile(samples, .25), sampleQuantile(samples, .75)],
+      95: [distribution.quantile(.025), distribution.quantile(.975)],
+      80: [distribution.quantile(.1), distribution.quantile(.9)],
+      50: [distribution.quantile(.25), distribution.quantile(.75)],
     };
     const referenceSalary = Number(PREDICTIVE_MODEL.rpProfile.reference_salary);
     const compactWidth = width < 480; const compactHeight = height < 230;
@@ -3365,7 +3407,7 @@
     const { axisMin, axisMax } = geometry;
     svg.dataset.modelAxisScale = geometry.logarithmic ? "log" : "linear";
     const xScale = (value) => margin.left + ((geometry.transform(value) - axisMin) / (axisMax - axisMin)) * innerWidth;
-    const density = modelDensity(samples);
+    const density = distribution.density;
     const displayDensity = geometry.logarithmic
       ? (value) => density.logarithmic(Math.log(value))
       : density;
@@ -3396,7 +3438,7 @@
     const linePath = points.map((point, index) => `${index ? "L" : "M"}${xScale(point.value).toFixed(2)},${yScale(point.density).toFixed(2)}`).join(" ");
     svg.append(svgElement("path", { d: areaPath, class: "model-density-area" }));
     appendOutlinedDensityPath(svg, linePath);
-    const medianValue = sampleQuantile(samples, .5);
+    const medianValue = distribution.quantile(.5);
     svg.append(svgElement("line", {
       x1: xScale(medianValue), x2: xScale(medianValue),
       y1: yScale(displayDensity(medianValue)), y2: bottom,
@@ -3412,7 +3454,7 @@
         x1: referenceX, x2: referenceX, y1: rpLogoY + markerSize / 2 + 1, y2: bottom,
         class: "rp-reference-guide", "aria-hidden": "true",
       }));
-      const predictivePercentile = samples.filter((value) => value < referenceSalary).length / samples.length * 100;
+      const predictivePercentile = distribution.cdf(referenceSalary) * 100;
       referenceMarker = appendRpMarker(svg, referenceX, rpLogoY, {
         row: DATA.rpReference, value: referenceSalary, weight: 0,
       }, {
@@ -3429,7 +3471,7 @@
     }
     appendCurveQuantileMarks(
       svg,
-      { density, quantile: (probability) => sampleQuantile(samples, probability) },
+      distribution,
       quantilePercentiles(), xScale, null, margin, 1, 1, axisMin, axisMax, modelMoney,
       geometry,
       (value) => yScale(displayDensity(value)),
@@ -3547,7 +3589,7 @@
   function renderQuantiles() {
     if (state.view === "model") {
       const prediction = currentModelPrediction();
-      if (!prediction?.samples?.length) {
+      if (!prediction?.distribution?.count) {
         refs.quantileBasis.textContent = "Enter valid required profile inputs to calculate predicted quantiles.";
         refs.customQuantilesField.hidden = state.quantileGranularity !== "custom";
         refs.customQuantilesError.textContent = "";
@@ -3571,7 +3613,7 @@
       refs.quantileGrid.replaceChildren();
       refs.quantileGrid.classList.toggle("is-percentiles", percentiles.length > 20);
       percentiles.forEach((percentile) => {
-        const value = prediction ? sampleQuantile(prediction.samples, percentile / 100) : NaN;
+        const value = prediction ? prediction.distribution.quantile(percentile / 100) : NaN;
         const button = document.createElement("button"); button.type = "button"; button.className = "quantile-cell";
         const label = percentileParts(percentile);
         button.innerHTML = `<span>${label.number}<sup>${label.suffix}</sup> percentile</span><strong>${compactMoney(value)}</strong>`;
@@ -3587,9 +3629,9 @@
     const descriptor = axisDescriptor(analysisAxisKey());
     const items = analysisItems();
     const model = fitModel(items);
-    refs.quantileBasis.textContent = state.fit === "empirical"
-      ? `Based on weighted percentiles of the selected records for ${descriptor.shortLabel}`
-      : `Estimated from the fitted ${state.fit} curve for ${descriptor.shortLabel}`;
+    refs.quantileBasis.textContent = model
+      ? `Estimated from the fitted ${state.fit} curve for ${descriptor.shortLabel}`
+      : `Based on weighted percentiles of the selected records for ${descriptor.shortLabel}${state.fit !== "empirical" ? " (too little variation to fit a curve)" : ""}`;
     refs.customQuantilesField.hidden = state.quantileGranularity !== "custom";
     const percentiles = quantilePercentiles();
     if (state.quantileGranularity === "custom") {
@@ -4404,7 +4446,7 @@
         ? "No weighting options selected: every included record counts equally."
         : "No weighting options selected: each selected organization has equal total influence.");
     if (!isCeoPosition()) {
-      if (components.length) baseDescription += " The results are then balanced so each selected organization has equal total influence before any custom row adjustment.";
+      if (components.length) baseDescription += " Each organization starts with equal total influence; selected multipliers and custom row adjustments then change that influence.";
       baseDescription += " Automatic CEO weighting has not yet been extended to this position.";
     }
     refs.weightingDescription.textContent = balanced
@@ -4625,7 +4667,7 @@
       : "Pay reported for selected roles in nonprofit Form 990 filings.");
     refs.positionDescription.textContent = ceo
       ? description
-      : `${description} Records are balanced so each selected organization has equal total influence.`;
+      : `${description} Each selected organization has equal total influence before weighting adjustments.`;
     refs.appTitle.setAttribute("aria-label", `${position.pageLabel} salary benchmark`);
     document.title = `${position.pageLabel} Salary Benchmark · vetr.dev`;
     refs.appDescription.content = `Interactive Rethink Priorities ${position.pageLabel} salary benchmark explorer`;
@@ -5081,10 +5123,10 @@
   function scenarioSummary() {
     if (state.view === "model") {
       const prediction = currentModelPrediction();
-      if (!prediction?.samples.length) throw new Error("The selected model profile does not produce a prediction.");
-      const values = [0.25, 0.5, 0.75].map((probability) => sampleQuantile(prediction.samples, probability));
+      if (!prediction?.distribution.count) throw new Error("The selected model profile does not produce a prediction.");
+      const values = [0.25, 0.5, 0.75].map((probability) => prediction.distribution.quantile(probability));
       const reference = Number(PREDICTIVE_MODEL.rpProfile.reference_salary);
-      const referencePercentile = prediction.samples.filter((value) => value <= reference).length / prediction.samples.length * 100;
+      const referencePercentile = prediction.distribution.cdf(reference) * 100;
       const trainingRows = activeModelTrainingRecords();
       const trainingOrganizations = new Set(trainingRows.map((row) => String(row.organization || row.id).trim().toLowerCase()));
       const method = currentModelComparisonRow()?.label || {
@@ -5101,7 +5143,7 @@
         peerOverrides: "0 rows", weightEdits: "0 edits", weightParameters: "Model profile inputs",
         records: trainingRows.length,
         organizations: trainingOrganizations.size,
-        effectiveN: prediction.samples.length,
+        effectiveN: prediction.distribution.count,
         rpValue: reference, rpPercentile: referencePercentile,
         p25: values[0], p50: values[1], p75: values[2],
         formatted: {
@@ -5830,7 +5872,7 @@
       const organizationTotals = new Map();
       selected.forEach((item) => {
         const organization = String(item.row.organization || "Not reported");
-        organizationTotals.set(organization, (organizationTotals.get(organization) || 0) + item.automaticWeight);
+        organizationTotals.set(organization, (organizationTotals.get(organization) || 0) + 1);
       });
       selected.forEach((item) => {
         const organization = String(item.row.organization || "Not reported");

@@ -47,3 +47,18 @@ log_interval_probability <- function(lower, upper, mean, sd) {
   }
   result
 }
+
+residual_bandwidth <- function(residuals) {
+  if (length(residuals) < 2L || any(!is.finite(residuals))) stop("Invalid calibration residuals")
+  max(0.04, 1.06 * sd(residuals) * length(residuals)^(-0.2))
+}
+
+residual_quantiles <- function(residuals, probabilities) {
+  bandwidth <- residual_bandwidth(residuals)
+  vapply(probabilities, function(p) {
+    if (!is.finite(p) || p <= 0 || p >= 1) stop("Invalid predictive probability")
+    uniroot(function(x) mean(pnorm(x, residuals, bandwidth)) - p,
+            c(min(residuals) - 10 * bandwidth, max(residuals) + 10 * bandwidth),
+            tol = 1e-10)$root
+  }, numeric(1))
+}
