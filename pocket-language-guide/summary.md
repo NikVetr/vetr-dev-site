@@ -329,19 +329,42 @@ and offline on a phone without paying for the solver, `pdf-lib` or a CJK font.
   own grid track, because the two names are different lengths and centring the group
   put the mark off centre.
 
-  This is the one place the gallery loads the engine, and only on the click — the
-  committed thumbnail holds the frame so the card is never blank, then the typeset
-  faces replace it. They are SVG, so there is no resolution to run out of.
+  This is the one place the gallery loads the engine, and only on the click. **The
+  first face is a shipped asset and the rest are typeset**, which is a split decided
+  by measurement rather than by preference.
 
-  Shipping the faces as assets was the obvious alternative and is worth recording
-  as rejected. A face is about 120KB of SVG and a default sheet is eight of them, so
-  240 ordered pairs is roughly 230MB in the working tree — and a compact encoding of
-  the plan is no smaller, because the plan *is* the text, positioned. What is
-  pre-rendered instead is the expensive part: fitting a sheet means searching for
-  the fewest faces and the largest type that hold the content, re-measuring and
-  re-breaking the whole sheet at a dozen candidate scales. `packs/index.json`
-  already records the answer, so the lightbox pins it and lays out exactly once —
-  byte-identical output, measured 10–12× faster, about 150ms rather than 1.8s, and
+  Laying out a sheet is about 1.2 seconds and *none* of it is network — the resource
+  timings for a cold CJK open are all under 25ms — so it is arithmetic, and no amount
+  of caching upstream would help. For that second the reader was looking at the 480px
+  card thumbnail upscaled to card size and dimmed to 55%: honest about not being
+  ready, and the thing that read as slow.
+
+  Shipping whole sheets is still not affordable, and the reason the split works is
+  that **SVG gzips about fourteen times**. A sheet is 1.5MB raw and ~118KB compressed,
+  so 420 ordered pairs is 50MB even at best — but one face is 13KB, and 420 first
+  faces is **5.5MB**. That is `packs/<pair>/face-1.svg.gz`, compressed in the
+  repository rather than only on the wire, because these files are rewritten wholesale
+  whenever the corpus or the theme moves and git would keep every revision. The
+  browser inflates it with `DecompressionStream`, and since it is the same renderer
+  over the same pinned fit, the face is byte-identical to the one the solve produces —
+  so the swap when the sheet lands is invisible. **Measured: sharp vector at 151ms
+  against a blur for 1050ms.**
+
+  It is kept in its own slot rather than as a one-element face list, because the
+  thumbnail strip and the paging carets are *shape*: driving them from the first face
+  would have built one thumbnail and then eight, and resizing the foot after the fact
+  is exactly what the reserved band exists to prevent.
+
+  The inflate checks for the gzip magic bytes first. Some hosts answer a `.gz` with
+  `Content-Encoding: gzip`, in which case `fetch` has already inflated it and
+  `DecompressionStream` would throw — silently disabling this on the deployed site
+  while it worked locally.
+
+  The other thing pre-rendered is the expensive decision: fitting a sheet means
+  searching for the fewest faces and the largest type that hold the content,
+  re-measuring and re-breaking the whole sheet at a dozen candidate scales.
+  `packs/index.json` already records the answer, so the lightbox pins it and lays out
+  exactly once — byte-identical output, measured 10–12× faster, and
   nothing new shipped to buy it. A pinned fit is still a cached answer, so when it
   does not fit — which any change to the type or the spacing causes until the packs
   are re-rendered — it falls back to the search rather than drawing an empty card.
@@ -1356,18 +1379,12 @@ Named so nobody has to rediscover the gap:
 - **Per-row split overrides.** The drag handles cover margins and the column gap;
   dragging an individual row's internal divider would need per-row overrides
   threaded through `atoms.js`.
-- **Pre-rendered faces as shipped assets.** The gallery's lightbox typesets the
-  pair when a reader opens it, rather than reading faces off disk. Committing them
-  was the other option and the numbers ruled it out: a face is ~120KB of SVG or
-  ~1.8MB of `LayoutPlan` JSON, and 240 ordered pairs at eight faces each is well
-  over 200MB in the working tree either way. What *is* pre-rendered is the expensive
-  half — the face count and type scale the fit settled on, already in
-  `packs/index.json`, which the lightbox pins to lay out once instead of searching:
-  byte-identical output about twelve times faster, for no new bytes. Also committed
-  is the 480px first-face thumbnail, which
-  goes up immediately so the dialog is never empty while the rest is typeset. The
-  faces it then shows are vector, so they are sharper than any PNG that could have
-  been shipped.
+- **Whole sheets as shipped assets.** The first face of every pair is committed and
+  the rest are typeset on open. Committing all of them was the other option and the
+  numbers ruled it out: 420 pairs is 50MB gzipped and 670MB raw, against 5.5MB for the
+  first faces alone. So a reader gets sharp vector immediately and the remaining seven
+  or nine faces about a second later, which is the point at which they would want the
+  second one.
 - **A reviewer queue.** `content/CONTRIBUTING.md` defines the confidence tiers and
   the validator enforces the safety gate, but there is no review UI.
 - **Eleven concepts the translators asked for**, staged in

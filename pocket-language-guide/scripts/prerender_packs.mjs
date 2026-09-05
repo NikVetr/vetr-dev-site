@@ -2,9 +2,9 @@
 //
 //   npm run prerender
 //
-// Writes packs/<target>__<source>/thumb.png plus packs/index.json. The gallery is
-// built from these, so it loads instantly and offline without touching the solver,
-// the fonts or the corpus.
+// Writes packs/<target>__<source>/thumb.png and face-1.svg.gz, plus packs/index.json.
+// The gallery is built from these, so it loads instantly and offline without touching
+// the solver, the fonts or the corpus.
 //
 // It used to also commit sheet.pdf and a full-resolution PNG per face. Nothing read
 // them -- the gallery's Export button goes to sheet.html, which solves and exports
@@ -16,6 +16,7 @@
 // `scripts/optimize_thumbs.py` runs after this one (via the `postprerender` hook)
 // and reindexes each screenshot to an exact palette: 16.4MB becomes 5.0MB.
 import { readFile, writeFile, mkdir, rm } from 'node:fs/promises';
+import { gzipSync } from 'node:zlib';
 import { createSheetContext, buildSheet, stacksFor } from '../core/sheet.js';
 import { planToSvg } from '../render/svg.js';
 import { cssFaces, fontFaceCss } from '../render/fonts.js';
@@ -69,6 +70,23 @@ for (const { target, source } of pairs) {
   await local.page.locator('svg').screenshot({
     path: `${dir}/thumb.png`, scale: 'css', style: `svg{width:${THUMB_WIDTH}px;height:auto}`,
   });
+
+  // **The first face as vector, so the lightbox opens on the real thing.**
+  //
+  // Laying out a sheet is about a second of arithmetic, and none of it is network:
+  // the fit is already pinned from this index, so what is left is measuring and
+  // breaking 600-odd rows. For that second the reader was looking at the 480px
+  // thumbnail above, upscaled to card size and dimmed -- honest about not being
+  // ready, and the thing they actually complained about.
+  //
+  // Shipping the whole sheet is not affordable and shipping one face is: a face is
+  // ~180KB of SVG, but SVG is text that repeats itself and gzip takes it to 13KB, so
+  // 420 pairs of first faces is ~5.5MB against ~75MB raw. Compressed *in the repo*
+  // rather than only on the wire, because these files are rewritten wholesale every
+  // time the corpus or the theme moves and git would keep every revision.
+  // `DecompressionStream` inflates it in the browser; the remaining faces arrive when
+  // the solve finishes, by which time the reader is still on this one.
+  await writeFile(`${dir}/face-1.svg.gz`, gzipSync(svgs[0], { level: 9 }));
 
   const meta = {
     target,

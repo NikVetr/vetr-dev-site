@@ -30,19 +30,19 @@ function el(tag, attrs = {}, kids = []) {
 /**
  * Every face of a pair's default sheet, as SVG, solved once and kept.
  *
- * This runs the real engine rather than reading pre-rendered faces, and the reason
- * is worth recording because shipping them was the obvious alternative. A face is
- * about 120KB of SVG and a default sheet is eight of them, so 240 ordered pairs is
- * roughly 230MB in the working tree -- and a compact encoding of the plan is no
- * smaller, because the plan *is* the text, positioned.
+ * This runs the real engine for the *rest* of the sheet rather than reading it off
+ * disk, and the reason is the arithmetic: a sheet is 1.5MB of SVG, or ~118KB gzipped,
+ * so 420 ordered pairs is 50MB compressed and 670MB raw -- and a compact encoding of
+ * the plan is no smaller, because the plan *is* the text, positioned. The first face
+ * alone is 13KB gzipped, which is why `firstFace` above ships and this does not.
  *
- * What is pre-rendered is the expensive part. Fitting a sheet means searching for
- * the fewest faces and the largest type that hold the content, which re-measures
- * and re-breaks the whole sheet at a dozen candidate scales. `packs/index.json`
- * already records the answer for every pair, so the lightbox pins it and lays the
- * sheet out exactly once: byte-identical output, measured 10-12x faster -- about
- * 150ms rather than 1.8s. Nothing new is shipped to buy that, and the SVG stays
- * vector, so it is sharper at any size than a committed PNG could be.
+ * The other thing pre-rendered is the expensive decision. Fitting a sheet means
+ * searching for the fewest faces and the largest type that hold the content, which
+ * re-measures and re-breaks the whole sheet at a dozen candidate scales.
+ * `packs/index.json` already records the answer for every pair, so the lightbox pins
+ * it and lays the sheet out exactly once: byte-identical output, measured 10-12x
+ * faster. What is left is ~1.2s to typeset eight faces of 600 rows, and it now
+ * happens behind a face the reader is already reading.
  * @type {Map<string, Promise<string[]>>}
  */
 const sheets = new Map();
@@ -53,11 +53,11 @@ const sheets = new Map();
  * The same faces, kept across visits.
  *
  * The in-memory map above only helps within one page: close the tab and every pair
- * is solved again from scratch. Pre-rendering all 272 pairs to disk is the obvious
- * alternative and it is not affordable -- eight faces of vector SVG is about a
- * megabyte, so the set is a quarter of a gigabyte, which is the same arithmetic
- * that stopped `prerender_packs.mjs` committing PDFs. Keeping what a reader has
- * actually looked at costs nothing until they look.
+ * is solved again from scratch -- and only the first face comes off disk, so faces two
+ * onward are what this is for. Shipping all 420 pairs whole is the obvious alternative
+ * and it is the 50MB above, which is the same arithmetic that stopped
+ * `prerender_packs.mjs` committing PDFs. Keeping what a reader has actually looked at
+ * costs nothing until they look.
  *
  * Cache Storage rather than IndexedDB because the service worker already owns a
  * cache per concern and this is one more; and keyed on `data/shell.json`'s version,
@@ -105,6 +105,37 @@ async function keep(key, svgs) {
     );
   } catch {
     // As above: caching is an optimisation, not a requirement.
+  }
+}
+
+/**
+ * The pre-rendered first face, inflated.
+ *
+ * `prerender_packs.mjs` writes one gzipped face per pair -- 13KB, against the second
+ * of arithmetic the browser would otherwise spend reaching the same bytes. It is the
+ * same renderer over the same pinned fit, so when the full solve lands, face one is
+ * byte-identical and the swap is invisible.
+ *
+ * Only the first, because a whole sheet compresses to ~118KB and 420 of those is
+ * 50MB. One face is the one the lightbox opens on.
+ * @param {string} target @param {string} source @returns {Promise<string|null>}
+ */
+async function firstFace(target, source) {
+  try {
+    const res = await fetch(`packs/${target}__${source}/face-1.svg.gz`);
+    if (!res.ok) return null;
+    const bytes = new Uint8Array(await res.arrayBuffer());
+    // Inflate only if it arrived compressed. Some hosts answer a `.gz` with
+    // `Content-Encoding: gzip`, in which case `fetch` has already inflated it and
+    // running it through `DecompressionStream` would throw -- silently disabling this
+    // on the deployed site while it worked locally. The two magic bytes settle it.
+    if (bytes[0] !== 0x1f || bytes[1] !== 0x8b) return new TextDecoder().decode(bytes);
+    const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+    return await new Response(stream).text();
+  } catch {
+    // A pair with no pack, or a browser without `DecompressionStream`. Either way
+    // the solver is still there and the thumbnail still holds the frame.
+    return null;
   }
 }
 
@@ -205,6 +236,8 @@ export function openLightbox({ languages, solved, target, source, onReaderChange
   let pair = { target, source };
   let at = 0;
   /** @type {string[]} */ let svgs = [];
+  /** The pre-rendered first face, until the solved sheet replaces it. */
+  /** @type {string|null} */ let first = null;
 
   // --- the card, with a caret on each of its edges -------------------------
   const face = el('div', { class: 'lightbox-face' });
@@ -309,7 +342,14 @@ export function openLightbox({ languages, solved, target, source, onReaderChange
     sourcePicker.select(pair.source);
     targetPicker.select(pair.target);
 
-    if (!svgs.length) return;
+    // The pre-rendered face while the rest of the sheet lays out. It is kept apart
+    // from `svgs` on purpose: the strip and the paging buttons are shape, and driving
+    // them from a one-element list would have built one thumbnail and then eight, and
+    // resizing the foot after the fact is the thing the reserved band exists to stop.
+    if (!svgs.length) {
+      if (first) face.innerHTML = first;
+      return;
+    }
     face.innerHTML = svgs[at];
     // The strip is the same faces at strip size, built once per sheet: re-parsing
     // eight sheets of SVG to move one outline is the only thing in here a reader
@@ -333,6 +373,14 @@ export function openLightbox({ languages, solved, target, source, onReaderChange
 
   function load() {
     const wanted = pair;
+    // The pre-rendered face first, and it wins the race by an order of magnitude:
+    // one fetch of 13KB against a second of layout. Guarded on `svgs` being empty so
+    // a slow inflate cannot overwrite a solve that has already landed.
+    firstFace(wanted.target, wanted.source).then((svg) => {
+      if (!svg || !dialog.isConnected || pair !== wanted) return;
+      first = svg;
+      paint();
+    });
     faceSheet(wanted.target, wanted.source, solved.get(`${wanted.target}__${wanted.source}`))
       .then((built) => {
         // The pair may have changed while this was solving.
@@ -378,6 +426,7 @@ export function openLightbox({ languages, solved, target, source, onReaderChange
     pair = next;
     at = 0;
     svgs = [];
+    first = null;
     strip.replaceChildren();
     if (readerChanged) {
       await onReaderChange(pair.source);

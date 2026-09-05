@@ -94,13 +94,19 @@ test.describe('gallery', () => {
     await page.locator('.card-thumb-button').first().click();
     const dialog = page.locator('dialog.lightbox');
     await expect(dialog).toBeVisible();
-    // The pre-rendered thumbnail holds the frame so the card is never blank, then
-    // the typeset faces replace it -- vector, and every face rather than the first.
-    await expect(dialog.locator('.lightbox-face img')).toBeVisible();
+    // Vector immediately -- the first face is pre-rendered, so there is nothing to
+    // wait for -- and then every face rather than the first, once the sheet solves.
+    // The `img` is still built first and is still what a pair with no pack falls back
+    // to; it is no longer worth asserting on, because the inflate usually beats it
+    // off the screen.
     await expect(dialog.locator('.lightbox-face svg')).toBeVisible({ timeout: 180_000 });
 
-    // One thumbnail per face, and the sheet comes in pairs of them.
+    // One thumbnail per face, and the sheet comes in pairs of them. The strip is
+    // built from the whole sheet rather than from the pre-rendered first face, so it
+    // is also the signal that the solve has landed -- which is what has to be waited
+    // for now that the card no longer waits for it to show something.
     const thumbs = dialog.locator('.lightbox-thumb');
+    await expect(thumbs.first()).toBeVisible({ timeout: 180_000 });
     const faces = await thumbs.count();
     expect(faces).toBeGreaterThanOrEqual(4);
     expect(faces % 2).toBe(0);
@@ -123,6 +129,37 @@ test.describe('gallery', () => {
 
     await page.keyboard.press('Escape');
     await expect(page.locator('dialog.lightbox')).toHaveCount(0);
+  });
+
+  test('the card opens on a pre-rendered face, not on a blur', async ({ page }) => {
+    // Laying a sheet out is about a second of arithmetic and none of it is network,
+    // so for that second the reader used to be looking at the 480px card thumbnail
+    // upscaled and dimmed. `prerender_packs.mjs` now ships the first face as 13KB of
+    // gzipped SVG, which is the same renderer over the same pinned fit -- so the face
+    // that arrives first is byte-identical to the one the solve would produce, and
+    // the swap is invisible.
+    await page.goto('/');
+    await expect(page.locator('.card').first()).toBeVisible();
+    const dialog = page.locator('dialog.lightbox');
+
+    const opened = Date.now();
+    await page.locator('.card-thumb-button').first().click();
+    await expect(dialog.locator('.lightbox-face svg')).toBeVisible({ timeout: 30_000 });
+    const vector = Date.now() - opened;
+    const early = dialog.locator('.lightbox-face svg').innerHTML();
+
+    // The strip is built from the whole sheet, so it marks when the solve landed.
+    await expect(dialog.locator('.lightbox-thumb').first()).toBeVisible({ timeout: 180_000 });
+    const solved = Date.now() - opened;
+
+    // A fetch and an inflate against a full solve. The bound is loose on purpose --
+    // this asserts the ordering, not a benchmark -- but the measured gap is ~60ms
+    // against ~1050ms, and if the pre-render stopped being read this would fail
+    // rather than merely get slower.
+    expect(vector).toBeLessThan(Math.max(solved / 2, 400));
+
+    // And the solved face replaces it with the same bytes, so nothing visibly moves.
+    expect(await dialog.locator('.lightbox-face svg').innerHTML()).toBe(await early);
   });
 
   test('the pair is editable from inside the lightbox, either side or the arrow', async ({ page }) => {
