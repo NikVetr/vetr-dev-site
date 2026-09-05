@@ -90,7 +90,7 @@ def main():
             result["folds_present"] = len(fold_deltas)
             output.append(result)
     with args.output.open("w", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=output[0].keys())
+        writer = csv.DictWriter(handle, fieldnames=output[0].keys(), lineterminator="\n")
         writer.writeheader()
         writer.writerows(output)
     print(f"Wrote {len(output)} paired model/stratum comparisons to {args.output}")
