@@ -18,7 +18,6 @@ import {
 import {
     formatTime,
     formatTimeValue,
-    parseTime,
     addMinutes,
     debounce,
     parseDuration,
@@ -33,6 +32,7 @@ import {
     openColorPicker,
     parseItemColor
 } from './colors.js';
+import { showNotification } from './export.js';
 
 let container = null;
 let draggedElement = null;
@@ -122,10 +122,10 @@ function setupModalListeners() {
             if (e.ctrlKey || e.metaKey) {
                 if (e.key === 'b') {
                     e.preventDefault();
-                    handleToolbarAction('bold');
+                    applyMarkdownAction(editorTextarea, 'bold');
                 } else if (e.key === 'i') {
                     e.preventDefault();
-                    handleToolbarAction('italic');
+                    applyMarkdownAction(editorTextarea, 'italic');
                 } else if (e.key === 's') {
                     e.preventDefault();
                     saveNotes();
@@ -373,15 +373,22 @@ export function renderAgenda(state) {
 
     renderAgendaHeader(varianceMode);
 
-    // Clear existing rows (but keep the header if it exists)
-    const existingRows = container.querySelectorAll('.agenda-row');
-    existingRows.forEach(row => row.remove());
+    const existingRows = new Map([...container.querySelectorAll('.agenda-row')]
+        .map(row => [row.dataset.id, row]));
 
     // Render each item
     itemsWithIntervals.forEach((item, index) => {
         const row = createAgendaRow(item, index, varianceMode, varianceById[item.id] || null);
-        container.appendChild(row);
+        const existing = existingRows.get(item.id);
+        if (existing) {
+            syncRowElement(existing, row);
+            existingRows.delete(item.id);
+        }
+        const target = existing || row;
+        const position = container.querySelectorAll('.agenda-row')[index];
+        if (position !== target) container.insertBefore(target, position || null);
     });
+    existingRows.forEach(row => row.remove());
 
     if (activeInputState?.itemId && activeInputState.field) {
         const restored = [...container.querySelectorAll('.agenda-row')]
@@ -394,6 +401,32 @@ export function renderAgenda(state) {
             }
         }
     }
+}
+
+// Keep controls connected so browser editing history and pending clicks survive updates.
+function syncRowElement(target, source) {
+    for (const attribute of [...target.attributes]) {
+        if (!source.hasAttribute(attribute.name)) target.removeAttribute(attribute.name);
+    }
+    for (const attribute of source.attributes) target.setAttribute(attribute.name, attribute.value);
+    if (target instanceof HTMLInputElement) {
+        if (document.activeElement !== target && target.value !== source.value) target.value = source.value;
+        target.checked = source.checked;
+        return;
+    }
+    const children = [...source.childNodes];
+    children.forEach((child, index) => {
+        const current = target.childNodes[index];
+        if (!current || current.nodeName !== child.nodeName) {
+            if (current) current.replaceWith(child);
+            else target.appendChild(child);
+        } else if (child.nodeType === Node.TEXT_NODE) {
+            if (current.textContent !== child.textContent) current.textContent = child.textContent;
+        } else {
+            syncRowElement(current, child);
+        }
+    });
+    while (target.childNodes.length > children.length) target.lastChild.remove();
 }
 
 function renderAgendaHeader(varianceMode) {
@@ -656,6 +689,7 @@ function createAgendaRow(item, index, varianceMode, varianceRow) {
  * @param {Object} item - Item data
  */
 function setupRowEventListeners(row, item) {
+    const currentItem = () => getState().items.find(entry => entry.id === item.id) || item;
     // Input changes with debouncing
     const debouncedUpdate = debounce((field, value) => {
         updateItem(item.id, { [field]: value });
@@ -663,13 +697,25 @@ function setupRowEventListeners(row, item) {
 
     row.querySelectorAll('input[type="text"]').forEach(input => {
         input.addEventListener('input', (e) => {
-            debouncedUpdate(e.target.dataset.field, e.target.value);
+            if (input.dataset.field !== 'duration') debouncedUpdate(e.target.dataset.field, e.target.value);
         });
 
         input.addEventListener('blur', (e) => {
             // Immediate update on blur
             debouncedUpdate.cancel();
+            if (input.dataset.field === 'duration') {
+                const minutes = parseDuration(input.value);
+                if (!Number.isFinite(minutes) || Math.round(minutes * 10) <= 0 || minutes > 525600) {
+                    showNotification('Enter a positive duration such as 5m, 2.5m, or 1h30m.', 'warning');
+                    input.value = currentItem().duration;
+                    return;
+                }
+                input.value = formatDuration(minutes);
+            }
             updateItem(item.id, { [e.target.dataset.field]: e.target.value });
+        });
+        input.addEventListener('keydown', event => {
+            if (event.key === 'Enter') input.blur();
         });
 
         // Scroll wheel for duration
@@ -685,8 +731,8 @@ function setupRowEventListeners(row, item) {
     if (colorButton) {
         colorButton.addEventListener('click', () => {
             openColorPicker({
-                color: getItemColor(item),
-                itemName: item.name,
+                color: getItemColor(currentItem()),
+                itemName: currentItem().name,
                 trigger: colorButton,
                 onApply: selectedColor => {
                     updateItem(item.id, parseItemColor(selectedColor));
@@ -743,7 +789,7 @@ function setupRowEventListeners(row, item) {
                     document.querySelector(`.staging-item[data-id="${CSS.escape(item.id)}"] [data-action="return"]`)?.focus({ preventScroll: true });
                 });
             } else if (action === 'notes') {
-                openNotesModal(item, btn);
+                openNotesModal(currentItem(), btn);
             }
         });
     });
@@ -819,7 +865,9 @@ function openIntervalTimeEditor(button) {
 
     const commit = () => {
         const nextValue = input.value || currentValue;
-        const parsed = parseTime(nextValue);
+        const parsed = new Date(position === 'end' ? interval.endTime : interval.startTime);
+        const [hours, minutes] = nextValue.split(':').map(Number);
+        parsed.setHours(hours, minutes, 0, 0);
         if (parsed && !Number.isNaN(parsed.getTime())) {
             updateIntervalTime(index, position, parsed);
         }
@@ -862,6 +910,7 @@ function adjustIntervalTimeByDelta(button, deltaMinutes) {
  * @param {number} deltaMinutes - Minutes to add/subtract
  */
 function adjustDuration(item, deltaMinutes) {
+    item = getState().items.find(entry => entry.id === item.id) || item;
     const minutes = parseDuration(item.duration || '10m');
 
     // Calculate new minutes

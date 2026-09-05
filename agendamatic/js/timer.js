@@ -320,6 +320,15 @@ export function startTimer() {
         : (syncInitialStart ? new Date(now) : (items[activeItemIndex]?.startTime || scheduledStartAt));
     if (Number.isNaN(activeStartedAt.getTime())) activeStartedAt = items[activeItemIndex]?.startTime || scheduledStartAt;
     let accumulatedPauseMs = Number(state.tracker.accumulatedPauseMs) || 0;
+    const completedIntervalsById = { ...state.tracker.completedIntervalsById };
+    // Older saved runs have no records; preserve their current completed intervals before shifting anchors.
+    items.slice(0, activeItemIndex).forEach(item => {
+        if (!completedIntervalsById[item.id]) completedIntervalsById[item.id] = {
+            startTime: item.startTime.toISOString(),
+            endTime: item.endTime.toISOString(),
+            durationMinutes: parseDuration(item.duration)
+        };
+    });
     if (hasStartedBefore && state.tracker.pausedAt) {
         const pausedAt = new Date(state.tracker.pausedAt);
         if (!Number.isNaN(pausedAt.getTime())) {
@@ -342,6 +351,8 @@ export function startTimer() {
         activeItemIndex: Math.max(0, activeItemIndex),
         activeItemId: state.items[activeItemIndex]?.id || null,
         activeStartedAt: activeStartedAt.toISOString(),
+        activeWallStartedAt: state.tracker.activeWallStartedAt || activeStartedAt.toISOString(),
+        completedIntervalsById,
         completedAt: null,
         completedDiffById: hasStartedBefore ? (state.tracker.completedDiffById || {}) : {},
         overallDeltaMinutes: hasStartedBefore ? (state.tracker.overallDeltaMinutes || 0) : 0

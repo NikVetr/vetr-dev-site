@@ -478,6 +478,10 @@ test('focused agenda fields retain native text undo', async ({ page }) => {
     await name.press('End');
     await name.pressSequentially(' changed');
     await expect(name).toHaveValue(original + ' changed');
+    await expect.poll(() => page.evaluate(async () => {
+        const { getState } = await import('/agendamatic/js/state.js');
+        return getState().items[0].name;
+    })).toBe(original + ' changed');
     await name.press(process.platform === 'darwin' ? 'Meta+z' : 'Control+z');
     await expect(name).toHaveValue(original);
 

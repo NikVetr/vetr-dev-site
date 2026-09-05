@@ -70,7 +70,7 @@ function setupDropEvents() {
         if (afterElement) {
             targetIndex = parseInt(afterElement.dataset.index || '0', 10);
         } else {
-            targetIndex = cards.length;
+            targetIndex = container.querySelectorAll('.staging-item').length;
         }
 
         if (source === 'agenda') {

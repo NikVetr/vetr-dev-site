@@ -353,6 +353,8 @@ const DEFAULT_STATE = {
         activeItemIndex: 0,
         activeItemId: null,
         activeStartedAt: null,
+        activeWallStartedAt: null,
+        completedIntervalsById: {},
         completedAt: null,
         completedDiffById: {},
         overallDeltaMinutes: 0,
@@ -718,6 +720,15 @@ function normalizeTracker(tracker, items, settings) {
         : null;
     const expectedSnapshot = normalizeExpectedSnapshot(normalized.expectedSnapshot, scheduledStart, settings);
     const varianceMode = !!expectedSnapshot && normalizeBoolean(normalized.varianceMode, false);
+    const completedIntervalsById = Object.fromEntries(Object.entries(normalized.completedIntervalsById || {})
+        .flatMap(([id, record]) => {
+            const start = validDate(record?.startTime);
+            const end = validDate(record?.endTime);
+            const duration = Number(record?.durationMinutes);
+            return start && end && end >= start && Number.isFinite(duration) && duration >= 0
+                ? [[id, { startTime: start.toISOString(), endTime: end.toISOString(), durationMinutes: duration }]]
+                : [];
+        }));
 
     return {
         ...normalized,
@@ -731,6 +742,10 @@ function normalizeTracker(tracker, items, settings) {
         activeItemIndex,
         activeItemId,
         activeStartedAt: activeStartedAt?.toISOString() || null,
+        activeWallStartedAt: startedAt
+            ? (validDate(normalized.activeWallStartedAt) || activeStartedAt)?.toISOString() || null
+            : null,
+        completedIntervalsById,
         completedAt: completedAt?.toISOString() || null,
         completedDiffById: normalized.completedDiffById && typeof normalized.completedDiffById === 'object'
             ? normalized.completedDiffById
@@ -1033,6 +1048,7 @@ function transitionTrackerAfterActiveRemoval(items, removedItemId, removedIndex)
             activeItemIndex: removedIndex,
             activeItemId: nextItem.id,
             activeStartedAt: effectiveTime.toISOString(),
+            activeWallStartedAt: effectiveTime.toISOString(),
             completedAt: null
         };
     }
@@ -1297,7 +1313,7 @@ export function advanceToNextItem(currentTime = new Date()) {
     const activeStartedAt = validDate(tracker.activeStartedAt) || scheduledCurrent.startTime;
     const elapsedExact = Math.max(0, (currentTime - activeStartedAt) / 60000);
     if (items[currentIndex].locked && elapsedExact < originalDuration) return false;
-    const newCurrentDuration = Math.max(1, roundToTenth(elapsedExact));
+    const newCurrentDuration = roundToTenth(elapsedExact);
 
     const scheduledEnd = scheduledIntervals[scheduledIntervals.length - 1].endTime;
     const remainingTotal = Math.max(0, roundToTenth((scheduledEnd - currentTime) / 60000));
@@ -1312,7 +1328,7 @@ export function advanceToNextItem(currentTime = new Date()) {
     const updatedItems = items.map((item, index) => {
         if (index < currentIndex) return item;
         if (index === currentIndex) {
-            return { ...item, duration: formatDuration(newCurrentDuration) };
+            return { ...item, duration: formatDuration(Math.max(0.1, newCurrentDuration)) };
         }
         const futureIndex = index - currentIndex - 1;
         const nextDuration = newFutureDurations[futureIndex] ?? parseDuration(item.duration);
@@ -1343,6 +1359,15 @@ export function advanceToNextItem(currentTime = new Date()) {
         activeItemIndex: isFinalItem ? items.length : currentIndex + 1,
         activeItemId: nextItem?.id || null,
         activeStartedAt: nextActiveStart?.toISOString() || activeStartedAt.toISOString(),
+        activeWallStartedAt: nextActiveStart?.toISOString() || tracker.activeWallStartedAt,
+        completedIntervalsById: {
+            ...tracker.completedIntervalsById,
+            [items[currentIndex].id]: {
+                startTime: tracker.activeWallStartedAt || activeStartedAt.toISOString(),
+                endTime: currentTime.toISOString(),
+                durationMinutes: newCurrentDuration
+            }
+        },
         completedAt: isFinalItem ? currentTime.toISOString() : null,
         completedDiffById,
         overallDeltaMinutes,
@@ -1379,6 +1404,7 @@ export function retreatToPreviousItem() {
     const prevItem = items[prevIndex];
     const intervals = calculateIntervals();
     const completedAt = validDate(tracker.completedAt);
+    const previousRecord = tracker.completedIntervalsById?.[prevItem.id];
 
     setState({
         tracker: {
@@ -1387,7 +1413,10 @@ export function retreatToPreviousItem() {
             pausedAt: completedAt?.toISOString() || tracker.pausedAt,
             activeItemIndex: prevIndex,
             activeItemId: prevItem.id,
-            activeStartedAt: intervals[prevIndex]?.startTime?.toISOString() || tracker.activeStartedAt,
+            activeStartedAt: previousRecord
+                ? addMinutes(new Date(previousRecord.endTime), -previousRecord.durationMinutes).toISOString()
+                : intervals[prevIndex]?.startTime?.toISOString() || tracker.activeStartedAt,
+            activeWallStartedAt: previousRecord?.startTime || intervals[prevIndex]?.startTime?.toISOString(),
             completedAt: null
         }
     });
@@ -1517,7 +1546,7 @@ export function updateIntervalTime(index, position, targetTime) {
  */
 export function calculateIntervals() {
     const { items, settings, tracker } = currentState;
-    return calculateIntervalsFromPlan(
+    const intervals = calculateIntervalsFromPlan(
         items,
         settings.startTime,
         settings.buffer || 0,
@@ -1525,6 +1554,16 @@ export function calculateIntervals() {
             ? planStartFromActiveAnchor(items, tracker, settings.buffer)
             : null
     );
+    return intervals.map((item, index) => {
+        const recorded = tracker?.completedIntervalsById?.[item.id];
+        if (recorded && (tracker.completedAt || index < tracker.activeItemIndex)) {
+            return { ...item, startTime: new Date(recorded.startTime), endTime: new Date(recorded.endTime), adjustedDuration: recorded.durationMinutes };
+        }
+        if (tracker?.startedAt && !tracker.completedAt && item.id === tracker.activeItemId && tracker.activeWallStartedAt) {
+            return { ...item, startTime: new Date(tracker.activeWallStartedAt) };
+        }
+        return item;
+    });
 }
 
 /**
@@ -1550,7 +1589,7 @@ export function getExpectedVsActualData() {
 
     const rows = actualIntervals.map(actual => {
         const expected = expectedById.get(actual.id) || null;
-        const actualDurationMinutes = parseDuration(actual.duration || '1m');
+        const actualDurationMinutes = actual.adjustedDuration ?? parseDuration(actual.duration || '1m');
         const expectedDurationMinutes = expected ? parseDuration(expected.duration || '1m') : null;
         const durationDifferenceMinutes = expectedDurationMinutes === null
             ? null
@@ -1583,7 +1622,7 @@ function scaleDurationsToTarget(items, targetTotal) {
 
     const durations = items.map(item => parseDuration(item.duration));
     const locked = items.map(item => item.locked);
-    const minDurations = durations.map((duration, idx) => (locked[idx] ? duration : 1));
+    const minDurations = durations.map((duration, idx) => (locked[idx] ? duration : Math.min(1, duration)));
 
     const totalDuration = durations.reduce((sum, duration) => sum + duration, 0);
     const lockedTotal = durations.reduce((sum, duration, idx) => {
@@ -1597,14 +1636,14 @@ function scaleDurationsToTarget(items, targetTotal) {
         const scale = unlockedTotal > 0 ? availableForUnlocked / unlockedTotal : 1;
         newDurations = durations.map((duration, idx) => {
             if (locked[idx]) return duration;
-            return Math.max(1, roundToTenth(duration * scale));
+            return Math.max(minDurations[idx], roundToTenth(duration * scale));
         });
     } else {
         const availableForUnlocked = Math.max(0, targetTotal - lockedTotal);
         const scale = unlockedTotal > 0 ? availableForUnlocked / unlockedTotal : 0;
         newDurations = durations.map((duration, idx) => {
             if (locked[idx]) return duration;
-            return Math.max(1, roundToTenth(duration * scale));
+            return Math.max(minDurations[idx], roundToTenth(duration * scale));
         });
     }
 
@@ -1655,9 +1694,10 @@ function scaleLiveFutureDurations(items, targetTotal) {
         .map((item, index) => ({ item, index }))
         .filter(entry => !entry.item.locked)
         .map(entry => entry.index);
-    const minimumTotal = lockedTotal + unlockedIndexes.length;
+    const minimums = durations.map(duration => Math.min(1, duration));
+    const minimumTotal = lockedTotal + unlockedIndexes.reduce((sum, index) => sum + minimums[index], 0);
     if (targetTotal <= minimumTotal) {
-        return durations.map((duration, index) => items[index].locked ? duration : 1);
+        return durations.map((duration, index) => items[index].locked ? duration : minimums[index]);
     }
 
     const availableExtra = targetTotal - minimumTotal;
@@ -1669,7 +1709,7 @@ function scaleLiveFutureDurations(items, targetTotal) {
     return durations.map((duration, index) => {
         if (items[index].locked) return duration;
         const weight = Math.max(0, duration - 1);
-        return 1 + availableExtra * (weight / totalExtraWeight);
+        return minimums[index] + availableExtra * (weight / totalExtraWeight);
     });
 }
 
@@ -1754,8 +1794,11 @@ export function calculateAdjustedIntervals(currentTime = new Date()) {
             duration = liveFutureDurations[index - currentItemIndex - 1];
         }
 
-        const itemStart = new Date(runningTime);
-        const itemEnd = addMinutes(runningTime, duration);
+        const itemStart = index <= currentItemIndex ? scheduledItems[index].startTime : new Date(runningTime);
+        const itemEnd = index < currentItemIndex
+            ? scheduledItems[index].endTime
+            : addMinutes(index === currentItemIndex ? currentScheduledStart : runningTime, duration);
+        if (index < currentItemIndex) duration = scheduledItems[index].adjustedDuration ?? duration;
         runningTime = addMinutes(itemEnd, index < items.length - 1 ? buffer : 0);
 
         return {
