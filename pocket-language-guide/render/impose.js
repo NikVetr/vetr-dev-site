@@ -8,6 +8,11 @@
 // double-sided cards, not eight cards. Which half backs which depends on the axis
 // the printer flips about, and getting it wrong is only discovered after cutting,
 // so both orders are offered and the studio can overlay them for checking.
+//
+// A fold is the same paper finished differently: rather than cutting a face into two
+// cards, four half-pages become one four-panel card hinged at the middle. It reuses
+// the split's own guarantee -- that a column never straddles the midline -- and
+// differs only in where on the sheet each half-page is printed.
 
 /** @typedef {import('../core/types.js').LayoutPlan} LayoutPlan */
 /** @typedef {import('../core/types.js').Face} Face */
@@ -56,6 +61,94 @@ export function splitCards(plan, opts = {}) {
   }
 
   return { ...plan, pageW: halfW, faces: sides };
+}
+
+/**
+ * Impose the sheet as folded cards instead of cut ones.
+ *
+ * **The same paper, finished differently.** A cut turns one 7x5 face into two
+ * independent 3.5x5 card sides; a fold turns *four* of those halves into one 3.5x5
+ * card with four panels, hinged at the middle. Nothing about the layout changes --
+ * both operations work on the same solved plan, and both rely on the same fact that
+ * makes the cut safe, which is that a column never straddles the midline. So each
+ * half of a face is already a valid 2-column page and the only question is where on
+ * the paper each one goes.
+ *
+ * The answer is the printer's own 4-page imposition and it is not the reading order:
+ * the front of the paper carries pages **4 and 1**, and the back carries **2 and 3**.
+ * That is what puts the 1/2 leaf on top of the 4/3 leaf with page 1 facing out, so
+ * folding the left half behind the right gives a card whose spine is on the left and
+ * whose panels read 1, 2, 3, 4.
+ *
+ * `long-edge` takes the same arrangement and rotates the back of the sheet, exactly
+ * as `splitCards` does and for the same reason: the printer's flip axis differs from
+ * a book turn by 180 degrees, so pre-rotating cancels it. A 180-degree rotation of a
+ * whole sheet side also swaps its halves, which is precisely the other half of what
+ * the long-edge case needs -- so one `rotate` covers both and there is no second
+ * arrangement to get wrong.
+ *
+ * The page size does not change. A fold card comes off the printer as the sheet it
+ * was, which is the point.
+ *
+ * @param {LayoutPlan} plan
+ * @param {{flip?:FlipAxis}} [opts]
+ * @returns {LayoutPlan}
+ */
+export function foldCards(plan, opts = {}) {
+  const flip = opts.flip ?? 'short-edge';
+  if (plan.faces.length % 2 !== 0) {
+    throw new Error(`folding needs an even number of faces, got ${plan.faces.length}`);
+  }
+  const halfW = plan.pageW / 2;
+  // Every half-page in reading order. The column solver fills a face's columns left
+  // to right before moving to the next face, so this is the order a reader would
+  // meet them in.
+  const pages = plan.faces.flatMap(
+    (face) => [crop(face, 0, halfW), crop(face, halfW, halfW)],
+  );
+
+  /** @type {Face[]} */ const sheets = [];
+  for (let card = 0; card < pages.length; card += 4) {
+    const [p1, p2, p3, p4] = pages.slice(card, card + 4);
+    const marks = foldMarks(halfW, plan.pageH);
+    const front = join(p4, p1, halfW, marks);
+    const back = join(p2, p3, halfW, marks);
+    sheets.push(front);
+    sheets.push(flip === 'long-edge' ? { ...back, rotate: 180 } : back);
+  }
+
+  return { ...plan, faces: sheets };
+}
+
+/**
+ * Two half-pages side by side on one sheet.
+ * @param {Face} left @param {Face} right @param {number} dx
+ * @param {import('../core/types.js').Rect[]} extra
+ */
+function join(left, right, dx, extra) {
+  const shift = (/** @type {any} */ item) => ({ ...item, x: item.x + dx });
+  return {
+    rects: [...left.rects, ...right.rects.map(shift), ...extra],
+    runs: [...left.runs, ...right.runs.map(shift)],
+    icons: [...left.icons, ...right.icons.map(shift)],
+    hits: [...left.hits, ...right.hits.map(shift)],
+  };
+}
+
+/**
+ * Where to fold, marked at the two edges rather than down the middle.
+ *
+ * A line down the face would be printed on the finished card forever; a tick in the
+ * top and bottom margin is enough to align a fold against and disappears into the
+ * crease. Same hairline as `trimMarks`, for the same reason -- it has to survive a
+ * 300dpi inkjet without being a feature.
+ * @param {number} x @param {number} pageH
+ */
+function foldMarks(x, pageH, len = 4, thickness = 0.25, fill = '#000000') {
+  return [
+    { x: x - thickness / 2, y: 0, w: thickness, h: len, fill },
+    { x: x - thickness / 2, y: pageH - len, w: thickness, h: len, fill },
+  ];
 }
 
 /**

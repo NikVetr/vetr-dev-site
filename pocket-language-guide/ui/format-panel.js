@@ -12,7 +12,7 @@ import { ARRANGEMENTS, arrangementShape } from '../core/solve/arrange.js';
 import { flagEmoji, flagsSupported } from './flags.js';
 import {
   pageGlyph, facesGlyph, paddingGlyph, PADDING_CHOICES, inkGlyph,
-  itemGlyph, cutGlyph, priorityOptions,
+  itemGlyph, finishGlyph, flipGlyph, priorityOptions,
   customGlyph, numericChoice, fieldGlyph, toggles, cardSizeControl, paletteControl,
   redrawGlyphs, relabelGlyphs, reserveControl, phoneControl, splitGlyph, headGlyph,
   typeGlyph, typefaceGlyph, dpiGlyph, segmented, panelField, backgroundControl,
@@ -62,8 +62,23 @@ const INK_CHOICES = /** @type {const} */ ([
   { value: 'low-ink', captionKey: 'format.ink.lowInk' },
   { value: 'mono', captionKey: 'format.ink.mono' },
 ]);
-const CUT_CHOICES = /** @type {const} */ ([
-  { value: '', captionKey: 'format.cut.whole' },
+/**
+ * What is done to the paper after it comes out of the printer.
+ *
+ * **Cutting and folding are the choice; the flip axis is not.** These were one
+ * three-way control -- whole, cut short-edge, cut long-edge -- which read as though
+ * the flip belonged to cutting. It does not: it is a fact about the reader's printer
+ * driver, and a folded card needs to know it for exactly the same reason a cut one
+ * does. Keeping them separate is what lets the fold arrive as one more finish rather
+ * than as two more entries in a list of five.
+ */
+const FINISH_CHOICES = /** @type {const} */ ([
+  { value: '', captionKey: 'format.finish.whole' },
+  { value: 'cut', captionKey: 'format.finish.cut' },
+  { value: 'fold', captionKey: 'format.finish.fold' },
+]);
+
+const FLIP_CHOICES = /** @type {const} */ ([
   { value: 'short-edge', captionKey: 'format.cut.shortEdge' },
   { value: 'long-edge', captionKey: 'format.cut.longEdge' },
 ]);
@@ -126,8 +141,13 @@ function fieldLabels(spec, corpus) {
   };
 }
 
-const CUT_NOTE_KEYS = {
+const FINISH_NOTE_KEYS = {
   '': 'cut.hint.whole',
+  cut: 'cut.hint.cut',
+  fold: 'cut.hint.fold',
+};
+
+const FLIP_NOTE_KEYS = {
   'short-edge': 'cut.hint.shortEdge',
   'long-edge': 'cut.hint.longEdge',
 };
@@ -218,7 +238,8 @@ function sampleValues(targetRows, sourceRows, respell, spec) {
  * @property {Record<string,string>[]} languages
  * @property {Record<string,any>} themes            id -> theme, for palette swatches
  * @property {(patch:Partial<import('../core/types.js').SheetSpec>)=>void} onChange
- * @property {(flip:''|'short-edge'|'long-edge')=>void} onCutChange
+ * @property {(finish:''|'cut'|'fold')=>void} onFinishChange  redraw: with a cut or a
+ *   fold selected the canvas shows the imposed sheet rather than a single face
  * @property {(dpi:number)=>void} onDpiChange
  */
 
@@ -244,7 +265,8 @@ function flagColoursFor(corpus, target) {
 export function createFormatPanel(input) {
   const { root, presets, corpus, languages, themes } = input;
   let spec = input.spec;
-  let cut = /** @type {''|'short-edge'|'long-edge'} */ ('');
+  let finish = /** @type {''|'cut'|'fold'} */ ('');
+  let flip = /** @type {'short-edge'|'long-edge'} */ ('short-edge');
 
   /** Which geometry preset the current page size corresponds to, if any. */
   const presetOf = () => Object.entries(presets.geometry).find(
@@ -469,23 +491,43 @@ export function createFormatPanel(input) {
 
   // --- cutting ------------------------------------------------------------
 
-  const cutNote = el('p', { class: 'small muted panel-note', text: t(CUT_NOTE_KEYS['']) });
-  const cutControl = segmented({
-    label: t('format.cutIntoCards'),
-    value: cut,
-    options: CUT_CHOICES.map((choice) => ({
+  const finishNote = el('p', { class: 'small muted panel-note', text: t(FINISH_NOTE_KEYS['']) });
+  const flipNote = el('p', { class: 'small muted panel-note', text: t(FLIP_NOTE_KEYS[flip]) });
+  const flipControl = segmented({
+    label: t('format.printerFlip'),
+    value: flip,
+    options: FLIP_CHOICES.map((choice) => ({
       value: choice.value,
       caption: t(choice.captionKey),
       title: t(choice.captionKey),
-      glyph: cutGlyph(choice.value),
+      glyph: flipGlyph(choice.value),
     })),
     onChange: (value) => {
-      cut = value;
-      cutNote.textContent = t(CUT_NOTE_KEYS[value]);
-      input.onCutChange(value);
+      flip = value;
+      flipNote.textContent = t(FLIP_NOTE_KEYS[value]);
+      input.onFinishChange(finish);
     },
   });
-  const cutField = panelField(t('format.cutIntoCards'), [cutControl.group, cutNote]);
+  const flipField = panelField(t('format.printerFlip'), [flipControl.group, flipNote]);
+  const finishControl = segmented({
+    label: t('format.finish'),
+    value: finish,
+    options: FINISH_CHOICES.map((choice) => ({
+      value: choice.value,
+      caption: t(choice.captionKey),
+      title: t(choice.captionKey),
+      glyph: finishGlyph(choice.value),
+    })),
+    onChange: (value) => {
+      finish = value;
+      finishNote.textContent = t(FINISH_NOTE_KEYS[value]);
+      // The axis only means something once the paper is being cut or folded.
+      flipField.hidden = !value;
+      input.onFinishChange(value);
+    },
+  });
+  const cutField = panelField(t('format.finish'), [finishControl.group, finishNote]);
+  flipField.hidden = true;
 
   // The mirror image of the cut control: meaningless off a screen, where the cut is
   // meaningless on one. A phone's operating system draws its clock over the top of
@@ -509,23 +551,24 @@ export function createFormatPanel(input) {
    * `cut()` is already empty by the time anything asks.
    * @param {number} faceCount  as resolved, since auto is what usually decides it
    */
-  const setCuttable = (faceCount) => {
+  const setFinishable = (faceCount) => {
     // From the geometry itself, not from which preset it still matches, which is
     // how `ui/sheet-options.js` has always read it. `cardSizeControl` carries
     // `screen` through a custom size, so adjusting the phone card's dimensions by
     // a few points kept the flag and lost the control that depends on it -- the
     // clock band vanished from the one aspect ratio it exists for.
     const screen = Boolean(spec.geometry.screen);
-    const cuttable = !screen && faceCount % 2 === 0;
-    cutField.hidden = !cuttable;
+    const finishable = !screen && faceCount % 2 === 0;
+    cutField.hidden = !finishable;
+    flipField.hidden = !finishable || !finish;
     reserveField.hidden = !screen;
     phoneField.hidden = !screen;
-    if (cuttable || !cut) return;
-    cut = '';
-    cutControl.select('');
-    cutNote.textContent = t(CUT_NOTE_KEYS['']);
+    if (finishable || !finish) return;
+    finish = '';
+    finishControl.select('');
+    finishNote.textContent = t(FINISH_NOTE_KEYS['']);
   };
-  setCuttable(spec.geometry.faces);
+  setFinishable(spec.geometry.faces);
 
   // --- the list-shaped choices -------------------------------------------
 
@@ -647,6 +690,7 @@ export function createFormatPanel(input) {
       [background.group, background.custom, background.rowsField]),
     panelField(t('format.ink'), [ink.group]),
     cutField,
+    flipField,
     reserveField,
     panelField(t('format.pngResolution'), [dpi.group]),
     panelField(t('format.columnsShown'), [fieldSet.group]),
@@ -678,7 +722,7 @@ export function createFormatPanel(input) {
       columns.select(next.geometry.columns);
       faces.select(next.autoFaces ? 0 : next.geometry.faces);
       priority.select(next.priority);
-      setCuttable(resolvedFaces ?? next.geometry.faces);
+      setFinishable(resolvedFaces ?? next.geometry.faces);
       // Auto is only useful if it says what it decided.
       if (autoFacesCaption) {
         autoFacesCaption.textContent = next.autoFaces && resolvedFaces
@@ -712,7 +756,8 @@ export function createFormatPanel(input) {
       relabelGlyphs(fieldSet.group, fieldCaptions(next));
       redrawGlyphs(ink.group, INK_CHOICES.map((c) => inkGlyph(c.value, theme.colours())));
     },
-    cut: () => cut,
+    /** What to do with the paper, and which way the printer turns it over. */
+    finish: () => ({ mode: finish, flip }),
   };
 }
 

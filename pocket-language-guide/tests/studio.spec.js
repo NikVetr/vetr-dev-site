@@ -177,23 +177,68 @@ test.describe('studio', () => {
     await page.locator('#pdf').click();
     expect((await sheet).suggestedFilename()).toBe('chinese-simplified-pocket-guide.pdf');
 
-    await page.getByRole('radio', { name: 'Short edge' }).click();
-    await expect(page.locator('.panel-note')).toContainText('four double-sided cards');
+    await page.getByRole('radio', { name: 'Cut', exact: true }).click();
+    await expect(page.locator('.panel-note').filter({ hasText: 'down the middle' }))
+      .toContainText('four double-sided cards');
     const cards = page.waitForEvent('download');
     await page.locator('#pdf').click();
     expect((await cards).suggestedFilename()).toBe('chinese-simplified-pocket-guide-cards.pdf');
   });
 
+  test('finishing and the printer flip are two settings, and folding is one of them',
+    async ({ page }) => {
+      await page.goto(STUDIO);
+      await expect(page.locator('.face.focused')).toBeVisible();
+      const finish = page.locator('.panel-field').filter({ hasText: 'Finishing' }).first();
+      const flip = page.locator('.panel-field').filter({ hasText: 'Printer flip' }).first();
+
+      // **The axis is meaningless until there is something to cut or fold**, so it is
+      // not offered until then. It used to be folded into the finish control as
+      // "cut short-edge" / "cut long-edge", which read as though the flip belonged to
+      // cutting rather than to the reader's printer -- and left nowhere to say it for
+      // a fold.
+      await expect(finish).toBeVisible();
+      await expect(flip).toBeHidden();
+
+      await page.getByRole('radio', { name: 'Fold', exact: true }).click();
+      await expect(flip).toBeVisible();
+      await expect(page.locator('.panel-note').filter({ hasText: 'read 1-2-3-4' }))
+        .toBeVisible();
+
+      // A fold keeps the sheet whole, so the canvas shows the same number of pages
+      // rather than twice as many -- and says which page is where, because they are
+      // deliberately out of reading order. No duplex overlay: it pairs each face with
+      // the next, which is a card's two sides after a cut but one sheet's two sides
+      // after a fold, so overlaying them would claim a pairing the printer will not
+      // make.
+      await expect(page.locator('#face-area .small.muted').first())
+        .toContainText('pages 4 and 1 on the front');
+      await expect(page.locator('#face-area .duplex')).toHaveCount(0);
+
+      const folded = page.waitForEvent('download');
+      await page.locator('#pdf').click();
+      expect((await folded).suggestedFilename())
+        .toBe('chinese-simplified-pocket-guide-fold.pdf');
+
+      // And the axis survives switching finish, since it describes the printer and
+      // not the operation.
+      await page.getByRole('radio', { name: 'Long edge' }).click();
+      await page.getByRole('radio', { name: 'Cut', exact: true }).click();
+      await expect(flip).toBeVisible();
+      await expect(page.getByRole('radio', { name: 'Long edge' })).toBeChecked();
+    });
+
   test('the phone card and the top priority step make one face, with nothing to cut', async ({ page }) => {
     await page.goto(STUDIO);
     await expect(page.locator('.face.focused')).toBeVisible();
-    // Paper has a back, so the cut control is there to begin with.
-    await expect(page.locator('.panel-field').filter({ hasText: 'Cut into cards' })).toBeVisible();
+    // Paper has a back, so the finishing control is there to begin with.
+    const finish = page.locator('.panel-field').filter({ hasText: 'Finishing' }).first();
+    await expect(finish).toBeVisible();
 
     await page.getByRole('radio', { name: 'Phone screen' }).click();
-    // A screen is not cut and has no back: the whole field goes, rather than
-    // offering an operation with no meaning.
-    await expect(page.locator('.panel-field').filter({ hasText: 'Cut into cards' })).toBeHidden();
+    // A screen is neither cut nor folded and has no back: the whole field goes,
+    // rather than offering an operation with no meaning.
+    await expect(finish).toBeHidden();
 
     // The whole corpus needs many wallpapers; the top priority step needs one.
     await expect(page.locator('#status')).toHaveText(/\d+ faces at/, { timeout: 120_000 });
@@ -603,8 +648,17 @@ test('the paper takes a colour of its own, and low ink takes it away', async ({ 
 
   // `tint` is one flat rect and is taken literally -- the swatch *is* the paper
   // colour, not a colour to dilute, which is what the first version got wrong.
+  //
+  // Counted as page-sized rects rather than as all of them, because turning any wash
+  // on also draws the light half of the row alternation: an unpainted row would show
+  // the wash through and the two-colour banding would stop reading. So the total
+  // grows by the wash plus one rect per light row, and what this asserts is that the
+  // *wash* is a single rect rather than a grid.
+  const pageRects = () => page.locator('.face.focused svg rect')
+    .evaluateAll((nodes) => nodes.filter((n) => Number(n.getAttribute('width')) > 400).length);
+  const plainPage = await pageRects();
   await page.getByRole('radio', { name: 'Tint', exact: true }).click();
-  await expect.poll(rects).toBe(plain + 1);
+  await expect.poll(pageRects).toBe(plainPage + 1);
   const swatch = page.locator('input[type="color"]:visible').last();
   await expect(swatch).toBeVisible();
   const chosen = (await swatch.inputValue()).toUpperCase();

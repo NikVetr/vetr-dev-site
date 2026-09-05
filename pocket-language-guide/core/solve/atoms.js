@@ -414,26 +414,50 @@ function itemAtoms(ctx, block, rows, withPaint) {
 
     /** @type {Rect[]} */ const rects = [];
     /** @type {TextRun[]} */ const runs = [];
-    // **A row's own box, and only when it is one.** An unshaded row used to draw a
-    // paper-coloured rect, which is invisible on white paper and, once the page has a
-    // background, is the one thing standing between the wash and the reader: it
-    // painted paper straight over it.
+    // **Both halves of the alternation are painted, not just the dark one.**
     //
-    // `rowShading` is how much of the shade colour there is, 0 to 1. It is a
-    // continuous value rather than three named modes because the useful settings are
-    // the ones in between: the reference card's own shading at 1, a hint of it over a
-    // flag wash at 0.3, nothing at 0.
-    const shaded = template.shadeAlternate && (startRow + i) % 2 === 1;
+    // `rowShading` is how opaque the row boxes are, 0 to 1 -- continuous rather than
+    // three named modes because the useful settings are the ones in between: the
+    // reference card's own shading at 1, a hint of it over a flag wash at 0.3,
+    // nothing at 0.
+    //
+    // What it fades is a *pair* of rects, and that is a reversal. The shade was once
+    // the only row background: an unpainted row was white, which was correct while
+    // the paper always was. When the wash arrived, the light row's paper-coloured
+    // rect looked like the one thing standing between the wash and the reader and was
+    // dropped for that reason. That was the wrong reading of what the alternation is
+    // for. With only the dark half painted, the light row is not white -- it is
+    // whatever the wash happens to be under it, which on a `sections` gradient is a
+    // different colour in every column, so the banding stops reading as two colours
+    // at all and the slider appears to affect only the grey. Painting both means the
+    // rows are white and grey *on* the card at 1, and gone at 0 with the card showing
+    // through: the slider says how much of the card you see, which is what it looks
+    // like it should say.
+    //
+    // Only when there is something to show through. On white paper the light rect is
+    // invisible and it is one rect per row -- about 600 a sheet, which is real against
+    // a face that compresses to 13KB.
+    const alternating = template.shadeAlternate;
     const alpha = ctx.spec.background?.rowShading ?? 1;
-    if (shaded && alpha > 0) {
-      rects.push({
-        x: 0,
-        y: 0,
-        w: ctx.colWidth,
-        h: height,
-        fill: ctx.palette.shade,
-        ...(alpha < 1 ? { opacity: alpha } : {}),
-      });
+    // The same condition `background.js` uses, because it is the same fact: a wash is
+    // suppressed outside full ink, so outside full ink there is nothing for the light
+    // rect to show against -- and `palette.shade` has already collapsed to the paper
+    // colour there, which would have painted both halves the same.
+    const washed = (ctx.spec.background?.mode ?? 'none') !== 'none'
+      && ctx.spec.inkMode === 'full';
+    if (alternating && alpha > 0) {
+      const shaded = (startRow + i) % 2 === 1;
+      const fill = shaded ? ctx.palette.shade : ctx.palette.paper;
+      if (shaded || washed) {
+        rects.push({
+          x: 0,
+          y: 0,
+          w: ctx.colWidth,
+          h: height,
+          fill,
+          ...(alpha < 1 ? { opacity: alpha } : {}),
+        });
+      }
     }
     rects.push({ x: 0, y: 0, w: template.accentPt, h: height, fill: ctx.palette.roles[block.colorRole] });
     rects.push({ x: 0, y: height - template.rulePt, w: ctx.colWidth, h: template.rulePt, fill: ctx.palette.rule });

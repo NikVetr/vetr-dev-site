@@ -390,28 +390,39 @@ export function dpiGlyph(dpi) {
   return svg;
 }
 
-/** A sheet whole, or cut down the middle with the back's orientation shown.
- * @param {''|'short-edge'|'long-edge'} flip */
-export function cutGlyph(flip) {
+/** A sheet left whole, cut down the middle, or folded there.
+ * @param {''|'cut'|'fold'} finish */
+export function finishGlyph(finish) {
   const box = 30;
   const svg = frame(box, box);
   svg.append(svgEl('rect', { x: 2, y: 8, width: 26, height: 15, rx: 1.5, class: 'g-page' }));
-  if (!flip) {
-    for (let i = 0; i < 4; i += 1) {
-      svg.append(svgEl('rect', { x: 4 + i * 6.2, y: 10, width: 4.6, height: 11, class: 'g-col' }));
-    }
-    return svg;
-  }
   for (let i = 0; i < 4; i += 1) {
     svg.append(svgEl('rect', { x: 4 + i * 6.2, y: 10, width: 4.6, height: 11, class: 'g-col' }));
   }
-  svg.append(svgEl('path', { d: `M15 5V26`, class: 'g-cut' }));
-  // Which way the back comes out: an upright mark, or an inverted one.
-  const mark = svgEl('path', {
+  // A cut runs clear through the sheet; a fold is the same line marked only at the
+  // edges, which is also exactly where `foldMarks` prints it. The two glyphs differ
+  // the way the operations do.
+  if (finish === 'cut') svg.append(svgEl('path', { d: 'M15 5V26', class: 'g-cut' }));
+  if (finish === 'fold') {
+    svg.append(svgEl('path', { d: 'M15 5V9', class: 'g-cut' }));
+    svg.append(svgEl('path', { d: 'M15 22V26', class: 'g-cut' }));
+  }
+  return svg;
+}
+
+/** Which way the back of the sheet comes out: upright, or inverted.
+ * @param {'short-edge'|'long-edge'} flip */
+export function flipGlyph(flip) {
+  const box = 30;
+  const svg = frame(box, box);
+  svg.append(svgEl('rect', { x: 2, y: 8, width: 26, height: 15, rx: 1.5, class: 'g-page' }));
+  for (let i = 0; i < 4; i += 1) {
+    svg.append(svgEl('rect', { x: 4 + i * 6.2, y: 10, width: 4.6, height: 11, class: 'g-col' }));
+  }
+  svg.append(svgEl('path', {
     d: flip === 'long-edge' ? 'M20.5 19 L23.5 19 L22 15.5 Z' : 'M20.5 12 L23.5 12 L22 15.5 Z',
     class: 'g-mark',
-  });
-  svg.append(mark);
+  }));
   return svg;
 }
 

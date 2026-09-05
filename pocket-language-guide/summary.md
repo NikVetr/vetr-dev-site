@@ -645,13 +645,26 @@ gaps.
 it: the reference card is white, a wash costs ink on a sheet someone prints at home,
 and `low-ink` and `mono` drop it outright the way they drop row shading.
 
-An item's own box is the other half of it, and `background.rows` says what it does:
-`shade` alternates as the reference card does, `soft` lets the wash through, `none`
-drops the boxes. An *unshaded* row used to draw a paper-coloured rect, which is
-invisible on white paper and, once the page has a background, is the one thing
-standing between the wash and the reader -- it painted paper straight over it. Those
-are gone. `soft` uses real alpha rather than pre-blending, because a `sections` or
-`flag` wash is a different colour under every row; both renderers take it natively.
+An item's own box is the other half of it, and `background.rowShading` says how
+opaque it is — 0 to 1, continuous rather than three named modes, because the useful
+settings are the ones in between: the reference card's own shading at 1, a hint of it
+over a flag wash at 0.3, nothing at 0. It uses real alpha rather than pre-blending,
+because a `sections` or `flag` wash is a different colour under every row, and both
+renderers take alpha natively.
+
+**What it fades is a pair of rects, and that is a reversal worth recording.** The
+shade was once the only row background: an unpainted row was white, which was right
+while the paper always was. When the wash arrived, the light row's paper-coloured
+rect looked like the one thing standing between the wash and the reader and was
+dropped for exactly that reason. That was the wrong reading of what the alternation
+is for. With only the dark half painted, the light row is not white — it is whatever
+the wash happens to be under it, which on a `sections` gradient is a different colour
+in every column, so the banding stops reading as two colours and the slider appears
+to move only the grey. Painting both means the rows are white and grey *on* the card
+at 1 and gone at 0 with the card showing through, so the slider says how much of the
+card you see. It is still skipped on white paper and outside full ink, where the light
+rect would be invisible and is one rect per row — about 600 a sheet, which is real
+against a face that compresses to 13KB.
 
 Four modes. `tint` is one flat rect and **takes its swatch literally** — the reader
 names the paper colour, so diluting it would make the picker lie about itself; the
@@ -921,11 +934,43 @@ printer flips about, and getting it wrong is only discovered after cutting, so
 both orders are offered. `long-edge` pre-rotates each back via a page-level
 rotation. `nUp` tiles faces onto Letter or A4 with trim marks.
 
+### Cut or folded, and why the flip axis is neither
+
+`foldCards` is the same paper finished differently. A cut turns one 7×5 face into two
+independent 3.5×5 card sides; a fold turns *four* of those halves into one 3.5×5 card
+with four panels, hinged at the middle. It reuses the cut's own guarantee — that a
+column never straddles the midline, so each half-face is already a valid two-column
+page — and differs only in where on the sheet each half-face is printed.
+
+**Where is the printers' 4-page imposition, and it is not the reading order.** The
+front of the paper carries pages **4 and 1** and the back carries **2 and 3**, which
+is what makes pages 1 and 2 the two faces of one leaf and 4 and 3 the two faces of the
+other. Impose them in reading order instead — 1 and 2 on the front, 3 and 4 on the
+back — and the folded card reads 1, 3, 4, 2. `tests/impose.test.mjs` asserts against
+exactly that mistake. `long-edge` needs no second arrangement: rotating a whole sheet
+side by 180° also swaps its halves, so the same `rotate` that cancels the printer's
+flip axis supplies the other half of what the long-edge case needs.
+
+**The flip axis became its own control, because it never belonged to cutting.** It was
+one three-way choice — whole, cut short-edge, cut long-edge — which read as though the
+axis were a property of the cut. It is a property of the reader's printer driver, and a
+folded card needs it for the same reason a cut one does. Splitting it is what let the
+fold arrive as one more finish rather than as two more entries in a list of five, and
+it means the axis survives switching between them.
+
 Choosing a cut turns the canvas into a **duplex check**: each card with its own
 back laid over it in red, its shading and rules dropped so the front stays
 readable. If the red words belong on the back of the black ones the flip setting
 matches the printer; if they are the same column twice, it does not. That is
 cheaper to learn there than after cutting.
+
+**A fold gets no overlay, and that is not an omission.** The overlay lays each face
+over the next, which is exactly right for a cut, where consecutive faces are one
+card's front and its back. A fold's consecutive faces are the two sides of *one
+sheet*, and under a short-edge flip the front's left half backs the back's *right*
+half — so overlaying them as they come would pair page 4 with page 2 and quietly claim
+that is what the printer will do. The canvas shows what will be printed and says which
+page is where; checking a fold is a matter of folding one.
 
 ## Build steps
 

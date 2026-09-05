@@ -11,7 +11,7 @@ import {
 import { buildSheet, stacksFor } from '../core/sheet.js';
 import { contentBox } from '../core/solve/index.js';
 import { proposeBalance } from '../core/solve/weights.js';
-import { splitCards } from '../render/impose.js';
+import { foldCards, splitCards } from '../render/impose.js';
 import { faceSvgs, exportPdf, exportPng, exportSvg, loadIcons } from './export.js';
 import { createFormatPanel } from './format-panel.js';
 import { createTree, revealItem } from './content-tree.js';
@@ -33,6 +33,21 @@ const SOLVE_DEBOUNCE_MS = 260;
 const THEME_IDS = ['latex-reference', 'cvd-safe'];
 
 const $ = (/** @type {string} */ id) => /** @type {HTMLElement} */ (document.getElementById(id));
+
+/**
+ * The plan as it will be printed, for whichever finish is chosen.
+ *
+ * Both the canvas preview and all three export paths need this and they must agree:
+ * a duplex overlay that showed a different imposition from the PDF would be worse
+ * than no overlay at all.
+ * @param {import('../core/types.js').LayoutPlan} plan
+ * @param {{mode:''|'cut'|'fold', flip:'short-edge'|'long-edge'}} finish
+ */
+function imposed(plan, finish) {
+  if (finish.mode === 'cut') return splitCards(plan, { flip: finish.flip });
+  if (finish.mode === 'fold') return foldCards(plan, { flip: finish.flip });
+  return plan;
+}
 
 async function main() {
   const { languages, coverage } = await loadLanguages();
@@ -109,7 +124,7 @@ async function main() {
       if (readerChanged) await retranslate();
       schedule();
     },
-    onCutChange: () => renderCanvas(),
+    onFinishChange: () => renderCanvas(),
     /** @param {number} dpi */
     onDpiChange: (dpi) => { pngDpi = dpi; },
   });
@@ -338,22 +353,37 @@ async function main() {
     detachHandles?.();
     detachHandles = null;
 
-    // With a cut selected, the canvas becomes a duplex check: what matters then is
-    // whether front and back pair up, not what a single face looks like.
-    const flip = format.cut();
-    if (flip && plan.faces.length) {
-      const cards = splitCards(plan, { flip });
+    // With a cut or a fold selected, the canvas shows the imposed sheet rather than a
+    // single face: what matters then is what goes on the paper.
+    //
+    // **Only a cut gets the duplex overlay, and that is not an omission.** The
+    // overlay lays each face over the next one, which is exactly right for a cut,
+    // where consecutive faces are one card's front and its back. A fold's
+    // consecutive faces are the two *sides of one sheet*, and under a short-edge
+    // flip the front's left half backs the back's *right* half -- so overlaying them
+    // as they come would pair page 4 with page 2 and quietly claim that is what the
+    // printer will do. Showing what will be printed, and saying why it is out of
+    // order, is the honest answer; checking a fold is a matter of folding one.
+    const finish = format.finish();
+    if (finish.mode && plan.faces.length) {
+      const cards = imposed(plan, finish);
       const sides = faceSvgs({ plan: cards, manifest, icons, stacks: [], name: 'x' });
       renderFaces({
         root: $('face-area'),
         plan: cards,
         svgs: sides,
         focused: null,
-        duplex: sides,
+        ...(finish.mode === 'cut' ? { duplex: sides } : {}),
         onFocus: () => {},
         onPick: () => {},
         onHover: () => {},
       });
+      // Say what the canvas has become. Without this the pages silently reorder,
+      // which for a fold is the correct output and looks like a fault.
+      const note = document.createElement('p');
+      note.className = 'small muted';
+      note.textContent = t(finish.mode === 'fold' ? 'studio.foldOrder' : 'studio.duplexChecking');
+      $('face-area').prepend(note);
       return;
     }
 
@@ -534,16 +564,15 @@ async function main() {
   const name = () => `${ctx.corpus.languages[spec.target].exonym_en
     .toLowerCase().replace(/\W+/g, '-').replace(/^-|-$/g, '')}-pocket-guide`;
 
-  /** Exporting cards is the same plan, cut in half and paired for duplexing. */
+  /** Exporting cards is the same plan, cut or folded and paired for duplexing. */
   const exportInput = () => {
     if (!plan) throw new Error('nothing solved yet');
-    const flip = format.cut();
-    const out = flip ? splitCards(plan, { flip }) : plan;
+    const finish = format.finish();
     return {
-      plan: out,
+      plan: imposed(plan, finish),
       manifest,
       icons,
-      name: flip ? `${name()}-cards` : name(),
+      name: finish.mode ? `${name()}-${finish.mode === 'fold' ? 'fold' : 'cards'}` : name(),
       stacks: stacksFor(ctx.corpus, spec.target, spec.source, spec.typeface),
     };
   };

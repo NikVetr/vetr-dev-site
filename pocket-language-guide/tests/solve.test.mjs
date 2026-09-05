@@ -841,3 +841,50 @@ test('the narrow face is a smaller sheet, not only a different one', async () =>
   assert.ok(![...stacks(cond.plan)].some((id) => String(id) === 'latin-400'),
     'and the Latin is the condensed face throughout');
 });
+
+test('both halves of the row alternation are painted, once the card is not white', async () => {
+  const base = await referenceSpec('zh-Hans', 'en');
+  /** Row-height rects in the shade and paper colours, across the whole sheet. */
+  const bands = async (/** @type {any} */ spec) => {
+    const { plan, theme } = await buildSheet(ctx, spec);
+    const shade = theme.colors.shade.toUpperCase();
+    const paper = theme.colors.paper.toUpperCase();
+    // Row bands only. A `note` block's own background is the same colour and the
+    // same width, and it is not part of the alternation -- it is one box behind one
+    // paragraph, and the slider has no business fading it. Its rounded corner is
+    // what tells them apart.
+    const wide = plan.faces.flatMap((f) => f.rects)
+      .filter((r) => r.w > plan.pageW / 8 && r.h > 2 && r.r === undefined);
+    return {
+      shaded: wide.filter((r) => (r.fill ?? '').toUpperCase() === shade).length,
+      light: wide.filter((r) => (r.fill ?? '').toUpperCase() === paper).length,
+    };
+  };
+
+  // On white paper the light row *is* the paper, so painting it would be one
+  // invisible rect per row -- about six hundred a sheet, which is real against a face
+  // that compresses to 13KB. Only the shade is drawn.
+  const plain = await bands(base);
+  assert.ok(plain.shaded > 20, `expected shaded rows, got ${plain.shaded}`);
+  assert.equal(plain.light, 0, 'nothing to show through, so nothing painted');
+
+  // With a wash the light row has to be drawn, or the alternation stops being two
+  // colours and becomes shade against whatever the gradient happens to be under that
+  // row -- a different colour in every column.
+  const washed = await bands({ ...base, background: { mode: 'sections', strength: 0.06 } });
+  assert.equal(washed.shaded, plain.shaded, 'the shaded rows are the same rows');
+  assert.ok(washed.light >= washed.shaded - 1,
+    `every other row should be paper-filled, got ${washed.light} against ${washed.shaded}`);
+
+  // And the slider fades the pair together rather than only the dark half.
+  const half = await bands({
+    ...base, background: { mode: 'sections', strength: 0.06, rowShading: 0.5 },
+  });
+  assert.equal(half.shaded, washed.shaded);
+  assert.equal(half.light, washed.light);
+  const off = await bands({
+    ...base, background: { mode: 'sections', strength: 0.06, rowShading: 0 },
+  });
+  assert.equal(off.shaded, 0, 'at zero the shading is gone');
+  assert.equal(off.light, 0, 'and so is the white behind it, or the card shows through one row in two');
+});

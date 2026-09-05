@@ -298,25 +298,30 @@ test('both carets are visible before hover and neither has a box', async ({ page
 });
 
 test('a sheet the reader has looked at is kept across visits', async ({ page }) => {
-  // The in-memory map only helped within one page. Pre-rendering all 272 pairs is
-  // the obvious alternative and is a quarter of a gigabyte of vector SVG; keeping
-  // what a reader has actually opened costs nothing until they open it.
+  // Only the *first* face is a shipped asset. Faces two onward are solved in the
+  // browser, and shipping them too would be 50MB gzipped across 420 pairs — so this
+  // cache is what stops a reader paying for the same solve on every visit.
   await page.goto('/');
+  const dialog = page.locator('dialog.lightbox');
   await page.locator('.card-thumb-button').first().click();
-  await expect(page.locator('.lightbox-face svg')).toBeVisible({ timeout: 90_000 });
+  // **The strip, not the face.** The face arrives pre-rendered and would be visible
+  // whether this cache worked or not, which made an earlier version of this test pass
+  // vacuously. The thumbnail strip is built from the whole sheet, so it is the only
+  // thing on screen that means the solve is done.
+  await expect(dialog.locator('.lightbox-thumb').first()).toBeVisible({ timeout: 180_000 });
   await expect.poll(() => page.evaluate(async () => {
     const c = await caches.open('plg-sheets');
     return (await c.keys()).length;
-  }), { timeout: 30_000 }).toBeGreaterThan(0);
+  }), { timeout: 60_000 }).toBeGreaterThan(0);
 
   // A fresh page finds it, and finds it fast.
   await page.reload();
   await expect(page.locator('.card').first()).toBeVisible();
   const t0 = Date.now();
   await page.locator('.card-thumb-button').first().click();
-  await expect(page.locator('.lightbox-face svg')).toBeVisible({ timeout: 90_000 });
+  await expect(dialog.locator('.lightbox-thumb').first()).toBeVisible({ timeout: 90_000 });
   const took = Date.now() - t0;
-  expect(took, `a kept sheet should open without solving, took ${took}ms`).toBeLessThan(700);
+  expect(took, `a kept sheet should open without solving, took ${took}ms`).toBeLessThan(1500);
 
   // And the key carries the shell's content hash, so an engine change invalidates.
   const keys = await page.evaluate(async () => {
