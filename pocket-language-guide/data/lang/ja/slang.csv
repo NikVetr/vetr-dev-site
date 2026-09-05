@@ -1,0 +1,15 @@
+concept_id,text,text_alt,romanization_hepburn,ipa,literal,confidence,provenance
+slang.thats-good,いいね,,ii ne,iː ne,,1,slang-agent-v1;ipa=hepburn
+slang.thats-great,すごいですね,,sugoi desu ne,sɯɡoi desɯ ne,,1,slang-agent-v1;ipa=hepburn
+slang.i-love-it,めっちゃ好き,,metcha suki,mettɕa sɯki,super like,1,slang-agent-v1;ipa=hepburn
+slang.thats-bad,微妙ですね,,bimyō desu ne,bimjoː desɯ ne,subtle,1,slang-agent-v1;ipa=hepburn
+slang.delicious,めっちゃおいしい,,metcha oishii,mettɕa oiɕii,super tasty,1,slang-agent-v1;ipa=hepburn
+slang.thats-pricey,高いですね,,takai desu ne,takai desɯ ne,,1,slang-agent-v1;ipa=hepburn
+slang.exactly,そうそう,,sō sō,soː soː,"so, so",1,slang-agent-v1;ipa=hepburn
+slang.no-worries,気にしないで,,ki ni shinaide,ki ɲi ɕinaide,don't mind it,1,slang-agent-v1;ipa=hepburn
+slang.youre-welcome,いえいえ,,ie ie,ie ie,no no,2,slang-agent-v1;ipa=hepburn
+slang.seriously,マジで？,,maji de?,madʑi de,for real?,1,slang-agent-v1;ipa=hepburn
+slang.im-good-thanks,やめときます,,yametokimasu,jametokimasɯ,I'll leave off,1,slang-agent-v1;ipa=hepburn
+slang.lets-go,行こう！,,ikō!,ikoː,,2,slang-agent-v1;ipa=hepburn
+slang.cheers,乾杯！,,kanpai!,kaɴpai,dry cup,2,slang-agent-v1;ipa=hepburn
+slang.see-you,またね！,,mata ne!,mata ne,"again, then",2,slang-agent-v1;ipa=hepburn

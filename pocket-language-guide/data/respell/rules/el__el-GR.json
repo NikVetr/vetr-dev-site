@@ -1,973 +1,978 @@
 {
- "source": "el",
- "accent": "el-GR",
- "status": "ready",
- "version": "1",
- "derives_from": "No published sound-keyed pronunciation key exists for a Greek reader, and that is a researched negative rather than an unexamined assumption: Greece's normative literature on foreign words is a *spelling* argument (aplografisi against antistrepsimotita), not a phonetic-respelling tradition, and its one official standard -- ELOT 743 -- runs the other way, Greek to Latin. The Academy of Athens' Chrestiko Lexiko marks pronunciation only for synizesis; LKN uses IPA rather than Greek letters; Triantafyllidis (1941) is spelling-based. So this table is invented, on four documented patterns, which RESPELL-SYSTEMS.md calls the third tier -- the same tier Hindi and Arabic are in. (1) Babiniotis, Lexiko tis Neas Ellinikis Glossas, para. 7(d), p. 26: a parenthetical pronunciation in Greek letters, used about 128 times -- `de jure (nte gioure)`, `Zeppelin (Tsepelin)`, `alter ego (alter engo)` -- including its hyphen separator against prenasalisation (`kon-trast`, `nte profoun-tis`). (2) ELETO's Orogramma 62, which recommends transcribing `me ti megalyteri dynati prosengisi tis proforas tou`, the closest possible approximation to the pronunciation, and gives `George Bush -> Tzortz Mpous`, `Facebook -> Feismpouk`. (3) el.wikipedia's Onomatodosia selidon, whose stated hierarchy is sound first and spelling second, with a Profora column. (4) The EU Interinstitutional style guide para. 10.5, which explicitly rejects reversibility in favour of aplografisi, and which supplies the one hard orthographic rule taken here: /ng/ is written nk, not gk -- `Chonnk Konnk kai ochi Chonk Konk`, `Sengken kai ochi Segken`. Stress: the tonos, which is not a choice. Monotonic Greek accents every polysyllable exactly once, and every one of those four sources puts the mark on the source-stressed syllable, so an unaccented Greek respelling is not an unmarked word but an impossible one.",
- "deviations": [
-  {
-   "rule": "Babiniotis's own primary key for proper names is reversibility, not sound (LNEG p. 37-38: `ischyse, kata kanona, i archi tis antistrepsimotitas` -- Voltairos, Roussso, Gkaite)",
-   "why": "Only para. 7(d) is borrowed, and it is the minority device in that dictionary: the pronunciation-in-parentheses slot, which is sound-keyed by construction. The reversibility principle that governs the headwords is exactly what this column must not do -- it would write German `oe` as `ai` because the source spells it that way, giving /o/ for a front rounded vowel. The EU guide's para. 10.5 makes the same choice against the same target and is cited for it."
-  },
-  {
-   "rule": "A published key would be keyed on the source language's spelling, since all four patterns here are examples rather than tables",
-   "why": "There is no table to re-key: the four sources supply between them about a hundred and fifty worked pronunciations and one explicit rule (the EU guide's nk), so every sound had to be read off attested renderings and then generalised. Where the attestations are unanimous the rule is theirs -- /b d g/ as mp nt gk, /w/ as ou against /v/ as b, /h/ as ch, /tS/ as ts, /dZ/ as tz, /S/ as s -- and where they are silent it is a documented approximation, listed below rather than hidden."
-  },
-  {
-   "rule": "Greek writes double consonants and pronounces every one of them single, so no length is doubled here",
-   "why": "The alternative is not merely uninformative, it is wrong: `gg` is read /ng/ and `mpmp` is unreadable, so doubling a Greek letter to show a geminate would change the sound rather than lengthen it. Italian `fatto`, Arabic shadda and Korean tense consonants all lose their length. policy.length is `none` for the vowels for the ordinary reason -- Greek has no length contrast and a doubled vowel reads as two syllables."
-  },
-  {
-   "rule": "The unaspirated series takes the voiced digraph only where the target has no voiced stops at all",
-   "why": "Palladius's trick, guarded typologically rather than by target, as the Spanish and Russian tables guard it. Greek pi tau kappa are already unaspirated [p t k], so they are the *better* sound for Mandarin b d g -- but using them there would collapse the /p/ ~ /pH/ contrast that Mandarin carries lexically, and mp nt gk are what Greek has for the other half. `unless_inventory` rather than the word-initial test `#b #d #g`, deliberately and for the reason the Russian table gives: the question is whether the target has any voiced stop for mp to collide with, and Korean and Thai both do."
-  },
-  {
-   "rule": "A glide or a lax vowel following another vowel is written with the diaeresis, not the bare letter",
-   "why": "This is a Greek-specific hazard with no analogue in any other table, and getting it wrong is silent. Greek `ai` is /e/, `ei` and `oi` are /i/, `ou` is /u/ and `au`/`eu` are /av/-/af/, so spelling /aI/ as `ai` tells the reader /e/ and spelling /eI/ as `ei` tells them /i/ -- the exact opposite of a pronunciation hint. The diaeresis is the device Greek orthography already uses to break a digraph, so /aI/ is `ai` with the diaeresis on the second letter and /aU/ needs no mark at all, `aou` being no digraph. In a stressed syllable the tonos on the first element would break the digraph on its own and Greek would normally drop the diaeresis; keeping both is redundant rather than wrong, and a fixup cannot fix it because fixups run before the stress device."
-  },
-  {
-   "rule": "The syllable separator does the work Babiniotis's hyphen was introduced for, so it is not also inserted by hand",
-   "why": "Greek mp nt gk are prenasalised medially, so `kontrast` can be read /kondrast/, and Babiniotis's answer is a hyphen in front of the digraph (`kon-trast`). Our syllable separator is that hyphen, and a medial voiced stop opens its own syllable, so the published fix falls out of the syllabification for free. What is left is a voiced stop in a *coda*, where Greek cannot write a bare [b d g] at all; those keep the nasal reading and are listed as an approximation."
-  },
-  {
-   "rule": "`reader_onsets` is deliberately absent, where the Spanish, German and Italian tables all name theirs",
-   "why": "That predicate exists to stop a reader being shown an onset their own orthography cannot begin, and Greek is the one language in the set where the restriction would cost more than it buys: its own syllabification opens words with str-, spl-, chth-, pt-, phth-, tm-, kn-, ks- and ps-, so the honest list is longer than the clusters the seventeen targets actually contain, and onset maximisation is already the right claim about a Greek reader. `max_onset: 3` is the cap Greek's own three-consonant onsets set."
-  },
-  {
-   "rule": "Final sigma is applied as a fixup rather than as a coda rule",
-   "why": "Greek has two forms of the letter and the choice is positional, not phonemic: /s/ is written s everywhere except at the end of a word, where it is written with the final form. A coda rule cannot express that, because a coda /s/ is only word-final when nothing follows it in the coda -- `st` must stay s -- so the rule is anchored to the end of the syllable text with `word_final`, which is exactly where the distinction lives."
-  }
- ],
- "approximations": [
-  {
-   "sounds": "/S/ /Z/ (English sh, French j; Mandarin sh, x; Japanese sh; Korean; Thai)",
-   "out": "s, z",
-   "why": "Greek has no postalveolar fricative and no source invents a letter for one: Shakespeare is Sexpir, chauffeur is sofer, Station is Stesion, Jean is Zan. The palatalised reading Greek `si` gets before a vowel is audibly closer, and it is rejected here because no source uses it and because it would insert a vowel letter into a consonant slot. /S/ and /s/ therefore merge, which costs Mandarin the three-way s/sh/x contrast and English sea/she."
-  },
-  {
-   "sounds": "/y/ /Y/ (German u-umlaut, Turkish u-umlaut, French u, Mandarin u-umlaut)",
-   "out": "i",
-   "why": "Greek has no rounded front vowel and no letter for one. i is what Greek print writes for it (Miler for Mueller), and it is the unrounded partner of the same height. The alternative attested in the spelling tradition -- `ai` for German oe/ue, which Lingris attacks as having no relation to the sound -- is exactly the reversibility this table rejects."
-  },
-  {
-   "sounds": "/oe/ /o-slash/ (German oe, Turkish oe, French eu)",
-   "out": "e",
-   "why": "Also unrounded, and also what Greek print writes: Goethe is Gkaite /e/, Schroeder is Sronter. So /o-slash/ and /e/ merge."
-  },
-  {
-   "sounds": "vowel length (Japanese, Hindi, Arabic, Thai, German, Vietnamese)",
-   "out": "not written",
-   "why": "Greek has had no length contrast since antiquity and its two letters for /i/ and its two for /o/ no longer differ in quantity, so any notation would be invented. Doubling reads as two syllables, as it does in Spanish and Russian, both of which made the same call."
-  },
-  {
-   "sounds": "lexical tone (Mandarin, Thai, Vietnamese)",
-   "out": "dropped",
-   "why": "Chao letters are not Greek and a reader with no key gets nothing from them. All four curated tonal sheets drop tone. Greek loses the most on Vietnamese and Thai, and it loses it on top of the /S/ merge, so those two targets are the weakest a Greek reader gets."
-  },
-  {
-   "sounds": "/?/ /9/ /pharyngealisation/ /Vietnamese glottalisation/",
-   "out": "dropped",
-   "why": "Greek has no letter and no sound. A dropped glottal stop leaves an ordinary onsetless syllable, which is what Greek's own Arabic borrowings do (Koranio, imamis)."
-  },
-  {
-   "sounds": "the retroflex series /T D N r-tap s-retro z-retro/ and the Mandarin retroflexes",
-   "out": "t nt n r s z",
-   "why": "Greek has no retroflex series; the dental letters are the standard Greek rendering of both Devanagari and Mandarin zh/ch/sh/r."
-  },
-  {
-   "sounds": "aspiration, palatalisation, the Korean tense series, gemination",
-   "out": "dropped",
-   "why": "Greek writes none of them. Aspiration survives only where the unaspirated-series trick above is active, which is Mandarin alone; elsewhere /pH/ and /p/ both print pi."
-  },
-  {
-   "sounds": "a voiced stop in a coda (English cab, Vietnamese, Thai)",
-   "out": "mp, nt, gk -- read with a nasal",
-   "why": "Greek cannot write a bare [b d g] in any position: the digraphs are its only spelling and they are prenasalised except word-initially. The syllable hyphen fixes the medial case, per the deviation above, and a coda has nowhere to put one. So `cab` reads /kamp/. The alternative -- spelling a coda voiced stop with its voiceless letter -- loses the voicing contrast outright, and Greek's own loanwords keep the digraph (mpar, klamp)."
-  },
-  {
-   "sounds": "/w/ against /u/",
-   "out": "ou for both",
-   "why": "Greek writes Ouiliam for William, so the glide and the vowel share a spelling. Where /w/ opens a syllable the following vowel keeps them apart; where it closes one the two are genuinely merged, so English `now` and Greek `nou` look alike. The contrast that matters more -- /w/ against /v/ -- is preserved, ou against b, which is the distinction Greek print is careful about."
-  }
- ],
- "policy": {
-  "syllable_separator": "-",
-  "word_separator": " ",
-  "stress": "acute",
-  "stress_min_syllables": 2,
-  "length": "none",
-  "tone": "drop",
-  "max_onset": 3,
-  "fixups": "all",
-  "locale": "el"
- },
- "splits": [],
- "targets": {
-  "ja": {
-   "comment": "Japanese /u/ is a compressed back vowel and every Greek rendering writes ou -- sousi, Fououkouoka, tsounami, Tokio. The iota the other three /M/ languages take would be unreadable here. Same call, same reason, as the Russian table's Polivanov exception.",
-   "phonemes": [
+  "source": "el",
+  "accent": "el-GR",
+  "status": "ready",
+  "version": "1",
+  "derives_from": "No published sound-keyed pronunciation key exists for a Greek reader, and that is a researched negative rather than an unexamined assumption: Greece's normative literature on foreign words is a *spelling* argument (aplografisi against antistrepsimotita), not a phonetic-respelling tradition, and its one official standard -- ELOT 743 -- runs the other way, Greek to Latin. The Academy of Athens' Chrestiko Lexiko marks pronunciation only for synizesis; LKN uses IPA rather than Greek letters; Triantafyllidis (1941) is spelling-based. So this table is invented, on four documented patterns, which RESPELL-SYSTEMS.md calls the third tier -- the same tier Hindi and Arabic are in. (1) Babiniotis, Lexiko tis Neas Ellinikis Glossas, para. 7(d), p. 26: a parenthetical pronunciation in Greek letters, used about 128 times -- `de jure (nte gioure)`, `Zeppelin (Tsepelin)`, `alter ego (alter engo)` -- including its hyphen separator against prenasalisation (`kon-trast`, `nte profoun-tis`). (2) ELETO's Orogramma 62, which recommends transcribing `me ti megalyteri dynati prosengisi tis proforas tou`, the closest possible approximation to the pronunciation, and gives `George Bush -> Tzortz Mpous`, `Facebook -> Feismpouk`. (3) el.wikipedia's Onomatodosia selidon, whose stated hierarchy is sound first and spelling second, with a Profora column. (4) The EU Interinstitutional style guide para. 10.5, which explicitly rejects reversibility in favour of aplografisi, and which supplies the one hard orthographic rule taken here: /ng/ is written nk, not gk -- `Chonnk Konnk kai ochi Chonk Konk`, `Sengken kai ochi Segken`. Stress: the tonos, which is not a choice. Monotonic Greek accents every polysyllable exactly once, and every one of those four sources puts the mark on the source-stressed syllable, so an unaccented Greek respelling is not an unmarked word but an impossible one.",
+  "deviations": [
     {
-     "slot": "nucleus",
-     "ipa": "ɯ",
-     "out": "ου"
+      "rule": "Babiniotis's own primary key for proper names is reversibility, not sound (LNEG p. 37-38: `ischyse, kata kanona, i archi tis antistrepsimotitas` -- Voltairos, Roussso, Gkaite)",
+      "why": "Only para. 7(d) is borrowed, and it is the minority device in that dictionary: the pronunciation-in-parentheses slot, which is sound-keyed by construction. The reversibility principle that governs the headwords is exactly what this column must not do -- it would write German `oe` as `ai` because the source spells it that way, giving /o/ for a front rounded vowel. The EU guide's para. 10.5 makes the same choice against the same target and is cited for it."
     },
     {
-     "slot": "any",
-     "ipa": "ɯ",
-     "out": "ου"
-    }
-   ]
-  },
-  "tr": {
-   "comment": "A fact about espeak's Turkish voice rather than about Turkish: it writes u-umlaut as /o-slash/ and o-umlaut as /oe/, so the two front rounded vowels arrive under the wrong symbols. Turkish u-umlaut is high, and Greek's unrounded partner for it is iota (Gioul, Ismir), where o-umlaut takes epsilon like German's. Without this, `gunler` printed `gkien-` and `ucretsiz` `etzretsiz`.",
-   "phonemes": [
+      "rule": "A published key would be keyed on the source language's spelling, since all four patterns here are examples rather than tables",
+      "why": "There is no table to re-key: the four sources supply between them about a hundred and fifty worked pronunciations and one explicit rule (the EU guide's nk), so every sound had to be read off attested renderings and then generalised. Where the attestations are unanimous the rule is theirs -- /b d g/ as mp nt gk, /w/ as ou against /v/ as b, /h/ as ch, /tS/ as ts, /dZ/ as tz, /S/ as s -- and where they are silent it is a documented approximation, listed below rather than hidden."
+    },
     {
-     "slot": "nucleus",
-     "ipa": "ø",
-     "out": "ι"
+      "rule": "Greek writes double consonants and pronounces every one of them single, so no length is doubled here",
+      "why": "The alternative is not merely uninformative, it is wrong: `gg` is read /ng/ and `mpmp` is unreadable, so doubling a Greek letter to show a geminate would change the sound rather than lengthen it. Italian `fatto`, Arabic shadda and Korean tense consonants all lose their length. policy.length is `none` for the vowels for the ordinary reason -- Greek has no length contrast and a doubled vowel reads as two syllables."
+    },
+    {
+      "rule": "The unaspirated series takes the voiced digraph only where the target has no voiced stops at all",
+      "why": "Palladius's trick, guarded typologically rather than by target, as the Spanish and Russian tables guard it. Greek pi tau kappa are already unaspirated [p t k], so they are the *better* sound for Mandarin b d g -- but using them there would collapse the /p/ ~ /pH/ contrast that Mandarin carries lexically, and mp nt gk are what Greek has for the other half. `unless_inventory` rather than the word-initial test `#b #d #g`, deliberately and for the reason the Russian table gives: the question is whether the target has any voiced stop for mp to collide with, and Korean and Thai both do."
+    },
+    {
+      "rule": "A glide or a lax vowel following another vowel is written with the diaeresis, not the bare letter",
+      "why": "This is a Greek-specific hazard with no analogue in any other table, and getting it wrong is silent. Greek `ai` is /e/, `ei` and `oi` are /i/, `ou` is /u/ and `au`/`eu` are /av/-/af/, so spelling /aI/ as `ai` tells the reader /e/ and spelling /eI/ as `ei` tells them /i/ -- the exact opposite of a pronunciation hint. The diaeresis is the device Greek orthography already uses to break a digraph, so /aI/ is `ai` with the diaeresis on the second letter and /aU/ needs no mark at all, `aou` being no digraph. In a stressed syllable the tonos on the first element would break the digraph on its own and Greek would normally drop the diaeresis; keeping both is redundant rather than wrong, and a fixup cannot fix it because fixups run before the stress device."
+    },
+    {
+      "rule": "The syllable separator does the work Babiniotis's hyphen was introduced for, so it is not also inserted by hand",
+      "why": "Greek mp nt gk are prenasalised medially, so `kontrast` can be read /kondrast/, and Babiniotis's answer is a hyphen in front of the digraph (`kon-trast`). Our syllable separator is that hyphen, and a medial voiced stop opens its own syllable, so the published fix falls out of the syllabification for free. What is left is a voiced stop in a *coda*, where Greek cannot write a bare [b d g] at all; those keep the nasal reading and are listed as an approximation."
+    },
+    {
+      "rule": "`reader_onsets` is deliberately absent, where the Spanish, German and Italian tables all name theirs",
+      "why": "That predicate exists to stop a reader being shown an onset their own orthography cannot begin, and Greek is the one language in the set where the restriction would cost more than it buys: its own syllabification opens words with str-, spl-, chth-, pt-, phth-, tm-, kn-, ks- and ps-, so the honest list is longer than the clusters the seventeen targets actually contain, and onset maximisation is already the right claim about a Greek reader. `max_onset: 3` is the cap Greek's own three-consonant onsets set."
+    },
+    {
+      "rule": "Final sigma is applied as a fixup rather than as a coda rule",
+      "why": "Greek has two forms of the letter and the choice is positional, not phonemic: /s/ is written s everywhere except at the end of a word, where it is written with the final form. A coda rule cannot express that, because a coda /s/ is only word-final when nothing follows it in the coda -- `st` must stay s -- so the rule is anchored to the end of the syllable text with `word_final`, which is exactly where the distinction lives."
     }
-   ]
-  }
- },
- "phonemes": [
-  {
-   "slot": "any",
-   "ipa": "pʰ",
-   "out": "π"
-  },
-  {
-   "slot": "any",
-   "ipa": "p",
-   "out": "μπ",
-   "unless_inventory": "b d ɡ"
-  },
-  {
-   "slot": "any",
-   "ipa": "p",
-   "out": "π"
-  },
-  {
-   "slot": "any",
-   "ipa": "tʰ",
-   "out": "τ"
-  },
-  {
-   "slot": "any",
-   "ipa": "t",
-   "out": "ντ",
-   "unless_inventory": "b d ɡ"
-  },
-  {
-   "slot": "any",
-   "ipa": "t",
-   "out": "τ"
-  },
-  {
-   "slot": "any",
-   "ipa": "kʰ",
-   "out": "κ"
-  },
-  {
-   "slot": "any",
-   "ipa": "k",
-   "out": "γκ",
-   "unless_inventory": "b d ɡ"
-  },
-  {
-   "slot": "any",
-   "ipa": "k",
-   "out": "κ"
-  },
-  {
-   "slot": "any",
-   "ipa": "tsʰ",
-   "out": "τσ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ts",
-   "out": "τζ",
-   "unless_inventory": "b d ɡ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ts",
-   "out": "τσ"
-  },
-  {
-   "slot": "any",
-   "ipa": "tɕʰ",
-   "out": "τσ"
-  },
-  {
-   "slot": "any",
-   "ipa": "tɕ",
-   "out": "τζ",
-   "unless_inventory": "b d ɡ"
-  },
-  {
-   "slot": "any",
-   "ipa": "tɕ",
-   "out": "τσ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ʈʂʰ",
-   "out": "τσ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ʈʂ",
-   "out": "τζ",
-   "unless_inventory": "b d ɡ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ʈʂ",
-   "out": "τσ"
-  },
-  {
-   "slot": "any",
-   "ipa": "tʃ",
-   "out": "τσ"
-  },
-  {
-   "slot": "any",
-   "ipa": "dʒ",
-   "out": "τζ"
-  },
-  {
-   "slot": "any",
-   "ipa": "dʑ",
-   "out": "τζ"
-  },
-  {
-   "slot": "any",
-   "ipa": "dz",
-   "out": "τζ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ɖʐ",
-   "out": "τζ"
-  },
-  {
-   "slot": "any",
-   "ipa": "pf",
-   "out": "πφ"
-  },
-  {
-   "slot": "any",
-   "ipa": "b",
-   "out": "μπ"
-  },
-  {
-   "slot": "any",
-   "ipa": "d",
-   "out": "ντ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ɡ",
-   "out": "γκ"
-  },
-  {
-   "slot": "any",
-   "ipa": "g",
-   "out": "γκ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ɗ",
-   "out": "ντ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ɖ",
-   "out": "ντ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ʈ",
-   "out": "τ"
-  },
-  {
-   "slot": "any",
-   "ipa": "t̪",
-   "out": "τ"
-  },
-  {
-   "slot": "any",
-   "ipa": "d̪",
-   "out": "ντ"
-  },
-  {
-   "slot": "any",
-   "ipa": "q",
-   "out": "κ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ɢ",
-   "out": "γκ"
-  },
-  {
-   "slot": "coda",
-   "ipa": "c",
-   "out": "κ"
-  },
-  {
-   "slot": "any",
-   "ipa": "cʰ",
-   "out": "τσ",
-   "if_inventory": "ʋ"
-  },
-  {
-   "slot": "any",
-   "ipa": "c",
-   "out": "τσ",
-   "if_inventory": "ʋ"
-  },
-  {
-   "slot": "any",
-   "ipa": "cʰ",
-   "out": "κι"
-  },
-  {
-   "slot": "any",
-   "ipa": "c",
-   "out": "κι"
-  },
-  {
-   "slot": "any",
-   "ipa": "ɟ",
-   "out": "τζ",
-   "if_inventory": "ʋ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ɟ",
-   "out": "τζ",
-   "if_inventory": "ð θ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ɟ",
-   "out": "γκι"
-  },
-  {
-   "slot": "any",
-   "ipa": "ç",
-   "out": "χ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ʝ",
-   "out": "γι"
-  },
-  {
-   "slot": "any",
-   "ipa": "f",
-   "out": "φ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ɸ",
-   "out": "φ"
-  },
-  {
-   "slot": "any",
-   "ipa": "v",
-   "out": "β"
-  },
-  {
-   "slot": "any",
-   "ipa": "ʋ",
-   "out": "β"
-  },
-  {
-   "slot": "any",
-   "ipa": "β",
-   "out": "β"
-  },
-  {
-   "slot": "any",
-   "ipa": "θ",
-   "out": "θ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ð",
-   "out": "δ"
-  },
-  {
-   "slot": "any",
-   "ipa": "s",
-   "out": "σ"
-  },
-  {
-   "slot": "any",
-   "ipa": "z",
-   "out": "ζ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ʃ",
-   "out": "σ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ʒ",
-   "out": "ζ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ɕ",
-   "out": "σ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ʑ",
-   "out": "ζ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ʂ",
-   "out": "σ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ʐ",
-   "out": "ζ"
-  },
-  {
-   "slot": "any",
-   "ipa": "x",
-   "out": "χ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ɣ",
-   "out": "γ"
-  },
-  {
-   "slot": "any",
-   "ipa": "χ",
-   "out": "χ"
-  },
-  {
-   "slot": "any",
-   "ipa": "h",
-   "out": "χ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ħ",
-   "out": "χ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ɦ",
-   "out": "χ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ks",
-   "out": "ξ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ps",
-   "out": "ψ"
-  },
-  {
-   "slot": "any",
-   "ipa": "m",
-   "out": "μ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ɱ",
-   "out": "μ"
-  },
-  {
-   "slot": "any",
-   "ipa": "n",
-   "out": "ν"
-  },
-  {
-   "slot": "any",
-   "ipa": "ɳ",
-   "out": "ν"
-  },
-  {
-   "slot": "any",
-   "ipa": "ɴ",
-   "out": "ν"
-  },
-  {
-   "slot": "any",
-   "ipa": "ɲ",
-   "out": "νι"
-  },
-  {
-   "slot": "any",
-   "ipa": "ʎ",
-   "out": "λι"
-  },
-  {
-   "slot": "any",
-   "ipa": "ŋ",
-   "out": "ν",
-   "before_onset": "k ɡ kʰ q g"
-  },
-  {
-   "slot": "any",
-   "ipa": "ŋ",
-   "out": "νγκ"
-  },
-  {
-   "slot": "any",
-   "ipa": "l",
-   "out": "λ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ɫ",
-   "out": "λ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ɭ",
-   "out": "λ"
-  },
-  {
-   "slot": "any",
-   "ipa": "r",
-   "out": "ρ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ɾ",
-   "out": "ρ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ɹ",
-   "out": "ρ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ʁ",
-   "out": "ρ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ʀ",
-   "out": "ρ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ɻ",
-   "out": "ρ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ɽ",
-   "out": "ρ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ɺ",
-   "out": "ρ"
-  },
-  {
-   "slot": "any",
-   "ipa": "ɖ̥",
-   "out": "ρ"
-  },
-  {
-   "slot": "any",
-   "ipa": "j",
-   "out": "ϊ",
-   "after_out": "α ε η ι ο υ ω ά έ ή ί ό ύ ώ ϊ ϋ"
-  },
-  {
-   "slot": "any",
-   "ipa": "j",
-   "out": "γι",
-   "after_out": ""
-  },
-  {
-   "slot": "any",
-   "ipa": "j",
-   "out": "ι"
-  },
-  {
-   "slot": "any",
-   "ipa": "w",
-   "out": "ου"
-  },
-  {
-   "slot": "any",
-   "ipa": "ɥ",
-   "out": "γι"
-  },
-  {
-   "slot": "any",
-   "ipa": "ɰ",
-   "out": "ι"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "a",
-   "out": "α"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ɑ",
-   "out": "α"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ɐ",
-   "out": "α"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ʌ",
-   "out": "α"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "æ",
-   "out": "α"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ɶ",
-   "out": "α"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "e",
-   "out": "ε"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ɛ",
-   "out": "ε"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ø",
-   "out": "ε"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "œ",
-   "out": "ε"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ɜ",
-   "out": "ε"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ɘ",
-   "out": "ε"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ɞ",
-   "out": "ε"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "o",
-   "out": "ο"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ɔ",
-   "out": "ο"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ɒ",
-   "out": "ο"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ɤ",
-   "out": "ο"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ɵ",
-   "out": "ο"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "i",
-   "out": "ι"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "y",
-   "out": "ι"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ʏ",
-   "out": "ι"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ɨ",
-   "out": "ι"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ɯ",
-   "out": "ι"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "u",
-   "out": "ου"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ʊ",
-   "out": "ου"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ʉ",
-   "out": "ου"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ɪ",
-   "out": "ϊ",
-   "after_out": "α ε η ι ο υ ω ά έ ή ί ό ύ ώ ϊ ϋ"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ɪ",
-   "out": "ι"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ɚ",
-   "out": "ερ"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ɝ",
-   "out": "ερ"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ə",
-   "out": "α",
-   "if_inventory": "ʋ"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ə",
-   "out": "ε"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ã",
-   "out": "αν"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ẽ",
-   "out": "εν"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ĩ",
-   "out": "ιν"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "õ",
-   "out": "ον"
-  },
-  {
-   "slot": "nucleus",
-   "ipa": "ũ",
-   "out": "ουν"
-  },
-  {
-   "slot": "any",
-   "ipa": "̃",
-   "out": "μ",
-   "before_onset": "p b m pʰ"
-  },
-  {
-   "slot": "any",
-   "ipa": "̃",
-   "out": "ν"
-  },
-  {
-   "slot": "any",
-   "ipa": "a",
-   "out": "α"
-  },
-  {
-   "slot": "any",
-   "ipa": "e",
-   "out": "ε"
-  },
-  {
-   "slot": "any",
-   "ipa": "i",
-   "out": "ι"
-  },
-  {
-   "slot": "any",
-   "ipa": "o",
-   "out": "ο"
-  },
-  {
-   "slot": "any",
-   "ipa": "u",
-   "out": "ου"
-  },
-  {
-   "slot": "any",
-   "ipa": "ː",
-   "out": ""
-  },
-  {
-   "slot": "any",
-   "ipa": "ˑ",
-   "out": ""
-  },
-  {
-   "slot": "any",
-   "ipa": "̯",
-   "out": ""
-  },
-  {
-   "slot": "any",
-   "ipa": "̩",
-   "out": ""
-  },
-  {
-   "slot": "any",
-   "ipa": "͈",
-   "out": ""
-  },
-  {
-   "slot": "any",
-   "ipa": "ʲ",
-   "out": ""
-  },
-  {
-   "slot": "any",
-   "ipa": "̪",
-   "out": ""
-  },
-  {
-   "slot": "any",
-   "ipa": "̥",
-   "out": ""
-  },
-  {
-   "slot": "any",
-   "ipa": "̬",
-   "out": ""
-  },
-  {
-   "slot": "any",
-   "ipa": "̚",
-   "out": ""
-  },
-  {
-   "slot": "any",
-   "ipa": "ʼ",
-   "out": ""
-  },
-  {
-   "slot": "any",
-   "ipa": "ʔ",
-   "out": ""
-  },
-  {
-   "slot": "any",
-   "ipa": "ʕ",
-   "out": ""
-  },
-  {
-   "slot": "any",
-   "ipa": "ˤ",
-   "out": ""
-  },
-  {
-   "slot": "any",
-   "ipa": "ˠ",
-   "out": ""
-  },
-  {
-   "slot": "any",
-   "ipa": "ˀ",
-   "out": ""
-  },
-  {
-   "slot": "any",
-   "ipa": "ʰ",
-   "out": ""
-  },
-  {
-   "slot": "any",
-   "ipa": "ʱ",
-   "out": ""
-  }
- ],
- "syllable_fixups": [
-  {
-   "match": "νγκγκ",
-   "out": "νγκ"
-  },
-  {
-   "match": "νγκκ",
-   "out": "νκ"
-  },
-  {
-   "match": "([λνμρσπτκβγδζθφχ])\\1",
-   "out": "\\1"
-  },
-  {
-   "match": "ιι",
-   "out": "ι"
-  },
-  {
-   "match": "ουου",
-   "out": "ου"
-  },
-  {
-   "match": "ϊι",
-   "out": "ϊ"
-  },
-  {
-   "match": "ιϊ",
-   "out": "ι"
-  },
-  {
-   "match": "σ$",
-   "out": "ς",
-   "when": [
-    "word_final"
-   ]
-  }
- ],
- "note": "Reader's legend: two conventions to learn, and both are already Greek. The tonos marks the stressed syllable, which is what the orthography does anyway and what every Greek pronunciation-in-parentheses does. The hyphen separates syllables, and it is doing a second job Babiniotis introduced it for: it keeps a medial mp, nt or gk from being read with its nasal. The diaeresis appears wherever a vowel pair would otherwise be read as a Greek digraph -- see the deviation above; a Greek reader already knows that mark and already knows why it is there."
+  ],
+  "approximations": [
+    {
+      "sounds": "/S/ /Z/ (English sh, French j; Mandarin sh, x; Japanese sh; Korean; Thai)",
+      "out": "s, z",
+      "why": "Greek has no postalveolar fricative and no source invents a letter for one: Shakespeare is Sexpir, chauffeur is sofer, Station is Stesion, Jean is Zan. The palatalised reading Greek `si` gets before a vowel is audibly closer, and it is rejected here because no source uses it and because it would insert a vowel letter into a consonant slot. /S/ and /s/ therefore merge, which costs Mandarin the three-way s/sh/x contrast and English sea/she."
+    },
+    {
+      "sounds": "/y/ /Y/ (German u-umlaut, Turkish u-umlaut, French u, Mandarin u-umlaut)",
+      "out": "i",
+      "why": "Greek has no rounded front vowel and no letter for one. i is what Greek print writes for it (Miler for Mueller), and it is the unrounded partner of the same height. The alternative attested in the spelling tradition -- `ai` for German oe/ue, which Lingris attacks as having no relation to the sound -- is exactly the reversibility this table rejects."
+    },
+    {
+      "sounds": "/oe/ /o-slash/ (German oe, Turkish oe, French eu)",
+      "out": "e",
+      "why": "Also unrounded, and also what Greek print writes: Goethe is Gkaite /e/, Schroeder is Sronter. So /o-slash/ and /e/ merge."
+    },
+    {
+      "sounds": "vowel length (Japanese, Hindi, Arabic, Thai, German, Vietnamese)",
+      "out": "not written",
+      "why": "Greek has had no length contrast since antiquity and its two letters for /i/ and its two for /o/ no longer differ in quantity, so any notation would be invented. Doubling reads as two syllables, as it does in Spanish and Russian, both of which made the same call."
+    },
+    {
+      "sounds": "lexical tone (Mandarin, Thai, Vietnamese)",
+      "out": "dropped",
+      "why": "Chao letters are not Greek and a reader with no key gets nothing from them. All four curated tonal sheets drop tone. Greek loses the most on Vietnamese and Thai, and it loses it on top of the /S/ merge, so those two targets are the weakest a Greek reader gets."
+    },
+    {
+      "sounds": "/?/ /9/ /pharyngealisation/ /Vietnamese glottalisation/",
+      "out": "dropped",
+      "why": "Greek has no letter and no sound. A dropped glottal stop leaves an ordinary onsetless syllable, which is what Greek's own Arabic borrowings do (Koranio, imamis)."
+    },
+    {
+      "sounds": "the retroflex series /T D N r-tap s-retro z-retro/ and the Mandarin retroflexes",
+      "out": "t nt n r s z",
+      "why": "Greek has no retroflex series; the dental letters are the standard Greek rendering of both Devanagari and Mandarin zh/ch/sh/r."
+    },
+    {
+      "sounds": "aspiration, palatalisation, the Korean tense series, gemination",
+      "out": "dropped",
+      "why": "Greek writes none of them. Aspiration survives only where the unaspirated-series trick above is active, which is Mandarin alone; elsewhere /pH/ and /p/ both print pi."
+    },
+    {
+      "sounds": "a voiced stop in a coda (English cab, Vietnamese, Thai)",
+      "out": "mp, nt, gk -- read with a nasal",
+      "why": "Greek cannot write a bare [b d g] in any position: the digraphs are its only spelling and they are prenasalised except word-initially. The syllable hyphen fixes the medial case, per the deviation above, and a coda has nowhere to put one. So `cab` reads /kamp/. The alternative -- spelling a coda voiced stop with its voiceless letter -- loses the voicing contrast outright, and Greek's own loanwords keep the digraph (mpar, klamp)."
+    },
+    {
+      "sounds": "/w/ against /u/",
+      "out": "ou for both",
+      "why": "Greek writes Ouiliam for William, so the glide and the vowel share a spelling. Where /w/ opens a syllable the following vowel keeps them apart; where it closes one the two are genuinely merged, so English `now` and Greek `nou` look alike. The contrast that matters more -- /w/ against /v/ -- is preserved, ou against b, which is the distinction Greek print is careful about."
+    }
+  ],
+  "policy": {
+    "syllable_separator": "-",
+    "word_separator": " ",
+    "stress": "acute",
+    "stress_min_syllables": 2,
+    "length": "none",
+    "tone": "drop",
+    "max_onset": 3,
+    "fixups": "all",
+    "locale": "el"
+  },
+  "splits": [],
+  "targets": {
+    "ja": {
+      "comment": "Japanese /u/ is a compressed back vowel and every Greek rendering writes ou -- sousi, Fououkouoka, tsounami, Tokio. The iota the other three /M/ languages take would be unreadable here. Same call, same reason, as the Russian table's Polivanov exception.",
+      "phonemes": [
+        {
+          "slot": "nucleus",
+          "ipa": "ɯ",
+          "out": "ου"
+        },
+        {
+          "slot": "any",
+          "ipa": "ɯ",
+          "out": "ου"
+        }
+      ]
+    },
+    "tr": {
+      "comment": "A fact about espeak's Turkish voice rather than about Turkish: it writes u-umlaut as /o-slash/ and o-umlaut as /oe/, so the two front rounded vowels arrive under the wrong symbols. Turkish u-umlaut is high, and Greek's unrounded partner for it is iota (Gioul, Ismir), where o-umlaut takes epsilon like German's. Without this, `gunler` printed `gkien-` and `ucretsiz` `etzretsiz`.",
+      "phonemes": [
+        {
+          "slot": "nucleus",
+          "ipa": "ø",
+          "out": "ι"
+        }
+      ]
+    }
+  },
+  "phonemes": [
+    {
+      "slot": "any",
+      "ipa": "ɬ",
+      "out": "λ"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʰ",
+      "out": "π"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "μπ",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "π"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰ",
+      "out": "τ"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "ντ",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "τ"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰ",
+      "out": "κ"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "γκ",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "κ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "τσ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "τζ",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "τσ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "τσ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "τζ",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "τσ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂʰ",
+      "out": "τσ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "τζ",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "τσ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "τσ"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒ",
+      "out": "τζ"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʑ",
+      "out": "τζ"
+    },
+    {
+      "slot": "any",
+      "ipa": "dz",
+      "out": "τζ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʐ",
+      "out": "τζ"
+    },
+    {
+      "slot": "any",
+      "ipa": "pf",
+      "out": "πφ"
+    },
+    {
+      "slot": "any",
+      "ipa": "b",
+      "out": "μπ"
+    },
+    {
+      "slot": "any",
+      "ipa": "d",
+      "out": "ντ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡ",
+      "out": "γκ"
+    },
+    {
+      "slot": "any",
+      "ipa": "g",
+      "out": "γκ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɗ",
+      "out": "ντ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖ",
+      "out": "ντ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈ",
+      "out": "τ"
+    },
+    {
+      "slot": "any",
+      "ipa": "t̪",
+      "out": "τ"
+    },
+    {
+      "slot": "any",
+      "ipa": "d̪",
+      "out": "ντ"
+    },
+    {
+      "slot": "any",
+      "ipa": "q",
+      "out": "κ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɢ",
+      "out": "γκ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "c",
+      "out": "κ"
+    },
+    {
+      "slot": "any",
+      "ipa": "cʰ",
+      "out": "τσ",
+      "if_inventory": "ʋ"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "τσ",
+      "if_inventory": "ʋ"
+    },
+    {
+      "slot": "any",
+      "ipa": "cʰ",
+      "out": "κι"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "κι"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "τζ",
+      "if_inventory": "ʋ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "τζ",
+      "if_inventory": "ð θ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "γκι"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "χ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "γι"
+    },
+    {
+      "slot": "any",
+      "ipa": "f",
+      "out": "φ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɸ",
+      "out": "φ"
+    },
+    {
+      "slot": "any",
+      "ipa": "v",
+      "out": "β"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʋ",
+      "out": "β"
+    },
+    {
+      "slot": "any",
+      "ipa": "β",
+      "out": "β"
+    },
+    {
+      "slot": "any",
+      "ipa": "θ",
+      "out": "θ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ð",
+      "out": "δ"
+    },
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "σ"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "ζ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "σ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒ",
+      "out": "ζ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "σ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʑ",
+      "out": "ζ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʂ",
+      "out": "σ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʐ",
+      "out": "ζ"
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "χ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɣ",
+      "out": "γ"
+    },
+    {
+      "slot": "any",
+      "ipa": "χ",
+      "out": "χ"
+    },
+    {
+      "slot": "any",
+      "ipa": "h",
+      "out": "χ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ħ",
+      "out": "χ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɦ",
+      "out": "χ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ks",
+      "out": "ξ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ps",
+      "out": "ψ"
+    },
+    {
+      "slot": "any",
+      "ipa": "m",
+      "out": "μ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɱ",
+      "out": "μ"
+    },
+    {
+      "slot": "any",
+      "ipa": "n",
+      "out": "ν"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɳ",
+      "out": "ν"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɴ",
+      "out": "ν"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "νι"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "λι"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "ν",
+      "before_onset": "k ɡ kʰ q g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "νγκ"
+    },
+    {
+      "slot": "any",
+      "ipa": "l",
+      "out": "λ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɫ",
+      "out": "λ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭ",
+      "out": "λ"
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
+      "out": "ρ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾ",
+      "out": "ρ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɹ",
+      "out": "ρ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "ρ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʀ",
+      "out": "ρ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɻ",
+      "out": "ρ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽ",
+      "out": "ρ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɺ",
+      "out": "ρ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖ̥",
+      "out": "ρ"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "ϊ",
+      "after_out": "α ε η ι ο υ ω ά έ ή ί ό ύ ώ ϊ ϋ"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "γι",
+      "after_out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "ι"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "ου"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɥ",
+      "out": "γι"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰ",
+      "out": "ι"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "a",
+      "out": "α"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑ",
+      "out": "α"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ",
+      "out": "α"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌ",
+      "out": "α"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "æ",
+      "out": "α"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɶ",
+      "out": "α"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "e",
+      "out": "ε"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ",
+      "out": "ε"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ø",
+      "out": "ε"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ",
+      "out": "ε"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɜ",
+      "out": "ε"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɘ",
+      "out": "ε"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɞ",
+      "out": "ε"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "o",
+      "out": "ο"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ",
+      "out": "ο"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɒ",
+      "out": "ο"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɤ",
+      "out": "ο"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɵ",
+      "out": "ο"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "i",
+      "out": "ι"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "y",
+      "out": "ι"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʏ",
+      "out": "ι"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɨ",
+      "out": "ι"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯ",
+      "out": "ι"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "u",
+      "out": "ου"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʊ",
+      "out": "ου"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʉ",
+      "out": "ου"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɪ",
+      "out": "ϊ",
+      "after_out": "α ε η ι ο υ ω ά έ ή ί ό ύ ώ ϊ ϋ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɪ",
+      "out": "ι"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɚ",
+      "out": "ερ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɝ",
+      "out": "ερ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ə",
+      "out": "α",
+      "if_inventory": "ʋ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ə",
+      "out": "ε"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ã",
+      "out": "αν"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ẽ",
+      "out": "εν"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ĩ",
+      "out": "ιν"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "õ",
+      "out": "ον"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ũ",
+      "out": "ουν"
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "μ",
+      "before_onset": "p b m pʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "ν"
+    },
+    {
+      "slot": "any",
+      "ipa": "a",
+      "out": "α"
+    },
+    {
+      "slot": "any",
+      "ipa": "e",
+      "out": "ε"
+    },
+    {
+      "slot": "any",
+      "ipa": "i",
+      "out": "ι"
+    },
+    {
+      "slot": "any",
+      "ipa": "o",
+      "out": "ο"
+    },
+    {
+      "slot": "any",
+      "ipa": "u",
+      "out": "ου"
+    },
+    {
+      "slot": "any",
+      "ipa": "ː",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˑ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̯",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̩",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "͈",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̪",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̥",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̬",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̚",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʼ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʕ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˤ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˠ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˀ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʱ",
+      "out": ""
+    }
+  ],
+  "syllable_fixups": [
+    {
+      "match": "νγκγκ",
+      "out": "νγκ"
+    },
+    {
+      "match": "νγκκ",
+      "out": "νκ"
+    },
+    {
+      "match": "([λνμρσπτκβγδζθφχ])\\1",
+      "out": "\\1"
+    },
+    {
+      "match": "ιι",
+      "out": "ι"
+    },
+    {
+      "match": "ουου",
+      "out": "ου"
+    },
+    {
+      "match": "ϊι",
+      "out": "ϊ"
+    },
+    {
+      "match": "ιϊ",
+      "out": "ι"
+    },
+    {
+      "match": "σ$",
+      "out": "ς",
+      "when": [
+        "word_final"
+      ]
+    }
+  ],
+  "note": "Reader's legend: two conventions to learn, and both are already Greek. The tonos marks the stressed syllable, which is what the orthography does anyway and what every Greek pronunciation-in-parentheses does. The hyphen separates syllables, and it is doing a second job Babiniotis introduced it for: it keeps a medial mp, nt or gk from being read with its nasal. The diaeresis appears wherever a vowel pair would otherwise be read as a Greek digraph -- see the deviation above; a Greek reader already knows that mark and already knows why it is there."
 }

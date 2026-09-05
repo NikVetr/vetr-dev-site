@@ -1,0 +1,15 @@
+concept_id,text,text_alt,romanization_elot,ipa,literal,confidence,provenance
+slang.thats-good,Μια χαρά!,,Mia chara!,mɲa xaɾˈa,a joy,1,slang-agent-v1;ipa=espeak
+slang.thats-great,Τέλειο!,Φοβερό!,Teleio!,tˈeʎo,perfect,1,slang-agent-v1;ipa=espeak
+slang.i-love-it,Το λατρεύω!,,To latrevo!,to latɾˈevo,I worship it,1,slang-agent-v1;ipa=espeak
+slang.thats-bad,Χάλια!,,Chalia!,xˈaʎa,in ruins,1,slang-agent-v1;ipa=espeak
+slang.delicious,Πολύ νόστιμο!,,Poly nostimo!,polˈi nˈostimˌo,very tasty,1,slang-agent-v1;ipa=espeak
+slang.thats-pricey,Τσιμπημένο!,,Tsimpimeno!,tsˌibimˈeno,stung,0,slang-agent-v1;ipa=espeak
+slang.exactly,Ακριβώς!,,Akrivos!,ˌakɾivˈos,,2,slang-agent-v1;ipa=espeak
+slang.no-worries,Δεν τρέχει τίποτα,,Den trechei tipota,ðˈen dɾˈeçi tˈipotˌa,nothing is running,1,slang-agent-v1;ipa=espeak
+slang.youre-welcome,Τίποτα!,,Tipota!,tˈipotˌa,nothing,2,slang-agent-v1;ipa=espeak
+slang.seriously,Σοβαρά;,,Sovara?,sˌovaɾˈa,,2,slang-agent-v1;ipa=espeak
+slang.im-good-thanks,Είμαι εντάξει,,Eimai entaxei,ˈime edˈaksi,I am okay,1,slang-agent-v1;ipa=espeak
+slang.lets-go,Πάμε!,,Pame!,pˈame,,2,slang-agent-v1;ipa=espeak
+slang.cheers,Γεια μας!,,Geia mas!,jˈa mas,our health,2,slang-agent-v1;ipa=espeak
+slang.see-you,Τα λέμε!,,Ta leme!,ta lˈeme,we'll say them,2,slang-agent-v1;ipa=espeak

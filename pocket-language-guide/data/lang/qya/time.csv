@@ -1,0 +1,32 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+time-scheduling.what-time-is-it,mana i lúmë,,mˈana i lˈuːme,what is the hour?,1,qya-composed-v1;lex=Let/265.0109 + PE23/135;grammar=PE22;ipa=appendix-e
+time-words.today,síra,,sˈiːra,today,3,qya-attested-v1;src=VT43/09.3400;eldamo=q;ipa=appendix-e
+time-words.tomorrow,nöa,,nˈoa,former or next day; context decides,3,qya-attested-v1;src=VT49/20.0917;eldamo=q;ipa=appendix-e
+time-words.yesterday,nöa,,nˈoa,one word for both -- context decides,3,qya-attested-v1;src=VT49/34.2811;eldamo=q;ipa=appendix-e
+time-words.this-week,enquië,,ˈenkwie,"the Elvish week is six days, not seven",3,qya-attested-v1;src=LotR/1107.3101;eldamo=q;ipa=appendix-e
+time-words.morning,aurë,,ˈawre,day / daylight / morning,3,qya-attested-v1;src=MC/222.3402;eldamo=q;ipa=appendix-e
+time-words.evening,andúnë,,andˈuːne,sunset / evening,3,qya-attested-v1;src=LotR/1116.3911;eldamo=q;ipa=appendix-e
+time-words.spring,tuilë,,tˈujle,,3,qya-attested-v1;src=LotR/1107.4106;eldamo=q;ipa=appendix-e
+time-words.summer,lairë,,lˈajre,,3,qya-attested-v1;src=LotR/1107.4107;eldamo=q;ipa=appendix-e
+time-words.fall,yávië,,jˈaːvie,autumn / harvest time,3,qya-attested-v1;src=LotR/1107.4108;eldamo=q;ipa=appendix-e
+time-words.winter,hrívë,,rˈiːve,,3,qya-attested-v1;src=LotR/1107.4110;eldamo=q;ipa=appendix-e
+time-words.night,lómë,,lˈoːme,night / dusk,3,qya-attested-v1;src=PE17/081.0102;eldamo=q;ipa=appendix-e
+days-of-week.monday,Isilya,,ˈisilja,Moon-day,3,qya-attested-v1;src=LotR/1110.2813;eldamo=q;ipa=appendix-e
+days-of-week.tuesday,Aldúya,Aldëa,aldˈuːja,Day of the Two Trees; Aldëa in Numenorean use,3,qya-attested-v1;src=LotR/1110.2901;eldamo=q;ipa=appendix-e
+days-of-week.wednesday,Menelya,,mˈenelja,Heavens-day,3,qya-attested-v1;src=LotR/1110.2902;eldamo=q;ipa=appendix-e
+days-of-week.thursday,Eärenya,,eˈarenja,Sea-day,3,qya-attested-v1;src=LotR/1110.3505;eldamo=q;ipa=appendix-e
+days-of-week.friday,Valanya,Tárion,vˈalanja,Vala-day,3,qya-attested-v1;src=LotR/1110.2903;eldamo=q;ipa=appendix-e
+days-of-week.saturday,Elenya,,ˈelenja,Star-day,3,qya-attested-v1;src=LotR/1110.2811;eldamo=q;ipa=appendix-e
+days-of-week.sunday,Anarya,,ˈanarja,Sun-day,3,qya-attested-v1;src=LotR/1110.2812;eldamo=q;ipa=appendix-e
+months.january,Narvinyë,,nˈarvinje,New-fire,3,qya-attested-v1;src=LotR/1110.0301;eldamo=q;ipa=appendix-e
+months.february,Nénimë,,nˈeːnime,Wet-ness,3,qya-attested-v1;src=LotR/1110.0302;eldamo=q;ipa=appendix-e
+months.march,Súlimë,,sˈuːlime,Windy-one,3,qya-attested-v1;src=LotR/1110.0303;eldamo=q;ipa=appendix-e
+months.april,Víressë,,viːrˈesse,Freshness,3,qya-attested-v1;src=LotR/1110.0304;eldamo=q;ipa=appendix-e
+months.may,Lótessë,,loːtˈesse,Flower-ness,3,qya-attested-v1;src=LotR/1110.0305;eldamo=q;ipa=appendix-e
+months.june,Nárië,,nˈaːrie,Fire-ness,3,qya-attested-v1;src=LotR/1110.0306;eldamo=q;ipa=appendix-e
+months.july,Cermië,,kˈermie,,3,qya-attested-v1;src=LotR/1110.0307;eldamo=q;ipa=appendix-e
+months.august,Úrimë,,ˈuːrime,Hot-one,3,qya-attested-v1;src=LotR/1110.0308;eldamo=q;ipa=appendix-e
+months.september,Yavannië,,javˈannie,Yavanna-ness,3,qya-attested-v1;src=LotR/1110.0309;eldamo=q;ipa=appendix-e
+months.october,Narquelië,,narkwˈelie,Sun-fading,3,qya-attested-v1;src=LotR/1110.0401;eldamo=q;ipa=appendix-e
+months.november,Hísimë,,hˈiːsime,Misty-one,3,qya-attested-v1;src=LotR/1110.0402;eldamo=q;ipa=appendix-e
+months.december,Ringarë,,rˈiŋɡare,Coldness,3,qya-attested-v1;src=LotR/1110.0403;eldamo=q;ipa=appendix-e

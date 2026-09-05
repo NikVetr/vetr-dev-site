@@ -1,0 +1,15 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+slang.thats-good,Nicht schlecht,,nˈɪçt ʃlˈɛçt,not bad,1,slang-agent-v1;ipa=espeak
+slang.thats-great,Wahnsinn!,,vˈɑːnzɪn,madness,1,slang-agent-v1;ipa=espeak
+slang.i-love-it,Ich find's mega,,ɪç fˈɪnds mˈeːɡɑː,,1,slang-agent-v1;ipa=espeak
+slang.thats-bad,Nicht so toll,,nˈɪçt zoː tˈɔl,not so great,1,slang-agent-v1;ipa=espeak
+slang.delicious,Lecker!,,lˈɛkɜ,,2,slang-agent-v1;ipa=espeak
+slang.thats-pricey,Ganz schön teuer,,ɡˌants ʃˈøːn tˈɔøɜ,quite nicely expensive,1,slang-agent-v1;ipa=espeak
+slang.exactly,Genau!,,ɡənˈaʊ,,2,slang-agent-v1;ipa=espeak
+slang.no-worries,Passt schon,,pˈast ʃˈoːn,it fits already,1,slang-agent-v1;ipa=espeak
+slang.youre-welcome,Immer wieder!,,ˈɪmɜ vˈiːdɜ,again any time,1,slang-agent-v1;ipa=espeak
+slang.seriously,Echt?,,ˈɛçt,real?,2,slang-agent-v1;ipa=espeak
+slang.im-good-thanks,"Alles gut, danke",,"ˈaləs ɡˈuːt, dˈaŋkə","all good, thanks",1,slang-agent-v1;ipa=espeak
+slang.lets-go,Los geht's!,,lˈoːs ɡˈeːts,off it goes,2,slang-agent-v1;ipa=espeak
+slang.cheers,Prost!,,pɾˈɔst,,2,slang-agent-v1;ipa=espeak
+slang.see-you,Bis dann!,,bɪs dan,till then,2,slang-agent-v1;ipa=espeak

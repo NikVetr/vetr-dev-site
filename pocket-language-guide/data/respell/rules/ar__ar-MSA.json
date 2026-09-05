@@ -102,6 +102,16 @@
   "splits": [],
   "phonemes": [
     {
+      "slot": "coda",
+      "ipa": "ɬ",
+      "out": "لْ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɬ",
+      "out": "ل"
+    },
+    {
       "slot": "nucleus",
       "ipa": "uə̯",
       "out": "ُوَ"

@@ -1,0 +1,15 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+slang.thats-good,Bello!,,bˈɛllo,beautiful,1,slang-agent-v1;ipa=espeak
+slang.thats-great,Che forte!,,ke fˈɔrte,how strong,1,slang-agent-v1;ipa=espeak
+slang.i-love-it,Mi piace un sacco,,mɪ pjˈatʃe ʊn sˈakko,I like it a sackful,1,slang-agent-v1;ipa=espeak
+slang.thats-bad,Non è un granché,,non e ʊn ɡrankˈe,it isn't much,1,slang-agent-v1;ipa=espeak
+slang.delicious,Buonissimo!,,bʊonˈissimo,,2,slang-agent-v1;ipa=espeak
+slang.thats-pricey,Costa un occhio,,kˈɔsta ʊn ˈɔkkio,it costs an eye,1,slang-agent-v1;ipa=espeak
+slang.exactly,Appunto!,,appˈunto,precisely,2,slang-agent-v1;ipa=espeak
+slang.no-worries,Non fa niente,,non fˈa njˈɛnte,it does nothing,2,slang-agent-v1;ipa=espeak
+slang.youre-welcome,Di niente,,dɪ njˈɛnte,of nothing,2,slang-agent-v1;ipa=espeak
+slang.seriously,Ma dai!,,ma dˈaːi,but come on!,2,slang-agent-v1;ipa=espeak
+slang.im-good-thanks,Sono a posto,,sˌono a pˈosto,I'm in place,1,slang-agent-v1;ipa=espeak
+slang.lets-go,Andiamo!,,andjˈamo,,2,slang-agent-v1;ipa=espeak
+slang.cheers,Cin cin!,,tʃˈin tʃˈin,clink clink,2,slang-agent-v1;ipa=espeak
+slang.see-you,Ci vediamo!,,tʃɪ vedjˈamo,we'll see each other,2,slang-agent-v1;ipa=espeak

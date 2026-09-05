@@ -1,0 +1,7 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+slang.thats-good,mára ná,,mˈaːra naː,it is good,3,qya-attested-v1;src=PE17/093.1817;eldamo=q;ipa=appendix-e
+slang.i-love-it,melinyes,,mˈelinjes,I love it -- attested inside melinyes apa la he,3,qya-attested-v1;src=VT49/15.1511;eldamo=q;ipa=appendix-e
+slang.thats-bad,urra ná,,ˈurra naː,it is bad,1,qya-composed-v1;lex=PE22/168.0314 + LotR/0377.4203;grammar=PE22;ipa=appendix-e
+slang.exactly,nása,,nˈaːsa,"yes, it is so",3,qya-attested-v1;src=PE22/166.2109;eldamo=q;ipa=appendix-e
+slang.lets-go,á tulë,,aː tˈule,do come!,3,qya-attested-v1;src=PE22/140.0108;eldamo=q;ipa=appendix-e
+slang.see-you,namárië,,namˈaːrie,farewell -- be well,3,qya-attested-v1;src=LotR/0378.0201;eldamo=q;ipa=appendix-e

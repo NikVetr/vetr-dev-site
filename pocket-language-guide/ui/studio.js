@@ -131,6 +131,13 @@ async function main() {
     setReaderLanguage(spec.source);
     await loadUiLanguage(spec.source, loadText);
     applyStatic();
+    // **The new pair's edits, not the old pair's.** `edits` is keyed on (target,
+    // source) in `localStorage`, and changing the reader used to leave the previous
+    // pair's overrides in memory: they showed on the new sheet, and the next save
+    // wrote them under the new pair's key -- so correcting an English respelling and
+    // then switching to French silently filed that correction against French and
+    // could overwrite what was there.
+    edits = loadEdits(spec.target, spec.source);
     format = createFormatPanel(formatConfig());
     updateTree = null;
     addTerm = null;
@@ -194,10 +201,16 @@ async function main() {
     ), 0);
     $('counts').textContent = t('studio.counts', { included: shown, total });
 
-    // Rebuilt only when its shape changes -- a term added or removed. Otherwise
-    // only checkboxes and counts change, so scroll position and expanded sections
-    // survive a re-solve.
-    const nextTreeKey = edits.extras.map((e) => e.conceptId).join('|');
+    // Rebuilt only when its shape changes -- a term added or removed, or a column
+    // switched on. Otherwise only checkboxes and counts change, so scroll position
+    // and expanded sections survive a re-solve.
+    //
+    // `fieldSet` is part of the shape because a tree row carries one cell per shown
+    // column and the row editor one input per cell, both built at construction: with
+    // only the extras in the key, switching IPA on left the tree with no IPA cell and
+    // the editor with no IPA field, and neither ever caught up.
+    const nextTreeKey = [spec.fieldSet.join(','), ...edits.extras.map((e) => e.conceptId)]
+      .join('|');
     if (!updateTree || nextTreeKey !== treeKey) {
       treeKey = nextTreeKey;
       updateTree = createTree({
@@ -481,12 +494,19 @@ async function main() {
         // section on brings all of its items with it -- so accepting one row from
         // "With children" would quietly add twelve. Turn the rest of that section
         // off explicitly, leaving only what was ticked.
+        //
+        // Except the rows the reader ticked themselves. Those are already `true` in
+        // the spec, and blanket-clearing the section took them away again: accept one
+        // proposal from a hidden section and every item you had picked out of it
+        // vanished, which is the opposite of what accepting an addition means.
         for (const sectionId of Object.keys(sections)) {
           if (spec.selection.sections[sectionId] !== false) continue;
           const section = ctx.corpus.sectionById[sectionId];
           for (const concept of ctx.corpus.conceptsByGroup[section.group] ?? []) {
             if (concept.section_id !== sectionId) continue;
-            if (!items[concept.concept_id]) items[concept.concept_id] = false;
+            if (items[concept.concept_id]) continue;
+            if (spec.selection.items[concept.concept_id]) continue;
+            items[concept.concept_id] = false;
           }
         }
         // What balancing did, so the reader can see it rather than infer it from a

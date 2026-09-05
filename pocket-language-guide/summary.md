@@ -25,18 +25,25 @@ everything tiny, which nobody wants. So it moves off the anchor only for a reaso
 
 The comfort threshold is set below the Japanese reference sheet's own 0.478, which
 is a deliberately tight layout that should not be second-guessed. On 7×5in, 192 of
-the 342 shipped pairs settle on eight faces and 148 on ten; none now fits six, and
-two need twelve — `el ← hi` and `ru ← hi`, where Devanagari respellings force the
-column above the theme's size and the solver reports it rather than clipping. Greek is the
-second-longest language in the set after Russian and takes ten against most sources;
-Hungarian is ordinary, eight against a Latin or Cyrillic source and ten against the
-scripts that need vertical room. The
-tens are the scripts that need the most vertical room: **every** Japanese, Arabic and
-Devanagari sheet takes ten, Russian eleven of sixteen and Thai nine, while no English
-or Vietnamese sheet needs one. The reference sheets reached four by hand against a
-bank of 413 concepts. It is 776 now; the divider defaults to one position per section
+the 342 pairs between the nineteen full packs settle on eight faces and 148 on ten;
+none now fits six, and two need twelve — `el ← hi` and `ru ← hi`, where Devanagari
+respellings force the column above the theme's size and the solver reports it rather
+than clipping. Greek is the second-longest language in the set after Russian and takes
+ten against every source; Hungarian is ordinary, eight against a Latin or Cyrillic
+source and ten against the scripts that need vertical room. The tens are the scripts
+that need the most vertical room: **every** Japanese, Arabic, Devanagari and Greek
+sheet takes ten, Russian fifteen of eighteen and Thai fourteen, while no English or
+Vietnamese sheet needs one.
+
+**Those three numbers did not move when the corpus went to twenty-one languages**,
+which is the check that face count follows content rather than the language list: all
+78 pairs that involve Klingon or Quenya land at two or four faces — 28 and 50 — because
+a partial pack has less to lay out, on either side of the join. A sheet whose *reader*
+is Klingon is short for the same reason a sheet whose subject is: a row with no gloss
+in the reading language cannot print. The reference sheets reached four by hand against a
+bank of 413 concepts. It is 798 now; the divider defaults to one position per section
 rather than one per row, which costs type size; and — the largest of the three — the
-respelling column has content on all 342 pairs rather than 16, so there is a third
+respelling column has content on all 420 pairs rather than 16, so there is a third
 line of type on every entry that used to have two. Eight is the same answer as four
 was, at the new size, the new default and the new column. A credit-card sheet takes
 sixteen rather than printing at minimum size.
@@ -122,10 +129,10 @@ A respelling is written *for a reader* — `nee HOW` is Chinese for someone who 
 English and nothing else — so curating them by hand is O(N²), and for a long time
 only the 16 pairs glossed into English had one while the other 256 printed an empty
 column. The way out is two O(N) inputs instead: the `ipa` column of the language
-being learned, and one rule table per language doing the reading. **All nineteen
-reader tables now exist and every one of the 342 pairs prints a respelling.**
+being learned, and one rule table per language doing the reading. **All twenty-one
+reader tables now exist and every one of the 420 pairs prints a respelling.**
 `node scripts/respell_check.mjs <reader> --gaps` counts IPA symbols that reach the
-page because no rule matched, and every reader is at zero. Seventeen of the tables
+page because no rule matched, and every reader is at zero. Nineteen of the tables
 derive from a published pronunciation key for that language (`content/RESPELL-SYSTEMS.md`
 records which, and what had to be adapted where no key existed); the English one was
 read off the 12,001 curated respellings already in the corpus, which is a better
@@ -497,6 +504,118 @@ so the priority ladder is untouched. Forcing one template on a whole section was
 other option and is worse both ways: the reference grid is much the more compact, and
 a long phrase does not fit it.
 
+### A slang section, and what a "universal reference set" turned out to be
+
+The brief was a per-language slang and idiom panel, built where possible from a
+universal reference set — "that's good", "that's really good", "that's bad", "I like
+it" — rather than a list of colourful phrases per language. That framing is what makes
+it fit the corpus at all: a concept has to be language-independent to join on
+`concept_id`, and "casual way to say X" is, while "the Spanish word *guay*" is not.
+
+Fourteen concepts survived the requirement that a commonality actually exist across
+twenty-one languages, and they are the intensity ladder the brief named plus the
+register-marked moves that turned out to travel with it: agreement (`exactly`),
+reassurance (`no worries`, `you're welcome`), surprise (`seriously`), a *refusal*
+(`I'm good, thanks`), and the four social ones every language marks casually —
+`delicious`, `let's go`, `cheers`, `see you`. Three clusters carry two rungs each, so
+the sheet can drop the intensifier and keep the base: `Nice` / `Awesome!`, `¡Genial!` /
+`¡Buenísimo!`, `Неплохо` / `Круто!`, `いいね` / `すごいですね`.
+
+**The negative rungs are where the universality claim gets tested and partly fails.**
+"That's bad" is not a casual register move in every language the way "that's good" is:
+Japanese answers with `微妙ですね` and German with `Nicht so toll`, both hedges rather
+than negations, because a blunt one is a different speech act. `thats-bad` is scored
+0.250 for that reason — the lowest in the section — so it drops off a dense card
+before the phrases that behave the same everywhere. The section as a whole sits at
+importance 0.36, below every safety and orientation panel, which is the honest place
+for it: it is what you print when there is room left.
+
+The section is `default_on: 0`, so it does not appear on the default card and is one of
+the panels the balance proposal draws on when a column has whitespace to fill. Two
+languages are short of the fourteen — Klingon has twelve and Quenya six — for the same
+reason they are short everywhere else.
+
+### Two constructed languages, treated as real ones
+
+Klingon (`tlh`) and Quenya (`qya`) are in, and the instruction was to treat them
+exactly as the other nineteen. That turned out to be the interesting part: both have
+a published phonology, an ISO 639 code and a documented lexicon, so the same sourcing
+discipline applies — and applying it honestly is what produces the findings.
+
+**Neither pack fills, and that is recorded rather than papered over.** Klingon covers
+317 of 798 concepts and Quenya 206, because the bank is pharmacy symptoms and ATM
+vocabulary and neither lexicon was built for that. Nothing is coined: a row is either
+verbatim from a named source, a canon frame with a slot substituted, or assembled from
+attested lexemes by documented affixes, and `provenance` says which per row. A
+morphological verifier over the Klingon pack strips every prefix and suffix and
+requires the remainder to be a lexicon headword; it reports zero unverifiable roots
+and it caught four authoring errors on the way.
+
+The gaps are facts about the languages. Klingon has `jaj` and `jar` and no named week
+or month, so `days-of-week` and `months` are empty — while Quenya has all seven days
+and all twelve months attested in Appendix D, so both are complete. **Klingon's
+compass has three points**, so `east` and `west` print and `north` and `south` cannot.
+**Quenya has no interrogative for "where"** — `yassë` is the relative "in which
+place" — and that single gap empties every "Where is X?" concept in the bank, which
+is the largest cause of its 26 empty sections.
+
+**Emergency numbers are the sharpest test of the instruction, and the answer is to
+print nothing.** `regions.csv` is a table of countries keyed on ISO 3166 with a source
+and a verification date; neither language has a territory, so neither gets a row and
+`languages.csv` carries an empty `regions` cell. Every consumer already degrades
+correctly — `emergencyNote` returns null, the destination menu hides itself, the flag
+wash finds no colours — so no number is invented and no warning fires, because nothing
+is missing. Separately, `validate_data.py` refuses confidence below 2 in the six
+safety-critical sections, and an assembled phrase is not an authoritative source: so
+those sections take only verbatim-attested cells, which means **Quenya has no
+emergency section at all** on any sheet. That is the gate working, not failing.
+
+**Klingon's case-significance is load-bearing and it reaches the pipeline.** `q` and
+`Q` are different consonants and `I` is a vowel where `i` is not a letter, so the new
+IPA route does not lowercase its input the way the other table routes do, and a
+Klingon reader's table can carry **no stress device at all**: `stress: caps` would
+turn every `q` into a different consonant, and the language has no diacritic to use
+instead. Its badge is `qQ`.
+
+Two hazards were raised against this pack and both were measured rather than acted on,
+because the measurement said not to. The first was that Klingon's case-significant `I`
+and `l` would be indistinguishable at the 4.4pt Latin floor, which would have argued
+for a serif default or a raised `min_size_pt` — a decision, since that floor is shared
+with nineteen other Latin languages. It does not arise: Noto Sans draws `I` with
+crossbars (twelve segments, a 258/1000-em bounding box) against `l`'s plain four-point
+stem at 88, and the two differ in height as well, 714 against 760. At 4.4pt the
+crossbar is still over a point wide. The second was that a Klingon emergency line would
+read `Spain: 112 Hoch QaH`, since `regionName` has no registry override the way
+`languageName` does. It would — and that is the right output. Neither language has a
+word for Spain, `Intl.DisplayNames` falls back to the English name for both locales
+rather than to a bare `ES`, and inventing one would fail the same sourcing rule that
+kept the emergency numbers out.
+
+**What the twenty-one-language corpus cost the other nineteen tables.** Klingon writes
+/t͡ɬ/ as `tɬ`, which `phonemesOf` splits into `t` + `ɬ` — and `ɬ` was the first lateral
+fricative the corpus had ever held, so every one of the nineteen printed a bare IPA
+letter on 28 cells. Each table already contained the answer, its own /l/ output, and
+the fix is that each table's `ɬ` rules are now a **copy of its own `l` rules, slot
+conditions and all**. That qualifier is the whole lesson, because the one-line version
+of the fix was wrong twice: a single `slot: any` rule handed Hindi a leading virama, so
+`कात-्लो` set a mark on a dotted circle at a syllable break, and handed Korean a bare
+initial ᄅ with no vowel to compose with — which NFC leaves alone and `subset_fonts.py`
+duly ships as a jamo glyph, printing a letter-sized fragment beside real syllables.
+Slot-conditioned copies read `कात-लो` and `캇-로`.
+
+**A rule cannot be audited in isolation**, which is why this went unseen: a Hangul
+syllable is assembled from three rules and composed afterwards, so per-rule inspection
+says nothing about what prints. `charset.json` — every character every reader emits
+over the whole corpus — is the only place the defect is visible, and
+`tests/respell.test.mjs` now asserts against it. There is also deliberately no `tɬ`
+rule anywhere: tokenisation splits the affricate before any rule is consulted, so the
+nineteen cluster rules written for it were dead code and are gone. It composes instead
+— `tl`, `τλ`, `тл`, `تل`, `तल`, `ตล`, `トル`, `te-le-`, `thl` for Quenya, and `tlh` for
+a Klingon reader, which is the canonical spelling arrived at without a special case.
+Japanese also turned out to be the only one of the nineteen with no rule for a bare
+`ʰ`, which the other eighteen all map to nothing. All twenty-one readers are at zero
+gaps.
+
 ### The paper's own colour
 
 `spec.background` washes the page behind the columns. White is the default and stays
@@ -731,10 +850,16 @@ in the distribution that still fills a real card:
 
 | step | floor | phrases | fits |
 |---|---|---|---|
-| Everything | 0 | 776 | 6–8 faces of 7×5 |
-| Broad | 0.74 | 306 | four faces — what both hand-built originals settled on |
+| Everything | 0 | 798 | 6–8 faces of 7×5 |
+| Broad | 0.74 | 314 | four faces — what both hand-built originals settled on |
 | Core | 0.82 | 147 | one sheet |
-| Essential | 0.95 | 11 | **one phone face at full nominal type, in all nineteen languages** |
+| Essential | 0.95 | 10 | **one phone face at full nominal type, in all nineteen natural languages** |
+
+**The top step is the one place the two constructed languages fall short of a
+preset**, and it is worth stating plainly rather than leaving to the coverage table:
+Klingon carries 5 of the 10 and Quenya 3. What is missing is the ambulance, the
+allergic reaction and the polite greeting — a lexicon written for a television series
+has no pharmacy in it, and the safety gate would refuse an invented one anyway.
 
 There is a cliff above the top step, which is why it is where it is: the next rung
 down is 35 phrases under *twelve* headings, and it overflows one phone face even at
@@ -814,10 +939,11 @@ normalised English gloss, against the exact section first and then its group,
 because two sheets can file the same phrase under different panels ("Can I charge
 my phone?" is hotel basics in one and hotel requests in the other).
 
-The bank is now **780 concepts across 57 sections in nineteen languages**, which is
-**342 ordered pairs** — every one of which renders, and two of which anyone wrote a
+The bank is now **798 concepts across 58 sections in twenty-one languages**, which is
+**420 ordered pairs** — every one of which renders, and two of which anyone wrote a
 sheet for. That ratio is the whole argument for joining on `concept_id` instead of
-storing pairs: the sixteenth language added 745 rows and 30 new pairs.
+storing pairs: the sixteenth language added 745 rows and 30 new pairs, and the
+twenty-first added 40 more pairs on its own.
 
 Every pack covers 100% of the concepts that apply to it. The qualifier is doing
 work: a concept can name the languages it belongs to, so the Korean won and the
@@ -1006,7 +1132,9 @@ the reader's own Emergency heading. It now takes its frame and its ten service w
 from `data/registry/emergency-labels/<source>.csv` -- registry rather than
 `data/i18n/`, because `core/` renders the sheet and must not reach into the
 interface's catalogues -- and the country name from `Intl.DisplayNames`, checked
-against all 53 regions in all nineteen languages.
+against all 53 regions in all nineteen natural languages. The two constructed ones are
+outside this entirely: neither has a territory, so neither is a destination, and CLDR
+has no display names in Quenya to check.
 
 **Every language refused the preposition.** `In {region}` was wrong for three of the
 49 English names ("In United States"); Portuguese counted 41 of 49 taking an article
@@ -1021,7 +1149,7 @@ nominative -- the same trick its pack used on sixteen slot rows. Hindi took
 Three validator rules keep the source side honest: every `note` needs text in every
 ready language except the ones it is scoped to (a language is never its own sheet's
 source), and every service word in `regions.csv` needs a row in every language's
-label file. All nineteen languages pass both.
+label file. All twenty-one languages pass both.
 
 **The third is new with the nineteenth and nothing passes it yet.** A concept with an
 `applies_to` renders only on the targets it names -- but on those pairs the *gloss*

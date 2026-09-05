@@ -140,6 +140,11 @@
   "splits": [],
   "phonemes": [
     {
+      "slot": "any",
+      "ipa": "ɬ",
+      "out": "l"
+    },
+    {
       "slot": "onset",
       "ipa": "ʃtɾ",
       "out": "str"

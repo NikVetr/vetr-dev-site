@@ -102,6 +102,22 @@
   "phonemes": [
     {
       "slot": "onset",
+      "ipa": "ɬ",
+      "out": "le-"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɬ",
+      "out": "-le",
+      "after_out": "b p m f d t k s z l ng"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɬ",
+      "out": "l"
+    },
+    {
+      "slot": "onset",
       "ipa": "p",
       "out": "bu-",
       "if_inventory": "pʰ"

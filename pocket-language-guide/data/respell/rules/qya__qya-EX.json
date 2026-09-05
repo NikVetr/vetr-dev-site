@@ -1,0 +1,1170 @@
+{
+  "source": "qya",
+  "accent": "qya-EX",
+  "status": "ready",
+  "version": "1",
+  "derives_from": "Eldamo's own notation for Quenya word-stress -- LAS.se, ni.QUES.se, TYA.li.e, las.se.LAN.ta, a.LAI.ti.en -- which is a full stop between syllables and capitals on the stressed one, and which is the notation the scholarly literature reaches for whenever it has to write a Quenya pronunciation down. The letters are Tolkien's own orthography as *The Lord of the Rings* Appendix E describes it, and the inventory that bounds them is Eldamo's Late Quenya phoneme list, which gives each consonant together with the orthography that writes it. **There is no Quenya respelling tradition to borrow, and the reason is worth stating: there is no body of foreign words written in Quenya to build one from.** What Tolkien left is four foreign proper nouns inside his Quenya prayers -- Aina Maria, Hristo for Christus, Eruion, and nasie for amen -- and one of those four is the whole evidence for how he treated a foreign cluster (Christus to Hristo, so /kr/ to hr). Four names is a datum, not a key, so this table borrows a *notation* and derives the *correspondences* from the phonology. That is the weakest source of the twenty-one and it is said here rather than in a footnote.",
+  "deviations": [
+    {
+      "rule": "policy.stress -- the acute, which four tables use and which Quenya writes on every long vowel.",
+      "why": "IMPOSSIBLE HERE, and it is the Greek and Hungarian trap running the other way. In Quenya the acute IS the length mark: á é í ó ú are long a e i o u and nothing else (Appendix E). Marking stress with it would print a long vowel wherever the source has a stressed short one, which is a different word rather than a decorated one. So length goes in the phonemes table -- oː takes ó -- exactly as content/CONTRIBUTING.md says a script that writes length with a different letter must, and stress takes the capitals instead. That is also what Eldamo does, which is why the notation and the correspondences agree for free."
+    },
+    {
+      "rule": "Quenya has no /θ/, so the naive answer is to approximate it.",
+      "why": "No approximation is needed, because the language already made this change itself. Exilic Quenya turned þ into s -- Tolkien tells the story at PM/331-332, where it is a point of contention among the Noldor -- so þ to s is not a substitution imposed from outside but the sound law of the dialect Appendix E describes. It is the one correspondence in this table that needs no defending."
+    },
+    {
+      "rule": "Quenya admits no word-initial b, d or g: they occur only in the clusters mb nd ng ld rd and in gw.",
+      "why": "Written anyway. This is phonotactics rather than inventory -- the sounds are in the language, a Quenya speaker says them in anga and ando -- so a reader can pronounce an initial b without being asked for anything new. Losing the voicing instead would merge /b d ɡ/ with /p t k/, which is lexical in every one of the twenty targets. The same licence covers the codas: Quenya ends a word in l n r s t and nothing else."
+    },
+    {
+      "rule": "A foreign consonant cluster is repaired by the reader's own phonotactics, which is what the Klingon table does with an epenthetic vowel.",
+      "why": "NOT done here, and the difference is the evidence. Klingon's key shows Okrand breaking clusters with I and u across two hundred borrowings, so the rule is his. Quenya's evidence is Hristo -- one word, and a simplification rather than an epenthesis. Inventing a Quenya epenthesis would be adding a sound law Tolkien did not write, which is the one thing this pack does not do. max_onset 1 pushes most clusters into a coda, where at least the syllable dot falls between the consonants and shows the reader where to break, and the rest print as they come."
+    },
+    {
+      "rule": "k, j and z are letters of the Latin alphabet and of the IPA.",
+      "why": "Never emitted. Appendix E is explicit that c always has the value of k in Quenya and that k appears only where a source writes it for clarity, so /k/ takes c; y in Quenya is a consonant, so /j/ takes y and the vowel /y/ takes u; and there is no z, so every sibilant takes s. Verified in the output: 0 rows contain k, j or z."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "/s z ʃ ʒ ɕ ʑ ʂ ʐ θ/",
+      "out": "s",
+      "why": "s is Quenya's only sibilant. Nine foreign sibilants collapse onto it, which is the largest loss here and is the same loss the Klingon table takes with S. /θ/ joins them by the language's own sound law rather than by approximation; the other eight are approximations."
+    },
+    {
+      "sounds": "/tʃ dʒ tɕ dʑ ʈʂ ɖʐ c ɟ/",
+      "out": "ty and dy",
+      "why": "Quenya's palatal series, which Appendix E describes in terms an English reader can say -- ty \"as the ty in British tune\". They are palatalised stops where the targets have postalveolar affricates: one manner off, and the nearest thing in the inventory. It also means Turkish's and Hungarian's palatal stops land exactly right, since those are the same sound."
+    },
+    {
+      "sounds": "/x ɣ ħ h/",
+      "out": "h",
+      "why": "Quenya h is [x] between vowels and before t -- Appendix E's own example is the ht of German echt -- so /x/ is not an approximation at all. /ɣ/ loses its voicing and /ħ/ its place, both audibly but not unrecognisably."
+    },
+    {
+      "sounds": "/ç/ (German ich, Japanese hi)",
+      "out": "hy",
+      "why": "Appendix E: hy \"has the same relation to y as hw to w\", the sound of English hew. That is /hj/ against /ç/, which is a sequence for a segment and the closest the orthography reaches."
+    },
+    {
+      "sounds": "/ʔ/ and /ʕ/",
+      "out": "dropped",
+      "why": "Quenya has neither and no letter that could carry one. A dropped hamza leaves an ordinary onsetless Quenya syllable, which the language has in abundance (aiya, ando, elen)."
+    },
+    {
+      "sounds": "/y ø œ/ (front rounded vowels)",
+      "out": "u, o, o",
+      "why": "Quenya's five vowels include no front rounded one, and y is not available for /y/ because in Quenya y is a consonant. o rather than e for /ø œ/, on the same two-features-against-one count the Klingon table sets out."
+    },
+    {
+      "sounds": "/ə ʌ ɜ ɐ/ (the central vowels)",
+      "out": "e and a",
+      "why": "Quenya has no central vowel. /ə/ and /ɜ/ take e, because Quenya's own unstressed final vowel -- the one it writes ë precisely so it is not swallowed -- is the nearest thing it has to one. /ʌ/ and /ɐ/ take a."
+    },
+    {
+      "sounds": "/ɚ ɝ/ (English NURSE)",
+      "out": "er",
+      "why": "Two letters for one phoneme, and Quenya's r is a trill, so an English reader would not recognise the result. A Quenya reader will read [er], which is what the spelling says."
+    },
+    {
+      "sounds": "/ɨ/ (Russian) and /ɯ/ (Turkish, Korean, Thai, Japanese)",
+      "out": "i or u",
+      "why": "Both are high unrounded vowels Quenya lacks. i is the nearest, and is right for Russian, Turkish, Korean and Thai; Japanese is the exception and unless_inventory 'u' finds it, since espeak writes Japanese's only high back vowel as /ɯ/ and the language has no plain /u/."
+    },
+    {
+      "sounds": "vowel length",
+      "out": "the accented letter",
+      "why": "Not an approximation but the orthography: á é í ó ú. So Hindi, Arabic, Thai, Japanese, German, Italian and Hungarian length all survive into this column, which they do not into most of the others. The five long letters are the only characters this table emits that a Latin subset might not already carry, and the corpus contains all five already."
+    },
+    {
+      "sounds": "aspiration, palatalisation, tenseness, pharyngealisation, tone",
+      "out": "not written",
+      "why": "Quenya has none of them. Every aspirated and tense series is listed one by one rather than left to a bare modifier rule, so that /kʰ/ cannot decompose into c plus a stranded modifier."
+    },
+    {
+      "sounds": "/ɬ/ and /t͡ɬ/, which are Klingon's tlh",
+      "out": "hl and thl",
+      "why": "**Quenya is the one reader of the twenty-one with a letter for this, and it is not a coincidence of the alphabet.** Appendix E gives hl as a voiceless l, which is what /ɬ/ is; Tolkien adds that by the Third Age it had fallen in with plain l, so a modern Quenya reader will say [l] and be about as close as any of the other readers get. The affricate takes thl, which is not a possible Quenya cluster, and the syllable dot is left to show where it breaks."
+    }
+  ],
+  "policy": {
+    "syllable_separator": ".",
+    "word_separator": " ",
+    "stress": "caps",
+    "stress_min_syllables": 2,
+    "length": "none",
+    "tone": "drop",
+    "max_onset": 1,
+    "locale": "qya",
+    "fixups": "all"
+  },
+  "splits": [],
+  "phonemes": [
+    {
+      "slot": "nucleus",
+      "ipa": "ɪ",
+      "out": "i",
+      "after_out": "a e i o u á é í ó ú"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "i",
+      "out": "i",
+      "after_out": "a e i o u á é í ó ú"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "j",
+      "out": "i",
+      "after_out": "a e i o u á é í ó ú"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʊ",
+      "out": "u",
+      "after_out": "a e i o u á é í ó ú"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "u",
+      "out": "u",
+      "after_out": "a e i o u á é í ó ú"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "w",
+      "out": "u",
+      "after_out": "a e i o u á é í ó ú"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɥ",
+      "out": "u",
+      "after_out": "a e i o u á é í ó ú"
+    },
+    {
+      "slot": "any",
+      "ipa": "aː",
+      "out": "á"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɑː",
+      "out": "á"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐː",
+      "out": "á"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɒː",
+      "out": "á"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʌː",
+      "out": "á"
+    },
+    {
+      "slot": "any",
+      "ipa": "eː",
+      "out": "é"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛː",
+      "out": "é"
+    },
+    {
+      "slot": "any",
+      "ipa": "æː",
+      "out": "é"
+    },
+    {
+      "slot": "any",
+      "ipa": "əː",
+      "out": "é"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɜː",
+      "out": "é"
+    },
+    {
+      "slot": "any",
+      "ipa": "iː",
+      "out": "í"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɪː",
+      "out": "í"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɨː",
+      "out": "í"
+    },
+    {
+      "slot": "any",
+      "ipa": "oː",
+      "out": "ó"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɔː",
+      "out": "ó"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɵː",
+      "out": "ó"
+    },
+    {
+      "slot": "any",
+      "ipa": "øː",
+      "out": "ó"
+    },
+    {
+      "slot": "any",
+      "ipa": "œː",
+      "out": "ó"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɤː",
+      "out": "ó"
+    },
+    {
+      "slot": "any",
+      "ipa": "uː",
+      "out": "ú"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʊː",
+      "out": "ú"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʉː",
+      "out": "ú"
+    },
+    {
+      "slot": "any",
+      "ipa": "yː",
+      "out": "ú"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂʰ",
+      "out": "ty"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "ty"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃʲ",
+      "out": "ty"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ͈",
+      "out": "ty"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "ty"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "ty"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "ty"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "ty"
+    },
+    {
+      "slot": "any",
+      "ipa": "cʰ",
+      "out": "ty"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʐ",
+      "out": "dy"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʑ",
+      "out": "dy"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒ",
+      "out": "dy"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "dy"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟʰ",
+      "out": "dy"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts̪",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "dz",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "pf",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʰ",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "p͈",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʲ",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʼ",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʰ",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʲ",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʼ",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɓ",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "b",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "t͈",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "t̪",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʲ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʼ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ṭ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʲ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "dˤ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʼ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɗ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ḍ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "d",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ð",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "k͈",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʲ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʼ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "qʰ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "q",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡʰ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡʲ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "g",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "fʲ",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "fʼ",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "f",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɸ",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "vʲ",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "vʼ",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "v",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʋ",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "θ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "sʲ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "sʼ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "s͈",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "s̪",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "ṣ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʂ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "zʲ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "zʼ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "ẓ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʐ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʑ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "hy"
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ħ",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "hʼ",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "h",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɣ",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʕ",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "mʲ",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "mʼ",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "m̩",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "m",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "nʲ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "nʼ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "n̩",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɳ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɴ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "n",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "ny"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "ng"
+    },
+    {
+      "slot": "any",
+      "ipa": "lʲ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "lʼ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɫ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭʲ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "l",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "ly"
+    },
+    {
+      "slot": "any",
+      "ipa": "rʲ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "rʼ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɹ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɻ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽʰ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "w"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɥ",
+      "out": "w"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰ",
+      "out": "w"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɬ",
+      "out": "hl"
+    },
+    {
+      "slot": "any",
+      "ipa": "a",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɑ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɒ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʌ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "e",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "æ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ə",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɜ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "i",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɪ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɨ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "o",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɔ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɵ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ø",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "œ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɤ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "u",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʊ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʉ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "y",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɯ",
+      "out": "u",
+      "unless_inventory": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɯ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɚ",
+      "out": "er"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɝ",
+      "out": "er"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ã",
+      "out": "an"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ẽ",
+      "out": "en"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ĩ",
+      "out": "in"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "õ",
+      "out": "on"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ũ",
+      "out": "un"
+    },
+    {
+      "slot": "any",
+      "ipa": "ː",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˑ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʷ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˤ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˀ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʼ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̯",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̩",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "͈",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̪",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̚",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̥",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̬",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̆",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "͜",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̈",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "n"
+    }
+  ],
+  "syllable_fixups": [
+    {
+      "match": "cw",
+      "out": "qu"
+    },
+    {
+      "match": "e$",
+      "out": "ë",
+      "when": [
+        "word_final"
+      ]
+    },
+    {
+      "match": "([bdgfvhyw])\\1",
+      "out": "\\1"
+    }
+  ],
+  "targets": {},
+  "legend": "Quenya tengwar; TÁRA = i tára",
+  "note": "Reader's legend, and it is one line because it can only be one line: \"Quenya tengwar; TÁRA = i tára\" -- Quenya letters, and the capitals are the raised syllable. `tára` is attested for \"lofty, high\" (PE17/186.1006) and `i` is the attested article, so the legend is Quenya; but **Quenya has no attested word for stress and none for syllable**, so the legend cannot say what it would say in any of the other twenty languages. That is the same gap the pack itself records everywhere else, showing up in the one string that is supposed to explain the column.\n\nThe full stop as separator and the capitals as stress are Eldamo's notation taken together, so a reader who has met Quenya word-stress written down has met exactly this: ni.QUES.se, las.se.LAN.ta. No Quenya text uses either mark, which is why they are borrowed from the metalanguage rather than from the orthography -- and the orthography's own marks are all taken. The acute is length, the diaeresis is \"pronounce this vowel\", and there is nothing else.\n\nThere is no curated Quenya sheet, so this table is not scored. It is held to zero --gaps, to a --units list in which every entry is a stated decision, and to reading its output on all twenty targets.",
+  "policy_note": "max_onset is 1 and it is a fact about Quenya rather than a preference: the language admits no initial cluster at all except qu, and the digraphs ty ny ly ry hy hw hl hr nw gw are single consonants rather than clusters. So the field is describing the reader correctly and reader_onsets is absent, being inert below 2. The cost is the same cost the Turkish and Indonesian tables pay and for the same reason -- prá.blem rather than prób.lem -- except that here the reader's own dictionary agrees with the engine.\n\nfixups is 'all' and the three of them do three unrelated jobs: cw to qu is a spelling rule, the final diaeresis is a convention, and the geminate collapse is a repair. A table whose fixups are alternative repairs wants 'first'; these compose.\n\nThe final-diaeresis fixup carries when: ['word_final'] rather than being written into the phoneme rules, and that is deliberate. It is a property of the *word*, not of the /e/: lassë has it and elen does not, and the phoneme table cannot see a word boundary. `holds` reads `when` against the syllable context, where word_final is available.",
+  "engine_note": "Engine limitation, stated as the rule that could not be expressed, with a number. Quenya's six diphthongs are ai au oi ui eu iu and no others, so a foreign /eɪ/ or /oʊ/ is two syllables in Quenya and not one -- but `syllabify` grows a nucleus span over /ɪ ʊ/ and over the glides before this table is consulted, so both arrive as a single nucleus and come out as the illegal digraphs ei and ou. The rule wanted: break a nucleus span whose two elements do not form a diphthong of the READER's inventory, which is the mirror of what `reader_onsets` does for clusters and does not exist for nuclei. Measured over all twenty targets, 1,100 of 85,675 syllables print ei or ou. Not worked around: a nucleus rule for each sequence would put a full stop inside what the engine still counts as one syllable, so the capitals would land on half of it.\n\nThe second is smaller and is the mirror of the first. /kw/ is one Quenya phoneme written qu, so it should be able to open a syllable; to the engine it is two phonemes, and at max_onset 1 the c is pushed into the previous coda before the cw-to-qu fixup can see the pair. The fixup therefore fires only where both letters land in the same syllable. reader_onsets 'kw' with max_onset 2 would fix it and would cost every other cluster the onset maximisation Quenya's own dictionary rejects, so it is not taken."
+}

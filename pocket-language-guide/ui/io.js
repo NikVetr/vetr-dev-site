@@ -68,9 +68,15 @@ export function exportSheetCsv({ corpus, blocks, spec, edits, name }) {
     for (const concept of corpus.conceptsByGroup[section.group] ?? []) {
       if (concept.section_id !== section.section_id) continue;
       const row = rows.get(concept.concept_id);
+      const saved = edits.overrides[concept.concept_id];
       // Items the pair cannot render at all are left out; there is nothing to edit.
-      if (!row && !edits.overrides[concept.concept_id]) continue;
-      const values = row?.values ?? {};
+      if (!row && !saved) continue;
+      // **An edited row that is switched off still has its edit.** `rows` comes from
+      // the solved blocks, so a row excluded from the sheet has no entry there -- and
+      // exporting `{}` for it wrote a line of blanks, which on reimport replaced the
+      // saved override with those blanks and lost the edit. The override is the
+      // fallback, and where both exist the rendered row already includes it.
+      const values = /** @type {Record<string,string>} */ (row?.values ?? saved?.values ?? {});
       records.push({
         concept_id: concept.concept_id,
         section_id: concept.section_id,
@@ -87,16 +93,21 @@ export function exportSheetCsv({ corpus, blocks, spec, edits, name }) {
     }
   }
   for (const extra of edits.extras) {
+    // A custom row can be edited and switched off like any other, and both live in
+    // `overrides` under its own id -- so exporting `extra.values` and a hardcoded
+    // `yes` threw away every change made since it was added.
+    const saved = edits.overrides[extra.conceptId];
+    const values = { ...extra.values, ...(saved?.values ?? {}) };
     records.push({
       concept_id: extra.conceptId,
       section_id: extra.sectionId,
       template: extra.template,
-      include: 'yes',
-      target_text: extra.values.script ?? '',
-      romanization: extra.values.roman ?? '',
-      ipa: extra.values.ipa ?? '',
-      gloss: extra.values.gloss ?? '',
-      respell: extra.values.respell ?? '',
+      include: saved?.include === false ? 'no' : 'yes',
+      target_text: values.script ?? '',
+      romanization: values.roman ?? '',
+      ipa: values.ipa ?? '',
+      gloss: values.gloss ?? '',
+      respell: values.respell ?? '',
       importance: String(extra.weight),
       notes: 'custom',
     });
@@ -161,15 +172,28 @@ export function importSheetCsv(text, corpus, current) {
       problems.push(`row ${line}: new item "${id}" needs both target_text and gloss`);
       continue;
     }
+    // A note is prose in the *reader's* language *about* the target, so `core/pack.js`
+    // reads its text from the source row -- which a new concept does not have. Left
+    // accepted, `template=note` imported cleanly and then threw on the next solve.
+    const template = clean(row.template) || 'entry';
+    if (template === 'note') {
+      problems.push(`row ${line}: new item "${id}" cannot be a note -- a note's text `
+        + 'comes from the reader-side row of an existing concept');
+      continue;
+    }
     const weight = Number(clean(row.importance));
     edits.extras = edits.extras.filter((e) => e.conceptId !== id);
     edits.extras.push({
       conceptId: id,
       sectionId,
-      template: clean(row.template) || 'entry',
+      template,
       weight: Number.isFinite(weight) && weight >= 0 && weight <= 1 ? weight : 0.5,
       values,
     });
+    // `include` was parsed and then dropped for a new row, so an excluded one came
+    // back switched on. `buildBlocks` filters every concept, custom included, on
+    // `overrides[id].include`, so that is where the flag goes.
+    if (!on) edits.overrides[id] = { values, include: false };
     added += 1;
   }
 

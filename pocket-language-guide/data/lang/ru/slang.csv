@@ -1,0 +1,15 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+slang.thats-good,Неплохо,,Neplokho,nʲipɭˈoxʌ,not bad,1,slang-agent-v1;ipa=espeak
+slang.thats-great,Круто!,,Kruto!,krˈutʌ,steep,1,slang-agent-v1;ipa=espeak
+slang.i-love-it,Обожаю!,,Obozhayu!,ʌbʌʒˈɑju,I adore it,1,slang-agent-v1;ipa=espeak
+slang.thats-bad,Так себе,,Tak sebe,tˈɑk sʲˈebʲi,so for itself,2,slang-agent-v1;ipa=espeak
+slang.delicious,Вкуснятина!,,Vkusnyatina!,fkusʲnʲˈɑtʲina,yummy stuff,1,slang-agent-v1;ipa=espeak
+slang.thats-pricey,Дороговато,,Dorogovato,dʌrʌɡʌvˈɑtʌ,a touch expensive,1,slang-agent-v1;ipa=espeak
+slang.exactly,Точно!,,Tochno!,tˈotʃʲnʌ,precisely,2,slang-agent-v1;ipa=espeak
+slang.no-worries,"Ничего, бывает",,"Nichego, byvayet","nʲitʃʲivˈo, bɨvˈɑjit","nothing, it happens",1,slang-agent-v1;ipa=espeak
+slang.youre-welcome,Всегда пожалуйста,,Vsegda pozhaluysta,fsʲiɡdˈɑ pʌʒˈɑɭujsta,always please,1,slang-agent-v1;ipa=espeak
+slang.seriously,Серьёзно?,,Seryozno?,sʲirʲjˈɵznʌ,,2,slang-agent-v1;ipa=espeak
+slang.im-good-thanks,"Спасибо, не надо",,"Spasibo, ne nado","spasʲˈibʌ, nʲe nˈɑdʌ","thanks, no need",2,slang-agent-v1;ipa=espeak
+slang.lets-go,Пошли!,,Poshli!,pʌʃɭʲˈi,we went,2,slang-agent-v1;ipa=espeak
+slang.cheers,Будем здоровы!,Будем!,Budem zdorovy!,bˌudʲim zdʌrˈovɨ,let us be healthy,1,slang-agent-v1;ipa=espeak
+slang.see-you,Пока!,,Poka!,pʌkˈɑ,for now,2,slang-agent-v1;ipa=espeak

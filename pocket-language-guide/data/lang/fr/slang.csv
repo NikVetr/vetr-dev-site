@@ -1,0 +1,15 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+slang.thats-good,C'est sympa,,sɛ sɛ̃pˈa,,1,slang-agent-v1;ipa=espeak
+slang.thats-great,C'est top,,sɛ tˈɔp,,1,slang-agent-v1;ipa=espeak
+slang.i-love-it,J'adore,,ʒadˈɔʁ,I adore,2,slang-agent-v1;ipa=espeak
+slang.thats-bad,C'est pas top,,sɛ pa tˈɔp,,1,slang-agent-v1;ipa=espeak
+slang.delicious,C'est trop bon,,sɛ tʁo bˈɔ̃,it's too good,2,slang-agent-v1;ipa=espeak
+slang.thats-pricey,Ça coûte un bras,,sa kut œ̃ bʁˈa,it costs an arm,1,slang-agent-v1;ipa=espeak
+slang.exactly,Carrément !,,kaʁemˈɑ̃,squarely,1,slang-agent-v1;ipa=espeak
+slang.no-worries,Pas de souci,,pa də susˈi,no worry,2,slang-agent-v1;ipa=espeak
+slang.youre-welcome,Y'a pas de quoi,,ja pa də kwˈa,there isn't what for,2,slang-agent-v1;ipa=espeak
+slang.seriously,Sérieux ?,,seʁjˈø,serious?,2,slang-agent-v1;ipa=espeak
+slang.im-good-thanks,"Ça va, merci",,"sa vˈa, mɛʁsˈi","it goes, thanks",2,slang-agent-v1;ipa=espeak
+slang.lets-go,On y va !,,ɔ̃n i vˈa,one goes there,2,slang-agent-v1;ipa=espeak
+slang.cheers,Santé !,,sɑ̃tˈe,health,2,slang-agent-v1;ipa=espeak
+slang.see-you,À plus !,,a plˈy,till later,2,slang-agent-v1;ipa=espeak

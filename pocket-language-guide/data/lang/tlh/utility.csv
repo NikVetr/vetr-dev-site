@@ -1,0 +1,13 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,{} vIghoS vIneH,,{} vɪɣoʂ vɪnɛx,I want to proceed to it,1,tlh-composed-v1;lex=TKD 6.2.5;grammar=TKD;ipa=okrand
+utility-templates.please-give-me,{} HInob,,{} xɪnob,give it to me,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+utility-templates.may-i,{} vIlaH'a',,{} vɪlɑxʔɑʔ,can I do it?,1,tlh-composed-v1;lex=TKD 4.2.5;grammar=TKD;ipa=okrand
+utility-templates.do-you-have,{} Daghaj'a',,{} ɖɑɣɑdʒʔɑʔ,do you have it?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+utility-templates.please-write-the-number,mI' yIghItlh,,mɪʔ jɪɣɪtɬ,write the number,1,tlh-composed-v1;lex=TNK + KGT;grammar=TKD;ipa=okrand
+utility-templates.i-need,{} vIpoQ,,{} vɪpʰoqx,I require it,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+utility-templates.is-there-nearby,naDev {} tu'lu''a',,nɑɖɛv {} tʰuʔluʔʔɑʔ,is there one here?,1,tlh-composed-v1;lex=TKD p.171;grammar=TKD;ipa=okrand
+utility-templates.how-much-is,{} DIlmeH Huch 'ar DaneH,,{} ɖɪlmɛx xutʃ ʔɑr ɖɑnɛx,how much money do you want for it?,3,tlh-attested-v1;src=TKD p.171;slot-substituted;ipa=okrand
+utility-templates.is-this,{} 'oH'a',,{} ʔoxʔɑʔ,is it this?,1,tlh-composed-v1;lex=TKD 6.3;grammar=TKD;ipa=okrand
+utility-templates.i-am-looking-for,{} vInej,,{} vɪnɛdʒ,I am looking for it,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+utility-templates.i-cannot-find,{} vItu'laHbe',,{} vɪtʰuʔlɑxbɛʔ,I cannot find it,3,tlh-attested-v1;src=TKD p.171;ipa=okrand
+utility-templates.there-is-a-problem-with,{} QapHa',,{} qxɑpʰxɑʔ,it malfunctions,1,tlh-composed-v1;lex=KGT + TKD 4.3;grammar=TKD;ipa=okrand

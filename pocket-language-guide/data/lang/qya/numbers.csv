@@ -1,0 +1,13 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+numbers-money.y,min,,min,,3,qya-attested-v1;src=PE17/095.3703;eldamo=q;ipa=appendix-e
+numbers-money.r,atta,,ˈatta,,3,qya-attested-v1;src=PE17/095.3704;eldamo=q;ipa=appendix-e
+numbers-money.s-n,neldë,,nˈelde,,3,qya-attested-v1;src=PE17/095.3705;eldamo=q;ipa=appendix-e
+numbers-money.s,canta,,kˈanta,,3,qya-attested-v1;src=PE17/095.3706;eldamo=q;ipa=appendix-e
+numbers-money.w,lempë,,lˈempe,,3,qya-attested-v1;src=PE17/095.3707;eldamo=q;ipa=appendix-e
+numbers-money.li,enquë,,ˈenkwe,,3,qya-attested-v1;src=PE17/095.3708;eldamo=q;ipa=appendix-e
+numbers-money.q,otso,,ˈotso,,3,qya-attested-v1;src=PE17/095.3901;eldamo=q;ipa=appendix-e
+numbers-money.b,toldo,tolto,tˈoldo,,3,qya-attested-v1;src=PE17/095.3902;eldamo=q;ipa=appendix-e
+numbers-money.ji,nertë,,nˈerte,,3,qya-attested-v1;src=PE17/095.3903;eldamo=q;ipa=appendix-e
+numbers-money.sh,quëan,cëan,kwˈean,,3,qya-attested-v1;src=VT48/06.1506;eldamo=q;ipa=appendix-e
+numbers-money.b-n,perta,peresta,pˈerta,one half,3,qya-attested-v1;src=VT48/11.2601;eldamo=q;ipa=appendix-e
+atm-cash.coin,malta,,mˈalta,gold as material -- Quenya has no attested word for coin,3,qya-attested-v1;src=LotR/1123.0302;eldamo=q;ipa=appendix-e

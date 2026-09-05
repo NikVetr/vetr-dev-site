@@ -553,8 +553,25 @@ test('the top priority step fits one phone face in every language', async () => 
   // because the step was chosen to fit with room: every language currently settles
   // at nominal size, scale 1.00, which is what you want on something you glance at
   // in an emergency.
-  const langs = Object.keys(ctx.corpus.coverage.languages);
+  const { coverage } = ctx.corpus;
+  const langs = Object.keys(coverage.languages);
   assert.ok(langs.length >= 16, `only ${langs.length} languages have coverage`);
+  // **The count of concepts is a claim about a complete pack, not about the
+  // engine.** The essential step is the top of the importance distribution, and a
+  // language that covers a quarter of the bank has no top: four of the ten concepts
+  // at or above 0.95 are `emergency-medical` phrases, which `validate_data.py`
+  // refuses below confidence 2, so a pack with no fluent reviewer cannot have them
+  // at all. Klingon prints five of the ten and Quenya three, and both are honest
+  // numbers rather than gaps -- `data/coverage.json` is the place that says so.
+  // Every assertion about the *layout* still runs for every language; only the
+  // non-vacuousness guard is scoped to the packs that have a distribution to take
+  // the top of. Without this line the suite fails the moment anyone adds a
+  // legitimately partial language, which is a state `hasContent` and the gallery's
+  // coverage label were both built to support.
+  const complete = (/** @type {string} */ code) => (
+    coverage.languages[code] >= coverage.total * 0.9);
+  assert.ok(langs.filter(complete).length >= 16,
+    `only ${langs.filter(complete).length} packs are complete`);
   for (const target of langs) {
     const base = await referenceSpec(target, target === 'en' ? 'es' : 'en');
     const { plan, blocks: kept } = await buildSheet(ctx, {
@@ -569,7 +586,11 @@ test('the top priority step fits one phone face in every language', async () => 
       `${target} did not fit one phone face`);
     assert.ok(plan.scale >= COMFORT,
       `${target} fitted one phone face only at ${plan.scale.toFixed(2)}, below comfort`);
-    assert.ok(printed(kept).size >= 8, `${target} kept only ${printed(kept).size} concepts`);
+    if (complete(target)) {
+      assert.ok(printed(kept).size >= 8, `${target} kept only ${printed(kept).size} concepts`);
+    } else {
+      assert.ok(printed(kept).size >= 1, `${target} kept nothing at all`);
+    }
   }
 
   // And it is the top of the distribution that fits, not merely a small number:

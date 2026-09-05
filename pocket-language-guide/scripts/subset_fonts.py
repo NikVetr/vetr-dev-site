@@ -139,7 +139,15 @@ LATIN_DONOR = {"NotoSansArabic-Regular.ttf": "NotoSans-Regular.ttf",
 
 # Which language directories feed each stack's corpus-character union.
 ALL_LANGS = ["en", "es", "fr", "de", "ko", "ar", "zh-Hans", "ja",
-             "pt", "ru", "tr", "vi", "hi", "id", "sw", "th", "it", "el", "hu"]
+             "pt", "ru", "tr", "vi", "hi", "id", "sw", "th", "it", "el", "hu",
+             # Klingon and Quenya are Latin-script and so need no stack of their
+             # own, but they still have to be in this union: it is what puts their
+             # own characters, their section titles and their emergency-service
+             # labels into the subset. Italian was left out of it for a whole
+             # language generation and only escaped a sheet of empty boxes because
+             # it is Latin too, which is luck rather than design. Quenya brings the
+             # o-diaeresis and the a-diaeresis, which no other pack writes.
+             "tlh", "qya"]
 STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                "latin-serif": ALL_LANGS, "latin-cond-serif": ALL_LANGS,
                "cjk-sc": ["zh-Hans"], "cjk-sc-serif": ["zh-Hans"],

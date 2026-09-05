@@ -1,0 +1,7 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+food-ordering.menu-please,HIDjolev,,xɪɖdʒolɛv,menu,3,tlh-attested-v1;src=TKD;ipa=okrand
+food-ordering.i-want-this,Dochvam vIneH,,ɖotʃvɑm vɪnɛx,I want this,1,tlh-composed-v1;lex=TKD 6.2.5;grammar=TKD;ipa=okrand
+food-ordering.do-you-have-drinking-water,bIQ Daghaj'a',,bɪqx ɖɑɣɑdʒʔɑʔ,do you have water?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+food-ordering.check-please,Soj vIDIlnIS,,ʂodʒ vɪɖɪlnɪʂ,I need to pay for the food,1,tlh-composed-v1;lex=KGT p.191 + TKD;grammar=TKD;ipa=okrand
+food-ordering.what-do-you-recommend,nuq Dachup,,nuqʰ ɖɑtʃupʰ,what do you recommend?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+food-ordering.water-please,bIQ,,bɪqx,water,3,tlh-attested-v1;src=TKD;ipa=okrand

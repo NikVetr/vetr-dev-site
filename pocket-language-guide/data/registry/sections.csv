@@ -7,52 +7,53 @@ phone-text-power,social,comm,1,smartphone,"Phone, text + power",5,universal,core
 sim-data,social,comm,1,signal,"SIM, data + Wi-Fi",6,universal,core;social,0.76,0
 introductions,intro,stay,1,circle-user,Introductions,7,universal,social;family,0.70,1
 etiquette,social,comm,1,hand-coins,Tipping + etiquette,8,universal,core;social,0.62,1
-time-scheduling,time,stay,1,clock,Time + scheduling,9,universal,core;transit,0.85,1
-time-words,time,stay,1,hourglass,Time words,10,universal,core,0.78,1
-days-of-week,time,stay,1,calendar-days,Days of the week,11,universal,core,0.62,1
-months,time,stay,1,calendar,Months,12,universal,core,0.50,1
-pronouns-verbs,core,comm,1,languages,Core words + patterns,13,universal,core,0.92,1
-question-words,core,comm,1,circle-help,Question + small words,14,universal,core,0.90,1
-payment-receipt,shop,money,3,credit-card,Payment + receipt,15,universal,shopping;food,0.82,1
-numbers-money,numbers,money,1,arrow-down-0-1,Numbers + money,16,universal,core;shopping,0.96,1
-atm-cash,numbers,money,1,banknote,ATM + cash,17,universal,core;shopping,0.84,1
-dietary-needs,food,money,3,leaf,Dietary needs,18,universal,food;health,0.80,1
-utility-templates,utility,comm,1,clipboard-list,Utility templates,19,universal,core,0.86,1
-shopping,shop,money,1,shopping-bag,Shopping,20,universal,shopping,0.74,1
-color-size-returns,shop,money,2,ruler,"Color, size + returns",21,universal,shopping,0.55,1
-tax-refund,shop,money,3,receipt,Tax refund,22,universal,shopping;business,0.40,1
-food-ordering,food,money,1,utensils,Food + ordering,23,universal,food,0.90,1
-attractions-tickets,places,stay,1,ticket,Attractions + tickets,24,universal,outdoors;family,0.70,1
-children,social,comm,1,baby,With children,25,universal,family;food;lodging,0.66,0
-directions,travel,move,1,signpost,Directions,26,universal,core;transit,0.94,1
-quick-directions,travel,move,2,navigation,Quick directions,27,universal,core;transit,0.88,1
-taxi,travel,move,1,car-taxi-front,Taxi,28,universal,transit,0.82,1
-building-help,building,move,3,building,Building help,29,universal,lodging,0.58,1
-accessibility,building,move,1,accessibility,Access + mobility,30,universal,core;health;transit,0.72,0
-transit-rides,travel,move,1,train-front,Transit + rides,31,universal,transit,0.88,1
-in-a-building,building,move,1,building,In a building,32,universal,lodging,0.66,1
-toilets,building,move,1,toilet,Toilets,33,universal,core;family,0.93,1
-building-words,building,move,3,list,Building words,34,universal,lodging,0.60,1
-hotel-words,hotel,stay,3,key-round,Hotel words,35,universal,lodging,0.64,1
-hotel-basics,hotel,stay,1,hotel,Hotel basics,36,universal,lodging,0.76,1
-hotel-requests,hotel,stay,1,concierge-bell,Hotel requests,37,universal,lodging,0.58,1
-room-problems,hotel,stay,3,circle-alert,Room problems,38,universal,lodging,0.54,1
-laundry,hotel,stay,3,washing-machine,Laundry,39,universal,lodging,0.42,0
-place-words,travel,move,3,map-pin,Place words,40,universal,transit,0.68,1
-border-customs,travel,move,1,stamp,Border + customs,41,universal,core;transit,0.74,0
-trail-words,hike,move,1,map,Trail words,42,universal,outdoors,0.50,1
-pickup-meeting,travel,move,3,map-pin,Pickup + meeting,43,universal,transit,0.60,1
-rail-station-words,travel,move,1,train-front,Rail + station words,44,universal,transit,0.72,1
-common-signs,travel,move,3,signpost,Common signs,45,universal,core;transit,0.80,1
-weather,hike,move,1,cloud-sun-rain,Weather + conditions,46,universal,outdoors;core,0.56,0
-hiking-parks,hike,move,1,footprints,Hiking + parks,47,universal,outdoors,0.48,1
-trail-conditions,hike,move,2,cloud-sun,Conditions + route,48,universal,outdoors,0.44,1
-trail-transport,hike,move,2,bus,Transport + services,49,universal,outdoors,0.42,1
-trail-warnings,hike,move,3,triangle-alert,Trail warnings,50,universal,outdoors;health,0.46,1
-trail-landmarks,hike,move,3,map-pin,Trail landmarks + services,51,universal,outdoors,0.40,1
-emergency-medical,emergency,alert,1,briefcase-medical,Emergency + medical,52,universal,core;health,1.00,1
-medical-conditions,emergency,alert,1,heart-pulse,Conditions + medication,53,universal,core;health,0.94,0
-pharmacy-symptoms,emergency,alert,1,pill,Pharmacy + symptoms,54,universal,core;health,0.92,1
-body-parts,emergency,alert,3,person-standing,Body parts,55,universal,core;health,0.84,1
-lost-rescue,emergency,alert,1,search,Lost items + rescue,56,universal,core;health,0.86,1
-police-consulate,emergency,alert,1,shield-alert,"Police, theft + consulate",57,universal,core,0.88,1
+slang,slang,comm,1,messages-square,Slang (casual),9,universal,social,0.36,0
+time-scheduling,time,stay,1,clock,Time + scheduling,10,universal,core;transit,0.85,1
+time-words,time,stay,1,hourglass,Time words,11,universal,core,0.78,1
+days-of-week,time,stay,1,calendar-days,Days of the week,12,universal,core,0.62,1
+months,time,stay,1,calendar,Months,13,universal,core,0.50,1
+pronouns-verbs,core,comm,1,languages,Core words + patterns,14,universal,core,0.92,1
+question-words,core,comm,1,circle-help,Question + small words,15,universal,core,0.90,1
+payment-receipt,shop,money,3,credit-card,Payment + receipt,16,universal,shopping;food,0.82,1
+numbers-money,numbers,money,1,arrow-down-0-1,Numbers + money,17,universal,core;shopping,0.96,1
+atm-cash,numbers,money,1,banknote,ATM + cash,18,universal,core;shopping,0.84,1
+dietary-needs,food,money,3,leaf,Dietary needs,19,universal,food;health,0.80,1
+utility-templates,utility,comm,1,clipboard-list,Utility templates,20,universal,core,0.86,1
+shopping,shop,money,1,shopping-bag,Shopping,21,universal,shopping,0.74,1
+color-size-returns,shop,money,2,ruler,"Color, size + returns",22,universal,shopping,0.55,1
+tax-refund,shop,money,3,receipt,Tax refund,23,universal,shopping;business,0.40,1
+food-ordering,food,money,1,utensils,Food + ordering,24,universal,food,0.90,1
+attractions-tickets,places,stay,1,ticket,Attractions + tickets,25,universal,outdoors;family,0.70,1
+children,social,comm,1,baby,With children,26,universal,family;food;lodging,0.66,0
+directions,travel,move,1,signpost,Directions,27,universal,core;transit,0.94,1
+quick-directions,travel,move,2,navigation,Quick directions,28,universal,core;transit,0.88,1
+taxi,travel,move,1,car-taxi-front,Taxi,29,universal,transit,0.82,1
+building-help,building,move,3,building,Building help,30,universal,lodging,0.58,1
+accessibility,building,move,1,accessibility,Access + mobility,31,universal,core;health;transit,0.72,0
+transit-rides,travel,move,1,train-front,Transit + rides,32,universal,transit,0.88,1
+in-a-building,building,move,1,building,In a building,33,universal,lodging,0.66,1
+toilets,building,move,1,toilet,Toilets,34,universal,core;family,0.93,1
+building-words,building,move,3,list,Building words,35,universal,lodging,0.60,1
+hotel-words,hotel,stay,3,key-round,Hotel words,36,universal,lodging,0.64,1
+hotel-basics,hotel,stay,1,hotel,Hotel basics,37,universal,lodging,0.76,1
+hotel-requests,hotel,stay,1,concierge-bell,Hotel requests,38,universal,lodging,0.58,1
+room-problems,hotel,stay,3,circle-alert,Room problems,39,universal,lodging,0.54,1
+laundry,hotel,stay,3,washing-machine,Laundry,40,universal,lodging,0.42,0
+place-words,travel,move,3,map-pin,Place words,41,universal,transit,0.68,1
+border-customs,travel,move,1,stamp,Border + customs,42,universal,core;transit,0.74,0
+trail-words,hike,move,1,map,Trail words,43,universal,outdoors,0.50,1
+pickup-meeting,travel,move,3,map-pin,Pickup + meeting,44,universal,transit,0.60,1
+rail-station-words,travel,move,1,train-front,Rail + station words,45,universal,transit,0.72,1
+common-signs,travel,move,3,signpost,Common signs,46,universal,core;transit,0.80,1
+weather,hike,move,1,cloud-sun-rain,Weather + conditions,47,universal,outdoors;core,0.56,0
+hiking-parks,hike,move,1,footprints,Hiking + parks,48,universal,outdoors,0.48,1
+trail-conditions,hike,move,2,cloud-sun,Conditions + route,49,universal,outdoors,0.44,1
+trail-transport,hike,move,2,bus,Transport + services,50,universal,outdoors,0.42,1
+trail-warnings,hike,move,3,triangle-alert,Trail warnings,51,universal,outdoors;health,0.46,1
+trail-landmarks,hike,move,3,map-pin,Trail landmarks + services,52,universal,outdoors,0.40,1
+emergency-medical,emergency,alert,1,briefcase-medical,Emergency + medical,53,universal,core;health,1.00,1
+medical-conditions,emergency,alert,1,heart-pulse,Conditions + medication,54,universal,core;health,0.94,0
+pharmacy-symptoms,emergency,alert,1,pill,Pharmacy + symptoms,55,universal,core;health,0.92,1
+body-parts,emergency,alert,3,person-standing,Body parts,56,universal,core;health,0.84,1
+lost-rescue,emergency,alert,1,search,Lost items + rescue,57,universal,core;health,0.86,1
+police-consulate,emergency,alert,1,shield-alert,"Police, theft + consulate",58,universal,core,0.88,1

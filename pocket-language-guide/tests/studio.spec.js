@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
-import { counts, expectIncluded, expectIncludedNot, faceCount } from './counts.js';
+import {
+  counts, expectIncluded, expectIncludedNot, faceCount, settledCounts,
+} from './counts.js';
 import { translated, withoutPack } from './registry.js';
 
 const STUDIO = '/customize.html?target=zh-Hans&source=en';
@@ -148,7 +150,11 @@ test.describe('studio', () => {
     const boxes = page.locator('.items input[type=checkbox]');
     const count = await boxes.count();
     for (let i = 0; i < count; i += 3) await boxes.nth(i).click({ force: true });
-    const { included: before } = await expectIncludedNot(page, full.included);
+    // Settled, not merely changed: two hundred clicks queue a burst of debounced
+    // solves, and reading the counter after the first one gave a `before` from
+    // halfway through -- which the final count is legitimately *below*.
+    const { included: before } = await settledCounts(page);
+    expect(before).toBeLessThan(full.included);
     await page.locator('#balance').click();
     await expect(page.locator('#diff')).toBeVisible();
     await expect(page.locator('#diff p')).toContainText('whitespace');
@@ -159,7 +165,7 @@ test.describe('studio', () => {
     await expect(page.locator('#diff')).toBeHidden();
     // Applying schedules a debounced re-solve; wait for the count to actually move.
     await expect(page.locator('#counts')).not.toContainText(`${before} of`);
-    const after = Number((await page.locator('#counts').textContent())?.match(/(\d+) of/)?.[1]);
+    const { included: after } = await settledCounts(page);
     expect(after).toBeGreaterThan(before);
   });
 
@@ -699,4 +705,48 @@ test('the card keeps the page aspect however the panels are sized', async ({ pag
     expect(offset, `${stage}: ink sits ${offset.toFixed(0)}px from its hit box`)
       .toBeLessThan(14);
   }
+});
+
+test('an edit belongs to its pair, and a new column reaches the tree', async ({ page }) => {
+  // Two state transitions that had no coverage, and both were wrong.
+  await page.goto('/customize.html?target=zh-Hans&source=en');
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+  await page.waitForTimeout(2500);
+
+  // **An edit belongs to the pair it was made on.** `edits` is keyed on
+  // (target, source) in localStorage, and changing the reader left the previous
+  // pair's overrides in memory -- so they showed on the new sheet, and the next save
+  // filed them under the new pair's key.
+  const row = page.locator('.items li').first();
+  await row.locator('.item-edit-open').click();
+  const form = row.locator('.item-edit');
+  await expect(form).toBeVisible();
+  await form.locator('input').last().fill('MARKER-EN');
+  await form.locator('button[type="submit"]').click();
+  await expect.poll(async () => row.locator('.cell.respell').textContent(),
+    { timeout: 60_000 }).toBe('MARKER-EN');
+
+  await page.selectOption('#source', 'de');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'de');
+  await page.waitForTimeout(4000);
+  const onGerman = await page.locator('.items li').first().locator('.cell.respell').textContent();
+  expect(onGerman, 'an English edit must not appear on the German sheet')
+    .not.toContain('MARKER-EN');
+
+  // And it is still there when the pair it belongs to comes back.
+  await page.selectOption('#source', 'en');
+  await page.waitForTimeout(4000);
+  await expect.poll(async () => page.locator('.items li').first()
+    .locator('.cell.respell').textContent(), { timeout: 60_000 }).toBe('MARKER-EN');
+
+  // **A column switched on reaches the tree and the editor.** A row carries one cell
+  // per shown column and the editor one input per cell, both built when the tree is
+  // constructed -- and the rebuild key tracked only custom terms, so enabling a
+  // column left the tree with no cell for it and never caught up.
+  expect(await page.locator('.items li .cell.ipa').count()).toBe(0);
+  await page.getByRole('checkbox', { name: 'IPA', exact: true }).check();
+  await expect.poll(async () => page.locator('.items li .cell.ipa').count(),
+    { timeout: 90_000 }).toBeGreaterThan(0);
+  await page.locator('.items li').first().locator('.item-edit-open').click();
+  await expect(page.locator('.item-edit input#edit-social-basics\\.hello-ipa')).toHaveCount(1);
 });

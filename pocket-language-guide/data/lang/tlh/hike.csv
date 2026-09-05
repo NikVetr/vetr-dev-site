@@ -1,0 +1,35 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+trail-words.trail,taw,,tʰɑw,road / path,3,tlh-attested-v1;src=Saarbruecken qepHom'a' 2015;ipa=okrand
+trail-words.viewpoint,jorchan,,dʒortʃɑn,view / scene / scenery,3,tlh-attested-v1;src=qep'a' 25 (2018);ipa=okrand
+trail-words.shuttle-bus,lupwI',,lupʰwɪʔ,jitney / bus,3,tlh-attested-v1;src=TNK;ipa=okrand
+trail-words.park-shuttle,lupwI',,lupʰwɪʔ,jitney / bus,3,tlh-attested-v1;src=TNK;ipa=okrand
+trail-words.steps,ngep'oS,,ŋɛpʰʔoʂ,stairs,3,tlh-attested-v1;src=KGT;ipa=okrand
+trail-words.up-uphill,Dung,,ɖuŋ,the area above,3,tlh-attested-v1;src=TKD;ipa=okrand
+trail-words.down-downhill,bIng,,bɪŋ,the area below,3,tlh-attested-v1;src=TKD;ipa=okrand
+weather.forecast,nuq muD Dotlh,,nuqʰ muɖ ɖotɬ,what is the weather?,1,tlh-composed-v1;lex=KGT + TKD;grammar=TKD;ipa=okrand
+weather.will-it-rain,SIS'a',,ʂɪʂʔɑʔ,will it rain?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+weather.is-it-safe-today,DaHjaj Qob'a',,ɖɑxdʒɑdʒ qxobʔɑʔ,is today dangerous?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+weather.rain,SIS,,ʂɪʂ,it rains,3,tlh-attested-v1;src=TKD;ipa=okrand
+weather.snow,chal chuch,,tʃɑl tʃutʃ,sky ice,3,tlh-attested-v1;src=qep'a' 24 (2017);ipa=okrand
+weather.wind,SuS,,ʂuʂ,wind / breeze,3,tlh-attested-v1;src=TKD;ipa=okrand
+weather.ice,chuch,,tʃutʃ,,3,tlh-attested-v1;src=TKD;ipa=okrand
+weather.fog,vI'laS,,vɪʔlɑʂ,fog / mist,3,tlh-attested-v1;src=Saarbruecken qepHom'a' 2016;ipa=okrand
+weather.heat,tuj,,tʰudʒ,heat / be hot,3,tlh-attested-v1;src=TKD;ipa=okrand
+weather.cold,bIr,,bɪr,be cold,3,tlh-attested-v1;src=TKD;ipa=okrand
+weather.sunrise,jajlo' chum,,dʒɑdʒloʔ tʃum,sunrise,3,tlh-attested-v1;src=qep'a' 23 (2016);ipa=okrand
+hiking-parks.is-this-the-way-to,{} He 'oH'a',,{} xɛ ʔoxʔɑʔ,is it the route to it?,1,tlh-composed-v1;lex=CK + TKD;grammar=TKD;ipa=okrand
+hiking-parks.where-is-the-trailhead,nuqDaq 'oH taw bI'reS'e',,nuqʰɖɑqʰ ʔox tʰɑw bɪʔrɛʂʔɛʔ,where does the road begin?,1,tlh-composed-v1;lex=HQ 12.2 + TKD p.170;grammar=TKD;ipa=okrand
+hiking-parks.which-route-is-easier,nuq He ngeD,,nuqʰ xɛ ŋɛɖ,which course is easy?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+trail-conditions.is-the-trail-open,poS'a' taw,,pʰoʂʔɑʔ tʰɑw,is the road open?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+trail-conditions.is-the-path-slippery,'Ich'a' taw,,ʔɪtʃʔɑʔ tʰɑw,is the road slippery?,1,tlh-composed-v1;lex=qep'a' 25 (2018) + TKD;grammar=TKD;ipa=okrand
+trail-warnings.open,poS,,pʰoʂ,be open,3,tlh-attested-v1;src=TKD;ipa=okrand
+trail-warnings.closed,SoQ,,ʂoqx,be closed,3,tlh-attested-v1;src=TKD;ipa=okrand
+trail-warnings.caution-slippery,'Ich,,ʔɪtʃ,be slippery,3,tlh-attested-v1;src=qep'a' 25 (2018);ipa=okrand
+trail-warnings.danger,Qob,,qxob,danger / be dangerous,3,tlh-attested-v1;src=TKD;ipa=okrand
+trail-warnings.beware-falling-rocks,pum nagh,,pʰum nɑɣ,rocks fall,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+trail-landmarks.trail-marker,per,,pʰɛr,label / marking,3,tlh-attested-v1;src=TKD;ipa=okrand
+trail-landmarks.fork-junction,taw chevwI',,tʰɑw tʃɛvwɪʔ,what divides the road,1,tlh-composed-v1;lex=HQ 8.1 + TKD;grammar=TKD;ipa=okrand
+trail-landmarks.start,bI'reS,,bɪʔrɛʂ,the beginning,3,tlh-attested-v1;src=HQ 12.2;ipa=okrand
+trail-landmarks.end,bertlham,,bɛrtɬɑm,the end,3,tlh-attested-v1;src=HQ 12.2;ipa=okrand
+trail-landmarks.sunset,tlhom,,tɬom,dusk,3,tlh-attested-v1;src=qep'a' 23 (2016);ipa=okrand
+trail-landmarks.water-point,bIQ,,bɪqx,water,3,tlh-attested-v1;src=TKD;ipa=okrand

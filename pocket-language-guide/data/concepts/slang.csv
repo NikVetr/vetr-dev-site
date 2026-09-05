@@ -1,0 +1,15 @@
+concept_id,section_id,default_template,kind,slug_en,rank,importance,cluster_id,cluster_rank,slots,register,applies_to,notes
+slang.thats-good,slang,refphrase,phrase,thats-good,1,0.360,slang.good,0,0,casual,,"mild positive about a thing: nice, cool"
+slang.thats-great,slang,refphrase,phrase,thats-great,2,0.345,slang.good,1,0,casual,,"intensified positive: amazing, awesome"
+slang.i-love-it,slang,refphrase,phrase,i-love-it,3,0.330,slang.like,0,0,casual,,strong personal liking of a thing
+slang.thats-bad,slang,refphrase,phrase,thats-bad,4,0.250,slang.bad,0,0,casual,,"mild negative about a thing, never about a person"
+slang.delicious,slang,refphrase,phrase,delicious,5,0.355,slang.delicious,0,0,casual,,enthusiastic praise for food
+slang.thats-pricey,slang,refphrase,phrase,thats-pricey,6,0.265,slang.pricey,0,0,casual,,"a comment on a price, not an accusation"
+slang.exactly,slang,refphrase,phrase,exactly,7,0.350,slang.agree,0,0,casual,,emphatic agreement with what was just said
+slang.no-worries,slang,refphrase,phrase,no-worries,8,0.335,slang.reassure,0,0,casual,,waving off an apology or a problem
+slang.youre-welcome,slang,refphrase,phrase,youre-welcome,9,0.365,slang.reassure,1,0,casual,,the reply to thanks that natives actually use
+slang.seriously,slang,refphrase,phrase,seriously,10,0.290,slang.surprise,0,0,casual,,surprise or disbelief at news
+slang.im-good-thanks,slang,refphrase,phrase,im-good-thanks,11,0.320,slang.refuse,0,0,casual,,declining an offer without a blunt no
+slang.lets-go,slang,refphrase,phrase,lets-go,12,0.340,slang.lets-go,0,0,casual,,"to companions, not to a stranger"
+slang.cheers,slang,refphrase,phrase,cheers,13,0.300,slang.cheers,0,0,casual,,a toast over a drink or a meal
+slang.see-you,slang,refphrase,phrase,see-you,14,0.275,slang.see-you,0,0,casual,,"casual parting, not the formal goodbye"

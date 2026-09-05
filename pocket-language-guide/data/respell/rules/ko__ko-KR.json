@@ -54,6 +54,34 @@
   "phonemes": [
     {
       "slot": "onset",
+      "ipa": "ɬ",
+      "out": "르",
+      "if_nucleus": " "
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɬ",
+      "out": "ᅳᄅ",
+      "after_out": "ᄀ ᄁ ᄂ ᄃ ᄄ ᄅ ᄆ ᄇ ᄈ ᄉ ᄊ ᄋ ᄌ ᄍ ᄎ ᄏ ᄐ ᄑ ᄒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɬ",
+      "out": "ᄅ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɬ",
+      "out": "ᆯ",
+      "after_out": "ᅡ ᅢ ᅣ ᅤ ᅥ ᅦ ᅧ ᅨ ᅩ ᅪ ᅫ ᅬ ᅭ ᅮ ᅯ ᅰ ᅱ ᅲ ᅳ ᅴ ᅵ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɬ",
+      "out": "르"
+    },
+    {
+      "slot": "onset",
       "ipa": "pʰ",
       "out": "프",
       "if_nucleus": " "

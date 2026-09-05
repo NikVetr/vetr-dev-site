@@ -13,6 +13,11 @@
   },
   "phonemes": [
     {
+      "slot": "any",
+      "ipa": "ɬ",
+      "out": "l"
+    },
+    {
       "slot": "nucleus",
       "ipa": "aː",
       "out": "ah"

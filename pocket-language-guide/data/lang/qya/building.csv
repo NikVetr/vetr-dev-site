@@ -1,0 +1,9 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+toilets.is-it-free,latina ná,,lˈatina naː,is it unencumbered?,1,qya-composed-v1;lex=PE17/159.1304 + LotR/0377.4203;grammar=PE22;ipa=appendix-e
+toilets.mens-toilet,nér,,neːr,man,3,qya-attested-v1;src=PE17/190.1105;eldamo=q;ipa=appendix-e
+toilets.womens-toilet,nís,,niːs,woman,3,qya-attested-v1;src=PE17/190.1106;eldamo=q;ipa=appendix-e
+toilets.drinking-water,nén,,neːn,water,3,qya-attested-v1;src=PE17/052.2911;eldamo=q;ipa=appendix-e
+building-words.entrance,ando,,ˈando,gate / great door,3,qya-attested-v1;src=LotR/1122.4605;eldamo=q;ipa=appendix-e
+building-words.men,nér,,neːr,man,3,qya-attested-v1;src=PE17/190.1105;eldamo=q;ipa=appendix-e
+building-words.women,nís,,niːs,woman,3,qya-attested-v1;src=PE17/190.1106;eldamo=q;ipa=appendix-e
+building-words.door,fendë,ando,fˈende,ando is a great door or gate,3,qya-attested-v1;src=PE17/045.2114;eldamo=q;ipa=appendix-e

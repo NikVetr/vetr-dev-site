@@ -1,0 +1,12 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+payment-receipt.pay-by-card,Huch chaw',,xutʃ tʃɑwʔ,credit card,3,tlh-attested-v1;src=TNK;ipa=okrand
+payment-receipt.pay-cash,Huch,,xutʃ,money -- Klingon has no separate word for cash,3,tlh-attested-v1;src=TKD;ipa=okrand
+payment-receipt.how-much-in-total,Hoch DIlmeH Huch 'ar,,xotʃ ɖɪlmɛx xutʃ ʔɑr,how much money to pay for all of it?,1,tlh-composed-v1;lex=TKD p.171;grammar=TKD;ipa=okrand
+payment-receipt.i-already-paid,jIDIlpu',,dʒɪɖɪlpʰuʔ,I have paid,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+shopping.that-is-too-expensive,waghqu',,wɑɣqʰuʔ,it is very expensive,1,tlh-composed-v1;lex=KGT + TKD 4.3;grammar=TKD;ipa=okrand
+shopping.where-do-i-pay,nuqDaq jIDIl,,nuqʰɖɑqʰ dʒɪɖɪl,where do I pay?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+shopping.i-will-take-this,Dochvam vItlhap,,ɖotʃvɑm vɪtɬɑpʰ,I take this,1,tlh-composed-v1;lex=PK + TKD;grammar=TKD;ipa=okrand
+shopping.what-is-this,Dochvam nuq,,ɖotʃvɑm nuqʰ,,3,tlh-attested-v1;src=CK;ipa=okrand
+shopping.where-can-i-buy,nuqDaq {} vIje'laH,,nuqʰɖɑqʰ {} vɪdʒɛʔlɑx,where can I buy it?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+shopping.what-is-it-made-of,nuq lo'lu',,nuqʰ loʔluʔ,what is used?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+color-size-returns.do-you-have-a-bag,buq Daghaj'a',,buqʰ ɖɑɣɑdʒʔɑʔ,do you have a bag?,1,tlh-composed-v1;lex=Saarbruecken qepHom'a' 2010 + TKD;grammar=TKD;ipa=okrand

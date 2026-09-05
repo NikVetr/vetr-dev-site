@@ -105,6 +105,11 @@
   "phonemes": [
     {
       "slot": "any",
+      "ipa": "ɬ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
       "ipa": "s",
       "out": "sz",
       "after_out": "sz"

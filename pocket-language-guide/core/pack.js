@@ -578,8 +578,13 @@ export function buildBlocks({
         // A language that has the row but left it blank was drawing an empty
         // bordered box on the card, which is worse than the note being absent: it
         // takes the space and says nothing.
+        // `?.` on the source row too: a note's prose comes from the reader-side row
+        // of an existing concept, and a *custom* concept has none. An imported
+        // `template=note` is refused now, but one may already be sitting in a
+        // reader's saved edits from before that check existed, and a stored edit
+        // should not be able to throw on the next solve.
         const text = overrides[concept.concept_id]?.values.gloss
-          ?? sourceRows[concept.concept_id].text;
+          ?? sourceRows[concept.concept_id]?.text ?? '';
         if (text.trim()) {
           blocks.push({
             kind: 'note',

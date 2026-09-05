@@ -1,0 +1,38 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+pronouns-verbs.i-me,ni,inyë,ni,inyë is the emphatic form,3,qya-attested-v1;src=LotR/0377.3505;eldamo=q;ipa=appendix-e
+pronouns-verbs.we-us,me,ve,me,me excludes you; ve includes you,3,qya-attested-v1;src=LotR/0377.4004;eldamo=q;ipa=appendix-e
+pronouns-verbs.you,tye,,tje,"one person, familiar",3,qya-attested-v1;src=PE17/075.0408;eldamo=q;ipa=appendix-e
+pronouns-verbs.you-polite,lye,elyë,lje,elyë is the emphatic form,3,qya-attested-v1;src=PE17/075.0308;eldamo=q;ipa=appendix-e
+pronouns-verbs.he-him,se,issë,se,se covers he and she alike,3,qya-attested-v1;src=PE17/091.4105;eldamo=q;ipa=appendix-e
+pronouns-verbs.she-her,se,essë,se,one pronoun for he and she,3,qya-attested-v1;src=PE17/091.4105;eldamo=q;ipa=appendix-e
+pronouns-verbs.they-them,te,tai,te,te of people; tai of things,3,qya-attested-v1;src=LotR/0953.2503;eldamo=q;ipa=appendix-e
+pronouns-verbs.my-mine,-nya,,nja,goes on the noun: essenya = my name,3,qya-attested-v1;src=LotR/0377.3706;eldamo=q;ipa=appendix-e
+pronouns-verbs.your-yours,-lya,-tya,lja,"-lya polite, -tya familiar",3,qya-attested-v1;src=VT49/38.1401;eldamo=q;ipa=appendix-e
+pronouns-verbs.be-called-call,essë,,ˈesse,name,3,qya-attested-v1;src=LotR/1123.0701;eldamo=q;ipa=appendix-e
+pronouns-verbs.have,harya-,,hˈarja,to have,1,qya-deduced-v1;src=MS/01.03;eldamo=q#;ipa=appendix-e
+pronouns-verbs.do-not-have,penya,,pˈenja,lacking / inadequate,3,qya-attested-v1;src=VT39/06.2506;eldamo=q;ipa=appendix-e
+pronouns-verbs.go,lelya-,,lˈelja,to go / proceed / travel,3,qya-attested-v1;src=WJ/363.1103;eldamo=q;ipa=appendix-e
+pronouns-verbs.come,tul-,,tul,,3,qya-attested-v1;src=LotR/0967.3504;eldamo=q;ipa=appendix-e
+pronouns-verbs.would-like,merin,,mˈerin,I hope,1,qya-composed-v1;lex=MS/01.01;grammar=PE22;ipa=appendix-e
+pronouns-verbs.want,mína-,,mˈiːna,to wish to go / desire,3,qya-attested-v1;src=VT39/11.3803;eldamo=q;ipa=appendix-e
+pronouns-verbs.look-for,cesta-,,kˈesta,to seek / search for,3,qya-attested-v1;src=PE17/156.2801;eldamo=q;ipa=appendix-e
+pronouns-verbs.like,mel-,,mel,to love,1,qya-deduced-v1;src=VT49/15.1512;eldamo=q#;ipa=appendix-e
+pronouns-verbs.need,sangië,,sˈaŋɡie,necessity / pressing need,1,qya-deduced-v1;src=VT44/08.3601;eldamo=q#;ipa=appendix-e
+pronouns-verbs.there-is-have,ëa-,,ˈea,to be / to exist,3,qya-attested-v1;src=PE17/074.4215;eldamo=q;ipa=appendix-e
+pronouns-verbs.want-to-verb,mínan,,mˈiːnan,I desire to go -- put the goal after it,1,qya-composed-v1;lex=VT39/11.3803;grammar=PE22;ipa=appendix-e
+pronouns-verbs.want-thing,engwë,,ˈeŋɡwe,thing that exists,3,qya-attested-v1;src=VT39/07.0109;eldamo=q;ipa=appendix-e
+pronouns-verbs.need-thing,sangië,,sˈaŋɡie,necessity / pressing need,1,qya-deduced-v1;src=VT44/08.3601;eldamo=q#;ipa=appendix-e
+pronouns-verbs.looking-for-thing,cestan,,kˈestan,I seek it,1,qya-composed-v1;lex=PE17/156.2801;grammar=PE22;ipa=appendix-e
+question-words.what,mana,,mˈana,,3,qya-attested-v1;src=PE23/135.0514;eldamo=q;ipa=appendix-e
+question-words.who,man,,man,,3,qya-attested-v1;src=LotR/0377.3502;eldamo=q;ipa=appendix-e
+question-words.when,yá,,jaː,"when -- attested only as a relative, not as a question",3,qya-attested-v1;src=CPT/1298.0403;eldamo=q;ipa=appendix-e
+question-words.how,manen,,mˈanen,,3,qya-attested-v1;src=PM/395.1209;eldamo=q;ipa=appendix-e
+question-words.this,sina,,sˈina,,3,qya-attested-v1;src=PE23/135.1413;eldamo=q;ipa=appendix-e
+question-words.that,tana,,tˈana,,3,qya-attested-v1;src=PE23/135.1412;eldamo=q;ipa=appendix-e
+question-words.here,sinomë,,sˈinome,in this place,3,qya-attested-v1;src=LotR/0967.3505;eldamo=q;ipa=appendix-e
+question-words.there,tanomë,,tˈanome,in the place referred to,3,qya-attested-v1;src=VT49/11.4102;eldamo=q;ipa=appendix-e
+question-words.a-little,pitya,,pˈitja,petty / little,3,qya-attested-v1;src=PE17/115.2007;eldamo=q;ipa=appendix-e
+question-words.some,ma,,ma,something / anything,3,qya-attested-v1;src=PE17/162.3208;eldamo=q;ipa=appendix-e
+question-words.very,íta,,ˈiːta,very / extremely,3,qya-attested-v1;src=PE17/112.1210;eldamo=q;ipa=appendix-e
+question-words.also,ar,,ar,and / also,3,qya-attested-v1;src=LotR/0377.3801;eldamo=q;ipa=appendix-e
+question-words.all-both,ilyë,illi,ˈilje,illi is the pronoun,3,qya-attested-v1;src=PE17/091.1213;eldamo=q;ipa=appendix-e

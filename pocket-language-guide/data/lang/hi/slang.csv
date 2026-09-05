@@ -1,0 +1,14 @@
+concept_id,text,text_alt,romanization_iast,ipa,literal,confidence,provenance
+slang.thats-good,बढ़िया,,baṛhiyā,bˈʌɽʰɪjˌaː,,1,slang-agent-v1;ipa=espeak
+slang.thats-great,ज़बरदस्त,,zabardast,zˌəbəɾədˈʌst,,1,slang-agent-v1;ipa=espeak
+slang.i-love-it,मज़ा आ गया,,mazā ā gayā,mˈʌzaː ˈaː ɡˈʌjaː,the fun arrived,1,slang-agent-v1;ipa=espeak
+slang.thats-bad,बेकार है,,bekār hai,beːkˈaːɾ hɛː,it is useless,1,slang-agent-v1;ipa=espeak
+slang.delicious,लाजवाब,,lājawāb,lˌaːɟʋˈaːb,beyond reply,1,slang-agent-v1;ipa=espeak
+slang.thats-pricey,ज़्यादा है,,zyādā hai,zjˈaːdaː hɛː,it is too much,1,slang-agent-v1;ipa=espeak
+slang.exactly,सही बात है,,sahī bāt hai,sˈʌhi bˈaːt hɛː,it is the right matter,1,slang-agent-v1;ipa=espeak
+slang.no-worries,छोड़ो ना,,choṛo nā,cʰˈoːɽoː nˈaː,"let it go, no?",1,slang-agent-v1;ipa=espeak
+slang.seriously,सच में?,,sac meṁ?,sˈʌc mˈẽː,in truth?,2,slang-agent-v1;ipa=espeak
+slang.im-good-thanks,नहीं चाहिए,,nahīṁ cāhie,nˈʌhĩ cˈaːhɪˌeː,not wanted,1,slang-agent-v1;ipa=espeak
+slang.lets-go,चलो!,,calo!,cˈʌloː,,2,slang-agent-v1;ipa=espeak
+slang.cheers,चियर्स!,,chiyars!,cɪjˈʌrs,cheers (English loan),1,slang-agent-v1;ipa=espeak
+slang.see-you,"अच्छा, चलते हैं",,"acchā, calte haiṁ","ˈʌcʰcʰaː, cˈʌltˌeː hɛ̃","all right, we're off",1,slang-agent-v1;ipa=espeak

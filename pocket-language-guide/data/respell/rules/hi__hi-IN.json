@@ -59,6 +59,22 @@
   },
   "phonemes": [
     {
+      "slot": "onset",
+      "ipa": "ɬ",
+      "out": "ल",
+      "after_out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɬ",
+      "out": "ल्"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɬ",
+      "out": "्ल"
+    },
+    {
       "slot": "nucleus",
       "ipa": "j",
       "out": "",

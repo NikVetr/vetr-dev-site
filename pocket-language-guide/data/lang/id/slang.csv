@@ -1,0 +1,14 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+slang.thats-good,Keren,,kˈɛrən,,1,slang-agent-v1;ipa=espeak
+slang.thats-great,Mantap!,,mˈantap,solid,1,slang-agent-v1;ipa=espeak
+slang.i-love-it,Suka banget!,,sˈuka bˈaŋət,,1,slang-agent-v1;ipa=espeak
+slang.thats-bad,Kurang bagus,,kˈuraŋ bˈaɡus,insufficiently good,1,slang-agent-v1;ipa=espeak
+slang.delicious,Enak banget!,,ˈɛnak bˈaŋət,,2,slang-agent-v1;ipa=espeak
+slang.thats-pricey,Mahal banget!,,mˈahal bˈaŋət,,1,slang-agent-v1;ipa=espeak
+slang.exactly,Betul banget!,,bˈɛtul bˈaŋət,,1,slang-agent-v1;ipa=espeak
+slang.no-worries,Nggak apa-apa,,ŋɡˈak ˈapaapa,not what-what,1,slang-agent-v1;ipa=espeak
+slang.seriously,Masa sih?,,mˈasa sˈih,surely not?,1,slang-agent-v1;ipa=espeak
+slang.im-good-thanks,"Nggak, makasih",,"ŋɡˈak, makˈasih","no, thanks",1,slang-agent-v1;ipa=espeak
+slang.lets-go,Ayo!,Yuk!,ˈajo,come on,2,slang-agent-v1;ipa=espeak
+slang.cheers,Bersulang!,,bərsˈulaŋ,to toast,1,slang-agent-v1;ipa=espeak
+slang.see-you,"Duluan, ya!",,"dulˈuan, jˈa","going on ahead, yes?",1,slang-agent-v1;ipa=espeak

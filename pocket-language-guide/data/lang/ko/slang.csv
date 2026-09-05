@@ -1,0 +1,15 @@
+concept_id,text,text_alt,romanization_rr,ipa,literal,confidence,provenance
+slang.thats-good,좋네요,,jonneyo,tɕonnejo,,1,slang-agent-v1;ipa=rr
+slang.thats-great,대박!,,daebak!,tɛbak,jackpot,1,slang-agent-v1;ipa=rr
+slang.i-love-it,완전 좋아요,,wanjeon johayo,wandʑʌn tɕohajo,totally good,1,slang-agent-v1;ipa=rr
+slang.thats-bad,별로예요,,byeolloyeyo,pjʌllojejo,not particularly,1,slang-agent-v1;ipa=rr
+slang.delicious,꿀맛이에요,,kkulmasieyo,k͈ulmasiejo,honey taste,1,slang-agent-v1;ipa=rr
+slang.thats-pricey,비싸네요,,bissaneyo,pis͈anejo,,1,slang-agent-v1;ipa=rr
+slang.exactly,맞아요,,majayo,madʑajo,that's right,2,slang-agent-v1;ipa=rr
+slang.no-worries,신경 쓰지 마세요,,singyeong sseuji maseyo,sinɡjʌŋ s͈ɯdʑi masejo,don't spend nerves,1,slang-agent-v1;ipa=rr
+slang.youre-welcome,뭘요,,mwollyo,mwʌlljo,what for,1,slang-agent-v1;ipa=rr
+slang.seriously,진짜요?,,jinjjayo?,tɕintɕ͈ajo,really?,2,slang-agent-v1;ipa=rr
+slang.im-good-thanks,전 괜찮아요,,jeon gwaenchanayo,tɕʌn kwɛntɕʰanajo,I'm all right,1,slang-agent-v1;ipa=rr
+slang.lets-go,가자!,,gaja!,kadʑa,,2,slang-agent-v1;ipa=rr
+slang.cheers,건배!,,geonbae!,kʌnbɛ,dry cup,2,slang-agent-v1;ipa=rr
+slang.see-you,또 봐요,,tto bwayo,t͈o pwajo,see you again,1,slang-agent-v1;ipa=rr

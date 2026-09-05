@@ -1,0 +1,9 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+introductions.my-name-is,{} 'oH pongwIj'e',,{} ʔox pʰoŋwɪdʒʔɛʔ,,1,tlh-composed-v1;lex=TKD 6.3;grammar=TKD;ipa=okrand
+introductions.what-is-your-name,nuq ponglIj,,nuqʰ pʰoŋlɪdʒ,,1,tlh-composed-v1;lex=CK + TKD;grammar=TKD;ipa=okrand
+introductions.we-are-traveling-together,maleng,,mɑlɛŋ,we travel,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+introductions.this-is-my-friend,jupwI' ghaH,,dʒupʰwɪʔ ɣɑx,,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+introductions.i-am-a-tourist,jIleng,,dʒɪlɛŋ,I travel -- lengwI' is taken by a grammatical term,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+introductions.this-is-my-husband-wife,'IpnalwI' ghaH,,ʔɪpʰnɑlwɪʔ ɣɑx,my spouse -- the word is gender-neutral,1,tlh-composed-v1;lex=qep'a' 27 (2020) + TKD;grammar=TKD;ipa=okrand
+introductions.this-is-my-daughter-son,puqwI' ghaH,,pʰuqʰwɪʔ ɣɑx,my child -- puqbe' daughter / puqloD son,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+introductions.i-am-traveling-alone,nIteb jIleng,,nɪtʰɛb dʒɪlɛŋ,I travel alone,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand

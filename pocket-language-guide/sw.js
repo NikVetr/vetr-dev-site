@@ -13,7 +13,7 @@
 // and it drifted: seven modules were missing, so the studio would have failed with
 // the network off. VERSION is a content hash of those files, so a deploy re-primes
 // the cache without anyone remembering to bump anything.
-const VERSION = 'plg-89057946f102';
+const VERSION = 'plg-2c1e5c52d62b';
 const SHELL_CACHE = `${VERSION}-shell`;
 /**
  * **Not version-scoped, deliberately.** The shell has to be replaced wholesale on a
@@ -31,6 +31,9 @@ const SHELL_CACHE = `${VERSION}-shell`;
  * wants the new rows can press the button again.
  */
 const PACK_CACHE = 'plg-packs';
+/** The prefix every cache of ours carries, which is what tells them apart from every
+ * other app's on this origin. `VERSION` already begins with it. */
+const OURS = 'plg-';
 const SHELL_MANIFEST = 'data/shell.json';
 
 self.addEventListener('install', (event) => {
@@ -38,11 +41,26 @@ self.addEventListener('install', (event) => {
     const cache = await caches.open(SHELL_CACHE);
     const response = await fetch(SHELL_MANIFEST, { cache: 'reload' });
     const files = ['./', SHELL_MANIFEST, ...(await response.json()).files];
-    // addAll fails the whole install if any single request fails, which would
-    // leave no service worker at all; cache what we can and report the rest.
+    // **A partial shell must not become the active one.** This used to cache what it
+    // could and warn about the rest, on the reasoning that failing the install
+    // "would leave no service worker at all". That reasoning is backwards: a
+    // rejected install does not activate, so the *previous* worker keeps serving
+    // from its own complete cache. Half-installing and then activating is what
+    // leaves nothing -- `activate` deletes the old shell, so one failed download
+    // during a deploy replaced a working offline copy with a broken one, which is
+    // the exact case this app exists for.
+    //
+    // So the install fails loudly and the reader keeps what they had. The names are
+    // still reported, because "the deploy is incomplete" is worth seeing in a console.
     const results = await Promise.allSettled(files.map((url) => cache.add(url)));
     const failed = files.filter((_, i) => results[i].status === 'rejected');
-    if (failed.length) console.warn('[plg] shell files not cached:', failed);
+    if (failed.length) {
+      console.warn('[plg] shell incomplete, keeping the previous version:', failed);
+      // Drop the half-built cache so a later attempt starts clean rather than
+      // inheriting whichever files happened to arrive this time.
+      await caches.delete(SHELL_CACHE);
+      throw new Error(`shell incomplete: ${failed.length} of ${files.length} files`);
+    }
     await self.skipWaiting();
   })());
 });
@@ -50,8 +68,15 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   event.waitUntil((async () => {
     for (const key of await caches.keys()) {
-      // Everything but this version's shell and the packs, which are not the
-      // shell's to throw away.
+      // **Only this app's own caches.** Cache Storage is scoped to the *origin*, not
+      // to a service worker's scope, and vetr.dev serves several apps from the same
+      // one -- so deleting everything that is not one of our two names was deleting
+      // caches belonging to whatever else happens to be there. Nothing else on the
+      // origin uses Cache Storage today, which is the only reason this never showed;
+      // the next app to add a service worker would have lost its cache silently.
+      //
+      // Ours are the ones carrying our prefix, and the two current names are kept.
+      if (!key.startsWith(OURS)) continue;
       if (key !== SHELL_CACHE && key !== PACK_CACHE) await caches.delete(key);
     }
     await self.clients.claim();

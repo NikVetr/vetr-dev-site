@@ -543,3 +543,29 @@ test('a rule can ask what vowel came before this syllable, not just which nucleu
   const exact = respeller({ slot: 'nucleus', ipa: 'a', out: 'Y', after_nucleus: 'i' });
   assert.equal(exact.respell('ti˥a'), 'ti-a', 'which is what the exact form cannot say');
 });
+
+test('no reader emits a mark or a jamo with nothing to attach to', async () => {
+  // The output of a table is not the output of its rules. A Hangul syllable is
+  // assembled from three separate rules and composed afterwards, and a Devanagari
+  // conjunct from a consonant rule and a virama -- so reading a rule in isolation
+  // says nothing about what prints, and the audit has to run on what the transducer
+  // actually produced. `charset.json` is exactly that: every character every reader
+  // emits over the whole corpus.
+  //
+  // Two ways for the assembly to come apart, both of which shipped:
+  //
+  // A conjoining jamo that never found a vowel. Klingon's /t͡ɬ/ tokenises as /t/ +
+  // /ɬ/, and the Korean rule written for the second half emitted a bare initial
+  // ᄅ -- which NFC leaves alone, `subset_fonts.py` then ships as a jamo glyph, and
+  // the card prints as a letter-sized fragment beside composed syllables.
+  //
+  // A combining mark with no base. The Hindi rule for the same phoneme emitted a
+  // leading virama, so a syllable break put ्ल at the start of a cluster and the
+  // mark rendered on a dotted circle.
+  const charset = JSON.parse(await readFile('data/respell/charset.json', 'utf8'));
+  for (const [reader, chars] of Object.entries(charset)) {
+    const jamo = [...(/** @type {string} */ (chars))]
+      .filter((c) => /[ᄀ-ᇿꥠ-꥿ힰ-퟿]/u.test(c));
+    assert.deepEqual(jamo, [], `${reader} emits uncomposed jamo: ${jamo.join('')}`);
+  }
+});

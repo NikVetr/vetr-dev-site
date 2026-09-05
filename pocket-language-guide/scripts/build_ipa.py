@@ -223,6 +223,20 @@ distrust the column as a whole.
 - **`thaig2p` drops the final /t/ of `อังกฤษ`**, Thai for English: the name is
   `ʔaŋ˧kri˨˩` where the curated sheet respells it *ang-grit*. It prints on both of
   the Thai pack's `{source}` rows for an English reader, and nowhere else.
+- **`thaig2p` appends a phantom `นะ` to `ขอบคุณ`**, which is `social-basics.thank-you`
+  -- the most-said row in the pack. It comes back `kʰɔːp˨˩kʰun˧na˦˥`, three syllables
+  where the word has two, so an English reader is told to say *kop-kun-na*. The model
+  is completing the polite formula rather than reading the string, and it does it to
+  the syllable and to the word alike, so neither of `thai_syllables`'s two units
+  escapes it. Found while writing `slang.im-good-thanks`, which now uses `ไม่ล่ะ`
+  instead of a phrase containing `ขอบคุณ`; the `social-basics` row still prints it.
+- **`thaig2p` reads a `จร`/`กร` cluster as two syllables and a leading `ห` as /h/.**
+  `จริง` comes back `t͡ɕa˨˩riŋ˧` where Thai says /t͡ɕiŋ/, and `เหรอ` comes back
+  `heː˩˩˦rɔː˧` where the `ห` is the silent tone-marking consonant and the word is
+  /rɤː/. Together they make `จริงเหรอ` -- the ordinary Thai for "really?" -- respell
+  as four syllables of which none is right. Both are properties of the decoder rather
+  than of the tokenizer, so there is no unit that fixes them; the slang round routed
+  around it with `ไม่น่า`.
 - **A French `{source}` cell carries two phrase stresses.** `STRESS["fr"]` puts the
   mark on the last word of a *run*, and the substituted name is its own run, so
   `Parlez-vous {source} ?` is `paʁlˈevˈu ɛspanjˈɔl` -- three marks where French has
@@ -383,7 +397,7 @@ ROMANISED = {"zh-Hans": "romanization_pinyin", "ja": "romanization_hepburn",
 # which have no lexical stress at all -- but it does not need to be told either, if
 # the generator simply does not write a mark it cannot justify.
 STRESS = {"fr": "phrase", "ko": "none", "vi": "none", "ja": "none",
-          "zh-Hans": "none", "th": "none"}
+          "zh-Hans": "none", "th": "none", "tlh": "none"}
 
 NON_LATIN = {"zh-Hans", "ja", "ko", "th", "hi", "ar", "ru", "el"}
 
@@ -1219,12 +1233,232 @@ def normalise(ipa, code, text=""):
     return apply_stress(ipa, STRESS.get(code, "keep"))
 
 
+# ---------------------------------------------- Klingon orthography -> IPA
+# Klingon is written in a Latin transcription of Okrand's own devising, and TKD
+# section 1.1 describes each letter's sound one at a time -- so this is a table
+# rather than a G2P, the same shape the Hepburn and Revised Romanization routes
+# have, and the values are the IPA the published descriptions amount to (TKD 1.1;
+# the same inventory is tabulated in the Klingon-language literature as
+# /pʰ tʰ qʰ ʔ b ɖ t͡ɬ t͡ʃ q͡χ d͡ʒ ʂ x v ɣ m n ŋ r w l j/ over five vowels
+# /ɑ ɛ ɪ o u/).
+#
+# **The orthography is case-significant and nothing here may fold it.** `q` /qʰ/
+# and `Q` /q͡χ/ are a minimal pair -- `qat` "accompany" against `Qat` "be popular"
+# -- and `I` is the vowel /ɪ/ while `i` is not a letter of the language at all. The
+# other three table routes lowercase their input, because for them a capital is
+# orthography rather than sound; doing it here would merge two consonants and
+# delete a vowel. That is also why `ROUTE_FORBIDS` names eleven lowercase letters:
+# every one of them is legal IPA, so a cell written `hol` for `Hol` would otherwise
+# be transcribed as `hol` and pass every gate.
+#
+# Three-letter keys come first because `longest` tries 3, 2, 1 -- and `ngh` is here
+# for a reason that reads like an accident and is not. No Klingon letter is a bare
+# `h`: the only letters containing one are `ch`, `gh`, `tlh` and the separate
+# consonant `H`. So an `h` after `ng` can only be the second letter of `gh`, which
+# makes `ngh` unambiguously `n` + `gh` and never `ng` + something. Five entries in
+# the lexicon need it (`nenghep`, `QIngheb`, `tlhonghaD`, `Hanghuq`, `chungHa'wI'`),
+# and without it `ng` would match first, leave a bare `h`, and take the row down.
+#
+# `Q` is given as `qχ` and `FOLD` then writes it `qx`, which is the same treatment
+# every other uvular in this file gets and is safe here for the same reason it is
+# safe there: Klingon's syllable canon admits exactly one consonant in an onset and
+# one in a coda (plus `-w'`, `-y'`, `-rgh`), so a `q`+`x` sequence cannot arise from
+# two separate letters and `qx` can only be `Q`.
+#
+# It does have one visible consequence, on exactly two rows. `Q` followed by `H` is
+# /q͡χ/ + /x/, and after the fold that is `qxx` -- `ngaQHa'moHwI'` (key) comes out
+# `ŋɑqxxɑʔmoxwɪʔ`, where the doubled `x` reads like a geminate and is not one. It is
+# still unambiguous, because `qHH` is not a possible Klingon spelling and neither is
+# a bare `q` before two `H`s, so `qxx` can only be `Q`+`H`. Keeping χ would read
+# better and would cost far more: no reader's table has a rule for U+03C7, and five
+# of the nineteen draw in a stack whose source font has no glyph for it.
+TLH = {
+    "ngh": "nɣ",
+    "tlh": "tɬ",
+    "ch": "tʃ", "gh": "ɣ", "ng": "ŋ",
+    "D": "ɖ", "H": "x", "Q": "qχ", "S": "ʂ", "I": "ɪ",
+    "b": "b", "j": "dʒ", "l": "l", "m": "m", "n": "n", "p": "pʰ", "q": "qʰ",
+    "r": "r", "t": "tʰ", "v": "v", "w": "w", "y": "j",
+    "a": "ɑ", "e": "ɛ", "o": "o", "u": "u",
+    "'": "ʔ",
+}
+
+
+def tlh_to_ipa(word):
+    """One Klingon word, letter by letter, longest grapheme first.
+
+    Not lowercased -- see `TLH`. The unreadable tail is carried out rather than
+    dropped, so `check_alphabet` and `check_route` refuse the row and name the
+    character instead of the cell going quietly wrong.
+    """
+    out, i = "", 0
+    while i < len(word):
+        if word[i] == "-":                        # a suffix boundary, not a sound
+            i += 1
+            continue
+        letter = longest(TLH, word, i)
+        if not letter:
+            return out + word[i:]
+        out += TLH[letter]
+        i += len(letter)
+    return out
+
+
+# ------------------------------------------------ Quenya orthography -> IPA
+# Quenya's pronunciation is Tolkien's own, in *The Lord of the Rings* Appendix E,
+# and its orthography is regular enough to be a table: `c` is always /k/, `qu` is
+# /kw/ ("qu has been used for cw"), `x` is /ks/, an acute marks a long vowel, and a
+# diaeresis marks a vowel that is pronounced rather than silent -- so `ë` is /e/ and
+# not a separate quality. The consonant values are checked against Eldamo's own
+# phoneme inventory for Late Quenya, which lists each one with the orthography that
+# writes it (`c` [k], `qu` [kʷ], `ty` [tʲ], `ny` [nʲ], `hy` [j̊], `hw` [w̥],
+# `hl` [l̥], `hr` [r̥], `nw` [ŋʷ], `gw` [gʷ]).
+#
+# Where a phoneme and its spelling disagree about how many segments there are, this
+# table follows the **spelling** and `qya_weight` follows the **phoneme**, and that
+# split is deliberate rather than sloppy. Appendix E describes the palatal series in
+# terms an English reader can say -- `ty` "as the ty in British tune", `hy` "as in
+# English hew, huge" -- which is a consonant plus /j/, and spelling them that way is
+# what lets nineteen reader tables that have no palatalised series spell them at all
+# (`ʲ` is in every one of them, but every one of them spells it as nothing). Syllable
+# weight is a different question, and there the segment count is what Appendix E's
+# stress rule counts, so `qu` and `ty` count as one consonant there.
+#
+# `hl` and `hr` are the Third-Age readings Appendix E gives, where the voiceless
+# liquids had already fallen in with plain `l` and `r`. `þ` likewise does not appear:
+# in the Quenya of the Exiles it had become `s`, and the attested Late Quenya word
+# list writes none.
+QYA_C = {                                         # (ipa, consonant units)
+    "ht": ("xt", 2), "ng": ("ŋɡ", 2), "x": ("ks", 2),
+    "qu": ("kw", 1), "ty": ("tj", 1), "ny": ("nj", 1), "ly": ("lj", 1),
+    "ry": ("rj", 1), "dy": ("dj", 1), "hy": ("hj", 1), "hw": ("hw", 1),
+    "hl": ("l", 1), "hr": ("r", 1), "nw": ("ŋw", 1), "gw": ("ɡw", 1),
+    "p": ("p", 1), "t": ("t", 1), "c": ("k", 1), "k": ("k", 1), "b": ("b", 1),
+    "d": ("d", 1), "g": ("ɡ", 1), "f": ("f", 1), "v": ("v", 1), "s": ("s", 1),
+    "h": ("h", 1), "m": ("m", 1), "n": ("n", 1), "l": ("l", 1), "r": ("r", 1),
+    "w": ("w", 1), "y": ("j", 1), "ñ": ("ŋ", 1), "þ": ("θ", 1), "χ": ("x", 1),
+}
+# A nucleus, and whether it is *heavy* for the stress rule. Eldamo's stress entry is
+# explicit that only the six true diphthongs count -- "two vowels in hiatus make up a
+# pair of light syllables, not one heavy syllable: tië has two syllables, ti.e" --
+# so `ëa`, `ea`, `oa` and the rest are two nuclei and fall out of the single-vowel
+# entries below. `iu` is Appendix E's Third-Age rising reading, "as yu in English
+# yule", which puts the glide in the onset and leaves `u` as the nucleus; it is still
+# a true diphthong for the weight rule, which is why the flag is carried here rather
+# than derived from the vowel's own length.
+QYA_V = {
+    "ai": ("aj", True), "au": ("aw", True), "oi": ("oj", True), "ui": ("uj", True),
+    "eu": ("ew", True), "iu": ("ju", True),
+    "á": ("aː", True), "é": ("eː", True), "í": ("iː", True), "ó": ("oː", True),
+    "ú": ("uː", True),
+    "ä": ("a", False), "ë": ("e", False), "ö": ("o", False),
+    "a": ("a", False), "e": ("e", False), "i": ("i", False), "o": ("o", False),
+    "u": ("u", False),
+}
+
+
+def qya_units(word):
+    """One Quenya word as [(kind, ipa, weight)], or None if a letter is unreadable.
+
+    `kind` is `V` for a nucleus and `C` for a consonant; `weight` is the heaviness
+    flag for a nucleus and the segment count for a consonant. Both tables are tried
+    longest-first at each position, vowels before consonants, so `ai` beats `a` and
+    `ty` beats `t`.
+    """
+    units = []
+    i = 0
+    while i < len(word):
+        if word[i] in "-'":                       # elision and hyphen are not sounds
+            i += 1
+            continue
+        vowel = longest(QYA_V, word, i)
+        if vowel:
+            units.append(("V",) + QYA_V[vowel])
+            i += len(vowel)
+            continue
+        cons = longest(QYA_C, word, i)
+        if not cons:
+            return None
+        units.append(("C",) + QYA_C[cons])
+        i += len(cons)
+    return units
+
+
+def qya_weight(units):
+    """Which nucleus of `units` is heavy, in nucleus order.
+
+    Eldamo, following Appendix E: a light syllable "contains a single short vowel and
+    is followed by zero or one consonant", and anything else is heavy -- a long
+    vowel, a true diphthong, or a vowel followed by two or more consonants. Counted
+    in *segments* rather than in letters, so `niquessë` is light-heavy-light (`qu` is
+    one, `ss` is two) and comes out ni-QUES-se the way the source says it does.
+    """
+    heavy, run = [], 0
+    for kind, _, w in reversed(units):
+        if kind == "C":
+            run += w
+        else:
+            heavy.append(w or run >= 2)
+            run = 0
+    return list(reversed(heavy))
+
+
+def qya_to_ipa(word):
+    """One Quenya word, with Appendix E's stress written on the nucleus.
+
+    The rule is fully mechanical and this is the only route here that can say that:
+    "In words of two syllables it falls in practically all cases on the first
+    syllable. In longer words it falls on the last syllable but one, where that
+    contains a long vowel, a diphthong, or a vowel followed by two (or more)
+    consonants; otherwise it falls on the syllable before that" (LotR/1116). A
+    monosyllable gets no mark, which is also what every reader's
+    `stress_min_syllables` would do with one.
+
+    The mark goes immediately before the stressed nucleus rather than before its
+    onset, which is where espeak puts it for the thirteen espeak languages and where
+    `syllabify` in core/respell.js reads it from: the mark applies to the next unit,
+    and onset maximisation has already put the onset in the same syllable.
+    """
+    units = qya_units(word.lower())
+    if units is None:
+        return word                               # fails check_alphabet
+    heavy = qya_weight(units)
+    n = len(heavy)
+    at = None
+    if n == 2:
+        at = 0
+    elif n >= 3:
+        at = n - 2 if heavy[n - 2] else n - 3
+    out, seen = "", 0
+    for kind, ipa, _ in units:
+        if kind == "V":
+            if seen == at:
+                out += "ˈ"
+            seen += 1
+        out += ipa
+    return out
+
+
 # Letters that are inside the IPA alphabet and still cannot appear in *Japanese*
 # IPA, so seeing one means a Hepburn mora went unconverted rather than that the
 # reading is exotic. `u` is the sharp one: Japanese /ɯ/ is never `u`, so a single
 # `u` is proof the tail was carried out whole. This is what let `chekkuin` ship --
 # `check_alphabet` only knows what is IPA, not what is IPA *for this language*.
-ROUTE_FORBIDS = {"hepburn": set("ucflqx")}
+ROUTE_FORBIDS = {
+    "hepburn": set("ucflqx"),
+    # Every lowercase letter Klingon's orthography does not use, and every one of
+    # them is legal IPA -- which is the whole reason the gate is needed. `TLH` is a
+    # whitelist and an unmatched letter is carried out, so `hol` for `Hol` would
+    # otherwise transcribe as `hol`, `Sos` for `SoS` as `ʂos`, and both would pass
+    # `check_alphabet`. `p t d` are absent from the list because the table emits them
+    # inside `pʰ`, `tʰ`, `tʃ` and `dʒ`.
+    "okrand": set("acefghiksyz"),
+    # `c`, `q` and `y` are Quenya letters that this table always rewrites -- `c` to
+    # `k`, `qu` to `kw`, `y` to `j` -- so one surviving means the letter was not
+    # where the table expected it: a bare `q` with no `u` after it, most likely a
+    # typo for `qu`.
+    "appendix-e": set("cqy"),
+}
 
 
 def check_route(ipa, route):
@@ -1322,6 +1556,12 @@ def route(code, chunks):
                                       for w in chunk.split()), "hepburn"
     if code == "ko":
         return lambda chunk: " ".join(rr_to_ipa(w.lower()) for w in chunk.split()), "rr"
+    if code == "tlh":
+        # **Not lowercased**, unlike the three routes above: Klingon's orthography is
+        # case-significant and `q`/`Q` is a minimal pair. See `TLH`.
+        return lambda chunk: " ".join(tlh_to_ipa(w) for w in chunk.split()), "okrand"
+    if code == "qya":
+        return lambda chunk: " ".join(qya_to_ipa(w) for w in chunk.split()), "appendix-e"
     raise SystemExit(f"no route for {code}")
 
 
@@ -1358,20 +1598,28 @@ def cldr_names(codes):
     """
     script = """
       const codes = JSON.parse(process.argv[1]);
-      const out = {};
+      const out = {}, own = [];
       for (const locale of codes) {
+        const names = new Intl.DisplayNames([locale], { type: 'language' });
+        // Whether ICU has display data *for* this locale, as against display data
+        // about it. Both new languages are in CLDR as subjects and neither is a
+        // display locale, so asking either of them for a name silently answers in
+        // English -- see `language_name_ipa`.
+        if (names.resolvedOptions().locale.split('-')[0] === locale.split('-')[0]) {
+          own.push(locale);
+        }
         out[locale] = {};
         for (const subject of codes) {
           const base = subject.split('-')[0];
-          out[locale][subject] =
-            new Intl.DisplayNames([locale], { type: 'language' }).of(base) || base;
+          out[locale][subject] = names.of(base) || base;
         }
       }
-      console.log(JSON.stringify(out));
+      console.log(JSON.stringify({ names: out, own }));
     """
     done = subprocess.run(["node", "-e", script, json.dumps(codes)],
                           capture_output=True, text=True, check=True)
-    return json.loads(done.stdout)
+    got = json.loads(done.stdout)
+    return got["names"], set(got["own"])
 
 
 def language_name_ipa(locales, subjects, rows):
@@ -1393,7 +1641,7 @@ def language_name_ipa(locales, subjects, rows):
     with a hole where the language should be -- which is the blank respelling these
     rows print today, so nothing regresses.
     """
-    names = cldr_names(sorted(set(locales) | set(subjects)))
+    names, cldr_locales = cldr_names(sorted(set(locales) | set(subjects)))
     written = {}
     for locale in locales:
         # What to phonemise, per subject. A pack read off a romanisation reads the
@@ -1403,8 +1651,20 @@ def language_name_ipa(locales, subjects, rows):
         text = {}
         for subject in subjects:
             row = rows.get((locale, subject), {})
+            # **A locale ICU cannot display in gets no fallback at all.** `tlh` and
+            # `qya` are in CLDR as subjects and in neither case as a display locale,
+            # so `Intl.DisplayNames(['qya'])` resolves to English and answers
+            # "Greek", "Japanese", "Swahili" -- names that are not Quenya words. Run
+            # through the Quenya route those came out as `ɡrˈeek`, `japanˈese`,
+            # `swˈahili`: legal IPA, correctly stressed by Appendix E's rule, and
+            # wrong in the one way this column cannot afford, since `fillLanguageSlots`
+            # would have substituted them into a Quenya sentence. So for these
+            # locales the registry's own `name` is the only source, and a subject it
+            # has no name for gets no cell -- which is what an empty `ipa` already
+            # means everywhere else here.
+            cldr = names[locale][subject] if locale in cldr_locales else ""
             name = (row.get("romanization") if locale in ROMANISED
-                    else row.get("name") or names[locale][subject]) or ""
+                    else row.get("name") or cldr) or ""
             if name and locale == "ko":
                 # RR read against the Hangul it romanises, which for every name but
                 # 한국어 is CLDR's rather than the registry's: `yeongeo` is 영어, so
@@ -1531,6 +1791,27 @@ GRADE = {
            "`egyszeru` come back read off the spelling rather than as [nɑccɛ-] and [ɛccɛryː], and "
            "a geminate before a consonant is shortened on some rows (`jobbra`, `mellkasi`) and not "
            "others. All three are careful-speech readings rather than errors"),
+    "tlh": ("A", "a letter-by-letter table over TKD section 1.1's own descriptions, so the "
+            "only thing that can be wrong here is the table -- and it is 26 entries long "
+            "over a five-vowel, twenty-one-consonant inventory with a strict CV(C) syllable "
+            "canon. Two things are deliberately absent. Stress is not written at all: TKD "
+            "1.3 states it over morphology (the stem of a verb, the last syllable of a "
+            "noun's stem, and any syllable ending in a glottal stop) and this column carries "
+            "no morphological analysis, so a partly-right mark would capitalise some rows and "
+            "not others for every reader whose table uses caps. And /t\u0361\u026c/ is written "
+            "t\u026c, which is correct and which nothing else in the corpus has -- it is "
+            "the phoneme that made every one of the other nineteen tables grow a rule, "
+            "and no table has a rule for the cluster itself: phonemesOf splits it into "
+            "/t/ + /\u026c/ before any rule is consulted, so each reader spells it with "
+            "its own two, under its own slot conditions"),
+    "qya": ("A", "a letter-by-letter table over The Lord of the Rings Appendix E, checked "
+            "against Eldamo's own Late Quenya phoneme inventory, which lists each consonant "
+            "with the orthography that writes it. Stress is the only fully mechanical stress "
+            "rule in this file -- Appendix E states it as a function of syllable count and "
+            "syllable weight and nothing else -- and `qya_weight` reproduces Eldamo's four "
+            "worked examples exactly. The one judgement in it is that the palatal digraphs "
+            "count as one consonant for weight while being spelt C+j, which is stated in "
+            "`QYA_C`"),
     "tr": ("B", "phonemic orthography, but espeak's Turkish stress is 68.1%"),
     "pt": ("B", "pt-br; vowel reduction is phonetic detail the curated sheet smooths away"),
     "en": ("B", "en-us; deep orthography, but espeak's English lexicon is its best"),

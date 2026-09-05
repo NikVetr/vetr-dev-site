@@ -1,0 +1,14 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+slang.thats-good,Poa,,pˈoa,cool,1,slang-agent-v1;ipa=espeak
+slang.thats-great,Poa kabisa,,pˈoa kabˈisa,cool completely,1,slang-agent-v1;ipa=espeak
+slang.i-love-it,Nimependa!,,nˌimepˈenda,I have come to like it,1,slang-agent-v1;ipa=espeak
+slang.thats-bad,Haifai,,hˌaifˈai,it will not do,1,slang-agent-v1;ipa=espeak
+slang.delicious,Tamu sana,,tˈamu sˈana,very sweet,1,slang-agent-v1;ipa=espeak
+slang.thats-pricey,Ghali sana,,ɣˈali sˈana,very expensive,1,slang-agent-v1;ipa=espeak
+slang.exactly,Kweli kabisa,,kwˈeli kabˈisa,truth completely,1,slang-agent-v1;ipa=espeak
+slang.no-worries,Usijali,,ˌusiɟˈali,don't be concerned,1,slang-agent-v1;ipa=espeak
+slang.youre-welcome,Si neno,,si nˈeno,it is not a word,1,slang-agent-v1;ipa=espeak
+slang.seriously,Kweli?,,kwˈeli,truly?,1,slang-agent-v1;ipa=espeak
+slang.im-good-thanks,"Hapana, asante",,"hapˈana, asˈante","no, thanks",1,slang-agent-v1;ipa=espeak
+slang.lets-go,Twende!,,twˈende,let us go,2,slang-agent-v1;ipa=espeak
+slang.see-you,Baadaye!,,bˌaadˈaje,later,2,slang-agent-v1;ipa=espeak

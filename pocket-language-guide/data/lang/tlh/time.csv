@@ -1,0 +1,14 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+time-scheduling.what-time-is-it,nuq rep,,nuqʰ rɛpʰ,what hour?,1,tlh-composed-v1;lex=CK + TKD;grammar=TKD;ipa=okrand
+time-scheduling.what-time-should-we-meet,ghorgh maghom,,ɣorɣ mɑɣom,when do we meet?,1,tlh-composed-v1;lex=TKD p.170;grammar=TKD;ipa=okrand
+time-scheduling.what-day-is-it-today,nuq DaHjaj,,nuqʰ ɖɑxdʒɑdʒ,what is today?,1,tlh-composed-v1;lex=CK + TKD;grammar=TKD;ipa=okrand
+time-scheduling.what-time-does-it-open,ghorgh poSlu',,ɣorɣ pʰoʂluʔ,when is it opened?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+time-scheduling.what-time-does-it-close,ghorgh SoQlu',,ɣorɣ ʂoqxluʔ,when is it closed?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+time-scheduling.how-long-does-it-take,'ar poH poQlu',,ʔɑr pʰox pʰoqxluʔ,how much time is required?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+time-words.today,DaHjaj,,ɖɑxdʒɑdʒ,,3,tlh-attested-v1;src=TKD;ipa=okrand
+time-words.tomorrow,wa'leS,,wɑʔlɛʂ,one day from now,3,tlh-attested-v1;src=TKD;ipa=okrand
+time-words.yesterday,wa'Hu',,wɑʔxuʔ,one day ago,3,tlh-attested-v1;src=TKD;ipa=okrand
+time-words.this-week,Hoghvam,,xoɣvɑm,this week,1,tlh-composed-v1;lex=TKD + TKD 3.3.4;grammar=TKD;ipa=okrand
+time-words.morning,po,,pʰo,,3,tlh-attested-v1;src=TKD;ipa=okrand
+time-words.afternoon,pov,,pʰov,afternoon,3,tlh-attested-v1;src=Saarbruecken qepHom'a' 2023;ipa=okrand
+time-words.night,ram,,rɑm,,3,tlh-attested-v1;src=TKD;ipa=okrand

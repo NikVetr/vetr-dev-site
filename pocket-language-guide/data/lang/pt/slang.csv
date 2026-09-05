@@ -1,0 +1,15 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+slang.thats-good,Boa!,Que bom!,bˈoæ,good (fem.),1,slang-agent-v1;ipa=espeak
+slang.thats-great,É o máximo!,Massa!,ɛ ʊ mˈasimʊ,it is the maximum,1,slang-agent-v1;ipa=espeak
+slang.i-love-it,Adorei!,,ˌadoɾˈeɪ,I adored it,2,slang-agent-v1;ipa=espeak
+slang.thats-bad,Que chato!,,ky ʃˈatʊ,how tiresome,1,slang-agent-v1;ipa=espeak
+slang.delicious,Que delícia!,,ky dˌelˈisjæ,what a delight,2,slang-agent-v1;ipa=espeak
+slang.thats-pricey,Que caro!,,ky kˈaɾʊ,how expensive,1,slang-agent-v1;ipa=espeak
+slang.exactly,Exato!,,ˌezˈatʊ,,2,slang-agent-v1;ipa=espeak
+slang.no-worries,Tranquilo!,,trˌɐ̃ŋkwˈilʊ,calm,1,slang-agent-v1;ipa=espeak
+slang.youre-welcome,Não tem de quê,Imagina!,nˌɐ̃ʊ̃ teɪŋ dʒy kˈe,there is nothing for it,1,slang-agent-v1;ipa=espeak
+slang.seriously,A sério?,Sério?,a sˈɛɾjʊ,,2,slang-agent-v1;ipa=espeak
+slang.im-good-thanks,Assim está bem,Tá bom assim,asˈiŋ estˌa bˈeɪŋ,it's fine like this,1,slang-agent-v1;ipa=espeak
+slang.lets-go,Bora!,Vamos!,bˈɔɾæ,let's be off,1,slang-agent-v1;ipa=espeak
+slang.cheers,Saúde!,Tim-tim!,sˌaˈudʒy,health,2,slang-agent-v1;ipa=espeak
+slang.see-you,Até já!,Falou!,atˌɛ ʒˈa,till right away,1,slang-agent-v1;ipa=espeak

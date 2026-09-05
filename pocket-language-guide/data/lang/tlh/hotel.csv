@@ -1,0 +1,16 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+hotel-words.passport,leng chaw',,lɛŋ tʃɑwʔ,travel permit,3,tlh-attested-v1;src=TNK;ipa=okrand
+hotel-words.luggage-storage,leng buq,,lɛŋ buqʰ,suitcase,3,tlh-attested-v1;src=TNK;ipa=okrand
+hotel-basics.are-any-rooms-available,mebpa' tu'lu''a',,mɛbpʰɑʔ tʰuʔluʔʔɑʔ,is there a guest room?,1,tlh-composed-v1;lex=KGT + CK;grammar=TKD;ipa=okrand
+hotel-basics.there-are-two-of-us,cha' maH,,tʃɑʔ mɑx,we are two,1,tlh-composed-v1;lex=TKD 6.3 + CK;grammar=TKD;ipa=okrand
+hotel-basics.i-have-a-reservation,pu'lorwIj vIghaj,,pʰuʔlorwɪdʒ vɪɣɑdʒ,I have my reservation,1,tlh-composed-v1;lex=qep'a' 33 (2026) + TKD;grammar=TKD;ipa=okrand
+hotel-basics.how-much-per-night,wa' ram DIlmeH Huch 'ar,,wɑʔ rɑm ɖɪlmɛx xutʃ ʔɑr,how much money for one night?,1,tlh-composed-v1;lex=TKD p.171;grammar=TKD;ipa=okrand
+hotel-basics.may-i-see-the-room,pa' vIleghlaH'a',,pʰɑʔ vɪlɛɣlɑxʔɑʔ,can I see the room?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+hotel-basics.is-there-air-conditioning,bIrmoHwI' tu'lu''a',,bɪrmoxwɪʔ tʰuʔluʔʔɑʔ,is there a cooler?,1,tlh-composed-v1;lex=TKD + CK;grammar=TKD;ipa=okrand
+hotel-requests.another-towel-please,latlh QaDmoHwI' DIr vIneH,,lɑtɬ qxɑɖmoxwɪʔ ɖɪr vɪnɛx,I want another towel,1,tlh-composed-v1;lex=TNK + TKD;grammar=TKD;ipa=okrand
+hotel-requests.is-there-a-safe,Huch polmeH pa' tu'lu''a',,xutʃ pʰolmɛx pʰɑʔ tʰuʔluʔʔɑʔ,is there a money-keeping room?,1,tlh-composed-v1;lex=BoP + CK;grammar=TKD;ipa=okrand
+room-problems.there-is-no-hot-water,bIQ tuj tu'lu'be',,bɪqx tʰudʒ tʰuʔluʔbɛʔ,there is no hot water,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+room-problems.can-i-change-rooms,latlh pa' vIlo'laH'a',,lɑtɬ pʰɑʔ vɪloʔlɑxʔɑʔ,can I use another room?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+room-problems.the-room-is-too-noisy,chuSqu' pa',,tʃuʂqʰuʔ pʰɑʔ,the room is very noisy,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+room-problems.the-key-does-not-work,Qapbe' ngaQHa'moHwI',,qxɑpʰbɛʔ ŋɑqxxɑʔmoxwɪʔ,the key does not work,1,tlh-composed-v1;lex=TNK + KGT;grammar=TKD;ipa=okrand
+room-problems.the-light-does-not-work,Qapbe' wovmoHwI',,qxɑpʰbɛʔ wovmoxwɪʔ,the light does not work,1,tlh-composed-v1;lex=TNK + KGT;grammar=TKD;ipa=okrand

@@ -1,0 +1,9 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,mínan {}nna,,mˈiːnan {} nna,I desire to go to it,1,qya-composed-v1;lex=VT39/11.3803;grammar=PE22;ipa=appendix-e
+utility-templates.please-give-me,ánin anta {},,ˈaːnin ˈanta {},give it to me,1,qya-composed-v1;lex=VT43/08.3400;grammar=PE22;ipa=appendix-e
+utility-templates.may-i,ecë nin {},,ˈeke nin {},may I?,3,qya-attested-v1;src=VT49/20.0907;slot-substituted;ipa=appendix-e
+utility-templates.do-you-have,haryalyë {},,hˈarjalje {},do you have it?,1,qya-composed-v1;lex=MS/01.03 + PE17/057.2803;grammar=PE22;ipa=appendix-e
+utility-templates.i-need,sangienya ná {},,saŋɡˈienja naː {},my need is it,1,qya-composed-v1;lex=VT44/08.3601;grammar=PE22;ipa=appendix-e
+utility-templates.is-this,sina ná {},,sˈina naː {},this is it?,1,qya-composed-v1;lex=PE23/135.1413 + LotR/0377.4203;grammar=PE22;ipa=appendix-e
+utility-templates.please,"{}, mecin",,"{}, mˈekin",please -- mecin follows the request,1,qya-composed-v1;lex=PE22/166.2001;grammar=PE22;ipa=appendix-e
+utility-templates.i-am-looking-for,cestan {},,kˈestan {},I seek it,1,qya-composed-v1;lex=PE17/156.2801;grammar=PE22;ipa=appendix-e

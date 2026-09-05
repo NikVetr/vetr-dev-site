@@ -1,0 +1,15 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+slang.thats-good,Được đấy,,ɗyə̯c˨˩ˀ ɗəɪ˧˥,that'll do,1,slang-agent-v1;ipa=espeak
+slang.thats-great,Đỉnh quá!,,ɗiɲ˧˩˧ kwaː˧˥,so peak,1,slang-agent-v1;ipa=espeak
+slang.i-love-it,Thích quá!,,tic˧˥ kwaː˧˥,like too much,1,slang-agent-v1;ipa=espeak
+slang.thats-bad,Không ổn,,xoŋ˧ on˧˩˧,not steady,1,slang-agent-v1;ipa=espeak
+slang.delicious,Ngon quá!,,ŋɔn˧ kwaː˧˥,so tasty,2,slang-agent-v1;ipa=espeak
+slang.thats-pricey,Đắt thế!,,ɗat̪˧˥ te˧˥,expensive like that!,1,slang-agent-v1;ipa=espeak
+slang.exactly,Chuẩn!,,tʃwən˧˩˧,standard,1,slang-agent-v1;ipa=espeak
+slang.no-worries,Đừng lo!,,ɗyŋ˨˩ lɔ˧,don't worry,1,slang-agent-v1;ipa=espeak
+slang.youre-welcome,Có gì đâu,,kɔ˧˥ zi˨˩ ɗəw˧,what is there,1,slang-agent-v1;ipa=espeak
+slang.seriously,Thật hả?,,tət̪˨˩ˀ haː˧˩˧,"really, huh?",1,slang-agent-v1;ipa=espeak
+slang.im-good-thanks,"Thôi, cảm ơn",,"toj˧, kaːm˧˩˧ əːn˧","enough, thanks",2,slang-agent-v1;ipa=espeak
+slang.lets-go,Đi thôi!,,ɗi˧ toj˧,go then,2,slang-agent-v1;ipa=espeak
+slang.cheers,Cạn ly!,,kaːn˨˩ˀ li˧,drain the glass,2,slang-agent-v1;ipa=espeak
+slang.see-you,Hẹn gặp lại!,,hɛn˨˩ˀ ɣap˨˩ˀ laːj˨˩ˀ,appoint to meet again,2,slang-agent-v1;ipa=espeak

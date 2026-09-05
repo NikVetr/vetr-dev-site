@@ -1,0 +1,15 @@
+concept_id,text,text_alt,romanization_pinyin,ipa,literal,confidence,provenance
+slang.thats-good,不错,,bùcuò,pu˥˩tsʰwɔ˥˩,not wrong,1,slang-agent-v1;ipa=pinyin
+slang.thats-great,太棒了,,tài bàng le,tʰaɪ˥˩ pɑŋ˥˩ lɤ,,1,slang-agent-v1;ipa=pinyin
+slang.i-love-it,我超喜欢,,wǒ chāo xǐhuan,wɔ˧˩˧ ʈʂʰɑʊ˥ ɕi˧˩˧xwan,I super-like it,1,slang-agent-v1;ipa=pinyin
+slang.thats-bad,不怎么样,,bù zěnmeyàng,pu˥˩ tsən˧˩˧mɤjɑŋ˥˩,nothing special,1,slang-agent-v1;ipa=pinyin
+slang.delicious,太好吃了,,tài hǎochī le,tʰaɪ˥˩ xɑʊ˧˩˧ʈʂʰɨ˥ lɤ,too good to eat,1,slang-agent-v1;ipa=pinyin
+slang.thats-pricey,贵死了,,guì sǐ le,kweɪ˥˩ sɯ˧˩˧ lɤ,expensive to death,1,slang-agent-v1;ipa=pinyin
+slang.exactly,没错,,méicuò,meɪ˧˥tsʰwɔ˥˩,not wrong,2,slang-agent-v1;ipa=pinyin
+slang.no-worries,没事,,méi shì,meɪ˧˥ ʂɨ˥˩,no matter,2,slang-agent-v1;ipa=pinyin
+slang.youre-welcome,不用谢,,búyòng xiè,pu˧˥jʊŋ˥˩ ɕjɛ˥˩,no need to thank,2,slang-agent-v1;ipa=pinyin
+slang.seriously,不会吧,,bù huì ba,pu˥˩ xweɪ˥˩ pa,it can't be,1,slang-agent-v1;ipa=pinyin
+slang.im-good-thanks,不用了，谢谢,,"búyòng le, xièxie","pu˧˥jʊŋ˥˩ lɤ, ɕjɛ˥˩ɕjɛ","no need, thanks",2,slang-agent-v1;ipa=pinyin
+slang.lets-go,走吧！,,zǒu ba!,tsoʊ˧˩˧ pa,walk then,2,slang-agent-v1;ipa=pinyin
+slang.cheers,干杯！,,gānbēi!,kan˥peɪ˥,dry the cup,2,slang-agent-v1;ipa=pinyin
+slang.see-you,拜拜！,,báibái!,paɪ˧˥paɪ˧˥,bye-bye,2,slang-agent-v1;ipa=pinyin

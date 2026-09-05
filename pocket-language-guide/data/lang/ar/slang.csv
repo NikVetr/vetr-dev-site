@@ -1,0 +1,14 @@
+concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
+slang.thats-good,حُلو,,ḥulw,ħˈuluː,sweet,1,slang-agent-v1;ipa=espeak
+slang.thats-great,روعة,,rawʿah,ɹˈawʕa,splendour,1,slang-agent-v1;ipa=espeak
+slang.i-love-it,حَبّيتُه,,ḥabbaytuh,ħˈabːitˌuh,I loved it,1,slang-agent-v1;ipa=espeak
+slang.thats-bad,مِش حُلو,,mish ḥulw,mˈiʃ ħˈuluː,not sweet,1,slang-agent-v1;ipa=espeak
+slang.delicious,لذيذ,,ladhīdh,lˈaðiːð,,2,slang-agent-v1;ipa=espeak
+slang.exactly,بالضبط,,bi-al-ḍabṭ,bidˤdˤˈabt̪,with precision,2,slang-agent-v1;ipa=espeak
+slang.no-worries,مَعْلِش,,maʿlish,mˈaʕliʃ,never mind,1,slang-agent-v1;ipa=espeak
+slang.youre-welcome,تِسْلَم,,tislam,tˈislam,may you stay safe,1,slang-agent-v1;ipa=espeak
+slang.seriously,عَن جَدّ؟,بِجَدّ؟,ʿan jadd?,ʕˈan dʒˈadː,for real?,1,slang-agent-v1;ipa=espeak
+slang.im-good-thanks,لا شُكْراً,,lā shukran,lˈaː ʃˈukɹaː,"no, thanks",2,slang-agent-v1;ipa=espeak
+slang.lets-go,يَلّا!,,yallā!,jˈallaː,come on,2,slang-agent-v1;ipa=espeak
+slang.cheers,بالعافية,,bi-al-ʿāfiyah,bilʕˈaːfiːˌa,in good health,1,slang-agent-v1;ipa=espeak
+slang.see-you,سلام,,salām,sˈalaːm,peace,2,slang-agent-v1;ipa=espeak

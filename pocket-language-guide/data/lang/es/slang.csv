@@ -1,0 +1,15 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+slang.thats-good,¡Genial!,,xenjˈal,,1,slang-agent-v1;ipa=espeak
+slang.thats-great,¡Buenísimo!,¡Qué pasada!,bwenˈisimo,,1,slang-agent-v1;ipa=espeak
+slang.i-love-it,¡Me encanta!,,me enkˈanta,,2,slang-agent-v1;ipa=espeak
+slang.thats-bad,¡Qué mal!,,kˈe mˈal,how bad,2,slang-agent-v1;ipa=espeak
+slang.delicious,¡Qué rico!,,kˈe rˈiko,how rich,2,slang-agent-v1;ipa=espeak
+slang.thats-pricey,¡Qué caro!,,kˈe kˈaɾo,how expensive,2,slang-agent-v1;ipa=espeak
+slang.exactly,¡Exacto!,,eksˈakto,,2,slang-agent-v1;ipa=espeak
+slang.no-worries,¡No pasa nada!,,nˈo pˈasa nˈada,nothing happens,2,slang-agent-v1;ipa=espeak
+slang.youre-welcome,¡No hay de qué!,,nˈo ˈaɪ de kˈe,there is nothing of what,2,slang-agent-v1;ipa=espeak
+slang.seriously,¿En serio?,,en sˈeɾjo,,2,slang-agent-v1;ipa=espeak
+slang.im-good-thanks,Así está bien,,asˈi estˈa bjˈen,it's fine like this,2,slang-agent-v1;ipa=espeak
+slang.lets-go,¡Vámonos!,,bˈamonos,,2,slang-agent-v1;ipa=espeak
+slang.cheers,¡Salud!,,salˈud,health,2,slang-agent-v1;ipa=espeak
+slang.see-you,¡Nos vemos!,,nos bˈemos,we see each other,2,slang-agent-v1;ipa=espeak

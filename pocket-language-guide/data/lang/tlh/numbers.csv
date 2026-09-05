@@ -1,0 +1,22 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+numbers-money.l-ng,pagh,,pʰɑɣ,,3,tlh-attested-v1;src=TKD 5.2;ipa=okrand
+numbers-money.y,wa',,wɑʔ,,3,tlh-attested-v1;src=TKD 5.2;ipa=okrand
+numbers-money.r,cha',,tʃɑʔ,,3,tlh-attested-v1;src=TKD 5.2;ipa=okrand
+numbers-money.s-n,wej,,wɛdʒ,,3,tlh-attested-v1;src=TKD 5.2;ipa=okrand
+numbers-money.s,loS,,loʂ,,3,tlh-attested-v1;src=TKD 5.2;ipa=okrand
+numbers-money.w,vagh,,vɑɣ,,3,tlh-attested-v1;src=TKD 5.2;ipa=okrand
+numbers-money.li,jav,,dʒɑv,,3,tlh-attested-v1;src=TKD 5.2;ipa=okrand
+numbers-money.q,Soch,,ʂotʃ,,3,tlh-attested-v1;src=TKD 5.2;ipa=okrand
+numbers-money.b,chorgh,,tʃorɣ,,3,tlh-attested-v1;src=TKD 5.2;ipa=okrand
+numbers-money.ji,Hut,,xutʰ,,3,tlh-attested-v1;src=TKD 5.2;ipa=okrand
+numbers-money.sh,wa'maH,,wɑʔmɑx,one ten,3,tlh-attested-v1;src=TKD 5.2;ipa=okrand
+numbers-money.y-b-i,wa'vatlh,,wɑʔvɑtɬ,one hundred,3,tlh-attested-v1;src=TKD 5.2;ipa=okrand
+numbers-money.y-qi-n,wa'SaD,,wɑʔʂɑɖ,one thousand; wa'SanID is the same number,3,tlh-attested-v1;src=TKD 5.2;ipa=okrand
+numbers-money.y-w-n,wa'netlh,,wɑʔnɛtɬ,one ten-thousand,3,tlh-attested-v1;src=TKD 5.2;ipa=okrand
+numbers-money.b-n,bID,,bɪɖ,half,3,tlh-attested-v1;src=TKD;ipa=okrand
+atm-cash.where-can-i-change-money,nuqDaq Huch vItamlaH,,nuqʰɖɑqʰ xutʃ vɪtʰɑmlɑx,where can I exchange money?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+atm-cash.do-you-have-change,chuv Daghaj'a',,tʃuv ɖɑɣɑdʒʔɑʔ,do you have change?,1,tlh-composed-v1;lex=TKD;grammar=TKD;ipa=okrand
+atm-cash.banknote,Huch nav,,xutʃ nɑv,paper money,3,tlh-attested-v1;src=Klingon Monopoly;ipa=okrand
+atm-cash.coin,DeQ,,ɖɛqx,,3,tlh-attested-v1;src=TKD;ipa=okrand
+atm-cash.change,chuv,,tʃuv,what is left over,3,tlh-attested-v1;src=Saarbruecken qepHom'a' 2020;ipa=okrand
+atm-cash.bank,beylI',,bɛjlɪʔ,,3,tlh-attested-v1;src=TNK;ipa=okrand

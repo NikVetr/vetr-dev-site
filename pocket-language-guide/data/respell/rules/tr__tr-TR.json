@@ -118,6 +118,11 @@
   "phonemes": [
     {
       "slot": "any",
+      "ipa": "ɬ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
       "ipa": "ʈʂʰ",
       "out": "ç"
     },

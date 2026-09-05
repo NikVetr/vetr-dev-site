@@ -1,0 +1,15 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+slang.thats-good,Nem rossz,,nˈɛm rˈoss,not bad,1,slang-agent-v1;ipa=espeak
+slang.thats-great,Óriási!,,ˈoːriaːʃi,gigantic,1,slang-agent-v1;ipa=espeak
+slang.i-love-it,Nagyon bejön,,nˈɑɟon bˈɛjøn,it comes in a lot,1,slang-agent-v1;ipa=espeak
+slang.thats-bad,Nem az igazi,,nˈɛm ˈɑz ˈiɡɑzi,not the real thing,1,slang-agent-v1;ipa=espeak
+slang.delicious,Isteni!,,ˈiʃtɛni,divine,1,slang-agent-v1;ipa=espeak
+slang.thats-pricey,Ez borsos,,ˈɛz bˈorʃoʃ,this is peppery,1,slang-agent-v1;ipa=espeak
+slang.exactly,Pontosan!,,pˈontoʃɑn,,2,slang-agent-v1;ipa=espeak
+slang.no-worries,Nem történt semmi,,nˈɛm tˈørteːnt ʃˈɛmmi,nothing happened,1,slang-agent-v1;ipa=espeak
+slang.youre-welcome,Nincs mit,,nˈintʃ mˈit,there is nothing for it,1,slang-agent-v1;ipa=espeak
+slang.seriously,Ne már!,,nˈɛ mˈaːr,not already!,1,slang-agent-v1;ipa=espeak
+slang.im-good-thanks,"Kösz, nem kell",,"kˈøs, nˈɛm kˈɛll","thanks, not needed",1,slang-agent-v1;ipa=espeak
+slang.lets-go,Gyerünk!,,ɟˈɛrynk,,2,slang-agent-v1;ipa=espeak
+slang.cheers,Egészségedre!,,ˈɛɡeːʃeːɡɛdrɛ,to your health,2,slang-agent-v1;ipa=espeak
+slang.see-you,Csá!,Sziasztok!,tʃˈaː,,1,slang-agent-v1;ipa=espeak

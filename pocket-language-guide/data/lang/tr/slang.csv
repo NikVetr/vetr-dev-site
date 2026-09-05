@@ -1,0 +1,15 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+slang.thats-good,Fena değil,,fenˈa dˈejɪl,not bad,1,slang-agent-v1;ipa=espeak
+slang.thats-great,Efsane!,Harika!,ˈɛfsanɛ,legend,1,slang-agent-v1;ipa=espeak
+slang.i-love-it,Bayıldım!,,bajɯɫdˈɯm,I fainted,1,slang-agent-v1;ipa=espeak
+slang.thats-bad,Pek iyi değil,,pˈɛk ijˈi dˈejɪl,not very good,1,slang-agent-v1;ipa=espeak
+slang.delicious,Nefis!,,nefˈɪs,exquisite,1,slang-agent-v1;ipa=espeak
+slang.thats-pricey,Biraz tuzlu,,biɾˈaz tʊzɫˈʊ,a bit salty,1,slang-agent-v1;ipa=espeak
+slang.exactly,Aynen!,,ajnˈæn,the very same,1,slang-agent-v1;ipa=espeak
+slang.no-worries,Boş ver!,,bˈɔʃ vˈɛr,give it empty,1,slang-agent-v1;ipa=espeak
+slang.youre-welcome,Ne demek!,,nˈɛ demˈɛk,what does that mean!,1,slang-agent-v1;ipa=espeak
+slang.seriously,Yok artık!,,jˈɔk artˈɯk,no more!,1,slang-agent-v1;ipa=espeak
+slang.im-good-thanks,"Yok, sağ ol",,"jˈɔk, sˈaː ˈɔɫ","no, be well",1,slang-agent-v1;ipa=espeak
+slang.lets-go,Hadi gidelim!,,hadˈɪ ɟidelˈɪm,"come on, let's go",2,slang-agent-v1;ipa=espeak
+slang.cheers,Şerefe!,,ʃeɾefˈɛ,to honour,2,slang-agent-v1;ipa=espeak
+slang.see-you,Görüşürüz!,,ɟœɾyʃˈyɾøz,we'll be seeing,2,slang-agent-v1;ipa=espeak

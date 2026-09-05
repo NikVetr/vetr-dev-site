@@ -137,6 +137,11 @@
   "phonemes": [
     {
       "slot": "any",
+      "ipa": "ɬ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
       "ipa": "tɕʰ",
       "out": "tsch"
     },

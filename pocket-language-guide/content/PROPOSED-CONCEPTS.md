@@ -395,3 +395,97 @@ already written down.
   `coperto` and, where charged, the `servizio` are already on the bill, so a tip is
   optional and often just the coins left behind. `Si usa lasciare la mancia?` is
   answerable with "no" without anyone being offended.
+
+## From the slang round
+
+`data/concepts/slang.csv` is fourteen concepts that name a **function** — the mild
+positive, the intensified positive, the reply to thanks — and let each language
+supply its own idiom for it. Everything below came out of filling them and is
+recorded so it is not rediscovered.
+
+### Functions considered and rejected
+
+Named because each looks obviously right until you try to fill nineteen cells.
+
+- **`wow`** — a surprise exclamation. Rejected because in a majority of the
+  nineteen the answer is either an international onomatopoeia that teaches nothing
+  (`wow` / `¡guau!` / `哇` / `واو`), or the same word as "that's great" (`すごい`,
+  `Wahnsinn`), or ambiguous between admiration and dismay (`やばい`, `¡Madre mía!`).
+  `slang.seriously` carries the surprise function with far more information per row.
+- **A casual greeting** (`what's up` / `¿qué pasa?` / `Wie geht's?`). Rejected on
+  register: a traveller's *first* words to a stranger are the one place where the
+  familiar register is guaranteed to be noticed, and `introductions.how-are-you`
+  already covers the neutral form. The same argument rejects a clipped casual
+  **thank-you**.
+- **An intensified negative** ("that's awful"). Rejected because it is where the
+  obscenities live in most of the nineteen — and because a traveller has almost no
+  use for saying it to a stranger. `slang.thats-bad` keeps one mild negative.
+- **`got-it`** — redundant against four existing flavours of okay in
+  `quick-responses` (`okay-can`, `okay-fine`, `works-okay`, `yes-right`).
+- **`hurry-up`**, **`never-mind`**, **`I'm exhausted`**, **`good luck`**,
+  **`that's crazy`**, **`cute`** — all either address the hearer in the imperative,
+  or duplicate a neighbour, or are too rare to earn a row on a card this size.
+
+### The empty cells, which are findings rather than gaps
+
+- **`slang.thats-pricey` has no Arabic row.** The colloquial intensifier is the most
+  regionally split word in the language — `أوي` (EG), `كتير` (LV), `وايد` (Gulf),
+  `مرة` (MA) — so no single form serves the six countries the pack claims, and
+  `shopping.that-is-too-expensive` already prints `هذا غالي جدّاً`. The bare
+  adjective on its own adds nothing.
+- **`slang.youre-welcome` has no Hindi row.** Hindi's casual reply to thanks *is*
+  `कोई बात नहीं`, which `social-basics.you-are-welcome` already prints; there is no
+  second register above it, and `स्वागत है` means "welcome to a place" rather than
+  "don't mention it".
+- **`slang.youre-welcome` has no Indonesian row**, for the same reason:
+  `Sama-sama` is both the textbook answer and the real one.
+- **`slang.cheers` has no Swahili row.** Urban Kenya and Tanzania use the English
+  word; the Swahili alternatives are occasion-specific wishes rather than a
+  conventional toast, and a confidence-0 guess here is worse than a blank.
+- **Klingon supplies only ten of the fourteen**, and three of the four blanks are
+  the same finding: `qay'be'`, `Qo'` and `Qapla'` are already on the card under
+  Social + basics and Quick responses, because **Klingon has no register layer
+  above its dictionary** — the slang and the lexicon are the same words. The fourth,
+  `youre-welcome`, is a form the language does not have.
+- **Quenya supplies six**, and that is the strongest "decline the concept" case in
+  the corpus. The attested Quenya corpus is high-style verse, liturgy and
+  nomenclature; Tolkien wrote no colloquial register, so there is nothing for a
+  slang cell to be faithful to. Inventing one would be the calque problem with no
+  speech community to be strange in front of.
+
+### Concepts this round would like, staged rather than added
+
+- **`slang.thats-annoying` / a mild complaint about a *situation*.** Five packs had
+  a natural idiom for it (`Qué rollo`, `Che palle` — no, obscene-adjacent — `Was
+  für ein Mist`, `Какая ерунда`) and it was cut because the safe forms and the
+  common forms are different forms in about half the nineteen. Worth revisiting with
+  a translator per pack rather than one designer.
+- **A `note` at the head of `slang` in the reader's own language**, saying in one
+  sentence that these are for people you are already friendly with. Rejected for
+  this round on the requester's own instruction — a warning in a note is a warning
+  nobody reads — and the section title carries it instead (`Slang (casual)`,
+  `Umgangssprache`, `くだけた表現`, `Bahasa gaul`). Recorded because if the section is
+  ever widened past the "about a thing, never about a person" rule, a note becomes
+  necessary rather than optional.
+- **`literal` on the `refphrase` template.** This is a design question rather than a
+  concept, and slang is where it bites hardest: the most memorable content in the
+  section is the literal sense — `Biraz tuzlu` "a bit salty", `Ça coûte un bras`
+  "it costs an arm", `꿀맛이에요` "honey taste", `Bayıldım!` "I fainted", `Ez borsos`
+  "this is peppery" — and no reference template defines the field, so all 121 of
+  those cells are written and none of them draws. `entry` would draw them but only
+  behind a toggle that is off by default, at twice the height per row. The cells are
+  in the corpus and correct; they are waiting on either a fifth `refphrase` column
+  or a per-section field override.
+
+### Two corpus defects found while filling this
+
+- **`registry/section-titles/hu.csv` was the one file of nineteen written with LF
+  line terminators.** Harmless where it is read — `core/csv.js` and Python's `csv`
+  both accept it — but `load_rows` in `scripts/build_ipa.py` splits on `\r\n` and
+  would have read the whole file as a single row had it ever been a `data/lang/`
+  file. Normalised to CRLF with this change.
+- **The English reader has no rule for German `/ɔø/`.** `teuer` is `tˈɔøɜ` in the
+  `de` column and respells as `TAW-ur-uh` — three syllables where German has two,
+  and `aw` where the diphthong wants `oy`. It already prints on the shipped
+  `shopping.that-is-too-expensive`, so this is a `data/respell/rules/en__en-US.json`
+  nucleus rule rather than anything about the data.

@@ -1,0 +1,15 @@
+concept_id,text,text_alt,romanization_rtgs,ipa,literal,confidence,provenance
+slang.thats-good,เจ๋ง,,cheng,tɕeːŋ˩˩˦,cool,1,slang-agent-v1;ipa=thaig2p
+slang.thats-great,สุดยอด,,sut yot,sut˨˩jɔːt˥˩,the very top,1,slang-agent-v1;ipa=thaig2p
+slang.i-love-it,ชอบมากเลย,,chop mak loei,tɕʰɔːp˥˩ maːk˥˩ lɤːj˧,,1,slang-agent-v1;ipa=thaig2p
+slang.thats-bad,ไม่ค่อยดี,ห่วย,mai khoi di,maj˥˩kʰɔj˥˩ diː˧,not very good,1,slang-agent-v1;ipa=thaig2p
+slang.delicious,อร่อยจัง,,aroi chang,ʔa˨˩rɔj˨˩ tɕaŋ˧,,1,slang-agent-v1;ipa=thaig2p
+slang.thats-pricey,แพงมากเลย,,phaeng mak loei,pʰɛːŋ˧ maːk˥˩ lɤːj˧,,1,slang-agent-v1;ipa=thaig2p
+slang.exactly,ใช่เลย,,chai loei,tɕʰaj˥˩ lɤːj˧,,2,slang-agent-v1;ipa=thaig2p
+slang.no-worries,ช่างมันเถอะ,,chang man thoe,tɕʰaːŋ˥˩man˧tʰɤʔ˨˩,let it be,1,slang-agent-v1;ipa=thaig2p
+slang.youre-welcome,ยินดี,,yin di,jin˧diː˧,gladly,1,slang-agent-v1;ipa=thaig2p
+slang.seriously,ไม่น่า,,mai na,maj˥˩ naː˥˩,surely not,1,slang-agent-v1;ipa=thaig2p
+slang.im-good-thanks,ไม่ล่ะ,,mai la,maj˥˩ laʔ˥˩,no thanks,1,slang-agent-v1;ipa=thaig2p
+slang.lets-go,ไปกันเลย,,pai kan loei,paj˧ kan˧ lɤːj˧,,2,slang-agent-v1;ipa=thaig2p
+slang.cheers,ชนแก้ว!,,chon kaeo!,tɕʰon˧kɛːw˥˩,clink glasses,1,slang-agent-v1;ipa=thaig2p
+slang.see-you,เจอกันนะ,,choe kan na,tɕɤː˧kan˧ naʔ˦˥,"meet each other, yes?",1,slang-agent-v1;ipa=thaig2p

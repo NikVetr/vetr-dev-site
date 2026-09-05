@@ -46,6 +46,28 @@ export async function expectIncludedNot(page, from) {
 }
 
 /**
+ * The counter once it has stopped moving, rather than merely moved.
+ *
+ * `expectIncludedNot` returns the first value that differs from the one given, which
+ * is the right answer for a single toggle and the wrong one for a burst: a spec that
+ * clicked two hundred checkboxes read an intermediate count, and then compared a
+ * later reading against it and found the sheet had *shrunk*. Two equal readings a
+ * beat apart mean the debounced re-solve has caught up.
+ * @param {import('@playwright/test').Page} page
+ * @returns {Promise<{included:number, total:number}>}
+ */
+export async function settledCounts(page) {
+  let last = -1;
+  await expect.poll(async () => {
+    const { included } = await counts(page);
+    const stable = included === last;
+    last = included;
+    return stable;
+  }, { timeout: 120_000, intervals: [700, 700, 700, 1500] }).toBe(true);
+  return counts(page);
+}
+
+/**
  * The face count the studio settled on, read from its own status line. Tests used
  * to hardcode 4, which was true only while the corpus was 413 concepts; auto faces
  * follow the content by design, so the number is not the invariant -- the agreement

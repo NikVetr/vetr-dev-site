@@ -1,0 +1,4 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+food-ordering.i-want-this,mínan sina,,mˈiːnan sˈina,I desire this,1,qya-composed-v1;lex=VT39/11.3803 + PE23/135.1413;grammar=PE22;ipa=appendix-e
+food-ordering.do-you-have-drinking-water,haryalyë nén,,hˈarjalje neːn,do you have water?,1,qya-composed-v1;lex=MS/01.03 + PE17/052.2911;grammar=PE22;ipa=appendix-e
+food-ordering.water-please,nén,,neːn,water,3,qya-attested-v1;src=PE17/052.2911;eldamo=q;ipa=appendix-e

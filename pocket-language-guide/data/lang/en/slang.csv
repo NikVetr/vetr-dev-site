@@ -1,0 +1,15 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+slang.thats-good,Nice,,nˈaɪs,,2,slang-agent-v1;ipa=espeak
+slang.thats-great,Awesome!,,ˈɔːsʌm,,2,slang-agent-v1;ipa=espeak
+slang.i-love-it,I love it,,aɪ lˈʌv ɪt,,2,slang-agent-v1;ipa=espeak
+slang.thats-bad,Not great,,nˌɑːt ɡɹˈeɪt,,2,slang-agent-v1;ipa=espeak
+slang.delicious,Delicious!,,dɪlˈɪʃəs,,2,slang-agent-v1;ipa=espeak
+slang.thats-pricey,That's steep,,ðæts stˈiːp,,2,slang-agent-v1;ipa=espeak
+slang.exactly,Totally!,,tˈoʊɾəli,,2,slang-agent-v1;ipa=espeak
+slang.no-worries,No worries,,nˈoʊ wˈʌɹiz,,2,slang-agent-v1;ipa=espeak
+slang.youre-welcome,Anytime!,,ˈɛnɪtˌaɪm,,2,slang-agent-v1;ipa=espeak
+slang.seriously,No way!,,nˈoʊ wˈeɪ,,2,slang-agent-v1;ipa=espeak
+slang.im-good-thanks,"I'm good, thanks",,"aɪm ɡˈʊd, θˈæŋks",,2,slang-agent-v1;ipa=espeak
+slang.lets-go,Let's go!,,lˈɛts ɡˈoʊ,,2,slang-agent-v1;ipa=espeak
+slang.cheers,Cheers!,,tʃˈɪɹz,,2,slang-agent-v1;ipa=espeak
+slang.see-you,See you!,,sˈiː juː,,2,slang-agent-v1;ipa=espeak

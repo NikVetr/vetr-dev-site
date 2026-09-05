@@ -1,0 +1,1082 @@
+{
+  "source": "tlh",
+  "accent": "tlh-TA",
+  "status": "ready",
+  "version": "1",
+  "derives_from": "Okrand's own transliterations of Terran names into Klingon orthography, read off the lexicon the way the English table was read off the curated respellings -- which is the better of the two kinds of source, because it records what the language's author actually chose for each foreign sound rather than what a reference book says he should have. The set is about two hundred entries: the country and food lists of Talk Now! Klingon (TNK), the place names in the qep'a' and qepHom'a' new-word releases, and the loans in The Klingon Dictionary (TKD) and Klingon for the Galactic Traveler (KGT). It is a one-directional key -- foreign sound to Klingon letter -- which is exactly the direction this column needs, and it is the only such key Klingon has: TKD section 1.1 runs the other way, describing Klingon letters for an English reader. The inventory and the syllable canon that constrain it are TKD sections 1.1-1.3.",
+  "deviations": [
+    {
+      "rule": "Okrand closes a borrowed word with a glottal stop where the source ends in a vowel: 'amerI'qa', qa'naDa', 'eSpanya', raSya', 'Italya'.",
+      "why": "Not reproduced. It is not phonotactically required -- Klingon's own vocabulary ends in a bare vowel freely (po, nu', tera' aside, and cha'maH is cha' plus maH) -- so it is a habit that makes a permanent proper noun feel Klingon rather than a fact a reader needs. A respelling is disposable, and a spurious final consonant is one more sound to unsay. The word-INITIAL glottal stop is kept, because there it is required: a syllable with no onset is not a possible Klingon syllable."
+    },
+    {
+      "rule": "vIraS for France, so the key spells the French rhotic r.",
+      "why": "Overruled: /ʁ/ takes gh. Klingon's gh is a voiced velar fricative and is the same sound to within a place feature, where r is an alveolar trill -- a different manner and a different articulator. The key's r is letter-copying from the Latin spelling of France rather than a reading of the sound, which is visible in the same list: Denmargh spells the final /k/ of Danmark as gh, which no sound-keyed rule would do either. Where the key is copying letters it is not evidence."
+    },
+    {
+      "rule": "policy.stress -- eleven of the nineteen reader tables use caps.",
+      "why": "IMPOSSIBLE HERE, and this is the sharpest single fact about a Klingon reader. The orthography is case-significant: q and Q are a minimal pair (qat 'accompany' against Qat 'be popular') and I is the vowel /ɪ/ while i is not a letter of the language at all. toLocaleUpperCase would turn every q into a different consonant and every vowel into something unreadable, so caps is not a device this reader has. An acute is not available either -- Klingon writes no diacritic -- and there is nothing else, so stress goes unmarked. Klingon's own stress is unmarked in writing too (TKD 1.3 states it as a rule over morphology), so this costs the reader nothing they are used to having."
+    },
+    {
+      "rule": "policy.length -- doubling a vowel is the device six tables use.",
+      "why": "Klingon has no long vowels and, more to the point, no two vowels may be adjacent in a syllable at all (TKD 1.2), so a doubled vowel is not a possible Klingon spelling. Length is dropped outright and a fixup collapses any pair the tables produce by accident. Hindi, Arabic, Thai, Japanese, German, Italian and Hungarian length is lost."
+    },
+    {
+      "rule": "Q is a letter of the Klingon alphabet.",
+      "why": "Never emitted, and the reason is worth stating because it is not squeamishness about the glyph: /q͡χ/ occurs in no target's ipa column except Klingon's own, and Klingon is not a target for itself. /q/ and /k/ both take q, which is the key's own choice throughout ('amerI'qa', qa'naDa', gharlIq, Hanghuq, turIqya'). Verified in the output: 0 rows contain Q."
+    },
+    {
+      "rule": "The key writes /ts/ as tS: pItSa' for pizza.",
+      "why": "Followed, and it is the one rule here that produces a letter sequence Klingon's syllable canon rejects -- two consonants with no vowel between them. In Okrand's own word it falls across a syllable break (pIt.Sa') and is legal; in an onset it is not. Kept anyway, because the alternative is losing the stop and merging /ts/ with /s/, which matters for German, Italian, Mandarin and Japanese all at once."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "/f/ (French, German, English, Turkish)",
+      "out": "v",
+      "why": "Klingon has no /f/. This is the key's own answer twice over -- vIraS for France, 'avrIqaS for Afrikaans -- and it keeps the labiodental fricative and loses only voicing, where p would lose the manner."
+    },
+    {
+      "sounds": "/s z ʃ ʒ ɕ ʑ ʂ ʐ θ/",
+      "out": "S",
+      "why": "S is Klingon's only sibilant, a voiceless retroflex fricative, and the key sends /s/ and /z/ to it without exception: vIraS, raSya', maSIr, 'eSpanya', bIraSIw (Brazil), nu'SIylan (New Zealand), Su'ghar (sugar). So eight foreign sibilants collapse onto one letter. That is the largest loss in the table and it is unavoidable: there is no second sibilant to spread them over. /θ/ joins them rather than taking t, keeping the manner at the cost of the place."
+    },
+    {
+      "sounds": "/ð/",
+      "out": "D",
+      "why": "The other half of that decision goes the other way, because D is already the voiced coronal Klingon has and /ð/ to /d/ is the commonest substitution any language makes for it. English 'this' is DIS, which collides with the Klingon word for year -- a collision the reader can see is not Klingon, since it sits in the pronunciation column."
+    },
+    {
+      "sounds": "/x ħ h ç/",
+      "out": "H",
+      "why": "Klingon H is a voiceless velar fricative, which is /x/ exactly, and it is the key's letter for Terran /h/ (Hanghuq for Hanguk, HInDIy for Hindi). Arabic's /ħ/ and German's /ç/ ride with them: both are audible and dropping them would not be."
+    },
+    {
+      "sounds": "/ʕ/ and /ʔ/",
+      "out": "'",
+      "why": "Klingon's ' is a glottal stop and a full consonant, so the Arabic hamza transfers exactly. The pharyngeal 'ayn takes it as well: it is not the same sound, but it is a consonant in the same corner of the throat and Klingon has nothing else there."
+    },
+    {
+      "sounds": "/c ɟ/ (Turkish, Hungarian, Hindi palatal stops)",
+      "out": "ch and j",
+      "why": "Klingon has no palatal stop. ch and j are its postalveolar affricates, one step forward and one manner off, which is much closer than q and gh would be -- and it is how these sounds are heard by speakers of any language without them."
+    },
+    {
+      "sounds": "/y ø œ/ (front rounded vowels)",
+      "out": "u, o, o",
+      "why": "Klingon's five vowels include no front rounded one. /y/ takes u on the key's own evidence (turIqya' for Turkiye, where u renders the Turkish u-umlaut). /ø/ and /œ/ take o rather than e, which is the other defensible answer and is what the Indonesian table chose: Klingon's e is /ɛ/, open-mid front UNROUNDED, so it shares one feature with /ø/, while o is /o/, close-mid back rounded, and shares two."
+    },
+    {
+      "sounds": "/ə ʌ ɜ ɐ/ (the central vowels)",
+      "out": "a",
+      "why": "Klingon has no central vowel. a is /ɑ/, open back unrounded, which is the nearest and is the key's answer in Su'ghar for sugar."
+    },
+    {
+      "sounds": "/ɚ ɝ/ (English NURSE and letter-R)",
+      "out": "ar",
+      "why": "Two letters for one phoneme, and again the key's: Su'ghar spells the -ar of sugar exactly this way. Klingon r is a trill, so an English reader would not recognise the result, but a Klingon reader will."
+    },
+    {
+      "sounds": "/ɨ/ (Russian) and /ɯ/ (Turkish, Korean, Thai, Japanese)",
+      "out": "I or u",
+      "why": "Both are high unrounded vowels Klingon lacks, and the choice is typological rather than per-target. I is /ɪ/, the nearest unrounded vowel, and is right for Russian, Turkish, Korean and Thai. Japanese is the exception and unless_inventory 'u' is what finds it: espeak writes Japanese's only high back vowel as /ɯ/ and the language has no plain /u/ at all, so there it is u. Russian's /ɨ/ takes the mirror predicate."
+    },
+    {
+      "sounds": "aspiration, palatalisation, labialisation, pharyngealisation, tenseness",
+      "out": "not written",
+      "why": "Klingon has none of them, and every aspirated and tense series is listed one by one rather than left to a bare modifier rule, so that /kʰ/ cannot decompose into k plus a stranded modifier. Korean and Mandarin lose their aspiration contrast, Russian its palatalisation and Arabic its emphatics."
+    },
+    {
+      "sounds": "lexical tone (Mandarin, Thai, Vietnamese)",
+      "out": "dropped",
+      "why": "Chao tone letters are not Klingon letters and Klingon has no tone. All four curated tonal sheets drop it too."
+    },
+    {
+      "sounds": "/tɬ/, which is Klingon's own tlh",
+      "out": "tlh",
+      "why": "Listed for completeness rather than for use: no target but Klingon has the sound, and Klingon is not a target for itself. It is here so that a future language with a lateral affricate is not a gap, and because the bare /ɬ/ rule beside it is the one thing a Klingon reader needs that no other reader's table supplies -- see the note."
+    },
+    {
+      "sounds": "vowel and consonant length",
+      "out": "not written",
+      "why": "See deviations: two adjacent vowels are not a possible Klingon spelling, and a geminate is not a possible Klingon syllable."
+    },
+    {
+      "sounds": "syllabic /m̩ n̩/ (Swahili mtoto, nchi)",
+      "out": "m and n",
+      "why": "The syllabicity is dropped and the epenthesis fixup then supplies a vowel where the cluster needs one, which is the same repair by a different route: mtoto comes out mItoto rather than m-toto."
+    },
+    {
+      "sounds": "a falling diphthong's second element (/aɪ eɪ ɔɪ aʊ oʊ/)",
+      "out": "y and w",
+      "why": "A consonant letter rather than a vowel, because two vowels may not stand together in a Klingon syllable (TKD 1.2) -- and again this is the key's own answer: ray' for rice, meyIS for maize, mangtay for Thailand, DoyIchlan for Deutschland. Conditioned on after_out so that the same symbol still spells a plain vowel when it is the nucleus itself, and written above the unconditioned rules so that the sort by ipa length and slot leaves file order to decide, which is what it does for two rules that agree on both."
+    }
+  ],
+  "policy": {
+    "syllable_separator": "",
+    "word_separator": " ",
+    "stress": "none",
+    "stress_min_syllables": 2,
+    "length": "none",
+    "tone": "drop",
+    "max_onset": 1,
+    "locale": "tlh",
+    "fixups": "all"
+  },
+  "splits": [],
+  "phonemes": [
+    {
+      "slot": "nucleus",
+      "ipa": "ɪ",
+      "out": "y",
+      "after_out": "a e I o u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "i",
+      "out": "y",
+      "after_out": "a e I o u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʊ",
+      "out": "w",
+      "after_out": "a e I o u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "u",
+      "out": "w",
+      "after_out": "a e I o u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɥ",
+      "out": "w",
+      "after_out": "a e I o u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂʰ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃʲ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ͈",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "cʰ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʐ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʑ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "dz",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟʰ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʑ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "tS"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts̪",
+      "out": "tS"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "tS"
+    },
+    {
+      "slot": "any",
+      "ipa": "pf",
+      "out": "pv"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʰ",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "p͈",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʲ",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʼ",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʰ",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʲ",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʼ",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɓ",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "b",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "t͈",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "t̪",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʲ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʼ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ṭ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʰ",
+      "out": "D"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʲ",
+      "out": "D"
+    },
+    {
+      "slot": "any",
+      "ipa": "dˤ",
+      "out": "D"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʼ",
+      "out": "D"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɗ",
+      "out": "D"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʰ",
+      "out": "D"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖ",
+      "out": "D"
+    },
+    {
+      "slot": "any",
+      "ipa": "ḍ",
+      "out": "D"
+    },
+    {
+      "slot": "any",
+      "ipa": "d",
+      "out": "D"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰ",
+      "out": "q"
+    },
+    {
+      "slot": "any",
+      "ipa": "k͈",
+      "out": "q"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʲ",
+      "out": "q"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʼ",
+      "out": "q"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "q"
+    },
+    {
+      "slot": "any",
+      "ipa": "qʰ",
+      "out": "q"
+    },
+    {
+      "slot": "any",
+      "ipa": "q",
+      "out": "q"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡʰ",
+      "out": "gh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡʲ",
+      "out": "gh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡ",
+      "out": "gh"
+    },
+    {
+      "slot": "any",
+      "ipa": "g",
+      "out": "gh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔ",
+      "out": "'"
+    },
+    {
+      "slot": "any",
+      "ipa": "fʲ",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "fʼ",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "f",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɸ",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "vʲ",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "vʼ",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "v",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʋ",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "θ",
+      "out": "S"
+    },
+    {
+      "slot": "any",
+      "ipa": "ð",
+      "out": "D"
+    },
+    {
+      "slot": "any",
+      "ipa": "sʲ",
+      "out": "S"
+    },
+    {
+      "slot": "any",
+      "ipa": "sʼ",
+      "out": "S"
+    },
+    {
+      "slot": "any",
+      "ipa": "s͈",
+      "out": "S"
+    },
+    {
+      "slot": "any",
+      "ipa": "s̪",
+      "out": "S"
+    },
+    {
+      "slot": "any",
+      "ipa": "ṣ",
+      "out": "S"
+    },
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "S"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʂ",
+      "out": "S"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "S"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "S"
+    },
+    {
+      "slot": "any",
+      "ipa": "zʲ",
+      "out": "S"
+    },
+    {
+      "slot": "any",
+      "ipa": "zʼ",
+      "out": "S"
+    },
+    {
+      "slot": "any",
+      "ipa": "ẓ",
+      "out": "S"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "S"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʐ",
+      "out": "S"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒ",
+      "out": "S"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "H"
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "H"
+    },
+    {
+      "slot": "any",
+      "ipa": "ħ",
+      "out": "H"
+    },
+    {
+      "slot": "any",
+      "ipa": "hʼ",
+      "out": "H"
+    },
+    {
+      "slot": "any",
+      "ipa": "h",
+      "out": "H"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɣ",
+      "out": "gh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "gh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʕ",
+      "out": "'"
+    },
+    {
+      "slot": "any",
+      "ipa": "mʲ",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "mʼ",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "m̩",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "m",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "nʲ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "nʼ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "n̩",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɳ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɴ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "n",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "ny"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "ng"
+    },
+    {
+      "slot": "any",
+      "ipa": "lʲ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "lʼ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɫ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭʲ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "l",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "ly"
+    },
+    {
+      "slot": "any",
+      "ipa": "rʲ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "rʼ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɹ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɻ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽʰ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "w"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɥ",
+      "out": "w"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰ",
+      "out": "w"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɬ",
+      "out": "lh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɑ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɒ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "a",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "æ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "e",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɪ",
+      "out": "I"
+    },
+    {
+      "slot": "any",
+      "ipa": "i",
+      "out": "I"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɔ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ø",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "œ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɵ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɤ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "o",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʊ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʉ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "y",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "u",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɨ",
+      "out": "u",
+      "if_inventory": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɨ",
+      "out": "I"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɯ",
+      "out": "u",
+      "unless_inventory": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɯ",
+      "out": "I"
+    },
+    {
+      "slot": "any",
+      "ipa": "ə",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʌ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɜ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɚ",
+      "out": "ar"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɝ",
+      "out": "ar"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ã",
+      "out": "an"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ẽ",
+      "out": "en"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ĩ",
+      "out": "In"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "õ",
+      "out": "on"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ũ",
+      "out": "un"
+    },
+    {
+      "slot": "any",
+      "ipa": "ː",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˑ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʷ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˤ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˀ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʼ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̯",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̩",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "͈",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̪",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̚",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̥",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̬",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̆",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "͜",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̈",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "n"
+    }
+  ],
+  "syllable_fixups": [
+    {
+      "match": "^(S)(tlh|ch|gh|ng|ny|ly|[bDHjlmnpqrStvwy'])",
+      "out": "Su\\2"
+    },
+    {
+      "match": "^(?!tlh|(?:ny|ly)[aeIou])(tlh|ch|gh|ng|ny|ly|[bDHjlmnpqrStvwy'])(tlh|ch|gh|ng|ny|ly|[bDHjlmnpqrStvwy'])",
+      "out": "\\1I\\2"
+    },
+    {
+      "match": "([aeIou])(?!tlh|(?:ny|ly)[aeIou])(tlh|ch|gh|ng|ny|ly|[bDHjlmnpqrStvwy'])(tlh|ch|gh|ng|ny|ly|[bDHjlmnpqrStvwy'])$",
+      "out": "\\1\\2I\\3"
+    },
+    {
+      "match": "^([aeIou])",
+      "out": "'\\1"
+    },
+    {
+      "match": "(tlh|ch|gh|ng|ny|ly|[bDHjlmnpqrStvwy'])\\1",
+      "out": "\\1"
+    },
+    {
+      "match": "([aeIou])\\1",
+      "out": "\\1"
+    }
+  ],
+  "targets": {},
+  "legend": "tlhIngan ngutlhmey neH lo'lu'",
+  "note": "Reader's legend, one line and one convention: \"tlhIngan ngutlhmey neH lo'lu'\" -- only Klingon letters are used. There is nothing else to explain, because there is no diacritic, no capital that means anything but a consonant, and no separator. That last is the one field here that is a fact about the language rather than a judgement: Klingon's syllable canon is CV, CVC, or CV plus one of -w' -y' -rgh, and nothing else (TKD 1.2), so a Klingon reader can find every syllable boundary in 'amerI'qa' from the letters alone and a separator would be telling them what they already know. The cost is real and is stated here rather than hidden: the engine treats a hyphen as a line-break opportunity, so a long respelling in this column has none, and the Devanagari and Thai rows are the ones to watch. The Arabic and Swahili tables carry the same empty separator for their own reasons, so this is not new behaviour for the solver.\n\n**What this pack cost the other nineteen tables, recorded because it is why they each grew a rule.** Klingon brought the corpus its first lateral fricative and its first bare aspiration mark. `/t͡ɬ/` is written `tɬ` in the ipa column, which is the published transcription; `core/respell.js` tokenises it as `t` plus `ɬ`, because `AFFRICATES` does not list it, so before the nineteen tables had a rule for `ɬ` a bare IPA letter reached the page on the 25 Klingon rows that carry `tlh` -- 475 cells. `/pʰ tʰ qʰ/` did the same with `ʰ` in the one table that had no rule for aspiration at all, Japanese.\n\nBoth are closed, and the shape of the fix is worth recording because the obvious version of it was wrong twice. `ɬ` is spelt with the reader's own `l`, so each table's `ɬ` rules are a copy of that table's `l` rules -- every slot condition included, not one `slot: any` rule with the `l` output pasted in. That distinction is the whole thing: a single unconditioned rule gave Hindi a leading virama, so `कात-्लो` put a mark on a dotted circle at a syllable break, and it gave Korean a bare initial ᄅ with no vowel to compose with, which NFC leaves alone and `subset_fonts.py` then ships as a jamo glyph. Slot-conditioned copies read `कात-लो` and `캇-로`. `tests/respell.test.mjs` now asserts both invariants over `charset.json`, which is the only place they are visible -- a rule cannot be judged in isolation when a Hangul syllable is assembled from three of them.\n\nThere is deliberately no `tɬ` rule in any table, including this one. `phonemesOf` splits the affricate before any rule is consulted, so a cluster rule for it can never match; the nineteen that had one were dead code and are gone. The affricate composes instead: `t` then `ɬ` gives `tl` for the eleven Latin readers, `τλ` Greek, `тл` Russian, `تل` Arabic, `तल` Hindi, `ตล` Thai, `トル` Japanese, `te-le-` Mandarin, `thl` Quenya -- and `tlh` here, which is the canonical Klingon spelling reached without a special case. The five slot-conditioned readers have no single answer to quote, because theirs depends on where the cluster falls: `qatlho'` reads `캇-로` to a Korean, whose /t/ lands in the coda of one syllable and whose /l/ opens the next. `respell_check <reader> --gaps` is back at zero for all twenty-one and `data/respell/charset.json` carries no IPA-block character for any reader. Worth knowing if you ever read those rules and wonder what they are for: nothing but Klingon has the sound, and Klingon is not a target for itself.\n\nOne trap in deriving them, since the derivation looks mechanical and is not. A table's rules are sorted by IPA length and slot and are otherwise in file order, and several tables put a *conditioned* rule for `/t/` or `/l/` before the plain one. Scanning for the first match therefore yields the conditional output, not the table's default: English's onset `/t/` reads as `d`, Greek's as `ντ`, Russian's as `д`. The value wanted is the first rule with no `when`, `after_out`, `if_inventory` or `unless_inventory` on it.",
+  "policy_note": "max_onset is 1 and it is not a preference. TKD 1.2 gives the syllable canon as one consonant, one vowel, and at most one consonant after it, with three biconsonantal codas admitted by name (-w', -y', -rgh) and no onset cluster at all. So one is the only value that describes this reader, and reader_onsets is absent for the same reason it is absent from the Indonesian table: syllabify consults the cluster set only in the max_onset >= 2 branches, so the field is inert.\n\nfixups is 'all' because these are a transliteration chart and not alternative repairs: the epenthesis rules and the initial-glottal rule anchor on different characters and are meant to compose, so a word beginning with a cluster and ending in one needs two of them to fire.\n\nEvery alternative inside a fixup's character position is written as a full alternation -- tlh|ch|gh|ng|[bDHjlmnpqrStvwy'] -- rather than as a character class, and that is load-bearing. Four of Klingon's twenty-one consonants are spelt with more than one letter, so a class would see ng as n followed by g and insert a vowel inside a single consonant: nIg for ng, tIlh for tlh. Written as an alternation the group can only ever match one whole letter.\n\nOne more thing about those alternations, found by reading output rather than by reasoning about the format. A JavaScript alternation BACKTRACKS: `^(ny)(I)` fails because I is not a consonant, and the engine then retries the same group against the character class, matches a bare n, and splits the digraph after all. So konnichiwa came out qonnIyIchIwa and every /tlh/ in an onset came out tIlh. The repair is a negative lookahead before the group -- (?!tlh|(?:ny|ly)[aeIou]) -- because JavaScript has no atomic group. Any table whose output alphabet has digraphs and which repairs clusters with a fixup has this bug waiting for it.",
+  "engine_note": "Engine limitation, stated as the rule that could not be expressed. Klingon admits three biconsonantal codas by name -- -w', -y', -rgh -- and the epenthesis fixup cannot know about them, because a fixup matches emitted letters and has no way to ask whether the pair it is looking at is one of the three. So a target syllable ending in /wʔ/, /jʔ/ or /rɣ/ is given a vowel it does not need. Measured over all twenty targets that is 0 syllables, because no other language in the corpus has a /rɣ/ coda or a glottal stop after a glide, so the rule that could not be written also never fires. It is recorded because the next language with a glottal-final coda -- Vietnamese writes /ˀ/ as a tone feature rather than a segment, so not that one -- would meet it.\n\nThe second is `nucleusAt`: respell.js computes the diacritic position before the fixups run, so a fixup that inserts a letter moves the nucleus out from under it. It costs this table nothing, since stress is 'none' and length is 'none' and neither device is ever placed, but a table that used both and inserted letters would want to know."
+}

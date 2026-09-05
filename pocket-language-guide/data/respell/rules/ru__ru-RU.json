@@ -93,6 +93,16 @@
   "splits": [],
   "phonemes": [
     {
+      "slot": "coda",
+      "ipa": "ɬ",
+      "out": "ль"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɬ",
+      "out": "л"
+    },
+    {
       "slot": "any",
       "ipa": "ʈʂʰ",
       "out": "ч",
