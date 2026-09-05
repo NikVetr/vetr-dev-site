@@ -1,0 +1,41 @@
+{
+  "colorSpace": "oklch",
+  "hueGrid": {
+    "l": 0.65,
+    "c": 0.08,
+    "stepDegrees": 15
+  },
+  "pairSelection": "Largest trichromatic/deutan distance ratio among pairs with trichromatic CIEDE2000 > 15; illustrative selection, not a representative sample.",
+  "pair": [
+    "#B4845C",
+    "#969257"
+  ],
+  "cvdModel": "machado2009",
+  "vision": "deutan",
+  "values": [
+    {
+      "severity": 0,
+      "simulated": [
+        "#B4845C",
+        "#969257"
+      ],
+      "deltaE2000": 17.162200169599142
+    },
+    {
+      "severity": 0.5,
+      "simulated": [
+        "#A48D5C",
+        "#9B9158"
+      ],
+      "deltaE2000": 5.283355473899467
+    },
+    {
+      "severity": 1,
+      "simulated": [
+        "#9E925C",
+        "#9D915A"
+      ],
+      "deltaE2000": 0.42103406923743014
+    }
+  ]
+}

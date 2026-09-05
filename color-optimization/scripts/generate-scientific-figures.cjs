@@ -100,7 +100,7 @@ async function main() {
       });
     });
     cells += text(15, 341, 'CIEDE2000 distance · shared scale · darker = larger separation', 'small');
-    cells += text(15, 363, 'Numbers identify colors in Figure 1. Fixed–fixed pairs are included in this diagnostic.', 'small');
+    cells += text(15, 363, 'Numbers identify colors in Figure 3. Fixed–fixed pairs are included in this diagnostic.', 'small');
     writeFileSync(resolve(output, 'distances.svg'), svg(690, 382, 'Pairwise color distances under trichromacy and the vision model with the weakest pair', cells));
     console.log(JSON.stringify({ added: example.added, score: example.best.score, minimums, worstState: example.states[worstIndex] }));
   } finally {

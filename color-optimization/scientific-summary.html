@@ -17,7 +17,7 @@
     </header>
 
     <nav class="note-contents" aria-label="Research note sections">
-      <a href="#science-introduction">Introduction</a><a href="#science-methods">Methods</a>
+      <a href="#science-introduction">Introduction</a><a href="#science-primer">Color primer</a><a href="#science-methods">Methods</a>
       <a href="#science-results">Worked example</a><a href="#science-discussion">Discussion</a>
       <a href="#science-references">References</a>
     </nav>
@@ -36,6 +36,18 @@
         <div><dt>Hue &amp; chroma</dt><dd>Color family, and distance from a neutral gray.</dd></div>
         <div><dt>Gamut</dt><dd>The set of colors a specified display space can represent.</dd></div>
       </dl>
+      <h3 id="science-primer">Reading a color space</h3>
+      <p>A color space is a coordinate system, not a picture of the eye. In OKLab, moving along a or b changes chromatic appearance; changing L moves to a different lightness slice. OKLCh describes the same point by a radius C and an angle h. Hue is an angle in this model, not a wavelength, and perceptual lightness is distinct from physical luminance.<sup><a href="#science-ref-2" aria-label="Reference 2">2</a></sup></p>
+      <figure>
+        <a href="assets/scientific-summary/color-space-primer.svg" target="_blank" rel="noopener" aria-label="Open Figure 1 at full size"><img src="assets/scientific-summary/color-space-primer.svg" width="690" height="362" alt="A sampled sRGB gamut slice at OKLab lightness 0.65 shows Cartesian a and b axes and the equivalent chroma radius C and hue angle h. Three swatch sequences separately vary lightness, chroma and hue while holding the other properties fixed."></a>
+        <figcaption><strong>Figure 1. Coordinates describe different kinds of change.</strong> Left: the neutral point has a = b = 0; the colored footprint contains only sRGB-representable colors at this lightness. C measures radial distance from neutral and h measures direction. Right: all swatches use the app’s conversion functions and are within sRGB. A gamut slice changes shape with lightness; it is not a circular region in general.</figcaption>
+      </figure>
+      <h3>Why color distinctions can collapse</h3>
+      <p>Human trichromacy draws on three broadly overlapping cone sensitivities, called L, M and S for their long-, medium- and short-wavelength sensitivity. Color discrimination depends on comparisons among their responses. These are not the red, green and blue components of a display: simulating deutan vision is not equivalent to deleting the green RGB channel. The app instead applies a published model of altered color responses.<sup><a href="#science-ref-3" aria-label="Reference 3">3</a></sup></p>
+      <figure>
+        <a href="assets/scientific-summary/cvd-primer.svg" target="_blank" rel="noopener" aria-label="Open Figure 2 at full size"><img src="assets/scientific-summary/cvd-primer.svg" width="690" height="346" alt="The app transforms linear sRGB through a Machado CVD matrix before display and distance calculation. An illustrative orange and olive pair has CIEDE2000 distance 17.2 without alteration, 5.3 at intermediate deutan severity, and 0.4 at full severity."></a>
+        <figcaption><strong>Figure 2. Different inputs can become similar simulated signals.</strong> This pair was deliberately selected to illustrate a large loss of modeled separation; it is not a representative sample. Intermediate severity is shown for teaching—the optimizer uses the endpoint. The transformations and distances come from the app’s shared functions. A simulation does not reproduce an individual viewer’s subjective experience. <a href="assets/scientific-summary/primer-data.json" target="_blank" rel="noopener">Parameters and numerical values</a>.</figcaption>
+      </figure>
     </section>
 
     <section aria-labelledby="science-methods">
@@ -61,19 +73,19 @@
       <h2 id="science-results"><span>03</span> Worked example &amp; results</h2>
       <p>This fixed example retains two input colors and adds three. It uses OKLab search, CIEDE2000 distance, Machado simulations, equal vision weights, a harmonic mean, sRGB clipping, the 65% hard L constraint, and unrestricted a/b. Background comparison is disabled. Seed 2026, 12 restarts and 160 iterations per restart define the illustrated run. These figures do not change with your current controls.</p>
       <figure>
-        <a href="assets/scientific-summary/palette.svg" target="_blank" rel="noopener" aria-label="Open Figure 1 at full size"><img src="assets/scientific-summary/palette.svg" width="690" height="322" alt="Two fixed input colors followed by three optimized additions, numbered 1 to 5, shown under trichromacy, deutan, protan and tritan simulations. Hex labels identify the exported colors."></a>
-        <figcaption><strong>Figure 1. Specify and compare.</strong> The first two columns remain fixed; the final three are added jointly. Each row uses the app’s own CVD transformation. Differences between rows explain why inspecting only the unsimulated palette is insufficient.</figcaption>
+        <a href="assets/scientific-summary/palette.svg" target="_blank" rel="noopener" aria-label="Open Figure 3 at full size"><img src="assets/scientific-summary/palette.svg" width="690" height="322" alt="Two fixed input colors followed by three optimized additions, numbered 1 to 5, shown under trichromacy, deutan, protan and tritan simulations. Hex labels identify the exported colors."></a>
+        <figcaption><strong>Figure 3. Specify and compare.</strong> The first two columns remain fixed; the final three are added jointly. Each row uses the app’s own CVD transformation. Differences between rows explain why inspecting only the unsimulated palette is insufficient.</figcaption>
       </figure>
       <figure>
         <div class="note-figure-pair">
-          <div><p class="note-panel-label">A · Color-space view</p><a href="assets/scientific-summary/domain.png" target="_blank" rel="noopener" aria-label="Open Figure 2A at full size"><img src="assets/scientific-summary/domain.png" alt="App-rendered OKLab a–b projection with the full gamut boundary, constrained boundary, fixed input circles and optimized output squares."></a></div>
-          <div><p class="note-panel-label">B · Optimization paths</p><a href="assets/scientific-summary/paths.png" target="_blank" rel="noopener" aria-label="Open Figure 2B at full size"><img src="assets/scientific-summary/paths.png" alt="App-rendered sampled search trajectories from blue to red, with gold stars marking the retained best colors."></a></div>
+          <div><p class="note-panel-label">A · Color-space view</p><a href="assets/scientific-summary/domain.png" target="_blank" rel="noopener" aria-label="Open Figure 4A at full size"><img src="assets/scientific-summary/domain.png" alt="App-rendered OKLab a–b projection with the full gamut boundary, constrained boundary, fixed input circles and optimized output squares."></a></div>
+          <div><p class="note-panel-label">B · Optimization paths</p><a href="assets/scientific-summary/paths.png" target="_blank" rel="noopener" aria-label="Open Figure 4B at full size"><img src="assets/scientific-summary/paths.png" alt="App-rendered sampled search trajectories from blue to red, with gold stars marking the retained best colors."></a></div>
         </div>
-        <figcaption><strong>Figure 2. Constrain and search.</strong> Captured directly from the same app run. The solid outline shows the full projected gamut; the dashed outline shows the region compatible with the hidden lightness constraint. A two-dimensional projection can conceal lightness differences. Paths are sampled best-point trajectories, not every trial evaluation, and stars mark the retained solution.</figcaption>
+        <figcaption><strong>Figure 4. Constrain and search.</strong> Captured directly from the same app run. The solid outline shows the full projected gamut; the dashed outline shows the region compatible with the hidden lightness constraint. A two-dimensional projection can conceal lightness differences. Paths are sampled best-point trajectories, not every trial evaluation, and stars mark the retained solution.</figcaption>
       </figure>
       <figure>
-        <a href="assets/scientific-summary/distances.svg" target="_blank" rel="noopener" aria-label="Open Figure 3 at full size"><img src="assets/scientific-summary/distances.svg" width="690" height="382" alt="Two numeric pairwise CIEDE2000 distance matrices: trichromacy and the vision state with the weakest pair. Darker cells mean larger separation; all five colors, including the fixed–fixed pair, are assessed."></a>
-        <figcaption><strong>Figure 3. Inspect the weak pairs.</strong> Distances are recomputed from the exported hex colors using the app’s metric and CVD pipeline. The second matrix selects the vision state with the smallest pairwise distance in this example. Unlike the extension objective, this complete-palette diagnostic includes the fixed–fixed pair. Larger numbers indicate greater modeled separation, not a probability of correct identification.</figcaption>
+        <a href="assets/scientific-summary/distances.svg" target="_blank" rel="noopener" aria-label="Open Figure 5 at full size"><img src="assets/scientific-summary/distances.svg" width="690" height="382" alt="Two numeric pairwise CIEDE2000 distance matrices: trichromacy and the vision state with the weakest pair. Darker cells mean larger separation; all five colors, including the fixed–fixed pair, are assessed."></a>
+        <figcaption><strong>Figure 5. Inspect the weak pairs.</strong> Distances are recomputed from the exported hex colors using the app’s metric and CVD pipeline. The second matrix selects the vision state with the smallest pairwise distance in this example. Unlike the extension objective, this complete-palette diagnostic includes the fixed–fixed pair. Larger numbers indicate greater modeled separation, not a probability of correct identification.</figcaption>
       </figure>
       <p>The weakest pair is substantially closer under the selected simulation than under trichromacy, despite joint optimization. This illustrates the compromise inherent in a weighted objective: inspect individual pairs, rather than interpreting the overall score as a guarantee for every viewer.</p>
       <p class="note-data">Select any figure to open it at full size. Reproduce or inspect the example: <a href="assets/scientific-summary/example.json" target="_blank" rel="noopener">settings, output colors &amp; full distance matrices</a>. The illustration shows one search outcome, not an experimental estimate of improvement for human observers.</p>

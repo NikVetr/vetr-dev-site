@@ -10,7 +10,7 @@ test('scientific note opens, navigates citations and closes without editing the 
   await expect(dialog.getByRole('button', { name: 'Close scientific summary' })).toBeFocused();
   await page.locator('#run-btn').evaluate((el) => el.focus());
   await expect(dialog.getByRole('button', { name: 'Close scientific summary' })).toBeFocused();
-  await expect(dialog.locator('.research-note img')).toHaveCount(4);
+  await expect(dialog.locator('.research-note img')).toHaveCount(6);
   await expect.poll(() => dialog.locator('.research-note img').evaluateAll((images) => images.every((img) => img.complete && img.naturalWidth > 0))).toBe(true);
   await dialog.screenshot({ path: testInfo.outputPath('note-desktop.png') });
   await dialog.getByRole('link', { name: 'Reference 1', exact: true }).first().click();
@@ -54,7 +54,8 @@ test('standalone note includes complete references and reproducible figures', as
   await expect(page.locator('.note-bibliography li')).toHaveCount(8);
   expect(await page.locator('a[href^="#"]').evaluateAll((links) => links.every((a) => document.querySelector(a.getAttribute('href'))))).toBe(true);
   await expect.poll(() => page.locator('figure img').evaluateAll((images) => images.every((img) => img.complete && img.naturalWidth > 0))).toBe(true);
-  for (let i = 0; i < 3; i++) {
+  await expect(page.locator('figure')).toHaveCount(5);
+  for (let i = 0; i < 5; i++) {
     await page.locator('figure').nth(i).screenshot({ path: testInfo.outputPath(`figure-${i + 1}.png`) });
   }
   const response = await page.request.get('/assets/scientific-summary/example.json');
