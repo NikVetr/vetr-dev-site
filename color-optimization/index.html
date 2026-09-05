@@ -6,6 +6,7 @@
   <title>Color Palette Extender</title>
   <link rel="icon" href="assets/palette-town_favicon2.png">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="scientific-summary.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -37,6 +38,7 @@
         </p>
       </div>
     
+      <button id="scientific-summary-btn" class="science-help" type="button" aria-label="Open scientific summary" aria-haspopup="dialog" aria-controls="scientific-summary-dialog" aria-expanded="false" title="Scientific summary">?</button>
       <div class="actions">
         <button id="run-btn" class="primary">RUN</button>
         <button id="reset-btn" class="ghost">RESET</button>
@@ -420,6 +422,13 @@
       <div id="verbose-table"></div>
     </section>
   </main>
+  <dialog id="scientific-summary-dialog" class="science-dialog" aria-labelledby="scientific-summary-label">
+    <div class="science-toolbar">
+      <strong id="scientific-summary-label">Scientific summary</strong>
+      <div><a href="scientific-summary.html" target="_blank" rel="noopener">Open page ↗</a><button type="button" aria-label="Close scientific summary" autofocus>×</button></div>
+    </div>
+    <div class="science-body"></div>
+  </dialog>
   <script type="module" src="main.js"></script>
 </body>
 </html>

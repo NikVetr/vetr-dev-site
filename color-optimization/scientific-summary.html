@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scientific summary · Palette Town</title>
+  <link rel="icon" href="assets/palette-town_favicon2.png">
+  <link rel="stylesheet" href="scientific-summary.css">
+</head>
+<body class="science-page">
+  <article class="research-note" aria-labelledby="science-title">
+    <header class="note-header">
+      <p class="note-kicker">Palette Town <span>Application research note · September 2026</span></p>
+      <h1 id="science-title">Designing distinguishable<br>color palettes</h1>
+      <p class="note-deck">A practical guide to perceptual color spaces, simulated color vision, and constrained palette optimization.</p>
+      <p class="note-meta">Scientific summary · Methods, worked example &amp; interpretation</p>
+    </header>
+
+    <nav class="note-contents" aria-label="Research note sections">
+      <a href="#science-introduction">Introduction</a><a href="#science-methods">Methods</a>
+      <a href="#science-results">Worked example</a><a href="#science-discussion">Discussion</a>
+      <a href="#science-references">References</a>
+    </nav>
+
+    <section class="note-abstract" aria-labelledby="science-abstract">
+      <h2 id="science-abstract">Abstract</h2>
+      <p>Palette Town extends a categorical palette or adjusts selected colors to increase their modeled visual separation. It searches within user-defined color constraints, evaluates exported colors under trichromacy and three color-vision-deficiency simulations, and balances separation against penalties. The result is a reproducible design candidate, accompanied by diagnostics for inspecting weak pairs. Its scores quantify a computational objective; they do not establish readability, universal accessibility, or a globally optimal palette.</p>
+    </section>
+
+    <section aria-labelledby="science-introduction">
+      <h2 id="science-introduction"><span>01</span> Introduction</h2>
+      <p>In a categorical figure, colors identify groups rather than encode an ordered quantity. Adding a visually distinct color becomes harder as a palette grows, especially when existing colors must remain recognizable. RGB coordinates describe a display signal, but equal numerical RGB differences need not look equally different. Perceptual color spaces and color-difference formulas provide more useful, though imperfect, approximations.<sup><a href="#science-ref-1" aria-label="Reference 1">1</a>, <a href="#science-ref-2" aria-label="Reference 2">2</a></sup></p>
+      <p>The app treats palette design as a constrained search: preserve what matters, explore permitted alternatives, and assess the result under several models of vision. A simulation can expose distinctions that may collapse for some viewers; it is not a literal account of every individual’s visual experience.<sup><a href="#science-ref-3" aria-label="Reference 3">3</a></sup></p>
+      <dl class="note-terms">
+        <div><dt>Lightness</dt><dd>How light or dark a color appears.</dd></div>
+        <div><dt>Hue &amp; chroma</dt><dd>Color family, and distance from a neutral gray.</dd></div>
+        <div><dt>Gamut</dt><dd>The set of colors a specified display space can represent.</dd></div>
+      </dl>
+    </section>
+
+    <section aria-labelledby="science-methods">
+      <h2 id="science-methods"><span>02</span> Methods</h2>
+      <h3>Define the design problem</h3>
+      <p>Start with hex colors, a preset, or an image. Image input groups sampled colors using distance and weighted centroids in OKLab; rare features can still be lost during subsampling. Choose how many colors to add. A color marked <em>Tweak</em> becomes an adjustable replacement for its source, rather than an extra fixed color that must be distinguished from itself. An enabled background is an additional fixed comparison color.</p>
+      <p>The <strong>search space</strong> controls how colors are parameterized; the <strong>distance metric</strong> controls how they are compared. The default search space, OKLab, uses lightness L and two chromatic axes a and b; OKLCh expresses the same coordinates as lightness, chroma and hue.<sup><a href="#science-ref-2" aria-label="Reference 2">2</a></sup> The default metric, CIEDE2000 (ΔE<sub>00</sub>), evaluates differences in CIELAB with corrections for perceptual nonuniformity.<sup><a href="#science-ref-1" aria-label="Reference 1">1</a></sup> Alternative metrics include Euclidean Lab/OKLab distances, CAM02/16-UCS appearance-space distances, and ΔE<sub>ITP</sub>.<sup><a href="#science-ref-4" aria-label="Reference 4">4</a>–<a href="#science-ref-6" aria-label="Reference 6">6</a></sup> Their scales are not interchangeable.</p>
+      <h3>Specify what may change</h3>
+      <p>Contiguous constraints define one allowed interval per channel; discontiguous or drawn custom constraints permit several regions. Hard constraints delimit the feasible search region. Soft constraints permit departures at a cost. Individuated controls specify local windows, including a tweak’s own source window. Higher width-slider percentages tighten the allowed window; 0% leaves it open and 100% collapses it to a point.</p>
+      <p>Optimization gamut clipping projects candidates into the selected gamut while respecting applicable hard constraints; a failed projection is rejected. Visual clipping changes the plot separately. All scored and exported colors are <strong>8-bit sRGB hex</strong>, even when the search uses Display P3 or Rec. 2020. Continuous coordinates remain available for constraint geometry, so clipping or quantization can shift the exported color away from an exact raw-coordinate bound.</p>
+      <h3>Compare palettes under multiple vision models</h3>
+      <p>By default, the app uses the Machado et al. model in a linear-sRGB basis, at its full-severity endpoint.<sup><a href="#science-ref-3" aria-label="Reference 3">3</a></sup> Deutan, protan and tritan simulations concern the medium-, long- and short-wavelength cone pathways, respectively. The optimizer uses the same quantized simulations as the previews. The legacy option uses a simpler encoded-sRGB matrix approximation.</p>
+      <div class="note-equation" role="math" aria-label="Maximize S of theta, equal to the sum over vision states of weight v times the aggregate of pairwise distances, minus the penalty P of theta.">
+        <span>maximize</span> &nbsp; S(θ) = ∑<sub>v</sub> w<sub>v</sub> A({d<sub>v</sub>(i, j) : (i, j) ∈ E}) − P(θ)
+      </div>
+      <p>Here θ denotes the adjustable color parameters; d is the selected color difference after simulation; and E contains adjustable–fixed and adjustable–adjustable pairs. Fixed–fixed pairs cannot improve during extension and are excluded from this objective. A is the chosen aggregation, and P combines soft-constraint, gamut and parameter penalties. Vision weights w express design priorities, not measured population prevalences.</p>
+      <p>The default harmonic mean emphasizes small distances: for positive distances, A = n / ∑(1/d); any zero pair makes it zero. Choosing the minimum emphasizes the weakest pair within each vision state. The weighted sum across states still permits tradeoffs. Negative-order Lehmer means are not monotone: increasing one distance can lower the aggregate.</p>
+      <h3>Search and retain the best candidate</h3>
+      <p>Multiple seeded starts are refined by Nelder–Mead, a derivative-free method that moves a small set of trial points using reflection, expansion and contraction.<sup><a href="#science-ref-7" aria-label="Reference 7">7</a></sup> Each restart ends at its iteration limit or when both objective spread and parameter spread are small. The app ranks completed runs by the penalized score. More restarts explore more starting regions; they do not prove global optimality. STOP retains the best completed restart.</p>
+    </section>
+
+    <section aria-labelledby="science-results">
+      <h2 id="science-results"><span>03</span> Worked example &amp; results</h2>
+      <p>This fixed example retains two input colors and adds three. It uses OKLab search, CIEDE2000 distance, Machado simulations, equal vision weights, a harmonic mean, sRGB clipping, the 65% hard L constraint, and unrestricted a/b. Background comparison is disabled. Seed 2026, 12 restarts and 160 iterations per restart define the illustrated run. These figures do not change with your current controls.</p>
+      <figure>
+        <a href="assets/scientific-summary/palette.svg" target="_blank" rel="noopener" aria-label="Open Figure 1 at full size"><img src="assets/scientific-summary/palette.svg" width="690" height="322" alt="Two fixed input colors followed by three optimized additions, numbered 1 to 5, shown under trichromacy, deutan, protan and tritan simulations. Hex labels identify the exported colors."></a>
+        <figcaption><strong>Figure 1. Specify and compare.</strong> The first two columns remain fixed; the final three are added jointly. Each row uses the app’s own CVD transformation. Differences between rows explain why inspecting only the unsimulated palette is insufficient.</figcaption>
+      </figure>
+      <figure>
+        <div class="note-figure-pair">
+          <div><p class="note-panel-label">A · Color-space view</p><a href="assets/scientific-summary/domain.png" target="_blank" rel="noopener" aria-label="Open Figure 2A at full size"><img src="assets/scientific-summary/domain.png" alt="App-rendered OKLab a–b projection with the full gamut boundary, constrained boundary, fixed input circles and optimized output squares."></a></div>
+          <div><p class="note-panel-label">B · Optimization paths</p><a href="assets/scientific-summary/paths.png" target="_blank" rel="noopener" aria-label="Open Figure 2B at full size"><img src="assets/scientific-summary/paths.png" alt="App-rendered sampled search trajectories from blue to red, with gold stars marking the retained best colors."></a></div>
+        </div>
+        <figcaption><strong>Figure 2. Constrain and search.</strong> Captured directly from the same app run. The solid outline shows the full projected gamut; the dashed outline shows the region compatible with the hidden lightness constraint. A two-dimensional projection can conceal lightness differences. Paths are sampled best-point trajectories, not every trial evaluation, and stars mark the retained solution.</figcaption>
+      </figure>
+      <figure>
+        <a href="assets/scientific-summary/distances.svg" target="_blank" rel="noopener" aria-label="Open Figure 3 at full size"><img src="assets/scientific-summary/distances.svg" width="690" height="382" alt="Two numeric pairwise CIEDE2000 distance matrices: trichromacy and the vision state with the weakest pair. Darker cells mean larger separation; all five colors, including the fixed–fixed pair, are assessed."></a>
+        <figcaption><strong>Figure 3. Inspect the weak pairs.</strong> Distances are recomputed from the exported hex colors using the app’s metric and CVD pipeline. The second matrix selects the vision state with the smallest pairwise distance in this example. Unlike the extension objective, this complete-palette diagnostic includes the fixed–fixed pair. Larger numbers indicate greater modeled separation, not a probability of correct identification.</figcaption>
+      </figure>
+      <p>The weakest pair is substantially closer under the selected simulation than under trichromacy, despite joint optimization. This illustrates the compromise inherent in a weighted objective: inspect individual pairs, rather than interpreting the overall score as a guarantee for every viewer.</p>
+      <p class="note-data">Select any figure to open it at full size. Reproduce or inspect the example: <a href="assets/scientific-summary/example.json" target="_blank" rel="noopener">settings, output colors &amp; full distance matrices</a>. The illustration shows one search outcome, not an experimental estimate of improvement for human observers.</p>
+    </section>
+
+    <section aria-labelledby="science-discussion">
+      <h2 id="science-discussion"><span>04</span> Discussion &amp; limitations</h2>
+      <p>A large aggregate score can coexist with a weak pair, especially in a low-weight vision state. Inspect all simulation panels and the complete palette, including existing input pairs. Check small marks, adjacent regions, the intended background, and the actual export. Background color distance is not a text-contrast ratio.</p>
+      <p>Color appearance depends on viewing conditions, spatial context, display calibration and individual vision. CAM calculations use fixed viewing assumptions; the app’s SDR ΔE<sub>ITP</sub> option assumes 100 cd/m² reference white. Resolvability bands such as “great” and the relative penalty strengths are heuristics, not observer-calibrated acceptance thresholds. Restart variation reflects search stability, not confidence intervals for perception.</p>
+      <p>Hard projections and 8-bit quantization create nonsmooth regions and plateaus. Different seeds, metrics or constraints can therefore produce different candidates. For consequential designs, test plausible alternatives and validate the final visualization with its intended audience. Pair color with labels, shapes, line styles or patterns so information does not depend on color alone.<sup><a href="#science-ref-8" aria-label="Reference 8">8</a></sup></p>
+    </section>
+
+    <section aria-labelledby="science-conclusion">
+      <h2 id="science-conclusion"><span>05</span> Conclusion</h2>
+      <p>Use the app as an explicit, inspectable design procedure: define fixed and adjustable colors, choose meaningful constraints, search under relevant vision models, inspect the weakest distinctions, and export. Its main value is making those choices reproducible and their tradeoffs visible.</p>
+    </section>
+
+    <section class="note-bibliography" aria-labelledby="science-references">
+      <h2 id="science-references">References</h2>
+      <ol>
+        <li id="science-ref-1">Sharma G, Wu W, Dalal EN. The CIEDE2000 color-difference formula: implementation notes, supplementary test data, and mathematical observations. <cite>Color Research &amp; Application.</cite> 2005;30(1):21–30. <a href="https://doi.org/10.1002/col.20070" target="_blank" rel="noopener">doi:10.1002/col.20070</a>. <a href="https://hajim.rochester.edu/ece/sites/gsharma/ciede2000/" target="_blank" rel="noopener">Author’s reference data</a>.</li>
+        <li id="science-ref-2">Ottosson B. <cite>A perceptual color space for image processing.</cite> 2020. <a href="https://bottosson.github.io/posts/oklab/" target="_blank" rel="noopener">Original OKLab technical description</a>.</li>
+        <li id="science-ref-3">Machado GM, Oliveira MM, Fernandes LAF. A physiologically-based model for simulation of color vision deficiency. <cite>IEEE Transactions on Visualization and Computer Graphics.</cite> 2009;15(6):1291–1298. <a href="https://doi.org/10.1109/TVCG.2009.113" target="_blank" rel="noopener">doi:10.1109/TVCG.2009.113</a>.</li>
+        <li id="science-ref-4">Luo MR, Cui G, Li C. Uniform colour spaces based on CIECAM02 colour appearance model. <cite>Color Research &amp; Application.</cite> 2006;31(4):320–330. <a href="https://doi.org/10.1002/col.20227" target="_blank" rel="noopener">doi:10.1002/col.20227</a>.</li>
+        <li id="science-ref-5">Li C, Li Z, Wang Z, et al. Comprehensive color solutions: CAM16, CAT16, and CAM16-UCS. <cite>Color Research &amp; Application.</cite> 2017;42(6):703–718. <a href="https://doi.org/10.1002/col.22131" target="_blank" rel="noopener">doi:10.1002/col.22131</a>.</li>
+        <li id="science-ref-6">International Telecommunication Union. <cite>Objective metric for the assessment of the potential visibility of colour differences in television.</cite> Recommendation ITU-R BT.2124-0; 2019. <a href="https://www.itu.int/rec/R-REC-BT.2124-0-201901-I/en" target="_blank" rel="noopener">Recommendation and specification</a>.</li>
+        <li id="science-ref-7">Nelder JA, Mead R. A simplex method for function minimization. <cite>The Computer Journal.</cite> 1965;7(4):308–313. <a href="https://doi.org/10.1093/comjnl/7.4.308" target="_blank" rel="noopener">doi:10.1093/comjnl/7.4.308</a>.</li>
+        <li id="science-ref-8">World Wide Web Consortium. <cite>Understanding Success Criterion 1.4.1: Use of Color.</cite> WCAG 2.2 supporting documentation. <a href="https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html" target="_blank" rel="noopener">W3C guidance</a>. Accessed September 5, 2026.</li>
+      </ol>
+    </section>
+    <footer class="note-footer">Palette Town · Scientific summary <a href="index.html">Return to the app ↗</a></footer>
+  </article>
+</body>
+</html>

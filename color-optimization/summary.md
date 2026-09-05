@@ -9,6 +9,8 @@ This project is a browser-based tool for extending discrete color palettes with 
 - `optimizer/` contains constraint/bounds construction, the objective function, Nelder-Mead search, and restart initialization. Gamut-aware optimization projects candidate colors into the selected display gamut when optimization clipping is enabled.
 - `ui/` contains rendering and interaction modules for the four-panel color wheel, optimization path mini-view, status graph, swatches, results, image-derived color picking, and direct manipulation of constraints and palette points.
 - `tests/` contains focused Node tests for color math, objectives, starts, and metrics plus Playwright specs for browser screenshots and visual smoke coverage.
+- `scientific-summary.html` is a standalone research note, also loaded into a native modal dialog by `ui/scientificSummary.js` from the header's (?) button. Its scoped stylesheet provides a readable article layout, mobile sizing, and print formatting. Linked references, definitions, the objective equation and a worked example explain the methods and their limits without changing the current palette or settings.
+- `assets/scientific-summary/` contains the worked example's figures and machine-readable settings, outputs and distance matrices. `scripts/generate-scientific-figures.cjs` captures the app's own color-space and trajectory canvases from a seeded run and uses its shared CVD/distance functions for the palette and matrix figures. These are fixed illustrations, not snapshots of a reader's current session.
 
 ## Scientific model and validation
 
@@ -31,3 +33,5 @@ Image inputs can be added by upload, paste, or drag and drop anywhere on the pag
 ## Checks
 
 Run `npm test` from this folder for the Node regression suite and focused Chromium interaction checks. The browser server can use `COLOR_TEST_PORT` and `COLOR_TEST_URL` to avoid an occupied default port. Screenshot capture specs are separate from the normal test gate. Constraint role binding is shared between hard clamping and gamut projection; failed projections are rejected rather than exported. Invalid scoring parameters, coordinates and distances fail explicitly. Background optimizer checkpoints use timers, subject to browser throttling.
+
+The research-note browser checks cover modal focus and dismissal, citation navigation, mobile overflow, figure loading, standalone references, and load-error recovery. To regenerate the worked example, serve the app and run `node scripts/generate-scientific-figures.cjs http://localhost:8080`; review the figures and explanatory text together if the scientific models change.

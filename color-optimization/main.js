@@ -1,4 +1,5 @@
 import { defaultPalette, plotOrder } from "./config.js";
+import { attachScientificSummary } from "./ui/scientificSummary.js";
 import { channelOrder, decodeColor } from "./core/colorSpaces.js";
 import { cloneExplicitBounds } from "./core/constraintBounds.js";
 import { contrastColor, deltaE2000 } from "./core/metrics.js";
@@ -424,6 +425,7 @@ function weightedAggregateDistances(valuesByState, weights, kind, p, eps = 1e-9)
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  attachScientificSummary();
   ui = getUIRefs();
   createPanels(ui, plotOrder);
   setDefaultValues();
