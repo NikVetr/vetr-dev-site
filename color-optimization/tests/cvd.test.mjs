@@ -4,7 +4,7 @@ import { strict as assert } from "node:assert";
 import { toLinear, toSrgb } from "../core/util.js";
 import { getMachadoMatrix } from "../core/cvdMachado.js";
 import { applyCvdLinear, simulateCvdHex, simulateCvdRgb } from "../core/cvd.js";
-import { applyCvdLinear as applyCvdLinearOld } from "../core/cvd_old.js";
+import { hexToRgb, rgbToHex } from "../core/colorSpaces.js";
 
 function assertClose(actual, expected, eps = 1e-7) {
   assert.ok(Math.abs(actual - expected) <= eps, `Expected ${actual} ≈ ${expected}`);
@@ -65,21 +65,16 @@ test("legacy mode matches historical outputs for a small fixture", () => {
   });
 });
 
-test("legacy applyCvdLinear matches old direct-matrix behavior", () => {
-  const samples = [
-    { r: 0.1, g: 0.2, b: 0.3 },
-    { r: -0.2, g: 1.5, b: 0.0 },
-    { r: 0.0, g: 0.0, b: 0.0 },
-    { r: 1.0, g: 1.0, b: 1.0 },
-  ];
-  const types = ["deutan", "protan", "tritan"];
-  for (const t of types) {
-    for (const s of samples) {
-      const a = applyCvdLinear(s, t, 1, "legacy");
-      const b = applyCvdLinearOld(s, t);
-      assertClose(a.r, b.r, 1e-10);
-      assertClose(a.g, b.g, 1e-10);
-      assertClose(a.b, b.b, 1e-10);
+test("legacy linear API matches encoded-space previews at every severity", () => {
+  for (const hex of ["#FF0000", "#00FF00", "#0000FF", "#123456", "#000000", "#FFFFFF"]) {
+    const rgb = hexToRgb(hex);
+    const linear = Object.fromEntries(Object.entries(rgb).map(([ch, v]) => [ch, toLinear(v)]));
+    for (const type of ["deutan", "protan", "tritan"]) {
+      for (const severity of [0, 0.25, 0.5, 1]) {
+        const simulated = applyCvdLinear(linear, type, severity, "legacy");
+        const encoded = Object.fromEntries(Object.entries(simulated).map(([ch, v]) => [ch, toSrgb(v)]));
+        assert.equal(rgbToHex(encoded), simulateCvdHex(hex, { type, model: "legacy", severity }));
+      }
     }
   }
 });

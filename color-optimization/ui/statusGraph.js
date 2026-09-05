@@ -840,22 +840,16 @@ export function drawStatusMini(state, ui, opts = {}) {
   };
 
   function visibleHardConstraintRegion(vals) {
-    if (!vals || !isRect || !rectKeys || !displayBounds || ui.colorSpace?.value !== space) return 0;
+    if (!vals || !displayBounds || ui.colorSpace?.value !== space) return 0;
     const constraintSets = displayBounds.constraintSets;
     if (!constraintSets?.channels) return 0;
     const base = displayBounds.ranges || csRanges[space];
-    const xKey = rectKeys.x;
-    const yKey = rectKeys.y;
     const norm = normalizeWithRange(vals, base, space);
-    const xC = constraintSets.channels[xKey];
-    const yC = constraintSets.channels[yKey];
-    const xHard = xC?.mode === "hard";
-    const yHard = yC?.mode === "hard";
     const topology = constraintSets.topology || "contiguous";
-    if (!xHard && !yHard) return 0;
-    const visibleSets = { topology, channels: {} };
-    if (xHard && xC) visibleSets.channels[xKey] = xC;
-    if (yHard && yC) visibleSets.channels[yKey] = yC;
+    const visibleSets = { topology, channels: Object.fromEntries(
+      visibleConstraintChannels.filter((ch) => constraintSets.channels[ch])
+        .map((ch) => [ch, constraintSets.channels[ch]])
+    ) };
     return hardConstraintRegionIndex(norm, visibleSets, topology, STATUS_MINI_CONSTRAINT_TOL);
   }
 
@@ -888,6 +882,13 @@ export function drawStatusMini(state, ui, opts = {}) {
     const vals = resolveVisualVals(hex, rawBest, idx, state.newRawSpace);
     const pt = toPoint(vals);
     drawPoint(pt, "#fbbf24", "star", 15);
+    if (visibleHardConstraintRegion(vals) == null) {
+      ctx.beginPath();
+      ctx.arc(pt.x, pt.y, 10, 0, Math.PI * 2);
+      ctx.strokeStyle = "#dc2626";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
   });
 
   function pointWindowConstraintGuides(bounds, guideSpace, visibleChannels) {

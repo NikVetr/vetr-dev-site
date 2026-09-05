@@ -19,6 +19,18 @@ Implementation note / provenance
 
 Additional Color / Distance Model References
 
+CIEDE2000 reference fixtures
+- Sharma, G., Wu, W., & Dalal, E. N. (2005), supplementary implementation notes and 34 test pairs:
+  https://hajim.rochester.edu/ece/sites/gsharma/ciede2000/
+  https://hajim.rochester.edu/ece/sites/gsharma/ciede2000/dataNprograms/ciede2000testdata.txt
+- The numeric table is stored in tests/fixtures/ciede2000.txt, with expected distances rounded to four decimals.
+
+Independent appearance-model fixtures
+- Colour 0.4.7 CIECAM02 and CAM16 tests, with matching white point, surround and luminance:
+  https://github.com/colour-science/colour/blob/v0.4.7/colour/appearance/tests/test_ciecam02.py
+  https://github.com/colour-science/colour/blob/v0.4.7/colour/appearance/tests/test_cam16.py
+- tests/science.test.mjs maps the published J/M/h values into UCS for comparison.
+
 CIE L*u*v* (CIELUV)
 - CIE 1976 L*u*v* colour space (CIELUV), defined in terms of CIE XYZ and u'v'.
 

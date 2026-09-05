@@ -1,20 +1,19 @@
-import { applyCvdLinear } from "../core/cvd.js";
 import { aggregateDistances } from "../core/means.js";
-import { coordsFromXyzForDistanceMetric, distanceBetweenCoords } from "../core/distance.js";
+import { coordsFromHexForDistanceMetric, distanceBetweenCoords } from "../core/distance.js";
 import {
   channelOrder,
   convertColorValues,
   csRanges,
   decodeColor,
   encodeColor,
-  linearRgbToXyz,
   xyzToLinearRgb,
   normalizeWithRange,
   unscaleWithRange,
   GAMUTS,
 } from "../core/colorSpaces.js";
 import { clamp, logistic } from "../core/util.js";
-import { projectToGamutWithinHardConstraints } from "../core/hardConstraints.js";
+import { GamutProjectionError, clampNormToHardConstraints, projectToGamutWithinHardConstraints } from "../core/hardConstraints.js";
+import { constraintSetForRole, modeForConstraintRow, candidatePointIndicesForConstraintRole } from "../core/constraintRoles.js";
 import { computeBoundsFromCurrent, computeBoundsFromRawValues } from "./bounds.js";
 
 const PARAM_PENALTY_WEIGHT = 20;
@@ -31,15 +30,6 @@ function defaultTweakConstraintMode(channels = []) {
     out[ch] = "soft";
   });
   return out;
-}
-
-function modeForConstraintRow(channelConfig, ch, rowRole, tweakConstraintMode = {}, pointIndex = null) {
-  if (rowRole?.skipConstraints) return "none";
-  if (rowRole?.kind === "tweak") return rowRole.constraintMode || tweakConstraintMode[ch] || "soft";
-  if (Number.isFinite(pointIndex) && Array.isArray(channelConfig?.pointModes)) {
-    return channelConfig.pointModes[pointIndex % channelConfig.pointModes.length] || channelConfig.mode || "hard";
-  }
-  return channelConfig?.mode || "hard";
 }
 
 function usesOrderedLightnessRows(optimizedRows = []) {
@@ -80,9 +70,7 @@ export function prepareData(palette, colorSpace, config) {
   const bounds = useCustom
     ? computeBoundsFromRawValues(config.customConstraintPoints, colorSpace, config)
     : computeBoundsFromCurrent(boundsPalette, colorSpace, config);
-  const currHex = normalized.map((row) =>
-    encodeColor(unscaleWithRange(row, ranges, colorSpace), colorSpace)
-  );
+  const currHex = palette.filter((_, idx) => !tweakSet.has(idx)).map((hex) => hex.toUpperCase());
   const cvdStates = config.colorblindSafe ? ["deutan", "protan", "tritan", "none"] : ["none"];
   const currCoordsByState = {};
   const clipToGamutOpt = config.clipToGamutOpt === true;
@@ -92,8 +80,8 @@ export function prepareData(palette, colorSpace, config) {
   const meanP = Number.isFinite(config.meanP) ? config.meanP : undefined;
   const distanceMetric = config.distanceMetric || "de2000";
   cvdStates.forEach((state) => {
-    currCoordsByState[state] = fixedDecoded.map((row) =>
-      coordsForObjective(row, colorSpace, gamutPreset, state, clipToGamutOpt, cvdModel, distanceMetric)
+    currCoordsByState[state] = currHex.map((hex) =>
+      coordsFromHexForDistanceMetric(hex, distanceMetric, state, cvdModel)
     );
   });
   const hueAnchorRad = channels.includes("h") ? computeHueAnchorRad(decoded) : 0;
@@ -133,6 +121,10 @@ export function meanDistance(par, prep, returnInfo) {
   const { currHex, bounds, colorSpace, colorblindWeights, colorblindSafe, ranges } = prep;
   const channels = channelOrder[colorSpace];
   const cn = channels;
+  const nOptimized = Math.max(0, prep.nOptimized ?? prep.nColsToAdd ?? 0);
+  if (par.length !== nOptimized * cn.length || !par.every(Number.isFinite)) {
+    throw new Error("Optimizer parameters must have the expected length and contain only finite numbers.");
+  }
   const lightKey = cn.includes("l") ? "l" : cn.includes("jz") ? "jz" : null;
   const constraintSets = bounds?.constraintSets;
   const globalConstraintSets = bounds?.globalConstraintSets || constraintSets;
@@ -154,10 +146,15 @@ export function meanDistance(par, prep, returnInfo) {
   const individualRowRoles = useLayeredIndividualConstraints
     ? individualConstraintRolesForOptimizedRows(prep.optimizedRows, prep.tweakInputIndices)
     : prep.optimizedRows;
+  const rowConstraintSets = (prep.optimizedRows || []).map((role, idx) => useLayeredIndividualConstraints
+    ? [
+        constraintSetForRole(globalConstraintSets, globalRowRoles[idx], prep.tweakConstraintMode),
+        constraintSetForRole(constraintSets, individualRowRoles[idx], prep.tweakConstraintMode),
+      ]
+    : [constraintSetForRole(constraintSets, role, prep.tweakConstraintMode)]);
 
   const m = [];
   const zRows = [];
-  const nOptimized = Math.max(0, prep.nOptimized ?? prep.nColsToAdd ?? 0);
   for (let i = 0; i < nOptimized; i++) {
     const row = {};
     for (let j = 0; j < cn.length; j++) {
@@ -177,6 +174,7 @@ export function meanDistance(par, prep, returnInfo) {
       for (let i = 0; i < m.length; i++) {
         acc += m[i][lightKey];
         m[i][lightKey] = acc;
+        zRows[i][lightKey] = acc;
       }
     }
     for (let i = 0; i < m.length; i++) {
@@ -241,13 +239,12 @@ export function meanDistance(par, prep, returnInfo) {
 
   const scaled = m.map((row) => unscaleWithRange(row, ranges, colorSpace));
   const displayRaw = prep.clipToGamutOpt
-    ? scaled.map((row) => projectToGamutWithinHardConstraints(row, prep))
+    ? scaled.map((row, idx) => projectToGamutWithinHardConstraints(row, prep, rowConstraintSets[idx]))
     : scaled;
   const rawHex = displayRaw.map((row) => encodeColor(row, colorSpace));
   const newHex = rawHex;
 
   const cvdStates = prep.cvdStates;
-  const objectiveRows = prep.clipToGamutOpt ? displayRaw : scaled;
   const perRowPenalties = scaled.map((row) => parameterPenaltyForRow(row, colorSpace));
   const perRowGamut = scaled.map((row) => gamutPenaltyForRow(row, colorSpace, prep.gamutPreset));
   const perRowConstraint = scaled.map((row, idx) => {
@@ -264,16 +261,8 @@ export function meanDistance(par, prep, returnInfo) {
   const newCoordsByState = {};
   const perColorDistances = Array.from({ length: scaled.length }, () => ({ sum: 0, count: 0 }));
   cvdStates.forEach((state) => {
-    newCoordsByState[state] = objectiveRows.map((row) =>
-      coordsForObjective(
-        row,
-        colorSpace,
-        prep.gamutPreset,
-        state,
-        prep.clipToGamutOpt,
-        prep.cvdModel,
-        prep.distanceMetric
-      )
+    newCoordsByState[state] = newHex.map((hex) =>
+      coordsFromHexForDistanceMetric(hex, prep.distanceMetric, state, prep.cvdModel)
     );
   });
   const dists = {};
@@ -326,7 +315,7 @@ export function meanDistance(par, prep, returnInfo) {
       const gamutDist = Math.sqrt(perRowGamut[idx].distSq || 0);
       const rowPenalty =
         (perRowPenalties[idx].penalty + perRowGamut[idx].penalty + perRowConstraint[idx].penalty) / penaltyScale;
-      const totalContribution = avgDist + rowPenalty;
+      const totalContribution = avgDist - rowPenalty;
       return {
         hex: newHex[idx],
         channels: row,
@@ -357,7 +346,12 @@ export function meanDistance(par, prep, returnInfo) {
 }
 
 export function objectiveValue(par, prep) {
-  return meanDistance(par, prep, false).value;
+  try {
+    return meanDistance(par, prep, false).value;
+  } catch (error) {
+    if (error instanceof GamutProjectionError) return Infinity;
+    throw error;
+  }
 }
 
 export function objectiveInfo(par, prep) {
@@ -416,24 +410,6 @@ function gamutPenaltyForRow(row, space, gamutPreset = "srgb") {
   return { penalty: GAMUT_PENALTY_WEIGHT * distSq, distSq };
 }
 
-function coordsForObjective(row, space, gamutPreset, cvdState, clipToGamutOpt, cvdModel, distanceMetric) {
-  const xyz = convertColorValues(row, space, "xyz");
-  const gamut = GAMUTS[gamutPreset] || GAMUTS["srgb"];
-  let lin;
-  if (clipToGamutOpt) {
-    const from = gamut?.fromXYZ ? gamut.fromXYZ : (x, y, z) => xyzToLinearRgb({ x, y, z });
-    const out = from(xyz.x, xyz.y, xyz.z);
-    lin = { r: clamp(out.r, 0, 1), g: clamp(out.g, 0, 1), b: clamp(out.b, 0, 1) };
-  } else {
-    lin = xyzToLinearRgb(xyz);
-  }
-  const sim = cvdState === "none" ? lin : applyCvdLinear(lin, cvdState, 1, cvdModel);
-  const xyzSim = clipToGamutOpt
-    ? gamut.toXYZ(sim.r, sim.g, sim.b)
-    : linearRgbToXyz(sim);
-  return coordsFromXyzForDistanceMetric(xyzSim, distanceMetric);
-}
-
 function wrap01(x) {
   return ((x % 1) + 1) % 1;
 }
@@ -476,119 +452,14 @@ function individualConstraintRolesForOptimizedRows(optimizedRows = [], tweakInpu
   });
 }
 
-function candidatePointIndicesForConstraintRole(role, numPoints) {
-  if (!numPoints) return [];
-  if (role?.kind === "tweak" && Number.isFinite(role.pointIndex)) {
-    return [Math.max(0, Math.min(numPoints - 1, Math.floor(role.pointIndex)))];
-  }
-  const excluded = new Set(
-    (Array.isArray(role?.excludePointIndices) ? role.excludePointIndices : [])
-      .map((idx) => Math.floor(idx))
-      .filter((idx) => Number.isFinite(idx) && idx >= 0 && idx < numPoints)
-  );
-  return Array.from({ length: numPoints }, (_, i) => i).filter((idx) => !excluded.has(idx));
-}
-
 function applyDiscontiguousHardConstraints(rows, zRows, constraintSets, rowRoles = [], tweakConstraintMode = {}) {
-  if (!constraintSets?.channels || !rows?.length) return;
-  const channels = Object.keys(constraintSets.channels);
-  const pointWindowsByChannel = {};
-  let numPoints = 0;
-
-  channels.forEach((ch) => {
-    const c = constraintSets.channels[ch];
-    if (!c) return;
-    if (Array.isArray(c.pointWindows) && c.pointWindows.length > 0) {
-      pointWindowsByChannel[ch] = c.pointWindows;
-      numPoints = Math.max(numPoints, c.pointWindows.length);
-    }
-  });
-
-  if (numPoints === 0) return;
-
   rows.forEach((row, idx) => {
-    const zRow = zRows?.[idx] || {};
-    let bestIndex = null;
-    let bestZSq = Infinity;
-    let bestTieSq = Infinity;
-
-    const role = rowRoles?.[idx] || {};
-    const candidateIndices = candidatePointIndicesForConstraintRole(role, numPoints);
-    if (!candidateIndices.length) return;
-    const rowHasHard = channels.some((ch) => {
-      const c = constraintSets.channels[ch];
-      if (!c) return false;
-      return !Array.isArray(c.pointModes)
-        ? modeForConstraintRow(c, ch, role, tweakConstraintMode) === "hard"
-        : candidateIndices.some((i) => modeForConstraintRow(c, ch, role, tweakConstraintMode, i) === "hard");
-    });
-    if (!rowHasHard) return;
-
-    candidateIndices.forEach((i) => {
-      let zSq = 0;
-      let tieSq = 0;
-      let used = false;
-      channels.forEach((ch) => {
-        const c = constraintSets.channels[ch];
-        if (!c || modeForConstraintRow(c, ch, role, tweakConstraintMode, i) !== "hard") return;
-        const windows = pointWindowsByChannel[ch];
-        if (!windows) return;
-        const w = windows[i % windows.length];
-        if (!w) return;
-        used = true;
-        if (c.type === "hue") {
-          const phi = row.__huePhi;
-          if (!Number.isFinite(phi)) return;
-          const sigma = Math.max(w.radius / 1.96, 1e-3);
-          const dHue = circularDistance(phi, w.center);
-          const excess = Math.max(0, dHue - Math.max(w.radius, 0));
-          zSq += Math.pow(excess / sigma, 2);
-          tieSq += Math.pow(dHue / sigma, 2);
-        } else {
-          const u = clamp(row[ch], 0, 1);
-          if (!Number.isFinite(u)) return;
-          const sigma = Math.max(w.radius / 1.96, 1e-3);
-          const min = Number.isFinite(w.min) ? w.min : Math.max(0, w.center - w.radius);
-          const max = Number.isFinite(w.max) ? w.max : Math.min(1, w.center + w.radius);
-          const excess = u < min ? min - u : u > max ? u - max : 0;
-          const dLin = Math.abs(u - w.center);
-          zSq += Math.pow(excess / sigma, 2);
-          tieSq += Math.pow(dLin / sigma, 2);
-        }
-      });
-      if (used && (zSq < bestZSq || (Math.abs(zSq - bestZSq) <= 1e-12 && tieSq < bestTieSq))) {
-        bestZSq = zSq;
-        bestTieSq = tieSq;
-        bestIndex = i;
-      }
-    });
-
-    if (bestIndex == null) return;
-
-    channels.forEach((ch) => {
-      const c = constraintSets.channels[ch];
-      if (!c || modeForConstraintRow(c, ch, role, tweakConstraintMode, bestIndex) !== "hard") return;
-      const windows = pointWindowsByChannel[ch];
-      if (!windows) return;
-      const w = windows[bestIndex % windows.length];
-      if (!w) return;
-      if (c.type === "hue") {
-        const phi = row.__huePhi;
-        if (!Number.isFinite(phi)) return;
-        const radius = Math.max(w.radius, 1e-6);
-        const delta = wrapToPi(phi - w.center);
-        if (Math.abs(delta) > radius) {
-          const clampedPhi = w.center + (delta >= 0 ? 1 : -1) * radius;
-          row.__huePhi = clampedPhi;
-          row.h = wrap01(clampedPhi / TAU);
-        }
-      } else {
-        const min = Number.isFinite(w.min) ? w.min : Math.max(0, w.center - w.radius);
-        const max = Number.isFinite(w.max) ? w.max : Math.min(1, w.center + w.radius);
-        const clamped = clamp(row[ch], min, max);
-        row[ch] = clamped;
-        zRow[ch] = logit(clamped);
-      }
+    const sets = constraintSetForRole(constraintSets, rowRoles[idx], tweakConstraintMode);
+    const clamped = clampNormToHardConstraints(row, sets, sets.topology, row);
+    Object.keys(sets.channels || {}).forEach((ch) => {
+      row[ch] = clamped[ch];
+      if (ch === "h") row.__huePhi += wrapToPi(row.h * TAU - row.__huePhi);
+      else zRows[idx][ch] = logit(row[ch]);
     });
   });
 }

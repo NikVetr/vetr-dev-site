@@ -38,9 +38,9 @@ function mul3(m, x, y, z) {
   };
 }
 
-function pqEncodeRelative(v, Lp = 10000) {
+function pqEncodeRelative(v, Lp) {
   // v is relative [0..1] mapping to [0..Lp] cd/m^2.
-  const x = clamp(v, 0, 1);
+  const x = clamp(v, 0, 1) * Lp / 10000;
   const p = Math.pow(x, PQ_M1);
   const num = PQ_C1 + PQ_C2 * p;
   const den = 1 + PQ_C3 * p;
@@ -49,6 +49,9 @@ function pqEncodeRelative(v, Lp = 10000) {
 }
 
 export function linearRec2020ToICtCp({ r, g, b }, Lp = 10000) {
+  if (!Number.isFinite(Lp) || Lp <= 0 || Lp > 10000) {
+    throw new RangeError("ICtCp peak luminance must be in (0, 10000] cd/m².");
+  }
   // Clamp for stability: ICtCp is defined for display-referred signals.
   const rr = clamp(r, 0, 1);
   const gg = clamp(g, 0, 1);
@@ -69,4 +72,3 @@ export function xyzToICtCp(xyz, Lp = 10000) {
   const lin = gamut.fromXYZ(xyz.x, xyz.y, xyz.z);
   return linearRec2020ToICtCp(lin, Lp);
 }
-

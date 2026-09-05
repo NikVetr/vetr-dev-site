@@ -1,5 +1,5 @@
 import { parsePalette } from "./configRead.js";
-import { rgbToHex, srgbToOklab } from "../core/colorSpaces.js";
+import { rgbToHex, srgbToOklab, oklabToSrgb } from "../core/colorSpaces.js";
 import { applyCvdHex } from "../core/cvd.js";
 import { contrastColor } from "../core/metrics.js";
 
@@ -548,7 +548,8 @@ function clusterImageColors(image, count) {
   const auto = count == null;
   const autoResult = auto ? adaptiveClusterCount(candidates) : { count, trace: [] };
   const target = autoResult.count;
-  const selected = refineCandidates(candidates, selectDistinctCandidates(candidates, target), 3);
+  const seeds = auto ? autoResult.selected : selectDistinctCandidates(candidates, target);
+  const selected = refineCandidates(candidates, seeds, 3);
   const entries = selected
     .sort((a, b) => b.count - a.count)
     .map((candidate) => ({
@@ -586,26 +587,19 @@ function candidateFromBucket(bucket) {
   };
 }
 
-function adaptiveClusterCount(candidates) {
-  if (!candidates.length) return { count: 0, trace: [] };
+export function adaptiveClusterCount(candidates) {
+  if (!candidates.length) return { count: 0, trace: [], selected: [] };
   const selected = [];
   const trace = [];
   const maxCount = Math.max(...candidates.map((c) => c.count));
   while (selected.length < Math.min(MAX_AUTO_CLUSTERS, candidates.length)) {
-    const next = bestDistinctCandidate(candidates, selected, maxCount);
+    const eligible = selected.length
+      ? candidates.filter((c) => nearestOklabDistance(c, selected) >= MIN_DISTINCT_OKLAB)
+      : candidates;
+    const next = bestDistinctCandidate(eligible, selected, maxCount);
     if (!next) break;
     const nearest = selected.length ? nearestOklabDistance(next, selected) : Infinity;
     const k = selected.length + 1;
-    if (selected.length && nearest < MIN_DISTINCT_OKLAB) {
-      trace.push({
-        k,
-        accepted: false,
-        nearest,
-        threshold: MIN_DISTINCT_OKLAB,
-        hex: rgbToHex({ r: next.r / 255, g: next.g / 255, b: next.b / 255 }),
-      });
-      break;
-    }
     selected.push(next);
     trace.push({
       k,
@@ -615,7 +609,7 @@ function adaptiveClusterCount(candidates) {
       hex: rgbToHex({ r: next.r / 255, g: next.g / 255, b: next.b / 255 }),
     });
   }
-  return { count: Math.max(1, selected.length), trace };
+  return { count: Math.max(1, selected.length), trace, selected };
 }
 
 function selectDistinctCandidates(candidates, target) {
@@ -648,11 +642,11 @@ function bestDistinctCandidate(candidates, selected, maxCount) {
   return best;
 }
 
-function refineCandidates(candidates, selected, iterations) {
+export function refineCandidates(candidates, selected, iterations) {
   if (!selected.length) return [];
   let centers = selected.map((candidate) => ({ ...candidate, lab: { ...candidate.lab } }));
   for (let iter = 0; iter < iterations; iter += 1) {
-    const groups = centers.map(() => ({ count: 0, r: 0, g: 0, b: 0, x: 0, y: 0 }));
+    const groups = centers.map(() => ({ count: 0, l: 0, a: 0, b: 0, x: 0, y: 0 }));
     candidates.forEach((candidate) => {
       let bestIdx = 0;
       let bestD = Infinity;
@@ -665,16 +659,19 @@ function refineCandidates(candidates, selected, iterations) {
       });
       const group = groups[bestIdx];
       group.count += candidate.count;
-      group.r += candidate.r * candidate.count;
-      group.g += candidate.g * candidate.count;
-      group.b += candidate.b * candidate.count;
+      group.l += candidate.lab.l * candidate.count;
+      group.a += candidate.lab.a * candidate.count;
+      group.b += candidate.lab.b * candidate.count;
       group.x += candidate.x * candidate.count;
       group.y += candidate.y * candidate.count;
     });
     centers = centers.map((center, idx) => {
       const group = groups[idx];
       if (!group.count) return center;
-      return candidateFromBucket(group);
+      const lab = { l: group.l / group.count, a: group.a / group.count, b: group.b / group.count };
+      const rgb = oklabToSrgb(lab);
+      return { count: group.count, lab, r: rgb.r * 255, g: rgb.g * 255, b: rgb.b * 255,
+        x: group.x / group.count, y: group.y / group.count };
     }).filter(Boolean);
   }
   return centers;

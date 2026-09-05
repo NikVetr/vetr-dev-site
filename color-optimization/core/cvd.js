@@ -1,5 +1,5 @@
 import { hexToRgb, rgbToHex } from "./colorSpaces.js";
-import { clamp } from "./util.js";
+import { clamp, toLinear, toSrgb } from "./util.js";
 import { srgb8ToLinear01, linear01ToSrgb8, srgbToLinear01, linearToSrgb01 } from "./srgb.js";
 import { getMachadoMatrix } from "./cvdMachado.js";
 
@@ -225,7 +225,7 @@ export function applyCvdHex(hex, type, severity = 1, model) {
 }
 
 // Applies the selected model in *linear* RGB space.
-// Used by the optimizer (values may be out of [0,1]; we intentionally do not clamp).
+// Machado accepts unclipped linear components; legacy uses its encoded-sRGB convention.
 export function applyCvdLinear(rgb, type, severity = 1, model) {
   const t = normalizeType(type);
   if (t === "none") return rgb;
@@ -234,14 +234,10 @@ export function applyCvdLinear(rgb, type, severity = 1, model) {
   const g = Number(rgb?.g);
   const b = Number(rgb?.b);
   if ((model || defaultModelForType(t)) === "legacy") {
-    // Back-compat: the historical code applied the 3×3 "legacy" matrices directly to the input
-    // numbers (even when callers passed linear RGB). Keep that exact behavior for optimizer parity.
-    const mat = legacyMatrices[t];
-    if (!mat) return rgb;
-    const [r2, g2, b2] = mulLegacy(mat, r, g, b);
-    if (sev >= 1) return { r: r2, g: g2, b: b2 };
+    // Legacy coefficients mix encoded sRGB, including when called from a linear pipeline.
     if (sev <= 0) return { r, g, b };
-    return { r: r * (1 - sev) + r2 * sev, g: g * (1 - sev) + g2 * sev, b: b * (1 - sev) + b2 * sev };
+    const [r2, g2, b2] = applyLegacySrgb01(toSrgb(r), toSrgb(g), toSrgb(b), t, sev);
+    return { r: toLinear(r2), g: toLinear(g2), b: toLinear(b2) };
   }
   const [r2, g2, b2] = applyLinearModel(r, g, b, t, sev, model);
   return { r: r2, g: g2, b: b2 };

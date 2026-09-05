@@ -69,7 +69,7 @@ export function deltaE2000(lab1, lab2) {
   const Sh = 1 + 0.015 * Cbarp * T;
   const deltaTheta = 30 * Math.exp(-Math.pow((hbarp - 275) / 25, 2));
   const Rc = 2 * Math.sqrt(Math.pow(Cbarp, 7) / (Math.pow(Cbarp, 7) + Math.pow(25, 7)));
-  const Rt = -Rc * Math.sin(rad(deltaTheta));
+  const Rt = -Rc * Math.sin(rad(2 * deltaTheta));
 
   const termL = dLp / (kL * Sl);
   const termC = dCp / (kC * Sc);

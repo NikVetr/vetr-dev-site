@@ -11,7 +11,9 @@ import { activeConstraintSets } from "./activeConstraints.js";
 
 const TAU = Math.PI * 2;
 
-export function projectToGamutWithinHardConstraints(row, prep) {
+export class GamutProjectionError extends Error {}
+
+export function projectToGamutWithinHardConstraints(row, prep, rowConstraintSets = null) {
   const space = prep.colorSpace;
   const gamutPreset = prep.gamutPreset || "srgb";
   const ranges = prep.ranges || csRanges[space];
@@ -19,32 +21,36 @@ export function projectToGamutWithinHardConstraints(row, prep) {
   const rawTopology = prep.constraintTopology || rawConstraintSets?.topology || "contiguous";
   const constraintSets = activeConstraintSets(prep.bounds, prep) || rawConstraintSets;
   const topology = rawTopology;
-  if (!ranges || !constraintSets?.channels) {
-    return projectToGamut(row, space, gamutPreset, space);
-  }
+  const layers = rowConstraintSets || [constraintSets];
+  const satisfies = (norm) => layers.every((sets) => normSatisfiesHardConstraints(norm, sets, topology));
+  const constrain = (norm) => layers.reduce((out, sets) =>
+    clampNormToHardConstraints(out, sets, topology, originalNorm), norm);
 
   const originalNorm = normalizeWithRange(row, ranges, space);
+  if (isInGamut(row, space, gamutPreset) && satisfies(originalNorm)) return row;
   let projected = projectToGamut(row, space, gamutPreset, space);
   let constrained = rawFromNorm(
-    clampNormToHardConstraints(normalizeWithRange(projected, ranges, space), constraintSets, topology, originalNorm),
+    constrain(normalizeWithRange(projected, ranges, space)),
     ranges,
     space
   );
-  if (isInGamut(constrained, space, gamutPreset)) return constrained;
-  if (isInGamut(row, space, gamutPreset) && normSatisfiesHardConstraints(originalNorm, constraintSets, topology)) return row;
+  const feasible = (raw) => isInGamut(raw, space, gamutPreset) &&
+    satisfies(normalizeWithRange(raw, ranges, space));
+  if (feasible(constrained)) return constrained;
 
   for (let i = 0; i < 8; i++) {
     projected = projectToGamut(constrained, space, gamutPreset, space);
     constrained = rawFromNorm(
-      clampNormToHardConstraints(normalizeWithRange(projected, ranges, space), constraintSets, topology, originalNorm),
+      constrain(normalizeWithRange(projected, ranges, space)),
       ranges,
       space
     );
-    if (isInGamut(constrained, space, gamutPreset)) return constrained;
+    if (feasible(constrained)) return constrained;
   }
 
-  const anchor = rawFromNorm(hardConstraintAnchorNorm(originalNorm, constraintSets, topology), ranges, space);
-  if (isInGamut(anchor, space, gamutPreset)) {
+  const anchorNorm = layers.reduce((norm, sets) => hardConstraintAnchorNorm(norm, sets, topology), originalNorm);
+  const anchor = rawFromNorm(constrain(anchorNorm), ranges, space);
+  if (feasible(anchor)) {
     let best = anchor;
     let lo = 0;
     let hi = 1;
@@ -52,7 +58,7 @@ export function projectToGamutWithinHardConstraints(row, prep) {
       const t = (lo + hi) / 2;
       const mid = interpolateRaw(anchor, constrained, t, space);
       const midNorm = normalizeWithRange(mid, ranges, space);
-      if (isInGamut(mid, space, gamutPreset) && normSatisfiesHardConstraints(midNorm, constraintSets, topology)) {
+      if (isInGamut(mid, space, gamutPreset) && satisfies(midNorm)) {
         best = mid;
         lo = t;
       } else {
@@ -62,7 +68,7 @@ export function projectToGamutWithinHardConstraints(row, prep) {
     return best;
   }
 
-  return constrained;
+  throw new GamutProjectionError(`Could not find a ${gamutPreset} color satisfying the active hard constraints.`);
 }
 
 export function rawFromNorm(norm, ranges, space) {
@@ -106,11 +112,12 @@ export function hardConstraintRegionIndex(norm, constraintSets, topology, tolera
 }
 
 export function hardConstraintAnchorNorm(norm, constraintSets, topology) {
+  if (!constraintSets?.channels) return { ...norm };
   if (topology === "custom" || topology === "discontiguous") {
     const idx = nearestHardPointWindowIndex(norm, constraintSets);
     const out = clampNormToPointWindow(norm, constraintSets, idx);
     Object.entries(constraintSets.channels || {}).forEach(([ch, c]) => {
-      if (!c || c.mode !== "hard" || !Array.isArray(c.pointWindows) || !c.pointWindows.length || idx == null) return;
+      if (!c || !hardModeAtPoint(c, idx) || !Array.isArray(c.pointWindows) || !c.pointWindows.length || idx == null) return;
       const w = c.pointWindows[idx % c.pointWindows.length];
       if (!w) return;
       out[ch] = c.type === "hue" ? wrap01(w.center / TAU) : clamp(w.center, 0, 1);
@@ -139,12 +146,16 @@ export function containingHardPointWindowIndex(norm, constraintSets, tolerance =
   return pointWindowIndex(norm, constraintSets, true, tolerance);
 }
 
+export function hardModeAtPoint(channel, index) {
+  return (channel.pointModes?.[index] || channel.mode) === "hard";
+}
+
 function pointWindowIndex(norm, constraintSets, requireInside, tolerance = 1e-8) {
   const channels = Object.keys(constraintSets.channels || {});
   let count = 0;
   channels.forEach((ch) => {
     const c = constraintSets.channels[ch];
-    if (c?.mode === "hard" && Array.isArray(c.pointWindows)) {
+    if (Array.isArray(c?.pointWindows)) {
       count = Math.max(count, c.pointWindows.length);
     }
   });
@@ -156,13 +167,11 @@ function pointWindowIndex(norm, constraintSets, requireInside, tolerance = 1e-8)
   for (let i = 0; i < count; i++) {
     let violation = 0;
     let tie = 0;
-    let used = false;
     channels.forEach((ch) => {
       const c = constraintSets.channels[ch];
-      if (!c || c.mode !== "hard" || !Array.isArray(c.pointWindows) || !c.pointWindows.length) return;
+      if (!c || !hardModeAtPoint(c, i) || !Array.isArray(c.pointWindows) || !c.pointWindows.length) return;
       const w = c.pointWindows[i % c.pointWindows.length];
       if (!w) return;
-      used = true;
       if (c.type === "hue") {
         const d = circularDistance(wrap01(norm[ch] ?? 0) * TAU, w.center);
         const excess = Math.max(0, d - Math.max(w.radius, 0));
@@ -177,7 +186,7 @@ function pointWindowIndex(norm, constraintSets, requireInside, tolerance = 1e-8)
       violation += excess * excess;
       tie += Math.pow((v ?? 0.5) - w.center, 2);
     });
-    if (used && (violation < bestViolation || (Math.abs(violation - bestViolation) <= 1e-12 && tie < bestTie))) {
+    if (violation < bestViolation || (Math.abs(violation - bestViolation) <= 1e-12 && tie < bestTie)) {
       bestViolation = violation;
       bestTie = tie;
       bestIndex = i;
@@ -191,7 +200,7 @@ function clampNormToPointWindow(norm, constraintSets, idx) {
   if (idx == null) return { ...norm };
   const out = { ...norm };
   Object.entries(constraintSets.channels || {}).forEach(([ch, c]) => {
-    if (!c || c.mode !== "hard" || !Array.isArray(c.pointWindows) || !c.pointWindows.length) return;
+    if (!c || !hardModeAtPoint(c, idx) || !Array.isArray(c.pointWindows) || !c.pointWindows.length) return;
     const w = c.pointWindows[idx % c.pointWindows.length];
     if (!w) return;
     if (c.type === "hue") {
@@ -262,7 +271,7 @@ function interpolateRaw(a, b, t, space) {
       const span = csRanges[space].max.h - csRanges[space].min.h || 360;
       const aNorm = (a[ch] - csRanges[space].min.h) / span;
       const bNorm = (b[ch] - csRanges[space].min.h) / span;
-      const delta = ((bNorm - aNorm + 0.5) % 1) - 0.5;
+      const delta = wrap01(bNorm - aNorm + 0.5) - 0.5;
       out[ch] = csRanges[space].min.h + wrap01(aNorm + delta * t) * span;
     } else {
       out[ch] = (a[ch] ?? 0) + ((b[ch] ?? 0) - (a[ch] ?? 0)) * t;

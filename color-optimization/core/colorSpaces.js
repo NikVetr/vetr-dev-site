@@ -122,7 +122,8 @@ export function rgbToHex({ r, g, b }) {
   const toHex = (v) => {
     // Guard against NaN/undefined - treat as black component
     if (!Number.isFinite(v)) v = 0;
-    const clamped = Math.round(clamp(v) * 255).toString(16).padStart(2, "0");
+    // Stabilize half-byte ties after transfer-function round trips.
+    const clamped = Math.round(clamp(v) * 255 + 1e-10).toString(16).padStart(2, "0");
     return clamped;
   };
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`.toUpperCase();

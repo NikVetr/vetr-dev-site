@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Color palette optimization tool",
   "scripts": {
-    "test": "npx playwright test",
+    "test": "npm run test:unit && npm run test:browser",
+    "test:unit": "node --test tests/*.test.mjs",
+    "test:browser": "node node_modules/@playwright/test/cli.js test tests/regressions.spec.js",
     "screenshot": "npx playwright test tests/screenshot.spec.js",
     "serve": "npx http-server . -p 8080 -c-1"
   },

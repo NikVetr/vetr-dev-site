@@ -218,7 +218,8 @@ function buildConstraintSets(
     const width = widthForChannel(ch, idx);
     const perWidths = Array.isArray(perInputWidths?.[ch]) ? perInputWidths[ch] : null;
     const pointModes = Array.isArray(perInputModes)
-      ? Array.from({ length: aestheticNorm.length }, (_, i) => perInputModes[i] === "soft" ? "soft" : mode)
+      ? Array.from({ length: aestheticNorm.length }, (_, i) =>
+          ["hard", "soft"].includes(perInputModes[i]) ? perInputModes[i] : mode)
       : null;
     if (ch === "h") {
       if (isDiscontiguous) {

@@ -2310,8 +2310,7 @@ function renderVerboseTable() {
 
   const metaColumns = [
     { key: "meta_best_run", label: "Best Run", type: "number", className: "col-meta", get: (row) => row.bestRunSoFar, render: (row) => row.bestRunSoFar ?? "" },
-    { key: "meta_influence", label: "Influence", type: "number", className: "col-meta", get: (row) => row.end.influence, render: (row) => formatVal(row.end.influence) },
-    { key: "meta_influence_pct", label: "% Influence", type: "number", className: "col-meta", get: (row) => percentInfluence(row.end.influence, row.end.score), render: (row) => formatVal(percentInfluence(row.end.influence, row.end.score)) },
+    { key: "meta_influence", label: "Normal-vision deletion Δ", type: "number", className: "col-meta", get: (row) => row.end.influence, render: (row) => formatVal(row.end.influence) },
     { key: "meta_rank", label: "Rank", type: "number", className: "col-meta", get: (row) => row.end.influenceRank, render: (row) => row.end.influenceRank ?? "" },
     { key: "meta_closest_hex", label: "Closest", type: "string", className: "col-meta", get: (row) => row.end.closestHex || "", render: (row) => renderHex(row.end.closestHex, row.end.closestHex) },
     { key: "meta_end_hex", label: "End Hex", type: "string", className: "col-meta", get: (row) => row.end.hex || "", render: (row) => renderHex(row.end.hex, row.end.color) },
@@ -2660,11 +2659,6 @@ function relPart(part, total) {
 function numDiff(a, b) {
   if (!Number.isFinite(a) || !Number.isFinite(b)) return NaN;
   return a - b;
-}
-
-function percentInfluence(influence, score) {
-  if (!Number.isFinite(influence) || !Number.isFinite(score) || score === 0) return NaN;
-  return influence / score;
 }
 
 function computeWorstColorScore(runNumber) {

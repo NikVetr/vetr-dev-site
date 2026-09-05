@@ -20,3 +20,10 @@ test("aggregateDistances matches common means", () => {
   close(aggregateDistances(vals, "lehmer", 1), (1 + 4 + 16) / (1 + 2 + 4)); // p=1 -> contraharmonic
 });
 
+test("aggregation preserves real collisions and rejects invalid distances", () => {
+  for (const kind of ["minimum", "harmonic", "geometric", "power", "lehmer"]) {
+    assert.equal(aggregateDistances([0, 2], kind, -2), 0);
+  }
+  for (const value of [NaN, Infinity, -1]) assert.throws(() => aggregateDistances([1, value]), /finite and nonnegative/);
+  assert.throws(() => aggregateDistances([1, 2], "misspelled"), /Unknown/);
+});

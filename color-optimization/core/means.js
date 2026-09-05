@@ -15,18 +15,18 @@ export function defaultPForMean(kind) {
   return 1;
 }
 
-function safeVals(values, eps) {
+function safeVals(values) {
   const out = [];
   for (const v of values || []) {
-    if (!Number.isFinite(v)) continue;
-    out.push(Math.max(v, eps));
+    if (!Number.isFinite(v) || v < 0) throw new Error("Distances must be finite and nonnegative.");
+    out.push(v);
   }
   return out;
 }
 
-export function aggregateDistances(values, kind = "harmonic", p = null, eps = 1e-9) {
+export function aggregateDistances(values, kind = "harmonic", p = null) {
   const k = String(kind || "").toLowerCase();
-  const vals = safeVals(values, eps);
+  const vals = safeVals(values);
   if (!vals.length) return 0;
 
   if (k === "minimum" || k === "min") {
@@ -64,11 +64,11 @@ export function aggregateDistances(values, kind = "harmonic", p = null, eps = 1e
   }
 
   if (k === "lehmer") {
+    if (pp < 0 && vals.includes(0)) return 0;
     const num = vals.reduce((acc, v) => acc + Math.pow(v, pp + 1), 0);
     const den = vals.reduce((acc, v) => acc + Math.pow(v, pp), 0);
     return den > 0 ? num / den : 0;
   }
 
-  // fallback
-  return vals.reduce((acc, v) => acc + v, 0) / vals.length;
+  throw new Error(`Unknown distance aggregation: ${kind}`);
 }

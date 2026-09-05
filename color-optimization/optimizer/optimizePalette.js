@@ -4,21 +4,19 @@ import {
   isInGamut,
   hexToRgb,
   rgbToXyz,
-  xyzToLinearRgb,
-  linearRgbToXyz,
   GAMUTS,
   normalizeWithRange,
   unscaleWithRange,
   projectToGamut,
 } from "../core/colorSpaces.js";
-import { applyCvdLinear } from "../core/cvd.js";
 import { clamp } from "../core/util.js";
 import { random, setRandomSeed } from "../core/random.js";
 import { nelderMeadAsync } from "./nelderMead.js";
 import { objectiveInfo, objectiveValue, prepareData } from "./objective.js";
 import { aggregateDistances } from "../core/means.js";
-import { coordsFromXyzForDistanceMetric, distanceBetweenCoords } from "../core/distance.js";
+import { coordsFromHexForDistanceMetric, coordsFromXyzForDistanceMetric, distanceBetweenCoords } from "../core/distance.js";
 import { activeConstraintSets } from "../core/activeConstraints.js";
+import { hardModeAtPoint } from "../core/hardConstraints.js";
 
 function logitClamped(p) {
   const t = clamp(p, 1e-6, 1 - 1e-6);
@@ -72,8 +70,8 @@ function pointWindowSummary(constraintSets, channels) {
   let count = 0;
   channels.forEach((ch) => {
     const c = constraintSets?.channels?.[ch];
-    if (!c || c.mode !== "hard" || !Array.isArray(c.pointWindows) || !c.pointWindows.length) return;
-    hardWindows[ch] = c.pointWindows;
+    if (!c || !Array.isArray(c.pointWindows) || !c.pointWindows.length) return;
+    hardWindows[ch] = c.pointWindows.map((w, i) => hardModeAtPoint(c, i) ? w : null);
     count = Math.max(count, c.pointWindows.length);
   });
   return count > 0 ? { count, hardWindows } : null;
@@ -664,22 +662,7 @@ function computeInfluences(hexes, conditioningHexes = [], prepLike = {}) {
 }
 
 function coordsFromHexForState(hex, state, prepLike, metric) {
-  const rgb = hexToRgb(hex);
-  const xyz = rgbToXyz(rgb);
-  const cvdModel = prepLike.cvdModel || "legacy";
-  const clipToGamutOpt = prepLike.clipToGamutOpt === true;
-  const gamutPreset = prepLike.gamutPreset || "srgb";
-  const gamut = GAMUTS[gamutPreset] || GAMUTS["srgb"];
-  let lin;
-  if (clipToGamutOpt) {
-    const out = gamut.fromXYZ(xyz.x, xyz.y, xyz.z);
-    lin = { r: clamp(out.r, 0, 1), g: clamp(out.g, 0, 1), b: clamp(out.b, 0, 1) };
-  } else {
-    lin = xyzToLinearRgb(xyz);
-  }
-  const sim = state === "none" ? lin : applyCvdLinear(lin, state, 1, cvdModel);
-  const xyzSim = clipToGamutOpt ? gamut.toXYZ(sim.r, sim.g, sim.b) : linearRgbToXyz(sim);
-  return coordsFromXyzForDistanceMetric(xyzSim, metric);
+  return coordsFromHexForDistanceMetric(hex, metric, state, prepLike.cvdModel || "legacy");
 }
 
 function computeClosestByState(newHexes = [], conditioningHexes = [], prepLike = {}) {

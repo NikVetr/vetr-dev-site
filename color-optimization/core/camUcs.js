@@ -148,8 +148,8 @@ function xyz100ToJmh(xyz100, variant = "cam02", conditions = null) {
   const HPE_RGBc = mul3(HPE, tmp1.x, tmp1.y, tmp1.z);
   const HPE_RGBcw = mul3(HPE, tmp2.x, tmp2.y, tmp2.z);
 
-  const RGBa = postAdaptResponse(HPE_RGBc, FL);
-  const RGBaw = postAdaptResponse(HPE_RGBcw, FL);
+  const RGBa = postAdaptResponse(variant === "cam16" ? RGBc : HPE_RGBc, FL);
+  const RGBaw = postAdaptResponse(variant === "cam16" ? RGBcw : HPE_RGBcw, FL);
 
   const Aw = (2 * RGBaw.r + RGBaw.g + 0.05 * RGBaw.b - 0.305) * Nbb;
   const A = (2 * RGBa.r + RGBa.g + 0.05 * RGBa.b - 0.305) * Nbb;

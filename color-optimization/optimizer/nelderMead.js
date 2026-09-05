@@ -1,3 +1,15 @@
+function bestResult(simplex, values, reason, trace) {
+  const index = values.reduce((best, v, i) => v < values[best] ? i : best, 0);
+  return { x: simplex[index].slice(), fx: values[index], reason, trace };
+}
+
+function simplexConverged(simplex, values, tolerance, xTolerance) {
+  if (!values.every(Number.isFinite)) return false;
+  const spread = Math.max(...values) - Math.min(...values);
+  return spread <= tolerance && simplex.every((p) =>
+    p.every((v, j) => Math.abs(v - simplex[0][j]) <= xTolerance));
+}
+
 export function nelderMead(fn, start, opts = {}) {
   const alpha = 1;
   const gamma = 2;
@@ -28,9 +40,8 @@ export function nelderMead(fn, start, opts = {}) {
     const worst = simplex[n];
     if (trace) trace.push(best.slice());
 
-    const spread = Math.max(...values) - Math.min(...values);
-    if (spread < tolerance) {
-      return { x: simplex[0], fx: values[0], reason: "converged (spread)", trace };
+    if (simplexConverged(simplex, values, tolerance, opts.xTolerance ?? 1e-5)) {
+      return bestResult(simplex, values, "converged (spread and simplex)", trace);
     }
 
     const centroid = Array(n).fill(0);
@@ -70,7 +81,7 @@ export function nelderMead(fn, start, opts = {}) {
       contract = centroid.map((c, j) => c + rho * (worst[j] - c));
     }
     const fc = fn(contract);
-    if (fc < values[n]) {
+    if (fr < values[n] ? fc <= fr : fc < values[n]) {
       simplex[n] = contract;
       values[n] = fc;
       continue;
@@ -82,13 +93,13 @@ export function nelderMead(fn, start, opts = {}) {
     }
   }
 
-  return { x: simplex[0], fx: values[0], reason: "max iterations", trace };
+  return bestResult(simplex, values, "max iterations", trace);
 }
 
 function defaultYield() {
   return new Promise((resolve) => {
-    if (typeof requestAnimationFrame === "function") requestAnimationFrame(() => resolve());
-    else setTimeout(resolve, 0);
+    // Animation frames can stop entirely when the tab is hidden.
+    setTimeout(resolve, 0);
   });
 }
 
@@ -116,12 +127,12 @@ export async function nelderMeadAsync(fn, start, opts = {}) {
 
   for (let iter = 0; iter < maxIterations; iter++) {
     if (shouldStop()) {
-      return { x: simplex[0], fx: values[0], reason: "cancelled", trace, cancelled: true };
+      return { ...bestResult(simplex, values, "cancelled", trace), cancelled: true };
     }
     if (iter > 0 && iter % yieldEvery === 0) {
       await yieldFn();
       if (shouldStop()) {
-        return { x: simplex[0], fx: values[0], reason: "cancelled", trace, cancelled: true };
+        return { ...bestResult(simplex, values, "cancelled", trace), cancelled: true };
       }
     }
 
@@ -135,9 +146,8 @@ export async function nelderMeadAsync(fn, start, opts = {}) {
     const worst = simplex[n];
     if (trace) trace.push(best.slice());
 
-    const spread = Math.max(...values) - Math.min(...values);
-    if (spread < tolerance) {
-      return { x: simplex[0], fx: values[0], reason: "converged (spread)", trace };
+    if (simplexConverged(simplex, values, tolerance, opts.xTolerance ?? 1e-5)) {
+      return bestResult(simplex, values, "converged (spread and simplex)", trace);
     }
 
     const centroid = Array(n).fill(0);
@@ -172,7 +182,7 @@ export async function nelderMeadAsync(fn, start, opts = {}) {
     if (fr < values[n]) contract = centroid.map((c, j) => c + rho * (reflect[j] - c));
     else contract = centroid.map((c, j) => c + rho * (worst[j] - c));
     const fc = fn(contract);
-    if (fc < values[n]) {
+    if (fr < values[n] ? fc <= fr : fc < values[n]) {
       simplex[n] = contract;
       values[n] = fc;
       continue;
@@ -184,5 +194,5 @@ export async function nelderMeadAsync(fn, start, opts = {}) {
     }
   }
 
-  return { x: simplex[0], fx: values[0], reason: "max iterations", trace };
+  return bestResult(simplex, values, "max iterations", trace);
 }
