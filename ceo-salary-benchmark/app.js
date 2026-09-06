@@ -2951,6 +2951,10 @@
     expenses: "Expenses", revenue: "Revenue", staff: "Employees",
     highest_other_base: "Non-CEO highest base pay (40h)",
   });
+  const MODEL_FAMILY_COLORS = Object.freeze({
+    bayesian: "#0072b2", bayesianGam: "#d55e00", bayesianExact: "#007f5f",
+    linear: "#555b65", gam: "#a66b00", svr: "#8e5b9e", gp: "#2b8c9b", intercept: "#30343b",
+  });
 
   function isBayesianMethod(method = state.modelMethod) { return ["bayesian", "bayesianGam", "bayesianExact"].includes(method); }
 
@@ -3374,42 +3378,81 @@
       ? modelCategoryLevels(spec[1]).map((label, j) => summary(label, prediction.model.draws[spec[0]].map((draw) => draw[j])))
       : [summary("Selected profile contrast", item.draws, item.normal)];
     if (spec) entries.unshift(summary("Selected profile contrast", item.draws));
-    if (allModels) entries = PREDICTIVE_MODEL.comparison.map((row) => {
-      const other = withModelComparison(row, currentModelPrediction);
-      const contribution = other?.contributions.find((candidate) => candidate.label === item.label);
-      const label = `${modelFamilyLabel(row)} · other ${row.includeHighestOtherPay ? "✓" : "—"} · ads ${row.includeAdvertisedRanges ? "✓" : "—"}`;
-      return contribution ? { ...summary(label, contribution.draws, contribution.normal), key: row.key }
-        : { label, key: row.key, unavailable: other ? "Not included" : "Invalid profile" };
-    });
+    const omittedModels = [];
+    if (allModels) {
+      const comparisons = PREDICTIVE_MODEL.comparison.map((row) => ({ row,
+        prediction: withModelComparison(row, currentModelPrediction),
+        modelLabel: `${modelFamilyLabel(row)} · other ${row.includeHighestOtherPay ? "✓" : "—"} · ads ${row.includeAdvertisedRanges ? "✓" : "—"}`,
+      }));
+      const effects = ["Selected profile contrast", ...(spec ? modelCategoryLevels(spec[1]) : [])];
+      entries = effects.flatMap((label, level) => comparisons.flatMap(({ row, prediction: other, modelLabel }) => {
+        const model = PREDICTIVE_MODEL.models[row.modelKey];
+        if (spec && !model.draws) {
+          if (!level) omittedModels.push(modelFamilyLabel(row));
+          return [];
+        }
+        const contribution = level ? { draws: model.draws[spec[0]].map((draw) => draw[level - 1]) }
+          : other?.contributions.find((candidate) => candidate.label === item.label);
+        return [{ ...(contribution ? summary(label, contribution.draws, contribution.normal)
+          : { label, unavailable: other ? "Not included" : "Invalid profile" }), key: row.key, modelLabel, color: MODEL_FAMILY_COLORS[row.method] }];
+      }));
+    }
     const note = document.createElement("p");
-    note.textContent = allModels ? `${state.modelCompatibilityLevel}% intervals at the current profile, relative to each model’s training reference. Bayesian/GP intervals are credible; other methods use approximate compatibility intervals. Effects are associations.` : `${state.modelCompatibilityLevel}% ${isBayesianMethod() ? "posterior credible" : state.modelMethod === "gp" ? "conditional GP credible" : "approximate compatibility"} intervals for the log-salary contrast${state.modelEffectUnits === "percent" ? ", transformed to percent salary effects" : ""}. Reference: numeric training geometric means; centered categories at zero; Functional overlap for EA. These are associations, not causal effects.`;
+    note.textContent = allModels ? `${state.modelCompatibilityLevel}% intervals for ${spec ? "every category and the selected profile" : "the selected profile"}, relative to each model’s training reference. Bayesian/GP intervals are credible; other methods use approximate compatibility intervals. Effects are associations.` : `${state.modelCompatibilityLevel}% ${isBayesianMethod() ? "posterior credible" : state.modelMethod === "gp" ? "conditional GP credible" : "approximate compatibility"} intervals for the log-salary contrast${state.modelEffectUnits === "percent" ? ", transformed to percent salary effects" : ""}. Reference: numeric training geometric means; centered categories at zero; Functional overlap for EA. These are associations, not causal effects.`;
     content.append(note);
+    if (allModels) content.append(resultElement("p", "", "Color identifies model family; bold marks the selected model."));
+    if (omittedModels.length) content.append(resultElement("p", "", `Not included in: ${[...new Set(omittedModels)].join(", ")}.`));
     const transform = (value) => state.modelEffectUnits === "percent" ? Math.expm1(value) * 100 : value;
     const bounds = entries.filter((entry) => !entry.unavailable).flatMap((entry) => [transform(entry.low), transform(entry.high), 0]);
     let low = Math.min(...bounds); let high = Math.max(...bounds);
     const padding = Math.max((high - low) * .1, state.modelEffectUnits === "percent" ? 1 : .01);
     low -= padding; high += padding;
-    const width = allModels ? 1300 : 1060; const height = 100 + entries.length * 48;
-    const labelWidth = allModels ? 525 : 285;
-    const x = (value) => labelWidth + (transform(value) - low) / (high - low) * 420;
+    const width = allModels ? 1400 : 1060;
+    const labelWidth = 285; const plotWidth = allModels ? 360 : 420;
+    const modelX = labelWidth + plotWidth + 25;
+    const valueX = allModels ? 1135 : labelWidth + plotWidth + 25;
+    let nextY = allModels ? 65 : 32;
+    entries.forEach((entry, i) => {
+      if (allModels && i && entry.label !== entries[i - 1].label) nextY += 24;
+      entry.y = nextY;
+      nextY += allModels ? 32 : 48;
+    });
+    const height = nextY + 60;
+    const x = (value) => labelWidth + (transform(value) - low) / (high - low) * plotWidth;
     const svg = svgElement("svg", { viewBox: `0 0 ${width} ${height}`, role: "img", "aria-label": `${item.label} effect forest plot`, class: "model-effect-figure" });
     const zero = x(0);
-    svg.append(svgElement("line", { x1: zero, x2: zero, y1: 12, y2: height - 60, stroke: "#a9b7bd", "stroke-dasharray": "4 4" }));
+    svg.append(svgElement("line", { x1: zero, x2: zero, y1: allModels ? 42 : 12, y2: height - 60, stroke: "#a9b7bd", "stroke-dasharray": "4 4" }));
+    if (allModels) [[15, "Effect"], [modelX, "Model · other pay / ads"], [valueX, `Estimate [${state.modelCompatibilityLevel}% interval]`]].forEach(([x, title]) => {
+      const heading = svgElement("text", { x, y: 22, "font-size": 14, "font-weight": 700 }); heading.textContent = title; svg.append(heading);
+    });
     entries.forEach((entry, i) => {
-      const y = 32 + i * 48;
-      const label = svgElement("text", { x: labelWidth - 15, y: y + 5, "text-anchor": "end", "font-size": 14 }); label.textContent = entry.label;
-      if (entry.key === prediction.methodKey) label.setAttribute("font-weight", "bold");
+      const y = entry.y;
+      const row = svgElement("g", { class: "model-effect-row", "data-effect": entry.label, "data-model-key": entry.key || prediction.methodKey });
+      const firstInGroup = !i || entry.label !== entries[i - 1].label;
+      if (!allModels || firstInGroup) {
+        const label = svgElement("text", { x: labelWidth - 15, y: y + 5, "text-anchor": "end", "font-size": 14, class: "model-effect-name" });
+        label.textContent = entry.label; row.append(label);
+        if (allModels && i) row.append(svgElement("line", { x1: 15, x2: width - 15, y1: y - 28, y2: y - 28, stroke: "#dbe5e8" }));
+      }
+      if (allModels) {
+        row.append(svgElement("rect", { x: modelX - 11, y: y - 8, width: 4, height: 14, fill: entry.color }));
+        const modelLabel = svgElement("text", { x: modelX, y: y + 5, "font-size": 13, class: "model-effect-model" });
+        modelLabel.textContent = entry.modelLabel;
+        if (entry.key === prediction.methodKey) modelLabel.setAttribute("font-weight", "bold");
+        row.append(modelLabel);
+      }
+      svg.append(row);
       if (entry.unavailable) {
         const missing = svgElement("text", { x: labelWidth, y: y + 5, "font-size": 13 }); missing.textContent = entry.unavailable;
-        svg.append(label, missing); return;
+        row.append(missing); return;
       }
-      const value = svgElement("text", { x: labelWidth + 445, y: y + 5, "font-size": 13 }); value.textContent = `${formatModelEffect(entry.center)} [${formatModelEffect(entry.low)}, ${formatModelEffect(entry.high)}]`;
-      svg.append(label, svgElement("line", { x1: x(entry.low), x2: x(entry.high), y1: y, y2: y, stroke: "#397c89", "stroke-width": 4 }),
-        svgElement("circle", { cx: x(entry.center), cy: y, r: 5, fill: "#123f4c" }), value);
+      const value = svgElement("text", { x: valueX, y: y + 5, "font-size": 13, class: "model-effect-estimate" }); value.textContent = `${formatModelEffect(entry.center)} [${formatModelEffect(entry.low)}, ${formatModelEffect(entry.high)}]`;
+      row.append(svgElement("line", { x1: x(entry.low), x2: x(entry.high), y1: y, y2: y, stroke: entry.color || "#397c89", "stroke-width": 4 }),
+        svgElement("circle", { cx: x(entry.center), cy: y, r: 5, fill: entry.color || "#123f4c" }), value);
     });
     for (let i = 0; i <= 4; i += 1) {
       const value = low + i / 4 * (high - low);
-      const label = svgElement("text", { x: labelWidth + i / 4 * 420, y: height - 34, "text-anchor": "middle", "font-size": 13 });
+      const label = svgElement("text", { x: labelWidth + i / 4 * plotWidth, y: height - 34, "text-anchor": "middle", "font-size": 13 });
       label.textContent = `${value.toFixed(state.modelEffectUnits === "percent" ? 1 : 2)}${state.modelEffectUnits === "percent" ? "%" : ""}`; svg.append(label);
     }
     content.append(svg);
@@ -3476,6 +3519,8 @@
       tr.dataset.methodKey = row.key;
       const methodCell = document.createElement("th");
       methodCell.scope = "row";
+      const methodContents = resultElement("span", "model-method-content");
+      methodCell.append(methodContents);
       if (modelComparisonSpec(row)) {
         const activate = () => selectModelComparisonMethod(row.key);
         tr.classList.add("is-actionable");
@@ -3500,12 +3545,12 @@
           event.stopPropagation();
           activate();
         });
-        methodCell.append(button);
+        methodContents.append(button);
       }
       const details = document.createElement("button"); details.type = "button"; details.className = "info-tooltip model-spec-button";
       details.textContent = "?"; details.setAttribute("aria-label", `Model specification: ${row.label}`);
       details.addEventListener("click", (event) => { event.stopPropagation(); showModelSpecification(row); });
-      methodCell.append(details);
+      methodContents.append(details);
       const metrics = [
         row.includeHighestOtherPay ? "Yes" : "No",
         row.includeAdvertisedRanges ? "Yes" : "No",
