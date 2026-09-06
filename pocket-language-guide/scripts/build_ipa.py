@@ -391,6 +391,14 @@ VOICES = {"en": "en-us", "es": "es-419", "fr": "fr-fr", "de": "de", "pt": "pt-br
           # is internally consistent -- it is only wrong against the grade a reviewer
           # gave it. Rebuilding the same list with the system library restored all
           # twenty-four byte-for-byte, which is also how the drift was measured.
+          #
+          # The uncomfortable part is that the newer library is the *more accurate*
+          # one here: `Fruehstueck` really is [ˈfʁyːʃtʏk] with a lax second vowel, so
+          # the shipped German column writes /y/ where the language has /ʏ/. Upgrading
+          # deliberately would mean re-deriving those cells, giving twenty-two reader
+          # tables a `ʏ` rule modelled on their own `y`, and regrading German -- a pass
+          # of its own rather than a side effect of adding a language, which is why
+          # this is a note and not a change.
           "bn": "bn", "pl": "pl", "uk": "uk",
           # espeak-ng ships one Tamil voice and no regional variant, and it is used
           # rather than a romanisation route for one reason: **it implements Tamil's

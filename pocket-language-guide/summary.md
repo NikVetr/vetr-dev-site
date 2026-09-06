@@ -207,8 +207,8 @@ A respelling is written *for a reader* — `nee HOW` is Chinese for someone who 
 English and nothing else — so curating them by hand is O(N²), and for a long time
 only the 16 pairs glossed into English had one while the other 256 printed an empty
 column. The way out is two O(N) inputs instead: the `ipa` column of the language
-being learned, and one rule table per language doing the reading. **All twenty-six
-reader tables now exist and every one of the 650 pairs prints a respelling.**
+being learned, and one rule table per language doing the reading. **All twenty-eight
+reader tables now exist and every one of the 756 pairs prints a respelling.**
 `node scripts/respell_check.mjs <reader> --gaps` counts IPA symbols that reach the
 page because no rule matched, and every reader is at zero. Twenty of the tables
 derive from a published pronunciation key for that language (`content/RESPELL-SYSTEMS.md`
@@ -737,6 +737,110 @@ złoty was "scoped to pl but has no gloss in ar, bn, de, …, so it prints on **
 25 pairs**". A scoped concept still needs a gloss wherever it is the *source*, and 47
 rows later it prints on 23 of 25 — the two short ones being the packs that are short
 everywhere.
+
+**Tamil and Ukrainian came in as the twenty-seventh and eighth**, and each proved a
+different thing.
+
+**Tamil's script refuses to say what the sound is, so the `ipa` column is the only
+column in the row that knows.** Tamil writes one letter per place of articulation and
+lets position decide voicing: `pōkalām` is read [poːɡalaːm] and `paṭu` is [paɖu], and
+neither `text` nor `romanization_iso15919` can carry that. So espeak was chosen *for*
+the ambiguity rather than in spite of it — its `ta` voice implements the positional
+rule, probed across all four environments (word-initial voiceless, intervocalic voiced,
+geminate voiceless, post-nasal voiced) before being trusted. That plus a shallow
+orthography with no schwa deletion is why `GRADE["ta"]` is **B+**, the best Indic grade
+in the file against Hindi's and Bengali's C.
+
+**The mirror problem is that a Tamil *reader* has to spell aspiration its own alphabet
+does not distinguish.** Hindi, Bengali and Urdu are full of `k kʰ ɡ ɡʰ`, and the bare
+alphabet merges all four onto க — seven-to-one once /x q ɣ/ arrive. The answer is the
+published Sanskrit-in-Tamil notation, `ப` pa / `ப²` pha / `ப³` ba / `ப⁴` bha, and the
+*fonts* confirm it independently: Noto Sans and Serif Tamil each carry exactly `² ³ ⁴`
+and `₂ ₃ ₄` out of the whole Superscripts block, six codepoints that are precisely the
+two written forms of this notation and nothing else. Read as features rather than as
+letters — ² breath, ³ voice, ⁴ both — it extends to the sibilants at no glyph cost.
+Tamil's own gemination device was rejected on a measurement: it collides with the 243
+real `Cː` sequences Italian, Japanese, Hindi and Arabic already carry, so /t/ and /tː/
+would spell identically.
+
+`Taml` came in at a measured 1.40 leading and a `min_size_pt` of 5.0, and both numbers
+were argued against the alternative rather than picked. Bengali's 1.45 and Devanagari's
+1.35 were rejected **on mechanism, not on number**: those scripts stack, and modern
+Tamil has two conjuncts in the whole orthography and no vertical mark stack — its
+extenders run sideways, which is `measure.js`'s problem and not the line box's. The
+floor was set by the closest confusable pair in the script, க against க் — letter
+against letter-plus-pulli — whose distinguishing contour is 0.134em, larger than
+Devanagari's nuqta and 1.8× Hebrew's hiriq; 5.4 was rejected for giving the *least*
+confusable non-Latin script here the same floor as the most confusable one. The Tamil
+digits `௦–௯` were deliberately left out, Hindi's answer rather than Bengali's, because
+ASCII has supplanted them in Tamil education and government while Bengali's `০–৯` are
+still on live price boards.
+
+**Ukrainian's reader table is Russian's structural sibling and diverges in exactly the
+four places its own script forces a different answer** — the и/і split for /ɪ/ against
+/i/, a genuine three-way г/ґ/х (Ukrainian г is a fricative where Russian's is a stop),
+в carrying v/ʋ/w as one letter, and no ё/ы/э/ъ. Building it turned up an **espeak
+dictionary defect**: шв- comes back as /ɬβ/, and /ɬ/ is not a Ukrainian sound at all —
+it is the Klingon lateral, and it would have printed a bare IPA letter on Polish's
+table.
+
+**Both took apposition for the `_frame`, which is now twenty-six of twenty-eight, and
+both counted rather than defaulted.** Ukrainian's count: of ICU's 58 region names,
+roughly 39 are feminine nouns whose locative is mechanical, 12 are masculine nouns
+whose locative alternates between `-і` and `-у` *lexically* (Ірані but Іраку), 4 do not
+decline at all (Чилі, Перу, Марокко, Сан-Марино), and Єгипет has a fleeting vowel on
+top of the ending — so about 19 of 58 cannot be derived from the nominative at all,
+before reaching the fact that `emergencyNote` never sees the name. Tamil's is sharper
+still: its locative has five surface shapes over 60 names, 35 of which do not take
+`-இல்`'s own form, and **even the 25 that do are not concatenation** — the final
+consonant's pulli has to be deleted first, which no substitution frame can do. Hindi's
+and Urdu's escape, a separate-word postposition, does not exist in Tamil.
+
+Three defects came out of this batch, all of the same family — something that is
+internally consistent and still wrong.
+
+- **A scope names the *target*, so a pack needs a gloss for every scoped concept it is
+  not in.** This is the złoty's bug read from the other end, and Ukrainian shipped
+  fifty-two of them empty: every foreign currency, the four Chinese classifier rows,
+  and the three tropical-disease rows. The reasoning that produced the gap was "Ukraine
+  is temperate and does not use the baht" — true, and beside the point, because
+  `pharmacy-symptoms.i-think-i-have-malaria` is scoped to the countries *being
+  visited*. The hryvnia then needed the same fifty rows in the opposite direction, each
+  derived from the wording that pack had already chosen for the zloty's symbol.
+- **`espeakng-loader` is not a settling tool.** Ukrainian has no voice in this
+  machine's espeak-ng 1.50 — it landed upstream in 1.52 — so its column is built
+  against a newer library pointed at by two environment variables. Leaving those set
+  while rebuilding the other twenty-four languages is not a rebuild, it is a different
+  phonemiser: about 320 cells moved, Russian worst and German most legibly, where
+  `Frühstück` reads frˈyːʃtʏk under the newer library and frˈyːʃtyk under 1.50.
+  Nothing close to the change caught it — `build_ipa.py --check` was clean, because a
+  re-derived column is internally consistent, and it is only wrong against the grade a
+  reviewer gave it. **`tests/fonts.test.mjs` caught it, on the second-order
+  consequence**: /ʏ/ is a symbol only five of the twenty-eight reader tables have a
+  rule for, so it fell through as a literal and six scripts were asked to draw a letter
+  they do not have. Rebuilding the same twenty-four with the system library restored
+  every one byte-for-byte, which is also what proved the revert complete.
+
+  Worth keeping separately: **the newer library is the more accurate one here.**
+  `Frühstück` really is [ˈfʁyːʃtʏk] with a lax second vowel, so the shipped German
+  column writes /y/ where the language has /ʏ/. Fixing that is a deliberate pass of its
+  own — 320 cells re-derived, twenty-two reader tables each gaining a rule modelled on
+  their own `y`, and German regraded — and not something to fold into a language
+  addition, which is why it is written down here rather than done.
+- **Two shared files were being written by two agents at once.** The Tamil agent edited
+  the registry directly while the Ukrainian one staged its rows, and nothing was lost
+  only because both *appended*. The rule now in the procedure file is the general one:
+  edit a shared file in place and append, and never regenerate it from a script that
+  rewrites the whole thing, because the result is still a valid file and the validator
+  will not notice.
+
+Two smaller things closed on the way. `language-names.csv` had twelve blank
+romanization cells left behind by the Persian, Bengali, Polish and Urdu additions, and
+`ru,bn`/`ru,fa` were missing the prepositional name their frame needs — a blank cell
+there blanks a whole printed line, so the file is now at zero across all sixteen
+romanising locales. And the Hindi reader gained three `ɳ` rules: /ɳ/ occurs only in
+Hindi's own column, so Hindi's table had never been asked for it, and Tamil arrived
+with 185 cells of it.
 
 ### A slang section, and what a "universal reference set" turned out to be
 
@@ -1647,8 +1751,8 @@ normalised English gloss, against the exact section first and then its group,
 because two sheets can file the same phrase under different panels ("Can I charge
 my phone?" is hotel basics in one and hotel requests in the other).
 
-The bank is now **827 concepts across 59 sections in twenty-six languages**, which
-is **650 ordered pairs** — every one of which renders, and two of which anyone wrote a
+The bank is now **829 concepts across 59 sections in twenty-eight languages**, which
+is **756 ordered pairs** — every one of which renders, and two of which anyone wrote a
 sheet for. That ratio is the whole argument for joining on `concept_id` instead of
 storing pairs: the sixteenth language added 745 rows and 30 new pairs, and the
 twenty-first added 40 more pairs on its own.
