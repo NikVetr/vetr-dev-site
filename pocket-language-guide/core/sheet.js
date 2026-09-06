@@ -13,6 +13,7 @@ import {
 } from './pack.js';
 import { createRespeller } from './respell.js';
 import { layout } from './solve/index.js';
+import { isElven } from './elven-frame.js';
 
 /**
  * Generated respellings, keyed `target__source__accent`. Module scope rather than
@@ -71,8 +72,9 @@ export async function createSheetContext({ loadText, loadBytes }) {
  * the serif variants if a serif sheet was asked for.
  * @param {SheetContext['corpus']} corpus @param {string} target @param {string} source
  * @param {import('./types.js').SheetSpec['typeface']} [typeface]
+ * @param {boolean} [serifHeadings]
  */
-export function stacksFor(corpus, target, source, typeface = 'sans') {
+export function stacksFor(corpus, target, source, typeface = 'sans', serifHeadings = false) {
   const of = (/** @type {string} */ code) => {
     const lang = corpus.languages[code];
     if (!lang) throw new Error(`unknown language ${code}`);
@@ -80,8 +82,8 @@ export function stacksFor(corpus, target, source, typeface = 'sans') {
   };
   // latin-cond always travels with latin: the table templates ask for it.
   const base = [...new Set(['latin', 'latin-cond', of(target), of(source)])];
-  if (typeface === 'sans') return base;
-  return [...new Set([...base, ...base.map((stack) => `${stack}-${typeface}`)])];
+  const variants = typeface === 'sans' ? [] : base.map(stack => `${stack}-${typeface}`);
+  return [...new Set([...base, ...variants, ...(serifHeadings ? [`${of(source)}-serif`] : [])])];
 }
 
 /**
@@ -172,6 +174,7 @@ function withThemeColors(theme, colors) {
 export async function buildSheet(ctx, spec, edits) {
   const { corpus, measurer, registry, loadText } = ctx;
   await loadFontsFor(ctx, spec.target, spec.source, spec.typeface ?? 'sans');
+  if (isElven(spec)) await loadFontsFor(ctx, spec.target, spec.source, 'serif');
   const theme = withThemeColors(await ctx.theme(spec.themeId), spec.themeColors);
   // Seven concepts name a language, and the name has to come from the pair rather
   // than from the row. Filled here, once, because five places downstream read these

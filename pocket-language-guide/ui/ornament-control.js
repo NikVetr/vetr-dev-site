@@ -1,5 +1,5 @@
 import { ORNAMENT_STYLES, motifFor, ornamentRule } from '../core/ornaments.js';
-import { isElven, elvenInset, elvenFrame, elvenHeading } from '../core/elven-frame.js';
+import { isElven, elvenInset, elvenFrame, elvenHeading, elvenColours } from '../core/elven-frame.js';
 import { contentBox } from '../core/solve/index.js';
 import { t } from './i18n.js';
 
@@ -63,11 +63,12 @@ export function ornamentControl(spec, onChange) {
         marginBottom: 2, reserve: undefined },
       paper: { ...next.paper, borderless: false, nonprintablePt: 2 } };
       const box = contentBox(sample.geometry, sample.paper, undefined, elvenInset(sample));
+      const colours = elvenColours(sample, color);
       const marks = elvenFrame(sample, { rects: [], runs: [], icons: [], hits: [] },
         box, { top: 0, bottom: 0 }, color);
       for (let c = 0; c < 2; c++) {
         const x = box.left + c * (box.colWidth + box.columnGap);
-        marks.push(...elvenHeading(box.colWidth, box.top + 7, 9, box.colWidth * 0.42, color)
+        marks.push(...elvenHeading(box.colWidth, box.top + 7, 9, box.colWidth * 0.42, colours.thread, colours.stem)
           .map(p => ({ ...p, x: p.x + x })));
       }
       preview.replaceChildren(...marks.map(mark => {
@@ -76,7 +77,7 @@ export function ornamentControl(spec, onChange) {
         p.setAttribute('transform', `translate(${mark.x} ${mark.y})`);
         p.setAttribute('stroke', mark.stroke);
         p.setAttribute('stroke-width', String(mark.strokeWidth * 1.5));
-        p.setAttribute('fill', 'none');
+        p.setAttribute('fill', mark.fill ?? 'none');
         return p;
       }));
     }

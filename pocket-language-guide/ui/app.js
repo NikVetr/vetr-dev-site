@@ -113,10 +113,11 @@ export function setReaderLanguage(code) {
  * @param {Awaited<ReturnType<typeof browserSheetContext>>} ctx
  * @param {string} target @param {string} source
  * @param {import('../core/types.js').SheetSpec['typeface']} [typeface]
+ * @param {boolean} [serifHeadings]
  */
-export async function ensureFontCss(ctx, target, source, typeface = 'sans') {
+export async function ensureFontCss(ctx, target, source, typeface = 'sans', serifHeadings = false) {
   const manifest = await fontManifest();
-  const stacks = stacksFor(ctx.corpus, target, source, typeface);
+  const stacks = stacksFor(ctx.corpus, target, source, typeface, serifHeadings);
   const id = `plg-fonts-${stacks.join('-')}`;
   if (!document.getElementById(id)) {
     const style = document.createElement('style');

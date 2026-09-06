@@ -3,6 +3,7 @@ import { pathPen } from './ornament-designs.js';
 /** @typedef {import('./types.js').SheetSpec} SheetSpec */
 /** @typedef {import('./types.js').PathMark} PathMark */
 /** @typedef {ReturnType<typeof pathPen>} Pen */
+/** @typedef {{stem:string,thread:string,rule:string,light:string,blue:string}} Colours */
 
 /** @param {SheetSpec} spec */
 export function isElven(spec) {
@@ -10,41 +11,27 @@ export function isElven(spec) {
     && (spec.ornamentStyle === 'language' || spec.ornamentStyle === 'botanical');
 }
 
-/** A real, measured reservation: the frame never borrows space from glyphs.
+/** The ornament owns measured space; its ink never borrows room from glyphs.
  * @param {SheetSpec} spec */
 export function elvenInset(spec) {
-  return isElven(spec) ? Math.min(14, Math.max(6, Math.min(spec.geometry.pageW, spec.geometry.pageH) * 0.032)) : 0;
+  return isElven(spec) ? Math.min(20, Math.max(8, Math.min(spec.geometry.pageW, spec.geometry.pageH) * 0.045)) : 0;
 }
 
-/** @param {SheetSpec} spec @param {string} ink */
+/** @param {SheetSpec} spec @param {string} ink @returns {Colours} */
 export function elvenColours(spec, ink) {
   return spec.inkMode === 'mono'
-    ? { stem: ink, thread: ink, rule: ink }
-    : { stem: '#486455', thread: '#a38b58', rule: '#b5c2b6' };
+    ? { stem: ink, thread: ink, rule: ink, light: ink, blue: ink }
+    : { stem: '#355b50', thread: '#9c793c', rule: '#d4c7a9', light: '#d9bd7c', blue: '#29485e' };
 }
 
-/** A curved, pointed leaf with a fine central vein. Coordinates are in points.
- * @param {Pen} p @param {number} x @param {number} y @param {number} dx
- * @param {number} dy @param {number} breadth @param {boolean} [vein] */
-function leaf(p, x, y, dx, dy, breadth, vein = false) {
-  const length = Math.hypot(dx, dy);
-  if (length < 0.1) return;
-  const nx = -dy / length * breadth, ny = dx / length * breadth;
-  p.m(x, y);
-  p.c(x + dx * 0.18 + nx, y + dy * 0.18 + ny,
-    x + dx * 0.62 + nx, y + dy * 0.62 + ny, x + dx, y + dy);
-  p.c(x + dx * 0.7 - nx * 0.35, y + dy * 0.7 - ny * 0.35,
-    x + dx * 0.22 - nx * 0.5, y + dy * 0.22 - ny * 0.5, x, y);
-  if (vein) { p.m(x, y); p.q(x + dx * 0.6, y + dy * 0.4, x + dx, y + dy); }
-}
-
-/** @param {number} x @param {number} y @param {number} w @param {number} h
+/** Absolute coordinate pairs let imposition transform the art.
+ * @param {number} x @param {number} y @param {number} w @param {number} h
  * @param {string} stroke @param {number} strokeWidth @param {(p:Pen)=>void} draw
- * @returns {PathMark} */
-function mark(x, y, w, h, stroke, strokeWidth, draw) {
-  const p = pathPen(100, 100);
+ * @param {string} [fill] @returns {PathMark} */
+function mark(x, y, w, h, stroke, strokeWidth, draw, fill) {
+  const p = pathPen(w, h);
   draw(p);
-  return { x, y, w, h, stroke, strokeWidth, d: p.d() };
+  return { x, y, w, h, stroke, strokeWidth, d: p.d(), ...(fill ? { fill } : {}) };
 }
 
 /** @param {PathMark} path @param {boolean} horizontal @param {boolean} vertical */
@@ -56,159 +43,120 @@ function mirror(path, horizontal, vertical) {
   }) };
 }
 
-/** Section branches grow out of the side stem, curl beneath the title, and rise
- * into the measured space to its right. @param {number} w @param {number} y
- * @param {number} h @param {number} titleEnd @param {string} colour
- * @returns {PathMark[]} */
-export function elvenHeading(w, y, h, titleEnd, colour) {
-  const ruleH = Math.min(2.6, h);
-  const out = [mark(0, y + h - ruleH, w, ruleH, colour, 0.28, p => {
-    p.m(0.3, ruleH * 0.66);
-    p.c(w * 0.24, ruleH * 0.66, w * 0.3, ruleH * 0.22, w * 0.51, ruleH * 0.52);
-    p.c(w * 0.76, ruleH * 0.87, w * 0.88, ruleH * 0.32, w - 0.3, ruleH * 0.58);
-    for (const a of [0.12, 0.25, 0.76, 0.9]) {
-      leaf(p, w * a, ruleH * 0.57, Math.min(8, w * 0.08), -ruleH * 0.37, ruleH * 0.14);
+/** A closed broad silhouette and a separate gold midrib.
+ * @param {Pen} p @param {number[]} leaf @param {boolean} vein */
+function drawLeaf(p, [x, y, dx, dy, width], vein) {
+  const length = Math.hypot(dx, dy), nx = -dy / length * width, ny = dx / length * width;
+  p.m(x, y);
+  if (vein) {
+    p.q(x + dx * 0.48, y + dy * 0.48, x + dx * 0.94, y + dy * 0.94);
+    return;
+  }
+  p.c(x + dx * 0.15 + nx, y + dy * 0.15 + ny,
+    x + dx * 0.7 + nx, y + dy * 0.7 + ny, x + dx, y + dy);
+  p.c(x + dx * 0.7 - nx, y + dy * 0.7 - ny,
+    x + dx * 0.15 - nx, y + dy * 0.15 - ny, x, y);
+  p.close();
+}
+
+/** Leaves attach along one sweeping stem. Bounded proportions keep them from
+ * stretching across arbitrarily wide columns.
+ * @param {number} x @param {number} y @param {number} w @param {number} h
+ * @param {Colours} colours @param {boolean} [right] @param {boolean} [bottom] */
+function sprig(x, y, w, h, colours, right = false, bottom = false) {
+  const leaves = [
+    [12, 84, -6, -29, 5], [23, 76, -10, -43, 6],
+    [37, 62, -8, -48, 7], [51, 46, 3, -37, 7],
+    [65, 33, 20, -23, 6], [33, 66, 24, 19, 7],
+    [48, 50, 29, 15, 7], [63, 35, 29, 7, 6],
+  ];
+  return [
+    mark(x, y, w, h, colours.thread, 0.5, p => {
+      p.m(3, 93); p.c(30, 83, 45, 42, 94, 12);
+    }),
+    mark(x, y, w, h, colours.thread, 0.23,
+      p => leaves.forEach(l => drawLeaf(p, l, false)), colours.stem),
+    mark(x, y, w, h, colours.light, 0.16,
+      p => leaves.forEach(l => drawLeaf(p, l, true))),
+  ].map(p => mirror(p, right, bottom));
+}
+
+/** @param {number} x @param {number} y @param {number} size @param {Colours} colours */
+function star(x, y, size, colours) {
+  return mark(x, y, size, size, colours.thread, 0.24, p => {
+    for (let i = 0; i < 16; i++) {
+      const a = i * Math.PI / 8 - Math.PI / 2;
+      const r = i % 2 ? 10 : i % 4 ? 30 : 46;
+      const px = 50 + Math.cos(a) * r, py = 50 + Math.sin(a) * r;
+      if (i) p.l(px, py); else p.m(px, py);
     }
+    p.close();
+  }, colours.blue);
+}
+
+/** A blue enamel lily capital, with gold ribs and a pendant point.
+ * @param {number} x @param {number} y @param {number} w @param {number} h
+ * @param {Colours} colours @param {boolean} bottom */
+function capital(x, y, w, h, colours, bottom) {
+  const petals = mark(x, y, w, h, colours.thread, 0.4, p => {
+    p.m(50, 95); p.c(36, 65, 39, 36, 50, 5); p.c(61, 36, 64, 65, 50, 95); p.close();
+    p.m(50, 91); p.c(31, 69, 6, 48, 6, 12); p.c(28, 7, 40, 22, 44, 40);
+    p.c(31, 24, 19, 22, 20, 32); p.c(21, 54, 41, 67, 50, 91); p.close();
+    p.m(50, 91); p.c(69, 69, 94, 48, 94, 12); p.c(72, 7, 60, 22, 56, 40);
+    p.c(69, 24, 81, 22, 80, 32); p.c(79, 54, 59, 67, 50, 91); p.close();
+  }, colours.blue);
+  const ribs = mark(x, y, w, h, colours.light, 0.2, p => {
+    p.m(50, 89); p.l(50, 13);
+    p.m(47, 79); p.c(33, 60, 14, 33, 12, 17);
+    p.m(53, 79); p.c(67, 60, 86, 33, 88, 17);
+  });
+  return [petals, ribs].map(p => mirror(p, false, bottom));
+}
+
+/** A restrained gold rule and one leaf spray beside a measured title.
+ * @param {number} w @param {number} y @param {number} h @param {number} titleEnd
+ * @param {string} colour @param {string} [foliage] @returns {PathMark[]} */
+export function elvenHeading(w, y, h, titleEnd, colour, foliage = colour) {
+  const ruleH = Math.min(2, h);
+  const out = [mark(0, y + h - ruleH, w, ruleH, colour, 0.42, p => {
+    p.m(0.5, 28); p.q(4, 72, 10, 72); p.l(90, 72); p.q(96, 72, 99.5, 28);
   })];
-  const room = w - titleEnd - 5;
-  if (room >= 18 && h >= 5) {
-    out.push(mark(titleEnd + 5, y, room, h, colour, 0.3, p => {
-      const floor = h - ruleH * 0.42;
-      p.m(room - 0.3, floor);
-      p.c(room * 0.51, floor, room * 0.77, 0.9, room * 0.19, h * 0.4);
-      p.c(room * 0.07, h * 0.48, room * 0.11, h * 0.8, room * 0.26, h * 0.66);
-      p.m(room * 0.63, floor - 0.3);
-      p.c(room * 0.45, h * 0.7, room * 0.53, h * 0.13, room * 0.78, 0.7);
-      leaf(p, room * 0.56, h * 0.63, room * 0.2, -h * 0.43, Math.min(1.1, h * 0.1), true);
-      leaf(p, room * 0.8, h * 0.81, room * 0.12, -h * 0.54, Math.min(0.8, h * 0.09));
-    }));
+  const room = w - titleEnd - 4;
+  if (room >= 15 && h >= 6) {
+    const sw = Math.min(23, room), sh = Math.min(11, h - 1);
+    out.push(...sprig(w - sw, y + h - sh - 0.5, sw, sh,
+      { stem: foliage, thread: colour, light: colour, rule: colour, blue: foliage }, true));
   }
   return out;
 }
 
-/** @param {number} w @param {number} y */
-const stemX = (w, y) => w * (0.5 + 0.19 * Math.sin(y / 29));
-/** @param {number} w @param {number} y */
-const stemSlope = (w, y) => w * 0.19 / 29 * Math.cos(y / 29);
-
-/** One continuous climbing stem. Leaves are sized in points, so a taller page
- * grows more branches instead of stretching a leaf into a ribbon.
+/** Gold mullions carry capitals at section junctions; most of each shaft stays quiet.
  * @param {number} x @param {number} y @param {number} w @param {number} h
- * @param {{stem:string,thread:string}} colours @returns {PathMark[]} */
-function vine(x, y, w, h, colours) {
+ * @param {Colours} colours @returns {PathMark[]} */
+function rail(x, y, w, h, colours) {
   if (w < 1 || h < 3) return [];
-  const out = [mark(x, y, w, h, colours.stem, 0.32, p => {
-    p.m(stemX(w, 0), 0.3);
-    for (let a = 0.3; a < h - 0.3; a += 18) {
-      const b = Math.min(a + 18, h - 0.3), d = (b - a) / 3;
-      p.c(stemX(w, a) + stemSlope(w, a) * d, a + d,
-        stemX(w, b) - stemSlope(w, b) * d, b - d, stemX(w, b), b);
-    }
-    if (w >= 2.8) for (let a = 20, i = 0; a < h - 5; a += 24, i++) {
-      const s = i % 2 ? -1 : 1;
-      const dx = s * Math.min(w * 0.27, 3.2);
-      leaf(p, stemX(w, a), a, dx, -Math.min(15, w * 2.5), Math.min(0.65, w * 0.065), w > 6);
-      if (w > 6) leaf(p, stemX(w, a - 7), a - 7, -dx * 0.65, -8, 0.45);
-    }
-  })];
-  out.push(mark(x, y, w, h, colours.thread, 0.2, p => {
-    p.m(w * 0.5, 0.3);
-    for (let a = 0.3; a < h - 0.3; a += 35) {
-      const b = Math.min(a + 35, h - 0.3);
-      p.c(w * 0.09, a + (b - a) * 0.32, w * 0.91, a + (b - a) * 0.68, w * 0.5, b);
-    }
-  }));
-  return out;
+  return [
+    mark(x, y, w, h, colours.thread, 0.48, p => { p.m(50, 0.2); p.l(50, 99.8); }),
+    mark(x, y, w, h, colours.light, 0.22, p => {
+      p.m(50 + Math.min(22, 100 / w), 0.2); p.l(50 + Math.min(22, 100 / w), 99.8);
+    }),
+  ];
 }
 
-/** Interwoven arches between the vertical stems, with richer foliage at the
- * junctions. All detail stays in the reserved horizontal band.
+/** A pointed vault has two parallel contours, no crossing loops.
  * @param {number} x @param {number} y @param {number} w @param {number} h
- * @param {number[]} nodes @param {{stem:string,thread:string}} colours
- * @param {boolean} bottom @returns {PathMark[]} */
-function canopy(x, y, w, h, nodes, colours, bottom) {
-  const base = h * 0.76;
-  const knots = [0.4, ...nodes.filter(a => a > 6 && a < w - 6), w - 0.4].sort((a, b) => a - b);
-  const out = [mark(x, y, w, h, colours.stem, 0.35, p => {
-    p.m(0.4, base);
-    for (let i = 1; i < knots.length; i++) {
-      const a = knots[i - 1], b = knots[i], d = b - a;
-      p.m(a, base);
-      p.c(a + d * 0.28, h * 0.04, b - d * 0.28, h * 0.04, b, base);
-      p.m(a, base);
-      p.c(a + d * 0.3, h * 0.95, b - d * 0.3, h * 0.14, b, base);
-      for (const s of [-1, 1]) {
-        const root = s > 0 ? a : b;
-        for (let k = 0; k < 3; k++) {
-          const dx = s * Math.min(d * (0.2 + k * 0.09), 13 + k * 7);
-          leaf(p, root + s * (1.4 + k), base - k * 0.5, dx,
-            -h * (0.47 - k * 0.09), Math.min(0.8, h * 0.055), k === 0 && h > 12);
-        }
-      }
-      const middle = (a + b) / 2;
-      p.m(middle - 3, h * 0.27); p.q(middle, h * 0.2, middle, h * 0.07);
-      p.q(middle, h * 0.2, middle + 3, h * 0.27);
-    }
-  }), mark(x, y, w, h, colours.thread, 0.22, p => {
-    p.m(0.4, base + 0.6);
-    for (let i = 1; i < knots.length; i++) {
-      const a = knots[i - 1], b = knots[i], d = b - a;
-      p.c(a + d * 0.23, h * 0.14, b - d * 0.32, h * 0.14, b, base + 0.6);
-    }
-  })];
-  return bottom ? out.map(p => mirror(p, false, true)) : out;
-}
-
-/** A corner is drawn as two connected arms, keeping their bounding boxes clear
- * of text as well as their ink. The long arm coils into the canopy; the short
- * arm turns down into the outer willow stem.
- * @param {number} x @param {number} y @param {number} w @param {number} h
- * @param {{stem:string,thread:string}} colours @param {boolean} right
- * @param {boolean} bottom @returns {PathMark[]} */
-function cornerCrown(x, y, w, h, colours, right, bottom) {
-  const ink = mark(x, y, w, h, colours.stem, 0.32, p => {
-    p.m(0.7, h * 0.85);
-    p.c(w * 0.2, h * 0.81, w * 0.19, h * 0.12, w * 0.48, h * 0.12);
-    p.c(w * 0.8, h * 0.12, w * 0.76, h * 0.95, w * 0.48, h * 0.79);
-    p.c(w * 0.29, h * 0.66, w * 0.55, h * 0.25, w * 0.61, h * 0.5);
-    p.m(0.8, h * 0.9);
-    p.c(w * 0.2, h * 0.46, w * 0.39, h * 0.55, w * 0.98, h * 0.67);
-    for (let i = 0; i < 5; i++) {
-      const a = 0.055 + i * 0.075;
-      leaf(p, w * a, h * (0.85 - i * 0.07), w * (0.08 + i * 0.015),
-        -h * (0.5 - i * 0.03), Math.min(1, h * 0.06), true);
-    }
-    leaf(p, w * 0.76, h * 0.63, w * 0.19, -h * 0.25, h * 0.065);
-    p.m(w * 0.66, h * 0.62); p.c(w * 0.79, h * 0.56, w * 0.83, h * 0.2, w * 0.73, h * 0.2);
-  });
-  const thread = mark(x, y, w, h, colours.thread, 0.2, p => {
-    p.m(0.9, h * 0.95); p.c(w * 0.27, h * 0.74, w * 0.38, h * 0.18, w * 0.69, h * 0.67);
-    p.c(w * 0.82, h * 0.89, w * 0.93, h * 0.63, w * 0.96, h * 0.39);
-  });
-  return [ink, thread].map(path => mirror(path, right, bottom));
-}
-
-/** Let an underfilled column end in a growing branch, joined to the bottom frame,
- * rather than a disconnected badge. @param {number} x @param {number} y
- * @param {number} w @param {number} h @param {{stem:string,thread:string}} colours */
-function lowerBranches(x, y, w, h, colours) {
-  return [mark(x, y, w, h, colours.stem, 0.3, p => {
-    p.m(0.3, h - 0.4);
-    p.c(w * 0.29, h - 0.4, w * 0.12, h * 0.24, w * 0.41, h * 0.27);
-    p.c(w * 0.65, h * 0.3, w * 0.38, h * 0.86, w * 0.26, h * 0.58);
-    p.c(w * 0.19, h * 0.42, w * 0.37, h * 0.4, w * 0.38, h * 0.53);
-    p.m(w - 0.3, h - 0.4);
-    p.c(w * 0.75, h - 0.4, w * 0.89, h * 0.1, w * 0.55, h * 0.13);
-    p.c(w * 0.35, h * 0.17, w * 0.58, h * 0.72, w * 0.68, h * 0.49);
-    p.m(w * 0.5, h - 0.4); p.c(w * 0.62, h * 0.69, w * 0.49, h * 0.51, w * 0.5, h * 0.04);
-    leaf(p, w * 0.5, h * 0.53, -w * 0.15, -h * 0.4, Math.min(1.2, h * 0.04), true);
-    leaf(p, w * 0.5, h * 0.37, w * 0.12, -h * 0.34, Math.min(1, h * 0.03));
-    leaf(p, w * 0.72, h * 0.68, w * 0.14, -h * 0.37, Math.min(1.3, h * 0.035), true);
-    leaf(p, w * 0.16, h * 0.79, -w * 0.09, -h * 0.4, Math.min(1.1, h * 0.03));
-  }), mark(x, y, w, h, colours.thread, 0.2, p => {
-    p.m(0.3, h - 0.8); p.c(w * 0.31, h * 0.74, w * 0.29, h * 0.27, w * 0.5, h * 0.6);
-    p.c(w * 0.76, h * 0.97, w * 0.75, h * 0.43, w - 0.3, h - 0.8);
-  })];
+ * @param {Colours} colours @param {boolean} bottom @returns {PathMark[]} */
+function vault(x, y, w, h, colours, bottom) {
+  return [
+    mark(x, y, w, h, colours.thread, 0.6, p => {
+      p.m(0.4, 94); p.c(14, 94, 11, 18, 50, 9);
+      p.c(89, 18, 86, 94, 99.6, 94);
+    }),
+    mark(x, y, w, h, colours.light, 0.26, p => {
+      p.m(1, 98); p.c(18, 98, 16, 31, 50, 22);
+      p.c(84, 31, 82, 98, 99, 98);
+    }),
+  ].map(p => mirror(p, false, bottom));
 }
 
 /** @param {SheetSpec} spec @param {import('./types.js').Face} face
@@ -221,10 +169,8 @@ export function elvenFrame(spec, face, box, bands, ink) {
   const bandH = inset * 1.5;
   const top = box.top - bandH - bands.top;
   const bottom = box.top + box.height + bands.bottom;
-  const outerW = inset - 1;
-  const left = box.left - inset + 0.5;
-  const right = box.left + box.width + 0.5;
-  const cut = g.pageW / 2;
+  const outerW = inset - 1, cut = g.pageW / 2;
+  const left = box.left - inset + 0.5, right = box.left + box.width + 0.5;
   /** @type {PathMark[]} */ const out = [];
   /** @type {{x:number,w:number,start:number,end:number,column:number}[]} */ const rails = [];
   for (let c = 0; c <= g.columns; c++) {
@@ -232,70 +178,95 @@ export function elvenFrame(spec, face, box, bands, ink) {
     const x = c === 0 ? left : c === g.columns ? right : colX - box.columnGap + 0.5;
     const w = c === 0 || c === g.columns ? outerW : box.columnGap - 1;
     const outer = c === 0 || c === g.columns;
-    const start = outer || !bands.top ? top + bandH * 0.76 : box.top;
-    const end = outer || !bands.bottom ? bottom + bandH * 0.24 : box.top + box.height;
+    const start = outer || !bands.top ? top + bandH * 0.94 : box.top;
+    const end = outer || !bands.bottom ? bottom + bandH * 0.06 : box.top + box.height;
     const pieces = x < cut && x + w > cut
       ? [[x, cut - 0.65 - x], [cut + 0.65, x + w - cut - 0.65]] : [[x, w]];
     for (const [rx, rw] of pieces) {
       if (rw < 1) continue;
-      out.push(...vine(rx, start, rw, end - start, colours));
+      out.push(...rail(rx, start, rw, end - start, colours));
       rails.push({ x: rx, w: rw, start, end, column: c });
     }
   }
   const x0 = left + outerW / 2, x1 = right + outerW / 2;
-  for (const [a, b] of [[x0, Math.min(cut - 0.7, x1)], [Math.max(cut + 0.7, x0), x1]]) {
-    if (b - a < 6) continue;
-    const nodes = rails.map(r => r.x + r.w * 0.5 - a);
-    out.push(...canopy(a, top, b - a, bandH, nodes, colours, false));
-    out.push(...canopy(a, bottom, b - a, bandH, nodes, colours, true));
+  for (const r of rails.filter(r => r.column === 0 || r.column === g.columns)) {
+    const h = Math.min(42, (r.end - r.start) * 0.2);
+    out.push(...capital(r.x, r.start, r.w, h, colours, false));
+    out.push(...capital(r.x, r.end - h, r.w, h, colours, true));
+    for (let y = r.start + h + 30; y + 28 < r.end - h; y += 85) {
+      out.push(...sprig(r.x, y, r.w, 28, colours, r.column === g.columns));
+    }
   }
-  const crownW = Math.min(65, (x1 - x0) * 0.23);
-  for (const rightSide of [false, true]) for (const bottomSide of [false, true]) {
-    out.push(...cornerCrown(rightSide ? x1 - crownW : x0,
-      bottomSide ? bottom : top, crownW, bandH, colours, rightSide, bottomSide));
-    const sideW = Math.min(48, box.height * 0.22);
-    const side = cornerCrown(0, 0, sideW, outerW, colours, bottomSide, rightSide);
-    for (const p of side) out.push({ ...p,
-      x: rightSide ? right : left,
-      y: bottomSide ? bottom + bandH * 0.24 - sideW : top + bandH * 0.76,
-      w: p.h, h: p.w,
-      d: p.d.replace(/(-?\d+(?:\.\d+)?) (-?\d+(?:\.\d+)?)/g, '$2 $1'),
-    });
+  // Panels remain separate on either side of the physical card cut.
+  const nodes = [x0, ...rails.map(r => r.x + r.w / 2).filter(x => x > x0 && x < x1), x1];
+  for (let i = 1; i < nodes.length; i++) {
+    for (const [a, b] of [[nodes[i - 1], Math.min(nodes[i], cut - 0.7)],
+      [Math.max(nodes[i - 1], cut + 0.7), nodes[i]]]) {
+      const w = b - a;
+      if (w < 6) continue;
+      out.push(...vault(a, top, w, bandH, colours, false));
+      out.push(...vault(a, bottom, w, bandH, colours, true));
+      if (w > 35) {
+        const sw = Math.min(30, w * 0.28), sh = bandH * 0.8;
+        for (const lower of [false, true]) for (const rightSide of [false, true]) {
+          out.push(...sprig(rightSide ? b - sw : a, lower ? bottom + bandH - sh : top,
+            sw, sh, colours, rightSide, lower));
+        }
+      }
+    }
   }
+  // Capitals grow from section rules, wholly within the gutter.
+  for (const hit of face.hits.filter(h => !h.conceptId)) {
+    const c = Math.round((hit.x - box.left) / (box.colWidth + box.columnGap));
+    const r = rails.filter(r => r.column === c && r.x + r.w <= hit.x + 0.01).at(-1);
+    if (!r) continue;
+    const endY = hit.y + hit.h - 1;
+    const h = Math.min(15, endY - r.start);
+    if (r.w > 3 && h > 6) out.push(...sprig(r.x, endY - h, r.w, h, colours));
+    const x = r.x + r.w / 2, w = hit.x - x;
+    if (w > 0.5) out.push(mark(x, endY - 1.2, w, 1.4, colours.thread, 0.42, p => {
+      p.m(0.5, 10); p.q(25, 85, 99, 85);
+    }));
+  }
+  // Empty column feet become arched courts attached to the bottom frame.
   for (let c = 0; c < g.columns; c++) {
     const x = box.left + c * (box.colWidth + box.columnGap);
     const hits = face.hits.filter(hit => Math.abs(hit.x - x) < 0.1);
-    if (!hits.length || bands.bottom) continue;
+    if (!hits.length) continue;
+    const from = rails.filter(r => r.column === c).at(-1);
+    const to = rails.find(r => r.column === c + 1);
+    const start = from ? from.x + from.w / 2 : x;
+    const finish = to ? to.x + to.w / 2 : x + box.colWidth;
+    for (let i = 0; i < hits.length; i++) {
+      const hit = hits[i], next = hits[i + 1];
+      if (!hit.conceptId || (next?.conceptId && next.sectionId === hit.sectionId)) continue;
+      const y = hit.y + hit.h + 0.15;
+      const h = Math.min(1.7, (next?.y ?? box.top + box.height) - y - 0.15);
+      if (h < 0.5) continue;
+      for (const [a, b] of [[start, Math.min(finish, cut - 0.7)],
+        [Math.max(start, cut + 0.7), finish]]) {
+        if (b - a < 4) continue;
+        out.push(mark(a, y, b - a, h, colours.thread, 0.4, p => {
+          p.m(0.5, 12); p.q(1, 82, 7, 82); p.l(93, 82); p.q(99, 82, 99.5, 12);
+        }));
+      }
+    }
+    if (bands.bottom) continue;
     const end = Math.max(...hits.map(hit => hit.y + hit.h));
     const free = box.top + box.height - end - 3;
     if (free < 22) continue;
-    const rise = Math.min(36, free);
-    const h = rise + bandH * 0.24;
-    const y = box.top + box.height - rise;
-    const from = rails.find(r => r.column === c);
-    const to = rails.find(r => r.column === c + 1);
-    const start = from ? from.x + from.w * 0.5 : x;
-    const finish = to ? to.x + to.w * 0.5 : x + box.colWidth;
+    const h = Math.min(35, free), y = box.top + box.height - h;
     for (const [a, b] of [[start, Math.min(finish, cut - 0.7)],
       [Math.max(start, cut + 0.7), finish]]) {
-      if (b - a > 24) out.push(...lowerBranches(a, y, b - a, h, colours));
+      const w = b - a;
+      if (w < 30) continue;
+      out.push(...vault(a, y, w, h + bandH * 0.06, colours, false));
+      const sw = Math.min(32, w * 0.3), sh = Math.min(19, h * 0.65);
+      out.push(...sprig(a, y + h - sh, sw, sh, colours));
+      out.push(...sprig(b - sw, y + h - sh, sw, sh, colours, true));
+      const size = Math.min(8, h * 0.26);
+      out.push(star(a + w / 2 - size / 2, y + h * 0.5, size, colours));
     }
-  }
-  // Branch from the same stem into the existing row rules. The connector stops
-  // at the content edge; no decorative path enters a vocabulary hit box.
-  for (const hit of face.hits) {
-    const c = Math.round((hit.x - box.left) / (box.colWidth + box.columnGap));
-    const rail = rails.filter(r => r.column === c && r.x + r.w <= hit.x + 0.01).at(-1);
-    if (!rail) continue;
-    const endY = hit.y + hit.h - (hit.conceptId ? 0.2 : 1.3);
-    const localY = endY - rail.start;
-    const startX = rail.x + stemX(rail.w, localY);
-    if (hit.x - startX < 0.5 || localY < 2 || endY > rail.end) continue;
-    out.push(mark(startX, endY - 1.4, hit.x - startX, 1.7,
-      hit.conceptId ? colours.rule : colours.stem, hit.conceptId ? 0.18 : 0.28, p => {
-      const w = hit.x - startX;
-      p.m(0.1, 0.3); p.c(w * 0.4, 1.1, w * 0.7, 1.2, w - 0.1, 1.2);
-    }));
   }
   return out;
 }

@@ -73,7 +73,7 @@ export function faceToSvg(face, plan, opts) {
 
   for (const p of face.paths ?? []) {
     out.push(`<path class="ornament" d="${esc(p.d)}" transform="translate(${num(p.x)} ${num(p.y)})" `
-      + `fill="none" stroke="${esc(p.stroke)}" stroke-width="${num(p.strokeWidth)}" `
+      + `fill="${esc(p.fill ?? 'none')}" stroke="${esc(p.stroke)}" stroke-width="${num(p.strokeWidth)}" `
       + 'stroke-linecap="round"/>');
   }
 

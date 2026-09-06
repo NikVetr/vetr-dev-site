@@ -10,7 +10,7 @@ import {
 } from './app.js';
 import { buildSheet, stacksFor } from '../core/sheet.js';
 import { contentBox } from '../core/solve/index.js';
-import { elvenInset } from '../core/elven-frame.js';
+import { elvenInset, isElven } from '../core/elven-frame.js';
 import { proposeBalance } from '../core/solve/weights.js';
 import { foldCards, splitCards } from '../render/impose.js';
 import { faceSvgs, exportPdf, exportPng, exportSvg, loadIcons } from './export.js';
@@ -192,12 +192,12 @@ async function main() {
     // Yield so the busy state paints before the solver takes the main thread.
     await afterPaint();
 
-    manifest = await ensureFontCss(ctx, spec.target, spec.source, spec.typeface);
+    manifest = await ensureFontCss(ctx, spec.target, spec.source, spec.typeface, isElven(spec));
     built = await buildSheet(ctx, spec, edits);
     const { theme, targetRows, sourceRows } = built;
     blocks = built.blocks;
     plan = built.plan;
-    const stacks = stacksFor(ctx.corpus, spec.target, spec.source, spec.typeface);
+    const stacks = stacksFor(ctx.corpus, spec.target, spec.source, spec.typeface, isElven(spec));
     svgs = plan.faces.length ? faceSvgs({ plan, manifest, icons, stacks, name: 'x' }) : [];
     if (!svgs.length) focused = null;
     else if (focused === null && !gridByChoice) focused = 0;
@@ -582,7 +582,7 @@ async function main() {
       manifest,
       icons,
       name: finish.mode ? `${name()}-${finish.mode === 'fold' ? 'fold' : 'cards'}` : name(),
-      stacks: stacksFor(ctx.corpus, spec.target, spec.source, spec.typeface),
+      stacks: stacksFor(ctx.corpus, spec.target, spec.source, spec.typeface, isElven(spec)),
     };
   };
 

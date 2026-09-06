@@ -1,7 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { createSheetContext, buildSheet } from '../core/sheet.js';
+import { createSheetContext, buildSheet, stacksFor } from '../core/sheet.js';
+import { planToSvg } from '../render/svg.js';
+import { cssFaces } from '../render/fonts.js';
 import { referenceSpec } from '../scripts/spec.mjs';
 import { splitCards, foldCards, nUp } from '../render/impose.js';
 
@@ -54,6 +56,26 @@ test('Quenya low ink restores Classic layout; monochrome has no coloured ornamen
     (await buildSheet(ctx, low)).plan);
   const mono = await buildSheet(ctx, { ...styled, inkMode: 'mono' });
   assert(mono.plan.faces.flatMap(f => f.paths ?? []).every(p => p.stroke === mono.theme.colors.ink));
+  assert(mono.plan.faces.flatMap(f => f.paths ?? []).every(p => !p.fill || p.fill === mono.theme.colors.ink));
+});
+
+test('filled foliage and the measured serif headings reach the exported SVG', async () => {
+  const manifest = JSON.parse(await readFile('data/fonts/manifest.json', 'utf8'));
+  const icons = JSON.parse(await readFile('data/icons.json', 'utf8'));
+  const painted = ornate.faces.flatMap(f => f.paths ?? []).filter(p => p.fill);
+  assert(painted.length > 0, 'foliage must have real silhouettes');
+  assert(painted.every(p => p.d.includes('Z')), 'filled shapes must be closed');
+  const svgs = planToSvg(ornate, { faces: cssFaces(manifest), icons });
+  assert.equal(svgs.reduce((n, svg) => n + (svg.match(/class="ornament"[^>]+fill="(?!none)[^"]+"/g) ?? []).length, 0), painted.length);
+  const stacks = stacksFor(ctx.corpus, styled.target, styled.source, styled.typeface, true);
+  const headingRuns = ornate.faces.flatMap(f => f.runs).filter(r => r.fontId.startsWith('latin-serif-'));
+  assert(headingRuns.length > 0);
+  assert(headingRuns.every(r => r.italic));
+  assert(stacks.includes('latin-serif'), 'preview/export CSS must include the measured heading face');
+  for (const plan of [splitCards(ornate), foldCards(ornate), nUp(ornate, { paperW: 1200, paperH: 800 })]) {
+    assert.deepEqual(plan.faces.flatMap(f => f.paths ?? []).filter(p => p.fill).map(p => p.fill).sort(),
+      painted.map(p => p.fill).sort());
+  }
 });
 
 test('the complete frame survives card cuts, folding and n-up', () => {

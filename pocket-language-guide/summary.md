@@ -33,19 +33,22 @@ reservations. These compact motifs leave text positions, fitting and page counts
 uses classic rules; monochrome keeps the motifs in the ink colour.
 
 Quenya's Language-inspired and Elven botanical choices use `core/elven-frame.js`:
-a connected sage-and-gold framework of willow stems, interwoven arches, leafy
-corner scrolls and branching heading rules. Its geometry follows the page size,
+a connected framework of gold architectural arches, filled green foliage,
+blue lily capitals and eight-point stars. Closed leaf silhouettes have gold edges
+and midribs; the decoration concentrates at corners and section junctions, leaving
+the column shafts quiet. Navy serif italic headings use the same measured fonts
+in the browser and exports. Its geometry follows the page size,
 column gutters, printer limits and phone reservations. The solver reserves a
 perimeter and wider gutters before measuring text, preserving every selected entry
 and the existing type-size floors. Fitting may change; the default Quenya–English
 sheet uses four faces with the frame versus two in Classic. The control previews
 the complete frame and explains that tradeoff in each interface catalogue.
-Additional branches grow only into measured empty space beneath columns. All art
+Additional arched panels grow only into measured empty space beneath columns. All art
 is native vector geometry shared by preview and exports; no generated raster or
 generated language content is shipped. Frame-specific tests cover content retention,
 clearance, variable geometry, ink modes, imposition and browser exports.
 
-Optional `Face.paths` travel through the SVG and PDF renderers and cut/fold/n-up
+Optional `Face.paths`, including filled shapes, travel through the SVG and PDF renderers and cut/fold/n-up
 imposition, so PDF, SVG and PNG exports carry the same decoration without image
 downloads. `ui/ornament-control.js` provides the selector and motif sample.
 The ornament tests cover layout invariance, content clearance, ink modes,

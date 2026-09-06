@@ -10,6 +10,9 @@ test('Quenya grows a reserved frame, exports it and restores Classic exactly', a
   const before = await positions();
   await page.selectOption('#ornament-style', 'language');
   await expect(page.locator('.face.focused .ornament').first()).toBeAttached();
+  expect(await page.locator('.face.focused .ornament[fill]:not([fill="none"])').count()).toBeGreaterThan(20);
+  expect(await page.evaluate(() => [...document.fonts].some(f =>
+    f.family.replace(/"/g, '') === 'plg-latin-serif' && f.style === 'italic' && f.status === 'loaded'))).toBe(true);
   expect(await positions()).not.toEqual(before);
   await expect(page.locator('#ornament-hint')).toContainText('page count may change');
   expect(await page.locator('.ornament-sample path').count()).toBeGreaterThan(10);

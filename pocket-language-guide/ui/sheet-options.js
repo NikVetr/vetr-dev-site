@@ -8,6 +8,7 @@ import {
   pairFromQuery, readerLanguage, showFatal, afterPaint, withBusy,
 } from './app.js';
 import { buildSheet, stacksFor } from '../core/sheet.js';
+import { isElven } from '../core/elven-frame.js';
 import { defaultSelection } from '../core/pack.js';
 import { faceSvgs, exportPdf, exportPng, exportSvg, loadIcons } from './export.js';
 import {
@@ -286,7 +287,7 @@ async function main() {
     reserveField.hidden = !spec.geometry.screen;
     reserve.sync(spec.geometry);
     await afterPaint();
-    manifest = await ensureFontCss(ctx, spec.target, spec.source, spec.typeface);
+    manifest = await ensureFontCss(ctx, spec.target, spec.source, spec.typeface, isElven(spec));
     const built = await buildSheet(ctx, spec);
     plan = built.plan;
 
@@ -295,7 +296,7 @@ async function main() {
     if (plan.faces.length) {
       const svgs = faceSvgs({
         plan, manifest, icons, name: 'x',
-        stacks: stacksFor(ctx.corpus, spec.target, spec.source, spec.typeface),
+        stacks: stacksFor(ctx.corpus, spec.target, spec.source, spec.typeface, isElven(spec)),
       });
       for (const [i, svg] of svgs.entries()) {
         const holder = document.createElement('div');
@@ -337,7 +338,7 @@ async function main() {
     if (!plan) throw new Error('nothing solved yet');
     return {
       plan, manifest, icons, name,
-      stacks: stacksFor(ctx.corpus, spec.target, spec.source, spec.typeface),
+      stacks: stacksFor(ctx.corpus, spec.target, spec.source, spec.typeface, isElven(spec)),
     };
   };
 

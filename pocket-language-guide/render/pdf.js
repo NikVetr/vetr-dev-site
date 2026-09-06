@@ -175,6 +175,7 @@ export async function planToPdf(plan, opts) {
       page.drawSvgPath(p.d, {
         x: p.x, y: flip(p.y), borderColor: color(p.stroke),
         borderWidth: p.strokeWidth, borderLineCap: 1,
+        ...(p.fill ? { color: color(p.fill) } : {}),
       });
     }
 

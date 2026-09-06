@@ -144,7 +144,7 @@ function makeContext({ theme, spec, corpus, measurer, registry, colWidth, scale 
   // scaling bug above.
   const padding = (spec.padding ?? 0) * spacingRatio;
   const palette = makePalette(theme, spec.inkMode);
-  if (isElven(spec) && spec.inkMode === 'full') palette.shade = '#f1f4ef';
+  if (isElven(spec) && spec.inkMode === 'full') palette.shade = '#f7f4eb';
   const shown = new Set(spec.fieldSet);
 
   const typeface = spec.typeface ?? 'sans';
@@ -192,7 +192,8 @@ function makeContext({ theme, spec, corpus, measurer, registry, colWidth, scale 
     colorFor: (fs, role) => (fs.color === 'section' ? palette.roles[role] : palette[fs.color]),
     sourceStack: (() => {
       const resolved = resolveField('gloss', targetLang.script, sourceLang.script, corpus.scripts);
-      return { ...resolved, stack: registry.stackFor(resolved.stack, typeface) };
+      return { ...resolved, stack: registry.stackFor(resolved.stack, typeface),
+        headingStack: registry.stackFor(resolved.stack, isElven(spec) ? 'serif' : typeface) };
     })(),
     sourceFloor: Number(corpus.scripts[sourceLang.script].min_size_pt)
       + Number(spec.paper.minSizeDelta),
@@ -269,25 +270,26 @@ function headingAtom(ctx, block) {
   const level = block.level ?? 1;
   const h = ctx.theme.headings[String(level)];
   const s = ctx.scale;
-  const size = ctx.sizeAt(h.size, ctx.sourceFloor);
+  const elven = isElven(ctx.spec);
+  const size = ctx.sizeAt(h.size * (elven ? 1.2 : 1), ctx.sourceFloor);
+  const colours = elvenColours(ctx.spec, ctx.palette.ink);
   const style = {
-    stack: ctx.sourceStack.stack,
+    stack: ctx.sourceStack.headingStack,
     dir: ctx.sourceStack.dir,
     // A section title is read by the source-language reader, so it breaks the
     // way that language does -- see noteAtom for what hardcoding this cost.
     wordBreak: ctx.sourceBreak,
     size,
     leading: size * (h.leading / h.size),
-    weight: 700,
-    italic: false,
+    weight: elven ? 400 : 700,
+    italic: elven,
     slotAsRule: false,
   };
-  const elven = isElven(ctx.spec);
-  const color = elven ? elvenColours(ctx.spec, ctx.palette.ink).stem : ctx.palette.roles[block.colorRole];
-  const iconW = h.iconSize > 0 && block.icon ? h.iconSize * s + h.iconGap * s : 0;
+  const color = elven ? colours.thread : ctx.palette.roles[block.colorRole];
+  const iconW = !elven && h.iconSize > 0 && block.icon ? h.iconSize * s + h.iconGap * s : 0;
   const textTop = h.spaceBefore * ctx.spacingRatio + ctx.padding * 0.5;
   const painted = paintField(ctx, block.text ?? '', style, {
-    x: iconW, y: textTop, w: ctx.colWidth - iconW, align: 'start', fill: ctx.palette.ink,
+    x: iconW, y: textTop, w: ctx.colWidth - iconW, align: 'start', fill: elven ? colours.blue : ctx.palette.ink,
   });
   const ruleY = textTop + painted.height + h.gapBeforeRule * ctx.spacingRatio;
   const height = ruleY + h.rulePt + h.gapAfterRule * ctx.spacingRatio + ctx.padding * 0.5;
@@ -307,7 +309,7 @@ function headingAtom(ctx, block) {
   const flourish = !elven && motif && titleRoom >= 22 && flourishHeight >= 3
     ? ornamentRule(motif, titleEnd + 4, textTop + 0.5, titleRoom, flourishHeight, color) : null;
   const branches = elven ? elvenHeading(ctx.colWidth, textTop,
-    height - textTop - 0.2, titleEnd, color) : [];
+    height - textTop - 0.2, titleEnd, color, colours.stem) : [];
 
   /** @type {IconMark[]} */ const icons = [];
   if (iconW > 0 && block.icon) {

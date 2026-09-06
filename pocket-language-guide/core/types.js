@@ -262,7 +262,7 @@
  * @typedef {{x:number,y:number,size:number,name:string,fill:string}} IconMark */
 
 /** Decorative path in local point coordinates, with its full ink inside w × h.
- * @typedef {{x:number,y:number,w:number,h:number,d:string,stroke:string,strokeWidth:number}} PathMark */
+ * @typedef {{x:number,y:number,w:number,h:number,d:string,stroke:string,strokeWidth:number,fill?:string}} PathMark */
 
 /** @typedef {{x:number,y:number,w:number,h:number,conceptId?:string,sectionId?:string}} HitBox */
 
