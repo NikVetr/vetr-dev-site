@@ -3343,30 +3343,32 @@ test("fitted percentile labels retain compact line spacing at common browser zoo
         document.body.style.zoom = String(value);
         window.dispatchEvent(new Event("resize"));
       }, zoom);
-      await page.waitForTimeout(250);
-      const spacing = await page.locator(".curve-quantile-mark").evaluateAll((marks) => marks.map((mark) => {
-        const percentile = mark.querySelector(".percentile");
-        const amount = mark.querySelector(".amount");
-        const percentileBox = percentile.getBBox();
-        const amountBox = amount.getBBox();
-        const matrix = mark.getScreenCTM();
-        const scale = Math.hypot(matrix.c, matrix.d);
-        return {
-          actual: (percentileBox.y + percentileBox.height - amountBox.y) * scale,
-          target: Number(mark.dataset.lineInsetPx),
-          separation: Number(mark.dataset.lineSeparationPx),
-          renderedLineHeight: Math.min(percentileBox.height, amountBox.height) * scale,
-          transform: mark.getAttribute("transform"),
-        };
-      }));
-      expect(spacing.length).toBeGreaterThan(1);
-      spacing.forEach((label) => {
-        expect(label.actual).toBeGreaterThanOrEqual(0.5);
-        expect(label.actual).toBeLessThanOrEqual(3.25);
-        expect(Math.abs(label.actual - label.target)).toBeLessThanOrEqual(0.35);
-        expect(Math.abs(label.separation - label.renderedLineHeight * 0.25)).toBeLessThanOrEqual(0.35);
-        expect(label.transform).toMatch(/translate\(.+\) rotate\(-?\d/);
-      });
+      // Wait for resize rendering, and query/measure atomically so replaced nodes cannot be measured.
+      await expect(async () => {
+        const spacing = await page.evaluate(() => [...document.querySelectorAll(".curve-quantile-mark")].map((mark) => {
+          const percentile = mark.querySelector(".percentile");
+          const amount = mark.querySelector(".amount");
+          const percentileBox = percentile.getBBox();
+          const amountBox = amount.getBBox();
+          const matrix = mark.getScreenCTM();
+          const scale = Math.hypot(matrix.c, matrix.d);
+          return {
+            actual: (percentileBox.y + percentileBox.height - amountBox.y) * scale,
+            target: Number(mark.dataset.lineInsetPx),
+            separation: Number(mark.dataset.lineSeparationPx),
+            renderedLineHeight: Math.min(percentileBox.height, amountBox.height) * scale,
+            transform: mark.getAttribute("transform"),
+          };
+        }));
+        expect(spacing.length).toBeGreaterThan(1);
+        spacing.forEach((label) => {
+          expect(label.actual).toBeGreaterThanOrEqual(0.5);
+          expect(label.actual).toBeLessThanOrEqual(3.25);
+          expect(Math.abs(label.actual - label.target)).toBeLessThanOrEqual(0.35);
+          expect(Math.abs(label.separation - label.renderedLineHeight * 0.25)).toBeLessThanOrEqual(0.35);
+          expect(label.transform).toMatch(/translate\(.+\) rotate\(-?\d/);
+        });
+      }).toPass({ timeout: 10000 });
       if (distribution === "gamma" && zoom === 1.5) {
         await page.locator(".chart-panel").screenshot({ path: "tmp/app-gamma-quantiles-zoom-150.png" });
       }
