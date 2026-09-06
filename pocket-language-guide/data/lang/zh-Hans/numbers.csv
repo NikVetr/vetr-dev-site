@@ -84,3 +84,5 @@ numbers-money.shekel,谢克尔,,xièkè'ěr,ɕjɛ˥˩kʰɤ˥˩ɑɻ˧˩˧,,2,shek
 numbers-money.shekel-symbol,谢克尔符号,,xièkè'ěr fúhào,ɕjɛ˥˩kʰɤ˥˩ɑɻ˧˩˧ fu˧˥xɑʊ˥˩,,2,shekel-gloss-v1;cldr;roman=generated;ipa=pinyin
 numbers-money.rial,里亚尔,,lǐyà'ěr,li˧˩˧ja˥˩ɑɻ˧˩˧,,2,rial-toman-gloss-v1;cldr;ipa=pinyin
 numbers-money.toman,十里亚尔,,shí lǐyà'ěr,ʂɨ˧˥ li˧˩˧ja˥˩ɑɻ˧˩˧,,2,rial-toman-gloss-v1;cldr;ipa=pinyin
+numbers-money.zloty,兹罗提,,,,,2,gloss-only;scoped-away;name of the currency in this language
+numbers-money.zloty-symbol,兹罗提符号,,,,,2,gloss-only;scoped-away;name of the currency in this language

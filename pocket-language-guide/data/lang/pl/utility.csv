@@ -1,0 +1,16 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,Chcę pojechać w to miejsce: {},,xtsˈɛ pɔjˈɛxatɕ f tɔ mʲˈɛjstsɛ {},,2,pl-agent-v1;ipa=espeak
+utility-templates.please-give-me,Proszę mi to dać: {},,prˈɔʃɛ mi tɔ dˈatɕ {},,2,pl-agent-v1;ipa=espeak
+utility-templates.may-i,Czy mogę {}?,,tʃɨ mˈɔɡɛ {},"the blank takes a Polish infinitive, which needs no case",2,pl-agent-v1;ipa=espeak
+utility-templates.please-do-not-add,Proszę tego nie dodawać: {},,prˈɔʃɛ tˌɛɡɔ ɲɛ dɔdˈavatɕ {},,2,pl-agent-v1;ipa=espeak
+utility-templates.do-you-have,Czy jest {}?,,tʃɨ jˈɛst {},,2,pl-agent-v1;ipa=espeak
+utility-templates.please-write-the-number,Proszę napisać liczbę,,prˈɔʃɛ napˈisatɕ lˈidʒbɛ,,2,pl-agent-v1;ipa=espeak
+utility-templates.i-need,Potrzebuję tego: {},,pˌɔtʃɛbˈujɛ tˈɛɡɔ {},,2,pl-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,Czy jest tu gdzieś {}?,,tʃɨ jɛst tˈu ɡdʑˈɛɕ {},,2,pl-agent-v1;ipa=espeak
+utility-templates.how-much-is,Ile kosztuje {}?,,ˈilɛ kɔʃtˈujɛ {},,2,pl-agent-v1;ipa=espeak
+utility-templates.is-this,Czy to {}?,,tʃɨ tɔ {},,2,pl-agent-v1;ipa=espeak
+utility-templates.please,"{}, proszę",,"{}, prˈɔʃɛ",,2,pl-agent-v1;ipa=espeak
+utility-templates.i-am-looking-for,Szukam tego: {},,ʃˈukam tˈɛɡɔ {},,2,pl-agent-v1;ipa=espeak
+utility-templates.do-you-accept,Czy można tym zapłacić: {},,tʃɨ mˈɔʒna tɨm zapwˈatɕitɕ {},can one pay with this: {},2,pl-agent-v1;ipa=espeak
+utility-templates.i-cannot-find,Nie mogę tego znaleźć: {},,ɲɛ mˈɔɡɛ tˌɛɡɔ znˈalɛɕtɕ {},,2,pl-agent-v1;ipa=espeak
+utility-templates.there-is-a-problem-with,Mam problem z tym: {},,mˈam prˈɔblɛm s tˈɨm {},,2,pl-agent-v1;ipa=espeak

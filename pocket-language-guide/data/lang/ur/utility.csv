@@ -1,0 +1,16 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,مجھے {} جانا ہے,,mujhe {} jānā hai,mˌʊɟʰeː {} ɟˈaːnaː hɛ,,2,ur-agent-v1;ipa=espeak
+utility-templates.please-give-me,مجھے {} دیجیے,,mujhe {} dījiye,mˌʊɟʰeː {} diɟˈiːeː,,2,ur-agent-v1;ipa=espeak
+utility-templates.may-i,کیا میں {} سکتا ہوں؟,,kyā maiñ {} saktā hūñ?,kjˈaː mˈẽ {} sˈʌktˌaː hũː,سکتی ہوں if the speaker is a woman; the slot takes a verb stem,2,ur-agent-v1;ipa=espeak
+utility-templates.please-do-not-add,{} نہ ڈالیے,,{} na ḍāliye,{} nˈa ɖˈaːljeː,,2,ur-agent-v1;ipa=espeak
+utility-templates.do-you-have,کیا {} ہے؟,,kyā {} hai?,kjˈaː {} hɛ,,2,ur-agent-v1;ipa=espeak
+utility-templates.please-write-the-number,نمبر لکھ دیجیے,,nambar likh dījiye,nˈʌmbəɾ lˈɪkʰ diɟˈiːeː,,2,ur-agent-v1;ipa=espeak
+utility-templates.i-need,مجھے {} چاہیے,,mujhe {} chāhiye,mˌʊɟʰeː {} cˈaːhjeː,,2,ur-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,کیا یہاں پاس میں {} ہے؟,کیا قریب ہی {} ہے؟,kyā yahāñ pās meñ {} hai?,kjˈaː jˈʌhãː pˈaːs mˈẽ {} hɛ,,2,ur-agent-v1;ipa=espeak
+utility-templates.how-much-is,{} کتنے کا ہے؟,,{} kitne kā hai?,{} kˈɪtneː kaː hɛ,,2,ur-agent-v1;ipa=espeak
+utility-templates.is-this,کیا یہ {} ہے؟,,kyā yah {} hai?,kjˈaː jeːh {} hɛ,,2,ur-agent-v1;ipa=espeak
+utility-templates.please,{} دیجیے,,{} dījiye,{} diɟˈiːeː,the shortest polite request frame in Urdu: point at a word and add دیجیے,2,ur-agent-v1;ipa=espeak
+utility-templates.i-am-looking-for,مجھے {} کی تلاش ہے,میں {} ڈھونڈ رہا ہوں,mujhe {} kī talāsh hai,mˌʊɟʰeː {} ki təlˈaːʃ hɛ,,2,ur-agent-v1;ipa=espeak
+utility-templates.do-you-accept,کیا {} چلے گا؟,,kyā {} chale gā?,kjˈaː {} cˈʌleː ɡaː,,2,ur-agent-v1;ipa=espeak
+utility-templates.i-cannot-find,مجھے {} نہیں مل رہا,,mujhe {} nahīñ mil rahā,mˌʊɟʰeː {} nahˈĩː mˈɪl ɾˈʌhaː,رہی if the thing sought is feminine,2,ur-agent-v1;ipa=espeak
+utility-templates.there-is-a-problem-with,{} میں مسئلہ ہے,{} میں کوئی خرابی ہے,{} meñ mas’ala hai,{} mˈẽ mˈʌsəla hɛ,,2,ur-agent-v1;ipa=espeak

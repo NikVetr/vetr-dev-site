@@ -1,0 +1,15 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+slang.thats-good,বেশ,ভালো,beśa,bˈeʃ,"nice, fine",2,bn-agent-v1;ipa=espeak
+slang.thats-great,দারুণ!,,dāruṇa!,dˈaɾun,splendid!,2,bn-agent-v1;ipa=espeak
+slang.i-love-it,দারুণ লেগেছে,,dāruṇa legeche,dˈaɾun lˈeɡetʃʰˌe,it felt splendid -- Bengali says liking impersonally,2,bn-agent-v1;ipa=espeak
+slang.thats-bad,ভালো না,,bhālo nā,bʰˈalo nˈa,not good,2,bn-agent-v1;ipa=espeak
+slang.delicious,খেতে দারুণ!,,khete dāruṇa!,kʰˈete dˈaɾun,splendid to eat!,2,bn-agent-v1;ipa=espeak
+slang.thats-pricey,দাম বেশি,,dāma beśi,dˈam bˈeʃi,the price is too much,2,bn-agent-v1;ipa=espeak
+slang.exactly,একদম ঠিক,,ekadama ṭhika,ˈekɔdˌɔm ʈʰˈik,completely right,2,bn-agent-v1;ipa=espeak
+slang.no-worries,সমস্যা নেই,কোনো ব্যাপার না,samasyā nei,ʃˈɔmɔssˌa nˈei,there is no problem,2,bn-agent-v1;ipa=espeak
+slang.youre-welcome,"আরে, কিছু না",,"āre, kichu nā","ˈaɾe, kˈitʃʰu nˈa","oh, it's nothing -- the casual reply to thanks. Bengali has no set formula for 'you're welcome'; স্বাগতম is a welcome to a place",2,bn-agent-v1;ipa=espeak
+slang.seriously,সত্যি?,তাই নাকি!,satyi?,ʃˈotːi,really?,2,bn-agent-v1;ipa=espeak
+slang.im-good-thanks,লাগবে না,"না, ঠিক আছে",lāgabe nā,lˈaɡɔbˌe nˈa,it won't be needed,2,bn-agent-v1;ipa=espeak
+slang.lets-go,চলো!,চলুন!,calo!,tʃˈɔlo,the second is the polite form,2,bn-agent-v1;ipa=espeak
+slang.cheers,চিয়ার্স!,,ciẏārsa!,tʃˈiarʃˌɔ,the English loan; Bengali has no native toast,2,bn-agent-v1;ipa=espeak
+slang.see-you,"আচ্ছা, চলি",আবার দেখা হবে,"ācchā, cali","ˈatʃtʃʰa, tʃˈoli","all right, I'm off",2,bn-agent-v1;ipa=espeak

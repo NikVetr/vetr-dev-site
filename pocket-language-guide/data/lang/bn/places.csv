@@ -1,0 +1,8 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,টিকিট কোথায় পাওয়া যাবে?,,ṭikiṭa kothāẏa pāoẏā yābe?,ʈˈikiʈ kˈotʰaj pˈaoˌa dʒˈabe,where will tickets be available?,2,bn-agent-v1;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,আগে বুকিং করতে হবে কি?,,āge bukiṁ karate habe ki?,ˈaɡe bˈukiŋ kˈɔɾɔtˌe hˈɔbe ki,must one book in advance?,2,bn-agent-v1;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,ঢোকার শেষ সময় কখন?,,ḍhokāra śeṣa samaẏa kakhana?,ɖʰˈokaɾ ʃˈeʃ ʃˈɔmɔj kˌɔkʰɔn,,2,bn-agent-v1;ipa=espeak
+attractions-tickets.are-there-lockers,লকার আছে কি?,,lakāra āche ki?,lˈɔkaɾ ˈatʃʰe ki,,2,bn-agent-v1;ipa=espeak
+attractions-tickets.may-i-take-photos,ছবি তোলা যাবে কি?,,chabi tolā yābe ki?,tʃʰˈobi tˈola dʒˈabe ki,is photographing allowed?,2,bn-agent-v1;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,দয়া করে আমাদের একটা ছবি তুলে দিন,,daẏā kare āmādera ekaṭā chabi tule dina,dˈɔa kˈɔɾe ˌamadˌeɾ ˈækʈa tʃʰˈobi tˈule dˈin,,2,bn-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,আমাদের একটা ছবি তুলে দেবেন?,,āmādera ekaṭā chabi tule debena?,ˌamadˌeɾ ˈækʈa tʃʰˈobi tˈule dˈeben,,2,bn-agent-v1;ipa=espeak

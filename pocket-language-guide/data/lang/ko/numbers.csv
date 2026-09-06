@@ -84,3 +84,5 @@ numbers-money.shekel,세켈,,sekel,sekʰel,,2,shekel-gloss-v1;cldr;roman=generat
 numbers-money.shekel-symbol,세켈 기호,,sekel giho,sekʰel kiho,,2,shekel-gloss-v1;cldr;roman=generated;ipa=rr
 numbers-money.rial,리얄,,riyal,ɾijal,,2,rial-toman-gloss-v1;cldr;ipa=rr
 numbers-money.toman,십 리얄,,sip riyal,sip ɾijal,,2,rial-toman-gloss-v1;cldr;ipa=rr
+numbers-money.zloty,즈워티,,,,,2,gloss-only;scoped-away;name of the currency in this language
+numbers-money.zloty-symbol,즈워티 기호,,,,,2,gloss-only;scoped-away;name of the currency in this language

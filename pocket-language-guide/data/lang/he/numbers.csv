@@ -84,3 +84,5 @@ numbers-money.number-and-classifier-notes,"מספרים בסינית נבנים 
 numbers-money.number-and-classifier-notes-2,"מספרים ביפנית נבנים מהחלקים: אחת עשרה היא juuichi, עשרים היא nijuu ועשרים ואחת nijuuichi. אחרי המספר באה סופית מנייה שנקבעת לפי צורת הדבר ואינה נשמטת: -tsu לדברים בכלל, -mai לדברים שטוחים, -hon לדברים ארוכים, -nin לאנשים, -hai לכוסות. בטלפון אומרים zero או maru לאפס, yon לארבע, nana לשבע, kyuu לתשע, ואת המקף קוראים no. תנועה ארוכה נכתבת כאן בכפל אות: juu, kyuu.",,,,,2,he-notes-v1
 numbers-money.rial,ריאל,,riyal,ʁijˈal,,2,rial-toman-gloss-v1;cldr;ipa=bgn
 numbers-money.toman,עשרה ריאל,,‘asara riyal,asaʁˈa ʁijˈal,,2,rial-toman-gloss-v1;cldr;ipa=bgn
+numbers-money.zloty,זלוטי,,,,,2,gloss-only;scoped-away;name of the currency in this language
+numbers-money.zloty-symbol,זלוטי (סמל),,,,,2,gloss-only;scoped-away;name of the currency in this language

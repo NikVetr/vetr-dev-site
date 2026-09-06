@@ -84,3 +84,5 @@ numbers-money.shekel,siclo,,sˈiklo,,2,shekel-gloss-v1;cldr;ipa=espeak
 numbers-money.shekel-symbol,siclo (simbolo),,sˈiklo sˈimbolo,,2,shekel-gloss-v1;cldr;ipa=espeak
 numbers-money.rial,rial,,riˈal,,2,rial-toman-gloss-v1;cldr;ipa=espeak
 numbers-money.toman,10 rial,,djˈɛtʃɪ riˈal,,2,rial-toman-gloss-v1;cldr;ipa=espeak
+numbers-money.zloty,zloty,,tslˈotɪ,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.zloty-symbol,zloty (simbolo),,tslˈotɪ sˈimbolo,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak

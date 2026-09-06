@@ -1,0 +1,11 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+profanity.oh-my-god,O Boże!,,ɔ bˈɔʒɛ,"O God -- shock, and not profanity",2,pl-agent-v1;ipa=espeak
+profanity.damn,Cholera!,,xɔlˈɛra,"cholera -- a disease curse, mild",2,pl-agent-v1;ipa=espeak
+profanity.expletive,Kurde!,,kˈurdɛ,coarse but everyday; a minced form of the strong word,2,pl-agent-v1;ipa=espeak
+profanity.strong-expletive,Kurwa!,,kˈurva,"very strong; said at nothing, never at a person",2,pl-agent-v1;ipa=espeak
+profanity.intensifier,pierdolony,,pʲˌɛrdɔlˈɔnɨ,before a noun: damn -; coarse. zajebisty is the approving one,2,pl-agent-v1;ipa=espeak
+profanity.frustration,To jest do dupy,,tɔ jɛzd dɔ dˈupɨ,this is arse-ward -- rubbish; coarse,2,pl-agent-v1;ipa=espeak
+profanity.thats-rude,Tak się nie mówi,,tˈak ɕɛ ɲɛ mˈuvi,one does not say that,2,pl-agent-v1;ipa=espeak
+profanity.excuse-my-language,Przepraszam za słownictwo,,pʃɛprˈaʃam za swɔvɲˈitstfɔ,sorry for the vocabulary,2,pl-agent-v1;ipa=espeak
+profanity.strength-warning,"Te słowa są tu do rozpoznania, nie do użycia: siła nie przechodzi przez tłumaczenie. Słowo, które wygląda tu na łagodne przeklęcie, w języku obok może być niewymawialne, a najmocniejsze słowo danego języka to często właśnie to, którego ta sekcja nie mogła umieścić.",,,,2,pl-notes-v1
+profanity.japanese-register,"Japoński robi to prawie wyłącznie gramatyką, nie słownictwem. Pogardę niesie forma: szorstki zaimek drugiej osoby, goły tryb rozkazujący, ucięte końcówki czasownika. Złość siedzi w końcówce, a nie w słowie, które da się sprawdzić w słowniku, i wiersze powyżej to niemal cały istniejący zasób.",,,,2,pl-notes-v1

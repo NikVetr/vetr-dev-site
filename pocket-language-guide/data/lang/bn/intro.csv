@@ -1,0 +1,13 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+introductions.my-name-is,আমার নাম {},,āmāra nāma {},ˌamaɾ nˈam {},,2,bn-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,আপনার সাথে পরিচিত হয়ে ভালো লাগল,আপনার সঙ্গে পরিচিত হয়ে ভালো লাগল,āpanāra sāthe paricita haẏe bhālo lāgala,ˌapɔnˌaɾ ʃˈatʰe pˈoɾitʃˌito hˈɔe bʰˈalo lˈaɡɔl,glad to have become acquainted with you,2,bn-agent-v1;ipa=espeak
+introductions.what-is-your-name,আপনার নাম কী?,,āpanāra nāma kī?,ˌapɔnˌaɾ nˈam kˈi,,2,bn-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,আমরা একসাথে ভ্রমণ করছি,,āmarā ekasāthe bhramaṇa karachi,ˌamɔɾˌa ˈekɔʃˌatʰe bʰɾˈomɔn koɾcʰˈi,,2,bn-agent-v1;ipa=espeak
+introductions.this-is-my-friend,ইনি আমার বন্ধু,,ini āmāra bandhu,ˌini ˌamaɾ bˈondʰu,ইনি is the honorific 'this person',2,bn-agent-v1;ipa=espeak
+introductions.i-am-from,আমি {} থেকে এসেছি,,āmi {} theke esechi,ˌami {} tʰˈeke ˈeʃetʃʰˌi,I have come from {},2,bn-agent-v1;ipa=espeak
+introductions.where-are-you-from,আপনি কোথা থেকে এসেছেন?,,āpani kothā theke esechena?,ˌapɔnˌi kˈotʰa tʰˈeke ˈeʃetʃʰˌen,,2,bn-agent-v1;ipa=espeak
+introductions.how-are-you,আপনি কেমন আছেন?,,āpani kemana āchena?,ˌapɔnˌi kˈemɔn ˈatʃʰen,,2,bn-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,আমি একজন পর্যটক,আমি ট্যুরিস্ট,āmi ekajana paryaṭaka,ˌami ækɟˈɔn pˈɔɾæʈˌɔk,"the second is the English loan, and commoner in speech",2,bn-agent-v1;ipa=espeak
+introductions.this-is-my-husband-wife,ইনি আমার স্বামী / স্ত্রী,,ini āmāra sbāmī / strī,ˌini ˌamaɾ ʃˈami / stɾˈi,my husband / my wife,2,bn-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,এ আমার মেয়ে / ছেলে,,e āmāra meẏe / chele,e ˌamaɾ mˈee / tʃʰˈele,"my daughter / my son; এ rather than ইনি, which is honorific",2,bn-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,আমি একা ভ্রমণ করছি,,āmi ekā bhramaṇa karachi,ˌami ˈeka bʰɾˈomɔn koɾcʰˈi,,2,bn-agent-v1;ipa=espeak

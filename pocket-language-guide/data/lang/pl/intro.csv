@@ -1,0 +1,13 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+introductions.my-name-is,Nazywam się {},,nazˈɨvam ɕɛ {},,2,pl-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,Miło mi,,mˈiwɔ mi,,2,pl-agent-v1;ipa=espeak
+introductions.what-is-your-name,Jak się pan nazywa?,Jak się pani nazywa?,jˈak ɕɛ pˈan nazˈɨva,"to a man; to a woman, Jak się pani nazywa",2,pl-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,Podróżujemy razem,,pˌɔdruʒujˈɛmɨ rˈazɛm,,2,pl-agent-v1;ipa=espeak
+introductions.this-is-my-friend,To mój znajomy,To moja znajoma,tɔ mˈuj znajˈɔmɨ,a male friend; a female friend is moja znajoma,2,pl-agent-v1;ipa=espeak
+introductions.i-am-from,Jestem z tego kraju: {},,jˌɛstɛm s tˌɛɡɔ krˈaju {},I am from this country: {},2,pl-agent-v1;ipa=espeak
+introductions.where-are-you-from,Z jakiego kraju?,,z jakʲˈɛɡɔ krˈaju,from which country?,2,pl-agent-v1;ipa=espeak
+introductions.how-are-you,Wszystko dobrze?,,fʃˈɨstkɔ dˈɔbʒɛ,everything all right?,2,pl-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,Jestem turystą,Jestem turystką,jˌɛstɛm turˈɨstɔ̃,masculine; a woman says turystką,2,pl-agent-v1;ipa=espeak
+introductions.this-is-my-husband-wife,To mój mąż / moja żona,,tɔ mˈuj mˈɔ̃ʃ / mˈɔja ʒˈɔna,,2,pl-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,To moja córka / mój syn,,tɔ mˈɔja tsˈurka / mˈuj sˈɨn,,2,pl-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,Podróżuję sam,Podróżuję sama,pˌɔdruʒˈujɛ sˈam,masculine; a woman says sama,2,pl-agent-v1;ipa=espeak

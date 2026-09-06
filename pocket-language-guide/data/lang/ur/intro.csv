@@ -1,0 +1,13 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+introductions.my-name-is,میرا نام {} ہے,,merā nām {} hai,mˈeːɾaː nˈaːm {} hɛ,,2,ur-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,آپ سے مل کر خوشی ہوئی,,āp se mil kar khushī hu’ī,ˌaːp seː mˈɪl kaɾ xˈʊʃi hˈuːi,,2,ur-agent-v1;ipa=espeak
+introductions.what-is-your-name,آپ کا نام کیا ہے؟,آپ کا اسمِ گرامی؟,āp kā nām kyā hai?,ˌaːp kaː nˈaːm kjˈaː hɛ,the alternative is the formal courtesy form,2,ur-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,ہم ساتھ سفر کر رہے ہیں,,ham sāth safar kar rahe haiñ,ham sˈaːtʰ safˈaɾ kaɾ ɾˈʌheː hẽ,,2,ur-agent-v1;ipa=espeak
+introductions.this-is-my-friend,یہ میرے دوست ہیں,,yah mere dost haiñ,jeːh mˈeːɾeː dˈoːst hẽ,plural agreement is the polite form for one person,2,ur-agent-v1;ipa=espeak
+introductions.i-am-from,میں {} سے ہوں,,maiñ {} se hūñ,mˈẽ {} seː hũː,,2,ur-agent-v1;ipa=espeak
+introductions.where-are-you-from,آپ کہاں سے ہیں؟,,āp kahāñ se haiñ?,ˌaːp kˈʌhãː seː hẽ,,2,ur-agent-v1;ipa=espeak
+introductions.how-are-you,آپ کیسے ہیں؟,کیا حال ہے؟,āp kaise haiñ?,ˌaːp kˈeːseː hẽ,the alternative is the everyday form,2,ur-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,میں سیاح ہوں,,maiñ sayyāh hūñ,mˈẽ sjˈaːh hũː,,2,ur-agent-v1;ipa=espeak
+introductions.this-is-my-husband-wife,میرے شوہر / میری بیوی,,mere shauhar / merī bīwī,mˈeːɾeː ʃoːhˈaɾ / mˈeːɾi bˈiːʋi,,2,ur-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,میری بیٹی / میرا بیٹا,,merī beṭī / merā beṭā,mˈeːɾi bˈeːʈi / mˈeːɾaː bˈeːʈaː,,2,ur-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,میں اکیلا سفر کر رہا ہوں,,maiñ akelā safar kar rahā hūñ,mˈẽ akˈeːlaː safˈaɾ kaɾ ɾˈʌhaː hũː,masculine speaker; a woman says اکیلی … رہی,2,ur-agent-v1;ipa=espeak

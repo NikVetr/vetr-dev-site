@@ -84,3 +84,5 @@ numbers-money.shekel,เชเกล,,,tɕʰeː˧ keː˧lɔː˧,,2,shekel-gloss-
 numbers-money.shekel-symbol,สัญลักษณ์เชเกล,,,san˩˩˦˥lak˦˥ tɕʰeː˧ keː˧lɔː˧,,2,shekel-gloss-v1;cldr;ipa=thaig2p
 numbers-money.rial,เรียล,,rian,ria̯ŋ˧,,2,rial-toman-gloss-v1;cldr;ipa=thaig2p
 numbers-money.toman,10 เรียล,,10 rian,ria̯ŋ˧,,2,rial-toman-gloss-v1;cldr;ipa=thaig2p
+numbers-money.zloty,ซวอตี,,,sɔː˧ tiː˧,,2,gloss-only;scoped-away;name of the currency in this language;ipa=thaig2p
+numbers-money.zloty-symbol,สัญลักษณ์ซวอตี,,,san˩˩˦˥lak˦˥ sɔː˧ tiː˧,,2,gloss-only;scoped-away;name of the currency in this language;ipa=thaig2p

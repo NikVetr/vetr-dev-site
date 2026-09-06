@@ -1,0 +1,10 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+profanity.oh-my-god,یا اللہ!,ہائے اللہ!,yā allāh!,jˈaː ˈallaːh,,2,ur-agent-v1;ipa=espeak
+profanity.damn,لعنت!,,lānat!,lˈaːnət,"damnation -- at a situation, never at a person",2,ur-agent-v1;ipa=espeak
+profanity.expletive,دھت تیرے کی!,,dhat tere kī!,dʰˈʌt tˈeːɾeː ki,an exclamation of disgust at a situation; the coarser Urdu options are all aimed at a person,2,ur-agent-v1;ipa=espeak
+profanity.intensifier,کم بخت,,kambakht,kˈʌm bˈʌxt,"luckless -- attributive emphasis, not an insult",2,ur-agent-v1;ipa=espeak
+profanity.frustration,یہ بکواس ہے,,yah bakwās hai,jeːh bəkʋˈaːs hɛ,,2,ur-agent-v1;ipa=espeak
+profanity.thats-rude,یہ بد تمیزی ہے,,yah badtamīzī hai,jeːh bˈʌd təmˈiːzi hɛ,,2,ur-agent-v1;ipa=espeak
+profanity.excuse-my-language,بد زبانی کے لیے معاف کیجیے,,bad-zabānī ke liye māf kījiye,bˈʌd zəbˈaːni keː lˈiːeː mˈaːf kˈeːɟjeː,,2,ur-agent-v1;ipa=espeak
+profanity.strength-warning,یہ سطریں پہچاننے کے لیے ہیں، بولنے کے لیے نہیں: گالی کا زور ترجمے میں نہیں بچتا۔ جو لفظ اِس کارڈ پر ہلکا لگتا ہے، وہ ساتھ والی زبان میں ناقابلِ زبان ہو سکتا ہے، اور کسی زبان کا سب سے بھاری لفظ اکثر وہی ہوتا ہے جو اِس حصے کو چھوڑنا پڑا۔,,,,,2,ur-agent-v1
+profanity.japanese-register,جاپانی یہ کام لفظوں سے تقریباً نہیں کرتی۔ حقارت وہاں گرامر سے آتی ہے: دوسرے شخص کا رُوکھا ضمیر، سادہ امر اور فعل کے کٹے ہوئے انجام۔ غصہ فعل کے آخر میں ہوتا ہے، کسی ایسے لفظ میں نہیں جو لغت میں ڈھونڈا جا سکے، اور اوپر کی سطریں ہی تقریباً پورا ذخیرہ ہیں۔,,,,,2,ur-agent-v1

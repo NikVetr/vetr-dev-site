@@ -363,7 +363,12 @@ DATA = ROOT / "data"
 # and `fr`/`pt` without a region raise "not supported".
 VOICES = {"en": "en-us", "es": "es-419", "fr": "fr-fr", "de": "de", "pt": "pt-br",
           "it": "it", "id": "id", "sw": "sw", "tr": "tr", "ru": "ru", "hi": "hi",
-          "ar": "ar", "vi": "vi", "el": "el", "hu": "hu", "fa": "fa"}
+          "ar": "ar", "vi": "vi", "el": "el", "hu": "hu", "fa": "fa", "ur": "ur",
+          # `bn` and not a regional variant: espeak-ng ships one Bengali voice. The
+          # two standards it would otherwise have to choose between differ
+          # lexically -- পানি against জল -- rather than phonologically, and the pack
+          # carries that in `text_alt`, where a voice could not.
+          "bn": "bn", "pl": "pl"}
 
 # Phonemised one word at a time rather than a phrase at a time, which every other
 # espeak language is.
@@ -440,7 +445,13 @@ STRESS = {"fr": "phrase", "ko": "none", "vi": "none", "ja": "none",
 # in here because their `text` is pIqaD and tengwar; the gate finds nothing to
 # refuse in either -- neither pack quotes a Latin loanword -- and they are named
 # anyway so that the next row that does quote one is asked the same question.
-NON_LATIN = {"zh-Hans", "ja", "ko", "th", "hi", "ar", "ru", "el", "tlh", "qya", "he", "fa"}
+NON_LATIN = {"zh-Hans", "ja", "ko", "th", "hi", "ar", "ru", "el", "tlh", "qya", "he",
+             "fa", "ur",
+             # Bengali writes every loanword in its own script -- ওয়াই-ফাই, এটিএম, সিম,
+             # প্ল্যাটফর্ম -- so the pack quotes no Latin at all and this gate finds
+             # nothing to refuse. Named anyway, so the next row that does quote a
+             # Latin acronym is asked the same question.
+             "bn"}
 
 
 # ------------------------------------------------------------------- alphabet
@@ -470,6 +481,39 @@ STRESS_MARKS = set("ˈˌ")
 TONE = set("˥˦˧˨˩ˀ")
 
 
+# ---------------------------------------------------- Bengali, on the way *in*
+# **The corpus and espeak want opposite normalisations of the same three letters.**
+# ড় ঢ় য় -- U+09DC, U+09DD, U+09DF -- have canonical decompositions *and* are Unicode
+# composition exclusions, so NFC leaves them as base + U+09BC NUKTA and never
+# composes them. `validate_data.py` requires NFC, so that is the form the pack must
+# store. espeak's Bengali dictionary only knows the precomposed codepoints, and
+# handed the decomposed sequence it **drops the vowel sign that follows**: গাড়ি comes
+# back `ɡaɽ` instead of `ɡaɽi`, পড়া `pɔɽ`, হারিয়ে `haɾi`, পয়েন্ট `pɔnʈɔ`. That is a
+# whole syllable gone, on **202 rows** of an 824-row pack.
+#
+# So the route composes on the way in. **Only before a dependent vowel sign**, which
+# is the case that is broken and is measured rather than assumed: composing
+# everywhere also changes 48 further rows and every one of those changes is *wrong*,
+# because espeak gives the precomposed letter an inherent vowel word-finally --
+# কোথায় becomes `kotʰajo` for [kothae] and যায় `dʒajo` for [dʒae]. Conditioning on
+# the following matra fixes the 202 and touches none of the 48.
+#
+# This is Persian's `clean()` trap in the other direction, and worth reading beside
+# it: there a `Cf` character the pack needed was being thrown away, here a
+# normalisation the validator requires is one the G2P cannot read.
+BN_NUKTA = {"\u09a1\u09bc": "\u09dc",       # ড় BENGALI LETTER RRA
+            "\u09a2\u09bc": "\u09dd",       # ঢ় BENGALI LETTER RHA
+            "\u09af\u09bc": "\u09df"}       # য় BENGALI LETTER YYA
+# The dependent vowel signs, U+09BE..U+09CC and U+09D7.
+BN_BEFORE_MATRA = re.compile("(" + "|".join(BN_NUKTA)
+                             + ")(?=[\u09be-\u09cc\u09d7])")
+
+
+def bn_compose(text):
+    """`text` with ড় ঢ় য় composed where a vowel sign follows. See `BN_NUKTA`."""
+    return BN_BEFORE_MATRA.sub(lambda m: BN_NUKTA[m.group(0)], text)
+
+
 # Substitutions applied to every route's output before the alphabet is checked.
 # Each is either a G2P artefact or a codepoint no shipped face can draw; none of
 # them is a phonemic distinction in any language in the corpus.
@@ -496,6 +540,73 @@ REPAIR = {
     "fr": [("-", "")],
     # `r.` is ड़ /ɽ/, and `r.h` is ढ़; the bare `.` that is left over is noise.
     "hi": [("r.h", "ɽʰ"), ("r.", "ɽ"), (".", "")],
+    # Bengali's two nukta consonants, and its length marks.
+    #
+    # `r.` is ড় /ɽ/ as it is in Hindi, but ঢ় is **`hr.`** and not `r.h` -- this voice
+    # writes the aspiration *before* the tap (আষাঢ় `aʃahr.ɔ`, দৃঢ় `dɾihr.ɔ`), so the
+    # order of the two substitutions is the opposite of Hindi's. Nothing else can
+    # produce `hr.`: no row in the pack has হ immediately before ড়, checked over the
+    # whole column. No `(".", "")` mop-up after them, unlike Hindi and Arabic --
+    # measured at zero surviving dots over all 824 rows, and a dot that did survive
+    # would make `check_alphabet` refuse the row, which is a blank cell rather than a
+    # wrong one.
+    #
+    # **The length mark is folded out after a vowel and kept after a consonant.**
+    # Bengali has no vowel length contrast -- ই/ঈ and উ/ঊ are spelling variants of one
+    # sound -- and espeak writes `ː` on the *letter* rather than the sound: ওষুধ comes
+    # back `oːʃudʰ` while কোথায়, the same vowel written with a matra, comes back
+    # `kotʰaj`. Left in, 134 rows would tell twenty-three reader tables to double a
+    # vowel or reach for a length device, and the identical sound elsewhere would not.
+    # Persian's blanket `("ː", "")` is wrong here and that is the reason this is
+    # enumerated per vowel instead: Bengali's **consonant** geminates are real and
+    # phonemic -- সত্যি /ʃɔtti/, বাক্য /bakko/, সাহায্য /ʃahaddʒo/ -- and espeak writes
+    # those with the same mark, on eleven rows.
+    "bn": [("hr.", "ɽʰ"), ("r.", "ɽ")]
+          + [(v + "ː", v) for v in "aeiouɔæɑɜãẽĩõũ"],
+    # **Urdu is Hindi's phonology in another script, and the first three repairs are
+    # Hindi's own**: this build writes ड़/ڑ /ɽ/ as `r.` and ढ़/ڑھ as `r.h` in the Urdu
+    # voice exactly as it does in the Hindi one, and `.` was the *only* character
+    # espeak's Urdu emitted that was nowhere in the corpus already -- so after these
+    # three, Urdu costs the twenty-four existing reader tables nothing.
+    #
+    # The rest were measured over the 847 distinct words of the finished pack, and
+    # each one is a place where this build's Urdu notation is not IPA or is not Urdu:
+    #
+    # `ph` for `پھ`: the aspirates come back with the modifier letter everywhere
+    # (`ʈʰ ɟʰ kʰ bʰ dʰ ɡʰ cʰ tʰ`) except in `پھر`, where the dictionary entry gives a
+    # plain `h`. A bare `ph` cannot arise any other way -- an Urdu `پ` followed by a
+    # real /h/ always has a vowel between them (`پہلے` pˈʌhle, `پہنچانا` pahunchānā) --
+    # so the substitution is unambiguous. Left as `ph`, `phonemesOf` splits it into
+    # /p/ + /h/ and every reader spells two consonants where Urdu has one.
+    #
+    # `ʂ` and `ʐ`: the retroflex fricatives. Every one of the twelve `ʂ` came from a
+    # ص (صبح, صرف, تصدیق, شخص, غصہ) and every one of the seven `ʐ` from a ظ (لفظ,
+    # محفوظ, انتظار, حافظ) -- letters Urdu inherited from Arabic and pronounces as
+    # plain /s/ and /z/. Urdu has no retroflex fricative at all, so neither symbol
+    # can be right in this pack. (`ʂ` *is* right in Hindi, for ष, which is why this
+    # is a per-language repair and not a FOLD.)
+    #
+    # `nahˈiːn` and `huːn`: espeak realises the noon ghunna as nasalisation nearly
+    # everywhere -- `میں` mˈẽ, `ہیں` hẽ, `ہاں` hˈãː, `کیوں` kjˈũː, `بچوں` bˈʌcõː --
+    # and as a full /n/ in exactly two words, which are the 1sg copula and the
+    # negator: the two most frequent words in the pack. Both are lexical dictionary
+    # defects rather than notation, so the repair is lexical, and it is safe by
+    # measurement rather than by argument: over those 847 words `huːn` occurs only in
+    # `ہوں` and `nahˈiːn` only in `نہیں`. A general rule was tried and refused -- a
+    # real final /n/ after a long vowel exists (`مکین` məkˈiːn, `قانون` qˈaːnuːn,
+    # `سکون` sʊkˈuːn), so `iːn -> ĩː` would have broken those.
+    #
+    # `w` -> `ʋ` and `r` -> `ɾ`, both for the reason `el`'s rhotic repair records.
+    # Urdu has one labial approximant and one rhotic; espeak writes the labial as `ʋ`
+    # in 51 places and `w` in one (`وہ`), and the rhotic as `r` in all 393. `r` is the
+    # *trill*, and the English table spells a non-initial `r` as `rr`, so leaving it
+    # would tell every reader to roll an Urdu tap. `ɾ` is also what Hindi's own column
+    # carries for the same sound in 496 of its 524 rhotics -- Hindi and Urdu are one
+    # spoken language, and the two packs must not disagree about a phoneme.
+    "ur": [("r.h", "ɽʰ"), ("r.", "ɽ"), (".", ""), ("ph", "pʰ"),
+           ("ʂ", "s"), ("ʐ", "z"),
+           ("nahˈiːn", "nahˈĩː"), ("huːn", "hũː"),
+           ("w", "ʋ"), ("r", "ɾ")],
     # espeak inserts a stray `.` before a long vowel in Arabic: `i.ː` for `iː`.
     "ar": [(".", "")],
     # `u"` is the fronted /u/ between palatalised consonants, and `ɪ^` is what a
@@ -628,6 +739,28 @@ REPAIR = {
     # rewritten -- checked against every `ejf` in the finished column, which is
     # these five rows and nothing else.
     "fa": [("q1", "q"), ("ejɡu", "iɡu"), ("ejf", "if"), ("ː", "")],
+    # **Three folds, and the first one is the whole cost of Polish to the other
+    # twenty-three reader tables.** espeak writes `ń` and the palatalising `ni` as a
+    # palatal nasal carrying U+02B2 -- a palatalisation mark on a consonant that is
+    # already palatal, which is redundant by definition -- and that two-character
+    # unit was the *only* thing in the Polish column that was nowhere else in the
+    # corpus. Left in, `phonemesOf` binds the modifier to the nasal and every one of
+    # the twenty-three existing tables, which all have a rule for the bare palatal
+    # nasal and none for the pair, would have printed a bare IPA modifier letter on
+    # 157 cells. Folding is the `q1` -> `q` decision one language later, and after it
+    # Polish costs no table an edit: its other seven palatalised consonants are
+    # already in the corpus from Russian.
+    #
+    # `ç` is the pre-front allophone of /x/ and occurs exactly once, in
+    # `przeciwhistaminowy`, where the devoiced `w` puts the `h` before an `i`. This
+    # column is phonemic, so it folds to `x`.
+    #
+    # `ː` is a phrase-level artefact and not a Polish contrast: the language has had
+    # no vowel-length opposition since the sixteenth century, and all four instances
+    # are a word-final vowel before a vowel-initial word (`do ubezpieczenia`, `tylko
+    # oglądam`). Left in, four rows would tell every table to reach for a length
+    # device on a vowel that is not long while the identical vowel elsewhere did not.
+    "pl": [("ɲʲ", "ɲ"), ("ç", "x"), ("ː", "")],
 }
 
 
@@ -1745,8 +1878,11 @@ def route(code, chunks):
         lexicon = espeak_lexicon(VOICES[code], [w for c in chunks for w in c.split()])
         return lambda chunk: " ".join(lexicon.get(w) or "" for w in chunk.split()), "espeak"
     if code in VOICES:
-        lexicon = espeak_lexicon(VOICES[code], chunks)
-        return lexicon.get, "espeak"
+        # `bn_compose` is the identity for every other language: those three
+        # sequences occur in no other pack, in no registry file and in no override.
+        pre = bn_compose if code == "bn" else (lambda text: text)
+        lexicon = espeak_lexicon(VOICES[code], [pre(c) for c in chunks])
+        return (lambda chunk: lexicon.get(pre(chunk))), "espeak"
     if code == "th":
         return thai_syllables(), "thaig2p"
     if code == "zh-Hans":
@@ -2054,11 +2190,56 @@ GRADE = {
            "ezāfe is required, which makes espeak produce the vowel every time (`آبِ معدنی` -> "
            "`ɑbe maʔdani`, verified on sixteen constructions). A row that forgets the kasra loses "
            "one vowel silently, which is what a reviewer should grep for first"),
+    "pl": ("A", "near-phonemic orthography, and the one language in this file whose "
+           "stress espeak cannot get wrong: Polish stress is positional and "
+           "exceptionless -- the penultimate syllable, always -- so the thing espeak "
+           "misses for German, Turkish, Hindi and French cannot be missed here, and "
+           "it is looked up rather than derived only because espeak already agrees. "
+           "The four learned words Polish stresses on the antepenult (`gramatyka`, "
+           "`fizyka`, `matematyka`, `uniwersytet`) are the whole exception list and "
+           "none is in this corpus. Probed on the four things Polish orthography is "
+           "*not* transparent about, and espeak has all four: final devoicing "
+           "(`chleb` -> xlɛp), voicing assimilation across a cluster (`prosba` -> "
+           "prɔʑba, `takze` -> taɡʐɛ), the nasal letters before a stop, which are "
+           "vowel plus a homorganic nasal rather than a nasal vowel (`zab` -> zɔmp, "
+           "`kat` -> kɔnt), and the devoicing of `w` after a voiceless consonant "
+           "(`twoj` -> tfuj). The known weakness is that it merges `trz` with `cz` "
+           "and `drz` with `dz-dot` -- `trzy` and `czy` both come back tʂɨ -- which "
+           "is a merger careful Polish also makes, so it is the orthography's "
+           "ambiguity rather than espeak's, and it costs the corpus nothing because "
+           "The one thing it writes that the corpus did not already have is the "
+           "palatalisation as a modifier letter -- `nie` comes back as a palatal "
+           "nasal carrying U+02B2, `kwiat` as kfʲat, `pogotowie` as pɔɡɔtɔvʲɛ -- and "
+           "of those units only the one on the palatal nasal was new, because the "
+           "other seven are already in the corpus from Russian. It is folded out in "
+           "REPAIR above, on the grounds that a palatal nasal carrying a "
+           "palatalisation mark is redundant by definition; after the fold this "
+           "column is 50 phonemes and every one of them was already in the corpus, "
+           "so Polish costs the other twenty-three reader tables no edit at all. No "
+           "curated sheet, so the syllable column is blank"),
     "tr": ("B", "phonemic orthography, but espeak's Turkish stress is 68.1%"),
     "pt": ("B", "pt-br; vowel reduction is phonetic detail the curated sheet smooths away"),
     "en": ("B", "en-us; deep orthography, but espeak's English lexicon is its best"),
     "ru": ("C", "espeak emits reduction and palatalisation as detail; 27.6% oracle ceiling"),
     "hi": ("C", "schwa deletion is espeak's to get wrong; stress 63.2%"),
+    "bn": ("C", "espeak-ng has a Bengali voice and it is a real one -- the consonant "
+           "inventory comes back whole, retroflex against dental, all four aspirates, ঙ ঞ as "
+           "/ŋ ɲ/, and the inherent vowel's /ɔ/ against /o/ right most of the time. Two "
+           "artefacts are repaired in REPAIR and one normalisation trap in `bn_compose`, and "
+           "after them what is left is three weaknesses, in order. **Inherent-vowel deletion "
+           "is espeak's to get wrong and it gets it wrong in one direction**: it inserts the "
+           "vowel where Bengali deletes it, so হাসপাতাল comes back `haʃɔpatal` for [haspatal] "
+           "and সাত `ʃato` for [ʃat]. This is Hindi's schwa problem with a wider scope, "
+           "because Bengali deletes in more places than Hindi does. **The ya-phala is read as "
+           "a vowel rather than as gemination**: ধন্যবাদ comes back `dʰɔnæbad` where the word "
+           "is [dʰonːobad], so ্য after a consonant loses the doubling on the rows where it "
+           "should have it -- though `স্য`, `ক্য` and `ত্য` do come back geminated, so it is "
+           "inconsistent rather than uniformly wrong. **And a bare letter is read as its "
+           "letter name**: য on its own returns `ɔntostedʒɔ`, the dictionary's অন্তঃস্থ য, which "
+           "is the failure mode that produces something plausible. No row in this pack is a "
+           "bare consonant letter, so nothing hits it, but a `core` row that added one would. "
+           "Stress is kept, because Bengali stress is initial and non-lexical and espeak puts "
+           "it there; that is a fact about the language rather than a claim about the voice"),
     "fr": ("C", "liaison survives and stress is phrasal, but the curated sheet's unit is coarser"),
     "vi": ("C", "tones reconstructed from espeak's digits, ngang included; anh/ach is a judgement"),
     "ar": ("D", "short vowels are unwritten and espeak guesses; emphatics inconsistent"),

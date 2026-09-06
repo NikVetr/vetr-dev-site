@@ -84,3 +84,5 @@ numbers-money.shekel,シェケル,,shekeru,ɕekeɾɯ,,2,shekel-gloss-v1;cldr;rom
 numbers-money.shekel-symbol,シェケル記号,,shekeru kigō,ɕekeɾɯ kiɡoː,,2,shekel-gloss-v1;cldr;roman=generated;ipa=hepburn
 numbers-money.rial,リアル,,riaru,ɾiaɾɯ,,2,rial-toman-gloss-v1;cldr;ipa=hepburn
 numbers-money.toman,十リアル,,jū riaru,dʑɯː ɾiaɾɯ,,2,rial-toman-gloss-v1;cldr;ipa=hepburn
+numbers-money.zloty,ズウォティ,,,,,2,gloss-only;scoped-away;name of the currency in this language
+numbers-money.zloty-symbol,ズウォティ記号,,,,,2,gloss-only;scoped-away;name of the currency in this language

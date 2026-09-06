@@ -108,7 +108,7 @@ them back again, which is the two rules meeting on the one pack thin enough for 
 to have an opinion. The reference sheets reached four by hand against a
 bank of 413 concepts. It is 813 now; the divider defaults to one position per section
 rather than one per row, which costs type size; and — the largest of the three — the
-respelling column has content on all 462 pairs rather than 16, so there is a third
+respelling column has content on all 650 pairs rather than 16, so there is a third
 line of type on every entry that used to have two. Eight is the same answer as four
 was, at the new size, the new default and the new column. A credit-card sheet takes
 sixteen rather than printing at minimum size.
@@ -194,8 +194,8 @@ A respelling is written *for a reader* — `nee HOW` is Chinese for someone who 
 English and nothing else — so curating them by hand is O(N²), and for a long time
 only the 16 pairs glossed into English had one while the other 256 printed an empty
 column. The way out is two O(N) inputs instead: the `ipa` column of the language
-being learned, and one rule table per language doing the reading. **All twenty-three
-reader tables now exist and every one of the 506 pairs prints a respelling.**
+being learned, and one rule table per language doing the reading. **All twenty-six
+reader tables now exist and every one of the 650 pairs prints a respelling.**
 `node scripts/respell_check.mjs <reader> --gaps` counts IPA symbols that reach the
 page because no rule matched, and every reader is at zero. Twenty of the tables
 derive from a published pronunciation key for that language (`content/RESPELL-SYSTEMS.md`
@@ -667,6 +667,64 @@ so the priority ladder is untouched. Forcing one template on a whole section was
 other option and is worse both ways: the reference grid is much the more compact, and
 a long phrase does not fit it.
 
+### Twenty-six languages, and the procedure that got the last three there
+
+`content/PROMPTS/add-a-language.md` is the addition procedure and the roadmap to
+fifty. It exists because the first twenty-three additions each rediscovered some of
+the same traps — the CRLF corpus, `make_todo.py` filtering notes out of its own todo,
+`clean()` eating U+200C, a new IPA symbol costing every *other* reader a rule, the
+`_frame` preposition that twenty-two of twenty-three languages rejected — and writing
+them down once is cheaper than twenty-seven more agents finding them.
+
+**Bengali, Urdu and Polish came in as the twenty-fourth, fifth and sixth**, and how
+they came in is the part worth recording: all three agents were killed mid-flight by a
+rate limit, and **all three packs survived** — 824, 820 and 827 rows, every one with
+provenance, plus 188 lines of Urdu findings. The briefs required writing findings and
+output to disk as the work happened rather than reporting at the end, and that is the
+whole reason there was anything to pick up. What was lost was the *cheap* part: three
+sets of registry rows, which a Sonnet agent then wrote in one pass.
+
+**Urdu's script question was settled by a crash, not a preference.** Nastaliq is a
+style rather than a script — ISO 15924 calls it `Aran` — and Noto Nastaliq Urdu is a
+separate face with a much taller line box, so the roadmap flagged this as the batch's
+real decision. The answer is that **fontkit throws on Noto Nastaliq Urdu for 84 of 86
+real Urdu rows**, in both copies of the shaper this project uses: the one
+`core/measure.js` measures with and the one `render/pdf.js` hands to pdf-lib. So Urdu
+reuses the `arabic` stack at Naskh with `script: Arab`, which is also what most Urdu on
+phones and signage is set in. Its extra letters `ٹ ڈ ڑ ھ ں ے` were already in the
+shipped subset, as Persian's four had been.
+
+**Bengali is the first new script since Hebrew**, `Beng` at a measured 1.45 leading
+against Devanagari's — its vowel signs go on all four sides of a consonant, including
+the two-part ো and ৌ that wrap around it, so the block is subset whole rather than by
+the letters the corpus happens to use today. It also demonstrated the trap its own
+procedure names: adding Bengali as a *target* grew the Hindi reader's respelling
+charset past what the `deva` subset shipped, and `tests/fonts.test.mjs` caught it.
+
+**Polish's `_frame` and its language names are the same grammar problem twice.** Its
+frame `Nie mówię {target}` has no `po` built into it, so every one of its twenty-six
+subjects needed a hand-written `po X-u` adverbial in `language-names.csv` — a real
+defect that no amount of ICU data reveals, because ICU's nominative is correct and
+still ungrammatical in the slot. Bengali's frame went the other way and took
+apposition, counted rather than defaulted: of 57 region names, 34 take the locative
+`-এ` as a plain vowel sign, 15 need an inserted glide য়, and 8 need a different
+syllable `-তে` — so **23 of 57 do not take the suffix's own shape at all**, which is
+Hungarian's and Turkish's problem rather than Hebrew's.
+
+**Two silent defects surfaced in the existing tables**, both of the same shape: a
+sequence whose halves each have a rule, so `--gaps` cannot see it. The Hindi reader had
+no rule for `ʋ`, which 81 Urdu rows needed, and **no rule for any aspirated stop** —
+`dʰ bʰ ɡʰ ɖʰ cʰ ʈʰ qʰ tʃʰ ɟʰ` — so ধন্যবাদ came back as দ-ন্য়-ভাদ with the
+aspiration quietly dropped, because `d` and `ʰ` both matched individually. Five tables
+carry those nine phonemes and four do not, which makes it a corpus inconsistency
+rather than one table's bug.
+
+And one gap the validator caught exactly as designed, in words worth quoting: the
+złoty was "scoped to pl but has no gloss in ar, bn, de, …, so it prints on **0 of its
+25 pairs**". A scoped concept still needs a gloss wherever it is the *source*, and 47
+rows later it prints on 23 of 25 — the two short ones being the packs that are short
+everywhere.
+
 ### A slang section, and what a "universal reference set" turned out to be
 
 The brief was a per-language slang and idiom panel, built where possible from a
@@ -707,7 +765,7 @@ a published phonology, an ISO 639 code and a documented lexicon, so the same sou
 discipline applies — and applying it honestly is what produces the findings.
 
 **Neither pack fills, and that is recorded rather than papered over.** Klingon covers
-317 of 813 concepts and Quenya 206, because the bank is pharmacy symptoms and ATM
+318 of 827 concepts and Quenya 206, because the bank is pharmacy symptoms and ATM
 vocabulary and neither lexicon was built for that. Nothing is coined: a row is either
 verbatim from a named source, a canon frame with a slot substituted, or assembled from
 attested lexemes by documented affixes, and `provenance` says which per row. A
@@ -1453,7 +1511,7 @@ in the distribution that still fills a real card:
 
 | step | floor | phrases | fits |
 |---|---|---|---|
-| Everything | 0 | 813 | 6–8 faces of 7×5 |
+| Everything | 0 | 827 | 6–8 faces of 7×5 |
 | Broad | 0.74 | 326 | four faces — what both hand-built originals settled on |
 | Core | 0.82 | 148 | one sheet |
 | Essential | 0.95 | 10 | **one phone face at full nominal type, in all twenty natural languages** |
@@ -1576,8 +1634,8 @@ normalised English gloss, against the exact section first and then its group,
 because two sheets can file the same phrase under different panels ("Can I charge
 my phone?" is hotel basics in one and hotel requests in the other).
 
-The bank is now **825 concepts across 59 sections in twenty-three languages**, which
-is **506 ordered pairs** — every one of which renders, and two of which anyone wrote a
+The bank is now **827 concepts across 59 sections in twenty-six languages**, which
+is **650 ordered pairs** — every one of which renders, and two of which anyone wrote a
 sheet for. That ratio is the whole argument for joining on `concept_id` instead of
 storing pairs: the sixteenth language added 745 rows and 30 new pairs, and the
 twenty-first added 40 more pairs on its own.

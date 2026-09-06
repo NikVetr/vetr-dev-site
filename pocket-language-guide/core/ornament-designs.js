@@ -5,6 +5,13 @@ export const LANGUAGE_MOTIFS = /** @type {const} */ ({
   ru: 'berry', id: 'kawung', sw: 'sail', tr: 'tulip', vi: 'bamboo', it: 'acanthus',
   el: 'meander', hu: 'embroidery', he: 'pomegranate', fa: 'cypress',
   qya: 'botanical', tlh: 'starforge',
+  // Art directions rather than emblems, on the same rule as the rest of this table.
+  // `alpona` is Bengal's rice-paste floor drawing -- radial, vine-led, made freehand
+  // for a festival and swept away after; `wycinanki` is Polish folk paper-cutting,
+  // which is symmetric because it is cut through a fold; and `jali` is the pierced
+  // lattice screen, chosen for Urdu over anything calligraphic because Arabic already
+  // holds `interlace` and a jali is a *grid* where an interlace is a knot.
+  bn: 'alpona', pl: 'wycinanki', ur: 'jali',
 });
 /** @typedef {typeof LANGUAGE_MOTIFS[keyof typeof LANGUAGE_MOTIFS]} LanguageMotif */
 
@@ -198,6 +205,41 @@ const emblems = {
     p.q(59, 93, 48, 92); p.m(49, 86); p.q(43, 53, 60, 19);
     for (const y of [51, 65, 78]) { p.m(49, y); p.q(37, y - 6, 37, y - 13); p.m(49, y); p.q(62, y - 5, 62, y - 11); }
   },
+  alpona(p) {
+    // Six-fold, because an alpona is drawn outward from a centre with the whole hand
+    // rather than laid out on a grid.
+    flower(p, 6, 26);
+    for (let i = 0; i < 6; i++) {
+      const a = i * Math.PI / 3;
+      leaf(p, 50 + Math.cos(a) * 26, 50 + Math.sin(a) * 26,
+        Math.cos(a) * 16, Math.sin(a) * 16, 8);
+      diamond(p, 50 + Math.cos(a + Math.PI / 6) * 34,
+        50 + Math.sin(a + Math.PI / 6) * 34, 5, 5);
+    }
+  },
+  wycinanki(p) {
+    // Cut through a fold, so the two halves are the same curve mirrored -- and the
+    // notches along the outer edge are where the scissors went in.
+    p.m(50, 92); p.l(50, 34);
+    for (const s of [-1, 1]) {
+      p.m(50, 34); p.c(50 + s * 30, 30, 50 + s * 36, 12, 50 + s * 12, 9);
+      p.q(50, 18, 50, 34);
+      p.m(50, 52); p.c(50 + s * 24, 50, 50 + s * 30, 34, 50 + s * 10, 31);
+      p.m(50, 70); p.c(50 + s * 18, 68, 50 + s * 24, 54, 50 + s * 8, 51);
+      p.m(50 + s * 8, 88); p.l(50 + s * 20, 79); p.l(50 + s * 8, 79);
+    }
+  },
+  jali(p) {
+    // A pierced screen: a grid of pointed arches, each one an opening rather than a
+    // motif, which is what a jali is for.
+    for (const x of [22, 50, 78]) {
+      for (const y of [30, 62]) {
+        p.m(x - 11, y + 14); p.l(x - 11, y); p.q(x, y - 18, x + 11, y);
+        p.l(x + 11, y + 14); p.close();
+      }
+    }
+    p.m(7, 92); p.l(93, 92); p.m(7, 8); p.l(93, 8);
+  },
 };
 
 // At divider height, use the motif's silhouette rather than its interior detail.
@@ -225,6 +267,9 @@ const tracery = {
   embroidery(p) { p.m(7, 18); p.l(28, 82); p.l(50, 18); p.l(72, 82); p.l(93, 18); },
   pomegranate(p) { p.m(36, 30); p.l(32, 8); p.l(50, 24); p.l(68, 8); p.l(64, 30); p.c(96, 41, 90, 90, 50, 90); p.c(10, 90, 4, 41, 36, 30); },
   cypress(p) { p.m(10, 88); p.c(14, 34, 63, 44, 86, 8); p.c(71, 38, 99, 89, 10, 88); },
+  alpona(p) { flower(p, 6, 40); },
+  wycinanki(p) { p.m(50, 92); p.l(50, 8); p.m(8, 60); p.q(50, 6, 92, 60); },
+  jali(p) { for (const x of [28, 72]) { p.m(x - 20, 90); p.l(x - 20, 46); p.q(x, 4, x + 20, 46); p.l(x + 20, 90); } },
 };
 
 /** @param {string} motif @returns {motif is keyof typeof emblems} */

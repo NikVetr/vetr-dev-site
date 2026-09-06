@@ -1,0 +1,15 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+slang.thats-good,Fajnie,,fˈajɲɛ,,2,pl-agent-v1;ipa=espeak
+slang.thats-great,Super!,,sˈupɛr,,2,pl-agent-v1;ipa=espeak
+slang.i-love-it,Uwielbiam to!,,uvʲˈɛlbjam tɔ,,2,pl-agent-v1;ipa=espeak
+slang.thats-bad,Takie sobie,,tˈakʲɛ sˈɔbjɛ,"so-so; about a thing, never a person",2,pl-agent-v1;ipa=espeak
+slang.delicious,Pyszne!,,pˈɨʃnɛ,,2,pl-agent-v1;ipa=espeak
+slang.thats-pricey,Ale drogo!,,ˌalɛ drˈɔɡɔ,,2,pl-agent-v1;ipa=espeak
+slang.exactly,Dokładnie!,,dɔkwˈadɲɛ,,2,pl-agent-v1;ipa=espeak
+slang.no-worries,Spokojnie,,spɔkˈɔjɲɛ,,2,pl-agent-v1;ipa=espeak
+slang.youre-welcome,Żaden problem!,,ʒˈadɛn prˈɔblɛm,,2,pl-agent-v1;ipa=espeak
+slang.seriously,Serio?!,,sˈɛrjɔ,,2,pl-agent-v1;ipa=espeak
+slang.im-good-thanks,"Dziękuję, nie trzeba",,"dʑɛŋkˈujɛ, ɲɛ tʃˈɛba","thank you, there is no need",2,pl-agent-v1;ipa=espeak
+slang.lets-go,Idziemy!,,idʑˈɛmɨ,,2,pl-agent-v1;ipa=espeak
+slang.cheers,Na zdrowie!,,na zdrˈɔvʲɛ,,2,pl-agent-v1;ipa=espeak
+slang.see-you,Na razie!,,na rˈaʑɛ,,2,pl-agent-v1;ipa=espeak

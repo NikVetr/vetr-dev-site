@@ -53,6 +53,15 @@ SOURCES = {
     "NotoSerifHebrew-var.ttf": f"{GFONTS}/notoserifhebrew/NotoSerifHebrew%5Bwdth,wght%5D.ttf",
     "NotoSansThai-var.ttf": f"{GFONTS}/notosansthai/NotoSansThai%5Bwdth,wght%5D.ttf",
     "NotoSerifThai-var.ttf": f"{GFONTS}/notoserifthai/NotoSerifThai%5Bwdth,wght%5D.ttf",
+    # Bengali. Noto Sans Bengali rather than any Latin face: `NotoSans-var.ttf` has
+    # none of U+0980..09FF, the same fact that made Devanagari and Thai their own
+    # stacks. The serif is fetched for the same reason its neighbours' are -- the
+    # typeface control offers serif per script and falls back per script, so a Bengali
+    # sheet in serif would otherwise silently be sans.
+    "NotoSansBengali-var.ttf":
+        f"{GFONTS}/notosansbengali/NotoSansBengali%5Bwdth,wght%5D.ttf",
+    "NotoSerifBengali-var.ttf":
+        f"{GFONTS}/notoserifbengali/NotoSerifBengali%5Bwdth,wght%5D.ttf",
     "NotoSansDevanagari-var.ttf":
         f"{GFONTS}/notosansdevanagari/NotoSansDevanagari%5Bwdth,wght%5D.ttf",
     "NotoSerifDevanagari-var.ttf":

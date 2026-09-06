@@ -1,5 +1,6 @@
 [
   "ar__ar-MSA",
+  "bn__bn-BD",
   "de__de-DE",
   "el__el-GR",
   "en__en-US",
@@ -13,6 +14,7 @@
   "it__it-IT",
   "ja__ja-JP",
   "ko__ko-KR",
+  "pl__pl-PL",
   "pt__pt-BR",
   "qya__qya-EX",
   "ru__ru-RU",
@@ -20,6 +22,7 @@
   "th__th-TH",
   "tlh__tlh-TA",
   "tr__tr-TR",
+  "ur__ur-PK",
   "vi__vi-VN",
   "zh-Hans__zh-CN"
 ]

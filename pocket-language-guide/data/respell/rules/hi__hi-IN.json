@@ -40,7 +40,16 @@
     {
       "rule": "/z/ against /ʒ/, and /e/ against /ɛ/",
       "why": "Two merges, both against a letter that exists. झ़ is in the standard's परिवर्धित table for /ʒ/ and is refused: without the nuqta it reads as an aspirated affricate, which is further from [ʒ] than ज़ is, and Hindi's own established spelling of the sound is ज़ (टेलीविज़न, विज़न). /ɛ/ takes ए rather than ऐ because ऐ is spent on /æ/ -- the standard's own बैंक ruling -- and the English pair bed/bad matters more than the Romance pair /e/-/ɛ/, which no Hindi reader distinguishes in an unfamiliar word anyway."
-    }
+    },
+    {
+      "rule": "ɽ -> ड़ and ɽʰ -> ढ़",
+      "why": "Added when Bengali and Urdu landed, which are the first *targets* whose `ipa` column carries the retroflex flap -- Hindi's own column has 37 of them, but a reader is never its own target, so nothing had ever asked this table for one and 45 Bengali rows printed a bare `ɽ` on a Hindi card. The letters are ordinary Devanagari and are exactly what the Hindi pack itself writes for the same sound."
+    },
+    {
+      "rule": "ʋ -> व, merged with /v/",
+      "why": "Added when Urdu landed. espeak's `ur` voice writes و as `ʋ` (a labiodental approximant) rather than `v`, on 81 rows -- `والیکم` in the greeting, `وہ` in three sentence-openers, and every borrowed `power`/`van`-type word. Hindi's own व already sits between [v] and [ʋ] and is read either way depending on the word, so this is not a new letter for the table to teach, only the second IPA symbol it has to recognise as asking for the one it already has."
+    },
+    "The nine aspirated stops have rules of their own -- भ ध घ ढ छ ठ झ and the two affricates Klingon and Bengali bring -- where before they fell through the engine's decomposition fallback, which spells `dʰ` as `d` plus `ʰ` and maps `ʰ` to nothing. `--gaps` cannot see that, because both halves have rules; `--units` reports it, and its own header states the test: a diacritic mapped to nothing is a decision, a diacritic mapped to a letter is usually a bug. For a reader whose script cannot show aspiration it is the right decision. Devanagari has a dedicated letter for every one of these, so here it was a loss: শুভ সকাল read as शूब शॉ-काल with a plain ब. Derived by shifting the Bengali table's own rules down 0x80, the offset that table was built from this one with."
   ],
   "approximations": "Sounds with no Devanagari letter, and what they get. /ʔ/ and /ʕ/ are written as nothing, which is what Hindi already does with Arabic hamza and ain (अरब, इस्लाम) and which leaves a Thai zero onset correctly bare. /ħ/ is ह. /θ ð/ are थ द, following Rapidex (थैंक्स, देन) and Hindi's own habit; they collide with /t̪ d/ for the dental targets, which is the documented cost. /x ɣ q/ are ख ग क. /ç/ is ख where the target has an /x/ for it to be the front allophone of (German ich -> इख, München -> म्यूनिख) and ह where it does not (Japanese ひ -> ही). /y yː ʉ/ are यू and /ɵ/ is यो, which is Hindi's own reading of a front rounded vowel (म्यूनिख, ज़्यूरिख, यूरो, मिन्यू); /ø œ/ are ओ (कोलोन, गोएथे). /ɯ/ is उ, following the romanisation its two largest holders use -- Japanese u and Korean ㅡ -- at the cost of Turkish ı. /ɤ/ is ए, which is what Hindi print gives Mandarin's e (देगुओ, हेनान). /ɲ/ is न्य and /ʎ/ ल्य. Vietnamese's glottalised codas and its /ˀ/ are dropped with the tone they belong to. Retroflex /ʂ ʈʂ ʈʂʰ/ merge into श च छ, since ष is read [ʃ] by Hindi speakers and would spell a distinction nobody pronounces. Korean's /ɰ/ and Mandarin's /ɥ/ are व and य.",
   "note": "**Devanagari is an abugida, so the design decision in this table is where the virama goes.** A consonant letter with nothing after it already says [ə], which means a cluster that forgets its virama does not merely look wrong -- it prints a vowel the target does not have. Every consonant therefore has three spellings and `spellSlot`'s position decides between them: bare when it is the first thing in the syllable (`after_out: \"\"`), so a matra can bind to it; virama-then-letter anywhere else in an onset, joining it to the consonant before it; and letter-then-virama in a coda, killing its own inherent vowel. The two directions are not interchangeable -- a coda spelt virama-first turns /pat/ into प्ट, a /pt/ cluster with no vowel at all -- and a slot cannot look ahead within itself, which is why the choice is made on what has already been emitted rather than on what is coming. The nucleus is the mirror image: an independent vowel when the syllable has emitted nothing, a matra otherwise, and nothing at all for the inherent vowel, which is what lets क spell /kə/ and क्या spell /kja/. `word()`'s NFC pass then composes the nuqta letters.\n\n**Tested by making the inherent vowel visible.** The claim to check is that no cluster prints a spurious inherent vowel, and the direct test cannot work: a bare consonant followed by a bare consonant is *correct* wherever the target has a schwa there, so पट for /pət/ and कम for /kʌm/ are right and 1,875 rows contain one. So the table is regenerated with every inherent-vowel rule emitting a sentinel letter instead of nothing, and then any remaining bare consonant-consonant adjacency is a virama the table forgot. Over 11,779 rows across all sixteen targets that count is **zero**. The same pass asserts nine more invariants that Devanagari makes checkable and that no gap count would catch: no syllable opens with a virama, no two matras adjoin, no matra follows a virama and no virama precedes one, no independent vowel follows a consonant without a sign between, no nukta sits on anything but a consonant, no doubled virama, no visible hal chihn at a word or syllable end, and the output is NFC. All nine hold. Four of them failed when first run and each failure was a real bug: Japanese /hoɴjakɯ/ printed a syllable that opened with a virama, Portuguese /trɐ̃ŋz-/ stacked a candrabindu and an anusvara, /omeɪŋs/ printed ओ-मेंगस with an inherent vowel inside the coda, and Arabic /aljawm/ lost its vowel entirely because an offglide cannot tell a written vowel from an inherent one -- which is why /əɪ/ and /əw/ are spelt as whole units (ऐ and औ, the one thing those two letters are for) rather than compositionally.\n\n**Character inventory: 56, all Devanagari.** `--gaps` prints none, and the stronger bar holds too: no IPA character and no Latin letter reaches the page anywhere in the corpus. The only non-Devanagari characters in the output are the space, the hyphen, U+2019, and the `{}` `/` `,` the `ipa` column itself carries. औ ौ appear only in /əw/, ऐ ै only in /æ/ /ɛː/ and /əɪ/, and ऍ ॅ ॲ ऎ ऒ ष ण घ झ ठ ढ ळ never -- which is the diphthong trap answered in the output rather than in prose.\n\n**Measured.** `max_onset` is 2, and 3 is byte-identical because `reader_onsets` has no three-phoneme entry; 1 costs 579 conjuncts by breaking exactly the clusters Hindi writes solid (प्रा-ब्लम becomes प्राब-लम, अ-ड्रेस becomes अड-रेस, एन-ट्री becomes एंट-री). `reader_onsets` changes 991 rows against an empty list, and the direction is the one Hindi's own prosody wants: with /st sp sk/ admitted the corpus gives हाइ-स्पीड, पै-स्पोर्ट, हा-स्पि-रल and रे-जि-स्ट्रे-शन, without them हाइस-पीड, पैस-पोर्ट, हास-पि-रल and रे-जिस-ट्रे-शन, which is how Hindi prints those four words. Three entries were removed after measurement: /nr/ split Thai ไม่เป็นไร into माइ-पे-न्राइ and /nv/ split German Datenvolumen into डा-ट-न्वो-लु-मन, so a nasal takes only य; and /tl dl/ gave से-प्रट-ली for *separately*, where Hindi writes प्ल ब्ल क्ल ग्ल फ़्ल स्ल व्ल and no त्ल at all. `fixups` is `all` and has to be: 3,282 rows differ under `first`, because a syllable routinely needs the anusvara repair *and* the hal chihn strip *and* the prime, and `first` gives it one of the three -- these are a transliteration chart, not alternative repairs. `tone` is `drop`: Hindi has no lexical tone and a Chao letter is a gap.\n\n**--units reports 33 phonemes spelt by decomposition and all 33 are the two drops named in the deviations** -- fifteen Russian palatalised consonants and eighteen Vietnamese glottalised segments. Every one decomposes to its base letter plus a mark mapped to nothing, which is the benign case; none of them spells a letter nobody chose. The dangerous shape the flag exists for (Hindi /ɟʰ/ as ジュハ) cannot arise here, because the modifier letters are mapped explicitly rather than left to fall through.\n\n**Stress.** The prime is Bhargava's, placed exactly where he places it -- after the stressed syllable, between letters, where it collides with no matra and no shirorekha -- and it survives 5.4pt in a way an accent would not, being a full-height mark in the space *between* two glyph clusters rather than a diacritic competing for the area above the headline. 13,167 of them across the corpus. See the deviations for why it is U+2019 rather than U+02B9.\n\n**Shaped, and it is cheaper than the survey expects.** Every one of the 11,779 respellings was laid out with `vendor/fontkit.esm.js` -- the same shaper `core/measure.js` measures with and `render/pdf.js` embeds -- against both Devanagari faces: 231,846 characters become 218,734 glyphs and **zero of them are .notdef**, in the sans and the serif alike. That is the check `--gaps` cannot make, since a character with a rule can still have no glyph, and it is how the U+02B9 problem was found rather than guessed: shaping कॅडʹ gives glyph 0 for the prime in both faces and a wider advance than the real mark, while कॅड’ gives a real glyph. RESPELL-SYSTEMS.md calls Hindi \"the most expensive source in the set\" and that is true of the height and false of the width. At the 5.4pt floor this column means 40.0pt against English's 60.4pt at 5.22pt, Russian's 47.7pt and German's 49.7pt, and sits level with Thai (39.4pt) and Korean (39.8pt) -- because a Devanagari cluster carries a whole syllable, so the string is shorter in glyphs than a Latin respelling of the same word. The 1.35 leading factor and the missing condensed face are still real costs, but they are vertical ones.\n\n**One `ipa`-column defect found here and not in the list in `scripts/build_ipa.py`.** All 64 English /ɾ/ are the flapped allophone of /t/ -- later, water, photo, little, hospital, latest, operated, and *it* before a vowel -- and none is a rhotic, so the rhotic letter printed वॉरर for *water*, टोरल for *total* and हास-पि-रल for *hospital*. That is phonetic detail in a column this engine documents as phonemic, so it is worked around in the `en` block rather than in the rules proper: /ɾ/ is ट for English only, which gives वॉ-टर, टो-टल and हास-पि-टल, and stays र for the seven targets where it is a real tap.\n\n**Known limits, in the order they will be noticed.** The 73 Arabic rows whose short vowels the G2P lost print as conjunct stacks (य्म्क्न्नी, ल्ल्सी-आह) -- 133 rows contain a three-consonant stack and almost all are those. The syllabifier's rule that one intervocalic consonant opens the next syllable costs Mandarin more than any other target here, because a Mandarin syllable is a morpheme: 翻译 comes out फ़ा-नी rather than फ़ान-ई, and 无障碍 ऊ-चा-ङाइ rather than ऊ-चांग-आइ. `core/respell.js` records that exception as implemented, measured and rejected twice, so it is noted rather than worked around. A word-final /a/ or /ə/ before a dropped /ʔ/ or /ʕ/ loses its vowel, since `open` is computed from the IPA and the coda spells as nothing: Arabic متوقع is मु-त-व-क्क. And Turkish is the target this table serves worst, for reasons that are all in the `ipa` column: ü appears as /y/, /ø/ and /œ/ in three different rows of the same phrase set.",
@@ -1608,6 +1617,22 @@
     },
     {
       "slot": "onset",
+      "ipa": "ʋ",
+      "out": "व",
+      "after_out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʋ",
+      "out": "व्"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʋ",
+      "out": "्व"
+    },
+    {
+      "slot": "onset",
       "ipa": "θ",
       "out": "थ",
       "after_out": ""
@@ -2083,6 +2108,38 @@
       "slot": "any",
       "ipa": "ɻ",
       "out": "्र"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɽʰ",
+      "out": "ढ़",
+      "after_out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɽʰ",
+      "out": "ढ़्"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽʰ",
+      "out": "्ढ़"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɽ",
+      "out": "ड़",
+      "after_out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɽ",
+      "out": "ड़्"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽ",
+      "out": "्ड़"
     },
     {
       "slot": "onset",
@@ -2865,6 +2922,172 @@
       "slot": "any",
       "ipa": "̃",
       "out": ""
+    },
+    {
+      "slot": "onset",
+      "ipa": "bʰ",
+      "out": "भ",
+      "after_out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "bʰ",
+      "out": "भ्"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʰ",
+      "out": "्भ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "dʰ",
+      "out": "ध",
+      "after_out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʰ",
+      "out": "ध्"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʰ",
+      "out": "्ध"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɡʰ",
+      "out": "घ",
+      "after_out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɡʰ",
+      "out": "घ्"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡʰ",
+      "out": "्घ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɖʰ",
+      "out": "ढ",
+      "after_out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɖʰ",
+      "out": "ढ्"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʰ",
+      "out": "्ढ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʈʰ",
+      "out": "ठ",
+      "after_out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʈʰ",
+      "out": "ठ्"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʰ",
+      "out": "्ठ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "cʰ",
+      "out": "छ",
+      "after_out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "cʰ",
+      "out": "ख्"
+    },
+    {
+      "slot": "any",
+      "ipa": "cʰ",
+      "out": "्छ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "qʰ",
+      "out": "ख",
+      "after_out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "qʰ",
+      "out": "ख्"
+    },
+    {
+      "slot": "any",
+      "ipa": "qʰ",
+      "out": "्ख"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tʃʰ",
+      "out": "छ",
+      "after_out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʃʰ",
+      "out": "छ्"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃʰ",
+      "out": "्छ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɟʰ",
+      "out": "घ",
+      "after_out": "",
+      "if_inventory": "dʒ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɟʰ",
+      "out": "झ",
+      "after_out": "",
+      "unless_inventory": "dʒ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɟʰ",
+      "out": "घ्",
+      "if_inventory": "dʒ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɟʰ",
+      "out": "झ्",
+      "unless_inventory": "dʒ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟʰ",
+      "out": "्घ",
+      "if_inventory": "dʒ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟʰ",
+      "out": "्झ",
+      "unless_inventory": "dʒ"
     }
   ],
   "syllable_fixups": [

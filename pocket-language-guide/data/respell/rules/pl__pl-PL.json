@@ -1,0 +1,1359 @@
+{
+  "source": "pl",
+  "accent": "pl-PL",
+  "status": "ready",
+  "version": "1",
+  "derives_from": "Two Polish sources, used for different halves of the job, plus one that settles the notation. (1) **The inventory for the non-Latin targets is KSNG's** -- Komisja Standaryzacji Nazw Geograficznych poza Granicami Rzeczypospolitej Polskiej, the commission attached to the Glowny Urzad Geodezji i Kartografii, which publishes for each script both a *transliteracja* (trl.) and a *transkrypcja* (trb.), the second being the phonetic rendering of the original into letters of the Polish alphabet. Polish transcriptions are adopted for Arabic, Bengali, Greek, Hebrew, Hindi, Persian, Russian and Urdu among others -- that is six of the twenty-three targets today and eight once batch 1 lands, and it is every non-Latin script in this corpus except the East Asian four and Thai, for which KSNG adopts only the international latinisations (pinyin, Hepburn, Revised Romanization, RTGS) that the `ipa` column is already derived from. So the one authority covers exactly the half a Polish reader could not work out for themselves. From it: ы -> y, ш -> sz, ж -> z-dot, ч -> cz, ть/дь/нь/сь -> c-acute/dz-acute/n-acute/s-acute, Arabic tha -> s and dhal -> z, ha and hha both -> h, qaf -> k, ghayn -> g, ayn and hamza dropped. (2) **The shape of the feature and its notation are Kopalinski's** -- Wladyslaw Kopalinski, *Slownik wyrazow obcych i zwrotow obcojezycznych*, which prints a Polish-letter respelling in square brackets after the abbreviation `wym.` (wymowa, 'pronunciation'): a dot under the stressed vowel, a colon after a long one, the Polish nasal letters for nasal vowels, and `a`-umlaut / `o`-umlaut for the two vowels Polish cannot write. Both devices this table uses are his. (3) **The licence to simplify is PWN's own**, from the Poradnia jezykowa of the Slownik jezyka polskiego PWN, where Lidia Wisniakowska answers the question of how to write the pronunciation of a foreign word by giving two acceptable forms ([kuloer lokal] with the ligature or [kulor lokal] with the umlaut) and the reason: 'wymowa wyrazow obcych podawana w wiekszosci slownikow jest uproszczona w stosunku do wymowy oryginalnej' -- the pronunciation of foreign words given in most dictionaries is simplified relative to the original. That is this column's whole thesis, stated by the reference publisher's own advice service, and it is what authorises the o-umlaut below. (4) The syllable division is the Wielki slownik ortograficzny PWN's rule on dzielenie wyrazow, which allows a medial consonant group to be split anywhere provided at least one consonant stays with the following vowel -- so onset maximisation is permitted rather than merely tolerated. Only conventions are taken, never text.",
+  "deviations": [
+    {
+      "rule": "Kopalinski marks stress with a dot under the stressed vowel, which is Duden's Unterpunkt with a Polish source.",
+      "why": "Not taken, for the reason `content/RESPELL-SYSTEMS.md` gives for every subscript device: this field sets at 5.22pt italic muted, where a mark below the baseline is the first thing to go. It is also not available in shared code -- U+0323 is in no `STRESS_DEVICE` entry, and adding one for a single reader is what the Hebrew meteg was refused for. Capitals instead, which is the documented fallback. **The acute is separately out, and this is the sharper reason**: in Polish an acute is not a stress mark, it is a letter. `o` with an acute is `o` with an acute, which is /u/, so an acute-for-stress on `potok` would print `potok` with a different vowel -- and on a consonant the acute makes `c` into `c-acute`, a different phoneme. Hungarian rejected the acute because length is phonemic there; Polish rejects it because the mark is part of five of its letters."
+    },
+    {
+      "rule": "KSNG writes Russian щ as `szcz` (Chruszczow, Szczerbakow).",
+      "why": "Overruled, and it is the one place this table departs from the commission on a sound rather than on a convention. `szcz` is a historical spelling: щ was [ʃtʃ] and in modern Russian it is a single long alveolo-palatal fricative [ɕː], which Polish `s-acute` writes exactly. KSNG's job is a permanent spelling of a place name, where matching the Cyrillic letter count matters; this column's job is to be said out loud. 26 rows."
+    },
+    {
+      "rule": "Polish naturalises a foreign /w/ as the letter `w`, which is /v/: `weekend` is said [ˈvikɛnt], `whisky` [ˈviski].",
+      "why": "Overruled in favour of `l-stroke`, which is [w] for every Polish speaker born since about 1940. The naturalised form is a *spelling* convention for a permanently borrowed word; this column is a disposable hint that has to be said. Polish is the only reader in this corpus with a full-size letter for /w/, and spending it on /v/ instead would throw away the one thing it has that Hungarian, Greek and Russian readers do not."
+    },
+    {
+      "rule": "Kopalinski's notation adds two letters to the Polish alphabet, `a`-umlaut for the vowel between a and e and `o`-umlaut for the one between o and e.",
+      "why": "One of the two is taken and one is not, and the split is the one-line-legend rule. `o`-umlaut is kept, because Polish has nothing at all in the front-rounded space and dropping it merges /o-slash/ and /oe/ with /ɛ/ across French, German, Turkish and Hungarian -- some 620 cells -- and because PWN's own Poradnia endorses exactly this letter for exactly this job. `a`-umlaut is dropped: /ae/ -> `e` is the substitution a Polish speaker actually makes and the one the loanword stock already records (`meczet`, `dzem`, `hetman`), so it costs a merger Polish speakers perform anyway rather than a distinction they could hear. `u`-umlaut is kept on the same terms as `o`-umlaut, for /y/; the two together are one legend clause ('as in German') rather than two."
+    },
+    {
+      "rule": "Polish cannot write a plain consonant before /i/. `si` is /ɕi/, `ni` is /ɲi/, `ci` is /tɕi/ and `zi` is /ʑi/ -- the vowel letter *is* the palatalisation mark, with no way to switch it off.",
+      "why": "Accepted rather than repaired, because there is nothing to repair it with: `sy` would be [sɨ], a different vowel, and a hyphen inside a syllable does not un-palatalise. So English `see` and Spanish `si` come out palatal. Two consolations. It is *right* for the two targets where the sound really is palatal -- Japanese `shi` and Mandarin `xi` are [ɕi], so `si` is the correct spelling and not an approximation. And /ts/ does have a repair, which is taken: before /i/ it is written `ts` rather than `c`, because Polish reads `ts` as [ts] (`bratstwo`) while `ci` would be [tɕi] -- so German `Zimmer` is `tsi-mer`."
+    },
+    {
+      "rule": "KSNG transcribes Arabic and Persian ayn and hamza with nothing, and this table drops the glottal stop everywhere.",
+      "why": "Followed for Arabic and Persian, where it is the commission's own answer, and extended to Thai and Klingon, where it is a loss. Klingon's apostrophe is a phoneme and a frequent one (269 rows), and a Polish reader loses it: the apostrophe is not available as a sound in Polish, where it marks a morpheme boundary on a foreign name (`Kennedy'ego`) and would be read as nothing at all rather than as a stop."
+    },
+    {
+      "rule": "AkH.-style forbidding of respelling a Latin-script name in place of its own spelling has a Polish counterpart in the WSO's rule that a foreign name keeps its original orthography.",
+      "why": "Compatible and both honoured, for the same reason the Hungarian table records: that rule governs how to *write* a name, and Kopalinski's `[wym. ...]` bracket -- printed beside the correctly-spelled headword -- is what this column is. The target's own spelling is in the column next to it."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "/th/ and /dh/ (English think and this, Greek theta and delta, Arabic tha and dhal, Swahili)",
+      "out": "s and z",
+      "why": "Polish has neither. [s] and [z] are the substitution a Polish speaker makes and the one Polish schools teach for English, and they are what KSNG's Arabic transcription writes for ث and ذ. So /th/ merges with /s/ and /dh/ with /z/. The alternative pair [f]/[v] is also heard in Polish English and is not written by any Polish source."
+    },
+    {
+      "sounds": "/h/ against /x/ (English, Korean, Japanese, Hindi, Arabic, German, Greek, Persian, Hebrew)",
+      "out": "h against ch",
+      "why": "**Standard Polish has no /h/.** Both `h` and `ch` are [x], so the two letters are an orthographic distinction with no sound behind it for most speakers -- though it is a real one for eastern speakers who voice `h` as [ɦ], which is closer to /h/ than [x] is. Writing them differently costs nothing and is right for that minority, so the distinction is kept in the spelling and lost in the reading. Arabic's ha and hha both land on `h`, which is KSNG's own choice."
+    },
+    {
+      "sounds": "vowel length (Hindi, Thai, Arabic, German, Hungarian, Vietnamese, English, Japanese)",
+      "out": "a colon after the vowel",
+      "why": "Polish has no phonemic vowel length at all -- the historical contrast collapsed by the sixteenth century, leaving `o`/`o with acute` as a *quality* difference. So the colon is a new instruction rather than a native contrast, and it is taken because Kopalinski's dictionary already prints exactly this mark for exactly this purpose, which makes it borrowed rather than invented -- the same standing Turkish's colon has from the TDK. Doubling was rejected: a doubled vowel in Polish is two syllables (`zoo`, `kooperacja`), which would add a syllable to every long vowel in Hindi and Thai."
+    },
+    {
+      "sounds": "aspiration (Mandarin, Korean, Hindi, Thai, Klingon)",
+      "out": "the voiced letter for the unaspirated series, the voiceless letter for the aspirated one",
+      "why": "Polish has no aspirated stops and no way to write one: `ph` and `kh` read as two segments. The contrast therefore survives as a voicing contrast and the aspiration does not. Hindi is the exception the condition exists for: it has a three-way contrast and word-initial /b d g/ of its own, so it keeps `p t k` for the voiceless series and loses only the aspiration and the breathy voice."
+    },
+    {
+      "sounds": "Korean's tense series (pp, tt, kk, ss, jj)",
+      "out": "a doubled letter",
+      "why": "There is no third stop series in Polish. A doubled consonant is Polish's own length mark (`lekki`, `wanna`), and a longer, tenser closure is close to what a tense consonant is -- but a Polish reader will produce length rather than tension, and word-initially Polish has no geminate to produce."
+    },
+    {
+      "sounds": "the front rounded vowels /y/, /o-slash/ and /oe/ (French, German, Turkish, Hungarian, Mandarin)",
+      "out": "u-umlaut and o-umlaut",
+      "why": "The two letters this table adds to the Polish alphabet, and the only thing in the legend. Both are Kopalinski's, both are endorsed by PWN's Poradnia for this exact job, and both are letters a Polish reader has met in German and Turkish names printed unaltered in Polish text (`Dusseldorf`, `Koln`, `Gorlitz`). The naturalised Polish reflex is `e` -- `szofer` from *chauffeur*, `manewr` from *manoeuvre*, `fotel` from *fauteuil*, `inzynier* from *ingenieur* -- and it is rejected here for the reason in `deviations`."
+    },
+    {
+      "sounds": "the Arabic emphatics, the pharyngeals, and Arabic and Persian qaf and ghayn",
+      "out": "the plain letters: d, h, k, g",
+      "why": "KSNG's Arabic transcription writes them this way and Polish has nothing else. The emphatic/plain contrast and the voicing of the uvular are both lost."
+    },
+    {
+      "sounds": "Klingon's /tl/ lateral affricate and its /ɬ/",
+      "out": "l",
+      "why": "Polish has no lateral fricative. `phonemesOf` splits /tɬ/ into /t/ + /ɬ/ before any rule is consulted, so it comes out `tl`, which is at least a legal Polish onset."
+    },
+    {
+      "sounds": "the retroflex series of Hindi (t, d, n, r) and Mandarin's retroflex stops",
+      "out": "the plain dentals",
+      "why": "Polish has no retroflex stops. It *does* have retroflex sibilants, which is why Mandarin's sh/zh/ch/r are not in this list -- see the note. Hindi's flapped retroflex is `r`, which KSNG's Hindi transcription also writes."
+    },
+    {
+      "sounds": "Russian's palatalised labials and /r/",
+      "out": "the plain letter, or the letter plus `i` before a vowel",
+      "why": "Listed for the opposite reason from the rest of this table: Polish spells palatalisation on the *coronals* with its own letters, so ть дь нь сь зь transcribe one to one as c-acute / dz-acute / n-acute / s-acute / z-acute -- which is KSNG's chart and is ordinary Polish. What is left over is мь пь бь вь фь and рь, where Polish has no palatal letter and writes the palatalising `i` before a vowel and nothing at all before a consonant."
+    }
+  ],
+  "policy": {
+    "syllable_separator": "-",
+    "word_separator": " ",
+    "stress": "caps",
+    "stress_min_syllables": 2,
+    "length": "colon",
+    "tone": "drop",
+    "max_onset": 3,
+    "fixups": "all",
+    "locale": "pl"
+  },
+  "legend": "WIELKIE LITERY to akcentowana sylaba, dwukropek wydłuża poprzedzającą samogłoskę, a ö i ü czyta się jak po niemiecku. Reszta to zwykły polski.",
+  "phonemes": [
+    {
+      "slot": "onset",
+      "ipa": "tɕ",
+      "out": "dz",
+      "if_inventory": "tɕʰ",
+      "if_nucleus_head": "i ɪ ĩ j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tɕ",
+      "out": "dzi",
+      "if_inventory": "tɕʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "dź",
+      "if_inventory": "tɕʰ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tɕʰ",
+      "out": "c",
+      "if_nucleus_head": "i ɪ ĩ j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tɕʰ",
+      "out": "ci"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "ć"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɕ",
+      "out": "s",
+      "if_nucleus_head": "i ɪ ĩ j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɕ",
+      "out": "si"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "ś"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʑ",
+      "out": "z",
+      "if_nucleus_head": "i ɪ ĩ j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʑ",
+      "out": "zi"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʑ",
+      "out": "ź"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tɕ",
+      "out": "c",
+      "if_nucleus_head": "i ɪ ĩ j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tɕ",
+      "out": "ci"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "ć"
+    },
+    {
+      "slot": "onset",
+      "ipa": "dʑ",
+      "out": "dz",
+      "if_nucleus_head": "i ɪ ĩ j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "dʑ",
+      "out": "dzi"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʑ",
+      "out": "dź"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɲ",
+      "out": "n",
+      "if_nucleus_head": "i ɪ ĩ j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɲ",
+      "out": "ni"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "ń"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tʲ",
+      "out": "c",
+      "if_nucleus_head": "i ɪ ĩ j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tʲ",
+      "out": "ci"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʲ",
+      "out": "ć"
+    },
+    {
+      "slot": "onset",
+      "ipa": "dʲ",
+      "out": "dz",
+      "if_nucleus_head": "i ɪ ĩ j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "dʲ",
+      "out": "dzi"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʲ",
+      "out": "dź"
+    },
+    {
+      "slot": "onset",
+      "ipa": "nʲ",
+      "out": "n",
+      "if_nucleus_head": "i ɪ ĩ j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "nʲ",
+      "out": "ni"
+    },
+    {
+      "slot": "any",
+      "ipa": "nʲ",
+      "out": "ń"
+    },
+    {
+      "slot": "onset",
+      "ipa": "sʲ",
+      "out": "s",
+      "if_nucleus_head": "i ɪ ĩ j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "sʲ",
+      "out": "si"
+    },
+    {
+      "slot": "any",
+      "ipa": "sʲ",
+      "out": "ś"
+    },
+    {
+      "slot": "onset",
+      "ipa": "c",
+      "out": "c",
+      "if_nucleus_head": "i ɪ ĩ j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "c",
+      "out": "ci"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "ć"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɟ",
+      "out": "dz",
+      "if_nucleus_head": "i ɪ ĩ j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɟ",
+      "out": "dzi"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "dź"
+    },
+    {
+      "slot": "onset",
+      "ipa": "cʰ",
+      "out": "c",
+      "if_nucleus_head": "i ɪ ĩ j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "cʰ",
+      "out": "ci"
+    },
+    {
+      "slot": "any",
+      "ipa": "cʰ",
+      "out": "ć"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɟʰ",
+      "out": "dz",
+      "if_nucleus_head": "i ɪ ĩ j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɟʰ",
+      "out": "dzi"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟʰ",
+      "out": "dź"
+    },
+    {
+      "slot": "onset",
+      "ipa": "mʲ",
+      "out": "m",
+      "if_nucleus_head": "i ɪ ĩ j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "mʲ",
+      "out": "mi"
+    },
+    {
+      "slot": "any",
+      "ipa": "mʲ",
+      "out": "m"
+    },
+    {
+      "slot": "onset",
+      "ipa": "pʲ",
+      "out": "p",
+      "if_nucleus_head": "i ɪ ĩ j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "pʲ",
+      "out": "pi"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʲ",
+      "out": "p"
+    },
+    {
+      "slot": "onset",
+      "ipa": "bʲ",
+      "out": "b",
+      "if_nucleus_head": "i ɪ ĩ j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "bʲ",
+      "out": "bi"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʲ",
+      "out": "b"
+    },
+    {
+      "slot": "onset",
+      "ipa": "vʲ",
+      "out": "w",
+      "if_nucleus_head": "i ɪ ĩ j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "vʲ",
+      "out": "wi"
+    },
+    {
+      "slot": "any",
+      "ipa": "vʲ",
+      "out": "w"
+    },
+    {
+      "slot": "onset",
+      "ipa": "fʲ",
+      "out": "f",
+      "if_nucleus_head": "i ɪ ĩ j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "fʲ",
+      "out": "fi"
+    },
+    {
+      "slot": "any",
+      "ipa": "fʲ",
+      "out": "f"
+    },
+    {
+      "slot": "onset",
+      "ipa": "kʲ",
+      "out": "k",
+      "if_nucleus_head": "i ɪ ĩ j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "kʲ",
+      "out": "ki"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʲ",
+      "out": "k"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɡʲ",
+      "out": "g",
+      "if_nucleus_head": "i ɪ ĩ j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɡʲ",
+      "out": "gi"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡʲ",
+      "out": "g"
+    },
+    {
+      "slot": "onset",
+      "ipa": "rʲ",
+      "out": "r",
+      "if_nucleus_head": "i ɪ ĩ j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "rʲ",
+      "out": "ri"
+    },
+    {
+      "slot": "any",
+      "ipa": "rʲ",
+      "out": "r"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɭʲ",
+      "out": "l",
+      "if_nucleus_head": "i ɪ ĩ j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɭʲ",
+      "out": "li"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭʲ",
+      "out": "l"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʎ",
+      "out": "l",
+      "if_nucleus_head": "i ɪ ĩ j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʎ",
+      "out": "li"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "-z",
+      "after_out": "s r c"
+    },
+    {
+      "slot": "any",
+      "ipa": "h",
+      "out": "-h",
+      "after_out": "c"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ẽː",
+      "out": "ę:"
+    },
+    {
+      "slot": "any",
+      "ipa": "ː",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˑ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̯",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˀ",
+      "out": ""
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "a",
+      "out": "a"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑ",
+      "out": "a"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ",
+      "out": "a"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌ",
+      "out": "a"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "æ",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "e",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ə",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɤ",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɜ",
+      "out": "ö"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ø",
+      "out": "ö"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ",
+      "out": "ö"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "i",
+      "out": "i"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɪ",
+      "out": "i"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɨ",
+      "out": "y"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "o",
+      "out": "o"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ",
+      "out": "o"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɒ",
+      "out": "o"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɵ",
+      "out": "o"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "u",
+      "out": "u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʊ",
+      "out": "u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʉ",
+      "out": "u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "y",
+      "out": "ü"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ã",
+      "out": "ą"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "õ",
+      "out": "ą"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑ̃",
+      "out": "ą"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ̃",
+      "out": "ą"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ̃",
+      "out": "ą"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ẽ",
+      "out": "ę"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ̃",
+      "out": "ę"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ̃",
+      "out": "ę"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ĩ",
+      "out": "in"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ũ",
+      "out": "un"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɚ",
+      "out": "er"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɝ",
+      "out": "ör"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯ",
+      "out": "y",
+      "if_inventory": "u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "ł"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰ",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɥ",
+      "out": "ü"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "j",
+      "out": "i",
+      "after_out": "p b t d k g f w s z m n l r c h ż ź ć ś ń ł"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "b",
+      "if_inventory": "pʰ",
+      "unless_inventory": "#b"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʰ",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "b",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "d",
+      "if_inventory": "tʰ",
+      "unless_inventory": "#d"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "d",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "g",
+      "if_inventory": "kʰ",
+      "unless_inventory": "#ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰ",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡ",
+      "out": "g"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ts",
+      "out": "ts",
+      "if_nucleus_head": "i ɪ j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "dz",
+      "if_inventory": "tsʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts̪",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts̪ʰ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "dz",
+      "out": "dz"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "dż",
+      "if_inventory": "ʈʂʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂʰ",
+      "out": "cz"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "cz"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "dż",
+      "if_inventory": "tʃʰ",
+      "unless_inventory": "#dʒ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃʰ",
+      "out": "cz"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "cz"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃʲ",
+      "out": "cz"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒ",
+      "out": "dż"
+    },
+    {
+      "slot": "any",
+      "ipa": "pf",
+      "out": "pf"
+    },
+    {
+      "slot": "any",
+      "ipa": "m",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "m̩",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "n",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "n̩",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɴ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɳ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "f",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "v",
+      "out": "w"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʋ",
+      "out": "w"
+    },
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "s̪",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "sz"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʂ",
+      "out": "sz"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒ",
+      "out": "ż"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʐ",
+      "out": "ż"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɻ",
+      "out": "ż"
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɸ",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "h",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ħ",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɣ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "q",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "qʰ",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "l",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɫ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɬ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɹ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽʰ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "t̪",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɗ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʰ",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡʰ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "dˤ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "θ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "ð",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʕ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "p͈",
+      "out": "pp"
+    },
+    {
+      "slot": "any",
+      "ipa": "t͈",
+      "out": "tt"
+    },
+    {
+      "slot": "any",
+      "ipa": "k͈",
+      "out": "kk"
+    },
+    {
+      "slot": "any",
+      "ipa": "s͈",
+      "out": "ss"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ͈",
+      "out": "ćć"
+    },
+    {
+      "slot": "any",
+      "ipa": "kː",
+      "out": "kk"
+    },
+    {
+      "slot": "any",
+      "ipa": "dː",
+      "out": "dd"
+    },
+    {
+      "slot": "any",
+      "ipa": "tː",
+      "out": "tt"
+    },
+    {
+      "slot": "any",
+      "ipa": "cː",
+      "out": "ćć"
+    },
+    {
+      "slot": "any",
+      "ipa": "pː",
+      "out": "pp"
+    },
+    {
+      "slot": "any",
+      "ipa": "bː",
+      "out": "bb"
+    },
+    {
+      "slot": "any",
+      "ipa": "t̪ː",
+      "out": "tt"
+    },
+    {
+      "slot": "any",
+      "ipa": "qː",
+      "out": "kk"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʰː",
+      "out": "dd"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰː",
+      "out": "tt"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "n",
+      "before_onset": "k ɡ kʰ k͈ x"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "ng"
+    }
+  ],
+  "targets": {
+    "el": {
+      "phonemes": [
+        {
+          "slot": "onset",
+          "ipa": "c",
+          "out": "k",
+          "if_nucleus_head": "i j"
+        },
+        {
+          "slot": "onset",
+          "ipa": "c",
+          "out": "ki"
+        },
+        {
+          "slot": "any",
+          "ipa": "c",
+          "out": "k"
+        }
+      ]
+    },
+    "ru": {
+      "phonemes": [
+        {
+          "slot": "nucleus",
+          "ipa": "ʌ",
+          "out": "o"
+        },
+        {
+          "slot": "nucleus",
+          "ipa": "ə",
+          "out": "a"
+        },
+        {
+          "slot": "nucleus",
+          "ipa": "ɐ",
+          "out": "a"
+        }
+      ]
+    },
+    "ko": {
+      "phonemes": [
+        {
+          "slot": "nucleus",
+          "ipa": "ʌ",
+          "out": "o"
+        }
+      ]
+    },
+    "tr": {
+      "phonemes": [
+        {
+          "slot": "onset",
+          "ipa": "ɟ",
+          "out": "g",
+          "if_nucleus_head": "i ɪ ĩ j"
+        },
+        {
+          "slot": "onset",
+          "ipa": "ɟ",
+          "out": "gi"
+        },
+        {
+          "slot": "any",
+          "ipa": "ɟ",
+          "out": "g"
+        },
+        {
+          "slot": "onset",
+          "ipa": "c",
+          "out": "k",
+          "if_nucleus_head": "i ɪ ĩ j"
+        },
+        {
+          "slot": "onset",
+          "ipa": "c",
+          "out": "ki"
+        },
+        {
+          "slot": "any",
+          "ipa": "c",
+          "out": "k"
+        }
+      ]
+    },
+    "pt": {
+      "phonemes": [
+        {
+          "slot": "nucleus",
+          "ipa": "æ",
+          "out": "a"
+        },
+        {
+          "slot": "nucleus",
+          "ipa": "y",
+          "out": "i"
+        }
+      ]
+    },
+    "hi": {
+      "phonemes": [
+        {
+          "slot": "nucleus",
+          "ipa": "ə",
+          "out": "a"
+        },
+        {
+          "slot": "nucleus",
+          "ipa": "ʌ",
+          "out": "a"
+        }
+      ]
+    }
+  },
+  "syllable_fixups": [],
+  "note": "Polish is the plain-Latin control of its batch and the cheap half of it is real: the orthography is near-phonemic, so `derives_from` had a national commission and a standard dictionary to borrow from rather than an invention to justify. What makes the table worth reading is the other half, and it is one fact about the inventory. **Polish has a three-way sibilant and affricate contrast, and nothing else in this corpus has more than two.** `s z c dz` against `sz z-dot cz d-z-dot` (retroflex) against `s-acute z-acute c-acute dz-acute` (alveolo-palatal) is exactly Mandarin's z/c, zh/ch/sh/r and j/q/x, so Mandarin transcribes one to one in ordinary Polish letters: shou-ji is `szou-dzi`, qing is `cing`, xi is `si`, zi is `dzy`, zhang is `dzang` with the dot. A Hungarian reader gets the three-way at the cost of an audible [h] in `hsz`; a Spanish or Greek reader has to merge two of the three. Japanese gets the same dividend: shi is `si`, chi is `ci`, ji is `dzi`, nichi is `ni-ci`, so konnichiwa is `kon-ni-ci-la` with every consonant right rather than approximated. And Russian's soft series maps straight onto it, which is KSNG's own chart: den is `dzien`, prostite is `pro-sci-ci`, vecher is `wie-czir`.\n\nThree more things Polish hands a reader that most of this set cannot. Its `l-stroke` is /w/, a full-size letter, so Mandarin shuo is `szlo` and Korean dwae is `dle`, where a Hungarian reader has to write `v` and a Greek one an `ou` digraph. Its `y` is /ɨ/, which is Russian ы and Mandarin's apical -i, one to one. And it has real nasal vowel letters, so French enfant is `a-nasal-FA-nasal` rather than a vowel plus an intrusive /n/, and Hindi's mein is `me-nasal` with a length colon.\n\nWhat it cannot do is one thing, and it runs through the whole table: **Polish cannot write a plain consonant before /i/.** The vowel letter is the palatalisation mark, so `si` is /ɕi/ and `ni` is /ɲi/ with no way to switch it off -- which is a gift for Japanese and Mandarin, where the sound really is palatal, and a loss for Spanish `si`, Hungarian `Szia` and English `see`. It is in `deviations` with the one repair that does exist, which is /ts/ before /i/.",
+  "policy_note": "`max_onset: 3` with no `reader_onsets`, and Polish is the first reader in this set that needs neither restriction. Spanish drops to 1 because a Spanish speaker cannot begin `an-der-stand`; Hungarian drops to 1 because AkH. 226 prescribes `prog-ram`. Polish opens words with `wstrz-`, `pstr-`, `szcz-`, `mgl-` and `zdzbl-`, so its own onset inventory is a superset of everything the other twenty-three targets can put at the start of a syllable, and there is nothing for a syllable-opening predicate to subtract. The Wielki slownik ortograficzny's rule on dzielenie wyrazow permits a medial group to be divided anywhere provided one consonant stays with the following vowel, so onset maximisation is what the book allows rather than what it forbids.\n\n`length: colon` rather than `double`, and the reason is Polish and not typographic: a doubled vowel in Polish is two syllables (`zoo`, `kooperacja`), so doubling would add a syllable to every long vowel in Hindi, Thai and Arabic. The colon is Kopalinski's own mark for exactly this, which puts it on the same footing as Turkish's, and it is the only length device Polish has -- the historical vowel-length contrast collapsed in the sixteenth century and left `o`/`o-acute` as a difference of quality.\n\n`fixups: 'all'` with an empty `syllable_fixups`: the digraph collisions are handled as `after_out` conditions in `phonemes`, because a fixup sees only the emitted text and could not tell a `-z` that has to break `rz` from the ordinary spelling of /ʐ/. The list is short and it was measured rather than enumerated -- the first draft guarded eight collisions and five of them cannot arise, because `AFFRICATES` in core/respell.js makes /dz/, /dʒ/, /dʑ/ and /tʃ/ single units, so /d/+/z/ is never two phonemes inside one syllable and across a boundary the separator is already there. What survives is /r/+/z/, which English plurals produce 40-odd times (`KA-ste-mer-z` for customers), /s/+/z/ once and /ts/+/h/ once."
+}

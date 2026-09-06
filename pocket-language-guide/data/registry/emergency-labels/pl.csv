@@ -1,0 +1,12 @@
+label,text
+_frame,{region}: {numbers}
+all services,wszystkie służby
+police,policja
+ambulance,pogotowie
+fire,straż pożarna
+also works,też działa
+fire and ambulance,straż pożarna + pogotowie
+medical,pomoc medyczna
+tourist police,policja turystyczna
+police and ambulance,policja + pogotowie
+gendarmerie,żandarmeria

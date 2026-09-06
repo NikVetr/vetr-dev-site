@@ -1,0 +1,8 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,ٹکٹ کہاں سے ملے گا؟,,ṭikaṭ kahāñ se mile gā?,ʈˈɪkɪʈ kˈʌhãː seː mˈɪleː ɡaː,,2,ur-agent-v1;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,کیا بکنگ کرانی پڑے گی؟,کیا پہلے سے بکنگ ضروری ہے؟,kyā buking karānī paṛe gī?,kjˈaː bˈʊkɪnɡ kəɾˈaːni pˈʌɽeː ɡi,,2,ur-agent-v1;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,اندر جانے کا آخری وقت کیا ہے؟,,andar jāne kā ākhirī waqt kyā hai?,ˈandaɾ ɟˈaːneː kaː ˈaːxɾˌiː ʋˈaqt kjˈaː hɛ,,2,ur-agent-v1;ipa=espeak
+attractions-tickets.are-there-lockers,کیا یہاں لاکر ہیں؟,کیا سامان رکھنے کی جگہ ہے؟,kyā yahāñ lākar haiñ?,kjˈaː jˈʌhãː lˈaːkəɾ hẽ,,2,ur-agent-v1;ipa=espeak
+attractions-tickets.may-i-take-photos,کیا یہاں تصویر لینے کی اجازت ہے؟,کیا یہاں فوٹو بنا سکتے ہیں؟,kyā yahāñ taswīr lene kī ijāzat hai?,kjˈaː jˈʌhãː təsʋˈiːɾ lˈeːneː ki ɪɟˈaːzat hɛ,,2,ur-agent-v1;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,ہماری تصویر بنا دیجیے,ہماری فوٹو لے دیجیے,hamārī taswīr banā dījiye,həmˈaːɾi təsʋˈiːɾ bˈʌnaː diɟˈiːeː,Urdu 'makes' a picture rather than taking one,2,ur-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,کیا آپ ہماری تصویر بنا دیں گے؟,ذرا ہماری فوٹو بنا دیجیے,kyā āp hamārī taswīr banā deñ ge?,kjˈaː ˌaːp həmˈaːɾi təsʋˈiːɾ bˈʌnaː dˈẽ ɡeː,,2,ur-agent-v1;ipa=espeak

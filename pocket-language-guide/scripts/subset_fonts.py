@@ -68,6 +68,12 @@ THAI_RANGES = [(0x0E00, 0x0E7F)]
 # which `layout_features` keeps.
 HEBREW_RANGES = [(0x0590, 0x05FF)]
 DEVA_RANGES = [(0x0900, 0x097F), (0xA8E0, 0xA8FF)]
+# The whole Bengali block. Its vowel signs go on all four sides of a consonant --
+# including the two-part ো and ৌ that wrap around it -- so the block is requested
+# whole rather than by the letters the corpus happens to use: a conjunct the corpus
+# does not contain today is one row away, and the subsetter intersects with the cmap
+# in any case. U+09E6..09EF are the Bengali digits, which the pack prints.
+BENG_RANGES = [(0x0980, 0x09FF)]
 
 # Klingon pIqaD and Tengwar. These are the two scripts here that are **not in
 # Unicode**: both proposals were rejected, so they live in the Private Use Area by
@@ -144,6 +150,10 @@ FACES = {
     ("hebrew", 700, False): "NotoSansHebrew-var.ttf",
     ("hebrew-serif", 400, False): "NotoSerifHebrew-var.ttf",
     ("hebrew-serif", 700, False): "NotoSerifHebrew-var.ttf",
+    ("beng", 400, False): "NotoSansBengali-var.ttf",
+    ("beng", 700, False): "NotoSansBengali-var.ttf",
+    ("beng-serif", 400, False): "NotoSerifBengali-var.ttf",
+    ("beng-serif", 700, False): "NotoSerifBengali-var.ttf",
     ("deva", 400, False): "NotoSansDevanagari-var.ttf",
     ("deva", 700, False): "NotoSansDevanagari-var.ttf",
     ("deva-serif", 400, False): "NotoSerifDevanagari-var.ttf",
@@ -224,7 +234,23 @@ ALL_LANGS = ["en", "es", "fr", "de", "ko", "ar", "zh-Hans", "ja",
              # romanisation brings `ā ī ū ‘ ’` and the middle dot of `es·hāl`. Leaving
              # a language out of this list is the omission Italian shipped with for a
              # whole language generation and only survived because it is Latin.
-             "fa"]
+             "fa",
+             # Urdu, whose own stack is `arabic` too. Same reason again -- the four
+             # `latin` faces draw its `romanization_bgn` and its `ipa` on every pair
+             # whose target is Urdu, and the romanisation brings `ā ī ū ṭ ḍ ṛ ñ ’`,
+             # of which `ṛ` U+1E5B and `ñ` are the two no earlier pack needed.
+             "ur",
+             # Bengali, whose own stack is `beng`. Here for the reason Hebrew,
+             # Persian and Urdu are: the four `latin` faces draw its
+             # `romanization_iso15919` and its `ipa` on every pair whose target is
+             # Bengali, and that romanisation brings the underdots `ṭ ḍ ṇ ṛ ṣ` and
+             # `ṁ`, whose candrabindu no earlier pack needed.
+             "bn",
+             # Polish, which needs no stack of its own -- `Latn` already routes to
+             # `latin` -- but does need naming here, because a language left out of
+             # this union is exactly the omission Italian shipped with. It brings
+             # `ą ć ę ł ń ó ś ź ż`, of which the ogoneks and `ł` are new.
+             "pl"]
 STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                "latin-serif": ALL_LANGS, "latin-cond-serif": ALL_LANGS,
                "cjk-sc": ["zh-Hans"], "cjk-sc-serif": ["zh-Hans"],
@@ -237,8 +263,17 @@ STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                # پ چ ژ گ ک ی and the Eastern Arabic-Indic digits: `ARABIC_RANGES` is
                # the whole standard repertoire and not a corpus union, which is why
                # Persian needed no font change for its four extra letters.
-               "arabic": ["ar", "fa"], "thai": ["th"], "thai-serif": ["th"],
+               # Urdu joins for the same reason, and its script decision is in
+               # tmp/urdu.md: it reuses `Arab` at Naskh because Nastaliq cannot be
+               # shaped by the fontkit this project measures and prints with -- 84
+               # of 86 real Urdu rows throw on Noto Nastaliq Urdu's NULL cursive
+               # anchors -- and because an honest Nastaliq `leading_factor` is 2.80
+               # against Arabic's 1.30. `ARABIC_RANGES` already covers ٹ ڈ ڑ ھ ہ ں
+               # ے, measured against both shipped cmaps, so Urdu needs no font
+               # change either.
+               "arabic": ["ar", "fa", "ur"], "thai": ["th"], "thai-serif": ["th"],
                "deva": ["hi"], "deva-serif": ["hi"],
+               "beng": ["bn"], "beng-serif": ["bn"],
                "hebrew": ["he"], "hebrew-serif": ["he"]}
 
 
@@ -337,6 +372,8 @@ def coverage(stack):
         chars |= expand(THAI_RANGES)
     elif stack.startswith("deva"):
         chars |= expand(DEVA_RANGES)
+    elif stack.startswith("beng"):
+        chars |= expand(BENG_RANGES)
     elif stack.startswith("hebrew"):
         chars |= expand(HEBREW_RANGES)
     return chars

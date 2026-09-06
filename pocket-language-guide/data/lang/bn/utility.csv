@@ -1,0 +1,16 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,আমি {} যেতে চাই,,āmi {} yete cāi,ˌami {} dʒˈete tʃˈai,,2,bn-agent-v1;ipa=espeak
+utility-templates.please-give-me,দয়া করে আমাকে {} দিন,,daẏā kare āmāke {} dina,dˈɔa kˈɔɾe ˈamakˌe {} dˈin,,2,bn-agent-v1;ipa=espeak
+utility-templates.may-i,আমি কি {} পারি?,,āmi ki {} pāri?,ˌami ki {} pˈaɾi,am I able to {}?,2,bn-agent-v1;ipa=espeak
+utility-templates.please-do-not-add,দয়া করে {} দেবেন না,,daẏā kare {} debena nā,dˈɔa kˈɔɾe {} dˈeben nˈa,please do not put in {},2,bn-agent-v1;ipa=espeak
+utility-templates.do-you-have,আপনার কাছে {} আছে কি?,,āpanāra kāche {} āche ki?,ˌapɔnˌaɾ kˈatʃʰe {} ˈatʃʰe ki,is {} with you?,2,bn-agent-v1;ipa=espeak
+utility-templates.please-write-the-number,দয়া করে সংখ্যাটা লিখে দিন,,daẏā kare saṁkhyāṭā likhe dina,dˈɔa kˈɔɾe ʃˈɔŋkʰæʈˌa lˈikʰe dˈin,,2,bn-agent-v1;ipa=espeak
+utility-templates.i-need,আমার {} দরকার,,āmāra {} darakāra,ˌamaɾ {} dɔɾkˈaɾ,{} is needed to me,2,bn-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,এখানে কাছে {} আছে কি?,,ekhāne kāche {} āche ki?,ˈekʰanˌe kˈatʃʰe {} ˈatʃʰe ki,is there a {} near here?,2,bn-agent-v1;ipa=espeak
+utility-templates.how-much-is,{} কত?,,{} kata?,{} kˈɔto,{} how much?,2,bn-agent-v1;ipa=espeak
+utility-templates.is-this,এটা কি {}?,,eṭā ki {}?,ˌeʈa ki {},,2,bn-agent-v1;ipa=espeak
+utility-templates.please,{} দিন,,{} dina,{} dˈin,give {} -- the -ন ending is the polite request,2,bn-agent-v1;ipa=espeak
+utility-templates.i-am-looking-for,আমি {} খুঁজছি,,āmi {} khum̐jachi,ˌami {} kʰˈũɟɔtʃʰˌi,,2,bn-agent-v1;ipa=espeak
+utility-templates.do-you-accept,{} নেন কি?,,{} nena ki?,{} nˈen ki,do you take {}?,2,bn-agent-v1;ipa=espeak
+utility-templates.i-cannot-find,আমি {} খুঁজে পাচ্ছি না,,āmi {} khum̐je pācchi nā,ˌami {} kʰˈũɟe pˈatʃtʃʰi nˈa,,2,bn-agent-v1;ipa=espeak
+utility-templates.there-is-a-problem-with,{} নিয়ে একটা সমস্যা হয়েছে,,{} niẏe ekaṭā samasyā haẏeche,{} nˈie ˈækʈa ʃˈɔmɔssˌa hˈɔetʃʰˌe,a problem has arisen with {},2,bn-agent-v1;ipa=espeak

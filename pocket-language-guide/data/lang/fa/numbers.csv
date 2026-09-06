@@ -84,3 +84,5 @@ numbers-money.lakh,صد هزار,,sad hezār,sad hezɑr,spelled out: two digits 
 numbers-money.crore,ده میلیون,,dah milyun,dah milijun,,2,fa-gloss-v1;ipa=espeak
 numbers-money.shekel,شکل,,shekel,ʃekl,,2,fa-gloss-v1;cldr;ipa=espeak
 numbers-money.shekel-symbol,نشانِ شکل,,neshān-e shekel,neʃɑne ʃekl,,2,fa-gloss-v1;cldr;ipa=espeak
+numbers-money.zloty,زلوتی,,,zoluti,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.zloty-symbol,زلوتی (نماد),,,zoluti namɑd,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
