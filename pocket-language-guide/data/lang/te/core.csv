@@ -1,0 +1,47 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+pronouns-verbs.i-me,నేను / నన్ను,నాకు,nēnu / nannu,,nominative / accusative; nāku is the dative 'to me',2,te-agent-v1
+pronouns-verbs.we-us,మేము / మమ్మల్ని,మనం / మనల్ని,mēmu / mammalni,,excludes the listener; manaṁ includes them,2,te-agent-v1
+pronouns-verbs.you,నువ్వు,,nuvvu,,familiar; only to a child or a close friend,2,te-agent-v1
+pronouns-verbs.you-polite,మీరు,,mīru,,use this always,2,te-agent-v1
+pronouns-verbs.he-him,అతను / అతన్ని,ఆయన,atanu / atanni,,atanu is ordinary; āyana is the honorific grade,2,te-agent-v1
+pronouns-verbs.she-her,ఆమె / ఆమెను,ఆవిడ,āme / āmenu,,āme is ordinary; āviḍa is the honorific grade,2,te-agent-v1
+pronouns-verbs.they-them,వారు / వారిని,వాళ్ళు,vāru / vārini,,vāḷḷu is the spoken form,2,te-agent-v1
+pronouns-verbs.my-mine,నా / నాది,,nā / nādi,,,2,te-agent-v1
+pronouns-verbs.your-yours,మీ / మీది,,mī / mīdi,,,2,te-agent-v1
+pronouns-verbs.be-called-call,పేరు / పిలవడం,,pēru / pilavaḍaṁ,,name / to call,2,te-agent-v1
+pronouns-verbs.have,… దగ్గర ఉంది,… కి ఉంది,… daggara uṁdi,,at [someone] it is,2,te-agent-v1
+pronouns-verbs.do-not-have,… దగ్గర లేదు,… కి లేదు,… daggara lēdu,,at [someone] it is not,2,te-agent-v1
+pronouns-verbs.go,వెళ్ళడం,,veḷḷaḍaṁ,,verbal noun; the stem is veḷḷ-,2,te-agent-v1
+pronouns-verbs.come,రావడం,,rāvaḍaṁ,,verbal noun; the stem is rā-,2,te-agent-v1
+pronouns-verbs.would-like,కావాలి,,kāvāli,,is wanted; takes the dative nāku,2,te-agent-v1
+pronouns-verbs.want,కోరుకోవడం,,kōrukōvaḍaṁ,,to wish for,2,te-agent-v1
+pronouns-verbs.look-for,వెతకడం,,vetakaḍaṁ,,,2,te-agent-v1
+pronouns-verbs.buy,కొనడం,,konaḍaṁ,,,2,te-agent-v1
+pronouns-verbs.like,ఇష్టపడడం,ఇష్టం,iṣṭapaḍaḍaṁ,,to be pleasing; takes the dative nāku,2,te-agent-v1
+pronouns-verbs.need,అవసరం,,avasaraṁ,,need is,2,te-agent-v1
+pronouns-verbs.there-is-have,ఉంది,ఉన్నాయి,uṁdi,,unnāyi is the plural,2,te-agent-v1
+pronouns-verbs.there-is-not-do-not-have,లేదు,లేవు,lēdu,,lēvu is the plural,2,te-agent-v1
+pronouns-verbs.want-to-verb,నేను … ఆలి,,nēnu … āli,,… is the verb stem: veḷḷ-āli = I want to go,2,te-agent-v1
+pronouns-verbs.want-thing,నాకు … కావాలి,,nāku … kāvāli,,,2,te-agent-v1
+pronouns-verbs.need-thing,నాకు … అవసరం,,nāku … avasaraṁ,,,2,te-agent-v1
+pronouns-verbs.looking-for-thing,నేను … వెతుకుతున్నాను,,nēnu … vetukutunnānu,,,2,te-agent-v1
+question-words.what,ఏమిటి,ఏంటి,ēmiṭi,,ēṁṭi is the spoken form,2,te-agent-v1
+question-words.where,ఎక్కడ,,ekkaḍa,,,2,te-agent-v1
+question-words.who,ఎవరు,,evaru,,,2,te-agent-v1
+question-words.which-one,ఏది,,ēdi,,,2,te-agent-v1
+question-words.when,ఎప్పుడు,,eppuḍu,,,2,te-agent-v1
+question-words.how,ఎలా,ఎట్లా,elā,,eṭlā is the Telangana form,2,te-agent-v1
+question-words.how-much-many,ఎంత,,eṁta,,,2,te-agent-v1
+question-words.how-many,ఎన్ని,,enni,,for things you count,2,te-agent-v1
+question-words.why,ఎందుకు,,eṁduku,,,2,te-agent-v1
+question-words.this,ఇది,,idi,,,2,te-agent-v1
+question-words.that,అది,,adi,,,2,te-agent-v1
+question-words.here,ఇక్కడ,,ikkaḍa,,,2,te-agent-v1
+question-words.there,అక్కడ,,akkaḍa,,,2,te-agent-v1
+question-words.a-little,కొంచెం,,koṁceṁ,,,2,te-agent-v1
+question-words.some,కొన్ని,,konni,,,2,te-agent-v1
+question-words.very,చాలా,,cālā,,,2,te-agent-v1
+question-words.too,మరీ ఎక్కువ,,marī ekkuva,,too much,2,te-agent-v1
+question-words.also,… కూడా,,… kūḍā,,follows the word it attaches to,2,te-agent-v1
+question-words.all-both,అన్నీ / రెండూ,,annī / reṁḍū,,,2,te-agent-v1
+question-words.how-much-what-price,ధర ఎంత?,ఎంత?,dhara eṁta?,,what is the price,2,te-agent-v1

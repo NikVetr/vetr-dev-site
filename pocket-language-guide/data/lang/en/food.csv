@@ -20,11 +20,11 @@ food-ordering.check-please,"Check, please",,"tʃˈɛk, plˈiːz",,2,latex-refere
 food-ordering.does-it-contain,Does it contain {} ?,,dˈʌz ɪt kəntˈeɪn {},,2,latex-reference-v2;ipa=espeak
 food-ordering.is-this-vegetarian,Is this vegetarian?,,ɪz ðɪs vˌɛdʒɪtˈɛɹiən,,2,latex-reference-v2;ipa=espeak
 dietary-needs.does-it-contain-fish-stock,Does it contain fish stock?,,dˈʌz ɪt kəntˈeɪn fˈɪʃ stˈɑːk,,2,japanese-reviewed-v6;ipa=espeak
-dietary-needs.does-it-contain-pork-stock,Does it contain pork stock?,,dˈʌz ɪt kəntˈeɪn pˈɔːɹk stˈɑːk,,2,coordinator-pork-stock-v1;ipa=espeak
+dietary-needs.does-it-contain-pork-stock,Does it contain pork stock?,,dˈʌz ɪt kəntˈeɪn pˈoːɹk stˈɑːk,,2,coordinator-pork-stock-v1;ipa=espeak
 dietary-needs.i-have-a-severe-allergy-to,I have a severe allergy to {},,aɪ hæv ɐ sɪvˈɪɹ ˈælɚdʒi tuː {},,2,japanese-reviewed-v6;ipa=espeak
 food-ordering.what-do-you-recommend,What do you recommend?,,wˌʌt dˈuː juː ɹˌɛkəmˈɛnd,,2,japanese-reviewed-v6;ipa=espeak
 food-ordering.water-please,"Water, please",,"wˈɔːɾɚ, plˈiːz",,2,japanese-reviewed-v6;ipa=espeak
 food-ordering.can-a-vegetarian-eat-this,Can a vegetarian eat this?,,kæn ɐ vˌɛdʒɪtˈɛɹiən ˈiːt ðˈɪs,,2,japanese-reviewed-v6;ipa=espeak
-dietary-needs.no-pork,No pork,,nˈoʊ pˈɔːɹk,,2,coordinator-gaps-v2;ipa=espeak
+dietary-needs.no-pork,No pork,,nˈoʊ pˈoːɹk,,2,coordinator-gaps-v2;ipa=espeak
 dietary-needs.is-this-halal,Is this halal?,,ɪz ðɪs hˈæləl,,2,coordinator-gaps-v2;ipa=espeak
-dietary-needs.does-it-contain-pork-fat,Does it contain pork fat?,Does it contain lard?,dˈʌz ɪt kəntˈeɪn pˈɔːɹk fˈæt,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak
+dietary-needs.does-it-contain-pork-fat,Does it contain pork fat?,Does it contain lard?,dˈʌz ɪt kəntˈeɪn pˈoːɹk fˈæt,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak

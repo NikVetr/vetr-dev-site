@@ -1,5 +1,5 @@
 concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
-attractions-tickets.where-can-i-buy-tickets,أين أشتري التذاكر؟,,ayna ashtarī al-tadhākir?,ʔˈajna ʔʃtrˈiː ʔattˈaðaːkˌar,,2,ar-agent-v1;ipa=espeak
+attractions-tickets.where-can-i-buy-tickets,أين أشتري التذاكر؟,,ayna ashtarī al-tadhākir?,ʔˈajna ʔʃtɹˈiː ʔattˈaðaːkˌar,,2,ar-agent-v1;ipa=espeak
 attractions-tickets.do-i-need-a-reservation,هل يجب الحجز؟,,hal yajib al-ḥajz?,hˈal jdʒb ʔalħˈadʒz,is booking required,2,ar-agent-v1;ipa=espeak
 attractions-tickets.what-is-the-latest-entry-time,ما آخر موعد للدخول؟,,mā ākhir mawʿid lil-dukhūl?,mˈaː ʔˈaːxar mˈawʕid lldxuːl,,2,ar-agent-v1;ipa=espeak
 attractions-tickets.are-there-lockers,هل توجد خزائن؟,,hal tūjad khazāʾin?,hˈal tˈuːdʒd xzˈaːʔn,,2,ar-agent-v1;ipa=espeak

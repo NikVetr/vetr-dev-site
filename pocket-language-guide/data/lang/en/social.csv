@@ -13,7 +13,7 @@ social-basics.i-do-not-know,I do not know,,aɪ duːnˌɑːt nˈoʊ,,2,latex-refe
 communication.i-do-not-speak-this-language,I do not speak {target},,aɪ duːnˌɑːt spˈiːk {target},,2,language-slots-v1;ipa=espeak
 communication.i-speak-only-a-little-of-this,I speak only a little {target},,aɪ spˈiːk ˈoʊnli ɐ lˈɪɾəl {target},,2,language-slots-v1;ipa=espeak
 communication.do-you-speak-english,Do you speak {source}?,,dˈuː juː spˈiːk {source},,2,language-slots-v1;ipa=espeak
-communication.please-speak-more-slowly,Please speak more slowly,,plˈiːz spˈiːk mˈɔːɹ slˈoʊli,,2,latex-reference-v2;ipa=espeak
+communication.please-speak-more-slowly,Please speak more slowly,,plˈiːz spˈiːk mˈoːɹ slˈoʊli,,2,latex-reference-v2;ipa=espeak
 communication.i-do-not-understand-spoken,I do not understand (spoken),,aɪ duːnˌɑːt ˌʌndɚstˈænd spˈoʊkən,,2,latex-reference-v2;ipa=espeak
 communication.i-cannot-read-understand,I cannot read / understand,,aɪ kænˈɑːt ɹˈiːd / ˌʌndɚstˈænd,,2,latex-reference-v2;ipa=espeak
 communication.please-say-it-again,Please say it again,,plˈiːz sˈeɪ ɪɾ ɐɡˈɛn,,2,latex-reference-v2;ipa=espeak
@@ -54,7 +54,7 @@ phone-text-power.may-i-charge-my-phone-here,May I charge my phone here?,,mˈeɪ 
 sim-data.i-would-like-a-tourist-sim,I would like a tourist SIM card,,aɪ wʊd lˈaɪk ɐ tˈʊɹɹɪst ˌɛsˌaɪˈɛm kˈɑːɹd,,2,expansion-v1;ipa=espeak
 sim-data.may-i-use-your-wifi,May I use your Wi-Fi?,,mˈeɪ aɪ jˈuːz jʊɹ wˈaɪfˌaɪ,,2,expansion-v1;ipa=espeak
 sim-data.how-much-data-is-included,How much data is included?,,hˌaʊ mˈʌtʃ dˈeɪɾə ɪz ɪŋklˈuːdɪd,,2,expansion-v1;ipa=espeak
-sim-data.do-you-need-my-passport,Do you need my passport?,,dˈuː juː nˈiːd maɪ pˈæspɔːɹt,,2,expansion-v1;ipa=espeak
+sim-data.do-you-need-my-passport,Do you need my passport?,,dˈuː juː nˈiːd maɪ pˈæspoːɹt,,2,expansion-v1;ipa=espeak
 sim-data.how-long-is-it-valid,How long is it valid?,,hˌaʊ lˈɔŋ ɪz ɪt vˈælɪd,,2,expansion-v1;ipa=espeak
 sim-data.please-activate-it,Please activate it,,plˈiːz ˈæktɪvˌeɪt ɪt,,2,expansion-v1;ipa=espeak
 sim-data.do-you-have-an-esim,Do you have an eSIM?,,dˈuː juː hæv ɐn ˈiː ˌɛsˌaɪˈɛm,,2,expansion-v1;ipa=espeak

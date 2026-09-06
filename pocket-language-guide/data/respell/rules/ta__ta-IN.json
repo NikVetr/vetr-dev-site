@@ -2332,6 +2332,23 @@
     },
     {
       "slot": "nucleus",
+      "ipa": "ʏ",
+      "out": "உ",
+      "after_out": ""
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʏ",
+      "out": "உ",
+      "after_out": "அ ஆ இ ஈ உ ஊ எ ஏ ஐ ஒ ஓ ா ி ீ ு ூ ெ ே ை ொ ோ ்"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʏ",
+      "out": "ு"
+    },
+    {
+      "slot": "nucleus",
       "ipa": "uː",
       "out": "ஊ",
       "after_out": ""

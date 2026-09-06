@@ -2,7 +2,7 @@ concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
 numbers-money.l-ng,ноль,,nolʼ,nˈoɭ,,2,ru-agent-v1;ipa=espeak
 numbers-money.y,один,,odin,ʌdʲˈin,,2,ru-agent-v1;ipa=espeak
 numbers-money.r,два,,dva,dvˈɑ,,2,ru-agent-v1;ipa=espeak
-numbers-money.s-n,три,,tri,trʲˈɪ,,2,ru-agent-v1;ipa=espeak
+numbers-money.s-n,три,,tri,trʲˈi,,2,ru-agent-v1;ipa=espeak
 numbers-money.s,четыре,,chetyre,tʃʲitˈɨrʲi,,2,ru-agent-v1;ipa=espeak
 numbers-money.w,пять,,pyatʼ,pʲˈɑtʲ,,2,ru-agent-v1;ipa=espeak
 numbers-money.li,шесть,,shestʼ,ʃˈɛstʲ,,2,ru-agent-v1;ipa=espeak
@@ -18,15 +18,15 @@ atm-cash.where-is-an-atm,Где банкомат?,,Gde bankomat?,ɡdʲˈe bʌnk�
 atm-cash.does-this-atm-take-foreign-cards,Банкомат принимает иностранные карты?,,Bankomat prinimayet inostrannyye karty?,bʌnkʌmˈɑt prʲinʲimˈɑjit ɪnʌstrˈɑnnɨjɪ kˈɑrtɨ,,2,ru-agent-v1;ipa=espeak
 atm-cash.the-atm-kept-my-card,Банкомат забрал мою карту.,,Bankomat zabral moyu kartu.,bʌnkʌmˈɑt zabrˈɑɭ mˈoju kˈɑrtu,,2,ru-agent-v1;ipa=espeak
 atm-cash.is-there-a-fee,Есть комиссия?,,Yestʼ komissiya?,jestʲ kʌmʲˈisʲsʲija,,2,ru-agent-v1;ipa=espeak
-atm-cash.the-card-was-declined,Карту не приняли.,,Kartu ne prinyali.,kˈɑrtu nʲɪ prʲˈinʲʌɭʲɪ,,2,ru-agent-v1;ipa=espeak
+atm-cash.the-card-was-declined,Карту не приняли.,,Kartu ne prinyali.,kˈɑrtu nʲe prʲˈinʲʌɭʲɪ,,2,ru-agent-v1;ipa=espeak
 atm-cash.what-is-the-exchange-rate,Какой курс?,,Kakoy kurs?,kakˈoj kˈurs,,2,ru-agent-v1;ipa=espeak
-atm-cash.no-money-came-out,Деньги не вышли.,,Denʼgi ne vyshli.,dʲˈenɡʲɪ nʲɪ vˈɨʃɭʲɪ,,2,ru-agent-v1;ipa=espeak
+atm-cash.no-money-came-out,Деньги не вышли.,,Denʼgi ne vyshli.,dʲˈenɡʲɪ nʲe vˈɨʃɭʲɪ,,2,ru-agent-v1;ipa=espeak
 atm-cash.where-can-i-change-money,Где можно обменять валюту?,,Gde mozhno obmenyatʼ valyutu?,ɡdʲˈe mˈoʒnʌ ʌbmʲinʲˈɑtʲ vaɭʲˈʉtu,,2,ru-agent-v1;ipa=espeak
-atm-cash.the-machine-is-out-of-service,Банкомат не работает.,,Bankomat ne rabotayet.,bʌnkʌmˈɑt nʲɪ rabˈotʌjit,,2,ru-agent-v1;ipa=espeak
-atm-cash.please-give-me-smaller-notes,"Дайте, пожалуйста, купюры поменьше.",,"Dayte, pozhaluysta, kupyury pomenʼshe.","dˈɑjtʲi, pʌʒˈɑɭusta, kupʲˈʉrɨ pʌmʲˈenʃɨ",,2,ru-agent-v1;ipa=espeak
-atm-cash.do-you-have-change,У вас есть размен?,Вы разменяете?,U vas yestʼ razmen?,u vˈɑs jestʲ razmʲˈen,,2,ru-agent-v1;ipa=espeak
+atm-cash.the-machine-is-out-of-service,Банкомат не работает.,,Bankomat ne rabotayet.,bʌnkʌmˈɑt nʲe rabˈotʌjit,,2,ru-agent-v1;ipa=espeak
+atm-cash.please-give-me-smaller-notes,"Дайте, пожалуйста, купюры поменьше.",,"Dayte, pozhaluysta, kupyury pomenʼshe.","dˈɑjtʲi, pʌʒˈɑɭujsta, kupʲˈʉrɨ pʌmʲˈenʃɨ",,2,ru-agent-v1;ipa=espeak
+atm-cash.do-you-have-change,У вас есть размен?,Вы разменяете?,U vas yestʼ razmen?,ˈu vˈɑs jestʲ razmʲˈen,,2,ru-agent-v1;ipa=espeak
 atm-cash.may-i-pay-in,Можно заплатить в {}?,,Mozhno zaplatitʼ v {}?,mˈoʒnʌ zʌpɭatʲˈitʲ vˈɛ {},,2,ru-agent-v1;ipa=espeak
-atm-cash.please-charge-in-local-currency,Спишите в местной валюте.,Спишите в рублях.,Spishite v mestnoy valyute.,spʲiʃˈɨtʲi v mʲˈesnʌj vaɭʲˈʉtʲi,,2,ru-agent-v1;ipa=espeak
+atm-cash.please-charge-in-local-currency,Спишите в местной валюте.,Спишите в рублях.,Spishite v mestnoy valyute.,spʲiʃˈɨtʲi v mʲˈestnʌj vaɭʲˈʉtʲi,,2,ru-agent-v1;ipa=espeak
 atm-cash.where-can-i-get-coins,Где взять монеты?,,Gde vzyatʼ monety?,ɡdʲˈe vʑˈɑtʲ mʌnʲˈetɨ,,2,ru-agent-v1;ipa=espeak
 atm-cash.is-there-a-minimum-for-cards,Есть минимальная сумма для карты?,,Yestʼ minimalʼnaya summa dlya karty?,jestʲ mʲinʲimˈɑɭnʌja sˈumma dɭʲɑ kˈɑrtɨ,,2,ru-agent-v1;ipa=espeak
 atm-cash.atm,банкомат,,bankomat,bʌnkʌmˈɑt,,2,ru-agent-v1;ipa=espeak
@@ -43,8 +43,8 @@ numbers-money.ruble,рубль,,rublʼ,rˈubɭ,,2,ru-agent-v1;ipa=espeak
 numbers-money.ruble-symbol,₽,рубль,rublʼ,,,2,ru-agent-v1
 numbers-money.number-and-classifier-notes,"Числа собираются из частей: 11 = shíyī; 20 = èrshí; 21 = èrshíyī. По телефону 1 обычно читают как yāo. Между числом и существительным обязательно стоит счётное слово, которого в русском нет: gè (общее), wèi (люди), zhāng (билеты, плоское), bēi (чашки), píng (бутылки). Деньги: kuài = юань в речи; jiǎo / máo = 0,1 юаня; fēn = 0,01 юаня.",,,,,2,ru-notes-v1
 numbers-money.number-and-classifier-notes-2,"Числа собираются из частей: 11 = jūichi; 20 = nijū; 21 = nijūichi. Счётные суффиксы идут после числа: -tsu (предметы), -mai (плоское), -hon (длинное), -nin (люди), -hai (чашки). По телефону: 0 = zero или maru, 4 = yon, 7 = nana, 9 = kyū; дефис между блоками читают как no.",,,,,2,ru-notes-v1
-numbers-money.forint,форинт,,,fˈorʲint,,2,reader-gloss-v1;ipa=espeak
-numbers-money.forint-symbol,форинт (символ),,,fˈorʲint sʲˈimvʌɭ,,2,reader-gloss-v1;ipa=espeak
+numbers-money.forint,форинт,,,fʌrʲˈint,,2,reader-gloss-v1;ipa=espeak
+numbers-money.forint-symbol,форинт (символ),,,fʌrʲˈint sʲˈimvʌɭ,,2,reader-gloss-v1;ipa=espeak
 numbers-money.rupee,рупия,,,rˈupʲija,,2,reader-gloss-v1;ipa=espeak
 numbers-money.rupee-symbol,рупия (символ),,,rˈupʲija sʲˈimvʌɭ,,2,reader-gloss-v1;ipa=espeak
 numbers-money.won,вона,,,vˈona,,2,reader-gloss-v1;ipa=espeak

@@ -3,7 +3,7 @@ sim-data.i-would-like-a-tourist-sim,Ich möchte eine Prepaid-SIM-Karte.,,ɪç m�
 children.cannot-find-my-child,Ich finde mein Kind nicht!,,ɪç fˈɪndə maɪn kˈɪnt nˈɪçt,,2,de-agent-v1;ipa=espeak
 etiquette.is-this-allowed,Ist das erlaubt?,,ɪst das ɛɾlˈaʊpt,,2,de-agent-v1;ipa=espeak
 sim-data.may-i-use-your-wifi,Darf ich Ihr WLAN benutzen?,,dˈaɾf ɪç iːɾ vˈeːlɑːn bənˈʊtsən,,2,de-agent-v1;ipa=espeak
-children.make-an-announcement,Bitte machen Sie eine Durchsage.,,bˈɪtə mˈaxən ziː ˌaɪnə dˈʊɐçzˌɑːɡə,,2,de-agent-v1;ipa=espeak
+children.make-an-announcement,Bitte machen Sie eine Durchsage.,,bˈɪtə mˈaxən ziː ˌaɪnə dˈʊɾçzˌɑːɡə,,2,de-agent-v1;ipa=espeak
 etiquette.is-tipping-expected,Ist Trinkgeld üblich?,,ɪst tɾˈɪŋkɡɛlt ˈyːplɪç,,2,de-agent-v1;ipa=espeak
 sim-data.how-much-data-is-included,Wie viel Datenvolumen ist dabei?,,viː fˈiːl dˈɑːtənvˌoːlʊmən ɪst dɑːbˈaɪ,,2,de-agent-v1;ipa=espeak
 children.child-age,Mein Kind ist {} Jahre alt.,,maɪn kˈɪnt ɪst {} jˈɑːrə ˈalt,,2,de-agent-v1;ipa=espeak
@@ -11,7 +11,7 @@ etiquette.is-service-included,Ist die Bedienung inklusive?,Ist der Service inklu
 sim-data.do-you-need-my-passport,Brauchen Sie meinen Pass?,,bɾˈaʊxən ziː mˌaɪnən pˈas,,2,de-agent-v1;ipa=espeak
 children.high-chair,Haben Sie einen Hochstuhl?,,hˌɑːbən ziː ˌaɪnən hˈoːxʃtˌuːl,,2,de-agent-v1;ipa=espeak
 etiquette.may-i-enter,Darf ich hereinkommen?,,dˈaɾf ɪç hɛrˈaɪnkˌɔmən,,2,de-agent-v1;ipa=espeak
-sim-data.how-long-is-it-valid,Wie lange ist es gültig?,,viː lˈaŋə ɪst ɛs ɡˈʏltɪç,,2,de-agent-v1;ipa=espeak
+sim-data.how-long-is-it-valid,Wie lange ist es gültig?,,viː lˈaŋə ɪst ɛs ɡˈyltɪç,,2,de-agent-v1;ipa=espeak
 children.baby-changing-room,Wo ist der Wickelraum?,,vˌoː ɪst dɛɾ vˈɪkəlrˌaʊm,,2,de-agent-v1;ipa=espeak
 etiquette.remove-shoes,Soll ich die Schuhe ausziehen?,,zˌɔl ɪç diː ʃˈuːə ˈaʊstsˌiːən,,2,de-agent-v1;ipa=espeak
 sim-data.please-activate-it,Bitte die SIM-Karte aktivieren.,,bˈɪtə diː ˌɛsˌiːˈɛmkaɾtə ˌaktiːvˈiːrən,,2,de-agent-v1;ipa=espeak

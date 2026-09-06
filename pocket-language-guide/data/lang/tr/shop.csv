@@ -2,11 +2,11 @@ concept_id,text,text_alt,ipa,literal,confidence,provenance
 payment-receipt.pay-by-card,Kartla olur mu?,,kˈartɫa oɫˈʊr mʊ,,2,tr-agent-v1;ipa=espeak
 payment-receipt.pay-cash,Nakit olur mu?,,nakˈɪt oɫˈʊr mʊ,,2,tr-agent-v1;ipa=espeak
 payment-receipt.pay-by-qr-code,QR kod ile olur mu?,,kjˌuɾˈɛ kˈɔd ˌilɛ oɫˈʊr mʊ,,2,tr-agent-v1;ipa=espeak
-payment-receipt.a-receipt-please,"Fiş, lütfen.","Fatura, lütfen.","fˈɪʃ, lˈøtfæn",,2,tr-agent-v1;ipa=espeak
-payment-receipt.please-write-the-number,"Tutarı yazın, lütfen.",,"tutaɾˈɯ jazˈɯn, lˈøtfæn",,2,tr-agent-v1;ipa=espeak
+payment-receipt.a-receipt-please,"Fiş, lütfen.","Fatura, lütfen.","fˈɪʃ, løtfˈæn",,2,tr-agent-v1;ipa=espeak
+payment-receipt.please-write-the-number,"Tutarı yazın, lütfen.",,"tutaɾˈɯ jazˈɯn, løtfˈæn",,2,tr-agent-v1;ipa=espeak
 payment-receipt.how-much-in-total,Toplam ne kadar?,,tɔpɫˈam nˈɛ kadˈar,,2,tr-agent-v1;ipa=espeak
 payment-receipt.can-we-pay-separately,Ayrı ayrı ödeyebilir miyiz?,,ajrˈɯ ajrˈɯ œdejebilˈɪr mˈijɪz,,2,tr-agent-v1;ipa=espeak
-payment-receipt.is-tax-included,KDV dahil mi?,,kˌɛdˌɛvˈɛ dahˈɪl mɪ,,2,tr-agent-v1;ipa=espeak
+payment-receipt.is-tax-included,KDV dahil mi?,,kˌadˌɛvˈɛ dahˈɪl mɪ,,2,tr-agent-v1;ipa=espeak
 payment-receipt.my-card-was-declined,Kartım geçmedi.,,kˈartɯm ɟˈɛtʃmedɪ,,2,tr-agent-v1;ipa=espeak
 payment-receipt.the-bill-is-wrong,Hesapta bir yanlışlık var galiba.,,hesaptˈa bɪr janɫɯʃɫˈɯk vˈar ɡalibˈa,,2,tr-agent-v1;ipa=espeak
 payment-receipt.i-already-paid,Ben ödedim.,,bæn œdedˈɪm,,2,tr-agent-v1;ipa=espeak
@@ -20,7 +20,7 @@ shopping.i-will-take-this,Bunu alıyorum.,,bunˈʊ aɫˈɯjoɾʊm,,2,tr-agent-v1
 shopping.what-is-this,Bu ne?,,bʊ nˈɛ,,2,tr-agent-v1;ipa=espeak
 shopping.where-can-i-buy,{} nereden alabilirim?,,{} nˈeɾedæn aɫabilˈiɾɪm,,2,tr-agent-v1;ipa=espeak
 shopping.do-you-have-this-in-stock,Stokta var mı?,,stɔktˈa vˈar mɯ,,2,tr-agent-v1;ipa=espeak
-shopping.two-of-these,"Bundan iki tane, lütfen.",,"bʊndˈan ikˈɪ tanˈɛ, lˈøtfæn",,2,tr-agent-v1;ipa=espeak
+shopping.two-of-these,"Bundan iki tane, lütfen.",,"bʊndˈan ikˈɪ tanˈɛ, løtfˈæn",,2,tr-agent-v1;ipa=espeak
 shopping.what-is-it-made-of,Malzemesi ne?,,maɫzemesˈɪ nˈɛ,,2,tr-agent-v1;ipa=espeak
 color-size-returns.do-you-have-another-color,Başka renk var mı?,,baʃkˈa rˈænk vˈar mɯ,,2,tr-agent-v1;ipa=espeak
 color-size-returns.do-you-have-another-size,Başka beden var mı?,,baʃkˈa bedˈæn vˈar mɯ,,2,tr-agent-v1;ipa=espeak
@@ -28,5 +28,5 @@ color-size-returns.may-i-try-it-on,Deneyebilir miyim?,,denejebilˈɪr mˈijɪm,,
 color-size-returns.can-i-return-it,İade edebilir miyim?,,iadˈɛ edebilˈɪr mˈijɪm,,2,tr-agent-v1;ipa=espeak
 color-size-returns.can-i-exchange-it,Değiştirebilir miyim?,,dejɪʃtiɾebilˈɪr mˈijɪm,,2,tr-agent-v1;ipa=espeak
 color-size-returns.do-you-have-a-bag,Poşet var mı?,,poʃˈɛt vˈar mɯ,,2,tr-agent-v1;ipa=espeak
-tax-refund.can-i-get-a-tax-refund,KDV iadesi alabilir miyim?,,kˌɛdˌɛvˈɛ iadesˈɪ aɫabilˈɪr mˈijɪm,,2,tr-agent-v1;ipa=espeak
+tax-refund.can-i-get-a-tax-refund,KDV iadesi alabilir miyim?,,kˌadˌɛvˈɛ iadesˈɪ aɫabilˈɪr mˈijɪm,,2,tr-agent-v1;ipa=espeak
 tax-refund.is-tax-free-shopping-available,Vergisiz alışveriş var mı?,Tax free var mı?,vɛrɟˈisɪz aɫɯʃveɾˈɪʃ vˈar mɯ,,2,tr-agent-v1;ipa=espeak

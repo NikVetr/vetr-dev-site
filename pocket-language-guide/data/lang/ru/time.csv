@@ -2,7 +2,7 @@ concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
 time-scheduling.what-time-is-it,Сколько времени?,,Skolʼko vremeni?,skˈoɭkʌ vrʲˈemʲinʲɪ,,2,ru-agent-v1;ipa=espeak
 time-scheduling.how-many-minutes,Сколько минут?,,Skolʼko minut?,skˈoɭkʌ mʲinˈut,,2,ru-agent-v1;ipa=espeak
 time-scheduling.what-time-should-we-meet,Во сколько встретимся?,,Vo skolʼko vstretimsya?,vˈo skˈoɭkʌ fstrʲˈetʲimsʲʌ,,2,ru-agent-v1;ipa=espeak
-time-scheduling.can-we-change-the-time,Можно перенести время?,,Mozhno perenesti vremya?,mˈoʒnʌ pʲirʲinʲisʲtʲˈɪ vrʲˈemʲʌ,,2,ru-agent-v1;ipa=espeak
+time-scheduling.can-we-change-the-time,Можно перенести время?,,Mozhno perenesti vremya?,mˈoʒnʌ pʲirʲinʲisʲtʲˈi vrʲˈemʲʌ,,2,ru-agent-v1;ipa=espeak
 time-scheduling.when-is-convenient,Когда вам удобно?,,Kogda vam udobno?,kʌɡdˈɑ vˈɑm udˈobnʌ,,2,ru-agent-v1;ipa=espeak
 time-scheduling.what-is-today-s-date,Какое сегодня число?,,Kakoye segodnya chislo?,kakˈojɪ sʲivˈodnʲʌ tʃʲisɭˈo,,2,ru-agent-v1;ipa=espeak
 time-scheduling.what-day-is-it-today,Какой сегодня день?,,Kakoy segodnya denʼ?,kakˈoj sʲivˈodnʲʌ dʲˈen,,2,ru-agent-v1;ipa=espeak

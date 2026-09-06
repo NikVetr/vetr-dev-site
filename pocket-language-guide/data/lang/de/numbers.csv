@@ -3,7 +3,7 @@ atm-cash.where-is-an-atm,Wo ist ein Geldautomat?,Wo ist ein Bankomat?,vˌoː ɪs
 atm-cash.does-this-atm-take-foreign-cards,Nimmt der Automat ausländische Karten?,,nˈɪmt dɛɾ ˌaʊtoːmˈɑːt ˈaʊslˌɛndɪʃə kˈaɾtən,,2,de-agent-v1;ipa=espeak
 atm-cash.the-atm-kept-my-card,Der Automat hat meine Karte behalten.,,dɛɾ ˌaʊtoːmˈɑːt hat mˌaɪnə kˈaɾtə bəhˈaltən,,2,de-agent-v1;ipa=espeak
 atm-cash.is-there-a-fee,Gibt es eine Gebühr?,,ɡˈiːpt ɛs ˌaɪnə ɡəbˈyːɾ,,2,de-agent-v1;ipa=espeak
-atm-cash.the-card-was-declined,Die Karte wurde abgelehnt.,,diː kˈaɾtə vˌʊɐdə ˈapɡəlˌeːnt,,2,de-agent-v1;ipa=espeak
+atm-cash.the-card-was-declined,Die Karte wurde abgelehnt.,,diː kˈaɾtə vˌʊɾdə ˈapɡəlˌeːnt,,2,de-agent-v1;ipa=espeak
 atm-cash.what-is-the-exchange-rate,Wie ist der Wechselkurs?,,viː ɪst dɛɾ vˌɛksəlkˈuːɾs,,2,de-agent-v1;ipa=espeak
 atm-cash.no-money-came-out,Es kam kein Geld heraus.,,ɛs kˌɑːm kˈaɪn ɡˈɛlt hɛrˈaʊs,,2,de-agent-v1;ipa=espeak
 atm-cash.where-can-i-change-money,Wo kann ich Geld wechseln?,,vˌoː kˌan ɪç ɡˈɛlt vˈɛksəln,,2,de-agent-v1;ipa=espeak
@@ -12,11 +12,11 @@ atm-cash.please-give-me-smaller-notes,Bitte kleine Scheine.,,bˈɪtə klˈaɪnə
 atm-cash.do-you-have-change,Können Sie wechseln?,Haben Sie Kleingeld?,kˌœnən ziː vˈɛksəln,,2,de-agent-v1;ipa=espeak
 atm-cash.may-i-pay-in,Kann ich in {} bezahlen?,,kˌan ɪç ˈɪn {} bətsˈɑːlən,,2,de-agent-v1;ipa=espeak
 atm-cash.please-charge-in-local-currency,Bitte in Landeswährung abbuchen.,Bitte in Euro abrechnen.,bˈɪtə ɪn lˈandəsvˌɛːrʊŋ ˈapbˌuːxən,,2,de-agent-v1;ipa=espeak
-atm-cash.where-can-i-get-coins,Wo bekomme ich Münzen?,,vˌoː bəkˈɔmə ɪç mˈʏntsən,,2,de-agent-v1;ipa=espeak
+atm-cash.where-can-i-get-coins,Wo bekomme ich Münzen?,,vˌoː bəkˈɔmə ɪç mˈyntsən,,2,de-agent-v1;ipa=espeak
 atm-cash.is-there-a-minimum-for-cards,Gibt es einen Mindestbetrag?,Gibt es einen Mindestbetrag für Karten?,ɡˈiːpt ɛs ˌaɪnən mˈɪndɛstbˌɛtɾɑːk,,2,de-agent-v1;ipa=espeak
 atm-cash.atm,Geldautomat,Bankomat,ɡˌɛldaʊtoːmˈɑːt,,2,de-agent-v1;ipa=espeak
 atm-cash.banknote,Schein,Geldschein,ʃˈaɪn,,2,de-agent-v1;ipa=espeak
-atm-cash.coin,Münze,,mˈʏntsə,,2,de-agent-v1;ipa=espeak
+atm-cash.coin,Münze,,mˈyntsə,,2,de-agent-v1;ipa=espeak
 atm-cash.cash-only,Nur Barzahlung,,nˈuːɾ bˈaɾtsɑːlˌʊŋ,,2,de-agent-v1;ipa=espeak
 atm-cash.fee,Gebühr,,ɡəbˈyːɾ,,2,de-agent-v1;ipa=espeak
 atm-cash.change,Wechselgeld,Rückgeld,vˈɛksəlɡˌɛlt,,2,de-agent-v1;ipa=espeak
@@ -30,7 +30,7 @@ numbers-money.r,zwei,,tsvˈaɪ,,2,de-agent-v1;ipa=espeak
 numbers-money.li-ng,zwo,,tsvˈoː,clear-speech form of 'zwei',2,de-agent-v1;ipa=espeak
 numbers-money.s-n,drei,,dɾˈaɪ,,2,de-agent-v1;ipa=espeak
 numbers-money.s,vier,,fˈiːɾ,,2,de-agent-v1;ipa=espeak
-numbers-money.w,fünf,,fˈʏnf,,2,de-agent-v1;ipa=espeak
+numbers-money.w,fünf,,fˈynf,,2,de-agent-v1;ipa=espeak
 numbers-money.li,sechs,,zˈɛks,,2,de-agent-v1;ipa=espeak
 numbers-money.q,sieben,,zˈiːbən,,2,de-agent-v1;ipa=espeak
 numbers-money.b,acht,,ˈaxt,,2,de-agent-v1;ipa=espeak
@@ -43,7 +43,7 @@ numbers-money.b-n,halb,die Hälfte,hˈalp,,2,de-agent-v1;ipa=espeak
 numbers-money.yu-n,Yuan,Renminbi,juːˈɑːn,,2,de-agent-v1;ipa=espeak
 numbers-money.ku-i,Yuan,Kuai,juːˈɑːn,,1,de-agent-v1;ipa=espeak
 numbers-money.number-and-classifier-notes,"Zahlen bauen: 11 = shíyī, 20 = èrshí, 21 = èrshíyī. Am Telefon: 1 meist yāo. Zählwörter: gè (allgemein), wèi (Personen), zhāng (Tickets, Flaches), bēi (Tassen), píng (Flaschen). jiǎo / máo = 0,1 Yuan, fēn = 0,01 Yuan.",,,,2,de-notes-v1
-numbers-money.2-items,zwei Stück,,tsvˈaɪ ʃtˈʏk,,2,de-agent-v1;ipa=espeak
+numbers-money.2-items,zwei Stück,,tsvˈaɪ ʃtˈyk,,2,de-agent-v1;ipa=espeak
 numbers-money.yen,Yen,,jˈeːn,,2,de-agent-v1;ipa=espeak
 numbers-money.yen-symbol,¥,,,,2,de-agent-v1
 numbers-money.number-and-classifier-notes-2,"Zahlen bauen: 11 = jūichi, 20 = nijū, 21 = nijūichi. Zählsuffixe: -tsu (Dinge), -mai (Flaches), -hon (Langes), -nin (Personen), -hai (Tassen). Am Telefon: 0 = zero oder maru, 4 = yon, 7 = nana, 9 = kyū.",,,,2,de-notes-v1
@@ -86,5 +86,5 @@ numbers-money.rial,Rial,,riːˈɑːl,,2,rial-toman-gloss-v1;cldr;ipa=espeak
 numbers-money.toman,10 Rial,,tsˈeːn riːˈɑːl,,2,rial-toman-gloss-v1;cldr;ipa=espeak
 numbers-money.zloty,Zloty,,slˈɔtiː,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
 numbers-money.zloty-symbol,Zloty (Zeichen),,slˈɔtiː tsˈaɪçən,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
-numbers-money.hryvnia,Hrywnja,,hˈɑːrʏvnjɑː,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
-numbers-money.hryvnia-symbol,Hrywnja (Zeichen),,hˈɑːrʏvnjɑː tsˈaɪçən,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.hryvnia,Hrywnja,,hˈɑːryvnjɑː,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.hryvnia-symbol,Hrywnja (Zeichen),,hˈɑːryvnjɑː tsˈaɪçən,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak

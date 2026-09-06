@@ -2,14 +2,14 @@ concept_id,text,text_alt,ipa,literal,confidence,provenance
 utility-templates.i-want-to-go-to,Buraya gitmek istiyorum: {},,bˈuɾaja ɟɪtmˈɛk ɪstˈijoɾʊm {},,2,tr-agent-v1;ipa=espeak
 utility-templates.please-give-me,{} verir misiniz?,,{} veɾˈɪr mˈisinɪz,,2,tr-agent-v1;ipa=espeak
 utility-templates.may-i,{} mümkün mü?,,{} mømkˈøn mø,,2,tr-agent-v1;ipa=espeak
-utility-templates.please-do-not-add,Lütfen {} koymayın.,,lˈøtfæn {} kɔjmajˈɯn,,2,tr-agent-v1;ipa=espeak
+utility-templates.please-do-not-add,Lütfen {} koymayın.,,løtfˈæn {} kɔjmajˈɯn,,2,tr-agent-v1;ipa=espeak
 utility-templates.do-you-have,{} var mı?,,{} vˈar mɯ,,2,tr-agent-v1;ipa=espeak
-utility-templates.please-write-the-number,"Rakamı yazın, lütfen.",,"rakamˈɯ jazˈɯn, lˈøtfæn",,2,tr-agent-v1;ipa=espeak
+utility-templates.please-write-the-number,"Rakamı yazın, lütfen.",,"rakamˈɯ jazˈɯn, løtfˈæn",,2,tr-agent-v1;ipa=espeak
 utility-templates.i-need,Bana {} lazım.,,banˈa {} ɫˈazɯm,,2,tr-agent-v1;ipa=espeak
 utility-templates.is-there-nearby,Yakında {} var mı?,,jakɯndˈa {} vˈar mɯ,,2,tr-agent-v1;ipa=espeak
 utility-templates.how-much-is,{} ne kadar?,,{} nˈɛ kadˈar,,2,tr-agent-v1;ipa=espeak
 utility-templates.is-this,{} bu mu?,,{} bʊ mʊ,,2,tr-agent-v1;ipa=espeak
-utility-templates.please,"{}, lütfen.",,"{}, lˈøtfæn",,2,tr-agent-v1;ipa=espeak
+utility-templates.please,"{}, lütfen.",,"{}, løtfˈæn",,2,tr-agent-v1;ipa=espeak
 utility-templates.i-am-looking-for,{} arıyorum.,,{} aɾˈɯjoɾʊm,,2,tr-agent-v1;ipa=espeak
 utility-templates.do-you-accept,{} kabul ediyor musunuz?,,{} kabˈʊɫ edˈijɔr mˈusunʊz,,2,tr-agent-v1;ipa=espeak
 utility-templates.i-cannot-find,{} bulamıyorum.,,{} buɫamˈɯjoɾʊm,,2,tr-agent-v1;ipa=espeak

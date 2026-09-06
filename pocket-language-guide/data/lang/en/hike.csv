@@ -18,7 +18,7 @@ hiking-parks.how-long-to-the-viewpoint,How long to the viewpoint?,,hˌaʊ lˈɔ�
 hiking-parks.which-route-is-easier,Which route is easier?,,wˌɪtʃ ɹˈaʊt ɪz ˈiːziɚ,,2,latex-reference-v2;ipa=espeak
 trail-conditions.how-long-is-the-full-route,How long is the full route?,,hˌaʊ lˈɔŋ ɪz ðə fˈʊl ɹˈaʊt,,2,latex-reference-v2;ipa=espeak
 trail-conditions.can-we-return-the-same-way,Can we return the same way?,,kæn wiː ɹɪtˈɜːn ðə sˈeɪm wˈeɪ,,2,latex-reference-v2;ipa=espeak
-trail-conditions.can-we-return-before-dark,Can we return before dark?,,kæn wiː ɹɪtˈɜːn bɪfˌɔːɹ dˈɑːɹk,,2,latex-reference-v2;ipa=espeak
+trail-conditions.can-we-return-before-dark,Can we return before dark?,,kæn wiː ɹɪtˈɜːn bɪfˌoːɹ dˈɑːɹk,,2,latex-reference-v2;ipa=espeak
 trail-conditions.is-the-trail-open,Is the trail open?,,ɪz ðə tɹˈeɪl ˈoʊpən,,2,latex-reference-v2;ipa=espeak
 trail-conditions.is-the-route-steep,Is the route steep?,,ɪz ðə ɹˈaʊt stˈiːp,,2,latex-reference-v2;ipa=espeak
 trail-conditions.is-the-path-slippery,Is the path slippery?,,ɪz ðə pˈæθ slˈɪpɚɹi,,2,latex-reference-v2;ipa=espeak
@@ -40,7 +40,7 @@ trail-warnings.first-aid-station,first-aid station,,fˈɜːsteɪd stˈeɪʃən,,
 trail-warnings.service-suspended,service suspended,,sˈɜːvɪs səspˈɛndɪd,,2,latex-reference-v2;ipa=espeak
 trail-landmarks.trail-marker,trail marker,,tɹˈeɪl mˈɑːɹkɚ,,2,latex-reference-v2;ipa=espeak
 trail-landmarks.fork-junction,fork / junction,,fˈɔːɹk / dʒˈʌŋkʃən,,2,latex-reference-v2;ipa=espeak
-trail-landmarks.boardwalk-cliff-path,boardwalk / cliff path,,bˈɔːɹdwɔːk / klˈɪf pˈæθ,,2,latex-reference-v2;ipa=espeak
+trail-landmarks.boardwalk-cliff-path,boardwalk / cliff path,,bˈoːɹdwɔːk / klˈɪf pˈæθ,,2,latex-reference-v2;ipa=espeak
 trail-landmarks.start,start,,stˈɑːɹt,,2,latex-reference-v2;ipa=espeak
 trail-landmarks.end,end,,ˈɛnd,,2,latex-reference-v2;ipa=espeak
 trail-landmarks.elevation,elevation,,ˌɛlɪvˈeɪʃən,,2,latex-reference-v2;ipa=espeak
@@ -55,7 +55,7 @@ weather.how-cold-at-night,How cold does it get at night?,,hˌaʊ kˈoʊld dˈʌz
 weather.rain,rain,,ɹˈeɪn,,2,expansion-v1;ipa=espeak
 weather.snow,snow,,snˈoʊ,,2,expansion-v1;ipa=espeak
 weather.wind,wind,,wˈɪnd,,2,expansion-v1;ipa=espeak
-weather.storm,storm,,stˈɔːɹm,,2,expansion-v1;ipa=espeak
+weather.storm,storm,,stˈoːɹm,,2,expansion-v1;ipa=espeak
 weather.ice,ice,,ˈaɪs,,2,expansion-v1;ipa=espeak
 weather.fog,fog,,fˈɑːɡ,,2,expansion-v1;ipa=espeak
 weather.heat,heat / hot,,hˈiːt / hˈɑːt,,2,expansion-v1;ipa=espeak

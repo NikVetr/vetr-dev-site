@@ -35,10 +35,10 @@ transit-rides.i-went-past-my-stop,I went past my stop,,aɪ wɛnt pˈæst maɪ st
 place-words.scenic-area,scenic area,,sˈiːnɪk ˈɛɹiə,,2,latex-reference-v2;ipa=espeak
 place-words.visitor-center,visitor center,,vˈɪzɪɾɚ sˈɛntɚ,,2,latex-reference-v2;ipa=espeak
 place-words.railway-station,railway station,,ɹˈeɪlweɪ stˈeɪʃən,,2,latex-reference-v2;ipa=espeak
-place-words.airport,airport,,ˈɛɹpɔːɹt,,2,latex-reference-v2;ipa=espeak
+place-words.airport,airport,,ˈɛɹpoːɹt,,2,latex-reference-v2;ipa=espeak
 place-words.service-desk,service desk,,sˈɜːvɪs dˈɛsk,,2,latex-reference-v2;ipa=espeak
 place-words.bus-stop,bus stop,,bˈʌs stˈɑːp,,2,latex-reference-v2;ipa=espeak
-place-words.luggage-storage,luggage storage,,lˈʌɡɪdʒ stˈɔːɹɪdʒ,,2,latex-reference-v2;ipa=espeak
+place-words.luggage-storage,luggage storage,,lˈʌɡɪdʒ stˈoːɹɪdʒ,,2,latex-reference-v2;ipa=espeak
 pickup-meeting.where-is-the-pickup-point,Where is the pickup point?,,wˌɛɹ ɪz ðə pˈɪkʌp pˈɔɪnt,,2,latex-reference-v2;ipa=espeak
 pickup-meeting.please-send-me-the-pickup-point,Please send me the pickup point,,plˈiːz sˈɛnd mˌiː ðə pˈɪkʌp pˈɔɪnt,,2,latex-reference-v2;ipa=espeak
 pickup-meeting.please-pick-us-up-here,Please pick us up here,,plˈiːz pˈɪk ˌʌs ˌʌp hˈɪɹ,,2,latex-reference-v2;ipa=espeak
@@ -76,7 +76,7 @@ common-signs.closed,closed,,klˈoʊzd,,2,japanese-reviewed-v6;ipa=espeak
 common-signs.stopped-stop,stopped / stop,,stˈɑːpt / stˈɑːp,,2,japanese-reviewed-v6;ipa=espeak
 place-words.tourist-spot-sightseeing-area,tourist spot / sightseeing area,,tˈʊɹɹɪst spˈɑːt / sˈaɪtsiːɪŋ ˈɛɹiə,,2,japanese-reviewed-v6;ipa=espeak
 border-customs.i-am-a-tourist,I am a tourist,,aɪɐm ɐ tˈʊɹɹɪst,,2,expansion-v1;ipa=espeak
-border-customs.here-is-my-passport,Here is my passport,,hˈɪɹ ɪz maɪ pˈæspɔːɹt,,2,expansion-v1;ipa=espeak
+border-customs.here-is-my-passport,Here is my passport,,hˈɪɹ ɪz maɪ pˈæspoːɹt,,2,expansion-v1;ipa=espeak
 border-customs.i-am-staying-for-days,I am staying for {} days,,aɪɐm stˈeɪɪŋ fɔːɹ {} dˈeɪz,,2,expansion-v1;ipa=espeak
 border-customs.nothing-to-declare,Nothing to declare,,nˈʌθɪŋ tə dɪklˈɛɹ,,2,expansion-v1;ipa=espeak
 border-customs.i-am-staying-at,I am staying at {},,aɪɐm stˈeɪɪŋ æt {},,2,expansion-v1;ipa=espeak
@@ -93,13 +93,13 @@ border-customs.i-have-a-connecting-flight,I have a connecting flight,,aɪ hæv �
 border-customs.may-i-have-an-entry-stamp,May I have an entry stamp?,,mˈeɪ aɪ hæv ɐn ˈɛntɹi stˈæmp,,2,expansion-v1;ipa=espeak
 border-customs.visa,visa,,vˈiːzə,,2,expansion-v1;ipa=espeak
 border-customs.i-have-no-food-or-plants,I have no food or plants,,aɪ hæv nˈoʊ fˈuːd ɔːɹ plˈænts,,2,expansion-v1;ipa=espeak
-border-customs.passport-control,passport control,,pˈæspɔːɹt kəntɹˈoʊl,,2,expansion-v1;ipa=espeak
+border-customs.passport-control,passport control,,pˈæspoːɹt kəntɹˈoʊl,,2,expansion-v1;ipa=espeak
 border-customs.customs,customs,,kˈʌstəmz,,2,expansion-v1;ipa=espeak
 border-customs.baggage-claim,baggage claim,,bˈæɡɪdʒ klˈeɪm,,2,expansion-v1;ipa=espeak
 border-customs.customs-declaration,customs declaration,,kˈʌstəmz dˌɛklɚɹˈeɪʃən,,2,expansion-v1;ipa=espeak
 border-customs.arrival-card,arrival card,,ɚɹˈaɪvəl kˈɑːɹd,,2,expansion-v1;ipa=espeak
 border-customs.transit,transit,,tɹˈænsɪt,,2,expansion-v1;ipa=espeak
-border-customs.boarding-pass,boarding pass,,bˈɔːɹdɪŋ pˈæs,,2,expansion-v1;ipa=espeak
+border-customs.boarding-pass,boarding pass,,bˈoːɹdɪŋ pˈæs,,2,expansion-v1;ipa=espeak
 directions.please-show-me-on-the-map,Please show me on the map,,plˈiːz ʃˈoʊ mˌiː ɔnðə mˈæp,,2,expansion-v1;ipa=espeak
 directions.where-is-the-nearest,Where is the nearest {}?,,wˌɛɹ ɪz ðə nˈɪɹɪst {},,2,expansion-v1;ipa=espeak
 directions.where-am-i,Where am I?,,wˌɛɹ æm ˈaɪ,,2,expansion-v1;ipa=espeak
@@ -114,5 +114,5 @@ directions.east,east,,ˈiːst,,2,expansion-v1;ipa=espeak
 directions.west,west,,wˈɛst,,2,expansion-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Do I need to validate this ticket?,,dˈuː aɪ nˈiːd tə vˈælɪdˌeɪt ðɪs tˈɪkɪt,,2,coordinator-gaps-v1;ipa=espeak
 rail-station-words.ticket-validator,ticket validator,,tˈɪkɪt vˈælɪdˌeɪɾɚ,,2,coordinator-gaps-v1;ipa=espeak
-common-signs.pork-code,pork codes on signs,B1 = dog,pˈɔːɹk kˈoʊdz ˌɔn sˈaɪnz,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
+common-signs.pork-code,pork codes on signs,B1 = dog,pˈoːɹk kˈoʊdz ˌɔn sˈaɪnz,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
 rail-station-words.fare,fare,,fˈɛɹ,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak

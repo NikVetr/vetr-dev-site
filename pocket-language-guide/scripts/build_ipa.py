@@ -377,6 +377,20 @@ VOICES = {"en": "en-us", "es": "es-419", "fr": "fr-fr", "de": "de", "pt": "pt-br
           # `PHONEMIZER_ESPEAK_LIBRARY`/`PHONEMIZER_ESPEAK_DATA_PATH` (both read by
           # `EspeakWrapper` itself, so nothing in this file has to know) before
           # running this script for `uk`. See tmp/ukrainian.md.
+          #
+          # **Point those two variables at the loader for `uk` alone, and never for a
+          # `--only` list that includes another language.** The two libraries do not
+          # agree, so pointing the newer one at an already-built column silently
+          # re-derives it: German's `Fruehstueck` comes back frˈyːʃtʏk under the loader
+          # and frˈyːʃtyk under Ubuntu's 1.50, and one settling run of the other
+          # twenty-four languages moved about 320 cells that way, Russian worst. It
+          # was caught by `tests/fonts.test.mjs` rather than by anything closer: /ʏ/
+          # is a symbol only five of the twenty-eight reader tables have a rule for,
+          # so six scripts could not draw what their respellings now emitted. Both
+          # `--gaps` and `--check` were clean at the time, because a re-derived column
+          # is internally consistent -- it is only wrong against the grade a reviewer
+          # gave it. Rebuilding the same list with the system library restored all
+          # twenty-four byte-for-byte, which is also how the drift was measured.
           "bn": "bn", "pl": "pl", "uk": "uk",
           # espeak-ng ships one Tamil voice and no regional variant, and it is used
           # rather than a romanisation route for one reason: **it implements Tamil's
