@@ -204,6 +204,7 @@ export function readConfig(ui, state) {
     nColsToAdd: Math.max(0, parseInt(ui.colorsToAdd.value, 10) || 0),
     tweakInputIndices,
     nOptimRuns: state.lastRuns,
+    searchStrategy: ui.searchStrategy?.value || "random",
     nmIterations,
     trajectorySteps,
     seed,

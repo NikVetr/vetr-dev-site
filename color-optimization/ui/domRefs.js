@@ -12,6 +12,7 @@ export function getUIRefs() {
     colorsToAdd: document.getElementById("colors-to-add"),
     optimRuns: document.getElementById("optim-runs"),
     nmIters: document.getElementById("nm-iters"),
+    searchStrategy: document.getElementById("search-strategy"),
     pathSteps: document.getElementById("path-steps"),
     colorwheelSpace: document.getElementById("colorwheel-space"),
     gamutMode: document.getElementById("gamut-mode"),

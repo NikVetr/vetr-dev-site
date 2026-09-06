@@ -1,3 +1,4 @@
+import { boundedCache } from "../core/boundedCache.js";
 import { channelOrder, convertColorValues, csRanges, GAMUTS, isInGamut, projectToGamut } from "../core/colorSpaces.js";
 
 const CUBE_EDGES = [
@@ -210,7 +211,7 @@ export function buildGamutBoundaryPoints(gamutKey, vizSpace, toPoint) {
   return points;
 }
 
-export function buildGamutProjectionBoundary(space, gamutPreset, ranges, isRectWheel, rectKeys, steps = 360, lSteps = 24) {
+function uncachedGamutProjectionBoundary(space, gamutPreset, ranges, isRectWheel, rectKeys, steps = 360, lSteps = 24) {
   const channels = channelOrder[space] || [];
   const out = [];
   const lKey = channels.includes("l") ? "l" : channels.includes("jz") ? "jz" : channels[0] || "l";
@@ -785,7 +786,7 @@ export function buildGamutOuterBoundary(pointsOrPaths, cx, cy, expandPx = 0) {
  * Returns a range object { min: {channel: value}, max: {channel: value} }
  * with a margin multiplier applied (e.g., 1.1 for 10% padding).
  */
-export function computeGamutExtent(space, gamutPreset, marginMultiplier = 1.1, rangeConstraint = null) {
+function uncachedGamutExtent(space, gamutPreset, marginMultiplier = 1.1, rangeConstraint = null) {
   const channels = channelOrder[space] || [];
   const baseRange = csRanges[space];
   if (!baseRange) return null;
@@ -896,4 +897,14 @@ function valuesWithinRange(vals, space, range, tolerance = 1e-6) {
     if (!Number.isFinite(v) || !Number.isFinite(min) || !Number.isFinite(max)) return true;
     return v >= min - tolerance && v <= max + tolerance;
   });
+}
+
+const buildGamutProjectionBoundaryCache = boundedCache(32);
+export function buildGamutProjectionBoundary(...args) {
+  return buildGamutProjectionBoundaryCache(JSON.stringify(args), () => uncachedGamutProjectionBoundary(...args));
+}
+
+const computeGamutExtentCache = boundedCache(32);
+export function computeGamutExtent(...args) {
+  return computeGamutExtentCache(JSON.stringify(args), () => uncachedGamutExtent(...args));
 }

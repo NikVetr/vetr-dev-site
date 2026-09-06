@@ -24,6 +24,7 @@ async function main() {
     await page.waitForFunction(() => window.__scientificExample?.ui?.panelMap?.none?.wheelMeta);
     await page.fill('#palette-input', '#4477AA, #CC6677');
     await page.uncheck('#bg-enabled');
+    await page.selectOption('#search-strategy', 'random');
     for (const [id, value] of Object.entries({ 'seed-input': 2026, 'colors-to-add': 3, 'optim-runs': 12,
       'nm-iters': 160 })) {
       await page.fill(`#${id}`, String(value));

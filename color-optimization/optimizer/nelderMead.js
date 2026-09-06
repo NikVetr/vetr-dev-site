@@ -105,34 +105,58 @@ function defaultYield() {
 
 export async function nelderMeadAsync(fn, start, opts = {}) {
   const alpha = 1;
-  const gamma = 2;
-  const rho = 0.5;
-  const sigma = 0.5;
+  // Gao–Han coefficients retain more simplex volume as dimension increases.
+  const dimension = start.length;
+  const adaptive = opts.adaptive && dimension > 1;
+  const gamma = adaptive ? 1 + 2 / dimension : 2;
+  const rho = adaptive ? 0.75 - 0.5 / dimension : 0.5;
+  const sigma = adaptive ? 1 - 1 / dimension : 0.5;
   const maxIterations = opts.maxIterations || 200;
   const tolerance = opts.tolerance || 1e-5;
   const step = opts.step || 1;
   const trace = opts.trace ? [] : null;
   const shouldStop = typeof opts.shouldStop === "function" ? opts.shouldStop : () => false;
-  const yieldEvery = Math.max(1, Math.floor(opts.yieldEvery || 5));
+  const yieldEvery = opts.yieldEvery == null ? Infinity : Math.max(1, Math.floor(opts.yieldEvery));
+  const yieldBudgetMs = opts.yieldBudgetMs ?? 10;
+  if (!(yieldBudgetMs > 0)) throw new Error("yieldBudgetMs must be positive.");
+  const now = opts.now || (() => performance.now());
   const yieldFn = typeof opts.yieldFn === "function" ? opts.yieldFn : defaultYield;
+  let lastYield = now();
 
   const n = start.length;
+  const maxEvaluations = opts.maxEvaluations ?? Infinity;
+  if (maxEvaluations !== Infinity && (!Number.isInteger(maxEvaluations) || maxEvaluations < n + 1)) {
+    throw new Error("maxEvaluations must cover the initial simplex (dimension + 1).");
+  }
+  let evaluations = 0, iterations = 0;
+  let bestSeen = { x: start.slice(), fx: Infinity };
+  const evaluate = (point) => {
+    if (evaluations >= maxEvaluations) return Infinity;
+    evaluations++;
+    const value = fn(point);
+    if (value < bestSeen.fx) bestSeen = { x: point.slice(), fx: value };
+    return value;
+  };
+  const finish = (reason) => ({ ...bestSeen, reason, trace, evaluations, iterations });
   let simplex = Array.from({ length: n + 1 }, (_, i) => {
     if (i === 0) return start.slice();
     const point = start.slice();
     point[i - 1] += step;
     return point;
   });
-  let values = simplex.map((p) => fn(p));
+  let values = simplex.map((p) => evaluate(p));
 
   for (let iter = 0; iter < maxIterations; iter++) {
+    if (evaluations >= maxEvaluations) return finish("max evaluations");
+    iterations = iter + 1;
     if (shouldStop()) {
-      return { ...bestResult(simplex, values, "cancelled", trace), cancelled: true };
+      return { ...finish("cancelled"), cancelled: true };
     }
-    if (iter > 0 && iter % yieldEvery === 0) {
+    if (now() - lastYield >= yieldBudgetMs || (iter > 0 && iter % yieldEvery === 0)) {
       await yieldFn();
+      lastYield = now();
       if (shouldStop()) {
-        return { ...bestResult(simplex, values, "cancelled", trace), cancelled: true };
+        return { ...finish("cancelled"), cancelled: true };
       }
     }
 
@@ -147,7 +171,7 @@ export async function nelderMeadAsync(fn, start, opts = {}) {
     if (trace) trace.push(best.slice());
 
     if (simplexConverged(simplex, values, tolerance, opts.xTolerance ?? 1e-5)) {
-      return bestResult(simplex, values, "converged (spread and simplex)", trace);
+      return finish("converged (spread and simplex)");
     }
 
     const centroid = Array(n).fill(0);
@@ -157,11 +181,11 @@ export async function nelderMeadAsync(fn, start, opts = {}) {
     for (let j = 0; j < n; j++) centroid[j] /= n;
 
     const reflect = centroid.map((c, j) => c + alpha * (c - worst[j]));
-    const fr = fn(reflect);
+    const fr = evaluate(reflect);
 
     if (fr < values[0]) {
       const expand = centroid.map((c, j) => c + gamma * (reflect[j] - c));
-      const fe = fn(expand);
+      const fe = evaluate(expand);
       if (fe < fr) {
         simplex[n] = expand;
         values[n] = fe;
@@ -181,7 +205,7 @@ export async function nelderMeadAsync(fn, start, opts = {}) {
     let contract;
     if (fr < values[n]) contract = centroid.map((c, j) => c + rho * (reflect[j] - c));
     else contract = centroid.map((c, j) => c + rho * (worst[j] - c));
-    const fc = fn(contract);
+    const fc = evaluate(contract);
     if (fr < values[n] ? fc <= fr : fc < values[n]) {
       simplex[n] = contract;
       values[n] = fc;
@@ -190,9 +214,9 @@ export async function nelderMeadAsync(fn, start, opts = {}) {
 
     for (let i = 1; i < simplex.length; i++) {
       simplex[i] = simplex[0].map((b, j) => b + sigma * (simplex[i][j] - b));
-      values[i] = fn(simplex[i]);
+      values[i] = evaluate(simplex[i]);
     }
   }
 
-  return bestResult(simplex, values, "max iterations", trace);
+  return finish(evaluations >= maxEvaluations ? "max evaluations" : "max iterations");
 }

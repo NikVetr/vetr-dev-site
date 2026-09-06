@@ -131,6 +131,7 @@ function captureHistorySnapshot() {
       colorsToAdd: ui?.colorsToAdd?.value || "",
       optimRuns: ui?.optimRuns?.value || "",
       nmIters: ui?.nmIters?.value || "",
+      searchStrategy: ui?.searchStrategy?.value || "random",
       pathSteps: ui?.pathSteps?.value || "",
       constraintTopology: ui?.constraintTopology?.value || "contiguous",
       aestheticMode: ui?.aestheticMode?.value || "none",
@@ -219,6 +220,7 @@ function applyHistorySnapshot(snapshot) {
   if (ui.colorsToAdd) ui.colorsToAdd.value = snapUi.colorsToAdd || ui.colorsToAdd.value;
   if (ui.optimRuns) ui.optimRuns.value = snapUi.optimRuns || ui.optimRuns.value;
   if (ui.nmIters) ui.nmIters.value = snapUi.nmIters || ui.nmIters.value;
+  if (ui.searchStrategy) ui.searchStrategy.value = snapUi.searchStrategy || "random";
   if (ui.pathSteps) ui.pathSteps.value = snapUi.pathSteps || ui.pathSteps.value;
   clampPathSteps();
   if (ui.constraintTopology) ui.constraintTopology.value = snapUi.constraintTopology || "contiguous";
@@ -474,6 +476,7 @@ function setDefaultValues() {
   ui.colorsToAdd.value = "3";
   ui.optimRuns.value = "100";
   ui.nmIters.value = "260";
+  ui.searchStrategy.value = "random";
   if (ui.pathSteps) ui.pathSteps.value = "48";
   clampPathSteps();
   applyConstraintWidthDefaults(ui.colorSpace.value);
@@ -1702,7 +1705,7 @@ function attachEventListeners() {
     clampPathSteps();
     drawStatusMini(state, ui, currentVizOpts());
   });
-  [ui.seedInput, ui.colorsToAdd, ui.optimRuns, ui.nmIters, ui.pathSteps].forEach((el) => {
+  [ui.seedInput, ui.colorsToAdd, ui.optimRuns, ui.nmIters, ui.pathSteps, ui.searchStrategy].forEach((el) => {
     if (!el) return;
     el.addEventListener("change", () => {
       clampPathSteps();
@@ -1974,10 +1977,21 @@ async function runOptimization() {
   drawStatusGraph(state, ui);
   drawStatusMini(state, ui, currentVizOpts());
 
+  let progressFrame = null;
+  let lastProgressPaint = -Infinity;
+  const scheduleProgressPaint = () => {
+    if (progressFrame != null || document.hidden || performance.now() - lastProgressPaint < 120) return;
+    progressFrame = requestAnimationFrame(() => {
+      progressFrame = null;
+      if (!shouldContinueRun()) return;
+      drawStatusMini(state, ui, currentVizOpts());
+      lastProgressPaint = performance.now();
+    });
+  };
   try {
     const best = await optimizePalette(paletteForOpt, config, {
       shouldStop: () => !shouldContinueRun(),
-      onProgress: async ({ run, pct, bestScore, startHex, endHex, startRaw, endRaw, trajectory, bestHex, bestRaw, optimizedRows }) => {
+      onProgress: ({ run, pct, bestScore, startHex, endHex, startRaw, endRaw, trajectory, bestHex, bestRaw, optimizedRows }) => {
         if (!shouldContinueRun()) return;
         state.bestScores.push(bestScore);
         state.nmTrails.push({
@@ -1993,8 +2007,7 @@ async function runOptimization() {
         state.rawBestColors = bestRaw || state.rawBestColors;
         state.optimizedColorRoles = Array.isArray(optimizedRows) ? optimizedRows.map((row) => ({ ...row })) : state.optimizedColorRoles;
         setStatus(`restart ${run}/${config.nOptimRuns}`, pct, ui, state);
-        drawStatusMini(state, ui, currentVizOpts());
-        await nextFrame();
+        scheduleProgressPaint();
       },
       onVerbose: (info) => {
         if (!shouldContinueRun()) return;
@@ -2022,6 +2035,7 @@ async function runOptimization() {
           }
           pushVerboseRows(info);
         } else if (info.stage === "end") {
+          logVerbose(`run ${info.run} stop`, "", `${info.reason}; ${info.evaluations} search evaluations, ${info.iterations} iterations`);
           logVerbose(`run ${info.run} end params`, "", paramPreview);
           logVerbose(`run ${info.run} end hex`, "", hexStr);
         if (info.score !== undefined) {
@@ -2103,6 +2117,7 @@ async function runOptimization() {
     showError(err.message || "Optimization failed.", ui);
     console.error(err);
   } finally {
+    if (progressFrame != null) cancelAnimationFrame(progressFrame);
     if (!isSameRun()) return;
     optimizationCancelRef = null;
     state.running = false;
@@ -2117,10 +2132,6 @@ async function runOptimization() {
     }
     updateResultNavigator();
   }
-}
-
-function nextFrame() {
-  return new Promise((resolve) => requestAnimationFrame(resolve));
 }
 
 function logVerbose(key, prev, next) {

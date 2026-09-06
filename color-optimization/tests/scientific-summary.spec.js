@@ -51,7 +51,7 @@ test('note remains within the mobile viewport and keyboard focus stays in the di
 test('standalone note includes complete references and reproducible figures', async ({ page }, testInfo) => {
   await page.goto('/scientific-summary.html');
   await expect(page.getByRole('heading', { name: 'Abstract', exact: true })).toBeVisible();
-  await expect(page.locator('.note-bibliography li')).toHaveCount(8);
+  await expect(page.locator('.note-bibliography li')).toHaveCount(9);
   expect(await page.locator('a[href^="#"]').evaluateAll((links) => links.every((a) => document.querySelector(a.getAttribute('href'))))).toBe(true);
   await expect.poll(() => page.locator('figure img').evaluateAll((images) => images.every((img) => img.complete && img.naturalWidth > 0))).toBe(true);
   await expect(page.locator('figure')).toHaveCount(5);

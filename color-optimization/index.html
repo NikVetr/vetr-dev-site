@@ -104,6 +104,14 @@
         <div class="control-block">
           <h3>Optimization Settings</h3>
           <input id="raw-input-values" type="hidden">
+          <div class="field">
+            <label for="search-strategy">Search strategy</label>
+            <select id="search-strategy" title="Classic preserves the original search. Adaptive scales local steps by dimension. Hybrid also replaces individual colors between restarts; benefits depend on the palette.">
+              <option value="random">Classic random restarts</option>
+              <option value="adaptive">Adaptive random restarts</option>
+              <option value="hybrid">Hybrid color exploration</option>
+            </select>
+          </div>
           <div class="field two-col">
             <div>
               <label for="seed-input">Seed</label>

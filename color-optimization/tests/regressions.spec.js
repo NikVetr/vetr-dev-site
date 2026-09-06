@@ -83,6 +83,49 @@ test('default optimization preserves feasible paths and top-layer stars', async 
   await page.locator('#status-mini').screenshot({ path: testInfo.outputPath('default-paths.png') });
 });
 
+test('search completes and paints its final result when animation frames are suspended', async ({ page }) => {
+  await configureRun(page, 3, 4, 30);
+  await page.evaluate(() => {
+    window.__savedRaf = requestAnimationFrame;
+    window.requestAnimationFrame = () => 0;
+    Object.defineProperty(document, 'hidden', { configurable: true, get: () => true });
+    document.querySelector('#run-btn').click();
+  });
+  await expect(page.locator('#status-state')).toHaveText('Finished', { timeout: 10000 });
+  expect(await page.evaluate(() => window.__colorTest.state.nmTrails.length)).toBe(4);
+  expect((await countMarkerPixels(page)).gold).toBeGreaterThan(80);
+  await page.evaluate(() => { window.requestAnimationFrame = window.__savedRaf; delete document.hidden; });
+});
+
+test('search strategy survives undo/redo and hybrid runs retain a finite result', async ({ page }) => {
+  await page.selectOption('#search-strategy', 'hybrid');
+  await configureRun(page, 3, 4, 40);
+  await finishRun(page);
+  expect(await page.evaluate(() => Number.isFinite(window.__colorTest.state.runRanking[0].score))).toBe(true);
+  await page.selectOption('#search-strategy', 'adaptive');
+  await page.locator('#undo-btn').click();
+  await expect(page.locator('#search-strategy')).toHaveValue('hybrid');
+  await page.locator('#redo-btn').click();
+  await expect(page.locator('#search-strategy')).toHaveValue('adaptive');
+});
+
+test('a scheduled STOP remains responsive during a larger search', async ({ page }, testInfo) => {
+  await configureRun(page, 8, 200, 1000);
+  await page.selectOption('#search-strategy', 'hybrid');
+  const latency = await page.evaluate(async () => {
+    const started = performance.now();
+    const fired = new Promise(resolve => setTimeout(() => {
+      document.querySelector('#run-btn').click();
+      resolve(performance.now() - started - 20);
+    }, 20));
+    document.querySelector('#run-btn').click();
+    return fired;
+  });
+  await expect(page.locator('#status-state')).toHaveText('Stopped', { timeout: 10000 });
+  expect(latency).toBeLessThan(500);
+  await testInfo.attach('stop-timer-latency-ms', { body: String(latency), contentType: 'text/plain' });
+});
+
 test('drawing after a colorspace switch replaces stale custom constraints', async ({ page }, testInfo) => {
   await page.click('#palette-clear');
   await drawCustomRectangle(page);

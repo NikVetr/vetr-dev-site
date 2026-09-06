@@ -10,13 +10,13 @@ import {
   projectToGamut,
 } from "../core/colorSpaces.js";
 import { clamp } from "../core/util.js";
-import { random, setRandomSeed } from "../core/random.js";
+import { random as sharedRandom, createRandom } from "../core/random.js";
 import { nelderMeadAsync } from "./nelderMead.js";
-import { objectiveInfo, objectiveValue, prepareData } from "./objective.js";
+import { decodePalette, objectiveInfo, objectiveValue, prepareData } from "./objective.js";
 import { aggregateDistances } from "../core/means.js";
 import { coordsFromHexForDistanceMetric, coordsFromXyzForDistanceMetric, distanceBetweenCoords } from "../core/distance.js";
 import { activeConstraintSets } from "../core/activeConstraints.js";
-import { hardModeAtPoint } from "../core/hardConstraints.js";
+import { GamutProjectionError, hardModeAtPoint } from "../core/hardConstraints.js";
 
 function logitClamped(p) {
   const t = clamp(p, 1e-6, 1 - 1e-6);
@@ -59,8 +59,8 @@ function channelBoundsForStart(prepLike, ch, scChannel, lightKey) {
   return bounds.boundsByName?.[ch] || [0, 1];
 }
 
-function buildRandomParams(dim) {
-  return Array.from({ length: dim }, () => logitClamped(random()));
+function buildRandomParams(dim, rng = sharedRandom) {
+  return Array.from({ length: dim }, () => logitClamped(rng()));
 }
 
 function pointWindowSummary(constraintSets, channels) {
@@ -108,7 +108,7 @@ function normWithinPointWindows(norm, constraintSets, channels, summary) {
   return false;
 }
 
-function sampleNormInPointWindow(norm, constraintSets, channels, summary, pointIndex) {
+function sampleNormInPointWindow(norm, constraintSets, channels, summary, pointIndex, random) {
   channels.forEach((ch) => {
     const windows = summary?.hardWindows?.[ch];
     const w = windows ? windows[pointIndex % windows.length] : null;
@@ -218,6 +218,7 @@ function encodeNormalizedRowsToParams(normRows, colorSpace, ranges, prepLike = {
 
 export function buildGamutUniformParams(nColors, colorSpace, gamutPreset, ranges, prepLike = {}) {
   const channels = channelOrder[colorSpace];
+  const random = prepLike.random || sharedRandom;
   const samples = [];
   const lightKey = channels.includes("l") ? "l" : channels.includes("jz") ? "jz" : null;
   const scChannel = channels.find((c) => c === "s" || c === "c") || null;
@@ -275,7 +276,7 @@ export function buildGamutUniformParams(nColors, colorSpace, gamutPreset, ranges
     });
     if (pointWindows?.count) {
       const pointIndex = Math.floor(random() * pointWindows.count);
-      sampleNormInPointWindow(norm, constraintSets, channels, pointWindows, pointIndex);
+      sampleNormInPointWindow(norm, constraintSets, channels, pointWindows, pointIndex, random);
     }
     return norm;
   };
@@ -338,6 +339,7 @@ export function buildGamutUniformParams(nColors, colorSpace, gamutPreset, ranges
 }
 
 function buildTweakAnchoredParams(prep) {
+  const random = prep.random || sharedRandom;
   const rows = prep.optimizedRows || [];
   if (!rows.some((row) => row?.kind === "tweak" && row.sourceNorm)) return null;
   const channels = channelOrder[prep.colorSpace] || [];
@@ -365,7 +367,7 @@ function generateStartWithInfo(dim, prep, runIndex = 0) {
     const info = objectiveInfo(params, prep);
     return { params, info };
   }
-  const params = buildRandomParams(dim);
+  const params = buildRandomParams(dim, prep.random);
   const info = objectiveInfo(params, prep);
   return { params, info };
 }
@@ -373,17 +375,18 @@ function generateStartWithInfo(dim, prep, runIndex = 0) {
 export async function optimizePalette(palette, config, { onProgress, onVerbose, shouldStop } = {}) {
   const colorSpace = config.colorSpace;
   const channels = channelOrder[colorSpace];
-  if ("seed" in config) {
-    setRandomSeed(config.seed);
-  }
   const prep = prepareData(palette, colorSpace, config);
+  prep.random = createRandom(config.seed);
+  const strategy = config.searchStrategy || "random";
+  if (!["random", "adaptive", "hybrid"].includes(strategy)) throw new Error(`Unknown search strategy: ${strategy}`);
   const conditioningHexes = prep.currHex || [];
   const dim = (prep.nOptimized ?? config.nColsToAdd) * channels.length;
   if (dim <= 0) {
     throw new Error("Nothing to optimize: set Colors to add above 0 or mark at least one input color for tweaking.");
   }
   let best = { value: Infinity, par: null, newHex: [], newRaw: [] };
-  let bestScoreSoFar = -Infinity;
+  let evaluations = 0;
+  let lastRestartYield = performance.now();
   const trajectorySteps = Math.max(
     1,
     Math.min(
@@ -408,7 +411,39 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose, 
       best.meta = { ...(best.meta || {}), reason: "cancelled" };
       break;
     }
+    // Short restarts must also let timers/STOP run, even if no solver slice expires.
+    if (performance.now() - lastRestartYield >= 10) {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      lastRestartYield = performance.now();
+      if (shouldStop?.()) {
+        best.cancelled = true;
+        best.meta = { ...(best.meta || {}), reason: "cancelled" };
+        break;
+      }
+    }
     const startState = generateStartWithInfo(dim, prep, run);
+    let startEvaluations = 1;
+    if (strategy === "hybrid" && run % 3 !== 0 && best.par && prep.nOptimized > 1) {
+      const incumbent = best.optimizerRaw.map((raw) => normalizeWithRange(raw, prep.ranges, colorSpace));
+      const fresh = startState.info.optimizerRaw.map((raw) => normalizeWithRange(raw, prep.ranges, colorSpace));
+      const candidates = incumbent.map((_, i) => i);
+      for (let attempt = 0; attempt < Math.min(4, incumbent.length); attempt++) {
+        const [row] = candidates.splice(Math.floor(prep.random() * candidates.length), 1);
+        const rows = incumbent.map((value, i) => i === row ? fresh[i] : value);
+        const params = encodeNormalizedRowsToParams(rows, colorSpace, prep.ranges, prep);
+        startEvaluations++;
+        try {
+          const info = objectiveInfo(params, prep);
+          if (info.value < startState.info.value) {
+            startState.params = params;
+            startState.info = info;
+          }
+        } catch (error) {
+          if (!(error instanceof GamutProjectionError)) throw error;
+        }
+      }
+    }
+    evaluations += startEvaluations;
     const start = startState.params;
     const startInfo = startState.info || objectiveInfo(start, prep);
     const startDetails = attachMeta(
@@ -441,15 +476,17 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose, 
     const res = await nelderMeadAsync(
       (p) => objectiveValue(p, prep),
       start,
-      { maxIterations: config.nmIterations, step: 1.2, trace: true, shouldStop, yieldEvery: 5 }
+      { maxIterations: config.nmIterations, step: 1.2, trace: true, shouldStop, adaptive: strategy !== "random",
+        maxEvaluations: config.maxEvaluationsPerRun == null ? Infinity : config.maxEvaluationsPerRun - startEvaluations }
     );
+    evaluations += res.evaluations;
     if (res.cancelled) {
       best.cancelled = true;
       best.meta = { ...(best.meta || {}), reason: "cancelled" };
       break;
     }
     const endInfo = objectiveInfo(res.x, prep);
-    const trajectory = buildTrajectory(res.trace, start, res.x, prep, trajectorySteps);
+    const trajectory = onProgress ? buildTrajectory(res.trace, start, res.x, prep, trajectorySteps) : null;
     const endDetails = attachMeta(
       endInfo.details,
       endInfo.newHex,
@@ -462,6 +499,9 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose, 
       onVerbose({
         ...verboseMeta,
         stage: "end",
+        reason: res.reason,
+        evaluations: res.evaluations + startEvaluations,
+        iterations: res.iterations,
         run: run + 1,
         params: res.x,
         hex: endInfo.newHex,
@@ -487,6 +527,8 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose, 
         optimizedRows: endInfo.optimizedRows,
         meta: {
           reason: res.reason,
+          evaluations: res.evaluations + startEvaluations,
+          iterations: res.iterations,
           distance: endInfo.distance,
           penalty: endInfo.penalty,
           paramPenalty: endInfo.paramPenalty,
@@ -494,7 +536,7 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose, 
           constraintPenalty: endInfo.constraintPenalty,
         },
       };
-      bestScoreSoFar = -res.fx;
+
       if (onVerbose) {
         onVerbose({
           ...verboseMeta,
@@ -556,7 +598,7 @@ export async function optimizePalette(palette, config, { onProgress, onVerbose, 
       });
     }
   }
-  return best;
+  return { ...best, evaluations };
 }
 
 function buildTrajectory(traceParams, startParams, endParams, prep, maxTraceSamples = DEFAULT_TRAJECTORY_STEPS) {
@@ -572,7 +614,7 @@ function buildTrajectory(traceParams, startParams, endParams, prep, maxTraceSamp
     if (!prev || !sameParams(prev, row)) unique.push(row);
   });
   return unique.map((params) => {
-    const info = objectiveInfo(params, prep);
+    const info = decodePalette(params, prep);
     return {
       hex: info.newHex,
       raw: info.newRaw || info.optimizerRaw,

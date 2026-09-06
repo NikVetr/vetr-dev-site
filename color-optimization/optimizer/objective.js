@@ -1,3 +1,4 @@
+import { boundedCache } from "../core/boundedCache.js";
 import { aggregateDistances } from "../core/means.js";
 import { coordsFromHexForDistanceMetric, distanceBetweenCoords } from "../core/distance.js";
 import {
@@ -85,7 +86,7 @@ export function prepareData(palette, colorSpace, config) {
     );
   });
   const hueAnchorRad = channels.includes("h") ? computeHueAnchorRad(decoded) : 0;
-  return {
+  const prep = {
     currCols: normalized,
     currHex,
     currRaw: fixedDecoded,
@@ -115,17 +116,15 @@ export function prepareData(palette, colorSpace, config) {
     hasPerInputConstraints: Boolean(config.perInputWidths || config.perInputModes),
     penaltyScale: PENALTY_NORMALIZATION,
   };
+  prep.constraintContext = prepareConstraintContext(prep);
+  const coordinateCache = boundedCache(20000);
+  prep.coordsForHex = (hex, state) => coordinateCache(`${state}|${hex}`, () =>
+    coordsFromHexForDistanceMetric(hex, distanceMetric, state, cvdModel));
+  return prep;
 }
 
-export function meanDistance(par, prep, returnInfo) {
-  const { currHex, bounds, colorSpace, colorblindWeights, colorblindSafe, ranges } = prep;
-  const channels = channelOrder[colorSpace];
-  const cn = channels;
-  const nOptimized = Math.max(0, prep.nOptimized ?? prep.nColsToAdd ?? 0);
-  if (par.length !== nOptimized * cn.length || !par.every(Number.isFinite)) {
-    throw new Error("Optimizer parameters must have the expected length and contain only finite numbers.");
-  }
-  const lightKey = cn.includes("l") ? "l" : cn.includes("jz") ? "jz" : null;
+function prepareConstraintContext(prep) {
+  const { bounds } = prep;
   const constraintSets = bounds?.constraintSets;
   const globalConstraintSets = bounds?.globalConstraintSets || constraintSets;
   const constraintTopology = prep.constraintTopology || constraintSets?.topology || "contiguous";
@@ -152,6 +151,24 @@ export function meanDistance(par, prep, returnInfo) {
         constraintSetForRole(constraintSets, individualRowRoles[idx], prep.tweakConstraintMode),
       ]
     : [constraintSetForRole(constraintSets, role, prep.tweakConstraintMode)]);
+
+  return { constraintSets, globalConstraintSets, constraintTopology, useLayeredIndividualConstraints,
+    globalRowRoles, individualRowRoles, rowConstraintSets,
+    primaryClampSets: rowConstraintSets.map((sets) => sets[0]),
+    secondaryClampSets: rowConstraintSets.map((sets) => sets[1]) };
+}
+
+function decodeParameters(par, prep) {
+  const { bounds, colorSpace, ranges } = prep;
+  const channels = channelOrder[colorSpace];
+  const cn = channels;
+  const nOptimized = Math.max(0, prep.nOptimized ?? prep.nColsToAdd ?? 0);
+  if (par.length !== nOptimized * cn.length || !par.every(Number.isFinite)) {
+    throw new Error("Optimizer parameters must have the expected length and contain only finite numbers.");
+  }
+  const lightKey = cn.includes("l") ? "l" : cn.includes("jz") ? "jz" : null;
+  const { constraintSets, globalConstraintSets, constraintTopology, useLayeredIndividualConstraints,
+    primaryClampSets, secondaryClampSets, rowConstraintSets } = prep.constraintContext;
 
   const m = [];
   const zRows = [];
@@ -230,10 +247,10 @@ export function meanDistance(par, prep, returnInfo) {
 
   if (constraintTopology === "discontiguous" || constraintTopology === "custom") {
     if (useLayeredIndividualConstraints) {
-      applyDiscontiguousHardConstraints(m, zRows, globalConstraintSets, globalRowRoles, prep.tweakConstraintMode);
-      applyDiscontiguousHardConstraints(m, zRows, constraintSets, individualRowRoles, prep.tweakConstraintMode);
+      applyDiscontiguousHardConstraints(m, zRows, primaryClampSets);
+      applyDiscontiguousHardConstraints(m, zRows, secondaryClampSets);
     } else {
-      applyDiscontiguousHardConstraints(m, zRows, constraintSets, prep.optimizedRows, prep.tweakConstraintMode);
+      applyDiscontiguousHardConstraints(m, zRows, primaryClampSets);
     }
   }
 
@@ -244,6 +261,20 @@ export function meanDistance(par, prep, returnInfo) {
   const rawHex = displayRaw.map((row) => encodeColor(row, colorSpace));
   const newHex = rawHex;
 
+  return { m, zRows, scaled, displayRaw, newHex };
+}
+
+export function decodePalette(par, prep) {
+  const { scaled, displayRaw, newHex } = decodeParameters(par, prep);
+  return { newHex, newRaw: displayRaw, optimizerRaw: scaled,
+    optimizedRows: prep.optimizedRows.map((row) => ({ ...row })) };
+}
+
+export function meanDistance(par, prep, returnInfo) {
+  const { colorSpace, colorblindWeights } = prep;
+  const { constraintSets, globalConstraintSets, constraintTopology, useLayeredIndividualConstraints,
+    globalRowRoles, individualRowRoles } = prep.constraintContext;
+  const { m, zRows, scaled, displayRaw, newHex } = decodeParameters(par, prep);
   const cvdStates = prep.cvdStates;
   const perRowPenalties = scaled.map((row) => parameterPenaltyForRow(row, colorSpace));
   const perRowGamut = scaled.map((row) => gamutPenaltyForRow(row, colorSpace, prep.gamutPreset));
@@ -262,7 +293,7 @@ export function meanDistance(par, prep, returnInfo) {
   const perColorDistances = Array.from({ length: scaled.length }, () => ({ sum: 0, count: 0 }));
   cvdStates.forEach((state) => {
     newCoordsByState[state] = newHex.map((hex) =>
-      coordsFromHexForDistanceMetric(hex, prep.distanceMetric, state, prep.cvdModel)
+      prep.coordsForHex(hex, state)
     );
   });
   const dists = {};
@@ -452,9 +483,9 @@ function individualConstraintRolesForOptimizedRows(optimizedRows = [], tweakInpu
   });
 }
 
-function applyDiscontiguousHardConstraints(rows, zRows, constraintSets, rowRoles = [], tweakConstraintMode = {}) {
+function applyDiscontiguousHardConstraints(rows, zRows, setsByRow) {
   rows.forEach((row, idx) => {
-    const sets = constraintSetForRole(constraintSets, rowRoles[idx], tweakConstraintMode);
+    const sets = setsByRow[idx];
     const clamped = clampNormToHardConstraints(row, sets, sets.topology, row);
     Object.keys(sets.channels || {}).forEach((ch) => {
       row[ch] = clamped[ch];

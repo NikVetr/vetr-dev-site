@@ -11,11 +11,11 @@ function mulberry32(seed) {
 }
 
 export function setRandomSeed(seed) {
-  if (!Number.isFinite(seed)) {
-    rng = Math.random;
-    return;
-  }
-  rng = mulberry32(Math.floor(seed));
+  rng = createRandom(seed);
+}
+
+export function createRandom(seed) {
+  return Number.isFinite(seed) ? mulberry32(Math.floor(seed)) : Math.random;
 }
 
 export function random() {
