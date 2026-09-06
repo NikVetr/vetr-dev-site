@@ -82,3 +82,5 @@ numbers-money.lakh,十万,,jūman,dʑɯːmaɴ,,2,lakh-crore-agent-v1;cldr;ipa=he
 numbers-money.crore,一千万,,issenman,isseɴmaɴ,,2,lakh-crore-agent-v1;cldr;ipa=hepburn
 numbers-money.shekel,シェケル,,shekeru,ɕekeɾɯ,,2,shekel-gloss-v1;cldr;roman=generated;ipa=hepburn
 numbers-money.shekel-symbol,シェケル記号,,shekeru kigō,ɕekeɾɯ kiɡoː,,2,shekel-gloss-v1;cldr;roman=generated;ipa=hepburn
+numbers-money.rial,リアル,,riaru,ɾiaɾɯ,,2,rial-toman-gloss-v1;cldr;ipa=hepburn
+numbers-money.toman,十リアル,,jū riaru,dʑɯː ɾiaɾɯ,,2,rial-toman-gloss-v1;cldr;ipa=hepburn

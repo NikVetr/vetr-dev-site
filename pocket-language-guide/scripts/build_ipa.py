@@ -363,7 +363,7 @@ DATA = ROOT / "data"
 # and `fr`/`pt` without a region raise "not supported".
 VOICES = {"en": "en-us", "es": "es-419", "fr": "fr-fr", "de": "de", "pt": "pt-br",
           "it": "it", "id": "id", "sw": "sw", "tr": "tr", "ru": "ru", "hi": "hi",
-          "ar": "ar", "vi": "vi", "el": "el", "hu": "hu"}
+          "ar": "ar", "vi": "vi", "el": "el", "hu": "hu", "fa": "fa"}
 
 # Phonemised one word at a time rather than a phrase at a time, which every other
 # espeak language is.
@@ -407,14 +407,40 @@ ROMANISED = {"zh-Hans": "romanization_pinyin", "ja": "romanization_hepburn",
 # which have no lexical stress at all -- but it does not need to be told either, if
 # the generator simply does not write a mark it cannot justify.
 STRESS = {"fr": "phrase", "ko": "none", "vi": "none", "ja": "none",
-          "zh-Hans": "none", "th": "none", "tlh": "none"}
+          "zh-Hans": "none", "th": "none", "tlh": "none",
+          # **Persian stress is not lexical, and espeak's is wrong in a systematic
+          # direction, so this is the one place both halves of the rule agree.**
+          #
+          # Persian stress is predictable from morphology: the final syllable of a
+          # nominal, the *prefix* of a prefixed verb (mi-, be-, na-), and never an
+          # enclitic. espeak prefers the initial syllable of a nominal, which is the
+          # opposite of the rule -- `kˈetɑb` for ketā́b, `xˈɑne` for khāné, `mˈardom`
+          # for mardóm, `pˈolis` for polís, `pˈezeʃk` for pezešk, `kˈomak` for komák,
+          # `bimˈɑrestˌɑn` for bimārestā́n. Keeping it would tell all twenty-two
+          # reader tables to shout the wrong syllable.
+          #
+          # Deriving it the way `hu_stress` does was the alternative and it does not
+          # work here: Hungarian's rule is positional and exceptionless, Persian's
+          # runs in *opposite directions* for nominals and verbs, and nothing in this
+          # pipeline knows which a word is. `می`/`نمی` are detectable from the text
+          # and the rest of the verb prefixes are not, so a derived mark would be
+          # right on the nouns and backwards on half the verbs -- and a mark in the
+          # wrong place is worse than no mark, because a reader with no capital falls
+          # back on their own language's default while a reader with the wrong capital
+          # is actively misled.
+          #
+          # What it costs is small and that is the third reason: Persian vowels do not
+          # reduce, so an unstressed syllable is spelt and said the same as a stressed
+          # one and an unmarked respelling is fully intelligible. Russian, where the
+          # vowel quality depends on the stress, could not have made this trade.
+          "fa": "none"}
 
 # Which packs write `text` in something other than the Latin alphabet, so that a
 # Latin run left in one is a loanword rather than the language. `tlh` and `qya` are
 # in here because their `text` is pIqaD and tengwar; the gate finds nothing to
 # refuse in either -- neither pack quotes a Latin loanword -- and they are named
 # anyway so that the next row that does quote one is asked the same question.
-NON_LATIN = {"zh-Hans", "ja", "ko", "th", "hi", "ar", "ru", "el", "tlh", "qya", "he"}
+NON_LATIN = {"zh-Hans", "ja", "ko", "th", "hi", "ar", "ru", "el", "tlh", "qya", "he", "fa"}
 
 
 # ------------------------------------------------------------------- alphabet
@@ -552,6 +578,56 @@ REPAIR = {
     # *khek*. Hanoi actually diphthongises this rhyme to [ajŋ]/[ajk]; that detail is
     # below the resolution of this column, which keeps espeak's palatal coda.
     "vi": [("e-", "a"), ("iɛ", "iɛ̯"), ("iə", "iə̯"), ("yə", "yə̯"), ("uə", "uə̯")],
+    # Two artefacts, and the first is the whole of what stands between this voice and
+    # a usable column. espeak writes Persian's one voiced uvular -- the phoneme both
+    # ق and غ realise in Tehrani speech -- as the two characters **`q1`**, its own
+    # mnemonic and not IPA, so `check_alphabet` refused every row containing either
+    # letter: چقدر, اتاق, قطار, دقیقه, قرص, برق, مرغ, غار. Measured over a 239-word
+    # probe, a bare `q` never occurs -- the counts of `q` and of `1` are equal and
+    # every one is part of a `q1` -- so this is a straight relabelling and not a
+    # guess about which `q` is which.
+    #
+    # `q` rather than `ɢ` or `ʁ`, which are the narrower symbols. The corpus already
+    # carries `q` from the Arabic pack, so all twenty-two reader tables already have a
+    # rule for it and Persian adds no symbol to `--gaps`; `ɢ` would have been the
+    # first voiced uvular stop the corpus ever held and would have cost twenty-two
+    # table edits, which is exactly what Klingon's /ɬ/ cost. What is lost is voicing:
+    # Arabic's `q` is voiceless and Persian's is not, so the two spell the same in
+    # every reader's column. That is below this column's resolution -- it is a
+    # respelling hint, and no reader table distinguishes uvular voicing anyway.
+    #
+    # **And length is folded out, because Persian has none.** Modern Persian has six
+    # vowel qualities and no length contrast: the historical long/short pairs are now
+    # /i u ɑ/ against /e o a/, distinguished by quality. espeak writes `ː`
+    # inconsistently on exactly those three -- `pˈuːl` for پول beside `mˈamnun` for
+    # ممنون, `bˈaleː` for بله beside `xˈoʃ` for خوش -- so the mark follows the
+    # spelling rather than the sound and tells a reader table to double a vowel or
+    # reach for a length device on some rows and not others.
+    #
+    # Safe as a bare substring, and that is measured rather than assumed: over the
+    # probe and over the shipped pack, `ː` follows a **vowel** every time (e ɑ a u i)
+    # and never a consonant, because espeak writes Persian gemination as a doubled
+    # letter instead -- `q1ˈolleː` for قله, `ˈavval` for اول, `bˈannɑ` for بنّا,
+    # `xˈatt` for خطّ. So nothing here shortens a geminate.
+    #
+    # And one word, which is the Hebrew word-list case arriving through this table
+    # instead. espeak's Persian dictionary reads میگو -- shrimp -- as `mˈejɡu`,
+    # taking the می for the verbal prefix *mey-*; the word is [miɡu] and nothing in
+    # Persian orthography can force that reading (`مِیگو` gives the same answer,
+    # `میگُو` gives `miɡov`, and every other spelling is a misspelling). It matters
+    # more than a vowel usually would because the word is on an **allergy** row, and
+    # a shellfish allergy respelled *MAY-goo* is a hint a shopkeeper will not
+    # decode. `ejɡu` is the substring because the stress mark sits between the m and
+    # the e at this stage; it fires on exactly the three میگو rows in the pack and
+    # nowhere else, verified over the whole column.
+    #
+    # کیف is the same shape and is a genuine homograph rather than a dictionary
+    # slip: [kif] is a bag and [kejf] is pleasure, and both are spelt کیف. espeak
+    # picks the second, so `کیفم را دزدیدند` and `کیفِ پولم` came back as *keyfam*
+    # and *keyf-e pulam*. In a phrasebook the word is always the bag, so `ejf` is
+    # rewritten -- checked against every `ejf` in the finished column, which is
+    # these five rows and nothing else.
+    "fa": [("q1", "q"), ("ejɡu", "iɡu"), ("ejf", "if"), ("ː", "")],
 }
 
 
@@ -1014,10 +1090,26 @@ def clean(chunk):
     (`check-out`). Everything else -- `¿ ? ! . : ; … ~ +`, quotes, brackets, the
     CJK marks -- goes, so that the table routes never see a character they would
     pass through and the espeak routes never get one back out.
+
+    **And the zero-width non-joiner, U+200C, which is category Cf and was therefore
+    being thrown away with the punctuation.** It is not punctuation in Perso-Arabic:
+    it is a letter-level part of the spelling, the نیم‌فاصله the Academy of Persian
+    Language and Literature prescribes between a verb and its `می` prefix, between
+    a noun and its `ها` plural, and before the enclitic `ام`. Strip it and espeak
+    reads a different word -- `بچه‌ام` (bachche-am, 'my child') became `بچهام` and
+    came back `batʃhɑm`, and `آمده‌ام`, `بقیه‌اش`, `روبه‌رو` and `سریع‌السیر` all
+    lost a syllable boundary the same way. Wrong on 195 rows of the Persian pack,
+    including `lost-rescue.my-child-is-missing`.
+
+    U+200D is deliberately not added beside it: nothing in the corpus uses the
+    joiner, and this is the character the data actually contains. Adding U+200C
+    changes no other language -- it appears in `fa` and in no other pack, in no
+    registry file and in no override, so `build_ipa.py --check` is unmoved for the
+    other twenty-two.
     """
     return "".join(c for c in chunk
                    if unicodedata.category(c)[0] in "LMN" or c.isspace()
-                   or c in "'-").strip()
+                   or c in "'-\u200c").strip()
 
 
 def pieces(text, loans=()):
@@ -1946,6 +2038,22 @@ GRADE = {
            "`umetsiot`) are corrected in the pack's own word list. It also means the "
            "column writes the careful `seliẖa` where Israelis say [sliˈχa], which is "
            "what BGN prescribes and is one syllable more than colloquial speech"),
+    "fa": ("B+", "espeak has a Persian voice and it is much better than the Arabic one, for a "
+           "structural reason rather than a lucky dictionary: Persian writes /i u ɑ/ with the "
+           "letters ی و ا, so the three vowels Arabic leaves to a guess are on the page, and only "
+           "/a e o/ are unwritten. Probed on fifty words chosen for exactly that ambiguity -- مرد "
+           "گل سفر نظر گم پر تند خشک جلو عقب شکم نسخه -- the vowel is right in every one. Two "
+           "artefacts are repaired in REPAIR above (`q1`, and the spelling-driven length mark) and "
+           "after them the output is clean IPA. Three weaknesses, in order. **Stress is not "
+           "written at all** and that is a decision, not a gap: see STRESS above. **ق and غ are "
+           "both `q`**, which is the Tehrani merger and is right for the sound but drops the "
+           "voicing, so Persian's uvular and Arabic's spell the same in every reader's column. "
+           "**And the ezāfe is only as good as the pack**: the linking /e/ is not in the script, "
+           "espeak does not insert it -- `آب معدنی` comes back `ɑb maʔdani` where Persian says "
+           "*āb-e ma‘dani* -- so this pack writes the kasra U+0650 on the host word wherever an "
+           "ezāfe is required, which makes espeak produce the vowel every time (`آبِ معدنی` -> "
+           "`ɑbe maʔdani`, verified on sixteen constructions). A row that forgets the kasra loses "
+           "one vowel silently, which is what a reviewer should grep for first"),
     "tr": ("B", "phonemic orthography, but espeak's Turkish stress is 68.1%"),
     "pt": ("B", "pt-br; vowel reduction is phonetic detail the curated sheet smooths away"),
     "en": ("B", "en-us; deep orthography, but espeak's English lexicon is its best"),

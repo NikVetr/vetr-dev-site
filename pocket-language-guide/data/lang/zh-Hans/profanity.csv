@@ -1,0 +1,11 @@
+concept_id,text,text_alt,romanization_pinyin,ipa,literal,confidence,provenance
+profanity.oh-my-god,天哪！,,tiān na!,tʰjɛn˥ na,oh heaven -- mild,1,profanity-v1;src=XHC-7;ipa=pinyin
+profanity.damn,该死！,,gāisǐ!,kaɪ˥sɯ˧˩˧,"deserving death -- damn it, mild",1,profanity-v1;src=XHC-7;ipa=pinyin
+profanity.expletive,妈的！,,mā de!,ma˥ tɤ,mother's -- coarse; not aimed at anyone,1,profanity-v1;src=XHC-7;ipa=pinyin
+profanity.strong-expletive,操！,草！,cào!,tsʰɑʊ˥˩,very strong; 草 is the softened spelling,1,profanity-v1;src=XHC-7;ipa=pinyin
+profanity.intensifier,他妈的,,tā mā de,tʰa˥ ma˥ tɤ,before a noun: damn -; coarse,1,profanity-v1;src=XHC-7;ipa=pinyin
+profanity.frustration,太烂了,,tài làn le,tʰaɪ˥˩ lan˥˩ lɤ,too rotten -- rubbish; mild-coarse,1,profanity-v1;src=XHC-7;ipa=pinyin
+profanity.thats-rude,别说脏话,,bié shuō zānghuà,pjɛ˧˥ ʂwɔ˥ tsɑŋ˥xwa˥˩,do not use foul language,1,profanity-v1;src=XHC-7;ipa=pinyin
+profanity.excuse-my-language,抱歉，我说了脏话,,"bàoqiàn, wǒ shuō le zānghuà","pɑʊ˥˩tɕʰjɛn˥˩, wɔ˧˩˧ ʂwɔ˥ lɤ tsɑŋ˥xwa˥˩","sorry, I used foul language",1,profanity-v1;src=XHC-7;ipa=pinyin
+profanity.strength-warning,这一栏是给你听懂用的，不是给你说的：脏话的分量翻不过去。这边译得轻描淡写的一个词，在旁边那门语言里可能根本说不出口，而一门语言里最重的那个词，往往正是本栏不得不省掉的。,,,,,1,profanity-notes-v1
+profanity.japanese-register,日语几乎不用词汇来干这件事。轻蔑靠语法承担：一个生硬的第二人称代词，光秃秃的命令形，以及切断式的动词形。怒气落在词尾，而不落在一个查得到的词上，上面这几行差不多就是全部的词了。,,,,,1,profanity-notes-v1

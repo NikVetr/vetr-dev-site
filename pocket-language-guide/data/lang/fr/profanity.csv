@@ -1,0 +1,11 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+profanity.oh-my-god,Mon Dieu !,,mɔ̃ djˈø,my God -- mild,1,profanity-v1;src=TLFi;ipa=espeak
+profanity.damn,Zut !,Mince !,zˈyt,darn -- harmless,1,profanity-v1;src=TLFi;ipa=espeak
+profanity.expletive,Merde !,,mˈɛʁd,shit -- coarse but everyday,1,profanity-v1;src=TLFi;ipa=espeak
+profanity.strong-expletive,Putain !,Tabarnak !,pytˈɛ̃,very strong; Québec tabarnak stronger,1,profanity-v1;src=TLFi+Usito;ipa=espeak
+profanity.intensifier,foutu,putain de,futˈy,before a noun: damn -; coarse,1,profanity-v1;src=TLFi;ipa=espeak
+profanity.frustration,C'est nul,,sɛ nˈyl,it is worthless -- mild,1,profanity-v1;src=TLFi;ipa=espeak
+profanity.thats-rude,C'est grossier,,sɛ ɡʁosjˈe,that is coarse,1,profanity-v1;src=TLFi;ipa=espeak
+profanity.excuse-my-language,Excusez l'expression,,ɛkskyze lɛkspʁɛsjˈɔ̃,excuse the expression,1,profanity-v1;src=TLFi;ipa=espeak
+profanity.strength-warning,"Ici pour être reconnus, non pour être employés : la force ne survit pas à la traduction. Un mot rendu ici par un juron anodin peut être indicible dans la langue d'à côté, et le mot le plus fort d'une langue est souvent celui que cette section a dû écarter.",,,,1,profanity-notes-v1
+profanity.japanese-register,"Le japonais ne fait presque rien de tout cela avec du vocabulaire. Le mépris passe par la grammaire : un pronom de deuxième personne brutal, l'impératif nu, les formes verbales abruptes. La colère est dans la terminaison, pas dans un mot que l'on peut chercher, et les lignes ci-dessus sont à peu près tout le lexique existant.",,,,1,profanity-notes-v1

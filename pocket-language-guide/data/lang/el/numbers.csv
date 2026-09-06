@@ -82,3 +82,5 @@ numbers-money.lakh,εκατό χιλιάδες,,ekato chiliades,ˌekatˈo çiʎ�
 numbers-money.crore,δέκα εκατομμύρια,,deka ekatommyria,ðˈeka ˌekatomˈiɾiˌa,,2,lakh-crore-agent-v1;cldr;ipa=espeak
 numbers-money.shekel,σεκέλ,,,secˈel,,2,shekel-gloss-v1;cldr;ipa=espeak
 numbers-money.shekel-symbol,σεκέλ (σύμβολο),,,secˈel sˈimvolˌo,,2,shekel-gloss-v1;cldr;ipa=espeak
+numbers-money.rial,ριάλ,,,ɾiˈal,,2,rial-toman-gloss-v1;cldr;ipa=espeak
+numbers-money.toman,10 ριάλ,,,ðˈeka ɾiˈal,,2,rial-toman-gloss-v1;cldr;ipa=espeak

@@ -82,3 +82,5 @@ numbers-money.lakh,cien mil,,sjˈen mˈil,,2,lakh-crore-agent-v1;cldr;ipa=espeak
 numbers-money.crore,diez millones,,djˈes miʝˈones,,2,lakh-crore-agent-v1;cldr;ipa=espeak
 numbers-money.shekel,el séquel,,el sˈekel,,2,shekel-gloss-v1;cldr;ipa=espeak
 numbers-money.shekel-symbol,séquel (símbolo),,sˈekel sˈimbolo,,2,shekel-gloss-v1;cldr;ipa=espeak
+numbers-money.rial,rial,,riˈal,,2,rial-toman-gloss-v1;cldr;ipa=espeak
+numbers-money.toman,10 riales,,djˈes riˈales,,2,rial-toman-gloss-v1;cldr;ipa=espeak

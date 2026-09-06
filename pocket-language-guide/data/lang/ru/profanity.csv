@@ -1,0 +1,10 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+profanity.oh-my-god,Боже мой!,,Bozhe moy!,bˈoʒɨ mˈoj,my God -- mild,1,profanity-v1;src=BTS-Kuznetsov;ipa=espeak
+profanity.damn,Чёрт!,,Chërt!,tʃʲˈɵrt,devil -- mild oath,1,profanity-v1;src=BTS-Kuznetsov;ipa=espeak
+profanity.expletive,Блин!,,Blin!,bɭʲˈin,pancake -- a mild stand-in for mat,1,profanity-v1;src=BTS-Kuznetsov;ipa=espeak
+profanity.intensifier,чёртов,хренов,chërtov,tʃʲˈɵrtʌf,before a noun: damn -; mild,1,profanity-v1;src=BTS-Kuznetsov;ipa=espeak
+profanity.frustration,Это фигня.,,Eto fignya.,ˈɛtʌ fʲiɡnʲˈɑ,this is rubbish -- mild-coarse,1,profanity-v1;src=BTS-Kuznetsov;ipa=espeak
+profanity.thats-rude,Это грубо.,,Eto grubo.,ˈɛtʌ ɡrˈubʌ,that is rude,1,profanity-v1;src=BTS-Kuznetsov;ipa=espeak
+profanity.excuse-my-language,Извините за выражение.,,Izvinite za vyrazheniye.,ɪzvʲinʲˈitʲi zˈɑ vɨraʒˈɛnʲijɪ,excuse the expression,1,profanity-v1;src=BTS-Kuznetsov;ipa=espeak
+profanity.strength-warning,"Они здесь для того, чтобы их узнавать, а не употреблять: сила при переводе не сохраняется. Слово, переданное здесь безобидной бранью, в соседнем языке может оказаться непроизносимым, а самое сильное слово языка — часто именно то, которое этот раздел пришлось опустить.",,,,,1,profanity-notes-v1
+profanity.japanese-register,"В японском для этого почти нет слов. Презрение несёт грамматика: резкое местоимение второго лица, простой императив, обрывистые формы глагола. Гнев сидит в окончании, а не в слове, которое можно найти в словаре, и строки выше — почти весь имеющийся запас.",,,,,1,profanity-notes-v1

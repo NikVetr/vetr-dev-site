@@ -1,0 +1,10 @@
+concept_id,text,text_alt,romanization_iast,ipa,literal,confidence,provenance
+profanity.oh-my-god,हे भगवान!,,he bhagvān!,hˈeː bʰˌəɡʋˈaːn,O God -- mild,1,profanity-v1;src=McGregor-OHED;ipa=espeak
+profanity.damn,धत् तेरे की!,,dhat tere kī!,dʰˈʌt tˈeːɾeː ki,an oath of annoyance -- mild,1,profanity-v1;src=McGregor-OHED;ipa=espeak
+profanity.expletive,साला!,,sālā!,sˈaːlaː,coarse; an insult if aimed at anyone,1,profanity-v1;src=McGregor-OHED;ipa=espeak
+profanity.intensifier,कमबख्त,,kambakht,kˌəməbˈʌkʰt,"before a noun: wretched, damn -; mild",1,profanity-v1;src=McGregor-OHED;ipa=espeak
+profanity.frustration,यह बकवास है,,yah bakvās hai,jˌəh bˌəkʋˈaːs hɛː,this is rubbish -- mild,1,profanity-v1;src=McGregor-OHED;ipa=espeak
+profanity.thats-rude,यह बदतमीज़ी है,,yah badtamīzī hai,jˌəh bˌədətmˈiːzi hɛː,this is bad manners,1,profanity-v1;src=McGregor-OHED;ipa=espeak
+profanity.excuse-my-language,अपशब्दों के लिए माफ़ कीजिए,,apaśabdoṁ ke lie māf kījie,ˌʌpəʃˈʌbdõ keː lˈɪeː mˈaːf kˈiːɟɪˌeː,forgive me for the foul words,1,profanity-v1;src=McGregor-OHED;ipa=espeak
+profanity.strength-warning,"ये पंक्तियाँ पहचानने के लिए हैं, बोलने के लिए नहीं: गाली का जोर अनुवाद में नहीं बचता। यहाँ जो शब्द हलकी गाली जैसा लगता है, वह बगल की भाषा में अनकहा हो सकता है, और किसी भाषा का सबसे भारी शब्द अक्सर वही होता है जिसे यह खंड छोड़ देना पड़ा।",,,,,1,profanity-notes-v1
+profanity.japanese-register,"जापानी में इसके लिए शब्द लगभग नहीं हैं। तिरस्कार व्याकरण से आता है: दूसरे पुरुष का रूखा सर्वनाम, सादा आज्ञा रूप, और क्रिया के कटे-छँटे रूप। गुस्सा क्रिया के अंत में होता है, किसी ऐसे शब्द में नहीं जिसे शब्दकोश में खोजा जा सके, और ऊपर की पंक्तियाँ ही लगभग पूरा शब्द-भंडार हैं।",,,,,1,profanity-notes-v1

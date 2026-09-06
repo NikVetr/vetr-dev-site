@@ -1,0 +1,11 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+profanity.oh-my-god,Meu Deus!,,meʊ dˈeʊs,my God -- mild,1,profanity-v1;src=Priberam;ipa=espeak
+profanity.damn,Droga!,,drˈɔɡæ,"drug -- mild oath, harmless",1,profanity-v1;src=Priberam;ipa=espeak
+profanity.expletive,Merda!,,mˈɛɾədæ,shit -- coarse but everyday,1,profanity-v1;src=Priberam;ipa=espeak
+profanity.strong-expletive,Caralho!,Porra!,kˌaɾˈaljʊ,very strong; said at nothing,1,profanity-v1;src=Priberam;ipa=espeak
+profanity.intensifier,maldito,de merda,mˌaʊdʒˈitʊ,with a noun: damn -; mild,1,profanity-v1;src=Priberam;ipa=espeak
+profanity.frustration,Isto é uma porcaria,,ˈistw ɛ ˌumæ pˌoɾəkaɾˈiæ,this is filth -- mild-coarse,1,profanity-v1;src=Priberam;ipa=espeak
+profanity.thats-rude,Isso é grosseria,,ˈisw ɛ ɡrˌoseɾˈiæ,that is coarseness,1,profanity-v1;src=Priberam;ipa=espeak
+profanity.excuse-my-language,Desculpe a expressão,,dˌeskˈuwpj a ˌespresˈɐ̃ʊ̃,excuse the expression,1,profanity-v1;src=Priberam;ipa=espeak
+profanity.strength-warning,"Estão aqui para serem reconhecidas, não para serem usadas: a força não sobrevive à tradução. Uma palavra traduzida aqui por uma praga leve pode ser indizível na língua ao lado, e a palavra mais forte de um idioma é muitas vezes a que esta seção teve de deixar de fora.",,,,1,profanity-notes-v1
+profanity.japanese-register,"O japonês quase não faz isto com vocabulário. O desprezo vai na gramática: um pronome de segunda pessoa brusco, o imperativo simples, as formas verbais cortantes. A raiva está na terminação e não numa palavra que se possa procurar, e as linhas acima são quase todo o léxico existente.",,,,1,profanity-notes-v1

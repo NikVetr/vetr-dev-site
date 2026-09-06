@@ -82,3 +82,5 @@ numbers-money.lakh,seratus ribu,100.000,sərˈatus rˈibu,,2,lakh-crore-agent-v1
 numbers-money.crore,sepuluh juta,10.000.000,səpˈuluh dʒˈuta,,2,lakh-crore-agent-v1;cldr;ipa=espeak
 numbers-money.shekel,shekel,,shˈɛkəl,,2,shekel-gloss-v1;cldr;ipa=espeak
 numbers-money.shekel-symbol,shekel (simbol),,shˈɛkəl sˈimbol,,2,shekel-gloss-v1;cldr;ipa=espeak
+numbers-money.rial,rial,,rˈial,,2,rial-toman-gloss-v1;cldr;ipa=espeak
+numbers-money.toman,10 rial,,səpˈuluh rˈial,,2,rial-toman-gloss-v1;cldr;ipa=espeak

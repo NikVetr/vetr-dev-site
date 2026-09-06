@@ -1,0 +1,8 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+profanity.oh-my-god,Mungu wangu!,,mˈuŋɡu wˈaŋɡu,my God -- mild,1,profanity-v1;src=TUKI-KKS;ipa=espeak
+profanity.expletive,Mavi!,,mˈavi,dung -- coarse,1,profanity-v1;src=TUKI-KKS;ipa=espeak
+profanity.frustration,Hii ni takataka,,hˌii ni tˌakatˈaka,this is rubbish -- mild,1,profanity-v1;src=TUKI-KKS;ipa=espeak
+profanity.thats-rude,Hayo ni matusi,,hˈajo ni matˈusi,those are insults,1,profanity-v1;src=TUKI-KKS;ipa=espeak
+profanity.excuse-my-language,Samahani kwa lugha yangu,,sˌamahˈani kwa lˈuɣa jˈaŋɡu,sorry for my language,1,profanity-v1;src=TUKI-KKS;ipa=espeak
+profanity.strength-warning,"Safu hizi zipo ili uzitambue, sio ili uzitumie: uzito wa neno la matusi haupitii tafsiri. Neno linaloonekana hapa kama laana nyepesi linaweza kuwa neno lisilosemeka katika lugha iliyo pembeni, na neno kali zaidi la lugha mara nyingi ni lile ambalo sehemu hii ililazimika kuliacha.",,,,1,profanity-notes-v1
+profanity.japanese-register,"Kijapani hakifanyi hivi kwa msamiati. Dharau hubebwa na sarufi: kiwakilishi cha nafsi ya pili kikavu, kauli ya amri tupu, na miundo ya kitenzi iliyokatwa. Hasira iko mwishoni wa kitenzi, sio katika neno unaloweza kulitafuta katika kamusi, na safu zilizo juu ni karibu msamiati wote uliopo.",,,,1,profanity-notes-v1

@@ -82,3 +82,5 @@ numbers-money.lakh,مئة ألف,١٠٠٠٠٠,miʾat alf,mʔt ʔˈallaf,,2,lakh-
 numbers-money.crore,عشرة ملايين,١٠٠٠٠٠٠٠,ʿasharat malāyīn,ʕˈiʃɹa mˌullaːˈijjiːn,,2,lakh-crore-agent-v1;cldr;ipa=espeak
 numbers-money.shekel,شيكل,,,ʃˈiːkl,,2,shekel-gloss-v1;cldr;ipa=espeak
 numbers-money.shekel-symbol,رمز الشيكل,,,ɹˈamz ʔaʃʃˈiːkl,,2,shekel-gloss-v1;cldr;ipa=espeak
+numbers-money.rial,ريال,,riyāl,ɹˈiːaːl,,2,rial-toman-gloss-v1;cldr;ipa=espeak
+numbers-money.toman,عشرة ريالات,,ʿasharat riyālāt,ʕˈiʃɹa ɹˈiːaːlˌaːt,,2,rial-toman-gloss-v1;cldr;ipa=espeak

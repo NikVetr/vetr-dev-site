@@ -1,0 +1,11 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+profanity.oh-my-god,Mein Gott!,,maɪn ɡˈɔt,my God -- mild,1,profanity-v1;src=Duden;ipa=espeak
+profanity.damn,Verdammt!,,fɛɾdˈamt,damned -- mild oath,1,profanity-v1;src=Duden;ipa=espeak
+profanity.expletive,Scheiße!,,ʃˈaɪsə,shit -- coarse but everyday,1,profanity-v1;src=Duden;ipa=espeak
+profanity.strong-expletive,Verdammte Scheiße!,,fɛɾdˈamtə ʃˈaɪsə,damned shit -- German stacks to escalate,1,profanity-v1;src=Duden;ipa=espeak
+profanity.intensifier,Scheiß-,,ʃˈaɪs,noun prefix: damn -; coarse,1,profanity-v1;src=Duden;ipa=espeak
+profanity.frustration,Das ist Mist.,,das ɪst mˈɪst,that is manure -- mild,1,profanity-v1;src=Duden;ipa=espeak
+profanity.thats-rude,Das ist ordinär.,,das ɪst ˌɔɾdiːnˈɛːɾ,that is coarse,1,profanity-v1;src=Duden;ipa=espeak
+profanity.excuse-my-language,Verzeihen Sie den Ausdruck.,,fɛɾtsˈaɪən ziː deːn ˈaʊsdɾˌʊk,forgive the expression,1,profanity-v1;src=Duden;ipa=espeak
+profanity.strength-warning,"Zum Erkennen gedacht, nicht zum Gebrauch: Die Wucht wird nicht mitübersetzt. Ein Wort, das hier als harmloser Fluch steht, kann in der Sprache daneben unsagbar sein, und das stärkste Wort einer Sprache ist oft genau das, was dieser Abschnitt weglassen musste.",,,,1,profanity-notes-v1
+profanity.japanese-register,"Japanisch macht das fast nie mit Wörtern. Verachtung steckt in der Grammatik: ein schroffes Pronomen der zweiten Person, der nackte Imperativ, die abrupten Verbformen. Der Zorn liegt in der Endung, nicht in einem Wort, das man nachschlagen kann, und die Zeilen darüber sind fast der ganze Wortschatz.",,,,1,profanity-notes-v1

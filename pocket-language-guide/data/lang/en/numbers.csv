@@ -82,3 +82,5 @@ numbers-money.lakh,"100,000",,"wˈʌnhʌndɹɪd, zˈiəɹoʊziəɹoʊ zˈiəɹo�
 numbers-money.crore,"10,000,000",,"tˈɛn, zˈiəɹoʊziəɹoʊ zˈiəɹoʊ, zˈiəɹoʊziəɹoʊ zˈiəɹoʊ",,2,lakh-crore-agent-v1;cldr;ipa=espeak
 numbers-money.shekel,shekel,,ʃˈɛkəl,,2,shekel-gloss-v1;cldr;ipa=espeak
 numbers-money.shekel-symbol,shekel (symbol),,ʃˈɛkəl sˈɪmbəl,,2,shekel-gloss-v1;cldr;ipa=espeak
+numbers-money.rial,rial,,ɹˈaɪəl,,2,rial-toman-gloss-v1;cldr;ipa=espeak
+numbers-money.toman,10 rial,,tˈɛn ɹˈaɪəl,,2,rial-toman-gloss-v1;cldr;ipa=espeak

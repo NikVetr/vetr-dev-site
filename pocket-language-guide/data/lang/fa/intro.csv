@@ -1,0 +1,13 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+introductions.my-name-is,اسمِ من {} است,,esm-e man {} ast,esme man {} ast,,2,fa-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,خوشوقتم,از آشنایی با شما خوشوقتم,khoshvaqtam,xoʃvaqtam,glad -- the long form is az āshnāyi bā shomā khoshvaqtam,2,fa-agent-v1;ipa=espeak
+introductions.what-is-your-name,اسمِ شما چیست؟,اسمتون چیه؟,esm-e shomā chist?,esme ʃomɑ tʃist,spoken esmetun chie,2,fa-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,ما با هم سفر می‌کنیم,,mā bā ham safar mikonim,mɑ bɑ ham safar mikonim,,2,fa-agent-v1;ipa=espeak
+introductions.this-is-my-friend,ایشان دوستِ من است,,ishān dust-e man ast,iʃɑn duste man ast,"ishān is the polite third person -- Persian introduces a person with it, not with in",2,fa-agent-v1;ipa=espeak
+introductions.i-am-from,من از {} هستم,,man az {} hastam,man az {} hastam,,2,fa-agent-v1;ipa=espeak
+introductions.where-are-you-from,شما از کجا هستید؟,اهلِ کجایید؟,shomā az kojā hastid?,ʃomɑ az kodʒɑ hastid,also ahl-e kojāyid,2,fa-agent-v1;ipa=espeak
+introductions.how-are-you,حالِ شما چطور است؟,حالتون چطوره؟,hāl-e shomā chetor ast?,hɑle ʃomɑ tʃetor ast,the ordinary greeting-question -- spoken hāletun chetore,2,fa-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,من گردشگر هستم,من توریستم,man gardeshgar hastam,man ɡardeʃɡar hastam,turist is just as common,2,fa-agent-v1;ipa=espeak
+introductions.this-is-my-husband-wife,ایشان همسرِ من است,شوهرم / خانمم,ishān hamsar-e man ast,iʃɑn hamsare man ast,"hamsar is spouse of either sex, so Persian needs one word where most languages need two -- showhar is husband, khānom wife",2,fa-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,این دخترم / پسرم است,,in dokhtaram / pesaram ast,in doxtaram / pesaram ast,,2,fa-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,من تنها سفر می‌کنم,,man tanhā safar mikonam,man tanhɑ safar mikonam,,2,fa-agent-v1;ipa=espeak

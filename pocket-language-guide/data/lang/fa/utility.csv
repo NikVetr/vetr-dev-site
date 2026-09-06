@@ -1,0 +1,16 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,می‌خواهم به {} بروم,,mikhāham be {} beravam,mixɑham be {} beravam,,2,fa-agent-v1;ipa=espeak
+utility-templates.please-give-me,لطفاً {} به من بدهید,,lotfan {} be man bedahid,lotfan {} be man bedahid,,2,fa-agent-v1;ipa=espeak
+utility-templates.may-i,می‌شود {}؟,,mishavad {}?,miʃavad {},"'is it possible to…' -- takes a verb, and needs no agreement with who is asking",2,fa-agent-v1;ipa=espeak
+utility-templates.please-do-not-add,لطفاً {} اضافه نکنید,,lotfan {} ezāfe nakonid,lotfan {} ezɑfe nakonid,,2,fa-agent-v1;ipa=espeak
+utility-templates.do-you-have,{} دارید؟,,{} dārid?,{} dɑrid,,2,fa-agent-v1;ipa=espeak
+utility-templates.please-write-the-number,لطفاً عدد را بنویسید,,lotfan ‘adad rā benevisid,lotfan adad rɑ benevisid,,2,fa-agent-v1;ipa=espeak
+utility-templates.i-need,{} لازم دارم,,{} lāzem dāram,{} lɑzem dɑram,,2,fa-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,{} این نزدیکی هست؟,,{} in nazdiki hast?,{} in nazdiki hast,,2,fa-agent-v1;ipa=espeak
+utility-templates.how-much-is,{} چند است؟,,{} chand ast?,{} tʃand ast,,2,fa-agent-v1;ipa=espeak
+utility-templates.is-this,این {} است؟,,in {} ast?,in {} ast,,2,fa-agent-v1;ipa=espeak
+utility-templates.please,{} لطفاً,,{} lotfan,{} lotfan,,2,fa-agent-v1;ipa=espeak
+utility-templates.i-am-looking-for,دنبالِ {} هستم,,donbāl-e {} hastam,donbɑle {} hastam,,2,fa-agent-v1;ipa=espeak
+utility-templates.do-you-accept,{} قبول می‌کنید؟,,{} qabul mikonid?,{} qabul mikonid,,2,fa-agent-v1;ipa=espeak
+utility-templates.i-cannot-find,{} را پیدا نمی‌کنم,,{} rā peydā nemikonam,{} rɑ pejdɑ nemikonam,,2,fa-agent-v1;ipa=espeak
+utility-templates.there-is-a-problem-with,{} مشکل دارد,,{} moshkel dārad,{} moʃkel dɑrad,,2,fa-agent-v1;ipa=espeak

@@ -1,0 +1,10 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+profanity.oh-my-god,Trời ơi!,,tʃəːj˨˩ əːj˧,"oh heaven -- mild, and everywhere",1,profanity-v1;src=HoangPhe-TDTV;ipa=espeak
+profanity.damn,Chết tiệt!,,tʃet̪˧˥ t̪iɛ̯t̪˨˩ˀ,"utterly dead -- damn it, mild",1,profanity-v1;src=HoangPhe-TDTV;ipa=espeak
+profanity.expletive,Cứt thật!,,kyt̪˧˥ tət̪˨˩ˀ,"shit, truly -- coarse",0,profanity-v1;src=HoangPhe-TDTV;ipa=espeak
+profanity.frustration,Thật là vớ vẩn,,tət̪˨˩ˀ laː˨˩ vəː˧˥ vən˧˩˧,utterly nonsensical -- mild,1,profanity-v1;src=HoangPhe-TDTV;ipa=espeak
+profanity.intensifier,chó chết,,tʃɔ˧˥ tʃet̪˧˥,after a noun: damn -; coarse,1,profanity-v1;src=HoangPhe-TDTV;ipa=espeak
+profanity.thats-rude,Nói thế là thô lỗ,,nɔj˧˥ te˧˥ laː˨˩ to˧ lo˧ˀ˥,saying that is coarse,1,profanity-v1;src=HoangPhe-TDTV;ipa=espeak
+profanity.excuse-my-language,Xin lỗi vì đã nói tục,,sin˧ loj˧ˀ˥ vi˨˩ ɗaː˧ˀ˥ nɔj˧˥ t̪uc˨˩ˀ,sorry for speaking coarsely,1,profanity-v1;src=HoangPhe-TDTV;ipa=espeak
+profanity.strength-warning,"Những dòng này để bạn nhận ra, không phải để bạn dùng: sức nặng của một tiếng thô không đi theo bản dịch. Một từ ở đây chỉ như lời rủa nhẹ có thể là điều không nói được trong tiếng bên cạnh, và từ nặng nhất của một ngôn ngữ thường chính là từ mà phần này buộc phải bỏ đi.",,,,1,profanity-notes-v1
+profanity.japanese-register,"Tiếng Nhật gần như không dùng từ vựng cho việc này. Sự coi thường nằm trong ngữ pháp: một đại từ ngôi thứ hai thô, thức mệnh lệnh trần, và các dạng động từ cụt. Cơn giận nằm ở đuôi động từ chứ không ở một từ có thể tra được, và các dòng trên đây gần như là toàn bộ số từ có sẵn.",,,,1,profanity-notes-v1

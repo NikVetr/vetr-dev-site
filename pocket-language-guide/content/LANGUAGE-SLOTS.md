@@ -622,3 +622,42 @@ frames are all prepositional or nominal. Two consequences to fold in:
   text is what the solver measures — so the PDFs, the face PNGs and the thumbnails
   all have to be rebuilt, and `data/shell.json` and the service-worker version with
   them.
+
+## Persian, the twenty-third, and what it added to the registry
+
+Persian needs **no rephrasing at all** in the seven cells, which is the cheapest any
+pack has been. A language name in Persian is a bare adverbial with no preposition, no
+article and no case ending -- `{target} صحبت نمی‌کنم`, `شما {source} صحبت می‌کنید؟` --
+so one frame fits every fill, and the script is caseless so the sentence-initial rule
+that binds `fr es pt ru it hu` does not apply. The two shape-C cells take the ezāfe
+instead, which is a mark on the *host* word rather than an agreement with the insert:
+`متنِ {target}` and `به {target} بنویسید`.
+
+It costs the registry 39 rows and **three `name` overrides**, one of which is a new
+instance of item 4 above:
+
+- **`fa,tr` -- ICU's Persian for Turkish is `ترکی استانبولی`, "Istanbul Turkish".**
+  Correct as a dictionary label and wrong inside a sentence: `شما ترکی استانبولی صحبت
+  می‌کنید؟` asks whether someone speaks *Istanbul* Turkish. The ordinary word is
+  `ترکی`. Exactly the Turkish `Svahili dili` and Indonesian `Tionghoa` shape.
+- **`fa,qya` -- ICU returns the bare tag `qya`**, which is the fall-through
+  `languageName` refuses, and every one of the other twenty-two locales already
+  carries a hand-written name here because CLDR has none. Persian's is `کوئنیا`,
+  following Arabic's `كوينيا`.
+- **`fa,he` and `fa,tlh` are pointed** -- `عِبری` and `کِلینگون` -- not because ICU's
+  spelling is wrong but because it is unvocalised and the `ipa` column is derived
+  from it: espeak read the bare forms as *ābri* and *kolingun*. The kasra makes the
+  vowel recoverable and is ordinary Persian pointing.
+
+Persian is a romanised pack, so all 23 of its rows also carry a `romanization`, and
+the five locales that require one for every name -- `zh-Hans ja ko he tlh` -- each gain
+their row for `fa`. **The Klingon one is derived rather than authored**, by the method
+the summary records for the last two of Okrand's names: Persian's endonym `fārsi` is
+/fɑrsi/, and putting that through Okrand's own key -- `createRespeller` over
+`tlh__tlh-TA.json`, which is the same key the respelling column uses -- returns
+`varSI`, so the name is `varSI Hol`. Klingon has no /f/, which is why it comes out
+with a `v`; and there is no glottal stop, for the same reason `qISuwaHIlI Hol` has
+none. `transliterate_native.py` writes the pIqaD from that cell.
+
+The table is now 23 x 23 = 529 pairs less the 22 that Quenya does not name, so 507
+rows.

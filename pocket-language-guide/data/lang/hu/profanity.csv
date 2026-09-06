@@ -1,0 +1,11 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+profanity.oh-my-god,Úristen!,,ˈuːriʃtɛn,Lord God -- mild,1,profanity-v1;src=EKsz;ipa=espeak
+profanity.damn,A fenébe!,Az istenit!,ˈɑ fˈɛneːbɛ,to the plague-demon -- mild oath,1,profanity-v1;src=EKsz;ipa=espeak
+profanity.expletive,Szar!,,sˈɑr,shit -- coarse but everyday,1,profanity-v1;src=EKsz;ipa=espeak
+profanity.strong-expletive,A kurva életbe!,,ˈɑ kˈurvɑ ˈeːlɛtbɛ,"into the whore life -- strong, at nothing",1,profanity-v1;src=EKsz;ipa=espeak
+profanity.intensifier,rohadt,,rˈohɑtt,"before a noun: rotten, damn -; coarse",1,profanity-v1;src=EKsz;ipa=espeak
+profanity.frustration,Ez szemét,,ˈɛz sˈɛmeːt,this is junk -- mild,0,profanity-v1;src=EKsz;ipa=espeak
+profanity.thats-rude,Ez csúnya beszéd,,ˈɛz tʃˈuːɲɑ bˈɛseːd,that is ugly talk,1,profanity-v1;src=EKsz;ipa=espeak
+profanity.excuse-my-language,Elnézést a kifejezésért,,ˈɛlneːzeːʃt ˈɑ kˈifɛjɛzeːʃeːrt,pardon for the expression,1,profanity-v1;src=EKsz;ipa=espeak
+profanity.strength-warning,"Azért van itt, hogy felismerje, nem azért, hogy használja: az erő nem éli túl a fordítást. Egy szó, amely itt szelíd szitkozódásnak látszik, a szomszédos nyelvben kimondhatatlan lehet, és egy nyelv legerősebb szava gyakran éppen az, amit ez a szakasz nem vehetett fel.",,,,1,profanity-notes-v1
+profanity.japanese-register,"A japán ezt szinte egyáltalán nem szavakkal teszi. A megvetést a nyelvtan hordozza: egy nyers második személyű névmás, a puszta felszólító mód, a kurta igealakok. A düh a végződésben van, nem egy szóban, amit ki lehet keresni, és a fenti sorok szinte a teljes szókincset kiteszik.",,,,1,profanity-notes-v1

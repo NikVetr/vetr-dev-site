@@ -4,6 +4,7 @@ ar,de,,al-almānīyah,ʔalʔlmaːnˈijjah
 ar,el,,al-yūnānīyah,ʔaljˌuːnaːnˈijjah
 ar,en,,al-injilīzīyah,ʔalʔˌinɡliˈizijˌah
 ar,es,,al-isbānīyah,ʔalʔsbaːnˈijjah
+ar,fa,,,ʔalfˌaːɹisˈijjah
 ar,fr,,al-faransīyah,ʔalfrnsˈijjah
 ar,he,,al-ʿibrīyah,ʔalʕabɹˈijjah
 ar,hi,,al-hindīyah,ʔalhindˈijjah
@@ -26,6 +27,7 @@ de,de,Deutsch,,dˈɔøtʃ
 de,el,,,ɡɾˈiːçɪʃ
 de,en,,,ˈɛŋlɪʃ
 de,es,,,ʃpˈɑnɪʃ
+de,fa,,,pˈɛɾzɪʃ
 de,fr,,,frantsˈøːzɪʃ
 de,he,,,hɛbɾˈɛːɪʃ
 de,hi,,,hˈɪndiː
@@ -48,6 +50,7 @@ el,de,,Germanika,jˌeɾmanikˈa
 el,el,Ελληνικά,Ellinika,ˌelinikˈa
 el,en,,Anglika,ˌaŋɡlikˈa
 el,es,,Ispanika,ˌispanikˈa
+el,fa,,,pˌeɾsikˈa
 el,fr,,Gallika,ɣˌalikˈa
 el,he,,Evraika,ˌevɾaɪkˈa
 el,hi,,Chinti,çˈidi
@@ -70,6 +73,7 @@ en,de,,,dʒˈɜːmən
 en,el,,,ɡɹˈiːk
 en,en,English,,ˈɪŋɡlɪʃ
 en,es,,,spˈænɪʃ
+en,fa,,,pˈɜːʒən
 en,fr,,,fɹˈɛntʃ
 en,he,,,hˈiːbɹuː
 en,hi,,,hˈɪndi
@@ -92,6 +96,7 @@ es,de,,,ˌalemˈan
 es,el,,,ɡɾiˈeɡo
 es,en,,,iŋɡlˈes
 es,es,español,,ˌespaɲˈol
+es,fa,,,pˈeɾsa
 es,fr,,,fɾansˈes
 es,he,,,ebɾˈeo
 es,hi,,,ˈindi
@@ -109,11 +114,35 @@ es,tlh,,,klˈiŋɡon
 es,tr,,,tˈuɾko
 es,vi,,,bjˌetnamˈita
 es,zh-Hans,,,tʃˈino
+fa,ar,,arabi,arabi
+fa,de,,ālmāni,ɑlmɑni
+fa,el,,yunāni,junɑni
+fa,en,,engelisi,enɡelisi
+fa,es,,espāniyāyi,espɑnijɑi
+fa,fa,,fārsi,fɑrsi
+fa,fr,,farānsavi,farɑnsavi
+fa,he,عِبری,ebri,ʔebri
+fa,hi,,hendi,hendi
+fa,hu,,majāri,madʒɑri
+fa,id,,andoneziyāyi,andonezijɑi
+fa,it,,itāliyāyi,itɑliɑi
+fa,ja,,zhāponi,ʒɑponi
+fa,ko,,kore-i,korei
+fa,pt,,porteghāli,porteqɑli
+fa,qya,کوئنیا,kue’niyā,kuʔeniɑ
+fa,ru,,rusi,rusi
+fa,sw,,savāhili,savɑhili
+fa,th,,tāylandi,tɑjlandi
+fa,tlh,کِلینگون,kelingon,kelinɡun
+fa,tr,ترکی,torki,torki
+fa,vi,,viyetnāmi,vijetnɑmi
+fa,zh-Hans,,chini,tʃini
 fr,ar,,,aʁˈab
 fr,de,,,almˈɑ̃
 fr,el,,,ɡʁˈɛk
 fr,en,,,ɑ̃ɡlˈɛ
 fr,es,,,ɛspanjˈɔl
+fr,fa,,,pɛʁsˈɑ̃
 fr,fr,français,,fʁɑ̃sˈɛ
 fr,he,,,ebʁˈø
 fr,hi,,,indˈi
@@ -136,6 +165,7 @@ he,de,,germanit,ɡeʁmanˈit
 he,el,,yevanit,jevanˈit
 he,en,,anglit,anɡlˈit
 he,es,,sefaradit,sefaʁadˈit
+he,fa,,parsit,paʁsˈit
 he,fr,,tsarfatit,tsaʁfatˈit
 he,he,,‘ivrit,ivʁˈit
 he,hi,,híndi,hˈindi
@@ -158,6 +188,7 @@ hi,de,,jarman,ɟˈʌrmən
 hi,el,,yūnānī,juːnˈaːni
 hi,en,,aṁgrezī,ʌŋɡɾˈeːzi
 hi,es,,speniś,spˈeːnɪʃ
+hi,fa,,,fˈaːɾsˌi
 hi,fr,,freṁc,fɾˈẽːc
 hi,he,,hibrū,hˈɪbɾuː
 hi,hi,हिन्दी,hindī,hˈɪndi
@@ -180,6 +211,7 @@ hu,de,,,nˈeːmɛt
 hu,el,,,ɡˈørøɡ
 hu,en,,,ˈɑnɡol
 hu,es,,,ʃpˈɑɲol
+hu,fa,,,pˈɛrʒɑ
 hu,fr,,,frˈɑntsiɑ
 hu,he,,,hˈeːbɛr
 hu,hi,,,hˈindi
@@ -202,6 +234,7 @@ id,de,,,dʒˈɛrman
 id,el,,,junˈani
 id,en,,,ˈiŋɡris
 id,es,,,spˈaɲol
+id,fa,,,pərsˈia
 id,fr,,,prˈantʃis
 id,he,,,ibrˈani
 id,hi,,,hˈindi
@@ -224,6 +257,7 @@ it,de,,,tedˈesko
 it,el,,,ɡrˈɛko
 it,en,,,iŋɡlˈeze
 it,es,,,spaɲˈɔlo
+it,fa,,,persjˈano
 it,fr,,,frantʃˈeze
 it,he,,,ebrˈaɪko
 it,hi,,,ˈindɪ
@@ -246,6 +280,7 @@ ja,de,,doitsugo,doitsɯɡo
 ja,el,,girishago,ɡiɾiɕaɡo
 ja,en,,eigo,eiɡo
 ja,es,,supeingo,sɯpeiɴɡo
+ja,fa,,perushiago,peɾɯɕiaɡo
 ja,fr,,furansugo,ɸɯɾaɴsɯɡo
 ja,he,,heburaigo,hebɯɾaiɡo
 ja,hi,,hindīgo,çiɴdiːɡo
@@ -268,6 +303,7 @@ ko,de,,dogireo,toɡiɾʌ
 ko,el,,geuriseu-eo,kɯɾisɯʌ
 ko,en,,yeongeo,jʌŋʌ
 ko,es,,seupeineo,sɯpʰeinʌ
+ko,fa,,pereusia-eo,pʰeɾɯsiaʌ
 ko,fr,,peurangseu-eo,pʰɯɾaŋsɯʌ
 ko,he,,hibeurieo,hibɯɾiʌ
 ko,hi,,hindi-eo,hindiʌ
@@ -290,6 +326,7 @@ pt,de,,,ˌalemˈɐ̃ʊ̃
 pt,el,,,ɡrˈeɡʊ
 pt,en,,,iŋɡlˈes
 pt,es,,,ˌespɐ̃ɲˈɔl
+pt,fa,,,pˈɛɾəsæ
 pt,fr,,,frɐ̃ŋsˈes
 pt,he,,,ˌebrˈaɪkʊ
 pt,hi,,,iŋdʒˈi
@@ -313,6 +350,7 @@ ru,de,немецком,nemetskom,nʲimʲˈetskʌm
 ru,el,греческом,grecheskom,ɡrʲˈetʃʲiskʌm
 ru,en,английском,angliyskom,anɡɭʲˈijskʌm
 ru,es,испанском,ispanskom,ɪspˈɑnskʌm
+ru,fa,,,pʲirsʲˈidskʲij
 ru,fr,французском,frantsuzskom,frantsˈusskʌm
 ru,he,иврите,ivrite,ɪvrʲˈitʲi
 ru,hi,хинди,khindi,xˈindʲɪ
@@ -335,6 +373,7 @@ sw,de,,,kˌiɟerumˈani
 sw,el,,,kˌiɡirˈiki
 sw,en,,,kˌiiŋɡerˈeza
 sw,es,,,kˌihispanˈia
+sw,fa,,,kˌiaɟˈemi
 sw,fr,,,kˌifarˈansa
 sw,he,,,kˌiebranˈia
 sw,hi,,,kihˈindi
@@ -357,6 +396,7 @@ th,de,,yoeraman,jɤːn˧man˧
 th,el,,krik,kriːk˨˩
 th,en,,angkrit,ʔaŋ˧kri˨˩
 th,es,,sapen,sa˨˩peːn˧
+th,fa,,,pɤː˧sia̯˧
 th,fr,,farangset,fa˨˩raŋ˨˩seːt˨˩
 th,he,,hibru,hiʔ˦˥bɔː˧
 th,hi,,hindi,hin˧diː˧
@@ -379,6 +419,7 @@ tlh,de, ,DoyIchlan Hol,ɖojɪtʃlɑn xol
 tlh,el, ,'elaDya' Hol,ʔɛlɑɖjɑʔ xol
 tlh,en, ,DIvI' Hol,ɖɪvɪʔ xol
 tlh,es, ,'eSpanya' Hol,ʔɛʂpʰɑnjɑʔ xol
+tlh,fa, ,varSI Hol,vɑrʂɪ xol
 tlh,fr, ,vIraS Hol,vɪrɑʂ xol
 tlh,he, ,'IvghIt Hol,ʔɪvɣɪtʰ xol
 tlh,hi, ,HInDIy Hol,xɪnɖɪj xol
@@ -401,6 +442,7 @@ tr,de,,,aɫmandʒˈa
 tr,el,,,junandʒˈa
 tr,en,,,ɪnɟˈilɪzdʒɛ
 tr,es,,,ɪspanjɔɫdʒˈa
+tr,fa,,,farstʃˈa
 tr,fr,,,fransɯzdʒˈa
 tr,he,,,ɪbranˈidʒɛ
 tr,hi,,,hˈɪnttʃɛ
@@ -423,6 +465,7 @@ vi,de,Đức,,ɗyc˧˥
 vi,el,Hy Lạp,,hi˧ laːp˨˩ˀ
 vi,en,Anh,,aɲ˧
 vi,es,Tây Ban Nha,,t̪əɪ˧ baːn˧ ɲaː˧
+vi,fa,,,t̪iɛ̯ŋ˧˥ baː˧ t̪y˧
 vi,fr,Pháp,,faːp˧˥
 vi,he,Do Thái,,zɔ˧ taːj˧˥
 vi,hi,Hindi,,hɪndi˧
@@ -445,6 +488,7 @@ zh-Hans,de,,Déyǔ,tɤ˧˥y˧˩˧
 zh-Hans,el,,Xīlàyǔ,ɕi˥la˥˩y˧˩˧
 zh-Hans,en,,Yīngyǔ,iŋ˥y˧˩˧
 zh-Hans,es,,Xībānyáyǔ,ɕi˥pan˥ja˧˥y˧˩˧
+zh-Hans,fa,,Bōsīyǔ,pwɔ˥sɯ˥y˧˩˧
 zh-Hans,fr,,Fǎyǔ,fa˧˩˧y˧˩˧
 zh-Hans,he,,Xībóláiyǔ,ɕi˥pwɔ˧˥laɪ˧˥y˧˩˧
 zh-Hans,hi,,Yìndìyǔ,in˥˩ti˥˩y˧˩˧

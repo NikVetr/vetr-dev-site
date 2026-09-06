@@ -1,0 +1,11 @@
+concept_id,text,text_alt,romanization_elot,ipa,literal,confidence,provenance
+profanity.oh-my-god,Θεέ μου!,,Thee mou!,θeˈe mu,my God -- mild,1,profanity-v1;src=LKN-Triantafyllidis;ipa=espeak
+profanity.damn,Να πάρει!,,Na parei!,na pˈaɾi,may it take it -- mild oath,1,profanity-v1;src=LKN-Triantafyllidis;ipa=espeak
+profanity.expletive,Σκατά!,,Skata!,skatˈa,shit -- coarse but everyday,1,profanity-v1;src=LKN-Triantafyllidis;ipa=espeak
+profanity.strong-expletive,Γαμώτο!,,Gamoto!,ɣamˈoto,strong; the everyday hard one,1,profanity-v1;src=LKN-Triantafyllidis;ipa=espeak
+profanity.intensifier,καταραμένος,γαμημένος,kataramenos,kˌataɾamˈenos,before a noun: damn -; mild,1,profanity-v1;src=LKN-Triantafyllidis;ipa=espeak
+profanity.frustration,Είναι χάλια,,Einai chalia,ˈine xˈaʎa,it is in ruins -- mild,1,profanity-v1;src=LKN-Triantafyllidis;ipa=espeak
+profanity.thats-rude,Αυτό είναι χυδαίο,,Afto einai chydaio,aftˈo ˈine çiðˈeo,that is vulgar,1,profanity-v1;src=LKN-Triantafyllidis;ipa=espeak
+profanity.excuse-my-language,Συγγνώμη για την έκφραση,,Syngnomi gia tin ekfrasi,siŋɡnˈomi jˈa tin ˈekfɾasˌi,sorry for the expression,1,profanity-v1;src=LKN-Triantafyllidis;ipa=espeak
+profanity.strength-warning,"Εδώ για να τις αναγνωρίζετε, όχι για να τις λέτε: η βαρύτητα δεν επιβιώνει στη μετάφραση. Μια λέξη που εδώ αποδίδεται με ήπια βρισιά μπορεί να είναι ανείπωτη στη γλώσσα δίπλα, και η πιο βαριά λέξη μιας γλώσσας είναι συχνά αυτή που αυτή η ενότητα αναγκάστηκε να παραλείψει.",,,,,1,profanity-notes-v1
+profanity.japanese-register,"Τα Ιαπωνικά δεν το κάνουν σχεδόν καθόλου με λέξεις. Την περιφρόνηση τη μεταφέρει η γραμματική: μια απότομη αντωνυμία δεύτερου προσώπου, η γυμνή προστακτική, οι κοφτοί ρηματικοί τύποι. Ο θυμός βρίσκεται στην κατάληξη και όχι σε μια λέξη που μπορείτε να αναζητήσετε, και οι σειρές πιο πάνω είναι σχεδόν όλο το λεξιλόγιο.",,,,,1,profanity-notes-v1

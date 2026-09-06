@@ -1,0 +1,10 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+profanity.oh-my-god,Ya ampun!,,jˈa ˈampun,oh mercy -- mild,1,profanity-v1;src=KBBI;ipa=espeak
+profanity.damn,Sialan!,,siˈalan,cursed -- mild oath,1,profanity-v1;src=KBBI;ipa=espeak
+profanity.expletive,Tai!,,tˈaɪ,shit -- coarse,1,profanity-v1;src=KBBI;ipa=espeak
+profanity.strong-expletive,Anjing!,,ˈandʒiŋ,dog -- strong; an insult if aimed at anyone,1,profanity-v1;src=KBBI;ipa=espeak
+profanity.frustration,Ini kacau,,ˈini kˈatʃaʊ,this is a mess -- mild,1,profanity-v1;src=KBBI;ipa=espeak
+profanity.thats-rude,Itu kasar,,ˈitu kˈasar,that is coarse,1,profanity-v1;src=KBBI;ipa=espeak
+profanity.excuse-my-language,"Maaf, bahasa saya kasar",,"mˈaaf, bahˈasa sˈaja kˈasar","sorry, my language was coarse",1,profanity-v1;src=KBBI;ipa=espeak
+profanity.strength-warning,"Baris-baris ini ada supaya Anda mengenalinya, bukan supaya Anda memakainya: bobot sebuah kata kasar tidak ikut diterjemahkan. Kata yang di sini tampak seperti sumpah ringan bisa tak terucapkan dalam bahasa di sebelahnya, dan kata terkeras suatu bahasa sering justru kata yang harus ditinggalkan bagian ini.",,,,1,profanity-notes-v1
+profanity.japanese-register,"Bahasa Jepang hampir tidak melakukan ini dengan kosakata. Penghinaan dibawa oleh tata bahasa: kata ganti orang kedua yang kasar, imperatif polos, dan bentuk kata kerja yang serba pendek. Kemarahannya ada pada akhiran, bukan pada kata yang bisa dicari di kamus, dan baris-baris di atas hampir seluruh kosakata yang ada.",,,,1,profanity-notes-v1

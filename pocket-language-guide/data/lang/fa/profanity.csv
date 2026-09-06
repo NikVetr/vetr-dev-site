@@ -1,0 +1,10 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+profanity.oh-my-god,یا خدا!,وای خدا!,yā Khodā!,jɑ xodɑ,"O God -- shock, and not profanity",1,profanity-v1;src=Najafi;ipa=espeak
+profanity.damn,لعنتی!,,la‘nati!,laʔnati,damned -- a mild curse at a situation,1,profanity-v1;src=Najafi;ipa=espeak
+profanity.expletive,کثافت!,,kesāfat!,kesɑfat,"filth -- coarse but ordinary, and shouted at things rather than people",1,profanity-v1;src=Najafi;ipa=espeak
+profanity.intensifier,کوفتی,,kufti,kufti,"'plague-ridden' -- and it follows its noun, where English bloody precedes: in kār-e kufti is 'this damned job'",1,profanity-v1;src=Najafi;ipa=espeak
+profanity.frustration,این آشغال است,,in āshghāl ast,in ɑʃqɑl ast,"this is rubbish -- about a thing, never a person",1,profanity-v1;src=Najafi;ipa=espeak
+profanity.thats-rude,این بی‌ادبی است,,in bi-adabi ast,in biadabi ast,"that is rude -- a plain rebuke, with no swearing in it",1,profanity-v1;src=Najafi;ipa=espeak
+profanity.excuse-my-language,ببخشید بد حرف زدم,,bebakhshid bad harf zadam,bebaxʃid bad harf zadam,"sorry, I spoke badly",1,profanity-v1;src=Najafi;ipa=espeak
+profanity.strength-warning,این سطرها برای شناختن است نه برای گفتن؛ شدتِ یک دشنام با ترجمه جابه‌جا نمی‌شود. واژه‌ای که اینجا سبک به نظر می‌رسد ممکن است در زبانِ کنارش گفتنی نباشد، و شدیدترین واژهٔ هر زبان معمولاً همان است که این بخش ناچار شده حذفش کند.,,,,,1,profanity-notes-v1
+profanity.japanese-register,ژاپنی این کار را تقریباً با واژه انجام نمی‌دهد؛ تحقیر را دستور زبان می‌رساند: ضمیرِ دومِ خشک، امرِ بی‌تعارف و پایانه‌های کوتاهِ فعل. پس خشم در پایانهٔ فعل است نه در واژه‌ای که بتوان در فرهنگ لغت جست، و سطرهای بالا تقریباً همهٔ آن واژگان است.,,,,,1,profanity-notes-v1

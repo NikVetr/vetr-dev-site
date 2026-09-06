@@ -1,0 +1,8 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,کجا می‌توانم بلیت بخرم؟,,kojā mitavānam belit bekharam?,kodʒɑ mitavɑnam belit bexaram,,2,fa-agent-v1;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,رزرو لازم است؟,,rezerv lāzem ast?,rezerv lɑzem ast,,2,fa-agent-v1;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,آخرین ساعتِ ورود چه وقت است؟,,ākharin sā‘at-e vorud che vaqt ast?,ɑxarin sɑʔate vorud tʃe vaqt ast,,2,fa-agent-v1;ipa=espeak
+attractions-tickets.are-there-lockers,کمدِ امانات دارید؟,,komod-e amānāt dārid?,komode amɑnɑt dɑrid,,2,fa-agent-v1;ipa=espeak
+attractions-tickets.may-i-take-photos,می‌توانم عکس بگیرم؟,,mitavānam ‘aks begiram?,mitavɑnam aks beɡiram,,2,fa-agent-v1;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,لطفاً از ما عکس بگیرید,,lotfan az mā ‘aks begirid,lotfan az mɑ aks beɡirid,,2,fa-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,می‌شود از ما عکس بگیرید؟,,mishavad az mā ‘aks begirid?,miʃavad az mɑ aks beɡirid,,2,fa-agent-v1;ipa=espeak

@@ -71,8 +71,17 @@ because the frame never sees the name it is filling in:
 | Turkish | five surface forms of the locative suffix, two names not decidable at all |
 | Russian | prepositional case on a name supplied in the nominative |
 | Hebrew | **the exception.** `ב{region}:` is right for all 54 regions, because Hebrew's preposition is one letter whose vowel is not written -- the agreement that defeats every language above simply does not surface -- and ICU's Hebrew names carry no definite article |
+| Persian | **the second exception, and a different reason.** `در {region}:` is right for all 55 regions, because Persian has **no definite article** and does **not oblique-mark or case-mark a proper noun** -- so a preposition has nothing to agree with. Checked against all 55 ICU Persian names, including the compounds (`در ایالات متحده`, `در امارات متحدهٔ عربی`, `در کنگو - کینشاسا`) |
 
-Most took apposition. **One language can just use a preposition, and it is worth knowing why before you copy it:** Hebrew, where the preposition is the single letter `ב` and its vowel is not written at all, so nothing has to agree with the name the frame never sees. If your script writes its vowels, that escape is not available to you. Two more found something better and you may be able to as well:
+Most took apposition. **Two languages can just use a preposition, and the two reasons
+are different, so check which one your language has before copying either:** Hebrew,
+where the preposition is the single letter `ב` and its vowel is not written at all, so
+nothing has to agree with the name the frame never sees; and Persian, where the
+preposition `در` is a whole written word and works anyway, because Persian has no
+definite article and does not oblique-mark a proper noun -- which is Hindi's reason
+with a *pre*position instead of a postposition. If your script writes its vowels,
+Hebrew's escape is not available to you; if your language has articles or noun cases,
+Persian's is not. Two more found something better and you may be able to as well:
 Turkish `{region} için:`, a **postposition governing the bare nominative**, and Hindi
 `{region} में:`, which works because Hindi does not oblique-mark proper nouns.
 Vietnamese `Tại {region}:` needs no agreement either. Spanish kept `En {region}:`
@@ -135,6 +144,22 @@ Three things the finished languages learned about the content:
   from 743 of its 745 rows, because printing it correctly needs two different pairs —
   one for statements, another for a woman's questions — and choosing one is wrong for
   half its readers. This note is what makes that a decision rather than an omission.
+
+**If your script is right-to-left, you cannot write a two-digit number in a note.**
+`validate_data.py` refuses more than one digit in a right-to-left row, because the
+renderer shapes a run right-to-left as a whole and would reverse them. The English
+notes are full of them -- `11 = shi yi`, `20 = er shi`, `saa moja is 7:00` -- so an
+Arabic, Hebrew or Persian version has to spell every number out as a word. Persian's
+Chinese note reads `یازده شی‌ئی است و بیست اِر‌شی`, and its Swahili one says
+`هفتِ صبح` where the English says `7:00`.
+
+**And a right-to-left note should transliterate what it quotes rather than romanise
+it.** The instruction above -- romanise everything -- exists because your own face
+cannot draw Chinese, kana or Thai. It solves that and leaves a second problem: two
+Latin words in a row inside a right-to-left line are painted right to left as pieces,
+so `shi yi` reads *yi shi*. The Arabic note writes the pinyin in Arabic letters
+(`شي إي`) and the Persian one writes it in Persian letters, which fixes the order and
+is easier for the reader as well. The Hebrew note keeps the Latin and has the problem.
 
 ## The one hard constraint
 

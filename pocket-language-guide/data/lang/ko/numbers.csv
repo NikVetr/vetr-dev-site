@@ -82,3 +82,5 @@ numbers-money.lakh,십만,,simman,simman,,2,lakh-crore-agent-v1;cldr;ipa=rr
 numbers-money.crore,천만,,cheonman,tɕʰʌnman,,2,lakh-crore-agent-v1;cldr;ipa=rr
 numbers-money.shekel,세켈,,sekel,sekʰel,,2,shekel-gloss-v1;cldr;roman=generated;ipa=rr
 numbers-money.shekel-symbol,세켈 기호,,sekel giho,sekʰel kiho,,2,shekel-gloss-v1;cldr;roman=generated;ipa=rr
+numbers-money.rial,리얄,,riyal,ɾijal,,2,rial-toman-gloss-v1;cldr;ipa=rr
+numbers-money.toman,십 리얄,,sip riyal,sip ɾijal,,2,rial-toman-gloss-v1;cldr;ipa=rr

@@ -1,0 +1,10 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+profanity.oh-my-god,Aman Allahım!,,amˈan aɫɫˈahɯm,"mercy, my God -- mild",1,profanity-v1;src=TDK-GTS;ipa=espeak
+profanity.damn,Kahretsin!,,kahrɛtsˈɪn,may it crush -- mild oath,1,profanity-v1;src=TDK-GTS;ipa=espeak
+profanity.expletive,Sıçtık!,Bok!,sɯtʃtˈɯk,we have shat -- coarse; we are sunk,1,profanity-v1;src=TDK-GTS;ipa=espeak
+profanity.intensifier,kahrolası,lanet olası,kahroɫasˈɯ,before a noun: damned; mild,1,profanity-v1;src=TDK-GTS;ipa=espeak
+profanity.frustration,Bu rezalet.,,bʊ rezalˈɛt,this is a disgrace -- mild,1,profanity-v1;src=TDK-GTS;ipa=espeak
+profanity.thats-rude,Bu ayıp.,,bʊ ajˈɯp,this is shameful,1,profanity-v1;src=TDK-GTS;ipa=espeak
+profanity.excuse-my-language,"Kusura bakmayın, ağzımdan kaçtı.",,"kusuɾˈa bakmajˈɯn, ˈaːzɯmdan katʃtˈɯ",pardon; it escaped my mouth,1,profanity-v1;src=TDK-GTS;ipa=espeak
+profanity.strength-warning,"Burada tanımanız için var, kullanmanız için değil: sözün ağırlığı çeviriyle taşınmıyor. Burada hafif bir küfürle karşılanan bir sözcük yandaki dilde söylenemez olabilir; bir dilin en ağır sözcüğü de çoğu zaman bu bölümün dışarıda bırakmak zorunda kaldığı sözcüktür.",,,,1,profanity-notes-v1
+profanity.japanese-register,"Japonca bunu neredeyse hiç sözcükle yapmaz. Küçümsemeyi dilbilgisi taşır: sert bir ikinci kişi zamiri, yalın emir kipi, kesik fiil çekimleri. Öfke sözlükte aranabilecek bir sözcükte değil, çekim ekinde durur; yukarıdaki satırlar var olan söz varlığının neredeyse tamamıdır.",,,,1,profanity-notes-v1

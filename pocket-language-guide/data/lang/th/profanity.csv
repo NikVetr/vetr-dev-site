@@ -1,0 +1,11 @@
+concept_id,text,text_alt,romanization_rtgs,ipa,literal,confidence,provenance
+profanity.oh-my-god,คุณพระช่วย,,khun phra chuai,kʰun˧na˦˥pʰraʔ˦˥tɕʰua̯j˥˩,may the holy one help -- mild,1,profanity-v1;src=RID-2554;ipa=thaig2p
+profanity.damn,เวร,,wen,weːn˧,"karma -- resigned, mild",1,profanity-v1;src=RID-2554;ipa=thaig2p
+profanity.expletive,ห่า,,ha,haː˨˩,"cholera -- a disease curse, coarse",1,profanity-v1;src=RID-2554+colloq;ipa=thaig2p
+profanity.strong-expletive,เหี้ย,,hia,hia̯˥˩,monitor lizard -- very strong,1,profanity-v1;src=RID-2554+colloq;ipa=thaig2p
+profanity.intensifier,ฉิบหาย,,chip hai,tɕʰip˨˩haːj˩˩˦,"after a word: ruinously, damn; coarse",1,profanity-v1;src=RID-2554+colloq;ipa=thaig2p
+profanity.frustration,อันนี้ห่วยแตก,,an ni huai taek,ʔan˧niː˦˥ hua̯j˨˩tɛːk˨˩,this one is lousy -- mild-coarse,1,profanity-v1;src=RID-2554+colloq;ipa=thaig2p
+profanity.thats-rude,อย่าพูดคำหยาบ,,ya phut kham yap,jaː˨˩ pʰuːt˥˩ kʰam˧jaːp˨˩,do not say coarse words,1,profanity-v1;src=RID-2554;ipa=thaig2p
+profanity.excuse-my-language,ขอโทษที่พูดหยาบ,,kho thot thi phut yap,kʰɔː˩˩˦tʰoːt˥˩ tʰiː˥˩ pʰuːt˥˩ jaːp˨˩,sorry for speaking coarsely,1,profanity-v1;src=RID-2554;ipa=thaig2p
+profanity.strength-warning,ส่วนนี้มีไว้ให้ฟังออก ไม่ใช่ให้พูด เพราะน้ำหนักของคำหยาบไม่ข้ามมากับคำแปล คำที่แปลไว้เบา ๆ ที่นี่อาจเป็นคำที่พูดไม่ได้เลยในภาษาข้าง ๆ และคำที่หนักที่สุดของแต่ละภาษามักเป็นคำที่ส่วนนี้ต้องตัดออก,,,,,1,profanity-notes-v1
+profanity.japanese-register,ภาษาญี่ปุ่นแทบไม่ใช้คำเพื่อการนี้ ความเหยียดอยู่ในไวยากรณ์ คือสรรพนามบุรุษที่สองแบบห้วน รูปคำสั่งเปล่า และรูปกริยาแบบตัดสั้น ความโกรธอยู่ที่ท้ายกริยา ไม่ใช่ที่คำซึ่งเปิดพจนานุกรมหาได้ และแถวข้างบนนี้ก็เกือบทั้งหมดที่มี,,,,,1,profanity-notes-v1

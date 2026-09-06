@@ -1,0 +1,11 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+profanity.oh-my-god,Oh my God!,,ˈoʊ maɪ ɡˈɑːd,"an oath, and mild -- not profanity",1,profanity-v1;src=OED;ipa=espeak
+profanity.damn,Damn!,,dˈæm,mild curse at a situation,1,profanity-v1;src=OED;ipa=espeak
+profanity.expletive,Shit!,,ʃˈɪt,coarse but ordinary,1,profanity-v1;src=OED;ipa=espeak
+profanity.strong-expletive,Fuck!,,fˈʌk,"strongest; at nothing, not at anyone",1,profanity-v1;src=OED;ipa=espeak
+profanity.intensifier,fucking,bloody,fˈʌkɪŋ,"before a noun: emphasis, not an insult",1,profanity-v1;src=OED;ipa=espeak
+profanity.frustration,This is crap,,ðɪs ɪz kɹˈæp,"coarse, about a thing not a person",1,profanity-v1;src=OED;ipa=espeak
+profanity.thats-rude,That's rude,,ðæts ɹˈuːd,"a plain rebuke, no swearing",1,profanity-v1;src=OED;ipa=espeak
+profanity.excuse-my-language,"Sorry, excuse my language",,"sˈɑːɹi, ɛkskjˈuːs maɪ lˈæŋɡwɪdʒ",said after swearing,1,profanity-v1;src=OED;ipa=espeak
+profanity.strength-warning,"Here to be recognised rather than used: strength does not survive translation. A word glossed damn on this card can be unsayable in the language beside it, and a language's strongest word is often the one this section had to leave out.",,,,1,profanity-notes-v1
+profanity.japanese-register,"Japanese does almost none of this with vocabulary. Contempt is carried by grammar instead -- a blunt second-person pronoun, the plain imperative, the abrupt verb endings -- so the anger sits in the ending rather than in a word you can look up. The rows above are close to the whole of the lexicon.",,,,1,profanity-notes-v1

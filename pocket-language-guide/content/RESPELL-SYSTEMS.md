@@ -1903,3 +1903,98 @@ which is the same Academy system in the other direction and is what the pack's
   admit (`דז׳` for /dʒ/, `טש` for /tʃ/, `ח׳` for /x/) are known only from the summary.
 - **Whether a general Israeli reader decodes a meteg as stress** is the question the
   stress decision turns on, and it is a reviewer question rather than a search one.
+
+## The twenty-first reader: Persian, and the one script whose extra letters are its own
+
+Persian is in the adapt tier, and the first thing to say is the one thing a search for
+a key returns: **there is no Persian transcription standard.** The Academy of Persian
+Language and Literature's [دستور خطّ فارسی](https://apll.ir/) is the national
+orthography — 1st edition 1381/2002, current edition 1401/2022 — and its own
+introduction states that punctuation, transcription, and the writing of foreign words
+in Persian letters are **outside its scope**. That is a citable negative rather than a
+gap in the search, and it puts Persian exactly where Arabic is: no table to borrow,
+three things to borrow instead.
+
+- **The notation is the Academy's.** `ک` U+06A9 and `ی` U+06CC rather than their Arabic
+  look-alikes, the نیم‌فاصله before an enclitic, the hamza-on-heh for the ezāfe, and
+  the harakat as optional marks a reader meets in a schoolbook.
+- **The method and the register are the dictionaries'.** فرهنگ بزرگ سخن (Anvari,
+  1381/2002) and فرهنگ فارسی عامیانه (Najafi) print the pronunciation of every headword
+  in **fully vocalised Persian letters, in brackets, beside the unvocalised spelling.**
+  That is a published, sound-keyed pronunciation notation in Persian letters for
+  Persian readers, which is this column's job exactly — and it is the same route the
+  Hindi entry above took, *follow the dictionaries, against the standard*.
+- **The letter-to-sound key is Persian's own**, letter by letter, the way the Arabic
+  entry seeds itself from Help:IPA/Arabic.
+
+**The four extended letters are not a question here, and that is the headline.** The
+whole longest `deviations` entry in `ar__ar-MSA.json` — ar.wikipedia's policy walling
+پ چ ژ گ ڤ off inside parentheses, the region-gating the survey marks *unverified*, the
+counted cost of every plain-letter fallback, and the survey's objection to چ — is
+about letters Persian **already owns**. پ چ ژ گ are in the alphabet children learn;
+Arabic borrowed them from Persian. And ڤ is not needed at all, because Persian و *is*
+/v/. So /p/, /tʃ/, /ʒ/, /ɡ/ and /v/ each take their own letter, there is nothing to
+bracket and nothing to gate, and **the legend has nothing to teach** — it says only
+that the marks are written everywhere on purpose, which is the `ko` and `sw` shape
+rather than the `ar` shape.
+
+**The vowel ceiling is six, not three, and that is the substantive difference.**
+The Arabic entry records a three-quality ceiling that no rule set lifts, because
+Arabic's harakat are /a i u/ — so *merci* is مِرْسِي and /e/ cannot be told from /i/.
+Persian's harakat are **/a e o/** and its three mad letters are **/ɑ i u/**, so all six
+of the corpus's basic qualities are writable: /e/ is a bare kasra and /i/ is کسره+ی,
+/o/ is a bare damma and /u/ is ضمه+و, /a/ is a fatha and /ɑ/ is فتحه+ا. *merci* is
+مِرْسِی with both vowels distinguished, English *sit* and *set* do not merge, and
+Turkish ü survives against i. Hebrew got five by having mid vowels; Persian gets six by
+having mid vowels **and** three mad letters. What still does not fit is /y ø œ/, which
+takes the /u/ series as Persian print does (مولر, کلن).
+
+**The hyphen: Persian is on Arabic's side of the line, not Hebrew's.** `syllable_separator`
+is the empty string. Persian is cursive and joins identically, so a hyphen or a thin
+space breaks the join for the same reason and costs the same letterforms. Hebrew is the
+counter-example that shows what the reason was doing — right-to-left and *not* cursive,
+so it takes the hyphen — and direction was never the question.
+
+**One hamza seat where Arabic needs five.** Arabic chooses between أ إ ؤ ئ ء by what
+precedes an onsetless syllable, and its own note lists the ؤ case as unreachable.
+Persian writes its word-internal hamza on ی, whatever the vowels are — سوئد, تئاتر,
+مسئله, رئال — so the table borrows the preceding vowel's glide where there is one and
+writes ئ everywhere else. Word-initially Persian writes a bare alef where Arabic writes
+أ and إ, which is one fewer letterform to decode.
+
+**Stress has no device, and Persian has a third reason on top of Arabic's two.** The
+script is caseless, so `caps` is out; `acute` and `grave` are byte-identical no-ops
+because `VOWEL_LETTERS` lists letters and a Persian short vowel is a mark, which is
+the wall Hebrew hit; `prime` U+02B9 is refused on Arabic's bidi grounds. The third
+reason is that there is nothing to borrow — Persian dictionaries do not mark stress in
+their pronunciation brackets, because Persian stress is predictable from morphology
+rather than lexical — and `scripts/build_ipa.py`'s `STRESS["fa"]` reaches the matching
+decision from the other end, so the `ipa` column writes no `ˈ` for a device to place.
+
+**What Persian cost the corpus: eight Hangul syllables, one of them outside KS X 1001.**
+`뉠 랩 랼 벅 큇 퍽 훅 흠`. Only `훅` comes from Persian as a target (`خوک` /xuk/, on
+three `dietary-needs` rows); `랼` comes from the French gloss of the new
+`numbers-money.toman` concept, /ʁjˈal/, and it is the one the Korean faces did not
+carry. The other six belong to the `profanity` section. Persian adds **no new IPA
+symbol** to the corpus at all, which is what `REPAIR["fa"]`'s `q1` → `q` buys: `ɢ`
+would have been the first voiced uvular stop here and would have cost twenty-two table
+edits, which is what Klingon's /ɬ/ cost.
+
+**Sources.** [دستور خطّ فارسی، فرهنگستان زبان و ادب فارسی](https://apll.ir/) ·
+[ROMANIZATION OF PERSIAN (Farsi), BGN/PCGN 1958 System, updated 2019](https://assets.publishing.service.gov.uk/media/5e1eeaafe5274a4f0f57553a/ROMANIZATION_OF_PERSIAN.pdf),
+which is what the pack's `romanization_bgn` column derives from ·
+فرهنگ بزرگ سخن (Anvari, Sokhan, 1381/2002) and فرهنگ فارسی عامیانه (Najafi, Niloufar,
+1378/1999), for the vocalised-headword convention this table's register is taken from.
+
+### Still unverified, carried forward
+
+- **The Academy's own PDF would not download** from a non-browser client, so the
+  statement that transcription is outside its scope is from the Academy's summary page
+  and the Persian Wikipedia article that reproduces it, not from the document.
+- **Whether a general Iranian reader accepts ث and ذ as markers of a foreign
+  consonant** is a reviewer question. They are ordinary Persian letters read as [s] and
+  [z], so the *sound* is right whatever the reader makes of the choice; what is
+  unverified is whether the provenance signal lands or is merely puzzling.
+- **The coda-/v/ collision after a rounded vowel** — 24 rows, all Greek and Russian —
+  is named in the table's `approximations` and has no repair inside Persian
+  orthography. A reviewer may prefer ڤ; this table refused it as a non-Persian letter.

@@ -1,0 +1,15 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+slang.thats-good,خوبه,خوب است,khube,xube,spoken form of khub ast,2,fa-agent-v1;ipa=espeak
+slang.thats-great,عالیه!,محشره!,‘āliye!,ɑlije,also mahshare,2,fa-agent-v1;ipa=espeak
+slang.i-love-it,عاشقشم,خیلی دوستش دارم,‘āsheqesham,ɑʃqaʃam,literally 'I am in love with it',2,fa-agent-v1;ipa=espeak
+slang.thats-bad,تعریفی نداره,,ta‘rifi nadāre,taʔrifi nadɑre,"'it is nothing to speak of' -- Persian hedges here rather than negating, as German and Japanese do",2,fa-agent-v1;ipa=espeak
+slang.delicious,چه خوشمزه!,,che khoshmaze!,tʃe xoʃmaze,,2,fa-agent-v1;ipa=espeak
+slang.thats-pricey,گرونه,قیمتش بالاست,gerune,ɡerune,spoken form of gerān ast,2,fa-agent-v1;ipa=espeak
+slang.exactly,دقیقاً!,همینه!,daqiqan!,daqiqan,also hamine,2,fa-agent-v1;ipa=espeak
+slang.no-worries,اشکالی نداره,,eshkāli nadāre,eʃkɑli nadɑre,'there is no objection',2,fa-agent-v1;ipa=espeak
+slang.youre-welcome,قابلی نداشت,,qābeli nadāsht,qɑbeli nadɑʃt,"'it was nothing' -- the casual reply, where khāhesh mikonam is the neutral one",2,fa-agent-v1;ipa=espeak
+slang.seriously,جدی؟!,,jeddi?!,dʒeddi,,2,fa-agent-v1;ipa=espeak
+slang.im-good-thanks,ممنون، لازم نیست,,"mamnun, lāzem nist",mamnun lɑzem nist,"'thanks, there is no need' -- declines without a bare no",2,fa-agent-v1;ipa=espeak
+slang.lets-go,بریم!,برویم,berim!,barim,spoken form of beravim,2,fa-agent-v1;ipa=espeak
+slang.cheers,به سلامتی!,,be salāmati!,be salɑmati,'to health',2,fa-agent-v1;ipa=espeak
+slang.see-you,می‌بینمت!,بعداً می‌بینمت,mibinamet!,mibinamat,,2,fa-agent-v1;ipa=espeak

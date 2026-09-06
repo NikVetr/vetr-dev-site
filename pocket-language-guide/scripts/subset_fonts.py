@@ -217,13 +217,27 @@ ALL_LANGS = ["en", "es", "fr", "de", "ko", "ar", "zh-Hans", "ja",
              # corpus quotes `Wi-Fi`, `SIM` and `PIN` in Latin, and because the four
              # `latin` faces draw the romanisation and the IPA of every pair whose
              # target is Hebrew.
-             "he"]
+             "he",
+             # Persian, whose own stack is `arabic` below. Here for the same reason
+             # Hebrew is: the four `latin` faces draw its `romanization_bgn` column
+             # and its `ipa` column on every pair whose target is Persian, and the
+             # romanisation brings `ā ī ū ‘ ’` and the middle dot of `es·hāl`. Leaving
+             # a language out of this list is the omission Italian shipped with for a
+             # whole language generation and only survived because it is Latin.
+             "fa"]
 STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                "latin-serif": ALL_LANGS, "latin-cond-serif": ALL_LANGS,
                "cjk-sc": ["zh-Hans"], "cjk-sc-serif": ["zh-Hans"],
                "cjk-jp": ["ja"], "cjk-jp-serif": ["ja"],
                "cjk-kr": ["ko"], "cjk-kr-serif": ["ko"],
-               "arabic": ["ar"], "thai": ["th"], "thai-serif": ["th"],
+               # Persian shares the stack with Arabic because `scripts.csv` gives it
+               # the same `Arab` row -- measured, see tmp/persian.md -- so the corpus
+               # union has to name both or the Persian rows, section titles and
+               # emergency labels are outside it. The *ranges* below already cover
+               # پ چ ژ گ ک ی and the Eastern Arabic-Indic digits: `ARABIC_RANGES` is
+               # the whole standard repertoire and not a corpus union, which is why
+               # Persian needed no font change for its four extra letters.
+               "arabic": ["ar", "fa"], "thai": ["th"], "thai-serif": ["th"],
                "deva": ["hi"], "deva-serif": ["hi"],
                "hebrew": ["he"], "hebrew-serif": ["he"]}
 

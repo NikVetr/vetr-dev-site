@@ -1,0 +1,1467 @@
+{
+ "source": "fa",
+ "accent": "fa-IR",
+ "status": "ready",
+ "version": 1,
+ "derives_from": "Adapted, and the honest first sentence is that there is no Persian transcription standard to borrow. The Academy of Persian Language and Literature's «دستور خطّ فارسی» (Farhangestān-e Zabān va Adab-e Fārsi, 1st ed. 1381/2002, current ed. 1401/2022) is the national orthography and it **says in its own introduction that punctuation, transcription and the writing of foreign words in Persian letters are outside its scope**. That is a citable negative rather than a gap in the search, and it puts Persian in the same tier as Arabic. So three things are borrowed instead of a table. **The notation is the Academy's**: the letter forms ک U+06A9 and ی U+06CC, the نیم‌فاصله before an enclitic, the hamza-on-heh for the ezāfe, and the harakat as optional marks a reader meets in a schoolbook. **The method and the register are the Persian dictionaries'** -- فرهنگ بزرگ سخن (Anvari, 1381/2002) and فرهنگ فارسی عامیانه (Najafi) print the pronunciation of every headword in fully vocalised Persian letters, in brackets, beside the unvocalised spelling. That is a published, sound-keyed pronunciation notation in Persian letters for Persian readers, which is this column's job exactly, and it is the same route content/RESPELL-SYSTEMS.md's Hindi entry took (*follow the dictionaries, against the standard*). **And the letter-to-sound key is Persian's own**: every consonant here is the letter whose Persian value *is* the phoneme. Not borrowed: the Academy's silence, which is not a permission, and the transliteration tables published for library cataloguing, which optimise for reversibility rather than for sound.",
+ "deviations": [
+  {
+   "rule": "content/CONTRIBUTING.md's separator table gives a cursive right-to-left script no hyphen, and `ar__ar-MSA.json` reaches the empty string by measuring that a thin space breaks the join in exactly the same way",
+   "why": "**Kept, and re-measured rather than inherited.** `syllable_separator` is the empty string. Persian is cursive and joins exactly as Arabic does, so a hyphen or a U+2009 between syllables turns هَلُو into three letterforms where there were two. Hebrew is the counter-example that shows what the reason was doing -- it is right-to-left and takes the hyphen because it has no joining forms -- and Persian is on Arabic's side of that line, not Hebrew's. The survey's own sentence applies unchanged: let the sukun and the harakat carry the syllabification, and they do, because every letter in this notation carries a mark or is a mad letter. What is lost is the line-break opportunity `core/measure.js` takes from a hyphen, which Perso-Arabic does not want."
+  },
+  {
+   "rule": "`ar__ar-MSA.json` needs a whole `deviations` entry and a legend line to justify پ چ ژ گ ڤ, because ar.wikipedia's policy walls those letters off from real spelling and the survey marks their regional acceptance **unverified**",
+   "why": "**None of that applies here, and it is the largest single difference between the two tables.** پ چ ژ گ are ordinary letters of the Persian alphabet -- they are in the alphabet children learn, and Persian is where Arabic borrowed them from. So /p/, /tʃ/, /ʒ/ and /ɡ/ are written with their own letters and there is nothing to region-gate, nothing to bracket and nothing for the legend to teach. ڤ is not needed either: Persian و **is** /v/, so /v/ takes و and the letter Arabic had to justify does not appear. The single most consequential open question in the Arabic entry -- whether a general reader accepts گ -- is not a question in Persian."
+  },
+  {
+   "rule": "Arabic's three harakat are /a i u/, so `ar__ar-MSA.json` records a three-quality vowel ceiling that no rule set lifts and spells *merci* مِرْسِي",
+   "why": "**Persian's harakat are /a e o/ and its three mad letters are /ɑ i u/, so all six of the corpus's basic vowel qualities are writable and the ceiling is not three but six.** /e/ takes a bare kasra and /i/ takes کسره+ی; /o/ takes a bare damma and /u/ takes ضمه+و; /a/ is a fatha and /ɑ/ is فتحه+ا. So *merci* is مِرْسِی with the two vowels distinguished, English *sit* and *set* do not merge, and Turkish ü against i survives. Hebrew got five by having mid vowels; Persian gets six by having mid vowels **and** three mad letters. What still does not fit is the front rounded series /y ø œ/, which takes the /u/ series -- Persian print writes Müller مولر and Köln کلن -- and that is a fact about the language rather than about the notation."
+  },
+  {
+   "rule": "Arabic chooses between five hamza seats -- أ إ ؤ ئ ء -- by what precedes the onsetless syllable, and its own note lists the ؤ case as unreachable",
+   "why": "**Persian needs one seat, ئ, and that is its own orthography rather than a simplification.** سوئد, تئاتر, مسئله, رئال: where Persian writes a hamza inside a word it writes it on ی, whatever the vowel on either side. So the borrowed glide comes first (یَ after a front vowel, وَ after a back one, which is what ایتالیا and سوئد do), and everything else takes ئ. Word-initially Persian writes a bare alef where Arabic writes أ and إ -- اِنگلیسی, نه إِنگلیسی -- so that is one fewer letterform to decode as well. Arabic's unreachable ؤ case simply does not arise."
+  },
+  {
+   "rule": "content/RESPELL-SYSTEMS.md: *accept that Arabic gets no stress marking*, and `ar__ar-MSA.json` refuses `prime` because U+02B9 is a Latin-block modifier letter that reorders in a right-to-left run",
+   "why": "**Agreed, and Persian has a third reason on top of Arabic's two.** `caps` is out because the script is caseless. `acute` and `grave` are byte-identical no-ops, because `VOWEL_LETTERS` in core/respell.js lists *letters* a diacritic may land on and a Persian short vowel is not a letter but a mark -- the same wall Hebrew hit. `prime` works mechanically and is refused on Arabic's bidi grounds. And the third reason is that there is nothing to borrow: Persian dictionaries do not mark stress in their pronunciation brackets, because Persian stress is predictable from morphology rather than lexical. `GRADE[\"fa\"]` in scripts/build_ipa.py records the matching decision on the other side -- the `ipa` column writes no `ˈ` at all -- so a device here would have nothing to place."
+  },
+  {
+   "rule": "Aspiration is not written: /pʰ tʰ kʰ cʰ ʈʰ tɕʰ ʈʂʰ tsʰ/ and the Hindi voiced aspirates take the same letter as their plain counterparts",
+   "why": "1,986 tokens lose a contrast that is lexical in Hindi, Thai and Korean, and this is a refusal rather than a gap. **Persian is the language the Urdu device was built out of and it still cannot use it**: a following ه is a full /h/ with its own syllable weight in Persian, so کْهُنْ reads [ke.hun] in two syllables, which is further from [kʰun] than کُونْ [kun] is. Persian's own voiceless stops are unaspirated, so the plain letter is the better sound every time. Mandarin is the exception and keeps its contrast, below."
+  },
+  {
+   "rule": "Mandarin's unaspirated series takes the voiced letters ب د گ ج, against the sound-based key used for every other target",
+   "why": "The `unless_inventory: \"b d ɡ\"` discriminator, unchanged from the Arabic table because the argument is about the *target*: Mandarin is the only language in the corpus with no voiced stop series, so ب د گ ج are free there and the /p/-/pʰ/ contrast survives as a ب-پ contrast. 不 comes out بُو and 中文 جُونْگْوَنْ, which is also what Persian press practice does with Chinese names."
+  },
+  {
+   "rule": "The Korean tense series /s͈ k͈ t͈ p͈ tɕ͈/ takes a tashdid, which puts one at the start of a word",
+   "why": "Persian's tashdid is the same mark for the same idea -- this consonant is strong or doubled -- and it is the reading a Persian reader will apply. The word-initial case is illegal Persian and is stripped by the first fixup, which Arabic's table does too; what survives is the medial one, سَّدُ for 써도."
+  },
+  {
+   "rule": "/θ/ and /ð/ take ث and ذ, and /ħ/ and /ʕ/ take ح and ع, though a Persian reader pronounces all four as [s], [z], [h] and a glottal stop",
+   "why": "**Deliberate, and it is Hebrew's geresh idea reached by another route.** These four letters are ordinary Persian -- they appear in thousands of Arabic loanwords -- and Persian is the one script here whose alphabet contains letters that are *silent history*: ث is read exactly as س and ذ exactly as ز. So each gives the right approximation **and** marks the consonant as foreign, at no cost, where a plain س would give the same sound and no signal. `ثَنْکْ یُو` reads [sɑnk ju], which is the best available, and looks like the loanword it is. ص ض ط ظ are *not* used, for Arabic's reason: they pharyngealise the vowel beside them in a careful reading, so ط for an Indic retroflex would change ا to [ɑ] across the syllable."
+  },
+  {
+   "rule": "French and German /ʁ/ takes ر rather than غ, which is the nearer sound",
+   "why": "Persian غ is the voiced uvular that French /ʁ/ also is, so this looks like the obvious mapping and is not. Persian غ is realised [ɢ], a stop, word-initially and after a consonant, so غو for *rue* gives [ɢu] -- and Persian print writes every European R with ر, which is the convention a reader already has. The same argument keeps ر for /ɹ ɾ ɽ ɻ/."
+  },
+  {
+   "rule": "Persian's own /q/ and Arabic's are spelt with the same letter, ق, though one is voiced and the other is not",
+   "why": "Inherited from the `ipa` column rather than chosen here: `REPAIR[\"fa\"]` in scripts/build_ipa.py maps espeak's Persian uvular to `q`, which is what the Arabic pack already writes, precisely so that Persian adds no new symbol to the other twenty-two reader tables. The cost is that ق spells both, which is below this column's resolution -- no reader table in the corpus distinguishes uvular voicing -- and the alternative would have been the first `ɢ` in the corpus and twenty-two table edits, which is exactly what Klingon's /ɬ/ cost."
+  }
+ ],
+ "approximations": [
+  {
+   "sounds": "/y ø œ ʉ ɵ/ (French *tu*, German *Tüte*, Turkish *özür*, Hungarian *köszönöm*)",
+   "out": "the /u/ and /o/ series: ضمه+و for the close ones, a bare damma for the mid ones",
+   "why": "Persian has no front rounded vowel and no way to write one. The rounding is what is kept, because the /i/ series would lose it, and it is what Persian print does: مولر for Müller, کلن for Köln, and Turkish günaydın comes out گُونَیْدُونْ. یو as in میونیخ is not used: it is keyed on the German spelling and writes two letters for one vowel."
+  },
+  {
+   "sounds": "/ŋ/ (2,511 tokens: every Indonesian, Thai, Mandarin, Vietnamese and Germanic velar nasal)",
+   "out": "نْگ, and a bare نْ before a velar onset",
+   "why": "Persian's own spelling, which is the whole reason this needs no argument: انگلیسی, هنگ‌کنگ, رینگ. Arabic had to reach for نغ because it has no گ of its own; Persian writes the sound it already writes. The bare نْ before /k/ and /ɡ/ stops انگلیسی becoming انگگلیسی."
+  },
+  {
+   "sounds": "the Indic retroflexes /ʈ ɖ ɳ ɭ ɽ/ (1,034 tokens across Hindi)",
+   "out": "the plain letters ت د ن ل ر",
+   "why": "Urdu's ٹ ڈ ڑ ں are one letter away in the same script and are refused for Arabic's reason: an MSA reader does not know them, and neither does a general Iranian reader -- they are Urdu letters, not Persian ones, and Persian has never adopted them. ط for the retroflex stops was refused as well, because it would pharyngealise the vowel beside it."
+  },
+  {
+   "sounds": "a nasal vowel (/ã ẽ ĩ õ ũ ɐ̃ʊ̃/ and the free `̃`: French, Portuguese, Vietnamese)",
+   "out": "the oral vowel plus نْ",
+   "why": "Persian has no nasal vowel and writes the consonant, exactly as its own loanwords do: فرانسه, سانفرانسیسکو, رستوران. So *combien* is کُنْبْیِنْ and *enfant* is آنْفَانْ."
+  },
+  {
+   "sounds": "a coda /v/ after a rounded vowel (24 rows, all Greek and Russian: πρόβλημα, приостановлена)",
+   "out": "وْ, which collides",
+   "why": "**The one place this notation is silently wrong, and it is named rather than hidden.** Persian writes /o/ as a damma, /u/ as ضمه+و and /v/ as و, so ـُوْ is [ow] or [u] and never [ov]: پْرُوْلِیمْ reads *pruwlim* where the word is *provlim*. ڤ was the escape and was refused: it is not a Persian letter, its skeleton is ف, so a reader would say [proflim], and it would import the exact unverified-acceptance problem the Arabic entry names -- for 24 rows of 16,854. Left as it is, with the count."
+  }
+ ],
+ "legend": "حرفِ تازه‌ای نیست؛ همه فارسیِ معمولی است. حرکت‌ها همه‌جا نوشته شده، چون خودِ تلفظ‌اند.",
+ "note": "Reader's legend, per content/RESPELL-SYSTEMS.md's one-line rule -- and for Persian the rule has nothing to teach, which is the finding. Every letter and every mark in this notation is ordinary Persian: پ چ ژ گ are in the alphabet, و is /v/, and the harakat are the pedagogical register a reader already knows from a vocalised schoolbook and from the pronunciation brackets in فرهنگ بزرگ سخن. The legend therefore says only the one thing a reader does need told -- that the marks are written everywhere on purpose, because they are the pronunciation and not decoration.\n\n**The invariant that holds the table together, borrowed whole from the Arabic table: every letter carries a mark or is a mad letter.** A consonant takes the following vowel's harakat; a coda consonant takes a sukun; a cluster's non-final letters take a sukun; ا و ی after their own harakat are mad letters and take nothing. That is what makes an empty `syllable_separator` legible. Measured with `tmp/fa/lint.mjs` over all 16,854 rows: **one** letter is left bare, in the Arabic row `sʔts̪l` (سأتصل), which espeak returned with no vowels at all -- the weakness `GRADE[\"ar\"]` records. No IPA character, no Latin letter, no floating combining mark, no two vowel marks on one letter, no sukun beside a vowel mark and no mark on a medial alef. `node scripts/respell_check.mjs fa --gaps` prints none.\n\n**The cluster fixups are one rule per run length, and that is a real difference from the Arabic table rather than a style choice.** `createRespeller` builds a fixup's regex with `new RegExp(f.match)` and **no `g` flag**, so a fixup replaces its first match and nothing else. Arabic's pair -- three letters, then two -- therefore leaves the fourth consonant of a longer cluster unmarked, which one of its own rows demonstrates: `llkrsiː` for للكرسي comes out لْلْکْرسِی with the ر bare. A lookahead fails for the same reason and made it worse (37 bare letters became 273). Runs of six down to two, longest first, take it to one.\n\n**What `--units` would report as the diacritic set is 19 phonemes and all 19 are the same decision.** `ʰ ʱ` (aspiration, 1,986 tokens), `ʲ` (1,591 Russian palatalised consonants), `̪` (724 Vietnamese dentals), `ˀ` (702 Vietnamese glottalised codas), `̩` (37 syllabic nasals), `ˤ ˠ ʷ ʼ` and the fine-detail marks all map to nothing, and `͈` (215 Korean tense consonants) maps to a tashdid. **No diacritic in this table maps to a letter**, which CONTRIBUTING.md names as the usual bug behind a clean `--gaps`.\n\n**Measured rather than assumed.** `max_onset` is 1 because Persian phonotactics admit no onset cluster -- پلاستیک is [pelɑstik] and اسپری is [esperi] -- and the sukun on a cluster's non-final letters invites the epenthetic vowel a reader will insert anyway without writing a syllable the word does not have. `reader_onsets` is **absent and would be unusable**: at `max_onset` 1 `syllabify` never consults the cluster table, which is the finding the Arabic entry states and it holds here for the same reason. `policy.fixups` is `all`, and it has to be: the cluster rules, the word-initial alef rules and the hiatus seat all have to compose in one pass, and they are mutually exclusive by construction -- a syllable that opens with a harakat has no cluster, and a syllable with a cluster does not open with a harakat.\n\n**Bidi.** The column is drawn in the source's script and direction from `scripts.csv`, so nothing is reversed here. Four non-Persian characters reach the page: `{` `}` from the placeholder rows, `/` from the alternation rows, and the Latin comma, remapped to ، U+060C because a Latin comma in a Persian run is a foreign mark. **No new character is added to the font subset by any of this**: `subset_fonts.py` gives the `arabic` stack the whole of U+0600-06FF unconditionally, so پ چ ژ گ ک ی, all five marks, the hamza seats and ، are already in the shipped face -- verified against the cmaps of `arabic-400.ttf` **and** `arabic-700.ttf`, which is the intersection `validate_data.py` checks.\n\n**Least confident, in order.** (1) The coda /v/ collision above, 24 rows. (2) The aspiration merge, where Thai /kʰ/ and /k/ are different words. (3) Vietnamese /uə̯ iə̯ ɯə̯/, which espeak writes as two vowels, so *buổi* is بُوَیْ in two syllables where Vietnamese has one. (4) English /ɜː/, given کسره+ی on the strength of Persian's own شرت and فرست, which leaves *hurt* as هِیتْ with no ر because espeak's en-us is non-rhotic. (5) Mandarin /ɤ/ and /ɨ/, given a bare fatha and ضمه+و, so 得 and 字 are دَ and تْسُو. (6) The Korean word-initial tashdid, stripped rather than expressed. (7) The 129 Arabic rows espeak returned with no short vowels at all, which this table can only spell as the consonant skeleton they are.",
+ "policy": {
+  "syllable_separator": "",
+  "word_separator": " ",
+  "stress": "none",
+  "stress_min_syllables": 2,
+  "length": "none",
+  "tone": "drop",
+  "max_onset": 1,
+  "fixups": "all",
+  "locale": "fa"
+ },
+ "phonemes": [
+  {
+   "slot": "onset",
+   "ipa": "p",
+   "out": "ب",
+   "unless_inventory": "b d ɡ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "t",
+   "out": "د",
+   "unless_inventory": "b d ɡ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "k",
+   "out": "گ",
+   "unless_inventory": "b d ɡ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "tɕ",
+   "out": "ج",
+   "unless_inventory": "b d ɡ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ʈʂ",
+   "out": "ج",
+   "unless_inventory": "b d ɡ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "pʰ",
+   "out": "پ",
+   "unless_inventory": "b d ɡ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "tʰ",
+   "out": "ت",
+   "unless_inventory": "b d ɡ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "kʰ",
+   "out": "ک",
+   "unless_inventory": "b d ɡ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "tɕʰ",
+   "out": "چ",
+   "unless_inventory": "b d ɡ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ʈʂʰ",
+   "out": "چ",
+   "unless_inventory": "b d ɡ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "uə̯",
+   "out": "ُوَ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "yə̯",
+   "out": "ُوَ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɯə̯",
+   "out": "ُوَ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "iə̯",
+   "out": "ِیَ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "iɛ̯",
+   "out": "ِیَ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ŋ",
+   "out": "نْ",
+   "before_onset": "ɡ k"
+  },
+  {
+   "slot": "coda",
+   "ipa": "c",
+   "out": "چْ",
+   "if_inventory": "cʰ"
+  },
+  {
+   "slot": "any",
+   "ipa": "c",
+   "out": "چ",
+   "if_inventory": "cʰ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɟ",
+   "out": "گ",
+   "if_inventory": "dʒ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɟ",
+   "out": "گْ",
+   "if_inventory": "dʒ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "p",
+   "out": "پْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "p",
+   "out": "پ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "tʃ",
+   "out": "چْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tʃ",
+   "out": "چ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʒ",
+   "out": "ژْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʒ",
+   "out": "ژ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɡ",
+   "out": "گْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɡ",
+   "out": "گ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "b",
+   "out": "بْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "b",
+   "out": "ب"
+  },
+  {
+   "slot": "coda",
+   "ipa": "t",
+   "out": "تْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "t",
+   "out": "ت"
+  },
+  {
+   "slot": "coda",
+   "ipa": "d",
+   "out": "دْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "d",
+   "out": "د"
+  },
+  {
+   "slot": "coda",
+   "ipa": "k",
+   "out": "کْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "k",
+   "out": "ک"
+  },
+  {
+   "slot": "coda",
+   "ipa": "q",
+   "out": "قْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "q",
+   "out": "ق"
+  },
+  {
+   "slot": "coda",
+   "ipa": "f",
+   "out": "فْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "f",
+   "out": "ف"
+  },
+  {
+   "slot": "coda",
+   "ipa": "v",
+   "out": "وْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "v",
+   "out": "و"
+  },
+  {
+   "slot": "coda",
+   "ipa": "s",
+   "out": "سْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "s",
+   "out": "س"
+  },
+  {
+   "slot": "coda",
+   "ipa": "z",
+   "out": "زْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "z",
+   "out": "ز"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʃ",
+   "out": "شْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʃ",
+   "out": "ش"
+  },
+  {
+   "slot": "coda",
+   "ipa": "x",
+   "out": "خْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "x",
+   "out": "خ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɣ",
+   "out": "غْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɣ",
+   "out": "غ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "h",
+   "out": "هْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "h",
+   "out": "ه"
+  },
+  {
+   "slot": "coda",
+   "ipa": "m",
+   "out": "مْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "m",
+   "out": "م"
+  },
+  {
+   "slot": "coda",
+   "ipa": "n",
+   "out": "نْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "n",
+   "out": "ن"
+  },
+  {
+   "slot": "coda",
+   "ipa": "l",
+   "out": "لْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "l",
+   "out": "ل"
+  },
+  {
+   "slot": "coda",
+   "ipa": "r",
+   "out": "رْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "r",
+   "out": "ر"
+  },
+  {
+   "slot": "coda",
+   "ipa": "j",
+   "out": "یْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "j",
+   "out": "ی"
+  },
+  {
+   "slot": "coda",
+   "ipa": "dʒ",
+   "out": "جْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "dʒ",
+   "out": "ج"
+  },
+  {
+   "slot": "coda",
+   "ipa": "θ",
+   "out": "ثْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "θ",
+   "out": "ث"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ð",
+   "out": "ذْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ð",
+   "out": "ذ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ħ",
+   "out": "حْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ħ",
+   "out": "ح"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʕ",
+   "out": "عْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʕ",
+   "out": "ع"
+  },
+  {
+   "slot": "coda",
+   "ipa": "c",
+   "out": "کْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "c",
+   "out": "ک"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɟ",
+   "out": "جْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɟ",
+   "out": "ج"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʈ",
+   "out": "تْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʈ",
+   "out": "ت"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɖ",
+   "out": "دْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɖ",
+   "out": "د"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɗ",
+   "out": "دْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɗ",
+   "out": "د"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɸ",
+   "out": "فْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɸ",
+   "out": "ف"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʋ",
+   "out": "وْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʋ",
+   "out": "و"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ç",
+   "out": "خْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ç",
+   "out": "خ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɦ",
+   "out": "هْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɦ",
+   "out": "ه"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɕ",
+   "out": "شْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɕ",
+   "out": "ش"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʂ",
+   "out": "شْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʂ",
+   "out": "ش"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʑ",
+   "out": "ژْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʑ",
+   "out": "ژ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʐ",
+   "out": "ژْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʐ",
+   "out": "ژ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "tɕ",
+   "out": "چْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tɕ",
+   "out": "چ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʈʂ",
+   "out": "چْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʈʂ",
+   "out": "چ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "dʑ",
+   "out": "جْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "dʑ",
+   "out": "ج"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɖʐ",
+   "out": "جْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɖʐ",
+   "out": "ج"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɴ",
+   "out": "نْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɴ",
+   "out": "ن"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɳ",
+   "out": "نْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɳ",
+   "out": "ن"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɫ",
+   "out": "لْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɫ",
+   "out": "ل"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɭ",
+   "out": "لْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɭ",
+   "out": "ل"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʎ",
+   "out": "لْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʎ",
+   "out": "ل"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɬ",
+   "out": "لْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɬ",
+   "out": "ل"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɾ",
+   "out": "رْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɾ",
+   "out": "ر"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɹ",
+   "out": "رْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɹ",
+   "out": "ر"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɽ",
+   "out": "رْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɽ",
+   "out": "ر"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɻ",
+   "out": "رْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɻ",
+   "out": "ر"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʁ",
+   "out": "رْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʁ",
+   "out": "ر"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʝ",
+   "out": "یْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʝ",
+   "out": "ی"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɰ",
+   "out": "وْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɰ",
+   "out": "و"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ts",
+   "out": "تْسْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ts",
+   "out": "تْس"
+  },
+  {
+   "slot": "coda",
+   "ipa": "dz",
+   "out": "دْزْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "dz",
+   "out": "دْز"
+  },
+  {
+   "slot": "coda",
+   "ipa": "pf",
+   "out": "پْفْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "pf",
+   "out": "پْف"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɲ",
+   "out": "نْیْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɲ",
+   "out": "نْی"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ŋ",
+   "out": "نْگْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ŋ",
+   "out": "نْگ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ŋk",
+   "out": "نْکْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ŋk",
+   "out": "نْک"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ŋɡ",
+   "out": "نْگْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ŋɡ",
+   "out": "نْگ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "j",
+   "out": "ی",
+   "after_out": "ِ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "j",
+   "out": "یْ",
+   "after_out": "َ ُ ْ َا ِی ُو"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɪ",
+   "out": "ی",
+   "after_out": "ِ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɪ",
+   "out": "یْ",
+   "after_out": "َ ُ ْ َا ِی ُو"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "w",
+   "out": "و",
+   "after_out": "ُ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "w",
+   "out": "وْ",
+   "after_out": "َ ِ ْ َا ِی ُو"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʊ",
+   "out": "و",
+   "after_out": "ُ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʊ",
+   "out": "وْ",
+   "after_out": "َ ِ ْ َا ِی ُو"
+  },
+  {
+   "slot": "coda",
+   "ipa": "j",
+   "out": "یْ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "w",
+   "out": "وْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "j",
+   "out": "ی"
+  },
+  {
+   "slot": "any",
+   "ipa": "w",
+   "out": "و"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɥ",
+   "out": "ی"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "a̯",
+   "out": "وَ",
+   "after_out": "ُ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "a̯",
+   "out": "یَ",
+   "after_out": "ِ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "i",
+   "out": "",
+   "after_nucleus": "i",
+   "when": [
+    "no_onset"
+   ],
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "u",
+   "out": "",
+   "after_nucleus": "u",
+   "when": [
+    "no_onset"
+   ],
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɯ",
+   "out": "",
+   "after_nucleus": "ɯ",
+   "when": [
+    "no_onset"
+   ],
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "a",
+   "out": "َ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "æ",
+   "out": "َ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɐ",
+   "out": "َ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʌ",
+   "out": "َ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ə",
+   "out": "َ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɜ",
+   "out": "َ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɤ",
+   "out": "َ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɑ",
+   "out": "َا"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɒ",
+   "out": "َا"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "e",
+   "out": "ِ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɛ",
+   "out": "ِ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɨ",
+   "out": "ِ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "eː",
+   "out": "ِ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɛː",
+   "out": "ِ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "oː",
+   "out": "ُ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɔː",
+   "out": "ُ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "æː",
+   "out": "َ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "i",
+   "out": "ِی"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɪ",
+   "out": "ِی"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʊ",
+   "out": "ُو"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "o",
+   "out": "ُ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɔ",
+   "out": "ُ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "u",
+   "out": "ُو"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "y",
+   "out": "ُو"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ø",
+   "out": "ُ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "œ",
+   "out": "ُ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʉ",
+   "out": "ُو"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɵ",
+   "out": "ُ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɯ",
+   "out": "ُو"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɜː",
+   "out": "ِی"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɚ",
+   "out": "َرْ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɝ",
+   "out": "َرْ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɐ̃ʊ̃",
+   "out": "َاوْ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ã",
+   "out": "َنْ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ẽ",
+   "out": "ِنْ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ĩ",
+   "out": "ِنْ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "õ",
+   "out": "ُنْ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ũ",
+   "out": "ُنْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "̃",
+   "out": "نْ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ː",
+   "out": "ا",
+   "after_out": "َ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ː",
+   "out": "ی",
+   "after_out": "ِ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ː",
+   "out": "و",
+   "after_out": "ُ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ː",
+   "out": "",
+   "after_out": "ْ ا و ی"
+  },
+  {
+   "slot": "any",
+   "ipa": "ː",
+   "out": "ّ"
+  },
+  {
+   "slot": "any",
+   "ipa": "͈",
+   "out": "ّ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ˑ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ʰ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ʱ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ʲ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ʷ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ˤ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ˠ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ʼ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̩",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̪",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̺",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̚",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̥",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̬",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̹",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̜",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̯",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ˀ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ʔ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": ",",
+   "out": "،"
+  }
+ ],
+ "syllable_fixups": [
+  {
+   "match": "^([بپتثجچحخدذرزژسشصضطظعغفقکگلمنهوی])ّ",
+   "out": "\\1",
+   "when": [
+    "word_initial"
+   ]
+  },
+  {
+   "match": "([بپتثجچحخدذرزژسشصضطظعغفقکگلمنه])([بپتثجچحخدذرزژسشصضطظعغفقکگلمنهوی])([بپتثجچحخدذرزژسشصضطظعغفقکگلمنهوی])([بپتثجچحخدذرزژسشصضطظعغفقکگلمنهوی])([بپتثجچحخدذرزژسشصضطظعغفقکگلمنهوی])([بپتثجچحخدذرزژسشصضطظعغفقکگلمنهوی])",
+   "out": "\\1ْ\\2ْ\\3ْ\\4ْ\\5ْ\\6"
+  },
+  {
+   "match": "([بپتثجچحخدذرزژسشصضطظعغفقکگلمنه])([بپتثجچحخدذرزژسشصضطظعغفقکگلمنهوی])([بپتثجچحخدذرزژسشصضطظعغفقکگلمنهوی])([بپتثجچحخدذرزژسشصضطظعغفقکگلمنهوی])([بپتثجچحخدذرزژسشصضطظعغفقکگلمنهوی])",
+   "out": "\\1ْ\\2ْ\\3ْ\\4ْ\\5"
+  },
+  {
+   "match": "([بپتثجچحخدذرزژسشصضطظعغفقکگلمنه])([بپتثجچحخدذرزژسشصضطظعغفقکگلمنهوی])([بپتثجچحخدذرزژسشصضطظعغفقکگلمنهوی])([بپتثجچحخدذرزژسشصضطظعغفقکگلمنهوی])",
+   "out": "\\1ْ\\2ْ\\3ْ\\4"
+  },
+  {
+   "match": "([بپتثجچحخدذرزژسشصضطظعغفقکگلمنه])([بپتثجچحخدذرزژسشصضطظعغفقکگلمنهوی])([بپتثجچحخدذرزژسشصضطظعغفقکگلمنهوی])",
+   "out": "\\1ْ\\2ْ\\3"
+  },
+  {
+   "match": "([بپتثجچحخدذرزژسشصضطظعغفقکگلمنه])([بپتثجچحخدذرزژسشصضطظعغفقکگلمنهوی])",
+   "out": "\\1ْ\\2"
+  },
+  {
+   "match": "([بپتثجچحخدذرزژسشصضطظعغفقکگلمنهوی])$",
+   "out": "\\1ْ",
+   "if_nucleus": " "
+  },
+  {
+   "match": "نْنْ",
+   "out": "نْ"
+  },
+  {
+   "match": "یِ?یْ",
+   "out": "ی"
+  },
+  {
+   "match": "وُ?وْ",
+   "out": "و"
+  },
+  {
+   "match": "رْرْ",
+   "out": "رْ"
+  },
+  {
+   "match": "^َا",
+   "out": "آ"
+  },
+  {
+   "match": "^ِی",
+   "out": "ای",
+   "when": [
+    "word_initial"
+   ]
+  },
+  {
+   "match": "^ُو",
+   "out": "او",
+   "when": [
+    "word_initial"
+   ]
+  },
+  {
+   "match": "^َ",
+   "out": "اَ",
+   "when": [
+    "word_initial"
+   ]
+  },
+  {
+   "match": "^ِ",
+   "out": "اِ",
+   "when": [
+    "word_initial"
+   ]
+  },
+  {
+   "match": "^ُ",
+   "out": "اُ",
+   "when": [
+    "word_initial"
+   ]
+  },
+  {
+   "match": "^َ",
+   "out": "یَ",
+   "after_nucleus": "i ɪ e ɛ ɨ"
+  },
+  {
+   "match": "^َ",
+   "out": "وَ",
+   "after_nucleus": "u ʊ o ɔ y ø œ ɯ ʉ ɵ ɒ"
+  },
+  {
+   "match": "^َ",
+   "out": "ئَ"
+  },
+  {
+   "match": "^ِ",
+   "out": "یِ",
+   "after_nucleus": "i ɪ e ɛ ɨ"
+  },
+  {
+   "match": "^ُ",
+   "out": "وُ",
+   "after_nucleus": "u ʊ o ɔ y ø œ ɯ ʉ ɵ ɒ"
+  },
+  {
+   "match": "^ِ",
+   "out": "ئِ"
+  },
+  {
+   "match": "^ُ",
+   "out": "ئُ"
+  }
+ ],
+ "targets": {
+  "ja": {
+   "comment": "Japanese /ç/ is the palatalised /h/ of ひ and ぴょ, so it takes ه (هِتْسُویُو for 必要). Everywhere else in the corpus /ç/ is the German ich-Laut and takes خ -- ایخْ for *ich*. No inventory predicate separates the two, since both languages have it only before a front vowel. 53 Japanese against 278 German.",
+   "phonemes": [
+    {
+     "slot": "any",
+     "ipa": "ç",
+     "out": "ه"
+    }
+   ]
+  },
+  "pt": {
+   "comment": "Three artefacts, all of them sounds Portuguese does not have. /y/ on 287 cells is the reduced final [ɨ] of *de* and *noite*, not the front rounded vowel it is in French and German, so it takes a kasra: دِ نَدَ for *de nada*, where this table's general /y/ would give دُو. /ŋ/ on 374 cells is the nasalisation of the vowel before it and not a velar nasal, so it takes ن rather than نگ, which turns بُنْگْ into بُنْ for *bom*. /x/ on 66 cells is ⟨r⟩ and ⟨rr⟩, and Portuguese has no /x/, so it takes ر as Persian print does for a European R.",
+   "phonemes": [
+    {
+     "slot": "nucleus",
+     "ipa": "y",
+     "out": "ِ"
+    },
+    {
+     "slot": "coda",
+     "ipa": "ŋ",
+     "out": "نْ"
+    },
+    {
+     "slot": "any",
+     "ipa": "ŋ",
+     "out": "ن"
+    },
+    {
+     "slot": "coda",
+     "ipa": "x",
+     "out": "رْ"
+    },
+    {
+     "slot": "any",
+     "ipa": "x",
+     "out": "ر"
+    }
+   ]
+  },
+  "tr": {
+   "comment": "espeak writes Turkish /e/ as /æ/ before a coda liquid or nasal on 96 cells -- *lütfen* is `lytfæn`. Turkish has no /æ/, so all 96 are the defect, and this table's general fatha would give لُوتْفَنْ for a word whose vowel is [e]. Kasra instead, which is what Turkish /e/ takes everywhere else here.",
+   "phonemes": [
+    {
+     "slot": "nucleus",
+     "ipa": "æ",
+     "out": "ِ"
+    }
+   ]
+  }
+ }
+}

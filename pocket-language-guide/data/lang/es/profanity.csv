@@ -1,0 +1,11 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+profanity.oh-my-god,¡Dios mío!,,djˈos mˈio,"my God -- mild, no offence",1,profanity-v1;src=RAE-DLE;ipa=espeak
+profanity.damn,¡Maldita sea!,,maldˈita sˈea,cursed be it -- mild oath,1,profanity-v1;src=RAE-DLE;ipa=espeak
+profanity.expletive,¡Mierda!,,mjˈeɾda,shit -- coarse but everyday,1,profanity-v1;src=RAE-DLE;ipa=espeak
+profanity.strong-expletive,¡Joder!,¡Carajo!,xodˈeɾ,very strong; said at nothing,1,profanity-v1;src=RAE-DLE;ipa=espeak
+profanity.intensifier,de mierda,maldito,de mjˈeɾda,with a noun: damn -; coarse,1,profanity-v1;src=RAE-DLE;ipa=espeak
+profanity.frustration,¡Qué porquería!,,kˈe pˌoɾkeɾˈia,what filth -- mild-coarse,1,profanity-v1;src=RAE-DLE;ipa=espeak
+profanity.thats-rude,Eso es una grosería,,ˈeso ˈes ˈuna ɡɾˌoseɾˈia,that is a coarseness,1,profanity-v1;src=RAE-DLE;ipa=espeak
+profanity.excuse-my-language,Perdón por la expresión,,peɾdˈom poɾ la ˌekspɾesjˈon,sorry for the expression,1,profanity-v1;src=RAE-DLE;ipa=espeak
+profanity.strength-warning,"Están aquí para reconocerlas, no para usarlas: la fuerza no sobrevive a la traducción. Una palabra glosada aquí como maldición leve puede ser impronunciable en la lengua de al lado, y la palabra más fuerte de un idioma suele ser justo la que esta sección ha dejado fuera.",,,,1,profanity-notes-v1
+profanity.japanese-register,"El japonés casi no hace esto con el léxico. El desprecio va en la gramática: un pronombre de segunda persona brusco, el imperativo llano, las formas verbales cortantes. La ira está en la terminación y no en una palabra que se pueda buscar, y las filas de arriba son casi todo el vocabulario que existe.",,,,1,profanity-notes-v1

@@ -82,3 +82,5 @@ numbers-money.lakh,लाख,"1,00,000",lākh,lˈaːkʰ,,2,lakh-crore-agent-v1;c
 numbers-money.crore,करोड़,"1,00,00,000",karoṛ,kəɾˈoːɽ,,2,lakh-crore-agent-v1;cldr;ipa=espeak
 numbers-money.shekel,शेकेल,,,ʃeːkˈeːl,,2,shekel-gloss-v1;cldr;ipa=espeak
 numbers-money.shekel-symbol,शेकेल चिह्न,,,ʃeːkˈeːl cˈɪhnə,,2,shekel-gloss-v1;cldr;ipa=espeak
+numbers-money.rial,रियाल,,riyāl,ɾɪjˈaːl,,2,rial-toman-gloss-v1;cldr;ipa=espeak
+numbers-money.toman,10 रियाल,,10 riyāl,dˈʌs ɾɪjˈaːl,,2,rial-toman-gloss-v1;cldr;ipa=espeak

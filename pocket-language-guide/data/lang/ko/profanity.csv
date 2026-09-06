@@ -1,0 +1,10 @@
+concept_id,text,text_alt,romanization_rr,ipa,literal,confidence,provenance
+profanity.oh-my-god,세상에!,,sesange!,sesaŋe,to the world -- mild shock,1,profanity-v1;src=NIKL-StdKor;ipa=rr
+profanity.damn,젠장!,,jenjang!,tɕendʑaŋ,damn it -- mild,1,profanity-v1;src=NIKL-StdKor;ipa=rr
+profanity.strong-expletive,씨발!,,ssibal!,s͈ibal,very strong -- Korea's commonest swear,1,profanity-v1;src=NIKL-Urimalsaem;ipa=rr
+profanity.intensifier,개-,,gae-,kɛ,"prefix: damn -, gae-joha; coarse",1,profanity-v1;src=NIKL-Urimalsaem;ipa=rr
+profanity.frustration,이건 쓰레기예요,,igeon sseuregiyeyo,iɡʌn s͈ɯɾeɡijejo,this is garbage -- blunt,1,profanity-v1;src=NIKL-StdKor;ipa=rr
+profanity.thats-rude,그건 무례해요,,geugeon muryehaeyo,kɯɡʌn muɾjehɛjo,that is impolite,1,profanity-v1;src=NIKL-StdKor;ipa=rr
+profanity.excuse-my-language,거친 말 해서 죄송해요,,geochin mal haeseo joesonghaeyo,kʌtɕʰin mal hɛsʌ tɕwesoŋhɛjo,sorry for the coarse words,1,profanity-v1;src=NIKL-StdKor;ipa=rr
+profanity.strength-warning,"이 칸은 알아듣기 위한 것이고 입에 올리기 위한 것이 아닙니다. 욕의 무게는 번역에 실려 오지 않습니다. 여기서 가벼운 욕처럼 보이는 말이 옆 언어에서는 입에 담을 수 없는 말일 수 있고, 어떤 언어에서 가장 센 말은 이 칸이 실을 수 없었던 말인 경우가 많습니다.",,,,,1,profanity-notes-v1
+profanity.japanese-register,"일본어는 이 일을 어휘로 거의 하지 않습니다. 경멸은 문법이 나릅니다. 무뚝뚝한 이인칭 대명사, 맨 명령형, 뚝 끊는 동사형이 그것입니다. 분노는 사전에서 찾을 수 있는 단어가 아니라 어미에 실립니다. 위의 줄들이 있는 어휘의 거의 전부입니다.",,,,,1,profanity-notes-v1

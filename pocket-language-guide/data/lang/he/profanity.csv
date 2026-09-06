@@ -1,0 +1,10 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+profanity.oh-my-god,אלוהים אדירים!,אֱלוֹהִים אַדִּירִים!,elohim adirim!,elohˈim adiʁˈim,"mighty God -- shock, mild",1,profanity-v1;src=Rav-Milim;ipa=bgn
+profanity.damn,לעזאזל!,לַעֲזָאזֵל!,la‘azazel!,laazazˈel,"to Azazel -- damn it, mild",1,profanity-v1;src=Rav-Milim;ipa=bgn
+profanity.expletive,חרא!,חָרָא!,ẖara!,xaʁˈa,shit -- coarse but everyday,1,profanity-v1;src=Rav-Milim;ipa=bgn
+profanity.intensifier,חרא של,חָרָא שֶׁל,ẖara shel,xaʁˈa ʃˈel,before a noun: shitty -; coarse,1,profanity-v1;src=Rav-Milim;ipa=bgn
+profanity.frustration,זה זבל,זֶה זֶבֶל,ze zével,zˈe zˈevel,this is garbage -- mild-coarse,1,profanity-v1;src=Rav-Milim;ipa=bgn
+profanity.thats-rude,זה דיבור גס,זֶה דִּיבּוּר גַּס,ze dibur gas,zˈe dibˈuʁ ɡˈas,that is coarse speech,1,profanity-v1;src=Rav-Milim;ipa=bgn
+profanity.excuse-my-language,סליחה על הביטוי,סְלִיחָה עַל הַבִּיטוּי,seliẖa ‘al habituy,selixˈa ˈal habitˈuj,sorry for the expression,1,profanity-v1;src=Rav-Milim;ipa=bgn
+profanity.strength-warning,"השורות כאן נועדו לזיהוי ולא לשימוש: עוצמתה של קללה אינה עוברת בתרגום. מילה שנראית כאן כקללה קלה עשויה להיות בלתי ניתנת לאמירה בשפה שלידה, והמילה החזקה ביותר בשפה היא לרוב דווקא זו שהמדור הזה נאלץ להשמיט.",,,,,1,profanity-notes-v1
+profanity.japanese-register,"היפנית כמעט אינה עושה זאת במילים. הבוז נשען על הדקדוק: כינוי גוף שני נוקשה, ציווי חשוף וצורות פועל קטועות. הכעס יושב בסיומת ולא במילה שניתן לחפש במילון, והשורות שלמעלה הן כמעט כל אוצר המילים שיש.",,,,,1,profanity-notes-v1

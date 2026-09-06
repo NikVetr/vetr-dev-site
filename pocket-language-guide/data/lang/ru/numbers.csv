@@ -82,3 +82,5 @@ numbers-money.lakh,сто тысяч,,sto tysyach,stˈo tˈɨsʲʌtʃʲ,,2,lakh-
 numbers-money.crore,десять миллионов,,desyatʼ millionov,dʲˈesʲʌtʲ mʲiɭɭʲiˈonʌf,,2,lakh-crore-agent-v1;cldr;ipa=espeak
 numbers-money.shekel,шекель,,,ʃˈɛkʲiɭ,,2,shekel-gloss-v1;cldr;ipa=espeak
 numbers-money.shekel-symbol,шекель (символ),,,ʃˈɛkʲiɭ sʲˈimvʌɭ,,2,shekel-gloss-v1;cldr;ipa=espeak
+numbers-money.rial,риал,,rial,rʲiˈɑɭ,,2,rial-toman-gloss-v1;cldr;ipa=espeak
+numbers-money.toman,10 риалов,,10 rialov,dʲˈesʲɪtʲ rʲiˈɑɭʌf,,2,rial-toman-gloss-v1;cldr;ipa=espeak

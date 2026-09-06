@@ -1,0 +1,11 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+profanity.oh-my-god,Mamma mia!,Dio mio!,mˈamma mˈia,"my mother -- mild, and everywhere",1,profanity-v1;src=Treccani;ipa=espeak
+profanity.damn,Accidenti!,,atʃtʃidˈɛntɪ,mishaps -- mild oath,1,profanity-v1;src=Treccani;ipa=espeak
+profanity.expletive,Merda!,,mˈɛrda,shit -- coarse but everyday,1,profanity-v1;src=Treccani;ipa=espeak
+profanity.strong-expletive,Cazzo!,,kˈatstso,very strong; said at nothing,1,profanity-v1;src=Treccani;ipa=espeak
+profanity.intensifier,maledetto,del cazzo,maledˈetto,with a noun: damn -; mild,1,profanity-v1;src=Treccani;ipa=espeak
+profanity.frustration,È una schifezza,,e ˌʊna skifˈetstsa,it is a disgusting thing -- mild,1,profanity-v1;src=Treccani;ipa=espeak
+profanity.thats-rude,È volgare,,e volɡˈare,that is vulgar,1,profanity-v1;src=Treccani;ipa=espeak
+profanity.excuse-my-language,Scusi il linguaggio,,skˈuzɪ il liŋɡwˈadʒdʒo,excuse the language,1,profanity-v1;src=Treccani;ipa=espeak
+profanity.strength-warning,"Qui per essere riconosciute, non per essere usate: la forza non sopravvive alla traduzione. Una parola resa qui con un'imprecazione leggera può essere indicibile nella lingua accanto, e la parola più forte di una lingua è spesso proprio quella che questa sezione ha dovuto escludere.",,,,1,profanity-notes-v1
+profanity.japanese-register,"Il giapponese non fa quasi nulla di questo col lessico. Il disprezzo passa dalla grammatica: un pronome di seconda persona brusco, l'imperativo nudo, le forme verbali secche. La rabbia sta nella desinenza e non in una parola che si possa cercare, e le righe qui sopra sono quasi tutto il lessico esistente.",,,,1,profanity-notes-v1

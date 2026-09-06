@@ -69,7 +69,9 @@ Hebrew is the counter-example to the Arabic rule and shows what the reason was d
 it is the other right-to-left script here and it **takes the hyphen**, because it is
 not cursive, has no joining forms and loses nothing to a break -- and because Israeli
 teaching material divides syllables with exactly this hyphen. Direction was never the
-question; the join was.
+question; the join was. Persian is the test of that reading and it comes out on
+Arabic's side: same script, same joining behaviour, same empty separator, measured on
+its own faces rather than assumed from Arabic's.
 
 ## Writing a rule table
 
@@ -102,7 +104,7 @@ question a reader will eventually ask.
 |---|---|---|
 | `syllable_separator` | any string | see the table above; not a hyphen everywhere |
 | `word_separator` | any string | |
-| `stress` | `caps` `acute` `grave` `prime` `none` | `caps` for a Latin script with no native mark, `acute` where one exists (Spanish, Portuguese, Russian, Greek -- where it is not a choice but the orthography), `grave` for Italian, `prime` for caseless Devanagari |
+| `stress` | `caps` `acute` `grave` `prime` `none` | `caps` for a Latin script with no native mark, `acute` where one exists (Spanish, Portuguese, Russian, Greek -- where it is not a choice but the orthography), `grave` for Italian, `prime` for caseless Devanagari, `none` for the three scripts that have no device at all -- see the Hebrew paragraph below, and note that `prime` is additionally out for Arabic and Persian because U+02B9 is a Latin-block modifier letter and reorders in a right-to-left run |
 | `stress_min_syllables` | integer | a monosyllable that shouts has stopped saying anything |
 | `length` | `none` `double` `colon` | `double` doubles a Latin vowel; Turkish takes the colon, since a doubled vowel there reads as two syllables. A script that writes length with a *different letter* puts it in the `phonemes` table instead, by giving `oː` its own rule -- that is every non-Latin one, and Hungarian, where `ó` is not `o` twice |
 | `tone` | `keep` `drop` | `zh-Hans`, `th` and `vi` carry Chao tone letters, because tone is lexical there |

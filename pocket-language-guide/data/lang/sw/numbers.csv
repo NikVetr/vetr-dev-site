@@ -82,3 +82,5 @@ numbers-money.lakh,Laki moja,Elfu mia moja,lˈaki mˈoɟa,laki is itself the Hin
 numbers-money.crore,Milioni kumi,,mˌiliˈoni kˈumi,,2,lakh-crore-agent-v1;cldr;ipa=espeak
 numbers-money.shekel,Shekeli,,ʃekˈeli,,2,shekel-gloss-v1;cldr;ipa=espeak
 numbers-money.shekel-symbol,Shekeli (alama),,ʃekˈeli alˈama,,2,shekel-gloss-v1;cldr;ipa=espeak
+numbers-money.rial,riali,,riˈali,,2,rial-toman-gloss-v1;cldr;ipa=espeak
+numbers-money.toman,riali 10,,riˈali kˈumi,,2,rial-toman-gloss-v1;cldr;ipa=espeak
