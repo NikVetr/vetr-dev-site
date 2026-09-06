@@ -3570,8 +3570,7 @@
     renderModelContributions(prediction);
     const warningText = coverage.warnings.length
       ? `This target profile has limited support: ${coverage.warnings.join("; ")}. ` : "";
-    refs.modelLimitations.innerHTML = "<strong>Benchmark, not a pay recommendation.</strong> The selected disclosure cohort is not a representative market sample. <strong>Source types stay distinct:</strong> base pay, cash proxies, and optional ad ranges use their documented models. <strong>Current work-location evidence can postdate compensation.</strong> Effects are descriptive. Percentile uncertainty omits uncertainty about cohort representativeness. <a href=\"ceo_reference_set_audit.md\" target=\"_blank\">Source audit</a> · <a href=\"ceo_peer_recommendations.csv\" target=\"_blank\">Peer recommendations</a> · <a href=\"unknown_work_arrangements.md\" target=\"_blank\">Work-arrangement follow-up</a> · <a href=\"benchmark/analysis/predictive_salary_models/measurement_sensitivity/README.md\" target=\"_blank\">Repeated validation</a>.";
-    if (warningText) refs.modelLimitations.prepend(document.createTextNode(warningText));
+    refs.modelLimitations.textContent = warningText;
   }
 
   function modelChartGeometry(domainValues) {

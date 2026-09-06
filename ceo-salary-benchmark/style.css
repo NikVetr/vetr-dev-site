@@ -356,6 +356,7 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .model-contribution.is-negative .model-contribution-bar { background: var(--green); }
 .model-contribution-track > output { position: absolute; top: 50%; transform: translateY(-50%); white-space: nowrap; text-align: left; font-variant-numeric: tabular-nums; }
 .model-limitations { margin-top: 9px !important; padding-top: 7px; border-top: 1px solid var(--line); }
+.model-limitations:empty { display: none; }
 .model-profile-warning { color: var(--coral); }
 .model-density-area { fill: color-mix(in srgb, var(--blue), transparent 68%); }
 .model-density-line { fill: none; stroke: var(--green); stroke-width: 2.5; }
