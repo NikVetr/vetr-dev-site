@@ -48,10 +48,12 @@ ROW_FIELDS = (
     "topic", "eaAffinity", "structure", "location", "expenses", "revenue",
     "staff", "compensationYear", "salary", "range", "highestPaidOtherEmployee", "auditStatus",
     "remoteCategory", "servesAsFiscalSponsor", "ceoHiringMarket", "ceoHiringMarketBasis",
+    "highestPaidOtherEmployee40h", "otherPayDisclosure",
 )
 RP_FIELDS = (
     "id", "organization", "expenses", "revenue", "staff", "compensationYear",
     "salary", "highestPaidOtherEmployee", "remoteCategory", "servesAsFiscalSponsor", "ceoHiringMarket", "ceoHiringMarketBasis",
+    "highestPaidOtherEmployee40h", "otherPayDisclosure",
 )
 
 

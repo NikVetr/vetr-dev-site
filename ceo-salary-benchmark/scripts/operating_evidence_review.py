@@ -35,6 +35,45 @@ def load_reviews() -> dict[str, dict]:
                 if local and not (ROOT / local).is_file():
                     raise ValueError(f"Missing saved operating source: {organization}: {local}")
             reviews[organization] = record
+    unknown = {name for name, record in reviews.items() if record["work_model"] == "unknown"}
+    followups = {}
+    for path in (REVIEW_DIR / "unknown_followup_1.jsonl", REVIEW_DIR / "unknown_followup_2.jsonl"):
+        for line in path.read_text(encoding="utf-8").splitlines():
+            followup = json.loads(line)
+            name = followup["organization"]
+            if name in followups or name not in unknown:
+                raise ValueError(f"Unexpected or duplicate unknown-work follow-up: {name}")
+            if followup["best_guess"] not in {"remote", "hybrid", "in_person", "unknown"}:
+                raise ValueError(f"Invalid work-model guess: {name}")
+            if not followup["search_log"] or (followup["best_guess"] != "unknown" and not followup["evidence"]):
+                raise ValueError(f"Missing follow-up evidence or search log: {name}")
+            if any(not item.get("url", "").startswith(("https://", "http://")) for item in followup["evidence"]):
+                raise ValueError(f"Invalid follow-up evidence URL: {name}")
+            followups[name] = followup
+            review = reviews[name]
+            review["unknown_followup"] = followup
+            promoted = followup["supports_promotion_to_main_classification"]
+            if promoted:
+                if followup["confidence"] not in {"high", "medium"} or followup["best_guess"] == "unknown":
+                    raise ValueError(f"Unsupported work-model promotion: {name}")
+                review["work_model"] = followup["best_guess"]
+                review["work_model_basis"] = "inferred_from_reviewed_job_evidence"
+            office_supported = followup.get("supports_office_present_predictor") is True and followup.get("combined_remote_vs_office_classification") == "office_present"
+            if office_supported:
+                review["office_present_inferred"] = True
+                review["work_model_basis"] = "inferred_office_presence"
+            if promoted or office_supported:
+                review["rationale"] = followup["reasoning"]
+                # Work evidence confidence must not silently increase the
+                # confidence assigned to a separate geography inference.
+                review["work_model_confidence"] = followup["confidence"]
+                review["recommendation"] = (
+                    f"Use the inferred {followup['best_guess']} designation ({followup['confidence']} confidence); role evidence may not cover every employee."
+                    if promoted else "Use In-person / hybrid for the combined predictor; the office arrangement subtype remains unresolved.")
+            review["evidence"] = followup["evidence"] + review["evidence"]
+            review["search_log"] += followup["search_log"]
+    if set(followups) != unknown:
+        raise ValueError("Unknown-work follow-up does not cover the original unresolved organizations")
     return reviews
 
 
@@ -56,5 +95,9 @@ def attach_review_fields(row: dict, review: dict) -> None:
     row["operatingFootprint"] = review.get("operating_scope", "unknown")
     row["workModelDetail"] = review["work_model"]
     row["workModelBasis"] = review.get("work_model_basis", "unknown")
+    followup = review.get("unknown_followup", {})
+    row["workModelGuess"] = followup.get("best_guess", "unknown")
+    row["workModelGuessConfidence"] = followup.get("confidence", "unknown")
+    row["workModelPlausible"] = followup.get("plausible_models", [])
     row["sourceLocationDescription"] = row.get("sourceLocationDescription", row.get("location", ""))
     row["location"] = row["ceoHiringMarket"]

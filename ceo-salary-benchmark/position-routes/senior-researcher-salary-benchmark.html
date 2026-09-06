@@ -126,13 +126,13 @@ layout: null
         </span>
         <span id="model-highest-other-field" class="model-option">
           <label><input id="model-include-highest-other" type="checkbox" checked> Include highest-other pay</label>
-          <button class="info-tooltip" type="button" aria-label="About highest-other pay in the model" data-tooltip="Use the highest eligible base pay reported for another employee in the same filing as a predictor. This is selectively disclosed pay, without full-time-equivalent adjustment. Switching this off uses a separately fitted version of the selected model that omits this field.">?</button>
+          <button class="info-tooltip" type="button" aria-label="About highest-other pay in the model" data-tooltip="Use the highest disclosed eligible non-CEO base pay after converting each employee to a 40-hour week: combined reported pay × 40 / combined weekly hours. This is a reported-effort convention, not verified contractual FTE. Missing disclosures can still conceal a higher base salary. Switching this off uses a separately fitted version of the selected model that omits this field.">?</button>
         </span>
         <div class="model-input-grid">
           <label><span>Expenses</span><input id="model-expenses" type="number" min="1" step="100000" inputmode="numeric"></label>
           <label><span>Revenue</span><input id="model-revenue" type="number" min="1" step="100000" inputmode="numeric"></label>
           <label><span>Employees</span><input id="model-staff" type="number" min="1" step="1" inputmode="numeric"></label>
-          <label><span>Highest other reported base pay</span><input id="model-highest-other" type="number" min="1" step="1000" inputmode="numeric"></label>
+          <label><span>Highest other base pay · 40h equivalent</span><input id="model-highest-other" type="number" min="1" step="1000" inputmode="numeric"></label>
         </div>
         <div id="model-category-inputs" class="model-category-inputs">
           <label><span>Focus area</span><select id="model-focus"></select></label>

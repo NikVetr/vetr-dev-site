@@ -12,6 +12,12 @@ The empirical Recommended CEO view contains 129 observations across 126 organiza
 
 The operating-evidence review covers all 201 organizations in two source-linked JSONL files. Current and historical job ads can support explicitly labeled indirect inferences; unknown remains a valid result. CEO hiring market, general hiring scope, and organizational footprint are separate fields. When executive-specific evidence is unavailable, a sufficiently supported staff market is labeled as an inference. RP's CEO is fully remote; its general hiring policy supports conditional international eligibility. Current policy does not establish the arrangement in an earlier pay year.
 
+The follow-up of 57 unresolved work arrangements supports 14 additional combined classifications. Of the 43 still unresolved, 12 have weaker or historical guesses displayed separately from the model input. `unknown_work_arrangements.md` summarizes the evidence, confidence and alternatives; the two follow-up JSONL files retain individual searches.
+
+Work-model dialogs combine current reasoning with dated supporting evidence and saved source copies. Updating a primary citation preserves earlier published evidence; duplicate citations are consolidated. Production Bayesian validation can extend one unsuccessful sampling run while retaining the substantive convergence thresholds, and records each refined fold in the artifact.
+
+`scripts/other_employee_pay.py` selects the highest other-employee pay after converting each eligible annual amount to a 40-hour week: combined filing/related pay × 40 / combined reported weekly hours. This is an effort-based standardization, not verified contractual FTE. The module retains actual pay, hours, source identity, payroll-allocation flags, and base-disclosure completeness alongside the standardized amount. Full-period part-time employees can enter this predictor; former/partial-year roles and unresolved CPI hours cannot. Cash disclosures are never substituted for base pay. `highest_other_fte_audit.md` in the enrichment folder documents the source checks.
+
 The non-CEO layer maps source-native titles through a reviewed taxonomy, retaining original titles and classification evidence. Each organization receives equal initial influence across its selected role holders before user multipliers. Disclosures of senior/high-paid employees cannot establish population pay percentiles for an occupation.
 
 ## Application
@@ -38,6 +44,8 @@ Every model is evaluated on the same exact-filing outcomes in organization-group
 
 `model_artifact.json` exports browser parameters, uncertainty draws, training IDs, diagnostics, and provenance. The build rejects stale inputs, unsupported schemas, missing models, incomplete residual identities, and failed sampler gates. Large fits are cached outside tracked results; optional `prepare_cluster_fits.R` and `cluster_fit_worker.R` support the documented worker cluster with four-chain Stan fits and integrity-checked imports. The model README specifies equations and reproduction details.
 
+`measurement_sensitivity.R` uses those same fitting and scoring functions for three grouped ten-fold repetitions. Matched Bayesian comparisons isolate exact-only training and removal of categorical predictors; single-split sensitivities compare reported other pay and treating incompletely identified maxima as missing. Numeric linear, GAM, SVR and GP comparators use all three splits. The separate `measurement_sensitivity/` results retain every held-out prediction, fold assignment, score and sampler diagnostic. They do not silently replace the app's 17 specifications.
+
 ## Reproduction and checks
 
 Run from this folder:
@@ -46,8 +54,11 @@ Run from this folder:
 python3 scripts/build_organization_operating_metadata.py
 python3 benchmark/analysis/predictive_salary_models/prepare_model_data.py
 Rscript benchmark/analysis/predictive_salary_models/fit_salary_models.R .
+Rscript benchmark/analysis/predictive_salary_models/measurement_sensitivity.R .
+python3 benchmark/analysis/predictive_salary_models/summarize_measurement_study.py
 npm run build
 python3 scripts/audit_ceo_reference_set.py
+python3 scripts/summarize_work_followup.py
 npm run test:data
 npm run test:statistics
 npm test

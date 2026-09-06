@@ -1,0 +1,54 @@
+{
+  "repetitions": 3,
+  "foldSeeds": [20260903, 20260904, 20260905],
+  "firstFoldRule": "Production Python organization shuffle; later repetitions use R sample with stated seeds",
+  "scoring": "Identical exact-base outcomes in every comparison; all evidence for an organization held out together",
+  "otherPayBasis": "40-hour equivalents; reported-pay sensitivity re-ranks the original eligible reported amounts",
+  "disclosureSensitivity": "Set other-pay predictor missing when an eligible disclosed employee with no base disclosure has cash exceeding the known maximum base; use the same joint missing-input model. This discards the known lower bound and does not correct unlisted-employee selection.",
+  "categoryAblation": "All centered categories collapsed to one level; EA held at the reference; numeric and missingness terms retained",
+  "specifications": [
+    {
+      "key": "bayesian_filing",
+      "label": "Bayesian linear: exact + cash, all categories",
+      "exact": false,
+      "categories": true,
+      "repeats": [1, 2, 3],
+      "offset": 0
+    },
+    {
+      "key": "bayesian_exact",
+      "label": "Bayesian linear: exact only, all categories",
+      "exact": true,
+      "categories": true,
+      "repeats": [1, 2, 3],
+      "offset": 1000
+    },
+    {
+      "key": "bayesian_numeric",
+      "label": "Bayesian linear: exact only, numeric inputs",
+      "exact": true,
+      "categories": false,
+      "repeats": [1, 2, 3],
+      "offset": 2000
+    },
+    {
+      "key": "bayesian_disclosure",
+      "label": "Bayesian linear: uncertain other-pay maxima missing",
+      "exact": false,
+      "categories": true,
+      "repeats": 1,
+      "offset": 3000
+    },
+    {
+      "key": "bayesian_reported",
+      "label": "Bayesian linear: reported other pay",
+      "exact": false,
+      "categories": true,
+      "repeats": 1,
+      "offset": 4000
+    }
+  ],
+  "trainingSha256": "39336d9c78d4738d826f019e0fa58fca3f95aa72ed9e5f523a73c2e628e68c43",
+  "fitScriptSha256": "8b2979c45652f265396a7d6112ebd4fcf00deaccbdc19b60ded9a5eb0dcdd9f0",
+  "rVersion": "R version 4.6.1 (2026-06-24)"
+}

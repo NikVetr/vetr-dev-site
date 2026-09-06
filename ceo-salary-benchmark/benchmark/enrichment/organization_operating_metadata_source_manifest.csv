@@ -1,9 +1,9 @@
 organization,claim,source_url,local_path,mime_type,byte_length,sha256,retrieved_at
-AI Objectives Institute,work_model,https://www.causeiq.com/organizations/ai-objectives-institute%2C873870371/,benchmark/sources/native/organization_metadata/job_review_1/ai_objectives_institute_current.html,text/html,164075,51bf1413a08001ff0b599b8f713685a1aee65b594047633eb1444b4ef8782df1,2026-09-05
+AI Objectives Institute,work_model,https://www.causeiq.com/organizations/ai-objectives-institute%2C873870371/,,,,,2026-09-05
 AI Objectives Institute,fiscal_sponsor,https://www.causeiq.com/organizations/ai-objectives-institute%2C873870371/,benchmark/sources/native/supporting/src-peer-ai-objectives-institute.html,text/html,164076,5cf8a37eaa3980b92ce1de725bfd3cbfabc41f42583d6becd2341ae6e3b49533,2026-09-05
 All Chicago Making Homelessness History,work_model,https://recruiting.paylocity.com/recruiting/jobs/Details/3926941/All-Chicago-Making-Homelessness-History/Director-of-Programs?source=Indeed_Feed,,,,,2026-09-05
 All Chicago Making Homelessness History,fiscal_sponsor,https://allchicago.org/,benchmark/sources/native/job_ads/src-ad-allchicago.html,text/html,212450,beb392d2e7f3857896e36a4dd70c06b0029472681cf75d8f7b33c801b6e85aa8,2026-09-05
-Alliance for Health Policy,work_model,https://www.allhealthpolicy.org/jobs/paid-nonprofit-development-production-intern,benchmark/sources/native/organization_metadata/job_review_1/alliance_for_health_policy_current.html,text/html,115442,441104206c68a1092aa4feef00dd4b8cc635d9de8677d6b8086f534b3ced4d9c,2026-09-05
+Alliance for Health Policy,work_model,https://www.allhealthpolicy.org/jobs/paid-nonprofit-development-production-intern,,,,,2026-09-05
 Alliance for Health Policy,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202531619349300118_public.xml,benchmark/sources/native/form990/202531619349300118_public.xml,application/xml,46392,1178ca3ef06a7e7cf441994e3e08420198f03b2b20e526bd6601ed4708bbfe95,2026-09-05
 Alliance to Feed the Earth in Disasters,work_model,https://www.impactpool.org/jobs/1191801,,,,,2026-09-05
 Alliance to Feed the Earth in Disasters,fiscal_sponsor,https://allfed.info/images/Annual-Reports/Allfed-Annual-Report-2023.pdf,,,,,2026-09-05
@@ -21,7 +21,7 @@ Animal Welfare Institute,work_model,https://awionline.org/about-us/working-at-aw
 Animal Welfare Institute,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202543189349305814_public.xml,benchmark/sources/native/form990/202543189349305814_public.xml,application/xml,89344,3e4b6f83680e006d2ff01d3ab9f62d48398fed1742a6afa9d45e9834e0b7c48b,2026-09-05
 Appleseed Foundation,work_model,https://appleseednetwork.org/jobs/,,,,,2026-09-05
 Appleseed Foundation,fiscal_sponsor,https://remoteimpact.org/jobs/executive-director-appleseed-foundation/,benchmark/sources/native/job_ads/src-ad-appleseed-2026.html,text/html,87476,255ab028e61878ea73157e237957a908b052d36954b2f1ae8b2968bc68d32407,2026-09-05
-Aquatic Animal Policy Organization,work_model,https://joinhive.substack.com/p/late-april-2026?open=false,benchmark/sources/native/organization_metadata/job_review_2/aapo_hive_listing_2026.html,text/html,235342,0f44002dccee3426d74401dc10ef83cb251fdbd994a0e2a96df8b09591554630,2026-09-05
+Aquatic Animal Policy Organization,work_model,https://joinhive.substack.com/p/late-april-2026?open=false,,,,,2026-09-05
 Aquatic Animal Policy Organization,fiscal_sponsor,https://docs.google.com/document/d/1CjW7mFt9FyA6qDbYV4pYLWyW5KqaAA5QsHRf3hRaPSk/edit?tab=t.0,benchmark/sources/native/job_ads/src-ad-aapo-2026.pdf,application/pdf,82031,404c56d96d2d5afa544d07d12246f24561468da5d2f5a5fcf32073cc74ccb48b,2026-09-05
 Aquatic Life Institute,work_model,https://www.linkedin.com/posts/aquatic-life-institute_aquaticanimalalliance-animaladvocacy-nowhiring-activity-7430324150608498688-Vhl4,,,,,2026-09-05
 Aquatic Life Institute,fiscal_sponsor,https://www.causeiq.com/organizations/aquatic-life-institute%2C873020380/,benchmark/sources/native/supporting/src-peer-aquatic-life-institute.html,text/html,161405,a5ad4fa1509c4d36971cf6e7b1d7bfe5417b73627928e0a714f15eee9bd016c4,2026-09-05
@@ -31,19 +31,19 @@ Better Food Foundation,work_model,https://www.betterfoodfoundation.org/careers/,
 Better Food Foundation,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202533169349305288_public.xml,benchmark/sources/native/form990/202533169349305288_public.xml,application/xml,37471,16f3789da5cc3e54e73f39e34d5b458163171d3cff5f9abb21a06db61893afd7,2026-09-05
 Bipartisan Policy Center,work_model,https://bipartisanpolicy.org/about-us/careers/internships/,,,,,2026-09-05
 Bipartisan Policy Center,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202513109349302561_public.xml,benchmark/sources/native/form990/202513109349302561_public.xml,application/xml,97997,fc506022f88419fecc204fc8e6ef965ddee026729dcbab5cf980d048a933229a,2026-09-05
-Breakthrough Institute,work_model,https://thebreakthrough.org/articles/office-manager-bookkeeper,benchmark/sources/native/organization_metadata/job_review_1/breakthrough_institute_current.html,text/html,64831,d8112ff0d9a45ad24a86dd6f68aa6239edcb513c28fdf65b9813ea3399968f85,2026-09-05
+Breakthrough Institute,work_model,https://thebreakthrough.org/articles/office-manager-bookkeeper,,,,,2026-09-05
 Breakthrough Institute,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2026/202631469349301333_public.xml,benchmark/sources/native/form990/202631469349301333_public.xml,application/xml,56316,b04d7b13c2ea29166f37d846b8bd8b84cc08955ffea3a66a2d14401a32608e3f,2026-09-05
 Brennan Center for Justice,work_model,https://www.brennancenter.org/es/node/10948,benchmark/sources/native/organization_metadata/job_review_2/009_archived_brennan_center_hybrid_fellow.html,text/html,196587,d65f8158cabbc54f9b3a36a7c502bf47bbdfb32a8418f53eb85e35af37c553c2,2026-09-05
 Brennan Center for Justice,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2026/202621289349303897_public.xml,benchmark/sources/native/form990/202621289349303897_public.xml,application/xml,85538,2be14762c33a13ea9f951534ad8fe8652c097fbd8520fc7e740cf6f4834ba0f0,2026-09-05
-Bulletin of the Atomic Scientists,work_model,https://thebulletin.org/about-us/open-positions/,benchmark/sources/native/organization_metadata/job_review_1/bulletin_of_the_atomic_scientists_current.html,text/html,315573,7fcb43694b47493cffccd2a43c66688fece518633c67cafc023156a08fd92fc2,2026-09-05
+Bulletin of the Atomic Scientists,work_model,https://thebulletin.org/about-us/open-positions/,,,,,2026-09-05
 Bulletin of the Atomic Scientists,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2026/202610149349301801_public.xml,benchmark/sources/native/form990/202610149349301801_public.xml,application/xml,45489,68ef8a5e62fabf74effe8963301181227ed8152f3ede45280847635882c82989,2026-09-05
 Candid,work_model,https://candid.org/careers/,benchmark/sources/native/organization_metadata/job_review_2/candid_careers_2026.html,text/html,99912,c092da355b85e28159d366766420ee41d5c1beec5bde318d48de8d01cc44cdd5,2026-09-05
 Candid,fiscal_sponsor,https://candid.org/about/,,,,,2026-09-05
 Carbon Mapper,work_model,https://carbonmapper.betterteam.com/,benchmark/sources/native/organization_metadata/job_review_1/carbon_mapper_careers_2026.html,text/html,1796548,8159168ce48af0b65d673eb9daaa542428789cdd5f5c5f71e52065dd8c480f37,2026-09-05
 Carbon Mapper,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2026/202630139349300833_public.xml,benchmark/sources/native/form990/202630139349300833_public.xml,application/xml,54387,117c39d079b845f7cd1c1e956ebba15510cd2886b911c32854ef9a120630f8bb,2026-09-05
-Center for a Humane Economy,work_model,https://centerforahumaneeconomy.org/contact/,,,,,2026-09-05
+Center for a Humane Economy,work_model,https://cloudjobfinder.com/job/email-fundraising-advocacy-specialist/,,,,,2026-09-05
 Center for a Humane Economy,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202502459349301350_public.xml,benchmark/sources/native/form990/202502459349301350_public.xml,application/xml,58025,e9a0c42f8ecc099678d215fe1ad9b0b0f12943b7b7fa98447e60c93e05d173f4,2026-09-05
-Center for a New American Security,work_model,https://www.cnas.org/careers,benchmark/sources/native/organization_metadata/job_review_1/center_for_a_new_american_security_current.html,text/html,60566,f94b4a7d4bc8db1e6294a413a29be91d9f6a4fa581d3bff65651a783e27b0448,2026-09-05
+Center for a New American Security,work_model,https://www.cnas.org/careers,,,,,2026-09-05
 Center for a New American Security,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202542329349300819_public.xml,benchmark/sources/native/form990/202542329349300819_public.xml,application/xml,59742,d161a7390f029f925721829aab78bac0de18678f178c47b886c1aaa6394b9f8e,2026-09-05
 Center for AI Policy,work_model,https://pac.org/job/policy-analyst-alignment,,,,,2026-09-05
 Center for AI Policy,fiscal_sponsor,https://www.centeraipolicy.org/,,,,,2026-09-05
@@ -51,9 +51,9 @@ Center for AI Safety,work_model,https://jobs.lever.co/aisafety/,benchmark/source
 Center for AI Safety,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202503219349323615_public.xml,benchmark/sources/native/form990/202503219349323615_public.xml,application/xml,51241,ade9e023932ea03e5382186c1ef395ce8af76387d4a43466172c7593e374e02a,2026-09-05
 Center for Arms Control and Non-Proliferation,work_model,https://armscontrolcenter.org/about/jobs-and-internships/,,,,,2026-09-05
 Center for Arms Control and Non-Proliferation,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202523179349304722_public.xml,benchmark/sources/native/form990/202523179349304722_public.xml,application/xml,42359,1611e90ccf79968a3e878546c1aa7e8825b07c49dfbf0e0c2a21ab37fdfba41a,2026-09-05
-Center for Climate and Energy Solutions,work_model,https://www.c2es.org/about/career-opportunities-at-c2es/,benchmark/sources/native/organization_metadata/job_review_1/c2es_careers_2026.html,text/html,124462,f9ad9b14756f1fde27b670b1f2d385dbc32a5f6e7474cc0469bb3827de41c59d,2026-09-05
+Center for Climate and Energy Solutions,work_model,https://www.c2es.org/about/career-opportunities-at-c2es/,,,,,2026-09-05
 Center for Climate and Energy Solutions,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2026/202631619349300808_public.xml,benchmark/sources/native/form990/202631619349300808_public.xml,application/xml,80668,30691fa1f764fa394486ad560dd64e0abec401b4382fb5b20666a125627fe832,2026-09-05
-Center for Democracy & Technology,work_model,https://cdt.hire.trakstar.com/jobs/fk0zm99,benchmark/sources/native/organization_metadata/job_review_2/cdt_externship_2026.html,text/html,133067,49e4f5726aea8358ca4edab5dd506b1c744e9d260e006d77a7338b81e2b63252,2026-09-05
+Center for Democracy & Technology,work_model,https://cdt.hire.trakstar.com/jobs/fk0zm99,,,,,2026-09-05
 Center for Democracy & Technology,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202533219349301933_public.xml,benchmark/sources/native/form990/202533219349301933_public.xml,application/xml,71382,d6e924a0f13486174e1b5baa6f0a5aaff53a98b681155a2eb41f852f651f7089,2026-09-05
 Center for Economic and Policy Research,work_model,https://cepr.net/about/careers/,,,,,2026-09-05
 Center for Economic and Policy Research,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202543169349304999_public.xml,benchmark/sources/native/form990/202543169349304999_public.xml,application/xml,50434,c7076c3f755b19b1cec09682ae1c8704aaaf37771c6ecdcce13e1d7180190484,2026-09-05
@@ -61,25 +61,25 @@ Center for Effective Philanthropy,work_model,https://cep.org/careers/analyst-cam
 Center for Effective Philanthropy,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2026/202602039349300145_public.xml,benchmark/sources/native/form990/202602039349300145_public.xml,application/xml,77677,54e81595c60a00a1ce5adae220f624df6cb0179d324625bcba13378b3c176df3,2026-09-05
 Center for Election Science,work_model,https://www.flexjobs.com/remote-jobs/company/center_for_election_science-ces,,,,,2026-09-05
 Center for Election Science,fiscal_sponsor,https://projects.propublica.org/nonprofits/organizations/452334002/202503189349305870/full,benchmark/sources/native/form990/202503189349305870_rendered.html,text/html,503451,15c64ccb76705b5197f16fbc6674b5316f1c646a6cdbf55e08a9b99b44975a28,2026-09-05
-Center for Health Care Strategies,work_model,https://www.chcs.org/about-us/job-opportunities/,,,,,2026-09-05
+Center for Health Care Strategies,work_model,https://www.jobtarget.com/jobs/jt-klegzgxfou/administrative-assistant-hamilton-township-new-jersey,,,,,2026-09-05
 Center for Health Care Strategies,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2026/202631279349304653_public.xml,benchmark/sources/native/form990/202631279349304653_public.xml,application/xml,67455,6ae0855cd1129e2d321a6fa4301df029eb075b0d3793f87ae13ec9d6f82a9050,2026-09-05
-Center for Humane Technology,work_model,https://center-for-humane-technology.vercel.app/fellowship,,,,,2026-09-05
+Center for Humane Technology,work_model,https://jobs.lever.co/humanetech,,,,,2026-09-05
 Center for Humane Technology,fiscal_sponsor,https://www.causeiq.com/organizations/center-for-humane-technology%2C823492182/,benchmark/sources/native/supporting/src-peer-center-for-humane-technology.html,text/html,165761,d8421dfd09c0fbed3e214cf4d401b097b1618eff998d3eba199d841490b87f5f,2026-09-05
 Center for International Policy,work_model,https://cip065.wixsite.com/website/jobs,,,,,2026-09-05
 Center for International Policy,fiscal_sponsor,https://internationalpolicy.org/publications/cip-announces-its-sponsorship-of-the-forum-on-the-arms-trade/,,,,,2026-09-05
-Center for Law and Social Policy,work_model,https://www.clasp.org/about/careers/,benchmark/sources/native/organization_metadata/job_review_1/clasp_careers_2026.html,text/html,63340,dacd6254d7ac999f7a20b72d22b17d9e13f132af89da2641370184024f95872d,2026-09-05
+Center for Law and Social Policy,work_model,https://www.clasp.org/about/careers/,,,,,2026-09-05
 Center for Law and Social Policy,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202513189349314621_public.xml,benchmark/sources/native/form990/202513189349314621_public.xml,application/xml,77299,aeb7ca84cccc717773351092e4d886f5d13fd0e549db24327b86b22706214aca,2026-09-05
 Center for Open Science,work_model,https://www.cos.io/careers,,,,,2026-09-05
 Center for Open Science,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202513219349318466_public.xml,benchmark/sources/native/form990/202513219349318466_public.xml,application/xml,60178,f91ece7c6381e8f47136d851516f8a2fade57a082144a73b11314cfc3e184637,2026-09-05
 Center for Public Integrity,work_model,https://www.flexjobs.com/remote-jobs/company/center_for_public_integrity,,,,,2026-09-05
 Center for Public Integrity,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2024/202412399349300756_public.xml,benchmark/sources/native/form990/202412399349300756_public.xml,application/xml,52697,f1b7fbda12ed301f3ab17b982741b59bfced1058946ea693f8f38f830848b0bb,2026-09-05
-Center for Responsible Lending,work_model,https://www.responsiblelending.org/about-crl/careers,benchmark/sources/native/organization_metadata/job_review_2/019_archived_center_for_responsible_lending_careers.html,text/html,27530,7b75b101e4c12f89ef94ab03f5565a30e9e4e2db12d35a17b39a848c380bd592,2026-09-05
+Center for Responsible Lending,work_model,https://www.responsiblelending.org/about-crl/careers,,,,,2026-09-05
 Center for Responsible Lending,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2026/202621149349301437_public.xml,benchmark/sources/native/form990/202621149349301437_public.xml,application/xml,67552,c6d52677d4ff3547cd9c1cd90902179b783fce48c985e13dd2eb1c9ca2a17849,2026-09-05
 Center for Scientific Collaboration and Community Engagement,work_model,https://www.cscce.org/2023/01/25/an-update-on-cscce-staff-changes-new-year-new-org-chart/,,,,,2026-09-05
 Center for Scientific Collaboration and Community Engagement,fiscal_sponsor,https://www.cscce.org/,benchmark/sources/native/job_ads/src-ad-cscce.html,text/html,110208,1e41eb60e51d29ac684814a2dca01bdaed2e4548f7851ec59af9d1fc7a69c7ce,2026-09-05
 Charity Navigator,work_model,https://charitynavigator.hire.trakstar.com/jobs/fk0zqky/,,,,,2026-09-05
 Charity Navigator,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2026/202640789349301509_public.xml,benchmark/sources/native/form990/202640789349301509_public.xml,application/xml,63243,8d37772f29bf2c56f3bec4df971a9d7676a87634357600620527969c0544972f,2026-09-05
-Charter Cities Institute,work_model,https://chartercitiesinstitute.org/careers/,benchmark/sources/native/organization_metadata/job_review_1/charter_cities_institute_current.html,text/html,178457,e49b82d3719d1345f4f5eda1b39d7180a9f505535ed83e6dd9f11c7ae1aa6be7,2026-09-05
+Charter Cities Institute,work_model,https://chartercitiesinstitute.org/careers/,,,,,2026-09-05
 Charter Cities Institute,fiscal_sponsor,https://www.causeiq.com/organizations/institute-for-innovative-governance-center-for-inn%2C823264419/,benchmark/sources/native/supporting/src-peer-charter-cities-institute.html,text/html,165749,16682fbe82593bedae7273f2eef89af62da38a5d668a6a5eb79f2b7a5337e5b2,2026-09-05
 Chicago Council on Global Affairs,work_model,https://www.jobleads.com/us/job/program-officer--chicago--eca0dfd6cf6f0e5e1d474f3ee6f951ac8,,,,,2026-09-05
 Chicago Council on Global Affairs,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202543179349309229_public.xml,benchmark/sources/native/form990/202543179349309229_public.xml,application/xml,91414,238ec567e23543586fa3faff47ee8681e000fcba5a71df96e033cdb175adca8f,2026-09-05
@@ -127,15 +127,15 @@ Effective Institutions Project,work_model,https://effectivealtruism.nz/job-board
 Effective Institutions Project,fiscal_sponsor,https://projects.propublica.org/nonprofits/organizations/932725003,benchmark/sources/native/supporting/src-peer-effective-institutions-project.html,text/html,162602,65c38046f65bc05a8d7768307be33fad894270b35d1dbac36ae10fc123465d07,2026-09-05
 Electronic Frontier Foundation,work_model,https://www.eff.org/el/about/opportunities/interns,,,,,2026-09-05
 Electronic Frontier Foundation,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2026/202610989349301676_public.xml,benchmark/sources/native/form990/202610989349301676_public.xml,application/xml,82447,42427ec5c4f075f6287baa2e6bb0c85fd74eec9310bf64e8ca885f50d0fe421d,2026-09-05
-Energy for Growth Hub,work_model,https://energyforgrowth.org/careers/,benchmark/sources/native/organization_metadata/job_review_1/energy_for_growth_careers_2026.html,text/html,290509,326f9f70f30cd23bdf2797c80bcbd55c9f9551277542bd5df7a5a1ca83e0c016,2026-09-05
+Energy for Growth Hub,work_model,https://energyforgrowth.org/careers/,,,,,2026-09-05
 Energy for Growth Hub,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202513219349322806_public.xml,benchmark/sources/native/form990/202513219349322806_public.xml,application/xml,43590,9f0c90d6b503ff1fc27be2e8e5bd699c88c6301a169577c51a079973bfeea4cb,2026-09-05
-Environmental Law Institute,work_model,https://www.eli.org/employment,,,,,2026-09-05
+Environmental Law Institute,work_model,https://www.terra.do/climate-jobs/job-board/law-fellow-climate-and-energy-8378914/,,,,,2026-09-05
 Environmental Law Institute,fiscal_sponsor,https://www.environmentalpeacebuilding.org/association/secretariat,,,,,2026-09-05
 Environmental Leadership Program,work_model,https://elpnet.org/director-of-people-operations,benchmark/sources/native/organization_metadata/job_review_1/elp_director_people_ops_2023.html,text/html,33131,e939c04047f700f6e8caf942ed415f6330812f6f93f78d06fc61d8ff848face7,2026-09-05
 Environmental Leadership Program,fiscal_sponsor,https://elpnet.org/executive-director-position,benchmark/sources/native/job_ads/src-ad-elp-2026.pdf,application/pdf,190097,9af98447d43173cc04d981a81e034718abf9d63ece16a1a9795697394b118788,2026-09-05
 Evidence Action,work_model,https://www.evidenceaction.org/about/careers,,,,,2026-09-05
 Evidence Action,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202512829349302256_public.xml,benchmark/sources/native/form990/202512829349302256_public.xml,application/xml,83930,79ab1ca712108c3b2dadfcb058f3c6320c623798d3d816f22e32c03c41a4c37c,2026-09-05
-Exponent Philanthropy,work_model,https://exponentphilanthropy.org/our-mission/careers/,benchmark/sources/native/organization_metadata/job_review_1/exponent_careers_2026.html,text/html,91372,e3ac8af67e60e547193ee900257cc8310b6f1d449fb2012433ab95422cf60fcd,2026-09-05
+Exponent Philanthropy,work_model,https://exponentphilanthropy.org/our-mission/careers/,,,,,2026-09-05
 Exponent Philanthropy,fiscal_sponsor,https://exponentphilanthropy.org/resource/serving-as-a-fiscal-sponsor/,,,,,2026-09-05
 FAR AI,work_model,https://www.aisafetycareers.com/jobs/3245b2fd-b6ca-400c-ba12-98fd55601fe1,,,,,2026-09-05
 FAR AI,fiscal_sponsor,https://far.ai/news/safe-ai-forum-spins-out-from-far-ai,,,,,2026-09-05
@@ -171,7 +171,7 @@ Global Health Corps,work_model,https://ghcorps.org/careers-at-ghc/,benchmark/sou
 Global Health Corps,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2026/202600139349300115_public.xml,benchmark/sources/native/form990/202600139349300115_public.xml,application/xml,45989,f3e7f8f57d55f15a42fd38e5eadda1104a3d9be34ee227523c7c59a6a96a6ade,2026-09-05
 Good Food Institute,work_model,https://gfi.org/careers/,,,,,2026-09-05
 Good Food Institute,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202543189349301719_public.xml,benchmark/sources/native/form990/202543189349301719_public.xml,application/xml,105793,28a786407ddd2290dc18a411aff6d3f97532aff7e16c9df77df90bb0b64de6a8,2026-09-05
-Grantmakers for Education,work_model,https://www.edfunders.org/jobs-and-opportunities-board/,benchmark/sources/native/organization_metadata/job_review_1/grantmakers_education_board_2026.html,text/html,165316,e242883f79e6a605f0e41790c7bb90da19ec881f03b40e865a05954863c337e6,2026-09-05
+Grantmakers for Education,work_model,https://www.edfunders.org/jobs-and-opportunities-board/,,,,,2026-09-05
 Grantmakers for Education,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202543079349303299_public.xml,benchmark/sources/native/form990/202543079349303299_public.xml,application/xml,51166,7dda32637934911e551f3128e03906772d8963f20cf5998e09e47a265f79f4f6,2026-09-05
 Grantmakers for Effective Organizations,work_model,https://geofunders.herokuapp.com/about-us/jobs,,,,,2026-09-05
 Grantmakers for Effective Organizations,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202503109349303655_public.xml,benchmark/sources/native/form990/202503109349303655_public.xml,application/xml,66905,f781f7fc3432911e7ea78cb22137975daeb28cd97ff6fd7a0ddcc8b451ef0c93,2026-09-05
@@ -179,9 +179,9 @@ Great Basin Water Network,work_model,https://epm.ucdavis.edu/job-listing/executi
 Great Basin Water Network,fiscal_sponsor,https://careers.councilofnonprofits.org/jobs/executive-director-in-reno-nevada-us/,benchmark/sources/native/job_ads/src-ad-gbwn-2026.html,text/html,53321,302cfa6fd71ffff3b039b5d7be89a2f458bcb88b79b659cfbae3be047571c4df,2026-09-05
 Guttmacher Institute,work_model,https://www.metaintro.com/company/guttmacher-institute,,,,,2026-09-05
 Guttmacher Institute,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2023/202341989349301459_public.xml,benchmark/sources/native/form990/202341989349301459_public.xml,application/xml,98904,f092efd744a14d544c5faa1356561f00f00fcb0ff18b0d686622f5a401d0ecbc,2026-09-05
-Hagley Museum and Library,work_model,https://www.hagley.org/about-us/employment,benchmark/sources/native/organization_metadata/job_review_1/hagley_employment_2026.html,text/html,218105,0340a6636364b3bf8cd83aec922b17081f81527663e5f4b6e5de0a63f8375d53,2026-09-05
+Hagley Museum and Library,work_model,https://www.hagley.org/about-us/employment,,,,,2026-09-05
 Hagley Museum and Library,fiscal_sponsor,https://www.hagley.org/about-us,,,,,2026-09-05
-Healthcare Career Advancement Program,work_model,https://www.hcapinc.org/,,,,,2026-09-05
+Healthcare Career Advancement Program,work_model,https://www.linkedin.com/jobs/view/program-manager-registered-apprenticeship-remote-at-h-cap-healthcare-career-advancement-program-4454269695,,,,,2026-09-05
 Healthcare Career Advancement Program,fiscal_sponsor,https://careers.arena.run/companies/seiu-2/jobs/66223842-executive-director-h-cap,"benchmark/sources/native/manual_browser/src-ad-hcap-2026/Executive Director, H-CAP @ SEIU _ Arena Job Board.html",text/html,193352,d483e43eb536c6d432bd5a25cd68777c50126c5cb220ace432bbfa9ef4bf0a4c,2026-09-05
 High Impact Athletes,work_model,https://www.linkedin.com/company/high-impact-athletes,,,,,2026-09-05
 High Impact Athletes,fiscal_sponsor,https://www.highimpactathletes.org/abouthia,,,,,2026-09-05
@@ -191,9 +191,9 @@ IDinsight,work_model,https://www.idinsight.org/about/careers/,benchmark/sources/
 IDinsight,fiscal_sponsor,https://www.idinsight.org/about/careers/,,,,,2026-09-05
 Independent Sector,work_model,https://independentsector.org/careers/,,,,,2026-09-05
 Independent Sector,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202502349349301110_public.xml,benchmark/sources/native/form990/202502349349301110_public.xml,application/xml,91944,0a39f094059c8c897208c2338ed58d9f5f16a5fba497389c6134fed762347e5b,2026-09-05
-Information Technology and Innovation Foundation,work_model,https://itif.org/jobs/,benchmark/sources/native/organization_metadata/job_review_1/itif_jobs_2026.html,text/html,39978,b6a677b9a33b655d7a77f720d335cae755726614debcaebe5f5854c393d28cec,2026-09-05
+Information Technology and Innovation Foundation,work_model,https://itif.org/jobs/,,,,,2026-09-05
 Information Technology and Innovation Foundation,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2026/202630159349300603_public.xml,benchmark/sources/native/form990/202630159349300603_public.xml,application/xml,68002,d3a214e980d86b3c1631b6664f2cedf88bc2592d2acaa496fe28a2bb7304f310,2026-09-05
-Injustice Watch,work_model,https://www.injusticewatch.org/about/jobs/,,,,,2026-09-05
+Injustice Watch,work_model,https://www.linkedin.com/posts/maxinecain_who-do-you-know-that-is-looking-for-a-job-activity-7421181910380449792-_Wpu,,,,,2026-09-05
 Injustice Watch,fiscal_sponsor,https://www.injusticewatch.org/about/policies/,,,,,2026-09-05
 Innovations for Poverty Action,work_model,https://poverty-action.org/careers,benchmark/sources/native/organization_metadata/job_review_1/ipa_careers_2026.html,text/html,92198,17f36d70a772ac11863794a9d690b5e07f3fddad7d13552c19849f702e4052ad,2026-09-05
 Innovations for Poverty Action,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202513169349300641_public.xml,benchmark/sources/native/form990/202513169349300641_public.xml,application/xml,103438,751985675ca0cea9fca39bebd4f9626c000a22b4889b88ee834c0d1869f02a6a,2026-09-05
@@ -203,7 +203,7 @@ Institute for Market Transformation,work_model,https://www.cityenergyproject.org
 Institute for Market Transformation,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202512829349300921_public.xml,benchmark/sources/native/form990/202512829349300921_public.xml,application/xml,63799,8fd905966f0c02fb45a755a591099191b7d8585e315fcd42457091f7c5cf6278,2026-09-05
 Institute for Nonprofit News,work_model,https://www.mediabistro.com/jobs/3325588667-remote-senior-editor-investigative-research,,,,,2026-09-05
 Institute for Nonprofit News,fiscal_sponsor,https://inn.org/resource/inn-fiscal-sponsorship/,,,,,2026-09-05
-Institute for Policy Studies,work_model,https://ips-dc.org/about/contact/,benchmark/sources/native/organization_metadata/job_review_1/ips_contact_2026.html,text/html,88883,538b1c3093ab6ca10e6b2b0b07658423d992d30e220ba639cfc0ecc82add9eb0,2026-09-05
+Institute for Policy Studies,work_model,https://ips-dc.org/about/contact/,,,,,2026-09-05
 Institute for Policy Studies,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202513219349302816_public.xml,benchmark/sources/native/form990/202513219349302816_public.xml,application/xml,58814,1d6b40acc301848295ae6eceb4909850e9efd1108e4b003458a1b979e7e723da,2026-09-05
 Institute for Security and Technology,work_model,https://securityandtechnology.org/senior-associate-cyber/,,,,,2026-09-05
 Institute for Security and Technology,fiscal_sponsor,https://securityandtechnology.org/wp-content/uploads/2025/07/Institute-For-Security-And-Technology-990-2022.pdf,,,,,2026-09-05
@@ -227,15 +227,15 @@ Lead Exposure Elimination Project,work_model,https://leadelimination.org/jobs/,b
 Lead Exposure Elimination Project,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2026/202631969349301838_public.xml,benchmark/sources/native/form990/202631969349301838_public.xml,application/xml,46508,c83f569c9d2281ec225f6d2e43c8dbe533f0deaecd5dc9ca7738e88654ef0391,2026-09-05
 Learning Policy Institute,work_model,https://learningpolicyinstitute.org/careers/about-lpi-internship,,,,,2026-09-05
 Learning Policy Institute,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202503179349312065_public.xml,benchmark/sources/native/form990/202503179349312065_public.xml,application/xml,59496,e180c43081750a372cccf5490232f0260f498083ec7235a8df8cf8ef9ac40d06,2026-09-05
-Legal Priorities Project,work_model,https://law-ai.org/career/research-fellow/,,,,,2026-09-05
+Legal Priorities Project,work_model,https://forum.effectivealtruism.org/posts/xen7oLdHwoHDTG4hR/legal-priorities-project-annual-report-2022,,,,,2026-09-05
 Legal Priorities Project,fiscal_sponsor,https://law-ai.org/career/research-fellow/,,,,,2026-09-05
 Leverage Research,work_model,https://wellfound.com/company/leverageresearch/jobs,,,,,2026-09-05
 Leverage Research,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202523239349301652_public.xml,benchmark/sources/native/form990/202523239349301652_rendered.html,text/html,488575,50ae947ac9f313081c7bb5191123525fac12b7ea862954a7590f09d7fa84dd1a,2026-09-05
-Living Goods,work_model,https://livinggoods.org/wp-content/uploads/2023/02/Living-Goods_2022-Year-End-Report.pdf,benchmark/sources/native/organization_metadata/job_review_1/living_goods_2022_report.pdf,application/pdf,4813251,1ea4126b5c2bb0e74122e41efd4d23bbc55dd2fbf047f9970f02f1bae09d6f7c,2026-09-05
+Living Goods,work_model,https://livinggoods.org/wp-content/uploads/2023/02/Living-Goods_2022-Year-End-Report.pdf,,,,,2026-09-05
 Living Goods,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2024/202433199349307518_public.xml,benchmark/sources/native/form990/202433199349307518_public.xml,application/xml,65398,15bd0cfbb03575b0f49dd48503360913c7889fd5188b7d0ee8895d727070fee9,2026-09-05
 Magnify Mentoring,work_model,https://www.magnifymentoring.org/post/we-are-hiring-a-recruitment-program-manager,,,,,2026-09-05
 Magnify Mentoring,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2026/202601479349201500_public.xml,benchmark/sources/native/form990/202601479349201500_rendered.html,text/html,157413,6d9cc2005ded53a5f28d675fa749bedbcc4214a0b4cfe3bdd9aa25e626c499b2,2026-09-05
-Marine Science Institute,work_model,https://aeoe.org/Find-a-Job/13574048,"benchmark/sources/native/manual_browser/src-ad-msi/AEOE - Executive Director - Marine Science Institute (Redwood City, CA).html",text/html,80526,3ac80d0ba6b8f4e4de50046eea41655ddf5f6c2410c064eedeb16262d995d47b,2026-09-05
+Marine Science Institute,work_model,https://aeoe.org/Find-a-Job/13574048,,,,,2026-09-05
 Marine Science Institute,fiscal_sponsor,https://www.sfbaymsi.org/employment,,,,,2026-09-05
 Mercy For Animals,work_model,https://mercyforanimals.org/about/careers/,,,,,2026-09-05
 Mercy For Animals,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202502259349301135_public.xml,benchmark/sources/native/form990/202502259349301135_public.xml,application/xml,78280,22bc2673ca9fd269b3b8ec2bbef7f2df2ec87470393a85b4f909d4ecb3d9709d,2026-09-05
@@ -247,7 +247,7 @@ MOST Policy Initiative,work_model,https://onthinktanks.org/job/executive-directo
 MOST Policy Initiative,fiscal_sponsor,https://onthinktanks.org/job/executive-director-15/,benchmark/sources/native/job_ads/src-ad-most-2025.html,text/html,61273,4bc8bcf65371ec3eee0c07db653a4b4f8930a04f071a716336b8fc6a6b691822,2026-09-05
 MuckRock Foundation,work_model,https://www.muckrock.com/jobs/,,,,,2026-09-05
 MuckRock Foundation,fiscal_sponsor,https://www.muckrock.com/staff/,,,,,2026-09-05
-National Academy for State Health Policy,work_model,https://ats.rippling.com/nashp/jobs,benchmark/sources/native/organization_metadata/job_review_1/nasph_careers_2026.html,text/html,160555,37d2ecf697cbfdc0562de8f014df4d68e4440f2f0e271782afff89066b2ec8c6,2026-09-05
+National Academy for State Health Policy,work_model,https://ats.rippling.com/nashp/jobs,,,,,2026-09-05
 National Academy for State Health Policy,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202503179349302775_public.xml,benchmark/sources/native/form990/202503179349302775_public.xml,application/xml,55729,7418439f348b663ccddf54eb69e05609fff41747222f480ee7701f7a65331674,2026-09-05
 National Committee for Responsive Philanthropy,work_model,https://www.flexjobs.com/remote-jobs/company/national_committee_for_responsive_philanthropy,,,,,2026-09-05
 National Committee for Responsive Philanthropy,fiscal_sponsor,https://ncrp.org/wp-content/uploads/2026/03/NCRP-Audited-Financial-Statements-FY25.pdf,,,,,2026-09-05
@@ -255,7 +255,7 @@ National Employment Law Project,work_model,https://www.nelp.org/about-us/work-at
 National Employment Law Project,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202523089349302957_public.xml,benchmark/sources/native/form990/202523089349302957_public.xml,application/xml,71495,833c234e9bf0544e560ab6ff8210743a51f095f054bd3f9583e5cb7c212b84ac,2026-09-05
 National Press Foundation,work_model,https://www.idealist.org/en/media-jobs-baltimore-md,,,,,2026-09-05
 National Press Foundation,fiscal_sponsor,https://nationalpress.org/,benchmark/sources/native/job_ads/src-ad-npf.html,text/html,135173,3da9bdc14f646d9635b58c530a4fbe2badd96421a8175091374627f35476a0ce,2026-09-05
-New America,work_model,https://www.newamerica.org/careers/,benchmark/sources/native/organization_metadata/job_review_1/new_america_careers_2026.html,text/html,64126,4181e61b9534f9c02c54edf09ef4cddc28b8cfe6fc0035614f01fd7bb65e839a,2026-09-05
+New America,work_model,https://www.newamerica.org/careers/,,,,,2026-09-05
 New America,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202513109349304131_public.xml,benchmark/sources/native/form990/202513109349304131_public.xml,application/xml,129953,c55a4ebe3104cfaa095aa8d22afe749110903e2b1801c057aa8632c144241c05,2026-09-05
 New Harvest,work_model,https://www.new-harvest.org/blog/hiring-chief-operating-officer,,,,,2026-09-05
 New Harvest,fiscal_sponsor,https://www.new-harvest.org/blog/hiring-chief-operating-officer,,,,,2026-09-05
@@ -267,11 +267,11 @@ Niskanen Center,work_model,https://www.niskanencenter.org/careers/,benchmark/sou
 Niskanen Center,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202523179349301947_public.xml,benchmark/sources/native/form990/202523179349301947_public.xml,application/xml,65583,d947331365e24d53aa92a48433d6f6f090195239f9d141772e7fdfd824da80c1,2026-09-05
 Nonhuman Rights Project,work_model,https://www.nonhumanrights.org/work-with-us/,,,,,2026-09-05
 Nonhuman Rights Project,fiscal_sponsor,https://www.nonhumanrights.org/about-us/,,,,,2026-09-05
-Nuclear Innovation Alliance,work_model,https://nuclearinnovationalliance.org/career-opportunities,benchmark/sources/native/organization_metadata/job_review_1/nia_careers_2026.html,text/html,47566,11209e83ce7c1bbb8a1fd5cf9326dddfecf5994e1e94566b6220deab2891430b,2026-09-05
+Nuclear Innovation Alliance,work_model,https://nuclearinnovationalliance.org/career-opportunities,,,,,2026-09-05
 Nuclear Innovation Alliance,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2026/202621339349301817_public.xml,benchmark/sources/native/form990/202621339349301817_public.xml,application/xml,37716,5990d380b548157833927ec47b5c87a4a785422b08fab771b781335c5538d466,2026-09-05
-Nuclear Threat Initiative,work_model,https://www.linkedin.com/posts/the-nuclear-threat-initiative_nti-internship-application-summer-2026-activity-7424856328306872321-ZsnD,,,,,2026-09-05
+Nuclear Threat Initiative,work_model,https://www.linkedin.com/posts/tabithasanders_the-nuclear-threat-initiative-is-looking-activity-6762420635584073730-0mFI,,,,,2026-09-05
 Nuclear Threat Initiative,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202522119349301667_public.xml,benchmark/sources/native/form990/202522119349301667_public.xml,application/xml,129609,6e51864590f824e0373f0b304bfa45ffad908702dd9954f7daa799fc872e8f3d,2026-09-05
-NumFOCUS,work_model,https://numfocus.org/,benchmark/sources/native/organization_metadata/job_review_1/numfocus_home_2026.html,text/html,182398,0e98fc1c34884d13021f9477b3343661590f8aefc4fdc8378df04f2ff2523945,2026-09-05
+NumFOCUS,work_model,https://numfocus.org/,,,,,2026-09-05
 NumFOCUS,fiscal_sponsor,https://numfocus.org/programs,benchmark/sources/native/organization_metadata/batch_3/numfocus_programs.html,text/html,187483,ab113fe9b2a016d46a3e06576600be27c0083b94ea719c454a4c5201a9379c57,2026-09-05
 One for the World,work_model,https://www.linkedin.com/posts/one-for-the-world_we-are-hiring-a-full-time-remote-program-activity-7306328800051511297-14dg,,,,,2026-09-05
 One for the World,fiscal_sponsor,https://1fortheworld.org/our-team,benchmark/sources/native/organization_metadata/batch_3/one_for_the_world_team.html,text/html,531458,2fa4f012f9f7ad38c18fc5de00fe31e581306461f263d250bff3f01095c49da9,2026-09-05
@@ -293,7 +293,7 @@ PEAK Grantmaking,work_model,https://nonprofithr.applytojob.com/apply/RQG6pztBvo/
 PEAK Grantmaking,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202511219349301641_public.xml,benchmark/sources/native/form990/202511219349301641_public.xml,application/xml,66925,a164cb1dbd7b7c54dc85b35fc0bdc30433ebce9c308597452c50c5f85144f771,2026-09-05
 Peterson Institute for International Economics,work_model,https://www.piie.com/employment/research-analyst-us-economic-statistics,benchmark/sources/native/organization_metadata/job_review_1/piie_analyst_2026.html,text/html,64251,64af80a8f0aa99afb7e5b284fce651b6d67c6a7611eac964a1f507c18d4cb54b,2026-09-05
 Peterson Institute for International Economics,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2026/202611189349300636_public.xml,benchmark/sources/native/form990/202611189349300636_public.xml,application/xml,90658,1205da2294db196d86d84e71efe907033931fa2233fa778135a98ca9c0b42c75,2026-09-05
-Physicians Committee for Responsible Medicine,work_model,https://pcrm.applicantpro.com/,,,,,2026-09-05
+Physicians Committee for Responsible Medicine,work_model,https://www.pcrm.org/about-us/careers/nutrition-educator,,,,,2026-09-05
 Physicians Committee for Responsible Medicine,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2026/202630169349300803_public.xml,benchmark/sources/native/form990/202630169349300803_public.xml,application/xml,94225,3033e83233895a57501dac0a9b62c86eaf3f0dbe2208fbf2a41e97eae0f79ca4,2026-09-05
 Physicians for Social Responsibility,work_model,https://psr.org/about/,,,,,2026-09-05
 Physicians for Social Responsibility,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202512749349301461_public.xml,benchmark/sources/native/form990/202512749349301461_public.xml,application/xml,59656,303e50be9360a60f98d6cd536db71db98c837668a2de4b3c6c4f93ca1bce71aa,2026-09-05
@@ -307,11 +307,11 @@ Precision Development,work_model,https://precisiondev.org/about-us/careers/,benc
 Precision Development,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2024/202433199349302193_public.xml,benchmark/sources/native/form990/202433199349302193_public.xml,application/xml,43070,2f5337b4c585543cede07020b0efaa82e0aa4d20a9ad640df012c12aed08b792,2026-09-05
 Project Drawdown,work_model,https://drawdown.org/careers/senior-digital-designer-climate-science,,,,,2026-09-05
 Project Drawdown,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202512529349301621_public.xml,benchmark/sources/native/form990/202512529349301621_public.xml,application/xml,49850,794062f41e8de2550048acb39e7afc812f5f45964ba069de197e27871a176d58,2026-09-05
-Project Healthy Children,work_model,https://sanku.com/contact/,,,,,2026-09-05
+Project Healthy Children,work_model,https://www.zoomtanzania.net/employer/sanku-tanzania/,,,,,2026-09-05
 Project Healthy Children,fiscal_sponsor,https://sanku.com/wp-content/uploads/2026/03/Sanku990_FY24.pdf,benchmark/sources/native/form990/sanku_2024_form990.pdf,application/pdf,571427,da15f03e589e8e1a0ed14b7580d6a330b3ea4cf13578bf501a63e6aa8072aba9,2026-09-05
-Public Agenda,work_model,https://publicagenda.org/about/careers/,,,,,2026-09-05
+Public Agenda,work_model,https://civicstudies.org/category/from-the-community/,,,,,2026-09-05
 Public Agenda,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2026/202631029349300503_public.xml,benchmark/sources/native/form990/202631029349300503_public.xml,application/xml,48019,35b423fee58901668774576b88259ec69de55eb70d8964d5376b4ebbe7fbd698,2026-09-05
-Public Knowledge,work_model,https://publicknowledge.applytojob.com/apply,benchmark/sources/native/organization_metadata/job_review_1/public_knowledge_ats_2026.html,text/html,91952,bef806327182624a066a4adbe49c645d6af5148a35effb42c838db26d80d566c,2026-09-05
+Public Knowledge,work_model,https://publicknowledge.applytojob.com/apply,,,,,2026-09-05
 Public Knowledge,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202533149349301903_public.xml,benchmark/sources/native/form990/202533149349301903_public.xml,application/xml,53843,5f215e06b07e5b588f6698b4bee7e943b7eec8b6c75fcf9f56a83686e0e046b4,2026-09-05
 Public Library of Science,work_model,https://job-boards.greenhouse.io/plos,,,,,2026-09-05
 Public Library of Science,fiscal_sponsor,https://plos.org/about/,,,,,2026-09-05
@@ -319,17 +319,17 @@ Public Religion Research Institute,work_model,https://members.apsanet.org/portal
 Public Religion Research Institute,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202533189349309763_public.xml,benchmark/sources/native/form990/202533189349309763_public.xml,application/xml,49604,5e6b8902ffadbe98438913629a1d1a52dba493badf53608b30a658fb1cf2a665,2026-09-05
 Pure Earth,work_model,https://pureearth.org/careers/,,,,,2026-09-05
 Pure Earth,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202532809349302073_public.xml,benchmark/sources/native/form990/202532809349302073_public.xml,application/xml,78816,3f1f278275fc8c2b042e1705769265cccdc36b428cfee9e6a40e3ef940b182c1,2026-09-05
-Qualia Research Institute,work_model,https://qri.org/volunteer,benchmark/sources/native/organization_metadata/job_review_1/qri_volunteer_2026.html,text/html,7951,bb3beebf795b74023a2b9a91c0b4b2ca1ec53f6b2d75421a75c0ae6e2e8cfeba,2026-09-05
+Qualia Research Institute,work_model,https://qri.org/volunteer,,,,,2026-09-05
 Qualia Research Institute,fiscal_sponsor,https://projects.propublica.org/nonprofits/organizations/825457325,benchmark/sources/native/form990/202503499349300780_rendered.html,text/html,489581,119d50f3b7d0e3522eb7206b52897c33a2e89cb9359453e2d02ed02c7c16898b,2026-09-05
 Quincy Institute for Responsible Statecraft,work_model,https://www.linkedin.com/posts/quincyinst_the-quincy-institute-is-hiring-quincy-institute-activity-7148746107307642881-t4Rc,,,,,2026-09-05
 Quincy Institute for Responsible Statecraft,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202523169349300137_public.xml,benchmark/sources/native/form990/202523169349300137_public.xml,application/xml,56795,aa714b9c9d44f1f5a925eb3ba23fa8a238d8afe32a9f9eb3cade4ba3f6aff3ba,2026-09-05
-R Street Institute,work_model,https://www.rstreet.org/about-r-street/employment/,benchmark/sources/native/organization_metadata/job_review_1/r_street_employment_2026.html,text/html,155254,86023c7332abdd460718cf84ca430b5d3e9cbf9ba0fe1ae71e9f84a6f15c6a88,2026-09-05
+R Street Institute,work_model,https://www.rstreet.org/about-r-street/employment/,,,,,2026-09-05
 R Street Institute,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202503119349301245_public.xml,benchmark/sources/native/form990/202503119349301245_public.xml,application/xml,63146,920493b9aa4cfe4095d8ff47e8dda045080d66d678b6e5c621556a35e472b6ff,2026-09-05
 Reach Out and Read (regional executive role),work_model,https://recruiting.paylocity.com/recruiting/jobs/All/2e2be09b-95da-4d67-8194-872c719eb3f8/Reach-Out-and-Read,,,,,2026-09-05
 Reach Out and Read (regional executive role),fiscal_sponsor,,benchmark/sources/raw/src-ad-reach-out-and-read-excluded.txt,text/plain,1227,2edb9bee70c0b3a0aeee65db26ff37b87f52d5a4bb826b387dd587cd15f925a0,2026-09-05
 Redwood Research,work_model,https://www.redwoodresearch.org/careers,,,,,2026-09-05
 Redwood Research,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202503199349302920_public.xml,benchmark/sources/native/form990/202503199349302920_public.xml,application/xml,38346,ab71b7113874c9da8fd610db1ab63414e6029c0ca4b3ec3560aefc2d36fb70d4,2026-09-05
-Research!America,work_model,https://www.researchamerica.org/about/careers/,,,,,2026-09-05
+Research!America,work_model,https://www.careerbuilder.com/job-details/senior-director-of-finance-and-administration-arlington-va--6a110aa8-c941-4ed7-8ba1-5828da8fadc5,,,,,2026-09-05
 Research!America,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2026/202601319349302140_public.xml,benchmark/sources/native/form990/202601319349302140_public.xml,application/xml,87791,135c4353237b6d34538b4f875445384b014f16be3b77ab210161fa368bc0e9b8,2026-09-05
 Resolve to Save Lives,work_model,https://resolvetosavelives.org/about/careers/,benchmark/sources/native/organization_metadata/job_review_1/resolve_careers_2026.html,text/html,188638,806ef6d887e144d0324b06b10c877198734e46481c91a914771a6282069589a5,2026-09-05
 Resolve to Save Lives,fiscal_sponsor,https://resolvetosavelives.org/about/,,,,,2026-09-05
@@ -355,13 +355,13 @@ Sightline Institute,work_model,https://www.sightline.org/about/careers/,benchmar
 Sightline Institute,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202522249349300332_public.xml,benchmark/sources/native/form990/202522249349300332_public.xml,application/xml,53866,85ad4d561e4cb9ce63344fd55e5c71c0279f28dc3da60e96387606fcbff451a6,2026-09-05
 Snap Foundation,work_model,https://www.snapfoundation.org/careers/careers,,,,,2026-09-05
 Snap Foundation,fiscal_sponsor,https://www.snapfoundation.org/about,,,,,2026-09-05
-Social Science Research Council,work_model,https://job-boards.greenhouse.io/socialscienceresearchcouncil?error=true,benchmark/sources/native/organization_metadata/job_review_1/ssrc_ats_2026.html,text/html,23970,58519cddd29cc10be27845855d0e9c51b35d138d89280ae6ad295b9bd36b4943,2026-09-05
+Social Science Research Council,work_model,https://job-boards.greenhouse.io/socialscienceresearchcouncil?error=true,,,,,2026-09-05
 Social Science Research Council,fiscal_sponsor,https://www.ssrc.org/how-we-work/,,,,,2026-09-05
 Software Freedom Conservancy,work_model,https://sfconservancy.org/news/2020/nov/02/2020-11-hiring/,,,,,2026-09-05
 Software Freedom Conservancy,fiscal_sponsor,https://sfconservancy.org/docs/conservancy_annual-report_fy-2012.pdf,benchmark/sources/native/organization_metadata/batch_3/software_freedom_conservancy_2012_annual_report.pdf,application/pdf,3278676,cb91f55c7e0bbaf7f3d84a33c10685fa485cf3f9a669d5da77c8e250c127de7e,2026-09-05
 Stimson Center,work_model,https://www.stimson.org/about/people/careersitespro/,,,,,2026-09-05
 Stimson Center,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202533169349304988_public.xml,benchmark/sources/native/form990/202533169349304988_public.xml,application/xml,71792,cdb8095e89f2e7296c9dd9aff30f12f504cff96a1a0bf1c061f25f638006e53c,2026-09-05
-StrongMinds,work_model,https://strongminds.org/careers/,,,,,2026-09-05
+StrongMinds,work_model,https://oxfordhr.com/wp-content/uploads/2023/11/StrongMinds-Relationships-Manager.pdf,,,,,2026-09-05
 StrongMinds,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202511719349300036_public.xml,benchmark/sources/native/form990/202511719349300036_public.xml,application/xml,43874,13adc2f781f0f3d3d57baf4bea3b5248a332e1bf8dbb4e4173479ffa1a847d0a,2026-09-05
 Taimaka,work_model,https://taimaka.org/careers/executive-director,benchmark/sources/native/organization_metadata/job_review_1/taimaka.pdf,application/pdf,144066,40b9050b2fd4df00b6161a2932c9e73134910f3a80ce135d95ee5d15add42d7b,2026-09-05
 Taimaka,fiscal_sponsor,https://taimaka.org/careers/executive-director,benchmark/sources/native/job_ads/src-ad-taimaka-2025.pdf,application/pdf,144066,40b9050b2fd4df00b6161a2932c9e73134910f3a80ce135d95ee5d15add42d7b,2026-09-05
@@ -383,7 +383,7 @@ The LeadersTrust,work_model,https://theleaderstrust.org/now-hiring-executive-dir
 The LeadersTrust,fiscal_sponsor,https://theleaderstrust.org/now-hiring-executive-director/,benchmark/sources/native/job_ads/src-ad-leaderstrust-2026.html,text/html,222063,9f37b4b90ef7e57b0841a6d33e176a1ef2db6f59c6f2a1cf78932a06d79f4ace,2026-09-05
 The Sentencing Project,work_model,https://www.idealist.org/en/prison-reform-jobs?page=2,,,,,2026-09-05
 The Sentencing Project,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202522829349301367_public.xml,benchmark/sources/native/form990/202522829349301367_public.xml,application/xml,77763,b8f9c695d551a3d4b6d23f92ed0f34f8d6888b3e0c680e152c837deeab6b9818,2026-09-05
-Third Way Institute,work_model,https://www.thirdway.org/careers,benchmark/sources/native/organization_metadata/job_review_1/third_way_careers_2026.html,text/html,203478,25ebad45abd5f6c0d43862799c4b2cdbfe0f7b056296e6eecbcaa25e0453a7f6,2026-09-05
+Third Way Institute,work_model,https://www.thirdway.org/careers,,,,,2026-09-05
 Third Way Institute,fiscal_sponsor,https://apps.irs.gov/pub/epostcard/990/xml/2025/202543159349301669_public.xml,benchmark/sources/native/form990/202543159349301669_public.xml,application/xml,49988,be99f3d085fb31416e61ad0ced379bccc12dc8b2827409f2360d1cd33b5d0126,2026-09-05
 Vegan Outreach,work_model,https://veganoutreach.org/job-openings/,,,,,2026-09-05
 Vegan Outreach,fiscal_sponsor,https://veganoutreach.org/about/,,,,,2026-09-05

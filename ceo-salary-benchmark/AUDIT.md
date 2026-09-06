@@ -1,6 +1,45 @@
 # Compensation benchmark audit
 
-## Current evidence and model review — 2026-09-05
+## Current 40-hour, work-evidence and measurement review — 2026-09-05
+
+**Highest-other pay is now standardized before ranking:** combined disclosed annual pay × 40 / combined filing-and-related weekly hours. This changes 18 model inputs and four selected employees. ORCID's $98,827 at 30 hours becomes **$131,769.33 nominal / $140,266.88 in July 2026 dollars**. RP's observed other-base value remains $136,142.69 after inflation adjustment. Original reported amounts remain available.
+
+The convention includes otherwise eligible full-period part-time employees and scales reported 40-plus-hour schedules down. It retains former/partial-year and unresolved-hours exclusions. Reported effort is not verified contractual FTE; centralized payroll can pay for work across affiliates, so hours are not allocated using payer amounts. The [independent XML audit](benchmark/enrichment/highest_other_fte_audit.md) verifies 895 positive employee records and the four ranking changes.
+
+**Fourteen of 57 unknown work arrangements now support a combined classification.** Current combined counts are 72 remote, 86 in-person/hybrid and 43 unknown. Twelve unresolved cases have weaker or historical directional guesses displayed with confidence, sources and alternatives; they remain Unknown in training. Marine Science Institute's verified Redwood City executive ad directly establishes regular office presence and US hiring geography. Employer-identity checks exclude university namesakes, unrelated job-card employers and the similarly named behavioral-design Appleseed. See [the organization-level follow-up](unknown_work_arrangements.md).
+
+### What the matched comparisons establish
+
+Every comparison scores the same **112 exact-base filings**. Three organization-grouped ten-fold repetitions retain all records from each organization together and learn preprocessing and comparator calibration inside training folds. Priors, sampling rules and tuning grids are unchanged.
+
+| Procedure | Mean log RMSE | Range across splits | Mean absolute % error | Mean log score |
+| --- | ---: | ---: | ---: | ---: |
+| Bayesian linear, exact + cash | 0.325 | 0.316–0.331 | 23.0% | −0.242 |
+| Bayesian linear, exact only | 0.286 | 0.281–0.290 | 22.4% | −0.160 |
+| Bayesian linear, exact only, numeric inputs | 0.287 | 0.285–0.289 | 22.4% | −0.144 |
+| Numeric GAM | 0.288 | 0.285–0.290 | 21.4% | −0.215 |
+| RBF SVR | 0.300 | 0.298–0.302 | 23.0% | −0.295 |
+| RBF GP | 0.295 | 0.289–0.299 | 22.8% | −0.170 |
+
+**Cash-proxy inclusion is the strongest explanation tested for the Bayesian model's excess error.** Exact-only training reduces log-RMSE by 0.035–0.044 in every repetition. Removing categories then changes it by only −0.003 to +0.004. Exact-only Bayesian linear and the numeric GAM are close; the GAM retains lower absolute percentage error, while the exact-only Bayesian procedures have stronger mean density scores. This is evidence about the current complete fitting procedures, not proof of a particular cash-measurement defect or a universal algorithm ranking. Scoring assesses base-disclosing organizations; cash-only organizations' latent base salaries remain unvalidated, and disclosure selection may explain part of the difference.
+
+The production-split 40-hour change raises ORCID's held-out Bayesian prediction from about $107,110 to $152,840, versus $287,681 observed. Copenhagen remains substantially underpredicted. Exact-only training raises Copenhagen's prediction from about $99,181 to $170,554. **Neither organization is deleted.**
+
+ORCID and RP have another disclosed employee whose cash pay could conceal a higher base salary. A rule applied across all organizations flags this incomplete maximum; the study masks ORCID's otherwise observed input, retaining its outcome and joint missing-input inference. Log-RMSE changes from 0.316 to 0.311 on the production split. This discards a known lower bound and is a limited sensitivity, not a censored-predictor or selection model.
+
+The [complete study](benchmark/analysis/predictive_salary_models/measurement_sensitivity/README.md) retains 23 specification/repetition comparisons, 2,576 held-out predictions, fold assignments and sampler diagnostics. Repeated observations and overlapping training sets are dependent; the split range is not a confidence interval. The study is separate from the app's 17 fitted variants. Priorities are an app-accessible exact-only Bayesian specification, explicit cash/disclosure measurement sensitivity, and time-aligned work evidence.
+
+### Verification
+
+All **80 production CV fits, eight full fits and 110 study CV fits pass their unchanged sampler gates**, with zero divergences and tree-depth hits. Production CV maximum R-hat is 1.0201, with minimum bulk/tail ESS 323.1/199.4; full-fit maximum R-hat is 1.0063. Bayesian GAM with other pay, fold 4, initially failed R-hat/bulk-ESS gates at 1.0557/88.7. Extending that fit from 400/500 to 800/1,000 warmup/retained iterations per chain resolves it to 1.0113/415.8. The reproducible one-refinement rule and actual refined fold are recorded in the fit configuration; thresholds were not relaxed.
+
+`npm run build`, `npm run test:data` (28 Python tests and five data audits), and `npm run test:statistics` (seven Node tests and four R checks) pass. All 36 Playwright tests pass; a focused metadata rerun also verifies saved supporting-source links after the final archive-preservation change. Desktop/mobile visual checks pass. The five shared first-split procedures reproduce all 112 production predictions, interval endpoints and distribution scores exactly in the separate study. Previously published evidence copies are preserved; saved supporting sources are linked from the review dialog, and duplicate citations are consolidated.
+
+---
+
+The following section records the earlier, **unstandardized-other-pay baseline**. Its model scores, work-arrangement counts and verification totals are historical.
+
+## Pre-40-hour model review — 2026-09-05
 
 The source audit covers all 153 incumbent inventory rows and 38 salary-bearing advertisements. **All 129 positive incumbent compensation records match their source values**; 24 rows have no applicable positive amount. This combines 121 XML reparses, seven rendered/PDF reviews, and Copenhagen's scanned filing. Thirty-three advertisements are corroborated; five retain explicit unresolved/third-party-only status, and none of those five trains the current models. See [the source audit](ceo_reference_set_audit.md) for scope and source-level limitations.
 

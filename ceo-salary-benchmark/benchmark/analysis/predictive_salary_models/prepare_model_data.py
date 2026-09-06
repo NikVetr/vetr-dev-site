@@ -69,6 +69,7 @@ def attach_operating_metadata(data: dict, path: Path) -> None:
     between rebuilding app-data.js and regenerating its model artifact.
     """
     from operating_evidence_review import load_reviews, attach_review_fields
+    from other_employee_pay import attach_highest_paid_other_employee
     reviews = load_reviews()
     with path.open(encoding="utf-8", newline="") as handle:
         metadata_rows = list(csv.DictReader(handle))
@@ -80,6 +81,7 @@ def attach_operating_metadata(data: dict, path: Path) -> None:
         by_organization[organization] = metadata
 
     app_rows = [*data["incumbents"], *data["jobAds"], data["rpReference"]]
+    attach_highest_paid_other_employee(app_rows)
     missing = sorted({row["organization"] for row in app_rows} - by_organization.keys())
     if missing:
         raise ValueError(f"Operating metadata is missing model organizations: {missing}")
@@ -370,8 +372,12 @@ def main() -> None:
             "revenue": None if source == "job_ad" else positive(row.get("revenue")),
             "staff": positive(row.get("staff")),
             "highest_other_base": positive(
+                (((row.get("highestPaidOtherEmployee40h") or {}).get("base") or {}).get("adjusted"))
+            ),
+            "highest_other_base_reported": positive(
                 (((row.get("highestPaidOtherEmployee") or {}).get("base") or {}).get("adjusted"))
             ),
+            "other_base_maximum_identified": int((row.get("otherPayDisclosure") or {}).get("maximumBaseIdentifiedAmongDisclosures", False)),
             "compensation_year": int(row["compensationYear"]),
             "focus_area": broad_focus(str(row.get("topic") or ""), str(row.get("organization") or "")),
             "ea_relationship": normalize_ea(str(row.get("eaAffinity") or "")),
@@ -433,7 +439,7 @@ def main() -> None:
             "revenue": positive(data["rpReference"].get("revenue")),
             "staff": positive(data["rpReference"].get("staff")),
             "highest_other_base": positive(
-                ((data["rpReference"].get("highestPaidOtherEmployee") or {}).get("base") or {}).get("adjusted")
+                ((data["rpReference"].get("highestPaidOtherEmployee40h") or {}).get("base") or {}).get("adjusted")
             ),
             "focus_area": "Research / evidence",
             "ea_relationship": "EA-adjacent",
@@ -451,6 +457,7 @@ def main() -> None:
             "stanModelSha256": hashlib.sha256((Path(__file__).parent / "ceo_salary_model.stan").read_bytes()).hexdigest(),
             "utilsScriptSha256": hashlib.sha256((Path(__file__).parent / "model_utils.R").read_bytes()).hexdigest(),
             "extensionsScriptSha256": hashlib.sha256((Path(__file__).parent / "model_extensions.R").read_bytes()).hexdigest(),
+            "otherPayScriptSha256": hashlib.sha256((ROOT / "scripts/other_employee_pay.py").read_bytes()).hexdigest(),
             "operatingReviewScriptSha256": hashlib.sha256((ROOT / "scripts" / "operating_evidence_review.py").read_bytes()).hexdigest(),
             "contractScriptSha256": hashlib.sha256((ROOT / "scripts" / "predictive_model_contract.py").read_bytes()).hexdigest(),
         },

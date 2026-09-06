@@ -171,14 +171,15 @@ def main() -> None:
         work = review["work_model"]
         # Current and historical evidence, inference, and conflicts remain
         # available in the linked per-organization evidence review.
-        row["is_remote"] = "true" if work == "remote" else "false" if work in {"hybrid", "in_person"} else "unknown"
-        row["remote_category"] = "remote" if work == "remote" else "in-person / hybrid" if work in {"hybrid", "in_person"} else "unknown"
-        row["remote_evidence"] = review["rationale"]
+        office = work in {"hybrid", "in_person"} or review.get("office_present_inferred", False)
+        row["is_remote"] = "true" if work == "remote" else "false" if office else "unknown"
+        row["remote_category"] = "remote" if work == "remote" else "in-person / hybrid" if office else "unknown"
+        row["remote_evidence"] = review.get("unknown_followup", {}).get("reasoning", review["rationale"])
         evidence = review["evidence"]
         if evidence:
             row["remote_source_url"] = evidence[0]["url"]
             row["remote_local_path"] = evidence[0].get("local_path", "")
-        row["confidence"] = review["confidence"]
+        row["confidence"] = review.get("work_model_confidence", review["confidence"])
         row["caveats"] = " ".join(filter(None, [review.get("historical_notes"), review.get("conflicts"), review.get("recommendation")]))
         row["retrieved_at"] = review["reviewed_at"]
     # User-confirmed role arrangement is independent of RP hiring geography.

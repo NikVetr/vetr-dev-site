@@ -994,6 +994,8 @@ test("organization work-model and fiscal-sponsor evidence stays connected to cha
         localPath: row.operatingMetadata?.remoteLocalPath || "",
         sourceUrl: row.operatingMetadata?.remoteSourceUrl || "",
         reviewEvidence: row.operatingMetadata?.reviewEvidence || [],
+        workModelGuess: row.workModelGuess,
+        workModelPlausible: row.workModelPlausible,
         defaultIncluded: row.defaultIncluded,
       },
       {
@@ -1021,7 +1023,11 @@ test("organization work-model and fiscal-sponsor evidence stays connected to cha
       invalidLocalPaths: archivedClaims
         .filter((claim) => !claim.localPath.startsWith("evidence/original/"))
         .map((claim) => `${claim.organization}/${claim.field}: ${claim.localPath}`),
-      localPaths: [...new Set(archivedClaims.map((claim) => claim.localPath))].sort(),
+      localPaths: [...new Set([
+        ...archivedClaims.map((claim) => claim.localPath),
+        ...allRows.flatMap((row) => (row.operatingMetadata?.reviewEvidence || [])
+          .map((item) => item.cachedSource).filter(Boolean)),
+      ])].sort(),
       dialogTarget,
       remoteCategories: [...new Set(plottedRows.map((row) => row.remoteCategory || "Unknown"))].sort(),
       fiscalSponsorCategories: [...new Set(plottedRows.map((row) => row.fiscalSponsorCategory || "Unknown"))].sort(),
@@ -1054,7 +1060,10 @@ test("organization work-model and fiscal-sponsor evidence stays connected to cha
   await expect(page.locator("#dialog-value")).toHaveText(target.value);
   await expect(page.locator("#dialog-evidence")).toHaveText(target.evidence);
   const metadataTerms = ["Classification", ...(target.field === "remote" ? [
-    "Evidence basis", "Detailed work model", "CEO hiring geography", "Organization footprint", "Historical evidence",
+    "Evidence basis", "Detailed work model",
+    ...(target.workModelGuess && target.workModelGuess !== "unknown" ? ["Best guess"] : []),
+    ...(target.workModelPlausible?.length ? ["Plausible arrangements"] : []),
+    "CEO hiring geography", "Organization footprint", "Historical evidence",
   ] : []), "Reviewed", "Confidence", "Review note", "Local audit copy"];
   await expect(page.locator("#dialog-meta dt")).toHaveCount(metadataTerms.length + (target.reviewEvidence?.length || 0));
   expect((await page.locator("#dialog-meta dt").allTextContents()).slice(0, metadataTerms.length)).toEqual(metadataTerms);
@@ -1063,11 +1072,27 @@ test("organization work-model and fiscal-sponsor evidence stays connected to cha
   for (const [index, item] of (target.reviewEvidence || []).entries()) {
     await expect(reviewedLinks.nth(index)).toHaveAttribute("href", item.archive_url || item.url);
   }
+  const savedReviews = (target.reviewEvidence || []).filter((item) => item.cachedSource);
+  const savedLinks = page.getByRole("link", { name: "Saved review copy ↗", exact: true });
+  await expect(savedLinks).toHaveCount(savedReviews.length);
+  for (const [index, item] of savedReviews.entries()) {
+    await expect(savedLinks.nth(index)).toHaveAttribute("href", item.cachedSource);
+  }
   await expect(page.locator("#dialog-category-provenance")).toBeHidden();
   await expect(page.locator("#dialog-cached")).toBeVisible();
   await expect(page.locator("#dialog-cached")).toHaveAttribute("href", target.localPath);
   await expect(page.locator("#dialog-external")).toBeVisible();
   await expect(page.locator("#dialog-external")).toHaveAttribute("href", target.sourceUrl);
+  await page.locator(".dialog-close").click();
+
+  const uncertainWork = page.getByRole("button", {
+    name: "View work-model evidence for Copenhagen Consensus Center: NA", exact: true,
+  }).first();
+  await expect(uncertainWork).toContainText("Guess: Remote");
+  await uncertainWork.click();
+  await expect(page.locator("#dialog-value")).toHaveText("Unknown");
+  await expect(page.locator("#dialog-meta")).toContainText("Remote · medium confidence");
+  await expect(page.locator("#dialog-meta")).toContainText("Plausible arrangements");
   await page.locator(".dialog-close").click();
 
   const fiscalSponsorLabels = metadata.fiscalSponsorCategories.map((category) => ({
@@ -2579,21 +2604,21 @@ test("highest-paid other employee ratios and reviewed position postings are usab
   await expect(page.locator("#chart-title")).toHaveText("Distribution of CEO Salary");
 
   const expectedPairs = await page.evaluate(() => window.CEO_BENCHMARK_DATA.incumbents.filter((row) => (
-    row.defaultIncluded && row.salary?.base > 0 && row.highestPaidOtherEmployee?.base?.adjusted > 0
+    row.defaultIncluded && row.salary?.base > 0 && row.highestPaidOtherEmployee40h?.base?.adjusted > 0
   )).length);
   expect(expectedPairs).toBeGreaterThan(90);
   const organizationsWhereOtherEarnsMore = await page.evaluate(() => window.CEO_BENCHMARK_DATA.incumbents
     .filter((row) => row.defaultIncluded
       && row.salary?.base > 0
-      && row.highestPaidOtherEmployee?.base?.adjusted > row.salary.base)
+      && row.highestPaidOtherEmployee40h?.base?.adjusted > row.salary.base)
     .map((row) => row.organization));
   expect(organizationsWhereOtherEarnsMore).toContain("Project Healthy Children");
   const samePositionComparisons = await page.evaluate(() => {
     const data = window.CEO_BENCHMARK_DATA;
-    const ceoMatches = data.incumbents.flatMap((row) => Object.values(row.highestPaidOtherEmployee || {}))
+    const ceoMatches = data.incumbents.flatMap((row) => Object.values(row.highestPaidOtherEmployee40h || {}))
       .filter((observation) => observation.roleScope === "organization_wide");
     const otherMatches = Object.entries(data.positionObservations).flatMap(([position, rows]) => rows
-      .flatMap((row) => Object.values(row.highestPaidOtherEmployee || {}))
+      .flatMap((row) => Object.values(row.highestPaidOtherEmployee40h || {}))
       .filter((observation) => observation.benchmarkPosition === position));
     return ceoMatches.length + otherMatches.length;
   });
@@ -2606,9 +2631,10 @@ test("highest-paid other employee ratios and reviewed position postings are usab
   await page.locator("#axis-denominator").selectOption("highestPaidOtherEmployee");
   await expect(page.locator("#stat-n")).toHaveText(String(expectedPairs));
   await expect(horizontalAxis()).toContainText("CEO Salary / Non-CEO highest-paid employee");
-  await expect(page.locator("#chart-title")).toHaveText("Distribution of CEO Salary / Non-CEO highest-paid employee");
+  await expect(page.locator("#chart-title")).toHaveText("Distribution of CEO Salary / Non-CEO highest-paid employee (40h)");
   await page.locator(".bar-block").first().hover();
   await expect(page.locator("#chart-tooltip")).toContainText("Highest-paid disclosed employee outside the CEO position");
+  await expect(page.locator("#chart-tooltip")).toContainText(/reported hours\/week.*reported →.*at 40h/);
   await expect(page.locator("#chart-tooltip")).toContainText(/#\d+ of \d+ eligible disclosures/);
   const sharedUrl = page.url();
   await page.reload();
@@ -2620,7 +2646,7 @@ test("highest-paid other employee ratios and reviewed position postings are usab
   await page.locator('input[name="histogram-axis-mode"][value="ratio"]').check();
   await horizontalAxis().click();
   await page.locator("#axis-denominator").selectOption("highestPaidOtherEmployee");
-  await expect(page.locator("#chart-title")).toHaveText("Distribution of COO Salary / Non-COO highest-paid employee");
+  await expect(page.locator("#chart-title")).toHaveText("Distribution of COO Salary / Non-COO highest-paid employee (40h)");
   await page.locator('input[name="histogram-axis-mode"][value="value"]').check();
   await expect(page.locator("#stream-select")).toHaveValue("combined");
   await expect(page.locator("#stream-select")).toBeEnabled();

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-06T01:51:13+00:00",
+  "generatedAt": "2026-09-06T04:22:21+00:00",
   "seed": 20260903,
-  "trainingInputSha256": "5c2f428362a0d316721251a58e341d1931fa1e0059a3f0d291517ebc32752365",
+  "trainingInputSha256": "c584431799708cec95797e950520bd05ef800ad0fc06c213aad88cb42f2df006",
   "target": "log July 2026-adjusted annual base salary",
   "foldRule": "Ten deterministic organization-grouped folds; filing and posting records with the same normalized organization name share a fold.",
   "counts": {
@@ -46,14 +46,14 @@
     },
     "location_scope": {
       "International / multi-country": 35,
-      "Location not reported": 43,
+      "Location not reported": 42,
       "Outside United States": 1,
-      "United States": 72
+      "United States": 73
     },
     "remote_category": {
-      "In-person / hybrid": 58,
-      "Remote": 55,
-      "Unknown": 38
+      "In-person / hybrid": 66,
+      "Remote": 58,
+      "Unknown": 27
     },
     "fiscal_sponsor_category": {
       "Does not serve as fiscal sponsor": 3,
@@ -82,13 +82,14 @@
     "reference_salary": 155230.03
   },
   "provenance": {
-    "trainingCsvSha256": "9515525effa64ea9063a75a37d8095ea1f7ab9e99228c5af07b3f584c859a604",
-    "prepareScriptSha256": "a96cacc97e2fe82a1d8a380400639b8ed14dcd01aee2722f522d00c814676ccf",
-    "fitScriptSha256": "8a97d52981b325d81ff98ea273176762077a0605d94db6f57d53545b34ec5db4",
+    "trainingCsvSha256": "39336d9c78d4738d826f019e0fa58fca3f95aa72ed9e5f523a73c2e628e68c43",
+    "prepareScriptSha256": "1d7b49651653aa348fffa917df5bf8c923c44b7c3d18ca3a9a4366f678111c27",
+    "fitScriptSha256": "8b2979c45652f265396a7d6112ebd4fcf00deaccbdc19b60ded9a5eb0dcdd9f0",
     "stanModelSha256": "184d43343e1fae7418ed2820c80196c67b293710ecc754db6f1746fe1b256d0b",
     "utilsScriptSha256": "afef3bd73787e768ae4c827a1828b969e80e201796b27a901cde14d7af1a2bd7",
     "extensionsScriptSha256": "e4a4f5220583165bd444368b4fc7f90c7c9c276e4286cb7f4332f56fc6e1fc5e",
-    "operatingReviewScriptSha256": "16ee31bf86ef1d4a51c8e811bdfbf8f911d6fdef4c29bb0c7a25dd373c606b7a",
-    "contractScriptSha256": "d10d3f3988b63983ef73ba9cc2dcf863c0ed1ed7f78090670963dfa7459f3a46"
+    "otherPayScriptSha256": "cf6304ddc52433755b348b52532e31405ce369b92757046bb358759f350540c4",
+    "operatingReviewScriptSha256": "2f68cd8dfcbb00cedae3956378e5fe80f45a4f69dd57b4d36892fdececa5361f",
+    "contractScriptSha256": "1bb2bce3e630ff18925de50d8d57056746691d1f38de300a203fe1c53335a093"
   }
 }

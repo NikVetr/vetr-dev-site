@@ -14,6 +14,7 @@ from xml.etree import ElementTree
 
 from predictive_model_contract import predictive_model_input_sha256, predictive_training_eligible, apply_role_hours_review
 from operating_evidence_review import load_reviews, attach_review_fields
+from other_employee_pay import attach_highest_paid_other_employee
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -135,6 +136,16 @@ def attach_organization_operating_metadata(app_rows: list[dict]) -> dict[str, in
         if local_path and cached_path:
             published_by_local_path[local_path.removeprefix("benchmark/")] = cached_path
 
+    def publish_review_source(local_path: str) -> str:
+        benchmark_path = local_path.removeprefix("benchmark/")
+        if benchmark_path not in published_by_local_path:
+            source_id = f"ORG-META-{Path(benchmark_path).stem}-{hashlib.sha256(benchmark_path.encode()).hexdigest()[:10]}"
+            published = cache_source(source_id, benchmark_path)
+            if not published:
+                raise FileNotFoundError(f"Could not publish operating-metadata source: {local_path}")
+            published_by_local_path[benchmark_path] = published
+        return published_by_local_path[benchmark_path]
+
     def published_claim_source(organization: str, claim: str, metadata: dict[str, str]) -> str:
         manifest = manifest_by_claim.get((organization, claim))
         if not manifest:
@@ -156,22 +167,24 @@ def attach_organization_operating_metadata(app_rows: list[dict]) -> dict[str, in
             raise ValueError(f"Operating-metadata source size changed: {organization}/{claim}")
         if hashlib.sha256(content).hexdigest() != text(manifest["sha256"]):
             raise ValueError(f"Operating-metadata source hash changed: {organization}/{claim}")
-        benchmark_path = local_path.removeprefix("benchmark/")
-        if benchmark_path not in published_by_local_path:
-            source_id = f"ORG-META-{Path(benchmark_path).stem}-{hashlib.sha256(benchmark_path.encode()).hexdigest()[:10]}"
-            published = cache_source(source_id, benchmark_path)
-            if not published:
-                raise FileNotFoundError(f"Could not publish operating-metadata source: {source}")
-            published_by_local_path[benchmark_path] = published
-        return published_by_local_path[benchmark_path]
+        return publish_review_source(local_path)
 
     counts = {"remote": 0, "inPersonHybrid": 0, "remoteUnknown": 0,
               "fiscalSponsor": 0, "notFiscalSponsor": 0, "fiscalSponsorUnknown": 0}
     counted_organizations: set[str] = set()
+    published_reviews = {}
     for row in app_rows:
         organization = text(row.get("organization"))
         metadata = by_organization[organization]
         review = evidence_reviews[organization]
+        if organization not in published_reviews:
+            unique_evidence = {}
+            for item in review["evidence"]:
+                key = (item["url"], item.get("excerpt", ""))
+                unique_evidence.setdefault(key, dict(item))
+                if item.get("local_path"):
+                    unique_evidence[key]["cachedSource"] = publish_review_source(item["local_path"])
+            published_reviews[organization] = list(unique_evidence.values())
         attach_review_fields(row, review)
         apply_role_hours_review(row)
         remote = tristate(metadata["is_remote"])
@@ -201,7 +214,7 @@ def attach_organization_operating_metadata(app_rows: list[dict]) -> dict[str, in
             "retrievedAt": text(metadata["retrieved_at"]),
             "workModelBasis": review["work_model_basis"],
             "hiringMarketBasis": row["ceoHiringMarketBasis"],
-            "reviewEvidence": review["evidence"],
+            "reviewEvidence": published_reviews[organization],
             "historicalNotes": review.get("historical_notes", ""),
         }
         if organization not in counted_organizations:
@@ -246,7 +259,10 @@ def load_predictive_model_artifact(
     if artifact.get("production") is not True:
         raise ValueError("Predictive-model artifact is a quick/smoke-test fit, not a production fit")
     fit_configuration = artifact.get("fitConfiguration") or {}
-    if fit_configuration != {
+    refinements = fit_configuration.get("cvRefinements")
+    if not isinstance(refinements, list):
+        raise ValueError("Predictive-model artifact lacks CV refinement provenance")
+    if {key: value for key, value in fit_configuration.items() if key != "cvRefinements"} != {
         "cvChains": 4,
         "cvWarmupPerChain": 400,
         "cvSamplingPerChain": 500,
@@ -256,6 +272,19 @@ def load_predictive_model_artifact(
         "exportedPosteriorDraws": 512,
     }:
         raise ValueError("Predictive-model artifact has an unsupported production fit configuration")
+    bayesian_labels = {row.get("label") for row in artifact.get("comparison", [])
+                       if row.get("method") in {"bayesian", "bayesianGam"}}
+    refined_folds = set()
+    for refinement in refinements:
+        if not isinstance(refinement, dict):
+            raise ValueError("Invalid CV refinement record")
+        model, fold = refinement.get("model"), refinement.get("fold")
+        if (model not in bayesian_labels or type(fold) is not int or not 1 <= fold <= 10
+                or (model, fold) in refined_folds or refinement != {
+                    "model": model, "fold": fold, "warmupPerChain": 800,
+                    "samplingPerChain": 1000, "adaptDelta": .999}):
+            raise ValueError("Unsupported CV sampling refinement")
+        refined_folds.add((model, fold))
     training = artifact.get("training") or {}
     if training.get("rpExcluded") is not True:
         raise ValueError("Predictive-model artifact does not prove RP was excluded from training")
@@ -295,6 +324,7 @@ def load_predictive_model_artifact(
         "stanModelSha256": model_dir / "ceo_salary_model.stan",
         "utilsScriptSha256": model_dir / "model_utils.R",
         "extensionsScriptSha256": model_dir / "model_extensions.R",
+        "otherPayScriptSha256": ROOT / "scripts/other_employee_pay.py",
         "operatingReviewScriptSha256": ROOT / "scripts" / "operating_evidence_review.py",
         "contractScriptSha256": ROOT / "scripts" / "predictive_model_contract.py",
     }
@@ -2681,100 +2711,6 @@ def build_position_job_ads(
             },
         })
     return output
-
-
-def normalized_person_key(value: object) -> str:
-    return re.sub(r"[^a-z0-9]+", "", text(value).casefold())
-
-
-def eligible_disclosed_pay_by_source() -> dict[str, dict[str, list[dict]]]:
-    measures = {
-        "base": ("schedule_j_base_total_nominal", "schedule_j_base_total_july_2026"),
-        "cash": ("part_vii_cash_nominal", "part_vii_cash_july_2026"),
-        "total": ("part_vii_total_nominal", "part_vii_total_july_2026"),
-    }
-    source_rows: dict[str, list[dict[str, str]]] = {}
-    for row in rows(FORM990_POSITION_OBSERVATIONS):
-        if not (
-            boolean(row["default_hours_eligible"])
-            and text(row["role_scope"]) in {"functional", "organization_wide"}
-            and text(row["compensation_year_role_status"]) in {"no_transition_indicated", "verified_full_year"}
-            and not boolean(row["former_officer_director_trustee"])
-        ):
-            continue
-        source_rows.setdefault(text(row["source_id"]), []).append(row)
-
-    output: dict[str, dict[str, list[dict]]] = {}
-    for source_id, candidates in source_rows.items():
-        source_result: dict[str, list[dict]] = {}
-        for measure, (nominal_field, adjusted_field) in measures.items():
-            by_person: dict[str, dict] = {}
-            for candidate in candidates:
-                nominal = number(candidate[nominal_field])
-                adjusted = number(candidate[adjusted_field])
-                if nominal is None or adjusted is None or nominal <= 0 or adjusted <= 0:
-                    continue
-                person_key = text(candidate["person_key"]) or text(candidate["person_name"]).casefold()
-                existing = by_person.get(person_key)
-                if existing is None or nominal > existing["nominal"]:
-                    by_person[person_key] = {
-                        "personKey": person_key,
-                        "person": text(candidate["effective_person_name"]) or text(candidate["person_name"]),
-                        "title": text(candidate["effective_title"]) or text(candidate["native_title"]),
-                        "benchmarkPosition": text(candidate["benchmark_position"]),
-                        "roleScope": text(candidate["role_scope"]),
-                        "nominal": nominal,
-                        "adjusted": adjusted,
-                    }
-            ranked = sorted(by_person.values(), key=lambda item: (-item["nominal"], item["person"].casefold()))
-            source_result[measure] = [
-                {**candidate, "sourceRank": rank, "eligibleDisclosures": len(ranked)}
-                for rank, candidate in enumerate(ranked, start=1)
-            ]
-        if source_result:
-            output[source_id] = source_result
-    return output
-
-
-def attach_highest_paid_other_employee(app_rows: list[dict]) -> int:
-    by_source = eligible_disclosed_pay_by_source()
-    attached = 0
-    for row in app_rows:
-        source_result = by_source.get(text(row.get("sourceId")))
-        if not source_result:
-            continue
-        row_person_keys = {
-            normalized_person_key(row.get("executive")),
-            normalized_person_key(row.get("rawExecutive")),
-            normalized_person_key(text(row.get("id")).rsplit("::", 1)[-1]),
-        } - {""}
-        selected_position = text(row.get("positionKey")) or "ceo"
-        result: dict[str, dict] = {}
-        for measure, candidates in source_result.items():
-            matched_keys = {
-                candidate["personKey"] for candidate in candidates
-                if candidate["personKey"] in row_person_keys
-                or normalized_person_key(candidate["person"]) in row_person_keys
-            }
-            if not matched_keys:
-                continue
-            def is_selected_position(candidate: dict) -> bool:
-                if candidate["personKey"] in matched_keys:
-                    return True
-                if selected_position == "ceo":
-                    return candidate["roleScope"] == "organization_wide"
-                return candidate["benchmarkPosition"] == selected_position
-
-            other = next(
-                (candidate for candidate in candidates if not is_selected_position(candidate)),
-                None,
-            )
-            if other:
-                result[measure] = copy.deepcopy(other)
-        if result:
-            row["highestPaidOtherEmployee"] = result
-            attached += 1
-    return attached
 
 
 def apply_living_peer_review(incumbents: list[dict], jobs: list[dict]) -> dict[str, int]:

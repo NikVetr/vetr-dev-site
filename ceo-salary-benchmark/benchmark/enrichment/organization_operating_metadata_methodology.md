@@ -13,6 +13,8 @@ Prefer an explicit employer policy. Otherwise, use role-level evidence as an exp
 
 The app/model combine hybrid and in-person as `In-person / hybrid`; the underlying review retains their distinction and whether the conclusion is explicit or inferred. RP's CEO is fully remote, also confirmed by the benchmark owner.
 
+The `unknown_followup_*.jsonl` files revisit all 57 originally unresolved organizations. Twelve support specific inferred arrangements; Center for Responsible Lending and Marine Science Institute support office presence while their hybrid/in-person subtypes stay unresolved. This leaves 43 unknown in the combined predictor. Twelve of those retain directional, weaker or historical guesses in the app and [follow-up report](../../unknown_work_arrangements.md). These guesses do not replace Unknown in training. A 2022 remote policy can support a present-day sensitivity guess without proving that policy persists. Employer identity and the actual job body take precedence over names or locations in sidebar job cards.
+
 ## Hiring geography versus footprint
 
 The salary predictor is the CEO role's eligible work locations or hiring market, not the countries where the organization delivers programs. Executive-specific advertisements take precedence. Where those are absent, medium/high-confidence general staff eligibility can supply a labeled `inferred_staff_market`; otherwise the market is unknown. A U.S. incorporation or office address alone does not establish a U.S.-only hiring rule. International programs alone do not establish international hiring.

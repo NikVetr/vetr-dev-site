@@ -1102,11 +1102,11 @@
       fullFormat: (value) => value == null ? "—" : `${Math.round(value)}`, logarithmic: false,
     },
     highestPaidOtherEmployee: {
-      get shortLabel() { return `Non-${positionDefinition().pageLabel} highest-paid employee`; },
-      label: () => `Non-${positionDefinition().pageLabel} highest-paid eligible employee in the same filing (${priceBasisLabel()})`,
+      get shortLabel() { return `Non-${positionDefinition().pageLabel} highest-paid employee (40h)`; },
+      label: () => `Non-${positionDefinition().pageLabel} highest-paid eligible employee in the same filing (40h equivalent, ${priceBasisLabel()})`,
       value: (row) => {
         const measure = rowStream(row) === "jobAds" ? "base" : state.measure;
-        const observation = row.highestPaidOtherEmployee?.[measure];
+        const observation = row.highestPaidOtherEmployee40h?.[measure];
         const value = state.inflationAdjusted ? observation?.adjusted : observation?.nominal;
         return Number.isFinite(value) && value > 0 ? value : null;
       },
@@ -2949,7 +2949,7 @@
 
   const MODEL_CONTINUOUS_LABELS = Object.freeze({
     expenses: "Expenses", revenue: "Revenue", staff: "Employees",
-    highest_other_base: "Non-CEO highest base pay",
+    highest_other_base: "Non-CEO highest base pay (40h)",
   });
 
   function isBayesianMethod(method = state.modelMethod) { return method === "bayesian" || method === "bayesianGam"; }
@@ -3455,7 +3455,7 @@
     renderModelContributions(prediction);
     const warningText = coverage.warnings.length
       ? `This target profile has limited support: ${coverage.warnings.join("; ")}. ` : "";
-    refs.modelLimitations.innerHTML = "<strong>Benchmark, not a pay recommendation.</strong> The selected disclosure cohort is not a representative market sample. <strong>Source types stay distinct:</strong> base pay, cash proxies, and optional ad ranges use their documented models. <strong>Current work-location evidence can postdate compensation.</strong> Effects are descriptive. Percentile uncertainty omits uncertainty about cohort representativeness. <a href=\"ceo_reference_set_audit.md\" target=\"_blank\">Source audit</a> · <a href=\"ceo_peer_recommendations.csv\" target=\"_blank\">Peer recommendations</a>.";
+    refs.modelLimitations.innerHTML = "<strong>Benchmark, not a pay recommendation.</strong> The selected disclosure cohort is not a representative market sample. <strong>Source types stay distinct:</strong> base pay, cash proxies, and optional ad ranges use their documented models. <strong>Current work-location evidence can postdate compensation.</strong> Effects are descriptive. Percentile uncertainty omits uncertainty about cohort representativeness. <a href=\"ceo_reference_set_audit.md\" target=\"_blank\">Source audit</a> · <a href=\"ceo_peer_recommendations.csv\" target=\"_blank\">Peer recommendations</a> · <a href=\"unknown_work_arrangements.md\" target=\"_blank\">Work-arrangement follow-up</a> · <a href=\"benchmark/analysis/predictive_salary_models/measurement_sensitivity/README.md\" target=\"_blank\">Repeated validation</a>.";
     if (warningText) refs.modelLimitations.prepend(document.createTextNode(warningText));
   }
 
@@ -3688,13 +3688,13 @@
         || (axisMode(axisKey) === "ratio" && expression.denominator === "highestPaidOtherEmployee");
     });
     const highestPaidOtherMeasure = rowStream(row) === "jobAds" ? "base" : state.measure;
-    const highestPaidOther = usesHighestPaidOther ? row.highestPaidOtherEmployee?.[highestPaidOtherMeasure] : null;
+    const highestPaidOther = usesHighestPaidOther ? row.highestPaidOtherEmployee40h?.[highestPaidOtherMeasure] : null;
     const details = [
       context.chartDetail,
       ...(context.rankDetails || []),
       highestPaidOther ? [
         `Highest-paid disclosed employee outside the ${positionDefinition().pageLabel} position`,
-        `${highestPaidOther.person} · ${highestPaidOther.title} · #${highestPaidOther.sourceRank} of ${highestPaidOther.eligibleDisclosures} eligible disclosures`,
+        `${highestPaidOther.person} · ${highestPaidOther.title} · ${highestPaidOther.weeklyHours} reported hours/week · ${money(highestPaidOther.reportedNominal)} reported → ${money(highestPaidOther.nominal)} at 40h (source-year USD) · #${highestPaidOther.sourceRank} of ${highestPaidOther.eligibleDisclosures} eligible disclosures`,
       ] : null,
       range ? ["Advertised range", range] : null,
       context.reference ? ["How this record is used", "RP reference only · shown for context, not included in results"] : ["Peer group", tier.label],
@@ -4175,8 +4175,14 @@
       const remote = document.createElement("td"); remote.className = "metadata-cell has-explainer";
       const remoteButton = document.createElement("button"); remoteButton.type = "button"; remoteButton.className = "metadata-evidence-button";
       remoteButton.textContent = tableDisplayLabel(row.remoteCategory || "Unknown");
-      remoteButton.title = row.operatingMetadata?.remoteEvidence || "No organization-wide work-model classification could be established from the reviewed official sources.";
-      remoteButton.setAttribute("aria-label", `View work-model evidence for ${row.organization}: ${remoteButton.textContent}`);
+      if (row.remoteCategory === "Unknown" && row.workModelGuess && row.workModelGuess !== "unknown") {
+        const guess = document.createElement("small"); guess.className = "organization-footprint";
+        guess.textContent = `Guess: ${humanizeCategory(row.workModelGuess)}`;
+        remoteButton.append(guess);
+      }
+      remoteButton.title = `${row.remoteCategory === "Unknown" && row.workModelGuess !== "unknown"
+        ? `Best guess: ${humanizeCategory(row.workModelGuess)} (${row.workModelGuessConfidence} confidence). ` : ""}${row.operatingMetadata?.remoteEvidence || "No work-model classification established."}`;
+      remoteButton.setAttribute("aria-label", `View work-model evidence for ${row.organization}: ${tableDisplayLabel(row.remoteCategory || "Unknown")}`);
       remoteButton.addEventListener("click", () => openOperatingMetadataDialog(row, "remote")); remote.append(remoteButton);
       const fiscalSponsor = document.createElement("td"); fiscalSponsor.className = "metadata-cell has-explainer";
       const fiscalSponsorButton = document.createElement("button"); fiscalSponsorButton.type = "button"; fiscalSponsorButton.className = "metadata-evidence-button";
@@ -4415,6 +4421,8 @@
       ...(remote ? [
         ["Evidence basis", humanizeCategory(metadata.workModelBasis || "unknown")],
         ["Detailed work model", humanizeCategory(row.workModelDetail || "unknown")],
+        ...(row.workModelGuess && row.workModelGuess !== "unknown" ? [["Best guess", `${humanizeCategory(row.workModelGuess)} · ${row.workModelGuessConfidence} confidence`]] : []),
+        ...(row.workModelPlausible?.length ? [["Plausible arrangements", row.workModelPlausible.map(humanizeCategory).join(" / ")]] : []),
         ["CEO hiring geography", `${row.ceoHiringMarket || "Location not reported"} · ${humanizeCategory(row.ceoHiringMarketBasis || "unknown")}`],
         ["Organization footprint", humanizeCategory(row.operatingFootprint || "unknown")],
         ["Historical evidence", metadata.historicalNotes || "No dated historic policy established"],
@@ -4433,7 +4441,13 @@
       const dd = document.createElement("dd");
       const quote = document.createElement("p"); quote.textContent = item.excerpt || "No work-arrangement statement found.";
       const link = document.createElement("a"); link.href = item.archive_url || item.url; link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = "Review cited source ↗";
-      dd.append(quote, link); meta.append(dt, dd);
+      dd.append(quote, link);
+      if (item.cachedSource) {
+        const saved = document.createElement("a"); saved.href = item.cachedSource;
+        saved.target = "_blank"; saved.rel = "noopener noreferrer"; saved.textContent = "Saved review copy ↗";
+        dd.append(document.createTextNode(" · "), saved);
+      }
+      meta.append(dt, dd);
     });
     const details = $("#dialog-category-provenance");
     details.hidden = true; details.open = false;

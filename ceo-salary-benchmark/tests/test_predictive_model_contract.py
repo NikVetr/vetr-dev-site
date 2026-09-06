@@ -1,4 +1,5 @@
 import importlib.util
+import csv
 import json
 import sys
 import unittest
@@ -9,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from predictive_model_contract import EXTRA_TRAINING_ROWS, predictive_training_eligible
-from operating_evidence_review import reviewed_hiring_market
+from operating_evidence_review import reviewed_hiring_market, load_reviews
 
 
 def load_prepare_module():
@@ -27,6 +28,49 @@ def load_app_data():
 
 
 class PredictiveModelContractTest(unittest.TestCase):
+    def test_sampler_refinements_match_published_chain_counts(self):
+        path = ROOT / "benchmark/analysis/predictive_salary_models"
+        artifact = json.loads((path / "model_artifact.json").read_text())
+        refinements = {(row["model"], row["fold"]): row for row in artifact["fitConfiguration"]["cvRefinements"]}
+        with (path / "sampler_diagnostics.csv").open() as handle:
+            rows = [row for row in csv.DictReader(handle) if row["phase"] == "cross_validation"]
+        self.assertEqual(len(rows), 80)
+        for row in rows:
+            refinement = refinements.get((row["model"], int(row["fold"])))
+            expected = refinement["samplingPerChain"] if refinement else 500
+            self.assertEqual(int(row["draws_per_chain"]), expected)
+            self.assertEqual(int(row["chains"]), 4)
+            self.assertLessEqual(float(row["max_rhat"]), 1.05)
+            self.assertGreaterEqual(float(row["min_bulk_ess"]), 100)
+            self.assertGreaterEqual(float(row["min_tail_ess"]), 100)
+
+    def test_published_other_pay_and_training_share_40_hour_basis(self):
+        data = load_app_data()
+        orcid = next(row for row in data["incumbents"] if row["organization"] == "ORCID")
+        other = orcid["highestPaidOtherEmployee40h"]["base"]
+        self.assertEqual(other["weeklyHours"], 30)
+        self.assertAlmostEqual(other["nominal"], 98827 * 40 / 30)
+        self.assertAlmostEqual(other["adjusted"], 140266.88)
+        with (ROOT / "benchmark/analysis/predictive_salary_models/training_data.csv").open() as handle:
+            training = next(row for row in csv.DictReader(handle) if row["organization"] == "ORCID")
+        self.assertEqual(float(training["highest_other_base"]), other["adjusted"])
+        self.assertEqual(training["other_base_maximum_identified"], "0")
+
+    def test_work_guesses_distinguish_supported_and_historical_evidence(self):
+        reviews = load_reviews()
+        self.assertEqual(sum("unknown_followup" in row for row in reviews.values()), 57)
+        self.assertEqual(reviews["Healthcare Career Advancement Program"]["work_model"], "remote")
+        self.assertEqual(reviews["Third Way Institute"]["work_model"], "hybrid")
+        self.assertEqual(reviews["Copenhagen Consensus Center"]["work_model"], "unknown")
+        self.assertEqual(reviews["Copenhagen Consensus Center"]["unknown_followup"]["best_guess"], "remote")
+        self.assertEqual(reviews["Federal Funds Information for States"]["work_model"], "unknown")
+        self.assertTrue(reviews["Center for Responsible Lending"]["office_present_inferred"])
+        marine = reviews["Marine Science Institute"]
+        self.assertTrue(marine["office_present_inferred"])
+        self.assertEqual(reviewed_hiring_market(marine), ("United States", "direct_role"))
+        self.assertTrue(any("aeoe.org" in item["url"] for item in marine["evidence"]))
+        self.assertFalse(any("up.edu.ph" in item["url"] for item in marine["evidence"]))
+
     def test_hiring_market_respects_role_evidence_and_separates_footprint(self):
         review = {"ceo_hiring_scope": "unknown", "ceo_scope_basis": "unknown",
                   "hiring_scope": "unknown", "operating_scope": "international", "confidence": "high"}

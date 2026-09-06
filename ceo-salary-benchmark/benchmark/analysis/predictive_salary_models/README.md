@@ -18,7 +18,11 @@ There are 17 browser specifications:
 | Bayesian multilevel linear | With/without other pay × filings/filings plus ads | Exact-base and cash-proxy filings; optional ads |
 | Bayesian multilevel additive | Same four variants | Same evidence model |
 
-Numeric inputs are standardized natural logs of expenses, revenue, employees, and optional highest reported non-CEO base pay, with missingness indicators. Removing other pay removes both columns. Recruitment budgets proxy expenses and never duplicate revenue. Numeric preprocessing uses each training fold only.
+Numeric inputs are standardized natural logs of expenses, revenue, employees, and optional highest disclosed non-CEO **40-hour-equivalent base pay**, with missingness indicators. Removing other pay removes both columns. Recruitment budgets proxy expenses and never duplicate revenue. Numeric preprocessing uses each training fold only.
+
+Other pay is re-ranked after multiplying each eligible annual amount by 40 / combined filing-and-related weekly hours. The numerator likewise combines pay from both entities. Centralized payroll can pay for work across affiliates, so zero related-entity pay does not imply unrelated or unpaid related hours. The calculation scales 35-hour pay up and 50-hour pay down; it describes reported effort, not contracted FTE. Retain full-period functional roles with reliable positive hours, including part-time roles; exclude former/partial-year roles and unresolved CPI hours. Preserve the source amounts and identifiers. ORCID's $98,827 at 30 hours becomes $131,769.33 nominal, or $140,266.88 after CPI adjustment. The CEO outcome remains annual disclosed base salary.
+
+`otherPayDisclosure` records whether an eligible employee with missing base disclosure has cash pay exceeding the known maximum base. In that case, the highest known base need not be the highest base among listed eligible employees. RP and ORCID have this limitation. It is separate from the selection of employees onto the filing at all.
 
 Bayesian categorical inputs are focus, organization type, title group, CEO hiring market, work arrangement, fiscal sponsorship, and EA relationship. Their vocabulary is salary-blind. Functional overlap is the EA reference; the collapsed EA-adjacent label has one signed increment. Peer tiers and RP similarity scores are not predictors.
 
@@ -58,7 +62,7 @@ Cash-only observations do not become base-pay labels. Let log(cash/base) be zero
 
 Advertised points use the ad normal distribution. A range [L,U] contributes Phi((log U-mu)/sigma_ad)-Phi((log L-mu)/sigma_ad), evaluated with stable log-tail arithmetic. This is an experimental policy-range likelihood, not proof that an actual hire fell within the range. Profile predictions always use the filing source, without the ad offset.
 
-Four chains are used per fit: 400 warmup/500 retained draws for each of 80 CV fits; 800/1,000 for each of eight full fits. Adapt delta is .995/.999 and maximum tree depth 13. All salary, covariance, and fitted curvature parameters enter convergence checks. The app rejects failed R-hat, ESS, E-BFMI, divergence, and tree-depth gates. It exports 512 posterior draws per model; full chain CSVs are cached separately.
+Four chains are used per fit: initially 400 warmup/500 retained draws for each of 80 CV fits; 800/1,000 for each of eight full fits. A CV fit failing the substantive convergence gates receives one refinement to 800/1,000 and must then pass the unchanged gates. The artifact records these folds in `fitConfiguration.cvRefinements`; the current cohort requires Bayesian GAM with other pay, fold 4. Adapt delta is .995/.999 and maximum tree depth 13. All salary, covariance, and fitted curvature parameters enter convergence checks. The app rejects failed R-hat, ESS, E-BFMI, divergence, and tree-depth gates. It exports 512 posterior draws per model; full chain CSVs are cached separately.
 
 ## Numeric comparators
 
@@ -85,6 +89,14 @@ Numeric transformations, imputation, REML, GP hyperparameters, and SVR tuning ar
 
 Cash-proxy, advertised-point, and interval-mass scores are separate, incomparable evidence targets. `cross_validation_results.csv` and `cross_validation_predictions.csv` retain the reproducible results. One grouped split cannot establish stable algorithm rankings; repeated grouped splits and an independently collected cohort remain priorities.
 
+### Matched measurement and repeated-validation study
+
+`measurement_sensitivity.R` retains the production split and adds two organization-grouped splits with seeds 20260904 and 20260905. Each compares Bayesian linear with exact-plus-cash training, exact-only training, and exact-only numeric inputs (all centered categories collapsed; EA held at its reference). Numeric linear, GAM, SVR and GP run on the identical held-out exact outcomes in all three repetitions. Priors and tuning grids are unchanged.
+
+Two additional first-split fits compare raw reported other pay and setting an incompletely identified maximum missing, retaining joint conditional imputation. The latter changes ORCID's predictor under a rule applied to every organization; it does not remove its salary outcome. It discards the known lower bound and is a conservative measurement sensitivity, not a complete selection or censoring model. Repetitions reuse outcomes and are not independent samples; compare paired scores and ranking stability, not a naive standard error over 336 allegedly independent cases.
+
+`measurement_sensitivity/` contains the design, explicit fold assignments, predictions, scores, sampler diagnostics and interpretation. `--prepare` exports missing cluster requests with `SALARY_CLUSTER_PREPARE`; `--numeric-only` computes reusable numeric comparison caches. Caches include input, code and software signatures. Research comparisons remain separate from the app registry.
+
 ## Browser uncertainty and drivers
 
 The predictive curve integrates peer variation and available parameter uncertainty. Its quantiles are distinct from uncertainty **about** each quantile. At probability p, Bayesian conditional quantile draws are exp(mu_draw + sigma_draw Phi^-1(p)); their central interval defaults to 89% and can be changed to 50–99%. The integrated-mixture quantile need not equal the median conditional-quantile draw.
@@ -101,8 +113,11 @@ From `ceo-salary-benchmark/`:
 
 ```sh
 python3 scripts/build_organization_operating_metadata.py
+python3 scripts/summarize_work_followup.py
 python3 benchmark/analysis/predictive_salary_models/prepare_model_data.py
 Rscript benchmark/analysis/predictive_salary_models/fit_salary_models.R .
+Rscript benchmark/analysis/predictive_salary_models/measurement_sensitivity.R .
+python3 benchmark/analysis/predictive_salary_models/summarize_measurement_study.py
 npm run build
 npm run test:statistics
 npm run test:data

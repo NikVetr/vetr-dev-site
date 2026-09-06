@@ -664,6 +664,12 @@ compiled_model <- cmdstan_model(stan_path, quiet = TRUE)
 
 oof_sets <- list()
 sampler_records <- list()
+cv_refinements <- list()
+adequate_cv_sampling <- function(d) isTRUE(
+  d$chains == 4L && d$divergences == 0L && d$maxTreedepthHits == 0L &&
+    is.finite(d$maxRhat) && d$maxRhat <= 1.05 && d$minBulkEss >= 100 &&
+    d$minTailEss >= 100 && d$minEbfmi >= .2
+)
 bayesian_specs <- list(
   list(name = "Bayesian multilevel · without other pay", include_ads = FALSE, include_highest = FALSE, seed_offset = 0L),
   list(name = "Bayesian multilevel · with other pay", include_ads = FALSE, include_highest = TRUE, seed_offset = 100L),
@@ -690,6 +696,15 @@ for (spec in bayesian_specs) {
       include_highest_other_pay = include_highest, smooth = isTRUE(spec$smooth)
     )
     fold_diagnostics <- sampler_diagnostic_summary(fitted$fit, fitted$n_missing, smooth = fitted$smooth)
+    if (!quick && !adequate_cv_sampling(fold_diagnostics)) {
+      message("  extending sampling for fold ", fold, " after failed convergence checks")
+      fitted <- fit_stan(training, 20260903 + fold + spec$seed_offset,
+        include_highest_other_pay = include_highest, smooth = isTRUE(spec$smooth), full = TRUE)
+      fold_diagnostics <- sampler_diagnostic_summary(fitted$fit, fitted$n_missing, smooth = fitted$smooth)
+      if (!adequate_cv_sampling(fold_diagnostics)) stop("CV sampler refinement failed: ", model_name, " fold ", fold)
+      cv_refinements[[length(cv_refinements) + 1L]] <- list(model = model_name, fold = fold,
+        warmupPerChain = 800L, samplingPerChain = 1000L, adaptDelta = .999)
+    }
     sampler_records[[length(sampler_records) + 1L]] <- data.frame(
       phase = "cross_validation", model = model_name, fold = fold,
       chains = fold_diagnostics$chains, draws_per_chain = fold_diagnostics$drawsPerChain,
@@ -1069,6 +1084,7 @@ artifact <- list(
     cvChains = if (quick) 1L else 4L,
     cvWarmupPerChain = if (quick) 80L else 400L,
     cvSamplingPerChain = if (quick) 80L else 500L,
+    cvRefinements = cv_refinements,
     fullChains = if (quick) 1L else 4L,
     fullWarmupPerChain = if (quick) 80L else 800L,
     fullSamplingPerChain = if (quick) 80L else 1000L,
@@ -1095,7 +1111,7 @@ artifact <- list(
     list(key = "expenses", label = "Annual expenses", unit = "USD"),
     list(key = "revenue", label = "Annual revenue", unit = "USD"),
     list(key = "staff", label = "Employees", unit = "people"),
-    list(key = "highest_other_base", label = "Non-CEO highest reported base pay", unit = "USD")
+    list(key = "highest_other_base", label = "Non-CEO highest base pay (40h equivalent)", unit = "USD")
   ),
   categoricalFeatures = category_schema,
   eaLevels = ea_levels,
