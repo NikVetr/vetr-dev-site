@@ -473,6 +473,45 @@
       ]
     },
     {
+      "target": "en",
+      "source": "fa",
+      "scale": 0.89,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 624,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
       "target": "es",
       "source": "en",
       "scale": 0.46,
@@ -945,6 +984,37 @@
       ]
     },
     {
+      "target": "es",
+      "source": "fa",
+      "scale": 0.84,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 620,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
       "target": "zh-Hans",
       "source": "en",
       "scale": 0.62,
@@ -1376,8 +1446,8 @@
     {
       "target": "zh-Hans",
       "source": "qya",
-      "scale": 1,
-      "faces": 4,
+      "scale": 0.9,
+      "faces": 2,
       "pageW": 504,
       "pageH": 360,
       "items": 176,
@@ -1401,14 +1471,6 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 15
-          },
-          "message": "15 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -1421,6 +1483,37 @@
       "pageH": 360,
       "items": 614,
       "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "zh-Hans",
+      "source": "fa",
+      "scale": 0.93,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 614,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -1929,6 +2022,45 @@
       ]
     },
     {
+      "target": "ja",
+      "source": "fa",
+      "scale": 0.53,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 624,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
       "target": "ar",
       "source": "en",
       "scale": 0.67,
@@ -2378,6 +2510,37 @@
       "pageH": 360,
       "items": 619,
       "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "ar",
+      "source": "fa",
+      "scale": 0.6,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 619,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -2870,6 +3033,37 @@
       ]
     },
     {
+      "target": "fr",
+      "source": "fa",
+      "scale": 0.85,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 622,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
       "target": "de",
       "source": "en",
       "scale": 0.45,
@@ -3338,6 +3532,37 @@
       "pageH": 360,
       "items": 621,
       "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "de",
+      "source": "fa",
+      "scale": 0.65,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 621,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -3822,6 +4047,37 @@
       ]
     },
     {
+      "target": "pt",
+      "source": "fa",
+      "scale": 0.85,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 622,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
       "target": "ko",
       "source": "en",
       "scale": 0.76,
@@ -4294,6 +4550,37 @@
       ]
     },
     {
+      "target": "ko",
+      "source": "fa",
+      "scale": 0.71,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 615,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
       "target": "hi",
       "source": "en",
       "scale": 0.52,
@@ -4751,6 +5038,37 @@
       "pageH": 360,
       "items": 623,
       "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "hi",
+      "source": "fa",
+      "scale": 0.53,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 623,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -5400,6 +5718,45 @@
       ]
     },
     {
+      "target": "th",
+      "source": "fa",
+      "scale": 0.72,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 620,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
       "target": "ru",
       "source": "en",
       "scale": 0.64,
@@ -5868,6 +6225,45 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "ru",
+      "source": "fa",
+      "scale": 0.59,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 621,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -6352,6 +6748,45 @@
       ]
     },
     {
+      "target": "id",
+      "source": "fa",
+      "scale": 0.9,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 618,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 2
+          },
+          "message": "2 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
       "target": "sw",
       "source": "en",
       "scale": 0.72,
@@ -6832,6 +7267,37 @@
       ]
     },
     {
+      "target": "sw",
+      "source": "fa",
+      "scale": 0.82,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 623,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
       "target": "tr",
       "source": "en",
       "scale": 0.5,
@@ -7292,6 +7758,37 @@
       "pageH": 360,
       "items": 620,
       "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "tr",
+      "source": "fa",
+      "scale": 0.92,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 620,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -7792,6 +8289,45 @@
       ]
     },
     {
+      "target": "vi",
+      "source": "fa",
+      "scale": 0.88,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 621,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
       "target": "it",
       "source": "en",
       "scale": 0.45,
@@ -8260,6 +8796,37 @@
       "pageH": 360,
       "items": 619,
       "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "it",
+      "source": "fa",
+      "scale": 0.82,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 619,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -8752,6 +9319,45 @@
       ]
     },
     {
+      "target": "el",
+      "source": "fa",
+      "scale": 0.53,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 618,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
       "target": "hu",
       "source": "en",
       "scale": 0.49,
@@ -9212,6 +9818,37 @@
       "pageH": 360,
       "items": 617,
       "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "hu",
+      "source": "fa",
+      "scale": 0.75,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 617,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -9688,10 +10325,41 @@
       ]
     },
     {
+      "target": "tlh",
+      "source": "fa",
+      "scale": 0.92,
+      "faces": 4,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 271,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
       "target": "qya",
       "source": "en",
-      "scale": 1,
-      "faces": 4,
+      "scale": 0.77,
+      "faces": 2,
       "pageW": 504,
       "pageH": 360,
       "items": 176,
@@ -9704,22 +10372,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 15
-          },
-          "message": "15 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "qya",
       "source": "es",
-      "scale": 1,
-      "faces": 4,
+      "scale": 0.86,
+      "faces": 2,
       "pageW": 504,
       "pageH": 360,
       "items": 176,
@@ -9732,22 +10392,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 15
-          },
-          "message": "15 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "qya",
       "source": "zh-Hans",
-      "scale": 1,
-      "faces": 4,
+      "scale": 0.94,
+      "faces": 2,
       "pageW": 504,
       "pageH": 360,
       "items": 176,
@@ -9760,22 +10412,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 15
-          },
-          "message": "15 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "qya",
       "source": "ja",
-      "scale": 1,
-      "faces": 4,
+      "scale": 0.76,
+      "faces": 2,
       "pageW": 504,
       "pageH": 360,
       "items": 176,
@@ -9788,14 +10432,6 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 15
-          },
-          "message": "15 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -9841,8 +10477,8 @@
     {
       "target": "qya",
       "source": "fr",
-      "scale": 1,
-      "faces": 4,
+      "scale": 0.79,
+      "faces": 2,
       "pageW": 504,
       "pageH": 360,
       "items": 176,
@@ -9855,22 +10491,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 15
-          },
-          "message": "15 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "qya",
       "source": "de",
-      "scale": 1,
-      "faces": 4,
+      "scale": 0.79,
+      "faces": 2,
       "pageW": 504,
       "pageH": 360,
       "items": 176,
@@ -9883,22 +10511,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 15
-          },
-          "message": "15 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "qya",
       "source": "pt",
-      "scale": 1,
-      "faces": 4,
+      "scale": 0.86,
+      "faces": 2,
       "pageW": 504,
       "pageH": 360,
       "items": 176,
@@ -9911,22 +10531,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 15
-          },
-          "message": "15 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "qya",
       "source": "ko",
-      "scale": 1,
-      "faces": 4,
+      "scale": 0.93,
+      "faces": 2,
       "pageW": 504,
       "pageH": 360,
       "items": 176,
@@ -9939,14 +10551,6 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 15
-          },
-          "message": "15 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -10031,8 +10635,8 @@
     {
       "target": "qya",
       "source": "ru",
-      "scale": 1,
-      "faces": 4,
+      "scale": 0.77,
+      "faces": 2,
       "pageW": 504,
       "pageH": 360,
       "items": 176,
@@ -10045,22 +10649,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 15
-          },
-          "message": "15 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "qya",
       "source": "id",
-      "scale": 1,
-      "faces": 4,
+      "scale": 0.84,
+      "faces": 2,
       "pageW": 504,
       "pageH": 360,
       "items": 176,
@@ -10073,22 +10669,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 15
-          },
-          "message": "15 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "qya",
       "source": "sw",
-      "scale": 1,
-      "faces": 4,
+      "scale": 0.87,
+      "faces": 2,
       "pageW": 504,
       "pageH": 360,
       "items": 176,
@@ -10101,22 +10689,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 15
-          },
-          "message": "15 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "qya",
       "source": "tr",
-      "scale": 1,
-      "faces": 4,
+      "scale": 0.82,
+      "faces": 2,
       "pageW": 504,
       "pageH": 360,
       "items": 176,
@@ -10129,22 +10709,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 15
-          },
-          "message": "15 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "qya",
       "source": "vi",
-      "scale": 1,
-      "faces": 4,
+      "scale": 0.83,
+      "faces": 2,
       "pageW": 504,
       "pageH": 360,
       "items": 176,
@@ -10157,22 +10729,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 15
-          },
-          "message": "15 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "qya",
       "source": "it",
-      "scale": 1,
-      "faces": 4,
+      "scale": 0.82,
+      "faces": 2,
       "pageW": 504,
       "pageH": 360,
       "items": 176,
@@ -10185,22 +10749,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 15
-          },
-          "message": "15 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "qya",
       "source": "el",
-      "scale": 1,
-      "faces": 4,
+      "scale": 0.77,
+      "faces": 2,
       "pageW": 504,
       "pageH": 360,
       "items": 176,
@@ -10213,22 +10769,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 15
-          },
-          "message": "15 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "qya",
       "source": "hu",
-      "scale": 1,
-      "faces": 4,
+      "scale": 0.82,
+      "faces": 2,
       "pageW": 504,
       "pageH": 360,
       "items": 176,
@@ -10241,14 +10789,6 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 15
-          },
-          "message": "15 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -10275,12 +10815,43 @@
     {
       "target": "qya",
       "source": "he",
+      "scale": 0.91,
+      "faces": 2,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 176,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "qya",
+      "source": "fa",
       "scale": 1,
       "faces": 4,
       "pageW": 504,
       "pageH": 360,
       "items": 176,
       "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
         {
           "code": "margin-below-safe-area",
           "severity": "warn",
@@ -10777,6 +11348,545 @@
             "count": 15
           },
           "message": "15 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
+      "target": "he",
+      "source": "fa",
+      "scale": 0.67,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 618,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "fa",
+      "source": "en",
+      "scale": 0.49,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 622,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "fa",
+      "source": "es",
+      "scale": 0.6,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 622,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "fa",
+      "source": "zh-Hans",
+      "scale": 0.69,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 622,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "fa",
+      "source": "ja",
+      "scale": 0.86,
+      "faces": 12,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 622,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "fa",
+      "source": "ar",
+      "scale": 0.6,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 622,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
+      "target": "fa",
+      "source": "fr",
+      "scale": 0.5,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 622,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "fa",
+      "source": "de",
+      "scale": 0.51,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 622,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "fa",
+      "source": "pt",
+      "scale": 0.59,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 622,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "fa",
+      "source": "ko",
+      "scale": 0.74,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 622,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "fa",
+      "source": "hi",
+      "scale": 0.84,
+      "faces": 12,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 622,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Devanagari",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Devanagari text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
+      "target": "fa",
+      "source": "th",
+      "scale": 0.49,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 622,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Thai",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Thai text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "fa",
+      "source": "ru",
+      "scale": 0.51,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 622,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "fa",
+      "source": "id",
+      "scale": 0.6,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 622,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "fa",
+      "source": "sw",
+      "scale": 0.56,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 622,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "fa",
+      "source": "tr",
+      "scale": 0.65,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 622,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "fa",
+      "source": "vi",
+      "scale": 0.62,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 622,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "fa",
+      "source": "it",
+      "scale": 0.55,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 622,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "fa",
+      "source": "el",
+      "scale": 0.51,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 622,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "fa",
+      "source": "hu",
+      "scale": 0.58,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 622,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "fa",
+      "source": "tlh",
+      "scale": 0.74,
+      "faces": 4,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 280,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "fa",
+      "source": "qya",
+      "scale": 1,
+      "faces": 4,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 183,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Tengwar",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Tengwar text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 15
+          },
+          "message": "15 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
+      "target": "fa",
+      "source": "he",
+      "scale": 0.66,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 622,
+      "warnings": [
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
         }
       ]
     }

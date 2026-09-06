@@ -84,10 +84,10 @@ everything tiny, which nobody wants. So it moves off the anchor only for a reaso
 
 The comfort threshold is set below the Japanese reference sheet's own 0.478, which
 is a deliberately tight layout that should not be second-guessed. On 7×5in, 196 of
-the 380 pairs between the twenty full packs settle on eight faces and 181 on ten;
-none now fits six, and three need twelve — `el ← hi`, `ru ← hi` and `hi ← ja`, where
-Devanagari forces the column above the theme's size and the solver reports it rather
-than clipping. Greek is the second-longest language in the set after Russian and takes
+the 420 pairs between the twenty-one full packs settle on eight faces and 219 on ten;
+none now fits six, and five need twelve — `el ← hi`, `ru ← hi`, `hi ← ja`, `fa ← ja`
+and `fa ← hi`, where Devanagari forces the column above the theme's size and the
+solver reports it rather than clipping. Greek is the second-longest language in the set after Russian and takes
 ten against every source; Hungarian is ordinary, eight against a Latin or Cyrillic
 source and ten against the scripts that need vertical room. The tens are the scripts
 that need the most vertical room: **every** Japanese, Arabic, Devanagari and Greek
@@ -100,10 +100,12 @@ that face count follows content rather than the language list — and the pairs 
 faces, because a partial pack has less to lay out on either side of the join: a sheet
 whose *reader* is Klingon is short for the same reason a sheet whose subject is, since
 a row with no gloss in the reading language cannot print. Those pairs were 28 at two
-faces and 50 at four while both packs were still written in Latin; they are 2 and 80
-now. **The native scripts cost them a face pair each**, and the number that did it is
-`scripts.csv`'s `leading_factor` — 1.30 for tengwar against Latin's 1.02, measured off
-the tehtar's own ink extents rather than chosen. The reference sheets reached four by hand against a
+faces and 50 at four while both packs were still written in Latin. **The native
+scripts cost them a face pair each** — the number that did it is `scripts.csv`'s
+`leading_factor`, 1.30 for tengwar against Latin's 1.02, measured off the tehtar's own
+ink extents rather than chosen — and then the blank-paper give-back handed twenty of
+them back again, which is the two rules meeting on the one pack thin enough for both
+to have an opinion. The reference sheets reached four by hand against a
 bank of 413 concepts. It is 813 now; the divider defaults to one position per section
 rather than one per row, which costs type size; and — the largest of the three — the
 respelling column has content on all 462 pairs rather than 16, so there is a third
@@ -1868,6 +1870,101 @@ three reproductions place every original row with no errors and nothing below a 
 Japanese at 4.74pt against the original's own 4.44pt, so this reproduction is the more
 legible of the two — and separately that autofit never falls below four faces, and
 never spends a pair without gaining type.
+
+### A header and a footer, and a band that is a tab
+
+`RunningHead.at` was `'none' | 'top' | 'bottom'`, which made a header and a footer
+mutually exclusive for no reason but the shape of the type — and a folio at the foot
+with the emergency number at the head is an obvious thing to want. **Position is which
+field the band sits in, not a value inside it**, so `spec.head` is the top band and
+`spec.foot` the bottom one, each absent when it is off. `headBands` migrates the old
+form, keyed on `at`: the new shape has no such field, so its presence identifies the
+old one exactly, and an `at: 'bottom'` becomes the foot rather than a header nobody
+asked for. `contentBox`'s third argument stopped being a signed number and became two
+heights, which cost one call site — every other caller omits it.
+
+`span` gives a band a fourth choice beside its three positions: `full` spreads them
+across the width as a running head normally is, and `left`, `center` or `right`
+gather all three into one edge for a reader who wants a tab rather than a rule across
+the face. The distinction is where the content sits, not how tall the band is — a tab
+still costs its line, because the columns above or below it end where they end.
+
+`colour` names a theme key for a whole band, which is a different question from
+emphasis: "make the emergency number red" is not "make it bold". Where it is set the
+band takes that colour and emphasis is left to the weight; where it is not, the
+existing rule holds and an emphasised part is promoted from muted to ink, because a
+bold grey number at 5.2pt is not much louder than a plain one.
+
+**The wonky bullet spacing had a specific cause.** `measurer.width` drops a trailing
+space, so a space at a join has to sit on the *leading* side of the part that follows
+it — that was already known and already handled by shifting spaces forward. What was
+not handled is that the emergency slot's own parts already end in spaces: its regex
+captures the digits *and* the run after them, so `"police "` is one part. Shifting
+that space onto a separator carrying its own leading space produced `"  •"` — two
+spaces before the bullet and one after — on some joins and not others, depending
+entirely on whether the slot to the left happened to end in whitespace. So the spaces
+are **normalised** rather than shifted, collapsed to exactly one wherever either side
+had any, which makes every join identical whatever meets there. A separator also
+cannot ask for the space on its right by carrying it, since that space would be
+trailing and would not measure, so `spaceParts` states that rule rather than encoding
+it in the string.
+
+The folio that arrives pre-ticked moved with all this. It used to be carried by the
+odd idiom of an `at: 'none'` band that still held slots — off, but remembering what it
+would say — and with two independent bands the off state is simply absence, so the
+memory is `headControl`'s own seed.
+
+### Three panel controls that did not say what they did
+
+Small, and all three were the same failure: a control whose meaning was in `title` and
+`aria-label`, reaching a screen reader and a patient hover and nobody else.
+
+**The custom colour swatches were six bare squares.** The one thing a reader needs to
+know there is which of the five section roles they are about to change, and the names
+already existed — the same strings the theme and ink-mode glyphs are labelled from.
+Two columns rather than a row of six, because the names are words and a six-across row
+of "Getting around" and "Places and time" wraps into rubble in a 260px panel.
+
+**The flag wash read the registry's first two countries unconditionally**, so a Spanish
+card was always Spain and Mexico and an Arabic one always Saudi Arabia and Egypt,
+however far from either you were standing. `background.flagRegions` is the reader's
+choice, defaulting to those two, and for the eight-country languages it is a decision
+only they can make. Toggles rather than a menu, because more than one is the
+interesting case and the wash blends them; and the swatch is the flag's own colours
+rather than its emoji, both because regional-indicator pairs do not render on Windows
+and because here the colours *are* the setting. The background strength slider gained
+the visible caption its neighbour already had.
+
+**The export-resolution glyph was a grid of dots** whose step shrank with the dpi — so
+at 600 the step was 2 and the dot 1, and it read as a single field of grey rather than
+as a fine grain. It is a checkerboard now, which covers half its area at every
+density, so the three glyphs differ only in cell size, which is the one thing they are
+meant to say. It is also the idiom every image editor uses for the same quantity.
+
+### Give back paper the glue cannot fill
+
+Quenya arrived with 206 rows and printed on four faces at the full nominal 1.00 with
+**every one of its sixteen columns carrying 82 to 137pt of slack** — 1971pt in total,
+five and a half columns of blank card, and the bottom third of every face empty. Every
+other pack measured zero to 65pt.
+
+That is not the airiness `AUTO_SCALE_MAX` hands to the glue on purpose. The per-gap
+ceilings exist so leftover space cannot open a canyon, and with thirteen rows to a
+column there are not enough gaps: `13 × MAX_STRETCH_ROW` is about a third of what there
+was to absorb. The face-count rule had only half of what it needed — it gave up a pair
+when the paper was *free*, and never when the paper was merely *empty*.
+
+Two ratios, and each blocks a different mistake. `BLANK_GIVEBACK` is a quarter of the
+card, and without it a dense sheet sheds paper it is using: `es ← en` at eight faces
+fits six at better than three quarters of its scale. `KEEP_GIVEBACK` is three quarters
+of the type, and without it a merely thin sheet sheds paper it should keep: an Arabic
+sheet read by a Quenya reader fits one pair less only at 0.45 against 1.00, which is
+half the type for half the paper and the wrong way round. Ratios rather than lengths,
+so neither depends on the page size or the column count, and each states a sentence.
+
+Measured over every pair: the rule moves **only the Quenya ones**, 4 faces to 2, none
+takes a pair, and `qya ← en` goes from 34% blank at 1.00 to zero residual at 0.77 with
+ink reaching 98% down the face.
 
 ### Golden signatures, and why they are geometry rather than pixels
 
