@@ -374,5 +374,6 @@
   "ornament.laurel": "Babérleveles kézirat",
   "ornament.starforge": "Csillagkovácsműhely",
   "ornament.hint": "Díszítő szegélyek változatlan szövegmérettel és térközökkel. A sarokdíszek ott jelennek meg, ahol van elég hely.",
+  "ornament.frameHint": "A fonott tündekeret helyet foglal a szöveg körül. Az elrendezés és az oldalszám változhat.",
   "ornament.lowInk": "A tintatakarékos mód a klasszikus vonalakat használja. Színes vagy egyszínű módban visszatér a választott stílus."
 }

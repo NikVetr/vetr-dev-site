@@ -1,18 +1,18 @@
 concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
 dietary-needs.no-meat,گوشت، مرغی اور مچھلی نہیں,,"gosht, murghī aur machhlī nahīñ",ɡˈoːʃt mˈʊɾɣi ɔɾ mˈʌcʰlˌiː nahˈĩː,"گوشت alone is read as red meat in a Pakistani kitchen, so all three are named",2,ur-allergen-v1;ipa=espeak
 dietary-needs.no-eggs,انڈا نہیں,,anḍā nahīñ,ˈanɖaː nahˈĩː,,2,ur-allergen-v1;ipa=espeak
-dietary-needs.not-spicy,مرچ نہیں,,mirch nahīñ,mˈʌɾc nahˈĩː,"no chilli -- تیز نہیں would be read as ""not fast""",2,ur-allergen-v1;ipa=espeak
-dietary-needs.less-spicy,مرچ کم,,mirch kam,mˈʌɾc kˈʌm,,2,ur-allergen-v1;ipa=espeak
-dietary-needs.no-peanuts,مونگ پھلی نہیں,,mūñg phalī nahīñ,mˈoːnɡ pʰˈʌli nahˈĩː,,2,ur-allergen-v1;ipa=espeak
+dietary-needs.not-spicy,مرچ نہیں,,mirch nahīñ,mˈɪɾc nahˈĩː,"no chilli -- تیز نہیں would be read as ""not fast""",2,ur-allergen-v1;ipa=espeak
+dietary-needs.less-spicy,مرچ کم,,mirch kam,mˈɪɾc kˈʌm,,2,ur-allergen-v1;ipa=espeak
+dietary-needs.no-peanuts,مونگ پھلی نہیں,,mūñg phalī nahīñ,mˈuːnɡ pʰˈʌli nahˈĩː,,2,ur-allergen-v1;ipa=espeak
 dietary-needs.no-nuts,بادام، اخروٹ، پستہ، کاجو نہیں,,"bādām, akhroṭ, pista, kājū nahīñ",baːdˈaːm ˌaxɾˈoːʈ pˈʌstˌa kˈaːɟoː nahˈĩː,"enumerated: خشک میوہ covers dried fruit and seeds as well, so it would over- and under-cover",2,ur-allergen-v1;ipa=espeak
-dietary-needs.no-seafood,مچھلی اور جھینگا نہیں,,machhlī aur jhīñgā nahīñ,mˈʌcʰlˌiː ɔɾ ɟʰˈeːnɡaː nahˈĩː,,2,ur-allergen-v1;ipa=espeak
+dietary-needs.no-seafood,مچھلی اور جھینگا نہیں,,machhlī aur jhīñgā nahīñ,mˈʌcʰlˌiː ɔɾ ɟʰˈeːnɡˌaː nahˈĩː,,2,ur-allergen-v1;ipa=espeak
 dietary-needs.i-am-vegetarian,میں سبزی خور ہوں، گوشت مرغی مچھلی کچھ نہیں,,"maiñ sabzī-khor hūñ, gosht murghī machhlī kuchh nahīñ",mˈẽ sˈʌbzˌiː xˈoːɾ hˈõː ɡˈoːʃt mˈʊɾɣi mˈʌcʰlˌiː kʊcʰ nahˈĩː,"سبزی خور alone is heard as a preference rather than a rule in Pakistan, so the exclusion is spelled out",2,ur-allergen-v1;ipa=espeak
 dietary-needs.i-am-vegan,میں ویگن ہوں، دودھ اور گھی بھی نہیں,,"maiñ vīgan hūñ, dūdh aur ghī bhī nahīñ",mˈẽ ʋˈeːɡən hˈõː dˈuːdʰ ɔɾ ɡʰˈiː bʰˈiː nahˈĩː,,2,ur-allergen-v1;ipa=espeak
 dietary-needs.i-do-not-eat,میں {} نہیں کھاتا,,maiñ {} nahīñ khātā,mˈẽ {} nahˈĩː kʰˈaːtaː,masculine speaker; a woman says کھاتی,2,ur-allergen-v1;ipa=espeak
 dietary-needs.i-am-allergic-to,مجھے {} سے الرجی ہے,,mujhe {} se alarjī hai,mˌʊɟʰeː {} seː alɾˈʌɟi hɛ,,2,ur-allergen-v1;ipa=espeak
 dietary-needs.does-it-contain-fish-stock,کیا اس میں مچھلی کا شوربہ ہے؟,,kyā is meñ machhlī kā shorba hai?,kjˈaː ɪs mˈẽ mˈʌcʰlˌiː kaː ʃˈoːɾəba hɛ,,2,ur-allergen-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-stock,کیا اس میں سؤر کا شوربہ ہے؟,,kyā is meñ su’ar kā shorba hai?,kjˈaː ɪs mˈẽ səˈoːɾ kaː ʃˈoːɾəba hɛ,,2,ur-allergen-v1;ipa=espeak
-dietary-needs.i-have-a-severe-allergy-to,مجھے {} سے شدید الرجی ہے,,mujhe {} se shadīd alarjī hai,mˌʊɟʰeː {} seː ʃədˈiːd ʊlɾˈʌɟi hɛ,,2,ur-allergen-v1;ipa=espeak
+dietary-needs.i-have-a-severe-allergy-to,مجھے {} سے شدید الرجی ہے,,mujhe {} se shadīd alarjī hai,mˌʊɟʰeː {} seː ʃədˈiːd alɾˈʌɟi hɛ,,2,ur-allergen-v1;ipa=espeak
 food-ordering.table-for-two,دو لوگوں کی میز,,do logoñ kī mez,dˈoː lˈoːɡõː ki mˈeːz,,2,ur-agent-v1;ipa=espeak
 food-ordering.is-a-table-available,کیا میز خالی ہے؟,,kyā mez khālī hai?,kjˈaː mˈeːz xˈaːli hɛ,,2,ur-agent-v1;ipa=espeak
 food-ordering.menu-please,مینو دیجیے,,menū dījiye,mˈeːnoː diɟˈiːeː,,2,ur-agent-v1;ipa=espeak

@@ -23,7 +23,7 @@ emergency-medical.i-am-having-a-severe-allergic-reaction,Ho uno shock anafilatti
 emergency-medical.i-cannot-breathe,Non riesco a respirare,,non riˈesko a respirˈare,,2,it-agent-v1;ipa=espeak
 emergency-medical.i-am-bleeding-badly,Sto perdendo molto sangue,,stˈɔ perdˈɛndo mˈolto sˈaŋɡwe,,2,it-agent-v1;ipa=espeak
 emergency-medical.i-have-chest-pain,Ho dolore al petto,Dolore toracico,o dolˈore al pˈɛtto,,2,it-agent-v1;ipa=espeak
-emergency-medical.this-person-is-unconscious,Questa persona ha perso conoscenza,Questa persona è priva di sensi,kwˌɛsta persˈona a pˈɛrso konoʃˈɛntsa,,2,it-agent-v1;ipa=espeak
+emergency-medical.this-person-is-unconscious,Questa persona ha perso conoscenza,Questa persona è priva di sensi,kwˌesta persˈona a pˈɛrso konoʃˈɛntsa,,2,it-agent-v1;ipa=espeak
 emergency-medical.where-is-the-nearest-hospital,Dov'è l'ospedale più vicino?,,dovˈɛ lospedˈale pjʊ vitʃˈino,,2,it-agent-v1;ipa=espeak
 emergency-medical.what-is-the-emergency-number,Qual è il numero di emergenza?,,kwˈal e il nˈumero dɪ emerdʒˈɛntsa,,2,it-agent-v1;ipa=espeak
 emergency-medical.is-there-a-doctor-who-speaks-english,C'è un medico che parla {source}?,,tʃe ʊn mˈɛdiko ke pˈarla {source},,2,language-slots-v1;ipa=espeak
@@ -52,14 +52,14 @@ medical-conditions.i-carry-an-adrenaline-injector,Ho un autoiniettore di adrenal
 medical-conditions.i-take-medicine-for,Prendo medicine per {},,prˈɛndo meditʃˈine pˈer {},,2,it-agent-v1;ipa=espeak
 medical-conditions.i-take-blood-thinners,Prendo anticoagulanti,,prˈɛndo antikoaɡʊlˈantɪ,,2,it-agent-v1;ipa=espeak
 medical-conditions.medicine-allergy,Allergia ai farmaci: {},,allerdʒˈia aj fˈarmatʃɪ {},,2,it-agent-v1;ipa=espeak
-medical-conditions.this-card-lists-my-conditions,Questa scheda indica le mie patologie,,kwˌɛsta skˈɛda ˈindika le mˌie patolodʒˈie,,2,it-agent-v1;ipa=espeak
+medical-conditions.this-card-lists-my-conditions,Questa scheda indica le mie patologie,,kwˌesta skˈɛda ˈindika le mˌie patolodʒˈie,,2,it-agent-v1;ipa=espeak
 medical-conditions.this-is-my-medicine,Questo è il mio farmaco,,kwˈesto ˌɛ il mˌio fˈarmako,,2,it-agent-v1;ipa=espeak
 medical-conditions.please-give-me-sugar-or-juice,Mi dia dello zucchero o un succo,,mɪ dˈia dˌello dzˈukkeɾo o ʊn sˈukko,,2,it-agent-v1;ipa=espeak
-medical-conditions.inject-it-into-my-outer-thigh,Lo inietti nella parte esterna della coscia,,lo injˈettɪ nˌɛlla pˈarte estˈɛrna dˌella kˈɔʃa,,2,it-agent-v1;ipa=espeak
+medical-conditions.inject-it-into-my-outer-thigh,Lo inietti nella parte esterna della coscia,,lo injˈettɪ nˈella pˈarte estˈɛrna dˌella kˈɔʃa,,2,it-agent-v1;ipa=espeak
 medical-conditions.my-blood-type-is,Il mio gruppo sanguigno è {},,il mˌio ɡrˈuppo saŋɡwˈiɲɲo ˈɛː {},,2,it-agent-v1;ipa=espeak
 medical-conditions.do-not-give-me,Non mi dia {},,non mɪ dˈia {},,2,it-agent-v1;ipa=espeak
 medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,Ho un'allergia all'aspirina e all'ibuprofene,,o ʊnallerdʒˈia allaspirˈina e allibʊprofˈɛne,,2,it-agent-v1;ipa=espeak
-medical-conditions.my-injector-is-in-my-bag,Il mio autoiniettore è nella borsa,,il mˌio aʊtoinjettˈore e nˌɛlla bˈorsa,,2,it-agent-v1;ipa=espeak
+medical-conditions.my-injector-is-in-my-bag,Il mio autoiniettore è nella borsa,,il mˌio aʊtoinjettˈore e nˈella bˈorsa,,2,it-agent-v1;ipa=espeak
 medical-conditions.i-am-allergic-to-sulfa-drugs,Ho un'allergia ai sulfamidici,,o ʊnallerdʒˈia aj sʊlfamˈiditʃɪ,,2,it-agent-v1;ipa=espeak
 pharmacy-symptoms.which-pharmacy-is-open-now,Quale farmacia è aperta adesso?,,kwˈale farmatʃˈiːa e apˈɛrta adˈɛsso,,2,it-agent-v1;ipa=espeak
 pharmacy-symptoms.i-need-medicine-for,Mi serve un farmaco per {},,mɪ sˈɛrve ʊn fˈarmako pˈer {},,2,it-agent-v1;ipa=espeak
@@ -82,7 +82,7 @@ pharmacy-symptoms.is-this-safe-to-take-with,Posso prenderlo insieme a {}?,,pˈɔ
 pharmacy-symptoms.i-feel-dizzy,Ho le vertigini,Mi gira la testa,o le vertˈidʒinɪ,,2,it-agent-v1;ipa=espeak
 pharmacy-symptoms.ibuprofen,ibuprofene,Moment / Brufen,ibʊprofˈɛne,,2,it-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-sore-throat,Ho mal di gola,,o mˈal dɪ ɡˈola,,2,it-agent-v1;ipa=espeak
-pharmacy-symptoms.can-i-get-this-medicine-here,Avete questo farmaco?,,avˌete kwˌɛsto fˈarmako,,2,it-agent-v1;ipa=espeak
+pharmacy-symptoms.can-i-get-this-medicine-here,Avete questo farmaco?,,avˌete kwˌesto fˈarmako,,2,it-agent-v1;ipa=espeak
 pharmacy-symptoms.bandage,una benda,un cerotto,ˌʊna bˈɛnda,,2,it-agent-v1;ipa=espeak
 pharmacy-symptoms.the-pain-is-severe,Il dolore è molto forte,,il dolˈore e mˈolto fˈɔrte,,2,it-agent-v1;ipa=espeak
 pharmacy-symptoms.antiseptic,un disinfettante,Betadine,ʊn dizinfettˈante,,2,it-agent-v1;ipa=espeak
@@ -116,7 +116,7 @@ police-consulate.i-am-calling-the-police,Sto chiamando la polizia,,stˈɔ kjamˈ
 police-consulate.am-i-under-arrest,Sono in arresto?,,sˌono in arɾˈɛsto,,2,it-agent-v1;ipa=espeak
 police-consulate.no-thank-you-i-am-not-interested,"No grazie, non mi interessa",,"nˈɔ ɡrˈatsje, non mɪ interˈessa",,2,it-agent-v1;ipa=espeak
 police-consulate.someone-attacked-me,Mi hanno aggredito,,mɪ ˌanno aɡɡredˈito,,2,it-agent-v1;ipa=espeak
-police-consulate.i-did-not-agree-to-this-price,Non ho accettato questo prezzo,,non o atʃtʃettˈato kwˌɛsto prˈɛtstso,,2,it-agent-v1;ipa=espeak
+police-consulate.i-did-not-agree-to-this-price,Non ho accettato questo prezzo,,non o atʃtʃettˈato kwˌesto prˈɛtstso,,2,it-agent-v1;ipa=espeak
 police-consulate.please-write-the-report-number,Scriva il numero della denuncia,,skrˈiva il nˈumero dˌella denˈuntʃa,,2,it-agent-v1;ipa=espeak
 police-consulate.it-happened-here,È successo qui,,e sʊtʃtʃˈɛsso kwˈi,,2,it-agent-v1;ipa=espeak
 police-consulate.may-i-have-a-copy-of-the-report,Posso avere una copia della denuncia?,,pˈɔsso avˈere ˌʊna kˈɔpia dˌella denˈuntʃa,,2,it-agent-v1;ipa=espeak

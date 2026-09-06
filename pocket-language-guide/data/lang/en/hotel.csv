@@ -1,5 +1,5 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-hotel-words.passport,passport,,pˈæspoːɹt,,2,latex-reference-v2;ipa=espeak
+hotel-words.passport,passport,,pˈæspɔːɹt,,2,latex-reference-v2;ipa=espeak
 hotel-words.room-key-card,room key card,,ɹˈuːm kˈiː kˈɑːɹd,,2,latex-reference-v2;ipa=espeak
 hotel-words.check-in,check-in,,tʃˈɛkɪn,,2,latex-reference-v2;ipa=espeak
 hotel-words.check-out,check-out,,tʃˈɛkaʊt,,2,latex-reference-v2;ipa=espeak
@@ -12,7 +12,7 @@ hotel-basics.i-would-like-a-quiet-room,I would like a quiet room,,aɪ wʊd lˈa�
 hotel-basics.is-there-a-washing-machine,Is there a washing machine?,,ɪz ðɛɹ ɐ wˈɑːʃɪŋ məʃˈiːn,,2,latex-reference-v2;ipa=espeak
 hotel-requests.can-i-check-out-later,Can I check out later?,,kæn aɪ tʃˈɛk ˈaʊt lˈeɪɾɚ,,2,latex-reference-v2;ipa=espeak
 hotel-requests.what-time-does-breakfast-start,What time does breakfast start?,,wˌʌt tˈaɪm dˈʌz bɹˈɛkfəst stˈɑːɹt,,2,latex-reference-v2;ipa=espeak
-hotel-requests.can-i-store-my-luggage,Can I store my luggage?,,kæn aɪ stˈoːɹ maɪ lˈʌɡɪdʒ,,2,latex-reference-v2;ipa=espeak
+hotel-requests.can-i-store-my-luggage,Can I store my luggage?,,kæn aɪ stˈɔːɹ maɪ lˈʌɡɪdʒ,,2,latex-reference-v2;ipa=espeak
 hotel-requests.no-housekeeping,No housekeeping,,nˈoʊ hˈaʊskiːpɪŋ,,2,latex-reference-v2;ipa=espeak
 room-problems.there-is-a-problem-with-the-room,There is a problem with the room,,ðɛɹ ɪz ɐ pɹˈɑːbləm wɪððə ɹˈuːm,,2,latex-reference-v2;ipa=espeak
 room-problems.the-air-conditioning-is-broken,The air conditioning is broken,,ðɪ ˈɛɹ kəndˈɪʃənɪŋ ɪz bɹˈoʊkən,,2,latex-reference-v2;ipa=espeak
@@ -20,7 +20,7 @@ room-problems.there-is-no-hot-water,There is no hot water,,ðɛɹ ɪz nˈoʊ hˈ
 room-problems.can-i-change-rooms,Can I change rooms?,,kæn aɪ tʃˈeɪndʒ ɹˈuːmz,,2,latex-reference-v2;ipa=espeak
 room-problems.the-room-is-too-noisy,The room is too noisy,,ðə ɹˈuːm ɪz tˈuː nˈɔɪzi,,2,latex-reference-v2;ipa=espeak
 hotel-basics.is-wi-fi-free,Is Wi-Fi free?,,ɪz wˈaɪfˌaɪ fɹˈiː,,2,japanese-reviewed-v6;ipa=espeak
-hotel-words.luggage-storage,luggage storage,,lˈʌɡɪdʒ stˈoːɹɪdʒ,,2,japanese-reviewed-v6;ipa=espeak
+hotel-words.luggage-storage,luggage storage,,lˈʌɡɪdʒ stˈɔːɹɪdʒ,,2,japanese-reviewed-v6;ipa=espeak
 hotel-requests.another-towel-please,"Another towel, please",,"ɐnˈʌðɚ tˈaʊəl, plˈiːz",,2,japanese-reviewed-v6;ipa=espeak
 laundry.please-wash-these-clothes,Please wash these clothes,,plˈiːz wˈɑːʃ ðiːz klˈoʊðz,,2,expansion-v1;ipa=espeak
 laundry.where-is-a-laundromat,Where is a laundromat?,,wˌɛɹ ɪz ɐ lˈɔːndɹəmˌæt,,2,expansion-v1;ipa=espeak

@@ -1,0 +1,11 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+profanity.oh-my-god,Боже мій!,,Bozhe mii!,bˈoʒɛ mˈiːj,,2,uk-agent-v1;ipa=espeak
+profanity.damn,Чорт!,,Chort!,tʃˈort,,2,uk-agent-v1;ipa=espeak
+profanity.expletive,Лайно!,,Laino!,lˈajno,,2,uk-agent-v1;ipa=espeak
+profanity.strong-expletive,Їбать!,,Yibat!,jˈiːbat,"the general taboo exclamation, not aimed at anyone -- the root Ukrainian mat shares with Russian mat, since the taboo vocabulary is a common East Slavic inheritance rather than a Russian one",2,uk-agent-v1;ipa=espeak
+profanity.intensifier,їбаний,,yibanyi,jiːbˈanɪj,"a coarse attributive intensifier (feminine їбана), comprehension only -- carries no meaning of its own",2,uk-agent-v1;ipa=espeak
+profanity.frustration,Це якесь лайно.,,Tse yakes laino.,tsˈɛ jˈakɛs lˈajno,,2,uk-agent-v1;ipa=espeak
+profanity.thats-rude,Це грубо.,,Tse hrubo.,tsˈɛ hrˈubo,,2,uk-agent-v1;ipa=espeak
+profanity.excuse-my-language,Вибачте за лайку.,,Vybachte za laiku.,ʋɪbˈatʃtɛ zˈa lˈajku,,2,uk-agent-v1;ipa=espeak
+profanity.japanese-register,"Японська передає це майже виключно граматикою, а не лексикою. Зневагу несе форма: різкий займенник другої особи, голий наказовий спосіб, урізані закінчення дієслова. Гнів живе в закінченні, а не в слові, яке можна знайти в словнику, і рядки вище — це майже весь наявний матеріал.",,"Yaponska peredaie tse maizhe vykliuchno hramatykoiu, a ne leksykoiu. Znevahu nese forma: rizkyi zaimennyk druhoi osoby, holyi nakazovyi sposib, urizani zakinchennia diieslova. Hniv zhyve v zakinchenni, a ne v slovi, yake mozhna znaity v slovnyku, i riadky vyshche — tse maizhe ves naiavnyi material.",,,2,uk-notes-v1
+profanity.strength-warning,"Ці слова тут для впізнавання, а не для вживання: сила при перекладі не зберігається. Слово, перекладене тут як необразливе, у сусідній мові може виявитися невимовним, а найсильніше слово мови часто саме те, яке цей розділ не зміг умістити.",,"Tsi slova tut dlia vpiznavannia, a ne dlia vzhyvannia: syla pry perekladi ne zberihaietsia. Slovo, perekladene tut yak neobrazlyve, u susidnii movi mozhe vyiavytysia nevymovnym, a naisylnishe slovo movy chasto same te, yake tsei rozdil ne zmih umistyty.",,,2,uk-notes-v1

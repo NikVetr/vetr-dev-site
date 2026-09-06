@@ -38,7 +38,7 @@ etiquette.keep-the-change,Quédese con el cambio,,kˈedese kon el kˈambjo,,2,es
 sim-data.where-can-i-buy-a-plug-adapter,¿Dónde puedo comprar un adaptador de enchufe?,,dˈonde pwˈedo kompɾˈaɾ ˈun ˌadapːtadˈoɾ de entʃˈufe,,2,es-agent-v1;ipa=espeak
 children.stroller,el carrito de bebé,el cochecito · la carriola,el karˈito de bebˈe,,2,es-agent-v1;ipa=espeak
 sim-data.mobile-data,los datos móviles,,los dˈatos mˈobiles,,2,es-agent-v1;ipa=espeak
-children.playground,¿Hay un parque infantil?,¿Hay juegos para niños?,ˈaɪ ˈum pˈaɾke ˌimfantˈil,,2,es-agent-v1;ipa=espeak
+children.playground,¿Hay un parque infantil?,¿Hay juegos para niños?,ˈaɪ ˈum pˈaɾke ˌinfantˈil,,2,es-agent-v1;ipa=espeak
 sim-data.can-i-top-up-this-sim,¿Puedo recargar esta SIM?,,pwˈedo rˌekaɾɡˈaɾ ˈesta ˌeseˌiˈeme,,2,es-agent-v1;ipa=espeak
 sim-data.top-up,la recarga,,la rekˈaɾɡa,,2,es-agent-v1;ipa=espeak
 sim-data.is-there-coverage-in,¿Hay cobertura en {}?,,ˈaɪ kˌobeɾtˈuɾa ˈen {},,2,es-agent-v1;ipa=espeak
@@ -96,6 +96,6 @@ phone-text-power.please-use-simple-words,"Use palabras sencillas, por favor",,"�
 phone-text-power.my-phone-battery-is-low,Mi teléfono tiene poca batería,,mi telˈefono tjˈene pˈoka bˌateɾˈia,,2,es-agent-v1;ipa=espeak
 phone-text-power.do-you-have-a-power-bank,¿Tiene una batería portátil?,¿Tiene un power bank?,tjˈene ˈuna bˌateɾˈia poɾtˈatil,,2,es-agent-v1;ipa=espeak
 phone-text-power.the-translation-may-be-inaccurate,La traducción puede ser inexacta,,la tɾˌaduksjˈom pwˈede sˈer ˌineksˈakta,,2,es-agent-v1;ipa=espeak
-phone-text-power.please-confirm,"Confírmelo, por favor",,"komfˈiɾmelo, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
+phone-text-power.please-confirm,"Confírmelo, por favor",,"konfˈiɾmelo, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
 phone-text-power.may-i-charge-my-phone-here,¿Puedo cargar el teléfono aquí?,,pwˈedo kaɾɡˈaɾ el telˈefono akˈi,,2,es-agent-v1;ipa=espeak
 social-basics.politeness-particles,"Cortesía en tailandés: termine casi cualquier frase con khrap si es hombre, con kha si es mujer. Si una mujer pregunta, kha se dice con tono ascendente. Las filas de esta guía omiten la partícula; añádala usted.",,,,2,es-notes-v1

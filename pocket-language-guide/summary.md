@@ -23,14 +23,27 @@ reader's chosen countries from the target language's region list.
 ## Optional ornament styles
 
 The customise panel's **Style** setting defaults to Classic. Language-inspired
-chooses a distinct motif for each of the 23 target languages; botanical, waves,
+chooses a distinct motif for each target language; botanical, waves,
 mosaic, woven, laurel and Starforge can also be chosen directly.
 `core/ornament-designs.js` contains the language catalogue and reusable vector
 drawing primitives; `core/ornaments.js` places the marks. Heading ornaments use
 existing rule space and measured free space beside titles; gutter and corner
 flourishes occupy only unused space inside the printable area and outside phone
-reservations. Text positions, fitting and page counts are unaffected. Low ink
+reservations. These compact motifs leave text positions, fitting and page counts unaffected. Low ink
 uses classic rules; monochrome keeps the motifs in the ink colour.
+
+Quenya's Language-inspired and Elven botanical choices use `core/elven-frame.js`:
+a connected sage-and-gold framework of willow stems, interwoven arches, leafy
+corner scrolls and branching heading rules. Its geometry follows the page size,
+column gutters, printer limits and phone reservations. The solver reserves a
+perimeter and wider gutters before measuring text, preserving every selected entry
+and the existing type-size floors. Fitting may change; the default Quenya–English
+sheet uses four faces with the frame versus two in Classic. The control previews
+the complete frame and explains that tradeoff in each interface catalogue.
+Additional branches grow only into measured empty space beneath columns. All art
+is native vector geometry shared by preview and exports; no generated raster or
+generated language content is shipped. Frame-specific tests cover content retention,
+clearance, variable geometry, ink modes, imposition and browser exports.
 
 Optional `Face.paths` travel through the SVG and PDF renderers and cut/fold/n-up
 imposition, so PDF, SVG and PNG exports carry the same decoration without image

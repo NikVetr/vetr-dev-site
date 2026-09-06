@@ -86,3 +86,5 @@ numbers-money.rial,里亚尔,,lǐyà'ěr,li˧˩˧ja˥˩ɑɻ˧˩˧,,2,rial-toman-
 numbers-money.toman,十里亚尔,,shí lǐyà'ěr,ʂɨ˧˥ li˧˩˧ja˥˩ɑɻ˧˩˧,,2,rial-toman-gloss-v1;cldr;ipa=pinyin
 numbers-money.zloty,兹罗提,,,,,2,gloss-only;scoped-away;name of the currency in this language
 numbers-money.zloty-symbol,兹罗提符号,,,,,2,gloss-only;scoped-away;name of the currency in this language
+numbers-money.hryvnia,格里夫纳,,Gélǐfūnà,kɤ˧˥li˧˩˧fu˥na˥˩,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
+numbers-money.hryvnia-symbol,格里夫纳符号,,Gélǐfūnà,kɤ˧˥li˧˩˧fu˥na˥˩,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin

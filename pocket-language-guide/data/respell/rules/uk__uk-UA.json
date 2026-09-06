@@ -1,0 +1,1118 @@
+{
+  "source": "uk",
+  "accent": "uk-UA",
+  "status": "ready",
+  "version": "1",
+  "derives_from": "Practical transcription per the 2001 recommendation of the State Department of Intellectual Property (Ministry of Education and Science of Ukraine), consolidated on uk.wikipedia's Довідка:Англо-українська практична транскрипція (\"Anglo-Ukrainian practical transcription\") -- the direct Ukrainian counterpart to the GUGK-based Anglo-russkaya table ru__ru-RU.json reads, and the source ð -> з / θ -> т below comes from, verbatim. Like the Russian table, this covers only the English column: the ten non-English targets' sounds with no row in it (retroflexes, aspirates, tones, the Sinitic/Korean/Japanese series) have no separate Ukrainian instruction to borrow the way Russian borrows Polivanov/Palladius/Kontsevich -- those are specifically Russian-language traditions, a century-plus old, with no Ukrainian-language equivalent published. Where ru__ru-RU.json's own departures from the English table are about the *target's* sound rather than about Russian's script, this table takes the same answer (documented in the module docstring as points not touched by и/і, г/ґ or в); where Ukrainian's own script forces a different answer, that is a deviation below, not silently copied.",
+  "deviations": [
+    {
+      "rule": "и and і are one letter in every other Cyrillic-reader table this corpus has (Russian's и, the same problem Bengali's і-less readers do not have to solve at all)",
+      "why": "Ukrainian's own orthography already keeps them apart -- и for a lowered, centralised /ɪ/-like vowel, і for tense /i/ -- which is not a respelling device invented for this table, it is how Ukrainian already spells бити/бити-alikes. The corpus's English column has both vowels (KIT and FLEECE), so the split is put to immediate use: bit -> бит, beat -> біт, a distinction ru__ru-RU.json cannot make and does not try to."
+    },
+    {
+      "rule": "г spells /ɡ/ in every other Cyrillic reader this table's targets reach, because Russian's г is a stop",
+      "why": "Ukrainian's г is a fricative, /ɦ/, and the stop is a separate letter, ґ -- rare in native vocabulary but exactly the letter foreign /ɡ/ calls for, and already how Ukrainian spells loanwords with a hard g (ґанок, ґрунт). Freeing г for what it actually is lets it spell /h/ and /ɣ/ instead of forcing х to do both jobs the way Russian's table has to -- German, English and Arabic all have a plain /h/ this table can now spell without collapsing it into the same letter as /x/."
+    },
+    {
+      "rule": "в spells only /v/, with /w/ needing a context-dependent у/ю workaround (ru__ru-RU.json's three-way split)",
+      "why": "Ukrainian's в is realised between [ʋ] and [w] depending on position -- it is not the dental fricative Russian's в is -- so /v/, /ʋ/ and /w/ are one Ukrainian sound already, not three sounds asking to be spelled the same way for convenience. English work and vine both start with a sound this letter already covers natively."
+    },
+    {
+      "rule": "ð and θ both become the same letter (t or d), per the English table's own answer",
+      "why": "The 2001 State Intellectual Property recommendation gives them different Ukrainian letters -- з for ð, т for θ -- which is kept here because it is the sourced Ukrainian answer, not the sourced Russian one: thin and this stop being homophones in the Russian table is not a fact about the sounds, it is a fact about which table you read."
+    },
+    {
+      "rule": "The front-rounded and NURSE-class vowels (ɜ ø œ) take a one-letter softening device after a consonant (ё)",
+      "why": "Ukrainian has no letter that both softens the consonant before it and carries an o-colour in one character. The two-letter sequence ьо does the same job and is not invented for this table -- it is how Ukrainian already spells льон (flax) -- so the device survives, just written in two characters instead of one."
+    },
+    {
+      "rule": "/æ/ takes a separate letter from plain /e/ (э against е) specifically to keep the English TRAP/DRESS contrast (bed/bad) audible",
+      "why": "Ukrainian's е does not palatalise the consonant before it the way Russian's does, which is exactly the fact ru__ru-RU.json's own deviations list cites for why э is the closer sound in every environment -- but Ukrainian never developed a second hard-e letter to spend on the contrast, because it never needed one. bed and bad merge to бед/бед here; a real loss against the Russian table, not an oversight, and listed in approximations below rather than hidden."
+    },
+    {
+      "rule": "/ɕ/ takes щ, the single letter the source tradition's own sound-keyed answer already prefers for it",
+      "why": "Ukrainian's щ is not a single soft fricative the way Russian's is usually described (and not how espeak's own uk voice reads it, confirmed against this pack's own щастя -> ʃtʃˈastʲa): it is the digraph letter for the affricate cluster /ʃtʃ/. Spelling a bare /ɕ/ with it would tell a Ukrainian reader to insert a stop that is not there, so ш stands in instead -- the nearest single sound Ukrainian's alphabet actually has."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "/æ/ (English TRAP) against /e/ /ɛ/ (DRESS)",
+      "out": "е for both",
+      "why": "See the /æ/ deviation above: Russian buys this contrast with a second hard-e letter Ukrainian's alphabet does not have. bed and bad both respell бед; the corpus's own data shows this only costs the English column, since no other target in the corpus contrasts these two vowels against each other in the words this pack carries."
+    },
+    {
+      "sounds": "vowel length (Japanese, Hindi, Arabic, Thai, German)",
+      "out": "not written",
+      "why": "Same argument as ru__ru-RU.json: Ukrainian has no length contrast either, so doubling a vowel would read as hiatus (two syllables) rather than as length, and policy.length is none by choice."
+    },
+    {
+      "sounds": "lexical tone (Mandarin, Thai, Vietnamese)",
+      "out": "dropped",
+      "why": "No Cyrillic device reads as tone to an untrained reader; the same choice every table in this corpus makes."
+    },
+    {
+      "sounds": "/ʔ/ /ʕ/ /ˤ/ /ˀ/ (glottal stop, ayn, pharyngealisation, Vietnamese glottalisation)",
+      "out": "dropped",
+      "why": "Ukrainian has no letter and no sound for any of the four, same as Russian."
+    },
+    {
+      "sounds": "/ʈ ɖ ɳ ɽ ʂ ʐ/ and the Mandarin retroflexes",
+      "out": "т д н р ш ж",
+      "why": "Ukrainian has no retroflex series either. The dental/plain letters are the same standard rendering Russian's table uses for Devanagari and for Palladius's zh/ch/sh/r row."
+    },
+    {
+      "sounds": "/ɰ/ (Korean 의)",
+      "out": "dropped",
+      "why": "Same as Russian: Kontsevich writes this word-initially and drops it elsewhere, and dropping it everywhere reads better than a two-letter vowel a Ukrainian reader would try to pronounce."
+    }
+  ],
+  "policy": {
+    "syllable_separator": "-",
+    "word_separator": " ",
+    "stress": "acute",
+    "stress_min_syllables": 2,
+    "length": "none",
+    "tone": "drop",
+    "max_onset": 3,
+    "locale": "uk"
+  },
+  "splits": [],
+  "phonemes": [
+    {
+      "slot": "coda",
+      "ipa": "ɬ",
+      "out": "ль"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɬ",
+      "out": "л"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂʰ",
+      "out": "ч",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "чж",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "ц",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "чх"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "ц",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "цх"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ͈",
+      "out": "чч"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "цз",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "ч"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "ч"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "цз",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "ц"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts̪",
+      "out": "тс"
+    },
+    {
+      "slot": "any",
+      "ipa": "ch",
+      "out": "ч"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʰ",
+      "out": "п",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰ",
+      "out": "т",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰ",
+      "out": "к",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "k͈",
+      "out": "кк"
+    },
+    {
+      "slot": "any",
+      "ipa": "t͈",
+      "out": "тт"
+    },
+    {
+      "slot": "any",
+      "ipa": "p͈",
+      "out": "пп"
+    },
+    {
+      "slot": "any",
+      "ipa": "s͈",
+      "out": "сс"
+    },
+    {
+      "slot": "any",
+      "ipa": "tː",
+      "out": "тт"
+    },
+    {
+      "slot": "any",
+      "ipa": "dː",
+      "out": "дд"
+    },
+    {
+      "slot": "any",
+      "ipa": "pː",
+      "out": "пп"
+    },
+    {
+      "slot": "any",
+      "ipa": "bː",
+      "out": "бб"
+    },
+    {
+      "slot": "any",
+      "ipa": "sː",
+      "out": "сс"
+    },
+    {
+      "slot": "any",
+      "ipa": "zː",
+      "out": "зз"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃː",
+      "out": "шш"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒː",
+      "out": "жж"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡː",
+      "out": "ґґ"
+    },
+    {
+      "slot": "any",
+      "ipa": "qː",
+      "out": "кк"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "б",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "д",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "ґ",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "п"
+    },
+    {
+      "slot": "any",
+      "ipa": "b",
+      "out": "б"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "т"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈ",
+      "out": "т"
+    },
+    {
+      "slot": "any",
+      "ipa": "̪",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "d",
+      "out": "д"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖ",
+      "out": "д"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɗ",
+      "out": "д"
+    },
+    {
+      "slot": "any",
+      "ipa": "ð",
+      "out": "з"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "к"
+    },
+    {
+      "slot": "any",
+      "ipa": "q",
+      "out": "к"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡ",
+      "out": "ґ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɣ",
+      "out": "г"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "ґ",
+      "if_inventory": "dʒ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "дж"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "ч"
+    },
+    {
+      "slot": "any",
+      "ipa": "θ",
+      "out": "т"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʕ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˤ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˀ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "f",
+      "out": "ф"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɸ",
+      "out": "ф"
+    },
+    {
+      "slot": "any",
+      "ipa": "v",
+      "out": "в"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʋ",
+      "out": "в"
+    },
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "с"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "з"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "ш"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʂ",
+      "out": "ш"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "ш"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɻ",
+      "out": "р"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒ",
+      "out": "ж"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʑ",
+      "out": "ж"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʐ",
+      "out": "ж"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɻ",
+      "out": "ж"
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "х"
+    },
+    {
+      "slot": "any",
+      "ipa": "ħ",
+      "out": "х"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "х"
+    },
+    {
+      "slot": "any",
+      "ipa": "h",
+      "out": "г"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "р"
+    },
+    {
+      "slot": "any",
+      "ipa": "m",
+      "out": "м"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "н",
+      "if_nucleus": "i iː ɪ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "нь"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "н",
+      "before_onset": "k ɡ x q ɣ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "н",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "нг"
+    },
+    {
+      "slot": "coda",
+      "ipa": "n",
+      "out": "нь",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "n",
+      "out": "н"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɳ",
+      "out": "н"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɴ",
+      "out": "н"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "л",
+      "if_nucleus": "i iː ɪ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "ль"
+    },
+    {
+      "slot": "coda",
+      "ipa": "l",
+      "out": "ль"
+    },
+    {
+      "slot": "any",
+      "ipa": "l",
+      "out": "л"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɫ",
+      "out": "л"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭ",
+      "out": "л"
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
+      "out": "р"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾ",
+      "out": "р"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɹ",
+      "out": "р"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽ",
+      "out": "р"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "",
+      "after_out": "ж ш ч щ ц цз ь"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "й",
+      "after_out": "а е є и і ї о у ю я"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "ь"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "ь"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɥœ",
+      "out": "юе"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɥ",
+      "out": "ю"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "ю",
+      "after_out": "ь"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "в"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰ",
+      "out": ""
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ̃ʊ̃",
+      "out": "ан"
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "м",
+      "before_onset": "p b m"
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "н"
+    },
+    {
+      "slot": "any",
+      "ipa": "ã",
+      "out": "ян",
+      "after_out": "ь"
+    },
+    {
+      "slot": "any",
+      "ipa": "ã",
+      "out": "ан"
+    },
+    {
+      "slot": "any",
+      "ipa": "ẽ",
+      "out": "ен"
+    },
+    {
+      "slot": "any",
+      "ipa": "ĩ",
+      "out": "ін"
+    },
+    {
+      "slot": "any",
+      "ipa": "õ",
+      "out": "он"
+    },
+    {
+      "slot": "any",
+      "ipa": "ũ",
+      "out": "ун"
+    },
+    {
+      "slot": "any",
+      "ipa": "a",
+      "out": "я",
+      "after_out": "ь"
+    },
+    {
+      "slot": "any",
+      "ipa": "a",
+      "out": "а"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɑ",
+      "out": "я",
+      "after_out": "ь"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɑ",
+      "out": "а"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ",
+      "out": "я",
+      "after_out": "ь"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ",
+      "out": "а"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʌ",
+      "out": "я",
+      "after_out": "ь"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʌ",
+      "out": "а"
+    },
+    {
+      "slot": "any",
+      "ipa": "æ",
+      "out": "я",
+      "after_out": "ь"
+    },
+    {
+      "slot": "any",
+      "ipa": "æ",
+      "out": "е"
+    },
+    {
+      "slot": "any",
+      "ipa": "ə",
+      "out": "я",
+      "after_out": "ь"
+    },
+    {
+      "slot": "any",
+      "ipa": "ə",
+      "out": "а",
+      "if_inventory": "ʋ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ə",
+      "out": "е",
+      "after_out": "б в г ґ д ж з й к л м н п р с т ф х ц ч ш щ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ə",
+      "out": "а"
+    },
+    {
+      "slot": "any",
+      "ipa": "e",
+      "out": "е"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛ",
+      "out": "е"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɜ",
+      "out": "ьо",
+      "after_out": "б в г ґ д ж з й к л м н п р с т ф х ц ч ш щ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɜ",
+      "out": "е"
+    },
+    {
+      "slot": "any",
+      "ipa": "ø",
+      "out": "ьо",
+      "after_out": "б в г ґ д ж з й к л м н п р с т ф х ц ч ш щ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ø",
+      "out": "е"
+    },
+    {
+      "slot": "any",
+      "ipa": "œ",
+      "out": "ьо",
+      "after_out": "б в г ґ д ж з й к л м н п р с т ф х ц ч ш щ"
+    },
+    {
+      "slot": "any",
+      "ipa": "œ",
+      "out": "е"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɪ",
+      "out": "й",
+      "after_out": "а е є и і ї о у ю я"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɪ",
+      "out": "и"
+    },
+    {
+      "slot": "any",
+      "ipa": "i",
+      "out": "і"
+    },
+    {
+      "slot": "any",
+      "ipa": "iː",
+      "out": "і"
+    },
+    {
+      "slot": "any",
+      "ipa": "ī",
+      "out": "і"
+    },
+    {
+      "slot": "any",
+      "ipa": "o",
+      "out": "о"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɔ",
+      "out": "о"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɒ",
+      "out": "о"
+    },
+    {
+      "slot": "any",
+      "ipa": "u",
+      "out": "ю",
+      "after_out": "ь"
+    },
+    {
+      "slot": "any",
+      "ipa": "u",
+      "out": "у"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʊ",
+      "out": "ю",
+      "after_out": "ь"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʊ",
+      "out": "у"
+    },
+    {
+      "slot": "any",
+      "ipa": "y",
+      "out": "ю"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɯ",
+      "out": "ю",
+      "after_out": "ь"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɯ",
+      "out": "и"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɤ",
+      "out": "е"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɵ",
+      "out": "о"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʉ",
+      "out": "у"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɨ",
+      "out": "и",
+      "after_out": "ц цз с"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɨ",
+      "out": "и"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɚ",
+      "out": "е",
+      "before_onset": "ɹ r ɾ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɚ",
+      "out": "ер"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɝ",
+      "out": "ер"
+    },
+    {
+      "slot": "any",
+      "ipa": "ː",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̯",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̩",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "͈",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʰ",
+      "out": "",
+      "unless_inventory": "b d ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʰ",
+      "out": "х"
+    }
+  ],
+  "syllable_fixups": [
+    {
+      "match": "^ья",
+      "out": "я"
+    },
+    {
+      "match": "^ье",
+      "out": "е"
+    },
+    {
+      "match": "^ьі",
+      "out": "ї"
+    },
+    {
+      "match": "^ью",
+      "out": "ю"
+    },
+    {
+      "match": "^ьу",
+      "out": "ю"
+    },
+    {
+      "match": "^ьо",
+      "out": "йо"
+    },
+    {
+      "match": "^ь",
+      "out": "й"
+    },
+    {
+      "match": "нг([кґгх])",
+      "out": "н\\1"
+    },
+    {
+      "match": "([аеєиіїоуюя][мн])[мн]",
+      "out": "\\1"
+    },
+    {
+      "match": "рр",
+      "out": "р"
+    }
+  ],
+  "targets": {
+    "ja": {
+      "comment": "Polivanov's tradition writes Japanese /ɯ/ as u (sushi, Fukuoka), which и does not carry as well as у does -- same reasoning as ru__ru-RU.json, ported letter-for-letter since и/і do not touch this vowel.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "ɯ",
+          "out": "ю",
+          "after_out": "ь"
+        },
+        {
+          "slot": "any",
+          "ipa": "ɯ",
+          "out": "у"
+        }
+      ]
+    },
+    "ko": {
+      "comment": "Kontsevich's o for 어 /ʌ/ (Seul, Pusan) and n for a final ㅇ, ported unchanged: neither touches и/і, г/ґ or в.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "ʌ",
+          "out": "о"
+        },
+        {
+          "slot": "any",
+          "ipa": "ŋ",
+          "out": "н"
+        }
+      ]
+    },
+    "en": {
+      "comment": "English coda /l/ is the dark velarised [l] that Ukrainian plain л already is (the soft-coda rule above does not apply to English, same argument as ru__ru-RU.json). Coda /ts/ is тс, not the affricate ц, because in English it is the plural/possessive suffix across a morpheme boundary.",
+      "phonemes": [
+        {
+          "slot": "coda",
+          "ipa": "l",
+          "out": "л"
+        },
+        {
+          "slot": "any",
+          "ipa": "ʔ",
+          "out": "т"
+        },
+        {
+          "slot": "coda",
+          "ipa": "ts",
+          "out": "тс"
+        }
+      ]
+    },
+    "de": {
+      "comment": "espeak writes the unstressed German -er suffix as /ɜ/, which is the reduced [ɐ] the tradition renders er (Vasser), not the front-rounded quality the general ɜ rule above assumes.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "ɜ",
+          "out": "ер"
+        }
+      ]
+    },
+    "vi": {
+      "comment": "espeak writes Vietnamese ư as /y/, the back unrounded vowel и already carries (not а front rounded one), and final -c as /k/, an orthographic fact about Vietnamese rather than a general coda rule -- both ported from ru__ru-RU.json with ы changed to и, since Ukrainian has no hard-y letter of its own to spend here (#4).",
+      "phonemes": [
+        {
+          "slot": "coda",
+          "ipa": "c",
+          "out": "к"
+        },
+        {
+          "slot": "any",
+          "ipa": "y",
+          "out": "ю",
+          "after_out": "ь"
+        },
+        {
+          "slot": "any",
+          "ipa": "y",
+          "out": "и"
+        },
+        {
+          "slot": "any",
+          "ipa": "ə",
+          "out": "я",
+          "after_out": "ь"
+        },
+        {
+          "slot": "any",
+          "ipa": "əː",
+          "out": "о"
+        },
+        {
+          "slot": "any",
+          "ipa": "ə",
+          "out": "о",
+          "after_nucleus": "u uː y yː"
+        },
+        {
+          "slot": "any",
+          "ipa": "ə",
+          "out": "а"
+        }
+      ]
+    },
+    "pt": {
+      "comment": "espeak writes the Brazilian reduced final -e as /y/, a plain [i] (de -> /dʒy/) -- і, not и, because this is the true /i/ quality the и/і split exists for (#1), which is the one place this table's answer differs from ru__ru-RU.json's for a reason beyond letter-inventory: Russian has no second /i/-letter to make the same call. The corresponding ŋ rule is unaffected by any of the four differences and is ported as-is.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "y",
+          "out": "і"
+        },
+        {
+          "slot": "any",
+          "ipa": "ŋ",
+          "out": "н"
+        }
+      ]
+    }
+  },
+  "legend": "Нічого нового: усе написано звичайними українськими літерами, а наголос позначено значком над наголошеним складом.",
+  "note": "Reader's legend, per RESPELL-SYSTEMS.md: none needed, same argument as ru__ru-RU.json -- every letter here is ordinary Ukrainian and the acute over the stressed syllable is a real Ukrainian lexicographic convention (dictionaries mark stress this way), not a device invented for this table. policy.stress = caps is the same documented fallback Russian's table names, for the same reason (a technical inability to print an acute)."
+}

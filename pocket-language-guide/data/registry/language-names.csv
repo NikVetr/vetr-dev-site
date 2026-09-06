@@ -1,28 +1,30 @@
 locale,bcp47,name,romanization,ipa
-ar,ar,العربية,al-ʿarabīyah,ʔalʕaɹˈabiːjˌa
+ar,ar,العربية,al-ʿarabīyah,ʔalʕarˈabiːjˌa
 ar,bn,,al-banghālīyah,ʔalbˌanɣaːlˈijjah
 ar,de,,al-almānīyah,ʔalʔlmaːnˈijjah
 ar,el,,al-yūnānīyah,ʔaljˌuːnaːnˈijjah
-ar,en,,al-injilīzīyah,ʔalʔˌinɡliˈizijˌah
+ar,en,,al-injilīzīyah,ʔalʔinɡlˈiːzijˌah
 ar,es,,al-isbānīyah,ʔalʔsbaːnˈijjah
-ar,fa,,,ʔalfˌaːɹisˈijjah
+ar,fa,,al-fārisīyah,ʔalfˌaːrisˈijjah
 ar,fr,,al-faransīyah,ʔalfrnsˈijjah
-ar,he,,al-ʿibrīyah,ʔalʕabɹˈijjah
+ar,he,,al-ʿibrīyah,ʔalʕˈabrijjah
 ar,hi,,al-hindīyah,ʔalhindˈijjah
-ar,hu,,al-hunghārīyah,ʔalhnɣaːɹˈijjah
+ar,hu,,al-hunghārīyah,ʔalhnɣaːrˈijjah
 ar,id,,al-indūnīsīyah,ʔalʔndˌuːniːsˈijjah
 ar,it,,al-īṭālīyah,ʔalʔˌiːt̪aːlˈijjah
 ar,ja,,al-yābānīyah,ʔaljˌaːbaːnˈijjah
-ar,ko,,al-kūrīyah,ʔalkˈuːɹiːjˌa
+ar,ko,,al-kūrīyah,ʔalkˈuːriːjˌa
 ar,pl,,al-būlandīyah,ʔalbuːlndˈijjah
 ar,pt,,al-burtughālīyah,ʔalbˌurtuɣaːlˈijjah
 ar,qya,كوينيا,kwīniyā,kuːˌiniːˌaː
-ar,ru,,al-rūsīyah,ʔarɹuːsˈijjah
+ar,ru,,al-rūsīyah,ʔarruːsˈijjah
 ar,sw,,al-sawāḥilīyah,ʔassuːaːħlˈijjah
+ar,ta,,al-tāmīlīyah,ʔattˌaːmiːlˈijjah
 ar,th,,al-tāylāndīyah,ʔattˌaːjlaːndˈijjah
 ar,tlh,,al-klīnjūn,ʔalkliːndʒˈuːna
-ar,tr,,al-turkīyah,ʔattˌaɹakˈijjah
-ar,ur,,al-urdīyah,ʔalʔˌawɹadˈijjah
+ar,tr,,al-turkīyah,ʔattˌarakˈijjah
+ar,uk,,al-ūkrānīyah,ʔalʔˌuːkraːnˈijjah
+ar,ur,,al-urdīyah,ʔalʔˌawradˈijjah
 ar,vi,,al-fītnāmīyah,ʔalfˌiːatnaːmˈijjah
 ar,zh-Hans,,al-ṣīnīyah,ʔas̪s̪ˈiːniːjˌa
 bn,ar,,ārabi,ˈaɾɔbˌi
@@ -45,9 +47,11 @@ bn,pt,,partugija,pˈoɾtuɡˌiɟ
 bn,qya,কুয়েনিয়া,kuẏeniẏā,kˈuenˌia
 bn,ru,,ruśa,ɾˈuʃ
 bn,sw,,soẏāhili,ʃˈoahˌili
+bn,ta,,tāmila,tˈamil
 bn,th,,thāi,tʰˈai
 bn,tlh,,kliṅgana,klˈiŋɡɔn
 bn,tr,,turki,tˈuɾki
+bn,uk,,iukrēnīẏa,ˈiukɾˌenij
 bn,ur,,urdu,ˈuɾdu
 bn,vi,,bhiẏetanāmī,bʰˈietˌɔnamˌi
 bn,zh-Hans,,cīnā,tʃˈina
@@ -71,19 +75,21 @@ de,pt,,,pˌɔɾtuːɡˈiːzɪʃ
 de,qya,Quenya,,kvˈeːnyːˌɑː
 de,ru,,,rˈʊsɪʃ
 de,sw,,,zˈuːɑːˌɛliː
+de,ta,,,tamˈiːl
 de,th,,,tˈaɪlˌɛndɪʃ
 de,tlh,,,klɪŋˈoːnɪʃ
-de,tr,,,tˈyɾkɪʃ
-de,ur,,,ˈʊɾduː
+de,tr,,,tˈʏɾkɪʃ
+de,uk,,,ʊkɾˈaɪnɪʃ
+de,ur,,,ˈʊɐduː
 de,vi,,,vˌɪɛtnamˈeːzɪʃ
 de,zh-Hans,,,çiːnˈeːzɪʃ
 el,ar,,Aravika,ˌaɾavikˈa
-el,bn,,,vˌeŋɡalikˈa
+el,bn,,Vengalika,vˌeŋɡalikˈa
 el,de,,Germanika,jˌeɾmanikˈa
 el,el,Ελληνικά,Ellinika,ˌelinikˈa
 el,en,,Anglika,ˌaŋɡlikˈa
 el,es,,Ispanika,ˌispanikˈa
-el,fa,,,pˌeɾsikˈa
+el,fa,,Persika,pˌeɾsikˈa
 el,fr,,Gallika,ɣˌalikˈa
 el,he,,Evraika,ˌevɾaɪkˈa
 el,hi,,Chinti,çˈidi
@@ -92,15 +98,17 @@ el,id,,Indonisiaka,ˌinðonˌisjakˈa
 el,it,,Italika,ˌitalikˈa
 el,ja,,Iaponika,ˌiapˌonikˈa
 el,ko,,Koreatika,kˌoɾeˌatikˈa
-el,pl,,,pˌolonikˈa
+el,pl,,Polonika,pˌolonikˈa
 el,pt,,Portogalika,pˌoɾtoɣˌalikˈa
 el,qya,Κουένυα,Kouenya,kuˈeɲa
 el,ru,,Rosika,ɾˌosikˈa
 el,sw,,Souachili,sˌuaçˈili
+el,ta,,Tamiliká,tˌamilikˈa
 el,th,,Tailandika,tˌaɪlanðikˈa
 el,tlh,,Klinnkon,klˈinɡon
 el,tr,,Tourkika,tˌuɾcikˈa
-el,ur,,,ˈuɾdu
+el,uk,,Oukranika,ˌukɾanikˈa
+el,ur,,Ourntou,ˈuɾdu
 el,vi,,Vietnamika,vˌietnˌamikˈa
 el,zh-Hans,,Kinezika,cˌinezikˈa
 en,ar,,,ˈæɹɐbˌɪk
@@ -119,13 +127,15 @@ en,it,,,ɪtˈæliən
 en,ja,,,dʒˌæpənˈiːz
 en,ko,,,kɚɹˈiːən
 en,pl,,,pˈoʊlɪʃ
-en,pt,,,pˌoːɹtʃəɡˈiːz
+en,pt,,,pˌɔːɹtʃəɡˈiːz
 en,qya,Quenya,,kwˈɛnjə
 en,ru,,,ɹˈʌʃən
 en,sw,,,swɑːhˈiːli
+en,ta,,,tˈæmɪl
 en,th,,,tˈaɪ
 en,tlh,,,klˈɪŋɡɑːn
 en,tr,,,tˈɜːkɪʃ
+en,uk,,,juːkɹˈeɪniən
 en,ur,,,ˈʊɹduː
 en,vi,,,vˌiːɛtnəmˈiːz
 en,zh-Hans,,,tʃaɪnˈiːz
@@ -149,9 +159,11 @@ es,pt,,,pˌoɾtuɡˈes
 es,qya,quenya,,kˈeɲa
 es,ru,,,rˈuso
 es,sw,,,swaxˈili
+es,ta,,,tamˈil
 es,th,,,tˌaɪlandˈes
 es,tlh,,,klˈiŋɡon
 es,tr,,,tˈuɾko
+es,uk,,,ˌukɾanjˈano
 es,ur,,,ˈuɾdu
 es,vi,,,bjˌetnamˈita
 es,zh-Hans,,,tʃˈino
@@ -175,9 +187,11 @@ fa,pt,,porteghāli,porteqɑli
 fa,qya,کوئنیا,kue’niyā,kuʔeniɑ
 fa,ru,,rusi,rusi
 fa,sw,,savāhili,savɑhili
+fa,ta,,tāmili,tɑmili
 fa,th,,tāylandi,tɑjlandi
 fa,tlh,کِلینگون,kelingon,kelinɡun
 fa,tr,ترکی,torki,torki
+fa,uk,,okrāyeni,okrɑjni
 fa,ur,,urdu,ordu
 fa,vi,,viyetnāmi,vijetnɑmi
 fa,zh-Hans,,chini,tʃini
@@ -201,9 +215,11 @@ fr,pt,,,pɔʁtyɡˈɛ
 fr,qya,quenya,,kənjˈa
 fr,ru,,,ʁˈys
 fr,sw,,,swailˈi
+fr,ta,,,tamˈul
 fr,th,,,tˈaj
 fr,tlh,,,klɛ̃ɡˈɔ̃
 fr,tr,,,tˈyʁk
+fr,uk,,,ykʁɛnjˈɛ̃
 fr,ur,,,uʁdˈu
 fr,vi,,,vjɛtnamjˈɛ̃
 fr,zh-Hans,,,ʃinwˈa
@@ -227,9 +243,11 @@ he,pt,,portugezit,poʁtuɡezˈit
 he,qya,קווניה,qvénya,kvˈenja
 he,ru,,rusit,ʁusˈit
 he,sw,,sevahíli,sevahˈili
+he,ta,,tamilit,tamilˈit
 he,th,,ta’it,taˈit
 he,tlh,,qlingonit,klinɡonˈit
 he,tr,,turqit,tuʁkˈit
+he,uk,,uqra’init,ukʁainˈit
 he,ur,,urdu,uʁdˈu
 he,vi,,vyetnamit,vjetnamˈit
 he,zh-Hans,,sinit,sinˈit
@@ -239,7 +257,7 @@ hi,de,,jarman,ɟˈʌrmən
 hi,el,,yūnānī,juːnˈaːni
 hi,en,,aṁgrezī,ʌŋɡɾˈeːzi
 hi,es,,speniś,spˈeːnɪʃ
-hi,fa,,,fˈaːɾsˌi
+hi,fa,,fārsī,fˈaːɾsˌi
 hi,fr,,freṁc,fɾˈẽːc
 hi,he,,hibrū,hˈɪbɾuː
 hi,hi,हिन्दी,hindī,hˈɪndi
@@ -253,9 +271,11 @@ hi,pt,,purtagālī,pˌʊɾtəɡˈaːli
 hi,qya,क्वेन्या,kvenyā,kʋˈeːnjaː
 hi,ru,,rūsī,ɾˈuːsi
 hi,sw,,svāhilī,sʋˈaːhɪlˌi
+hi,ta,,tamil,tˈʌmɪl
 hi,th,,thāī,tʰˈaːi
 hi,tlh,,kliṁgan,klˈĩɡən
 hi,tr,,turkī,tˈʊɾki
+hi,uk,,yūkreniyāī,jˈuːkɾeːnˌɪjaːˌi
 hi,ur,,urdū,ˈʊɾduː
 hi,vi,,viyatnāmī,ʋˌɪjətnˈaːmi
 hi,zh-Hans,,cīnī,cˈiːni
@@ -279,9 +299,11 @@ hu,pt,,,pˈortuɡaːl
 hu,qya,quenya,,kvˈɛɲɑ
 hu,ru,,,ˈoros
 hu,sw,,,sˈuɑheːli
+hu,ta,,,tˈɑmil
 hu,th,,,thˈɑi
 hu,tlh,,,klˈinɡon
 hu,tr,,,tˈørøk
+hu,uk,,,ˈukraːn
 hu,ur,,,ˈurdu
 hu,vi,,,vˈiɛtnaːmi
 hu,zh-Hans,,,kˈiːnɑi
@@ -305,9 +327,11 @@ id,pt,,,pɔrtˈuɡis
 id,qya,Quenya,,kwˈɛɲa
 id,ru,,,rusˈia
 id,sw,,,swahˈili
+id,ta,,,tˈamil
 id,th,,,thˈaɪ
 id,tlh,,,klˈiŋon
 id,tr,,,tˈurki
+id,uk,,,ukrˈaɪna
 id,ur,,,ˈurdu
 id,vi,,,vˈitnam
 id,zh-Hans,Mandarin,,mandˈarin
@@ -331,9 +355,11 @@ it,pt,,,portoɡˈeze
 it,qya,quenya,,kwˈenja
 it,ru,,,rˈusso
 it,sw,,,swahˈilɪ
+it,ta,,,tˈamil
 it,th,,,taɪlandˈeze
 it,tlh,,,klˈiŋɡon
 it,tr,,,tˈurko
+it,uk,,,ʊkrˈaɪno
 it,ur,,,ˈurdʊ
 it,vi,,,vjetnamˈita
 it,zh-Hans,,,tʃinˈeze
@@ -357,9 +383,11 @@ ja,pt,,porutogarugo,poɾɯtoɡaɾɯɡo
 ja,qya,クウェンヤ,kuwen'ya,kɯweɴja
 ja,ru,,roshiago,ɾoɕiaɡo
 ja,sw,,suwahirigo,sɯwaçiɾiɡo
+ja,ta,,tamirugo,tamiɾɯɡo
 ja,th,,taigo,taiɡo
 ja,tlh,,kuringongo,kɯɾiɴɡoɴɡo
 ja,tr,,torukogo,toɾɯkoɡo
+ja,uk,,ukurainago,ɯkɯɾainaɡo
 ja,ur,,urudūgo,ɯɾɯdɯːɡo
 ja,vi,,betonamugo,betonamɯɡo
 ja,zh-Hans,,chūgokugo,tɕɯːɡokɯɡo
@@ -383,9 +411,11 @@ ko,pt,,poreutugareo,pʰoɾɯtʰuɡaɾʌ
 ko,qya,퀘냐,kwenya,kʰwenja
 ko,ru,,reosia-eo,ɾʌsiaʌ
 ko,sw,,seuwahilli-eo,sɯwahilliʌ
+ko,ta,,tamil-eo,tʰamilʌ
 ko,th,,taegugeo,tʰɛɡuɡʌ
 ko,tlh,,keullingeoneo,kʰɯlliŋʌnʌ
 ko,tr,,twireukiye-eo,tʰwiɾɯkʰijeʌ
+ko,uk,,ukeuraina-eo,ukʰɯɾainaʌ
 ko,ur,,ureudu-eo,uɾɯduʌ
 ko,vi,,beteunameo,petʰɯnamʌ
 ko,zh-Hans,,jungugeo,tɕuŋuɡʌ
@@ -409,9 +439,11 @@ pl,pt,po portugalsku,,pɔ pˌɔrtuɡˈalsku
 pl,qya,w Quenya,,w ɡvɛnˈɨa
 pl,ru,po rosyjsku,,pɔ rɔsˈɨjsku
 pl,sw,po suahili,,pɔ sˌuaxˈili
+pl,ta,po tamilsku,,pɔ tamˈilsku
 pl,th,po tajsku,,pɔ tˈajsku
 pl,tlh,po klingońsku,,pɔ kliŋɡˈɔɲsku
 pl,tr,po turecku,,pɔ turˈɛtsku
+pl,uk,po ukraińsku,,pɔ ˌukraˈiɲsku
 pl,ur,po urdu,,pɔ ˈurdu
 pl,vi,po wietnamsku,,pɔ vʲɛtnˈamsku
 pl,zh-Hans,po chińsku,,pɔ xˈiɲsku
@@ -435,25 +467,27 @@ pt,pt,português,,pˌoɾətuɡˈes
 pt,qya,quenya,,kˈenjæ
 pt,ru,,,xˈusʊ
 pt,sw,,,sˌuaˈili
+pt,ta,,,tˈɐ̃miʊ
 pt,th,,,tˌaɪlɐ̃ŋdˈes
 pt,tlh,,,kliŋɡˈoŋ
 pt,tr,,,tˈuɾəkʊ
+pt,uk,,,ˌukræniˈɐ̃nʊ
 pt,ur,,,uɾədˈu
 pt,vi,,,vˌietnæmˈitæ
 pt,zh-Hans,,,ʃinˈes
 qya,qya,,Quenya,kwˈenja
 ru,ar,арабском,arabskom,arˈɑpskʌm
-ru,bn,,,bʲinɡˈɑɭskʲij
+ru,bn,бенгальском,bengalʼskom,bʲinɡˈɑɭskʌm
 ru,de,немецком,nemetskom,nʲimʲˈetskʌm
 ru,el,греческом,grecheskom,ɡrʲˈetʃʲiskʌm
 ru,en,английском,angliyskom,anɡɭʲˈijskʌm
 ru,es,испанском,ispanskom,ɪspˈɑnskʌm
-ru,fa,,,pʲirsʲˈidskʲij
+ru,fa,персидском,persidskom,pʲirsʲˈitskʌm
 ru,fr,французском,frantsuzskom,frantsˈusskʌm
 ru,he,иврите,ivrite,ɪvrʲˈitʲi
 ru,hi,хинди,khindi,xˈindʲɪ
 ru,hu,венгерском,vengerskom,vʲinɡʲˈerskʌm
-ru,id,индонезийском,indoneziyskom,ɪndʌnʲˈeʑijskʌm
+ru,id,индонезийском,indoneziyskom,ɪndʌnʲiʑˈijskʌm
 ru,it,итальянском,italʼyanskom,ɪtaɭjˈjanskʌm
 ru,ja,японском,yaponskom,japˈonskʌm
 ru,ko,корейском,koreyskom,kʌrʲˈejskʌm
@@ -462,9 +496,11 @@ ru,pt,португальском,portugalʼskom,pʌrtuɡˈɑɭskʌm
 ru,qya,квенья,kvenʼya,kvʲˈenjja
 ru,ru,русском,russkom,rˈusskʌm
 ru,sw,суахили,suakhili,suˈɑxiɭʲɪ
+ru,ta,тамильском,tamilʼskom,tamʲˈiɭskʌm
 ru,th,тайском,tayskom,tˈɑjskʌm
 ru,tlh,клингонском,klingonskom,kɭʲinɡˈonskʌm
 ru,tr,турецком,turetskom,turʲˈetskʌm
+ru,uk,украинском,ukrainskom,ukraˈinskʌm
 ru,ur,урду,urdu,urdˈu
 ru,vi,вьетнамском,vʼyetnamskom,vjjitnˈɑmskʌm
 ru,zh-Hans,китайском,kitayskom,kʲitˈɑjskʌm
@@ -488,19 +524,49 @@ sw,pt,,,kirˈeno
 sw,qya,Quenya,,kuˈeɲa
 sw,ru,,,kirˈusi
 sw,sw,Kiswahili,,kˌiswahˈili
+sw,ta,,,kˌitamˈili
 sw,th,,,kiθˈai
 sw,tlh,,,kˌikliŋɡˈoni
 sw,tr,,,kˌiturˈuki
+sw,uk,,,kˌiukraˈini
 sw,ur,,,kiˈurdu
 sw,vi,,,kˌiviˌetinˈamu
 sw,zh-Hans,,,kitʃˈina
+ta,ar,,arapik,aɾʌbiɡ
+ta,bn,,vaṅkāḷam,vʌŋɡaːɭʌm
+ta,de,,jermaṉ,dʒermʌn
+ta,el,,kirēkkam,ɡɾeːkkʌm
+ta,en,,āṅkilam,aːŋɡilʌm
+ta,es,,spāṉiṣ,spaːniʂ
+ta,fa,,perṣiyaṉ,perʂijʌn
+ta,fr,,pireñcu,fɾeɲtʃɯ
+ta,he,,hīprū,hiːbɾɯ
+ta,hi,,inti,indi
+ta,hu,,haṅkēriyaṉ,hʌŋɡeːɾijʌn
+ta,id,,intōṉēṣiyaṉ,indoːneːʂijʌn
+ta,it,,ittāliyaṉ,ittaːlijʌn
+ta,ja,,jāppaṉīs,dʒaːppʌniːs
+ta,ko,,koriyaṉ,koɾijʌn
+ta,pl,,pōliṣ,poːliʂ
+ta,pt,,pōrccukīs,poːrtʃːɯɡiːs
+ta,qya,குவென்யா,kuveṉyā,kuvenjaː
+ta,ru,,raṣiyaṉ,ɾʌʂijʌn
+ta,sw,,svāhili,svaːhili
+ta,ta,தமிழ்,tamiḻ,tʌmiɻ
+ta,th,,tāy,taːj
+ta,tlh,,kḷiṅkōṉ,kɭiŋɡoːn
+ta,tr,,turukkiṣ,tuɾɯkkiʂ
+ta,uk,,ukrainiyaṉ,ukɾaɪnijʌn
+ta,ur,,urutu,uɾɯdɯ
+ta,vi,,viyaṭnāmīs,vijʌɖnaːmiːs
+ta,zh-Hans,சீனம்,cīṉam,siːnʌm
 th,ar,,arap,ʔaː˧rap˨˩
-th,bn,,,baŋ˧ klaː˧
+th,bn,,bangkla,baŋ˧ klaː˧
 th,de,,yoeraman,jɤːn˧man˧
 th,el,,krik,kriːk˨˩
 th,en,,angkrit,ʔaŋ˧kri˨˩
 th,es,,sapen,sa˨˩peːn˧
-th,fa,,,pɤː˧sia̯˧
+th,fa,,poesia,pɤː˧sia̯˧
 th,fr,,farangset,fa˨˩raŋ˨˩seːt˨˩
 th,he,,hibru,hiʔ˦˥bɔː˧
 th,hi,,hindi,hin˧diː˧
@@ -509,15 +575,17 @@ th,id,,indonisia,ʔin˧doː˧niː˧sia̯˧
 th,it,,itali,ʔiʔ˨˩taː˧liː˧
 th,ja,,yipun,jiː˥˩pun˨˩
 th,ko,,kaoli,kaw˧liː˩˩˦
-th,pl,,,poː˧lɛn˧
+th,pl,,polaen,poː˧lɛn˧
 th,pt,,portuket,proː˧tuʔ˨˩keːt˨˩
 th,qya,เควนยา,khwenya,kʰeː˧ won˧ jaː˧
 th,ru,,ratsia,rat˦˥sa˨˩sia̯˧
 th,sw,,sawahili,sa˨˩waː˩˩˦ hiː˧ liː˧
+th,ta,,thamin,tʰa˦˥min˧
 th,th,ไทย,thai,tʰaj˧
 th,tlh,,khlingngon,kʰliʔ˦˥ŋɔː˧ ŋɔːn˧
 th,tr,,turaki,tuʔ˨˩ra˦˥kiː˧
-th,ur,,,ʔuː˧rɔː˧duː˧
+th,uk,,yukhren,juː˧kʰreːn˧
+th,ur,,urodu,ʔuː˧rɔː˧duː˧
 th,vi,,wiatnam,wia̯t˥˩naːm˧
 th,zh-Hans,,chin,tɕiːn˧
 tlh,ar, ,'arab Hol,ʔɑrɑb xol
@@ -540,9 +608,11 @@ tlh,pt, ,portughal Hol,pʰortʰuɣɑl xol
 tlh,qya, ,quwenya' Hol,qʰuwɛnjɑʔ xol
 tlh,ru, ,raSya' Hol,rɑʂjɑʔ xol
 tlh,sw, ,qISuwaHIlI Hol,qʰɪʂuwɑxɪlɪ xol
+tlh,ta, ,tamIl Hol,tʰɑmɪl xol
 tlh,th, ,mangtay Hol,mɑŋtʰɑj xol
 tlh,tlh, ,tlhIngan Hol,tɬɪŋɑn xol
 tlh,tr, ,turIqya' Hol,tʰurɪqʰjɑʔ xol
+tlh,uk, ,'uqrayIna Hol,
 tlh,ur, ,'urDu Hol,ʔurɖu xol
 tlh,vi, ,vIyetnam Hol,vɪjɛtʰnɑm xol
 tlh,zh-Hans, ,jungwoq Hol,dʒuŋwoqʰ xol
@@ -566,14 +636,44 @@ tr,pt,,,pɔrtˈekɪzdʒɛ
 tr,qya,Quenya,,kuænjˈa
 tr,ru,,,rʊstʃˈa
 tr,sw,Svahilice,,svahilˈidʒɛ
+tr,ta,,,tamˈɪldʒɛ
 tr,th,,,tajdʒˈa
 tr,tlh,,,klɪnɡɔndʒˈa
 tr,tr,Türkçe,,tˈørktʃɛ
+tr,uk,,,ʊkrajnadʒˈa
 tr,ur,,,ʊrdudʒˈa
 tr,vi,,,viɛtnamdʒˈa
 tr,zh-Hans,,,tʃˈɪndʒɛ
+uk,ar,арабською,arabskoiu,arˈapskoju
+uk,bn,бенгальською,benhalskoiu,bɛnhˈaʎskoju
+uk,de,німецькою,nimetskoiu,ɲiːmˈɛtskoju
+uk,el,грецькою,hretskoiu,hrɛtskˈoju
+uk,en,англійською,anhliiskoiu,anhʎˈiːjskoju
+uk,es,іспанською,ispanskoiu,iːspˈanskoju
+uk,fa,перською,perskoiu,pɛrskˈoju
+uk,fr,французькою,frantsuzkoiu,frantsˈuzkoju
+uk,he,івритом,ivrytom,iːʋrˈɪtom
+uk,hi,гінді,hindi,hˈiːndiː
+uk,hu,угорською,uhorskoiu,uhˈorskoju
+uk,id,індонезійською,indoneziiskoiu,iːndonˈɛziːjskoju
+uk,it,італійською,italiiskoiu,iːtaʎˈiːjskoju
+uk,ja,японською,yaponskoiu,japˈonskoju
+uk,ko,корейською,koreiskoiu,korˈɛjskoju
+uk,pl,польською,polskoiu,poʎskˈoju
+uk,pt,португальською,portuhalskoiu,portuhˈaʎskoju
+uk,qya,мовою Квенья,movoiu Kvenia,moʋˈoju ɡʋˈɛɲja
+uk,ru,російською,rosiiskoiu,rosˈiːjskoju
+uk,sw,суахілі,suakhili,suaxˈiːʎiː
+uk,ta,тамільською,tamilskoiu,tamˈiːʎskoju
+uk,th,тайською,taiskoiu,tajskˈoju
+uk,tlh,клінгонською,klinhonskoiu,kʎiːnhˈonskoju
+uk,tr,турецькою,turetskoiu,turˈɛtskoju
+uk,uk,українською,ukrainskoiu,ukrajˈiːnskoju
+uk,ur,урду,urdu,ˈurdu
+uk,vi,вʼєтнамською,vʼyetnamskoiu,ʋjɛtnˈamskoju
+uk,zh-Hans,китайською,kytaiskoiu,kɪtˈajskoju
 ur,ar,,arbī,ˈaɾbˌiː
-ur,bn,,banglā,bˈʌnɡəla
+ur,bn,,banglā,bˈʌnəɡˌəlˌa
 ur,de,,jarman,ɟˈaɾman
 ur,el,,yūnānī,jɔnˈaːni
 ur,en,,angrezī,anɡɾˈeːzi
@@ -589,12 +689,14 @@ ur,ja,,jāpānī,ɟaːpˈaːni
 ur,ko,,koriyāī,kˈoːɾjaːˌiː
 ur,pl,,pōliś,pˈoːləʃ
 ur,pt,,purtgālī,pˌʊɾətɡˈaːli
-ur,qya,کوئنیا,kwenyā,koːˈɪnjaː
+ur,qya,کوئنیا,kwenyā,kˈoːnjaː
 ur,ru,,rūsī,ɾˈuːsi
 ur,sw,,savāhilī,saʋˈaːhəlˌiː
+ur,ta,,tamil,tˈʌməl
 ur,th,,thāī,tʰˈaːi
-ur,tlh,,kalingan,kəlˈʌnɡən
+ur,tlh,,kalingan,kˈʌlənˌəɡən
 ur,tr,,turkī,tˈʊɾki
+ur,uk,,yūkrīniyā’ī,jˌɔkɾˈiːnjaːˌiː
 ur,ur,,urdū,ˈʊɾdˌuː
 ur,vi,,vietnāmī,ʋˌeːtnˈaːmi
 ur,zh-Hans,,chīnī,cˈiːni
@@ -618,9 +720,11 @@ vi,pt,Bồ Đào Nha,,bo˨˩ ɗaːw˨˩ ɲaː˧
 vi,qya,Quenya,,kwɛnjə˧
 vi,ru,Nga,,ŋaː˧
 vi,sw,Swahili,,swɑːhiːli˧
+vi,ta,Tamil,,tamɪl˧
 vi,th,Thái,,taːj˧˥
 vi,tlh,Klingon,,klɪŋɡɒn˧
 vi,tr,Thổ Nhĩ Kỳ,,to˧˩˧ ɲi˧ˀ˥ ki˨˩
+vi,uk,Ukraina,,juːkɹeɪnə˧
 vi,ur,Urdu,,ʊəduː˧
 vi,vi,Việt,,viɛ̯t̪˨˩ˀ
 vi,zh-Hans,Trung,,tʃuŋ˧
@@ -644,9 +748,11 @@ zh-Hans,pt,,Pútáoyáyǔ,pʰu˧˥tʰɑʊ˧˥ja˧˥y˧˩˧
 zh-Hans,qya,昆雅语,Kūnyǎyǔ,kʰwən˥ja˧˩˧y˧˩˧
 zh-Hans,ru,,Éyǔ,ɤ˧˥y˧˩˧
 zh-Hans,sw,,Sīwǎxīlǐyǔ,sɯ˥wa˧˩˧ɕi˥li˧˩˧y˧˩˧
+zh-Hans,ta,,Tàimǐ'ěryǔ,tʰaɪ˥˩mi˧˩˧ɑɻ˧˩˧y˧˩˧
 zh-Hans,th,,Tàiyǔ,tʰaɪ˥˩y˧˩˧
 zh-Hans,tlh,,Kèlíngòngyǔ,kʰɤ˥˩lin˧˥kʊŋ˥˩y˧˩˧
 zh-Hans,tr,,Tǔ'ěrqíyǔ,tʰu˧˩˧ɑɻ˧˩˧tɕʰi˧˥y˧˩˧
+zh-Hans,uk,,Wūkèlányǔ,u˥kʰɤ˥˩lan˧˥y˧˩˧
 zh-Hans,ur,,Wū'ěrdūyǔ,u˥ɑɻ˧˩˧tu˥y˧˩˧
 zh-Hans,vi,,Yuènányǔ,ɥœ˥˩nan˧˥y˧˩˧
 zh-Hans,zh-Hans,中文,Zhōngwén,ʈʂʊŋ˥wən˧˥

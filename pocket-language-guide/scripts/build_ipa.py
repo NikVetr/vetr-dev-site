@@ -368,7 +368,27 @@ VOICES = {"en": "en-us", "es": "es-419", "fr": "fr-fr", "de": "de", "pt": "pt-br
           # two standards it would otherwise have to choose between differ
           # lexically -- পানি against জল -- rather than phonologically, and the pack
           # carries that in `text_alt`, where a voice could not.
-          "bn": "bn", "pl": "pl"}
+          # This build's installed espeak-ng-data is 1.50 (Ubuntu jammy's package),
+          # and Ukrainian's voice was only added upstream in 1.52 (espeak-ng#1480,
+          # 2022) -- confirmed by diffing this package's `espeak-ng-data/lang/`
+          # against upstream `docs/languages.md`, which lists `uk` under `zle` beside
+          # `ru`. `pip3 install --user espeakng-loader` bundles a newer prebuilt
+          # library and data tree that does carry it; point `phonemizer` at it with
+          # `PHONEMIZER_ESPEAK_LIBRARY`/`PHONEMIZER_ESPEAK_DATA_PATH` (both read by
+          # `EspeakWrapper` itself, so nothing in this file has to know) before
+          # running this script for `uk`. See tmp/ukrainian.md.
+          "bn": "bn", "pl": "pl", "uk": "uk",
+          # espeak-ng ships one Tamil voice and no regional variant, and it is used
+          # rather than a romanisation route for one reason: **it implements Tamil's
+          # positional voicing rule**, which the script itself does not write and
+          # which no letter-by-letter table over `romanization_iso15919` could
+          # recover, because the information is not in the letters. Probed on all
+          # four environments before it was trusted -- word-initial voiceless
+          # (கடை `kˈʌɖaɪ`, பால் `pˈaːl`), intervocalic voiced (அகம் `ˈaɡʌm`, எது
+          # `ʲˈedʉ`), geminate voiceless (அப்பா `ˈappaː`, ஓட்டு `ˈoːʈʈʉ`) and
+          # post-nasal voiced (தம்பி `tˈʌmbi`, ஐந்து `ˈaɪndʉ`, ஒன்பது `ˈonbʌdʉ`) --
+          # and right in every one. See GRADE["ta"] for the two words it is wrong on.
+          "ta": "ta"}
 
 # Phonemised one word at a time rather than a phrase at a time, which every other
 # espeak language is.
@@ -438,7 +458,28 @@ STRESS = {"fr": "phrase", "ko": "none", "vi": "none", "ja": "none",
           # reduce, so an unstressed syllable is spelt and said the same as a stressed
           # one and an unmarked respelling is fully intelligible. Russian, where the
           # vowel quality depends on the stress, could not have made this trade.
-          "fa": "none"}
+          "fa": "none",
+          # **Tamil stress is not contrastive, and espeak's is wrong in exactly the
+          # place the generalisation has an exception -- so this is Persian's case,
+          # not Hungarian's.**
+          #
+          # Keane's IPA illustration of Tamil (Journal of the IPA 34(1), 2004) states
+          # that stress is not contrastive, and that the first syllable tends to be
+          # prominent *unless* it is short and the second syllable holds a long vowel.
+          # espeak marks the first syllable and never that exception: விமானம் comes
+          # back `vˈimaːnʌm` where the generalisation puts the prominence on `maː`,
+          # and that shape covers a large class of the Sanskrit-derived nouns this
+          # pack is full of -- சுற்றுலா, பரிசோதனை, மருத்துவமனை, கடவுச்சீட்டு.
+          #
+          # Deriving it the way `hu_stress` does was the alternative and it does not
+          # reach: Hungarian's rule is positional and exceptionless, and Tamil's
+          # exception is stated over *syllable weight*, which needs a syllabification
+          # this script does not do. A mark in the wrong place is worse than no mark
+          # -- the Persian argument -- and it costs less here than it does there,
+          # because Tamil vowels do not reduce: an unstressed syllable is said
+          # exactly as a stressed one, so an unmarked respelling is fully
+          # intelligible rather than merely flat.
+          "ta": "none"}
 
 # Which packs write `text` in something other than the Latin alphabet, so that a
 # Latin run left in one is a loanword rather than the language. `tlh` and `qya` are
@@ -451,7 +492,13 @@ NON_LATIN = {"zh-Hans", "ja", "ko", "th", "hi", "ar", "ru", "el", "tlh", "qya", 
              # প্ল্যাটফর্ম -- so the pack quotes no Latin at all and this gate finds
              # nothing to refuse. Named anyway, so the next row that does quote a
              # Latin acronym is asked the same question.
-             "bn"}
+             "bn",
+             # Tamil writes its loanwords in its own letters too -- வைஃபை, சிம் கார்டு,
+             # ஏடிஎம், க்யூஆர், போர்டிங் பாஸ் -- so no `text` cell in the pack quotes
+             # Latin, checked over all 826. `atm-cash.pin` and `sim-data.esim` keep
+             # `PIN` and `eSIM` in `text_alt`, which takes no `ipa`. Named anyway, so
+             # the next row that does quote one is asked the same question.
+             "ta"}
 
 
 # ------------------------------------------------------------------- alphabet
@@ -615,6 +662,39 @@ REPAIR = {
     # Russian has no such phoneme, so a bare `y` can only be /ɨ/, and leaving it
     # would have `добрый` respelled with the vowel of French `tu`.
     "ru": [("u\"", "ʉ"), ("ɪ^", "ʲ"), ("y", "ɨ")],
+    # espeak writes Ukrainian в as β (voiced bilabial fricative), which is not IPA
+    # for the sound and not one of the three characters `FOLD` already strips for
+    # being undrawable -- Greek established U+03B2 in this corpus for its own /v/,
+    # and only 5 of 26 reader tables have a rule for it, so a plain FOLD here would
+    # cost the other 21 a new rule for a symbol this pack does not actually need.
+    # Ukrainian в is not [b] either (`ALLOPHONE`'s fold in core/respell.js is a
+    # syllable-clustering heuristic for Spanish, not a respelling rule, and does not
+    # reach the printed page) -- it is a labiodental approximant, [ʋ], which is
+    # already the corpus's own symbol for exactly that sound: Urdu's و forced a `ʋ`
+    # rule into all 26 existing reader tables. Folding в to `ʋ` here is therefore
+    # both the phonetically closer answer (the brief's own "в is /w/ or /ʋ/, not
+    # /v/") and the one that costs no other table anything, checked with
+    # `grep -c '"ipa": "ʋ"' data/respell/rules/*.json` returning nonzero for all 26.
+    # This build's uk voice reads the onset cluster шв- as /ɬβ/ instead of /ʃβ/ --
+    # "швидко" is `ɬβˈɪtko`, and plain ш is correct everywhere it is not followed
+    # by в (кошик -> koʃˈɪk, подушка -> podˈuʃka) -- and /ɬ/ is not a Ukrainian
+    # sound at all, so every occurrence is this one dictionary defect and not a
+    # real lateral. Repaired to ʃ before the в->ʋ fold runs, so швидку comes out
+    # ʃʋˈɪtku rather than ɬʋˈɪtku. Three rows in this pack hit it (швидку,
+    # швидкісний x2), all in the frequent швидк- "fast/ambulance" family.
+    #
+    # This voice also marks dentality on nearly every т/д (565 of this pack's
+    # cells carry U+032A), which no target in the corpus contrasts and which no
+    # other reader table has a rule for -- Russian's own т/д carry no such mark,
+    # so the symbol never had to be handled before. And it marks palatalisation
+    # on a handful of consonants with a bare ʲ (14 cells), which this table's own
+    # phoneme list already drops (`"ipa": "ʲ", "out": ""`) and Polish's table
+    # does not, so leaving either in would cost every reader table that lacks a
+    # rule a gap the moment uk landed as a target -- caught by
+    # `node scripts/respell_check.mjs pl uk --gaps`. Both are dropped here, at
+    # generation time, rather than patched into two dozen reader tables: neither
+    # carries information any of them could use.
+    "uk": [("̪", ""), ("ʲ", ""), ("ɬβ", "ʃβ"), ("β", "ʋ")],
     # This version of espeak emits a literal `??` for German short /ʊ/ before a
     # coda r -- `wurde` is `vˌ??də`, `Sturm` is `ʃtˈ??m` -- and `check_alphabet`
     # then refuses the whole row, which is why *Durchsage*, *Durchfall*, *gestohlen*
@@ -761,6 +841,85 @@ REPAIR = {
     # oglądam`). Left in, four rows would tell every table to reach for a length
     # device on a vowel that is not long while the identical vowel elsewhere did not.
     "pl": [("ɲʲ", "ɲ"), ("ç", "x"), ("ː", "")],
+    # **Three folds, and two of them are chosen by which symbols the other
+    # twenty-six reader tables already have a rule for rather than by taste.** The
+    # census that decided them is in tmp/tamil.md: every symbol espeak's Tamil voice
+    # emits was looked up in all twenty-six shipped tables *before* the column was
+    # generated, because `--gaps` only reports a hole after it has already reached
+    # the page.
+    #
+    # `ʲ` is espeak's onglide before a word-initial எ/ஏ -- `ʲˈeŋɡeː` for எங்கே,
+    # `ʲˈeːɻʉ` for ஏழு -- and it is dropped for three reasons at once. It is
+    # **inconsistent**: espeak writes it for எ/ஏ and never for ஒ/ஓ, which take a [w]
+    # onglide by the same rule, so keeping it would tell twenty-six tables the two
+    # vowels behave differently when they do not. It is the **wrong symbol**: in this
+    # corpus U+02B2 is Slavic palatalisation *of a preceding consonant*, and word
+    # initially there is no consonant, so `phonemesOf` hands every table a bare
+    # standalone modifier. And `pl__pl-PL.json` has **no rule for it at all** --
+    # Polish's own column is where most of the corpus's `ʲ` lives and a table never
+    # respells its own language -- so shipping it would open a gap in exactly one
+    # reader, which is the defect this fold exists to avoid.
+    #
+    # `ʉ` -> `ɯ` for the same class of reason and it is the sharper case. This is
+    # Tamil's reduced ukaram, the centralised short உ that appears everywhere except
+    # word-initially (சாப்பாடு `sˈaːppaːɖʉ` against உதவி `ˈudʌvi`) -- real, audible
+    # and worth carrying. But `ʉ` occurs in the corpus **only in Russian's own
+    # column**, 26 cells, so `ru__ru-RU.json` has never needed a rule for it and does
+    # not have one, while `ɯ` has a rule in all twenty-six. `ɯ` is also the symbol
+    # the Tamil phonetic literature uses for this vowel, so the fold is toward the
+    # standard notation rather than away from it.
+    #
+    # `ɹ` -> `ɾ`: espeak writes ர as the English approximant and ற as a trill, which
+    # keeps the two letters apart -- the right outcome by the wrong letter. Tamil ர is
+    # a tap. `ɾ` is mapped in all twenty-six tables and is 5,109 cells of the corpus
+    # already, so this costs nothing and fixes the symbol.
+    #
+    # **`ʌ` is deliberately *not* folded to `a`, and `ː` is deliberately kept.**
+    # espeak writes Tamil's short அ as `ʌ` and its long ஆ as `aː`. Nineteen of the
+    # twenty-six tables spell `a` and `ʌ` identically anyway, so the fold would be
+    # invisible to most readers; three of the seven that do not (`th` เอ, `vi` ơ,
+    # `id` ê) give `ʌ` a *mid* vowel that is wrong for Tamil, and two (`en` u, `ur`
+    # اَ) give a short vowel that is right. It is left alone because it is the
+    # phonetic quality Keane's illustration reports and because folding it would put
+    # the whole length contrast on `ː`, which twenty-one tables drop by policy --
+    # Tamil has real length minimal pairs (படம் [paɖam] a picture, பாடம் [paːɖam] a
+    # lesson) and unlike Bengali it is not a spelling variant. Both halves of that
+    # trade are honest and neither is free; the three tables with the wrong mid vowel
+    # are the cost and are named here so a reviewer can find them.
+    #
+    # No `("f", ...)` fold: `f` is correct here. Tamil writes /f/ as ஃப (āytam plus
+    # ப) and the pack uses it in வைஃபை, இபுபுரூஃபன், ஃபிராங்க் and சல்ஃபா.
+    # **Eight lexical repairs after the three folds, and they are dictionary entries
+    # rather than a broken rule.** Every one of the four voicing environments was
+    # probed and espeak's rule is right in all of them (see `VOICES["ta"]`), so what
+    # is left is individual words its Tamil lexicon has wrong. `tmp/ta/audit.py`
+    # finds them mechanically rather than by sampling: it walks `text` and `ipa` word
+    # by word and flags a word whose Tamil letter is க ச ட த ப and whose ipa opens
+    # with a voiced stop, which Tamil's own rule forbids word-initially, and a word
+    # whose Tamil letter is an independent vowel and whose ipa does not open with a
+    # vowel. Over 2,026 word pairs that is **17 occurrences of the first and 4 of the
+    # second**, and the audit is a candidate list rather than a verdict: four of the
+    # twelve flagged words are English loans -- பஸ் bus, பில் bill, பேங்க் bank,
+    # போர்டிங் boarding -- where the voiced reading is exactly what a Tamil speaker
+    # says, so espeak is right and the audit's rule is what is over-strict. Those
+    # four are left alone. The other eight are repaired, and each prefix was checked
+    # against the whole finished column for a second match before being written.
+    #
+    # இரத்தம் is the one that matters most: espeak **drops the initial vowel**,
+    # giving [rattam] for [irattam], and the word is *blood* -- it is in
+    # `medical-conditions.my-blood-sugar-is-low`, `.my-blood-type-is`,
+    # `.i-take-blood-thinners` and `emergency-medical.i-am-bleeding-badly`, so the
+    # repair lands on four safety-critical rows.
+    "ta": [("ʲ", ""), ("ʉ", "ɯ"), ("ɹ", "ɾ"),
+           ("ɾˈʌtt", "iɾˈʌtt"),          # இரத்தம் -- initial vowel dropped
+           ("ɡˈʌrbb", "kˈʌrpp"),         # கர்ப்ப, கர்ப்பிணி -- and the geminate too
+           ("dˈuːɾ", "tˈuːɾ"),           # தூரம், தூரமா
+           ("dˈʌjʌv", "tˈʌjʌv"),         # தயவுசெய்து
+           ("dˈʌɖipp", "tˈʌɖipp"),       # தடிப்பு
+           ("bˈudʌn", "pˈudʌn"),         # புதன்கிழமை
+           ("bˈaːdaːm", "pˈaːdaːm"),     # பாதாம்
+           ("bˈaːɡʌm", "pˈaːɡʌm")],      # பாகம் -- same defect, and in language-names
+
 }
 
 
@@ -2222,6 +2381,34 @@ GRADE = {
     "en": ("B", "en-us; deep orthography, but espeak's English lexicon is its best"),
     "ru": ("C", "espeak emits reduction and palatalisation as detail; 27.6% oracle ceiling"),
     "hi": ("C", "schwa deletion is espeak's to get wrong; stress 63.2%"),
+    "ta": ("B+", "espeak has a Tamil voice and it is the best Indic one in this file, for a "
+           "structural reason rather than a lucky dictionary. **Tamil orthography is shallow "
+           "in everything except voicing** -- every vowel is written, there is no schwa "
+           "deletion for a G2P to get wrong, and the pulli marks a bare consonant "
+           "explicitly -- and the one thing it does *not* write, whether a stop is voiced, "
+           "is a positional rule that espeak implements. Probed on all four environments "
+           "before it was trusted, and right in each: word-initial voiceless (கடை kaḍai, "
+           "பால் paal, சரி sari), intervocalic voiced (அகம் agam, எது edu, உதவி udavi), "
+           "geminate voiceless (அப்பா appaa, ஓட்டு ooṭṭu, மருக்கு marukku), post-nasal "
+           "voiced (தம்பி tambi, ஐந்து aindu, அங்கே angee, ஒன்பது onbadu). It also gets the "
+           "ukaram reduction right -- short உ is [u] word-initially and [ɯ] elsewhere -- and "
+           "keeps ர /ɾ/ apart from ற /r/ and ழ /ɻ/ apart from ள /ɭ/, which are the two "
+           "distinctions a romanisation route off `romanization_iso15919` would have "
+           "preserved and the voicing is the one it could not. Four weaknesses, in order. "
+           "**Eight lexical defects, found mechanically and repaired**: `tmp/ta/audit.py` "
+           "walks text against ipa word by word, and over 2,026 word pairs found 17 "
+           "word-initial stops wrongly voiced and 4 dropped initial vowels -- of which four "
+           "are English loans espeak is right about (பஸ், பில், பேங்க், போர்டிங்) and eight "
+           "are repaired in REPAIR above; இரத்தம் *blood* came back with no initial vowel at "
+           "all, on four safety-critical rows. **The dental/alveolar contrast is lost**: "
+           "espeak writes both ந and ன as `n` and த as a plain `t` rather than `t̪`, so the "
+           "column does not distinguish Tamil's dental nasal from its alveolar one. It is a "
+           "real contrast and a marginal one -- the two letters are in complementary "
+           "distribution in almost every word -- and adding `t̪`/`n̪` would have cost every "
+           "one of the twenty-six reader tables a rule for a distinction no reader would "
+           "spell differently. **Stress is not written at all** and that is a decision, not "
+           "a gap: see STRESS above. **And espeak's `ʌ` for short அ is kept rather than "
+           "folded to `a`**, which is a trade with a named cost -- see REPAIR"),
     "bn": ("C", "espeak-ng has a Bengali voice and it is a real one -- the consonant "
            "inventory comes back whole, retroflex against dental, all four aspirates, ঙ ঞ as "
            "/ŋ ɲ/, and the inherent vowel's /ɔ/ against /o/ right most of the time. Two "
@@ -2244,6 +2431,38 @@ GRADE = {
     "vi": ("C", "tones reconstructed from espeak's digits, ngang included; anh/ach is a judgement"),
     "ar": ("D", "short vowels are unwritten and espeak guesses; emphatics inconsistent"),
     "th": ("D", "a neural G2P, and no Thai tone is verifiable against anything in this corpus"),
+    "uk": ("B+", "near-phonemic orthography and, unlike Russian, genuinely no vowel-"
+           "reduction system to get wrong -- probed on 60-odd words chosen for it "
+           "(молоко, телефон, весело, педагог, перевод, легенда...) and unstressed "
+           "о and е come back as written in all but one, температура, whose second "
+           "е comes back ɪ rather than ɛ; a single lexical item rather than a "
+           "pattern, since neither `пере-` elsewhere in the sample nor any other "
+           "unstressed е does the same. Stress is lexical and free, as in Russian, "
+           "so it is looked up rather than derived, and there is no curated sheet to "
+           "score it against -- unlike `es`/`it`, this is the first pack in the file "
+           "with no such reference, so the syllable column is blank and the number "
+           "the other B/B+ grades cite is one this entry cannot give. Three "
+           "repairs were needed, all in REPAIR above: в comes back as β, which is "
+           "folded to /ʋ/, a symbol already in all 26 reader tables from Urdu's و "
+           "rather than the /b/ Greek's own β would suggest; шв- comes back /ɬβ/ "
+           "rather than /ʃβ/ -- ш is correct everywhere it is not followed by в "
+           "(кошик -> koʃˈɪk) and /ɬ/ is not a Ukrainian sound at all, so this is "
+           "one dictionary defect on one cluster (3 rows: швидку, швидкісний x2), "
+           "folded to ʃ before the в repair runs so the resulting β also gets the "
+           "ʋ fold. Apostrophe is handled correctly as a hard boundary rather than "
+           "a soft one -- п'ять comes back pjˈat with a true glide, not a "
+           "palatalised п -- which is the thing to check first in any Cyrillic "
+           "voice, since it is where a dictionary-less rule engine most often "
+           "guesses wrong. Palatalisation of consonants other than л is written as "
+           "a following /j/ (дякую -> djˈakuju) rather than a diacritic, which "
+           "matches how this build already treats it elsewhere and costs nothing "
+           "new. Weaknesses: loanwords with an ае hiatus diphthongise "
+           "(аеропорт -> aɪrˈoport̪, one row in this pack), г/х show an occasional "
+           "assimilation this build did not verify against a second source "
+           "(хворий -> ɣβˈorɪj, а voiced г for a written х), and none of the "
+           "seven-case declension is or could be represented -- the ipa column "
+           "reads citation-form pronunciation only, which is what every other "
+           "language in this file does too"),
 }
 
 

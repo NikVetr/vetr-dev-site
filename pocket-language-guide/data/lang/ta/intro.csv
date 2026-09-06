@@ -1,0 +1,13 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+introductions.my-name-is,என் பெயர் {},,eṉ peyar {},en pejʌr {},,2,ta-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,உங்களைச் சந்தித்ததில் மகிழ்ச்சி,,uṅkaḷaic cantittatil makiḻcci,uŋɡʌɭaɪtʃː ʌndittʌdil mʌɡiɻtʃːi,,2,ta-agent-v1;ipa=espeak
+introductions.what-is-your-name,உங்கள் பெயர் என்ன?,,uṅkaḷ peyar eṉṉa?,uŋɡʌɭ pejʌr ennʌ,,2,ta-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,நாங்கள் சேர்ந்து பயணம் செய்கிறோம்,,nāṅkaḷ cērntu payaṇam ceykiṟōm,naːŋɡʌɭ seːrndɯ pʌjʌɳʌm sejɡiroːm,,2,ta-agent-v1;ipa=espeak
+introductions.this-is-my-friend,இவர் என் நண்பர்,,ivar eṉ naṇpar,ivʌr en nʌɳbʌr,,2,ta-agent-v1;ipa=espeak
+introductions.i-am-from,என் ஊர் {},நான் {} இல் இருந்து வருகிறேன்,eṉ ūr {},en uːr {},my home place is —,2,ta-agent-v1;ipa=espeak
+introductions.where-are-you-from,நீங்கள் எந்த ஊர்?,,nīṅkaḷ enta ūr?,niːŋɡʌɭ endʌ uːr,which place are you?,2,ta-agent-v1;ipa=espeak
+introductions.how-are-you,நீங்கள் எப்படி இருக்கிறீர்கள்?,எப்படி இருக்கீங்க?,nīṅkaḷ eppaṭi irukkiṟīrkaḷ?,niːŋɡʌɭ eppʌɖi iɾɯkkiriːrɡʌɭ,,2,ta-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,நான் ஒரு சுற்றுலாப் பயணி,,nāṉ oru cuṟṟulāp payaṇi,naːn oɾɯ suʈrɯlaːp pʌjʌɳi,,2,ta-agent-v1;ipa=espeak
+introductions.this-is-my-husband-wife,இவர் என் கணவர் / மனைவி,,ivar eṉ kaṇavar / maṉaivi,ivʌr en kʌɳʌvʌr / mʌnaɪvi,my husband / my wife,2,ta-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,இவள் என் மகள் / இவன் என் மகன்,,ivaḷ eṉ makaḷ / ivaṉ eṉ makaṉ,ivʌɭ en mʌɡʌɭ / ivʌn en mʌɡʌn,my daughter / my son,2,ta-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,நான் தனியாகப் பயணம் செய்கிறேன்,,nāṉ taṉiyākap payaṇam ceykiṟēṉ,naːn tʌnijaːɡʌp pʌjʌɳʌm sejɡireːn,,2,ta-agent-v1;ipa=espeak

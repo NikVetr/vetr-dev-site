@@ -10,6 +10,7 @@ import {
 } from './app.js';
 import { buildSheet, stacksFor } from '../core/sheet.js';
 import { contentBox } from '../core/solve/index.js';
+import { elvenInset } from '../core/elven-frame.js';
 import { proposeBalance } from '../core/solve/weights.js';
 import { foldCards, splitCards } from '../render/impose.js';
 import { faceSvgs, exportPdf, exportPng, exportSvg, loadIcons } from './export.js';
@@ -448,7 +449,7 @@ async function main() {
       });
       return;
     }
-    const box = contentBox(spec.geometry, spec.paper);
+    const box = contentBox(spec.geometry, spec.paper, undefined, elvenInset(spec));
     showDiff(proposeBalance({
       corpus: ctx.corpus,
       spec,

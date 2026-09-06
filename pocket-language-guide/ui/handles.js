@@ -12,6 +12,7 @@
 // does not make it obvious that the text is being reflowed.
 
 import { contentBox } from '../core/solve/index.js';
+import { elvenInset } from '../core/elven-frame.js';
 import { number, t } from './i18n.js';
 
 /** Smallest margin worth offering; the printer's own limit is applied on top. */
@@ -47,7 +48,7 @@ export function attachHandles({ face, spec, onCommit }) {
 
   /** Content box for a candidate geometry, so handle positions follow the value. */
   const boxFor = (/** @type {Partial<import('../core/types.js').Geometry>} */ over) => contentBox(
-    { ...g, ...over }, spec.paper,
+    { ...g, ...over }, spec.paper, undefined, elvenInset({ ...spec, geometry: { ...g, ...over } }),
   );
 
   /**
@@ -56,13 +57,19 @@ export function attachHandles({ face, spec, onCommit }) {
    */
   function offsetFor(kind, value, gutter = 0) {
     if (kind === 'marginLeft') return boxFor({ marginLeft: value }).left;
-    if (kind === 'marginRight') return g.pageW - value;
+    if (kind === 'marginRight') {
+      const box = boxFor({ marginRight: value });
+      return box.left + box.width;
+    }
     if (kind === 'marginTop') return boxFor({ marginTop: value }).top;
-    if (kind === 'marginBottom') return g.pageH - value;
+    if (kind === 'marginBottom') {
+      const box = boxFor({ marginBottom: value });
+      return box.top + box.height;
+    }
     // Centre of the nth gutter, which moves as the gap changes because the
     // columns either side of it narrow.
     const box = boxFor({ columnGap: value });
-    return box.left + (gutter + 1) * box.colWidth + gutter * value + value / 2;
+    return box.left + (gutter + 1) * box.colWidth + (gutter + 0.5) * box.columnGap;
   }
 
   // Snap every handle back to the committed geometry, and -- for the gutters --

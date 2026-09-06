@@ -66,6 +66,18 @@ SOURCES = {
         f"{GFONTS}/notosansdevanagari/NotoSansDevanagari%5Bwdth,wght%5D.ttf",
     "NotoSerifDevanagari-var.ttf":
         f"{GFONTS}/notoserifdevanagari/NotoSerifDevanagari%5Bwdth,wght%5D.ttf",
+    # Tamil, and `NotoSans-var.ttf` has zero codepoints of U+0B80..0BFF, so `Taml`
+    # cannot route to `latin` the way `Grek` and `Cyrl` do. Both faces cover all 72
+    # assigned codepoints of the block, and -- read off the cmap rather than assumed
+    # -- both also carry `² ³ ⁴` and `₂ ₃ ₄` and nothing else from Latin-1's
+    # superscripts or the Superscripts and Subscripts block, which are exactly the
+    # two written forms of the Sanskrit-in-Tamil digit notation `ta__ta-IN.json`
+    # depends on. They carry 286 codepoints of U+0020..024F including `·` and `₹`,
+    # so this is the Bengali case and not the Arabic one: no `LATIN_DONOR` graft.
+    "NotoSansTamil-var.ttf":
+        f"{GFONTS}/notosanstamil/NotoSansTamil%5Bwdth,wght%5D.ttf",
+    "NotoSerifTamil-var.ttf":
+        f"{GFONTS}/notoseriftamil/NotoSerifTamil%5Bwdth,wght%5D.ttf",
     # Klingon pIqaD and Tengwar, which no Noto face has and which are not in Unicode
     # at all -- they are Private Use Area allocations from the ConScript Unicode
     # Registry, U+F8D0..U+F8FF and U+E000..U+E07F. Constructium is a fork of SIL

@@ -374,5 +374,6 @@
   "ornament.laurel": "Naskah berdaun salam",
   "ornament.starforge": "Tempa bintang",
   "ornament.hint": "Tepi dekoratif dengan ukuran teks dan jarak yang tetap sama. Hiasan sudut muncul jika ada ruang kosong.",
+  "ornament.frameHint": "Bingkai elf berjalin menyisakan ruang di sekeliling teks. Tata letak dan jumlah halaman dapat berubah.",
   "ornament.lowInk": "Mode hemat tinta menggunakan garis klasik. Gaya pilihan Anda kembali dalam mode warna atau monokrom."
 }

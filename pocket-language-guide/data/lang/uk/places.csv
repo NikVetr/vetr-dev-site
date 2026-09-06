@@ -1,0 +1,8 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,Де можна купити квитки?,,De mozhna kupyty kvytky?,dˈɛ mˈoʒna kupˈɪtɪ ɡʋˈɪtkɪ,,2,uk-agent-v1;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,Мені потрібне бронювання?,,Meni potribne broniuvannia?,mˈɛɲiː potrˈiːbnɛ broɲˈuʋanɲa,,2,uk-agent-v1;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,Який час останнього входу?,,Yakyi chas ostannoho vkhodu?,jakˈɪj tʃˈas ostˈanɲoho fxˈodu,,2,uk-agent-v1;ipa=espeak
+attractions-tickets.are-there-lockers,Тут є шафки для речей?,,Tut ye shafky dlia rechei?,tˈut jˈɛ ʃˈafkɪ dʎˈa rˈɛtʃɛj,,2,uk-agent-v1;ipa=espeak
+attractions-tickets.may-i-take-photos,Можна фотографувати?,,Mozhna fotohrafuvaty?,mˈoʒna fotohrˈafuʋatɪ,,2,uk-agent-v1;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,"Сфотографуйте нас, будь ласка.",,"Sfotohrafuite nas, bud laska.","sfotohrˈafujtɛ nˈas, bˈud lˈaska",,2,uk-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,Ви не могли б нас сфотографувати?,,Vy ne mohly b nas sfotohrafuvaty?,ʋˈɪ nˈɛ mˈohlɪ b nˈas sfotohrˈafuʋatɪ,,2,uk-agent-v1;ipa=espeak

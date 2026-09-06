@@ -374,5 +374,6 @@
   "ornament.laurel": "Manoscritto con allori",
   "ornament.starforge": "Forgia stellare",
   "ornament.hint": "Bordi decorativi, senza cambiare le dimensioni del testo o la spaziatura. Gli ornamenti agli angoli compaiono dove c’è spazio.",
+  "ornament.frameHint": "Una cornice elfica intrecciata riserva spazio intorno al testo. L’impaginazione e il numero di pagine possono cambiare.",
   "ornament.lowInk": "La modalità risparmio inchiostro usa le linee classiche. Il tuo stile riappare a colori o in monocromia."
 }

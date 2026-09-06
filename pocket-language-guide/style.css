@@ -1357,3 +1357,4 @@ button.big { justify-content: center; padding: 0.6em 1em; font-size: var(--fs-1)
   border-radius: 4px;
 }
 .ornament-control p { margin: 5px 0 0; }
+.ornament-sample.elven { max-height: 100px; }

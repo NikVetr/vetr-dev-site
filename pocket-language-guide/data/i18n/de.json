@@ -374,5 +374,6 @@
   "ornament.laurel": "Lorbeerhandschrift",
   "ornament.starforge": "Sternenschmiede",
   "ornament.hint": "Dekorative Ränder bei unveränderter Schriftgröße und unveränderten Abständen. Eckverzierungen erscheinen dort, wo Platz ist.",
+  "ornament.frameHint": "Ein verschlungener Elbenrahmen benötigt Platz um den Text. Einpassung und Seitenzahl können sich ändern.",
   "ornament.lowInk": "Der Tintensparmodus verwendet die klassischen Linien. In Farbe oder Schwarzweiß erscheint dein gewählter Stil wieder."
 }

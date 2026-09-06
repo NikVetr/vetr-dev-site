@@ -14,6 +14,7 @@ import { inkWidth } from '../measure.js';
 import { chooseSplit, chooseSharedWidths } from './rowsplit.js';
 import { arrangeTemplate } from './arrange.js';
 import { motifFor, ornamentRule } from '../ornaments.js';
+import { isElven, elvenHeading, elvenColours } from '../elven-frame.js';
 
 // How many of a section's opening rows are held in the same column as its
 // heading.
@@ -143,6 +144,7 @@ function makeContext({ theme, spec, corpus, measurer, registry, colWidth, scale 
   // scaling bug above.
   const padding = (spec.padding ?? 0) * spacingRatio;
   const palette = makePalette(theme, spec.inkMode);
+  if (isElven(spec) && spec.inkMode === 'full') palette.shade = '#f1f4ef';
   const shown = new Set(spec.fieldSet);
 
   const typeface = spec.typeface ?? 'sans';
@@ -280,7 +282,8 @@ function headingAtom(ctx, block) {
     italic: false,
     slotAsRule: false,
   };
-  const color = ctx.palette.roles[block.colorRole];
+  const elven = isElven(ctx.spec);
+  const color = elven ? elvenColours(ctx.spec, ctx.palette.ink).stem : ctx.palette.roles[block.colorRole];
   const iconW = h.iconSize > 0 && block.icon ? h.iconSize * s + h.iconGap * s : 0;
   const textTop = h.spaceBefore * ctx.spacingRatio + ctx.padding * 0.5;
   const painted = paintField(ctx, block.text ?? '', style, {
@@ -292,7 +295,7 @@ function headingAtom(ctx, block) {
     : motifFor(ctx.spec.ornamentStyle, ctx.spec.target);
   const ornamentTop = textTop + painted.height + 0.25;
   const ornamentHeight = Math.min(3.2, height - ornamentTop - 0.2);
-  const ornament = motif && ornamentHeight >= 0.6
+  const ornament = !elven && motif && ornamentHeight >= 0.6
     ? ornamentRule(motif, 0, ornamentTop, ctx.colWidth, ornamentHeight, color) : null;
   // A short heading leaves a useful pocket beside its title. Measure its actual
   // ink before putting a larger flourish there; long titles keep the rule alone.
@@ -301,8 +304,10 @@ function headingAtom(ctx, block) {
   ));
   const titleRoom = ctx.colWidth - titleEnd - 4;
   const flourishHeight = Math.min(7, painted.height - 1);
-  const flourish = motif && titleRoom >= 22 && flourishHeight >= 3
+  const flourish = !elven && motif && titleRoom >= 22 && flourishHeight >= 3
     ? ornamentRule(motif, titleEnd + 4, textTop + 0.5, titleRoom, flourishHeight, color) : null;
+  const branches = elven ? elvenHeading(ctx.colWidth, textTop,
+    height - textTop - 0.2, titleEnd, color) : [];
 
   /** @type {IconMark[]} */ const icons = [];
   if (iconW > 0 && block.icon) {
@@ -326,9 +331,9 @@ function headingAtom(ctx, block) {
     keepWithNext: false,
     paint: {
       rects: [...painted.rects,
-        ...(ornament ? [] : [{ x: 0, y: ruleY, w: ctx.colWidth, h: h.rulePt, fill: color }])],
-      ...((ornament || flourish)
-        ? { paths: [...(ornament ? [ornament] : []), ...(flourish ? [flourish] : [])] } : {}),
+        ...(ornament || elven ? [] : [{ x: 0, y: ruleY, w: ctx.colWidth, h: h.rulePt, fill: color }])],
+      ...((ornament || flourish || elven)
+        ? { paths: [...branches, ...(ornament ? [ornament] : []), ...(flourish ? [flourish] : [])] } : {}),
       runs: painted.runs,
       icons,
       hits: [{ x: 0, y: 0, w: ctx.colWidth, h: height, sectionId: block.sectionId }],
@@ -514,8 +519,10 @@ function itemAtoms(ctx, block, rows, withPaint) {
         });
       }
     }
-    rects.push({ x: 0, y: 0, w: template.accentPt, h: height, fill: ctx.palette.roles[block.colorRole] });
-    rects.push({ x: 0, y: height - template.rulePt, w: ctx.colWidth, h: template.rulePt, fill: ctx.palette.rule });
+    const elven = isElven(ctx.spec);
+    if (!elven) rects.push({ x: 0, y: 0, w: template.accentPt, h: height, fill: ctx.palette.roles[block.colorRole] });
+    rects.push({ x: 0, y: height - template.rulePt, w: ctx.colWidth, h: template.rulePt,
+      fill: elven ? elvenColours(ctx.spec, ctx.palette.ink).rule : ctx.palette.rule });
 
     let x = pad[3];
     grid.forEach((cells, j) => {

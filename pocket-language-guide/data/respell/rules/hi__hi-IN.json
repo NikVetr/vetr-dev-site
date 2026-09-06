@@ -1905,6 +1905,22 @@
     },
     {
       "slot": "onset",
+      "ipa": "ɳ",
+      "out": "ण",
+      "after_out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɳ",
+      "out": "ण्"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɳ",
+      "out": "्ण"
+    },
+    {
+      "slot": "onset",
       "ipa": "n̩",
       "out": "न",
       "after_out": ""

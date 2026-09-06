@@ -1,0 +1,16 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,நான் {} க்கு போக வேண்டும்,,nāṉ {} kku pōka vēṇṭum,naːn {} kkɯ poːɡʌ veːɳɖɯm,-kku = 'to',2,ta-agent-v1;ipa=espeak
+utility-templates.please-give-me,எனக்கு {} கொடுங்கள்,,eṉakku {} koṭuṅkaḷ,enʌkkɯ {} koɖɯŋɡʌɭ,,2,ta-agent-v1;ipa=espeak
+utility-templates.may-i,நான் {} செய்யலாமா?,,nāṉ {} ceyyalāmā?,naːn {} sejjʌlaːmaː,may I do —,2,ta-agent-v1;ipa=espeak
+utility-templates.please-do-not-add,{} சேர்க்க வேண்டாம்,,{} cērkka vēṇṭām,{} seːrkkʌ veːɳɖaːm,,2,ta-agent-v1;ipa=espeak
+utility-templates.do-you-have,உங்களிடம் {} இருக்கிறதா?,,uṅkaḷiṭam {} irukkiṟatā?,uŋɡʌɭiɖʌm {} iɾɯkkirʌdaː,,2,ta-agent-v1;ipa=espeak
+utility-templates.please-write-the-number,எண்ணை எழுதுங்கள்,,eṇṇai eḻutuṅkaḷ,eɳɳaɪ eɻɯdɯŋɡʌɭ,,2,ta-agent-v1;ipa=espeak
+utility-templates.i-need,எனக்கு {} தேவை,,eṉakku {} tēvai,enʌkkɯ {} teːvaɪ,,2,ta-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,அருகில் {} இருக்கிறதா?,,arukil {} irukkiṟatā?,aɾɯɡil {} iɾɯkkirʌdaː,,2,ta-agent-v1;ipa=espeak
+utility-templates.how-much-is,{} எவ்வளவு?,,{} evvaḷavu?,{} evvʌɭʌvɯ,,2,ta-agent-v1;ipa=espeak
+utility-templates.is-this,இது {} தானா?,,itu {} tāṉā?,idɯ {} taːnaː,is this indeed —,2,ta-agent-v1;ipa=espeak
+utility-templates.please,தயவுசெய்து {},,tayavuceytu {},tʌjʌvɯsejdɯ {},,2,ta-agent-v1;ipa=espeak
+utility-templates.i-am-looking-for,நான் {} தேடுகிறேன்,,nāṉ {} tēṭukiṟēṉ,naːn {} teːɖɯɡireːn,,2,ta-agent-v1;ipa=espeak
+utility-templates.do-you-accept,{} ஏற்றுக்கொள்வீர்களா?,,{} ēṟṟukkoḷvīrkaḷā?,{} eːʈrɯkkoɭviːrɡʌɭaː,,2,ta-agent-v1;ipa=espeak
+utility-templates.i-cannot-find,எனக்கு {} கிடைக்கவில்லை,,eṉakku {} kiṭaikkavillai,enʌkkɯ {} kiɖaɪkkʌvillaɪ,— is not available to me,2,ta-agent-v1;ipa=espeak
+utility-templates.there-is-a-problem-with,{} இல் ஒரு பிரச்சினை,,{} il oru piracciṉai,{} il oɾɯ pɾʌtʃːinaɪ,a problem in —,2,ta-agent-v1;ipa=espeak

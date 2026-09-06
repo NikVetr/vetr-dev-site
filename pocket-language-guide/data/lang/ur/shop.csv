@@ -12,9 +12,9 @@ payment-receipt.the-bill-is-wrong,لگتا ہے بل میں کوئی غلطی ہ
 payment-receipt.i-already-paid,میں نے پیسے دے دیے ہیں,,maiñ ne paise de diye haiñ,mˈẽ neː pˈeːseː dˈeː djˈeː hẽ,,2,ur-agent-v1;ipa=espeak
 shopping.i-am-just-looking,بس دیکھ رہا ہوں,,bas dekh rahā hūñ,bˈʌs dˈeːkʰ ɾˈʌhaː hũː,رہی ہوں if the speaker is a woman,2,ur-agent-v1;ipa=espeak
 shopping.how-much-is-this,یہ کتنے کا ہے؟,,yah kitne kā hai?,jeːh kˈɪtneː kaː hɛ,,2,ur-agent-v1;ipa=espeak
-shopping.that-is-too-expensive,یہ بہت مہنگا ہے,,yah bahut mahngā hai,jeːh bˈahʊt mˈɛhnɡaː hɛ,,2,ur-agent-v1;ipa=espeak
+shopping.that-is-too-expensive,یہ بہت مہنگا ہے,,yah bahut mahngā hai,jeːh bˈahʊt mˈɛhnəɡˌaː hɛ,,2,ur-agent-v1;ipa=espeak
 shopping.can-it-be-a-little-cheaper,تھوڑا کم ہو جائے گا؟,تھوڑا کم کر دیجیے,thoṛā kam ho jā’e gā?,tʰˈoːɽaː kˈʌm hˈoː ɟˈaːeː ɡaː,,2,ur-agent-v1;ipa=espeak
-shopping.is-there-a-discount,کوئی رعایت ہے؟,کوئی ڈسکاؤنٹ ہے؟,ko’ī riāyat hai?,kˈoːi ɾˌaːiˈat hɛ,,2,ur-agent-v1;ipa=espeak
+shopping.is-there-a-discount,کوئی رعایت ہے؟,کوئی ڈسکاؤنٹ ہے؟,ko’ī riāyat hai?,kˈoːi ɾˌɪaːjˈat hɛ,,2,ur-agent-v1;ipa=espeak
 shopping.where-do-i-pay,پیسے کہاں دینے ہیں؟,کاؤنٹر کہاں ہے؟,paise kahāñ dene haiñ?,pˈeːseː kˈʌhãː dˈeːneː hẽ,,2,ur-agent-v1;ipa=espeak
 shopping.i-will-take-this,مجھے یہی لینا ہے,یہ دے دیجیے,mujhe yahī lenā hai,mˌʊɟʰeː jˈɛhi lˈeːnaː hɛ,,2,ur-agent-v1;ipa=espeak
 shopping.what-is-this,یہ کیا ہے؟,,yah kyā hai?,jeːh kjˈaː hɛ,,2,ur-agent-v1;ipa=espeak
@@ -29,4 +29,4 @@ color-size-returns.can-i-return-it,کیا یہ واپس ہو سکتا ہے؟,,ky
 color-size-returns.can-i-exchange-it,کیا یہ تبدیل ہو سکتا ہے؟,کیا یہ بدلا جا سکتا ہے؟,kyā yah tabdīl ho saktā hai?,kjˈaː jeːh tˌəbdˈiːl hˈoː sˈʌktˌaː hɛ,,2,ur-agent-v1;ipa=espeak
 color-size-returns.do-you-have-a-bag,کیا شاپر مل جائے گا؟,کیا تھیلا مل جائے گا؟,kyā shāpar mil jā’e gā?,kjˈaː ʃˈaːpəɾ mˈɪl ɟˈaːeː ɡaː,"شاپر, from 'shopper', is the ordinary Pakistani word for a plastic carrier bag; تھیلا is a cloth or larger bag",2,ur-agent-v1;ipa=espeak
 tax-refund.can-i-get-a-tax-refund,کیا ٹیکس واپس مل سکتا ہے؟,,kyā ṭaiks wāpas mil saktā hai?,kjˈaː ʈˈeːks ʋˈaːpəs mˈɪl sˈʌktˌaː hɛ,"Pakistan runs no tourist sales-tax refund scheme, so the answer will be no",2,ur-agent-v1;ipa=espeak
-tax-refund.is-tax-free-shopping-available,کیا ٹیکس فری خریداری ہوتی ہے؟,,kyā ṭaiks frī kharīdārī hotī hai?,kjˈaː ʈˈeːks fˈʌɾi xˌəɾidˈaːɾi hˈoːti hɛ,no tourist tax-free shopping exists in Pakistan; the airport shops are ڈیوٹی فری,2,ur-agent-v1;ipa=espeak
+tax-refund.is-tax-free-shopping-available,کیا ٹیکس فری خریداری ہوتی ہے؟,,kyā ṭaiks frī kharīdārī hotī hai?,kjˈaː ʈˈeːks fɾˈiː xˌəɾidˈaːɾi hˈoːti hɛ,no tourist tax-free shopping exists in Pakistan; the airport shops are ڈیوٹی فری,2,ur-agent-v1;ipa=espeak

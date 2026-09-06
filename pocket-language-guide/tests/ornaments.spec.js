@@ -1,7 +1,31 @@
 import { test, expect } from '@playwright/test';
 
-test('style is opt-in, decorates the sheet and exports through every renderer', async ({ page }) => {
+test('Quenya grows a reserved frame, exports it and restores Classic exactly', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
   await page.goto('/customize.html?target=qya&source=en');
+  await expect(page.locator('.face.focused')).toBeVisible();
+  const positions = () => page.locator('.face.focused svg text').evaluateAll(nodes =>
+    nodes.map(n => [n.textContent, n.getAttribute('x'), n.getAttribute('y')]));
+  const before = await positions();
+  await page.selectOption('#ornament-style', 'language');
+  await expect(page.locator('.face.focused .ornament').first()).toBeAttached();
+  expect(await positions()).not.toEqual(before);
+  await expect(page.locator('#ornament-hint')).toContainText('page count may change');
+  expect(await page.locator('.ornament-sample path').count()).toBeGreaterThan(10);
+  for (const id of ['pdf', 'svg', 'png']) {
+    const download = page.waitForEvent('download', { timeout: 120_000 });
+    await page.locator(`#${id}`).click();
+    expect(await (await download).failure()).toBeNull();
+  }
+  await page.selectOption('#ornament-style', 'classic');
+  await expect(page.locator('.face.focused .ornament')).toHaveCount(0);
+  expect(await positions()).toEqual(before);
+  expect(errors).toEqual([]);
+});
+
+test('style is opt-in, decorates the sheet and exports through every renderer', async ({ page }) => {
+  await page.goto('/customize.html?target=en&source=en');
   await expect(page.locator('.face.focused')).toBeVisible();
   const selection = page.locator('#ornament-style');
   await expect(selection).toHaveValue('classic');

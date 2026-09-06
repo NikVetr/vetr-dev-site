@@ -1,0 +1,8 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,டிக்கெட் எங்கே வாங்கலாம்?,,ṭikkeṭ eṅkē vāṅkalām?,ʈikkeʈ eŋɡeː vaːŋɡʌlaːm,,2,ta-agent-v1;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,முன்பதிவு தேவையா?,,muṉpativu tēvaiyā?,munpʌdivɯ teːvaɪjaː,,2,ta-agent-v1;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,உள்ளே விடும் கடைசி நேரம் என்ன?,,uḷḷē viṭum kaṭaici nēram eṉṉa?,uɭɭeː viɖɯm kʌɖaɪsi neːɾʌm ennʌ,,2,ta-agent-v1;ipa=espeak
+attractions-tickets.are-there-lockers,பொருள் வைக்கும் பெட்டிகள் உள்ளதா?,,poruḷ vaikkum peṭṭikaḷ uḷḷatā?,poɾɯɭ vaɪkkɯm peʈʈiɡʌɭ uɭɭʌdaː,,2,ta-agent-v1;ipa=espeak
+attractions-tickets.may-i-take-photos,புகைப்படம் எடுக்கலாமா?,,pukaippaṭam eṭukkalāmā?,puɡaɪppʌɖʌm eɖɯkkʌlaːmaː,,2,ta-agent-v1;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,எங்களைப் புகைப்படம் எடுங்கள்,,eṅkaḷaip pukaippaṭam eṭuṅkaḷ,eŋɡʌɭaɪp puɡaɪppʌɖʌm eɖɯŋɡʌɭ,,2,ta-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,எங்களுக்கு ஒரு புகைப்படம் எடுத்துத் தர முடியுமா?,,eṅkaḷukku oru pukaippaṭam eṭuttut tara muṭiyumā?,eŋɡʌɭɯkkɯ oɾɯ puɡaɪppʌɖʌm eɖɯttɯt tʌɾʌ muɖijɯmaː,,2,ta-agent-v1;ipa=espeak

@@ -1,0 +1,16 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,Мені треба в {}.,,Meni treba v {}.,mˈɛɲiː trˈɛba ʋ {},,2,uk-agent-v1;ipa=espeak
+utility-templates.please-give-me,"Дайте, будь ласка, {}.",,"Daite, bud laska, {}.","dˈajtɛ, bˈud lˈaska, {}",,2,uk-agent-v1;ipa=espeak
+utility-templates.may-i,Можна {}?,,Mozhna {}?,mˈoʒna {},,2,uk-agent-v1;ipa=espeak
+utility-templates.please-do-not-add,"Без {}, будь ласка.",,"Bez {}, bud laska.","bˈɛz {}, bˈud lˈaska",,2,uk-agent-v1;ipa=espeak
+utility-templates.do-you-have,У вас є {}?,,U vas ye {}?,ˈu ʋˈas jˈɛ {},,2,uk-agent-v1;ipa=espeak
+utility-templates.please-write-the-number,"Напишіть число, будь ласка.",,"Napyshit chyslo, bud laska.","napˈɪʃiːt tʃˈɪslo, bˈud lˈaska",,2,uk-agent-v1;ipa=espeak
+utility-templates.i-need,Мені потрібно {}.,,Meni potribno {}.,mˈɛɲiː potrˈiːbno {},,2,uk-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,Тут поблизу є {}?,,Tut poblyzu ye {}?,tˈut poblˈɪzu jˈɛ {},,2,uk-agent-v1;ipa=espeak
+utility-templates.how-much-is,Скільки коштує {}?,,Skilky koshtuie {}?,skˈiːʎkɪ koʃtˈujɛ {},,2,uk-agent-v1;ipa=espeak
+utility-templates.is-this,Це {}?,,Tse {}?,tsˈɛ {},,2,uk-agent-v1;ipa=espeak
+utility-templates.please,"{}, будь ласка.",,"{}, bud laska.","{}, bˈud lˈaska",,2,uk-agent-v1;ipa=espeak
+utility-templates.i-am-looking-for,Я шукаю {}.,,Ya shukaiu {}.,jˈa ʃukˈaju {},,2,uk-agent-v1;ipa=espeak
+utility-templates.do-you-accept,Ви приймаєте {}?,,Vy pryimaiete {}?,ʋˈɪ prɪjmˈajɛtɛ {},,2,uk-agent-v1;ipa=espeak
+utility-templates.i-cannot-find,Я не можу знайти {}.,,Ya ne mozhu znaity {}.,jˈa nˈɛ mˈoʒu znˈajtɪ {},,2,uk-agent-v1;ipa=espeak
+utility-templates.there-is-a-problem-with,Проблема: {},,Problema: {},problˈɛma {},,2,uk-agent-v1;ipa=espeak

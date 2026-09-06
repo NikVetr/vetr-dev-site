@@ -86,3 +86,5 @@ numbers-money.rial,リアル,,riaru,ɾiaɾɯ,,2,rial-toman-gloss-v1;cldr;ipa=hep
 numbers-money.toman,十リアル,,jū riaru,dʑɯː ɾiaɾɯ,,2,rial-toman-gloss-v1;cldr;ipa=hepburn
 numbers-money.zloty,ズウォティ,,,,,2,gloss-only;scoped-away;name of the currency in this language
 numbers-money.zloty-symbol,ズウォティ記号,,,,,2,gloss-only;scoped-away;name of the currency in this language
+numbers-money.hryvnia,フリヴニャ,,furivunya,ɸɯɾivɯɲa,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
+numbers-money.hryvnia-symbol,フリヴニャ記号,,furivunya,ɸɯɾivɯɲa,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn

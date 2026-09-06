@@ -86,3 +86,5 @@ numbers-money.rial,rial,,rjˈal,,2,pl-gloss-v1;cldr;ipa=espeak
 numbers-money.toman,10 riali,,dʑˈɛɕɛɲtɕ rjˈali,ten rial; riali is the genitive plural Polish takes after 10,2,pl-gloss-v1;ipa=espeak
 numbers-money.zloty,złoty,,zwˈɔtɨ,,2,pl-agent-v1;ipa=espeak
 numbers-money.zloty-symbol,zł,,zˌɛtˈɛw,"the sign on every Polish price tag, always after the number",2,pl-agent-v1;ipa=espeak
+numbers-money.hryvnia,hrywna,,xrˈɨvna,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.hryvnia-symbol,hrywna (symbol),,xrˈɨvna sˈɨmbɔl,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak

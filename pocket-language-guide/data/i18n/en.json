@@ -9,6 +9,7 @@
   "ornament.laurel": "Laurel manuscript",
   "ornament.starforge": "Starforge",
   "ornament.hint": "Decorative borders, with the same text size and spacing. Corner flourishes appear where there is room.",
+  "ornament.frameHint": "An interwoven elven frame reserves space around the text. Fitting and page count may change.",
   "ornament.lowInk": "Low ink uses the classic rules. Your style returns in colour or monochrome.",
   "_note": "Source of truth for every UI string. Other catalogues in this directory are partial overlays; a key they omit falls back to the English here. Keys are namespaced by where the string appears. {name} is a placeholder filled at runtime.",
   "addTerm.add": "Add to the sheet",

@@ -1,5 +1,5 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-utility-templates.i-want-to-go-to,Je voudrais aller à {},,ʒə vudʁɛz ale ˌaaksɑ̃ɡʁˈav {},,2,fr-agent-v1;ipa=espeak
+utility-templates.i-want-to-go-to,Je voudrais aller à {},,ʒə vudʁɛz ale ˈa {},,2,fr-agent-v1;ipa=espeak
 utility-templates.please-give-me,"Donnez-moi {}, s'il vous plaît",,"dɔnemwˈa {}, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
 utility-templates.may-i,Puis-je {} ?,,pyˈiʒ {},,2,fr-agent-v1;ipa=espeak
 utility-templates.please-do-not-add,"Sans {}, s'il vous plaît",,"sˈɑ̃ {}, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak

@@ -374,5 +374,6 @@
   "ornament.laurel": "Manuscrito con laureles",
   "ornament.starforge": "Forja estelar",
   "ornament.hint": "Bordes decorativos, con el mismo tamaño de texto y espaciado. Los adornos de las esquinas aparecen donde hay espacio.",
+  "ornament.frameHint": "Un marco élfico entrelazado reserva espacio alrededor del texto. El ajuste y el número de páginas pueden cambiar.",
   "ornament.lowInk": "El modo de ahorro de tinta usa las líneas clásicas. Tu estilo vuelve al usar color o monocromo."
 }

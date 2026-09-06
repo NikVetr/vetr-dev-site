@@ -1,10 +1,10 @@
 concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
 profanity.oh-my-god,يا إلهي!,,yā ilāhī!,jˈaː ʔˈilaːhˌiːj,O my God -- mild,1,profanity-v1;src=Wasit;ipa=espeak
 profanity.damn,اللعنة!,,al-laʿnah!,ʔallˈaʕna,"the curse -- damn it, mild",1,profanity-v1;src=Wasit;ipa=espeak
-profanity.expletive,خرا!,,kharā!,xɹˈaː,"shit -- coarse, colloquial",1,profanity-v1;src=Hinds-Badawi;ipa=espeak
+profanity.expletive,خرا!,,kharā!,xrˈaː,"shit -- coarse, colloquial",1,profanity-v1;src=Hinds-Badawi;ipa=espeak
 profanity.intensifier,اللعين,,al-laʿīn,ʔallˈaʕiːn,after a noun: the damned; agrees,1,profanity-v1;src=Wasit;ipa=espeak
 profanity.frustration,دَه زفت,,dah zift,dˈah zˈift,this is tar -- rubbish; mild-coarse,1,profanity-v1;src=Hinds-Badawi;ipa=espeak
-profanity.thats-rude,هذا كلام قبيح,,hādhā kalām qabīḥ,haˈaðaˌa kˈalaːm qˈabiːħ,these are ugly words,1,profanity-v1;src=Wasit;ipa=espeak
-profanity.excuse-my-language,آسف على هذا التعبير,,āsif ʿalá hādhā al-taʿbīr,ʔˈaːsif ʕˈalaː haˈaðaˌa ʔattˈaʕbiːr,sorry for this expression,1,profanity-v1;src=Wasit;ipa=espeak
+profanity.thats-rude,هذا كلام قبيح,,hādhā kalām qabīḥ,hˈaːðaː kˈalaːm qˈabiːħ,these are ugly words,1,profanity-v1;src=Wasit;ipa=espeak
+profanity.excuse-my-language,آسف على هذا التعبير,,āsif ʿalá hādhā al-taʿbīr,ʔˈaːsif ʕˈalaː hˈaːðaː ʔattˈaʕbiːr,sorry for this expression,1,profanity-v1;src=Wasit;ipa=espeak
 profanity.strength-warning,هذه السطور للتمييز لا للاستعمال، فثقل الكلمة لا ينتقل مع الترجمة. وقد تكون الكلمة التي تبدو هنا سبابًا خفيفًا مما لا يقال في اللغة المجاورة، وأشد كلمة في أي لغة هي في الغالب الكلمة التي اضطر هذا الباب إلى حجبها.,,,,,1,profanity-notes-v1
 profanity.japanese-register,اليابانية لا تفعل هذا بالمفردات إلا نادرًا، فالاحتقار يحمله النحو: ضمير مخاطب جاف، وصيغة أمر مجردة، وأشكال فعلية مقتضبة. فالغضب في آخر الفعل لا في كلمة يمكن البحث عنها في المعجم، والسطور أعلاه هي كل ما هنالك تقريبًا.,,,,,1,profanity-notes-v1

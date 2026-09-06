@@ -11,7 +11,7 @@ accessibility.how-many-steps,Kaç basamak var?,,kˈatʃ basamˈak vˈar,,2,tr-ag
 accessibility.cannot-climb-stairs,Merdiven çıkamıyorum.,,mɛrdivˈæn tʃɯkamˈɯjoɾʊm,,2,tr-agent-v1;ipa=espeak
 accessibility.need-to-sit-down,Oturmam gerekiyor.,,otʊrmˈam ɟeɾekˈijɔr,,2,tr-agent-v1;ipa=espeak
 accessibility.accessible-restroom,Engelli tuvaleti var mı?,,ænɟællˈɪ tuvaletˈɪ vˈar mɯ,,2,tr-agent-v1;ipa=espeak
-accessibility.station-assistance,İstasyonda yardım var mı?,,ɪstasjɔndˈa jardˈɯm vˈar mɯ,,2,tr-agent-v1;ipa=espeak
+accessibility.station-assistance,İstasyonda yardım var mı?,,ɪstasjˈɔnda jardˈɯm vˈar mɯ,,2,tr-agent-v1;ipa=espeak
 accessibility.help-me-carry,Taşımama yardım eder misiniz?,,taʃˈɯmama jardˈɯm edˈɛr mˈisinɪz,,2,tr-agent-v1;ipa=espeak
 accessibility.board-first,Önce ben binebilir miyim?,,ˈœndʒɛ bæn binebilˈɪr mˈijɪm,,2,tr-agent-v1;ipa=espeak
 accessibility.door-width,Kapı genişliği kaç cm?,,kapˈɯ ɟenɪʃlijˈɪ kˈatʃ dʒˌɛmˈɛ,,2,tr-agent-v1;ipa=espeak
@@ -20,7 +20,7 @@ accessibility.hard-of-hearing,İşitme engelliyim.,Az duyuyorum.,iʃˈɪtmɛ æn
 accessibility.speak-louder,Daha yüksek sesle konuşur musunuz?,,dahˈa jˈøksɛk sˈɛslɛ konuʃˈʊr mˈusunʊz,,2,tr-agent-v1;ipa=espeak
 accessibility.visually-impaired,Görme engelliyim.,,ɟˈœrmɛ ænɟællˈijɪm,,2,tr-agent-v1;ipa=espeak
 accessibility.take-your-arm,Kolunuza girebilir miyim?,,kˈoɫunuza ɟiɾebilˈɪr mˈijɪm,,2,tr-agent-v1;ipa=espeak
-accessibility.guide-dog,Bu benim rehber köpeğim.,,bʊ bˈenɪm rɛhbˈɛr kœpˈejɪm,,2,tr-agent-v1;ipa=espeak
+accessibility.guide-dog,Bu benim rehber köpeğim.,,bʊ benˈɪm rɛhbˈɛr kœpˈejɪm,,2,tr-agent-v1;ipa=espeak
 in-a-building.is-this-the-correct-entrance,Giriş burası mı?,,ɟiɾˈɪʃ buɾasˈɯ mɯ,,2,tr-agent-v1;ipa=espeak
 in-a-building.do-you-have-wi-fi,Wi-Fi var mı?,,wˈifɪ vˈar mɯ,,2,tr-agent-v1;ipa=espeak
 in-a-building.what-is-the-wi-fi-password,Wi-Fi şifresi nedir?,,wˈifɪ ʃɪfresˈɪ nˈedɪr,,2,tr-agent-v1;ipa=espeak

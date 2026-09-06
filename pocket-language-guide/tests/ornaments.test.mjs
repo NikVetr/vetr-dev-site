@@ -12,7 +12,7 @@ import { parseTable } from '../core/csv.js';
 const ctx = await createSheetContext({
   loadText: p => readFile(p, 'utf8'), loadBytes: p => readFile(p),
 });
-const spec = await referenceSpec('qya', 'en');
+const spec = await referenceSpec('en', 'en');
 const classic = (await buildSheet(ctx, spec)).plan;
 const adorned = (await buildSheet(ctx, { ...spec, ornamentStyle: 'language' })).plan;
 
@@ -120,6 +120,8 @@ test('every ready language has distinct rules and corners, with ink inside its b
 
 test('all language designs preserve text layout, content clearance and card cuts', async () => {
   for (const target of Object.keys(LANGUAGE_MOTIFS)) {
+    // Quenya has a reserved frame and its own fitting/clearance regression suite.
+    if (target === 'qya') continue;
     const plainSpec = await referenceSpec(target, 'en');
     const plain = (await buildSheet(ctx, plainSpec)).plan;
     const decorated = (await buildSheet(ctx, { ...plainSpec, ornamentStyle: 'language' })).plan;
@@ -143,7 +145,7 @@ test('all language designs preserve text layout, content clearance and card cuts
 });
 
 test('all interface catalogues translate every style choice and help message', async () => {
-  const keys = ['format.ornamentStyle', 'ornament.hint', 'ornament.lowInk',
+  const keys = ['format.ornamentStyle', 'ornament.hint', 'ornament.frameHint', 'ornament.lowInk',
     ...ORNAMENT_STYLES.map(style => `ornament.${style}`)];
   for (const code of Object.keys(LANGUAGE_MOTIFS)) {
     const messages = JSON.parse(await readFile(`data/i18n/${code}.json`, 'utf8'));

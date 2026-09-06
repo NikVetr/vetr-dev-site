@@ -1,0 +1,15 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+slang.thats-good,நல்லா இருக்கு,,nallā irukku,nʌllaː iɾɯkkɯ,,2,ta-agent-v1;ipa=espeak
+slang.thats-great,செம! சூப்பர்!,,cema! cūppar!,semʌ suːppʌr,,2,ta-agent-v1;ipa=espeak
+slang.i-love-it,எனக்கு ரொம்பப் பிடிச்சிருக்கு,,eṉakku rompap piṭiccirukku,enʌkkɯ ɾombʌp piɖitʃːiɾɯkkɯ,,2,ta-agent-v1;ipa=espeak
+slang.thats-bad,சுமாரா இருக்கு,,cumārā irukku,sumaːɾaː iɾɯkkɯ,so-so,2,ta-agent-v1;ipa=espeak
+slang.delicious,ரொம்ப ருசியா இருக்கு!,,rompa ruciyā irukku!,ɾombʌ ɾusijaː iɾɯkkɯ,,2,ta-agent-v1;ipa=espeak
+slang.thats-pricey,விலை ரொம்ப ஜாஸ்தி,,vilai rompa jāsti,vilaɪ ɾombʌ dʒaːsti,,2,ta-agent-v1;ipa=espeak
+slang.exactly,அதேதான்!,,atētāṉ!,adeːdaːn,,2,ta-agent-v1;ipa=espeak
+slang.no-worries,பரவாயில்லை,,paravāyillai,pʌɾʌvaːjillaɪ,,2,ta-agent-v1;ipa=espeak
+slang.youre-welcome,அதுக்கென்ன!,,atukkeṉṉa!,adɯkkennʌ,what of it -- the colloquial reply to thanks,2,ta-agent-v1;ipa=espeak
+slang.seriously,அப்படியா!,,appaṭiyā!,appʌɖijaː,,2,ta-agent-v1;ipa=espeak
+slang.im-good-thanks,"வேண்டாம், நன்றி",,"vēṇṭām, naṉṟi","veːɳɖaːm, nʌnri",,2,ta-agent-v1;ipa=espeak
+slang.lets-go,போகலாம்!,,pōkalām!,poːɡʌlaːm,,2,ta-agent-v1;ipa=espeak
+slang.cheers,சியர்ஸ்!,,ciyars!,tʃijʌrs,borrowed; Tamil has no toasting formula of its own,2,ta-agent-v1;ipa=espeak
+slang.see-you,பிறகு பார்க்கலாம்!,,piṟaku pārkkalām!,pirʌɡɯ paːrkkʌlaːm,,2,ta-agent-v1;ipa=espeak

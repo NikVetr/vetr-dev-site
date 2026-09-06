@@ -1,0 +1,13 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+introductions.my-name-is,Мене звати {}.,,Mene zvaty {}.,mˈɛnɛ zʋˈatɪ {},,2,uk-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,Дуже приємно.,,Duzhe pryiemno.,dˈuʒɛ prɪjˈɛmno,,2,uk-agent-v1;ipa=espeak
+introductions.what-is-your-name,Як вас звати?,,Yak vas zvaty?,jˈaɡ ʋˈaz zʋˈatɪ,,2,uk-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,Ми подорожуємо разом.,,My podorozhuiemo razom.,mˈɪ podorˈoʒujɛmo rˈazom,,2,uk-agent-v1;ipa=espeak
+introductions.this-is-my-friend,Це мій друг.,Це моя подруга.,Tse mii druh.,tsˈɛ mˈiːj drˈuh,,2,uk-agent-v1;ipa=espeak
+introductions.i-am-from,Я з {}.,,Ya z {}.,jˈa z {},,2,uk-agent-v1;ipa=espeak
+introductions.where-are-you-from,Звідки ви?,,Zvidky vy?,zʋˈiːtkɪ ʋˈɪ,,2,uk-agent-v1;ipa=espeak
+introductions.how-are-you,Як справи?,,Yak spravy?,jˈak sprˈaʋɪ,,2,uk-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,Я турист.,Я туристка.,Ya turyst.,jˈa turˈɪst,,2,uk-agent-v1;ipa=espeak
+introductions.this-is-my-husband-wife,Це мій чоловік / моя дружина.,,Tse mii cholovik / moia druzhyna.,tsˈɛ mˈiːj tʃoloʋˈiːk / mˈoja druʒˈɪna,,2,uk-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,Це моя донька / мій син.,,Tse moia donka / mii syn.,tsˈɛ mˈoja dˈoɲka / mˈiːj sˈɪn,,2,uk-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,Я подорожую сам.,Я подорожую сама.,Ya podorozhuiu sam.,jˈa podorˈoʒuju sˈam,,2,uk-agent-v1;ipa=espeak

@@ -12,6 +12,12 @@ export const LANGUAGE_MOTIFS = /** @type {const} */ ({
   // lattice screen, chosen for Urdu over anything calligraphic because Arabic already
   // holds `interlace` and a jali is a *grid* where an interlace is a knot.
   bn: 'alpona', pl: 'wycinanki', ur: 'jali',
+  // `kolam` is the Tamil doorstep drawing, laid on a grid of dots the line loops
+  // around; `petrykivka` is Ukrainian brush painting, where every shape is one pull
+  // of the brush. Both are named against the neighbour they could be confused with:
+  // a kolam is a *grid* where `alpona` is freehand and radial, and a petrykivka
+  // bloom is struck outward from its own centre where `berry` is fruit on a vine.
+  ta: 'kolam', uk: 'petrykivka',
 });
 /** @typedef {typeof LANGUAGE_MOTIFS[keyof typeof LANGUAGE_MOTIFS]} LanguageMotif */
 
@@ -229,6 +235,29 @@ const emblems = {
       p.m(50 + s * 8, 88); p.l(50 + s * 20, 79); p.l(50 + s * 8, 79);
     }
   },
+  kolam(p) {
+    // The pulli are the point: the line loops around the dots rather than joining
+    // them, and the grid is what a kolam is measured out on before any line is
+    // drawn. That is the whole difference from `alpona`, which is freehand.
+    for (const x of [26, 50, 74]) for (const y of [26, 50, 74]) oval(p, x, y, 2.5, 2.5);
+    for (const [dx, dy] of [[0, -1], [1, 0], [0, 1], [-1, 0]]) {
+      leaf(p, 50 + dx * 10, 50 + dy * 10, dx * 30, dy * 30, 13);
+    }
+    p.m(50, 6); p.q(94, 6, 94, 50); p.q(94, 94, 50, 94); p.q(6, 94, 6, 50); p.q(6, 6, 50, 6);
+  },
+  petrykivka(p) {
+    // Brush painting, so every shape is one pull of a cat's-hair brush: the bloom is
+    // struck outward from its own centre and the buds are single teardrops laid along
+    // the stem, which is why nothing here is a closed grid or a mirrored cut.
+    p.m(8, 92); p.c(26, 74, 30, 56, 48, 44);
+    for (let i = 0; i < 7; i++) {
+      const a = i * Math.PI * 2 / 7 - Math.PI / 2;
+      leaf(p, 62 + Math.cos(a) * 6, 32 + Math.sin(a) * 6,
+        Math.cos(a) * 19, Math.sin(a) * 19, 9);
+    }
+    oval(p, 62, 32, 4, 4);
+    for (const [x, y, dx, dy] of [[26, 74, -16, 6], [36, 60, -15, 3]]) leaf(p, x, y, dx, dy, 7);
+  },
   jali(p) {
     // A pierced screen: a grid of pointed arches, each one an opening rather than a
     // motif, which is what a jali is for.
@@ -269,6 +298,8 @@ const tracery = {
   cypress(p) { p.m(10, 88); p.c(14, 34, 63, 44, 86, 8); p.c(71, 38, 99, 89, 10, 88); },
   alpona(p) { flower(p, 6, 40); },
   wycinanki(p) { p.m(50, 92); p.l(50, 8); p.m(8, 60); p.q(50, 6, 92, 60); },
+  kolam(p) { p.m(50, 8); p.q(92, 8, 92, 50); p.q(92, 92, 50, 92); p.q(8, 92, 8, 50); p.q(8, 8, 50, 8); oval(p, 50, 50, 7, 7); },
+  petrykivka(p) { p.m(8, 92); p.q(34, 66, 46, 44); oval(p, 62, 34, 26, 26); },
   jali(p) { for (const x of [28, 72]) { p.m(x - 20, 90); p.l(x - 20, 46); p.q(x, 4, x + 20, 46); p.l(x + 20, 90); } },
 };
 

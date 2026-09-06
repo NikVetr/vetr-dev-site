@@ -13,7 +13,7 @@ pharmacy-symptoms.i-think-i-have-malaria,Creo que tengo malaria,paludismo,kɾˈe
 pharmacy-symptoms.i-need-a-malaria-test,Necesito una prueba de malaria,,nˌesesˈito ˈuna pɾuˈeba de malˈaɾja,,2,malaria-v1;ipa=espeak
 police-consulate.my-bag-was-stolen,Me robaron el bolso,Me robaron la mochila,me robˈaɾon el bˈolso,,2,es-agent-v1;ipa=espeak
 body-parts.back,la espalda,,la espˈalda,,2,es-agent-v1;ipa=espeak
-medical-conditions.i-have-a-heart-condition,Tengo una enfermedad del corazón,Tengo una cardiopatía,tˈeŋɡo ˈuna ˌemfeɾmedˈad del kˌoɾasˈon,,2,es-agent-v1;ipa=espeak
+medical-conditions.i-have-a-heart-condition,Tengo una enfermedad del corazón,Tengo una cardiopatía,tˈeŋɡo ˈuna ˌenfeɾmedˈad del kˌoɾasˈon,,2,es-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-diarrhea,Tengo diarrea,,tˈeŋɡo djarˈea,,2,es-agent-v1;ipa=espeak
 police-consulate.my-passport-was-stolen,Me robaron el pasaporte,,me robˈaɾon el pˌasapˈoɾte,,2,es-agent-v1;ipa=espeak
 body-parts.throat,la garganta,,la ɡaɾɡˈanta,,2,es-agent-v1;ipa=espeak
@@ -53,7 +53,7 @@ medical-conditions.medicine-allergy,Alergia a medicamentos: {},,alˈeɾxja a mˌ
 pharmacy-symptoms.how-many-times-a-day,¿Cuántas veces al día?,,kwˈantas bˈeses al dˈia,,2,es-agent-v1;ipa=espeak
 police-consulate.please-notify-my-consulate,"Avise a mi consulado, por favor",,"abˈise a mi kˌonsulˈado, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
 body-parts.knee,la rodilla,,la rodˈiʝa,,2,es-agent-v1;ipa=espeak
-medical-conditions.this-card-lists-my-conditions,Esta tarjeta indica mis enfermedades,,ˈesta taɾxˈeta indˈika mis ˌemfeɾmedˈades,,2,es-agent-v1;ipa=espeak
+medical-conditions.this-card-lists-my-conditions,Esta tarjeta indica mis enfermedades,,ˈesta taɾxˈeta indˈika mis ˌenfeɾmedˈades,,2,es-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-stomach-ache,Me duele el estómago,,me dwˈele el estˈomaɡo,,2,es-agent-v1;ipa=espeak
 police-consulate.i-am-calling-the-police,Voy a llamar a la policía,,bˈoɪ a ʝamˈaɾ a la pˌolisˈia,,2,es-agent-v1;ipa=espeak
 body-parts.ankle,el tobillo,,el tobˈiʝo,,2,es-agent-v1;ipa=espeak
@@ -84,13 +84,13 @@ pharmacy-symptoms.can-i-get-this-medicine-here,¿Tienen este medicamento?,,tjˈe
 police-consulate.i-will-not-sign-anything-i-cannot-read,No firmaré nada que no pueda leer,,nˈo fˌiɾmaɾˈe nˈada ke nˈo pwˈeda leˈeɾ,,2,es-agent-v1;ipa=espeak
 pharmacy-symptoms.bandage,una venda,una tirita · una curita,ˈuna bˈenda,,2,es-agent-v1;ipa=espeak
 police-consulate.am-i-free-to-go,¿Puedo irme?,,pwˈedo ˈiɾme,,2,es-agent-v1;ipa=espeak
-pharmacy-symptoms.the-pain-is-severe,El dolor es muy fuerte,,el dolˈoɾ ˈes mˈuʝ fwˈeɾte,,2,es-agent-v1;ipa=espeak
+pharmacy-symptoms.the-pain-is-severe,El dolor es muy fuerte,,el dolˈoɾ ˈes mˈuj fwˈeɾte,,2,es-agent-v1;ipa=espeak
 police-consulate.i-do-not-want-to-go-with-you,No quiero ir con usted,,nˈo kjˈeɾo ˈiɾ kon ustˈed,,2,es-agent-v1;ipa=espeak
 pharmacy-symptoms.antiseptic,un antiséptico,,ˈun ˌantisˈepːtiko,,2,es-agent-v1;ipa=espeak
 pharmacy-symptoms.i-feel-nauseous,Tengo náuseas,,tˈeŋɡo nˈausˌeas,,2,es-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-rash,Tengo un sarpullido,Tengo una erupción,tˈeŋɡo ˈun sˌaɾpuʝˈido,,2,es-agent-v1;ipa=espeak
 pharmacy-symptoms.before-or-after-food,¿Antes o después de comer?,,ˈantes o despwˈes de komˈeɾ,,2,es-agent-v1;ipa=espeak
-pharmacy-symptoms.i-think-it-is-infected,Creo que está infectado,,kɾˈeo ke estˈa ˌimfektˈado,,2,es-agent-v1;ipa=espeak
+pharmacy-symptoms.i-think-it-is-infected,Creo que está infectado,,kɾˈeo ke estˈa ˌinfektˈado,,2,es-agent-v1;ipa=espeak
 pharmacy-symptoms.motion-sickness-tablets,pastillas para el mareo,,pastˈiʝas pˌaɾa el maɾˈeo,,2,es-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-cut,Tengo un corte,,tˈeŋɡo ˈun kˈoɾte,,2,es-agent-v1;ipa=espeak
 pharmacy-symptoms.antacid,un antiácido,,ˈun antjˈasido,,2,es-agent-v1;ipa=espeak
@@ -101,7 +101,7 @@ pharmacy-symptoms.is-this-safe-during-pregnancy,¿Es seguro en el embarazo?,,ˈe
 emergency-medical.help,¡Auxilio!,¡Socorro!,aʊksˈiljo,,2,es-agent-v1;ipa=espeak
 emergency-medical.please-call-an-ambulance,"Llame a una ambulancia, por favor",,"ʝˈame a ˈuna ˌambulˈansja, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
 emergency-medical.i-need-a-doctor,Necesito un médico,,nˌesesˈito ˈun mˈediko,,2,es-agent-v1;ipa=espeak
-emergency-medical.i-am-sick,Estoy enfermo/a,,estˈoɪ emfˈeɾmo / ˈa,,2,es-agent-v1;ipa=espeak
+emergency-medical.i-am-sick,Estoy enfermo/a,,estˈoɪ enfˈeɾmo / ˈa,,2,es-agent-v1;ipa=espeak
 emergency-medical.i-am-injured,Estoy herido/a,,estˈoɪ eɾˈido / ˈa,,2,es-agent-v1;ipa=espeak
 emergency-medical.it-hurts-here,Me duele aquí,,me dwˈele akˈi,,2,es-agent-v1;ipa=espeak
 emergency-medical.where-is-a-pharmacy,¿Dónde hay una farmacia?,,dˈonde ˈaɪ ˈuna faɾmˈasja,,2,es-agent-v1;ipa=espeak

@@ -141,10 +141,21 @@ orthography. That is what makes the respelling column O(N) rather than O(N²).
 
 ## The registry
 
-**`languages.csv`, `scripts.csv` and `language-names.csv` are shared with every other
-agent working at the same time.** Do not edit them in the middle of your work. Write
-your intended rows to `tmp/registry-<code>.md` as literal CSV lines and let the
-coordinating session apply them — that removes the conflict rather than racing on it.
+**`languages.csv`, `scripts.csv`, `regions.csv`, `romanizations.csv` and
+`language-names.csv` are shared with every other agent working at the same time.** Do
+not edit them in the middle of your work. Write your intended rows to
+`tmp/registry-<code>.md` as literal CSV lines and let the coordinating session apply
+them — that removes the conflict rather than racing on it.
+
+The same holds for every other file more than one language touches:
+`scripts/subset_fonts.py`, `data/respell/rules/index.json`, `core/ornament-designs.js`
+and `data/concepts/*.csv`. If you do edit one, **edit it in place and append; never
+regenerate it from a script that rewrites the whole file.** The twenty-seventh
+addition wrote its registry rows directly while the twenty-eighth was staging its own,
+and the only reason nothing was lost is that both appended rather than rebuilt. A
+wholesale rewrite from a copy loaded minutes earlier silently drops the other agent's
+work, and `npm run validate` will not notice, because the result is still a valid
+file.
 
 `language-names.csv` is N² and grows by `2N-1` rows per language: what every existing
 language calls yours, and what yours calls each of them. `core/pack.js`'s
@@ -161,7 +172,20 @@ a different reason. Read that discussion in `summary.md` before writing yours.
 seventeenth language shipped without the euro because `numbers-money.euro` was scoped
 `de;fr;es;pt` and nobody added `it`. Read the scopes against the countries
 `regions.csv` gives your language; currency is the obvious one and rarely the only
-one.
+one. An Indian language has to be read against `rupee`, `rupee-symbol`, `lakh` and
+`crore` too.
+
+**And the mirror of it, which is the easier half to miss: a scope names the *target*,
+so your pack still needs a gloss for every scoped concept it is not in.** Ukrainian
+shipped with fifty-two of them empty — every foreign currency, the four Chinese
+classifier rows, and the three tropical-disease rows — because the reasoning stopped
+at "Ukraine is temperate and does not use the baht". True, and beside the point:
+`pharmacy-symptoms.i-think-i-have-malaria` is scoped to the tropical countries *being
+visited*, and a Ukrainian traveller in Thailand needs it exactly as much as a Polish
+one does. The validator says so in as many words — "scoped to X but has no gloss in
+`<you>`, so it prints on N of its M pairs" — so find your own code in that warning
+block before calling the sweep done. `python3 scripts/validate_data.py 2>&1 | grep
+'no gloss in.*<code>'` is the whole check.
 
 ## House style
 
@@ -179,8 +203,8 @@ a refused row with a reason is worth more than a filled one without a source.
 
 ## The roadmap to fifty
 
-Twenty-three are in: `ar de el en es fa fr he hi hu id it ja ko pt ru sw th tr vi
-zh-Hans` plus `tlh qya`. Twenty-seven to go, chosen on three things at once — speaker
+Twenty-eight are in: `ar bn de el en es fa fr he hi hu id it ja ko pl pt ru sw ta th
+tr uk ur vi zh-Hans` plus `tlh qya`. Twenty-two to go, chosen on three things at once — speaker
 count, whether a traveller actually goes there, and whether the script makes the engine
 prove something it has not proved yet. The third matters more than it looks: every new
 script is a leading measurement, a word-break decision and a font stack, and those are
@@ -192,9 +216,9 @@ is only a grouping.
 
 | batch | languages | what it proves |
 |---|---|---|
-| 1 | `bn` Bengali, `ur` Urdu, `pl` Polish | first new script since Hebrew; Arabic-stack reuse a second time; a plain Latin control |
-| 2 | `ta` Tamil, `te` Telugu, `mr` Marathi | three Indic scripts, two of them new, one reusing Devanagari |
-| 3 | `uk` Ukrainian, `nl` Dutch, `ro` Romanian | Cyrillic reuse and two Latin, all with espeak voices |
+| 1 | ~~`bn` Bengali, `ur` Urdu, `pl` Polish~~ **done** | first new script since Hebrew; Arabic-stack reuse a second time; a plain Latin control |
+| 2 | ~~`ta` Tamil~~, `te` Telugu, `mr` Marathi | three Indic scripts, two of them new, one reusing Devanagari |
+| 3 | ~~`uk` Ukrainian~~, `nl` Dutch, `ro` Romanian | Cyrillic reuse and two Latin, all with espeak voices |
 | 4 | `my` Burmese, `km` Khmer, `lo` Lao | the hard batch: complex stacking, and `word_break: dict` for the second and third time |
 | 5 | `fil` Filipino, `ms` Malay, `zh-Hant` Traditional Chinese | two Latin; the first script that is a *variant* of one already shipped |
 | 6 | `am` Amharic, `ka` Georgian, `hy` Armenian | three scripts nothing else in the corpus resembles |
@@ -205,10 +229,12 @@ is only a grouping.
 Three known questions the roadmap will force, worth thinking about before the batch
 that hits them rather than during it:
 
-- **Urdu is Nastaliq**, which is a *style* rather than a script — ISO 15924's `Aran`.
-  Noto Nastaliq is a separate face from Noto Sans Arabic and its leading is far larger.
-  Whether Urdu reuses `Arab` at Naskh or earns a stack is the first real question of
-  batch 1.
+- ~~**Urdu is Nastaliq**~~ — **settled, and by a crash rather than a preference.**
+  `fontkit` throws on Noto Nastaliq Urdu for 84 of 86 real Urdu rows, in both copies of
+  the shaper this project measures and prints with, so Urdu reuses `Arab` at Naskh,
+  which is what most Urdu on a phone or a street sign is set in anyway. See tmp/urdu.md.
+  The general lesson is that a script decision can sometimes be closed by measuring the
+  toolchain rather than by weighing the typography.
 - **`zh-Hant` is a variant, not a new script**, and the corpus already carries
   Traditional forms in `zh-Hans`'s `text_alt`. Whether it is a language or a
   presentation of one is a design decision, not a translation job.

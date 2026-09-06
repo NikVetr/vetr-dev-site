@@ -322,6 +322,7 @@
   "ornament.laurel": "porDu' ghItlh",
   "ornament.starforge": "Hov QuQ",
   "ornament.hint": "nav veHmey 'IHmoH mIlloghmey. choHbe' ngutlh 'ab, rulvaH je. navDaq Daq chIm tu'lu'chugh, pa' mIllogh lanlu'.",
+  "ornament.frameHint": "ghItlh Dech Sor DuQwI' rurwI'. logh lo'. chaq choH ghItlh meH 'ej chaq choH nav mI'.",
   "ornament.lowInk": "rItlh puS Dalo'DI', yamtaw motlh lo'lu'. rItlh puS Dalo'be'DI', mIllogh Segh Dalo'qa'.",
   "_ornament_note": "Style labels use descriptive editorial paraphrases: mIllogh Segh (picture type), porDu' mIllogh (leaf picture), tlheghmey mIllogh (rope picture), Hov QuQ (star engine). These are not canonical names for the designs. yu'egh (wave), tlhegh (rope), Hov (star) and QuQ (engine) are TKD vocabulary; see https://klingonska.org/dict/. The low-ink hint says ordinary rules are used with little ink, and the chosen picture type returns when little ink is no longer used."
 }

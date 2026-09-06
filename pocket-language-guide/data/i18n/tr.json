@@ -374,5 +374,6 @@
   "ornament.laurel": "Defne yapraklı el yazması",
   "ornament.starforge": "Yıldız ocağı",
   "ornament.hint": "Metin boyutu ve aralıkları değişmeden dekoratif kenarlıklar eklenir. Köşe süsleri, boş alan varsa görünür.",
+  "ornament.frameHint": "İç içe geçmiş elf çerçevesi metnin çevresinde yer ayırır. Yerleşim ve sayfa sayısı değişebilir.",
   "ornament.lowInk": "Mürekkep tasarrufu modunda klasik çizgiler kullanılır. Renkli veya tek renkli moda geçince seçtiğiniz stil geri gelir."
 }

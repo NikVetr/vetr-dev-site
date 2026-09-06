@@ -10,6 +10,7 @@ import { buildAtoms } from './atoms.js';
 import { breakColumns } from './columnbreak.js';
 import { backgroundRects } from './background.js';
 import { cornerOrnaments, gutterOrnaments, motifFor, ornamentRule } from '../ornaments.js';
+import { elvenInset, elvenFrame, elvenHeading } from '../elven-frame.js';
 import { placeColumn } from './justify.js';
 
 // Scale 0 puts every field at the smallest size its own script can carry, so the
@@ -102,9 +103,10 @@ const HEAD_LINES = 1.5;
 /**
  * @param {import('../types.js').Geometry} g
  * @param {import('../types.js').PaperSpec} paper
- * @param {{top:number,bottom:number}} [bands]  the two furniture bands' heights  a band reserved for a running head, at top or bottom
+ * @param {{top:number,bottom:number}} [bands] the two furniture bands' heights
+ * @param {number} [frame] space reserved for an ornamental frame
  */
-export function contentBox(g, paper, bands = { top: 0, bottom: 0 }) {
+export function contentBox(g, paper, bands = { top: 0, bottom: 0 }, frame = 0) {
   const insetX = paper.borderless ? (g.pageW * paper.oversprayPct) / 200 : paper.nonprintablePt;
   const insetY = paper.borderless ? (g.pageH * paper.oversprayPct) / 200 : paper.nonprintablePt;
   // A lock screen's reserved bands are the same shape as a printer's dead zone:
@@ -113,20 +115,22 @@ export function contentBox(g, paper, bands = { top: 0, bottom: 0 }) {
   // auto-fit, all three renderers -- needs no knowledge of them.
   const reserveTop = g.pageH * (g.reserve?.top ?? 0);
   const reserveBottom = g.pageH * (g.reserve?.bottom ?? 0);
-  const left = Math.max(g.marginLeft, insetX);
-  const right = Math.max(g.marginRight, insetX);
+  const left = Math.max(g.marginLeft, insetX) + frame;
+  const right = Math.max(g.marginRight, insetX) + frame;
   // A band is *added* to the margin rather than max()ed into it: a printer's dead
   // zone and a lock screen's clock are areas the sheet may not use, where a running
   // head is area the sheet is using for something else. Taking the larger of the two
   // would let a wide margin swallow the head's own line. Two independent heights
   // rather than one signed number, since a header and a footer can both be on.
-  const top = Math.max(g.marginTop, insetY, reserveTop) + (bands.top ?? 0);
-  const bottom = Math.max(g.marginBottom, insetY, reserveBottom) + (bands.bottom ?? 0);
+  const top = Math.max(g.marginTop, insetY, reserveTop) + (bands.top ?? 0) + frame * 1.5;
+  const bottom = Math.max(g.marginBottom, insetY, reserveBottom) + (bands.bottom ?? 0) + frame * 1.5;
+  const columnGap = g.columnGap + frame * 0.65;
   const width = g.pageW - left - right;
   const height = g.pageH - top - bottom;
   return {
     left, top, width, height,
-    colWidth: (width - g.columnGap * (g.columns - 1)) / g.columns,
+    colWidth: (width - columnGap * (g.columns - 1)) / g.columns,
+    columnGap,
     clipped: g.marginLeft < insetX || g.marginTop < insetY,
     insetX, insetY,
   };
@@ -460,7 +464,8 @@ export function layout(input) {
   const { blocks, theme, spec, corpus, measurer, registry } = input;
   const band = headBandPt(input);
   const bands = headBands(spec);
-  const box = contentBox(spec.geometry, spec.paper, band);
+  const frame = elvenInset(spec);
+  const box = contentBox(spec.geometry, spec.paper, band, frame);
   /** @type {import('../types.js').Warning[]} */ const warnings = [];
 
   const targetScript = corpus.scripts[corpus.languages[spec.target].script];
@@ -662,7 +667,7 @@ export function layout(input) {
     for (let c = 0; c < spec.geometry.columns; c += 1) {
       const bin = f * spec.geometry.columns + c;
       const indices = broken.columns[bin] ?? [];
-      const x = box.left + c * (box.colWidth + spec.geometry.columnGap);
+      const x = box.left + c * (box.colWidth + box.columnGap);
       const columnAtoms = indices.map((i) => atoms[i]);
       const { offsets, residual } = placeColumn(columnAtoms, box.top, broken.slack[bin]);
       looseness.push(residual);
@@ -693,9 +698,12 @@ export function layout(input) {
             // Give each half a complete motif instead of slicing a leaf in two.
             const motif = motifFor(spec.ornamentStyle, spec.target);
             if (motif) for (const [start, end] of [[mark.x, cut - 0.5], [cut + 0.5, mark.x + mark.w]]) {
-              if (end - start >= 2) (face.paths ??= []).push(
-                ornamentRule(motif, start, mark.y, end - start, mark.h, mark.stroke),
-              );
+              if (end - start >= 2) {
+                const segment = frame
+                  ? { ...elvenHeading(end - start, mark.y, mark.h, end - start, mark.stroke)[0], x: start }
+                  : ornamentRule(motif, start, mark.y, end - start, mark.h, mark.stroke);
+                (face.paths ??= []).push(segment);
+              }
             }
           } else (face.paths ??= []).push(mark);
         }
@@ -847,12 +855,16 @@ export function layout(input) {
     // Behind everything, so it goes on the front of the list rather than the back.
     // Per face, not per sheet: a `sections` wash follows the sections that landed on
     // *this* face, which is the whole point of it.
-    const corners = cornerOrnaments(spec, face, box,
-      spec.inkMode === 'mono' ? theme.colors.ink : theme.colors.roles.comm);
-    if (corners.length) (face.paths ??= []).push(...corners);
-    const gutters = gutterOrnaments(spec, box,
-      spec.inkMode === 'mono' ? theme.colors.ink : theme.colors.roles.comm);
-    if (gutters.length) (face.paths ??= []).push(...gutters);
+    if (frame) {
+      (face.paths ??= []).push(...elvenFrame(spec, face, box, band, theme.colors.ink));
+    } else {
+      const corners = cornerOrnaments(spec, face, box,
+        spec.inkMode === 'mono' ? theme.colors.ink : theme.colors.roles.comm);
+      if (corners.length) (face.paths ??= []).push(...corners);
+      const gutters = gutterOrnaments(spec, box,
+        spec.inkMode === 'mono' ? theme.colors.ink : theme.colors.roles.comm);
+      if (gutters.length) (face.paths ??= []).push(...gutters);
+    }
     face.rects.unshift(...backgroundRects({
       spec,
       theme,
@@ -928,7 +940,9 @@ function findFixes(input, box, scaleFloor) {
 
   /** @param {import('../types.js').Geometry} geometry */
   const fitsWith = (geometry) => {
-    const probeBox = contentBox(geometry, spec.paper);
+    const candidate = { ...spec, geometry };
+    const probeBox = contentBox(geometry, spec.paper,
+      headBandPt({ ...input, spec: candidate }), elvenInset(candidate));
     if (probeBox.colWidth < 40 || probeBox.height < 40) return false;
     const atoms = buildAtoms({
       blocks, theme, spec: { ...spec, geometry }, corpus, measurer, registry,

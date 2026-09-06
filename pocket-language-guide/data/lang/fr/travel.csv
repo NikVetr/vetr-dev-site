@@ -3,7 +3,7 @@ border-customs.i-am-a-tourist,Je suis touriste,,ʒə syi tuʁˈist,,2,fr-agent-v
 border-customs.here-is-my-passport,Voici mon passeport,,vwasi mɔ̃ paspˈɔʁ,,2,fr-agent-v1;ipa=espeak
 border-customs.i-am-staying-for-days,Je reste {} jours,,ʒə ʁˈɛst {} ʒˈuʁ,,2,fr-agent-v1;ipa=espeak
 border-customs.nothing-to-declare,Rien à déclarer,,ʁiɛ̃n a deklaʁˈe,,2,fr-agent-v1;ipa=espeak
-border-customs.i-am-staying-at,Je loge à {},,ʒə lɔʒ ˌaaksɑ̃ɡʁˈav {},,2,fr-agent-v1;ipa=espeak
+border-customs.i-am-staying-at,Je loge à {},,ʒə lɔʒ ˈa {},,2,fr-agent-v1;ipa=espeak
 border-customs.i-am-here-for-business,Je viens pour affaires,,ʒə vjɛ̃ puʁ afˈɛʁ,,2,fr-agent-v1;ipa=espeak
 border-customs.i-have-a-return-ticket,J'ai un billet de retour,,ʒe œ̃ bijɛ də ʁətˈuʁ,,2,fr-agent-v1;ipa=espeak
 border-customs.i-am-visiting-family,Je viens voir ma famille,,ʒə vjɛ̃ vwaʁ ma famˈij,,2,fr-agent-v1;ipa=espeak
@@ -25,7 +25,7 @@ border-customs.arrival-card,fiche de débarquement,,fiʃ də debaʁkəmˈɑ̃,,2
 border-customs.transit,Transit,,tʁɑ̃zˈit,,2,fr-agent-v1;ipa=espeak
 border-customs.boarding-pass,carte d'embarquement,,kaʁt dɑ̃baʁkəmˈɑ̃,,2,fr-agent-v1;ipa=espeak
 directions.where-is,Où est {} ?,,u ˈɛ {},,2,fr-agent-v1;ipa=espeak
-directions.how-do-i-get-to,Comment aller à {} ?,,kɔmɑ̃ ale ˌaaksɑ̃ɡʁˈav {},,2,fr-agent-v1;ipa=espeak
+directions.how-do-i-get-to,Comment aller à {} ?,,kɔmɑ̃ ale ˈa {},,2,fr-agent-v1;ipa=espeak
 directions.is-it-far,C'est loin ?,,sɛ lwˈɛ̃,,2,fr-agent-v1;ipa=espeak
 directions.how-long-on-foot,Combien de temps à pied ?,,kɔ̃bjɛ̃ də tɑ̃ a pjˈe,,2,fr-agent-v1;ipa=espeak
 directions.please-show-me-on-the-map,"Montrez-moi sur la carte, s'il vous plaît",,"mɔ̃tʁemwa syʁ la kˈaʁt, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
@@ -61,7 +61,7 @@ taxi.i-will-get-off-here,Je descends ici,,ʒə dɛsɑ̃z isˈi,,2,fr-agent-v1;ip
 taxi.please-get-me-there-in-time-for-the-shinkansen,Déposez-moi à temps pour le Shinkansen,,depozemwa a tɑ̃ puʁ lə ʃɛ̃kɑ̃sˈɛn,,2,fr-agent-v1;ipa=espeak
 transit-rides.two-tickets,Deux billets,,dø bijˈɛ,,2,fr-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,Où est la station de métro ?,,u ɛ la stasjɔ̃ də metʁˈo,,2,fr-agent-v1;ipa=espeak
-transit-rides.does-this-bus-train-go-to,Ce bus / train va-t-il à {} ?,,sə bˈys / tʁɛ̃ vatil ˌaaksɑ̃ɡʁˈav {},,2,fr-agent-v1;ipa=espeak
+transit-rides.does-this-bus-train-go-to,Ce bus / train va-t-il à {} ?,,sə bˈys / tʁɛ̃ vatil ˈa {},,2,fr-agent-v1;ipa=espeak
 transit-rides.what-is-the-next-stop,Quel est le prochain arrêt ?,,kɛl ɛ lə pʁoʃɛ̃n aʁˈɛ,,2,fr-agent-v1;ipa=espeak
 transit-rides.please-tell-me-where-to-get-off,"Dites-moi où descendre, s'il vous plaît",,"ditmwa u dɛsˈɑ̃dʁ, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
 transit-rides.is-this-direct,C'est direct ?,,sɛ diʁˈɛkt,,2,fr-agent-v1;ipa=espeak
@@ -83,7 +83,7 @@ place-words.tourist-spot-sightseeing-area,site touristique,,sit tuʁistˈik,,2,f
 pickup-meeting.where-is-the-pickup-point,Où est le point de rendez-vous ?,,u ɛ lə pwɛ̃ də ʁɑ̃devˈu,,2,fr-agent-v1;ipa=espeak
 pickup-meeting.please-send-me-the-pickup-point,Envoyez-moi le point de rendez-vous,,ɑ̃vwajemwa lə pwɛ̃ də ʁɑ̃devˈu,,2,fr-agent-v1;ipa=espeak
 pickup-meeting.please-pick-us-up-here,Venez nous chercher ici,,vəne nu ʃɛʁʃe isˈi,,2,fr-agent-v1;ipa=espeak
-pickup-meeting.meet-us-at,Rejoignez-nous à {},,ʁəʒwanjenuz ˌaaksɑ̃ɡʁˈav {},,2,fr-agent-v1;ipa=espeak
+pickup-meeting.meet-us-at,Rejoignez-nous à {},,ʁəʒwanjenuz ˈa {},,2,fr-agent-v1;ipa=espeak
 pickup-meeting.please-call-me-a-ride,"Commandez-moi un VTC, s'il vous plaît",une voiture,"kɔmɑ̃demwa œ̃ vˌetˌesˈe, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
 pickup-meeting.please-call-a-taxi,"Appelez un taxi, s'il vous plaît",,"aplez œ̃ taksˈi, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
 rail-station-words.high-speed-rail,TGV,train à grande vitesse,tˌeʒˌevˈe,,2,fr-agent-v1;ipa=espeak

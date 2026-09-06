@@ -1,7 +1,7 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 payment-receipt.pay-by-card,¿Puedo pagar con tarjeta?,,pwˈedo paɡˈaɾ kon taɾxˈeta,,2,es-agent-v1;ipa=espeak
 payment-receipt.pay-cash,¿Puedo pagar en efectivo?,,pwˈedo paɡˈaɾ en ˌefektˈibo,,2,es-agent-v1;ipa=espeak
-payment-receipt.pay-by-qr-code,¿Puedo pagar con código QR?,,pwˈedo paɡˈaɾ kon kˈodiɡo kˌuˈeɾe,,2,es-agent-v1;ipa=espeak
+payment-receipt.pay-by-qr-code,¿Puedo pagar con código QR?,,pwˈedo paɡˈaɾ kon kˈodiɡo kˌuˈere,,2,es-agent-v1;ipa=espeak
 payment-receipt.a-receipt-please,"Un recibo, por favor",Un comprobante · un ticket,"ˈun resˈibo, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
 payment-receipt.please-write-the-number,"Escriba el número, por favor",,"eskɾˈiba el nˈumeɾo, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
 payment-receipt.how-much-in-total,¿Cuánto es en total?,,kwˈanto ˈes en totˈal,,2,es-agent-v1;ipa=espeak
@@ -28,5 +28,5 @@ color-size-returns.may-i-try-it-on,¿Me lo puedo probar?,,me lo pwˈedo pɾobˈa
 color-size-returns.can-i-return-it,¿Puedo devolverlo?,,pwˈedo dˌebolbˈeɾlo,,2,es-agent-v1;ipa=espeak
 color-size-returns.can-i-exchange-it,¿Puedo cambiarlo?,,pwˈedo kambjˈaɾlo,,2,es-agent-v1;ipa=espeak
 color-size-returns.do-you-have-a-bag,¿Tiene una bolsa?,,tjˈene ˈuna bˈolsa,,2,es-agent-v1;ipa=espeak
-tax-refund.can-i-get-a-tax-refund,¿Puedo pedir la devolución del IVA?,,pwˈedo pedˈiɾ la dˌebolusjˈon del ˌiˌubeˈa,,2,es-agent-v1;ipa=espeak
+tax-refund.can-i-get-a-tax-refund,¿Puedo pedir la devolución del IVA?,,pwˈedo pedˈiɾ la dˌebolusjˈon del ˌibˌeˈa,,2,es-agent-v1;ipa=espeak
 tax-refund.is-tax-free-shopping-available,¿Hay compras libres de impuestos?,,ˈaɪ kˈompɾas lˈibɾes de impwˈestos,,2,es-agent-v1;ipa=espeak

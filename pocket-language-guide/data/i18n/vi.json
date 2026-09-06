@@ -374,5 +374,6 @@
   "ornament.laurel": "Bản thảo lá nguyệt quế",
   "ornament.starforge": "Lò rèn tinh tú",
   "ornament.hint": "Viền trang trí giữ nguyên cỡ chữ và khoảng cách. Họa tiết góc chỉ xuất hiện khi có chỗ trống.",
+  "ornament.frameHint": "Khung tiên đan xen dành khoảng trống quanh văn bản. Bố cục và số trang có thể thay đổi.",
   "ornament.lowInk": "Chế độ tiết kiệm mực dùng đường viền cổ điển. Kiểu đã chọn sẽ trở lại khi chuyển sang chế độ màu hoặc đơn sắc."
 }

@@ -374,5 +374,6 @@
   "ornament.laurel": "Manuscrit aux lauriers",
   "ornament.starforge": "Forge stellaire",
   "ornament.hint": "Bordures décoratives, sans changer la taille du texte ni l’espacement. Les ornements d’angle apparaissent là où il reste de la place.",
+  "ornament.frameHint": "Un cadre elfique entrelacé réserve de l’espace autour du texte. La mise en page et le nombre de pages peuvent changer.",
   "ornament.lowInk": "Le mode économie d’encre utilise les traits classiques. Votre style revient en couleur ou en monochrome."
 }

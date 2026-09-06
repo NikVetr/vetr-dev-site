@@ -1,4 +1,6 @@
 import { ORNAMENT_STYLES, motifFor, ornamentRule } from '../core/ornaments.js';
+import { isElven, elvenInset, elvenFrame, elvenHeading } from '../core/elven-frame.js';
+import { contentBox } from '../core/solve/index.js';
 import { t } from './i18n.js';
 
 /** @param {import('../core/types.js').SheetSpec} spec
@@ -36,6 +38,10 @@ export function ornamentControl(spec, onChange) {
     select.value = style;
     const motif = motifFor(style, next.target);
     const color = next.inkMode === 'mono' ? '#111820' : '#237547';
+    const elven = isElven(next);
+    hint.textContent = t(elven ? 'ornament.frameHint' : 'ornament.hint');
+    preview.setAttribute('viewBox', elven ? '0 0 240 90' : '0 0 240 42');
+    preview.classList.toggle('elven', elven);
     const path = document.createElementNS(preview.namespaceURI, 'path');
     if (motif) {
       const rule = ornamentRule(motif, 10, 12, 220, 18, color);
@@ -51,6 +57,29 @@ export function ornamentControl(spec, onChange) {
     path.setAttribute('stroke-linecap', 'round');
     path.setAttribute('stroke-linejoin', 'round');
     preview.replaceChildren(path);
+    if (elven) {
+      const sample = { ...next, geometry: { ...next.geometry, pageW: 240, pageH: 90,
+        columns: 2, columnGap: 6, marginLeft: 2, marginRight: 2, marginTop: 2,
+        marginBottom: 2, reserve: undefined },
+      paper: { ...next.paper, borderless: false, nonprintablePt: 2 } };
+      const box = contentBox(sample.geometry, sample.paper, undefined, elvenInset(sample));
+      const marks = elvenFrame(sample, { rects: [], runs: [], icons: [], hits: [] },
+        box, { top: 0, bottom: 0 }, color);
+      for (let c = 0; c < 2; c++) {
+        const x = box.left + c * (box.colWidth + box.columnGap);
+        marks.push(...elvenHeading(box.colWidth, box.top + 7, 9, box.colWidth * 0.42, color)
+          .map(p => ({ ...p, x: p.x + x })));
+      }
+      preview.replaceChildren(...marks.map(mark => {
+        const p = document.createElementNS(preview.namespaceURI, 'path');
+        p.setAttribute('d', mark.d);
+        p.setAttribute('transform', `translate(${mark.x} ${mark.y})`);
+        p.setAttribute('stroke', mark.stroke);
+        p.setAttribute('stroke-width', String(mark.strokeWidth * 1.5));
+        p.setAttribute('fill', 'none');
+        return p;
+      }));
+    }
     caption.textContent = t(`ornament.${style === 'language' ? 'language' : motif ?? 'classic'}`);
     if (motif && next.inkMode === 'low-ink') caption.textContent = t('ornament.lowInk');
   }
