@@ -109,10 +109,11 @@ layout: null
           <button id="model-reset-profile" class="text-button" type="button">Reset RP inputs</button>
         </div>
         <label class="field compact">
-          <span>Method <button class="info-tooltip" type="button" aria-label="About prediction methods" data-tooltip="Bayesian linear and additive models use numeric and categorical inputs. Linear, GAM, RBF SVR, and Gaussian-process comparisons use numeric inputs; the intercept baseline uses none. Every method was evaluated on held-out organizations; details appear in Model details below the plot.">?</button></span>
+          <span>Method <button class="info-tooltip" type="button" aria-label="About prediction methods" data-tooltip="Bayesian models use numeric and categorical inputs. Other methods use numeric inputs; the intercept baseline uses none. See Model details for specifications and validation.">?</button></span>
           <select id="model-method">
             <option value="bayesian">Bayesian multilevel</option>
             <option value="bayesianGam">Bayesian GAM</option>
+            <option value="bayesianExact">Bayesian exact base</option>
             <option value="linear">Scale linear</option>
             <option value="gam">Numeric-input GAM</option>
             <option value="svr">RBF support-vector regression</option>
@@ -122,11 +123,11 @@ layout: null
         </label>
         <span id="model-ad-ranges-field" class="model-option">
           <label><input id="model-use-ad-ranges" type="checkbox"> Include ad ranges</label>
-          <button class="info-tooltip" type="button" aria-label="About advertised ranges in the model" data-tooltip="Experimental: advertised low-to-high ranges enter the Bayesian model as intervals, never as midpoint salaries. A separate posting adjustment recognizes that advertised and realized pay are different. Numeric comparison models do not use postings.">?</button>
+          <button class="info-tooltip" type="button" aria-label="About advertised ranges in the model" data-tooltip="Experimental: add advertised ranges as interval evidence, with a separate posting adjustment. Available for the cash-inclusive Bayesian models.">?</button>
         </span>
         <span id="model-highest-other-field" class="model-option">
           <label><input id="model-include-highest-other" type="checkbox" checked> Include highest-other pay</label>
-          <button class="info-tooltip" type="button" aria-label="About highest-other pay in the model" data-tooltip="Use the highest disclosed eligible non-CEO base pay after converting each employee to a 40-hour week: combined reported pay × 40 / combined weekly hours. This is a reported-effort convention, not verified contractual FTE. Missing disclosures can still conceal a higher base salary. Switching this off uses a separately fitted version of the selected model that omits this field.">?</button>
+          <button class="info-tooltip" type="button" aria-label="About highest-other pay in the model" data-tooltip="Use highest disclosed non-CEO base pay × 40 / reported weekly hours. This is a reported-hours equivalent; incomplete disclosure can understate the maximum. Switching off uses a separately fitted model.">?</button>
         </span>
         <div class="model-input-grid">
           <label><span>Expenses</span><input id="model-expenses" type="number" min="1" step="100000" inputmode="numeric"></label>
@@ -147,8 +148,8 @@ layout: null
           <label><span>Work model</span><select id="model-remote"></select></label>
           <label><span>Fiscal sponsor</span><select id="model-fiscal-sponsor"></select></label>
         </div>
-        <label><span>Uncertainty interval (%)</span><input id="model-compatibility-level" type="number" min="50" max="99" step="1" value="89"></label>
-        <label><span>Driver units</span><select id="model-effect-units"><option value="percent">Percent salary effect</option><option value="log">Log salary</option></select></label>
+        <label class="field compact"><span>Uncertainty interval (%)</span><input id="model-compatibility-level" type="number" min="50" max="99" step="1" value="89"></label>
+        <label class="field compact"><span>Driver units</span><select id="model-effect-units"><option value="percent">Percent salary effect</option><option value="log">Log salary</option></select></label>
         <p id="model-settings-note" class="field-description"></p>
       </section>
 
@@ -387,7 +388,7 @@ layout: null
 
         <section id="results-panel-robustness" class="results-tab-panel" role="tabpanel" aria-labelledby="results-tab-robustness" hidden>
           <div class="robustness-toolbar">
-            <fieldset>
+            <fieldset id="empirical-robustness-options">
               <legend>Vary</legend>
               <label><input type="checkbox" name="robustness-dimension" value="distribution" checked> Distribution</label>
               <label><input type="checkbox" name="robustness-dimension" value="sample" checked> Sample</label>
@@ -399,7 +400,8 @@ layout: null
             </fieldset>
             <button id="robustness-run" class="result-action" type="button">Run check</button>
           </div>
-          <p class="result-note">This check always evaluates pay for the selected position, even when the chart shows another quantity. The main range varies comparable model, sample, and weighting choices. Pay-source and dollar-basis checks are shown separately. These are sensitivity results, not confidence intervals.</p>
+          <p id="empirical-robustness-note" class="result-note">This check always evaluates pay for the selected position, even when the chart shows another quantity. The main range varies comparable model, sample, and weighting choices. Pay-source and dollar-basis checks are shown separately. These are sensitivity results, not confidence intervals.</p>
+          <p id="model-robustness-note" class="result-note" hidden>All fitted models at the current profile. Points show predictive percentiles; the diamond marks the selected model. Select a point to use that model. Model differences are sensitivity results, not confidence intervals.</p>
           <p id="robustness-status" class="result-status" role="status" aria-live="polite">Run the check to compare the selected alternatives for the current position.</p>
           <div id="robustness-results"></div>
           <div id="robustness-tooltip" class="robustness-tooltip" role="tooltip" hidden></div>
@@ -413,13 +415,13 @@ layout: null
               <h3>Grouped 10-fold validation</h3>
               <div class="model-comparison-scroll">
                 <table class="model-comparison-table">
-                  <thead><tr><th scope="col">Method</th><th scope="col"><button class="info-tooltip metric-tooltip" type="button" data-tooltip="Root mean squared error of held-out log salaries. Lower is better; large errors receive more weight. Exponentiating gives an error factor, not a percentage MAE.">Log RMSE</button></th><th scope="col"><button class="info-tooltip metric-tooltip" type="button" data-tooltip="Mean absolute percentage error: average of 100 × |predicted salary / observed salary − 1| across held-out exact base salaries. Lower is better. This is an actual salary-scale percentage, not exponentiated RMSE.">Mean error %</button></th><th scope="col"><button class="info-tooltip metric-tooltip" type="button" data-tooltip="Share of held-out exact salaries inside their 90% predictive intervals. A calibrated model aims near 90%; wider intervals can improve coverage without improving precision.">90% coverage</button></th><th scope="col"><button class="info-tooltip metric-tooltip" type="button" data-tooltip="Mean log predictive density at the held-out log salary. Higher is better. Exponentiating a difference between models gives their geometric mean density ratio, not a probability or percent accuracy.">Log score</button></th><th scope="col"><button class="info-tooltip metric-tooltip" type="button" data-tooltip="Continuous ranked probability score, in log-salary units. Scores the full predictive distribution by its distance from the observed salary; rewards both calibration and sharpness. Lower is better.">CRPS</button></th></tr></thead>
+                  <thead><tr><th scope="col" aria-sort="none"><button class="model-sort-button" type="button" data-model-sort="method">Method</button></th><th scope="col" aria-sort="none"><button class="model-sort-button info-tooltip metric-tooltip" type="button" data-model-sort="includeHighestOtherPay" data-tooltip="Uses highest disclosed non-CEO base pay, converted to a 40-hour week.">Other pay</button></th><th scope="col" aria-sort="none"><button class="model-sort-button info-tooltip metric-tooltip" type="button" data-model-sort="includeAdvertisedRanges" data-tooltip="Includes advertised salary ranges and points in model fitting.">Ad ranges</button></th><th scope="col" aria-sort="none"><button class="model-sort-button info-tooltip metric-tooltip" type="button" data-model-sort="logRmse" data-tooltip="Root mean squared error of held-out log salaries. Lower is better; large errors receive more weight.">Log RMSE</button></th><th scope="col" aria-sort="none"><button class="model-sort-button info-tooltip metric-tooltip" type="button" data-model-sort="meanAbsPercentError" data-tooltip="Mean absolute percentage error: average of 100 × |predicted salary / observed salary − 1|. Lower is better.">Mean error %</button></th><th scope="col" aria-sort="none"><button class="model-sort-button info-tooltip metric-tooltip" type="button" data-model-sort="coverage90" data-tooltip="Share of held-out salaries inside 90% predictive intervals. Calibration aims for 90%.">90% coverage</button></th><th scope="col" aria-sort="none"><button class="model-sort-button info-tooltip metric-tooltip" type="button" data-model-sort="meanLogPredictiveDensity" data-tooltip="Mean log predictive density at the held-out log salary. Higher is better.">Log score</button></th><th scope="col" aria-sort="none"><button class="model-sort-button info-tooltip metric-tooltip" type="button" data-model-sort="logCrps" data-tooltip="Continuous ranked probability score in log-salary units. Measures predictive-distribution error; lower is better.">CRPS</button></th></tr></thead>
                   <tbody id="model-comparison-body"></tbody>
                 </table>
               </div>
             </div>
             <div>
-              <h3>Prediction drivers <button class="info-tooltip" type="button" aria-label="About prediction drivers" data-tooltip="Profile contrasts against the model's reference: numeric inputs at their training geometric means, centered categorical effects at zero, and Functional overlap for EA. Percent effects are 100 × (exp(log contrast) − 1) and combine multiplicatively. Kernel models use exact Shapley allocations across the numeric inputs. These are predictive associations, not causal effects.">?</button></h3>
+              <h3>Prediction drivers <button class="info-tooltip" type="button" aria-label="About prediction drivers" data-tooltip="Contributions relative to training-center numeric inputs, centered categories, and Functional overlap for EA. Percent effects combine multiplicatively. Kernel models allocate interactions using Shapley values. These are associations.">?</button></h3>
               <p id="model-driver-reference" class="field-description"></p>
               <div id="model-contributions" class="model-contributions"></div>
             </div>

@@ -26,9 +26,11 @@ The non-CEO layer maps source-native titles through a reviewed taxonomy, retaini
 
 The Model tab uses a fixed, versioned cohort independently of table filtering. Users edit numeric and categorical organization features, choose fractional focus-area weights, and inspect the support for their profile. “Average category effect” means the unweighted centered category effect; a specified mixture is a weighted log effect, not a mixture of different salary distributions.
 
+Model robustness compares P25, median, and P75 across every fitted variant at the same profile. The shared empirical robustness chart provides point inspection, keyboard navigation, model selection, and an expandable result table. Model predictions are cached by variant and profile; input changes refresh the comparison. Switching models preserves supported profile vocabulary even when a selected category has only prior support in the new training cohort. The CV table sorts numeric metrics and separates method, other-pay inclusion, and ad inclusion.
+
 `model-vignettes.js` supplies each model's large, keyboard-accessible specification modal: estimand, equations, priors or penalties, fitting, validation, and uncertainty assumptions. `model-analysis.js` supplies shared spline, kernel, normal-quantile, and Shapley calculations.
 
-Driver bars show conditional prediction changes from numeric training centers, centered categorical effects, and the functional-overlap EA reference. They are selectable in log units or percentage changes. Clicking a driver opens its posterior or approximate compatibility forest plot. Kernel interactions use exact Shapley allocations over the numeric predictors, with other inputs fixed; these descriptive contrasts are not causal effects.
+Driver bars show conditional prediction changes from numeric training centers, centered categorical effects, and the functional-overlap EA reference. They are selectable in log units or percentage changes. Clicking a driver opens its posterior or approximate compatibility forest plot, with a toggle for the focused model or all 19 variants. Omitted predictors appear as “Not included”; each modeled contrast uses that model’s training reference. Values sit just beyond the bars, with explicit effect units. Kernel interactions use exact Shapley allocations over the numeric predictors, with other inputs fixed; these descriptive contrasts are not causal effects.
 
 Predictive quantiles describe variation among comparable peers. A separate interval around each quantile describes estimation uncertainty at a user-selected level, defaulting to 89%. Bayesian models use posterior draws; the Gaussian process conditions on fitted kernel hyperparameters; other models use explicitly labeled coefficient approximations and/or organization bootstrap. Those latter intervals omit some tuning and preprocessing uncertainty.
 
@@ -36,7 +38,7 @@ Predictive quantiles describe variation among comparable peers. A separate inter
 
 `benchmark/analysis/predictive_salary_models/prepare_model_data.py` prepares 151 records across 147 organization-name groups: 112 exact-base filings, 12 cash proxies, and 27 advertisements. RP never contributes an outcome. The preparation contract records cohort membership, deterministic grouped folds, predictor definitions, and source/code hashes.
 
-`fit_salary_models.R` orchestrates 17 specifications: an intercept baseline; paired scale-linear, numeric GAM, RBF SVR, and RBF Gaussian-process fits; and eight Bayesian fits crossing linear/additive numeric effects, presence/absence of highest non-CEO pay, and inclusion/exclusion of advertisements. `model_extensions.R` contains spline bases, kernel fits, distribution scores, and uncertainty utilities. `ceo_salary_model.stan` implements the shared multilevel model, joint Gaussian missing inputs, and source-specific pay likelihoods.
+`fit_salary_models.R` orchestrates 19 specifications: an intercept baseline; paired scale-linear, numeric GAM, RBF SVR, and RBF Gaussian-process fits; and eight Bayesian fits crossing linear/additive numeric effects, presence/absence of highest non-CEO pay, and inclusion/exclusion of advertisements. Two exact-base-only Bayesian linear variants retain the multilevel and joint missing-input structure, with/without other pay, while excluding cash-only records and ads. `model_extensions.R` contains spline bases, kernel fits, distribution scores, and uncertainty utilities. `ceo_salary_model.stan` implements the shared multilevel model, joint Gaussian missing inputs, and source-specific pay likelihoods.
 
 Bayesian additive models regularize natural cubic curvature toward the multilevel linear specification. Both retain partially pooled categories and latent, correlated missing predictors. Cash-only amounts inform latent base pay through a zero-or-positive cash increment; advertisements have a separate offset and scale. Advertised intervals are experimental policy-range evidence, not observed hires.
 
@@ -44,7 +46,9 @@ Every model is evaluated on the same exact-filing outcomes in organization-group
 
 `model_artifact.json` exports browser parameters, uncertainty draws, training IDs, diagnostics, and provenance. The build rejects stale inputs, unsupported schemas, missing models, incomplete residual identities, and failed sampler gates. Large fits are cached outside tracked results; optional `prepare_cluster_fits.R` and `cluster_fit_worker.R` support the documented worker cluster with four-chain Stan fits and integrity-checked imports. The model README specifies equations and reproduction details.
 
-`measurement_sensitivity.R` uses those same fitting and scoring functions for three grouped ten-fold repetitions. Matched Bayesian comparisons isolate exact-only training and removal of categorical predictors; single-split sensitivities compare reported other pay and treating incompletely identified maxima as missing. Numeric linear, GAM, SVR and GP comparators use all three splits. The separate `measurement_sensitivity/` results retain every held-out prediction, fold assignment, score and sampler diagnostic. They do not silently replace the app's 17 specifications.
+`measurement_sensitivity.R` uses those same fitting and scoring functions for three grouped ten-fold repetitions. Matched Bayesian comparisons isolate exact-only training and removal of categorical predictors; single-split sensitivities compare reported other pay and treating incompletely identified maxima as missing. Numeric linear, GAM, SVR and GP comparators use all three splits. The separate `measurement_sensitivity/` results retain every held-out prediction, fold assignment, score and sampler diagnostic. The exact-only with-other-pay app variant uses the first repetition’s held-out fits; the remaining research sensitivities stay separate from the app registry.
+
+`audit_cash_disclosure.py` produces source-linked cash-only records, descriptive cohort summaries, and `cash_disclosure_audit.md`. It compares the same held-out outcomes under pooled and exact-only Bayesian fitting, including the other-pay-missing stratum. Cash-only records have lower observed cash and smaller scale, and all lack the other-pay predictor. Filing disclosure rules and compensation-component measurement are separate issues; the report specifies a disclosure-aware extension without claiming that unobserved cash-only base salaries are validated.
 
 ## Reproduction and checks
 
@@ -57,6 +61,7 @@ Rscript benchmark/analysis/predictive_salary_models/fit_salary_models.R .
 Rscript benchmark/analysis/predictive_salary_models/measurement_sensitivity.R .
 python3 benchmark/analysis/predictive_salary_models/summarize_measurement_study.py
 npm run build
+python3 benchmark/analysis/predictive_salary_models/audit_cash_disclosure.py
 python3 scripts/audit_ceo_reference_set.py
 python3 scripts/summarize_work_followup.py
 npm run test:data
@@ -66,7 +71,7 @@ npm test
 
 The model preparation reads the generated app data and applies current review overlays. After changing raw acquisition/extraction layers, rebuild those layers first. A stale model artifact deliberately prevents a production app build; regenerate preparation and fits before publishing. `--quick` is for smoke testing and cannot satisfy production gates. R, CmdStan, and package versions are recorded in the artifact; native evidence files must be present to reproduce source audits.
 
-Python checks validate source contracts, cohort membership, routes, and artifact structure. R/Node checks cover numerical distributions, held-out outcome independence, conditional imputation, spline and GP calculations, and driver decomposition. Playwright tests cover model selection, uncertainty, source dialogs, fractional inputs, URL/history behavior, and the broader explorer.
+Python checks validate source contracts, cohort membership, routes, and artifact structure. R/Node checks cover numerical distributions, held-out outcome independence, conditional imputation, spline and GP calculations, and driver decomposition. Playwright tests cover model robustness and variant selection, numeric CV sorting, driver comparisons, control styling, uncertainty, source dialogs, fractional inputs, URL/history behavior, and the broader explorer.
 
 ## Interpretation and remaining research
 

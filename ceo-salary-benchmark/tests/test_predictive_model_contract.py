@@ -28,13 +28,32 @@ def load_app_data():
 
 
 class PredictiveModelContractTest(unittest.TestCase):
+    def test_exact_base_bayesian_predictions_match_cohort_and_archived_study(self):
+        path = ROOT / "benchmark/analysis/predictive_salary_models"
+        with (path / "training_data.csv").open() as handle:
+            exact = {row["id"] for row in csv.DictReader(handle) if row["observation"] == "exact_base"}
+        with (path / "cross_validation_predictions.csv").open() as handle:
+            predictions = list(csv.DictReader(handle))
+        for name in ("Bayesian exact base · with other pay", "Bayesian exact base · without other pay"):
+            rows = [row for row in predictions if row["model"] == name]
+            self.assertEqual(len(rows), len(exact))
+            self.assertEqual({row["id"] for row in rows}, exact)
+            self.assertTrue(all(row["observation"] == "exact_base" for row in rows))
+        with (path / "measurement_sensitivity/predictions.csv").open() as handle:
+            study = {row["id"]: row for row in csv.DictReader(handle)
+                     if row["model"] == "bayesian_exact" and row["replicate"] == "1"}
+        for row in predictions:
+            if row["model"] == "Bayesian exact base · with other pay":
+                for metric in ("predicted_log_salary", "log_predictive_density", "log_crps"):
+                    self.assertEqual(row[metric], study[row["id"]][metric])
+
     def test_sampler_refinements_match_published_chain_counts(self):
         path = ROOT / "benchmark/analysis/predictive_salary_models"
         artifact = json.loads((path / "model_artifact.json").read_text())
         refinements = {(row["model"], row["fold"]): row for row in artifact["fitConfiguration"]["cvRefinements"]}
         with (path / "sampler_diagnostics.csv").open() as handle:
             rows = [row for row in csv.DictReader(handle) if row["phase"] == "cross_validation"]
-        self.assertEqual(len(rows), 80)
+        self.assertEqual(len(rows), 100)
         for row in rows:
             refinement = refinements.get((row["model"], int(row["fold"])))
             expected = refinement["samplingPerChain"] if refinement else 500
@@ -140,10 +159,10 @@ class PredictiveModelContractTest(unittest.TestCase):
                 "bayesianRangesNoHighest", "gam", "gamNoHighest", "intercept",
                 "linear", "linearNoHighest",
                 "bayesianGam", "bayesianGamNoHighest", "bayesianGamRanges", "bayesianGamRangesNoHighest",
-                "svr", "svrNoHighest", "gp", "gpNoHighest",
+                "svr", "svrNoHighest", "gp", "gpNoHighest", "bayesianExact", "bayesianExactNoHighest",
             },
         )
-        for model_key in ("bayesian", "bayesianRanges", "gam", "linear", "bayesianGam", "bayesianGamRanges", "svr", "gp"):
+        for model_key in ("bayesian", "bayesianRanges", "gam", "linear", "bayesianGam", "bayesianGamRanges", "svr", "gp", "bayesianExact"):
             self.assertEqual(
                 [item["key"] for item in artifact["models"][model_key]["preprocessing"]],
                 expected,
@@ -153,7 +172,7 @@ class PredictiveModelContractTest(unittest.TestCase):
         for model_key in (
             "bayesianNoHighest", "bayesianRangesNoHighest", "gamNoHighest",
             "linearNoHighest",
-            "bayesianGamNoHighest", "bayesianGamRangesNoHighest", "svrNoHighest", "gpNoHighest",
+            "bayesianGamNoHighest", "bayesianGamRangesNoHighest", "svrNoHighest", "gpNoHighest", "bayesianExactNoHighest",
         ):
             self.assertEqual(
                 [item["key"] for item in artifact["models"][model_key]["preprocessing"]],
@@ -233,6 +252,7 @@ class PredictiveModelContractTest(unittest.TestCase):
             ("bayesian_ranges", True, True),
             ("bayesian_gam_no_highest", False, False), ("bayesian_gam", True, False),
             ("bayesian_gam_ranges_no_highest", False, True), ("bayesian_gam_ranges", True, True),
+            ("bayesian_exact_no_highest", False, False), ("bayesian_exact", True, False),
             ("svr_no_highest", False, False), ("svr", True, False),
             ("gp_no_highest", False, False), ("gp", True, False),
         ]

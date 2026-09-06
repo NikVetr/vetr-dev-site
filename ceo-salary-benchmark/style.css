@@ -344,13 +344,13 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .model-method-button[aria-pressed="true"] { color: var(--ink); text-decoration-thickness: 2px; }
 .model-contributions { display: grid; gap: 3px; }
 .model-no-contributions { margin: 0; color: var(--muted); font-size: 9px; }
-.model-contribution { display: grid; grid-template-columns: 80px minmax(50px, 1fr) 40px; align-items: center; gap: 4px; font-size: 8px; }
+.model-contribution { display: grid; grid-template-columns: 80px minmax(50px, 1fr); padding-right: 44px; align-items: center; gap: 4px; font-size: 8px; }
 .model-contribution > span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .model-contribution-track { position: relative; height: 8px; background: color-mix(in srgb, var(--line), transparent 42%); }
 .model-contribution-track::after { position: absolute; top: -2px; bottom: -2px; left: 50%; width: 1px; background: var(--muted); content: ""; opacity: .5; }
 .model-contribution-bar { position: absolute; top: 1px; bottom: 1px; background: var(--teal); }
 .model-contribution.is-negative .model-contribution-bar { background: var(--green); }
-.model-contribution > output { text-align: right; font-variant-numeric: tabular-nums; }
+.model-contribution-track > output { position: absolute; top: 50%; transform: translateY(-50%); white-space: nowrap; text-align: left; font-variant-numeric: tabular-nums; }
 .model-limitations { margin-top: 9px !important; padding-top: 7px; border-top: 1px solid var(--line); }
 .model-profile-warning { color: var(--coral); }
 .model-density-area { fill: color-mix(in srgb, var(--blue), transparent 68%); }
@@ -896,7 +896,7 @@ a.organization-name:hover { color: var(--green); text-decoration: underline; tex
 .model-explanation-dialog h3 { margin-bottom: .5rem; }
 .model-explanation-dialog p { max-width: 100ch; line-height: 1.6; }
 .model-equation { padding: 1rem; background: #edf3f4; border-radius: 7px; overflow-x: auto; white-space: pre-wrap; line-height: 1.65; font-size: .95rem; }
-.model-effect-figure { width: 100%; min-width: 690px; max-height: 65vh; }
+.model-effect-figure { width: 100%; min-width: 900px; }
 #model-explanation-content { overflow-x: auto; }
 .model-driver-button { border: 0; padding: 0; background: transparent; font: inherit; color: inherit; text-align: left; text-decoration: underline dotted; cursor: pointer; }
 .model-spec-button { margin-left: .45rem; flex-shrink: 0; }
@@ -909,3 +909,22 @@ a.organization-name:hover { color: var(--green); text-decoration: underline; tex
 #model-focus-weights input { width: 60px; }
 #model-focus-error { color: #9f3d33; }
 @media (max-width: 700px) { .model-explanation-dialog { width: 94vw; padding: 1rem; } .model-equation { font-size: .8rem; } }
+
+.model-contribution-heading { display: grid; grid-template-columns: 80px 1fr; gap: 4px; margin: 5px 0 2px; color: var(--muted); font-size: 8px; font-weight: 650; }
+.model-contribution-heading span:last-child { text-align: center; }
+.model-driver-scope { display: flex; align-items: center; gap: 7px; font-size: 13px; }
+.model-driver-scope input { accent-color: var(--green); }
+.model-sort-button { padding: 0; border: 0; background: transparent; color: inherit; font: inherit; cursor: pointer; }
+.model-comparison-table th[aria-sort="ascending"] button::after { content: " ▴"; }
+.model-comparison-table th[aria-sort="descending"] button::after { content: " ▾"; }
+.model-settings label:not(:has(input[type="checkbox"])) { display: grid; gap: 3px; min-width: 0; color: var(--muted); font-size: 10px; font-weight: 650; }
+.model-settings :is(select, input[type="number"]) { font-size: 10px; font-weight: 450; padding: 7px 6px; }
+.model-settings select { padding-right: 25px; }
+.model-settings option { font-size: inherit; }
+.model-settings label > span { color: inherit; font-size: inherit; font-weight: inherit; }
+.model-settings .model-option { font-size: 10px; }
+#model-settings-note:empty { display: none; }
+.results-tabs:has(#results-tab-model-details:not([hidden])) { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.model-comparison-table thead .model-sort-button { white-space: normal; }
+
+#empirical-robustness-options[hidden] { display: none; }

@@ -49,6 +49,6 @@
     }
   ],
   "trainingSha256": "39336d9c78d4738d826f019e0fa58fca3f95aa72ed9e5f523a73c2e628e68c43",
-  "fitScriptSha256": "8b2979c45652f265396a7d6112ebd4fcf00deaccbdc19b60ded9a5eb0dcdd9f0",
+  "fitScriptSha256": "88ebdf089682fd6402f647dd7066c88fbaad6f595d02a91b869175a3099e00f0",
   "rVersion": "R version 4.6.1 (2026-06-24)"
 }

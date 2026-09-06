@@ -234,6 +234,9 @@ fit_stan <- function(rows, seed, include_highest_other_pay, full = FALSE, smooth
     fiscal_sponsor_raw = rep(0, stan_data$J_fiscal_sponsor),
     ea_increment = rep(0.03, stan_data$J_ea - 1L)
   )
+  # JSON cannot preserve both dimensions of a zero-row matrix. Stan supplies
+  # the empty curvature block itself for linear fits.
+  if (!smooth) initial_values$smooth_raw <- NULL
   chains <- if (quick) 1L else 4L
   cache_dir <- file.path(repo, "tmp", "predictive-model-cache")
   dir.create(cache_dir, recursive = TRUE, showWarnings = FALSE)
@@ -682,6 +685,11 @@ bayesian_specs <- c(bayesian_specs, lapply(bayesian_specs, function(spec) {
   spec$seed_offset <- spec$seed_offset + 400L
   spec
 }))
+bayesian_specs <- c(bayesian_specs, lapply(c(FALSE, TRUE), function(highest) list(
+  name = paste("Bayesian exact base", if (highest) "· with other pay" else "· without other pay"),
+  include_ads = FALSE, include_highest = highest, exact_only = TRUE,
+  seed_offset = 1000L + 100L * highest
+)))
 for (spec in bayesian_specs) {
   include_ads <- spec$include_ads
   include_highest <- spec$include_highest
@@ -689,8 +697,9 @@ for (spec in bayesian_specs) {
   message("Running grouped 10-fold CV: ", model_name)
   fold_outputs <- list()
   for (fold in sort(unique(z$outer_fold))) {
-    training <- z[z$outer_fold != fold & (include_ads | z$source == "filing"), ]
-    test <- z[z$outer_fold == fold & (include_ads | z$source == "filing"), ]
+    eligible <- (include_ads | z$source == "filing") & (!isTRUE(spec$exact_only) | z$observation == "exact_base")
+    training <- z[z$outer_fold != fold & eligible, ]
+    test <- z[z$outer_fold == fold & eligible, ]
     fitted <- fit_stan(
       training, 20260903 + fold + spec$seed_offset,
       include_highest_other_pay = include_highest, smooth = isTRUE(spec$smooth)
@@ -772,10 +781,11 @@ full_bayesian_fits <- list(
   "Bayesian multilevel + ad ranges · without other pay" = full_bayesian_ads_no_highest,
   "Bayesian multilevel + ad ranges · with other pay" = full_bayesian_ads
 )
-for (spec in bayesian_specs[vapply(bayesian_specs, function(spec) isTRUE(spec$smooth), logical(1))]) {
+for (spec in bayesian_specs[vapply(bayesian_specs, function(spec) isTRUE(spec$smooth) || isTRUE(spec$exact_only), logical(1))]) {
   message("Fitting full ", spec$name)
-  full_bayesian_fits[[spec$name]] <- fit_stan(z[spec$include_ads | z$source == "filing", ],
-    20262903 + spec$seed_offset, include_highest_other_pay = spec$include_highest, full = TRUE, smooth = TRUE)
+  eligible <- (spec$include_ads | z$source == "filing") & (!isTRUE(spec$exact_only) | z$observation == "exact_base")
+  full_bayesian_fits[[spec$name]] <- fit_stan(z[eligible, ],
+    20262903 + spec$seed_offset, include_highest_other_pay = spec$include_highest, full = TRUE, smooth = isTRUE(spec$smooth))
 }
 for (model_name in names(full_bayesian_fits)) {
   fitted <- full_bayesian_fits[[model_name]]
@@ -1023,6 +1033,9 @@ comparison_keys <- c(comparison_keys,
   "Bayesian GAM + ad ranges · with other pay" = "bayesian_gam_ranges",
   "RBF SVR · without other pay" = "svr_no_highest", "RBF SVR · with other pay" = "svr",
   "RBF Gaussian process · without other pay" = "gp_no_highest", "RBF Gaussian process · with other pay" = "gp")
+comparison_keys <- c(comparison_keys,
+  "Bayesian exact base · without other pay" = "bayesian_exact_no_highest",
+  "Bayesian exact base · with other pay" = "bayesian_exact")
 model_key_from_comparison <- function(key) {
   parts <- strsplit(key, "_", fixed = TRUE)[[1]]
   paste0(parts[1], paste0(toupper(substring(parts[-1], 1, 1)), substring(parts[-1], 2), collapse = ""))
@@ -1034,7 +1047,8 @@ comparison_json <- lapply(seq_len(nrow(comparison)), function(i) {
   list(
     key = unname(comparison_keys[[row$model]]),
     modelKey = model_key_from_comparison(unname(comparison_keys[[row$model]])),
-    method = if (grepl("Bayesian GAM", row$model, fixed = TRUE)) "bayesianGam" else
+    method = if (grepl("Bayesian exact base", row$model, fixed = TRUE)) "bayesianExact" else
+      if (grepl("Bayesian GAM", row$model, fixed = TRUE)) "bayesianGam" else
       if (grepl("Bayesian multilevel", row$model, fixed = TRUE)) "bayesian" else
       if (grepl("Gaussian process", row$model, fixed = TRUE)) "gp" else
       if (grepl("SVR", row$model, fixed = TRUE)) "svr" else
@@ -1197,6 +1211,12 @@ for (spec in bayesian_specs[vapply(bayesian_specs, function(spec) isTRUE(spec$sm
   key <- model_key_from_comparison(comparison_keys[[spec$name]])
   artifact$models[[key]] <- thin_components(full_bayesian_fits[[spec$name]], spec$include_ads)
   artifact$method[[key]] <- "Bayesian additive log-salary model: regularized natural cubic numeric effects, partially pooled categories, joint missing-input model, and evidence-specific compensation likelihoods."
+}
+for (spec in bayesian_specs[vapply(bayesian_specs, function(spec) isTRUE(spec$exact_only), logical(1))]) {
+  key <- model_key_from_comparison(comparison_keys[[spec$name]])
+  artifact$models[[key]] <- thin_components(full_bayesian_fits[[spec$name]], FALSE)
+  artifact$models[[key]]$trainingRecordIds <- unname(exact$id)
+  artifact$method[[key]] <- "Exact-base-only Bayesian multilevel linear model with partially pooled categories and joint missing-input inference; cash-only records and advertisements are excluded."
 }
 for (kind in c("svr", "gp")) for (highest in c(FALSE, TRUE)) {
   keys <- feature_keys_for(highest)

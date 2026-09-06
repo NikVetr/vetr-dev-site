@@ -273,7 +273,7 @@ def load_predictive_model_artifact(
     }:
         raise ValueError("Predictive-model artifact has an unsupported production fit configuration")
     bayesian_labels = {row.get("label") for row in artifact.get("comparison", [])
-                       if row.get("method") in {"bayesian", "bayesianGam"}}
+                       if row.get("method") in {"bayesian", "bayesianGam", "bayesianExact"}}
     refined_folds = set()
     for refinement in refinements:
         if not isinstance(refinement, dict):
@@ -359,6 +359,7 @@ def load_predictive_model_artifact(
         "gam", "gamNoHighest", "intercept", "linear", "linearNoHighest",
         "bayesianGam", "bayesianGamNoHighest", "bayesianGamRanges", "bayesianGamRangesNoHighest",
         "svr", "svrNoHighest", "gp", "gpNoHighest",
+        "bayesianExact", "bayesianExactNoHighest",
     }:
         raise ValueError("Predictive-model artifact is missing a required model")
     rp_profile = artifact.get("rpProfile") or {}
@@ -434,6 +435,7 @@ def load_predictive_model_artifact(
         "bayesian_gam": (True, False),
         "bayesian_gam_ranges_no_highest": (False, True),
         "bayesian_gam_ranges": (True, True),
+        "bayesian_exact_no_highest": (False, False), "bayesian_exact": (True, False),
         "svr_no_highest": (False, False), "svr": (True, False),
         "gp_no_highest": (False, False), "gp": (True, False),
     }
@@ -457,13 +459,19 @@ def load_predictive_model_artifact(
         if expected_ranges:
             require_finite_number(row.get("advertisedIntervalMeanLogScore"), "range-model interval log score")
             require_finite_number(row.get("advertisedPointMeanLogScore"), "range-model point log score")
-        if row["key"].startswith("bayesian"):
+        if row["key"].startswith("bayesian") and not row["key"].startswith("bayesian_exact"):
             require_finite_number(row.get("cashProxyMeanLogScore"), f"{row.get('key')} cash-proxy log score")
+        if row["key"].startswith("bayesian_exact") and (
+            row.get("cashProxyN") != 0 or row.get("cashProxyMeanLogScore") is not None
+            or row.get("advertisedRangeN") != 0 or row.get("advertisedPointN") != 0
+        ):
+            raise ValueError("Exact-base Bayesian comparison contains cash-only or advertised observations")
         parts = row["key"].split("_")
         expected_model_key = parts[0] + "".join(part.title() for part in parts[1:])
         if row.get("modelKey") != expected_model_key or expected_model_key not in artifact["models"]:
             raise ValueError("Predictive-model comparison points to the wrong fitted model")
-        expected_method = "bayesianGam" if row["key"].startswith("bayesian_gam") else parts[0]
+        expected_method = ("bayesianExact" if row["key"].startswith("bayesian_exact") else
+                           "bayesianGam" if row["key"].startswith("bayesian_gam") else parts[0])
         if row.get("method") != expected_method:
             raise ValueError("Predictive-model comparison has the wrong method family")
 
@@ -506,6 +514,7 @@ def load_predictive_model_artifact(
         "bayesianRangesNoHighest": (False, True),
         "bayesianGam": (True, False), "bayesianGamNoHighest": (False, False),
         "bayesianGamRanges": (True, True), "bayesianGamRangesNoHighest": (False, True),
+        "bayesianExact": (True, False), "bayesianExactNoHighest": (False, False),
     }
     for model_key, (include_highest, include_ranges) in bayesian_configurations.items():
         model = artifact["models"][model_key]
@@ -515,6 +524,10 @@ def load_predictive_model_artifact(
             raise ValueError(f"Predictive-model {model_key} has the wrong non-CEO-pay specification")
         if model.get("includeAdvertisedRanges") is not include_ranges:
             raise ValueError(f"Predictive-model {model_key} has the wrong advertised-range specification")
+        if model_key.startswith("bayesianExact") and model.get("trainingRecordIds") != [
+            row["id"] for row in archived_records if row["observation"] == "exact_base"
+        ]:
+            raise ValueError("Exact-base Bayesian model has the wrong training cohort")
         expected_design = [
             *(f"log_{key}" for key in expected_keys),
             *(f"{key}_missing" for key in expected_keys),
@@ -756,8 +769,8 @@ def load_predictive_model_artifact(
             raise ValueError(f"Predictive-model {method_key} method description is missing")
 
     validation = artifact.get("validationDiagnostics") or {}
-    if validation.get("crossValidationFits") != 80:
-        raise ValueError("Predictive-model artifact lacks all 80 Bayesian CV fit diagnostics")
+    if validation.get("crossValidationFits") != 100:
+        raise ValueError("Predictive-model artifact lacks all 100 Bayesian CV fit diagnostics")
     if validation.get("crossValidationDivergences") or validation.get("crossValidationMaxTreedepthHits"):
         raise ValueError("Predictive-model cross-validation contains sampler failures")
     if not isinstance(validation.get("crossValidationMinEbfmi"), (int, float)) or validation["crossValidationMinEbfmi"] < 0.2:

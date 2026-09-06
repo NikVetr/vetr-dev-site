@@ -1,5 +1,19 @@
 # Compensation benchmark audit
 
+## Model comparisons and exact-base sensitivity — 2026-09-06
+
+The app has **19 fitted specifications**, including exact-base-only Bayesian multilevel linear models with and without highest-other pay. The new variants retain the same priors, category vocabulary and correlated missing-input model; ads and cash-only outcomes are excluded. The with-other-pay CV fits match the archived first study repetition exactly. Fixed folds and all 112 scored base outcomes are retained.
+
+With other pay, exact-only versus pooled log RMSE is **0.281 versus 0.316**, with mean absolute percentage errors 22.2% versus 22.5%. Without other pay, log RMSE improves (0.321 versus 0.336) but mean percentage error worsens (24.8% versus 23.4%). These are sensitivity results conditional on exact-base disclosure, not a universal ranking.
+
+The [cash/disclosure audit](benchmark/analysis/predictive_salary_models/cash_disclosure_audit.md) documents smaller, lower-paid cash-only organizations and the complete absence of their other-pay inputs. Among 16 held-out exact-base records missing other pay, pooled versus exact-only log RMSE is .504 versus .374; among 96 with that input it is .272 versus .262. This post-hoc breakdown cannot identify a causal disclosure effect. A fuller disclosure likelihood requires filing-rule inputs and validation of currently unobserved base pay.
+
+Model robustness uses the existing percentile-point interaction to compare all variants at one profile. The CV table sorts every column and separates method, other pay and ads. Driver forest plots toggle between the current model and all variants, with omitted predictors labeled explicitly. Tooltips, driver subtitles and settings typography are concise and consistent; driver values sit five pixels beyond the bars. Model switching preserves category inputs even when the new model has only prior support for a category.
+
+An uncached linear-fit initialization bug was corrected by leaving Stan’s empty curvature matrix out of JSON initialization. This changes neither the statistical model nor its sampler budget. **All 100 CV and ten full Bayesian fits pass the unchanged convergence gates.** Native Stan outputs remain cached and untracked.
+
+Validation: `npm run build`, all 29 Python unit tests and the source/data audits, `npm run test:statistics`, all 38 Playwright tests, and a final two-test browser rerun after focus handling. Desktop/mobile figures were inspected. The source cohort and operating metadata are unchanged.
+
 ## Current 40-hour, work-evidence and measurement review — 2026-09-05
 
 **Highest-other pay is now standardized before ranking:** combined disclosed annual pay × 40 / combined filing-and-related weekly hours. This changes 18 model inputs and four selected employees. ORCID's $98,827 at 30 hours becomes **$131,769.33 nominal / $140,266.88 in July 2026 dollars**. RP's observed other-base value remains $136,142.69 after inflation adjustment. Original reported amounts remain available.

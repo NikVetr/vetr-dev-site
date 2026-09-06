@@ -6,7 +6,7 @@ These models estimate the distribution of **positive annual CEO base salary in J
 
 The versioned cohort contains **151 records in 147 organization-name groups**: 112 exact Schedule J base salaries, 12 reported-cash proxies, and 27 recruitment observations (25 ranges and two points). RP is a prediction profile only. Center for Public Integrity and Nuclear Threat Initiative are excluded pending reported-hours resolution; see the [reference-set audit](../../../ceo_reference_set_audit.md).
 
-There are 17 browser specifications:
+There are 19 browser specifications:
 
 | Family | Specifications | Evidence |
 | --- | --- | --- |
@@ -17,6 +17,7 @@ There are 17 browser specifications:
 | RBF Gaussian process | With/without highest non-CEO pay | Exact-base filings |
 | Bayesian multilevel linear | With/without other pay × filings/filings plus ads | Exact-base and cash-proxy filings; optional ads |
 | Bayesian multilevel additive | Same four variants | Same evidence model |
+| Bayesian exact base | With/without other pay | Exact-base filings only |
 
 Numeric inputs are standardized natural logs of expenses, revenue, employees, and optional highest disclosed non-CEO **40-hour-equivalent base pay**, with missingness indicators. Removing other pay removes both columns. Recruitment budgets proxy expenses and never duplicate revenue. Numeric preprocessing uses each training fold only.
 
@@ -62,7 +63,7 @@ Cash-only observations do not become base-pay labels. Let log(cash/base) be zero
 
 Advertised points use the ad normal distribution. A range [L,U] contributes Phi((log U-mu)/sigma_ad)-Phi((log L-mu)/sigma_ad), evaluated with stable log-tail arithmetic. This is an experimental policy-range likelihood, not proof that an actual hire fell within the range. Profile predictions always use the filing source, without the ad offset.
 
-Four chains are used per fit: initially 400 warmup/500 retained draws for each of 80 CV fits; 800/1,000 for each of eight full fits. A CV fit failing the substantive convergence gates receives one refinement to 800/1,000 and must then pass the unchanged gates. The artifact records these folds in `fitConfiguration.cvRefinements`; the current cohort requires Bayesian GAM with other pay, fold 4. Adapt delta is .995/.999 and maximum tree depth 13. All salary, covariance, and fitted curvature parameters enter convergence checks. The app rejects failed R-hat, ESS, E-BFMI, divergence, and tree-depth gates. It exports 512 posterior draws per model; full chain CSVs are cached separately.
+Four chains are used per fit: initially 400 warmup/500 retained draws for each of 100 CV fits; 800/1,000 for each of ten full fits. A CV fit failing the substantive convergence gates receives one refinement to 800/1,000 and must then pass the unchanged gates. The artifact records these folds in `fitConfiguration.cvRefinements`; the current cohort requires Bayesian GAM with other pay, fold 4. Adapt delta is .995/.999 and maximum tree depth 13. All salary, covariance, and fitted curvature parameters enter convergence checks. The app rejects failed R-hat, ESS, E-BFMI, divergence, and tree-depth gates. It exports 512 posterior draws per model; full chain CSVs are cached separately.
 
 ## Numeric comparators
 
@@ -75,7 +76,7 @@ K(x,x') = 1 + A² exp(-||x-x'||²/(2 ell²)), with independent Normal(0,sigma²)
 
 ## Validation and scores
 
-Seed 20260903 assigns normalized organization-name groups to ten outer folds. Repeated filing/ad records stay together. All procedures are evaluated on the **same 112 held-out exact-base outcomes**. Bayesian fits also train on cash proxies; this compares complete procedures, not an isolated Bayesian-versus-frequentist contrast.
+Seed 20260903 assigns normalized organization-name groups to ten outer folds. Repeated filing/ad records stay together. All procedures are evaluated on the **same 112 held-out exact-base outcomes**. Cash-inclusive Bayesian fits also train on cash proxies; this compares complete procedures, not an isolated Bayesian-versus-frequentist contrast.
 
 Numeric transformations, imputation, REML, GP hyperparameters, and SVR tuning are learned within training folds. Intercept/linear/GAM/SVR predictive distributions use Gaussian KDEs of residuals from inner grouped fits entirely inside each outer training set, with bandwidth max(.04, 1.06 SD(r) n^(-.2)). No outer test outcome enters calibration. GP uses its conditional predictive normal.
 
@@ -95,7 +96,15 @@ Cash-proxy, advertised-point, and interval-mass scores are separate, incomparabl
 
 Two additional first-split fits compare raw reported other pay and setting an incompletely identified maximum missing, retaining joint conditional imputation. The latter changes ORCID's predictor under a rule applied to every organization; it does not remove its salary outcome. It discards the known lower bound and is a conservative measurement sensitivity, not a complete selection or censoring model. Repetitions reuse outcomes and are not independent samples; compare paired scores and ranking stability, not a naive standard error over 336 allegedly independent cases.
 
-`measurement_sensitivity/` contains the design, explicit fold assignments, predictions, scores, sampler diagnostics and interpretation. `--prepare` exports missing cluster requests with `SALARY_CLUSTER_PREPARE`; `--numeric-only` computes reusable numeric comparison caches. Caches include input, code and software signatures. Research comparisons remain separate from the app registry.
+`measurement_sensitivity/` contains the design, explicit fold assignments, predictions, scores, sampler diagnostics and interpretation. `--prepare` exports missing cluster requests with `SALARY_CLUSTER_PREPARE`; `--numeric-only` computes reusable numeric comparison caches. Caches include input, code and software signatures. The exact-only with-other-pay app model reuses the first-split study fits and scoring seeds; the other research sensitivities remain separate from the registry.
+
+### Disclosure audit and exact-base-only app option
+
+`audit_cash_disclosure.py` generates `cash_disclosure_audit.md` and companion source-linked CSVs after fitting and building. Cash-only records have median cash pay $104,228 versus $305,761 for exact-base records, with smaller expenses and staff counts. All 12 lack other-pay inputs. The audit separates the pay-component likelihood from selection into itemized base disclosure, verifies matched exact-only CV coverage, and describes a disclosure-aware extension.
+
+The exact-base-only Bayesian linear options retain the original category vocabulary, priors, and joint missing-input model. They use 112 exact-base outcomes and exclude cash-only records and ads. Paired cash increments still estimate ancillary parameters but do not enter base predictions. With other pay, shared-split log RMSE is .281 versus .316 for the pooled cash-inclusive model; without it, .321 versus .336. The no-other-pay option has higher mean percentage error (.248 versus .234), so the improvement is metric-dependent. Exact-only validation conditions on base disclosure and cannot establish accuracy for unobserved cash-only base salaries.
+
+The Model robustness tab evaluates every variant at the same user profile, showing P25/median/P75 points with selection and an expandable table. CV headers sort by raw numeric values; other-pay and ad-range flags occupy separate columns.
 
 ## Browser uncertainty and drivers
 
@@ -105,7 +114,7 @@ GP quantile intervals propagate conditional latent-function variance, holding ke
 
 Numeric driver contrasts compare the profile with training-center inputs, preserving other settings; categorical contrasts use centered effects, with Functional overlap the EA reference. Additive curves subtract their value at the reference. Kernel interactions use exact Shapley allocations across numeric features; GP intervals use joint conditional covariance of the coalition predictions. Percent effects are 100(exp(log contrast)-1) and multiply rather than add.
 
-Clicking a driver shows a forest plot in log or percent units. Category plots preserve joint posterior draws. A fractional focus profile contributes sum_l weight_l a_l on the log scale. Weights must be nonnegative and sum to 100%; this is a declared additive interpolation, not estimated RP team shares. “Average category effect” is the unweighted centered effect across levels.
+Clicking a driver shows a forest plot in log or percent units, for the selected model or all variants. Omitted predictors are labeled “Not included.” Contrasts use each fitted model’s own training reference; they are not directly comparable raw coefficients. Category plots preserve joint posterior draws. A fractional focus profile contributes sum_l weight_l a_l on the log scale. Weights must be nonnegative and sum to 100%; this is a declared additive interpolation, not estimated RP team shares. “Average category effect” is the unweighted centered effect across levels.
 
 ## Reproduction and artifact contract
 
@@ -119,12 +128,13 @@ Rscript benchmark/analysis/predictive_salary_models/fit_salary_models.R .
 Rscript benchmark/analysis/predictive_salary_models/measurement_sensitivity.R .
 python3 benchmark/analysis/predictive_salary_models/summarize_measurement_study.py
 npm run build
+python3 benchmark/analysis/predictive_salary_models/audit_cash_disclosure.py
 npm run test:statistics
 npm run test:data
 npm test
 ```
 
-Preparation applies reviewed eligibility/geography overlays to app data and records input/script hashes. The build rejects stale hashes and any schema other than the supported production contract. Schema 3 contains all 17 named models, held-out record IDs, uncertainty arrays, category support counts, sampler diagnostics, and recorded R/package/CmdStan versions. `--quick` cannot replace a production artifact.
+Preparation applies reviewed eligibility/geography overlays to app data and records input/script hashes. The build rejects stale hashes and any schema other than the supported production contract. Schema 3 contains all 19 named models, held-out record IDs, uncertainty arrays, category support counts, sampler diagnostics, and recorded R/package/CmdStan versions. `--quick` cannot replace a production artifact.
 
 Large fits are stored under the ignored `tmp/predictive-model-cache/` with signatures covering Stan data, code, version, seed, and sampler settings. For the repository's worker cluster, `SALARY_CLUSTER_PREPARE=<requests-directory> Rscript .../prepare_cluster_fits.R .` exports exact requests for uncached fits. Run `cluster_fit_worker.R LOCAL_STAGE FIT_SIGNATURE PUBLISH_DIRECTORY` on a worker with CmdStan 2.38.0; it publishes integrity manifests plus four CSVs to the explicitly supplied, existing shared directory. Import verifies signatures and CSV checksums before postprocessing.
 

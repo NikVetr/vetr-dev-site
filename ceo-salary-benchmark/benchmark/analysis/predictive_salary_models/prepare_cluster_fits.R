@@ -22,3 +22,12 @@ for (smooth in c(FALSE, TRUE)) for (ads in c(FALSE, TRUE)) for (highest in c(FAL
     20262903 + offset + if (!smooth && ads) 800L else 0L, highest, full = TRUE, smooth = smooth)
   message(if (is.null(result$prepared)) "cached full fit; no request needed" else paste("prepared full", result$prepared))
 }
+for (highest in c(FALSE, TRUE)) {
+  offset <- 1000L + 100L * highest
+  for (fold in 0:10) {
+    full <- fold == 0L
+    rows <- z[z$observation == "exact_base" & (full | z$outer_fold != fold), ]
+    fit_stan(rows, if (full) 20262903 + offset else 20260903 + fold + offset,
+      highest, full = full)
+  }
+}
