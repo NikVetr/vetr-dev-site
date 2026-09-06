@@ -8,7 +8,8 @@ suppressPackageStartupMessages({
 
 args <- commandArgs(trailingOnly = TRUE)
 quick <- "--quick" %in% args
-args <- args[args != "--quick"]
+functions_only <- "--functions-only" %in% args
+args <- args[!args %in% c("--quick", "--functions-only")]
 repo <- if (length(args)) normalizePath(args[[1]]) else normalizePath(getwd())
 analysis_dir <- file.path(repo, "benchmark", "analysis", "predictive_salary_models")
 training_path <- file.path(analysis_dir, "training_data.csv")
@@ -24,6 +25,7 @@ if (!file.exists(training_path)) stop("Missing prepared model data: ", training_
 if (!file.exists(stan_path)) stop("Missing Stan model: ", stan_path)
 if (!file.exists(utils_path)) stop("Missing model utilities: ", utils_path)
 source(utils_path, local = TRUE)
+source(file.path(analysis_dir, "model_extensions.R"), local = TRUE)
 
 set.seed(20260903)
 z <- read.csv(training_path, stringsAsFactors = FALSE, check.names = FALSE)
@@ -169,11 +171,15 @@ make_design <- function(rows, preprocessing, feature_keys) {
   )
 }
 
-make_stan_data <- function(rows, preprocessing, feature_keys) {
+make_stan_data <- function(rows, preprocessing, feature_keys, smooth = FALSE) {
   design <- make_design(rows, preprocessing, feature_keys)
+  curvature <- fit_curvature(rows, preprocessing, feature_keys)
   missing_locations <- which(design$missing, arr.ind = TRUE)
   list(
     N = nrow(rows), K = ncol(design$X), P = length(feature_keys), X = design$X,
+    use_smooth = as.integer(smooth),
+    smooth_knots = do.call(rbind, lapply(curvature, `[[`, "knots")),
+    smooth_adjustment = lapply(curvature, `[[`, "adjustment"),
     N_missing = nrow(missing_locations),
     missing_row = as.integer(missing_locations[, "row"]),
     missing_col = as.integer(missing_locations[, "col"]),
@@ -204,13 +210,15 @@ make_stan_data <- function(rows, preprocessing, feature_keys) {
   )
 }
 
-fit_stan <- function(rows, seed, include_highest_other_pay, full = FALSE) {
+fit_stan <- function(rows, seed, include_highest_other_pay, full = FALSE, smooth = FALSE) {
   feature_keys <- feature_keys_for(include_highest_other_pay)
   preprocessing <- fit_preprocessing(rows, feature_keys)
-  stan_data <- make_stan_data(rows, preprocessing, feature_keys)
+  stan_data <- make_stan_data(rows, preprocessing, feature_keys, smooth)
   if (!exists("compiled_model", inherits = TRUE)) stop("Stan model was not compiled")
   initial_values <- list(
     alpha = mean(rows$log_mid), beta = rep(0, stan_data$K),
+    smooth_scale = rep(0.05, stan_data$P * as.integer(smooth)),
+    smooth_raw = matrix(0, stan_data$P * as.integer(smooth), 2L),
     x_missing = rep(0, stan_data$N_missing), ad_offset = 0,
     x_location = rep(0, stan_data$P), x_scale = rep(1, stan_data$P),
     x_cholesky = diag(stan_data$P),
@@ -227,7 +235,44 @@ fit_stan <- function(rows, seed, include_highest_other_pay, full = FALSE) {
     ea_increment = rep(0.03, stan_data$J_ea - 1L)
   )
   chains <- if (quick) 1L else 4L
-  fit <- compiled_model$sample(
+  cache_dir <- file.path(repo, "tmp", "predictive-model-cache")
+  dir.create(cache_dir, recursive = TRUE, showWarnings = FALSE)
+  signature_file <- tempfile(tmpdir = cache_dir)
+  saveRDS(list(data = stan_data, seed = seed, full = full, quick = quick,
+               stan = unname(tools::md5sum(stan_path)), cmdstan = as.character(cmdstan_version()),
+               sampler = "4chains-400/500-800/1000-delta995/999-depth13"), signature_file)
+  signature <- unname(tools::md5sum(signature_file))
+  unlink(signature_file)
+  fit_path <- file.path(cache_dir, paste0(signature, ".rds"))
+  if (file.exists(fit_path)) {
+    message("  using saved fit ", signature)
+    return(readRDS(fit_path))
+  }
+  output_dir <- file.path(cache_dir, signature)
+  dir.create(output_dir, showWarnings = FALSE)
+  cluster_prepare <- Sys.getenv("SALARY_CLUSTER_PREPARE", "")
+  if (nzchar(cluster_prepare)) {
+    request_dir <- file.path(cluster_prepare, signature)
+    dir.create(request_dir, recursive = TRUE, showWarnings = FALSE)
+    json_data <- stan_data
+    # A standalone JSON file lacks CmdStanR's model-aware scalar/array repair.
+    # Keep a one-element missing-location array as [n], not a scalar n.
+    json_data$missing_row <- array(stan_data$missing_row, length(stan_data$missing_row))
+    json_data$missing_col <- array(stan_data$missing_col, length(stan_data$missing_col))
+    write_stan_json(json_data, file.path(request_dir, "data.json"))
+    write_stan_json(initial_values, file.path(request_dir, "init.json"))
+    write_json(list(signature = signature, seed = seed, full = full, chains = chains,
+      warmup = if (full) 800L else 400L, sampling = if (full) 1000L else 500L,
+      delta = if (full) .999 else .995, maxDepth = 13L), file.path(request_dir, "request.json"), auto_unbox = TRUE)
+    return(list(prepared = signature))
+  }
+  imported_csv <- file.path(output_dir, paste0("chain", 1:4, ".csv"))
+  if (all(file.exists(imported_csv))) {
+    manifest <- fromJSON(file.path(output_dir, "complete.json"))
+    if (!identical(manifest$signature, signature) || manifest$cmdstan != as.character(cmdstan_version()) ||
+        !identical(unname(tools::md5sum(imported_csv)), unname(manifest$md5))) stop("Imported Stan fit integrity check failed: ", signature)
+    fit <- as_cmdstan_fit(imported_csv)
+  } else fit <- compiled_model$sample(
     data = stan_data,
     seed = seed,
     chains = chains,
@@ -239,15 +284,20 @@ fit_stan <- function(rows, seed, include_highest_other_pay, full = FALSE) {
     adapt_delta = if (quick) 0.99 else if (full) 0.999 else 0.995,
     max_treedepth = 13,
     show_messages = quick
+    , output_dir = output_dir
   )
-  list(
+  result <- list(
     fit = fit, preprocessing = preprocessing, feature_keys = feature_keys,
+    curvature = fit_curvature(rows, preprocessing, feature_keys), smooth = smooth,
     include_highest_other_pay = isTRUE(include_highest_other_pay),
     n_missing = stan_data$N_missing
   )
+  fit$save_object(file.path(output_dir, "cmdstan-fit.rds"))
+  saveRDS(result, fit_path)
+  result
 }
 
-sampler_diagnostic_summary <- function(fit, n_missing, max_treedepth = 13L) {
+sampler_diagnostic_summary <- function(fit, n_missing, max_treedepth = 13L, smooth = FALSE) {
   diagnostics <- fit$sampler_diagnostics(format = "draws_array")
   energies <- diagnostics[, , "energy__", drop = TRUE]
   if (is.null(dim(energies))) energies <- matrix(energies, ncol = 1L)
@@ -258,7 +308,7 @@ sampler_diagnostic_summary <- function(fit, n_missing, max_treedepth = 13L) {
   })
   convergence_variables <- c(
     "x_location", "x_scale", "x_cholesky",
-    "alpha", "beta", if (n_missing > 0L) "x_missing", "ad_offset", "cash_increment_rate",
+    "alpha", "beta", if (smooth) c("smooth_effect", "smooth_scale", "smooth_raw"), if (n_missing > 0L) "x_missing", "ad_offset", "cash_increment_rate",
     "cash_zero_probability", "sigma",
     "tau_focus", "tau_structure", "tau_title", "tau_location", "tau_remote", "tau_fiscal_sponsor",
     "focus_raw", "structure_raw", "title_raw", "location_raw", "remote_raw", "fiscal_sponsor_raw",
@@ -287,10 +337,10 @@ draw_columns <- function(draws, prefix, count) {
   draws[, columns, drop = FALSE]
 }
 
-posterior_components <- function(fit, feature_keys) {
+posterior_components <- function(fit, feature_keys, curvature = NULL) {
   variables <- c(
     "x_location", "x_cov_cholesky",
-    "alpha", "beta", "ad_offset", "cash_increment_rate", "cash_zero_probability", "sigma",
+    "alpha", "beta", "smooth_effect", "ad_offset", "cash_increment_rate", "cash_zero_probability", "sigma",
     "focus_effect", "structure_effect", "title_effect", "location_effect",
     "remote_effect", "fiscal_sponsor_effect", "ea_effect"
   )
@@ -304,6 +354,8 @@ posterior_components <- function(fit, feature_keys) {
     x_covariance = lapply(seq_len(nrow(draws)), function(i) tcrossprod(matrix(covariance_draws[i, ], p, p))),
     alpha = as.numeric(draws[, "alpha"]),
     beta = draw_columns(draws, "beta", 2L * length(feature_keys)),
+    curvature = curvature,
+    smooth = lapply(seq_len(p), function(j) draws[, paste0("smooth_effect[", j, ",", 1:2, "]"), drop = FALSE]),
     ad_offset = as.numeric(draws[, "ad_offset"]),
     cash_increment_rate = as.numeric(draws[, "cash_increment_rate"]),
     cash_zero_probability = as.numeric(draws[, "cash_zero_probability"]),
@@ -324,6 +376,10 @@ posterior_mu <- function(components, design) {
   n <- nrow(design$X)
   d <- length(components$alpha)
   mu <- design$X %*% t(components$beta)
+  if (!is.null(components$curvature)) for (j in seq_along(components$curvature)) {
+    basis <- components$curvature[[j]]
+    mu <- mu + curvature_basis(design$X[, j], basis$knots, basis$adjustment) %*% t(components$smooth[[j]])
+  }
   for (i in which(rowSums(design$missing) > 0)) {
     missing <- design$missing[i, ]
     columns <- which(missing)
@@ -334,6 +390,13 @@ posterior_mu <- function(components, design) {
       )
       latent <- conditional$mean + as.numeric(t(chol(conditional$covariance)) %*% rnorm(length(columns)))
       mu[i, s] <- mu[i, s] + sum((latent - design$X[i, columns]) * components$beta[s, columns])
+      if (!is.null(components$curvature)) for (k in seq_along(columns)) {
+        j <- columns[k]
+        basis <- components$curvature[[j]]
+        difference <- curvature_basis(latent[k], basis$knots, basis$adjustment) -
+          curvature_basis(design$X[i, j], basis$knots, basis$adjustment)
+        mu[i, s] <- mu[i, s] + sum(difference * components$smooth[[j]][s, ])
+      }
     }
   }
   mu <- mu + matrix(components$alpha, nrow = n, ncol = d, byrow = TRUE)
@@ -362,6 +425,7 @@ evaluate_prediction_draws <- function(test, design, components, seed) {
   n <- nrow(test)
   prediction <- coverage80 <- coverage90 <- log_density <- rep(NA_real_, n)
   lower80 <- upper80 <- lower90 <- upper90 <- rep(NA_real_, n)
+  crps <- rep(NA_real_, n)
   for (i in seq_len(n)) {
     prediction[[i]] <- mean(mu[i, ])
     predictive_sd <- if (test$source[[i]] == "job_ad") sigma[, 2] else sigma[, 1]
@@ -373,6 +437,7 @@ evaluate_prediction_draws <- function(test, design, components, seed) {
     lower90[[i]] <- interval90[[1]]
     upper90[[i]] <- interval90[[2]]
     if (test$observation[[i]] == "exact_base") {
+      crps[i] <- normal_mixture_crps(test$log_mid[i], mu[i, ], sigma[, 1])
       log_density[[i]] <- log_mean_exp(dnorm(test$log_mid[[i]], mu[i, ], sigma[, 1], log = TRUE))
       coverage80[[i]] <- test$log_mid[[i]] >= interval80[[1]] && test$log_mid[[i]] <= interval80[[2]]
       coverage90[[i]] <- test$log_mid[[i]] >= interval90[[1]] && test$log_mid[[i]] <= interval90[[2]]
@@ -407,7 +472,7 @@ evaluate_prediction_draws <- function(test, design, components, seed) {
     predicted_log_salary = prediction,
     predicted_log_lower80 = lower80, predicted_log_upper80 = upper80,
     predicted_log_lower90 = lower90, predicted_log_upper90 = upper90,
-    log_predictive_density = log_density, coverage80 = coverage80,
+    log_predictive_density = log_density, log_crps = crps, coverage80 = coverage80,
     coverage90 = coverage90, stringsAsFactors = FALSE
   )
 }
@@ -429,6 +494,10 @@ metrics_from_oof <- function(oof, model_name) {
     log_mae = mean(abs(residual)),
     oos_r2 = 1 - sum(residual^2) / denominator,
     median_abs_percent_error = median(abs(exp(-residual) - 1)),
+    mean_abs_percent_error = mean(abs(exp(-residual) - 1)),
+    geometric_abs_error_factor = exp(mean(abs(residual))),
+    log_crps = mean(exact$log_crps),
+    interval90_mean_log_width = mean(exact$predicted_log_upper90 - exact$predicted_log_lower90),
     coverage80 = mean(exact$coverage80, na.rm = TRUE),
     coverage90 = mean(exact$coverage90, na.rm = TRUE),
     cv_elpd = sum(exact$log_predictive_density),
@@ -523,6 +592,13 @@ predict_simple_model <- function(training, test, kind, feature_keys) {
         fit <- fit_gam_design(training$log_mid, x_train, feature_keys)
         predicted <- as.numeric(predict(fit$fit, newdata = data.frame(x_test), type = "response"))
         sigma <- sqrt(summary(fit$fit)$scale)
+      } else if (kind == "svr") {
+        parameters <- tune_svr(training, feature_keys)
+        fit <- fit_svr_design(training$log_mid, x_train, parameters)
+        predicted <- as.numeric(predict(fit, x_test))
+      } else if (kind == "gp") {
+        fit <- fit_gp_design(training$log_mid, x_train)
+        predicted <- predict_gp_design(fit, x_test)$mean
       } else stop("Unknown simple model: ", kind)
     }
     as.numeric(predicted)
@@ -535,7 +611,19 @@ evaluate_simple_model <- function(kind, include_highest_other_pay = FALSE) {
     training <- z[z$outer_fold != fold & z$observation == "exact_base", ]
     test <- z[z$outer_fold == fold & z$observation == "exact_base", ]
     predicted <- predict_simple_model(training, test, kind, feature_keys)
-    # Inner fits and residuals must exclude the entire outer test fold.
+    if (kind == "gp") {
+      pp <- fit_preprocessing(training, feature_keys)
+      fitted <- fit_gp_design(training$log_mid, transform_continuous(training, pp, feature_keys)$X)
+      prediction <- predict_gp_design(fitted, transform_continuous(test, pp, feature_keys)$X)
+      predicted <- prediction$mean
+      lower80 <- predicted + qnorm(.1) * prediction$sd
+      upper80 <- predicted + qnorm(.9) * prediction$sd
+      lower90 <- predicted + qnorm(.05) * prediction$sd
+      upper90 <- predicted + qnorm(.95) * prediction$sd
+      log_density <- dnorm(test$log_mid, predicted, prediction$sd, log = TRUE)
+      crps <- vapply(seq_len(nrow(test)), function(i) normal_mixture_crps(test$log_mid[i], predicted[i], prediction$sd[i]), numeric(1))
+    } else {
+    # Inner fits, hyperparameter selection, and residuals exclude the outer test fold.
     calibration <- unlist(lapply(sort(unique(training$outer_fold)), function(inner_fold) {
       inner_test <- training[training$outer_fold == inner_fold, ]
       inner_train <- training[training$outer_fold != inner_fold, ]
@@ -550,6 +638,8 @@ evaluate_simple_model <- function(kind, include_highest_other_pay = FALSE) {
     log_density <- vapply(test$log_mid - predicted, function(residual) {
       log_mean_exp(dnorm(residual, calibration, bandwidth, log = TRUE))
     }, numeric(1))
+    crps <- vapply(test$log_mid - predicted, function(residual) normal_mixture_crps(residual, calibration, bandwidth), numeric(1))
+    }
     output[[length(output) + 1L]] <- data.frame(
       id = test$id, organization = test$organization, source = test$source,
       observation = test$observation, fold = test$outer_fold,
@@ -559,7 +649,7 @@ evaluate_simple_model <- function(kind, include_highest_other_pay = FALSE) {
       predicted_log_salary = as.numeric(predicted),
       predicted_log_lower80 = lower80, predicted_log_upper80 = upper80,
       predicted_log_lower90 = lower90, predicted_log_upper90 = upper90,
-      log_predictive_density = log_density,
+      log_predictive_density = log_density, log_crps = crps,
       coverage80 = test$log_mid >= lower80 & test$log_mid <= upper80,
       coverage90 = test$log_mid >= lower90 & test$log_mid <= upper90,
       stringsAsFactors = FALSE
@@ -568,6 +658,7 @@ evaluate_simple_model <- function(kind, include_highest_other_pay = FALSE) {
   do.call(rbind, output)
 }
 
+if (functions_only) quit(save = "no", status = 0L)
 message("Compiling Bayesian salary model")
 compiled_model <- cmdstan_model(stan_path, quiet = TRUE)
 
@@ -579,6 +670,12 @@ bayesian_specs <- list(
   list(name = "Bayesian multilevel + ad ranges · without other pay", include_ads = TRUE, include_highest = FALSE, seed_offset = 200L),
   list(name = "Bayesian multilevel + ad ranges · with other pay", include_ads = TRUE, include_highest = TRUE, seed_offset = 300L)
 )
+bayesian_specs <- c(bayesian_specs, lapply(bayesian_specs, function(spec) {
+  spec$name <- sub("Bayesian multilevel", "Bayesian GAM", spec$name, fixed = TRUE)
+  spec$smooth <- TRUE
+  spec$seed_offset <- spec$seed_offset + 400L
+  spec
+}))
 for (spec in bayesian_specs) {
   include_ads <- spec$include_ads
   include_highest <- spec$include_highest
@@ -590,9 +687,9 @@ for (spec in bayesian_specs) {
     test <- z[z$outer_fold == fold & (include_ads | z$source == "filing"), ]
     fitted <- fit_stan(
       training, 20260903 + fold + spec$seed_offset,
-      include_highest_other_pay = include_highest
+      include_highest_other_pay = include_highest, smooth = isTRUE(spec$smooth)
     )
-    fold_diagnostics <- sampler_diagnostic_summary(fitted$fit, fitted$n_missing)
+    fold_diagnostics <- sampler_diagnostic_summary(fitted$fit, fitted$n_missing, smooth = fitted$smooth)
     sampler_records[[length(sampler_records) + 1L]] <- data.frame(
       phase = "cross_validation", model = model_name, fold = fold,
       chains = fold_diagnostics$chains, draws_per_chain = fold_diagnostics$drawsPerChain,
@@ -606,7 +703,7 @@ for (spec in bayesian_specs) {
     )
     design <- make_design(test, fitted$preprocessing, fitted$feature_keys)
     fold_outputs[[length(fold_outputs) + 1L]] <- evaluate_prediction_draws(
-      test, design, posterior_components(fitted$fit, fitted$feature_keys),
+      test, design, posterior_components(fitted$fit, fitted$feature_keys, fitted$curvature),
       20261903 + fold + spec$seed_offset
     )
     message("  completed fold ", fold, "/10")
@@ -620,6 +717,11 @@ oof_sets[["Scale linear · without other pay"]] <- evaluate_simple_model("scale_
 oof_sets[["Scale linear · with other pay"]] <- evaluate_simple_model("scale_linear", TRUE)
 oof_sets[["Numeric-input GAM · without other pay"]] <- evaluate_simple_model("gam", FALSE)
 oof_sets[["Numeric-input GAM · with other pay"]] <- evaluate_simple_model("gam", TRUE)
+for (kind in c("svr", "gp")) for (highest in c(FALSE, TRUE)) {
+  label <- paste(if (kind == "svr") "RBF SVR" else "RBF Gaussian process", if (highest) "· with other pay" else "· without other pay")
+  message("Running grouped 10-fold CV: ", label)
+  oof_sets[[label]] <- evaluate_simple_model(kind, highest)
+}
 
 comparison <- do.call(rbind, lapply(names(oof_sets), function(name) metrics_from_oof(oof_sets[[name]], name)))
 comparison_order <- c(
@@ -630,6 +732,7 @@ comparison_order <- c(
   "Bayesian multilevel + ad ranges · without other pay",
   "Bayesian multilevel + ad ranges · with other pay"
 )
+comparison_order <- c(comparison_order, setdiff(names(oof_sets), comparison_order))
 comparison <- comparison[match(comparison_order, comparison$model), ]
 write.csv(comparison, cv_path, row.names = FALSE)
 oof_export <- do.call(rbind, lapply(names(oof_sets), function(name) transform(oof_sets[[name]], model = name)))
@@ -654,9 +757,14 @@ full_bayesian_fits <- list(
   "Bayesian multilevel + ad ranges · without other pay" = full_bayesian_ads_no_highest,
   "Bayesian multilevel + ad ranges · with other pay" = full_bayesian_ads
 )
+for (spec in bayesian_specs[vapply(bayesian_specs, function(spec) isTRUE(spec$smooth), logical(1))]) {
+  message("Fitting full ", spec$name)
+  full_bayesian_fits[[spec$name]] <- fit_stan(z[spec$include_ads | z$source == "filing", ],
+    20262903 + spec$seed_offset, include_highest_other_pay = spec$include_highest, full = TRUE, smooth = TRUE)
+}
 for (model_name in names(full_bayesian_fits)) {
   fitted <- full_bayesian_fits[[model_name]]
-  full_diagnostics <- sampler_diagnostic_summary(fitted$fit, fitted$n_missing)
+  full_diagnostics <- sampler_diagnostic_summary(fitted$fit, fitted$n_missing, smooth = fitted$smooth)
   sampler_records[[length(sampler_records) + 1L]] <- data.frame(
     phase = "full", model = model_name, fold = NA_integer_,
     chains = full_diagnostics$chains, draws_per_chain = full_diagnostics$drawsPerChain,
@@ -761,25 +869,26 @@ json_preprocessing <- function(preprocessing) {
 }
 
 thin_components <- function(fitted, include_ads, maximum_draws = if (quick) 80L else 512L) {
-  components <- posterior_components(fitted$fit, fitted$feature_keys)
+  components <- posterior_components(fitted$fit, fitted$feature_keys, fitted$curvature)
   total <- length(components$alpha)
   keep <- unique(round(seq(1, total, length.out = min(total, maximum_draws))))
   set.seed(if (include_ads) 20264903 else 20265903)
   summary_table <- fitted$fit$summary(variables = c(
     "x_location", "x_scale", "x_cholesky",
-    "alpha", "beta", if (fitted$n_missing > 0L) "x_missing", "ad_offset", "cash_increment_rate",
+    "alpha", "beta", if (fitted$smooth) c("smooth_effect", "smooth_scale", "smooth_raw"), if (fitted$n_missing > 0L) "x_missing", "ad_offset", "cash_increment_rate",
     "cash_zero_probability", "sigma",
     "tau_focus", "tau_structure", "tau_title", "tau_location", "tau_remote", "tau_fiscal_sponsor",
     "focus_raw", "structure_raw", "title_raw", "location_raw", "remote_raw", "fiscal_sponsor_raw",
     "ea_increment", "focus_effect", "structure_effect", "title_effect", "location_effect",
     "remote_effect", "fiscal_sponsor_effect", "ea_effect"
   ))
-  sampler <- sampler_diagnostic_summary(fitted$fit, fitted$n_missing)
+  sampler <- sampler_diagnostic_summary(fitted$fit, fitted$n_missing, smooth = fitted$smooth)
   list(
     includeAdvertisedRanges = include_ads,
     includeHighestOtherPay = fitted$include_highest_other_pay,
     designColumns = design_columns_for(fitted$feature_keys),
     preprocessing = json_preprocessing(fitted$preprocessing),
+    curvature = if (fitted$smooth) fitted$curvature else NULL,
     missingInputs = list(
       distribution = "joint_normal_standardized_log_inputs",
       conditioning = "observed continuous inputs; training-fold posterior only",
@@ -790,6 +899,7 @@ thin_components <- function(fitted, include_ads, maximum_draws = if (quick) 80L 
     draws = list(
       alpha = unname(components$alpha[keep]),
       beta = unname(components$beta[keep, , drop = FALSE]),
+      smooth = lapply(components$smooth, function(values) unname(values[keep, , drop = FALSE])),
       adOffset = unname(components$ad_offset[keep]),
       sigma = unname(components$sigma[keep, , drop = FALSE]),
       focus = unname(components$focus[keep, , drop = FALSE]),
@@ -819,6 +929,8 @@ thin_components <- function(fitted, include_ads, maximum_draws = if (quick) 80L 
 
 serialize_linear_model <- function(result) {
   fitted <- result$fitted
+  design <- cbind(1, result$x[, fitted$active_columns, drop = FALSE])
+  covariance <- fitted$sigma^2 * chol2inv(chol(crossprod(design)))
   list(
     includeAdvertisedRanges = FALSE,
     includeHighestOtherPay = result$include_highest_other_pay,
@@ -829,6 +941,9 @@ serialize_linear_model <- function(result) {
     designColumns = unname(fitted$active_columns),
     baseline = fitted$coefficients[[1]],
     coefficients = unname(fitted$coefficients[-1]),
+    uncertainty = list(method = "Gaussian coefficient approximation and organization bootstrap of out-of-fold residuals; fixed preprocessing",
+      coefficientDraws = unname(coefficient_simulation(fitted$coefficients, covariance)),
+      residualDraws = replicate(256L, result$oof$residuals[bootstrap_indices(exact$organization_group[match(result$oof$ids, exact$id)])], simplify = FALSE)),
     residuals = result$oof$residuals,
     residualRecordIds = result$oof$ids,
     trainingRecordIds = unname(exact$id),
@@ -842,6 +957,15 @@ serialize_linear_model <- function(result) {
 serialize_gam_model <- function(result) {
   fitted <- result$fitted
   active_columns <- c(fitted$value_columns, fitted$active_missing_columns)
+  zero <- as.data.frame(as.list(setNames(rep(0, ncol(result$x)), colnames(result$x))))
+  baseline_basis <- as.numeric(predict(fitted$fit, zero, type = "lpmatrix"))
+  effect_basis <- lapply(seq_along(result$feature_keys), function(j) {
+    key <- result$feature_keys[j]
+    effect <- result$effects[[j]]
+    grid <- zero[rep(1L, length(effect$z)), , drop = FALSE]
+    grid[[paste0("log_", key)]] <- effect$z
+    list(key = key, z = effect$z, basis = unname(sweep(predict(fitted$fit, grid, type = "lpmatrix"), 2L, baseline_basis, "-")))
+  })
   list(
     includeAdvertisedRanges = FALSE,
     includeHighestOtherPay = result$include_highest_other_pay,
@@ -851,6 +975,10 @@ serialize_gam_model <- function(result) {
     droppedDesignColumns = unname(setdiff(colnames(result$x), active_columns)),
     baseline = result$baseline,
     effects = result$effects,
+    uncertainty = list(method = "mgcv Gaussian coefficient approximation including smoothing-parameter correction; organization bootstrap of out-of-fold residuals; fixed preprocessing",
+      coefficientDraws = unname(coefficient_simulation(coef(fitted$fit), vcov(fitted$fit, unconditional = TRUE))),
+      baselineBasis = baseline_basis, effectBasis = effect_basis,
+      residualDraws = replicate(256L, result$oof$residuals[bootstrap_indices(exact$organization_group[match(result$oof$ids, exact$id)])], simplify = FALSE)),
     residuals = result$oof$residuals,
     residualRecordIds = result$oof$ids,
     trainingRecordIds = unname(exact$id),
@@ -873,12 +1001,30 @@ comparison_keys <- c(
   "Bayesian multilevel + ad ranges · without other pay" = "bayesian_ranges_no_highest",
   "Bayesian multilevel + ad ranges · with other pay" = "bayesian_ranges"
 )
+comparison_keys <- c(comparison_keys,
+  "Bayesian GAM · without other pay" = "bayesian_gam_no_highest",
+  "Bayesian GAM · with other pay" = "bayesian_gam",
+  "Bayesian GAM + ad ranges · without other pay" = "bayesian_gam_ranges_no_highest",
+  "Bayesian GAM + ad ranges · with other pay" = "bayesian_gam_ranges",
+  "RBF SVR · without other pay" = "svr_no_highest", "RBF SVR · with other pay" = "svr",
+  "RBF Gaussian process · without other pay" = "gp_no_highest", "RBF Gaussian process · with other pay" = "gp")
+model_key_from_comparison <- function(key) {
+  parts <- strsplit(key, "_", fixed = TRUE)[[1]]
+  paste0(parts[1], paste0(toupper(substring(parts[-1], 1, 1)), substring(parts[-1], 2), collapse = ""))
+}
 comparison_json <- lapply(seq_len(nrow(comparison)), function(i) {
   row <- comparison[i, ]
   include_highest <- grepl("with other pay$", row$model)
   include_ads <- grepl("+ ad ranges", row$model, fixed = TRUE)
   list(
     key = unname(comparison_keys[[row$model]]),
+    modelKey = model_key_from_comparison(unname(comparison_keys[[row$model]])),
+    method = if (grepl("Bayesian GAM", row$model, fixed = TRUE)) "bayesianGam" else
+      if (grepl("Bayesian multilevel", row$model, fixed = TRUE)) "bayesian" else
+      if (grepl("Gaussian process", row$model, fixed = TRUE)) "gp" else
+      if (grepl("SVR", row$model, fixed = TRUE)) "svr" else
+      if (grepl("GAM", row$model, fixed = TRUE)) "gam" else
+      if (grepl("linear", row$model, fixed = TRUE)) "linear" else "intercept",
     label = row$model,
     includeHighestOtherPay = include_highest,
     includeAdvertisedRanges = include_ads,
@@ -890,6 +1036,10 @@ comparison_json <- lapply(seq_len(nrow(comparison)), function(i) {
     logMae = row$log_mae,
     oosR2 = row$oos_r2,
     medianAbsPercentError = row$median_abs_percent_error,
+    meanAbsPercentError = row$mean_abs_percent_error,
+    geometricAbsErrorFactor = row$geometric_abs_error_factor,
+    logCrps = row$log_crps,
+    interval90MeanLogWidth = row$interval90_mean_log_width,
     coverage80 = row$coverage80,
     coverage90 = row$coverage90,
     cvElpd = row$cv_elpd,
@@ -913,7 +1063,7 @@ category_schema <- lapply(categorical_keys, function(key) {
 names(category_schema) <- NULL
 
 artifact <- list(
-  schemaVersion = 2,
+  schemaVersion = 3,
   production = !quick,
   fitConfiguration = list(
     cvChains = if (quick) 1L else 4L,
@@ -980,6 +1130,9 @@ artifact <- list(
       includeAdvertisedRanges = FALSE,
       includeHighestOtherPay = FALSE,
       baseline = intercept_baseline,
+      uncertainty = list(method = "Gaussian mean approximation and organization bootstrap of out-of-fold residuals",
+        coefficientDraws = unname(coefficient_simulation(intercept_baseline, matrix(vcov(intercept_fit), 1L))),
+        residualDraws = replicate(256L, intercept_oof$residuals[bootstrap_indices(exact$organization_group[match(intercept_oof$ids, exact$id)])], simplify = FALSE)),
       residuals = intercept_oof$residuals,
       residualRecordIds = intercept_oof$ids,
       trainingRecordIds = unname(exact$id),
@@ -1024,6 +1177,49 @@ artifact <- list(
   )
 )
 
-write_json(artifact, artifact_path, auto_unbox = TRUE, pretty = TRUE, digits = 7, na = "null")
+for (spec in bayesian_specs[vapply(bayesian_specs, function(spec) isTRUE(spec$smooth), logical(1))]) {
+  key <- model_key_from_comparison(comparison_keys[[spec$name]])
+  artifact$models[[key]] <- thin_components(full_bayesian_fits[[spec$name]], spec$include_ads)
+  artifact$method[[key]] <- "Bayesian additive log-salary model: regularized natural cubic numeric effects, partially pooled categories, joint missing-input model, and evidence-specific compensation likelihoods."
+}
+for (kind in c("svr", "gp")) for (highest in c(FALSE, TRUE)) {
+  keys <- feature_keys_for(highest)
+  pp <- fit_preprocessing(exact, keys)
+  x <- transform_continuous(exact, pp, keys)$X
+  label <- paste(if (kind == "svr") "RBF SVR" else "RBF Gaussian process", if (highest) "· with other pay" else "· without other pay")
+  oof <- validate_simple_oof(oof_sets[[label]], label)
+  model <- list(includeAdvertisedRanges = FALSE, includeHighestOtherPay = highest,
+    preprocessing = json_preprocessing(pp), designColumns = unname(colnames(x)), trainingRecordIds = unname(exact$id))
+  if (kind == "gp") {
+    model$kernel <- fit_gp_design(exact$log_mid, x)
+    model$uncertainty <- list(method = "Conditional Gaussian-process posterior; empirical-Bayes kernel hyperparameters held fixed")
+    model$diagnostics <- list(trainingN = nrow(exact), residualScale = model$kernel$noise)
+  } else {
+    parameters <- tune_svr(exact, keys)
+    fitted <- fit_svr_design(exact$log_mid, x, parameters)
+    weights <- numeric(nrow(exact)); weights[fitted$index] <- as.numeric(fitted$coefs)
+    model$kernel <- list(trainingX = unname(x), weights = weights, intercept = -unname(fitted$rho), gamma = parameters$gamma,
+                         cost = parameters$cost, epsilon = parameters$epsilon)
+    model$residuals <- oof$residuals; model$residualRecordIds <- oof$ids
+    model$intervalCalibration <- "nested organization-fold residual KDE"
+    model$uncertainty <- list(method = "Organization bootstrap with selected hyperparameters and preprocessing held fixed",
+      kernelDraws = lapply(1:256, function(draw) {
+        indices <- bootstrap_indices(exact$organization_group)
+        fit <- fit_svr_design(exact$log_mid[indices], x[indices, , drop = FALSE], parameters)
+        weights <- numeric(nrow(exact))
+        for (j in seq_along(fit$index)) weights[indices[fit$index[j]]] <- weights[indices[fit$index[j]]] + fit$coefs[j]
+        list(weights = weights, intercept = -unname(fit$rho))
+      }),
+      residualDraws = replicate(256L, oof$residuals[bootstrap_indices(exact$organization_group[match(oof$ids, exact$id)])], simplify = FALSE))
+    model$diagnostics <- list(trainingN = nrow(exact), supportVectors = nrow(fitted$SV), residualScale = sd(oof$residuals))
+  }
+  key <- paste0(kind, if (!highest) "NoHighest" else "")
+  artifact$models[[key]] <- model
+  artifact$method[[key]] <- if (kind == "gp") "Exact RBF Gaussian process with an uncertain constant mean and empirical-Bayes kernel parameters fitted inside each training fold; conditional predictive distribution." else
+    "RBF epsilon-support-vector regression with nested organization-grouped tuning and residual calibration. Numeric predictors and missingness indicators only."
+}
+artifact$provenance$packageVersions$e1071 <- as.character(packageVersion("e1071"))
+
+write_json(artifact, artifact_path, auto_unbox = TRUE, pretty = TRUE, digits = 7, na = "null", null = "null")
 message("Wrote ", artifact_path)
 print(comparison[, c("model", "exact_n", "ad_range_n", "ad_point_n", "log_rmse", "oos_r2", "median_abs_percent_error", "coverage90", "mean_log_predictive_density", "ad_interval_mean_log_score", "ad_point_mean_log_score")])

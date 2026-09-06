@@ -13,7 +13,7 @@
   const DATA = window.CEO_BENCHMARK_DATA;
   if (!DATA) throw new Error("Benchmark data did not load.");
   const PREDICTIVE_MODEL = DATA.predictiveModel;
-  if (!PREDICTIVE_MODEL || PREDICTIVE_MODEL.schemaVersion !== 2 || PREDICTIVE_MODEL.training?.rpExcluded !== true) {
+  if (!PREDICTIVE_MODEL || PREDICTIVE_MODEL.schemaVersion !== 3 || PREDICTIVE_MODEL.training?.rpExcluded !== true) {
     throw new Error("Validated predictive-model data did not load.");
   }
   if (!Array.isArray(PREDICTIVE_MODEL.training.records)) {
@@ -171,6 +171,7 @@
     showContours: true,
     showJobAdIntervals: true,
     modelMethod: "bayesian",
+    modelCompatibilityLevel: 89, modelEffectUnits: "percent", modelFocusWeights: null,
     modelUseAdRanges: false,
     modelIncludeHighestOtherPay: true,
     modelProfile: { ...MODEL_PROFILE_DEFAULTS },
@@ -1312,10 +1313,10 @@
       if (!activeTrainingIds.has(String(trainingRecord.id))) {
         return { eligible: false, reason: "This record is not used by the selected model specification." };
       }
-      if (["gam", "linear", "intercept"].includes(state.modelMethod) && trainingRecord.observation !== "exact_base") {
+      if (["gam", "linear", "intercept", "svr", "gp"].includes(state.modelMethod) && trainingRecord.observation !== "exact_base") {
         return {
           eligible: false,
-          reason: `The ${state.modelMethod === "gam" ? "numeric-input GAM" : state.modelMethod === "linear" ? "scale-linear model" : "intercept-only model"} uses exact Form 990 base salaries only.`,
+          reason: `${currentModelComparisonRow().label} uses exact Form 990 base salaries only.`,
         };
       }
       if (trainingRecord.source === "job_ad" && !state.modelUseAdRanges) {
@@ -1610,7 +1611,7 @@
   function presetSelected(row) {
     const available = salary(row) != null;
     if (state.sample === "sensitivity") return Boolean(available && (
-      row.defaultIncluded || ["sensitivity_only", "structural_sensitivity"].includes(row.analysisStatus)
+      row.defaultIncluded || ["sensitivity_only", "structural_sensitivity", "sensitivity_hours_review"].includes(row.analysisStatus)
     ));
     if (state.sample === "clean") return Boolean(row.defaultIncluded && row.structurallyClean && available);
     if (state.sample === "tierA") return Boolean(row.defaultIncluded && available && (row.tier === "A" || row.tier === "strict_primary"));
@@ -2951,10 +2952,12 @@
     highest_other_base: "Non-CEO highest base pay",
   });
 
+  function isBayesianMethod(method = state.modelMethod) { return method === "bayesian" || method === "bayesianGam"; }
+
   function activeModelKey() {
     if (state.modelMethod === "intercept") return "intercept";
     const suffix = state.modelIncludeHighestOtherPay ? "" : "NoHighest";
-    if (state.modelMethod === "bayesian" && state.modelUseAdRanges) return `bayesianRanges${suffix}`;
+    if (isBayesianMethod() && state.modelUseAdRanges) return `${state.modelMethod}Ranges${suffix}`;
     return `${state.modelMethod}${suffix}`;
   }
 
@@ -3002,7 +3005,7 @@
   }
 
   function modelCategoryIndex(key, value) {
-    if (value === "__average__") return -1;
+    if (value === "__average__" || (key === "focus_area" && value === "__mixture__")) return -1;
     const index = modelCategoryDefinition(key)?.levels.indexOf(value) ?? -1;
     if (index < 0) throw new Error(`Unknown predictive-model category: ${key}=${value}`);
     return index;
@@ -3036,21 +3039,26 @@
     if (vector.slice(0, continuousKeys.length).some((value) => !Number.isFinite(value))) return null;
     const effectKeys = { expenses: "expenses", revenue: "revenue", staff: "staff", highest_other_base: "highestOther" };
     const contributions = continuousKeys.map((key, index) => ({
+      key,
       label: MODEL_CONTINUOUS_LABELS[key],
       value: interpolateModelEffect(model.effects[effectKeys[key]], vector[index]),
+      draws: model.uncertainty.coefficientDraws.map((draw) => SalaryModelMath.dot(draw,
+        SalaryModelMath.interpolateBasis(model.uncertainty.effectBasis[index], vector[index]))),
     }));
     const mu = model.baseline + contributions.reduce((sum, contribution) => sum + contribution.value, 0);
-    return residualCalibratedPrediction(currentModelComparisonRow()?.key || "gam", model, mu, contributions);
+    const muDraws = model.uncertainty.coefficientDraws.map((draw, i) => SalaryModelMath.dot(draw, model.uncertainty.baselineBasis)
+      + contributions.reduce((sum, item) => sum + item.draws[i], 0));
+    return residualCalibratedPrediction(currentModelComparisonRow()?.key || "gam", model, mu, contributions, muDraws);
   }
 
-  function residualCalibratedPrediction(methodKey, model, mu, contributions = []) {
+  function residualCalibratedPrediction(methodKey, model, mu, contributions = [], muDraws = null) {
     const residuals = model.residuals;
     const mean = residuals.reduce((sum, value) => sum + value, 0) / residuals.length;
     const variance = residuals.reduce((sum, value) => sum + (value - mean) ** 2, 0) / (residuals.length - 1);
     const bandwidth = Math.max(0.04, 1.06 * Math.sqrt(variance) * residuals.length ** -0.2);
     const distribution = logNormalMixture(residuals.map((residual) => mu + residual), residuals.map(() => bandwidth));
     return {
-      methodKey, model, mu, distribution,
+      methodKey, model, mu, muDraws, distribution, reference: mu - contributions.reduce((sum, item) => sum + item.value, 0),
       expected: distribution.expected,
       median: distribution.quantile(0.5),
       contributions,
@@ -3059,7 +3067,7 @@
 
   function interceptModelPrediction() {
     const model = PREDICTIVE_MODEL.models.intercept;
-    return residualCalibratedPrediction("intercept", model, model.baseline);
+    return residualCalibratedPrediction("intercept", model, model.baseline, [], model.uncertainty.coefficientDraws.map((draw) => draw[0]));
   }
 
   function linearModelPrediction() {
@@ -3073,13 +3081,19 @@
     const designColumns = model.designColumns || model.activeDesignColumns || [];
     const coefficientByColumn = new Map(designColumns.map((column, index) => [column, model.coefficients[index]]));
     const contributions = continuousKeys.map((key, index) => ({
+      key,
       label: MODEL_CONTINUOUS_LABELS[key],
       value: standardized[index] * (coefficientByColumn.get(`log_${key}`) || 0),
+      draws: model.uncertainty.coefficientDraws.map((draw) => {
+        const column = designColumns.indexOf(`log_${key}`);
+        return column >= 0 ? standardized[index] * draw[column + 1] : 0;
+      }),
     }));
     const mu = model.baseline + vector.reduce((sum, value, index) => (
       sum + value * model.coefficients[index]
     ), 0);
-    return residualCalibratedPrediction(currentModelComparisonRow()?.key || "linear", model, mu, contributions);
+    return residualCalibratedPrediction(currentModelComparisonRow()?.key || "linear", model, mu, contributions,
+      model.uncertainty.coefficientDraws.map((draw) => SalaryModelMath.dot([1, ...vector], draw)));
   }
 
   function bayesianModelPrediction() {
@@ -3089,6 +3103,12 @@
     const continuousKeys = modelContinuousKeys(model);
     if (vector.slice(0, continuousKeys.length).some((value) => !Number.isFinite(value))) return null;
     const draws = model.draws;
+    const focusWeights = state.modelProfile.focus_area === "__mixture__" ? state.modelFocusWeights : null;
+    if (state.modelProfile.focus_area === "__mixture__" && (!Array.isArray(focusWeights)
+      || focusWeights.length !== draws.focus[0].length || focusWeights.some((value) => !Number.isFinite(value) || value < 0)
+      || Math.abs(focusWeights.reduce((sum, value) => sum + value, 0) - 100) > .01)) return null;
+    const curve = (column, value, draw) => model.curvature
+      ? SalaryModelMath.dot(SalaryModelMath.curvature(value, model.curvature[column]), draws.smooth[column][draw]) : 0;
     const categoryIndexes = {
       focus: modelCategoryIndex("focus_area", state.modelProfile.focus_area),
       organizationType: modelCategoryIndex("organization_type", state.modelProfile.organization_type),
@@ -3103,18 +3123,22 @@
     const mu = [];
     for (let index = 0; index < draws.alpha.length; index += 1) {
       let value = draws.alpha[index] + vector.reduce((sum, item, column) => sum + item * draws.beta[index][column], 0);
+      value += continuousKeys.reduce((sum, key, column) => sum + curve(column, vector[column], index), 0);
       Object.entries(categoryIndexes).forEach(([key, categoryIndex]) => {
         if (categoryIndex >= 0) value += draws[key][index][categoryIndex];
       });
+      if (focusWeights) value += SalaryModelMath.dot(focusWeights, draws.focus[index]) / 100;
       mu.push(value);
     }
     const contributionSpecs = [
-      ...continuousKeys.map((key, column) => [MODEL_CONTINUOUS_LABELS[key], () => draws.beta.map((row) => row[column] * vector[column])]),
-      ["Focus area", () => categoryIndexes.focus < 0 ? [0] : draws.focus.map((row) => row[categoryIndexes.focus])],
+      ...continuousKeys.map((key, column) => [MODEL_CONTINUOUS_LABELS[key], () => draws.beta.map((row, i) => row[column] * vector[column]
+        + curve(column, vector[column], i) - curve(column, 0, i)), key]),
+      ["Focus area", () => focusWeights ? draws.focus.map((row) => SalaryModelMath.dot(focusWeights, row) / 100)
+        : categoryIndexes.focus < 0 ? [0] : draws.focus.map((row) => row[categoryIndexes.focus]), "focus"],
       ["Effective Altruism", () => categoryIndexes.ea < 0 ? [0] : draws.ea.map((row) => row[categoryIndexes.ea])],
       ["Organization type", () => categoryIndexes.organizationType < 0 ? [0] : draws.organizationType.map((row) => row[categoryIndexes.organizationType])],
       ["Title group", () => categoryIndexes.title < 0 ? [0] : draws.title.map((row) => row[categoryIndexes.title])],
-      ["Location", () => categoryIndexes.location < 0 ? [0] : draws.location.map((row) => row[categoryIndexes.location])],
+      ["CEO hiring market", () => categoryIndexes.location < 0 ? [0] : draws.location.map((row) => row[categoryIndexes.location])],
       ["Work model", () => categoryIndexes.remote < 0 ? [0] : draws.remote.map((row) => row[categoryIndexes.remote])],
       ["Fiscal sponsor", () => categoryIndexes.fiscalSponsor < 0 ? [0] : draws.fiscalSponsor.map((row) => row[categoryIndexes.fiscalSponsor])],
     ];
@@ -3122,18 +3146,69 @@
     return {
       methodKey: currentModelComparisonRow()?.key || (state.modelUseAdRanges ? "bayesian_ranges" : "bayesian"),
       model, mu, distribution,
+      reference: medianAcrossDraws(draws.alpha.map((alpha, i) => alpha + continuousKeys.reduce((sum, key, j) => sum + curve(j, 0, i), 0))),
       expected: distribution.expected,
       median: distribution.quantile(0.5),
-      contributions: contributionSpecs.map(([label, accessor]) => ({ label, value: medianAcrossDraws(accessor()) })),
+      contributions: contributionSpecs.map(([label, accessor, key]) => ({ label, key, draws: accessor(), value: medianAcrossDraws(accessor()) })),
     };
   }
 
+  function kernelModelPrediction() {
+    const model = activeModelArtifact();
+    const vector = modelContinuousVector(model);
+    if (vector.some((value) => !Number.isFinite(value))) return null;
+    const family = state.modelMethod;
+    const result = SalaryModelMath.kernelPrediction(model.kernel, vector, family);
+    const contributions = SalaryModelMath.kernelContributions(model.kernel, vector, family, model.uncertainty.kernelDraws)
+      .map((item, j) => ({ ...item, key: modelContinuousKeys(model)[j], label: MODEL_CONTINUOUS_LABELS[modelContinuousKeys(model)[j]] }));
+    if (family === "svr") return residualCalibratedPrediction(currentModelComparisonRow().key, model, result.mean, contributions,
+      model.uncertainty.kernelDraws.map((draw) => SalaryModelMath.kernelPrediction(model.kernel, vector, family, draw).mean));
+    const distribution = logNormalMixture([result.mean], [Math.sqrt(result.variance + model.kernel.noise ** 2)]);
+    return { methodKey: currentModelComparisonRow().key, model, mu: result.mean, latentVariance: result.variance,
+      distribution, expected: distribution.expected, median: distribution.quantile(.5), contributions,
+      reference: SalaryModelMath.kernelPrediction(model.kernel, vector.map(() => 0), family).mean };
+  }
+
+  let modelPredictionCache = { key: "", prediction: null };
   function currentModelPrediction() {
     if (!isCeoPosition()) return null;
-    if (state.modelMethod === "intercept") return interceptModelPrediction();
-    if (state.modelMethod === "linear") return linearModelPrediction();
-    if (state.modelMethod === "gam") return gamModelPrediction();
-    return bayesianModelPrediction();
+    const key = JSON.stringify([activeModelKey(), state.modelProfile, state.modelFocusWeights]);
+    if (key === modelPredictionCache.key) return modelPredictionCache.prediction;
+    const prediction = state.modelMethod === "intercept" ? interceptModelPrediction()
+      : state.modelMethod === "linear" ? linearModelPrediction()
+        : state.modelMethod === "gam" ? gamModelPrediction()
+          : ["svr", "gp"].includes(state.modelMethod) ? kernelModelPrediction() : bayesianModelPrediction();
+    if (prediction) prediction.quantileUncertaintyCache = new Map();
+    modelPredictionCache = { key, prediction };
+    return prediction;
+  }
+
+  function quantileUncertainty(prediction, probability) {
+    const level = state.modelCompatibilityLevel / 100;
+    const key = `${probability}:${level}`;
+    if (prediction.quantileUncertaintyCache.has(key)) return prediction.quantileUncertaintyCache.get(key);
+    const tail = (1 - level) / 2;
+    const z = SalaryModelMath.normalQuantile(probability);
+    let interval;
+    if (isBayesianMethod()) {
+      const quantiles = prediction.mu.map((mu, i) => Math.exp(mu + prediction.model.draws.sigma[i][0] * z));
+      interval = [sampleQuantile(quantiles, tail), sampleQuantile(quantiles, 1 - tail)];
+    } else if (state.modelMethod === "gp") {
+      const center = prediction.mu + prediction.model.kernel.noise * z;
+      const radius = SalaryModelMath.normalQuantile(1 - tail) * Math.sqrt(prediction.latentVariance);
+      interval = [Math.exp(center - radius), Math.exp(center + radius)];
+    } else {
+      const quantiles = prediction.muDraws.map((mu, i) => {
+        const residuals = prediction.model.uncertainty.residualDraws[i];
+        const mean = residuals.reduce((sum, value) => sum + value, 0) / residuals.length;
+        const sd = Math.sqrt(residuals.reduce((sum, value) => sum + (value - mean) ** 2, 0) / (residuals.length - 1));
+        const bandwidth = Math.max(.04, 1.06 * sd * residuals.length ** -.2);
+        return logNormalMixture(residuals.map((value) => value + mu), residuals.map(() => bandwidth)).quantile(probability);
+      });
+      interval = [sampleQuantile(quantiles, tail), sampleQuantile(quantiles, 1 - tail)];
+    }
+    prediction.quantileUncertaintyCache.set(key, interval);
+    return interval;
   }
 
   function modelComparisonRow(key) {
@@ -3142,26 +3217,16 @@
 
   function modelComparisonSpec(row) {
     if (!row) return null;
-    const token = String(row.modelKey || row.key || row.label || "").replaceAll(/[^a-z]/gi, "").toLowerCase();
-    const method = token.includes("intercept") ? "intercept"
-      : token.includes("linear") ? "linear"
-        : token.includes("gam") ? "gam"
-          : token.includes("bayesian") ? "bayesian" : "";
-    if (!method) return null;
-    return {
-      method,
-      useAdRanges: method === "bayesian"
-        && (row.includeAdvertisedRanges === true || token.includes("ranges")),
-      includeHighestOtherPay: method === "intercept"
-        ? state.modelIncludeHighestOtherPay : row.includeHighestOtherPay !== false && !token.includes("nohighest"),
-    };
+    if (!row.method || !PREDICTIVE_MODEL.models[row.modelKey]) throw new Error("Invalid model comparison registry");
+    return { method: row.method, useAdRanges: row.includeAdvertisedRanges,
+      includeHighestOtherPay: row.method === "intercept" ? state.modelIncludeHighestOtherPay : row.includeHighestOtherPay };
   }
 
   function currentModelComparisonRow() {
     return PREDICTIVE_MODEL.comparison.find((row) => {
       const spec = modelComparisonSpec(row);
       return spec?.method === state.modelMethod
-        && (state.modelMethod !== "bayesian" || spec.useAdRanges === state.modelUseAdRanges)
+        && (!isBayesianMethod() || spec.useAdRanges === state.modelUseAdRanges)
         && (state.modelMethod === "intercept" || spec.includeHighestOtherPay === state.modelIncludeHighestOtherPay);
     }) || null;
   }
@@ -3173,7 +3238,7 @@
       return PREDICTIVE_MODEL.training.records.filter((record) => ids.has(String(record.id)));
     }
     return PREDICTIVE_MODEL.training.records.filter((record) => {
-      if (["gam", "linear", "intercept"].includes(state.modelMethod)) return record.observation === "exact_base";
+      if (["gam", "linear", "intercept", "svr", "gp"].includes(state.modelMethod)) return record.observation === "exact_base";
       if (state.modelUseAdRanges) return true;
       return record.source === "filing";
     });
@@ -3190,7 +3255,7 @@
       if (!Number.isFinite(value) || value <= 0) warnings.push(`${key} is invalid`);
       else if (definition && (value < definition.minimum || value > definition.maximum)) warnings.push(`${key.replace("compensation_", "")} is outside the training range`);
     });
-    if (state.modelMethod === "bayesian") {
+    if (isBayesianMethod()) {
       PREDICTIVE_MODEL.categoricalFeatures.forEach((definition) => {
         const value = state.modelProfile[definition.key];
         if (value === "__average__") return;
@@ -3210,6 +3275,7 @@
 
   function renderModelContributions(prediction) {
     refs.modelContributions.replaceChildren();
+    $("#model-driver-reference").textContent = "";
     if (!prediction.contributions.length) {
       const note = document.createElement("p");
       note.className = "model-no-contributions";
@@ -3217,20 +3283,95 @@
       refs.modelContributions.append(note);
       return;
     }
-    const maximum = Math.max(...prediction.contributions.map((item) => Math.abs(item.value)), 0.01);
+    const effectValue = (value) => state.modelEffectUnits === "percent" ? Math.expm1(value) * 100 : value;
+    const maximum = Math.max(...prediction.contributions.map((item) => Math.abs(effectValue(item.value))), 0.01);
+    $("#model-driver-reference").textContent = `Reference median before residual calibration: ${modelMoney(Math.exp(prediction.reference))}. Click a driver to inspect uncertainty. ${state.modelEffectUnits === "percent" ? "Percent effects multiply; separately summarized effects need not reconstruct the predictive median." : "Effects are in natural-log salary units."}`;
     prediction.contributions.forEach((item) => {
       const row = document.createElement("div");
       row.className = `model-contribution${item.value < 0 ? " is-negative" : ""}`;
-      const label = document.createElement("span"); label.textContent = item.label; label.title = item.label;
+      const label = document.createElement("button"); label.type = "button"; label.className = "model-driver-button"; label.textContent = item.label;
+      label.setAttribute("aria-label", `Inspect ${item.label} uncertainty`);
+      label.addEventListener("click", () => showDriverExplanation(prediction, item));
       const track = document.createElement("span"); track.className = "model-contribution-track";
       const bar = document.createElement("i"); bar.className = "model-contribution-bar";
-      const width = Math.max(1, Math.abs(item.value) / maximum * 50);
+      const width = Math.max(0, Math.abs(effectValue(item.value)) / maximum * 50);
       bar.style.width = `${width}%`;
       bar.style.left = item.value < 0 ? `${50 - width}%` : "50%";
       track.append(bar);
-      const value = document.createElement("output"); value.textContent = `${item.value >= 0 ? "+" : ""}${item.value.toFixed(2)}`;
+      const value = document.createElement("output"); value.textContent = formatModelEffect(item.value);
       row.append(label, track, value); refs.modelContributions.append(row);
     });
+  }
+
+  function formatModelEffect(value) {
+    const transformed = state.modelEffectUnits === "percent" ? 100 * Math.expm1(value) : value;
+    return `${transformed >= 0 ? "+" : ""}${transformed.toFixed(state.modelEffectUnits === "percent" ? 1 : 3)}${state.modelEffectUnits === "percent" ? "%" : ""}`;
+  }
+
+  function showModelSpecification(row) {
+    $("#model-explanation-title").textContent = row.label;
+    $("#model-explanation-content").innerHTML = salaryModelVignette(row, PREDICTIVE_MODEL.models[row.modelKey], PREDICTIVE_MODEL);
+    $("#model-explanation-dialog").showModal();
+  }
+
+  function showDriverExplanation(prediction, item) {
+    const content = $("#model-explanation-content");
+    $("#model-explanation-title").textContent = `${item.label}: uncertainty in the model effect`;
+    content.replaceChildren();
+    const categorySpecs = {
+      "Focus area": ["focus", "focus_area"], "Effective Altruism": ["ea", "ea_relationship"],
+      "Organization type": ["organizationType", "organization_type"], "Title group": ["title", "title_group"],
+      "CEO hiring market": ["location", "location_scope"], "Work model": ["remote", "remote_category"],
+      "Fiscal sponsor": ["fiscalSponsor", "fiscal_sponsor_category"],
+    };
+    const spec = categorySpecs[item.label];
+    const tail = (1 - state.modelCompatibilityLevel / 100) / 2;
+    const summary = (label, draws, normal = null) => ({ label,
+      center: normal ? normal.mean : sampleQuantile(draws, .5),
+      low: normal ? normal.mean + SalaryModelMath.normalQuantile(tail) * normal.sd : sampleQuantile(draws, tail),
+      high: normal ? normal.mean + SalaryModelMath.normalQuantile(1 - tail) * normal.sd : sampleQuantile(draws, 1 - tail),
+    });
+    const entries = spec && prediction.model.draws
+      ? modelCategoryLevels(spec[1]).map((label, j) => summary(label, prediction.model.draws[spec[0]].map((draw) => draw[j])))
+      : [summary("Selected profile contrast", item.draws, item.normal)];
+    if (spec) entries.unshift(summary("Selected profile contrast", item.draws));
+    const note = document.createElement("p");
+    note.textContent = `${state.modelCompatibilityLevel}% ${isBayesianMethod() ? "posterior credible" : state.modelMethod === "gp" ? "conditional GP credible" : "approximate compatibility"} intervals for the log-salary contrast${state.modelEffectUnits === "percent" ? ", transformed to percent salary effects" : ""}. Reference: numeric training geometric means; centered categories at zero; Functional overlap for EA. These are associations, not causal effects.`;
+    content.append(note);
+    const transform = (value) => state.modelEffectUnits === "percent" ? Math.expm1(value) * 100 : value;
+    const bounds = entries.flatMap((entry) => [transform(entry.low), transform(entry.high), 0]);
+    let low = Math.min(...bounds); let high = Math.max(...bounds);
+    const padding = Math.max((high - low) * .1, state.modelEffectUnits === "percent" ? 1 : .01);
+    low -= padding; high += padding;
+    const width = 1060; const height = 100 + entries.length * 48;
+    const x = (value) => 285 + (transform(value) - low) / (high - low) * 420;
+    const svg = svgElement("svg", { viewBox: `0 0 ${width} ${height}`, role: "img", "aria-label": `${item.label} effect forest plot`, class: "model-effect-figure" });
+    const zero = x(0);
+    svg.append(svgElement("line", { x1: zero, x2: zero, y1: 12, y2: height - 60, stroke: "#a9b7bd", "stroke-dasharray": "4 4" }));
+    entries.forEach((entry, i) => {
+      const y = 32 + i * 48;
+      const label = svgElement("text", { x: 270, y: y + 5, "text-anchor": "end", "font-size": 14 }); label.textContent = entry.label;
+      const value = svgElement("text", { x: 730, y: y + 5, "font-size": 13 }); value.textContent = `${formatModelEffect(entry.center)} [${formatModelEffect(entry.low)}, ${formatModelEffect(entry.high)}]`;
+      svg.append(label, svgElement("line", { x1: x(entry.low), x2: x(entry.high), y1: y, y2: y, stroke: "#397c89", "stroke-width": 4 }),
+        svgElement("circle", { cx: x(entry.center), cy: y, r: 5, fill: "#123f4c" }), value);
+    });
+    for (let i = 0; i <= 4; i += 1) {
+      const value = low + i / 4 * (high - low);
+      const label = svgElement("text", { x: 285 + i / 4 * 420, y: height - 34, "text-anchor": "middle", "font-size": 13 });
+      label.textContent = `${value.toFixed(state.modelEffectUnits === "percent" ? 1 : 2)}${state.modelEffectUnits === "percent" ? "%" : ""}`; svg.append(label);
+    }
+    content.append(svg);
+    if (!spec) {
+      const explanation = document.createElement("p");
+      explanation.textContent = ["svr", "gp"].includes(state.modelMethod)
+        ? "For this interacting kernel model, the contrast is the exact Shapley allocation across all numeric-input coalitions. Its interval uses the joint uncertainty across those coalitions."
+        : "This interval is for this profile’s contribution, not a regression coefficient or the variation in salaries among peers. A zero input contrast has zero contribution by definition, even when the model coefficient is uncertain.";
+      content.append(explanation);
+    }
+    const limitation = document.createElement("p");
+    limitation.textContent = prediction.model.uncertainty?.method || "Posterior draws retain dependence between coefficients and category effects.";
+    content.append(limitation);
+    $("#model-explanation-dialog").showModal();
   }
 
   function selectModelComparisonMethod(methodKey) {
@@ -3249,7 +3390,7 @@
   function renderModelDiagnostics(prediction) {
     const metric = modelComparisonRow(prediction.methodKey);
     const coverage = modelProfileCoverage();
-    refs.modelCvError.textContent = `${(metric.medianAbsPercentError * 100).toFixed(0)}%`;
+    refs.modelCvError.textContent = `${(metric.meanAbsPercentError * 100).toFixed(0)}%`;
     refs.modelCvCoverage.textContent = `${(metric.coverage90 * 100).toFixed(0)}%`;
     refs.modelProfileSupport.textContent = coverage.label;
     refs.modelProfileSupport.classList.toggle("model-profile-warning", coverage.warnings.length > 0);
@@ -3259,7 +3400,7 @@
     refs.modelProfileReasons.textContent = coverage.warnings.length
       ? `Limited support: ${coverage.warnings.join("; ")}.` : "";
     refs.modelTrainingCount.textContent = `${activeModelTrainingRecords().length}`;
-    refs.modelMethodDescription.textContent = `${PREDICTIVE_MODEL.method[activeModelKey()] || PREDICTIVE_MODEL.method[state.modelMethod]} ${PREDICTIVE_MODEL.method.validation}`;
+    refs.modelMethodDescription.innerHTML = "<strong>Held-out organizations.</strong> All methods share the exact-base scoring cohort and organization-grouped folds. Open (?) for the complete specification. Ranking is descriptive; one cross-validation split does not establish a winner.";
     refs.modelComparisonBody.replaceChildren();
     PREDICTIVE_MODEL.comparison.forEach((row) => {
       const tr = document.createElement("tr");
@@ -3293,11 +3434,16 @@
         });
         methodCell.append(button);
       }
+      const details = document.createElement("button"); details.type = "button"; details.className = "info-tooltip model-spec-button";
+      details.textContent = "?"; details.setAttribute("aria-label", `Model specification: ${row.label}`);
+      details.addEventListener("click", (event) => { event.stopPropagation(); showModelSpecification(row); });
+      methodCell.append(details);
       const metrics = [
         row.logRmse.toFixed(3),
-        `${(row.medianAbsPercentError * 100).toFixed(0)}%`,
+        `${(row.meanAbsPercentError * 100).toFixed(1)}%`,
         `${(row.coverage90 * 100).toFixed(0)}%`,
         row.meanLogPredictiveDensity.toFixed(3),
+        row.logCrps.toFixed(3),
       ];
       tr.append(methodCell, ...metrics.map((value) => {
         const cell = document.createElement("td");
@@ -3309,7 +3455,8 @@
     renderModelContributions(prediction);
     const warningText = coverage.warnings.length
       ? `This target profile has limited support: ${coverage.warnings.join("; ")}. ` : "";
-    refs.modelLimitations.textContent = `${warningText}${PREDICTIVE_MODEL.exclusions.join(" ")} Prediction intervals describe uncertainty among modeled peer salaries, not a recommended salary range.`;
+    refs.modelLimitations.innerHTML = "<strong>Benchmark, not a pay recommendation.</strong> The selected disclosure cohort is not a representative market sample. <strong>Source types stay distinct:</strong> base pay, cash proxies, and optional ad ranges use their documented models. <strong>Current work-location evidence can postdate compensation.</strong> Effects are descriptive. Percentile uncertainty omits uncertainty about cohort representativeness. <a href=\"ceo_reference_set_audit.md\" target=\"_blank\">Source audit</a> · <a href=\"ceo_peer_recommendations.csv\" target=\"_blank\">Peer recommendations</a>.";
+    if (warningText) refs.modelLimitations.prepend(document.createTextNode(warningText));
   }
 
   function modelChartGeometry(domainValues) {
@@ -3359,6 +3506,7 @@
   }
 
   function clearModelDetailsForInvalidPrediction() {
+    $("#model-driver-reference").textContent = "";
     refs.modelMethodDescription.textContent = "Model details are available after the required profile inputs are valid.";
     refs.modelComparisonBody.replaceChildren();
     refs.modelContributions.replaceChildren();
@@ -3380,11 +3528,13 @@
     const { width, height } = measuredChartSize();
     svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
     refs.chartLegend.replaceChildren();
-    if (!prediction || prediction.distribution.count < 20) {
+    if (!prediction || prediction.distribution.count < 1) {
       refs.modelDiagnostics.hidden = true;
       clearModelDetailsForInvalidPrediction();
       const empty = svgElement("text", { x: width / 2, y: height / 2, "text-anchor": "middle", fill: "#52879E", "font-size": 13 });
-      empty.textContent = isCeoPosition() ? "Enter positive model inputs to generate a prediction." : "The predictive model is currently validated only for CEO pay.";
+      empty.textContent = isCeoPosition() ? (isBayesianMethod() && state.modelProfile.focus_area === "__mixture__"
+        ? "Enter positive numeric inputs and focus shares totaling 100%."
+        : "Enter positive model inputs to generate a prediction.") : "The predictive model is currently validated only for CEO pay.";
       svg.append(empty);
       $("#chart-description").textContent = empty.textContent;
       refs.statN.textContent = "—"; refs.statNeff.textContent = "—"; refs.statCenter.textContent = "—";
@@ -3503,6 +3653,7 @@
     yTitle.textContent = "Predictive density"; svg.append(yTitle);
     $("#chart-description").textContent = prediction.methodKey.startsWith("bayesian")
       ? "A posterior predictive distribution for CEO salary at the selected organization profile. Shaded regions show 50%, 80%, and 95% prediction intervals."
+      : state.modelMethod === "gp" ? "A conditional Gaussian-process predictive distribution for CEO salary. Shaded regions show 50%, 80%, and 95% prediction intervals, with estimated kernel parameters held fixed."
       : "A residual-calibrated predictive distribution for CEO salary at the selected organization profile. Shaded regions show 50%, 80%, and 95% prediction intervals.";
     renderModelLegend();
     refs.statN.textContent = modelMoney(prediction.expected); refs.statNUnit.textContent = "expected salary";
@@ -3596,14 +3747,8 @@
         refs.quantileGrid.replaceChildren();
         return;
       }
-      const predictorSuffix = state.modelMethod === "intercept" || state.modelIncludeHighestOtherPay
-        ? "" : " without highest-other pay";
-      refs.quantileBasis.textContent = {
-        intercept: "Predicted from the intercept-only benchmark with held-out residual calibration",
-        linear: `Predicted from the scale-linear model${predictorSuffix} with held-out residual calibration`,
-        gam: `Predicted from the numeric-input GAM${predictorSuffix} with held-out residual calibration`,
-      }[state.modelMethod]
-        || `Predicted for the selected profile using Bayesian multilevel modeling${state.modelUseAdRanges ? " with advertised ranges" : ""}${predictorSuffix}`;
+      const intervalLabel = isBayesianMethod() ? "credible" : state.modelMethod === "gp" ? "conditional credible" : "approximate compatibility";
+      refs.quantileBasis.textContent = `${currentModelComparisonRow().label}. Each small range is a ${state.modelCompatibilityLevel}% ${intervalLabel} interval for that population percentile; the curve shows peer salary variation.`;
       refs.customQuantilesField.hidden = state.quantileGranularity !== "custom";
       const percentiles = quantilePercentiles();
       if (state.quantileGranularity === "custom") {
@@ -3617,7 +3762,12 @@
         const button = document.createElement("button"); button.type = "button"; button.className = "quantile-cell";
         const label = percentileParts(percentile);
         button.innerHTML = `<span>${label.number}<sup>${label.suffix}</sup> percentile</span><strong>${compactMoney(value)}</strong>`;
-        button.setAttribute("aria-label", `${formatPercentile(percentile)}: ${money(value)}`);
+        const interval = quantileUncertainty(prediction, percentile / 100);
+        const uncertainty = document.createElement("small"); uncertainty.className = "quantile-uncertainty";
+        uncertainty.textContent = `${compactMoney(interval[0])}–${compactMoney(interval[1])}`;
+        uncertainty.title = `${state.modelCompatibilityLevel}% ${intervalLabel} interval for the estimated population percentile, not a future salary interval.`;
+        button.append(uncertainty);
+        button.setAttribute("aria-label", `${formatPercentile(percentile)}: ${money(value)}; ${state.modelCompatibilityLevel}% ${intervalLabel} interval ${money(interval[0])} to ${money(interval[1])}`);
         button.addEventListener("pointerenter", () => { state.hoverQuantile = value; renderChart(); });
         button.addEventListener("pointerleave", () => { state.hoverQuantile = null; renderChart(); });
         button.addEventListener("focus", () => { state.hoverQuantile = value; renderChart(); });
@@ -4014,7 +4164,14 @@
       const tier = document.createElement("td"); tier.className = "tier-cell"; tier.textContent = peerCategoryLabel(row.tier);
       const topic = document.createElement("td"); topic.className = "topic-cell"; topic.title = row.topic || ""; topic.textContent = tableDisplayLabel(row.topic);
       const expenses = document.createElement("td"); expenses.className = "money-cell"; expenses.textContent = compactMoney(row.expenses);
-      const location = document.createElement("td"); location.className = "metadata-cell"; location.textContent = tableDisplayLabel(row.location);
+      const location = document.createElement("td"); location.className = "metadata-cell";
+      const market = document.createElement("button"); market.type = "button"; market.className = "metadata-evidence-button";
+      market.textContent = row.ceoHiringMarket === "Location not reported" ? "NA" : tableDisplayLabel(row.ceoHiringMarket);
+      market.title = `CEO hiring market: ${row.ceoHiringMarket}. Basis: ${humanizeCategory(row.ceoHiringMarketBasis)}.`;
+      market.addEventListener("click", () => openOperatingMetadataDialog(row, "remote"));
+      const footprint = document.createElement("small"); footprint.className = "organization-footprint";
+      footprint.textContent = `Footprint: ${{ us: "US", international: "international", outside_us: "outside US", unknown: "unknown" }[row.operatingFootprint] || row.operatingFootprint}`;
+      location.append(market, footprint);
       const remote = document.createElement("td"); remote.className = "metadata-cell has-explainer";
       const remoteButton = document.createElement("button"); remoteButton.type = "button"; remoteButton.className = "metadata-evidence-button";
       remoteButton.textContent = tableDisplayLabel(row.remoteCategory || "Unknown");
@@ -4181,6 +4338,7 @@
       excluded_part_time: "Excluded because the role is part-time",
       structural_sensitivity: "Broader case because the organization type differs",
       sensitivity_only: "Broader comparison case",
+      sensitivity_hours_review: "Sensitivity only; full-time role hours unresolved",
       included: "Included",
       no: "Not included",
     };
@@ -4202,7 +4360,10 @@
       ["Inflation reference period", row.cpiPeriod || "Not reported"],
       ["Peer group", row.tier || "Not classified"],
       ["Area", row.topic || "Not classified"],
-      ["Location / work arrangement", [row.location, row.remoteStatus].filter(Boolean).join(" · ") || "Not reported"],
+      ["Source location / work arrangement", [row.sourceLocationDescription, row.remoteStatus].filter(Boolean).join(" · ") || "Not reported"],
+      ["CEO hiring geography", `${row.ceoHiringMarket || "Location not reported"} · ${humanizeCategory(row.ceoHiringMarketBasis || "unknown")}`],
+      ["Organization footprint", humanizeCategory(row.operatingFootprint || "unknown")],
+      ...(row.eligibilityReview ? [["Role eligibility review", row.eligibilityReview]] : []),
       ["Effective Altruism", eaAffinityLabel(row.eaAffinity)],
       ["Organization type", row.structure || "Not classified"],
       ...(row.sourceMissionOperatingModel ? [["Mission / operating model (source wording)", row.sourceMissionOperatingModel]] : []),
@@ -4251,6 +4412,13 @@
     meta.replaceChildren();
     [
       ["Classification", value],
+      ...(remote ? [
+        ["Evidence basis", humanizeCategory(metadata.workModelBasis || "unknown")],
+        ["Detailed work model", humanizeCategory(row.workModelDetail || "unknown")],
+        ["CEO hiring geography", `${row.ceoHiringMarket || "Location not reported"} · ${humanizeCategory(row.ceoHiringMarketBasis || "unknown")}`],
+        ["Organization footprint", humanizeCategory(row.operatingFootprint || "unknown")],
+        ["Historical evidence", metadata.historicalNotes || "No dated historic policy established"],
+      ] : []),
       ["Reviewed", metadata.retrievedAt || "Not reported"],
       ["Confidence", humanizeCategory(metadata.confidence || "Unspecified")],
       ["Review note", metadata.caveats || "None recorded"],
@@ -4259,6 +4427,13 @@
       const dt = document.createElement("dt"); dt.textContent = term;
       const dd = document.createElement("dd"); dd.textContent = description;
       meta.append(dt, dd);
+    });
+    if (remote) (metadata.reviewEvidence || []).forEach((item) => {
+      const dt = document.createElement("dt"); dt.textContent = `${item.role || "Source"} · ${item.published_date || item.date || "Date unknown"}`;
+      const dd = document.createElement("dd");
+      const quote = document.createElement("p"); quote.textContent = item.excerpt || "No work-arrangement statement found.";
+      const link = document.createElement("a"); link.href = item.archive_url || item.url; link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = "Review cited source ↗";
+      dd.append(quote, link); meta.append(dt, dd);
     });
     const details = $("#dialog-category-provenance");
     details.hidden = true; details.open = false;
@@ -4746,7 +4921,7 @@
     const roleLabel = positionDefinition().pageLabel;
     refs.sampleDescription.textContent = {
       primary: `Reviewed full-year ${roleLabel} pay records used in the main benchmark.`,
-      sensitivity: "Recommended records plus broader comparisons.",
+      sensitivity: "Recommended records plus broader comparisons, including unresolved CEO-hours cases.",
       clean: "Recommended records from organization types most similar to RP.",
       tierA: "Only the closest Form 990 peers and job-posting matches.",
       observed: "All records with usable pay, including broader comparisons.",
@@ -4855,6 +5030,7 @@
   }
 
   function encodeModelCategory(key, value) {
+    if (key === "focus_area" && value === "__mixture__") return -1;
     if (value === "__average__") return 0;
     const index = modelCategoryLevels(key).indexOf(value);
     if (index < 0) throw new Error(`Unknown predictive-model category: ${key}=${value}`);
@@ -4862,6 +5038,7 @@
   }
 
   function decodeModelCategory(key, code, fallback) {
+    if (key === "focus_area" && code === -1) return "__mixture__";
     if (code === 0) return key === "ea_relationship" ? fallback : "__average__";
     const index = Number(code) - 1;
     return Number.isInteger(index) && modelCategoryLevels(key)[index] != null
@@ -4870,13 +5047,16 @@
 
   function compactModelState() {
     const compact = {};
-    const methodCode = { intercept: "i", linear: "l", gam: "g" }[state.modelMethod];
+    const methodCode = { intercept: "i", linear: "l", gam: "g", bayesianGam: "a", svr: "s", gp: "p" }[state.modelMethod];
     if (methodCode) compact.m = methodCode;
-    if (state.modelMethod === "bayesian" && state.modelUseAdRanges) compact.d = 1;
+    if (isBayesianMethod() && state.modelUseAdRanges) compact.d = 1;
     if (state.modelMethod !== "intercept" && !state.modelIncludeHighestOtherPay) compact.x = 0;
+    if (state.modelCompatibilityLevel !== 89) compact.u = state.modelCompatibilityLevel;
+    if (state.modelEffectUnits === "log") compact.v = "l";
+    if (isBayesianMethod() && state.modelProfile.focus_area === "__mixture__") compact.j = state.modelFocusWeights;
     Object.entries(MODEL_PROFILE_URL_FIELDS).forEach(([key, code]) => {
       const categorical = MODEL_CATEGORY_KEYS.includes(key);
-      if (state.modelMethod === "intercept" || (state.modelMethod !== "bayesian" && categorical)) return;
+      if (state.modelMethod === "intercept" || (!isBayesianMethod() && categorical)) return;
       if (key === "highest_other_base" && !state.modelIncludeHighestOtherPay) return;
       const value = state.modelProfile[key];
       if (!categorical && !Number.isFinite(value)) return;
@@ -5137,7 +5317,7 @@
       return {
         axisSignature: `model|${JSON.stringify(compactModelState())}`,
         axisLabel: "Predicted CEO Salary", formatKind: "money", position: "CEO",
-        source: state.modelUseAdRanges && state.modelMethod === "bayesian" ? "Form 990s + job-ad ranges" : "Form 990s",
+        source: state.modelUseAdRanges && isBayesianMethod() ? "Form 990s + job-ad ranges" : "Form 990s",
         measure: "Modeled base salary", basis: "July 2026 USD", sample: "Fixed reviewed training cohort",
         distribution: method, weighting: "Predictive model", filters: "Not applied to model training",
         peerOverrides: "0 rows", weightEdits: "0 edits", weightParameters: "Model profile inputs",
@@ -5794,7 +5974,7 @@
       return Boolean(available && spec.selectedIds?.has(row.id));
     }
     if (spec.sample === "sensitivity") return Boolean(available && (
-      row.defaultIncluded || ["sensitivity_only", "structural_sensitivity"].includes(row.analysisStatus)
+      row.defaultIncluded || ["sensitivity_only", "structural_sensitivity", "sensitivity_hours_review"].includes(row.analysisStatus)
     ));
     if (spec.sample === "clean") return Boolean(row.defaultIncluded && row.structurallyClean && available);
     if (spec.sample === "tierA") return Boolean(row.defaultIncluded && available && (row.tier === "A" || row.tier === "strict_primary"));
@@ -6903,7 +7083,7 @@
     return (state.modelUseAdRanges ? definition?.counts : definition?.filingCounts) || definition?.counts;
   }
 
-  function populateModelControls({ normalize = state.modelMethod === "bayesian" } = {}) {
+  function populateModelControls({ normalize = isBayesianMethod() } = {}) {
     const definitions = [
       [refs.modelFocus, "focus_area", true],
       [refs.modelEa, "ea_relationship", false],
@@ -6916,14 +7096,17 @@
     definitions.forEach(([select, key, includeAverage]) => {
       const allLevels = modelCategoryLevels(key);
       const counts = activeModelCategoryCounts(key);
-      const supportedLevels = state.modelMethod === "bayesian" && Array.isArray(counts)
+      const supportedLevels = isBayesianMethod() && Array.isArray(counts)
         ? allLevels.filter((level, index) => Number(counts[index]) > 0) : allLevels;
-      if (normalize && state.modelProfile[key] !== "__average__" && !supportedLevels.includes(state.modelProfile[key])) {
+      if (normalize && !["__average__", "__mixture__"].includes(state.modelProfile[key]) && !supportedLevels.includes(state.modelProfile[key])) {
         const reference = MODEL_PROFILE_DEFAULTS[key];
         state.modelProfile[key] = supportedLevels.includes(reference)
           ? reference : includeAverage ? "__average__" : supportedLevels[0] || reference;
       }
       populateModelSelect(select, supportedLevels, { includeAverage });
+      if (key === "focus_area") {
+        const option = document.createElement("option"); option.value = "__mixture__"; option.textContent = "Custom focus shares"; select.append(option);
+      }
     });
   }
 
@@ -6941,7 +7124,25 @@
     refs.modelLocation.value = state.modelProfile.location_scope;
     refs.modelRemote.value = state.modelProfile.remote_category;
     refs.modelFiscalSponsor.value = state.modelProfile.fiscal_sponsor_category;
-    const bayesian = state.modelMethod === "bayesian";
+    $("#model-compatibility-level").value = state.modelCompatibilityLevel;
+    $("#model-effect-units").value = state.modelEffectUnits;
+    $("#model-focus-mixture").hidden = state.modelProfile.focus_area !== "__mixture__";
+    if (state.modelProfile.focus_area === "__mixture__" && !state.modelFocusWeights) state.modelFocusWeights = modelCategoryLevels("focus_area").map(() => 0);
+    const focusContainer = $("#model-focus-weights");
+    if (!focusContainer.children.length) modelCategoryLevels("focus_area").forEach((label, j) => {
+      const field = document.createElement("label");
+      const title = document.createElement("span"); title.textContent = label;
+      const input = document.createElement("input"); input.type = "number"; input.min = "0"; input.max = "100"; input.step = "any"; input.dataset.focusIndex = j;
+      input.addEventListener("input", () => {
+        state.modelFocusWeights[j] = Number(input.value);
+        const total = state.modelFocusWeights.reduce((sum, value) => sum + value, 0);
+        $("#model-focus-error").textContent = Math.abs(total - 100) > .01 ? `Shares total ${total.toFixed(1)}%; enter 100%.` : "";
+        renderChart(); renderQuantiles(); scheduleUrlState();
+      });
+      field.append(title, input); focusContainer.append(field);
+    });
+    focusContainer.querySelectorAll("input").forEach((input, j) => { input.value = state.modelFocusWeights?.[j] || 0; });
+    const bayesian = isBayesianMethod();
     const intercept = state.modelMethod === "intercept";
     refs.modelUseAdRanges.checked = bayesian && state.modelUseAdRanges;
     refs.modelIncludeHighestOtherPay.checked = state.modelIncludeHighestOtherPay;
@@ -6966,8 +7167,8 @@
       ? "Intercept only uses the overall exact-filing pay distribution; profile inputs do not change its prediction."
       : state.modelMethod === "linear"
         ? `Scale linear uses ${numericInputCount} numeric profile inputs in a linear model fit to exact Form 990 base-pay records.${highestOtherNote}`
-        : state.modelMethod === "gam"
-          ? `The GAM uses ${numericInputCount} numeric profile inputs nonlinearly, not the categorical fields. It was fit to exact Form 990 base-pay records only.${highestOtherNote}`
+        : ["gam", "svr", "gp"].includes(state.modelMethod)
+          ? `This method uses ${numericInputCount} numeric profile inputs and exact Form 990 base-pay records.${highestOtherNote} RP’s CEO role is fully remote; work categories affect only the Bayesian methods.`
           : `The Bayesian multilevel model uses both the numeric profile inputs and categorical fields.${highestOtherNote} Its fixed reviewed cohort is not changed by table filters. Cash-only filings use a separate measurement model. ${state.modelUseAdRanges ? "Advertised ranges contribute as intervals." : "Recruitment postings are excluded."}`;
   }
 
@@ -7084,9 +7285,14 @@
     state.autoBins = compactVersion;
     state.view = enumValue(analysis.vw, ["histogram", "scatter", "model"], state.view);
     if (state.view === "model" && !isCeoPosition()) state.view = "histogram";
-    state.modelMethod = ({ i: "intercept", l: "linear", g: "gam" })[analysis.pm?.m] || "bayesian";
-    state.modelUseAdRanges = state.modelMethod === "bayesian" && analysis.pm?.d === 1;
+    state.modelMethod = ({ i: "intercept", l: "linear", g: "gam", a: "bayesianGam", s: "svr", p: "gp" })[analysis.pm?.m] || "bayesian";
+    state.modelUseAdRanges = isBayesianMethod() && analysis.pm?.d === 1;
     state.modelIncludeHighestOtherPay = analysis.pm?.x !== 0;
+    state.modelCompatibilityLevel = finiteNumber(analysis.pm?.u, 89, 50, 99);
+    state.modelEffectUnits = analysis.pm?.v === "l" ? "log" : "percent";
+    const focusWeights = analysis.pm?.j;
+    state.modelFocusWeights = Array.isArray(focusWeights) && focusWeights.length === modelCategoryLevels("focus_area").length
+      && focusWeights.every((value) => Number.isFinite(value) && value >= 0 && value <= 100) ? focusWeights : null;
     state.modelProfile = { ...MODEL_PROFILE_DEFAULTS };
     Object.entries(MODEL_PROFILE_URL_FIELDS).forEach(([key, code]) => {
       if (!Object.hasOwn(analysis.pm || {}, code)) return;
@@ -7198,6 +7404,7 @@
       scatterXAxis: { numerator: "expenses", denominator: "staff" },
       scatterYAxis: { numerator: "salary", denominator: "expenses" },
       chartColor: "tier", showContours: true, showJobAdIntervals: true,
+      modelCompatibilityLevel: 89, modelEffectUnits: "percent", modelFocusWeights: null,
       modelMethod: "bayesian", modelUseAdRanges: false, modelIncludeHighestOtherPay: true,
       modelProfile: { ...MODEL_PROFILE_DEFAULTS },
       quantileGranularity: "quintiles", customQuantiles: "5, 25, 50, 75, 95", markCurve: true,
@@ -7388,9 +7595,9 @@
   refs.customQuantiles.addEventListener("input", () => { state.customQuantiles = refs.customQuantiles.value; renderQuantiles(); renderChart(); });
   refs.markCurve.addEventListener("change", () => { state.markCurve = refs.markCurve.checked; renderChart(); });
   refs.modelMethod.addEventListener("change", () => {
-    state.modelMethod = ["bayesian", "linear", "gam", "intercept"].includes(refs.modelMethod.value)
+    state.modelMethod = ["bayesian", "bayesianGam", "linear", "gam", "svr", "gp", "intercept"].includes(refs.modelMethod.value)
       ? refs.modelMethod.value : "bayesian";
-    if (state.modelMethod !== "bayesian") state.modelUseAdRanges = false;
+    if (!isBayesianMethod()) state.modelUseAdRanges = false;
     syncModelControls();
     renderAll();
   });
@@ -7442,10 +7649,25 @@
     [refs.modelFiscalSponsor, "fiscal_sponsor_category"],
   ].forEach(([select, key]) => select.addEventListener("change", () => {
     state.modelProfile[key] = select.value;
+    if (key === "focus_area" && select.value === "__mixture__" && !state.modelFocusWeights) {
+      state.modelFocusWeights = modelCategoryLevels("focus_area").map(() => 0);
+    }
+    syncModelControls();
     renderAll();
   }));
+  $("#model-compatibility-level").addEventListener("change", (event) => {
+    const value = Number(event.target.value);
+    state.modelCompatibilityLevel = Number.isFinite(value) && value >= 50 && value <= 99 ? value : 89;
+    event.target.value = state.modelCompatibilityLevel;
+    renderAll();
+  });
+  $("#model-effect-units").addEventListener("change", (event) => {
+    state.modelEffectUnits = event.target.value === "log" ? "log" : "percent";
+    renderAll();
+  });
   refs.modelResetProfile.addEventListener("click", () => {
     state.modelProfile = { ...MODEL_PROFILE_DEFAULTS };
+    state.modelFocusWeights = null;
     syncModelControls();
     renderAll();
   });

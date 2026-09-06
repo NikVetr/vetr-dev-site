@@ -26,6 +26,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from predictive_model_contract import (  # noqa: E402
     predictive_model_input_sha256,
     predictive_training_eligible,
+    apply_role_hours_review,
 )
 
 DEFAULT_INPUT = ROOT / "app-data.js"
@@ -67,6 +68,8 @@ def attach_operating_metadata(data: dict, path: Path) -> None:
     Reading the reviewed CSV directly breaks the otherwise circular dependency
     between rebuilding app-data.js and regenerating its model artifact.
     """
+    from operating_evidence_review import load_reviews, attach_review_fields
+    reviews = load_reviews()
     with path.open(encoding="utf-8", newline="") as handle:
         metadata_rows = list(csv.DictReader(handle))
     by_organization: dict[str, dict[str, str]] = {}
@@ -82,6 +85,8 @@ def attach_operating_metadata(data: dict, path: Path) -> None:
         raise ValueError(f"Operating metadata is missing model organizations: {missing}")
     for row in app_rows:
         metadata = by_organization[row["organization"]]
+        attach_review_fields(row, reviews[row["organization"]])
+        apply_role_hours_review(row)
         remote = tristate(metadata.get("is_remote"))
         remote_category = str(metadata.get("remote_category") or "").strip().casefold()
         expected = "remote" if remote is True else "in-person / hybrid" if remote is False else "unknown"
@@ -372,7 +377,7 @@ def main() -> None:
             "ea_relationship": normalize_ea(str(row.get("eaAffinity") or "")),
             "organization_type": broad_structure(str(row.get("structure") or "")),
             "title_group": normalize_title(str(row.get("titleGroup") or "")),
-            "location_scope": broad_location(str(row.get("location") or "")),
+            "location_scope": row["ceoHiringMarket"],
             "remote_category": normalize_remote(row.get("remoteCategory")),
             "fiscal_sponsor_category": normalize_fiscal_sponsor(row.get("servesAsFiscalSponsor")),
         })
@@ -434,7 +439,7 @@ def main() -> None:
             "ea_relationship": "EA-adjacent",
             "organization_type": "Independent nonprofit",
             "title_group": "CEO",
-            "location_scope": "International / multi-country",
+            "location_scope": data["rpReference"]["ceoHiringMarket"],
             "remote_category": normalize_remote(data["rpReference"].get("remoteCategory")),
             "fiscal_sponsor_category": normalize_fiscal_sponsor(data["rpReference"].get("servesAsFiscalSponsor")),
             "reference_salary": positive((data["rpReference"].get("salary") or {}).get("base")),
@@ -445,6 +450,8 @@ def main() -> None:
             "fitScriptSha256": hashlib.sha256((Path(__file__).parent / "fit_salary_models.R").read_bytes()).hexdigest(),
             "stanModelSha256": hashlib.sha256((Path(__file__).parent / "ceo_salary_model.stan").read_bytes()).hexdigest(),
             "utilsScriptSha256": hashlib.sha256((Path(__file__).parent / "model_utils.R").read_bytes()).hexdigest(),
+            "extensionsScriptSha256": hashlib.sha256((Path(__file__).parent / "model_extensions.R").read_bytes()).hexdigest(),
+            "operatingReviewScriptSha256": hashlib.sha256((ROOT / "scripts" / "operating_evidence_review.py").read_bytes()).hexdigest(),
             "contractScriptSha256": hashlib.sha256((ROOT / "scripts" / "predictive_model_contract.py").read_bytes()).hexdigest(),
         },
     }

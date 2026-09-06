@@ -103,21 +103,24 @@
           <button id="model-reset-profile" class="text-button" type="button">Reset RP inputs</button>
         </div>
         <label class="field compact">
-          <span>Method <button class="info-tooltip" type="button" aria-label="About prediction methods" data-tooltip="Bayesian multilevel modeling uses numeric and categorical inputs. Scale linear and the GAM use the numeric inputs only; intercept only uses no profile inputs. Every method was evaluated on held-out organizations; details appear in Model details below the plot.">?</button></span>
+          <span>Method <button class="info-tooltip" type="button" aria-label="About prediction methods" data-tooltip="Bayesian linear and additive models use numeric and categorical inputs. Linear, GAM, RBF SVR, and Gaussian-process comparisons use numeric inputs; the intercept baseline uses none. Every method was evaluated on held-out organizations; details appear in Model details below the plot.">?</button></span>
           <select id="model-method">
             <option value="bayesian">Bayesian multilevel</option>
+            <option value="bayesianGam">Bayesian GAM</option>
             <option value="linear">Scale linear</option>
             <option value="gam">Numeric-input GAM</option>
+            <option value="svr">RBF support-vector regression</option>
+            <option value="gp">RBF Gaussian process</option>
             <option value="intercept">Intercept only</option>
           </select>
         </label>
         <span id="model-ad-ranges-field" class="model-option">
           <label><input id="model-use-ad-ranges" type="checkbox"> Include ad ranges</label>
-          <button class="info-tooltip" type="button" aria-label="About advertised ranges in the model" data-tooltip="Experimental: advertised low-to-high ranges enter the Bayesian model as intervals, never as midpoint salaries. A separate posting adjustment recognizes that advertised and realized pay are different. The GAM does not use postings.">?</button>
+          <button class="info-tooltip" type="button" aria-label="About advertised ranges in the model" data-tooltip="Experimental: advertised low-to-high ranges enter the Bayesian model as intervals, never as midpoint salaries. A separate posting adjustment recognizes that advertised and realized pay are different. Numeric comparison models do not use postings.">?</button>
         </span>
         <span id="model-highest-other-field" class="model-option">
           <label><input id="model-include-highest-other" type="checkbox" checked> Include highest-other pay</label>
-          <button class="info-tooltip" type="button" aria-label="About highest-other pay in the model" data-tooltip="Use the highest eligible base pay reported for another employee in the same filing as a predictor. Switching this off uses a separately fitted version of the selected model that omits this field.">?</button>
+          <button class="info-tooltip" type="button" aria-label="About highest-other pay in the model" data-tooltip="Use the highest eligible base pay reported for another employee in the same filing as a predictor. This is selectively disclosed pay, without full-time-equivalent adjustment. Switching this off uses a separately fitted version of the selected model that omits this field.">?</button>
         </span>
         <div class="model-input-grid">
           <label><span>Expenses</span><input id="model-expenses" type="number" min="1" step="100000" inputmode="numeric"></label>
@@ -127,13 +130,19 @@
         </div>
         <div id="model-category-inputs" class="model-category-inputs">
           <label><span>Focus area</span><select id="model-focus"></select></label>
+          <div id="model-focus-mixture" class="model-focus-mixture" hidden>
+            <p>Focus shares (%) — a user-specified scenario. Enter shares totaling 100; these are not estimated RP team sizes.</p>
+            <div id="model-focus-weights"></div><small id="model-focus-error" role="alert"></small>
+          </div>
           <label><span>Effective Altruism</span><select id="model-ea"></select></label>
           <label><span>Organization type</span><select id="model-organization-type"></select></label>
           <label><span>Title group</span><select id="model-title"></select></label>
-          <label><span>Location</span><select id="model-location"></select></label>
+          <label><span>CEO hiring geography</span><select id="model-location"></select></label>
           <label><span>Work model</span><select id="model-remote"></select></label>
           <label><span>Fiscal sponsor</span><select id="model-fiscal-sponsor"></select></label>
         </div>
+        <label><span>Uncertainty interval (%)</span><input id="model-compatibility-level" type="number" min="50" max="99" step="1" value="89"></label>
+        <label><span>Driver units</span><select id="model-effect-units"><option value="percent">Percent salary effect</option><option value="log">Log salary</option></select></label>
         <p id="model-settings-note" class="field-description"></p>
       </section>
 
@@ -296,7 +305,7 @@
           </div>
           <section id="model-diagnostics" class="model-diagnostics" hidden aria-label="Prediction-model validation">
             <div class="model-diagnostic-strip">
-              <span><b id="model-cv-error">—</b> held-out typical error</span>
+              <span><b id="model-cv-error">—</b> held-out mean absolute error</span>
               <span><b id="model-cv-coverage">—</b> 90% coverage</span>
               <span><b id="model-profile-support">—</b> profile coverage</span>
               <span><b id="model-training-count">—</b> training records</span>
@@ -398,13 +407,14 @@
               <h3>Grouped 10-fold validation</h3>
               <div class="model-comparison-scroll">
                 <table class="model-comparison-table">
-                  <thead><tr><th scope="col">Method</th><th scope="col">Log RMSE</th><th scope="col">Typical error</th><th scope="col">90% coverage</th><th scope="col">CV log score</th></tr></thead>
+                  <thead><tr><th scope="col">Method</th><th scope="col"><button class="info-tooltip metric-tooltip" type="button" data-tooltip="Root mean squared error of held-out log salaries. Lower is better; large errors receive more weight. Exponentiating gives an error factor, not a percentage MAE.">Log RMSE</button></th><th scope="col"><button class="info-tooltip metric-tooltip" type="button" data-tooltip="Mean absolute percentage error: average of 100 × |predicted salary / observed salary − 1| across held-out exact base salaries. Lower is better. This is an actual salary-scale percentage, not exponentiated RMSE.">Mean error %</button></th><th scope="col"><button class="info-tooltip metric-tooltip" type="button" data-tooltip="Share of held-out exact salaries inside their 90% predictive intervals. A calibrated model aims near 90%; wider intervals can improve coverage without improving precision.">90% coverage</button></th><th scope="col"><button class="info-tooltip metric-tooltip" type="button" data-tooltip="Mean log predictive density at the held-out log salary. Higher is better. Exponentiating a difference between models gives their geometric mean density ratio, not a probability or percent accuracy.">Log score</button></th><th scope="col"><button class="info-tooltip metric-tooltip" type="button" data-tooltip="Continuous ranked probability score, in log-salary units. Scores the full predictive distribution by its distance from the observed salary; rewards both calibration and sharpness. Lower is better.">CRPS</button></th></tr></thead>
                   <tbody id="model-comparison-body"></tbody>
                 </table>
               </div>
             </div>
             <div>
-              <h3>Prediction drivers <button class="info-tooltip" type="button" aria-label="About prediction drivers" data-tooltip="These bars are profile-specific contributions in log-salary units, not model coefficients. A negative bar can mean that a positively associated input is below the model's center. They are predictive associations, not causal effects or board recommendations.">?</button></h3>
+              <h3>Prediction drivers <button class="info-tooltip" type="button" aria-label="About prediction drivers" data-tooltip="Profile contrasts against the model's reference: numeric inputs at their training geometric means, centered categorical effects at zero, and Functional overlap for EA. Percent effects are 100 × (exp(log contrast) − 1) and combine multiplicatively. Kernel models use exact Shapley allocations across the numeric inputs. These are predictive associations, not causal effects.">?</button></h3>
+              <p id="model-driver-reference" class="field-description"></p>
               <div id="model-contributions" class="model-contributions"></div>
             </div>
           </div>
@@ -483,7 +493,7 @@
               </th>
               <th class="filterable-column">
                 <div class="header-controls">
-                  <button type="button" data-sort="location">Location</button>
+                  <button type="button" data-sort="location">CEO market / footprint</button>
                   <div class="filter-menu header-filter-menu" data-filter-menu="location"></div>
                 </div>
               </th>
@@ -585,7 +595,13 @@
     </div>
   </aside>
 
+  <dialog id="model-explanation-dialog" class="model-explanation-dialog" aria-labelledby="model-explanation-title">
+    <form method="dialog"><button class="model-dialog-close" aria-label="Close model explanation">×</button></form>
+    <h2 id="model-explanation-title"></h2><div id="model-explanation-content"></div>
+  </dialog>
   <script src="app-data.js"></script>
+  <script src="model-analysis.js"></script>
+  <script src="model-vignettes.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

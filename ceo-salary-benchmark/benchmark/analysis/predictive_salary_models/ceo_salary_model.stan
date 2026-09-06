@@ -1,4 +1,14 @@
 functions {
+  vector curvature_basis(real x, row_vector knots, matrix adjustment) {
+    vector[2] basis;
+    real last = pow(fmax(x - knots[4], 0), 3);
+    real reference = (pow(fmax(x - knots[3], 0), 3) - last) / (knots[4] - knots[3]);
+    for (j in 1:2) {
+      real raw = (pow(fmax(x - knots[j], 0), 3) - last) / (knots[4] - knots[j]) - reference;
+      basis[j] = (raw - adjustment[j, 1] - adjustment[j, 2] * x) / adjustment[j, 3];
+    }
+    return basis;
+  }
   real normal_interval_lprob(real lo, real hi, real mu, real sigma) {
     if (lo > mu) {
       return log_diff_exp(
@@ -18,6 +28,9 @@ data {
   int<lower=1> K;
   int<lower=1, upper=K> P;
   matrix[N, K] X;
+  int<lower=0, upper=1> use_smooth;
+  matrix[P, 4] smooth_knots;
+  array[P] matrix[2, 3] smooth_adjustment;
   int<lower=0> N_missing;
   array[N_missing] int<lower=1, upper=N> missing_row;
   array[N_missing] int<lower=1, upper=P> missing_col;
@@ -51,6 +64,8 @@ data {
 parameters {
   real alpha;
   vector[K] beta;
+  vector<lower=0>[P * use_smooth] smooth_scale;
+  matrix[P * use_smooth, 2] smooth_raw;
   vector[N_missing] x_missing;
   vector[P] x_location;
   vector<lower=0>[P] x_scale;
@@ -91,6 +106,11 @@ transformed parameters {
   vector[J_fiscal_sponsor] fiscal_sponsor_effect = tau_fiscal_sponsor * (fiscal_sponsor_raw - mean(fiscal_sponsor_raw));
   vector[J_ea] ea_effect;
   vector[N] mu;
+  matrix[P, 2] smooth_effect = rep_matrix(0, P, 2);
+
+  if (use_smooth == 1) {
+    for (j in 1:P) smooth_effect[j] = smooth_scale[j] * smooth_raw[j];
+  }
 
   for (m in 1:N_missing) {
     X_complete[missing_row[m], missing_col[m]] = x_missing[m];
@@ -110,12 +130,19 @@ transformed parameters {
       + remote_effect[remote[n]]
       + fiscal_sponsor_effect[fiscal_sponsor[n]]
       + ea_effect[ea_level[n]];
+    if (use_smooth == 1) {
+      for (j in 1:P) {
+        mu[n] += dot_product(smooth_effect[j], curvature_basis(X_complete[n, j], smooth_knots[j], smooth_adjustment[j]));
+      }
+    }
   }
 }
 
 model {
   alpha ~ normal(12.5, 1);
   beta ~ normal(0, 0.3);
+  smooth_scale ~ normal(0, 0.15);
+  to_vector(smooth_raw) ~ std_normal();
   x_location ~ normal(0, 0.5);
   x_scale ~ lognormal(0, 0.35);
   x_cholesky ~ lkj_corr_cholesky(2);

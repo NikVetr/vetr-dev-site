@@ -1,0 +1,62 @@
+{
+  "reviewed_at": "2026-09-05",
+  "purpose": "Independent source review of RP work arrangement and hiring geography; final organization classifications and their evidence are in the two shard files.",
+  "rethinking_priorities_geography": {
+    "recommended_work_model": "remote",
+    "recommended_hiring_scope": "international",
+    "recommended_ceo_hiring_scope": "unknown",
+    "basis": "The official organization-wide careers policy explicitly describes a fully remote staff and broad cross-border eligibility. It is relevant to the staff market, but is not a CEO vacancy or an executive-specific eligibility policy.",
+    "role_eligibility": {
+      "rule": "In most places, applicants with local work authorization will be considered.",
+      "geographic_preference": "American, European, and African time zones are typically preferred because most staff are in those regions.",
+      "constraint": "Applicants outside those time zones are welcomed, but employees are expected to attend some meetings during working hours in the preferred regions.",
+      "interpretation": "The policy is international and conditional, not worldwide eligibility without qualification. The time-zone language is a preference and meeting-time expectation, not a stated exclusion."
+    },
+    "team_footprint": {
+      "finding": "The same official page says the fully remote staff is currently based in 15 countries.",
+      "interpretation": "This directly supports an internationally distributed team and remote work model. It corroborates broad geographic operations; it does not by itself establish legal hiring eligibility in every country."
+    },
+    "sources": [
+      {
+        "url": "https://careers.rethinkpriorities.org/",
+        "local_path": "benchmark/sources/native/organization_metadata/rp/rethink_priorities_careers.html",
+        "source_kind": "official_careers_page",
+        "quote": "Although we are incorporated in the US, our fully remote staff is currently based in 15 countries.",
+        "supports": [
+          "remote work model",
+          "international team footprint"
+        ]
+      },
+      {
+        "url": "https://careers.rethinkpriorities.org/",
+        "local_path": "benchmark/sources/native/organization_metadata/rp/rethink_priorities_careers.html",
+        "source_kind": "official_careers_page_faq",
+        "quote": "In most places, if you have local work authorization, we will consider your application.",
+        "supports": [
+          "conditional international role eligibility"
+        ]
+      },
+      {
+        "url": "https://careers.rethinkpriorities.org/",
+        "local_path": "benchmark/sources/native/organization_metadata/rp/rethink_priorities_careers.html",
+        "source_kind": "official_careers_page_faq",
+        "quote": "We typically prefer candidates located in American, European, or African time zones.",
+        "supports": [
+          "time-zone preference"
+        ]
+      },
+      {
+        "url": "https://careers.rethinkpriorities.org/",
+        "local_path": "benchmark/sources/native/organization_metadata/job_review_2/085_archived_rethink_priorities_careers.html",
+        "source_kind": "preserved_official_page_capture",
+        "quote": "While we welcome candidates from outside of these time zones, we often have meetings during working hours in these time zones that employees are expected to attend.",
+        "supports": [
+          "outside-region applicants are not categorically excluded",
+          "meeting-time constraint"
+        ]
+      }
+    ],
+    "historical_caveat": "The preserved official capture repeats the current policy language, but its source capture date is not independently established in this review. It corroborates wording, not a dated historical policy.",
+    "benchmark_owner_confirmation": "2026-09-05: RP CEO is a fully remote position. General staff eligibility is a labeled proxy for CEO hiring market, not a verified executive-specific country list."
+  }
+}

@@ -299,8 +299,8 @@ def validate_generated_app(reviewed: list[dict[str, str]]) -> None:
         raise ValueError("Generated app summary has the wrong lingering-organization count")
     summary = payload.get("summary", {})
     expected_summary = {
-        "primaryIncumbentObservations": 122,
-        "validatedBaseObservations": 114,
+        "primaryIncumbentObservations": 120,
+        "validatedBaseObservations": 112,
         "quantitativeJobAds": 17,
         "livingPeerReviewedObservations": 16,
         "livingPeerPromotedObservations": 6,

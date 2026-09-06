@@ -5,6 +5,7 @@ model_dir <- file.path(repo, "benchmark", "analysis", "predictive_salary_models"
 suppressPackageStartupMessages(library(mgcv))
 scope <- new.env()
 source(file.path(model_dir, "model_utils.R"), local = scope)
+source(file.path(model_dir, "model_extensions.R"), local = scope)
 # Load the actual fitting functions without triggering sampling or writing artifacts.
 for (expression in parse(file.path(model_dir, "fit_salary_models.R"))) {
   if (is.call(expression) && identical(expression[[1]], as.name("<-")) &&

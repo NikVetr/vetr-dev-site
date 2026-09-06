@@ -8,6 +8,7 @@ import hashlib
 import json
 import mimetypes
 from pathlib import Path
+from operating_evidence_review import load_reviews
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -161,6 +162,27 @@ def main() -> None:
     extra = sorted(combined.keys() - expected)
     if missing or extra:
         raise ValueError(f"Operating-metadata universe mismatch; missing={missing}, extra={extra}")
+
+    reviews = load_reviews()
+    if set(reviews) != expected:
+        raise ValueError("Job-evidence review does not cover the complete organization universe")
+    for organization, review in reviews.items():
+        row = combined[organization]
+        work = review["work_model"]
+        # Current and historical evidence, inference, and conflicts remain
+        # available in the linked per-organization evidence review.
+        row["is_remote"] = "true" if work == "remote" else "false" if work in {"hybrid", "in_person"} else "unknown"
+        row["remote_category"] = "remote" if work == "remote" else "in-person / hybrid" if work in {"hybrid", "in_person"} else "unknown"
+        row["remote_evidence"] = review["rationale"]
+        evidence = review["evidence"]
+        if evidence:
+            row["remote_source_url"] = evidence[0]["url"]
+            row["remote_local_path"] = evidence[0].get("local_path", "")
+        row["confidence"] = review["confidence"]
+        row["caveats"] = " ".join(filter(None, [review.get("historical_notes"), review.get("conflicts"), review.get("recommendation")]))
+        row["retrieved_at"] = review["reviewed_at"]
+    # User-confirmed role arrangement is independent of RP hiring geography.
+    combined["Rethink Priorities"].update(is_remote="true", remote_category="remote")
 
     output_rows = [combined[organization] for organization in sorted(combined, key=str.casefold)]
     write_csv(OUTPUT, FIELDS, output_rows)

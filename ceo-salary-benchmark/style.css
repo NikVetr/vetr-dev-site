@@ -779,7 +779,7 @@ a.organization-name:hover { color: var(--green); text-decoration: underline; tex
 .source-dialog::backdrop { background: rgba(20, 28, 24, .53); backdrop-filter: blur(2px); }
 .dialog-shell { position: relative; padding: 26px; }
 .dialog-shell h2 { margin: 5px 0 18px; font: 650 24px/1.15 "Aspekta Variable", sans-serif; }
-.dialog-close { position: absolute; right: 13px; top: 10px; border: 0; background: none; font-size: 26px; cursor: pointer; color: var(--muted); }
+.dialog-close, .model-dialog-close { position: absolute; right: 13px; top: 10px; border: 0; background: none; font-size: 26px; cursor: pointer; color: var(--muted); }
 .evidence-value { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; border-block: 1px solid var(--line); background: var(--green-soft); }
 .evidence-value span { color: var(--muted); font-size: 11px; }
 .evidence-value mark { padding: 3px 7px; background: var(--line); color: var(--ink); font-size: 19px; font-weight: 800; font-variant-numeric: tabular-nums; }
@@ -887,3 +887,25 @@ a.organization-name:hover { color: var(--green); text-decoration: underline; tex
     .quantile-panel { max-height: clamp(60px, calc(100dvh - 388px), min(400px, 46dvh)); }
   }
 }
+/* Model specifications and uncertainty views remain usable on small screens. */
+.model-explanation-dialog { width: 88vw; max-width: 1400px; height: 87vh; max-height: 90vh; box-sizing: border-box; padding: 2rem 2.5rem; border: 1px solid #b6c9ce; border-radius: 14px; color: #253b42; background: #fbfdfd; }
+.model-explanation-dialog::backdrop { background: rgb(18 44 52 / 48%); }
+.model-explanation-dialog > form { position: sticky; top: 0; float: right; z-index: 2; }
+.model-explanation-dialog h2 { padding-right: 2rem; }
+.model-explanation-dialog section { margin: 1.5rem 0; }
+.model-explanation-dialog h3 { margin-bottom: .5rem; }
+.model-explanation-dialog p { max-width: 100ch; line-height: 1.6; }
+.model-equation { padding: 1rem; background: #edf3f4; border-radius: 7px; overflow-x: auto; white-space: pre-wrap; line-height: 1.65; font-size: .95rem; }
+.model-effect-figure { width: 100%; min-width: 690px; max-height: 65vh; }
+#model-explanation-content { overflow-x: auto; }
+.model-driver-button { border: 0; padding: 0; background: transparent; font: inherit; color: inherit; text-align: left; text-decoration: underline dotted; cursor: pointer; }
+.model-spec-button { margin-left: .45rem; flex-shrink: 0; }
+.organization-footprint { display: block; font-size: 8px; color: var(--muted); }
+.metric-tooltip { width: auto; height: auto; border: 0; border-radius: 0; background: transparent; color: inherit; font: inherit; text-decoration: underline dotted; white-space: nowrap; }
+.quantile-uncertainty { display: block; font-size: .72rem; color: #52879e; margin-top: .3rem; }
+.model-focus-mixture { grid-column: 1 / -1; padding: .6rem; background: #edf3f4; border-radius: 6px; }
+.model-focus-mixture p { font-size: .75rem; }
+#model-focus-weights label { display: grid; grid-template-columns: 1fr 60px; gap: .4rem; align-items: center; font-size: .73rem; margin: .25rem 0; }
+#model-focus-weights input { width: 60px; }
+#model-focus-error { color: #9f3d33; }
+@media (max-width: 700px) { .model-explanation-dialog { width: 94vw; padding: 1rem; } .model-equation { font-size: .8rem; } }

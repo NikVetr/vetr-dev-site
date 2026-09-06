@@ -27,16 +27,31 @@ EXTRA_TRAINING_ROWS = {
     "SRC-AD-JOYCEIVY-2026": "Full-time organization-wide Executive Director posting; the wide range and optional fractional alternative remain documented caveats.",
 }
 
+# Source-exact pay is retained for sensitivity analysis, but unresolved hours
+# do not satisfy the standard annual full-time leadership target.
+ROLE_HOURS_REVIEW = {
+    "SRC-990-EXT-CENTER-FOR-PUBLIC-INTEGRITY": "Sensitivity only: the 2023 filing reports 0.5 weekly hours for Paul Cheung and several senior officers. Earlier 40-hour evidence does not resolve this year's filing convention.",
+    "SRC-990-EXT-NUCLEAR-THREAT-INITIATIVE": "Sensitivity only: Ernest Moniz is reported at 25 weekly hours, with no related-organization hours, and also held a concurrent external CEO role.",
+}
+
+
+def apply_role_hours_review(row: dict) -> None:
+    reason = ROLE_HOURS_REVIEW.get(str(row.get("id") or ""))
+    if reason:
+        row["defaultIncluded"] = False
+        row["analysisStatus"] = "sensitivity_hours_review"
+        row["eligibilityReview"] = reason
+
 
 ROW_FIELDS = (
     "id", "organization", "defaultIncluded", "analysisStatus", "titleGroup",
     "topic", "eaAffinity", "structure", "location", "expenses", "revenue",
     "staff", "compensationYear", "salary", "range", "highestPaidOtherEmployee", "auditStatus",
-    "remoteCategory", "servesAsFiscalSponsor",
+    "remoteCategory", "servesAsFiscalSponsor", "ceoHiringMarket", "ceoHiringMarketBasis",
 )
 RP_FIELDS = (
     "id", "organization", "expenses", "revenue", "staff", "compensationYear",
-    "salary", "highestPaidOtherEmployee", "remoteCategory", "servesAsFiscalSponsor",
+    "salary", "highestPaidOtherEmployee", "remoteCategory", "servesAsFiscalSponsor", "ceoHiringMarket", "ceoHiringMarketBasis",
 )
 
 
@@ -81,6 +96,8 @@ def predictive_model_input_sha256(data: dict) -> str:
 
 def predictive_training_eligible(source: str, row: dict) -> bool:
     """Return the reviewed target-compatibility decision for one CEO record."""
+    if str(row.get("id") or "") in ROLE_HOURS_REVIEW:
+        return False
     if source == "job_ad" and row.get("auditStatus") != "verified":
         return False
     if row.get("defaultIncluded"):

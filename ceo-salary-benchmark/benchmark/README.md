@@ -35,7 +35,7 @@ These are decision ranges, not estimated population percentiles.
 - **116 historically frozen primary-use Form 990 incumbent observations**, including **79 structurally clean** observations.
 - **17 current quantitative CEO/ED recruitment advertisements**.
 - **110 independently recovered exact Schedule J base observations among the 116 historically frozen primary-use rows**. The original evidence table omitted these fields; `deliverables/validated_form990_compensation.csv` contains the reparsed values. Form 990 Part VII reportable compensation remains a cash/W-2 proxy, not exact base salary.
-- **152 organizations and 153 incumbent rows in the current app inventory** after source-validated post-freeze additions. The dated living review admits **122 incumbent cash observations**, of which **114 report Schedule J base**; together with the 17 postings, the initial base view contains **131 observations across 128 organizations**. The frozen files remain unchanged, while `enrichment/living_peer_universe_review.csv` records every amended disposition.
+- **152 organizations and 153 incumbent rows in the current app inventory** after source-validated post-freeze additions. The dated living review admits **120 default incumbent cash observations**, of which **112 report Schedule J base**; together with the 17 postings, the initial base view contains **129 observations across 126 organizations**. Center for Public Integrity and Nuclear Threat Initiative remain selectable sensitivity records pending CEO-hours resolution; see [the source audit](../ceo_reference_set_audit.md). The frozen files remain unchanged, while `enrichment/living_peer_universe_review.csv` records every amended disposition.
 
 ## Two different reproduction commands
 

@@ -4,6 +4,7 @@ repo <- dirname(dirname(script))
 model_dir <- file.path(repo, "benchmark", "analysis", "predictive_salary_models")
 scope <- new.env()
 source(file.path(model_dir, "model_utils.R"), local = scope)
+source(file.path(model_dir, "model_extensions.R"), local = scope)
 for (expression in parse(file.path(model_dir, "fit_salary_models.R"))) {
   if (is.call(expression) && identical(expression[[1]], as.name("<-")) &&
       is.call(expression[[3]]) && identical(expression[[3]][[1]], as.name("function"))) {
@@ -66,6 +67,8 @@ if ("--stan" %in% commandArgs(trailingOnly = TRUE)) {
   locations <- which(missing, arr.ind = TRUE)
   x[missing] <- 0
   data <- list(N = n, K = 2L * p, P = p, X = cbind(x, 1L * missing),
+               use_smooth = 0L, smooth_knots = matrix(rep(c(-1, -.3, .3, 1), each = p), p),
+               smooth_adjustment = rep(list(matrix(c(0, 0, 0, 0, 1, 1), 2)), p),
                N_missing = nrow(locations), missing_row = locations[, 1], missing_col = locations[, 2],
                log_salary_midpoint = salary, log_salary_lower = salary, log_salary_upper = salary,
                log_cash_proxy = rep(0, n), has_cash = rep(0L, n), cash_equals_base = rep(0L, n),

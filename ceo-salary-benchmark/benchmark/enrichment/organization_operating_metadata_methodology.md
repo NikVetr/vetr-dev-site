@@ -1,71 +1,36 @@
-# Organization work-model and fiscal-sponsor metadata
+# Work arrangement, hiring geography, and fiscal sponsorship
 
-## Purpose and scope
+This salary-blind enrichment covers every organization in the app. The reviewed evidence and unresolved cases are retained in `operating_evidence_review/shard_1.jsonl` and `shard_2.jsonl`; each record includes searches, sources, dates, scope, confidence, reasoning, and historical caveats.
 
-This enrichment adds two organization-level fields to every organization that
-appears in the benchmark application, including organizations that appear only
-in a non-CEO position view:
+## Work arrangement
 
-- whether the organization is remote rather than regularly office/site based;
-- whether the organization itself serves as a fiscal sponsor for other
-  projects.
+Prefer an explicit employer policy. Otherwise, use role-level evidence as an explicitly labeled inference:
 
-The review is independent of compensation. Neither salary nor a model outcome
-was used to assign either field.
+- Multiple different remote vacancies can support a remote designation when no contradictory office requirement is found.
+- Regular on-site requirements support in-person or hybrid. Mixed remote and office roles support a hybrid/mixed designation, with the role-specific nature retained.
+- One ambiguous advertisement, an address alone, an employee review, or unsuccessful searches do not establish the organization-wide arrangement.
+- Conflicting or weak evidence remains unknown. Absence of on-site advertisements is not proof of universal remote eligibility.
 
-## Work-model rule
+The app/model combine hybrid and in-person as `In-person / hybrid`; the underlying review retains their distinction and whether the conclusion is explicit or inferred. RP's CEO is fully remote, also confirmed by the benchmark owner.
 
-`is_remote=true` requires current or reasonably current organization-wide
-evidence that the organization is fully remote, remote-first, or distributed
-without a regular shared office. `is_remote=false` requires evidence of a
-regular office, physical work site, or hybrid arrangement. `unknown` is used
-when sources describe only one role, list an address without describing how
-staff work, conflict across time, or do not establish an organization-wide
-practice.
+## Hiring geography versus footprint
 
-The app combines office-based and hybrid organizations as
-`In-person / hybrid`, giving one binary comparison plus an explicit `Unknown`
-category. More detailed source wording remains in the evidence and caveat
-fields.
+The salary predictor is the CEO role's eligible work locations or hiring market, not the countries where the organization delivers programs. Executive-specific advertisements take precedence. Where those are absent, medium/high-confidence general staff eligibility can supply a labeled `inferred_staff_market`; otherwise the market is unknown. A U.S. incorporation or office address alone does not establish a U.S.-only hiring rule. International programs alone do not establish international hiring.
 
-## Fiscal-sponsor rule
+The app retains CEO hiring scope and its basis, general hiring scope, and operating footprint separately. RP's official careers policy considers applicants in most places with local work authorization, prefers American/European/African time zones, and welcomes others subject to meeting expectations. This supports conditional international eligibility, without implying unrestricted worldwide employment.
 
-`serves_as_fiscal_sponsor=true` requires evidence that the organization itself
-legally or administratively hosts projects operated by other groups. Merely
-being fiscally sponsored, receiving or regranting funds, using a host for one
-program, acting as a secretariat, or having sponsored projects historically is
-not sufficient.
+## Current and historical evidence
 
-`false` is used only when official legal or program evidence affirmatively
-resolves that the organization is sponsored by another entity or otherwise
-does not itself provide the service. Because absence is difficult to prove,
-most cases without affirmative evidence remain `unknown` rather than `false`.
+Official policies, employer advertisements and ATS records are preferred. Historical advertisements, dated search records, employer archives, and available archived captures are considered individually. Each record states whether historical evidence was found. A locally saved current page is not a dated Wayback snapshot. Failed or unavailable archive searches remain documented limitations; they do not justify filling a category.
 
-## Evidence and preservation
+Most compensation records predate this review. Current or inferred policy is a descriptive covariate and cannot establish the arrangement during an earlier compensation year. The review's temporal caveats remain visible in source dialogs. Historic and current evidence can disagree without either being an extraction error.
 
-Current official organization pages, employer recruitment materials, original
-regulatory filings, and signed reports are preferred. Existing locally archived
-primary sources are reused where they directly support the claim. Each row
-preserves the source URL, local path when available, retrieval date, evidence
-sentence, overall confidence, and caveats. Programmatically blocked official
-pages are listed separately in
-`organization_operating_metadata_manual_requests.csv`.
+## Fiscal sponsorship
 
-`model_cohort_operating_metadata_followup.md` documents a second, field-by-field
-review of every unresolved value in the predictive-model cohort, including the
-strict negative-evidence rules and the one resulting source-backed update.
+`serves_as_fiscal_sponsor=true` requires evidence that the organization itself legally or administratively hosts other projects. Being sponsored, regranting money, or receiving grants is insufficient. A negative designation requires affirmative evidence; unresolved cases remain unknown. This field retains its separately reviewed evidence layer.
 
-`scripts/build_organization_operating_metadata.py` validates the complete app
-organization universe, controlled values, source fields, and local paths; then
-it creates the consolidated table and a file-integrity manifest. The generated
-app builder refuses to run when any app organization lacks a row or when the
-boolean and displayed work-model categories disagree.
+## Build and modeling
 
-## Modeling and weighting
+`scripts/operating_evidence_review.py` validates the review schema, source links, controlled labels, search logs, and any claimed local captures. `build_organization_operating_metadata.py` merges the review with fiscal-sponsor evidence and creates the consolidated table and source-integrity manifest. `build_app_data.py` requires complete organization coverage and publishes the evidence behind displayed claims. Only genuinely preserved captures receive local-file links.
 
-The Bayesian salary model treats work model and fiscal-sponsor status as
-regularized multilevel categorical effects. `Unknown` is modeled as its own
-category rather than silently treated as remote or office-based. The app also
-allows either field to be used for chart colors, filters, or editable
-multiplicative weights. Those optional weights are similarity choices, not
-causal claims about compensation.
+Bayesian models use regularized categorical effects with unknown as a separate level. Confidence labels are exposed to users but are not a latent misclassification model. The empirical explorer also exposes these fields as optional filters and weights. Neither fitted associations nor chosen similarity multipliers imply causal salary effects.

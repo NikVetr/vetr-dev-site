@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from predictive_model_contract import EXTRA_TRAINING_ROWS, predictive_training_eligible
+from operating_evidence_review import reviewed_hiring_market
 
 
 def load_prepare_module():
@@ -26,6 +27,29 @@ def load_app_data():
 
 
 class PredictiveModelContractTest(unittest.TestCase):
+    def test_hiring_market_respects_role_evidence_and_separates_footprint(self):
+        review = {"ceo_hiring_scope": "unknown", "ceo_scope_basis": "unknown",
+                  "hiring_scope": "unknown", "operating_scope": "international", "confidence": "high"}
+        self.assertEqual(reviewed_hiring_market(review), ("Location not reported", "unknown"))
+        review.update(hiring_scope="us_only", confidence="medium")
+        self.assertEqual(reviewed_hiring_market(review), ("United States", "inferred_staff_market"))
+        review.update(confidence="low")
+        self.assertEqual(reviewed_hiring_market(review), ("Location not reported", "unknown"))
+        review.update(ceo_hiring_scope="international", ceo_scope_basis="direct_role", confidence="high")
+        self.assertEqual(reviewed_hiring_market(review), ("International / multi-country", "direct_role"))
+
+    def test_rp_remote_profile_and_reported_hours_sensitivities(self):
+        data = load_app_data()
+        self.assertEqual(data["rpReference"]["remoteCategory"], "Remote")
+        reviewed = [row for row in data["incumbents"] if row["organization"] in
+                    {"Center for Public Integrity", "Nuclear Threat Initiative"}]
+        self.assertEqual(len(reviewed), 2)
+        for row in reviewed:
+            self.assertFalse(row["defaultIncluded"])
+            self.assertGreater(row["salary"]["base"], 0)
+            self.assertFalse(predictive_training_eligible("filing", row))
+            self.assertIn("hours", row["eligibilityReview"])
+
     def test_bayesian_models_export_joint_missing_input_provenance(self):
         artifact = json.loads(
             (ROOT / "benchmark" / "analysis" / "predictive_salary_models" / "model_artifact.json")
@@ -71,9 +95,11 @@ class PredictiveModelContractTest(unittest.TestCase):
                 "bayesian", "bayesianNoHighest", "bayesianRanges",
                 "bayesianRangesNoHighest", "gam", "gamNoHighest", "intercept",
                 "linear", "linearNoHighest",
+                "bayesianGam", "bayesianGamNoHighest", "bayesianGamRanges", "bayesianGamRangesNoHighest",
+                "svr", "svrNoHighest", "gp", "gpNoHighest",
             },
         )
-        for model_key in ("bayesian", "bayesianRanges", "gam", "linear"):
+        for model_key in ("bayesian", "bayesianRanges", "gam", "linear", "bayesianGam", "bayesianGamRanges", "svr", "gp"):
             self.assertEqual(
                 [item["key"] for item in artifact["models"][model_key]["preprocessing"]],
                 expected,
@@ -83,6 +109,7 @@ class PredictiveModelContractTest(unittest.TestCase):
         for model_key in (
             "bayesianNoHighest", "bayesianRangesNoHighest", "gamNoHighest",
             "linearNoHighest",
+            "bayesianGamNoHighest", "bayesianGamRangesNoHighest", "svrNoHighest", "gpNoHighest",
         ):
             self.assertEqual(
                 [item["key"] for item in artifact["models"][model_key]["preprocessing"]],
@@ -97,10 +124,10 @@ class PredictiveModelContractTest(unittest.TestCase):
             {"expenses", "revenue", "staff"},
         )
         self.assertEqual(artifact["eaLevels"], ["Functional overlap", "EA-adjacent"])
-        self.assertEqual(sum(artifact["eaFilingCounts"]), 126)
+        self.assertEqual(sum(artifact["eaFilingCounts"]), 124)
         for feature in artifact["categoricalFeatures"]:
             self.assertEqual(len(feature["filingCounts"]), len(feature["levels"]))
-            self.assertEqual(sum(feature["filingCounts"]), 126)
+            self.assertEqual(sum(feature["filingCounts"]), 124)
 
     def test_browser_baselines_preserve_leakage_safe_residual_provenance(self):
         artifact = json.loads(
@@ -160,6 +187,10 @@ class PredictiveModelContractTest(unittest.TestCase):
             ("bayesian_no_highest", False, False), ("bayesian", True, False),
             ("bayesian_ranges_no_highest", False, True),
             ("bayesian_ranges", True, True),
+            ("bayesian_gam_no_highest", False, False), ("bayesian_gam", True, False),
+            ("bayesian_gam_ranges_no_highest", False, True), ("bayesian_gam_ranges", True, True),
+            ("svr_no_highest", False, False), ("svr", True, False),
+            ("gp_no_highest", False, False), ("gp", True, False),
         ]
         self.assertEqual(
             [
@@ -186,7 +217,7 @@ class PredictiveModelContractTest(unittest.TestCase):
                     ads += 1
                 if not row.get("defaultIncluded"):
                     admitted_nondefault.add(row["id"])
-        self.assertEqual((exact, cash, ads), (114, 12, 27))
+        self.assertEqual((exact, cash, ads), (112, 12, 27))
         self.assertEqual(admitted_nondefault, set(EXTRA_TRAINING_ROWS))
 
     def test_known_noncomparable_records_are_not_admitted(self):
@@ -198,6 +229,7 @@ class PredictiveModelContractTest(unittest.TestCase):
             "SRC-AD-AAPO-2026", "SRC-AD-FIRST-EMBRACE-2026",
             "SRC-AD-CETI", "SRC-AD-NPF", "SRC-AD-SNAP",
             "SRC-AD-ALLCHICAGO", "SRC-AD-INJUSTICEWATCH", "SRC-AD-DRW",
+            "SRC-990-EXT-CENTER-FOR-PUBLIC-INTEGRITY", "SRC-990-EXT-NUCLEAR-THREAT-INITIATIVE",
         ):
             self.assertNotIn(row_id, EXTRA_TRAINING_ROWS)
 

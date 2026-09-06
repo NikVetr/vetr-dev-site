@@ -12,7 +12,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from xml.etree import ElementTree
 
-from predictive_model_contract import predictive_model_input_sha256, predictive_training_eligible
+from predictive_model_contract import predictive_model_input_sha256, predictive_training_eligible, apply_role_hours_review
+from operating_evidence_review import load_reviews, attach_review_fields
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -107,6 +108,7 @@ def tristate(value: object) -> bool | None:
 
 
 def attach_organization_operating_metadata(app_rows: list[dict]) -> dict[str, int]:
+    evidence_reviews = load_reviews()
     metadata_rows = rows(ORGANIZATION_OPERATING_METADATA)
     manifest_rows = rows(ORGANIZATION_OPERATING_METADATA_MANIFEST)
     manifest_by_claim = {
@@ -169,6 +171,9 @@ def attach_organization_operating_metadata(app_rows: list[dict]) -> dict[str, in
     for row in app_rows:
         organization = text(row.get("organization"))
         metadata = by_organization[organization]
+        review = evidence_reviews[organization]
+        attach_review_fields(row, review)
+        apply_role_hours_review(row)
         remote = tristate(metadata["is_remote"])
         remote_category = text(metadata["remote_category"]).casefold()
         expected_remote_category = "remote" if remote is True else "in-person / hybrid" if remote is False else "unknown"
@@ -194,6 +199,10 @@ def attach_organization_operating_metadata(app_rows: list[dict]) -> dict[str, in
             "confidence": text(metadata["confidence"]),
             "caveats": text(metadata["caveats"]),
             "retrievedAt": text(metadata["retrieved_at"]),
+            "workModelBasis": review["work_model_basis"],
+            "hiringMarketBasis": row["ceoHiringMarketBasis"],
+            "reviewEvidence": review["evidence"],
+            "historicalNotes": review.get("historical_notes", ""),
         }
         if organization not in counted_organizations:
             counted_organizations.add(organization)
@@ -232,7 +241,7 @@ def load_predictive_model_artifact(
     if not PREDICTIVE_MODEL_ARTIFACT.is_file():
         raise FileNotFoundError(f"Missing predictive-model artifact: {PREDICTIVE_MODEL_ARTIFACT}")
     artifact = json.loads(PREDICTIVE_MODEL_ARTIFACT.read_text(encoding="utf-8"))
-    if artifact.get("schemaVersion") != 2:
+    if artifact.get("schemaVersion") != 3:
         raise ValueError("Unsupported predictive-model artifact schema")
     if artifact.get("production") is not True:
         raise ValueError("Predictive-model artifact is a quick/smoke-test fit, not a production fit")
@@ -285,6 +294,8 @@ def load_predictive_model_artifact(
         "fitScriptSha256": model_dir / "fit_salary_models.R",
         "stanModelSha256": model_dir / "ceo_salary_model.stan",
         "utilsScriptSha256": model_dir / "model_utils.R",
+        "extensionsScriptSha256": model_dir / "model_extensions.R",
+        "operatingReviewScriptSha256": ROOT / "scripts" / "operating_evidence_review.py",
         "contractScriptSha256": ROOT / "scripts" / "predictive_model_contract.py",
     }
     for key, path in expected_scripts.items():
@@ -316,6 +327,8 @@ def load_predictive_model_artifact(
     if set((artifact.get("models") or {})) != {
         "bayesian", "bayesianNoHighest", "bayesianRanges", "bayesianRangesNoHighest",
         "gam", "gamNoHighest", "intercept", "linear", "linearNoHighest",
+        "bayesianGam", "bayesianGamNoHighest", "bayesianGamRanges", "bayesianGamRangesNoHighest",
+        "svr", "svrNoHighest", "gp", "gpNoHighest",
     }:
         raise ValueError("Predictive-model artifact is missing a required model")
     rp_profile = artifact.get("rpProfile") or {}
@@ -387,6 +400,12 @@ def load_predictive_model_artifact(
         "bayesian": (True, False),
         "bayesian_ranges_no_highest": (False, True),
         "bayesian_ranges": (True, True),
+        "bayesian_gam_no_highest": (False, False),
+        "bayesian_gam": (True, False),
+        "bayesian_gam_ranges_no_highest": (False, True),
+        "bayesian_gam_ranges": (True, True),
+        "svr_no_highest": (False, False), "svr": (True, False),
+        "gp_no_highest": (False, False), "gp": (True, False),
     }
     if (
         [row.get("key") for row in comparison if isinstance(row, dict)]
@@ -401,17 +420,22 @@ def load_predictive_model_artifact(
             raise ValueError(f"comparison {row['key']} has the wrong advertised-range specification")
         for metric in (
             "logRmse", "logMae", "oosR2", "medianAbsPercentError", "coverage80",
-            "coverage90", "cvElpd", "meanLogPredictiveDensity",
+            "coverage90", "cvElpd", "meanLogPredictiveDensity", "meanAbsPercentError",
+            "geometricAbsErrorFactor", "logCrps", "interval90MeanLogWidth",
         ):
             require_finite_number(row.get(metric), f"comparison {row.get('key')} {metric}")
-        if row.get("key") in {"bayesian_ranges", "bayesian_ranges_no_highest"}:
+        if expected_ranges:
             require_finite_number(row.get("advertisedIntervalMeanLogScore"), "range-model interval log score")
             require_finite_number(row.get("advertisedPointMeanLogScore"), "range-model point log score")
-        if row.get("key") in {
-            "bayesian", "bayesian_no_highest", "bayesian_ranges",
-            "bayesian_ranges_no_highest",
-        }:
+        if row["key"].startswith("bayesian"):
             require_finite_number(row.get("cashProxyMeanLogScore"), f"{row.get('key')} cash-proxy log score")
+        parts = row["key"].split("_")
+        expected_model_key = parts[0] + "".join(part.title() for part in parts[1:])
+        if row.get("modelKey") != expected_model_key or expected_model_key not in artifact["models"]:
+            raise ValueError("Predictive-model comparison points to the wrong fitted model")
+        expected_method = "bayesianGam" if row["key"].startswith("bayesian_gam") else parts[0]
+        if row.get("method") != expected_method:
+            raise ValueError("Predictive-model comparison has the wrong method family")
 
     full_preprocessing = ["expenses", "revenue", "staff", "highest_other_base"]
     reduced_preprocessing = ["expenses", "revenue", "staff"]
@@ -450,6 +474,8 @@ def load_predictive_model_artifact(
         "bayesianNoHighest": (False, False),
         "bayesianRanges": (True, True),
         "bayesianRangesNoHighest": (False, True),
+        "bayesianGam": (True, False), "bayesianGamNoHighest": (False, False),
+        "bayesianGamRanges": (True, True), "bayesianGamRangesNoHighest": (False, True),
     }
     for model_key, (include_highest, include_ranges) in bayesian_configurations.items():
         model = artifact["models"][model_key]
@@ -483,6 +509,23 @@ def load_predictive_model_artifact(
         require_finite_matrix(
             draws.get("beta"), draw_count, len(expected_design), f"{model_key} draws beta"
         )
+        if len(draws.get("smooth") or []) != len(expected_keys):
+            raise ValueError(f"{model_key} curvature draws are missing")
+        for values in draws["smooth"]:
+            require_finite_matrix(values, draw_count, 2, f"{model_key} curvature draws")
+        if "Gam" in model_key:
+            curvature = model.get("curvature") or []
+            if [item.get("key") for item in curvature] != expected_keys:
+                raise ValueError(f"{model_key} curvature basis is malformed")
+            for item in curvature:
+                require_finite_vector(item.get("knots"), 4, f"{model_key} knots")
+                if any(a >= b for a, b in zip(item["knots"], item["knots"][1:])):
+                    raise ValueError(f"{model_key} knots are not increasing")
+                require_finite_matrix(item.get("adjustment"), 2, 3, f"{model_key} basis adjustment")
+                if any(row[2] <= 0 for row in item["adjustment"]):
+                    raise ValueError(f"{model_key} basis scale is not positive")
+        elif model.get("curvature") is not None or any(value for matrix in draws["smooth"] for row in matrix for value in row):
+            raise ValueError(f"{model_key} linear specification contains curvature")
         require_finite_matrix(draws.get("sigma"), draw_count, 2, f"{model_key} draws sigma")
         for row_index, row in enumerate(draws["sigma"]):
             if any(value <= 0 for value in row):
@@ -526,7 +569,9 @@ def load_predictive_model_artifact(
                     raise ValueError(f"Predictive-model {model_key} {effect_key} support is missing")
                 transformed = math.log(bound) if preprocessing.get("transform") == "log" else bound
                 required.append((transformed - preprocessing["center"]) / preprocessing["scale"])
-            if grid[0] > min(required) + 1e-7 or grid[-1] < max(required) - 1e-7:
+            # Center, scale, and grid are each exported to seven decimals;
+            # their combined round-trip error can exceed one last-place unit.
+            if grid[0] > min(required) + 1e-6 or grid[-1] < max(required) - 1e-6:
                 raise ValueError(f"Predictive-model {model_key} {effect_key} grid does not cover observed support")
         require_finite_number(gam.get("baseline"), f"{model_key} baseline")
         require_finite_vector(gam.get("residuals"), expected_exact, f"{model_key} residuals")
@@ -608,18 +653,81 @@ def load_predictive_model_artifact(
         gam = validate_deterministic_model(model_key, include_highest, require_rank=False)
         validate_design_partition(model_key, gam, include_highest)
 
+    for family in ("svr", "gp"):
+        for highest in (False, True):
+            key = family + ("" if highest else "NoHighest")
+            model = artifact["models"][key]
+            expected_keys = full_preprocessing if highest else reduced_preprocessing
+            validate_preprocessing(key, model, expected_keys)
+            if model.get("trainingRecordIds") != exact_record_ids or model.get("includeAdvertisedRanges") is not False or model.get("includeHighestOtherPay") is not highest:
+                raise ValueError(f"{key} training specification is stale")
+            if model.get("designColumns") != expected_design_columns(highest):
+                raise ValueError(f"{key} design columns are malformed")
+            kernel = model.get("kernel") or {}
+            require_finite_matrix(kernel.get("trainingX"), expected_exact, 2 * len(expected_keys), f"{key} kernel inputs")
+            if family == "gp":
+                require_finite_vector(kernel.get("alpha"), expected_exact, f"{key} alpha")
+                require_finite_matrix(kernel.get("cholesky"), expected_exact, expected_exact, f"{key} Cholesky")
+                for i, row in enumerate(kernel["cholesky"]):
+                    if row[i] <= 0 or any(row[j] != 0 for j in range(i + 1, expected_exact)):
+                        raise ValueError(f"{key} Cholesky is malformed")
+                for field in ("lengthScale", "amplitude", "noise"):
+                    require_finite_number(kernel.get(field), f"{key} {field}", positive=True)
+                if kernel.get("priorMean") != 12.5 or kernel.get("priorInterceptVariance") != 1:
+                    raise ValueError(f"{key} mean prior is stale")
+            else:
+                require_finite_vector(kernel.get("weights"), expected_exact, f"{key} support weights")
+                for field in ("gamma", "cost", "epsilon"):
+                    require_finite_number(kernel.get(field), f"{key} {field}", positive=True)
+                require_finite_number(kernel.get("intercept"), f"{key} intercept")
+                require_finite_vector(model.get("residuals"), expected_exact, f"{key} residuals")
+                if set(model.get("residualRecordIds") or []) != set(exact_record_ids):
+                    raise ValueError(f"{key} residual provenance is stale")
+                draws = (model.get("uncertainty") or {}).get("kernelDraws") or []
+                if len(draws) != 256:
+                    raise ValueError(f"{key} lacks bootstrap fits")
+                for draw in draws:
+                    require_finite_vector(draw.get("weights"), expected_exact, f"{key} bootstrap weights")
+                    require_finite_number(draw.get("intercept"), f"{key} bootstrap intercept")
+
+    for key, model in artifact["models"].items():
+        if key.startswith("bayesian"):
+            continue
+        uncertainty = model.get("uncertainty") or {}
+        if not text(uncertainty.get("method")):
+            raise ValueError(f"{key} lacks an uncertainty specification")
+        if key.startswith("gp"):
+            continue
+        residual_draws = uncertainty.get("residualDraws") or []
+        if len(residual_draws) != 256:
+            raise ValueError(f"{key} lacks residual bootstrap draws")
+        for values in residual_draws:
+            if not isinstance(values, list) or len(values) < 2:
+                raise ValueError(f"{key} has an empty residual bootstrap")
+            require_finite_vector(values, len(values), f"{key} residual bootstrap")
+        if not key.startswith("svr"):
+            coefficients = uncertainty.get("coefficientDraws") or []
+            width = len(coefficients[0]) if coefficients and isinstance(coefficients[0], list) else 0
+            if width < 1:
+                raise ValueError(f"{key} has no coefficient uncertainty")
+            require_finite_matrix(coefficients, 256, width, f"{key} coefficient draws")
+            if key.startswith("gam"):
+                require_finite_vector(uncertainty.get("baselineBasis"), width, f"{key} baseline basis")
+                effects = uncertainty.get("effectBasis") or []
+                if [effect.get("key") for effect in effects] != [item["key"] for item in model["preprocessing"]]:
+                    raise ValueError(f"{key} uncertainty basis does not cover its inputs")
+                for effect in effects:
+                    require_finite_vector(effect.get("z"), len(effect["z"]), f"{key} uncertainty grid")
+                    require_finite_matrix(effect.get("basis"), len(effect["z"]), width, f"{key} uncertainty basis")
+
     method = artifact.get("method") or {}
-    for method_key in (
-        "intercept", "linear", "linearNoHighest", "bayesian", "bayesianNoHighest",
-        "bayesianRanges", "bayesianRangesNoHighest", "gam", "gamNoHighest",
-        "validation",
-    ):
+    for method_key in [*artifact["models"], "validation"]:
         if not text(method.get(method_key)):
             raise ValueError(f"Predictive-model {method_key} method description is missing")
 
     validation = artifact.get("validationDiagnostics") or {}
-    if validation.get("crossValidationFits") != 40:
-        raise ValueError("Predictive-model artifact lacks all 40 Bayesian CV fit diagnostics")
+    if validation.get("crossValidationFits") != 80:
+        raise ValueError("Predictive-model artifact lacks all 80 Bayesian CV fit diagnostics")
     if validation.get("crossValidationDivergences") or validation.get("crossValidationMaxTreedepthHits"):
         raise ValueError("Predictive-model cross-validation contains sampler failures")
     if not isinstance(validation.get("crossValidationMinEbfmi"), (int, float)) or validation["crossValidationMinEbfmi"] < 0.2:
@@ -630,9 +738,7 @@ def load_predictive_model_artifact(
         raise ValueError("Predictive-model cross-validation has inadequate bulk ESS")
     if not isinstance(validation.get("crossValidationMinTailEss"), (int, float)) or validation["crossValidationMinTailEss"] < 100:
         raise ValueError("Predictive-model cross-validation has inadequate tail ESS")
-    for key in (
-        "bayesian", "bayesianNoHighest", "bayesianRanges", "bayesianRangesNoHighest"
-    ):
+    for key in bayesian_configurations:
         diagnostics = artifact["models"][key].get("diagnostics") or {}
         if diagnostics.get("chains") != 4 or diagnostics.get("drawsPerChain") != 1000:
             raise ValueError(f"Predictive-model full fit {key} lacks the required four-chain run")

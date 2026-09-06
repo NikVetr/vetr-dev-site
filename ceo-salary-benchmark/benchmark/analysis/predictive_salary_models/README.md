@@ -1,372 +1,124 @@
 # Predictive CEO salary models
 
-This directory contains the reproducible, fixed-cohort models behind the app's
-experimental **Model** view. The estimand is the distribution of positive annual
-CEO base salary, expressed in July 2026 USD, for a user-specified organization
-profile. The result is a predictive association among reviewed peers; it is not a
-recommended salary, a causal estimate, or a replacement for the app's empirical
-benchmark and sensitivity tools.
+These models estimate the distribution of **positive annual CEO base salary in July 2026 USD**, conditional on an editable organization profile. They describe reviewed disclosures; they do not identify a causal effect or a recommended salary.
 
-## Cohort and target
+## Cohort and specifications
 
-`prepare_model_data.py` builds `training_data.csv` from the generated
-`app-data.js`. It includes the reviewed and admitted annual organization-head
-records with a positive observed pay amount. Admission combines the app's
-recommended records with a documented, hand-reviewed set of additional records:
+The versioned cohort contains **151 records in 147 organization-name groups**: 112 exact Schedule J base salaries, 12 reported-cash proxies, and 27 recruitment observations (25 ranges and two points). RP is a prediction profile only. Center for Public Integrity and Nuclear Threat Initiative are excluded pending reported-hours resolution; see the [reference-set audit](../../../ceo_reference_set_audit.md).
 
-- 114 exact Form 990 Schedule J base-pay observations;
-- 12 Form 990 or 990-EZ reported-cash observations whose base salary is latent;
-- 27 recruitment records (25 advertised intervals and two advertised point
-  amounts);
-- 153 records across 149 normalized organization-name groups; and
-- no Rethink Priorities outcome. RP is retained only as the editable default
-  prediction profile and as a visual reference.
+There are 17 browser specifications:
 
-The three organizations represented in both evidence streams are kept in one
-cross-validation group. A filing amount is modeled as an exact log salary. An
-advertised range retains its adjusted lower and upper bounds rather than being
-replaced by its midpoint.
+| Family | Specifications | Evidence |
+| --- | --- | --- |
+| Intercept | One | Exact-base filings |
+| Scale linear | With/without highest non-CEO pay | Exact-base filings |
+| Numeric GAM | With/without highest non-CEO pay | Exact-base filings |
+| RBF SVR | With/without highest non-CEO pay | Exact-base filings |
+| RBF Gaussian process | With/without highest non-CEO pay | Exact-base filings |
+| Bayesian multilevel linear | With/without other pay × filings/filings plus ads | Exact-base and cash-proxy filings; optional ads |
+| Bayesian multilevel additive | Same four variants | Same evidence model |
 
-The continuous features are log annual expenses, log annual revenue, log
-employee count, and, in one member of each paired specification, log highest
-reported non-CEO Schedule J base pay in the same filing. Every model family is
-fit both with and without that last feature, so its influence is visible rather
-than assumed. The categorical features are broad focus area,
-EA relationship, organization type, CEO-title group, broad location scope,
-organization-wide work model, and whether the organization serves as a fiscal
-sponsor. Category construction is deterministic, source-reviewed, and
-salary-blind. Peer group and similarity score are excluded because they are
-RP-relative judgments assembled from overlapping inputs.
+Numeric inputs are standardized natural logs of expenses, revenue, employees, and optional highest reported non-CEO base pay, with missingness indicators. Removing other pay removes both columns. Recruitment budgets proxy expenses and never duplicate revenue. Numeric preprocessing uses each training fold only.
 
-The combined cohort has 19 missing expense values, 27 missing revenue values, 18
-missing staff values, and 57 missing highest-other-base values. Recruitment
-budgets are kept as expense proxies and are not duplicated into revenue. In the
-Bayesian fit, observed and missing standardized log inputs follow a joint normal
-distribution with a learned location, scales, and regularized correlation matrix.
-Missing values remain latent parameters. Held-out imputations condition jointly
-on that record's observed continuous inputs, using each training-posterior draw;
-the held-out salary is never used. This propagates conditional imputation and
-covariance uncertainty into salary predictions. The GAM remains a
-deterministic challenger and uses the fold-specific transformed center plus active
-missingness indicators. Browser profiles require positive numeric inputs.
+Bayesian categorical inputs are focus, organization type, title group, CEO hiring market, work arrangement, fiscal sponsorship, and EA relationship. Their vocabulary is salary-blind. Functional overlap is the EA reference; the collapsed EA-adjacent label has one signed increment. Peer tiers and RP similarity scores are not predictors.
 
-RP's exported default profile is $20,378,936 in expenses, $20,599,841 in revenue,
-43 employees, $136,142.69 highest reported non-CEO base pay, Research / evidence,
-EA-adjacent, Independent nonprofit, CEO, International /
-multi-country, Remote, and Serves as fiscal sponsor. Its displayed adjusted
-filing salary is $155,230.03 and is never a training outcome. The employee count
-is from RP's 2023 filing, whereas the financial values and compensation are from
-2024.
+Hiring market concerns eligible work locations, separately from operating footprint. Staff eligibility is a labeled proxy where executive-specific evidence is unavailable. RP is fully remote with conditional international general-role eligibility. Current policies may postdate compensation; RP employee count also comes from a different filing year than its financial inputs.
 
-## Bayesian multilevel model
+## Bayesian specification
 
-`ceo_salary_model.stan` defines a normal model on log salary. For record \(i\),
+For standardized numeric input z and missing indicators m:
 
 ```text
-mu[i] = alpha + X[i] beta
-      + ad_offset * I(source is job ad)
-      + focus_effect[focus[i]]
-      + structure_effect[structure[i]]
-      + title_effect[title[i]]
-      + location_effect[location[i]]
-      + remote_effect[remote[i]]
-      + fiscal_sponsor_effect[fiscal_sponsor[i]]
-      + ea_effect[ea[i]]
+log(base_i) ~ Normal(mu_i, sigma_filing)
+mu_i = alpha + sum_j beta_j z_ij + sum_j beta_missing_j m_ij
+       + sum_j sum_k theta_jk B_jk(z_ij) + sum_c a_c[level_ic]
+       + EA_increment * I(EA-adjacent) + ad_offset * I(ad)
 ```
 
-`X` contains standardized log expenses, log revenue, log staff, their three
-missingness indicators, and—only in the paired “with other pay” fits—log highest
-reported non-CEO base pay and its missingness indicator. The reduced fits truly
-remove both columns; they do not hold their coefficients at zero. Centering and
-scaling parameters are estimated from the relevant training data only. The
-salary outcome and advertised bounds are already expressed in July 2026 USD, so
-the model does not add a separate pay-year trend on top of that adjustment. The
-priors are:
+The curvature term is present only in the additive model. Each numeric feature has two natural-cubic curvature bases at its observed training quantiles 0.10, 0.35, 0.65, and 0.90. Each raw basis is residualized against the intercept and linear input and scaled to unit training SD. This separates linear slopes from regularized curvature; tails are linear. With h_j(x) = ((x-k_j)_+³-(x-k_4)_+³)/(k_4-k_j), the raw columns are h_1-h_3 and h_2-h_3. The same basis is evaluated at latent missing values.
 
 ```text
-alpha                         ~ Normal(12.5, 1)
-beta[k]                       ~ Normal(0, 0.3)
-ad_offset                     ~ Normal(0, 0.35)
-sigma[filing]                 ~ Normal(0.35, 0.15), constrained >= 0.12
-sigma[job ad]                 ~ Normal(0.45, 0.18), constrained >= 0.12
+alpha ~ Normal(12.5, 1)
+beta ~ Normal(0, 0.3)
+theta_jk = smooth_scale_j * smooth_raw_jk
+smooth_scale_j ~ half-Normal(0, 0.15); smooth_raw_jk ~ Normal(0, 1)
+a_c[l] = tau_c * (raw_c[l] - mean(raw_c))
+raw_c ~ Normal(0, 1)
 tau_focus/type/title/location ~ half-Normal(0, 0.25)
-tau_remote/fiscal sponsor     ~ half-Normal(0, 0.20)
-raw category effects          ~ Normal(0, 1)
-EA increments                 ~ Normal(0, 0.2)
-input location[k]             ~ Normal(0, 0.5)
-input scale[k]                ~ Lognormal(0, 0.35)
-input correlation             ~ LKJ(2), Cholesky parameterization
-complete standardized inputs  ~ Multivariate Normal(input location, input covariance)
+tau_work/fiscal_sponsor ~ half-Normal(0, 0.20)
+EA_increment ~ Normal(0, 0.2)
+ad_offset ~ Normal(0, 0.35)
+sigma_filing ~ Normal(0.35, 0.15), constrained to [0.12, 1.5]
+sigma_ad ~ Normal(0.45, 0.18), constrained to [0.12, 1.5]
 ```
 
-Each categorical effect is `tau * (raw - mean(raw))`, giving a centered
-multilevel effect with stronger regularization for sparse levels. The app's
-current EA taxonomy has two levels: Functional overlap is the zero point and a
-single signed increment represents EA-adjacent organizations. Historical input
-files retain their finer labels, which are collapsed at model ingress. The
-increment remains signed, so the coding does not impose a salary direction.
+Observed and missing numeric inputs jointly follow MVN(location, covariance), with location ~ Normal(0, 0.5), scales ~ Lognormal(0, 0.35), and correlation ~ LKJ(2). Missing values remain latent. Held-out imputation uses Gaussian conditioning on observed inputs and training-posterior covariance draws; **the held-out salary never enters imputation**.
 
-The joint input likelihood includes observed covariates as well as latent missing
-values. Its covariance is `diag(scale) * correlation * diag(scale)`; the LKJ prior
-regularizes correlations toward zero ([Stan documentation](https://mc-stan.org/docs/functions-reference/correlation_matrix_distributions.html)).
-Salary and missingness-indicator coefficients retain their existing priors. The
-input model shares one distribution across the included records. Recruitment
-budgets still proxy expenses, and recruitment revenue is entirely missing: this
-model transports the observed financial relationship to those records rather
-than identifying an advertisement-specific revenue distribution.
+Cash-only observations do not become base-pay labels. Let log(cash/base) be zero with probability p and otherwise Exponential(rate). The model learns p ~ Beta(2,2) and rate ~ Lognormal(log(10),0.6), constrained to [0.5,100], from paired base/cash disclosures. Marginalizing base salary gives a mixture of normal and exponentially modified normal log-cash densities. Transport to low-paid cash-only disclosures is an assumption.
 
-Exact filings contribute
+Advertised points use the ad normal distribution. A range [L,U] contributes Phi((log U-mu)/sigma_ad)-Phi((log L-mu)/sigma_ad), evaluated with stable log-tail arithmetic. This is an experimental policy-range likelihood, not proof that an actual hire fell within the range. Profile predictions always use the filing source, without the ad offset.
 
-```text
-log(salary[i]) ~ Normal(mu[i], sigma[source[i]])
-```
+Four chains are used per fit: 400 warmup/500 retained draws for each of 80 CV fits; 800/1,000 for each of eight full fits. Adapt delta is .995/.999 and maximum tree depth 13. All salary, covariance, and fitted curvature parameters enter convergence checks. The app rejects failed R-hat, ESS, E-BFMI, divergence, and tree-depth gates. It exports 512 posterior draws per model; full chain CSVs are cached separately.
 
-For an advertised interval `[L, U]`, the likelihood is the normal probability
-mass between `log(L)` and `log(U)`:
+## Numeric comparators
 
-```text
-log(P(log(L) <= latent log salary <= log(U) | mu[i], sigma[job ad]))
-```
+The intercept and linear models use ordinary least squares on log pay. Constant/collinear design columns are explicitly removed and recorded. GAM uses mgcv REML cubic regression splines, k=4 per numeric input, plus active missingness indicators. Missing numeric values are set to the training log center.
 
-The Stan implementation evaluates this stably with differences of log CDFs or
-log complementary CDFs. This integrates over a latent salary in the range; it
-does not assert that the range midpoint was paid. A separate job-ad intercept and
-residual scale acknowledge that an advertised offer and realized filing pay are
-different evidence types. The interval model remains experimental because a
-posted range is an employer policy range, not a classical censoring mechanism.
+SVR uses e1071 epsilon regression with kernel exp(-gamma ||x-x'||²), no additional library scaling, C in {1,4,16}, gamma in {.1,.4}, and epsilon in {.05,.15}. Four organization-grouped inner folds choose the lowest log MSE, including fold-specific preprocessing. Residual calibration repeats tuning within each calibration-training set.
 
-The residual-scale normals are truncated by the declared lower bound. They are
-mildly informative because the posting spread is weakly identified by interval
-observations and near-zero scales produced unstable geometry in sparse folds.
+The exact Gaussian process has mean 12.5 and covariance
+K(x,x') = 1 + A² exp(-||x-x'||²/(2 ell²)), with independent Normal(0,sigma²) observation noise. The constant covariance integrates an uncertain intercept with variance 1. Log ell ~ Normal(log 1,.7), and log A/log sigma ~ Normal(log .3,.6). Hyperparameters maximize the marginal log likelihood plus these log-parameter priors using three L-BFGS-B starts. Bounds are ell [.05,20], A [.02,2], sigma [.03,1.5]. Predictions use the analytic conditional normal distribution, **holding fitted hyperparameters fixed**; this is empirical Bayes, not full hyperparameter posterior sampling.
 
-The production artifact uses four chains. Each grouped cross-validation fit has
-400 warmup and 500 retained iterations per chain; each full fit has 800 warmup
-and 1,000 retained iterations per chain. `adapt_delta` is 0.995 for validation
-fits and 0.999 for full fits; maximum tree depth is 13. Diagnostics are recorded
-for all 40 four-chain cross-validation fits and all four full Bayesian fits. The
-app-data build requires them to pass R-hat, effective-sample-size, divergence,
-tree-depth, and E-BFMI gates,
-but they do not resolve the substantive sparsity and evidence-stream limitations
-described below.
+## Validation and scores
 
-The joint-input production run passes all 44 fit gates: zero divergences and
-tree-depth hits, maximum R-hat 1.0194, minimum bulk ESS 287.7, minimum tail ESS
-203.8, and minimum E-BFMI 0.658. Posterior mean expense/revenue correlations
-range from 0.873 to 0.881 across the four full fits.
+Seed 20260903 assigns normalized organization-name groups to ten outer folds. Repeated filing/ad records stay together. All procedures are evaluated on the **same 112 held-out exact-base outcomes**. Bayesian fits also train on cash proxies; this compares complete procedures, not an isolated Bayesian-versus-frequentist contrast.
 
-## Comparison models
+Numeric transformations, imputation, REML, GP hyperparameters, and SVR tuning are learned within training folds. Intercept/linear/GAM/SVR predictive distributions use Gaussian KDEs of residuals from inner grouped fits entirely inside each outer training set, with bandwidth max(.04, 1.06 SD(r) n^(-.2)). No outer test outcome enters calibration. GP uses its conditional predictive normal.
 
-The audit also fits five exact-filing comparators:
+- Log RMSE = sqrt(mean((log predicted-log observed)²)); lower is better.
+- Mean absolute percentage error = mean(100 |exp(predicted log-observed log)-1|). This is computed per observation, not obtained by exponentiating RMSE. Median absolute percentage error is also retained.
+- Geometric absolute-error factor = exp(mean(|log error|)); an interpretable multiplicative error summary, distinct from MAPE.
+- Out-of-sample R² compares summed held-out squared log errors with the total squared deviation from the scoring cohort’s observed mean log salary.
+- Coverage is the observed share inside nominal 80%/90% predictive intervals; interval width is reported alongside it.
+- Log score is held-out log predictive density on **log salary**; larger is better. ELPD sums it; the table shows its mean. exp(mean score_A - mean score_B) is a geometric density ratio on these same outcomes, not a probability of correctness.
+- CRPS scores the entire log-salary distribution; smaller is better. Normal-mixture CRPS is analytic, using up to 256 evenly spaced posterior components for Bayesian scoring.
 
-- **Intercept only:** the training-fold mean log salary and residual standard
-  deviation.
-- **Scale linear, paired:** linear regression on standardized numeric inputs and
-  active missingness indicators, with and without other pay.
-- **Numeric-input GAM, paired:** REML cubic-regression splines (`k = 4`) for log
-  expenses, revenue, and staff, again with and without other pay.
+Cash-proxy, advertised-point, and interval-mass scores are separate, incomparable evidence targets. `cross_validation_results.csv` and `cross_validation_predictions.csv` retain the reproducible results. One grouped split cannot establish stable algorithm rankings; repeated grouped splits and an independently collected cohort remain priorities.
 
-The browser exposes all nine fitted models. The intercept-only and scale-linear
-models remain deliberately simple validation baselines, but their full-fit
-parameters and organization-grouped out-of-fold residuals are exported so a
-user can inspect the predictions behind their validation rows. No boosted-tree
-model is included in the current artifact and the app must not describe one as
-implemented.
+## Browser uncertainty and drivers
 
-## Leakage-safe grouped validation
+The predictive curve integrates peer variation and available parameter uncertainty. Its quantiles are distinct from uncertainty **about** each quantile. At probability p, Bayesian conditional quantile draws are exp(mu_draw + sigma_draw Phi^-1(p)); their central interval defaults to 89% and can be changed to 50–99%. The integrated-mixture quantile need not equal the median conditional-quantile draw.
 
-The preparation script uses seed `20260903` to assign every normalized
-organization-name group to one of ten deterministic outer folds. All records in
-a group, including filing and recruitment records, share its fold. This prevents
-the known same-name duplicates from crossing folds, but it is not a legal-entity
-or alias-resolution system.
-`fit_salary_models.R` then performs one organization-grouped 10-fold run.
+GP quantile intervals propagate conditional latent-function variance, holding kernel and noise parameters fixed. Linear/intercept models simulate coefficients from their estimated Gaussian covariance. GAM uses mgcv's approximate coefficient covariance including smoothing-parameter correction. Those models combine coefficient draws with 256 organization resamples of OOF residuals. SVR resamples organization groups and refits 256 times with selected hyperparameters and preprocessing fixed, also resampling OOF residuals. These **approximate compatibility intervals** omit some selection/preprocessing uncertainty and are not calibrated coverage guarantees.
 
-For each held-out fold, continuous imputation, centering, and scaling are learned
-from the other nine folds. This includes all joint-input location, scale, and
-correlation parameters. Conditional Gaussian draws use the observed coordinates
-and the Schur-complement conditional covariance, so simultaneous missing values
-remain correlated. No held-out outcome enters this calculation. GAM smoothing is
-fit by REML within the training fold.
-The Bayesian priors and model form are fixed rather than selected against the
-held-out outcomes. The broad categorical vocabulary is fixed for the prepared
-cohort and is outcome-blind; no salary-derived category construction or target
-encoding is used.
+Numeric driver contrasts compare the profile with training-center inputs, preserving other settings; categorical contrasts use centered effects, with Functional overlap the EA reference. Additive curves subtract their value at the reference. Kernel interactions use exact Shapley allocations across numeric features; GP intervals use joint conditional covariance of the coalition predictions. Percent effects are 100(exp(log contrast)-1) and multiply rather than add.
 
-Headline predictive metrics are calculated only on held-out exact Form 990
-observations, so adding job ads is judged by whether it improves prediction of
-the same filing-pay estimand. `cv_elpd` is the sum of held-out filing log
-predictive densities, and `mean_log_predictive_density` is its per-filing mean.
-Ad-range log scores are reported separately. Bayesian coverage uses held-out
-posterior-predictive intervals. Deterministic coverage and log predictive density
-use a Gaussian KDE of log residuals from inner organization-grouped fits within
-each outer training set. The nine remaining outer groups serve as inner folds;
-neither their fitted models nor their calibration residuals use the outer test
-outcomes. The bandwidth is `max(0.04, 1.06 * sd(residuals) * n^(-0.2))`, matching
-the browser's residual distribution. These are empirically validated intervals,
-not a distribution-free coverage guarantee. This is cross-validated ELPD, not in-sample
-lppd. The generated `cross_validation_results.csv` is the canonical results
-table and reports all nine specifications in paired order.
+Clicking a driver shows a forest plot in log or percent units. Category plots preserve joint posterior draws. A fractional focus profile contributes sum_l weight_l a_l on the log scale. Weights must be nonnegative and sum to 100%; this is a declared additive interpolation, not estimated RP team shares. “Average category effect” is the unweighted centered effect across levels.
 
-### Joint missing-input comparison
+## Reproduction and artifact contract
 
-`compare_missing_input_models.py` compares the current OOF predictions with the
-independent-input baseline at git commit `b871665`. It requires byte-identical
-prepared training data and matched model/record keys, folds, observations, and
-outcomes. `missing_input_comparison.csv` reports exact-salary RMSE, 90% coverage,
-and log scores by complete/incomplete input status, with cash-proxy and ad scores
-kept separate. Positive changes in summed log score favor the joint model; the
-number of improving folds is descriptive, not a significance test.
+From `ceo-salary-benchmark/`:
 
-All four Bayesian specifications improve exact-filing RMSE and log score on
-this split. Deterministic comparator results reproduce unchanged.
-
-| Bayesian specification | Independent log-RMSE | Joint log-RMSE | Change in filing ELPD | Folds with higher log score |
-| --- | ---: | ---: | ---: | ---: |
-| Filings, without other pay | 0.3457 | 0.3435 | +0.63 | 7/10 |
-| Filings, with other pay | 0.3378 | 0.3256 | +5.49 | 9/10 |
-| Filings + ads, without other pay | 0.3404 | 0.3338 | +1.67 | 8/10 |
-| Filings + ads, with other pay | 0.3321 | 0.3195 | +5.25 | 8/10 |
-
-For the default filing model with other pay, complete-record RMSE changes from
-0.2932 to 0.2834 and incomplete-record RMSE from 0.5139 to 0.4931. Overall 90%
-coverage rises from 89.5% to 93.9%; incomplete-record coverage rises from 14/18
-to 17/18. These coverage changes do not establish nominal calibration.
-For the ad-augmented model with other pay, incomplete-record ELPD changes by only
-+0.07, so almost all its filing log-score gain comes from complete records.
-
-Cash-proxy mean log scores improve in all four models, but ad scores worsen:
-mean interval scores change from -2.201 to -2.276 without other pay and -2.374
-to -2.393 with it. The two ad point scores also deteriorate. The retained model
-targets filing-source salary; these mixed stream results strengthen the case
-for checking input-distribution transport and ad measurement separately.
-
-Only one of the 114 exact-salary filings has an incomplete three-input profile;
-18 are incomplete when highest-other pay is included. All 27 ads lack revenue.
-These subgroup sizes limit evidence about performance on naturally missing
-inputs. The toy-data tests verify the conditional model's mathematics and Stan
-implementation; they do not validate its transport or disclosure assumptions.
-
-## Browser artifact semantics
-
-`fit_salary_models.R` writes schema-versioned `model_artifact.json`, which
-`scripts/build_app_data.py` embeds into `app-data.js`. The app-data build fails if
-the schema is unsupported, RP exclusion is not asserted, the cohort counts or
-input/script/training hashes are stale, required models are absent, or recorded
-sampler diagnostics fail the build thresholds.
-
-Each categorical level has three support counts: `counts` across all training
-records, `filingCounts` across exact-base and cash-proxy filings, and
-`exactCounts` across exact-base filings alone. EA relationship exposes the same
-three scopes at the top level. Interface support notes use filing counts for a
-filing-target Bayesian prediction, while the exact counts remain available for
-auditing how much of that support uses the direct base-salary estimand.
-
-For each of the four Bayesian fits, the artifact exports 512 evenly spaced posterior draws of
-the intercept, slopes, category effects, source offset, and source-specific
-residual scales. Seeded residual draws remain in the artifact for reproducibility;
-the browser uses the analytic mixture instead. For a browser profile, the app:
-
-1. transforms inputs using the full-fit preprocessing constants;
-2. calculates one filing-source `mu` per posterior draw;
-3. constructs the equal-weight mixture of the corresponding lognormal distributions;
-4. computes its density and inverts its CDF for all displayed quantiles; and
-5. computes expected salary analytically as the draw-average of
-   `exp(mu + sigma_filing^2 / 2)`.
-
-Each Bayesian artifact also records its missing-input specification, feature
-order, and posterior mean correlation matrix. Covariance parameters participate
-in the same sampler convergence gates as salary parameters. Browser profiles
-require complete positive inputs, so no browser-side imputation is needed.
-
-The job-ad offset is never added to an RP/profile prediction: ads can inform the
-range-augmented fit, but the prediction target remains filing-source CEO pay.
-Selecting an `Average category effect` profile contributes the centered zero
-effect (the unweighted mean across the declared category levels, not the
-record-count-weighted mean). The displayed driver bars are median additive
-contributions on the log-salary scale and are predictive associations, not causal
-decompositions.
-
-For each GAM, the artifact exports the full-fit baseline, effect grids with at
-least 141 points spanning standardized values from -3.5 to 3.5 and all observed
-training support, and the 114 organization-grouped out-of-fold residuals. The
-browser linearly interpolates each effect grid and adds a Gaussian KDE of the
-log residuals to the profile prediction. Its density, quantiles, and expected
-salary all use that same mixture distribution. Values beyond an effect grid are
-clamped at its endpoint and separately flagged as outside training support.
-
-For the intercept-only model, the artifact exports the full-fit mean log salary
-and the 114 organization-grouped out-of-fold residuals. For each scale-linear
-model, it additionally exports the full-fit preprocessing constants, candidate,
-active, and explicitly dropped design columns, intercept, and coefficient
-vector. Constant or collinear columns are removed deterministically instead of
-being retained with a silently replaced non-finite coefficient. The with-pay
-candidate schema has eight columns and the without-pay schema has six. Both
-comparators use the same residual KDE as the GAM. Residual and training-record IDs are retained explicitly
-so the app-data build can prove that each exact filing contributes exactly one
-held-out residual and that no other record enters either comparator.
-
-The Model view is deliberately fixed to the versioned Recommended CEO cohort.
-Table inclusion, filters, peer weights, distribution choice, pay-source control,
-pay measure, and dollar-basis choice do not refit it. The model is currently
-disabled for every non-CEO position. Model method, range inclusion, editable
-profile, and quantile settings are encoded in the compact share URL and participate
-in application history.
-
-## Limitations
-
-- The sample is small, selected, and overwhelmingly U.S.-registered independent
-  nonprofits. It is not representative of all nonprofits or labor markets.
-- The EA-adjacent category merges every organization with a documented EA
-  connection. This avoids estimating a sparsely supported finer distinction,
-  but its effect remains descriptive rather than causal.
-- Several other levels have little or no exact-filing support: Independent
-  nonprofit accounts for 108/114 filings, no exact filing is in Outside United
-  States or Education / public engagement, and multiple focus areas contain only
-  a handful of records.
-- Revenue and expenses are strongly related, and conditional coefficient signs
-  should not be read as independent causal effects.
-- The joint Gaussian input model assumes that observed input relationships
-  transport to missing values. Missingness indicators allow salary shifts but do
-  not identify a nonignorable disclosure mechanism. Source-specific measurement
-  error, heavy-tailed inputs, and the ad-budget/filing-expense difference remain
-  sensitivity targets.
-- The four organization groups with repeated records are held together in
-  cross-validation, but the likelihood does not add a separately identifiable
-  organization random effect; repeated rows remain conditionally independent.
-- Work-model evidence is resolved for 115 of 201 app organizations, while
-  fiscal-sponsor status is resolved for only 17. `Unknown` is a modeled category,
-  not evidence of an in-person workplace or absence of sponsorship.
-- Work-model and fiscal-sponsor classifications describe the 2026 review
-  snapshot and may not match an older compensation year.
-- One Form 990-EZ officer-compensation observation shares the broader reported-
-  cash measurement model even though its source definition differs from Part VII.
-- Schedule J base-pay availability is selective, and job-ad covariates are often
-  missing. Interval treatment preserves advertised bounds but cannot remove
-  evidence-stream selection or measurement differences.
-- Validation uses one deterministic 10-fold assignment, not repeated folds or an
-  external test set. Model-comparison differences have no cross-validation
-  standard errors.
-- Cross-validation groups use normalized organization names rather than a
-  fully resolved legal-entity and alias map. Known same-name filing and job-ad
-  records stay together, but unresolved aliases or affiliated entities could
-  still create dependence across folds.
-- The normal log-residual assumption may understate tail risk. Posterior-predictive
-  ranges describe modeled peer variability, not uncertainty about a board's
-  appropriate compensation decision.
-
-## Reproduction
-
-From the repository root:
-
-```bash
+```sh
+python3 scripts/build_organization_operating_metadata.py
 python3 benchmark/analysis/predictive_salary_models/prepare_model_data.py
 Rscript benchmark/analysis/predictive_salary_models/fit_salary_models.R .
-python3 benchmark/analysis/predictive_salary_models/compare_missing_input_models.py
-Rscript tests/test_salary_model_missing_inputs.R --stan
+npm run build
+npm run test:statistics
+npm run test:data
+npm test
 ```
 
-The R run requires `cmdstanr`, CmdStan, `jsonlite`, and `mgcv`. Together the two
-commands rewrite the training cohort, cross-validation predictions and metrics,
-and browser artifact; review all diffs before publishing. `--quick` is a
-development smoke run with far fewer Stan iterations and must not be published as
-the validated artifact.
+Preparation applies reviewed eligibility/geography overlays to app data and records input/script hashes. The build rejects stale hashes and any schema other than the supported production contract. Schema 3 contains all 17 named models, held-out record IDs, uncertainty arrays, category support counts, sampler diagnostics, and recorded R/package/CmdStan versions. `--quick` cannot replace a production artifact.
+
+Large fits are stored under the ignored `tmp/predictive-model-cache/` with signatures covering Stan data, code, version, seed, and sampler settings. For the repository's worker cluster, `SALARY_CLUSTER_PREPARE=<requests-directory> Rscript .../prepare_cluster_fits.R .` exports exact requests for uncached fits. Run `cluster_fit_worker.R LOCAL_STAGE FIT_SIGNATURE PUBLISH_DIRECTORY` on a worker with CmdStan 2.38.0; it publishes integrity manifests plus four CSVs to the explicitly supplied, existing shared directory. Import verifies signatures and CSV checksums before postprocessing.
+
+### Historical missing-input comparison
+
+`missing_input_comparison.csv` documents the earlier 153-record/114-exact cohort against independent-input baseline commit b871665. It is **historical**, not a comparison of the current changed cohort. `compare_missing_input_models.py` deliberately requires identical prepared data, folds, IDs, and outcomes; it must not be run across changed cohorts. Its joint-input improvements and the earlier “97% Copenhagen plus ORCID” excess-error attribution do not automatically carry over to new folds or models.
+
+## Limits and priorities
+
+Disclosure and peer selection, correlated scale predictors, sparse categories, current-versus-historical policy, and cash/ad measurement assumptions constrain interpretation. The joint Gaussian input model assumes observed relationships transport to missing records and does not identify nonignorable disclosure. The browser requires positive complete numeric inputs; unsupported profiles need particular care. Model quantile intervals are conditional on this cohort and model, not uncertainty about representativeness.
+
+Prioritize verified comparable additions, time-aligned operating evidence, repeated grouped validation, prior/measurement sensitivity, and joint support checks. Do not exclude correctly measured organizations because a particular model has large residuals.

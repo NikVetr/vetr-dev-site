@@ -1,4 +1,49 @@
-# Compensation benchmark audit — 2026-09-04
+# Compensation benchmark audit
+
+## Current evidence and model review — 2026-09-05
+
+The source audit covers all 153 incumbent inventory rows and 38 salary-bearing advertisements. **All 129 positive incumbent compensation records match their source values**; 24 rows have no applicable positive amount. This combines 121 XML reparses, seven rendered/PDF reviews, and Copenhagen's scanned filing. Thirty-three advertisements are corroborated; five retain explicit unresolved/third-party-only status, and none of those five trains the current models. See [the source audit](ceo_reference_set_audit.md) for scope and source-level limitations.
+
+**Reported hours change eligibility, not the extracted pay.** Center for Public Integrity reports Paul Cheung at 0.5 hours alongside other senior officers, leaving a possible filing convention unresolved. Nuclear Threat Initiative reports Ernest Moniz at 25 hours and his official biography identifies concurrent external CEO work. Both are off in the default empirical sample and excluded from model training, with source-exact amounts retained in the Recommended + broader preset and manual sensitivity selection.
+
+**Retain Copenhagen Consensus Center and ORCID.** Copenhagen's single employee counts the U.S. filer payroll rather than its global contractor/expert network. ORCID supplies membership-funded research infrastructure and has international, geographically differentiated pay. These are reasons for structural sensitivity analyses, not evidence that their CEO salaries were mis-extracted. In ORCID's XML, the highest disclosed non-CEO base salary is $98,827 for finance director Thomas Tepper Jr., reported at 30 hours; foreign technology director Will Simpson reports $139,527 cash but no separate Schedule J base. The predictor therefore measures the highest *disclosed* base amount, without full-time-equivalent adjustment, rather than the organization's highest full-time salary.
+
+All 201 organizations have individual operating-evidence reviews: 69 remote, 70 hybrid/mixed, five in-person, and 57 unknown. Explicit employer policy and indirect multi-ad inference are distinguished. CEO eligibility or an explicitly inferred staff market is separate from international operations. RP's CEO is fully remote. Historical gaps and the mismatch between current policy and older pay years remain visible.
+
+### Fitted model results
+
+The common scoring cohort is 112 exact-base filings, with 12 cash proxies and optionally 27 advertisements used by the Bayesian procedures. The following are filing-only specifications **with highest-other pay**, evaluated in the same organization-grouped ten-fold split:
+
+| Model | Log RMSE | Mean absolute error % | 90% coverage | Mean log score | Log CRPS |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Scale linear | 0.294 | 22.8% | 92.9% | −0.256 | 0.162 |
+| Numeric GAM | 0.283 | 21.2% | 92.9% | −0.165 | 0.154 |
+| Bayesian linear | 0.318 | 22.2% | 93.8% | −0.235 | 0.167 |
+| Bayesian GAM | 0.336 | 23.0% | 92.9% | −0.283 | 0.175 |
+| RBF SVR | 0.288 | 22.5% | 93.8% | −0.241 | 0.159 |
+| RBF GP | 0.291 | 22.6% | 86.6% | −0.153 | 0.158 |
+
+Lower errors/CRPS and higher log scores are preferable; coverage needs interval-width context. The GP has the strongest density score here but lower-than-nominal observed coverage. The numeric GAM leads point error and CRPS. **The Bayesian additive model does not improve the multilevel linear model in this test.** This argues against missing additive nonlinearities as a sufficient explanation; it does not establish that nonlinearities never matter. Hyperparameters and priors were not revised to chase this ranking.
+
+Copenhagen and ORCID account for 89.6% of the Bayesian linear model's **net excess squared log error over the numeric GAM** on these folds, not 89.6% of its total error. The earlier approximately 97% statement concerns the preceding cohort and folds. Their held-out predictions remain too low in both Bayesian specifications; curvature alone makes these two errors larger. Prioritize matched exact-only and category ablations, full-time/disclosure-aware other-pay measurement, repeated grouped splits, and prior sensitivity before choosing a default model from this one ranking.
+
+All **80 CV fits and eight full Bayesian fits pass the unchanged substantive sampler gates**: zero divergences or tree-depth hits; CV maximum R-hat 1.0429 and minimum bulk/tail ESS 120.4/254.0; full-fit maximum R-hat 1.0072 and minimum bulk/tail ESS 1018.2/982.6. Both input-covariance and fitted spline parameters are checked.
+
+### Browser and numerical contract
+
+The app exposes 17 fitted variants with individual mathematical vignettes, actual mean absolute percentage errors, proper distribution scores, metric tooltips, fractional focus inputs, and log/percent driver forest plots. Separate user-selectable percentile intervals default to 89%. Bayesian intervals use posterior conditional quantiles; GP intervals condition on fitted hyperparameters; comparator intervals use disclosed Gaussian/organization-bootstrap approximations. None identifies uncertainty about cohort representativeness.
+
+Production integration verifies scalar spline evaluation, JSON null handling for absent curvature, and GAM grid support within accumulated seven-decimal serialization error. The latter tolerance is one millionth of a standardized input unit; it does not permit substantive extrapolation beyond the exported grid. The cached full-fit results are regenerated through the same fit script after serialization corrections.
+
+`npm run build`, `npm run test:data` (20 Python unit tests and four data audits), `npm run test:statistics` (seven Node tests and the R numerical, calibration, missing-input, and extension checks), and `git diff --check` pass. All 36 distinct Playwright checks pass across the full suite and focused reruns. The final full run passed 35; its URL round-trip test had waited for an already-present URL parameter rather than the latest filter value. Waiting for that exact encoded value preserves the restoration assertion and passes twice. Desktop/mobile inspection also covers all 17 specification dialogs, driver forests, and uncertainty intervals for all 99 percentiles.
+
+The [project summary](summary.md), [model specification and reproduction guide](benchmark/analysis/predictive_salary_models/README.md), and [operating-evidence methodology](benchmark/enrichment/organization_operating_metadata_methodology.md) describe the current architecture and assumptions.
+
+---
+
+## Historical correctness audit — 2026-09-04
+
+The following findings, cohort sizes, and results describe their explicitly dated baseline and earlier resolutions, rather than the current 17-model artifact.
 
 Review of the static application, data preparation and validation, archived analysis, and predictive R/Stan models. The findings and original check results below describe the pre-fix version; the five confirmed findings have now been addressed. Evidence and historical report/workbook deliverables are unchanged.
 
