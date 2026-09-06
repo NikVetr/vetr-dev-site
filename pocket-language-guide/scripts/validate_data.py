@@ -234,8 +234,20 @@ def main():
             rel = f"lang/{code}/{group}.csv"
             if not (DATA / rel).exists():
                 continue
+            # A duplicate `concept_id` *within a pack* was the one shape of duplicate
+            # nothing looked for. `concepts/*.csv` has been checked since the
+            # beginning, but `loadLanguage` builds a dictionary and silently lets the
+            # last row win -- so a re-imported edit or a careless append leaves two
+            # rows for one concept, one of them dead, and every downstream count
+            # agrees with itself while printing the wrong cell. Found by a hand-written
+            # scan after it had already happened to `lang/it/profanity.csv`.
+            in_pack = set()
             for line, row in enumerate(load(rel), start=2):
                 cid = row["concept_id"]
+                if cid in in_pack:
+                    errors.append(f"{rel}:{line} duplicate concept_id {cid!r} -- "
+                                  "loadLanguage keeps the last row and drops this one")
+                in_pack.add(cid)
                 seen.add(cid)
                 if cid not in concepts:
                     errors.append(f"{rel}: unknown concept_id {cid!r}")

@@ -236,7 +236,7 @@ export async function buildSheet(ctx, spec, edits) {
     sourceRows,
     respell,
     plan: layout({
-      blocks, theme, spec, corpus, measurer, registry, respellLegend: legend,
+      blocks, theme, spec, corpus, measurer, registry, respellLegend: legend, emergencyLabels,
     }),
   };
 }

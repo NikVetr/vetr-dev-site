@@ -211,6 +211,12 @@ function emptyColumns({ blocks, theme, spec, corpus }) {
  * @property {Awaited<ReturnType<import('../pack.js').loadCorpus>>} corpus
  * @property {ReturnType<import('../measure.js').createMeasurer>} measurer
  * @property {ReturnType<import('../fonts.js').createFontRegistry>} registry
+ * @property {Record<string,string>} [emergencyLabels]  the ten service words in the
+ *   reader's language, from `data/registry/emergency-labels/<source>.csv`. Passed in
+ *   for the same reason the legend is -- the solver does not load files -- and needed
+ *   because the head band's `region` slot builds the same note the section does: with
+ *   the default it printed `police` and `ambulance` in English on every sheet, for all
+ *   twenty-three readers, while the note block two inches below it was correct.
  * @property {string} [respellLegend]  the reader's own key to the respelling column,
  *   from the `legend` field of their rule table. Passed in rather than read here,
  *   because the solver does not load files. The romanisation half of the same slot
@@ -325,7 +331,9 @@ function headText(input, face, faces, band) {
       return [{ text: `${name(spec.target)} \u2192 ${name(spec.source)}`, bold: false }];
     }
     if (slot === 'region') {
-      const text = emergencyNote(corpus, spec.region)?.text ?? '';
+      const text = emergencyNote(
+        corpus, spec.region, spec.source, input.emergencyLabels ?? {},
+      )?.text ?? '';
       if (!text) return [];
       // The digits bold and the service words plain. This is the one piece of
       // furniture somebody reads in an emergency, and a number set in the same
