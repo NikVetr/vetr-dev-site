@@ -9,7 +9,7 @@
 // to hover to find out which is which.
 
 import { nextIndex } from './keys.js';
-import { PERCENT_FIRST, t, uiLanguage } from './i18n.js';
+import { PERCENT_FIRST, regionName, t, uiLanguage } from './i18n.js';
 import { PRIORITY_STEPS } from '../core/pack.js';
 
 const NS = 'http://www.w3.org/2000/svg';
@@ -371,19 +371,31 @@ export function typefaceGlyph(family) {
 }
 
 /**
- * Export resolution, as a page with a coarse or fine grain over it.
+ * Export resolution, as a checkerboard whose cells get smaller.
+ *
+ * **A checkerboard rather than a grid of dots**, which is what this was: dots with
+ * gaps between them lose contrast as they shrink, so at 600dpi the step was 2 and the
+ * dot 1, and the glyph read as a single field of grey rather than as a fine grain. A
+ * checkerboard covers half its area at every density, so the three glyphs differ only
+ * in cell size — which is the one thing they are meant to say — and none of them turns
+ * to mush. It is also the idiom every image editor uses for the same quantity.
+ *
+ * An even number of cells across, so opposite corners agree and the pattern reads as
+ * a grid rather than as a diagonal.
  * @param {number} dpi
  */
 export function dpiGlyph(dpi) {
   const box = 30;
   const svg = frame(box, box);
   svg.append(svgEl('rect', { x: 5, y: 4, width: 20, height: 22, rx: 1.5, class: 'g-page' }));
-  const step = dpi >= 600 ? 2 : dpi >= 300 ? 3.4 : 5.2;
-  for (let x = 7; x < 24; x += step) {
-    for (let y = 6; y < 24; y += step) {
+  const cells = dpi >= 600 ? 8 : dpi >= 300 ? 4 : 2;
+  const w = 16 / cells;
+  const h = 18 / cells;
+  for (let i = 0; i < cells; i += 1) {
+    for (let j = 0; j < cells; j += 1) {
+      if ((i + j) % 2 !== 0) continue;
       svg.append(svgEl('rect', {
-        x, y, width: Math.max(0.7, step - 1), height: Math.max(0.7, step - 1),
-        class: 'g-ink faint',
+        x: 7 + i * w, y: 6 + j * h, width: w, height: h, class: 'g-ink faint',
       }));
     }
   }
@@ -938,20 +950,30 @@ export function paletteControl({ themes, themeId, themeColors, onChange }) {
   let state = { themeId, themeColors };
   const roles = (/** @type {string} */ id) => Object.values(themes[id]?.colors?.roles ?? {});
 
+  // **Each swatch says what it colours.** These were six bare squares in a row: the
+  // name was in `title` and `aria-label`, so a screen reader and a slow hover got it
+  // and nobody else did -- and the one thing a reader needs to know here is which of
+  // the five section roles they are about to change. The caption is the same string
+  // the ink-mode and theme glyphs are labelled from, so the vocabulary matches the
+  // rest of the panel.
   const swatches = COLOUR_KEYS.map((entry) => {
     const input = /** @type {HTMLInputElement} */ (document.createElement('input'));
     input.type = 'color';
     input.className = 'swatch';
-    input.setAttribute('aria-label', t(entry.labelKey));
-    input.title = t(entry.labelKey);
     input.addEventListener('input', () => onChange({
       themeColors: { ...currentColours(), [entry.key]: input.value },
     }));
-    return { ...entry, input };
+    const label = document.createElement('label');
+    label.className = 'swatch-labelled';
+    const caption = document.createElement('span');
+    caption.className = 'small muted';
+    caption.textContent = t(entry.labelKey);
+    label.append(input, caption);
+    return { ...entry, input, label };
   });
   const custom = document.createElement('div');
-  custom.className = 'numeric-custom swatches';
-  custom.append(...swatches.map((s) => s.input));
+  custom.className = 'swatches';
+  custom.append(...swatches.map((s) => s.label));
 
   /** Every colour the reader could have changed, defaulted from the base theme. */
   const currentColours = () => {
@@ -1021,30 +1043,6 @@ export function redrawGlyphs(group, glyphs) {
   });
 }
 
-/**
- * A page with a rule of furniture along the top, the bottom, or neither.
- * @param {'none'|'top'|'bottom'} at
- */
-export function headGlyph(at) {
-  const box = 30;
-  const svg = frame(box, box);
-  svg.append(svgEl('rect', { x: 5, y: 3, width: 20, height: 24, rx: 1.5, class: 'g-page' }));
-  const rows = at === 'top' ? [10, 14, 18, 22] : at === 'bottom' ? [7, 11, 15, 19] : [7, 11, 15, 19, 23];
-  for (const y of rows) {
-    svg.append(svgEl('rect', { x: 7.5, y, width: 15, height: 1.6, rx: 0.6, class: 'g-ink faint' }));
-  }
-  if (at !== 'none') {
-    // The furniture itself: short, at the edge, and in the accent so it reads as
-    // the thing being switched on.
-    svg.append(svgEl('rect', {
-      x: 7.5, y: at === 'top' ? 6 : 23.5, width: 7, height: 1.8, rx: 0.6, class: 'g-accent',
-    }));
-    svg.append(svgEl('rect', {
-      x: 19, y: at === 'top' ? 6 : 23.5, width: 3.5, height: 1.8, rx: 0.6, class: 'g-accent',
-    }));
-  }
-  return svg;
-}
 
 /**
  * Which phone, once "Phone screen" is chosen.
@@ -1362,14 +1360,19 @@ export function backgroundGlyph(mode, colours, flag, tint) {
  * @param {import('../core/types.js').SheetSpec['background']} config.value
  * @param {() => string[]} config.roleColours
  * @param {string[]} config.flagColours
+ * @param {string[]} [config.regions]  every country the target language serves
+ * @param {(code:string) => string[]} [config.regionColours]  one country's flag colours
  * @param {(patch:{background:import('../core/types.js').BackgroundSpec})=>void} config.onChange
  */
-export function backgroundControl({ value, roleColours, flagColours, onChange }) {
+export function backgroundControl({
+  value, roleColours, flagColours, regions = [], regionColours = () => [], onChange,
+}) {
   let state = {
     mode: value?.mode ?? 'none',
     color: value?.color ?? '#F6F2EA',
     strength: value?.strength ?? 0.06,
     rowShading: value?.rowShading ?? 1,
+    flagRegions: value?.flagRegions ?? regions.slice(0, 2),
   };
 
   const swatch = /** @type {HTMLInputElement} */ (document.createElement('input'));
@@ -1384,7 +1387,48 @@ export function backgroundControl({ value, roleColours, flagColours, onChange })
   strength.max = '0.16';
   strength.step = '0.01';
   strength.setAttribute('aria-label', t('format.backgroundStrength'));
-  strength.title = t('format.backgroundStrength');
+
+  /**
+   * Which of the target language's countries the flag wash reads.
+   *
+   * It read the registry's first two unconditionally, so a Spanish card was Spain and
+   * Mexico and an Arabic one Saudi Arabia and Egypt however far from either you were
+   * standing — and for the eight-country languages that is a decision the reader is
+   * the only one able to make. Toggles rather than a `<select>`, because more than one
+   * is the interesting case and the wash blends them.
+   *
+   * The swatch is the flag's own colours rather than its emoji: regional-indicator
+   * pairs do not render as flags on Windows, which `ui/flags.js` documents at length —
+   * and here the colours *are* the setting, so showing them is more honest than
+   * showing a picture of them.
+   */
+  const flagPicker = document.createElement('div');
+  flagPicker.className = 'flag-picker';
+  const flagBoxes = regions.map((/** @type {string} */ code) => {
+    const box = /** @type {HTMLInputElement} */ (document.createElement('input'));
+    box.type = 'checkbox';
+    box.addEventListener('change', () => push({
+      flagRegions: flagBoxes
+        .filter((/** @type {{box:HTMLInputElement}} */ f) => f.box.checked)
+        .map((/** @type {{code:string}} */ f) => f.code),
+    }));
+    const strip = document.createElement('span');
+    strip.className = 'flag-strip';
+    for (const colour of regionColours(code)) {
+      const band = document.createElement('span');
+      band.style.background = colour;
+      strip.append(band);
+    }
+    const label = document.createElement('label');
+    label.className = 'flag-choice';
+    label.title = regionName(code);
+    const name = document.createElement('span');
+    name.className = 'small muted';
+    name.textContent = regionName(code);
+    label.append(box, strip, name);
+    flagPicker.append(label);
+    return { code, box };
+  });
 
   // How much of the alternating item shading there is -- the other half of a page
   // background, since an unshaded row used to paint paper straight over the wash and
@@ -1399,9 +1443,21 @@ export function backgroundControl({ value, roleColours, flagColours, onChange })
   shading.title = t('format.backgroundRows');
   shading.addEventListener('input', () => push({ rowShading: Number(shading.value) }));
 
+  // Both sliders carry a visible caption. The strength one had its name in
+  // `aria-label` only, so on screen it was an unlabelled slider next to an unlabelled
+  // swatch and the reader had to drag it to find out what it did.
+  const strengthField = document.createElement('div');
+  strengthField.className = 'numeric-custom';
+  strengthField.append(
+    Object.assign(document.createElement('span'), {
+      className: 'small muted', textContent: t('format.backgroundStrength'),
+    }),
+    strength,
+  );
+
   const custom = document.createElement('div');
-  custom.className = 'numeric-custom';
-  custom.append(swatch, strength);
+  custom.className = 'background-custom';
+  custom.append(swatch, strengthField, flagPicker);
   // Under the background's own slider, and always offered: the item shading is worth
   // turning down on white paper too, where it is simply a cleaner card.
   const rowsField = document.createElement('div');
@@ -1417,9 +1473,11 @@ export function backgroundControl({ value, roleColours, flagColours, onChange })
     swatch.value = state.color;
     strength.value = String(state.strength);
     swatch.hidden = state.mode !== 'tint';
-    strength.hidden = state.mode === 'tint' || state.mode === 'none';
+    strengthField.hidden = state.mode === 'tint' || state.mode === 'none';
+    flagPicker.hidden = state.mode !== 'flag' || !regions.length;
     custom.hidden = state.mode === 'none';
     shading.value = String(state.rowShading);
+    for (const { code, box } of flagBoxes) box.checked = state.flagRegions.includes(code);
   };
 
   /** @param {Partial<typeof state>} patch */
@@ -1459,6 +1517,7 @@ export function backgroundControl({ value, roleColours, flagColours, onChange })
         color: next?.color ?? state.color,
         strength: next?.strength ?? state.strength,
         rowShading: next?.rowShading ?? state.rowShading,
+        flagRegions: next?.flagRegions ?? state.flagRegions,
       };
       paint();
       group.select(state.mode);
@@ -1481,96 +1540,231 @@ export function backgroundControl({ value, roleColours, flagColours, onChange })
  * "which of these five" and not "one of these five".
  * @param {Object} config
  * @param {import('../core/types.js').SheetSpec} config.spec
- * @param {(patch:{head:import('../core/types.js').RunningHead})=>void} config.onChange
+ * @param {(patch:Partial<import('../core/types.js').SheetSpec>)=>void} config.onChange
+ * @param {string[]} [config.colourKeys]  theme colour keys a band may be set in
  */
-export function headControl({ spec, onChange }) {
-  const AT = /** @type {const} */ (['none', 'top', 'bottom']);
+export function headControl({ spec, onChange, colourKeys = [] }) {
   /** @type {import('../core/types.js').HeadSlot[]} */
   const SLOTS = ['page', 'pair', 'region', 'legend', 'custom'];
   const SIDES = /** @type {const} */ (['left', 'center', 'right']);
+  const SPANS = /** @type {const} */ (['full', 'left', 'center', 'right']);
   /** A position may hold a bare slot in a spec saved before it became a list. */
   const listOf = (/** @type {any} */ held) => new Set(
     (Array.isArray(held) ? held : [held]).filter(Boolean));
 
   let held = spec;
-  const text = /** @type {HTMLInputElement} */ (document.createElement('input'));
-  text.type = 'text';
-  text.id = 'head-text';
-  text.className = 'text-box';
-  text.placeholder = t('format.headTextPlaceholder');
-  text.value = spec.head?.text ?? '';
 
-  /** @param {Partial<import('../core/types.js').RunningHead>} patch */
-  const push = (patch) => onChange({
-    head: {
-      at: 'none', left: [], center: [], right: [], ...held.head, ...patch, text: text.value,
-    },
-  });
-  text.addEventListener('change', () => push({}));
+  /**
+   * The old shape, read once so the control opens on whatever was saved.
+   *
+   * `at` is the discriminator, exactly as in `headBands`: the new shape has no such
+   * field. Written back in the new shape, so opening the panel migrates the spec.
+   * @param {import('../core/types.js').SheetSpec} from
+   */
+  const bandsOf = (from) => {
+    const legacy = /** @type {any} */ (from.head);
+    if (legacy && typeof legacy.at === 'string') {
+      /** @type {import('../core/types.js').HeadBand|null} */
+      const band = legacy.at === 'none' ? null : {
+        span: 'full', left: legacy.left, center: legacy.center, right: legacy.right,
+        text: legacy.text,
+      };
+      return legacy.at === 'bottom' ? { head: null, foot: band } : { head: band, foot: null };
+    }
+    return {
+      head: /** @type {import('../core/types.js').HeadBand|null} */ (from.head ?? null),
+      foot: from.foot ?? null,
+    };
+  };
 
-  const at = segmented({
-    label: t('format.headLong'),
-    value: spec.head?.at ?? 'none',
-    options: AT.map((id) => ({
-      value: id,
-      caption: t(`format.head.${id}`),
-      title: t(`format.headTitle.${id}`),
-      glyph: headGlyph(id),
-    })),
-    onChange: (next) => push({ at: next }),
-  });
+  /**
+   * One band's editor: whether it is on, where its content sits, what it holds, and
+   * what colour it is.
+   *
+   * Built twice rather than once with a position argument, because a header and a
+   * footer are now independent — that was the point of the change. `which` is the
+   * spec field, which is also the position: `head` is the top band and `foot` the
+   * bottom one.
+   * @param {'head'|'foot'} which
+   */
+  const bandEditor = (which) => {
+    const text = /** @type {HTMLInputElement} */ (document.createElement('input'));
+    text.type = 'text';
+    text.id = `${which}-text`;
+    text.className = 'text-box';
+    text.placeholder = t('format.headTextPlaceholder');
+    text.value = bandsOf(spec)[which]?.text ?? '';
 
-  const sides = SIDES.map((side) => {
-    const on = listOf(spec.head?.[side]);
-    /** @type {{id:import('../core/types.js').HeadSlot, box:HTMLInputElement}[]} */
-    const boxes = SLOTS.map((id) => {
-      const box = /** @type {HTMLInputElement} */ (document.createElement('input'));
-      box.type = 'checkbox';
-      box.id = `head-${side}-${id}`;
-      box.checked = on.has(id);
-      box.addEventListener('change', () => {
-        push({ [side]: boxes.filter((b) => b.box.checked).map((b) => b.id) });
-      });
-      return { id, box };
-    });
-    const wrap = document.createElement('fieldset');
-    wrap.className = 'head-side';
-    const caption = document.createElement('legend');
-    caption.textContent = t(`format.head.${side}`);
-    wrap.append(caption, ...boxes.map(({ id, box }) => {
-      const label = document.createElement('label');
-      label.title = t(`format.headSlot.${id}`);
-      const span = document.createElement('span');
-      span.textContent = t(`format.headSlot.${id}`);
-      label.append(box, span);
-      return label;
+    /** @param {Partial<import('../core/types.js').HeadBand>|null} patch */
+    const push = (patch) => {
+      const current = bandsOf(held);
+      const next = patch === null ? undefined : {
+        span: 'full', left: [], center: [], right: [],
+        .../** @type {any} */ (current[which]), ...patch, text: text.value,
+      };
+      // Both fields every time, so a legacy `head.at` is written out of the spec on
+      // the first touch rather than lingering beside the new shape.
+      onChange(/** @type {Partial<import('../core/types.js').SheetSpec>} */ ({
+        head: which === 'head' ? next : (current.head ?? undefined),
+        foot: which === 'foot' ? next : (current.foot ?? undefined),
+      }));
+    };
+    text.addEventListener('change', () => push({}));
+
+    /**
+     * What a band comes back as when it is switched on.
+     *
+     * The folio arrives already ticked, so turning a band on prints a page number
+     * rather than an empty line the reader has to go and fill. That used to be
+     * carried by the odd idiom of an `at: 'none'` band that still held slots -- off,
+     * but remembering what it would say. With two independent bands the off state is
+     * simply absence, so the memory moves here: a spec saved in the old shape hands
+     * back whatever it was configured with, and anything else gets the folio.
+     * @param {import('../core/types.js').SheetSpec} from
+     */
+    const seed = (from) => {
+      const legacy = /** @type {any} */ (from.head);
+      if (legacy && typeof legacy.at === 'string' && legacy.at === 'none'
+        && SIDES.some((side) => listOf(legacy[side]).size)) {
+        return {
+          span: 'full', left: legacy.left, center: legacy.center, right: legacy.right,
+          text: legacy.text,
+        };
+      }
+      return { span: 'full', left: [], center: [], right: ['page'], text: '' };
+    };
+
+    const on = /** @type {HTMLInputElement} */ (document.createElement('input'));
+    on.type = 'checkbox';
+    on.id = `${which}-on`;
+    on.addEventListener('change', () => push(on.checked
+      ? /** @type {any} */ (seed(held))
+      : null));
+    const onLabel = document.createElement('label');
+    onLabel.className = 'head-on';
+    onLabel.append(on, Object.assign(document.createElement('span'), {
+      textContent: t(`format.band.${which}`),
     }));
-    return { side, boxes, wrap };
-  });
 
-  const slots = document.createElement('div');
-  slots.className = 'head-slots';
-  slots.append(...sides.map((s) => s.wrap), text);
+    const span = segmented({
+      label: t('format.headSpan'),
+      value: 'full',
+      options: SPANS.map((id) => ({
+        value: id,
+        caption: t(`format.headSpan.${id}`),
+        title: t(`format.headSpanTitle.${id}`),
+        glyph: headSpanGlyph(id),
+      })),
+      onChange: (value) => push({
+        span: /** @type {'full'|'left'|'center'|'right'} */ (value),
+      }),
+    });
 
+    const sides = SIDES.map((side) => {
+      /** @type {{id:import('../core/types.js').HeadSlot, box:HTMLInputElement}[]} */
+      const boxes = SLOTS.map((id) => {
+        const box = /** @type {HTMLInputElement} */ (document.createElement('input'));
+        box.type = 'checkbox';
+        box.id = `${which}-${side}-${id}`;
+        box.addEventListener('change', () => {
+          push({ [side]: boxes.filter((b) => b.box.checked).map((b) => b.id) });
+        });
+        return { id, box };
+      });
+      const wrap = document.createElement('fieldset');
+      wrap.className = 'head-side';
+      wrap.append(
+        Object.assign(document.createElement('legend'), { textContent: t(`format.head.${side}`) }),
+        ...boxes.map(({ id, box }) => {
+          const label = document.createElement('label');
+          label.title = t(`format.headSlot.${id}`);
+          label.append(box, Object.assign(document.createElement('span'), {
+            textContent: t(`format.headSlot.${id}`),
+          }));
+          return label;
+        }),
+      );
+      return { side, boxes, wrap };
+    });
+
+    // Colour, which is a separate question from emphasis: "make the emergency number
+    // red" is not "make it bold". The choices are the theme's own keys, so a band can
+    // only ever be a colour already on the card.
+    const colour = /** @type {HTMLSelectElement} */ (document.createElement('select'));
+    colour.className = 'select';
+    colour.id = `${which}-colour`;
+    colour.append(Object.assign(document.createElement('option'), {
+      value: '', textContent: t('format.headColour.default'),
+    }));
+    for (const key of colourKeys) {
+      colour.append(Object.assign(document.createElement('option'), {
+        value: key, textContent: t(`colour.${key.replace('roles.', '')}`),
+      }));
+    }
+    colour.addEventListener('change', () => push({ colour: colour.value || undefined }));
+    const colourField = document.createElement('div');
+    colourField.className = 'numeric-custom';
+    colourField.append(Object.assign(document.createElement('span'), {
+      className: 'small muted', textContent: t('format.headColour'),
+    }), colour);
+
+    const slots = document.createElement('div');
+    slots.className = 'head-slots';
+    slots.append(span.group, ...sides.map((sd) => sd.wrap), text, colourField);
+
+    /** @param {import('../core/types.js').SheetSpec} from */
+    const paint = (from) => {
+      const band = /** @type {any} */ (bandsOf(from)[which]);
+      on.checked = Boolean(band);
+      slots.hidden = !band;
+      span.select(band?.span ?? 'full');
+      colour.value = band?.colour ?? '';
+      // The free-text box is only useful where a position asks for the reader's text.
+      text.hidden = !SIDES.some((side) => listOf(/** @type {any} */ (band)?.[side]).has('custom'));
+      for (const { side, boxes } of sides) {
+        const set = listOf(/** @type {any} */ (band)?.[side]);
+        for (const { id, box } of boxes) box.checked = set.has(id);
+      }
+    };
+
+    const wrap = document.createElement('div');
+    wrap.className = 'head-band';
+    wrap.append(onLabel, slots);
+    return { wrap, paint };
+  };
+
+  const head = bandEditor('head');
+  const foot = bandEditor('foot');
   /** @param {import('../core/types.js').SheetSpec} from */
   const paint = (from) => {
     held = from;
-    slots.hidden = (from.head?.at ?? 'none') === 'none';
-    // The free-text box is only useful where a position asks for the reader's text.
-    text.hidden = !SIDES.some((side) => listOf(from.head?.[side]).has('custom'));
-    for (const { side, boxes } of sides) {
-      const on = listOf(from.head?.[side]);
-      for (const { id, box } of boxes) box.checked = on.has(id);
-    }
+    head.paint(from);
+    foot.paint(from);
   };
   paint(spec);
 
   return {
-    field: panelField(t('format.head'), [at.group, slots]),
+    field: panelField(t('format.head'), [head.wrap, foot.wrap]),
     /** @param {import('../core/types.js').SheetSpec} next */
     sync(next) {
-      at.select(next.head?.at ?? 'none');
       paint(next);
     },
   };
+}
+
+/**
+ * Where a band's content sits: across the whole width, or gathered into one edge.
+ * @param {'full'|'left'|'center'|'right'} span
+ */
+export function headSpanGlyph(span) {
+  const box = 30;
+  const svg = frame(box, box);
+  svg.append(svgEl('rect', { x: 3, y: 7, width: 24, height: 16, rx: 1.5, class: 'g-page' }));
+  const marks = span === 'full'
+    ? [[5, 4], [13.5, 3], [22, 4]]
+    : span === 'left' ? [[5, 8]] : span === 'right' ? [[19, 8]] : [[12, 6]];
+  for (const [x, w] of marks) {
+    svg.append(svgEl('rect', { x, y: 9, width: w, height: 1.6, class: 'g-ink' }));
+  }
+  return svg;
 }

@@ -1,5 +1,64 @@
 # Pocket Language Guide
 
+## Content, practice and page controls
+
+The app includes 23 ready target languages, including Persian, with vocabulary,
+regional emergency details, pronunciation columns and localized interface catalogues.
+CSV registries connect the concept bank to each language pack; build scripts validate
+the data, generate pronunciation columns and subset fonts for the scripts in use.
+Optional profanity content is a separate section that starts disabled.
+
+`ui/drill.js` builds seeded practice sessions from the selected content, with multiple
+choice, matching and typed answers. Grading distinguishes correct answers, differences
+in diacritics and incorrect answers, with a length-dependent tolerance for typos.
+The same module supplies the practice dialog and its keyboard controls.
+
+Header and footer bands can be configured independently, with multiple information
+slots, custom text, colour and full-width or tab placement. The solver reserves their
+space before fitting vocabulary and supports saved specs using the earlier single-band
+shape. Automatic fitting can give back an underused face pair when the resulting type
+size remains sufficiently close to the larger layout. Background washes can use the
+reader's chosen countries from the target language's region list.
+
+## Optional ornament styles
+
+The customise panel's **Style** setting defaults to Classic. Language-inspired
+chooses a distinct motif for each of the 23 target languages; botanical, waves,
+mosaic, woven, laurel and Starforge can also be chosen directly.
+`core/ornament-designs.js` contains the language catalogue and reusable vector
+drawing primitives; `core/ornaments.js` places the marks. Heading ornaments use
+existing rule space and measured free space beside titles; gutter and corner
+flourishes occupy only unused space inside the printable area and outside phone
+reservations. Text positions, fitting and page counts are unaffected. Low ink
+uses classic rules; monochrome keeps the motifs in the ink colour.
+
+Optional `Face.paths` travel through the SVG and PDF renderers and cut/fold/n-up
+imposition, so PDF, SVG and PNG exports carry the same decoration without image
+downloads. `ui/ornament-control.js` provides the selector and motif sample.
+The ornament tests cover layout invariance, content clearance, ink modes,
+imposition, unique designs, complete Style translations and browser exports.
+The Style control, all eight choices and both help messages are localized in all
+23 interface catalogues, including Persian. Quenya and Klingon
+use documented descriptive paraphrases for modern design terminology.
+
+The language art directions are imaginative interpretations, not national emblems
+or claims of historical authenticity:
+
+| Language | Motif | Language | Motif |
+| --- | --- | --- | --- |
+| English | Engraved oak leaves | Spanish | Tile rosettes |
+| Chinese | Curling clouds | Japanese | Layered wave fans |
+| Arabic | Interlaced eight-point geometry | French | Iris scrolls |
+| German | Compass geometry | Portuguese | Four-petal azulejos |
+| Korean | Ringed floral medallions | Hindi | Lotus petals |
+| Thai | Flame scrolls | Russian | Berry sprigs |
+| Indonesian | Kawung-inspired woven petals | Swahili | Sails and sea breezes |
+| Turkish | Tulips | Vietnamese | Bamboo |
+| Italian | Acanthus scrolls | Greek | Meanders |
+| Hungarian | Floral embroidery | Hebrew | Pomegranates |
+| Persian | Cypress paisley | Quenya | Elven leafy tendrils |
+| Klingon | Angular Starforge | | |
+
 A browser app that typesets printable, pocket-sized vocabulary and phrase cards
 for a pair of languages, and exports them as vector PDF, high-resolution PNG or
 SVG. Everything runs client-side, so it works with the network off — which is the
@@ -133,8 +192,8 @@ A respelling is written *for a reader* — `nee HOW` is Chinese for someone who 
 English and nothing else — so curating them by hand is O(N²), and for a long time
 only the 16 pairs glossed into English had one while the other 256 printed an empty
 column. The way out is two O(N) inputs instead: the `ipa` column of the language
-being learned, and one rule table per language doing the reading. **All twenty-two
-reader tables now exist and every one of the 462 pairs prints a respelling.**
+being learned, and one rule table per language doing the reading. **All twenty-three
+reader tables now exist and every one of the 506 pairs prints a respelling.**
 `node scripts/respell_check.mjs <reader> --gaps` counts IPA symbols that reach the
 page because no rule matched, and every reader is at zero. Twenty of the tables
 derive from a published pronunciation key for that language (`content/RESPELL-SYSTEMS.md`
@@ -876,7 +935,7 @@ nineteen cluster rules written for it were dead code and are gone. It composes i
 — `tl`, `τλ`, `тл`, `تل`, `तल`, `ตล`, `トル`, `te-le-`, `thl` for Quenya, and `tlh` for
 a Klingon reader, which is the canonical spelling arrived at without a special case.
 Japanese also turned out to be the only one of the nineteen with no rule for a bare
-`ʰ`, which the other eighteen all map to nothing. All twenty-two readers are at zero
+`ʰ`, which the other eighteen all map to nothing. All twenty-three readers are at zero
 gaps.
 
 ### Hebrew, and where the vowels go
@@ -997,6 +1056,153 @@ its symbol ₪ (U+20AA), which no shipped face carried**. It was the Italian-eur
 exactly — a ready language with a country, a currency in `regions.csv` and no row for
 it — and the reason it is a named row rather than the generic `local-currency` that
 Arabic and Russian take is that Israel is one country with one currency.
+
+### Persian, and the script it shares with a language it is not
+
+Persian (`fa`) is the twenty-third language and the **third right-to-left** one, and
+unlike either of the first two it shares a *script* with a language already in the
+corpus while differing from it substantially. That overlap is the whole of what is
+interesting about it, and almost every decision came out the opposite way from the one
+a reading of the Arabic pack would predict.
+
+**The four letters Arabic does not have cost nothing, and the reason is that
+`ARABIC_RANGES` is not a corpus union.** `subset_fonts.py` gives the `arabic` stack the
+whole of U+0600–06FF, U+0750–077F, U+08A0–08FF and both presentation-forms blocks
+unconditionally, with the corpus added *on top* rather than instead — so `پ چ ژ گ`,
+Persian's `ی` U+06CC and `ک` U+06A9, and the Eastern Arabic-Indic digits U+06F0–06F9
+were all already in the shipped faces. Verified against the cmaps of `arabic-400.ttf`
+**and** `arabic-700.ttf`, which is the intersection `validate_data.py` checks, and then
+proved by the build: **both Arabic faces came back byte-identical at 2,823 glyphs.**
+The Arabic *reader table* had in fact been emitting `پ چ ژ گ ڤ` for two language
+generations, which `tests/fonts.test.mjs` already said in a comment. The real font cost
+of the twenty-third language is **one Korean syllable** — `랼`, outside KS X 1001, from
+the French gloss of the new `numbers-money.toman` concept, so from a *currency* rather
+than from Persian's script.
+
+**`Arab` is reused rather than given a Perso-Arabic row of its own, and the measurement
+is why.** `direction`, `needs_shaping`, `word_break` and `font_stack` are the same claim
+for both. The two that could differ were measured with the same method that produced
+Hebrew's recorded 1.149em: over the letter repertoire in all four positional forms,
+Arabic spans 1.3610em/1.4390em against Persian's **1.3340em/1.3700em**, and the cause is
+exactly the codepoint difference — Arabic's floor is `ي` U+064A isolated, whose deep
+tail carries *two dots below*, where Persian's `ی` U+06CC has none, so Persian's floor
+is `ج`. **The ی/ک substitution is worth 2.0% of the line box in the regular face and
+4.8% in the bold**, always in Persian's favour, so a row of its own could only carry a
+smaller number than the 1.30 both already sit under. `min_size_pt` is 5.4, the same as
+Arabic, arrived at from a different feature: Persian's finest distinction is the
+**three-dot cluster** that separates `پ` from `ب`, and the gap between two adjacent dots
+in it is 0.037em = **0.200pt at 5.4pt**, exactly the ink this paper holds. And ISO 15924
+has no code to use — `Arab` covers the Perso-Arabic form and `Aran` is the Nastaliq
+*style*, which this project does not typeset.
+
+**The short vowels go the other way from Hebrew, and that is the decision the pack
+turns on.** Hebrew earns a pointed `text_alt` because pointing is a second orthography
+an Israeli meets in children's books, dictionaries and a newspaper's partial pointing.
+Persian vocalisation is not that: outside a first-grade primer and a dictionary's
+pronunciation bracket, no Iranian sees a vocalised Persian sentence, so a pointed column
+would be a picture of something that does not exist. There is also much less to write —
+Persian spells /ɑ i u/ with ا ی و, so only /a e o/ are missing — and the column a
+learner actually needs is already there, because BGN's own Note 6 makes the
+romanisation write the ezāfe. So `text_alt` is spent the way Arabic and Portuguese spend
+it, on the **colloquial Tehrani** form (`آن‌ها`/`اون‌ها`, `نمی‌دانم`/`نمی‌دونم`,
+`چند است؟`/`چنده؟`), and `script_alt` in `languages.csv` stays empty because a register
+is not a script.
+
+**What *is* pointed is two marks, each fixing something unrecoverable.** The **ezāfe
+kasra** is written on every row that needs one, because the linking /e/ is in neither
+the script nor espeak's output — `آب معدنی` comes back `ɑb maʔdani` where Persian says
+*āb-e ma‘dani* — and one character fixes the `ipa` column, all twenty-two readers'
+respellings and the agreement with the romanisation at once. And a **damma or a tashdid
+on the three words where the unpointed spelling is two words and espeak takes the
+wrong one**: `خُرد` against `خِرَد`, `مسکّن` (painkiller) against `مسکن` (housing) —
+which is a safety row — and `دِنگی` against *dongi*.
+
+**espeak has a Persian voice and it is much better than the Arabic one, for a
+structural reason.** `GRADE["fa"]` is **B+** against Arabic's D, because Persian writes
+its three "long" vowels with letters, so the vowels Arabic leaves to a guess are on the
+page and only /a e o/ are unwritten — right in all fifty of a probe chosen for exactly
+that ambiguity. Two artefacts are repaired: espeak writes Persian's one voiced uvular
+as the two characters **`q1`**, which refused every row containing ق or غ, and it writes
+a spelling-driven length mark on vowels Persian does not distinguish. `q1` becomes `q`
+rather than `ɢ` deliberately: **Persian adds no new IPA symbol to the corpus at all**, so
+no other reader table needed a rule, where `ɢ` would have cost twenty-two edits — the
+lesson Klingon's /ɬ/ taught. **Stress is not written**, and that is a decision: Persian
+stress is rule-governed rather than lexical, espeak places it in the *opposite*
+direction from the rule (`kˈetɑb` for *ketā́b*), and deriving it the way `hu_stress`
+does is impossible because the rule runs one way for nominals and the other for verbs.
+Persian vowels do not reduce, so an unmarked respelling stays intelligible — the trade
+Russian could not have made.
+
+**The reader table is the Arabic table with its hardest argument deleted and its
+tightest constraint lifted.** `fa__fa-IR.json` reaches zero gaps over 16,854 rows. The
+whole longest `deviations` entry in `ar__ar-MSA.json` — ar.wikipedia's policy walling
+`پ چ ژ گ ڤ` off inside parentheses, the region-gating the survey leaves unverified, the
+counted cost of every plain-letter fallback — is about letters **Persian already owns**,
+and `ڤ` is not needed because Persian `و` *is* /v/. So **the legend has nothing to
+teach**: it says only that the marks are written on purpose. And the vowel ceiling the
+Arabic entry records as unliftable is lifted, because Persian's harakat are /a e o/
+rather than /a i u/ and it has three mad letters as well: all six of the corpus's basic
+qualities are writable, *merci* is `مِرْسِی` rather than Arabic's `مِرْسِي`, and English
+*sit* does not merge with *set*. Persian also needs **one** hamza seat where Arabic
+chooses between five, because Persian writes its word-internal hamza on `ی` whatever
+surrounds it (`سوئد`, `تئاتر`, `مسئله`), and writes a bare alef word-initially where
+Arabic writes `أ` and `إ`. What Arabic's reasoning it *keeps* is the empty
+`syllable_separator` — Persian is cursive and a hyphen or a thin space breaks the join
+identically, which is what makes Hebrew's hyphen the exception rather than the rule —
+and `stress: none`, for Arabic's bidi reason plus a third one: Persian dictionaries do
+not mark stress either, so there is nothing to borrow.
+
+**The emergency frame is the second one in twenty-three that takes a preposition, and
+for a different reason from the first.** Hebrew's `ב{region}:` works because its
+preposition is one letter whose vowel is unwritten. Persian's **`در {region}:`** is a
+whole written word and works anyway, because Persian has no definite article and does
+not oblique-mark or case-mark a proper noun — which is Hindi's reason with a
+*pre*position instead of a postposition. Right for all 55 region names, compounds
+included. The two escapes are therefore disjoint, and a future translator has to check
+which one their language has.
+
+**The digit rule binds Persian and Hebrew's escape from it does not.** `str.isdigit()`
+is true of U+06F0–06F9, and Iran writes every price board and platform number in
+`۰۱۲۳۴۵۶۷۸۹` where Israel writes 0–9 as Europe does — so where Hebrew's number rows
+carry the *word*, Persian takes Arabic's answer exactly: **0–9 carry the numeral in
+`text`**, which the one-digit rule permits and which is the most useful thing on an
+Iranian card, and 10 and up carry the word with the numeral in `text_alt`. espeak reads
+`۵` as *panj*, so the `ipa` follows for free. The four notes and the `lakh`/`crore`
+glosses spell every number out, because a note is prose and two adjacent digits in it
+would reverse.
+
+**Two currency concepts, and the second is the expensive thing to get wrong.**
+`numbers-money.rial` is a named row like the shekel, because Iran is one country with
+one currency — and it is the second currency in the bank with **no symbol row**, for a
+new reason: Iran prints no currency sign at all, so U+FDFC would teach a Saudi and
+Yemeni convention nobody uses there. `numbers-money.toman` takes its place, at 0.795
+against 0.740 for every symbol row, because Iranian notes are denominated in rial while
+every shop, taxi and menu quotes in **toman** at ten rial to one: read it wrong and you
+pay ten times. It is a `num` row so its reader side is the equivalence `10 rial`,
+exactly as `numbers-money.lakh`'s is `100,000` — no prose to compose in twenty
+languages, and Arabic and Hebrew spell the numeral out while the three CJK glosses use
+native numerals, because an Arabic digit is a character the Pinyin, Hepburn and RR
+routes have no reading for.
+
+**Three scopes widened on the evidence rather than on the pattern.**
+`communication.please-write-it-in-roman-letters` takes `fa` because Persian is exactly
+what that scope names, an abjad a traveller cannot sound out. Both malaria rows take it
+because Iran is **not** WHO-certified malaria-free — a 2022 resurgence reset the
+four-year clock and it is in the E-2025 group, with residual transmission in the
+south-east. And `i-think-i-have-dengue` takes it on the strongest evidence of the
+three: **Iran reported its first autochthonous dengue transmission in June 2024** (WHO
+DON 2024-DON526, Hormozgan), which is newer than any of the six packs already in that
+scope.
+
+**One bug found and fixed outside the pack, and it was silent.** `clean()` in
+`scripts/build_ipa.py` keeps characters whose Unicode category starts with L, M or N,
+and the **zero-width non-joiner is Cf**. In Perso-Arabic the ZWNJ is not punctuation
+but a letter-level part of the spelling — the نیم‌فاصله the Academy prescribes before
+`می`, `ها` and the enclitics — so stripping it handed espeak a different word:
+`بچه‌ام` (*bachche-am*, "my child") became `بچهام` and came back `batʃhɑm`. Wrong on
+195 rows, `lost-rescue.my-child-is-missing` among them. U+200C is now kept and U+200D
+deliberately is not, because nothing in the corpus uses it; verified to move no other
+language, since `fa` is the only pack that contains one.
 
 ### The paper's own colour
 
@@ -1368,8 +1574,8 @@ normalised English gloss, against the exact section first and then its group,
 because two sheets can file the same phrase under different panels ("Can I charge
 my phone?" is hotel basics in one and hotel requests in the other).
 
-The bank is now **813 concepts across 58 sections in twenty-two languages**, which is
-**462 ordered pairs** — every one of which renders, and two of which anyone wrote a
+The bank is now **825 concepts across 59 sections in twenty-three languages**, which
+is **506 ordered pairs** — every one of which renders, and two of which anyone wrote a
 sheet for. That ratio is the whole argument for joining on `concept_id` instead of
 storing pairs: the sixteenth language added 745 rows and 30 new pairs, and the
 twenty-first added 40 more pairs on its own.
@@ -2004,6 +2210,29 @@ Named so nobody has to rediscover the gap:
   Italian corpus, its section titles and its emergency labels were outside the font
   union entirely. That one printed nothing wrong only because Italian is Latin; the
   same omission for Greek would have been a sheet of empty boxes.
+
+  **And three the twenty-third found, all of which cost real work to rediscover.**
+  `clean()` in `scripts/build_ipa.py` was **throwing away U+200C**, because the
+  zero-width non-joiner is category Cf and the filter keeps L, M and N — silently
+  wrong on 195 Persian rows, since the ZWNJ is a letter-level part of Perso-Arabic
+  spelling and not punctuation. **A new concept can grow another reader's charset just
+  as a new language can**: the two currency concepts Persian added put `랼` into the
+  Korean table, outside KS X 1001 and missing from all four shipped Korean faces, and
+  nothing in `npm run validate` looks — only `npm run respell:charset` diffed against
+  the committed file. And **a reader table's cluster fixups have to be one rule per run
+  length**, because `createRespeller` builds each fixup's regex without the `g` flag,
+  so a fixup replaces its first match and nothing else; Arabic's pair of rules
+  therefore leaves the fourth consonant of a longer cluster unmarked, which one of
+  Arabic's own rows demonstrates.
+- **The head band's emergency slot prints in English for every reader.**
+  `core/solve/index.js`'s `headText` calls `emergencyNote(corpus, spec.region)` with no
+  `source` and no `labels`, so the `region` slot gets the English frame and the English
+  service words whatever language the reader is in — `United Kingdom:999 all services`
+  on a Persian sheet. This is the same defect the *note block* had before
+  `data/registry/emergency-labels/` existed, in the one consumer that was never given
+  the fix; the note block itself is correct (`در بریتانیا: 999 شمارهٔ واحد · 112 هم
+  فعال`). Found while checking Persian, and it affects all twenty-three readers, which
+  is why it is here rather than in the Persian section.
 - **Digits inside right-to-left text.** The renderer shapes a run right-to-left as
   a whole and nothing here implements the bidi algorithm's rule that digits stay
   left-to-right inside it, so Arabic-Indic `١٠` printed as `٠١` and `١/٢` as `٢/١`.

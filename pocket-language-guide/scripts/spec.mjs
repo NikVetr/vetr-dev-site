@@ -46,7 +46,9 @@ export async function referenceSpec(target = 'zh-Hans', source = 'en', overrides
     // furniture there is; every other slot stays off, because the pair, the
     // emergency line and the pronunciation key are all things a reader should choose
     // rather than find.
-    head: { at: 'none', left: [], center: [], right: ['page'], text: '' },
+    // Both bands off. What a band says when it is switched on lives in
+    // `headControl`'s own seed now, rather than in an `at: 'none'` band that
+    // held slots it was not printing.
     // 0 means fit: with faces on auto too, that resolves to the fewest pairs of
     // faces at the largest legible type -- the same answer the reference sheet
     // arrived at by hand.

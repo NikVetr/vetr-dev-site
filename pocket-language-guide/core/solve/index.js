@@ -9,6 +9,7 @@ import { emergencyNote } from '../pack.js';
 import { buildAtoms } from './atoms.js';
 import { breakColumns } from './columnbreak.js';
 import { backgroundRects } from './background.js';
+import { cornerOrnaments, gutterOrnaments, motifFor, ornamentRule } from '../ornaments.js';
 import { placeColumn } from './justify.js';
 
 // Scale 0 puts every field at the smallest size its own script can carry, so the
@@ -59,6 +60,24 @@ const MAX_AUTO_FACES = 64;
 // own 0.478, which is a legitimate, deliberately tight layout that should not be
 // second-guessed.
 export const COMFORT = 0.45;
+/**
+ * When a face pair is worth giving back, as two ratios.
+ *
+ * `BLANK_GIVEBACK` is how much of the card has to be empty before the paper is worth
+ * questioning at all, and `KEEP_GIVEBACK` is how much of the type size may be spent
+ * to shed it. Ratios rather than lengths, so neither depends on the page size or the
+ * column count, and each states a sentence: *a quarter of the card is blank* and
+ * *half the paper is worth at most a quarter of the type*.
+ *
+ * Both are needed and each blocks a different mistake. Without the blank gate, a
+ * dense sheet sheds paper too -- `es <- en` at eight faces fits six at better than
+ * three quarters of its scale, so it would give up a pair it is using. Without the
+ * keep gate, a merely thin sheet sheds paper it should keep: an Arabic sheet read by
+ * a Quenya reader fits one pair less only at 0.45 against 1.00, which is half the
+ * type for half the paper and the wrong way round.
+ */
+const BLANK_GIVEBACK = 0.25;
+const KEEP_GIVEBACK = 0.75;
 
 /** A column left this fraction of itself empty is reported as loose. */
 export const LOOSE_FRACTION = 0.06;
@@ -83,9 +102,9 @@ const HEAD_LINES = 1.5;
 /**
  * @param {import('../types.js').Geometry} g
  * @param {import('../types.js').PaperSpec} paper
- * @param {number} [headPt]  a band reserved for a running head, at top or bottom
+ * @param {{top:number,bottom:number}} [bands]  the two furniture bands' heights  a band reserved for a running head, at top or bottom
  */
-export function contentBox(g, paper, headPt = 0) {
+export function contentBox(g, paper, bands = { top: 0, bottom: 0 }) {
   const insetX = paper.borderless ? (g.pageW * paper.oversprayPct) / 200 : paper.nonprintablePt;
   const insetY = paper.borderless ? (g.pageH * paper.oversprayPct) / 200 : paper.nonprintablePt;
   // A lock screen's reserved bands are the same shape as a printer's dead zone:
@@ -96,12 +115,13 @@ export function contentBox(g, paper, headPt = 0) {
   const reserveBottom = g.pageH * (g.reserve?.bottom ?? 0);
   const left = Math.max(g.marginLeft, insetX);
   const right = Math.max(g.marginRight, insetX);
-  // The head's band is *added* to the margin rather than max()ed into it: a
-  // printer's dead zone and a lock screen's clock are areas the sheet may not use,
-  // where a running head is area the sheet is using for something else. Taking the
-  // larger of the two would let a wide margin swallow the head's own line.
-  const top = Math.max(g.marginTop, insetY, reserveTop) + (headPt > 0 ? headPt : 0);
-  const bottom = Math.max(g.marginBottom, insetY, reserveBottom) + (headPt < 0 ? -headPt : 0);
+  // A band is *added* to the margin rather than max()ed into it: a printer's dead
+  // zone and a lock screen's clock are areas the sheet may not use, where a running
+  // head is area the sheet is using for something else. Taking the larger of the two
+  // would let a wide margin swallow the head's own line. Two independent heights
+  // rather than one signed number, since a header and a footer can both be on.
+  const top = Math.max(g.marginTop, insetY, reserveTop) + (bands.top ?? 0);
+  const bottom = Math.max(g.marginBottom, insetY, reserveBottom) + (bands.bottom ?? 0);
   const width = g.pageW - left - right;
   const height = g.pageH - top - bottom;
   return {
@@ -198,16 +218,64 @@ function emptyColumns({ blocks, theme, spec, corpus }) {
  */
 
 /**
- * How tall the head's band is for this spec, signed: positive at the top, negative
- * at the bottom, zero when there is none. The sign is what lets `contentBox` take
- * it out of the right margin without a second parameter.
+ * The two bands, normalised, with the old single-band shape migrated.
+ *
+ * A spec saved before a header and a footer could both be on carries
+ * `head: {at, left, center, right, text}` -- in `localStorage`, in an exported
+ * sheet.json, and in `data/presets.json`. `at` is the discriminator: the new shape has
+ * no such field, so its presence identifies the old one exactly, and an `at` of
+ * `'bottom'` becomes the foot rather than a header nobody asked for.
+ * @param {import('../types.js').SheetSpec} spec
+ * @returns {{top: import('../types.js').HeadBand|null, bottom: import('../types.js').HeadBand|null}}
+ */
+export function headBands(spec) {
+  const legacy = /** @type {any} */ (spec.head);
+  if (legacy && typeof legacy.at === 'string') {
+    if (legacy.at === 'none') return { top: null, bottom: null };
+    /** @type {import('../types.js').HeadBand} */
+    const band = {
+      span: 'full',
+      left: legacy.left,
+      center: legacy.center,
+      right: legacy.right,
+      text: legacy.text,
+    };
+    return legacy.at === 'top' ? { top: band, bottom: null } : { top: null, bottom: band };
+  }
+  return {
+    top: /** @type {import('../types.js').HeadBand|null} */ (spec.head ?? null),
+    bottom: spec.foot ?? null,
+  };
+}
+
+/**
+ * Whether a band asks for anything at all.
+ *
+ * Height has to be reserved before any slot is resolved -- `contentBox` runs before
+ * there is a face to put a folio number on -- so this reads the *spec* rather than the
+ * text. A band whose three positions are empty reserves nothing, which is what lets
+ * the control leave a band switched on while the reader empties it.
+ * @param {import('../types.js').HeadBand|null} band
+ */
+function bandAsks(band) {
+  if (!band) return false;
+  return ['left', 'center', 'right'].some((side) => {
+    const held = /** @type {any} */ (band)[side];
+    return (Array.isArray(held) ? held : [held]).filter(Boolean).length > 0;
+  });
+}
+
+/**
+ * How tall each band is for this spec, in points, zero where there is none.
  * @param {SolveInput} input
  */
-function headBand(input) {
-  const at = input.spec.head?.at ?? 'none';
-  if (at === 'none') return 0;
+function headBandPt(input) {
+  const bands = headBands(input.spec);
   const pt = headSize(input) * HEAD_LINES;
-  return at === 'top' ? pt : -pt;
+  return {
+    top: bandAsks(bands.top) ? pt : 0,
+    bottom: bandAsks(bands.bottom) ? pt : 0,
+  };
 }
 
 /**
@@ -244,8 +312,9 @@ function headSize({ theme, spec, corpus }) {
  * @param {import('./index.js').SolveInput} input
  * @param {number} face  zero-based
  * @param {number} faces
+ * @param {import('../types.js').HeadBand} band
  */
-function headText(input, face, faces) {
+function headText(input, face, faces, band) {
   const { spec, corpus } = input;
   const name = (/** @type {string} */ code) => corpus.languages[code]?.exonym_en ?? code;
 
@@ -295,7 +364,7 @@ function headText(input, face, faces) {
       }
       return parts;
     }
-    if (slot === 'custom') return [{ text: (spec.head?.text ?? '').trim(), bold: false }];
+    if (slot === 'custom') return [{ text: (band.text ?? '').trim(), bold: false }];
     return [];
   };
 
@@ -307,28 +376,72 @@ function headText(input, face, faces) {
     for (const slot of slots) {
       const parts = one(slot).filter((p) => p.text);
       if (!parts.length) continue;
-      if (out.length) out.push({ text: ' \u2022 ', bold: false });
+      if (out.length) out.push({ text: ' \u2022', bold: false, sep: true });
       out.push(...parts);
     }
-    // **A part may not end in a space.** `measurer.width` drops a trailing space --
-    // `"110 "` measures exactly as wide as `"110"` -- so advancing the pen by each
-    // part's own width closed up every gap between them and the emergency line came
-    // out as `China:110police·119fire·120ambulance`. A leading space *is* counted, so
-    // the space moves to the front of the part that follows it and the widths sum.
-    for (let i = 0; i < out.length - 1; i += 1) {
-      const spaces = /\s+$/.exec(out[i].text);
-      if (!spaces) continue;
-      out[i].text = out[i].text.slice(0, -spaces[0].length);
-      out[i + 1].text = spaces[0] + out[i + 1].text;
-    }
-    return out.filter((part) => part.text);
+    return spaceParts(out);
   };
 
   return {
-    left: position(spec.head?.left),
-    center: position(spec.head?.center),
-    right: position(spec.head?.right),
+    left: position(band.left),
+    center: position(band.center),
+    right: position(band.right),
   };
+}
+
+/**
+ * Put the spaces where they can be measured, exactly one of them at each join.
+ *
+ * **A part may not end in a space.** `measurer.width` drops a trailing one --
+ * `"110 "` measures exactly as wide as `"110"` -- so advancing the pen by each part's
+ * own width closed up every gap and the emergency line came out as
+ * `China:110police·119fire·120ambulance`. A leading space *is* counted, so a space at
+ * a join belongs on the front of the part that follows it.
+ *
+ * Moving them was not enough, and that was the wonky bullet spacing. The emergency
+ * slot's own parts already end in spaces -- its regex captures the digits *and* the
+ * run after them, so `"police "` is one part -- and shifting that space onto a
+ * separator that carried its own leading space gave `"  \u2022"`: two spaces before the
+ * bullet and one after it, on some joins and not others, depending entirely on
+ * whether the slot to the left happened to end in whitespace. So the spaces are
+ * *normalised* rather than shifted -- collapsed to exactly one wherever either side
+ * had any -- which makes every join in the band identical whatever meets there.
+ * @param {import('../types.js').HeadPart[]} parts
+ * @returns {import('../types.js').HeadPart[]}
+ */
+function spaceParts(parts) {
+  const out = parts.map((part) => ({ ...part }));
+  for (let i = 0; i < out.length - 1; i += 1) {
+    const trailing = /\s+$/.test(out[i].text);
+    if (trailing) out[i].text = out[i].text.replace(/\s+$/, '');
+    // A separator always takes a space on both sides, and it cannot ask for the one
+    // on its right by carrying it: that space would be trailing, and trailing spaces
+    // do not measure. So the rule is stated here rather than encoded in the string,
+    // which is also what makes `" \u2022"` the only correct way to write one.
+    if (trailing || out[i].sep || /^\s/.test(out[i + 1].text)) {
+      out[i + 1].text = ` ${out[i + 1].text.replace(/^\s+/, '')}`;
+    }
+  }
+  // A separator that lost its neighbour to a trim would otherwise print alone.
+  return out.filter((part, i) => part.text.trim() && !(part.sep && i === out.length - 1));
+}
+
+/**
+ * Several positions' parts as one bullet-joined group, for a tab.
+ *
+ * The same separator a single position's slots take, and the same rule that keeps it
+ * measurable: a separator carries its spaces on the *leading* side, because
+ * `measurer.width` drops a trailing one.
+ * @param {import('../types.js').HeadPart[][]} groups
+ * @returns {import('../types.js').HeadPart[]}
+ */
+function joinParts(groups) {
+  /** @type {import('../types.js').HeadPart[]} */ const out = [];
+  for (const group of groups.filter((g) => g.length)) {
+    if (out.length) out.push({ text: ' \u2022', bold: false, sep: true });
+    out.push(...group);
+  }
+  return spaceParts(out);
 }
 
 /**
@@ -337,7 +450,8 @@ function headText(input, face, faces) {
  */
 export function layout(input) {
   const { blocks, theme, spec, corpus, measurer, registry } = input;
-  const band = headBand(input);
+  const band = headBandPt(input);
+  const bands = headBands(spec);
   const box = contentBox(spec.geometry, spec.paper, band);
   /** @type {import('../types.js').Warning[]} */ const warnings = [];
 
@@ -563,6 +677,20 @@ export function layout(input) {
         }
         if (!atom.paint) return;
         for (const r of atom.paint.rects) face.rects.push({ ...r, x: r.x + x, y: r.y + dy });
+        for (const p of atom.paint.paths ?? []) {
+          const mark = { ...p, x: p.x + x, y: p.y + dy };
+          const cut = spec.geometry.pageW / 2;
+          if (mark.x < cut && mark.x + mark.w > cut) {
+            // Odd columns or asymmetric margins may put a rule across the cut.
+            // Give each half a complete motif instead of slicing a leaf in two.
+            const motif = motifFor(spec.ornamentStyle, spec.target);
+            if (motif) for (const [start, end] of [[mark.x, cut - 0.5], [cut + 0.5, mark.x + mark.w]]) {
+              if (end - start >= 2) (face.paths ??= []).push(
+                ornamentRule(motif, start, mark.y, end - start, mark.h, mark.stroke),
+              );
+            }
+          } else (face.paths ??= []).push(mark);
+        }
         for (const r of atom.paint.runs) face.runs.push({ ...r, x: r.x + x, y: r.y + dy });
         for (const i of atom.paint.icons) face.icons.push({ ...i, x: i.x + x, y: i.y + dy });
         for (const h of atom.paint.hits) face.hits.push({ ...h, x: h.x + x, y: h.y + dy });
@@ -571,10 +699,12 @@ export function layout(input) {
     // The running head, drawn after the columns so it is never something the
     // breaker has to reason about: its band came out of the margin in `contentBox`,
     // so by here the space is already its own.
-    if (band !== 0) {
+    for (const edge of /** @type {const} */ (['top', 'bottom'])) {
+      if (!band[edge]) continue;
+      const bandSpec = /** @type {import('../types.js').HeadBand} */ (bands[edge]);
       const size = headSize(input);
-      const { left, center, right } = headText(input, f, faces);
-      const y = band > 0
+      const { left, center, right } = headText(input, f, faces, bandSpec);
+      const y = edge === 'top'
         ? box.top - size * 0.9
         : box.top + box.height + size * 1.35;
       // The reader's own face: a running head is read by whoever the sheet is
@@ -598,6 +728,16 @@ export function layout(input) {
       const latin = resolveField(
         'roman', corpus.languages[spec.target].script, sourceIso, corpus.scripts,
       );
+      // A theme colour key, resolved the way `themeColors` keys are so that a role
+      // reads as the section colour the reader already sees on the card.
+      const key = bandSpec.colour;
+      const bandColour = key
+        ? spec.themeColors?.[key]
+          ?? (key.startsWith('roles.')
+            ? theme.colors.roles?.[key.slice(6)]
+            : /** @type {any} */ (theme.colors)[key])
+          ?? null
+        : null;
       /** @param {import('../types.js').HeadPart} part */
       const styleOf = (part) => ({
         ...style,
@@ -637,15 +777,32 @@ export function layout(input) {
       const leftW = widthOf(left);
       const rightW = widthOf(right);
       const gap = size;
-      const placedHead = /** @type {[import('../types.js').HeadPart[], number, 'start'|'end'|'mid'][]} */ ([
-        [fit(left, Math.max(0, box.width - rightW - gap)), box.left, 'start'],
-        [fit(right, Math.max(0, box.width - leftW - gap)), box.left + box.width, 'end'],
-        [
-          fit(center, Math.max(0, box.width - leftW - rightW - gap * 2)),
-          box.left + box.width / 2,
-          'mid',
-        ],
-      ]);
+      const span = bandSpec.span ?? 'full';
+      /** @type {[import('../types.js').HeadPart[], number, 'start'|'end'|'mid'][]} */
+      const placedHead = span === 'full'
+        ? [
+          [fit(left, Math.max(0, box.width - rightW - gap)), box.left, 'start'],
+          [fit(right, Math.max(0, box.width - leftW - gap)), box.left + box.width, 'end'],
+          [
+            fit(center, Math.max(0, box.width - leftW - rightW - gap * 2)),
+            box.left + box.width / 2,
+            'mid',
+          ],
+        ]
+        // **A tab rather than a rule across the face.** The three positions are
+        // concatenated into one group at the chosen edge, bullet-joined as a single
+        // position's slots already are, and given the whole width to fit in -- so a
+        // reader who wants the furniture out of the way of the outer columns can put
+        // it in one corner instead of spreading it over three. The distinction is
+        // where the content sits, not how tall the band is: a tab still costs its
+        // line, because the columns above or below it end where they end.
+        : [[
+          fit(joinParts([left, center, right]), box.width),
+          span === 'left' ? box.left
+            : span === 'right' ? box.left + box.width
+              : box.left + box.width / 2,
+          span === 'left' ? 'start' : span === 'right' ? 'end' : 'mid',
+        ]];
 
       for (const [parts, anchor, align] of placedHead) {
         if (!parts.length) continue;
@@ -664,7 +821,13 @@ export function layout(input) {
             // Emphasis is carried by weight *and* ink: the band is set in the muted
             // grey, and a bold grey number at 5.2pt is not much louder than a plain
             // one, so an emphasised part takes the body colour too.
-            fill: part.bold ? theme.colors.ink : theme.colors.muted,
+            //
+            // Unless the band names a colour of its own, in which case that is the
+            // whole band's and emphasis is left to the weight. Colour and emphasis are
+            // separate questions -- "make the emergency number red" is not "make it
+            // bold" -- and promoting a coloured part to ink would have thrown the
+            // colour away exactly where it was asked for.
+            fill: bandColour ?? (part.bold ? theme.colors.ink : theme.colors.muted),
             bold: part.bold,
             italic: false,
             dir: partStyle.dir,
@@ -676,6 +839,12 @@ export function layout(input) {
     // Behind everything, so it goes on the front of the list rather than the back.
     // Per face, not per sheet: a `sections` wash follows the sections that landed on
     // *this* face, which is the whole point of it.
+    const corners = cornerOrnaments(spec, face, box,
+      spec.inkMode === 'mono' ? theme.colors.ink : theme.colors.roles.comm);
+    if (corners.length) (face.paths ??= []).push(...corners);
+    const gutters = gutterOrnaments(spec, box,
+      spec.inkMode === 'mono' ? theme.colors.ink : theme.colors.roles.comm);
+    if (gutters.length) (face.paths ??= []).push(...gutters);
     face.rects.unshift(...backgroundRects({
       spec,
       theme,
@@ -851,6 +1020,21 @@ function solveFaces(build, box, spec, scaleFloor) {
   ).failure;
   /** @param {number} faces */
   const fittedAt = (faces) => autofit(build, box.height, faces * columns, scaleFloor);
+  /**
+   * The fraction of the card the content leaves empty.
+   *
+   * `breakColumns` already reports the leftover height of each bin, so this is the
+   * sum of those over the whole card's column height. Slack *before* glue, which is
+   * the right measure here: the question is whether the paper is needed at all, not
+   * how the space would be dressed if it were kept.
+   * @param {number} faces @param {number} scale
+   */
+  const blankFraction = (faces, scale) => {
+    const bins = faces * columns;
+    const broken = breakColumns(build(scale), box.height, bins);
+    if (broken.failure) return 0;
+    return broken.slack.reduce((a, b) => a + b, 0) / (bins * box.height);
+  };
 
   const anchor = Math.max(1, spec.geometry.faces || FACE_STEP);
   let faces = anchor;
@@ -859,6 +1043,32 @@ function solveFaces(build, box, spec, scaleFloor) {
   // an even anchor the step lands on two either way, and for the phone's anchor of
   // one there is nothing to give back.
   while (faces - FACE_STEP >= 1 && fitsAt(faces - FACE_STEP, 1)) {
+    faces -= FACE_STEP;
+  }
+
+  // **And give up paper the glue cannot fill.** The rule above only sheds a pair
+  // when it costs nothing, which leaves the case it was not written for: a pack with
+  // too little content for its anchor and too much for one pair less. Quenya was
+  // the first -- 206 rows over four faces, fitted at the full nominal 1.00, and every
+  // one of its sixteen columns carrying 82 to 137pt of slack the glue had no gaps
+  // left to absorb. 1971pt in total, five and a half columns of blank card, and the
+  // bottom third of every face empty.
+  //
+  // That is not the airiness `AUTO_SCALE_MAX` hands to the glue on purpose. The
+  // per-gap ceilings exist so leftover space cannot open a canyon, and with thirteen
+  // rows to a column there are simply not enough gaps: 13 x MAX_STRETCH_ROW is about
+  // a third of what there was to absorb.
+  //
+  // Two gates, both ratios, and each blocks a different mistake -- see
+  // `BLANK_GIVEBACK` and `KEEP_GIVEBACK`. What stops this becoming "minimise faces"
+  // is the second: the anchor exists precisely because fewest-faces is always
+  // reachable by making everything tiny, so a pair is only given back when keeping it
+  // was buying almost no type size.
+  while (faces - FACE_STEP >= 1) {
+    const fitted = fittedAt(faces);
+    if (fitted === null || blankFraction(faces, fitted) < BLANK_GIVEBACK) break;
+    const smaller = fittedAt(faces - FACE_STEP);
+    if (smaller === null || smaller < fitted * KEEP_GIVEBACK) break;
     faces -= FACE_STEP;
   }
 

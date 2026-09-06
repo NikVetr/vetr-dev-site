@@ -60,10 +60,14 @@ const mix = (a, b, t) => /** @type {[number,number,number]} */ (
 function sources(spec, theme, placed, regions, languageRegions) {
   const mode = spec.background?.mode ?? 'none';
   if (mode === 'flag') {
-    // Two countries' worth is enough for a wash; more and the corners stop being
-    // distinguishable at 6% strength. `regions.csv` lists them in the order the
-    // registry does, which is roughly by number of speakers.
-    const codes = languageRegions.slice(0, 2);
+    // Whichever countries the reader picked, defaulting to the registry's first two --
+    // which it lists roughly by number of speakers. Two is the useful number rather
+    // than a limit: past that the corners of a 6% wash stop being distinguishable, so
+    // a third and fourth flag mostly average each other away. The control offers them
+    // all anyway, because *which* two is a question only the reader can answer -- a
+    // Spanish card for Mexico had no way to say so.
+    const chosen = spec.background?.flagRegions;
+    const codes = chosen?.length ? chosen : languageRegions.slice(0, 2);
     const colours = codes
       .flatMap((code) => (regions[code]?.flag_colors ?? '').split(';'))
       .map((c) => c.trim())

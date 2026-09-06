@@ -51,7 +51,9 @@ test.describe('help me decide', () => {
     // respelling column, so the band carries the romanisation key alone, which is the
     // defect this repaired: the slot used to print a key for the column that was gone
     // and none for the column that was there.
-    await expect(page.locator('#head-center-legend')).toBeChecked();
+    // The **foot**, since a header and a footer are independent fields now: this is
+    // furniture the reader did not ask for, so it goes where a folio usually is not.
+    await expect(page.locator('#foot-center-legend')).toBeChecked();
     await expect(page.locator('.face.focused svg')).toContainText('ǎ à = 1 2 3 4');
   });
 
@@ -68,8 +70,8 @@ test.describe('help me decide', () => {
     await expect(page.locator('.face.focused')).toBeVisible();
     // The slot's checkbox is always in the panel -- it is a control, not a
     // consequence -- so what has to be untouched is its state and the band itself.
-    await expect(page.locator('#head-center-legend')).not.toBeChecked();
-    await expect(page.locator('.head-slots')).toBeHidden();
+    await expect(page.locator('#foot-center-legend')).not.toBeChecked();
+    await expect(page.locator('#foot-on')).not.toBeChecked();
   });
 
   test('cancelling changes nothing', async ({ page }) => {

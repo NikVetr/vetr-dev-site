@@ -610,15 +610,19 @@ test('a header or footer can carry a folio, the pair, or your own text', async (
   await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
 
   const field = page.locator('.panel-field', { hasText: 'Header / footer' });
-  await expect(field.locator('.head-slots')).toBeHidden();
+  // **Two bands, each its own checkbox.** This was one three-way choice of
+  // none/top/bottom, which made a header and a footer mutually exclusive for no
+  // reason but the shape of the type.
+  await expect(field.locator('#head-on')).not.toBeChecked();
+  await expect(field.locator('#foot-on')).not.toBeChecked();
 
-  await field.getByRole('radio', { name: 'Footer' }).click();
-  await expect(field.locator('.head-slots')).toBeVisible();
+  await field.locator('#foot-on').check();
+  await expect(field.locator('#foot-text')).toBeAttached();
   // Checkboxes, not menus: a position takes any number of slots, so the question is
   // "which of these five" rather than "one of these five". The folio arrives already
   // ticked, so turning the band on prints a page number without hunting for one.
-  await expect(page.locator('#head-right-page')).toBeChecked();
-  await page.locator('#head-left-pair').check();
+  await expect(page.locator('#foot-right-page')).toBeChecked();
+  await page.locator('#foot-left-pair').check();
 
   const texts = () => page.locator('.face.focused svg text')
     .evaluateAll((ns) => ns.map((n) => n.textContent));
@@ -628,10 +632,18 @@ test('a header or footer can carry a folio, the pair, or your own text', async (
     { timeout: 120_000 }).toBe(true);
 
   // Custom text reveals the box and reaches the page.
-  await page.locator('#head-left-custom').check();
-  await expect(page.locator('#head-text')).toBeVisible();
-  await page.locator('#head-text').fill('If found, call +1 555 0100');
-  await page.locator('#head-text').press('Enter');
+  await page.locator('#foot-left-custom').check();
+  await expect(page.locator('#foot-text')).toBeVisible();
+  await page.locator('#foot-text').fill('If found, call +1 555 0100');
+  await page.locator('#foot-text').press('Enter');
+  await expect.poll(async () => (await texts()).some((s) => s.includes('555 0100')),
+    { timeout: 120_000 }).toBe(true);
+
+  // And a header on top of it, which is the point of the change.
+  await field.locator('#head-on').check();
+  await page.locator('#head-center-region').check();
+  await expect.poll(async () => (await texts()).some((s) => /110/.test(s)),
+    { timeout: 120_000 }).toBe(true);
   await expect.poll(async () => (await texts()).some((s) => s.includes('555 0100')),
     { timeout: 120_000 }).toBe(true);
 });
@@ -689,17 +701,15 @@ test('the furniture band takes three positions, several slots each', async ({ pa
   await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
   // Off by default, but the folio is already ticked -- so turning the band on gives
   // a page number without hunting for one.
-  await expect(page.locator('.head-slots')).toBeHidden();
-  await page.getByRole('radio', { name: 'Footer', exact: true }).click();
-  await expect(page.locator('.head-slots')).toBeVisible();
-  await expect(page.locator('#head-right-page')).toBeChecked();
+  await page.locator('#foot-on').check();
+  await expect(page.locator('#foot-right-page')).toBeChecked();
   await expect.poll(async () => (await page.locator('.face.focused svg text').allTextContents())
     .some((s) => /^\d+ \/ \d+$/.test(s)), { timeout: 60_000 }).toBe(true);
 
   // Three positions, and a position takes more than one slot.
-  await page.locator('#head-left-region').check();
-  await page.locator('#head-center-pair').check();
-  await page.locator('#head-left-page').check();
+  await page.locator('#foot-left-region').check();
+  await page.locator('#foot-center-pair').check();
+  await page.locator('#foot-left-page').check();
   await expect.poll(async () => {
     const said = (await page.locator('.face.focused svg text').allTextContents()).join('');
     return said.includes('•') && /police/.test(said) && /Chinese/.test(said);
@@ -709,6 +719,24 @@ test('the furniture band takes three positions, several slots each', async ({ pa
   const bold = await page.locator('.face.focused svg text[font-weight="700"], '
     + '.face.focused svg text[style*="bold"]').allTextContents();
   expect(bold.join('')).toMatch(/\d/);
+
+  // **A band may be a tab rather than a rule across the face**, which gathers all
+  // three positions into one edge. The furniture keeps its line either way; what
+  // changes is where on that line it sits.
+  const spread = await page.locator('.face.focused svg text').evaluateAll(
+    (ns) => ns.map((n) => Number(n.getAttribute('x'))),
+  );
+  await page.locator('#foot-colour').selectOption('roles.alert');
+  const field = page.locator('.panel-field', { hasText: 'Header / footer' });
+  await field.getByRole('radio', { name: 'Right tab', exact: true }).click();
+  await expect.poll(async () => {
+    const xs = await page.locator('.face.focused svg text').evaluateAll(
+      (ns) => ns.map((n) => Number(n.getAttribute('x'))),
+    );
+    // The leftmost furniture moved right: nothing now starts at the left margin that
+    // did not before.
+    return Math.max(...xs) > Math.max(...spread) - 1;
+  }, { timeout: 60_000 }).toBe(true);
 });
 
 test('the card keeps the page aspect however the panels are sized', async ({ page }) => {

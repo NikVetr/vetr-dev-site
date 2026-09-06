@@ -207,7 +207,7 @@ export function warningText(warning) {
  * A country's name in the interface language, or its code if we cannot.
  * @param {string} code ISO 3166-1 alpha-2
  */
-function regionName(code) {
+export function regionName(code) {
   try {
     return new Intl.DisplayNames([active], { type: 'region' }).of(code) || code;
   } catch {

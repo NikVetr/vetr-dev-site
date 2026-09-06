@@ -202,7 +202,9 @@ export function makeSpec(ctx, presets, choice) {
     // Worse, it pushed the Devanagari, Arabic and Thai respellings under their own
     // 5.4pt legibility floor, which `tests/solve.test.mjs` asserts as a safety
     // property. A folio is not worth either of those by default.
-    head: { at: 'none', left: [], center: [], right: ['page'], text: '' },
+    // Both bands off. What a band says when it is switched on lives in
+    // `headControl`'s own seed now, rather than in an `at: 'none'` band that
+    // held slots it was not printing.
     scale: 0,
     priority: 0,
     selection: defaultSelection(ctx.corpus),

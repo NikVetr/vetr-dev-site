@@ -119,20 +119,44 @@
  * changes.
  * @typedef {'none'|'page'|'pair'|'region'|'legend'|'custom'} HeadSlot
  *
- * A line of furniture along the top or bottom, in three positions.
+ * A line of furniture along one edge, in three positions.
  *
  * Each position takes a *list* of slots, joined with a bullet, because the useful
  * shapes are combinations: a folio in one corner, the pair in the other, and the
  * local emergency number in the middle where a stranger can find it. A single slot
- * is still accepted and read as a list of one, so a spec saved before this -- in
- * `localStorage`, in an exported sheet.json, or in `data/presets.json` -- keeps
- * working.
+ * is still accepted and read as a list of one, so a spec saved before that change
+ * keeps working.
+ *
+ * **Position is which field the band sits in, not a value inside it.** It was an
+ * `at` of `'none' | 'top' | 'bottom'`, which made a header and a footer mutually
+ * exclusive for no reason other than the shape of the type -- and a folio at the
+ * foot with the emergency number at the head is an obvious thing to want. So
+ * `spec.head` is the top band and `spec.foot` the bottom one, each absent when it is
+ * off. `headBands` in `core/solve/index.js` migrates the old form.
+ * @typedef {Object} HeadBand
+ * @property {'full'|'left'|'center'|'right'} [span]  where the band's content sits.
+ *   `full` distributes the three positions across the width, as a running head
+ *   normally does. The other three concatenate all three positions into one group at
+ *   that edge, for a reader who wants a tab rather than a rule of furniture across
+ *   the whole face.
+ * @property {HeadSlot|HeadSlot[]} [left]
+ * @property {HeadSlot|HeadSlot[]} [center]
+ * @property {HeadSlot|HeadSlot[]} [right]
+ * @property {string} [text]  for a `custom` slot
+ * @property {string} [colour]  a theme colour key -- `ink`, `muted`, or
+ *   `roles.<role>` -- for every part in this band. Unset keeps the default, which is
+ *   muted with emphasis promoted to ink; set, it colours the whole band and emphasis
+ *   is carried by weight alone. Emphasis and colour are different questions and the
+ *   band had only the first.
+ *
+ * The shape this replaced, still read from saved specs, `data/presets.json` and
+ * exported sheets.
  * @typedef {Object} RunningHead
  * @property {'none'|'top'|'bottom'} at
  * @property {HeadSlot|HeadSlot[]} [left]
  * @property {HeadSlot|HeadSlot[]} [center]
  * @property {HeadSlot|HeadSlot[]} [right]
- * @property {string} [text]  for a `custom` slot
+ * @property {string} [text]
  */
 
 /** One run of head furniture: its text and whether it carries emphasis. A part is
@@ -142,7 +166,7 @@
  * `latin` sets the part in the Latin face rather than the reader's, which the
  * romanisation half of the `legend` slot needs: it quotes the target's own marks, and
  * Noto Sans Thai, Devanagari and Hebrew draw none of `ǎ ǐ ǒ ǔ ṭ ḍ ṇ ṣ`.
- * @typedef {{text:string, bold:boolean, latin?:boolean}} HeadPart */
+ * @typedef {{text:string, bold:boolean, latin?:boolean, sep?:boolean}} HeadPart */
 
 /**
  * @typedef {Object} SheetSpec
@@ -165,6 +189,12 @@
  *   variant falls back to its plain stack, which is why a condensed Mandarin sheet
  *   is condensed Latin against unchanged Han
  * @property {'full'|'low-ink'|'mono'} inkMode
+ * @property {import('./ornaments.js').OrnamentStyle} [ornamentStyle] decorative
+ *   section rules and corner flourishes. Absent means classic; never changes fitting.
+ * @property {HeadBand|RunningHead} [head]  the band along the top. The second form is
+ *   a spec saved before a header and a footer could both be on, and `headBands`
+ *   migrates it -- including an `at: 'bottom'`, which becomes the foot.
+ * @property {HeadBand} [foot]  the band along the bottom
  * @property {BackgroundSpec} [background]  the paper's own colour. Absent or `none`
  *   is white, which is the default and what the reference card is.
  * @property {boolean} autoFaces  let the solver add or drop pairs of faces
@@ -209,6 +239,10 @@
  *   there is, so a page background shows through as it comes down and at 0 the boxes
  *   are gone. A slider rather than three named modes, because the useful values are
  *   in between and naming them was guessing which ones.
+ * @property {string[]} [flagRegions]  which of the target language's countries the
+ *   `flag` wash reads, as ISO 3166-1 alpha-2. Absent means the registry's first two,
+ *   which is what this did unconditionally -- so a Spanish card was always Spain and
+ *   Mexico and an Arabic one always Saudi Arabia and Egypt, whoever was holding it.
  */
 
 /** Text already broken to a single line and positioned. Renderers do not re-wrap.
@@ -227,11 +261,14 @@
 /** Icon geometry; `name` is resolved against data/icons.json by the renderer.
  * @typedef {{x:number,y:number,size:number,name:string,fill:string}} IconMark */
 
+/** Decorative path in local point coordinates, with its full ink inside w × h.
+ * @typedef {{x:number,y:number,w:number,h:number,d:string,stroke:string,strokeWidth:number}} PathMark */
+
 /** @typedef {{x:number,y:number,w:number,h:number,conceptId?:string,sectionId?:string}} HitBox */
 
 /** `rotate` is a whole-page rotation in degrees, set by imposition when a
  * duplex flip would otherwise print the back of a card upside down.
- * @typedef {{rects:Rect[], runs:TextRun[], icons:IconMark[], hits:HitBox[], rotate?:number}} Face */
+ * @typedef {{rects:Rect[], runs:TextRun[], icons:IconMark[], hits:HitBox[], paths?:PathMark[], rotate?:number}} Face */
 
 /**
  * A remedy the reader can apply with one click. `patch` is a shallow overlay on

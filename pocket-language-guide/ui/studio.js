@@ -18,6 +18,7 @@ import { createTree, revealItem } from './content-tree.js';
 import { renderFaces, highlight } from './preview.js';
 import { exportSheetCsv, importSheetCsv, loadEdits, saveEdits, clearEdits } from './io.js';
 import { openQuiz, applyQuiz } from './quiz.js';
+import { openDrill } from './drill.js';
 import { attachHandles } from './handles.js';
 import { attachPanelResizers } from './panels.js';
 import { createAddTerm } from './add-term.js';
@@ -174,6 +175,13 @@ async function main() {
     $('banner').hidden = true;
     localStorage.setItem(BANNER_KEY, '1');
     schedule();
+  });
+
+  // The study side of the sheet. `blocks` rather than `spec.selection`, because the
+  // question is what is on the card -- see `ui/drill.js` for why those differ. It
+  // changes nothing, so there is nothing to schedule when it closes.
+  $('drill-open').addEventListener('click', () => {
+    openDrill({ blocks, corpus: ctx.corpus, spec }).catch(showFatal);
   });
 
   // --- solving ------------------------------------------------------------

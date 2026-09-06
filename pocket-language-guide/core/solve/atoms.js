@@ -13,6 +13,7 @@ import { resolveField, isTargetSide } from '../fonts.js';
 import { inkWidth } from '../measure.js';
 import { chooseSplit, chooseSharedWidths } from './rowsplit.js';
 import { arrangeTemplate } from './arrange.js';
+import { motifFor, ornamentRule } from '../ornaments.js';
 
 // How many of a section's opening rows are held in the same column as its
 // heading.
@@ -43,7 +44,7 @@ const MAX_STRETCH_SECTION = 7;
 /** @typedef {import('../types.js').IconMark} IconMark */
 /** @typedef {import('../types.js').HitBox} HitBox */
 
-/** @typedef {{rects:Rect[], runs:TextRun[], icons:IconMark[], hits:HitBox[]}} Paint */
+/** @typedef {{rects:Rect[], runs:TextRun[], icons:IconMark[], hits:HitBox[], paths?:import('../types.js').PathMark[]}} Paint */
 
 /**
  * @typedef {Object} Atom
@@ -287,6 +288,21 @@ function headingAtom(ctx, block) {
   });
   const ruleY = textTop + painted.height + h.gapBeforeRule * ctx.spacingRatio;
   const height = ruleY + h.rulePt + h.gapAfterRule * ctx.spacingRatio + ctx.padding * 0.5;
+  const motif = ctx.spec.inkMode === 'low-ink' ? null
+    : motifFor(ctx.spec.ornamentStyle, ctx.spec.target);
+  const ornamentTop = textTop + painted.height + 0.25;
+  const ornamentHeight = Math.min(3.2, height - ornamentTop - 0.2);
+  const ornament = motif && ornamentHeight >= 0.6
+    ? ornamentRule(motif, 0, ornamentTop, ctx.colWidth, ornamentHeight, color) : null;
+  // A short heading leaves a useful pocket beside its title. Measure its actual
+  // ink before putting a larger flourish there; long titles keep the rule alone.
+  const titleEnd = Math.max(iconW, ...painted.runs.map(
+    run => run.x + ctx.measurer.width(run.text, style),
+  ));
+  const titleRoom = ctx.colWidth - titleEnd - 4;
+  const flourishHeight = Math.min(7, painted.height - 1);
+  const flourish = motif && titleRoom >= 22 && flourishHeight >= 3
+    ? ornamentRule(motif, titleEnd + 4, textTop + 0.5, titleRoom, flourishHeight, color) : null;
 
   /** @type {IconMark[]} */ const icons = [];
   if (iconW > 0 && block.icon) {
@@ -309,7 +325,10 @@ function headingAtom(ctx, block) {
     breakCost: BREAK_SECTION,
     keepWithNext: false,
     paint: {
-      rects: [...painted.rects, { x: 0, y: ruleY, w: ctx.colWidth, h: h.rulePt, fill: color }],
+      rects: [...painted.rects,
+        ...(ornament ? [] : [{ x: 0, y: ruleY, w: ctx.colWidth, h: h.rulePt, fill: color }])],
+      ...((ornament || flourish)
+        ? { paths: [...(ornament ? [ornament] : []), ...(flourish ? [flourish] : [])] } : {}),
       runs: painted.runs,
       icons,
       hits: [{ x: 0, y: 0, w: ctx.colWidth, h: height, sectionId: block.sectionId }],

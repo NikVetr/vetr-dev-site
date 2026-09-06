@@ -131,6 +131,8 @@ function join(left, right, dx, extra) {
     rects: [...left.rects, ...right.rects.map(shift), ...extra],
     runs: [...left.runs, ...right.runs.map(shift)],
     icons: [...left.icons, ...right.icons.map(shift)],
+    ...((left.paths || right.paths)
+      ? { paths: [...(left.paths ?? []), ...(right.paths ?? []).map(shift)] } : {}),
     hits: [...left.hits, ...right.hits.map(shift)],
   };
 }
@@ -172,6 +174,13 @@ function crop(face, x0, width) {
       .map((r) => ({ ...r, x: r.x - x0 })),
     icons: face.icons.filter((i) => i.x >= x0 - 0.01 && i.x < x1 - 0.01)
       .map((i) => ({ ...i, x: i.x - x0 })),
+    ...(face.paths ? { paths: face.paths.filter((p) => {
+      if (p.x + p.w <= x0 || p.x >= x1) return false;
+      if (p.x < x0 - 0.01 || p.x + p.w > x1 + 0.01) {
+        throw new Error('an ornament crosses the card cut; use an even column count');
+      }
+      return true;
+    }).map((p) => ({ ...p, x: p.x - x0 })) } : {}),
     hits: face.hits.flatMap((h) => {
       const left = Math.max(h.x, x0);
       const right = Math.min(h.x + h.w, x1);
@@ -206,6 +215,9 @@ export function nUp(plan, paper) {
       for (const r of face.rects) sheet.rects.push({ ...r, x: r.x + dx, y: r.y + dy });
       for (const r of face.runs) sheet.runs.push({ ...r, x: r.x + dx, y: r.y + dy });
       for (const i of face.icons) sheet.icons.push({ ...i, x: i.x + dx, y: i.y + dy });
+      for (const p of face.paths ?? []) {
+        (sheet.paths ??= []).push({ ...p, x: p.x + dx, y: p.y + dy });
+      }
       for (const h of face.hits) sheet.hits.push({ ...h, x: h.x + dx, y: h.y + dy });
       if (paper.marks !== false) sheet.rects.push(...trimMarks(dx, dy, plan.pageW, plan.pageH));
     }

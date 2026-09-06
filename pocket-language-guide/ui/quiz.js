@@ -6,6 +6,7 @@
 // afterwards; this only picks a starting point.
 
 import { defaultSelection } from '../core/pack.js';
+import { headBands } from '../core/solve/index.js';
 import { t } from './i18n.js';
 
 // Keys rather than words: this is module scope, evaluated before a catalogue is
@@ -157,20 +158,29 @@ export function applyQuiz(spec, corpus, answers) {
   // Added to the band rather than replacing it: unlike the field set and the
   // selection, which this deliberately resets, the other slots are things a reader
   // chose deliberately -- and one of them is the local emergency number.
+  //
+  // The **foot**, because a header and a footer are now independent fields rather
+  // than one `at` and this is furniture the reader did not ask for: putting it at the
+  // bottom leaves the header, where a folio or the pair usually goes, alone. A spec
+  // saved in the old shape is migrated on the way past, so an `at: 'bottom'` band's
+  // slots are kept and an `at: 'top'` one is left where the reader put it.
+  const bands = headBands(spec);
+  const target = bands.top && !bands.bottom ? 'head' : 'foot';
   /** @type {import('../core/types.js').HeadSlot[]} */
-  const centre = listOf(spec.head?.center);
+  const centre = listOf((target === 'head' ? bands.top : bands.bottom)?.center);
   if (!centre.includes('legend')) centre.push('legend');
+  /** @type {import('../core/types.js').HeadBand} */
+  const band = {
+    span: 'full',
+    ...(target === 'head' ? bands.top : bands.bottom),
+    center: centre,
+  };
 
   return {
     ...spec,
     fieldSet: fields,
-    head: marked
-      ? {
-        ...spec.head,
-        at: spec.head?.at && spec.head.at !== 'none' ? spec.head.at : 'bottom',
-        center: centre,
-      }
-      : spec.head,
+    head: marked && target === 'head' ? band : (bands.top ?? undefined),
+    foot: marked && target === 'foot' ? band : (bands.bottom ?? undefined),
     // Large print means fewer, bigger items rather than the same content shrunk.
     scale: answers.print === 'large' ? 1.3 : 0,
     selection: answers.interests.length

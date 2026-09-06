@@ -171,6 +171,13 @@ export async function planToPdf(plan, opts) {
       }
     }
 
+    for (const p of face.paths ?? []) {
+      page.drawSvgPath(p.d, {
+        x: p.x, y: flip(p.y), borderColor: color(p.stroke),
+        borderWidth: p.strokeWidth, borderLineCap: 1,
+      });
+    }
+
     for (const icon of face.icons) {
       const paths = opts.icons.paths[icon.name];
       if (!paths) throw new Error(`icon "${icon.name}" is not in data/icons.json`);

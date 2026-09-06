@@ -553,6 +553,84 @@ dialog.quiz legend { font-size: var(--fs--1); color: var(--muted); padding-inlin
   display: flex; gap: 0.5em; align-items: baseline; padding: 0.2em 0; cursor: pointer;
 }
 
+/* --- the drill (quiz mode) ------------------------------------------------
+   The study side of the card, so it borrows the onboarding dialog's frame and
+   differs only where a question needs something a form does not. It is wider than
+   `dialog.quiz`, because a prompt cell holds a whole phrase in its own script and a
+   matching question shows five of them at once. */
+dialog.drill {
+  border: 1px solid var(--line); border-radius: var(--radius);
+  padding: var(--space-3); max-width: 44rem; width: calc(100% - 2rem);
+  font: inherit; color: var(--ink);
+  /* Long enough to be scrolled rather than clipped: a matching question is five
+     prompts, five menus and five verdicts. */
+  max-height: calc(100dvh - 4rem); overflow: auto;
+}
+dialog.drill::backdrop { background: rgb(17 24 32 / 45%); }
+dialog.drill fieldset {
+  border: 1px solid var(--line-soft); border-radius: var(--radius-sm);
+  padding: var(--space-2); margin: 0 0 var(--space-2);
+}
+dialog.drill legend { font-size: var(--fs--1); color: var(--muted); padding-inline: 0.3em; }
+dialog.drill h2 { margin-bottom: var(--space-1); }
+dialog.drill .lede { margin-bottom: var(--space-2); }
+dialog.drill .field { margin-bottom: var(--space-2); }
+.drill-seed { width: 8em; font-variant-numeric: tabular-nums; }
+.drill-note { margin: 0 0 var(--space-2); }
+.drill-head { margin-bottom: var(--space-2); }
+
+/* The question's given half. One cell per shown column, captioned with the same
+   name the "Columns shown" control uses, so the quiz and the panel agree about what
+   a column is called. */
+.drill-prompt {
+  display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-3);
+  padding: var(--space-2); margin-bottom: var(--space-2);
+  background: var(--surface-2); border-radius: var(--radius-sm);
+}
+.drill-cell { display: flex; flex-direction: column; min-width: 0; }
+/* A phrase in its own script, at reading size rather than at label size: the whole
+   question is whether you can read it. */
+.drill-value { font-size: var(--fs-1); line-height: 1.35; overflow-wrap: anywhere; }
+
+.drill-options { display: grid; gap: var(--space-1); margin-bottom: var(--space-2); }
+.drill-option {
+  display: flex; gap: var(--space-2); align-items: baseline; text-align: start;
+  font: inherit; font-size: var(--fs-1); padding: 0.35em 0.6em;
+  background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-sm);
+  color: inherit; cursor: pointer;
+}
+.drill-option:hover:not(:disabled) { background: var(--surface-2); }
+.drill-option.chosen { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+/* The key that selects it. A numbered list of four invites the digits, so it says
+   which digit. */
+.drill-key { flex: 0 0 1.2em; font-variant-numeric: tabular-nums; }
+/* Graded. A shape as well as a colour on each -- a rule down the inline start edge
+   -- because a verdict must not be carried by colour alone. */
+.drill-option.right, .drill-mark.right {
+  border-inline-start: 4px solid var(--ok); color: var(--ok);
+}
+.drill-option.wrong, .drill-mark.wrong {
+  border-inline-start: 4px solid var(--alert); color: var(--alert);
+}
+.drill-option:disabled { opacity: 1; cursor: default; }
+
+/* Matching: one prompt, one menu, one verdict per row. */
+.drill-line {
+  display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center;
+  margin-bottom: var(--space-1);
+}
+.drill-line .drill-prompt { flex: 1 1 12rem; margin: 0; }
+.drill-line select { max-width: 16rem; }
+
+.drill-blank { display: flex; flex-direction: column; gap: 0.2em; }
+.drill-answer { font-size: var(--fs-1); width: 100%; }
+.drill-mark { font-size: var(--fs--1); padding-inline-start: 0.5em; }
+/* Multiple choice puts its verdict on a line of its own under the options, where
+   matching and fill-in-the-blank put theirs beside each row. */
+.drill-run > .drill-mark { display: block; margin-bottom: var(--space-2); }
+.drill-mark.marks { border-inline-start: 4px solid var(--accent); color: var(--accent); }
+.drill-summary p { margin: 0 0 var(--space-2); }
+
 .warnings .fixes { margin-top: 0.4em; gap: var(--space-1); }
 button.fix {
   font-size: inherit; padding: 0.2em 0.6em; background: var(--paper);
@@ -874,12 +952,45 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
 
 /* The Custom row for colours: one swatch per section role, plus the ink. Native
    colour inputs, because every platform already has a picker better than one drawn
-   here and this is the one setting where the reader needs to see the result. */
-.swatches { flex-wrap: wrap; gap: 5px; }
+   here and this is the one setting where the reader needs to see the result.
+
+   Each one carries its own caption. Six unlabelled squares told the reader nothing
+   about which section they were recolouring -- the name was in `title` and reached
+   only a screen reader or a patient hover. Two columns rather than a row of six,
+   because the names are words ("Getting around", "Places and time") and a six-across
+   row of them wraps into rubble in a 260px panel. */
+.swatches { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; }
+/* `display` beats `[hidden]`, which is why every block here that is toggled needs
+   this line -- the third time this trap has been paid for in this file. */
+.swatches[hidden], .flag-picker[hidden], .background-custom[hidden] { display: none; }
+.swatch-labelled { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+.swatch-labelled .small { line-height: 1.15; }
 .swatch {
   inline-size: 2rem; block-size: 1.7rem; padding: 0; cursor: pointer;
   border: 1px solid var(--line); border-radius: var(--radius-sm); background: none;
 }
+/* The background panel's own column: a swatch, a labelled slider and, in flag mode,
+   one toggle per country the language serves. */
+.background-custom { display: flex; flex-direction: column; gap: 6px; }
+
+/* Two bands, each its own block: a checkbox that turns it on and the editor beneath.
+   A header and a footer are independent settings now, so they read as two things
+   rather than as one three-way choice. */
+.head-band { display: flex; flex-direction: column; gap: 4px; }
+.head-band + .head-band { margin-block-start: var(--space-2); }
+.head-on { display: flex; align-items: center; gap: 6px; font-weight: 600; cursor: pointer; }
+.head-band[hidden] { display: none; }
+.flag-picker { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 10px; }
+.flag-choice { display: flex; align-items: center; gap: 5px; cursor: pointer; min-width: 0; }
+.flag-choice .small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* The flag's own colours rather than its emoji, which does not render on Windows --
+   and here the colours *are* what the setting does. */
+.flag-strip {
+  display: flex; inline-size: 1.1rem; block-size: 0.8rem; flex: 0 0 auto;
+  border: 1px solid var(--line); border-radius: 2px; overflow: hidden;
+}
+.flag-strip > span { flex: 1 1 0; }
+
 .swatch::-webkit-color-swatch-wrapper { padding: 2px; }
 .swatch::-webkit-color-swatch { border: none; border-radius: 2px; }
 .swatch::-moz-color-swatch { border: none; border-radius: 2px; }
@@ -1235,3 +1346,14 @@ button.big { justify-content: center; padding: 0.6em 1em; font-size: var(--fs-1)
   display: flex; align-items: center; gap: 0.35em;
   font-size: var(--fs--1); cursor: pointer; padding: 0.05em 0;
 }
+/* A print-like sample next to the optional ornament choice. */
+.ornament-sample {
+  display: block;
+  width: 100%;
+  max-height: 54px;
+  margin-top: 8px;
+  background: #fff;
+  border: 1px solid #dce3de;
+  border-radius: 4px;
+}
+.ornament-control p { margin: 5px 0 0; }

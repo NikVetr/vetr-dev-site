@@ -1014,3 +1014,88 @@ test('both halves of the row alternation are painted, once the card is not white
   assert.equal(off.shaded, 0, 'at zero the shading is gone');
   assert.equal(off.light, 0, 'and so is the white behind it, or the card shows through one row in two');
 });
+
+test('a header and a footer are two bands, and a band may be a tab', async () => {
+  const base = await referenceSpec('zh-Hans', 'en');
+  /**
+   * The topmost and bottom-most rows of runs on face 1.
+   *
+   * By content rather than by geometry: a band's own height has already come out of
+   * the margin by the time anything is drawn, so `contentBox` called without it
+   * reports a top *above* where the header sits and cannot be used to tell them
+   * apart. The furniture is distinctive enough to recognise -- a folio, an emergency
+   * line -- so the tests below say what they expect to read there.
+   * @param {any} plan
+   */
+  const bandsOf = (plan) => {
+    /** @type {Map<string, any[]>} */ const rows = new Map();
+    for (const r of plan.faces[0].runs) {
+      const key = r.y.toFixed(1);
+      rows.set(key, [...(rows.get(key) ?? []), r]);
+    }
+    const ys = [...rows.keys()].map(Number).sort((a, b) => a - b);
+    const row = (/** @type {number} */ y) => (rows.get(y.toFixed(1)) ?? [])
+      .slice().sort((a, b) => a.x - b.x);
+    return { top: row(ys[0]), bottom: row(ys[ys.length - 1]) };
+  };
+  const textOf = (/** @type {any[]} */ runs) => runs.map((r) => r.text).join('');
+
+  // **Both at once**, which the old `at: 'none'|'top'|'bottom'` made impossible for no
+  // reason but the shape of the type -- and a folio at the foot with the emergency
+  // number at the head is an obvious thing to want.
+  const both = await buildSheet(ctx, {
+    ...base,
+    head: { span: 'full', left: ['page'], right: ['pair'] },
+    foot: { span: 'full', center: ['region'] },
+  });
+  const b = bandsOf(both.plan);
+  assert.match(textOf(b.top), /1 \/ \d+/, 'a header should print');
+  assert.match(textOf(b.bottom), /110/, 'and a footer at the same time');
+
+  // The legacy shape still works, and `at: 'bottom'` becomes the foot rather than a
+  // header nobody asked for. A spec of this shape is in `localStorage`, in exported
+  // sheets and in `data/presets.json`.
+  const legacy = await buildSheet(ctx, {
+    ...base, head: /** @type {any} */ ({ at: 'bottom', left: ['page'] }),
+  });
+  const l = bandsOf(legacy.plan);
+  assert.doesNotMatch(textOf(l.top), /1 \/ \d+/, 'at:bottom is not a header');
+  assert.match(textOf(l.bottom), /1 \/ \d+/, 'at:bottom is a footer');
+
+  // A tab gathers all three positions into one edge instead of spreading them.
+  const tab = await buildSheet(ctx, {
+    ...base, head: undefined, foot: { span: 'right', left: ['page'], center: ['region'] },
+  });
+  const runs = bandsOf(tab.plan).bottom;
+  assert.match(textOf(runs), /1 \/ \d+/, 'the tab should print');
+  const left = Math.min(...runs.map((/** @type {any} */ r) => r.x));
+  assert.ok(left > tab.plan.pageW / 2,
+    `a right tab should sit in the right half, starts at ${left.toFixed(1)}`);
+
+  // **One space at every join, whatever meets there.** The emergency slot's own parts
+  // end in spaces -- its regex captures the digits and the run after them -- and
+  // shifting that space onto a separator that carried its own gave two spaces before
+  // the bullet and one after, on some joins and not others. `measurer.width` drops a
+  // trailing space, so a join's space has to sit on the leading side and there has to
+  // be exactly one of it.
+  for (const run of runs) {
+    assert.ok(!/\s$/.test(run.text), `"${run.text}" ends in a space, which cannot measure`);
+    assert.ok(!/^\s\s/.test(run.text), `"${run.text}" starts with more than one space`);
+  }
+  const joined = textOf(runs);
+  assert.ok(!/ {2}/.test(joined), `doubled space in the band: ${JSON.stringify(joined)}`);
+  assert.match(joined, /\u2022 /, 'the bullet takes a space on each side');
+
+  // A band may be a colour of its own, which is a different question from emphasis.
+  const red = await buildSheet(ctx, {
+    ...base, head: { span: 'full', center: ['region'], colour: 'roles.alert' }, foot: undefined,
+  });
+  const fills = new Set(bandsOf(red.plan).top.map((/** @type {any} */ r) => r.fill));
+  assert.equal(fills.size, 1, 'the whole band takes the colour, emphasis included');
+  assert.equal([...fills][0], red.theme.colors.roles.alert);
+
+  // And an empty band reserves no height, so the control may leave one switched on.
+  const empty = await buildSheet(ctx, { ...base, head: { span: 'full' }, foot: undefined });
+  const plainBox = contentBox((await buildSheet(ctx, { ...base, head: undefined })).plan.geometry, base.paper);
+  assert.equal(contentBox(empty.plan.geometry, base.paper).height, plainBox.height);
+});

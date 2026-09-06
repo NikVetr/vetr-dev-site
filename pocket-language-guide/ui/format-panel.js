@@ -14,14 +14,19 @@ import {
   pageGlyph, facesGlyph, paddingGlyph, PADDING_CHOICES, inkGlyph,
   itemGlyph, finishGlyph, flipGlyph, priorityOptions,
   customGlyph, numericChoice, fieldGlyph, toggles, cardSizeControl, paletteControl,
-  redrawGlyphs, relabelGlyphs, reserveControl, phoneControl, splitGlyph, headGlyph,
+  redrawGlyphs, relabelGlyphs, reserveControl, phoneControl, splitGlyph,
   typeGlyph, typefaceGlyph, dpiGlyph, segmented, panelField, backgroundControl,
   headControl,
 } from './glyphs.js';
 import { familyFor } from '../render/fonts.js';
 import { languageName, t } from './i18n.js';
+import { ornamentControl } from './ornament-control.js';
 
 const COLUMN_CHOICES = [1, 2, 3, 4, 5, 6];
+/** Theme colour keys a furniture band may be set in, named as the theme files key them. */
+const COLOUR_BAND_KEYS = [
+  'roles.comm', 'roles.money', 'roles.move', 'roles.stay', 'roles.alert', 'ink',
+];
 // 0 selects auto. Faces come in pairs, because a double-sided sheet is two of them
 // -- except for one, which is a single side: a phone screen, or a card printed on
 // one side and not cut.
@@ -91,6 +96,10 @@ const FIELD_ORDER = /** @type {const} */ ([
 /**
  * The columns this pair could actually fill, in order.
  *
+ * Exported for `ui/drill.js`: the quiz asks which columns to show and which to
+ * enter, which is the same question about the same cells, so it takes the same list
+ * and the same names rather than re-deriving either.
+ *
  * Two of the seven are structural rather than empty: a target with no alternate
  * script and a target with no romanisation system can *never* fill those columns,
  * and their toggles were drawing an empty dashed rule -- which reads as "this is
@@ -100,7 +109,7 @@ const FIELD_ORDER = /** @type {const} */ ([
  * @param {import('../core/types.js').SheetSpec} spec
  * @param {PanelInput['corpus']} corpus
  */
-function fieldsFor(spec, corpus) {
+export function fieldsFor(spec, corpus) {
   const target = corpus.languages[spec.target];
   return FIELD_ORDER.filter((field) => {
     if (field === 'script_alt') return Boolean(target.script_alt);
@@ -124,7 +133,7 @@ function fieldsFor(spec, corpus) {
  * @param {PanelInput['corpus']} corpus
  * @returns {Record<string, {caption:string, title:string}>}
  */
-function fieldLabels(spec, corpus) {
+export function fieldLabels(spec, corpus) {
   const target = languageName(spec.target, corpus.languages[spec.target].exonym_en);
   const source = languageName(spec.source, corpus.languages[spec.source].exonym_en);
   const altIso = corpus.languages[spec.target].script_alt;
@@ -391,6 +400,8 @@ export function createFormatPanel(input) {
     onChange: (value) => emit({ typeface: value }),
   });
 
+  const ornaments = ornamentControl(spec, (ornamentStyle) => emit({ ornamentStyle }));
+
   const padding = numericChoice({
     label: t('format.breathingRoom'),
     value: spec.padding,
@@ -455,6 +466,11 @@ export function createFormatPanel(input) {
     value: spec.background,
     roleColours: () => theme.colours(),
     flagColours: flagColoursFor(corpus, spec.target),
+    // Every country the target language serves, so the reader can say *which* flag
+    // rather than always getting the registry's first two.
+    regions: (corpus.languages[spec.target]?.regions ?? '').split(';').filter(Boolean),
+    regionColours: (/** @type {string} */ code) => (corpus.regions[code]?.flag_colors ?? '')
+      .split(';').map((/** @type {string} */ c) => c.trim()).filter(Boolean),
     onChange: emit,
   });
 
@@ -642,7 +658,11 @@ export function createFormatPanel(input) {
   // --- running head -------------------------------------------------------
 
   // Shared with the quick page, which had no way to reach the band at all.
-  const head = headControl({ spec, onChange: emit });
+  // The theme's own colour keys, so a band can only ever be a colour already on the
+  // card -- the five section roles plus the body ink.
+  const head = headControl({
+    spec, onChange: emit, colourKeys: COLOUR_BAND_KEYS,
+  });
   const headField = head.field;
 
   // --- which columns appear ----------------------------------------------
@@ -686,6 +706,7 @@ export function createFormatPanel(input) {
     headField,
     panelField(t('format.textPadding'), [padding.group]),
     panelField(t('format.colours'), [theme.group, theme.custom]),
+    ornaments.root,
     panelField(t('format.background'),
       [background.group, background.custom, background.rowsField]),
     panelField(t('format.ink'), [ink.group]),
@@ -737,6 +758,7 @@ export function createFormatPanel(input) {
       head.sync(next);
       theme.sync(next);
       ink.select(next.inkMode);
+      ornaments.sync(next);
       background.sync(next.background);
       paper.select.value = next.paper.presetId;
       if (region) region.select.value = next.region;
@@ -760,4 +782,3 @@ export function createFormatPanel(input) {
     finish: () => ({ mode: finish, flip }),
   };
 }
-

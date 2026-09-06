@@ -71,6 +71,12 @@ export function faceToSvg(face, plan, opts) {
     );
   }
 
+  for (const p of face.paths ?? []) {
+    out.push(`<path class="ornament" d="${esc(p.d)}" transform="translate(${num(p.x)} ${num(p.y)})" `
+      + `fill="none" stroke="${esc(p.stroke)}" stroke-width="${num(p.strokeWidth)}" `
+      + 'stroke-linecap="round"/>');
+  }
+
   for (const icon of face.icons) {
     const paths = opts.icons.paths[icon.name];
     if (!paths) throw new Error(`icon "${icon.name}" is not in data/icons.json`);
