@@ -65,20 +65,43 @@
     const count = x.length / 2;
     const profiles = coalitions(x, count);
     const predictions = profiles.map((profile) => kernelPrediction(kernel, profile, family));
+    const allocations = Array.from({ length: count }, (_, driver) => shapleyWeights(count, driver));
+    const covariance = family === "gp" ? profiles.map((profile, i) => profiles.map((other, j) => {
+      const distance = profile.reduce((sum, value, k) => sum + (value - other[k]) ** 2, 0);
+      return kernel.priorInterceptVariance + kernel.amplitude ** 2 * Math.exp(-distance / (2 * kernel.lengthScale ** 2))
+        - dot(predictions[i].projected, predictions[j].projected);
+    })) : null;
+    const joint = covariance && allocations.map((a) => allocations.map((b) => dot(a, covariance.map((row) => dot(row, b)))));
+    if (joint) for (let i = 0; i < count; i++) for (let j = 0; j < i; j++) joint[i][j] = joint[j][i] = (joint[i][j] + joint[j][i]) / 2;
     return Array.from({ length: count }, (_, driver) => {
-      const weights = shapleyWeights(count, driver);
+      const weights = allocations[driver];
       const mean = dot(weights, predictions.map((item) => item.mean));
       if (family === "svr") {
         return { value: mean, draws: draws.map((draw) => dot(weights, profiles.map((profile) => kernelPrediction(kernel, profile, family, draw).mean))) };
       }
-      let variance = 0;
-      profiles.forEach((profile, i) => profiles.forEach((other, j) => {
-        const distance = profile.reduce((sum, value, k) => sum + (value - other[k]) ** 2, 0);
-        const prior = kernel.priorInterceptVariance + kernel.amplitude ** 2 * Math.exp(-distance / (2 * kernel.lengthScale ** 2));
-        variance += weights[i] * weights[j] * (prior - dot(predictions[i].projected, predictions[j].projected));
-      }));
+      const variance = joint[driver][driver];
       if (variance < -1e-5) throw new Error("Negative GP contrast variance");
-      return { value: mean, normal: { mean, sd: Math.sqrt(Math.max(0, variance)) } };
+      return { value: mean, normal: { mean, sd: Math.sqrt(Math.max(0, variance)) }, covariance: joint[driver] };
+    });
+  }
+  function jointNormalDraws(means, covariance, count = 1000) {
+    const n = means.length;
+    if (covariance.length !== n || covariance.some((row) => row.length !== n || row.some((v) => !Number.isFinite(v)))) throw new Error("Invalid joint covariance");
+    const lower = Array.from({ length: n }, () => Array(n).fill(0));
+    const tolerance = 1e-9 * Math.max(1, ...covariance.map((row, i) => Math.abs(row[i])));
+    for (let i = 0; i < n; i++) for (let j = 0; j <= i; j++) {
+      const residual = covariance[i][j] - dot(lower[i].slice(0, j), lower[j].slice(0, j));
+      if (i === j) {
+        if (residual < -tolerance) throw new Error("Joint covariance is not positive semidefinite");
+        lower[i][j] = Math.sqrt(Math.max(0, residual));
+      } else if (lower[j][j] > 0) lower[i][j] = residual / lower[j][j];
+      else if (Math.abs(residual) > tolerance) throw new Error("Inconsistent singular joint covariance");
+    }
+    let seed = 71943;
+    const uniform = () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return (seed + .5) / 4294967296; };
+    return Array.from({ length: count }, () => {
+      const z = means.map(() => Math.sqrt(-2 * Math.log(uniform())) * Math.cos(2 * Math.PI * uniform()));
+      return means.map((mean, i) => mean + dot(lower[i], z));
     });
   }
   function interpolateBasis(effect, x) {
@@ -90,7 +113,7 @@
     const fraction = (x - grid[i]) / (grid[i + 1] - grid[i]);
     return effect.basis[i].map((value, j) => value + fraction * (effect.basis[i + 1][j] - value));
   }
-  const api = { dot, curvature, normalQuantile, kernelPrediction, kernelContributions, shapleyWeights, interpolateBasis };
+  const api = { dot, curvature, normalQuantile, kernelPrediction, kernelContributions, shapleyWeights, interpolateBasis, jointNormalDraws };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.SalaryModelMath = Object.freeze(api);
 })(globalThis);

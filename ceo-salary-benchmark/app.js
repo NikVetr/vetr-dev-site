@@ -167,6 +167,9 @@
     histogramAxis: { numerator: "salary", denominator: "expenses" },
     scatterXAxis: { numerator: "expenses", denominator: "staff" },
     scatterYAxis: { numerator: "salary", denominator: "expenses" },
+    scatterPlotMode: "bivariate",
+    modelRobustnessIntervals: false,
+    scatterMatrix: { mode: "mixed", correlation: "spearman", scale: "log", features: ["salary", "expenses", "revenue", "staff"] },
     chartColor: "tier",
     showContours: true,
     showJobAdIntervals: true,
@@ -1330,6 +1333,10 @@
       return { eligible: true, reason, trainingRecord };
     }
     if (state.view === "histogram") return axisEligibility("histogram", row);
+    if (state.scatterPlotMode === "matrix") {
+      const available = scatterMatrixColumns().filter((column) => state.scatterMatrix.features.includes(column.key) && Number.isFinite(column.value(row))).length;
+      return { eligible: available >= 2, reason: available >= 2 ? "Available in at least one matrix pair." : "Fewer than two selected matrix features are available." };
+    }
     const horizontal = axisEligibility("scatterX", row);
     if (!horizontal.eligible) return { ...horizontal, reason: `Horizontal axis: ${horizontal.reason}` };
     const vertical = axisEligibility("scatterY", row);
@@ -1348,7 +1355,7 @@
     if (state.view === "model") return [];
     const xDescriptor = axisDescriptor("scatterX");
     const yDescriptor = axisDescriptor("scatterY");
-    return selectedRows((row) => plotEligibility(row).eligible)
+    return selectedRows((row) => axisEligibility("scatterX", row).eligible && axisEligibility("scatterY", row).eligible)
       .map((item) => ({
         ...item,
         xValue: xDescriptor.value(item.row),
@@ -2700,40 +2707,8 @@
     return true;
   }
 
-  function weightedPearson(values) {
-    const total = values.reduce((sum, item) => sum + item.weight, 0);
-    if (values.length < 2 || !total) return NaN;
-    const meanX = values.reduce((sum, item) => sum + item.x * item.weight, 0) / total;
-    const meanY = values.reduce((sum, item) => sum + item.y * item.weight, 0) / total;
-    const covariance = values.reduce((sum, item) => sum + (item.x - meanX) * (item.y - meanY) * item.weight, 0);
-    const varianceX = values.reduce((sum, item) => sum + (item.x - meanX) ** 2 * item.weight, 0);
-    const varianceY = values.reduce((sum, item) => sum + (item.y - meanY) ** 2 * item.weight, 0);
-    return varianceX > 0 && varianceY > 0 ? covariance / Math.sqrt(varianceX * varianceY) : NaN;
-  }
-
-  function weightedRanks(values, accessor) {
-    const ranked = [...values].sort((a, b) => accessor(a) - accessor(b));
-    const result = new Map();
-    let cumulative = 0;
-    for (let start = 0; start < ranked.length;) {
-      let end = start + 1;
-      while (end < ranked.length && accessor(ranked[end]) === accessor(ranked[start])) end += 1;
-      const groupWeight = ranked.slice(start, end).reduce((sum, item) => sum + item.weight, 0);
-      const rank = cumulative + groupWeight / 2;
-      ranked.slice(start, end).forEach((item) => result.set(item.index, rank));
-      cumulative += groupWeight;
-      start = end;
-    }
-    return result;
-  }
-
   function weightedCorrelations(items, xAccessor, yAccessor) {
-    const values = items.map((item, index) => ({ index, x: xAccessor(item), y: yAccessor(item), weight: item.weight }));
-    const pearson = weightedPearson(values);
-    const xRanks = weightedRanks(values, (item) => item.x);
-    const yRanks = weightedRanks(values, (item) => item.y);
-    const spearman = weightedPearson(values.map((item) => ({ x: xRanks.get(item.index), y: yRanks.get(item.index), weight: item.weight })));
-    return { pearson, spearman };
+    return RelationshipPlots.correlations(items.map((item) => ({ x: xAccessor(item), y: yAccessor(item), weight: item.weight })));
   }
 
   function updateCorrelationSummary(correlations = {}) {
@@ -2945,6 +2920,71 @@
     refs.statN.textContent = items.length;
     refs.statNeff.textContent = squared ? (totalWeight ** 2 / squared).toFixed(1) : "0";
     refs.statCenter.textContent = yDescriptor.format(distributionQuantile(items, 0.5));
+  }
+
+  function scatterMatrixColumns() {
+    const columns = Object.entries(numericVariables).map(([key, variable]) => ({ key, label: variable.shortLabel,
+      rawValue: variable.value, expression: { numerator: key, denominator: key === "expenses" ? "staff" : "expenses" }, mode: "value", rawFormat: variable.format }));
+    ["scatterX", "scatterY"].forEach((axis) => {
+      if (axisMode(axis) !== "ratio") return;
+      const descriptor = axisDescriptor(axis);
+      columns.push({ key: axis, label: descriptor.shortLabel, rawValue: descriptor.value,
+        expression: { ...axisExpression(axis) }, mode: "ratio", rawFormat: compactNumber });
+    });
+    return columns.map((column) => ({ ...column,
+      value: (row) => {
+        const value = column.rawValue(row);
+        return !Number.isFinite(value) || state.scatterMatrix.scale === "log" && value <= 0 ? NaN
+          : state.scatterMatrix.scale === "log" ? Math.log(value) : value;
+      },
+      format: (value) => state.scatterMatrix.scale === "log" ? column.rawFormat(Math.exp(value)) : column.rawFormat(value),
+    }));
+  }
+
+  function renderScatterMatrix(container = $("#scatter-matrix"), expanded = false) {
+    const columns = scatterMatrixColumns();
+    const items = selectedRows();
+    const colors = categoryColors(items);
+    const settings = state.scatterMatrix;
+    const getPair = (x, y) => {
+      const paired = selectedRows((row) => Number.isFinite(x.value(row)) && Number.isFinite(y.value(row)));
+      return [...paired.map((item) => ({ x: x.value(item.row), y: y.value(item.row), weight: item.weight,
+        color: colors.get(chartCategory(item.row)), label: item.row.organization, item })),
+      ...activeRpReferences().map((row) => ({ x: x.value(row), y: y.value(row), weight: 0,
+        color: "#f2bd42", label: `${row.organization} (reference)`, reference: true, item: { row } }))];
+    };
+    const openPair = (x, y) => {
+      state.scatterXAxis = { ...x.expression }; state.scatterYAxis = { ...y.expression };
+      state.axisModes.scatterX = x.mode; state.axisModes.scatterY = y.mode;
+      state.axisScales.scatterX = settings.scale; state.axisScales.scatterY = settings.scale;
+      if (expanded) $("#model-explanation-dialog").close();
+      state.scatterPlotMode = "bivariate"; hideTooltip(); syncControlsFromState(); renderAll();
+    };
+    RelationshipPlots.explorer(container, { columns, getPair, settings, onCell: openPair,
+      scales: [["log", "Log scale"], ["linear", "Original scale"]], maximumPoints: Infinity,
+      onPoint: (point) => point.reference ? focusRpReferenceRow(point.item.row.id) : focusRow(point.item.row.id),
+      onChange: () => {
+        refs.statCenter.textContent = settings.scale === "log" ? "Log" : "Original";
+        renderTable(); scheduleUrlState();
+        if (expanded) renderScatterMatrix();
+      },
+      note: "Weighted, pairwise-complete records; each cell reports n. Log scale uses positive values. Gold marks RP (excluded from correlations). Open a pair for ranges, contours and quantile summaries.",
+    });
+    if (!expanded) {
+      const expand = resultElement("button", "text-button", "Expand ↗"); expand.type = "button";
+      expand.addEventListener("click", () => {
+        $("#model-explanation-title").textContent = "Relationships among organization characteristics";
+        renderScatterMatrix($("#model-explanation-content"), true);
+        $("#model-explanation-dialog").showModal(); $("#model-explanation-dialog").scrollTop = 0;
+      });
+      container.querySelector(".relationship-controls").append(expand);
+    }
+    refs.chartTitle.textContent = "Relationships among selected features";
+    refs.statN.textContent = items.length; refs.statNUnit.textContent = "selected records";
+    refs.statNeff.textContent = "Pairwise"; refs.statNeffUnit.textContent = "available cases";
+    refs.statCenter.textContent = settings.scale === "log" ? "Log" : "Original"; refs.statCenterUnit.textContent = "value scale";
+    refs.chartLegend.replaceChildren(); appendCategoryLegend(colors); appendPointSizeLegend(items);
+    $("#chart-description").textContent = "A selectable matrix of weighted record correlations and pairs plots. Correlations exclude RP reference marks and use the values available in each pair.";
   }
 
   const MODEL_CONTINUOUS_LABELS = Object.freeze({
@@ -3306,6 +3346,7 @@
 
   function renderModelContributions(prediction) {
     refs.modelContributions.replaceChildren();
+    $("#model-joint-drivers").disabled = !prediction.contributions.length;
     $("#model-driver-reference").textContent = "";
     if (!prediction.contributions.length) {
       const note = document.createElement("p");
@@ -3360,7 +3401,11 @@
       showDriverExplanation(prediction, item, checkbox.checked);
       $("#model-driver-all-models").focus({ preventScroll: true });
     });
-    toggle.append(checkbox, "Compare all models"); content.append(toggle);
+    toggle.append(checkbox, "Compare all models");
+    const actions = resultElement("div", "driver-view-actions");
+    const joint = resultElement("button", "text-button", "Joint uncertainty ↗"); joint.type = "button";
+    joint.addEventListener("click", () => showJointDrivers(prediction, item));
+    actions.append(toggle, joint); content.append(actions);
     const categorySpecs = {
       "Focus area": ["focus", "focus_area"], "Effective Altruism": ["ea", "ea_relationship"],
       "Organization type": ["organizationType", "organization_type"], "Title group": ["title", "title_group"],
@@ -3489,6 +3534,63 @@
     const prediction = currentModelPrediction();
     if (prediction) renderModelDiagnostics(prediction);
   }));
+
+  function showJointDrivers(prediction, focusedItem = null) {
+    const content = $("#model-explanation-content");
+    const row = modelComparisonRow(prediction.methodKey);
+    $("#model-explanation-title").textContent = "Joint uncertainty in prediction drivers";
+    content.replaceChildren();
+    const label = resultElement("label", "relationship-controls", "Model");
+    const modelSelect = document.createElement("select"); modelSelect.setAttribute("aria-label", "Joint uncertainty model");
+    PREDICTIVE_MODEL.comparison.filter((candidate) => candidate.method !== "intercept").forEach((candidate) => {
+      const option = document.createElement("option"); option.value = candidate.key; option.textContent = candidate.label;
+      option.disabled = !withModelComparison(candidate, currentModelPrediction);
+      modelSelect.append(option);
+    });
+    modelSelect.value = row.key;
+    modelSelect.addEventListener("change", () => {
+      const selected = modelComparisonRow(modelSelect.value);
+      const other = withModelComparison(selected, currentModelPrediction);
+      if (!other) throw new Error("Cannot show joint uncertainty for an invalid profile");
+      showJointDrivers(other);
+    });
+    label.append(modelSelect); content.append(label);
+    if (focusedItem) {
+      const back = resultElement("button", "text-button", "Back to effect intervals"); back.type = "button";
+      back.addEventListener("click", () => showDriverExplanation(prediction, focusedItem)); content.append(back);
+    }
+    const contributions = prediction.contributions;
+    let jointDraws = null;
+    if (row.method === "gp") jointDraws = SalaryModelMath.jointNormalDraws(contributions.map((item) => item.value), contributions.map((item) => item.covariance));
+    const count = jointDraws?.length || Math.max(...contributions.map((item) => item.draws.length));
+    const rawColumns = contributions.map((item, j) => ({ key: `profile:${j}`, label: item.label,
+      draws: jointDraws ? jointDraws.map((draw) => draw[j]) : item.draws }));
+    if (prediction.model.draws) {
+      const specs = [["focus", "focus_area", "Focus"], ["ea", "ea_relationship", "EA"], ["organizationType", "organization_type", "Org type"],
+        ["title", "title_group", "Title"], ["location", "location_scope", "Hiring market"], ["remote", "remote_category", "Work model"], ["fiscalSponsor", "fiscal_sponsor_category", "Fiscal sponsor"]];
+      specs.forEach(([key, feature, label]) => modelCategoryLevels(feature).forEach((level, j) => rawColumns.push({
+        key: `${key}:${j}`, label: `${label}: ${level}`, draws: prediction.model.draws[key].map((draw) => draw[j]),
+      })));
+    }
+    if (rawColumns.some((column) => ![1, count].includes(column.draws.length) || column.draws.some((value) => !Number.isFinite(value)))) throw new Error("Joint driver draws must be finite and aligned");
+    const settings = { mode: "mixed", correlation: "pearson", scale: state.modelEffectUnits,
+      features: contributions.flatMap((item, j) => Object.hasOwn(MODEL_CONTINUOUS_LABELS, item.key) || item.label === focusedItem?.label ? [`profile:${j}`] : []) };
+    const columns = rawColumns.map((column) => ({ ...column,
+      value: (i) => { const v = column.draws.length === 1 ? column.draws[0] : column.draws[i]; return settings.scale === "percent" ? 100 * Math.expm1(v) : v; },
+      format: (v) => `${v.toFixed(settings.scale === "percent" ? 1 : 2)}${settings.scale === "percent" ? "%" : ""}`,
+    }));
+    const source = row.method.startsWith("bayesian") ? "Aligned posterior draws"
+      : row.method === "gp" ? "Joint conditional GP simulation; fitted kernel held fixed"
+        : row.method === "svr" ? "Aligned bootstrap fits" : "Joint coefficient approximation";
+    const explorer = resultElement("div", "model-joint-explorer"); content.append(explorer);
+    RelationshipPlots.explorer(explorer, { columns, settings,
+      getPair: (x, y) => Array.from({ length: count }, (_, i) => ({ x: x.value(i), y: y.value(i), weight: 1, color: MODEL_FAMILY_COLORS[row.method], label: `Draw ${i + 1}` })),
+      scales: [["percent", "Percent salary effect"], ["log", "Log salary effect"]],
+      onChange: () => { state.modelEffectUnits = settings.scale; $("#model-effect-units").value = settings.scale; renderModelContributions(currentModelPrediction()); scheduleUrlState(); },
+      note: `${source} (${count}). Correlations use all draws; small pairs show up to 250. Profile contributions are contrasts from the training reference, not slopes. Category levels are available under Features.`,
+    });
+    const dialog = $("#model-explanation-dialog"); if (!dialog.open) dialog.showModal(); dialog.scrollTop = 0;
+  }
 
   function renderModelDiagnostics(prediction) {
     const metric = modelComparisonRow(prediction.methodKey);
@@ -3620,6 +3722,7 @@
   }
 
   function clearModelDetailsForInvalidPrediction() {
+    $("#model-joint-drivers").disabled = true;
     $("#model-driver-reference").textContent = "";
     refs.modelMethodDescription.textContent = "Model details are available after the required profile inputs are valid.";
     refs.modelComparisonBody.replaceChildren();
@@ -3776,7 +3879,12 @@
   }
 
   function renderChart() {
+    const matrix = state.view === "scatter" && state.scatterPlotMode === "matrix";
+    // Avoid invalidating SVG text layout when the view has not changed.
+    if (refs.chart.hasAttribute("hidden") !== matrix) refs.chart.toggleAttribute("hidden", matrix);
+    if ($("#scatter-matrix").hidden === matrix) $("#scatter-matrix").hidden = !matrix;
     if (state.view === "model") renderModel();
+    else if (matrix) renderScatterMatrix();
     else if (state.view === "scatter") renderScatter();
     else renderHistogram();
   }
@@ -3862,7 +3970,9 @@
         return;
       }
       const intervalLabel = isBayesianMethod() ? "credible" : state.modelMethod === "gp" ? "conditional credible" : "approximate compatibility";
-      refs.quantileBasis.textContent = `${currentModelComparisonRow().label}. Each small range is a ${state.modelCompatibilityLevel}% ${intervalLabel} interval for that population percentile; the curve shows peer salary variation.`;
+      const predictive = isBayesianMethod() || state.modelMethod === "gp";
+      refs.quantileBasis.innerHTML = `${escapeHtml(currentModelComparisonRow().label)}. <strong>${predictive ? "Predictive salary percentiles:" : "Estimated salary percentiles:"}</strong> ${predictive ? "peer variation + model uncertainty" : "residual peer variation at the fitted prediction"}. <strong>${state.modelCompatibilityLevel}% ${intervalLabel} intervals:</strong> estimation uncertainty about each underlying peer percentile.${predictive ? " At P50, these intervals describe exp(expected log salary)." : ""}`;
+      refs.quantileBasis.title = "For Bayesian models, percentile intervals summarize exp(μ + σ Φ⁻¹(p)) across posterior draws. At the median, this is exp(μ), where μ is expected log salary. Other percentiles also depend on peer spread. The headline percentile comes from the predictive distribution; it can differ from the center of the parameter-based interval. Expected salary means E(salary), not exp(E(log salary)). GP intervals condition on fitted kernel parameters; other methods use joint coefficient or bootstrap approximations.";
       refs.customQuantilesField.hidden = state.quantileGranularity !== "custom";
       const percentiles = quantilePercentiles();
       if (state.quantileGranularity === "custom") {
@@ -3879,7 +3989,7 @@
         const interval = quantileUncertainty(prediction, percentile / 100);
         const uncertainty = document.createElement("small"); uncertainty.className = "quantile-uncertainty";
         uncertainty.textContent = `${compactMoney(interval[0])}–${compactMoney(interval[1])}`;
-        uncertainty.title = `${state.modelCompatibilityLevel}% ${intervalLabel} interval for the estimated population percentile, not a future salary interval.`;
+        uncertainty.title = `${state.modelCompatibilityLevel}% ${intervalLabel} interval for the underlying peer percentile (estimation uncertainty).`;
         button.append(uncertainty);
         button.setAttribute("aria-label", `${formatPercentile(percentile)}: ${money(value)}; ${state.modelCompatibilityLevel}% ${intervalLabel} interval ${money(interval[0])} to ${money(interval[1])}`);
         button.addEventListener("pointerenter", () => { state.hoverQuantile = value; renderChart(); });
@@ -3891,6 +4001,7 @@
       return;
     }
     const descriptor = axisDescriptor(analysisAxisKey());
+    refs.quantileBasis.removeAttribute("title");
     const items = analysisItems();
     const model = fitModel(items);
     refs.quantileBasis.textContent = model
@@ -5027,7 +5138,8 @@
       refs.statCenterUnit.textContent = "median";
     }
     refs.priceBasisStatus.textContent = priceBasisLabel();
-    refs.scatterControls.hidden = state.view !== "scatter";
+    refs.scatterControls.hidden = state.view !== "scatter" || state.scatterPlotMode === "matrix";
+    $("#scatter-plot-mode").value = state.scatterPlotMode;
     refs.scatterDisplaySettings.hidden = state.view !== "scatter";
     refs.modelDiagnostics.hidden = !isModel || !isCeoPosition();
     refs.binField.hidden = state.view !== "histogram";
@@ -5181,6 +5293,7 @@
     if (state.modelMethod !== "intercept" && !state.modelIncludeHighestOtherPay) compact.x = 0;
     if (state.modelCompatibilityLevel !== 89) compact.u = state.modelCompatibilityLevel;
     if (state.modelEffectUnits === "log") compact.v = "l";
+    if (state.modelRobustnessIntervals) compact.ui = 1;
     if (isBayesianMethod() && state.modelProfile.focus_area === "__mixture__") compact.j = state.modelFocusWeights;
     Object.entries(MODEL_PROFILE_URL_FIELDS).forEach(([key, code]) => {
       const categorical = MODEL_CATEGORY_KEYS.includes(key);
@@ -5198,7 +5311,7 @@
   const allShareRows = [...allRowsByStream.incumbents, ...allRowsByStream.jobAds];
   const shareRowCodes = new Map();
   let urlSyncReady = false;
-  let urlSyncFrame = 0;
+  let urlSyncScheduled = false;
   const SCENARIO_STORAGE_KEY = "rp-salary-benchmark.scenarios.v1";
   const MAX_SCENARIOS = 4;
   let savedScenarios = [];
@@ -5310,6 +5423,10 @@
       else payload.h = expressionCode(quantileExpression);
     }
     if (state.view === "scatter" && (quantileMode === "ratio" || nondefaultQuantileExpression)) payload.l = 1;
+    if (state.view === "scatter" && state.scatterPlotMode === "matrix") {
+      payload.l = 1; payload.mx = { ...state.scatterMatrix, xMode: state.axisModes.scatterX };
+      payload.j = expressionCode(state.scatterXAxis);
+    }
     if (state.weightings.size) payload.w = [...state.weightings]
       .map((key) => URL_WEIGHT_CODES[key]).sort((a, b) => a.localeCompare(b)).join("");
     if (Object.keys(parameters).length) payload.x = parameters;
@@ -6414,6 +6531,13 @@
       }));
       robustnessReport = { kind: "model", fingerprint, core, source: [], measures: [], posting: [], dollars: [] };
     }
+    if (state.modelRobustnessIntervals && robustnessReport.intervalLevel !== state.modelCompatibilityLevel) {
+      robustnessReport.core.filter((result) => result.status === "valid").forEach((result) => withModelComparison(result.row, () => {
+        const prediction = currentModelPrediction();
+        result.intervals = Object.fromEntries([["q25", .25], ["q50", .5], ["q75", .75]].map(([key, probability]) => [key, quantileUncertainty(prediction, probability)]));
+      }));
+      robustnessReport.intervalLevel = state.modelCompatibilityLevel;
+    }
     robustnessReport.current = robustnessReport.core.find((result) => result.id === currentModelComparisonRow()?.key);
     refs.robustnessStatus.textContent = `${robustnessReport.core.filter((result) => result.status === "valid").length} / ${robustnessReport.core.length} models evaluated at the current profile.`;
     renderRobustnessReport();
@@ -6682,6 +6806,7 @@
     const list = document.createElement("dl");
     if (result.kind === "model") {
       for (const [label, value] of [[robustnessQuantileLabel(key), money(result[key])],
+        ...(state.modelRobustnessIntervals && result.intervals ? [[`${state.modelCompatibilityLevel}% percentile interval`, result.intervals[key].map(money).join("–")]] : []),
         ["Other pay", result.row.includeHighestOtherPay ? "Yes" : "No"],
         ["Ad ranges", result.row.includeAdvertisedRanges ? "Yes" : "No"],
         ["Training records", result.rowCount]]) {
@@ -6744,7 +6869,7 @@
   }
 
   function robustnessPointAriaLabel(result, key, applies = true) {
-    if (result.kind === "model") return `${result.label}. ${robustnessQuantileLabel(key)} ${money(result[key])}. ${applies ? "Select to apply." : "Current model."}`;
+    if (result.kind === "model") return `${result.label}. ${robustnessQuantileLabel(key)} ${money(result[key])}. ${state.modelRobustnessIntervals && result.intervals ? `${state.modelCompatibilityLevel}% percentile interval ${result.intervals[key].map(money).join(" to ")}. ` : ""}${applies ? "Select to apply." : "Current model."}`;
     return result.label + ". " + robustnessQuantileLabel(key) + " " + money(result[key]) + ". "
       + result.rowCount + " records from " + result.organizationCount + " organizations; effective n "
       + result.organizationEffectiveN.toFixed(1) + ". " + (applies ? "Select to apply." : "Current analysis.");
@@ -6804,12 +6929,15 @@
     const valid = report.core.filter((result) => result.status === "valid");
     if (!valid.length) return resultElement("p", "robustness-warning", report.kind === "model" ? "Enter valid profile inputs to compare predictions." : "No core specification met the minimum peer-set requirements.");
     const width = Math.max(300, Math.floor(refs.robustnessResults.getBoundingClientRect().width || 720));
-    const height = 132;
+    const showIntervals = report.kind === "model" && state.modelRobustnessIntervals;
+    const rowHeight = showIntervals ? valid.length * 12 + 22 : 28;
+    const height = showIntervals ? rowHeight * 3 + 40 : 132;
     const margin = { left: width < 420 ? 54 : 64, right: width < 420 ? 8 : 14, top: 8, bottom: 24 };
     const keys = [
       ["q25", "P25"], ["q50", "Median"], ["q75", "P75"],
     ];
     const values = valid.flatMap((result) => keys.map(([key]) => result[key]));
+    if (showIntervals) valid.forEach((result) => keys.forEach(([key]) => values.push(...result.intervals[key])));
     keys.forEach(([key]) => {
       if (report.current.status === "valid") values.push(report.current[key]);
     });
@@ -6832,25 +6960,35 @@
     const pointerPoints = [];
     keys.forEach(([key, label], rowIndex) => {
       const rowTargets = [];
-      const y = margin.top + 18 + rowIndex * 28;
+      const y = margin.top + 18 + rowIndex * rowHeight;
       const range = robustnessRange(valid, key);
       const labelNode = svgElement("text", { x: margin.left - 8, y: y + 3, "text-anchor": "end", class: "robustness-label" });
       labelNode.textContent = label;
       svg.append(labelNode);
-      svg.append(svgElement("line", {
+      if (!showIntervals) svg.append(svgElement("line", {
         x1: x(range[0]), x2: x(range[1]), y1: y, y2: y, class: "robustness-range",
       }));
-      robustnessPointPositions(valid, key, x, y).forEach(({ result, x: pointX, y: pointY }) => {
+      const positions = showIntervals ? valid.map((result, i) => ({ result, x: x(result[key]), y: y + i * 12 })) : robustnessPointPositions(valid, key, x, y);
+      positions.forEach(({ result, x: pointX, y: pointY }) => {
         const target = svgElement("g", {
           class: "robustness-spec-point", tabindex: "-1", role: "button",
           "data-spec-id": result.id, "data-quantile": key,
           "aria-label": robustnessPointAriaLabel(result, key),
           "aria-describedby": "robustness-tooltip",
         });
+        if (showIntervals) {
+          const interval = result.intervals[key];
+          const color = MODEL_FAMILY_COLORS[result.row.method];
+          target.append(svgElement("line", { x1: x(interval[0]), x2: x(interval[1]), y1: pointY, y2: pointY,
+            class: "robustness-percentile-interval", stroke: color, "stroke-width": 2, opacity: .65,
+            "data-low": interval[0], "data-high": interval[1], "data-level": state.modelCompatibilityLevel }));
+          interval.forEach((value) => target.append(svgElement("line", { x1: x(value), x2: x(value), y1: pointY - 2, y2: pointY + 2, stroke: color })));
+        }
         target.append(
           svgElement("circle", { cx: pointX, cy: pointY, r: 9, class: "robustness-point-hit" }),
           svgElement("circle", { cx: pointX, cy: pointY, r: 3.1, class: "robustness-point" }),
         );
+        if (showIntervals) target.querySelector(".robustness-point").style.fill = MODEL_FAMILY_COLORS[result.row.method];
         target.addEventListener("focus", (event) => showRobustnessTooltip(event, target, result, key));
         target.addEventListener("blur", hideRobustnessTooltip);
         target.addEventListener("keydown", (event) => {
@@ -6864,22 +7002,23 @@
       });
       if (report.current.status === "valid") {
         const centerX = x(report.current[key]);
+        const currentY = showIntervals ? positions.find((point) => point.result.id === report.current.id).y : y;
         const target = svgElement("g", {
           class: "robustness-current-point", tabindex: "-1", role: "img",
           "aria-label": robustnessPointAriaLabel(report.current, key, false),
           "aria-describedby": "robustness-tooltip",
         });
         target.append(
-          svgElement("circle", { cx: centerX, cy: y, r: 9, class: "robustness-point-hit" }),
+          svgElement("circle", { cx: centerX, cy: currentY, r: 9, class: "robustness-point-hit" }),
           svgElement("rect", {
-            x: centerX - 4, y: y - 4, width: 8, height: 8,
-            transform: "rotate(45 " + centerX + " " + y + ")", class: "robustness-point is-current",
+            x: centerX - 4, y: currentY - 4, width: 8, height: 8,
+            transform: "rotate(45 " + centerX + " " + currentY + ")", class: "robustness-point is-current",
           }),
         );
         target.addEventListener("focus", (event) => showRobustnessTooltip(event, target, report.current, key, { applies: false }));
         target.addEventListener("blur", hideRobustnessTooltip);
         rowTargets.push(target);
-        pointerPoints.unshift({ x: centerX, y, target, result: report.current, key, applies: false });
+        pointerPoints.unshift({ x: centerX, y: currentY, target, result: report.current, key, applies: false });
         svg.append(target);
       }
       rowTargets.forEach((target, index) => {
@@ -7150,6 +7289,9 @@
     $("#empirical-robustness-options").hidden = modelView;
     $("#empirical-robustness-note").hidden = modelView;
     $("#model-robustness-note").hidden = !modelView;
+    $("#model-robustness-interval-option").hidden = !modelView;
+    $("#model-robustness-intervals").checked = state.modelRobustnessIntervals;
+    $("#model-robustness-note").textContent = `All fitted models at the current profile. Points are salary percentiles; the diamond marks the selected model.${state.modelRobustnessIntervals ? ` Lines show ${state.modelCompatibilityLevel}% estimation intervals for the underlying peer percentiles; colors identify model families.` : " Model differences show sensitivity to the specification."} Select a point to use that model.`;
     weightingInput.disabled = !ceo || modelView;
     refs.robustnessWeightingOption.title = ceo ? "" : "Automatic weights are available only for the CEO benchmark.";
     sourceInput.disabled = !ceo || modelView;
@@ -7184,7 +7326,7 @@
   }
 
   function writeUrlState() {
-    urlSyncFrame = 0;
+    urlSyncScheduled = false;
     if (!urlSyncReady) return;
     const url = new URL(window.location.href);
     const payload = sharePayload();
@@ -7202,8 +7344,9 @@
   }
 
   function scheduleUrlState() {
-    if (!urlSyncReady || urlSyncFrame) return;
-    urlSyncFrame = requestAnimationFrame(writeUrlState);
+    if (!urlSyncReady || urlSyncScheduled) return;
+    urlSyncScheduled = true;
+    queueMicrotask(writeUrlState);
   }
 
   function clearUrlState() {
@@ -7411,7 +7554,7 @@
         d: URL_FIT_KEYS[payload.g],
         am: payload.a === 1 ? "ratio" : "value",
         vw: payload.l === 2 ? "model" : payload.l === 1 ? "scatter" : "histogram",
-        hx: payload.h, sx: payload.j, sy: payload.k, pm: payload.y,
+        hx: payload.h, sx: payload.j, sy: payload.k, pm: payload.y, mx: payload.mx,
         w: [...String(payload.w || "")].map((code) => URL_WEIGHT_KEYS[code]).filter(Boolean),
         te: payload.x?.e, ts: payload.x?.s, eb: payload.x?.b, sb: payload.x?.f, rh: payload.x?.r, ae: payload.x?.a,
         q: URL_QUANTILE_KEYS[payload.q], qq: payload.z,
@@ -7460,12 +7603,20 @@
     state.bins = Math.round(finiteNumber(analysis.b, state.bins, 2, 200));
     state.autoBins = compactVersion;
     state.view = enumValue(analysis.vw, ["histogram", "scatter", "model"], state.view);
+    state.scatterPlotMode = analysis.mx ? "matrix" : "bivariate";
+    state.scatterMatrix = {
+      mode: enumValue(analysis.mx?.mode, ["mixed", "mixed-reverse", "pairs", "heatmap"], "mixed"),
+      correlation: enumValue(analysis.mx?.correlation, ["pearson", "spearman"], "spearman"),
+      scale: enumValue(analysis.mx?.scale, ["log", "linear"], "log"),
+      features: Array.isArray(analysis.mx?.features) ? [...new Set(analysis.mx.features)].filter((key) => Object.hasOwn(numericVariables, key) || ["scatterX", "scatterY"].includes(key)) : ["salary", "expenses", "revenue", "staff"],
+    };
     if (state.view === "model" && !isCeoPosition()) state.view = "histogram";
     state.modelMethod = ({ i: "intercept", l: "linear", g: "gam", a: "bayesianGam", e: "bayesianExact", s: "svr", p: "gp" })[analysis.pm?.m] || "bayesian";
     state.modelUseAdRanges = isBayesianMethod() && state.modelMethod !== "bayesianExact" && analysis.pm?.d === 1;
     state.modelIncludeHighestOtherPay = analysis.pm?.x !== 0;
     state.modelCompatibilityLevel = finiteNumber(analysis.pm?.u, 89, 50, 99);
     state.modelEffectUnits = analysis.pm?.v === "l" ? "log" : "percent";
+    state.modelRobustnessIntervals = analysis.pm?.ui === 1;
     const focusWeights = analysis.pm?.j;
     state.modelFocusWeights = Array.isArray(focusWeights) && focusWeights.length === modelCategoryLevels("focus_area").length
       && focusWeights.every((value) => Number.isFinite(value) && value >= 0 && value <= 100) ? focusWeights : null;
@@ -7502,6 +7653,7 @@
     state.histogramAxis = decodeExpression(analysis.hx, state.histogramAxis);
     state.scatterXAxis = decodeExpression(analysis.sx, state.scatterXAxis);
     state.scatterYAxis = decodeExpression(analysis.sy, state.scatterYAxis);
+    if (analysis.mx) state.axisModes.scatterX = enumValue(analysis.mx.xMode, ["value", "ratio"], "value");
     if (analysis.x && numericVariables[analysis.x]) state.scatterXAxis.numerator = analysis.x;
     normalizeAxisExpressions();
     Object.keys(state.axisScales).forEach((axisKey) => { state.axisScales[axisKey] = recommendedAxisScale(axisKey); });
@@ -7579,6 +7731,9 @@
       histogramAxis: { numerator: "salary", denominator: "expenses" },
       scatterXAxis: { numerator: "expenses", denominator: "staff" },
       scatterYAxis: { numerator: "salary", denominator: "expenses" },
+      scatterPlotMode: "bivariate",
+      modelRobustnessIntervals: false,
+      scatterMatrix: { mode: "mixed", correlation: "spearman", scale: "log", features: ["salary", "expenses", "revenue", "staff"] },
       chartColor: "tier", showContours: true, showJobAdIntervals: true,
       modelCompatibilityLevel: 89, modelEffectUnits: "percent", modelFocusWeights: null,
       modelMethod: "bayesian", modelUseAdRanges: false, modelIncludeHighestOtherPay: true,
@@ -7878,6 +8033,11 @@
     if (closeHeaderFilterPopovers({ restoreFocus: true })) event.preventDefault();
   });
   refs.chartColor.addEventListener("change", () => { state.chartColor = refs.chartColor.value; renderAll(); });
+  $("#scatter-plot-mode").addEventListener("change", (event) => { state.scatterPlotMode = event.target.value; renderAll(); });
+  $("#model-joint-drivers").addEventListener("click", () => showJointDrivers(currentModelPrediction()));
+  $("#model-robustness-intervals").addEventListener("change", (event) => {
+    state.modelRobustnessIntervals = event.target.checked; updateRobustnessAvailability(); scheduleUrlState();
+  });
   refs.showContours.addEventListener("change", () => { state.showContours = refs.showContours.checked; renderChart(); });
   refs.showJobAdIntervals.addEventListener("change", () => {
     state.showJobAdIntervals = refs.showJobAdIntervals.checked;
