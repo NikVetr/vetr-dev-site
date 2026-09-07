@@ -1,0 +1,16 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,ወደ {} መሄድ እፈልጋለሁ,,wede {} mehēd ifelligallehu,wədə {} məhed ʔɨfəlːɨɡalːəhu,,2,am-agent-v1;ipa=bgn-am
+utility-templates.please-give-me,እባክዎ {} ይስጡኝ,,ibakwo {} yistʼunny,ʔɨbakwo {} jɨstʼuɲː,,2,am-agent-v1;ipa=bgn-am
+utility-templates.may-i,{} እችላለሁ?,,{} ichilallehu?,{} ʔɨtʃɨlalːəhu,am I able to {}?,2,am-agent-v1;ipa=bgn-am
+utility-templates.please-do-not-add,እባክዎ {} አይጨምሩ,,ibakwo {} āyichʼemru,ʔɨbakwo {} ʔajɨtʃʼəmru,please do not add {},2,am-agent-v1;ipa=bgn-am
+utility-templates.do-you-have,{} አለዎት?,,{} āllewot?,{} ʔalːəwot,,2,am-agent-v1;ipa=bgn-am
+utility-templates.please-write-the-number,እባክዎ ቁጥሩን ይጻፉት,,ibakwo kʼutʼirun yitsʼafut,ʔɨbakwo kʼutʼɨrun jɨsʼafut,,2,am-agent-v1;ipa=bgn-am
+utility-templates.i-need,{} ያስፈልገኛል,,{} yasfelligennyal,{} jasfəlːɨɡəɲːal,{} is needed by me,2,am-agent-v1;ipa=bgn-am
+utility-templates.is-there-nearby,በቅርብ {} አለ?,,bekʼirb {} āle?,bəkʼɨrb {} ʔalə,nearby is there {}?,2,am-agent-v1;ipa=bgn-am
+utility-templates.how-much-is,{} ስንት ነው?,,{} sint new?,{} sɨnt nəw,,2,am-agent-v1;ipa=bgn-am
+utility-templates.is-this,ይህ {} ነው?,,yih {} new?,jɨh {} nəw,,2,am-agent-v1;ipa=bgn-am
+utility-templates.please,{} እባክዎ,,{} ibakwo,{} ʔɨbakwo,,2,am-agent-v1;ipa=bgn-am
+utility-templates.i-am-looking-for,{} እፈልጋለሁ,,{} ifelligallehu,{} ʔɨfəlːɨɡalːəhu,I want {},2,am-agent-v1;ipa=bgn-am
+utility-templates.do-you-accept,በ{} ይቀበላሉ?,,be{} yikʼebbelallu?,bə {} jɨkʼəbːəlalːu,do you accept in {}?,2,am-agent-v1;ipa=bgn-am
+utility-templates.i-cannot-find,{} ማግኘት አልቻልኩም,,{} magnyet ālchalkum,{} maɡɲət ʔaltʃalkum,I could not find {},2,am-agent-v1;ipa=bgn-am
+utility-templates.there-is-a-problem-with,በ{} ችግር አለ,,be{} chigir āle,bə {} tʃɨɡɨr ʔalə,there is a problem with {},2,am-agent-v1;ipa=bgn-am

@@ -96,3 +96,6 @@ numbers-money.krona,крона,,krona,krˈona,,2,uk-gloss-v1;cldr;ipa=espeak
 numbers-money.krona-symbol,крона (символ),,krona (symvol),krˈona sˈɪmʋol,,2,uk-gloss-v1;cldr;ipa=espeak
 numbers-money.ringgit,рингіт,,,rɪnhˈiːt,,2,gloss-only;scoped-away;name of the currency in this language;mechanical-transliteration;flagged-for-review;ipa=espeak
 numbers-money.ringgit-symbol,рингіт (символ),,,rɪnhˈiːt sˈɪmʋol,,2,gloss-only;scoped-away;name of the currency in this language;mechanical-transliteration;flagged-for-review;ipa=espeak
+numbers-money.nepali-rupee,непальська рупія,,,nɛpˈaʎska rupˈiːja,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.nepali-rupee-symbol,непальська рупія (символ),,,nɛpˈaʎska rupˈiːja sˈɪmʋol,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.birr,бир,,,bˈɪr,,2,uk-gloss-v1;cldr;ipa=espeak

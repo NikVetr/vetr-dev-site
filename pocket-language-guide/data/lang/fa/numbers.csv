@@ -96,3 +96,6 @@ numbers-money.krona,کرون,,,korun,,2,gloss-only;scoped-away;name of the curre
 numbers-money.krona-symbol,کرون (نماد),,,korun namɑd,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
 numbers-money.ringgit,رینگیت,,,rineɡijat,,2,gloss-only;scoped-away;name of the currency in this language;mechanical-transliteration;flagged-for-review;ipa=espeak
 numbers-money.ringgit-symbol,رینگیت (نماد),,,rineɡijat namɑd,,2,gloss-only;scoped-away;name of the currency in this language;mechanical-transliteration;flagged-for-review;ipa=espeak
+numbers-money.nepali-rupee,روپیه نپالی,,,rupije nepɑli,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.nepali-rupee-symbol,روپیه نپالی (نماد),,,rupije nepɑli namɑd,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.birr,بیر,,,bir,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak

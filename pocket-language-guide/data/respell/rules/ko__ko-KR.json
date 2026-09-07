@@ -52,7 +52,7 @@
  },
  "splits": [],
  "phonemes": [
-  {
+  {"slot": "any", "ipa": "ʼ", "out": ""},{
    "slot": "onset",
    "ipa": "ɬ",
    "out": "르",

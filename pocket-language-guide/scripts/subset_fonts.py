@@ -108,6 +108,23 @@ TELU_RANGES = [(0x0C00, 0x0C7F)]
 # print -- they arrive with the block and no row can reach them, exactly as Tamil's
 # and Telugu's do.
 GURU_RANGES = [(0x0A00, 0x0A7F)]
+# The whole Kannada block, for Bengali's, Tamil's, Telugu's, Gurmukhi's and
+# Gujarati's reason and **two** of its own, because Kannada stacks in two directions
+# and has a third device none of those five has.
+#
+# Its conjuncts are *subscript* consonants hung below the line and have **no
+# codepoints at all** -- `kasubscriptknda` and its 33 siblings are reached only
+# through GSUB, which `subset_source`'s `layout_features = ["*"]` keeps. And a coda
+# `ರ್` before a consonant becomes the **arkavattu**, a superscript hook drawn over
+# the *following* letter (ಕರ್ನಾಟಕ), which is a third contextual form again. So the
+# request has to be the block whole rather than the letters the corpus happens to use
+# today. 89 of the block's 128 codepoints are assigned (checked against
+# `unicodedata`; the other 39 are Unicode leaving them unassigned) and both faces
+# carry all 89. That includes the digits U+0CE6..0CEF, which the pack does **not**
+# print -- they arrive with the block and no row can reach them, exactly as Tamil's,
+# Telugu's, Gurmukhi's and Gujarati's do -- and the nukta U+0CBC, which no Kannada
+# text uses and which `tmp/kn/write.py` asserts is absent from every cell.
+KNDA_RANGES = [(0x0C80, 0x0CFF)]
 # The whole Gujarati block, for Bengali's, Tamil's, Telugu's and Gurmukhi's reason and
 # one of its own. Gujarati is Devanagari without the shirorekha and it forms the same
 # subjoined and ligated conjuncts -- ક્ત, દ્ધ, ષ્ટ, હ્ય, and the below-base ર of પ્ર --
@@ -125,6 +142,27 @@ GURU_RANGES = [(0x0A00, 0x0A7F)]
 # a nukta letter followed by a subjoined ર is one of the two sequences Noto Serif
 # Gujarati throws on in `vendor/fontkit.esm.js`. See tmp/gujarati.md.
 GUJR_RANGES = [(0x0A80, 0x0AFF)]
+# The whole Ethiopic block, and here the reason is the opposite of every Brahmic
+# entry above. Ethiopic is an **abugida written as a syllabary**: each of the ~34
+# consonant series has seven vowel-bearing forms and every one of them is its own
+# *precomposed* codepoint, so there is no vowel sign, no conjunct, no reordering and
+# no GSUB form to reach -- `tmp/am/shapecheck.mjs` lays all 129,628 single syllables,
+# mark sequences and ordered pairs through `vendor/fontkit.esm.js` and finds **zero**
+# substitutions among the letters. The block is requested whole for the plain reason
+# instead: 358 of the 384 codepoints are assigned, the pack's 837 rows reach a large
+# fraction of them, and a reader typing their own term into the add-your-own-term
+# editor can reach any of them.
+#
+# **What the block also carries is the one thing that would make `needs_shaping: 0`
+# false, and it is unreachable by construction.** U+1369..137C are the Ethiopic
+# numerals, and this fontkit *does* substitute them -- 400 contextual joined forms,
+# every ordered pair of the twenty. The pack writes ASCII digits (Hindi's and Tamil's
+# usage answer: every Ethiopian price board, plate and receipt does) and
+# `tmp/am/write.py` asserts that no cell contains one, as it asserts for the three
+# combining marks U+135D..135F, which are the only glyphs in the block with a GPOS
+# anchor. They arrive with the block and nothing can reach them, exactly as the
+# Gujarati nukta and the Tamil, Telugu, Gurmukhi and Kannada digits do.
+ETHI_RANGES = [(0x1200, 0x137F)]
 
 # Klingon pIqaD and Tengwar. These are the two scripts here that are **not in
 # Unicode**: both proposals were rejected, so they live in the Private Use Area by
@@ -303,6 +341,81 @@ FACES = {
     # shipped, which `arabic` and `telu` both already rely on.
     ("gujr", 400, False): "MuktaVaani-Regular.ttf",
     ("gujr", 700, False): "MuktaVaani-Bold.ttf",
+    # Kannada, and **the first Brahmic script in this corpus to ship both halves of
+    # the Noto pair.** The NULL MarkBasePos base-anchor defect that refused Noto for
+    # Telugu (468 of 2,106), Gurmukhi (880 of 1,486) and Gujarati is simply absent
+    # from Noto Sans Kannada: **0 NULL anchors of 667**, so the `applyLookup` case-4
+    # path `vendor/fontkit.esm.js` crashes on cannot be entered at all. Over the
+    # 123,760-akshara matrix (34 consonants x 13 vowel signs x {bare, anusvara,
+    # visarga, candrabindu} x {no subjoined, each of the 34} x {no arkavattu, ರ್}) it
+    # throws on 0 and draws 0 notdefs, and `PAIRS=1` over all 34^3 double conjuncts
+    # plus every arkavattu-over-a-conjunct throws on 0 as well. 89 of 89 assigned
+    # codepoints of U+0C80..0CFF, and **274** codepoints of U+0020..024F including
+    # the whole of ASCII, `·` U+00B7 and `₹` -- so this is the Bengali case and needs
+    # no `LATIN_DONOR` graft, unlike the Gurmukhi UI cut.
+    #
+    # **There is no `knda-serif`, and Noto Serif Kannada was measured, staged and
+    # then withdrawn -- which is tmp/gujarati.md's lesson happening a second time and
+    # costing more.** It holds **210 NULL base anchors of 1,451** and throws on **0**
+    # of the 123,760 aksharas *and* 0 of the 40,460 double conjuncts, so both
+    # matrices called it clean. Reading the lookup out with fontTools shows the NULL
+    # class is `halant_kannada` **as a mark**, which is only reached when the virama
+    # has no consonant to fuse with -- and the cube never contained a bare one,
+    # because every virama in it was followed by a consonant.
+    #
+    # **Shaping the real rows found 2,593 throws of 30,659**, and the class is
+    # a *subjoined* consonant carrying a **word-final virama** -- 1,120 of the 1,156
+    # such pairs. That is the shape of every English loanword ending in a consonant
+    # cluster, and modern Kannada is full of them: ಲಿಫ್ಟ್ *lift*,
+    # ಆಂಬ್ಯುಲೆನ್ಸ್ *ambulance*, ಆಗಸ್ಟ್ *August*, ಫಿಟ್ಸ್ *fits*,
+    # ಪ್ರಿಪೇಯ್ಡ್ *prepaid*. A throw in `core/measure.js` is a crash, not a bad
+    # glyph, so this is a blocker rather than a defect. A single consonant plus a
+    # virama shapes clean, and so does a subjoined consonant plus a vowel sign, which
+    # is exactly why both matrices missed it -- **the harness to run on the next
+    # Brahmic addition is `tmp/kn/throwrows.mjs` over real rows.**
+    #
+    # So Kannada ships **sans-only**, which is `telu`'s, `gujr`'s and `arabic`'s
+    # shape, and `stackFor` in core/fonts.js falls back to the sans face for a
+    # variant that is not shipped.
+    #
+    # What was refused, and on what: **Noto Sans Kannada UI** (43 codepoints of
+    # U+0020..024F, no letter of either case, no `·` -- the graft Gurmukhi pays and
+    # there is no reason to pay it when the non-UI face has no NULL anchors);
+    # **Hubballi** (630 NULL anchors of 1,433, and a single weight); **Anek Kannada**
+    # (upem 2000, 194 Latin codepoints, and the same confusable-pair measurement its
+    # Telugu, Gurmukhi and Gujarati siblings failed); **Hind Mysuru** (the Kannada
+    # member of the Hind superfamily `telu` ships -- real static Regular and Bold,
+    # full Latin, zero throws, zero NULLs, and refused on coverage: 84 of 89 of the
+    # block, missing the two Vedic signs, ಽ and ೞ/ಱ); **Tiro Kannada**, **Benne** and
+    # **Padyakke Expanded One** (all real serifs with 0 NULL anchors, 0 throws over
+    # the same 30,659 real rows and -- for Tiro Kannada -- only 6 notdefs, so **Tiro
+    # Kannada is the replacement if the sans ever has to go**; all three are refused
+    # as `knda-serif` only because they have no bold, so a stack built from one would
+    # print the theme's weight distinction as none); **Baloo Tamma 2** (a heavy rounded display design); and **Akaya
+    # Kanadaka** (2,600 throws and 30,290 notdefs -- it has no candrabindu glyph).
+    # See tmp/kannada.md.
+    ("knda", 400, False): "NotoSansKannada-var.ttf",
+    ("knda", 700, False): "NotoSansKannada-var.ttf",
+    # Ethiopic, and **the first script here whose Noto pair needed no argument at
+    # all.** The NULL MarkBasePos base-anchor defect that refused Noto for Telugu,
+    # Gurmukhi and Gujarati cannot arise: Ethiopic has no mark to attach except the
+    # three combining signs U+135D..135F, which no Amharic text writes. Over the
+    # 129,628-string matrix -- every assigned syllable singly, every syllable under
+    # each of the three marks, all 24 punctuation and numeral signs, and every one of
+    # the 358x358 ordered pairs -- both faces throw on **0** and draw **0** notdefs.
+    # 358 of 358 assigned codepoints of U+1200..137F, and **283** of U+0020..024F
+    # including the whole of ASCII, `·` U+00B7, `…`, `—`, `’` and `ä`, so this is the
+    # Bengali case and needs no `LATIN_DONOR` graft.
+    #
+    # Abyssinica SIL was the third candidate and is refused on two counts, neither of
+    # them drawing quality: it is **single-weight**, so the `script` field's bold
+    # would fall back to 400 the way Constructium's does for tengwar, and its OFL
+    # carries a **Reserved Font Name**, so a subset would have to be renamed. Its
+    # upem is 2048 besides. See tmp/amharic.md.
+    ("ethi", 400, False): "NotoSansEthiopic-var.ttf",
+    ("ethi", 700, False): "NotoSansEthiopic-var.ttf",
+    ("ethi-serif", 400, False): "NotoSerifEthiopic-var.ttf",
+    ("ethi-serif", 700, False): "NotoSerifEthiopic-var.ttf",
 }
 
 # Sources that need a Latin face grafted in, and the face to graft.
@@ -534,7 +647,43 @@ ALL_LANGS = ["en", "es", "fr", "de", "ko", "ar", "zh-Hans", "ja",
              # column either -- Latin-scripted already -- so this entry is only for
              # the language's own text, section titles and emergency labels, the
              # Polish/Ukrainian/Romanian/Czech/Filipino/Swedish shape.
-             "ms"]
+             "ms",
+             # Nepali shares `hi`'s and `mr`'s stack, `deva` -- Devanagari's own font
+             # question was already answered twice and checked a third time rather
+             # than assumed: every Devanagari codepoint Nepali's finished pack
+             # actually uses (58 of them -- the independent vowels, the 33
+             # consonants, the vowel signs, virama, candrabindu/anusvara/visarga and
+             # the danda) is present in all four shipped `deva*.ttf` faces, via
+             # `fontTools.ttLib.TTFont.getBestCmap()`. Nepali's inventory turned out
+             # to be a *subset* of Hindi's rather than needing anything new: no
+             # candra vowels (ऍ ऑ ॲ, which Marathi uses and standard Nepali
+             # orthography does not, checked against real Nepali-language financial
+             # press rather than assumed), no nukta series (Nepali does not use the
+             # nukta at all, unlike Hindi), and no ळ (Marathi's retroflex lateral,
+             # which Nepali does not write separately from ल). `DEVA_RANGES` below
+             # already requests the whole Devanagari block unconditionally for the
+             # `deva` stack, so this entry in the `latin` union is only for Nepali's
+             # `romanization_iso15919` and `ipa` columns and the occasional Latin
+             # loan (`Wi-Fi`, `SIM`, `PIN`) in its section titles and emergency
+             # labels, the Marathi shape exactly.
+             "ne",
+             # Kannada. `KNDA_RANGES` below already requests the whole Kannada block
+             # unconditionally for the `knda` stack, so this entry in the `latin`
+             # union is only for Kannada's `romanization_iso15919` and `ipa` columns,
+             # which are drawn by the Latin faces on every pair, and for the four
+             # `note` rows that quote pinyin, Hepburn, Thai and Swahili in Latin
+             # plus the `B2 · BPK · bakso` pork-code row. Telugu's and Gujarati's
+             # shape exactly.
+             "kn",
+             # Amharic. `ETHI_RANGES` below requests the whole Ethiopic block
+             # unconditionally for the `ethi` stack, so this entry in the `latin`
+             # union is for the pack's `romanization_bgn` and `ipa` columns -- which
+             # the Latin faces draw on every pair -- and for the one row that quotes
+             # Latin, `common-signs.pork-code`. The romanisation is BGN/PCGN 1967 and
+             # brings `ā ī ē` plus the modifier letters `ʼ` U+02BC and `ʽ` U+02BD,
+             # all four of which arrive through `LATIN_RANGES` at the top of this
+             # file rather than through this union.
+             "am"]
 STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                "latin-serif": ALL_LANGS, "latin-cond-serif": ALL_LANGS,
                "cjk-sc": ["zh-Hans"], "cjk-sc-serif": ["zh-Hans"],
@@ -562,6 +711,8 @@ STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                "telu": ["te"],
                "guru": ["pa"], "guru-serif": ["pa"],
                "gujr": ["gu"],
+               "knda": ["kn"],
+               "ethi": ["am"], "ethi-serif": ["am"],
                "hebrew": ["he"], "hebrew-serif": ["he"]}
 
 
@@ -670,6 +821,10 @@ def coverage(stack):
         chars |= expand(GUJR_RANGES)
     elif stack.startswith("guru"):
         chars |= expand(GURU_RANGES)
+    elif stack.startswith("knda"):
+        chars |= expand(KNDA_RANGES)
+    elif stack.startswith("ethi"):
+        chars |= expand(ETHI_RANGES)
     elif stack.startswith("hebrew"):
         chars |= expand(HEBREW_RANGES)
     return chars

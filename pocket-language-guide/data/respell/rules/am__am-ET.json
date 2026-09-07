@@ -1,0 +1,1811 @@
+{
+ "source": "am",
+ "accent": "am-ET",
+ "status": "ready",
+ "version": "1",
+ "derives_from": "**There is no published Amharic pronunciation key**, of the kind Bhargava's dictionary gives Hindi or Magay's gives Hungarian -- Amharic lexicography prints no respelling column, because the fidal is a shallow enough orthography not to need one. What this table derives from instead is a real and observable system: **the way Amharic writes a foreign word**, as it is written in Ethiopian newspapers, on signage and in CLDR's own Amharic data. Every device here is read off that: a cluster becomes a run of sixth-order glyphs (ፕላስቲክ, ስፖርት, ኮምፒዩተር, ዋሽንግተን), a foreign velar nasal becomes ንግ (ቦርዲንግ, ሺሊንግ), a falling diphthong takes a coda glide (ታይላንድ, ቻው), and a front rounded vowel takes its rounded back letter (ዙሪክ). Nothing is invented and nothing is borrowed from another table's mechanism except the *idea* of Korean's ㅡ, which is described in tmp/am/build_respell.py.",
+ "deviations": "**No new glyph and no mark of any kind.** Every character this table emits is an ordinary letter of the fidal, which is why the legend has nothing to teach. Three distinctions are deliberately lost and each is a property of Amharic orthography rather than of this table.\n\n**Length and gemination are not written.** Amharic geminates phonemically and writes it nowhere -- አለ is both `ala` \"he said\" and `alla` \"there is\" -- so a reader who is handed ፋቶ for Italian /fatːo/ is in exactly the position an Amharic reader is in with an Amharic word. `policy.length` is `none` and `ː` maps to nothing rather than doubling the letter, which in Ethiopic would read as an epenthetic vowel: ፋትቶ is [fatɨto].\n\n**Aspiration and palatalisation are not written**, because the language has neither. Each of the eighteen aspirates and seventeen palatalised consonants the corpus produces has its own rule mapping to the plain letter, rather than a bare `ʰ`/`ʲ` fallback -- that is the Hindi ধন্যবাদ lesson, where `dʰ` fell through to `d` + `ʰ` and `--gaps` could see nothing wrong.\n\n**Labialisation is written as a sequence and not with the labialised forms.** /kwa/ comes out ክዋ where Amharic's own orthography has ኳ. Fusing them would be thirty more fixups and would force `fixups: \"all\"`, and ክዋ is read correctly; ኳስ against ክዋስ is a spelling preference rather than a reading.",
+ "approximations": "Eleven merges, and two of them are historical identities rather than approximations at all: **Arabic ح is Ethiopic ሐ and ع is ዐ**, letters an Amharic reader meets in ሐኪም and ሰዓት, and /q/ ق is ቀ, which is how every Amharic transcription of an Arabic name writes it.\n\nThe nine that really are merges: /θ ð/ take ስ ዝ; /ts tsʰ dz/ take ጽ ጅ, so a German z merges with Amharic's own /sʼ/, which is Amharic's merger rather than one introduced here; the retroflex series /ʈ ɖ ɳ ɭ/ takes the plain dentals; Mandarin's six palatal and retroflex sibilants collapse onto ሸ ዠ ቸ ጀ; the front rounded vowels /y ʏ ø œ/ take their rounded back letters ኡ ኦ; /ɯ/ takes እ; and every rhotic -- /r ɾ ɹ ɻ ɽ ʁ/ and Czech's r̝ -- takes ር, because Amharic has one.\n\n/x/ is the one place this table refuses a merge that would have been easy: it takes **ኸ** rather than ሀ, so Russian х and German ch stay clear of /h/. ኸ is the letter Ethiopian Semitic writes a velar fricative with -- Tigrinya ኸ is [x] -- and it is otherwise nearly idle in Amharic, which is what makes it available.",
+ "note": "**Ethiopic is the first script in this corpus where a bare consonant is a legal standalone letter, and that removes most of the machinery.** The sixth order (ስ ት ክ) is the bare consonant *and* the [Cɨ] Amharic writes when it spells a foreign cluster, so a consonant needs one rule where every Brahmic table here needs a slot-conditioned three (full letter / joined form / coda), and Klingon's /ɬ/ needs one line rather than a copy of three.\n\nWhat Ethiopic does not have is a vowel *sign*. The vowel is inside the glyph and `spellSlot` appends, so the nucleus cannot write onto the consonant the onset already emitted. The answer is Korean's, arrived at from the other side: Korean writes a loose 초성 and lets the 중성 bind through NFC, and since Ethiopic has no canonical compositions the nucleus here emits the **independent አ-series vowel letter** and 196 generated `syllable_fixups` fuse `<sixth order><vowel letter>` into the single glyph that is both. ፕ + ኣ is ፓ.\n\nThree properties of that shape are why it was chosen over the obvious design, which is 196 onset rules conditioned on `if_nucleus_head`. **An onset cluster needs no lookahead**: every onset consonant emits its sixth order and only the last is adjacent to the vowel letter, so /str/ + /iː/ is ስትሪ and /pl/ + /a/ is ፕላ -- where a forward-looking rule would put the vowel on the *first* consonant, and `spellSlot` cannot see the rest of the onset in any case. **A multi-glyph consonant works for free**, which is what makes /ŋ/ = ንግ and /ŋa/ = ንጋ expressible at all. And **a failed fixup is legible rather than tofu**: the marker is a real letter, so the worst case is a spurious glottal stop (ፕኣ for ፓ) and never a box.\n\n`fixups: \"first\"` is correct as well as cheap: exactly one vowel letter is emitted per syllable and exactly one fixup can match it.\n\n**Three of the four stress devices are dead here and it was checked rather than assumed.** `caps` is dead on a caseless script. `acute` and `grave` are byte-identical no-ops, because `VOWEL_LETTERS` and `ACCENTED` in core/respell.js list Latin, Cyrillic and Greek vowels and no Ethiopic codepoint -- the wall Hebrew, Persian, Tamil, Telugu, Punjabi and Gujarati all hit. `prime` would work and is refused for Tamil's reason: Amharic prominence is not contrastive and is written by neither orthography, so a mark here would be a notation this reader has never met carrying information their own language does not use. `policy.length` is `none` for the reason in `deviations`, and `policy.tone` is `drop` because Amharic has none.",
+ "legend": "ሁሉም ፊደል የተለመደ አማርኛ ነው — አዲስ ምልክት የለም። ጭንቀት አይመለከትም።",
+ "policy": {
+  "syllable_separator": "-",
+  "word_separator": " ",
+  "stress": "none",
+  "stress_min_syllables": 2,
+  "length": "none",
+  "tone": "drop",
+  "max_onset": 1,
+  "fixups": "all",
+  "locale": "am"
+ },
+ "phonemes": [
+  {
+   "slot": "any",
+   "ipa": "b",
+   "out": "ብ"
+  },
+  {
+   "slot": "any",
+   "ipa": "d",
+   "out": "ድ"
+  },
+  {
+   "slot": "any",
+   "ipa": "f",
+   "out": "ፍ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɡ",
+   "out": "ግ"
+  },
+  {
+   "slot": "any",
+   "ipa": "h",
+   "out": "ህ"
+  },
+  {
+   "slot": "any",
+   "ipa": "k",
+   "out": "ክ"
+  },
+  {
+   "slot": "any",
+   "ipa": "l",
+   "out": "ል"
+  },
+  {
+   "slot": "any",
+   "ipa": "m",
+   "out": "ም"
+  },
+  {
+   "slot": "any",
+   "ipa": "n",
+   "out": "ን"
+  },
+  {
+   "slot": "any",
+   "ipa": "p",
+   "out": "ፕ"
+  },
+  {
+   "slot": "any",
+   "ipa": "r",
+   "out": "ር"
+  },
+  {
+   "slot": "any",
+   "ipa": "s",
+   "out": "ስ"
+  },
+  {
+   "slot": "any",
+   "ipa": "t",
+   "out": "ት"
+  },
+  {
+   "slot": "any",
+   "ipa": "v",
+   "out": "ቭ"
+  },
+  {
+   "slot": "any",
+   "ipa": "w",
+   "out": "ው"
+  },
+  {
+   "slot": "any",
+   "ipa": "z",
+   "out": "ዝ"
+  },
+  {
+   "slot": "any",
+   "ipa": "j",
+   "out": "ይ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʃ",
+   "out": "ሽ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʒ",
+   "out": "ዥ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tʃ",
+   "out": "ች"
+  },
+  {
+   "slot": "any",
+   "ipa": "dʒ",
+   "out": "ጅ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɲ",
+   "out": "ኝ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʔ",
+   "out": "እ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ħ",
+   "out": "ሕ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʕ",
+   "out": "ዕ"
+  },
+  {
+   "slot": "any",
+   "ipa": "q",
+   "out": "ቅ"
+  },
+  {
+   "slot": "any",
+   "ipa": "qʰ",
+   "out": "ቅ"
+  },
+  {
+   "slot": "any",
+   "ipa": "x",
+   "out": "ኽ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ç",
+   "out": "ኽ"
+  },
+  {
+   "slot": "any",
+   "ipa": "θ",
+   "out": "ስ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ð",
+   "out": "ዝ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ts",
+   "out": "ጽ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tsʰ",
+   "out": "ጽ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ts̪",
+   "out": "ጽ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tsʲ",
+   "out": "ጽ"
+  },
+  {
+   "slot": "any",
+   "ipa": "dz",
+   "out": "ጅ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʈ",
+   "out": "ት"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɖ",
+   "out": "ድ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɳ",
+   "out": "ን"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɭ",
+   "out": "ል"
+  },
+  {
+   "slot": "any",
+   "ipa": "t̪",
+   "out": "ት"
+  },
+  {
+   "slot": "any",
+   "ipa": "d̪",
+   "out": "ድ"
+  },
+  {
+   "slot": "any",
+   "ipa": "s̪",
+   "out": "ስ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɗ",
+   "out": "ድ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɴ",
+   "out": "ን"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɫ",
+   "out": "ል"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʎ",
+   "out": "ል"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɸ",
+   "out": "ፍ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɣ",
+   "out": "ግ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʝ",
+   "out": "ይ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɰ",
+   "out": "ው"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɥ",
+   "out": "ይ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʋ",
+   "out": "ቭ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɹ",
+   "out": "ር"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɻ",
+   "out": "ር"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɽ",
+   "out": "ር"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɾ",
+   "out": "ር"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʁ",
+   "out": "ር"
+  },
+  {
+   "slot": "any",
+   "ipa": "r̝",
+   "out": "ር"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɕ",
+   "out": "ሽ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʂ",
+   "out": "ሽ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʐ",
+   "out": "ዥ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʑ",
+   "out": "ዥ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tɕ",
+   "out": "ች"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʈʂ",
+   "out": "ች"
+  },
+  {
+   "slot": "any",
+   "ipa": "dʑ",
+   "out": "ጅ"
+  },
+  {
+   "slot": "any",
+   "ipa": "c",
+   "out": "ች"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɟ",
+   "out": "ጅ"
+  },
+  {
+   "slot": "any",
+   "ipa": "cʰ",
+   "out": "ች"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɟʰ",
+   "out": "ጅ"
+  },
+  {
+   "slot": "any",
+   "ipa": "pʰ",
+   "out": "ፕ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tʰ",
+   "out": "ት"
+  },
+  {
+   "slot": "any",
+   "ipa": "kʰ",
+   "out": "ክ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʈʰ",
+   "out": "ት"
+  },
+  {
+   "slot": "any",
+   "ipa": "tʃʰ",
+   "out": "ች"
+  },
+  {
+   "slot": "any",
+   "ipa": "tɕʰ",
+   "out": "ች"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʈʂʰ",
+   "out": "ች"
+  },
+  {
+   "slot": "any",
+   "ipa": "bʰ",
+   "out": "ብ"
+  },
+  {
+   "slot": "any",
+   "ipa": "dʰ",
+   "out": "ድ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɡʰ",
+   "out": "ግ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɖʰ",
+   "out": "ድ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɽʰ",
+   "out": "ር"
+  },
+  {
+   "slot": "any",
+   "ipa": "bʲ",
+   "out": "ብ"
+  },
+  {
+   "slot": "any",
+   "ipa": "dʲ",
+   "out": "ድ"
+  },
+  {
+   "slot": "any",
+   "ipa": "fʲ",
+   "out": "ፍ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɡʲ",
+   "out": "ግ"
+  },
+  {
+   "slot": "any",
+   "ipa": "kʲ",
+   "out": "ክ"
+  },
+  {
+   "slot": "any",
+   "ipa": "mʲ",
+   "out": "ም"
+  },
+  {
+   "slot": "any",
+   "ipa": "nʲ",
+   "out": "ን"
+  },
+  {
+   "slot": "any",
+   "ipa": "pʲ",
+   "out": "ፕ"
+  },
+  {
+   "slot": "any",
+   "ipa": "rʲ",
+   "out": "ር"
+  },
+  {
+   "slot": "any",
+   "ipa": "sʲ",
+   "out": "ስ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tʲ",
+   "out": "ት"
+  },
+  {
+   "slot": "any",
+   "ipa": "vʲ",
+   "out": "ቭ"
+  },
+  {
+   "slot": "any",
+   "ipa": "zʲ",
+   "out": "ዝ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʃʲ",
+   "out": "ሽ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɭʲ",
+   "out": "ል"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɾʲ",
+   "out": "ር"
+  },
+  {
+   "slot": "any",
+   "ipa": "tʃʲ",
+   "out": "ች"
+  },
+  {
+   "slot": "any",
+   "ipa": "k͈",
+   "out": "ክ"
+  },
+  {
+   "slot": "any",
+   "ipa": "p͈",
+   "out": "ፕ"
+  },
+  {
+   "slot": "any",
+   "ipa": "s͈",
+   "out": "ስ"
+  },
+  {
+   "slot": "any",
+   "ipa": "t͈",
+   "out": "ት"
+  },
+  {
+   "slot": "any",
+   "ipa": "tɕ͈",
+   "out": "ች"
+  },
+  {
+   "slot": "any",
+   "ipa": "dˤ",
+   "out": "ድ"
+  },
+  {
+   "slot": "any",
+   "ipa": "l̩",
+   "out": "ል"
+  },
+  {
+   "slot": "any",
+   "ipa": "m̩",
+   "out": "ም"
+  },
+  {
+   "slot": "any",
+   "ipa": "n̩",
+   "out": "ን"
+  },
+  {
+   "slot": "any",
+   "ipa": "r̩",
+   "out": "ር"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɬ",
+   "out": "ል"
+  },
+  {
+   "slot": "any",
+   "ipa": "ŋk",
+   "out": "ንክ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ŋɡ",
+   "out": "ንግ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ŋ",
+   "out": "ንግ"
+  },
+  {
+   "slot": "any",
+   "ipa": "pf",
+   "out": "ፕፍ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɪ",
+   "out": "ይ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "i",
+   "out": "ይ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "j",
+   "out": "ይ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʊ",
+   "out": "ው",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "u",
+   "out": "ው",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "w",
+   "out": "ው",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ə",
+   "out": "የ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɜ",
+   "out": "የ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɵ",
+   "out": "ዮ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "u",
+   "out": "ዩ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʊ",
+   "out": "ዩ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʉ",
+   "out": "ዩ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "y",
+   "out": "ዩ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʏ",
+   "out": "ዩ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "i",
+   "out": "ዪ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɪ",
+   "out": "ዪ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "a",
+   "out": "ያ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɑ",
+   "out": "ያ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɐ",
+   "out": "ያ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "æ",
+   "out": "ያ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʌ",
+   "out": "ያ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "e",
+   "out": "ዬ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɛ",
+   "out": "ዬ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɨ",
+   "out": "ይ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɯ",
+   "out": "ይ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "o",
+   "out": "ዮ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɔ",
+   "out": "ዮ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɒ",
+   "out": "ዮ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɤ",
+   "out": "ዮ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ø",
+   "out": "ዮ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "œ",
+   "out": "ዮ",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ə",
+   "out": "አ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɜ",
+   "out": "አ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɵ",
+   "out": "ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "u",
+   "out": "ኡ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʊ",
+   "out": "ኡ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʉ",
+   "out": "ኡ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "y",
+   "out": "ኡ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʏ",
+   "out": "ኡ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "i",
+   "out": "ኢ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɪ",
+   "out": "ኢ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "a",
+   "out": "ኣ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɑ",
+   "out": "ኣ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɐ",
+   "out": "ኣ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "æ",
+   "out": "ኣ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʌ",
+   "out": "ኣ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "e",
+   "out": "ኤ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɛ",
+   "out": "ኤ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɨ",
+   "out": "እ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɯ",
+   "out": "እ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "o",
+   "out": "ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɔ",
+   "out": "ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɒ",
+   "out": "ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɤ",
+   "out": "ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ø",
+   "out": "ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "œ",
+   "out": "ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ã",
+   "out": "ያን",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ã",
+   "out": "ኣን"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ẽ",
+   "out": "ዬን",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ẽ",
+   "out": "ኤን"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ĩ",
+   "out": "ዪን",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ĩ",
+   "out": "ኢን"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "õ",
+   "out": "ዮን",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "õ",
+   "out": "ኦን"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ũ",
+   "out": "ዩን",
+   "after_out": "አ ኡ ኢ ኣ ኤ ኦ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ũ",
+   "out": "ኡን"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɚ",
+   "out": "አር"
+  },
+  {
+   "slot": "any",
+   "ipa": "̃",
+   "out": "ን"
+  },
+  {
+   "slot": "any",
+   "ipa": "ː",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ʰ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ʲ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ˀ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ˤ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "͈",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̩",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̯",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "͈",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ˈ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ˌ",
+   "out": ""
+  }
+ ],
+ "syllable_fixups": [
+  {
+   "match": "እአ",
+   "out": "አ"
+  },
+  {
+   "match": "እኡ",
+   "out": "ኡ"
+  },
+  {
+   "match": "እኢ",
+   "out": "ኢ"
+  },
+  {
+   "match": "እኣ",
+   "out": "ኣ"
+  },
+  {
+   "match": "እኤ",
+   "out": "ኤ"
+  },
+  {
+   "match": "እእ",
+   "out": "እ"
+  },
+  {
+   "match": "እኦ",
+   "out": "ኦ"
+  },
+  {
+   "match": "ህአ",
+   "out": "ሀ"
+  },
+  {
+   "match": "ህኡ",
+   "out": "ሁ"
+  },
+  {
+   "match": "ህኢ",
+   "out": "ሂ"
+  },
+  {
+   "match": "ህኣ",
+   "out": "ሃ"
+  },
+  {
+   "match": "ህኤ",
+   "out": "ሄ"
+  },
+  {
+   "match": "ህእ",
+   "out": "ህ"
+  },
+  {
+   "match": "ህኦ",
+   "out": "ሆ"
+  },
+  {
+   "match": "ልአ",
+   "out": "ለ"
+  },
+  {
+   "match": "ልኡ",
+   "out": "ሉ"
+  },
+  {
+   "match": "ልኢ",
+   "out": "ሊ"
+  },
+  {
+   "match": "ልኣ",
+   "out": "ላ"
+  },
+  {
+   "match": "ልኤ",
+   "out": "ሌ"
+  },
+  {
+   "match": "ልእ",
+   "out": "ል"
+  },
+  {
+   "match": "ልኦ",
+   "out": "ሎ"
+  },
+  {
+   "match": "ሕአ",
+   "out": "ሐ"
+  },
+  {
+   "match": "ሕኡ",
+   "out": "ሑ"
+  },
+  {
+   "match": "ሕኢ",
+   "out": "ሒ"
+  },
+  {
+   "match": "ሕኣ",
+   "out": "ሓ"
+  },
+  {
+   "match": "ሕኤ",
+   "out": "ሔ"
+  },
+  {
+   "match": "ሕእ",
+   "out": "ሕ"
+  },
+  {
+   "match": "ሕኦ",
+   "out": "ሖ"
+  },
+  {
+   "match": "ምአ",
+   "out": "መ"
+  },
+  {
+   "match": "ምኡ",
+   "out": "ሙ"
+  },
+  {
+   "match": "ምኢ",
+   "out": "ሚ"
+  },
+  {
+   "match": "ምኣ",
+   "out": "ማ"
+  },
+  {
+   "match": "ምኤ",
+   "out": "ሜ"
+  },
+  {
+   "match": "ምእ",
+   "out": "ም"
+  },
+  {
+   "match": "ምኦ",
+   "out": "ሞ"
+  },
+  {
+   "match": "ርአ",
+   "out": "ረ"
+  },
+  {
+   "match": "ርኡ",
+   "out": "ሩ"
+  },
+  {
+   "match": "ርኢ",
+   "out": "ሪ"
+  },
+  {
+   "match": "ርኣ",
+   "out": "ራ"
+  },
+  {
+   "match": "ርኤ",
+   "out": "ሬ"
+  },
+  {
+   "match": "ርእ",
+   "out": "ር"
+  },
+  {
+   "match": "ርኦ",
+   "out": "ሮ"
+  },
+  {
+   "match": "ስአ",
+   "out": "ሰ"
+  },
+  {
+   "match": "ስኡ",
+   "out": "ሱ"
+  },
+  {
+   "match": "ስኢ",
+   "out": "ሲ"
+  },
+  {
+   "match": "ስኣ",
+   "out": "ሳ"
+  },
+  {
+   "match": "ስኤ",
+   "out": "ሴ"
+  },
+  {
+   "match": "ስእ",
+   "out": "ስ"
+  },
+  {
+   "match": "ስኦ",
+   "out": "ሶ"
+  },
+  {
+   "match": "ሽአ",
+   "out": "ሸ"
+  },
+  {
+   "match": "ሽኡ",
+   "out": "ሹ"
+  },
+  {
+   "match": "ሽኢ",
+   "out": "ሺ"
+  },
+  {
+   "match": "ሽኣ",
+   "out": "ሻ"
+  },
+  {
+   "match": "ሽኤ",
+   "out": "ሼ"
+  },
+  {
+   "match": "ሽእ",
+   "out": "ሽ"
+  },
+  {
+   "match": "ሽኦ",
+   "out": "ሾ"
+  },
+  {
+   "match": "ቅአ",
+   "out": "ቀ"
+  },
+  {
+   "match": "ቅኡ",
+   "out": "ቁ"
+  },
+  {
+   "match": "ቅኢ",
+   "out": "ቂ"
+  },
+  {
+   "match": "ቅኣ",
+   "out": "ቃ"
+  },
+  {
+   "match": "ቅኤ",
+   "out": "ቄ"
+  },
+  {
+   "match": "ቅእ",
+   "out": "ቅ"
+  },
+  {
+   "match": "ቅኦ",
+   "out": "ቆ"
+  },
+  {
+   "match": "ብአ",
+   "out": "በ"
+  },
+  {
+   "match": "ብኡ",
+   "out": "ቡ"
+  },
+  {
+   "match": "ብኢ",
+   "out": "ቢ"
+  },
+  {
+   "match": "ብኣ",
+   "out": "ባ"
+  },
+  {
+   "match": "ብኤ",
+   "out": "ቤ"
+  },
+  {
+   "match": "ብእ",
+   "out": "ብ"
+  },
+  {
+   "match": "ብኦ",
+   "out": "ቦ"
+  },
+  {
+   "match": "ቭአ",
+   "out": "ቨ"
+  },
+  {
+   "match": "ቭኡ",
+   "out": "ቩ"
+  },
+  {
+   "match": "ቭኢ",
+   "out": "ቪ"
+  },
+  {
+   "match": "ቭኣ",
+   "out": "ቫ"
+  },
+  {
+   "match": "ቭኤ",
+   "out": "ቬ"
+  },
+  {
+   "match": "ቭእ",
+   "out": "ቭ"
+  },
+  {
+   "match": "ቭኦ",
+   "out": "ቮ"
+  },
+  {
+   "match": "ትአ",
+   "out": "ተ"
+  },
+  {
+   "match": "ትኡ",
+   "out": "ቱ"
+  },
+  {
+   "match": "ትኢ",
+   "out": "ቲ"
+  },
+  {
+   "match": "ትኣ",
+   "out": "ታ"
+  },
+  {
+   "match": "ትኤ",
+   "out": "ቴ"
+  },
+  {
+   "match": "ትእ",
+   "out": "ት"
+  },
+  {
+   "match": "ትኦ",
+   "out": "ቶ"
+  },
+  {
+   "match": "ችአ",
+   "out": "ቸ"
+  },
+  {
+   "match": "ችኡ",
+   "out": "ቹ"
+  },
+  {
+   "match": "ችኢ",
+   "out": "ቺ"
+  },
+  {
+   "match": "ችኣ",
+   "out": "ቻ"
+  },
+  {
+   "match": "ችኤ",
+   "out": "ቼ"
+  },
+  {
+   "match": "ችእ",
+   "out": "ች"
+  },
+  {
+   "match": "ችኦ",
+   "out": "ቾ"
+  },
+  {
+   "match": "ንአ",
+   "out": "ነ"
+  },
+  {
+   "match": "ንኡ",
+   "out": "ኑ"
+  },
+  {
+   "match": "ንኢ",
+   "out": "ኒ"
+  },
+  {
+   "match": "ንኣ",
+   "out": "ና"
+  },
+  {
+   "match": "ንኤ",
+   "out": "ኔ"
+  },
+  {
+   "match": "ንእ",
+   "out": "ን"
+  },
+  {
+   "match": "ንኦ",
+   "out": "ኖ"
+  },
+  {
+   "match": "ኝአ",
+   "out": "ኘ"
+  },
+  {
+   "match": "ኝኡ",
+   "out": "ኙ"
+  },
+  {
+   "match": "ኝኢ",
+   "out": "ኚ"
+  },
+  {
+   "match": "ኝኣ",
+   "out": "ኛ"
+  },
+  {
+   "match": "ኝኤ",
+   "out": "ኜ"
+  },
+  {
+   "match": "ኝእ",
+   "out": "ኝ"
+  },
+  {
+   "match": "ኝኦ",
+   "out": "ኞ"
+  },
+  {
+   "match": "ክአ",
+   "out": "ከ"
+  },
+  {
+   "match": "ክኡ",
+   "out": "ኩ"
+  },
+  {
+   "match": "ክኢ",
+   "out": "ኪ"
+  },
+  {
+   "match": "ክኣ",
+   "out": "ካ"
+  },
+  {
+   "match": "ክኤ",
+   "out": "ኬ"
+  },
+  {
+   "match": "ክእ",
+   "out": "ክ"
+  },
+  {
+   "match": "ክኦ",
+   "out": "ኮ"
+  },
+  {
+   "match": "ኽአ",
+   "out": "ኸ"
+  },
+  {
+   "match": "ኽኡ",
+   "out": "ኹ"
+  },
+  {
+   "match": "ኽኢ",
+   "out": "ኺ"
+  },
+  {
+   "match": "ኽኣ",
+   "out": "ኻ"
+  },
+  {
+   "match": "ኽኤ",
+   "out": "ኼ"
+  },
+  {
+   "match": "ኽእ",
+   "out": "ኽ"
+  },
+  {
+   "match": "ኽኦ",
+   "out": "ኾ"
+  },
+  {
+   "match": "ውአ",
+   "out": "ወ"
+  },
+  {
+   "match": "ውኡ",
+   "out": "ዉ"
+  },
+  {
+   "match": "ውኢ",
+   "out": "ዊ"
+  },
+  {
+   "match": "ውኣ",
+   "out": "ዋ"
+  },
+  {
+   "match": "ውኤ",
+   "out": "ዌ"
+  },
+  {
+   "match": "ውእ",
+   "out": "ው"
+  },
+  {
+   "match": "ውኦ",
+   "out": "ዎ"
+  },
+  {
+   "match": "ዕአ",
+   "out": "ዐ"
+  },
+  {
+   "match": "ዕኡ",
+   "out": "ዑ"
+  },
+  {
+   "match": "ዕኢ",
+   "out": "ዒ"
+  },
+  {
+   "match": "ዕኣ",
+   "out": "ዓ"
+  },
+  {
+   "match": "ዕኤ",
+   "out": "ዔ"
+  },
+  {
+   "match": "ዕእ",
+   "out": "ዕ"
+  },
+  {
+   "match": "ዕኦ",
+   "out": "ዖ"
+  },
+  {
+   "match": "ዝአ",
+   "out": "ዘ"
+  },
+  {
+   "match": "ዝኡ",
+   "out": "ዙ"
+  },
+  {
+   "match": "ዝኢ",
+   "out": "ዚ"
+  },
+  {
+   "match": "ዝኣ",
+   "out": "ዛ"
+  },
+  {
+   "match": "ዝኤ",
+   "out": "ዜ"
+  },
+  {
+   "match": "ዝእ",
+   "out": "ዝ"
+  },
+  {
+   "match": "ዝኦ",
+   "out": "ዞ"
+  },
+  {
+   "match": "ዥአ",
+   "out": "ዠ"
+  },
+  {
+   "match": "ዥኡ",
+   "out": "ዡ"
+  },
+  {
+   "match": "ዥኢ",
+   "out": "ዢ"
+  },
+  {
+   "match": "ዥኣ",
+   "out": "ዣ"
+  },
+  {
+   "match": "ዥኤ",
+   "out": "ዤ"
+  },
+  {
+   "match": "ዥእ",
+   "out": "ዥ"
+  },
+  {
+   "match": "ዥኦ",
+   "out": "ዦ"
+  },
+  {
+   "match": "ይአ",
+   "out": "የ"
+  },
+  {
+   "match": "ይኡ",
+   "out": "ዩ"
+  },
+  {
+   "match": "ይኢ",
+   "out": "ዪ"
+  },
+  {
+   "match": "ይኣ",
+   "out": "ያ"
+  },
+  {
+   "match": "ይኤ",
+   "out": "ዬ"
+  },
+  {
+   "match": "ይእ",
+   "out": "ይ"
+  },
+  {
+   "match": "ይኦ",
+   "out": "ዮ"
+  },
+  {
+   "match": "ድአ",
+   "out": "ደ"
+  },
+  {
+   "match": "ድኡ",
+   "out": "ዱ"
+  },
+  {
+   "match": "ድኢ",
+   "out": "ዲ"
+  },
+  {
+   "match": "ድኣ",
+   "out": "ዳ"
+  },
+  {
+   "match": "ድኤ",
+   "out": "ዴ"
+  },
+  {
+   "match": "ድእ",
+   "out": "ድ"
+  },
+  {
+   "match": "ድኦ",
+   "out": "ዶ"
+  },
+  {
+   "match": "ጅአ",
+   "out": "ጀ"
+  },
+  {
+   "match": "ጅኡ",
+   "out": "ጁ"
+  },
+  {
+   "match": "ጅኢ",
+   "out": "ጂ"
+  },
+  {
+   "match": "ጅኣ",
+   "out": "ጃ"
+  },
+  {
+   "match": "ጅኤ",
+   "out": "ጄ"
+  },
+  {
+   "match": "ጅእ",
+   "out": "ጅ"
+  },
+  {
+   "match": "ጅኦ",
+   "out": "ጆ"
+  },
+  {
+   "match": "ግአ",
+   "out": "ገ"
+  },
+  {
+   "match": "ግኡ",
+   "out": "ጉ"
+  },
+  {
+   "match": "ግኢ",
+   "out": "ጊ"
+  },
+  {
+   "match": "ግኣ",
+   "out": "ጋ"
+  },
+  {
+   "match": "ግኤ",
+   "out": "ጌ"
+  },
+  {
+   "match": "ግእ",
+   "out": "ግ"
+  },
+  {
+   "match": "ግኦ",
+   "out": "ጎ"
+  },
+  {
+   "match": "ጽአ",
+   "out": "ጸ"
+  },
+  {
+   "match": "ጽኡ",
+   "out": "ጹ"
+  },
+  {
+   "match": "ጽኢ",
+   "out": "ጺ"
+  },
+  {
+   "match": "ጽኣ",
+   "out": "ጻ"
+  },
+  {
+   "match": "ጽኤ",
+   "out": "ጼ"
+  },
+  {
+   "match": "ጽእ",
+   "out": "ጽ"
+  },
+  {
+   "match": "ጽኦ",
+   "out": "ጾ"
+  },
+  {
+   "match": "ፍአ",
+   "out": "ፈ"
+  },
+  {
+   "match": "ፍኡ",
+   "out": "ፉ"
+  },
+  {
+   "match": "ፍኢ",
+   "out": "ፊ"
+  },
+  {
+   "match": "ፍኣ",
+   "out": "ፋ"
+  },
+  {
+   "match": "ፍኤ",
+   "out": "ፌ"
+  },
+  {
+   "match": "ፍእ",
+   "out": "ፍ"
+  },
+  {
+   "match": "ፍኦ",
+   "out": "ፎ"
+  },
+  {
+   "match": "ፕአ",
+   "out": "ፐ"
+  },
+  {
+   "match": "ፕኡ",
+   "out": "ፑ"
+  },
+  {
+   "match": "ፕኢ",
+   "out": "ፒ"
+  },
+  {
+   "match": "ፕኣ",
+   "out": "ፓ"
+  },
+  {
+   "match": "ፕኤ",
+   "out": "ፔ"
+  },
+  {
+   "match": "ፕእ",
+   "out": "ፕ"
+  },
+  {
+   "match": "ፕኦ",
+   "out": "ፖ"
+  }
+ ]
+}

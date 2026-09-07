@@ -10,3 +10,6 @@ te,iso15919,ā ī ū ē ō = aa ii uu ee oo · ṭ ḍ ṇ ḷ = t d n l · ś �
 mr,iso15919,ā ī ū ē ō = aa ii uu ee oo · ṭ ḍ ṇ ḷ = t d n l · ś ṣ = sh · ṁ = n · ḻ = retroflex l (ळ)
 pa,iso15919,ā ī ū ē ō = aa ii uu ee oo · ṭ ḍ ṇ ṛ = t d n r · ś = sh · ṁ = n · ḷ = retroflex l (ਲ਼) · x ġ = ਖ਼ ਗ਼ · a final short a is not written · tone is not shown — see the IPA column
 gu,iso15919,ā ī ū ē ō = aa ii uu ee oo · ṭ ḍ ṇ ḷ = t d n l · ś ṣ = sh · ṁ = n · r̥ = ru · ê ô = ઍ ઑ — the short open e and o · a final short a is not written · h after a stop is a puff of air: kh gh th dh ph bh are one sound each
+ne,iso15919,"ā ī ū ē ō = aa ii uu ee oo · ṭ ḍ ṇ = t d n · ś ṣ = sh · ṁ = n · ṅ = the ङ in an English -ing loanword (बुकिङ bukiṅa ""booking"") · r̥ = ri"
+am,bgn,ī ē = ee ay · e = uh · i = ih · kʼ tʼ pʼ tsʼ chʼ = k t p ts ch
+kn,iso15919,ā ī ū ē ō = aa ii uu ee oo · ṭ ḍ ṇ ḷ = t d n l · ś ṣ = sh · ṁ = n · r̥ = ru · h after a stop is a puff of air: kh gh th dh ph bh are one sound each

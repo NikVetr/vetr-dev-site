@@ -62,7 +62,7 @@
   },
   "legend": "VELKÁ PÍSMENA značí přízvučnou slabiku, čárka/kroužek nad samohláskou ji prodlužuje. Zbytek se čte jako běžná čeština.",
   "phonemes": [
-    {
+    {"slot": "any", "ipa": "ʼ", "out": ""},{
       "slot": "nucleus",
       "ipa": "a",
       "out": "a"

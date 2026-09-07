@@ -1,0 +1,16 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,मलाई {} जानु छ,,malāī {} jānu cha,məlˈaːi {} ɟˈaːnuʲˌu cʰˈə,,2,ne-agent-v1;ipa=espeak
+utility-templates.please-give-me,मलाई {} दिनुहोस्,,malāī {} dinuhōs,məlˈaːi {} dˌɪnuhˈoːs,,2,ne-agent-v1;ipa=espeak
+utility-templates.may-i,म {} गर्न मिल्छ?,,ma {} garna milcha?,mə {} ɡˈʌrrnə mˈɪlcʰə,,2,ne-agent-v1;ipa=espeak
+utility-templates.please-do-not-add,{} नराख्नुहोस्,,{} narākhnuhōs,{} nəɾˈaːkʰnuhˌoːs,,2,ne-agent-v1;ipa=espeak
+utility-templates.do-you-have,तपाईंसँग {} छ?,,tapāīṁsam̐ga {} cha?,tˌəpaːˈɪːnʃʌ̃ɡ {} cʰˈə,,2,ne-agent-v1;ipa=espeak
+utility-templates.please-write-the-number,नम्बर लेखिदिनुहोस्,,nambara lēkhidinuhōs,nˈʌmbəɾˌə lˌeːkʰɪdˌɪnuhˈoːs,,2,ne-agent-v1;ipa=espeak
+utility-templates.i-need,मलाई {} चाहियो,,malāī {} cāhiyō,məlˈaːi {} cˈaːhɪjˌoː,,2,ne-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,नजिकै {} छ?,,najikai {} cha?,nˈʌɟɪkˌɛː {} cʰˈə,,2,ne-agent-v1;ipa=espeak
+utility-templates.how-much-is,{} कति पर्छ?,,{} kati parcha?,{} kˈʌtɪ pˈʌrrcʰə,,2,ne-agent-v1;ipa=espeak
+utility-templates.is-this,के यो {} हो?,,kē yō {} hō?,kˈeː jˈoː {} hoː,,2,ne-agent-v1;ipa=espeak
+utility-templates.please,{} दिनुहोस्,,{} dinuhōs,{} dˌɪnuhˈoːs,,2,ne-agent-v1;ipa=espeak
+utility-templates.i-am-looking-for,म {} खोज्दै छु,,ma {} khōjdai chu,mə {} kʰˈoːɟdɛː cʰˈu,,2,ne-agent-v1;ipa=espeak
+utility-templates.do-you-accept,के तपाईं {} स्वीकार्नुहुन्छ?,,kē tapāīṁ {} svīkārnuhuncha?,kˈeː tˌəpaːˈɪːn {} swˌɪːkaːrrnuhˈuncʰə,,2,ne-agent-v1;ipa=espeak
+utility-templates.i-cannot-find,मलाई {} भेटिएन,,malāī {} bhēṭiēna,məlˈaːi {} bʰˌeːʈɪˈeːnə,,2,ne-agent-v1;ipa=espeak
+utility-templates.there-is-a-problem-with,{} मा समस्या छ,,{} mā samasyā cha,{} mˈaː səmˈʌsjaː cʰˈə,,2,ne-agent-v1;ipa=espeak

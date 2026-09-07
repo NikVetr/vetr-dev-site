@@ -61,6 +61,7 @@ export const LANGUAGE_MOTIFS = /** @type {const} */ ({
   // exactly that reason, in favour of the rope border and the tree, which
   // read as neither a flower nor a stitch.
   ro: 'funie',
+  ne: 'dhaka',
   ms: 'ketupat',
   sv: 'kurbits',
   cs: 'sklo',
@@ -129,6 +130,55 @@ export const LANGUAGE_MOTIFS = /** @type {const} */ ({
   // floor drawing, and the house rule is to name a motif against the neighbour it
   // could be confused with rather than to ship a third name for one art.
   gu: 'bandhani',
+  // `telsem` is the interlaced cross of Ethiopian handweaving -- the ጥልፍ border
+  // figure worked into the edge of a shamma and a netela, the same cross cut into the
+  // rock-hewn churches at Lalibela and drawn into a manuscript's harag. Named against
+  // the two motifs it could be confused with, and on the *mark* rather than on the
+  // craft, which is this table's house rule.
+  //
+  // `banig` (fil) is the other weave here and is the closest: it is a plain plaited
+  // check, the over-under of two sets of palm strips with no figure in it, so its
+  // unit is a *facet* of the ground itself. A telsem is a discrete figure standing
+  // *in* a woven ground -- four bands crossing at right angles, each passing over one
+  // neighbour and under the other, with the small square the weaver leaves at the
+  // crossing -- so this emblem draws one cross with its ground left plain, where
+  // banig continues the check to the edges of its box. And `interlace` (ar) is
+  // continuous strapwork whose lines never terminate; a telsem's four arms *end*,
+  // which is why it is drawn with capped arms and banig and interlace are not.
+  //
+  // `meskel`, the processional cross itself, was the alternative and was refused for
+  // the reason Telugu's `muggu` and Gujarati's `sathiya` were: it is a religious
+  // object rather than an art direction, and this table's own preface says these are
+  // imaginative interpretations and not national or religious emblems. The woven
+  // border is the same geometry arrived at through cloth.
+  am: 'telsem',
+  // `kasuti` is Karnataka's counted-thread embroidery -- the GI-tagged ಕಸೂತಿ of north
+  // Karnataka -- and its emblem is the **gopura**, the stepped temple tower a Kasuti
+  // sampler is counted out around.
+  //
+  // Named against the three neighbours it could be confused with, on the mark rather
+  // than on the craft. `meander` (el) is the closest and is the only other motif here
+  // built entirely of right angles, which is exactly why the distinction has to be
+  // drawn on the figure: a Greek key is a spiral that **turns back into itself**, and
+  // a gopura is **bilaterally symmetric** and never reverses. `kolam` (ta) is the
+  // other motif with a counted dot grid, and there the difference is what the line
+  // does with the dots: a kolam line **loops around** its pulli and curves, while a
+  // Kasuti gavanti stitch lands **on** the counted intersections, so every corner of
+  // this outline sits on a dot and every segment is orthogonal. And `phulkari` (pa)
+  // is the other Indian embroidery: its darn-stitch blocks are read off the
+  // *direction of their floats*, a fill, where Kasuti's gavanti is a double-running
+  // **outline** and never fills anything -- which is also what separates it from
+  // `dhaka` (ne), whose units are solid woven diamonds.
+  //
+  // Two alternatives were refused. **`bidri`**, the silver-inlaid blackened zinc of
+  // Bidar, because its distinguishing mark is a bright line *inlaid into a dark
+  // ground* and these ornaments print as strokes on white paper, so the one thing
+  // that makes it bidriware could not survive the medium. And **`rangoli`**,
+  // Karnataka's floor drawing, outright, for the reason Telugu's `muggu` and
+  // Gujarati's `sathiya` were refused: `kolam` (ta) and `alpona` (bn) already hold
+  // floor drawing, and the house rule is to name a motif against the neighbour it
+  // could be confused with rather than to ship a fourth name for one art.
+  kn: 'kasuti',
 });
 /** @typedef {typeof LANGUAGE_MOTIFS[keyof typeof LANGUAGE_MOTIFS]} LanguageMotif */
 
@@ -486,6 +536,24 @@ const emblems = {
     p.m(32, 24); p.l(68, 76); p.m(68, 24); p.l(32, 76);
     p.m(50, 16); p.l(84, 50); p.l(50, 84); p.l(16, 50); p.close();
   },
+  dhaka(p) {
+    // Four nested diamonds telescoping to one centre -- the "ankhi jhyal"
+    // (eye-window) unit a discontinuous supplementary weft actually produces,
+    // not a single frame (rosette) or a flat grid of same-size facets (banig).
+    for (const r of [43, 31, 19, 7]) diamond(p, 50, 50, r, r);
+    // The zigzag selvedge either side: the stepped edge left where the
+    // pattern thread turns back on itself, which is what a discontinuous
+    // weft does and a phulkari float (edge to edge, never turning back) does
+    // not.
+    for (const side of [-1, 1]) {
+      const x0 = 50 + side * 40;
+      p.m(x0, 8);
+      for (let i = 0; i < 5; i++) {
+        const y0 = 8 + i * 16.8, y1 = y0 + 8.4, y2 = y0 + 16.8;
+        p.l(x0 + side * 9, y1); p.l(x0, y2);
+      }
+    }
+  },
   funie(p) {
     // The rope twist (funie), top and bottom: an alternating S-curve rather
     // than a straight or single-curve edge, which is what makes it read as
@@ -549,6 +617,24 @@ const emblems = {
       }
     }
   },
+  telsem(p) {
+    // Four bands crossing at right angles, and the *interlacing* is the whole of the
+    // mark: the horizontal band is drawn straight through, so it reads as passing
+    // over, and the vertical band's edges stop short of the crossing and resume past
+    // it, so it reads as passing under. That over-under is what separates a woven
+    // cross from a drawn one, and it is what `interlace` (ar) never resolves --
+    // strapwork whose lines never terminate -- while these four arms are capped and
+    // end.
+    p.m(6, 40); p.l(94, 40); p.m(6, 60); p.l(94, 60);
+    p.m(6, 40); p.l(6, 60); p.m(94, 40); p.l(94, 60);
+    p.m(40, 6); p.l(40, 40); p.m(60, 6); p.l(60, 40);
+    p.m(40, 60); p.l(40, 94); p.m(60, 60); p.l(60, 94);
+    p.m(40, 6); p.l(60, 6); p.m(40, 94); p.l(60, 94);
+    // The small square the weaver leaves where the bands meet. It is also what keeps
+    // the centre from reading as a solid blot at emblem size, which is the failure
+    // `banig`'s short alternation bar avoids in the other direction.
+    p.m(45, 45); p.l(55, 45); p.l(55, 55); p.l(45, 55); p.close();
+  },
   bandhani(p) {
     // A chaubundi -- four tied points around a fifth, which is what the pattern is
     // counted and named by. The rings are drawn just clear of each other because two
@@ -563,6 +649,23 @@ const emblems = {
     // centre dot, which is what says "this field goes on" rather than "there are nine
     // of them".
     for (const [x, y] of [[50, 14], [14, 50], [86, 50], [50, 86]]) oval(p, x, y, 7, 7);
+  },
+  kasuti(p) {
+    // The gopura, drawn as one continuous right-angled line: three courses rising on
+    // the left, a plateau, the mirror of them on the right, closed along the plinth,
+    // with a kalasha finial above. Right angles only, because a counted-thread stitch
+    // spans a whole number of threads and can go nowhere else.
+    p.m(12, 88); p.l(12, 72); p.l(27, 72); p.l(27, 56); p.l(38, 56); p.l(38, 40);
+    p.l(62, 40); p.l(62, 56); p.l(73, 56); p.l(73, 72); p.l(88, 72); p.l(88, 88);
+    p.close();
+    // The kalasha: a shaft and a bar, orthogonal like everything else.
+    p.m(50, 40); p.l(50, 24); p.m(41, 24); p.l(59, 24);
+    // The counted ground, and the whole difference from `kolam`: the dots are the
+    // cloth's own thread intersections and the line lands *on* them rather than
+    // looping around them, so each one sits at a corner of the outline.
+    for (const [x, y] of [[12, 88], [27, 72], [38, 56], [62, 56], [73, 72], [88, 88]]) {
+      oval(p, x, y, 2.4, 2.4);
+    }
   },
 };
 
@@ -606,9 +709,20 @@ const tracery = {
     p.l(24, 76); p.l(12, 50); p.l(24, 24); p.close();
     p.m(50, 8); p.l(88, 50); p.l(50, 92); p.l(12, 50); p.close();
   },
+  dhaka(p) { for (const r of [40, 24, 10]) diamond(p, 50, 50, r, r); },
   funie(p) { p.m(6, 50); p.q(28, 30, 50, 50); p.q(72, 70, 94, 50); },
   phulkari(p) { diamond(p, 30, 50, 22, 42); diamond(p, 70, 50, 22, 42); p.m(12, 88); p.l(48, 12); p.m(52, 88); p.l(88, 12); },
   banig(p) { diamond(p, 30, 30, 17, 11); diamond(p, 70, 30, 17, 11); diamond(p, 30, 70, 17, 11); diamond(p, 70, 70, 17, 11); },
+  telsem(p) {
+    // The cross's own silhouette, with the interlacing dropped for the reason this
+    // whole table drops interior detail at divider height. The outline is what keeps
+    // it apart from `banig`, whose tracery is four *separate* facets, and from
+    // `interlace`, whose tracery is two overlapping diamonds: a Greek cross is one
+    // closed contour and reads as one figure at any size.
+    p.m(36, 8); p.l(64, 8); p.l(64, 36); p.l(92, 36); p.l(92, 64); p.l(64, 64);
+    p.l(64, 92); p.l(36, 92); p.l(36, 64); p.l(8, 64); p.l(8, 36); p.l(36, 36);
+    p.close();
+  },
   bandhani(p) {
     // Three tied points on the diagonal, which is the lattice's own direction. Drawn
     // on the diagonal rather than side by side so that at tracery height it cannot be
@@ -617,6 +731,14 @@ const tracery = {
     for (const [x, y] of [[19, 74], [50, 50], [81, 26]]) {
       oval(p, x, y, 14, 14); oval(p, x, y, 3.6, 3.6);
     }
+  },
+  kasuti(p) {
+    // Three courses rather than two, and that was decided by rendering both: at two
+    // courses the figure reads as a plinth with a block on it rather than as a
+    // stepped tower. No dots at tracery height -- they close up against the line.
+    p.m(12, 88); p.l(12, 68); p.l(30, 68); p.l(30, 48); p.l(44, 48); p.l(44, 28);
+    p.l(56, 28); p.l(56, 48); p.l(70, 48); p.l(70, 68); p.l(88, 68); p.l(88, 88);
+    p.close();
   },
 };
 
@@ -642,7 +764,11 @@ export function languageRule(motif, p, w, h) {
 
 /** @param {keyof typeof emblems} motif @param {Pen} p */
 export function languageCorner(motif, p) {
-  const angular = ['rosette', 'interlace', 'compass', 'azulejo', 'kawung', 'meander', 'embroidery', 'polder'].includes(motif);
+  // `telsem` joins this list where `bandhani` deliberately did not: the treatment is
+  // for motifs built from straight *borders*, and a telsem is four straight bands
+  // meeting at right angles where a field of tie-dye rings is the opposite.
+  const angular = ['rosette', 'interlace', 'compass', 'azulejo', 'kawung', 'meander',
+    'embroidery', 'polder', 'telsem', 'kasuti'].includes(motif);
   if (angular) {
     p.m(7, 93); p.l(7, 7); p.l(93, 7);
     p.m(14, 65); p.l(14, 14); p.l(65, 14);

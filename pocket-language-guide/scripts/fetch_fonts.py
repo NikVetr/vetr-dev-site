@@ -49,6 +49,22 @@ SOURCES = {
     # so the emergency line's digits and its U+00B7 separators draw without a graft.
     # Checked against these files rather than assumed -- that is the same mistake the
     # Devanagari note below records, in the other direction.
+    # Amharic, and `NotoSans-var.ttf` has zero codepoints of U+1200..137F, so `Ethi`
+    # cannot route to `latin` the way `Grek` and `Cyrl` do. Both faces cover all 358
+    # assigned codepoints of the block, all 26 of Ethiopic Extended, all 79 of the
+    # Supplement and all 32 of Extended-A, and both carry 283 codepoints of
+    # U+0020..024F including the whole of ASCII and `·` U+00B7 -- so this is the
+    # Bengali case and not the Arabic one: no `LATIN_DONOR` graft. **Neither throws
+    # on any of the 129,628 strings `tmp/am/shapecheck.mjs` lays through this
+    # project's own fontkit**, which is the check tmp/telugu.md, tmp/punjabi.md and
+    # tmp/gujarati.md all tell the next addition to run first; Ethiopic has no
+    # MarkBasePos lookup for a syllable to reach, so the NULL-base-anchor crash
+    # cannot be entered. Abyssinica SIL 2.300 covers the block too and is refused for
+    # being single-weight and for carrying a Reserved Font Name.
+    "NotoSansEthiopic-var.ttf":
+        f"{GFONTS}/notosansethiopic/NotoSansEthiopic%5Bwdth,wght%5D.ttf",
+    "NotoSerifEthiopic-var.ttf":
+        f"{GFONTS}/notoserifethiopic/NotoSerifEthiopic%5Bwdth,wght%5D.ttf",
     "NotoSansHebrew-var.ttf": f"{GFONTS}/notosanshebrew/NotoSansHebrew%5Bwdth,wght%5D.ttf",
     "NotoSerifHebrew-var.ttf": f"{GFONTS}/notoserifhebrew/NotoSerifHebrew%5Bwdth,wght%5D.ttf",
     "NotoSansThai-var.ttf": f"{GFONTS}/notosansthai/NotoSansThai%5Bwdth,wght%5D.ttf",
@@ -227,6 +243,52 @@ SOURCES = {
     "MuktaVaani-Bold.ttf": f"{GFONTS}/muktavaani/MuktaVaani-Bold.ttf",
     "HindGuntur-Regular.ttf": f"{GFONTS}/hindguntur/HindGuntur-Regular.ttf",
     "HindGuntur-Bold.ttf": f"{GFONTS}/hindguntur/HindGuntur-Bold.ttf",
+    # Kannada, and **the first Brahmic script here to ship both halves of the Noto
+    # pair** -- the shaper defect that refused Noto for Telugu, Gurmukhi and Gujarati
+    # is absent from Noto Sans Kannada, which has **zero** NULL MarkBasePos base
+    # anchors of 667, so the code path `vendor/fontkit.esm.js` crashes on cannot be
+    # entered at all. Run tmp/kn/shapecheck.mjs before choosing a Brahmic face, which
+    # is what tmp/telugu.md, tmp/punjabi.md and tmp/gujarati.md all say. Over the
+    # 123,760 aksharas Kannada can write (34 consonants x 13 vowel signs x {bare,
+    # anusvara, visarga, candrabindu} x {no subjoined, each of the 34} x {no
+    # arkavattu, ರ್}):
+    #
+    #   Noto Sans Kannada              0 throws     0 NULL base anchors of   667
+    #   Noto Serif Kannada             0 throws   210 NULL base anchors of 1,451
+    #   Noto Sans Kannada UI           0 throws     0 of 210   <- 43 Latin codepoints
+    #   Anek Kannada                   0 throws     0 of   0   <- upem 2000
+    #   Hind Mysuru                    0 throws     0 of   9   <- 84 of 89 of block
+    #   Tiro Kannada / Benne /
+    #     Padyakke Expanded One        0 throws     0 of   0   <- single weight
+    #   Baloo Tamma 2                  0 throws     0 of  88   <- display design
+    #   Hubballi                       0 throws   630 of 1,433
+    #   Akaya Kanadaka             2,600 throws, 30,290 notdefs
+    #
+    # **The matrix is not the test, and Kannada is where that becomes unmistakable.**
+    # Noto Serif Kannada and Hubballi hold 210 and 630 NULL anchors between them and
+    # both shape every one of the 123,760 aksharas -- and Noto Serif Kannada then
+    # **throws on 2,593 of 30,659 real rows**. The class is `C್C್`: a *subjoined*
+    # consonant carrying a **word-final virama**, 1,120 of the 1,156 such pairs,
+    # which is the shape of every English loanword ending in a consonant cluster --
+    # ಲಿಫ್ಟ್ *lift*, ಆಂಬ್ಯುಲೆನ್ಸ್ *ambulance*, ಆಗಸ್ಟ್ *August*, ಫಿಟ್ಸ್ *fits*. `C್`
+    # alone shapes clean and so does `C್C` plus a vowel sign, which is exactly why
+    # the cube missed it: every `್` in the cube was followed by a consonant and
+    # consumed into a conjunct. **So Kannada ships sans-only**, which is `telu`'s,
+    # `gujr`'s and `arabic`'s shape, and the harness to run on the next Brahmic
+    # addition is `tmp/kn/throwrows.mjs` over real rows rather than either matrix.
+    # Tiro Kannada is the replacement if the sans ever has to go: a real text serif,
+    # 0 NULL anchors, 0 throws and 6 notdefs over the same 30,659 rows -- refused
+    # here only because it has Regular and Italic and no bold, so a serif stack built
+    # from it would print the theme's weight distinction as none.
+    #
+    # The sans is variable (`wght`+`wdth`) and `subset_source` pins static instances
+    # out of it, so it needs no instancing here. It carries the whole assigned
+    # Kannada block (89 of 89) and 274 codepoints of U+0020..024F including ASCII,
+    # `·` U+00B7 and `₹`, so this is the Bengali case and needs no `LATIN_DONOR`
+    # graft -- unlike Noto Sans Kannada **UI**, which has 43 and no letter of either
+    # case. See tmp/kannada.md.
+    "NotoSansKannada-var.ttf":
+        f"{GFONTS}/notosanskannada/NotoSansKannada%5Bwdth,wght%5D.ttf",
     # Klingon pIqaD and Tengwar, which no Noto face has and which are not in Unicode
     # at all -- they are Private Use Area allocations from the ConScript Unicode
     # Registry, U+F8D0..U+F8FF and U+E000..U+E07F. Constructium is a fork of SIL

@@ -230,6 +230,29 @@ first twenty-two languages rejected a naive preposition**; Hebrew was the first 
 take one, because its preposition's vowel is not written, and Persian the second, for
 a different reason. Read that discussion in `summary.md` before writing yours.
 
+**Two corrections to advice this file used to give, both earned the hard way.**
+
+`pgrep -f "[s]ubset_fonts.py"` was recommended here as the way to check whether a
+subset run is in flight without the pattern matching your own shell. **It still
+self-matches through the parent shell.** The check that actually works assembles the
+pattern at run time in a separate file. The unbracketed form is worse still — an
+agent deadlocked itself on it for an hour.
+
+**`data/concepts/numbers.csv` and `social.csv` are LF where the other fourteen are
+CRLF**, so a `\r\n` splitter fails *silently* on exactly those two. Five of one
+addition's eight `applies_to` scopes needed a second pass because of it. Split on both.
+
+**A `slot: onset` rule is not the fix for a mark that needs a preceding consonant.**
+Czech's `r̝` arrives in the Indic tables as a subjoined `्र`, which needs something to
+attach to, so a word-initial ř printed a dangling mark and the obvious repair looked
+like an `onset`-slot rule emitting the independent letter. **Measure before doing it:**
+across the Czech pack, `r̝` is word-initial 4 times and cluster-internal 96 times, and
+the onset rule fires on both — so `pr̝es` came out `परेस` (pa-res) rather than
+`प्रेस` (pres). It was reverted. Gujarati's table renders both correctly from a
+three-rule set, and the mechanism is *not* simply the extra `coda` rule; whoever needs
+this next should read `gu__gu-IN.json` against `hi__hi-IN.json` and find out why rather
+than copying rule shapes.
+
 **`applies_to` has to be widened when your language joins an existing scope.** The
 seventeenth language shipped without the euro because `numbers-money.euro` was scoped
 `de;fr;es;pt` and nobody added `it`. Read the scopes against the countries

@@ -139,7 +139,7 @@
   "policy_note": "max_onset 3 and reader_onsets are carried over unmodified from the Italian table rather than independently re-measured over this corpus's own targets -- flagged rather than hidden, see derives_from. Romanian and Italian constrain onset clusters very similarly (both conservative Romance languages with the same Latin consonant-cluster inheritance), so this is an adaptation with a stated justification, not a guess, but it is not the corpus-wide measurement Italian's own policy_note describes running and a fluent-speaker or measurement pass could tighten it.",
   "splits": [],
   "phonemes": [
-    {
+    {"slot": "any", "ipa": "ʼ", "out": ""},{
       "slot": "any",
       "ipa": "ʏ",
       "out": "u"

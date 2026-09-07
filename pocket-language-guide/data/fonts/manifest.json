@@ -8,8 +8,10 @@
     "Copyright 2019 Google Inc. All Rights Reserved.",
     "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/arabic)",
     "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/devanagari)",
+    "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/ethiopic)",
     "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/gurmukhi)",
     "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/hebrew)",
+    "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/kannada)",
     "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/latin-greek-cyrillic)",
     "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/tamil)",
     "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/thai)",
@@ -284,9 +286,9 @@
       "weight": 400,
       "italic": false,
       "file": "cjk-kr-400",
-      "glyphs": 5856,
-      "ttfBytes": 940468,
-      "woff2Bytes": 309160,
+      "glyphs": 5861,
+      "ttfBytes": 941448,
+      "woff2Bytes": 309420,
       "source": "NotoSansKR-var.ttf"
     },
     {
@@ -294,9 +296,9 @@
       "weight": 700,
       "italic": false,
       "file": "cjk-kr-700",
-      "glyphs": 5856,
-      "ttfBytes": 940688,
-      "woff2Bytes": 316008,
+      "glyphs": 5861,
+      "ttfBytes": 941668,
+      "woff2Bytes": 316336,
       "source": "NotoSansKR-var.ttf"
     },
     {
@@ -304,9 +306,9 @@
       "weight": 400,
       "italic": false,
       "file": "cjk-kr-serif-400",
-      "glyphs": 5857,
-      "ttfBytes": 2602712,
-      "woff2Bytes": 596148,
+      "glyphs": 5862,
+      "ttfBytes": 2605924,
+      "woff2Bytes": 596944,
       "source": "NotoSerifKR-var.ttf"
     },
     {
@@ -314,9 +316,9 @@
       "weight": 700,
       "italic": false,
       "file": "cjk-kr-serif-700",
-      "glyphs": 5857,
-      "ttfBytes": 2607280,
-      "woff2Bytes": 618764,
+      "glyphs": 5862,
+      "ttfBytes": 2610508,
+      "woff2Bytes": 619372,
       "source": "NotoSerifKR-var.ttf"
     },
     {
@@ -544,9 +546,9 @@
       "weight": 400,
       "italic": false,
       "file": "guru-400",
-      "glyphs": 2087,
-      "ttfBytes": 255312,
-      "woff2Bytes": 89628,
+      "glyphs": 2114,
+      "ttfBytes": 264092,
+      "woff2Bytes": 92396,
       "source": "NotoSansGurmukhiUI-var.ttf"
     },
     {
@@ -554,9 +556,9 @@
       "weight": 700,
       "italic": false,
       "file": "guru-700",
-      "glyphs": 2087,
-      "ttfBytes": 256248,
-      "woff2Bytes": 94224,
+      "glyphs": 2114,
+      "ttfBytes": 265036,
+      "woff2Bytes": 96696,
       "source": "NotoSansGurmukhiUI-var.ttf"
     },
     {
@@ -598,6 +600,66 @@
       "ttfBytes": 302852,
       "woff2Bytes": 83304,
       "source": "MuktaVaani-Bold.ttf"
+    },
+    {
+      "stack": "knda",
+      "weight": 400,
+      "italic": false,
+      "file": "knda-400",
+      "glyphs": 737,
+      "ttfBytes": 137984,
+      "woff2Bytes": 40600,
+      "source": "NotoSansKannada-var.ttf"
+    },
+    {
+      "stack": "knda",
+      "weight": 700,
+      "italic": false,
+      "file": "knda-700",
+      "glyphs": 737,
+      "ttfBytes": 138108,
+      "woff2Bytes": 41172,
+      "source": "NotoSansKannada-var.ttf"
+    },
+    {
+      "stack": "ethi",
+      "weight": 400,
+      "italic": false,
+      "file": "ethi-400",
+      "glyphs": 747,
+      "ttfBytes": 209504,
+      "woff2Bytes": 57492,
+      "source": "NotoSansEthiopic-var.ttf"
+    },
+    {
+      "stack": "ethi",
+      "weight": 700,
+      "italic": false,
+      "file": "ethi-700",
+      "glyphs": 747,
+      "ttfBytes": 209532,
+      "woff2Bytes": 57600,
+      "source": "NotoSansEthiopic-var.ttf"
+    },
+    {
+      "stack": "ethi-serif",
+      "weight": 400,
+      "italic": false,
+      "file": "ethi-serif-400",
+      "glyphs": 746,
+      "ttfBytes": 192568,
+      "woff2Bytes": 44772,
+      "source": "NotoSerifEthiopic-var.ttf"
+    },
+    {
+      "stack": "ethi-serif",
+      "weight": 700,
+      "italic": false,
+      "file": "ethi-serif-700",
+      "glyphs": 746,
+      "ttfBytes": 192788,
+      "woff2Bytes": 53772,
+      "source": "NotoSerifEthiopic-var.ttf"
     }
   ]
 }

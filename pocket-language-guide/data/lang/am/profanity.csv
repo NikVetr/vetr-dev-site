@@ -1,0 +1,9 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+profanity.oh-my-god,አምላኬ!,,āmilakē!,ʔamɨlake,my God!,1,am-agent-v1;ipa=bgn-am
+profanity.damn,ወይኔ!,,weynē!,wəjne,woe is me! — at a situation,1,am-agent-v1;ipa=bgn-am
+profanity.expletive,ወይ ጉድ!,,wey gud!,wəj ɡud,oh trouble! — coarse but milder than the gloss,1,am-agent-v1;ipa=bgn-am
+profanity.frustration,ይህ ምንም አይረባም!,,yih minim āyirebam!,jɨh mɨnɨm ʔajɨrəbam,this is worth nothing!,1,am-agent-v1;ipa=bgn-am
+profanity.thats-rude,ይህ ጨዋነት አይደለም,,yih chʼewanet āydellem,jɨh tʃʼəwanət ʔajdəlːəm,this is not decency,2,am-agent-v1;ipa=bgn-am
+profanity.excuse-my-language,ይቅርታ በአነጋገሬ,,yikʼirta beʼānegagerē,jɨkʼɨrta bəʔanəɡaɡəre,forgiveness for my way of speaking,2,am-agent-v1;ipa=bgn-am
+profanity.strength-warning,እነዚህ ቃላት ለመጠቀም አይደለም ለማወቅ ነው። የስድብ ጥንካሬ ከቋንቋ ወደ ቋንቋ አይሻገርም። በዚህ ካርድ ላይ ቀላል የሚመስል ቃል በአጠገቡ ባለው ቋንቋ ፈጽሞ የማይነገር ሊሆን ይችላል። የአንድ ቋንቋ በጣም ከባድ ቃል ብዙ ጊዜ ከዚህ ዝርዝር የተተወው ነው።,,innezzīh kʼalat lemetʼekʼem āydellem lemawekʼ new። yesidib tʼinkarē kekʼwankʼwa wede kʼwankʼwa āyishagerim። bezzīh kard lay kʼelal yemīmesil kʼal beʼātʼegebu ballew kʼwankʼwa fetsʼimo yemayineger līhon yichilal። yeʼānd kʼwankʼwa betʼam kebad kʼal bizu gīzē kezzīh zirizir yetetewew new።,,,2,am-agent-v1
+profanity.japanese-register,ጃፓንኛ ይህን በቃላት አያደርገውም። ንዴቱ በሰዋስው ውስጥ ነው — ደፋር የሁለተኛ ሰው ተውላጠ ስም ቀጥተኛ ትእዛዝ አጭር የግስ መድረሻ። ስለዚህ ቁጣው በቃሉ ውስጥ አይደለም በመድረሻው ውስጥ ነው። ከላይ ያሉት መስመሮች ሁሉንም መዝገበ ቃላት ያህል ናቸው።,,japaninya yihin bekʼalat āyaderigewim። nidētu besewasiw wistʼ new — defar yehulettennya sew tewilatʼe sim kʼetʼitenya tiʼizaz āchʼir yegis medresha። silezzīh kʼutʼaw bekʼalu wistʼ āydellem bemedreshaw wistʼ new። kelay yallut mesmeroch hulunim mezgebe kʼalat yahil nachew።,,,2,am-agent-v1

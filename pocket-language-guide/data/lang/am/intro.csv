@@ -1,0 +1,13 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+introductions.my-name-is,ስሜ {} ነው,,simē {} new,sɨme {} nəw,my name is {},2,am-agent-v1;ipa=bgn-am
+introductions.nice-to-meet-you,ደስ ብሎኛል,,des bilonnyal,dəs bɨloɲːal,it has pleased me,2,am-agent-v1;ipa=bgn-am
+introductions.what-is-your-name,ስምዎ ማን ነው?,,simiwo man new?,sɨmɨwo man nəw,your name who is?,2,am-agent-v1;ipa=bgn-am
+introductions.we-are-traveling-together,አንድ ላይ እንጓዛለን,,ānd lay ingwazallen,ʔand laj ʔɨnɡwazalːən,we travel in one place,2,am-agent-v1;ipa=bgn-am
+introductions.this-is-my-friend,ይህ ጓደኛዬ ነው,,yih gwadenyayē new,jɨh ɡwadəɲaje nəw,,2,am-agent-v1;ipa=bgn-am
+introductions.i-am-from,ከ{} ነኝ,,ke{} neny,kə {} nəɲ,from {} I am,2,am-agent-v1;ipa=bgn-am
+introductions.where-are-you-from,ከየት ነዎት?,,keyet newot?,kəjət nəwot,from where are you?,2,am-agent-v1;ipa=bgn-am
+introductions.how-are-you,እንደምን ነዎት?,,indemin newot?,ʔɨndəmɨn nəwot,how are you?,2,am-agent-v1;ipa=bgn-am
+introductions.i-am-a-tourist,ጎብኚ ነኝ,,gobinyī neny,ɡobɨɲi nəɲ,,2,am-agent-v1;ipa=bgn-am
+introductions.this-is-my-husband-wife,ይህ ባሌ ነው / ዪህች ሚስቴ ናት,,yih balē new / yīhich mīstē nat,jɨh bale nəw / jihɨtʃ miste nat,my husband / my wife,2,am-agent-v1;ipa=bgn-am
+introductions.this-is-my-daughter-son,ዪህች ሴት ልጄ ናት / ይህ ወንድ ልጄ ነው,,yīhich sēt lijē nat / yih wend lijē new,jihɨtʃ set lɨdʒe nat / jɨh wənd lɨdʒe nəw,my girl child / my boy child — ልጅ is either,2,am-agent-v1;ipa=bgn-am
+introductions.i-am-traveling-alone,ብቻዬን እንጓዛለሁ,,bichayēn ingwazallehu,bɨtʃajen ʔɨnɡwazalːəhu,,2,am-agent-v1;ipa=bgn-am

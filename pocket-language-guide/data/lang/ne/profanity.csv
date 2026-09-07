@@ -1,0 +1,10 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+profanity.oh-my-god,हे भगवान्!,,hē bhagavān!,hˈeː bʰˌəɡəwˈaːn,,2,ne-agent-v1;ipa=espeak
+profanity.damn,धत्!,,dhat!,dʰˈʌt,,2,ne-agent-v1;ipa=espeak
+profanity.expletive,सत्यानाश!,,satyānāśa!,sˌətjaːnˈaːʃ,,2,ne-agent-v1;ipa=espeak
+profanity.intensifier,अभागी,,abhāgī,əbʰˈaːɡi,"""wretched"", used as an intensifier",2,ne-agent-v1;ipa=espeak
+profanity.frustration,यो बकवास छ,,yō bakavāsa cha,jˈoː bˌəkəwˈaːs cʰˈə,,2,ne-agent-v1;ipa=espeak
+profanity.thats-rude,यो असभ्य छ,,yō asabhya cha,jˈoː əsˈʌbʰjˌə cʰˈə,,2,ne-agent-v1;ipa=espeak
+profanity.excuse-my-language,अपशब्दको लागि माफ गर्नुहोस्,,apaśabdakō lāgi māpha garnuhōs,ˌəpəʃˈʌbdəkˌoː lˈaːɡɪ mˈaːpʰ ɡˌərrnuhˈoːs,,2,ne-agent-v1;ipa=espeak
+profanity.strength-warning,"यी हरू चिन्नका लागि हुन्, बोल्नका लागि होइनन्: गालीको भार अनुवादमा जोगिँदैन। यहाँ हल्का गाली जस्तो देखिने शब्द छेउको भाषामा नबोल्नुपर्ने हुन सक्छ, र कुनै भाषाको सबैभन्दा गाह्रो शब्द प्रायः यही खण्डले छोड्नुपर्ने भएको हुन्छ।",,"yī harū cinnakā lāgi hun, bōlnakā lāgi hōinan: gālīkō bhāra anuvādamā jōgim̐daina। yahām̐ halkā gālī jastō dēkhinē śabda chēukō bhāṣāmā nabōlnuparnē huna sakcha, ra kunai bhāṣākō sabaibhandā gāhrō śabda prāyaḥ yahī khaṇḍalē chōḍnuparnē bhaēkō huncha।",,,2,ne-agent-v1
+profanity.japanese-register,"जापानीमा यसका लागि लगभग शब्दै छैनन्। घृणा शब्दभण्डारभन्दा व्याकरणबाट आउँछ — कठोर दोस्रो पुरुष सर्वनाम, सोझो आज्ञार्थक रूप, र क्रियाको छोटो अन्त्य — त्यसैले रिस शब्दकोशमा खोज्न सकिने शब्दमा भन्दा क्रियाको अन्त्यमा बस्छ। माथिका हरूहरू नै लगभग सम्पूर्ण शब्दभण्डार हुन्।",,"jāpānīmā yasakā lāgi lagabhaga śabdai chainan। ghr̥ṇā śabdabhaṇḍārabhandā vyākaraṇabāṭa āum̐cha — kaṭhōra dōsrō puruṣa sarvanāma, sōjhō ājñārthaka rūpa, ra kriyākō chōṭō antya — tyasailē risa śabdakōśamā khōjna sakinē śabdamā bhandā kriyākō antyamā bascha। māthikā harūharū nai lagabhaga sampūrṇa śabdabhaṇḍāra hun।",,,2,ne-agent-v1

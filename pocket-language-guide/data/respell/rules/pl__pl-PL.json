@@ -103,7 +103,7 @@
   },
   "legend": "WIELKIE LITERY to akcentowana sylaba, dwukropek wydłuża poprzedzającą samogłoskę, a ö i ü czyta się jak po niemiecku. Reszta to zwykły polski.",
   "phonemes": [
-    {
+    {"slot": "any", "ipa": "ʼ", "out": ""},{
       "slot": "onset",
       "ipa": "tɕ",
       "out": "dz",

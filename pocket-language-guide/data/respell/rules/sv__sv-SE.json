@@ -61,7 +61,7 @@
     }
   ],
   "phonemes": [
-    {
+    {"slot": "any", "ipa": "ʼ", "out": ""},{
       "slot": "any",
       "ipa": "s",
       "out": "s"

@@ -1,0 +1,8 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,ቲኬት የት መግዛት እችላለሁ?,,tīkēt yet megzat ichilallehu?,tiket jət məɡzat ʔɨtʃɨlalːəhu,,2,am-agent-v1;ipa=bgn-am
+attractions-tickets.do-i-need-a-reservation,ቀድሞ ቦታ ማስያዝ ያስፈልጋል?,,kʼedimo bota masyaz yasfelligal?,kʼədɨmo bota masjaz jasfəlːɨɡal,is booking a place ahead needed?,2,am-agent-v1;ipa=bgn-am
+attractions-tickets.what-is-the-latest-entry-time,መግቢያ ስንት ሰዓት ይዘጋል?,,megbīya sint seʽat yizzegal?,məɡbija sɨnt səʔat jɨzːəɡal,at what hour does the entrance close?,2,am-agent-v1;ipa=bgn-am
+attractions-tickets.are-there-lockers,ዕቃ ማስቀመጫ አለ?,,ʽikʼa maskʼemechʼa āle?,ʔɨkʼa maskʼəmətʃʼa ʔalə,is there a place for keeping things?,2,am-agent-v1;ipa=bgn-am
+attractions-tickets.may-i-take-photos,ፎቶ ማንሳት ይፈቀዳል?,,foto mansat yifekʼedal?,foto mansat jɨfəkʼədal,is photographing permitted?,2,am-agent-v1;ipa=bgn-am
+attractions-tickets.please-take-a-photo-of-us,እባክዎ ፎቶ ያንሱልን,,ibakwo foto yansulin,ʔɨbakwo foto jansulɨn,,2,am-agent-v1;ipa=bgn-am
+attractions-tickets.could-you-take-a-photo-for-us,ፎቶ ሊያነሱልን ይችላሉ?,,foto līyanesulin yichilallu?,foto lijanəsulɨn jɨtʃɨlalːu,would you be able to take a photo for us?,2,am-agent-v1;ipa=bgn-am

@@ -1,0 +1,8 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,टिकट कहाँ पाइन्छ?,,ṭikaṭa kahām̐ pāincha?,ʈˈɪkəʈ kˈʌhã paːˈɪncʰə,,2,ne-agent-v1;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,बुकिङ गर्नुपर्छ?,,bukiṅa garnuparcha?,bˈukɪŋ ɡˌərrnupˈʌrrcʰə,,2,ne-agent-v1;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,भित्र जाने अन्तिम समय के हो?,,bhitra jānē antima samaya kē hō?,bʰˈɪtɾə ɟˈaːneː ˈʌntɪmˌə sˈʌməjˌə kˈeː hoː,,2,ne-agent-v1;ipa=espeak
+attractions-tickets.are-there-lockers,लकर छ?,,lakara cha?,lˈʌkəɾˌə cʰˈə,,2,ne-agent-v1;ipa=espeak
+attractions-tickets.may-i-take-photos,यहाँ फोटो खिच्न मिल्छ?,,yahām̐ phōṭō khicna milcha?,jˈʌhã pʰˈoːʈoː kʰˈɪcnə mˈɪlcʰə,,2,ne-agent-v1;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,हाम्रो फोटो खिचिदिनुहोस्,,hāmrō phōṭō khicidinuhōs,hˈaːmɾoː pʰˈoːʈoː kʰˌɪcɪdˌɪnuhˈoːs,,2,ne-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,हाम्रो फोटो खिचिदिनुहुन्छ?,,hāmrō phōṭō khicidinuhuncha?,hˈaːmɾoː pʰˈoːʈoː kʰˌɪcɪdˌɪnuhˈuncʰə,,2,ne-agent-v1;ipa=espeak

@@ -78,7 +78,7 @@
   },
   "splits": [],
   "phonemes": [
-    {
+    {"slot": "any", "ipa": "ʼ", "out": ""},{
       "slot": "coda",
       "ipa": "ɬ",
       "out": "ль"

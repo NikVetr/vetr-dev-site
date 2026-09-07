@@ -118,7 +118,7 @@
   },
   "splits": [],
   "phonemes": [
-    {
+    {"slot": "any", "ipa": "ʼ", "out": ""},{
       "slot": "any",
       "ipa": "ɬ",
       "out": "l"

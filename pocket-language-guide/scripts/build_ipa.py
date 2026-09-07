@@ -599,7 +599,57 @@ VOICES = {"en": "en-us", "es": "es-419", "fr": "fr-fr", "de": "de", "pt": "pt-br
           # counts of the nine aspirated units sum to exactly 655 -- so there is no
           # bare `ʰ` anywhere and the Hindi `dʰ` bug cannot recur here for the
           # structural reason Telugu's entry gives rather than by luck.
-          "gu": "gu"}
+          "gu": "gu",
+          # Kannada, and **`kn_dict` is in this build's installed system
+          # espeak-ng-data 1.50** -- `espeak-ng-data/lang/dra/kn` sits beside `ta`,
+          # `te` and `ml`, and `EspeakBackend.supported_languages()['kn']` is
+          # `'Kannada'` against the plain system library with no
+          # `PHONEMIZER_ESPEAK_*` set, confirmed before reaching for anything else.
+          # So the `espeakng_loader` escape `uk` and `mr` need is **not** needed
+          # here, and per the warning on those two entries it must not be set for a
+          # run that also touches an already-built language.
+          #
+          # Used rather than a romanisation route over `romanization_iso15919`, and
+          # the reason is neither Tamil's nor Telugu's. Kannada writes voicing and
+          # aspiration both, and it writes every vowel it pronounces including the
+          # short/long e and o -- so a letter-by-letter route would have carried the
+          # same segments. What the letters do **not** say is the anusvara's place of
+          # articulation, and this voice gets it right in **every environment the
+          # pack contains**, checked one by one before it was trusted: ಂಬ `mb`
+          # (ತುಂಬಾ `tumbaː`), ಂಪ `mp`, ಂಭ `mbʰ`, ಂಸ `ms` (ಮಾಂಸ `maːmsɐ`), ಂತ `nt`,
+          # ಂದ `nd`, ಂಧ `ndʰ`, ಂಟ `ɳʈ` (ಪಾಯಿಂಟ್ `paːjiɳʈ`), ಂಡ `ɳɖ`, ಂಕ `ŋk`,
+          # ಂಖ `ŋkʰ`, ಂಗ `ŋɡ`, ಂಜ `ɲɟ` (ಸಂಜೆ `sɐɲɟe`), and word-finally `m`
+          # (ಎಟಿಎಂ `eʈiem`). That is the whole of what `te_anusvara` had to be
+          # written by hand for and what `pa_nasal` had to regularise, so **no new
+          # per-language function is needed here** -- which is Gujarati's outcome
+          # rather than Telugu's.
+          #
+          # **The full four-way stop series survives, all ten aspirates**, which is
+          # the thing to probe before trusting any Indic voice: ಧನ್ಯವಾದ
+          # `dʰɐnjɐvaːdɐ`, ಭಾರತ `bʰaːɹɐtɐ`, ಖಾಲಿ `kʰaːli`, ಘಂಟೆ `ɡʰɐɳʈe`, ಫೋನ್
+          # `pʰoːn`, ಥಟ್ಟನೆ `tʰɐʈʈɐne`, ಛತ್ರಿ `cʰɐtɹi`, ಝರಿ `ɟʰɐɹi`, ಠೀಕು `ʈʰiːku`,
+          # ಢಾಳ `ɖʰaːɭɐ`. Aspiration comes back as a `ʰ` modifier bound to the stop,
+          # and over the finished column the count of `ʰ` is 152 while the counts of
+          # the eight aspirated units the pack actually produces (`pʰ dʰ tʰ bʰ kʰ ʈʰ
+          # cʰ ɡʰ`) sum to exactly 152 -- so there is **no bare `ʰ` anywhere** and
+          # the Hindi `dʰ` bug cannot recur, for the structural reason Telugu's entry
+          # gives rather than by luck. `ɟʰ` and `ɖʰ` have no row in this pack: ಝ and
+          # ಢ are real Kannada letters that no concept in the bank happens to need,
+          # which is a fact about the bank rather than about the language.
+          #
+          # **Gemination is written as a doubled consonant, not as a length mark**,
+          # checked over the whole pack: ಇಲ್ಲ `illɐ`, ಇದ್ದಾರೆ `iddaːɹe`, ಗಡ್ಡೆ
+          # `ɡɐɖɖe`, and there is **not one consonant+`ː` sequence in the column**.
+          # So `GEMINATE_DOUBLES` is not needed, unlike Punjabi's and Gujarati's.
+          "kn": "kn",
+          # Nepali is in this build's **system** espeak-ng-data (1.50) directly --
+          # unlike `mr`/`uk`, no `espeakng_loader` is needed. Confirmed with
+          # `EspeakBackend.supported_languages()['ne']` and a direct probe against the
+          # plain system library, no `PHONEMIZER_ESPEAK_*` set:
+          # `EspeakBackend('ne').phonemize(['नमस्ते'])` -> `'nəmʌsteː '`, a correct
+          # reading with the schwa retained. See `REPAIR["ne"]` for the one defect
+          # this voice shares with `hi`/`mr`.
+          "ne": "ne"}
 
 # Phonemised one word at a time rather than a phrase at a time, which every other
 # espeak language is.
@@ -630,7 +680,20 @@ WORD_AT_A_TIME = {"hu"}
 # either of them is a table of.
 ROMANISED = {"zh-Hans": "romanization_pinyin", "ja": "romanization_hepburn",
              "ko": "romanization_rr", "he": "romanization_bgn",
-             "tlh": "romanization_okrand", "qya": "romanization_appendix-e"}
+             "tlh": "romanization_okrand", "qya": "romanization_appendix-e",
+             # **Amharic is here for a reason none of the other five has: the fidal
+             # carries *less* information than the romanisation, so the romanisation
+             # is the authored cell and `text` is derived from it.** Amharic
+             # geminates phonemically -- አለ is both *ala* "he said" and *alla* "there
+             # is", one and the same string of letters -- and the script does not
+             # write gemination at all. Nor does espeak's `am` voice: probed over 90
+             # words it emits **zero** length marks. So the `ipa` column is the only
+             # column in an Amharic row that can carry it, which is Tamil's finding
+             # about voicing arrived at from the other end. The same column also
+             # resolves the sixth order, whose vowel is pronounced in ስንት /sɨnt/ and
+             # not in ገንዘብ /ɡənzəb/ -- a distinction BGN/PCGN's own Note 1 delegates
+             # to pronunciation and espeak gets wrong on most polysyllables.
+             "am": "romanization_bgn"}
 
 # Whether espeak's word-level stress marks are kept.
 #   keep    the language has lexical stress and espeak finds it
@@ -658,6 +721,28 @@ STRESS = {"fr": "phrase", "ko": "none", "vi": "none", "ja": "none",
           # for a Spanish reader on a syllable the language does not stress, next to a
           # tone the language does. Tamil refused a stress prime for the same reason.
           "pa": "none",
+          # **Kannada stress is not contrastive and espeak's is the first syllable,
+          # unconditionally** -- which is a sharper measurement than Punjabi's or
+          # Gujarati's, because the number is not a percentage. Over the **1,772**
+          # polysyllables of the finished pack the primary mark lands on the first
+          # syllable **1,772 times**, so this voice is applying a rule rather than
+          # looking anything up.
+          #
+          # The rule it is applying is roughly Kannada's own. Sridhar (*Kannada*,
+          # Descriptive Grammars, 1990) and Schiffman both state that Kannada has no
+          # phonemic stress and that such prominence as there is falls on the initial
+          # syllable **unless that syllable is light and the next holds a long
+          # vowel** -- ಪ್ರಯಾಣ, ವಿಮಾನ, ಸಹಾಯ. **77 of the pack's 858 distinct
+          # polysyllables (9%) are in that environment by vowel length alone**, and
+          # espeak never implements the exception. Deriving it the way `hu_stress`
+          # does does not reach, for Telugu's reason: the exception is stated over
+          # syllable *weight* and nothing here syllabifies.
+          #
+          # So the mark is dropped, which is what Tamil, Telugu, Punjabi and Gujarati
+          # all do: it would be a capital for an English reader and an acute for a
+          # Spanish one on a syllable the language does not contrast, and Kannada
+          # vowels do not reduce, so an unmarked respelling is fully intelligible.
+          "kn": "none",
           "zh-Hans": "none", "th": "none", "tlh": "none",
           # **Persian stress is not lexical, and espeak's is wrong in a systematic
           # direction, so this is the one place both halves of the rule agree.**
@@ -760,7 +845,15 @@ STRESS = {"fr": "phrase", "ko": "none", "vi": "none", "ja": "none",
           # and an acute for a Spanish one on a syllable the language does not
           # stress. Tamil, Telugu, Punjabi, Persian and Filipino all reached "none"
           # by one or other half of this argument.
-          "gu": "none"}
+          "gu": "none",
+          # **Amharic stress is not lexical and this route writes none**, so the
+          # entry is a decision made explicit rather than a filter on anything --
+          # `am_to_ipa` emits no mark at all, the way `fil_to_ipa` does not. Amharic
+          # prominence is phrasal and largely predictable from the gemination and
+          # vowel length already in the column; Leslau's grammar and the *Handbook of
+          # the IPA* illustration both state that it is not contrastive, and there is
+          # no espeak mark to keep or drop because the espeak route is not used.
+          "am": "none"}
 
 # Which packs write `text` in something other than the Latin alphabet, so that a
 # Latin run left in one is a loanword rather than the language. `tlh` and `qya` are
@@ -810,7 +903,29 @@ NON_LATIN = {"zh-Hans", "ja", "ko", "th", "hi", "ar", "ru", "el", "tlh", "qya", 
              # and `common-signs.pork-code`, whose whole content is
              # `B2 · BPK · bakso` -- the gate doing exactly the job its comment
              # describes, which is what the Telugu and Punjabi pork-code rows record.
-             "gu"}
+             "gu",
+             # Amharic writes its loanwords in the fidal -- ኤቲኤም, ዋይፋይ, ፒን, ኢ-ሲም,
+             # ፓስፖርት, ሆስፒታል -- so no `text` cell this script transcribes quotes
+             # Latin, checked over all 837. The one row that does is
+             # `common-signs.pork-code`, whose whole content is `B2 · BPK · bakso`,
+             # and `latin_survives` refuses it exactly as it does for `te`, `pa` and
+             # `gu`. Worth stating separately for this pack because its route reads a
+             # **romanisation** column, which is Latin from end to end: the narrower
+             # question `latin_survives` asks -- does a Latin run of `text` survive
+             # into the string the route reads -- is what makes that safe.
+             "am",
+             # Kannada writes its loanwords in its own letters too -- ಎಟಿಎಂ,
+             # ವೈ-ಫೈ, ಪಿನ್, ಇ-ಸಿಮ್, ಕ್ಯುಆರ್ ಕೋಡ್, ಪಾಸ್ಪೋರ್ಟ್, ಪ್ಲಾಟ್ಫಾರ್ಮ್ -- so no
+             # `text` cell this script transcribes quotes Latin, checked over all
+             # 838. `PIN`, `SIM`, `eSIM`, `ATM` and the ASCII digits ride in
+             # `text_alt`, which takes no `ipa`. Five rows really do quote Latin and
+             # all five are refused here rather than guessed at: the four `note` rows
+             # that name Chinese, Japanese, Thai and Swahili readings, which this
+             # script skips on principle, and `common-signs.pork-code`, whose whole
+             # content is `B2 · BPK · bakso` -- the gate doing exactly the job its
+             # comment describes, which is what the Telugu, Punjabi and Gujarati
+             # pork-code rows record.
+             "kn"}
 
 
 # ------------------------------------------------------------------- alphabet
@@ -1490,6 +1605,59 @@ REPAIR = {
            ("ʌ̃ɛj", "ãj"), ("ʌɛj", "ɛj"),
            ("kːj", "kj"), ("tːj", "tj"), ("cːj", "cj"),
            ("dʰː", "ddʰ"), ("ʌ̃", "ã")],
+    # Kannada, and **three folds is the whole list** -- the shortest REPAIR entry any
+    # Indic language here has, because this voice gets the anusvara, the aspirates,
+    # the gemination and the word-final vowel all right on its own. Every one was
+    # counted over the finished column first, and **not one adds a symbol the corpus
+    # did not already carry**, which is this brief's hardest constraint.
+    #
+    # **`ɐ` -> `a`, 1,895 cells, and the argument is the length pair.** espeak writes
+    # Kannada's short a as `ɐ` and its long ā as `aː`, so the one length pair the
+    # language contrasts most often comes back as *two different vowel qualities*.
+    # `ɐ` has a rule in all 39 tables, so this is not a gap -- it is a
+    # disagreement: `policy.length` in a reader table is written for a `V`/`Vː`
+    # pair, and `ɐ`/`aː` is not one. Folding also makes this column agree with
+    # Telugu's and Tamil's on the commonest vowel in the pack, where `ɐ` occurs
+    # today in only `en`, `pt` and `vi` (364 cells between them). What it discards is
+    # the centralised realisation, which is real and is not contrastive.
+    #
+    # **`ɹ` -> `r`, 450 cells, and this voice is already inconsistent about it.** ರ
+    # comes back `ɹ` as an onset (450) and `r` in the arkavattu coda (89, ಕುರ್ಚಿ
+    # `kurci`, ಸಾರ್ವ `saːrvɐ`) -- one phoneme, two symbols, on no principle. `ɹ` is
+    # the English approximant and Kannada's ರ is a tap or a trill; `ɹ` occurs in the
+    # corpus only in `ar de en it ms vi`, which have one. `r` has a rule in all 39
+    # tables. Telugu made the same fold for the same reason on four cells.
+    #
+    # **`ɕ` -> `ʃ`, 43 cells.** ಶ is [ʃ]. `ɕ` in this corpus belongs to `ja ko pl ru
+    # sv th zh-Hans`, all of which really have an alveolo-palatal; `ʃ` is what
+    # Hindi's श, Bengali's শ, Gujarati's શ, Telugu's శ and Tamil's ஸ் all carry, and
+    # ಷ is already `ʂ`. Keeping `ɕ` would have Kannada disagree with five packs it
+    # shares the phoneme with. Telugu's decision, unchanged.
+    #
+    # **`c` and `ɟ` are kept, which is Punjabi's and Gujarati's decision and not
+    # Telugu's**, and it was decided on rule coverage rather than on phonetics.
+    # ಚ and ಜ are affricates in every description of Kannada (Sridhar 1990;
+    # Krishnamurti, *The Dravidian Languages*), so `tʃ`/`dʒ` would be the better
+    # transcription and it is what `te` and `ta` write. Against that: `ɟ` has a rule
+    # in **all 39** tables where `dʒ` has none in `ru` or `uk`, and `cʰ` has one in
+    # 29 where `tʃʰ` has one in only 13 -- so folding would *create* two
+    # decompositions and cost aspiration in sixteen more tables, on a language whose
+    # entire Sanskrit-derived layer is cognate with the six packs that already write
+    # `c`/`ɟ` (ಜ್ವರ/ज्वर, ಪ್ರಜ್ಞೆ/प्रज्ञा, ಅಸಭ್ಯ/असभ्य). Recorded as a cost.
+    #
+    # **`ɪ` and `ʊ` are kept and are not a defect**, checked rather than assumed:
+    # all 67 occurrences are the second element of ಐ `aɪ` and ಔ `aʊ` (ವೈ-ಫೈ
+    # `vaɪpʰaɪ`, ಶೌಚಾಲಯ `ʃaʊcaːlɐjɐ`), which is the right transcription of Kannada's
+    # two diphthongs and is what `en`, `de` and `hi` already carry. Kannada has no
+    # lax /ɪ/ or /ʊ/ of its own and this column contains none.
+    "kn": [("ɐ", "a"), ("ɹ", "r"), ("ɕ", "ʃ")],
+    # Nepali shares Devanagari and this build's espeak voice shares the same defect
+    # `REPAIR["hi"]` names: क्या (the yes/no particle) comes back `kːjaː`, reading a
+    # `C्य` conjunct as a doubled consonant. Probed directly before assuming the
+    # defect carried over: `EspeakBackend('ne').phonemize(['क्या'])` -> `'kːjaː '`,
+    # confirming it. Aspiration was probed separately and is not affected --
+    # `धन्यवाद` -> `dʰənjəwaːd`, `भात` -> `bʰaːt`, both correct on their own.
+    "ne": [("kːj", "kj"), ("tːj", "tj"), ("cːj", "cj")],
 }
 
 
@@ -2422,6 +2590,137 @@ def he_to_ipa(word):
     return "".join(out)
 
 
+# ------------------------------------- Amharic romanisation -> IPA
+# Amharic has an espeak voice in this build -- `am_dict` and `lang/sem/am` are both
+# in the 1.50 tree -- and it is **not used**, which is the one place this pack
+# departs from every Indic and Semitic neighbour. Five defects, probed over ninety
+# real words before the decision rather than after:
+#
+#   ejectives come back as a backtick (ጤና `t`ena`, ቀይ `k`əj`, ጳጳስ `p`ap`as`);
+#   ጸ loses its ejection entirely (ጸሎት `tsˈəlot`, where the letter is /sʼ/);
+#   ህ is read `x` or `ç` in a coda (እባክህ `ʔˈɨβakɨx`, እዚህ `ʔˈɨziç`) and Amharic has
+#     neither sound;
+#   a spurious `ɨ` after most sixth-order consonants -- ስንት `sˈɨnɨt` for [sɨnt],
+#     ገንዘብ `ɡˈənɨzəb` for [ɡənzəb], እንደምን `ʔˈɨnɨdəmɨn` for [ɨndəmɨn];
+#   and **no gemination at all**: zero length marks over the whole probe.
+#
+# The first three are folds. The fourth is not: the correct rule is a
+# syllable-structure rule -- Amharic syllables are (C)V(C), so /ɨ/ appears where a
+# cluster would otherwise be illegal -- and repairing espeak's output means
+# resyllabifying it, at which point the G2P has been written. And the fifth cannot be
+# repaired from anything, because the information is in neither the letters nor the
+# voice: gemination is phonemic (አለ is *ala* "he said" and *alla* "there is", one
+# spelling) and the fidal does not write it. So the route reads a column a human
+# wrote, the way Hebrew, Japanese, Korean and Mandarin do.
+#
+# That column is `romanization_bgn`: **BGN/PCGN 1967 for Amharic**, the table the UK
+# and US geographic-names boards publish jointly, re-checked for validity in
+# September 2022. It says of itself that "the Roman letters and letter combinations
+# shown as equivalents to the Amharic characters reflect modern Amharic
+# pronunciation", and read in this direction it is very nearly a phonemic notation:
+# all seven vowels are distinguished, and the two pairs that matter are the ones a
+# reader will misread -- `ī` is /i/ against `i` for /ɨ/, and `ē` is /e/ against `e`
+# for /ə/, so the macron marks *quality* here and not length.
+#
+# Three named departures and nothing else:
+#   1. a geminate consonant is written twice, which BGN marks nowhere. For a digraph
+#      the *first character* doubles -- `nny` /ɲː/, `ssh` /ʃː/, `kkʼ` /kʼː/, `ttsʼ`
+#      /sʼː/ -- which is unambiguous because the consonants are tried longest first,
+#      and the only two sequences it cannot tell apart, a real /n/+/ɲ/ and a real
+#      /s/+/ʃ/, occur in no row of the pack.
+#   2. the sixth-order `i` is written only where the vowel is pronounced, which is
+#      the standard's own Note 1 taken up rather than departed from.
+#   3. the two apostrophes are the **modifier letters** U+02BC and U+02BD rather than
+#      the quotation marks U+2019 and U+2018 that Note 6 pins. That one is forced:
+#      `clean` keeps Unicode categories L, M and N and deletes the rest, so a Pf
+#      apostrophe is thrown away before any route sees the chunk -- Persian's U+200C
+#      bug in a new place, and it would have merged ቀ into ከ, ጠ into ተ, ጨ into ቸ, ጰ
+#      into ፐ and ጸ into ሰ on 504 cells with nothing downstream able to notice. The
+#      corpus's other BGN column already does this: `ru`'s uses U+02BC on 275 cells.
+#
+# The values are the inventory of Hayward & Hayward's illustration of Amharic in the
+# *Handbook of the IPA* -- /p b t d k ɡ kʼ tʼ pʼ tʃ dʒ tʃʼ f v s z ʃ ʒ sʼ h m n ɲ l
+# r w j ʔ/ over /ə u i a e ɨ o/. Three mergers in it are the modern language rather
+# than approximations and the BGN table records all three itself: ሀ ሐ ኀ ኸ are all
+# /h/, ሰ and ሠ are both /s/, ጸ and ፀ are both /sʼ/, and አ and ዐ are both /ʔ/.
+#
+# **Labialisation is written `w` and not `ʷ`**, so ቋንቋ is /kʼwankʼwa/ and the route
+# needs no labial machinery at all: a `w` is simply the consonant. Amharic's
+# labiovelars are analysable as /Cw/ clusters either way, and `ʷ` has a rule in only
+# fourteen of the thirty-eight reader tables where `w` has one in all of them --
+# Persian's `q1` -> `q` decision, taken for the same reason.
+AM = {
+    # Three characters long first, so `chʼ` and `tsʼ` beat `ch` and `t`.
+    "chʼ": "tʃʼ",
+    "kʼ": "kʼ", "tʼ": "tʼ", "pʼ": "pʼ", "tsʼ": "sʼ",
+    "ch": "tʃ", "sh": "ʃ", "ny": "ɲ", "zh": "ʒ",
+    "b": "b", "d": "d", "f": "f", "g": "ɡ", "h": "h", "j": "dʒ", "k": "k",
+    "l": "l", "m": "m", "n": "n", "p": "p", "r": "r", "s": "s", "t": "t",
+    "v": "v", "w": "w", "y": "j", "z": "z",
+    "ʼ": "ʔ", "ʽ": "ʔ",
+}
+# The seven orders. `ā` is the first order of the five guttural rows only -- the BGN
+# table prints `hā` and `ʼā` where every other row prints `Ce`, because on ሀ ሐ ኀ አ ዐ
+# the first order says [a] and ሀ and ሃ are homophones -- so it is a spelling of /a/
+# and not an eighth vowel.
+AM_VOWELS = {"e": "ə", "u": "u", "ī": "i", "a": "a", "ē": "e", "i": "ɨ", "o": "o",
+             "ā": "a"}
+# Longest first: `ī ē ā` are one codepoint each but must be tried before `i e a` in
+# case a future normalisation decomposes them.
+AM_VOWEL_KEYS = sorted(AM_VOWELS, key=len, reverse=True)
+AM_CONS_KEYS = sorted(AM, key=len, reverse=True)
+
+
+def am_to_ipa(word):
+    """One BGN/PCGN-romanised Amharic word, geminates and all.
+
+    A consonant written twice is long: the doubling is on the *first character* of
+    its spelling, so `nny` is /ɲː/ and `nna` is /nː/ + /a/, resolved by trying the
+    consonant keys longest first at the second character. A consonant with no vowel
+    after it is the sixth order with its vowel unpronounced, which is departure 2. A
+    vowel with no consonant before it is the አ series romanised bare, which is the
+    standard's own Note 4 -- so `ādīs` is /ʔadis/ and not /adis/.
+
+    No stress mark, deliberately: see `STRESS["am"]`.
+    """
+    out, i = [], 0
+    while i < len(word):
+        if word[i] == "-":
+            # A hyphen joins the two halves of a written compound -- `ī-sīm`, and the
+            # fidal writes ኢ-ሲም -- and is not a sound. `clean` keeps it because it is
+            # load-bearing for French elision and Pinyin, so it is dropped here, as
+            # the Hebrew and Klingon routes drop theirs.
+            i += 1
+            continue
+        letter = longest(AM, word, i)
+        if letter is None:
+            vowel = longest(AM_VOWELS, word, i)
+            if vowel is None:
+                out.append(word[i])              # carried out, so a gate names it
+                i += 1
+                continue
+            out.append("ʔ" + AM_VOWELS[vowel])   # BGN Note 4, word-initially
+            i += len(vowel)
+            continue
+        # A geminate: the same character twice, then a consonant spelling starting
+        # with it. `ll` finds `l` at the second character and `nny` finds `ny`.
+        double = None
+        if word.startswith(word[i] * 2, i):
+            double = next((c for c in AM_CONS_KEYS
+                           if word.startswith(c, i + 1) and c[0] == word[i]), None)
+        if double:
+            out.append(AM[double] + "ː")
+            i += 1 + len(double)
+        else:
+            out.append(AM[letter])
+            i += len(letter)
+        vowel = longest(AM_VOWELS, word, i)
+        if vowel is not None:
+            out.append(AM_VOWELS[vowel])
+            i += len(vowel)
+    return "".join(out)
+
+
 # ---------------------------------------------- Klingon orthography -> IPA
 # Klingon is written in a Latin transcription of Okrand's own devising, and TKD
 # section 1.1 describes each letter's sound one at a time -- so this is a table
@@ -2777,6 +3076,12 @@ ROUTE_FORBIDS = {
     # for י, `c` and `w` for nothing at all. `HE` is a whitelist and an unmatched
     # character is carried out, which is what makes the gate necessary.
     "bgn": set("cqwy"),
+    # Every one of these is legal IPA and none of them is a sound Amharic has, so one
+    # surviving means a BGN letter went unconverted. `q` and `x` are not letters of
+    # this romanisation at all -- BGN writes ቀ as `k’` and Amharic has no velar
+    # fricative -- and `y` is always rewritten to `j`. `c` is *not* in the list,
+    # because the table emits it inside `tʃ` and `tʃʼ`.
+    "bgn-am": set("qxy"),
 }
 
 
@@ -2888,6 +3193,11 @@ def route(code, chunks):
         # Lowercased like the other romanisation routes: a capital in this column is
         # a sentence opening, not a sound.
         return lambda chunk: " ".join(he_to_ipa(w.lower()) for w in chunk.split()), "bgn"
+    if code == "am":
+        # Lowercased like the other romanisation routes: a capital in this column is
+        # a sentence opening, not a sound. Amharic has no case of its own.
+        return lambda chunk: " ".join(am_to_ipa(w.lower())
+                                      for w in chunk.split()), "bgn-am"
     if code == "fil":
         # Reads `row["text"]` itself, not a romanisation column -- see the comment
         # above `FIL_WORDS` for why `fil` is in neither `ROMANISED` nor `NON_LATIN`.
@@ -3142,6 +3452,31 @@ GRADE = {
             "worked examples exactly. The one judgement in it is that the palatal digraphs "
             "count as one consonant for weight while being spelt C+j, which is stated in "
             "`QYA_C`"),
+    "am": ("A-", "a letter-by-letter table over BGN/PCGN 1967 for Amharic, read in "
+           "reverse -- the standard says of itself that its letters reflect modern "
+           "Amharic pronunciation, and read this way it is very nearly a phonemic "
+           "notation, so the only thing that can be wrong is the table and it is 32 "
+           "entries over a seven-vowel, twenty-eight-consonant inventory. **The "
+           "weakness is gemination and it is the whole of the weakness.** Amharic "
+           "geminates phonemically -- አለ is both `ala` \"he said\" and `alla` \"there "
+           "is\", one and the same fidal string -- and neither the script nor espeak "
+           "writes it, so it is *authored* in the romanisation column rather than "
+           "derived from anything, which makes it exactly as good as the source behind "
+           "each row and no better. It is the pack's weakest claim, it is the second "
+           "thing a fluent speaker should read, and unlike most weaknesses of this "
+           "kind it is visible on the artifact: the doubled letter prints in the "
+           "romanisation column beside the word. The sixth-order vowel is the same "
+           "shape of claim and a much safer one, because the standard's own Note 1 "
+           "asks for it (`i` where the vowel is pronounced and nothing where it is "
+           "not) and the syllable-structure rule behind it is exceptionless: ስንት is "
+           "/sɨnt/ and ገንዘብ is /ɡənzəb/, where espeak gives `sˈɨnɨt` and `ɡˈənɨzəb`. "
+           "Two things are deliberately *not* in the column. Stress: Amharic "
+           "prominence is not contrastive and is written by neither orthography, so "
+           "nothing is marked, which is Persian's, Tamil's, Telugu's and Gujarati's "
+           "decision. And the intervocalic [β] allophone of /b/, which espeak does "
+           "emit (አበባ `ʔˈaβəβa`) and which is real Amharic phonetics -- folded to /b/, "
+           "because this column is broad everywhere else and `β` has a rule in five "
+           "of thirty-eight reader tables"),
     "he": ("A-", "a letter-by-letter table over the BGN/PCGN 2018 agreement, which is "
            "the Academy of the Hebrew Language's own 2006/2011 transliteration read in "
            "reverse -- so the only thing that can be wrong is the table, and it is 31 "
@@ -3565,6 +3900,52 @@ GRADE = {
            "curated Swedish sheet exists to score syllable-agreement against, so this "
            "grade is a probe-based spot-check like Dutch's, Marathi's, Romanian's, "
            "Czech's and Filipino's, not a corpus-wide measurement."),
+    "kn": ("A-", "espeak-ng's Kannada voice is in this build's *system* 1.50 tree "
+           "(`kn_dict`, `espeak-ng-data/lang/dra/kn` beside `ta`, `te` and `ml`), so "
+           "no `espeakng_loader` is involved and this column is library-independent. "
+           "**This is the highest grade any Indic language in the corpus has, and it "
+           "is earned on four separate things the neighbouring voices get wrong.** "
+           "Kannada's orthography is shallow -- every vowel it pronounces is written, "
+           "including the short/long e and o pairs Devanagari lacks, and a final "
+           "consonant carries its own virama, so there is no schwa-deletion "
+           "convention to model and no inherent-vowel guessing of the kind that keeps "
+           "`hi` and `bn` at C. On top of that: **the anusvara's place of "
+           "articulation is right in every environment the pack contains** (ಂಬ `mb`, "
+           "ಂಪ `mp`, ಂಸ `ms`, ಂತ `nt`, ಂಟ `ɳʈ`, ಂಡ `ɳɖ`, ಂಕ `ŋk`, ಂಗ `ŋɡ`, ಂಜ `ɲɟ`, "
+           "and word-finally `m`), which `te_anusvara` had to be hand-written for "
+           "Telugu; **the four-way stop series survives intact**, with the count of "
+           "`ʰ` reconciling exactly against the eight aspirated units, so the Hindi "
+           "`dʰ` bug is structurally impossible here; and **gemination comes back as "
+           "a doubled consonant** with not one consonant+`ː` sequence anywhere, so "
+           "the `GEMINATE_DOUBLES` machinery Punjabi and Gujarati need is not needed. "
+           "Only three folds were required (`ɐ`->`a`, `ɹ`->`r`, `ɕ`->`ʃ`), all three "
+           "of them corpus-consistency rather than error repair, and **zero new IPA "
+           "symbols reach the other 38 reader tables**. "
+           "**What keeps it from A.** First, stress: the voice marks the first "
+           "syllable on all 1,772 polysyllables unconditionally, which is roughly "
+           "Kannada's own rule but never its exception (light initial syllable before "
+           "a long vowel, 9% of the pack's distinct polysyllables), so `STRESS` drops "
+           "the mark rather than printing a wrong one. Second, the short/long "
+           "quality split described above is a real inconsistency in the raw output "
+           "that had to be folded away rather than something the voice got right. "
+           "Third, Kannada's ಚ and ಜ are affricates and this column writes them `c` "
+           "and `ɟ`, palatal stops, for the rule-coverage reason `REPAIR['kn']` "
+           "records -- a deliberate cost, not an oversight. No curated Kannada sheet "
+           "exists to score syllable-agreement against, so this grade is a probe-based "
+           "audit of every symbol and every anusvara environment in the pack rather "
+           "than a corpus-wide measurement, like Gujarati's and Punjabi's."),
+    "ne": ("B", "espeak has a `ne` voice in this build's own system espeak-ng-data "
+           "(1.50) -- unlike `mr`/`uk`, no `espeakng_loader` needed. Probed directly "
+           "rather than trusted: schwa retention is correct on the words checked "
+           "(नमस्ते -> nəmʌsteː, keeping both syllables' vowels where Hindi's own "
+           "voice would delete a medial one), aspiration is correct on bʰ/dʰ (भात, "
+           "धन्यवाद), and the same spurious `Cːj` geminate `hi`'s and `mr`'s voices "
+           "share on क्या is present here too and repaired the same way "
+           "(`REPAIR['ne']`). Not probed against a corpus of comparable size to "
+           "Hindi's or Tamil's, and no curated `ne__en__en-US.csv` respelling exists "
+           "to score syllable-agreement against either, so this grade is a "
+           "spot-check rather than a measurement -- the same honest bar Marathi's "
+           "own entry sets."),
 }
 
 
