@@ -19,7 +19,7 @@ emergency-medical.what-is-the-emergency-number,आपतकालीन नम�
 emergency-medical.is-there-a-doctor-who-speaks-english,{source} बोल्ने डाक्टर छ?,,{source} bōlnē ḍākṭara cha?,{source} bˈoːlneː ɖˈaːkʈəɾˌə cʰˈə,,2,ne-agent-v1;ipa=espeak
 emergency-medical.i-think-a-bone-is-broken,हड्डी भाँचिएको जस्तो छ,,haḍḍī bhām̐ciēkō jastō cha,hˈʌɖɖˌiː bʰãcˈɪeːkˌoː ɟˈʌstoː cʰˈə,,2,ne-agent-v1;ipa=espeak
 emergency-medical.please-call-my-emergency-contact,मेरो आपतकालीन सम्पर्कमा फोन गरिदिनुहोस्,,mērō āpatakālīna samparkamā phōna garidinuhōs,mˈeːɾoː ˌaːpətˌəkaːlˈɪːn səmpˈʌrrkəmˌaː pʰˈoːn ɡˌəɾɪdˌɪnuhˈoːs,,2,ne-agent-v1;ipa=espeak
-emergency-medical.i-have-travel-insurance,मसँग यात्रा बीमा छ,,masam̐ga yātrā bīmā cha,məʃˈʌ̃ɡ jˈaːtɾaː bˈɪːmaː cʰˈə,,2,ne-agent-v1;ipa=espeak
+emergency-medical.i-have-travel-insurance,मसँग यात्रा बीमा छ,,masam̐ga yātrā bīmā cha,məʃˈãɡ jˈaːtɾaː bˈɪːmaː cʰˈə,,2,ne-agent-v1;ipa=espeak
 medical-conditions.i-am-diabetic,मलाई मधुमेह छ,,malāī madhumēha cha,məlˈaːi mˌədʰumˈeːhə cʰˈə,,2,ne-agent-v1;ipa=espeak
 medical-conditions.i-need-insulin,मलाई इन्सुलिन चाहियो,,malāī insulina cāhiyō,məlˈaːi ˈɪnsulˌɪn cˈaːhɪjˌoː,,2,ne-agent-v1;ipa=espeak
 medical-conditions.i-have-asthma,मलाई दम रोग छ,,malāī dama rōga cha,məlˈaːi dˈʌmə ɾˈoːɡ cʰˈə,,2,ne-agent-v1;ipa=espeak
@@ -29,7 +29,7 @@ medical-conditions.i-have-epilepsy,मलाई छारेरोग छ,,malā
 medical-conditions.my-blood-sugar-is-low,मेरो रगतको चिनी कम भएको छ,,mērō ragatakō cinī kama bhaēkō cha,mˈeːɾoː ɾˈʌɡətˌəkoː cˈɪni kˈʌmə bʰəˈeːkoː cʰˈə,,2,ne-agent-v1;ipa=espeak
 medical-conditions.i-need-my-inhaler,मलाई मेरो इन्हेलर चाहियो,,malāī mērō inhēlara cāhiyō,məlˈaːi mˈeːɾoː ɪnhˈeːləɾˌə cˈaːhɪjˌoː,,2,ne-agent-v1;ipa=espeak
 medical-conditions.i-am-pregnant,म गर्भवती छु,,ma garbhavatī chu,mə ɡˈʌrrbʰəwˌəti cʰˈu,,2,ne-agent-v1;ipa=espeak
-medical-conditions.i-carry-an-adrenaline-injector,मसँग एड्रेनालिन इन्जेक्टर छ,,masam̐ga ēḍrēnālina injēkṭara cha,məʃˈʌ̃ɡ ˈeːɖɾeːnˌaːlɪn ɪnɟˈeːkʈəɾˌə cʰˈə,,2,ne-agent-v1;ipa=espeak
+medical-conditions.i-carry-an-adrenaline-injector,मसँग एड्रेनालिन इन्जेक्टर छ,,masam̐ga ēḍrēnālina injēkṭara cha,məʃˈãɡ ˈeːɖɾeːnˌaːlɪn ɪnɟˈeːkʈəɾˌə cʰˈə,,2,ne-agent-v1;ipa=espeak
 medical-conditions.i-take-medicine-for,मलाई {} को औषधि चलिरहेको छ,,malāī {} kō auṣadhi calirahēkō cha,məlˈaːi {} kˈoː ˈʌʊʂədʰˌɪ cˌəlɪɾəhˈeːkoː cʰˈə,,2,ne-agent-v1;ipa=espeak
 medical-conditions.i-take-blood-thinners,मलाई रगत पातलो पार्ने औषधि चलिरहेको छ,,malāī ragata pātalō pārnē auṣadhi calirahēkō cha,məlˈaːi ɾˈʌɡət pˈaːtəlˌoː pˈaːrrneː ˈʌʊʂədʰˌɪ cˌəlɪɾəhˈeːkoː cʰˈə,,2,ne-agent-v1;ipa=espeak
 medical-conditions.medicine-allergy,औषधि एलर्जी: {},,auṣadhi ēlarjī: {},ˈʌʊʂədʰˌɪ eːlˈʌrrɟi {},,2,ne-agent-v1;ipa=espeak
@@ -61,7 +61,7 @@ pharmacy-symptoms.i-have-a-stomach-ache,मेरो पेट दुख्छ,,
 pharmacy-symptoms.i-have-a-cough,मलाई खोकी लागेको छ,,malāī khōkī lāgēkō cha,məlˈaːi kʰˈoːki laːɡˈeːkoː cʰˈə,,2,ne-agent-v1;ipa=espeak
 pharmacy-symptoms.antihistamine,एलर्जीको औषधि,,ēlarjīkō auṣadhi,ˌeːlərrɟˈɪːkoː ˈʌʊʂədʰˌɪ,,2,ne-agent-v1;ipa=espeak
 pharmacy-symptoms.anti-diarrhea-medicine,पखालाको औषधि,,pakhālākō auṣadhi,pˌəkʰaːlˈaːkoː ˈʌʊʂədʰˌɪ,,2,ne-agent-v1;ipa=espeak
-pharmacy-symptoms.is-this-safe-to-take-with,यो {} सँगै लिन मिल्छ?,,yō {} sam̐gai lina milcha?,jˈoː {} ʃʌ̃ɡˈɛː lˈɪn mˈɪlcʰə,,2,ne-agent-v1;ipa=espeak
+pharmacy-symptoms.is-this-safe-to-take-with,यो {} सँगै लिन मिल्छ?,,yō {} sam̐gai lina milcha?,jˈoː {} ʃãɡˈɛː lˈɪn mˈɪlcʰə,,2,ne-agent-v1;ipa=espeak
 pharmacy-symptoms.i-feel-dizzy,मलाई रिँगटा लागिरहेको छ,,malāī rim̐gaṭā lāgirahēkō cha,məlˈaːi ɾĩɡˈʌʈaː lˌaːɡɪɾəhˈeːkoː cʰˈə,,2,ne-agent-v1;ipa=espeak
 pharmacy-symptoms.ibuprofen,आइबुप्रोफेन,,āibuprōphēna,ˌaːɪbˌupɾoːpʰˈeːn,,2,ne-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-sore-throat,मेरो घाँटी दुख्छ,,mērō ghām̐ṭī dukhcha,mˈeːɾoː ɡʰãʈˈiː dˈukʰcʰə,,2,ne-agent-v1;ipa=espeak
@@ -120,7 +120,7 @@ police-consulate.my-bag-was-stolen,मेरो झोला चोरी भय
 police-consulate.my-passport-was-stolen,मेरो राहदानी चोरी भयो,,mērō rāhadānī cōrī bhayō,mˈeːɾoː ɾˌaːhədˈaːni cˈoːɾi bʰˈʌjoː,,2,ne-agent-v1;ipa=espeak
 police-consulate.someone-is-following-me,कसैले मेरो पछ्याइरहेको छ,,kasailē mērō pachyāirahēkō cha,kəsˈɛːleː mˈeːɾoː pˌəcʰjaːˌɪɾəhˈeːkoː cʰˈə,,2,ne-agent-v1;ipa=espeak
 police-consulate.i-need-a-written-police-report,मलाई लिखित प्रहरी प्रतिवेदन चाहियो,,malāī likhita praharī prativēdana cāhiyō,məlˈaːi lˈɪkʰɪt pɾˈʌhəɾˌiː pɾˌətɪwˈeːdən cˈaːhɪjˌoː,,2,ne-agent-v1;ipa=espeak
-police-consulate.i-want-to-contact-my-embassy,मलाई मेरो दूतावाससँग सम्पर्क गर्नु छ,,malāī mērō dūtāvāsasam̐ga samparka garnu cha,məlˈaːi mˈeːɾoː dˌuːtaːwˈaːsəʃˌʌ̃ɡ səmpˈʌrrkə ɡˈʌrrnuʲˌu cʰˈə,,2,ne-agent-v1;ipa=espeak
+police-consulate.i-want-to-contact-my-embassy,मलाई मेरो दूतावाससँग सम्पर्क गर्नु छ,,malāī mērō dūtāvāsasam̐ga samparka garnu cha,məlˈaːi mˈeːɾoː dˌuːtaːwˈaːsəʃˌãɡ səmpˈʌrrkə ɡˈʌrrnuʲˌu cʰˈə,,2,ne-agent-v1;ipa=espeak
 police-consulate.i-need-it-for-my-insurance,मलाई यो मेरो बीमाको लागि चाहियो,,malāī yō mērō bīmākō lāgi cāhiyō,məlˈaːi jˈoː mˈeːɾoː bɪːmˈaːkoː lˈaːɡɪ cˈaːhɪjˌoː,,2,ne-agent-v1;ipa=espeak
 police-consulate.i-need-an-interpreter,मलाई अनुवादक चाहियो,,malāī anuvādaka cāhiyō,məlˈaːi ˌənuwˈaːdəkˌə cˈaːhɪjˌoː,,2,ne-agent-v1;ipa=espeak
 police-consulate.please-leave-me-alone,मलाई एक्लै छोडिदिनुहोस्,,malāī ēklai chōḍidinuhōs,məlˈaːi ˈeːklɛː cʰˌoːɖɪdˌɪnuhˈoːs,,2,ne-agent-v1;ipa=espeak
@@ -135,7 +135,7 @@ police-consulate.i-did-not-agree-to-this-price,यो मूल्यमा म�
 police-consulate.please-write-the-report-number,प्रतिवेदन नम्बर लेखिदिनुहोस्,,prativēdana nambara lēkhidinuhōs,pɾˌətɪwˈeːdən nˈʌmbəɾˌə lˌeːkʰɪdˌɪnuhˈoːs,,2,ne-agent-v1;ipa=espeak
 police-consulate.it-happened-here,यो यहीँ भएको हो,,yō yahīm̐ bhaēkō hō,jˈoː jˈʌhĩ bʰəˈeːkoː hoː,,2,ne-agent-v1;ipa=espeak
 police-consulate.may-i-have-a-copy-of-the-report,प्रतिवेदनको प्रतिलिपि पाउन सक्छु?,,prativēdanakō pratilipi pāuna sakchu?,pɾˌətɪwˈeːdənˌəkoː pɾˈʌtɪlˌɪpɪ pˈaːʊn sˈʌkcʰu,,2,ne-agent-v1;ipa=espeak
-police-consulate.i-will-not-sign-anything-i-cannot-read,नपढी कुनै कागजमा हस्ताक्षर गर्दिनँ,,napaḍhī kunai kāgajamā hastākṣara gardinam̐,nˈʌpəɖʰˌiː kˈunɛː kˈaːɡəɟˌəmaː həstˈaːkʂəɾˌə ɡˈʌrrdɪnˌʌ̃,,2,ne-agent-v1;ipa=espeak
+police-consulate.i-will-not-sign-anything-i-cannot-read,नपढी कुनै कागजमा हस्ताक्षर गर्दिनँ,,napaḍhī kunai kāgajamā hastākṣara gardinam̐,nˈʌpəɖʰˌiː kˈunɛː kˈaːɡəɟˌəmaː həstˈaːkʂəɾˌə ɡˈʌrrdɪnˌã,,2,ne-agent-v1;ipa=espeak
 police-consulate.am-i-free-to-go,के म जान पाउँछु?,,kē ma jāna pāum̐chu?,kˈeː mə ɟˈaːn pˌaːũcʰˈu,,2,ne-agent-v1;ipa=espeak
-police-consulate.i-do-not-want-to-go-with-you,मलाई तपाईंसँग जान मन छैन,,malāī tapāīṁsam̐ga jāna mana chaina,məlˈaːi tˌəpaːˈɪːnʃʌ̃ɡ ɟˈaːn mˈʌn cʰˈɛːnə,,2,ne-agent-v1;ipa=espeak
+police-consulate.i-do-not-want-to-go-with-you,मलाई तपाईंसँग जान मन छैन,,malāī tapāīṁsam̐ga jāna mana chaina,məlˈaːi tˌəpaːˈɪːnʃãɡ ɟˈaːn mˈʌn cʰˈɛːnə,,2,ne-agent-v1;ipa=espeak
 pharmacy-symptoms.i-think-i-have-dengue,मलाई डेंगु भएको जस्तो लाग्छ,,malāī ḍēṁgu bhaēkō jastō lāgcha,məlˈaːi ɖˈeːŋɡu bʰəˈeːkoː ɟˈʌstoː lˈaːɡcʰə,,2,ne-agent-v1;ipa=espeak

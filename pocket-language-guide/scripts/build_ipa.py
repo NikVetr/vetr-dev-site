@@ -1657,7 +1657,12 @@ REPAIR = {
     # defect carried over: `EspeakBackend('ne').phonemize(['क्या'])` -> `'kːjaː '`,
     # confirming it. Aspiration was probed separately and is not affected --
     # `धन्यवाद` -> `dʰənjəwaːd`, `भात` -> `bʰaːt`, both correct on their own.
-    "ne": [("kːj", "kj"), ("tːj", "tj"), ("cːj", "cj")],
+    # `ʌ̃` has a rule in no reader table and `ã` has one in all of them -- Gujarati's
+    # entry below makes the argument and folded 120 cells for it. Nepali kept `ʌ̃`,
+    # and the seven rows that reach it were `en`'s only remaining gap: a bare U+0303
+    # printed on the page because `ʌ` and `̃` each matched separately, which is the
+    # decomposition fallback doing exactly what it is documented to do.
+    "ne": [("ʌ̃", "ã"), ("kːj", "kj"), ("tːj", "tj"), ("cːj", "cj")],
 }
 
 
@@ -1677,10 +1682,23 @@ VI_LEVEL = "˧"                                 # ngang, which espeak usually le
 VI_TONES = {"1": VI_LEVEL, "2": "˨˩", "ɜ": "˧˥", "4": "˧˩˧", "5": "˧ˀ˥", "6": "˨˩ˀ"}
 
 
+# `ɜ` is the one key here that is also a real IPA vowel, so it needs a guard the five
+# digits do not: espeak's stray tone-6 marker always sits *beside* a nucleus, where a
+# genuine `ɜ` **is** the nucleus. Without the guard the Amharic birr came through as
+# `bː˧˥` -- the vowel eaten and a tone appended to a bare consonant. One cell of the
+# pack was affected, found by looking for a token that carries tone bars and no vowel
+# at all; the forty *ở đâu* and *bao lâu* rows the table exists for all keep a real
+# nucleus beside the marker, so they are untouched.
+VI_VOWELS = set("aeiouyɐɔəɛɪɨʊʌɤɯœø")
+
+
 def vi_tone(token):
     """One espeak Vietnamese token with its tone digit moved to the end, as bars."""
-    tone = "".join(VI_TONES[c] for c in token if c in VI_TONES) or VI_LEVEL
-    return "".join(c for c in token if c not in VI_TONES) + tone
+    keys = {c for c in token if c in VI_TONES}
+    if "ɜ" in keys and not (set(token) & VI_VOWELS):
+        keys.discard("ɜ")          # the `ɜ` is the vowel, not a tone
+    tone = "".join(VI_TONES[c] for c in token if c in keys) or VI_LEVEL
+    return "".join(c for c in token if c not in keys) + tone
 
 
 # ------------------------------------------------------------- Hepburn -> IPA

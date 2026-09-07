@@ -2,7 +2,7 @@ concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
 introductions.my-name-is,मेरो नाम {} हो,,mērō nāma {} hō,mˈeːɾoː nˈaːmə {} hoː,,2,ne-agent-v1;ipa=espeak
 introductions.nice-to-meet-you,तपाईंलाई भेटेर खुशी लाग्यो,,tapāīṁlāī bhēṭēra khuśī lāgyō,tˌəpaːˈɪːnlaːˌiː bʰeːʈˈeːɾə kʰˈuʃi lˈaːɡjoː,,2,ne-agent-v1;ipa=espeak
 introductions.what-is-your-name,तपाईंको नाम के हो?,,tapāīṁkō nāma kē hō?,tˌəpaːˈɪːŋkoː nˈaːmə kˈeː hoː,,2,ne-agent-v1;ipa=espeak
-introductions.we-are-traveling-together,हामी सँगै यात्रा गरिरहेका छौं,,hāmī sam̐gai yātrā garirahēkā chauṁ,hˈaːmi ʃʌ̃ɡˈɛː jˈaːtɾaː ɡˌəɾɪɾəhˈeːkaː cʰˈɔːn,"-eka is the plural participle, not a gendered singular one",2,ne-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,हामी सँगै यात्रा गरिरहेका छौं,,hāmī sam̐gai yātrā garirahēkā chauṁ,hˈaːmi ʃãɡˈɛː jˈaːtɾaː ɡˌəɾɪɾəhˈeːkaː cʰˈɔːn,"-eka is the plural participle, not a gendered singular one",2,ne-agent-v1;ipa=espeak
 introductions.this-is-my-friend,यो मेरो साथी हो,,yō mērō sāthī hō,jˈoː mˈeːɾoː sˈaːtʰi hoː,साथी does not change for a male or female friend,2,ne-agent-v1;ipa=espeak
 introductions.i-am-from,म {} को हुँ,,ma {} kō hum̐,mə {} kˈoː hˈũ,,2,ne-agent-v1;ipa=espeak
 introductions.where-are-you-from,तपाईं कहाँबाट हुनुहुन्छ?,,tapāīṁ kahām̐bāṭa hunuhuncha?,tˌəpaːˈɪːn kˌəhãbˈaːʈ hˌunuhˈuncʰə,honorific copula,2,ne-agent-v1;ipa=espeak
