@@ -1,0 +1,15 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+slang.thats-good,Astig!,,astiɡ,,2,fil-agent-v1;ipa=fil-g2p
+slang.thats-great,Ang galing!,,aŋ ɡaliŋ,,2,fil-agent-v1;ipa=fil-g2p
+slang.i-love-it,Gustung-gusto ko ito!,,ɡustuŋɡusto ko ito,,2,fil-agent-v1;ipa=fil-g2p
+slang.thats-bad,Hindi gaanong maganda,,hindi ɡaanoŋ maɡanda,,2,fil-agent-v1;ipa=fil-g2p
+slang.delicious,Ang sarap!,,aŋ saɾap,,2,fil-agent-v1;ipa=fil-g2p
+slang.thats-pricey,Ang mahal naman!,,aŋ mahal naman,,2,fil-agent-v1;ipa=fil-g2p
+slang.exactly,Oo nga!,,oo ŋa,,2,fil-agent-v1;ipa=fil-g2p
+slang.no-worries,Ayos lang,,ajos laŋ,,2,fil-agent-v1;ipa=fil-g2p
+slang.youre-welcome,Wala 'yun!,,wala jun,,2,fil-agent-v1;ipa=fil-g2p
+slang.seriously,Talaga?!,,talaɡa,,2,fil-agent-v1;ipa=fil-g2p
+slang.im-good-thanks,"Ayos na ako, salamat",,"ajos na ako, salamat",,2,fil-agent-v1;ipa=fil-g2p
+slang.lets-go,Tara na!,,taɾa na,,2,fil-agent-v1;ipa=fil-g2p
+slang.cheers,Tagay!,,taɡaj,,2,fil-agent-v1;ipa=fil-g2p
+slang.see-you,Kita-kits!,,kitakits,,2,fil-agent-v1;ipa=fil-g2p

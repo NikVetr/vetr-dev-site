@@ -1,0 +1,8 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,Saan po ako makakabili ng tiket?,,saan po ako makakabili naŋ tikɛt,,2,fil-agent-v1;ipa=fil-g2p
+attractions-tickets.do-i-need-a-reservation,Kailangan ko po ba ng reserbasyon?,,kailaŋan ko po ba naŋ ɾɛsɛɾbasjon,,2,fil-agent-v1;ipa=fil-g2p
+attractions-tickets.what-is-the-latest-entry-time,Ano po ang huling oras ng pagpasok?,,ano po aŋ huliŋ oɾas naŋ paɡpasok,,2,fil-agent-v1;ipa=fil-g2p
+attractions-tickets.are-there-lockers,May lockers po ba?,,maj lokkɛɾs po ba,,2,fil-agent-v1;ipa=fil-g2p
+attractions-tickets.may-i-take-photos,Puwede po ba akong kumuha ng litrato?,,puwɛdɛ po ba akoŋ kumuha naŋ litɾato,,2,fil-agent-v1;ipa=fil-g2p
+attractions-tickets.please-take-a-photo-of-us,Pakikuhanan po kami ng litrato,,pakikuhanan po kami naŋ litɾato,,2,fil-agent-v1;ipa=fil-g2p
+attractions-tickets.could-you-take-a-photo-for-us,Puwede niyo po ba kaming kuhanan ng litrato?,,puwɛdɛ nijo po ba kamiŋ kuhanan naŋ litɾato,,2,fil-agent-v1;ipa=fil-g2p

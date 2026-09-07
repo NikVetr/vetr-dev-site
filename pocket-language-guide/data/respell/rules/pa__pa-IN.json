@@ -35,6 +35,22 @@
  },
  "phonemes": [
   {
+   "slot": "onset",
+   "ipa": "r̝",
+   "out": "ਰ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "r̝",
+   "out": "ਰ"
+  },
+  {
+   "slot": "any",
+   "ipa": "r̝",
+   "out": "੍ਰ"
+  },
+  {
    "slot": "coda",
    "ipa": "p",
    "out": "ੱ",
@@ -680,6 +696,12 @@
   {
    "slot": "nucleus",
    "ipa": "ɪ",
+   "out": "ਇ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɪ",
    "out": "ਿ"
   },
   {
@@ -693,6 +715,12 @@
    "ipa": "ʊ",
    "out": "ਉ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʊ",
+   "out": "ਉ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -731,6 +759,17 @@
   {
    "slot": "nucleus",
    "ipa": "ə",
+   "out": "ਆ",
+   "when": [
+    "word_final",
+    "open",
+    "not_word_initial"
+   ],
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ə",
    "out": "ਾ",
    "when": [
     "word_final",
@@ -759,6 +798,17 @@
     "open",
     "not_word_initial"
    ]
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "əː",
+   "out": "ਆ",
+   "when": [
+    "word_final",
+    "open",
+    "not_word_initial"
+   ],
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -791,6 +841,17 @@
     "open",
     "not_word_initial"
    ]
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɘ",
+   "out": "ਆ",
+   "when": [
+    "word_final",
+    "open",
+    "not_word_initial"
+   ],
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -823,6 +884,17 @@
     "open",
     "not_word_initial"
    ]
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɐ",
+   "out": "ਆ",
+   "when": [
+    "word_final",
+    "open",
+    "not_word_initial"
+   ],
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -854,6 +926,16 @@
     "word_final",
     "open"
    ]
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʌ",
+   "out": "ਆ",
+   "when": [
+    "word_final",
+    "open"
+   ],
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -893,6 +975,12 @@
   {
    "slot": "nucleus",
    "ipa": "ø",
+   "out": "ਓ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ø",
    "out": "ੋ"
   },
   {
@@ -904,6 +992,12 @@
   {
    "slot": "nucleus",
    "ipa": "a",
+   "out": "ਆ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "a",
    "out": "ਾ"
   },
   {
@@ -911,6 +1005,12 @@
    "ipa": "aː",
    "out": "ਆ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "aː",
+   "out": "ਆ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -922,6 +1022,12 @@
    "ipa": "ɑ",
    "out": "ਆ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɑ",
+   "out": "ਆ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -933,6 +1039,12 @@
    "ipa": "ɑː",
    "out": "ਆ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɑː",
+   "out": "ਆ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -948,6 +1060,12 @@
   {
    "slot": "nucleus",
    "ipa": "eɪ",
+   "out": "ਏ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "eɪ",
    "out": "ੇ"
   },
   {
@@ -955,6 +1073,12 @@
    "ipa": "oʊ",
    "out": "ਓ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "oʊ",
+   "out": "ਓ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -970,6 +1094,12 @@
   {
    "slot": "nucleus",
    "ipa": "ɔɪ",
+   "out": "ਔਇ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɔɪ",
    "out": "ੌਇ"
   },
   {
@@ -981,6 +1111,12 @@
   {
    "slot": "nucleus",
    "ipa": "ɒɪ",
+   "out": "ਔਇ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɒɪ",
    "out": "ੌਇ"
   },
   {
@@ -992,6 +1128,12 @@
   {
    "slot": "nucleus",
    "ipa": "əɪ",
+   "out": "ਐ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "əɪ",
    "out": "ੈ"
   },
   {
@@ -999,6 +1141,12 @@
    "ipa": "əj",
    "out": "ਐ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "əj",
+   "out": "ਐ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1010,6 +1158,12 @@
    "ipa": "ʌj",
    "out": "ਐ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʌj",
+   "out": "ਐ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1021,6 +1175,12 @@
    "ipa": "ɐj",
    "out": "ਐ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɐj",
+   "out": "ਐ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1032,6 +1192,12 @@
    "ipa": "əw",
    "out": "ਔ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "əw",
+   "out": "ਔ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1043,6 +1209,12 @@
    "ipa": "əʊ",
    "out": "ਔ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "əʊ",
+   "out": "ਔ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1054,6 +1226,12 @@
    "ipa": "ʌw",
    "out": "ਔ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʌw",
+   "out": "ਔ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1065,6 +1243,12 @@
    "ipa": "æ",
    "out": "ਐ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "æ",
+   "out": "ਐ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1076,6 +1260,12 @@
    "ipa": "ɛː",
    "out": "ਐ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɛː",
+   "out": "ਐ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1087,6 +1277,12 @@
    "ipa": "i",
    "out": "ਈ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "i",
+   "out": "ਈ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1098,6 +1294,12 @@
    "ipa": "iː",
    "out": "ਈ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "iː",
+   "out": "ਈ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1113,6 +1315,12 @@
   {
    "slot": "nucleus",
    "ipa": "ɨ",
+   "out": "ਇ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɨ",
    "out": "ਿ"
   },
   {
@@ -1124,6 +1332,12 @@
   {
    "slot": "nucleus",
    "ipa": "u",
+   "out": "ਊ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "u",
    "out": "ੂ"
   },
   {
@@ -1131,6 +1345,12 @@
    "ipa": "uː",
    "out": "ਊ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "uː",
+   "out": "ਊ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1146,6 +1366,12 @@
   {
    "slot": "nucleus",
    "ipa": "ɯ",
+   "out": "ਉ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɯ",
    "out": "ੁ"
   },
   {
@@ -1153,6 +1379,12 @@
    "ipa": "ɯː",
    "out": "ਊ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɯː",
+   "out": "ਊ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1168,6 +1400,12 @@
   {
    "slot": "nucleus",
    "ipa": "e",
+   "out": "ਏ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "e",
    "out": "ੇ"
   },
   {
@@ -1175,6 +1413,12 @@
    "ipa": "eː",
    "out": "ਏ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "eː",
+   "out": "ਏ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1190,6 +1434,12 @@
   {
    "slot": "nucleus",
    "ipa": "ɛ",
+   "out": "ਐ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɛ",
    "out": "ੈ"
   },
   {
@@ -1201,6 +1451,12 @@
   {
    "slot": "nucleus",
    "ipa": "ɤ",
+   "out": "ਏ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɤ",
    "out": "ੇ"
   },
   {
@@ -1212,6 +1468,12 @@
   {
    "slot": "nucleus",
    "ipa": "ɤː",
+   "out": "ਏ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɤː",
    "out": "ੇ"
   },
   {
@@ -1223,6 +1485,12 @@
   {
    "slot": "nucleus",
    "ipa": "o",
+   "out": "ਓ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "o",
    "out": "ੋ"
   },
   {
@@ -1230,6 +1498,12 @@
    "ipa": "oː",
    "out": "ਓ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "oː",
+   "out": "ਓ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1241,6 +1515,12 @@
    "ipa": "øː",
    "out": "ਓ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "øː",
+   "out": "ਓ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1252,6 +1532,12 @@
    "ipa": "œ",
    "out": "ਓ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "œ",
+   "out": "ਓ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1263,6 +1549,12 @@
    "ipa": "œː",
    "out": "ਓ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "œː",
+   "out": "ਓ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1289,6 +1581,12 @@
   {
    "slot": "nucleus",
    "ipa": "ɔ",
+   "out": "ਔ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɔ",
    "out": "ੌ"
   },
   {
@@ -1296,6 +1594,12 @@
    "ipa": "ɔː",
    "out": "ਔ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɔː",
+   "out": "ਔ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1307,6 +1611,12 @@
    "ipa": "ɒ",
    "out": "ਔ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɒ",
+   "out": "ਔ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1318,6 +1628,12 @@
    "ipa": "ɒː",
    "out": "ਔ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɒː",
+   "out": "ਔ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1371,6 +1687,12 @@
   {
    "slot": "nucleus",
    "ipa": "ɑ̃",
+   "out": "ਆੰ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɑ̃",
    "out": "ਾੰ"
   },
   {
@@ -1378,6 +1700,12 @@
    "ipa": "ɐ̃",
    "out": "ਆੰ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɐ̃",
+   "out": "ਆੰ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1389,6 +1717,12 @@
    "ipa": "ã",
    "out": "ਆੰ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ã",
+   "out": "ਆੰ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1400,6 +1734,12 @@
    "ipa": "ɐ̃ʊ̃",
    "out": "ਆਉੰ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɐ̃ʊ̃",
+   "out": "ਆਉੰ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1411,6 +1751,12 @@
    "ipa": "ɑ̃ʊ̃",
    "out": "ਆਉੰ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɑ̃ʊ̃",
+   "out": "ਆਉੰ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1422,6 +1768,12 @@
    "ipa": "ɛ̃",
    "out": "ਏੰ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɛ̃",
+   "out": "ਏੰ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1433,6 +1785,12 @@
    "ipa": "ẽ",
    "out": "ਏੰ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ẽ",
+   "out": "ਏੰ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1444,6 +1802,12 @@
    "ipa": "œ̃",
    "out": "ਓੰ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "œ̃",
+   "out": "ਓੰ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1459,6 +1823,12 @@
   {
    "slot": "nucleus",
    "ipa": "ɔ̃",
+   "out": "ਔੰ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɔ̃",
    "out": "ੌੰ"
   },
   {
@@ -1466,6 +1836,12 @@
    "ipa": "õ",
    "out": "ਓੰ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "õ",
+   "out": "ਓੰ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -1481,6 +1857,12 @@
   {
    "slot": "nucleus",
    "ipa": "ũ",
+   "out": "ਊੰ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ũ",
    "out": "ੂੰ"
   },
   {
@@ -1488,6 +1870,12 @@
    "ipa": "ĩ",
    "out": "ਈੰ",
    "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ĩ",
+   "out": "ਈੰ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
   },
   {
    "slot": "nucleus",
@@ -3513,11 +3901,6 @@
    "ipa": "ɟʰ",
    "out": "ਝ",
    "unless_inventory": "dʒ"
-  },
-  {
-   "slot": "any",
-   "ipa": "r̝",
-   "out": "੍ਰ"
   }
  ],
  "syllable_fixups": [

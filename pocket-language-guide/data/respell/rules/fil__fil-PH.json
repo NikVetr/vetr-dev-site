@@ -1,0 +1,895 @@
+{
+  "source": "fil",
+  "accent": "fil-PH",
+  "status": "ready",
+  "version": "1",
+  "derives_from": "ADAPTED FROM id__id-ID.json, not invented independently and not derived from any Filipino document -- there is no Filipino pronunciation-respelling tradition to borrow any more than there is an Indonesian one (checked: KWF's Diksiyonaryo ng Wikang Filipino marks stress with the pahilis/paiwa/pakupya tuldik system on its own headwords, which is the citable precedent for this table's stress policy below, but prints no IPA-to-Filipino correspondence table for foreign words the way, say, Korea's IPA-to-Hangul notification does). Adapted from Indonesian specifically -- see this file's own module docstring in tmp/fil_respell_build.py for the full argument -- rather than from Spanish or English, which the brief itself suggested weighing: both share almost nothing of Filipino's vowel inventory or syllable canon, and English additionally carries a stress convention (capitals) RESPELL-SYSTEMS.md documents as not porting to a language with its own native device.",
+  "deviations": [
+    {
+      "rule": "Indonesian's EYD V optional e-pepet diacritic (e with circumflex, ê), which is why Indonesian's table can spend one new glyph on schwa and its five reduced-vowel relatives.",
+      "why": "NOT AVAILABLE HERE. Checked rather than assumed: Filipino orthography, unlike Indonesian's, has never had a phonemic schwa to begin with -- Tagalog's own vowel system is traditionally described as three vowels (a i u), with e and o entering only through Spanish and English loanwords as full vowels, never as a distinct mid-central quality. There is no KWF-sanctioned diacritic for a sixth vowel to extend the way Indonesian's table extends KBBI's own e-pepet mark. So ə/ʌ/ɨ/ɤ/ɜ/ɚ are each folded onto one of Filipino's five ordinary vowel letters instead (a, a, i, o, er respectively -- see tmp/fil_respell_build.py's REMAP for the reasoning per symbol), and /ɯ/ loses the u/ɯ contrast Indonesian's ê preserves for Korean, Turkish and Thai, since there is no sixth letter to spare for it."
+    },
+    {
+      "rule": "Indonesian's own precedent for /θ ð/ -- its Arabic loanwords hadis, zikir, azan, zalim, which already decided s/z for a Filipino table to simply copy.",
+      "why": "NOT COPIED. Filipino has no comparable everyday Arabic loan corpus to point to, but it has two independent native precedents of its own, both pointing at the stop series instead: Spanish-mediated academic vocabulary renders English th as plain t (mathematics entered Filipino via Spanish matematica as Matematika), and the well-documented phonetic substitution pattern in Filipino-accented English is dental-stop, not sibilant -- think/this as [tink]/[dis], never [sink]/[ziss]. So theta and eth are t and d here, not s and z."
+    },
+    {
+      "rule": "Indonesian's own conclusion that its hyphen cannot serve as a syllable separator, because it already carries four competing readings (line break, reduplication anak-anak, prefix/compound joining se-Indonesia, and letter-spelling p-a-n-i-t-i-a).",
+      "why": "CHECKED AGAINST FILIPINO RATHER THAN ASSUMED TO TRANSFER, and two of the four readings genuinely do: Filipino's hyphen marks reduplication exactly the way Indonesian's does (araw-araw, \"every day\"), and it marks a prefix's boundary before a vowel-initial root (mag-aral, \"to study\"), so a respelling that hyphenated every syllable of a foreign word would be visually identical to a reduplicated Filipino root. The KBBI dot solution is adopted for the same reason it was invented -- ke.pa.la reads unambiguously as one word's syllables, where ke-pa-la could be misread as a compound or a reduplication."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "/ɯ/ (Japanese's only high back vowel; Korean, Turkish and Thai's second one, contrasting with their own /u/)",
+      "out": "u",
+      "why": "Indonesian spares its invented ê for exactly this contrast. Filipino has no sixth vowel letter to spare, so the contrast is lost outright here rather than merely approximated -- a real cost of having no schwa tradition to extend, named rather than hidden."
+    },
+    {
+      "sounds": "/ə ʌ/ (English schwa and STRUT; Hindi/Bengali's frequent inherent vowel; Russian's reduced vowels)",
+      "out": "a",
+      "why": "The plain Filipino vowel a is what these sounds are already heard as in Filipino-accented English -- banana said with three full a's, but heard and said with a. No new letter, unlike Indonesian's ê."
+    },
+    {
+      "sounds": "/ɨ/ (Russian ы, Vietnamese ư)",
+      "out": "i",
+      "why": "Filipino has no central vowel. Matches Spanish's own choice for the identical five-vowel-system gap (es__es-419.json), which is the more relevant precedent than Indonesian's ê here."
+    },
+    {
+      "sounds": "the retroflex series /ʈ ɖ ɳ ɽ/ and Mandarin's retroflex/alveolo-palatal series",
+      "out": "t d n r, and c j sy r r",
+      "why": "Filipino has no retroflexes, the same gap Indonesian has. The dental letters are the standard Filipino rendering of Devanagari (also the standard Spanish and Indonesian one), and the Mandarin retroflex and alveolo-palatal series merge on c j sy, which is what pinyin's zh/j, ch/q, sh/x collapse to for a reader without the contrast."
+    },
+    {
+      "sounds": "aspiration and palatalisation",
+      "out": "not written",
+      "why": "Filipino has neither. This is the trap the batch brief names directly: every aspirate has its own explicit rule (pʰ tʰ kʰ cʰ ʈʰ bʰ dʰ ɡʰ ɟʰ ɖʰ ɽʰ) so that a decomposed dʰ cannot fall through to d + ʰ with the ʰ silently mapping to nothing on a base letter that never carried the aspiration -- the exact shape of the Hindi generation-one bug. The bare standalone ʰ -> \"\" rule exists too, and is safe here for the identical reason Dutch's is: a base consonant letter always survives the decomposition and carries the rest of the phoneme, so dropping ʰ loses only the aspiration and never a whole segment. Filipino has no aspirated stops of its own to lose, so dropping it is a decision, not a bug -- see the pack's build_ipa.py GRADE note and this file's --units count below."
+    },
+    {
+      "sounds": "vowel length, consonant gemination",
+      "out": "not written",
+      "why": "Filipino orthography does not write either, and pemenggalan-style syllable division would misread a doubled vowel as an extra syllable exactly as Indonesian's does. Hindi, Arabic, Thai, Japanese, German and Italian length is lost."
+    },
+    {
+      "sounds": "lexical tone (zh-Hans, th, vi)",
+      "out": "dropped",
+      "why": "Chao tone letters are not Filipino letters and a reader with no key gets nothing from them. All curated tonal sheets in the corpus drop it too."
+    },
+    {
+      "sounds": "/ʔ ʕ/ (glottal stop, pharyngeal) and pharyngealisation ˤ",
+      "out": "dropped",
+      "why": "Filipino itself has a real, contrastive glottal stop (baba \"chin\" against babà \"to go down\"), which makes this the interesting case rather than the easy one: Filipino orthography has a device that comes close -- the hyphen that preserves a glottal onset at a prefix/root boundary (mag-aral) -- but that device is scoped to a native morpheme boundary, not to an arbitrary point inside a respelled foreign word, and reusing it there would collide with the same reduplication/prefix readings that ruled the hyphen out as a syllable separator above. So a borrowed glottal stop is dropped, leaving an ordinary onsetless Filipino syllable, exactly Indonesian's own solution for its Arabic loans (maaf < ma'af) and exactly what Spanish and Persian do for the same symbol. Filipino's own native glottal stop is a separate question -- see build_ipa.py's fil_to_ipa docstring -- and does not arise here because this table only ever reads foreign IPA, never Filipino's own."
+    },
+    {
+      "sounds": "/y ø œ ɥ/ (front rounded vowels)",
+      "out": "u, o, o, u",
+      "why": "Filipino has five vowels and none is rounded-front. This is the error a Filipino speaker makes anyway on French/German/Turkish loans (Zurich, Brussels)."
+    },
+    {
+      "sounds": "/ɹ/ (English r), /ʁ/ (French/German r)",
+      "out": "r",
+      "why": "Filipino r is a flap or trill and there is no closer letter, the same finding Indonesian's table reaches for the same two sounds."
+    },
+    {
+      "sounds": "/æ/ (English TRAP, Turkish closed-final e)",
+      "out": "e",
+      "why": "KEPT from Indonesian rather than re-decided, because the same argument holds without change: [kɛn] for can and [sɛŋk] for thank are much closer than [kan] and [saŋk], and English /æ/ is always checked, so max_onset 1 already closes the syllable and gives the right allophone unasked. Portuguese is excluded by the same targets block for the same G2P-artefact reason."
+    },
+    {
+      "sounds": "syllabic /m̩/ and /n̩/ (Swahili mtoto, nchi)",
+      "out": "a plus the nasal",
+      "why": "Filipino has no syllabic consonant, and mto.to asks for an onset it cannot begin. a gives the nasal a syllable of its own -- [am.to.to] against [m̩.to.to] is nearly the same sound and is readable. Restricted to m before a non-labial, matching Indonesian's own guard, so Swahili's prenasalised mb mv nd nz nj and its ng/ny digraphs are left alone."
+    }
+  ],
+  "policy": {
+    "syllable_separator": ".",
+    "word_separator": " ",
+    "stress": "acute",
+    "stress_min_syllables": 2,
+    "length": "none",
+    "tone": "drop",
+    "max_onset": 1,
+    "locale": "fil-PH",
+    "fixups": "first"
+  },
+  "splits": [],
+  "phonemes": [
+    {
+      "slot": "any",
+      "ipa": "ɬ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂʰ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ͈",
+      "out": "c"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʈʂ",
+      "out": "j",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "c"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tɕ",
+      "out": "j",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "c"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ts",
+      "out": "dz",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts̪",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʑ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "dz",
+      "out": "dz"
+    },
+    {
+      "slot": "any",
+      "ipa": "pf",
+      "out": "pf"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʰ",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰ",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "cʰ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʰ",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡʰ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟʰ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽʰ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "p͈",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "t͈",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "k͈",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "s͈",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "dˤ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "t̪",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "s̪",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "m̩",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "n̩",
+      "out": "n"
+    },
+    {
+      "slot": "onset",
+      "ipa": "p",
+      "out": "b",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "t",
+      "out": "d",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "k",
+      "out": "g",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "q",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "b",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "d",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɗ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "g",
+      "if_inventory": "dʒ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "f",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɸ",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "v",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʋ",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "θ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ð",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "sy"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʂ",
+      "out": "sy"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "sy"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʑ",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "kh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɣ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "kh",
+      "if_inventory": "x"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ħ",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "h",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʕ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "m",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "n",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "ny"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "ng"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɴ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɳ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "l",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɫ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "ly"
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɹ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʐ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɻ",
+      "out": "r"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "j",
+      "out": "i",
+      "after_out": "a e i o u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "j",
+      "out": "",
+      "after_out": "y"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "j",
+      "out": "i",
+      "after_out": "s j c"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "j",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "i"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "w",
+      "out": "u",
+      "after_out": "a e i o u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "w",
+      "out": "w",
+      "when": [
+        "no_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "w",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "w"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɥ",
+      "out": "w",
+      "when": [
+        "no_onset"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "ɥ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ː",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˀ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˤ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̪",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̩",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "͈",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̯",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "n"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ̃ʊ̃",
+      "out": "aun"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ã",
+      "out": "an"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ẽ",
+      "out": "en"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ĩ",
+      "out": "in"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "õ",
+      "out": "on"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ũ",
+      "out": "un"
+    },
+    {
+      "slot": "any",
+      "ipa": "a",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɑ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "æ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "e",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ø",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "œ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ə",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʌ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɨ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɤ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɜ",
+      "out": "er"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɚ",
+      "out": "er"
+    },
+    {
+      "slot": "any",
+      "ipa": "i",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɪ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "o",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɔ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɒ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɵ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "u",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʊ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʉ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "y",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʏ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "r̝",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɯ",
+      "out": "u"
+    }
+  ],
+  "syllable_fixups": [
+    {
+      "match": "^m(?=[^aeioubpfvwy])",
+      "out": "am"
+    },
+    {
+      "match": "([aeiou])\\1",
+      "out": "\\1"
+    },
+    {
+      "match": "([bcdfghjklmnprstvwyz])\\1",
+      "out": "\\1"
+    }
+  ],
+  "targets": {
+    "pt": {
+      "comment": "espeak writes Portuguese's reduced final vowels with two symbols that are not those sounds: final -e is /y/ (a front rounded vowel Portuguese does not have) and final -a is /ae/. Both are the near-schwa this table spells a.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "y",
+          "out": "a"
+        },
+        {
+          "slot": "any",
+          "ipa": "æ",
+          "out": "a"
+        }
+      ]
+    },
+    "ko": {
+      "comment": "Korean eo, which every other target writes as a schwa or an English STRUT.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "ʌ",
+          "out": "o"
+        }
+      ]
+    }
+  },
+  "legend": "walang tuldik = walang diin; tuldik (´) = ang pantig na may diin. Ang iba pa ay ordinaryong baybay na Filipino.",
+  "note": "Reader's legend, per RESPELL-SYSTEMS.md's one-line limit: no default mark for unstressed syllables, an acute (tuldik) for the stressed one; everything else is ordinary Filipino spelling, including the digraphs ng ts ny and the diphthongs ay aw iw oy uy, and the syllable dot is Indonesian KBBI's own device adopted for the identical hyphen-ambiguity reason. There is no curated Filipino sheet, so this table is not scored; it is held to zero --gaps, to a --units list in which every entry is a stated decision, and to being read aloud across all thirty-four targets.",
+  "policy_note": "syllable_separator is a full stop, adapted from Indonesian's KBBI convention rather than reasoned independently -- see the deviations entry above for why Filipino's own hyphen has the identical reduplication/prefix-boundary ambiguity Indonesian's does. max_onset is 1, adopted by direct phonological analogy with Indonesian's own measured value rather than independently re-derived over this corpus: Filipino syllabication (pagpapantig, taught from DepEd's own elementary reading curriculum) is the same shape as EYD V's pemenggalan kata -- a medial two-consonant cluster splits between syllables (bang-ko, kwar-to), a single medial consonant opens the next syllable (ba-hay, ka-in) -- so the same argument Indonesian's policy_note makes from its own corpus measurement is expected to hold here too. Flagged honestly as adopted-by-analogy rather than measured, for a fluent speaker or a future session to verify against this pack's own respell_check --units output. stress is acute, not caps: unlike Indonesian, which has no native stress-marking convention to borrow (Malay stress is 'neither phonemic nor predictable' per the instrumental literature Indonesian's own table cites), Filipino's dictionary tradition already marks stress on headwords with the pahilis (acute) tuldik -- KWF's Diksiyonaryo ng Wikang Filipino distinguishes buhay 'life' from buháy 'alive' exactly this way. So the acute mark used here is a borrowed native convention, not an engine compromise the way Indonesian's capitals are its weakest-justified field. length is none and tone is drop; see approximations.",
+  "engine_note": "No engine limitation distinct from Indonesian's own noted one is hit here beyond it: the same nucleus-span retraction gap (a vowel+glide immediately followed by glide+vowel collapsing into one nucleus) applies to any table built on this engine and is not re-derived here."
+}

@@ -90,5 +90,5 @@ numbers-money.hryvnia,гривна,,grivna,ɡrʲˈivna,,2,gloss-only;scoped-away
 numbers-money.hryvnia-symbol,гривна (символ),,grivna,ɡrʲˈivna sʲˈimvʌɭ,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
 numbers-money.leu,лей,,,ɭʲˈej,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
 numbers-money.leu-symbol,лей (символ),,,ɭʲˈej sʲˈimvʌɭ,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
-numbers-money.koruna,крона,,,,,2,gloss-only;scoped-away;name of the currency in this language
-numbers-money.koruna-symbol,крона (символ),,,,,2,gloss-only;scoped-away;name of the currency in this language
+numbers-money.koruna,крона,,,krˈona,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.koruna-symbol,крона (символ),,,krˈona sʲˈimvʌɭ,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak

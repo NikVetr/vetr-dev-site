@@ -90,5 +90,5 @@ numbers-money.hryvnia,hrywna,,xrˈɨvna,,2,gloss-only;scoped-away;name of the cu
 numbers-money.hryvnia-symbol,hrywna (symbol),,xrˈɨvna sˈɨmbɔl,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
 numbers-money.leu,lej,,lˈɛj,,2,pl-gloss-v1;cldr;ipa=espeak
 numbers-money.leu-symbol,lej (symbol),,lˈɛj sˈɨmbɔl,,2,pl-gloss-v1;cldr;ipa=espeak
-numbers-money.koruna,korona,,,,2,gloss-only;scoped-away;name of the currency in this language
-numbers-money.koruna-symbol,korona (symbol),,,,2,gloss-only;scoped-away;name of the currency in this language
+numbers-money.koruna,korona,,kɔrˈɔna,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.koruna-symbol,korona (symbol),,kɔrˈɔna sˈɨmbɔl,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak

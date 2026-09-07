@@ -88,7 +88,7 @@ numbers-money.zloty,ਜ਼ਲੋਟੀ,,zalōṭī,zʌloʈi,,2,pa-agent-v1;ipa=e
 numbers-money.zloty-symbol,ਜ਼ਲੋਟੀ (ਚਿੰਨ੍ਹ),,zalōṭī (ciṁnh),zʌloʈi cɪ˥nn,zloty (sign),2,pa-agent-v1;ipa=espeak
 numbers-money.hryvnia,ਹਰਿਵਨੀਆ,,harivanīā,həɾɪʋənia,,2,pa-agent-v1;ipa=espeak
 numbers-money.hryvnia-symbol,ਹਰਿਵਨੀਆ (ਚਿੰਨ੍ਹ),,harivanīā (ciṁnh),həɾɪʋənia cɪ˥nn,hryvnia (sign),2,pa-agent-v1;ipa=espeak
-numbers-money.koruna,ਕੋਰੂਨਾ,,kōrūnā,,,2,pa-agent-v1
-numbers-money.koruna-symbol,ਕੋਰੂਨਾ (ਚਿੰਨ੍ਹ),,kōrūnā (ciṁnh),,koruna (sign),2,pa-agent-v1
+numbers-money.koruna,ਕੋਰੂਨਾ,,kōrūnā,koɾuna,,2,pa-agent-v1;ipa=espeak
+numbers-money.koruna-symbol,ਕੋਰੂਨਾ (ਚਿੰਨ੍ਹ),,kōrūnā (ciṁnh),koɾuna cɪ˥nn,koruna (sign),2,pa-agent-v1;ipa=espeak
 numbers-money.leu,ਲੇਊ,,lēū,leu,,2,pa-agent-v1;ipa=espeak
 numbers-money.leu-symbol,ਲੇਈ,,lēī,lei,"the plural *lei*, which is what a price tag spells out",2,pa-agent-v1;ipa=espeak

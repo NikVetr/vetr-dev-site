@@ -90,5 +90,5 @@ numbers-money.toman,తోమాన్,,tōmān,toːmaːn,ten rial,2,te-currency
 numbers-money.local-currency,స్థానిక కరెన్సీ,,sthānika karensī,stʰaːnika karensiː,,2,te-agent-v1;ipa=espeak
 numbers-money.lakh,లక్ష,"1,00,000",lakṣa,lakʂa,"100,000 -- and the grouping is the point: a Telugu price board writes 1,00,000",2,te-agent-v1;ipa=espeak
 numbers-money.crore,కోటి,"1,00,00,000",kōṭi,koːʈi,ten million,2,te-agent-v1;ipa=espeak
-numbers-money.koruna,కొరూనా,,,,,2,gloss-only;scoped-away;name of the currency in this language
-numbers-money.koruna-symbol,కొరూనా గుర్తు,,,,,2,gloss-only;scoped-away;name of the currency in this language
+numbers-money.koruna,కొరూనా,,,koruːnaː,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.koruna-symbol,కొరూనా గుర్తు,,,koruːnaː ɡurtu,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak

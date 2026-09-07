@@ -1,0 +1,9 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+profanity.japanese-register,"Halos hindi ito ginagawa ng Hapon gamit ang bokabularyo. Ang paghamak ay dinadala ng gramatika -- isang tuwirang panghalip na pangalawang-panauhan, ang payak na imperatibo, ang maiksing hulihan ng pandiwa -- kaya ang galit ay nasa hulihan, hindi sa isang salitang mahahanap mo sa diksiyonaryo. Ang mga hanay sa itaas ay halos buo na ng bokabularyong umiiral.",,,,1,fil-agent-v1
+profanity.oh-my-god,Diyos ko!,,dijos ko,,2,fil-agent-v1;ipa=fil-g2p
+profanity.damn,Lintik!,,lintik,,2,fil-agent-v1;ipa=fil-g2p
+profanity.expletive,Tae!,,taɛ,,2,fil-agent-v1;ipa=fil-g2p
+profanity.frustration,Kalokohan ito,,kalokohan ito,,2,fil-agent-v1;ipa=fil-g2p
+profanity.thats-rude,Bastos yan,,bastos jan,,2,fil-agent-v1;ipa=fil-g2p
+profanity.excuse-my-language,Pasensya na po sa masamang salita,,pasɛnsja na po sa masamaŋ salita,,2,fil-agent-v1;ipa=fil-g2p
+profanity.strength-warning,"Narito ito upang makilala lamang, hindi upang gamitin: ang tindi ng isang masamang salita ay hindi buong nakakarating sa pagsasalin. Ang salitang isinalin dito bilang 'damn' ay maaaring hindi na masasabi sa kabilang wika. Ipinapaalam din nito kung may kulang: kung hindi alam ng bumabasa na may isang antas na sinadyang iniwan, ang isang blangkong hanay ay mababasa na parang malumanay lang ang wikang iyon -- na hindi totoo.",,,,2,fil-agent-v1

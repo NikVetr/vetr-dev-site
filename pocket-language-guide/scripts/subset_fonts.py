@@ -421,7 +421,21 @@ ALL_LANGS = ["en", "es", "fr", "de", "ko", "ar", "zh-Hans", "ja",
              # U+02B0..02FF in every Latin face through `LATIN_RANGES` at the top of
              # this file. Punjabi is the only tonal Indic language in the corpus and
              # its tone is free here for exactly that reason.
-             "pa"]
+             "pa",
+             # Filipino, routed to `latin` via `Latn` -- no stack of its own needed.
+             # Checked rather than assumed, the way Polish, Ukrainian, Romanian and
+             # Czech were: ñ/Ñ U+00F1/U+00D1 (this pack's own text mostly spells the
+             # sound `ny`, but a proper name may still need bare ñ) and the peso sign
+             # ₱ U+20B1 (numbers-money.peso-symbol, scoped `es;fil` -- a different
+             # codepoint from the Latin American pesos' `$`) are both present in
+             # every shipped `latin*.ttf`/`latin-cond*.ttf` cmap, confirmed with
+             # `fontTools.ttLib.TTFont.getBestCmap()` against the actual faces. `ng`
+             # is two ordinary ASCII letters and costs nothing. No romanisation
+             # column either -- Filipino is Latin-scripted already, and has no
+             # espeak voice (see `VOICES`' comment in build_ipa.py), so this entry
+             # is only for the language's own text, section titles and emergency
+             # labels, the Polish/Ukrainian/Romanian/Czech shape.
+             "fil"]
 STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                "latin-serif": ALL_LANGS, "latin-cond-serif": ALL_LANGS,
                "cjk-sc": ["zh-Hans"], "cjk-sc-serif": ["zh-Hans"],

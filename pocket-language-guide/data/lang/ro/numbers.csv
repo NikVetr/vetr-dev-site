@@ -90,5 +90,5 @@ numbers-money.yen-symbol,¥,,,,2,reader-gloss-v1
 numbers-money.won,won,,wˈon,,2,reader-gloss-v1;cldr;ipa=espeak
 numbers-money.won-symbol,won (simbol),,wˈon simbˈol,,2,reader-gloss-v1;cldr;ipa=espeak
 numbers-money.number-and-classifier-notes-2,"Formarea numerelor: 11 = juuichi; 20 = nijuu; 21 = nijuuichi. Clasificatorul vine după numeral: -tsu (obiecte), -mai (obiecte plate), -hon (obiecte lungi), -nin (persoane), -hai (căni). La telefon: 0 = zero sau maru, 4 = yon, 7 = nana, 9 = kyuu. Vocala dublată înseamnă o vocală lungă.",,,,2,ro-agent-v1
-numbers-money.koruna,coroana cehă,,,,2,gloss-only;scoped-away;name of the currency in this language
-numbers-money.koruna-symbol,coroana cehă (simbol),,,,2,gloss-only;scoped-away;name of the currency in this language
+numbers-money.koruna,coroana cehă,,koɾˈɔana tʃˈehə,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.koruna-symbol,coroana cehă (simbol),,koɾˈɔana tʃˈehə simbˈol,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak

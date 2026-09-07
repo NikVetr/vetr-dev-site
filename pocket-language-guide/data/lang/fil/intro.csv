@@ -1,0 +1,13 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+introductions.my-name-is,Ang pangalan ko po ay {},,aŋ paŋalan ko po aj {},,2,fil-agent-v1;ipa=fil-g2p
+introductions.nice-to-meet-you,Ikinagagalak ko po kayong makilala,,ikinaɡaɡalak ko po kajoŋ makilala,,2,fil-agent-v1;ipa=fil-g2p
+introductions.what-is-your-name,Ano po ang pangalan niyo?,,ano po aŋ paŋalan nijo,,2,fil-agent-v1;ipa=fil-g2p
+introductions.we-are-traveling-together,Magkasama po kaming naglalakbay,,maɡkasama po kamiŋ naɡlalakbaj,,2,fil-agent-v1;ipa=fil-g2p
+introductions.this-is-my-friend,Ito po ang kaibigan ko,,ito po aŋ kaibiɡan ko,,2,fil-agent-v1;ipa=fil-g2p
+introductions.i-am-from,Taga-{} po ako,,taɡa {} po ako,,2,fil-agent-v1;ipa=fil-g2p
+introductions.where-are-you-from,Taga-saan po kayo?,,taɡasaan po kajo,,2,fil-agent-v1;ipa=fil-g2p
+introductions.how-are-you,Kumusta po kayo?,,kumusta po kajo,,2,fil-agent-v1;ipa=fil-g2p
+introductions.i-am-a-tourist,Turista po ako,,tuɾista po ako,,2,fil-agent-v1;ipa=fil-g2p
+introductions.this-is-my-husband-wife,Ito po ang asawa ko,,ito po aŋ asawa ko,"asawa is gender-neutral, covering both husband and wife",2,fil-agent-v1;ipa=fil-g2p
+introductions.this-is-my-daughter-son,Ito po ang anak ko,,ito po aŋ anak ko,"anak is gender-neutral, covering both daughter and son",2,fil-agent-v1;ipa=fil-g2p
+introductions.i-am-traveling-alone,Nag-iisa po akong naglalakbay,,naɡiisa po akoŋ naɡlalakbaj,,2,fil-agent-v1;ipa=fil-g2p

@@ -2084,11 +2084,19 @@ PA_ONSETLESS_H = re.compile(r"([" + "".join(VOWELS) + r"]\u0303?)([mnɳŋɲlɾɽ
 # the nasal vowel rather than the nasal consonant is what has to be matched.
 PA_HOMORGANIC = {"k": "ŋ", "ɡ": "ŋ", "c": "ɲ", "ɟ": "ɲ", "ʈ": "ɳ", "ɖ": "ɳ",
                  "t": "n", "d": "n", "p": "m", "b": "m", "m": "m", "n": "n", "l": "n"}
-PA_NASAL = re.compile(r"([" + "".join(VOWELS) + r"])\u0303([" + "".join(PA_HOMORGANIC) + r"])")
+# The tone bar can sit **between** the tilde and the stop, because espeak writes
+# its own `+` there: ਧੁੰਦ comes back `tˈʊ̃+d`, so after the fold the string is
+# `tʊ̃˩d`. Missed on the first pass, and it was the Korean reader that found it --
+# `respell_check ko pa` printed `ᄃ드` for that one row, a bare choseong with no
+# vowel, which is the uncomposed-jamo defect `tests/respell.test.mjs` guards. The
+# tone stays on the vowel, where `syllabify` wants it, and the nasal goes after it.
+PA_NASAL = re.compile(r"([" + "".join(VOWELS) + r"])\u0303([˥˩]?)(["
+                      + "".join(PA_HOMORGANIC) + r"])")
 
 
 def pa_nasal(ipa):
-    return PA_NASAL.sub(lambda m: m.group(1) + PA_HOMORGANIC[m.group(2)] + m.group(2), ipa)
+    return PA_NASAL.sub(
+        lambda m: m.group(1) + m.group(2) + PA_HOMORGANIC[m.group(3)] + m.group(3), ipa)
 
 
 def pa_tone(text, ipa):
@@ -2513,12 +2521,24 @@ def fil_to_ipa(word):
     not `ʔˈanak`, confirmed directly against this build's output), and a
     Malayo-Polynesian sibling language's own espeak-derived column is the more
     relevant precedent here than inventing a mark from scratch.
+
+    A bare digit is carried out unread rather than expanded to a number word,
+    unlike espeak's own languages, which expand a numeral before phonemising it
+    for free. Five rows in this pack are literal numerals or contain one
+    (`numbers-money.2-items`, `.li-ng`, `.lakh`, `.crore`, `.toman`), and all
+    five are refused here rather than guessed at: writing a place-value reader
+    for five reference rows is exactly the speculative machinery this project
+    avoids building for a case that does not generalise, and an absent `ipa`
+    on a reference word is a stated, checked gap rather than a silent one.
     """
     if word in FIL_WORDS:
         return FIL_WORDS[word]
     out, i = "", 0
     while i < len(word):
-        if word[i] == "-":                            # a morpheme boundary, not a sound
+        if word[i] in "-'":
+            # A hyphen is a morpheme boundary; an apostrophe marks an elided
+            # syllable in casual spelling ('yun for iyon) -- 'Wala 'yun!' in
+            # slang.csv is the row this was found on. Neither is a sound.
             i += 1
             continue
         if word[i] == "c":

@@ -90,5 +90,5 @@ numbers-money.hryvnia,hryvnia,,hrˈɪvniˌaː,,2,nl-agent-v1;ipa=espeak
 numbers-money.hryvnia-symbol,hryvnia (symbool),,hrˈɪvniˌaː sɪmbˈoːl,,2,nl-agent-v1;ipa=espeak
 numbers-money.leu,leu,lei,lˈøː,"singular leu, plural lei -- the plural is what a Dutch traveller actually reads on a price tag",2,nl-agent-v1;ipa=espeak
 numbers-money.leu-symbol,lei,leu,lˈɛɪ,"no stylised symbol exists; the plural word is what is printed, matching the concept's own reasoning",2,nl-agent-v1;ipa=espeak
-numbers-money.koruna,kroon,,,,2,gloss-only;scoped-away;name of the currency in this language
-numbers-money.koruna-symbol,kroon (symbool),,,,2,gloss-only;scoped-away;name of the currency in this language
+numbers-money.koruna,kroon,,krˈoːn,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.koruna-symbol,kroon (symbool),,krˈoːn sɪmbˈoːl,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak

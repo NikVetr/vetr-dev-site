@@ -62,6 +62,41 @@ export const LANGUAGE_MOTIFS = /** @type {const} */ ({
   // read as neither a flower nor a stitch.
   ro: 'funie',
   cs: 'sklo',
+  // `phulkari` is the Punjabi flower-work of Malwa and the Sialkot side both --
+  // and it is named against `embroidery`, which Hungarian already holds, because
+  // the two are only the same craft at the level of "thread through cloth". The
+  // difference is the mark. Hungarian's emblem is a **running stitch**: one
+  // continuous sewn line that changes direction, drawn there as a zigzag and a
+  // flower outline. Phulkari is **darn stitch worked from the reverse of a coarse
+  // khaddar ground, on a counted thread grid**, so its unit is not a line at all --
+  // it is a solid lozenge filled with long parallel floats, and the neighbouring
+  // lozenge runs its floats the other way, which is what makes a real phulkari
+  // shimmer as it turns. So this emblem fills an area with directional hatching,
+  // and **no other motif in this table hatches an area**: every one of the others
+  // is an outline, a silhouette or a set of strokes.
+  //
+  // Also named against the two others it could be confused with. `kawung` is
+  // Javanese batik -- four curved ovals made by wax resist, a dyed shape rather
+  // than a counted stitch. And `wycinanki` is a folded-paper silhouette cut all
+  // the way through a flat sheet, so it reads by its outline where a phulkari
+  // lozenge reads by the direction of its fill and has no meaningful outline at
+  // all. `bagh`, the fully covered phulkari, was the alternative name and was
+  // refused because it means "garden" and would read as a botanical motif next to
+  // `lotus`, `cypress` and `iris`, which is exactly what it is not.
+  pa: 'phulkari',
+  // `banig` is the woven sleeping-mat pattern of pandan or buri palm strips
+  // (Basey, Samar; Badjao and Sama weaving), and it is named against the two
+  // neighbours it could most easily be confused with. `kawung` (id) is a
+  // DYED pattern -- four wax-resist ovals drawn and repeated onto cloth that
+  // already exists -- where a banig's checker/diamond lattice is not applied
+  // to a base material at all; it IS the material's own construction, the
+  // over-under interlacing of two sets of strips. And `sail` (sw) is one
+  // large fluid curved form; a banig mark is the opposite formal quality,
+  // a small rigid unit repeated evenly across a hard-edged grid. (It is also
+  // not `phulkari`'s counted-thread hatching, which fills a separate base
+  // cloth with angled floats of thread from the reverse side -- a banig has
+  // no base cloth and no thread; the strips are the whole object.)
+  fil: 'banig',
 });
 /** @typedef {typeof LANGUAGE_MOTIFS[keyof typeof LANGUAGE_MOTIFS]} LanguageMotif */
 
@@ -393,6 +428,52 @@ const emblems = {
     p.m(50, 78); p.l(50, 24);
     for (const y of [32, 48, 64]) { p.m(50, y); p.l(39, y + 10); p.l(50, y + 4); p.l(61, y + 10); p.close(); }
   },
+  phulkari(p) {
+    // Four lozenges of darn stitch, each filled with long parallel floats, and the
+    // floats running *across* in two of them and *down* in the other two. That
+    // alternation is what a real phulkari is: the same thread laid one way and then
+    // the other catches the light differently, and the pattern is read off the
+    // direction of the fill rather than off an outline. The floats are clipped to
+    // the lozenge -- at a distance `d` from the centre a lozenge is `r - |d|` wide --
+    // because a darn stitch stops at the counted edge of its block and does not
+    // overrun it.
+    const r = 17, gap = 4.25;
+    const blocks = /** @type {[number, number, boolean][]} */ ([
+      [27, 27, true], [73, 27, false], [27, 73, false], [73, 73, true]]);
+    for (const [cx, cy, across] of blocks) {
+      diamond(p, cx, cy, r, r);
+      for (let d = -r + gap; d < r - gap / 2; d += gap) {
+        const half = r - Math.abs(d);
+        if (across) { p.m(cx - half, cy + d); p.l(cx + half, cy + d); }
+        else { p.m(cx + d, cy - half); p.l(cx + d, cy + half); }
+      }
+    }
+  },
+  banig(p) {
+    // A woven mat's own structure, not a pattern applied to a surface -- the
+    // distinction that separates it from both neighbours it could be confused
+    // with. `kawung` (id) is a DYED pattern, four wax-resist ovals drawn and
+    // repeated onto cloth that already exists; a banig has no base material
+    // at all, since the checker itself IS the object, the over-under
+    // interlacing of two sets of pandan or buri-palm strips. And `sail` (sw)
+    // is one large fluid curved form, where a banig mark is the opposite
+    // formal quality: a small rigid unit, repeated evenly across a
+    // hard-edged grid. (It is also not `phulkari`'s directional thread-float
+    // fill on a separate counted-thread base cloth, just above -- a banig
+    // strip has no base cloth and no thread; the flattened facets below are
+    // the strips themselves.) The short bar through half the facets is the
+    // alternation a real weave shows: the same strip's face reads
+    // differently depending on whether it passes over or under its
+    // neighbour at that crossing.
+    const n = 4, margin = 8, cell = (100 - margin * 2) / n, r = cell * 0.44;
+    for (let row = 0; row < n; row++) {
+      for (let col = 0; col < n; col++) {
+        const cx = margin + cell * (col + 0.5), cy = margin + cell * (row + 0.5);
+        diamond(p, cx, cy, r, r * 0.6);
+        if ((row + col) % 2 === 0) { p.m(cx - r * 0.5, cy); p.l(cx + r * 0.5, cy); }
+      }
+    }
+  },
 };
 
 // At divider height, use the motif's silhouette rather than its interior detail.
@@ -430,6 +511,8 @@ const tracery = {
   polder(p) { p.m(5, 85); p.l(95, 85); p.m(30, 85); p.l(30, 30); p.m(55, 85); p.l(55, 15); p.m(80, 85); p.l(80, 40); },
   sklo(p) { p.m(50, 7); p.l(93, 50); p.l(50, 93); p.l(7, 50); p.close(); p.m(50, 7); p.l(50, 93); p.m(7, 50); p.l(93, 50); },
   funie(p) { p.m(6, 50); p.q(28, 30, 50, 50); p.q(72, 70, 94, 50); },
+  phulkari(p) { diamond(p, 30, 50, 22, 42); diamond(p, 70, 50, 22, 42); p.m(12, 88); p.l(48, 12); p.m(52, 88); p.l(88, 12); },
+  banig(p) { diamond(p, 30, 30, 17, 11); diamond(p, 70, 30, 17, 11); diamond(p, 30, 70, 17, 11); diamond(p, 70, 70, 17, 11); },
 };
 
 /** @param {string} motif @returns {motif is keyof typeof emblems} */

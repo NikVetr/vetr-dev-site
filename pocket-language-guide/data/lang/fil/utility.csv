@@ -1,0 +1,16 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,Gusto ko pong pumunta sa {},,ɡusto ko poŋ pumunta sa {},,2,fil-agent-v1;ipa=fil-g2p
+utility-templates.please-give-me,Pakibigyan po ako ng {},,pakibiɡjan po ako naŋ {},,2,fil-agent-v1;ipa=fil-g2p
+utility-templates.may-i,Puwede ko po bang {}?,,puwɛdɛ ko po baŋ {},,2,fil-agent-v1;ipa=fil-g2p
+utility-templates.please-do-not-add,Huwag po lagyan ng {},,huwaɡ po laɡjan naŋ {},,2,fil-agent-v1;ipa=fil-g2p
+utility-templates.do-you-have,Meron po ba kayong {}?,,mɛɾon po ba kajoŋ {},,2,fil-agent-v1;ipa=fil-g2p
+utility-templates.please-write-the-number,Pakisulat po ang numero,,pakisulat po aŋ numɛɾo,,2,fil-agent-v1;ipa=fil-g2p
+utility-templates.i-need,Kailangan ko po ng {},,kailaŋan ko po naŋ {},,2,fil-agent-v1;ipa=fil-g2p
+utility-templates.is-there-nearby,May {} po ba na malapit?,,maj {} po ba na malapit,,2,fil-agent-v1;ipa=fil-g2p
+utility-templates.how-much-is,Magkano po ang {}?,,maɡkano po aŋ {},,2,fil-agent-v1;ipa=fil-g2p
+utility-templates.is-this,{} po ba ito?,,{} po ba ito,,2,fil-agent-v1;ipa=fil-g2p
+utility-templates.please,{} po,,{} po,,2,fil-agent-v1;ipa=fil-g2p
+utility-templates.i-am-looking-for,Naghahanap po ako ng {},,naɡhahanap po ako naŋ {},,2,fil-agent-v1;ipa=fil-g2p
+utility-templates.do-you-accept,Tumatanggap po ba kayo ng {}?,,tumataŋɡap po ba kajo naŋ {},,2,fil-agent-v1;ipa=fil-g2p
+utility-templates.i-cannot-find,Hindi ko po mahanap ang {},,hindi ko po mahanap aŋ {},,2,fil-agent-v1;ipa=fil-g2p
+utility-templates.there-is-a-problem-with,May problema po sa {},,maj pɾoblɛma po sa {},,2,fil-agent-v1;ipa=fil-g2p

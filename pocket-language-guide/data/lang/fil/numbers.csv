@@ -1,0 +1,94 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+numbers-money.l-ng,sero,,sɛɾo,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.y,isa,,isa,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.r,dalawa,,dalawa,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.s-n,tatlo,,tatlo,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.s,apat,,apat,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.w,lima,,lima,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.li,anim,,anim,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.q,pito,,pito,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.b,walo,,walo,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.ji,siyam,,sijam,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.sh,sampu,,sampu,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.y-b-i,isang daan,,isaŋ daan,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.y-qi-n,isang libo,,isaŋ libo,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.y-w-n,sampung libo,,sampuŋ libo,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.b-n,kalahati,,kalahati,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.peso,piso,,piso,PH,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.peso-symbol,₱,piso,,PH,2,fil-agent-v1
+atm-cash.where-is-an-atm,Nasaan po ang ATM?,,nasaan po aŋ eitiɛm,,2,fil-agent-v1;ipa=fil-g2p+loan
+atm-cash.does-this-atm-take-foreign-cards,Tumatanggap po ba ang ATM na ito ng dayuhang card?,,tumataŋɡap po ba aŋ eitiɛm na ito naŋ dajuhaŋ kaɾd,,2,fil-agent-v1;ipa=fil-g2p+loan
+atm-cash.the-atm-kept-my-card,Kinain po ng ATM ang card ko,,kinain po naŋ eitiɛm aŋ kaɾd ko,,2,fil-agent-v1;ipa=fil-g2p+loan
+atm-cash.is-there-a-fee,May bayad po ba?,,maj bajad po ba,,2,fil-agent-v1;ipa=fil-g2p
+atm-cash.the-card-was-declined,Hindi po tinanggap ang card,,hindi po tinaŋɡap aŋ kaɾd,,2,fil-agent-v1;ipa=fil-g2p+loan
+atm-cash.what-is-the-exchange-rate,Ano po ang palitan ng pera?,,ano po aŋ palitan naŋ pɛɾa,,2,fil-agent-v1;ipa=fil-g2p
+atm-cash.no-money-came-out,Walang lumabas na pera,,walaŋ lumabas na pɛɾa,,2,fil-agent-v1;ipa=fil-g2p
+atm-cash.where-can-i-change-money,Saan po ako puwedeng magpapalit ng pera?,,saan po ako puwɛdɛŋ maɡpapalit naŋ pɛɾa,,2,fil-agent-v1;ipa=fil-g2p
+atm-cash.the-machine-is-out-of-service,Sira po ang makina,,siɾa po aŋ makina,,2,fil-agent-v1;ipa=fil-g2p
+atm-cash.please-give-me-smaller-notes,Pakibigyan po ako ng mas maliliit na perang papel,,pakibiɡjan po ako naŋ mas maliliit na pɛɾaŋ papɛl,,2,fil-agent-v1;ipa=fil-g2p
+atm-cash.do-you-have-change,Meron po ba kayong sukli?,,mɛɾon po ba kajoŋ sukli,,2,fil-agent-v1;ipa=fil-g2p
+atm-cash.may-i-pay-in,Puwede po ba akong magbayad gamit ang {}?,,puwɛdɛ po ba akoŋ maɡbajad ɡamit aŋ {},,2,fil-agent-v1;ipa=fil-g2p
+atm-cash.please-charge-in-local-currency,Pakisingil po sa lokal na pera,,pakisiŋil po sa lokal na pɛɾa,,2,fil-agent-v1;ipa=fil-g2p
+atm-cash.where-can-i-get-coins,Saan po ako makakakuha ng barya?,,saan po ako makakakuha naŋ baɾja,,2,fil-agent-v1;ipa=fil-g2p
+atm-cash.is-there-a-minimum-for-cards,May minimum po ba para sa card?,,maj minimum po ba paɾa sa kaɾd,,2,fil-agent-v1;ipa=fil-g2p+loan
+atm-cash.atm,ATM,,eitiɛm,,2,fil-agent-v1;ipa=fil-g2p+loan
+atm-cash.banknote,perang papel,,pɛɾaŋ papɛl,,2,fil-agent-v1;ipa=fil-g2p
+atm-cash.coin,barya,,baɾja,,2,fil-agent-v1;ipa=fil-g2p
+atm-cash.cash-only,cash lang,,kash laŋ,,2,fil-agent-v1;ipa=fil-g2p
+atm-cash.fee,bayad,komisyon,bajad,,2,fil-agent-v1;ipa=fil-g2p
+atm-cash.change,sukli,,sukli,,2,fil-agent-v1;ipa=fil-g2p
+atm-cash.exchange-rate,palitan ng pera,,palitan naŋ pɛɾa,,2,fil-agent-v1;ipa=fil-g2p
+atm-cash.bank,bangko,,baŋko,,2,fil-agent-v1;ipa=fil-g2p
+atm-cash.money-exchange,palitan ng pera,,palitan naŋ pɛɾa,,2,fil-agent-v1;ipa=fil-g2p
+atm-cash.pin,PIN,,pin,,2,fil-agent-v1;ipa=fil-g2p+loan
+numbers-money.li-ng,2 + panuring,,,,2,fil-agent-v1
+numbers-money.yu-n,yuan,,juan,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.ku-i,yuan (sinasalita),,juan sinasalita,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.2-items,2 na piraso,,,,2,fil-agent-v1
+numbers-money.yen,yen,,jɛn,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.yen-symbol,¥,yen,,,2,fil-agent-v1
+numbers-money.won,won,,won,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.won-symbol,₩,won,,,2,fil-agent-v1
+numbers-money.euro,euro,,ɛuɾo,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.euro-symbol,€,euro,,,2,fil-agent-v1
+numbers-money.lira,lira,,liɾa,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.lira-symbol,₺,lira,,,2,fil-agent-v1
+numbers-money.dong,dong,,doŋ,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.dong-symbol,₫,dong,,,2,fil-agent-v1
+numbers-money.ruble,ruble,,ɾublɛ,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.ruble-symbol,₽,ruble,,,2,fil-agent-v1
+numbers-money.rupiah,rupiah,,ɾupiah,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.rupiah-symbol,Rp,rupiah,ɾp,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.shilling,shilling,,shilliŋ,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.shilling-symbol,Sh,shilling,sh,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.baht,baht,,baht,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.baht-symbol,฿,baht,,,2,fil-agent-v1
+numbers-money.forint,forint,,foɾint,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.forint-symbol,forint (simbolo),,foɾint simbolo,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.rupee,rupee,,ɾupɛɛ,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.rupee-symbol,₹,rupee,,,2,fil-agent-v1
+numbers-money.dollar,dolyar,$,doljaɾ,US · CA · AU · NZ,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.dollar-symbol,$,dolyar,,US · CA · AU · NZ,2,fil-agent-v1
+numbers-money.pound,pound,£,pound,GB,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.pound-symbol,£,pound,,GB,2,fil-agent-v1
+numbers-money.franc,franc,,fɾank,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.franc-symbol,franc (simbolo),,fɾank simbolo,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.real,real,real ng Brazil,ɾɛal,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.real-symbol,real (simbolo),,ɾɛal simbolo,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.local-currency,lokal na pera,,lokal na pɛɾa,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.lakh,"100,000",,,,2,fil-agent-v1
+numbers-money.crore,"10,000,000",,,,2,fil-agent-v1
+numbers-money.shekel,shekel,,shɛkɛl,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.shekel-symbol,shekel (simbolo),,shɛkɛl simbolo,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.rial,rial,,ɾial,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.toman,10 rial,,,,2,fil-agent-v1
+numbers-money.zloty,zloty,,zlotj,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.zloty-symbol,zloty (simbolo),,zlotj simbolo,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.hryvnia,hryvnia,,hɾjvnia,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.hryvnia-symbol,hryvnia (simbolo),,hɾjvnia simbolo,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.leu,leu,,lɛu,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.leu-symbol,leu (simbolo),,lɛu simbolo,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.koruna,koruna,,koɾuna,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.koruna-symbol,koruna (simbolo),,koɾuna simbolo,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.number-and-classifier-notes,"Pagbuo ng numero: 11 = shi yi; 20 = er shi; 21 = er shi yi. Sa numero ng telepono, madalas na binibigkas ang 1 bilang yao. Sa pagitan ng numero at ng pangngalan, may panuring: ge (pangkalahatan), wei (tao), zhang (tiket, papel), bei (tasa), ping (bote). jiao / mao = 0.1 yuan; fen = 0.01 yuan.",,,,2,fil-agent-v1
+numbers-money.number-and-classifier-notes-2,"Pagbuo ng numero: 11 = juuichi; 20 = nijuu; 21 = nijuuichi. Mga tagabilang: -tsu (bagay), -mai (patag), -hon (mahaba), -nin (tao), -hai (tasa). Sa telepono: 0 = zero o maru, 4 = yon, 7 = nana, 9 = kyuu.",,,,2,fil-agent-v1
