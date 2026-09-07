@@ -1,0 +1,13 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+introductions.my-name-is,Sunana {},,sunana {},name-my {},2,ha-agent-v1;ipa=ha-g2p
+introductions.nice-to-meet-you,Na ji dadin saduwa da kai,Na ji dadin saduwa da ke,na dʒi dadin saduwa da kai,I felt the sweetness of meeting you; da ke to a woman,2,ha-agent-v1;ipa=ha-g2p
+introductions.what-is-your-name,Menene sunanka?,Menene sunanki?,menene sunanka,what-is name-your(m); sunanki to a woman,2,ha-agent-v1;ipa=ha-g2p
+introductions.we-are-traveling-together,Muna tafiya tare,,muna tafija tare,we-are traveling together,2,ha-agent-v1;ipa=ha-g2p
+introductions.this-is-my-friend,Wannan abokina ne,Wannan abokiyata ce,wannan abokina ne,this friend-my is; abokiyata (female friend) takes ce,2,ha-agent-v1;ipa=ha-g2p
+introductions.i-am-from,Ni daga {} ne,,ni daɡa {} ne,I from {} am,2,ha-agent-v1;ipa=ha-g2p
+introductions.where-are-you-from,Daga ina kake?,Daga ina kike?,daɡa ina kake,from where you-are(m); kike to a woman,2,ha-agent-v1;ipa=ha-g2p
+introductions.how-are-you,Kana lafiya?,Kina lafiya?,kana lafija,you-are(m) well?; kina to a woman -- the ordinary Hausa greeting,2,ha-agent-v1;ipa=ha-g2p
+introductions.i-am-a-tourist,Ni mai yawon shakatawa ne,,ni mai jawon ʃakatawa ne,I owner-of leisure-travel am,2,ha-agent-v1;ipa=ha-g2p
+introductions.this-is-my-husband-wife,Wannan mijina ne,Wannan matata ce,wannan midʒina ne,this husband-my is / this wife-my is,2,ha-agent-v1;ipa=ha-g2p
+introductions.this-is-my-daughter-son,Wannan diyata ce,Wannan dana ne,wannan dijata tʃe,this daughter-my is / this son-my is,2,ha-agent-v1;ipa=ha-g2p
+introductions.i-am-traveling-alone,Ina tafiya ni kadai,,ina tafija ni kadai,I-am traveling I alone,2,ha-agent-v1;ipa=ha-g2p

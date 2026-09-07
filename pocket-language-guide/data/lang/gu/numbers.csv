@@ -99,3 +99,5 @@ numbers-money.ringgit-symbol,રિંગિત (ચિહ્ન),,riṁgit (cih
 numbers-money.nepali-rupee,નેપાળી રૂપિયો,,,neːpaːɭi ɾuːpɪjoː,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
 numbers-money.nepali-rupee-symbol,નેપાળી રૂપિયો (ચિહ્ન),,,neːpaːɭi ɾuːpɪjoː cɪhnə,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
 numbers-money.birr,બિર,,bir,bɪɾ,,2,gu-currency-v1;cldr;ipa=espeak
+numbers-money.naira,નાઇજીરિયન નૈરા,,,naːɪɟiːɾɪjən nɛɾaː,,2,naira-gloss-v1;cldr;ipa=espeak
+numbers-money.naira-symbol,નાઇજીરિયન નૈરા (ચિહ્ન),,,naːɪɟiːɾɪjən nɛɾaː cɪhnə,naira (sign),2,naira-gloss-v1;cldr;ipa=espeak

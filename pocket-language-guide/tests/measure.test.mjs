@@ -111,6 +111,21 @@ test('a slash does not orphan a single letter', () => {
   assert.deepEqual(atoms('and/or', style()), ['and/', 'or']);
 });
 
+test('Khmer clusters hold together, so no line can open on a coeng', () => {
+  // Khmer is in `BREAKS_ANYWHERE` and had no entry in `NO_LINE_START`, so every
+  // codepoint was its own atom: ភ្នំពេញ measured as seven, and a line could open on
+  // U+17D2, the coeng, whose only job is to bind the consonant after it into a
+  // subscript -- which renders over a dotted circle when stranded. Nothing had
+  // noticed because no Khmer pack exists yet. Found by the Burmese survey.
+  const s = style({ stack: 'latin', wordBreak: 'dict' });
+  const phnom = atoms('ភ្នំពេញ', s);
+  assert(phnom.length < 7, `expected clusters, got ${phnom.length} atoms`);
+  for (const atom of phnom) {
+    assert(!/^[\u17B6-\u17D2\u17DD]/u.test(atom),
+      `atom starts with a Khmer mark: ${JSON.stringify(atom)}`);
+  }
+});
+
 test('a script that breaks anywhere still keeps a Latin word whole', () => {
   // `any` means between ideographs, kana and hangul -- not inside a romanisation
   // printed among them, which is what every reader-side note does.

@@ -1,0 +1,47 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+pronouns-verbs.i-me,ni,,ni,,2,ha-agent-v1;ipa=ha-g2p
+pronouns-verbs.we-us,mu,,mu,,2,ha-agent-v1;ipa=ha-g2p
+pronouns-verbs.you,kai,ke,kai,to a man; ke to a woman,2,ha-agent-v1;ipa=ha-g2p
+pronouns-verbs.you-polite,ku,,ku,"polite/plural you, to an elder or a stranger",2,ha-agent-v1;ipa=ha-g2p
+pronouns-verbs.he-him,shi,,ʃi,,2,ha-agent-v1;ipa=ha-g2p
+pronouns-verbs.she-her,ita,,ita,,2,ha-agent-v1;ipa=ha-g2p
+pronouns-verbs.they-them,su,,su,,2,ha-agent-v1;ipa=ha-g2p
+pronouns-verbs.my-mine,-na,-ta,na,"suffixed to a masculine-noun form: littafina, my book; -ta to a feminine-noun form: motata, my car",2,ha-agent-v1;ipa=ha-g2p
+pronouns-verbs.your-yours,-nka,-nki,nka,your (to a man); -nki to a woman -- both suffixed to a masculine-noun form,2,ha-agent-v1;ipa=ha-g2p
+pronouns-verbs.be-called-call,kira,ana kirana,kira,kira = to call; ana kirana = I am called,2,ha-agent-v1;ipa=ha-g2p
+pronouns-verbs.have,ina da,,ina da,I-am with (used with any pronoun: kana da = you have),2,ha-agent-v1;ipa=ha-g2p
+pronouns-verbs.do-not-have,ba ni da,,ba ni da,not I with (ba ka da = you do not have),2,ha-agent-v1;ipa=ha-g2p
+pronouns-verbs.go,tafi,,tafi,,2,ha-agent-v1;ipa=ha-g2p
+pronouns-verbs.come,zo,,zo,,2,ha-agent-v1;ipa=ha-g2p
+pronouns-verbs.would-like,ji so,,dʒi so,feel-want; ina jin so = I would like,2,ha-agent-v1;ipa=ha-g2p
+pronouns-verbs.want,so,,so,,2,ha-agent-v1;ipa=ha-g2p
+pronouns-verbs.look-for,nema,,nema,,2,ha-agent-v1;ipa=ha-g2p
+pronouns-verbs.buy,saya,,saja,,2,ha-agent-v1;ipa=ha-g2p
+pronouns-verbs.like,so,,so,same verb as want -- Hausa does not lexically separate them,2,ha-agent-v1;ipa=ha-g2p
+pronouns-verbs.need,bukata,,bukata,,2,ha-agent-v1;ipa=ha-g2p
+pronouns-verbs.there-is-have,akwai,,akwai,,2,ha-agent-v1;ipa=ha-g2p
+pronouns-verbs.there-is-not-do-not-have,babu,,babu,,2,ha-agent-v1;ipa=ha-g2p
+pronouns-verbs.want-to-verb,ina son…,,ina son,I want-to (+ a verbal noun),2,ha-agent-v1;ipa=ha-g2p
+pronouns-verbs.want-thing,ina son…,,ina son,I want (+ a noun) -- same construction as want-to-verb,2,ha-agent-v1;ipa=ha-g2p
+pronouns-verbs.need-thing,ina bukatar…,,ina bukatar,I need (+ a noun),2,ha-agent-v1;ipa=ha-g2p
+pronouns-verbs.looking-for-thing,ina neman…,,ina neman,I am looking for (+ a noun),2,ha-agent-v1;ipa=ha-g2p
+question-words.what,me,,me,,2,ha-agent-v1;ipa=ha-g2p
+question-words.where,ina,,ina,homophone of the 1st-person continuous marker; context tells them apart,2,ha-agent-v1;ipa=ha-g2p
+question-words.who,wa,,wa,,2,ha-agent-v1;ipa=ha-g2p
+question-words.which-one,wanne,wace,wanne,wace when the thing referred to is grammatically feminine,2,ha-agent-v1;ipa=ha-g2p
+question-words.when,yaushe,,jauʃe,,2,ha-agent-v1;ipa=ha-g2p
+question-words.how,yaya,,jaja,,2,ha-agent-v1;ipa=ha-g2p
+question-words.how-much-many,nawa,,nawa,,2,ha-agent-v1;ipa=ha-g2p
+question-words.how-many,nawa,,nawa,same word as how much -- Hausa does not distinguish,2,ha-agent-v1;ipa=ha-g2p
+question-words.why,don me,,don me,for what,2,ha-agent-v1;ipa=ha-g2p
+question-words.this,wannan,,wannan,,2,ha-agent-v1;ipa=ha-g2p
+question-words.that,wancan,,wantʃan,,2,ha-agent-v1;ipa=ha-g2p
+question-words.here,nan,,nan,,2,ha-agent-v1;ipa=ha-g2p
+question-words.there,can,,tʃan,,2,ha-agent-v1;ipa=ha-g2p
+question-words.a-little,kadan,,kadan,,2,ha-agent-v1;ipa=ha-g2p
+question-words.some,wasu,,wasu,,2,ha-agent-v1;ipa=ha-g2p
+question-words.very,sosai,,sosai,"postposed: mai kyau sosai, very good",2,ha-agent-v1;ipa=ha-g2p
+question-words.too,fiye da kima,,fije da kima,lit. more than due measure,2,ha-agent-v1;ipa=ha-g2p
+question-words.also,kuma,,kuma,,2,ha-agent-v1;ipa=ha-g2p
+question-words.all-both,duka,,duka,,2,ha-agent-v1;ipa=ha-g2p
+question-words.how-much-what-price,Nawa ne?,,nawa ne,how-much is (it),2,ha-agent-v1;ipa=ha-g2p

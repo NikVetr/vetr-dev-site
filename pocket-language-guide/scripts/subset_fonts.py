@@ -125,6 +125,30 @@ GURU_RANGES = [(0x0A00, 0x0A7F)]
 # Telugu's, Gurmukhi's and Gujarati's do -- and the nukta U+0CBC, which no Kannada
 # text uses and which `tmp/kn/write.py` asserts is absent from every cell.
 KNDA_RANGES = [(0x0C80, 0x0CFF)]
+# The whole Malayalam block, for Bengali's, Tamil's, Telugu's, Gurmukhi's,
+# Gujarati's and Kannada's reason and **two** of its own.
+#
+# Its conjuncts have **no codepoints at all**: ക്ക, ന്ന, ണ്ട, ത്ത, ല്ല, ങ്ങ, ഞ്ഞ,
+# മ്പ, ന്ത, സ്ഥ, ക്ഷ, ന്റ and the rest of a large inventory are reached only
+# through GSUB from the `C + ് + C` the corpus stores, which is why
+# `subset_source`'s `layout_features = ["*"]` is load-bearing here. And the
+# **traditional/reformed orthography split is a property of the face rather than of
+# the encoding** -- ക + ു is the same two codepoints either way, and whether it
+# prints as the fused traditional കു or as a detached reformed sign is decided by
+# whether the face has the ligature. Manjari has it; Noto does not. So the request
+# has to be the block whole rather than the letters the corpus happens to use today.
+#
+# 118 of the block's 128 codepoints are assigned (checked against `unicodedata`
+# rather than by eye) and Manjari carries all 118. That includes the digits
+# U+0D66..0D6F, which the pack does **not** print -- it writes ASCII, for Hindi's,
+# Tamil's, Telugu's, Gurmukhi's, Gujarati's and Kannada's usage reason -- and the
+# six **chillu** letters U+0D7A..0D7F, five of which the reader table emits on every
+# coda and the sixth (ൿ, chillu k) of which is archaic and banned from the pack by
+# `tmp/ml/write.py`. It also carries U+0D3B and U+0D3C, the two Unicode 9.0
+# alternate viramas, which no Malayalam text writes and which `tmp/ml/write.py` also
+# asserts absent: they are the marks Noto Sans Malayalam's 227 NULL MarkBasePos base
+# anchors belong to. See tmp/malayalam.md.
+MLYM_RANGES = [(0x0D00, 0x0D7F)]
 # The whole Gujarati block, for Bengali's, Tamil's, Telugu's and Gurmukhi's reason and
 # one of its own. Gujarati is Devanagari without the shirorekha and it forms the same
 # subjoined and ligated conjuncts -- ક્ત, દ્ધ, ષ્ટ, હ્ય, and the below-base ર of પ્ર --
@@ -396,6 +420,74 @@ FACES = {
     # See tmp/kannada.md.
     ("knda", 400, False): "NotoSansKannada-var.ttf",
     ("knda", 700, False): "NotoSansKannada-var.ttf",
+    # Malayalam, and **the first script in this corpus where *neither* half of the
+    # Noto pair can be shipped.** This is Kannada's finding exactly inverted.
+    #
+    # **Noto Sans Malayalam and Noto Serif Malayalam throw on `ക്` -- a single
+    # consonant plus a word-final chandrakkala -- which is how the majority of
+    # Malayalam consonant-final words are spelt.** Same crash as Telugu's,
+    # Gurmukhi's, Gujarati's and Noto Serif Kannada's: `getAnchor` reading
+    # `.xCoordinate` off a NULL MarkBasePos base anchor in `vendor/fontkit.esm.js`,
+    # which is a throw in `core/measure.js` rather than a bad glyph. Over the
+    # 61,704-akshara matrix (36 consonants x {no subjoined, each of the 36} x 15
+    # vowel signs x {bare, anusvara, visarga}, **plus a word-final chandrakkala on
+    # every stem**, plus the six chillu letters against every consonant in both
+    # orders) they throw on **52,001 and 51,967** -- 84% -- and `ഇഷ്ടം`, `ഉണ്ട്`
+    # and `ടിക്കറ്റ്` are all among them. Reading the anchor table out with
+    # fontTools names it: Noto Sans Malayalam has **227 NULL base anchors of 1,189**
+    # whose mark class is U+0D3B/U+0D3C (the two Unicode 9.0 alternate viramas) plus
+    # U+0952 and three Latin combining marks, and **Noto Serif Malayalam has a
+    # second NULL class whose mark list includes `viramamlym` itself** -- Kannada's
+    # `halant_kannada` in another script. The difference is that Malayalam *keeps* a
+    # bare chandrakkala on the surface where Kannada mostly fuses it, so what was a
+    # 26-sequence unwritable corner there is 84% of the script here.
+    #
+    # **So `mlym` is Manjari, and the argument is structural rather than
+    # statistical**: **0 NULL base anchors of 461/462**, so the `applyLookup` case-4
+    # path cannot be entered at all. 0 throws and 0 notdefs over the same 61,704
+    # aksharas and over all 93,312 double conjuncts (36^3, each also with a
+    # word-final chandrakkala). 118 of 118 assigned codepoints of U+0D00..0D7F, and
+    # **260** codepoints of U+0020..024F including the whole of ASCII, `·` U+00B7
+    # and `₹` -- so this is the Bengali case and needs no `LATIN_DONOR` graft. Real
+    # static Regular and Bold, so the pair needs no instancing: the fourth stack
+    # here of which that is true, after `arabic`, `telu` and `gujr`. OFL 1.1,
+    # "Copyright 2018 The Manjari Project Authors", **no Reserved Font Name**, from
+    # Swathanthra Malayalam Computing -- the face designed in Kerala. upem 2048,
+    # which is the first non-1000 upem shipped here and is handled generally:
+    # `core/measure.js` divides by `face.upem` and `render/pdf.js` by
+    # `shaper.unitsPerEm`.
+    #
+    # **Manjari also settles the orthography question, and it is a font question
+    # rather than an encoding one.** ക + ു is the same two codepoints in the
+    # traditional and the reformed orthography; which one prints depends on whether
+    # the face has the ligature. Measured over `കു കൂ രു ഗു ശു കൃ പ്ര`, one glyph
+    # against two: Manjari, Gayathri and Chilanka give **one** -- the fused
+    # traditional signs a Kerala street sign uses -- and Noto Sans/Serif/UI, Anek
+    # and Baloo Chettan 2 give two, the reformed detached signs a phone keyboard's
+    # default face draws. All nine ligate the common conjuncts (ക്ക ന്ന ണ്ട ത്ത
+    # ല്ല ങ്ങ ഞ്ഞ മ്പ ന്ത സ്ഥ ക്ഷ ന്റ), so that is not where the split lives.
+    #
+    # **There is no `mlym-serif`**, which is `telu`'s, `gujr`'s, `knda`'s and
+    # `arabic`'s shape: the only OFL Malayalam serif is Noto Serif Malayalam, which
+    # is the blocker above. `stackFor` in core/fonts.js falls back to the sans face
+    # for a variant that is not shipped.
+    #
+    # What was refused, and on what: **Gayathri** (0 NULLs, 0 throws, real Regular
+    # and Bold, 117 of 118 -- and refused on `·` U+00B7, which it does not carry and
+    # which `core/pack.js` joins the emergency numbers with, so it would be the
+    # third stack here to need a `LATIN_DONOR` graft. **It is the replacement if
+    # Manjari ever has to go**, and the graft is a solved problem); **Noto Sans
+    # Malayalam UI** (43 codepoints of U+0020..024F, no letter of either case and no
+    # `·` -- Gurmukhi's graft again, and no reason to pay it); **Anek Malayalam**
+    # (upem 2000, 194 Latin codepoints, 2 NULL anchors on Latin combining marks, and
+    # the same confusable-pair measurement its Telugu, Gurmukhi, Gujarati and
+    # Kannada siblings failed); **Chilanka** (single weight, so the theme's bold
+    # would print as regular, and a handwriting design besides); **Baloo Chettan 2**
+    # (a heavy rounded display design, and 100 of 118 codepoints -- it lacks both
+    # alternate viramas, three of the archaic chillu and the fraction signs).
+    # See tmp/malayalam.md.
+    ("mlym", 400, False): "Manjari-Regular.ttf",
+    ("mlym", 700, False): "Manjari-Bold.ttf",
     # Ethiopic, and **the first script here whose Noto pair needed no argument at
     # all.** The NULL MarkBasePos base-anchor defect that refused Noto for Telugu,
     # Gurmukhi and Gujarati cannot arise: Ethiopic has no mark to attach except the
@@ -683,7 +775,18 @@ ALL_LANGS = ["en", "es", "fr", "de", "ko", "ar", "zh-Hans", "ja",
              # brings `ā ī ē` plus the modifier letters `ʼ` U+02BC and `ʽ` U+02BD,
              # all four of which arrive through `LATIN_RANGES` at the top of this
              # file rather than through this union.
-             "am"]
+             "am",
+             # Malayalam. `MLYM_RANGES` below already requests the whole Malayalam
+             # block unconditionally for the `mlym` stack, so this entry in the
+             # `latin` union is only for Malayalam's `romanization_iso15919` and
+             # `ipa` columns, which the Latin faces draw on every pair, and for the
+             # four `note` rows that quote pinyin, Hepburn, Thai and Swahili in Latin
+             # plus the `B2 · BPK · bakso` pork-code row. Telugu's, Gujarati's and
+             # Kannada's shape exactly. The romanisation brings `ŭ` U+016D, ISO
+             # 15919's mark for the samvrutokaram, which no other pack writes; it
+             # arrives through `LATIN_RANGES` and both shipped Latin weights already
+             # carry it, checked.
+             "ml"]
 STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                "latin-serif": ALL_LANGS, "latin-cond-serif": ALL_LANGS,
                "cjk-sc": ["zh-Hans"], "cjk-sc-serif": ["zh-Hans"],
@@ -712,6 +815,7 @@ STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                "guru": ["pa"], "guru-serif": ["pa"],
                "gujr": ["gu"],
                "knda": ["kn"],
+               "mlym": ["ml"],
                "ethi": ["am"], "ethi-serif": ["am"],
                "hebrew": ["he"], "hebrew-serif": ["he"]}
 
@@ -823,6 +927,8 @@ def coverage(stack):
         chars |= expand(GURU_RANGES)
     elif stack.startswith("knda"):
         chars |= expand(KNDA_RANGES)
+    elif stack.startswith("mlym"):
+        chars |= expand(MLYM_RANGES)
     elif stack.startswith("ethi"):
         chars |= expand(ETHI_RANGES)
     elif stack.startswith("hebrew"):

@@ -323,6 +323,54 @@ that hits them rather than during it:
 - **`zh-Hant` is a variant, not a new script**, and the corpus already carries
   Traditional forms in `zh-Hans`'s `text_alt`. Whether it is a language or a
   presentation of one is a design decision, not a translation job.
-- **Khmer and Lao join Thai in needing dictionary word-breaking**, and Thai is
-  currently the only `word_break: dict` language. Whatever that mechanism actually
-  does should be read before two more languages depend on it.
+- ~~**Khmer and Lao join Thai in needing dictionary word-breaking**~~ — **read, and
+  the answer is that `word_break: dict` is a to-do rather than a feature.** A Burmese
+  survey traced it: `core/measure.js`'s `atoms()` has exactly one branch,
+  `if (wordBreak === 'space')`, so `dict` and `any` are the *same code*. No wordlist
+  ships, `Intl.Segmenter` is never constructed, and `'dict'` is compared in one place
+  in the whole tree — `core/solve/index.js:552`, which raises the
+  `no-dictionary-breaking` warning. **That warning is the only observable difference
+  between `dict` and `any` anywhere in the app**, and `core/respell.js` never reads
+  `word_break` at all.
+
+  It also does *not* uniformly "degrade to `any`", because `wordish` excludes only the
+  scripts in `BREAKS_ANYWHERE` (Han, kana, hangul, Thai, Khmer) and the glue clause
+  welds every adjacent `wordish` pair. Measured with the real measurer: Thai breaks
+  between clusters and works; **Khmer broke into one atom per codepoint** because it
+  is in `BREAKS_ANYWHERE` and had no cluster glue; Lao and Myanmar are in neither, so
+  each run is one unbreakable atom. For Burmese that means a real sentence is a single
+  16.9em atom against `rowsplit.js`'s 0.6 cap, overflowing by 27—64%.
+
+  **The Khmer half of that was a live latent defect and is now fixed**, with a
+  regression test that fails without it: a line could open on a bare coeng (U+17D2),
+  whose only job is to bind the consonant after it, which renders over a dotted
+  circle. It would have shipped broken the day a `km` pack existed.
+
+  Read-across for the rest of the batch, measured rather than assumed: **Lao is
+  Thai's case** — fontkit and HarfBuzz agree to four decimal places, because both
+  store pre-base vowels in visual order and need no reordering. **Khmer is a font
+  hunt** — Noto Sans Khmer holds 385 NULL anchors and throws on `ភ្នំពេញ` and
+  `ខ្ញុំ`.
+
+- **Burmese is blocked, and not by anything in this repo.** `mymr`/`mym2` are absent
+  from fontkit's script-to-shaper map — in the vendored bundle, in
+  `@pdf-lib/fontkit` 1.1.1's own dist, **and in `foliojs/fontkit@master`** — so
+  Burmese falls to the *Default* shaper: no subjoined consonants, no kinzi, and the
+  pre-base vowel `ေ` drawn on the wrong side of its consonant. fontkit over-measures
+  real Burmese by up to **64.6%** against HarfBuzz, so the preview would draw correct
+  text at a width the solver never measured while the PDF drew the wrong glyphs.
+  Every escape was tried and failed: requesting `blws` by hand OOMs at 4 GB, the
+  Indic shaper does not stack, and the Universal shaper reorders correctly but emits
+  a dotted circle on the kinzi, so `မင်္ဂလာပါ` prints an error glyph. Unlike Urdu's
+  Nastaliq refusal there is no fallback script, so this closes the language until
+  fontkit gains a Myanmar shaper or the project gains a second shaper for the PDF
+  path. **No pack was written**, on the stated grounds that 769 rows of unreviewable
+  Burmese for a language that cannot be printed is 769 rows that *look* reviewed.
+
+- **And the sharpest font-testing lesson of all, from the same survey: a clean cube
+  can be clean for the wrong reason.** All seven candidate Myanmar faces shaped all
+  152,976 cube clusters and a 150,752-sequence exhaustive block probe with **zero
+  throws** — *because the Default shaper never produces the `.sub` glyphs the NULL
+  anchors belong to*. The cube was clean because the language was broken. So a
+  zero-throw result is only evidence when you have separately confirmed that the
+  shaper being exercised is the one the script actually needs.

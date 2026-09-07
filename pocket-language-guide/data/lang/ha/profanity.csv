@@ -1,0 +1,9 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+profanity.oh-my-god,Ya Allah!,,ja allah,,1,ha-agent-v1;ipa=ha-g2p
+profanity.damn,Kaico!,,kaitʃo,"alas/what a pity -- a mild curse at a situation, never at a person",1,ha-agent-v1;ipa=ha-g2p
+profanity.expletive,Kashi!,,kaʃi,"scatological, like most packs in this section",1,ha-agent-v1;ipa=ha-g2p
+profanity.frustration,Wannan banza ne,,wannan banza ne,this is worthless/nonsense,1,ha-agent-v1;ipa=ha-g2p
+profanity.thats-rude,Wannan rashin ladabi ne,,wannan raʃin ladabi ne,this is a lack of manners,1,ha-agent-v1;ipa=ha-g2p
+profanity.excuse-my-language,Yi hakuri kan maganata,,ji hakuri kan maɡanata,forgive me regarding my words,1,ha-agent-v1;ipa=ha-g2p
+profanity.strength-warning,"Wadannan layuka don ganewa ne, ba don amfani ba: karfin kalmar zagi ba ya wucewa lokacin fassara. Kalmar da take bayyana a nan a matsayin zagi mai sauki za ta iya zama abin da ba za a iya fadi ba a harshen da ke kusa da ita, kuma mafi karfin zagin wata harshe sau da yawa shi ne wanda wannan sashe ya kasa hadawa.",,,,1,ha-notes-v1
+profanity.japanese-register,"Harshen Japananci ba ya yin haka da kalmomi. Raini yana zuwa ne ta hanyar nahawu: karin magana na mutum na biyu mai taurin murya, umarni maras kwalliya, da siffofin aikatau gajarce. Fushi yana cikin karshen kalmar, ba a wata kalma da za a nema a kamus ba, kuma layukan da ke sama sun kunshi kusan dukan kalmomin da ake da su.",,,,1,ha-notes-v1

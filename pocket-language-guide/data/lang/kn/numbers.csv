@@ -99,3 +99,5 @@ atm-cash.bank,ಬ್ಯಾಂಕ್,,byāṁk,bjaːŋk,,2,"Kittel, A Kannada-Eng
 atm-cash.money-exchange,ಹಣ ವಿನಿಮಯ,,haṇa vinimaya,haɳa vinimaja,,2,"Kittel, A Kannada-English Dictionary (DSAL); Univ. of Madras Kannada-English Dictionary (DSAL);ipa=espeak"
 atm-cash.pin,ಪಿನ್,PIN,pin,pin,,2,"Kittel, A Kannada-English Dictionary (DSAL); Univ. of Madras Kannada-English Dictionary (DSAL);ipa=espeak"
 numbers-money.birr,ಬಿರ್,,bir,bir,,2,Kannada name of the currency as written in Karnataka newspapers and in CLDR kn currency data;ipa=espeak
+numbers-money.naira,ನೈಜೀರಿಯಾದ ನೇರಾ,,,naɪɟiːrijaːda neːraː,,2,naira-gloss-v1;cldr;ipa=espeak
+numbers-money.naira-symbol,ನೈಜೀರಿಯಾದ ನೇರಾ ಚಿಹ್ನೆ,,,naɪɟiːrijaːda neːraː cihne,naira (abbreviation),2,naira-gloss-v1;cldr;ipa=espeak

@@ -22,6 +22,11 @@
  "phonemes": [
   {
    "slot": "any",
+   "ipa": "ʼ",
+   "out": ""
+  },
+  {
+   "slot": "any",
    "ipa": "b",
    "out": "ብ"
   },

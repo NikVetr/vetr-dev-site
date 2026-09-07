@@ -1,0 +1,8 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,Ina zan iya sayan tikiti?,,ina zan ija sajan tikiti,,2,ha-agent-v1;ipa=ha-g2p
+attractions-tickets.do-i-need-a-reservation,Ina bukatar yin ajiya?,,ina bukatar jin adʒija,,2,ha-agent-v1;ipa=ha-g2p
+attractions-tickets.what-is-the-latest-entry-time,Mece ce lokacin karshe na shiga?,,metʃe tʃe lokatʃin karʃe na ʃiɡa,,2,ha-agent-v1;ipa=ha-g2p
+attractions-tickets.are-there-lockers,Akwai akwatunan ajiya?,,akwai akwatunan adʒija,storage boxes,2,ha-agent-v1;ipa=ha-g2p
+attractions-tickets.may-i-take-photos,Zan iya daukar hotuna?,,zan ija daukar hotuna,,2,ha-agent-v1;ipa=ha-g2p
+attractions-tickets.please-take-a-photo-of-us,Don Allah ku dauki hotonmu,,don allah ku dauki hotonmu,,2,ha-agent-v1;ipa=ha-g2p
+attractions-tickets.could-you-take-a-photo-for-us,Za ku iya daukar mana hoto?,,za ku ija daukar mana hoto,,2,ha-agent-v1;ipa=ha-g2p

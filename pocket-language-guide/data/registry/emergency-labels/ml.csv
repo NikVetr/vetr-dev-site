@@ -1,0 +1,12 @@
+label,text
+_frame,{region}: {numbers}
+all services,എല്ലാ അത്യാഹിത സേവനങ്ങളും
+police,പോലീസ്
+ambulance,ആംബുലൻസ്
+fire,അഗ്നിശമനം
+also works,ഇതും പ്രവർത്തിക്കും
+fire and ambulance,അഗ്നിശമനം + ആംബുലൻസ്
+medical,വൈദ്യസഹായം
+tourist police,ടൂറിസ്റ്റ് പോലീസ്
+police and ambulance,പോലീസ് + ആംബുലൻസ്
+gendarmerie,ഗ്രാമീണ പോലീസ്

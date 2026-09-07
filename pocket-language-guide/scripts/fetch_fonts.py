@@ -289,6 +289,42 @@ SOURCES = {
     # case. See tmp/kannada.md.
     "NotoSansKannada-var.ttf":
         f"{GFONTS}/notosanskannada/NotoSansKannada%5Bwdth,wght%5D.ttf",
+    # Malayalam, and **the first script here where neither half of the Noto pair can
+    # be shipped.** Kannada's finding inverted: Noto Sans Malayalam and Noto Serif
+    # Malayalam both throw in `vendor/fontkit.esm.js` on `ക്`, a single consonant
+    # plus a word-final chandrakkala, which is how most Malayalam consonant-final
+    # words are spelt -- 52,001 and 51,967 throws of the 61,704 aksharas
+    # `tmp/ml/shapecheck.mjs` lays through it. `tmp/ml/nullanchors.py` names the
+    # cause: 227 NULL MarkBasePos base anchors of 1,189 in the sans, and a second
+    # NULL class in the serif whose mark list includes `viramamlym` itself.
+    #
+    #   Manjari (Regular + Bold)       0 throws     0 NULL base anchors of 461/462
+    #   Gayathri (Regular + Bold)      0 throws     0 of   614   <- no `·` U+00B7
+    #   Chilanka (Regular)             0 throws     0 of   107   <- single weight
+    #   Noto Sans Malayalam UI         0 throws     0 of   205   <- 43 Latin cps
+    #   Anek Malayalam                 0 throws     2 of   126   <- upem 2000
+    #   Baloo Chettan 2                0 throws     0 of     0   <- 100/118 cps
+    #   Noto Sans Malayalam       52,001 throws   227 of 1,189
+    #   Noto Serif Malayalam      51,967 throws   392 of 1,302
+    #
+    # **Manjari** (Swathanthra Malayalam Computing, OFL 1.1, "Copyright 2018 The
+    # Manjari Project Authors", **no Reserved Font Name**, so a subset needs no
+    # rename) covers all 118 assigned codepoints of U+0D00..0D7F and **260** of
+    # U+0020..024F including the whole of ASCII, `·` and `₹` -- the Bengali case, no
+    # `LATIN_DONOR` graft. Real static Regular and Bold, so no instancing. It also
+    # draws the **traditional** orthography, which is a font property rather than an
+    # encoding one: measured over `കു കൂ രു ഗു ശു കൃ പ്ര`, Manjari, Gayathri and
+    # Chilanka return one glyph (the fused traditional signs a Kerala street sign
+    # uses) and the Noto, Anek and Baloo faces return two (the reformed detached
+    # signs). upem 2048, handled generally by `core/measure.js` and `render/pdf.js`.
+    #
+    # Gayathri is fetched as the recorded replacement -- it is Manjari's equal on
+    # every count except `·` U+00B7, which it lacks and which `core/pack.js` joins
+    # the emergency numbers with, so it would need the graft Gurmukhi pays. There is
+    # **no `mlym-serif`**: the only OFL Malayalam serif is the blocker above.
+    # See tmp/malayalam.md.
+    "Manjari-Regular.ttf": f"{GFONTS}/manjari/Manjari-Regular.ttf",
+    "Manjari-Bold.ttf": f"{GFONTS}/manjari/Manjari-Bold.ttf",
     # Klingon pIqaD and Tengwar, which no Noto face has and which are not in Unicode
     # at all -- they are Private Use Area allocations from the ConScript Unicode
     # Registry, U+F8D0..U+F8FF and U+E000..U+E07F. Constructium is a fork of SIL

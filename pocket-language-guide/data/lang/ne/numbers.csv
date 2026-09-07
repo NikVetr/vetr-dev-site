@@ -99,3 +99,5 @@ numbers-money.krona-symbol,क्रोना चिह्न,,krōnā cihna,kɾ
 numbers-money.nepali-rupee,रुपैयाँ,,rupaiyām̐,ɾupˈɛːjã,Nepal's own currency (NPR),2,ne-agent-v1;ipa=espeak
 numbers-money.nepali-rupee-symbol,रु,,ru,ɾˈu,"as printed on a Nepali price, before the number",2,ne-agent-v1;ipa=espeak
 numbers-money.birr,बिर,,bir,bˈɪɾə,,2,ne-agent-v1;ipa=espeak
+numbers-money.naira,नाइजेरियन नाइरा,,,nˌaːɪɟˈeːɾɪjˌən nˈaːɪɾˌaː,,2,naira-gloss-v1;cldr;ipa=espeak
+numbers-money.naira-symbol,नाइजेरियन नाइरा चिह्न,,,nˌaːɪɟˈeːɾɪjˌən nˈaːɪɾˌaː cˈɪhnə,,2,naira-gloss-v1;cldr;ipa=espeak

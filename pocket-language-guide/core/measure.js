@@ -53,22 +53,37 @@ const IN_WORD = '-:./,';
 // Minimal kinsoku: never strand closing punctuation at the start of a line, and
 // never leave an opening bracket dangling at the end of one.
 //
-// The Thai and Lao entries are doing something different from the CJK ones. Those
-// two scripts want dictionary line breaking, which is not implemented, so a line
-// may break between any two characters -- but breaking *inside* a character cluster
-// is not merely a poor word division, it is broken text: a tone mark or a vowel
-// orphaned at the start of a line renders over a dotted circle, and a leading vowel
-// left at the end of one is separated from the consonant it is pronounced after.
-// Gluing the combining marks and the spacing vowels to the consonant they belong to
-// is the cheap core of a Thai character cluster segmenter, and it costs one string.
+// The Thai and Khmer entries are doing something different from the CJK ones —and
+// the comment here used to say "Thai and Lao", which was wrong twice: Lao is in
+// neither `BREAKS_ANYWHERE` nor this set, and Khmer is in both. Those two scripts
+// want dictionary line breaking, which is not implemented, so a line may break
+// between any two characters —but breaking *inside* a character cluster is not
+// merely a poor word division, it is broken text: a tone mark or a vowel orphaned at
+// the start of a line renders over a dotted circle, and a leading vowel left at the
+// end of one is separated from the consonant it is pronounced after. Gluing the
+// combining marks and the spacing vowels to the consonant they belong to is the cheap
+// core of a character cluster segmenter, and it costs one string.
+//
+// **Khmer's half was missing until a Burmese survey went looking for it.** Khmer is
+// in `BREAKS_ANYWHERE` but had no marks here, so `ភ្នំពេញ` measured as *seven* atoms, one
+// per codepoint, and a line could open on a bare coeng — U+17D2, whose whole job is
+// to bind the consonant after it into a subscript. Nothing had noticed because no
+// Khmer pack exists yet; it would have shipped broken on the day one did.
 const THAI_MARKS = '\u0E31\u0E33\u0E34\u0E35\u0E36\u0E37\u0E38\u0E39\u0E3A'
   + '\u0E47\u0E48\u0E49\u0E4A\u0E4B\u0E4C\u0E4D\u0E4E\u0E30\u0E32\u0E45\u0E46';
+// Dependent vowels U+17B6..17C5, the signs U+17C6..17D1 and U+17DD, and the coeng
+// U+17D2. The coeng matters most: it is a prefix to the consonant it subscripts, so
+// it can neither end a line nor start one, and it appears in both sets below.
+const KHMER_MARKS = '\u17B6\u17B7\u17B8\u17B9\u17BA\u17BB\u17BC\u17BD\u17BE\u17BF'
+  + '\u17C0\u17C1\u17C2\u17C3\u17C4\u17C5\u17C6\u17C7\u17C8\u17C9\u17CA\u17CB'
+  + '\u17CC\u17CD\u17CE\u17CF\u17D0\u17D1\u17D2\u17DD';
 const THAI_LEAD_VOWELS = '\u0E40\u0E41\u0E42\u0E43\u0E44';
+const KHMER_LEAD = '\u17D2';
 // The ASCII brackets are here for the same reason the full-width ones are: notes
 // gloss a romanisation parenthetically -- `-mai (flat things)` -- and in an
 // any-breaking script a bare `)` would otherwise be free to open a line.
-const NO_LINE_START = `、。，．：；？！）」』》＞…)]}${THAI_MARKS}`;
-const NO_LINE_END = `（「『《＜([{${THAI_LEAD_VOWELS}`;
+const NO_LINE_START = `、。，．：；？！）」』》＞…)]}${THAI_MARKS}${KHMER_MARKS}`;
+const NO_LINE_END = `（「『《＜([{${THAI_LEAD_VOWELS}${KHMER_LEAD}`;
 
 /**
  * A unit of text that never splits. `w` includes any trailing space; `inkW` is

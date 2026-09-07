@@ -1,0 +1,16 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,Ina son zuwa {},,ina son zuwa {},,2,ha-agent-v1;ipa=ha-g2p
+utility-templates.please-give-me,Don Allah ku ba ni {},,don allah ku ba ni {},,2,ha-agent-v1;ipa=ha-g2p
+utility-templates.may-i,Zan iya {}?,,zan ija {},,2,ha-agent-v1;ipa=ha-g2p
+utility-templates.please-do-not-add,Don Allah kada ku sa {},,don allah kada ku sa {},,2,ha-agent-v1;ipa=ha-g2p
+utility-templates.do-you-have,Kuna da {}?,,kuna da {},,2,ha-agent-v1;ipa=ha-g2p
+utility-templates.please-write-the-number,Don Allah ku rubuta lambar,,don allah ku rubuta lambar,,2,ha-agent-v1;ipa=ha-g2p
+utility-templates.i-need,Ina bukatar {},,ina bukatar {},,2,ha-agent-v1;ipa=ha-g2p
+utility-templates.is-there-nearby,Akwai {} kusa da nan?,,akwai {} kusa da nan,,2,ha-agent-v1;ipa=ha-g2p
+utility-templates.how-much-is,Nawa ne {}?,,nawa ne {},,2,ha-agent-v1;ipa=ha-g2p
+utility-templates.is-this,Wannan {} ne?,,wannan {} ne,,2,ha-agent-v1;ipa=ha-g2p
+utility-templates.please,"{}, don Allah",,"{}, don allah",,2,ha-agent-v1;ipa=ha-g2p
+utility-templates.i-am-looking-for,Ina neman {},,ina neman {},,2,ha-agent-v1;ipa=ha-g2p
+utility-templates.do-you-accept,Kuna karban {}?,,kuna karban {},,2,ha-agent-v1;ipa=ha-g2p
+utility-templates.i-cannot-find,Ba na iya samun {} ba,,ba na ija samun {} ba,,2,ha-agent-v1;ipa=ha-g2p
+utility-templates.there-is-a-problem-with,Akwai matsala da {},,akwai matsʼala da {},,2,ha-agent-v1;ipa=ha-g2p
