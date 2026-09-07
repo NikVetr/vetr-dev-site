@@ -431,8 +431,11 @@ layout: null
             <div>
               <h3>Prediction drivers <button class="info-tooltip" type="button" aria-label="About prediction drivers" data-tooltip="Contributions relative to training-center numeric inputs, centered categories, and Functional overlap for EA. Percent effects combine multiplicatively. Kernel models allocate interactions using Shapley values. These are associations.">?</button></h3>
               <p id="model-driver-reference" class="field-description"></p>
-              <button id="model-joint-drivers" class="text-button" type="button">Joint uncertainty ↗</button>
               <div id="model-contributions" class="model-contributions"></div>
+              <div id="model-driver-joint" hidden>
+                <button id="model-joint-drivers" class="text-button" type="button" title="Pearson correlations among this profile’s driver effects">Joint uncertainty ↗</button>
+                <div id="model-joint-preview"></div>
+              </div>
             </div>
           </div>
           <p id="model-limitations" class="model-limitations"></p>

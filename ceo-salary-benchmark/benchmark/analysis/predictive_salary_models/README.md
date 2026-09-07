@@ -119,7 +119,9 @@ GP quantile intervals propagate conditional latent-function variance, holding ke
 
 Numeric driver contrasts compare the profile with training-center inputs, preserving other settings; categorical contrasts use centered effects, with Functional overlap the EA reference. Additive curves subtract their value at the reference. Kernel interactions use exact Shapley allocations across numeric features; GP intervals use joint conditional covariance of the coalition predictions. Percent effects are 100(exp(log contrast)-1) and multiply rather than add.
 
-Clicking a driver shows a forest plot in log or percent units, for the selected model or all variants. Omitted predictors are labeled “Not included.” Contrasts use each fitted model’s own training reference; they are not directly comparable raw coefficients. Category plots preserve joint posterior draws. A fractional focus profile contributes sum_l weight_l a_l on the log scale. Weights must be nonnegative and sum to 100%; this is a declared additive interpolation, not estimated RP team shares. “Average category effect” is the unweighted centered effect across levels.
+A square Pearson heatmap beneath the drivers summarizes their joint uncertainty at the selected profile, in the selected log or percent units. The grid aligns with the bar tracks; axis labels sit on the left and bottom. The Joint uncertainty link opens the full pairs/correlation explorer.
+
+Clicking a driver shows a forest plot in log or percent units, for all variants, with the selected model outlined and its labels bold. Omitted predictors are labeled “Not included.” Contrasts use each fitted model’s own training reference; they are not directly comparable raw coefficients. Category plots preserve joint posterior draws. A fractional focus profile contributes sum_l weight_l a_l on the log scale. Weights must be nonnegative and sum to 100%; this is a declared additive interpolation, not estimated RP team shares. “Average category effect” is the unweighted centered effect across levels.
 
 ## Reproduction and artifact contract
 

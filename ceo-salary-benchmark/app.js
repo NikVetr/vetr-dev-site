@@ -3413,6 +3413,8 @@
   function renderModelContributions(prediction) {
     refs.modelContributions.replaceChildren();
     $("#model-joint-drivers").disabled = !prediction.contributions.length;
+    $("#model-driver-joint").hidden = !prediction.contributions.length;
+    $("#model-joint-preview").replaceChildren();
     $("#model-driver-reference").textContent = "";
     if (!prediction.contributions.length) {
       const note = document.createElement("p");
@@ -3444,6 +3446,14 @@
       track.append(value);
       row.append(label, track); refs.modelContributions.append(row);
     });
+    const { columns, count } = jointDriverColumns(prediction);
+    const shortLabels = { "Non-CEO highest base pay (40h)": "Other pay", "Effective Altruism": "EA", "Organization type": "Org type",
+      "Title group": "Title", "CEO hiring market": "Market", "Work model": "Work", "Fiscal sponsor": "Sponsor", "Focus area": "Focus" };
+    RelationshipPlots.compactHeatmap($("#model-joint-preview"), {
+      columns: columns.map((column) => ({ ...column, shortLabel: shortLabels[column.label] || column.label })),
+      getPair: (x, y) => Array.from({ length: count }, (_, i) => ({ x: effectValue(x.draws.length === 1 ? x.draws[0] : x.draws[i]),
+        y: effectValue(y.draws.length === 1 ? y.draws[0] : y.draws[i]), weight: 1 })),
+    });
   }
 
   function formatModelEffect(value) {
@@ -3457,21 +3467,14 @@
     $("#model-explanation-dialog").showModal();
   }
 
-  function showDriverExplanation(prediction, item, allModels = false) {
+  function showDriverExplanation(prediction, item) {
     const content = $("#model-explanation-content");
     $("#model-explanation-title").textContent = `${item.label}: model contribution`;
     content.replaceChildren();
-    const toggle = resultElement("label", "model-driver-scope");
-    const checkbox = document.createElement("input"); checkbox.type = "checkbox"; checkbox.id = "model-driver-all-models"; checkbox.checked = allModels;
-    checkbox.addEventListener("change", () => {
-      showDriverExplanation(prediction, item, checkbox.checked);
-      $("#model-driver-all-models").focus({ preventScroll: true });
-    });
-    toggle.append(checkbox, "Compare all models");
     const actions = resultElement("div", "driver-view-actions");
     const joint = resultElement("button", "text-button", "Joint uncertainty ↗"); joint.type = "button";
     joint.addEventListener("click", () => showJointDrivers(prediction, item));
-    actions.append(toggle, joint); content.append(actions);
+    actions.append(joint); content.append(actions);
     const categorySpecs = {
       "Focus area": ["focus", "focus_area"], "Effective Altruism": ["ea", "ea_relationship"],
       "Organization type": ["organizationType", "organization_type"], "Title group": ["title", "title_group"],
@@ -3485,83 +3488,79 @@
       low: normal ? normal.mean + SalaryModelMath.normalQuantile(tail) * normal.sd : sampleQuantile(draws, tail),
       high: normal ? normal.mean + SalaryModelMath.normalQuantile(1 - tail) * normal.sd : sampleQuantile(draws, 1 - tail),
     });
-    const drawsForCategory = spec && categoryDraws(prediction.model, spec[0]);
-    let entries = drawsForCategory
-      ? modelCategoryLevels(spec[1]).map((label, j) => summary(label, drawsForCategory.map((draw) => draw[j])))
-      : [summary("Selected profile contrast", item.draws, item.normal)];
-    if (spec) entries.unshift(summary("Selected profile contrast", item.draws));
     const omittedModels = [];
-    if (allModels) {
-      const comparisons = PREDICTIVE_MODEL.comparison.map((row) => ({ row,
-        prediction: withModelComparison(row, currentModelPrediction),
-        modelLabel: `${modelFamilyLabel(row)} · base only ${row.baseOnly ? "✓" : "—"} · cats ${row.includeCategories ? "✓" : "—"} · other ${row.includeHighestOtherPay ? "✓" : "—"} · ads ${row.includeAdvertisedRanges ? "✓" : "—"}`,
-      }));
-      const effects = ["Selected profile contrast", ...(spec ? modelCategoryLevels(spec[1]) : [])];
-      entries = effects.flatMap((label, level) => comparisons.flatMap(({ row, prediction: other, modelLabel }) => {
-        const model = PREDICTIVE_MODEL.models[row.modelKey];
-        const category = spec && categoryDraws(model, spec[0]);
-        if (spec && !category) {
-          if (!level) omittedModels.push(row.method === "gam" ? "GAM · numeric" : modelFamilyLabel(row));
-          return [];
-        }
-        const contribution = level ? { draws: category.map((draw) => draw[level - 1]) }
-          : other?.contributions.find((candidate) => candidate.label === item.label);
-        return [{ ...(contribution ? summary(label, contribution.draws, contribution.normal)
-          : { label, unavailable: other ? "Not included" : "Invalid profile" }), key: row.key, modelLabel, color: MODEL_FAMILY_COLORS[row.method] }];
-      }));
-    }
+    const comparisons = PREDICTIVE_MODEL.comparison.map((row) => ({ row,
+      prediction: withModelComparison(row, currentModelPrediction),
+      modelLabel: `${modelFamilyLabel(row)} · base only ${row.baseOnly ? "✓" : "—"} · cats ${row.includeCategories ? "✓" : "—"} · other ${row.includeHighestOtherPay ? "✓" : "—"} · ads ${row.includeAdvertisedRanges ? "✓" : "—"}`,
+    }));
+    const effects = ["Selected profile contrast", ...(spec ? modelCategoryLevels(spec[1]) : [])];
+    const entries = effects.flatMap((label, level) => comparisons.flatMap(({ row, prediction: other, modelLabel }) => {
+      const model = PREDICTIVE_MODEL.models[row.modelKey];
+      const category = spec && categoryDraws(model, spec[0]);
+      if (spec && !category) {
+        if (!level) omittedModels.push(row.method === "gam" ? "GAM · numeric" : modelFamilyLabel(row));
+        return [];
+      }
+      const contribution = level ? { draws: category.map((draw) => draw[level - 1]) }
+        : other?.contributions.find((candidate) => candidate.label === item.label);
+      return [{ ...(contribution ? summary(label, contribution.draws, contribution.normal)
+        : { label, unavailable: other ? "Not included" : "Invalid profile" }), key: row.key, modelLabel, color: MODEL_FAMILY_COLORS[row.method] }];
+    }));
     const note = document.createElement("p");
-    note.textContent = allModels ? `${state.modelCompatibilityLevel}% intervals for ${spec ? "every category and the selected profile" : "the selected profile"}, relative to each model’s training reference. Bayesian/GP intervals are credible; other methods use approximate compatibility intervals. Effects are associations.` : `${state.modelCompatibilityLevel}% ${isBayesianMethod() ? "posterior credible" : state.modelMethod === "gp" ? "conditional GP credible" : "approximate compatibility"} intervals for the log-salary contrast${state.modelEffectUnits === "percent" ? ", transformed to percent salary effects" : ""}. Reference: numeric training geometric means; centered categories at zero; Functional overlap for EA. These are associations, not causal effects.`;
+    note.textContent = `${state.modelCompatibilityLevel}% intervals for ${spec ? "every category and the selected profile" : "the selected profile"}, relative to each model’s training reference. Bayesian/GP intervals are credible; other methods use approximate compatibility intervals. Effects are associations.`;
     content.append(note);
-    if (allModels) content.append(resultElement("p", "", "Color identifies model family; bold marks the selected model."));
+    content.append(resultElement("p", "", "Color identifies model family; outlines mark the selected model."));
     if (omittedModels.length) content.append(resultElement("p", "", `Not included in: ${[...new Set(omittedModels)].join(", ")}.`));
     const transform = (value) => state.modelEffectUnits === "percent" ? Math.expm1(value) * 100 : value;
     const bounds = entries.filter((entry) => !entry.unavailable).flatMap((entry) => [transform(entry.low), transform(entry.high), 0]);
     let low = Math.min(...bounds); let high = Math.max(...bounds);
     const padding = Math.max((high - low) * .1, state.modelEffectUnits === "percent" ? 1 : .01);
     low -= padding; high += padding;
-    const width = allModels ? 1400 : 1060;
-    const labelWidth = 285; const plotWidth = allModels ? 360 : 420;
+    const width = 1400;
+    const labelWidth = 285; const plotWidth = 360;
     const modelX = labelWidth + plotWidth + 25;
-    const valueX = allModels ? 1135 : labelWidth + plotWidth + 25;
-    let nextY = allModels ? 65 : 32;
+    const valueX = 1135;
+    let nextY = 65;
     entries.forEach((entry, i) => {
-      if (allModels && i && entry.label !== entries[i - 1].label) nextY += 24;
+      if (i && entry.label !== entries[i - 1].label) nextY += 24;
       entry.y = nextY;
-      nextY += allModels ? 32 : 48;
+      nextY += 32;
     });
     const height = nextY + 60;
     const x = (value) => labelWidth + (transform(value) - low) / (high - low) * plotWidth;
     const svg = svgElement("svg", { viewBox: `0 0 ${width} ${height}`, role: "img", "aria-label": `${item.label} effect forest plot`, class: "model-effect-figure" });
     const zero = x(0);
-    svg.append(svgElement("line", { x1: zero, x2: zero, y1: allModels ? 42 : 12, y2: height - 60, stroke: "#a9b7bd", "stroke-dasharray": "4 4" }));
-    if (allModels) [[15, "Effect"], [modelX, "Model / variant"], [valueX, `Estimate [${state.modelCompatibilityLevel}% interval]`]].forEach(([x, title]) => {
+    svg.append(svgElement("line", { x1: zero, x2: zero, y1: 42, y2: height - 60, stroke: "#a9b7bd", "stroke-dasharray": "4 4" }));
+    [[15, "Effect"], [modelX, "Model / variant"], [valueX, `Estimate [${state.modelCompatibilityLevel}% interval]`]].forEach(([x, title]) => {
       const heading = svgElement("text", { x, y: 22, "font-size": 14, "font-weight": 700 }); heading.textContent = title; svg.append(heading);
     });
     entries.forEach((entry, i) => {
       const y = entry.y;
-      const row = svgElement("g", { class: "model-effect-row", "data-effect": entry.label, "data-model-key": entry.key || prediction.methodKey });
+      const selected = entry.key === prediction.methodKey;
+      const row = svgElement("g", { class: `model-effect-row${selected ? " is-selected" : ""}`, "data-effect": entry.label, "data-model-key": entry.key || prediction.methodKey });
+      if (selected) row.append(svgElement("rect", { x: labelWidth - 10, y: y - 15, width: width - labelWidth - 5, height: 30,
+        rx: 4, fill: "none", stroke: "#253b42", "stroke-width": 1.5, class: "model-effect-selection" }));
       const firstInGroup = !i || entry.label !== entries[i - 1].label;
-      if (!allModels || firstInGroup) {
+      if (firstInGroup) {
         const label = svgElement("text", { x: labelWidth - 15, y: y + 5, "text-anchor": "end", "font-size": 14, class: "model-effect-name" });
         label.textContent = entry.label; row.append(label);
-        if (allModels && i) row.append(svgElement("line", { x1: 15, x2: width - 15, y1: y - 28, y2: y - 28, stroke: "#dbe5e8" }));
+        if (i) row.append(svgElement("line", { x1: 15, x2: width - 15, y1: y - 28, y2: y - 28, stroke: "#dbe5e8" }));
       }
-      if (allModels) {
-        row.append(svgElement("rect", { x: modelX - 11, y: y - 8, width: 4, height: 14, fill: entry.color }));
-        const modelLabel = svgElement("text", { x: modelX, y: y + 5, "font-size": 13, class: "model-effect-model" });
-        modelLabel.textContent = entry.modelLabel;
-        if (entry.key === prediction.methodKey) modelLabel.setAttribute("font-weight", "bold");
-        row.append(modelLabel);
-      }
+      row.append(svgElement("rect", { x: modelX - 11, y: y - 8, width: 4, height: 14, fill: entry.color }));
+      const modelLabel = svgElement("text", { x: modelX, y: y + 5, "font-size": 13, class: "model-effect-model" });
+      modelLabel.textContent = entry.modelLabel;
+      if (entry.key === prediction.methodKey) modelLabel.setAttribute("font-weight", "bold");
+      row.append(modelLabel);
       svg.append(row);
       if (entry.unavailable) {
         const missing = svgElement("text", { x: labelWidth, y: y + 5, "font-size": 13 }); missing.textContent = entry.unavailable;
         row.append(missing); return;
       }
       const value = svgElement("text", { x: valueX, y: y + 5, "font-size": 13, class: "model-effect-estimate" }); value.textContent = `${formatModelEffect(entry.center)} [${formatModelEffect(entry.low)}, ${formatModelEffect(entry.high)}]`;
+      if (selected) row.append(svgElement("line", { x1: x(entry.low), x2: x(entry.high), y1: y, y2: y,
+        stroke: "#253b42", "stroke-width": 7, "stroke-linecap": "round", class: "model-effect-interval-outline" }));
       row.append(svgElement("line", { x1: x(entry.low), x2: x(entry.high), y1: y, y2: y, stroke: entry.color || "#397c89", "stroke-width": 4 }),
-        svgElement("circle", { cx: x(entry.center), cy: y, r: 5, fill: entry.color || "#123f4c" }), value);
+        svgElement("circle", { cx: x(entry.center), cy: y, r: 5, fill: entry.color || "#123f4c", stroke: selected ? "#253b42" : "none", "stroke-width": 1.5 }), value);
     });
     for (let i = 0; i <= 4; i += 1) {
       const value = low + i / 4 * (high - low);
@@ -3569,16 +3568,6 @@
       label.textContent = `${value.toFixed(state.modelEffectUnits === "percent" ? 1 : 2)}${state.modelEffectUnits === "percent" ? "%" : ""}`; svg.append(label);
     }
     content.append(svg);
-    if (!spec && !allModels) {
-      const explanation = document.createElement("p");
-      explanation.textContent = ["svr", "gp"].includes(state.modelMethod)
-        ? "For this interacting kernel model, the contrast is the exact Shapley allocation across all numeric-input coalitions. Its interval uses the joint uncertainty across those coalitions."
-        : "This interval is for this profile’s contribution, not a regression coefficient or the variation in salaries among peers. A zero input contrast has zero contribution by definition, even when the model coefficient is uncertain.";
-      content.append(explanation);
-    }
-    const limitation = document.createElement("p");
-    limitation.textContent = prediction.model.uncertainty?.method || "Posterior draws retain dependence between coefficients and category effects.";
-    if (!allModels) content.append(limitation);
     if (!$("#model-explanation-dialog").open) $("#model-explanation-dialog").showModal();
   }
 
@@ -3602,6 +3591,25 @@
     const prediction = currentModelPrediction();
     if (prediction) renderModelDiagnostics(prediction);
   }));
+
+  function jointDriverColumns(prediction, includeCategoryLevels = false) {
+    const contributions = prediction.contributions;
+    const row = modelComparisonRow(prediction.methodKey);
+    const jointDraws = row.method === "gp"
+      ? SalaryModelMath.jointNormalDraws(contributions.map((item) => item.value), contributions.map((item) => item.covariance)) : null;
+    const count = jointDraws?.length || Math.max(...contributions.map((item) => item.draws.length));
+    const columns = contributions.map((item, j) => ({ key: `profile:${j}`, label: item.label,
+      draws: jointDraws ? jointDraws.map((draw) => draw[j]) : item.draws }));
+    if (includeCategoryLevels && (prediction.model.draws || prediction.model.categoryEffects)) {
+      const specs = [["focus", "focus_area", "Focus"], ["ea", "ea_relationship", "EA"], ["organizationType", "organization_type", "Org type"],
+        ["title", "title_group", "Title"], ["location", "location_scope", "Hiring market"], ["remote", "remote_category", "Work model"], ["fiscalSponsor", "fiscal_sponsor_category", "Fiscal sponsor"]];
+      specs.forEach(([key, feature, label]) => modelCategoryLevels(feature).forEach((level, j) => columns.push({
+        key: `${key}:${j}`, label: `${label}: ${level}`, draws: categoryDraws(prediction.model, key).map((draw) => draw[j]),
+      })));
+    }
+    if (columns.some((column) => ![1, count].includes(column.draws.length) || column.draws.some((value) => !Number.isFinite(value)))) throw new Error("Joint driver draws must be finite and aligned");
+    return { columns, count };
+  }
 
   function showJointDrivers(prediction, focusedItem = null) {
     const content = $("#model-explanation-content");
@@ -3628,19 +3636,7 @@
       back.addEventListener("click", () => showDriverExplanation(prediction, focusedItem)); content.append(back);
     }
     const contributions = prediction.contributions;
-    let jointDraws = null;
-    if (row.method === "gp") jointDraws = SalaryModelMath.jointNormalDraws(contributions.map((item) => item.value), contributions.map((item) => item.covariance));
-    const count = jointDraws?.length || Math.max(...contributions.map((item) => item.draws.length));
-    const rawColumns = contributions.map((item, j) => ({ key: `profile:${j}`, label: item.label,
-      draws: jointDraws ? jointDraws.map((draw) => draw[j]) : item.draws }));
-    if (prediction.model.draws || prediction.model.categoryEffects) {
-      const specs = [["focus", "focus_area", "Focus"], ["ea", "ea_relationship", "EA"], ["organizationType", "organization_type", "Org type"],
-        ["title", "title_group", "Title"], ["location", "location_scope", "Hiring market"], ["remote", "remote_category", "Work model"], ["fiscalSponsor", "fiscal_sponsor_category", "Fiscal sponsor"]];
-      specs.forEach(([key, feature, label]) => modelCategoryLevels(feature).forEach((level, j) => rawColumns.push({
-        key: `${key}:${j}`, label: `${label}: ${level}`, draws: categoryDraws(prediction.model, key).map((draw) => draw[j]),
-      })));
-    }
-    if (rawColumns.some((column) => ![1, count].includes(column.draws.length) || column.draws.some((value) => !Number.isFinite(value)))) throw new Error("Joint driver draws must be finite and aligned");
+    const { columns: rawColumns, count } = jointDriverColumns(prediction, true);
     const settings = { mode: "mixed", correlation: "pearson", scale: state.modelEffectUnits,
       features: contributions.flatMap((item, j) => Object.hasOwn(MODEL_CONTINUOUS_LABELS, item.key) || item.label === focusedItem?.label ? [`profile:${j}`] : []) };
     const columns = rawColumns.map((column) => ({ ...column,
@@ -3793,6 +3789,8 @@
 
   function clearModelDetailsForInvalidPrediction() {
     $("#model-joint-drivers").disabled = true;
+    $("#model-driver-joint").hidden = true;
+    $("#model-joint-preview").replaceChildren();
     $("#model-driver-reference").textContent = "";
     refs.modelMethodDescription.textContent = "Model details are available after the required profile inputs are valid.";
     refs.modelComparisonBody.replaceChildren();

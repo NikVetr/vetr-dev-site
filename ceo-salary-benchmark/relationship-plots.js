@@ -173,7 +173,29 @@
     render();
     return { render };
   }
-  const api = { correlations, subsample, drawMatrix, explorer };
+  function compactHeatmap(container, { columns, getPair }) {
+    const plot = html("div", "compact-correlation");
+    const n = columns.length;
+    const svg = node("svg", { viewBox: `0 0 ${n} ${n}`, role: "img", "aria-label": "Pearson correlations of active model driver effects" });
+    columns.forEach((column, i) => {
+      for (const side of ["left", "bottom"]) {
+        const label = html("span", `compact-correlation-label is-${side}`, column.shortLabel || column.label);
+        label.title = column.label;
+        label.style[side === "left" ? "top" : "left"] = `${100 * (i + .5) / n}%`;
+        plot.append(label);
+      }
+      columns.forEach((other, j) => {
+        const points = getPair(other, column);
+        const r = points.some((p) => p.x !== points[0].x) && points.some((p) => p.y !== points[0].y) ? pearson(points) : NaN;
+        const cell = node("rect", { x: j, y: i, width: 1, height: 1, fill: color(r), stroke: "white", "stroke-width": .025,
+          "data-x": other.key, "data-y": column.key, "data-correlation": Number.isFinite(r) ? r : "", class: "compact-correlation-cell" });
+        cell.append(node("title", {}, `${other.label} × ${column.label}: ${Number.isFinite(r) ? r.toFixed(2) : "undefined (constant effect)"}`));
+        svg.append(cell);
+      });
+    });
+    plot.prepend(svg); container.replaceChildren(plot);
+  }
+  const api = { correlations, subsample, drawMatrix, explorer, compactHeatmap };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.RelationshipPlots = Object.freeze(api);
 })(globalThis);

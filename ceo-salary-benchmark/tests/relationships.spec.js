@@ -63,6 +63,31 @@ test("joint drivers preserve aligned draws, support model families and place clo
   await page.goto("/ceo-salary-benchmark/");
   await page.locator("#chart-tab-model").click();
   await page.locator("#results-tab-model-details").click();
+  const preview = page.locator("#model-joint-preview");
+  await expect(preview.locator(".compact-correlation-cell")).toHaveCount(121);
+  await expect(preview.locator(".is-left")).toHaveCount(11);
+  await expect(preview.locator(".is-bottom")).toHaveCount(11);
+  const focus = await page.locator("#model-focus").inputValue();
+  await page.locator("#model-focus").selectOption("__average__");
+  await expect(preview.locator('[data-x="profile:4"][data-y="profile:4"]')).toHaveAttribute("data-correlation", "");
+  await page.locator("#model-focus").selectOption(focus);
+  for (const viewport of [{ width: 1440, height: 900 }, { width: 900, height: 650 }, { width: 390, height: 844 }]) {
+    await page.setViewportSize(viewport);
+    const geometry = await page.evaluate(() => {
+      const matrix = document.querySelector("#model-joint-preview svg").getBoundingClientRect();
+      const track = document.querySelector(".model-contribution-track").getBoundingClientRect();
+      const drivers = document.querySelector("#model-contributions").getBoundingClientRect();
+      const link = document.querySelector("#model-joint-drivers").getBoundingClientRect();
+      return { square: matrix.width - matrix.height, width: matrix.width - track.width, left: matrix.left - track.left, below: link.top >= drivers.bottom };
+    });
+    expect(Math.abs(geometry.square)).toBeLessThan(1);
+    expect(Math.abs(geometry.width)).toBeLessThan(1);
+    expect(Math.abs(geometry.left)).toBeLessThan(1);
+    expect(geometry.below).toBe(true);
+  }
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.locator("#model-driver-joint").scrollIntoViewIfNeeded();
+  await page.screenshot({ path: "tmp/driver-heatmap.png" });
   await page.locator("#model-joint-drivers").click();
   const dialog = page.locator("#model-explanation-dialog");
   await expect(dialog.locator(".relationship-cell")).toHaveCount(16);
@@ -87,6 +112,7 @@ test("joint drivers preserve aligned draws, support model families and place clo
   const n = Number(await cell.getAttribute("data-n")); expect(n).toBeGreaterThan(250);
   expect(n).toBe(expected.n);
   expect(Number(await cell.getAttribute("data-correlation"))).toBeCloseTo(expected.r, 12);
+  expect(Number(await preview.locator('[data-x="profile:0"][data-y="profile:1"]').getAttribute("data-correlation"))).toBeCloseTo(expected.r, 12);
   await dialog.getByLabel("Focus: AI / technology", { exact: true }).check();
   await expect(dialog.locator(".relationship-cell")).toHaveCount(25);
   await page.screenshot({ path: "tmp/joint-driver-matrix.png" });
@@ -106,5 +132,21 @@ test("joint drivers preserve aligned draws, support model families and place clo
   await expect(dialog.locator(".relationship-cell")).toHaveCount(9);
   await close.click();
   await expect(dialog).not.toBeVisible();
+  for (const [family, size] of [["gamCategorical", 11], ["linear", 4], ["gam", 4], ["svr", 4], ["gp", 4]]) {
+    await page.locator("#model-method").selectOption(family);
+    await expect(preview.locator(".compact-correlation-cell")).toHaveCount(size ** 2);
+    const modalCorrelation = Number(await preview.locator('[data-x="profile:0"][data-y="profile:1"]').getAttribute("data-correlation"));
+    await page.locator("#model-joint-drivers").click();
+    expect(Number(await dialog.locator('[data-x="profile:0"][data-y="profile:1"]').getAttribute("data-correlation"))).toBeCloseTo(modalCorrelation, 12);
+    await close.click();
+  }
+  await page.locator("#model-include-highest-other").uncheck();
+  await expect(preview.locator(".compact-correlation-cell")).toHaveCount(9);
+  await page.locator("#model-staff").fill("");
+  await expect(page.locator("#model-driver-joint")).toBeHidden();
+  await expect(preview).toBeEmpty();
+  await page.locator("#model-method").selectOption("intercept");
+  await expect(page.locator("#model-driver-joint")).toBeHidden();
+  await expect(preview).toBeEmpty();
   expect(errors).toEqual([]);
 });
