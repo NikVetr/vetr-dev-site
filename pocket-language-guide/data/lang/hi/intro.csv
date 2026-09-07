@@ -1,7 +1,7 @@
 concept_id,text,text_alt,romanization_iast,ipa,literal,confidence,provenance
 introductions.my-name-is,मेरा नाम {} है,,merā nām {} hai,mˌeːɾaː nˈaːm {} hɛː,,2,hi-agent-v1;ipa=espeak
 introductions.nice-to-meet-you,आपसे मिलकर खुशी हुई,,āpse milkar khuśī huī,ˈaːpsˌeː mˈɪləkˌəɾ kʰˈʊʃi hˈʊi,,2,hi-agent-v1;ipa=espeak
-introductions.what-is-your-name,आपका नाम क्या है?,,āpkā nām kyā hai?,ˌaːpkˌaː nˈaːm kːjaː hɛː,,2,hi-agent-v1;ipa=espeak
+introductions.what-is-your-name,आपका नाम क्या है?,,āpkā nām kyā hai?,ˌaːpkˌaː nˈaːm kjaː hɛː,,2,hi-agent-v1;ipa=espeak
 introductions.we-are-traveling-together,हम साथ यात्रा कर रहे हैं,हम साथ यात्रा कर रही हैं,ham sāth yātrā kar rahe haiṁ,hˌəm sˈaːtʰ jˈaːtɾaː kˈʌɾ ɾˌəheː hɛ̃,,2,hi-agent-v1;ipa=espeak
 introductions.this-is-my-friend,ये मेरे दोस्त हैं,,ye mere dost haiṁ,jeː mˌeːɾeː dˈoːst hɛ̃,,2,hi-agent-v1;ipa=espeak
 introductions.i-am-from,मैं {} से हूँ,,maiṁ {} se hūṁ,mɛ̃ {} seː hũ,,2,hi-agent-v1;ipa=espeak

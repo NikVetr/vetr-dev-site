@@ -898,7 +898,18 @@ REPAIR = {
     # espeak marks an elidable schwa with a trailing hyphen: `ʒə-` for *je*.
     "fr": [("-", "")],
     # `r.` is ड़ /ɽ/, and `r.h` is ढ़; the bare `.` that is left over is noise.
-    "hi": [("r.h", "ɽʰ"), ("r.", "ɽ"), (".", "")],
+    # **`Cːj` is a `C्य` conjunct, not a geminate.** क्या comes back `kːjaː` where the
+    # word is [kjaː] with one consonant; `gu`'s entry below carries the full argument
+    # and reported this here rather than editing another language's column. Applied by
+    # the coordinating session: 131 `hi` cells and 6 `mr` ones, and क्या is the yes/no
+    # question particle heading a large share of the pack's questions, so the spurious
+    # geminate was telling all thirty-seven readers to double the first consonant of
+    # the most frequent interrogative in the language. `REPAIR` runs before
+    # `GEMINATE_DOUBLES`, so the real geminates are untouched.
+    "hi": [("kːj", "kj"), ("tːj", "tj"), ("cːj", "cj"),
+           ("r.h", "ɽʰ"), ("r.", "ɽ"), (".", "")],
+    # Marathi shares Devanagari and the same espeak defect, on six cells.
+    "mr": [("kːj", "kj"), ("tːj", "tj"), ("cːj", "cj")],
     # Bengali's two nukta consonants, and its length marks.
     #
     # `r.` is ড় /ɽ/ as it is in Hindi, but ঢ় is **`hr.`** and not `r.h` -- this voice

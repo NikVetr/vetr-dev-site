@@ -3111,6 +3111,11 @@
       "unless_inventory": "dʒ"
     },
     {
+      "slot": "onset",
+      "ipa": "r̝",
+      "out": "र"
+    },
+    {
       "slot": "any",
       "ipa": "r̝",
       "out": "्र"

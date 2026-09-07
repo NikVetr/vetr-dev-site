@@ -1,13 +1,13 @@
 concept_id,text,text_alt,romanization_iast,ipa,literal,confidence,provenance
 directions.where-is,{} कहाँ है?,,{} kahāṁ hai?,{} kˈʌhã hɛː,,2,hi-agent-v1;ipa=espeak
 directions.how-do-i-get-to,{} कैसे जाऊँ?,,{} kaise jāūṁ?,{} kˈɛːseː ɟˈaːũ,,2,hi-agent-v1;ipa=espeak
-directions.is-it-far,क्या दूर है?,,kyā dūr hai?,kːjaː dˈuːɾ hɛː,,2,hi-agent-v1;ipa=espeak
+directions.is-it-far,क्या दूर है?,,kyā dūr hai?,kjaː dˈuːɾ hɛː,,2,hi-agent-v1;ipa=espeak
 directions.how-long-on-foot,पैदल कितनी देर?,,paidal kitnī der?,pˈɛːdəl kˈɪtnˌi dˈeːɾ,,2,hi-agent-v1;ipa=espeak
 directions.please-show-me-on-the-map,नक्शे पर दिखाइए,,nakśe par dikhāie,nˈʌkʃeː pˈʌɾ dɪkʰˈaːɪˌeː,,2,hi-agent-v1;ipa=espeak
 directions.where-is-the-nearest,सबसे नज़दीकी {} कहाँ है?,,sabse nazdīkī {} kahāṁ hai?,sˈʌbsˌeː nˌəzdˈiːki {} kˈʌhã hɛː,,2,hi-agent-v1;ipa=espeak
 directions.where-am-i,मैं कहाँ हूँ?,,maiṁ kahāṁ hūṁ?,mɛ̃ kˈʌhã hũ,,2,hi-agent-v1;ipa=espeak
 directions.which-way,किधर?,,kidhar?,kˈɪdʰəɾ,,2,hi-agent-v1;ipa=espeak
-directions.can-i-walk-there,क्या पैदल जाने लायक है?,,kyā paidal jāne lāyak hai?,kːjaː pˈɛːdəl ɟˈaːneː lˈaːjək hɛː,is it walkable,2,hi-agent-v1;ipa=espeak
+directions.can-i-walk-there,क्या पैदल जाने लायक है?,,kyā paidal jāne lāyak hai?,kjaː pˈɛːdəl ɟˈaːneː lˈaːjək hɛː,is it walkable,2,hi-agent-v1;ipa=espeak
 directions.how-far-is-it,कितनी दूर है?,,kitnī dūr hai?,kˈɪtnˌi dˈuːɾ hɛː,,2,hi-agent-v1;ipa=espeak
 directions.which-exit,कौन सा गेट?,कौन सा निकास?,kaun sā geṭ?,kˈɔːn sˈaː ɡˈeːʈ,,2,hi-agent-v1;ipa=espeak
 directions.can-you-show-me-the-way,रास्ता दिखा दीजिए,,rāstā dikhā dījie,ɾˈaːstaː dˈɪkʰaː dˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
@@ -36,17 +36,17 @@ taxi.i-will-get-off-here,मुझे यहाँ उतरना है,,mujhe
 taxi.please-get-me-there-in-time-for-the-shinkansen,शिंकानसेन के लिए समय पर पहुँचाइए,,,ʃˌĩkaːnsˈeːn keː lˈɪeː sˈʌmˌɛj pˈʌɾ pəhˈũncaːˌɪeː,,1,reader-gloss-v1;ipa=espeak
 transit-rides.two-tickets,दो टिकट दीजिए,,do ṭikaṭ dījie,dˈoː ʈˈɪkəʈ dˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,मेट्रो स्टेशन कहाँ है?,,meṭro sṭeśan kahāṁ hai?,mˈeːʈɾoː sʈˈeːʃən kˈʌhã hɛː,,2,hi-agent-v1;ipa=espeak
-transit-rides.does-this-bus-train-go-to,क्या यह {} जाती है?,,kyā yah {} jātī hai?,kːjaː jˌəh {} ɟˈaːti hɛː,,2,hi-agent-v1;ipa=espeak
+transit-rides.does-this-bus-train-go-to,क्या यह {} जाती है?,,kyā yah {} jātī hai?,kjaː jˌəh {} ɟˈaːti hɛː,,2,hi-agent-v1;ipa=espeak
 transit-rides.what-is-the-next-stop,अगला स्टॉप कौन सा है?,,aglā sṭop kaun sā hai?,ˈʌɡlˌaː sʈˈɔp kˈɔːn sˈaː hɛː,,2,hi-agent-v1;ipa=espeak
 transit-rides.please-tell-me-where-to-get-off,"कहाँ उतरना है, बता दीजिए",,"kahāṁ utarnā hai, batā dījie","kˈʌhã ˈʊtəɾnaː hɛː, bˈʌtaː dˈiːɟɪˌeː",,2,hi-agent-v1;ipa=espeak
-transit-rides.is-this-direct,क्या सीधी जाती है?,,kyā sīdhī jātī hai?,kːjaː sˈiːdʰi ɟˈaːti hɛː,,2,hi-agent-v1;ipa=espeak
-transit-rides.do-i-need-to-transfer,क्या गाड़ी बदलनी पड़ेगी?,,kyā gāṛī badalnī paṛegī?,kːjaː ɡˈaːɽi bˈʌdəlni pəɽˈeːɡi,,2,hi-agent-v1;ipa=espeak
-transit-rides.is-it-delayed,क्या देर से है?,,kyā der se hai?,kːjaː dˈeːɾ seː hɛː,,2,hi-agent-v1;ipa=espeak
+transit-rides.is-this-direct,क्या सीधी जाती है?,,kyā sīdhī jātī hai?,kjaː sˈiːdʰi ɟˈaːti hɛː,,2,hi-agent-v1;ipa=espeak
+transit-rides.do-i-need-to-transfer,क्या गाड़ी बदलनी पड़ेगी?,,kyā gāṛī badalnī paṛegī?,kjaː ɡˈaːɽi bˈʌdəlni pəɽˈeːɡi,,2,hi-agent-v1;ipa=espeak
+transit-rides.is-it-delayed,क्या देर से है?,,kyā der se hai?,kjaː dˈeːɾ seː hɛː,,2,hi-agent-v1;ipa=espeak
 transit-rides.i-am-in-a-hurry,मुझे जल्दी है,,mujhe jaldī hai,mˌʊɟʰeː ɟˈʌldi hɛː,,2,hi-agent-v1;ipa=espeak
 transit-rides.which-platform,कौन सा प्लेटफ़ॉर्म?,,kaun sā pleṭform?,kˈɔːn sˈaː plˈeːʈfˌɔrm,,2,hi-agent-v1;ipa=espeak
 transit-rides.what-time-is-the-next-one,अगली कितने बजे है?,,aglī kitne baje hai?,ˈʌɡlˌi kˈɪtnˌeː bˈʌɟeː hɛː,,2,hi-agent-v1;ipa=espeak
 transit-rides.i-went-past-my-stop,मेरा स्टॉप निकल गया,,merā sṭop nikal gayā,mˌeːɾaː sʈˈɔp nˈɪkəl ɡˈʌjaː,,2,hi-agent-v1;ipa=espeak
-transit-rides.can-i-use-this-ticket,क्या यह टिकट चलेगा?,,kyā yah ṭikaṭ calegā?,kːjaː jˌəh ʈˈɪkəʈ cəlˈeːɡaː,,2,hi-agent-v1;ipa=espeak
+transit-rides.can-i-use-this-ticket,क्या यह टिकट चलेगा?,,kyā yah ṭikaṭ calegā?,kjaː jˌəh ʈˈɪkəʈ cəlˈeːɡaː,,2,hi-agent-v1;ipa=espeak
 place-words.visitor-center,पर्यटक सूचना केंद्र,,paryaṭak sūcnā keṁdra,pˈʌrjəʈˌək sˈuːcnˌaː kˈẽːdɾə,,2,hi-agent-v1;ipa=espeak
 place-words.railway-station,रेलवे स्टेशन,,relve sṭeśan,ɾˈeːlʋˌeː sʈˈeːʃən,,2,hi-agent-v1;ipa=espeak
 place-words.airport,हवाई अड्डा,एयरपोर्ट,havāī aḍḍā,həʋˈaːi ˈʌɖɖaː,,2,hi-agent-v1;ipa=espeak
@@ -70,7 +70,7 @@ border-customs.this-is-a-gift,यह उपहार है,यह गिफ़�
 border-customs.where-do-i-collect-my-baggage,सामान कहाँ मिलेगा?,,sāmān kahāṁ milegā?,saːmˈaːn kˈʌhã mɪlˈeːɡaː,,2,hi-agent-v1;ipa=espeak
 border-customs.how-long-may-i-stay,कितने दिन रुकने की इजाज़त है?,,kitne din rukne kī ijāzat hai?,kˈɪtnˌeː dˈɪn ɾˈʊknˌeː ki ɪɟˈaːzət hɛː,,2,hi-agent-v1;ipa=espeak
 border-customs.i-have-a-connecting-flight,मेरी आगे की फ़्लाइट है,कनेक्टिंग फ़्लाइट,merī āge kī flāiṭ hai,mˌeːɾi ˈaːɡeː ki flˈaːɪʈ hɛː,,2,hi-agent-v1;ipa=espeak
-border-customs.may-i-have-an-entry-stamp,क्या प्रवेश की मुहर मिल सकती है?,,kyā praveś kī muhar mil saktī hai?,kːjaː pɾəʋˈeːʃ ki mˈʊhəɾ mˈɪl sˈʌktˌi hɛː,,2,hi-agent-v1;ipa=espeak
+border-customs.may-i-have-an-entry-stamp,क्या प्रवेश की मुहर मिल सकती है?,,kyā praveś kī muhar mil saktī hai?,kjaː pɾəʋˈeːʃ ki mˈʊhəɾ mˈɪl sˈʌktˌi hɛː,,2,hi-agent-v1;ipa=espeak
 border-customs.visa,वीज़ा,,vīzā,ʋˈiːzaː,,2,hi-agent-v1;ipa=espeak
 border-customs.i-have-no-food-or-plants,मेरे पास खाना या पौधे नहीं हैं,,mere pās khānā yā paudhe nahīṁ haiṁ,mˌeːɾeː pˈaːs kʰˈaːnaː jˈaː pˈɔːdʰeː nˈʌhĩ hɛ̃,,2,hi-agent-v1;ipa=espeak
 border-customs.passport-control,पासपोर्ट जाँच,आप्रवासन,pāsporṭ jāṁc,pˌaːspˈoːɾʈ ɟˈãnc,,2,hi-agent-v1;ipa=espeak
@@ -111,7 +111,7 @@ common-signs.temporarily-closed,फ़िलहाल बंद,अस्था�
 common-signs.open-operating,खुला है,,khulā hai,kʰˈʊlaː hɛː,,2,hi-agent-v1;ipa=espeak
 common-signs.closed,बंद है,,baṁd hai,bˈʌnd hɛː,,2,hi-agent-v1;ipa=espeak
 common-signs.stopped-stop,रुकिए,रुका हुआ,rukie,ɾˈʊkɪˌeː,stop / stopped,2,hi-agent-v1;ipa=espeak
-transit-rides.do-i-need-to-validate,क्या टिकट पंच कराना पड़ेगा?,,kyā ṭikaṭ paṁc karānā paṛegā?,kːjaː ʈˈɪkəʈ pˈʌɲc kəɾˈaːnaː pəɽˈeːɡaː,must it be punched,1,hi-agent-v1;ipa=espeak
+transit-rides.do-i-need-to-validate,क्या टिकट पंच कराना पड़ेगा?,,kyā ṭikaṭ paṁc karānā paṛegā?,kjaː ʈˈɪkəʈ pˈʌɲc kəɾˈaːnaː pəɽˈeːɡaː,must it be punched,1,hi-agent-v1;ipa=espeak
 rail-station-words.ticket-validator,टिकट पंच मशीन,,ṭikaṭ paṁc maśīn,ʈˈɪkəʈ pˈʌɲc məʃˈiːn,punching machine,1,hi-agent-v1;ipa=espeak
 rail-station-words.maglev,मैग्लेव,चुंबकीय रेल,,mˈɛːɡleːʋ,,1,reader-gloss-v1;ipa=espeak
 common-signs.pork-code,सूअर के कोड,,sūar ke koḍ,sˈuːəɾ keː kˈoːɖ,,2,pork-code-agent-v1;lppom-mui;ipa=espeak

@@ -1,7 +1,7 @@
 concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
 payment-receipt.pay-by-card,कार्डने पैसे भरू का?,,kārḍanē paisē bharū kā?,kˈaːɾɖənˌeː pˈaɪseː bʰˈʌɾuː kˈaː,,2,mr-agent-v1;ipa=espeak
 payment-receipt.pay-cash,रोख पैसे भरू का?,,rōkha paisē bharū kā?,ɾˈoːkʰ pˈaɪseː bʰˈʌɾuː kˈaː,,2,mr-agent-v1;ipa=espeak
-payment-receipt.pay-by-qr-code,क्यूआर कोडने पैसे भरू का?,,kyūāra kōḍanē paisē bharū kā?,kːjuːˈaːɾ kˈoːɖnˌeː pˈaɪseː bʰˈʌɾuː kˈaː,,2,mr-agent-v1;ipa=espeak
+payment-receipt.pay-by-qr-code,क्यूआर कोडने पैसे भरू का?,,kyūāra kōḍanē paisē bharū kā?,kjuːˈaːɾ kˈoːɖnˌeː pˈaɪseː bʰˈʌɾuː kˈaː,,2,mr-agent-v1;ipa=espeak
 payment-receipt.a-receipt-please,"पावती द्या, कृपया",,"pāvatī dyā, kr̥payā","pˈaːvtˌi djˈaː, kɾˈʊpjˌaː",,2,mr-agent-v1;ipa=espeak
 payment-receipt.please-write-the-number,नंबर लिहा,,naṁbara lihā,nˈʌmbəɾ lˈɪhaː,,2,mr-agent-v1;ipa=espeak
 payment-receipt.how-much-in-total,एकूण किती झाले?,,ēkūṇa kitī jhālē?,eːkˈuːɳ kˈɪti ɟʰˈaːleː,,2,mr-agent-v1;ipa=espeak

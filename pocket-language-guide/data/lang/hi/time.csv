@@ -2,7 +2,7 @@ concept_id,text,text_alt,romanization_iast,ipa,literal,confidence,provenance
 time-scheduling.what-time-is-it,कितने बजे हैं?,,kitne baje haiṁ?,kˈɪtnˌeː bˈʌɟeː hɛ̃,,2,hi-agent-v1;ipa=espeak
 time-scheduling.how-many-minutes,कितने मिनट?,,kitne minaṭ?,kˈɪtnˌeː mˈɪnəʈ,,2,hi-agent-v1;ipa=espeak
 time-scheduling.what-time-should-we-meet,कितने बजे मिलें?,,kitne baje mileṁ?,kˈɪtnˌeː bˈʌɟeː mˈɪlẽː,,2,hi-agent-v1;ipa=espeak
-time-scheduling.can-we-change-the-time,क्या समय बदला जा सकता है?,,kyā samay badlā jā saktā hai?,kːjaː sˈʌmˌɛj bˈʌdlˌaː ɟˈaː sˈʌktˌaː hɛː,,2,hi-agent-v1;ipa=espeak
+time-scheduling.can-we-change-the-time,क्या समय बदला जा सकता है?,,kyā samay badlā jā saktā hai?,kjaː sˈʌmˌɛj bˈʌdlˌaː ɟˈaː sˈʌktˌaː hɛː,,2,hi-agent-v1;ipa=espeak
 time-scheduling.when-is-convenient,आपको कब ठीक रहेगा?,,āpko kab ṭhīk rahegā?,ˌaːpkˌoː kˈʌb ʈʰˈiːk ɾəhˈeːɡaː,,2,hi-agent-v1;ipa=espeak
 time-scheduling.what-is-today-s-date,आज कौन सी तारीख है?,,āj kaun sī tārīkh hai?,ˈaːɟ kˈɔːn sˈi taːɾˈiːkʰ hɛː,,2,hi-agent-v1;ipa=espeak
 time-scheduling.what-day-is-it-today,आज कौन सा दिन है?,,āj kaun sā din hai?,ˈaːɟ kˈɔːn sˈaː dˈɪn hɛː,,2,hi-agent-v1;ipa=espeak

@@ -3,7 +3,7 @@ utility-templates.i-want-to-go-to,मला {} ला जायचे आहे,
 utility-templates.please-give-me,मला {} द्या,,malā {} dyā,mˈʌlaː {} djˈaː,,2,mr-agent-v1;ipa=espeak
 utility-templates.may-i,मला {} करता येईल का?,,malā {} karatā yēīla kā?,mˈʌlaː {} kˈʌɾtˌaː jeːˈiːl kˈaː,will it be possible for me to {}?,2,mr-agent-v1;ipa=espeak
 utility-templates.please-do-not-add,{} घालू नका,,{} ghālū nakā,{} ɡʰˈaːluː nˈʌkaː,,2,mr-agent-v1;ipa=espeak
-utility-templates.do-you-have,तुमच्याकडे {} आहे का?,,tumacyākaḍē {} āhē kā?,tˌʊmcːjˈaːkɖˌeː {} ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
+utility-templates.do-you-have,तुमच्याकडे {} आहे का?,,tumacyākaḍē {} āhē kā?,tˌʊmcjˈaːkɖˌeː {} ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
 utility-templates.please-write-the-number,नंबर लिहा,,naṁbara lihā,nˈʌmbəɾ lˈɪhaː,,2,mr-agent-v1;ipa=espeak
 utility-templates.i-need,मला {} हवे आहे,,malā {} havē āhē,mˈʌlaː {} hˈʌveː ˈaːheː,,2,mr-agent-v1;ipa=espeak
 utility-templates.is-there-nearby,इथे जवळ {} आहे का?,,ithē javaḷa {} āhē kā?,ˈɪtʰeː zˈʌvəɭ {} ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak

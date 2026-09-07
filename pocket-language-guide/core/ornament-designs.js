@@ -99,6 +99,36 @@ export const LANGUAGE_MOTIFS = /** @type {const} */ ({
   // cloth with angled floats of thread from the reverse side -- a banig has
   // no base cloth and no thread; the strips are the whole object.)
   fil: 'banig',
+  // `bandhani` is the tie-dye of Kutch and Saurashtra -- the odhani a Gujarati bride
+  // wears -- and it is named against the three neighbours it could be confused with,
+  // on the mark rather than on the craft.
+  //
+  // `kawung` (id) is the closest and is also a resist-dye, which is exactly why the
+  // distinction has to be drawn on the mark: kawung is **wax** resist, four large
+  // ovals *drawn* onto finished cloth with a canting, so its unit is a deliberate
+  // curve of a size the hand chooses. Bandhani is **tie** resist: the cloth is
+  // pinched into thousands of points and each is bound with thread before dyeing, so
+  // its unit is a *knot* -- a small ring of undyed cloth with a dyed centre -- whose
+  // size is fixed by the thread and which can never overlap its neighbour, because
+  // two knots cannot occupy one pinch. So this emblem is a **field of small rings on
+  // a diagonal lattice**, and no other motif in this table is a field of rings at
+  // all: `petal` is one large circle around a flower, `berry` is three fruit on a
+  // stem, `kalamkari` is one drawn-and-filled flower head, and `seigaiha` is nested
+  // *arcs* that overlap into scales -- overlapping being the one thing a bandhani dot
+  // cannot do.
+  //
+  // The lattice runs on the diagonal rather than square, and the count is the
+  // pattern's own name -- ekdali one dot, trikunti three, chaubundi four, satbandi
+  // seven -- so the emblem draws a chaubundi cluster (four points around a fifth)
+  // with the lattice continuing on the axes. `patola`, the Patan double-ikat, was the
+  // alternative and was refused because its distinguishing mark is the *stepped,
+  // feathered diagonal* that resist-dyed yarn forces on a woven figure, which is a
+  // weave artefact and would have had to be named against `banig` (fil) rather than
+  // against a dye. And `sathiya`, Gujarat's doorstep rangoli, was refused outright
+  // for the reason Telugu's `muggu` was: `kolam` (ta) and `alpona` (bn) already hold
+  // floor drawing, and the house rule is to name a motif against the neighbour it
+  // could be confused with rather than to ship a third name for one art.
+  gu: 'bandhani',
 });
 /** @typedef {typeof LANGUAGE_MOTIFS[keyof typeof LANGUAGE_MOTIFS]} LanguageMotif */
 
@@ -519,6 +549,21 @@ const emblems = {
       }
     }
   },
+  bandhani(p) {
+    // A chaubundi -- four tied points around a fifth, which is what the pattern is
+    // counted and named by. The rings are drawn just clear of each other because two
+    // pinches of cloth cannot share a knot; that near-touching density is what a real
+    // bandhani field looks like and is why this reads as tie-dye rather than as
+    // polka dots.
+    for (const [x, y] of [[50, 50], [37, 37], [63, 37], [37, 63], [63, 63]]) {
+      oval(p, x, y, 9, 9); oval(p, x, y, 2.4, 2.4);
+    }
+    // The lattice continues on the *axes*, not the corners: the cloth is folded
+    // before it is tied, so the points come out in diagonal rows. These four carry no
+    // centre dot, which is what says "this field goes on" rather than "there are nine
+    // of them".
+    for (const [x, y] of [[50, 14], [14, 50], [86, 50], [50, 86]]) oval(p, x, y, 7, 7);
+  },
 };
 
 // At divider height, use the motif's silhouette rather than its interior detail.
@@ -564,6 +609,15 @@ const tracery = {
   funie(p) { p.m(6, 50); p.q(28, 30, 50, 50); p.q(72, 70, 94, 50); },
   phulkari(p) { diamond(p, 30, 50, 22, 42); diamond(p, 70, 50, 22, 42); p.m(12, 88); p.l(48, 12); p.m(52, 88); p.l(88, 12); },
   banig(p) { diamond(p, 30, 30, 17, 11); diamond(p, 70, 30, 17, 11); diamond(p, 30, 70, 17, 11); diamond(p, 70, 70, 17, 11); },
+  bandhani(p) {
+    // Three tied points on the diagonal, which is the lattice's own direction. Drawn
+    // on the diagonal rather than side by side so that at tracery height it cannot be
+    // read as `kalamkari`'s concentric flower head, which is the one other mark in
+    // this table built from a ring inside a ring.
+    for (const [x, y] of [[19, 74], [50, 50], [81, 26]]) {
+      oval(p, x, y, 14, 14); oval(p, x, y, 3.6, 3.6);
+    }
+  },
 };
 
 /** @param {string} motif @returns {motif is keyof typeof emblems} */

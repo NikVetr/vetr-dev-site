@@ -36,7 +36,7 @@ medical-conditions.medicine-allergy,औषधाची ऍलर्जी: {},,a
 medical-conditions.this-card-lists-my-conditions,या कार्डावर माझे आजार लिहिले आहेत,,yā kārḍāvara mājhē ājāra lihilē āhēta,jˈaː kˈaːɾɖaːvˌəɾ mˈaːɟʰeː aːzˈaːɾ lˈɪhɪlˌeː aːhˈeːt,,2,mr-agent-v1;ipa=espeak
 medical-conditions.this-is-my-medicine,हे माझे औषध आहे,,hē mājhē auṣadha āhē,hˈeː mˈaːɟʰeː ˈaʊʂədʰ ˈaːheː,,2,mr-agent-v1;ipa=espeak
 medical-conditions.please-give-me-sugar-or-juice,मला साखर किंवा ज्यूस द्या,,malā sākhara kiṁvā jyūsa dyā,mˈʌlaː sˈaːkʰəɾ kˈĩvaː zjˈuːs djˈaː,,2,mr-agent-v1;ipa=espeak
-medical-conditions.inject-it-into-my-outer-thigh,हे माझ्या मांडीच्या बाहेरील भागात टोचा,,hē mājhyā māṁḍīcyā bāhērīla bhāgāta ṭōcā,hˈeː mˈaːɟʰjaː mãɖˈiːcːjaː bˌaːheːɾˈiːl bʰaːɡˈaːt ʈˈoːcaː,,2,mr-agent-v1;ipa=espeak
+medical-conditions.inject-it-into-my-outer-thigh,हे माझ्या मांडीच्या बाहेरील भागात टोचा,,hē mājhyā māṁḍīcyā bāhērīla bhāgāta ṭōcā,hˈeː mˈaːɟʰjaː mãɖˈiːcjaː bˌaːheːɾˈiːl bʰaːɡˈaːt ʈˈoːcaː,,2,mr-agent-v1;ipa=espeak
 medical-conditions.my-blood-type-is,माझा रक्तगट {} आहे,,mājhā raktagaṭa {} āhē,mˈaːɟʰaː ɾˈʌktəɡˌəʈ {} ˈaːheː,,2,mr-agent-v1;ipa=espeak
 medical-conditions.do-not-give-me,मला {} देऊ नका,,malā {} dēū nakā,mˈʌlaː {} dˈeːu nˈʌkaː,,2,mr-agent-v1;ipa=espeak
 medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,मला ऍस्पिरिन आणि आयबुप्रोफेनची ऍलर्जी आहे,,malā êspirina āṇi āyabuprōphēnacī êlarjī āhē,mˈʌlaː ˈɛspɪɾˌɪn ˈaːɳɪ ˌaːjbˌʊpɾoːpʰˈeːncˌi ɛlˈʌɾɟiˌi ˈaːheː,,2,mr-agent-v1;ipa=espeak
@@ -73,7 +73,7 @@ pharmacy-symptoms.i-feel-nauseous,मला मळमळत आहे,,malā ma�
 pharmacy-symptoms.i-have-a-rash,मला पुरळ आले आहे,,malā puraḷa ālē āhē,mˈʌlaː pˈʊɾəɭ ˈaːleː ˈaːheː,,2,mr-agent-v1;ipa=espeak
 pharmacy-symptoms.before-or-after-food,जेवणापूर्वी की जेवणानंतर?,,jēvaṇāpūrvī kī jēvaṇānaṁtara?,zˌeːvɳaːpˈuːrvi kˈi zˌeːvɳaːnˈʌntəɾ,,2,mr-agent-v1;ipa=espeak
 pharmacy-symptoms.i-think-it-is-infected,याला इन्फेक्शन झाले आहे असे वाटते,,yālā inphēkśana jhālē āhē asē vāṭatē,jˈaːlaː ɪnpʰˈeːkʃən ɟʰˈaːleː ˈaːheː ˈʌseː vˈaːʈtˌeː,impersonal,2,mr-agent-v1;ipa=espeak
-pharmacy-symptoms.motion-sickness-tablets,प्रवासातील मळमळीच्या गोळ्या,,pravāsātīla maḷamaḷīcyā gōḷyā,pɾˌəvaːsaːtˈiːl mˌəɭəmɭˈiːcːjaː ɡˈoːɭjaː,,2,mr-agent-v1;ipa=espeak
+pharmacy-symptoms.motion-sickness-tablets,प्रवासातील मळमळीच्या गोळ्या,,pravāsātīla maḷamaḷīcyā gōḷyā,pɾˌəvaːsaːtˈiːl mˌəɭəmɭˈiːcjaː ɡˈoːɭjaː,,2,mr-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-cut,मला कापले आहे,,malā kāpalē āhē,mˈʌlaː kˈaːplˌeː ˈaːheː,impersonal idiom,2,mr-agent-v1;ipa=espeak
 pharmacy-symptoms.antacid,अँटासिड,,am̐ṭāsiḍa,ʌnʈˈaːsɪɖ,,2,mr-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-burn,मला भाजले आहे,,malā bhājalē āhē,mˈʌlaː bʰˈaːzlˌeː ˈaːheː,impersonal idiom,2,mr-agent-v1;ipa=espeak
@@ -135,7 +135,7 @@ police-consulate.i-did-not-agree-to-this-price,ही किंमत मला 
 police-consulate.please-write-the-report-number,रिपोर्ट नंबर लिहा,,ripōrṭa naṁbara lihā,ɾɪpˈoːɾʈ nˈʌmbəɾ lˈɪhaː,,2,mr-agent-v1;ipa=espeak
 police-consulate.it-happened-here,हे इथे घडले,,hē ithē ghaḍalē,hˈeː ˈɪtʰeː ɡʰˈʌɖlˌeː,said while pointing at a map or address,2,mr-agent-v1;ipa=espeak
 police-consulate.may-i-have-a-copy-of-the-report,रिपोर्टची कॉपी मिळेल का?,,ripōrṭacī kôpī miḷēla kā?,ɾɪpˈoːɾʈəcˌi kˈɔpi mɪɭˈeːl kˈaː,,2,mr-agent-v1;ipa=espeak
-police-consulate.i-will-not-sign-anything-i-cannot-read,"जे वाचता येत नाही, त्यावर सही होणार नाही",,"jē vācatā yēta nāhī, tyāvara sahī hōṇāra nāhī","zˈeː vˈaːctˌaː jˈeːt nˈaːhi, tːjˈaːvəɾ sˈʌhi hoːɳˈaːɾ nˈaːhi","fully impersonal, no gender",2,mr-agent-v1;ipa=espeak
+police-consulate.i-will-not-sign-anything-i-cannot-read,"जे वाचता येत नाही, त्यावर सही होणार नाही",,"jē vācatā yēta nāhī, tyāvara sahī hōṇāra nāhī","zˈeː vˈaːctˌaː jˈeːt nˈaːhi, tjˈaːvəɾ sˈʌhi hoːɳˈaːɾ nˈaːhi","fully impersonal, no gender",2,mr-agent-v1;ipa=espeak
 police-consulate.am-i-free-to-go,मला जाता येईल का?,,malā jātā yēīla kā?,mˈʌlaː zˈaːtaː jeːˈiːl kˈaː,"impersonal, no gender",2,mr-agent-v1;ipa=espeak
-police-consulate.i-do-not-want-to-go-with-you,मला तुमच्यासोबत यायचे नाही,,malā tumacyāsōbata yāyacē nāhī,mˈʌlaː tˌʊmcːjaːsˈoːbət jˈaːjcˌeː nˈaːhi,,2,mr-agent-v1;ipa=espeak
+police-consulate.i-do-not-want-to-go-with-you,मला तुमच्यासोबत यायचे नाही,,malā tumacyāsōbata yāyacē nāhī,mˈʌlaː tˌʊmcjaːsˈoːbət jˈaːjcˌeː nˈaːhi,,2,mr-agent-v1;ipa=espeak
 pharmacy-symptoms.i-think-i-have-dengue,मला डेंग्यू झाला आहे असे वाटते,,malā ḍēṁgyū jhālā āhē asē vāṭatē,mˈʌlaː ɖˈẽːɡjuː ɟʰˈaːlaː ˈaːheː ˈʌseː vˈaːʈtˌeː,impersonal,2,mr-agent-v1;ipa=espeak

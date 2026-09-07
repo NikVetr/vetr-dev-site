@@ -34,14 +34,14 @@ quick-responses.okay-can,चालेल,,cālēla,caːlˈeːl,,2,mr-agent-v1;ip
 quick-responses.cannot-not-allowed,चालणार नाही,,cālaṇāra nāhī,cˌaːlɳˈaːɾ nˈaːhi,,2,mr-agent-v1;ipa=espeak
 quick-responses.works-okay,चालते,,cālatē,cˈaːltˌeː,,2,mr-agent-v1;ipa=espeak
 quick-responses.does-not-work-no,चालत नाही,,cālata nāhī,cˈaːlət nˈaːhi,,2,mr-agent-v1;ipa=espeak
-quick-responses.can-possible,शक्य आहे,,śakya āhē,ʃˈʌkːjə ˈaːheː,,2,mr-agent-v1;ipa=espeak
-quick-responses.cannot-not-possible,शक्य नाही,,śakya nāhī,ʃˈʌkːjə nˈaːhi,,2,mr-agent-v1;ipa=espeak
+quick-responses.can-possible,शक्य आहे,,śakya āhē,ʃˈʌkjə ˈaːheː,,2,mr-agent-v1;ipa=espeak
+quick-responses.cannot-not-possible,शक्य नाही,,śakya nāhī,ʃˈʌkjə nˈaːhi,,2,mr-agent-v1;ipa=espeak
 quick-responses.okay-fine,ठीक,,ṭhīka,ʈʰˈiːk,,2,mr-agent-v1;ipa=espeak
 quick-responses.no-good-not-allowed-will-not-work,नाही चालणार,,nāhī cālaṇāra,nˈaːhi cˌaːlɳˈaːɾ,,2,mr-agent-v1;ipa=espeak
 phone-translation.i-am-using-phone-translation,मी फोनवरून भाषांतर करत आहे,,mī phōnavarūna bhāṣāṁtara karata āhē,mˈi pʰˌoːnəvɾˈuːn bʰaːʂˈãtəɾ kˈʌɾət ˈaːheː,,2,mr-agent-v1;ipa=espeak
 phone-translation.please-speak-toward-the-phone,फोनकडे बघून बोला,,phōnakaḍē baghūna bōlā,pʰˈoːnəkɖeː bəɡʰˈuːn bˈoːlaː,,2,mr-agent-v1;ipa=espeak
 phone-translation.please-write-the-place-name,जागेचे नाव {target} मध्ये लिहा,,jāgēcē nāva {target} madhyē lihā,zaːɡˈeːceː nˈaːv {target} mˈʌdʰjeː lˈɪhaː,,2,mr-agent-v1;ipa=espeak
-phone-translation.one-sentence-at-a-time-please,एका वेळी एकच वाक्य बोला,,ēkā vēḷī ēkaca vākya bōlā,ˈeːkaː vˈeːɭi ˈeːkəc vˈaːkːjə bˈoːlaː,,2,mr-agent-v1;ipa=espeak
+phone-translation.one-sentence-at-a-time-please,एका वेळी एकच वाक्य बोला,,ēkā vēḷī ēkaca vākya bōlā,ˈeːkaː vˈeːɭi ˈeːkəc vˈaːkjə bˈoːlaː,,2,mr-agent-v1;ipa=espeak
 phone-translation.please-type-it-and-show-me,टाईप करून दाखवा,,ṭāīpa karūna dākhavā,ʈaːˈiːp kəɾˈuːn dˈaːkʰvˌaː,,2,mr-agent-v1;ipa=espeak
 phone-translation.please-look-at-the-screen,स्क्रीनकडे बघा,,skrīnakaḍē baghā,skɾˈiːnəkɖeː bˈʌɡʰaː,,2,mr-agent-v1;ipa=espeak
 phone-text-power.please-type-it-for-me,माझ्यासाठी टाईप करा,,mājhyāsāṭhī ṭāīpa karā,mˈaːɟʰjaːsˌaːʈʰi ʈaːˈiːp kˈʌɾaː,,2,mr-agent-v1;ipa=espeak

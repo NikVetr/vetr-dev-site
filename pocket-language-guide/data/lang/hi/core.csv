@@ -25,7 +25,7 @@ pronouns-verbs.want-to-verb,मुझे …ना है,,mujhe …nā hai,mˌ�
 pronouns-verbs.want-thing,मुझे … चाहिए,,mujhe … cāhie,mˌʊɟʰeː cˈaːhɪˌeː,,2,hi-agent-v1;ipa=espeak
 pronouns-verbs.need-thing,मुझे … की ज़रूरत है,,mujhe … kī zarūrat hai,mˌʊɟʰeː ki zəɾˈuːɾət hɛː,,2,hi-agent-v1;ipa=espeak
 pronouns-verbs.looking-for-thing,मुझे … की तलाश है,,mujhe … kī talāś hai,mˌʊɟʰeː ki təlˈaːʃ hɛː,search is to me,2,hi-agent-v1;ipa=espeak
-question-words.what,क्या,,kyā,kːjaː,,2,hi-agent-v1;ipa=espeak
+question-words.what,क्या,,kyā,kjaː,,2,hi-agent-v1;ipa=espeak
 question-words.where,कहाँ,,kahāṁ,kˈʌhã,,2,hi-agent-v1;ipa=espeak
 question-words.who,कौन,,kaun,kˈɔːn,,2,hi-agent-v1;ipa=espeak
 question-words.which-one,कौन सा,,kaun sā,kˈɔːn sˈaː,,2,hi-agent-v1;ipa=espeak
@@ -33,7 +33,7 @@ question-words.when,कब,,kab,kˈʌb,,2,hi-agent-v1;ipa=espeak
 question-words.how,कैसे,,kaise,kˈɛːseː,,2,hi-agent-v1;ipa=espeak
 question-words.how-much-many,कितना,,kitnā,kˈɪtnˌaː,,2,hi-agent-v1;ipa=espeak
 question-words.how-many,कितने,,kitne,kˈɪtnˌeː,plural,2,hi-agent-v1;ipa=espeak
-question-words.why,क्यों,,kyoṁ,kːjˈõ,,2,hi-agent-v1;ipa=espeak
+question-words.why,क्यों,,kyoṁ,kjˈõ,,2,hi-agent-v1;ipa=espeak
 question-words.this,यह,,yah,jˌəh,,2,hi-agent-v1;ipa=espeak
 question-words.that,वह,,vah,ʋˌəh,,2,hi-agent-v1;ipa=espeak
 question-words.here,यहाँ,,yahāṁ,jˈʌhã,,2,hi-agent-v1;ipa=espeak

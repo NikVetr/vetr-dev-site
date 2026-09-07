@@ -11,7 +11,7 @@ dietary-needs.i-am-vegan,मी व्हीगन आहे,,mī vhīgana āhē
 dietary-needs.i-do-not-eat,मी {} खात नाही,,mī {} khāta nāhī,mˈi {} kʰˈaːt nˈaːhi,,2,mr-agent-v1;ipa=espeak
 dietary-needs.i-am-allergic-to,मला {} ची ऍलर्जी आहे,,malā {} cī êlarjī āhē,mˈʌlaː {} cˈi ɛlˈʌɾɟiˌi ˈaːheː,,2,mr-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-fish-stock,यात माशाचा स्टॉक आहे का?,,yāta māśācā sṭôka āhē kā?,jˈaːt maːʃˈaːcaː sʈˈɔk ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
-dietary-needs.does-it-contain-pork-stock,यात डुकराच्या मांसाचा स्टॉक आहे का?,,yāta ḍukarācyā māṁsācā sṭôka āhē kā?,jˈaːt ɖˌʊkɾˈaːcːjaː mãsˈaːcaː sʈˈɔk ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
+dietary-needs.does-it-contain-pork-stock,यात डुकराच्या मांसाचा स्टॉक आहे का?,,yāta ḍukarācyā māṁsācā sṭôka āhē kā?,jˈaːt ɖˌʊkɾˈaːcjaː mãsˈaːcaː sʈˈɔk ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
 dietary-needs.i-have-a-severe-allergy-to,मला {} ची तीव्र ऍलर्जी आहे,,malā {} cī tīvra êlarjī āhē,mˈʌlaː {} cˈi tˈiːvɾə ɛlˈʌɾɟiˌi ˈaːheː,,2,mr-agent-v1;ipa=espeak
 food-ordering.table-for-two,दोघांसाठी टेबल,,dōghāṁsāṭhī ṭēbala,dˌoːɡʰãsˈaːʈʰi ʈˈeːbəl,,2,mr-agent-v1;ipa=espeak
 food-ordering.is-a-table-available,टेबल उपलब्ध आहे का?,,ṭēbala upalabdha āhē kā?,ʈˈeːbəl ˌʊpəlˈʌbdʰ ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak

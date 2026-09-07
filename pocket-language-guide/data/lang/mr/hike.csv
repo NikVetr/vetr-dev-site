@@ -32,9 +32,9 @@ hiking-parks.where-is-the-trailhead,पायवाट कुठून सुर
 hiking-parks.how-long-to-the-summit,शिखरापर्यंत किती वेळ लागतो?,,śikharāparyaṁta kitī vēḷa lāgatō?,ʃˌɪkʰɾˌaːpərjˈʌnt kˈɪti vˈeːɭ lˈaːɡtˌoː,,2,mr-agent-v1;ipa=espeak
 hiking-parks.how-long-to-the-viewpoint,दृश्यस्थळापर्यंत किती वेळ लागतो?,,dr̥śyasthaḷāparyaṁta kitī vēḷa lāgatō?,dɾˌʊʃjəstʰˌəɭaːpərjˈʌnt kˈɪti vˈeːɭ lˈaːɡtˌoː,,2,mr-agent-v1;ipa=espeak
 hiking-parks.which-route-is-easier,कोणता मार्ग सोपा आहे?,,kōṇatā mārga sōpā āhē?,kˈoːɳtˌaː mˈaːɾɡ sˈoːpaː ˈaːheː,,2,mr-agent-v1;ipa=espeak
-hiking-parks.is-this-trail-suitable-for-beginners,ही पायवाट नवशिक्यांसाठी योग्य आहे का?,,hī pāyavāṭa navaśikyāṁsāṭhī yōgya āhē kā?,hˈi pˌaːjvˈaːʈ nˌəvʃˌɪkːjãsˈaːʈʰi jˈoːɡjə ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
+hiking-parks.is-this-trail-suitable-for-beginners,ही पायवाट नवशिक्यांसाठी योग्य आहे का?,,hī pāyavāṭa navaśikyāṁsāṭhī yōgya āhē kā?,hˈi pˌaːjvˈaːʈ nˌəvʃˌɪkjãsˈaːʈʰi jˈoːɡjə ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
 trail-conditions.how-long-is-the-full-route,पूर्ण मार्ग किती लांब आहे?,,pūrṇa mārga kitī lāṁba āhē?,pˈuːrɳə mˈaːɾɡ kˈɪti lˈãb ˈaːheː,,2,mr-agent-v1;ipa=espeak
-trail-conditions.can-we-return-the-same-way,आम्ही त्याच वाटेने परत येऊ शकतो का?,,āmhī tyāca vāṭēnē parata yēū śakatō kā?,ˈaːmhi tːjˈaːc vaːʈˈeːneː pˈʌɾət jˈeːu ʃˈʌktˌoː kˈaː,,2,mr-agent-v1;ipa=espeak
+trail-conditions.can-we-return-the-same-way,आम्ही त्याच वाटेने परत येऊ शकतो का?,,āmhī tyāca vāṭēnē parata yēū śakatō kā?,ˈaːmhi tjˈaːc vaːʈˈeːneː pˈʌɾət jˈeːu ʃˈʌktˌoː kˈaː,,2,mr-agent-v1;ipa=espeak
 trail-conditions.can-we-return-before-dark,अंधार पडण्याआधी आम्ही परत येऊ शकतो का?,,aṁdhāra paḍaṇyāādhī āmhī parata yēū śakatō kā?,ʌndʰˈaːɾ pˌəɖɳjaːˈaːdʰi ˈaːmhi pˈʌɾət jˈeːu ʃˈʌktˌoː kˈaː,,2,mr-agent-v1;ipa=espeak
 trail-conditions.is-the-trail-open,पायवाट खुली आहे का?,,pāyavāṭa khulī āhē kā?,pˌaːjvˈaːʈ kʰˈʊli ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
 trail-conditions.is-the-route-steep,मार्ग तीव्र चढाचा आहे का?,,mārga tīvra caḍhācā āhē kā?,mˈaːɾɡ tˈiːvɾə cəɖʰˈaːcaː ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
@@ -53,7 +53,7 @@ trail-warnings.maintenance,देखभाल,,dēkhabhāla,dˌeːkʰbʰˈaːl,,
 trail-warnings.steep-slope,तीव्र उतार,,tīvra utāra,tˈiːvɾə ʊtˈaːɾ,,2,mr-agent-v1;ipa=espeak
 trail-warnings.caution-slippery,सावधान: निसरडे,,sāvadhāna: nisaraḍē,sˌaːvdʰˈaːn nˈɪsəɾɖeː,,2,mr-agent-v1;ipa=espeak
 trail-warnings.danger,धोका,,dhōkā,dʰˈoːkaː,,2,mr-agent-v1;ipa=espeak
-trail-warnings.beware-falling-rocks,दरड कोसळण्याची शक्यता,,daraḍa kōsaḷaṇyācī śakyatā,dˈʌɾəɖ kˌoːsəɭɳjˈaːci ʃˈʌkːjətˌaː,standard Maharashtra ghat-road wording,2,mr-agent-v1;ipa=espeak
+trail-warnings.beware-falling-rocks,दरड कोसळण्याची शक्यता,,daraḍa kōsaḷaṇyācī śakyatā,dˈʌɾəɖ kˌoːsəɭɳjˈaːci ʃˈʌkjətˌaː,standard Maharashtra ghat-road wording,2,mr-agent-v1;ipa=espeak
 trail-warnings.first-aid-station,प्रथमोपचार केंद्र,,prathamōpacāra kēṁdra,pɾˌətʰmˌoːpcˈaːɾ kˈẽːdɾə,,2,mr-agent-v1;ipa=espeak
 trail-warnings.service-suspended,सेवा बंद आहे,,sēvā baṁda āhē,sˈeːvaː bˈʌnd ˈaːheː,,2,mr-agent-v1;ipa=espeak
 trail-landmarks.trail-marker,पायवाटेची खूण,,pāyavāṭēcī khūṇa,pˌaːjvaːʈˈeːci kʰˈuːɳ,,2,mr-agent-v1;ipa=espeak
