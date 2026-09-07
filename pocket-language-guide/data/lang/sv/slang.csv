@@ -1,0 +1,15 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+slang.thats-good,Najs.,,nˈajs,,2,sv-agent-v1;ipa=espeak
+slang.thats-great,Grymt!,,ɡrˈymt,,2,sv-agent-v1;ipa=espeak
+slang.i-love-it,Jag älskar det!,,jɑːɡ ˈɛlskar deːt,,2,sv-agent-v1;ipa=espeak
+slang.thats-bad,Inte så kul.,,ˈɪntɛ sˈoː kˈʉl,,2,sv-agent-v1;ipa=espeak
+slang.delicious,Så gott!,,sˈoː ɡˈɔt,,2,sv-agent-v1;ipa=espeak
+slang.thats-pricey,Det kostar skjortan!,,deːt kˈɔstar ɕˈuːtan,,2,sv-agent-v1;ipa=espeak
+slang.exactly,Precis!,,prəsˈiːs,,2,sv-agent-v1;ipa=espeak
+slang.no-worries,Ingen fara!,,ˈɪŋən fˈɑːra,,2,sv-agent-v1;ipa=espeak
+slang.youre-welcome,Ingen orsak!,,ˈɪŋən ˈuːʂak,,2,sv-agent-v1;ipa=espeak
+slang.seriously,Seriöst?!,,sˌeːriːˈœst,,2,sv-agent-v1;ipa=espeak
+slang.im-good-thanks,"Nej tack, det är bra.",,"nˈɛj tˈak, deːt ɛːr brˈɑː",,2,sv-agent-v1;ipa=espeak
+slang.lets-go,Nu kör vi!,,nˈʉ ɕˈøːr viː,,2,sv-agent-v1;ipa=espeak
+slang.cheers,Skål!,,skˈoːl,,2,sv-agent-v1;ipa=espeak
+slang.see-you,Vi ses!,,viː sˈeːs,,2,sv-agent-v1;ipa=espeak

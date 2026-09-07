@@ -1,0 +1,15 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+slang.thats-good,Best!,,bˈɛst,,1,slang-agent-v1;ipa=espeak
+slang.thats-great,Power!,,pˈaʊə,solid,1,slang-agent-v1;ipa=espeak
+slang.i-love-it,Suka gila!,,sˈukə ɡˈilə,,1,slang-agent-v1;ipa=espeak
+slang.thats-bad,Kurang bagus,,kˈuraŋ bˈaɡos,insufficiently good,1,slang-agent-v1;ipa=espeak
+slang.delicious,Sedap gila!,,sˈɛdap ɡˈilə,,2,slang-agent-v1;ipa=espeak
+slang.thats-pricey,Mahal gila!,,mˈahal ɡˈilə,,1,slang-agent-v1;ipa=espeak
+slang.exactly,Memang betul!,,mˈɛmaŋ bˈətol,,1,slang-agent-v1;ipa=espeak
+slang.no-worries,Takpe,,tˈakpe,"contraction of tak apa, ""(it's) nothing""",1,slang-agent-v1;ipa=espeak
+slang.seriously,Betul ke?,,bˈətol kə,surely not?,1,slang-agent-v1;ipa=espeak
+slang.im-good-thanks,"Taknak, terima kasih",,"tˈaknaʔ, təɾrˈimə kˈaseh","don't want, thanks",1,slang-agent-v1;ipa=espeak
+slang.lets-go,Jom!,Jomlah!,dʒˈom,come on,2,slang-agent-v1;ipa=espeak
+slang.cheers,Bersulang!,,bərsˈulaŋ,to toast,1,slang-agent-v1;ipa=espeak
+slang.see-you,"Aku balik dulu, ya!",,"ˈaku bˈaleʔ dˈulu, jˈa","I'm heading off first, yeah?",1,slang-agent-v1;ipa=espeak
+slang.youre-welcome,Takde apalah,Benda biasa,tˈakde apˈəlah,it's nothing -- the casual reply to thanks,2,ms-agent-v1;ipa=espeak

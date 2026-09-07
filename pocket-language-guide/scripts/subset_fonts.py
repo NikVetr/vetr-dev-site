@@ -108,6 +108,23 @@ TELU_RANGES = [(0x0C00, 0x0C7F)]
 # print -- they arrive with the block and no row can reach them, exactly as Tamil's
 # and Telugu's do.
 GURU_RANGES = [(0x0A00, 0x0A7F)]
+# The whole Gujarati block, for Bengali's, Tamil's, Telugu's and Gurmukhi's reason and
+# one of its own. Gujarati is Devanagari without the shirorekha and it forms the same
+# subjoined and ligated conjuncts -- ક્ત, દ્ધ, ષ્ટ, હ્ય, and the below-base ર of પ્ર --
+# and **none of those has a codepoint at all**: the shaper reaches every one through
+# GSUB, which `subset_source`'s `layout_features = ["*"]` keeps, so the request has to
+# be the block whole rather than the letters the corpus happens to use today. 91 of the
+# block's 128 codepoints are assigned (checked against `unicodedata` rather than by
+# eye) and Mukta Vaani carries 85 of the 91 -- the six it lacks are U+0AFA..0AFF, the
+# Unicode 8.0 signs for writing Perso-Arabic phonology in Gujarati, which no standard
+# Gujarati text uses. The subsetter intersects with the cmap in any case. U+0AE6..0AEF
+# are the Gujarati digits, which the pack does **not** print -- it writes ASCII, for
+# Hindi's, Tamil's, Telugu's and Punjabi's usage reason -- and they arrive with the
+# block. **U+0ABC, the nukta, arrives too and no row and no rule can reach it**: it is
+# banned from the pack by `tmp/gu/write.py` and from the reader table outright, because
+# a nukta letter followed by a subjoined ર is one of the two sequences Noto Serif
+# Gujarati throws on in `vendor/fontkit.esm.js`. See tmp/gujarati.md.
+GUJR_RANGES = [(0x0A80, 0x0AFF)]
 
 # Klingon pIqaD and Tengwar. These are the two scripts here that are **not in
 # Unicode**: both proposals were rejected, so they live in the Private Use Area by
@@ -232,6 +249,60 @@ FACES = {
     ("guru", 700, False): "NotoSansGurmukhiUI-var.ttf",
     ("guru-serif", 400, False): "NotoSerifGurmukhi-var.ttf",
     ("guru-serif", 700, False): "NotoSerifGurmukhi-var.ttf",
+    # Gujarati, and this is Telugu's outcome reached by a different route: **Noto Sans
+    # Gujarati is refused and the shaper closed it, on the Gujarati past tense.** Over
+    # the 53,352 aksharas Gujarati can write (`node tmp/gu/shapecheck.mjs`) it throws
+    # in `vendor/fontkit.esm.js` on only **27** -- a small number, and one of the 27
+    # families is `હ્યું`, the neuter perfect participle, so કહ્યું *said*, રહ્યું
+    # *stayed* and સહ્યું *endured* all throw. Probed as whole words rather than
+    # inferred from the matrix. A throw in `core/measure.js` is a crash rather than a
+    # bad glyph, so what matters is not how many strings throw but whether a real row
+    # reaches one -- and the ordinary Gujarati past tense does. Same NULL MarkBasePos
+    # base anchor defect as Telugu's 340 and Gurmukhi's 26,232.
+    #
+    # Unlike Gurmukhi there is no UI cut on Google Fonts to fall back to, so the sans
+    # half leaves the Noto family. **Mukta Vaani** (Ek Type, OFL 1.1, "Copyright (c)
+    # 2016, Ek Type", no Reserved Font Name in OFL.txt) shapes all 53,352 with zero
+    # throws and zero notdef, carries 85 of the 91 assigned Gujarati codepoints
+    # including the digits, the nukta and ૃ/ૄ, and carries **326** codepoints of
+    # U+0020..024F including the whole of ASCII, `·` U+00B7 and `₹` -- so it needs no
+    # `LATIN_DONOR` graft, which is what decided it against Noto Sans Gujarati **UI**
+    # (43 codepoints, no letter of either case, no `·`). It is the same superfamily as
+    # Mukta Mahee, which tmp/punjabi.md measured and refused for Gurmukhi on the nukta;
+    # Gujarati's binding pair is the **anusvara** instead, and Mukta Vaani's ક/કં
+    # differ by 0.078 of the smaller letter's ink at 5.4pt against Noto's 0.070 -- both
+    # in Devanagari's and Thai's tier (0.067, 0.065) rather than Arabic's 0.036, so
+    # refusing the graft costs nothing measurable. Real static Regular and Bold, so the
+    # pair needs no instancing: the third stack of which that is true, after `arabic`
+    # and `telu`. Hind Vadodara (lacks 23 of the block including the digits, worst pair
+    # 0.060) and Anek Gujarati (worst pair 0.051, upem 2000) are refused on those
+    # numbers, Baloo Bhai 2 is a display design, and Rasa throws on 1,355.
+    #
+    # **No `gujr-serif`, and this is Telugu's outcome by a different route.** Noto Serif
+    # Gujarati was measured, staged and then refused, and the way it was refused is the
+    # finding the next Brahmic addition should read. Over the 53,352-akshara matrix it
+    # throws on 183, and every one of the 183 looked unreachable: 75 are `C્રૃ`, which
+    # Gujarati cannot write because ૃ *is* a vowel, and 108 are a nukta letter plus a
+    # subjoined ર, and this pack writes no nukta. **The matrix was wrong, because it
+    # tested one subjoined consonant and the corpus produces two.** Shaping the real
+    # 27,644 rows -- the pack's own strings plus every respelling `gu__gu-IN.json`
+    # generates over the whole corpus, `node tmp/gu/throwrows.mjs` -- found it throwing
+    # on three: `હ્ર્ર`, `ચ્ર્ર્ફ્ના` and `ત્ફ્ર્ર્જ ફ’-કત`, all of them Arabic's
+    # shadda-geminated ر (حرّ, تشرّفنا, أتفرّج) arriving as `rr` and each `r` taking the
+    # `any` rule `્ર`. A **double subjoined ર**, which no other shipped face has any
+    # trouble with -- `ह्र्र`, `হ্র্র`, `హ్ర్ర`, `ਹ੍ਰ੍ਰ` and `ஹ்ர்ர` all shape clean in
+    # the eighteen committed deva/beng/telu/guru/taml faces, checked -- so this is Noto
+    # Serif Gujarati's defect alone.
+    #
+    # It could have been papered over with one rule (`after_out: "્ર"` on the four
+    # rhotics), and it is not, for the reason the whole face question turns on: Mukta
+    # Vaani throws on **zero** of the 53,352 aksharas *and* zero of the 27,644 real
+    # rows, and a matrix that missed one reachable sequence may be missing another. The
+    # only other OFL Gujarati serif is **Rasa**, which throws on **1,758** real rows.
+    # `stackFor` in core/fonts.js falls back to the sans face for a variant that is not
+    # shipped, which `arabic` and `telu` both already rely on.
+    ("gujr", 400, False): "MuktaVaani-Regular.ttf",
+    ("gujr", 700, False): "MuktaVaani-Bold.ttf",
 }
 
 # Sources that need a Latin face grafted in, and the face to graft.
@@ -435,7 +506,35 @@ ALL_LANGS = ["en", "es", "fr", "de", "ko", "ar", "zh-Hans", "ja",
              # espeak voice (see `VOICES`' comment in build_ipa.py), so this entry
              # is only for the language's own text, section titles and emergency
              # labels, the Polish/Ukrainian/Romanian/Czech shape.
-             "fil"]
+             "fil",
+             # Swedish, routed to `latin` via `Latn` -- no stack of its own needed.
+             # Checked rather than assumed, the way Polish, Ukrainian, Romanian,
+             # Czech and Filipino were: å ä ö and their capitals (U+00E5/00C4/00F6
+             # and uppercase) are all present in every shipped
+             # `latin*.ttf`/`latin-cond*.ttf` cmap, confirmed with
+             # `fontTools.ttLib.TTFont.getBestCmap()` against the actual faces --
+             # ä and ö were already drawn for German's own text, å is the one
+             # genuinely new codepoint and costs nothing further. No romanisation
+             # column either -- Swedish is Latin-scripted already -- so this
+             # entry is only for the language's own text, section titles and
+             # emergency labels.
+             "sv",
+             # Gujarati, whose own script is `Gujr` with a stack of its own below. It
+             # belongs in this union anyway, for the reason Bengali, Tamil, Telugu and
+             # Punjabi do: the four `latin` faces draw its `romanization_iso15919` and
+             # its `ipa` column on every pair whose target is Gujarati, and both are
+             # Latin.
+             "gu",
+             # Malay, routed to `latin` via `Latn` -- no stack of its own needed and
+             # no new codepoint at all: Malay uses plain ASCII Latin with no
+             # diacritics whatsoever, confirmed by reading every row of the finished
+             # pack rather than assumed, so nothing here was even worth measuring
+             # with `fontTools.ttLib.TTFont.getBestCmap()` the way Dutch's IJ or
+             # Swedish's å were -- there is no character to check. No romanisation
+             # column either -- Latin-scripted already -- so this entry is only for
+             # the language's own text, section titles and emergency labels, the
+             # Polish/Ukrainian/Romanian/Czech/Filipino/Swedish shape.
+             "ms"]
 STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                "latin-serif": ALL_LANGS, "latin-cond-serif": ALL_LANGS,
                "cjk-sc": ["zh-Hans"], "cjk-sc-serif": ["zh-Hans"],
@@ -462,6 +561,7 @@ STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                "taml": ["ta"], "taml-serif": ["ta"],
                "telu": ["te"],
                "guru": ["pa"], "guru-serif": ["pa"],
+               "gujr": ["gu"],
                "hebrew": ["he"], "hebrew-serif": ["he"]}
 
 
@@ -566,6 +666,8 @@ def coverage(stack):
         chars |= expand(TAML_RANGES)
     elif stack.startswith("telu"):
         chars |= expand(TELU_RANGES)
+    elif stack.startswith("gujr"):
+        chars |= expand(GUJR_RANGES)
     elif stack.startswith("guru"):
         chars |= expand(GURU_RANGES)
     elif stack.startswith("hebrew"):

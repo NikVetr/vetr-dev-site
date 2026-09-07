@@ -1,0 +1,866 @@
+{
+  "source": "sv",
+  "accent": "sv-SE",
+  "status": "ready",
+  "version": "1",
+  "derives_from": "INVENTED, on the same footing as data/respell/rules/de__de-DE.json and nl__nl-NL.json: Swedish lexicography is IPA-only (SAOL/SO/NE print pronunciation in a modified IPA, not a native-letter respelling), so there is no published Swedish respelling key to transcribe. The engine mechanics (aspirated-cluster decomposition, the espeak-bug targets block) are adapted from de__de-DE.json and nl__nl-NL.json, which share Swedish's own gaps (no aspiration series, no dental fricatives, no voiced postalveolar). The output letters are re-derived throughout: Swedish's own y/u/ö already sit on almost exactly the vowel qualities German and Dutch had to invent digraphs for; Swedish's native sj-ljud and tj-ljud digraphs (sj, tj) give this table a genuine three-way postalveolar/alveolo-palatal split neither German nor Dutch's inventory supports; and Swedish's own r + coronal retroflexion (mars [maʂ], probed directly on this build's espeak sv voice before being trusted -- see tmp/swedish.md) gives a native spelling for the one class of consonant this corpus's other Latin-script readers all have to merge away. The onset g/k device (gh/kh forcing hardness before a front vowel) has no Swedish precedent at all and is borrowed from Italian's and Romanian's own onset c/g rule for the identical letter ambiguity -- said so in the legend rather than assumed known, since a Swedish reader has never been taught it the way an Italian reader has been taught ghi/chi.",
+  "deviations": [
+    {
+      "rule": "German writes /w/ as u before a vowel, u as an offglide after a, o as an offglide after a mid/front vowel, and never v",
+      "why": "Taken as written, because the underlying fact is identical: Swedish native w is also [v] (Wallenberg is [ˈvalɛnbærj]), so German's whole argument -- never spend the glide on a letter the reader will voice on sight -- transfers unchanged. Not Dutch's problem: Dutch w is [ʋ], already close to a glide."
+    },
+    {
+      "rule": "Dutch spells /ʃ ʒ ʂ ɕ ʑ/ all as sj/zj, because Dutch has no native digraph for the alveolo-palatal half of that set",
+      "why": "Overruled for the alveolo-palatal half. Swedish's own tj-ljud (tj, kj, k-before-front-vowel) is phonemically distinct from sj-ljud in the standard language, so /ɕ ʑ ç/ take tj and only the genuinely postalveolar /ʃ ʒ ʂ ʐ/ take sj -- a split neither German nor Dutch's own inventory can make, since neither language contrasts the two."
+    },
+    {
+      "rule": "Dutch and German both approximate Indic retroflex ʈ ɖ ɳ ɭ ʂ by merging them into the plain coronal everywhere",
+      "why": "Overruled in coda position only, where Swedish's own r + coronal sandhi (mars, bort) already produces the identical articulation, confirmed on this build's own espeak sv voice rather than assumed from the orthography (see tmp/swedish.md for the probe). Onset retroflex has no preceding vowel for the r to lean on and merges with the plain coronal, the same loss every other Latin-script reader in the corpus accepts."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "/θ/ /ð/ (English think and this, Arabic thaa and dhaal, Swahili)",
+      "out": "t and d",
+      "why": "Swedish has neither sound and no letter for either. The documented Swedish-accent substitution for English /θ/ is a plain dental stop (\"tink\" for \"think\"), not the sibilant substitution German and Dutch speakers make, so this table takes t/d rather than copying s/d across from a cognate table."
+    },
+    {
+      "sounds": "/x/ /ɣ/ /ç/ /ħ/",
+      "out": "k, g, tj, h",
+      "why": "Swedish has no ach-laut/ich-laut contrast at all, unlike Dutch and German, so none of these four is a native match. /x/ and /ɣ/ take the voiceless/voiced velar stop, the nearest place of articulation Swedish spells directly; /ç/ (German ich-laut, Japanese /çi/) is perceptually closer to tj-ljud than to anything velar and takes tj; /ħ/ (Arabic) has nothing Swedish reaches for at all beyond plain h."
+    },
+    {
+      "sounds": "/ʒ/ /ʐ/ (French j, Mandarin r-like sounds)",
+      "out": "sj (voicing lost)",
+      "why": "Swedish loanwords ending -age (garage, bagage) do carry a voiced [ʒ] in careful speech, spelled with a soft g -- but that letter is already claimed by this table's onset g/k hardness device (plain g means hard /ɡ/ here), and reusing it for /ʒ/ would collide the two devices with no way for a reader to tell which is meant. Merged into sj instead, losing voicing rather than inventing a second device."
+    }
+  ],
+  "policy": {
+    "syllable_separator": "-",
+    "word_separator": " ",
+    "stress": "acute",
+    "stress_min_syllables": 2,
+    "length": "colon",
+    "tone": "drop",
+    "locale": "sv",
+    "fixups": "all"
+  },
+  "splits": [
+    {
+      "glide": "j"
+    }
+  ],
+  "syllable_fixups": [
+    {
+      "match": "ng([kg])",
+      "out": "n\\1"
+    },
+    {
+      "match": "nng",
+      "out": "ng"
+    }
+  ],
+  "phonemes": [
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "θ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ð",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "sj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʂ",
+      "out": "sj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒ",
+      "out": "sj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʐ",
+      "out": "sj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "tj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʑ",
+      "out": "tj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "tj"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "tsj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "dsj",
+      "if_inventory": "ʈʂʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "tsj"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "dsj",
+      "if_inventory": "tɕʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "tsj"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ͈",
+      "out": "tsj"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒ",
+      "out": "dsj"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʑ",
+      "out": "dsj"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "tsj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂʰ",
+      "out": "tsj"
+    },
+    {
+      "slot": "any",
+      "ipa": "cʰ",
+      "out": "tj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "dz",
+      "out": "ds"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "pf",
+      "out": "pf"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɬ",
+      "out": "l"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɡ",
+      "out": "g"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɡ",
+      "out": "g",
+      "if_nucleus": "a aj ajj ajˀ aw aɪ aɪw aɪʊ aʊ aː aːj aːjˀ aːw aːwˀ aːɪ aːʊ a̯ a̯j a̯w o oj ojɪ ojʊ ojˀ ow oɪ oɪʊ oʊ oʊɪ oˀ oː oːj oːɪ oːʊ u uj ujʊ uw uɪ uˀ uː uːɪ w wa waj waɪ waʊ waː waːj waːjˀ we weɪ weː wi wiw wiː wo wu wæ wɐ̃ wɑ wɑː wɔ wɔː wə wəɪ wɛ wɛ̃ wɜː wɤː wɪ wʊ wʌ wː y yj yˀ yː ã ãː æ æː õ õj õː ũ ũː ɐ ɐː ɐ̃ ɐ̃ʊ̃ ɐ̃ː ɑ ɑj ɑʊ ɑː ɑ̃ ɒ ɒː ɔ ɔj ɔjˀ ɔɪ ɔˀ ɔː ɔːj ɔ̃ ɥ ɥœ ɥː ɯ ɯjʊ ɯː ɰ ɰː ɵ ɵː ʉ ʉː ʊ ʊj ʊː ʌ ʌj ʌjɪ ʌː"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡ",
+      "out": "gh"
+    },
+    {
+      "slot": "coda",
+      "ipa": "k",
+      "out": "k"
+    },
+    {
+      "slot": "onset",
+      "ipa": "k",
+      "out": "g",
+      "unless_inventory": "#b #d #ɡ",
+      "if_nucleus": "a aj ajj ajˀ aw aɪ aɪw aɪʊ aʊ aː aːj aːjˀ aːw aːwˀ aːɪ aːʊ a̯ a̯j a̯w o oj ojɪ ojʊ ojˀ ow oɪ oɪʊ oʊ oʊɪ oˀ oː oːj oːɪ oːʊ u uj ujʊ uw uɪ uˀ uː uːɪ w wa waj waɪ waʊ waː waːj waːjˀ we weɪ weː wi wiw wiː wo wu wæ wɐ̃ wɑ wɑː wɔ wɔː wə wəɪ wɛ wɛ̃ wɜː wɤː wɪ wʊ wʌ wː y yj yˀ yː ã ãː æ æː õ õj õː ũ ũː ɐ ɐː ɐ̃ ɐ̃ʊ̃ ɐ̃ː ɑ ɑj ɑʊ ɑː ɑ̃ ɒ ɒː ɔ ɔj ɔjˀ ɔɪ ɔˀ ɔː ɔːj ɔ̃ ɥ ɥœ ɥː ɯ ɯjʊ ɯː ɰ ɰː ɵ ɵː ʉ ʉː ʊ ʊj ʊː ʌ ʌj ʌjɪ ʌː"
+    },
+    {
+      "slot": "onset",
+      "ipa": "k",
+      "out": "gh",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "k",
+      "out": "k",
+      "if_nucleus": "a aj ajj ajˀ aw aɪ aɪw aɪʊ aʊ aː aːj aːjˀ aːw aːwˀ aːɪ aːʊ a̯ a̯j a̯w o oj ojɪ ojʊ ojˀ ow oɪ oɪʊ oʊ oʊɪ oˀ oː oːj oːɪ oːʊ u uj ujʊ uw uɪ uˀ uː uːɪ w wa waj waɪ waʊ waː waːj waːjˀ we weɪ weː wi wiw wiː wo wu wæ wɐ̃ wɑ wɑː wɔ wɔː wə wəɪ wɛ wɛ̃ wɜː wɤː wɪ wʊ wʌ wː y yj yˀ yː ã ãː æ æː õ õj õː ũ ũː ɐ ɐː ɐ̃ ɐ̃ʊ̃ ɐ̃ː ɑ ɑj ɑʊ ɑː ɑ̃ ɒ ɒː ɔ ɔj ɔjˀ ɔɪ ɔˀ ɔː ɔːj ɔ̃ ɥ ɥœ ɥː ɯ ɯjʊ ɯː ɰ ɰː ɵ ɵː ʉ ʉː ʊ ʊj ʊː ʌ ʌj ʌjɪ ʌː"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "kh"
+    },
+    {
+      "slot": "onset",
+      "ipa": "p",
+      "out": "b",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "p"
+    },
+    {
+      "slot": "onset",
+      "ipa": "t",
+      "out": "d",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "b",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "d",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "q",
+      "out": "k"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʈ",
+      "out": "rt"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈ",
+      "out": "t"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɖ",
+      "out": "rd"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖ",
+      "out": "d"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɳ",
+      "out": "rn"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɳ",
+      "out": "n"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɭ",
+      "out": "rl"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭ",
+      "out": "l"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʂ",
+      "out": "rs"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɗ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽʰ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʰ",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʰ",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "tj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "m̩",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "n̩",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "m",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "n",
+      "before_onset": "k ɡ x q ɣ kʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "ng"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɴ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "nj"
+    },
+    {
+      "slot": "any",
+      "ipa": "n",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "lj"
+    },
+    {
+      "slot": "any",
+      "ipa": "l",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɫ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɹ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɻ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "r̝",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɥ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "u",
+      "after_out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "",
+      "after_out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "o",
+      "after_out": "e i o ä ö"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "v",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʋ",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɸ",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "f",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɣ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ħ",
+      "out": "h"
+    },
+    {
+      "slot": "coda",
+      "ipa": "h",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "h",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʕ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "aɪ",
+      "out": "aj"
+    },
+    {
+      "slot": "any",
+      "ipa": "eɪ",
+      "out": "ej"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛi",
+      "out": "ej"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɔɪ",
+      "out": "oj"
+    },
+    {
+      "slot": "any",
+      "ipa": "aʊ",
+      "out": "au"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʌu",
+      "out": "au"
+    },
+    {
+      "slot": "any",
+      "ipa": "œy",
+      "out": "öj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɪ",
+      "out": "j",
+      "after_out": "a e i o u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɪ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʉ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "y",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʏ",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "ø",
+      "out": "ö"
+    },
+    {
+      "slot": "any",
+      "ipa": "œ",
+      "out": "ö"
+    },
+    {
+      "slot": "any",
+      "ipa": "u",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʊ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɯ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɨ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɚ",
+      "out": "er"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɝ",
+      "out": "er"
+    },
+    {
+      "slot": "any",
+      "ipa": "a",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɑ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʌ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "æ",
+      "out": "ä"
+    },
+    {
+      "slot": "any",
+      "ipa": "e",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ə",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɜ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɤ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "i",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "o",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɔ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɒ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɵ",
+      "out": "o"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ̃ʊ̃",
+      "out": "aon"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɑ̃",
+      "out": "an"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɔ̃",
+      "out": "on"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛ̃",
+      "out": "en"
+    },
+    {
+      "slot": "any",
+      "ipa": "œ̃",
+      "out": "ön"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ̃",
+      "out": "an"
+    },
+    {
+      "slot": "any",
+      "ipa": "ã",
+      "out": "an"
+    },
+    {
+      "slot": "any",
+      "ipa": "ẽ",
+      "out": "en"
+    },
+    {
+      "slot": "any",
+      "ipa": "ĩ",
+      "out": "in"
+    },
+    {
+      "slot": "any",
+      "ipa": "õ",
+      "out": "on"
+    },
+    {
+      "slot": "any",
+      "ipa": "ũ",
+      "out": "on"
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ː",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˀ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˤ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̪",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": "",
+      "after_out": "sj tj tsj dsj j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʲ",
+      "out": "j",
+      "if_nucleus_head": "a ɑ ʌ ɐ o ɔ ɵ u ʊ ɯ ʉ ɨ ɤ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̩",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "͈",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̯",
+      "out": ""
+    }
+  ],
+  "targets": {},
+  "legend": "Accent (´) markerar den betonade stavelsen. Kolon (:) förlänger vokalen före. gh och kh markerar hårt g/k. sj och tj är svenska sj-ljudet och tj-ljudet. Annars vanlig svensk stavning.",
+  "note": "Reader's legend, per RESPELL-SYSTEMS.md's method: teaches only the glyphs that are not already ordinary Swedish spelling. The acute is SAOL's own device for irregular stress in loanwords (café, idé, resumé all carry it for exactly this reason -- an unexpected final stress a Swedish reader would not otherwise guess), extended here from its narrow native use (mostly a final é) to mark the stressed vowel of any foreign word, the same extension Dutch's table makes of its own klemtoonteken. The colon is the one borrowed glyph, on the same standing it has in the German and Dutch tables: Swedish's own vowel-length device is doubling the FOLLOWING CONSONANT after a short stressed vowel (väg one g, vägg two), which is not a mark on the vowel at all and cannot be expressed by core/respell.js's per-nucleus length policy without conditioning the *coda* slot on the nucleus's own length -- a materially larger engine change than Czech's reuse of the acute-composition function, and not undertaken for a respelling gimmick. gh/kh are the one fully invented device, flagged as such in derives_from. Everything else in this table is ordinary Swedish spelling.",
+  "policy_note": "max_onset left at the engine default (3, no reader_onsets list) rather than measured against Swedish's own official avstavning (hyphenation) rule the way the Spanish/Portuguese/French/Italian tables were -- flagged, like Dutch's identical disclosure, as a place a fluent speaker's reading of the actual respelled onsets would be worth a second pass.",
+  "measurements": []
+}

@@ -1,0 +1,16 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,Jag vill åka till {}.,,jɑːɡ vɪl ˈoːka tɪl {},,2,sv-agent-v1;ipa=espeak
+utility-templates.please-give-me,"Ge mig {}, tack.",,"jˈeː mˈɛj {}, tˈak",,2,sv-agent-v1;ipa=espeak
+utility-templates.may-i,Får jag {}?,,fˈoːr jɑːɡ {},,2,sv-agent-v1;ipa=espeak
+utility-templates.please-do-not-add,"Lägg inte i {}, tack.",,"lˈɛɡ ˈɪntɛ iː {}, tˈak",,2,sv-agent-v1;ipa=espeak
+utility-templates.do-you-have,Har ni {}?,,hɑːr niː {},,2,sv-agent-v1;ipa=espeak
+utility-templates.please-write-the-number,Kan du skriva numret?,,kan dʉ skrˈiːva nˈɵmrət,,2,sv-agent-v1;ipa=espeak
+utility-templates.i-need,Jag behöver {}.,,jɑːɡ bəhˈøːvər {},,2,sv-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,Finns det en {} i närheten?,,fˈɪns deːt ɛn {} iː nˈɛrheːtən,,2,sv-agent-v1;ipa=espeak
+utility-templates.how-much-is,Hur mycket kostar {}?,,hˈʉr mˈykət kˈɔstar {},,2,sv-agent-v1;ipa=espeak
+utility-templates.is-this,Är det här {}?,,ɛːr deːt hˈɛːr {},,2,sv-agent-v1;ipa=espeak
+utility-templates.please,"{}, tack.",,"{}, tˈak",,2,sv-agent-v1;ipa=espeak
+utility-templates.i-am-looking-for,Jag letar efter {}.,,jɑːɡ lˈeːtar ˈɛftər {},,2,sv-agent-v1;ipa=espeak
+utility-templates.do-you-accept,Tar ni {}?,,tˈɑːr niː {},,2,sv-agent-v1;ipa=espeak
+utility-templates.i-cannot-find,Jag kan inte hitta {}.,,jɑːɡ kan ˈɪntɛ hˈɪtːa {},,2,sv-agent-v1;ipa=espeak
+utility-templates.there-is-a-problem-with,Det är ett problem med {}.,,deːt ɛːr ˈɛt prɔblˈeːm meːd {},,2,sv-agent-v1;ipa=espeak

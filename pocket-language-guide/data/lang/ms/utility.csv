@@ -1,0 +1,16 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,Saya mahu ke {},,sˈajə mˈahu kə {},,2,ms-agent-v1;ipa=espeak
+utility-templates.please-give-me,Tolong beri saya {},,tˈoloŋ bˈəri sˈajə {},,2,ms-agent-v1;ipa=espeak
+utility-templates.may-i,Boleh saya {}?,,bˈoleh sˈajə {},,2,ms-agent-v1;ipa=espeak
+utility-templates.please-do-not-add,Tolong jangan pakai {},,tˈoloŋ dʒˈaŋan pˈakaɪ {},,2,ms-agent-v1;ipa=espeak
+utility-templates.do-you-have,Ada {}?,,ˈadə {},,2,ms-agent-v1;ipa=espeak
+utility-templates.please-write-the-number,Tolong tulis angkanya,,tˈoloŋ tˈules aŋkˈəɲə,,2,ms-agent-v1;ipa=espeak
+utility-templates.i-need,Saya perlu {},,sˈajə pˈəɾrlu {},,2,ms-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,Ada {} di dekat sini?,,ˈadə {} di dˈəkat sˈini,,2,ms-agent-v1;ipa=espeak
+utility-templates.how-much-is,{} berapa?,,{} bərˈapə,,2,ms-agent-v1;ipa=espeak
+utility-templates.is-this,Ini {}?,,ˈini {},works for: Ini halal? Ini babi?,2,ms-agent-v1;ipa=espeak
+utility-templates.please,Minta {},,mˈintə {},,2,ms-agent-v1;ipa=espeak
+utility-templates.i-am-looking-for,Saya cari {},,sˈajə tʃˈari {},,2,ms-agent-v1;ipa=espeak
+utility-templates.do-you-accept,Terima {}?,,təɾrˈimə {},,2,ms-agent-v1;ipa=espeak
+utility-templates.i-cannot-find,Saya tidak menemukan {},,sˈajə tˈidaʔ mənəmˈukan {},,2,ms-agent-v1;ipa=espeak
+utility-templates.there-is-a-problem-with,Ada masalah dengan {},,ˈadə masˈalah dˈəŋan {},,2,ms-agent-v1;ipa=espeak

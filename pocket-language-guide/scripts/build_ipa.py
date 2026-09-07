@@ -426,6 +426,11 @@ VOICES = {"en": "en-us", "es": "es-419", "fr": "fr-fr", "de": "de", "pt": "pt-br
           # other already-built column was built with, so the two-libraries-disagree
           # hazard this comment block warns about for `uk`/`mr` does not apply here.
           "nl": "nl",
+          # Malay has been in espeak-ng for a long time (unlike `uk`/`mr`,
+          # recent additions), and the system package (1.50) carries it, so
+          # no `espeakng_loader` is needed -- confirmed the same way `nl`'s
+          # own entry was, by checking before reaching for the loader.
+          "ms": "ms",
           # espeak-ng ships one Tamil voice and no regional variant, and it is used
           # rather than a romanisation route for one reason: **it implements Tamil's
           # positional voicing rule**, which the script itself does not write and
@@ -525,7 +530,76 @@ VOICES = {"en": "en-us", "es": "es-419", "fr": "fr-fr", "de": "de", "pt": "pt-br
           # [dʊ́d] and [lɑ́b]. The voice is internally inconsistent about the same
           # sound, which is what makes this an omission rather than a transcription
           # choice.
-          "pa": "pa"}
+          "pa": "pa",
+          # Swedish, confirmed with `EspeakBackend.supported_languages()` against
+          # the plain system library (this build's espeak-ng-data 1.50 already
+          # ships `sv`) before considering `espeakng_loader` at all -- no
+          # `PHONEMIZER_ESPEAK_*` override needed, matching Czech's and Polish's
+          # finding rather than Ukrainian's or Marathi's.
+          #
+          # **Probed for the one thing this language is in the corpus to prove --
+          # lexical pitch (accent 1/accent 2, "anden" the duck against "anden" the
+          # spirit) -- and the voice does not write it.** Both readings of `anden`
+          # phonemize identically (`ˈandən`), and so do other standard minimal
+          # pairs (`tomten`, `anden`); there is no tone letter, no extra stress
+          # mark, nothing in the output that varies with which word was intended.
+          # SAOL (Svenska Akademiens ordlista) *does* have a native notation for
+          # this -- a superscript 3/4 after the long segment, in its own
+          # pronunciation key -- so the omission is the G2P's, not the
+          # orthography's; there is simply nothing here to carry to the `ipa`
+          # column, and inventing marks espeak cannot produce would make every
+          # unmarked row look like a claim of accent 1 rather than an absence of
+          # data. See the reader-table notes below for what this means for
+          # `sv__sv-SE.json`.
+          #
+          # **The sj/tj fricatives cost the corpus no new symbol.** `sjuk`,
+          # `stjärna` and `sju` come back with the sj-sound written `sx` (ASCII
+          # for /ɧ/, which `phonemesOf` splits into the already-common `s` + `x`);
+          # `tjugo`, `kött` and `kyrka` get the tj-sound as plain `ɕ`, already in
+          # the corpus from Polish's ś and Russian's palatalised sibilants. Loan
+          # /ʃ/ (`garage`, `choklad`) is kept separate from both, correctly.
+          #
+          # **Vowel length is written on the vowel, as `ː`, which is what
+          # `policy.length` in the reader table below needs** -- confirmed on
+          # minimal pairs mat/matt, vit/vitt, sol/full (long vowel gets `ː`, short
+          # vowel does not) rather than assumed from the orthography. What the
+          # voice does *not* reproduce is Swedish's own spelling convention of
+          # doubling the *following consonant* after a short stressed vowel
+          # (väg/vägg): a handful of coda clusters before /t/ show the same
+          # inconsistency un-repaired (`bort` keeps `rt`, `svart`/`kort` drop the
+          # r entirely with no retroflex mark) with no single deterministic
+          # substitution across them, unlike German's `??`, so it is left as a
+          # graded weakness rather than patched.
+          "sv": "sv",
+          # espeak-ng ships one Gujarati voice and this build's **system**
+          # espeak-ng-data 1.50 has it: `gu_dict` is in the installed tree and
+          # `espeak-ng-data/lang/inc/gu` sits beside `hi`, `bn`, `pa`, `mr` and `ur`,
+          # confirmed with `EspeakBackend.supported_languages()` against the plain
+          # system library before reaching for anything else. So the
+          # `espeakng_loader` escape `uk` and `mr` need is **not** needed here, and
+          # per the warning on those two entries it must not be set for a run that
+          # also touches an already-built language.
+          #
+          # It is used rather than a romanisation route over
+          # `romanization_iso15919`, and unlike Tamil the reason is not that the
+          # script hides something. Gujarati writes voicing and aspiration both, so a
+          # letter-by-letter route would have carried the same information -- but the
+          # voice supplies the three things the letters do not say and gets two of
+          # them right: the ordinary reading of ઝ as [z] (see the fold list), the
+          # deletion of the word-final inherent vowel (ઘર `ɡʰʌɾ`, હાથ `haːtʰ`,
+          # પુરુષ `puɾuʂ`), and the anusvara's split between a nasal consonant before
+          # a stop (પંજો `pʌɲɟoː`, રંગ `ɾʌŋɡ`, ઠંડી `ʈʰʌɳɖi`) and vowel nasalisation
+          # elsewhere (હું `hũ`, નહીં `nʌhĩ`).
+          #
+          # **The four-way stop series survives intact**, which is the thing to probe
+          # before trusting any Indic voice: ધન્યવાદ `dʰənjəʋaːd`, ભારત `bʰaːɾʌt`,
+          # ખાવાનું `kʰaːʋaːnũ`, છે `cʰeː`, ઠીક `ʈʰiːk`, ફોન `pʰoːn`, દૂધ `duːdʰ`,
+          # ઘર `ɡʰʌɾ`, થોડું `tʰoːɖũ`. Aspiration comes back as a `ʰ` modifier bound
+          # to the stop, and over the finished column the count of `ʰ` is 655 and the
+          # counts of the nine aspirated units sum to exactly 655 -- so there is no
+          # bare `ʰ` anywhere and the Hindi `dʰ` bug cannot recur here for the
+          # structural reason Telugu's entry gives rather than by luck.
+          "gu": "gu"}
 
 # Phonemised one word at a time rather than a phrase at a time, which every other
 # espeak language is.
@@ -662,7 +736,31 @@ STRESS = {"fr": "phrase", "ko": "none", "vi": "none", "ja": "none",
           # nothing in practice -- it is here to make the decision explicit and
           # searchable rather than an accident of a function that happens not to
           # produce one).
-          "fil": "none"}
+          "fil": "none",
+          # **Gujarati stress is not contrastive and espeak marks the penult even
+          # when the penult is a schwa**, which is exactly the half of the rule the
+          # language does not follow. Measured over the 1,650 polysyllables of the
+          # finished pack: espeak's primary mark agrees with "the penult" on 84%,
+          # with the first syllable on 54%, with the leftmost long vowel on 52%, with
+          # the antepenult on 1% -- and with **Gujarati's own rule on only 67%**.
+          # That rule is Mistry's (*Gujarati Phonology*, 1997) and Cardona's (*A
+          # Gujarati Reference Grammar*, 1965): the penultimate vowel, unless it is
+          # /ə/, in which case the one before it. કેટલો comes back `keːʈˈʌloː` where
+          # the word is [ˈkeʈlo], and a third of the pack's polysyllables carry the
+          # mark on a schwa in the same way.
+          #
+          # **Deriving it the way `hu_stress` does was considered and refused**, and
+          # the reason is a property of this column rather than of the language: the
+          # rule's condition is stated over vowel *quality*, and this voice writes
+          # the one Gujarati inherent vowel two ways -- `ʌ` on 905 cells and `ə` on
+          # 440, on no discernible principle beyond espeak's own stress placement --
+          # so the predicate the derivation needs is the distinction the column does
+          # not reliably carry. An unmarked respelling costs nothing here: Gujarati
+          # vowels do not reduce, and a wrong mark is a capital for an English reader
+          # and an acute for a Spanish one on a syllable the language does not
+          # stress. Tamil, Telugu, Punjabi, Persian and Filipino all reached "none"
+          # by one or other half of this argument.
+          "gu": "none"}
 
 # Which packs write `text` in something other than the Latin alphabet, so that a
 # Latin run left in one is a loanword rather than the language. `tlh` and `qya` are
@@ -701,7 +799,18 @@ NON_LATIN = {"zh-Hans", "ja", "ko", "th", "hi", "ar", "ru", "el", "tlh", "qya", 
              # whose whole content is `B2 · BPK · bakso` -- the gate doing exactly
              # the job its comment describes, which is what Telugu's own pork-code
              # row records.
-             "pa"}
+             "pa",
+             # Gujarati writes its loanwords in its own letters too -- એટીએમ,
+             # વાઇ-ફાઇ, પિન, ઈ-સિમ, ક્યુઆર કોડ, પાસપોર્ટ, પ્લૅટફૉર્મ -- so no `text`
+             # cell this script transcribes quotes Latin, checked over all 832.
+             # `PIN`, `eSIM` and the ASCII digits ride in `text_alt`, which takes no
+             # `ipa`. Four rows really do quote Latin and all four are refused here
+             # rather than guessed at: the three `note` rows that name Chinese,
+             # Japanese and Swahili readings, which this script skips on principle,
+             # and `common-signs.pork-code`, whose whole content is
+             # `B2 · BPK · bakso` -- the gate doing exactly the job its comment
+             # describes, which is what the Telugu and Punjabi pork-code rows record.
+             "gu"}
 
 
 # ------------------------------------------------------------------- alphabet
@@ -1293,6 +1402,83 @@ REPAIR = {
     "pa": [("r.", "ɽ"), ("+", "˩"), ("v", "ʋ"),
            ("kʰː", "kkʰ"), ("tʰː", "ttʰ"), ("pʰː", "ppʰ"),
            ("ʈʰː", "ʈʈʰ"), ("cʰː", "ccʰ")],
+    # Gujarati: eight repairs, every one of them counted over the finished column
+    # before it was written, and **not one of them adds a symbol the corpus did not
+    # already carry** -- `ɭ ɾ ʋ cʰ ɛ ɔ ə j ã k t c d ʰ` all have a rule in all
+    # thirty-six reader tables, checked table by table rather than assumed.
+    #
+    # **`r.` is ળ, the retroflex lateral, in this voice's ASCII fallback** -- the
+    # same notation Hindi's and Urdu's voices use for ड़ and Punjabi's for ੜ, over a
+    # different letter. `("r.", "ɭ")` needs **no `(".", "")` mop-up and that was
+    # measured rather than assumed**: over the whole column there are 68 dots and 68
+    # `r.` sequences, so the pair is exhaustive -- Bengali's argument -- and a
+    # surviving dot would make `check_alphabet` refuse the row, which is a blank cell
+    # rather than a wrong one. The 12 bare `r` that remain are the trill allophone
+    # this voice writes inside `ર્ય`/`ર્જ` clusters (સૂર્યોદય, એલર્જી, કર્યો), and
+    # they fold to `ɾ` because Gujarati has **one** rhotic and `ɾ` is the symbol
+    # `hi`, `mr`, `te` and `pa` already give it.
+    #
+    # **`w` is વ, on 60 cells, where the same letter comes back `ʋ` on 220.** The
+    # voice is simply inconsistent about one phoneme; `ʋ` wins for Punjabi's reason,
+    # which is agreement with `hi`, `mr`, `te` and `ur` on the same letter.
+    #
+    # **`ch` is છ, and it is the shape of the Hindi `dʰ` bug caught before it
+    # shipped.** One row -- `numbers-money.li`, the bare numeral six -- comes back
+    # `chə` with an ASCII `c` + `h` where every other છ in the pack comes back
+    # `cʰ` (છે `cʰeː`, ઓછું `oːcʰũ`, છોકરો `cʰoːkʌɾoː`, 305 cells in all). Left
+    # alone, thirty-six readers would have spelt "six" with a separate /h/
+    # consonant. Exhaustive: `ch` occurs once and only there.
+    #
+    # **ૈ and ૌ are monophthongs in Gujarati and this voice writes them as
+    # diphthongs.** `aɪ` (7 cells: પૈસા, તૈયાર) and `aʊ` (10 cells: શૌચાલય, સૌથી)
+    # are [ɛ] and [ɔ] -- Cardona's eight-vowel inventory /ə a i u e ɛ o ɔ/ has no
+    # diphthong at all -- and the fold is also what makes the column agree with
+    # `hi`, whose own committed cells give ऐ as `ɛ` and शौचालय as `ʃɔːcˈaːlˌɛj`.
+    # Exhaustive and safe: every `aɪ`/`aʊ` in the column was traced to a ૈ or a ૌ,
+    # and a genuine આઇ/આઈ hiatus comes back with the **long** `aː` (સાઇઝ `saːɪz`,
+    # ભાઈ `bʰaːi`), which these two-character keys cannot match.
+    #
+    # **`ʌɛj` is a word-final `-અય` with a vowel inserted into it**, on 12 cells
+    # (શૌચાલય, સૂર્યોદય, સમય). Folded to `ɛj`, which is what `hi`'s own column
+    # writes for the identical ending (`sˈʌmˌɛj` for समय), rather than to the
+    # phonetically better `əj`: Punjabi's `c`/`ɟ` decision in another place, where
+    # agreement with the neighbouring Indo-Aryan pack on one unstressed final
+    # syllable is worth more than a third reading of it. `ʌ̃ɛj` -- one cell, બાંય --
+    # goes to `ãj` first, because a nasal vowel there would otherwise carry three
+    # vowels in a row.
+    #
+    # **`Cːj` is a `C્ય` conjunct, and it is not a geminate.** ક્યાં comes back
+    # `kːjʌ̃` and ત્યાં `tːjʌ̃` -- 43 cells across `kːj`, `tːj` and `cːj` -- where
+    # the words are [kjã] and [tjã] with one consonant each. This one is repaired
+    # rather than tolerated even though **`hi`'s own column ships the identical
+    # defect** (`kːjaː` for क्या), because gemination is *phonemic* in Gujarati:
+    # સિકો against સિક્કો, પતા against પત્તા. A spurious geminate is a different
+    # word, not a shade, and it tells all thirty-six readers to double a consonant.
+    # Reported for `hi` and `mr` rather than edited there, which is the precedent
+    # `tmp/punjabi.md` set for Czech's `r̝` in four Indic tables.
+    #
+    # **The real geminates are written two ways and the doubled one wins.** સિક્કો
+    # comes back `sɪkːoː` with a length mark and છેલ્લો `cʰeːlloː` with a doubled
+    # consonant, for the same orthographic conjunct. `dʰː` (શુદ્ધ) is folded here so
+    # that the aspiration lands on the second half only -- `ddʰ`, which is the
+    # correct [ʃuddʰ] -- and the ten plain ones are left to `GEMINATE_DOUBLES`
+    # below, machinery that already exists for Hungarian, Italian and Punjabi. It
+    # has to run after the `Cːj` folds, and it does: `REPAIR` is applied first.
+    #
+    # **`ʌ̃` has a rule in none of the thirty-six tables and `ã` has one in all
+    # thirty-six.** 120 cells, and almost all of them are the locative postposition
+    # `-માં` (`bɪlʌmʌ̃`, `aːmʌ̃`) and the interrogative ક્યાં -- so left in, the most
+    # frequent grammatical morpheme in the pack would have relied on `̃` mapping to
+    # nothing and quietly lost its nasal, which is the Hindi `dʰ` bug in another
+    # place. `ã` is the better transcription anyway: -માં is [mã], a low central
+    # nasal vowel. What survives is `ã ũ ĩ ẽ` -- 214 `ũ`, 120 `ã`, 37 `ĩ`, 2 `ẽ` --
+    # and **no `õ`, `ɛ̃`, `ɔ̃`, `ʊ̃` or `ɪ̃` occurs at all**, which matters because
+    # `õ` has no rule in `cs` and the other four have none in `cs`, `en` or `pl`.
+    "gu": [("r.", "ɭ"), ("r", "ɾ"), ("w", "ʋ"), ("ch", "cʰ"),
+           ("aɪ", "ɛ"), ("aʊ", "ɔ"),
+           ("ʌ̃ɛj", "ãj"), ("ʌɛj", "ɛj"),
+           ("kːj", "kj"), ("tːj", "tj"), ("cːj", "cj"),
+           ("dʰː", "ddʰ"), ("ʌ̃", "ã")],
 }
 
 
@@ -1970,8 +2156,9 @@ def el_stress(text, ipa):
 # The affricates are captured whole so that `tsː` becomes `tsts` rather than `tss`,
 # which `phonemesOf` would read as /t/ + /s/ + /s/.
 GEMINATE = re.compile(r"(ts|tʃ|dz|dʒ|tɕ|ʈʂ|[pbtdkɡcɟqfvszʃʒçxhmnɲŋlrɾjʋ])ː")
-# Punjabi joins for its addak: see the geminate paragraph in REPAIR["pa"].
-GEMINATE_DOUBLES = {"hu", "it", "pa"}
+# Punjabi joins for its addak and Gujarati for the same conjunct written the other
+# way: see the geminate paragraph in REPAIR["pa"] and in REPAIR["gu"].
+GEMINATE_DOUBLES = {"hu", "it", "pa", "gu"}
 
 
 # ------------------------------------------------------------- Hungarian stress
@@ -3062,6 +3249,50 @@ GRADE = {
            "**no curated sheet for Punjabi**, so this grade is a spot-check and a "
            "mechanical audit rather than a corpus-wide measurement against a reviewer, "
            "which is the same honest bar Czech's, Dutch's and Romanian's entries set"),
+    "gu": ("B+", "espeak-ng's Gujarati voice is in this build's *system* 1.50 tree, so this "
+           "column is library-independent and settles with either pass of the two-pass "
+           "`--check` the `uk` comment in VOICES describes. It is the second-best Indic "
+           "reading in this file after Tamil's, and for the same kind of structural reason "
+           "rather than a lucky dictionary: **Gujarati orthography is shallow in almost "
+           "everything the corpus needs**. Voicing and all four stop series are written, "
+           "every vowel except the inherent one is written, and the two things the letters "
+           "*do* leave to the reader are exactly the two the voice gets right. **The "
+           "word-final inherent vowel is deleted**, categorically and correctly -- ઘર "
+           "`ɡʰʌɾ`, હાથ `haːtʰ`, પુરુષ `puɾuʂ`, ઔષધ `ɔʂʌdʰ`, પાસપોર્ટ `paːspoːɾʈ` -- which "
+           "is the one thing Hindi's own voice is graded C for getting wrong. And **the "
+           "anusvara's split is implemented**: a homorganic nasal consonant before a stop "
+           "(પંજો `pʌɲɟoː`, રંગ `ɾʌŋɡ`, ઠંડી `ʈʰʌɳɖi`, પલંગ `pəlʌŋɡ`) and vowel "
+           "nasalisation elsewhere (હું `hũ`, છું `cʰũ`, નહીં `nʌhĩ`), which is what "
+           "`te_anusvara` had to be written by hand to supply for Telugu and what "
+           "`pa_nasal` had to regularise for Punjabi. **ઝ comes back `z`, and that is "
+           "right rather than a merger to repair**: Gujarati's historical /dʒʰ/ has gone to "
+           "[z] in the modern standard -- ઝાડા [zaːɖaː], ઝડપી [zəɖpi] -- and the same "
+           "letter is what writes loan /z/ (સાઇઝ, ઝ્લોટી), so the pack contains no `ɟʰ` at "
+           "all and the four-way series has a real hole at the palatal. Eight things are "
+           "repaired in REPAIR[\"gu\"] and every one was counted over the finished column "
+           "first; the largest is `ʌ̃` -> `ã` on 120 cells, which is the locative "
+           "postposition `-માં` and which no reader table has a rule for. "
+           "What is left un-repaired, and is the reason this is B+ rather than higher. "
+           "**Stress is not written at all** (see STRESS[\"gu\"]: espeak marks the penult "
+           "even when the penult is a schwa, agreeing with Gujarati's own rule on 67% of "
+           "1,650 polysyllables, and the rule's condition is a vowel-quality distinction "
+           "this column does not reliably carry). **A word-final schwa survives after a "
+           "consonant cluster** on 61 cells -- ચિહ્ન `cɪhnə`, કેન્દ્ર `keːndɾə`, મિત્ર "
+           "`mɪtɾə`, શૂન્ય `ʃuːnjə`, થાય `tʰaːjə` -- which is careful-speech Gujarati in "
+           "the Sanskrit-derived words and an inserted vowel in the ય-final ones, and which "
+           "`hi`'s own committed column has identically (`ʃˈuːnjə`, `kˈẽːdɾə`), so it is "
+           "left rather than patched in one language only. **The one Gujarati inherent "
+           "vowel is written two ways**, `ʌ` on 905 cells and `ə` on 440, tracking espeak's "
+           "own stress placement rather than anything in the language; folding them would "
+           "make this column disagree with `hi`, `mr`, `pa` and `ur`, all four of which "
+           "carry the same split, so it is recorded as a cost instead. **ચ and જ are kept "
+           "as `c` and `ɟ`** rather than folded to the affricates `tʃ`/`dʒ` they really "
+           "are, which is Punjabi's decision and not Telugu's, for Punjabi's reason: `hi`, "
+           "`bn`, `mr`, `pa` and `ur` all write `c`/`ɟ` for the cognate letters and "
+           "Gujarati shares most of its vocabulary with them. And there is **no curated "
+           "sheet for Gujarati**, so this grade is a spot-check and a mechanical audit "
+           "rather than a measurement against a reviewer -- the same honest bar Czech's, "
+           "Dutch's, Romanian's and Punjabi's entries set"),
     "tr": ("B", "phonemic orthography, but espeak's Turkish stress is 68.1%"),
     "pt": ("B", "pt-br; vowel reduction is phonetic detail the curated sheet smooths away"),
     "en": ("B", "en-us; deep orthography, but espeak's English lexicon is its best"),
@@ -3111,6 +3342,24 @@ GRADE = {
            "depending on sentence context. Left as espeak produced it rather than "
            "hand-patched, since both readings are things a Dutch speaker might actually "
            "say and neither is wrong, only inconsistent"),
+    "ms": ("A-", "system espeak-ng-data 1.50, no loader needed (see the `VOICES` comment). "
+           "829 of 836 rows filled -- 6 note rows and 1 bare-symbol row (the yen sign) need "
+           "none. Malay orthography is near-phonemic and the derivation reads correctly on "
+           "every spot-check for this pack, including a real allophonic rule this voice "
+           "models rather than glosses over: word-final short vowels reduce in the standard "
+           "broadcast pronunciation this voice implements -- `saya` sˈajə (not sˈaja), `dia` "
+           "dˈiə, `bilik`-type closed final syllables lower /i u/ toward [e o] (`ringgit` "
+           "rˈiŋɡet, `panggil` pˈaŋɡel) -- which is a genuine feature of standard spoken "
+           "Malay (the 'Johor-Riau'/kelainan-pepet pronunciation Wikipedia's own Malay- "
+           "phonology article names) and not an error, though it reads as a surprise next "
+           "to Indonesian's more open `saya` sˈaja for the identical spelling. One pattern "
+           "flagged rather than silently accepted: coda `r` before a following consonant "
+           "comes back as the two-character sequence `ɾr` (`perlu` pˈəɾrlu, `berdarah` "
+           "bərdarˈahan) rather than a single rhotic -- both `ɾ` and `r` already carry a "
+           "rule in every reader table this corpus has, so it costs no reader a new symbol "
+           "and `--gaps` cannot see it either way, but it reads as an espeak dictionary "
+           "quirk rather than a real gemination and is worth a fluent speaker's second look "
+           "before it is trusted as phonetic fact."),
     "mr": ("B", "espeak has an `mr` voice only via `espeakng_loader`'s newer bundled data -- "
            "this build's system espeak-ng-data 1.50 predates it, the same situation Ukrainian "
            "was in. Probed directly rather than trusted, on words chosen to force the question "
@@ -3279,6 +3528,32 @@ GRADE = {
             "Filipino sheet exists to score syllable-agreement against, so this grade "
             "is a table read carefully rather than a corpus-wide measurement, in the "
             "same position Dutch's, Marathi's and Romanian's own spot-checks are."),
+    "sv": ("A-", "near-phonemic orthography read by a mature espeak voice (this build's "
+           "system espeak-ng-data 1.50 already ships `sv`; no loader override needed). "
+           "Word stress is looked up rather than derived, as for Polish and Czech, "
+           "because Swedish stress is lexical rather than positional -- loanwords keep "
+           "final stress (`restaurang`, `banan`) beside native initial stress, and "
+           "espeak's dictionary carries the distinction rather than a rule. Vowel "
+           "length is written correctly and is what `policy.length` in the reader "
+           "table below is for. The sj/tj fricatives (`sjuk`, `kyrka`) come back as "
+           "`sx` and `ɕ`, both decomposing into symbols already in the corpus, so "
+           "Swedish costs the other reader tables no new rule. "
+           "**What keeps this from A rather than what earns the minus**: lexical pitch "
+           "accent (accent 1/accent 2 -- `anden` the duck against `anden` the spirit) "
+           "is real and contrastive and the voice does not write it at all, confirmed "
+           "on the standard minimal pair rather than assumed -- both readings "
+           "phonemize identically. SAOL's own pronunciation key has a native notation "
+           "for it (a superscript 3/4 after the long segment), so the gap is the G2P's "
+           "and not a case of the orthography having nothing to say; there is no route "
+           "to it from `text` that this build can drive, and inventing marks the voice "
+           "cannot produce would print false certainty on every unmarked row rather "
+           "than an honest absence. And a handful of `r`-plus-coronal codas before /t/ "
+           "are inconsistent (`bort` keeps `rt`, `svart`/`kort` drop the r with no "
+           "retroflex mark) with no single deterministic substitution across them, "
+           "unlike German's `??`, so it is left ungraded rather than patched. No "
+           "curated Swedish sheet exists to score syllable-agreement against, so this "
+           "grade is a probe-based spot-check like Dutch's, Marathi's, Romanian's, "
+           "Czech's and Filipino's, not a corpus-wide measurement."),
 }
 
 

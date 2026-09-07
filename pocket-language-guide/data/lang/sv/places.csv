@@ -1,0 +1,8 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,Var kan jag köpa biljetter?,,vɑːr kan jɑːɡ ɕˈøːpa bˈɪljətːər,,2,sv-agent-v1;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,Behöver jag boka i förväg?,,bəhˈøːvər jɑːɡ bˈuːka iː fˈœrvɛːɡ,,2,sv-agent-v1;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,Vad är sista insläpp?,,vɑːd ɛːr sˈɪsta ˈɪnsləp,,2,sv-agent-v1;ipa=espeak
+attractions-tickets.are-there-lockers,Finns det förvaringsskåp?,,fˈɪns deːt fˈœrvarˌɪŋskoːp,,2,sv-agent-v1;ipa=espeak
+attractions-tickets.may-i-take-photos,Får jag ta foton?,,fˈoːr jɑːɡ tˈɑː fˈuːtuːn,,2,sv-agent-v1;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,Kan du ta ett foto på oss?,,kan dʉ tˈɑː ˈɛt fˈuːtuː poː ˈɔs,,2,sv-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,Skulle du kunna ta ett foto åt oss?,,skˌɵlə dʉ kˈɵna tˈɑː ˈɛt fˈuːtuː ˈoːt ˈɔs,,2,sv-agent-v1;ipa=espeak

@@ -92,3 +92,7 @@ numbers-money.leu,lej,,lˈɛj,,2,pl-gloss-v1;cldr;ipa=espeak
 numbers-money.leu-symbol,lej (symbol),,lˈɛj sˈɨmbɔl,,2,pl-gloss-v1;cldr;ipa=espeak
 numbers-money.koruna,korona,,kɔrˈɔna,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
 numbers-money.koruna-symbol,korona (symbol),,kɔrˈɔna sˈɨmbɔl,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.krona,korona,,kɔrˈɔna,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.krona-symbol,korona (symbol),,kɔrˈɔna sˈɨmbɔl,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.ringgit,ringgit,,rˈiŋɡɡʲit,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.ringgit-symbol,ringgit (symbol),,rˈiŋɡɡʲit sˈɨmbɔl,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak

@@ -92,3 +92,7 @@ numbers-money.koruna,koruna,,koɾuna,,2,fil-agent-v1;ipa=fil-g2p
 numbers-money.koruna-symbol,koruna (simbolo),,koɾuna simbolo,,2,fil-agent-v1;ipa=fil-g2p
 numbers-money.number-and-classifier-notes,"Pagbuo ng numero: 11 = shi yi; 20 = er shi; 21 = er shi yi. Sa numero ng telepono, madalas na binibigkas ang 1 bilang yao. Sa pagitan ng numero at ng pangngalan, may panuring: ge (pangkalahatan), wei (tao), zhang (tiket, papel), bei (tasa), ping (bote). jiao / mao = 0.1 yuan; fen = 0.01 yuan.",,,,2,fil-agent-v1
 numbers-money.number-and-classifier-notes-2,"Pagbuo ng numero: 11 = juuichi; 20 = nijuu; 21 = nijuuichi. Mga tagabilang: -tsu (bagay), -mai (patag), -hon (mahaba), -nin (tao), -hai (tasa). Sa telepono: 0 = zero o maru, 4 = yon, 7 = nana, 9 = kyuu.",,,,2,fil-agent-v1
+numbers-money.krona,krona,,kɾona,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.krona-symbol,krona (simbolo),,kɾona simbolo,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.ringgit,ringgit,,ɾiŋɡit,,2,gloss-only;scoped-away;name of the currency in this language;ipa=fil-g2p
+numbers-money.ringgit-symbol,ringgit (simbolo),,ɾiŋɡit simbolo,,2,gloss-only;scoped-away;name of the currency in this language;ipa=fil-g2p

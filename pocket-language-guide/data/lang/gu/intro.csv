@@ -1,0 +1,13 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+introductions.my-name-is,મારું નામ {} છે,,māruṁ nām {} chē,maːɾũ naːm {} cʰeː,my name is {},2,gu-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,તમને મળીને આનંદ થયો,,tamanē maḷīnē ānaṁd thayō,təmʌneː məɭiːneː aːnʌnd tʰʌjoː,joy happened on meeting you,2,gu-agent-v1;ipa=espeak
+introductions.what-is-your-name,તમારું નામ શું છે?,,tamāruṁ nām śuṁ chē?,təmaːɾũ naːm ʃũ cʰeː,what is your name?,2,gu-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,અમે સાથે પ્રવાસ કરીએ છીએ,,amē sāthē pravās karīē chīē,ʌmeː saːtʰeː pɾəʋaːs kəɾiːeː cʰiːeː,we travel together,2,gu-agent-v1;ipa=espeak
+introductions.this-is-my-friend,આ મારો મિત્ર છે,આ મારી બહેનપણી છે,ā mārō mitr chē,aː maːɾoː mɪtɾə cʰeː,this is my friend (m) — બહેનપણી for a woman,2,gu-agent-v1;ipa=espeak
+introductions.i-am-from,હું {} નો છું,,huṁ {} nō chuṁ,hũ {} noː cʰũ,I am of {},2,gu-agent-v1;ipa=espeak
+introductions.where-are-you-from,તમે ક્યાંના છો?,,tamē kyāṁnā chō?,tʌmeː kjãnaː cʰoː,of where are you?,2,gu-agent-v1;ipa=espeak
+introductions.how-are-you,કેમ છો?,મજામાં?,kēm chō?,keːm cʰoː,how are you? — the ordinary Gujarati greeting,2,gu-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,હું પ્રવાસી છું,,huṁ pravāsī chuṁ,hũ pɾəʋaːsi cʰũ,I am a traveller,2,gu-agent-v1;ipa=espeak
+introductions.this-is-my-husband-wife,મારા પતિ / મારી પત્ની,,mārā pati / mārī patnī,maːɾaː pʌtɪ / maːɾi pʌtni,my husband / my wife,2,gu-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,મારી દીકરી / મારો દીકરો,,mārī dīkarī / mārō dīkarō,maːɾi dikʌɾi / maːɾoː dikʌɾoː,my daughter / my son,2,gu-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,હું એકલો પ્રવાસ કરું છું,હું એકલી પ્રવાસ કરું છું,huṁ ēkalō pravās karuṁ chuṁ,hũ eːkʌloː pɾəʋaːs kʌɾũ cʰũ,I travel alone (m) — એકલી for a woman,2,gu-agent-v1;ipa=espeak

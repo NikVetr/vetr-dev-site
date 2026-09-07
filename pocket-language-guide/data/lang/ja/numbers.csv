@@ -84,11 +84,15 @@ numbers-money.shekel,シェケル,,shekeru,ɕekeɾɯ,,2,shekel-gloss-v1;cldr;rom
 numbers-money.shekel-symbol,シェケル記号,,shekeru kigō,ɕekeɾɯ kiɡoː,,2,shekel-gloss-v1;cldr;roman=generated;ipa=hepburn
 numbers-money.rial,リアル,,riaru,ɾiaɾɯ,,2,rial-toman-gloss-v1;cldr;ipa=hepburn
 numbers-money.toman,十リアル,,jū riaru,dʑɯː ɾiaɾɯ,,2,rial-toman-gloss-v1;cldr;ipa=hepburn
-numbers-money.zloty,ズウォティ,,,,,2,gloss-only;scoped-away;name of the currency in this language
-numbers-money.zloty-symbol,ズウォティ記号,,,,,2,gloss-only;scoped-away;name of the currency in this language
+numbers-money.zloty,ズウォティ,,zuwoti,zɯwoti,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
+numbers-money.zloty-symbol,ズウォティ記号,,zuwoti,zɯwoti,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
 numbers-money.hryvnia,フリヴニャ,,furivunya,ɸɯɾivɯɲa,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
 numbers-money.hryvnia-symbol,フリヴニャ記号,,furivunya,ɸɯɾivɯɲa,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
 numbers-money.leu,レイ,,rei,ɾei,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
 numbers-money.leu-symbol,レイ記号,,rei kigō,ɾei kiɡoː,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
-numbers-money.koruna,コルナ,,,,,2,gloss-only;scoped-away;name of the currency in this language
-numbers-money.koruna-symbol,コルナ記号,,,,,2,gloss-only;scoped-away;name of the currency in this language
+numbers-money.koruna,コルナ,,koruna,koɾɯna,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
+numbers-money.koruna-symbol,コルナ記号,,koruna,koɾɯna,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
+numbers-money.krona,クローナ,,kurōna,kɯɾoːna,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
+numbers-money.krona-symbol,クローナ記号,,kurōna,kɯɾoːna,,2,gloss-only;scoped-away;name of the currency in this language;ipa=hepburn
+numbers-money.ringgit,リンギット,,ringitto,ɾiɴɡitto,,2,gloss-only;scoped-away;name of the currency in this language;mechanical-transliteration;flagged-for-review;ipa=hepburn
+numbers-money.ringgit-symbol,リンギット記号,,ringitto,ɾiɴɡitto,,2,gloss-only;scoped-away;name of the currency in this language;mechanical-transliteration;flagged-for-review;ipa=hepburn

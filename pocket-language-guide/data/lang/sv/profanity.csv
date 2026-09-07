@@ -1,0 +1,10 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+profanity.oh-my-god,Herregud!,,hˈɛrəɡˌʉd,,2,sv-agent-v1;ipa=espeak
+profanity.damn,Jäklar!,,jˈɛklɑːr,,2,sv-agent-v1;ipa=espeak
+profanity.expletive,Skit!,,sxˈiːt,,2,sv-agent-v1;ipa=espeak
+profanity.strong-expletive,Fan!,,fˈɑːn,,2,sv-agent-v1;ipa=espeak
+profanity.intensifier,jävla,,jˈɛvla,,2,sv-agent-v1;ipa=espeak
+profanity.frustration,Det här är skit.,,deːt hˈɛːr ɛːr sxˈiːt,,2,sv-agent-v1;ipa=espeak
+profanity.thats-rude,Det där var oförskämt.,,deːt dˈɛːr vɑːr uːfˈœʂkəmt,,2,sv-agent-v1;ipa=espeak
+profanity.excuse-my-language,Ursäkta mitt språkbruk.,,ˈɵʂəktˌa mɪt sprˈoːkbrʉk,,2,sv-agent-v1;ipa=espeak
+profanity.strength-warning,"Detta är till för att känna igen orden, inte för att använda dem: ett ords styrka överlever sällan en översättning. Ett ord som glossas som ”fan” här kan vara helt osägbart på språket bredvid, och ett språks starkaste ord är ofta det som fick utelämnas ur den här sektionen.",,,,2,sv-agent-v1

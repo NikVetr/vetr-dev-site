@@ -1,0 +1,13 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+introductions.my-name-is,Jag heter {}.,,jɑːɡ hˈeːtər {},,2,sv-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,Trevligt att träffas.,,trˈɛvlɪkt at trˈɛfas,,2,sv-agent-v1;ipa=espeak
+introductions.what-is-your-name,Vad heter du?,,vɑːd hˈeːtər dʉ,,2,sv-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,Vi reser tillsammans.,,viː rˈeːsər tˌɪlsamˈans,,2,sv-agent-v1;ipa=espeak
+introductions.this-is-my-friend,Det här är min vän.,,deːt hˈɛːr ɛːr mɪn vˈɛːn,,2,sv-agent-v1;ipa=espeak
+introductions.i-am-from,Jag är från {}.,,jɑːɡ ɛːr froːn {},,2,sv-agent-v1;ipa=espeak
+introductions.where-are-you-from,Var kommer du ifrån?,,vɑːr kˈɔmər dʉ ˈɪfroːn,,2,sv-agent-v1;ipa=espeak
+introductions.how-are-you,Hur mår du?,,hˈʉr mˈoːr dʉ,,2,sv-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,Jag är turist.,,jɑːɡ ɛːr tˈʉrɪst,,2,sv-agent-v1;ipa=espeak
+introductions.this-is-my-husband-wife,Det här är min man / fru.,,deːt hˈɛːr ɛːr mɪn man / frˈʉ,,2,sv-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,Det här är min dotter / son.,,deːt hˈɛːr ɛːr mɪn dˈɔtːər / sˈoːn,,2,sv-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,Jag reser ensam.,,jɑːɡ rˈeːsər ˈɛnsam,,2,sv-agent-v1;ipa=espeak

@@ -92,3 +92,7 @@ numbers-money.won-symbol,won (simbol),,wˈon simbˈol,,2,reader-gloss-v1;cldr;ip
 numbers-money.number-and-classifier-notes-2,"Formarea numerelor: 11 = juuichi; 20 = nijuu; 21 = nijuuichi. Clasificatorul vine după numeral: -tsu (obiecte), -mai (obiecte plate), -hon (obiecte lungi), -nin (persoane), -hai (căni). La telefon: 0 = zero sau maru, 4 = yon, 7 = nana, 9 = kyuu. Vocala dublată înseamnă o vocală lungă.",,,,2,ro-agent-v1
 numbers-money.koruna,coroana cehă,,koɾˈɔana tʃˈehə,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
 numbers-money.koruna-symbol,coroana cehă (simbol),,koɾˈɔana tʃˈehə simbˈol,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.krona,coroana suedeză,,koɾˈɔana swedˈezə,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.krona-symbol,coroana suedeză (simbol),,koɾˈɔana swedˈezə simbˈol,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.ringgit,ringgit,,riŋɡdʒˈit,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.ringgit-symbol,ringgit (simbol),,riŋɡdʒˈit simbˈol,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak

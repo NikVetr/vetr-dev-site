@@ -61,6 +61,8 @@ export const LANGUAGE_MOTIFS = /** @type {const} */ ({
   // exactly that reason, in favour of the rope border and the tree, which
   // read as neither a flower nor a stitch.
   ro: 'funie',
+  ms: 'ketupat',
+  sv: 'kurbits',
   cs: 'sklo',
   // `phulkari` is the Punjabi flower-work of Malwa and the Sialkot side both --
   // and it is named against `embroidery`, which Hungarian already holds, because
@@ -411,6 +413,49 @@ const emblems = {
       p.m(50, 50); p.l(50 + Math.cos(a) * 43, 50 + Math.sin(a) * 43);
     }
   },
+  kurbits(p) {
+    // The vase: kurbits (Dalarna's flower-painting tradition, the kind that
+    // decorates a Dala horse) is always painted growing FROM a container,
+    // which is what separates its composition from every other floral mark
+    // in this table -- iris, tulip, lotus and cypress are all rootless
+    // silhouettes with no base object at all.
+    p.m(38, 92); p.l(35, 80); p.q(35, 75, 41, 75); p.l(59, 75); p.q(65, 75, 65, 80); p.l(62, 92); p.close();
+    // The stem: one continuous asymmetric S-curve, not a symmetric radial
+    // base (iris, lotus) or a straight trunk (funie's tree of life) -- a
+    // real kurbits stem is drawn as a single sweeping gesture with the
+    // flowers hung off alternating sides of it.
+    p.m(50, 75); p.q(30, 60, 40, 45); p.q(50, 30, 62, 15);
+    // Three bell-flowers alternating off the stem, each a single bulbous
+    // shape rather than a multi-petal fan: the bell is kurbits' own unit,
+    // not assembled from several petals the way iris/lotus are.
+    leaf(p, 40, 45, -22, -8, 9);
+    leaf(p, 62, 15, 20, -6, 8);
+    leaf(p, 47, 58, -16, 10, 6);
+    // Small round buds beside two of the flowers, and two small pointed
+    // leaves directly on the stem -- a real kurbits panel is never just the
+    // one flower, it is a stem carrying flowers, buds and leaves together.
+    oval(p, 22, 33, 5, 5);
+    oval(p, 78, 12, 4, 4);
+    leaf(p, 44, 60, -14, 8, 5);
+    leaf(p, 55, 32, 14, 6, 5);
+  },
+  ketupat(p) {
+    // The ketupat's own shape: a faceted, elongated diamond pouch plaited
+    // from a single strip of coconut-palm leaf (janur) around a rice
+    // filling -- pointed top and bottom where the strip's ends tuck in,
+    // faceted rather than round because the leaf is folded, not curved.
+    p.m(50, 6); p.l(74, 22); p.l(84, 50); p.l(74, 78); p.l(50, 94);
+    p.l(26, 78); p.l(16, 50); p.l(26, 22); p.close();
+    // The plait: two diagonal strip directions crossing, plus the inner
+    // diamond their crossings trace along the pouch's own sides -- the
+    // lattice a woven ketupat actually shows, rather than banig's (fil)
+    // tiled grid of separate mat facets: here the whole pouch is one
+    // continuous strip, so the weave is read off one shape's own
+    // diagonals, not off repeated units.
+    p.m(24, 32); p.l(76, 68); p.m(76, 32); p.l(24, 68);
+    p.m(32, 24); p.l(68, 76); p.m(68, 24); p.l(32, 76);
+    p.m(50, 16); p.l(84, 50); p.l(50, 84); p.l(16, 50); p.close();
+  },
   funie(p) {
     // The rope twist (funie), top and bottom: an alternating S-curve rather
     // than a straight or single-curve edge, which is what makes it read as
@@ -510,6 +555,12 @@ const tracery = {
   kalamkari(p) { p.m(8, 90); p.q(34, 70, 44, 46); oval(p, 62, 34, 25, 25); oval(p, 62, 34, 11, 11); },
   polder(p) { p.m(5, 85); p.l(95, 85); p.m(30, 85); p.l(30, 30); p.m(55, 85); p.l(55, 15); p.m(80, 85); p.l(80, 40); },
   sklo(p) { p.m(50, 7); p.l(93, 50); p.l(50, 93); p.l(7, 50); p.close(); p.m(50, 7); p.l(50, 93); p.m(7, 50); p.l(93, 50); },
+  kurbits(p) { p.m(50, 92); p.q(28, 65, 42, 42); p.q(56, 19, 70, 6); leaf(p, 42, 42, -24, -10, 11); },
+  ketupat(p) {
+    p.m(50, 8); p.l(76, 24); p.l(88, 50); p.l(76, 76); p.l(50, 92);
+    p.l(24, 76); p.l(12, 50); p.l(24, 24); p.close();
+    p.m(50, 8); p.l(88, 50); p.l(50, 92); p.l(12, 50); p.close();
+  },
   funie(p) { p.m(6, 50); p.q(28, 30, 50, 50); p.q(72, 70, 94, 50); },
   phulkari(p) { diamond(p, 30, 50, 22, 42); diamond(p, 70, 50, 22, 42); p.m(12, 88); p.l(48, 12); p.m(52, 88); p.l(88, 12); },
   banig(p) { diamond(p, 30, 30, 17, 11); diamond(p, 70, 30, 17, 11); diamond(p, 30, 70, 17, 11); diamond(p, 70, 70, 17, 11); },

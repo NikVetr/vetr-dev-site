@@ -1,0 +1,16 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,મારે {} જવું છે,,mārē {} javuṁ chē,maːɾeː {} ɟʌʋũ cʰeː,to me going to {} is,2,gu-agent-v1;ipa=espeak
+utility-templates.please-give-me,મને {} આપો,,manē {} āpō,mʌneː {} aːpoː,give me {},2,gu-agent-v1;ipa=espeak
+utility-templates.may-i,હું {} શકું?,,huṁ {} śakuṁ?,hũ {} ʃʌkũ,may I {}?,2,gu-agent-v1;ipa=espeak
+utility-templates.please-do-not-add,{} ન નાખો,,{} n nākhō,{} nə naːkʰoː,do not put in {},2,gu-agent-v1;ipa=espeak
+utility-templates.do-you-have,{} છે?,,{} chē?,{} cʰeː,is there {}?,2,gu-agent-v1;ipa=espeak
+utility-templates.please-write-the-number,નંબર લખી આપો,,naṁbar lakhī āpō,nʌmbəɾ lʌkʰi aːpoː,write the number,2,gu-agent-v1;ipa=espeak
+utility-templates.i-need,મને {} ની જરૂર છે,,manē {} nī jarūr chē,mʌneː {} ni ɟʌɾuːɾ cʰeː,to me there is need of {},2,gu-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,અહીં નજીકમાં {} છે?,,ahīṁ najīkamāṁ {} chē?,ɛhĩ nəɟikʌmã {} cʰeː,is there {} near here?,2,gu-agent-v1;ipa=espeak
+utility-templates.how-much-is,{} કેટલાનું છે?,,{} kēṭalānuṁ chē?,{} keːʈlaːnũ cʰeː,of how much is {}?,2,gu-agent-v1;ipa=espeak
+utility-templates.is-this,આ {} છે?,,ā {} chē?,aː {} cʰeː,is this {}?,2,gu-agent-v1;ipa=espeak
+utility-templates.please,{} આપો,,{} āpō,{} aːpoː,give {},2,gu-agent-v1;ipa=espeak
+utility-templates.i-am-looking-for,હું {} શોધું છું,,huṁ {} śōdhuṁ chuṁ,hũ {} ʃoːdʰũ cʰũ,I am searching for {},2,gu-agent-v1;ipa=espeak
+utility-templates.do-you-accept,{} ચાલશે?,,{} cālaśē?,{} caːlʌʃeː,will {} run?,2,gu-agent-v1;ipa=espeak
+utility-templates.i-cannot-find,મને {} મળતું નથી,,manē {} maḷatuṁ nathī,mʌneː {} məɭʌtũ nʌtʰi,{} is not being found by me,2,gu-agent-v1;ipa=espeak
+utility-templates.there-is-a-problem-with,{} માં તકલીફ છે,,{} māṁ takalīph chē,{} mã təkliːpʰ cʰeː,there is trouble in {},2,gu-agent-v1;ipa=espeak

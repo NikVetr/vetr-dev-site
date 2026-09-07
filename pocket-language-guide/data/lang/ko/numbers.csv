@@ -84,11 +84,15 @@ numbers-money.shekel,세켈,,sekel,sekʰel,,2,shekel-gloss-v1;cldr;roman=generat
 numbers-money.shekel-symbol,세켈 기호,,sekel giho,sekʰel kiho,,2,shekel-gloss-v1;cldr;roman=generated;ipa=rr
 numbers-money.rial,리얄,,riyal,ɾijal,,2,rial-toman-gloss-v1;cldr;ipa=rr
 numbers-money.toman,십 리얄,,sip riyal,sip ɾijal,,2,rial-toman-gloss-v1;cldr;ipa=rr
-numbers-money.zloty,즈워티,,,,,2,gloss-only;scoped-away;name of the currency in this language
-numbers-money.zloty-symbol,즈워티 기호,,,,,2,gloss-only;scoped-away;name of the currency in this language
+numbers-money.zloty,즈워티,,jeuwoti,tɕɯwʌtʰi,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
+numbers-money.zloty-symbol,즈워티 기호,,jeuwoti,,,2,gloss-only;scoped-away;name of the currency in this language
 numbers-money.hryvnia,흐리브냐,,heuribeunya,hɯɾibɯnja,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
 numbers-money.hryvnia-symbol,흐리브냐 기호,,heuribeunya,,,2,gloss-only;scoped-away;name of the currency in this language
 numbers-money.leu,레우,,reu,ɾeu,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
 numbers-money.leu-symbol,레우 기호,,reu giho,ɾeu kiho,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
-numbers-money.koruna,코루나,,,,,2,gloss-only;scoped-away;name of the currency in this language
-numbers-money.koruna-symbol,코루나 기호,,,,,2,gloss-only;scoped-away;name of the currency in this language
+numbers-money.koruna,코루나,,koruna,kʰoɾuna,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
+numbers-money.koruna-symbol,코루나 기호,,koruna,,,2,gloss-only;scoped-away;name of the currency in this language
+numbers-money.krona,크로나,,keurona,kʰɯɾona,,2,gloss-only;scoped-away;name of the currency in this language;ipa=rr
+numbers-money.krona-symbol,크로나 기호,,keurona,,,2,gloss-only;scoped-away;name of the currency in this language
+numbers-money.ringgit,링깃,,ringgit,ɾiŋɡit,,2,gloss-only;scoped-away;name of the currency in this language;mechanical-transliteration;flagged-for-review;ipa=rr
+numbers-money.ringgit-symbol,링깃 기호,,ringgit,,,2,gloss-only;scoped-away;name of the currency in this language;mechanical-transliteration;flagged-for-review

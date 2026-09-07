@@ -167,6 +167,64 @@ SOURCES = {
         f"{GFONTS}/notosansgurmukhiui/NotoSansGurmukhiUI%5Bwdth,wght%5D.ttf",
     "NotoSerifGurmukhi-var.ttf":
         f"{GFONTS}/notoserifgurmukhi/NotoSerifGurmukhi%5Bwght%5D.ttf",
+    # Gujarati, and Telugu's finding a third time -- **run tmp/gu/shapecheck.mjs
+    # before choosing a Brahmic face.** Over the 53,352 aksharas Gujarati can write
+    # (34 consonants + 4 nukta sequences, x 12 vowel signs, x {bare, anusvara,
+    # candrabindu}, x {no subjoined, each of the 38}), through the same
+    # `vendor/fontkit.esm.js` this project measures and prints with:
+    #
+    #   Noto Sans Gujarati            27 throws   <- and one of them is કહ્યું
+    #   Noto Serif Gujarati          183 throws   <- all unreachable, see below
+    #   Anek Gujarati                  3 throws
+    #   Rasa                       1,355 throws
+    #   Noto Sans Gujarati UI          0 throws
+    #   Mukta Vaani                    0 throws
+    #   Hind Vadodara                  0 throws
+    #   Baloo Bhai 2                   0 throws
+    #
+    # **Twenty-seven is a small number and one of the families is the Gujarati past
+    # tense**, which is what refuses Noto Sans Gujarati: `હ્યું` is the neuter perfect
+    # participle, so કહ્યું *said*, રહ્યું *stayed* and સહ્યું *endured* all throw --
+    # probed as whole words rather than inferred from the matrix. `ધ્રું` and `ળ્રુ`,
+    # the other two families, are artefacts of the matrix and Gujarati writes neither.
+    # Same NULL MarkBasePos base anchor defect as Telugu's and Gurmukhi's.
+    #
+    # **Noto Serif Gujarati's 183 looked unreachable and three of them were not**,
+    # which is the sharpest lesson here and the one the si/kn/ml/ne additions should
+    # read. `tmp/gu/throws.mjs` enumerates all 183: 75 are `C્રૃ`, which Gujarati cannot
+    # write because ૃ *is* a vowel, and 108 are a nukta letter plus a subjoined ર, and
+    # this pack writes no nukta. Both classes are genuinely out of reach. **But the
+    # matrix tests one subjoined consonant and the corpus produces two**: shaping the
+    # real 27,644 rows with `node tmp/gu/throwrows.mjs` -- the pack's own strings plus
+    # every respelling `gu__gu-IN.json` generates over the whole corpus -- found three
+    # throws on a **double subjoined ર**, `હ્ર્ર`, `ચ્ર્ર્ફ્ના` and `ત્ફ્ર્ર્જ ફ’-કત`,
+    # all of them Arabic's shadda-geminated ر (حرّ, تشرّفنا, أتفرّج) arriving as `rr`.
+    # No other shipped face has any trouble with it. So Gujarati ships **sans-only**,
+    # which is Telugu's shape, and the harness to run is the one over real rows rather
+    # than the one over the akshara matrix.
+    #
+    # **The sans is Mukta Vaani rather than Noto Sans Gujarati UI, and the graft is
+    # why.** Both shape all 53,352. The UI cut carries 43 codepoints of U+0020..024F,
+    # no letter of either case and no `·` U+00B7, so it would be the third source here
+    # to need a `LATIN_DONOR`; Mukta Vaani carries **326** including the whole of
+    # ASCII, `·` and `₹`, and needs none. It is Ek Type's Mukta superfamily -- the same
+    # family as the Mukta Mahee tmp/punjabi.md measured and refused for Gurmukhi, and
+    # refused there on the *nukta*, which Gujarati does not write. Gujarati's binding
+    # pair is the anusvara instead: ક/કં differ by 0.078 of the smaller letter's ink at
+    # 5.4pt in Mukta Vaani against 0.070 in Noto Sans Gujarati UI, both in
+    # Devanagari's and Thai's tier (0.067, 0.065) rather than Arabic's (0.036). Real
+    # static Regular and Bold, OFL 1.1, no Reserved Font Name. What it costs is six
+    # codepoints, U+0AFA..0AFF, the Unicode 8.0 signs for writing Perso-Arabic
+    # phonology in Gujarati, which no standard Gujarati text uses and no row reaches.
+    #
+    # Hind Vadodara (Indian Type Foundry, full Latin, zero throws) is refused for Hind
+    # Guntur's reason repeated -- it lacks 23 of the Gujarati block including the
+    # digits ૦-૯, ઌ, ૄ and ૠ ૡ ૢ ૣ -- and on the measurement: its worst pair at 5.4 is
+    # 0.060, below Devanagari's. Anek Gujarati is refused on the same measurement its
+    # Telugu and Gurmukhi siblings were, `ઇ`/`ઈ` at 0.051 and 0.044 at 4.4. Baloo Bhai
+    # 2 is a heavy rounded display design. See tmp/gujarati.md.
+    "MuktaVaani-Regular.ttf": f"{GFONTS}/muktavaani/MuktaVaani-Regular.ttf",
+    "MuktaVaani-Bold.ttf": f"{GFONTS}/muktavaani/MuktaVaani-Bold.ttf",
     "HindGuntur-Regular.ttf": f"{GFONTS}/hindguntur/HindGuntur-Regular.ttf",
     "HindGuntur-Bold.ttf": f"{GFONTS}/hindguntur/HindGuntur-Bold.ttf",
     # Klingon pIqaD and Tengwar, which no Noto face has and which are not in Unicode

@@ -1,0 +1,12 @@
+label,text
+_frame,{region}: {numbers}
+all services,alla tjänster
+police,polis
+ambulance,ambulans
+fire,brandkår
+also works,fungerar också
+fire and ambulance,brandkår + ambulans
+medical,sjukvård
+tourist police,turistpolis
+police and ambulance,polis + ambulans
+gendarmerie,gendarmeri

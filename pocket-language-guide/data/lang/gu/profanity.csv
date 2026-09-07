@@ -1,0 +1,10 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+profanity.oh-my-god,હે ભગવાન!,અરે રામ!,hē bhagavān!,heː bʰəɡʋaːn,O God — mild,1,gu-profanity-v1;ipa=espeak
+profanity.damn,ધત્ તારીની!,,dhat tārīnī!,dʰʌt taːɾiːni,an oath of annoyance — mild,1,gu-profanity-v1;ipa=espeak
+profanity.expletive,સાલા!,,sālā!,saːlaː,coarse; an insult if aimed at anyone,1,gu-profanity-v1;ipa=espeak
+profanity.intensifier,કમબખ્ત,,kamabakht,kəməbʌkʰt,"before a noun: wretched, damn -; mild",1,gu-profanity-v1;ipa=espeak
+profanity.frustration,આ બકવાસ છે,,ā bakavās chē,aː bəkʋaːs cʰeː,this is rubbish — mild,1,gu-profanity-v1;ipa=espeak
+profanity.thats-rude,આ અસભ્યતા છે,,ā asabhyatā chē,aː ʌsəbʰjətaː cʰeː,this is bad manners,1,gu-profanity-v1;ipa=espeak
+profanity.excuse-my-language,ગાળ માટે માફ કરશો,,gāḷ māṭē māph karaśō,ɡaːɭ maːʈeː maːpʰ kəɾʌʃoː,forgive me for the swearing,1,gu-profanity-v1;ipa=espeak
+profanity.strength-warning,"આ પંક્તિઓ ઓળખવા માટે છે, બોલવા માટે નહીં: ગાળનું જોર ભાષાંતરમાં ટકતું નથી. અહીં જે શબ્દ હળવી ગાળ જેવો લાગે એ બાજુની ભાષામાં અકથ્ય હોઈ શકે, અને કોઈ ભાષાનો સૌથી ભારે શબ્દ ઘણી વાર એ જ હોય છે જેને આ ખંડ છોડી દેવો પડ્યો છે.",,"ā paṁktiō ōḷakhavā māṭē chē, bōlavā māṭē nahīṁ: gāḷanuṁ jōr bhāṣāṁtaramāṁ ṭakatuṁ nathī. ahīṁ jē śabd haḷavī gāḷ jēvō lāgē ē bājunī bhāṣāmāṁ akathy hōī śakē, anē kōī bhāṣānō sauthī bhārē śabd ghaṇī vār ē j hōy chē jēnē ā khaṁḍ chōḍī dēvō paḍyō chē.",,,1,gu-notes-v1
+profanity.japanese-register,"જાપાનીમાં આ માટે શબ્દ લગભગ નથી. તિરસ્કાર વ્યાકરણમાંથી આવે છે: બીજા પુરુષનું રુક્ષ સર્વનામ, સાદું આજ્ઞારૂપ, અને ક્રિયાનાં કાપેલાં રૂપ. ગુસ્સો ક્રિયાના છેડે હોય છે, શબ્દકોશમાં શોધી શકાય એવા કોઈ શબ્દમાં નહીં, અને ઉપરની પંક્તિઓ જ લગભગ આખો શબ્દભંડાર છે.",,"jāpānīmāṁ ā māṭē śabd lagabhag nathī. tiraskār vyākaraṇamāṁthī āvē chē: bījā puruṣanuṁ rukṣ sarvanām, sāduṁ ājñārūp, anē kriyānāṁ kāpēlāṁ rūp. gussō kriyānā chēḍē hōy chē, śabdakōśamāṁ śōdhī śakāy ēvā kōī śabdamāṁ nahīṁ, anē uparanī paṁktiō j lagabhag ākhō śabdabhaṁḍār chē.",,,1,gu-notes-v1

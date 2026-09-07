@@ -4,6 +4,7 @@
     "(c) 2014-2021 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'.",
     "(c) 2017-2024 Adobe (http://www.adobe.com/).",
     "Copyright (c) 2015 Indian Type Foundry (info@indiantypefoundry.com)",
+    "Copyright (c) 2016, Ek Type. All rights reserved.",
     "Copyright 2019 Google Inc. All Rights Reserved.",
     "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/arabic)",
     "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/devanagari)",
@@ -103,9 +104,9 @@
       "weight": 400,
       "italic": false,
       "file": "cjk-sc-400",
-      "glyphs": 4953,
-      "ttfBytes": 1324904,
-      "woff2Bytes": 604648,
+      "glyphs": 4955,
+      "ttfBytes": 1325228,
+      "woff2Bytes": 604860,
       "source": "NotoSansSC-var.ttf"
     },
     {
@@ -113,9 +114,9 @@
       "weight": 700,
       "italic": false,
       "file": "cjk-sc-700",
-      "glyphs": 4953,
-      "ttfBytes": 1324768,
-      "woff2Bytes": 619564,
+      "glyphs": 4955,
+      "ttfBytes": 1325096,
+      "woff2Bytes": 619648,
       "source": "NotoSansSC-var.ttf"
     },
     {
@@ -123,9 +124,9 @@
       "weight": 400,
       "italic": false,
       "file": "cjk-jp-400",
-      "glyphs": 5123,
-      "ttfBytes": 1412972,
-      "woff2Bytes": 599032,
+      "glyphs": 5125,
+      "ttfBytes": 1413300,
+      "woff2Bytes": 599356,
       "source": "NotoSansJP-var.ttf"
     },
     {
@@ -133,9 +134,9 @@
       "weight": 700,
       "italic": false,
       "file": "cjk-jp-700",
-      "glyphs": 5123,
-      "ttfBytes": 1414444,
-      "woff2Bytes": 611632,
+      "glyphs": 5125,
+      "ttfBytes": 1414772,
+      "woff2Bytes": 611204,
       "source": "NotoSansJP-var.ttf"
     },
     {
@@ -143,9 +144,9 @@
       "weight": 400,
       "italic": false,
       "file": "arabic-400",
-      "glyphs": 2839,
-      "ttfBytes": 264816,
-      "woff2Bytes": 99392,
+      "glyphs": 2841,
+      "ttfBytes": 265120,
+      "woff2Bytes": 99172,
       "source": "NotoSansArabic-Regular.ttf"
     },
     {
@@ -153,9 +154,9 @@
       "weight": 700,
       "italic": false,
       "file": "arabic-700",
-      "glyphs": 2839,
-      "ttfBytes": 266692,
-      "woff2Bytes": 102984,
+      "glyphs": 2841,
+      "ttfBytes": 266996,
+      "woff2Bytes": 102876,
       "source": "NotoSansArabic-Bold.ttf"
     },
     {
@@ -243,9 +244,9 @@
       "weight": 400,
       "italic": false,
       "file": "cjk-sc-serif-400",
-      "glyphs": 4943,
-      "ttfBytes": 1821352,
-      "woff2Bytes": 789684,
+      "glyphs": 4945,
+      "ttfBytes": 1821716,
+      "woff2Bytes": 788972,
       "source": "NotoSerifSC-var.ttf"
     },
     {
@@ -253,9 +254,9 @@
       "weight": 700,
       "italic": false,
       "file": "cjk-sc-serif-700",
-      "glyphs": 4943,
-      "ttfBytes": 1821300,
-      "woff2Bytes": 813396,
+      "glyphs": 4945,
+      "ttfBytes": 1821664,
+      "woff2Bytes": 813764,
       "source": "NotoSerifSC-var.ttf"
     },
     {
@@ -263,9 +264,9 @@
       "weight": 400,
       "italic": false,
       "file": "cjk-jp-serif-400",
-      "glyphs": 5123,
-      "ttfBytes": 2002592,
-      "woff2Bytes": 807596,
+      "glyphs": 5125,
+      "ttfBytes": 2002960,
+      "woff2Bytes": 807856,
       "source": "NotoSerifJP-var.ttf"
     },
     {
@@ -273,9 +274,9 @@
       "weight": 700,
       "italic": false,
       "file": "cjk-jp-serif-700",
-      "glyphs": 5123,
-      "ttfBytes": 2001768,
-      "woff2Bytes": 831248,
+      "glyphs": 5125,
+      "ttfBytes": 2002132,
+      "woff2Bytes": 830992,
       "source": "NotoSerifJP-var.ttf"
     },
     {
@@ -283,9 +284,9 @@
       "weight": 400,
       "italic": false,
       "file": "cjk-kr-400",
-      "glyphs": 5853,
-      "ttfBytes": 939920,
-      "woff2Bytes": 309320,
+      "glyphs": 5856,
+      "ttfBytes": 940468,
+      "woff2Bytes": 309160,
       "source": "NotoSansKR-var.ttf"
     },
     {
@@ -293,9 +294,9 @@
       "weight": 700,
       "italic": false,
       "file": "cjk-kr-700",
-      "glyphs": 5853,
-      "ttfBytes": 940136,
-      "woff2Bytes": 315984,
+      "glyphs": 5856,
+      "ttfBytes": 940688,
+      "woff2Bytes": 316008,
       "source": "NotoSansKR-var.ttf"
     },
     {
@@ -303,9 +304,9 @@
       "weight": 400,
       "italic": false,
       "file": "cjk-kr-serif-400",
-      "glyphs": 5854,
-      "ttfBytes": 2601708,
-      "woff2Bytes": 596028,
+      "glyphs": 5857,
+      "ttfBytes": 2602712,
+      "woff2Bytes": 596148,
       "source": "NotoSerifKR-var.ttf"
     },
     {
@@ -313,9 +314,9 @@
       "weight": 700,
       "italic": false,
       "file": "cjk-kr-serif-700",
-      "glyphs": 5854,
-      "ttfBytes": 2606272,
-      "woff2Bytes": 618376,
+      "glyphs": 5857,
+      "ttfBytes": 2607280,
+      "woff2Bytes": 618764,
       "source": "NotoSerifKR-var.ttf"
     },
     {
@@ -543,9 +544,9 @@
       "weight": 400,
       "italic": false,
       "file": "guru-400",
-      "glyphs": 2085,
-      "ttfBytes": 255000,
-      "woff2Bytes": 89480,
+      "glyphs": 2087,
+      "ttfBytes": 255312,
+      "woff2Bytes": 89628,
       "source": "NotoSansGurmukhiUI-var.ttf"
     },
     {
@@ -553,9 +554,9 @@
       "weight": 700,
       "italic": false,
       "file": "guru-700",
-      "glyphs": 2085,
-      "ttfBytes": 255936,
-      "woff2Bytes": 94084,
+      "glyphs": 2087,
+      "ttfBytes": 256248,
+      "woff2Bytes": 94224,
       "source": "NotoSansGurmukhiUI-var.ttf"
     },
     {
@@ -577,6 +578,26 @@
       "ttfBytes": 58756,
       "woff2Bytes": 25276,
       "source": "NotoSerifGurmukhi-var.ttf"
+    },
+    {
+      "stack": "gujr",
+      "weight": 400,
+      "italic": false,
+      "file": "gujr-400",
+      "glyphs": 1251,
+      "ttfBytes": 299336,
+      "woff2Bytes": 75636,
+      "source": "MuktaVaani-Regular.ttf"
+    },
+    {
+      "stack": "gujr",
+      "weight": 700,
+      "italic": false,
+      "file": "gujr-700",
+      "glyphs": 1251,
+      "ttfBytes": 302852,
+      "woff2Bytes": 83304,
+      "source": "MuktaVaani-Bold.ttf"
     }
   ]
 }

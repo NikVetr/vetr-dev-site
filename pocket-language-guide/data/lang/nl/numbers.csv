@@ -92,3 +92,7 @@ numbers-money.leu,leu,lei,lˈøː,"singular leu, plural lei -- the plural is wha
 numbers-money.leu-symbol,lei,leu,lˈɛɪ,"no stylised symbol exists; the plural word is what is printed, matching the concept's own reasoning",2,nl-agent-v1;ipa=espeak
 numbers-money.koruna,kroon,,krˈoːn,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
 numbers-money.koruna-symbol,kroon (symbool),,krˈoːn sɪmbˈoːl,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.krona,kroon,,krˈoːn,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.krona-symbol,kroon (symbool),,krˈoːn sɪmbˈoːl,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.ringgit,ringgit,,rˈɪŋɣɪt,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.ringgit-symbol,ringgit (symbool),,rˈɪŋɣɪt sɪmbˈoːl,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak

@@ -1,0 +1,32 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+payment-receipt.pay-by-card,Bayar pakai kad?,,bˈajar pˈakaɪ kˈad,,2,ms-agent-v1;ipa=espeak
+payment-receipt.pay-cash,Bayar tunai?,,bˈajar tˈunaɪ,,2,ms-agent-v1;ipa=espeak
+payment-receipt.pay-by-qr-code,Bayar pakai QRIS?,,bˈajar pˈakaɪ krˈis,QRIS = the national QR standard,2,ms-agent-v1;ipa=espeak
+payment-receipt.a-receipt-please,Minta resit,,mˈintə rˈəset,,2,ms-agent-v1;ipa=espeak
+payment-receipt.please-write-the-number,Tolong tulis angkanya,,tˈoloŋ tˈules aŋkˈəɲə,,2,ms-agent-v1;ipa=espeak
+payment-receipt.how-much-in-total,Totalnya berapa?,,totˈalɲə bərˈapə,,2,ms-agent-v1;ipa=espeak
+payment-receipt.can-we-pay-separately,Boleh bayar terpisah?,,bˈoleh bˈajar təɾrpˈisah,,2,ms-agent-v1;ipa=espeak
+payment-receipt.is-tax-included,Sudah termasuk cukai?,,sˈudah təɾrmˈasoʔ tʃˈukaɪ,,2,ms-agent-v1;ipa=espeak
+payment-receipt.my-card-was-declined,Kad saya ditolak,,kˈad sˈajə ditˈolaʔ,,2,ms-agent-v1;ipa=espeak
+payment-receipt.the-bill-is-wrong,Sepertinya tagihannya keliru,,səpəɾrtˈiɲə tˌaɡihˈanɲə kəlˈiru,,2,ms-agent-v1;ipa=espeak
+payment-receipt.i-already-paid,Saya sudah bayar,,sˈajə sˈudah bˈajar,,2,ms-agent-v1;ipa=espeak
+shopping.i-am-just-looking,Saya lihat-lihat dulu,,sˈajə lˈihatlihat dˈulu,,2,ms-agent-v1;ipa=espeak
+shopping.how-much-is-this,Ini berapa?,,ˈini bərˈapə,,2,ms-agent-v1;ipa=espeak
+shopping.that-is-too-expensive,Terlalu mahal,,təɾrlˈalu mˈahal,,2,ms-agent-v1;ipa=espeak
+shopping.can-it-be-a-little-cheaper,Boleh kurang sedikit?,,bˈoleh kˈuraŋ sədˈiket,,2,ms-agent-v1;ipa=espeak
+shopping.is-there-a-discount,Ada diskaun?,,ˈadə dˈiskaʊn,,2,ms-agent-v1;ipa=espeak
+shopping.where-do-i-pay,Bayar di mana?,,bˈajar dimˈanə,,2,ms-agent-v1;ipa=espeak
+shopping.i-will-take-this,Saya ambil ini,,sˈajə ˈambel ˈini,,2,ms-agent-v1;ipa=espeak
+shopping.what-is-this,Ini apa?,,ˈini ˈapə,,2,ms-agent-v1;ipa=espeak
+shopping.where-can-i-buy,Di mana boleh beli {}?,,dimˈanə bˈoleh bˈəli {},,2,ms-agent-v1;ipa=espeak
+shopping.do-you-have-this-in-stock,Ada stoknya?,,ˈadə stˈokɲə,,2,ms-agent-v1;ipa=espeak
+shopping.two-of-these,"Yang ini dua, ya",,"jaŋ ˈini dˈuə, jˈa",,2,ms-agent-v1;ipa=espeak
+shopping.what-is-it-made-of,Ini bahannya apa?,,ˈini bahˈanɲə ˈapə,bahan = material and ingredient,2,ms-agent-v1;ipa=espeak
+color-size-returns.do-you-have-another-color,Ada warna lain?,,ˈadə wˈarnə lˈaɪn,,2,ms-agent-v1;ipa=espeak
+color-size-returns.do-you-have-another-size,Ada ukuran lain?,,ˈadə ukˈuran lˈaɪn,,2,ms-agent-v1;ipa=espeak
+color-size-returns.may-i-try-it-on,Boleh dicoba?,,bˈoleh ditʃˈobə,,2,ms-agent-v1;ipa=espeak
+color-size-returns.can-i-return-it,Boleh dikembalikan?,,bˈoleh dˌikəmbalˈikan,,2,ms-agent-v1;ipa=espeak
+color-size-returns.can-i-exchange-it,Boleh ditukar?,,bˈoleh ditˈukar,,2,ms-agent-v1;ipa=espeak
+color-size-returns.do-you-have-a-bag,Ada beg plastik?,Plastik?,ˈadə bˈɛɡ plˈasteʔ,,2,ms-agent-v1;ipa=espeak
+tax-refund.can-i-get-a-tax-refund,Boleh minta pemulangan SST?,,bˈoleh mˈintə pəmulˈaŋan ˌɛsˌɛstˈiː,SST = Malaysia's Sales and Service Tax,2,ms-agent-v1;ipa=espeak
+tax-refund.is-tax-free-shopping-available,Ada Skim Pemulangan Pelancong?,Bebas cukai,ˈadə skˈim pəmulˈaŋan pəlˈantʃoŋ,Skim Pemulangan Pelancong (Tourist Refund Scheme) is run by Kastam (Malaysian Customs),2,ms-agent-v1;ipa=espeak

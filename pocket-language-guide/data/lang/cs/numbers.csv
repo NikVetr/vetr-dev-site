@@ -90,3 +90,7 @@ numbers-money.hryvnia,hřivna,,hr̝ˈivna,,2,gloss-only;scoped-away;cs-agent-v1;
 numbers-money.hryvnia-symbol,hřivna (symbol),,hr̝ˈivna sˈimbol,,2,gloss-only;scoped-away;cs-agent-v1;ipa=espeak
 numbers-money.leu,leu,,lˈeʊ,,2,gloss-only;scoped-away;cs-agent-v1;ipa=espeak
 numbers-money.leu-symbol,leu (symbol),,lˈeʊ sˈimbol,,2,gloss-only;scoped-away;cs-agent-v1;ipa=espeak
+numbers-money.krona,koruna,,kˈoruna,,2,gloss-only;scoped-away;cs-agent-v1;ipa=espeak
+numbers-money.krona-symbol,koruna (symbol),,kˈoruna sˈimbol,,2,gloss-only;scoped-away;cs-agent-v1;ipa=espeak
+numbers-money.ringgit,ringgit,,rˈiŋɡɡit,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.ringgit-symbol,ringgit (symbol),,rˈiŋɡɡit sˈimbol,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak

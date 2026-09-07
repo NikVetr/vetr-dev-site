@@ -1,0 +1,926 @@
+{
+  "source": "ms",
+  "accent": "ms-MY",
+  "status": "ready",
+  "version": "1",
+  "derives_from": "ADAPTED from data/respell/rules/id__id-ID.json, not built from nothing -- Malay and Indonesian share the same vowel/consonant inventory, the same kh/ng/ny/sy digraphs and ai/au/ei/oi diphthongs, and the same near-phonemic orthography, all fixed by the 1972 Indonesian-Malaysian spelling unification (see Wikipedia's own article by that name). Where id's table cites a fact about Indonesian phonology or EYD spelling that is equally a fact about Malay and DBP's own Ejaan Rumi, the same rule and the same reasoning is kept rather than re-derived. Three places genuinely differ, and are the actual content of the divergence rather than a restatement of id's own reasoning: the schwa marker's precedent (below), eu (deviations), and the OTC/media-exposure facts a few approximations lean on, both checked rather than assumed to transfer. id's own `derives_from` explains why EYD's Penulisan Unsur Serapan and PUPI were rejected as spelling-keyed rather than sound-keyed documents -- DBP's parallel foreign-term-absorption guidelines (Pedoman Umum Ejaan Bahasa Melayu) are indexed the same way, for the same reason, so that argument is inherited rather than re-run. \n\nThe schwa marker (ê) is kept, but its precedent is Malay's own, not Indonesian's borrowed one: the pre-1972 Za'aba spelling system, Malaya's standard orthography until unification, wrote schwa as ĕ (e-breve) against plain e for exactly this contrast -- a real Malay convention that predates and is independent of Indonesian's KBBI slash -field precedent id's own table extends. Modern unified spelling dropped the distinction in both countries (both now write plain e for /e/, /ɛ/ and /ə/ alike -- Wikipedia's Malay-phonology article confirms this for Malay in as many words), so this table is reviving a real but retired device rather than inventing one from nothing. The circumflex ê is used rather than Za'aba's own breve ĕ for a stated, practical reason: ê is already proven safe -- it is drawn by the `latin` stack today, in id's own shipped output -- where ĕ would be an unverified new glyph for a table that otherwise introduces none, which is exactly the kind of cost the project's own history warns against paying without measuring it first.",
+  "deviations": [
+    {
+      "rule": "EYD Edisi V, Penulisan Unsur Serapan (95 rules), and PUPI -- the two documents anyone reviewing this will reach for. Not derived from at all.",
+      "why": "They answer the wrong question, and this was checked in full rather than taken from the survey. Both ejaan.kemendikdasmen.go.id pages were read: the section's own statement of scope is 'huruf, gabungan huruf, dan imbuhan' under the principle 'Unsur bahasa sumber diserap ke dalam bahasa Indonesia dengan memprioritaskan bentuk' -- prioritising FORM. So every one of the 95 rules is INDEXED on a source-language letter or letter-combination. The survey recorded as unverified whether it is spelling-keyed throughout, and the strict answer is no: about 27 of the 95 do consult pronunciation, but only as a tie-breaker between two spelling-keyed outcomes -- 'Gabungan huruf ea yang dilafalkan /i/ menjadi i', 'Huruf t yang diikuti i dan dilafalkan /s/ menjadi s'. The index is still a letter, so there is no entry a phoneme can reach and the document fails the respelling test exactly as the survey concluded. PUPI is worse and says so: 6.5 changes foreign spelling 'hanya seperlunya', 6.6 keeps a cluster's 'bentuk visual' (hence pneumonia, tmesis, knebelit), 6.3 defines transliteration as 'lepas dari bunyi lafal yang sebenarnya'."
+    },
+    {
+      "rule": "KBBI's slash field is scoped to Indonesian headwords and to the e qualities only: 'Garis miring dipakai untuk lafal kata yang mengandung unsur bunyi /e/, /e/, dan /e/'.",
+      "why": "That scope is the whole convention we are extending: KBBI needs the diacritic only where its own spelling is ambiguous, which for an Indonesian word is nothing but e. A foreign phrase is ambiguous in more places, and every one of them is answered by an ordinary Indonesian letter, so the extension costs no new glyph. Of PUEBI 2015's three diacritics EYD V keeps only e-pepet ('pada huruf e pepet dapat diberikan tanda diakritik'), so é for /e/ and è for /ɛ/ are NOT used: /e/ and /ɛ/ both take plain e, which lands right for free because [ɛ] is the closed-final allophone of /e/."
+    },
+    {
+      "rule": "KBBI marks no stress, and instrumental work finds none in Malay -- 'neither phonemic nor predictable'.",
+      "why": "So policy.stress: caps is a NEW INSTRUCTION rather than a borrowed convention, and it is the weakest-justified field in this table. It is kept because it is the only device the typography can carry (RESPELL-SYSTEMS.md: bold and italic are unavailable, and a diacritic dies at 5.2pt italic muted) and because it is harmless where it is uninformative. The alternative was measured and rejected: an acute cannot be used here, because PUEBI's é means 'this e is /e/', so the mark would read as a vowel-quality change on exactly the vowel most likely to be stressed -- the same argument that rules the acute out for French. Expect the capitals to do no phonetic work and to need the legend."
+    },
+    {
+      "rule": "'v ... is virtually always pronounced as [f]', so the survey concludes it 'does not buy /v/'.",
+      "why": "The premise is right and the conclusion is not followed here: /v/ is written v, not f. A reader who merges them says [f] whichever letter is printed, so v is never worse; a reader who does not merge them gets the distinction; and f for /v/ would additionally collapse /f/ and /v/ ON THE PAGE for the four targets where the contrast is lexical (fr it de ru). v is a letter of the alphabet and the cost of using it is zero."
+    },
+    {
+      "rule": "q and x are letters of the Indonesian alphabet.",
+      "why": "Never emitted, per the survey: EYD restricts both to proper names and religious terms, so /q/ takes k (kiblat, kurban) and /ks/ falls out of the ordinary letters. Verified in the output -- 0 rows contain q or x."
+    },
+    {
+      "rule": "Indonesian orthography is near-phonemic, so the naive table writes each series with its own letter.",
+      "why": "Overruled for the two targets that contrast unaspirated with aspirated and have no word-initial voiced stop: there the unaspirated series takes b d g j dz instead of p t k c ts, and the aspirated series takes p t k c ts. That keeps a contrast that is lexical in the target and reproduces a Latin spelling Indonesian readers have already met -- pinyin (Beijing, Guangzhou) and Revised Romanization (Busan, bibimbap), both of which Indonesian media print as-is. The guard is unless_inventory '#b #d #ɡ' with a word-edge mark and not a bare presence test, because Korean's ipa carries b d g only intervocalically (0 word-initial) while Thai's and Hindi's are phonemes; a presence test groups Korean with Thai and destroys the aspiration contrast. Malaysia's own large ethnic-Chinese population and its exposure to Korean pop culture (K-pop, K-drama) make this at least as safe an assumption for a Malay reader as for an Indonesian one -- if anything more so, since Chinese-Malaysians read pinyin place and personal names as routinely as Malay ones."
+    },
+    {
+      "rule": "EYD V can write gemination (Arabic loans keep it) and KBBI writes long vowels in some loans.",
+      "why": "Neither is written here. policy.length is none because EYD's pemenggalan splits adjacent vowels -- bu-ah, ma-in, sa-at -- so a doubled vowel reads as an EXTRA SYLLABLE, which is a wrong reading rather than a neutral one, and because doubling would move the syllable count the capitals are placed against. Consonant length collapses with it, so Italian otto is o.to and Japanese doozo is do.zo. Turkish's colon is a TDK notation with no Indonesian standing."
+    },
+    {
+      "rule": "eu is a vowel combination EYD V recognises, and the obvious letter pair for French /oe/.",
+      "why": "Not used for the same free-glyph reason id's table isn't, but for the opposite fact about the sound: the /ɘ/ monophthong id's own table cites is a Sumatran/Javanese-Indonesian regional feature (Aceh, Sunda, Rejang), not a Peninsular Malaysian one, and standard Malaysian Malay has no competing claim on the letter pair eu at all. So this table spends it rather than avoiding it: /ø/ and /œ/ are written eu (approximations), which is closer to the sound than plain e (it keeps the rounding gesture, if not the vowel quality) and costs nothing, since nothing else in Malay spelling wants eu for anything."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "/θ/ and /ð/ (English think/this, Arabic ث ذ, Swahili th/dh)",
+      "out": "s and z",
+      "why": "Indonesian has neither, and KBBI's own Arabic loans have already decided both: hadis (ḥadīth), zikir, azan, zalim. So s and z are not an invention here but the reading an Indonesian has been taught. The cost is English: this way is zis wei, north is nors."
+    },
+    {
+      "sounds": "/ʒ/ (French jour, Russian ж, Portuguese -ge)",
+      "out": "j",
+      "why": "The one gap with no letter and no digraph. j is the voiced palatal Indonesian does have and is what Indonesian's own loans use for it (jurnal < journal), so the error is manner (affricate for fricative) at the right place and voicing. zy was rejected: it would be a third thing in the legend, which RESPELL-SYSTEMS.md limits to one line."
+    },
+    {
+      "sounds": "/ʔ/ (glottal stop) and /ʕ/, plus pharyngealisation ˤ",
+      "out": "dropped",
+      "why": "What Indonesian does with its own Arabic loans: maaf < ma'af, Jumat < Jum'at, Alquran, alim. A dropped hamza leaves an ordinary onsetless Indonesian syllable. Note that final k is [?] in Indonesian anyway, so a target's final glottal stop often survives by accident."
+    },
+    {
+      "sounds": "/ħ/ (Arabic ح)",
+      "out": "h",
+      "why": "EYD's own Arabic correspondence, and audible, which dropping it would not be."
+    },
+    {
+      "sounds": "/y ø œ/ (front rounded vowels) and /ɥ/",
+      "out": "eu",
+      "why": "Not written e the way id's table does, because Malaysian Malay's eu is free (see deviations): closer to the sound, costs nothing."
+    },
+    {
+      "sounds": "/ə ʌ ɨ ɤ ɜ/ and Turkish, Korean and Thai /ɯ/",
+      "out": "ê",
+      "why": "The one place this table adds a glyph, and the reason it is worth it: Indonesian writes /e/ and /ə/ with the same letter, so without the diacritic a reader cannot tell mer.de.ka's two e's apart. It is one glyph, it is EYD V's own optional mark, and it carries five foreign vowels no other Indonesian letter is close to -- Russian's reduced vowels (spa.SI.bê), Hindi's inherent अ (nê.MÊS.te), Mandarin's e and -i finals (jê.gê, syê), Turkish's ı (gu.nai.DÊN), Korean's ㅡ (sêl), and German's final -er and English NURSE, both ê plus r (kin.dêr, wêrks). Japanese /ɯ/ is excluded typologically rather than by target: espeak writes Japanese's only high back vowel as /ɯ/ and the language has no plain /u/ at all, so unless_inventory 'u' sends it to u there and to ê in the four languages that have both."
+    },
+    {
+      "sounds": "/æ/ (English TRAP, Turkish closed-final e)",
+      "out": "e",
+      "why": "e rather than a, against the loan spellings (taksi, aktif) and for the sound: [kɛn] for can and [sɛŋk] for thank are much closer than [kan] and [saŋk]. It is nearly free, because English /æ/ is always checked, so with max_onset 1 the syllable is closed and Indonesian's own allophony gives [ɛ] rather than [e] without being asked. Portuguese is excluded by a targets block, where the same symbol is a G2P artefact for final -a."
+    },
+    {
+      "sounds": "the retroflex series /ʈ ɖ ɳ ɽ/ and Mandarin's /ʈʂ ʈʂʰ ʂ ʐ ɻ/",
+      "out": "t d n r, and c j sy r r",
+      "why": "Indonesian has no retroflexes. The dental letters are the standard Indonesian rendering of Devanagari, and for Mandarin the retroflex and alveolo-palatal series merge on c j sy, which is what pinyin's zh/j, ch/q, sh/x collapse to for any reader without the contrast."
+    },
+    {
+      "sounds": "aspiration and palatalisation",
+      "out": "not written",
+      "why": "Indonesian has neither. Every aspirate has its own explicit rule so that /kʰ/ cannot decompose into k plus ʰ and print kh, which is the letter for /x/ -- that trap is the whole reason the aspirated and Korean tense series are listed one by one rather than left to a bare modifier rule. Palatalisation is dropped outright rather than written y or i, because y after s would spell sy (/ʃ/) and i would add a syllable Russian does not have; --units lists all 14 palatalised consonants for exactly this reason and every one of them is this decision."
+    },
+    {
+      "sounds": "vowel length, consonant gemination",
+      "out": "not written",
+      "why": "See deviations: doubling reads as an extra syllable in Indonesian. Hindi, Arabic, Thai, Japanese, German and Italian length is lost."
+    },
+    {
+      "sounds": "lexical tone (zh-Hans, th, vi)",
+      "out": "dropped",
+      "why": "Chao tone letters are not Indonesian letters and a reader with no key gets nothing from them. All four curated tonal sheets drop it too. This is the largest single loss in the table and it is unfixable without a device Indonesian does not have."
+    },
+    {
+      "sounds": "syllabic /m̩/ and /n̩/ (Swahili mtoto, nchi)",
+      "out": "ê plus the nasal",
+      "why": "Indonesian has no syllabic consonant, and mto.to asks for an onset it cannot begin. ê gives the nasal a syllable of its own -- [əm.to.to] against [m̩.to.to] is nearly the same sound and is readable. Done as a fixup rather than a phoneme rule because espeak marks the syllabicity on only 34 of the Swahili rows and writes a plain m on the rest; the fixup catches both, and is restricted to m before a non-labial so that Swahili's prenasalised mb mv nd nz nj and the ng/ny digraphs are left alone (ÊNZU.ri for nzuri would have added a syllable and moved the penult, which is where Swahili stress is)."
+    },
+    {
+      "sounds": "/ɹ/ (English r), /ʁ/ (French r)",
+      "out": "r",
+      "why": "Indonesian r is a trill or tap and there is no closer letter. For French this is also what Indonesian's own French loans do -- restoran, trotoar, parfum -- so kh (the letter for [x], and arguably closer in manner) was rejected as unrecognisable."
+    }
+  ],
+  "policy": {
+    "syllable_separator": ".",
+    "word_separator": " ",
+    "stress": "caps",
+    "stress_min_syllables": 2,
+    "length": "none",
+    "tone": "drop",
+    "max_onset": 1,
+    "locale": "ms-MY",
+    "fixups": "first"
+  },
+  "splits": [],
+  "phonemes": [
+    {
+      "slot": "any",
+      "ipa": "ɬ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂʰ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ͈",
+      "out": "c"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʈʂ",
+      "out": "j",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "c"
+    },
+    {
+      "slot": "onset",
+      "ipa": "tɕ",
+      "out": "j",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "c"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ts",
+      "out": "dz",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts̪",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʑ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "dz",
+      "out": "dz"
+    },
+    {
+      "slot": "any",
+      "ipa": "pf",
+      "out": "pf"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʰ",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰ",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "cʰ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʰ",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡʰ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟʰ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽʰ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "p͈",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "t͈",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "k͈",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "s͈",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "dˤ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "t̪",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "s̪",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "m̩",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "n̩",
+      "out": "n"
+    },
+    {
+      "slot": "onset",
+      "ipa": "p",
+      "out": "b",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "t",
+      "out": "d",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "k",
+      "out": "g",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "q",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "b",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "d",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɗ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "g",
+      "if_inventory": "dʒ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "f",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɸ",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "v",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʋ",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "θ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "ð",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "sy"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʂ",
+      "out": "sy"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "sy"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʑ",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "kh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɣ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "kh",
+      "if_inventory": "x"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ħ",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "h",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʕ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "m",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "n",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "ny"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "ng"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɴ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɳ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "l",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɫ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "ly"
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɹ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʐ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɻ",
+      "out": "r"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "j",
+      "out": "i",
+      "after_out": "a e i o u ê"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "j",
+      "out": "",
+      "after_out": "y"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "j",
+      "out": "i",
+      "after_out": "s j c"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "j",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "i"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "w",
+      "out": "u",
+      "after_out": "a e i o u ê"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "w",
+      "out": "w",
+      "when": [
+        "no_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "w",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "w"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɥ",
+      "out": "w",
+      "when": [
+        "no_onset"
+      ]
+    },
+    {
+      "slot": "any",
+      "ipa": "ɥ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ː",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˀ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˤ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̪",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̩",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "͈",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̯",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "n"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ̃ʊ̃",
+      "out": "aun"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ã",
+      "out": "an"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ẽ",
+      "out": "en"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ĩ",
+      "out": "in"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "õ",
+      "out": "on"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ũ",
+      "out": "un"
+    },
+    {
+      "slot": "any",
+      "ipa": "a",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɑ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "æ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "e",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ø",
+      "out": "eu"
+    },
+    {
+      "slot": "any",
+      "ipa": "œ",
+      "out": "eu"
+    },
+    {
+      "slot": "any",
+      "ipa": "ə",
+      "out": "ê"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʌ",
+      "out": "ê"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɨ",
+      "out": "ê"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɤ",
+      "out": "ê"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɜ",
+      "out": "êr"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɚ",
+      "out": "êr"
+    },
+    {
+      "slot": "any",
+      "ipa": "i",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɪ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "o",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɔ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɒ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɵ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "u",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʊ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʉ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "y",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʏ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɯ",
+      "out": "u",
+      "unless_inventory": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɯ",
+      "out": "ê"
+    },
+    {
+      "slot": "any",
+      "ipa": "r̝",
+      "out": "r"
+    }
+  ],
+  "syllable_fixups": [
+    {
+      "match": "^m(?=[^aeiouêbpfvwy])",
+      "out": "êm"
+    },
+    {
+      "match": "([aeiouê])\\1",
+      "out": "\\1"
+    },
+    {
+      "match": "([bcdfghjklmnprstvwyz])\\1",
+      "out": "\\1"
+    }
+  ],
+  "targets": {
+    "pt": {
+      "comment": "espeak writes Portuguese's reduced final vowels with two symbols that are not those sounds: final -e is /y/ (a front rounded vowel Portuguese does not have) and final -a is /ae/. Both are the near-schwa the rest of the table spells e pepet and a.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "y",
+          "out": "ê"
+        },
+        {
+          "slot": "any",
+          "ipa": "æ",
+          "out": "a"
+        }
+      ]
+    },
+    "ko": {
+      "comment": "Korean eo, which every other target writes as a schwa or an English STRUT.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "ʌ",
+          "out": "o"
+        }
+      ]
+    }
+  },
+  "legend": "ê = e pepet (mêrdeka); HURUF BESAR = suku kata bertekanan.",
+  "note": "Reader's legend, per RESPELL-SYSTEMS.md's one-line limit -- one glyph and one convention, matching id's own table's shape exactly: \"ê = e pepet (mêrdeka); HURUF BESAR = suku kata bertekanan.\" Everything else is ordinary Malay spelling, including the digraphs kh ng ny sy and the diftong ai au ei oi, which are identical to Indonesian's own since both were fixed by the 1972 unification. No q and no x are ever emitted, DBP's own restriction of both to proper names and loanwords mirroring EYD's. There is no curated Malay sheet, so this table is not scored; it is held to zero --gaps, to a --units list in which every entry is a stated decision, and to being read aloud across every target.",
+  "policy_note": "syllable_separator is a full stop, for the same reason id's table gives: Malay's own hyphen is already loaded (line break, reduplication -- rumah-rumah, prefix and compound joining), so it cannot double as a word-internal syllable mark without creating the same false letter-by-letter reading id's own note describes. \n\nmax_onset is 1, inherited unchanged rather than re-measured, and that inheritance is principled rather than lazy: the count id's table reports (40,674 intervocalic junctures over 16 targets; 33.3% none, 49.2% one, 16.3% two, 1.1% three, 0.1% four) is a property of the shared *target* corpus's IPA, not of Indonesian text, since a reader table only ever looks at what it is reading -- so the same figures apply to any reader measuring the same targets. What has to transfer separately is the syllabification *rule* id measured that count against, and it does: Malay's own traditional word-division convention (pemenggalan kata) comes from the same pre-1972 grammatical tradition Za'aba's system codified for both countries, splits a medial two-consonant cluster the same way (man-di), opens the next syllable on a single medial consonant the same way (ba-pak), and splits adjacent vowels the same way (bu-ah) -- so max_onset 1 reproduces it here for the identical reason id's table gives, not a borrowed one. reader_onsets stays absent for the same inertness argument id's own note makes: the field is only consulted at max_onset >= 2. \n\nfixups stays first, unchanged: this is a fact about the shared engine and the shared vowel/consonant fixup patterns (both operate on the a-z+ê output alphabet, not on which reader produced it), not about Indonesian specifically. \n\nlength is none and tone is drop, for the identical reason id's table gives -- a doubled vowel reads as an extra syllable under the same pemenggalan rule, and Chao tone letters are not Malay letters either. stress is caps at stress_min_syllables 2, inherited with the same caveat id's own table states: Malay stress, like Indonesian's, is usually described as non-phonemic and not reliably predictable, so this is a new instruction for the typography to carry rather than a borrowed convention, and it is the weakest-justified field in this table for the same reason it is id's.",
+  "engine_note": "Engine limitation, stated as the rule that could not be expressed, with numbers. In syllabify the nucleus span grows greedily over glides and over /ɪ ʊ/, and the retraction loop only fires when the span ENDS on a glide -- so a vowel+glide immediately followed by a glide+vowel collapses into a single nucleus and the syllable boundary between them is lost. The rule wanted: break a nucleus span at a glide that has a vowel on both sides. Mandarin 借用 /tɕjɛjʊŋ/ prints jieiung for jie.yung and 自用 prints dzêiung; Russian -ние /nʲijɪ/ prints nii for ni.ye, and Turkish miyim prints miim -- the last two survive only because the vowel fixup happens to leave a run of three as a run of two. 19 rows print a chunk of seven letters or more and 2 of them are this. Not fixed here, and not worked around: a nucleus rule for each sequence would be a lookup table. The other two engine behaviours this table meets are already documented as measured and rejected in respell.js -- one medial consonant always opens the next syllable, so Mandarin 翻译 is fa.ni and Thai ตอนเย็น is to.nyen rather than ton.yen -- and I have no new numbers to add to them. This note is inherited essentially verbatim from id's own table: it describes a limitation of the shared `syllabify` engine measured against the shared target corpus, neither of which differs between an Indonesian reader and a Malay one."
+}

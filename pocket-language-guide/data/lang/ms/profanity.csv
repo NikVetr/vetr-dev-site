@@ -1,0 +1,10 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+profanity.oh-my-god,Alamak!,,alˈamaʔ,oh mercy -- mild,1,profanity-v1;src=DBP;ipa=espeak
+profanity.damn,Sial!,,sˈial,cursed -- mild oath,1,profanity-v1;src=DBP;ipa=espeak
+profanity.expletive,Tai!,,tˈaɪ,shit -- coarse,1,profanity-v1;src=DBP;ipa=espeak
+profanity.strong-expletive,Anjing!,,ˈandʒeŋ,dog -- strong; an insult if aimed at anyone,1,profanity-v1;src=DBP;ipa=espeak
+profanity.frustration,Ini kacau,,ˈini kˈatʃaʊ,this is a mess -- mild,1,profanity-v1;src=DBP;ipa=espeak
+profanity.thats-rude,Itu kasar,,ˈitu kˈasar,that is coarse,1,profanity-v1;src=DBP;ipa=espeak
+profanity.excuse-my-language,"Maaf, bahasa saya kasar",,"mˈaaf, bahˈasə sˈajə kˈasar","sorry, my language was coarse",1,profanity-v1;src=DBP;ipa=espeak
+profanity.strength-warning,"Baris-baris ini ada supaya anda mengenalinya, bukan supaya anda menggunakannya: beratnya sesuatu kata kesat tidak turut diterjemah. Kata yang kelihatan seperti sumpahan ringan di sini mungkin tidak pernah disebut dalam bahasa di sebelahnya, dan kata terkasar sesuatu bahasa selalunya kata yang terpaksa ditinggalkan daripada bahagian ini.",,,,1,profanity-notes-v1
+profanity.japanese-register,"Bahasa Jepun hampir tidak melakukan ini melalui kosa kata. Penghinaan dibawa oleh tatabahasa: kata ganti nama diri kedua yang kasar, kata perintah tanpa hiasan, dan bentuk kata kerja yang serba pendek. Kemarahannya terletak pada akhiran, bukan pada kata yang boleh dicari dalam kamus, dan baris-baris di atas adalah hampir seluruh kosa kata yang ada.",,,,1,profanity-notes-v1

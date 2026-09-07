@@ -84,11 +84,15 @@ numbers-money.shekel,谢克尔,,xièkè'ěr,ɕjɛ˥˩kʰɤ˥˩ɑɻ˧˩˧,,2,shek
 numbers-money.shekel-symbol,谢克尔符号,,xièkè'ěr fúhào,ɕjɛ˥˩kʰɤ˥˩ɑɻ˧˩˧ fu˧˥xɑʊ˥˩,,2,shekel-gloss-v1;cldr;roman=generated;ipa=pinyin
 numbers-money.rial,里亚尔,,lǐyà'ěr,li˧˩˧ja˥˩ɑɻ˧˩˧,,2,rial-toman-gloss-v1;cldr;ipa=pinyin
 numbers-money.toman,十里亚尔,,shí lǐyà'ěr,ʂɨ˧˥ li˧˩˧ja˥˩ɑɻ˧˩˧,,2,rial-toman-gloss-v1;cldr;ipa=pinyin
-numbers-money.zloty,兹罗提,,,,,2,gloss-only;scoped-away;name of the currency in this language
-numbers-money.zloty-symbol,兹罗提符号,,,,,2,gloss-only;scoped-away;name of the currency in this language
+numbers-money.zloty,兹罗提,,Zīluótí,tsɯ˥lwɔ˧˥tʰi˧˥,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
+numbers-money.zloty-symbol,兹罗提符号,,Zīluótí,tsɯ˥lwɔ˧˥tʰi˧˥,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
 numbers-money.hryvnia,格里夫纳,,Gélǐfūnà,kɤ˧˥li˧˩˧fu˥na˥˩,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
 numbers-money.hryvnia-symbol,格里夫纳符号,,Gélǐfūnà,kɤ˧˥li˧˩˧fu˥na˥˩,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
 numbers-money.leu,列伊,,lièyī,ljɛ˥˩i˥,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
 numbers-money.leu-symbol,列伊符号,,lièyī fúhào,ljɛ˥˩i˥ fu˧˥xɑʊ˥˩,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
-numbers-money.koruna,克朗,,,,,2,gloss-only;scoped-away;name of the currency in this language
-numbers-money.koruna-symbol,克朗符号,,,,,2,gloss-only;scoped-away;name of the currency in this language
+numbers-money.koruna,克朗,,Kèlǎng,kʰɤ˥˩lɑŋ˧˩˧,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
+numbers-money.koruna-symbol,克朗符号,,Kèlǎng,kʰɤ˥˩lɑŋ˧˩˧,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
+numbers-money.krona,克朗,,Kèlǎng,kʰɤ˥˩lɑŋ˧˩˧,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
+numbers-money.krona-symbol,克朗符号,,Kèlǎng,kʰɤ˥˩lɑŋ˧˩˧,,2,gloss-only;scoped-away;name of the currency in this language;ipa=pinyin
+numbers-money.ringgit,林吉特,,Línjítè,lin˧˥tɕi˧˥tʰɤ˥˩,,2,gloss-only;scoped-away;name of the currency in this language;mechanical-transliteration;flagged-for-review;ipa=pinyin
+numbers-money.ringgit-symbol,林吉特符号,,Línjítè,lin˧˥tɕi˧˥tʰɤ˥˩,,2,gloss-only;scoped-away;name of the currency in this language;mechanical-transliteration;flagged-for-review;ipa=pinyin

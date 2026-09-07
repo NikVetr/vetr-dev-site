@@ -1,0 +1,30 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+dietary-needs.no-meat,Tanpa daging,,tˈanpə dˈaɡeŋ,,2,ms-agent-v1;ipa=espeak
+dietary-needs.no-eggs,Tanpa telur,,tˈanpə tˈəlor,,2,ms-agent-v1;ipa=espeak
+dietary-needs.not-spicy,Tidak pedas,Jangan pakai sambal,tˈidaʔ pˈɛdas,,2,ms-agent-v1;ipa=espeak
+dietary-needs.less-spicy,Jangan terlalu pedas,,dʒˈaŋan təɾrlˈalu pˈɛdas,,2,ms-agent-v1;ipa=espeak
+dietary-needs.no-peanuts,Tanpa kacang tanah,,tˈanpə kˈatʃaŋ tˈanah,kacang alone = any bean or nut,2,ms-agent-v1;ipa=espeak
+dietary-needs.no-nuts,Tanpa kacang-kacangan,Tanpa kacang pohon,tˈanpə kˈatʃaŋkatʃaŋan,,2,ms-agent-v1;ipa=espeak
+dietary-needs.no-seafood,Tanpa makanan laut,Tanpa udang dan kerang,tˈanpə makˈanan lˈaʊt,,2,ms-agent-v1;ipa=espeak
+dietary-needs.i-am-vegetarian,Saya vegetarian murni,"Tanpa daging, ayam, ikan",sˈajə vˌeɡətarˈian mˈurni,"murni signals strict, not ""less meat""",2,ms-agent-v1;ipa=espeak
+dietary-needs.i-am-vegan,Saya vegan,"Tanpa daging, telur, susu",sˈajə vˈɛɡan,,2,ms-agent-v1;ipa=espeak
+dietary-needs.i-do-not-eat,Saya tidak makan {},,sˈajə tˈidaʔ mˈakan {},,2,ms-agent-v1;ipa=espeak
+dietary-needs.i-am-allergic-to,Saya alergi {},,sˈajə alˈəɾrɡi {},,2,ms-agent-v1;ipa=espeak
+dietary-needs.does-it-contain-fish-stock,Ada belacan atau kaldu ikan?,,ˈadə bəlˈatʃan ˈataʊ kˈaldu ˈikan,belacan = fermented shrimp paste,2,ms-agent-v1;ipa=espeak
+dietary-needs.does-it-contain-pork-stock,Kuahnya pakai kaldu babi?,Ada kaldu atau tulang babi?,kuˈahɲə pˈakaɪ kˈaldu bˈabi,,2,ms-pork-stock-v1;ipa=espeak
+dietary-needs.i-have-a-severe-allergy-to,Saya alergi berat {},Saya alergi parah terhadap {},sˈajə alˈəɾrɡi bˈɛrat {},,2,ms-agent-v1;ipa=espeak
+food-ordering.table-for-two,Meja untuk dua orang,,mˈɛdʒə ˈuntoʔ dˈuə ˈoraŋ,,2,ms-agent-v1;ipa=espeak
+food-ordering.is-a-table-available,Ada meja kosong?,,ˈadə mˈɛdʒə kˈosoŋ,,2,ms-agent-v1;ipa=espeak
+food-ordering.menu-please,Minta menunya,,mˈintə mənˈuɲə,,2,ms-agent-v1;ipa=espeak
+food-ordering.i-want-this,Saya mahu ini,,sˈajə mˈahu ˈini,,2,ms-agent-v1;ipa=espeak
+food-ordering.do-you-have-drinking-water,Ada air putih?,,ˈadə ˈaer pˈuteh,air putih = plain drinking water,2,ms-agent-v1;ipa=espeak
+food-ordering.to-go-please,"Dibungkus, ya",,"dibˈuŋkos, jˈa",,2,ms-agent-v1;ipa=espeak
+food-ordering.check-please,Minta bilnya,Minta resitnya,mˈintə bˈilɲə,,2,ms-agent-v1;ipa=espeak
+food-ordering.does-it-contain,Ini pakai {}?,Ini mengandung {}?,ˈini pˈakaɪ {},"try: babi, angciu, belacan",2,ms-agent-v1;ipa=espeak
+food-ordering.is-this-vegetarian,Ini vegetarian?,,ˈini vˌeɡətarˈian,,2,ms-agent-v1;ipa=espeak
+food-ordering.what-do-you-recommend,Apa yang enak di sini?,,ˈapə jaŋ ˈɛnaʔ di sˈini,,2,ms-agent-v1;ipa=espeak
+food-ordering.water-please,Minta air putih,,mˈintə ˈaer pˈuteh,,2,ms-agent-v1;ipa=espeak
+food-ordering.can-a-vegetarian-eat-this,"Ini pakai daging, ikan, atau belacan?",,"ˈini pˈakaɪ dˈaɡeŋ, ˈikan, ˈataʊ bəlˈatʃan",,2,ms-agent-v1;ipa=espeak
+dietary-needs.no-pork,Tanpa babi,Tanpa babi dan lemak babi,tˈanpə bˈabi,lemak babi = lard,2,ms-gaps-v1;ipa=espeak
+dietary-needs.is-this-halal,Ini halal?,Ada sijil Halal JAKIM?,ˈini hˈalal,logo: Halal JAKIM (Malaysia's halal authority),2,ms-gaps-v1;ipa=espeak
+dietary-needs.does-it-contain-pork-fat,Masaknya pakai lemak babi?,Ada minyak babi atau lemak babi?,masˈakɲə pˈakaɪ lˈɛmaʔ bˈabi,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak

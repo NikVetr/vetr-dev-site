@@ -1,0 +1,8 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,ટિકિટ ક્યાં મળશે?,,ṭikiṭ kyāṁ maḷaśē?,ʈɪkɪʈ kjã məɭʌʃeː,where will a ticket be got?,2,gu-agent-v1;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,બુકિંગ કરાવવી પડશે?,,bukiṁg karāvavī paḍaśē?,bukɪnɡ kəɾaːʋʌʋi pəɖʌʃeː,will a booking have to be got done?,2,gu-agent-v1;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,અંદર જવાનો છેલ્લો સમય ક્યારે?,,aṁdar javānō chēllō samay kyārē?,ʌndəɾ ɟəʋaːnoː cʰeːlloː səmɛj kjaːɾeː,when is the last time for going in?,2,gu-agent-v1;ipa=espeak
+attractions-tickets.are-there-lockers,લૉકર છે?,,lôkar chē?,lɔkəɾ cʰeː,are there lockers?,2,gu-agent-v1;ipa=espeak
+attractions-tickets.may-i-take-photos,અહીં ફોટા લેવાની છૂટ છે?,,ahīṁ phōṭā lēvānī chūṭ chē?,ɛhĩ pʰoːʈaː leːʋaːni cʰuːʈ cʰeː,is there permission for taking photos here?,2,gu-agent-v1;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,અમારો ફોટો લઈ આપો,,amārō phōṭō laī āpō,ʌmaːɾoː pʰoːʈoː lʌi aːpoː,take our photo for us,2,gu-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,જરા અમારો ફોટો લઈ આપશો?,,jarā amārō phōṭō laī āpaśō?,ɟʌɾaː ʌmaːɾoː pʰoːʈoː lʌi aːpʌʃoː,will you take our photo for us a little?,2,gu-agent-v1;ipa=espeak

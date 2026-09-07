@@ -100,8 +100,25 @@ no explanation.
 **No duplicate `concept_id` within your pack.** `loadLanguage` keeps the last row and
 silently drops the rest. `validate_data.py` now catches this; it did not always.
 
-**This bites hardest in the other direction — the gloss sweep across everyone else's
-packs.** A new currency concept needs a gloss row in every other pack, and appending
+**A gloss sweep has to run *before* your ipa build, and this has now gone wrong four
+times.** The sweep writes a row with an empty `ipa` cell, and `build_ipa.py` is what
+fills it — so a sweep that lands *after* the build ships a currency that prints with
+no pronunciation in every pack that is not its own. It happened to `koruna` in thirty
+packs, and to `ringgit` and `krona` in thirty-three each, in the same session. Nothing
+catches it: `validate_data.py` has no opinion on a blank `ipa`, `--gaps` has nothing to
+report because no symbol reached the page, and `build_ipa.py --check` reads *current*
+because the file on disk is what the last build produced. **The check is to look:**
+
+```bash
+grep -h '<your-concept-id>,' data/lang/*/numbers.csv | awk -F, '$5 == "" || $4 == ""'
+```
+
+The safe order is: add the concept, sweep the gloss into every pack, *then* build ipa
+— and if you are filling only your own language, remember that the sweep touched
+thirty-odd others whose ipa now needs a run too, split by library so `uk` and `mr` go
+through `espeakng-loader` and nothing else does.
+
+**The sweep also bites in the other direction — appending twice.** A new currency concept needs a gloss row in every other pack, and appending
 that row twice is easy to do when the sweep is re-run after an interruption. Because
 `loadLanguage` keeps the *last* row, the surviving copy is the second one, which is
 the one written before `build_ipa.py` filled the `ipa` cell — so the pack silently

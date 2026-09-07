@@ -1,0 +1,13 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+introductions.my-name-is,Nama saya {},,nˈamə sˈajə {},,2,ms-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,Senang berkenalan,,sˈɛnaŋ bərkənˈalan,,2,ms-agent-v1;ipa=espeak
+introductions.what-is-your-name,Namanya siapa?,Nama anda siapa?,namˈəɲə siˈapə,"-nya = polite ""your""",2,ms-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,Kami bepergian bersama,,kˈami bəpəɾrɡˈian bərsˈamə,,2,ms-agent-v1;ipa=espeak
+introductions.this-is-my-friend,Ini teman saya,,ˈini tˈəman sˈajə,,2,ms-agent-v1;ipa=espeak
+introductions.i-am-from,Saya dari {},,sˈajə dˌari {},,2,ms-agent-v1;ipa=espeak
+introductions.where-are-you-from,Asalnya dari mana?,Dari mana asalnya?,asˈalɲə dˌari mˈanə,,2,ms-agent-v1;ipa=espeak
+introductions.how-are-you,Apa khabar?,,ˈapə xˈabar,,2,ms-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,Saya turis,Saya pelancong,sˈajə tˈures,,2,ms-agent-v1;ipa=espeak
+introductions.this-is-my-husband-wife,Ini suami / isteri saya,,ˈini suˈami / istˈəri sˈajə,,2,ms-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,Ini anak saya,Ini anak perempuan / lelaki saya,ˈini ˈanaʔ sˈajə,,2,ms-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,Saya bepergian sendiri,,sˈajə bəpəɾrɡˈian səndˈiri,,2,ms-agent-v1;ipa=espeak

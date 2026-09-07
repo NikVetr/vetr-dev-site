@@ -192,7 +192,11 @@ const STRESS = { 'ˈ': 1, 'ˌ': 2 };
  * two syllables where `αι` is /e/. NFC composes each of them with U+0301 into the
  * single tonos codepoint the corpus is normalised to.
  */
-const VOWEL_LETTERS = /[aeiouáéíóúàèìòùâêîôûäëïöüãõẽĩũıywаеёиоуыэюяαεηιουωάέήίόύώϊϋΐΰ]+/iu;
+// `å` joins the German umlauts already here (`äëïöü`) for Swedish's sake: it is
+// one of the three letters that syllable is built from, and without it `markNucleus`
+// below cannot find the vowel run in a nucleus spelt `å`, the same silent-no-op this
+// comment already warns a new table to check for.
+const VOWEL_LETTERS = /[aeiouáéíóúàèìòùâêîôûäëïöüåãõẽĩũıywаеёиоуыэюяαεηιουωάέήίόύώϊϋΐΰ]+/iu;
 /**
  * Letters that already carry the mark, so a second one would produce a character
  * no orthography has.
@@ -203,8 +207,16 @@ const VOWEL_LETTERS = /[aeiouáéíóúàèìòùâêîôûäëïöüãõẽĩũ
  * Portuguese: *irmã*, *pão* and *jardim* carry the stress in the nasal itself and
  * Portuguese never stacks a mark on a tilde, so 59 rows were printing `ã-fã́` and
  * `a-nṍs`.
+ *
+ * `å ä ö` are here for the first reader whose *own* stress device is acute and
+ * whose *own* vowel letters include them: Swedish orthography carries all three as
+ * ordinary, unaccented letters, so stacking an acute on top would print a character
+ * no Swedish font or Swedish spelling has (`ö́`), the same argument that already
+ * exempts `ë ï ü` from `VOWEL_LETTERS`' German-umlaut vowels -- those three simply
+ * never reached this set before because no earlier acute/grave-stress table ever
+ * produced them.
  */
-const ACCENTED = /[áéíóúàèìòùёãõẽĩũâêîôûάέήίόύώΐΰ]/i;
+const ACCENTED = /[áéíóúàèìòùёãõẽĩũâêîôûάέήίόύώΐΰåäö]/i;
 /** A mark of either kind, for stripping one back off. */
 const MARKS = /[\u0300-\u036f]/gu;
 

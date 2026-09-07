@@ -1,0 +1,8 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,Beli tiket di mana?,,bˈəli tˈikət dimˈanə,,2,ms-agent-v1;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,Perlu reservasi?,Perlu booking?,pˈəɾrlu rˌesəɾrvˈasi,,2,ms-agent-v1;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,Masuk terakhir jam berapa?,,mˈasoʔ təɾrˈaxer dʒˈam bərˈapə,,2,ms-agent-v1;ipa=espeak
+attractions-tickets.are-there-lockers,Ada loker?,,ˈadə lˈokeɾr,,2,ms-agent-v1;ipa=espeak
+attractions-tickets.may-i-take-photos,Boleh foto?,,bˈoleh fˈoto,,2,ms-agent-v1;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,Tolong foto kami,,tˈoloŋ fˈoto kˈami,,2,ms-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,Boleh fotokan kami?,,bˈoleh fotˈokan kˈami,,2,ms-agent-v1;ipa=espeak
