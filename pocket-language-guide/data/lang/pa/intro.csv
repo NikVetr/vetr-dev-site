@@ -1,0 +1,13 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+introductions.my-name-is,ਮੇਰਾ ਨਾਂ {} ਹੈ,,mērā nāṁ {} hai,meɾa nã {} hɛ,my name is {},2,pa-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,ਤੁਹਾਨੂੰ ਮਿਲ ਕੇ ਖ਼ੁਸ਼ੀ ਹੋਈ,,tuhānūṁ mil kē k͟huśī hōī,tʊhanũ mɪl ke xʊʃi hoi,"meeting you, happiness happened",2,pa-agent-v1;ipa=espeak
+introductions.what-is-your-name,ਤੁਹਾਡਾ ਨਾਂ ਕੀ ਹੈ?,,tuhāḍā nāṁ kī hai?,tʊhaɖa nã ki hɛ,what is your name?,2,pa-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,ਅਸੀਂ ਇਕੱਠੇ ਸਫ਼ਰ ਕਰ ਰਹੇ ਹਾਂ,,asīṁ ikaṭṭhē safar kar rahē hāṁ,əsĩ ɪkʌʈʰʈʰe sʌfəɾ kʌɾ ɾəhe hã,we are travelling together,2,pa-agent-v1;ipa=espeak
+introductions.this-is-my-friend,ਇਹ ਮੇਰਾ ਦੋਸਤ ਹੈ,,ih mērā dōsat hai,ɪ˥ meɾa dosət hɛ,this is my friend,2,pa-agent-v1;ipa=espeak
+introductions.i-am-from,ਮੈਂ {} ਤੋਂ ਹਾਂ,,maiṁ {} tōṁ hāṁ,mɛ̃ {} tõ hã,I am from {},2,pa-agent-v1;ipa=espeak
+introductions.where-are-you-from,ਤੁਸੀਂ ਕਿੱਥੋਂ ਹੋ?,,tusīṁ kitthōṁ hō?,tʊsĩ kɪttʰõ ho,where are you from?,2,pa-agent-v1;ipa=espeak
+introductions.how-are-you,ਕਿਵੇਂ ਹੋ ਜੀ?,,kivēṁ hō jī?,kɪʋẽ ho ɟi,how are you?,2,pa-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,ਮੈਂ ਸੈਲਾਨੀ ਹਾਂ,,maiṁ sailānī hāṁ,mɛ̃ sɛlani hã,I am a tourist,2,pa-agent-v1;ipa=espeak
+introductions.this-is-my-husband-wife,ਇਹ ਮੇਰਾ ਪਤੀ / ਮੇਰੀ ਪਤਨੀ ਹੈ,,ih mērā patī / mērī patanī hai,ɪ˥ meɾa pʌti / meɾi pʌtəni hɛ,this is my husband / my wife,2,pa-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,ਇਹ ਮੇਰੀ ਧੀ / ਮੇਰਾ ਪੁੱਤਰ ਹੈ,,ih mērī dhī / mērā puttar hai,ɪ˥ meɾi ti˩ / meɾa pʊttəɾ hɛ,this is my daughter / my son,2,pa-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,ਮੈਂ ਇਕੱਲਾ ਸਫ਼ਰ ਕਰ ਰਿਹਾ ਹਾਂ,,maiṁ ikallā safar kar rihā hāṁ,mɛ̃ ɪkʌlla sʌfəɾ kʌɾ ɾɪha hã,I am travelling alone,2,pa-agent-v1;ipa=espeak

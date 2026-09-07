@@ -1,0 +1,94 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+numbers-money.l-ng,शून्य,,śūnya,ʃˈuːnjə,,2,mr-agent-v1;ipa=espeak
+numbers-money.y,एक,,ēka,ˈeːk,,2,mr-agent-v1;ipa=espeak
+numbers-money.r,दोन,,dōna,dˈoːn,,2,mr-agent-v1;ipa=espeak
+numbers-money.li-ng,2 + मापक शब्द,,2 + māpaka śabda,dˈoːn mˈaːpək ʃˈʌbd,,1,mr-gloss-v1;ipa=espeak
+numbers-money.s-n,तीन,,tīna,tˈiːn,,2,mr-agent-v1;ipa=espeak
+numbers-money.s,चार,,cāra,cˈaːɾ,,2,mr-agent-v1;ipa=espeak
+numbers-money.w,पाच,,pāca,pˈaːc,,2,mr-agent-v1;ipa=espeak
+numbers-money.li,सहा,,sahā,sˈʌhaː,,2,mr-agent-v1;ipa=espeak
+numbers-money.q,सात,,sāta,sˈaːt,,2,mr-agent-v1;ipa=espeak
+numbers-money.b,आठ,,āṭha,ˈaːʈʰ,,2,mr-agent-v1;ipa=espeak
+numbers-money.ji,नऊ,,naū,nˈʌu,,2,mr-agent-v1;ipa=espeak
+numbers-money.sh,दहा,,dahā,dˈʌhaː,,2,mr-agent-v1;ipa=espeak
+numbers-money.y-b-i,शंभर,,śaṁbhara,ʃˈʌmbʰəɾ,,2,mr-agent-v1;ipa=espeak
+numbers-money.y-qi-n,हजार,,hajāra,həzˈaːɾ,,2,mr-agent-v1;ipa=espeak
+numbers-money.y-w-n,दहा हजार,,dahā hajāra,dˈʌhaː həzˈaːɾ,,2,mr-agent-v1;ipa=espeak
+numbers-money.b-n,अर्धा,,ardhā,ˈʌɾdʰaː,,2,mr-agent-v1;ipa=espeak
+numbers-money.yu-n,युआन,,yuāna,jʊˈaːn,,2,mr-gloss-v1;ipa=espeak
+numbers-money.ku-i,युआन (बोलचालीत),,yuāna (bōlacālīta),jʊˈaːn bˌoːlcaːlˈiːt,,1,mr-gloss-v1;ipa=espeak
+numbers-money.number-and-classifier-notes,"संख्या जोडून तयार होतात: 11 = shi yi, 20 = er shi, 21 = er shi yi. फोनवर 1 अनेकदा yao असे म्हणतात. मोजताना संख्या थेट नामाला जोडली जात नाही -- मध्ये एक मापक शब्द लागतो, म्हणजे दोन तिकिटांसाठी liang zhang piao. ge (सर्वसाधारण), wei (माणसे), zhang (तिकिटे/सपाट वस्तू), bei (कप), ping (बाटल्या). बोलीभाषेत yuan ला kuai म्हणतात; jiao/mao = 0.1 yuan, fen = 0.01 yuan.",,"saṁkhyā jōḍūna tayāra hōtāta: 11 = shi yi, 20 = er shi, 21 = er shi yi. phōnavara 1 anēkadā yao asē mhaṇatāta. mōjatānā saṁkhyā thēṭa nāmālā jōḍalī jāta nāhī -- madhyē ēka māpaka śabda lāgatō, mhaṇajē dōna tikiṭāṁsāṭhī liang zhang piao. ge (sarvasādhāraṇa), wei (māṇasē), zhang (tikiṭē/sapāṭa vastū), bei (kapa), ping (bāṭalyā). bōlībhāṣēta yuan lā kuai mhaṇatāta; jiao/mao = 0.1 yuan, fen = 0.01 yuan.",,,2,mr-notes-v1
+numbers-money.2-items,2 वस्तू,,2 vastū,dˈoːn vˈʌstuː,,1,mr-gloss-v1;ipa=espeak
+numbers-money.yen,येन,,yēna,jˈeːn,,2,mr-gloss-v1;ipa=espeak
+numbers-money.yen-symbol,¥,,¥,,,2,mr-gloss-v1
+numbers-money.number-and-classifier-notes-2,"संख्या जोडून तयार होतात: 11 = juuichi, 20 = nijuu, 21 = nijuuichi. मोजताना संख्येनंतर एक प्रत्यय येतो, जो वस्तूच्या आकारावर ठरतो: -tsu (सर्वसाधारण वस्तू), -mai (सपाट), -hon (लांब), -nin (माणसे), -hai (कप). फोन नंबर सांगताना: 0 = zero किंवा maru, 4 = yon, 7 = nana, 9 = kyuu; मधला हायफन no असा वाचला जातो.",,"saṁkhyā jōḍūna tayāra hōtāta: 11 = juuichi, 20 = nijuu, 21 = nijuuichi. mōjatānā saṁkhyēnaṁtara ēka pratyaya yētō, jō vastūcyā ākārāvara ṭharatō: -tsu (sarvasādhāraṇa vastū), -mai (sapāṭa), -hon (lāṁba), -nin (māṇasē), -hai (kapa). phōna naṁbara sāṁgatānā: 0 = zero kiṁvā maru, 4 = yon, 7 = nana, 9 = kyuu; madhalā hāyaphana no asā vācalā jātō.",,,2,mr-notes-v1
+atm-cash.where-is-an-atm,एटीएम कुठे आहे?,,ēṭīēma kuṭhē āhē?,ˌeːʈiˈeːm kˈʊʈʰeː ˈaːheː,,2,mr-agent-v1;ipa=espeak
+atm-cash.does-this-atm-take-foreign-cards,हे एटीएम परदेशी कार्ड चालवते का?,,hē ēṭīēma paradēśī kārḍa cālavatē kā?,hˈeː ˌeːʈiˈeːm pˌəɾdˈeːʃi kˈaːɾɖ cˈaːləvteː kˈaː,,2,mr-agent-v1;ipa=espeak
+atm-cash.the-atm-kept-my-card,एटीएमने माझे कार्ड ठेवून घेतले,,ēṭīēmanē mājhē kārḍa ṭhēvūna ghētalē,ˌeːʈiˈeːmnˌeː mˈaːɟʰeː kˈaːɾɖ ʈʰeːvˈuːn ɡʰˈeːtlˌeː,,2,mr-agent-v1;ipa=espeak
+atm-cash.is-there-a-fee,काही शुल्क आहे का?,,kāhī śulka āhē kā?,kˈaːhi ʃˈʊlk ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
+atm-cash.the-card-was-declined,कार्ड नाकारले गेले,,kārḍa nākāralē gēlē,kˈaːɾɖ naːkˈaːɾlˌeː ɡˈeːleː,,2,mr-agent-v1;ipa=espeak
+atm-cash.what-is-the-exchange-rate,विनिमय दर काय आहे?,,vinimaya dara kāya āhē?,vˈɪnɪmɛj dˈʌɾ kˈaːj ˈaːheː,,2,mr-agent-v1;ipa=espeak
+atm-cash.no-money-came-out,पैसे आलेच नाहीत,,paisē ālēca nāhīta,pˈaɪseː aːlˈeːc naːhˈiːt,,2,mr-agent-v1;ipa=espeak
+atm-cash.where-can-i-change-money,पैसे कुठे बदलता येतील?,,paisē kuṭhē badalatā yētīla?,pˈaɪseː kˈʊʈʰeː bˈʌdəltaː jeːtˈiːl,"impersonal, no gender",2,mr-agent-v1;ipa=espeak
+atm-cash.the-machine-is-out-of-service,मशीन बंद आहे,,maśīna baṁda āhē,məʃˈiːn bˈʌnd ˈaːheː,,2,mr-agent-v1;ipa=espeak
+atm-cash.please-give-me-smaller-notes,सुट्टे नोटा द्या,,suṭṭē nōṭā dyā,sˈʊʈʈeː nˈoːʈaː djˈaː,,2,mr-agent-v1;ipa=espeak
+atm-cash.do-you-have-change,सुट्टे पैसे आहेत का?,,suṭṭē paisē āhēta kā?,sˈʊʈʈeː pˈaɪseː aːhˈeːt kˈaː,,2,mr-agent-v1;ipa=espeak
+atm-cash.may-i-pay-in,{} मध्ये पैसे भरता येतील का?,,{} madhyē paisē bharatā yētīla kā?,{} mˈʌdʰjeː pˈaɪseː bʰˈʌɾtˌaː jeːtˈiːl kˈaː,"impersonal, no gender",2,mr-agent-v1;ipa=espeak
+atm-cash.please-charge-in-local-currency,स्थानिक चलनातच पैसे आकारा,,sthānika calanātaca paisē ākārā,stʰˈaːnɪk cˌəlnˈaːtəc pˈaɪseː aːkˈaːɾaː,,2,mr-agent-v1;ipa=espeak
+atm-cash.where-can-i-get-coins,नाणी कुठे मिळतील?,,nāṇī kuṭhē miḷatīla?,nˈaːɳi kˈʊʈʰeː mˌɪɭtˈiːl,,2,mr-agent-v1;ipa=espeak
+atm-cash.is-there-a-minimum-for-cards,कार्डसाठी किमान रक्कम आहे का?,,kārḍasāṭhī kimāna rakkama āhē kā?,kˈaːɾɖəsˌaːʈʰi kɪmˈaːn ɾˈʌkːəm ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
+atm-cash.atm,एटीएम,,ēṭīēma,ˌeːʈiˈeːm,,2,mr-agent-v1;ipa=espeak
+atm-cash.banknote,नोट,,nōṭa,nˈoːʈ,,2,mr-agent-v1;ipa=espeak
+atm-cash.coin,नाणे,,nāṇē,nˈaːɳeː,,2,mr-agent-v1;ipa=espeak
+atm-cash.cash-only,फक्त रोख,,phakta rōkha,pʰˈʌkt ɾˈoːkʰ,,2,mr-agent-v1;ipa=espeak
+atm-cash.fee,शुल्क,,śulka,ʃˈʊlk,,2,mr-agent-v1;ipa=espeak
+atm-cash.change,सुट्टे पैसे,,suṭṭē paisē,sˈʊʈʈeː pˈaɪseː,,2,mr-agent-v1;ipa=espeak
+atm-cash.exchange-rate,विनिमय दर,,vinimaya dara,vˈɪnɪmɛj dˈʌɾ,,2,mr-agent-v1;ipa=espeak
+atm-cash.bank,बँक,,bam̐ka,bˈʌnk,,2,mr-agent-v1;ipa=espeak
+atm-cash.money-exchange,मनी एक्सचेंज,,manī ēksacēṁja,mˈʌni ˈeːksəcˌẽːz,,2,mr-agent-v1;ipa=espeak
+atm-cash.pin,पिन,,pina,pˈɪn,,2,mr-agent-v1;ipa=espeak
+numbers-money.won,वॉन,,vôna,vˈɔn,,2,mr-gloss-v1;ipa=espeak
+numbers-money.won-symbol,वॉन चिन्ह,,vôna cinha,vˈɔn cˈɪnh,,2,mr-gloss-v1;ipa=espeak
+numbers-money.euro,युरो,,yurō,jˈʊɾoː,,2,mr-gloss-v1;ipa=espeak
+numbers-money.euro-symbol,युरो चिन्ह,,yurō cinha,jˈʊɾoː cˈɪnh,,2,mr-gloss-v1;ipa=espeak
+numbers-money.lira,लिरा,,lirā,lˈɪɾaː,,2,mr-gloss-v1;ipa=espeak
+numbers-money.lira-symbol,लिरा चिन्ह,,lirā cinha,lˈɪɾaː cˈɪnh,,2,mr-gloss-v1;ipa=espeak
+numbers-money.dong,डाँग,,ḍām̐ga,ɖˈãnɡ,,2,mr-gloss-v1;ipa=espeak
+numbers-money.dong-symbol,डाँग चिन्ह,,ḍām̐ga cinha,ɖˈãnɡ cˈɪnh,,2,mr-gloss-v1;ipa=espeak
+numbers-money.ruble,रुबल,,rubala,ɾˈʊbəl,,2,mr-gloss-v1;ipa=espeak
+numbers-money.ruble-symbol,रुबल चिन्ह,,rubala cinha,ɾˈʊbəl cˈɪnh,,2,mr-gloss-v1;ipa=espeak
+numbers-money.rupiah,रुपिया,,rupiyā,ɾˈʊpɪjˌaː,,2,mr-gloss-v1;ipa=espeak
+numbers-money.rupiah-symbol,रुपिया चिन्ह,,rupiyā cinha,ɾˈʊpɪjˌaː cˈɪnh,,2,mr-gloss-v1;ipa=espeak
+numbers-money.shilling,शिलिंग,,śiliṁga,ʃɪlˈĩɡ,,2,mr-gloss-v1;ipa=espeak
+numbers-money.shilling-symbol,शिलिंग चिन्ह,,śiliṁga cinha,ʃɪlˈĩɡ cˈɪnh,,2,mr-gloss-v1;ipa=espeak
+numbers-money.baht,बाथ,,bātha,bˈaːtʰ,,2,mr-gloss-v1;ipa=espeak
+numbers-money.baht-symbol,बाथ चिन्ह,,bātha cinha,bˈaːtʰ cˈɪnh,,2,mr-gloss-v1;ipa=espeak
+numbers-money.forint,फोरिंट,,phōriṁṭa,pʰoːɾˈĩʈ,,2,mr-gloss-v1;ipa=espeak
+numbers-money.forint-symbol,फोरिंट चिन्ह,,phōriṁṭa cinha,pʰoːɾˈĩʈ cˈɪnh,,2,mr-gloss-v1;ipa=espeak
+numbers-money.rupee,रुपया,,rupayā,ɾˈʊpjˌaː,,2,mr-agent-v1;ipa=espeak
+numbers-money.rupee-symbol,₹,,₹,,,2,mr-agent-v1
+numbers-money.dollar,डॉलर,,ḍôlara,ɖˈɔləɾ,,2,mr-gloss-v1;ipa=espeak
+numbers-money.dollar-symbol,$,,$,,,2,mr-gloss-v1
+numbers-money.pound,पाउंड,,pāuṁḍa,paːˈʊɳɖ,,2,mr-gloss-v1;ipa=espeak
+numbers-money.pound-symbol,£,,£,,,2,mr-gloss-v1
+numbers-money.franc,फ्रँक,,phram̐ka,pʰɾˈʌnk,,2,mr-gloss-v1;ipa=espeak
+numbers-money.franc-symbol,फ्रँक चिन्ह,,phram̐ka cinha,pʰɾˈʌnk cˈɪnh,,2,mr-gloss-v1;ipa=espeak
+numbers-money.peso,पेसो,,pēsō,pˈeːsoː,,2,mr-gloss-v1;ipa=espeak
+numbers-money.peso-symbol,पेसो चिन्ह,,pēsō cinha,pˈeːsoː cˈɪnh,not a bare $ -- see module docstring,2,mr-gloss-v1;ipa=espeak
+numbers-money.real,रियाल,,riyāla,ɾɪjˈaːl,,2,mr-gloss-v1;ipa=espeak
+numbers-money.real-symbol,रियाल चिन्ह,,riyāla cinha,ɾɪjˈaːl cˈɪnh,,2,mr-gloss-v1;ipa=espeak
+numbers-money.local-currency,स्थानिक चलन,,sthānika calana,stʰˈaːnɪk cˈʌlən,,2,mr-gloss-v1;ipa=espeak
+numbers-money.lakh,लाख,,lākha,lˈaːkʰ,,2,mr-agent-v1;ipa=espeak
+numbers-money.crore,कोटी,,kōṭī,kˈoːʈi,,2,mr-agent-v1;ipa=espeak
+numbers-money.shekel,शेकेल,,śēkēla,ʃeːkˈeːl,,2,mr-gloss-v1;ipa=espeak
+numbers-money.shekel-symbol,शेकेल चिन्ह,,śēkēla cinha,ʃeːkˈeːl cˈɪnh,,2,mr-gloss-v1;ipa=espeak
+numbers-money.rial,रियाल,,riyāla,ɾɪjˈaːl,,2,mr-gloss-v1;ipa=espeak
+numbers-money.toman,10 रियाल,,10 riyāla,dˈʌhaː ɾɪjˈaːl,,2,mr-gloss-v1;ipa=espeak
+numbers-money.zloty,झ्लॉटी,,jhlôṭī,ɟʰlˈɔʈi,,2,mr-gloss-v1;ipa=espeak
+numbers-money.zloty-symbol,झ्लॉटी चिन्ह,,jhlôṭī cinha,ɟʰlˈɔʈi cˈɪnh,,2,mr-gloss-v1;ipa=espeak
+numbers-money.hryvnia,ह्रिव्न्या,,hrivnyā,hɾˈɪvnjaː,,2,mr-gloss-v1;ipa=espeak
+numbers-money.hryvnia-symbol,ह्रिव्न्या चिन्ह,,hrivnyā cinha,hɾˈɪvnjaː cˈɪnh,,2,mr-gloss-v1;ipa=espeak
+numbers-money.leu,लेऊ,,leū,lˈeːu,,2,mr-gloss-v1;ipa=espeak
+numbers-money.leu-symbol,लेऊ चिन्ह,,leū cinha,lˈeːu cˈɪnh,,2,mr-gloss-v1;ipa=espeak
+numbers-money.koruna,कोरुना,,,,,2,gloss-only;scoped-away;name of the currency in this language
+numbers-money.koruna-symbol,कोरुना चिन्ह,,,,,2,gloss-only;scoped-away;name of the currency in this language

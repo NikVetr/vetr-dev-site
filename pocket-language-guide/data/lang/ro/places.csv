@@ -1,0 +1,8 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,De unde pot cumpăra bilete?,,de ˈunde pot kˌumpəɾˈa bilˈete,,2,ro-agent-v1;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,Am nevoie de rezervare?,,am nevˈoje de rezervˈaɾe,,2,ro-agent-v1;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,Care este ultima oră de intrare?,,kˌaɾe jˌeste ˈultimˌa ˈorə de intrˈaɾe,,2,ro-agent-v1;ipa=espeak
+attractions-tickets.are-there-lockers,Sunt dulapuri de bagaje?,,sunt dˌulapˈurʲ de baɡˈaʒe,,2,ro-agent-v1;ipa=espeak
+attractions-tickets.may-i-take-photos,Pot face fotografii?,,pot fˌatʃe fˌotoɡrafˈiɪ,,2,ro-agent-v1;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,"Ne faceți o fotografie, vă rog",,"ne fˈatʃetsʲ o fˌotoɡrafˈie, və rˈoɡ",,2,ro-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,Ne puteți face o fotografie?,,ne putˌetsʲ fˌatʃe o fˌotoɡrafˈie,,2,ro-agent-v1;ipa=espeak

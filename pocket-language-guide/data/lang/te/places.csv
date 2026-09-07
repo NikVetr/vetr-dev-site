@@ -1,0 +1,8 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,టికెట్లు ఎక్కడ దొరుకుతాయి?,,ṭikeṭlu ekkaḍa dorukutāyi?,ʈikeʈlu ekkaɖa dorukutaːji,,2,te-agent-v1;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,రిజర్వేషన్ కావాలా?,,rijarvēṣan kāvālā?,ridʒarʋeːʂan kaːʋaːlaː,,2,te-agent-v1;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,చివరి ప్రవేశం ఎన్ని గంటలకు?,,civari pravēśaṁ enni gaṁṭalaku?,tʃiʋari praʋeːʃam enni ɡaɳʈalaku,,2,te-agent-v1;ipa=espeak
+attractions-tickets.are-there-lockers,లాకర్లు ఉన్నాయా?,,lākarlu unnāyā?,laːkarlu unnaːjaː,,2,te-agent-v1;ipa=espeak
+attractions-tickets.may-i-take-photos,ఫోటోలు తీయవచ్చా?,,phōṭōlu tīyavaccā?,pʰoːʈoːlu tiːjaʋatʃtʃaː,,2,te-agent-v1;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,మా ఫోటో తీయండి,,mā phōṭō tīyaṁḍi,maː pʰoːʈoː tiːjaɳɖi,,2,te-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,మా ఫోటో తీస్తారా?,,mā phōṭō tīstārā?,maː pʰoːʈoː tiːstaːraː,,2,te-agent-v1;ipa=espeak

@@ -98,11 +98,20 @@ const AFFRICATES = ['ʈʂ', 'tɕ', 'tʃ', 'ts', 'ɖʐ', 'dʑ', 'dʒ', 'dz', 'pf'
  * Modifier letters and diacritics that belong to the consonant they follow, the
  * way `VOWEL_TAIL` belongs to its vowel: aspiration, palatalisation,
  * labialisation, pharyngealisation, ejectives, the dental and apical marks, the
- * Korean tense mark and the unreleased mark.
+ * Korean tense mark, the unreleased mark, and (`̝`) the raising diacritic
+ * that turns a bare `r` into `r̝`, Czech's ř and the corpus's first raised
+ * alveolar trill. Binding it here is what makes `r̝` one phoneme for
+ * `phonemesOf` rather than a bare `r` plus a floating mark no table has a
+ * rule for. The voiceless allophone (an added ring above, `̊`) never
+ * reaches this column at all -- `REPAIR["cs"]` in build_ipa.py strips it at
+ * generation time, because the devoicing is a predictable rule of Czech's own
+ * phonology that Czech spelling does not mark either, the same argument that
+ * repair file already makes for Ukrainian's dental marks.
  */
 const CONSONANT_TAIL = new Set([
   ...'ʰʱʲʷˤˠˀʼ',
-  ...['\u0329', '\u032A', '\u033A', '\u0348', '\u031A', '\u0325', '\u032C', '\u0339', '\u031C'],
+  ...['\u0329', '\u032A', '\u033A', '\u0348', '\u031A', '\u0325', '\u032C', '\u0339', '\u031C',
+    '\u031D'],
 ]);
 
 /**
@@ -894,7 +903,17 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
           // The second copy is the bare letter: the mark belongs to the syllable
           // once, and `àà` is a character sequence no orthography writes.
           ? (/** @type {string} */ c) => c + c.normalize('NFD').replace(MARKS, '')
-          : (/** @type {string} */ c) => `${c}:`;
+          // Czech spells vowel length with its own diacritic (á é í ó ú ý) rather
+          // than approximating with a colon, and `accent` is that device: the
+          // same combining-acute composition `STRESS_DEVICE.acute` already uses,
+          // reused for a second call site rather than duplicated. Stress marks
+          // first (see above) so a stressed long vowel composes to e.g. `Á`,
+          // which is an acute composed onto an already-capitalised letter -- capitalisation
+          // and the acute are orthogonally different marks, so the two devices
+          // do not collide the way two accents on one letter would.
+          : policy.length === 'accent'
+            ? (/** @type {string} */ c) => (ACCENTED.test(c) ? c : `${c}\u0301`.normalize('NFC'))
+            : (/** @type {string} */ c) => `${c}:`;
         text = markNucleus(text, nucleusAt, codaAt, head, mark);
       }
       return text;

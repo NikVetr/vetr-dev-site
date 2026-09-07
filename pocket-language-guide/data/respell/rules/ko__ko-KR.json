@@ -3865,6 +3865,11 @@
       "slot": "any",
       "ipa": "ī",
       "out": "이"
+    },
+    {
+      "slot": "any",
+      "ipa": "r̝",
+      "out": "르"
     }
   ],
   "syllable_fixups": []

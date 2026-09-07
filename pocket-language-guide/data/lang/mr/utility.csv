@@ -1,0 +1,16 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,मला {} ला जायचे आहे,,malā {} lā jāyacē āhē,mˈʌlaː {} lˈaː zˈaːjcˌeː ˈaːheː,,2,mr-agent-v1;ipa=espeak
+utility-templates.please-give-me,मला {} द्या,,malā {} dyā,mˈʌlaː {} djˈaː,,2,mr-agent-v1;ipa=espeak
+utility-templates.may-i,मला {} करता येईल का?,,malā {} karatā yēīla kā?,mˈʌlaː {} kˈʌɾtˌaː jeːˈiːl kˈaː,will it be possible for me to {}?,2,mr-agent-v1;ipa=espeak
+utility-templates.please-do-not-add,{} घालू नका,,{} ghālū nakā,{} ɡʰˈaːluː nˈʌkaː,,2,mr-agent-v1;ipa=espeak
+utility-templates.do-you-have,तुमच्याकडे {} आहे का?,,tumacyākaḍē {} āhē kā?,tˌʊmcːjˈaːkɖˌeː {} ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
+utility-templates.please-write-the-number,नंबर लिहा,,naṁbara lihā,nˈʌmbəɾ lˈɪhaː,,2,mr-agent-v1;ipa=espeak
+utility-templates.i-need,मला {} हवे आहे,,malā {} havē āhē,mˈʌlaː {} hˈʌveː ˈaːheː,,2,mr-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,इथे जवळ {} आहे का?,,ithē javaḷa {} āhē kā?,ˈɪtʰeː zˈʌvəɭ {} ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
+utility-templates.how-much-is,{} किती रुपयांना आहे?,,{} kitī rupayāṁnā āhē?,{} kˈɪti ɾˌʊpjˈãnaː ˈaːheː,,2,mr-agent-v1;ipa=espeak
+utility-templates.is-this,हे {} आहे का?,,hē {} āhē kā?,hˈeː {} ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
+utility-templates.please,"{}, कृपया",,"{}, kr̥payā","{}, kɾˈʊpjˌaː",,2,mr-agent-v1;ipa=espeak
+utility-templates.i-am-looking-for,मी {} शोधत आहे,,mī {} śōdhata āhē,mˈi {} ʃˈoːdʰət ˈaːheː,,2,mr-agent-v1;ipa=espeak
+utility-templates.do-you-accept,इथे {} चालेल का?,,ithē {} cālēla kā?,ˈɪtʰeː {} caːlˈeːl kˈaː,,2,mr-agent-v1;ipa=espeak
+utility-templates.i-cannot-find,मला {} सापडत नाही,,malā {} sāpaḍata nāhī,mˈʌlaː {} sˈaːpəɖˌət nˈaːhi,,2,mr-agent-v1;ipa=espeak
+utility-templates.there-is-a-problem-with,{} मध्ये अडचण आहे,,{} madhyē aḍacaṇa āhē,{} mˈʌdʰjeː ˈʌɖəcˌəɳ ˈaːheː,,2,mr-agent-v1;ipa=espeak

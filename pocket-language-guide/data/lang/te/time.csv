@@ -1,0 +1,44 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+time-scheduling.what-time-is-it,ఇప్పుడు టైం ఎంత?,ఎంత సమయం అయింది?,ippuḍu ṭaiṁ eṁta?,ippuɖu ʈaɪm enta,,2,te-agent-v1;ipa=espeak
+time-scheduling.how-many-minutes,ఎన్ని నిమిషాలు?,,enni nimiṣālu?,enni nimiʂaːlu,,2,te-agent-v1;ipa=espeak
+time-scheduling.what-time-should-we-meet,ఎన్ని గంటలకు కలుద్దాం?,,enni gaṁṭalaku kaluddāṁ?,enni ɡaɳʈalaku kaluddaːm,,2,te-agent-v1;ipa=espeak
+time-scheduling.can-we-change-the-time,సమయం మార్చవచ్చా?,,samayaṁ mārcavaccā?,samajam maːrtʃaʋatʃtʃaː,,2,te-agent-v1;ipa=espeak
+time-scheduling.when-is-convenient,మీకు ఎప్పుడు కుదురుతుంది?,,mīku eppuḍu kudurutuṁdi?,miːku eppuɖu kudurutundi,when does it work out for you,2,te-agent-v1;ipa=espeak
+time-scheduling.what-is-today-s-date,ఈ రోజు తారీఖు ఎంత?,,ī rōju tārīkhu eṁta?,iː roːdʒu taːriːkʰu enta,,2,te-agent-v1;ipa=espeak
+time-scheduling.what-day-is-it-today,ఈ రోజు ఏ వారం?,,ī rōju ē vāraṁ?,iː roːdʒu eː ʋaːram,which weekday is today,2,te-agent-v1;ipa=espeak
+time-scheduling.what-time-does-it-open,ఎన్ని గంటలకు తెరుస్తారు?,,enni gaṁṭalaku terustāru?,enni ɡaɳʈalaku terustaːru,,2,te-agent-v1;ipa=espeak
+time-scheduling.what-time-does-it-close,ఎన్ని గంటలకు మూసేస్తారు?,,enni gaṁṭalaku mūsēstāru?,enni ɡaɳʈalaku muːseːstaːru,,2,te-agent-v1;ipa=espeak
+time-scheduling.how-long-does-it-take,ఎంత సమయం పడుతుంది?,,eṁta samayaṁ paḍutuṁdi?,enta samajam paɖutundi,,2,te-agent-v1;ipa=espeak
+time-words.today,ఈ రోజు,నేడు,ī rōju,iː roːdʒu,nēḍu is the written form,2,te-agent-v1;ipa=espeak
+time-words.tomorrow,రేపు,,rēpu,reːpu,,2,te-agent-v1;ipa=espeak
+time-words.yesterday,నిన్న,,ninna,ninna,,2,te-agent-v1;ipa=espeak
+time-words.this-week,ఈ వారం,,ī vāraṁ,iː ʋaːram,,2,te-agent-v1;ipa=espeak
+time-words.next-week,వచ్చే వారం,,vaccē vāraṁ,ʋatʃtʃeː ʋaːram,the week that comes,2,te-agent-v1;ipa=espeak
+time-words.morning,ఉదయం,పొద్దున,udayaṁ,udajam,poddun is the spoken form,2,te-agent-v1;ipa=espeak
+time-words.afternoon,మధ్యాహ్నం,,madhyāhnaṁ,madʰjaːhnam,,2,te-agent-v1;ipa=espeak
+time-words.evening,సాయంత్రం,,sāyaṁtraṁ,saːjantram,,2,te-agent-v1;ipa=espeak
+time-words.spring,వసంత కాలం,,vasaṁta kālaṁ,ʋasanta kaːlam,,2,te-agent-v1;ipa=espeak
+time-words.summer,వేసవి,ఎండాకాలం,vēsavi,ʋeːsaʋi,"eṁḍākālaṁ = the hot season, which is what it is called",2,te-agent-v1;ipa=espeak
+time-words.fall,శరత్కాలం,ఆకురాలు కాలం,śaratkālaṁ,ʃaratkaːlam,the leaf-fall season; south India has no autumn to speak of,2,te-agent-v1;ipa=espeak
+time-words.winter,చలికాలం,,calikālaṁ,tʃalikaːlam,the cold season,2,te-agent-v1;ipa=espeak
+time-words.night,రాత్రి,,rātri,raːtri,,2,te-agent-v1;ipa=espeak
+days-of-week.monday,సోమవారం,,sōmavāraṁ,soːmaʋaːram,,2,te-agent-v1;ipa=espeak
+days-of-week.tuesday,మంగళవారం,,maṁgaḷavāraṁ,maŋɡaɭaʋaːram,,2,te-agent-v1;ipa=espeak
+days-of-week.wednesday,బుధవారం,,budhavāraṁ,budʰaʋaːram,,2,te-agent-v1;ipa=espeak
+days-of-week.thursday,గురువారం,,guruvāraṁ,ɡuruʋaːram,,2,te-agent-v1;ipa=espeak
+days-of-week.friday,శుక్రవారం,,śukravāraṁ,ʃukraʋaːram,,2,te-agent-v1;ipa=espeak
+days-of-week.saturday,శనివారం,,śanivāraṁ,ʃaniʋaːram,,2,te-agent-v1;ipa=espeak
+days-of-week.sunday,ఆదివారం,,ādivāraṁ,aːdiʋaːram,,2,te-agent-v1;ipa=espeak
+months.january,జనవరి,,janavari,dʒanaʋari,,2,te-agent-v1;ipa=espeak
+months.february,ఫిబ్రవరి,,phibravari,pʰibraʋari,,2,te-agent-v1;ipa=espeak
+months.march,మార్చి,,mārci,maːrtʃi,,2,te-agent-v1;ipa=espeak
+months.april,ఏప్రిల్,,ēpril,eːpril,,2,te-agent-v1;ipa=espeak
+months.may,మే,,mē,meː,,2,te-agent-v1;ipa=espeak
+months.june,జూన్,,jūn,dʒuːn,,2,te-agent-v1;ipa=espeak
+months.july,జూలై,,jūlai,dʒuːlaɪ,,2,te-agent-v1;ipa=espeak
+months.august,ఆగస్టు,,āgasṭu,aːɡasʈu,,2,te-agent-v1;ipa=espeak
+months.september,సెప్టెంబరు,,sepṭeṁbaru,sepʈembaru,,2,te-agent-v1;ipa=espeak
+months.october,అక్టోబరు,,akṭōbaru,akʈoːbaru,,2,te-agent-v1;ipa=espeak
+months.november,నవంబరు,,navaṁbaru,naʋambaru,,2,te-agent-v1;ipa=espeak
+months.december,డిసెంబరు,,ḍiseṁbaru,ɖisembaru,,2,te-agent-v1;ipa=espeak
+time-words.clock-offset,"స్వాహిలీ గడియారం తెల్లవారుజాము నుంచి మొదలవుతుంది — మీ ఫోన్ గడియారం కంటే ఆరు గంటల తేడా: saa moja అంటే ఉదయం 7, saa sita అంటే మధ్యాహ్నం 12, saa kumi అంటే సాయంత్రం 4. అంకెను చెప్పండి, లేదా పాశ్చాత్య గడియారం కావాలంటే saa ngapi za kizungu అని అడగండి.",,"svāhilī gaḍiyāraṁ tellavārujāmu nuṁci modalavutuṁdi — mī phōn gaḍiyāraṁ kaṁṭē āru gaṁṭala tēḍā: saa moja aṁṭē udayaṁ 7, saa sita aṁṭē madhyāhnaṁ 12, saa kumi aṁṭē sāyaṁtraṁ 4. aṁkenu ceppaṁḍi, lēdā pāścātya gaḍiyāraṁ kāvālaṁṭē saa ngapi za kizungu ani aḍagaṁḍi.",,,2,te-notes-v1

@@ -18,6 +18,50 @@ export const LANGUAGE_MOTIFS = /** @type {const} */ ({
   // a kolam is a *grid* where `alpona` is freehand and radial, and a petrykivka
   // bloom is struck outward from its own centre where `berry` is fruit on a vine.
   ta: 'kolam', uk: 'petrykivka',
+  // `warli` is the Maharashtrian tribal mural style built from three shapes --
+  // circle, triangle, line -- repeated into human figures and animals; chosen for
+  // Marathi because it is the one folk-art tradition of the state's own name, and
+  // because no other motif here draws a figure, so it needs no disambiguation.
+  mr: 'warli',
+  // `kalamkari` is the pen-drawn cotton of the Telugu country -- Srikalahasti and
+  // Machilipatnam -- and *kalam* is the pen, which is the whole of its character: a
+  // kalamkari shape is **outlined first and filled after**, so this emblem draws a
+  // second contour inside its flower head where no other motif here doubles a line
+  // at all. Named against the three neighbours it could be confused with: `lotus` is
+  // one bloom seen face-on with a single contour, `cypress` is a single tapering
+  // silhouette with no creeper, and `kolam` is a floor grid the line loops around
+  // rather than a drawn-and-filled figure -- which is why Telugu's own `muggu`, the
+  // same doorstep drawing under a different name, was refused as too close to it.
+  te: 'kalamkari',
+  // `polder` is the reclaimed-land drainage grid, not a tile or a flower --
+  // deliberately not Delft tile-work or a tulip-book illustration, the two motifs a
+  // Dutch entry would reach for first, because both are already taken and by
+  // exactly the wrong neighbours: `pt` already holds `azulejo`, a painted glazed
+  // tile, and Delftware is the same object (tin-glazed ceramic) in a different
+  // country's colours, not a different *kind* of mark; and `tr` already holds
+  // `tulip`, a floral silhouette, so a tulip-book bloom would be the same shape
+  // again under a different name. A polder map is neither a tile nor a flower: it
+  // is a boundary canal with narrow parallel strip-parcels (`slagenlandschap`)
+  // running off it at unequal lengths, the characteristic look of Dutch reclaimed
+  // land seen from above. Also named against `bamboo`, the one existing motif built
+  // from straight perpendicular lines: bamboo is a symmetric, evenly spaced
+  // cross-hatch representing stalks, where a polder's strips are deliberately
+  // unequal in length and run off one side only, off a single canal, the way a
+  // real polder's parcels do.
+  nl: 'polder',
+  // `funie` (Romanian for "rope, cord") is the twisted-cable border carved
+  // around a Maramures wooden gate-frame, paired here with a chip-carved
+  // tree of life at centre. Named against the two neighbours it could be
+  // confused with rather than either: `hu` already holds `embroidery`, a
+  // thread-and-fabric cross-stitch technique, where a funie is cut into
+  // oak with a knife -- a different medium, not just a different pattern
+  // on the same one. And `es` already holds `rosette`, a flower set in a
+  // diamond frame; a Maramures gate's own carved sun-disc would have been
+  // the obvious first reach for a Romanian motif and was rejected for
+  // exactly that reason, in favour of the rope border and the tree, which
+  // read as neither a flower nor a stitch.
+  ro: 'funie',
+  cs: 'sklo',
 });
 /** @typedef {typeof LANGUAGE_MOTIFS[keyof typeof LANGUAGE_MOTIFS]} LanguageMotif */
 
@@ -269,6 +313,86 @@ const emblems = {
     }
     p.m(7, 92); p.l(93, 92); p.m(7, 8); p.l(93, 8);
   },
+  kalamkari(p) {
+    // The creeper border of a kalamkari panel: an S-curving vine with paired leaves
+    // and one flower head, and the head is drawn twice -- outer contour, then the
+    // inner one the dye is laid between. That doubling is the signature of a
+    // pen-drawn-and-filled cloth and is what separates it from `lotus`, which is a
+    // single face-on bloom, and from `cypress`, which has no vine.
+    p.m(8, 88); p.c(30, 78, 22, 54, 44, 44);
+    for (const [x, y, dx, dy] of [[24, 79, -14, 8], [24, 79, -8, -12],
+      [32, 62, -14, 5], [32, 62, -7, -11]]) leaf(p, x, y, dx, dy, 6);
+    for (let i = 0; i < 6; i++) {
+      const a = i * Math.PI * 2 / 6 - Math.PI / 2;
+      leaf(p, 62 + Math.cos(a) * 7, 32 + Math.sin(a) * 7,
+        Math.cos(a) * 21, Math.sin(a) * 21, 10);
+    }
+    oval(p, 62, 32, 9, 9);
+    oval(p, 62, 32, 4.5, 4.5);
+  },
+  warli(p) {
+    // The Warli dancer: a circle head over two triangles meeting point-to-point at
+    // the waist, with straight limb strokes flung wide -- the same figure repeated
+    // in a ring around the tarpa player on an actual Warli mural. Triangles rather
+    // than a filled torso because a Warli figure is built from the three shapes
+    // (circle, triangle, line) and nothing else; no other motif here uses a human
+    // figure at all, so it needs no disambiguation against a neighbour.
+    oval(p, 50, 16, 9, 9);
+    p.m(35, 26); p.l(65, 26); p.l(50, 42); p.close();
+    p.m(50, 42); p.l(65, 58); p.l(35, 58); p.close();
+    p.m(38, 30); p.l(15, 15); p.m(62, 30); p.l(85, 15);
+    p.m(42, 58); p.l(20, 92); p.m(58, 58); p.l(80, 92);
+  },
+  polder(p) {
+    // A boundary canal along the bottom with narrow strip-parcels running off it
+    // at unequal lengths -- the `slagenlandschap` pattern a Dutch reclaimed
+    // polder actually shows from above, rather than a symmetric lattice. Unequal
+    // lengths are the whole point: a regular grid is `bamboo`'s cross-hatch of
+    // stalks, and a polder's strips are surveyed, not woven.
+    p.m(5, 85); p.l(95, 85);
+    p.m(15, 85); p.l(15, 22); p.m(30, 85); p.l(30, 38);
+    p.m(45, 85); p.l(45, 14); p.m(60, 85); p.l(60, 32);
+    p.m(75, 85); p.l(75, 10); p.m(90, 85); p.l(90, 26);
+  },
+  sklo(p) {
+    // Bohemian cut crystal's star-cut: straight facets ground from a centre point out
+    // to a faceted octagon, crossed by a second octagon at half the radius -- the
+    // pattern on the base of an ordinary Czech crystal bowl. Straight lines meeting at
+    // one point is what separates it from `hu`'s `embroidery`, a curved sewn line, and
+    // from `pl`'s `wycinanki`, an outline cut through folded paper: a different medium
+    // rather than a different pattern on the same one, and the only design in this
+    // table with no curve in it at all.
+    const octagon = (/** @type {number} */ r) => {
+      for (let i = 0; i <= 8; i++) {
+        const a = i * Math.PI / 4 + Math.PI / 8;
+        const x = 50 + Math.cos(a) * r, y = 50 + Math.sin(a) * r;
+        if (i === 0) p.m(x, y); else p.l(x, y);
+      }
+      p.close();
+    };
+    octagon(43); octagon(21);
+    for (let i = 0; i < 8; i++) {
+      const a = i * Math.PI / 4 + Math.PI / 8;
+      p.m(50, 50); p.l(50 + Math.cos(a) * 43, 50 + Math.sin(a) * 43);
+    }
+  },
+  funie(p) {
+    // The rope twist (funie), top and bottom: an alternating S-curve rather
+    // than a straight or single-curve edge, which is what makes it read as
+    // a twisted cable rather than a plain border -- the carved detail that
+    // runs around a Maramures gate-frame.
+    for (const y of [10, 90]) {
+      for (let i = 0; i < 4; i++) {
+        const x0 = 10 + i * 20, x1 = x0 + 20, mid = (x0 + x1) / 2, dy = i % 2 ? 6 : -6;
+        p.m(x0, y); p.q(mid, y + dy, x1, y);
+      }
+    }
+    p.m(10, 10); p.l(10, 90); p.m(90, 10); p.l(90, 90);
+    // The tree of life at centre: straight-line chip-carved boughs, not
+    // acanthus's curved flanking leaves.
+    p.m(50, 78); p.l(50, 24);
+    for (const y of [32, 48, 64]) { p.m(50, y); p.l(39, y + 10); p.l(50, y + 4); p.l(61, y + 10); p.close(); }
+  },
 };
 
 // At divider height, use the motif's silhouette rather than its interior detail.
@@ -301,6 +425,11 @@ const tracery = {
   kolam(p) { p.m(50, 8); p.q(92, 8, 92, 50); p.q(92, 92, 50, 92); p.q(8, 92, 8, 50); p.q(8, 8, 50, 8); oval(p, 50, 50, 7, 7); },
   petrykivka(p) { p.m(8, 92); p.q(34, 66, 46, 44); oval(p, 62, 34, 26, 26); },
   jali(p) { for (const x of [28, 72]) { p.m(x - 20, 90); p.l(x - 20, 46); p.q(x, 4, x + 20, 46); p.l(x + 20, 90); } },
+  warli(p) { oval(p, 50, 20, 10, 10); p.m(32, 33); p.l(68, 33); p.l(50, 56); p.close(); p.m(50, 56); p.l(68, 80); p.l(32, 80); p.close(); },
+  kalamkari(p) { p.m(8, 90); p.q(34, 70, 44, 46); oval(p, 62, 34, 25, 25); oval(p, 62, 34, 11, 11); },
+  polder(p) { p.m(5, 85); p.l(95, 85); p.m(30, 85); p.l(30, 30); p.m(55, 85); p.l(55, 15); p.m(80, 85); p.l(80, 40); },
+  sklo(p) { p.m(50, 7); p.l(93, 50); p.l(50, 93); p.l(7, 50); p.close(); p.m(50, 7); p.l(50, 93); p.m(7, 50); p.l(93, 50); },
+  funie(p) { p.m(6, 50); p.q(28, 30, 50, 50); p.q(72, 70, 94, 50); },
 };
 
 /** @param {string} motif @returns {motif is keyof typeof emblems} */
@@ -325,7 +454,7 @@ export function languageRule(motif, p, w, h) {
 
 /** @param {keyof typeof emblems} motif @param {Pen} p */
 export function languageCorner(motif, p) {
-  const angular = ['rosette', 'interlace', 'compass', 'azulejo', 'kawung', 'meander', 'embroidery'].includes(motif);
+  const angular = ['rosette', 'interlace', 'compass', 'azulejo', 'kawung', 'meander', 'embroidery', 'polder'].includes(motif);
   if (angular) {
     p.m(7, 93); p.l(7, 7); p.l(93, 7);
     p.m(14, 65); p.l(14, 14); p.l(65, 14);

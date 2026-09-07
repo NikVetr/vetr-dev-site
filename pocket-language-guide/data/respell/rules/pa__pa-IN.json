@@ -1,0 +1,4056 @@
+{
+ "source": "pa",
+ "accent": "pa-IN",
+ "status": "ready",
+ "version": "1",
+ "derives_from": "Punjabi has no published pronunciation key of the kind Bhargava's dictionary gives Hindi, so this table adapts the mechanism rather than a book: it is generated from `hi__hi-IN.json` -- which follows Bhargava's page layout and the *Rapidex English Speaking Course*'s letter-for-sound choices -- with every Devanagari letter mapped to its Gurmukhi counterpart and five overrides that are facts about Gurmukhi rather than preferences. See content/RESPELL-SYSTEMS.md and tmp/punjabi.md. The layout is the one an Indian reader has met: hyphens dividing syllables, a prime after the stressed one, ordinary Gurmukhi letters, a one-line legend.",
+ "deviations": [
+  {
+   "rule": "Gurmukhi writes the virama only before a subjoined ਹ ਰ ਵ",
+   "why": "**The largest thing this table does differently from Hindi's, and it is Gurmukhi's own orthography rather than a simplification.** Devanagari writes नमस्ते and स्टेशन with a virama and a half-form; Punjabi writes ਨਮਸਤੇ, ਸਟੇਸ਼ਨ, ਪਲੇਟਫ਼ਾਰਮ, ਪਾਸਪੋਰਟ and ਟਿਕਟ with bare letters. So every consonant has one spelling here where Hindi's has three, ੍ survives only in front of ਰ (ਪ੍ਰੀਪੇਡ, ਟ੍ਰੇਨ, ਸ੍ਰੀ), and the whole class of forgotten-virama defect that dominated the Bengali, Tamil and Telugu tables cannot occur. What carries the information instead is the syllable hyphen: ਨ-ਮਸ-ਤੇ says which letter closes which syllable, and an onset cluster gets the epenthetic vowel a Punjabi reader supplies anyway -- which is exactly what Punjabi does with an English loan."
+  },
+  {
+   "rule": "no ਕ਼ for /q/",
+   "why": "Punjabi orthography has ਖ਼ ਗ਼ ਜ਼ ਫ਼ and no ਕ਼, and no Punjabi speaker distinguishes /q/ from /k/, so /q/ is ਕ. The other four are kept because /x ɣ z f/ really do occur in Punjabi's Perso-Arabic vocabulary. ड़ and ढ़ both become ੜ, Punjabi's own flap."
+  },
+  {
+   "rule": "श and ष both spell ਸ਼",
+   "why": "Gurmukhi has no retroflex sibilant. /ʂ/ and /ʃ/ therefore merge, which is what Punjabi does with a Sanskrit loan (ਭਾਸ਼ਾ, ਵਿਸ਼ੇਸ਼) and the documented cost of this table."
+  }
+ ],
+ "approximations": "Sounds with no Gurmukhi letter, and what they get. /ʔ/ and /ʕ/ are written as nothing, which is what Punjabi already does with Arabic hamza and ain (ਅਰਬ, ਇਸਲਾਮ) and which leaves a Thai zero onset correctly bare. /ħ/ is ਹ. /θ ð/ are ਥ ਦ, colliding with /t̪ d/ for the dental targets. /x ɣ/ are ਖ਼ ਗ਼, which is better than Hindi manages -- it converts them to /kʰ ɡ/ and writes ਖ ਗ -- because Punjabi's own orthography carries the two letters. /q/ is ਕ. /y yː ʉ/ are ਯੂ and /ɵ/ is ਯੋ. /ɛ/ and /æ/ are both ਐ, which keeps the vowel's quality at the cost of its length; Hindi gives /ɛ/ ए and loses the quality instead. /ɔ ɔː ɒ/ are ਔ, a real Punjabi letter where Hindi has to borrow the candra-o. Tone is not written: 30 of the 33 tables drop the Chao letters by policy and this is one of them, because a Punjabi reader shown a tone bar on a German word would read neither.",
+ "note": "**Gurmukhi is the one Brahmic script in this corpus that does not write the virama, and that is the design of this table.** A consonant letter already says [ə], as in Devanagari, but a coda and a cluster are written as bare letters rather than with a virama or a half-form -- ਨਮਸਤੇ, ਸਟਾਪ, ਟਿਕਟ -- so each consonant has exactly one spelling and the syllable hyphen tells the reader where the vowel is not. ੍ appears only before ਰ, which is the one cluster Punjabi really conjoins.\n\nThree things are Punjabi's own. The **addak** ੱ writes a geminate on the preceding syllable (ਪੱ-ਤਾ, ਅੱ-ਖ), which matters because gemination is phonemic in Punjabi and because `ː` is dropped by most tables. The **tippi/bindi** choice is orthographic and mechanical -- ੰ over a bare consonant and over ਿ ੁ ੂ, ਂ after ਾ ੀ ੇ ੈ ੋ ੌ -- and is made by one fixup rather than in fifty rules. And **ਔ and ਐ are real letters for [ɔ] and [ɛ]**, so this table borrows nothing where Hindi's has to reach for a candra vowel.\n\nThere is **no bare `ʰ` rule**, deliberately: Hindi's `ʰ` -> \"\" is what let ধন্যবাদ print with its aspiration silently gone, because both halves of `dʰ` were mapped. Every aspirate has a rule of its own here, so an aspirate this table does not know prints a raw IPA modifier and `--gaps` catches it.",
+ "legend": "’ ਤੋਂ ਪਹਿਲੇ ਹਿੱਸੇ ਉੱਤੇ ਜ਼ੋਰ ਦਿਓ। ਬਾਕੀ ਸਭ ਆਮ ਗੁਰਮੁਖੀ ਹੈ — ਕੋਈ ਨਵਾਂ ਚਿੰਨ੍ਹ ਨਹੀਂ।",
+ "policy": {
+  "syllable_separator": "-",
+  "word_separator": " ",
+  "stress": "none",
+  "stress_min_syllables": 2,
+  "length": "none",
+  "tone": "drop",
+  "max_onset": 2,
+  "reader_onsets": "pr pɾ pɹ pʁ br bɾ bɹ bʁ tr tɾ tɹ tʁ dr dɾ dɹ dʁ kr kɾ kɹ kʁ ɡr ɡɾ ɡɹ ɡʁ fr fɾ fɹ fʁ vr vɾ vɹ vʁ sr sɾ sɹ sʁ ʃr ʃɾ ʃɹ ʃʁ hr hɾ hɹ hʁ xr xɾ xɹ xʁ θr θɾ θɹ θʁ ðr ðɾ ðɹ ðʁ pʰr pʰɾ pʰɹ pʰʁ tʰr tʰɾ tʰɹ tʰʁ kʰr kʰɾ kʰɹ kʰʁ t̪r t̪ɾ t̪ɹ t̪ʁ tʃr tʃɾ tʃɹ tʃʁ dʒr dʒɾ dʒɹ dʒʁ tsr tsɾ tsɹ tsʁ ɟr ɟɾ ɟɹ ɟʁ pl bl kl ɡl fl vl sl ʃl pʰl kʰl pj pw pv bj bw bv tj tw tv dj dw dv kj kw kv ɡj ɡw ɡv fj fw fv vj vw sj sw sv ʃj ʃw ʃv hj hw hv xj xw xv θj θw θv ðj ðw ðv pʰj pʰw pʰv tʰj tʰw tʰv kʰj kʰw kʰv t̪j t̪w t̪v tʃj tʃw tʃv dʒj dʒw dʒv tsj tsw tsv ɟj ɟw ɟv zj zw zv lj lw lv ɲj ɲw ɲv mj nj",
+  "fixups": "all",
+  "locale": "hi"
+ },
+ "phonemes": [
+  {
+   "slot": "coda",
+   "ipa": "p",
+   "out": "ੱ",
+   "before_onset": "p pʰ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "b",
+   "out": "ੱ",
+   "before_onset": "b bʰ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "t",
+   "out": "ੱ",
+   "before_onset": "t tʰ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "t̪",
+   "out": "ੱ",
+   "before_onset": "t̪ t̪ʰ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "d",
+   "out": "ੱ",
+   "before_onset": "d dʰ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʈ",
+   "out": "ੱ",
+   "before_onset": "ʈ ʈʰ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɖ",
+   "out": "ੱ",
+   "before_onset": "ɖ ɖʰ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "k",
+   "out": "ੱ",
+   "before_onset": "k kʰ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɡ",
+   "out": "ੱ",
+   "before_onset": "ɡ ɡʰ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "c",
+   "out": "ੱ",
+   "before_onset": "c cʰ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɟ",
+   "out": "ੱ",
+   "before_onset": "ɟ ɟʰ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "tʃ",
+   "out": "ੱ",
+   "before_onset": "tʃ tʃʰ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "dʒ",
+   "out": "ੱ",
+   "before_onset": "dʒ dʒʰ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "s",
+   "out": "ੱ",
+   "before_onset": "s"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʃ",
+   "out": "ੱ",
+   "before_onset": "ʃ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "z",
+   "out": "ੱ",
+   "before_onset": "z"
+  },
+  {
+   "slot": "coda",
+   "ipa": "f",
+   "out": "ੱ",
+   "before_onset": "f"
+  },
+  {
+   "slot": "coda",
+   "ipa": "m",
+   "out": "ੱ",
+   "before_onset": "m"
+  },
+  {
+   "slot": "coda",
+   "ipa": "n",
+   "out": "ੱ",
+   "before_onset": "n"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɳ",
+   "out": "ੱ",
+   "before_onset": "ɳ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "l",
+   "out": "ੱ",
+   "before_onset": "l"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɭ",
+   "out": "ੱ",
+   "before_onset": "ɭ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "r",
+   "out": "ੱ",
+   "before_onset": "r"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɾ",
+   "out": "ੱ",
+   "before_onset": "ɾ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɽ",
+   "out": "ੱ",
+   "before_onset": "ɽ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʋ",
+   "out": "ੱ",
+   "before_onset": "ʋ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "j",
+   "out": "ੱ",
+   "before_onset": "j"
+  },
+  {
+   "slot": "coda",
+   "ipa": "h",
+   "out": "ੱ",
+   "before_onset": "h"
+  },
+  {
+   "slot": "coda",
+   "ipa": "x",
+   "out": "ੱ",
+   "before_onset": "x"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɣ",
+   "out": "ੱ",
+   "before_onset": "ɣ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ŋ",
+   "out": "ੱ",
+   "before_onset": "ŋ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɲ",
+   "out": "ੱ",
+   "before_onset": "ɲ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "pp",
+   "out": "ੱਪ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ppʰ",
+   "out": "ੱਫ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "bb",
+   "out": "ੱਬ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "bbʰ",
+   "out": "ੱਭ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "tt",
+   "out": "ੱਤ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ttʰ",
+   "out": "ੱਥ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "t̪t̪",
+   "out": "ੱਤ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "t̪t̪ʰ",
+   "out": "ੱਥ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "dd",
+   "out": "ੱਦ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ddʰ",
+   "out": "ੱਧ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʈʈ",
+   "out": "ੱਟ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʈʈʰ",
+   "out": "ੱਠ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɖɖ",
+   "out": "ੱਡ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɖɖʰ",
+   "out": "ੱਢ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "kk",
+   "out": "ੱਕ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "kkʰ",
+   "out": "ੱਖ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɡɡ",
+   "out": "ੱਗ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɡɡʰ",
+   "out": "ੱਘ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "cc",
+   "out": "ੱਚ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ccʰ",
+   "out": "ੱਛ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɟɟ",
+   "out": "ੱਜ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɟɟʰ",
+   "out": "ੱਝ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "tʃtʃ",
+   "out": "ੱਚ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "tʃtʃʰ",
+   "out": "ੱਛ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "dʒdʒ",
+   "out": "ੱਜ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "dʒdʒʰ",
+   "out": "ੱਝ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ss",
+   "out": "ੱਸ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʃʃ",
+   "out": "ੱਸ਼"
+  },
+  {
+   "slot": "coda",
+   "ipa": "zz",
+   "out": "ੱਜ਼"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ff",
+   "out": "ੱਫ਼"
+  },
+  {
+   "slot": "coda",
+   "ipa": "mm",
+   "out": "ੱਮ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "nn",
+   "out": "ੱਨ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɳɳ",
+   "out": "ੱਣ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ll",
+   "out": "ੱਲ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɭɭ",
+   "out": "ੱਲ਼"
+  },
+  {
+   "slot": "coda",
+   "ipa": "rr",
+   "out": "ੱਰ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɾɾ",
+   "out": "ੱਰ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɽɽ",
+   "out": "ੱੜ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʋʋ",
+   "out": "ੱਵ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "jj",
+   "out": "ੱਯ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "hh",
+   "out": "ੱਹ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "xx",
+   "out": "ੱਖ਼"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɣɣ",
+   "out": "ੱਗ਼"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ŋŋ",
+   "out": "ੱਙ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɲɲ",
+   "out": "ੱਞ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "m",
+   "out": "ੰ",
+   "before_onset": "p pʰ b bʰ t tʰ d dʰ t̪ t̪ʰ d̪ ʈ ʈʰ ɖ ɖʰ k kʰ ɡ ɡʰ q c cʰ ɟ ɟʰ tʃ tʃʰ dʒ dʒʰ ts dz f v ʋ s z ʃ ʒ ʂ ɕ x ɣ ç θ ð ħ ʕ h ɦ m n ɳ ɲ ŋ l ɭ ɬ r ɾ ɽ ʁ ɹ j w"
+  },
+  {
+   "slot": "coda",
+   "ipa": "n",
+   "out": "ੰ",
+   "before_onset": "p pʰ b bʰ t tʰ d dʰ t̪ t̪ʰ d̪ ʈ ʈʰ ɖ ɖʰ k kʰ ɡ ɡʰ q c cʰ ɟ ɟʰ tʃ tʃʰ dʒ dʒʰ ts dz f v ʋ s z ʃ ʒ ʂ ɕ x ɣ ç θ ð ħ ʕ h ɦ m n ɳ ɲ ŋ l ɭ ɬ r ɾ ɽ ʁ ɹ j w"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɳ",
+   "out": "ੰ",
+   "before_onset": "p pʰ b bʰ t tʰ d dʰ t̪ t̪ʰ d̪ ʈ ʈʰ ɖ ɖʰ k kʰ ɡ ɡʰ q c cʰ ɟ ɟʰ tʃ tʃʰ dʒ dʒʰ ts dz f v ʋ s z ʃ ʒ ʂ ɕ x ɣ ç θ ð ħ ʕ h ɦ m n ɳ ɲ ŋ l ɭ ɬ r ɾ ɽ ʁ ɹ j w"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɲ",
+   "out": "ੰ",
+   "before_onset": "p pʰ b bʰ t tʰ d dʰ t̪ t̪ʰ d̪ ʈ ʈʰ ɖ ɖʰ k kʰ ɡ ɡʰ q c cʰ ɟ ɟʰ tʃ tʃʰ dʒ dʒʰ ts dz f v ʋ s z ʃ ʒ ʂ ɕ x ɣ ç θ ð ħ ʕ h ɦ m n ɳ ɲ ŋ l ɭ ɬ r ɾ ɽ ʁ ɹ j w"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ŋ",
+   "out": "ੰ",
+   "before_onset": "p pʰ b bʰ t tʰ d dʰ t̪ t̪ʰ d̪ ʈ ʈʰ ɖ ɖʰ k kʰ ɡ ɡʰ q c cʰ ɟ ɟʰ tʃ tʃʰ dʒ dʒʰ ts dz f v ʋ s z ʃ ʒ ʂ ɕ x ɣ ç θ ð ħ ʕ h ɦ m n ɳ ɲ ŋ l ɭ ɬ r ɾ ɽ ʁ ɹ j w"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɬ",
+   "out": "ਲ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɬ",
+   "out": "ਲ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɬ",
+   "out": "ਲ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "j",
+   "out": "",
+   "after_out": "ਿ ੀ ਇ ਈ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "j",
+   "out": "",
+   "after_out": "ਯ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "j",
+   "out": "ਇ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "j",
+   "out": "ਯ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "j",
+   "out": "ਯ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "w",
+   "out": "",
+   "after_out": "ੁ ੂ ਉ ਊ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "w",
+   "out": "",
+   "after_out": "ਵ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "w",
+   "out": "ਉ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "w",
+   "out": "ਵ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "w",
+   "out": "ਵ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɰ",
+   "out": "",
+   "after_out": "ਵ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɰ",
+   "out": "ਉ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɰ",
+   "out": "ਵ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɰ",
+   "out": "ਵ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɥ",
+   "out": "",
+   "after_out": "ਯ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɥ",
+   "out": "ਇ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɥ",
+   "out": "ਯ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɥ",
+   "out": "ਯ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "j",
+   "out": "ਯ",
+   "after_out": ""
+  },
+  {
+   "slot": "onset",
+   "ipa": "j",
+   "out": "ਯ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "j",
+   "out": "ਯ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɥ",
+   "out": "ਯ",
+   "after_out": ""
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɥ",
+   "out": "ਯ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɥ",
+   "out": "ਯ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "w",
+   "out": "ਵ",
+   "after_out": ""
+  },
+  {
+   "slot": "onset",
+   "ipa": "w",
+   "out": "ਵ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "w",
+   "out": "ਵ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɰ",
+   "out": "ਵ",
+   "after_out": ""
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɰ",
+   "out": "ਵ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɰ",
+   "out": "ਵ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɪ",
+   "out": "ਇ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɪ",
+   "out": "ਇ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɪ",
+   "out": "ਿ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʊ",
+   "out": "ਉ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʊ",
+   "out": "ਉ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʊ",
+   "out": "ੁ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "a̯",
+   "out": "ਆ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʊ̃",
+   "out": "ਉੰ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɪ̃",
+   "out": "ਇੰ",
+   "after_out": "ਾ ਿ ੀ ੁ ੂ ੇ ੈ ੋ ੌ ਅ ਆ ਇ ਈ ਉ ਊ ਏ ਐ ਓ ਔ ੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ə",
+   "out": "ਆ",
+   "after_out": "",
+   "when": [
+    "word_final",
+    "open",
+    "not_word_initial"
+   ]
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ə",
+   "out": "ਾ",
+   "when": [
+    "word_final",
+    "open",
+    "not_word_initial"
+   ]
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ə",
+   "out": "ਅ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ə",
+   "out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "əː",
+   "out": "ਆ",
+   "after_out": "",
+   "when": [
+    "word_final",
+    "open",
+    "not_word_initial"
+   ]
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "əː",
+   "out": "ਾ",
+   "when": [
+    "word_final",
+    "open",
+    "not_word_initial"
+   ]
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "əː",
+   "out": "ਅ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "əː",
+   "out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɘ",
+   "out": "ਆ",
+   "after_out": "",
+   "when": [
+    "word_final",
+    "open",
+    "not_word_initial"
+   ]
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɘ",
+   "out": "ਾ",
+   "when": [
+    "word_final",
+    "open",
+    "not_word_initial"
+   ]
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɘ",
+   "out": "ਅ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɘ",
+   "out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɐ",
+   "out": "ਆ",
+   "after_out": "",
+   "when": [
+    "word_final",
+    "open",
+    "not_word_initial"
+   ]
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɐ",
+   "out": "ਾ",
+   "when": [
+    "word_final",
+    "open",
+    "not_word_initial"
+   ]
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɐ",
+   "out": "ਅ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɐ",
+   "out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʌ",
+   "out": "ਆ",
+   "after_out": "",
+   "when": [
+    "word_final",
+    "open"
+   ]
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʌ",
+   "out": "ਾ",
+   "when": [
+    "word_final",
+    "open"
+   ]
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʌ",
+   "out": "ਅ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʌ",
+   "out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ø",
+   "out": "ਇ",
+   "after_nucleus": "ɔ",
+   "when": [
+    "no_onset"
+   ]
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ø",
+   "out": "ਓ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ø",
+   "out": "ੋ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "a",
+   "out": "ਆ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "a",
+   "out": "ਾ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "aː",
+   "out": "ਆ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "aː",
+   "out": "ਾ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɑ",
+   "out": "ਆ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɑ",
+   "out": "ਾ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɑː",
+   "out": "ਆ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɑː",
+   "out": "ਾ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "eɪ",
+   "out": "ਏ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "eɪ",
+   "out": "ੇ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "oʊ",
+   "out": "ਓ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "oʊ",
+   "out": "ੋ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɔɪ",
+   "out": "ਔਇ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɔɪ",
+   "out": "ੌਇ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɒɪ",
+   "out": "ਔਇ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɒɪ",
+   "out": "ੌਇ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "əɪ",
+   "out": "ਐ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "əɪ",
+   "out": "ੈ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "əj",
+   "out": "ਐ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "əj",
+   "out": "ੈ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʌj",
+   "out": "ਐ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʌj",
+   "out": "ੈ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɐj",
+   "out": "ਐ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɐj",
+   "out": "ੈ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "əw",
+   "out": "ਔ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "əw",
+   "out": "ੌ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "əʊ",
+   "out": "ਔ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "əʊ",
+   "out": "ੌ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʌw",
+   "out": "ਔ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʌw",
+   "out": "ੌ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "æ",
+   "out": "ਐ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "æ",
+   "out": "ੈ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɛː",
+   "out": "ਐ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɛː",
+   "out": "ੈ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "i",
+   "out": "ਈ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "i",
+   "out": "ੀ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "iː",
+   "out": "ਈ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "iː",
+   "out": "ੀ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɨ",
+   "out": "ਇ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɨ",
+   "out": "ਿ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "u",
+   "out": "ਊ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "u",
+   "out": "ੂ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "uː",
+   "out": "ਊ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "uː",
+   "out": "ੂ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɯ",
+   "out": "ਉ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɯ",
+   "out": "ੁ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɯː",
+   "out": "ਊ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɯː",
+   "out": "ੂ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "e",
+   "out": "ਏ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "e",
+   "out": "ੇ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "eː",
+   "out": "ਏ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "eː",
+   "out": "ੇ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɛ",
+   "out": "ਐ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɛ",
+   "out": "ੈ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɤ",
+   "out": "ਏ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɤ",
+   "out": "ੇ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɤː",
+   "out": "ਏ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɤː",
+   "out": "ੇ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "o",
+   "out": "ਓ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "o",
+   "out": "ੋ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "oː",
+   "out": "ਓ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "oː",
+   "out": "ੋ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "øː",
+   "out": "ਓ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "øː",
+   "out": "ੋ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "œ",
+   "out": "ਓ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "œ",
+   "out": "ੋ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "œː",
+   "out": "ਓ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "œː",
+   "out": "ੋ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɵ",
+   "out": "ਯੋ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɵ",
+   "out": "ਯੋ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɔ",
+   "out": "ਔ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɔ",
+   "out": "ੌ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɔː",
+   "out": "ਔ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɔː",
+   "out": "ੌ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɒ",
+   "out": "ਔ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɒ",
+   "out": "ੌ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɒː",
+   "out": "ਔ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɒː",
+   "out": "ੌ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "y",
+   "out": "ਯੂ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "y",
+   "out": "ਯੂ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʏ",
+   "out": "ਯੁ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "yː",
+   "out": "ਯੂ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "yː",
+   "out": "ਯੂ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʉ",
+   "out": "ਯੂ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʉ",
+   "out": "ਯੂ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɑ̃",
+   "out": "ਆੰ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɑ̃",
+   "out": "ਾੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɐ̃",
+   "out": "ਆੰ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɐ̃",
+   "out": "ਾੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ã",
+   "out": "ਆੰ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ã",
+   "out": "ਾੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɐ̃ʊ̃",
+   "out": "ਆਉੰ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɐ̃ʊ̃",
+   "out": "ਾਉੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɑ̃ʊ̃",
+   "out": "ਆਉੰ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɑ̃ʊ̃",
+   "out": "ਾਉੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɛ̃",
+   "out": "ਏੰ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɛ̃",
+   "out": "ੇੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ẽ",
+   "out": "ਏੰ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ẽ",
+   "out": "ੇੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "œ̃",
+   "out": "ਓੰ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "œ̃",
+   "out": "ੋੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɔ̃",
+   "out": "ਔੰ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɔ̃",
+   "out": "ੌੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "õ",
+   "out": "ਓੰ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "õ",
+   "out": "ੋੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ũ",
+   "out": "ਊੰ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ũ",
+   "out": "ੂੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ĩ",
+   "out": "ਈੰ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ĩ",
+   "out": "ੀੰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɚ",
+   "out": "ਅਰ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɚ",
+   "out": "ਰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɝ",
+   "out": "ਅਰ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɝ",
+   "out": "ਰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɜ",
+   "out": "ਅਰ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɜ",
+   "out": "ਰ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɜː",
+   "out": "ਅਰ",
+   "after_out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɜː",
+   "out": "ਰ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "p",
+   "out": "ਪ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "p",
+   "out": "ਪ"
+  },
+  {
+   "slot": "any",
+   "ipa": "p",
+   "out": "ਪ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "pʰ",
+   "out": "ਫ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "pʰ",
+   "out": "ਫ"
+  },
+  {
+   "slot": "any",
+   "ipa": "pʰ",
+   "out": "ਫ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "b",
+   "out": "ਬ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "b",
+   "out": "ਬ"
+  },
+  {
+   "slot": "any",
+   "ipa": "b",
+   "out": "ਬ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "t",
+   "out": "ਤ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "t",
+   "out": "ਤ"
+  },
+  {
+   "slot": "any",
+   "ipa": "t",
+   "out": "ਤ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "t̪",
+   "out": "ਤ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "t̪",
+   "out": "ਤ"
+  },
+  {
+   "slot": "any",
+   "ipa": "t̪",
+   "out": "ਤ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "tʰ",
+   "out": "ਥ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "tʰ",
+   "out": "ਥ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tʰ",
+   "out": "ਥ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "d",
+   "out": "ਦ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "d",
+   "out": "ਦ"
+  },
+  {
+   "slot": "any",
+   "ipa": "d",
+   "out": "ਦ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɗ",
+   "out": "ਦ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɗ",
+   "out": "ਦ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɗ",
+   "out": "ਦ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ʈ",
+   "out": "ਟ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʈ",
+   "out": "ਟ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʈ",
+   "out": "ਟ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɖ",
+   "out": "ਡ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɖ",
+   "out": "ਡ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɖ",
+   "out": "ਡ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "k",
+   "out": "ਕ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "k",
+   "out": "ਕ"
+  },
+  {
+   "slot": "any",
+   "ipa": "k",
+   "out": "ਕ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "kʰ",
+   "out": "ਖ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "kʰ",
+   "out": "ਖ"
+  },
+  {
+   "slot": "any",
+   "ipa": "kʰ",
+   "out": "ਖ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɡ",
+   "out": "ਗ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɡ",
+   "out": "ਗ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɡ",
+   "out": "ਗ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "q",
+   "out": "ਕ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "q",
+   "out": "ਕ"
+  },
+  {
+   "slot": "any",
+   "ipa": "q",
+   "out": "ਕ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "x",
+   "out": "ਖ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "x",
+   "out": "ਖ"
+  },
+  {
+   "slot": "any",
+   "ipa": "x",
+   "out": "ਖ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɣ",
+   "out": "ਗ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɣ",
+   "out": "ਗ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɣ",
+   "out": "ਗ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "tʃ",
+   "out": "ਚ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "tʃ",
+   "out": "ਚ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tʃ",
+   "out": "ਚ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "tɕ",
+   "out": "ਚ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "tɕ",
+   "out": "ਚ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tɕ",
+   "out": "ਚ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ʈʂ",
+   "out": "ਚ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʈʂ",
+   "out": "ਚ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʈʂ",
+   "out": "ਚ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "tɕʰ",
+   "out": "ਛ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "tɕʰ",
+   "out": "ਛ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tɕʰ",
+   "out": "ਛ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ʈʂʰ",
+   "out": "ਛ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʈʂʰ",
+   "out": "ਛ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʈʂʰ",
+   "out": "ਛ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "dʒ",
+   "out": "ਜ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "dʒ",
+   "out": "ਜ"
+  },
+  {
+   "slot": "any",
+   "ipa": "dʒ",
+   "out": "ਜ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "dʑ",
+   "out": "ਜ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "dʑ",
+   "out": "ਜ"
+  },
+  {
+   "slot": "any",
+   "ipa": "dʑ",
+   "out": "ਜ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "dz",
+   "out": "ਜ਼",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "dz",
+   "out": "ਜ਼"
+  },
+  {
+   "slot": "any",
+   "ipa": "dz",
+   "out": "ਜ਼"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ts",
+   "out": "ਤਸ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ts",
+   "out": "ਤਸ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ts",
+   "out": "ਤਸ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "tsʰ",
+   "out": "ਤਸ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "tsʰ",
+   "out": "ਤਸ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tsʰ",
+   "out": "ਤਸ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ts̪",
+   "out": "ਤਸ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ts̪",
+   "out": "ਤਸ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ts̪",
+   "out": "ਤਸ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "pf",
+   "out": "ਪਫ਼",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "pf",
+   "out": "ਪਫ਼"
+  },
+  {
+   "slot": "any",
+   "ipa": "pf",
+   "out": "ਪਫ਼"
+  },
+  {
+   "slot": "onset",
+   "ipa": "f",
+   "out": "ਫ਼",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "f",
+   "out": "ਫ਼"
+  },
+  {
+   "slot": "any",
+   "ipa": "f",
+   "out": "ਫ਼"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɸ",
+   "out": "ਫ਼",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɸ",
+   "out": "ਫ਼"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɸ",
+   "out": "ਫ਼"
+  },
+  {
+   "slot": "onset",
+   "ipa": "v",
+   "out": "ਵ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "v",
+   "out": "ਵ"
+  },
+  {
+   "slot": "any",
+   "ipa": "v",
+   "out": "ਵ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ʋ",
+   "out": "ਵ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʋ",
+   "out": "ਵ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʋ",
+   "out": "ਵ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "θ",
+   "out": "ਥ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "θ",
+   "out": "ਥ"
+  },
+  {
+   "slot": "any",
+   "ipa": "θ",
+   "out": "ਥ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ð",
+   "out": "ਦ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ð",
+   "out": "ਦ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ð",
+   "out": "ਦ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "s",
+   "out": "ਸ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "s",
+   "out": "ਸ"
+  },
+  {
+   "slot": "any",
+   "ipa": "s",
+   "out": "ਸ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "s̪",
+   "out": "ਸ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "s̪",
+   "out": "ਸ"
+  },
+  {
+   "slot": "any",
+   "ipa": "s̪",
+   "out": "ਸ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "z",
+   "out": "ਜ਼",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "z",
+   "out": "ਜ਼"
+  },
+  {
+   "slot": "any",
+   "ipa": "z",
+   "out": "ਜ਼"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ʃ",
+   "out": "ਸ਼",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʃ",
+   "out": "ਸ਼"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʃ",
+   "out": "ਸ਼"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ʂ",
+   "out": "ਸ਼",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʂ",
+   "out": "ਸ਼"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʂ",
+   "out": "ਸ਼"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɕ",
+   "out": "ਸ਼",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɕ",
+   "out": "ਸ਼"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɕ",
+   "out": "ਸ਼"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ʒ",
+   "out": "ਜ਼",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʒ",
+   "out": "ਜ਼"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʒ",
+   "out": "ਜ਼"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ʑ",
+   "out": "ਜ਼",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʑ",
+   "out": "ਜ਼"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʑ",
+   "out": "ਜ਼"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ʐ",
+   "out": "ਰ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʐ",
+   "out": "ਰ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʐ",
+   "out": "੍ਰ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "dˤ",
+   "out": "ਜ਼",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "dˤ",
+   "out": "ਜ਼"
+  },
+  {
+   "slot": "any",
+   "ipa": "dˤ",
+   "out": "ਜ਼"
+  },
+  {
+   "slot": "onset",
+   "ipa": "h",
+   "out": "ਹ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "h",
+   "out": "ਹ"
+  },
+  {
+   "slot": "any",
+   "ipa": "h",
+   "out": "ਹ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ħ",
+   "out": "ਹ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ħ",
+   "out": "ਹ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ħ",
+   "out": "ਹ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "m",
+   "out": "ਮ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "m",
+   "out": "ਮ"
+  },
+  {
+   "slot": "any",
+   "ipa": "m",
+   "out": "ਮ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "m̩",
+   "out": "ਮ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "m̩",
+   "out": "ਮ"
+  },
+  {
+   "slot": "any",
+   "ipa": "m̩",
+   "out": "ਮ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "n",
+   "out": "ਨ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "n",
+   "out": "ਨ"
+  },
+  {
+   "slot": "any",
+   "ipa": "n",
+   "out": "ਨ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɳ",
+   "out": "ਣ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɳ",
+   "out": "ਣ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɳ",
+   "out": "ਣ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "n̩",
+   "out": "ਨ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "n̩",
+   "out": "ਨ"
+  },
+  {
+   "slot": "any",
+   "ipa": "n̩",
+   "out": "ਨ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɲ",
+   "out": "ਨਯ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɲ",
+   "out": "ਨਯ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɲ",
+   "out": "ਨਯ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "l",
+   "out": "ਲ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "l",
+   "out": "ਲ"
+  },
+  {
+   "slot": "any",
+   "ipa": "l",
+   "out": "ਲ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɫ",
+   "out": "ਲ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɫ",
+   "out": "ਲ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɫ",
+   "out": "ਲ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɭ",
+   "out": "ਲ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɭ",
+   "out": "ਲ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɭ",
+   "out": "ਲ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ʎ",
+   "out": "ਲਯ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʎ",
+   "out": "ਲਯ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʎ",
+   "out": "ਲਯ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "r",
+   "out": "ਰ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "r",
+   "out": "",
+   "after_out": "ਰ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "r",
+   "out": "ਰ"
+  },
+  {
+   "slot": "any",
+   "ipa": "r",
+   "out": "੍ਰ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɾ",
+   "out": "ਰ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɾ",
+   "out": "",
+   "after_out": "ਰ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɾ",
+   "out": "ਰ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɾ",
+   "out": "੍ਰ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɹ",
+   "out": "ਰ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɹ",
+   "out": "",
+   "after_out": "ਰ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɹ",
+   "out": "ਰ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɹ",
+   "out": "੍ਰ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ʁ",
+   "out": "ਰ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʁ",
+   "out": "",
+   "after_out": "ਰ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʁ",
+   "out": "ਰ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʁ",
+   "out": "੍ਰ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɻ",
+   "out": "ਰ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɻ",
+   "out": "",
+   "after_out": "ਰ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɻ",
+   "out": "ਰ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɻ",
+   "out": "੍ਰ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɽʰ",
+   "out": "ੜ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɽʰ",
+   "out": "ੜ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɽʰ",
+   "out": "ੜ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɽ",
+   "out": "ੜ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɽ",
+   "out": "ੜ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɽ",
+   "out": "ੜ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "p͈",
+   "out": "ਪ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "p͈",
+   "out": "ਪ"
+  },
+  {
+   "slot": "any",
+   "ipa": "p͈",
+   "out": "ਪ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "t͈",
+   "out": "ਤ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "t͈",
+   "out": "ਤ"
+  },
+  {
+   "slot": "any",
+   "ipa": "t͈",
+   "out": "ਤ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "k͈",
+   "out": "ਕ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "k͈",
+   "out": "ਕ"
+  },
+  {
+   "slot": "any",
+   "ipa": "k͈",
+   "out": "ਕ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "s͈",
+   "out": "ਸ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "s͈",
+   "out": "ਸ"
+  },
+  {
+   "slot": "any",
+   "ipa": "s͈",
+   "out": "ਸ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "tɕ͈",
+   "out": "ਚ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "tɕ͈",
+   "out": "ਚ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tɕ͈",
+   "out": "ਚ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "tː",
+   "out": "ਤ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "tː",
+   "out": "ੱਤ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tː",
+   "out": "ਤ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "dː",
+   "out": "ਦ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "dː",
+   "out": "ੱਦ"
+  },
+  {
+   "slot": "any",
+   "ipa": "dː",
+   "out": "ਦ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "kː",
+   "out": "ਕ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "kː",
+   "out": "ੱਕ"
+  },
+  {
+   "slot": "any",
+   "ipa": "kː",
+   "out": "ਕ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɡː",
+   "out": "ਗ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɡː",
+   "out": "ੱਗ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɡː",
+   "out": "ਗ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "pː",
+   "out": "ਪ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "pː",
+   "out": "ੱਪ"
+  },
+  {
+   "slot": "any",
+   "ipa": "pː",
+   "out": "ਪ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "bː",
+   "out": "ਬ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "bː",
+   "out": "ੱਬ"
+  },
+  {
+   "slot": "any",
+   "ipa": "bː",
+   "out": "ਬ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "sː",
+   "out": "ਸ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "sː",
+   "out": "ੱਸ"
+  },
+  {
+   "slot": "any",
+   "ipa": "sː",
+   "out": "ਸ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "zː",
+   "out": "ਜ਼",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "zː",
+   "out": "ੱਜ਼"
+  },
+  {
+   "slot": "any",
+   "ipa": "zː",
+   "out": "ਜ਼"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ʃː",
+   "out": "ਸ਼",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʃː",
+   "out": "ੱਸ਼"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʃː",
+   "out": "ਸ਼"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ʒː",
+   "out": "ਜ਼ਜ਼",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʒː",
+   "out": "ਜ਼ਜ਼"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʒː",
+   "out": "ਜ਼ਜ਼"
+  },
+  {
+   "slot": "onset",
+   "ipa": "qː",
+   "out": "ਕਕ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "qː",
+   "out": "ਕਕ"
+  },
+  {
+   "slot": "any",
+   "ipa": "qː",
+   "out": "ਕਕ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "mː",
+   "out": "ਮ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "mː",
+   "out": "ੱਮ"
+  },
+  {
+   "slot": "any",
+   "ipa": "mː",
+   "out": "ਮ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "nː",
+   "out": "ਨ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "nː",
+   "out": "ੱਨ"
+  },
+  {
+   "slot": "any",
+   "ipa": "nː",
+   "out": "ਨ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "lː",
+   "out": "ਲ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "lː",
+   "out": "ੱਲ"
+  },
+  {
+   "slot": "any",
+   "ipa": "lː",
+   "out": "ਲ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "rː",
+   "out": "ਰ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "rː",
+   "out": "ੱਰ"
+  },
+  {
+   "slot": "any",
+   "ipa": "rː",
+   "out": "ਰ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "fː",
+   "out": "ਫ਼",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "fː",
+   "out": "ੱਫ਼"
+  },
+  {
+   "slot": "any",
+   "ipa": "fː",
+   "out": "ਫ਼"
+  },
+  {
+   "slot": "onset",
+   "ipa": "tʃː",
+   "out": "ਚ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "tʃː",
+   "out": "ੱਚ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tʃː",
+   "out": "ਚ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "dʒː",
+   "out": "ਜ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "dʒː",
+   "out": "ੱਜ"
+  },
+  {
+   "slot": "any",
+   "ipa": "dʒː",
+   "out": "ਜ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "tsː",
+   "out": "ਤਸਤਸ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "tsː",
+   "out": "ਤਸਤਸ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tsː",
+   "out": "ਤਸਤਸ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "dzː",
+   "out": "ਜ਼ਜ਼",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "dzː",
+   "out": "ਜ਼ਜ਼"
+  },
+  {
+   "slot": "any",
+   "ipa": "dzː",
+   "out": "ਜ਼ਜ਼"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ħː",
+   "out": "ਹਹ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ħː",
+   "out": "ਹਹ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ħː",
+   "out": "ਹਹ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ʈː",
+   "out": "ਟ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʈː",
+   "out": "ੱਟ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʈː",
+   "out": "ਟ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɖː",
+   "out": "ਡ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɖː",
+   "out": "ੱਡ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɖː",
+   "out": "ਡ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "hː",
+   "out": "ਹ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "hː",
+   "out": "ੱਹ"
+  },
+  {
+   "slot": "any",
+   "ipa": "hː",
+   "out": "ਹ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "vː",
+   "out": "ਵਵ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "vː",
+   "out": "ਵਵ"
+  },
+  {
+   "slot": "any",
+   "ipa": "vː",
+   "out": "ਵਵ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ç",
+   "out": "ਖ",
+   "after_out": "",
+   "if_inventory": "x"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ç",
+   "out": "ਹ",
+   "after_out": "",
+   "unless_inventory": "x"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ç",
+   "out": "ਖ",
+   "if_inventory": "x"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ç",
+   "out": "ਹ",
+   "unless_inventory": "x"
+  },
+  {
+   "slot": "any",
+   "ipa": "ç",
+   "out": "ਖ",
+   "if_inventory": "x"
+  },
+  {
+   "slot": "any",
+   "ipa": "ç",
+   "out": "ਹ",
+   "unless_inventory": "x"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ʝ",
+   "out": "ਯ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʝ",
+   "out": "ਯ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʝ",
+   "out": "ਯ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "c",
+   "out": "ਚ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "c",
+   "out": "ਕ"
+  },
+  {
+   "slot": "any",
+   "ipa": "c",
+   "out": "ਚ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɟ",
+   "out": "ਗ",
+   "after_out": "",
+   "if_inventory": "dʒ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɟ",
+   "out": "ਜ",
+   "after_out": "",
+   "unless_inventory": "dʒ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɟ",
+   "out": "ਗ",
+   "if_inventory": "dʒ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɟ",
+   "out": "ਜ",
+   "unless_inventory": "dʒ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɟ",
+   "out": "ਗ",
+   "if_inventory": "dʒ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɟ",
+   "out": "ਜ",
+   "unless_inventory": "dʒ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ŋ",
+   "out": "ਙ",
+   "after_out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ŋ",
+   "out": "ਙ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ŋ",
+   "out": "",
+   "after_out": "ੰ",
+   "before_onset": "k ɡ kʰ q x ɣ k͈"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ŋ",
+   "out": "ੰ",
+   "before_onset": "k ɡ kʰ q x ɣ k͈"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ŋ",
+   "out": "ਗ",
+   "after_out": "ੰ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ŋ",
+   "out": "ੰਗ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ŋk",
+   "out": "ਕ",
+   "after_out": "ੰ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ŋk",
+   "out": "ੰਕ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ŋɡ",
+   "out": "ਗ",
+   "after_out": "ੰ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ŋɡ",
+   "out": "ੰਗ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɴ",
+   "out": "",
+   "after_out": "ੰ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɴ",
+   "out": "ੰ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɴ",
+   "out": "ਨ",
+   "after_out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ɴ",
+   "out": "ਨ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʔ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ʕ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ː",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ˑ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ʲ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ʷ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ˤ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ˠ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ʼ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ˀ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̪",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̩",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̺",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "͈",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̚",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̥",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̬",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̹",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̜",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̯",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̃",
+   "out": ""
+  },
+  {
+   "slot": "onset",
+   "ipa": "bʰ",
+   "out": "ਭ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "bʰ",
+   "out": "ਭ"
+  },
+  {
+   "slot": "any",
+   "ipa": "bʰ",
+   "out": "ਭ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "dʰ",
+   "out": "ਧ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "dʰ",
+   "out": "ਧ"
+  },
+  {
+   "slot": "any",
+   "ipa": "dʰ",
+   "out": "ਧ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɡʰ",
+   "out": "ਘ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɡʰ",
+   "out": "ਘ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɡʰ",
+   "out": "ਘ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɖʰ",
+   "out": "ਢ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɖʰ",
+   "out": "ਢ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɖʰ",
+   "out": "ਢ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ʈʰ",
+   "out": "ਠ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʈʰ",
+   "out": "ਠ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʈʰ",
+   "out": "ਠ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "cʰ",
+   "out": "ਛ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "cʰ",
+   "out": "ਖ"
+  },
+  {
+   "slot": "any",
+   "ipa": "cʰ",
+   "out": "ਛ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "qʰ",
+   "out": "ਖ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "qʰ",
+   "out": "ਖ"
+  },
+  {
+   "slot": "any",
+   "ipa": "qʰ",
+   "out": "ਖ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "tʃʰ",
+   "out": "ਛ",
+   "after_out": ""
+  },
+  {
+   "slot": "coda",
+   "ipa": "tʃʰ",
+   "out": "ਛ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tʃʰ",
+   "out": "ਛ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɟʰ",
+   "out": "ਘ",
+   "after_out": "",
+   "if_inventory": "dʒ"
+  },
+  {
+   "slot": "onset",
+   "ipa": "ɟʰ",
+   "out": "ਝ",
+   "after_out": "",
+   "unless_inventory": "dʒ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɟʰ",
+   "out": "ਘ",
+   "if_inventory": "dʒ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ɟʰ",
+   "out": "ਝ",
+   "unless_inventory": "dʒ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɟʰ",
+   "out": "ਘ",
+   "if_inventory": "dʒ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɟʰ",
+   "out": "ਝ",
+   "unless_inventory": "dʒ"
+  },
+  {
+   "slot": "any",
+   "ipa": "r̝",
+   "out": "੍ਰ"
+  }
+ ],
+ "syllable_fixups": [
+  {
+   "match": "([ਾੀੇੈੋੌਆਈਏਐਓਔ])ੰ",
+   "out": "\\1ਂ"
+  },
+  {
+   "match": "([ਾੀੇੈੋੌਆਈਏਐਓਔ])ੰ",
+   "out": "\\1ਂ"
+  },
+  {
+   "match": "(?<=.)[ਨਮਣਞਙ](?=[ਕਖਗਘਙਚਛਜਝਞਟਠਡਢਣਤਥਦਧਨਪਫਬਭਮਯਰਲਵੜਸਹ])",
+   "out": "ੰ"
+  },
+  {
+   "match": "([,;:.!?]*)$",
+   "out": "’\\1",
+   "when": [
+    "stressed",
+    "not_word_initial"
+   ]
+  },
+  {
+   "match": "([,;:.!?]*)$",
+   "out": "’\\1",
+   "when": [
+    "stressed",
+    "word_initial",
+    "not_word_final"
+   ]
+  }
+ ],
+ "targets": {
+  "en": {
+   "phonemes": [
+    {
+     "slot": "nucleus",
+     "ipa": "ɑː",
+     "out": "ਆ",
+     "if_coda": "ɹ",
+     "after_out": ""
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "ɑː",
+     "out": "ਾ",
+     "if_coda": "ɹ"
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "ɑː",
+     "out": "ਔ",
+     "after_out": ""
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "ɑː",
+     "out": "ੌ"
+    },
+    {
+     "slot": "onset",
+     "ipa": "t",
+     "out": "ਟ",
+     "after_out": ""
+    },
+    {
+     "slot": "coda",
+     "ipa": "t",
+     "out": "ਟ"
+    },
+    {
+     "slot": "any",
+     "ipa": "t",
+     "out": "ਟ"
+    },
+    {
+     "slot": "onset",
+     "ipa": "d",
+     "out": "ਡ",
+     "after_out": ""
+    },
+    {
+     "slot": "coda",
+     "ipa": "d",
+     "out": "ਡ"
+    },
+    {
+     "slot": "any",
+     "ipa": "d",
+     "out": "ਡ"
+    },
+    {
+     "slot": "onset",
+     "ipa": "tː",
+     "out": "ਟਟ",
+     "after_out": ""
+    },
+    {
+     "slot": "coda",
+     "ipa": "tː",
+     "out": "ਟਟ"
+    },
+    {
+     "slot": "any",
+     "ipa": "tː",
+     "out": "ਟਟ"
+    },
+    {
+     "slot": "onset",
+     "ipa": "dː",
+     "out": "ਡਡ",
+     "after_out": ""
+    },
+    {
+     "slot": "coda",
+     "ipa": "dː",
+     "out": "ਡਡ"
+    },
+    {
+     "slot": "any",
+     "ipa": "dː",
+     "out": "ਡਡ"
+    },
+    {
+     "slot": "onset",
+     "ipa": "ɾ",
+     "out": "ਟ",
+     "after_out": ""
+    },
+    {
+     "slot": "coda",
+     "ipa": "ɾ",
+     "out": "ਟ"
+    },
+    {
+     "slot": "any",
+     "ipa": "ɾ",
+     "out": "ਟ"
+    }
+   ]
+  },
+  "de": {
+   "phonemes": [
+    {
+     "slot": "onset",
+     "ipa": "t",
+     "out": "ਟ",
+     "after_out": ""
+    },
+    {
+     "slot": "coda",
+     "ipa": "t",
+     "out": "ਟ"
+    },
+    {
+     "slot": "any",
+     "ipa": "t",
+     "out": "ਟ"
+    },
+    {
+     "slot": "onset",
+     "ipa": "d",
+     "out": "ਡ",
+     "after_out": ""
+    },
+    {
+     "slot": "coda",
+     "ipa": "d",
+     "out": "ਡ"
+    },
+    {
+     "slot": "any",
+     "ipa": "d",
+     "out": "ਡ"
+    },
+    {
+     "slot": "onset",
+     "ipa": "tː",
+     "out": "ਟਟ",
+     "after_out": ""
+    },
+    {
+     "slot": "coda",
+     "ipa": "tː",
+     "out": "ਟਟ"
+    },
+    {
+     "slot": "any",
+     "ipa": "tː",
+     "out": "ਟਟ"
+    },
+    {
+     "slot": "onset",
+     "ipa": "dː",
+     "out": "ਡਡ",
+     "after_out": ""
+    },
+    {
+     "slot": "coda",
+     "ipa": "dː",
+     "out": "ਡਡ"
+    },
+    {
+     "slot": "any",
+     "ipa": "dː",
+     "out": "ਡਡ"
+    }
+   ]
+  },
+  "ar": {
+   "phonemes": [
+    {
+     "slot": "nucleus",
+     "ipa": "a",
+     "out": "ਆ",
+     "after_out": "",
+     "when": [
+      "word_final",
+      "open",
+      "not_word_initial"
+     ]
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "a",
+     "out": "ਾ",
+     "when": [
+      "word_final",
+      "open",
+      "not_word_initial"
+     ]
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "a",
+     "out": "ਅ",
+     "after_out": ""
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "a",
+     "out": ""
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "i",
+     "out": "ਇ",
+     "after_out": ""
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "i",
+     "out": "ਿ"
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "u",
+     "out": "ਉ",
+     "after_out": ""
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "u",
+     "out": "ੁ"
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "aj",
+     "out": "ਐ",
+     "after_out": ""
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "aj",
+     "out": "ੈ"
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "ajj",
+     "out": "ਐ",
+     "after_out": ""
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "ajj",
+     "out": "ੈ"
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "aw",
+     "out": "ਔ",
+     "after_out": ""
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "aw",
+     "out": "ੌ"
+    }
+   ]
+  },
+  "th": {
+   "phonemes": [
+    {
+     "slot": "nucleus",
+     "ipa": "a",
+     "out": "ਆ",
+     "after_out": "",
+     "when": [
+      "word_final",
+      "open",
+      "not_word_initial"
+     ]
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "a",
+     "out": "ਾ",
+     "when": [
+      "word_final",
+      "open",
+      "not_word_initial"
+     ]
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "a",
+     "out": "ਅ",
+     "after_out": ""
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "a",
+     "out": ""
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "i",
+     "out": "ਇ",
+     "after_out": ""
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "i",
+     "out": "ਿ"
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "u",
+     "out": "ਉ",
+     "after_out": ""
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "u",
+     "out": "ੁ"
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "aj",
+     "out": "ਆਇ",
+     "after_out": ""
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "aj",
+     "out": "ਾਇ"
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "aw",
+     "out": "ਆਉ",
+     "after_out": ""
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "aw",
+     "out": "ਾਉ"
+    }
+   ]
+  },
+  "vi": {
+   "phonemes": [
+    {
+     "slot": "nucleus",
+     "ipa": "a",
+     "out": "ਆ",
+     "after_out": "",
+     "when": [
+      "word_final",
+      "open",
+      "not_word_initial"
+     ]
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "a",
+     "out": "ਾ",
+     "when": [
+      "word_final",
+      "open",
+      "not_word_initial"
+     ]
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "a",
+     "out": "ਅ",
+     "after_out": ""
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "a",
+     "out": ""
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "y",
+     "out": "ਉ",
+     "after_out": ""
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "y",
+     "out": "ੁ"
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "yː",
+     "out": "ਊ",
+     "after_out": ""
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "yː",
+     "out": "ੂ"
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "aj",
+     "out": "ਆਇ",
+     "after_out": ""
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "aj",
+     "out": "ਾਇ"
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "aw",
+     "out": "ਆਉ",
+     "after_out": ""
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "aw",
+     "out": "ਾਉ"
+    }
+   ]
+  },
+  "pt": {
+   "phonemes": [
+    {
+     "slot": "nucleus",
+     "ipa": "y",
+     "out": "ਇ",
+     "after_out": ""
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "y",
+     "out": "ਿ"
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "æ",
+     "out": "ਆ",
+     "after_out": "",
+     "when": [
+      "word_final",
+      "open",
+      "not_word_initial"
+     ]
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "æ",
+     "out": "ਾ",
+     "when": [
+      "word_final",
+      "open",
+      "not_word_initial"
+     ]
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "æ",
+     "out": "ਅ",
+     "after_out": ""
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "æ",
+     "out": ""
+    },
+    {
+     "slot": "coda",
+     "ipa": "ŋ",
+     "out": "",
+     "after_out": "ੰ"
+    },
+    {
+     "slot": "coda",
+     "ipa": "ŋ",
+     "out": "ੰ"
+    }
+   ]
+  },
+  "tr": {
+   "phonemes": [
+    {
+     "slot": "nucleus",
+     "ipa": "æ",
+     "out": "ਏ",
+     "after_out": ""
+    },
+    {
+     "slot": "nucleus",
+     "ipa": "æ",
+     "out": "ੇ"
+    }
+   ]
+  }
+ }
+}

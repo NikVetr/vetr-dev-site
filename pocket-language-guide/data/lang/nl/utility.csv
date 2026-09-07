@@ -1,0 +1,16 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,Ik wil naar {} gaan.,,ɪk ʋɪl nˈaːr {} ɣˈaːn,,2,nl-agent-v1;ipa=espeak
+utility-templates.please-give-me,"Geef mij {}, alstublieft.",,"ɣˈeːf mˈɛɪ {}, ˌɑlstʏblˈift",,2,nl-agent-v1;ipa=espeak
+utility-templates.may-i,Mag ik {}?,,mɑx ɪk {},,2,nl-agent-v1;ipa=espeak
+utility-templates.please-do-not-add,"Doe er geen {} bij, alstublieft.",,"dˈu ər ɣˈeːn {} bˈɛɪ, ˌɑlstʏblˈift",,2,nl-agent-v1;ipa=espeak
+utility-templates.do-you-have,Heeft u {}?,,heːft y {},,2,nl-agent-v1;ipa=espeak
+utility-templates.please-write-the-number,Wilt u het nummer opschrijven?,,ʋɪlt y hət nˈʏmər ˈɔpsxrɛɪvən,,2,nl-agent-v1;ipa=espeak
+utility-templates.i-need,Ik heb {} nodig.,,ɪk hɛp {} nˈoːdəx,,2,nl-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,Is er een {} in de buurt?,,ɪs ər ˈeːn {} ɪn də bˈyrt,,2,nl-agent-v1;ipa=espeak
+utility-templates.how-much-is,Hoeveel kost {}?,,huvˈeːl kˈɔst {},,2,nl-agent-v1;ipa=espeak
+utility-templates.is-this,Is dit {}?,,ɪs dɪt {},,2,nl-agent-v1;ipa=espeak
+utility-templates.please,"{}, alstublieft.",,"{}, ˌɑlstʏblˈift",,2,nl-agent-v1;ipa=espeak
+utility-templates.i-am-looking-for,Ik zoek {}.,,ɪk zˈuk {},,2,nl-agent-v1;ipa=espeak
+utility-templates.do-you-accept,Accepteert u {}?,,ˌɑksɛptˈɪrt y {},,2,nl-agent-v1;ipa=espeak
+utility-templates.i-cannot-find,Ik kan {} niet vinden.,,ɪk kɑn {} nˌit vˈɪndən,,2,nl-agent-v1;ipa=espeak
+utility-templates.there-is-a-problem-with,Er is een probleem met {}.,,ər ɪs ən prɔblˈeːm mˈɛt {},,2,nl-agent-v1;ipa=espeak

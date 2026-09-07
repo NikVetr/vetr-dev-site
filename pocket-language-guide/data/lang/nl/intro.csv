@@ -1,0 +1,13 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+introductions.my-name-is,Ik heet {}.,,ɪk hˈeːt {},,2,nl-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,Aangenaam.,Aangenaam kennis te maken.,ˈaːnɣənˌaːm,,2,nl-agent-v1;ipa=espeak
+introductions.what-is-your-name,Hoe heet u?,,hˈu hˈeːt y,,2,nl-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,We reizen samen.,,ʋə rˈɛɪzən sˈaːmən,,2,nl-agent-v1;ipa=espeak
+introductions.this-is-my-friend,Dit is een vriend van mij.,Dit is een vriendin van mij.,dɪt ɪs ən vrˈint vɑn mˈɛɪ,"masculine friend; a woman-friend is vriendin -- both words are ambiguous with boyfriend/girlfriend, as in German",2,nl-agent-v1;ipa=espeak
+introductions.i-am-from,Ik kom uit {}.,,ɪk kˈɔm ˈœyt {},,2,nl-agent-v1;ipa=espeak
+introductions.where-are-you-from,Waar komt u vandaan?,,ʋˈaːr kˈɔmt y vɑndˈaːn,,2,nl-agent-v1;ipa=espeak
+introductions.how-are-you,Hoe gaat het met u?,,hˈu ɣˈaːt hət mɛt y,"the ordinary greeting-question, not a literal health enquiry",2,nl-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,Ik ben toerist.,,ɪk bɛn tˈurˌɪst,toerist is common-gender; no separate form needed,2,nl-agent-v1;ipa=espeak
+introductions.this-is-my-husband-wife,Dit is mijn man / mijn vrouw.,,dɪt ɪs mɛɪn mˈɑn / mɛɪn vrˈʌʊ,,2,nl-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,Dit is mijn dochter / mijn zoon.,,dɪt ɪs mɛɪn dˈɔxtər / mɛɪn zˈoːn,,2,nl-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,Ik reis alleen.,,ɪk rˈɛɪs ɑlˈeːn,,2,nl-agent-v1;ipa=espeak

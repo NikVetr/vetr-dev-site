@@ -88,3 +88,7 @@ numbers-money.zloty,esloti,,eslˈoti,,2,gloss-only;scoped-away;name of the curre
 numbers-money.zloty-symbol,esloti (símbolo),,eslˈoti sˈimbolo,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
 numbers-money.hryvnia,grivna,,ɡɾˈibna,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
 numbers-money.hryvnia-symbol,grivna (símbolo),,ɡɾˈibna sˈimbolo,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.leu,leu,,lˈeʊ,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.leu-symbol,leu (símbolo),,lˈeʊ sˈimbolo,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.koruna,corona,,,,2,gloss-only;scoped-away;name of the currency in this language
+numbers-money.koruna-symbol,corona (símbolo),,,,2,gloss-only;scoped-away;name of the currency in this language

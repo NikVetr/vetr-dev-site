@@ -1,0 +1,16 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,నేను {} వెళ్ళాలి,,nēnu {} veḷḷāli,neːnu {} ʋeɭɭaːli,a place name takes no case suffix with 'go' in Telugu,2,te-agent-v1;ipa=espeak
+utility-templates.please-give-me,నాకు {} ఇవ్వండి,,nāku {} ivvaṁḍi,naːku {} iʋʋaɳɖi,,2,te-agent-v1;ipa=espeak
+utility-templates.may-i,నేను {} చేయవచ్చా?,,nēnu {} cēyavaccā?,neːnu {} tʃeːjaʋatʃtʃaː,may I do —,2,te-agent-v1;ipa=espeak
+utility-templates.please-do-not-add,{} వేయకండి,,{} vēyakaṁḍi,{} ʋeːjakaɳɖi,do not put in —,2,te-agent-v1;ipa=espeak
+utility-templates.do-you-have,మీ దగ్గర {} ఉందా?,,mī daggara {} uṁdā?,miː daɡɡara {} undaː,,2,te-agent-v1;ipa=espeak
+utility-templates.please-write-the-number,నంబరు రాయండి,,naṁbaru rāyaṁḍi,nambaru raːjaɳɖi,,2,te-agent-v1;ipa=espeak
+utility-templates.i-need,నాకు {} కావాలి,,nāku {} kāvāli,naːku {} kaːʋaːli,,2,te-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,దగ్గరలో {} ఉందా?,,daggaralō {} uṁdā?,daɡɡaraloː {} undaː,,2,te-agent-v1;ipa=espeak
+utility-templates.how-much-is,{} ఎంత?,,{} eṁta?,{} enta,,2,te-agent-v1;ipa=espeak
+utility-templates.is-this,ఇది {} అవునా?,,idi {} avunā?,idi {} aʋunaː,"this is —, yes?",2,te-agent-v1;ipa=espeak
+utility-templates.please,దయచేసి {},,dayacēsi {},dajatʃeːsi {},,2,te-agent-v1;ipa=espeak
+utility-templates.i-am-looking-for,నేను {} వెతుకుతున్నాను,,nēnu {} vetukutunnānu,neːnu {} ʋetukutunnaːnu,,2,te-agent-v1;ipa=espeak
+utility-templates.do-you-accept,{} తీసుకుంటారా?,,{} tīsukuṁṭārā?,{} tiːsukuɳʈaːraː,,2,te-agent-v1;ipa=espeak
+utility-templates.i-cannot-find,నాకు {} కనిపించడం లేదు,,nāku {} kanipiṁcaḍaṁ lēdu,naːku {} kanipiɲtʃaɖam leːdu,— is not to be seen by me,2,te-agent-v1;ipa=espeak
+utility-templates.there-is-a-problem-with,{} లో సమస్య ఉంది,,{} lō samasya uṁdi,{} loː samasja undi,there is a problem in —,2,te-agent-v1;ipa=espeak

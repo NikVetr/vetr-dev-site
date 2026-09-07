@@ -2791,6 +2791,11 @@
       "out": "یُو"
     },
     {
+      "slot": "nucleus",
+      "ipa": "ʏ",
+      "out": "یُو"
+    },
+    {
       "ipa": "yː",
       "slot": "nucleus",
       "out": "اِیو",
@@ -3750,6 +3755,11 @@
       "ipa": "̃",
       "slot": "any",
       "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "r̝",
+      "out": "ر"
     }
   ],
   "syllable_fixups": [

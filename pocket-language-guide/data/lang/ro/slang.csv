@@ -1,0 +1,15 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+slang.thats-good,Mișto!,,miʃtˈo,"cool (Romani loanword, ubiquitous slang)",1,slang-agent-v1;ipa=espeak
+slang.thats-great,Super tare!,,sˈuper tˈaɾe,lit. super strong,1,slang-agent-v1;ipa=espeak
+slang.i-love-it,Îmi place la nebunie,,ˌɨmʲ plˈatʃe la nebˈunje,lit. I like it to madness,1,slang-agent-v1;ipa=espeak
+slang.thats-bad,Nu e cine știe ce,,nu je tʃˈine ʃtˈie tʃˈe,lit. it's not who-knows-what,1,slang-agent-v1;ipa=espeak
+slang.delicious,Delicios!,,dˌelitʃˈos,,2,slang-agent-v1;ipa=espeak
+slang.thats-pricey,Costă o groază,,kˈostə o ɡrˈɔazə,lit. it costs a dread/horror -- a ton,1,slang-agent-v1;ipa=espeak
+slang.exactly,Exact!,,eɡzˈakt,,2,slang-agent-v1;ipa=espeak
+slang.no-worries,Nicio problemă!,,nˌitʃo problˈemə,,2,slang-agent-v1;ipa=espeak
+slang.youre-welcome,Oricând!,,ˈoɾʲkˌɨnd,"anytime -- the casual reply, not the formal cu plăcere",1,slang-agent-v1;ipa=espeak
+slang.seriously,Nu se poate!,,nu se pˈɔate,lit. it can't be,1,slang-agent-v1;ipa=espeak
+slang.im-good-thanks,"Sunt bine așa, mersi",,"sunt bˈine aʃˈa, mˈersʲ",,1,slang-agent-v1;ipa=espeak
+slang.lets-go,"Hai, să mergem!",,"hˈaɪ, sə mˈerdʒem",,2,slang-agent-v1;ipa=espeak
+slang.cheers,Noroc!,,noɾˈok,lit. luck -- the standard toast,1,slang-agent-v1;ipa=espeak
+slang.see-you,Ne vedem!,,ne vedˈem,,2,slang-agent-v1;ipa=espeak

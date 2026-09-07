@@ -1,0 +1,8 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,ਟਿਕਟਾਂ ਕਿੱਥੋਂ ਮਿਲਣਗੀਆਂ?,,ṭikaṭāṁ kitthōṁ milaṇagīāṁ?,ʈɪkəʈã kɪttʰõ mɪləɳəɡiã,from where will tickets be got?,2,pa-agent-v1;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,ਪਹਿਲਾਂ ਬੁਕਿੰਗ ਕਰਾਉਣੀ ਪੈਂਦੀ ਹੈ?,,pahilāṁ bukiṁg karāuṇī paiṁdī hai?,pʌhɪlã bʊkɪŋɡ kəɾaʊɳi pɛndi hɛ,does booking have to be got done first?,2,pa-agent-v1;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,ਅੰਦਰ ਜਾਣ ਦਾ ਆਖ਼ਰੀ ਵੇਲਾ ਕੀ ਹੈ?,,aṁdar jāṇ dā āk͟harī vēlā kī hai?,ʌndəɾ ɟaɳ da axəɾi ʋela ki hɛ,what is the last time for going inside?,2,pa-agent-v1;ipa=espeak
+attractions-tickets.are-there-lockers,ਸਮਾਨ ਰੱਖਣ ਵਾਲੀਆਂ ਅਲਮਾਰੀਆਂ ਹਨ?,,samān rakkhaṇ vālīāṁ alamārīāṁ han?,səman ɾʌkkʰəɳ ʋaliã ələmaɾiã hən,are there cupboards for keeping luggage?,2,pa-agent-v1;ipa=espeak
+attractions-tickets.may-i-take-photos,ਇੱਥੇ ਫ਼ੋਟੋ ਖਿੱਚ ਸਕਦੇ ਹਾਂ?,,itthē fōṭō khicc sakadē hāṁ?,ɪttʰe foʈo kʰɪc sʌkəde hã,can photos be taken here?,2,pa-agent-v1;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,ਸਾਡੀ ਫ਼ੋਟੋ ਖਿੱਚ ਦਿਓ ਜੀ,,sāḍī fōṭō khicc diō jī,saɖi foʈo kʰɪc dɪo ɟi,take our photo,2,pa-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,ਤੁਸੀਂ ਸਾਡੀ ਫ਼ੋਟੋ ਖਿੱਚ ਦਿਓਗੇ?,,tusīṁ sāḍī fōṭō khicc diōgē?,tʊsĩ saɖi foʈo kʰɪc dɪoɡe,will you take our photo?,2,pa-agent-v1;ipa=espeak

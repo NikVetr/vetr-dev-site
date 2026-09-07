@@ -1,0 +1,15 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+slang.thats-good,छान,,chāna,cʰˈaːn,mild positive about a thing,2,mr-agent-v1;ipa=espeak
+slang.thats-great,जबरदस्त!,,jabaradasta!,zˌəbəɾədˈʌst,intensified positive,2,mr-agent-v1;ipa=espeak
+slang.i-love-it,मला हे खूप आवडले,,malā hē khūpa āvaḍalē,mˈʌlaː hˈeː kʰˈuːp ˈaːvəɖleː,,2,mr-agent-v1;ipa=espeak
+slang.thats-bad,फारसं बरं नाही,,phārasaṁ baraṁ nāhī,pʰˈaːɾəsˌən bˈʌɾən nˈaːhi,"mild, never about a person",2,mr-agent-v1;ipa=espeak
+slang.delicious,एकदम चविष्ट!,,ēkadama caviṣṭa!,ˈeːkədˌəm cəvˈɪʂʈ,,2,mr-agent-v1;ipa=espeak
+slang.thats-pricey,जरा महागच आहे,,jarā mahāgaca āhē,zˈʌɾaː məhˈaːɡəc ˈaːheː,"a comment on price, not an accusation",2,mr-agent-v1;ipa=espeak
+slang.exactly,अगदी बरोबर!,,agadī barōbara!,ˈʌɡdˌi bəɾˈoːbəɾ,,2,mr-agent-v1;ipa=espeak
+slang.no-worries,काही हरकत नाही,,kāhī harakata nāhī,kˈaːhi hˈʌɾəkˌət nˈaːhi,,2,mr-agent-v1;ipa=espeak
+slang.youre-welcome,त्यात काय एवढं!,,tyāta kāya ēvaḍhaṁ!,tːjˈaːt kˈaːj ˈeːvəɖʰˌən,colloquial reply to thanks,2,mr-agent-v1;ipa=espeak
+slang.seriously,खरंच?!,,kharaṁca?!,kʰəɾˈʌɲc,surprise or disbelief,2,mr-agent-v1;ipa=espeak
+slang.im-good-thanks,"नको, ठीक आहे",,"nakō, ṭhīka āhē","nˈʌkoː, ʈʰˈiːk ˈaːheː",declining without a blunt no,2,mr-agent-v1;ipa=espeak
+slang.lets-go,"चला, जाऊया!",,"calā, jāūyā!","cˈʌlaː, zˈaːujˌaː","to companions, not a stranger",2,mr-agent-v1;ipa=espeak
+slang.cheers,चिअर्स!,,ciarsa!,cɪˈʌrs,the loanword is what is actually said at a table,2,mr-agent-v1;ipa=espeak
+slang.see-you,भेटूया!,,bhēṭūyā!,bʰeːʈˈuːjaː,"casual, not the formal goodbye",2,mr-agent-v1;ipa=espeak

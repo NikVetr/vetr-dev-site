@@ -1,0 +1,10 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+profanity.oh-my-god,Ježíšmarjá!,Proboha!,jˈeʒiːʃmˌarjaː,"contraction of 'Ježíši, Maria' (Jesus, Mary) -- an oath of shock, religious rather than obscene",2,cs-agent-v1;ipa=espeak
+profanity.damn,Sakra!,,sˈakra,"the ordinary mild curse at a situation, not a person",2,cs-agent-v1;ipa=espeak
+profanity.expletive,Do prdele!,,dˈopr̩dˌele,"literally 'into the ass' -- the everyday coarse expletive, vulgar register but not aimed at anyone",2,cs-agent-v1;ipa=espeak
+profanity.strong-expletive,Kurva!,,kˈurva,"see this file's own docstring: taken as a bare interjection, which is not aimed at a person, rather than as the noun ('whore') it derives from",2,cs-agent-v1;ipa=espeak
+profanity.intensifier,zasraný,,zˈasraniː,"vulgar intensifying adjective, agrees in gender/case with its noun -- 'ten zasraný vlak', that fucking train",2,cs-agent-v1;ipa=espeak
+profanity.frustration,To je na hovno,,tˈo je nˈahovno,"idiomatic 'this is crap', built on the same root as expletive but recontextualized as a complaint about a thing, not an exclamation",2,cs-agent-v1;ipa=espeak
+profanity.thats-rude,To je sprosté!,,tˈo je sprˈosteː,"sprostý describes crude/vulgar language specifically, which is exactly this concept's use",2,cs-agent-v1;ipa=espeak
+profanity.excuse-my-language,Promiňte mi ten výraz,,prˈomiɲte mi tˈen vˈiːras,,2,cs-agent-v1;ipa=espeak
+profanity.strength-warning,"Tato slova jsou zde k rozpoznání, ne k použití: síla nadávky se překladem neuchová. Slovo, které zde vypadá jako mírné zaklení, může být v sousedním jazyce zcela nevyslovitelné a nejsilnější slovo daného jazyka bývá právě to, které tato část musela vynechat.",,,,2,cs-notes-v1

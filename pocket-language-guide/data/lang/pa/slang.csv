@@ -1,0 +1,15 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+slang.thats-good,ਵਧੀਆ,,vadhīā,ʋə˥dia,fine / nice,2,pa-agent-v1;ipa=espeak
+slang.thats-great,ਕਮਾਲ ਈ!,,kamāl ī!,kəmal i,a wonder!,2,pa-agent-v1;ipa=espeak
+slang.i-love-it,ਮੈਨੂੰ ਬੜਾ ਈ ਪਸੰਦ ਆਇਆ,,mainūṁ baṛā ī pasaṁd āiā,mɛnũ bʌɽa i pʌsənd aɪa,I liked it a great deal,2,pa-agent-v1;ipa=espeak
+slang.thats-bad,ਕੋਈ ਖ਼ਾਸ ਨਹੀਂ,,kōī k͟hās nahīṁ,koi xas nʌhĩ,nothing special,2,pa-agent-v1;ipa=espeak
+slang.delicious,ਸੁਆਦ ਈ ਆ ਗਿਆ!,,suād ī ā giā!,sʊad i a ɡɪa,the taste has come!,2,pa-agent-v1;ipa=espeak
+slang.thats-pricey,ਬੜਾ ਮਹਿੰਗਾ ਏ,,baṛā mahiṁgā ē,bʌɽa məhɪŋɡa e,it is very expensive,2,pa-agent-v1;ipa=espeak
+slang.exactly,ਬਿਲਕੁਲ ਸਹੀ!,,bilakul sahī!,bɪləkʊl sʌhi,absolutely right!,2,pa-agent-v1;ipa=espeak
+slang.no-worries,ਕੋਈ ਨਾ,,kōī nā,koi na,no matter — the Punjabi tag for waving something off,2,pa-agent-v1;ipa=espeak
+slang.youre-welcome,ਕੋਈ ਗੱਲ ਨਹੀਂ ਜੀ,,kōī gall nahīṁ jī,koi ɡʌl nʌhĩ ɟi,it is no matter,2,pa-agent-v1;ipa=espeak
+slang.seriously,ਸੱਚੀਂ?,,saccīṁ?,sʌccĩ,truly?,2,pa-agent-v1;ipa=espeak
+slang.im-good-thanks,"ਨਹੀਂ ਜੀ, ਬੱਸ",,"nahīṁ jī, bass","nʌhĩ ɟi, bʌs","no thank you, that is enough",2,pa-agent-v1;ipa=espeak
+slang.lets-go,ਚੱਲੋ ਫੇਰ!,,callō phēr!,cʌllo pʰeɾ,let us go then!,2,pa-agent-v1;ipa=espeak
+slang.cheers,ਵਾਹ ਵਾਹ!,,vāh vāh!,ʋa˥ ʋa˥,Punjabi has no drinking toast; this is the shout of approval,2,pa-agent-v1;ipa=espeak
+slang.see-you,ਮਿਲਦੇ ਆਂ,,miladē āṁ,mɪləde ã,we meet (again),2,pa-agent-v1;ipa=espeak

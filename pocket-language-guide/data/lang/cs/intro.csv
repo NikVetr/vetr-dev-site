@@ -1,0 +1,13 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+introductions.my-name-is,Jmenuji se {},,jmˈenuji se {},,2,cs-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,Těší mě,,cˈeʃiː mɲˈe,literally 'it pleases me',2,cs-agent-v1;ipa=espeak
+introductions.what-is-your-name,Jak se jmenujete?,,jˈak se jmˈenujˌete,,2,cs-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,Cestujeme spolu,,tsˈestujˌeme spˈolu,,2,cs-agent-v1;ipa=espeak
+introductions.this-is-my-friend,Toto je můj kamarád / moje kamarádka,,tˈoto je mˈuːj kˈamaraːt / mˈoje kˈamarˌaːtka,"kamarád(ka) rather than přítel(kyně), which in everyday spoken Czech reads as 'boyfriend/girlfriend' rather than a platonic friend",2,cs-agent-v1;ipa=espeak
+introductions.i-am-from,Jsem z {},,jsem zˈet {},"the place name takes the genitive case after z -- 'z Ameriky', 'z Německa' -- which a bare slot cannot inflect for every filler; this is a known limitation shared with the other case-marking Slavic packs",2,cs-agent-v1;ipa=espeak
+introductions.where-are-you-from,Odkud jste?,,ˈotkud jste,,2,cs-agent-v1;ipa=espeak
+introductions.how-are-you,Jak se máte?,,jˈak se mˈaːte,,2,cs-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,Jsem turista / turistka,,jsem tˈurista / tˈuristka,,2,cs-agent-v1;ipa=espeak
+introductions.this-is-my-husband-wife,Toto je můj manžel / moje manželka,,tˈoto je mˈuːj mˈanʒel / mˈoje mˈanʒelka,,2,cs-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,Toto je moje dcera / můj syn,,tˈoto je mˈoje ttsˈera / mˈuːj sˈin,,2,cs-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,Cestuji sám / sama,,tsˈestuji sˈaːm / sˈama,sám (male speaker) / sama (female speaker),2,cs-agent-v1;ipa=espeak

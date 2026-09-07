@@ -16,6 +16,10 @@
     {
       "rule": "Tamil's positional voicing, under which an intervocalic `க` is read [ɡ]",
       "why": "**Suspended by declaration, and the legend is what declares it.** The superscript digits make this column a marked notation, and in a marked notation every letter is read at face value -- which is how a Tamil-script Sanskrit text works: once the digits are on the page the reader is out of Tamil sandhi and into one-letter-one-sound. The alternative was measured and rejected: writing an intervocalic voiceless stop as a geminate, which is Tamil's own device for it (ஹோட்டல், டிக்கெட், காப்பி), would collide with the **real** geminate contrast Italian, Japanese, Hindi and Arabic carry -- 243 `Cː` sequences in the corpus -- so /t/ and /tː/ would spell identically. The residual cost is named in `approximations`."
+    },
+    {
+      "rule": "A bare, unattached palatalisation mark ʲ (one with no consonant of its own to attach to) is dropped.",
+      "why": "Romanian's espeak voice writes a genuinely doubled palatalisation on a word-final consonant before an asyllabic final -i (vorbiti \"you speak\" is vorbˈitsʲʲ) -- the first ʲ completes the tsʲ combination this table already has a rule for, and the second is left over with nothing to bind to. Every other reader table in this corpus already has exactly this fallback (`{\"slot\": \"any\", \"ipa\": \"ʲ\", \"out\": \"\"}`); this table had specific consonant+ʲ combinations but never needed the bare fallback until Romanian, the first source to double the mark, landed as a target. Added by the ro addition; see tmp/romanian.md."
     }
   ],
   "approximations": "Sounds with no Tamil letter, and what they get. /ʔ ʕ/ are written as nothing, matching every South Asian script's treatment of hamza and ain. /ħ/ is ஹ and so is /ç/, where Hindi splits /ç/ by inventory -- Tamil ஹ is nearer to both the German ich-Laut and Japanese ひ than an aspirated velar would be. /x ɣ q qʰ/ are க² க³ க க², following Hindi's reasoning that a reader who does not make the uvular should not be told to. Every rhotic collapses onto ர -- /r ɾ ɹ ʁ ɽ ɽʰ/ -- because Tamil's own ற is a trill in careful speech and [tr] between vowels and no Tamil print writes a foreign r with it. /ʂ ɕ/ merge into ஷ with /ʃ/, and /ʐ ʑ/ into ஷ³ with /ʒ/. /y yː ø œ øː œː ɵ/ take the ஊ and ஒ/ஓ series: the front rounded quality is not writable at all, and Tamil print already spells München and Köln that way. /ɜ ɜː/ take the short அ, which is what நர்ஸ் and பர்ட் already write. Vietnamese's glottalised codas and its /ˀ/ are dropped with the tone. Korean's /ɰ/ shares the /w/ device and Mandarin's /ɥ/ the /j/ one.\n\n**Three costs are sharper and are named rather than hidden.** *The dental/alveolar pair is not spelt.* /t/ and /t̪/ both take த and /n/ takes ந or ன by Tamil's own positional rule rather than by the phoneme, so Arabic's and Vietnamese's dental series prints as Tamil's own. *An unmarked stop between vowels is a gamble on the legend.* Tamil's reading rule voices it, and this column asks the reader not to -- so a reader who has not read the legend will say [waːɖar] for வாடர். The `targets` block removes the sharpest case by giving English and German the retroflex series, which Tamil already reads as a foreign spelling, but the general case is a real risk and the honest statement of it is that the legend is load-bearing rather than decorative. *And the digits are three more shapes to decode.* `tmp/ta/calibrate.py` measured that they never become the least distinguishable pair in the set at any print size, so they are legible; whether an ordinary Tamil reader who has not met Sanskrit-in-Tamil printing accepts them is a reviewer question and is the first thing to ask about this table.",
@@ -3181,6 +3185,16 @@
     {
       "slot": "any",
       "ipa": "ː",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "r̝",
+      "out": "்ர"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
       "out": ""
     }
   ],

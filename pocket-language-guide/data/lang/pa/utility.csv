@@ -1,0 +1,16 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,ਮੈਨੂੰ {} ਜਾਣਾ ਹੈ,,mainūṁ {} jāṇā hai,mɛnũ {} ɟaɳa hɛ,I have to go {},2,pa-agent-v1;ipa=espeak
+utility-templates.please-give-me,ਮੈਨੂੰ {} ਦਿਓ ਜੀ,,mainūṁ {} diō jī,mɛnũ {} dɪo ɟi,give me {},2,pa-agent-v1;ipa=espeak
+utility-templates.may-i,ਮੈਂ {} ਸਕਦਾ ਹਾਂ?,,maiṁ {} sakadā hāṁ?,mɛ̃ {} sʌkəda hã,may I {}?,2,pa-agent-v1;ipa=espeak
+utility-templates.please-do-not-add,ਇਸ ਵਿੱਚ {} ਨਾ ਪਾਓ ਜੀ,,is vicc {} nā pāō jī,ɪs ʋɪc {} na pao ɟi,do not put {} in this,2,pa-agent-v1;ipa=espeak
+utility-templates.do-you-have,ਤੁਹਾਡੇ ਕੋਲ {} ਹੈ?,,tuhāḍē kōl {} hai?,tʊhaɖe kol {} hɛ,is {} with you?,2,pa-agent-v1;ipa=espeak
+utility-templates.please-write-the-number,ਨੰਬਰ ਲਿਖ ਦਿਓ ਜੀ,,naṁbar likh diō jī,nʌnbəɾ lɪkʰ dɪo ɟi,write the number,2,pa-agent-v1;ipa=espeak
+utility-templates.i-need,ਮੈਨੂੰ {} ਦੀ ਲੋੜ ਹੈ,,mainūṁ {} dī lōṛ hai,mɛnũ {} di loɽ hɛ,to me there is need of {},2,pa-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,ਨੇੜੇ {} ਹੈ?,,nēṛē {} hai?,neɽe {} hɛ,is there a {} nearby?,2,pa-agent-v1;ipa=espeak
+utility-templates.how-much-is,{} ਕਿੰਨੇ ਦਾ ਹੈ?,,{} kiṁnē dā hai?,{} kɪnne da hɛ,of how much is {}?,2,pa-agent-v1;ipa=espeak
+utility-templates.is-this,ਇਹ {} ਹੈ?,,ih {} hai?,ɪ˥ {} hɛ,is this {}?,2,pa-agent-v1;ipa=espeak
+utility-templates.please,{} ਦਿਓ ਜੀ,,{} diō jī,{} dɪo ɟi,"give {}, please",2,pa-agent-v1;ipa=espeak
+utility-templates.i-am-looking-for,ਮੈਂ {} ਲੱਭ ਰਿਹਾ ਹਾਂ,,maiṁ {} labbh rihā hāṁ,mɛ̃ {} lʌ˥b ɾɪha hã,I am looking for {},2,pa-agent-v1;ipa=espeak
+utility-templates.do-you-accept,ਤੁਸੀਂ {} ਲੈਂਦੇ ਹੋ?,,tusīṁ {} laiṁdē hō?,tʊsĩ {} lɛnde ho,do you take {}?,2,pa-agent-v1;ipa=espeak
+utility-templates.i-cannot-find,ਮੈਨੂੰ {} ਨਹੀਂ ਮਿਲ ਰਿਹਾ,,mainūṁ {} nahīṁ mil rihā,mɛnũ {} nʌhĩ mɪl ɾɪha,{} is not being found by me,2,pa-agent-v1;ipa=espeak
+utility-templates.there-is-a-problem-with,{} ਵਿੱਚ ਮਸਲਾ ਹੈ,,{} vicc masalā hai,{} ʋɪc mʌsəla hɛ,there is a problem in {},2,pa-agent-v1;ipa=espeak

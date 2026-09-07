@@ -1,0 +1,8 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,तिकीट कुठे मिळेल?,,tikīṭa kuṭhē miḷēla?,tɪkˈiːʈ kˈʊʈʰeː mɪɭˈeːl,,2,mr-agent-v1;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,बुकिंग करावं लागेल का?,,bukiṁga karāvaṁ lāgēla kā?,bʊkˈĩɡ kəɾˈaːvən laːɡˈeːl kˈaː,,2,mr-agent-v1;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,आत जाण्याची शेवटची वेळ कोणती आहे?,,āta jāṇyācī śēvaṭacī vēḷa kōṇatī āhē?,ˈaːt zˈaːɳjaːcˌi ʃˈeːvəʈci vˈeːɭ kˈoːɳtˌi ˈaːheː,,2,mr-agent-v1;ipa=espeak
+attractions-tickets.are-there-lockers,इथे लॉकर आहेत का?,,ithē lôkara āhēta kā?,ˈɪtʰeː lˈɔkəɾ aːhˈeːt kˈaː,,2,mr-agent-v1;ipa=espeak
+attractions-tickets.may-i-take-photos,इथे फोटो काढायला परवानगी आहे का?,,ithē phōṭō kāḍhāyalā paravānagī āhē kā?,ˈɪtʰeː pʰˈoːʈoː kaːɖʰˈaːjlˌaː pˌəɾvˈaːnɡˌi ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,आमचा फोटो काढा,,āmacā phōṭō kāḍhā,ˈaːmcˌaː pʰˈoːʈoː kˈaːɖʰaː,,2,mr-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,जरा आमचा फोटो काढाल का?,,jarā āmacā phōṭō kāḍhāla kā?,zˈʌɾaː ˈaːmcˌaː pʰˈoːʈoː kaːɖʰˈaːl kˈaː,,2,mr-agent-v1;ipa=espeak

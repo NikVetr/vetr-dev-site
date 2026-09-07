@@ -88,3 +88,7 @@ numbers-money.yen-symbol,єна (символ),,yena (symvol),jˈɛna sˈɪmʋol
 numbers-money.yu-n,юань,,yuan,jˈuaɲ,,2,uk-gloss-v1;cldr;ipa=espeak
 numbers-money.zloty,злотий,,zlotyi,zlˈotɪj,,2,uk-gloss-v1;cldr;ipa=espeak
 numbers-money.zloty-symbol,злотий (символ),,zlotyi (symvol),zlˈotɪj sˈɪmʋol,,2,uk-gloss-v1;cldr;ipa=espeak
+numbers-money.leu,лей,,lei,lˈɛj,,2,uk-gloss-v1;cldr;ipa=espeak
+numbers-money.leu-symbol,лей (символ),,lei (symvol),lˈɛj sˈɪmʋol,,2,uk-gloss-v1;cldr;ipa=espeak
+numbers-money.koruna,крона,,,,,2,gloss-only;scoped-away;name of the currency in this language
+numbers-money.koruna-symbol,крона (символ),,,,,2,gloss-only;scoped-away;name of the currency in this language

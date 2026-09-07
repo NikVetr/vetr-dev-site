@@ -924,6 +924,11 @@
     },
     {
       "slot": "any",
+      "ipa": "ʏ",
+      "out": "ü"
+    },
+    {
+      "slot": "any",
       "ipa": "ɚ",
       "out": "er"
     },
@@ -931,6 +936,11 @@
       "slot": "any",
       "ipa": "ɝ",
       "out": "er"
+    },
+    {
+      "slot": "any",
+      "ipa": "r̝",
+      "out": "r"
     }
   ],
   "syllable_fixups": [

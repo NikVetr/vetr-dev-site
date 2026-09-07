@@ -1776,6 +1776,11 @@
     },
     {
       "slot": "nucleus",
+      "ipa": "ʏ",
+      "out": "yu"
+    },
+    {
+      "slot": "nucleus",
       "ipa": "j",
       "out": "y",
       "after_out": ""
@@ -1976,6 +1981,11 @@
       "slot": "any",
       "ipa": "ˤ",
       "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "r̝",
+      "out": "r"
     }
   ],
   "syllable_fixups": [

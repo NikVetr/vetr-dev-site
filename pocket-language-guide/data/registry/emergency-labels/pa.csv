@@ -1,0 +1,12 @@
+label,text
+_frame,{region} ਵਿੱਚ: {numbers}
+all services,ਸਾਰੀਆਂ ਐਮਰਜੈਂਸੀ ਸੇਵਾਵਾਂ
+police,ਪੁਲਿਸ
+ambulance,ਐਂਬੂਲੈਂਸ
+fire,ਅੱਗ ਬੁਝਾਊ
+also works,ਇਹ ਵੀ ਚੱਲਦਾ ਹੈ
+fire and ambulance,ਅੱਗ ਬੁਝਾਊ ਤੇ ਐਂਬੂਲੈਂਸ
+medical,ਡਾਕਟਰੀ ਮਦਦ
+tourist police,ਸੈਲਾਨੀ ਪੁਲਿਸ
+police and ambulance,ਪੁਲਿਸ ਤੇ ਐਂਬੂਲੈਂਸ
+gendarmerie,ਪੇਂਡੂ ਪੁਲਿਸ

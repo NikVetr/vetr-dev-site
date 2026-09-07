@@ -1287,6 +1287,11 @@
     },
     {
       "slot": "nucleus",
+      "ipa": "ʏ",
+      "out": "ü"
+    },
+    {
+      "slot": "nucleus",
       "ipa": "ã",
       "out": "an"
     },
@@ -1444,6 +1449,11 @@
       "slot": "any",
       "ipa": "̜",
       "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "r̝",
+      "out": "r"
     }
   ],
   "targets": {

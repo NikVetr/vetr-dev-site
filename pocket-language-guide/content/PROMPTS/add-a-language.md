@@ -39,6 +39,28 @@ breaks `npm run validate`, every test, and the app — for you and for every age
 working beside you. The same applies in reverse to your own pack: a registry row is a
 promise the file exists.
 
+**Your `LANGUAGE_MOTIFS` entry has to land in the same step as your registry row,
+in both directions.** `tests/ornaments.test.mjs` asserts
+`Object.keys(LANGUAGE_MOTIFS).sort()` deep-equals the list of `ready` languages, so a
+motif for an unregistered language fails exactly as hard as a ready language with no
+motif — the invariant is there to stop dead motifs accumulating. Czech added its
+motif while its row was still staged, and the two failures read `unknown language cs`
+from `scripts/spec.mjs`, which points at neither file. Stage the motif with the row.
+
+**And do not put your language in `languages.csv` until its pack, its interface
+catalogue, its section titles and its emergency labels all exist** — nor before
+`regions.csv` defines every region the row names, which is a hard error rather than a
+warning.** Dutch was
+registered `ready` while `data/i18n/nl.json`, `section-titles/nl.csv` and
+`emergency-labels/nl.csv` were still unwritten, and the effects were spread out and
+confusing: `npm run validate` stayed at 0 errors, `npm run i18n` did not complain
+either — it skips a language with no catalogue rather than failing it —
+`tests/ornaments.test.mjs` went red on an unrelated-sounding assertion ("every ready
+language has distinct rules and corners"), and the app itself would have failed to
+load Dutch's interface at runtime. Three other agents then had to be told which red
+test was not theirs. Stage the row and let the coordinating session apply it once the
+files are real.
+
 1. `python3 scripts/make_todo.py <code>` for the work list. **It omits the `note`
    rows**: it filters on `applies_to`, which is right for a target row and wrong for a
    note, whose scope names the language it is *about*. Handle the notes explicitly or
@@ -78,6 +100,16 @@ no explanation.
 **No duplicate `concept_id` within your pack.** `loadLanguage` keeps the last row and
 silently drops the rest. `validate_data.py` now catches this; it did not always.
 
+**This bites hardest in the other direction — the gloss sweep across everyone else's
+packs.** A new currency concept needs a gloss row in every other pack, and appending
+that row twice is easy to do when the sweep is re-run after an interruption. Because
+`loadLanguage` keeps the *last* row, the surviving copy is the second one, which is
+the one written before `build_ipa.py` filled the `ipa` cell — so the pack silently
+ships a row with no pronunciation while the good row is discarded. The Romanian `leu`
+sweep did exactly this to the Telugu pack. **Read the file before appending to it**,
+and re-run `python3 scripts/validate_data.py` at the very end rather than only after
+your own pack is done, because another agent may have swept into your pack meanwhile.
+
 ## The IPA engine
 
 `scripts/build_ipa.py` derives the `ipa` column. Two routes exist and the choice is
@@ -87,6 +119,19 @@ forced by what is available:
   fixed voice list. Add a `GRADE[<code>]` entry saying honestly how good the
   derivation is and where it is weak — the existing grades run A to D and the reasons
   are recorded beside them.
+
+  **If your language needs `espeakng-loader`, scope it to `--only <your code>` and
+  nothing else.** This machine's `espeak-ng-data` is Ubuntu's 1.50 and several voices
+  (`uk`, `mr`) landed upstream later, so those packs are built against a newer library
+  behind `PHONEMIZER_ESPEAK_LIBRARY` and `PHONEMIZER_ESPEAK_DATA_PATH`. Leaving those
+  set across a wider `--only` list is not a rebuild, it is a different phonemiser:
+  about 320 cells moved across twenty-four languages that way, German most legibly
+  (`Fruehstueck` is frˈyːʃtʏk under the newer library and frˈyːʃtyk under 1.50).
+  Neither `--check` nor `--gaps` can see it, because a re-derived column is internally
+  consistent and is only wrong against the grade a reviewer gave it. What caught it was
+  `tests/fonts.test.mjs`, two steps downstream: /ʏ/ has a rule in only five reader
+  tables, so it fell through as a literal and six scripts were asked to draw a letter
+  they do not have.
 - **A romanisation route**, where no voice exists. Hebrew, Klingon and Quenya read
   their `romanization_*` column letter by letter. `ROMANISED` and `NON_LATIN` are the
   tables to add to.

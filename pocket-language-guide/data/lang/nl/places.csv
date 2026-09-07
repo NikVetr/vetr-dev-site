@@ -1,0 +1,8 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,Waar kan ik kaartjes kopen?,,ʋˈaːr kɑn ɪk kˈaːrtʲəs kˈoːpən,,2,nl-agent-v1;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,Moet ik reserveren?,,mˈut ɪk rˌeːzərvˈɪːrən,,2,nl-agent-v1;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,Tot hoe laat kan ik naar binnen?,,tɔt hˈu lˈaːt kɑn ɪk naːr bˈɪnən,literally 'until when can I go in'; more natural than a calque of 'latest entry time',2,nl-agent-v1;ipa=espeak
+attractions-tickets.are-there-lockers,Zijn er kluisjes?,,zɛɪn ər klˈœysjəs,,2,nl-agent-v1;ipa=espeak
+attractions-tickets.may-i-take-photos,Mag ik foto's maken?,,mɑx ɪk fˈoːtoːs mˈaːkən,,2,nl-agent-v1;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,Maakt u alstublieft een foto van ons.,,mˈaːkt y ˌɑlstʏblˈift ən fˈoːtoː vɑn ɔns,,2,nl-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,Zou u een foto van ons kunnen maken?,,zʌʊ y ən fˈoːtoː vɑn ɔns kˌʏnən mˈaːkən,,2,nl-agent-v1;ipa=espeak

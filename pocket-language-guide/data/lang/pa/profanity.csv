@@ -1,0 +1,10 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+profanity.oh-my-god,ਹੇ ਰੱਬਾ!,,hē rabbā!,he ɾʌbba,O God!,1,pa-agent-v1;ipa=espeak
+profanity.damn,ਲਾਹਨਤ!,,lāhanat!,lahənət,a curse! — damnation rather than anatomy,1,pa-agent-v1;ipa=espeak
+profanity.expletive,ਕੰਜਰਖ਼ਾਨਾ!,,kaṁjarak͟hānā!,kənɟəɾəxana,a shambles — the everyday coarse exclamation at a situation,1,pa-agent-v1;ipa=espeak
+profanity.intensifier,ਸਾਲਾ,,sālā,sala,"attributive intensifier; literally *wife's brother*, and abusive of a person if aimed at one",1,pa-agent-v1;ipa=espeak
+profanity.frustration,ਇਹ ਤਾਂ ਕਬਾੜ ਏ,,ih tāṁ kabāṛ ē,ɪ˥ tã kəbaɽ e,this is junk,1,pa-agent-v1;ipa=espeak
+profanity.thats-rude,ਇਹ ਗੱਲ ਚੰਗੀ ਨਹੀਂ,,ih gall caṁgī nahīṁ,ɪ˥ ɡʌl cʌnɡi nʌhĩ,this speech is not good,2,pa-agent-v1;ipa=espeak
+profanity.excuse-my-language,"ਮਾਫ਼ ਕਰਨਾ, ਮੂੰਹੋਂ ਨਿਕਲ ਗਿਆ",,"māf karanā, mūṁhōṁ nikal giā","maf kʌɾəna, mũhõ nɪkəl ɡɪa","forgive me, it slipped out of my mouth",2,pa-agent-v1;ipa=espeak
+profanity.strength-warning,"ਇਹ ਸ਼ਬਦ ਪਛਾਣਨ ਲਈ ਹਨ, ਵਰਤਣ ਲਈ ਨਹੀਂ: ਗਾਲ਼ ਦਾ ਜ਼ੋਰ ਤਰਜਮੇ ਵਿੱਚ ਨਹੀਂ ਜਾਂਦਾ। ਜਿਹੜਾ ਸ਼ਬਦ ਇਸ ਕਾਰਡ ਉੱਤੇ ਹਲਕਾ ਲੱਗਦਾ ਹੈ, ਉਹ ਨਾਲ ਵਾਲੀ ਬੋਲੀ ਵਿੱਚ ਬੋਲਿਆ ਵੀ ਨਹੀਂ ਜਾ ਸਕਦਾ, ਅਤੇ ਕਿਸੇ ਬੋਲੀ ਦਾ ਸਭ ਤੋਂ ਭਾਰਾ ਸ਼ਬਦ ਬਹੁਤੀ ਵਾਰੀ ਉਹੀ ਹੁੰਦਾ ਹੈ ਜਿਹੜਾ ਇਸ ਹਿੱਸੇ ਵਿੱਚੋਂ ਛੱਡਣਾ ਪਿਆ।",,"ih śabad pachāṇan laī han, varataṇ laī nahīṁ: gāḷ dā zōr tarajamē vicc nahīṁ jāṁdā। jihaṛā śabad is kāraḍ uttē halakā laggadā hai, uh nāl vālī bōlī vicc bōliā vī nahīṁ jā sakadā, atē kisē bōlī dā sabh tōṁ bhārā śabad bahutī vārī uhī huṁdā hai jihaṛā is hissē viccōṁ chaḍḍaṇā piā।",,,2,pa-agent-v1
+profanity.japanese-register,"ਜਾਪਾਨੀ ਵਿੱਚ ਇਹ ਕੰਮ ਸ਼ਬਦਾਂ ਨਾਲ ਨਹੀਂ, ਸਗੋਂ ਵਿਆਕਰਨ ਨਾਲ ਹੁੰਦਾ ਹੈ — ਕਿਹੜਾ ਪੜਨਾਂਵ ਵਰਤਿਆ, ਕਿਰਿਆ ਦਾ ਰੁੱਖਾ ਰੂਪ, ਸਿੱਧਾ ਹੁਕਮ। ਇਸ ਲਈ ਜਾਪਾਨੀ ਦੀਆਂ ਇਹ ਸਤਰਾਂ ਥੋੜ੍ਹੀਆਂ ਹਨ: ਗਾਲ਼ ਦੀ ਥਾਂ ਬੇਅਦਬੀ ਬੋਲਣ ਦੇ ਢੰਗ ਵਿੱਚ ਹੁੰਦੀ ਹੈ, ਜਿਹੜੀ ਕਿਸੇ ਇੱਕ ਸ਼ਬਦ ਵਿੱਚ ਨਹੀਂ ਆ ਸਕਦੀ।",,"jāpānī vicc ih kaṁm śabadāṁ nāl nahīṁ, sagōṁ viākaran nāl huṁdā hai — kihaṛā paṛanāṁv varatiā, kiriā dā rukkhā rūp, siddhā hukam। is laī jāpānī dīāṁ ih satarāṁ thōṛhīāṁ han: gāḷ dī thāṁ bēadabī bōlaṇ dē ḍhaṁg vicc huṁdī hai, jihaṛī kisē ikk śabad vicc nahīṁ ā sakadī।",,,2,pa-agent-v1

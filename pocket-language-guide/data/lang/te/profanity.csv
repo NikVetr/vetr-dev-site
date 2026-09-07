@@ -1,0 +1,10 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+profanity.oh-my-god,అయ్యో!,దేవుడా!,ayyō!,ajjoː,the general Telugu cry of dismay; dēvuḍā is the religious oath and is mild,1,te-profanity-v1;ipa=espeak
+profanity.damn,ఛ!,ఛీ!,cha!,tʃʰa,"an oath of annoyance -- mild, and at a situation",1,te-profanity-v1;ipa=espeak
+profanity.expletive,పాడుగాను!,,pāḍugānu!,paːɖuɡaːnu,"'may it rot' -- coarse but ordinary, said at a thing going wrong",1,te-profanity-v1;ipa=espeak
+profanity.intensifier,వెధవ,పాడు,vedhava,ʋedʰaʋa,"before a noun: 'the damn -'; literally 'wretched'. Emphasis, not an insult",1,te-profanity-v1;ipa=espeak
+profanity.frustration,ఇది చెత్త,,idi cetta,idi tʃetta,"this is rubbish -- coarse, about a thing",1,te-profanity-v1;ipa=espeak
+profanity.thats-rude,అది మర్యాద కాదు,,adi maryāda kādu,adi marjaːda kaːdu,that is not good manners,1,te-profanity-v1;ipa=espeak
+profanity.excuse-my-language,"క్షమించండి, నోరు జారింది",,"kṣamiṁcaṁḍi, nōru jāriṁdi","kʂamiɲtʃaɳɖi, noːru dʒaːrindi","forgive me, my tongue slipped -- the Telugu idiom for it",1,te-profanity-v1;ipa=espeak
+profanity.strength-warning,"ఈ వరుసలు గుర్తు పట్టడానికి, చెప్పడానికి కాదు: తిట్టు బలం అనువాదంలో నిలవదు. ఈ కార్డులో 'damn' అని ఇచ్చిన మాట పక్క భాషలో చెప్పకూడని మాట అవ్వచ్చు, ఒక భాషలోని బలమైన మాటను ఈ విభాగం వదిలేయాల్సి వచ్చిందని కూడా అర్థం.",,"ī varusalu gurtu paṭṭaḍāniki, ceppaḍāniki kādu: tiṭṭu balaṁ anuvādaṁlō nilavadu. ī kārḍulō 'damn' ani iccina māṭa pakka bhāṣalō ceppakūḍani māṭa avvaccu, oka bhāṣalōni balamaina māṭanu ī vibhāgaṁ vadilēyālsi vacciṁdani kūḍā arthaṁ.",,,1,te-notes-v1
+profanity.japanese-register,"జపనీస్ భాషలో ఇది మాటలతో దాదాపు జరగదు. చిన్నచూపు వ్యాకరణంతో వస్తుంది — మొరటు రెండో మనిషి సర్వనామం, పొడి ఆజ్ఞార్థం, కటువైన క్రియా రూపాలు — అంటే కోపం క్రియ చివరిలో ఉంటుంది, వెతికి చూడగల మాటలో ఉండదు. పైన ఇచ్చిన వరుసలే దాదాపు మొత్తం పదజాలం.",,"japanīs bhāṣalō idi māṭalatō dādāpu jaragadu. cinnacūpu vyākaraṇaṁtō vastuṁdi — moraṭu reṁḍō maniṣi sarvanāmaṁ, poḍi ājñārthaṁ, kaṭuvaina kriyā rūpālu — aṁṭē kōpaṁ kriya civarilō uṁṭuṁdi, vetiki cūḍagala māṭalō uṁḍadu. paina iccina varusalē dādāpu mottaṁ padajālaṁ.",,,1,te-notes-v1

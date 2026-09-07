@@ -1,0 +1,8 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,Kde si mohu koupit vstupenky?,,ɡdˈe si mˈohu kˈoʊpit fstˈupeŋki,,2,cs-agent-v1;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,Potřebuji rezervaci?,,pˈotr̝ebˌuji rˈezervˌatsi,,2,cs-agent-v1;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,Jaký je poslední možný vstup?,,jˈakiː je pˈosledɲiː mˈoʒniː fstˈup,,2,cs-agent-v1;ipa=espeak
+attractions-tickets.are-there-lockers,Jsou tu skříňky na zavazadla?,,jsoʊ tˈu skr̝ˈiːɲki na zˈavazˌadla,,2,cs-agent-v1;ipa=espeak
+attractions-tickets.may-i-take-photos,Mohu fotografovat?,,mˈohu fˈotoɡrˌafovat,,2,cs-agent-v1;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,"Vyfoťte nás, prosím",,"vˈifocte nˈaːs, prˈosiːm",,2,cs-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,Mohl byste nás vyfotit?,,mˈohl̩ bˌiste nˈaːs vˈifocit,byste is gender-neutral; addressed with formal vy,2,cs-agent-v1;ipa=espeak

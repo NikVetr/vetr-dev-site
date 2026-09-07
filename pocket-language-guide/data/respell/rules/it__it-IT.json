@@ -970,6 +970,11 @@
     },
     {
       "slot": "any",
+      "ipa": "ʏ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
       "ipa": "ũ",
       "out": "un"
     },
@@ -1112,6 +1117,11 @@
       "slot": "any",
       "ipa": "̃",
       "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "r̝",
+      "out": "r"
     }
   ],
   "syllable_fixups": [],

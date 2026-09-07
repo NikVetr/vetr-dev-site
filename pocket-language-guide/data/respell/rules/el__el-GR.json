@@ -935,6 +935,11 @@
       "slot": "any",
       "ipa": "ʱ",
       "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "r̝",
+      "out": "ρ"
     }
   ],
   "syllable_fixups": [

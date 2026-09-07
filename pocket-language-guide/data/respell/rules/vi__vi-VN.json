@@ -1958,6 +1958,11 @@
       "out": "uy"
     },
     {
+      "slot": "any",
+      "ipa": "ʏ",
+      "out": "uy"
+    },
+    {
       "slot": "nucleus",
       "ipa": "j",
       "out": "y",
@@ -2044,6 +2049,11 @@
       "slot": "any",
       "ipa": "̃",
       "out": "ng"
+    },
+    {
+      "slot": "any",
+      "ipa": "r̝",
+      "out": "r"
     }
   ],
   "syllable_fixups": [

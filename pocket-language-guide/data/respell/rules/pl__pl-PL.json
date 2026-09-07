@@ -32,6 +32,10 @@
     {
       "rule": "AkH.-style forbidding of respelling a Latin-script name in place of its own spelling has a Polish counterpart in the WSO's rule that a foreign name keeps its original orthography.",
       "why": "Compatible and both honoured, for the same reason the Hungarian table records: that rule governs how to *write* a name, and Kopalinski's `[wym. ...]` bracket -- printed beside the correctly-spelled headword -- is what this column is. The target's own spelling is in the column next to it."
+    },
+    {
+      "rule": "A bare, unattached palatalisation mark ʲ (one with no consonant of its own to attach to) is dropped.",
+      "why": "Romanian's espeak voice writes a genuinely doubled palatalisation on a word-final consonant before an asyllabic final -i (vorbiti \"you speak\" is vorbˈitsʲʲ) -- the first ʲ completes the tsʲ combination this table already has a rule for, and the second is left over with nothing to bind to. Every other reader table in this corpus already has exactly this fallback (`{\"slot\": \"any\", \"ipa\": \"ʲ\", \"out\": \"\"}`); this table had specific consonant+ʲ combinations but never needed the bare fallback until Romanian, the first source to double the mark, landed as a target. Added by the ro addition, twice -- this file was found rewritten from an older snapshot mid-session, dropping the same fix once already; see tmp/romanian.md."
     }
   ],
   "approximations": [
@@ -656,6 +660,11 @@
     },
     {
       "slot": "nucleus",
+      "ipa": "ʏ",
+      "out": "ü"
+    },
+    {
+      "slot": "nucleus",
       "ipa": "ã",
       "out": "ą"
     },
@@ -1237,6 +1246,21 @@
       "slot": "any",
       "ipa": "ŋ",
       "out": "ng"
+    },
+    {
+      "slot": "any",
+      "ipa": "r̝",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "̩",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": ""
     }
   ],
   "targets": {

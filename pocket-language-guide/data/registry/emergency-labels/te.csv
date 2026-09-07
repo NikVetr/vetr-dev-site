@@ -1,0 +1,12 @@
+label,text
+_frame,{region}: {numbers}
+all services,అన్ని అత్యవసర సేవలు
+police,పోలీసు
+ambulance,అంబులెన్స్
+fire,అగ్నిమాపక దళం
+also works,ఇదీ పని చేస్తుంది
+fire and ambulance,అగ్నిమాపక దళం + అంబులెన్స్
+medical,వైద్య సహాయం
+tourist police,పర్యాటక పోలీసు
+police and ambulance,పోలీసు + అంబులెన్స్
+gendarmerie,గ్రామీణ పోలీసు

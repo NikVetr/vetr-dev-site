@@ -1,0 +1,13 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+introductions.my-name-is,Mă numesc {},,mə numˈesk {},,2,ro-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,Îmi pare bine,,ˌɨmʲ pˈaɾe bˈine,,2,ro-agent-v1;ipa=espeak
+introductions.what-is-your-name,Cum vă numiți?,,kˈum və numˈitsʲ,,2,ro-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,Călătorim împreună,,kˌələtoɾˈim ˌɨmpreˈunə,,2,ro-agent-v1;ipa=espeak
+introductions.this-is-my-friend,El este prietenul meu,Ea este prietena mea,jel jˌeste prjˈetenul mˈeu,,2,ro-agent-v1;ipa=espeak
+introductions.i-am-from,Sunt din {},,sunt din {},,2,ro-agent-v1;ipa=espeak
+introductions.where-are-you-from,De unde sunteți?,,de ˈunde sˈuntetsʲ,,2,ro-agent-v1;ipa=espeak
+introductions.how-are-you,Ce mai faceți?,,tʃe maɪ fˈatʃetsʲ,"lit. what more are you doing -- the ordinary greeting-question, not a health enquiry",2,ro-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,Sunt turist,Sunt turistă,sunt tuɾˈist,,2,ro-agent-v1;ipa=espeak
+introductions.this-is-my-husband-wife,El este soțul meu / ea este soția mea,,jel jˌeste sˈotsul mˈeu / ja jˌeste sˈotsja mˈea,,2,ro-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,Ea este fiica mea / el este fiul meu,,ja jˌeste fˈiɪka mˈea / jel jˌeste fˈiʊl mˈeu,,2,ro-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,Călătoresc singur/singură,,kˌələtoɾˈesk sˈiŋɡur / sˈiŋɡuɾˌə,,2,ro-agent-v1;ipa=espeak

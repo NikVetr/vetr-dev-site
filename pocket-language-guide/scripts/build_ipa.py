@@ -400,6 +400,32 @@ VOICES = {"en": "en-us", "es": "es-419", "fr": "fr-fr", "de": "de", "pt": "pt-br
           # of its own rather than a side effect of adding a language, which is why
           # this is a note and not a change.
           "bn": "bn", "pl": "pl", "uk": "uk",
+          # Marathi is in the same situation as Ukrainian, not a new one: this
+          # build's espeak-ng-data 1.50 has no `mr` voice at all (confirmed with
+          # `EspeakBackend.supported_languages()` against the system library before
+          # reaching for the loader), and `espeakng_loader`'s bundled tree does --
+          # `EspeakBackend('mr').phonemize(['नमस्कार, तुम्ही कसे आहात?'])` returns
+          # `nəmskaːɾ tʊmhi kʌseː aːhaːt`, a plausible reading of "namaskār, tumhī
+          # kase āhāt" with the schwa and the retained final /t/ both right. Needs
+          # the same two environment variables as `uk`, and the same warning: run
+          # `--only mr`, never a list that also touches an already-built language,
+          # or the newer library silently re-derives cells nothing asked it to.
+          "mr": "mr",
+          # Dutch needed neither the loader nor a warning about it: unlike `uk` and
+          # `mr`, which were both added to espeak-ng after this build's system
+          # `espeak-ng-data` 1.50 was cut, `nl` has been in espeak-ng for a long time
+          # and is present in the system package on PATH-less Ubuntu jammy --
+          # confirmed with `EspeakBackend.supported_languages()` against the plain
+          # system library, no `PHONEMIZER_ESPEAK_*` set, before even considering the
+          # loader. Probed directly: `EspeakBackend('nl').phonemize(['Goedemorgen,
+          # spreekt u Engels?'])` returns `ɣudəmɔrɣən spreːkt y ɛŋəls` -- ɣ for the
+          # Dutch g (not Hindi's aspirate, not German's x), y for u (front rounded,
+          # not English y), ʋ for w (labiodental approximant, not English [w]) all
+          # correct on a second probe (`mɛɪn pɑspɔːrt kʋɛɪt` for "mijn paspoort
+          # kwijt"). Built with `--only nl` against the same system library every
+          # other already-built column was built with, so the two-libraries-disagree
+          # hazard this comment block warns about for `uk`/`mr` does not apply here.
+          "nl": "nl",
           # espeak-ng ships one Tamil voice and no regional variant, and it is used
           # rather than a romanisation route for one reason: **it implements Tamil's
           # positional voicing rule**, which the script itself does not write and
@@ -410,7 +436,96 @@ VOICES = {"en": "en-us", "es": "es-419", "fr": "fr-fr", "de": "de", "pt": "pt-br
           # `ʲˈedʉ`), geminate voiceless (அப்பா `ˈappaː`, ஓட்டு `ˈoːʈʈʉ`) and
           # post-nasal voiced (தம்பி `tˈʌmbi`, ஐந்து `ˈaɪndʉ`, ஒன்பது `ˈonbʌdʉ`) --
           # and right in every one. See GRADE["ta"] for the two words it is wrong on.
-          "ta": "ta"}
+          "ta": "ta",
+          # Telugu, and **`te_dict` is in this build's installed 1.50 data tree**
+          # beside `ta`, `kn` and `ml` under `espeak-ng-data/lang/dra/`, so the
+          # `espeakng-loader` escape Ukrainian needed above is not needed here.
+          # Checked before anything was installed.
+          #
+          # The reason it can be used at all is the opposite of Tamil's: Telugu
+          # *writes* voicing and aspiration, all four series, so a romanisation route
+          # over `romanization_iso15919` would have carried the same information. The
+          # espeak route is taken because it also gets the things the letters do not
+          # say -- vowel length is written but the anusvara's place of articulation is
+          # not, and neither is the [m] it becomes word-finally, which is why
+          # `te_anusvara` below exists. Probed on the four-way series before it was
+          # trusted: ఖాళీ `kʰˈaːɭiː`, ఘంటం `ɡʰˈaɳʈam`, ధన్యవాదాలు `dʰˈanjaʋˌaːdaːlu`,
+          # భోజనం `bʰˈoːdʒanam` -- aspiration emitted as a `ʰ` modifier on the stop and
+          # right in every one, which is what makes this pack the first to put the
+          # whole series in front of every reader table at once.
+          "te": "te",
+          # Romanian, and the opposite situation from Marathi/Ukrainian above:
+          # checked before assuming the loader was needed, and it is not.
+          # `/usr/lib/x86_64-linux-gnu/espeak-ng-data/lang/roa/ro` is already in
+          # this build's system-package data (1.50), so `EspeakBackend('ro')`
+          # finds it directly -- the Telugu precedent (`te_dict` already in the
+          # 1.50 tree) rather than the Marathi/Ukrainian one. Never point
+          # `PHONEMIZER_ESPEAK_LIBRARY`/`_DATA_PATH` at the loader for a `ro`
+          # run: there is nothing here for the loader to fix, and doing it
+          # anyway would risk the exact cross-language drift the `uk` comment
+          # above describes, for zero benefit.
+          "ro": "ro",
+          # Czech, and the Telugu/Romanian situation rather than the Marathi/
+          # Ukrainian one: `EspeakBackend.supported_languages()['cs'] == 'Czech'`
+          # against the plain system library, no `PHONEMIZER_ESPEAK_*` set, so
+          # this build's own 1.50 data tree already has it and the loader is
+          # never touched for `--only cs`.
+          #
+          # Probed on exactly what Czech orthography is not transparent about,
+          # matching the method `GRADE["pl"]`/`GRADE["hu"]` use for the same
+          # kind of language. **ř devoicing after a voiceless consonant is
+          # right**: `tři` -> `tr̝̊i`, `přes` -> `pr̝̊es`, both with the
+          # voiceless ring correctly placed. **Word-initial stress is right on
+          # every probe**, long words and proclitic fusion included
+          # (`ˈaʊtomˌobil`, `do domu` -> `dˈodomu`) -- so, like Polish, stress
+          # is looked up rather than derived: no `cs_stress` override function
+          # is needed, because espeak already agrees with Czech's own
+          # exceptionless first-syllable rule everywhere tried. **Syllabic r
+          # and l are right** on every inflected form probed (krk, prst, smrt,
+          # srp, trh, vlku, vlkodlak, vlna, plný, plzeň all correct) with one
+          # dictionary-level exception: the bare headwords `vlk` (wolf) and
+          # `plch` (dormouse) are spelled out letter-by-letter in isolation
+          # (`veːelkaː`, `peːeltseːhaː`) regardless of context, which is a
+          # defect in those two specific dictionary entries rather than in the
+          # syllabic-consonant mechanism -- neither word is in this pack.
+          # **What is wrong, and systematic**: word-initial/-medial `kd` never
+          # voices to [ɡd] -- `kdo`, `kde`, `kdy`, `kdyby`, `nikdo`, `nikdy`
+          # all keep a voiceless `k` where standard Czech has regressive
+          # voicing assimilation (Palková, *Fonetika a fonologie češtiny*),
+          # while the general assimilation rule is applied correctly
+          # elsewhere (sbírka -> zbˈiːrka, prosba -> prˈozba, svatba ->
+          # svˈadba, pod stromem -> pˈotstromem). Repaired below, because
+          # `kdo/kde/kdy` are exactly the high-frequency interrogatives a
+          # travel pack cannot avoid.
+          "cs": "cs",
+          # Punjabi, and **`pa_dict` is in this build's installed 1.50 data tree**
+          # beside `hi`, `bn`, `ur`, `gu` and `mr` under `espeak-ng-data/lang/inc/`,
+          # so the `espeakng-loader` escape Ukrainian and Marathi needed above is
+          # **not needed here** -- checked with the plain system library and no
+          # `PHONEMIZER_ESPEAK_*` set before anything was installed. Never point
+          # those two variables at the loader for a `pa` run: there is nothing here
+          # for the loader to fix and it would risk the cross-language drift the
+          # `uk` comment describes for no benefit.
+          #
+          # **The reason this voice can be used is that it implements Punjabi
+          # tonogenesis, which is the fact Punjabi is in the corpus to prove.** The
+          # historical voiced aspirates ਘ ਝ ਢ ਧ ਭ are written and not said: word
+          # initially they came out voiceless and unaspirated with a **low tone** on
+          # the following vowel, and non-initially they left a **high tone** on the
+          # preceding one. Probed word-initially before the voice was trusted, on all
+          # five letters -- ਘੋੜਾ `kˈo+r.a`, ਘਰ `kˈʌ+ɾ`, ਝੂਠ `cˈu+ʈʰ`, ਢੰਗ `ʈˈʌ+nɡ`,
+          # ਧੰਨਵਾਦ `tˌə+nnəvˈad`, ਭਾਰਤ `pˈa+ɾət` -- and right on every one, with the
+          # tone written as an ASCII `+`, which is espeak's internal marker rather
+          # than IPA and is repaired below. All 20 such words in the pack got it;
+          # there is no lexicon miss of Tamil's kind.
+          #
+          # **What it does not do is the non-initial half**, and that is why
+          # `pa_tone` below exists: ਦੁੱਧ comes back `dˈʊdʰ` and ਲਾਭ `lˈabʰ`, keeping a
+          # voiced aspirate that modern Punjabi does not have, where the language says
+          # [dʊ́d] and [lɑ́b]. The voice is internally inconsistent about the same
+          # sound, which is what makes this an omission rather than a transcription
+          # choice.
+          "pa": "pa"}
 
 # Phonemised one word at a time rather than a phrase at a time, which every other
 # espeak language is.
@@ -454,6 +569,21 @@ ROMANISED = {"zh-Hans": "romanization_pinyin", "ja": "romanization_hepburn",
 # which have no lexical stress at all -- but it does not need to be told either, if
 # the generator simply does not write a mark it cannot justify.
 STRESS = {"fr": "phrase", "ko": "none", "vi": "none", "ja": "none",
+          # **Punjabi stress is not contrastive and espeak's is the first syllable**,
+          # which is Telugu's finding in another language and was measured the same
+          # way. Over the 671 polysyllables of the finished pack, espeak's primary
+          # mark agrees with "the first syllable" on **72%**, with "the penult" on
+          # 62%, with "the leftmost heavy syllable" on 52% and with "the rightmost
+          # heavy syllable" on 12% -- so it follows no rule Punjabi grammars state,
+          # and ਗੁਰਮੁਖੀ comes back `ɡˈʊɾəmˌʊkʰi` where the word is [ɡʊɾmʊkʰˈi].
+          #
+          # And there is a second reason here that Telugu did not have: **this column
+          # already carries prominence, as tone.** Punjabi's contrastive prominence is
+          # the high/low tone `pa_tone` writes, and adding a non-contrastive stress
+          # mark beside it would give one column two prominence devices -- an acute
+          # for a Spanish reader on a syllable the language does not stress, next to a
+          # tone the language does. Tamil refused a stress prime for the same reason.
+          "pa": "none",
           "zh-Hans": "none", "th": "none", "tlh": "none",
           # **Persian stress is not lexical, and espeak's is wrong in a systematic
           # direction, so this is the one place both halves of the rule agree.**
@@ -501,7 +631,38 @@ STRESS = {"fr": "phrase", "ko": "none", "vi": "none", "ja": "none",
           # because Tamil vowels do not reduce: an unstressed syllable is said
           # exactly as a stressed one, so an unmarked respelling is fully
           # intelligible rather than merely flat.
-          "ta": "none"}
+          "ta": "none",
+          # **Telugu is Tamil's case exactly, and the exception is the same one.**
+          #
+          # Krishnamurti and Gwynn's *A Grammar of Modern Telugu* (OUP 1985) states
+          # that stress is not contrastive and that the first syllable is prominent
+          # *unless* it is light and the second holds a long vowel, in which case the
+          # second takes it. espeak marks the first syllable unconditionally and never
+          # that exception, and the exception is a large class in this pack -- the
+          # Sanskrit-derived nouns in -āṇaṁ and -ānaṁ: విమానం comes back `ʋˈimaːnan`
+          # where the rule puts the prominence on `maː`, and so do ప్రయాణం, సహాయం,
+          # పరిశోధన. It is right where the first syllable is heavy (ధన్యవాదాలు
+          # `dʰˈanja…`), which is what makes this a rule error rather than a lexicon
+          # one.
+          #
+          # Deriving it the way `hu_stress` does does not reach, for Tamil's reason:
+          # the exception is stated over syllable *weight*, and nothing here
+          # syllabifies. A mark in the wrong place is worse than no mark, and it costs
+          # less here than in Russian because Telugu vowels do not reduce -- an
+          # unstressed syllable is said exactly as a stressed one.
+          "te": "none",
+          # **Filipino stress is lexical and contrastive** -- `buhay` "life"
+          # [ˈbuhaj] against `buhay` "alive" [buˈhaj] is the textbook pair -- so
+          # this is not Hungarian's case (positional, exceptionless, worth
+          # deriving). It is closest to Persian's: there is nothing mechanical to
+          # derive it from, and unlike Persian there is not even a morphological
+          # rule to try, because there is no espeak voice and no machine-readable
+          # pronouncing dictionary for Tagalog/Filipino to look one up from either
+          # (`fil_to_ipa` never emits a stress mark at all, so this entry changes
+          # nothing in practice -- it is here to make the decision explicit and
+          # searchable rather than an accident of a function that happens not to
+          # produce one).
+          "fil": "none"}
 
 # Which packs write `text` in something other than the Latin alphabet, so that a
 # Latin run left in one is a loanword rather than the language. `tlh` and `qya` are
@@ -520,7 +681,27 @@ NON_LATIN = {"zh-Hans", "ja", "ko", "th", "hi", "ar", "ru", "el", "tlh", "qya", 
              # Latin, checked over all 826. `atm-cash.pin` and `sim-data.esim` keep
              # `PIN` and `eSIM` in `text_alt`, which takes no `ipa`. Named anyway, so
              # the next row that does quote one is asked the same question.
-             "ta"}
+             "ta",
+             # Telugu writes its loanwords in its own letters too -- పాస్పోర్ట్,
+             # ప్లాట్ఫారం, వైఫై, ఏటీఎం, సిమ్ కార్డు, బోగీ -- so no `text` cell that
+             # this script transcribes quotes Latin, checked over all 828. `PIN`,
+             # `eSIM` and `1,00,000` are in `text_alt`, which takes no `ipa`, and the
+             # six rows that really do quote Latin (`shi yi`, `juuichi`, `saa moja`,
+             # `B2`, `bakso`, `damn`) are all `note` rows, which this script skips on
+             # principle. Named anyway, so the next row that does quote one is asked
+             # the same question.
+             "te",
+             # Punjabi writes its loanwords in Gurmukhi too -- ਏਟੀਐਮ, ਵਾਈ-ਫ਼ਾਈ,
+             # ਪਿਨ ਨੰਬਰ, ਈ-ਸਿਮ, ਕਿਊਆਰ ਕੋਡ, ਪਾਸਪੋਰਟ, ਪਲੇਟਫ਼ਾਰਮ -- so no `text` cell
+             # this script transcribes quotes Latin, checked over all 831. `PIN`,
+             # `eSIM`, `1,00,000` and the ASCII digits ride in `text_alt`, which takes
+             # no `ipa`. Three rows really do quote Latin and all three are refused
+             # here rather than guessed at: the two Chinese/Japanese `note` rows,
+             # which this script skips on principle, and `common-signs.pork-code`,
+             # whose whole content is `B2 · BPK · bakso` -- the gate doing exactly
+             # the job its comment describes, which is what Telugu's own pork-code
+             # row records.
+             "pa"}
 
 
 # ------------------------------------------------------------------- alphabet
@@ -717,6 +898,72 @@ REPAIR = {
     # generation time, rather than patched into two dozen reader tables: neither
     # carries information any of them could use.
     "uk": [("̪", ""), ("ʲ", ""), ("ɬβ", "ʃβ"), ("β", "ʋ")],
+    # Two repairs, both about ř and neither a guess.
+    #
+    # `("̊", "")` strips the ring this voice adds to mark ř's predictable
+    # voiceless allophone after a voiceless consonant (tři -> tr̝̊i, přes ->
+    # pr̝̊es, both probed and correct as *phonetics*). Czech spelling has
+    # exactly one letter, ř, for both allophones, because the devoicing is
+    # automatic and never contrastive -- the same argument REPAIR["uk"]
+    # above makes for dropping a dentality mark no target contrasts. Left
+    # in, every reader table gains a second ř-like phoneme (`r̝̊`) worth
+    # nothing over the first, for zero rows any table needs it on: Czech's
+    # own `core/respell.js` binds `r̝` (not `r̝̊`) into CONSONANT_TAIL,
+    # by design, so a surviving ring would simply be an unbound stray mark.
+    #
+    # `("kd", "ɡd")` repairs word-initial/-medial /kd/ never voicing to
+    # [ɡd] -- kdo, kde, kdy, kdyby, nikdo, nikdy all keep espeak's voiceless
+    # k where standard Czech has regressive voicing assimilation (Palková,
+    # *Fonetika a fonologie češtiny*; this is the textbook example of the
+    # rule). Safe as a blanket string substitution: checked over the whole
+    # built `cs` column for any word where a genuine /k/+/d/ sequence should
+    # NOT assimilate, and none exists -- Czech's own assimilation rule is
+    # general to the whole obstruent inventory, and every other cluster this
+    # voice was probed on already gets it right (sbírka -> zbˈiːrka, prosba
+    # -> prˈozba, svatba -> svˈadba, pod stromem -> pˈotstromem), so /kd/ is
+    # this dictionary's own isolated gap rather than a different rule.
+    "cs": [("̊", ""), ("kd", "ɡd")],
+    # This voice reads a/ă written before an i-glide as a front rounded vowel
+    # instead of the language's usual /ɨ/: mâine ("tomorrow") comes back
+    # `mˈyɪne` and pâine ("bread") `pˈyɪne`, where the correct reading is
+    # `ˈmɨjne`/`ˈpɨjne` -- the same â this voice gets right everywhere else
+    # (vârf vˈɨrf, mâna mˈɨna, câmp kˈɨmp, românește rˌomɨnˈeʃte all read
+    # correctly). Checked rather than assumed to be isolated: câini
+    # ("dogs") shows the identical substitution (`kˈyɪnʲʲ` for `ˈkɨjnʲ`), so
+    # this is one dictionary rule keyed on the following -i rather than a
+    # one-word fluke. /y/ is not a Romanian phoneme and does not otherwise
+    # appear in this voice's output, so the fold is unconditional rather
+    # than needing a following-context guard.
+    # This voice inserts a secondary-stress mark ˌ directly after a
+    # palatalisation mark ʲ on a word-final consonant, in words whose primary
+    # stress falls two or more syllables from the end -- astazi (today) is
+    # `ˈastəzʲˌʲ`, vineri (Friday) `vˈineɾʲˌʲ`, faceti (2pl imperative "do")
+    # `fˈatʃetsʲˌʲ`, and the same word plus an enclitic keeps it mid-string
+    # (scrieti-mi "write to me" is `skrˈietsʲˌimʲ`). A secondary stress
+    # belongs on a syllable, not wedged inside a single consonant's own
+    # diacritics, so `ʲˌ` is folded to `ʲ` rather than kept: this is a
+    # placement defect, not information a respelling could use. Found via
+    # `node scripts/respell_check.mjs ro --gaps`, which showed `ˌ` reaching
+    # all thirty other reader tables as a new, unmapped, mid-word artefact.
+    #
+    # **A second, independent defect, only visible after the first repair
+    # runs**: this voice doubles the palatalisation mark itself on a
+    # word-final consonant before Romanian's non-syllabic final -i --
+    # bani (money) is `bˈanʲʲ`, marti (Tuesday) `mˈartsʲʲ`, luni (Monday)
+    # `lˈunʲʲ`, imi (to me) `ˌɨmʲʲ`, and arata,ti (show, 4 syllables, no
+    # embedded stress mark to confuse this with the first defect) is
+    # `ˌaɾətˈatsʲʲ` -- clean of the first bug and still doubled. `ʲʲ` is
+    # redundant by definition, the same argument Polish's own entry above
+    # makes for a palatal nasal that already carries a bare `ʲ`: this is
+    # about 100 rows across this pack, all at the same word-final
+    # non-syllabic -i, and it reached `nl` as a target before it was
+    # caught here -- `respell_check nl --units` showed a decomposed `ʃʲʲ`
+    # reading Romanian, since a doubled modifier still decomposes into
+    # base + `ʲ` + `ʲ` and both halves have rules, so `--gaps` alone never
+    # saw it. Ordered after the `ʲˌ` fold, so `ʲˌʲ` collapses to `ʲʲ`
+    # first and then to a single `ʲ`. No tripled `ʲʲʲ` form was found
+    # anywhere in the corpus once both folds are checked.
+    "ro": [("yɪ", "ɨj"), ("ʲˌ", "ʲ"), ("ʲʲ", "ʲ")],
     # This version of espeak emits a literal `??` for German short /ʊ/ before a
     # coda r -- `wurde` is `vˌ??də`, `Sturm` is `ʃtˈ??m` -- and `check_alphabet`
     # then refuses the whole row, which is why *Durchsage*, *Durchfall*, *gestohlen*
@@ -745,6 +992,68 @@ REPAIR = {
     # Italian reader got their own doubled rhotic for the same reason. `ɾ` is what
     # the Spanish, Portuguese and Turkish columns already carry for the same sound.
     "el": [("ss", "s"), ("r", "ɾ")],
+    # This voice writes Dutch short /ʏ/ (the vowel of nummer, munt, rug,
+    # alstublieft) as U+0275 ɵ throughout rather than U+028F ʏ, the symbol this
+    # corpus already uses for the identical sound in every other target that has
+    # it. Checked rather than assumed: 134 rows carry it, all in a closed
+    # syllable spelled with u, which is exactly `ʏ`'s own environment, and the
+    # substitution is unconditional because this voice never emits ʏ at all --
+    # so there is no real distinction being erased. Caught by
+    # `node scripts/respell_check.mjs ru --gaps` the moment `nl` landed as a
+    # target: 29 of 30 reader tables already carry a `ʏ` rule (the German-table
+    # `ʏ` drift this file's own `VOICES` comment records), and folding here
+    # rather than adding `ɵ` as a new symbol costs the thirtieth (Russian)
+    # nothing extra either, per this project's own preference for a repair that
+    # adds no new symbol over one that costs every reader table a rule.
+    "nl": [("ɵ", "ʏ")],
+    # Telugu. Five folds and eight assimilations, and the folds were chosen the way
+    # Tamil's were: **every symbol this voice emits was looked up in all 29 shipped
+    # rule tables before the column was generated**, because `--gaps` only reports a
+    # hole after it has already reached a page. Two symbols had no rule anywhere --
+    # `ʰ` and `ʲ`, both missing in `pl` and `ta` -- and they are the two this list
+    # has to answer. `ʲ` is dropped; `ʰ` is *kept*, because a bare `ʰ` never reaches
+    # a table (see `--units` in tmp/telugu.md) and the aspirated units it forms all
+    # have rules of their own.
+    #
+    #   `ʲ`  espeak inserts a y-onglide before a word-initial front vowel -- ఎక్కడ
+    #        comes back `ʲˈekkaɖa` -- which is a real phonetic detail of spoken
+    #        Telugu and is not phonemic, is not written, and has no rule in `pl` or
+    #        `ta`. Dropped, exactly as `REPAIR["uk"]` drops the same symbol for the
+    #        same reason.
+    #   `c ɟ`  espeak gives చ and జ as palatal *stops*. **Telugu has no palatal stop
+    #        series**; both are affricates -- Krishnamurti's *The Dravidian
+    #        Languages* and Krishnamurti & Gwynn's grammar both describe them as
+    #        palato-alveolar affricates in the modern standard -- so they fold to
+    #        `tʃ` and `dʒ`, which every table already has a rule for and which the
+    #        Hindi and Bengali packs use for च/চ and ज/জ. Doing it as a bare fold
+    #        also repairs the aspirates for free: `cʰ` becomes `tʃʰ` and `ɟʰ`
+    #        becomes `dʒʰ`. What it discards is the dental-affricate realisation
+    #        [ts]/[dz] before back vowels, which is real in some Telangana and
+    #        coastal speech and which the archaic letters ౘ/ౙ once wrote; the
+    #        standard is [tʃ]/[dʒ] and one pack cannot carry both.
+    #   `ɕ`  espeak gives శ as an alveolo-palatal fricative. The corpus's symbol for
+    #        this sound is `ʃ` -- it is what Hindi's श and Bengali's শ carry -- and
+    #        keeping `ɕ` would have Telugu disagree with them about a phoneme the
+    #        three share. ష is already `ʂ`, so the fold gives Telugu the same ś/ṣ
+    #        split Hindi has rather than collapsing it.
+    #   `ɹ`  four occurrences against 571 `r`, and Telugu ర is a tap or trill, not
+    #        an approximant. `el`'s and `ur`'s rhotic repairs record the argument.
+    #
+    # **The eight assimilations are the anusvara, and they are the largest thing
+    # this voice gets wrong.** ం is a *place-neutral* nasal in the orthography and
+    # assimilates to whatever follows; espeak writes `n` for it everywhere, which is
+    # right only before a dental or alveolar. So ంక is [ŋk] and comes back `nk`, ంబ
+    # is [mb] and comes back `nb`, ండ is [ɳɖ] and comes back `nɖ` -- 263 corrections
+    # over the pack. Safe as a bare string replacement, which was checked rather than
+    # assumed: every `nC` of these eight shapes in the whole pack comes from a ం, not
+    # one from a న్, because Telugu does not write a heterorganic nasal cluster
+    # inside a word and a word boundary is a space. `nt`, `nd`, `ns`, `nl` and `nn`
+    # are deliberately left alone -- those are the environments where `n` is already
+    # the right nasal. The `c`/`ɟ` folds run first, so the palatal pair is written
+    # `ntʃ`/`ndʒ` by the time these see it.
+    "te": [("ʲ", ""), ("ɕ", "ʃ"), ("c", "tʃ"), ("ɟ", "dʒ"), ("ɹ", "r"),
+           ("nk", "ŋk"), ("nɡ", "ŋɡ"), ("ntʃ", "ɲtʃ"), ("ndʒ", "ɲdʒ"),
+           ("nʈ", "ɳʈ"), ("nɖ", "ɳɖ"), ("np", "mp"), ("nb", "mb")],
     # Asked for one word at a time -- see `WORD_AT_A_TIME` -- espeak reads the bare
     # definite article `a` as the *letter* and returns `ˈɑː`. Hungarian has no such
     # vowel: the long partner of /ɒ/ is the unrounded /aː/, written `á`, which espeak
@@ -941,7 +1250,49 @@ REPAIR = {
            ("bˈudʌn", "pˈudʌn"),         # புதன்கிழமை
            ("bˈaːdaːm", "pˈaːdaːm"),     # பாதாம்
            ("bˈaːɡʌm", "pˈaːɡʌm")],      # பாகம் -- same defect, and in language-names
-
+    # **Punjabi, and every one of these is a place where this voice's notation is
+    # not IPA or not Punjabi.** Measured over the 886 distinct Gurmukhi words of the
+    # finished pack, not over probes.
+    #
+    # `("r.", "ɽ")` is ੜ, Hindi's and Urdu's repair in this build's third script.
+    # **No `(".", "")` mop-up after it, and that was measured rather than assumed**:
+    # over the whole column there is no `.` that is not preceded by `r` and no `r`
+    # that is not followed by `.`, so the pair is exhaustive -- Bengali's argument,
+    # and a dot that did somehow survive would make `check_alphabet` refuse the row,
+    # which is a blank cell rather than a wrong one.
+    #
+    # `("+", "˩")` is **the low tone**, and `+` U+002B is not IPA at all -- it is
+    # espeak's internal marker leaking through, the same class of thing as the `r.`
+    # above. Written as U+02E9 MODIFIER LETTER EXTRA-LOW TONE BAR, which is the
+    # notation the corpus already carries on `th`, `vi` and `zh-Hans`: 30 of the 33
+    # reader tables are `policy.tone: "drop"` and strip U+02E5..02E9 in `respell()`
+    # before anything is looked up, and the three that keep tone all have rules for
+    # the bare bars already. So the tone costs **no symbol and no rule anywhere**,
+    # which is the opposite of Klingon's `/ɬ/`. See tmp/punjabi.md for the two
+    # notations refused (combining acute/grave, which appears in no `ipa` column in
+    # the corpus, and two-bar contours, of which `˩˧` has a rule in none of the three
+    # tone-keeping tables).
+    #
+    # `("v", "ʋ")` is ਵ, which every description of Punjabi gives as /ʋ/ and which
+    # `hi`, `mr` and `te` already write that way for the same letter. 79 cells, and
+    # both symbols have a rule in all 33 tables, so this buys agreement with the
+    # three packs Punjabi shares most of its vocabulary with rather than fixing a gap.
+    #
+    # The five aspirate geminates are folded with **the aspiration on the second
+    # half**, which is the correct Punjabi phonetics: ਅੱਖ is [əkkʰ], not [əkʰː]. This
+    # voice writes the same sound both ways in the same pack -- ਇਕੱਠੇ comes back
+    # `ɪkˈʌʈʰʈʰe` doubled and ਅੱਖਰਾਂ `ˈʌkʰːəɾˌã` with a length mark -- so folding is
+    # what makes the column internally consistent. The **unaspirated** geminates are
+    # left to `GEMINATE_DOUBLES` below, which is the same job done by machinery that
+    # already exists for Hungarian and Italian; between them the two cover all eleven
+    # geminate bases the pack produces (k ɡ t d p b c ɟ kʰ tʰ pʰ). Doubling rather
+    # than keeping `ː` matters for the reader and not only for the phonetics: the
+    # addak is phonemic and frequent in Punjabi -- ਪਤਾ *address* against ਪੱਤਾ *leaf*,
+    # ਦਸ *ten* against ਦੱਸ *tell* -- and `ː` has a map-to-nothing rule in most tables,
+    # so keeping it would respell those pairs identically for most readers.
+    "pa": [("r.", "ɽ"), ("+", "˩"), ("v", "ʋ"),
+           ("kʰː", "kkʰ"), ("tʰː", "ttʰ"), ("pʰː", "ppʰ"),
+           ("ʈʰː", "ʈʈʰ"), ("cʰː", "ccʰ")],
 }
 
 
@@ -1348,6 +1699,15 @@ LOANWORDS = {
     # gives the reading. `w` is not a Hebrew consonant: `Wi-Fi` is [vajfaj], which
     # is also how it is spelt when somebody does write it out, ווי-פיי.
     "he": {"Wi-Fi": "vajˈfaj", "eSIM": "iˈsim", "QR": "kjuˈar"},
+    # Filipino keeps these six in Latin letters exactly as Hebrew's press and
+    # routers do, and for the same reason: they are said with (Filipino-accented)
+    # English sounds, not read letter-by-letter through `FIL`, which would give
+    # `card` the vowel of `cat` rather than the vowel it is actually said with.
+    # Letter names (`ATM`, `WC`) follow DepEd's own Alpabetong Filipino names for
+    # the Latin letters, which is where a Filipino schoolchild is taught to read
+    # an acronym aloud -- `ATM` is `ey-ti-em`, not `a-t-m`.
+    "fil": {"Wi-Fi": "wajfaj", "eSIM": "isim", "SIM": "sim", "PIN": "pin",
+            "QR": "kjuar", "ATM": "eitiɛm", "WC": "dobolyusi", "card": "kaɾd"},
 }
 
 
@@ -1610,7 +1970,8 @@ def el_stress(text, ipa):
 # The affricates are captured whole so that `tsː` becomes `tsts` rather than `tss`,
 # which `phonemesOf` would read as /t/ + /s/ + /s/.
 GEMINATE = re.compile(r"(ts|tʃ|dz|dʒ|tɕ|ʈʂ|[pbtdkɡcɟqfvszʃʒçxhmnɲŋlrɾjʋ])ː")
-GEMINATE_DOUBLES = {"hu", "it"}
+# Punjabi joins for its addak: see the geminate paragraph in REPAIR["pa"].
+GEMINATE_DOUBLES = {"hu", "it", "pa"}
 
 
 # ------------------------------------------------------------- Hungarian stress
@@ -1643,6 +2004,107 @@ def hu_stress(ipa):
     return " ".join(out)
 
 
+# ------------------------------------------------------- Telugu final anusvara
+# **Word-final ం is [m], and this voice writes it `n`.** It is the one thing about
+# Telugu that the letters do not say and that a string fold cannot fix: 112 of the
+# pack's 1,098 distinct words end in the anusvara and all 112 come back with a final
+# `n`, while 28 words end in న్ + virama and come back with a final `n` correctly --
+# ఫోన్, ఇన్సులిన్, ఆస్పిరిన్, జూన్, the loanwords. So the repair needs the source
+# spelling, which is exactly what `text` is here for; `REPAIR` sees only the output
+# and could not tell the two classes apart.
+#
+# Word-aligned and it declines to guess, which is `el_stress`'s contract above: if
+# espeak returned a different number of words than the text has, the transcription is
+# left exactly as it came rather than shifted by one.
+#
+# The claim itself is the standard description -- Krishnamurti and Gwynn's *A Grammar
+# of Modern Telugu* gives the word-final anusvara as [m], and every romanisation
+# writes it so (namaskāram, bhōjanam, prayāṇam). The medial cases are in `REPAIR`
+# above, where a fold is enough because the following consonant is in the output.
+def te_anusvara(text, ipa):
+    words, out = text.split(), []
+    if len(words) != len(ipa.split()):
+        return ipa
+    for word, unit in zip(words, ipa.split()):
+        out.append(unit[:-1] + "m" if word.endswith("\u0c02") and unit.endswith("n")
+                   else unit)
+    return " ".join(out)
+
+
+# Punjabi's two tones, which are what its five written voiced aspirates actually
+# are. Word-initially espeak already does the job and writes the low tone as `+`
+# (folded to `˩` in REPAIR); the two things it does not do are here.
+#
+# **The high tone, from a non-initial ਘ ਝ ਢ ਧ ਭ.** espeak leaves those as voiced
+# aspirates -- ਦੁੱਧ `dˈʊdʰ`, ਲਾਭ `lˈabʰ`, ਸਿੱਧਾ `sˈɪdʰa`, ਖੰਘ `kʰˈʌnɡʰ`, 27 words of
+# the pack -- where modern Punjabi has a plain voiced stop and a high tone on the
+# *preceding* vowel: [dʊ́d], [lɑ́b], [sɪ́da], [kʰə́ŋɡ]. The voice applies the same
+# merger word-initially and not here, which is what makes this an omission rather
+# than a transcription choice.
+#
+# **The high tone from ਹ outside an onset**, which needs the source text and is why
+# this function takes it. Punjabi's subjoined ਹ (pairī̃ hāhā, `੍ਹ`) is not
+# pronounced: it marks tone. espeak writes it as an [h] -- ਪੜ੍ਹ `pˈʌr.h`, ਕੱਲ੍ਹ
+# `kˈʌllh`, ਥੋੜ੍ਹਾ `tʰˈor.ha`, ਉਨ੍ਹਾਂ `ˈʊnhã`, 18 words -- and word-final ਹ after a
+# vowel is the same phenomenon (ਮੀਂਹ `mˈĩh`, ਬਾਂਹ `bˈãh`, both [mĩ́ː] and [bã́ː]).
+# **The output alone cannot tell those from a real [ɦ]**: ਉਨ੍ਹਾਂ's h sits between a
+# consonant and a vowel exactly as ਨਹੀਂ's does, and ਨਹੀਂ's is pronounced. So the
+# test is on the Gurmukhi: `੍ਹ` in the word, or the word ending in `ਹ`. Contract
+# borrowed from `el_stress` and `te_anusvara` -- word-aligned, and if espeak
+# returned a different number of words than the text has, the transcription is
+# returned exactly as it came rather than shifted by one.
+#
+# The tone bar goes immediately after the vowel, which is where espeak's own `+`
+# goes and where `syllabify` in core/respell.js wants it: `VOWEL_TAIL` binds a Chao
+# letter to the nucleus and `isTone` walks back past a coda consonant to find one.
+PA_ASPIRATE_TONE = re.compile(r"([" + "".join(VOWELS) + r"]\u0303?)([mnɳŋɲlɾɽ]?)([bdɖɡɟ])ʰ")
+PA_ONSETLESS_H = re.compile(r"([" + "".join(VOWELS) + r"]\u0303?)([mnɳŋɲlɾɽ]*)h")
+
+
+# The homorganic nasal, which is the other thing this voice is inconsistent about.
+# Gurmukhi's tippi ੰ and bindi ਂ are one sign for two things: a **nasal consonant**
+# before a stop (ਪੰਜ [pəndʒ], ਘੰਟੇ [kò.ɳʈe], ਕਿੰਨਾ [kɪnna]) and **vowel
+# nasalisation** elsewhere (ਹਾਂ [hã], ਮੈਂ [mɛ̃], ਨਹੀਂ [nəɦĩ]). espeak writes the
+# consonant on some words (ਪੰਜ `pˈʌnɟ`, ਖੰਘ `kʰˈʌnɡʰ`, ਧੰਨਵਾਦ `tˌə+nnəvˈad`) and a
+# nasal vowel on others with the identical structure (ਅੰਦਰ `ˈʌ̃dəɾ`, ਬੈਂਕ `bˈɛ̃k`,
+# ਮਿੰਟ `mˈɪ̃ʈ`) -- 67 places against 71 where the nasal vowel is correct because
+# nothing follows it.
+#
+# Fixed in the direction the voice itself uses elsewhere, which also removes the one
+# real cost the nasal vowels would have carried: `ə̃` and `ʌ̃` have a rule in **none**
+# of the 33 reader tables, `ɪ̃` in 5 and `ʊ̃` in 10, so 67 rows would have relied on
+# `̃` mapping to nothing and quietly lost their nasal -- the shape of the Hindi `dʰ`
+# bug. What survives is the word-final and pre-fricative nasal vowel, which is
+# correct Punjabi and which uses only `ã ẽ ĩ õ ũ ɛ̃ ɔ̃` -- the set `hi` and `bn`
+# already put in front of every table.
+#
+# Before a fricative or /h/ the nasal vowel is kept, because that is what Punjabi
+# has: ਬਾਂਹ [bã́ː], ਐਂਬੂਲੈਂਸ, ਕੌਂਸਲਖ਼ਾਨਾ. Telugu's eight `REPAIR` folds do the same job
+# from the other side, as plain string substitutions; a regex is used here because
+# the nasal vowel rather than the nasal consonant is what has to be matched.
+PA_HOMORGANIC = {"k": "ŋ", "ɡ": "ŋ", "c": "ɲ", "ɟ": "ɲ", "ʈ": "ɳ", "ɖ": "ɳ",
+                 "t": "n", "d": "n", "p": "m", "b": "m", "m": "m", "n": "n", "l": "n"}
+PA_NASAL = re.compile(r"([" + "".join(VOWELS) + r"])\u0303([" + "".join(PA_HOMORGANIC) + r"])")
+
+
+def pa_nasal(ipa):
+    return PA_NASAL.sub(lambda m: m.group(1) + PA_HOMORGANIC[m.group(2)] + m.group(2), ipa)
+
+
+def pa_tone(text, ipa):
+    ipa = PA_ASPIRATE_TONE.sub("\\1˥\\2\\3", ipa)
+    words = text.split()
+    units = ipa.split()
+    if len(words) != len(units):
+        return ipa
+    out = []
+    for word, unit in zip(words, units):
+        if "\u0a4d\u0a39" in word or word.endswith("\u0a39"):
+            unit = PA_ONSETLESS_H.sub("\\1˥\\2", unit)
+        out.append(unit)
+    return " ".join(out)
+
+
 def normalise(ipa, code, text=""):
     for old, new in REPAIR.get(code, []):
         ipa = ipa.replace(old, new)
@@ -1652,6 +2114,12 @@ def normalise(ipa, code, text=""):
         ipa = " ".join(vi_tone(t) for t in ipa.split())
     if code == "el":
         ipa = el_stress(text, ipa)
+    if code == "te":
+        ipa = te_anusvara(text, ipa)
+    if code == "pa":
+        # Nasal first: `pa_tone` inserts a tone bar between the vowel and its coda,
+        # which would then sit between the tilde and the stop `pa_nasal` matches on.
+        ipa = pa_tone(text, pa_nasal(ipa))
     if code in GEMINATE_DOUBLES:
         ipa = GEMINATE.sub(r"\1\1", ipa)
     if code == "hu":
@@ -1954,6 +2422,119 @@ def qya_to_ipa(word):
     return out
 
 
+# ---------------------------------------------- Filipino orthography -> IPA
+# Filipino has no espeak voice in this build, and none in `espeakng_loader`'s
+# bundled library either -- checked both directly rather than assumed: neither
+# `EspeakBackend.supported_languages()` (system espeak-ng-data 1.50) nor the
+# `poz/` directory (the Malayo-Polynesian family folder that holds `id` and `ms`)
+# under either library's `espeak-ng-data/lang/` tree has a `tl` or `fil` file. So
+# this is the `he`/`tlh`/`qya` case, a table read letter by letter -- except there
+# is no separate romanisation column to read it *off*, because Filipino
+# orthography already *is* the romanisation: it has been written in the Latin
+# alphabet since Spanish contact, and the post-1987 alfabetong Filipino (the
+# native Abakada's 20 letters plus `c f j ñ q v x z` for loanwords and proper
+# names) is close to phonemic throughout. `route()` below reads `row["text"]`
+# directly rather than adding `fil` to `ROMANISED`, and `fil` is not added to
+# `NON_LATIN` either, for the same reason: the script is already Latin, so there
+# is no "loanword written in the wrong alphabet" case for `latin_survives` to
+# catch.
+#
+# Two words are hand-coded rather than left to the table, because they are
+# frozen irregular spellings of extremely common grammatical function words
+# rather than an ordinary sound-letter mismatch a table entry could fix. `ng`,
+# the linker/genitive particle (`bahay ng pusa`, "the cat's house"), is
+# pronounced [naŋ] -- not [ŋ] -- and `mga`, the plural marker (`mga bata`,
+# "children"), is pronounced [maˈŋa]. Both are named in Tagalog reference
+# grammars (Schachter & Otanes, *Tagalog Reference Grammar*, University of
+# California Press, 1972, section on function words) as the two spellings the
+# modern alphabet inherited without reforming -- almost certainly because both
+# are so frequent that respelling them was never going to happen. Every *other*
+# occurrence of the digraph `ng` is the ordinary velar nasal /ŋ/ and goes through
+# `FIL` like any other digraph, including where a genuine `ng`+`g` cluster
+# follows (`panggastos` "for spending" -> `p a ŋ ɡ a s t o s`, matching how the
+# word is actually said, digraph then plain letter, with no separate rule
+# needed).
+FIL_WORDS = {"ng": "naŋ", "mga": "maŋa"}
+
+# Digraphs first (`longest` tries 3, 2, then 1 -- there are no 3-letter keys
+# here, so a 3-character probe that happens to land on a 2-letter key at the end
+# of a short word is the same outcome as the 2-character probe finding it).
+# `ng` is the native velar nasal; `ts` is the affricate loanwords are spelled
+# with (tsokolate "chocolate", tsinelas "slippers"); `ny` and `ñ` both write the
+# palatal nasal Spanish loans carry (banyo < baño, Espanya < España) -- modern
+# Filipino orthography prefers `ny` for common nouns and reserves bare `ñ` for a
+# handful of retained proper names, so both map to the same phoneme rather than
+# the pack needing to pick one. No entry is needed for the diphthongs `ay aw iw
+# oy uy ey` at all: `y` and `w` are already the glides /j/ and /w/ in the plain
+# letter table below, so `ay` composes to /aj/ and `aw` to /aw/ for free, the
+# same way Indonesian's respell table gets `ai`/`au` for nothing.
+FIL = {
+    "ng": "ŋ", "ts": "ts", "ny": "ɲ", "qu": "k",
+    "a": "a", "e": "ɛ", "i": "i", "o": "o", "u": "u",
+    "b": "b", "k": "k", "d": "d", "g": "ɡ", "h": "h", "l": "l", "m": "m", "n": "n",
+    "p": "p", "r": "ɾ", "s": "s", "t": "t", "w": "w", "y": "j",
+    "ñ": "ɲ", "f": "f", "v": "v", "z": "z", "j": "dʒ", "q": "k", "x": "ks",
+}
+# `c` alone is the one letter this table cannot give a context-free value: the
+# alfabetong Filipino keeps the Spanish rule it was borrowed with, /s/ before a
+# front vowel and /k/ elsewhere (`sentro`, `klima` -- most loans are simply
+# respelled with `s`/`k` instead, but a handful of retained spellings are not).
+FIL_C_FRONT = {"e": "s", "i": "s"}
+
+
+def fil_to_ipa(word):
+    """One Filipino word, letter by letter, longest grapheme first.
+
+    Lowercased by the caller in `route()`, like the other table routes: Filipino
+    capitalises the first word of a sentence and proper nouns, and a capital is
+    orthography, not a sound.
+
+    No stress mark is ever placed, which is a finding rather than an oversight.
+    Filipino stress is lexical and contrastive -- `buhay` [ˈbuhaj] "life" against
+    `buhay` [buˈhaj] "alive" is the textbook minimal pair -- and with no espeak
+    voice and no machine-readable pronouncing dictionary for Tagalog/Filipino to
+    look it up from, there is nothing to derive it from except a wrong default.
+    That is the same conclusion `STRESS` already reaches for Persian, for a
+    different reason (verbs and nominals stress in opposite directions there;
+    here the rule is simply unrecoverable from the spelling without a lexicon).
+    See `STRESS["fil"]` for the fuller note.
+
+    The phonemic word-final glottal stop (`baba` "chin" against `babà` "to go
+    down") is the same story and is silently absent for the same reason: it is
+    real and contrastive, and the everyday orthography this pack's `text` column
+    uses -- a road sign, a newspaper, a phrasebook -- does not write it either,
+    reserving the grave/circumflex tuldik marks for a dictionary headword. What
+    the printed word does not distinguish, this column cannot recover.
+
+    The predictable word-initial glottal *onset* before a vowel-initial syllable
+    (`aso` "dog", phonetically [ˈʔaso]) is not written either, and that is a
+    consistency decision rather than a second gap: `EspeakBackend('id')` does not
+    insert one for the identical environment in Indonesian (`anak` -> `ˈanak`,
+    not `ʔˈanak`, confirmed directly against this build's output), and a
+    Malayo-Polynesian sibling language's own espeak-derived column is the more
+    relevant precedent here than inventing a mark from scratch.
+    """
+    if word in FIL_WORDS:
+        return FIL_WORDS[word]
+    out, i = "", 0
+    while i < len(word):
+        if word[i] == "-":                            # a morpheme boundary, not a sound
+            i += 1
+            continue
+        if word[i] == "c":
+            out += FIL_C_FRONT.get(word[i + 1:i + 2], "k")
+            i += 1
+            continue
+        letter = longest(FIL, word, i)
+        if letter:
+            out += FIL[letter]
+            i += len(letter)
+            continue
+        out += word[i]                                # carried out, so a gate names it
+        i += 1
+    return out
+
+
 # Letters that are inside the IPA alphabet and still cannot appear in *Japanese*
 # IPA, so seeing one means a Hepburn mora went unconverted rather than that the
 # reading is exotic. `u` is the sharp one: Japanese /ɯ/ is never `u`, so a single
@@ -2089,6 +2670,10 @@ def route(code, chunks):
         # Lowercased like the other romanisation routes: a capital in this column is
         # a sentence opening, not a sound.
         return lambda chunk: " ".join(he_to_ipa(w.lower()) for w in chunk.split()), "bgn"
+    if code == "fil":
+        # Reads `row["text"]` itself, not a romanisation column -- see the comment
+        # above `FIL_WORDS` for why `fil` is in neither `ROMANISED` nor `NON_LATIN`.
+        return lambda chunk: " ".join(fil_to_ipa(w.lower()) for w in chunk.split()), "fil-g2p"
     raise SystemExit(f"no route for {code}")
 
 
@@ -2398,6 +2983,65 @@ GRADE = {
            "column is 50 phonemes and every one of them was already in the corpus, "
            "so Polish costs the other twenty-three reader tables no edit at all. No "
            "curated sheet, so the syllable column is blank"),
+    "cs": ("A", "near-phonemic orthography, and the same Polish/Hungarian argument for "
+           "stress: Czech's is positional and exceptionless -- the first syllable, "
+           "always -- so it is looked up rather than derived, and every probe agrees, "
+           "long words and proclitic fusion included (`ˈaʊtomˌobil`, `do domu` -> "
+           "`dˈodomu`). Probed on the four things Czech orthography is not transparent "
+           "about. Voicing assimilation across a cluster is mostly right (`sbírka` -> "
+           "`zbˈiːrka`, `prosba` -> `prˈozba`, `svatba` -> `svˈadba`, `pod stromem` -> "
+           "`pˈotstromem`) with one systematic, repaired exception: word-initial/-medial "
+           "`kd` never voiced to [ɡd] on any of `kdo/kde/kdy/kdyby/nikdo/nikdy` before "
+           "`REPAIR[\"cs\"]`. ř devoicing after a voiceless consonant is right (`tři` -> "
+           "`tr̝̊i`, `přes` -> `pr̝̊es`), and the voiceless ring is folded out in REPAIR "
+           "because the alternation is automatic and Czech spelling does not mark it "
+           "either. Syllabic r/l are right on every inflected form probed (krk, prst, "
+           "smrt, srp, trh, vlku, vlkodlak, vlna, plný, plzeň), with one dictionary-level "
+           "defect rather than a mechanism failure: the bare headwords `vlk` (wolf) and "
+           "`plch` (dormouse) are spelled out letter-by-letter in isolation regardless of "
+           "context, and neither word is in this pack. No curated sheet, so the syllable "
+           "column is blank, and this grade is a spot-check rather than a corpus-wide "
+           "measurement, the same honest bar Dutch's and Romanian's entries set"),
+    "pa": ("B", "espeak has a Punjabi voice and it does the one thing this language is "
+           "here to prove, in one direction of two. **Punjabi tone is the residue of the "
+           "lost voiced aspirates and the script still writes the old letters**, so the "
+           "`ipa` column is the only column in a Punjabi row that can carry it -- `text` "
+           "writes ਘ and `romanization_iso15919` transliterates that as `gha`, and the "
+           "word is [ko˩ɽa]. **Word-initially the voice gets it right and was probed on "
+           "all five letters before it was trusted**: ਘੋੜਾ, ਘਰ, ਝੂਠ, ਢੰਗ, ਧੰਨਵਾਦ, ਭਾਰਤ all "
+           "come back voiceless, unaspirated and tone-marked, and all 20 such words in "
+           "the pack got the mark -- no lexicon miss of Tamil's kind. The tone itself "
+           "arrives as an ASCII `+`, which is not IPA and is folded to `˩` in REPAIR. "
+           "**Non-initially the voice does not do it at all**, which is the single largest "
+           "thing repaired here: ਦੁੱਧ comes back `dˈʊdʰ` and ਲਾਭ `lˈabʰ`, keeping a voiced "
+           "aspirate modern Punjabi does not have, on 27 words -- so `pa_tone` writes the "
+           "high tone on the preceding vowel instead, which is what the language does. "
+           "The voice is internally inconsistent about the same sound, applying the merger "
+           "in one position and not the other, which is what makes this an omission rather "
+           "than a transcription choice. Three further defects, all repaired and all "
+           "measured over the 886 distinct words of the finished pack rather than over "
+           "probes. **The subjoined ਹ is written as an [h]** -- ਪੜ੍ਹ `pˈʌr.h`, ਕੱਲ੍ਹ "
+           "`kˈʌllh`, 18 words -- where it is silent and marks tone; the output alone "
+           "cannot tell it from the real [ɦ] of ਨਹੀਂ, so `pa_tone` takes the source text, "
+           "which is `te_anusvara`'s and `el_stress`'s contract. **The tippi/bindi is "
+           "written as vowel nasalisation before a stop on 67 words and as a homorganic "
+           "nasal consonant on others of identical structure** (ਪੰਜ `pˈʌnɟ` against ਅੰਦਰ "
+           "`ˈʌ̃dəɾ`), so `pa_nasal` regularises it in the direction the voice itself uses "
+           "elsewhere. **And the addak is written as a length mark on some words and a "
+           "doubled consonant on others** (ਅੱਖਰਾਂ `ˈʌkʰːəɾˌã` against ਇਕੱਠੇ `ɪkˈʌʈʰʈʰe`), "
+           "which matters because Punjabi gemination is phonemic -- ਪਤਾ against ਪੱਤਾ -- and "
+           "`ː` has a map-to-nothing rule in most reader tables. What is left un-repaired "
+           "and is the reason this is a B rather than higher: **stress is not written at "
+           "all** (see STRESS[\"pa\"] -- espeak's is the first syllable on 72% of the 671 "
+           "polysyllables and follows no rule Punjabi grammars state, and this column "
+           "already carries prominence as tone); **the aspiration of a doubled aspirate is "
+           "left on both halves** on the one word that has it, ਇਕੱਠੇ; **[ɦ] between vowels "
+           "is left as a full [h]** on words like ਨਹੀਂ and ਵਿਹੜਾ, where much of Punjab says "
+           "[nə́ĩ] with a tone and no consonant, because that reduction is variable and the "
+           "careful reading is the one a stranger will be understood saying; and there is "
+           "**no curated sheet for Punjabi**, so this grade is a spot-check and a "
+           "mechanical audit rather than a corpus-wide measurement against a reviewer, "
+           "which is the same honest bar Czech's, Dutch's and Romanian's entries set"),
     "tr": ("B", "phonemic orthography, but espeak's Turkish stress is 68.1%"),
     "pt": ("B", "pt-br; vowel reduction is phonetic detail the curated sheet smooths away"),
     "en": ("B", "en-us; deep orthography, but espeak's English lexicon is its best"),
@@ -2431,6 +3075,63 @@ GRADE = {
            "spell differently. **Stress is not written at all** and that is a decision, not "
            "a gap: see STRESS above. **And espeak's `ʌ` for short அ is kept rather than "
            "folded to `a`**, which is a trade with a named cost -- see REPAIR"),
+    "nl": ("A-", "system espeak-ng-data 1.50, no loader needed (see the `VOICES` comment). "
+           "821 of 831 rows filled -- 6 note rows and 4 bare-symbol/number rows (e.g. the "
+           "euro sign) need none. Dutch orthography is close to phonemic and the derivation "
+           "reads correctly on every spot-check run for this pack: ɣ/x for g/ch (`regen` "
+           "rˈeːɣən, `acht` ˈɑxt), ʋ for w (`water` wˈaːtər -> ʋˈaːtər), the œy/ɛi diphthongs "
+           "(`huis`, `mijn`/`kwijt`), and øː for eu. Not cross-checked against a curated "
+           "Dutch sheet the way `es`/`it`/`hu` are, because none exists in this corpus, so "
+           "there is no syllable-agreement percentage to report -- this grade is a "
+           "targeted spot-check on the phonemes the pack's own reader table (below) had to "
+           "get right, not a corpus-wide measurement. One inconsistency worth naming rather "
+           "than hiding: the acronym `eSIM` is read as a spelled-out acronym "
+           "(ˌɛsˌiːˈɛm) inside the sentence 'Heeft u een eSIM?' but as a word "
+           "(ˈeː sˈɪm) in the bare `sim-data.esim` row -- the same string, two G2P paths, "
+           "depending on sentence context. Left as espeak produced it rather than "
+           "hand-patched, since both readings are things a Dutch speaker might actually "
+           "say and neither is wrong, only inconsistent"),
+    "mr": ("B", "espeak has an `mr` voice only via `espeakng_loader`'s newer bundled data -- "
+           "this build's system espeak-ng-data 1.50 predates it, the same situation Ukrainian "
+           "was in. Probed directly rather than trusted, on words chosen to force the question "
+           "the respell table's own second deviation turns on: schwa retention. Mixed within a "
+           "single word -- कमळ *lotus* comes back kˈʌməɭ, keeping the medial अ and dropping the "
+           "final one -- which is a fact about Marathi's own less-categorical deletion (real, "
+           "but nothing like Hindi's well-documented syncope) rather than a G2P defect, and it "
+           "is exactly why the respell table keeps the final halant Hindi's drops rather than "
+           "assuming the same rule transfers. Aspiration (भ ध घ ढ छ ठ झ, all eight probed), "
+           "retroflexion (ट ड ण ळ against त द न ल) and the dental/alveolar nasal contrast all "
+           "came back correct on every word tried, including the retroflex lateral ळ itself "
+           "(बाळ, आळशी). Not probed against a reference corpus of comparable size to Hindi's "
+           "or Tamil's audits, so this grade is a spot-check rather than a measurement -- the "
+           "honest bar available for a table with no curated Marathi sheet to score against"),
+    "te": ("A-", "espeak has a Telugu voice -- `te_dict` is in this build's 1.50 data tree -- and "
+           "it is the best Indic derivation in this file, for a structural reason: **Telugu "
+           "orthography is shallow in the two places every other Indic script in this corpus is "
+           "not.** There is no schwa deletion, so a consonant letter says [a] unless a vowel "
+           "sign or the virama says otherwise and no rule has to guess (Hindi's and Bengali's "
+           "biggest G2P risk simply does not exist here); and it writes the whole four-way stop "
+           "series, so voicing and aspiration are on the page where Tamil leaves both to a "
+           "positional rule. Probed on the series before it was trusted and right in every one: "
+           "ఖాళీ `kʰˈaːɭiː`, ఘంటం `ɡʰˈaɳʈam`, గంట `ɡˈaɳʈa`, కాలం `kˈaːlam`, ధన్యవాదాలు "
+           "`dʰˈanjaʋˌaːdaːlu`, భోజనం `bʰˈoːdʒanam`. It writes both vowel lengths for all five "
+           "pairs including short ఎ/ఒ, which Devanagari cannot. Three weaknesses, in order, and "
+           "the first two are repaired. **The anusvara has no place of articulation and espeak "
+           "gives it `n` everywhere**, which is right before a dental and wrong before everything "
+           "else -- ంక is [ŋk], ంబ is [mb], ండ is [ɳɖ] -- and wrong word-finally, where Telugu "
+           "says [m] and 112 of the pack's 1,098 distinct words end in it. Both halves are "
+           "repaired: the medial cases by the eight folds in REPAIR above (263 corrections, and "
+           "every `nC` they touch was verified to come from a ం rather than a న్), and the "
+           "word-final case by `te_anusvara`, which needs the source spelling because the output "
+           "cannot tell ప్రవేశం from ఫోన్. **It gives చ and జ as palatal stops**, which Telugu "
+           "does not have; folded to the affricates, which discards the dental-affricate "
+           "realisation some Telangana and coastal speech has before back vowels. **And stress "
+           "is not written at all**, which is a decision rather than a gap -- see STRESS above: "
+           "espeak marks the first syllable unconditionally and Telugu's own rule moves it to a "
+           "long second syllable, which is most of the Sanskrit-derived nouns this pack is full "
+           "of. What no reviewer should assume is checked: the dental/retroflex *nasal* contrast "
+           "is now carried by a repair rather than by the dictionary, so a row where the "
+           "assimilation reads wrong is a repair to question and not a lexicon entry"),
     "bn": ("C", "espeak-ng has a Bengali voice and it is a real one -- the consonant "
            "inventory comes back whole, retroflex against dental, all four aspirates, ঙ ঞ as "
            "/ŋ ɲ/, and the inherent vowel's /ɔ/ against /o/ right most of the time. Two "
@@ -2485,6 +3186,79 @@ GRADE = {
            "seven-case declension is or could be represented -- the ipa column "
            "reads citation-form pronunciation only, which is what every other "
            "language in this file does too"),
+    "ro": ("A-", "system espeak-ng-data 1.50 has a Romanian voice directly, no loader "
+           "needed (see the `VOICES` comment) -- and Romanian orthography is nearly as "
+           "shallow as Italian's, which the derivation confirms rather than assumes: "
+           "probed on ce/ci/che/chi/ge/gi/ghe/ghi (excelent, chelner, geantă, gheață -- "
+           "all correct), the ș/ț letters (șase, ștampilă, mulțumesc, județ -- ʃ and ts "
+           "throughout, never the Turkish cedilla forms), and x's two positional "
+           "readings, /ks/ before a stressed syllable's onset and /ɡz/ when the "
+           "following syllable is stressed (excelent eksˈ-, exemplu eɡzˈ- -- a real "
+           "allophonic rule, not noise, and this voice gets the conditioning right on "
+           "both probed words). **One real, repeatable defect, repaired in REPAIR "
+           "above**: â/ă before an i-glide reads as a front rounded vowel instead of "
+           "the language's own /ɨ/ -- mâine and pâine came back `mˈyɪne`/`pˈyɪne` "
+           "before the fix, against the correct `ˈmɨjne`/`ˈpɨjne`, while â everywhere "
+           "else (vârf, mâna, câmp, românește) was already right; câini confirmed it "
+           "is a rule keyed on the following -i rather than a single lexical accident. "
+           "**A second, unrelated defect, also repaired in REPAIR**: a stray secondary-"
+           "stress mark lands directly after a word-final consonant's palatalisation "
+           "in words whose primary stress sits two or more syllables from the end -- "
+           "astazi (today) was `ˈastəzʲˌʲ`, faceti (do, 2pl) `fˈatʃetsʲˌʲ` -- found by "
+           "`node scripts/respell_check.mjs ro --gaps`, which showed the mark reaching "
+           "all thirty other reader tables as a new mid-word symbol none of them has a "
+           "rule for. Folded to plain `ʲ`, since a secondary stress belongs on a "
+           "syllable and not wedged inside one consonant's own diacritic. "
+           "**A third defect, found after the first two were fixed**: this voice "
+           "doubles the palatalisation mark itself, unconditionally, on a word-final "
+           "consonant before Romanian's non-syllabic final -i -- bani (money) is "
+           "`bˈanʲʲ`, marti (Tuesday) `mˈartsʲʲ`, luni (Monday) `lˈunʲʲ` -- about 100 "
+           "rows in this pack, clustering exactly at that one position (word-final "
+           "non-syllabic -i) rather than scattered across the lexicon. `ʲʲ` is "
+           "redundant by definition and folded to a single `ʲ`, the same argument "
+           "Polish's own REPAIR entry makes for a doubly-marked palatal nasal. Not "
+           "visible to `--gaps` at all, because a doubled modifier decomposes into "
+           "base + `ʲ` + `ʲ` and both halves already have a rule in most tables; it "
+           "surfaced in Dutch's own `--units` output as a decomposed `ʃʲʲ` reading "
+           "Romanian. Checked for a tripled `ʲʲʲ` form once both folds were in place "
+           "and found none. "
+           "**Stress is lexical and free, as in Russian/Ukrainian**, so it is looked "
+           "up from espeak's dictionary rather than derived by any rule this file "
+           "writes -- there is no mechanical position to compute it from, the same "
+           "conclusion `STRESS` reaches for Persian, for the opposite reason. No "
+           "curated Romanian sheet exists to score syllable-agreement against, so "
+           "this grade is a spot-check like Dutch's and Marathi's rather than a "
+           "corpus-wide measurement. Romanian has no phonemic aspiration to get "
+           "wrong or right: it never appears as a *source* concern here, only as a "
+           "*target* one in the reader table below"),
+    "fil": ("A-", "no espeak voice exists for `tl`/`fil` in this build's system "
+            "espeak-ng-data (1.50) or in `espeakng_loader`'s bundled library -- checked "
+            "directly rather than assumed, since `mr`/`uk` needed the loader and `ro` "
+            "turned out not to: neither library's `lang/poz/` directory (Indonesian's "
+            "and Malay's own family folder) has a Tagalog/Filipino file at all. So this "
+            "is a hand-written letter table (`FIL`) like `tlh`/`qya`/`he`, over an "
+            "orthography that is close to phonemic throughout the post-1987 alfabetong "
+            "Filipino, rather than a probabilistic model with an error rate to measure. "
+            "**What the table cannot capture, both silently and by design**: the "
+            "word-final glottal stop (baba 'chin' against babà 'to go down') and lexical "
+            "stress (buhay [ˈbuhaj] 'life' against buhay [buˈhaj] 'alive') are both real "
+            "and contrastive in spoken Filipino, and neither is written in the everyday "
+            "orthography this pack's `text` column uses -- so this column is exactly as "
+            "silent about both as the printed word already is, not a separate loss on "
+            "top of it. That is the one point of daylight from `tlh`'s A: Klingon's "
+            "orthography does not lose a phonemic contrast by omitting stress (TKD "
+            "1.3's stress is predictable from morphology and non-contrastive), where "
+            "Filipino's omission is a genuine, if honestly documented, gap. Two "
+            "irregular high-frequency function-word spellings are hand-coded rather "
+            "than left to the table -- `ng` [naŋ] the linker, `mga` [maˈŋa] the plural "
+            "marker, both frozen spellings named in Schachter & Otanes 1972 -- which is "
+            "this pack's version of the aspiration trap the project has been bitten by "
+            "before: a table entry alone would have read `mga` as `mɡa`, not `maŋa`, "
+            "and both words are among the most frequent in the language, so the defect "
+            "would have reached nearly every row rather than a handful. No curated "
+            "Filipino sheet exists to score syllable-agreement against, so this grade "
+            "is a table read carefully rather than a corpus-wide measurement, in the "
+            "same position Dutch's, Marathi's and Romanian's own spot-checks are."),
 }
 
 

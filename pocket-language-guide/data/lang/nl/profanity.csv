@@ -1,0 +1,11 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+profanity.oh-my-god,Mijn God!,,mɛɪn ɣˈɔt,"religious oath of shock, printable, matching the concept's own reading",2,nl-agent-v1;ipa=espeak
+profanity.damn,Verdomme!,,vərdˈɔmə,"the ordinary mild curse at a situation, never at a person",2,nl-agent-v1;ipa=espeak
+profanity.expletive,Shit!,,ʃˈɪt,a fully naturalised loanword and the everyday coarse expletive in spoken Dutch,2,nl-agent-v1;ipa=espeak
+profanity.strong-expletive,Fuck!,,fˈʏk,"also a fully naturalised loanword used as a bare exclamation (not aimed at anyone); the native alternatives (godverdomme, blasphemous; kanker-/tyfus- disease curses) target religion or invoke illness respectively and were set aside for the same reason the brief gives for the ten languages that left this row blank",2,nl-agent-v1;ipa=espeak
+profanity.intensifier,kut-,,kˈʏt,"productive negative-intensifying prefix (kutweer, kutdag), the Dutch parallel to German Scheiss-",2,nl-agent-v1;ipa=espeak
+profanity.frustration,Dit is klote.,,dɪt ɪs klˈoːtə,"a whole sentence, safe to say aloud",2,nl-agent-v1;ipa=espeak
+profanity.thats-rude,Dat is onbeleefd.,,dɑt ɪs ɔnbəlˈeːft,"the warning, not an insult back",2,nl-agent-v1;ipa=espeak
+profanity.excuse-my-language,Sorry voor mijn taalgebruik.,,sˈɔɾri vɔːr mɛɪn tˈaːlɣɛbrˌœyk,the repair move; polite in every register,2,nl-agent-v1;ipa=espeak
+profanity.strength-warning,"Bedoeld om herkend te worden, niet om te gebruiken: kracht laat zich niet vertalen. Een woord dat hier als ‘verdomme’ wordt vertaald, kan in de taal ernaast onuitspreekbaar zijn, en het sterkste woord van een taal is vaak precies het woord dat in dit onderdeel moest worden weggelaten.",,,,2,nl-agent-v1
+profanity.japanese-register,"Het Japans doet dit bijna nooit met woordenschat. Minachting wordt in plaats daarvan overgebracht via grammatica -- een bot voornaamwoord voor de tweede persoon, de kale gebiedende wijs, de korte werkwoordsuitgangen -- zodat de boosheid in de uitgang zit en niet in een woord dat je kunt opzoeken. De regels hierboven vormen vrijwel de hele woordenschat.",,,,2,nl-agent-v1

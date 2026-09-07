@@ -808,6 +808,11 @@
     },
     {
       "slot": "nucleus",
+      "ipa": "ʏ",
+      "out": "yoo"
+    },
+    {
+      "slot": "nucleus",
       "ipa": "œ",
       "out": "eh"
     },
@@ -820,6 +825,11 @@
       "slot": "nucleus",
       "ipa": "ʊ",
       "out": "oo"
+    },
+    {
+      "slot": "any",
+      "ipa": "r̝",
+      "out": "rr"
     }
   ],
   "syllable_fixups": [

@@ -1,0 +1,15 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+slang.thats-good,Leuk,,lˈøːk,mild positive about a thing,2,nl-agent-v1;ipa=espeak
+slang.thats-great,Geweldig!,,ɣəʋˈɛldəx,,2,nl-agent-v1;ipa=espeak
+slang.i-love-it,Ik ben er dol op.,,ɪk bɛn ər dˈɔl ˈɔp,,2,nl-agent-v1;ipa=espeak
+slang.thats-bad,Valt tegen.,,vˈɑl tˈeːɣən,"idiomatic 'disappointing', never about a person",2,nl-agent-v1;ipa=espeak
+slang.delicious,Heerlijk!,,hˈɪːrlək,,2,nl-agent-v1;ipa=espeak
+slang.thats-pricey,Dat is aan de prijs.,,dɑt ɪs aːn də prˈɛɪs,"idiomatic; a comment on price, not an accusation",2,nl-agent-v1;ipa=espeak
+slang.exactly,Precies!,,preːsˈis,,2,nl-agent-v1;ipa=espeak
+slang.no-worries,Geen zorgen.,,ɣˈeːn zˈɔrɣən,distinct from social-basics.no-problem,2,nl-agent-v1;ipa=espeak
+slang.youre-welcome,Altijd!,,ˈɑltɛɪt,"casual reply to thanks, distinct from social-basics.you-are-welcome",2,nl-agent-v1;ipa=espeak
+slang.seriously,Serieus?!,,sˌɪːrijˈøːs,surprise/disbelief; a widely used casual borrowing,2,nl-agent-v1;ipa=espeak
+slang.im-good-thanks,"Het is goed zo, bedankt.",,"hət ɪs ɣˈut zˈoː, bədˈɑŋkt",declines an offer without a blunt no,2,nl-agent-v1;ipa=espeak
+slang.lets-go,"Kom, we gaan!",,"kˈɔm, ʋə ɣˈaːn","to companions, not a stranger",2,nl-agent-v1;ipa=espeak
+slang.cheers,Proost!,,prˈoːst,,2,nl-agent-v1;ipa=espeak
+slang.see-you,Doei!,,dˈuj,"casual parting, distinct from the formal goodbye",2,nl-agent-v1;ipa=espeak

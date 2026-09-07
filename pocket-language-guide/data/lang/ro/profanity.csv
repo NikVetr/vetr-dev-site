@@ -1,0 +1,11 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+profanity.oh-my-god,Doamne!,Dumnezeule!,dˈɔamne,"Lord! / my God! -- mild, everywhere",1,profanity-agent-v1;src=DEX;ipa=espeak
+profanity.damn,La naiba!,Fir-ar să fie!,la nˈaɪba,to the devil! -- mild oath,1,profanity-agent-v1;src=DEX;ipa=espeak
+profanity.expletive,Rahat!,,rahˈat,shit -- coarse but everyday,1,profanity-agent-v1;src=DEX;ipa=espeak
+profanity.strong-expletive,Pula mea!,,pˈula mˈea,lit. my dick -- very strong; said at nothing,1,profanity-agent-v1;src=DEX;ipa=espeak
+profanity.intensifier,dracului,pulii,drˈakuluɪ,"of-the-devil (casual) / genitive of pula (vulgar), both used before/after a noun: damn -",1,profanity-agent-v1;src=DEX;ipa=espeak
+profanity.frustration,E o porcărie,,je o pˌorkəɾˈie,it is a piggish thing -- mild-coarse,1,profanity-agent-v1;src=DEX;ipa=espeak
+profanity.thats-rude,Asta e nepoliticos,,ˌasta je nˌepolˌitikˈos,that is impolite,1,profanity-agent-v1;src=DEX;ipa=espeak
+profanity.excuse-my-language,Scuzați limbajul,,skuzˈatsʲ limbˈaʒul,excuse the language,1,profanity-agent-v1;src=DEX;ipa=espeak
+profanity.strength-warning,"Aici pentru a fi recunoscute, nu pentru a fi folosite: puterea nu supraviețuiește traducerii. Un cuvânt redat aici printr-un jurământ ușor poate fi de nerostit în limba de alături, iar cel mai puternic cuvânt al unei limbi este adesea tocmai cel pe care această secțiune a trebuit să îl excludă.",,,,2,ro-agent-v1
+profanity.japanese-register,"Japoneza nu face aproape nimic din toate acestea prin vocabular, așa că rândurile ei sunt sărace din realitate, nu din omisiune, iar cititorul trebuie anunțat de ce. Disprețul este purtat de gramatică -- alegerea pronumelui, imperativul simplu, formele verbale abrupte -- lucruri pe care niciun rând nu le poate reda ca frază. Niciun cuvânt japonez nu este citat aici: nota apare în alfabetul cititorului, iar check_drawable respinge o notă ce nu poate fi desenată, așa că un kisama transliterat ar fi în regulă, dar unul scris în kana ar apărea ca un pătrat gol -- iar numirea mecanismului este oricum partea mai utilă.",,,,2,ro-agent-v1

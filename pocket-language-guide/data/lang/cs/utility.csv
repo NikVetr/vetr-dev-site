@@ -1,0 +1,16 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,Chci jet do {},,xtsi jˈed do {},the place then takes the genitive after do -- 'do Prahy',2,cs-agent-v1;ipa=espeak
+utility-templates.please-give-me,"Dejte mi {}, prosím",,"dˈeɪte mi {}, prˈosiːm",the thing takes the accusative,2,cs-agent-v1;ipa=espeak
+utility-templates.may-i,Mohu {}?,,mˈohu {},,2,cs-agent-v1;ipa=espeak
+utility-templates.please-do-not-add,"Nedávejte mi tam {}, prosím",,"nˈedaːvˌeɪte mi tˈam {}, prˈosiːm",the thing takes the accusative,2,cs-agent-v1;ipa=espeak
+utility-templates.do-you-have,Máte {}?,,mˈaːte {},,2,cs-agent-v1;ipa=espeak
+utility-templates.please-write-the-number,"Napište mi to číslo, prosím",,"nˈapiʃte mi tˈo tʃˈiːslo, prˈosiːm",,2,cs-agent-v1;ipa=espeak
+utility-templates.i-need,Potřebuji {},,pˈotr̝ebˌuji {},,2,cs-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,Je tu poblíž {}?,,je tˈu pˈobliːʃ {},,2,cs-agent-v1;ipa=espeak
+utility-templates.how-much-is,Kolik stojí {}?,,kˈolik stˈojiː {},,2,cs-agent-v1;ipa=espeak
+utility-templates.is-this,Je to {}?,,je tˈo {},,2,cs-agent-v1;ipa=espeak
+utility-templates.please,"{}, prosím",,"{}, prˈosiːm",,2,cs-agent-v1;ipa=espeak
+utility-templates.i-am-looking-for,Hledám {},,hlˈedaːm {},,2,cs-agent-v1;ipa=espeak
+utility-templates.do-you-accept,Přijímáte {}?,,pr̝ˈijiːmˌaːte {},,2,cs-agent-v1;ipa=espeak
+utility-templates.i-cannot-find,Nemohu najít {},,nˈemohu nˈajiːt {},,2,cs-agent-v1;ipa=espeak
+utility-templates.there-is-a-problem-with,Je problém s {},,je prˈobleːm ˈes {},,2,cs-agent-v1;ipa=espeak

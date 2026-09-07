@@ -1,0 +1,13 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+introductions.my-name-is,నా పేరు {},,nā pēru {},naː peːru {},,2,te-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,మిమ్మల్ని కలవడం సంతోషం,,mimmalni kalavaḍaṁ saṁtōṣaṁ,mimmalni kalaʋaɖam santoːʂam,meeting you is a joy,2,te-agent-v1;ipa=espeak
+introductions.what-is-your-name,మీ పేరు ఏమిటి?,,mī pēru ēmiṭi?,miː peːru eːmiʈi,,2,te-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,మేము కలిసి ప్రయాణం చేస్తున్నాము,,mēmu kalisi prayāṇaṁ cēstunnāmu,meːmu kalisi prajaːɳam tʃeːstunnaːmu,,2,te-agent-v1;ipa=espeak
+introductions.this-is-my-friend,ఇతను నా స్నేహితుడు,ఈమె నా స్నేహితురాలు,itanu nā snēhituḍu,itanu naː sneːhituɖu,m / f,2,te-agent-v1;ipa=espeak
+introductions.i-am-from,నేను {} నుంచి వచ్చాను,,nēnu {} nuṁci vaccānu,neːnu {} nuɲtʃi ʋatʃtʃaːnu,I came from —,2,te-agent-v1;ipa=espeak
+introductions.where-are-you-from,మీరు ఎక్కడి నుంచి వచ్చారు?,,mīru ekkaḍi nuṁci vaccāru?,miːru ekkaɖi nuɲtʃi ʋatʃtʃaːru,,2,te-agent-v1;ipa=espeak
+introductions.how-are-you,ఎలా ఉన్నారు?,బాగున్నారా?,elā unnāru?,elaː unnaːru,,2,te-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,నేను పర్యాటకుడిని,నేను పర్యాటకురాలిని,nēnu paryāṭakuḍini,neːnu parjaːʈakuɖini,m / f,2,te-agent-v1;ipa=espeak
+introductions.this-is-my-husband-wife,ఇతను నా భర్త / ఈమె నా భార్య,,itanu nā bharta / īme nā bhārya,itanu naː bʰarta / iːme naː bʰaːrja,husband / wife,2,te-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,ఈమె నా కూతురు / ఇతను నా కొడుకు,,īme nā kūturu / itanu nā koḍuku,iːme naː kuːturu / itanu naː koɖuku,daughter / son,2,te-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,నేను ఒంటరిగా ప్రయాణం చేస్తున్నాను,,nēnu oṁṭarigā prayāṇaṁ cēstunnānu,neːnu oɳʈariɡaː prajaːɳam tʃeːstunnaːnu,,2,te-agent-v1;ipa=espeak

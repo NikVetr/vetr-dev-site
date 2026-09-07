@@ -390,7 +390,7 @@ def main():
     # reader will eventually ask.
     SLOTS = {"onset", "nucleus", "coda", "any"}
     POLICY_VALUES = {"stress": {"caps", "acute", "grave", "prime", "none"},
-                     "length": {"none", "double", "colon"},
+                     "length": {"none", "double", "colon", "accent"},
                      "tone": {"keep", "drop"},
                      "fixups": {"first", "all"},
                      # `script` relabels the finished respelling into a writing system

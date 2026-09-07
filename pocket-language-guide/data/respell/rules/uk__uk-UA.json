@@ -862,6 +862,11 @@
     },
     {
       "slot": "any",
+      "ipa": "ʏ",
+      "out": "ю"
+    },
+    {
+      "slot": "any",
       "ipa": "ɯ",
       "out": "ю",
       "after_out": "ь"
@@ -948,6 +953,11 @@
       "slot": "any",
       "ipa": "ʰ",
       "out": "х"
+    },
+    {
+      "slot": "any",
+      "ipa": "r̝",
+      "out": "р"
     }
   ],
   "syllable_fixups": [

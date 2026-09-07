@@ -1,0 +1,855 @@
+{
+  "source": "cs",
+  "accent": "cs-CZ",
+  "status": "ready",
+  "version": "1",
+  "derives_from": "Czech has no single normative sound-to-letter transliteration standard the way Hungarian's AkH. or Korean's own regulation do, but the *shape* of the feature -- a bracketed native-letter pronunciation printed beside a foreign headword -- is already ordinary Czech lexicographic practice for loanwords (see the first deviation below), and Czech orthography is close enough to phonemic that most of what this table does is simply write the sound with the letter that already spells it natively. The three places Czech's own alphabet reaches further than a reader table in this corpus has before are ř (a raised alveolar trill with no equivalent anywhere else here), syllabic r/l (a syllable with no vowel letter, which `phonemesOf` and `syllabify` already carry as an ordinary consonant since every other reader table already needed it for English), and vowel length written with the vowel's own diacritic rather than a colon or doubling -- see the deviations for what each one buys.",
+  "deviations": [
+    {
+      "rule": "The Akademický slovník cizích slov (Petráčková, Kraus et al., eds., Academia, 1995) and comparable Czech dictionaries of loanwords print a bracketed pronunciation beside a foreign headword in ordinary Czech letters -- gentleman [džentlmen], software [softvér] -- which is the shape and the licence this whole column takes, the same standing Kopalinski's brackets give Polish's table and Duden's Unterpunkt gives none of them a device it needed.",
+      "why": "Taken as the general convention (a native-letter respelling beside the correct spelling is already sanctioned, not invented for this project) rather than as a source of individual letter-by-letter rulings: I do not have a copy of the dictionary in hand to quote a specific entry the way the Polish table quotes KSNG or the Hungarian table quotes AkH. Every individual phoneme mapping below is my own reasoning from Czech orthography and phonology, stated and argued on its own, not attributed to a rule I looked up."
+    },
+    {
+      "rule": "Czech genuinely marks stress nowhere in its own orthography, because its own stress is exceptionless (always the first syllable) and needs no mark.",
+      "why": "Not extended to this column, for the reason Polish's own table gives for the same fact about Polish: this column respells *foreign* words, where stress is not first-syllable and not predictable, so a Czech reader needs the cue precisely because their own language does not carry one. `caps` is the fallback already documented for a Latin script with no native stress mark, and it is Czech's situation exactly -- háček and čárka are both already spoken for (consonant softness and vowel length), leaving no spare diacritic the way Spanish or Russian have one."
+    },
+    {
+      "rule": "Vowel length could be written as a colon (Polish, Turkish) or by doubling the letter (the pre-existing Japanese convention).",
+      "why": "Neither: Czech's own script already has the real device -- á é í ó ú ý -- and `core/respell.js` gained a `length: accent` policy (composing a combining acute, reusing `STRESS_DEVICE.acute`'s own technique for a second call site) so this table can use it rather than approximate. Doubling was rejected for the reason it always is: a doubled vowel in Czech is potentially two syllables in a compound reading, and colon is simply not a mark Czech print ever uses for this. One simplification, stated rather than hidden: native Czech spells a long u as ů except at the literal start of a word (dům, kůň against úterý), and this column does not reproduce that alternation -- see `syllable_fixups`' own comment for why the obvious fix does not fit the engine's ordering, and every generated long u prints as ú."
+    },
+    {
+      "rule": "Czech's own /r̝/ has a predictable voiceless allophone after a voiceless consonant (tři, přes), which narrow IPA writes with an added ring.",
+      "why": "Not distinguished: Czech spelling has exactly one letter, ř, for both, because the alternation is automatic and never contrastive. `REPAIR[\"cs\"]` strips the ring at generation time so the ipa column carries the phonemic /r̝/ throughout, which is what this and every other reader table wants -- see core/respell.js's own comment on CONSONANT_TAIL."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "Mandarin's alveolo-palatal and retroflex series (tɕ ɕ dʑ vs ʈʂ ʂ ɖʐ), Polish's own three-way sibilant contrast, Russian's palatalised coronals",
+      "out": "č š dž (the plain postalveolar series)",
+      "why": "Czech has one postalveolar/affricate series, not two or three: no alveolo-palatal contrast at all. Every finer distinction these targets make collapses to š/ž/č/dž, which is the same merger a Czech speaker actually makes on these sounds."
+    },
+    {
+      "sounds": "aspiration (Mandarin, Korean, Hindi, Thai, Klingon)",
+      "out": "the same letter for both series",
+      "why": "Czech has no aspirated stops and no way to write one; `ph`/`kh` would read as two segments. Unlike Polish and Hungarian, this table does not even have a voicing contrast to fall back on for the unaspirated series where the target also has a plain voiced stop, because nothing in Czech's own phonology forces one -- so both series simply share the plain letter. The aspiration itself is a decision to drop (see deviations), not a gap."
+    },
+    {
+      "sounds": "the retroflex stops of Hindi and Mandarin, and the Arabic emphatics",
+      "out": "the plain dentals/alveolars",
+      "why": "Czech has no retroflex or pharyngealised series. The one retroflex-adjacent sound this table treats specially is Mandarin's r-coloured ɻ, which becomes ř rather than merging -- see the phoneme list."
+    },
+    {
+      "sounds": "front rounded vowels y/ø/œ (French, German, Turkish, Mandarin's ü)",
+      "out": "i / e",
+      "why": "Czech has nothing in the front-rounded space and no borrowed umlaut convention the way Kopalinski gives Polish one -- I have no Czech source for such a device, so this table does not invent one. /y/ merges with /i/, which is the same merger Czech's own y/i spelling already makes internally; /ø/ and /œ/ merge with /e/."
+    },
+    {
+      "sounds": "nasal vowels (French, Portuguese, Hindi)",
+      "out": "vowel + n",
+      "why": "Czech has no nasal vowels or nasal vowel letters, so the nasal quality survives only as a following n, the same repair every other non-nasal-vowel reader in this corpus takes."
+    }
+  ],
+  "policy": {
+    "syllable_separator": "-",
+    "word_separator": " ",
+    "stress": "caps",
+    "stress_min_syllables": 2,
+    "length": "accent",
+    "tone": "drop",
+    "max_onset": 3,
+    "fixups": "first",
+    "locale": "cs"
+  },
+  "legend": "VELKÁ PÍSMENA značí přízvučnou slabiku, čárka/kroužek nad samohláskou ji prodlužuje. Zbytek se čte jako běžná čeština.",
+  "phonemes": [
+    {
+      "slot": "nucleus",
+      "ipa": "a",
+      "out": "a"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑ",
+      "out": "a"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ",
+      "out": "a"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌ",
+      "out": "a"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "æ",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "e",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ə",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɤ",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɜ",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ø",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "i",
+      "out": "i"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɪ",
+      "out": "i"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɨ",
+      "out": "i"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "o",
+      "out": "o"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ",
+      "out": "o"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɒ",
+      "out": "o"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɵ",
+      "out": "o"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "u",
+      "out": "u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʊ",
+      "out": "u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʉ",
+      "out": "u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "y",
+      "out": "i"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯ",
+      "out": "u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɚ",
+      "out": "er"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɝ",
+      "out": "er"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʏ",
+      "out": "i"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ã",
+      "out": "an"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑ̃",
+      "out": "an"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ̃",
+      "out": "an"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ̃",
+      "out": "on"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ẽ",
+      "out": "en"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ̃",
+      "out": "en"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ̃",
+      "out": "en"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ĩ",
+      "out": "in"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ũ",
+      "out": "un"
+    },
+    {
+      "slot": "any",
+      "ipa": "ː",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˑ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̯",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˀ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˌ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɥ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʰ",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "b",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʰ",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "t̪",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "d",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɗ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰ",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡʰ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "q",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "qʰ",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "ť"
+    },
+    {
+      "slot": "any",
+      "ipa": "cʰ",
+      "out": "ť"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "ď"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟʰ",
+      "out": "ď"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʲ",
+      "out": "ť"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʲ",
+      "out": "ď"
+    },
+    {
+      "slot": "any",
+      "ipa": "nʲ",
+      "out": "ň"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "m",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "m̩",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "n",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "n̩",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɳ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɴ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "ň"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "n",
+      "before_onset": "k ɡ kʰ k͈ x"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "ng"
+    },
+    {
+      "slot": "any",
+      "ipa": "f",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɸ",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "v",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʋ",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "s̪",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "š"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʂ",
+      "out": "š"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "š"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒ",
+      "out": "ž"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʐ",
+      "out": "ž"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʑ",
+      "out": "ž"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɻ",
+      "out": "ř"
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "χ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "h",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɦ",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ħ",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɣ",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "θ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "ð",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʕ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "dˤ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "sˤ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "tˤ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ðˤ",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "zˤ",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "l",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɫ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɬ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɹ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽʰ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "r̝",
+      "out": "ř"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts̪",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts̪ʰ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "dz",
+      "out": "dz"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "č"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃʰ",
+      "out": "č"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃʲ",
+      "out": "č"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "č"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂʰ",
+      "out": "č"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒ",
+      "out": "dž"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʐ",
+      "out": "dž"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "č"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "č"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʑ",
+      "out": "dž"
+    },
+    {
+      "slot": "any",
+      "ipa": "pf",
+      "out": "pf"
+    },
+    {
+      "slot": "any",
+      "ipa": "p͈",
+      "out": "pp"
+    },
+    {
+      "slot": "any",
+      "ipa": "t͈",
+      "out": "tt"
+    },
+    {
+      "slot": "any",
+      "ipa": "k͈",
+      "out": "kk"
+    },
+    {
+      "slot": "any",
+      "ipa": "s͈",
+      "out": "ss"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ͈",
+      "out": "čč"
+    },
+    {
+      "slot": "any",
+      "ipa": "kː",
+      "out": "kk"
+    },
+    {
+      "slot": "any",
+      "ipa": "dː",
+      "out": "dd"
+    },
+    {
+      "slot": "any",
+      "ipa": "tː",
+      "out": "tt"
+    },
+    {
+      "slot": "any",
+      "ipa": "cː",
+      "out": "ťť"
+    },
+    {
+      "slot": "any",
+      "ipa": "pː",
+      "out": "pp"
+    },
+    {
+      "slot": "any",
+      "ipa": "bː",
+      "out": "bb"
+    },
+    {
+      "slot": "any",
+      "ipa": "t̪ː",
+      "out": "tt"
+    },
+    {
+      "slot": "any",
+      "ipa": "qː",
+      "out": "kk"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʰː",
+      "out": "dd"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰː",
+      "out": "tt"
+    }
+  ],
+  "syllable_fixups": [],
+  "note": "Three things this table can spell that no other reader in this corpus could, all real consequences of Czech's own alphabet rather than of this table's invention. **Vowel length** is the one that matters on the most rows: `ː` reaches the page from Hindi, Thai, Arabic, German, Hungarian, Japanese, Vietnamese and English alike, and every existing Latin-script reader either has no length contrast to draw on (Polish's historical length collapsed in the sixteenth century, which is why its table borrows Kopalinski's colon) or spends a borrowed convention on it. Czech kept the Common Slavic length distinction and still writes it natively, so `length: accent` puts Hindi's मैं on the page as `MÉN` rather than `ME:N` -- the length is the same diacritic a Czech reader already reads every day, not a new instruction. **ř** costs this table one phoneme (`r̝`, plus the fold in build_ipa.py's REPAIR that keeps its voiceless allophone from ever reaching the column) and, in return, is the only reader in the corpus that does not have to approximate Mandarin's r-coloured ɻ into an unrelated sound -- see the ɻ rule. **Syllabic r and l** needed nothing new at all: Czech's own `vlk`, `krk`, `prst` and `smrt` are ordinary words with no vowel letter, and `phonemesOf` already binds the syllabic mark for every other reader's sake (English `little`, `button`), so this table simply spells `r̩`/`l̩` with the plain letter the way Czech spelling already would.",
+  "policy_note": "`max_onset: 3` with no `reader_onsets`, matching Polish's own finding for the same reason: Czech opens native words with `vstř-` (vstřebat), `scvrnkl` (five consonants), `zmrzl-` and `zdrav-`, so its own onset inventory is already a superset of what any of the corpus's other twenty-two syllable structures can put at the head of a word -- there is nothing for a syllable-opening predicate to restrict.\n\n`fixups: 'first'`, with exactly one fixup (the ú/ů alternation), because nothing else in this table's own output collides the way Polish's `rz` digraph does with a literal r+z sequence -- checked directly, since Czech's own digraphs (ch, ť/ď/ň already single Unicode letters with a combining háček, dž) do not arise as accidental phoneme-boundary sequences anywhere `AFFRICATES`/`CONSONANT_TAIL` do not already bind them into one unit first."
+}

@@ -1,0 +1,13 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+introductions.my-name-is,माझे नाव {} आहे,,mājhē nāva {} āhē,mˈaːɟʰeː nˈaːv {} ˈaːheː,,2,mr-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,तुम्हाला भेटून आनंद झाला,,tumhālā bhēṭūna ānaṁda jhālā,tʊmhˈaːlaː bʰeːʈˈuːn aːnˈʌnd ɟʰˈaːlaː,,2,mr-agent-v1;ipa=espeak
+introductions.what-is-your-name,तुमचे नाव काय आहे?,,tumacē nāva kāya āhē?,tˈʊmcˌeː nˈaːv kˈaːj ˈaːheː,,2,mr-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,आम्ही एकत्र प्रवास करत आहोत,,āmhī ēkatra pravāsa karata āhōta,ˈaːmhi eːkˈʌtɾə pɾəvˈaːs kˈʌɾət aːhˈoːt,,2,mr-agent-v1;ipa=espeak
+introductions.this-is-my-friend,हे माझे मित्र आहेत,,hē mājhē mitra āhēta,hˈeː mˈaːɟʰeː mˈɪtɾə aːhˈeːt,,2,mr-agent-v1;ipa=espeak
+introductions.i-am-from,मी {} चा आहे,मी {} ची आहे,mī {} cā āhē,mˈi {} cˈaː ˈaːheː,male speaker / female speaker,2,mr-agent-v1;ipa=espeak
+introductions.where-are-you-from,तुम्ही कुठून आहात?,,tumhī kuṭhūna āhāta?,tˈʊmhi kʊʈʰˈuːn aːhˈaːt,,2,mr-agent-v1;ipa=espeak
+introductions.how-are-you,तुम्ही कसे आहात?,तुम्ही कशा आहात?,tumhī kasē āhāta?,tˈʊmhi kˈʌseː aːhˈaːt,to a woman: kashā,2,mr-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,मी पर्यटक आहे,मी टूरिस्ट आहे,mī paryaṭaka āhē,mˈi pˈʌrjəʈˌək ˈaːheː,,2,mr-agent-v1;ipa=espeak
+introductions.this-is-my-husband-wife,हा माझा नवरा / ही माझी बायको,,hā mājhā navarā / hī mājhī bāyakō,hˈaː mˈaːɟʰaː nˈʌvɾˌaː / hˈi mˈaːɟʰi bˈaːjkˌoː,my husband / my wife,2,mr-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,ही माझी मुलगी / हा माझा मुलगा,,hī mājhī mulagī / hā mājhā mulagā,hˈi mˈaːɟʰi mˈʊlɡˌi / hˈaː mˈaːɟʰaː mˈʊlɡˌaː,my daughter / my son,2,mr-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,मी एकटा प्रवास करत आहे,मी एकटी प्रवास करत आहे,mī ēkaṭā pravāsa karata āhē,mˈi ˈeːkʈˌaː pɾəvˈaːs kˈʌɾət ˈaːheː,male speaker / female speaker,2,mr-agent-v1;ipa=espeak

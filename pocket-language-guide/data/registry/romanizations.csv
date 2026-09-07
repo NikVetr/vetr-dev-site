@@ -6,3 +6,5 @@ ar,ala-lc,ā ī ū = aa ii uu · ḥ ṭ ṣ ḍ ẓ = h t s d z · ʿ ʾ = '
 bn,iso15919,ā ī ū = aa ii uu · ṭ ḍ ṇ ṛ = t d n r · ś ṣ = sh · ṁ = n · final a is silent
 ur,bgn,ā ī ū = aa ii uu · ṭ ḍ ṛ = t d r · ñ = n (nasal) · ’ = glottal stop / hamza
 ta,iso15919,ā ī ū ē ō = aa ii uu ee oo · ṭ ṇ ṟ ṉ ḷ = t n r n l · ḻ = zh · c = ch or s · letters do not show voicing
+te,iso15919,ā ī ū ē ō = aa ii uu ee oo · ṭ ḍ ṇ ḷ = t d n l · ś ṣ = sh · ṁ = n · r̥ = ri · h after a stop is a puff of air: kh gh th dh ph bh are one sound each
+mr,iso15919,ā ī ū ē ō = aa ii uu ee oo · ṭ ḍ ṇ ḷ = t d n l · ś ṣ = sh · ṁ = n · ḻ = retroflex l (ळ)

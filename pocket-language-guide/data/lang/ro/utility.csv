@@ -1,0 +1,16 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,Aș vrea să merg la {},,ˈaʃ vrˈea sə mˈerɡ la {},,2,ro-agent-v1;ipa=espeak
+utility-templates.please-give-me,"Dați-mi {}, vă rog",,"dˈatsʲimʲ {}, və rˈoɡ",,2,ro-agent-v1;ipa=espeak
+utility-templates.may-i,Pot {}?,,pˈot {},"the blank takes a Romanian short infinitive after a putea, which needs no further conjugation",2,ro-agent-v1;ipa=espeak
+utility-templates.please-do-not-add,"Fără {}, vă rog",,"fˈərə {}, və rˈoɡ",,2,ro-agent-v1;ipa=espeak
+utility-templates.do-you-have,Aveți {}?,,avˈetsʲ {},,2,ro-agent-v1;ipa=espeak
+utility-templates.please-write-the-number,"Scrieți cifra, vă rog",,"skrˈietsʲ tʃˈifra, və rˈoɡ",,2,ro-agent-v1;ipa=espeak
+utility-templates.i-need,Am nevoie de {},,am nevˈoje de {},,2,ro-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,Este un {} prin apropiere?,,jˌeste un {} prin ˌapropjˈeɾe,un defaults masculine/neuter; a feminine place noun takes o instead,2,ro-agent-v1;ipa=espeak
+utility-templates.how-much-is,Cât costă {}?,,kˈɨt kˈostə {},,2,ro-agent-v1;ipa=espeak
+utility-templates.is-this,Asta e {}?,,ˌasta ˈe {},"asta is the gender-invariant colloquial demonstrative, chosen because the slot's gender is unknown",2,ro-agent-v1;ipa=espeak
+utility-templates.please,"{}, vă rog",,"{}, və rˈoɡ",,2,ro-agent-v1;ipa=espeak
+utility-templates.i-am-looking-for,Caut {},,kaˈut {},,2,ro-agent-v1;ipa=espeak
+utility-templates.do-you-accept,Acceptați {}?,,ˌaktʃeptˈatsʲ {},,2,ro-agent-v1;ipa=espeak
+utility-templates.i-cannot-find,Nu găsesc {},,nu ɡəsˈesk {},,2,ro-agent-v1;ipa=espeak
+utility-templates.there-is-a-problem-with,Este o problemă cu {},,jˌeste o problˈemə ku {},,2,ro-agent-v1;ipa=espeak

@@ -1,0 +1,15 @@
+concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+slang.thats-good,బాగుంది,,bāguṁdi,baːɡundi,,2,te-slang-v1;ipa=espeak
+slang.thats-great,అదుర్స్!,సూపర్!,adurs!,adurs,,2,te-slang-v1;ipa=espeak
+slang.i-love-it,నాకు చాలా ఇష్టం,,nāku cālā iṣṭaṁ,naːku tʃaːlaː iʂʈam,,2,te-slang-v1;ipa=espeak
+slang.thats-bad,బాగోలేదు,,bāgōlēdu,baːɡoːleːdu,,2,te-slang-v1;ipa=espeak
+slang.delicious,చాలా రుచిగా ఉంది!,అదిరింది!,cālā rucigā uṁdi!,tʃaːlaː rutʃiɡaː undi,,2,te-slang-v1;ipa=espeak
+slang.thats-pricey,రేటు ఎక్కువ,చాలా ఖరీదు,rēṭu ekkuva,reːʈu ekkuʋa,,2,te-slang-v1;ipa=espeak
+slang.exactly,"అవును, నిజమే!",కరెక్ట్!,"avunu, nijamē!","aʋunu, nidʒameː",,2,te-slang-v1;ipa=espeak
+slang.no-worries,పరవాలేదులే,,paravālēdulē,paraʋaːleːduleː,the -lē clitic is what makes it a shrug,2,te-slang-v1;ipa=espeak
+slang.youre-welcome,ఎప్పుడైనా చెప్పండి,పరవాలేదు,eppuḍainā ceppaṁḍi,eppuɖaɪnaː tʃeppaɳɖi,tell me any time,2,te-slang-v1;ipa=espeak
+slang.seriously,నిజంగానా?!,,nijaṁgānā?!,nidʒaŋɡaːnaː,,2,te-slang-v1;ipa=espeak
+slang.im-good-thanks,"వద్దండీ, ధన్యవాదాలు",,"vaddaṁḍī, dhanyavādālu","ʋaddaɳɖiː, dʰanjaʋaːdaːlu","not wanted, thank you",2,te-slang-v1;ipa=espeak
+slang.lets-go,పోదాం పదండి!,వెళ్దాం!,pōdāṁ padaṁḍi!,poːdaːm padaɳɖi,,2,te-slang-v1;ipa=espeak
+slang.cheers,చీర్స్!,,cīrs!,tʃiːrs,borrowed; Telugu has no toasting formula of its own,2,te-slang-v1;ipa=espeak
+slang.see-you,మళ్ళీ కలుద్దాం!,వస్తా!,maḷḷī kaluddāṁ!,maɭɭiː kaluddaːm,vastā = 'I'll come' -- the ordinary casual parting,2,te-slang-v1;ipa=espeak

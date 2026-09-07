@@ -1183,6 +1183,11 @@
     },
     {
       "slot": "any",
+      "ipa": "ʏ",
+      "out": "イウ"
+    },
+    {
+      "slot": "any",
       "ipa": "ɨ",
       "out": "ウ",
       "if_inventory": "ʈʂ"
@@ -1191,6 +1196,11 @@
       "slot": "any",
       "ipa": "ɨ",
       "out": "イ"
+    },
+    {
+      "slot": "any",
+      "ipa": "r̝",
+      "out": "ル"
     }
   ],
   "syllable_fixups": [

@@ -1,0 +1,1010 @@
+{
+  "source": "nl",
+  "accent": "nl-NL",
+  "status": "ready",
+  "version": "1",
+  "derives_from": "INVENTED, per the same argument RESPELL-SYSTEMS.md makes for German: Van Dale (vandale.nl's own help page, 'Uitspraak in de Dikke Van Dale') states its pronunciation field uses IPA directly, and Dutch has no published simplified respelling key the way Spanish (DPD) or Turkish (TDK) do. So the invention is constrained rather than free, by ordinary Dutch spelling and by the Nederlandse Taalunie's own conventions for the two things a respelling most needs: the official post-1995 klemtoonteken (taaladvies.net, 'Klemtoonteken (algemeen)') for stress -- accent aigu on the stressed vowel, e.g. vóórkomen against voorkómen -- used here as the stress device since, unlike German's Unterpunkt/Unterstrich, it is a mark ABOVE the letter and so is one of the four the engine's STRESS_DEVICE can actually draw; and the open/closed-syllable vowel-length rule (ta-fel, one letter, long; tak-ken, two letters, short) for the length argument, read the same way German's table reads Duden's Laengenzeichen -- see the length deviation below for why the colon and not native doubling. The engine mechanics (aspirated-cluster decomposition, retroflex/affricate approximation shape, the ko/ru/pt/vi espeak-bug targets) are adapted from data/respell/rules/de__de-DE.json, which shares Dutch's own gaps (no aspiration series, no retroflexes, no dental fricatives) -- but the actual output LETTERS are re-derived throughout, because several of German's choices are wrong for Dutch if copied verbatim; see tmp/nl_respell_build.py's docstring for the full list, the sharpest being that German's u is back rounded and Dutch's u is front rounded, so its whole u/ü/ö vowel table would invert Dutch's own front/back rounded pair, and that German's sch is available as a catch-all for /ʃ ʒ/ where Dutch sch already means a different, contrastive sound (/sx/, school/schip) at the start of a syllable.",
+  "deviations": [
+    {
+      "rule": "German's table spells its own back rounded /u/ with the letter u, and /y ø œ/ with umlauts (ü ö ö)",
+      "why": "Overruled outright, not adapted: Dutch's own letter u is FRONT rounded ([y]/[ʏ]), and Dutch spells back rounded [u] as oe (voet, boek) -- the opposite assignment. This table therefore sends /u ʊ ɯ ʉ/ to oe and /y ʏ/ to u, and long /ø/ to eu (Dutch's own spelling of that vowel) with short /œ/ approximated by the same short front rounded letter, u. Copying German's table here would have inverted Dutch's own front/back rounded pair on every row with one of these six vowels -- the sharpest single trap in adapting a cognate table."
+    },
+    {
+      "rule": "German spells /ʃ ʒ ʂ ɕ ʑ/ all as sch, on the reasoning that German onset /j/ outnumbers /ʒ/ 4949 to 500 so sch is the safer merge",
+      "why": "Not available at all for Dutch, for a reason German does not have: Dutch sch is a real, contrastive digraph for /sx/ at a syllable's start (school, schip, schaap) -- so writing it for /ʃ/ would print an existing Dutch word-shape with the wrong sound, not merely an imprecise one. Dutch's own established loanword spelling for a postalveolar is sj/zj (sjaal, sjofel, and zj is attested for /ʒ/ in genre-type loans), used throughout; the affricates take tsj/dzj, the same country-name precedent (Tsjechie, Tsjaad) the German table leans on for tsch/dsch."
+    },
+    {
+      "rule": "German writes /w/ as u before a vowel and as an offglide elsewhere, specifically to avoid ever writing v, because German native w is [v]",
+      "why": "Not needed. Dutch native w is [ʋ], a labiodental approximant distinct from both v [v] and f [f] -- already the closest single Dutch letter to a labial glide, and not confusable with v the way German's is. Foreign /w/ is written w directly throughout."
+    },
+    {
+      "rule": "German spells onset /s/ as ss and reserves plain s for a pre-vocalic [z], because German intervocalic s is read voiced",
+      "why": "Not needed. Dutch s and z are each fairly consistently /s/ and /z/ in Dutch's own orthography (unlike German's onset-conditioned voicing), so both take the direct letter with no onset-specific doubling rule."
+    },
+    {
+      "rule": "RESPELL-SYSTEMS.md's own case for German's stress device: capitals, because the engine's STRESS_DEVICE cannot draw German's native Unterpunkt/Unterstrich (a mark BELOW the vowel)",
+      "why": "Does not apply to Dutch, which has a different native device that the engine CAN draw. The Nederlandse Taalunie's post-1995 spelling rule for the klemtoonteken uses the accent aigu (´) placed on the stressed vowel -- vóórkomen (to occur in court) against voorkómen (to prevent) -- and STRESS_DEVICE offers 'acute' as one of its four options. Used here as the primary device, joining Spanish, Portuguese and Russian rather than English, Turkish, Swahili and German's four capitals-users. One simplification recorded rather than silently made: the official rule places the accent on BOTH letters of a digraph representing one long vowel (búíten, ééuwig), and the engine's markNucleus marks only one letter of a nucleus -- so a respelled éu or éi carries the accent on its first letter only, which is short of the full written convention but still an unambiguous mark on the correct syllable."
+    },
+    {
+      "rule": "German's Laengenzeichen argument for taking the colon over native doubling: doubling /iː/ would give iee (wrong digraph) and doubling /y ø/ would give letter sequences (ii, ää, öö) German never writes",
+      "why": "The same structural conflict recurs in Dutch and is overruled the same way, for a Dutch-specific version of the reason. Dutch's own vowel-length rule is genuinely two rules, not one: an open syllable with a single vowel letter is automatically long (ta-fel), while a closed syllable doubles the letter for a long vowel (taak) and leaves it single for a short one (tak). A global policy switch cannot conditionally know which syllable shape it is in when it decides whether to double -- so the same problem German's table names (one letter meaning two different things depending on syllable structure) applies here too, and the colon sidesteps it exactly as it does for German and Turkish: a is short, a: is long, regardless of syllable shape."
+    },
+    {
+      "rule": "German forces max_onset to 1, citing the Amtliche Regelung's own coda-maximising syllable-division rule (Fens-ter, not Fen-ster)",
+      "why": "Not carried over. Dutch's own official word-division rule (Nederlandse Taalunie's afbreekregels) is onset-maximising, the opposite convention: a single intervocalic consonant goes with the FOLLOWING syllable (ta-fel, not taf-el), and a legal consonant cluster stays together and moves to the next syllable as a unit (in-stappen splits in-stap-pen, keeping the legal onset st together) -- which is the engine's own default maximum-onset behaviour. So this table leaves max_onset at its default (3) and sets no reader_onsets list, rather than importing German's forced single-consonant division, which is right for German's own schoolbook rule and wrong for Dutch's."
+    },
+    {
+      "rule": "Aspiration and gemination, decomposed",
+      "why": "Dutch has no aspirated stop series (voiceless stops are unaspirated, unlike English or German's own word-initial aspiration) and no phonemic consonant length. The decomposed-cluster rules (dʰ, bʰ, pʰ, tʰ, kʰ, ɡʰ, ʈʰ, ɖʰ, ɽʰ, cʰ, ɟʰ -> the plain unaspirated letter) and the standalone `ʰ -> ''` fallback are both carried over from the German table as-is. Recorded here explicitly per the batch brief's own warning about the Hindi/Bengali aspiration bug: mapping ʰ to nothing is safe and correct here because the base letter it decomposed from (d, b, p...) still prints and carries the rest of the phoneme -- the bug that trap describes is a diacritic mapping to nothing on ITS OWN, with no base letter surviving, which is not this table's shape. Gemination (pː etc.) likewise prints as a single letter rather than doubling, for the Duden reason the length deviation above already states for Dutch's own doubling rule: a doubled consonant asserts something about the PRECEDING VOWEL's length in Dutch spelling, not about the consonant, so doubling one to mark gemination would misspell the vowel it sits next to."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "/θ/ /ð/ (English think and this, Arabic thaa and dhaal, Swahili)",
+      "out": "s and d",
+      "why": "Dutch has neither sound and no letter for either. The documented substitution a Dutch speaker actually makes for English /θ/ is [s] or [t] (dat/dit-style 'dis, dat' jokes about Dutch English exist for a reason); [s] is used here since it needs no onset-position exception the way t would (t already spells a real Dutch stop). [d] for /ð/ for the parallel voiced reason."
+    },
+    {
+      "sounds": "/ʔ/ /ʕ/ and pharyngealisation ˤ, and Vietnamese glottalisation ˀ",
+      "out": "dropped",
+      "why": "Dutch, like German, introduces the articulation of a word-initial vowel with an unwritten glottal stop (harde aanzet), so a dropped hamza or glottal onset leaves an ordinary onsetless Dutch syllable and the reader supplies the stop unprompted, the same argument Duden Band 6 makes for German. The pharyngeals and Vietnamese's glottalised codas are a real loss with no Dutch letter at all."
+    },
+    {
+      "sounds": "/x/ /ɣ/ /ç/ /ħ/",
+      "out": "ch, g, ch, ch",
+      "why": "The first two are exact: Dutch's own g/ch contrast IS this pair (zacht [x], graag [ɣ] in most of the Netherlands), so a foreign /x/ or /ɣ/ is spelled with the Dutch letter for the identical sound rather than approximated. /ç/ (German ich-laut, Japanese /çi/) takes ch too, the nearest Dutch has, though standard Dutch does not front its own ch this far. /ħ/ (Arabic) is the one true approximation here, taking the velar for want of anything nearer."
+    },
+    {
+      "sounds": "/ɯ/ (Mandarin, Japanese, Korean, Thai, Turkish), /ɨ/ (Mandarin, Russian) and /ʉ/",
+      "out": "oe, i, oe",
+      "why": "Dutch has no unrounded back vowel and no central one. oe (Dutch's own back rounded letter) keeps height and backness and adds rounding for /ɯ/ and /ʉ/, which is the error a Dutch speaker makes anyway; i keeps height and frontness for the central /ɨ/, losing backness rather than rounding since Dutch i is already unrounded, which is the smaller of the two available errors."
+    },
+    {
+      "sounds": "/u ʊ/, /y ʏ/, /ø/, /œ/ and unstressed /ə/",
+      "out": "oe, u, eu, u, e",
+      "why": "Not approximations at all for the first four -- Dutch has its own /u/ (oe), /y ʏ/ (u) and /ø/ (eu) as native phonemes, which is where this table earns its keep rather than copying German's: German's own u/ü/ö do not sit on the same letters, since German u is back rounded where Dutch u is front rounded (see the deviation above). Short /œ/ is approximated with Dutch's own short front rounded vowel, u. Unstressed schwa is genuinely e in Dutch spelling (de, gemakkelijk), the same fact German's table uses for the identical letter."
+    },
+    {
+      "sounds": "/w/ (Mandarin, Swahili, Vietnamese, English, Korean, Japanese, Thai, Arabic, Spanish, Italian)",
+      "out": "w",
+      "why": "Direct, and this is the sharpest place Dutch is simply easier than German: Dutch native w is [ʋ], a labiodental approximant distinct from both v [v] and f [f], and close enough to a labial glide that no substitution is needed the way German needs one to avoid ever writing its own w=[v]."
+    },
+    {
+      "sounds": "/ɪ/ and /j/ as a falling offglide, and /aɪ eɪ ɔɪ aʊ/ where a target's own G2P does not already write a Dutch-shaped diphthong",
+      "out": "j, and aai/ee/oi/au",
+      "why": "Dutch's own diphthongs ui /œy/, ei~ij /ɛi/ and ou~au /ʌu/ are written directly wherever the source IPA already gives them (see the phoneme table). Where a target's G2P instead gives an English-shaped /aɪ eɪ ɔɪ aʊ/, this table spells them with the closest legible Dutch vowel-letter sequence rather than reusing ei for /aɪ/, which RESPELL-SYSTEMS.md's own German section names as a trap: mei for /meɪ/ would be read [mɛi], not [meː] plus a following glide."
+    },
+    {
+      "sounds": "/ɲ/ /ʎ/ and Russian palatalisation /ʲ/",
+      "out": "nj, lj, and j before a back vowel or nothing before a front one",
+      "why": "nj and lj are Dutch's own established spellings for exactly these sounds (anjer, Tanja-type names), inherited unchanged from the German table's identical reasoning: nj reads [ɲ]-ish by the same coarticulation German relies on. Russian's /ʲ/ is dropped before a front vowel, where Dutch's own ni/ti sequences already sound palatalised-adjacent, and written j before a back one."
+    },
+    {
+      "sounds": "/ʈ ɖ ɳ ɽ ʂ ʐ/ and the Mandarin retroflex series",
+      "out": "t d n r sj, and dzj/tsj for the affricates",
+      "why": "Dutch has no retroflexes, so the dental letters stand in, matching the German table's own reasoning -- but the sibilant lands on sj/zj rather than German's sch, for the reason the deviation above gives: Dutch sch already means /sx/."
+    },
+    {
+      "sounds": "aspiration (ʰ) and the Korean tense series",
+      "out": "dropped, and the plain (lenis) letter",
+      "why": "Dutch has no three-way stop contrast: voiceless stops are unaspirated, so ʰ carries no information a Dutch reader could use and is dropped, per the explicit deviation above. Guarded by unless_inventory \"#b #d #ɡ\" exactly as German's table is, which is what separates Korean (whose ipa carries b d g only as the lenis series' intervocalic allophones) from Thai and Hindi, where they are word-initial and contrastive."
+    }
+  ],
+  "policy": {
+    "syllable_separator": "-",
+    "word_separator": " ",
+    "stress": "acute",
+    "stress_min_syllables": 2,
+    "length": "colon",
+    "tone": "drop",
+    "locale": "nl",
+    "fixups": "all"
+  },
+  "splits": [],
+  "phonemes": [
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "θ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "ð",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "sj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʂ",
+      "out": "sj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "sj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒ",
+      "out": "zj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʑ",
+      "out": "zj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʐ",
+      "out": "zj"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "tsj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "tsj",
+      "if_inventory": "ʈʂʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "tsj"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "dzj",
+      "if_inventory": "tɕʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "tsj"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ͈",
+      "out": "tsj"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒ",
+      "out": "dzj"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʑ",
+      "out": "dzj"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "w"
+    },
+    {
+      "slot": "any",
+      "ipa": "u",
+      "out": "oe"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʊ",
+      "out": "oe"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɯ",
+      "out": "oe"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʉ",
+      "out": "oe"
+    },
+    {
+      "slot": "any",
+      "ipa": "y",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʏ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ø",
+      "out": "eu"
+    },
+    {
+      "slot": "any",
+      "ipa": "œ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɣ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "œy",
+      "out": "ui"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛi",
+      "out": "ei"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʌu",
+      "out": "ou"
+    },
+    {
+      "slot": "any",
+      "ipa": "aɪ",
+      "out": "aai"
+    },
+    {
+      "slot": "any",
+      "ipa": "eɪ",
+      "out": "ee"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɔɪ",
+      "out": "oi"
+    },
+    {
+      "slot": "any",
+      "ipa": "aʊ",
+      "out": "au"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɬ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "tsch"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂʰ",
+      "out": "tsch"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "cʰ",
+      "out": "tsch"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟʰ",
+      "out": "dsch"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽʰ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʰ",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡʰ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʰ",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰ",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "p͈",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "t͈",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "k͈",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "s͈",
+      "out": "ss"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ͈",
+      "out": "tsch"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "dsch",
+      "if_inventory": "tɕʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "tsch"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "dsch",
+      "if_inventory": "ʈʂʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "tsch"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "tsch"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒ",
+      "out": "dsch"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʑ",
+      "out": "dsch"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "dz",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "pf",
+      "out": "pf"
+    },
+    {
+      "slot": "onset",
+      "ipa": "p",
+      "out": "b",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "t",
+      "out": "d",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "k",
+      "out": "g",
+      "unless_inventory": "#b #d #ɡ"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "b",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "d",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɗ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "q",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡ",
+      "out": "g"
+    },
+    {
+      "slot": "coda",
+      "ipa": "c",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "tsch"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "g",
+      "if_inventory": "dʒ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "dsch"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʕ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "f",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɸ",
+      "out": "f"
+    },
+    {
+      "slot": "coda",
+      "ipa": "v",
+      "out": "f"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʋ",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "v",
+      "out": "w"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʋ",
+      "out": "w"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɻ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "ħ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɣ",
+      "out": "g"
+    },
+    {
+      "slot": "coda",
+      "ipa": "h",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "h",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "m̩",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "n̩",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "m",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "n",
+      "before_onset": "k ɡ x q ɣ kʰ k͈"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "ng"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɴ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɳ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "nj"
+    },
+    {
+      "slot": "any",
+      "ipa": "n",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "lj"
+    },
+    {
+      "slot": "any",
+      "ipa": "l",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɫ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɹ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɥ",
+      "out": "w"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ɪ",
+      "out": "j",
+      "after_out": "a e i o u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɪ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": "",
+      "after_out": "sj zj tsj dzj j"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʲ",
+      "out": "j",
+      "if_nucleus_head": "a ɑ ʌ ɐ o ɔ ɵ u ʊ ɯ ʉ ɨ ɤ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ː",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˀ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˤ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̪",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̩",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "͈",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̯",
+      "out": ""
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ̃ʊ̃",
+      "out": "aun"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɑ̃",
+      "out": "an"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɔ̃",
+      "out": "on"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛ̃",
+      "out": "en"
+    },
+    {
+      "slot": "any",
+      "ipa": "œ̃",
+      "out": "un"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ̃",
+      "out": "an"
+    },
+    {
+      "slot": "any",
+      "ipa": "ã",
+      "out": "an"
+    },
+    {
+      "slot": "any",
+      "ipa": "ẽ",
+      "out": "en"
+    },
+    {
+      "slot": "any",
+      "ipa": "ĩ",
+      "out": "in"
+    },
+    {
+      "slot": "any",
+      "ipa": "õ",
+      "out": "on"
+    },
+    {
+      "slot": "any",
+      "ipa": "ũ",
+      "out": "un"
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛː",
+      "out": "è"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɜː",
+      "out": "eu"
+    },
+    {
+      "slot": "any",
+      "ipa": "a",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɑ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "æ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʌ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "e",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ə",
+      "out": "a",
+      "if_inventory": "ʋ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ə",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɜ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɤ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "i",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɨ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "o",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɔ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɒ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɵ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɚ",
+      "out": "er"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɝ",
+      "out": "er"
+    },
+    {
+      "slot": "any",
+      "ipa": "r̝",
+      "out": "r"
+    }
+  ],
+  "syllable_fixups": [
+    {
+      "match": "ng([kg])",
+      "out": "n\\1"
+    },
+    {
+      "match": "nng",
+      "out": "ng"
+    }
+  ],
+  "targets": {
+    "ko": {
+      "comment": "Korean eo is [ʌ~ɔ] and Dutch also writes that quality o, same reasoning as the German table's targets block for this symbol.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "ʌ",
+          "out": "o"
+        }
+      ]
+    },
+    "ru": {
+      "comment": "espeak writes Russian palatalised з/с as /ʑ/, a plain sibilant it is not: здесь comes out with /ʑ/ where the sound is [zʲ]. Dutch z is a clean match for the voicing this symbol is actually carrying here, so it takes z rather than this table's general zj.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "ʑ",
+          "out": "z"
+        }
+      ]
+    },
+    "pt": {
+      "comment": "espeak writes the Portuguese reduced final vowel [ɨ] as /y/, a front rounded vowel it is not (noite -> nˈoɪtʃy). Dutch unstressed e is also [ə], the same fact the German table uses for the same bug.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "y",
+          "out": "e"
+        }
+      ]
+    },
+    "vi": {
+      "comment": "The same espeak defect with a different true value: Vietnamese ư is [ɨ~ɯ] and is written /y/ (được /ɗyəc/). Takes this table's own letter for /ɯ/ (oe), matching German's reasoning that it should agree with wherever else the table sends that vowel.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "y",
+          "out": "oe"
+        }
+      ]
+    }
+  },
+  "legend": "klemtoon: accent (´) op de beklemtoonde klinker; ′:′ betekent dat de klinker ervoor lang wordt uitgesproken. g/ch = twee verschillende Nederlandse klanken (zacht/hard). Verder gewoon Nederlands.",
+  "note": "Reader's legend, per RESPELL-SYSTEMS.md's method: the accent is the official Dutch klemtoonteken (taaladvies.net), and the colon is the one borrowed glyph, on the same standing it has in the German and Turkish tables -- a length mark for a language whose own doubling rule cannot be reused as a global policy switch. Everything else in this table is ordinary Dutch spelling.",
+  "policy_note": "max_onset left at the engine default (3, no reader_onsets list) rather than forced to 1 the way German's table is, because Dutch's own official word-division rule is onset-maximising -- the opposite of German's -- so the engine's default already matches Dutch's own schoolbook instinct. Not independently re-measured against a reader_onsets list of Dutch's own legal clusters the way the Spanish/Portuguese/French/Italian tables were; flagged as a place a fluent speaker's reading of the actual respelled onsets would be worth a second pass, since this table's onset handling is the one place it trusts the engine default rather than a measurement.",
+  "measurements": []
+}

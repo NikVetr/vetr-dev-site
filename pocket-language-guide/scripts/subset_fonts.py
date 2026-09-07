@@ -85,6 +85,29 @@ BENG_RANGES = [(0x0980, 0x09FF)]
 # government and daily life (see tmp/tamil.md). ௰ ௱ ௲ and ௹ come along too and no
 # row can reach them.
 TAML_RANGES = [(0x0B80, 0x0BFF)]
+# The whole Telugu block, for Bengali's and Tamil's reason plus one of its own.
+#
+# Telugu puts its vowel signs *above* the consonant (the talakattu ` ి` and its
+# relatives) and its conjuncts *below* the line as subscript consonants -- and the
+# subscript forms have no codepoints at all. The shaper reaches `lasubscripttelu` and
+# the other 35 through GSUB, which `subset_source`'s `layout_features = ["*"]` keeps,
+# so the request has to be the block whole rather than the letters the corpus happens
+# to use today: a conjunct is one row away and it is not a character. 100 of the
+# block's 128 codepoints are assigned and the subsetter intersects with the cmap in
+# any case. U+0C66..0C6F are the Telugu digits, which the pack does *not* print --
+# they arrive with the block and no row can reach them, exactly as Tamil's do.
+TELU_RANGES = [(0x0C00, 0x0C7F)]
+# The whole Gurmukhi block, for Bengali's, Tamil's and Telugu's reason and one of its
+# own: Gurmukhi's three subjoined consonants -- pairin ਹ ਰ ਵ -- have **no codepoints
+# at all**, and the shaper reaches them through GSUB, so the request has to be the
+# block plus `subset_source`'s `layout_features = ["*"]`. 80 of the block's 128
+# codepoints are assigned (checked against `unicodedata` rather than by eye; the other
+# 48 are Unicode leaving them unassigned) and both faces carry all 80. That includes
+# the addak U+0A71 and the nukta U+0A3C, the two marks the whole design of the Punjabi
+# reader table turns on, and the digits U+0A66..0A6F, which the pack does **not**
+# print -- they arrive with the block and no row can reach them, exactly as Tamil's
+# and Telugu's do.
+GURU_RANGES = [(0x0A00, 0x0A7F)]
 
 # Klingon pIqaD and Tengwar. These are the two scripts here that are **not in
 # Unicode**: both proposals were rejected, so they live in the Private Use Area by
@@ -173,6 +196,42 @@ FACES = {
     ("taml", 700, False): "NotoSansTamil-var.ttf",
     ("taml-serif", 400, False): "NotoSerifTamil-var.ttf",
     ("taml-serif", 700, False): "NotoSerifTamil-var.ttf",
+    # Telugu, and the one stack here that is neither Noto nor paired with a serif.
+    # **Noto Sans Telugu and Noto Serif Telugu throw in `vendor/fontkit.esm.js`** --
+    # 340 of the 49,140 aksharas Telugu can write, every consonant with a
+    # ra-subscript plus ి ీ ె ే, so ప్ర, శ్రీ and క్రి among them. The cause is 468
+    # NULL MarkBasePos base anchors, which are legal OpenType and which this fontkit
+    # dereferences without a null check; instancing and subsetting change nothing.
+    # See the note in fetch_fonts.py and tmp/telugu.md, which also records why Hind
+    # Guntur was chosen over the other twenty faces that do not throw. Static, like
+    # the Arabic pair and unlike every other stack here, because this family ships
+    # five real weights and needs no instancing.
+    #
+    # No `telu-serif`: the only OFL Telugu face with a claim to being a serif is the
+    # Noto Serif that throws. `stackFor` in core/fonts.js falls back to the sans face
+    # for a variant that is not shipped, which is what `arabic` above relies on -- it
+    # has no serif either.
+    ("telu", 400, False): "HindGuntur-Regular.ttf",
+    ("telu", 700, False): "HindGuntur-Bold.ttf",
+    # Gurmukhi. **Noto Sans Gurmukhi is refused and the shaper closed it**: it throws
+    # in `vendor/fontkit.esm.js` on 26,232 of the 59,280 aksharas Gurmukhi can write,
+    # including 680 of the 1,520 that have no subjoined consonant at all -- ਪੰਜਾਬੀ,
+    # ਸਿੰਘ, ਮੈਂ and ਸ੍ਰੀ among them -- because its GPOS holds 880 NULL MarkBasePos
+    # base anchors of 1,486 and this fontkit reads `.xCoordinate` off them. Telugu's
+    # defect in a worse proportion; see the note in fetch_fonts.py, and run
+    # `node tmp/pa/shapecheck.mjs` before choosing a face for gu, si, kn, ml or ne.
+    #
+    # **Noto Sans Gurmukhi *UI* is the same design with a GPOS that has none of them**
+    # -- byte-identical glyph bounding boxes, identical vertical metrics, zero throws
+    # -- so unlike Telugu this stack stays inside the Noto family and keeps a serif.
+    # It is the second source here to need a `LATIN_DONOR`, because the UI cut carries
+    # 43 codepoints of U+0020..024F and no letter of either case; the serif carries
+    # 284 and needs none, so the graft is on one face of the stack and not the other,
+    # which `build_face` already handles per source file.
+    ("guru", 400, False): "NotoSansGurmukhiUI-var.ttf",
+    ("guru", 700, False): "NotoSansGurmukhiUI-var.ttf",
+    ("guru-serif", 400, False): "NotoSerifGurmukhi-var.ttf",
+    ("guru-serif", 700, False): "NotoSerifGurmukhi-var.ttf",
 }
 
 # Sources that need a Latin face grafted in, and the face to graft.
@@ -191,8 +250,17 @@ FACES = {
 # identical widths, so the Latin lands on the Arabic baseline unscaled. The Arabic
 # face is merged first, so its `hhea`/`OS/2` metrics and its `name` table win and
 # the line box is unchanged.
+# Noto Sans Gurmukhi UI is the second, read off the same `getBestCmap()`: 43
+# codepoints of U+0020..024F -- the ASCII digits and punctuation and nothing else --
+# so no letter of either case and no `·` U+00B7, which `core/pack.js` joins emergency
+# numbers with. The *non*-UI Noto Sans Gurmukhi has 284 and would need no graft; it is
+# the file that throws in the shaper, which is why the graft is the cheaper of the two
+# costs. The donor is the variable Noto Sans, instanced to the same weight by
+# `subset_source`, so this is one family again: same upem, same x-height, and the
+# Latin the two do share has identical outlines.
 LATIN_DONOR = {"NotoSansArabic-Regular.ttf": "NotoSans-Regular.ttf",
-               "NotoSansArabic-Bold.ttf": "NotoSans-Bold.ttf"}
+               "NotoSansArabic-Bold.ttf": "NotoSans-Bold.ttf",
+               "NotoSansGurmukhiUI-var.ttf": "NotoSans-var.ttf"}
 
 # The same graft in the other direction, for the two conscripts. No Noto face has a
 # pIqaD or a tengwar glyph -- neither script is in Unicode -- so the four Latin
@@ -282,7 +350,78 @@ ALL_LANGS = ["en", "es", "fr", "de", "ko", "ar", "zh-Hans", "ja",
              # `ṭ ṇ ṟ ṉ ḷ ḻ ṅ ñ ṣ ś` -- of which `ḻ` U+1E3B and `ṟ` U+1E5F are the
              # two no earlier pack needed. Leaving a language out of this list is the
              # omission Italian shipped with for a whole language generation.
-             "ta"]
+             "ta",
+             # Telugu, whose own stack is `telu`. Here for the reason Hebrew, Persian,
+             # Urdu, Bengali and Tamil are: the four `latin` faces draw its
+             # `romanization_iso15919` and its `ipa` on every pair whose target is
+             # Telugu. What that romanisation brings that no earlier pack needed is
+             # **`r̥`** -- `r` plus U+0325 COMBINING RING BELOW, ISO 15919's vocalic r,
+             # which Telugu writes as ఋ/ృ. It is a *combining* mark rather than a
+             # precomposed letter, so it arrives through `LATIN_RANGES`' U+0300..036F
+             # block rather than through this union, and all sixteen `latin*.ttf`
+             # cmaps already carry it -- measured, the way Persian's `پ چ ژ گ` and
+             # Ukrainian's `і ї є ґ` were. The rest of the column (ā ī ū ē ō, ṭ ḍ ṇ ḷ
+             # ṟ, ś ṣ, ṅ ñ, ṁ ḥ) is already drawn for Tamil, Bengali and Hindi.
+             "te",
+             # Marathi shares `hi`'s stack, `deva` -- Devanagari's own font question
+             # was already answered when Hindi landed, and checked again rather than
+             # assumed: ळ U+0933, ऱ U+0931 and ॲ U+0972/ऑ U+0911 (the candra vowels
+             # Marathi uses for English loans) are all present in every shipped
+             # `deva*.ttf` face, via `fontTools.ttLib.TTFont.getBestCmap()` -- the
+             # Persian `پ چ ژ گ` result a third time. `DEVA_RANGES` below is the whole
+             # Devanagari block requested unconditionally for the `deva` stack, so
+             # this entry is only for the four `latin` faces, which draw Marathi's
+             # `romanization_iso15919` and `ipa` columns and the occasional Latin
+             # loan (`Wi-Fi`, `SIM`, `PIN`) in its section titles and emergency
+             # labels, on every pair whose target is Marathi.
+             "mr",
+             # Dutch, routed to `latin` via `Latn` -- no stack of its own needed, and
+             # this entry costs nothing further: checked rather than assumed, IJ/ij
+             # (U+0132/U+0133), Dutch's one unusual letter, is present in every
+             # shipped `latin*.ttf` face via `fontTools.ttLib.TTFont.getBestCmap()`.
+             # No romanisation column either -- Latin-scripted already -- so this
+             # entry is only for the language's own text, section titles and
+             # emergency labels, the Polish/Ukrainian/Romanian shape.
+             "nl",
+             # Romanian, routed to `latin` via `Latn` -- no stack of its own needed.
+             # Checked rather than assumed, the way Polish and Ukrainian were: ă â î
+             # ș ț and their capitals (U+0103/00C2/00EE/0219/021B and uppercase) are
+             # all present in every shipped `latin*.ttf`/`latin-cond*.ttf` cmap,
+             # confirmed with `fontTools.ttLib.TTFont.getBestCmap()` against the
+             # actual faces. â and î were already drawn for French; ă, ș and ț are
+             # new codepoints but cost nothing further. No romanisation column
+             # either -- Romanian is Latin-scripted already, so this entry is only
+             # for the language's own text, section titles and emergency labels.
+             "ro",
+             # Czech, routed to `latin` via `Latn` -- no stack of its own needed.
+             # Checked rather than assumed, the way Polish, Ukrainian and Romanian
+             # were: á č ď é ě í ň ó ř š ť ú ů ý ž and their capitals are all present
+             # in every shipped `latin*.ttf`/`latin-cond*.ttf` cmap, confirmed with
+             # `fontTools.ttLib.TTFont.getBestCmap()` against the actual faces --
+             # including the two checked hardest, ř U+0159/Ř U+0158 (caron on r,
+             # which no earlier pack needed) and ů U+016F/Ů U+016E (ring above, also
+             # new). No romanisation column either -- Czech is Latin-scripted
+             # already -- so this entry is only for the language's own text, section
+             # titles and emergency labels, the Polish/Ukrainian/Romanian shape.
+             "cs",
+             # Punjabi, whose own stack is `guru`. Here for the reason Hebrew,
+             # Persian, Urdu, Bengali, Tamil and Telugu are: the four `latin` faces
+             # draw its `romanization_iso15919` and its `ipa` on every pair whose
+             # target is Punjabi. What that romanisation brings that no earlier pack
+             # needed is **`ġ`** U+0121 for ਗ਼ -- g with a dot above, which arrives
+             # precomposed and is in all sixteen `latin*.ttf` cmaps -- while `ṛ` for
+             # ੜ, `ḷ` for ਲ਼, the underdots `ṭ ḍ ṇ`, `ś`, `ṁ` and the macrons
+             # ā ī ū ē ō are already drawn for Tamil, Telugu, Bengali and Hindi, and
+             # `x` for ਖ਼ is ASCII. Measured against the shipped faces rather than
+             # inferred, the way Persian's `پ چ ژ گ`, Ukrainian's `і ї є ґ`, Marathi's
+             # `ळ ऱ ॲ` and Czech's `ř ů` were.
+             #
+             # What the **`ipa`** column brings is the two Chao tone letters `˥` and
+             # `˩`, and those cost nothing either: `th`, `vi` and `zh-Hans` already put
+             # U+02B0..02FF in every Latin face through `LATIN_RANGES` at the top of
+             # this file. Punjabi is the only tonal Indic language in the corpus and
+             # its tone is free here for exactly that reason.
+             "pa"]
 STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                "latin-serif": ALL_LANGS, "latin-cond-serif": ALL_LANGS,
                "cjk-sc": ["zh-Hans"], "cjk-sc-serif": ["zh-Hans"],
@@ -307,6 +446,8 @@ STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                "deva": ["hi"], "deva-serif": ["hi"],
                "beng": ["bn"], "beng-serif": ["bn"],
                "taml": ["ta"], "taml-serif": ["ta"],
+               "telu": ["te"],
+               "guru": ["pa"], "guru-serif": ["pa"],
                "hebrew": ["he"], "hebrew-serif": ["he"]}
 
 
@@ -409,6 +550,10 @@ def coverage(stack):
         chars |= expand(BENG_RANGES)
     elif stack.startswith("taml"):
         chars |= expand(TAML_RANGES)
+    elif stack.startswith("telu"):
+        chars |= expand(TELU_RANGES)
+    elif stack.startswith("guru"):
+        chars |= expand(GURU_RANGES)
     elif stack.startswith("hebrew"):
         chars |= expand(HEBREW_RANGES)
     return chars
@@ -424,7 +569,19 @@ def subset_source(source, stack, weight, chars):
         # gvar never carried.
         if "wdth" in {a.axisTag for a in font["fvar"].axes}:
             axes["wdth"] = CONDENSED_WDTH if stack.startswith("latin-cond") else NORMAL_WDTH
-        instancer.instantiateVariableFont(font, axes, inplace=True, updateFontNames=True)
+        # **`updateFontNames` needs a STAT table with axis *values* in it, and one
+        # shipped source does not have one.** Noto Sans Gurmukhi UI declares its two
+        # axes in `DesignAxisRecord` and ships an empty `AxisValueArray`, which is
+        # legal enough for a shaper and makes `instancer` raise
+        # `ValueError: Cannot update name table since there are no STAT Axis Values`.
+        # Asking for the rename only when it can be answered is the whole fix: the
+        # face then keeps the family's own style name for both weights, which is
+        # cosmetic -- `core/fonts.js` and `manifest.json` key on the *file* name, and
+        # nameIDs 0, 13 and 14 (the copyright and the licence, which are the records
+        # the OFL cares about) are untouched either way.
+        stat = font.get("STAT")
+        named = bool(stat and getattr(stat.table, "AxisValueArray", None))
+        instancer.instantiateVariableFont(font, axes, inplace=True, updateFontNames=named)
 
     options = subset.Options()
     options.layout_features = ["*"]      # keep GSUB/GPOS so fontkit can shape

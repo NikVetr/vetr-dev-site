@@ -1,0 +1,94 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+numbers-money.l-ng,nul,,nˈʏl,,2,nl-agent-v1;ipa=espeak
+numbers-money.y,één,,ˈeːn,,2,nl-agent-v1;ipa=espeak
+numbers-money.r,twee,,tʋˈeː,,2,nl-agent-v1;ipa=espeak
+numbers-money.s-n,drie,,drˈi,,2,nl-agent-v1;ipa=espeak
+numbers-money.s,vier,,vˈir,,2,nl-agent-v1;ipa=espeak
+numbers-money.w,vijf,,vˈɛɪf,,2,nl-agent-v1;ipa=espeak
+numbers-money.li,zes,,zˈɛs,,2,nl-agent-v1;ipa=espeak
+numbers-money.q,zeven,,zˈeːvən,,2,nl-agent-v1;ipa=espeak
+numbers-money.b,acht,,ˈɑxt,,2,nl-agent-v1;ipa=espeak
+numbers-money.ji,negen,,nˈeːɣən,,2,nl-agent-v1;ipa=espeak
+numbers-money.sh,tien,,tˈin,,2,nl-agent-v1;ipa=espeak
+numbers-money.y-b-i,honderd,,hˈɔndərt,,2,nl-agent-v1;ipa=espeak
+numbers-money.y-qi-n,duizend,,dˈœyzənt,,2,nl-agent-v1;ipa=espeak
+numbers-money.y-w-n,tienduizend,,tˈindœyzənt,,2,nl-agent-v1;ipa=espeak
+numbers-money.b-n,half,de helft,hˈɑlf,,2,nl-agent-v1;ipa=espeak
+atm-cash.where-is-an-atm,Waar is een pinautomaat?,,ʋˈaːr ɪs ən pˌinʌʊtoːmˈaːt,,2,nl-agent-v1;ipa=espeak
+atm-cash.does-this-atm-take-foreign-cards,Accepteert deze pinautomaat buitenlandse kaarten?,,ˌɑksɛptˈɪr tˌeːzə pˌinʌʊtoːmˈaːt bˈœytənlˌɑndsə kˈaːrtən,,2,nl-agent-v1;ipa=espeak
+atm-cash.the-atm-kept-my-card,De pinautomaat heeft mijn kaart ingehouden.,,də pˌinʌʊtoːmˈaːt heːft mɛɪn kˈaːrt ˈɪnɣəhˌʌʊdən,,2,nl-agent-v1;ipa=espeak
+atm-cash.is-there-a-fee,Zijn er kosten aan verbonden?,,zɛɪn ər kˈɔstən aːn vərbˈɔndən,,2,nl-agent-v1;ipa=espeak
+atm-cash.the-card-was-declined,De kaart is geweigerd.,,də kˈaːrt ɪs ɣəʋˈɛɪɣərt,,2,nl-agent-v1;ipa=espeak
+atm-cash.what-is-the-exchange-rate,Wat is de wisselkoers?,,ʋɑt ɪs də ʋˌɪsɛlkˈurs,,2,nl-agent-v1;ipa=espeak
+atm-cash.no-money-came-out,Er kwam geen geld uit de automaat.,,ər kʋˈɑm ɣˈeːn ɣˈɛld œy tə ˌʌʊtoːmˈaːt,,2,nl-agent-v1;ipa=espeak
+atm-cash.where-can-i-change-money,Waar kan ik geld wisselen?,,ʋˈaːr kɑn ɪk ɣˈɛlt ʋˈɪsələn,,2,nl-agent-v1;ipa=espeak
+atm-cash.the-machine-is-out-of-service,De automaat is buiten gebruik.,,də ˌʌʊtoːmˈaːt ɪs bˈœytən ɣəbrˈœyk,,2,nl-agent-v1;ipa=espeak
+atm-cash.please-give-me-smaller-notes,"Mag ik kleinere biljetten, alstublieft?",,"mɑx ɪk klˈɛɪnərə bɪljˈɛtən, ˌɑlstʏblˈift",,2,nl-agent-v1;ipa=espeak
+atm-cash.do-you-have-change,Heeft u wisselgeld?,,heːft y ʋˈɪsɛlɣəlt,,2,nl-agent-v1;ipa=espeak
+atm-cash.may-i-pay-in,Kan ik in {} betalen?,,kɑn ɪk ˈɪn {} bətˈaːlən,,2,nl-agent-v1;ipa=espeak
+atm-cash.please-charge-in-local-currency,Reken alstublieft af in de lokale valuta.,,rˈeːkən ˌɑlstʏblˈift ˈɑf ɪn də loːkˈaːlə vaːlˈytaː,,2,nl-agent-v1;ipa=espeak
+atm-cash.where-can-i-get-coins,Waar kan ik munten krijgen?,,ʋˈaːr kɑn ɪk mˈʏntən krˈɛɪɣən,,2,nl-agent-v1;ipa=espeak
+atm-cash.is-there-a-minimum-for-cards,Is er een minimumbedrag voor kaartbetalingen?,,ɪs ər ən mˈinimˌʏmbɛdrˌɑx vɔːr kˈaːrtbətˌaːlɪŋən,,2,nl-agent-v1;ipa=espeak
+atm-cash.atm,pinautomaat,geldautomaat,pˌinʌʊtoːmˈaːt,,2,nl-agent-v1;ipa=espeak
+atm-cash.banknote,briefje,bankbiljet,brˈifjə,everyday word ('een briefje van twintig'); bankbiljet is the more formal term,2,nl-agent-v1;ipa=espeak
+atm-cash.coin,munt,,mˈʏnt,,2,nl-agent-v1;ipa=espeak
+atm-cash.cash-only,Alleen contant,,ɑlˈeːn kɔntˈɑnt,,2,nl-agent-v1;ipa=espeak
+atm-cash.fee,kosten,commissie,kˈɔstən,,2,nl-agent-v1;ipa=espeak
+atm-cash.change,wisselgeld,,ʋˈɪsɛlɣəlt,"money handed back, not the verb",2,nl-agent-v1;ipa=espeak
+atm-cash.exchange-rate,wisselkoers,,ʋˌɪsɛlkˈurs,,2,nl-agent-v1;ipa=espeak
+atm-cash.bank,bank,,bˈɑŋk,,2,nl-agent-v1;ipa=espeak
+atm-cash.money-exchange,wisselkantoor,,ʋˌɪsɛlkɑntˈoːr,,2,nl-agent-v1;ipa=espeak
+atm-cash.pin,pincode,,pɪnkˈoːdə,,2,nl-agent-v1;ipa=espeak
+numbers-money.euro,euro,,ˈøːroː,,2,nl-agent-v1;ipa=espeak
+numbers-money.euro-symbol,€,euro,,,2,nl-agent-v1
+numbers-money.li-ng,2 + maatwoord,,tʋˈeː mˈaːtʋɔːrt,,2,nl-agent-v1;ipa=espeak
+numbers-money.yu-n,yuan,,jˈyɑn,,2,nl-agent-v1;ipa=espeak
+numbers-money.ku-i,yuan (gesproken),,jˈyɑn ɣəsprˈoːkən,,2,nl-agent-v1;ipa=espeak
+numbers-money.number-and-classifier-notes,"Getallen opbouwen: 11 = shi yi; 20 = er shi; 21 = er shi yi. Telefoonnummers: 1 wordt vaak als yao uitgesproken. Maatwoorden: ge (algemeen), wei (mensen), zhang (kaartjes / platte voorwerpen), bei (kopjes), ping (flessen). jiao / mao = 0,1 yuan; fen = 0,01 yuan.",,,,2,nl-agent-v1
+numbers-money.2-items,2 stuks,,tʋˈeː stˈʏks,,2,nl-agent-v1;ipa=espeak
+numbers-money.yen,yen,,jˈɛn,,2,nl-agent-v1;ipa=espeak
+numbers-money.yen-symbol,yen (symbool),,jˈɛn sɪmbˈoːl,,2,nl-agent-v1;ipa=espeak
+numbers-money.number-and-classifier-notes-2,"Getallen opbouwen: 11 = juuichi; 20 = nijuu; 21 = nijuuichi. Telwoorden: -tsu (dingen), -mai (platte voorwerpen), -hon (lange voorwerpen), -nin (mensen), -hai (kopjes). Telefoon: 0 = zero of maru, 4 = yon, 7 = nana, 9 = kyuu.",,,,2,nl-agent-v1
+numbers-money.won,won,,ʋˈɔn,,2,nl-agent-v1;ipa=espeak
+numbers-money.won-symbol,won (symbool),,ʋˈɔn sɪmbˈoːl,,2,nl-agent-v1;ipa=espeak
+numbers-money.lira,lira,,lˈiraː,,2,nl-agent-v1;ipa=espeak
+numbers-money.lira-symbol,lira (symbool),,lˈiraː sɪmbˈoːl,,2,nl-agent-v1;ipa=espeak
+numbers-money.dong,dong,,dˈɔŋ,,2,nl-agent-v1;ipa=espeak
+numbers-money.dong-symbol,dong (symbool),,dˈɔŋ sɪmbˈoːl,,2,nl-agent-v1;ipa=espeak
+numbers-money.ruble,roebel,,rˈubəl,the naturalised Dutch word,2,nl-agent-v1;ipa=espeak
+numbers-money.ruble-symbol,roebel (symbool),,rˈubəl sɪmbˈoːl,,2,nl-agent-v1;ipa=espeak
+numbers-money.rupiah,rupiah,,rˈypiˌɑh,,2,nl-agent-v1;ipa=espeak
+numbers-money.rupiah-symbol,rupiah (symbool),,rˈypiˌɑh sɪmbˈoːl,,2,nl-agent-v1;ipa=espeak
+numbers-money.shilling,shilling,,ʃˈɪlɪŋ,,2,nl-agent-v1;ipa=espeak
+numbers-money.shilling-symbol,shilling (symbool),,ʃˈɪlɪŋ sɪmbˈoːl,,2,nl-agent-v1;ipa=espeak
+numbers-money.baht,baht,,bˈɑht,,2,nl-agent-v1;ipa=espeak
+numbers-money.baht-symbol,baht (symbool),,bˈɑht sɪmbˈoːl,,2,nl-agent-v1;ipa=espeak
+numbers-money.forint,forint,,fˈoːrɪnt,,2,nl-agent-v1;ipa=espeak
+numbers-money.forint-symbol,forint (symbool),,fˈoːrɪnt sɪmbˈoːl,,2,nl-agent-v1;ipa=espeak
+numbers-money.rupee,roepie,,rupˈi,the naturalised Dutch word,2,nl-agent-v1;ipa=espeak
+numbers-money.rupee-symbol,₹,roepie,,,2,nl-agent-v1
+numbers-money.dollar,dollar,$,dˈɔlɑr,,2,nl-agent-v1;ipa=espeak
+numbers-money.dollar-symbol,$,dollar,,,2,nl-agent-v1
+numbers-money.pound,pond,£,pˈɔnt,"Brits pond, the naturalised Dutch word",2,nl-agent-v1;ipa=espeak
+numbers-money.pound-symbol,£,pond,,,2,nl-agent-v1
+numbers-money.franc,frank,,frˈɑŋk,the naturalised Dutch word,2,nl-agent-v1;ipa=espeak
+numbers-money.franc-symbol,frank (symbool),,frˈɑŋk sɪmbˈoːl,,2,nl-agent-v1;ipa=espeak
+numbers-money.peso,peso,,pˈeːzoː,,2,nl-agent-v1;ipa=espeak
+numbers-money.peso-symbol,peso (symbool),,pˈeːzoː sɪmbˈoːl,,2,nl-agent-v1;ipa=espeak
+numbers-money.real,real,Braziliaanse real,rˈeːɑl,,2,nl-agent-v1;ipa=espeak
+numbers-money.real-symbol,real (symbool),,rˈeːɑl sɪmbˈoːl,,2,nl-agent-v1;ipa=espeak
+numbers-money.local-currency,lokale valuta,,loːkˈaːlə vaːlˈytaː,,2,nl-agent-v1;ipa=espeak
+numbers-money.lakh,100.000,,hˈɔndər tˌœyzɛnt,Dutch thousands separator is a full stop,2,nl-agent-v1;ipa=espeak
+numbers-money.crore,10.000.000,,tˈin mˌiljun,,2,nl-agent-v1;ipa=espeak
+numbers-money.shekel,sjekel,,ʃeːkˈɛl,the naturalised Dutch spelling,2,nl-agent-v1;ipa=espeak
+numbers-money.shekel-symbol,sjekel (symbool),,ʃeːkˈɛl sɪmbˈoːl,,2,nl-agent-v1;ipa=espeak
+numbers-money.rial,rial,,rˈiɑl,,2,nl-agent-v1;ipa=espeak
+numbers-money.toman,10 rial,,tˈin rˈiɑl,,2,nl-agent-v1;ipa=espeak
+numbers-money.zloty,zloty,,zlˈoːti,,2,nl-agent-v1;ipa=espeak
+numbers-money.zloty-symbol,zloty (symbool),,zlˈoːti sɪmbˈoːl,,2,nl-agent-v1;ipa=espeak
+numbers-money.hryvnia,hryvnia,,hrˈɪvniˌaː,,2,nl-agent-v1;ipa=espeak
+numbers-money.hryvnia-symbol,hryvnia (symbool),,hrˈɪvniˌaː sɪmbˈoːl,,2,nl-agent-v1;ipa=espeak
+numbers-money.leu,leu,lei,lˈøː,"singular leu, plural lei -- the plural is what a Dutch traveller actually reads on a price tag",2,nl-agent-v1;ipa=espeak
+numbers-money.leu-symbol,lei,leu,lˈɛɪ,"no stylised symbol exists; the plural word is what is printed, matching the concept's own reasoning",2,nl-agent-v1;ipa=espeak
+numbers-money.koruna,kroon,,,,2,gloss-only;scoped-away;name of the currency in this language
+numbers-money.koruna-symbol,kroon (symbool),,,,2,gloss-only;scoped-away;name of the currency in this language

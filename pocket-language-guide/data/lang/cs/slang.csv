@@ -1,0 +1,15 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+slang.thats-good,Fajn,,fˈajn,,2,cs-agent-v1;ipa=espeak
+slang.thats-great,Super!,Bezva!,sˈuper,,2,cs-agent-v1;ipa=espeak
+slang.i-love-it,Miluju to!,,mˈiluju tˈo,,2,cs-agent-v1;ipa=espeak
+slang.thats-bad,To je blbý,,tˈo je bˈl̩biː,"mild/casual, never about a person",2,cs-agent-v1;ipa=espeak
+slang.delicious,Mňam!,,mɲˈam,,2,cs-agent-v1;ipa=espeak
+slang.thats-pricey,To je drahota,,tˈo je drˈahota,,2,cs-agent-v1;ipa=espeak
+slang.exactly,Přesně!,,pr̝ˈesɲe,,2,cs-agent-v1;ipa=espeak
+slang.no-worries,V pohodě,,v pˈohoɟe,literally 'in ease/comfort' -- the ordinary Czech way to wave off an apology or a problem,2,cs-agent-v1;ipa=espeak
+slang.youre-welcome,Kdykoli!,,ɡdˈikoli,,2,cs-agent-v1;ipa=espeak
+slang.seriously,Fakt jo?!,,fˈakt jˈo,,2,cs-agent-v1;ipa=espeak
+slang.im-good-thanks,"Jsem v pohodě, díky",,"jsem v pˈohoɟe, ɟˈiːki",,2,cs-agent-v1;ipa=espeak
+slang.lets-go,Jdeme!,,jdˈeme,,2,cs-agent-v1;ipa=espeak
+slang.cheers,Na zdraví!,,nˈazdraviː,,2,cs-agent-v1;ipa=espeak
+slang.see-you,Ahoj!,,ˈahoj,"casual, doubling as hi/bye the way Czech Ahoj always has -- distinct from the formal Na shledanou",2,cs-agent-v1;ipa=espeak

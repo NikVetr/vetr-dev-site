@@ -1,0 +1,12 @@
+label,text
+_frame,{region}: {numbers}
+all services,všechny služby
+police,policie
+ambulance,záchranná služba
+fire,hasiči
+also works,funguje také
+fire and ambulance,hasiči + záchranná služba
+medical,lékařská pomoc
+tourist police,turistická policie
+police and ambulance,policie + záchranná služba
+gendarmerie,četnictvo

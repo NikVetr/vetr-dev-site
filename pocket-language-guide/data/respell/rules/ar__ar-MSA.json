@@ -1043,6 +1043,11 @@
     },
     {
       "slot": "nucleus",
+      "ipa": "ʏ",
+      "out": "ُ"
+    },
+    {
+      "slot": "nucleus",
       "ipa": "ø",
       "out": "ُ"
     },
@@ -1254,6 +1259,11 @@
       "slot": "any",
       "ipa": ",",
       "out": "،"
+    },
+    {
+      "slot": "any",
+      "ipa": "r̝",
+      "out": "ر"
     }
   ],
   "syllable_fixups": [
