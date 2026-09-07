@@ -129,6 +129,7 @@
   function explorer(container, { columns, getPair, settings, onChange = () => {}, onCell, onPoint, note = "", scales = null, maximumPoints = 250 }) {
     let selectedPair = null;
     container.replaceChildren();
+    const root = html("div", "relationship-explorer"); container.append(root);
     const controls = html("div", "relationship-controls");
     const body = html("div", "relationship-scroll"), caption = html("p", "relationship-note");
     function select(label, key, options) {
@@ -141,7 +142,7 @@
     select("Layout", "mode", [["mixed", "Pairs above · heatmap below"], ["mixed-reverse", "Heatmap above · pairs below"], ["pairs", "Pairs"], ["heatmap", "Heatmap"]]);
     select("Correlation", "correlation", [["spearman", "Spearman"], ["pearson", "Pearson"]]);
     if (scales) select("Values", "scale", scales);
-    const details = html("details", "relationship-features"), summary = html("summary", "", "Features");
+    const details = html("fieldset", "relationship-features"), summary = html("legend", "", "Features");
     details.append(summary);
     const choices = html("div", "relationship-feature-list");
     columns.forEach((column) => {
@@ -153,11 +154,12 @@
       });
       label.append(input, column.label); choices.append(label);
     });
-    details.append(choices); controls.append(details);
+    details.append(choices);
     const back = html("button", "text-button", "Back to matrix"); back.type = "button"; back.hidden = true;
     back.addEventListener("click", () => { selectedPair = null; render(); });
     controls.append(back);
-    container.append(controls, caption, body);
+    const workspace = html("div", "relationship-workspace"); workspace.append(body, details);
+    root.append(controls, caption, workspace);
     function render() {
       const selected = columns.filter((col) => settings.features.includes(col.key));
       summary.textContent = `Features (${selected.length})`;

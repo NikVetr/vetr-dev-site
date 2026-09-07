@@ -174,7 +174,7 @@
     showContours: true,
     showJobAdIntervals: true,
     modelMethod: "bayesian",
-    modelCompatibilityLevel: 89, modelEffectUnits: "percent", modelFocusWeights: null,
+    modelCompatibilityLevel: 89, modelEffectUnits: "percent", modelFocusWeights: null, modelTarget: "predictive",
     modelUseAdRanges: false,
     modelIncludeHighestOtherPay: true,
     modelProfile: { ...MODEL_PROFILE_DEFAULTS },
@@ -3214,15 +3214,37 @@
   }
 
   const modelPredictionCache = new Map();
+  function expectationView() { return state.modelTarget === "expectation"; }
+
+  function locationDistribution(prediction) {
+    if (state.modelMethod === "gp") return logNormalMixture([prediction.mu], [Math.sqrt(prediction.latentVariance)]);
+    const draws = Array.isArray(prediction.mu) ? prediction.mu : prediction.muDraws;
+    if (!draws?.length || draws.some((value) => !Number.isFinite(value))) throw new Error("Missing finite log-location draws");
+    const mean = draws.reduce((sum, value) => sum + value, 0) / draws.length;
+    const sd = Math.sqrt(draws.reduce((sum, value) => sum + (value - mean) ** 2, 0) / (draws.length - 1));
+    // Smooth only the plotted density; summaries use the retained draws directly.
+    const distribution = logNormalMixture(draws, draws.map(() => Math.max(1e-6, 1.06 * sd * draws.length ** -.2)));
+    return { ...distribution, expected: draws.reduce((sum, value) => sum + Math.exp(value), 0) / draws.length,
+      quantile: (p) => Math.exp(sampleQuantile(draws, p)),
+      cdf: (value) => draws.filter((mu) => mu <= Math.log(value)).length / draws.length };
+  }
+
   function currentModelPrediction() {
     if (!isCeoPosition()) return null;
-    const key = JSON.stringify([activeModelKey(), state.modelProfile, state.modelFocusWeights]);
+    const key = JSON.stringify([activeModelKey(), state.modelProfile, state.modelFocusWeights, state.modelTarget]);
     if (modelPredictionCache.has(key)) return modelPredictionCache.get(key);
     const prediction = state.modelMethod === "intercept" ? interceptModelPrediction()
       : state.modelMethod === "linear" ? linearModelPrediction()
         : state.modelMethod === "gam" ? gamModelPrediction()
           : ["svr", "gp"].includes(state.modelMethod) ? kernelModelPrediction() : bayesianModelPrediction();
-    if (prediction) prediction.quantileUncertaintyCache = new Map();
+    if (prediction) {
+      prediction.quantileUncertaintyCache = new Map();
+      if (expectationView()) {
+        prediction.distribution = locationDistribution(prediction);
+        prediction.expected = prediction.distribution.expected;
+        prediction.median = prediction.distribution.quantile(.5);
+      }
+    }
     if (modelPredictionCache.size >= 64) modelPredictionCache.clear();
     modelPredictionCache.set(key, prediction);
     return prediction;
@@ -3259,7 +3281,9 @@
     const tail = (1 - level) / 2;
     const z = SalaryModelMath.normalQuantile(probability);
     let interval;
-    if (isBayesianMethod()) {
+    if (expectationView()) {
+      interval = [prediction.distribution.quantile(tail), prediction.distribution.quantile(1 - tail)];
+    } else if (isBayesianMethod()) {
       const quantiles = prediction.mu.map((mu, i) => Math.exp(mu + prediction.model.draws.sigma[i][0] * z));
       interval = [sampleQuantile(quantiles, tail), sampleQuantile(quantiles, 1 - tail)];
     } else if (state.modelMethod === "gp") {
@@ -3717,7 +3741,7 @@
   function renderModelLegend() {
     refs.chartLegend.replaceChildren();
     [["model-legend-50", "50% prediction interval"], ["model-legend-80", "80% prediction interval"], ["model-legend-95", "95% prediction interval"]].forEach(([className, label]) => {
-      const item = document.createElement("span"); item.innerHTML = `<i class="swatch ${className}"></i> ${label}`; refs.chartLegend.append(item);
+      const item = document.createElement("span"); item.innerHTML = `<i class="swatch ${className}"></i> ${expectationView() ? label.replace("prediction", "estimation") : label}`; refs.chartLegend.append(item);
     });
   }
 
@@ -3827,7 +3851,7 @@
       }, {
         primaryLabel: "RP filing salary", primaryFormat: money,
         chartDetail: ["Model reference", "Excluded from model fitting"],
-        rankDetails: [["Predictive percentile", `${predictivePercentile.toFixed(1)} (model distribution)`]],
+        rankDetails: [[expectationView() ? "Estimation percentile" : "Predictive percentile", `${predictivePercentile.toFixed(1)} (model distribution)`]],
       }, markerSize);
       const markerBounds = referenceMarker.getBoundingClientRect();
       referenceAvoidBounds.push({
@@ -3865,17 +3889,19 @@
       label.textContent = modelMoney(value); svg.append(label);
     }
     const xTitle = svgElement("text", { x: margin.left + innerWidth / 2, y: height - 6, "text-anchor": "middle", fill: "#3E454A", "font-size": 10, "font-weight": 700 });
-    xTitle.textContent = "Predicted CEO Salary (July 2026 USD)"; svg.append(xTitle);
+    xTitle.textContent = expectationView() ? "Expected log salary, exponentiated (July 2026 USD)" : "Predicted CEO Salary (July 2026 USD)"; svg.append(xTitle);
     const yTitle = svgElement("text", { x: 14, y: margin.top + innerHeight / 2, transform: `rotate(-90 14 ${margin.top + innerHeight / 2})`, "text-anchor": "middle", fill: "#3E454A", "font-size": 10, "font-weight": 700 });
-    yTitle.textContent = "Predictive density"; svg.append(yTitle);
-    $("#chart-description").textContent = prediction.methodKey.startsWith("bayesian")
+    yTitle.textContent = expectationView() ? "Estimation density" : "Predictive density"; svg.append(yTitle);
+    $("#chart-description").textContent = expectationView() ? "Estimation uncertainty in exp(μ), the exponentiated expected log salary (SVR: fitted log-location). Shading shows central 50%, 80%, and 95% intervals."
+      : prediction.methodKey.startsWith("bayesian")
       ? "A posterior predictive distribution for CEO salary at the selected organization profile. Shaded regions show 50%, 80%, and 95% prediction intervals."
       : state.modelMethod === "gp" ? "A conditional Gaussian-process predictive distribution for CEO salary. Shaded regions show 50%, 80%, and 95% prediction intervals, with estimated kernel parameters held fixed."
       : "A residual-calibrated predictive distribution for CEO salary at the selected organization profile. Shaded regions show 50%, 80%, and 95% prediction intervals.";
     renderModelLegend();
-    refs.statN.textContent = modelMoney(prediction.expected); refs.statNUnit.textContent = "expected salary";
-    refs.statNeff.textContent = modelMoney(prediction.median); refs.statNeffUnit.textContent = "median";
-    refs.statCenter.textContent = `${modelMoney(intervals[80][0])}–${modelMoney(intervals[80][1])}`; refs.statCenterUnit.textContent = "80% prediction range";
+    refs.statN.textContent = modelMoney(prediction.expected); refs.statNUnit.textContent = expectationView() ? "mean of exp(μ)" : "expected salary";
+    refs.statNeff.textContent = modelMoney(prediction.median); refs.statNeffUnit.textContent = expectationView() ? "median estimate" : "median";
+    const summaryInterval = expectationView() ? quantileUncertainty(prediction, .5) : intervals[80];
+    refs.statCenter.textContent = summaryInterval.map(modelMoney).join("–"); refs.statCenterUnit.textContent = expectationView() ? `${state.modelCompatibilityLevel}% estimation interval` : "80% prediction range";
   }
 
   function renderChart() {
@@ -3973,6 +3999,10 @@
       const predictive = isBayesianMethod() || state.modelMethod === "gp";
       refs.quantileBasis.innerHTML = `${escapeHtml(currentModelComparisonRow().label)}. <strong>${predictive ? "Predictive salary percentiles:" : "Estimated salary percentiles:"}</strong> ${predictive ? "peer variation + model uncertainty" : "residual peer variation at the fitted prediction"}. <strong>${state.modelCompatibilityLevel}% ${intervalLabel} intervals:</strong> estimation uncertainty about each underlying peer percentile.${predictive ? " At P50, these intervals describe exp(expected log salary)." : ""}`;
       refs.quantileBasis.title = "For Bayesian models, percentile intervals summarize exp(μ + σ Φ⁻¹(p)) across posterior draws. At the median, this is exp(μ), where μ is expected log salary. Other percentiles also depend on peer spread. The headline percentile comes from the predictive distribution; it can differ from the center of the parameter-based interval. Expected salary means E(salary), not exp(E(log salary)). GP intervals condition on fitted kernel parameters; other methods use joint coefficient or bootstrap approximations.";
+      if (expectationView()) {
+        refs.quantileBasis.innerHTML = `${escapeHtml(currentModelComparisonRow().label)}. <strong>Estimation percentiles of exp(μ):</strong> uncertainty in expected log salary, exponentiated; no residual peer variation.${state.modelMethod === "svr" ? " SVR uses fitted log-location." : ""} The ${state.modelCompatibilityLevel}% interval above summarizes this same distribution.`;
+        refs.quantileBasis.title = "μ = E(log salary | inputs); exp(μ) is a geometric mean, not expected dollar salary. Bayesian: posterior draws; GP: conditional latent-function distribution; other methods: coefficient or bootstrap approximation. No second interval is estimated around these uncertainty percentiles.";
+      }
       refs.customQuantilesField.hidden = state.quantileGranularity !== "custom";
       const percentiles = quantilePercentiles();
       if (state.quantileGranularity === "custom") {
@@ -3984,14 +4014,17 @@
       percentiles.forEach((percentile) => {
         const value = prediction ? prediction.distribution.quantile(percentile / 100) : NaN;
         const button = document.createElement("button"); button.type = "button"; button.className = "quantile-cell";
+        button.dataset.value = value;
         const label = percentileParts(percentile);
         button.innerHTML = `<span>${label.number}<sup>${label.suffix}</sup> percentile</span><strong>${compactMoney(value)}</strong>`;
-        const interval = quantileUncertainty(prediction, percentile / 100);
-        const uncertainty = document.createElement("small"); uncertainty.className = "quantile-uncertainty";
-        uncertainty.textContent = `${compactMoney(interval[0])}–${compactMoney(interval[1])}`;
-        uncertainty.title = `${state.modelCompatibilityLevel}% ${intervalLabel} interval for the underlying peer percentile (estimation uncertainty).`;
-        button.append(uncertainty);
-        button.setAttribute("aria-label", `${formatPercentile(percentile)}: ${money(value)}; ${state.modelCompatibilityLevel}% ${intervalLabel} interval ${money(interval[0])} to ${money(interval[1])}`);
+        if (!expectationView()) {
+          const interval = quantileUncertainty(prediction, percentile / 100);
+          const uncertainty = document.createElement("small"); uncertainty.className = "quantile-uncertainty";
+          uncertainty.textContent = `${compactMoney(interval[0])}–${compactMoney(interval[1])}`;
+          uncertainty.title = `${state.modelCompatibilityLevel}% ${intervalLabel} interval for the underlying peer percentile (estimation uncertainty).`;
+          button.append(uncertainty);
+          button.setAttribute("aria-label", `${formatPercentile(percentile)}: ${money(value)}; ${state.modelCompatibilityLevel}% ${intervalLabel} interval ${money(interval[0])} to ${money(interval[1])}`);
+        } else button.setAttribute("aria-label", `${formatPercentile(percentile)} of exp(μ): ${money(value)}`);
         button.addEventListener("pointerenter", () => { state.hoverQuantile = value; renderChart(); });
         button.addEventListener("pointerleave", () => { state.hoverQuantile = null; renderChart(); });
         button.addEventListener("focus", () => { state.hoverQuantile = value; renderChart(); });
@@ -5127,7 +5160,7 @@
     refs.tablePanel.classList.toggle("is-model-view", isModel);
     refs.modelSettings.hidden = !isModel;
     if (isModel) {
-      refs.chartTitle.textContent = isCeoPosition() ? "Predicted CEO Salary for Selected Profile" : "CEO Prediction Model Unavailable";
+      refs.chartTitle.textContent = isCeoPosition() ? (expectationView() ? "Expected Log Salary · exp(μ)" : "Predicted CEO Salary for Selected Profile") : "CEO Prediction Model Unavailable";
     } else {
       const plotted = axisDescriptor(analysisAxisKey());
       refs.chartTitle.textContent = state.view === "scatter"
@@ -5292,6 +5325,7 @@
     if (isBayesianMethod() && state.modelUseAdRanges) compact.d = 1;
     if (state.modelMethod !== "intercept" && !state.modelIncludeHighestOtherPay) compact.x = 0;
     if (state.modelCompatibilityLevel !== 89) compact.u = state.modelCompatibilityLevel;
+    if (expectationView()) compact.target = "e";
     if (state.modelEffectUnits === "log") compact.v = "l";
     if (state.modelRobustnessIntervals) compact.ui = 1;
     if (isBayesianMethod() && state.modelProfile.focus_area === "__mixture__") compact.j = state.modelFocusWeights;
@@ -5564,10 +5598,10 @@
       }[state.modelMethod] || `Bayesian multilevel${state.modelUseAdRanges ? " + ad ranges" : ""}`;
       return {
         axisSignature: `model|${JSON.stringify(compactModelState())}`,
-        axisLabel: "Predicted CEO Salary", formatKind: "money", position: "CEO",
+        axisLabel: expectationView() ? "Expected log salary · exp(μ)" : "Predicted CEO Salary", formatKind: "money", position: "CEO",
         source: state.modelUseAdRanges && isBayesianMethod() ? "Form 990s + job-ad ranges" : "Form 990s",
         measure: "Modeled base salary", basis: "July 2026 USD", sample: "Fixed reviewed training cohort",
-        distribution: method, weighting: "Predictive model", filters: "Not applied to model training",
+        distribution: method, weighting: expectationView() ? "Log-location estimation" : "Predictive model", filters: "Not applied to model training",
         peerOverrides: "0 rows", weightEdits: "0 edits", weightParameters: "Model profile inputs",
         records: trainingRows.length,
         organizations: trainingOrganizations.size,
@@ -6519,7 +6553,7 @@
   }
 
   function runModelRobustnessAnalysis() {
-    const fingerprint = JSON.stringify([state.modelProfile, state.modelFocusWeights]);
+    const fingerprint = JSON.stringify([state.modelProfile, state.modelFocusWeights, state.modelTarget]);
     if (robustnessReport?.kind !== "model" || robustnessReport.fingerprint !== fingerprint) {
       const core = PREDICTIVE_MODEL.comparison.map((row) => withModelComparison(row, () => {
         const prediction = currentModelPrediction();
@@ -6806,7 +6840,7 @@
     const list = document.createElement("dl");
     if (result.kind === "model") {
       for (const [label, value] of [[robustnessQuantileLabel(key), money(result[key])],
-        ...(state.modelRobustnessIntervals && result.intervals ? [[`${state.modelCompatibilityLevel}% percentile interval`, result.intervals[key].map(money).join("–")]] : []),
+        ...(state.modelRobustnessIntervals && result.intervals ? [[`${state.modelCompatibilityLevel}% ${expectationView() ? "estimation" : "percentile"} interval`, result.intervals[key].map(money).join("–")]] : []),
         ["Other pay", result.row.includeHighestOtherPay ? "Yes" : "No"],
         ["Ad ranges", result.row.includeAdvertisedRanges ? "Yes" : "No"],
         ["Training records", result.rowCount]]) {
@@ -6869,7 +6903,7 @@
   }
 
   function robustnessPointAriaLabel(result, key, applies = true) {
-    if (result.kind === "model") return `${result.label}. ${robustnessQuantileLabel(key)} ${money(result[key])}. ${state.modelRobustnessIntervals && result.intervals ? `${state.modelCompatibilityLevel}% percentile interval ${result.intervals[key].map(money).join(" to ")}. ` : ""}${applies ? "Select to apply." : "Current model."}`;
+    if (result.kind === "model") return `${result.label}. ${robustnessQuantileLabel(key)} ${money(result[key])}. ${state.modelRobustnessIntervals && result.intervals ? `${state.modelCompatibilityLevel}% ${expectationView() ? "estimation" : "percentile"} interval ${result.intervals[key].map(money).join(" to ")}. ` : ""}${applies ? "Select to apply." : "Current model."}`;
     return result.label + ". " + robustnessQuantileLabel(key) + " " + money(result[key]) + ". "
       + result.rowCount + " records from " + result.organizationCount + " organizations; effective n "
       + result.organizationEffectiveN.toFixed(1) + ". " + (applies ? "Select to apply." : "Current analysis.");
@@ -6931,9 +6965,10 @@
     const width = Math.max(300, Math.floor(refs.robustnessResults.getBoundingClientRect().width || 720));
     const showIntervals = report.kind === "model" && state.modelRobustnessIntervals;
     const rowHeight = showIntervals ? valid.length * 12 + 22 : 28;
-    const height = showIntervals ? rowHeight * 3 + 40 : 132;
+    const locationOnly = report.kind === "model" && expectationView();
+    const height = showIntervals ? rowHeight * (locationOnly ? 1 : 3) + 40 : locationOnly ? 76 : 132;
     const margin = { left: width < 420 ? 54 : 64, right: width < 420 ? 8 : 14, top: 8, bottom: 24 };
-    const keys = [
+    const keys = locationOnly ? [["q50", "Median"]] : [
       ["q25", "P25"], ["q50", "Median"], ["q75", "P75"],
     ];
     const values = valid.flatMap((result) => keys.map(([key]) => result[key]));
@@ -7292,6 +7327,8 @@
     $("#model-robustness-interval-option").hidden = !modelView;
     $("#model-robustness-intervals").checked = state.modelRobustnessIntervals;
     $("#model-robustness-note").textContent = `All fitted models at the current profile. Points are salary percentiles; the diamond marks the selected model.${state.modelRobustnessIntervals ? ` Lines show ${state.modelCompatibilityLevel}% estimation intervals for the underlying peer percentiles; colors identify model families.` : " Model differences show sensitivity to the specification."} Select a point to use that model.`;
+    if (expectationView()) $("#model-robustness-note").textContent = `Median estimates of exp(μ) across models; SVR uses fitted log-location.${state.modelRobustnessIntervals ? ` Lines show ${state.modelCompatibilityLevel}% estimation intervals.` : ""} The diamond marks the selected model. Select a point to use that model.`;
+    $("#model-robustness-interval-option").lastChild.textContent = expectationView() ? " Show estimation intervals" : " Show percentile uncertainty intervals";
     weightingInput.disabled = !ceo || modelView;
     refs.robustnessWeightingOption.title = ceo ? "" : "Automatic weights are available only for the CEO benchmark.";
     sourceInput.disabled = !ceo || modelView;
@@ -7452,6 +7489,7 @@
     refs.modelRemote.value = state.modelProfile.remote_category;
     refs.modelFiscalSponsor.value = state.modelProfile.fiscal_sponsor_category;
     $("#model-compatibility-level").value = state.modelCompatibilityLevel;
+    $("#model-target").value = state.modelTarget;
     $("#model-effect-units").value = state.modelEffectUnits;
     $("#model-focus-mixture").hidden = state.modelProfile.focus_area !== "__mixture__";
     if (state.modelProfile.focus_area === "__mixture__" && !state.modelFocusWeights) state.modelFocusWeights = modelCategoryLevels("focus_area").map(() => 0);
@@ -7615,6 +7653,7 @@
     state.modelUseAdRanges = isBayesianMethod() && state.modelMethod !== "bayesianExact" && analysis.pm?.d === 1;
     state.modelIncludeHighestOtherPay = analysis.pm?.x !== 0;
     state.modelCompatibilityLevel = finiteNumber(analysis.pm?.u, 89, 50, 99);
+    state.modelTarget = analysis.pm?.target === "e" ? "expectation" : "predictive";
     state.modelEffectUnits = analysis.pm?.v === "l" ? "log" : "percent";
     state.modelRobustnessIntervals = analysis.pm?.ui === 1;
     const focusWeights = analysis.pm?.j;
@@ -7735,7 +7774,7 @@
       modelRobustnessIntervals: false,
       scatterMatrix: { mode: "mixed", correlation: "spearman", scale: "log", features: ["salary", "expenses", "revenue", "staff"] },
       chartColor: "tier", showContours: true, showJobAdIntervals: true,
-      modelCompatibilityLevel: 89, modelEffectUnits: "percent", modelFocusWeights: null,
+      modelCompatibilityLevel: 89, modelEffectUnits: "percent", modelFocusWeights: null, modelTarget: "predictive",
       modelMethod: "bayesian", modelUseAdRanges: false, modelIncludeHighestOtherPay: true,
       modelProfile: { ...MODEL_PROFILE_DEFAULTS },
       quantileGranularity: "quintiles", customQuantiles: "5, 25, 50, 75, 95", markCurve: true,
@@ -7984,6 +8023,9 @@
     syncModelControls();
     renderAll();
   }));
+  $("#model-target").addEventListener("change", (event) => {
+    state.modelTarget = event.target.value; state.hoverQuantile = null; renderAll();
+  });
   $("#model-compatibility-level").addEventListener("change", (event) => {
     const value = Number(event.target.value);
     state.modelCompatibilityLevel = Number.isFinite(value) && value >= 50 && value <= 99 ? value : 89;

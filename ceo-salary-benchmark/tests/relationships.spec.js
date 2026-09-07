@@ -7,6 +7,7 @@ test("record matrix supports features, transformations, layouts and scatter dril
   await page.locator("#scatter-plot-mode").selectOption("matrix");
   const matrix = page.locator("#scatter-matrix");
   await expect(matrix.locator(".relationship-cell")).toHaveCount(16);
+  await expect(matrix.locator(".relationship-feature-list")).toBeVisible();
   await expect(page.locator("#salary-chart")).toBeHidden();
   const cell = matrix.locator('.relationship-cell[data-x="expenses"][data-y="salary"]');
   expect(Number(await cell.getAttribute("data-n"))).toBeGreaterThan(20);
@@ -17,10 +18,8 @@ test("record matrix supports features, transformations, layouts and scatter dril
   const linearPearson = Number(await cell.getAttribute("data-correlation"));
   await matrix.getByLabel("Values", { exact: true }).selectOption("log");
   expect(Number(await cell.getAttribute("data-correlation"))).not.toBeCloseTo(linearPearson, 3);
-  await matrix.locator("summary").click();
   await matrix.getByLabel("Non-CEO highest-paid employee (40h)", { exact: true }).check();
   await expect(matrix.locator(".relationship-cell")).toHaveCount(25);
-  await matrix.locator("summary").click();
   await matrix.getByLabel("Layout", { exact: true }).selectOption("heatmap");
   await expect(matrix.locator("circle")).toHaveCount(0);
   await matrix.getByLabel("Layout", { exact: true }).selectOption("mixed-reverse");
@@ -39,11 +38,21 @@ test("record matrix supports features, transformations, layouts and scatter dril
   await matrix.getByRole("button", { name: "Expand ↗" }).click();
   const expanded = page.locator("#model-explanation-dialog");
   await expect(expanded.locator(".relationship-cell")).toHaveCount(25);
+  for (const viewport of [{ width: 1440, height: 900 }, { width: 900, height: 650 }, { width: 390, height: 844 }]) {
+    await page.setViewportSize(viewport);
+    await expect(expanded.locator(".relationship-features")).toBeVisible();
+    await expect.poll(() => expanded.evaluate((dialog) => {
+      const matrix = dialog.querySelector(".relationship-matrix").getBoundingClientRect();
+      const box = dialog.getBoundingClientRect();
+      return matrix.width > 0 && matrix.height > 0 && matrix.right <= box.right && matrix.bottom <= box.bottom;
+    })).toBe(true);
+    await expect(expanded.locator(".relationship-controls select").first()).toHaveCSS("padding-right", "28px");
+  }
+  await page.setViewportSize({ width: 1440, height: 900 });
   await page.screenshot({ path: "tmp/record-relationship-expanded.png" });
   await expanded.getByLabel("Layout", { exact: true }).selectOption("heatmap");
   await expanded.getByRole("button", { name: "Close model explanation" }).click();
   await expect(matrix.locator("circle")).toHaveCount(0);
-  await matrix.locator("summary").click();
   while (await matrix.locator('input:checked').count()) await matrix.locator('input:checked').first().uncheck();
   await expect(matrix).toContainText("Select at least two features.");
   expect(errors).toEqual([]);
@@ -57,6 +66,7 @@ test("joint drivers preserve aligned draws, support model families and place clo
   await page.locator("#model-joint-drivers").click();
   const dialog = page.locator("#model-explanation-dialog");
   await expect(dialog.locator(".relationship-cell")).toHaveCount(16);
+  await expect(dialog.locator(".relationship-feature-list")).toBeVisible();
   const expected = await page.evaluate(() => {
     const artifact = window.CEO_BENCHMARK_DATA.predictiveModel;
     const row = artifact.comparison.find((row) => row.method === "bayesian" && row.includeHighestOtherPay && !row.includeAdvertisedRanges);
@@ -77,10 +87,8 @@ test("joint drivers preserve aligned draws, support model families and place clo
   const n = Number(await cell.getAttribute("data-n")); expect(n).toBeGreaterThan(250);
   expect(n).toBe(expected.n);
   expect(Number(await cell.getAttribute("data-correlation"))).toBeCloseTo(expected.r, 12);
-  await dialog.locator("summary").click();
   await dialog.getByLabel("Focus: AI / technology", { exact: true }).check();
   await expect(dialog.locator(".relationship-cell")).toHaveCount(25);
-  await dialog.locator("summary").click();
   await page.screenshot({ path: "tmp/joint-driver-matrix.png" });
   await cell.click();
   await expect(dialog.locator(".relationship-cell")).toHaveCount(1);

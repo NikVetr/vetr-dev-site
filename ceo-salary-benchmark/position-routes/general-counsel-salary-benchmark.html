@@ -149,6 +149,7 @@ layout: null
           <label><span>Work model</span><select id="model-remote"></select></label>
           <label><span>Fiscal sponsor</span><select id="model-fiscal-sponsor"></select></label>
         </div>
+        <label class="field compact"><span>Prediction target</span><select id="model-target"><option value="predictive">Individual salary (predictive)</option><option value="expectation">Expected log salary (exp μ)</option></select></label>
         <label class="field compact"><span>Uncertainty interval (%)</span><input id="model-compatibility-level" type="number" min="50" max="99" step="1" value="89"></label>
         <label class="field compact"><span>Driver units</span><select id="model-effect-units"><option value="percent">Percent salary effect</option><option value="log">Log salary</option></select></label>
         <p id="model-settings-note" class="field-description"></p>
