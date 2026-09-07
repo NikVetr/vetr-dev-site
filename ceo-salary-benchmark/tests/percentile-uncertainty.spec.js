@@ -29,7 +29,7 @@ test("expectation target separates log-location uncertainty from predictive spre
   expect(location[2] - location[0]).toBeLessThan(predictive[2] - predictive[0]);
   await page.locator("#results-tab-robustness").click();
   await page.locator("#model-robustness-intervals").check();
-  await expect(page.locator(".robustness-percentile-interval")).toHaveCount(19);
+  await expect(page.locator(".robustness-percentile-interval")).toHaveCount(21);
   const interval = page.locator(`.robustness-spec-point[data-spec-id="${expected.id}"] .robustness-percentile-interval`);
   expect(Number(await interval.getAttribute("data-low"))).toBeCloseTo(expected.interval[0], 6);
   expect(Number(await interval.getAttribute("data-high"))).toBeCloseTo(expected.interval[1], 6);
@@ -38,8 +38,9 @@ test("expectation target separates log-location uncertainty from predictive spre
   const shared = page.url(); await page.goto(shared);
   await expect(page.locator("#model-target")).toHaveValue("expectation");
   await expect(page.locator("#model-title")).toHaveValue(title);
-  for (const method of ["gp", "linear", "gam", "svr", "intercept", "bayesianGam", "bayesianExact"]) {
-    await page.locator("#model-method").selectOption(method);
+  for (const method of ["gp", "linear", "gam", "gamCategorical", "svr", "intercept", "bayesianGam", "bayesianExact"]) {
+    await page.locator("#model-method").selectOption(method === "bayesianExact" ? "bayesian" : method);
+    if (method === "bayesianExact") await page.locator("#model-base-only").check();
     await expect(page.locator("#quantile-basis")).toContainText("Estimation percentiles of exp(μ)");
     const draws = await values(); expect(draws).toHaveLength(3);
     expect(draws.every(Number.isFinite)).toBe(true);
@@ -63,7 +64,7 @@ test("model robustness optionally shows estimation intervals for peer percentile
   await expect(toggle).not.toBeChecked();
   await expect(page.locator(".robustness-percentile-interval")).toHaveCount(0);
   await toggle.check();
-  await expect(page.locator(".robustness-percentile-interval")).toHaveCount(57);
+  await expect(page.locator(".robustness-percentile-interval")).toHaveCount(63);
   const expected = await page.evaluate(() => {
     const a = window.CEO_BENCHMARK_DATA.predictiveModel;
     const row = a.comparison.find((r) => r.method === "bayesian" && r.includeHighestOtherPay && !r.includeAdvertisedRanges);

@@ -1406,7 +1406,7 @@ test("model view starts from the RP profile and renders predictions, quantiles, 
   await page.locator("#analysis-column").screenshot({ path: "tmp/app-model-details-expanded.png" });
   await expect(page.locator("#model-method-description")).toBeVisible();
   await expect(page.locator("#model-comparison-body tr")).toHaveCount(defaults.comparisonRows);
-  expect(defaults.comparisonRows).toBe(19);
+  expect(defaults.comparisonRows).toBe(21);
   expect(defaults.comparison.map(({ key }) => key)).toEqual(expect.arrayContaining([
     "intercept", "linear", "linear_no_highest", "gam", "gam_no_highest",
     "bayesian", "bayesian_no_highest", "bayesian_ranges", "bayesian_ranges_no_highest",
@@ -1449,7 +1449,7 @@ test("model view starts from the RP profile and renders predictions, quantiles, 
   await expect(page.locator("#model-use-ad-ranges")).not.toBeChecked();
   await expect(page.locator("#model-category-inputs")).toBeHidden();
   for (const selector of numericModelInputs) await expect(page.locator(selector)).toBeEnabled();
-  await expect(page.locator("#quantile-basis")).toContainText("Scale linear");
+  await expect(page.locator("#quantile-basis")).toContainText("OLS");
   await expect(page.locator("#model-contributions .model-contribution")).toHaveCount(4);
   await expect(page.locator("#model-contributions .model-no-contributions")).toHaveCount(0);
   await expect(page.locator("#model-profile-support")).toHaveText("Typical");
@@ -1516,7 +1516,7 @@ test("model view starts from the RP profile and renders predictions, quantiles, 
   await expect(page.locator("#model-use-ad-ranges")).toBeDisabled();
   await expect(page.locator("#model-use-ad-ranges")).not.toBeChecked();
   await expect(page.locator("#model-training-count")).toHaveText(String(defaults.exactFilings));
-  await expect(page.locator("#quantile-basis")).toContainText("Numeric-input GAM");
+  await expect(page.locator("#quantile-basis")).toContainText("GAM · numeric");
   await expect(page.locator(".density-line")).toHaveCount(1);
   await expect.poll(() => {
     const encoded = new URL(page.url()).searchParams.get("s");
@@ -1694,7 +1694,7 @@ test("model state round-trips through the compact URL and participates in undo a
   await page.locator("#model-include-highest-other").uncheck();
   await expect(page.locator("#model-diagnostics")).toBeVisible();
   await expect(page.locator("#model-highest-other")).toBeDisabled();
-  await expect(page.locator("#model-comparison-body tr")).toHaveCount(19);
+  await expect(page.locator("#model-comparison-body tr")).toHaveCount(21);
   await expect(page.locator('#model-comparison-body tr[data-method-key="bayesian_no_highest"]')).toHaveClass(/is-selected/);
 
   const defaultExpenses = Number(await page.locator("#model-expenses").inputValue());
@@ -1780,7 +1780,7 @@ test("model specifications, percentile uncertainty, focus shares and driver figu
   expect(await page.locator(".quantile-cell strong").allTextContents()).toEqual(salary);
   expect(await page.locator(".quantile-uncertainty").allTextContents()).not.toEqual(wide);
   await page.getByRole("tab", { name: "Model details" }).click();
-  await expect(page.locator(".model-spec-button")).toHaveCount(19);
+  await expect(page.locator(".model-spec-button")).toHaveCount(21);
   await page.getByRole("button", { name: "Model specification: Bayesian GAM · with other pay", exact: true }).click();
   const dialog = page.locator("#model-explanation-dialog");
   await expect(dialog).toBeVisible();

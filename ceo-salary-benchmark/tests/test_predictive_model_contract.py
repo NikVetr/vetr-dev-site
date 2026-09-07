@@ -156,13 +156,13 @@ class PredictiveModelContractTest(unittest.TestCase):
             set(artifact["models"]),
             {
                 "bayesian", "bayesianNoHighest", "bayesianRanges",
-                "bayesianRangesNoHighest", "gam", "gamNoHighest", "intercept",
+                "bayesianRangesNoHighest", "gam", "gamNoHighest", "gamCategorical", "gamCategoricalNoHighest", "intercept",
                 "linear", "linearNoHighest",
                 "bayesianGam", "bayesianGamNoHighest", "bayesianGamRanges", "bayesianGamRangesNoHighest",
                 "svr", "svrNoHighest", "gp", "gpNoHighest", "bayesianExact", "bayesianExactNoHighest",
             },
         )
-        for model_key in ("bayesian", "bayesianRanges", "gam", "linear", "bayesianGam", "bayesianGamRanges", "svr", "gp", "bayesianExact"):
+        for model_key in ("bayesian", "bayesianRanges", "gam", "gamCategorical", "linear", "bayesianGam", "bayesianGamRanges", "svr", "gp", "bayesianExact"):
             self.assertEqual(
                 [item["key"] for item in artifact["models"][model_key]["preprocessing"]],
                 expected,
@@ -170,7 +170,7 @@ class PredictiveModelContractTest(unittest.TestCase):
             self.assertTrue(artifact["models"][model_key]["includeHighestOtherPay"])
         reduced = expected[:-1]
         for model_key in (
-            "bayesianNoHighest", "bayesianRangesNoHighest", "gamNoHighest",
+            "bayesianNoHighest", "bayesianRangesNoHighest", "gamNoHighest", "gamCategoricalNoHighest",
             "linearNoHighest",
             "bayesianGamNoHighest", "bayesianGamRangesNoHighest", "svrNoHighest", "gpNoHighest", "bayesianExactNoHighest",
         ):
@@ -202,7 +202,7 @@ class PredictiveModelContractTest(unittest.TestCase):
             for record in artifact["training"]["records"]
             if record["observation"] == "exact_base"
         ]
-        for model_key in ("intercept", "linear", "linearNoHighest", "gam", "gamNoHighest"):
+        for model_key in ("intercept", "linear", "linearNoHighest", "gam", "gamNoHighest", "gamCategorical", "gamCategoricalNoHighest"):
             model = artifact["models"][model_key]
             self.assertFalse(model["includeAdvertisedRanges"])
             self.assertEqual(model["trainingRecordIds"], exact_ids)
@@ -255,6 +255,7 @@ class PredictiveModelContractTest(unittest.TestCase):
             ("bayesian_exact_no_highest", False, False), ("bayesian_exact", True, False),
             ("svr_no_highest", False, False), ("svr", True, False),
             ("gp_no_highest", False, False), ("gp", True, False),
+            ("gam_categorical_no_highest", False, False), ("gam_categorical", True, False),
         ]
         self.assertEqual(
             [

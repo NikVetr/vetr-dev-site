@@ -6,18 +6,17 @@ These models estimate the distribution of **positive annual CEO base salary in J
 
 The versioned cohort contains **151 records in 147 organization-name groups**: 112 exact Schedule J base salaries, 12 reported-cash proxies, and 27 recruitment observations (25 ranges and two points). RP is a prediction profile only. Center for Public Integrity and Nuclear Threat Initiative are excluded pending reported-hours resolution; see the [reference-set audit](../../../ceo_reference_set_audit.md).
 
-There are 19 browser specifications:
+There are 21 browser specifications:
 
 | Family | Specifications | Evidence |
 | --- | --- | --- |
 | Intercept | One | Exact-base filings |
-| Scale linear | With/without highest non-CEO pay | Exact-base filings |
-| Numeric GAM | With/without highest non-CEO pay | Exact-base filings |
+| OLS | With/without highest non-CEO pay | Exact-base filings |
+| GAM | Numeric/categorical × with/without highest non-CEO pay | Exact-base filings |
 | RBF SVR | With/without highest non-CEO pay | Exact-base filings |
 | RBF Gaussian process | With/without highest non-CEO pay | Exact-base filings |
-| Bayesian multilevel linear | With/without other pay × filings/filings plus ads | Exact-base and cash-proxy filings; optional ads |
+| Bayesian multilevel | With/without other pay × base only/base and cash/base, cash and ads | Exact-base and cash-proxy filings; optional ads |
 | Bayesian multilevel additive | Same four variants | Same evidence model |
-| Bayesian exact base | With/without other pay | Exact-base filings only |
 
 Numeric inputs are standardized natural logs of expenses, revenue, employees, and optional highest disclosed non-CEO **40-hour-equivalent base pay**, with missingness indicators. Removing other pay removes both columns. Recruitment budgets proxy expenses and never duplicate revenue. Numeric preprocessing uses each training fold only.
 
@@ -25,7 +24,7 @@ Other pay is re-ranked after multiplying each eligible annual amount by 40 / com
 
 `otherPayDisclosure` records whether an eligible employee with missing base disclosure has cash pay exceeding the known maximum base. In that case, the highest known base need not be the highest base among listed eligible employees. RP and ORCID have this limitation. It is separate from the selection of employees onto the filing at all.
 
-Bayesian categorical inputs are focus, organization type, title group, CEO hiring market, work arrangement, fiscal sponsorship, and EA relationship. Their vocabulary is salary-blind. Functional overlap is the EA reference; the collapsed EA-adjacent label has one signed increment. Peer tiers and RP similarity scores are not predictors.
+Bayesian and categorical-GAM inputs are focus, organization type, title group, CEO hiring market, work arrangement, fiscal sponsorship, and EA relationship. Their vocabulary is salary-blind. Functional overlap is the EA reference; the collapsed EA-adjacent label has one signed increment. Peer tiers and RP similarity scores are not predictors.
 
 Hiring market concerns eligible work locations, separately from operating footprint. Staff eligibility is a labeled proxy where executive-specific evidence is unavailable. RP is fully remote with conditional international general-role eligibility. Current policies may postdate compensation; RP employee count also comes from a different filing year than its financial inputs.
 
@@ -65,9 +64,15 @@ Advertised points use the ad normal distribution. A range [L,U] contributes Phi(
 
 Four chains are used per fit: initially 400 warmup/500 retained draws for each of 100 CV fits; 800/1,000 for each of ten full fits. A CV fit failing the substantive convergence gates receives one refinement to 800/1,000 and must then pass the unchanged gates. The artifact records these folds in `fitConfiguration.cvRefinements`; the current cohort requires Bayesian GAM with other pay, fold 4. Adapt delta is .995/.999 and maximum tree depth 13. All salary, covariance, and fitted curvature parameters enter convergence checks. The app rejects failed R-hat, ESS, E-BFMI, divergence, and tree-depth gates. It exports 512 posterior draws per model; full chain CSVs are cached separately.
 
-## Numeric comparators
+## Frequentist GAM and numeric comparators
 
-The intercept and linear models use ordinary least squares on log pay. Constant/collinear design columns are explicitly removed and recorded. GAM uses mgcv REML cubic regression splines, k=4 per numeric input, plus active missingness indicators. Missing numeric values are set to the training log center.
+The intercept and OLS models use ordinary least squares on log pay. Constant/collinear design columns are explicitly removed and recorded. GAM uses mgcv REML cubic regression splines, k=4 per numeric input, plus active missingness indicators. Missing numeric values are set to the training log center.
+
+The categorical GAM adds all seven categorical fields through `s(field, bs = "re")`: one indicator per category with a shared ridge penalty within each field. REML estimates numeric smoothness and each categorical penalty jointly. These are partially pooled random intercepts, equivalent to independent Gaussian effects with empirically estimated variances. Fixed salary-blind factor vocabularies and `drop.unused.levels = FALSE` retain unobserved levels with uncertainty. Displayed category contrasts are centered over the taxonomy; EA uses Functional overlap. Joint coefficient draws include mgcv’s smoothing-parameter covariance correction and preserve dependence with numeric smooths.
+
+Both GAM variants use the same 112 exact-base outcomes, outer folds and nested residual calibration. With other pay, adding categories changes log RMSE from 0.2885 to 0.2823 and mean absolute percentage error from 21.94% to 21.51%. This single split suggests a modest improvement, not a stable ranking. The categorical GAM shares the Bayesian GAM’s predictor fields, but still differs in spline basis, penalties/priors, missing-input treatment and (for cash-inclusive Bayesian models) training evidence.
+
+`fit_categorical_gam.R` adds these two fitted variants to the production registry using the shared preprocessing, scoring and nested calibration functions. `categorical_gam.R` holds fitting and export logic. Independent provenance hashes cover both scripts, training data and R/mgcv versions; full fits are cached under ignored `tmp/categorical-gam/`.
 
 SVR uses e1071 epsilon regression with kernel exp(-gamma ||x-x'||²), no additional library scaling, C in {1,4,16}, gamma in {.1,.4}, and epsilon in {.05,.15}. Four organization-grouped inner folds choose the lowest log MSE, including fold-specific preprocessing. Residual calibration repeats tuning within each calibration-training set.
 
@@ -104,7 +109,7 @@ Two additional first-split fits compare raw reported other pay and setting an in
 
 The exact-base-only Bayesian linear options retain the original category vocabulary, priors, and joint missing-input model. They use 112 exact-base outcomes and exclude cash-only records and ads. Paired cash increments still estimate ancillary parameters but do not enter base predictions. With other pay, shared-split log RMSE is .281 versus .316 for the pooled cash-inclusive model; without it, .321 versus .336. The no-other-pay option has higher mean percentage error (.248 versus .234), so the improvement is metric-dependent. Exact-only validation conditions on base disclosure and cannot establish accuracy for unobserved cash-only base salaries.
 
-The Model robustness tab evaluates every variant at the same user profile, showing P25/median/P75 points with selection and an expandable table. CV headers sort by raw numeric values; other-pay and ad-range flags occupy separate columns.
+The Model robustness tab evaluates every variant at the same user profile, showing P25/median/P75 points with selection and an expandable table. CV headers sort by raw numeric values; base-only, categorical-input, other-pay and ad-range flags occupy separate columns.
 
 ## Browser uncertainty and drivers
 
@@ -125,6 +130,7 @@ python3 scripts/build_organization_operating_metadata.py
 python3 scripts/summarize_work_followup.py
 python3 benchmark/analysis/predictive_salary_models/prepare_model_data.py
 Rscript benchmark/analysis/predictive_salary_models/fit_salary_models.R .
+Rscript benchmark/analysis/predictive_salary_models/fit_categorical_gam.R .
 Rscript benchmark/analysis/predictive_salary_models/measurement_sensitivity.R .
 python3 benchmark/analysis/predictive_salary_models/summarize_measurement_study.py
 npm run build
@@ -134,7 +140,7 @@ npm run test:data
 npm test
 ```
 
-Preparation applies reviewed eligibility/geography overlays to app data and records input/script hashes. The build rejects stale hashes and any schema other than the supported production contract. Schema 3 contains all 19 named models, held-out record IDs, uncertainty arrays, category support counts, sampler diagnostics, and recorded R/package/CmdStan versions. `--quick` cannot replace a production artifact.
+Preparation applies reviewed eligibility/geography overlays to app data and records input/script hashes. The build rejects stale hashes and any schema other than the supported production contract. Schema 3 contains all 21 named models, held-out record IDs, uncertainty arrays, category support counts, sampler diagnostics, and recorded R/package/CmdStan versions. `--quick` cannot replace a production artifact.
 
 Large fits are stored under the ignored `tmp/predictive-model-cache/` with signatures covering Stan data, code, version, seed, and sampler settings. For the repository's worker cluster, `SALARY_CLUSTER_PREPARE=<requests-directory> Rscript .../prepare_cluster_fits.R .` exports exact requests for uncached fits. Run `cluster_fit_worker.R LOCAL_STAGE FIT_SIGNATURE PUBLISH_DIRECTORY` on a worker with CmdStan 2.38.0; it publishes integrity manifests plus four CSVs to the explicitly supplied, existing shared directory. Import verifies signatures and CSV checksums before postprocessing.
 

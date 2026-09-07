@@ -95,7 +95,7 @@ test("joint drivers preserve aligned draws, support model families and place clo
   await expect(dialog.getByRole("button", { name: "Back to matrix" })).toBeVisible();
   await dialog.getByRole("button", { name: "Back to matrix" }).click();
   const registry = await page.evaluate(() => window.CEO_BENCHMARK_DATA.predictiveModel.comparison);
-  for (const family of ["linear", "gam", "svr", "gp", "bayesianGam", "bayesianExact"]) {
+  for (const family of ["linear", "gam", "gamCategorical", "svr", "gp", "bayesianGam", "bayesianExact"]) {
     const row = registry.find((row) => row.method === family && row.includeHighestOtherPay);
     await dialog.getByLabel("Joint uncertainty model").selectOption(row.key);
     await expect(dialog.locator(".relationship-cell")).toHaveCount(16);

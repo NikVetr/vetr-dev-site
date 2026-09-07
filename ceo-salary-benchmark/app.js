@@ -2992,11 +2992,31 @@
     highest_other_base: "Non-CEO highest base pay (40h)",
   });
   const MODEL_FAMILY_COLORS = Object.freeze({
-    bayesian: "#0072b2", bayesianGam: "#d55e00", bayesianExact: "#007f5f",
-    linear: "#555b65", gam: "#a66b00", svr: "#8e5b9e", gp: "#2b8c9b", intercept: "#30343b",
+    bayesian: "#0072b2", bayesianGam: "#d55e00", bayesianExact: "#0072b2",
+    linear: "#555b65", gam: "#a66b00", gamCategorical: "#a66b00", svr: "#8e5b9e", gp: "#2b8c9b", intercept: "#30343b",
+  });
+  const MODEL_FAMILY_NAMES = Object.freeze({ bayesian: "Bayesian multilevel", bayesianExact: "Bayesian multilevel",
+    bayesianGam: "Bayesian GAM", linear: "OLS", gam: "GAM", gamCategorical: "GAM",
+    svr: "RBF support-vector regression", gp: "RBF Gaussian process", intercept: "Intercept only" });
+  PREDICTIVE_MODEL.comparison.forEach((row) => {
+    row.baseOnly = row.cashProxyN === 0 && !row.includeAdvertisedRanges;
+    row.includeCategories = isBayesianMethod(row.method) || row.method === "gamCategorical";
+    row.label = MODEL_FAMILY_NAMES[row.method]
+      + (row.method === "bayesianExact" ? " · base only" : "")
+      + (["gam", "gamCategorical"].includes(row.method) ? ` · ${row.includeCategories ? "categorical" : "numeric"}` : "")
+      + (row.includeAdvertisedRanges ? " + ad ranges" : "")
+      + (row.method === "intercept" ? "" : ` · ${row.includeHighestOtherPay ? "with" : "without"} other pay`);
   });
 
   function isBayesianMethod(method = state.modelMethod) { return ["bayesian", "bayesianGam", "bayesianExact"].includes(method); }
+  function usesModelCategories() { return isBayesianMethod() || state.modelMethod === "gamCategorical"; }
+  function categoryDraws(model, key) {
+    if (model.draws) return model.draws[key];
+    const feature = { focus: "focus_area", ea: "ea_relationship", organizationType: "organization_type", title: "title_group",
+      location: "location_scope", remote: "remote_category", fiscalSponsor: "fiscal_sponsor_category" }[key];
+    const effect = model.categoryEffects?.[feature];
+    return effect ? model.uncertainty.coefficientDraws.map((draw) => effect.basis.map((basis) => SalaryModelMath.dot(draw, basis))) : null;
+  }
 
   function activeModelKey() {
     if (state.modelMethod === "intercept") return "intercept";
@@ -3089,6 +3109,28 @@
       draws: model.uncertainty.coefficientDraws.map((draw) => SalaryModelMath.dot(draw,
         SalaryModelMath.interpolateBasis(model.uncertainty.effectBasis[index], vector[index]))),
     }));
+    if (model.categoryEffects) {
+      const labels = { focus_area: "Focus area", ea_relationship: "Effective Altruism", organization_type: "Organization type",
+        title_group: "Title group", location_scope: "CEO hiring market", remote_category: "Work model", fiscal_sponsor_category: "Fiscal sponsor" };
+      for (const [key, effect] of Object.entries(model.categoryEffects)) {
+        const value = state.modelProfile[key];
+        let basis;
+        if (key === "focus_area" && value === "__mixture__") {
+          const weights = state.modelFocusWeights;
+          if (!Array.isArray(weights) || weights.length !== effect.levels.length || weights.some((w) => !Number.isFinite(w) || w < 0) || Math.abs(weights.reduce((a, b) => a + b, 0) - 100) > .01) return null;
+          basis = effect.basis[0].map((_, j) => effect.basis.reduce((sum, row, i) => sum + weights[i] * row[j] / 100, 0));
+        } else if (value === "__average__") basis = effect.basis[0].map(() => 0);
+        else {
+          const index = effect.levels.indexOf(value);
+          if (index < 0) throw new Error(`Unknown GAM category: ${key}=${value}`);
+          basis = effect.basis[index];
+        }
+        const draws = model.uncertainty.coefficientDraws.map((draw) => SalaryModelMath.dot(draw, basis));
+        const estimate = value === "__average__" ? 0 : value === "__mixture__"
+          ? SalaryModelMath.dot(state.modelFocusWeights, effect.values) / 100 : effect.values[effect.levels.indexOf(value)];
+        contributions.push({ key, label: labels[key], value: estimate, draws });
+      }
+    }
     const mu = model.baseline + contributions.reduce((sum, contribution) => sum + contribution.value, 0);
     const muDraws = model.uncertainty.coefficientDraws.map((draw, i) => SalaryModelMath.dot(draw, model.uncertainty.baselineBasis)
       + contributions.reduce((sum, item) => sum + item.draws[i], 0));
@@ -3235,7 +3277,7 @@
     if (modelPredictionCache.has(key)) return modelPredictionCache.get(key);
     const prediction = state.modelMethod === "intercept" ? interceptModelPrediction()
       : state.modelMethod === "linear" ? linearModelPrediction()
-        : state.modelMethod === "gam" ? gamModelPrediction()
+        : ["gam", "gamCategorical"].includes(state.modelMethod) ? gamModelPrediction()
           : ["svr", "gp"].includes(state.modelMethod) ? kernelModelPrediction() : bayesianModelPrediction();
     if (prediction) {
       prediction.quantileUncertaintyCache = new Map();
@@ -3265,7 +3307,7 @@
   }
 
   function modelFamilyLabel(row) {
-    return refs.modelMethod.querySelector(`option[value="${row.method}"]`).textContent;
+    return MODEL_FAMILY_NAMES[row.method];
   }
 
   function renderProfileResults() {
@@ -3348,19 +3390,19 @@
       if (!Number.isFinite(value) || value <= 0) warnings.push(`${key} is invalid`);
       else if (definition && (value < definition.minimum || value > definition.maximum)) warnings.push(`${key.replace("compensation_", "")} is outside the training range`);
     });
-    if (isBayesianMethod()) {
+    if (usesModelCategories()) {
       PREDICTIVE_MODEL.categoricalFeatures.forEach((definition) => {
         const value = state.modelProfile[definition.key];
         if (value === "__average__") return;
         const index = definition.levels.indexOf(value);
-        const counts = (state.modelMethod === "bayesianExact" ? definition.exactCounts : state.modelUseAdRanges ? definition.counts : definition.filingCounts) || definition.counts || [];
+        const counts = (["bayesianExact", "gamCategorical"].includes(state.modelMethod) ? definition.exactCounts : state.modelUseAdRanges ? definition.counts : definition.filingCounts) || definition.counts || [];
         const count = counts[index] || 0;
         if (value === "__mixture__") return;
         if (count < 3) warnings.push(count ? `${value} has only ${count} record${count === 1 ? "" : "s"} in this model`
           : `${value} has no training examples; its effect relies on partial pooling`);
       });
       const eaIndex = PREDICTIVE_MODEL.eaLevels.indexOf(state.modelProfile.ea_relationship);
-      const eaCounts = (state.modelMethod === "bayesianExact" ? PREDICTIVE_MODEL.eaExactCounts : state.modelUseAdRanges ? PREDICTIVE_MODEL.eaCounts : PREDICTIVE_MODEL.eaFilingCounts)
+      const eaCounts = (["bayesianExact", "gamCategorical"].includes(state.modelMethod) ? PREDICTIVE_MODEL.eaExactCounts : state.modelUseAdRanges ? PREDICTIVE_MODEL.eaCounts : PREDICTIVE_MODEL.eaFilingCounts)
         || PREDICTIVE_MODEL.eaCounts || [];
       const eaCount = eaIndex >= 0 ? eaCounts[eaIndex] || 0 : 0;
       if (eaCount > 0 && eaCount < 3) warnings.push(`${state.modelProfile.ea_relationship} has only ${eaCount} record${eaCount === 1 ? "" : "s"} in this model`);
@@ -3443,24 +3485,26 @@
       low: normal ? normal.mean + SalaryModelMath.normalQuantile(tail) * normal.sd : sampleQuantile(draws, tail),
       high: normal ? normal.mean + SalaryModelMath.normalQuantile(1 - tail) * normal.sd : sampleQuantile(draws, 1 - tail),
     });
-    let entries = spec && prediction.model.draws
-      ? modelCategoryLevels(spec[1]).map((label, j) => summary(label, prediction.model.draws[spec[0]].map((draw) => draw[j])))
+    const drawsForCategory = spec && categoryDraws(prediction.model, spec[0]);
+    let entries = drawsForCategory
+      ? modelCategoryLevels(spec[1]).map((label, j) => summary(label, drawsForCategory.map((draw) => draw[j])))
       : [summary("Selected profile contrast", item.draws, item.normal)];
     if (spec) entries.unshift(summary("Selected profile contrast", item.draws));
     const omittedModels = [];
     if (allModels) {
       const comparisons = PREDICTIVE_MODEL.comparison.map((row) => ({ row,
         prediction: withModelComparison(row, currentModelPrediction),
-        modelLabel: `${modelFamilyLabel(row)} · other ${row.includeHighestOtherPay ? "✓" : "—"} · ads ${row.includeAdvertisedRanges ? "✓" : "—"}`,
+        modelLabel: `${modelFamilyLabel(row)} · base only ${row.baseOnly ? "✓" : "—"} · cats ${row.includeCategories ? "✓" : "—"} · other ${row.includeHighestOtherPay ? "✓" : "—"} · ads ${row.includeAdvertisedRanges ? "✓" : "—"}`,
       }));
       const effects = ["Selected profile contrast", ...(spec ? modelCategoryLevels(spec[1]) : [])];
       entries = effects.flatMap((label, level) => comparisons.flatMap(({ row, prediction: other, modelLabel }) => {
         const model = PREDICTIVE_MODEL.models[row.modelKey];
-        if (spec && !model.draws) {
-          if (!level) omittedModels.push(modelFamilyLabel(row));
+        const category = spec && categoryDraws(model, spec[0]);
+        if (spec && !category) {
+          if (!level) omittedModels.push(row.method === "gam" ? "GAM · numeric" : modelFamilyLabel(row));
           return [];
         }
-        const contribution = level ? { draws: model.draws[spec[0]].map((draw) => draw[level - 1]) }
+        const contribution = level ? { draws: category.map((draw) => draw[level - 1]) }
           : other?.contributions.find((candidate) => candidate.label === item.label);
         return [{ ...(contribution ? summary(label, contribution.draws, contribution.normal)
           : { label, unavailable: other ? "Not included" : "Invalid profile" }), key: row.key, modelLabel, color: MODEL_FAMILY_COLORS[row.method] }];
@@ -3491,7 +3535,7 @@
     const svg = svgElement("svg", { viewBox: `0 0 ${width} ${height}`, role: "img", "aria-label": `${item.label} effect forest plot`, class: "model-effect-figure" });
     const zero = x(0);
     svg.append(svgElement("line", { x1: zero, x2: zero, y1: allModels ? 42 : 12, y2: height - 60, stroke: "#a9b7bd", "stroke-dasharray": "4 4" }));
-    if (allModels) [[15, "Effect"], [modelX, "Model · other pay / ads"], [valueX, `Estimate [${state.modelCompatibilityLevel}% interval]`]].forEach(([x, title]) => {
+    if (allModels) [[15, "Effect"], [modelX, "Model / variant"], [valueX, `Estimate [${state.modelCompatibilityLevel}% interval]`]].forEach(([x, title]) => {
       const heading = svgElement("text", { x, y: 22, "font-size": 14, "font-weight": 700 }); heading.textContent = title; svg.append(heading);
     });
     entries.forEach((entry, i) => {
@@ -3589,11 +3633,11 @@
     const count = jointDraws?.length || Math.max(...contributions.map((item) => item.draws.length));
     const rawColumns = contributions.map((item, j) => ({ key: `profile:${j}`, label: item.label,
       draws: jointDraws ? jointDraws.map((draw) => draw[j]) : item.draws }));
-    if (prediction.model.draws) {
+    if (prediction.model.draws || prediction.model.categoryEffects) {
       const specs = [["focus", "focus_area", "Focus"], ["ea", "ea_relationship", "EA"], ["organizationType", "organization_type", "Org type"],
         ["title", "title_group", "Title"], ["location", "location_scope", "Hiring market"], ["remote", "remote_category", "Work model"], ["fiscalSponsor", "fiscal_sponsor_category", "Fiscal sponsor"]];
       specs.forEach(([key, feature, label]) => modelCategoryLevels(feature).forEach((level, j) => rawColumns.push({
-        key: `${key}:${j}`, label: `${label}: ${level}`, draws: prediction.model.draws[key].map((draw) => draw[j]),
+        key: `${key}:${j}`, label: `${label}: ${level}`, draws: categoryDraws(prediction.model, key).map((draw) => draw[j]),
       })));
     }
     if (rawColumns.some((column) => ![1, count].includes(column.draws.length) || column.draws.some((value) => !Number.isFinite(value)))) throw new Error("Joint driver draws must be finite and aligned");
@@ -3678,6 +3722,8 @@
       details.addEventListener("click", (event) => { event.stopPropagation(); showModelSpecification(row); });
       methodContents.append(details);
       const metrics = [
+        row.baseOnly ? "Yes" : "No",
+        row.includeCategories ? "Yes" : "No",
         row.includeHighestOtherPay ? "Yes" : "No",
         row.includeAdvertisedRanges ? "Yes" : "No",
         row.logRmse.toFixed(3),
@@ -5320,7 +5366,7 @@
 
   function compactModelState() {
     const compact = {};
-    const methodCode = { intercept: "i", linear: "l", gam: "g", bayesianGam: "a", bayesianExact: "e", svr: "s", gp: "p" }[state.modelMethod];
+    const methodCode = { intercept: "i", linear: "l", gam: "g", gamCategorical: "c", bayesianGam: "a", bayesianExact: "e", svr: "s", gp: "p" }[state.modelMethod];
     if (methodCode) compact.m = methodCode;
     if (isBayesianMethod() && state.modelUseAdRanges) compact.d = 1;
     if (state.modelMethod !== "intercept" && !state.modelIncludeHighestOtherPay) compact.x = 0;
@@ -5328,10 +5374,10 @@
     if (expectationView()) compact.target = "e";
     if (state.modelEffectUnits === "log") compact.v = "l";
     if (state.modelRobustnessIntervals) compact.ui = 1;
-    if (isBayesianMethod() && state.modelProfile.focus_area === "__mixture__") compact.j = state.modelFocusWeights;
+    if (usesModelCategories() && state.modelProfile.focus_area === "__mixture__") compact.j = state.modelFocusWeights;
     Object.entries(MODEL_PROFILE_URL_FIELDS).forEach(([key, code]) => {
       const categorical = MODEL_CATEGORY_KEYS.includes(key);
-      if (state.modelMethod === "intercept" || (!isBayesianMethod() && categorical)) return;
+      if (state.modelMethod === "intercept" || (!usesModelCategories() && categorical)) return;
       if (key === "highest_other_base" && !state.modelIncludeHighestOtherPay) return;
       const value = state.modelProfile[key];
       if (!categorical && !Number.isFinite(value)) return;
@@ -7162,7 +7208,7 @@
     const thead = document.createElement("thead");
     const header = document.createElement("tr");
     const modelReport = report.kind === "model";
-    (modelReport ? ["Method", "Other pay", "Ad ranges", "P25", "Median", "P75", "Records", "Warning"]
+    (modelReport ? ["Method", "Base only", "Categories", "Other pay", "Ad ranges", "P25", "Median", "P75", "Records", "Warning"]
       : ["Family", "Specification", "P25", "Median", "P75", "Records", "Orgs", "Org. eff. n", "Max org. share", "Warning"]).forEach((label) => {
       const cell = document.createElement("th");
       cell.scope = "col";
@@ -7175,7 +7221,7 @@
     all.forEach((result) => {
       const row = document.createElement("tr");
       if (result.status !== "valid") row.classList.add("is-invalid");
-      const values = modelReport ? [modelFamilyLabel(result.row), result.row.includeHighestOtherPay ? "Yes" : "No",
+      const values = modelReport ? [modelFamilyLabel(result.row), result.row.baseOnly ? "Yes" : "No", result.row.includeCategories ? "Yes" : "No", result.row.includeHighestOtherPay ? "Yes" : "No",
         result.row.includeAdvertisedRanges ? "Yes" : "No",
         ...["q25", "q50", "q75"].map((key) => result.status === "valid" ? compactMoney(result[key]) : "—"),
         result.rowCount, result.warning] : [
@@ -7435,14 +7481,14 @@
 
   function activeModelCategoryCounts(key) {
     if (key === "ea_relationship") {
-      return (state.modelMethod === "bayesianExact" ? PREDICTIVE_MODEL.eaExactCounts : state.modelUseAdRanges ? PREDICTIVE_MODEL.eaCounts : PREDICTIVE_MODEL.eaFilingCounts)
+      return (["bayesianExact", "gamCategorical"].includes(state.modelMethod) ? PREDICTIVE_MODEL.eaExactCounts : state.modelUseAdRanges ? PREDICTIVE_MODEL.eaCounts : PREDICTIVE_MODEL.eaFilingCounts)
         || PREDICTIVE_MODEL.eaCounts;
     }
     const definition = modelCategoryDefinition(key);
-    return (state.modelMethod === "bayesianExact" ? definition?.exactCounts : state.modelUseAdRanges ? definition?.counts : definition?.filingCounts) || definition?.counts;
+    return (["bayesianExact", "gamCategorical"].includes(state.modelMethod) ? definition?.exactCounts : state.modelUseAdRanges ? definition?.counts : definition?.filingCounts) || definition?.counts;
   }
 
-  function populateModelControls({ normalize = isBayesianMethod() } = {}) {
+  function populateModelControls({ normalize = usesModelCategories() } = {}) {
     const definitions = [
       [refs.modelFocus, "focus_area", true],
       [refs.modelEa, "ea_relationship", false],
@@ -7455,7 +7501,7 @@
     definitions.forEach(([select, key, includeAverage]) => {
       const allLevels = modelCategoryLevels(key);
       const counts = activeModelCategoryCounts(key);
-      const supportedLevels = isBayesianMethod() && Array.isArray(counts)
+      const supportedLevels = usesModelCategories() && Array.isArray(counts)
         ? allLevels.filter((level, index) => Number(counts[index]) > 0) : allLevels;
       if (normalize && !["__average__", "__mixture__"].includes(state.modelProfile[key]) && !allLevels.includes(state.modelProfile[key])) {
         const reference = MODEL_PROFILE_DEFAULTS[key];
@@ -7476,7 +7522,7 @@
 
   function syncModelControls() {
     populateModelControls();
-    refs.modelMethod.value = state.modelMethod;
+    refs.modelMethod.value = state.modelMethod === "bayesianExact" ? "bayesian" : state.modelMethod;
     refs.modelExpenses.value = state.modelProfile.expenses;
     refs.modelRevenue.value = state.modelProfile.revenue;
     refs.modelStaff.value = state.modelProfile.staff;
@@ -7512,7 +7558,11 @@
     const intercept = state.modelMethod === "intercept";
     refs.modelUseAdRanges.checked = bayesian && state.modelUseAdRanges;
     refs.modelIncludeHighestOtherPay.checked = state.modelIncludeHighestOtherPay;
-    refs.modelCategoryInputs.hidden = !bayesian;
+    refs.modelCategoryInputs.hidden = !usesModelCategories();
+    const baseChoice = ["bayesian", "bayesianExact"].includes(state.modelMethod);
+    $("#model-base-only").checked = currentModelComparisonRow().baseOnly;
+    $("#model-base-only").disabled = !baseChoice;
+    $("#model-base-only-field").classList.toggle("is-disabled", !baseChoice);
     refs.modelUseAdRanges.disabled = !allowsAds;
     refs.modelIncludeHighestOtherPay.disabled = intercept;
     refs.modelAdRangesField.classList.toggle("is-disabled", !allowsAds);
@@ -7649,7 +7699,7 @@
       features: Array.isArray(analysis.mx?.features) ? [...new Set(analysis.mx.features)].filter((key) => Object.hasOwn(numericVariables, key) || ["scatterX", "scatterY"].includes(key)) : ["salary", "expenses", "revenue", "staff"],
     };
     if (state.view === "model" && !isCeoPosition()) state.view = "histogram";
-    state.modelMethod = ({ i: "intercept", l: "linear", g: "gam", a: "bayesianGam", e: "bayesianExact", s: "svr", p: "gp" })[analysis.pm?.m] || "bayesian";
+    state.modelMethod = ({ i: "intercept", l: "linear", g: "gam", c: "gamCategorical", a: "bayesianGam", e: "bayesianExact", s: "svr", p: "gp" })[analysis.pm?.m] || "bayesian";
     state.modelUseAdRanges = isBayesianMethod() && state.modelMethod !== "bayesianExact" && analysis.pm?.d === 1;
     state.modelIncludeHighestOtherPay = analysis.pm?.x !== 0;
     state.modelCompatibilityLevel = finiteNumber(analysis.pm?.u, 89, 50, 99);
@@ -7965,7 +8015,7 @@
   refs.customQuantiles.addEventListener("input", () => { state.customQuantiles = refs.customQuantiles.value; renderQuantiles(); renderChart(); });
   refs.markCurve.addEventListener("change", () => { state.markCurve = refs.markCurve.checked; renderChart(); });
   refs.modelMethod.addEventListener("change", () => {
-    state.modelMethod = ["bayesian", "bayesianGam", "bayesianExact", "linear", "gam", "svr", "gp", "intercept"].includes(refs.modelMethod.value)
+    state.modelMethod = ["bayesian", "bayesianGam", "linear", "gam", "gamCategorical", "svr", "gp", "intercept"].includes(refs.modelMethod.value)
       ? refs.modelMethod.value : "bayesian";
     if (!isBayesianMethod() || state.modelMethod === "bayesianExact") state.modelUseAdRanges = false;
     syncModelControls();
@@ -7975,6 +8025,10 @@
     state.modelUseAdRanges = refs.modelUseAdRanges.checked;
     syncModelControls();
     renderAll();
+  });
+  $("#model-base-only").addEventListener("change", (event) => {
+    state.modelMethod = event.target.checked ? "bayesianExact" : "bayesian";
+    state.modelUseAdRanges = false; syncModelControls(); renderAll();
   });
   refs.modelIncludeHighestOtherPay.addEventListener("change", () => {
     state.modelIncludeHighestOtherPay = refs.modelIncludeHighestOtherPay.checked;
