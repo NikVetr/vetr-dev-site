@@ -230,6 +230,10 @@ function swapGlyph() {
  *   in step, and swaps the interface language before this dialog redraws
  */
 export function openLightbox({ languages, solved, target, source, onReaderChange }) {
+  /** The registry's English exonym, which is what `languageName` should fall back to
+   * when ICU has no entry -- as it does not for `qya`. @param {string} code */
+  const exonymOf = (code) => (
+    languages.find((l) => l.bcp47 === code)?.exonym_en ?? code);
   const dialog = document.createElement('dialog');
   dialog.className = 'lightbox';
 
@@ -323,7 +327,12 @@ export function openLightbox({ languages, solved, target, source, onReaderChange
   const thumbImage = () => el('img', {
     class: 'lightbox-holding',
     src: `packs/${pair.target}__${pair.source}/thumb.png`,
-    alt: t('gallery.thumbAlt', { language: languageName(pair.target, pair.target) }),
+    // The *code* was the fallback here, so Quenya's alt text read "qya": ICU has no
+    // entry for `qya`, and `languageName` returns its fallback when that happens.
+    // The registry's own `exonym_en` is what every other call site passes.
+    alt: t('gallery.thumbAlt', {
+      language: languageName(pair.target, exonymOf(pair.target)),
+    }),
   });
 
   /** @param {number} to */

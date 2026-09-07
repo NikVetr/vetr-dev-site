@@ -6,8 +6,8 @@
 // sheet -- and only when a reader opens one.
 
 import {
-  browserSheetContext, fontManifest, loadText, loadLanguages, readerLanguage,
-  registerOffline, saveForOffline, setReaderLanguage, showFatal,
+  loadText, loadLanguages, readerLanguage,
+  registerOffline, setReaderLanguage, showFatal,
 } from './app.js';
 import { regionRow } from './flags.js';
 import { languagePicker } from './language-picker.js';
@@ -91,34 +91,13 @@ function card(lang, gallery) {
     actions.push(el('a', {
       class: 'btn', href: `customize.html${query}`, text: t('gallery.customise'),
     }));
-    const offline = el('button', {
-      type: 'button', class: 'btn', text: t('gallery.offline'),
-      title: t('gallery.offlineTitle'),
-      'data-offline': lang.bcp47,
-    });
-    offline.addEventListener('click', async () => {
-      const button = /** @type {HTMLButtonElement} */ (offline);
-      offline.textContent = t('gallery.saving');
-      button.disabled = true;
-      try {
-        const ctx = await browserSheetContext();
-        const manifest = await fontManifest();
-        const result = await saveForOffline({
-          corpus: ctx.corpus, target: lang.bcp47, source: reader, manifest,
-        });
-        offline.textContent = result.ok ? t('gallery.saved') : t('gallery.partlySaved');
-        // Only a complete save is final. "Partly saved" means some file 404ed and
-        // the pair may still be unusable offline, so the reader has to be able to
-        // try again -- and the button used to be disabled for the life of the page
-        // on both of the two ways this can fail.
-        button.disabled = result.ok;
-      } catch (err) {
-        offline.textContent = t('gallery.saveFailed');
-        button.disabled = false;
-        console.warn('[plg]', err);
-      }
-    });
-    actions.push(offline);
+    // **No "Offline" button here.** It said "Offline" and did something that needs a
+    // sentence to explain -- fetch this pair's data and its subset fonts into the
+    // service worker cache -- so it read as a state ("this is offline") rather than
+    // an action, and sat beside two buttons that navigate. Export and Customise are
+    // the two things to do with a card. The capability is unchanged: `sw.js` still
+    // precaches the shell, and `app.js` still exports `saveForOffline` for a surface
+    // that can afford to explain itself.
   }
 
   if (thumb instanceof HTMLButtonElement) {
@@ -258,14 +237,33 @@ async function main() {
   /** @param {string} readerCode */
   function render(readerCode) {
     // Guides into your own language are not a thing; everything else is offered,
-    // ordered so the ones that will actually render come first.
-    // Most-translated first, so the ones that actually render lead the grid.
+    // **alphabetically by the name as the reader actually sees it**. Coverage-first
+    // was the earlier order and it read as arbitrary: forty-three cards in an order
+    // nobody can predict is forty-three cards you have to scan, where an alphabet is
+    // a thing you can skip through. The number is still on every card, so the signal
+    // that used to be carried by position is not lost, only moved to where it is
+    // legible.
+    //
+    // `Intl.Collator` in the *reader's* locale rather than `localeCompare` on the
+    // English exonym, because both halves of that mattered: the label is
+    // `languageName()`'s output, which is already in the reader's language, and
+    // sorting Arabic labels by their English names would have produced an order with
+    // no visible logic at all. A collator also knows things a codepoint sort does
+    // not -- that Swedish files `ö` after `z`, that German does not, and that `zh`
+    // means pinyin order rather than stroke order. Unsupported tags (`qya`, `tlh`)
+    // fall back to the default collation, which is the same answer `localeCompare`
+    // would have given.
+    const collator = new Intl.Collator(readerCode, { numeric: true });
+    const label = (/** @type {Record<string,string>} */ l) => (
+      languageName(l.bcp47, l.exonym_en));
     const have = (/** @type {Record<string,string>} */ l) => Math.min(
       coverage.languages[l.bcp47] ?? 0, coverage.languages[readerCode] ?? 0,
     );
     const shown = languages
       .filter((l) => l.bcp47 !== readerCode)
-      .sort((a, b) => have(b) - have(a) || a.exonym_en.localeCompare(b.exonym_en));
+      // Coverage only breaks a tie between two identical labels, so the order is
+      // still total and the grid cannot reshuffle between renders.
+      .sort((a, b) => collator.compare(label(a), label(b)) || have(b) - have(a));
     const grid = /** @type {HTMLElement} */ (document.getElementById('gallery'));
     /** @type {GalleryContext} */ const context = {
       languages, solved, coverage, reader: readerCode, onReaderChange: setReader,
