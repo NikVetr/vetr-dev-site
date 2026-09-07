@@ -5,6 +5,7 @@
     "(c) 2017-2024 Adobe (http://www.adobe.com/).",
     "Copyright (c) 2015 Indian Type Foundry (info@indiantypefoundry.com)",
     "Copyright (c) 2016, Ek Type. All rights reserved.",
+    "Copyright 2018 The Manjari Project Authors (https://gitlab.com/smc/fonts/manjari)",
     "Copyright 2019 Google Inc. All Rights Reserved.",
     "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/arabic)",
     "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/devanagari)",
@@ -286,9 +287,9 @@
       "weight": 400,
       "italic": false,
       "file": "cjk-kr-400",
-      "glyphs": 5861,
-      "ttfBytes": 941448,
-      "woff2Bytes": 309420,
+      "glyphs": 5863,
+      "ttfBytes": 941884,
+      "woff2Bytes": 309680,
       "source": "NotoSansKR-var.ttf"
     },
     {
@@ -296,9 +297,9 @@
       "weight": 700,
       "italic": false,
       "file": "cjk-kr-700",
-      "glyphs": 5861,
-      "ttfBytes": 941668,
-      "woff2Bytes": 316336,
+      "glyphs": 5863,
+      "ttfBytes": 942104,
+      "woff2Bytes": 316596,
       "source": "NotoSansKR-var.ttf"
     },
     {
@@ -306,9 +307,9 @@
       "weight": 400,
       "italic": false,
       "file": "cjk-kr-serif-400",
-      "glyphs": 5862,
-      "ttfBytes": 2605924,
-      "woff2Bytes": 596944,
+      "glyphs": 5864,
+      "ttfBytes": 2607088,
+      "woff2Bytes": 597292,
       "source": "NotoSerifKR-var.ttf"
     },
     {
@@ -316,9 +317,9 @@
       "weight": 700,
       "italic": false,
       "file": "cjk-kr-serif-700",
-      "glyphs": 5862,
-      "ttfBytes": 2610508,
-      "woff2Bytes": 619372,
+      "glyphs": 5864,
+      "ttfBytes": 2611672,
+      "woff2Bytes": 619404,
       "source": "NotoSerifKR-var.ttf"
     },
     {
@@ -620,6 +621,26 @@
       "ttfBytes": 138108,
       "woff2Bytes": 41172,
       "source": "NotoSansKannada-var.ttf"
+    },
+    {
+      "stack": "mlym",
+      "weight": 400,
+      "italic": false,
+      "file": "mlym-400",
+      "glyphs": 906,
+      "ttfBytes": 144168,
+      "woff2Bytes": 73996,
+      "source": "Manjari-Regular.ttf"
+    },
+    {
+      "stack": "mlym",
+      "weight": 700,
+      "italic": false,
+      "file": "mlym-700",
+      "glyphs": 895,
+      "ttfBytes": 143872,
+      "woff2Bytes": 73832,
+      "source": "Manjari-Bold.ttf"
     },
     {
       "stack": "ethi",

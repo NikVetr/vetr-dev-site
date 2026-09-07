@@ -61,6 +61,8 @@ export const LANGUAGE_MOTIFS = /** @type {const} */ ({
   // exactly that reason, in favour of the rope border and the tree, which
   // read as neither a flower nor a stitch.
   ro: 'funie',
+  ml: 'nettipattam',
+  ha: 'askatakwas',
   ne: 'dhaka',
   ms: 'ketupat',
   sv: 'kurbits',
@@ -554,6 +556,41 @@ const emblems = {
       }
     }
   },
+  askatakwas(p) {
+    // Eight blades radiating from the gown's own neck-opening, drawn with straight
+    // lines rather than flower()'s curves -- a knife has a wide base and a point,
+    // not a leaf's curved margin. Each blade widens at 35% of its own length (the
+    // hilt end, near the collar) and tapers to a sharp point at full length.
+    for (let i = 0; i < 8; i++) {
+      const a = (i * Math.PI) / 4 - Math.PI / 2;
+      const x = 50 + Math.cos(a) * 6, y = 50 + Math.sin(a) * 6;
+      const dx = Math.cos(a) * 38, dy = Math.sin(a) * 38;
+      const len = Math.hypot(dx, dy), nx = (-dy / len) * 6, ny = (dx / len) * 6;
+      const mx = x + dx * 0.35, my = y + dy * 0.35;
+      p.m(x, y); p.l(mx + nx, my + ny); p.l(x + dx, y + dy); p.l(mx - nx, my - ny); p.close();
+    }
+    oval(p, 50, 50, 5, 5); // the collar roundel the eight blades radiate from
+  },
+    nettipattam(p) {
+      // The panel: a broad top edge with its corners cut, tapering downward. Three
+      // graded registers of bosses, and the *grading* is the mark -- each row is
+      // shorter and its bosses smaller than the one above, because the panel narrows
+      // -- which is what makes this a register rather than `bandhani`'s even lattice.
+      p.m(8, 26); p.l(11, 22); p.l(89, 22); p.l(92, 26);
+      p.l(77, 70); p.l(23, 70); p.close();
+      for (const [y, n, r, half] of [[33, 5, 6.8, 32], [48, 4, 5.2, 24], [61, 3, 3.8, 14]]) {
+        for (let i = 0; i < n; i += 1) {
+          oval(p, 50 + (i - (n - 1) / 2) * (2 * half / (n - 1)), y, r, r);
+        }
+      }
+      // Five scallops and five bells. They hang side by side and each carries its own
+      // pendant, where `seigaiha`'s arcs nest inside one another.
+      for (let i = 0; i < 5; i += 1) {
+        const x = 23 + i * 10.8;
+        p.m(x, 70); p.q(x + 5.4, 81, x + 10.8, 70);
+        oval(p, x + 5.4, 86, 1.9, 1.9);
+      }
+    },
   funie(p) {
     // The rope twist (funie), top and bottom: an alternating S-curve rather
     // than a straight or single-curve edge, which is what makes it read as
@@ -710,6 +747,29 @@ const tracery = {
     p.m(50, 8); p.l(88, 50); p.l(50, 92); p.l(12, 50); p.close();
   },
   dhaka(p) { for (const r of [40, 24, 10]) diamond(p, 50, 50, r, r); },
+  askatakwas(p) {
+    for (let i = 0; i < 8; i++) {
+      const a = (i * Math.PI) / 4 - Math.PI / 2;
+      const x = 50 + Math.cos(a) * 4, y = 50 + Math.sin(a) * 4;
+      const dx = Math.cos(a) * 44, dy = Math.sin(a) * 44;
+      const len = Math.hypot(dx, dy), nx = (-dy / len) * 4, ny = (dx / len) * 4;
+      const mx = x + dx * 0.35, my = y + dy * 0.35;
+      p.m(x, y); p.l(mx + nx, my + ny); p.l(x + dx, y + dy); p.l(mx - nx, my - ny); p.close();
+    }
+  },
+    nettipattam(p) {
+      // The panel's silhouette and its hem, with the bosses dropped for the reason
+      // this whole table drops interior detail at divider height: three registers of
+      // rings close into a blot at 3pt. Nothing else in this table is a tapering
+      // four-sided panel, so the outline alone still names it -- and the scallops are
+      // kept because they are what separate it from a plain trapezoid.
+      p.m(6, 16); p.l(10, 10); p.l(90, 10); p.l(94, 16);
+      p.l(78, 74); p.l(22, 74); p.close();
+      for (let i = 0; i < 4; i += 1) {
+        const x = 22 + i * 14;
+        p.m(x, 74); p.q(x + 7, 88, x + 14, 74);
+      }
+    },
   funie(p) { p.m(6, 50); p.q(28, 30, 50, 50); p.q(72, 70, 94, 50); },
   phulkari(p) { diamond(p, 30, 50, 22, 42); diamond(p, 70, 50, 22, 42); p.m(12, 88); p.l(48, 12); p.m(52, 88); p.l(88, 12); },
   banig(p) { diamond(p, 30, 30, 17, 11); diamond(p, 70, 30, 17, 11); diamond(p, 30, 70, 17, 11); diamond(p, 70, 70, 17, 11); },

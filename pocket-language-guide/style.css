@@ -321,11 +321,20 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
   max-block-size: 100%;
 }
 .face.focused svg { inline-size: 100%; block-size: 100%; }
-.face-strip { display: flex; gap: var(--space-1); flex: none; align-items: stretch; }
+/* Left-aligned and capped, for the reason the lightbox strip is: `flex: 1` gave two
+   faces half the canvas each, and since a thumbnail's height follows its width they
+   stood as tall as the focused face they are subordinate to. */
+.face-strip {
+  display: flex; gap: var(--space-1); flex: none;
+  align-items: flex-start; justify-content: flex-start;
+}
 /* "All faces" leads the strip, where the other faces are. Sized to the thumbnails
    beside it rather than to its own text, so the row reads as one control. */
 .face-all {
-  flex: none; padding: 0 var(--space-2); white-space: nowrap;
+  /* `align-self` because the strip now aligns to `flex-start` rather than stretching
+     -- this button is still meant to be exactly as tall as the thumbnails beside it,
+     which is what makes the row read as one control. */
+  flex: none; align-self: stretch; padding: 0 var(--space-2); white-space: nowrap;
   font-size: var(--fs--1); cursor: pointer;
   border: 1px solid var(--line); border-radius: var(--radius-sm);
   background: var(--paper); color: var(--muted);
@@ -333,7 +342,7 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
 .face-all:hover, .face-all:focus-visible {
   color: var(--accent); border-color: var(--accent); outline: none;
 }
-.face-strip .face { flex: 1; cursor: pointer; }
+.face-strip .face { flex: 0 1 8rem; max-inline-size: 8rem; cursor: pointer; }
 .face.current { outline: 2px solid var(--accent); }
 /* Colour alone should not say "you are here": the tick survives greyscale. */
 .face.current::after {
@@ -742,7 +751,13 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
 /* The thumbnail holding the frame while a pair typesets. It is a raster of the
    first face at gallery size, so it is blurred at card size -- which is the honest
    signal that the real thing has not arrived yet. */
-.lightbox-holding { object-fit: cover; opacity: 0.55; }
+/* `cover` scaled the raster to fill and cropped the overflow, so the swap to the
+   typeset SVG moved the ink -- a visible jolt on every open. The box already carries
+   the sheet's own aspect (`--card-aspect`) and the raster is a render of that same
+   face, so `fill` puts both in exactly the same place; the 0.0006 of aspect between
+   480x343 and 7:5 is not a visible distortion. The dimming stays: it is the only
+   cue that this is a holding image and not the typeset one. */
+.lightbox-holding { object-fit: fill; opacity: 0.55; }
 .lightbox-failed {
   position: absolute; inset-block-end: 0; inset-inline: 0; margin: 0;
   padding: var(--space-2); background: var(--surface); color: var(--ink);
@@ -817,17 +832,21 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
    scrollbar. `minmax(0, 1fr)` is what lets a track go below its content's width.
    The thumbs keep the sheet's aspect, so their height follows and the foot's own
    height follows that. */
+/* Flex rather than a grid of equal fractions, because equal fractions spread three
+   thumbnails across the whole width and centred each one in its own wide track --
+   so a two-face sheet showed two thumbs marooned either side of a gap. A basis with
+   no grow packs them at the start and leaves the buttons where they are; shrink is
+   still allowed, so ten faces narrow to fit rather than scrolling. */
 .lightbox-strip {
-  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr);
-  gap: 0.4rem; min-inline-size: 0; flex: 1 1 0;
-  align-items: center; justify-items: center;
+  display: flex; gap: 0.4rem; min-inline-size: 0; flex: 1 1 0;
+  align-items: center; justify-content: flex-start;
 }
 .lightbox-thumb {
   padding: 0; border: 1px solid rgb(255 255 255 / 25%); border-radius: 3px;
   background: var(--paper); cursor: pointer; overflow: hidden;
   /* No width of its own: the grid track decides, capped so two faces do not become
      two enormous thumbnails. */
-  inline-size: 100%; max-inline-size: 8rem; aspect-ratio: var(--card-aspect, 1.4);
+  flex: 0 1 8rem; max-inline-size: 8rem; aspect-ratio: var(--card-aspect, 1.4);
   /* The strip's height is fixed, so a thumbnail fits inside it rather than setting
      it -- which is what keeps the foot from resizing when the face count is known. */
   max-block-size: 100%;

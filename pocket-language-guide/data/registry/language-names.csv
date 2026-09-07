@@ -19,6 +19,7 @@ am,it,,tʼalīyaninnya,tʼalijanɨɲːa
 am,ja,,japaninnya,dʒapanɨɲːa
 am,kn,,kanada,kanada
 am,ko,,korīyannya,korijaɲːa
+am,ml,,malayalam,malajalam
 am,mr,,maratī,marati
 am,ms,,malay,malaj
 am,ne,,nēpalīnnya,nepaliɲːa
@@ -60,6 +61,7 @@ ar,it,,al-īṭālīyah,ʔalʔˌiːt̪aːlˈijjah
 ar,ja,,al-yābānīyah,ʔaljˌaːbaːnˈijjah
 ar,kn,,al-kānādā,ʔalkaːnˌaːdaː
 ar,ko,,al-kūrīyah,ʔalkˈuːɹiːjˌa
+ar,ml,,al-mālāyālāmīyah,ʔalmˌaːlaːjˌaːlaːmˈijjah
 ar,mr,,al-mārāthīyah,ʔalmˌaːɹaːθˈijjah
 ar,ms,,al-mālīzīyah,ʔalmˌaːliːzˈijjah
 ar,ne,,al-nībālīyah,ʔannˌiːbaːlˈijjah
@@ -101,6 +103,7 @@ bn,it,,itālīẏa,ˈitalˌij
 bn,ja,,jāpāni,ɟˈapanˌi
 bn,kn,,kannaṛa,kˈɔnnɔɽ
 bn,ko,,koriẏāna,kˈoɾiˌan
+bn,ml,,mālaẏālama,mˈalɔˌalɔm
 bn,mr,,mārāṭhi,mˈaɾaʈʰˌi
 bn,ms,,mālaẏa,mˈalɔj
 bn,ne,,nēpāli,nˈepalˌi
@@ -142,6 +145,7 @@ cs,it,italsky,,ˈitalski
 cs,ja,japonsky,,jˈaponski
 cs,kn,kannadsky,,kˈanatski
 cs,ko,korejsky,,kˈoreɪski
+cs,ml,malajálamsky,,mˈalajˌaːlamski
 cs,mr,maráthsky (flag: rare word; not personally attested),,mˈaraːthski flˈaɡ rˈare vˈord nˈot pˈersonˌali ˈattestet
 cs,ms,malajsky,,mˈalajski
 cs,ne,nepálsky,,nˈepaːlski
@@ -224,6 +228,7 @@ el,it,,Italika,ˌitalikˈa
 el,ja,,Iaponika,ˌiapˌonikˈa
 el,kn,,Kananta,kanˈada
 el,ko,,Koreatika,kˌoɾeˌatikˈa
+el,ml,,Malagialamika,mˌalajˌalamikˈa
 el,mr,,Marathika,mˌaɾaθikˈa
 el,ms,,Malaisiana,mˌalesjanˈa
 el,ne,,Nepalika,nˌepalikˈa
@@ -347,6 +352,7 @@ fa,it,,itāliyāyi,itɑliɑi
 fa,ja,,zhāponi,ʒɑponi
 fa,kn,,kānārā,kɑnɑrɑ
 fa,ko,,kore-i,korei
+fa,ml,,mālāyālāmī,mɑlɑjɑlɑmi
 fa,mr,,marātī,marɑti
 fa,ms,,mālāyi,mɑlɑi
 fa,ne,,nepāli,nepɑli
@@ -470,6 +476,7 @@ gu,it,,iṭāliyan,ɪʈaːlɪjən
 gu,ja,,jāpānījh,ɟaːpaːniːz
 gu,kn,,kannaḍ,kənnʌɖ
 gu,ko,,kōriyan,koːɾɪjən
+gu,ml,,malayālam,məljaːlʌm
 gu,mr,,marāṭhī,məɾaːʈʰi
 gu,ms,,malay,məlɛj
 gu,ne,,nēpāḷī,neːpaːɭi
@@ -511,6 +518,7 @@ he,it,,italqit,italkˈit
 he,ja,,yapanit,japanˈit
 he,kn,,qanadah,kanadˈah
 he,ko,,qore’anit,koʁeanˈit
+he,ml,,malialam,malialˈam
 he,mr,,marathit,maʁathˈit
 he,ms,,malait,malaˈit
 he,ne,,nefalit,nefalˈit
@@ -552,6 +560,7 @@ hi,it,,itālvī,ɪtˈaːlʋˌi
 hi,ja,,jāpānī,ɟaːpˈaːni
 hi,kn,,kannaṛa,kˈʌnnəɽ
 hi,ko,,koriyāī,kˌoːɾɪjˈaːi
+hi,ml,,malayālam,mˌəljˈaːləm
 hi,mr,,marāṭhī,məɾˈaːʈʰi
 hi,ms,,malaya,mˈʌlˌɛj
 hi,ne,,nepālī,neːpˈaːli
@@ -716,6 +725,7 @@ ja,it,,itariago,itaɾiaɡo
 ja,ja,日本語,nihongo,ɲihoɴɡo
 ja,kn,,kannadago,kaɴnadaɡo
 ja,ko,,kankokugo,kaɴkokɯɡo
+ja,ml,,marayāramugo,maɾajaːɾamɯɡo
 ja,mr,,marātīgo,maɾaːtiːɡo
 ja,ms,,mareego,maɾeeɡo
 ja,ne,,nepārugo,nepaːɾɯɡo
@@ -757,6 +767,7 @@ kn,it,,iṭāliyan,iʈaːlijan
 kn,ja,,jāpanīs,ɟaːpaniːs
 kn,kn,,kannaḍa,kannaɖa
 kn,ko,,koriyan,korijan
+kn,ml,,malayāḷaṁ,malajaːɭam
 kn,mr,,marāṭhi,maraːʈʰi
 kn,ms,,malay,malaj
 kn,ne,,nēpāḷi,neːpaːɭi
@@ -798,6 +809,7 @@ ko,it,,itallia-eo,itʰalliaʌ
 ko,ja,,ilboneo,ilbonʌ
 ko,kn,,kannadaeo,kʰannadaʌ
 ko,ko,한국어,hangugeo,hanɡuɡʌ
+ko,ml,,mallayallameo,mallajallamʌ
 ko,mr,,maratieo,maɾatʰiʌ
 ko,ms,,malleieo,malleiʌ
 ko,ne,,nepal-eo,nepʰalʌ
@@ -819,48 +831,48 @@ ko,uk,,ukeuraina-eo,ukʰɯɾainaʌ
 ko,ur,,ureudu-eo,uɾɯduʌ
 ko,vi,,beteunameo,petʰɯnamʌ
 ko,zh-Hans,,jungugeo,tɕuŋuɡʌ
-ml,am,,,amhaːɾiɡ
-ml,ar,,,arabiɡ
-ml,bn,,,bamɡlaː
-ml,cs,,,cekkɨ
-ml,de,,,ɟaɾmman
-ml,el,,,ɡɾiːkkɨ
-ml,en,,,imɡliːʂɨ
-ml,es,,,sbaːniʂɨ
-ml,fa,,,peːɾʂjan
-ml,fil,,,pʰilippinoː
-ml,fr,,,pʰɾaɲcɨ
-ml,gu,,,ɡuɟaraːtti
-ml,he,,,hiːbɾu
-ml,hi,,,hindi
-ml,hu,,,hamɡeːrijan
-ml,id,,,indoːneːʂjan
-ml,it,,,iʈʈaːlijan
-ml,ja,,,ɟaːppaniːsɨ
-ml,kn,,,kannaɖa
-ml,ko,,,korijan
-ml,ml,,,malajaːɭam
-ml,mr,,,maraːtti
-ml,ms,,,malejɨ
-ml,ne,,,neːppaːɭi
-ml,nl,,,ɖaccɨ
-ml,pa,,,paɲcaːbi
-ml,pl,,,poːɭiʂɨ
-ml,pt,,,poːɾccuɡiːsɨ
-ml,qya,,,kaia
-ml,ro,,,romaːnijan
-ml,ru,,,raʂjan
-ml,sv,,,sviːɖiʂɨ
-ml,sw,,,svaːhili
-ml,ta,,,tamiɻɨ
-ml,te,,,teluŋɡ
-ml,th,,,taːjɨ
-ml,tlh,,,klimɡoːɳ
-ml,tr,,,ʈaɾkkiʂɨ
-ml,uk,,,ukɾeːnijan
-ml,ur,,,urudu
-ml,vi,,,vijaʈʈnaːmiːsɨ
-ml,zh-Hans,,,cainiːsɨ
+ml,am,,aṁhārikŭ,amhaːɾiɡ
+ml,ar,,aṟabikŭ,arabiɡ
+ml,bn,,baṁglā,bamɡlaː
+ml,cs,,cekkŭ,cekkɨ
+ml,de,,jarmman,ɟaɾmman
+ml,el,,grīkkŭ,ɡɾiːkkɨ
+ml,en,,iṁglīṣŭ,imɡliːʂɨ
+ml,es,,sŭ‌pāniṣŭ,sbaːniʂɨ
+ml,fa,,pērṣyan,peːɾʂjan
+ml,fil,,philippinō,pʰilippinoː
+ml,fr,,phrañcŭ,pʰɾaɲcɨ
+ml,gu,,gujaṟātti,ɡuɟaraːtti
+ml,he,,hībru,hiːbɾu
+ml,hi,,hindi,hindi
+ml,hu,,haṁgēṟiyan,hamɡeːrijan
+ml,id,,intōnēṣyan,indoːneːʂjan
+ml,it,,iṟṟāliyan,iʈʈaːlijan
+ml,ja,,jāppanīsŭ,ɟaːppaniːsɨ
+ml,kn,,kannaḍa,kannaɖa
+ml,ko,,koṟiyan,korijan
+ml,ml,,malayāḷaṁ,malajaːɭam
+ml,mr,,maṟātti,maraːtti
+ml,ms,,maleyŭ,malejɨ
+ml,ne,,nēppāḷi,neːppaːɭi
+ml,nl,,ḍaccŭ,ɖaccɨ
+ml,pa,,pañcābi,paɲcaːbi
+ml,pl,,pōḷiṣŭ,poːɭiʂɨ
+ml,pt,,pōrccugīsŭ,poːɾccuɡiːsɨ
+ml,qya,,qya,kaia
+ml,ro,,ṟomāniyan,romaːnijan
+ml,ru,,ṟaṣyan,raʂjan
+ml,sv,,svīḍiṣŭ,sviːɖiʂɨ
+ml,sw,,svāhili,svaːhili
+ml,ta,,tamiḻŭ,tamiɻɨ
+ml,te,,teluṅkŭ,teluŋɡ
+ml,th,,tāyŭ,taːjɨ
+ml,tlh,,kliṁgōṇ,klimɡoːɳ
+ml,tr,,ṭarkkiṣŭ,ʈaɾkkiʂɨ
+ml,uk,,ukrēniyan,ukɾeːnijan
+ml,ur,,uṟudu,urudu
+ml,vi,,viyaṟṟnāmīsŭ,vijaʈʈnaːmiːsɨ
+ml,zh-Hans,,laḷitamākkiya cainīsŭ,cainiːsɨ
 mr,am,,amhārika,ʌmhˈaːɾɪk
 mr,ar,,arabī,ˈʌɾbˌi
 mr,bn,,baṁgālī,bəŋɡˈaːli
@@ -881,6 +893,7 @@ mr,it,,iṭāliyana,ɪʈˈaːlɪjˌən
 mr,ja,,japānī,zəpˈaːni
 mr,kn,,kannaḍa,kˈʌnnəɖ
 mr,ko,,kōriyana,kˈoːɾɪjˌən
+mr,ml,,malyāḷam,məljˈaːɭəm
 mr,mr,मराठी,marāṭhī,məɾˈaːʈʰi
 mr,ms,,malaya,mˈʌlˌɛj
 mr,ne,,nēpāḷī,neːpˈaːɭi
@@ -963,6 +976,7 @@ ne,it,,iṭālēlī,ˌɪʈaːlˈeːli
 ne,ja,,jāpānī,ɟaːpˈaːni
 ne,kn,,,kˈʌnnˌaːɖaː
 ne,ko,,kōriyālī,kˌoːɾɪjˈaːli
+ne,ml,,malayālam,mˌələjˈaːləmˌə
 ne,mr,,marāṭhī,məɾˈaːʈʰi
 ne,ms,,malāya,məlˈaːjə
 ne,ne,,,neːpˈaːli
@@ -1045,6 +1059,7 @@ pa,it,,itālavī,ɪtaləʋi
 pa,ja,,japānī,ɟəpani
 pa,kn,,kannaṛ,kʌnnəɽ
 pa,ko,,kōrīāī,koɾiai
+pa,ml,,maliālam,məlɪaləm
 pa,mr,,marāṭhī,məɾaʈʰi
 pa,ms,,malaya,mʌləj
 pa,ne,,nēpālī,nepali
@@ -1086,6 +1101,7 @@ pl,it,po włosku,,pɔ vwˈɔsku
 pl,ja,po japońsku,,pɔ japˈɔɲsku
 pl,kn,po kannada,,pɔ kannˈada
 pl,ko,po koreańsku,,pɔ kˌɔrɛˈaɲsku
+pl,ml,po malajalam,,pɔ mˌalajˈalam
 pl,mr,po marathi,,pɔ marˈasi
 pl,ms,po malajsku,,pɔ malˈajsku
 pl,ne,po nepalsku,,pɔ nɛpˈalsku
@@ -1210,6 +1226,7 @@ ru,it,итальянском,italʼyanskom,ɪtaɭjˈjanskʌm
 ru,ja,японском,yaponskom,japˈonskʌm
 ru,kn,каннада,kannada,kannˈɑda
 ru,ko,корейском,koreyskom,kʌrʲˈejskʌm
+ru,ml,малаялам,malayalam,mʌɭaˈjaɭʌm
 ru,mr,маратхи,maratkhi,marˈɑtxɪ
 ru,ms,малайском,malajskom,maɭˈɑjskʌm
 ru,ne,непальском,nepalʼskom,nʲipˈɑɭskʌm
@@ -1333,6 +1350,7 @@ ta,it,,ittāliyaṉ,ittaːlijʌn
 ta,ja,,jāppaṉīs,dʒaːppʌniːs
 ta,kn,,kannaṭam,kʌnnʌɖʌm
 ta,ko,,koriyaṉ,koɾijʌn
+ta,ml,,malaiyāḷam,mʌlaɪjaːɭʌm
 ta,mr,,marātti,mʌɾaːtti
 ta,ms,,malāy,mʌlaːj
 ta,ne,,nēpāḷi,neːpaːɭi
@@ -1374,6 +1392,7 @@ te,it,,iṭāliyan,iʈaːlijan
 te,ja,,japanīs,dʒapaniːs
 te,kn,,kannaḍa,kannaɖa
 te,ko,,koriyan,korijan
+te,ml,,malayāḷaṁ,malajaːɭam
 te,mr,,marāṭhī,maraːʈʰiː
 te,ms,,malay,malaj
 te,ne,,nēpālī,neːpaːliː
@@ -1415,6 +1434,7 @@ th,it,,itali,ʔiʔ˨˩taː˧liː˧
 th,ja,,yipun,jiː˥˩pun˨˩
 th,kn,,kannada,kan˧ naː˧ daː˧
 th,ko,,kaoli,kaw˧liː˩˩˦
+th,ml,,malayalam,maː˧laː˧ jaː˧ lam˧
 th,mr,,mrathi,mɔː˧ raː˧ tʰiː˩˩˦
 th,ms,,malei,maː˧leː˧
 th,ne,,nepan,neː˧paː˧la˦˥
@@ -1456,6 +1476,7 @@ tlh,it, ,'Italya' Hol,ʔɪtʰɑljɑʔ xol
 tlh,ja, ,nIpon Hol,nɪpʰon xol
 tlh,kn, ,qannaDa Hol,qʰɑnnɑɖɑ xol
 tlh,ko, ,Hanghuq Hol,xɑnɣuqʰ xol
+tlh,ml, ,malayalam Hol,mɑlɑjɑlɑm xol
 tlh,mr, ,maratI Hol,mɑrɑtʰɪ xol
 tlh,ms, ,melayu Hol,mɛlɑju xol
 tlh,ne, ,nepalI Hol,nɛpʰɑlɪ xol
@@ -1538,6 +1559,7 @@ uk,it,італійською,italiiskoiu,iːtaʎˈiːjskoju
 uk,ja,японською,yaponskoiu,japˈonskoju
 uk,kn,,kannada,kannˈada
 uk,ko,корейською,koreiskoiu,korˈɛjskoju
+uk,ml,,malaialam,malajˈalam
 uk,mr,,maratkhi,marˈatxiː
 uk,ms,малайською,malaiskoiu,malˈajskoju
 uk,ne,непальською,nepalskoiu,nɛpˈaʎskoju
@@ -1579,6 +1601,7 @@ ur,it,,iṭālvī,atˈaːlʋi
 ur,ja,,jāpānī,ɟaːpˈaːni
 ur,kn,,kannāḍā,kənnˈaːɖaː
 ur,ko,,koriyāī,kˈoːɾjaːˌiː
+ur,ml,,maliyālam,məljˈaːləm
 ur,mr,,marāṭhī,məɾˈaːʈʰi
 ur,ms,,mālē,mˈaːleː
 ur,ne,,nīpālī,neːpˈaːli
@@ -1620,6 +1643,7 @@ vi,it,Ý,,i˧˥
 vi,ja,Nhật,,ɲət̪˨˩ˀ
 vi,kn,Kannada,,kɑːnədə˧
 vi,ko,Hàn,,haːn˨˩
+vi,ml,Malayalam,,maleɪɑːləm˧
 vi,mr,Marathi,,maɹaθɪ˧
 vi,ms,Mã Lai,,maː˧ˀ˥ laːj˧
 vi,ne,Nepal,,nɛpɔːl˧
@@ -1661,6 +1685,7 @@ zh-Hans,it,,Yìdàlìyǔ,i˥˩ta˥˩li˥˩y˧˩˧
 zh-Hans,ja,,Rìyǔ,ʐɨ˥˩y˧˩˧
 zh-Hans,kn,,Kǎnàdáyǔ,kʰa˧˩˧na˥˩ta˧˥y˧˩˧
 zh-Hans,ko,,Hányǔ,xan˧˥y˧˩˧
+zh-Hans,ml,,Mǎlāyǎlāmǔyǔ,ma˧˩˧la˥ja˧˩˧la˥mu˧˩˧y˧˩˧
 zh-Hans,mr,,Mǎlādìyǔ,ma˧˩˧la˥ti˥˩y˧˩˧
 zh-Hans,ms,,Mǎláiyǔ,ma˧˩˧laɪ˧˥y˧˩˧
 zh-Hans,ne,,Níbó'ěryǔ,ni˧˥pwɔ˧˥ɑɻ˧˩˧y˧˩˧
@@ -1682,3 +1707,102 @@ zh-Hans,uk,,Wūkèlányǔ,u˥kʰɤ˥˩lan˧˥y˧˩˧
 zh-Hans,ur,,Wū'ěrdūyǔ,u˥ɑɻ˧˩˧tu˥y˧˩˧
 zh-Hans,vi,,Yuènányǔ,ɥœ˥˩nan˧˥y˧˩˧
 zh-Hans,zh-Hans,中文,Zhōngwén,ʈʂʊŋ˥wən˧˥
+ha,tlh,Kilingon,,kilinɡon
+ha,qya,Kwenya,,kwenja
+ja,ha,,Hausago,haɯsaɡo
+ar,ha,,al-Hawsā,ʔalhˈuːsaː
+ko,ha,,hausaeo,hausaʌ
+hi,ha,,hausā,hˈɔːsaː
+th,ha,,Haosa,haw˧ saː˧
+ru,ha,,khausa,xaˈusa
+el,ha,,Cháousa,xˈausˌa
+he,ha,,ha’usa,hausˈa
+fa,ha,,hosa'i,husɑi
+bn,ha,,hāusā,hˈauʃˌa
+ur,ha,,ha'ūsā,hˈoːsaː
+ta,ha,,hausā,haʊsaː
+uk,ha,,khausa,xaˈusa
+te,ha,,hausā,haʊsaː
+mr,ha,,hausā,hˈaʊsaː
+pa,ha,,hausā,hɔsa
+gu,ha,,hausā,hɔsaː
+ne,ha,,hāusā,hˈaːʊsˌaː
+am,ha,,hāwsanya,hawsaɲa
+kn,ha,,hausā,haʊsaː
+tlh,ha, ,HawSa Hol,xɑwʂɑ xol
+ha,am,,,amharik
+ha,ar,,,larabtʃi
+ha,bn,,,benɡali
+ha,cs,,,tʃek
+ha,de,,,dʒamusantʃi
+ha,el,,,ɡirkantʃi
+ha,en,,,turantʃi
+ha,es,,,sifanijantʃi
+ha,fa,,,farisantʃi
+ha,fil,,,dan filifin
+ha,fr,,,faransantʃi
+ha,gu,,,ɡudʒarati
+ha,he,,,ibranantʃi
+ha,hi,,,harʃen hindi
+ha,hu,,,harʃen hunɡari
+ha,id,,,harʃen indunusija
+ha,it,,,italijantʃi
+ha,ja,,,dʒapanantʃi
+ha,kn,,,kannada
+ha,ko,,,harʃen korija
+ha,ml,,,malajalamtʃi
+ha,mr,,,maratintʃi
+ha,ms,,,harʃen malaj
+ha,ne,,,nepali
+ha,nl,,,holantʃi
+ha,pa,,,pundʒabi
+ha,pl,,,harʃen polan
+ha,pt,,,harʃen potuɡis
+ha,ro,,,romanijantʃi
+ha,ru,,,raʃantʃi
+ha,sv,,,harʃen suwedan
+ha,sw,,,harʃen suwahili
+ha,ta,,,tamil
+ha,te,,,teluɡu
+ha,th,,,thai
+ha,tr,,,harʃen turkijja
+ha,uk,,,harʃen jukuren
+ha,ur,,,urdantʃi
+ha,vi,,,harʃen bijetinam
+ha,zh-Hans,,,harʃen sinantʃi
+ha,ha,,,hausa
+cs,ha,,,hˈaʊʃcina
+de,ha,,,hˈaʊszˌɑː
+en,ha,,,hˈɔːsə
+es,ha,,,ˈaʊsa
+fil,ha,,,hausa
+fr,ha,,,ausˈa
+hu,ha,,,hˈɑusɑ
+id,ha,,,hˈaʊsa
+it,ha,,,hˈaʊza
+ml,ha,,hausa,hausa
+ms,ha,,,hˈaʊsə
+nl,ha,,,hˈʌʊzaː
+pl,ha,,,xˈawsa
+pt,ha,,,aʊsˈa
+ro,ha,,,hˈaʊsa
+sv,ha,,,hˈɑːʉsˌa
+sw,ha,,,kˌihaˈusa
+tr,ha,,,haˈusa dilˈɪ
+vi,ha,,,t̪iɛ̯ŋ˧˥ hawsaː˧
+zh-Hans,ha,,Háosàyǔ,xɑʊ˧˥sa˥˩y˧˩˧
+de,ml,,,mˈɑlaɪˌɑlɑːm
+en,ml,,,mˌæleɪˈɑːləm
+es,ml,,,mˌalaʝˈalam
+fil,ml,,,malajalam
+fr,ml,,,malɛjalˈam
+hu,ml,,,mˈɑlɑjaːlɑm
+id,ml,,,mˌalajˈalam
+it,ml,,,malajˈalam
+ms,ml,,,mˌalajˈalam
+nl,ml,,,mˈaːlaːjˌaːlɑm
+pt,ml,,,mˌalaɪˈalæ
+ro,ml,,,mˌalajalˈam
+sv,ml,,,mˈɑːlaˌyːalˌam
+sw,ml,,,kˌimalˌajalˈamu
+tr,ml,,,maɫajaɫˈam dilˈɪ

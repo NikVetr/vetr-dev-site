@@ -150,12 +150,21 @@ const targets = only ? [only] : ready.filter((l) => l !== source);
  */
 const IPA_ONLY = /[\u0250-\u02af\u02b0-\u02ff\u0300-\u036f\u1d00-\u1d7f]/u;
 /**
- * Except the two marks a stress device emits on purpose. Both fall inside the
- * ranges above -- the combining acute is in the same block as the IPA
- * diacritics -- so without this the Russian table's 13,035 stress marks report as
- * the largest gap in the corpus.
+ * Except the two marks a stress device emits on purpose, and one reader's own
+ * letter. The combining acute and modifier apostrophe fall inside the ranges
+ * above -- the combining acute is in the same block as the IPA diacritics -- so
+ * without exempting them the Russian table's 13,035 stress marks report as the
+ * largest gap in the corpus. `\u0257` U+0257 is Hausa's own Boko letter (\u0257an, \u0257aya)
+ * and not a residue of anything: unlike Vietnamese's `\u0111` U+0111 (LATIN SMALL
+ * LETTER D WITH STROKE, a different codepoint entirely, well outside this
+ * range), Hausa's implosive-d letter happens to share its exact codepoint with
+ * the IPA symbol for the same sound, so `ha__ha-NG.json` deliberately spells the
+ * sound with it rather than folding it away the way every other reader's table
+ * does. Scoped to this one codepoint rather than widening the mechanism, since
+ * no other script in this corpus reuses an IPA-range codepoint as one of its own
+ * letters.
  */
-const DEVICE_MARKS = new Set(['\u0301', '\u02b9']);
+const DEVICE_MARKS = new Set(['\u0301', '\u02b9', '\u0257']);
 
 /** Ignore what a reviewer would not call a disagreement. */
 const loose = (/** @type {string} */ s) => s.toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');

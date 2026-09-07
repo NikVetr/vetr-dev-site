@@ -1,0 +1,776 @@
+{
+  "source": "ha",
+  "accent": "ha-NG",
+  "status": "ready",
+  "version": "1",
+  "derives_from": "No published Hausa pronunciation-respelling key exists to borrow -- Hausa lexicography prints no such column, the way Amharic's does not either, because Boko is shallow enough that a dictionary does not need one. What this table derives from instead is a real, observable system: the way Boko itself spells a foreign loanword, as Hausa newspapers, road signs and everyday print already do -- asibiti (hospital), fasfo (passport), kwamfuta (computer), sigari (cigarette), banki (bank), ofis/ofishin (office). Every one of those collapses a foreign sound onto the nearest Boko letter the way this table's own rules do: p/f for the labials English and French split three ways, s for the th-sounds Boko has no digraph for, and a plain stop for any aspiration or ejection Hausa itself does not make. Adapted in shape (policy, fixup style) from id__id-ID.json and ms__ms-MY.json rather than sw__sw-KE.json, because Hausa's own phonotactics match theirs and not Swahili's: Hausa freely closes a syllable on a consonant (mutum, hannu, gwamnati, dan) where Swahili's BAKITA standard requires every syllable open, so Swahili's whole word-final-epenthesis apparatus is machinery this table does not need and does not borrow.",
+  "deviations": [
+    {
+      "rule": "ɗ, the implosive alveolar stop, is kept distinct rather than folded to d",
+      "why": "Unlike Swahili and Malay, which have no such letter and fold ɗ to d, Hausa's own Boko orthography has ɗ as a real, everyday letter (ɗan, ɗaya, huɗu) with a rule already present in all forty-one other reader tables in this corpus (Vietnamese's đ put it there first). Keeping it distinct costs nothing new and is the more accurate reading of a target's own /ɗ/, where one occurs."
+    },
+    {
+      "rule": "ʔ, the glottal stop, is read as an apostrophe rather than dropped",
+      "why": "Most readers in this corpus drop ʔ to nothing, because their own orthography has no letter for it. Hausa is a genuine exception: Boko already writes a medial glottal stop with an apostrophe in ordinary words (na'ura, sha'awa), so a foreign glottal stop is read the way Hausa's own is written, rather than silently dropped the way it is for readers with no device for it at all."
+    },
+    {
+      "rule": "No word-final epenthetic vowel is inserted after a consonant",
+      "why": "Considered and refused, on the phonotactic evidence rather than by default: Hausa natively closes syllables on a consonant (mutum, hannu, gwamnati, dan Sallah), so a foreign word ending in a consonant is not the ill-formed shape it would be for a CV-only reader like Swahili's. Building an epenthesis rule for a problem Hausa's own phonotactics do not have would be exactly the speculative machinery this project's own house style asks a table not to carry."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "/θ ð/ (English think, this)",
+      "out": "s d",
+      "why": "Boko has no th/dh digraph and Hausa has neither sound natively. s is the closest voiceless fricative at the same place a Hausa mouth reaches for; d is the closest the voiced counterpart has, matching how Hausa's own borrowings from English routinely substitute a plain stop or fricative for th (as fasfo does for the English /s/ cluster in passport, folding a whole consonant sequence onto the nearest Hausa shape)."
+    },
+    {
+      "sounds": "/v/ (English very, French vous)",
+      "out": "f",
+      "why": "Hausa has no phonemic /v/; loanwords from English and French regularly fold it to f, the voiceless counterpart at the same place, the same substitution es/it/de readers make for sounds just outside their own inventory."
+    },
+    {
+      "sounds": "/ə ɜ ɚ ɝ ʌ/ (English about, bird, water, cup)",
+      "out": "a",
+      "why": "Hausa has no reduced central vowel and does not weaken unstressed vowels the way English does, so an unstressed English syllable is read at full value whatever is written. a is the closest of Hausa's five vowels to schwa's mid-central quality, the same choice Swahili's and Malay's own tables make for the identical reason."
+    },
+    {
+      "sounds": "/y ø œ ɯ ʉ ʏ/ (front rounded and back unrounded vowels)",
+      "out": "u u e e u u",
+      "why": "Hausa's five vowels are all unrounded-front or rounded-back in the ordinary way; a front rounded vowel is read as its nearest back-rounded cousin (u) and a back unrounded vowel the same way, except the two mid-front rounded vowels ø/œ, which read closer to e."
+    }
+  ],
+  "policy": {
+    "syllable_separator": ".",
+    "word_separator": " ",
+    "stress": "caps",
+    "stress_min_syllables": 2,
+    "length": "none",
+    "tone": "drop",
+    "max_onset": 1,
+    "locale": "ha-NG",
+    "fixups": "first"
+  },
+  "policy_note": "stress: caps rather than none, unlike Hausa's own ipa column (which carries no stress mark at all, because Hausa itself has no contrastive stress -- see STRESS['ha'] in scripts/build_ipa.py). This is the mirror case, not a contradiction: a Hausa reader's own words are never marked for stress because Hausa has none to mark, but the *targets* this table reads (English, Russian, Arabic and the rest) do have contrastive stress, and Boko's Latin letters can carry a capital exactly the way Indonesian's and Malay's own readers do, so there is no reason to throw the information away on the reading side merely because the source side has none of its own to report. length: none matches the pack's own text column, which does not double a vowel either, for the same mechanical reason recorded in scripts/build_ipa.py's note above HA: there is nothing in Boko's ordinary spelling to model length on. max_onset: 1 matches Hausa's own preference for simple syllable onsets, the same evidence id__id-ID.json's and ms__ms-MY.json's own choice rests on and the same one Hausa's loanword adaptations show directly (Kirista breaks English Christian's onset cluster with an epenthetic vowel rather than keeping it). No curated Hausa sheet exists to score syllable-agreement against, so this table is held to zero --gaps and to being read aloud, the same honest bar id/ms/fil/sw's own tables set for themselves.",
+  "splits": [],
+  "phonemes": [
+    {
+      "slot": "any",
+      "ipa": "ʼ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˤ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˀ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ː",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̪",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̩",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "͈",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̯",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂʰ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃʲ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ͈",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts̪",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʑ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "dz",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "pf",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʰ",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰ",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "cʰ",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʰ",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "dˤ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡʰ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟʰ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽʰ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "p͈",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "t͈",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "k͈",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "s͈",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "t̪",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "s̪",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "m̩",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "n̩",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "q",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "b",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "d",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɗ",
+      "out": "ɗ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "f",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɸ",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "v",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʋ",
+      "out": "w"
+    },
+    {
+      "slot": "any",
+      "ipa": "θ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "ð",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "sh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʂ",
+      "out": "sh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "sh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʑ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "ly"
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɣ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ħ",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "h",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔ",
+      "out": "'"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʕ",
+      "out": "'"
+    },
+    {
+      "slot": "any",
+      "ipa": "m",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "ny"
+    },
+    {
+      "slot": "any",
+      "ipa": "nʲ",
+      "out": "ny"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɴ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɳ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "n",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "l",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɫ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɹ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʀ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʐ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɻ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "r̝",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "w"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɥ",
+      "out": "w"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰ",
+      "out": "w"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ̃ʊ̃",
+      "out": "aun"
+    },
+    {
+      "slot": "any",
+      "ipa": "ã",
+      "out": "an"
+    },
+    {
+      "slot": "any",
+      "ipa": "ẽ",
+      "out": "en"
+    },
+    {
+      "slot": "any",
+      "ipa": "ĩ",
+      "out": "in"
+    },
+    {
+      "slot": "any",
+      "ipa": "õ",
+      "out": "on"
+    },
+    {
+      "slot": "any",
+      "ipa": "ũ",
+      "out": "un"
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "a",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɑ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "æ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʌ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ə",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɜ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɚ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɝ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "e",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ø",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "œ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɤ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "i",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɪ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɨ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "o",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɔ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɒ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɵ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "u",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʊ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɯ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʉ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "y",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʏ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɬ",
+      "out": "l"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "iːj",
+      "out": "i"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "iːɪ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ̃",
+      "out": "an"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛ̃",
+      "out": "en"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʊ̃",
+      "out": "un"
+    }
+  ],
+  "syllable_fixups": [
+    {
+      "match": "([aeiou])\\1",
+      "out": "\\1"
+    },
+    {
+      "match": "([bcdfghjklmnprstwyz])\\1",
+      "out": "\\1"
+    }
+  ],
+  "targets": {},
+  "legend": "Babu sabuwar alama -- dukan haruffa da su ne na Hausa ta al'ada. BABBAN HARUFI = ma'auni mai karfi (inda harshen tushe ke da shi).",
+  "note": "Reader's legend, per RESPELL-SYSTEMS.md: nothing to teach. Every letter and digraph here is ordinary Boko orthography -- sh is /ʃ/ as in shan, ny is /ɲ/, ts is Hausa's own ejective affricate, ɗ is Hausa's own implosive letter, and a medial apostrophe is Hausa's own glottal stop, exactly as in na'ura. There is no curated Hausa sheet, so this table is not scored against a reviewer; it is held to zero --gaps and to being read aloud by a fluent speaker, which is the check this table has not yet had."
+}
