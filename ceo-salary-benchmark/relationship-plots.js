@@ -142,17 +142,33 @@
     select("Layout", "mode", [["mixed", "Pairs above · heatmap below"], ["mixed-reverse", "Heatmap above · pairs below"], ["pairs", "Pairs"], ["heatmap", "Heatmap"]]);
     select("Correlation", "correlation", [["spearman", "Spearman"], ["pearson", "Pearson"]]);
     if (scales) select("Values", "scale", scales);
+    const sizing = html("div", "relationship-sizing");
+    sizing.setAttribute("role", "group"); sizing.setAttribute("aria-label", "Plot size");
+    const fit = html("button", "text-button", "Fit to screen ↙"), expand = html("button", "text-button", "Expand details ↗");
+    for (const button of [fit, expand]) button.type = "button";
+    function size(expanded) {
+      root.classList.toggle("is-expanded", expanded);
+      fit.setAttribute("aria-pressed", String(!expanded)); expand.setAttribute("aria-pressed", String(expanded));
+    }
+    fit.addEventListener("click", () => size(false)); expand.addEventListener("click", () => size(true));
+    sizing.append(fit, expand); controls.append(sizing); size(false);
     const details = html("fieldset", "relationship-features"), summary = html("legend", "", "Features");
     details.append(summary);
     const choices = html("div", "relationship-feature-list");
+    const groups = new Map();
     columns.forEach((column) => {
+      const name = column.group || "Features";
+      if (!groups.has(name)) {
+        const group = html("fieldset", "relationship-feature-group");
+        group.append(html("legend", "", name)); groups.set(name, group); choices.append(group);
+      }
       const label = html("label"), input = html("input"); input.type = "checkbox"; input.value = column.key;
       input.checked = settings.features.includes(column.key);
       input.addEventListener("change", () => {
         settings.features = [...choices.querySelectorAll("input:checked")].map((input) => input.value);
         selectedPair = null; onChange(); render();
       });
-      label.append(input, column.label); choices.append(label);
+      label.append(input, column.label); groups.get(name).append(label);
     });
     details.append(choices);
     const back = html("button", "text-button", "Back to matrix"); back.type = "button"; back.hidden = true;

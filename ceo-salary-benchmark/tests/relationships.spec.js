@@ -8,6 +8,14 @@ test("record matrix supports features, transformations, layouts and scatter dril
   const matrix = page.locator("#scatter-matrix");
   await expect(matrix.locator(".relationship-cell")).toHaveCount(16);
   await expect(matrix.locator(".relationship-feature-list")).toBeVisible();
+  await expect(matrix.locator(".relationship-feature-group legend")).toHaveText(["Pay", "Organization statistics"]);
+  await expect(matrix.getByRole("button", { name: "Fit to screen ↙" })).toHaveAttribute("aria-pressed", "true");
+  await matrix.getByRole("button", { name: "Expand details ↗" }).click();
+  await expect(matrix.locator(".relationship-explorer")).toHaveClass(/is-expanded/);
+  expect(await matrix.locator(".relationship-scroll").evaluate((el) => el.scrollWidth > el.clientWidth || el.scrollHeight > el.clientHeight)).toBe(true);
+  await expect(matrix.locator(".relationship-features")).toBeVisible();
+  await matrix.getByRole("button", { name: "Fit to screen ↙" }).click();
+  await expect(matrix.locator(".relationship-explorer")).not.toHaveClass(/is-expanded/);
   await expect(page.locator("#salary-chart")).toBeHidden();
   const cell = matrix.locator('.relationship-cell[data-x="expenses"][data-y="salary"]');
   expect(Number(await cell.getAttribute("data-n"))).toBeGreaterThan(20);
@@ -92,6 +100,11 @@ test("joint drivers preserve aligned draws, support model families and place clo
   const dialog = page.locator("#model-explanation-dialog");
   await expect(dialog.locator(".relationship-cell")).toHaveCount(16);
   await expect(dialog.locator(".relationship-feature-list")).toBeVisible();
+  await expect(dialog.locator(".relationship-feature-group legend")).toContainText(["Organization statistics", "Employee pay", "Profile category effects", "Focus levels"]);
+  await dialog.getByRole("button", { name: "Expand details ↗" }).click();
+  await expect(dialog.locator(".relationship-scroll")).toHaveCSS("overflow", "auto");
+  await page.screenshot({ path: "tmp/joint-driver-expanded-details.png" });
+  await dialog.getByRole("button", { name: "Fit to screen ↙" }).click();
   const expected = await page.evaluate(() => {
     const artifact = window.CEO_BENCHMARK_DATA.predictiveModel;
     const row = artifact.comparison.find((row) => row.method === "bayesian" && row.includeHighestOtherPay && !row.includeAdvertisedRanges);

@@ -4,6 +4,11 @@ test("expectation target separates log-location uncertainty from predictive spre
   const errors = []; page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/ceo-salary-benchmark/");
   await page.locator("#chart-tab-model").click();
+  await expect(page.locator("#model-target option")).toHaveText(["Estimation + peer variation", "Estimation only (epistemic)"]);
+  await page.getByRole("button", { name: "About displayed uncertainty" }).hover();
+  await expect(page.locator("#help-tooltip")).toContainText("All models are fitted on log salary.");
+  await expect(page.locator("#help-tooltip")).toContainText("Posterior predictive salary distribution");
+  await expect(page.locator("#help-tooltip")).toContainText("e^μ means exponentiation");
   await page.locator("#quantile-granularity").selectOption("custom");
   await page.locator("#custom-quantiles").fill("25, 50, 75");
   await page.locator("#custom-quantiles").blur();
@@ -22,7 +27,7 @@ test("expectation target separates log-location uncertainty from predictive spre
     return { id: row.key, quantiles: [.25, .5, .75].map(q), interval: [.055, .945].map(q) };
   });
   await page.locator("#model-target").selectOption("expectation");
-  await expect(page.locator("#quantile-basis")).toContainText("Estimation percentiles of exp(μ)");
+  await expect(page.locator("#quantile-basis")).toContainText("Estimation percentiles of e^μ");
   await expect(page.locator("#quantile-grid .quantile-uncertainty")).toHaveCount(0);
   const location = await values();
   location.forEach((value, i) => expect(value).toBeCloseTo(expected.quantiles[i], 6));
@@ -40,8 +45,11 @@ test("expectation target separates log-location uncertainty from predictive spre
   await expect(page.locator("#model-title")).toHaveValue(title);
   for (const method of ["gp", "linear", "gam", "gamCategorical", "svr", "intercept", "bayesianGam", "bayesianExact"]) {
     await page.locator("#model-method").selectOption(method === "bayesianExact" ? "bayesian" : method);
+    if (method === "gp") await expect(page.locator("#model-target")).toHaveAttribute("title", /kernel parameters are held fixed/);
+    if (method === "svr") await expect(page.locator("#model-target")).toHaveAttribute("title", /Bootstrap uncertainty/);
+    if (method === "linear") await expect(page.locator("#model-target")).toHaveAttribute("title", /Approximate coefficient uncertainty/);
     if (method === "bayesianExact") await page.locator("#model-base-only").check();
-    await expect(page.locator("#quantile-basis")).toContainText("Estimation percentiles of exp(μ)");
+    await expect(page.locator("#quantile-basis")).toContainText("Estimation percentiles of e^μ");
     const draws = await values(); expect(draws).toHaveLength(3);
     expect(draws.every(Number.isFinite)).toBe(true);
     expect(draws[0]).toBeLessThan(draws[1]); expect(draws[1]).toBeLessThan(draws[2]);
