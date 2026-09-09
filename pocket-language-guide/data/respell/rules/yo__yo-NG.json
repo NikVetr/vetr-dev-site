@@ -1,0 +1,776 @@
+{
+  "source": "yo",
+  "accent": "yo-NG",
+  "status": "ready",
+  "version": 1,
+  "derives_from": "No published Yoruba pronunciation-respelling key exists to borrow -- Yoruba lexicography prints no such column, the same absence Hausa's and Amharic's own entries record, because Standard orthography is shallow enough that a dictionary does not need one. What this table derives from instead is the same real, observable system Hausa's own table reads: the way Yoruba itself spells a foreign loanword in newspapers, signage and everyday print -- kọ́mpútà (computer), báńkì (bank), sìgá/sìgárẹ́ẹ̀tì (cigarette), fóònù (phone), rédíò (radio), pásípọ́ọ̀tù (passport). Every one collapses a consonant cluster with an inserted vowel and a foreign sound onto the nearest native letter, which is what `syllable_fixups` and the `any`-slot table below do mechanically. Adapted in shape from `ha__ha-NG.json`, the corpus's other West African CV-syllable Latin orthography, with the consonant table kept largely as Hausa measured it (both languages license no onset or coda clusters at all, so `max_onset: 1` is not a compromise for either) and the vowel table rebuilt outright: Hausa's own vowels do not distinguish close-mid from open-mid at either height, so its table collapses e/ɛ and o/ɔ onto one letter apiece, where Yoruba's alphabet carries that exact distinction as `e`/`ẹ` and `o`/`ọ` -- collapsing it here would throw away the one thing this reader's own script is built to keep.",
+  "deviations": [
+    {
+      "for": "z, dz",
+      "why": "Yoruba has no voiced non-labial fricative at all -- the native inventory is b d dʒ ɡ for voiced obstruents and f s ʃ h for voiceless fricatives, with nothing voiced among the fricatives -- so /z/ is folded to its voiceless counterpart `s`, the same voicing-neutralising move this table already makes for /v/->`f`."
+    },
+    {
+      "for": "tʃ and its affricate relatives (ʈʂʰ, tɕʰ, tʃʲ, tɕ, ʈʂ)",
+      "why": "Yoruba has no <c> letter and no voiceless affricate of its own -- only the voiced dʒ, spelt `j`. Hausa's table reads these onto `c`, which is Hausa's own letter for exactly this affricate; Yoruba has no equivalent, so the class is read onto `ṣ`, the fricative Yoruba does have at the same place of articulation, rather than onto `j`, which would misrepresent voicing in the direction a reader is more likely to notice."
+    },
+    {
+      "for": "ɗ",
+      "why": "Kept as its own letter in Hausa's own table, because Hausa has an implosive series and a native letter for it. Yoruba has neither, so the plain stop `d` is the nearest sound rather than a borrowed letter this reader's own alphabet does not contain."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "/θ ð/ (English think, this)",
+      "out": "s d",
+      "why": "Boko has no th/dh digraph and Hausa has neither sound natively. s is the closest voiceless fricative at the same place a Hausa mouth reaches for; d is the closest the voiced counterpart has, matching how Hausa's own borrowings from English routinely substitute a plain stop or fricative for th (as fasfo does for the English /s/ cluster in passport, folding a whole consonant sequence onto the nearest Hausa shape)."
+    },
+    {
+      "sounds": "/v/ (English very, French vous)",
+      "out": "f",
+      "why": "Hausa has no phonemic /v/; loanwords from English and French regularly fold it to f, the voiceless counterpart at the same place, the same substitution es/it/de readers make for sounds just outside their own inventory."
+    },
+    {
+      "sounds": "/ə ɜ ɚ ɝ ʌ/ (English about, bird, water, cup)",
+      "out": "a",
+      "why": "Hausa has no reduced central vowel and does not weaken unstressed vowels the way English does, so an unstressed English syllable is read at full value whatever is written. a is the closest of Hausa's five vowels to schwa's mid-central quality, the same choice Swahili's and Malay's own tables make for the identical reason."
+    },
+    {
+      "sounds": "/y ø œ ɯ ʉ ʏ/ (front rounded and back unrounded vowels)",
+      "out": "u u e e u u",
+      "why": "Hausa's five vowels are all unrounded-front or rounded-back in the ordinary way; a front rounded vowel is read as its nearest back-rounded cousin (u) and a back unrounded vowel the same way, except the two mid-front rounded vowels ø/œ, which read closer to e."
+    }
+  ],
+  "policy": {
+    "syllable_separator": ".",
+    "word_separator": " ",
+    "stress": "caps",
+    "stress_min_syllables": 2,
+    "length": "none",
+    "tone": "drop",
+    "max_onset": 1,
+    "locale": "yo-NG",
+    "fixups": "first"
+  },
+  "policy_note": "max_onset: 1, and not a compromise -- Yoruba syllable structure is strictly (C)V, with no onset or coda consonant clusters anywhere in the native vocabulary, so `reader_onsets` is omitted the same way Mandarin's own table omits it: the field would be read at max_onset 1 and do nothing. Every consonant cluster a foreign word's IPA presents is therefore broken across syllables by `syllabify` alone, which is the mechanical version of what Yoruba's own loanword spelling already does by ear (sukulu for school, búrẹ́dì for bread -- a vowel inserted to open every cluster). \n\nstress: caps, not none, for the same reason `ha`'s own table gives: Yoruba itself has no contrastive stress, so this device never fires on a Yoruba word, but marking a foreign word's stressed syllable is still a real signal to a reader approximating an unfamiliar pronunciation, and capitalisation does not collide with anything Yoruba's own orthography uses the letter case for. \n\ntone: drop, matching Punjabi's own reader table rather than the three that keep it -- Punjabi is itself a tone language and still chose drop for its own reader, on the grounds that a respelling is approximating a foreign word's segments, not composing a second, independently-tuned tone melody on top of them. The same argument applies here with more force: Yoruba's tone is register, not contour, so folding an arbitrary foreign pitch contour onto three Yoruba tone levels would assert a specific tone melody with no real source in the word being read, on every single respelling in every one of Yoruba's 42 target pairs -- a much larger and less defensible claim than the one Vietnamese, Thai and Mandarin's own readers make about each other's genuinely cognate tone systems. \n\nlength: none. Yoruba writes a long vowel by doubling only in a dictionary headword, the same convention `ha_to_ipa`'s own note records for Hausa, and this pack's own `text` column does not use it, so there is no established reading convention for a reader to lean on here either.",
+  "splits": [],
+  "phonemes": [
+    {
+      "slot": "any",
+      "ipa": "ʼ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˤ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˀ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ː",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̪",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̩",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "͈",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̯",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂʰ",
+      "out": "ṣ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "ṣ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃʲ",
+      "out": "ṣ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "ṣ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ͈",
+      "out": "ṣ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "ṣ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "ṣ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts̪",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʑ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "dz",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "pf",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʰ",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰ",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "cʰ",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʰ",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "dˤ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡʰ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟʰ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽʰ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "p͈",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "t͈",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "k͈",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "s͈",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "t̪",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "s̪",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "m̩",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "n̩",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "q",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "b",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "d",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɗ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "f",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɸ",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "v",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʋ",
+      "out": "w"
+    },
+    {
+      "slot": "any",
+      "ipa": "θ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "ð",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "ṣ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʂ",
+      "out": "ṣ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "ṣ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʑ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "ly"
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɣ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ħ",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "h",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔ",
+      "out": "'"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʕ",
+      "out": "'"
+    },
+    {
+      "slot": "any",
+      "ipa": "m",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "ny"
+    },
+    {
+      "slot": "any",
+      "ipa": "nʲ",
+      "out": "ny"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɴ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɳ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "n",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "l",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɫ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɹ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʀ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʐ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɻ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "r̝",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "w"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɥ",
+      "out": "w"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰ",
+      "out": "w"
+    },
+    {
+      "slot": "any",
+      "ipa": "ã",
+      "out": "an"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ̃",
+      "out": "an"
+    },
+    {
+      "slot": "any",
+      "ipa": "ẽ",
+      "out": "ẹn"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛ̃",
+      "out": "ẹn"
+    },
+    {
+      "slot": "any",
+      "ipa": "ĩ",
+      "out": "in"
+    },
+    {
+      "slot": "any",
+      "ipa": "õ",
+      "out": "ọn"
+    },
+    {
+      "slot": "any",
+      "ipa": "ũ",
+      "out": "un"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʊ̃",
+      "out": "un"
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "a",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɑ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "æ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʌ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ə",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɜ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɚ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɝ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "e",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ø",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "œ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛ",
+      "out": "ẹ"
+    },
+    {
+      "slot": "any",
+      "ipa": "i",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɪ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɨ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "o",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɵ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɤ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɔ",
+      "out": "ọ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɒ",
+      "out": "ọ"
+    },
+    {
+      "slot": "any",
+      "ipa": "u",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʊ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɯ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʉ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "y",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʏ",
+      "out": "u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ̃ʊ̃",
+      "out": "aun"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɬ",
+      "out": "l"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "iːj",
+      "out": "i"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "iːɪ",
+      "out": "i"
+    }
+  ],
+  "syllable_fixups": [
+    {
+      "match": "([aeiouẹọ])\\1",
+      "out": "\\1"
+    },
+    {
+      "match": "([bdfghjklmnprstwyṣ])\\1",
+      "out": "\\1"
+    }
+  ],
+  "targets": {},
+  "legend": "Kò sí àmì tuntun -- gbogbo lẹ́tà jẹ́ ti Yorùbá ní ìbámu. LẸ́TÀ ÀGBÀ = ìdí tí ó ní agbára (níbi tí èdè ìpìlẹ̀ ti ní irú u rẹ̀).",
+  "note": "What this reads for and what it does not. Yoruba's own tone is fully spelt in `data/lang/yo`'s own `text` column, which is the thing this file does not touch -- this table is the mirror direction, spelling *other* languages' IPA in Yoruba letters for a Yoruba reader, and `policy.tone: drop` means a foreign tone contour is never asserted here (see `policy_note`). What it keeps that Hausa's sibling table does not: the close-mid/open-mid vowel distinction Yoruba's own alphabet already marks (e/ẹ, o/ọ), rebuilt from measurement rather than carried over blind -- see `derives_from`. Nasal vowels are spelt with the subdotted letter for the front and back open-mid categories (ẹn, ọn) rather than the plain-letter `en`/`on` Hausa's own table would use for the identical IPA, because standard Yoruba orthography never writes `en` or `on` as a nasal vowel -- only `ẹn`/`ọn` are legal nasal spellings, so `en`/`on` would misparse as a plain vowel followed by an onset `n` rather than read as nasal at all. Checked with `node scripts/respell_check.mjs yo --gaps` before being trusted, not assumed."
+}

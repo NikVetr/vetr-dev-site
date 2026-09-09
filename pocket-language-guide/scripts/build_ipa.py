@@ -931,7 +931,13 @@ STRESS = {"fr": "phrase", "ko": "none", "vi": "none", "ja": "none",
           # vowel length already in the column; Leslau's grammar and the *Handbook of
           # the IPA* illustration both state that it is not contrastive, and there is
           # no espeak mark to keep or drop because the espeak route is not used.
-          "am": "none"}
+          "am": "none",
+          # Lao has no phonemic stress -- prominence is at the phrase level and is
+          # not lexical -- and `lao_to_ipa` emits no mark at all, the way
+          # `am_to_ipa` and `fil_to_ipa` do not. So this entry documents rather than
+          # strips, which is Amharic's and Filipino's shape. What Lao *does* write
+          # is tone, and that is a property of the syllable rather than of the word.
+          "lo": "none"}
 
 # Which packs write `text` in something other than the Latin alphabet, so that a
 # Latin run left in one is a loanword rather than the language. `tlh` and `qya` are
@@ -1015,7 +1021,18 @@ NON_LATIN = {"zh-Hans", "ja", "ko", "th", "hi", "ar", "ru", "el", "tlh", "qya", 
              # content is `B2 · BPK · bakso` -- the gate doing exactly the job its
              # comment describes, which is what the Telugu, Punjabi, Gujarati and
              # Kannada pork-code rows record.
-             "ml"}
+             "ml",
+             # Lao writes its loanwords in its own letters too -- ວາຍຟາຍ, ເອທີເອັມ,
+             # ຊິມ, ວີຊາ, ອີຊິມ -- so almost no `text` cell in the pack quotes Latin.
+             # Two rows do and both are deliberate: `atm-cash.pin` keeps `PIN` in
+             # `text_alt`, which takes no `ipa`, and `common-signs.pork-code`, whose
+             # whole content is `B2 · BPK · bakso`, is refused by this gate exactly
+             # as it is for Telugu, Punjabi, Kannada and Malayalam -- the gate doing
+             # the job its comment describes. The two number notes quote a
+             # romanisation and are `note` rows, which this script skips on
+             # principle. Named anyway, so the next row that quotes Latin is asked
+             # the same question.
+             "lo"}
 
 
 # ------------------------------------------------------------------- alphabet
@@ -1841,6 +1858,367 @@ REPAIR = {
 }
 
 
+# ---------------------------------------------------------- Lao, orthography -> IPA
+# There is no espeak `lo` voice in *either* library -- checked in both, and neither
+# has an `lo_dict` or a `lang/tai/lo`; `espeak-ng-data/lang/tai/` holds only Shan.
+# So Lao takes a hand-authored G2P on **Amharic's** model rather than Filipino's:
+# one parse produces the IPA *and* the BGN/PCGN romanisation, so the two columns
+# agree by construction the way Malayalam's `iso15919.py` and its espeak column do.
+#
+# The route is orthography -> IPA and **not** romanisation -> IPA, and the deciding
+# reason is in BGN/PCGN 1966's own note 3: "Tone marks should not be romanized. For
+# example ນາ, ນ່າ, ນ້າ, ນ໊າ, ນ໋າ should all be romanized na." BGN also merges ຂ with
+# ຄ, ຖ with ທ and ຜ with ພ -- every high/low consonant-class pair -- so a
+# romanisation route could derive neither the tone nor the class that determines it,
+# which is most of what a Lao `ipa` column has to carry. `lo` is therefore in
+# `NON_LATIN` and **not** in `ROMANISED`.
+#
+# Lao orthography is shallow and was reformed to be read directly, so the parse is a
+# rhyme table over four orthogonal slots. See tmp/lao.md section 6 for the sources
+# and for the one contested cell of the tone rule, which `GRADE["lo"]` names.
+
+# ---------------------------------------------------------------- consonants
+# (initial IPA, BGN initial, tone class). The three classes are what decide the
+# tone, so they are part of the letter's identity here rather than a lookup.
+LAO_HIGH, LAO_MID, LAO_LOW = "h", "m", "l"
+LAO_INITIALS = {
+    # High class: the six plain letters plus every ຫ-prefixed sonorant. A silent ຫ
+    # exists only to move the following sonorant into the high class, which is the
+    # single most important fact about Lao tone spelling.
+    "ຂ": ("kʰ", "kh", LAO_HIGH), "ສ": ("s", "s", LAO_HIGH), "ຖ": ("tʰ", "th", LAO_HIGH),
+    "ຜ": ("pʰ", "ph", LAO_HIGH), "ຝ": ("f", "f", LAO_HIGH), "ຫ": ("h", "h", LAO_HIGH),
+    "ໜ": ("n", "n", LAO_HIGH), "ໝ": ("m", "m", LAO_HIGH),
+    "ຫງ": ("ŋ", "ng", LAO_HIGH), "ຫຍ": ("ɲ", "gn", LAO_HIGH), "ຫນ": ("n", "n", LAO_HIGH),
+    "ຫມ": ("m", "m", LAO_HIGH), "ຫລ": ("l", "l", LAO_HIGH), "ຫຼ": ("l", "l", LAO_HIGH),
+    "ຫວ": ("w", "v", LAO_HIGH), "ຫຣ": ("r", "r", LAO_HIGH),
+    # Mid class.
+    "ກ": ("k", "k", LAO_MID), "ຈ": ("c", "ch", LAO_MID), "ດ": ("d", "d", LAO_MID),
+    "ຕ": ("t", "t", LAO_MID), "ບ": ("b", "b", LAO_MID), "ປ": ("p", "p", LAO_MID),
+    "ຢ": ("j", "y", LAO_MID), "ອ": ("ʔ", "", LAO_MID),
+    # Low class.
+    "ຄ": ("kʰ", "kh", LAO_LOW), "ຊ": ("s", "x", LAO_LOW), "ທ": ("tʰ", "th", LAO_LOW),
+    "ພ": ("pʰ", "ph", LAO_LOW), "ຟ": ("f", "f", LAO_LOW), "ຮ": ("h", "h", LAO_LOW),
+    "ງ": ("ŋ", "ng", LAO_LOW), "ຍ": ("ɲ", "gn", LAO_LOW), "ນ": ("n", "n", LAO_LOW),
+    "ມ": ("m", "m", LAO_LOW), "ຣ": ("r", "r", LAO_LOW), "ລ": ("l", "l", LAO_LOW),
+    "ວ": ("w", "v", LAO_LOW),
+    # The one live consonant cluster, C + ຼ (semivowel lo). Modern Lao has kept it
+    # only in a handful of loans; ຫຼ above is the frequent one and is a class
+    # marker rather than a cluster.
+    "ກຼ": ("kl", "kl", LAO_MID), "ຂຼ": ("kʰl", "khl", LAO_HIGH), "ຄຼ": ("kʰl", "khl", LAO_LOW),
+    "ປຼ": ("pl", "pl", LAO_MID), "ພຼ": ("pʰl", "phl", LAO_LOW), "ຜຼ": ("pʰl", "phl", LAO_HIGH),
+    # C + ວ, romanised character by character per BGN note 6.
+    "ກວ": ("kw", "ko", LAO_MID), "ຂວ": ("kʰw", "kho", LAO_HIGH), "ຄວ": ("kʰw", "kho", LAO_LOW),
+}
+# C + ຣ and C + ລ, which modern Lao writes only in loanwords -- and writes a great
+# deal of: ຝຣັ່ງ "France", ບຣາຊິນ "Brazil", ອາຟຣິກາ "Africa", ໂປແລນ "Poland". BGN
+# note 6 says to romanise these "character by character ... even where the second
+# character may represent no pronounced sound", which is what the two loops below
+# do. The tone class is the *first* letter's, as it is for every Lao cluster.
+for _c, (_ipa, _bgn, _cls) in list(LAO_INITIALS.items()):
+    if len(_c) != 1 or _ipa in ("ŋ", "ɲ", "n", "m", "l", "r", "w", "j", "ʔ", "h", "s"):
+        continue
+    for _second, _si, _sb in (("ຣ", "r", "r"), ("ລ", "l", "l"), ("ວ", "w", "o")):
+        LAO_INITIALS.setdefault(_c + _second, (_ipa + _si, _bgn + _sb, _cls))
+# ຟ and ສ do take a following ຣ/ລ/ວ in loans even though they are fricatives, and ຫ
+# already has its own ຫຣ/ຫລ/ຫວ digraph entries above, which must not be overwritten.
+# ຊວ is the one that made this necessary: ICU's Lao name for Swahili is ຊວາຮີລິ.
+for _c in ("ຟ", "ຝ", "ສ", "ຊ", "ຍ", "ມ", "ນ", "ງ", "ລ", "ຮ"):
+    _ipa, _bgn, _cls = LAO_INITIALS[_c]
+    for _second, _si, _sb in (("ຣ", "r", "r"), ("ລ", "l", "l"), ("ວ", "w", "o")):
+        if _c == _second:
+            continue
+        LAO_INITIALS.setdefault(_c + _second, (_ipa + _si, _bgn + _sb, _cls))
+# Longest first, so ຫຍ beats ຫ and ກຼ beats ກ.
+LAO_INITIAL_KEYS = sorted(LAO_INITIALS, key=len, reverse=True)
+
+# ---------------------------------------------------------------- finals
+# All eight Lao finals plus the two written with a vowel letter. `son` says whether
+# the syllable is live (sonorant coda or open long vowel) or dead (stop coda),
+# which is the other half of the tone rule.
+LAO_FINALS = {
+    "ກ": ("k", "k", False), "ດ": ("t", "t", False), "ບ": ("p", "p", False),
+    "ງ": ("ŋ", "ng", True), "ນ": ("n", "n", True), "ມ": ("m", "m", True),
+    "ຍ": ("j", "y", True), "ວ": ("w", "o", True),
+    # ຣ and ລ occur syllable-finally only in loanwords -- ອູແກຣນ "Ukraine",
+    # ບຣາຊິນ -- and Lao pronounces both as /n/, exactly as Thai does with its
+    # cognate ร and ล. BGN gives ຣ a syllable-final value of `r` (consonant row 22)
+    # and lists none for ລ, so `l` is used for symmetry and is what the standard's
+    # own note 6 asks for -- "character by character".
+    "ຣ": ("n", "r", True), "ລ": ("n", "l", True),
+    # **Every other consonant is a legal coda in a loanword**, neutralised to the
+    # canonical stop of its own place. This is Lao's (and Thai's) transliteration
+    # rule and it is not an edge case: it is how ICU's own Lao name for Spanish is
+    # spelt, ສະແປນນິຊ, whose final ຊ is a bare consonant with no vowel sign -- which
+    # is what this table was missing when `language_name_ipa` first ran.
+    #
+    # BGN's third consonant column ("full syllable within a word") gives these the
+    # Sanskrit-style doubled forms `kkha`, `tcha`, `tsa`, `tta`, `ttha`, `ppa`,
+    # `ppha`, `pfa`; that column is for a consonant *within* a word carrying an
+    # inherent vowel, not for a coda, so the plain coda letter is used here and the
+    # departure is recorded in tmp/lao.md.
+    "ຂ": ("k", "k", False), "ຄ": ("k", "k", False),
+    "ຈ": ("t", "t", False), "ສ": ("t", "s", False), "ຊ": ("t", "s", False),
+    "ຕ": ("t", "t", False), "ຖ": ("t", "t", False), "ທ": ("t", "t", False),
+    "ປ": ("p", "p", False), "ຜ": ("p", "p", False), "ຝ": ("p", "f", False),
+    "ພ": ("p", "p", False), "ຟ": ("p", "f", False),
+}
+
+# ---------------------------------------------------------------- the rhyme table
+# A Lao syllable is
+#
+#     [pre-base vowel] initial [above/below vowel] [tone mark] [spacing tail] [final]
+#
+# and **the tone mark sits in the middle of the vowel**, which is the fact the first
+# version of this got wrong: the combining vowel signs ັ ິ ີ ຶ ື ຸ ູ ົ come *before*
+# the tone mark and the spacing ones ະ າ ວ ຽ ອ ຳ ໍ come *after* it. So ຄ້າ is
+# ຄ + ້ + າ and a parser that looks for the whole vowel before the tone mark cannot
+# read it. Confirmed at r12a.github.io/scripts/laoo: "Tone marks should be typed and
+# stored after any combining vowel mark ... However, the tone mark should be typed
+# before ຳ, even though it will be displayed above the nikhahit."
+#
+# The table is therefore keyed on (pre, combining, tail) -- three orthogonal slots,
+# no guessing -- and covers the whole standard Lao vowel set.
+# Value: (IPA nucleus, BGN nucleus, long?).
+LAO_PRE_VOWELS = "ເແໂໃໄ"
+LAO_COMB = "ັິີຶືຸູົໍ"
+# ໍ is a *superscript* vowel sign, so it sits in LAO_COMB before the tone mark; ຳ is
+# the one sign that follows the tone mark, which is why it alone is a tail.
+LAO_TAILS = ["ວະ", "ຽະ", "າະ", "ະ", "າ", "ວ", "ຽ", "ຍ", "ອ", "ຳ"]
+LAO_TONE_MARKS = {"່": "ek", "້": "tho", "໊": "ti", "໋": "catawa"}
+LAO_RHYMES = {
+    # short/long pairs written with a combining sign alone
+    ("",  "ັ", ""):    ("a",   "a",   False),
+    ("",  "ິ", ""):    ("i",   "i",   False),
+    ("",  "ີ", ""):    ("iː",  "i",   True),
+    ("",  "ຶ", ""):    ("ɯ",   "u",   False),
+    ("",  "ື", ""):    ("ɯː",  "u",   True),
+    ("",  "ຸ", ""):    ("u",   "ou",  False),
+    ("",  "ູ", ""):    ("uː",  "ou",  True),
+    ("",  "ົ", ""):    ("o",   "ô",   False),
+    # written with a spacing tail alone
+    ("",  "",  "ະ"):   ("a",   "a",   False),
+    ("",  "",  "າ"):   ("aː",  "a",   True),
+    ("",  "ໍ", ""):    ("ɔː",  "o",   True),
+    ("",  "",  "ອ"):   ("ɔː",  "o",   True),
+    ("",  "",  "ວ"):   ("ua̯", "oua", True),
+    ("",  "",  "ຽ"):   ("ia̯", "ia",  True),
+    ("",  "",  "ຳ"):   ("am",  "am",  False),
+    # combining + tail
+    ("",  "ັ", "ອ"):   ("ɔ",   "o",   False),
+    ("",  "ົ", "ວ"):   ("ua̯", "oua", True),
+    ("",  "ັ", "ວ"):   ("ua̯", "oua", False),
+    ("",  "ົ", "ວະ"):  ("ua̯", "oua", False),
+    ("",  "ັ", "ຽ"):   ("ia̯", "ia",  False),
+    ("",  "ິ", "ວ"):   ("iw",  "iou", True),
+    ("",  "ີ", "ວ"):   ("iːw", "iou", True),
+    ("",  "ົ", "ຽ"):   ("oːj", "oy",  True),
+    # ເ
+    ("ເ", "",  ""):    ("eː",  "é",   True),
+    ("ເ", "",  "ະ"):   ("e",   "é",   False),
+    ("ເ", "ັ", ""):    ("e",   "é",   False),
+    ("ເ", "ິ", ""):    ("ɤ",   "eu",  False),
+    ("ເ", "ີ", ""):    ("ɤː",  "eu",  True),
+    ("ເ", "ິ", "ະ"):   ("ɤ",   "eu",  False),
+    ("ເ", "ຶ", "ອ"):   ("ɯa̯", "ua",  False),
+    ("ເ", "ື", "ອ"):   ("ɯa̯", "ua",  True),
+    ("ເ", "ົ", "າ"):   ("aw",  "ao",  True),
+    # ເ◌າ without the ົ is a live alternative spelling of the same /aw/ vowel --
+    # ຫົວເຂ່າ "knee" writes it that way. Unambiguous, because າ cannot open a
+    # syllable, so the sequence has no other reading.
+    ("ເ", "",  "າ"):   ("aw",  "ao",  True),
+    ("ເ", "",  "າະ"):  ("ɔ",   "o",   False),
+    ("ເ", "ັ", "ຽ"):   ("ia̯", "ia",  True),
+    ("ເ", "",  "ຽ"):   ("ia̯", "ia",  True),
+    ("ເ", "ັ", "ຽະ"):  ("ia̯", "ia",  False),
+    # ຍ spells the ia vowel wherever ຽ does. BGN's consonant row 8 lists "ຍ, ຽ"
+    # together and its vowel row 10 keys on ◌ຽ; both spellings are current, and
+    # ເບຍ "beer" writes ຍ where ດຽວ "single" writes ຽ. The tail is matched at one
+    # position only, so this never competes with a final ຍ: in ຫຼາຍ the tail is າ
+    # and ຍ is the /j/ coda.
+    ("ເ", "",  "ຍ"):   ("ia̯", "ia",  True),
+    ("ເ", "ັ", "ຍ"):   ("ia̯", "ia",  True),
+    ("",  "ັ", "ຍ"):   ("ia̯", "ia",  False),
+    ("",  "",  "ຍ"):   ("ia̯", "ia",  True),
+    # ແ ໂ ໄ ໃ
+    ("ແ", "",  ""):    ("ɛː",  "è",   True),
+    ("ແ", "",  "ະ"):   ("ɛ",   "è",   False),
+    ("ແ", "ັ", ""):    ("ɛ",   "è",   False),
+    ("ໂ", "",  ""):    ("oː",  "ô",   True),
+    ("ໂ", "",  "ະ"):   ("o",   "ô",   False),
+    ("ໄ", "",  ""):    ("aj",  "ai",  True),
+    ("ໃ", "",  ""):    ("aj",  "ai",  True),
+}
+# Longest first, so ວະ beats ວ and າະ beats າ.
+LAO_TAIL_KEYS = sorted({t for _, _, t in LAO_RHYMES if t}, key=len, reverse=True)
+# Anything that can only belong to a syllable whose *initial precedes it*, so a
+# consonant standing before one of these is that syllable's initial rather than the
+# previous syllable's final.
+#
+# **The pre-base vowels are deliberately not in this set**, and getting that
+# backwards is what turned ຂອບໃຈ into ຂອ-ບ-ໃຈ: a pre-base vowel always *opens* a
+# syllable, so the consonant in front of one can only be the previous syllable's
+# final. `ຼ` is here because it is part of the initial it subjoins to.
+LAO_STARTS_RHYME = set(LAO_COMB) | set(LAO_TONE_MARKS) | set("ະາຳຼ")
+
+# ---------------------------------------------------------------- the tone rule
+# Wikipedia's *Indication of tones* table, which is the only source found that
+# covers all fifteen cells at once, mapped onto Osatananda 1997 p.40's Chao letters
+# for Vientiane. `live` is a sonorant coda or an open long vowel; a stop coda or a
+# short open syllable is dead.
+#
+# ONE CELL IS CONTESTED and is recorded in GRADE["lo"] rather than hidden: for
+# (low class, short vowel) this table gives mid `˧`, where the same article's
+# *checked syllables* table gives ຮັກ "love" as Low.
+LAO_TONE = {
+    #              live      long+stop        short            mai ek    mai tho
+    LAO_HIGH: {"live": "˩",  "deadlong": "˧˩", "deadshort": "˧˥", "ek": "˧", "tho": "˧˩"},
+    LAO_MID:  {"live": "˩",  "deadlong": "˧˩", "deadshort": "˧˥", "ek": "˧", "tho": "˥˨"},
+    LAO_LOW:  {"live": "˧˥", "deadlong": "˥˨", "deadshort": "˧",  "ek": "˧", "tho": "˥˨"},
+}
+# The two rare marks, named by the same source: ໊ = high, ໋ = rising (= low here).
+LAO_TONE_RARE = {"ti": "˧˥", "catawa": "˩"}
+
+
+class LaoParseError(ValueError):
+    pass
+
+
+def _lao_parses(s, i):
+    """Every legal reading of one syllable at `i`, in preference order.
+
+    A generator rather than a function, because **Lao syllable division is
+    genuinely ambiguous at three points** and no amount of look-ahead settles it:
+
+    - ກວດ is ກ + ວ(/uːə/) + ດ, but ແຂວງ is ຂວ(/kʰw/) + າ + ງ, so whether a
+      consonant plus ວ is a cluster or a consonant plus a vowel depends on what
+      follows.
+    - ຕາມອນ is ຕາ + ມອນ where ຫຼາຍ is ຫຼ + າ + ຍ, so whether a consonant before
+      ອ/ວ/ຽ/ຍ is this syllable's final or the next one's initial depends on
+      whether the remainder parses.
+    - ດຽວ is ດ + ຽ + ວ, so the same question again for a consonant before ຽ.
+
+    So `lao_parse_word` searches instead of guessing, which is cheap -- a Lao
+    orthographic word is a dozen characters at most -- and removes a whole class of
+    heuristics. Preference order is longest initial, then longest tail, then *with*
+    a final before *without*, which makes the result deterministic.
+    """
+    pre = ""
+    if i < len(s) and s[i] in LAO_PRE_VOWELS:
+        pre = s[i]; i += 1
+    for k in LAO_INITIAL_KEYS:
+        if not s.startswith(k, i):
+            continue
+        j = i + len(k)
+        comb = ""
+        if j < len(s) and s[j] in LAO_COMB:
+            comb = s[j]; j += 1
+        tone_mark = ""
+        if j < len(s) and s[j] in LAO_TONE_MARKS:
+            tone_mark = LAO_TONE_MARKS[s[j]]; j += 1
+        for tail in LAO_TAIL_KEYS + [""]:
+            if tail and not s.startswith(tail, j):
+                continue
+            if (pre, comb, tail) not in LAO_RHYMES:
+                continue
+            t = j + len(tail)
+            ipa_v, bgn_v, long_v = LAO_RHYMES[(pre, comb, tail)]
+            # A rhyme that closes its own syllable takes no final: a tail ending in
+            # ະ (the short open vowels), ຳ (which carries its own /m/), and ໍ (the
+            # long ɔː written without ອ -- before a final Lao writes ອ instead).
+            closed = tail.endswith("ະ") or tail == "ຳ" or comb == "ໍ"
+            options = []
+            if not closed and t < len(s) and s[t] in LAO_FINALS:
+                options.append(s[t])
+            options.append("")
+            for fin in options:
+                # ໌ U+0ECC, the cancellation mark, silences the consonant it sits
+                # on -- ໄຟລ໌ "file", ອາເມຣິກ໌, and BGN's own example ເບີຣ໌ -> Beur
+                # (note 8). It is a live Lao loanword device and it sits *after* the
+                # final, which is why it cannot be handled in the tone-mark slot.
+                # The IPA drops the cancelled consonant; the romanisation keeps it,
+                # which is what BGN does.
+                killed = fin and t + len(fin) < len(s) and s[t + len(fin)] == "\u0ecc"
+                ipa_c, bgn_c, cls = LAO_INITIALS[k]
+                if tail == "ຳ":
+                    ipa_f, bgn_f, son = "", "", True   # ຳ carries its own /m/
+                elif fin and killed:
+                    ipa_f, bgn_f, son = "", LAO_FINALS[fin][1], long_v
+                elif fin:
+                    ipa_f, bgn_f, son = LAO_FINALS[fin]
+                else:
+                    ipa_f, bgn_f, son = "", "", long_v
+                if tone_mark in LAO_TONE_RARE:
+                    tone = LAO_TONE_RARE[tone_mark]
+                elif tone_mark:
+                    tone = LAO_TONE[cls][tone_mark]
+                elif son:
+                    tone = LAO_TONE[cls]["live"]
+                elif long_v:
+                    tone = LAO_TONE[cls]["deadlong"]
+                else:
+                    tone = LAO_TONE[cls]["deadshort"]
+                # A short open syllable ends in a glottal stop, which Lao does not
+                # write and every description records. It is written because /ʔ/ has
+                # a unit rule in 43 of 43 reader tables and dropping it would merge
+                # ຈະ with ຈາ in every reader's respelling.
+                coda = ipa_f or ("ʔ" if not son and not long_v and not fin else "")
+                yield ({"init": k, "pre": pre, "comb": comb, "tail": tail,
+                        "tone_mark": tone_mark, "fin": fin, "cls": cls,
+                        "ipa": ipa_c + ipa_v + coda + tone,
+                        "bgn": bgn_c + bgn_v + bgn_f},
+                       t + len(fin) + (1 if killed else 0))
+
+
+def lao_parse_word(w):
+    """Every syllable of one Lao orthographic word, by depth-first search.
+
+    Returns the first parse that consumes the whole word, which is why `_lao_parses`
+    yields in preference order. Raises rather than returning a partial parse: a
+    string this cannot read is a string that is wrong, and that is the round-trip
+    check `tmp/lo/write.py` runs over every authored cell.
+    """
+    best_reach = [0]
+
+    def walk(i):
+        if i >= len(w):
+            return []
+        # ໆ is consumed by the branch below, where the syllable it repeats is in
+        # hand. Reaching it here means it had nothing to repeat, which is not Lao.
+        if w[i] == "ໆ":
+            return None
+        for rec, nxt in _lao_parses(w, i):
+            if nxt <= i:
+                continue
+            best_reach[0] = max(best_reach[0], nxt)
+            if nxt < len(w) and w[nxt] == "ໆ":
+                rest = walk(nxt + 1)
+                if rest is not None:
+                    return [rec, dict(rec)] + rest
+                continue
+            rest = walk(nxt)
+            if rest is not None:
+                return [rec] + rest
+        return None
+
+    got = walk(0)
+    if got is None:
+        raise LaoParseError(
+            f"no parse of {w!r}; the longest prefix that reads is "
+            f"{w[:best_reach[0]]!r}")
+    return got
+
+
+
+def lao_to_ipa(word):
+    """One Lao orthographic word, tone and all."""
+    return "".join(r["ipa"] for r in lao_parse_word(word))
+
+
+def lao_to_bgn(word):
+    """The same word in BGN/PCGN 1966, from the same parse as the IPA."""
+    return "".join(r["bgn"] for r in lao_parse_word(word))
+
+
 # ------------------------------------------------------- Vietnamese tone letters
 # espeak's `vi` voice writes five of the six tones as a digit after the nucleus and
 # the sixth, sắc, as a stray `ɜ`. Hanoi values, as Chao tone letters. The mark
@@ -2277,6 +2655,21 @@ LOANWORDS = {
     # a BCEAO banknote is actually pronounced in Hausa, not spelled out as a word.
     "ha": {"Wi-Fi": "wajfaj", "eSIM": "iːsim", "SIM": "sim", "PIN": "pin",
            "QR": "kjuːɑːr", "ATM": "eːtiːɛm", "AC": "eːsiː", "CFA": "siːɛfeː"},
+    # Yoruba keeps these in Latin letters for the same reason Hausa's own press and
+    # routers do: a Nigerian speaker says them with English letter-names, not by
+    # reading `yo_to_ipa`'s consonant table over them -- which would give `SIM` a
+    # Yoruba /i/ where the loan is said with a fuller vowel, and would read `PIN`'s
+    # `p` as the labial-velar `/k͡p/` rather than the letter name "pee". Values
+    # copied from `LOANWORDS["ha"]`: the same Nigerian-English letter-names, said the
+    # same way regardless of the speaker's other native language.
+    # `CFA` is the third letter of `numbers-money.franc-symbol`'s "F CFA", read
+    # the same way Hausa's own franc-symbol row reads it: English letter names,
+    # because that is how the abbreviation on a BCEAO banknote is actually
+    # pronounced in Nigeria and Niger alike. The plain "F" beside it needs no
+    # loan entry -- it is read letter-by-letter through `YO` like any other
+    # word, and `f` happens to already be the right sound either way.
+    "yo": {"Wi-Fi": "wajfaj", "eSIM": "iːsim", "SIM": "sim", "PIN": "pin",
+           "QR": "kjuːɑːr", "ATM": "eːtiːɛm", "CFA": "siːɛfeː"},
 }
 
 
@@ -3363,6 +3756,209 @@ def ha_to_ipa(word):
     return out
 
 
+# ------------------------------------------------------------------ Yoruba -> IPA
+# No espeak voice: checked directly against `EspeakBackend.supported_languages()`
+# for both this system's espeak-ng-data (1.50) and `espeakng_loader`'s newer
+# bundled tree (the one `uk` and `mr` are built against) -- 109 and 140 languages
+# respectively, neither containing `yo`, and neither `lang/` tree has a Volta-Congo
+# or Defoid family folder at all (only `bnt` Bantu, where `sw` lives). So this is
+# the `ha`/`fil` situation, a table rather than a probabilistic model -- and the
+# easy case of that family, because Yoruba's Latin orthography (standardised by the
+# Yoruba Orthography Committee, in continuous use since the 1850s CMS tradition and
+# the 1875 primer) is fully phonemic for everything that matters here.
+#
+# **Unlike Hausa, Yoruba's `text` column carries tone, and that is the entire
+# reason to prefer this route over silence.** Standard orthography marks the high
+# tone with an acute and the low with a grave, leaving mid unmarked -- `bàbá`
+# "father" against `baba` "fence" against `bàbà` "guinea corn" is the textbook
+# minimal triple. A hand-authored letter table can only carry what the spelling in
+# front of it carries, and here the spelling carries tone, so `yo_to_ipa` reads it
+# rather than dropping it the way `ha_to_ipa` was forced to.
+#
+# **Tone is written as a Chao letter, not invented**: `th`, `vi` and `pa` already
+# write ˥˦˧˨˩ in this column, `core/respell.js`'s `policy.tone` already strips or
+# keeps the whole U+02E5-U+02E9 block, and the three tables that keep it (`vi`,
+# `th`, `zh-Hans`) already carry a rule for every one of the five bare bars --
+# confirmed by reading their own `phonemes` lists before writing a line of `YO`,
+# not assumed. So Yoruba's three register tones cost the corpus *zero* new rules
+# in either direction: high is `˥`, low is `˩`, and mid is left unmarked, which is
+# both the cheapest encoding and a mirror of what the orthography itself does.
+# Downstep and the rarer contour marks (the caron/circumflex a dictionary uses for
+# a single vowel carrying two tones) are not written -- they are rare enough in
+# this pack's everyday-register `text` that none arose, and are named here as a
+# known, disclosed gap rather than a silent one.
+#
+# **The labial-velars cost nothing either.** `/ɡ͡b/` is written `gb`, and `/k͡p/` --
+# which Standard (Nigerian) orthography spells with the single letter `p`, not the
+# digraph `kp` the Benin variant uses -- is written `kp`. Neither carries a tie bar,
+# the same repair Klingon's `/t͜ɬ/` made for the identical reason: a tie bar is a
+# new symbol with no reader table rule anywhere, and dropping it costs nothing a
+# reader can hear, since `phonemesOf` never needed the two letters bound to spell
+# them. Yoruba has no plain bilabial /p/ of its own (the one Yoruba grammars agree
+# on, `pẹ́ńsù` "pencil" and other recent loans aside), so every `p` in this pack's
+# `text` reads as the labial-velar.
+#
+# **The five nasal vowels are read as five distinct qualities, not folded to
+# three.** Standard orthography spells them `an in un ẹn ọn` -- note there is no
+# `en` or `on`, because Yoruba's nasal series pairs only with the open vowels `a i
+# u ẹ ọ`, never with the close-mid `e o` -- and although some phonemic analyses
+# treat the open-mid nasals as conditioned variants of a three-vowel nasal system,
+# this table transcribes what is written, the same "spell the spelling" discipline
+# `ha_to_ipa` and `fil_to_ipa` both state for their own orthographies. `an`, `in`
+# and `un` land on the corpus's existing precomposed nasal vowels `ã ĩ ũ`; `ẹn` and
+# `ọn` land on `ɛ̃` and `ɔ̃`, which have no precomposed Unicode form and decompose to
+# base+combining-tilde -- already the identical shape French's own nasal vowels
+# take in this corpus (`respell.js`'s own comment: "ɐ̃ and ɛ̃ have no precomposed
+# form and stay decomposed, which the VOWEL_TAIL rule already handles"), so no
+# engine change was needed. Checked before being relied on: `ɛ̃` has a rule in 28 of
+# 43 shipped reader tables and `ɔ̃` in 25, both inherited from French's own nasal
+# vowels rather than new to this addition, and the tables without one already
+# decompose it the identical way they decompose French's -- so this is a real,
+# pre-existing, disclosed cost, not a new one, and it is the honest reason `--units`
+# reports a nonzero decomposition count for this pack (see `GRADE["yo"]`).
+#
+# **The vowel-plus-n test is a lookahead, not a table entry, because the same two
+# letters mean two different things depending on what follows.** `ẹnu` "mouth" is
+# `ɛ.nu` -- two syllables, `n` the onset of the second -- while `ọdún` "year" is
+# `ɔ.dṹ`, one syllable with a nasal vowel. Reading the letter `n` after a vowel is
+# only a nasal mark when nothing after it is itself a vowel; when a vowel follows,
+# `n` is an ordinary onset consonant and the preceding vowel stays oral. Both
+# readings occur in this pack's own rows: `ẹnu`-class words exercise the onset
+# branch and `ọdún`/`wọn`/`sanwó`-class words exercise the nasal branch.
+#
+# **The bare syllabic nasal is real and is spelled as plain `/n/`, not as the
+# homorganic velar `[ŋ̍]` careful phonetics gives it before a pause.** It surfaces
+# in this pack only as the reduced subjunctive pronoun after `kí` (`kí n mu` "that I
+# drink"), which is its own whitespace-delimited token and therefore reaches this
+# function alone, with no vowel neighbour for the lookahead above to consult. A
+# full homorganic-assimilation rule for one grammatical morpheme, occurring at low
+# frequency in a phrasebook register, is exactly the speculative machinery this
+# project declines to build for a case that does not generalise; the plain
+# consonant is disclosed as a simplification in `GRADE["yo"]` rather than modelled.
+YO = {
+    "gb": "ɡb",
+    "a": "a", "e": "e", "i": "i", "o": "o", "u": "u",
+    "b": "b", "d": "d", "f": "f", "g": "ɡ", "h": "h", "j": "dʒ", "k": "k",
+    "l": "l", "m": "m", "n": "n", "p": "kp", "r": "r", "s": "s",
+    "t": "t", "w": "w", "y": "j",
+}
+# U+0323 COMBINING DOT BELOW is what `ẹ ọ ṣ` decompose to (see the NFD step in
+# `yo_to_ipa`), and it repaints exactly these three base letters -- `n` has no
+# subdot form of its own, and every other consonant and vowel is unaffected by it.
+YO_SUBDOT = {"e": "ɛ", "o": "ɔ", "s": "ʃ"}
+# Keyed on the *resolved* vowel quality, after `YO_SUBDOT` has already been
+# applied: `a i u` nasalise as themselves, `ẹ ọ` (already turned into `ɛ ɔ`) do
+# too, and plain `e o` are absent on purpose -- standard orthography never writes
+# `en` or `on`, because Yoruba's nasal series pairs only with the open vowels.
+YO_NASAL = {"a": "ã", "i": "ĩ", "u": "ũ", "ɛ": "ɛ̃", "ɔ": "ɔ̃"}
+# Acute = high, grave = low, written as the Chao letters this corpus's tone-keeping
+# tables already carry a rule for -- see the note above `YO`. Mid is unmarked in
+# both the source orthography and this column, so there is no third entry; U+0304
+# COMBINING MACRON is the orthography's own explicit mid mark on a syllabic nasal
+# and is consumed the same way, emitting nothing.
+YO_TONE = {"́": "˥", "̀": "˩", "̄": ""}
+
+
+def yo_to_ipa(word):
+    """One Yoruba (Standard/Nigerian orthography) word, longest grapheme first.
+
+    Lowercased by the caller in `route()`, like the other table routes: a capital
+    is a sentence opening or a proper noun, not a sound.
+
+    **NFD first, and this is load-bearing rather than cosmetic.** The pack's
+    `text` column is stored NFC, where `á à é è í ì ó ò ú ù` are single
+    precomposed codepoints -- Unicode has a canonical composition for a plain
+    vowel plus a tone mark -- but `ẹ ọ ṣ` are not: they compose only as far as
+    the dot-below (`ẹ` = U+1EB9, one codepoint), and a *second* mark stacked on
+    top of that, the acute or grave that spells the tone, has no further
+    composition to fall into. So the very same orthographic device -- a base
+    letter plus a combining tone mark -- arrives in two different shapes
+    depending on which letter carries it, and a table keyed on whole characters
+    (`á` as one entry, `ẹ` plus a separate lookahead for the mark after it) would
+    have needed the tone-bearing form of every plain vowel written out twice.
+    Decomposing first makes every vowel, marked or not, present the identical
+    shape to this function: a bare base letter, optionally followed by
+    U+0323 (dot below, `e`/`o`/`s` only) and then optionally by a tone mark --
+    which is what lets `YO_SUBDOT`, `YO_NASAL` and `YO_TONE` each be a small
+    table over base letters rather than a larger one over precomposed letters.
+
+    A tone mark is only ever found on a vowel or on the bare syllabic nasal (see
+    the note above `YO`), so the lookahead for one happens at exactly those two
+    points and nowhere else in the loop -- a tone mark can never appear after a
+    plain consonant in this orthography, so a table entry for one is never needed.
+
+    An apostrophe marks an elided vowel in casual spelling, the same fact
+    `fil_to_ipa` records about its own orthography's apostrophe, and a hyphen
+    marks a compound or reduplication boundary, the same fact `ha_to_ipa` records
+    -- neither is a sound.
+    """
+    word = unicodedata.normalize("NFD", word)
+    out, i = "", 0
+    while i < len(word):
+        ch = word[i]
+        if ch in "'-":
+            i += 1
+            continue
+        if ch in "aeiou" or ch in "ns":
+            j = i + 1
+            if ch in YO_SUBDOT and j < len(word) and word[j] == "̣":
+                symbol = YO_SUBDOT[ch]
+                j += 1
+            else:
+                symbol = YO.get(ch, ch)
+            tone = ""
+            if ch != "s" and j < len(word) and word[j] in YO_TONE:
+                tone = YO_TONE[word[j]]
+                j += 1
+            if ch == "s":                              # consonant, no tone, no nasal
+                out += symbol
+            elif ch == "n":
+                # **A toned `n` is syllabic, and it is written `n̩` rather than bare.**
+                # A bare `n` carrying a tone is a *nucleus*, and every reader table
+                # treats a bare `n` as a coda -- so `ba˥n˥ki˩` had both tones fold onto
+                # the one vowel, and `zh-Hans` printed `bā̄n`, an `a` under two
+                # macrons, which is a sequence no orthography writes. `n̩` is the
+                # convention the corpus already has for exactly this: **34 of 45
+                # tables carry an `n̩` rule and 44 carry the bare U+0329**, so this
+                # costs no new symbol. Only a *toned* `n` is marked, because the tone
+                # mark is the orthography's own signal that the nasal is a syllable
+                # rather than a coda -- the untoned coda is handled by the nasal
+                # branch below, which fuses it into the vowel.
+                out += ("n̩" if tone else "n") + tone
+            else:
+                # **A tone mark on the `n` is what makes it syllabic**, and that is
+                # the difference between a coda that nasalises the vowel before it
+                # and a syllable of its own. `báńkì` is ba-ń-kì and `sẹ̀ǹtímítà` is
+                # sẹ̀-ǹ-tí-mí-tà -- three and five syllables, each nasal carrying its
+                # own tone -- where the `n` of an unmarked sequence has no tone to
+                # carry and belongs to the vowel. Without this clause the nasal
+                # branch swallowed the `n` and left its tone mark behind as a bare
+                # combining acute or grave, which then reached the page: six cells,
+                # and U+0300/U+0301 are not in the `gujr`, `laoo`, `mlym`, `telu` or
+                # `cjk-sc` subsets, so `tests/fonts.test.mjs` failed for five readers
+                # that had no other business with Yoruba. `Pọ́ǹdì` is the case that
+                # settles it rather than a fold would: the vowel is high and the
+                # nasal is *low*, so discarding the mark would have lost a real tone.
+                nasal = (symbol in YO_NASAL and j < len(word) and word[j] == "n"
+                         and not (j + 1 < len(word) and word[j + 1] in "aeiou")
+                         and not (j + 1 < len(word) and word[j + 1] in YO_TONE))
+                if nasal:
+                    out += YO_NASAL[symbol] + tone
+                    j += 1
+                else:
+                    out += symbol + tone
+            i = j
+            continue
+        letter = longest(YO, word, i)
+        if letter:
+            out += YO[letter]
+            i += len(letter)
+            continue
+        out += word[i]                                # carried out, so a gate names it
+        i += 1
+    return out
+
+
 # Letters that are inside the IPA alphabet and still cannot appear in *Japanese*
 # IPA, so seeing one means a Hepburn mora went unconverted rather than that the
 # reading is exotic. `u` is the sharp one: Japanese /ɯ/ is never `u`, so a single
@@ -3513,10 +4109,30 @@ def route(code, chunks):
         # Reads `row["text"]` itself, not a romanisation column -- see the comment
         # above `FIL_WORDS` for why `fil` is in neither `ROMANISED` nor `NON_LATIN`.
         return lambda chunk: " ".join(fil_to_ipa(w.lower()) for w in chunk.split()), "fil-g2p"
+    if code == "lo":
+        # Reads `row["text"]` itself, like `fil` and `ha` and unlike the six
+        # romanisation routes -- but `lo` *is* in `NON_LATIN`, because Lao text is
+        # Lao script and the Latin gate has something to check. **Not lowercased**,
+        # because Lao is caseless and `.lower()` would be a no-op that implies
+        # otherwise.
+        # A word with no Lao character in it is skipped rather than read: the only
+        # ones that arise are `language_name_ipa`'s fallbacks, where ICU has no Lao
+        # display name and `languageName` answers with the bare code -- `qya`, which
+        # is a CLDR subject and not a display locale. `core/pack.js` blanks that cell
+        # for exactly the same reason, and `build_ipa.py` has refused the fallback
+        # all along; a Lao G2P asked to read `qya` would invent a Lao word.
+        return (lambda chunk: " ".join(lao_to_ipa(w) for w in chunk.split()
+                                       if any("\u0e80" <= c <= "\u0eff" for c in w)),
+                "lo-g2p")
     if code == "ha":
         # Reads `row["text"]` itself, not a romanisation column -- see the note
         # above `HA` for why `ha` is in neither `ROMANISED` nor `NON_LATIN`.
         return lambda chunk: " ".join(ha_to_ipa(w.lower()) for w in chunk.split()), "ha-g2p"
+    if code == "yo":
+        # Reads `row["text"]` itself, not a romanisation column -- Standard Yoruba
+        # orthography is the script this table reads, the same shape of fact `ha`
+        # and `fil` are in neither `ROMANISED` nor `NON_LATIN` for.
+        return lambda chunk: " ".join(yo_to_ipa(w.lower()) for w in chunk.split()), "yo-g2p"
     raise SystemExit(f"no route for {code}")
 
 
@@ -3767,6 +4383,32 @@ GRADE = {
             "worked examples exactly. The one judgement in it is that the palatal digraphs "
             "count as one consonant for weight while being spelt C+j, which is stated in "
             "`QYA_C`"),
+    "lo": ("C+", "a hand-authored orthography-to-IPA rhyme table, because there is no "
+           "espeak `lo` voice in *either* library -- neither the system 1.50 nor "
+           "`espeakng_loader`'s 1.52 lists one, and `espeak-ng-data/lang/tai/` holds "
+           "only Shan, so unlike Burmese there was nothing to probe and nothing to "
+           "distrust. The **segmental** derivation is near-exact and the grade is not "
+           "limited by it: Lao orthography was reformed in the twentieth century to be "
+           "read directly, so initial, vowel, length and final all fall out of a "
+           "four-slot parse with no schwa deletion, no inherent vowel and no "
+           "positional voicing -- the three things that cap the Indic grades. What "
+           "caps this one is the **tone**, which is derived rather than read: Lao "
+           "writes it as consonant class x syllable type x vowel length x tone mark, "
+           "and the table used here (the fifteen cells of Wikipedia's *Indication of "
+           "tones*, mapped onto Osatananda 1997 p.40's Chao letters for Vientiane) is "
+           "contested in two ways. **The count is contested** -- Hoshino & Marcus give "
+           "Lao six lexical tones where Brown 1965 and Osatananda 1997/2015 give "
+           "Vientiane five, and five is what is written. **And one of the fifteen "
+           "cells is contested**: for a low-class consonant with a short vowel this "
+           "table gives mid `˧`, where the same article's *checked syllables* table "
+           "gives ຮັກ 'love' as Low. The five bars are U+02E5..02E9 only, so the "
+           "notation costs no other reader a rule and `core/respell.js` strips it for "
+           "the forty tables whose `policy.tone` is `drop`. Two smaller weaknesses: "
+           "ຍ is read /ɲ/ everywhere, which is right initially and is what the "
+           "orthography says in Pali loans like ອາຍຸ where a Vientiane speaker may say "
+           "/j/; and a short open syllable is given the glottal coda /ʔ/ that Lao does "
+           "not write, which is phonetically right and is what keeps ຈະ from merging "
+           "with ຈາ in every reader's respelling"),
     "am": ("A-", "a letter-by-letter table over BGN/PCGN 1967 for Amharic, read in "
            "reverse -- the standard says of itself that its letters reflect modern "
            "Amharic pronunciation, and read this way it is very nearly a phonemic "
@@ -4217,6 +4859,41 @@ GRADE = {
            "syllable-agreement against, so this grade is a table read carefully rather "
            "than a corpus-wide measurement, the same honest bar Filipino's own entry "
            "sets."),
+    "yo": ("B+", "no espeak voice exists for `yo` either -- checked the same way `ha`'s "
+           "absence was, against both this system's espeak-ng-data (1.50, 109 "
+           "languages) and `espeakng_loader`'s newer bundled tree (140 languages): "
+           "neither lists `yo`, and neither `lang/` tree has a Volta-Congo or Defoid "
+           "family folder, only Bantu's (`bnt`, where `sw` lives). So this is a "
+           "hand-written letter table (`YO`) like `ha`/`fil`, over Standard (Nigerian) "
+           "orthography, which is fully phonemic for consonants and short vowels the "
+           "same way Hausa's Boko is. **Unlike Hausa, tone is not a gap here: the "
+           "orthography marks it (acute high, grave low, mid unmarked) and `yo_to_ipa` "
+           "reads it, writing the corpus's existing Chao letters -- `˥`/`˩`, already "
+           "carried by every reader table that keeps tone, at zero new-symbol cost, "
+           "checked before being relied on rather than assumed.** Downstep and the "
+           "rarer two-tone-on-one-vowel contours a dictionary headword marks with a "
+           "caron or circumflex are not written, because they did not arise in this "
+           "pack's everyday-register `text`; that is a smaller, disclosed gap than "
+           "Hausa's, not a hidden one. The nasal vowels are transcribed as five "
+           "distinct qualities (`ã ĩ ũ ɛ̃ ɔ̃`) rather than folded to the three some "
+           "phonemic analyses treat as basic, which is the reason `--units` reports a "
+           "nonzero decomposition count for this pack: `ɛ̃` and `ɔ̃` have a rule in 28 "
+           "and 25 of 43 reader tables respectively, inherited whole from French's own "
+           "nasal vowels rather than new to this addition, and every table lacking one "
+           "decomposes them the identical way it already decomposes French's -- a "
+           "real, pre-existing cost rather than a new one. The bare syllabic nasal "
+           "(the reduced subjunctive pronoun after `kí`) is spelled as plain `/n/` "
+           "rather than the homorganic `[ŋ̍]` careful phonetics gives it, a disclosed "
+           "simplification for one low-frequency grammatical morpheme rather than a "
+           "modelled rule. Graded a step below `fil`'s A- and level with `ha`'s B+ for "
+           "the same reason `ha` sits there and not higher: something real is still "
+           "silently unrecoverable from the spelling this table reads (Yoruba's rarer "
+           "tone contours here, Hausa's whole tone system there), even though the "
+           "biggest single gap Hausa disclosed -- tone itself -- is exactly what this "
+           "table does not lose. No curated Yoruba sheet exists to score "
+           "syllable-agreement against, so this grade is a table read carefully "
+           "rather than a corpus-wide measurement, the same bar `ha`'s and `fil`'s "
+           "own entries set."),
     "sv": ("A-", "near-phonemic orthography read by a mature espeak voice (this build's "
            "system espeak-ng-data 1.50 already ships `sv`; no loader override needed). "
            "Word stress is looked up rather than derived, as for Polish and Czech, "

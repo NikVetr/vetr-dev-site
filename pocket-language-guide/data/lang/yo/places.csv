@@ -1,0 +1,8 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,Níbo ni mo ti lè ra tikẹ́tì?,,ni˥bo ni mo ti le˩ ra tikɛ˥ti˩,,2,yo-agent-v1;ipa=yo-g2p
+attractions-tickets.do-i-need-a-reservation,Ṣé mo nílò ìfipamọ́?,,ʃe˥ mo ni˥lo˩ i˩fikpamɔ˥,,2,yo-agent-v1;ipa=yo-g2p
+attractions-tickets.what-is-the-latest-entry-time,Wákàtí kíní ni àkókò ìwọlé tí ó kẹ́yìn?,,wa˥ka˩ti˥ ki˥ni˥ ni a˩ko˥ko˩ i˩wɔle˥ ti˥ o˥ kɛ˥jĩ˩,,2,yo-agent-v1;ipa=yo-g2p
+attractions-tickets.are-there-lockers,Ṣé àpótí ìtọ́jú ẹrù wà?,,ʃe˥ a˩kpo˥ti˥ i˩tɔ˥dʒu˥ ɛru˩ wa˩,,2,yo-agent-v1;ipa=yo-g2p
+attractions-tickets.may-i-take-photos,Ṣé mo lè ya fọ́tò?,,ʃe˥ mo le˩ ja fɔ˥to˩,,2,yo-agent-v1;ipa=yo-g2p
+attractions-tickets.please-take-a-photo-of-us,"Ẹ jọ̀wọ́, yà wá ní fọ́tò",,"ɛ dʒɔ˩wɔ˥, ja˩ wa˥ ni˥ fɔ˥to˩",,2,yo-agent-v1;ipa=yo-g2p
+attractions-tickets.could-you-take-a-photo-for-us,Ṣé ẹ lè yà wá ní fọ́tò?,,ʃe˥ ɛ le˩ ja˩ wa˥ ni˥ fɔ˥to˩,,2,yo-agent-v1;ipa=yo-g2p

@@ -67,6 +67,28 @@ SOURCES = {
         f"{GFONTS}/notoserifethiopic/NotoSerifEthiopic%5Bwdth,wght%5D.ttf",
     "NotoSansHebrew-var.ttf": f"{GFONTS}/notosanshebrew/NotoSansHebrew%5Bwdth,wght%5D.ttf",
     "NotoSerifHebrew-var.ttf": f"{GFONTS}/notoserifhebrew/NotoSerifHebrew%5Bwdth,wght%5D.ttf",
+    # Lao, and the choice is Phetsarath rather than a Noto face -- the only
+    # candidate on which **HarfBuzz and this project's fontkit produce the same
+    # glyph run**. fontkit has no Lao shaper (`lao ` is absent from its
+    # script->shaper map, exactly as `mymr` is), so it cannot do HarfBuzz's Thai/Lao
+    # U+0EB3 decomposition-and-reorder; every Noto Lao face relies on that reorder
+    # plus GPOS offsets and therefore stacks ນ້ຳ ("water", and the ນ້ຳ inside
+    # ຫ້ອງນ້ຳ "toilet") wrong in the PDF while the browser draws it right. Phetsarath
+    # does the whole job in **GSUB** `rlig` -- `ນ ້(lowered) ໍ າ`, zero GPOS offsets
+    # -- which fontkit applies, so preview and export agree by construction.
+    # See tmp/lao.md sections 3 and 5. It also has **no GPOS table at all**, so the
+    # NULL-MarkBasePos crash that killed both Noto Malayalam faces cannot be entered;
+    # it is the most compact of the candidates at an equal letter body (cluster-set
+    # ink span 1.2773em against Noto Sans Lao's 1.5550em, median consonant height
+    # within 3%); and it is the Lao national font, OFL 1.1 with no Reserved Font
+    # Name, published by the Ministry of Posts and Telecommunications of Laos.
+    #
+    # It carries **no Latin letter of either case**, no `·` U+00B7 and no `₭`
+    # U+20AD, so it is the third source here to need a `LATIN_DONOR` graft after
+    # Noto Sans Arabic's and Noto Sans Gurmukhi UI's. upem 2048, which `scale_upem`
+    # handles.
+    "Phetsarath-Regular.ttf": f"{GFONTS}/phetsarath/Phetsarath-Regular.ttf",
+    "Phetsarath-Bold.ttf": f"{GFONTS}/phetsarath/Phetsarath-Bold.ttf",
     "NotoSansThai-var.ttf": f"{GFONTS}/notosansthai/NotoSansThai%5Bwdth,wght%5D.ttf",
     "NotoSerifThai-var.ttf": f"{GFONTS}/notoserifthai/NotoSerifThai%5Bwdth,wght%5D.ttf",
     # Bengali. Noto Sans Bengali rather than any Latin face: `NotoSans-var.ttf` has

@@ -1,0 +1,7 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+profanity.oh-my-god,Olúwa mi o!,,olu˥wa mi o,,2,yo-agent-v1;ipa=yo-g2p
+profanity.frustration,Ìdọ̀tí ni èyí,,i˩dɔ˩ti˥ ni e˩ji˥,,2,yo-agent-v1;ipa=yo-g2p
+profanity.thats-rude,Ìyẹn kò tọ́,,i˩jɛ̃ ko˩ tɔ˥,,2,yo-agent-v1;ipa=yo-g2p
+profanity.excuse-my-language,"Ẹ dárí jì mi, ẹnu mi yọ",,"ɛ da˥ri˥ dʒi˩ mi, ɛnu mi jɔ",,2,yo-agent-v1;ipa=yo-g2p
+profanity.strength-warning,"Ohun tí a kọ sí ìhín jẹ́ fún mímọ̀ nìkan, kì í ṣe fún sísọ: agbára ọ̀rọ̀-èébú kì í yè kọjá ìtumọ̀. Ọ̀rọ̀ tí a túmọ̀ sí ""damn"" lórí káàdì yìí lè jẹ́ ohun tí kò ṣeé sọ rárá ní èdè tí ó wà lẹ́gbẹ̀ẹ́ rẹ̀, àti pé ọ̀rọ̀-èébú tí ó le jù lọ ní èdè kan sábà máa ń jẹ́ èyí tí abala yìí kò lè kó sínú rẹ̀.",,,,2,yo-agent-v1
+profanity.japanese-register,"Èdè Japanese kì í fi ọ̀rọ̀-atúmọ̀ ṣe èyí rárá. Ìkẹ́gàn máa ń wá nípasẹ̀ gírámà dípò rẹ̀ -- arọ́pò-orúkọ ẹnì-kejì tí ó le koko, àṣẹ tààrà, àti ìparí ọ̀rọ̀-ìṣe kúkúrú -- nítorí náà, ìbínú náà wà nínú ìparí ọ̀rọ̀ dípò kíkọ ọ̀rọ̀ tí a lè wá kiri. Àwọn ọ̀rọ̀ tí ó wà lókè fẹ́rẹ̀ jẹ́ gbogbo ohun tí a lè sọ nínú ẹ̀ka yìí.",,,,2,yo-notes-v1

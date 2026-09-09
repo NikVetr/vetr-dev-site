@@ -60,6 +60,25 @@ ARABIC_RANGES = [(0x600, 0x6FF), (0x750, 0x77F), (0x8A0, 0x8FF),
 # the static faces behind `latin` have none of it. Adding `hi` to `ALL_LANGS` would
 # have looked like a fix and produced a subset request the source could not fill.
 THAI_RANGES = [(0x0E00, 0x0E7F)]
+# The whole Lao block, for Bengali's, Tamil's, Telugu's, Gurmukhi's, Gujarati's,
+# Kannada's and Malayalam's reason: Phetsarath reaches its contextual tone-mark
+# variants and its `ນ ້ ຳ` -> `ນ ້(lowered) ໍ າ` substitution through **GSUB**
+# `rlig`, and none of those glyphs has a codepoint at all, so the request has to be
+# the block whole rather than the letters the corpus happens to use today.
+# `subset_source`'s `layout_features = ["*"]` is what keeps the lookups.
+#
+# 82 of the block's 128 codepoints are assigned (checked against `unicodedata`
+# rather than by eye) and Phetsarath carries 65 of the 82. The 17 it lacks are the
+# fourteen Pali and Sanskrit extension letters, the Pali virama U+0EBA and the two
+# Khmu letters -- precisely the set modern Lao does not write, and the Pali virama's
+# absence is a *benefit*: it is the one base every Noto Lao face has a NULL
+# MarkBasePos anchor for. The subsetter intersects with the cmap in any case.
+#
+# U+0ED0..0ED9, the Lao digits, are inside the range and are requested for the same
+# reason Bengali's are: the block is subset whole. The `lo` pack itself writes none
+# of them -- Laos prices, buses and timetables are in ASCII numerals, which is
+# Hindi's and Tamil's answer rather than Bengali's and Arabic's.
+LAO_RANGES = [(0x0E80, 0x0EFF)]
 # The whole Hebrew block: 88 of its 135 codepoints are in both Hebrew faces, and the
 # subsetter intersects with the cmap anyway. The Alphabetic Presentation Forms block
 # is deliberately *not* here -- U+FB2A shin-with-dot and U+FB31 bet-with-dagesh are
@@ -255,6 +274,12 @@ FACES = {
     ("cjk-kr-serif", 700, False): "NotoSerifKR-var.ttf",
     # No italic, as with CJK and Arabic: the sheet only italicises romanisation and
     # the respelling, both of which are Latin.
+    # Lao is sans-only, on Telugu's, Gujarati's and Kannada's precedent: Phetsarath
+    # has no serif companion, and Noto Serif Lao was refused on the same shaper
+    # divergence as the Noto sans plus a second NULL-anchor class of its own (see
+    # tmp/lao.md section 5), so the typeface control falls back to sans for Lao.
+    ("laoo", 400, False): "Phetsarath-Regular.ttf",
+    ("laoo", 700, False): "Phetsarath-Bold.ttf",
     ("thai", 400, False): "NotoSansThai-var.ttf",
     ("thai", 700, False): "NotoSansThai-var.ttf",
     ("thai-serif", 400, False): "NotoSerifThai-var.ttf",
@@ -536,7 +561,18 @@ FACES = {
 # Latin the two do share has identical outlines.
 LATIN_DONOR = {"NotoSansArabic-Regular.ttf": "NotoSans-Regular.ttf",
                "NotoSansArabic-Bold.ttf": "NotoSans-Bold.ttf",
-               "NotoSansGurmukhiUI-var.ttf": "NotoSans-var.ttf"}
+               "NotoSansGurmukhiUI-var.ttf": "NotoSans-var.ttf",
+               # Phetsarath carries **no Latin letter of either case** -- 35
+               # codepoints of U+0020..024F, all ASCII punctuation and the digits --
+               # and neither `·` U+00B7, which `core/pack.js` joins the emergency
+               # numbers with, nor `₭` U+20AD, the kip sign, which is the currency of
+               # the one country that speaks the language. So this is the largest
+               # graft here and the third source to need one. The donor is a
+               # *different family* rather than a sibling cut, unlike Noto Sans
+               # Arabic's, so the em square really is rescaled: Phetsarath is 2048
+               # units where Noto is 1000, and `scale_upem` is what makes that safe.
+               "Phetsarath-Regular.ttf": "NotoSans-Regular.ttf",
+               "Phetsarath-Bold.ttf": "NotoSans-Bold.ttf"}
 
 # The same graft in the other direction, for the two conscripts. No Noto face has a
 # pIqaD or a tengwar glyph -- neither script is in Unicode -- so the four Latin
@@ -786,7 +822,23 @@ ALL_LANGS = ["en", "es", "fr", "de", "ko", "ar", "zh-Hans", "ja",
              # 15919's mark for the samvrutokaram, which no other pack writes; it
              # arrives through `LATIN_RANGES` and both shipped Latin weights already
              # carry it, checked.
-             "ml"]
+             "ml",
+             # Lao. `LAO_RANGES` above already requests the whole Lao block
+             # unconditionally for the `laoo` stack, so this entry in the `latin`
+             # union is for the pack's `romanization_bgn` and `ipa` columns -- which
+             # the Latin faces draw on every pair -- and for the rows that quote a
+             # Latin acronym. Telugu's, Gujarati's, Kannada's, Amharic's and
+             # Malayalam's shape exactly.
+             #
+             # What the romanisation brings is BGN/PCGN 1966's three accented
+             # letters `é è ô` (U+00E9/U+00E8/U+00F4), every one of which is already
+             # drawn for French, German and Portuguese. What the **`ipa`** column
+             # brings is the Chao tone letters `˥ ˧ ˩ ˨`, and those cost nothing
+             # either: `th`, `vi`, `zh-Hans` and `pa` already put U+02B0..02FF into
+             # every Latin face through `LATIN_RANGES` at the top of this file.
+             # Measured against the shipped faces rather than inferred, the way
+             # Persian's `پ چ ژ گ`, Ukrainian's `і ї є ґ` and Punjabi's `ġ` were.
+             "lo"]
 STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                "latin-serif": ALL_LANGS, "latin-cond-serif": ALL_LANGS,
                "cjk-sc": ["zh-Hans"], "cjk-sc-serif": ["zh-Hans"],
@@ -808,6 +860,7 @@ STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                # ے, measured against both shipped cmaps, so Urdu needs no font
                # change either.
                "arabic": ["ar", "fa", "ur"], "thai": ["th"], "thai-serif": ["th"],
+               "laoo": ["lo"],
                "deva": ["hi"], "deva-serif": ["hi"],
                "beng": ["bn"], "beng-serif": ["bn"],
                "taml": ["ta"], "taml-serif": ["ta"],
@@ -913,6 +966,8 @@ def coverage(stack):
         chars |= expand(ARABIC_RANGES)
     elif stack.startswith("thai"):
         chars |= expand(THAI_RANGES)
+    elif stack.startswith("laoo"):
+        chars |= expand(LAO_RANGES)
     elif stack.startswith("deva"):
         chars |= expand(DEVA_RANGES)
     elif stack.startswith("beng"):

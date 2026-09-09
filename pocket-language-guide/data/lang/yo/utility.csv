@@ -1,0 +1,16 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,Mo fẹ́ lọ sí {},,mo fɛ˥ lɔ si˥ {},,2,yo-agent-v1;ipa=yo-g2p
+utility-templates.please-give-me,"Ẹ jọ̀wọ́, fún mi ní {}",,"ɛ dʒɔ˩wɔ˥, fũ˥ mi ni˥ {}",,2,yo-agent-v1;ipa=yo-g2p
+utility-templates.may-i,Ṣé mo lè {}?,,ʃe˥ mo le˩ {},,2,yo-agent-v1;ipa=yo-g2p
+utility-templates.please-do-not-add,"Ẹ jọ̀wọ́, má ṣe fi {} kún un",,"ɛ dʒɔ˩wɔ˥, ma˥ ʃe fi {} kũ˥ ũ",,2,yo-agent-v1;ipa=yo-g2p
+utility-templates.do-you-have,Ṣé ẹ ní {}?,,ʃe˥ ɛ ni˥ {},,2,yo-agent-v1;ipa=yo-g2p
+utility-templates.please-write-the-number,"Ẹ jọ̀wọ́, kọ nọ́mbà náà sílẹ̀",,"ɛ dʒɔ˩wɔ˥, kɔ nɔ˥mba˩ na˥a˩ si˥lɛ˩",,2,yo-agent-v1;ipa=yo-g2p
+utility-templates.i-need,Mo nílò {},,mo ni˥lo˩ {},,2,yo-agent-v1;ipa=yo-g2p
+utility-templates.is-there-nearby,Ṣé {} kan wà nítòsí?,,ʃe˥ {} kã wa˩ ni˥to˩si˥,,2,yo-agent-v1;ipa=yo-g2p
+utility-templates.how-much-is,Èló ni {}?,,e˩lo˥ ni {},,2,yo-agent-v1;ipa=yo-g2p
+utility-templates.is-this,Ṣé {} ni èyí?,,ʃe˥ {} ni e˩ji˥,,2,yo-agent-v1;ipa=yo-g2p
+utility-templates.please,"{}, ẹ jọ̀wọ́",,"{}, ɛ dʒɔ˩wɔ˥",,2,yo-agent-v1;ipa=yo-g2p
+utility-templates.i-am-looking-for,Mo ń wá {},,mo n̩˥ wa˥ {},,2,yo-agent-v1;ipa=yo-g2p
+utility-templates.do-you-accept,Ṣé ẹ gba {}?,,ʃe˥ ɛ ɡba {},,2,yo-agent-v1;ipa=yo-g2p
+utility-templates.i-cannot-find,Mi ò rí {},,mi o˩ ri˥ {},,2,yo-agent-v1;ipa=yo-g2p
+utility-templates.there-is-a-problem-with,Ìṣòro kan wà pẹ̀lú {},,i˩ʃo˩ro kã wa˩ kpɛ˩lu˥ {},,2,yo-agent-v1;ipa=yo-g2p

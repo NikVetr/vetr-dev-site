@@ -1998,3 +1998,112 @@ which is what the pack's `romanization_bgn` column derives from ·
 - **The coda-/v/ collision after a rounded vowel** — 24 rows, all Greek and Russian —
   is named in the table's `approximations` and has no repair inside Persian
   orthography. A reviewer may prefer ڤ; this table refused it as a non-Persian letter.
+
+## The forty-fifth reader: Lao, and the one table here that is a transposition
+
+**Lao has no published foreign-name transcription standard at all.** BGN/PCGN 1966
+exists and the pack's `romanization_bgn` column derives from it, but it runs the
+other way — Lao script into Roman letters, for maps — and its own note 3 says "Tone
+marks should not be romanized", which disqualifies it for this column twice over.
+There is no Lao equivalent of หลักเกณฑ์การทับศัพท์, no Lao Academy transcription
+announcement, and no Lao dictionary of foreign names.
+
+**So `lo__lo-LA.json` is `th__th-TH.json` transposed letter for letter**, and the
+argument is structural rather than a convenience. Lao and Thai are a closer pair
+than Ukrainian and Russian, which is this file's own precedent for a sibling table:
+
+- the same three consonant classes with the same members, letter for letter — ຂ ສ ຖ
+  ຜ ຝ ຫ high, ກ ຈ ດ ຕ ບ ປ ອ mid, ຄ ຊ ທ ພ ຟ ຮ ງ ຍ ນ ມ ຣ ລ ວ low;
+- the same deterministic tone rule over **class × tone mark × vowel length ×
+  live/dead**, so what this file says of Thai holds of Lao word for word: *"A Thai
+  syllable cannot be toneless … A rule set for Thai readers must choose consonant
+  letters and tone marks together and on purpose — more work than any other language
+  here, and it cannot be delegated to the standard."*
+- cognate vowel signs including the pre-base ones, ເ ແ ໂ ໃ ໄ against เ แ โ ใ ไ;
+- the same two everyday tone marks, mai ek ່/่ and mai tho ້/้, plus mai catawa.
+
+**What is borrowed is therefore the device, and it is the expensive part.** The
+phoneme rules emit a *placeholder* superscript — ² mai ek, ³ mai tho, ⁵ mai catawa,
+with the unmarked tone emitting nothing — and the `syllable_fixups` then read the
+class off the letter in hand, write the mark that reaches the wanted pitch, and
+**change the letter** where its class cannot get there: ຄ→ຂ, ທ→ຖ, ຊ→ສ, ຟ→ຝ, ຮ→ຫ,
+ພ→ຜ for the low-to-high swaps, and a prefixed ຫ for the sonorants ງ ຍ ນ ມ ຣ ລ ວ,
+which is Lao's own class-marking device and not a borrowed one. A final fixup clears
+any leftover placeholder, which is why no superscript reaches `charset.json` — and
+that is worth knowing independently, because **the shipped `thai` faces carry no
+superscript glyph at all** (checked with `getBestCmap()`), so if one ever survived
+the chain it would print as a box.
+
+`tmp/lo/build_respell.py` is the transposition and is the audit trail: every rule is
+the Thai rule with its Thai characters replaced. **Six places Lao forces a different
+answer**, each in the table's own `deviations`:
+
+1. **Thai's ช/ฉ pair for /tɕʰ/ and its ซ/ส pair for /s/ merge onto ຊ/ສ.** Lao has
+   one /s/ class pair where Thai has two, and has neither /tʃ/ nor /ʃ/, so /tʃ/, /ʃ/
+   and /s/ come out as one letter — which is what Lao loanword spelling does anyway.
+2. **Thai's ย for /j/ becomes ຢ in an onset and ຍ in a coda.** Thai writes one
+   letter where Lao writes two, so this table is *more* precise than its source: ຢ
+   for the y of *yes*, ຍ for the ñ of *señor*. A coda ຢ is not Lao at all.
+3. **Thai's ็ mai taikhu becomes ັ**, because Lao writes a short vowel before a
+   final with ັ alone.
+4. **Thai's `็([่-๋]) → \1` fixup is dropped rather than transposed.** Its subject is
+   mai taikhu, which Lao does not have; under the letter map it became
+   `ັ([່-໋]) → \1` and **silently deleted the mai han akat of every syllable with a
+   tone mark** — Arabic *fadlka* came out ຟ່ດ-ກະ where it should be ຟັ່ດ-ກະ, on
+   2,347 rows across 28 targets. `--gaps` reported nothing, because no *symbol* was
+   missing.
+5. **Thai's ฤ, ฺ and ฯ are dropped from the character classes** as Sanskrit and
+   abbreviation devices with no Lao counterpart; ຯ in particular is absent from
+   Phetsarath, the shipped `laoo` face.
+6. **Thai's use of tone as a stress device is refused.** It is a good argument and it
+   is declined because this column already writes the *target's own* tone for four
+   tonal targets, and one mark cannot carry two claims. `stress` is `none`, and Lao
+   has Persian's three reasons rather than a choice: the script is caseless so `caps`
+   is out, `acute` and `grave` are byte-identical no-ops because `VOWEL_LETTERS` and
+   `ACCENTED` list no Lao character, and `prime` would be a fifth mark over a
+   syllable that may already carry a vowel sign and a tone mark.
+
+**`tone: keep`, which only four of the forty-five tables can say** — `th`, `vi`,
+`zh-Hans` and `lo`. A Lao reader reads tone natively, so the target's tone is
+information rather than noise.
+
+**And one verification worth copying.** Zero gaps says every IPA symbol had a rule;
+it does *not* say the output is Lao, because `IPA_ONLY` in `respell_check.mjs` does
+not count plain ASCII — so a missing rule for `a`, `i` or `u` leaks a **Latin**
+letter into the middle of a Lao word and reports nothing. `tmp/lo/checkrespell.py`
+reads all 36,338 respellings back through the Lao parser in `scripts/build_ipa.py`
+(`lao_parse_word`), which is a different question and caught two real defects the
+gap count could not see: the 49 rules a too-aggressive dedup had dropped
+(`ເອິລ-ມa-ນa`), and deviation 4 above.
+
+**Licensing.** Nothing new: the source table is this repository's own, and the Thai
+standard behind it is excluded from copyright by section 7 of Thailand's Copyright
+Act, as recorded above.
+
+**Sources.** [ROMANIZATION OF LAO, BGN/PCGN 1966 Agreement](https://assets.publishing.service.gov.uk/media/5ab4e2e4e5274a1aa2d4146d/ROMANIZATION_OF_LAO.pdf),
+which the pack's `romanization_bgn` column derives from and whose note 3 is why this
+column cannot ·
+[Lao orthography notes, r12a.github.io](https://r12a.github.io/scripts/laoo/lo.html)
+for the storage order of the vowel signs and tone marks, and for the statement that
+U+0EB3's tone mark is typed *before* it ·
+Enfield, N. J., *A Grammar of Lao* (Mouton de Gruyter, 2007) for the phonology and
+the classes · Osatananda, Varisa, *Tone in Vientiane Lao* (1997), p. 40, for the
+Chao letters this corpus's Lao `ipa` column writes.
+
+### Still unverified, carried forward
+
+- **Whether a Lao reader accepts the class-swapped letters** — ຂ for a /kʰ/ that
+  needs a high-class tone, ສ for a /s/ that does, and the prefixed ຫ on a sonorant —
+  is a reviewer question. The *sound* is right by construction and the tone is right
+  by construction; what is unverified is whether the letter swap reads as a
+  deliberate device or as a misspelling. Thai's table has the same open question and
+  has been shipping with it.
+- **The /tʃ/, /ʃ/, /s/ merge** costs a distinction on English, German, Polish and
+  Mandarin targets that a Lao reader might rather have as ຈ. It is named in the
+  table's `deviations` and no repair exists inside Lao's phoneme inventory.
+- **4,584 respellings out of 36,338 are strings the Lao parser refuses**, all of one
+  class: a syllable with an onset cluster or a bare consonant Lao orthography cannot
+  write (`ກເດ` for Czech *gde*, `ວ` for Czech *v*, `ຟ່ດກະ` for Arabic *fadlka*).
+  Verified to be **inherited rather than introduced**: the Thai table produces the
+  identical shapes in Thai (`กเด`, `ว`, `ฟั่ด-กะ`), and `tmp/lo/cmp-all.mjs` shows
+  every divergence between the two outputs is one of the six deviations above.

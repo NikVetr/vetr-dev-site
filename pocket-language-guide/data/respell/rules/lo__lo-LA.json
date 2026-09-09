@@ -1,0 +1,3794 @@
+{
+  "source": "lo",
+  "accent": "lo-LA",
+  "status": "ready",
+  "version": 1,
+  "derives_from": "the Thai reader table in this repository, transposed letter for letter -- and through it the Royal Institute's หลักเกณฑ์การทับศัพท์. Lao has no published foreign-name transcription standard at all, and Thai's is the only one in this corpus written for a script with the same three consonant classes, the same deterministic tone rule and the same cognate vowel signs, so the two-stage tone device is borrowed rather than reinvented. Built by tmp/lo/build_respell.py, which is the audit trail: every rule here is the Thai rule with its Thai characters replaced, and the four places Lao forces a different answer are in `approximations` below.",
+  "deviations": [
+    {
+      "rule": "Thai's ช/ฉ pair for /tɕʰ/ and its ซ/ส pair for /s/",
+      "why": "**Merged onto ຊ/ສ**, because Lao has one /s/ class pair where Thai has two and has neither /tʃ/ nor /ʃ/ at all. So /tʃ/, /ʃ/ and /s/ come out as the same Lao letter, which is what Lao loanword spelling does with them anyway -- and the merge is why 49 of Thai's 580 phoneme rules and 3 of its 43 fixups collapse into duplicates here and are dropped."
+    },
+    {
+      "rule": "Thai's ย for /j/",
+      "why": "**Becomes ຢ, and ຍ is reserved for /ɲ/.** Thai writes one letter where Lao writes two, so this is the one place the transposed table is *more* precise than its source: a Lao reader gets ຢ for the English y of *yes* and ຍ for the Spanish ñ, where a Thai reader gets ย for both."
+    },
+    {
+      "rule": "Thai's ็ (mai taikhu)",
+      "why": "**Becomes ັ.** Lao has no mai taikhu; a short vowel before a final consonant is written with ັ alone. Thai's table uses both ั and ็ and the two collapse, which accounts for the rest of the dropped duplicates."
+    },
+    {
+      "rule": "Thai's ฤ, ฺ and ฯ",
+      "why": "**Dropped from the character classes.** All three are Thai spellings of Sanskrit or abbreviation devices rather than sounds, Lao has no counterpart for any of them, and nothing in the corpus's `ipa` column reaches one. ຯ in particular is absent from Phetsarath, the shipped `laoo` face, so emitting it would print a box."
+    },
+    {
+      "rule": "Thai's use of tone as a stress device",
+      "why": "**Refused.** `content/RESPELL-SYSTEMS.md` records Thai's argument -- since a syllable cannot be toneless, give the stressed syllable a high or falling tone and let the rest sit at mid. It is a good argument and it is declined here because this column already writes the *target's own* tone for four tonal targets, and one mark cannot carry two claims. `stress` is `none`; see `policy_note`."
+    },
+    {
+      "rule": "Thai's ธ ฑ ฒ ณ ญ ฬ ศ ษ ฐ ฎ ฏ ฃ ฅ ฆ ภ",
+      "why": "**Folded onto their plain Lao counterparts** (ທ ນ ຍ ລ ສ ຖ ດ ຕ ຂ ຄ ພ). These are Thai's Pali and Sanskrit letters, kept in Thai orthography for etymology and pronounced identically to their plain partners; the Lao script dropped them from ordinary use, so there is nothing to fold *to* but the plain letter. This is a simplification the Lao script itself already made."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "lexical tone (zh-Hans, vi)",
+      "out": "the five Thai tones, by contour",
+      "why": "Mandarin 55 -> ສາມັຍ (mid, unmarked), 35 -> ຈັຕວາ (rising), 214 -> ເອກ (low), 51 -> ໂທ (falling); Vietnamese ngang -> ສາມັຍ, sắc -> ຈັຕວາ, hỏi -> ເອກ, huyền -> ໂທ. Four distinct tones out of four in both, which is the best any reader in this project gets. Tone 1 is unmarked rather than ຕຣີ because Thai has no high *level* tone -- ຕຣີ rises -- and because unmarked is what Thai practice writes for it: 中国 is ຈງກັ໋ວ, with tone 1 bare and tone 2 on ໋. The rest of the mapping is the same practice: 你好 ຫນິ່ເຫ່າ, 请 ສິ່ງ, 我 ຫວ່ອ, 是 ຊື່ອ, 这个 ເຈ້ອເກອ, 小费 ເສີ່ຍວເຟ່, 流量 ຫລິວເລີ່ຍງ. Two Vietnamese pairs merge before the table sees them: `ˀ` is not a tone letter, so it separates from ˨˩ˀ and ˧ˀ˥ and lands in the coda, which makes nặng identical to huyền and ngã identical to sắc. The vi table documents the same artifact from the other side. ຕຣີ is therefore never written and ໄມ້ຕຣີ never reaches the page."
+    },
+    {
+      "sounds": "an open syllable in a target that writes tone",
+      "out": "the long vowel, so the syllable is live",
+      "why": "A Thai syllable ending in a short vowel is *dead*, and a dead syllable cannot carry the mid tone -- it takes low or high by rule, whichever the consonant class dictates, whatever the target wanted. So every open syllable in a tone-writing target takes the long vowel, which makes it live and lets the tone rules reach all five pitches. 609 rows: 一 is ອີ rather than ອິ, 吗 is ມາ rather than ມະ, 你好 is ຫນີ່ ເຫ່າ rather than ຫນິ່ ເຫ່າ, 打字 is ຕ່າ-ຈື້ອ, nghe is ແງ rather than ເງະ. Guarded on the target contrasting the two lengths itself -- Vietnamese does for /a/ and /u/ and keeps them short, Mandarin has no long vowel anywhere in its column -- so no length contrast is spent to buy the tone. This was the tenth item on this table's own least-confident list and it needed no new predicate, only reading the output."
+    },
+    {
+      "sounds": "a centring diphthong written with U+032F (Vietnamese iê, uô, ươ)",
+      "out": "Thai's own ເ-ີຍ, -ັວ and ເ-ືອ",
+      "why": "These three are the same three, and they correspond exactly: /iə/ ເ-ີຍ, /uə/ -ັວ, /ɯə/ ເ-ືອ. So the rime a Thai reader would write is the rime the target has -- biệt is ເບີ້ຍຕ, hiểu is ເຫີ່ຍວ, buổi is ບ່ວຍ, and -ັວ keeps only its ວ before an offglide the way Thai writes ດ້ວຍ. 288 rows. Before the generator marked these vowels non-syllabic they were two syllables apiece and this table listed them as a loss; the mark itself spells nothing, since putting the vowel in the rime already says it is not a syllable of its own."
+    },
+    {
+      "sounds": "stress, on the twelve targets whose ipa carries ˈ",
+      "out": "a falling tone (ໂທ) on the stressed syllable of a polysyllable",
+      "why": "Thai's stress device is a tone mark, as RESPELL-SYSTEMS.md says, and falling is the one tone writable on every consonant class and in both live and dead syllables -- mid class ້, high and low class ່ -- so it never forces a letter change. It is also the most prominent Thai tone. Unstressed syllables take no mark, which for an open syllable is mid and for a dead one is whatever the class gives; that is not neutrality, but it is the reading Thai loanword phonology already assigns (ແທັກຊີ່, ເຄ້ກ, ຟຸຕບອລ). A monosyllable is never marked, which is stress_min_syllables: 2 expressed as a pair of fixups, since a fixup cannot count syllables. 26% of all syllables end up marked (17,675 of 67,437) -- 18% for English, 0% for Japanese and Korean, which carry neither stress nor tone and so are written entirely unmarked. The weakest case is Indonesian at 40%: Malay stress is neither phonemic nor predictable, so a mark there asserts a prominence the language may not have. It is kept because the ipa column carries the mark, because the alternative is a flat reading, and because it is at worst a plausible pitch on a syllable a Thai reader has to give *some* pitch to."
+    },
+    {
+      "sounds": "/p t k/ against /b d ɡ/",
+      "out": "ປ ຕ ກ against ບ ດ ກ, with ຄ for /k/ where the target contrasts it with /ɡ/",
+      "why": "Thai has ປ/ບ and ຕ/ດ but no voiced velar, so /k/ and /ɡ/ are the one stop pair with nowhere to go. Where the target contrasts them, /k/ borrows the aspirate ຄ and /ɡ/ keeps ກ -- which is the standard's own k = ຄ, g = ກ (Kansas = ແຄນຊັສ, galaxy = ກາແລັກຊີ) and modern practice throughout (ເຄ້ກ, ຄອມພິວເຕອຣ໌, ເກມ, ກອລ໌ຟ). Where the target instead contrasts /k/ with /kʰ/ -- Mandarin, Korean, Hindi -- ຄ is spent on /kʰ/ and /k/ takes ກ, so Hindi loses its क/ग distinction and keeps its क/ख one. That is the right way round: aspiration is lexical in all three and Thai writes it."
+    },
+    {
+      "sounds": "a coda Thai does not have",
+      "out": "the standard's ຕັວສະກດ letter, read by Thai's own final rules",
+      "why": "Thai admits one final consonant and reads it by rule, so a foreign coda fricative keeps its own letter and comes out as the stop at its place: /s/ ສ and /z/ ຊ both read /t/ (Lagos = ລາກອສ), /f v/ ຟ reads /p/ (love = ເລິຟ), /ʃ tʃ dʒ/ ຊ and ຈ read /t/, /ç x/ ກ. That is the standard's answer and it costs nothing, because the letter a Thai reader sees is the one they would have written and the sound they give it is the one a Thai speaker makes. Everything after the first coda consonant is dropped; a coda rhotic is dropped outright, which is what the standard does audibly (horn = ຮອຣ໌ນ is /hɔːn/) and this table does visibly."
+    },
+    {
+      "sounds": "the /j/ onglide (Mandarin -i-, Japanese -y-, Korean -ㅕ-, Spanish -i-, Russian -ь-)",
+      "out": "Thai's ເ-ີຍ family, or ຍ where the syllable has no onset",
+      "why": "The standard's vowel table already answers this and answers it better than a split would: ia = ເອີຍ, eo = ເອີຍວ, iew and u = ອິວ, ure = ເອີຍວ. So /Cja/ is C + ເ-ີຍ (gracias = ກຣາເຊີຍສ, xiè = ເຊີ່ຍ), /Cjo/ is ເ-ີຍວ (Borneo = ບອຣ໌ເນີຍວ, jiào = ເຈີ້ຍວ), /Cju/ is -ິວ (Cuba = ຄິວບາ, liù = ຫລິ່ວ), /Cji/ is -ີ, and an onsetless /ju/ is just ຍູ (Union = ຍູເນີຍນ). policy.splits is therefore empty: breaking a rising diphthong into its own syllable is what a reader with no such rime needs, and Thai has the rime."
+    },
+    {
+      "sounds": "/ɲ ʎ/ and Russian's palatalised series",
+      "out": "ນຍ and ລຍ; the plain letter",
+      "why": "Thai has no palatal nasal or lateral letter that is still read as one -- ຍ is /j/ today -- so /ɲ/ is ນຍ, which is what the tradition writes (Kenya = ເຄນຍາ) and reads as /na-j/, close enough to be recognised. Before a front vowel the glide letter is redundant and dropped, so Japanese に is ນິ rather than ນຍິ. Russian's fourteen palatalised consonants take the plain letter and lose the palatalisation: an i-onglide would mean rewriting the rime, which a consonant rule cannot do, and ນຍ for /nʲ/ would put a syllable break inside Russian's softest consonant."
+    },
+    {
+      "sounds": "/ə/ and /ʌ/",
+      "out": "ະ/ັ, or ເ-ອ/ເ-ິ where the target has a real mid-central vowel",
+      "why": "The standard's own choice for both (Hungary = ຮັງກາຣີ, Washington = ວອຊິງຕັນ, thermocouple = ເທອຣ໌ໂມຄັປເປິລ), and it keeps an unstressed syllable short, which is what a schwa is. Three guards move it. A target that contrasts /ə/ with /əː/ writes Thai's own schwa letter instead, which is exact for Vietnamese â against ơ. A target with /ʌ/ and no /ə/ at all -- Korean, by that guard alone -- gets ເ-ອ for ㅓ, a full vowel there and not a reduction. And a target with no word-final /ə/ has a full vowel rather than a reduction wherever it does have one, so before a nasal coda it takes ເ-ິ: that is Mandarin's en and eng, which Thai writes ເ-ິນ and ເ-ິງ (人 ເຫຣິນ, 什么 ເສິນ-ເມອ, 温 ເວິນ), and it moved 74 rows off -ັນ. English, German, French, Hindi, Russian and Indonesian all have a word-final schwa and keep ສຣະອະ, which is the standard's own choice for them."
+    },
+    {
+      "sounds": "/ɯ/, /y/, /ɨ/",
+      "out": "ຶ, ຸ/ູ, ືອ/ື",
+      "why": "Thai has /ɯ/ exactly (ຶ ື), so Turkish ı and Korean ㅡ are free. Japanese う is written /ɯ/ by the generator but is the language's only high back vowel, so it takes the rounded ຸ ູ that Thai practice gives it (ຊູຊິ) -- guarded on the target having no /u/ of its own, which only Japanese satisfies. /y/ has no Thai vowel and takes the rounded ູ (Zürich = ຊູຣິກ); the generator's three false /y/s are handled per target, ິ for Portuguese's reduced final [ɨ] and ຶ for Vietnamese ư. /ɨ/ is Mandarin's -i and Russian ы, both long, and takes ືອ (是 = ຊື່ອ)."
+    },
+    {
+      "sounds": "the pharyngeals and the glottal stop (Arabic ح ع ء, Korean ㅢ)",
+      "out": "ຮ; ອ where the syllable has nothing else, nothing where it does",
+      "why": "ອ is Thai's own zero consonant, so it is exact for a syllable-initial glottal stop and for Arabic's hamza, and silent everywhere else. /ħ/ takes ຮ, /ʕ/ nothing -- Thai has neither and no letter approximates them; the survey is right that Arabic needs a reviewer more than a table."
+    },
+    {
+      "sounds": "a nasal vowel that also has a coda of its own",
+      "out": "the coda carries the nasality, at its own place",
+      "why": "A nasal vowel writes its nasality as a coda (ັງ for /ɑ̃/), so a syllable that already has a nasal coda was getting ງ written over its own /n/ or /m/. With if_coda the ງ is written only where the coda is not itself a nasal: /ɔ̃n/ is ມອນ rather than ມອງ, /ɐ̃m/ is ັມ rather than ັງ. 51 rows across French, Portuguese and Hindi. Measured over the corpus, 815 nasal vowels have no coda, 170 have a nasal one and 121 an obstruent -- and the obstruent case deliberately keeps the old behaviour, ງ written and the obstruent dropped, because that is what Thai itself does with the pair (France = ຟຣານຊ໌, read [fraŋ])."
+    },
+    {
+      "sounds": "vowel length in a closed syllable with /ə/ or /o/",
+      "out": "lost",
+      "why": "Thai writes short and long with different signs everywhere except two places, and both are structural rather than avoidable: ເ-ິ is the closed form of both /ə/ and /əː/, and a closed short /o/ has no written form at all in Thai (ນກ is spelt with no vowel), so /o/ takes ໂ- and reads long. Everywhere else length is written, which is why policy.length is none and every long vowel has its own rule."
+    },
+    {
+      "what": "Thai's two class pairs for /tɕʰ/ and /s/ collapse into Lao's one",
+      "why": "Thai has (ช, ฉ) for /tɕʰ/ and (ซ, ส) for /s/ where Lao has only ຊ/ສ. Lao has neither /tʃ/ nor /ʃ/ and its nearest native sound is /s/, so both pairs map onto ຊ/ສ and /tʃ/, /ʃ/ and /s/ merge in the output. That is also what Lao loanword spelling does."
+    },
+    {
+      "what": "Thai's ็ mai taikhu is written ັ",
+      "why": "Lao has no mai taikhu; a short vowel before a final consonant takes ັ alone, so Thai's two spellings of that vowel collapse into one and the duplicate rules are dropped."
+    },
+    {
+      "what": "/j/ takes ຢ and /ɲ/ takes ຍ",
+      "why": "Thai ย is /j/ and its ญ is a spelling variant of the same sound. Lao splits them: ຢ is /j/ and ຍ is /ɲ/. So this table is more precise than the one it derives from, and it is the one divergence in Lao's favour."
+    },
+    {
+      "what": "the two rare tone marks ໊ mai ti and ໋ mai catawa are used sparingly",
+      "why": "Lao writes them almost only in loanwords and interjections. The placeholder chain uses ໋ where Thai uses ๋ and never emits ໊, which is the same restraint the Thai table shows."
+    }
+  ],
+  "legend": "ບໍ່ມີສັນຍາລັກໃໝ່ ທັງໝົດແມ່ນຕົວອັກສອນລາວຕາມປົກກະຕິ ຂີດຂັ້ນແບ່ງພະຍາງ ແລະ ວັນນະຍຸດທີ່ຂຽນໄວ້ແມ່ນສຽງຈິງ ບໍ່ແມ່ນເຄື່ອງປະດັບ",
+  "policy": {
+    "syllable_separator": "-",
+    "word_separator": " ",
+    "stress": "none",
+    "stress_min_syllables": 2,
+    "length": "none",
+    "tone": "keep",
+    "max_onset": 2,
+    "fixups": "all",
+    "locale": "lo",
+    "reader_onsets": "pr pɾ pɹ pʁ pɽ pɻ pʰr pʰɾ pʰɹ pʰʁ pʰɽ pʰɻ br bɾ bɹ bʁ bɽ bɻ tr tɾ tɹ tʁ tɽ tɻ tʰr tʰɾ tʰɹ tʰʁ tʰɽ tʰɻ dr dɾ dɹ dʁ dɽ dɻ kr kɾ kɹ kʁ kɽ kɻ kʰr kʰɾ kʰɹ kʰʁ kʰɽ kʰɻ ɡr ɡɾ ɡɹ ɡʁ ɡɽ ɡɻ fr fɾ fɹ fʁ fɽ fɻ pl pɫ pɭ pʰl pʰɫ pʰɭ bl bɫ bɭ kl kɫ kɭ kʰl kʰɫ kʰɭ ɡl ɡɫ ɡɭ fl fɫ fɭ kw kʰw ɡw xw sw tw tʰw dw hw"
+  },
+  "splits": [],
+  "phonemes": [
+    {
+      "slot": "any",
+      "ipa": "ɬ",
+      "out": "ລ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɬ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɬ",
+      "out": "ລ"
+    },
+    {
+      "slot": "any",
+      "ipa": "˧˩˧",
+      "out": "²"
+    },
+    {
+      "slot": "any",
+      "ipa": "˧˥˨˩",
+      "out": "³"
+    },
+    {
+      "slot": "any",
+      "ipa": "˨˩ˀ",
+      "out": "³"
+    },
+    {
+      "slot": "any",
+      "ipa": "˧˥",
+      "out": "⁵"
+    },
+    {
+      "slot": "any",
+      "ipa": "˥˩",
+      "out": "³"
+    },
+    {
+      "slot": "any",
+      "ipa": "˨˩",
+      "out": "³"
+    },
+    {
+      "slot": "any",
+      "ipa": "˧˩",
+      "out": "³"
+    },
+    {
+      "slot": "any",
+      "ipa": "˩˩˦",
+      "out": "⁵"
+    },
+    {
+      "slot": "any",
+      "ipa": "˦˥",
+      "out": "⁵"
+    },
+    {
+      "slot": "any",
+      "ipa": "˥",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "˦",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "˧",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "˨",
+      "out": "²"
+    },
+    {
+      "slot": "any",
+      "ipa": "˩",
+      "out": "²"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "i",
+      "out": "ີ",
+      "when": [
+        "open"
+      ],
+      "if_inventory": "˧",
+      "unless_inventory": "iː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "u",
+      "out": "ູ",
+      "when": [
+        "open"
+      ],
+      "if_inventory": "˧",
+      "unless_inventory": "uː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "a",
+      "out": "າ",
+      "when": [
+        "open"
+      ],
+      "if_inventory": "˧",
+      "unless_inventory": "aː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "y",
+      "out": "ູ",
+      "when": [
+        "open"
+      ],
+      "if_inventory": "˧",
+      "unless_inventory": "yː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯ",
+      "out": "ື",
+      "when": [
+        "open"
+      ],
+      "if_inventory": "˧",
+      "unless_inventory": "ɯː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ",
+      "out": "ແ",
+      "when": [
+        "open"
+      ],
+      "if_inventory": "˧",
+      "unless_inventory": "ɛː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ə",
+      "out": "ເີ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ə",
+      "out": "ເີ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌ",
+      "out": "ເີ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌ",
+      "out": "ເີ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ",
+      "out": "ເີ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ",
+      "out": "ເີ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "e",
+      "out": "ເີ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "e",
+      "out": "ເີ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ",
+      "out": "ເີ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ",
+      "out": "ເີ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ø",
+      "out": "ເີ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ø",
+      "out": "ເີ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ",
+      "out": "ເີ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ",
+      "out": "ເີ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "a",
+      "out": "າ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "a",
+      "out": "າ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "æ",
+      "out": "າ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "æ",
+      "out": "າ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "i",
+      "out": "ີ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "i",
+      "out": "ີ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɪ",
+      "out": "ີ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɪ",
+      "out": "ີ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "u",
+      "out": "ູ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "u",
+      "out": "ູ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʊ",
+      "out": "ູ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʊ",
+      "out": "ູ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "y",
+      "out": "ູ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "y",
+      "out": "ູ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "o",
+      "out": "ອ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "o",
+      "out": "ອ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oː",
+      "out": "ອ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oː",
+      "out": "ອ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ",
+      "out": "ອ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ ɾ",
+      "unless_inventory": "ɹ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ",
+      "out": "ອ",
+      "if_coda": "r ɹ ʁ ɽ ɻ rʲ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "a",
+      "out": "ະ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "a",
+      "out": "ັ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ",
+      "out": "ະ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ",
+      "out": "ັ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aː",
+      "out": "າ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑ",
+      "out": "າ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑː",
+      "out": "າ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "æ",
+      "out": "ແະ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "æ",
+      "out": "ແ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "e",
+      "out": "ເ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "eː",
+      "out": "ເ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ",
+      "out": "ເະ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ",
+      "out": "ເັ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛː",
+      "out": "ແ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "i",
+      "out": "ິ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɪ",
+      "out": "ິ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "iː",
+      "out": "ີ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "o",
+      "out": "ໂ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oː",
+      "out": "ໂ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɵ",
+      "out": "ໂ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ",
+      "out": "ອ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ",
+      "out": "ັອ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔː",
+      "out": "ອ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɒ",
+      "out": "ອ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "u",
+      "out": "ຸ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʊ",
+      "out": "ຸ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "uː",
+      "out": "ູ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʉ",
+      "out": "ູ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "y",
+      "out": "ຸ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʏ",
+      "out": "ຸ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "yː",
+      "out": "ູ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯː",
+      "out": "ື",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯː",
+      "out": "ື",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɨ",
+      "out": "ື",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɨ",
+      "out": "ື",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɜ",
+      "out": "ເີ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɜ",
+      "out": "ເິ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɜː",
+      "out": "ເີ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɜː",
+      "out": "ເິ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɚ",
+      "out": "ເີ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɚ",
+      "out": "ເິ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɝ",
+      "out": "ເີ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɝ",
+      "out": "ເິ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɤ",
+      "out": "ເີ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɤ",
+      "out": "ເິ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ø",
+      "out": "ເີ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ø",
+      "out": "ເິ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ",
+      "out": "ເີ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ",
+      "out": "ເິ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "əː",
+      "out": "ເີ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "əː",
+      "out": "ເິ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɤː",
+      "out": "ເີ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɤː",
+      "out": "ເິ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ə",
+      "out": "ເີ",
+      "when": [
+        "open"
+      ],
+      "if_inventory": "əː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ə",
+      "out": "ເິ",
+      "when": [
+        "closed"
+      ],
+      "if_inventory": "əː"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ə",
+      "out": "ເິ",
+      "if_coda": "n m ŋ ɴ",
+      "unless_inventory": "ə#"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ə",
+      "out": "ະ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ə",
+      "out": "ັ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌ",
+      "out": "ເີ",
+      "when": [
+        "open"
+      ],
+      "unless_inventory": "ə"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌ",
+      "out": "ເິ",
+      "when": [
+        "closed"
+      ],
+      "unless_inventory": "ə"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌ",
+      "out": "ະ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌ",
+      "out": "ັ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯ",
+      "out": "ຸ",
+      "unless_inventory": "u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯ",
+      "out": "ຶ"
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "",
+      "if_coda": "n m ŋ ɴ ɲ nʲ mʲ ɳ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ã",
+      "out": "ັ",
+      "if_coda": "n m ŋ ɴ ɲ nʲ mʲ ɳ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑ̃",
+      "out": "ັ",
+      "if_coda": "n m ŋ ɴ ɲ nʲ mʲ ɳ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ̃",
+      "out": "ັ",
+      "if_coda": "n m ŋ ɴ ɲ nʲ mʲ ɳ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ã",
+      "out": "ັ",
+      "if_coda": "n m ŋ ɴ ɲ nʲ mʲ ɳ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ̃",
+      "out": "ແ",
+      "if_coda": "n m ŋ ɴ ɲ nʲ mʲ ɳ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ũ",
+      "out": "ຸ",
+      "if_coda": "n m ŋ ɴ ɲ nʲ mʲ ɳ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ̃",
+      "out": "ເິ",
+      "if_coda": "n m ŋ ɴ ɲ nʲ mʲ ɳ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ̃",
+      "out": "ອ",
+      "if_coda": "n m ŋ ɴ ɲ nʲ mʲ ɳ"
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "ງ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ã",
+      "out": "ັງ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑ̃",
+      "out": "ັງ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ̃",
+      "out": "ັງ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ã",
+      "out": "ັງ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ̃",
+      "out": "ແງ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ẽ",
+      "out": "ເງ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ẽː",
+      "out": "ເງ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ĩ",
+      "out": "ິງ"
+    },
+    {
+      "slot": "any",
+      "ipa": "õ",
+      "out": "ອງ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ̃",
+      "out": "ອງ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ũ",
+      "out": "ຸງ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ̃",
+      "out": "ເິງ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ̃ʊ̃",
+      "out": "ເາ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aɪ",
+      "out": "ໄ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aj",
+      "out": "ໄ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑɪ",
+      "out": "ໄ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aːj",
+      "out": "າຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aːɪ",
+      "out": "າຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aʊ",
+      "out": "ເາ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aw",
+      "out": "ເາ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑʊ",
+      "out": "ເາ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑw",
+      "out": "ເາ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aːw",
+      "out": "າວ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aːʊ",
+      "out": "າວ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "eɪ",
+      "out": "ເ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ej",
+      "out": "ເ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "eːj",
+      "out": "ເຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oːw",
+      "out": "ໂວ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oj",
+      "out": "ອຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oɪ",
+      "out": "ອຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔj",
+      "out": "ອຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔɪ",
+      "out": "ອຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔːj",
+      "out": "ອຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "eʊ",
+      "out": "ເວ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ew",
+      "out": "ເວ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛʊ",
+      "out": "ເວ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛw",
+      "out": "ເວ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "uj",
+      "out": "ຸຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "uɪ",
+      "out": "ຸຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "uːj",
+      "out": "ູຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "iw",
+      "out": "ິວ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "iʊ",
+      "out": "ິວ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "iːw",
+      "out": "ີວ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "iːj",
+      "out": "ີ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ij",
+      "out": "ີ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "əɪ",
+      "out": "ເຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "əj",
+      "out": "ເຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "əːj",
+      "out": "ເຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "əːɪ",
+      "out": "ເຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯɪ",
+      "out": "ຶຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯj",
+      "out": "ຶຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɨɪ",
+      "out": "ຶຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌɪ",
+      "out": "ັຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌj",
+      "out": "ັຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɪʊ",
+      "out": "ິວ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʊɪ",
+      "out": "ຸຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "yɪ",
+      "out": "ຸຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "æɪ",
+      "out": "ໄ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛɪ",
+      "out": "ເ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "eːɪ",
+      "out": "ເ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "iːɪ",
+      "out": "ີ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "uːɪ",
+      "out": "ູຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oːɪ",
+      "out": "ອຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "õj",
+      "out": "ອງ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aɪʊ",
+      "out": "ໄ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "aɪw",
+      "out": "ໄ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "eɪʊ",
+      "out": "ເ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oʊɪ",
+      "out": "ໂ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jeɪ",
+      "out": "ເີຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oʊ",
+      "out": "ໂວ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oʊ",
+      "out": "ໂ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ow",
+      "out": "ໂວ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ow",
+      "out": "ໂ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "əʊ",
+      "out": "ໂວ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "əʊ",
+      "out": "ໂ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oːʊ",
+      "out": "ໂວ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oːʊ",
+      "out": "ໂ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oːw",
+      "out": "ໂວ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "oːw",
+      "out": "ໂ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "iɛ̯",
+      "out": "ເີຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "iə̯",
+      "out": "ເີຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "uə̯",
+      "out": "ັວ",
+      "when": [
+        "open"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "uə̯",
+      "out": "ວ",
+      "when": [
+        "closed"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "yə̯",
+      "out": "ເືອ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯə̯",
+      "out": "ເືອ"
+    },
+    {
+      "slot": "any",
+      "ipa": "̯",
+      "out": ""
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ja",
+      "out": "ເີຍ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jaː",
+      "out": "ເີຍ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɑ",
+      "out": "ເີຍ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɑː",
+      "out": "ເີຍ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɐ",
+      "out": "ເີຍ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jʌ",
+      "out": "ເີຍ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jə",
+      "out": "ເີຍ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jæ",
+      "out": "ເີຍ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɛ",
+      "out": "ເີຍ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɛː",
+      "out": "ເີຍ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "je",
+      "out": "ເີຍ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jeː",
+      "out": "ເີຍ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɪ",
+      "out": "ເີຍ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jã",
+      "out": "ເີຍ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɛ̃",
+      "out": "ເີຍ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɑ̃",
+      "out": "ເີຍ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ji",
+      "out": "ີ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jiː",
+      "out": "ີ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ju",
+      "out": "ິວ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "juː",
+      "out": "ິວ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jʊ",
+      "out": "ິວ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jy",
+      "out": "ິວ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jyː",
+      "out": "ິວ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "joʊ",
+      "out": "ິວ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jũ",
+      "out": "ິວ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jo",
+      "out": "ເີຍວ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "joː",
+      "out": "ເີຍວ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɔ",
+      "out": "ເີຍວ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɔː",
+      "out": "ເີຍວ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɤ",
+      "out": "ເີຍວ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jø",
+      "out": "ເີຍວ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jœ",
+      "out": "ເີຍວ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɵ",
+      "out": "ເີຍວ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɑʊ",
+      "out": "ເີຍວ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jaʊ",
+      "out": "ເີຍວ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "jɔ̃",
+      "out": "ເີຍວ",
+      "when": [
+        "has_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "j",
+      "out": "ຍ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "w",
+      "out": "ວ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɥ",
+      "out": "ວ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "ຊ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "ຊ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂʰ",
+      "out": "ຊ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ͈",
+      "out": "ຈ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts̪",
+      "out": "ຊ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃʲ",
+      "out": "ຊ"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰ",
+      "out": "ຄ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰ",
+      "out": "ທ"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʰ",
+      "out": "ພ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʰ",
+      "out": "ທ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʰ",
+      "out": "ທ"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʰ",
+      "out": "ພ"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʰ",
+      "out": "ທ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡʰ",
+      "out": "ຄ"
+    },
+    {
+      "slot": "any",
+      "ipa": "cʰ",
+      "out": "ຊ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟʰ",
+      "out": "ຊ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽʰ",
+      "out": "ຣ"
+    },
+    {
+      "slot": "any",
+      "ipa": "pf",
+      "out": "ຟ"
+    },
+    {
+      "slot": "any",
+      "ipa": "s͈",
+      "out": "ຊ"
+    },
+    {
+      "slot": "any",
+      "ipa": "dz",
+      "out": "ຊ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "ຊ"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒ",
+      "out": "ຈ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "ຈ"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʑ",
+      "out": "ຈ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "ຈ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʐ",
+      "out": "ຈ"
+    },
+    {
+      "slot": "any",
+      "ipa": "m̩",
+      "out": "ມ"
+    },
+    {
+      "slot": "any",
+      "ipa": "n̩",
+      "out": "ນ"
+    },
+    {
+      "slot": "any",
+      "ipa": "t̪",
+      "out": "ຕ"
+    },
+    {
+      "slot": "any",
+      "ipa": "s̪",
+      "out": "ຊ"
+    },
+    {
+      "slot": "any",
+      "ipa": "dˤ",
+      "out": "ດ"
+    },
+    {
+      "slot": "any",
+      "ipa": "k͈",
+      "out": "ກ"
+    },
+    {
+      "slot": "any",
+      "ipa": "t͈",
+      "out": "ຕ"
+    },
+    {
+      "slot": "any",
+      "ipa": "p͈",
+      "out": "ປ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʲ",
+      "out": "ຕ"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʲ",
+      "out": "ດ"
+    },
+    {
+      "slot": "any",
+      "ipa": "nʲ",
+      "out": "ນ"
+    },
+    {
+      "slot": "any",
+      "ipa": "sʲ",
+      "out": "ຊ"
+    },
+    {
+      "slot": "any",
+      "ipa": "rʲ",
+      "out": "ຣ"
+    },
+    {
+      "slot": "any",
+      "ipa": "mʲ",
+      "out": "ມ"
+    },
+    {
+      "slot": "any",
+      "ipa": "vʲ",
+      "out": "ວ"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʲ",
+      "out": "ປ"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʲ",
+      "out": "ບ"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʲ",
+      "out": "ຄ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡʲ",
+      "out": "ກ"
+    },
+    {
+      "slot": "any",
+      "ipa": "fʲ",
+      "out": "ຟ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭʲ",
+      "out": "ລ"
+    },
+    {
+      "slot": "any",
+      "ipa": "b",
+      "out": "ບ"
+    },
+    {
+      "slot": "any",
+      "ipa": "d",
+      "out": "ດ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɗ",
+      "out": "ດ"
+    },
+    {
+      "slot": "any",
+      "ipa": "g",
+      "out": "ກ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡ",
+      "out": "ກ"
+    },
+    {
+      "slot": "any",
+      "ipa": "q",
+      "out": "ກ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɣ",
+      "out": "ກ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈ",
+      "out": "ຕ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖ",
+      "out": "ດ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɳ",
+      "out": "ນ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ħ",
+      "out": "ຮ"
+    },
+    {
+      "slot": "any",
+      "ipa": "h",
+      "out": "ຮ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "ຮ"
+    },
+    {
+      "slot": "any",
+      "ipa": "f",
+      "out": "ຟ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɸ",
+      "out": "ຟ"
+    },
+    {
+      "slot": "any",
+      "ipa": "v",
+      "out": "ວ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʋ",
+      "out": "ວ"
+    },
+    {
+      "slot": "any",
+      "ipa": "θ",
+      "out": "ທ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ð",
+      "out": "ດ"
+    },
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "ຊ"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "ຊ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "ຊ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒ",
+      "out": "ຊ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʑ",
+      "out": "ຊ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʂ",
+      "out": "ຊ"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "ຊ"
+    },
+    {
+      "slot": "any",
+      "ipa": "m",
+      "out": "ມ"
+    },
+    {
+      "slot": "any",
+      "ipa": "n",
+      "out": "ນ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "ງ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɴ",
+      "out": "ງ"
+    },
+    {
+      "slot": "any",
+      "ipa": "l",
+      "out": "ລ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɫ",
+      "out": "ລ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭ",
+      "out": "ລ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "ລ"
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
+      "out": "ຣ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾ",
+      "out": "ຣ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɹ",
+      "out": "ຣ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "ຣ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽ",
+      "out": "ຣ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɻ",
+      "out": "ຣ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʐ",
+      "out": "ຣ"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "ຍ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "ຍ"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "ວ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɥ",
+      "out": "ວ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɲ",
+      "out": "ນ",
+      "if_nucleus_head": "i iː ɪ j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "ນຍ"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "ປ"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "ຕ"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "ຄ",
+      "if_inventory": "ɡ",
+      "unless_inventory": "kʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "ກ"
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "ຮ",
+      "unless_inventory": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "ຄ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "ຊ",
+      "if_inventory": "ʂ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "ຊ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "ຈ",
+      "if_inventory": "tsʰ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "ຊ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "ກ",
+      "if_inventory": "dʒ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "ຈ"
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʔ",
+      "out": "ອ",
+      "after_out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔ",
+      "out": ""
+    },
+    {
+      "slot": "onset",
+      "ipa": "ʕ",
+      "out": "ອ",
+      "after_out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʕ",
+      "out": ""
+    },
+    {
+      "slot": "onset",
+      "ipa": "ɰ",
+      "out": "ອ",
+      "after_out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʷ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˤ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˀ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʼ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ː",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "͈",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̩",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̪",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̚",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̥",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̬",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̹",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̜",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̺",
+      "out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "t̪ˀ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "t̪ˀ",
+      "out": "ຕ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ts̪",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ts̪",
+      "out": "ຊ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tsʰ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tsʰ",
+      "out": "ຊ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʃʲ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʃʲ",
+      "out": "ຊ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tɕʰ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tɕʰ",
+      "out": "ຊ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "pʰ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "pʰ",
+      "out": "ປ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "bʰ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "bʰ",
+      "out": "ປ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "pʲ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "pʲ",
+      "out": "ປ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "bʲ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "bʲ",
+      "out": "ປ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "p͈",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "p͈",
+      "out": "ປ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "pf",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "pf",
+      "out": "ຟ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "fʲ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "fʲ",
+      "out": "ຟ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "vʲ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "vʲ",
+      "out": "ຟ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʰ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʰ",
+      "out": "ຕ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʈʰ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʈʰ",
+      "out": "ຕ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "t̪",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "t̪",
+      "out": "ຕ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʲ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʲ",
+      "out": "ຕ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "t͈",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "t͈",
+      "out": "ຕ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʰ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʰ",
+      "out": "ດ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʲ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʲ",
+      "out": "ດ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dˤ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dˤ",
+      "out": "ດ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɖʰ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɖʰ",
+      "out": "ດ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "kʰ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "kʰ",
+      "out": "ກ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɡʰ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɡʰ",
+      "out": "ກ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "kʲ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "kʲ",
+      "out": "ກ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɡʲ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɡʲ",
+      "out": "ກ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "k͈",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "k͈",
+      "out": "ກ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "cˀ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "cˀ",
+      "out": "ກ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "s̪",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "s̪",
+      "out": "ສ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "sʲ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "sʲ",
+      "out": "ສ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "s͈",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "s͈",
+      "out": "ສ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ts",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ts",
+      "out": "ຊ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dz",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dz",
+      "out": "ຊ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʃ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tʃ",
+      "out": "ຊ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tɕ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "tɕ",
+      "out": "ຊ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʈʂ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʈʂ",
+      "out": "ຊ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʒ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʒ",
+      "out": "ຈ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʑ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "dʑ",
+      "out": "ຈ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "mʲ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "mʲ",
+      "out": "ມ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "m̩",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "m̩",
+      "out": "ມ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "nʲ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "nʲ",
+      "out": "ນ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "n̩",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "n̩",
+      "out": "ນ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "nˀ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "nˀ",
+      "out": "ນ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ŋˀ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ŋˀ",
+      "out": "ງ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɭʲ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɭʲ",
+      "out": "ລ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "rʲ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "rʲ",
+      "out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "p",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "p",
+      "out": "ປ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "b",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "b",
+      "out": "ປ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "f",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "f",
+      "out": "ຟ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "v",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "v",
+      "out": "ຟ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɸ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɸ",
+      "out": "ຟ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʋ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʋ",
+      "out": "ຟ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "t",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "t",
+      "out": "ຕ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʈ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʈ",
+      "out": "ຕ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "θ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "θ",
+      "out": "ຕ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "d",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "d",
+      "out": "ດ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɗ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɗ",
+      "out": "ດ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɖ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɖ",
+      "out": "ດ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ð",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ð",
+      "out": "ດ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "k",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "k",
+      "out": "ກ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɡ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɡ",
+      "out": "ກ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "x",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "x",
+      "out": "ກ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ç",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ç",
+      "out": "ກ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "q",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "q",
+      "out": "ກ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɣ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɣ",
+      "out": "ກ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "c",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "c",
+      "out": "ກ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɟ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɟ",
+      "out": "ກ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "s",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "s",
+      "out": "ສ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "z",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "z",
+      "out": "ຊ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʃ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʃ",
+      "out": "ຊ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʒ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʒ",
+      "out": "ຊ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɕ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɕ",
+      "out": "ຊ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʑ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʑ",
+      "out": "ຊ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʂ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʂ",
+      "out": "ຊ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "m",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "m",
+      "out": "ມ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "n",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "n",
+      "out": "ນ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɲ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɲ",
+      "out": "ນ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɳ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɳ",
+      "out": "ນ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ŋ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ŋ",
+      "out": "ງ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "l",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "l",
+      "out": "ລ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɫ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɫ",
+      "out": "ລ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɭ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɭ",
+      "out": "ລ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʎ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʎ",
+      "out": "ລ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "j",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "j",
+      "out": "ຍ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "w",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "w",
+      "out": "ວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "r",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "r",
+      "out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɾ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɾ",
+      "out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɹ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɹ",
+      "out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʁ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʁ",
+      "out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɽ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɽ",
+      "out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɻ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɻ",
+      "out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʐ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʐ",
+      "out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "h",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "h",
+      "out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ħ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ħ",
+      "out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʕ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʕ",
+      "out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʔ",
+      "out": "",
+      "after_out": "ປ ຕ ດ ກ ມ ນ ງ ລ ສ ຊ ຊ ຈ ຟ ໄ ໃ ຳ ເາ າວ າຍ ຸຍ ູຍ ິວ ີວ ອຍ ັຍ ຶຍ ເຍ ໂຍ ໂວ ີຍວ ເວ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʔ",
+      "out": ""
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɴ",
+      "out": "ນ",
+      "before_onset": "d t n s z ts dʑ tɕ ɕ ɾ"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɴ",
+      "out": "ມ",
+      "before_onset": "b p m"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ɴ",
+      "out": "ງ"
+    },
+    {
+      "slot": "any",
+      "ipa": "r̝",
+      "out": "ຣ"
+    }
+  ],
+  "syllable_fixups": [
+    {
+      "match": "^(?=[ເແໂໃໄັິີຶືຸູັໍະາຳອ])",
+      "out": "ຍ",
+      "when": [
+        "no_onset"
+      ],
+      "after_nucleus_tail": "i"
+    },
+    {
+      "match": "^(?=[ເແໂໃໄັິີຶືຸູັໍະາຳອ])",
+      "out": "ຍ",
+      "when": [
+        "no_onset"
+      ],
+      "after_nucleus": "ɪ"
+    },
+    {
+      "match": "^(?=[ເແໂໃໄັິີຶືຸູັໍະາຳອ])",
+      "out": "ວ",
+      "when": [
+        "no_onset"
+      ],
+      "after_nucleus_tail": "u"
+    },
+    {
+      "match": "^(?=[ເແໂໃໄັິີຶືຸູັໍະາຳອ])",
+      "out": "ວ",
+      "when": [
+        "no_onset"
+      ],
+      "after_nucleus": "ʊ"
+    },
+    {
+      "match": "^(?=[ເແໂໃໄັິີຶືຸູັໍະາຳອ])",
+      "out": "ອ",
+      "when": [
+        "no_onset"
+      ]
+    },
+    {
+      "match": "^(?=[ັິີຶືຸູັໍ])",
+      "out": "ອ"
+    },
+    {
+      "match": "ເະ([²³⁵]?)([ຍວ])",
+      "out": "ເ\\1\\2"
+    },
+    {
+      "match": "ແະ([²³⁵]?)([ຍວ])",
+      "out": "ແ\\1\\2"
+    },
+    {
+      "match": "ະ([²³⁵]?)ຍ",
+      "out": "ໄ\\1"
+    },
+    {
+      "match": "ະ([²³⁵]?)ວ",
+      "out": "ເ\\1າ"
+    },
+    {
+      "match": "ະ([²³⁵]?)([ກ-ຮ])",
+      "out": "\\1\\2"
+    },
+    {
+      "match": "^([^ເແໂໃໄ]*?)((?:[ກຂຄຕປຜພບດຟ][ຣລ]|[ກ-ຮ]ວ)|[ກ-ຮ])([ເແໂໃໄ])",
+      "out": "\\1\\3\\2"
+    },
+    {
+      "match": "^([ເແໂໃໄ]?(?:[ກຂຄຕປຜພບດຟ][ຣລ]|[ກຂຄຕປຜພບດຟ]ວ(?=[ັິີຶືຸູັໍະາຳອ])|[ກ-ຮ])[ັິີຶືຸູັໍ]*)(?![ເແໂໃໄ])",
+      "out": "\\1³",
+      "when": [
+        "stressed",
+        "not_word_initial"
+      ]
+    },
+    {
+      "match": "^([ເແໂໃໄ]?(?:[ກຂຄຕປຜພບດຟ][ຣລ]|[ກຂຄຕປຜພບດຟ]ວ(?=[ັິີຶືຸູັໍະາຳອ])|[ກ-ຮ])[ັິີຶືຸູັໍ]*)(?![ເແໂໃໄ])",
+      "out": "\\1³",
+      "when": [
+        "stressed",
+        "word_initial",
+        "not_word_final"
+      ]
+    },
+    {
+      "match": "ັອ([²³⁵]?)(?=[,/{}]*$)",
+      "out": "ອ\\1"
+    },
+    {
+      "match": "ັ([²³⁵]?)(?=[,/{}]*$)",
+      "out": "ະ\\1"
+    },
+    {
+      "match": "^([ເແໂໃໄ]?(?:[ກຂຄຕປຜພບດຟ][ຣລ]|[ກຂຄຕປຜພບດຟ]ວ(?=[ັິີຶືຸູັໍະາຳອ])|[ກ-ຮ])[ັິີຶືຸູັໍ]*[ຍວ]*)([ະາຳອ][ະາຳອວຍ]*)([²³⁵])",
+      "out": "\\1\\3\\2"
+    },
+    {
+      "match": "^([ເແໂໃໄ]?(?:[ກຂຄຕປຜພບດຟ][ຣລ]|[ກ-ຮ])[ັິີຶືຸູັໍ]*)([ຍວ]+)([²³⁵])",
+      "out": "\\1\\3\\2"
+    },
+    {
+      "match": "^([ເແໂໃໄ]?[ກຈດຕບປອ])([^²]*)²",
+      "out": "\\1\\2່"
+    },
+    {
+      "match": "^([ເແໂໃໄ]?[ກຈດຕບປອ])([^³]*)³",
+      "out": "\\1\\2້"
+    },
+    {
+      "match": "^([ເແໂໃໄ]?[ກຈດຕບປອ])([^⁵]*)⁵",
+      "out": "\\1\\2໋"
+    },
+    {
+      "match": "^([ເແໂໃໄ]?[ຄທຊຊຟຮພງນມຍຣລວ])([^³]*)³",
+      "out": "\\1\\2່"
+    },
+    {
+      "match": "^([ເແໂໃໄ]?)([ງນມຍຣລວ])([^²]*)²",
+      "out": "\\1ຫ\\2\\3່"
+    },
+    {
+      "match": "^([ເແໂໃໄ]?)([ງນມຍຣລວ])([^⁵]*)⁵",
+      "out": "\\1ຫ\\2\\3"
+    },
+    {
+      "match": "^([ເແໂໃໄ]?)ຄ([^²]*)²",
+      "out": "\\1ຂ\\2່"
+    },
+    {
+      "match": "^([ເແໂໃໄ]?)ຄ([^⁵]*)⁵",
+      "out": "\\1ຂ\\2"
+    },
+    {
+      "match": "^([ເແໂໃໄ]?)ທ([^²]*)²",
+      "out": "\\1ຖ\\2່"
+    },
+    {
+      "match": "^([ເແໂໃໄ]?)ທ([^⁵]*)⁵",
+      "out": "\\1ຖ\\2"
+    },
+    {
+      "match": "^([ເແໂໃໄ]?)ຊ([^²]*)²",
+      "out": "\\1ສ\\2່"
+    },
+    {
+      "match": "^([ເແໂໃໄ]?)ຊ([^⁵]*)⁵",
+      "out": "\\1ສ\\2"
+    },
+    {
+      "match": "^([ເແໂໃໄ]?)ຟ([^²]*)²",
+      "out": "\\1ຝ\\2່"
+    },
+    {
+      "match": "^([ເແໂໃໄ]?)ຟ([^⁵]*)⁵",
+      "out": "\\1ຝ\\2"
+    },
+    {
+      "match": "^([ເແໂໃໄ]?)ຮ([^²]*)²",
+      "out": "\\1ຫ\\2່"
+    },
+    {
+      "match": "^([ເແໂໃໄ]?)ຮ([^⁵]*)⁵",
+      "out": "\\1ຫ\\2"
+    },
+    {
+      "match": "^([ເແໂໃໄ]?)ພ([^²]*)²",
+      "out": "\\1ຜ\\2່"
+    },
+    {
+      "match": "^([ເແໂໃໄ]?)ພ([^⁵]*)⁵",
+      "out": "\\1ຜ\\2"
+    },
+    {
+      "match": "([ັິີຶືຸູັໍະາຳ][²³⁵]?)[ັິີຶືຸູັໍ]",
+      "out": "\\1"
+    },
+    {
+      "match": "ັ([²³⁵່-໋]?ວ[ຍວ])",
+      "out": "\\1"
+    },
+    {
+      "match": "[²³⁵]",
+      "out": ""
+    }
+  ],
+  "targets": {
+    "en": {
+      "phonemes": [
+        {
+          "slot": "onset",
+          "ipa": "p",
+          "out": "ພ"
+        },
+        {
+          "slot": "onset",
+          "ipa": "t",
+          "out": "ທ"
+        }
+      ]
+    },
+    "de": {
+      "phonemes": [
+        {
+          "slot": "onset",
+          "ipa": "p",
+          "out": "ພ"
+        },
+        {
+          "slot": "onset",
+          "ipa": "t",
+          "out": "ທ"
+        }
+      ]
+    },
+    "tr": {
+      "phonemes": [
+        {
+          "slot": "onset",
+          "ipa": "p",
+          "out": "ພ"
+        },
+        {
+          "slot": "onset",
+          "ipa": "t",
+          "out": "ທ"
+        },
+        {
+          "slot": "nucleus",
+          "ipa": "æ",
+          "out": "ເະ",
+          "when": [
+            "open"
+          ]
+        },
+        {
+          "slot": "nucleus",
+          "ipa": "æ",
+          "out": "ເັ",
+          "when": [
+            "closed"
+          ]
+        }
+      ]
+    },
+    "pt": {
+      "phonemes": [
+        {
+          "slot": "nucleus",
+          "ipa": "æ",
+          "out": "ະ",
+          "when": [
+            "open"
+          ]
+        },
+        {
+          "slot": "nucleus",
+          "ipa": "æ",
+          "out": "ັ",
+          "when": [
+            "closed"
+          ]
+        },
+        {
+          "slot": "nucleus",
+          "ipa": "y",
+          "out": "ິ"
+        },
+        {
+          "slot": "any",
+          "ipa": "x",
+          "out": "ຣ"
+        }
+      ]
+    },
+    "vi": {
+      "phonemes": [
+        {
+          "slot": "nucleus",
+          "ipa": "y",
+          "out": "ຶ"
+        },
+        {
+          "slot": "nucleus",
+          "ipa": "yː",
+          "out": "ື"
+        }
+      ]
+    }
+  },
+  "note": "Transposed from the Thai table rather than invented, and the reason is structural rather than a convenience: Lao and Thai have the same three consonant classes with the same members letter for letter, the same deterministic tone rule over class x mark x vowel length x live/dead, and cognate vowel signs including the pre-base ones. `content/RESPELL-SYSTEMS.md` says of Thai that \"a Thai syllable cannot be toneless\" and that a rule set \"must choose consonant letters and tone marks together and on purpose\"; that is true of Lao word for word, and the Thai table already solves it.\n\nHow tone is written, which is the whole of the design and is unchanged from Thai's. The tone rules emit a placeholder rather than a mark -- ² mai ek, ³ mai tho, ⁵ mai catawa, with the unmarked tone emitting nothing -- and the `syllable_fixups` then read the class off the letter in hand and write the mark that reaches the wanted pitch, changing the letter where its class cannot get there: ຄ→ຂ, ທ→ຖ, ຊ→ສ, ຟ→ຝ, ຮ→ຫ, ພ→ຜ for the low-to-high swaps, and a prefixed ຫ for the sonorants ງ ຍ ນ ມ ຣ ລ ວ, which is Lao's own class-marking device. The final fixup clears any leftover placeholder, so no superscript reaches `charset.json` -- which is verifiable against Thai's own key, and is worth knowing because the shipped `thai` faces carry no superscript glyph at all.\n\nEvery output string is passed through the Lao parser in `scripts/build_ipa.py` (`lao_parse_word`) as a structural check, which is the one `--gaps` cannot make: zero gaps says every symbol had a rule, and the parser says the result is a legal Lao string.",
+  "policy_note": "`stress: none`, and Lao has Persian's three reasons rather than a choice. The script is caseless so `caps` is out; `acute` and `grave` are byte-identical no-ops because `VOWEL_LETTERS` and `ACCENTED` in `core/respell.js` list Latin, Greek and Cyrillic letters and no Lao character, which is the wall Hebrew and Persian both hit; and `prime` would be a fifth mark above a syllable that may already carry a vowel sign and a tone mark. Thai uses tone itself as its stress device; that is refused here because it would make the same mark carry two claims, and the tone this column writes is the target's real tone.\n\n`tone: keep`, which only four of the 44 tables can say -- `th`, `vi`, `zh-Hans` and now `lo`. A Lao reader reads tone natively, so the target's tone is information rather than noise, and `core/respell.js`'s `TONE` regex would otherwise strip it.\n\n`max_onset: 2`, transposed with the rest: Lao's phonotactics are Thai's here -- a bare consonant, a /Cw/ cluster, or a /Cr/ or /Cl/ cluster in a loanword, and nothing longer."
+}

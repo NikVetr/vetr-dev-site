@@ -1,0 +1,13 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+introductions.my-name-is,Orúkọ mi ni {},,oru˥kɔ mi ni {},,2,yo-agent-v1;ipa=yo-g2p
+introductions.nice-to-meet-you,Inú mi dùn láti pàdé ọ,,inu˥ mi dũ˩ la˥ti kpa˩de˥ ɔ,,2,yo-agent-v1;ipa=yo-g2p
+introductions.what-is-your-name,Kí ni orúkọ rẹ?,,ki˥ ni oru˥kɔ rɛ,,2,yo-agent-v1;ipa=yo-g2p
+introductions.we-are-traveling-together,A ń rin ìrìn-àjò papọ̀,,a n̩˥ rĩ i˩rĩ˩a˩dʒo˩ kpakpɔ˩,,2,yo-agent-v1;ipa=yo-g2p
+introductions.this-is-my-friend,Èyí ni ọ̀rẹ́ mi,,e˩ji˥ ni ɔ˩rɛ˥ mi,,2,yo-agent-v1;ipa=yo-g2p
+introductions.i-am-from,Mo wá láti {},,mo wa˥ la˥ti {},,2,yo-agent-v1;ipa=yo-g2p
+introductions.where-are-you-from,Níbo ni o ti wá?,,ni˥bo ni o ti wa˥,,2,yo-agent-v1;ipa=yo-g2p
+introductions.how-are-you,Báwo ni?,,ba˥wo ni,,2,yo-agent-v1;ipa=yo-g2p
+introductions.i-am-a-tourist,Arìnrìn-àjò afẹ́ ni mi,,arĩ˩rĩ˩a˩dʒo˩ afɛ˥ ni mi,,2,yo-agent-v1;ipa=yo-g2p
+introductions.this-is-my-husband-wife,Èyí ni ọkọ mi / aya mi,,e˩ji˥ ni ɔkɔ mi / aja mi,husband-my / wife-my,2,yo-agent-v1;ipa=yo-g2p
+introductions.this-is-my-daughter-son,Èyí ni ọmọbìnrin mi / ọmọkùnrin mi,,e˩ji˥ ni ɔmɔbĩ˩rĩ mi / ɔmɔkũ˩rĩ mi,daughter-my / son-my,2,yo-agent-v1;ipa=yo-g2p
+introductions.i-am-traveling-alone,Mo ń rin ìrìn-àjò nìkan,,mo n̩˥ rĩ i˩rĩ˩a˩dʒo˩ ni˩kã,,2,yo-agent-v1;ipa=yo-g2p

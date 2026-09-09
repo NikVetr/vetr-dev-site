@@ -367,6 +367,44 @@ that hits them rather than during it:
   path. **No pack was written**, on the stated grounds that 769 rows of unreviewable
   Burmese for a language that cannot be printed is 769 rows that *look* reviewed.
 
+- **Three defects in `vendor/fontkit.esm.js` itself, found by the Khmer font hunt.**
+  None is a font's fault and none affects a shipped pack, which is why they had gone
+  unseen — but each is a trap for the next script that reaches it, and the third is
+  why Khmer's face was chosen the way it was.
+
+  1. **The chain-context *backtrack* sequence is matched in the wrong direction.**
+     `coverageSequenceMatches(-n.backtrackGlyphCount, …)` starts at the farthest
+     glyph and walks forward, where the spec and HarfBuzz put element 0 on the glyph
+     *immediately* before the input. **A one-glyph backtrack coincides**, which is
+     exactly why no shipped script found it; Khmer OpenType is built on two-glyph
+     backtracks, so `ថា` is right and `ថ្នា` is wrong. In Battambang Bold it costs
+     5.99% of clusters an advance error up to 8.3%; reversing the array at its three
+     call sites takes that to 0.01%. Reproducer and patch in `tmp/km/patch-fk.py`,
+     deliberately unapplied.
+  2. **Shaping is order-dependent inside one solve.** `getGlyph` caches a `Glyph` by
+     id *together with whatever codepoints asked for it first*, and the Indic shaper
+     classifies by `glyph.codePoints[0]`. Khmer is the only script here that can
+     reach it structurally, because the Khmer-OS faces substitute the register
+     shifters down into the below slot and substitute *to* `uni17BB`, which is also
+     the encoded glyph for `ុ`. So shaping `ស៊ើ` makes the next `ហ៊ុន` come back with
+     a dotted circle **permanently**, and `ក៉ុ` measures 92% too wide. Verified clean
+     across 9,764 cells in all nine Indic-shaper packs and Thai, so nothing shipped
+     is affected — but a solve is not order-independent in general, which is a
+     stronger claim than this project had evidence for before.
+  3. **`render/pdf.js` discards GPOS offsets wholesale on contextual glyphs.** Its
+     all-or-nothing proof guard fails on every contextual Khmer glyph, so 83.5% of
+     Noto Khmer clusters lose their positioning entirely — `pdf-dropped` equalled
+     `shifted` exactly. That is the guard working as written rather than a bug in it,
+     and it is the reason the shipped Khmer face was chosen for carrying **no GPOS
+     table at all**: Khmer OS Content positions every vowel sign, subscript and
+     shifter by GSUB substitution, so both crash paths are unreachable *by
+     construction* and the dropped-offset path does not exist. That is Constructium
+     over Alcarin arriving in a real script rather than a conscript.
+
+  The method that found all three is worth copying: **compare fontkit's output
+  against HarfBuzz glyph-for-glyph and advance-for-advance, rather than counting
+  throws.** Burmese's caveat below is answered that way and not by a clean cube.
+
 - **And the sharpest font-testing lesson of all, from the same survey: a clean cube
   can be clean for the wrong reason.** All seven candidate Myanmar faces shaped all
   152,976 cube clusters and a 150,752-sequence exhaustive block probe with **zero

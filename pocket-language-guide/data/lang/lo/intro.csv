@@ -1,0 +1,13 @@
+concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+introductions.my-name-is,ຂ້ອຍຊື່ {},,khoyxu {},kʰɔːj˧˩sɯː˧ {},literally 'I am named {}',2,"Enfield, N. J., *A Grammar of Lao* (Mouton de Gruyter, 2007);ipa=lo-g2p"
+introductions.nice-to-meet-you,ຍິນດີທີ່ໄດ້ພົບເຈົ້າ,,gnindithidaiphôpchao,ɲin˧˥diː˩tʰiː˧daj˥˨pʰop˧caw˥˨,,2,"Enfield, N. J., *A Grammar of Lao* (Mouton de Gruyter, 2007);ipa=lo-g2p"
+introductions.what-is-your-name,ເຈົ້າຊື່ຫຍັງ,,chaoxugnang,caw˥˨sɯː˧ɲaŋ˩,,2,"Enfield, N. J., *A Grammar of Lao* (Mouton de Gruyter, 2007);ipa=lo-g2p"
+introductions.we-are-traveling-together,ພວກເຮົາເດີນທາງດ້ວຍກັນ,,phouakhaodeunthangdouaykan,pʰua̯k˥˨haw˧˥dɤːn˩tʰaːŋ˧˥dua̯j˥˨kan˩,,2,"Enfield, N. J., *A Grammar of Lao* (Mouton de Gruyter, 2007);ipa=lo-g2p"
+introductions.this-is-my-friend,ນີ້ແມ່ນເພື່ອນຂອງຂ້ອຍ,,nimènphuankhongkhoy,niː˥˨mɛːn˧pʰɯa̯n˧kʰɔːŋ˩kʰɔːj˧˩,ເພື່ອນ carries no gender,2,"Enfield, N. J., *A Grammar of Lao* (Mouton de Gruyter, 2007);ipa=lo-g2p"
+introductions.i-am-from,ຂ້ອຍມາຈາກ {},,khoymachak {},kʰɔːj˧˩maː˧˥caːk˧˩ {},"ຈາກ is a separate word, so the slot needs no case work",2,"Enfield, N. J., *A Grammar of Lao* (Mouton de Gruyter, 2007);ipa=lo-g2p"
+introductions.where-are-you-from,ເຈົ້າມາຈາກໃສ,,chaomachaksai,caw˥˨maː˧˥caːk˧˩saj˩,,2,"Enfield, N. J., *A Grammar of Lao* (Mouton de Gruyter, 2007);ipa=lo-g2p"
+introductions.how-are-you,ເຈົ້າສະບາຍດີບໍ່,,chaosabaydibo,caw˥˨saʔ˧˥baːj˩diː˩bɔː˧,the same word that greets you,2,"Enfield, N. J., *A Grammar of Lao* (Mouton de Gruyter, 2007);ipa=lo-g2p"
+introductions.i-am-a-tourist,ຂ້ອຍເປັນນັກທ່ອງທ່ຽວ,,khoypénnakthongthiao,kʰɔːj˧˩pen˩nak˧tʰɔːŋ˧tʰia̯w˧,,2,"Kerr, Allen D., *Lao-English Dictionary* (Catholic University of America Press, 1972);ipa=lo-g2p"
+introductions.this-is-my-husband-wife,ນີ້ແມ່ນຜົວຫຼືເມຍຂອງຂ້ອຍ,,nimènphoualumiakhongkhoy,niː˥˨mɛːn˧pʰua̯˩lɯː˩mia̯˧˥kʰɔːŋ˩kʰɔːj˧˩,"Lao has separate words for husband and wife, so the row carries both",2,"Kerr, Allen D., *Lao-English Dictionary* (Catholic University of America Press, 1972);ipa=lo-g2p"
+introductions.this-is-my-daughter-son,ນີ້ແມ່ນລູກຂອງຂ້ອຍ,,nimènloukkhongkhoy,niː˥˨mɛːn˧luːk˥˨kʰɔːŋ˩kʰɔːj˧˩,"ລູກ carries no gender, so one word covers both",2,"Kerr, Allen D., *Lao-English Dictionary* (Catholic University of America Press, 1972);ipa=lo-g2p"
+introductions.i-am-traveling-alone,ຂ້ອຍເດີນທາງຄົນດຽວ,,khoydeunthangkhôndiao,kʰɔːj˧˩dɤːn˩tʰaːŋ˧˥kʰon˧˥dia̯w˩,literally 'travelling one person',2,"Enfield, N. J., *A Grammar of Lao* (Mouton de Gruyter, 2007);ipa=lo-g2p"

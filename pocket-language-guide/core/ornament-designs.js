@@ -61,6 +61,7 @@ export const LANGUAGE_MOTIFS = /** @type {const} */ ({
   // exactly that reason, in favour of the rope border and the tree, which
   // read as neither a flower nor a stitch.
   ro: 'funie',
+  yo: 'adire',
   ml: 'nettipattam',
   ha: 'askatakwas',
   ne: 'dhaka',
@@ -181,6 +182,26 @@ export const LANGUAGE_MOTIFS = /** @type {const} */ ({
   // floor drawing, and the house rule is to name a motif against the neighbour it
   // could be confused with rather than to ship a fourth name for one art.
   kn: 'kasuti',
+  // `matmi` (ມັດໝີ່) is Lao ikat, and its mark is a *weave artefact* rather than a
+  // drawn or dyed unit: the weft is tied and resist-dyed **before** it is woven, so
+  // the loom cannot place the figure exactly and every diagonal comes out stepped
+  // and feathered, its edges broken into short perpendicular ticks by the picks.
+  // Nothing else in this table has a feathered edge.
+  //
+  // Named against four neighbours, on the mark rather than on the craft.
+  // `bandhani` (gu) is the closest by craft -- the other tie-resist -- which is
+  // exactly why the distinction is drawn on the mark: bandhani ties the *cloth*, so
+  // its unit is a ring on a diagonal lattice with circular edges, where mat mi ties
+  // the *yarn* and so has no unit at all, only a figure whose contour the weave
+  // quantises. `patola`, the Patan double-ikat, was refused for Gujarati on exactly
+  // this mark -- that note names "the stepped, feathered diagonal that resist-dyed
+  // yarn forces on a woven figure" -- so it is unclaimed, and mat mi is the ikat
+  // tradition of the one country that speaks this language. `banig` (fil) is the
+  // other weave and is a plain plaited check with no figure in it: a banig *is* its
+  // ground where a mat mi ground is left plain and carries one. And `dhaka` (ne) and
+  // `phulkari` (pa) are the other diamond marks, both built from *solid* units on a
+  // clean count, where a mat mi diamond is hollow and hooked.
+  lo: 'matmi',
 });
 /** @typedef {typeof LANGUAGE_MOTIFS[keyof typeof LANGUAGE_MOTIFS]} LanguageMotif */
 
@@ -591,6 +612,27 @@ const emblems = {
         oval(p, x + 5.4, 86, 1.9, 1.9);
       }
     },
+  adire(p) {
+    // Adire eleko: cassava paste drawn through a stencil, so the cloth reads as a
+    // grid of blocks and **each block carries a different filler** -- the variation
+    // between blocks is the pattern, where in most of this table the repetition of
+    // one unit is. That grid is what separates it from `gu`'s `bandhani`, which is
+    // resist-dye too but reads as rings of tied dots, and from `ha`'s `askatakwas`,
+    // which radiates from a point. It is not a weave, which is what `ne`'s `dhaka`,
+    // `ms`'s `ketupat`, `fil`'s `banig` and `am`'s `telsem` already are: the marks
+    // sit *on* the cloth rather than being the cloth.
+    for (const [x, y] of [[8, 8], [50, 8], [8, 50], [50, 50]]) {
+      p.m(x, y); p.l(x + 42, y); p.l(x + 42, y + 42); p.l(x, y + 42); p.close();
+    }
+    // Four different kinds of mark, one per block.
+    for (const [cx, cy] of [[19, 19], [31, 19], [19, 31], [31, 31]]) oval(p, cx, cy, 3.5, 3.5);
+    for (let i = 1; i < 5; i++) { p.m(52 + i * 8, 50); p.l(52, 50 - i * 8); }
+    p.m(29, 71); p.l(71 - 42, 71); p.m(29, 56); p.l(29, 86);
+    for (const r of [7, 14]) {
+      p.m(71 - r, 71 - r); p.l(71 + r, 71 - r); p.l(71 + r, 71 + r);
+      p.l(71 - r, 71 + r); p.close();
+    }
+  },
   funie(p) {
     // The rope twist (funie), top and bottom: an alternating S-curve rather
     // than a straight or single-curve edge, which is what makes it read as
@@ -704,6 +746,26 @@ const emblems = {
       oval(p, x, y, 2.4, 2.4);
     }
   },
+  matmi(p) {
+    // The ໝີ່ lozenge, hollow, with a hook at each of its four points -- and the long
+    // edges **stepped** rather than straight, which is the resist-dyed weft's own
+    // signature and the one thing that separates this from every drawn diamond here.
+    // Each step is one pick of the loom.
+    p.m(50, 12);
+    p.l(62, 26); p.l(58, 30); p.l(70, 44); p.l(66, 48); p.l(78, 62);
+    p.l(74, 66); p.l(86, 80);
+    p.l(50, 88);
+    p.l(14, 80); p.l(26, 66); p.l(22, 62); p.l(34, 48); p.l(30, 44);
+    p.l(42, 30); p.l(38, 26);
+    p.close();
+    // The four hooks. They point *outward*, which is how a mat mi figure grows along
+    // the warp, and they are what makes the silhouette read as a textile figure
+    // rather than as a plain rhombus.
+    p.m(50, 12); p.l(50, 4); p.l(58, 8);
+    p.m(86, 80); p.l(94, 84); p.l(88, 90);
+    p.m(14, 80); p.l(6, 84); p.l(12, 90);
+    p.m(50, 88); p.l(50, 96);
+  },
 };
 
 // At divider height, use the motif's silhouette rather than its interior detail.
@@ -770,6 +832,7 @@ const tracery = {
         p.m(x, 74); p.q(x + 7, 88, x + 14, 74);
       }
     },
+  adire(p) { for (const [x, y] of [[8, 8], [50, 8], [8, 50], [50, 50]]) { p.m(x, y); p.l(x + 42, y); p.l(x + 42, y + 42); p.l(x, y + 42); p.close(); } },
   funie(p) { p.m(6, 50); p.q(28, 30, 50, 50); p.q(72, 70, 94, 50); },
   phulkari(p) { diamond(p, 30, 50, 22, 42); diamond(p, 70, 50, 22, 42); p.m(12, 88); p.l(48, 12); p.m(52, 88); p.l(88, 12); },
   banig(p) { diamond(p, 30, 30, 17, 11); diamond(p, 70, 30, 17, 11); diamond(p, 30, 70, 17, 11); diamond(p, 70, 70, 17, 11); },
@@ -798,6 +861,15 @@ const tracery = {
     // stepped tower. No dots at tracery height -- they close up against the line.
     p.m(12, 88); p.l(12, 68); p.l(30, 68); p.l(30, 48); p.l(44, 48); p.l(44, 28);
     p.l(56, 28); p.l(56, 48); p.l(70, 48); p.l(70, 68); p.l(88, 68); p.l(88, 88);
+    p.close();
+  },
+  matmi(p) {
+    // At divider height the steps close up, so the tracery keeps three large ones per
+    // edge and drops the hooks -- the trade `kasuti` makes with its courses and
+    // `bandhani` with its centre dots. Three was chosen by rendering both: at one
+    // step the figure is a plain diamond and reads as `dhaka`.
+    p.m(50, 8); p.l(66, 30); p.l(58, 36); p.l(78, 58); p.l(70, 64); p.l(92, 92);
+    p.l(8, 92); p.l(30, 64); p.l(22, 58); p.l(42, 36); p.l(34, 30);
     p.close();
   },
 };

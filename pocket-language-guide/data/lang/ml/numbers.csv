@@ -101,3 +101,5 @@ numbers-money.nepali-rupee-symbol,നേപ്പാൾ രൂപ ചിഹ്�
 numbers-money.birr,ബിർ,,bir,biɾ,,2,"Issuing central bank’s own name for the unit, transliterated by Malayalam loan phonology (Asher & Kumari 1997, ch. on the sound system);ipa=espeak"
 numbers-money.naira,നൈറ,,naiṟa,naira,,2,"Issuing central bank’s own name for the unit, transliterated by Malayalam loan phonology (Asher & Kumari 1997, ch. on the sound system);ipa=espeak"
 numbers-money.naira-symbol,നൈറ ചിഹ്നം,,naiṟa cihnaṁ,naira cihnam,naira (sign),2,"Issuing central bank’s own name for the unit, transliterated by Malayalam loan phonology (Asher & Kumari 1997, ch. on the sound system);ipa=espeak"
+numbers-money.riel,റീൽ,,,riːl,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.riel-symbol,റീൽ ചിഹ്നം,,,riːl cihnam,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak

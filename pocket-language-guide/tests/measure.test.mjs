@@ -111,6 +111,18 @@ test('a slash does not orphan a single letter', () => {
   assert.deepEqual(atoms('and/or', style()), ['and/', 'or']);
 });
 
+test('a number in an any-breaking script is one atom', () => {
+  // Thai and Khmer digits are `Script=Thai`/`Script=Khmer`, so they were excluded
+  // from `wordish` along with the letters and nothing glued them -- `๑๐๐` measured
+  // as three atoms and a line could break inside a number. The shipped Thai pack
+  // carries ๑๐, ๑๐๐ and ๑๐๐๐, so this was live rather than hypothetical.
+  const s = style({ stack: 'latin', wordBreak: 'dict' });
+  assert.deepEqual(atoms('๑๐๐', s), ['๑๐๐']);
+  assert.deepEqual(atoms('១១៩', s), ['១១៩']);
+  // And the letters around them still break, which is the whole point of `dict`.
+  assert(atoms('ก๑๐๐ก', s).length > 1);
+});
+
 test('Khmer clusters hold together, so no line can open on a coeng', () => {
   // Khmer is in `BREAKS_ANYWHERE` and had no entry in `NO_LINE_START`, so every
   // codepoint was its own atom: ភ្នំពេញ measured as seven, and a line could open on
@@ -124,6 +136,31 @@ test('Khmer clusters hold together, so no line can open on a coeng', () => {
     assert(!/^[\u17B6-\u17D2\u17DD]/u.test(atom),
       `atom starts with a Khmer mark: ${JSON.stringify(atom)}`);
   }
+});
+
+test('Lao breaks between clusters and never opens a line on a mark', () => {
+  // Lao was in neither `BREAKS_ANYWHERE` nor `NO_LINE_START`, which is Khmer's
+  // defect inverted: every Lao letter was `wordish`, so the glue clause welded the
+  // whole run into one unbreakable atom -- 8.78em for "I lost my passport" against
+  // the 9.9-10.3em a column's 0.6 floor cap allows at 7pt, and an over-wide atom
+  // overflows rather than splitting. Both halves of the fix are asserted here,
+  // because either alone is a defect: no glue means one atom, and no
+  // `NO_LINE_START` means a line can open on a bare tone mark over a dotted circle.
+  const s = style({ stack: 'latin', wordBreak: 'dict' });
+  const toilet = atoms('ຫ້ອງນ້ຳຢູ່ໃສ', s);
+  assert(toilet.length > 1, `expected clusters, got one atom: ${JSON.stringify(toilet)}`);
+  for (const atom of toilet) {
+    // No dependent vowel, semivowel, tone mark or sign may open an atom, and no
+    // pre-base vowel may end one -- it is written before a consonant it is
+    // pronounced after.
+    assert(!/^[ະ-ຽໆ່-ໍ]/u.test(atom),
+      `atom starts with a Lao mark: ${JSON.stringify(atom)}`);
+    assert(!/[ເ-ໄ]$/u.test(atom),
+      `atom ends with a Lao pre-base vowel: ${JSON.stringify(atom)}`);
+  }
+  // ນ້ຳ is the sequence the whole cluster question turns on -- a tone mark and then
+  // U+0EB3, which is spacing -- and it has to stay one atom.
+  assert.deepEqual(atoms('ນ້ຳ', s), ['ນ້ຳ']);
 });
 
 test('a script that breaks anywhere still keeps a Latin word whole', () => {

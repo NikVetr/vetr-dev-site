@@ -101,3 +101,5 @@ numbers-money.nepali-rupee-symbol,สัญลักษณ์รูปีเน�
 numbers-money.birr,บีร์,,,biː˧,,2,gloss-only;scoped-away;name of the currency in this language;ipa=thaig2p
 numbers-money.naira,ไนราไนจีเรีย,,,naj˧ raː˧ naj˧tɕiː˧ria̯˧,,2,naira-gloss-v1;cldr;ipa=thaig2p
 numbers-money.naira-symbol,สัญลักษณ์ไนราไนจีเรีย,,,san˩˩˦˥lak˦˥ naj˧ raː˧ naj˧tɕiː˧ria̯˧,,2,naira-gloss-v1;cldr;ipa=thaig2p
+numbers-money.riel,เรียล,,,ria̯ŋ˧,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=thaig2p
+numbers-money.riel-symbol,สัญลักษณ์เรียล,,,san˩˩˦˥lak˦˥ ria̯ŋ˧,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=thaig2p

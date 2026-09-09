@@ -101,3 +101,5 @@ numbers-money.krona-symbol,Krona na ƙasar Sweden (alama),,krona na kʼasar swed
 numbers-money.nepali-rupee,Rupee na Nepal,,rupee na nepal,"the Nepali rupee, a separate currency from the Indian one",2,ha-currency-gloss-v1;cldr;ipa=ha-g2p
 numbers-money.nepali-rupee-symbol,Rupee na Nepal (alama),,rupee na nepal alama,,2,ha-currency-gloss-v1;cldr;ipa=ha-g2p
 numbers-money.birr,Birr na Habasha,,birr na habaʃa,,2,ha-currency-gloss-v1;cldr;ipa=ha-g2p
+numbers-money.riel,riel,,riel,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=ha-g2p
+numbers-money.riel-symbol,riel (alama),,riel alama,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=ha-g2p

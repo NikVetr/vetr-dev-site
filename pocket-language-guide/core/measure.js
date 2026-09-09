@@ -39,9 +39,17 @@ const BREAK_AFTER = /(?<=[ \t\n\u3000\u2013\u2014])|(?<=[^\s-]-)|(?<=\/)(?=\S{2}
 // could break after any of its letters. Han, kana, hangul, Thai and Khmer are
 // excluded because breaking between those characters is the whole point.
 const WORDISH = /[\p{L}\p{N}\p{M}]/u;
-const BREAKS_ANYWHERE = /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}\p{Script=Thai}\p{Script=Khmer}]/u;
+const BREAKS_ANYWHERE = /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}\p{Script=Thai}\p{Script=Khmer}\p{Script=Lao}]/u;
+/* **A digit is never a break opportunity, whatever script it belongs to.** Thai and
+   Khmer digits carry `Script=Thai`/`Script=Khmer`, so `BREAKS_ANYWHERE` made them
+   non-`wordish` and the glue clause never welded them: `๑๐๐` in the *shipped* Thai
+   pack measured as three atoms, and a line could break inside a number. Found by the
+   Khmer survey looking for its own `១១៩`, which does the same. Latin digits were
+   never affected, which is why this survived so long. */
+const NUMERIC = /\p{N}/u;
 /** @param {string} ch */
-const wordish = (ch) => ch !== '' && WORDISH.test(ch) && !BREAKS_ANYWHERE.test(ch);
+const wordish = (ch) => ch !== '' && WORDISH.test(ch)
+  && (!BREAKS_ANYWHERE.test(ch) || NUMERIC.test(ch));
 
 // Punctuation that sits *inside* a word or a number rather than after it, so an
 // any-breaking script does not split it. Found in a Chinese note, where `16:00`
@@ -69,6 +77,18 @@ const IN_WORD = '-:./,';
 // per codepoint, and a line could open on a bare coeng — U+17D2, whose whole job is
 // to bind the consonant after it into a subscript. Nothing had noticed because no
 // Khmer pack exists yet; it would have shipped broken on the day one did.
+//
+// **Lao is the third of these and was in neither list, which is the opposite
+// failure.** With no Lao in `BREAKS_ANYWHERE`, `wordish` was true of every Lao
+// letter, the glue clause welded every adjacent pair, and a whitespace-delimited
+// Lao run was *one unbreakable atom* — measured at 8.78em for `ຂ້ອຍເສຍໜັງສືຜ່ານແດນ`
+// ("I lost my passport") against the 9.9-10.3em that `rowsplit.js`'s 0.6 floor cap
+// allows a column at 7pt. That is a 12-17% margin on the reference sheet and none
+// at all on a narrower card, and an over-wide atom overflows rather than splitting,
+// because `wrap` puts it on its own line whole. Lao is therefore in both lists now,
+// which is Thai's arrangement exactly and takes the widest atom down to one cluster.
+// Both halves have to land together: Lao in `BREAKS_ANYWHERE` alone is Khmer's
+// defect again, since a line could then open on a bare tone mark.
 const THAI_MARKS = '\u0E31\u0E33\u0E34\u0E35\u0E36\u0E37\u0E38\u0E39\u0E3A'
   + '\u0E47\u0E48\u0E49\u0E4A\u0E4B\u0E4C\u0E4D\u0E4E\u0E30\u0E32\u0E45\u0E46';
 // Dependent vowels U+17B6..17C5, the signs U+17C6..17D1 and U+17DD, and the coeng
@@ -77,13 +97,26 @@ const THAI_MARKS = '\u0E31\u0E33\u0E34\u0E35\u0E36\u0E37\u0E38\u0E39\u0E3A'
 const KHMER_MARKS = '\u17B6\u17B7\u17B8\u17B9\u17BA\u17BB\u17BC\u17BD\u17BE\u17BF'
   + '\u17C0\u17C1\u17C2\u17C3\u17C4\u17C5\u17C6\u17C7\u17C8\u17C9\u17CA\u17CB'
   + '\u17CC\u17CD\u17CE\u17CF\u17D0\u17D1\u17D2\u17DD';
+// Every Lao dependent vowel, semivowel, tone mark and sign: U+0EB0..0EBD (the
+// vowel signs, the two semivowels and the Pali virama), U+0EC8..0ECD (the four
+// tone marks, the cancellation mark and the niggahita), and U+0EC6, which repeats
+// the word before it and so has nothing to say at the head of a line. The spacing
+// ones \u2014 \u0EB0 \u0EB2 \u0EB3 \u0EBD \u2014 are here for the same reason Thai's \u0E30 \u0E32 \u0E46 are: they follow
+// their consonant and mean nothing without it.
+const LAO_MARKS = '\u0EB0\u0EB1\u0EB2\u0EB3\u0EB4\u0EB5\u0EB6\u0EB7\u0EB8\u0EB9'
+  + '\u0EBA\u0EBB\u0EBC\u0EBD\u0EC6\u0EC8\u0EC9\u0ECA\u0ECB\u0ECC\u0ECD';
 const THAI_LEAD_VOWELS = '\u0E40\u0E41\u0E42\u0E43\u0E44';
+// Lao's five pre-base vowels, stored in visual order like Thai's rather than
+// logically like Khmer's and Burmese's -- which is the whole reason Lao needs no
+// shaper reordering. They are still written before a consonant they are pronounced
+// after, so a line may not end on one.
+const LAO_LEAD_VOWELS = '\u0EC0\u0EC1\u0EC2\u0EC3\u0EC4';
 const KHMER_LEAD = '\u17D2';
 // The ASCII brackets are here for the same reason the full-width ones are: notes
 // gloss a romanisation parenthetically -- `-mai (flat things)` -- and in an
 // any-breaking script a bare `)` would otherwise be free to open a line.
-const NO_LINE_START = `、。，．：；？！）」』》＞…)]}${THAI_MARKS}${KHMER_MARKS}`;
-const NO_LINE_END = `（「『《＜([{${THAI_LEAD_VOWELS}${KHMER_LEAD}`;
+const NO_LINE_START = `、。，．：；？！）」』》＞…)]}${THAI_MARKS}${KHMER_MARKS}${LAO_MARKS}`;
+const NO_LINE_END = `（「『《＜([{${THAI_LEAD_VOWELS}${KHMER_LEAD}${LAO_LEAD_VOWELS}`;
 
 /**
  * A unit of text that never splits. `w` includes any trailing space; `inkW` is

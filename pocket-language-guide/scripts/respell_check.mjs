@@ -157,6 +157,14 @@ const IPA_ONLY = /[\u0250-\u02af\u02b0-\u02ff\u0300-\u036f\u1d00-\u1d7f]/u;
  * largest gap in the corpus. `\u0257` U+0257 is Hausa's own Boko letter (\u0257an, \u0257aya)
  * and not a residue of anything: unlike Vietnamese's `\u0111` U+0111 (LATIN SMALL
  * LETTER D WITH STROKE, a different codepoint entirely, well outside this
+ * `\u0304` U+0304 (combining macron) is the same case as the acute: it is
+ * `zh-Hans__zh-CN.json`'s own first-tone device, emitted by that table rather than
+ * arriving from a target, and Yoruba was the first language to make it show up --
+ * because Yoruba writes tone, so every Mandarin respelling of it carries a mark.
+ * Reported as the largest gap in the corpus for one pair until exempted, while
+ * `tests/fonts.test.mjs` stayed green throughout, the character being perfectly
+ * drawable. A device the reader's own table emits is not a gap in it.
+ *
  * range), Hausa's implosive-d letter happens to share its exact codepoint with
  * the IPA symbol for the same sound, so `ha__ha-NG.json` deliberately spells the
  * sound with it rather than folding it away the way every other reader's table
@@ -164,7 +172,7 @@ const IPA_ONLY = /[\u0250-\u02af\u02b0-\u02ff\u0300-\u036f\u1d00-\u1d7f]/u;
  * no other script in this corpus reuses an IPA-range codepoint as one of its own
  * letters.
  */
-const DEVICE_MARKS = new Set(['\u0301', '\u02b9', '\u0257']);
+const DEVICE_MARKS = new Set(['\u0301', '\u02b9', '\u0257', '\u0304']);
 
 /** Ignore what a reviewer would not call a disagreement. */
 const loose = (/** @type {string} */ s) => s.toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
