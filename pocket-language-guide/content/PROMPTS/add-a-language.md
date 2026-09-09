@@ -367,6 +367,26 @@ that hits them rather than during it:
   path. **No pack was written**, on the stated grounds that 769 rows of unreviewable
   Burmese for a language that cannot be printed is 769 rows that *look* reviewed.
 
+- **A fourth, and this one is *shipping*: Thai's `ห้องน้ำ` renders with a detached
+  nikhahit.** `thai` and `lao ` are both absent from fontkit's shaper map, and
+  HarfBuzz has a dedicated Thai/Lao shaper whose whole job is the U+0E33/U+0EB3
+  decompose-and-**reorder**. Without it the nikhahit prints as a loose dot floating
+  above the tone mark rather than beside it. The Lao survey measured the divergence
+  — advances agree to four decimal places, glyph *runs* do not — then asked
+  whether Thai had the same problem, rendered it, and looked: it does, in **both
+  shipped Thai faces**, on the word for *toilet*. It is why Lao writes standard
+  U+0EB3 rather than routing around it, and why its own face was chosen for doing
+  the whole job in GSUB with no GPOS at all. **Not fixed**: the repair is a Thai/Lao
+  shaper in the vendored fontkit, which is a piece of work rather than a patch.
+
+- **And a rule that follows from Lao's numbers: measure on the subset you ship, not
+  on the upstream face.** Its `leading_factor` and `min_size_pt` were both wrong
+  until re-measured on `laoo-400.ttf` itself, because the shipped subset fires a
+  `liga` upstream Phetsarath does not, ligating `ຼ`+`ູ` **0.18em deeper**: a cluster
+  span of 1.4551em shipped against 1.2773em upstream. 1.30 became 1.50 and 5.4
+  became 6.0. Every earlier addition measured the donor; this is the first to catch
+  the donor and the subset disagreeing.
+
 - **Three defects in `vendor/fontkit.esm.js` itself, found by the Khmer font hunt.**
   None is a font's fault and none affects a shipped pack, which is why they had gone
   unseen — but each is a trap for the next script that reaches it, and the third is
