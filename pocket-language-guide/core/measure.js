@@ -118,6 +118,10 @@ const KHMER_LEAD = '\u17D2';
 const NO_LINE_START = `、。，．：；？！）」』》＞…)]}${THAI_MARKS}${KHMER_MARKS}${LAO_MARKS}`;
 const NO_LINE_END = `（「『《＜([{${THAI_LEAD_VOWELS}${KHMER_LEAD}${LAO_LEAD_VOWELS}`;
 
+// Grapheme boundaries, for the last-resort break inside a word. Built once: a
+// `Segmenter` is not cheap to construct and this one is stateless.
+const GRAPHEMES = new Intl.Segmenter(undefined, { granularity: 'grapheme' });
+
 /**
  * A unit of text that never splits. `w` includes any trailing space; `inkW` is
  * the visible width, which is what matters when the piece ends a line. Both are
@@ -244,9 +248,68 @@ export function createMeasurer(registry, opts = {}) {
     return out;
   }
 
-  /** Same pieces, scaled to points. @param {string} text @param {RunStyle} style */
-  function pieces(text, style) {
-    return piecesEm(text, style).map((p) => ({
+  /**
+   * Last resort for a word wider than the whole line it has to sit on: cut it
+   * into pieces that do fit.
+   *
+   * `maxAtomWidth` is a floor the width solvers honour, so this is only reached
+   * when the floors could not all be met at once -- a four-column reference table
+   * in which every field is a long word, and `fractions.js` had to scale them
+   * down together. Until now the over-wide word simply ran past its column and
+   * printed on top of its neighbour, which is how a Russian sheet came to read
+   * `пожалуйстаpozhaluysta` and an Amharic one `ቁርጭምጭሚትk'urch'imich'imīt`.
+   * Breaking a word without a hyphen is a compromise; two words overprinting each
+   * other is not legible at all.
+   *
+   * Cut at grapheme boundaries, and measured on the accumulated string rather
+   * than a character at a time, because shaping is not additive: a Devanagari
+   * conjunct or an Arabic join is narrower than the sum of its parts, and a
+   * combining mark has no width of its own to add.
+   * @param {Piece} piece @param {number} limit  em
+   * @param {RunStyle} style
+   * @returns {Piece[]}
+   */
+  function cut(piece, limit, style) {
+    /** @type {Piece[]} */ const out = [];
+    let text = '';
+    let w = 0;
+    for (const { segment } of GRAPHEMES.segment(piece.text)) {
+      const grown = advanceEm(text + segment, style);
+      if (text !== '' && grown > limit + 1e-4) {
+        out.push({ type: 'text', text, w, inkW: w });
+        text = segment;
+        w = advanceEm(segment, style);
+      } else {
+        text += segment;
+        w = grown;
+      }
+    }
+    // The trailing space of the original piece still hangs past the right edge,
+    // so only the final fragment carries it.
+    if (text !== '') out.push({ type: 'text', text, w: piece.w - (piece.inkW - w), inkW: w });
+    return out;
+  }
+
+  /**
+   * The cached atoms, with any atom too wide for the line cut down. Shared by
+   * `wrap` and `lineCount` so a line that is painted and a line that is counted
+   * can never disagree about how many there are.
+   * @param {string} text @param {number} limit  em; zero or less means no limit
+   * @param {RunStyle} style
+   */
+  function fitPieces(text, limit, style) {
+    const all = piecesEm(text, style);
+    if (!(limit > 0) || !all.some((p) => p.inkW > limit + 1e-4)) return all;
+    return all.flatMap((p) => (p.type === 'text' && p.inkW > limit + 1e-4
+      ? cut(p, limit, style) : [p]));
+  }
+
+  /**
+   * Same pieces, scaled to points and fitted to `avail`.
+   * @param {string} text @param {RunStyle} style @param {number} avail  points
+   */
+  function pieces(text, style, avail) {
+    return fitPieces(text, avail / style.size, style).map((p) => ({
       ...p, w: p.w * style.size, inkW: p.inkW * style.size,
     }));
   }
@@ -274,7 +337,7 @@ export function createMeasurer(registry, opts = {}) {
       /** @type {Piece[][]} */ const lines = [];
       /** @type {Piece[]} */ let line = [];
       let w = 0;
-      for (const piece of pieces(text, style)) {
+      for (const piece of pieces(text, style, avail)) {
         if (line.length && w + piece.inkW > avail + 0.01) {
           lines.push(line);
           line = [piece];
@@ -298,12 +361,12 @@ export function createMeasurer(registry, opts = {}) {
     lineCount(text, avail, style) {
       // Compared in em so the cached piece widths are used directly. The hot path
       // of the whole engine: the width solvers call this tens of times per cell.
-      const limit = avail / style.size + 1e-4;
+      const limit = avail / style.size;
       let count = 1;
       let w = 0;
       let started = false;
-      for (const piece of piecesEm(text, style)) {
-        if (started && w + piece.inkW > limit) {
+      for (const piece of fitPieces(text, limit, style)) {
+        if (started && w + piece.inkW > limit + 1e-4) {
           count += 1;
           w = piece.w;
         } else {
@@ -312,6 +375,18 @@ export function createMeasurer(registry, opts = {}) {
         }
       }
       return started ? count : 0;
+    },
+
+    /**
+     * The pieces `text` may be broken between, as their own text. A break
+     * opportunity is a property of the string and its script, not of any
+     * particular width, so this reports them without laying anything out -- which
+     * is also why it is not `wrap` at a hair's width. Since the last-resort break
+     * arrived, that would report single graphemes.
+     * @param {string} text @param {RunStyle} style
+     */
+    atoms(text, style) {
+      return piecesEm(text, style).map((p) => p.text);
     },
 
     /**

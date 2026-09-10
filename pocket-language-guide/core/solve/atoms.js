@@ -12,7 +12,7 @@
 import { resolveField, isTargetSide } from '../fonts.js';
 import { inkWidth } from '../measure.js';
 import { chooseSplit, chooseSharedWidths } from './rowsplit.js';
-import { arrangeTemplate } from './arrange.js';
+import { arrangeTemplate, foldTemplate } from './arrange.js';
 import { motifFor, ornamentRule } from '../ornaments.js';
 import { isElven, elvenHeading, elvenColours } from '../elven-frame.js';
 
@@ -370,17 +370,17 @@ function resolveAlign(align, mirror) {
 }
 
 /**
+ * Solve one item block under one grid shape: the cells, the column widths they
+ * share, and the height of every row.
+ *
+ * Separate from painting because a reference table's shape is not given -- it is
+ * chosen by measuring two candidates, and only the winner is ever drawn. See
+ * `chooseTableShape`.
  * @param {ReturnType<typeof makeContext>} ctx
- * @param {import('../types.js').Block} block
+ * @param {any} template
  * @param {import('../types.js').ItemRow[]} rows
- * @param {boolean} withPaint
- * @returns {Atom[]}
  */
-function itemAtoms(ctx, block, rows, withPaint) {
-  const base = ctx.theme.templates[block.templateId ?? 'entry'];
-  if (!base) throw new Error(`unknown template ${block.templateId}`);
-  const template = arrangeTemplate(base, ctx.spec.arrangement ?? 'mixed', ctx.shown);
-  const s = ctx.scale;
+function solveTable(ctx, template, rows) {
   // All four sides, not just top and bottom. Holding the horizontal insets back was
   // meant to protect the usable width, but those insets are exactly the gap between
   // the text and the accent rule down the left edge -- so turning padding up moved
@@ -394,9 +394,6 @@ function itemAtoms(ctx, block, rows, withPaint) {
   const avail = ctx.colWidth - pad[3] - pad[1] - gutter;
   const grids = rows.map((row) => cellGrid(ctx, template, row));
 
-  // Shared-width templates solve their columns once for the whole group; phrase
-  // rows solve per row, which is what lets a long phrase borrow width from a
-  // short gloss.
   // Shared-width templates solve their columns once for the whole group, and so do
   // phrase rows by default: every row's divider in a section lines up, which is what
   // a reader looking at a section notices.
@@ -417,11 +414,36 @@ function itemAtoms(ctx, block, rows, withPaint) {
     ? chooseSharedWidths(grids, avail, template, ctx.measurer)
     : null;
 
-  const startRow = ctx.rowIndex;
-  return rows.map((row, i) => {
-    const grid = grids[i];
+  const rowStretch = template.rowStretch ?? 1;
+  // **The two item shapes are set by two different mechanisms in the original, and
+  // each has its own vertical rule.** Measured off
+  // `mandarin_travel_cheatsheet_generic_full_verified_v2.tex` and its PDF:
+  //
+  // - `\entry` is `\hbox{\vtop{...}\hfil\vtop{...}}`, and a `\vtop`'s reference
+  //   point is its first line's baseline, so both halves sit on one baseline
+  //   whatever their leadings are. On page 1 the target and the gloss share 333.70
+  //   exactly while their second lines land 5.00 and 5.30 below it -- so *only* the
+  //   first line is shared, and everything under it flows in its own column's
+  //   leading. An hbox of vtops is `max(height) + max(depth)` tall, which is what
+  //   `ascent + below` is.
+  // - The reference tables are `array`'s `m{width}` columns, i.e. `\parbox[c]`,
+  //   vertically centred. The original means it: on page 2 a two-line respelling
+  //   sits at 173.15 and 167.45 against its row's shared 170.30, which is centred to
+  //   the digit. So `valign: 'middle'` is a faithful transcription and keeps both
+  //   its centring and its `max(height)` row height.
+  //
+  // Aligning them by baseline instead would move a one-line gloss up beside a
+  // four-line respelling, which is a change away from the sheet this reproduces.
+  // There is a residual there -- the original's `\baselineskip` is uniform within a
+  // row, so its one-line cells are boxes of equal height and centring leaves their
+  // baselines coincident, where the per-script leading floor makes ours unequal by
+  // 0.2-0.4pt. Reproducing that needs a row-uniform leading, which was measured and
+  // rejected: on a row whose respelling wraps to four 5.37pt lines, taking the row's
+  // leading up to the `script` cell's 6.81 costs 22.3pt -> 28.3pt, +27%.
+  const centred = template.valign === 'middle';
+
+  const solved = grids.map((grid) => {
     const widths = shared ? shared.widths : chooseSplit(grid, avail, template, ctx.measurer).widths;
-    const rowStretch = template.rowStretch ?? 1;
     const stacks = grid.map((cells, j) => {
       const live = cells.filter((c) => c.text !== '');
       // Distance from the top of the column's material to its **first line's**
@@ -438,37 +460,90 @@ function itemAtoms(ctx, block, rows, withPaint) {
       );
       return { live, ascent, height };
     });
-    // **The two item shapes are set by two different mechanisms in the original, and
-    // each has its own vertical rule.** Measured off
-    // `mandarin_travel_cheatsheet_generic_full_verified_v2.tex` and its PDF:
-    //
-    // - `\entry` is `\hbox{\vtop{...}\hfil\vtop{...}}`, and a `\vtop`'s reference
-    //   point is its first line's baseline, so both halves sit on one baseline
-    //   whatever their leadings are. On page 1 the target and the gloss share 333.70
-    //   exactly while their second lines land 5.00 and 5.30 below it -- so *only* the
-    //   first line is shared, and everything under it flows in its own column's
-    //   leading. An hbox of vtops is `max(height) + max(depth)` tall, which is what
-    //   `ascent + below` is.
-    // - The reference tables are `array`'s `m{width}` columns, i.e. `\parbox[c]`,
-    //   vertically centred. The original means it: on page 2 a two-line respelling
-    //   sits at 173.15 and 167.45 against its row's shared 170.30, which is centred to
-    //   the digit. So `valign: 'middle'` is a faithful transcription and keeps both
-    //   its centring and its `max(height)` row height.
-    //
-    // Aligning them by baseline instead would move a one-line gloss up beside a
-    // four-line respelling, which is a change away from the sheet this reproduces.
-    // There is a residual there -- the original's `\baselineskip` is uniform within a
-    // row, so its one-line cells are boxes of equal height and centring leaves their
-    // baselines coincident, where the per-script leading floor makes ours unequal by
-    // 0.2-0.4pt. Reproducing that needs a row-uniform leading, which was measured and
-    // rejected: on a row whose respelling wraps to four 5.37pt lines, taking the row's
-    // leading up to the `script` cell's 6.81 costs 22.3pt -> 28.3pt, +27%.
-    const centred = template.valign === 'middle';
     const ascent = Math.max(0, ...stacks.map((st) => st.ascent));
     const gridHeight = (centred
       ? Math.max(0, ...stacks.map((st) => st.height))
       : ascent + Math.max(0, ...stacks.map((st) => st.height - st.ascent))) * rowStretch;
-    const height = pad[0] + gridHeight + pad[2];
+    return { grid, widths, stacks, ascent, gridHeight, height: pad[0] + gridHeight + pad[2] };
+  });
+
+  return {
+    template,
+    pad,
+    rowGap,
+    colGap,
+    centred,
+    rows: solved,
+    total: solved.reduce((sum, row) => sum + row.height, 0),
+  };
+}
+
+/**
+ * How much shorter the folded shape has to be before a table is folded into it.
+ *
+ * Not zero, and the margin is the point rather than a hedge. A table of
+ * single-word rows measures the same either way -- one line beside one line, or
+ * one line over one line at twice the width -- so a bare `<=` would fold the
+ * months of the year, which is exactly the table four columns were for. Requiring
+ * a real gain means the fold fires only where the rows had already stopped being
+ * one line each.
+ */
+const FOLD_GAIN = 0.05;
+
+/**
+ * Pick a table's grid shape by measuring both: one line of four columns, or two
+ * columns of two.
+ *
+ * This *is* a decision by measurement, which `arrange.js` deliberately does not
+ * make for phrase rows, so the difference is worth stating. There the candidates
+ * held the same fields at the same sizes, so the choice came down to which one
+ * happened to wrap less at the scale being probed, and it moved with the scale:
+ * Mandarin went from eight faces to ten. Here the two candidates differ in shape
+ * rather than in luck -- four narrow columns against two wide ones -- so which is
+ * shorter is mostly a fact about the table's own content. Measured across ten
+ * languages, no sheet lost either faces or scale: Amharic gained 0.12 of scale,
+ * Russian 0.09, Hindi and Japanese 0.03, and Korean fell from ten faces to eight.
+ *
+ * `fits(scale)` is not perfectly monotone either way, and that is worth being
+ * plain about. The width descent settles on plateaus, so sweeping the scale from
+ * 0.30 to 1.00 already showed total height *dropping* by up to 67pt somewhere on
+ * the Spanish sheet before any of this, and 38pt on the Amharic one; the fold
+ * takes those to 71pt and 43pt. It adds to a wobble the engine already tolerates
+ * rather than introducing one -- which is what `FOLD_GAIN` is for. The shape may
+ * only change where the gain is worth having.
+ * @param {ReturnType<typeof makeContext>} ctx
+ * @param {any} template
+ * @param {import('../types.js').ItemRow[]} rows
+ */
+function chooseTableShape(ctx, template, rows) {
+  const flat = solveTable(ctx, template, rows);
+  // The three named arrangements are the reader saying what shape they want an
+  // item in. `mixed` is the one that leaves it to the sheet.
+  if ((ctx.spec.arrangement ?? 'mixed') !== 'mixed') return flat;
+  const folded = foldTemplate(template, ctx.shown);
+  if (!folded || !rows.length) return flat;
+  const two = solveTable(ctx, folded, rows);
+  return two.total <= flat.total * (1 - FOLD_GAIN) ? two : flat;
+}
+
+/**
+ * @param {ReturnType<typeof makeContext>} ctx
+ * @param {import('../types.js').Block} block
+ * @param {import('../types.js').ItemRow[]} rows
+ * @param {boolean} withPaint
+ * @returns {Atom[]}
+ */
+function itemAtoms(ctx, block, rows, withPaint) {
+  const base = ctx.theme.templates[block.templateId ?? 'entry'];
+  if (!base) throw new Error(`unknown template ${block.templateId}`);
+  const table = chooseTableShape(
+    ctx, arrangeTemplate(base, ctx.spec.arrangement ?? 'mixed', ctx.shown), rows,
+  );
+  const { template, pad, rowGap, colGap, centred } = table;
+
+  const startRow = ctx.rowIndex;
+  return rows.map((row, i) => {
+    const { grid, widths, stacks, ascent, gridHeight, height } = table.rows[i];
 
     if (!withPaint) {
       return atomShell(ctx, block, height, i, template);

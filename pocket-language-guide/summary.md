@@ -345,8 +345,25 @@ rather than a noun swap.
   small change.
 - **`arrange.js`** — how an item's fields sit inside its own box: side by side (the
   reference's target-left, reader-right pairing), one line, or one field per line.
-  Only per-row templates are rearranged; a reference table is already one line of
-  four columns and its whole point is that every row aligns.
+  Only per-row templates answer to that setting. A reference table gets one shape
+  decision of its own instead: `foldTemplate` offers it the same two-column shape a
+  phrase row has, and `atoms.js` measures both and takes the shorter -- so a table
+  of single words keeps its four columns and a table of phrases folds.
+
+  A four-column table earns its shape by keeping every row to one line, which is
+  what makes it scannable. Once the phrases are long enough that rows wrap anyway,
+  four columns of a quarter width each is the worst of both: the one column that
+  wrapped becomes a tall skinny wall of text with three columns of whitespace
+  beside it. The Amharic sheet showed it plainly -- `Days of the week` and `Months`
+  read perfectly at four columns while `Pharmacy + symptoms` had rows five lines
+  deep -- and both are now the shape they should be, on the same sheet, decided per
+  table.
+
+  Measured across ten languages, no sheet lost faces or scale: Amharic gained 0.12
+  of scale, Russian 0.09, Hindi and Japanese 0.03, and Korean fell from ten faces
+  to eight. The decision needs a real margin -- `FOLD_GAIN`, 5% -- rather than a
+  bare comparison, because a single-word table measures the same either way and a
+  tie would have folded the months of the year.
 - **`weights.js`** — proposes items to fill leftover whitespace. Value decays with
   each item already taken from the same coverage cluster, so a sheet with "Hello"
   gains little from "Hello (polite)". Results are a reviewable diff with a stated
@@ -2684,3 +2701,25 @@ Three failure modes here were silent rather than loud, and the fixes are load-be
   one line. Separately, refusing to break at an *existing* hyphen made
   "jong-dyen-jahn" reserve its full natural width and squeeze every other column;
   allowing it cut one table's height by 39%.
+- **A word wider than its column printed on top of the next one.** Every width
+  solver already floors a column at its own widest unbreakable word, and
+  `fractions.js` says out loud what happens when those floors cannot all be met at
+  once -- "something has to overflow and spreading it is the least bad option". The
+  part nobody had written was what overflowing *looked like*: the line builder
+  never broke inside a piece, so the word simply ran past its cell, and a Russian
+  sheet read `пожалуйстаpozhaluysta` while an Amharic one read
+  `ቁርጭምጭሚትk'urch'imich'imīt`. It is now cut at grapheme boundaries as a last
+  resort, measured on the accumulated string rather than a character at a time
+  because shaping is not additive -- an Arabic join is narrower than the letters it
+  joins, and a combining mark has no width of its own to add. No hyphen is
+  inserted, as nowhere else in this engine inserts one. `maxAtomWidth` still
+  reports the whole word, so the floors keep trying to avoid the break rather than
+  settling for it.
+
+  It changed no sheet's fit -- faces and scale are identical across ten languages
+  with it alone -- because it only alters what happens at widths the solvers were
+  already trying not to hand out. What it did change is `tests/measure.test.mjs`'s
+  own `atoms` helper, which enumerated break opportunities by wrapping at 0.01pt
+  and would now get single graphemes. Its doc comment already claimed to read the
+  atoms directly rather than a wrapped result, so `measurer.atoms` now exists and
+  the helper is gone.

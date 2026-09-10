@@ -83,32 +83,24 @@ test('baseline sits inside the line box', () => {
   assert.ok(b > 0 && b < s.leading, `baseline ${b} outside 0..${s.leading}`);
 });
 
-/**
- * Where a string is allowed to break, as the text either side of each break.
- * Reading the atoms directly rather than a wrapped result, because a break
- * *opportunity* is the thing under test and whether a given width happens to use
- * it is not.
- * @param {string} text @param {import('../core/measure.js').RunStyle} s
- */
-const atoms = (text, s) => m.wrap(text, 0.01, s).lines.map((l) => l.map((p) => p.text).join(''));
 
 test('a hyphen that opens a word stays with it', () => {
   // Every language's number note lists the Japanese counters as `-tsu`, `-mai`,
   // `-hon`. The rule used to be unconditional, so it offered a break between the
   // hyphen and its own word and a bare `-` dangled at the end of a line.
-  assert.deepEqual(atoms('-tsu -mai', style()), ['-tsu ', '-mai']);
+  assert.deepEqual(m.atoms('-tsu -mai', style()), ['-tsu ', '-mai']);
   // A hyphen joining two words still offers one, which is what it is for.
-  assert.deepEqual(atoms('no-pork', style()), ['no-', 'pork']);
+  assert.deepEqual(m.atoms('no-pork', style()), ['no-', 'pork']);
 });
 
 test('a slash does not orphan a single letter', () => {
   // Gendered forms are written `solo/a`, `alérgico/a`, `vegetariano/a` in Italian,
   // Spanish and Portuguese. Breaking after the slash puts one letter on the next
   // line, which reads as a typo rather than as a wrap.
-  assert.deepEqual(atoms('solo/a', style()), ['solo/a']);
-  assert.deepEqual(atoms('alérgico/a a X', style()), ['alérgico/a ', 'a ', 'X']);
+  assert.deepEqual(m.atoms('solo/a', style()), ['solo/a']);
+  assert.deepEqual(m.atoms('alérgico/a a X', style()), ['alérgico/a ', 'a ', 'X']);
   // A slash between two real words still offers one, which is what it is for.
-  assert.deepEqual(atoms('and/or', style()), ['and/', 'or']);
+  assert.deepEqual(m.atoms('and/or', style()), ['and/', 'or']);
 });
 
 test('a number in an any-breaking script is one atom', () => {
@@ -117,10 +109,10 @@ test('a number in an any-breaking script is one atom', () => {
   // as three atoms and a line could break inside a number. The shipped Thai pack
   // carries ๑๐, ๑๐๐ and ๑๐๐๐, so this was live rather than hypothetical.
   const s = style({ stack: 'latin', wordBreak: 'dict' });
-  assert.deepEqual(atoms('๑๐๐', s), ['๑๐๐']);
-  assert.deepEqual(atoms('១១៩', s), ['១១៩']);
+  assert.deepEqual(m.atoms('๑๐๐', s), ['๑๐๐']);
+  assert.deepEqual(m.atoms('១១៩', s), ['១១៩']);
   // And the letters around them still break, which is the whole point of `dict`.
-  assert(atoms('ก๑๐๐ก', s).length > 1);
+  assert(m.atoms('ก๑๐๐ก', s).length > 1);
 });
 
 test('Khmer clusters hold together, so no line can open on a coeng', () => {
@@ -130,7 +122,7 @@ test('Khmer clusters hold together, so no line can open on a coeng', () => {
   // subscript -- which renders over a dotted circle when stranded. Nothing had
   // noticed because no Khmer pack exists yet. Found by the Burmese survey.
   const s = style({ stack: 'latin', wordBreak: 'dict' });
-  const phnom = atoms('ភ្នំពេញ', s);
+  const phnom = m.atoms('ភ្នំពេញ', s);
   assert(phnom.length < 7, `expected clusters, got ${phnom.length} atoms`);
   for (const atom of phnom) {
     assert(!/^[\u17B6-\u17D2\u17DD]/u.test(atom),
@@ -147,7 +139,7 @@ test('Lao breaks between clusters and never opens a line on a mark', () => {
   // because either alone is a defect: no glue means one atom, and no
   // `NO_LINE_START` means a line can open on a bare tone mark over a dotted circle.
   const s = style({ stack: 'latin', wordBreak: 'dict' });
-  const toilet = atoms('ຫ້ອງນ້ຳຢູ່ໃສ', s);
+  const toilet = m.atoms('ຫ້ອງນ້ຳຢູ່ໃສ', s);
   assert(toilet.length > 1, `expected clusters, got one atom: ${JSON.stringify(toilet)}`);
   for (const atom of toilet) {
     // No dependent vowel, semivowel, tone mark or sign may open an atom, and no
@@ -160,16 +152,61 @@ test('Lao breaks between clusters and never opens a line on a mark', () => {
   }
   // ນ້ຳ is the sequence the whole cluster question turns on -- a tone mark and then
   // U+0EB3, which is spacing -- and it has to stay one atom.
-  assert.deepEqual(atoms('ນ້ຳ', s), ['ນ້ຳ']);
+  assert.deepEqual(m.atoms('ນ້ຳ', s), ['ນ້ຳ']);
 });
 
 test('a script that breaks anywhere still keeps a Latin word whole', () => {
   // `any` means between ideographs, kana and hangul -- not inside a romanisation
   // printed among them, which is what every reader-side note does.
   const s = style({ stack: 'cjk-sc', weight: 700, wordBreak: 'any' });
-  assert.deepEqual(atoms('数juuichi', s), ['数', 'juuichi']);
+  assert.deepEqual(m.atoms('数juuichi', s), ['数', 'juuichi']);
   // And a digital time or a decimal is one number, not two. A Chinese note wrapped
   // `16:00` as `16:` and `00` before this.
-  assert.deepEqual(atoms('是16:00了', s), ['是', '16:00', '了']);
-  assert.deepEqual(atoms('是0.1元', s), ['是', '0.1', '元']);
+  assert.deepEqual(m.atoms('是16:00了', s), ['是', '16:00', '了']);
+  assert.deepEqual(m.atoms('是0.1元', s), ['是', '0.1', '元']);
+});
+
+test('a word wider than its whole column is broken rather than printed past it', () => {
+  // The width solvers give every column a floor of its own widest unbreakable
+  // word, so this is only reached when the floors could not all be met at once --
+  // and then the word used to print straight over the next column, which is how a
+  // Russian sheet came to read `пожалуйстаpozhaluysta`.
+  const s = style({ size: 6, leading: 7 });
+  const word = 'Rehydrationssalze';
+  const avail = m.width(word, s) * 0.45;
+  const { lines, width } = m.wrap(word, avail, s);
+  assert.ok(lines.length >= 2, `expected a break, got ${lines.length} line(s)`);
+  assert.ok(width <= avail + 0.01, `line is ${width.toFixed(2)}pt wide in ${avail.toFixed(2)}pt`);
+  // Nothing is dropped and nothing is invented -- no hyphen is inserted, as
+  // nowhere else in this engine inserts one either.
+  assert.equal(lines.flat().map((p) => p.text).join(''), word);
+  // The counted height and the painted one have to agree or the row is the wrong
+  // size for what is drawn in it.
+  assert.equal(m.lineCount(word, avail, s), lines.length);
+});
+
+test('the last-resort break keeps a combining mark with its base', () => {
+  // Cutting per character would strand a mark at the start of a line over a
+  // dotted circle. Arabic is the sharper case: the pieces are measured on the
+  // accumulated string, because a join is narrower than the letters it joins.
+  const s = style({ stack: 'arabic', dir: 'rtl', size: 6, leading: 7 });
+  const word = 'الإسعافات';
+  const avail = m.width(word, s) * 0.5;
+  const { lines, width } = m.wrap(word, avail, s);
+  assert.ok(lines.length >= 2);
+  assert.ok(width <= avail + 0.01, `line is ${width.toFixed(2)}pt wide in ${avail.toFixed(2)}pt`);
+  assert.equal(lines.flat().map((p) => p.text).join(''), word);
+  for (const piece of lines.flat()) {
+    assert.ok(!/^\p{Mn}/u.test(piece.text), `piece opens on a mark: ${piece.text}`);
+  }
+});
+
+test('an unbreakable word is still measured at its full width', () => {
+  // `maxAtomWidth` is what the width solvers use as a floor, so it must keep
+  // reporting the word's real width: if it shrank to whatever the last-resort
+  // break would allow, no column would ever ask for enough room and every long
+  // word on the sheet would be cut in half.
+  const s = style({ size: 6, leading: 7 });
+  const word = 'Rehydrationssalze';
+  assert.ok(Math.abs(m.maxAtomWidth(word, s) - m.width(word, s)) < 0.01);
 });

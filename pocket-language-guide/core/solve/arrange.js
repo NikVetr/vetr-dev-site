@@ -7,8 +7,10 @@
 // follow when they are long -- so the arrangement is a setting rather than a
 // property of the theme.
 //
-// Only per-row templates are rearranged. A reference table is already one line of
-// four columns, and its whole point is that every row lines up.
+// Only per-row templates answer to that setting. A reference table keeps its own
+// grid, because its whole point is that every row lines up -- but it does get one
+// shape decision of its own, `foldTemplate`, taken per table from its content
+// rather than from the setting.
 
 /** @typedef {import('../types.js').FieldId} FieldId */
 /** @typedef {import('../types.js').FieldStyle} FieldStyle */
@@ -19,10 +21,17 @@
  * skipped, so turning off romanisation closes the gap rather than leaving one.
  * @type {FieldId[]}
  */
-const ORDER = ['script', 'script_alt', 'roman', 'ipa', 'gloss', 'literal', 'respell'];
+const ORDER = ['numeral', 'script', 'script_alt', 'roman', 'ipa', 'gloss', 'literal', 'respell'];
 
-/** Which side of the item a field belongs to, for the two-column arrangement. */
-const TARGET_SIDE = new Set(['script', 'script_alt', 'roman', 'ipa']);
+/**
+ * Which side of the item a field belongs to, for the two-column arrangement.
+ *
+ * Not `isTargetSide` from `core/fonts.js`, which answers a different question --
+ * that one is about whose *writing* a field carries, so it counts `literal` as the
+ * target's and a numeral as neither. Here `literal` is a gloss of the target and
+ * belongs beside it on the reader's side, and a numeral leads its row.
+ */
+const TARGET_SIDE = new Set(['numeral', 'script', 'script_alt', 'roman', 'ipa']);
 
 /** @typedef {'mixed'|'two-column'|'one-row'|'stacked'} Arrangement */
 
@@ -123,6 +132,70 @@ export function arrangeTemplate(template, arrangement, shown) {
       1,
     ),
     cols: 2,
+    fields: fields.map((f) => {
+      const left = TARGET_SIDE.has(f.field);
+      return {
+        ...f,
+        col: left ? 0 : 1,
+        row: left ? leftRow++ : rightRow++,
+        align: left ? 'start' : 'end',
+      };
+    }),
+  };
+}
+
+/**
+ * The same reference table folded from one line of four columns into two columns
+ * of two: the target's own writing over its pronunciation on the left, your
+ * language over its respelling on the right.
+ *
+ * A reference table earns its four columns by keeping every row to a single line
+ * -- that is the whole of what makes it scannable. Once its phrases are long
+ * enough that rows wrap anyway, four columns of a quarter width each is the worst
+ * of both: the one column that wrapped becomes a tall skinny wall of text with
+ * three columns of whitespace beside it. Folding gives each side about twice the
+ * width, so the same words take roughly half the lines and the row reads as a
+ * pair rather than a stripe.
+ *
+ * This only produces the shape. Whether a given table is better off in it is a
+ * question about that table's own content, and `atoms.js` answers it by measuring
+ * both -- see `chooseTableShape`.
+ *
+ * @param {any} template
+ * @param {Set<string>} shown  the field ids the sheet is displaying
+ * @returns {any|null} the folded template, or `null` if there is nothing to fold
+ */
+export function foldTemplate(template, shown) {
+  // Per-row items are already two columns, and a two-column table has no width to
+  // gain: folding it would only stack what already sits side by side.
+  if (template.widthMode !== 'shared' || template.cols < 3) return null;
+  const fields = /** @type {FieldStyle[]} */ (template.fields)
+    .filter((f) => shown.has(f.field))
+    .slice()
+    .sort((a, b) => ORDER.indexOf(a.field) - ORDER.indexOf(b.field));
+  if (fields.length < 2) return null;
+
+  let leftRow = 0;
+  let rightRow = 0;
+  return {
+    ...template,
+    rows: Math.max(
+      fields.filter((f) => TARGET_SIDE.has(f.field)).length,
+      fields.filter((f) => !TARGET_SIDE.has(f.field)).length,
+      1,
+    ),
+    cols: 2,
+    // A table's own bounds are set for quarter-width columns -- 8% to 55% -- which
+    // for two columns would cap a side that wants two thirds of the row. These are
+    // the bounds the theme already uses for a two-column item.
+    minFrac: 0.235,
+    maxFrac: 0.745,
+    // A table centres its cells because each of its columns holds exactly one, so
+    // there is nothing for centring to disagree with. Two stacked cells per column
+    // is the shape a phrase row has, and that one aligns on its first baseline: it
+    // is what puts the reader's word level with the writing it glosses instead of
+    // floating in the middle of whatever wrapped beside it.
+    valign: 'top',
     fields: fields.map((f) => {
       const left = TARGET_SIDE.has(f.field);
       return {

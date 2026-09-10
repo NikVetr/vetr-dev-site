@@ -1099,3 +1099,48 @@ test('a header and a footer are two bands, and a band may be a tab', async () =>
   const plainBox = contentBox((await buildSheet(ctx, { ...base, head: undefined })).plan.geometry, base.paper);
   assert.equal(contentBox(empty.plan.geometry, base.paper).height, plainBox.height);
 });
+
+test('a table of phrases folds into two columns, a table of single words does not', async () => {
+  // Both halves of one report. The Russian sheet's "Quick responses" printed
+  // `пожалуйстаpozhaluysta`: four columns of a quarter width each, and a row whose
+  // phrases did not fit in them. Folding that table gives each side twice the
+  // width; the months and the days of the week must *not* fold, because a column
+  // of single words is exactly what four columns are for.
+  const spec = await referenceSpec('ru', 'en');
+  await loadFontsFor(ctx, spec.target, spec.source);
+  const { plan } = await buildSheet(ctx, spec);
+
+  /**
+   * The first run of the target's own writing and the first of its romanisation,
+   * for one row. Cells are painted column by column, so the leading bold run is
+   * the script and the leading italic one is the romanisation whichever shape the
+   * row is in -- which is the point: their positions are what differ.
+   * @param {string} conceptId
+   */
+  const sides = (conceptId) => {
+    for (const face of plan.faces) {
+      const hit = face.hits.find((h) => h.conceptId === conceptId);
+      if (!hit) continue;
+      const runs = face.runs.filter((r) => r.x >= hit.x - 0.5 && r.x < hit.x + hit.w
+        && r.y >= hit.y - 0.5 && r.y <= hit.y + hit.h);
+      const script = runs.find((r) => r.bold && !r.italic);
+      const roman = runs.find((r) => r.italic);
+      assert.ok(script && roman, `${conceptId} is missing a script or a romanisation`);
+      return { script, roman };
+    }
+    throw new Error(`${conceptId} is not on the sheet`);
+  };
+
+  const folded = sides('quick-responses.please-go-ahead');
+  assert.ok(Math.abs(folded.script.x - folded.roman.x) < 0.5,
+    'a folded row stacks the romanisation under the writing, at the same left edge');
+  assert.ok(folded.roman.y > folded.script.y + 1,
+    'a folded row puts the romanisation on its own baseline');
+
+  for (const day of ['days-of-week.monday', 'months.january']) {
+    const flat = sides(day);
+    assert.ok(flat.roman.x > flat.script.x + 1, `${day} should stay four columns wide`);
+    assert.ok(Math.abs(flat.roman.y - flat.script.y) < 1,
+      `${day} should keep its romanisation on the row's own baseline`);
+  }
+});
