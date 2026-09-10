@@ -2,15 +2,40 @@ import { test, expect } from '@playwright/test';
 import { faceCount } from './counts.js';
 import { pickReader } from './controls.js';
 
+/**
+ * Save one pair for offline, the way the gallery's Offline button used to.
+ *
+ * The button is hidden: it said "Offline" and did something that needs a sentence
+ * to explain, so it read as a state rather than an action beside two buttons that
+ * navigate. `saveForOffline` is what the primary use case rests on, though, so it
+ * stays under test through the function rather than through a control that is no
+ * longer on the page -- and if the button returns, this is still what it calls.
+ * These three tests failed silently for exactly as long as they asserted on the
+ * control instead.
+ * @param {import('@playwright/test').Page} page
+ * @param {string} target @param {string} source
+ */
+async function save(page, target, source) {
+  return page.evaluate(async (pair) => {
+    const app = await import('./ui/app.js');
+    const ctx = await app.browserSheetContext();
+    const manifest = await app.fontManifest();
+    return app.saveForOffline({ corpus: ctx.corpus, ...pair, manifest });
+  }, { target, source });
+}
+
 // The primary use case: abroad, no data, still needs to produce a printable file.
 test('saves a language for offline, then exports with the network off', async ({ page, context }) => {
   await page.goto('/');
   await expect(page.locator('.card').first()).toBeVisible();
   await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
 
-  const save = page.locator('[data-offline="zh-Hans"]');
-  await save.click();
-  await expect(save).toHaveText('Saved', { timeout: 180_000 });
+  const saved = await save(page, 'zh-Hans', 'en');
+  expect(saved.ok, `did not cache: ${JSON.stringify(saved.failed)}`).toBe(true);
+  // `ok` is "nothing failed", which an empty list satisfies. A pair is sixteen
+  // concept groups times three files plus its fonts, so the count is the part that
+  // says work happened.
+  expect(saved.total).toBeGreaterThan(40);
 
   await context.setOffline(true);
   await page.goto('/customize.html?target=zh-Hans&source=en');
@@ -32,14 +57,19 @@ test('saves a pair that has no curated respellings', async ({ page, context }) =
   await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
   await pickReader(page, '日本語');
 
-  const save = page.locator('[data-offline="zh-Hans"]');
-  await save.click();
-  // In Japanese, because picking a reading language switches the interface into it.
-  // This asserted the English string and passed for the wrong reason: the picker
-  // used to re-sort the grid without ever swapping the message catalogue, so a
-  // Japanese reader got a Japanese card list under English chrome.
-  await expect(save).toHaveText('保存済み', { timeout: 180_000 });
+  // Picking a reading language switches the interface into it. The button this
+  // test used to click carried that assertion, and it once asserted the English
+  // string and passed for the wrong reason: the picker re-sorted the grid without
+  // ever swapping the message catalogue, so a Japanese reader got a Japanese card
+  // list under English chrome. The catalogue is the part worth keeping.
   await expect(page.locator('html')).toHaveAttribute('lang', 'ja');
+
+  const saved = await save(page, 'zh-Hans', 'ja');
+  // Not merely "no error": the whole point is that the file nobody curated is
+  // never asked for, so nothing may be reported as failed.
+  expect(saved.failed).toEqual([]);
+  expect(saved.ok).toBe(true);
+  expect(saved.total).toBeGreaterThan(40);
 
   await context.setOffline(true);
   await page.goto('/customize.html?target=zh-Hans&source=ja');
@@ -64,18 +94,25 @@ test('a failed data or font fetch is reported, not printed around', async ({ pag
   await expect(page.locator('body')).not.toContainText('Something went wrong');
 });
 
-test('a saved pack survives a shell change, and a failed save can be retried', async ({ page, context }) => {
+test('a saved pack survives a shell change', async ({ page, context }) => {
   await page.goto('/');
   await expect(page.locator('.card').first()).toBeVisible();
   await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
 
-  const save = page.locator('[data-offline="zh-Hans"]');
-  await save.click();
-  await expect(save).toHaveText('Saved', { timeout: 180_000 });
+  const saved = await save(page, 'zh-Hans', 'en');
+  expect(saved.ok, `did not cache: ${JSON.stringify(saved.failed)}`).toBe(true);
+
+  // Named URLs really are in the pack cache, not merely reported as cached.
+  const cached = await page.evaluate(async () => {
+    const cache = await caches.open('plg-packs');
+    return (await cache.keys()).map((r) => new URL(r.url).pathname);
+  });
+  expect(cached).toContain('/data/lang/zh-Hans/social.csv');
+  expect(cached.some((u) => u.endsWith('.woff2'))).toBe(true);
 
   // The pack cache is not version-scoped, because `VERSION` is a content hash of
   // the *shell*: a one-character CSS change used to discard every pack every reader
-  // had saved, which is the one thing the button exists to prevent.
+  // had saved, which is the one thing saving exists to prevent.
   const names = await page.evaluate(() => caches.keys());
   expect(names).toContain('plg-packs');
   expect(names.some((n) => n.startsWith('plg-') && n.endsWith('-shell'))).toBe(true);
