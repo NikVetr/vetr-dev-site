@@ -125,6 +125,10 @@ def native_xml_check(row: dict, path: Path) -> tuple[bool, str]:
     compensation_year = int(end[:4]) if end[5:] == "12-31" else int(end[:4]) - 1
     if end != row["tax_period_end"] or compensation_year != int(row["compensation_year"]):
         return False, "Filing or compensation year mismatch"
+    if row.get("tax_period_begin") and row["tax_period_begin"] != tree.findtext("ReturnHeader/TaxPeriodBeginDt"):
+        return False, "Filing period start mismatch"
+    if row.get("financial_year_end") is not None and int(row["financial_year_end"]) != int(end[:4]):
+        return False, "Financial year mismatch"
     cash = amount(person, "ReportableCompFromOrgAmt") + amount(person, "ReportableCompFromRltdOrgAmt")
     if cash != row["cash_nominal"]:
         return False, "Part VII cash mismatch"
@@ -153,8 +157,10 @@ def native_xml_check(row: dict, path: Path) -> tuple[bool, str]:
         return False, "Total-compensation basis mismatch"
     for field, tag in (("revenue_nominal_usd", "CYTotalRevenueAmt"),
                        ("expenses_nominal_usd", "CYTotalExpensesAmt"), ("filing_employees", "TotalEmployeeCnt")):
-        if row.get(field) is not None and row[field] != amount(tree, "ReturnData/IRS990/" + tag):
-            return False, f"Organization context mismatch: {field}"
+        if row.get(field) is not None:
+            value = tree.findtext("ReturnData/IRS990/" + tag)
+            if value is None or row[field] != float(value):
+                return False, f"Organization context mismatch: {field}"
     return True, "Exact native XML identity, periods, hours, pay components and organization context reconciled"
 
 
@@ -378,7 +384,16 @@ def prepare(package: Path, review_path: Path, baseline_path: Path):
                 else:
                     audit = {"reason": message, "contextVerified": True}
             if not reason:
+                if audit.get("nativeLocators"):
+                    if ad or path.suffix.lower() != ".xml":
+                        raise ValueError(f"Native locators require an XML incumbent source: {identifier}")
+                    record = {**record, "part_vii_locator": audit["nativeLocators"]["partVII"],
+                              "schedule_j_locator": audit["nativeLocators"].get("scheduleJ")}
                 record = recover_missing_base(record, audit, path)
+                if not ad and path.suffix.lower() == ".xml":
+                    verified, message = native_xml_check(record, path)
+                    if not verified:
+                        raise ValueError(f"Reviewed native XML no longer reconciles: {identifier}: {message}")
                 digest = hashlib.sha256(path.read_bytes()).hexdigest()
                 identity = (digest, normalized(record.get("person_name")))
                 ein = (record.get("entity_id") or "").removeprefix("US-EIN-")

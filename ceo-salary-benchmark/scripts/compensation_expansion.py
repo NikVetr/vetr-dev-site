@@ -152,7 +152,7 @@ def apply_expansion(payload: dict, cache_source, *, expansion_path: Path = EXPAN
             counts["initialOrganizations"] = len({r["organization"] for r in initial})
             definition["description"] = re.sub(
                 r"\d+ usable pay records from \d+ selected peer organizations\.",
-                f"{len(initial)} nominal-only pay record(s) from {counts['initialOrganizations']} organization(s); no reviewed inflation conversion.",
+                f"{len(initial)} observed pay record(s) from {counts['initialOrganizations']} organization(s), shown in nominal dollars; none meet the primary eligibility criteria.",
                 definition["description"],
             )
         definition["description"] = re.sub(

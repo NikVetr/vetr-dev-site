@@ -791,7 +791,7 @@ a.organization-name:hover { color: var(--green); text-decoration: underline; tex
 .evidence-text { margin: 18px 0; line-height: 1.65; font-size: 13px; }
 .evidence-meta { display: grid; grid-template-columns: 120px 1fr; margin: 0; border-top: 1px solid var(--line); font-size: 11px; }
 .evidence-meta dt, .evidence-meta dd { margin: 0; padding: 7px 0; border-bottom: 1px solid var(--line); }
-.evidence-meta dt { color: var(--muted); font-weight: 700; }
+.evidence-meta dt { padding-right: 8px; color: var(--muted); font-weight: 700; }
 .evidence-meta dd { overflow-wrap: anywhere; }
 .category-provenance { margin-top: 16px; border-block: 1px solid var(--line); }
 .category-provenance > summary { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; color: var(--green); font-size: 11px; font-weight: 750; cursor: pointer; }

@@ -66,6 +66,20 @@ The importer uses the app's frozen CPI conversion for complete historical years.
 
 Organization fiscal-year dates and the calendar-year employee-count definition are retained in each record's review metadata. Missing organization size remains missing. EA affiliation can be explicitly Not assessed; it is not inferred from the absence of an EA label. Original institution-wide categories are reused only for the same employer. New role pay ratios require a unique record in the same source and compensation year.
 
+## Existing-record refinements
+
+The refinement pass preserves the same 956 canonical observations, 37 positions and fitted models. Thirteen existing disclosures (six Brookings and seven Cato) now include independently reconciled organization context. Brookings reports $115,659,701 revenue, $107,734,507 expenses and 603 calendar-year employees; Cato reports $62,821,387, $47,370,866 and 317 respectively. Revenue and expenses cover each filing's fiscal period, while employee counts are neither FTE nor point-in-time headcount. These repeated organization inputs do not represent independent organization observations.
+
+The reviewed source hashes, exact XML tags and values are retained in `compensation_expansion_review.json`. Source-native person locators replace rendered-page references for these 13 rows. The importer rechecks manually reviewed XML after locator/base recovery, including fiscal-period start/end and financial-year end. Missing numeric context tags cannot be interpreted as zero. Other unreconciled financial inputs remain missing.
+
+All 269 included expansion incumbents lack independently verified complete-year employment and contractual FTE. Reported hours are retained without automatically multiplying pay by 40/hours. Source dialogs distinguish these limits from the filing's financial period and employee-count definition; primary-sample descriptions do not claim every record is verified full-year employment.
+
+Expansion source previews render their own role-classification and source-verification schema. They do not assume the older category-by-category provenance fields, which previously could prevent these dialogs from opening.
+
+The existing Society of Family Planning #WeCount advertisement remains available but is sensitivity-only: the salary/benefits section (saved PDF page 4) does not establish employment fraction. The Research Program Manager page therefore opens in the explicitly labeled observed sample, in nominal dollars, and states that no records meet primary eligibility. Its $80,000–$90,000 range and narrower program-delivery classification are unchanged.
+
+Charity Navigator's $9,038 reported cash for Jose Antonio Rodriguez warrants further tenure verification. The retained filing does not establish employment dates, and a primary-source appointment date was not recovered. The pay amount alone does not justify removing the observation; it is neither annualized nor assigned an invented start date.
+
 ## Files and reproduction
 
 - `compensation_expansion_review.json`: source-pinned independent decisions, role mapping, package-table hashes and baseline fingerprint.
@@ -80,4 +94,4 @@ The input ZIP, extracted package, working audits, raw recovery attempts, PDF ren
 
 Validation: the app build and complete data-audit command pass, including 36 Python tests. Seven focused browser tests cover all 22 new role selectors, semantic routes, nominal-only evidence, shared functional views, CEO ratios, existing position interactions, weighting and robustness. The rendered People/HR Director page was inspected. A separate baseline comparison verifies all 662 original observations, RP references and the complete predictive artifact remain unchanged; all 956 canonical observation IDs are unique.
 
-Follow-up priorities are resolving the remaining ad payroll/FTE/source questions, obtaining role-specific RP scope and hiring-market evidence, validating historical full-year/FTE status, and reviewing the expanded CEO peer set before changing its default membership. Further modeling should follow those separate data decisions.
+Follow-up work is limited to refining existing records: role-specific RP scope and hiring-market evidence, historical full-year/FTE status, and expanded CEO peer comparability before any default-membership change. Additional records and further modeling are deferred.
