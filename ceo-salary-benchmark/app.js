@@ -4686,6 +4686,12 @@
     [
       ["Person / role", [roleHolder(row), row.rawTitle || row.title].filter(Boolean).join(" · ") || "Not reported"],
       ["Pay year", row.compensationYear || "Not reported"],
+      ...(row.expansionReview && row.evidenceStream === "incumbents" ? [
+        ["Employment coverage", "Reported calendar-year compensation; a complete employment year is not independently established."],
+        ["Reported weekly hours", `${row.averageHoursPerWeek ?? "Not reported"} at filing organization · ${row.averageHoursRelatedOrgs ?? "Not reported"} at related organizations`],
+        ["Contractual FTE", row.expansionReview.contractualFte ?? "Not established; reported hours alone do not establish FTE."],
+        ["Pay standardization", "Reported pay, without annualizing a partial year or rescaling to a 40-hour week."],
+      ] : []),
       ["Dollar basis shown", state.inflationAdjusted ? `${DATA.priceBasis} · inflation adjustment ${Number(row.cpiFactor || 1).toFixed(4)}×` : "Original reported dollars · no inflation adjustment"],
       ["Inflation reference period", row.cpiPeriod || "Not reported"],
       ["Peer group", row.tier || "Not classified"],
@@ -4699,6 +4705,10 @@
       ...(row.sourceMissionOperatingModel ? [["Mission / operating model (source wording)", row.sourceMissionOperatingModel]] : []),
       ...(row.sourceReportingRelationship ? [["Reporting line (source wording)", row.sourceReportingRelationship]] : []),
       ["Organization size", `${compactMoney(row.expenses)} expenses · ${row.staff ?? "—"} staff${row.staffFte ? ` (${row.staffFte} full-time equivalents)` : ""}`],
+      ...(row.expansionReview && row.evidenceStream === "incumbents" ? [
+        ["Organization financial period", `${row.expansionReview.taxPeriodBegin || "Not reported"} to ${row.expansionReview.taxPeriodEnd || "Not reported"}`],
+        ["Employee-count basis", row.expansionReview.staffDefinition],
+      ] : []),
       ...(row.filingStaff != null ? [["Employees reported on Form 990", `${row.filingStaff} on Part I, line 5 (${row.staffYear || row.compensationYear})`]] : []),
       ...(row.currentFilingStaff != null ? [["Employees in latest Form 990", `${row.currentFilingStaff} on Part I, line 5 (${row.compensationYear})`]] : []),
       ["Website listed in filing", row.homepageUrl || "Not available in the saved source"],
@@ -4792,15 +4802,22 @@
     details.open = false;
     if (!provenance) return;
 
-    $("#dialog-provenance-confidence").textContent = `${humanizeCategory(provenance.confidence || "Unspecified")} confidence in this classification`;
-    $("#dialog-provenance-intro").textContent = [
+    const expansion = provenance.provenanceType === "independent_expansion_review";
+    $("#dialog-provenance-confidence").textContent = expansion ? provenance.confidence
+      : `${humanizeCategory(provenance.confidence || "Unspecified")} confidence in this classification`;
+    $("#dialog-provenance-intro").textContent = expansion
+      ? "Organization categories reuse reviewed employer profiles where available. Role scope is assessed separately from disclosed pay."
+      : [
       "These categories were assigned without using pay.",
       provenance.caveats ? `Important note: ${provenance.caveats}` : "",
     ].filter(Boolean).join(" ");
 
     const records = $("#dialog-provenance-records");
     records.replaceChildren();
-    const categories = [
+    const categories = expansion ? [
+      ["Role classification", row.titleGroup, row.positionTaxonomy.classificationRule, row.positionTaxonomy.methodologyPath],
+      ["Source verification", row.sourceType, row.expansionReview.verification, row.sourceUrl],
+    ] : [
       ["Peer group", [provenance.tier.value, provenance.tier.label].filter(Boolean).join(" · "), provenance.tier.rationale, provenance.tier.citation],
       ["Effective Altruism", provenance.ea.value || "Not classified", provenance.ea.rationale, provenance.ea.citation],
       ["Organization type", [provenance.structure.expected && `Expected type: ${provenance.structure.expected}`, provenance.structure.observationFlag && `Record flag: ${provenance.structure.observationFlag}`].filter(Boolean).join(" · ") || "Not classified", provenance.structure.rationale, provenance.structure.citation],
@@ -4848,7 +4865,9 @@
 
     const links = $("#dialog-provenance-links");
     links.replaceChildren();
-    const provenanceLinks = [
+    const provenanceLinks = expansion ? [
+      ["Compensation integration audit", DATA.categoryExplainers.compensationExpansionAuditPath],
+    ] : [
       ["Category definitions", DATA.categoryExplainers.dictionaryPath],
       ["Reasons for each row (CSV)", DATA.categoryExplainers.rationalesPath],
       ["How categories were assigned", DATA.categoryExplainers.methodologyPath],
@@ -5259,7 +5278,7 @@
     refs.chartViewContent.setAttribute("aria-labelledby", `chart-tab-${state.view}`);
     const roleLabel = positionDefinition().pageLabel;
     refs.sampleDescription.textContent = {
-      primary: `${positionDefinition().expansion ? "Reviewed disclosed" : "Reviewed full-year"} ${roleLabel} pay records used in the main benchmark.`,
+      primary: `Reviewed ${roleLabel} pay records used in the main benchmark.`,
       sensitivity: "Recommended records plus broader comparisons, including unresolved CEO-hours cases.",
       clean: "Recommended records from organization types most similar to RP.",
       tierA: "Only the closest Form 990 peers and job-posting matches.",

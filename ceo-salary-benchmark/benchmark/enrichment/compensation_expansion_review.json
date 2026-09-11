@@ -1329,8 +1329,8 @@
       "positionKey": "research_program_manager",
       "low": 80000,
       "high": 90000,
-      "defaultIncluded": true,
-      "reason": "Research-initiative role with participant relationships, data collection, protocol/IRB and project delivery; no employee line management evidence. PDF does not establish weekly hours or FTE. Reviewed as research-program delivery, not research-team line management. Deadline 2026-09-11."
+      "defaultIncluded": false,
+      "reason": "Research-initiative role with participant relationships, data collection, protocol/IRB and project delivery; no employee line management evidence. PDF does not establish weekly hours or FTE. Reviewed as research-program delivery, not research-team line management. Deadline 2026-09-11. Sensitivity only: employment fraction for the advertised range is unresolved (salary/benefits section, PDF page 4); no FTE rescaling applied."
     },
     "AD::r12:ISRG:finance-manager-2021": {
       "path": "benchmark/sources/native/compensation_expansion/a6caf2e72656e368b754.html",
@@ -1476,78 +1476,300 @@
       "path": "benchmark/sources/native/compensation_expansion/788504a8a7d606571a5e.xml",
       "sha256": "788504a8a7d606571a5e0696a02e2b95c25377f8e7b0cf9930ed494070897c30",
       "url": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202601359349300310_public.xml",
-      "reason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[1]; named row; columns D/E/F=(1327657, 0, 42574); hours=40.00",
-      "contextVerified": false,
+      "reason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[1]; named row; columns D/E/F=(1327657, 0, 42574); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML.",
+      "contextVerified": true,
       "year": 2024,
       "recoveredBase": {
         "locator": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[1]",
         "filer": 977657,
         "related": 0
+      },
+      "nativeLocators": {
+        "partVII": "Return/ReturnData/IRS990/Form990PartVIISectionAGrp[1]",
+        "scheduleJ": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[1]"
+      },
+      "contextVerification": {
+        "reviewDate": "2026-09-10",
+        "fields": {
+          "ein": {
+            "tag": "ReturnHeader/Filer/EIN",
+            "value": "530196577"
+          },
+          "expenses_nominal_usd": {
+            "tag": "ReturnData/IRS990/CYTotalExpensesAmt",
+            "value": 107734507
+          },
+          "filing_employees": {
+            "tag": "ReturnData/IRS990/TotalEmployeeCnt",
+            "value": 603
+          },
+          "revenue_nominal_usd": {
+            "tag": "ReturnData/IRS990/CYTotalRevenueAmt",
+            "value": 115659701
+          },
+          "tax_period_begin": {
+            "tag": "ReturnHeader/TaxPeriodBeginDt",
+            "value": "2024-07-01"
+          },
+          "tax_period_end": {
+            "tag": "ReturnHeader/TaxPeriodEndDt",
+            "value": "2025-06-30"
+          },
+          "tax_year": {
+            "tag": "ReturnHeader/TaxYr",
+            "value": "2024"
+          }
+        }
       }
     },
     "new:Brookings:FY2025::jonathandschwartz": {
       "path": "benchmark/sources/native/compensation_expansion/788504a8a7d606571a5e.xml",
       "sha256": "788504a8a7d606571a5e0696a02e2b95c25377f8e7b0cf9930ed494070897c30",
       "url": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202601359349300310_public.xml",
-      "reason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[2]; named row; columns D/E/F=(660245, 0, 91441); hours=40.00",
-      "contextVerified": false,
+      "reason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[2]; named row; columns D/E/F=(660245, 0, 91441); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML.",
+      "contextVerified": true,
       "year": 2024,
       "recoveredBase": {
         "locator": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[2]",
         "filer": 628745,
         "related": 0
+      },
+      "nativeLocators": {
+        "partVII": "Return/ReturnData/IRS990/Form990PartVIISectionAGrp[2]",
+        "scheduleJ": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[2]"
+      },
+      "contextVerification": {
+        "reviewDate": "2026-09-10",
+        "fields": {
+          "ein": {
+            "tag": "ReturnHeader/Filer/EIN",
+            "value": "530196577"
+          },
+          "expenses_nominal_usd": {
+            "tag": "ReturnData/IRS990/CYTotalExpensesAmt",
+            "value": 107734507
+          },
+          "filing_employees": {
+            "tag": "ReturnData/IRS990/TotalEmployeeCnt",
+            "value": 603
+          },
+          "revenue_nominal_usd": {
+            "tag": "ReturnData/IRS990/CYTotalRevenueAmt",
+            "value": 115659701
+          },
+          "tax_period_begin": {
+            "tag": "ReturnHeader/TaxPeriodBeginDt",
+            "value": "2024-07-01"
+          },
+          "tax_period_end": {
+            "tag": "ReturnHeader/TaxPeriodEndDt",
+            "value": "2025-06-30"
+          },
+          "tax_year": {
+            "tag": "ReturnHeader/TaxYr",
+            "value": "2024"
+          }
+        }
       }
     },
     "new:Brookings:FY2025::williamgale": {
       "path": "benchmark/sources/native/compensation_expansion/788504a8a7d606571a5e.xml",
       "sha256": "788504a8a7d606571a5e0696a02e2b95c25377f8e7b0cf9930ed494070897c30",
       "url": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202601359349300310_public.xml",
-      "reason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[4]; named row; columns D/E/F=(520695, 0, 82314); hours=40.00",
-      "contextVerified": false,
+      "reason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[4]; named row; columns D/E/F=(520695, 0, 82314); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML.",
+      "contextVerified": true,
       "year": 2024,
       "recoveredBase": {
         "locator": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[4]",
         "filer": 496045,
         "related": 0
+      },
+      "nativeLocators": {
+        "partVII": "Return/ReturnData/IRS990/Form990PartVIISectionAGrp[4]",
+        "scheduleJ": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[4]"
+      },
+      "contextVerification": {
+        "reviewDate": "2026-09-10",
+        "fields": {
+          "ein": {
+            "tag": "ReturnHeader/Filer/EIN",
+            "value": "530196577"
+          },
+          "expenses_nominal_usd": {
+            "tag": "ReturnData/IRS990/CYTotalExpensesAmt",
+            "value": 107734507
+          },
+          "filing_employees": {
+            "tag": "ReturnData/IRS990/TotalEmployeeCnt",
+            "value": 603
+          },
+          "revenue_nominal_usd": {
+            "tag": "ReturnData/IRS990/CYTotalRevenueAmt",
+            "value": 115659701
+          },
+          "tax_period_begin": {
+            "tag": "ReturnHeader/TaxPeriodBeginDt",
+            "value": "2024-07-01"
+          },
+          "tax_period_end": {
+            "tag": "ReturnHeader/TaxPeriodEndDt",
+            "value": "2025-06-30"
+          },
+          "tax_year": {
+            "tag": "ReturnHeader/TaxYr",
+            "value": "2024"
+          }
+        }
       }
     },
     "new:Brookings:FY2025::xavierbriggs": {
       "path": "benchmark/sources/native/compensation_expansion/788504a8a7d606571a5e.xml",
       "sha256": "788504a8a7d606571a5e0696a02e2b95c25377f8e7b0cf9930ed494070897c30",
       "url": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202601359349300310_public.xml",
-      "reason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[8]; named row; columns D/E/F=(369582, 0, 97505); hours=40.00",
-      "contextVerified": false,
+      "reason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[8]; named row; columns D/E/F=(369582, 0, 97505); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML.",
+      "contextVerified": true,
       "year": 2024,
       "recoveredBase": {
         "locator": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[8]",
         "filer": 369582,
         "related": 0
+      },
+      "nativeLocators": {
+        "partVII": "Return/ReturnData/IRS990/Form990PartVIISectionAGrp[8]",
+        "scheduleJ": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[8]"
+      },
+      "contextVerification": {
+        "reviewDate": "2026-09-10",
+        "fields": {
+          "ein": {
+            "tag": "ReturnHeader/Filer/EIN",
+            "value": "530196577"
+          },
+          "expenses_nominal_usd": {
+            "tag": "ReturnData/IRS990/CYTotalExpensesAmt",
+            "value": 107734507
+          },
+          "filing_employees": {
+            "tag": "ReturnData/IRS990/TotalEmployeeCnt",
+            "value": 603
+          },
+          "revenue_nominal_usd": {
+            "tag": "ReturnData/IRS990/CYTotalRevenueAmt",
+            "value": 115659701
+          },
+          "tax_period_begin": {
+            "tag": "ReturnHeader/TaxPeriodBeginDt",
+            "value": "2024-07-01"
+          },
+          "tax_period_end": {
+            "tag": "ReturnHeader/TaxPeriodEndDt",
+            "value": "2025-06-30"
+          },
+          "tax_year": {
+            "tag": "ReturnHeader/TaxYr",
+            "value": "2024"
+          }
+        }
       }
     },
     "new:Brookings:FY2025::wendyedelberg": {
       "path": "benchmark/sources/native/compensation_expansion/788504a8a7d606571a5e.xml",
       "sha256": "788504a8a7d606571a5e0696a02e2b95c25377f8e7b0cf9930ed494070897c30",
       "url": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202601359349300310_public.xml",
-      "reason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[14]; named row; columns D/E/F=(322210, 0, 102414); hours=40.00",
-      "contextVerified": false,
+      "reason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[14]; named row; columns D/E/F=(322210, 0, 102414); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML.",
+      "contextVerified": true,
       "year": 2024,
       "recoveredBase": {
         "locator": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[14]",
         "filer": 318210,
         "related": 0
+      },
+      "nativeLocators": {
+        "partVII": "Return/ReturnData/IRS990/Form990PartVIISectionAGrp[14]",
+        "scheduleJ": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[14]"
+      },
+      "contextVerification": {
+        "reviewDate": "2026-09-10",
+        "fields": {
+          "ein": {
+            "tag": "ReturnHeader/Filer/EIN",
+            "value": "530196577"
+          },
+          "expenses_nominal_usd": {
+            "tag": "ReturnData/IRS990/CYTotalExpensesAmt",
+            "value": 107734507
+          },
+          "filing_employees": {
+            "tag": "ReturnData/IRS990/TotalEmployeeCnt",
+            "value": 603
+          },
+          "revenue_nominal_usd": {
+            "tag": "ReturnData/IRS990/CYTotalRevenueAmt",
+            "value": 115659701
+          },
+          "tax_period_begin": {
+            "tag": "ReturnHeader/TaxPeriodBeginDt",
+            "value": "2024-07-01"
+          },
+          "tax_period_end": {
+            "tag": "ReturnHeader/TaxPeriodEndDt",
+            "value": "2025-06-30"
+          },
+          "tax_year": {
+            "tag": "ReturnHeader/TaxYr",
+            "value": "2024"
+          }
+        }
       }
     },
     "new:Brookings:FY2025::elisabethdonahue": {
       "path": "benchmark/sources/native/compensation_expansion/788504a8a7d606571a5e.xml",
       "sha256": "788504a8a7d606571a5e0696a02e2b95c25377f8e7b0cf9930ed494070897c30",
       "url": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202601359349300310_public.xml",
-      "reason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[16]; named row; columns D/E/F=(315043, 0, 92758); hours=40.00",
-      "contextVerified": false,
+      "reason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[16]; named row; columns D/E/F=(315043, 0, 92758); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML.",
+      "contextVerified": true,
       "year": 2024,
       "recoveredBase": {
         "locator": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[16]",
         "filer": 285043,
         "related": 0
+      },
+      "nativeLocators": {
+        "partVII": "Return/ReturnData/IRS990/Form990PartVIISectionAGrp[16]",
+        "scheduleJ": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[16]"
+      },
+      "contextVerification": {
+        "reviewDate": "2026-09-10",
+        "fields": {
+          "ein": {
+            "tag": "ReturnHeader/Filer/EIN",
+            "value": "530196577"
+          },
+          "expenses_nominal_usd": {
+            "tag": "ReturnData/IRS990/CYTotalExpensesAmt",
+            "value": 107734507
+          },
+          "filing_employees": {
+            "tag": "ReturnData/IRS990/TotalEmployeeCnt",
+            "value": 603
+          },
+          "revenue_nominal_usd": {
+            "tag": "ReturnData/IRS990/CYTotalRevenueAmt",
+            "value": 115659701
+          },
+          "tax_period_begin": {
+            "tag": "ReturnHeader/TaxPeriodBeginDt",
+            "value": "2024-07-01"
+          },
+          "tax_period_end": {
+            "tag": "ReturnHeader/TaxPeriodEndDt",
+            "value": "2025-06-30"
+          },
+          "tax_year": {
+            "tag": "ReturnHeader/TaxYr",
+            "value": "2024"
+          }
+        }
       }
     },
     "new:GiveWell:2024::eliehassenfeld": {
@@ -1642,57 +1864,316 @@
       "path": "benchmark/sources/native/compensation_expansion/13442323da19ed45cfa4.xml",
       "sha256": "13442323da19ed45cfa49d00fb19ebd2a9a9618c9ae8e75e67070ee83c038d2b",
       "url": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202532419349300218_public.xml",
-      "reason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[3]; named row; columns D/E/F=(711629, 0, 54249); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[1]; named row; base=711629; total=765878",
-      "contextVerified": false,
-      "year": 2024
+      "reason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[3]; named row; columns D/E/F=(711629, 0, 54249); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[1]; named row; base=711629; total=765878 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML.",
+      "contextVerified": true,
+      "year": 2024,
+      "nativeLocators": {
+        "partVII": "Return/ReturnData/IRS990/Form990PartVIISectionAGrp[3]",
+        "scheduleJ": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[1]"
+      },
+      "contextVerification": {
+        "reviewDate": "2026-09-10",
+        "fields": {
+          "ein": {
+            "tag": "ReturnHeader/Filer/EIN",
+            "value": "237432162"
+          },
+          "expenses_nominal_usd": {
+            "tag": "ReturnData/IRS990/CYTotalExpensesAmt",
+            "value": 47370866
+          },
+          "filing_employees": {
+            "tag": "ReturnData/IRS990/TotalEmployeeCnt",
+            "value": 317
+          },
+          "revenue_nominal_usd": {
+            "tag": "ReturnData/IRS990/CYTotalRevenueAmt",
+            "value": 62821387
+          },
+          "tax_period_begin": {
+            "tag": "ReturnHeader/TaxPeriodBeginDt",
+            "value": "2024-04-01"
+          },
+          "tax_period_end": {
+            "tag": "ReturnHeader/TaxPeriodEndDt",
+            "value": "2025-03-31"
+          },
+          "tax_year": {
+            "tag": "ReturnHeader/TaxYr",
+            "value": "2024"
+          }
+        }
+      }
     },
     "v4:CATO:FY2025::norbertmichel": {
       "path": "benchmark/sources/native/compensation_expansion/13442323da19ed45cfa4.xml",
       "sha256": "13442323da19ed45cfa49d00fb19ebd2a9a9618c9ae8e75e67070ee83c038d2b",
       "url": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202532419349300218_public.xml",
-      "reason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[22]; named row; columns D/E/F=(247637, 0, 40536); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[6]; named row; base=235137; total=288173",
-      "contextVerified": false,
-      "year": 2024
+      "reason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[22]; named row; columns D/E/F=(247637, 0, 40536); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[6]; named row; base=235137; total=288173 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML.",
+      "contextVerified": true,
+      "year": 2024,
+      "nativeLocators": {
+        "partVII": "Return/ReturnData/IRS990/Form990PartVIISectionAGrp[22]",
+        "scheduleJ": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[6]"
+      },
+      "contextVerification": {
+        "reviewDate": "2026-09-10",
+        "fields": {
+          "ein": {
+            "tag": "ReturnHeader/Filer/EIN",
+            "value": "237432162"
+          },
+          "expenses_nominal_usd": {
+            "tag": "ReturnData/IRS990/CYTotalExpensesAmt",
+            "value": 47370866
+          },
+          "filing_employees": {
+            "tag": "ReturnData/IRS990/TotalEmployeeCnt",
+            "value": 317
+          },
+          "revenue_nominal_usd": {
+            "tag": "ReturnData/IRS990/CYTotalRevenueAmt",
+            "value": 62821387
+          },
+          "tax_period_begin": {
+            "tag": "ReturnHeader/TaxPeriodBeginDt",
+            "value": "2024-04-01"
+          },
+          "tax_period_end": {
+            "tag": "ReturnHeader/TaxPeriodEndDt",
+            "value": "2025-03-31"
+          },
+          "tax_year": {
+            "tag": "ReturnHeader/TaxYr",
+            "value": "2024"
+          }
+        }
+      }
     },
     "v4:CATO:FY2025::scottlincicome": {
       "path": "benchmark/sources/native/compensation_expansion/13442323da19ed45cfa4.xml",
       "sha256": "13442323da19ed45cfa49d00fb19ebd2a9a9618c9ae8e75e67070ee83c038d2b",
       "url": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202532419349300218_public.xml",
-      "reason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[23]; named row; columns D/E/F=(245178, 0, 38826); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[5]; named row; base=234678; total=284004",
-      "contextVerified": false,
-      "year": 2024
+      "reason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[23]; named row; columns D/E/F=(245178, 0, 38826); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[5]; named row; base=234678; total=284004 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML.",
+      "contextVerified": true,
+      "year": 2024,
+      "nativeLocators": {
+        "partVII": "Return/ReturnData/IRS990/Form990PartVIISectionAGrp[23]",
+        "scheduleJ": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[5]"
+      },
+      "contextVerification": {
+        "reviewDate": "2026-09-10",
+        "fields": {
+          "ein": {
+            "tag": "ReturnHeader/Filer/EIN",
+            "value": "237432162"
+          },
+          "expenses_nominal_usd": {
+            "tag": "ReturnData/IRS990/CYTotalExpensesAmt",
+            "value": 47370866
+          },
+          "filing_employees": {
+            "tag": "ReturnData/IRS990/TotalEmployeeCnt",
+            "value": 317
+          },
+          "revenue_nominal_usd": {
+            "tag": "ReturnData/IRS990/CYTotalRevenueAmt",
+            "value": 62821387
+          },
+          "tax_period_begin": {
+            "tag": "ReturnHeader/TaxPeriodBeginDt",
+            "value": "2024-04-01"
+          },
+          "tax_period_end": {
+            "tag": "ReturnHeader/TaxPeriodEndDt",
+            "value": "2025-03-31"
+          },
+          "tax_year": {
+            "tag": "ReturnHeader/TaxYr",
+            "value": "2024"
+          }
+        }
+      }
     },
     "v4:CATO:FY2025::genehealy": {
       "path": "benchmark/sources/native/compensation_expansion/13442323da19ed45cfa4.xml",
       "sha256": "13442323da19ed45cfa49d00fb19ebd2a9a9618c9ae8e75e67070ee83c038d2b",
       "url": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202532419349300218_public.xml",
-      "reason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[20]; named row; columns D/E/F=(239165, 0, 40022); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[7]; named row; base=229165; total=279187",
-      "contextVerified": false,
-      "year": 2024
+      "reason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[20]; named row; columns D/E/F=(239165, 0, 40022); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[7]; named row; base=229165; total=279187 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML.",
+      "contextVerified": true,
+      "year": 2024,
+      "nativeLocators": {
+        "partVII": "Return/ReturnData/IRS990/Form990PartVIISectionAGrp[20]",
+        "scheduleJ": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[7]"
+      },
+      "contextVerification": {
+        "reviewDate": "2026-09-10",
+        "fields": {
+          "ein": {
+            "tag": "ReturnHeader/Filer/EIN",
+            "value": "237432162"
+          },
+          "expenses_nominal_usd": {
+            "tag": "ReturnData/IRS990/CYTotalExpensesAmt",
+            "value": 47370866
+          },
+          "filing_employees": {
+            "tag": "ReturnData/IRS990/TotalEmployeeCnt",
+            "value": 317
+          },
+          "revenue_nominal_usd": {
+            "tag": "ReturnData/IRS990/CYTotalRevenueAmt",
+            "value": 62821387
+          },
+          "tax_period_begin": {
+            "tag": "ReturnHeader/TaxPeriodBeginDt",
+            "value": "2024-04-01"
+          },
+          "tax_period_end": {
+            "tag": "ReturnHeader/TaxPeriodEndDt",
+            "value": "2025-03-31"
+          },
+          "tax_year": {
+            "tag": "ReturnHeader/TaxYr",
+            "value": "2024"
+          }
+        }
+      }
     },
     "v4:CATO:FY2025::michaelcannon": {
       "path": "benchmark/sources/native/compensation_expansion/13442323da19ed45cfa4.xml",
       "sha256": "13442323da19ed45cfa49d00fb19ebd2a9a9618c9ae8e75e67070ee83c038d2b",
       "url": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202532419349300218_public.xml",
-      "reason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[21]; named row; columns D/E/F=(225730, 0, 24930); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[9]; named row; base=222230; total=250660",
-      "contextVerified": false,
-      "year": 2024
+      "reason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[21]; named row; columns D/E/F=(225730, 0, 24930); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[9]; named row; base=222230; total=250660 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML.",
+      "contextVerified": true,
+      "year": 2024,
+      "nativeLocators": {
+        "partVII": "Return/ReturnData/IRS990/Form990PartVIISectionAGrp[21]",
+        "scheduleJ": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[9]"
+      },
+      "contextVerification": {
+        "reviewDate": "2026-09-10",
+        "fields": {
+          "ein": {
+            "tag": "ReturnHeader/Filer/EIN",
+            "value": "237432162"
+          },
+          "expenses_nominal_usd": {
+            "tag": "ReturnData/IRS990/CYTotalExpensesAmt",
+            "value": 47370866
+          },
+          "filing_employees": {
+            "tag": "ReturnData/IRS990/TotalEmployeeCnt",
+            "value": 317
+          },
+          "revenue_nominal_usd": {
+            "tag": "ReturnData/IRS990/CYTotalRevenueAmt",
+            "value": 62821387
+          },
+          "tax_period_begin": {
+            "tag": "ReturnHeader/TaxPeriodBeginDt",
+            "value": "2024-04-01"
+          },
+          "tax_period_end": {
+            "tag": "ReturnHeader/TaxPeriodEndDt",
+            "value": "2025-03-31"
+          },
+          "tax_year": {
+            "tag": "ReturnHeader/TaxYr",
+            "value": "2024"
+          }
+        }
+      }
     },
     "v4:CATO:FY2025::marissadelgado": {
       "path": "benchmark/sources/native/compensation_expansion/13442323da19ed45cfa4.xml",
       "sha256": "13442323da19ed45cfa49d00fb19ebd2a9a9618c9ae8e75e67070ee83c038d2b",
       "url": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202532419349300218_public.xml",
-      "reason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[16]; named row; columns D/E/F=(216517, 0, 32097); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[2]; named row; base=216517; total=248614",
-      "contextVerified": false,
-      "year": 2024
+      "reason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[16]; named row; columns D/E/F=(216517, 0, 32097); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[2]; named row; base=216517; total=248614 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML.",
+      "contextVerified": true,
+      "year": 2024,
+      "nativeLocators": {
+        "partVII": "Return/ReturnData/IRS990/Form990PartVIISectionAGrp[16]",
+        "scheduleJ": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[2]"
+      },
+      "contextVerification": {
+        "reviewDate": "2026-09-10",
+        "fields": {
+          "ein": {
+            "tag": "ReturnHeader/Filer/EIN",
+            "value": "237432162"
+          },
+          "expenses_nominal_usd": {
+            "tag": "ReturnData/IRS990/CYTotalExpensesAmt",
+            "value": 47370866
+          },
+          "filing_employees": {
+            "tag": "ReturnData/IRS990/TotalEmployeeCnt",
+            "value": 317
+          },
+          "revenue_nominal_usd": {
+            "tag": "ReturnData/IRS990/CYTotalRevenueAmt",
+            "value": 62821387
+          },
+          "tax_period_begin": {
+            "tag": "ReturnHeader/TaxPeriodBeginDt",
+            "value": "2024-04-01"
+          },
+          "tax_period_end": {
+            "tag": "ReturnHeader/TaxPeriodEndDt",
+            "value": "2025-03-31"
+          },
+          "tax_year": {
+            "tag": "ReturnHeader/TaxYr",
+            "value": "2024"
+          }
+        }
+      }
     },
     "v4:CATO:FY2025::harrisonmoar": {
       "path": "benchmark/sources/native/compensation_expansion/13442323da19ed45cfa4.xml",
       "sha256": "13442323da19ed45cfa49d00fb19ebd2a9a9618c9ae8e75e67070ee83c038d2b",
       "url": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202532419349300218_public.xml",
-      "reason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[17]; named row; columns D/E/F=(219948, 0, 24899); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[4]; named row; base=219948; total=244847",
-      "contextVerified": false,
-      "year": 2024
+      "reason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[17]; named row; columns D/E/F=(219948, 0, 24899); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[4]; named row; base=219948; total=244847 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML.",
+      "contextVerified": true,
+      "year": 2024,
+      "nativeLocators": {
+        "partVII": "Return/ReturnData/IRS990/Form990PartVIISectionAGrp[17]",
+        "scheduleJ": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[4]"
+      },
+      "contextVerification": {
+        "reviewDate": "2026-09-10",
+        "fields": {
+          "ein": {
+            "tag": "ReturnHeader/Filer/EIN",
+            "value": "237432162"
+          },
+          "expenses_nominal_usd": {
+            "tag": "ReturnData/IRS990/CYTotalExpensesAmt",
+            "value": 47370866
+          },
+          "filing_employees": {
+            "tag": "ReturnData/IRS990/TotalEmployeeCnt",
+            "value": 317
+          },
+          "revenue_nominal_usd": {
+            "tag": "ReturnData/IRS990/CYTotalRevenueAmt",
+            "value": 62821387
+          },
+          "tax_period_begin": {
+            "tag": "ReturnHeader/TaxPeriodBeginDt",
+            "value": "2024-04-01"
+          },
+          "tax_period_end": {
+            "tag": "ReturnHeader/TaxPeriodEndDt",
+            "value": "2025-03-31"
+          },
+          "tax_year": {
+            "tag": "ReturnHeader/TaxYr",
+            "value": "2024"
+          }
+        }
+      }
     },
     "v5:UCS:FY2025::suzanneshaw": {
       "path": "benchmark/sources/native/compensation_expansion/84420fb62eae440007d7.pdf",

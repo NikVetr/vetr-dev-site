@@ -268,10 +268,10 @@
       "menuGroup": "Managers",
       "expansion": true,
       "defaultMeasure": "base",
-      "defaultSample": "primary",
-      "defaultInflationAdjusted": true,
+      "defaultSample": "observed",
+      "defaultInflationAdjusted": false,
       "supportLevel": "exploratory",
-      "description": "Research/program delivery managers whose job combines research operations and project delivery. 1 usable pay records from 1 selected peer organizations. Small exploratory reference set. Disclosed employee pay and advertised ranges are separate evidence streams; distributions describe the selected records.",
+      "description": "Research/program delivery managers whose job combines research operations and project delivery. 0 usable pay records from 0 selected peer organizations. Small exploratory reference set. Disclosed employee pay and advertised ranges are separate evidence streams; distributions describe the selected records.",
       "methodologyPath": "benchmark/enrichment/compensation_expansion_audit.md"
     },
     {
@@ -14231,9 +14231,9 @@
       "location": "Not reported",
       "remoteStatus": "Not reported",
       "structure": "Not classified",
-      "revenue": null,
-      "expenses": null,
-      "staff": null,
+      "revenue": 115659701,
+      "expenses": 107734507,
+      "staff": 603,
       "comparabilityScore": 0,
       "compensationYear": 2024,
       "salary": {
@@ -14253,9 +14253,9 @@
       "founder": false,
       "analysisStatus": "sensitivity_only",
       "auditStatus": "independently reconciled source evidence",
-      "selectionNote": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[1]; named row; columns D/E/F=(1327657, 0, 42574); hours=40.00 Previously missing base pay recovered from the named native Schedule J row. Additional CEO disclosure: selectable in All records; excluded from the frozen model and default CEO cohort. Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
-      "sensitivityOnlyReason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[1]; named row; columns D/E/F=(1327657, 0, 42574); hours=40.00 Previously missing base pay recovered from the named native Schedule J row. Additional CEO disclosure: selectable in All records; excluded from the frozen model and default CEO cohort. Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
-      "evidenceText": "Cecilia Rouse, PRESIDENT. Nominal 2024 USD: Schedule J base $977,657; Part VII reportable cash $1,327,657; total $1,370,231 (Part VII D+E+F). Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[1]; named row; columns D/E/F=(1327657, 0, 42574); hours=40.00 Previously missing base pay recovered from the named native Schedule J row. Additional CEO disclosure: selectable in All records; excluded from the frozen model and default CEO cohort. Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
+      "selectionNote": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[1]; named row; columns D/E/F=(1327657, 0, 42574); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Previously missing base pay recovered from the named native Schedule J row. Additional CEO disclosure: selectable in All records; excluded from the frozen model and default CEO cohort. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
+      "sensitivityOnlyReason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[1]; named row; columns D/E/F=(1327657, 0, 42574); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Previously missing base pay recovered from the named native Schedule J row. Additional CEO disclosure: selectable in All records; excluded from the frozen model and default CEO cohort. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
+      "evidenceText": "Cecilia Rouse, PRESIDENT. Nominal 2024 USD: Schedule J base $977,657; Part VII reportable cash $1,327,657; total $1,370,231 (Part VII D+E+F). Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[1]; named row; columns D/E/F=(1327657, 0, 42574); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Previously missing base pay recovered from the named native Schedule J row. Additional CEO disclosure: selectable in All records; excluded from the frozen model and default CEO cohort. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
       "sourceUrl": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202601359349300310_public.xml",
       "canonicalUrl": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202601359349300310_public.xml",
       "cachedSource": "",
@@ -14268,12 +14268,12 @@
       "categoryProvenance": {
         "provenanceType": "independent_expansion_review",
         "confidence": "Source pay checked; role scope remains disclosure-based",
-        "caveats": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[1]; named row; columns D/E/F=(1327657, 0, 42574); hours=40.00 Previously missing base pay recovered from the named native Schedule J row. Additional CEO disclosure: selectable in All records; excluded from the frozen model and default CEO cohort. Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation."
+        "caveats": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[1]; named row; columns D/E/F=(1327657, 0, 42574); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Previously missing base pay recovered from the named native Schedule J row. Additional CEO disclosure: selectable in All records; excluded from the frozen model and default CEO cohort. Reported annual pay; weekly hours do not establish contractual FTE or a complete year."
       },
       "positionTaxonomy": {
         "classificationRule": "Reviewed chief_executive only; President title alone is insufficient.",
         "confidence": "reviewed",
-        "partViiLocator": "Rendered Form990 page 7, Part VII A, native row 1; person Cecilia Rouse",
+        "partViiLocator": "Return/ReturnData/IRS990/Form990PartVIISectionAGrp[1]",
         "scheduleJLocator": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[1]",
         "methodologyPath": "benchmark/enrichment/compensation_expansion_audit.md"
       },
@@ -14284,7 +14284,7 @@
         "sourceKey": "EXPANSION-788504a8a7d606571a5e",
         "packageObservationId": "new:Brookings:FY2025::ceciliarouse",
         "identity": "788504a8a7d606571a5e0696a02e2b95c25377f8e7b0cf9930ed494070897c30:ceciliarouse",
-        "verification": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[1]; named row; columns D/E/F=(1327657, 0, 42574); hours=40.00",
+        "verification": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[1]; named row; columns D/E/F=(1327657, 0, 42574); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML.",
         "empiricalOnly": true,
         "contractualFte": null,
         "taxPeriodBegin": "2024-07-01",
@@ -14352,9 +14352,9 @@
       "location": "Not reported",
       "remoteStatus": "Not reported",
       "structure": "Not classified",
-      "revenue": null,
-      "expenses": null,
-      "staff": null,
+      "revenue": 115659701,
+      "expenses": 107734507,
+      "staff": 603,
       "comparabilityScore": 0,
       "compensationYear": 2024,
       "salary": {
@@ -14374,9 +14374,9 @@
       "founder": false,
       "analysisStatus": "primary",
       "auditStatus": "independently reconciled source evidence",
-      "selectionNote": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[2]; named row; columns D/E/F=(660245, 0, 91441); hours=40.00 Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
+      "selectionNote": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[2]; named row; columns D/E/F=(660245, 0, 91441); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
       "sensitivityOnlyReason": "",
-      "evidenceText": "Jonathan D Schwartz, GENERAL COUNSEL. Nominal 2024 USD: Schedule J base $628,745; Part VII reportable cash $660,245; total $751,686 (Part VII D+E+F). Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[2]; named row; columns D/E/F=(660245, 0, 91441); hours=40.00 Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
+      "evidenceText": "Jonathan D Schwartz, GENERAL COUNSEL. Nominal 2024 USD: Schedule J base $628,745; Part VII reportable cash $660,245; total $751,686 (Part VII D+E+F). Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[2]; named row; columns D/E/F=(660245, 0, 91441); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
       "sourceUrl": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202601359349300310_public.xml",
       "canonicalUrl": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202601359349300310_public.xml",
       "cachedSource": "",
@@ -14389,12 +14389,12 @@
       "categoryProvenance": {
         "provenanceType": "independent_expansion_review",
         "confidence": "Source pay checked; role scope remains disclosure-based",
-        "caveats": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[2]; named row; columns D/E/F=(660245, 0, 91441); hours=40.00 Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation."
+        "caveats": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[2]; named row; columns D/E/F=(660245, 0, 91441); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year."
       },
       "positionTaxonomy": {
         "classificationRule": "Exclude associate/deputy counsel policy-counsel hybrids and governance-only secretary roles.",
         "confidence": "reviewed",
-        "partViiLocator": "Rendered Form990 page 7, Part VII A, native row 2; person Jonathan D Schwartz",
+        "partViiLocator": "Return/ReturnData/IRS990/Form990PartVIISectionAGrp[2]",
         "scheduleJLocator": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[2]",
         "methodologyPath": "benchmark/enrichment/compensation_expansion_audit.md"
       },
@@ -14405,7 +14405,7 @@
         "sourceKey": "EXPANSION-788504a8a7d606571a5e",
         "packageObservationId": "new:Brookings:FY2025::jonathandschwartz",
         "identity": "788504a8a7d606571a5e0696a02e2b95c25377f8e7b0cf9930ed494070897c30:jonathandschwartz",
-        "verification": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[2]; named row; columns D/E/F=(660245, 0, 91441); hours=40.00",
+        "verification": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[2]; named row; columns D/E/F=(660245, 0, 91441); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML.",
         "empiricalOnly": true,
         "contractualFte": null,
         "taxPeriodBegin": "2024-07-01",
@@ -14473,9 +14473,9 @@
       "location": "Not reported",
       "remoteStatus": "Not reported",
       "structure": "Not classified",
-      "revenue": null,
-      "expenses": null,
-      "staff": null,
+      "revenue": 115659701,
+      "expenses": 107734507,
+      "staff": 603,
       "comparabilityScore": 0,
       "compensationYear": 2024,
       "salary": {
@@ -14495,9 +14495,9 @@
       "founder": false,
       "analysisStatus": "primary",
       "auditStatus": "independently reconciled source evidence",
-      "selectionNote": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[4]; named row; columns D/E/F=(520695, 0, 82314); hours=40.00 Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
+      "selectionNote": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[4]; named row; columns D/E/F=(520695, 0, 82314); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
       "sensitivityOnlyReason": "",
-      "evidenceText": "William Gale, SENIOR FELLOW. Nominal 2024 USD: Schedule J base $496,045; Part VII reportable cash $520,695; total $603,009 (Part VII D+E+F). Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[4]; named row; columns D/E/F=(520695, 0, 82314); hours=40.00 Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
+      "evidenceText": "William Gale, SENIOR FELLOW. Nominal 2024 USD: Schedule J base $496,045; Part VII reportable cash $520,695; total $603,009 (Part VII D+E+F). Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[4]; named row; columns D/E/F=(520695, 0, 82314); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
       "sourceUrl": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202601359349300310_public.xml",
       "canonicalUrl": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202601359349300310_public.xml",
       "cachedSource": "",
@@ -14510,12 +14510,12 @@
       "categoryProvenance": {
         "provenanceType": "independent_expansion_review",
         "confidence": "Source pay checked; role scope remains disclosure-based",
-        "caveats": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[4]; named row; columns D/E/F=(520695, 0, 82314); hours=40.00 Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation."
+        "caveats": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[4]; named row; columns D/E/F=(520695, 0, 82314); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year."
       },
       "positionTaxonomy": {
         "classificationRule": "Exclude Fellow/Director hybrids research chairs executives managers and grade-unresolved fellows.",
         "confidence": "reviewed",
-        "partViiLocator": "Rendered Form990 page 7, Part VII A, native row 4; person William Gale",
+        "partViiLocator": "Return/ReturnData/IRS990/Form990PartVIISectionAGrp[4]",
         "scheduleJLocator": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[4]",
         "methodologyPath": "benchmark/enrichment/compensation_expansion_audit.md"
       },
@@ -14526,7 +14526,7 @@
         "sourceKey": "EXPANSION-788504a8a7d606571a5e",
         "packageObservationId": "new:Brookings:FY2025::williamgale",
         "identity": "788504a8a7d606571a5e0696a02e2b95c25377f8e7b0cf9930ed494070897c30:williamgale",
-        "verification": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[4]; named row; columns D/E/F=(520695, 0, 82314); hours=40.00",
+        "verification": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[4]; named row; columns D/E/F=(520695, 0, 82314); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML.",
         "empiricalOnly": true,
         "contractualFte": null,
         "taxPeriodBegin": "2024-07-01",
@@ -14594,9 +14594,9 @@
       "location": "Not reported",
       "remoteStatus": "Not reported",
       "structure": "Not classified",
-      "revenue": null,
-      "expenses": null,
-      "staff": null,
+      "revenue": 115659701,
+      "expenses": 107734507,
+      "staff": 603,
       "comparabilityScore": 0,
       "compensationYear": 2024,
       "salary": {
@@ -14616,9 +14616,9 @@
       "founder": false,
       "analysisStatus": "primary",
       "auditStatus": "independently reconciled source evidence",
-      "selectionNote": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[8]; named row; columns D/E/F=(369582, 0, 97505); hours=40.00 Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
+      "selectionNote": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[8]; named row; columns D/E/F=(369582, 0, 97505); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
       "sensitivityOnlyReason": "",
-      "evidenceText": "Xavier Briggs, SENIOR FELLOW. Nominal 2024 USD: Schedule J base $369,582; Part VII reportable cash $369,582; total $467,087 (Part VII D+E+F). Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[8]; named row; columns D/E/F=(369582, 0, 97505); hours=40.00 Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
+      "evidenceText": "Xavier Briggs, SENIOR FELLOW. Nominal 2024 USD: Schedule J base $369,582; Part VII reportable cash $369,582; total $467,087 (Part VII D+E+F). Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[8]; named row; columns D/E/F=(369582, 0, 97505); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
       "sourceUrl": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202601359349300310_public.xml",
       "canonicalUrl": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202601359349300310_public.xml",
       "cachedSource": "",
@@ -14631,12 +14631,12 @@
       "categoryProvenance": {
         "provenanceType": "independent_expansion_review",
         "confidence": "Source pay checked; role scope remains disclosure-based",
-        "caveats": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[8]; named row; columns D/E/F=(369582, 0, 97505); hours=40.00 Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation."
+        "caveats": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[8]; named row; columns D/E/F=(369582, 0, 97505); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year."
       },
       "positionTaxonomy": {
         "classificationRule": "Exclude Fellow/Director hybrids research chairs executives managers and grade-unresolved fellows.",
         "confidence": "reviewed",
-        "partViiLocator": "Rendered Form990 page 7, Part VII A, native row 8; person Xavier Briggs",
+        "partViiLocator": "Return/ReturnData/IRS990/Form990PartVIISectionAGrp[8]",
         "scheduleJLocator": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[8]",
         "methodologyPath": "benchmark/enrichment/compensation_expansion_audit.md"
       },
@@ -14647,7 +14647,7 @@
         "sourceKey": "EXPANSION-788504a8a7d606571a5e",
         "packageObservationId": "new:Brookings:FY2025::xavierbriggs",
         "identity": "788504a8a7d606571a5e0696a02e2b95c25377f8e7b0cf9930ed494070897c30:xavierbriggs",
-        "verification": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[8]; named row; columns D/E/F=(369582, 0, 97505); hours=40.00",
+        "verification": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[8]; named row; columns D/E/F=(369582, 0, 97505); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML.",
         "empiricalOnly": true,
         "contractualFte": null,
         "taxPeriodBegin": "2024-07-01",
@@ -14715,9 +14715,9 @@
       "location": "Not reported",
       "remoteStatus": "Not reported",
       "structure": "Not classified",
-      "revenue": null,
-      "expenses": null,
-      "staff": null,
+      "revenue": 115659701,
+      "expenses": 107734507,
+      "staff": 603,
       "comparabilityScore": 0,
       "compensationYear": 2024,
       "salary": {
@@ -14737,9 +14737,9 @@
       "founder": false,
       "analysisStatus": "primary",
       "auditStatus": "independently reconciled source evidence",
-      "selectionNote": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[14]; named row; columns D/E/F=(322210, 0, 102414); hours=40.00 Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
+      "selectionNote": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[14]; named row; columns D/E/F=(322210, 0, 102414); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
       "sensitivityOnlyReason": "",
-      "evidenceText": "Wendy Edelberg, SENIOR FELLOW. Nominal 2024 USD: Schedule J base $318,210; Part VII reportable cash $322,210; total $424,624 (Part VII D+E+F). Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[14]; named row; columns D/E/F=(322210, 0, 102414); hours=40.00 Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
+      "evidenceText": "Wendy Edelberg, SENIOR FELLOW. Nominal 2024 USD: Schedule J base $318,210; Part VII reportable cash $322,210; total $424,624 (Part VII D+E+F). Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[14]; named row; columns D/E/F=(322210, 0, 102414); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
       "sourceUrl": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202601359349300310_public.xml",
       "canonicalUrl": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202601359349300310_public.xml",
       "cachedSource": "",
@@ -14752,12 +14752,12 @@
       "categoryProvenance": {
         "provenanceType": "independent_expansion_review",
         "confidence": "Source pay checked; role scope remains disclosure-based",
-        "caveats": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[14]; named row; columns D/E/F=(322210, 0, 102414); hours=40.00 Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation."
+        "caveats": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[14]; named row; columns D/E/F=(322210, 0, 102414); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year."
       },
       "positionTaxonomy": {
         "classificationRule": "Exclude Fellow/Director hybrids research chairs executives managers and grade-unresolved fellows.",
         "confidence": "reviewed",
-        "partViiLocator": "Rendered Form990 page 7, Part VII A, native row 14; person Wendy Edelberg",
+        "partViiLocator": "Return/ReturnData/IRS990/Form990PartVIISectionAGrp[14]",
         "scheduleJLocator": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[14]",
         "methodologyPath": "benchmark/enrichment/compensation_expansion_audit.md"
       },
@@ -14768,7 +14768,7 @@
         "sourceKey": "EXPANSION-788504a8a7d606571a5e",
         "packageObservationId": "new:Brookings:FY2025::wendyedelberg",
         "identity": "788504a8a7d606571a5e0696a02e2b95c25377f8e7b0cf9930ed494070897c30:wendyedelberg",
-        "verification": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[14]; named row; columns D/E/F=(322210, 0, 102414); hours=40.00",
+        "verification": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[14]; named row; columns D/E/F=(322210, 0, 102414); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML.",
         "empiricalOnly": true,
         "contractualFte": null,
         "taxPeriodBegin": "2024-07-01",
@@ -14836,9 +14836,9 @@
       "location": "Not reported",
       "remoteStatus": "Not reported",
       "structure": "Not classified",
-      "revenue": null,
-      "expenses": null,
-      "staff": null,
+      "revenue": 115659701,
+      "expenses": 107734507,
+      "staff": 603,
       "comparabilityScore": 0,
       "compensationYear": 2024,
       "salary": {
@@ -14858,9 +14858,9 @@
       "founder": false,
       "analysisStatus": "primary",
       "auditStatus": "independently reconciled source evidence",
-      "selectionNote": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[16]; named row; columns D/E/F=(315043, 0, 92758); hours=40.00 Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
+      "selectionNote": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[16]; named row; columns D/E/F=(315043, 0, 92758); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
       "sensitivityOnlyReason": "",
-      "evidenceText": "Elisabeth Donahue, VP OF COMM & PA. Nominal 2024 USD: Schedule J base $285,043; Part VII reportable cash $315,043; total $407,801 (Part VII D+E+F). Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[16]; named row; columns D/E/F=(315043, 0, 92758); hours=40.00 Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
+      "evidenceText": "Elisabeth Donahue, VP OF COMM & PA. Nominal 2024 USD: Schedule J base $285,043; Part VII reportable cash $315,043; total $407,801 (Part VII D+E+F). Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[16]; named row; columns D/E/F=(315043, 0, 92758); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
       "sourceUrl": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202601359349300310_public.xml",
       "canonicalUrl": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202601359349300310_public.xml",
       "cachedSource": "",
@@ -14873,12 +14873,12 @@
       "categoryProvenance": {
         "provenanceType": "independent_expansion_review",
         "confidence": "Source pay checked; role scope remains disclosure-based",
-        "caveats": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[16]; named row; columns D/E/F=(315043, 0, 92758); hours=40.00 Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation."
+        "caveats": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[16]; named row; columns D/E/F=(315043, 0, 92758); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Previously missing base pay recovered from the named native Schedule J row. Reported annual pay; weekly hours do not establish contractual FTE or a complete year."
       },
       "positionTaxonomy": {
         "classificationRule": "Exclude communications/strategy hybrids and generic Vice Presidents.",
         "confidence": "reviewed",
-        "partViiLocator": "Rendered Form990 page 7, Part VII A, native row 16; person Elisabeth Donahue",
+        "partViiLocator": "Return/ReturnData/IRS990/Form990PartVIISectionAGrp[16]",
         "scheduleJLocator": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[16]",
         "methodologyPath": "benchmark/enrichment/compensation_expansion_audit.md"
       },
@@ -14889,7 +14889,7 @@
         "sourceKey": "EXPANSION-788504a8a7d606571a5e",
         "packageObservationId": "new:Brookings:FY2025::elisabethdonahue",
         "identity": "788504a8a7d606571a5e0696a02e2b95c25377f8e7b0cf9930ed494070897c30:elisabethdonahue",
-        "verification": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[16]; named row; columns D/E/F=(315043, 0, 92758); hours=40.00",
+        "verification": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[16]; named row; columns D/E/F=(315043, 0, 92758); hours=40.00 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML.",
         "empiricalOnly": true,
         "contractualFte": null,
         "taxPeriodBegin": "2024-07-01",
@@ -18177,9 +18177,9 @@
       "location": "Not reported",
       "remoteStatus": "Not reported",
       "structure": "Not classified",
-      "revenue": null,
-      "expenses": null,
-      "staff": null,
+      "revenue": 62821387,
+      "expenses": 47370866,
+      "staff": 317,
       "comparabilityScore": 0,
       "compensationYear": 2024,
       "salary": {
@@ -18199,9 +18199,9 @@
       "founder": false,
       "analysisStatus": "sensitivity_only",
       "auditStatus": "independently reconciled source evidence",
-      "selectionNote": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[3]; named row; columns D/E/F=(711629, 0, 54249); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[1]; named row; base=711629; total=765878 Additional CEO disclosure: selectable in All records; excluded from the frozen model and default CEO cohort. Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
-      "sensitivityOnlyReason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[3]; named row; columns D/E/F=(711629, 0, 54249); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[1]; named row; base=711629; total=765878 Additional CEO disclosure: selectable in All records; excluded from the frozen model and default CEO cohort. Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
-      "evidenceText": "Peter Goettler, PRESIDENT AND CEO. Nominal 2024 USD: Schedule J base $711,629; Part VII reportable cash $711,629; total $765,878 (Schedule J E). Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[3]; named row; columns D/E/F=(711629, 0, 54249); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[1]; named row; base=711629; total=765878 Additional CEO disclosure: selectable in All records; excluded from the frozen model and default CEO cohort. Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
+      "selectionNote": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[3]; named row; columns D/E/F=(711629, 0, 54249); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[1]; named row; base=711629; total=765878 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Additional CEO disclosure: selectable in All records; excluded from the frozen model and default CEO cohort. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
+      "sensitivityOnlyReason": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[3]; named row; columns D/E/F=(711629, 0, 54249); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[1]; named row; base=711629; total=765878 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Additional CEO disclosure: selectable in All records; excluded from the frozen model and default CEO cohort. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
+      "evidenceText": "Peter Goettler, PRESIDENT AND CEO. Nominal 2024 USD: Schedule J base $711,629; Part VII reportable cash $711,629; total $765,878 (Schedule J E). Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[3]; named row; columns D/E/F=(711629, 0, 54249); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[1]; named row; base=711629; total=765878 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Additional CEO disclosure: selectable in All records; excluded from the frozen model and default CEO cohort. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
       "sourceUrl": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202532419349300218_public.xml",
       "canonicalUrl": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202532419349300218_public.xml",
       "cachedSource": "",
@@ -18214,13 +18214,13 @@
       "categoryProvenance": {
         "provenanceType": "independent_expansion_review",
         "confidence": "Source pay checked; role scope remains disclosure-based",
-        "caveats": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[3]; named row; columns D/E/F=(711629, 0, 54249); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[1]; named row; base=711629; total=765878 Additional CEO disclosure: selectable in All records; excluded from the frozen model and default CEO cohort. Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation."
+        "caveats": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[3]; named row; columns D/E/F=(711629, 0, 54249); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[1]; named row; base=711629; total=765878 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Additional CEO disclosure: selectable in All records; excluded from the frozen model and default CEO cohort. Reported annual pay; weekly hours do not establish contractual FTE or a complete year."
       },
       "positionTaxonomy": {
         "classificationRule": "Reviewed chief_executive only; President title alone is insufficient.",
         "confidence": "reviewed",
-        "partViiLocator": "PDF p7; Part VII A row 1; Peter Goettler",
-        "scheduleJLocator": "PDF p45; Schedule J II; named row Peter Goettler; row (i) filing employer, row (ii) related",
+        "partViiLocator": "Return/ReturnData/IRS990/Form990PartVIISectionAGrp[3]",
+        "scheduleJLocator": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[1]",
         "methodologyPath": "benchmark/enrichment/compensation_expansion_audit.md"
       },
       "expansionReview": {
@@ -18230,7 +18230,7 @@
         "sourceKey": "EXPANSION-13442323da19ed45cfa4",
         "packageObservationId": "v4:CATO:FY2025::petergoettler",
         "identity": "13442323da19ed45cfa49d00fb19ebd2a9a9618c9ae8e75e67070ee83c038d2b:petergoettler",
-        "verification": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[3]; named row; columns D/E/F=(711629, 0, 54249); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[1]; named row; base=711629; total=765878",
+        "verification": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[3]; named row; columns D/E/F=(711629, 0, 54249); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[1]; named row; base=711629; total=765878 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML.",
         "empiricalOnly": true,
         "contractualFte": null,
         "taxPeriodBegin": "2024-04-01",
@@ -18292,9 +18292,9 @@
       "location": "Not reported",
       "remoteStatus": "Not reported",
       "structure": "Not classified",
-      "revenue": null,
-      "expenses": null,
-      "staff": null,
+      "revenue": 62821387,
+      "expenses": 47370866,
+      "staff": 317,
       "comparabilityScore": 0,
       "compensationYear": 2024,
       "salary": {
@@ -18314,9 +18314,9 @@
       "founder": false,
       "analysisStatus": "primary",
       "auditStatus": "independently reconciled source evidence",
-      "selectionNote": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[22]; named row; columns D/E/F=(247637, 0, 40536); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[6]; named row; base=235137; total=288173 Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
+      "selectionNote": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[22]; named row; columns D/E/F=(247637, 0, 40536); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[6]; named row; base=235137; total=288173 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
       "sensitivityOnlyReason": "",
-      "evidenceText": "Norbert Michel, VP, DIRECTOR, MONETARY & FINANCIAL. Nominal 2024 USD: Schedule J base $235,137; Part VII reportable cash $247,637; total $288,173 (Schedule J E). Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[22]; named row; columns D/E/F=(247637, 0, 40536); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[6]; named row; base=235137; total=288173 Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
+      "evidenceText": "Norbert Michel, VP, DIRECTOR, MONETARY & FINANCIAL. Nominal 2024 USD: Schedule J base $235,137; Part VII reportable cash $247,637; total $288,173 (Schedule J E). Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[22]; named row; columns D/E/F=(247637, 0, 40536); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[6]; named row; base=235137; total=288173 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
       "sourceUrl": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202532419349300218_public.xml",
       "canonicalUrl": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202532419349300218_public.xml",
       "cachedSource": "",
@@ -18329,13 +18329,13 @@
       "categoryProvenance": {
         "provenanceType": "independent_expansion_review",
         "confidence": "Source pay checked; role scope remains disclosure-based",
-        "caveats": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[22]; named row; columns D/E/F=(247637, 0, 40536); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[6]; named row; base=235137; total=288173 Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation."
+        "caveats": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[22]; named row; columns D/E/F=(247637, 0, 40536); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[6]; named row; base=235137; total=288173 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Reported annual pay; weekly hours do not establish contractual FTE or a complete year."
       },
       "positionTaxonomy": {
         "classificationRule": "Exclude policy/program hybrids legal-policy hybrids and generic Vice Presidents.",
         "confidence": "reviewed",
-        "partViiLocator": "PDF p7; Part VII A row 3; Norbert Michel",
-        "scheduleJLocator": "PDF p45; Schedule J II; named row Norbert Michel; row (i) filing employer, row (ii) related",
+        "partViiLocator": "Return/ReturnData/IRS990/Form990PartVIISectionAGrp[22]",
+        "scheduleJLocator": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[6]",
         "methodologyPath": "benchmark/enrichment/compensation_expansion_audit.md"
       },
       "expansionReview": {
@@ -18345,7 +18345,7 @@
         "sourceKey": "EXPANSION-13442323da19ed45cfa4",
         "packageObservationId": "v4:CATO:FY2025::norbertmichel",
         "identity": "13442323da19ed45cfa49d00fb19ebd2a9a9618c9ae8e75e67070ee83c038d2b:norbertmichel",
-        "verification": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[22]; named row; columns D/E/F=(247637, 0, 40536); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[6]; named row; base=235137; total=288173",
+        "verification": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[22]; named row; columns D/E/F=(247637, 0, 40536); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[6]; named row; base=235137; total=288173 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML.",
         "empiricalOnly": true,
         "contractualFte": null,
         "taxPeriodBegin": "2024-04-01",
@@ -18407,9 +18407,9 @@
       "location": "Not reported",
       "remoteStatus": "Not reported",
       "structure": "Not classified",
-      "revenue": null,
-      "expenses": null,
-      "staff": null,
+      "revenue": 62821387,
+      "expenses": 47370866,
+      "staff": 317,
       "comparabilityScore": 0,
       "compensationYear": 2024,
       "salary": {
@@ -18429,9 +18429,9 @@
       "founder": false,
       "analysisStatus": "primary",
       "auditStatus": "independently reconciled source evidence",
-      "selectionNote": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[23]; named row; columns D/E/F=(245178, 0, 38826); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[5]; named row; base=234678; total=284004 Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
+      "selectionNote": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[23]; named row; columns D/E/F=(245178, 0, 38826); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[5]; named row; base=234678; total=284004 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
       "sensitivityOnlyReason": "",
-      "evidenceText": "Scott Lincicome, VP, GENERAL ECONOMICS & TRADE. Nominal 2024 USD: Schedule J base $234,678; Part VII reportable cash $245,178; total $284,004 (Schedule J E). Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[23]; named row; columns D/E/F=(245178, 0, 38826); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[5]; named row; base=234678; total=284004 Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
+      "evidenceText": "Scott Lincicome, VP, GENERAL ECONOMICS & TRADE. Nominal 2024 USD: Schedule J base $234,678; Part VII reportable cash $245,178; total $284,004 (Schedule J E). Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[23]; named row; columns D/E/F=(245178, 0, 38826); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[5]; named row; base=234678; total=284004 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
       "sourceUrl": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202532419349300218_public.xml",
       "canonicalUrl": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202532419349300218_public.xml",
       "cachedSource": "",
@@ -18444,13 +18444,13 @@
       "categoryProvenance": {
         "provenanceType": "independent_expansion_review",
         "confidence": "Source pay checked; role scope remains disclosure-based",
-        "caveats": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[23]; named row; columns D/E/F=(245178, 0, 38826); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[5]; named row; base=234678; total=284004 Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation."
+        "caveats": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[23]; named row; columns D/E/F=(245178, 0, 38826); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[5]; named row; base=234678; total=284004 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Reported annual pay; weekly hours do not establish contractual FTE or a complete year."
       },
       "positionTaxonomy": {
         "classificationRule": "Exclude policy/program hybrids legal-policy hybrids and generic Vice Presidents.",
         "confidence": "reviewed",
-        "partViiLocator": "PDF p7; Part VII A row 4; Scott Lincicome",
-        "scheduleJLocator": "PDF p45; Schedule J II; named row Scott Lincicome; row (i) filing employer, row (ii) related",
+        "partViiLocator": "Return/ReturnData/IRS990/Form990PartVIISectionAGrp[23]",
+        "scheduleJLocator": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[5]",
         "methodologyPath": "benchmark/enrichment/compensation_expansion_audit.md"
       },
       "expansionReview": {
@@ -18460,7 +18460,7 @@
         "sourceKey": "EXPANSION-13442323da19ed45cfa4",
         "packageObservationId": "v4:CATO:FY2025::scottlincicome",
         "identity": "13442323da19ed45cfa49d00fb19ebd2a9a9618c9ae8e75e67070ee83c038d2b:scottlincicome",
-        "verification": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[23]; named row; columns D/E/F=(245178, 0, 38826); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[5]; named row; base=234678; total=284004",
+        "verification": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[23]; named row; columns D/E/F=(245178, 0, 38826); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[5]; named row; base=234678; total=284004 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML.",
         "empiricalOnly": true,
         "contractualFte": null,
         "taxPeriodBegin": "2024-04-01",
@@ -18522,9 +18522,9 @@
       "location": "Not reported",
       "remoteStatus": "Not reported",
       "structure": "Not classified",
-      "revenue": null,
-      "expenses": null,
-      "staff": null,
+      "revenue": 62821387,
+      "expenses": 47370866,
+      "staff": 317,
       "comparabilityScore": 0,
       "compensationYear": 2024,
       "salary": {
@@ -18544,9 +18544,9 @@
       "founder": false,
       "analysisStatus": "primary",
       "auditStatus": "independently reconciled source evidence",
-      "selectionNote": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[20]; named row; columns D/E/F=(239165, 0, 40022); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[7]; named row; base=229165; total=279187 Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
+      "selectionNote": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[20]; named row; columns D/E/F=(239165, 0, 40022); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[7]; named row; base=229165; total=279187 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
       "sensitivityOnlyReason": "",
-      "evidenceText": "Gene Healy, SENIOR VP FOR POLICY. Nominal 2024 USD: Schedule J base $229,165; Part VII reportable cash $239,165; total $279,187 (Schedule J E). Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[20]; named row; columns D/E/F=(239165, 0, 40022); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[7]; named row; base=229165; total=279187 Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
+      "evidenceText": "Gene Healy, SENIOR VP FOR POLICY. Nominal 2024 USD: Schedule J base $229,165; Part VII reportable cash $239,165; total $279,187 (Schedule J E). Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[20]; named row; columns D/E/F=(239165, 0, 40022); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[7]; named row; base=229165; total=279187 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
       "sourceUrl": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202532419349300218_public.xml",
       "canonicalUrl": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202532419349300218_public.xml",
       "cachedSource": "",
@@ -18559,13 +18559,13 @@
       "categoryProvenance": {
         "provenanceType": "independent_expansion_review",
         "confidence": "Source pay checked; role scope remains disclosure-based",
-        "caveats": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[20]; named row; columns D/E/F=(239165, 0, 40022); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[7]; named row; base=229165; total=279187 Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation."
+        "caveats": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[20]; named row; columns D/E/F=(239165, 0, 40022); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[7]; named row; base=229165; total=279187 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Reported annual pay; weekly hours do not establish contractual FTE or a complete year."
       },
       "positionTaxonomy": {
         "classificationRule": "Exclude policy/program hybrids legal-policy hybrids and generic Vice Presidents.",
         "confidence": "reviewed",
-        "partViiLocator": "PDF p7; Part VII A row 5; Gene Healy",
-        "scheduleJLocator": "PDF p45; Schedule J II; named row Gene Healy; row (i) filing employer, row (ii) related",
+        "partViiLocator": "Return/ReturnData/IRS990/Form990PartVIISectionAGrp[20]",
+        "scheduleJLocator": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[7]",
         "methodologyPath": "benchmark/enrichment/compensation_expansion_audit.md"
       },
       "expansionReview": {
@@ -18575,7 +18575,7 @@
         "sourceKey": "EXPANSION-13442323da19ed45cfa4",
         "packageObservationId": "v4:CATO:FY2025::genehealy",
         "identity": "13442323da19ed45cfa49d00fb19ebd2a9a9618c9ae8e75e67070ee83c038d2b:genehealy",
-        "verification": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[20]; named row; columns D/E/F=(239165, 0, 40022); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[7]; named row; base=229165; total=279187",
+        "verification": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[20]; named row; columns D/E/F=(239165, 0, 40022); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[7]; named row; base=229165; total=279187 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML.",
         "empiricalOnly": true,
         "contractualFte": null,
         "taxPeriodBegin": "2024-04-01",
@@ -18637,9 +18637,9 @@
       "location": "Not reported",
       "remoteStatus": "Not reported",
       "structure": "Not classified",
-      "revenue": null,
-      "expenses": null,
-      "staff": null,
+      "revenue": 62821387,
+      "expenses": 47370866,
+      "staff": 317,
       "comparabilityScore": 0,
       "compensationYear": 2024,
       "salary": {
@@ -18659,9 +18659,9 @@
       "founder": false,
       "analysisStatus": "primary",
       "auditStatus": "independently reconciled source evidence",
-      "selectionNote": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[21]; named row; columns D/E/F=(225730, 0, 24930); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[9]; named row; base=222230; total=250660 Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
+      "selectionNote": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[21]; named row; columns D/E/F=(225730, 0, 24930); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[9]; named row; base=222230; total=250660 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
       "sensitivityOnlyReason": "",
-      "evidenceText": "Michael Cannon, DIRECTOR OF HEALTH POLICY. Nominal 2024 USD: Schedule J base $222,230; Part VII reportable cash $225,730; total $250,660 (Schedule J E). Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[21]; named row; columns D/E/F=(225730, 0, 24930); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[9]; named row; base=222230; total=250660 Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
+      "evidenceText": "Michael Cannon, DIRECTOR OF HEALTH POLICY. Nominal 2024 USD: Schedule J base $222,230; Part VII reportable cash $225,730; total $250,660 (Schedule J E). Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[21]; named row; columns D/E/F=(225730, 0, 24930); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[9]; named row; base=222230; total=250660 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
       "sourceUrl": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202532419349300218_public.xml",
       "canonicalUrl": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202532419349300218_public.xml",
       "cachedSource": "",
@@ -18674,13 +18674,13 @@
       "categoryProvenance": {
         "provenanceType": "independent_expansion_review",
         "confidence": "Source pay checked; role scope remains disclosure-based",
-        "caveats": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[21]; named row; columns D/E/F=(225730, 0, 24930); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[9]; named row; base=222230; total=250660 Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation."
+        "caveats": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[21]; named row; columns D/E/F=(225730, 0, 24930); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[9]; named row; base=222230; total=250660 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Reported annual pay; weekly hours do not establish contractual FTE or a complete year."
       },
       "positionTaxonomy": {
         "classificationRule": "Keep policy executives and research-policy hybrids separate; do not map every named-policy program director here.",
         "confidence": "reviewed",
-        "partViiLocator": "PDF p7; Part VII A row 7; Michael Cannon",
-        "scheduleJLocator": "PDF p45; Schedule J II; named row Michael Cannon; row (i) filing employer, row (ii) related",
+        "partViiLocator": "Return/ReturnData/IRS990/Form990PartVIISectionAGrp[21]",
+        "scheduleJLocator": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[9]",
         "methodologyPath": "benchmark/enrichment/compensation_expansion_audit.md"
       },
       "expansionReview": {
@@ -18690,7 +18690,7 @@
         "sourceKey": "EXPANSION-13442323da19ed45cfa4",
         "packageObservationId": "v4:CATO:FY2025::michaelcannon",
         "identity": "13442323da19ed45cfa49d00fb19ebd2a9a9618c9ae8e75e67070ee83c038d2b:michaelcannon",
-        "verification": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[21]; named row; columns D/E/F=(225730, 0, 24930); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[9]; named row; base=222230; total=250660",
+        "verification": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[21]; named row; columns D/E/F=(225730, 0, 24930); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[9]; named row; base=222230; total=250660 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML.",
         "empiricalOnly": true,
         "contractualFte": null,
         "taxPeriodBegin": "2024-04-01",
@@ -18752,9 +18752,9 @@
       "location": "Not reported",
       "remoteStatus": "Not reported",
       "structure": "Not classified",
-      "revenue": null,
-      "expenses": null,
-      "staff": null,
+      "revenue": 62821387,
+      "expenses": 47370866,
+      "staff": 317,
       "comparabilityScore": 0,
       "compensationYear": 2024,
       "salary": {
@@ -18774,9 +18774,9 @@
       "founder": false,
       "analysisStatus": "primary",
       "auditStatus": "independently reconciled source evidence",
-      "selectionNote": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[16]; named row; columns D/E/F=(216517, 0, 32097); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[2]; named row; base=216517; total=248614 Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
+      "selectionNote": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[16]; named row; columns D/E/F=(216517, 0, 32097); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[2]; named row; base=216517; total=248614 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
       "sensitivityOnlyReason": "",
-      "evidenceText": "Marissa Delgado, SECRETARY, VP, FINANCE & CFO. Nominal 2024 USD: Schedule J base $216,517; Part VII reportable cash $216,517; total $248,614 (Schedule J E). Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[16]; named row; columns D/E/F=(216517, 0, 32097); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[2]; named row; base=216517; total=248614 Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
+      "evidenceText": "Marissa Delgado, SECRETARY, VP, FINANCE & CFO. Nominal 2024 USD: Schedule J base $216,517; Part VII reportable cash $216,517; total $248,614 (Schedule J E). Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[16]; named row; columns D/E/F=(216517, 0, 32097); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[2]; named row; base=216517; total=248614 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
       "sourceUrl": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202532419349300218_public.xml",
       "canonicalUrl": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202532419349300218_public.xml",
       "cachedSource": "",
@@ -18789,13 +18789,13 @@
       "categoryProvenance": {
         "provenanceType": "independent_expansion_review",
         "confidence": "Source pay checked; role scope remains disclosure-based",
-        "caveats": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[16]; named row; columns D/E/F=(216517, 0, 32097); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[2]; named row; base=216517; total=248614 Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation."
+        "caveats": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[16]; named row; columns D/E/F=(216517, 0, 32097); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[2]; named row; base=216517; total=248614 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Reported annual pay; weekly hours do not establish contractual FTE or a complete year."
       },
       "positionTaxonomy": {
         "classificationRule": "Exclude finance/operations hybrids finance executives without CFO authority and board treasurers.",
         "confidence": "reviewed",
-        "partViiLocator": "PDF p7; Part VII A row 8; Marissa Delgado",
-        "scheduleJLocator": "PDF p45; Schedule J II; named row Marissa Delgado; row (i) filing employer, row (ii) related",
+        "partViiLocator": "Return/ReturnData/IRS990/Form990PartVIISectionAGrp[16]",
+        "scheduleJLocator": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[2]",
         "methodologyPath": "benchmark/enrichment/compensation_expansion_audit.md"
       },
       "expansionReview": {
@@ -18805,7 +18805,7 @@
         "sourceKey": "EXPANSION-13442323da19ed45cfa4",
         "packageObservationId": "v4:CATO:FY2025::marissadelgado",
         "identity": "13442323da19ed45cfa49d00fb19ebd2a9a9618c9ae8e75e67070ee83c038d2b:marissadelgado",
-        "verification": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[16]; named row; columns D/E/F=(216517, 0, 32097); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[2]; named row; base=216517; total=248614",
+        "verification": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[16]; named row; columns D/E/F=(216517, 0, 32097); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[2]; named row; base=216517; total=248614 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML.",
         "empiricalOnly": true,
         "contractualFte": null,
         "taxPeriodBegin": "2024-04-01",
@@ -18867,9 +18867,9 @@
       "location": "Not reported",
       "remoteStatus": "Not reported",
       "structure": "Not classified",
-      "revenue": null,
-      "expenses": null,
-      "staff": null,
+      "revenue": 62821387,
+      "expenses": 47370866,
+      "staff": 317,
       "comparabilityScore": 0,
       "compensationYear": 2024,
       "salary": {
@@ -18889,9 +18889,9 @@
       "founder": false,
       "analysisStatus": "primary",
       "auditStatus": "independently reconciled source evidence",
-      "selectionNote": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[17]; named row; columns D/E/F=(219948, 0, 24899); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[4]; named row; base=219948; total=244847 Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
+      "selectionNote": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[17]; named row; columns D/E/F=(219948, 0, 24899); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[4]; named row; base=219948; total=244847 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
       "sensitivityOnlyReason": "",
-      "evidenceText": "Harrison Moar, VP FOR DEVELOPMENT. Nominal 2024 USD: Schedule J base $219,948; Part VII reportable cash $219,948; total $244,847 (Schedule J E). Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[17]; named row; columns D/E/F=(219948, 0, 24899); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[4]; named row; base=219948; total=244847 Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation.",
+      "evidenceText": "Harrison Moar, VP FOR DEVELOPMENT. Nominal 2024 USD: Schedule J base $219,948; Part VII reportable cash $219,948; total $244,847 (Schedule J E). Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[17]; named row; columns D/E/F=(219948, 0, 24899); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[4]; named row; base=219948; total=244847 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Reported annual pay; weekly hours do not establish contractual FTE or a complete year.",
       "sourceUrl": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202532419349300218_public.xml",
       "canonicalUrl": "https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/202532419349300218_public.xml",
       "cachedSource": "",
@@ -18904,13 +18904,13 @@
       "categoryProvenance": {
         "provenanceType": "independent_expansion_review",
         "confidence": "Source pay checked; role scope remains disclosure-based",
-        "caveats": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[17]; named row; columns D/E/F=(219948, 0, 24899); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[4]; named row; base=219948; total=244847 Reported annual pay; weekly hours do not establish contractual FTE or a complete year. Organization size is omitted pending source-field reconciliation."
+        "caveats": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[17]; named row; columns D/E/F=(219948, 0, 24899); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[4]; named row; base=219948; total=244847 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML. Reported annual pay; weekly hours do not establish contractual FTE or a complete year."
       },
       "positionTaxonomy": {
         "classificationRule": "Exclude mixed external-relations roles unless the reviewed detail is development_executive.",
         "confidence": "reviewed",
-        "partViiLocator": "PDF p7; Part VII A row 9; Harrison Moar",
-        "scheduleJLocator": "PDF p45; Schedule J II; named row Harrison Moar; row (i) filing employer, row (ii) related",
+        "partViiLocator": "Return/ReturnData/IRS990/Form990PartVIISectionAGrp[17]",
+        "scheduleJLocator": "Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[4]",
         "methodologyPath": "benchmark/enrichment/compensation_expansion_audit.md"
       },
       "expansionReview": {
@@ -18920,7 +18920,7 @@
         "sourceKey": "EXPANSION-13442323da19ed45cfa4",
         "packageObservationId": "v4:CATO:FY2025::harrisonmoar",
         "identity": "13442323da19ed45cfa49d00fb19ebd2a9a9618c9ae8e75e67070ee83c038d2b:harrisonmoar",
-        "verification": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[17]; named row; columns D/E/F=(219948, 0, 24899); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[4]; named row; base=219948; total=244847",
+        "verification": "Exact native XML identity, period, hours, Part VII and Schedule J components reconciled. Return/ReturnData/IRS990/Form990PartVIISectionAGrp[17]; named row; columns D/E/F=(219948, 0, 24899); hours=40.0 Return/ReturnData/IRS990ScheduleJ/RltdOrgOfficerTrstKeyEmplGrp[4]; named row; base=219948; total=244847 Fiscal-period revenue/expenses and calendar-year employee count reconciled to native XML.",
         "empiricalOnly": true,
         "contractualFte": null,
         "taxPeriodBegin": "2024-04-01",
@@ -33794,14 +33794,14 @@
       },
       "cpiFactor": 1.0,
       "cpiPeriod": "July 2026 target-year approximation for a 2026 advertisement",
-      "defaultIncluded": true,
-      "structurallyClean": true,
+      "defaultIncluded": false,
+      "structurallyClean": false,
       "founder": false,
-      "analysisStatus": "primary",
+      "analysisStatus": "sensitivity_only",
       "auditStatus": "independently reconciled source evidence",
-      "selectionNote": "Research-initiative role with participant relationships, data collection, protocol/IRB and project delivery; no employee line management evidence. PDF does not establish weekly hours or FTE. Reviewed as research-program delivery, not research-team line management. Deadline 2026-09-11.",
-      "sensitivityOnlyReason": "",
-      "evidenceText": "#WeCount Research Manager. Advertised annual USD range $80,000–$90,000; midpoint is a policy-range summary, not observed employee pay. Research-initiative role with participant relationships, data collection, protocol/IRB and project delivery; no employee line management evidence. PDF does not establish weekly hours or FTE. Reviewed as research-program delivery, not research-team line management. Deadline 2026-09-11.",
+      "selectionNote": "Research-initiative role with participant relationships, data collection, protocol/IRB and project delivery; no employee line management evidence. PDF does not establish weekly hours or FTE. Reviewed as research-program delivery, not research-team line management. Deadline 2026-09-11. Sensitivity only: employment fraction for the advertised range is unresolved (salary/benefits section, PDF page 4); no FTE rescaling applied.",
+      "sensitivityOnlyReason": "Research-initiative role with participant relationships, data collection, protocol/IRB and project delivery; no employee line management evidence. PDF does not establish weekly hours or FTE. Reviewed as research-program delivery, not research-team line management. Deadline 2026-09-11. Sensitivity only: employment fraction for the advertised range is unresolved (salary/benefits section, PDF page 4); no FTE rescaling applied.",
+      "evidenceText": "#WeCount Research Manager. Advertised annual USD range $80,000–$90,000; midpoint is a policy-range summary, not observed employee pay. Research-initiative role with participant relationships, data collection, protocol/IRB and project delivery; no employee line management evidence. PDF does not establish weekly hours or FTE. Reviewed as research-program delivery, not research-team line management. Deadline 2026-09-11. Sensitivity only: employment fraction for the advertised range is unresolved (salary/benefits section, PDF page 4); no FTE rescaling applied.",
       "sourceUrl": "https://societyfp.org/wp-content/uploads/2026/08/WeCount-Research-Manager-2026.pdf",
       "canonicalUrl": "https://societyfp.org/wp-content/uploads/2026/08/WeCount-Research-Manager-2026.pdf",
       "cachedSource": "",
@@ -33814,7 +33814,7 @@
       "categoryProvenance": {
         "provenanceType": "independent_expansion_review",
         "confidence": "Source pay checked; role scope remains disclosure-based",
-        "caveats": "Research-initiative role with participant relationships, data collection, protocol/IRB and project delivery; no employee line management evidence. PDF does not establish weekly hours or FTE. Reviewed as research-program delivery, not research-team line management. Deadline 2026-09-11."
+        "caveats": "Research-initiative role with participant relationships, data collection, protocol/IRB and project delivery; no employee line management evidence. PDF does not establish weekly hours or FTE. Reviewed as research-program delivery, not research-team line management. Deadline 2026-09-11. Sensitivity only: employment fraction for the advertised range is unresolved (salary/benefits section, PDF page 4); no FTE rescaling applied."
       },
       "positionTaxonomy": {
         "classificationRule": "Do not duplicate into research_manager or program_project_manager; one reviewed hybrid family only.",
@@ -33830,7 +33830,7 @@
         "sourceKey": "EXPANSION-c76f2deebdca6a593bde",
         "packageObservationId": "AD::r12:SFP:WeCount-research-manager-2026",
         "identity": "ad:r12:SFP:WeCount-research-manager-2026",
-        "verification": "Research-initiative role with participant relationships, data collection, protocol/IRB and project delivery; no employee line management evidence. PDF does not establish weekly hours or FTE. Reviewed as research-program delivery, not research-team line management. Deadline 2026-09-11.",
+        "verification": "Research-initiative role with participant relationships, data collection, protocol/IRB and project delivery; no employee line management evidence. PDF does not establish weekly hours or FTE. Reviewed as research-program delivery, not research-team line management. Deadline 2026-09-11. Sensitivity only: employment fraction for the advertised range is unresolved (salary/benefits section, PDF page 4); no FTE rescaling applied.",
         "empiricalOnly": true,
         "contractualFte": null,
         "taxPeriodBegin": null,

@@ -486,7 +486,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#sample-select")).toContainText("Recommended peers");
   await expect(page.locator("#sample-select")).toContainText("Recommended + broader");
   await expect(page.locator('#sample-select option[value="tierA"]')).toHaveText("Closest peers only");
-  await expect(page.locator("#sample-description")).toContainText("Reviewed full-year CEO pay records");
+  await expect(page.locator("#sample-description")).toContainText("Reviewed CEO pay records");
   await page.locator("#sample-select").selectOption("sensitivity");
   await expect(page.locator("#sample-description")).toContainText("broader comparisons");
   await expect(page.locator("#stat-n")).toHaveText("168");

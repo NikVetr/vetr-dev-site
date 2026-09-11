@@ -2,7 +2,7 @@ const { test, expect } = require("@playwright/test");
 
 test("expanded roles expose evidence, routes, and salary axes", async ({ page }) => {
   const errors = [];
-  page.on("pageerror", (error) => errors.push(error.message));
+  page.on("pageerror", (error) => errors.push(error.stack));
   await page.goto("/ceo-salary-benchmark/");
   const additions = await page.evaluate(() => window.CEO_BENCHMARK_DATA.positionCatalog.filter((p) => p.expansion));
   expect(additions.map((p) => p.key)).toEqual([
@@ -27,6 +27,17 @@ test("expanded roles expose evidence, routes, and salary axes", async ({ page })
   await page.reload();
   await expect(page.locator("#position-select")).toHaveValue("people_director");
   await expect(page.locator("#stat-n")).not.toHaveText("0");
+  const eli = page.locator('tbody tr[data-id="SRC-990-EXT-ENVIRONMENTAL-LAW-INSTITUTE::stefaniegarcia"]');
+  await eli.locator(".preview-button").click();
+  await expect(page.locator("#source-dialog")).toBeVisible();
+  await expect(page.locator("#dialog-meta")).toContainText("37.5 at filing organization");
+  await expect(page.locator("#dialog-meta")).toContainText("reported hours alone do not establish FTE");
+  await expect(page.locator("#dialog-meta")).toContainText("not FTE or point-in-time headcount");
+  await page.locator("#dialog-category-provenance summary").click();
+  await expect(page.locator("#dialog-provenance-records")).toContainText("Role classification");
+  await expect(page.locator("#dialog-provenance-records")).toContainText("Source verification");
+  await page.locator("#source-dialog").screenshot({ path: "tmp/existing-refinement/source-dialog.png" });
+  await page.keyboard.press("Escape");
   await page.goto("/finance-manager-salary-benchmark/");
   await expect(page.locator("#sample-select")).toHaveValue("primary");
   await expect(page.locator('input[name="dollar-basis"][value="adjusted"]')).toBeChecked();
