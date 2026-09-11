@@ -18,7 +18,9 @@ test("expanded roles expose evidence, routes, and salary axes", async ({ page })
     await expect(page).toHaveURL(new RegExp(`/${position.key.replaceAll("_", "-")}-salary-benchmark/`));
     await expect(page.locator("#stat-n")).not.toHaveText("0");
     await page.locator('.axis-variable-control[aria-label^="Change horizontal"]').click();
-    await expect(page.locator(`#axis-numerator option[value="position:${position.key}"]`)).toHaveCount(1);
+    const parent = await page.evaluate(key => window.CEO_BENCHMARK_DATA.positionCatalog.find(p => p.memberPositionKeys?.includes(key))?.key, position.key);
+    await expect(page.locator(`#axis-numerator option[value="position:${parent || position.key}"]`)).toHaveCount(1);
+    if (parent) await expect(page.locator(`#axis-numerator option[value="position:${position.key}"]`)).toHaveCount(0);
     await page.locator("#axis-selector-close").click();
   }
   await page.locator("#position-select").selectOption("people_director");
@@ -74,7 +76,7 @@ test("CEO ratios match the same filing and compensation year", async ({ page }) 
   await page.locator("#sample-select").selectOption("sensitivity");
   await page.locator('input[name="histogram-axis-mode"][value="ratio"]').check();
   await page.locator('.axis-variable-control[aria-label^="Change horizontal"]').click();
-  await page.locator("#axis-denominator").selectOption("position:coo");
+  await page.locator("#axis-denominator").selectOption("position:operations_leadership");
   const pairs = await page.evaluate(() => {
     const d = window.CEO_BENCHMARK_DATA;
     return d.incumbents.filter((r) => r.expansionReview).flatMap((ceo) =>
@@ -83,9 +85,10 @@ test("CEO ratios match the same filing and compensation year", async ({ page }) 
   });
   expect(pairs.map((p) => p.org)).toContain("Woodwell Climate Research Center");
   expect(pairs.map((p) => p.org)).toContain("Urban Institute");
-  await expect(page.locator("#salary-chart")).toContainText("COO");
+  await expect(page.locator("#salary-chart")).toContainText("Operations leadership");
   await page.locator('[data-chart-view="scatter"]').click();
   await page.locator('.axis-variable-control[aria-label^="Change horizontal"]').click();
-  await expect(page.locator('#axis-numerator option[value="position:people_director"]')).toHaveCount(1);
+  await expect(page.locator('#axis-numerator option[value="position:people_leadership"]')).toHaveCount(1);
+  await expect(page.locator('#axis-numerator option[value="position:people_director"]')).toHaveCount(0);
   expect(errors).toEqual([]);
 });

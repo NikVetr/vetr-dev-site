@@ -38,12 +38,13 @@ def apply_position_families(payload):
         organizations = len({r["organization"] for r in available})
         payload["positionCatalog"].append({
             "key": key, "label": label, "pageLabel": label, "menuGroup": "Executive leadership",
+            "metricLabel": key.replace("_", " ").capitalize(),
             "pooled": True, "memberPositionKeys": members,
             "subtitle": " · ".join(catalog[m]["label"] for m in members),
             "defaultMeasure": "cash", "defaultSample": "primary", "defaultInflationAdjusted": True,
             "supportLevel": "primary" if len(available) >= 15 and organizations >= 12 else "exploratory",
             "description": "Pooled functional leadership: " + "; ".join(catalog[m]["label"] for m in members)
-                + ". Titles can differ in scope; use a title subgroup for a narrower comparison. Existing eligibility restrictions are retained; each observation is counted once.",
+                + ". Titles can differ in scope; use the table's Title filter for a narrower comparison. Existing eligibility restrictions are retained; each observation is counted once.",
             "counts": {"catalog": len(rows), "defaultIncluded": len(defaults), "defaultAvailable": len(available), "organizations": organizations},
         })
         # Views carry membership metadata, not duplicate canonical observations.

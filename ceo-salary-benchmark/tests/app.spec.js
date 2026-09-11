@@ -2,6 +2,18 @@ const { test, expect } = require("@playwright/test");
 
 const chartViewTab = (page, view) => page.locator(`[role="tab"][data-chart-view="${view}"]`);
 
+async function pooledOperationsRows(page) {
+  return page.evaluate(() => {
+    const d = window.CEO_BENCHMARK_DATA;
+    const members = d.positionCatalog.find(p => p.key === "operations_leadership").memberPositionKeys;
+    const canonical = new Map(Object.values(d.positionObservations).flat().map(r => [r.id, r]));
+    return [...new Map(members.flatMap(key => [
+      ...d.positionObservations[key],
+      ...(d.positionMemberships[key] || []).map(m => ({ ...canonical.get(m.observationId), defaultIncluded: m.defaultIncluded })),
+    ]).map(r => [r.id, r])).values()];
+  });
+}
+
 async function selectChartView(page, view) {
   const tab = chartViewTab(page, view);
   await tab.click();
@@ -2408,18 +2420,18 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
   await expect(page.locator("#axis-selector-title")).toHaveText("Histogram axis");
   await expect(page.locator("#axis-numerator-label")).toHaveText("Measure");
   await expect(page.locator("#axis-denominator-field")).toBeHidden();
-  const positionOptionCount = await page.evaluate(() => window.CEO_BENCHMARK_DATA.positionCatalog.length);
+  const positionOptionCount = await page.locator("#position-menu [data-position-key]").count();
   const payOptions = page.locator('#axis-numerator optgroup[label="Pay"] option');
   const organizationStatOptions = page.locator('#axis-numerator optgroup[label="Organization statistics"] option');
   await expect(payOptions).toHaveCount(positionOptionCount + 2);
   await expect(organizationStatOptions).toHaveCount(5);
   await expect(page.locator('#axis-numerator optgroup[label="Pay"] option[value="highestPaidOtherEmployee"]')).toHaveCount(1);
   await expect(page.locator("#axis-numerator option")).toHaveCount(positionOptionCount + 7);
-  const expectedCeoCooBasePairs = await page.evaluate(() => {
+  const expectedCeoCooBasePairs = await page.evaluate((operations) => {
     const data = window.CEO_BENCHMARK_DATA;
     const filingSourceId = (row) => row.sourceId || String(row.id || "").split("::", 1)[0];
     const coosBySource = new Map();
-    (data.positionObservations.coo || [])
+    operations
       .filter((row) => row.defaultIncluded && row.salary?.base > 0)
       .forEach((row) => {
         const sourceId = filingSourceId(row);
@@ -2430,17 +2442,17 @@ test("clickable value and ratio axes drive plots, fits, quantiles, and correlati
       && row.salary?.base > 0
       && (coosBySource.get(filingSourceId(row)) || []).length === 1
     )).length;
-  });
-  expect(expectedCeoCooBasePairs).toBe(23);
-  await expect(page.locator('#axis-numerator option[value="position:coo"]'))
-    .toHaveText(`COO pay · matching records: ${expectedCeoCooBasePairs}`);
+  }, await pooledOperationsRows(page));
+  expect(expectedCeoCooBasePairs).toBe(29);
+  await expect(page.locator('#axis-numerator option[value="position:operations_leadership"]'))
+    .toHaveText(`COO / Operations leadership pay · matching records: ${expectedCeoCooBasePairs}`);
   await page.locator("#axis-selector-close").click();
   await expect(page.locator('tbody tr[data-id][data-plot-eligible="false"]')).toHaveCount(0);
   await page.locator('input[name="histogram-axis-mode"][value="ratio"]').check();
   await horizontalAxis().click();
-  await page.locator("#axis-denominator").selectOption("position:coo");
+  await page.locator("#axis-denominator").selectOption("position:operations_leadership");
   await expect(page.locator("#stat-n")).toHaveText(String(expectedCeoCooBasePairs));
-  await expect(page.locator("#salary-chart")).toContainText("CEO Salary / COO salary");
+  await expect(page.locator("#salary-chart")).toContainText("CEO Salary / Operations leadership salary");
   const checkedCeoCooEligible = page.locator('tbody tr[data-id][data-plot-eligible="true"] .row-toggle:checked');
   await expect(checkedCeoCooEligible).toHaveCount(expectedCeoCooBasePairs);
   const checkedCeoCooIneligible = page.locator('tbody tr[data-id][data-plot-eligible="false"] .row-toggle:checked');
@@ -2700,22 +2712,22 @@ test("LEEP sensitivity rows preserve co-leader balance and same-filing ambiguity
   const horizontalAxis = () => page.locator('.axis-variable-control[aria-label^="Change horizontal"]');
   await page.locator('input[name="histogram-axis-mode"][value="ratio"]').check();
   await horizontalAxis().click();
-  await page.locator("#axis-denominator").selectOption("position:coo");
+  await page.locator("#axis-denominator").selectOption("position:operations_leadership");
   expect(await leepRows.evaluateAll((tableRows) => tableRows.every((row) => row.dataset.plotEligible === "true"))).toBe(true);
-  const expectedSensitivityPairs = await page.evaluate(() => {
+  const expectedSensitivityPairs = await page.evaluate((operations) => {
     const data = window.CEO_BENCHMARK_DATA;
     const selected = (row) => row.defaultIncluded
       || ["sensitivity_only", "structural_sensitivity"].includes(row.analysisStatus);
     const sourceId = (row) => row.sourceId || String(row.id || "").split("::", 1)[0];
     const coos = new Map();
-    (data.positionObservations.coo || []).filter((row) => selected(row) && row.salary?.cash > 0).forEach((row) => {
+    operations.filter((row) => selected(row) && row.salary?.cash > 0).forEach((row) => {
       const key = sourceId(row);
       coos.set(key, [...(coos.get(key) || []), row]);
     });
     return data.incumbents.filter((row) => (
       selected(row) && row.salary?.cash > 0 && (coos.get(sourceId(row)) || []).length === 1
     )).length;
-  });
+  }, await pooledOperationsRows(page));
   await expect(page.locator("#stat-n")).toHaveText(String(expectedSensitivityPairs));
 
   await page.goto("/coo-salary-benchmark/");
@@ -2939,7 +2951,7 @@ test("plot eligibility isolates weights while preserving row intent", async ({ p
   const horizontalAxis = () => page.locator('.axis-variable-control[aria-label^="Change horizontal"]');
   await page.locator('input[name="histogram-axis-mode"][value="ratio"]').check();
   await horizontalAxis().click();
-  await page.locator("#axis-denominator").selectOption("position:coo");
+  await page.locator("#axis-denominator").selectOption("position:operations_leadership");
 
   const auto = page.locator('.auto-weight-rule input[value="comparability"]');
   await auto.check();
@@ -2949,7 +2961,10 @@ test("plot eligibility isolates weights while preserving row intent", async ({ p
       row.querySelector(".weight-input").value,
     ])));
   const baseline = await eligibleWeights();
-  expect(Object.keys(baseline).length).toBe(23);
+  // Plot eligibility also covers six unchecked sensitivity records.
+  expect(Object.keys(baseline).length).toBe(35);
+  await expect(page.locator('tbody tr[data-plot-eligible="true"] .row-toggle:checked')).toHaveCount(29);
+  await expect(page.locator("#stat-n")).toHaveText("29");
 
   const ineligibleRow = page.locator('tbody tr[data-id][data-plot-eligible="false"]:has(.row-toggle:checked)').first();
   const ineligibleId = await ineligibleRow.getAttribute("data-id");
