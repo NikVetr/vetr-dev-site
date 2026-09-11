@@ -13,7 +13,7 @@
 // and it drifted: seven modules were missing, so the studio would have failed with
 // the network off. VERSION is a content hash of those files, so a deploy re-primes
 // the cache without anyone remembering to bump anything.
-const VERSION = 'plg-5cb9dac6b2f3';
+const VERSION = 'plg-93f8ab1a436b';
 const SHELL_CACHE = `${VERSION}-shell`;
 /**
  * **Not version-scoped, deliberately.** The shell has to be replaced wholesale on a
@@ -79,6 +79,30 @@ self.addEventListener('activate', (event) => {
       if (!key.startsWith(OURS)) continue;
       if (key !== SHELL_CACHE && key !== PACK_CACHE) await caches.delete(key);
     }
+
+    // **Nothing the shell owns may also sit in the pack cache.** The fetch handler
+    // below used to revalidate every `/data/` path into `PACK_CACHE`, and that is
+    // 221 of the 278 shell files -- the whole registry, all 66 respell tables, all
+    // 48 interface catalogues, the theme. `caches.match` searches caches in
+    // creation order, and the pack cache outlives a deploy by design, so that copy
+    // shadowed the version-scoped one and a deploy did *not* replace it. It is the
+    // exact failure the comment on `PACK_CACHE` says is not survivable: last
+    // week's modules against this week's data, or worse, this week's
+    // `languages.csv` against last week's `scripts.csv` -- which names a script
+    // row that does not exist yet and took the studio down with `Cannot read
+    // properties of undefined (reading 'font_stack')`.
+    //
+    // Stopping it at the source is not enough, because every existing reader is
+    // already carrying the duplicates. They are dropped here. Nothing a reader
+    // saved is lost: `data/concepts/` and `data/lang/` are not in the shell
+    // manifest, so a saved pack's rows and its subset fonts are not touched, and
+    // the two font files that *are* in the shell keep their shell copy.
+    const shell = await caches.open(SHELL_CACHE);
+    const pack = await caches.open(PACK_CACHE);
+    for (const request of await pack.keys()) {
+      if (await shell.match(request, { ignoreSearch: true })) await pack.delete(request);
+    }
+
     await self.clients.claim();
   })());
 });
@@ -95,9 +119,20 @@ self.addEventListener('fetch', (event) => {
     const cached = await caches.match(request, { ignoreSearch: true });
     const fresh = fetch(request).then(async (response) => {
       if (response.ok) {
-        const cache = await caches.open(url.pathname.includes('/data/') || url.pathname.includes('/packs/')
-          ? PACK_CACHE : SHELL_CACHE);
-        cache.put(request, response.clone());
+        // Refresh the file in whichever cache already owns it. A shell file stays
+        // in the version-scoped shell, so a deploy really does replace it; a
+        // language's rows, its subset fonts and the gallery's thumbnails stay in
+        // the pack cache, which outlives a deploy on purpose.
+        //
+        // Asking the shell rather than testing the path is what makes this right.
+        // `data/registry/scripts.csv` is a shell file and `data/lang/km/core.csv`
+        // is not, and no prefix tells them apart -- which is why the `/data/` test
+        // this replaces sent two thirds of the shell to the wrong cache.
+        const shell = await caches.open(SHELL_CACHE);
+        const owner = (await shell.match(request, { ignoreSearch: true }))
+          ? shell
+          : await caches.open(PACK_CACHE);
+        owner.put(request, response.clone());
       }
       return response;
     }).catch(() => null);
@@ -118,8 +153,23 @@ self.addEventListener('message', (event) => {
   if (!data || data.type !== 'cache-urls') return;
   event.waitUntil((async () => {
     const cache = await caches.open(PACK_CACHE);
-    const results = await Promise.allSettled(data.urls.map((/** @type {string} */ u) => cache.add(u)));
-    const failed = data.urls.filter((/** @type {string} */ _, /** @type {number} */ i) => results[i].status === 'rejected');
+    const shell = await caches.open(SHELL_CACHE);
+    // **Skip what the shell already has.** A pair needs its reader's respelling
+    // overrides and the Latin face, and both of those are shell files -- already
+    // precached, already offline, and nothing here can make them more so. Copying
+    // them puts the same file in both caches, which is the shadowing `activate`
+    // exists to remove: the pack cache is not version-scoped and answers first, so
+    // the copy would outlive the deploy meant to replace it.
+    //
+    // They still count toward `total`, because the reader asked for a pair and got
+    // one; what is reported is whether the pair is saved, not how many requests it
+    // took.
+    /** @type {string[]} */ const wanted = [];
+    for (const url of data.urls) {
+      if (!(await shell.match(url, { ignoreSearch: true }))) wanted.push(url);
+    }
+    const results = await Promise.allSettled(wanted.map((u) => cache.add(u)));
+    const failed = wanted.filter((/** @type {string} */ _, /** @type {number} */ i) => results[i].status === 'rejected');
     event.source?.postMessage({
       type: 'cache-urls-done', ok: failed.length === 0, failed, total: data.urls.length,
     });

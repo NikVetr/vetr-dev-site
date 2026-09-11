@@ -78,7 +78,14 @@ export function stacksFor(corpus, target, source, typeface = 'sans', serifHeadin
   const of = (/** @type {string} */ code) => {
     const lang = corpus.languages[code];
     if (!lang) throw new Error(`unknown language ${code}`);
-    return corpus.scripts[lang.script].font_stack;
+    const script = corpus.scripts[lang.script];
+    // Named, because the unnamed version of this *was* a reader's whole error
+    // message: `Cannot read properties of undefined (reading 'font_stack')`, with
+    // nothing to say which row was missing or why. `validate_data.py` makes the
+    // two files consistent in the repository, so when a browser disagrees the
+    // cause is its own cache -- and the useful thing to print is the script.
+    if (!script) throw new Error(`unknown script ${lang.script} for language ${code}`);
+    return script.font_stack;
   };
   // latin-cond always travels with latin: the table templates ask for it.
   const base = [...new Set(['latin', 'latin-cond', of(target), of(source)])];

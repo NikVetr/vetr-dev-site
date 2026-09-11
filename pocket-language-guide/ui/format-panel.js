@@ -183,7 +183,11 @@ function el(tag, attrs = {}, kids = []) {
 function fieldSample(values, spec, corpus) {
   const stackOf = (/** @type {string} */ code) => {
     const lang = corpus && code ? corpus.languages[code] : null;
-    return lang && corpus ? familyFor(corpus.scripts[lang.script].font_stack) : 'inherit';
+    const script = lang && corpus ? corpus.scripts[lang.script] : null;
+    // This only picks the family a sample is drawn in, so a script row that is
+    // missing falls back to the page font rather than taking the whole panel down.
+    // `stacksFor` is the one that has to be loud about it.
+    return script ? familyFor(script.font_stack) : 'inherit';
   };
   return {
     values,

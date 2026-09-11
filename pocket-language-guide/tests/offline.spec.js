@@ -122,3 +122,44 @@ test('a saved pack survives a shell change', async ({ page, context }) => {
   await page.goto('/customize.html?target=zh-Hans&source=en');
   await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
 });
+
+test('a shell file is never shadowed by a copy in the pack cache', async ({ page }) => {
+  // The shell is version-scoped and the pack cache is not, deliberately -- so a
+  // file in both is a file a deploy cannot replace. `caches.match` searches caches
+  // in creation order and the pack cache outlives the shell, so the stale copy is
+  // the one that answers.
+  //
+  // The fetch handler used to decide by path, sending every `/data/` request to the
+  // pack cache, and two thirds of the shell manifest is under `data/`: the whole
+  // registry, every respell table, every interface catalogue. That is how a Windows
+  // reader came to hold a `languages.csv` naming a script their `scripts.csv` did
+  // not have yet, and the studio died with `Cannot read properties of undefined
+  // (reading 'font_stack')`.
+  await page.goto('/');
+  await expect(page.locator('.card').first()).toBeVisible();
+  await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
+  // The studio asks for far more of the registry than the gallery does, and a save
+  // is what fills the pack cache with the files that legitimately belong there.
+  await page.goto('/customize.html?target=zh-Hans&source=en');
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+  await save(page, 'zh-Hans', 'en');
+  // Revalidation is fire-and-forget, so give the writes a moment to land rather
+  // than polling until the answer is the one we want -- which would hide the bug.
+  await page.waitForTimeout(1500);
+
+  const { overlap, packOnly } = await page.evaluate(async () => {
+    const names = await caches.keys();
+    const shell = await caches.open(names.find((n) => n.endsWith('-shell')) ?? '');
+    const pack = await caches.open('plg-packs');
+    const inShell = new Set((await shell.keys()).map((r) => r.url));
+    const inPack = (await pack.keys()).map((r) => r.url);
+    return {
+      overlap: inPack.filter((u) => inShell.has(u)).map((u) => new URL(u).pathname),
+      packOnly: inPack.filter((u) => !inShell.has(u)).length,
+    };
+  });
+  expect(overlap).toEqual([]);
+  // And the pack cache is still doing its job, so this is not passing by being
+  // empty -- a saved pair is its corpus rows and its subset fonts.
+  expect(packOnly).toBeGreaterThan(20);
+});
