@@ -10,6 +10,7 @@ import json
 import re
 from dataclasses import dataclass
 from pathlib import Path
+from position_families import FAMILIES
 
 
 APP_ROOT = Path(__file__).resolve().parents[1]
@@ -100,6 +101,10 @@ def load_public_routes(catalog_path: Path) -> tuple[PositionRoute, ...]:
             if any(existing.key == key or existing.slug == route.slug for existing in routes):
                 raise ValueError(f"Duplicate expansion route: {key}")
             routes.append(route)
+        for key, label, _members in FAMILIES:
+            if key in {route.key for route in routes}:
+                raise ValueError(f"Duplicate pooled route: {key}")
+            routes.append(PositionRoute(key, label, "exploratory", key.replace("_", "-")))
     return tuple(routes)
 
 

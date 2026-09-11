@@ -51,16 +51,28 @@ button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible
 .title-position-select > span { display: block; cursor: pointer; transition: color .15s ease; }
 .title-position-select select {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  width: 1px;
+  height: 1px;
   margin: 0;
   padding: 0;
   border: 0;
   background: none;
   opacity: 0;
-  cursor: pointer;
+  pointer-events: none;
 }
+.title-position-select > button { position: absolute; inset: 0; width: 100%; border: 0; padding: 0; background: transparent; cursor: pointer; }
+.title-position-select:has(> button:focus-visible) { outline: 3px solid color-mix(in srgb, var(--focus), transparent 60%); outline-offset: 2px; }
+#position-menu { position: fixed; z-index: 100; top: 96px; left: clamp(18px, 2.2vw, 36px); width: min(570px, calc(100vw - 36px)); max-height: calc(100dvh - 114px); overflow-y: auto; overscroll-behavior: contain; padding: 10px; border: 1px solid var(--line-dark); border-radius: 8px; background: var(--panel); box-shadow: var(--shadow); }
+.position-menu-heading { margin: 14px 8px 5px; color: var(--green); font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.position-choice { display: grid; grid-template-columns: minmax(0, 1fr) 68px; gap: 3px 12px; align-items: center; width: 100%; padding: 9px 8px; border: 0; border-radius: 4px; background: transparent; text-align: left; font: 550 13px/1.35 "Aspekta Variable", sans-serif; color: var(--ink); cursor: pointer; }
+.position-choice:hover, .position-choice:focus-visible { background: var(--green-soft); outline: 2px solid var(--line); outline-offset: -2px; }
+.position-choice[aria-current="true"] { background: var(--green-soft); color: var(--green); }
+.position-choice-count { text-align: right; color: var(--muted); font-size: 12px; font-weight: 500; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.position-choice-subtitle { grid-column: 1; color: var(--muted); font-size: 10px; font-weight: 400; }
+.position-subgroups { margin: 0 0 4px 12px; }
+.position-subgroups > summary { padding: 3px 8px; color: var(--muted); font-size: 10px; cursor: pointer; }
+.position-subgroups .position-choice { font-size: 12px; padding-block: 7px; }
+.position-menu-note { margin: 10px 8px 4px; color: var(--muted); font-size: 10px; line-height: 1.4; }
 .title-position-select:hover > span,
 .title-position-select:has(> select:focus-visible) > span { color: var(--green); }
 .title-position-select:has(> select:focus-visible) { border-radius: 3px; outline: 3px solid color-mix(in srgb, var(--focus), transparent 60%); outline-offset: 2px; }

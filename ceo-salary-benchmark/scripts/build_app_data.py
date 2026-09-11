@@ -16,6 +16,7 @@ from predictive_model_contract import predictive_model_input_sha256, predictive_
 from operating_evidence_review import load_reviews, attach_review_fields
 from other_employee_pay import attach_highest_paid_other_employee
 from compensation_expansion import apply_expansion
+from position_families import apply_position_families
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -3094,6 +3095,7 @@ def main() -> None:
     # The predictive artifact is validated above against its unchanged frozen
     # inputs. Reviewed expansion records belong to the empirical explorer.
     apply_expansion(payload, cache_source)
+    apply_position_families(payload)
     payload = normalize_ea_taxonomy(payload)
     assert_no_retired_ea_label(payload)
     OUTPUT.write_text(

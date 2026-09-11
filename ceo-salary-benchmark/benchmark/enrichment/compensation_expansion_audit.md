@@ -12,7 +12,7 @@ The reference set remains purposive and disproportionately covers senior/high-pa
 
 ## Integrated records
 
-**294 additional records are published:** 237 non-CEO incumbent disclosures, 32 CEO disclosures and 25 advertised cases. There are 22 new role pages, bringing the catalog to CEO plus 36 other positions. The added records span 116 named organizations; many organizations already appeared elsewhere in the app. This is not a claim of 116 newly discovered employers.
+**294 additional records are published:** 237 non-CEO incumbent disclosures, 32 CEO disclosures and 25 advertised cases. There are 22 new title-specific role pages, bringing the title-specific catalog to CEO plus 36 other positions. Nine pooled functional-leadership views additionally combine existing title groups without new observations. The added records span 116 named organizations; many organizations already appeared elsewhere in the app. This is not a claim of 116 newly discovered employers.
 
 New role groups include People/HR Director and Executive, functional research/development/communications executives, Executive Vice President, Chief Economist, Controller, Legal Director, Operations Director and Manager, research and program managers, and research/program individual contributors. Existing COO, CFO, research-director and other pages receive supported additions. New role groups retain their narrower reviewed definitions instead of splitting hybrid jobs among functions.
 

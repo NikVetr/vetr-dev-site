@@ -109,8 +109,24 @@
 
   const canonicalPositionIncumbents = new Map(Object.values(DATA.positionObservations || {}).flat().map((row) => [row.id, row]));
 
+  function pooledPositionRows(key, getter) {
+    const unique = new Map();
+    positionDefinition(key).memberPositionKeys.flatMap((member) => getter(member)).forEach((row) => {
+      const previous = unique.get(row.id);
+      const included = row.defaultIncluded && (!previous || previous.defaultIncluded);
+      const chosen = previous && (!previous.defaultIncluded || row.defaultIncluded) ? previous : row;
+      unique.set(row.id, { ...chosen, defaultIncluded: included,
+        structurallyClean: chosen.structurallyClean && included,
+        analysisStatus: [previous?.analysisStatus, row.analysisStatus].includes("excluded") ? "excluded" : chosen.analysisStatus,
+        sensitivityOnlyReason: previous?.sensitivityOnlyReason || row.sensitivityOnlyReason,
+        highestPaidOtherEmployee40h: undefined, highestPaidOtherEmployee: undefined, otherPayDisclosure: undefined });
+    });
+    return [...unique.values()];
+  }
+
   function positionIncumbents(key = state.position) {
     if (key === "ceo") return DATA.incumbents;
+    if (positionDefinition(key).pooled) return pooledPositionRows(key, positionIncumbents);
     const direct = Array.isArray(DATA.positionObservations?.[key]) ? DATA.positionObservations[key] : [];
     const shared = (DATA.positionMemberships?.[key] || []).map((membership) => {
       const row = canonicalPositionIncumbents.get(membership.observationId);
@@ -131,6 +147,7 @@
 
   function positionJobAds(key = state.position) {
     if (key === "ceo") return DATA.jobAds;
+    if (positionDefinition(key).pooled) return pooledPositionRows(key, positionJobAds);
     return Array.isArray(DATA.positionJobAds?.[key]) ? DATA.positionJobAds[key] : [];
   }
 
@@ -140,6 +157,11 @@
 
   function activeRpReferences(key = state.position) {
     if (key === "ceo") return DATA.rpReference ? [DATA.rpReference] : [];
+    if (positionDefinition(key).pooled) {
+      return [...new Map(positionDefinition(key).memberPositionKeys.flatMap((member) => activeRpReferences(member)).map((row) => [row.id, {
+        ...row, highestPaidOtherEmployee40h: undefined, highestPaidOtherEmployee: undefined, otherPayDisclosure: undefined,
+      }])).values()];
+    }
     return Array.isArray(DATA.rpReferencesByPosition?.[key]) ? DATA.rpReferencesByPosition[key] : [];
   }
 
@@ -730,6 +752,71 @@
     });
     refs.position.value = state.position;
     refs.positionSelectedLabel.textContent = positionDefinition().pageLabel;
+    populatePositionMenu();
+  }
+
+  function populatePositionMenu() {
+    const menu = $("#position-menu");
+    const groupedMembers = new Set(POSITION_CATALOG.flatMap((p) => p.memberPositionKeys || []));
+    const addChoice = (position, container) => {
+      const button = document.createElement("button");
+      button.type = "button"; button.className = "position-choice"; button.dataset.positionKey = position.key;
+      const name = document.createElement("span"); name.textContent = position.label;
+      const count = document.createElement("span"); count.className = "position-choice-count";
+      const n = position.counts?.initialAvailable ?? position.counts?.defaultAvailable ?? position.counts?.defaultIncluded;
+      count.textContent = Number.isFinite(n) ? `(n = ${n})` : "";
+      button.append(name, count);
+      const subtitle = position.subtitle || (position.key === "ceo" ? "CEO · Executive Director · chief-executive President" : "");
+      if (subtitle) {
+        const sub = document.createElement("span"); sub.className = "position-choice-subtitle"; sub.textContent = subtitle;
+        button.append(sub);
+      }
+      container.append(button);
+    };
+    menu.replaceChildren();
+    addChoice(positionDefinition("ceo"), menu);
+    const leadership = ["operations_leadership", "finance_leadership", "legal_leadership", "chief_of_staff",
+      "people_leadership", "research_leadership", "program_leadership", "development_leadership",
+      "communications_leadership", "policy_leadership", "managing_director", "executive_vice_president", "senior_vice_president", "vice_president"];
+    const remaining = POSITION_CATALOG.filter((p) => p.key !== "ceo" && !groupedMembers.has(p.key) && !leadership.includes(p.key));
+    const groups = [
+      ["Executive leadership", leadership.map((key) => positionDefinition(key))],
+      ["Managers", remaining.filter((p) => p.menuGroup === "Managers")],
+      ["Research and specialists", remaining.filter((p) => p.menuGroup !== "Managers")],
+    ];
+    groups.forEach(([label, positions]) => {
+      const heading = document.createElement("p"); heading.className = "position-menu-heading"; heading.textContent = label; menu.append(heading);
+      positions.forEach((position) => {
+        addChoice(position, menu);
+        if (!position.pooled) return;
+        const details = document.createElement("details"); details.className = "position-subgroups";
+        const summary = document.createElement("summary"); summary.textContent = "Title subgroups"; details.append(summary);
+        position.memberPositionKeys.forEach((key) => addChoice(positionDefinition(key), details));
+        menu.append(details);
+      });
+    });
+    const note = document.createElement("p"); note.className = "position-menu-note";
+    note.textContent = "n counts usable records in each view’s starting sample, including advertised ranges. Pooled roles retain original titles and eligibility checks.";
+    menu.append(note);
+  }
+
+  function closePositionMenu({ focus = false } = {}) {
+    $("#position-menu").hidden = true;
+    $("#position-menu-trigger").setAttribute("aria-expanded", "false");
+    if (focus) $("#position-menu-trigger").focus();
+  }
+
+  function openPositionMenu() {
+    const menu = $("#position-menu");
+    menu.querySelectorAll("[data-position-key]").forEach((button) => {
+      button.setAttribute("aria-current", String(button.dataset.positionKey === state.position));
+      if (button.dataset.positionKey === state.position && button.parentElement.matches("details")) button.parentElement.open = true;
+    });
+    menu.hidden = false;
+    const top = Math.min($("#position-menu-trigger").getBoundingClientRect().bottom + 12, window.innerHeight / 3);
+    menu.style.top = `${top}px`; menu.style.maxHeight = `${window.innerHeight - top - 16}px`;
+    $("#position-menu-trigger").setAttribute("aria-expanded", "true");
+    menu.querySelector('[aria-current="true"]').focus();
   }
 
   function clearAnalyticalFilters() {
@@ -8013,6 +8100,31 @@
   });
 
   refs.position.addEventListener("change", () => activatePosition(refs.position.value));
+  $("#position-menu-trigger").addEventListener("click", () => {
+    if ($("#position-menu").hidden) openPositionMenu(); else closePositionMenu();
+  });
+  $("#position-menu").addEventListener("click", (event) => {
+    const button = event.target.closest("[data-position-key]");
+    if (!button) return;
+    activatePosition(button.dataset.positionKey);
+    closePositionMenu({ focus: true });
+  });
+  $("#position-menu").addEventListener("keydown", (event) => {
+    if (event.key === "Escape") { event.preventDefault(); closePositionMenu({ focus: true }); return; }
+    if (!["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) return;
+    event.preventDefault();
+    const choices = [...$("#position-menu").querySelectorAll("button, summary")].filter((item) => item.getClientRects().length);
+    const index = choices.indexOf(document.activeElement);
+    const next = event.key === "Home" ? 0 : event.key === "End" ? choices.length - 1
+      : (index + (event.key === "ArrowDown" ? 1 : -1) + choices.length) % choices.length;
+    choices[next].focus();
+  });
+  document.addEventListener("pointerdown", (event) => {
+    if (!event.target.closest("#position-menu, #position-menu-trigger")) closePositionMenu();
+  });
+  document.addEventListener("focusin", (event) => {
+    if (!event.target.closest("#position-menu, #position-menu-trigger")) closePositionMenu();
+  });
   refs.stream.addEventListener("change", () => {
     state.stream = refs.stream.value; state.focusedId = ""; state.autoBins = true;
     if (state.stream === "combined") {
