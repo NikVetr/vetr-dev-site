@@ -8,7 +8,7 @@ test("expectation target separates log-location uncertainty from predictive spre
   await page.getByRole("button", { name: "About displayed uncertainty" }).hover();
   await expect(page.locator("#help-tooltip")).toContainText("All models are fitted on log salary.");
   await expect(page.locator("#help-tooltip")).toContainText("Posterior predictive salary distribution");
-  await expect(page.locator("#help-tooltip")).toContainText("e^μ means exponentiation");
+  await expect(page.locator("#help-tooltip")).toContainText("eμ means exponentiation");
   await page.locator("#quantile-granularity").selectOption("custom");
   await page.locator("#custom-quantiles").fill("25, 50, 75");
   await page.locator("#custom-quantiles").blur();
@@ -27,7 +27,15 @@ test("expectation target separates log-location uncertainty from predictive spre
     return { id: row.key, quantiles: [.25, .5, .75].map(q), interval: [.055, .945].map(q) };
   });
   await page.locator("#model-target").selectOption("expectation");
-  await expect(page.locator("#quantile-basis")).toContainText("Estimation percentiles of e^μ");
+  await expect(page.locator("#quantile-basis")).toContainText("Estimation percentiles of eμ");
+  for (const selector of ["#chart-title", "#stat-n-unit", "#quantile-basis"]) {
+    const expression = page.locator(`${selector} .math-expression`);
+    await expect(expression).toHaveCSS("text-transform", "none");
+    await expect(expression).toHaveCSS("font-style", "italic");
+    await expect(expression.locator("sup")).toHaveText("μ");
+    await expect(expression.locator("sup")).toHaveCSS("vertical-align", "super");
+  }
+  await page.locator(".chart-heading").screenshot({ path: "tmp/model-superscript-heading.png" });
   await expect(page.locator("#quantile-grid .quantile-uncertainty")).toHaveCount(0);
   const location = await values();
   location.forEach((value, i) => expect(value).toBeCloseTo(expected.quantiles[i], 6));
@@ -49,7 +57,7 @@ test("expectation target separates log-location uncertainty from predictive spre
     if (method === "svr") await expect(page.locator("#model-target")).toHaveAttribute("title", /Bootstrap uncertainty/);
     if (method === "linear") await expect(page.locator("#model-target")).toHaveAttribute("title", /Approximate coefficient uncertainty/);
     if (method === "bayesianExact") await page.locator("#model-base-only").check();
-    await expect(page.locator("#quantile-basis")).toContainText("Estimation percentiles of e^μ");
+    await expect(page.locator("#quantile-basis")).toContainText("Estimation percentiles of eμ");
     const draws = await values(); expect(draws).toHaveLength(3);
     expect(draws.every(Number.isFinite)).toBe(true);
     expect(draws[0]).toBeLessThan(draws[1]); expect(draws[1]).toBeLessThan(draws[2]);
