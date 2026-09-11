@@ -304,18 +304,25 @@ is only a grouping.
 | 1 | ~~`bn` Bengali, `ur` Urdu, `pl` Polish~~ **done** | first new script since Hebrew; Arabic-stack reuse a second time; a plain Latin control |
 | 2 | ~~`ta` Tamil, `te` Telugu, `mr` Marathi~~ | three Indic scripts, two of them new, one reusing Devanagari |
 | 3 | ~~`uk` Ukrainian, `nl` Dutch, `ro` Romanian~~ | Cyrillic reuse and two Latin, all with espeak voices |
-| 4 | **`my` refused**, `km` Khmer **draft**, ~~`lo` Lao~~ | the hard batch: complex stacking, and `word_break: dict` for the second and third time |
+| 4 | **`my` refused**, ~~`km` Khmer, `lo` Lao~~ | the hard batch: complex stacking, and `word_break: dict` for the second and third time |
 | 5 | ~~`fil` Filipino, `ms` Malay~~, `zh-Hant` **not a language** | two Latin; the variant question is settled above -- `zh-Hant` is `script_alt`, not a row |
 | 6 | ~~`am` Amharic, `ka` Georgian, `hy` Armenian~~ **done** | three scripts nothing else in the corpus resembles |
 | 7 | ~~`pa` Punjabi, `gu` Gujarati~~, **`si` refused** | Brahmic breadth |
 | 8 | ~~`kn` Kannada, `ml` Malayalam, `ne` Nepali~~ | completes the Indic set |
-| 9 | ~~`cs` Czech, `sv` Swedish~~, `fi` Finnish | European Latin, and Finnish's agglutination is Hungarian's problem again |
+| 9 | ~~`cs` Czech, `sv` Swedish, `fi` Finnish~~ **done** | European Latin, and Finnish's agglutination is Hungarian's problem again |
 
 `hr` Croatian was added off-roadmap as language 46, for a reason the batches do not
 capture: Croatia is among the highest-traffic destinations without a card, and Gaj's
-Latin cost the font and respelling machinery nothing. **What is actually left** is
-`fi` Finnish -- two refusals (`my`, `si`) are closed until
-fontkit gains a shaper, and `zh-Hant` is not a row.
+Latin cost the font and respelling machinery nothing.
+
+**The roadmap is finished.** Fifty languages are `ready`; `my` and `si` are refused
+until fontkit gains a shaper, and `zh-Hant` is a `script_alt` rather than a row. So
+a new language now needs a reason of its own, and the two arguments that have
+carried one are Croatian's -- a high-traffic destination whose script costs the
+machinery nothing -- and the batch table's, that a script teaches the engine
+something no shipped script does. **What is left is not breadth but depth**: three
+countries' cards name no currency because there is no `dram`, `lari` or `kip`
+concept, and each of those is a fifty-pack sweep rather than a language.
 
 **Georgian went in as language 47 and is the counter-example the last three
 script attempts needed**, so its numbers are here rather than only in
