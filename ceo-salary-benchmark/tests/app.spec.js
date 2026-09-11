@@ -84,7 +84,7 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#stat-n")).toHaveText("129");
   await expect(page.locator(".bar-block")).toHaveCount(129);
   const screenedRosterIntegration = await page.evaluate(() => {
-    const incumbents = window.CEO_BENCHMARK_DATA.incumbents;
+    const incumbents = window.CEO_BENCHMARK_DATA.incumbents.filter((row) => !row.expansionReview);
     const byOrganization = (organization) => incumbents.filter((row) => row.organization === organization);
     return {
       projectHealthyChildren: byOrganization("Project Healthy Children").map((row) => ({
@@ -139,12 +139,13 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   }));
   expect(explainerCoverage).toEqual({
     definitions: 280,
-    rows: 193,
+    rows: 225,
     filingReviews: 122,
     packageCounts: { reference_selection: 144, form990: 135, job_ad: 33 },
   });
   const wikipediaCoverage = await page.evaluate(() => {
-    const rows = [...window.CEO_BENCHMARK_DATA.incumbents, ...window.CEO_BENCHMARK_DATA.jobAds];
+    const rows = [...window.CEO_BENCHMARK_DATA.incumbents, ...window.CEO_BENCHMARK_DATA.jobAds]
+      .filter((row) => !row.expansionReview);
     const profiles = new Map(rows.map((row) => [row.organization, {
       title: row.wikipediaTitle,
       url: row.wikipediaUrl,
@@ -488,10 +489,10 @@ test("benchmark interactions and validated sources", async ({ page }) => {
   await expect(page.locator("#sample-description")).toContainText("Reviewed full-year CEO pay records");
   await page.locator("#sample-select").selectOption("sensitivity");
   await expect(page.locator("#sample-description")).toContainText("broader comparisons");
-  await expect(page.locator("#stat-n")).toHaveText("137");
+  await expect(page.locator("#stat-n")).toHaveText("168");
   await page.locator("#stream-select").selectOption("incumbents");
   await page.locator("#measure-select").selectOption("cash");
-  await expect(page.locator("#stat-n")).toHaveText("126");
+  await expect(page.locator("#stat-n")).toHaveText("158");
   for (const organization of ["Animal Equality", "Compassion in World Farming USA", "Center for Public Integrity", "Nuclear Threat Initiative"]) {
     await expect(page.locator(`tbody tr[data-id]:has(.organization-name:text-is("${organization}")) .row-toggle`)).toBeChecked();
   }
@@ -2984,7 +2985,8 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/ceo-salary-benchmark/");
 
-  const catalog = await page.evaluate(() => window.CEO_BENCHMARK_DATA.positionCatalog || []);
+  const allCatalog = await page.evaluate(() => window.CEO_BENCHMARK_DATA.positionCatalog || []);
+  const catalog = allCatalog.filter((position) => !position.expansion);
   const positions = new Map(catalog.map((position) => [position.key, position]));
   expect([...positions.keys()]).toEqual([
     "ceo", "vice_president", "program_director", "managing_director", "coo",
@@ -3036,7 +3038,7 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
     { id: "SRC-990-EXT-PROJECT-DRAWDOWN::reshmapattni", position: "finance_director", executive: "RESHMA PATTNI", rawExecutive: "RESHMA PATTNI", title: "FINANCE DIRECTOR", rawTitle: "FINANCE DIRE", effectiveSource: "schedule_j_reviewed_expansion", classificationSource: "" },
     { id: "SRC-990-EXT-PROJECT-DRAWDOWN::toodreubold", position: "communications_director", executive: "TOOD REUBOLD", rawExecutive: "TOOD REUBOLD", title: "MARKETING DIRECTOR", rawTitle: "MARKETING DI", effectiveSource: "schedule_j_reviewed_expansion", classificationSource: "" },
   ]);
-  await expect(page.locator("#position-select option")).toHaveCount(catalog.length);
+  await expect(page.locator("#position-select option")).toHaveCount(allCatalog.length);
   await expect(page.locator("#position-selected-label")).toHaveText("CEO");
   const selectedPositionOverlay = await page.locator(".title-position-select").evaluate((shell) => {
     const select = shell.querySelector("select").getBoundingClientRect();

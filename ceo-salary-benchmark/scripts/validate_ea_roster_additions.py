@@ -467,9 +467,14 @@ def validate_screened_roster_entity_update() -> None:
         item for item in payload.get("incumbents", [])
         if item.get("organization") == "Project Healthy Children"
     ]
-    if len(entity_rows) != 1:
+    current_rows = [item for item in entity_rows if not item.get("expansionReview")]
+    if len(current_rows) != 1:
         raise ValueError("Sanku / Project Healthy Children was not entity-deduplicated in the app")
-    generated = entity_rows[0]
+    # A separately reviewed historical filing is not a second legal employer.
+    years = [item.get("compensationYear") for item in entity_rows]
+    if len(set(years)) != len(years) or any(item.get("defaultIncluded") for item in entity_rows if item.get("expansionReview")):
+        raise ValueError("Project Healthy Children historical years were duplicated or entered the default cohort")
+    generated = current_rows[0]
     if generated.get("executive") != "FELIX BROOKS-CHURCH" or generated.get("title") != "CEO":
         raise ValueError("Generated Project Healthy Children identity/title changed")
     for measure, expected_value in (("base", 97_072), ("cash", 97_072), ("total", 213_840)):
