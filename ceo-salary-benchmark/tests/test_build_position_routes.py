@@ -7,6 +7,7 @@ from pathlib import Path
 
 
 SCRIPT_PATH = Path(__file__).resolve().parents[1] / "scripts/build_position_routes.py"
+sys.path.insert(0, str(SCRIPT_PATH.parent))
 SPEC = importlib.util.spec_from_file_location("build_position_routes", SCRIPT_PATH)
 assert SPEC and SPEC.loader
 ROUTES = importlib.util.module_from_spec(SPEC)

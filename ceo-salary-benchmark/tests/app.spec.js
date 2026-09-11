@@ -2986,7 +2986,7 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
   await page.goto("/ceo-salary-benchmark/");
 
   const allCatalog = await page.evaluate(() => window.CEO_BENCHMARK_DATA.positionCatalog || []);
-  const catalog = allCatalog.filter((position) => !position.expansion);
+  const catalog = allCatalog.filter((position) => !position.expansion && !position.pooled);
   const positions = new Map(catalog.map((position) => [position.key, position]));
   expect([...positions.keys()]).toEqual([
     "ceo", "vice_president", "program_director", "managing_director", "coo",
@@ -3041,17 +3041,17 @@ test("standardized positions switch evidence, labels, controls, and semantic sha
   await expect(page.locator("#position-select option")).toHaveCount(allCatalog.length);
   await expect(page.locator("#position-selected-label")).toHaveText("CEO");
   const selectedPositionOverlay = await page.locator(".title-position-select").evaluate((shell) => {
-    const select = shell.querySelector("select").getBoundingClientRect();
+    const trigger = shell.querySelector("#position-menu-trigger").getBoundingClientRect();
     const label = shell.querySelector("#position-selected-label").getBoundingClientRect();
     return {
-      selectCoversLabel: select.left <= label.left && select.right >= label.right
-        && select.top <= label.top && select.bottom >= label.bottom,
-      selectOpacity: getComputedStyle(shell.querySelector("select")).opacity,
-      cursor: getComputedStyle(shell.querySelector("select")).cursor,
+      triggerCoversLabel: trigger.left <= label.left && trigger.right >= label.right
+        && trigger.top <= label.top && trigger.bottom >= label.bottom,
+      background: getComputedStyle(shell.querySelector("#position-menu-trigger")).backgroundColor,
+      cursor: getComputedStyle(shell.querySelector("#position-menu-trigger")).cursor,
     };
   });
   expect(selectedPositionOverlay).toEqual({
-    selectCoversLabel: true, selectOpacity: "0", cursor: "pointer",
+    triggerCoversLabel: true, background: "rgba(0, 0, 0, 0)", cursor: "pointer",
   });
   for (const position of catalog) {
     await expect(page.locator(`#position-select option[value="${position.key}"]`))
