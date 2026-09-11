@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import csv
 import html
+import json
 import re
 from dataclasses import dataclass
 from pathlib import Path
@@ -85,6 +86,20 @@ def load_public_routes(catalog_path: Path) -> tuple[PositionRoute, ...]:
             if route.support == "primary":
                 routes.append(route)
 
+    # New reviewed roles have a separate catalog so the original extraction
+    # and its support counts remain reproducible.
+    expansion_path = APP_ROOT / "benchmark/enrichment/compensation_expansion.json"
+    if catalog_path.resolve() == DEFAULT_CATALOG.resolve():
+        expansion = json.loads(expansion_path.read_text())
+        for definition in expansion["positions"]:
+            key = definition["key"]
+            route = _route_from_row({
+                "position_key": key, "label": definition["pageLabel"],
+                "support_level": definition["supportLevel"],
+            }, len(routes) + 1)
+            if any(existing.key == key or existing.slug == route.slug for existing in routes):
+                raise ValueError(f"Duplicate expansion route: {key}")
+            routes.append(route)
     return tuple(routes)
 
 

@@ -65,7 +65,7 @@
       ? supplied
       : [DEFAULT_POSITION, ...supplied];
     const byKey = new Map();
-    catalog.filter((position) => position.key === "ceo" || !position.supportLevel || position.supportLevel === "primary").forEach((position) => {
+    catalog.filter((position) => position.key === "ceo" || !position.supportLevel || ["primary", "exploratory"].includes(position.supportLevel)).forEach((position) => {
       if (!position?.key || byKey.has(position.key)) throw new Error(`Invalid or duplicate position key: ${position?.key || "blank"}`);
       byKey.set(position.key, {
         ...position,
@@ -107,9 +107,26 @@
     return POSITION_BY_KEY.get(key) || POSITION_BY_KEY.get("ceo") || DEFAULT_POSITION;
   }
 
+  const canonicalPositionIncumbents = new Map(Object.values(DATA.positionObservations || {}).flat().map((row) => [row.id, row]));
+
   function positionIncumbents(key = state.position) {
     if (key === "ceo") return DATA.incumbents;
-    return Array.isArray(DATA.positionObservations?.[key]) ? DATA.positionObservations[key] : [];
+    const direct = Array.isArray(DATA.positionObservations?.[key]) ? DATA.positionObservations[key] : [];
+    const shared = (DATA.positionMemberships?.[key] || []).map((membership) => {
+      const row = canonicalPositionIncumbents.get(membership.observationId);
+      if (!row) throw new Error(`Missing cross-listed observation: ${membership.observationId}`);
+      // Highest-other disclosure was screened against the canonical role family.
+      return { ...row, positionKey: key, defaultIncluded: membership.defaultIncluded,
+        analysisStatus: membership.defaultIncluded ? row.analysisStatus : "sensitivity_only",
+        structurallyClean: membership.defaultIncluded && row.structurallyClean,
+        selectionNote: membership.selectionNote,
+        sensitivityOnlyReason: membership.defaultIncluded ? "" : membership.selectionNote,
+        crossListingReview: membership,
+        positionTaxonomy: { ...row.positionTaxonomy, classificationRule: membership.classificationRule,
+          methodologyPath: DATA.categoryExplainers.compensationExpansionAuditPath },
+        highestPaidOtherEmployee40h: undefined, highestPaidOtherEmployee: undefined, otherPayDisclosure: undefined };
+    });
+    return direct.concat(shared);
   }
 
   function positionJobAds(key = state.position) {
@@ -706,8 +723,9 @@
       }
       const option = document.createElement("option");
       option.value = position.key;
-      const count = position.counts?.defaultAvailable ?? position.counts?.defaultIncluded;
-      option.textContent = Number.isFinite(count) ? `${position.label} (n = ${count})` : position.label;
+      const count = position.counts?.initialAvailable ?? position.counts?.defaultAvailable ?? position.counts?.defaultIncluded;
+      const support = position.expansion && position.supportLevel === "exploratory" ? "; exploratory" : "";
+      option.textContent = Number.isFinite(count) ? `${position.label} (n = ${count}${support})` : position.label;
       groups.get(groupLabel).append(option);
     });
     refs.position.value = state.position;
@@ -1128,13 +1146,14 @@
     if (!row || !POSITION_BY_KEY.has(positionKey)) return [];
     if (positionKey === state.position) return salary(row) == null ? [] : [row];
     const sourceId = filingSourceId(row);
-    if (!sourceId) return [];
+    if (!sourceId || !Number.isFinite(row.compensationYear)) return [];
     const isRpReference = row.analysisStatus === "reference_not_analyzed" || row.id === DATA.rpReference?.id;
     const candidates = isRpReference
       ? activeRpReferences(positionKey)
       : positionIncumbents(positionKey).filter(presetSelected);
     return candidates.filter((candidate) => (
       filingSourceId(candidate) === sourceId
+      && candidate.compensationYear === row.compensationYear
       && candidate.id !== row.id
       && salaryForBasis(candidate, state.inflationAdjusted) != null
     ));
@@ -2283,7 +2302,7 @@
         option.value = value;
         if (definition.positionKey) {
           const pairCount = positionIncumbents().filter((row) => (
-            row.defaultIncluded && definition.value(row) != null
+            presetSelected(row) && definition.value(row) != null
           )).length;
           option.textContent = `${POSITION_BY_KEY.get(definition.positionKey).label} pay · matching records: ${pairCount}`;
           option.disabled = pairCount === 0 && value !== expression.numerator && value !== expression.denominator;
@@ -4656,6 +4675,7 @@
   }
 
   function openSourceDialog(row) {
+    row = { ...row, ...DATA.compensationSourceUpdates?.[row.id] };
     $("#dialog-source-type").textContent = `${row.sourceType} · ${plainAuditStatus(row.auditStatus)}`;
     $("#dialog-title").textContent = row.organization;
     $("#dialog-measure-label").textContent = measureLabel(row);
@@ -5239,7 +5259,7 @@
     refs.chartViewContent.setAttribute("aria-labelledby", `chart-tab-${state.view}`);
     const roleLabel = positionDefinition().pageLabel;
     refs.sampleDescription.textContent = {
-      primary: `Reviewed full-year ${roleLabel} pay records used in the main benchmark.`,
+      primary: `${positionDefinition().expansion ? "Reviewed disclosed" : "Reviewed full-year"} ${roleLabel} pay records used in the main benchmark.`,
       sensitivity: "Recommended records plus broader comparisons, including unresolved CEO-hours cases.",
       clean: "Recommended records from organization types most similar to RP.",
       tierA: "Only the closest Form 990 peers and job-posting matches.",
@@ -7886,7 +7906,8 @@
     if (state.view === "model" && key !== "ceo") state.view = "histogram";
     state.stream = defaultPositionStream(key);
     state.measure = positionDefinition().defaultMeasure;
-    state.sample = "primary";
+    state.sample = positionDefinition().defaultSample || "primary";
+    state.inflationAdjusted = positionDefinition().defaultInflationAdjusted !== false;
     state.focusedId = "";
     state.hoverQuantile = null;
     state.autoBins = true;
@@ -8238,6 +8259,13 @@
   if (encodedInitialState || POSITION_BY_KEY.has(semanticPosition)) {
     try {
       restoreUrlState(encodedInitialState ? decodeUrlState(encodedInitialState) : { v: URL_STATE_VERSION }, semanticPosition);
+      if (!encodedInitialState && positionDefinition().defaultSample === "observed") {
+        state.sample = "observed";
+        state.inflationAdjusted = positionDefinition().defaultInflationAdjusted !== false;
+        applyPreset();
+        configureRanges();
+        syncControlsFromState();
+      }
     } catch (error) {
       applyPreset();
       configureRanges();

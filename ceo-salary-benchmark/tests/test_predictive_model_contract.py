@@ -140,9 +140,12 @@ class PredictiveModelContractTest(unittest.TestCase):
             *(row for rows in data["rpReferencesByPosition"].values() for row in rows),
         ]
         self.assertEqual(
-            {row["eaAffinity"] for row in all_rows},
+            {row["eaAffinity"] for row in all_rows if not row.get("expansionReview")},
             {"EA-adjacent", "functional-only"},
         )
+        for row in all_rows:
+            if row.get("expansionReview"):
+                self.assertIn(row["eaAffinity"], {"EA-adjacent", "functional-only", "Not assessed"})
 
     def test_model_uses_adjusted_salary_without_a_second_pay_year_effect(self):
         artifact = json.loads(
