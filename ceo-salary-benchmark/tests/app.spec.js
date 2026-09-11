@@ -2020,6 +2020,9 @@ test("table headers stack compact sort and filter controls at desktop and constr
       const filterSummary = header.querySelector(".header-filter-menu summary");
       const filterIcon = getComputedStyle(filterSummary, "::before");
       const filter = header.querySelector(".header-filter-menu").getBoundingClientRect();
+      const labelRange = document.createRange();
+      labelRange.selectNodeContents(sortButton);
+      const labelRight = Math.max(...Array.from(labelRange.getClientRects(), rect => rect.right));
       const sortIconTop = controls.top + Number.parseFloat(sortIcon.top);
       const sortIconRight = controls.right - Number.parseFloat(sortIcon.right);
       const sortGlyphShift = new DOMMatrixReadOnly(sortIcon.transform).m42;
@@ -2043,6 +2046,7 @@ test("table headers stack compact sort and filter controls at desktop and constr
         verticalGap: filter.top - sortIconTop - Number.parseFloat(sortIcon.height),
         glyphCenterGap: filterIconCenter.y - sortIconCenter.y,
         labelToIconGap: sortIconCenter.x - sort.right,
+        labelClearance: filter.left - labelRight,
         rightOffset: Math.abs(filter.right - sortIconRight),
         contained: controls.left >= bounds.left && controls.right <= bounds.right
           && filter.left >= controls.left && filter.right <= controls.right,
@@ -2065,6 +2069,7 @@ test("table headers stack compact sort and filter controls at desktop and constr
       && Math.abs(placement.verticalGap) <= 0.5
       && placement.glyphCenterGap >= 11.5 && placement.glyphCenterGap <= 12.5
       && placement.labelToIconGap >= 10 && placement.labelToIconGap <= 12.5
+      && placement.labelClearance >= -0.5
       && placement.rightOffset <= 0.5 && placement.contained
       && placement.sortTargetHeight >= 48 && placement.controlHeight >= 48
       && Math.abs(placement.sortGlyphShift - 6) <= 0.1
@@ -2104,6 +2109,21 @@ test("table headers stack compact sort and filter controls at desktop and constr
 
     await page.evaluate(() => document.activeElement?.blur());
     await page.locator(".table-panel").screenshot({ path: screenshot });
+    await page.locator('thead button[data-sort="comparabilityScore"]').scrollIntoViewIfNeeded();
+    await page.locator(".table-panel").screenshot({ path: screenshot.replace(".png", "-score.png") });
+  }
+  for (const zoom of [1.25, 1.5, 2]) {
+    await page.evaluate(value => { document.body.style.zoom = String(value); }, zoom);
+    const overlaps = await page.locator("thead th.filterable-column").evaluateAll(headers => headers.flatMap(header => {
+      const button = header.querySelector("button[data-sort]");
+      const range = document.createRange();
+      range.selectNodeContents(button);
+      const right = Math.max(...Array.from(range.getClientRects(), rect => rect.right));
+      const filter = header.querySelector(".header-filter-menu").getBoundingClientRect();
+      return right > filter.left + 0.5 || filter.right > header.getBoundingClientRect().right + 0.5
+        ? [button.dataset.sort] : [];
+    }));
+    expect(overlaps, `Header overlap at ${zoom * 100}% zoom`).toEqual([]);
   }
   expect(errors).toEqual([]);
 });
