@@ -66,7 +66,7 @@ numbers-money.baht-symbol,বাতের চিহ্ন,,bātera cihna,bˈate�
 numbers-money.forint,ফরিন্ট,,pharinṭa,fˈoɾinʈˌɔ,,2,bn-gloss-v1;cldr;ipa=espeak
 numbers-money.forint-symbol,ফরিন্টের চিহ্ন,,pharinṭera cihna,fˈoɾinʈˌeɾ tʃˈihnɔ,,2,bn-gloss-v1;cldr;ipa=espeak
 numbers-money.rupee,রুপি,,rupi,ɾˈupi,"the Indian rupee; West Bengalis call it টাকা in speech, the same word as the Bangladeshi taka",2,bn-gloss-v1;cldr;ipa=espeak
-numbers-money.rupee-symbol,রুপির চিহ্ন,,rupira cihna,ɾˈupiɾ tʃˈihnɔ,,2,bn-gloss-v1;cldr;ipa=espeak
+numbers-money.rupee-symbol,₹,রুপির চিহ্ন,rupi,,,2,bn-gloss-v1;cldr;currency-gap-v1
 numbers-money.dollar,ডলার,,ḍalāra,ɖˈɔlaɾ,,2,bn-gloss-v1;cldr;ipa=espeak
 numbers-money.dollar-symbol,ডলারের চিহ্ন,,ḍalārera cihna,ɖˈɔlaɾˌeɾ tʃˈihnɔ,,2,bn-gloss-v1;cldr;ipa=espeak
 numbers-money.pound,পাউন্ড,,pāunḍa,pˈaunɖˌɔ,,2,bn-gloss-v1;cldr;ipa=espeak
@@ -103,3 +103,13 @@ numbers-money.naira,নাইজেরিয়ান নায়রা,,,nˈai
 numbers-money.naira-symbol,নাইজেরিয়ান নায়রা (প্রতীক),,,nˈaiɟˌeɾiˌan nˈajɔɾˌa pɾˈotik,,2,naira-gloss-v1;cldr;ipa=espeak
 numbers-money.riel,রিয়েল,,,ɾˈiel,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
 numbers-money.riel-symbol,রিয়েল (প্রতীক),,,ɾˈiel pɾˈotik,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.taka,টাকা,,ṭākā,ʈˈaka,the currency of Bangladesh -- and the word West Bengal says for the rupee,2,Bangladesh Bank (bb.org.bd);cldr;ipa=espeak
+numbers-money.taka-symbol,৳,Tk,ṭākā,,the symbol on a price tag,2,Bangladesh Bank (bb.org.bd);cldr
+numbers-money.dram,দ্রাম,,drāma,dɾˈam,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.dram-symbol,দ্রাম (প্রতীক),,drāma (pratīka),dɾˈam pɾˈotik,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.lari,লারি,,lāri,lˈaɾi,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.lari-symbol,লারি (প্রতীক),,lāri (pratīka),lˈaɾi pɾˈotik,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.kip,কিপ,,kipa,kˈip,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.kip-symbol,কিপ (প্রতীক),,kipa (pratīka),kˈip pɾˈotik,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.pakistani-rupee,পাকিস্তানি রুপি,,pākistāni rupi,pˈakistˌani ɾˈupi,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.pakistani-rupee-symbol,পাকিস্তানি রুপি (প্রতীক),,pākistāni rupi (pratīka),pˈakistˌani ɾˈupi pɾˈotik,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak

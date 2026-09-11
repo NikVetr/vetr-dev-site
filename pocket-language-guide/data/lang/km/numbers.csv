@@ -103,3 +103,13 @@ numbers-money.naira,ណៃរ៉ានីហ្សេរីយ៉ា,,najraː ni
 numbers-money.naira-symbol,₦,,,,2,"Unicode Standard, Currency Symbols block (U+20A6); National Bank of Cambodia daily exchange-rate table (nbc.gov.kh/economic_research/exchange_rate.php)"
 numbers-money.riel,រៀល,,riəl,,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977);ipa=km-analysis"
 numbers-money.riel-symbol,៛,,riəl,,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977);ipa=km-analysis"
+numbers-money.dram,ដ្រាំអាមេនី,,dram ʔaːmeːniː,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=km-analysis
+numbers-money.dram-symbol,សញ្ញាដ្រាំអាមេនី,,sɑɲɲiə dram ʔaːmeːniː,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=km-analysis
+numbers-money.lari,ឡារីហ្សកហ្ស៊ី,,laːriː hsɑkhsiː,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=km-analysis
+numbers-money.lari-symbol,សញ្ញាឡារីហ្សកហ្ស៊ី,,sɑɲɲiə laːriː hsɑkhsiː,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=km-analysis
+numbers-money.kip,គីបឡាវ,,kiːp laːw,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=km-analysis
+numbers-money.kip-symbol,សញ្ញាគីបឡាវ,,sɑɲɲiə kiːp laːw,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=km-analysis
+numbers-money.taka,តាកាបង់ក្លាដែស,,taːkaː bɑŋklaːdaeh,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=km-analysis
+numbers-money.taka-symbol,សញ្ញាតាកាបង់ក្លាដែស,,sɑɲɲiə taːkaː bɑŋklaːdaeh,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=km-analysis
+numbers-money.pakistani-rupee,រ៉ូពីប៉ាគីស្ថាន,,roːpiː paːkiːstʰaːn,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=km-analysis
+numbers-money.pakistani-rupee-symbol,សញ្ញារ៉ូពីប៉ាគីស្ថាន,,sɑɲɲiə roːpiː paːkiːstʰaːn,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=km-analysis

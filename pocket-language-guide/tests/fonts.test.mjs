@@ -14,9 +14,10 @@
 // change to the font pipeline is checked against what actually matters.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import fontkit from '@pdf-lib/fontkit';
 import { parseTable } from '../core/csv.js';
+import { resolveField } from '../core/fonts.js';
 
 const manifest = JSON.parse(await readFile('data/fonts/manifest.json', 'utf8'));
 
@@ -165,4 +166,83 @@ test('a grafted face credits the font it borrowed glyphs from', async () => {
     'including the conscript donor');
   assert.ok(manifest.copyright.every((/** @type {string} */ c) => !c.includes('\n')),
     'one line each, or the roll-up is unreadable');
+});
+
+test('every corpus cell can be drawn by the face that will draw it', async () => {
+  // The gap this closes, found by the currency sweep rather than by anything here:
+  // the tests above check the *respelling* charset and a required Latin set per
+  // face. Nothing checked the corpus's own cells against the side that renders
+  // them, and the two are not the same question.
+  //
+  // `FIELD_SIDE` in `core/fonts.js` routes `roman` to `latin` whatever the pack's
+  // script, so the seven `rupee-symbol` rows that print `₹` work only because
+  // U+20B9 happens to be in all sixteen Latin faces. `֏` and `৳` are in none of
+  // them, so a dram or taka symbol row written to that convention would have
+  // printed boxes in the PDF with nothing to say so. And `numbers-money.baht-symbol`
+  // really did ship that way in one pack: every language names the currency in its
+  // own `text`, because that column is also the gloss, and `fil` alone wrote `฿` --
+  // U+0E3F, in the Thai block, which the Latin stack never requests. Filipino is
+  // never that concept's target, so the cell only ever reached a Filipino reader's
+  // gloss column, drawn in Latin. `th <- fil` printed a box.
+  //
+  // `literal` is deliberately not checked, and that is a known gap rather than an
+  // oversight. Sixty-two (language, face, codepoint) triples fail it today: Telugu,
+  // Tamil and Hebrew literals explain a word using Latin transliteration (`ḍ ṭ ṁ ḷ
+  // ṇ ṣ ẖ`) and a Lao one quotes `元`, none of which is in the target's own face.
+  // The field is out of the default `fieldSet`, so nothing prints it unless a reader
+  // turns the column on in the studio -- and the honest fix is a font fallback for a
+  // codepoint the primary face lacks, which is a design decision and not a data
+  // edit. Adding it here would only pin four packs' prose.
+  const langs = parseTable(await readFile('data/registry/languages.csv', 'utf8'));
+  const scripts = Object.fromEntries(parseTable(await readFile('data/registry/scripts.csv', 'utf8'))
+    .map((r) => [r.iso15924, r]));
+  const ready = langs.filter((l) => l.status === 'ready');
+
+  // Accumulate the distinct codepoints each stack has to draw, rather than
+  // re-checking a character once per cell: 95,000 cells, a few hundred codepoints.
+  const COLUMNS = { text: 'script', text_alt: 'script_alt', ipa: 'ipa' };
+  /** @type {Map<string, Map<number, string>>} */ const wanted = new Map();
+  for (const lang of ready) {
+    const dir = `data/lang/${lang.bcp47}`;
+    let files;
+    try { files = await readdir(dir); } catch { continue; }
+    for (const file of files.filter((f) => f.endsWith('.csv'))) {
+      for (const row of parseTable(await readFile(`${dir}/${file}`, 'utf8'))) {
+        for (const [column, field] of Object.entries(COLUMNS)) {
+          const value = (row[column] ?? '').trim();
+          if (!value) continue;
+          // The source is a placeholder: none of these three fields resolves
+          // through it. `gloss` and `respell` do, but a language's gloss *is* its
+          // own `text`, so checking `text` against its own stack covers both.
+          const { stack } = resolveField(
+            /** @type {any} */ (field), lang.script, 'Latn', scripts);
+          if (!wanted.has(stack)) wanted.set(stack, new Map());
+          for (const ch of value) {
+            const cp = ch.codePointAt(0) ?? 0;
+            if (cp > 0x20) wanted.get(stack)?.set(cp, `${lang.bcp47} ${column}`);
+          }
+        }
+      }
+    }
+  }
+
+  /** @type {string[]} */ const missing = [];
+  for (const face of manifest.faces) {
+    const need = wanted.get(face.stack);
+    if (!need) continue;
+    const font = fontkit.create(await readFile(`data/fonts/${face.file}.ttf`));
+    const have = new Set(font.characterSet);
+    for (const [cp, where] of need) {
+      if (!have.has(cp)) {
+        missing.push(`${face.file} cannot draw U+${cp.toString(16).toUpperCase().padStart(4, '0')} `
+          + `${String.fromCodePoint(cp)} (${where})`);
+      }
+    }
+  }
+  assert.deepEqual(missing, [], `${missing.length} cell(s) route to a face without the glyph`);
+
+  // Not vacuous: the accumulation has to have found real work to do.
+  assert.ok(wanted.size >= 20, `expected every stack, got ${wanted.size}`);
+  const total = [...wanted.values()].reduce((n, m) => n + m.size, 0);
+  assert.ok(total > 2000, `expected thousands of distinct codepoints, got ${total}`);
 });

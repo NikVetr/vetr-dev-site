@@ -103,3 +103,13 @@ numbers-money.naira,نائیجیریائی نائرا,,,nˌaːiɟˈiːɾjaːˌi�
 numbers-money.naira-symbol,نائیجیریائی نائرا (علامت),,,nˌaːiɟˈiːɾjaːˌiː nˈaɪɾaː alˈaːmət,,2,naira-gloss-v1;cldr;ipa=espeak
 numbers-money.riel,ریئل,,,ɾeːˈɪl,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
 numbers-money.riel-symbol,ریئل (علامت),,,ɾeːˈɪl alˈaːmət,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.pakistani-rupee,روپیہ,روپے,rūpiya,ɾoːpˈiːa,the Pakistani rupee; the plural روپے is what a price is quoted in,2,State Bank of Pakistan (sbp.org.pk);ur-agent-v1;ipa=espeak
+numbers-money.pakistani-rupee-symbol,₨,Rs · PKR,rūpiya,,the symbol on a price tag; a receipt prints Rs,2,State Bank of Pakistan (sbp.org.pk);ur-agent-v1
+numbers-money.dram,ڈرم,,ḍaram,ɖˈʌɾəm,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.dram-symbol,ڈرم (علامت),,ḍaram (alāmat),ɖˈʌɾəm alˈaːmət,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.lari,لاری,,lārī,lˈaːɾi,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.lari-symbol,لاری (علامت),,lārī (alāmat),lˈaːɾi alˈaːmət,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.kip,کِپ,,kip,kˈɪp,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.kip-symbol,کِپ (علامت),,kip (alāmat),kˈɪp alˈaːmət,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.taka,ٹکا,,ṭakā,ʈˈʌkaː,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.taka-symbol,ٹکا (علامت),,ṭakā (alāmat),ʈˈʌkaː alˈaːmət,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak

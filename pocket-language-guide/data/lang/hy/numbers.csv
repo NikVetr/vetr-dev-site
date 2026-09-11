@@ -103,3 +103,13 @@ numbers-money.naira,նաիրա,,naira,nˌaiɾˈa,the Nigerian naira,2,"Central B
 numbers-money.naira-symbol,նաիրայի նշան,,nairayi nshan,nˌaiɾajˈi nəʃˈan,the naira sign,2,"Central Bank of Armenia (cba.am); Baratyan, N. et al., Armenian-English Dictionary (Yerevan State University Press, 2011);ipa=espeak"
 numbers-money.riel,ռիել,,rriyel,riˈel,,2,"Central Bank of Armenia (cba.am); Baratyan, N. et al., Armenian-English Dictionary (Yerevan State University Press, 2011);ipa=espeak"
 numbers-money.riel-symbol,ռիելի նշան,,rriyeli nshan,rˌielˈi nəʃˈan,the riel sign,2,"Central Bank of Armenia (cba.am); Baratyan, N. et al., Armenian-English Dictionary (Yerevan State University Press, 2011);ipa=espeak"
+numbers-money.dram,դրամ,,dram,dəɾˈam,,2,"Central Bank of Armenia (cba.am); Baratyan, N. et al., Armenian-English Dictionary (Yerevan State University Press, 2011);ipa=espeak"
+numbers-money.dram-symbol,֏,դր. · AMD,dram,,the symbol on a price tag,2,"Central Bank of Armenia (cba.am); Baratyan, N. et al., Armenian-English Dictionary (Yerevan State University Press, 2011)"
+numbers-money.lari,լարի,,lari,laɾˈi,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.lari-symbol,լարու նշան,,laru nshan,laɾˈu nəʃˈan,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.kip,կիպ,,kip,kˈip,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.kip-symbol,կիպի նշան,,kipi nshan,kipˈi nəʃˈan,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.taka,տակա,,taka,takˈa,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.taka-symbol,տակայի նշան,,takayi nshan,tˌakajˈi nəʃˈan,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.pakistani-rupee,պակիստանյան ռուփի,,pakistanyan rrup’i,pˌakistanjˈan rupʰˈi,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.pakistani-rupee-symbol,պակիստանյան ռուփու նշան,,pakistanyan rrup’u nshan,pˌakistanjˈan rupʰˈu nəʃˈan,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak

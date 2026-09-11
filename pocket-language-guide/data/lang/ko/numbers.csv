@@ -103,3 +103,13 @@ numbers-money.naira,나이지리아 나이라,,Naijiria naira,naidʑiɾia naiɾa
 numbers-money.naira-symbol,나이지리아 나이라 기호,,Naijiria naira giho,naidʑiɾia naiɾa kiho,,2,naira-gloss-v1;cldr;ipa=rr
 numbers-money.riel,리엘,,riel,ɾiel,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
 numbers-money.riel-symbol,리엘 기호,,riel giho,ɾiel kiho,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
+numbers-money.dram,드람,,deuram,tɯɾam,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
+numbers-money.dram-symbol,드람 기호,,deuram giho,tɯɾam kiho,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
+numbers-money.lari,라리,,rari,ɾaɾi,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
+numbers-money.lari-symbol,라리 기호,,rari giho,ɾaɾi kiho,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
+numbers-money.kip,키프,,kipeu,kʰipʰɯ,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
+numbers-money.kip-symbol,키프 기호,,kipeu giho,kʰipʰɯ kiho,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
+numbers-money.taka,타카,,taka,tʰakʰa,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
+numbers-money.taka-symbol,타카 기호,,taka giho,tʰakʰa kiho,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
+numbers-money.pakistani-rupee,파키스탄 루피,,pakiseutan rupi,pʰakʰisɯtʰan ɾupʰi,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr
+numbers-money.pakistani-rupee-symbol,파키스탄 루피 기호,,pakiseutan rupi giho,pʰakʰisɯtʰan ɾupʰi kiho,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=rr

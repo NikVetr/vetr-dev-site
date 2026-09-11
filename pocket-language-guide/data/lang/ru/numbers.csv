@@ -103,3 +103,13 @@ numbers-money.naira,нигерийская найра,,,nʲiɡʲirʲˈijskʌja n
 numbers-money.naira-symbol,нигерийская найра (символ),,,nʲiɡʲirʲˈijskʌja nˈɑjra sʲˈimvʌɭ,,2,naira-gloss-v1;cldr;ipa=espeak
 numbers-money.riel,риель,,,rʲˈijiɭ,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
 numbers-money.riel-symbol,риель (символ),,,rʲˈijiɭ sʲˈimvʌɭ,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.dram,драм,,dram,drˈɑm,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.dram-symbol,драм (символ),,dram (simvol),drˈɑm sʲˈimvʌɭ,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.lari,лари,,lari,ɭarʲˈi,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.lari-symbol,лари (символ),,lari (simvol),ɭarʲˈi sʲˈimvʌɭ,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.kip,кип,,kip,kʲˈip,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.kip-symbol,кип (символ),,kip (simvol),kʲˈip sʲˈimvʌɭ,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.taka,така,,taka,tˈɑka,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.taka-symbol,така (символ),,taka (simvol),tˈɑka sʲˈimvʌɭ,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.pakistani-rupee,пакистанская рупия,,pakistanskaya rupiya,pʌkʲistˈɑnskʌja rˈupʲija,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.pakistani-rupee-symbol,пакистанская рупия (символ),,pakistanskaya rupiya (simvol),pʌkʲistˈɑnskʌja rˈupʲija sʲˈimvʌɭ,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak

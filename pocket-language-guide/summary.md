@@ -2646,6 +2646,17 @@ Three failure modes here were silent rather than loud, and the fixes are load-be
   the shipped subsets rather than the sources -- which is the right instinct and is
   now what `tests/fonts.test.mjs` does for the subsetter's other failure mode.
   Devanagari has its own stack, as Thai does.
+- **The romanisation column is drawn in the Latin face, whatever the pack's script.**
+  `FIELD_SIDE.roman` is `latin` in `core/fonts.js`, so a Bengali pack's
+  `romanization_iso15919` cell is set in `latin-400` and not in `beng-400`. That is
+  right for a romanisation and it is a trap for anything else put in that column:
+  seven `numbers-money.rupee-symbol` rows carry `₹` there, which prints only because
+  U+20B9 is in all sixteen shipped Latin faces, while `֏` U+058F and `৳` U+09F3 --
+  both present in the Armenian and Bengali faces that draw the `text` cell -- are in
+  none of them. The dram and taka symbol rows carry the spoken word in that column
+  instead. Nothing checks this: `tests/fonts.test.mjs` asserts the respelling charset
+  and a required Latin set per face, not the corpus's own cells against the side that
+  draws them.
 - **Only `text` is guaranteed to reach the sheet.** `script_alt` and `literal` are
   both fields a reader switches on, and the default set is `script`, `roman`,
   `gloss`, `respell`, `numeral`. So a safety-relevant qualification that lives in

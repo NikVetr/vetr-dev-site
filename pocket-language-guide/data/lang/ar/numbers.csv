@@ -103,3 +103,13 @@ numbers-money.naira,نايرا نيجيري,,,nˈaːjɹaː nˈajdʒiːɹˌiːj,,
 numbers-money.naira-symbol,نايرا نيجيري (الرمز),,,nˈaːjɹaː nˈajdʒiːɹˌiːj ʔarɹˈamz,,2,naira-gloss-v1;cldr;ipa=espeak
 numbers-money.riel,رييال,,,ɹˈiːiˌaːl,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
 numbers-money.riel-symbol,رييال (الرمز),,,ɹˈiːiˌaːl ʔarɹˈamz,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.dram,درام,,drām,dɹˈaːm,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.dram-symbol,درام (الرمز),,drām (al-ramz),dɹˈaːm ʔarɹˈamz,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.lari,لاري,,lārī,laːɹˌiː,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.lari-symbol,لاري (الرمز),,lārī (al-ramz),laːɹˌiː ʔarɹˈamz,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.kip,كيب,,kīb,kˈiːb,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.kip-symbol,كيب (الرمز),,kīb (al-ramz),kˈiːb ʔarɹˈamz,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.taka,تاكا,,tākā,tˈaːkaː,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.taka-symbol,تاكا (الرمز),,tākā (al-ramz),tˈaːkaː ʔarɹˈamz,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.pakistani-rupee,روبية باكستانية,,rūbīyah bākistānīyah,ɹˈuːbiːjˌa bˌaːkistaːnˈijjah,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.pakistani-rupee-symbol,روبية باكستانية (الرمز),,rūbīyah bākistānīyah (al-ramz),ɹˈuːbiːjˌa bˌaːkistaːnˈijjah ʔarɹˈamz,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak

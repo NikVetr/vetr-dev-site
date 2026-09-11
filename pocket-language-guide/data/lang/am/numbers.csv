@@ -103,3 +103,13 @@ numbers-money.naira,የናይጄሪያ ናይራ,,,,,2,naira-gloss-v1;cldr
 numbers-money.naira-symbol,የናይጄሪያ ናይራ (ምልክት),,,,,2,naira-gloss-v1;cldr
 numbers-money.riel,ሬል,,rēl,rel,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn-am
 numbers-money.riel-symbol,ሬል (ምልክት),,rēl (milikkit),rel mɨlɨkːɨt,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn-am
+numbers-money.dram,ድራም,,diram,dɨram,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn-am
+numbers-money.dram-symbol,ድራም (ምልክት),,diram (milikkit),dɨram mɨlɨkːɨt,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn-am
+numbers-money.lari,ላሪ,,larī,lari,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn-am
+numbers-money.lari-symbol,ላሪ (ምልክት),,larī (milikkit),lari mɨlɨkːɨt,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn-am
+numbers-money.kip,ኪፕ,,kīp,kip,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn-am
+numbers-money.kip-symbol,ኪፕ (ምልክት),,kīp (milikkit),kip mɨlɨkːɨt,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn-am
+numbers-money.taka,ታካ,,taka,taka,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn-am
+numbers-money.taka-symbol,ታካ (ምልክት),,taka (milikkit),taka mɨlɨkːɨt,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn-am
+numbers-money.pakistani-rupee,የፓኪስታን ሩፒ,,yepakīstan rupī,jəpakistan rupi,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn-am
+numbers-money.pakistani-rupee-symbol,የፓኪስታን ሩፒ (ምልክት),,yepakīstan rupī (milikkit),jəpakistan rupi mɨlɨkːɨt,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn-am

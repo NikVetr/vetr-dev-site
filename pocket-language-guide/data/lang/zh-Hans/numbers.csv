@@ -103,3 +103,13 @@ numbers-money.naira,尼日利亚奈拉,,Nírìlìyà Nàilā,ni˧˥ʐɨ˥˩li˥�
 numbers-money.naira-symbol,尼日利亚奈拉符号,,Nírìlìyà Nàilā fúhào,ni˧˥ʐɨ˥˩li˥˩ja˥˩ naɪ˥˩la˥ fu˧˥xɑʊ˥˩,,2,naira-gloss-v1;cldr;ipa=pinyin
 numbers-money.riel,瑞尔,,Ruì'ěr,ʐweɪ˥˩ɑɻ˧˩˧,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
 numbers-money.riel-symbol,瑞尔符号,,Ruì'ěr,ʐweɪ˥˩ɑɻ˧˩˧,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
+numbers-money.dram,德拉姆,,délāmǔ,tɤ˧˥la˥mu˧˩˧,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
+numbers-money.dram-symbol,德拉姆符号,,délāmǔ fúhào,tɤ˧˥la˥mu˧˩˧ fu˧˥xɑʊ˥˩,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
+numbers-money.lari,拉里,,lālǐ,la˥li˧˩˧,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
+numbers-money.lari-symbol,拉里符号,,lālǐ fúhào,la˥li˧˩˧ fu˧˥xɑʊ˥˩,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
+numbers-money.kip,基普,,jīpǔ,tɕi˥pʰu˧˩˧,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
+numbers-money.kip-symbol,基普符号,,jīpǔ fúhào,tɕi˥pʰu˧˩˧ fu˧˥xɑʊ˥˩,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
+numbers-money.taka,塔卡,,tǎkǎ,tʰa˧˩˧kʰa˧˩˧,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
+numbers-money.taka-symbol,塔卡符号,,tǎkǎ fúhào,tʰa˧˩˧kʰa˧˩˧ fu˧˥xɑʊ˥˩,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
+numbers-money.pakistani-rupee,巴基斯坦卢比,,Bājīsītǎn lúbǐ,pa˥tɕi˥sɯ˥tʰan˧˩˧ lu˧˥pi˧˩˧,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin
+numbers-money.pakistani-rupee-symbol,巴基斯坦卢比符号,,Bājīsītǎn lúbǐ fúhào,pa˥tɕi˥sɯ˥tʰan˧˩˧ lu˧˥pi˧˩˧ fu˧˥xɑʊ˥˩,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=pinyin

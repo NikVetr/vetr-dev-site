@@ -103,3 +103,13 @@ numbers-money.naira,νάιρα Νιγηρίας,,,nˈaɪɾa nˌijiɾˈias,,2,nai
 numbers-money.naira-symbol,νάιρα Νιγηρίας (σύμβολο),,,nˈaɪɾa nˌijiɾˈias sˈimvolˌo,,2,naira-gloss-v1;cldr;ipa=espeak
 numbers-money.riel,ριέλ,,,ɾiˈel,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
 numbers-money.riel-symbol,ριέλ (σύμβολο),,,ɾiˈel sˈimvolˌo,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.dram,ντραμ,,ntram,dɾˈam,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.dram-symbol,ντραμ (σύμβολο),,ntram (symvolo),dɾˈam sˈimvolˌo,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.lari,λάρι,,lari,lˈaɾi,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.lari-symbol,λάρι (σύμβολο),,lari (symvolo),lˈaɾi sˈimvolˌo,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.kip,κιπ,,kip,cˈip,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.kip-symbol,κιπ (σύμβολο),,kip (symvolo),cˈip sˈimvolˌo,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.taka,τάκα,,taka,tˈaka,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.taka-symbol,τάκα (σύμβολο),,taka (symvolo),tˈaka sˈimvolˌo,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.pakistani-rupee,ρουπία Πακιστάν,,roupia Pakistan,ɾupˈia pˌacistˈan,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.pakistani-rupee-symbol,ρουπία Πακιστάν (σύμβολο),,roupia Pakistan (symvolo),ɾupˈia pˌacistˈan sˈimvolˌo,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak

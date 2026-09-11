@@ -103,3 +103,13 @@ numbers-money.naira,నైజీరియన్ నైరా,,,naɪdʒiːrijan n
 numbers-money.naira-symbol,నైజీరియన్ నైరా గుర్తు,,,naɪdʒiːrijan naɪraː ɡurtu,,2,naira-gloss-v1;cldr;ipa=espeak
 numbers-money.riel,రీల్,,,riːl,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
 numbers-money.riel-symbol,రీల్ గుర్తు,,,riːl ɡurtu,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.dram,డ్రామ్,,ḍrām,ɖraːm,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.dram-symbol,డ్రామ్ గుర్తు,,ḍrām gurtu,ɖraːm ɡurtu,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.lari,లారి,,lāri,laːri,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.lari-symbol,లారి గుర్తు,,lāri gurtu,laːri ɡurtu,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.kip,కిప్,,kip,kip,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.kip-symbol,కిప్ గుర్తు,,kip gurtu,kip ɡurtu,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.taka,టాకా,,ṭākā,ʈaːkaː,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.taka-symbol,టాకా గుర్తు,,ṭākā gurtu,ʈaːkaː ɡurtu,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.pakistani-rupee,పాకిస్థాన్ రూపాయి,,pākisthān rūpāyi,paːkistʰaːn ruːpaːji,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.pakistani-rupee-symbol,పాకిస్థాన్ రూపాయి గుర్తు,,pākisthān rūpāyi gurtu,paːkistʰaːn ruːpaːji ɡurtu,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak

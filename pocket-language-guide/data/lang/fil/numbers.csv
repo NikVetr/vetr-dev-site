@@ -62,7 +62,7 @@ numbers-money.rupiah-symbol,Rp,rupiah,ɾp,,2,fil-agent-v1;ipa=fil-g2p
 numbers-money.shilling,shilling,,shilliŋ,,2,fil-agent-v1;ipa=fil-g2p
 numbers-money.shilling-symbol,Sh,shilling,sh,,2,fil-agent-v1;ipa=fil-g2p
 numbers-money.baht,baht,,baht,,2,fil-agent-v1;ipa=fil-g2p
-numbers-money.baht-symbol,฿,baht,,,2,fil-agent-v1
+numbers-money.baht-symbol,baht (simbolo),baht,,"named rather than shown: the Thai baht sign is U+0E3F, which is in the Thai block, and this row is only ever a Filipino reader’s gloss, drawn in the Latin face",2,fil-agent-v1
 numbers-money.forint,forint,,foɾint,,2,fil-agent-v1;ipa=fil-g2p
 numbers-money.forint-symbol,forint (simbolo),,foɾint simbolo,,2,fil-agent-v1;ipa=fil-g2p
 numbers-money.rupee,rupee,,ɾupɛɛ,,2,fil-agent-v1;ipa=fil-g2p
@@ -103,3 +103,13 @@ numbers-money.naira,Nigerian naira,,niɡɛɾian naiɾa,,2,naira-gloss-v1;cldr;ip
 numbers-money.naira-symbol,Nigerian naira (simbolo),,niɡɛɾian naiɾa simbolo,,2,naira-gloss-v1;cldr;ipa=fil-g2p
 numbers-money.riel,riel,,ɾiɛl,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
 numbers-money.riel-symbol,riel (simbolo),,ɾiɛl simbolo,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
+numbers-money.dram,dram,,dɾam,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
+numbers-money.dram-symbol,dram (simbolo),,dɾam simbolo,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
+numbers-money.lari,lari,,laɾi,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
+numbers-money.lari-symbol,lari (simbolo),,laɾi simbolo,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
+numbers-money.kip,kip,,kip,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
+numbers-money.kip-symbol,kip (simbolo),,kip simbolo,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
+numbers-money.taka,taka,,taka,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
+numbers-money.taka-symbol,taka (simbolo),,taka simbolo,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
+numbers-money.pakistani-rupee,rupee ng Pakistan,,ɾupɛɛ naŋ pakistan,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
+numbers-money.pakistani-rupee-symbol,rupee ng Pakistan (simbolo),,ɾupɛɛ naŋ pakistan simbolo,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p

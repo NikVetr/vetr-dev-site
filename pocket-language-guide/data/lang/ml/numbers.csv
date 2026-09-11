@@ -103,3 +103,13 @@ numbers-money.naira,നൈറ,,naiṟa,naira,,2,"Issuing central bank’s own na
 numbers-money.naira-symbol,നൈറ ചിഹ്നം,,naiṟa cihnaṁ,naira cihnam,naira (sign),2,"Issuing central bank’s own name for the unit, transliterated by Malayalam loan phonology (Asher & Kumari 1997, ch. on the sound system);ipa=espeak"
 numbers-money.riel,റീൽ,,,riːl,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
 numbers-money.riel-symbol,റീൽ ചിഹ്നം,,,riːl cihnam,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.dram,ഡ്രാം,,ḍrāṁ,ɖɾaːm,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.dram-symbol,ഡ്രാം ചിഹ്നം,,ḍrāṁ cihnaṁ,ɖɾaːm cihnam,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.lari,ലാറി,,lāṟi,laːri,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.lari-symbol,ലാറി ചിഹ്നം,,lāṟi cihnaṁ,laːri cihnam,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.kip,കിപ്,,kipŭ,kip,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.kip-symbol,കിപ് ചിഹ്നം,,kipŭ cihnaṁ,kip cihnam,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.taka,ടാക്ക,,ṭākka,ʈaːkka,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.taka-symbol,ടാക്ക ചിഹ്നം,,ṭākka cihnaṁ,ʈaːkka cihnam,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.pakistani-rupee,പാക്കിസ്ഥാനി രൂപ,,pākkisthāni rūpa,paːkkistʰaːni ɾuːba,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.pakistani-rupee-symbol,പാക്കിസ്ഥാനി രൂപ ചിഹ്നം,,pākkisthāni rūpa cihnaṁ,paːkkistʰaːni ɾuːba cihnam,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak

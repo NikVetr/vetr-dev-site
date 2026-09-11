@@ -103,3 +103,13 @@ numbers-money.naira,ナイジェリア ナイラ,,Naijeria naira,naidʑeɾia nai
 numbers-money.naira-symbol,ナイジェリア ナイラ記号,,Naijeria naira,naidʑeɾia naiɾa,,2,naira-gloss-v1;cldr;ipa=hepburn
 numbers-money.riel,リエル,,rieru,ɾieɾɯ,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
 numbers-money.riel-symbol,リエル記号,,rieru,ɾieɾɯ,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
+numbers-money.dram,ドラム,,doramu,doɾamɯ,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
+numbers-money.dram-symbol,ドラム記号,,doramu kigō,doɾamɯ kiɡoː,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
+numbers-money.lari,ラリ,,rari,ɾaɾi,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
+numbers-money.lari-symbol,ラリ記号,,rari kigō,ɾaɾi kiɡoː,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
+numbers-money.kip,キープ,,kīpu,kiːpɯ,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
+numbers-money.kip-symbol,キープ記号,,kīpu kigō,kiːpɯ kiɡoː,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
+numbers-money.taka,タカ,,taka,taka,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
+numbers-money.taka-symbol,タカ記号,,taka kigō,taka kiɡoː,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
+numbers-money.pakistani-rupee,パキスタン・ルピー,,pakisutan rupī,pakisɯtaɴ ɾɯpiː,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn
+numbers-money.pakistani-rupee-symbol,パキスタン・ルピー記号,,pakisutan rupī kigō,pakisɯtaɴ ɾɯpiː kiɡoː,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=hepburn

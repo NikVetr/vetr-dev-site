@@ -103,3 +103,13 @@ numbers-money.naira,Nigerian naira,,naɪdʒˈiəɹɪən nˈɛɹə,,2,naira-gloss
 numbers-money.naira-symbol,Nigerian naira (symbol),,naɪdʒˈiəɹɪən nˈɛɹə sˈɪmbəl,,2,naira-gloss-v1;cldr;ipa=espeak
 numbers-money.riel,riel,,ɹˈiːl,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
 numbers-money.riel-symbol,riel (symbol),,ɹˈiːl sˈɪmbəl,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.dram,dram,,dɹˈæm,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.dram-symbol,dram (symbol),,dɹˈæm sˈɪmbəl,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.lari,lari,,lˈɑːɹɹi,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.lari-symbol,lari (symbol),,lˈɑːɹɹi sˈɪmbəl,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.kip,kip,,kˈɪp,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.kip-symbol,kip (symbol),,kˈɪp sˈɪmbəl,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.taka,taka,,tˈɑːkə,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.taka-symbol,taka (symbol),,tˈɑːkə sˈɪmbəl,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.pakistani-rupee,Pakistani rupee,,pˌækɪstˈæni ɹˈuːpiː,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.pakistani-rupee-symbol,Pakistani rupee (symbol),,pˌækɪstˈæni ɹˈuːpiː sˈɪmbəl,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak

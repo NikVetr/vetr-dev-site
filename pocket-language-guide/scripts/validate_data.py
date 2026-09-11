@@ -544,6 +544,31 @@ def main():
                             f"{len(ready) - len(scope) - len(blank)} of its "
                             f"{len(ready) - len(scope)} pairs")
 
+    # **A word row and its symbol row must print on the same cards.** The pair is one
+    # fact said twice -- the name of the money and the sign beside a price -- and a
+    # card carrying one without the other is not a shorter card, it is a sign nobody
+    # can read or a word nobody can point at.
+    #
+    # This is not a hypothetical invariant. `numbers-money.franc` was scoped
+    # `de;fr;it;sw;ha` while `franc-symbol` was scoped `...;yo`, so a Yoruba card
+    # printed `F CFA` with no word beside it. The concept's own note argues the
+    # widening at length -- "Yoruba is indigenous to, not merely spoken in, both
+    # Benin and Togo" -- and the symbol row's note says "yo joins for the same reason
+    # as the row above", so the intent was recorded in the file and one of the two
+    # `applies_to` fields was simply never edited. An error rather than a warning,
+    # because there is no reading of the pair under which the two scopes differing is
+    # what someone meant.
+    for cid, concept in concepts.items():
+        sibling = concepts.get(f"{cid}-symbol")
+        if not sibling:
+            continue
+        word = (concept.get("applies_to") or "").strip()
+        symbol = (sibling.get("applies_to") or "").strip()
+        if word != symbol:
+            errors.append(f"concepts: {cid!r} applies to {word or '(all)'} but "
+                          f"{cid + '-symbol'!r} applies to {symbol or '(all)'}; a word "
+                          f"and its symbol have to print on the same cards")
+
     # The emergency note's service words and its frame come from the registry in the
     # reader's language. Absent, they fall back to English, which is what every
     # sheet not glossed into English was printing.

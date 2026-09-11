@@ -103,3 +103,13 @@ numbers-money.naira,ไนราไนจีเรีย,,,naj˧ raː˧ naj˧tɕ
 numbers-money.naira-symbol,สัญลักษณ์ไนราไนจีเรีย,,,san˩˩˦˥lak˦˥ naj˧ raː˧ naj˧tɕiː˧ria̯˧,,2,naira-gloss-v1;cldr;ipa=thaig2p
 numbers-money.riel,เรียล,,,ria̯ŋ˧,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=thaig2p
 numbers-money.riel-symbol,สัญลักษณ์เรียล,,,san˩˩˦˥lak˦˥ ria̯ŋ˧,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=thaig2p
+numbers-money.dram,แดรม,,draem,dɛː˧ rom˧,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=thaig2p
+numbers-money.dram-symbol,สัญลักษณ์แดรม,,sanyalak draem,san˩˩˦˥lak˦˥ dɛː˧ rom˧,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=thaig2p
+numbers-money.lari,ลารี,,lari,laː˧ riː˧,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=thaig2p
+numbers-money.lari-symbol,สัญลักษณ์ลารี,,sanyalak lari,san˩˩˦˥lak˦˥ laː˧ riː˧,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=thaig2p
+numbers-money.kip,กีบ,,kip,kiːp˨˩,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=thaig2p
+numbers-money.kip-symbol,สัญลักษณ์กีบ,,sanyalak kip,san˩˩˦˥lak˦˥ kiːp˨˩,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=thaig2p
+numbers-money.taka,ตากา,,taka,taː˧kaː˧,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=thaig2p
+numbers-money.taka-symbol,สัญลักษณ์ตากา,,sanyalak taka,san˩˩˦˥lak˦˥ taː˧kaː˧,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=thaig2p
+numbers-money.pakistani-rupee,รูปีปากีสถาน,,rupi pakisathan,ruː˧piː˧paː˧kiː˧sa˨˩tʰaː˩˩˦,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=thaig2p
+numbers-money.pakistani-rupee-symbol,สัญลักษณ์รูปีปากีสถาน,,sanyalak rupi pakisathan,san˩˩˦˥lak˦˥ ruː˧piː˧paː˧kiː˧sa˨˩tʰaː˩˩˦,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=thaig2p

@@ -103,3 +103,13 @@ numbers-money.naira,нігерійська найра,,,ɲiːhˈɛriːjska nˈaj
 numbers-money.naira-symbol,нігерійська найра (символ),,,ɲiːhˈɛriːjska nˈajra sˈɪmʋol,,2,naira-gloss-v1;cldr;ipa=espeak
 numbers-money.riel,рієль,,,rˈiːjɛʎ,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
 numbers-money.riel-symbol,рієль (символ),,,rˈiːjɛʎ sˈɪmʋol,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.dram,драм,,dram,drˈam,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.dram-symbol,драм (символ),,dram (symvol),drˈam sˈɪmʋol,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.lari,ларі,,lari,lˈariː,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.lari-symbol,ларі (символ),,lari (symvol),lˈariː sˈɪmʋol,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.kip,кіп,,kip,kˈiːp,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.kip-symbol,кіп (символ),,kip (symvol),kˈiːp sˈɪmʋol,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.taka,така,,taka,tˈaka,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.taka-symbol,така (символ),,taka (symvol),tˈaka sˈɪmʋol,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.pakistani-rupee,пакистанська рупія,,pakystanska rupiia,pakˈɪstanska rupˈiːja,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.pakistani-rupee-symbol,пакистанська рупія (символ),,pakystanska rupiia (symvol),pakˈɪstanska rupˈiːja sˈɪmʋol,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak

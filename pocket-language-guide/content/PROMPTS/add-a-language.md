@@ -127,6 +127,19 @@ sweep did exactly this to the Telugu pack. **Read the file before appending to i
 and re-run `python3 scripts/validate_data.py` at the very end rather than only after
 your own pack is done, because another agent may have swept into your pack meanwhile.
 
+**And fill the romanisation column while you are in there, with the *word* and not
+the sign.** 363 currency-gloss cells across the twenty-five romanised packs are
+empty because the riel, koruna, ringgit, krona and naira sweeps wrote only `text`;
+the column is display-only for most packs, but for `zh-Hans`, `ja`, `ko`, `he` and
+`am` it is the column `build_ipa.py` *reads* (`ROMANISED`), so an empty cell there
+ships a row with no pronunciation as surely as a missing ipa build does. Seven
+`rupee-symbol` rows put `₹` itself in that column, and that works only by luck:
+`FIELD_SIDE.roman` is `latin`, so the romanisation is drawn in the **Latin** face
+whatever the pack's script, and U+20B9 happens to be in all sixteen of them.
+`֏` U+058F and `৳` U+09F3 are not in any of them, so the dram and taka symbol rows
+carry `dram` and `ṭākā` there instead. A sign in a romanisation cell is a box in
+the PDF and nothing checks it.
+
 ## The IPA engine
 
 `scripts/build_ipa.py` derives the `ipa` column. Two routes exist and the choice is
@@ -320,9 +333,30 @@ until fontkit gains a shaper, and `zh-Hant` is a `script_alt` rather than a row.
 a new language now needs a reason of its own, and the two arguments that have
 carried one are Croatian's -- a high-traffic destination whose script costs the
 machinery nothing -- and the batch table's, that a script teaches the engine
-something no shipped script does. **What is left is not breadth but depth**: three
-countries' cards name no currency because there is no `dram`, `lari` or `kip`
-concept, and each of those is a fifty-pack sweep rather than a language.
+something no shipped script does. **What is left is not breadth but depth**, and
+the currency sweep this paragraph used to name is done: `dram`, `lari`, `kip`,
+`taka` and `pakistani-rupee` shipped together as ten concepts and 480 pack rows,
+which is what one of these sweeps actually costs. The audit that found them is
+worth re-running rather than trusting -- cross-reference every `applies_to` in
+`numbers-money.currency` against the ready list, and read `ja` and `zh-Hans` as
+covered by `numbers-money.yen` and the `yuan`/`kuai` rows in
+`numbers-money.misc`, which are currency concepts in a different cluster. It
+turned up **two scope defects that are still open**, both of the same shape and
+neither a currency of its own:
+
+- **`numbers-money.franc` is scoped `de;fr;it;sw;ha` while `franc-symbol` is
+  scoped `de;fr;it;sw;ha;yo`**, and the Yoruba pack carries an authored
+  `numbers-money.franc` row (`faranki`). The concept's own note says "Widened to
+  yo" and argues it at length; the `applies_to` field was never edited. So a
+  Yoruba card prints `F CFA` with no word beside it, and the pack's own word for
+  it prints nowhere. `validate_data.py` does not catch a pack row whose concept
+  is not scoped to that pack, which is why it sat.
+- **`numbers-money.lakh` and `numbers-money.crore` are scoped
+  `gu;hi;kn;ml;mr;ne;pa;ta;te`, without `bn`**, and the Bengali pack carries
+  authored rows for both with Bengali-specific literals ("a Bengali price board
+  writes ১,০০,০০০, not 100,000"). Bengali's regions are `BD;IN`, both of which
+  group digits that way and use both words. This is the same omission the
+  `numbers-money.rupee` widening in this sweep repaired one row over.
 
 **Georgian went in as language 47 and is the counter-example the last three
 script attempts needed**, so its numbers are here rather than only in

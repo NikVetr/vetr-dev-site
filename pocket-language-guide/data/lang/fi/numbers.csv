@@ -103,3 +103,13 @@ numbers-money.dong,dong,,dˈoŋ,,2,fi-agent-v1;ipa=espeak
 numbers-money.dong-symbol,dong (merkki),,dˈoŋ mˈerkki,,2,fi-agent-v1;ipa=espeak
 numbers-money.number-and-classifier-notes,"Lukujen muodostus: 11 = shi yi, 20 = er shi, 21 = er shi yi. Puhelinnumeroissa 1 on usein yao. Luokittelijat: ge (yleinen), wei (ihmiset), zhang (liput ja litteät), bei (kupit), ping (pullot). jiao eli mao = 0,1 juania, fen = 0,01 juania.",,,,2,fi-agent-v1
 numbers-money.number-and-classifier-notes-2,"Lukujen muodostus: 11 = juuichi, 20 = nijuu, 21 = nijuuichi. Luokittelijat: -tsu (asiat), -mai (litteät), -hon (pitkät), -nin (ihmiset), -hai (kupit). Puhelinnumeroissa 0 = zero tai maru, 4 = yon, 7 = nana, 9 = kyuu.",,,,2,fi-agent-v1
+numbers-money.dram,dram,,drˈam,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.dram-symbol,dram (merkki),,drˈam mˈerkki,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.lari,lari,,lˈari,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.lari-symbol,lari (merkki),,lˈari mˈerkki,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.kip,kip,,kˈip,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.kip-symbol,kip (merkki),,kˈip mˈerkki,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.taka,taka,,tˈaka,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.taka-symbol,taka (merkki),,tˈaka mˈerkki,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.pakistani-rupee,Pakistanin rupia,,pˈakistanin rˈupia,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.pakistani-rupee-symbol,Pakistanin rupia (merkki),,pˈakistanin rˈupia mˈerkki,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak

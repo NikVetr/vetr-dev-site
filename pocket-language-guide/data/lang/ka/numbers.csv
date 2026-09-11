@@ -103,3 +103,13 @@ numbers-money.naira,ნაირა,,naira,naira,the Nigerian naira,2,"National 
 numbers-money.naira-symbol,ნაირას ნიშანი,,nairas nishani,nairas niʃani,the naira sign,2,"National Bank of Georgia (nbg.gov.ge) currency listings, which is where the Georgian names of foreign currencies are published;ipa=ka-g2p"
 numbers-money.riel,რიელი,,rieli,rieli,,2,"National Bank of Georgia (nbg.gov.ge) currency listings, which is where the Georgian names of foreign currencies are published;ipa=ka-g2p"
 numbers-money.riel-symbol,რიელის ნიშანი,,rielis nishani,rielis niʃani,the riel sign,2,"National Bank of Georgia (nbg.gov.ge) currency listings, which is where the Georgian names of foreign currencies are published;ipa=ka-g2p"
+numbers-money.lari,ლარი,,lari,lari,,2,"National Bank of Georgia (nbg.gov.ge); Rayfield et al. (eds.), A Comprehensive Georgian-English Dictionary (Garnett Press, 2006);ipa=ka-g2p"
+numbers-money.lari-symbol,₾,GEL,lari,,the symbol on a price tag,2,"National Bank of Georgia (nbg.gov.ge); Rayfield et al. (eds.), A Comprehensive Georgian-English Dictionary (Garnett Press, 2006)"
+numbers-money.dram,დრამი,,drami,drami,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=ka-g2p
+numbers-money.dram-symbol,დრამის ნიშანი,,dramis nishani,dramis niʃani,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=ka-g2p
+numbers-money.kip,კიპი,,kipi,kʼipʼi,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=ka-g2p
+numbers-money.kip-symbol,კიპის ნიშანი,,kipis nishani,kʼipʼis niʃani,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=ka-g2p
+numbers-money.taka,ტაკა,,taka,tʼakʼa,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=ka-g2p
+numbers-money.taka-symbol,ტაკას ნიშანი,,takas nishani,tʼakʼas niʃani,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=ka-g2p
+numbers-money.pakistani-rupee,პაკისტანური რუპია,,pakistanuri rupia,pʼakʼistʼanuri rupʼia,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=ka-g2p
+numbers-money.pakistani-rupee-symbol,პაკისტანური რუპიის ნიშანი,,pakistanuri rupiis nishani,pʼakʼistʼanuri rupʼiis niʃani,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=ka-g2p

@@ -103,3 +103,13 @@ numbers-money.naira,náírà,,na˥i˥ra˩,,2,yo-currency-v1;ipa=yo-g2p
 numbers-money.naira-symbol,₦,,,,2,yo-currency-v1
 numbers-money.riel,ráyò,,ra˥jo˩,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=yo-g2p
 numbers-money.riel-symbol,ráyò (àmì),,ra˥jo˩ a˩mi˩,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=yo-g2p
+numbers-money.dram,dírààmù,,di˥ra˩a˩mu˩,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=yo-g2p
+numbers-money.dram-symbol,dírààmù (àmì),,di˥ra˩a˩mu˩ a˩mi˩,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=yo-g2p
+numbers-money.lari,lárì,,la˥ri˩,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=yo-g2p
+numbers-money.lari-symbol,lárì (àmì),,la˥ri˩ a˩mi˩,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=yo-g2p
+numbers-money.kip,kíììpù,,ki˥i˩i˩kpu˩,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=yo-g2p
+numbers-money.kip-symbol,kíììpù (àmì),,ki˥i˩i˩kpu˩ a˩mi˩,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=yo-g2p
+numbers-money.taka,tákà,,ta˥ka˩,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=yo-g2p
+numbers-money.taka-symbol,tákà (àmì),,ta˥ka˩ a˩mi˩,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=yo-g2p
+numbers-money.pakistani-rupee,Rúpì Pakistan,,ru˥kpi˩ kpakistã,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=yo-g2p
+numbers-money.pakistani-rupee-symbol,Rúpì Pakistan (àmì),,ru˥kpi˩ kpakistã a˩mi˩,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=yo-g2p
