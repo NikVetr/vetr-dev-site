@@ -1053,7 +1053,7 @@
       if (trigger.dataset.tooltipBound === "true") return;
       trigger.dataset.tooltipBound = "true";
       const show = () => {
-        refs.helpTooltip.textContent = trigger.dataset.tooltip;
+        refs.helpTooltip.innerHTML = modelMathHtml(trigger.dataset.tooltip);
         refs.helpTooltip.hidden = false;
         positionFloating(refs.helpTooltip, trigger);
       };
@@ -4054,13 +4054,13 @@
     xTitle.textContent = expectationView() ? "Expected log salary, exponentiated (July 2026 USD)" : "Predicted CEO Salary (July 2026 USD)"; svg.append(xTitle);
     const yTitle = svgElement("text", { x: 14, y: margin.top + innerHeight / 2, transform: `rotate(-90 14 ${margin.top + innerHeight / 2})`, "text-anchor": "middle", fill: "#3E454A", "font-size": 10, "font-weight": 700 });
     yTitle.textContent = expectationView() ? "Estimation density" : "Predictive density"; svg.append(yTitle);
-    $("#chart-description").textContent = expectationView() ? "Estimation uncertainty in e^μ, the exponentiated expected log salary (SVR: fitted log-location). Shading shows central 50%, 80%, and 95% intervals."
+    $("#chart-description").textContent = expectationView() ? "Estimation uncertainty in exp(μ), the exponentiated expected log salary (SVR: fitted log-location). Shading shows central 50%, 80%, and 95% intervals."
       : prediction.methodKey.startsWith("bayesian")
       ? "A posterior predictive distribution for CEO salary at the selected organization profile. Shaded regions show 50%, 80%, and 95% prediction intervals."
       : state.modelMethod === "gp" ? "A conditional Gaussian-process predictive distribution for CEO salary. Shaded regions show 50%, 80%, and 95% prediction intervals, with estimated kernel parameters held fixed."
       : "A residual-calibrated predictive distribution for CEO salary at the selected organization profile. Shaded regions show 50%, 80%, and 95% prediction intervals.";
     renderModelLegend();
-    refs.statN.textContent = modelMoney(prediction.expected); refs.statNUnit.textContent = expectationView() ? "mean of e^μ" : "expected salary";
+    refs.statN.textContent = modelMoney(prediction.expected); refs.statNUnit.innerHTML = modelMathHtml(expectationView() ? "mean of exp(μ)" : "expected salary");
     refs.statNeff.textContent = modelMoney(prediction.median); refs.statNeffUnit.textContent = expectationView() ? "median estimate" : "median";
     const summaryInterval = expectationView() ? quantileUncertainty(prediction, .5) : intervals[80];
     refs.statCenter.textContent = summaryInterval.map(modelMoney).join("–"); refs.statCenterUnit.textContent = expectationView() ? `${state.modelCompatibilityLevel}% estimation interval` : "80% prediction range";
@@ -4160,10 +4160,10 @@
       const intervalLabel = isBayesianMethod() ? "credible" : state.modelMethod === "gp" ? "conditional credible" : "approximate compatibility";
       const predictive = isBayesianMethod() || state.modelMethod === "gp";
       refs.quantileBasis.innerHTML = `${escapeHtml(currentModelComparisonRow().label)}. <strong>${predictive ? "Predictive salary percentiles:" : "Estimated salary percentiles:"}</strong> ${predictive ? "peer variation + model uncertainty" : "residual peer variation at the fitted prediction"}. <strong>${state.modelCompatibilityLevel}% ${intervalLabel} intervals:</strong> estimation uncertainty about each underlying peer percentile.${predictive ? " At P50, these intervals describe exp(expected log salary)." : ""}`;
-      refs.quantileBasis.title = "For Bayesian models, percentile intervals summarize exp(μ + σ Φ⁻¹(p)) across posterior draws. At the median, this is e^μ, where μ is expected log salary. Other percentiles also depend on peer spread. The headline percentile comes from the predictive distribution; it can differ from the center of the parameter-based interval. Expected salary means E(salary), not exp(E(log salary)). GP intervals condition on fitted kernel parameters; other methods use joint coefficient or bootstrap approximations.";
+      refs.quantileBasis.title = "For Bayesian models, percentile intervals summarize exp(μ + σ Φ⁻¹(p)) across posterior draws. At the median, this is exp(μ), where μ is expected log salary. Other percentiles also depend on peer spread. The headline percentile comes from the predictive distribution; it can differ from the center of the parameter-based interval. Expected salary means E(salary), not exp(E(log salary)). GP intervals condition on fitted kernel parameters; other methods use joint coefficient or bootstrap approximations.";
       if (expectationView()) {
-        refs.quantileBasis.innerHTML = `${escapeHtml(currentModelComparisonRow().label)}. <strong>Estimation percentiles of e^μ:</strong> uncertainty in expected log salary, exponentiated; no residual peer variation.${state.modelMethod === "svr" ? " SVR uses fitted log-location." : ""} The ${state.modelCompatibilityLevel}% interval above summarizes this same distribution.`;
-        refs.quantileBasis.title = "μ = E(log salary | inputs); e^μ is a geometric mean, not expected dollar salary. Bayesian: posterior draws; GP: conditional latent-function distribution; other methods: coefficient or bootstrap approximation. No second interval is estimated around these uncertainty percentiles.";
+        refs.quantileBasis.innerHTML = `${escapeHtml(currentModelComparisonRow().label)}. <strong>Estimation percentiles of ${modelMathHtml("exp(μ)")}:</strong> uncertainty in expected log salary, exponentiated; no residual peer variation.${state.modelMethod === "svr" ? " SVR uses fitted log-location." : ""} The ${state.modelCompatibilityLevel}% interval above summarizes this same distribution.`;
+        refs.quantileBasis.title = "μ = E(log salary | inputs); exp(μ) is a geometric mean, not expected dollar salary. Bayesian: posterior draws; GP: conditional latent-function distribution; other methods: coefficient or bootstrap approximation. No second interval is estimated around these uncertainty percentiles.";
       }
       refs.customQuantilesField.hidden = state.quantileGranularity !== "custom";
       const percentiles = quantilePercentiles();
@@ -4186,7 +4186,7 @@
           uncertainty.title = `${state.modelCompatibilityLevel}% ${intervalLabel} interval for the underlying peer percentile (estimation uncertainty).`;
           button.append(uncertainty);
           button.setAttribute("aria-label", `${formatPercentile(percentile)}: ${money(value)}; ${state.modelCompatibilityLevel}% ${intervalLabel} interval ${money(interval[0])} to ${money(interval[1])}`);
-        } else button.setAttribute("aria-label", `${formatPercentile(percentile)} of e^μ: ${money(value)}`);
+        } else button.setAttribute("aria-label", `${formatPercentile(percentile)} of exp(μ): ${money(value)}`);
         button.addEventListener("pointerenter", () => { state.hoverQuantile = value; renderChart(); });
         button.addEventListener("pointerleave", () => { state.hoverQuantile = null; renderChart(); });
         button.addEventListener("focus", () => { state.hoverQuantile = value; renderChart(); });
@@ -5342,7 +5342,7 @@
     refs.tablePanel.classList.toggle("is-model-view", isModel);
     refs.modelSettings.hidden = !isModel;
     if (isModel) {
-      refs.chartTitle.textContent = isCeoPosition() ? (expectationView() ? "Geometric Salary · e^μ" : "Predicted CEO Salary for Selected Profile") : "CEO Prediction Model Unavailable";
+      refs.chartTitle.innerHTML = modelMathHtml(isCeoPosition() ? (expectationView() ? "Geometric Salary · exp(μ)" : "Predicted CEO Salary for Selected Profile") : "CEO Prediction Model Unavailable");
     } else {
       const plotted = axisDescriptor(analysisAxisKey());
       refs.chartTitle.textContent = state.view === "scatter"
@@ -5780,7 +5780,7 @@
       }[state.modelMethod] || `Bayesian multilevel${state.modelUseAdRanges ? " + ad ranges" : ""}`;
       return {
         axisSignature: `model|${JSON.stringify(compactModelState())}`,
-        axisLabel: expectationView() ? "Geometric salary · e^μ" : "Predicted CEO Salary", formatKind: "money", position: "CEO",
+        axisLabel: expectationView() ? "Geometric salary · exp(μ)" : "Predicted CEO Salary", formatKind: "money", position: "CEO",
         source: state.modelUseAdRanges && isBayesianMethod() ? "Form 990s + job-ad ranges" : "Form 990s",
         measure: "Modeled base salary", basis: "July 2026 USD", sample: "Fixed reviewed training cohort",
         distribution: method, weighting: expectationView() ? "Log-location estimation" : "Predictive model", filters: "Not applied to model training",
@@ -6253,6 +6253,7 @@
       }
     } else {
       cell.textContent = String(value ?? "—");
+      if (metric.key === "axisLabel") cell.innerHTML = modelMathHtml(value ?? "—");
       if (baseline && value !== baseline.summary[metric.key]) cell.classList.add("scenario-assumption-different");
     }
     return cell;
@@ -7509,7 +7510,7 @@
     $("#model-robustness-interval-option").hidden = !modelView;
     $("#model-robustness-intervals").checked = state.modelRobustnessIntervals;
     $("#model-robustness-note").textContent = `All fitted models at the current profile. Points are salary percentiles; the diamond marks the selected model.${state.modelRobustnessIntervals ? ` Lines show ${state.modelCompatibilityLevel}% estimation intervals for the underlying peer percentiles; colors identify model families.` : " Model differences show sensitivity to the specification."} Select a point to use that model.`;
-    if (expectationView()) $("#model-robustness-note").textContent = `Median estimates of e^μ across models; SVR uses fitted log-location.${state.modelRobustnessIntervals ? ` Lines show ${state.modelCompatibilityLevel}% estimation intervals.` : ""} The diamond marks the selected model. Select a point to use that model.`;
+    if (expectationView()) $("#model-robustness-note").innerHTML = modelMathHtml(`Median estimates of exp(μ) across models; SVR uses fitted log-location.${state.modelRobustnessIntervals ? ` Lines show ${state.modelCompatibilityLevel}% estimation intervals.` : ""} The diamond marks the selected model. Select a point to use that model.`);
     $("#model-robustness-interval-option").lastChild.textContent = expectationView() ? " Show estimation intervals" : " Show percentile uncertainty intervals";
     weightingInput.disabled = !ceo || modelView;
     refs.robustnessWeightingOption.title = ceo ? "" : "Automatic weights are available only for the CEO benchmark.";
@@ -7672,14 +7673,14 @@
     refs.modelFiscalSponsor.value = state.modelProfile.fiscal_sponsor_category;
     $("#model-compatibility-level").value = state.modelCompatibilityLevel;
     $("#model-target").value = state.modelTarget;
-    const estimation = isBayesianMethod() ? "Posterior uncertainty in expected log salary, displayed as e^μ."
-      : state.modelMethod === "gp" ? "Conditional uncertainty in mean log salary, displayed as e^μ; fitted kernel parameters are held fixed."
-        : state.modelMethod === "svr" ? "Bootstrap uncertainty in the fitted log-location, displayed as e^μ; tuning and preprocessing are held fixed."
-          : "Approximate coefficient uncertainty in mean log salary, displayed as e^μ; preprocessing is held fixed.";
+    const estimation = isBayesianMethod() ? "Posterior uncertainty in expected log salary, displayed as exp(μ)."
+      : state.modelMethod === "gp" ? "Conditional uncertainty in mean log salary, displayed as exp(μ); fitted kernel parameters are held fixed."
+        : state.modelMethod === "svr" ? "Bootstrap uncertainty in the fitted log-location, displayed as exp(μ); tuning and preprocessing are held fixed."
+          : "Approximate coefficient uncertainty in mean log salary, displayed as exp(μ); preprocessing is held fixed.";
     const predictive = isBayesianMethod() ? "Posterior predictive salary distribution, including parameter uncertainty and residual variation among peers."
       : state.modelMethod === "gp" ? "Conditional predictive salary distribution, including latent-mean uncertainty and peer noise; fitted kernel parameters are held fixed."
         : "Salary distribution at the fitted location with held-out residual calibration. Residual spread combines peer variation and prediction error; estimation is not separately integrated into this curve.";
-    const targetHelp = `All models are fitted on log salary. Estimation only: ${estimation} Estimation + peer variation: ${predictive} e^μ means exponentiation of the fitted log-location. Expected dollar salary is a separate summary.`;
+    const targetHelp = `All models are fitted on log salary. Estimation only: ${estimation} Estimation + peer variation: ${predictive} exp(μ) means exponentiation of the fitted log-location. Expected dollar salary is a separate summary.`;
     $("#model-target-help").dataset.tooltip = targetHelp;
     $("#model-target").title = targetHelp;
     $("#model-target option[value=expectation]").title = estimation;
@@ -8014,6 +8015,10 @@
 
   function escapeHtml(value) {
     return String(value ?? "").replace(/[&<>"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[char]);
+  }
+
+  function modelMathHtml(value) {
+    return escapeHtml(value).replace(/exp\(μ\)|e\^μ/g, '<var class="math-expression">e<sup>μ</sup></var>');
   }
 
   function activatePosition(key) {
