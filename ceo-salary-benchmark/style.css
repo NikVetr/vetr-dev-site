@@ -69,9 +69,6 @@ button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible
 .position-choice[aria-current="true"] { background: var(--green-soft); color: var(--green); }
 .position-choice-count { text-align: right; color: var(--muted); font-size: 12px; font-weight: 500; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .position-choice-subtitle { grid-column: 1; color: var(--muted); font-size: 10px; font-weight: 400; }
-.position-subgroups { margin: 0 0 4px 12px; }
-.position-subgroups > summary { padding: 3px 8px; color: var(--muted); font-size: 10px; cursor: pointer; }
-.position-subgroups .position-choice { font-size: 12px; padding-block: 7px; }
 .position-menu-note { margin: 10px 8px 4px; color: var(--muted); font-size: 10px; line-height: 1.4; }
 .title-position-select:hover > span,
 .title-position-select:has(> select:focus-visible) > span { color: var(--green); }

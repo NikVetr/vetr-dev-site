@@ -79,6 +79,21 @@
     return [byKey.get("ceo"), ...[...byKey.values()].filter((position) => position.key !== "ceo")];
   })();
   const POSITION_BY_KEY = new Map(POSITION_CATALOG.map((position) => [position.key, position]));
+  const POOLED_POSITION_PARENT = new Map(POSITION_CATALOG.flatMap((position) =>
+    (position.memberPositionKeys || []).map((key) => [key, position.key])));
+  const EXECUTIVE_POSITION_KEYS = ["operations_leadership", "finance_leadership", "legal_leadership", "chief_of_staff",
+    "people_leadership", "research_leadership", "program_leadership", "development_leadership",
+    "communications_leadership", "policy_leadership", "managing_director", "executive_vice_president", "senior_vice_president", "vice_president"];
+  const otherPositions = POSITION_CATALOG.filter((p) => p.key !== "ceo" && !POOLED_POSITION_PARENT.has(p.key) && !EXECUTIVE_POSITION_KEYS.includes(p.key));
+  const POSITION_MENU_GROUPS = [
+    ["Executive leadership", EXECUTIVE_POSITION_KEYS.map((key) => {
+      if (!POSITION_BY_KEY.has(key)) throw new Error(`Missing menu position: ${key}`);
+      return POSITION_BY_KEY.get(key);
+    })],
+    ["Managers", otherPositions.filter((p) => p.menuGroup === "Managers")],
+    ["Research and specialists", otherPositions.filter((p) => p.menuGroup !== "Managers")],
+  ];
+  const SELECTABLE_POSITIONS = [POSITION_BY_KEY.get("ceo"), ...POSITION_MENU_GROUPS.flatMap(([, positions]) => positions)];
   const POSITION_ROUTE_KEY_BY_SLUG = new Map(
     POSITION_CATALOG.map((position) => [`${position.key.replaceAll("_", "-")}-salary-benchmark`, position.key]),
   );
@@ -757,7 +772,6 @@
 
   function populatePositionMenu() {
     const menu = $("#position-menu");
-    const groupedMembers = new Set(POSITION_CATALOG.flatMap((p) => p.memberPositionKeys || []));
     const addChoice = (position, container) => {
       const button = document.createElement("button");
       button.type = "button"; button.className = "position-choice"; button.dataset.positionKey = position.key;
@@ -775,28 +789,12 @@
     };
     menu.replaceChildren();
     addChoice(positionDefinition("ceo"), menu);
-    const leadership = ["operations_leadership", "finance_leadership", "legal_leadership", "chief_of_staff",
-      "people_leadership", "research_leadership", "program_leadership", "development_leadership",
-      "communications_leadership", "policy_leadership", "managing_director", "executive_vice_president", "senior_vice_president", "vice_president"];
-    const remaining = POSITION_CATALOG.filter((p) => p.key !== "ceo" && !groupedMembers.has(p.key) && !leadership.includes(p.key));
-    const groups = [
-      ["Executive leadership", leadership.map((key) => positionDefinition(key))],
-      ["Managers", remaining.filter((p) => p.menuGroup === "Managers")],
-      ["Research and specialists", remaining.filter((p) => p.menuGroup !== "Managers")],
-    ];
-    groups.forEach(([label, positions]) => {
+    POSITION_MENU_GROUPS.forEach(([label, positions]) => {
       const heading = document.createElement("p"); heading.className = "position-menu-heading"; heading.textContent = label; menu.append(heading);
-      positions.forEach((position) => {
-        addChoice(position, menu);
-        if (!position.pooled) return;
-        const details = document.createElement("details"); details.className = "position-subgroups";
-        const summary = document.createElement("summary"); summary.textContent = "Title subgroups"; details.append(summary);
-        position.memberPositionKeys.forEach((key) => addChoice(positionDefinition(key), details));
-        menu.append(details);
-      });
+      positions.forEach((position) => addChoice(position, menu));
     });
     const note = document.createElement("p"); note.className = "position-menu-note";
-    note.textContent = "n counts usable records in each view’s starting sample, including advertised ranges. Pooled roles retain original titles and eligibility checks.";
+    note.textContent = "Use the table’s Title filter to narrow a pooled role. n counts usable records in the starting sample, including advertised ranges.";
     menu.append(note);
   }
 
@@ -810,13 +808,13 @@
     const menu = $("#position-menu");
     menu.querySelectorAll("[data-position-key]").forEach((button) => {
       button.setAttribute("aria-current", String(button.dataset.positionKey === state.position));
-      if (button.dataset.positionKey === state.position && button.parentElement.matches("details")) button.parentElement.open = true;
     });
     menu.hidden = false;
     const top = Math.min($("#position-menu-trigger").getBoundingClientRect().bottom + 12, window.innerHeight / 3);
     menu.style.top = `${top}px`; menu.style.maxHeight = `${window.innerHeight - top - 16}px`;
     $("#position-menu-trigger").setAttribute("aria-expanded", "true");
-    menu.querySelector('[aria-current="true"]').focus();
+    const focusKey = POOLED_POSITION_PARENT.get(state.position) || state.position;
+    menu.querySelector(`[data-position-key="${focusKey}"]`).focus();
   }
 
   function clearAnalyticalFilters() {
@@ -1168,7 +1166,8 @@
   }
 
   function positionSalaryLabel() {
-    return `${positionDefinition().pageLabel} Salary`;
+    const position = positionDefinition();
+    return `${position.metricLabel || position.pageLabel} Salary`;
   }
 
   function compactNumber(value) {
@@ -1254,8 +1253,8 @@
   POSITION_CATALOG.forEach((position) => {
     const key = `position:${position.key}`;
     numericVariables[key] = {
-      shortLabel: `${position.label} salary`,
-      label: () => `${position.label} compensation (${priceBasisLabel()}; unique same-filing match)`,
+      shortLabel: `${position.metricLabel || position.label} salary`,
+      label: () => `${position.metricLabel || position.label} compensation (${priceBasisLabel()}; unique same-filing match)`,
       value: (row) => sameFilingPositionSalary(row, position.key),
       format: compactMoney,
       fullFormat: money,
@@ -1263,6 +1262,15 @@
       positionKey: position.key,
     };
   });
+
+  function selectableNumericVariables(retainedKeys = []) {
+    const nonPosition = Object.entries(numericVariables).filter(([, variable]) => !variable.positionKey);
+    const positions = SELECTABLE_POSITIONS.map((position) => [`position:${position.key}`, numericVariables[`position:${position.key}`]]);
+    // A saved title-specific metric must not silently acquire a broader denominator.
+    const retained = [...new Set(retainedKeys)].filter((key) =>
+      POOLED_POSITION_PARENT.has(numericVariables[key]?.positionKey));
+    return [...nonPosition, ...positions, ...retained.map((key) => [key, numericVariables[key]])];
+  }
 
   const axisStateKeys = { histogram: "histogramAxis", scatterX: "scatterXAxis", scatterY: "scatterYAxis" };
 
@@ -2384,14 +2392,15 @@
       pay.label = "Pay";
       const organizationStats = document.createElement("optgroup");
       organizationStats.label = "Organization statistics";
-      Object.entries(numericVariables).forEach(([value, definition]) => {
+      selectableNumericVariables([expression.numerator, expression.denominator]).forEach(([value, definition]) => {
         const option = document.createElement("option");
         option.value = value;
         if (definition.positionKey) {
           const pairCount = positionIncumbents().filter((row) => (
             presetSelected(row) && definition.value(row) != null
           )).length;
-          option.textContent = `${POSITION_BY_KEY.get(definition.positionKey).label} pay · matching records: ${pairCount}`;
+          const retained = POOLED_POSITION_PARENT.has(definition.positionKey) ? " · title-specific selection" : "";
+          option.textContent = `${POSITION_BY_KEY.get(definition.positionKey).label} pay${retained} · matching records: ${pairCount}`;
           option.disabled = pairCount === 0 && value !== expression.numerator && value !== expression.denominator;
           pay.append(option);
         } else {
@@ -3029,7 +3038,8 @@
   }
 
   function scatterMatrixColumns() {
-    const columns = Object.entries(numericVariables).map(([key, variable]) => ({ key, label: variable.shortLabel,
+    const columns = selectableNumericVariables(state.scatterMatrix.features).map(([key, variable]) => ({ key,
+      label: variable.shortLabel + (POOLED_POSITION_PARENT.has(variable.positionKey) ? " (title-specific)" : ""),
       group: variable.positionKey || ["salary", "highestPaidOtherEmployee"].includes(key) ? "Pay" : "Organization statistics",
       rawValue: variable.value, expression: { numerator: key, denominator: key === "expenses" ? "staff" : "expenses" }, mode: "value", rawFormat: variable.format }));
     ["scatterX", "scatterY"].forEach((axis) => {
