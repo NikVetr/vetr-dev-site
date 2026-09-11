@@ -302,17 +302,26 @@ is only a grouping.
 | batch | languages | what it proves |
 |---|---|---|
 | 1 | ~~`bn` Bengali, `ur` Urdu, `pl` Polish~~ **done** | first new script since Hebrew; Arabic-stack reuse a second time; a plain Latin control |
-| 2 | ~~`ta` Tamil~~, `te` Telugu, `mr` Marathi | three Indic scripts, two of them new, one reusing Devanagari |
-| 3 | ~~`uk` Ukrainian~~, `nl` Dutch, `ro` Romanian | Cyrillic reuse and two Latin, all with espeak voices |
-| 4 | `my` Burmese, `km` Khmer, `lo` Lao | the hard batch: complex stacking, and `word_break: dict` for the second and third time |
-| 5 | `fil` Filipino, `ms` Malay, `zh-Hant` Traditional Chinese | two Latin; the first script that is a *variant* of one already shipped |
-| 6 | `am` Amharic, `ka` Georgian, `hy` Armenian | three scripts nothing else in the corpus resembles |
-| 7 | `pa` Punjabi, `gu` Gujarati, `si` Sinhala | Brahmic breadth |
-| 8 | `kn` Kannada, `ml` Malayalam, `ne` Nepali | completes the Indic set |
-| 9 | `cs` Czech, `sv` Swedish, `fi` Finnish | European Latin, and Finnish's agglutination is Hungarian's problem again |
+| 2 | ~~`ta` Tamil, `te` Telugu, `mr` Marathi~~ | three Indic scripts, two of them new, one reusing Devanagari |
+| 3 | ~~`uk` Ukrainian, `nl` Dutch, `ro` Romanian~~ | Cyrillic reuse and two Latin, all with espeak voices |
+| 4 | **`my` refused**, `km` Khmer **draft**, ~~`lo` Lao~~ | the hard batch: complex stacking, and `word_break: dict` for the second and third time |
+| 5 | ~~`fil` Filipino, `ms` Malay~~, `zh-Hant` **not a language** | two Latin; the variant question is settled above -- `zh-Hant` is `script_alt`, not a row |
+| 6 | ~~`am` Amharic~~, `ka` Georgian **written, unregistered**, `hy` Armenian | three scripts nothing else in the corpus resembles |
+| 7 | ~~`pa` Punjabi, `gu` Gujarati~~, **`si` refused** | Brahmic breadth |
+| 8 | ~~`kn` Kannada, `ml` Malayalam, `ne` Nepali~~ | completes the Indic set |
+| 9 | ~~`cs` Czech, `sv` Swedish~~, `fi` Finnish | European Latin, and Finnish's agglutination is Hungarian's problem again |
 
-Three known questions the roadmap will force, worth thinking about before the batch
-that hits them rather than during it:
+`hr` Croatian was added off-roadmap as language 46, for a reason the batches do not
+capture: Croatia is among the highest-traffic destinations without a card, and Gaj's
+Latin cost the font and respelling machinery nothing. **What is actually left** is
+`hy` Armenian, `fi` Finnish, finishing `ka` and finishing `km` -- two refusals
+(`my`, `si`) are closed until fontkit gains a shaper, and `zh-Hant` is not a row.
+
+The questions the roadmap forces, worth thinking about before the batch that hits
+them rather than during it. Deliberately not numbered: this list was "three known
+questions" through two additions to it, and an ordinal in the prose goes stale the
+moment someone inserts a bullet in the right *thematic* place rather than at the
+end -- which is the right place to insert it.
 
 - ~~**Urdu is Nastaliq**~~ — **settled, and by a crash rather than a preference.**
   `fontkit` throws on Noto Nastaliq Urdu for 84 of 86 real Urdu rows, in both copies of
@@ -395,7 +404,7 @@ that hits them rather than during it:
   **space** with 1,770 real rows giving 1,770 atoms and zero violations. See
   tmp/si/sinhala.md.
 
-- **A fourth, and this one is *shipping*: Thai's `ห้องน้ำ` renders with a detached
+- **And one that is *shipping*: Thai's `ห้องน้ำ` renders with a detached
   nikhahit.** `thai` and `lao ` are both absent from fontkit's shaper map, and
   HarfBuzz has a dedicated Thai/Lao shaper whose whole job is the U+0E33/U+0EB3
   decompose-and-**reorder**. Without it the nikhahit prints as a loose dot floating
