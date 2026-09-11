@@ -4199,14 +4199,27 @@ KA = {
 def ka_to_ipa(word):
     """One Georgian word. **Not lowercased**, because Mkhedruli is caseless.
 
-    Anything not in `KA` is carried out unchanged so a gate names it, which is the
-    same contract `YO`, `HA` and `FIL` have. In practice nothing reaches that
-    branch: the pack writes Mkhedruli and ASCII digits only, `tmp/ka/ka.py`'s
-    `check` refuses a Mtavruli, Asomtavruli, Nuskhuri or archaic-Mkhedruli
-    character at authoring time, and every Latin acronym the pack does quote is
-    either a `note` (skipped) or in `LOANWORDS["ka"]`.
+    A bare hyphen is dropped, which is `ha_to_ipa`'s, `fil_to_ipa`'s and
+    `hepburn_to_ipa`'s rule and for the same reason: it is a morpheme boundary in
+    the orthography and not a sound. Georgian writes one everywhere a compound is
+    felt as two pieces -- a reduplication (`ცალ-ცალკე` "separately",
+    `მისვლა-მოსვლა` "round trip"), a loan spelt as two Georgian words (`ვაი-ფაი`
+    Wi-Fi, `პინ-კოდი` PIN), and an abbreviation joined to its case ending
+    (`დღგ-ის` "of VAT", and the `{}-ზე` of the wake-up row, where the suffix
+    attaches to a clock time the traveller writes in). Carrying it out refused
+    **eleven rows** on a character `check_alphabet` is right to reject, so every
+    one of them shipped with a blank `ipa` -- and therefore a blank respelling on
+    all forty-six pairs. Fusing is also what the rest of the corpus does with the
+    same word: `ওয়াই-ফাই` is `ˈoaˌifai` in Bengali, `ПИН-код` is `pʲˈiŋkot` in
+    Russian, `ኢ-ሲም` is `ʔisim` in Amharic, and **no shipped `ipa` cell in any pack
+    contains a hyphen at all**.
+
+    Anything else not in `KA` is carried out unchanged so a gate names it, which is
+    the same contract `YO`, `HA` and `FIL` have. In practice nothing reaches that
+    branch: the pack writes Mkhedruli, ASCII digits and this hyphen only, and every
+    Latin acronym it quotes is either a `note` (skipped) or in `LOANWORDS["ka"]`.
     """
-    return "".join(KA.get(c, c) for c in word)
+    return "".join(KA.get(c, c) for c in word if c != "-")
 
 
 # Letters that are inside the IPA alphabet and still cannot appear in *Japanese*
@@ -4304,6 +4317,20 @@ def thai_syllables():
         return " ".join(filter(None, (one(w) for w in word_tokenize(text, engine="newmm")
                                       if any(c.isalpha() for c in w))))
     return chunk
+
+
+# The one pack whose `ipa` column is written by hand rather than derived, so this
+# script neither fills it nor owns it. Khmer's column is the broad phonemic analysis
+# `tmp/km/SPEC.md` asked its author for, tagged `ipa=km-analysis`; the orthographic
+# G2P that would otherwise be its route disagrees with that analysis on 194 of the
+# first 277 rows, because Khmer writes no word boundaries and does not write its
+# inherent vowel, so the length of that vowel and a long tail of irregular everyday
+# words (`អ្នក` is [neəʔ], not [ʔnɑʔ]) need a word-keyed lexicon the pack has not
+# got. A route built on the rules alone would replace a hand-written column with a
+# worse one, so there is none -- and `route()` below raises on an unknown code
+# *before* `build()` looks at whether any row is left to transcribe, which is why
+# this is a skip in `main` rather than a branch in `route`. See tmp/khmer.md §9.
+AUTHORED = {"km"}
 
 
 def route(code, chunks):
@@ -5472,6 +5499,7 @@ def main():
     with (DATA / "registry/languages.csv").open(encoding="utf-8-sig") as fh:
         ready = [r["bcp47"] for r in csv.DictReader(fh) if r["status"] == "ready"]
     codes = [c for c in args.only.split(",") if c in ready] if args.only else ready
+    codes = [c for c in codes if c not in AUTHORED]     # see AUTHORED
 
     stale, repertoire, report = [], Counter(), []
     for code in codes:

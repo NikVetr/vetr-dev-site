@@ -67,6 +67,35 @@ SOURCES = {
         f"{GFONTS}/notoserifethiopic/NotoSerifEthiopic%5Bwdth,wght%5D.ttf",
     "NotoSansHebrew-var.ttf": f"{GFONTS}/notosanshebrew/NotoSansHebrew%5Bwdth,wght%5D.ttf",
     "NotoSerifHebrew-var.ttf": f"{GFONTS}/notoserifhebrew/NotoSerifHebrew%5Bwdth,wght%5D.ttf",
+    # Georgian (Mkhedruli), and Noto is chosen here rather than refused -- the first
+    # new script since Amharic where it is. Mkhedruli is alphabetic: no conjuncts, no
+    # reordering, no stacking and **no combining marks at all**, so the two defects
+    # that refused Noto elsewhere cannot be entered. Measured rather than reasoned:
+    # both faces hold **zero NULL anchors** across every GPOS lookup type, read
+    # directly with fontTools through the Extension subtables (tmp/ka/nullanchors.py),
+    # and `vendor/fontkit.esm.js` reproduces HarfBuzz's glyph run, glyph ids, GPOS
+    # offsets and advances **exactly** -- 0 divergences over 3,370 real tokens, 1,389
+    # real strings and a 38,241-string exhaustive cube, in all five candidate files.
+    # That is not a vacuous pass: `kern` changes advances on 2,567 of the 3,370 tokens
+    # in the sans and 2,904 in the serif, and fontkit matches every one. See
+    # tmp/ka/georgian.md.
+    #
+    # **The variable files, not the hinted statics, and the difference is the whole
+    # Latin repertoire.** `NotoSansGeorgian-Regular.ttf` from notofonts.github.io has
+    # a 182-codepoint cmap with **2 of ASCII**; the Google Fonts variable has 509 with
+    # all 95 of ASCII, 84 of Latin-1, `·` U+00B7 and `—` U+2014. The Georgian pack
+    # quotes `eSIM`, `QR`, `B2 · BPK · bakso` and romanised Japanese numerals in its
+    # `text` column, so the static would have printed those as boxes. That is the
+    # Devanagari note above in the other direction -- check the file that actually
+    # feeds the stack, not the family. With the variable there is nothing missing, so
+    # this is the Bengali case and needs no `LATIN_DONOR` graft.
+    #
+    # Both faces carry Mtavruli (U+1C90..1CBF) and Khutsuri as well; `GEOR_RANGES` in
+    # subset_fonts.py asks for neither, and says why.
+    "NotoSansGeorgian-var.ttf":
+        f"{GFONTS}/notosansgeorgian/NotoSansGeorgian%5Bwdth,wght%5D.ttf",
+    "NotoSerifGeorgian-var.ttf":
+        f"{GFONTS}/notoserifgeorgian/NotoSerifGeorgian%5Bwdth,wght%5D.ttf",
     # Lao, and the choice is Phetsarath rather than a Noto face -- the only
     # candidate on which **HarfBuzz and this project's fontkit produce the same
     # glyph run**. fontkit has no Lao shaper (`lao ` is absent from its

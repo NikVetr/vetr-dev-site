@@ -235,6 +235,34 @@ GUJR_RANGES = [(0x0A80, 0x0AFF)]
 # Gujarati nukta and the Tamil, Telugu, Gurmukhi and Kannada digits do.
 ETHI_RANGES = [(0x1200, 0x137F)]
 
+# Mkhedruli, and **only** Mkhedruli. Georgian has three scripts in Unicode and the
+# choice is not a preference, it is what the corpus is: 12,455 Georgian characters
+# in the pack and 77,992 in 97KB of Georgian Wikipedia are Mkhedruli, and **zero**
+# are Mtavruli (U+1C90..1CBF) or Asomtavruli/Nuskhuri (U+10A0..10CF, U+2D00..2D2F).
+# Modern Georgian is unicameral Mkhedruli; Khutsuri is liturgical and historical.
+#
+# Mtavruli is the case worth stating, because it is reachable in a way Khutsuri is
+# not: Unicode 11 gave every Mkhedruli letter an uppercase mapping *into* Mtavruli,
+# so `"გამარჯობა".toUpperCase()` is `ᲒᲐᲛᲐᲠᲯᲝᲑᲐ` in plain JavaScript. Two places
+# could reach that and neither does. `core/respell.js`'s `caps` stress device would,
+# and `ka__ka-GE.json` declines it and says why -- Georgian is the first script here
+# where `caps` is neither dead (Amharic, Thai, Hebrew: caseless) nor native (Latin,
+# Greek, Cyrillic), it *fires* and produces a display style that means something
+# else. And `style.css`'s `text-transform: uppercase` on `.panel-title` does, but
+# that is browser chrome set in `var(--ui)` -- a system font, never a shipped subset
+# -- and Mtavruli all-caps is the typographically correct answer there anyway.
+# Nothing in `core/` or `render/` uppercases sheet text at all, so no glyph of
+# U+1C90..1CBF can reach a page this project draws.
+#
+# The block is requested whole rather than by corpus union for the reason
+# `LATIN_EXTRA_RANGES` states: 33 of the 48 are the modern alphabet and the corpus
+# uses exactly those 33, but the add-your-own-term editor can type the five archaic
+# letters ჱ ჲ ჳ ჴ ჵ offline with no font to fall back to. Unlike the Brahmic and Lao
+# blocks there is no second reason: Georgian reaches **no** unencoded glyph, because
+# it fires no substitution at all -- 0 GSUB substitutions over the 38,241-string
+# exhaustive cube and 3,370 real tokens, in both faces (tmp/ka/georgian.md).
+GEOR_RANGES = [(0x10D0, 0x10FF)]
+
 # Klingon pIqaD and Tengwar. These are the two scripts here that are **not in
 # Unicode**: both proposals were rejected, so they live in the Private Use Area by
 # allocation of the ConScript Unicode Registry, and nothing about them can be
@@ -575,6 +603,17 @@ FACES = {
     ("ethi", 700, False): "NotoSansEthiopic-var.ttf",
     ("ethi-serif", 400, False): "NotoSerifEthiopic-var.ttf",
     ("ethi-serif", 700, False): "NotoSerifEthiopic-var.ttf",
+    # Georgian, and a serif beside the sans because for once nothing refuses it.
+    # Lao, Khmer, Telugu, Gujarati, Kannada and Malayalam all ship sans-only because
+    # their serif candidate throws or diverges; Noto Serif Georgian does neither --
+    # same zero divergences against HarfBuzz over the same 38,241-string cube, same
+    # zero NULL anchors, same full ASCII. So the typeface control means something for
+    # a Georgian sheet instead of silently falling back, which is the reason
+    # `NotoSerifBengali` is fetched a few entries above.
+    ("geor", 400, False): "NotoSansGeorgian-var.ttf",
+    ("geor", 700, False): "NotoSansGeorgian-var.ttf",
+    ("geor-serif", 400, False): "NotoSerifGeorgian-var.ttf",
+    ("geor-serif", 700, False): "NotoSerifGeorgian-var.ttf",
 }
 
 # Sources that need a Latin face grafted in, and the face to graft.
@@ -926,7 +965,25 @@ ALL_LANGS = ["en", "es", "fr", "de", "ko", "ar", "zh-Hans", "ja",
              # Latin faces over every cell of the pack, both registry files and the
              # `Đđ` badge: nothing is absent from any of them. There is no
              # romanisation column, Croatian being Latin already.
-             "hr"]
+             "hr",
+             # Georgian. `GEOR_RANGES` above already requests the whole Mkhedruli
+             # block unconditionally for the `geor` stack, so this entry in the
+             # `latin` union is for the pack's `romanization_national` and `ipa`
+             # columns -- which the Latin faces draw on every pair whose target is
+             # Georgian -- and for the rows that quote a Latin acronym (`eSIM`,
+             # `QR`, `B2 · BPK · bakso`, and the romanised Japanese numerals in the
+             # two `number-and-classifier-notes` rows). Khmer's, Lao's, Malayalam's,
+             # Kannada's, Gujarati's and Telugu's shape exactly.
+             #
+             # **And it costs the union nothing, measured against the cmaps of all
+             # sixteen shipped Latin faces rather than assumed.** The romanisation
+             # is the Georgian national (2002) system, which is deliberately
+             # diacritic-free -- see the `ka` row of registry/romanizations.csv --
+             # so the column is bare ASCII. The `ipa` column's only characters
+             # outside older packs' repertoire are the ejective marker `ʼ` U+02BC,
+             # already requested by Amharic, and `ʁ q χ`, already requested by
+             # Arabic, Persian and German.
+             "ka"]
 STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                "latin-serif": ALL_LANGS, "latin-cond-serif": ALL_LANGS,
                "cjk-sc": ["zh-Hans"], "cjk-sc-serif": ["zh-Hans"],
@@ -959,6 +1016,7 @@ STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                "knda": ["kn"],
                "mlym": ["ml"],
                "ethi": ["am"], "ethi-serif": ["am"],
+               "geor": ["ka"], "geor-serif": ["ka"],
                "hebrew": ["he"], "hebrew-serif": ["he"]}
 
 
@@ -1079,6 +1137,8 @@ def coverage(stack):
         chars |= expand(ETHI_RANGES)
     elif stack.startswith("hebrew"):
         chars |= expand(HEBREW_RANGES)
+    elif stack.startswith("geor"):
+        chars |= expand(GEOR_RANGES)
     return chars
 
 

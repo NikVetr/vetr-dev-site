@@ -306,7 +306,7 @@ is only a grouping.
 | 3 | ~~`uk` Ukrainian, `nl` Dutch, `ro` Romanian~~ | Cyrillic reuse and two Latin, all with espeak voices |
 | 4 | **`my` refused**, `km` Khmer **draft**, ~~`lo` Lao~~ | the hard batch: complex stacking, and `word_break: dict` for the second and third time |
 | 5 | ~~`fil` Filipino, `ms` Malay~~, `zh-Hant` **not a language** | two Latin; the variant question is settled above -- `zh-Hant` is `script_alt`, not a row |
-| 6 | ~~`am` Amharic~~, `ka` Georgian **written, unregistered**, `hy` Armenian | three scripts nothing else in the corpus resembles |
+| 6 | ~~`am` Amharic, `ka` Georgian~~, `hy` Armenian | three scripts nothing else in the corpus resembles |
 | 7 | ~~`pa` Punjabi, `gu` Gujarati~~, **`si` refused** | Brahmic breadth |
 | 8 | ~~`kn` Kannada, `ml` Malayalam, `ne` Nepali~~ | completes the Indic set |
 | 9 | ~~`cs` Czech, `sv` Swedish~~, `fi` Finnish | European Latin, and Finnish's agglutination is Hungarian's problem again |
@@ -314,8 +314,27 @@ is only a grouping.
 `hr` Croatian was added off-roadmap as language 46, for a reason the batches do not
 capture: Croatia is among the highest-traffic destinations without a card, and Gaj's
 Latin cost the font and respelling machinery nothing. **What is actually left** is
-`hy` Armenian, `fi` Finnish, finishing `ka` and finishing `km` -- two refusals
-(`my`, `si`) are closed until fontkit gains a shaper, and `zh-Hant` is not a row.
+`hy` Armenian and `fi` Finnish -- two refusals (`my`, `si`) are closed until
+fontkit gains a shaper, and `zh-Hant` is not a row.
+
+**Georgian went in as language 47 and is the counter-example the last three
+script attempts needed**, so its numbers are here rather than only in
+tmp/ka/georgian.md. Burmese and Sinhala were both refused on fontkit, and the
+method this file prescribes -- compare glyph *runs* against HarfBuzz before
+writing anything -- is what refused them. Run the same way, Mkhedruli comes back
+**exactly clean**: 0 throws, 0 glyph-run differences, 0 GPOS-offset differences
+and 0 advance differences over 3,370 real tokens, 1,389 real strings and a
+38,241-string exhaustive cube, in all five candidate files and in all four
+shipped subsets. And it is clean for the *right* reason, which is the check
+Burmese's caveat demands: `geor` is absent from fontkit's script-to-shaper map
+and falls to the **Default** shaper -- which is also what HarfBuzz picks, whose
+buffer trace under `set_message_func` shows `ccmp` in GSUB and `kern`/`mark`/
+`mkmk` in GPOS under `script tag 'geor'` and no syllable machinery at all. Nor
+is the pass vacuous: `kern` moves advances on 2,567 of the 3,370 tokens in Noto
+Sans Georgian and 2,904 in the serif, and fontkit reproduces every one. **A
+clean cube is evidence when the shaper being exercised is the one the script
+needs, and for an alphabet with no marks and no reordering that shaper is the
+default one.**
 
 The questions the roadmap forces, worth thinking about before the batch that hits
 them rather than during it. Deliberately not numbered: this list was "three known

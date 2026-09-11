@@ -209,6 +209,57 @@ export const LANGUAGE_MOTIFS = /** @type {const} */ ({
   // `interlace`. The design and the two refusals it rests on are argued at
   // `emblems.suhozid`.
   hr: 'suhozid',
+  // `kbach` (ក្បាច់) is the Khmer word for Khmer ornament itself -- the interlocking
+  // leaf-and-flame units carved on every temple lintel and repeated in silk, silver
+  // and woodwork -- so it is an art direction rather than an emblem, which is this
+  // table's own rule, and it is the one Cambodians name. `acanthus` (it) is the entry
+  // it has to be argued against, both being leaf scrolls: an acanthus leaf is lobed
+  // and serrated and its volute unfurls *outward* along a running asymmetric stem,
+  // where a kbach unit is a flame-tipped leaf whose tip curls back to touch its own
+  // stem and a kbach figure is paired and mirrored about that stem. They are also
+  // not the same art under two names, which is the rule that refused `pleter`,
+  // `muggu`, `sathiya` and `rangoli`: Graeco-Roman acanthus and Khmer kbach are two
+  // unrelated lineages that arrived at leaves, where Carolingian interlace and
+  // Islamic strapwork are relatives. Argued at `emblems.kbach` against the three
+  // other neighbours, and refusing `pidan` (ikat, which `lo` holds as `matmi`) and
+  // `krama` (a plaited check, which `fil` holds as `banig`).
+  km: 'kbach',
+  // `minankari` (მინანქარი) is Georgian cloisonné enamel -- the ninth-to-twelfth
+  // century school the Khakhuli triptych belongs to, which art historians treat as
+  // its own tradition beside the Byzantine rather than a copy of it.
+  //
+  // **The colour objection is the one that has to be answered first**, because it is
+  // what refused `bidri` for Kannada and the Šestine umbrella for Croatian: an art
+  // whose whole character is colour cannot survive being printed as strokes. Enamel
+  // would seem to be exactly that, and it is not, because in cloisonné the colour is
+  // not the mark -- the **cloison** is. A minankari figure is drawn entirely in bent
+  // gold wire soldered edge-on to a plate, and the enamel is only what the resulting
+  // cells are filled with. Take the colour away and the drawing is still there,
+  // which is not true of an inlay or a painted umbrella.
+  //
+  // So the mark is: **every cell is closed, and no line crosses another.** A cloison
+  // must close or it cannot hold its enamel, and it cannot cross, because two wires
+  // soldered to one plate have nowhere to pass. Named against the four neighbours
+  // that share some part of that. `interlace` (ar) and `jali` (ur) are the strand
+  // motifs: an interlace strand's whole point is passing over and under, and a jali
+  // is a *pierced* screen where the openings are the figure and the grid is regular.
+  // `suhozid` (hr) is the other motif made of closed compartments, and it is the
+  // closest formally -- the difference is that a suhozid's joints *stop*, no line
+  // continuing across more than two stones, because they are separate rocks; a
+  // cloison is one continuous filament turned back on itself, so every cell shares
+  // its walls with its neighbours. And `azulejo` (pt) is the other fired surface,
+  // but it is a painted square tile in a regular repeat where a cloison's cells are
+  // each cut to the figure and no two are the same size.
+  //
+  // Three alternatives refused. **`borjgali`**, the seven-armed solar whirl, because
+  // this table's own preface says art directions and not national emblems, and a
+  // borjgali is the second of those. **The carved grapevine** of Nikortsminda and
+  // Samtavisi, because `acanthus` (it) and `kbach` (km) already hold the leaf scroll
+  // and `berry` (ru) holds fruit on a vine -- three names for one art is what
+  // refused `muggu`, `sathiya`, `rangoli` and `pleter`. And **Khevsur cross-stitch**,
+  // because `embroidery` (hu), `phulkari` (pa), `kasuti` (kn) and `dhaka` (ne) are
+  // four already and the fifth would have nothing left to be named against.
+  ka: 'minankari',
 });
 /** @typedef {typeof LANGUAGE_MOTIFS[keyof typeof LANGUAGE_MOTIFS]} LanguageMotif */
 
@@ -808,6 +859,65 @@ const emblems = {
     p.m(14, 80); p.l(6, 84); p.l(12, 90);
     p.m(50, 88); p.l(50, 96);
   },
+  kbach(p) {
+    /** One kbach tongue: it leaves the stem at (x,y), swells outward along one
+     * side only, comes to a point, and the point **curls back toward the stem**.
+     * Local rather than shared -- nothing else in this table draws one.
+     * @param {number} x @param {number} y @param {number} dx @param {number} dy
+     * @param {number} out how far the outer edge bows, signed with `dx` */
+    const tongue = (x, y, dx, dy, out) => {
+      const length = Math.hypot(dx, dy), nx = -dy / length * out, ny = dx / length * out;
+      const tipX = x + dx, tipY = y + dy;
+      p.m(x, y);
+      p.c(x + dx * 0.06 + nx * 0.95, y + dy * 0.06 + ny * 0.95,
+        x + dx * 0.66 + nx, y + dy * 0.66 + ny, tipX, tipY);
+      p.c(tipX + dx * 0.16 - nx * 0.1, tipY + dy * 0.16 - ny * 0.1,
+        tipX + dx * 0.1 - nx * 0.5, tipY + dy * 0.1 - ny * 0.5,
+        tipX - dx * 0.06 - nx * 0.42, tipY - dy * 0.06 - ny * 0.42);
+      p.c(x + dx * 0.58 - nx * 0.16, y + dy * 0.58 - ny * 0.16,
+        x + dx * 0.16 - nx * 0.1, y + dy * 0.16 - ny * 0.1, x, y);
+    };
+    // The stem, and it is a curve: a kbach has **no straight segment anywhere**,
+    // which is the mark that separates it from `meander` (el), the other motif here
+    // that turns back into itself -- `kasuti`'s note already draws that line, a
+    // meander being right angles only.
+    p.m(50, 90); p.c(43, 66, 57, 38, 50, 14);
+    // Three mirrored pairs on that stem, diminishing upward. **The tips curl back
+    // toward the stem and the pairs mirror**, which is the whole difference from
+    // `acanthus` (it), the one other leaf scroll here: an acanthus leaf is lobed and
+    // serrated and its volute unfurls *outward* along a running, asymmetric stem.
+    // Deliberately not serrated for that reason -- a scalloped edge was drawn and
+    // rejected, because it made this the acanthus's own description. Nothing crosses
+    // anything, which is what a knot does and `interlace` (ar) is; and this is a
+    // repeating unit with no centre, where `lotus` (hi) and `cypress` (fa) are
+    // single silhouettes seen face-on. Named last against `flame` (th), the nearest
+    // mark of all: a Thai flame is one tongue standing alone, and one tongue is
+    // exactly what this is built out of, so the figure has to be the paired
+    // stem-borne one rather than the unit.
+    for (const [y, reach, rise, bow] of [[82, 36, -32, 13], [59, 28, -25, 10],
+      [38, 20, -17, 7]]) {
+      for (const side of [-1, 1]) tongue(50, y, side * reach, rise, side * bow);
+    }
+  },
+  minankari(p) {
+    // A cloisonné plaque: one bent wire, closed cells, nothing crossing anything.
+    // The outline is a pointed oval rather than a circle -- no other emblem here is
+    // a vesica, and `petal`, `lotus`, `kolam` and `bandhani` are the round ones.
+    p.m(50, 6); p.q(89, 50, 50, 94); p.q(11, 50, 50, 6);
+    // A second wire inside it, closing a border cell the whole way round, and a
+    // third for the centre. Two nested cells and a core is the commonest Georgian
+    // medallion layout and it is also what fits: a fourth wire closes to a blot at
+    // divider height, which is the trade `kbach` and `kasuti` both make.
+    p.m(50, 17); p.q(75, 50, 50, 83); p.q(25, 50, 50, 17);
+    p.m(50, 30); p.q(63, 50, 50, 70); p.q(37, 50, 50, 30);
+    // Four ties across the border cell, and they are deliberately **not** on one
+    // axis: a cloison is cut to the figure it outlines, so its compartments come out
+    // unequal, where `azulejo`'s tiles and `jali`'s openings are a regular repeat.
+    p.m(50, 6); p.l(50, 17);
+    p.m(50, 83); p.l(50, 94);
+    p.m(17, 63); p.l(31, 61);
+    p.m(83, 37); p.l(69, 39);
+  },
 };
 
 // At divider height, use the motif's silhouette rather than its interior detail.
@@ -914,6 +1024,28 @@ const tracery = {
     p.m(50, 8); p.l(66, 30); p.l(58, 36); p.l(78, 58); p.l(70, 64); p.l(92, 92);
     p.l(8, 92); p.l(30, 64); p.l(22, 58); p.l(42, 36); p.l(34, 30);
     p.close();
+  },
+  kbach(p) {
+    // The stem and one pair, the two upper pairs dropped: at divider height three
+    // pairs close into a blot, the trade `kasuti` makes with its courses and
+    // `matmi` with its steps. What has to survive is the mirrored pairing and the
+    // tip curling back, since an `acanthus` tracery is one running asymmetric
+    // scroll and a `flame` tracery is one tongue on its own.
+    p.m(50, 90); p.c(43, 64, 57, 36, 50, 10);
+    for (const side of [-1, 1]) {
+      p.m(50, 82);
+      p.c(50 + side * 30, 84, 50 + side * 46, 44, 50 + side * 22, 26);
+      p.c(50 + side * 14, 20, 50 + side * 8, 30, 50 + side * 17, 33);
+    }
+  },
+  // Two closed cells and the tie between them, the nesting dropped: at divider
+  // height three concentric wires close into a blot. What has to survive is that
+  // the cells are *closed* and that nothing crosses, since an `interlace` tracery
+  // is two diamonds that overlap and a `jali` tracery is two open arches.
+  minankari(p) {
+    p.m(28, 6); p.q(48, 50, 28, 94); p.q(8, 50, 28, 6);
+    p.m(72, 6); p.q(92, 50, 72, 94); p.q(52, 50, 72, 6);
+    p.m(48, 50); p.l(52, 50);
   },
 };
 

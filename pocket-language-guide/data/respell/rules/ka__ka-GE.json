@@ -1,0 +1,882 @@
+{
+ "source": "ka",
+ "accent": "ka-GE",
+ "status": "ready",
+ "version": "1",
+ "policy": {
+  "syllable_separator": "-",
+  "word_separator": " ",
+  "stress": "none",
+  "tone": "drop",
+  "length": "none",
+  "max_onset": 3,
+  "fixups": "all",
+  "locale": "ka"
+ },
+ "phonemes": [
+  {
+   "slot": "coda",
+   "ipa": "ɲ",
+   "out": "ნ"
+  },
+  {
+   "slot": "coda",
+   "ipa": "ʎ",
+   "out": "ლ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɲ",
+   "out": "ნ",
+   "if_nucleus_head": "i ɪ ɨ y ʏ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʎ",
+   "out": "ლ",
+   "if_nucleus_head": "i ɪ ɨ y ʏ"
+  },
+  {
+   "slot": "any",
+   "ipa": "j",
+   "out": "",
+   "if_nucleus_head": "i ɪ ɨ"
+  },
+  {
+   "slot": "any",
+   "ipa": "p",
+   "out": "პ"
+  },
+  {
+   "slot": "any",
+   "ipa": "pʲ",
+   "out": "პ"
+  },
+  {
+   "slot": "any",
+   "ipa": "pʼ",
+   "out": "პ"
+  },
+  {
+   "slot": "any",
+   "ipa": "pʰ",
+   "out": "ფ"
+  },
+  {
+   "slot": "any",
+   "ipa": "p͈",
+   "out": "პპ"
+  },
+  {
+   "slot": "any",
+   "ipa": "b",
+   "out": "ბ"
+  },
+  {
+   "slot": "any",
+   "ipa": "bʲ",
+   "out": "ბ"
+  },
+  {
+   "slot": "any",
+   "ipa": "bʰ",
+   "out": "ბჰ"
+  },
+  {
+   "slot": "any",
+   "ipa": "t",
+   "out": "ტ"
+  },
+  {
+   "slot": "any",
+   "ipa": "t̪",
+   "out": "ტ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tʲ",
+   "out": "ტ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʈ",
+   "out": "ტ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tʼ",
+   "out": "ტ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tʰ",
+   "out": "თ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʈʰ",
+   "out": "თ"
+  },
+  {
+   "slot": "any",
+   "ipa": "θ",
+   "out": "თ"
+  },
+  {
+   "slot": "any",
+   "ipa": "t͈",
+   "out": "ტტ"
+  },
+  {
+   "slot": "any",
+   "ipa": "d",
+   "out": "დ"
+  },
+  {
+   "slot": "any",
+   "ipa": "dʲ",
+   "out": "დ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɖ",
+   "out": "დ"
+  },
+  {
+   "slot": "any",
+   "ipa": "dˤ",
+   "out": "დ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɗ",
+   "out": "დ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ð",
+   "out": "დ"
+  },
+  {
+   "slot": "any",
+   "ipa": "dʰ",
+   "out": "დჰ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɖʰ",
+   "out": "დჰ"
+  },
+  {
+   "slot": "any",
+   "ipa": "k",
+   "out": "კ"
+  },
+  {
+   "slot": "any",
+   "ipa": "kʲ",
+   "out": "კ"
+  },
+  {
+   "slot": "any",
+   "ipa": "kʼ",
+   "out": "კ"
+  },
+  {
+   "slot": "any",
+   "ipa": "k͈",
+   "out": "კკ"
+  },
+  {
+   "slot": "any",
+   "ipa": "kʰ",
+   "out": "ქ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɡ",
+   "out": "გ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɡʲ",
+   "out": "გ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɡʰ",
+   "out": "გჰ"
+  },
+  {
+   "slot": "any",
+   "ipa": "q",
+   "out": "ყ"
+  },
+  {
+   "slot": "any",
+   "ipa": "qʰ",
+   "out": "ყ"
+  },
+  {
+   "slot": "any",
+   "ipa": "qʼ",
+   "out": "ყ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ts",
+   "out": "ც"
+  },
+  {
+   "slot": "any",
+   "ipa": "tsʰ",
+   "out": "ც"
+  },
+  {
+   "slot": "any",
+   "ipa": "tsʲ",
+   "out": "ც"
+  },
+  {
+   "slot": "any",
+   "ipa": "ts̪",
+   "out": "ც"
+  },
+  {
+   "slot": "any",
+   "ipa": "tsʼ",
+   "out": "წ"
+  },
+  {
+   "slot": "any",
+   "ipa": "sʼ",
+   "out": "წ"
+  },
+  {
+   "slot": "any",
+   "ipa": "dz",
+   "out": "ძ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tʃ",
+   "out": "ჩ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tʃʰ",
+   "out": "ჩ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tʃʲ",
+   "out": "ჩ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tɕ",
+   "out": "ჩ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tɕʰ",
+   "out": "ჩ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʈʂ",
+   "out": "ჩ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʈʂʰ",
+   "out": "ჩ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tɕ͈",
+   "out": "ჩჩ"
+  },
+  {
+   "slot": "any",
+   "ipa": "c",
+   "out": "ჩ"
+  },
+  {
+   "slot": "any",
+   "ipa": "cʰ",
+   "out": "ჩ"
+  },
+  {
+   "slot": "any",
+   "ipa": "tʃʼ",
+   "out": "ჭ"
+  },
+  {
+   "slot": "any",
+   "ipa": "dʒ",
+   "out": "ჯ"
+  },
+  {
+   "slot": "any",
+   "ipa": "dʑ",
+   "out": "ჯ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɟ",
+   "out": "ჯ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɟʰ",
+   "out": "ჯჰ"
+  },
+  {
+   "slot": "any",
+   "ipa": "f",
+   "out": "ფ"
+  },
+  {
+   "slot": "any",
+   "ipa": "fʲ",
+   "out": "ფ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɸ",
+   "out": "ფ"
+  },
+  {
+   "slot": "any",
+   "ipa": "pf",
+   "out": "პფ"
+  },
+  {
+   "slot": "any",
+   "ipa": "v",
+   "out": "ვ"
+  },
+  {
+   "slot": "any",
+   "ipa": "vʲ",
+   "out": "ვ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʋ",
+   "out": "ვ"
+  },
+  {
+   "slot": "any",
+   "ipa": "s",
+   "out": "ს"
+  },
+  {
+   "slot": "any",
+   "ipa": "s̪",
+   "out": "ს"
+  },
+  {
+   "slot": "any",
+   "ipa": "sʲ",
+   "out": "ს"
+  },
+  {
+   "slot": "any",
+   "ipa": "s͈",
+   "out": "სს"
+  },
+  {
+   "slot": "any",
+   "ipa": "z",
+   "out": "ზ"
+  },
+  {
+   "slot": "any",
+   "ipa": "zʲ",
+   "out": "ზ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʃ",
+   "out": "შ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʂ",
+   "out": "შ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɕ",
+   "out": "შ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʃʲ",
+   "out": "შ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʒ",
+   "out": "ჟ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʐ",
+   "out": "ჟ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʑ",
+   "out": "ჟ"
+  },
+  {
+   "slot": "any",
+   "ipa": "x",
+   "out": "ხ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ç",
+   "out": "ხ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ħ",
+   "out": "ხ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɣ",
+   "out": "ღ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʁ",
+   "out": "ღ"
+  },
+  {
+   "slot": "any",
+   "ipa": "h",
+   "out": "ჰ"
+  },
+  {
+   "slot": "any",
+   "ipa": "m",
+   "out": "მ"
+  },
+  {
+   "slot": "any",
+   "ipa": "mʲ",
+   "out": "მ"
+  },
+  {
+   "slot": "any",
+   "ipa": "m̩",
+   "out": "მ"
+  },
+  {
+   "slot": "any",
+   "ipa": "n",
+   "out": "ნ"
+  },
+  {
+   "slot": "any",
+   "ipa": "nʲ",
+   "out": "ნ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɳ",
+   "out": "ნ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɴ",
+   "out": "ნ"
+  },
+  {
+   "slot": "any",
+   "ipa": "n̩",
+   "out": "ნ"
+  },
+  {
+   "slot": "any",
+   "ipa": "̃",
+   "out": "ნ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ŋ",
+   "out": "ნგ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɲ",
+   "out": "ნი"
+  },
+  {
+   "slot": "any",
+   "ipa": "l",
+   "out": "ლ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɫ",
+   "out": "ლ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɭ",
+   "out": "ლ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɭʲ",
+   "out": "ლ"
+  },
+  {
+   "slot": "any",
+   "ipa": "l̩",
+   "out": "ლ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɬ",
+   "out": "ლ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʎ",
+   "out": "ლი"
+  },
+  {
+   "slot": "any",
+   "ipa": "r",
+   "out": "რ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɾ",
+   "out": "რ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɾʲ",
+   "out": "რ"
+  },
+  {
+   "slot": "any",
+   "ipa": "rʲ",
+   "out": "რ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɹ",
+   "out": "რ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɻ",
+   "out": "რ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɽ",
+   "out": "რ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɽʰ",
+   "out": "რჰ"
+  },
+  {
+   "slot": "any",
+   "ipa": "r̩",
+   "out": "რ"
+  },
+  {
+   "slot": "any",
+   "ipa": "r̝",
+   "out": "რჟ"
+  },
+  {
+   "slot": "any",
+   "ipa": "j",
+   "out": "ი"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʝ",
+   "out": "ი"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɥ",
+   "out": "ი"
+  },
+  {
+   "slot": "any",
+   "ipa": "w",
+   "out": "ვ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ɰ",
+   "out": "უ"
+  },
+  {
+   "slot": "any",
+   "ipa": "ʔ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ʔʲ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ʕ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ˀ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ʼ",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "ː",
+   "out": ""
+  },
+  {
+   "slot": "any",
+   "ipa": "̯",
+   "out": ""
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "a",
+   "out": "ა"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɑ",
+   "out": "ა"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɐ",
+   "out": "ა"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʌ",
+   "out": "ა"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ə",
+   "out": "ა"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "e",
+   "out": "ე"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɛ",
+   "out": "ე"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "æ",
+   "out": "ე"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɜ",
+   "out": "ე"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "i",
+   "out": "ი"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɪ",
+   "out": "ი"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɨ",
+   "out": "ი"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "o",
+   "out": "ო"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɔ",
+   "out": "ო"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɒ",
+   "out": "ო"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɵ",
+   "out": "ო"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɤ",
+   "out": "ო"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "u",
+   "out": "უ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʊ",
+   "out": "უ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɯ",
+   "out": "უ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʉ",
+   "out": "უ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "uʲ",
+   "out": "უ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "y",
+   "out": "იუ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ʏ",
+   "out": "იუ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ø",
+   "out": "იო"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "œ",
+   "out": "იო"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ã",
+   "out": "ან"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ẽ",
+   "out": "ენ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ĩ",
+   "out": "ინ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "õ",
+   "out": "ონ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ũ",
+   "out": "უნ"
+  },
+  {
+   "slot": "nucleus",
+   "ipa": "ɚ",
+   "out": "ერ"
+  }
+ ],
+ "syllable_fixups": [],
+ "legend": "ახალი ნიშანი არ არის — ყველა ასო ჩვეულებრივი ქართულია. დეფისი მარცვლებს ჰყოფს. მახვილი არ აღინიშნება.",
+ "derives_from": "**There is no bracketed Georgian pronunciation key to borrow, and there is something better: Georgian already writes every foreign word phonetically in its own alphabet, and has for as long as it has had a press.** Georgian lexicography and encyclopaedic practice do not print a pronunciation in brackets beside a foreign headword the way Croatian's and Italian's do -- they render the word itself in Mkhedruli, once, and that spelling *is* the pronunciation, because Mkhedruli is one letter to one phoneme in both directions. So this table does not adapt a notation; it continues an orthographic convention, and every rule in it can be checked against a Georgian word somebody has already written.\n\n**The attestations used are this pack's own loanwords**, which is the strongest evidence available here because each of them is sourced to Rayfield's dictionary rather than to this table's author. They settle the one decision that carries the whole consonant system -- see `deviations` -- and they also fix ts (პოლიცია, რეცეპცია), f (ტელეფონი, ლიფტი), v (ვიზა), z (ვიზა), x (ტაქსი, ქსელი: Georgian writes a Latin x as ქს) and the -ი that Georgian appends to a consonant-final loan, which this table deliberately does **not** add: a respelling is a hint and not a Georgian noun, so it takes no case ending.\n\nNames outside the pack were used for the four sounds no loanword in it has: ვაშინგტონი and ჰოლივუდი for /w/ -> ვ and /h/ -> ჰ, მიუნხენი for /y/ -> იუ and /x/ -> ხ, კიოლნი and გოეთე for /ø œ/ -> იო, ნიუ-იორკი for /j/ -> ი, and ბჰუტანი for the Indic breathy stops -> Cჰ.",
+ "deviations": [
+  {
+   "rule": "**A plain voiceless stop takes the ejective letter, not the aspirated one: /p t k/ are პ ტ კ and only /pʰ tʰ kʰ/ are ფ თ ქ.** Read off the IPA alone this looks backwards, since an ejective is the marked member of the pair and a plain stop is not.",
+   "why": "Two reasons, and the first is that it is simply what Georgian does. Nine of this pack's own loanwords settle it and none goes the other way: პასპორტი, პრობლემა, პოლიცია, პაროლი, ტელეფონი, ტურისტი, ინტერნეტი, ბანკომატი, ადვოკატი, კოდი. The second is phonetic and is why the convention exists: Georgian's ejective series is [p t k] with a glottalic airstream and its aspirated series is [pʰ tʰ kʰ], and the languages that supply most of the bare `p t k` in this corpus -- French, Spanish, Italian, Russian, Japanese, Indonesian, Turkish -- have *unaspirated* voiceless stops. Holding ფ თ ქ back for the six packs that write `pʰ tʰ kʰ` because they genuinely contrast them (Mandarin, Korean, Thai, Hindi, Lao, Khmer) means this table spells that contrast **exactly**, with two ordinary letters, where every Latin-script table here has to drop it or spell an `h`. The cost is English and German, whose word-initial /p t k/ really are aspirated and are written unaspirated here; espeak does not mark that aspiration, so it is invisible to this table in any case."
+  },
+  {
+   "rule": "Georgian appends -ი to a consonant-final foreign noun (პასპორტი, ტელეფონი, ბანკი). This column does not.",
+   "why": "That -ი is the nominative case ending, not a sound: it is there because the word has become a Georgian noun that has to decline. A respelling is a disposable hint, it is not being declined, and adding a vowel the source word does not have would make the reader say one. Croatian's table takes the same licence against its own standard's adapted-spelling rule, and for the same reason."
+  },
+  {
+   "rule": "Vowel length is not written at all, where six tables here write it with a colon, a doubled letter or an accent.",
+   "why": "Georgian has no phonemic vowel length, and -- unlike Croatian, which also lacks a way to write it and borrows a colon -- it has no spare device either. Doubling reads as two syllables, because Georgian has no diphthongs and every vowel letter is its own nucleus; a colon after a Mkhedruli letter is not a mark any Georgian reader has met; and the two accent devices in `core/respell.js` are dead here for Amharic's reason -- `VOWEL_LETTERS` and `ACCENTED` list Latin, Cyrillic and Greek vowels and no Georgian codepoint at all."
+  }
+ ],
+ "approximations": [
+  {
+   "sounds": "the uvulars /q qʰ qʼ/ (Arabic and Persian qaf, Urdu ق, Klingon, and Georgian's own ყ arriving from this pack)",
+   "out": "ყ",
+   "why": "**This is the one thing this table can do that no other reader in the corpus can**, and it is why ყ is worth the note. ყ is a uvular ejective, so it is not Arabic's plain /q/ exactly -- but it is the only uvular letter in any of the forty-seven orthographies here, and every other table spells qaf with its velar k and throws the place of articulation away. Attested: Georgian writes the Qur'an ყურანი and a qadi ყადი. Place beats phonation in a pronunciation hint, which is Khmer's `tɕ`-over-`c` trade in the other direction."
+  },
+  {
+   "sounds": "the ejectives /kʼ tʼ pʼ tsʼ tʃʼ sʼ/ (Amharic, Hausa, and Georgian's own)",
+   "out": "კ ტ პ წ ჭ წ",
+   "why": "Listed here for the opposite reason to everything else in this block: these are **exact**, and they are exact nowhere else. All forty-seven existing tables spell an ejective by decomposition -- the stop matches, then the `ʼ` matches a rule that emits nothing -- so 675 Amharic and Hausa cells lose the glottalisation entirely. Georgian has a whole ejective series and spells each one with its own letter. The single inexact member is /sʼ/, Amharic ጸ, which goes to წ /tsʼ/: Georgian has no ejective fricative, and the affricate keeps the airstream where ს would keep only the place."
+  },
+  {
+   "sounds": "the palatal stops and the Indic palatal affricate, which the corpus writes with the same symbol /c cʰ/",
+   "out": "ჩ",
+   "why": "`c` means two different things in this corpus and no single Georgian letter serves both. Counted rather than guessed: of the 1,694 bare `c` a Georgian reader meets, 1,202 are the Indic palatal affricate च /tʃ/ (mr, pa, ml, ne, hi, gu, ur, kn) and 118 are Lao ຈ, which is also an affricate -- against 202 that are a true palatal stop (cs, el, hu, tr) and 172 Vietnamese ch, which is between the two. So ჩ is right on 78% and one manner step off on the rest, where კ would be right on 12% and a whole manner *and* place off on the majority. Croatian's ć and Amharic's ች are the same decision from the same two tables that faced it most recently."
+  },
+  {
+   "sounds": "/j/ beside a close front vowel",
+   "out": "one ი rather than two",
+   "why": "Georgian writes the glide and the vowel with the same letter, so `jɨ` and `ɨj` both come out `იი` unless something stops them. The rule in `phonemes` stops the falling case, where the glide ends the nucleus -- Russian Добрый is `დობრი`, which is how Georgian writes it -- and cannot stop the rising case, where `syllabify` makes the glide the nucleus *head* and `if_nucleus_head` therefore asks about the /j/ itself. Measured at the end (`tmp/ka/dbl.mjs`): 1,107 of 37,989 respelled cells still carry a doubled ი, 2.9%, mostly Amharic's ይ- prefix, Spanish ʝi and Mandarin ɥ. It is deliberately not repaired with an `after_out: \"ი\"` rule on the vowels, because that would also fire on a genuine two-vowel sequence -- English *seeing* is `სიინგ` and should be -- and deleting a syllable the word has is worse than writing a letter twice."
+  },
+  {
+   "sounds": "the front rounded vowels /y ʏ/ and /ø œ/ (French, German, Dutch, Turkish, Swedish, Mandarin)",
+   "out": "იუ and იო",
+   "why": "Georgian has five vowels and no rounded front one, so these are the only two vowel decisions in this table that are a convention rather than a nearest neighbour -- and the convention is real and old: მიუნხენი, კიოლნი, გოეთე. A digraph costs a syllable boundary that the source word does not have, which is why it is used for exactly these two and not for /ɯ ʉ ɵ ɨ/, which take the single nearest letter."
+  },
+  {
+   "sounds": "the glottal stop /ʔ/, the pharyngeals /ʕ ħ/ and Vietnamese's glottalisation /ˀ/",
+   "out": "nothing, except /ħ/ which goes to ხ",
+   "why": "Georgian has no glottal or pharyngeal consonant and no letter near one. Writing ჰ would add an /h/ the word does not have, where writing nothing only omits one -- which is the choice every Latin- and Cyrillic-script table here makes for the same three symbols. /ħ/ is the exception because ხ /x/ is genuinely close to it and Georgian already hears Arabic ح that way."
+  },
+  {
+   "sounds": "tone (Mandarin, Thai, Vietnamese, Lao, Punjabi, Yoruba, Cantonese) and stress (everything else)",
+   "out": "neither is written",
+   "why": "Georgian writes no tone and has nothing to write it with, so `tone: drop` is forced. Stress is a *refusal* rather than a limit and the three devices were each checked. `caps` is not dead here the way it is on a caseless script -- it is the opposite, and that is the problem: Unicode 11 gave every Mkhedruli letter an uppercase mapping into **Mtavruli** (U+1C90..1CBF), so `toLocaleUpperCase('ka')` really would fire and really would emit 33 codepoints the shipped `geor` subset does not carry -- a row of empty boxes in the PDF, and an all-caps display style that means something else in Georgian besides. `acute` and `grave` are byte-identical no-ops, the wall Amharic, Hebrew, Persian, Tamil, Telugu, Punjabi and Gujarati all hit. `prime` would work and is refused for Tamil's and Amharic's reason: Georgian prominence is not contrastive and is written by neither orthography, so the mark would be a notation this reader has never met carrying information their own language does not use."
+  }
+ ],
+ "note": "**Georgian is the first script in this corpus that needs no slot conditioning at all, and it is worth saying why rather than letting it look like an omission.** Every Brahmic table here needs a consonant three times -- full letter, subjoined form, coda -- because the script writes a consonant differently depending on what is around it; Hebrew and Arabic need positional forms; Amharic needs 196 generated `syllable_fixups` to fuse a bare consonant onto a vowel letter. Mkhedruli has none of that. It is unicameral, it has no vowel signs, no conjuncts, no positional forms and no combining marks, and it writes a vowel with a full letter in every position -- so one rule per phoneme is the whole table and `syllable_fixups` is empty. The three rules that do carry a slot are all one fact: ნი and ლი are digraphs whose second letter is a vowel, so they cannot close a syllable (`coda`) and must not double their ი before a front vowel (`if_nucleus_head`).\n\n**The key set was derived from the corpus, not from a sibling table.** `tmp/ka/needed.mjs` runs `phonemesOf` over the `ipa` column of all forty-six other packs and reports the 163 units that actually reach a Georgian reader's page, with counts. That is the answer to the hole Croatian's first `--gaps` run found -- a sibling's key set is missing precisely the phonemes the sibling itself contributes -- and it is cheaper than checking against the union of forty-seven tables afterwards.",
+ "policy_note": "`max_onset` is 3, the highest value this engine offers, and Georgian is the one reader here for which that is an *understatement* rather than a stretch. Georgian phonotactics permit onsets no other language in this corpus does -- ბრწყინვალე opens on four consonants, გვფრცქვნის on six -- so onset maximisation can never hand this reader a cluster they cannot pronounce, which is the question `max_onset` exists to ask. `syllable_separator` is the hyphen, the corpus default and what thirty-five of the forty-seven tables use; Georgian has no native syllable-division mark, and the hyphen is already in the pack's own text (ვაი-ფაი, პინ-კოდი) as a within-word joiner, so it is a mark this reader meets. `fixups` is `all` and the list is empty, which is not an oversight: see the note on why this script needs none."
+}

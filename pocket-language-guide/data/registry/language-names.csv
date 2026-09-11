@@ -19,6 +19,7 @@ am,hu,,hāngarīnnya,hanɡariɲːa
 am,id,,īndonēzhyannya,ʔindoneʒjaɲːa
 am,it,,tʼalīyaninnya,tʼalijanɨɲːa
 am,ja,,japaninnya,dʒapanɨɲːa
+am,ka,,jorjiyannya,dʒordʒɨjaɲːa
 am,kn,,kanada,kanada
 am,ko,,korīyannya,korijaɲːa
 am,lo,,laonnya,laʔoɲːa
@@ -65,6 +66,8 @@ ar,hu,,al-hunghārīyah,ʔalhnɣaːɹˈijjah
 ar,id,,al-indūnīsīyah,ʔalʔndˌuːniːsˈijjah
 ar,it,,al-īṭālīyah,ʔalʔˌiːt̪aːlˈijjah
 ar,ja,,al-yābānīyah,ʔaljˌaːbaːnˈijjah
+ar,ka,,al-Jūrjīyah,ʔaldʒuːrdʒˈijjah
+ar,km,,,ʔalxˌamiːɹˈijjah
 ar,kn,,al-kānādā,ʔalkaːnˌaːdaː
 ar,ko,,al-kūrīyah,ʔalkˈuːɹiːjˌa
 ar,lo,,al-lāwīyah,ʔallaːwˈijjah
@@ -111,6 +114,8 @@ bn,hu,,hāṅgerīẏa,hˈaŋɡeɾˌij
 bn,id,,indoneśīẏa,ˈindonˌeʃij
 bn,it,,itālīẏa,ˈitalˌij
 bn,ja,,jāpāni,ɟˈapanˌi
+bn,ka,,jarjiẏāna,ɟˈoɾɟiˌan
+bn,km,,,kʰˈɔmeɾ
 bn,kn,,kannaṛa,kˈɔnnɔɽ
 bn,ko,,koriẏāna,kˈoɾiˌan
 bn,lo,,lāo,lˈao
@@ -157,6 +162,8 @@ cs,hu,maďarsky,,mˈaɟarski
 cs,id,indonésky,,ˈindonˌeːski
 cs,it,italsky,,ˈitalski
 cs,ja,japonsky,,jˈaponski
+cs,ka,gruzínsky,,ɡrˈuziːnski
+cs,km,,,khmˈeːrʃcina
 cs,kn,kannadsky,,kˈanatski
 cs,ko,korejsky,,kˈoreɪski
 cs,lo,laosky,,lˈaoski
@@ -198,10 +205,13 @@ de,gu,,,ɡˈuːjarˌɑtiː
 de,ha,,,hˈaʊszˌɑː
 de,he,,,hɛbɾˈɛːɪʃ
 de,hi,,,hˈɪndiː
+de,hr,,,kɾoːˈɑːtɪʃ
 de,hu,,,ˈʊnɡˌɑrɪʃ
 de,id,,,ˌɪndoːnˈeːzɪʃ
 de,it,,,ˌiːtalɪˈeːnɪʃ
 de,ja,,,japˈɑnɪʃ
+de,ka,,,ɡeːˈɔɾɡɪʃ
+de,km,,,kmˈeːɾ
 de,kn,,,kˈanadˌɑː
 de,ko,,,kˌoːreːˈɑnɪʃ
 de,lo,,,laˈoːtɪʃ
@@ -248,6 +258,8 @@ el,hu,,Oungrika,ˌuŋɡɾikˈa
 el,id,,Indonisiaka,ˌinðonˌisjakˈa
 el,it,,Italika,ˌitalikˈa
 el,ja,,Iaponika,ˌiapˌonikˈa
+el,ka,,Georgiana,jˌoɾjanˈa
+el,km,,,xmˈeɾ
 el,kn,,Kananta,kanˈada
 el,ko,,Koreatika,kˌoɾeˌatikˈa
 el,lo,,Laotina,lˌaotinˈa
@@ -289,10 +301,13 @@ en,gu,,,ɡˌʊdʒɐɹˈɑːɾi
 en,ha,,,hˈɔːsə
 en,he,,,hˈiːbɹuː
 en,hi,,,hˈɪndi
+en,hr,,,kɹoʊˈeɪʃən
 en,hu,,,hʌŋɡˈɛɹiən
 en,id,,,ɪndoʊnˈiːʒən
 en,it,,,ɪtˈæliən
 en,ja,,,dʒˌæpənˈiːz
+en,ka,,,dʒˈɔːɹdʒən
+en,km,,,kmˈɪɹ
 en,kn,,,kˈɑːnədə
 en,ko,,,kɚɹˈiːən
 en,lo,,,lˈaʊ
@@ -334,10 +349,13 @@ es,gu,,,ɡˌuʝaɾatˈi
 es,ha,,,ˈaʊsa
 es,he,,,ebɾˈeo
 es,hi,,,ˈindi
+es,hr,,,kɾoˈata
 es,hu,,,ˈuŋɡaɾo
 es,id,,,ˌindonˈesjo
 es,it,,,ˌitaljˈano
 es,ja,,,xˌaponˈes
+es,ka,,,xˌeoɾxjˈano
+es,km,,,xemˈeɾ
 es,kn,,,kˌanaɾˈes
 es,ko,,,kˌoɾeˈano
 es,lo,,,lˈao
@@ -384,6 +402,8 @@ fa,hu,,majāri,madʒɑri
 fa,id,,andoneziyāyi,andonezijɑi
 fa,it,,itāliyāyi,itɑliɑi
 fa,ja,,zhāponi,ʒɑponi
+fa,ka,,gorjī,ɡordʒi
+fa,km,,,xamri
 fa,kn,,kānārā,kɑnɑrɑ
 fa,ko,,kore-i,korei
 fa,lo,,lāʼosi,lɑʔusi
@@ -430,6 +450,8 @@ fil,hu,Hungaro,,huŋaɾo
 fil,id,Indonesiyo,,indonɛsijo
 fil,it,Italyano,,italjano
 fil,ja,Hapon,,hapon
+fil,ka,Georgiano,,ɡɛoɾɡiano
+fil,km,,,khmɛɾ
 fil,kn,,,kannada
 fil,ko,Koreano,,koɾɛano
 fil,lo,,,lao
@@ -471,10 +493,13 @@ fr,gu,,,ɡudʒaʁatˈi
 fr,ha,,,ausˈa
 fr,he,,,ebʁˈø
 fr,hi,,,indˈi
+fr,hr,,,kʁɔˈat
 fr,hu,,,ɔ̃ɡʁwˈa
 fr,id,,,ɛ̃donezjˈɛ̃
 fr,it,,,italjˈɛ̃
 fr,ja,,,ʒaponˈɛ
+fr,ka,,,ʒeɔʁʒjˈɛ̃
+fr,km,,,kmˈe
 fr,kn,,,kanadˈa
 fr,ko,,,koʁeˈɛ̃
 fr,lo,,,laˈo
@@ -521,6 +546,8 @@ gu,hu,,haṁgēriyan,həŋɡeːɾɪjən
 gu,id,,inḍōnēśiyan,ɪnɖoːneːʃɪjən
 gu,it,,iṭāliyan,ɪʈaːlɪjən
 gu,ja,,jāpānījh,ɟaːpaːniːz
+gu,ka,,jyōrjiyana,ɟjoːɾɟɪjən
+gu,km,,,kʰmeːɾ
 gu,kn,,kannaḍ,kənnʌɖ
 gu,ko,,kōriyan,koːɾɪjən
 gu,lo,,lāō,laːoː
@@ -562,10 +589,13 @@ ha,gu,,,ɡudʒarati
 ha,ha,,,hausa
 ha,he,,,ibranantʃi
 ha,hi,,,harʃen hindi
+ha,hr,,,kuroʃijan
 ha,hu,,,harʃen hunɡari
 ha,id,,,harʃen indunusija
 ha,it,,,italijantʃi
 ha,ja,,,dʒapanantʃi
+ha,ka,,,dʒodʒijantʃi
+ha,km,,,harʃen kimar
 ha,kn,,,kannada
 ha,ko,,,harʃen korija
 ha,lo,,,lao
@@ -612,6 +642,7 @@ he,hu,,hungarit,hunɡaʁˈit
 he,id,,indonezit,indonezˈit
 he,it,,italqit,italkˈit
 he,ja,,yapanit,japanˈit
+he,ka,,ge’orgit,ɡeoʁɡˈit
 he,kn,,qanadah,kanadˈah
 he,ko,,qore’anit,koʁeanˈit
 he,lo,,la’o,laˈo
@@ -658,6 +689,8 @@ hi,hu,,haṁgeriyāī,hˌəŋɡeːɾɪjˈaːi
 hi,id,,iṁḍoneśiyāī,ˌĩɖoːnˌeːʃɪjˈaːi
 hi,it,,itālvī,ɪtˈaːlʋˌi
 hi,ja,,jāpānī,ɟaːpˈaːni
+hi,ka,,jŏrjiyāī,ɟˌɔɾɟɪjˈaːi
+hi,km,,,kʰəmˈeːɾ
 hi,kn,,kannaṛa,kˈʌnnəɽ
 hi,ko,,koriyāī,kˌoːɾɪjˈaːi
 hi,lo,,lāo,lˈaːoː
@@ -704,6 +737,8 @@ hr,hu,,,madʑarski
 hr,id,,,indonezijski
 hr,it,,,talijanski
 hr,ja,,,japanski
+hr,ka,,,ɡruzijski
+hr,km,,,kmˈerski
 hr,kn,,,karnatatʃki
 hr,ko,,,korejski
 hr,lo,,,lˈaoski
@@ -745,10 +780,13 @@ hu,gu,,,ɡˈudʒɑraːti
 hu,ha,,,hˈɑusɑ
 hu,he,,,hˈeːbɛr
 hu,hi,,,hˈindi
+hu,hr,,,hˈorvaːt
 hu,hu,magyar,,mˈɑɟɑr
 hu,id,,,ˈindoneːz
 hu,it,,,ˈolɑs
 hu,ja,,,jˈɑpaːn
+hu,ka,,,ɡrˈuːz
+hu,km,,,khmˈɛr
 hu,kn,,,kˈɑnnɑdɑ
 hu,ko,,,kˈorɛɑi
 hu,lo,,,lˈɑo
@@ -790,10 +828,13 @@ id,gu,,,ɡudʒˈarat
 id,ha,,,hˈaʊsa
 id,he,,,ibrˈani
 id,hi,,,hˈindi
+id,hr,,,krˌoasˈia
 id,hu,,,hˌuŋarˈia
 id,id,Indonesia,,ˌindonəsˈia
 id,it,,,ˌitalˈia
 id,ja,,,dʒˈɛpaŋ
+id,ka,,,ɡˌɛɔrɡˈia
+id,km,,,xmˈɛr
 id,kn,,,kannˈada
 id,ko,,,kɔrˈɛa
 id,lo,,,lˈao
@@ -835,10 +876,13 @@ it,gu,,,ɡʊjaɾˈatɪ
 it,ha,,,hˈaʊza
 it,he,,,ebrˈaɪko
 it,hi,,,ˈindɪ
+it,hr,,,kroˈato
 it,hu,,,ʊŋɡerˈeze
 it,id,,,indonezjˈano
 it,it,italiano,,italiˈano
 it,ja,,,dʒapponˈeze
+it,ka,,,dʒeordʒˈano
+it,km,,,kmˈɛr
 it,kn,,,kannˈada
 it,ko,,,koreˈano
 it,lo,,,lˈao
@@ -885,6 +929,7 @@ ja,hu,,hangarīgo,haɴɡaɾiːɡo
 ja,id,,indoneshiago,iɴdoneɕiaɡo
 ja,it,,itariago,itaɾiaɡo
 ja,ja,日本語,nihongo,ɲihoɴɡo
+ja,ka,,jōjiago,dʑoːdʑiaɡo
 ja,kn,,kannadago,kaɴnadaɡo
 ja,ko,,kankokugo,kaɴkokɯɡo
 ja,lo,,raogo,ɾaoɡo
@@ -911,6 +956,54 @@ ja,ur,,urudūgo,ɯɾɯdɯːɡo
 ja,vi,,betonamugo,betonamɯɡo
 ja,yo,,yorubago,joɾɯbaɡo
 ja,zh-Hans,,chūgokugo,tɕɯːɡokɯɡo
+ka,am,,amharuli,amharuli
+ka,ar,,arabuli,arabuli
+ka,bn,,bengaluri,benɡaluri
+ka,cs,,chekhuri,tʃʰexuri
+ka,de,,germanuli,ɡermanuli
+ka,el,,berdznuli,berdznuli
+ka,en,,inglisuri,inɡlisuri
+ka,es,,espanuri,espʼanuri
+ka,fa,,sparsuli,spʼarsuli
+ka,fil,,pilipinuri,pʰilipʼinuri
+ka,fr,,pranguli,pʰranɡuli
+ka,gu,,gujarati,ɡudʒaratʰi
+ka,ha,,hausa,hausa
+ka,he,,ebrauli,ebrauli
+ka,hi,,hindi,hindi
+ka,hr,,khorvatuli,xorvatʼuli
+ka,hu,,ungruli,unɡruli
+ka,id,,indoneziuri,indoneziuri
+ka,it,,italiuri,itʼaliuri
+ka,ja,,iaponuri,iapʼonuri
+ka,ka,,kartuli,kʰartʰuli
+ka,km,,kmeruli,kʰmeruli
+ka,kn,კანნადა,kannada,kʼannada
+ka,ko,,koreuli,kʼoreuli
+ka,lo,,laosuri,laosuri
+ka,ml,,malaialamuri,malaialamuri
+ka,mr,,marathi,maratʰhi
+ka,ms,,malaiuri,malaiuri
+ka,ne,,nepaluri,nepʼaluri
+ka,nl,,niderlanduri,niderlanduri
+ka,pa,,penjaburi,pʼendʒaburi
+ka,pl,,polonuri,pʼolonuri
+ka,pt,,portugaliuri,pʼortʼuɡaliuri
+ka,qya,კვენია,kvenia,kʼvenia
+ka,ro,,ruminuli,ruminuli
+ka,ru,,rusuli,rusuli
+ka,sv,,shveduri,ʃveduri
+ka,sw,,suahili,suahili
+ka,ta,,tamiluri,tʼamiluri
+ka,te,,telugu,tʼeluɡu
+ka,th,,tailanduri,tʼailanduri
+ka,tlh,,klingoni,kʼlinɡoni
+ka,tr,,turkuli,tʰurkʰuli
+ka,uk,,ukrainuli,ukʼrainuli
+ka,ur,,urdu,urdu
+ka,vi,,vietnamuri,vietʼnamuri
+ka,yo,,ioruba,ioruba
+ka,zh-Hans,,chinuri,tʃʰinuri
 kn,am,,aṁharik,amharik
 kn,ar,,arēbik,areːbik
 kn,bn,,bāṁglā,baːŋɡlaː
@@ -931,6 +1024,8 @@ kn,hu,,haṁgēriyan,haŋɡeːrijan
 kn,id,,iṁḍōnēśiyan,iɳɖoːneːʃijan
 kn,it,,iṭāliyan,iʈaːlijan
 kn,ja,,jāpanīs,ɟaːpaniːs
+kn,ka,,jārjiyan,ɟaːrɟijan
+kn,km,,,kʰameːr
 kn,kn,,kannaḍa,kannaɖa
 kn,ko,,koriyan,korijan
 kn,lo,,lāvō,laːvoː
@@ -977,6 +1072,7 @@ ko,hu,,heonggari-eo,hʌŋɡaɾiʌ
 ko,id,,indonesia-eo,indonesiaʌ
 ko,it,,itallia-eo,itʰalliaʌ
 ko,ja,,ilboneo,ilbonʌ
+ko,ka,,jojiaeo,tɕodʑiaʌ
 ko,kn,,kannadaeo,kʰannadaʌ
 ko,ko,한국어,hangugeo,hanɡuɡʌ
 ko,lo,,raoeo,ɾaoʌ
@@ -1023,6 +1119,8 @@ lo,hu,,hangkarian,haŋ˧˥kaː˩ria̯n˧˥
 lo,id,,indônéxian,ʔin˩doː˩neː˧˥sia̯n˧˥
 lo,it,,italian,ʔiʔ˧˥taː˩lia̯n˧˥
 lo,ja,,gnipoun,ɲiː˧pun˧
+lo,ka,,chocheun,cɔː˩cia̯n˩
+lo,km,,,kʰaʔ˧˥meːn˩
 lo,kn,,khannada,kʰan˧˥naː˧˥daː˩
 lo,ko,,kaoli,kaw˩liː˩
 lo,lo,,lao,laːw˧˥
@@ -1069,6 +1167,8 @@ ml,hu,,haṁgēṟiyan,hamɡeːrijan
 ml,id,,intōnēṣyan,indoːneːʂjan
 ml,it,,iṟṟāliyan,iʈʈaːlijan
 ml,ja,,jāppanīsŭ,ɟaːppaniːsɨ
+ml,ka,,jōrjiyan,ɟoːɾɟijan
+ml,km,,,kʰameɾ
 ml,kn,,kannaḍa,kannaɖa
 ml,ko,,koṟiyan,korijan
 ml,lo,,lāvō,laːvoː
@@ -1115,6 +1215,8 @@ mr,hu,,haṁgēriyana,həŋɡˈeːɾɪjˌən
 mr,id,,iṁḍōnēśiyana,ˌĩɖoːnˈeːʃɪjˌən
 mr,it,,iṭāliyana,ɪʈˈaːlɪjˌən
 mr,ja,,japānī,zəpˈaːni
+mr,ka,,jŏrjiyana,zˈɔɾɟɪˌɪjən
+mr,km,,,kʰmˈeːɾ
 mr,kn,,kannaḍa,kˈʌnnəɖ
 mr,ko,,kōriyana,kˈoːɾɪjˌən
 mr,lo,,lāo,lˈaːoː
@@ -1156,10 +1258,13 @@ ms,gu,,,ɡudʒˈarat
 ms,ha,,,hˈaʊsə
 ms,he,,,ibrˈani
 ms,hi,,,hˈindi
+ms,hr,,,tʃrˌoatˈiə
 ms,hu,,,hˈuŋarj
 ms,id,,,ˌindonˈeɪsiə
 ms,it,,,itˈali
 ms,ja,,,dʒˈəpon
+ms,ka,,,ɡˌɛɔrɡˈiə
+ms,km,,,xmˈɛɾr
 ms,kn,,,kannˈadə
 ms,ko,,,kɔɹˈiːə
 ms,lo,,,lˈaos
@@ -1206,6 +1311,8 @@ ne,hu,,haṅgēriyālī,hˌəŋɡeːɾɪjˈaːli
 ne,id,,inḍōnēsiyālī,ˌɪnɖoːnˌeːsɪjˈaːli
 ne,it,,iṭālēlī,ˌɪʈaːlˈeːli
 ne,ja,,jāpānī,ɟaːpˈaːni
+ne,ka,,jarjiyālī,ɟˌərrɟɪjˈaːli
+ne,km,,,kʰəmˈeːɾə
 ne,kn,,,kˈʌnnˌaːɖaː
 ne,ko,,kōriyālī,kˌoːɾɪjˈaːli
 ne,lo,,lāo,lˈaːoː
@@ -1247,10 +1354,13 @@ nl,gu,,,ɣˈyjaːrˌaːti
 nl,ha,,,hˈʌʊzaː
 nl,he,,,hˈɛbreʊs
 nl,hi,,,hˈɪndi
+nl,hr,,,kroːˈaːtis
 nl,hu,,,hˈɔŋaːrs
 nl,id,,,ˌɪndoːnˈeːzis
 nl,it,,,ˌitaːliˈaːns
 nl,ja,,,jˈaːpɑns
+nl,ka,,,ɣəˈɔrɣis
+nl,km,,,kmˈɛr
 nl,kn,,,kɑnˈaːdaː
 nl,ko,,,kˌoːrəˈaːns
 nl,lo,,,lˌaːoːʃˈaːns
@@ -1297,6 +1407,8 @@ pa,hu,,haṁgarīāī,hənɡəɾiai
 pa,id,,iṁḍōnēśīāī,ɪɳɖoneʃiai
 pa,it,,itālavī,ɪtaləʋi
 pa,ja,,japānī,ɟəpani
+pa,ka,,jārjīāī,ɟaɾəɟiai
+pa,km,,,kʰəmeɾ
 pa,kn,,kannaṛ,kʌnnəɽ
 pa,ko,,kōrīāī,koɾiai
 pa,lo,,lāō,lao
@@ -1343,6 +1455,8 @@ pl,hu,po węgiersku,,pɔ vɛŋɡʲˈɛrsku
 pl,id,po indonezyjsku,,pɔ ˌindɔnɛzˈɨjsku
 pl,it,po włosku,,pɔ vwˈɔsku
 pl,ja,po japońsku,,pɔ japˈɔɲsku
+pl,ka,po gruzińsku,,pɔ ɡruzˈiɲsku
+pl,km,,,kxmˈɛrski
 pl,kn,po kannada,,pɔ kannˈada
 pl,ko,po koreańsku,,pɔ kˌɔrɛˈaɲsku
 pl,lo,po laotańsku,,pɔ lˌaɔtˈaɲsku
@@ -1384,10 +1498,13 @@ pt,gu,,,ɡˌuzeɾˈatʃy
 pt,ha,,,aʊsˈa
 pt,he,,,ˌebrˈaɪkʊ
 pt,hi,,,iŋdʒˈi
+pt,hr,,,krˌoˈatæ
 pt,hu,,,ˈũŋɡæɾʊ
 pt,id,,,ˌiŋdonˈɛzjʊ
 pt,it,,,ˌitaliˈɐ̃nʊ
 pt,ja,,,ʒˌaponˈes
+pt,ka,,,ʒˌeoɾəʒiˈɐ̃nʊ
+pt,km,,,kmˈer
 pt,kn,,,kˌænaɾˈiŋ
 pt,ko,,,kˌoɾeˈɐ̃nʊ
 pt,lo,,,lˌaoziˈɐ̃nʊ
@@ -1430,10 +1547,13 @@ ro,gu,,,ɡˌuʒaɾˈatʲ
 ro,ha,,,hˈaʊsa
 ro,he,,,ebrˈaɪkə
 ro,hi,,,hˈindʲ
+ro,hr,,,krˈɔatə
 ro,hu,,,maɡjˈaɾə
 ro,id,,,ˌindonezjˈanə
 ro,it,,,ˌitaljˈanə
 ro,ja,,,ʒˌaponˈezə
+ro,ka,,,dʒeordʒjˈanə
+ro,km,,,khmˈeɾə
 ro,kn,,,kannˈada
 ro,ko,,,kˌoɾeˈeanə
 ro,lo,,,lˌaotsjˈanə
@@ -1480,6 +1600,8 @@ ru,hu,венгерском,vengerskom,vʲinɡʲˈerskʌm
 ru,id,индонезийском,indoneziyskom,ɪndʌnʲˈeʑijskʌm
 ru,it,итальянском,italʼyanskom,ɪtaɭjˈjanskʌm
 ru,ja,японском,yaponskom,japˈonskʌm
+ru,ka,грузинском,gruzinskom,ɡruʑˈinskʌm
+ru,km,,,kxmʲˈerskʲij
 ru,kn,каннада,kannada,kannˈɑda
 ru,ko,корейском,koreyskom,kʌrʲˈejskʌm
 ru,lo,лаосском,laosskom,ɭaˈosskʌm
@@ -1521,10 +1643,13 @@ sv,gu,,,ɡˈʉjarˌɑːtiː
 sv,ha,,,hˈɑːʉsˌa
 sv,he,,,hˈɛbrəˌɪska
 sv,hi,,,hˈɪndiː
+sv,hr,,,krˈuːatˌɪska
 sv,hu,,,ˈɵŋəʂkˌa
 sv,id,,,ˈɪndɔnəsˌɪska
 sv,it,,,ˈiːtalˌiːənskˌa
 sv,ja,,,jˈɑːpanskˌa
+sv,ka,,,jˈeːɔrjˌɪska
+sv,km,,,kˈambɔdjˌanska
 sv,kn,,,kˈanadˌa
 sv,ko,,,kˈuːrəˌanska
 sv,lo,,,lˈɑːuːtˌɪska
@@ -1566,10 +1691,13 @@ sw,gu,,,kˌiɡuɟarˈati
 sw,ha,,,kˌihaˈusa
 sw,he,,,kˌiebranˈia
 sw,hi,,,kihˈindi
+sw,hr,,,kˌikorasˈia
 sw,hu,,,kˌihuŋɡarˈia
 sw,id,,,kˌiindˌonesˈia
 sw,it,,,kˌiitˌaliˈano
 sw,ja,,,kˌiɟapˈani
+sw,ka,,,kˌiɟoɟˈia
+sw,km,,,kˌikambodˈia
 sw,kn,,,kˌikannˈada
 sw,ko,,,kˌikorˈea
 sw,lo,,,kˌilaˈosi
@@ -1616,6 +1744,8 @@ ta,hu,,haṅkēriyaṉ,hʌŋɡeːɾijʌn
 ta,id,,intōṉēṣiyaṉ,indoːneːʂijʌn
 ta,it,,ittāliyaṉ,ittaːlijʌn
 ta,ja,,jāppaṉīs,dʒaːppʌniːs
+ta,ka,,jārjiyaṉ,zaːrdʒijʌn
+ta,km,,,kemer
 ta,kn,,kannaṭam,kʌnnʌɖʌm
 ta,ko,,koriyaṉ,koɾijʌn
 ta,lo,,lāvō,laːvoː
@@ -1662,6 +1792,8 @@ te,hu,,haṁgēriyan,haŋɡeːrijan
 te,id,,iṁḍōnēṣiyan,iɳɖoːneːʂijan
 te,it,,iṭāliyan,iʈaːlijan
 te,ja,,japanīs,dʒapaniːs
+te,ka,,jārjiyan,dʒaːrdʒijan
+te,km,,,kʰmeːr
 te,kn,,kannaḍa,kannaɖa
 te,ko,,koriyan,korijan
 te,lo,,lāvō,laːʋoː
@@ -1708,6 +1840,8 @@ th,hu,,hangkari,haŋ˧kaː˧riː˧
 th,id,,indonisia,ʔin˧doː˧niː˧sia̯˧
 th,it,,itali,ʔiʔ˨˩taː˧liː˧
 th,ja,,yipun,jiː˥˩pun˨˩
+th,ka,,chochia,tɕɔː˧tɕia̯w˧
+th,km,,,kʰa˨˩meːn˩˩˦
 th,kn,,kannada,kan˧ naː˧ daː˧
 th,ko,,kaoli,kaw˧liː˩˩˦
 th,lo,,lao,laːw˧
@@ -1754,6 +1888,7 @@ tlh,hu, ,maDyar Hol,mɑɖjɑr xol
 tlh,id, ,'InDoneSya' Hol,ʔɪnɖonɛʂjɑʔ xol
 tlh,it, ,'Italya' Hol,ʔɪtʰɑljɑʔ xol
 tlh,ja, ,nIpon Hol,nɪpʰon xol
+tlh,ka, ,jorjIya' Hol,dʒordʒɪjɑʔ xol
 tlh,kn, ,qannaDa Hol,qʰɑnnɑɖɑ xol
 tlh,ko, ,Hanghuq Hol,xɑnɣuqʰ xol
 tlh,lo, ,lawo Hol,lɑwo xol
@@ -1795,10 +1930,13 @@ tr,gu,,,ɟydʒeɾattʃˈa
 tr,ha,,,haˈusa dilˈɪ
 tr,he,,,ɪbranˈidʒɛ
 tr,hi,,,hˈɪnttʃɛ
+tr,hr,,,hɯrvattʃˈa
 tr,hu,,,madʒardʒˈa
 tr,id,,,ændonˈɛzdʒɛ
 tr,it,,,itaɫjandʒˈa
 tr,ja,,,ʒapɔndʒˈa
+tr,ka,,,ɟørdʒˈydʒɛ
+tr,km,,,kˈahmɛr dilˈɪ
 tr,kn,,,kannadˈa dilˈɪ
 tr,ko,,,kˈoɾedʒɛ
 tr,lo,,,ɫaˈɔ dilˈɪ
@@ -1845,6 +1983,8 @@ uk,hu,угорською,uhorskoiu,uhˈorskoju
 uk,id,індонезійською,indoneziiskoiu,iːndonˈɛziːjskoju
 uk,it,італійською,italiiskoiu,iːtaʎˈiːjskoju
 uk,ja,японською,yaponskoiu,japˈonskoju
+uk,ka,грузинською,hruzynskoiu,hruzˈɪnskoju
+uk,km,,,kxmˈɛrska
 uk,kn,,kannada,kannˈada
 uk,ko,корейською,koreiskoiu,korˈɛjskoju
 uk,lo,лаоською,laoskoiu,laˈoskoju
@@ -1886,10 +2026,13 @@ ur,gu,,gujrātī,ɡˌəɟɾˈaːti
 ur,ha,,ha'ūsā,hˈoːsaː
 ur,he,,ibrānī,ˌabɾˈaːni
 ur,hi,,hindī,hˈɪndi
+ur,hr,,,kəɾˈaːti
 ur,hu,,hangerīn,hˌənɡiɾˈiːn
 ur,id,,indoneśiyāī,ˌanɖoːnˈiːsjaːˌiː
 ur,it,,iṭālvī,atˈaːlʋi
 ur,ja,,jāpānī,ɟaːpˈaːni
+ur,ka,,jārjiyā’ī,ɟˌaːɾɟjˈaːi
+ur,km,,,xəmˈiːɾ
 ur,kn,,kannāḍā,kənnˈaːɖaː
 ur,ko,,koriyāī,kˈoːɾjaːˌiː
 ur,lo,,lāʼo,lˈaːoː
@@ -1936,6 +2079,8 @@ vi,hu,Hungary,,hʌŋɡəɹi˧
 vi,id,Indonesia,,ɪndəʊniːziə̯˧
 vi,it,Ý,,i˧˥
 vi,ja,Nhật,,ɲət̪˨˩ˀ
+vi,ka,Gruzia,,ɡɹuːziə̯˧
+vi,km,,,t̪iɛ̯ŋ˧˥ kmiə̯˧
 vi,kn,Kannada,,kɑːnədə˧
 vi,ko,Hàn,,haːn˨˩
 vi,lo,Lào,,laːw˨˩
@@ -1977,10 +2122,13 @@ yo,gu,,,e˩de˩ ɡudʒarati
 yo,ha,,,e˩de˩ hausa
 yo,he,,,e˩de˩ heberu
 yo,hi,,,e˩de˩ hi˥n̩˥di˩
+yo,hr,,,e˩de˩ kroatia
 yo,hu,,,e˩de˩ hũɡaria
 yo,id,,,e˩de˩ ĩdone˥ʃi˥a˩
 yo,it,,,e˩de˩ i˥ta˥li˩
 yo,ja,,,e˩de˩ dʒa˩kpa˥a˩nu˩
+yo,ka,,,e˩de˩ ɡeorɡia
+yo,km,,,e˩de˩ kameri
 yo,kn,,,e˩de˩ kãnada
 yo,ko,,,e˩de˩ ko˩ri˥a˩
 yo,lo,,,la˥o˩
@@ -2027,6 +2175,7 @@ zh-Hans,hu,,Xiōngyálìyǔ,ɕjʊŋ˥ja˧˥li˥˩y˧˩˧
 zh-Hans,id,,Yìndùníxīyàyǔ,in˥˩tu˥˩ni˧˥ɕi˥ja˥˩y˧˩˧
 zh-Hans,it,,Yìdàlìyǔ,i˥˩ta˥˩li˥˩y˧˩˧
 zh-Hans,ja,,Rìyǔ,ʐɨ˥˩y˧˩˧
+zh-Hans,ka,,gélǔjíyàyǔ,kɤ˧˥lu˧˩˧tɕi˧˥ja˥˩y˧˩˧
 zh-Hans,kn,,Kǎnàdáyǔ,kʰa˧˩˧na˥˩ta˧˥y˧˩˧
 zh-Hans,ko,,Hányǔ,xan˧˥y˧˩˧
 zh-Hans,lo,,Lǎowōyǔ,lɑʊ˧˩˧wɔ˥y˧˩˧

@@ -12,6 +12,7 @@
     "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/arabic)",
     "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/devanagari)",
     "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/ethiopic)",
+    "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/georgian)",
     "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/gurmukhi)",
     "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/hebrew)",
     "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/kannada)",
@@ -289,9 +290,9 @@
       "weight": 400,
       "italic": false,
       "file": "cjk-kr-400",
-      "glyphs": 5866,
-      "ttfBytes": 942356,
-      "woff2Bytes": 309832,
+      "glyphs": 5870,
+      "ttfBytes": 943028,
+      "woff2Bytes": 310400,
       "source": "NotoSansKR-var.ttf"
     },
     {
@@ -299,9 +300,9 @@
       "weight": 700,
       "italic": false,
       "file": "cjk-kr-700",
-      "glyphs": 5866,
-      "ttfBytes": 942572,
-      "woff2Bytes": 316600,
+      "glyphs": 5870,
+      "ttfBytes": 943244,
+      "woff2Bytes": 316824,
       "source": "NotoSansKR-var.ttf"
     },
     {
@@ -309,9 +310,9 @@
       "weight": 400,
       "italic": false,
       "file": "cjk-kr-serif-400",
-      "glyphs": 5867,
-      "ttfBytes": 2607956,
-      "woff2Bytes": 597120,
+      "glyphs": 5871,
+      "ttfBytes": 2610788,
+      "woff2Bytes": 597776,
       "source": "NotoSerifKR-var.ttf"
     },
     {
@@ -319,9 +320,9 @@
       "weight": 700,
       "italic": false,
       "file": "cjk-kr-serif-700",
-      "glyphs": 5867,
-      "ttfBytes": 2612540,
-      "woff2Bytes": 620468,
+      "glyphs": 5871,
+      "ttfBytes": 2615372,
+      "woff2Bytes": 621136,
       "source": "NotoSerifKR-var.ttf"
     },
     {
@@ -723,6 +724,46 @@
       "ttfBytes": 192788,
       "woff2Bytes": 53772,
       "source": "NotoSerifEthiopic-var.ttf"
+    },
+    {
+      "stack": "geor",
+      "weight": 400,
+      "italic": false,
+      "file": "geor-400",
+      "glyphs": 420,
+      "ttfBytes": 46244,
+      "woff2Bytes": 21660,
+      "source": "NotoSansGeorgian-var.ttf"
+    },
+    {
+      "stack": "geor",
+      "weight": 700,
+      "italic": false,
+      "file": "geor-700",
+      "glyphs": 420,
+      "ttfBytes": 46172,
+      "woff2Bytes": 22252,
+      "source": "NotoSansGeorgian-var.ttf"
+    },
+    {
+      "stack": "geor-serif",
+      "weight": 400,
+      "italic": false,
+      "file": "geor-serif-400",
+      "glyphs": 458,
+      "ttfBytes": 58004,
+      "woff2Bytes": 25468,
+      "source": "NotoSerifGeorgian-var.ttf"
+    },
+    {
+      "stack": "geor-serif",
+      "weight": 700,
+      "italic": false,
+      "file": "geor-serif-700",
+      "glyphs": 458,
+      "ttfBytes": 57980,
+      "woff2Bytes": 26196,
+      "source": "NotoSerifGeorgian-var.ttf"
     }
   ]
 }
