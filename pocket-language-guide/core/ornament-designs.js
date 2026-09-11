@@ -260,6 +260,68 @@ export const LANGUAGE_MOTIFS = /** @type {const} */ ({
   // because `embroidery` (hu), `phulkari` (pa), `kasuti` (kn) and `dhaka` (ne) are
   // four already and the fifth would have nothing left to be named against.
   ka: 'minankari',
+  // `himmeli` is the Finnish straw mobile -- rye straws cut to length, threaded on a
+  // linen thread and knotted into a chain of octahedra, hung over the table at
+  // midwinter since long before there were Christmas trees in Finland. It is an art
+  // direction rather than an object: the mark is **an openwork solid drawn in
+  // projection**, a lozenge with a narrower lozenge inside it sharing the same
+  // vertical axis, which is how a straw octahedron reads when you look through it.
+  //
+  // Named against the four neighbours it could be confused with, on the mark rather
+  // than on the craft, which is this table's house rule.
+  //
+  // `jali` (ur) is the closest in feel and is the pierced stone lattice: there the
+  // ground is **solid** and the pattern is the void cut out of it, so a jali reads by
+  // its openings. A himmeli has no ground at all -- the straws are the whole object
+  // and there is paper behind them.
+  //
+  // `ketupat` (ms) and `banig` (fil) are the plaited ones, and both are
+  // **interlacing**: two sets of strips passing alternately over and under each
+  // other, which is what makes a plaited diamond a plaited diamond. Nothing in a
+  // himmeli passes over or under anything; the straws are threaded end to end and
+  // meet at knots, so this emblem draws its nodes and neither of those two does.
+  //
+  // `sklo` (cs) is the other motif built from straight lines meeting at points, and
+  // the difference is where they meet: Bohemian cut crystal radiates every facet
+  // from **one centre**, where a himmeli is a **chain** -- modules hung off each
+  // other along a thread, with three centres on the vertical and two more on the
+  // equator.
+  //
+  // **Two Finnish motifs were refused.** The Aalto wave, the shape a Finn would name
+  // first, is the same art `ja` already holds as `seigaiha` and `waves` already
+  // offers as a style -- a repeated curve standing for water -- and it falls to the
+  // rule that refused Croatia's `pleter` and Telugu's `muggu`. And the ryijy, the
+  // knotted pile rug, would be a fifth textile after `embroidery`, `phulkari`,
+  // `kasuti` and `dhaka`, which is the third-name-for-one-art case that rule exists
+  // for.
+  fi: 'himmeli',
+  // `trchnagir` (թռչնագիր, "bird writing") is the Armenian zoomorphic display
+  // script of the illuminated manuscripts -- ninth century onwards, used for an
+  // initial or a headpiece, where an ordinary Erkatagir letter is written large and
+  // its strokes grow into birds and fish. It is an art direction and not a national
+  // emblem, which is what refused the two an Armenian entry would reach for first:
+  // the **arevakhach** solar whirl and the **khachkar** cross-stone are both
+  // emblems, the first of them Georgia's `borjgali` in another alphabet, and this
+  // table's own preface refuses them.
+  //
+  // The mark is: **a stroke that ends in a creature's head.** No other motif here
+  // does that, and the neighbours it could be confused with each fail it on a
+  // different count. `warli` (mr) is the other motif that draws a living thing, and
+  // its figures are assembled from three free shapes -- circle, triangle, line --
+  // standing clear of any stroke, where a trchnagir bird *is* the end of the letter
+  // and cannot be lifted off it. `interlace` (ar) and `jali` (ur) are the strand
+  // motifs, and a trchnagir stroke never crosses itself or anything else -- it is
+  // one pen movement with two ends. `minankari` (ka), the other alphabet script in
+  // this batch, is closed cells, where this is a stroke that stops. And the
+  // botanical terminals -- `oak`, `iris`, `acanthus`, `cypress` -- end in a leaf,
+  // which is why the beak is drawn as the only pair of straight lines in the
+  // emblem: it is what says animal rather than plant at 2pt.
+  //
+  // **A third alternative was refused on this table's repeat rule.** Armenian
+  // carpet and Marash embroidery are textiles, and `embroidery` (hu), `phulkari`
+  // (pa), `kasuti` (kn), `dhaka` (ne) and `banig` (fil) are five already -- the
+  // same count that refused Georgia's Khevsur cross-stitch and Finland's ryijy.
+  hy: 'trchnagir',
 });
 /** @typedef {typeof LANGUAGE_MOTIFS[keyof typeof LANGUAGE_MOTIFS]} LanguageMotif */
 
@@ -899,6 +961,48 @@ const emblems = {
       for (const side of [-1, 1]) tongue(50, y, side * reach, rise, side * bow);
     }
   },
+  himmeli(p) {
+    // The thread the whole thing hangs on, which is the only line here that is not a
+    // straw -- a himmeli is assembled by threading, so the thread runs through every
+    // module and out of the top and the bottom.
+    p.m(50, 5); p.l(50, 95);
+    // The crown module, a small octahedron seen end-on.
+    diamond(p, 50, 15, 9, 9);
+    // The body. Two lozenges sharing the vertical axis is a straw octahedron in
+    // projection: the near four edges and the far four, visible because there is
+    // nothing between them. The equator is the girth of straws round its middle.
+    diamond(p, 50, 52, 30, 24);
+    diamond(p, 50, 52, 13, 24);
+    p.m(20, 52); p.l(80, 52);
+    // Two more modules knotted onto the equator's own points, and one below, which is
+    // the chain: a himmeli is never one solid, it is solids hung off each other.
+    diamond(p, 20, 52, 8, 7);
+    diamond(p, 80, 52, 8, 7);
+    diamond(p, 50, 86, 10, 9);
+  },
+  trchnagir(p) {
+    // The stroke, one continuous pen movement from its foot up to where the head
+    // grows out of it. A trchnagir letter is a letter first: this is the stem, and
+    // everything else on it is what the stem turned into.
+    p.m(30, 90); p.c(24, 62, 30, 40, 48, 30);
+    // The head, curled back onto the stroke it came from and stopping there. It
+    // does not close into a cell -- that is `minankari`'s mark -- and it does not
+    // pass under anything, which is `interlace`'s.
+    p.c(62, 22, 76, 28, 74, 40); p.c(72, 50, 58, 50, 50, 40);
+    // The beak: the only pair of straight lines in the emblem, and the thing that
+    // still reads as a bird rather than a leaf when the mark is 2pt tall.
+    p.m(75, 32); p.l(92, 22);
+    p.m(74, 43); p.l(92, 22);
+    // The eye.
+    p.m(62, 33); p.l(66, 33);
+    // The tail, turned back under the stem without touching it, and ending in the
+    // second creature's head -- a trchnagir initial carries more than one, which is
+    // what makes it zoomorphic writing rather than a single finial.
+    p.m(30, 90); p.c(18, 86, 10, 74, 16, 62);
+    p.c(20, 54, 28, 54, 30, 60);
+    p.m(17, 58); p.l(8, 50);
+    p.m(22, 55); p.l(8, 50);
+  },
   minankari(p) {
     // A cloisonné plaque: one bent wire, closed cells, nothing crossing anything.
     // The outline is a pointed oval rather than a circle -- no other emblem here is
@@ -955,6 +1059,7 @@ const tracery = {
   polder(p) { p.m(5, 85); p.l(95, 85); p.m(30, 85); p.l(30, 30); p.m(55, 85); p.l(55, 15); p.m(80, 85); p.l(80, 40); },
   sklo(p) { p.m(50, 7); p.l(93, 50); p.l(50, 93); p.l(7, 50); p.close(); p.m(50, 7); p.l(50, 93); p.m(7, 50); p.l(93, 50); },
   kurbits(p) { p.m(50, 92); p.q(28, 65, 42, 42); p.q(56, 19, 70, 6); leaf(p, 42, 42, -24, -10, 11); },
+  himmeli(p) { p.m(50, 5); p.l(50, 95); diamond(p, 50, 50, 30, 26); diamond(p, 50, 14, 9, 9); diamond(p, 50, 86, 9, 9); },
   suhozid(p) { p.m(6, 88); p.l(94, 88); p.l(88, 14); p.l(12, 14); p.close(); p.m(8, 54); p.l(50, 49); p.l(92, 53); p.m(34, 88); p.l(37, 51); p.m(66, 51); p.l(69, 14); },
   ketupat(p) {
     p.m(50, 8); p.l(76, 24); p.l(88, 50); p.l(76, 76); p.l(50, 92);
@@ -1038,6 +1143,16 @@ const tracery = {
       p.c(50 + side * 14, 20, 50 + side * 8, 30, 50 + side * 17, 33);
     }
   },
+  // One stroke and one head, the second bird and the eye dropped: at divider height
+  // a second creature and a dot both close to a blot. What has to survive is that
+  // the stroke *ends in a head with a beak*, since a `warli` tracery is free figures
+  // and an `interlace` tracery is two overlapping diamonds.
+  trchnagir(p) {
+    p.m(8, 80); p.c(24, 52, 38, 34, 56, 30);
+    p.c(70, 26, 78, 34, 74, 44); p.c(70, 52, 58, 50, 54, 42);
+    p.m(76, 34); p.l(92, 24);
+    p.m(75, 44); p.l(92, 24);
+  },
   // Two closed cells and the tie between them, the nesting dropped: at divider
   // height three concentric wires close into a blot. What has to survive is that
   // the cells are *closed* and that nothing crosses, since an `interlace` tracery
@@ -1077,7 +1192,10 @@ export function languageCorner(motif, p) {
   // `suhozid` joins for `polder`'s reason: it is straight lines and right-ish angles
   // all the way down, and a curved border would be the only curve on the card.
   const angular = ['rosette', 'interlace', 'compass', 'azulejo', 'kawung', 'meander',
-    'embroidery', 'polder', 'telsem', 'kasuti', 'suhozid'].includes(motif);
+    'embroidery', 'polder', 'telsem', 'kasuti', 'suhozid',
+    // `himmeli` joins for `polder`'s and `suhozid`'s reason: every stroke in it
+    // is straight, so a curved border would be the only curve on the card.
+    'himmeli'].includes(motif);
   if (angular) {
     p.m(7, 93); p.l(7, 7); p.l(93, 7);
     p.m(14, 65); p.l(14, 14); p.l(65, 14);

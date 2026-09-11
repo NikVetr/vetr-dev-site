@@ -1,0 +1,16 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,Haluan mennä tänne: {}.,,hˈaluan mˈennæ tˈænne {},"'I want to go here: {}' -- mennä governs the illative (Helsinkiin), so the frame carries the case on tänne and the slot stays nominative",2,fi-agent-v1;ipa=espeak
+utility-templates.please-give-me,Saisinko tämän: {}?,,sˈaisiŋko tˈæmæn {},'could I have this: {}' -- the object case sits on tämän,2,fi-agent-v1;ipa=espeak
+utility-templates.may-i,Saanko {}?,,sˈaːŋko {},"the slot is a verb, and a Finnish verb's dictionary form is the first infinitive the frame wants -- no device needed",2,fi-agent-v1;ipa=espeak
+utility-templates.please-do-not-add,Älä lisää tätä: {}.,,ˈælæ lˈisæː tˈætæ {},,2,fi-agent-v1;ipa=espeak
+utility-templates.do-you-have,Onko teillä {}?,,ˈoŋko tˈeillæ {},"the possessive existential takes a nominative for a countable thing; a mass noun would be partitive (kahvia), which the slot cannot supply",2,fi-agent-v1;ipa=espeak
+utility-templates.please-write-the-number,Kirjoittaisitko numeron?,,kˈirjoittˌaisitko nˈumeron,,2,fi-agent-v1;ipa=espeak
+utility-templates.i-need,Tarvitsen tätä: {}.,,tˈarvitsen tˈætæ {},"tarvita always takes a partitive object, which a bare filler cannot be",2,fi-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,Onko lähellä {}?,,ˈoŋko lˈæhellæ {},"an existential whose subject is nominative, so this frame needs no device at all",2,fi-agent-v1;ipa=espeak
+utility-templates.how-much-is,Paljonko {} maksaa?,,pˈaljoŋko {} mˈaksaː,the slot is the nominative subject of maksaa,2,fi-agent-v1;ipa=espeak
+utility-templates.is-this,Onko tämä {}?,,ˈoŋko tˈæmæ {},predicative nominative,2,fi-agent-v1;ipa=espeak
+utility-templates.please,"{}, kiitos.",,"{}, kˈiːtos",,2,fi-agent-v1;ipa=espeak
+utility-templates.i-am-looking-for,Etsin tätä: {}.,,ˈetsin tˈætæ {},,2,fi-agent-v1;ipa=espeak
+utility-templates.do-you-accept,Käykö {}?,,kˈæykø {},"'does {} do?' -- the nominative-subject rewrite, in place of 'hyväksyttekö {}' which would need a partitive object",2,fi-agent-v1;ipa=espeak
+utility-templates.i-cannot-find,En löydä tätä: {}.,,ˈen lˈøydæ tˈætæ {},"a negated object is partitive in Finnish, so no filler could be right in the frame itself",2,fi-agent-v1;ipa=espeak
+utility-templates.there-is-a-problem-with,Tässä on ongelma: {}.,,tˈæssæ ˈon ˈoŋŋelma {},,2,fi-agent-v1;ipa=espeak

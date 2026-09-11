@@ -1,0 +1,1428 @@
+{
+  "source": "fi",
+  "accent": "fi-FI",
+  "status": "ready",
+  "version": "1",
+  "derives_from": "Three real Finnish sources for three different parts of the table, and my own reasoning from Finnish orthography for everything else -- stated the way cs__cs-CZ.json states it rather than claiming a single key. **(1) The shape and the licence** come from ordinary Finnish lexicographic practice: Kielitoimiston sanakirja and its predecessors print a bracketed pronunciation in plain Finnish letters beside a foreign headword -- show [šou], jazz [jats], jockey [džoki], beige [beeš] -- so a native-letter respelling beside the correct spelling is a sanctioned Finnish convention and not an invention of this project. **(2) The sibilants and affricates** are the Kotimaisten kielten keskus recommendation, which is also ordinary Finnish spelling rather than a transcription scheme: š for /ʃ/ and ž for /ʒ/, with tš and dž for their affricates and ts for /ts/, as written in šakki, Tšekki, džonkki and pitsa. Finnish has no choice here, which is the point: Finnish reads every letter, so sh would be [s]+[h]. **(3) The palatalisation rule** follows SFS 4900, Finland's own national standard for transliterating Cyrillic into Finnish, which writes я/ю/ё and ь with j -- bolšoi rather than bolshoi. Vowel length needs no source at all: doubling the letter is how Finnish spells it.",
+  "deviations": [
+    {
+      "rule": "SFS 4900 transliterates Cyrillic ы as `y`.",
+      "why": "Overruled to `i`. SFS 4900 is a standard for writing *names*, where a reversible letter-for-letter mapping matters more than the sound; ы is [ɨ], unrounded and central, and Finnish `y` is [y], front and rounded. `i` is the nearer sound and this column is a pronunciation rather than a transliteration. The same reasoning declines SFS 4900's `štš` for щ, which arrives here as /ɕɕ/ or /ɕ/ and is spelt š."
+    },
+    {
+      "rule": "Finnish writes no stress mark at all, in any orthography or dictionary, because Finnish stress is fixed to the first syllable and carries no information.",
+      "why": "So there is nothing native to borrow and `stress: caps` is this table's own device, on Czech's and Polish's reasoning: the respelling exists to carry *foreign*, unpredictable stress, and capitals are the one device Finnish has not already spent. An acute is not available the way it is in Czech -- Finnish `ä` and `ö` are letters rather than marked vowels, so an acute on either would print a character no Finnish font or spelling has, which is exactly why `ACCENTED` in core/respell.js lists them."
+    },
+    {
+      "rule": "Kielitoimiston sanakirja's bracketed pronunciations keep the loan's own `z` where Finnish has borrowed the spelling (`zeniitti`).",
+      "why": "Not followed for /z/, which is spelt `s`. Finnish reads `z` as [ts], so `z` would tell a reader to say an affricate; the /s/-/z/ merger is what a Finnish speaker makes in any case."
+    },
+    {
+      "rule": "German's and Swedish's tables spell /w/ `u` after `a` and `o` after a mid or front vowel, and never `v`.",
+      "why": "Taken, because the underlying fact holds in Finnish too -- `w` is read [ʋ] on sight -- but **modified where Finnish is better equipped**: the offglide after a front rounded vowel is `y`, not `o`, because Finnish's own diphthongs obey vowel harmony (äy, öy beside au, ou) and Finnish has a letter for a front rounded offglide where German does not. German's third rule also exists to avoid `eu`, which German and Swedish readers say with an intrusive [v]; Finnish `eu` is a native diphthong read [eu] (seuraava), so that half of the rule is dropped rather than copied."
+    },
+    {
+      "rule": "Every other Latin-script table in this corpus drops Russian's palatalisation mark.",
+      "why": "Not followed: it is spelt `j`, per SFS 4900. One rule covers all fifteen palatalised consonants by decomposition, which is safe here for the reason it was *not* safe for Hindi's aspirates -- the decomposition is the intended spelling rather than an accident of it."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "aspiration (Mandarin, Korean, Hindi, Thai, Georgian, Klingon)",
+      "out": "the plain letter, with all seventeen aspirated units enumerated",
+      "why": "Finnish has no aspirated stop and no way to write one: `ph` reads as [p]+[h]. Enumerated rather than left to decompose, because that decomposition is what silently dropped the aspiration of Hindi धन्यवाद for five tables."
+    },
+    {
+      "sounds": "the ejectives and the glottalised segments (Georgian, Klingon, Amharic, Vietnamese)",
+      "out": "the plain consonant or vowel",
+      "why": "Finnish has neither series. Also enumerated, for the aspirates' reason."
+    },
+    {
+      "sounds": "the retroflex series (Hindi, Urdu, Marathi, Tamil, Malayalam) and the palatal stops (Hungarian, Czech, Croatian)",
+      "out": "the plain coronal, and `tj`/`dj` for the palatals",
+      "why": "Finnish has one coronal series. `tj`/`dj` is the nearest Finnish spelling of a palatal stop and is read as one gesture, which is more than `t`/`d` alone would give."
+    },
+    {
+      "sounds": "Mandarin's three-way sibilant contrast (tɕ ɕ dʑ against ʈʂ ʂ ɖʐ against tʃ ʃ dʒ) and Polish's own",
+      "out": "š ž tš dž",
+      "why": "Finnish has one postalveolar series. The merger is the one a Finnish speaker makes, and unlike German's `sch` or Dutch's `sj` the Finnish letters are single graphemes, so the syllable count of the respelling stays equal to the syllable count of the word."
+    },
+    {
+      "sounds": "/θ/ and /ð/ (English, Arabic, Swahili)",
+      "out": "`t` and `d`",
+      "why": "Finnish has neither, and a Finnish speaker substitutes a plain stop (thriller is [trilleri]) rather than the sibilant a German speaker reaches for."
+    },
+    {
+      "sounds": "the nasal vowels (French, Portuguese, Hindi, Punjabi)",
+      "out": "the vowel plus `n`",
+      "why": "Finnish has no nasal vowel and spells the French and Portuguese ones with a following n in ordinary writing -- Lyon, Avignon, Chopin -- which is also how a Finn says them."
+    },
+    {
+      "sounds": "syllabic consonants (English button, Czech vlk and krk)",
+      "out": "the bare consonant",
+      "why": "Every Finnish syllable has a vowel, so a vowelless one cannot be written at all. Czech's `l̩` and `r̩` are the ten and twenty-seven cells this costs, and they are here only because the key set was read off the corpus rather than off Czech's own table, which has no rule for its own syllabic consonants."
+    },
+    {
+      "sounds": "lexical tone (Mandarin, Thai, Vietnamese, Punjabi, Yoruba)",
+      "out": "dropped",
+      "why": "`tone: drop`, matching every non-tonal reader: Finnish has no device for it and a Finnish reader given a Chao letter reads neither the word nor the tone."
+    }
+  ],
+  "policy": {
+    "syllable_separator": "-",
+    "word_separator": " ",
+    "stress": "caps",
+    "stress_min_syllables": 2,
+    "length": "double",
+    "tone": "drop",
+    "max_onset": 1,
+    "fixups": "first",
+    "locale": "fi"
+  },
+  "legend": "ISOT KIRJAIMET = painollinen tavu. Kaksoisvokaali = pitkä vokaali, kaksoiskonsonantti = pitkä konsonantti. š ž tš dž ovat suomen omat vierassanamerkinnät. Muuten luetaan kuin suomea.",
+  "phonemes": [
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "",
+      "after_out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɪ",
+      "out": "",
+      "after_out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʊ",
+      "out": "",
+      "after_out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "y",
+      "out": "",
+      "after_out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "i",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɪ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɨ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "y",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʏ",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʉ",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "u",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʊ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɯ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "e",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɘ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ə",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "æ",
+      "out": "ä"
+    },
+    {
+      "slot": "any",
+      "ipa": "ø",
+      "out": "ö"
+    },
+    {
+      "slot": "any",
+      "ipa": "œ",
+      "out": "ö"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɵ",
+      "out": "ö"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɶ",
+      "out": "ö"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɜ",
+      "out": "ö"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɞ",
+      "out": "ö"
+    },
+    {
+      "slot": "any",
+      "ipa": "o",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɔ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɒ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɤ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "a",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɑ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʌ",
+      "out": "a"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɚ",
+      "out": "er"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɝ",
+      "out": "ör"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɑɻ",
+      "out": "ar"
+    },
+    {
+      "slot": "any",
+      "ipa": "ã",
+      "out": "an"
+    },
+    {
+      "slot": "any",
+      "ipa": "ẽ",
+      "out": "en"
+    },
+    {
+      "slot": "any",
+      "ipa": "ĩ",
+      "out": "in"
+    },
+    {
+      "slot": "any",
+      "ipa": "õ",
+      "out": "on"
+    },
+    {
+      "slot": "any",
+      "ipa": "ũ",
+      "out": "un"
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɐ̃ʊ̃",
+      "out": "au"
+    },
+    {
+      "slot": "any",
+      "ipa": "ː",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˑ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̯",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "i",
+      "after_out": "a e i o u y ä ö"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɥ",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "",
+      "after_out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "y",
+      "after_out": "ä ö y"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰ",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "b",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "d",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "g",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "q",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɢ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "f",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "v",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʋ",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "β",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɸ",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "m",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɱ",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "n",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɓ",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɗ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɳ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʂ",
+      "out": "š"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʐ",
+      "out": "ž"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "tj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "dj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "š"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒ",
+      "out": "ž"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "š"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʑ",
+      "out": "ž"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "dz",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts̪",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "tš"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒ",
+      "out": "dž"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "tš"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʑ",
+      "out": "dž"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "tš"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʐ",
+      "out": "dž"
+    },
+    {
+      "slot": "any",
+      "ipa": "pf",
+      "out": "pf"
+    },
+    {
+      "slot": "any",
+      "ipa": "ks",
+      "out": "ks"
+    },
+    {
+      "slot": "any",
+      "ipa": "ps",
+      "out": "ps"
+    },
+    {
+      "slot": "any",
+      "ipa": "θ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ð",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "χ",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "h",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɦ",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ħ",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɣ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʕ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "n",
+      "before_onset": "k ɡ g x q ɣ kʰ k͈ kʼ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "ng"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɴ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋɡ",
+      "out": "ng"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋk",
+      "out": "nk"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "nj"
+    },
+    {
+      "slot": "any",
+      "ipa": "l",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɫ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɬ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "lj"
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʀ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɹ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɻ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɺ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "r̝",
+      "out": "rž"
+    },
+    {
+      "slot": "any",
+      "ipa": "m̩",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "n̩",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "l̩",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "r̩",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "̩",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "pʰ",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰ",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʰ",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡʰ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "cʰ",
+      "out": "tj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟʰ",
+      "out": "dj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "qʰ",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽʰ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃʰ",
+      "out": "tš"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "tš"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂʰ",
+      "out": "tš"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts̪ʰ",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʱ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔʲ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʷ",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "ˤ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˠ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˀ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʼ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̚",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̥",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̬",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̹",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̜",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̪",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "͈",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̆",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̈",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "͜",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̝",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "͈",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "kʼ",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʼ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʼ",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "qʼ",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "sʼ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʼ",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʼ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "fʼ",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "hʼ",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "lʼ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "mʼ",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "nʼ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "rʼ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "vʼ",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "zʼ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʼ",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃʼ",
+      "out": "tš"
+    },
+    {
+      "slot": "any",
+      "ipa": "cˀ",
+      "out": "tj"
+    },
+    {
+      "slot": "any",
+      "ipa": "t̪ˀ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "iˀ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "nˀ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "jˀ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "wˀ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "eˀ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "pˀ",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "mˀ",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋˀ",
+      "out": "ng"
+    },
+    {
+      "slot": "any",
+      "ipa": "oˀ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "yˀ",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲˀ",
+      "out": "nj"
+    },
+    {
+      "slot": "any",
+      "ipa": "uˀ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɔˀ",
+      "out": "o"
+    },
+    {
+      "slot": "any",
+      "ipa": "kˀ",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɛˀ",
+      "out": "e"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɪˀ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "t̪",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "d̪",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "s̪",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "n̪",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "l̪",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "dˤ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "tˤ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "sˤ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "zˤ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "ðˤ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "k͈",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "t͈",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "p͈",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "s͈",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ͈",
+      "out": "tš"
+    },
+    {
+      "slot": "any",
+      "ipa": "pː",
+      "out": "pp"
+    },
+    {
+      "slot": "any",
+      "ipa": "bː",
+      "out": "bb"
+    },
+    {
+      "slot": "any",
+      "ipa": "tː",
+      "out": "tt"
+    },
+    {
+      "slot": "any",
+      "ipa": "dː",
+      "out": "dd"
+    },
+    {
+      "slot": "any",
+      "ipa": "kː",
+      "out": "kk"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡː",
+      "out": "gg"
+    },
+    {
+      "slot": "any",
+      "ipa": "qː",
+      "out": "kk"
+    },
+    {
+      "slot": "any",
+      "ipa": "cː",
+      "out": "ttj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟː",
+      "out": "ddj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈː",
+      "out": "tt"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖː",
+      "out": "dd"
+    },
+    {
+      "slot": "any",
+      "ipa": "fː",
+      "out": "ff"
+    },
+    {
+      "slot": "any",
+      "ipa": "vː",
+      "out": "vv"
+    },
+    {
+      "slot": "any",
+      "ipa": "sː",
+      "out": "ss"
+    },
+    {
+      "slot": "any",
+      "ipa": "zː",
+      "out": "ss"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃː",
+      "out": "šš"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒː",
+      "out": "žž"
+    },
+    {
+      "slot": "any",
+      "ipa": "xː",
+      "out": "hh"
+    },
+    {
+      "slot": "any",
+      "ipa": "hː",
+      "out": "hh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ħː",
+      "out": "hh"
+    },
+    {
+      "slot": "any",
+      "ipa": "mː",
+      "out": "mm"
+    },
+    {
+      "slot": "any",
+      "ipa": "nː",
+      "out": "nn"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲː",
+      "out": "nnj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋː",
+      "out": "ng"
+    },
+    {
+      "slot": "any",
+      "ipa": "lː",
+      "out": "ll"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭː",
+      "out": "ll"
+    },
+    {
+      "slot": "any",
+      "ipa": "rː",
+      "out": "rr"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾː",
+      "out": "rr"
+    },
+    {
+      "slot": "any",
+      "ipa": "jː",
+      "out": "jj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰː",
+      "out": "vv"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsː",
+      "out": "tts"
+    },
+    {
+      "slot": "any",
+      "ipa": "dzː",
+      "out": "tts"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃː",
+      "out": "ttš"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒː",
+      "out": "ddž"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕː",
+      "out": "ttš"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʑː",
+      "out": "ddž"
+    },
+    {
+      "slot": "any",
+      "ipa": "t̪ː",
+      "out": "tt"
+    },
+    {
+      "slot": "any",
+      "ipa": "d̪ː",
+      "out": "dd"
+    },
+    {
+      "slot": "any",
+      "ipa": "s̪ː",
+      "out": "ss"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰː",
+      "out": "tt"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʰː",
+      "out": "dd"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰː",
+      "out": "kk"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʰː",
+      "out": ""
+    }
+  ],
+  "syllable_fixups": [
+    {
+      "match": "ng([kg])",
+      "out": "n\\1"
+    },
+    {
+      "match": "nng",
+      "out": "ng"
+    }
+  ],
+  "splits": [],
+  "targets": {},
+  "note": "**No `splits`, and that is a Finnish fact rather than an omission.** Swedish needs `splits: [{glide: j}]` because `sj tj dj gj hj lj` are all frozen Swedish digraphs, so an onset consonant followed by /j/ collides with one of them; Finnish has no consonant digraph at all beyond the caron letters, which are single graphemes, so Hindi's /kja/ comes out `kja` and is read [kjɑ] -- the right sound, spelt the only way Finnish could spell it. Checked directly on Hindi, Russian and Punjabi onset-glide rows rather than assumed.\n\n**A coda /h/ is kept**, unlike Swedish's and German's tables which delete it: Finnish writes a syllable-final h (tähti, vahti, lahti) and reads it as [x]/[ç], which is also what most of the targets' coda /h/ actually is.\n\n**What a fluent speaker should read first** is the caron letters on a real printed card. `š` and `ž` are correct Finnish and are also the letters Finns most often replace with `sh`/`zh` when a keyboard is awkward; at 4.4pt the caron is a small mark, and whether it survives the page is a typographic question this table cannot answer. Both are in the cmap of all sixteen shipped Latin faces, which is the part that was checked.",
+  "policy_note": "**`max_onset: 1`, and this one is not a judgement call: it is Finnish's own hyphenation rule.** Finnish tavutus puts the boundary before the *last* consonant of an intervocalic cluster and only that one -- kirk-ko, pas-si, mart-ti, ras-kas -- which is exactly what `max_onset: 1` computes. The engine leaves a *word-initial* cluster whole regardless, because there is no preceding syllable to give it to, and that is also Finnish's rule: stra-te-gi-a, kli-nik-ka, print-te-ri, pre-si-dent-ti all come back hyphenated the way a Finnish dictionary hyphenates them, which was checked on those five words rather than assumed. Measured against the default: 4,486 of the corpus's 38,918 respellings change, 11.5%, and every one moves toward the Finnish division -- `ink-LUU-did` over `in-KLUU-did`, `TŠILD-ren` over `TŠIL-dren`, `PÄS-poort` over `PÄ-spoort`, `träns-LEI-šen` over `trän-SLEI-šen`. German's table reached the same number for the same reason. No `reader_onsets` list is needed on top of it: at 1 there is no cluster left to restrict.\n\n`fixups: 'first'` with two fixups, both the `ng`/`nk` pair, because they are alternative repairs of one situation rather than a chart to apply in sequence.",
+  "measurements": []
+}

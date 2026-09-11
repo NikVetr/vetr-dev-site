@@ -731,7 +731,82 @@ VOICES = {"en": "en-us", "es": "es-419", "fr": "fr-fr", "de": "de", "pt": "pt-br
           # *fewer* symbols to the other readers' tables rather than more.
           #
           # And **stress is not written above two syllables**: see `hr_stress`.
-          "hr": "hr"}
+          "hr": "hr",
+          # Finnish, and the Czech/Swedish/Croatian situation rather than the
+          # Marathi/Ukrainian one: `EspeakBackend.supported_languages()['fi'] ==
+          # 'Finnish'` against the plain system library with no `PHONEMIZER_ESPEAK_*`
+          # set, so 1.50's own data tree already carries it and **the loader is never
+          # touched for `--only fi`**. Checked before reaching for it, and there is
+          # nothing here for it to fix.
+          #
+          # Finnish orthography is very nearly phonemic, so the interesting question
+          # is not whether the letters are read correctly -- they are -- but what the
+          # voice does with the three things the letters do not settle. Measured over
+          # the finished pack, 909 chunks and 1,947 polysyllabic word tokens:
+          #
+          # **Vowel length is right, on all eight vowels.** Finnish writes it double
+          # and espeak writes `ː`: tuli/tuuli `tˈuli`/`tˈuːli`, kala/kaala, mene/
+          # meneekö, koto/kooto, kylä/kyylä, hätä/häätö, tori/toori, and `saapas
+          # teeskennellä liikaa koodi kuuma hyytelö määrä möö` all with the mark.
+          # This is the column `policy.length` in a reader table needs and it needs no
+          # repair.
+          #
+          # **Consonant gradation needs nothing, because the orthography has already
+          # done it**: katu/kadulla, tupa/tuvassa, sänky/sängyssä, apu/avun,
+          # lukko/lukon, pankki/pankin, hattu/hatun all come back reading the letters
+          # that are there. What gradation *does* cost is the geminate notation below,
+          # because half of gradation is a length alternation.
+          #
+          # **Stress is a blind positional rule, and for Finnish that is the right
+          # answer rather than a lucky one.** Croatian's check run on Finnish: the
+          # primary mark lands on the first syllable of 1,790 of the 1,792 polysyllabic
+          # tokens that carry one, and the rule fires on words no dictionary can hold
+          # -- `kelpolattinen` -> `kˈelpolˌatːɪnen`, `murtovisaliokas` ->
+          # `mˈurtovˌisalˌiokas`, `glaakkoteemus` -> `ɡlˈaːkːotˌeːmus` -- with the
+          # secondary marks on the odd syllables where Finnish puts them. Finnish
+          # primary stress is initial and exceptionless, so a rule is all it needs.
+          # The two exceptions are inside `note` rows, which this script skips.
+          #
+          # **What it gets wrong is the Greek function-word case**, on 155 of those
+          # 1,947 tokens (8.0%) and specifically the most frequent words in the
+          # language: `minä` is `mˌinæ`, `tämä` `tˌæmæ`, `olen` `ˌolen`, `tässä`
+          # `tˌæssæ`, `joka` `jˌoka` -- a secondary mark and no primary at all, or no
+          # mark at all. A Finnish word with no stress is not a possible Finnish word.
+          # Repaired in `fi_stress`.
+          #
+          # Two smaller findings. Word boundaries survive: unlike Hungarian's `nem`,
+          # no Finnish proclitic is fused into the word after it (4 of 909 chunks
+          # disagree on word count and all four are acronyms or digits), so `fi` stays
+          # out of `WORD_AT_A_TIME`. And **Finnish costs the other reader tables
+          # nothing**: the finished column emits 31 distinct characters and every one
+          # is already somewhere in the corpus, so unlike Klingon's `ɬ` or Czech's
+          # `r̝` no existing table gains a rule for it.
+          "fi": "fi",
+          # **Armenian, and `hy` rather than `hyw`, which is a language decision and
+          # not a voice one.** espeak-ng 1.50 ships both -- this build's *system*
+          # tree, no `espeakng_loader` and no `PHONEMIZER_ESPEAK_*` involved, checked
+          # with `EspeakBackend.supported_languages()` against the plain system
+          # library before anything else. `hy` is Eastern Armenian, the standard of
+          # the Republic of Armenia; `hyw` is Western, the diaspora variety. The
+          # difference is not an accent: Western has undergone a consonant shift
+          # Eastern has not, so the two voices disagree on the *identity* of most
+          # stops. Probed on the pack's own words rather than assumed -- բարև is
+          # `baɹˈev` in `hy` and `pʰaɹˈev` in `hyw`, ջուր is `dʒˈur` against
+          # `tʃʰˈur`, տուն is `tˈun` against `dˈun`, պանիր is `panˈir` against
+          # `banˈir`, մեկ is `mˈek` against `mˈeɡ`. A card for a traveller in Armenia
+          # has to be the Eastern one, and a Western column would have printed the
+          # wrong sound on every stop in the pack.
+          #
+          # **Stress is a blind positional rule, and Armenian is Finnish's case in
+          # mirror image**: the primary mark lands on the *final* syllable, which is
+          # Armenian's own exceptionless rule, and the voice gets the one exception
+          # right as well -- a final unstressable ը pulls the mark back, so սառը is
+          # `sˈarə` and not *sarˈə*. So the mark is kept rather than stripped, unlike
+          # Georgian's, where the sources disagreed and espeak's placement was a
+          # constant and therefore not evidence either way.
+          #
+          # What it gets wrong is all notation, and is in `REPAIR["hy"]`.
+          "hy": "hy"}
 
 # Phonemised one word at a time rather than a phrase at a time, which every other
 # espeak language is.
@@ -1068,7 +1143,18 @@ NON_LATIN = {"zh-Hans", "ja", "ko", "th", "hi", "ar", "ru", "el", "tlh", "qya", 
              # romanisation and are `note` rows, which this script skips on
              # principle. Named anyway, so the next row that quotes Latin is asked
              # the same question.
-             "lo"}
+             "lo",
+             # Armenian keeps only what Armenian really keeps, which is Georgian's
+             # answer measured again rather than copied: the loanwords go in Armenian
+             # letters -- վայ-ֆայ, սիմ քարտ, պին կոդ, բանկոմատ, ռոումինգ -- so this
+             # gate finds exactly three cells that are Latin on an Armenian screen or
+             # sign. `eSIM` and the `QR` of `QR կոդով` have a `LOANWORDS["hy"]`
+             # reading; the third is the `B2 · BPK · bakso` pork-code row, which is
+             # Indonesian and a verbatim quote, and is refused here as it is in `ka`,
+             # `am`, `te`, `pa`, `kn` and `ml`. The `WC` of the toilet row sits in
+             # `text_alt` and this gate never sees it, which is what every other pack
+             # does with that row.
+             "hy"}
 
 
 # ------------------------------------------------------------------- alphabet
@@ -1191,6 +1277,70 @@ REPAIR = {
     # those with the same mark, on eleven rows.
     "bn": [("hr.", "ɽʰ"), ("r.", "ɽ")]
           + [(v + "ː", v) for v in "aeiouɔæɑɜãẽĩõũ"],
+    # **Finnish has no vowel reduction, and this voice writes one.** Short /i/ comes
+    # back as `ɪ` in every unstressed syllable and as `i` in every stressed one --
+    # `tuli` is `tˈulɪ`, `poliisi` is `pˈolɪːsɪ`, `xylitoli` is `ksˈylɪtˌolɪ` -- and
+    # the conditioning is exactly stress: over the finished pack `ɪ` occurs 547 times
+    # and **not once** after a stress mark, primary or secondary. Finnish vowel
+    # qualities do not change with stress; the eight vowels are the eight vowels
+    # everywhere, which is one of the first things any description of the language
+    # says. So the fold is not an approximation, it is the phoneme.
+    #
+    # It also makes the column internally consistent, which is the argument that
+    # decides it: the same long /iː/ was being written two ways, `kˈiːtos` beside
+    # `pˈolɪːsɪ`, because the mark went on whichever allophone the stress rule
+    # produced. 21 of the 547 are that `ɪː`.
+    #
+    # And it is the one repair in this file that costs the other reader tables
+    # nothing while making them *more* likely to be right: `ɪ` has a rule in fewer
+    # tables than `i` does -- it is the symbol the espeak-loader drift was caught on
+    # in its `ʏ` form -- so folding it removes a dependency rather than adding one.
+    # **And `q` -> `k`, because Finnish has no uvular stop and the letter is read
+    # [k].** espeak returns a literal `q` wherever a Finnish string spells one: it
+    # gave `qˈuːˌær` for QR (repaired in `LOANWORDS` above, which also fixes the
+    # letter reading) and `qˈuenyan` for the Finnish genitive of Quenya in
+    # `language-names.csv`, which is the cell `{target}` substitutes into a Quenya
+    # sheet's respelling. A general fold is the right shape rather than a second
+    # lexical entry, for Persian's `q1` reason: it is not a Finnish phoneme in any
+    # word, and leaving it in would ask forty-nine reader tables to spell a uvular
+    # where Finnish says a velar. Safe by measurement -- the finished pack column
+    # contains no `q` at all.
+    "fi": [("ɪ", "i"), ("q", "k")],
+    # Armenian, and all three are notation rather than phonology. Two of them exist
+    # only to keep a **new symbol out of the other forty-eight reader tables**, which
+    # is Persian's `q1` -> `q` decision and Georgian's `χ` -> `x` one:
+    #
+    # - **`ʀ` -> `ʁ`.** ղ is a voiced uvular *fricative* in every Eastern Armenian
+    #   description; this voice writes the uvular *trill* U+0280, which is not an
+    #   Armenian sound and occurs in **no cell of this corpus at all**. `ʁ` is
+    #   already in 1,249 cells of `fr` and `he`, so every reader table has a rule
+    #   for it and nothing gains one. 88 tokens in 1,200.
+    # - **`ɹ` -> `ɾ`.** ր is a tap, and the voice writes the English approximant for
+    #   it before a vowel while writing `r` for it (and for the real trill ռ) in a
+    #   coda. The tap is the right symbol and is already in 8,726 cells of `es`,
+    #   `tr` and `ja`. **The coda merge is left as it is and disclosed in
+    #   `GRADE["hy"]`**: repairing it would mean aligning IPA back to letters, and
+    #   both members of the merge are rhotics that nearly every reader table spells
+    #   with its own single r.
+    # - **`aɪ` -> `aj`.** այ is a vowel plus the glide յ, not a diphthong, and `ɪ`
+    #   appears in this column **only** after `a` -- checked over 1,200 tokens, 123
+    #   occurrences, no other environment -- so the substitution is exactly the
+    #   digraph. Left in, a table that spells `aɪ` as its own "eye" would have read
+    #   Հայաստան as *ha-EYE-a-stan* rather than *ha-ya-stan*; this is Croatian's
+    #   `after_out` observation arriving in the column instead of in the table.
+    #
+    # `χ` needs no entry: խ comes back as U+03C7 and the global `FOLD` above already
+    # takes it to `x`, for the reason stated there.
+    # - **`ː` -> nothing.** Armenian has no vowel length contrast and this voice
+    #   writes the mark in exactly one place: the *letter name* of an isolated ի,
+    #   which arises on the three rows whose slot carries a hyphenated case ending
+    #   (`{}-ի հետ`, `{}-ի ճանապարհն`, `{}-ի հերթն`). Measured over 1,200 real
+    #   tokens and over the finished column: three cells, all of them that, and no
+    #   geminate anywhere -- Armenian's own geminates come back doubled
+    #   (`ˌastitʃˌanneɾˈi`) rather than marked, so nothing else can produce it. This
+    #   is Persian's blanket `("ː", "")` for Persian's reason, and unlike Bengali's
+    #   case there is no consonant length here for it to damage.
+    "hy": [("ʀ", "ʁ"), ("ɹ", "ɾ"), ("aɪ", "aj"), ("ː", "")],
     # **Urdu is Hindi's phonology in another script, and the first three repairs are
     # Hindi's own**: this build writes ड़/ڑ /ɽ/ as `r.` and ढ़/ڑھ as `r.h` in the Urdu
     # voice exactly as it does in the Hindi one, and `.` was the *only* character
@@ -2705,6 +2855,15 @@ LOANWORDS = {
     # name has. Read through `KA` rather than written by ear, so the two cells are in
     # the same phonology as the sentence around them.
     "ka": {"eSIM": "isimi", "QR": "kʰiuari"},
+    # Armenian keeps the same two in Latin and no others -- see the `NON_LATIN` note.
+    # Both readings are what an Armenian speaker says rather than what the letters
+    # are: `eSIM` is *isim* (իսիմ) and `QR` is *kyu-ar* (քյու-առ), with the aspirated
+    # ք the Latin letter's name has in Armenian and the trill ռ of *ar*. Read through
+    # the `hy` voice on those two Armenian spellings and then put through
+    # `REPAIR["hy"]`, so the two cells are in the same phonology as the sentence
+    # around them -- Georgian's rule, and the reason `QR` is not simply copied from
+    # `ru`'s `kʲjuˈɑr`.
+    "hy": {"eSIM": "isˈim", "QR": "kʰjuˈar"},
     "th": {"eSIM": "ʔiː˧sim˧"},                   # อีซิม, straight out of thaig2p
     # No tone letters: the loan has no lexical tone to carry, and the readers who
     # keep tone would otherwise be shown one that was invented here.
@@ -2783,6 +2942,35 @@ LOANWORDS = {
     "hr": {"Wi-Fi": "vˈajfaj", "eSIM": "esˈim", "SIM": "sˈim", "QR": "kjuˈar",
            "PDV": "pedeˈve", "WC": "vˈetse", "cm": "tsentimˈetara",
            "shuttle": "ʃˈatl", "Tax Free": "tˈaks frˈi"},
+    # Finnish, and Croatian's list is the model: espeak reads an acronym out in the
+    # language's own letter names, which is right for some languages and wrong for
+    # Finnish, where these four are said as words.
+    #
+    # `wc` is the one that matters, because it is on seven rows and they are the
+    # toilet rows. The Finnish name for the letter W is *kaksois-vee* ("double v"),
+    # so espeak returns `kˈaksoisveːsˌeː` -- and nobody in Finland says that: the
+    # sign is read *vee-see*, which is where the everyday word *vessa* comes from.
+    # `SIM` is *sim* as a word and never *äs-ii-äm*, exactly as Croatian's is, and
+    # `eSIM` is *ee-sim*. `cm` is read out in full, and the case is the partitive
+    # singular a Finnish numeral governs (*kuusikymmentä senttiä*) -- Croatian's and
+    # Korean's entry for the same row, in the case Finnish wants.
+    #
+    # **`QR` is here for a different reason: espeak returns a phoneme Finnish does
+    # not have.** `qˈuːˌær` writes the letter-name *kuu* with a uvular /q/, which is
+    # correct as a letter name and wrong as a sound -- Finnish has no uvular stop, and
+    # every reader table would have spelled one. The reading is otherwise right, so
+    # the entry only repairs the consonant.
+    #
+    # **`wifi` needs no entry**, which was checked rather than assumed: this voice
+    # returns `vˈifi`, and *vifi* is what a Finn says. `PIN` needs none either,
+    # because the pack writes *tunnusluku* in `text` and keeps `PIN-koodi` in
+    # `text_alt`, which takes no IPA.
+    #
+    # A loan value skips `normalise`, so these are written in the alphabet the
+    # finished column uses -- geminates doubled, no `ɪ` -- and they carry their own
+    # initial stress mark, which is where Finnish always puts it.
+    "fi": {"eSIM": "ˈeːsim", "SIM": "sˈim", "QR": "kˈuːær", "wc": "vˈeːseː",
+           "cm": "sˈenttiæ"},
 }
 
 
@@ -3055,7 +3243,23 @@ GEMINATE = re.compile(r"(ts|tʃ|dz|dʒ|tɕ|ʈʂ|[pbtdkɡcɟqfvszʃʒçxhmnɲŋlr
 # writes both as two letters (ക്ക, ത്ത, പ്പ), so doubling the 462 is what makes the
 # column internally consistent rather than a preference about respelling. The 1,255
 # vowel+`ː` sequences are real length and `GEMINATE` does not match them.
-GEMINATE_DOUBLES = {"hu", "it", "pa", "gu", "ml"}
+# Finnish joins, and it is the strongest case in this set rather than another
+# instance of it. The notation is split by manner exactly as Hungarian's and
+# Italian's are -- over the finished pack 285 geminate stops come back with a length
+# mark (`t` 188, `k` 80, `p` 17: `lˈukːo`, `hˈatːu`, `pˈaŋkːi`) and 381 other
+# geminates come back doubled (`l` 173, `s` 104, `n` 55, `m` 33, `ŋ` 10, `r` 6:
+# `kˈadulla`, `kˈamman`, `ˈespresso`) -- and Finnish writes both as two letters.
+#
+# What makes it the strongest case is that **half of Finnish consonant gradation is
+# a length alternation**, so `Cː` does not merely erase a lexical contrast, it erases
+# a grammatical one: hattu/hatun, lukko/lukon, pankki/pankin, kukka/kukan are
+# nominative against genitive, and every reader whose table maps a bare `ː` to
+# nothing would have printed the two identically. tuli/tulli, kuka/kukka and
+# mato/matto are the lexical half. `syllabify` gives the second reason Hungarian's
+# entry gives: `Cː` between two vowels is one unit and opens the next syllable, so
+# `hattu` would divide ha-tu where Finnish divides hat-tu, which is also where
+# Finnish hyphenates it.
+GEMINATE_DOUBLES = {"hu", "it", "pa", "gu", "ml", "fi"}
 
 
 # ------------------------------------------------------------- Hungarian stress
@@ -3085,6 +3289,94 @@ def hu_stress(ipa):
         bare = "".join(c for c in word if c not in STRESS_MARKS)
         at = next((i for i, c in enumerate(bare) if c in VOWELS), None)
         out.append(bare if at is None else f"{bare[:at]}ˈ{bare[at:]}")
+    return " ".join(out)
+
+
+# --------------------------------------------------------------- Finnish sandhi
+# **Loppukahdennus, and it is folded out.** Finnish geminates the initial consonant
+# of a word after certain preceding forms -- an e-stem, an allative in -lle, the
+# imperative, the first infinitive -- so `ole hyvä` is said [ole hhyvæ] and `tänne
+# pyörätuolilla` is said [tænne ppyørætuolilla]. Finnish spelling writes none of it,
+# which is why it is called hidden gemination, and espeak writes it **on either side
+# of the space with no principle**: 13 rows of the pack come back with the geminate
+# on the following word (`ppˈyørætuolilla`, `ttˈætæ`, `kkˈestæː`) and 12 with the
+# same consonant hung on the end of the *preceding* one (`ˈoleh hˈyvæ`, `tˈullam
+# mˈukaːnne`, `runsaːstiv vˈerta`). One phenomenon, two notations -- which is the
+# argument `GEMINATE_DOUBLES` already rests on -- and the second notation invents
+# words Finnish does not have: `oleh`, `tullam`, `virhel`, `tilapäisestis`, printed
+# beside a card that reads `Ole hyvä`.
+#
+# So it goes, on the rule this file already applies to Spanish's β/ð/ɣ and to Czech's
+# voiceless ř: **the column is phonemic, and this has no phonemic status at all.** It
+# is automatic, conditioned by the word before it, and unwritten.
+#
+# **What is *not* folded is the place assimilation beside it**, and the distinction is
+# the reason rather than an inconsistency: `en puhu` comes back `ˈem pˈuhu` and `onko`
+# comes back `ˈoŋko`, which substitute one consonant every reader table can spell for
+# another, exactly as Czech's `pod stromem` -> `pˈotstromem` and Croatian's `vas
+# zovite` -> `vˈaz zˈovite` do. Gemination *adds a segment*, and in half the cases it
+# adds it to the wrong word.
+#
+# Word-aligned, and it declines to guess: a chunk espeak returned with a different
+# number of words -- a digit read out, an acronym spelled out -- is left alone. The
+# condition is orthographic and cannot misfire on a real geminate, because it only
+# fires where the *preceding written word ends in a vowel*, and Finnish writes no
+# word-initial geminate and no vowel-final word that ends in a consonant sound.
+FI_VOWEL_LETTERS = "aeiouyäöå"
+
+
+def fi_sandhi(text, ipa):
+    words, units = text.split(), ipa.split()
+    if len(words) != len(units):
+        return ipa
+    units = list(units)
+    for i, word in enumerate(words):
+        if word[-1].lower() not in FI_VOWEL_LETTERS:
+            continue
+        # The geminating consonant written on the end of this word.
+        if units[i] and units[i][-1] not in VOWELS and units[i][-1] != "ː":
+            units[i] = units[i][:-1]
+        # Or as length, or a doubled letter, on the next word's initial consonant.
+        if i + 1 < len(units):
+            nxt = units[i + 1]
+            at = 1 if nxt[:1] in ("ˈ", "ˌ") else 0
+            if len(nxt) > at + 1 and nxt[at] not in VOWELS \
+                    and nxt[at + 1] in ("ː", nxt[at]):
+                units[i + 1] = nxt[:at + 1] + nxt[at + 2:]
+    return " ".join(units)
+
+
+# --------------------------------------------------------------- Finnish stress
+# Finnish primary stress is on the first syllable of every word, without exception,
+# and espeak already applies that rule -- it fires on words invented for the probe
+# (`kelpolattinen`, `glaakkoteemus`), which is what shows it is a rule and not a
+# lookup. So unlike Hungarian's, this stress does not have to be written from
+# scratch, and unlike Croatian's it does not have to be argued about.
+#
+# What has to be repaired is the Greek function-word case, and only that. espeak's
+# Finnish dictionary demotes a closed class of high-frequency words to a secondary
+# mark with no primary, or to no mark at all: `minä` is `mˌinæ`, `tämä` `tˌæmæ`,
+# `olen` `ˌolen`, `tässä` `tˌæssæ`, `en` nothing. In connected speech that is
+# defensible -- they are prosodically weak -- but the card prints a headword, and a
+# word with no primary mark prints unmarked: no capital for an English reader, no
+# acute for a Spanish, Russian or Greek one. 155 of the pack's 1,947 polysyllabic
+# tokens, 8.0%, and they are the pronouns and the copula.
+#
+# Immediately before the vowel rather than before the onset, which is where espeak
+# itself puts it (`kˈiːtos`, `hˈætæ`), so the column stays internally consistent.
+# A word that already has a primary is left exactly as it came: `apply_stress`
+# downstream keeps one primary per word, so this only ever adds the missing one.
+def fi_stress(ipa):
+    out = []
+    for word in ipa.split():
+        at = next((i for i, c in enumerate(word) if c in VOWELS), None)
+        if at is None or "ˈ" in word:
+            out.append(word)
+            continue
+        # Replace a secondary mark on that vowel rather than stacking a second one.
+        if at and word[at - 1] in STRESS_MARKS:
+            word, at = word[:at - 1] + word[at:], at - 1
+        out.append(word[:at] + "ˈ" + word[at:])
     return " ".join(out)
 
 
@@ -3282,6 +3574,10 @@ def normalise(ipa, code, text=""):
         # Nasal first: `pa_tone` inserts a tone bar between the vowel and its coda,
         # which would then sit between the tilde and the stop `pa_nasal` matches on.
         ipa = pa_tone(text, pa_nasal(ipa))
+    if code == "fi":
+        # Before the geminate fold, which would otherwise double the consonant this
+        # takes out, and before `fi_stress`, which counts vowels.
+        ipa = fi_stress(fi_sandhi(text, ipa))
     if code in GEMINATE_DOUBLES:
         ipa = GEMINATE.sub(r"\1\1", ipa)
     if code == "hu":
@@ -5353,6 +5649,108 @@ GRADE = {
            "Croatian sheet exists to score syllable-agreement against, so this grade "
            "is a probe-based audit plus the corpus-wide symbol and stress counts "
            "above."),
+    "fi": ("A", "Finnish orthography is as close to one-letter-one-phoneme as anything "
+           "in this corpus, so the segmental derivation is nearly free and the grade is "
+           "decided by the three things the letters do not settle. **All three come out "
+           "right.** Vowel length is written on all eight vowels and espeak writes `ː` "
+           "for every one (tuli/tuuli, kala/kaala, mene/meneekö, koto/kooto, "
+           "kylä/kyylä, hätä/häätö, tori/toori as minimal pairs). Consonant gradation "
+           "needs nothing, because the orthography has already applied it -- "
+           "katu/kadulla, tupa/tuvassa, sänky/sängyssä, lukko/lukon, pankki/pankin, "
+           "hattu/hatun all read the letters that are there. And **stress is a blind "
+           "positional rule that happens to be the right rule**: Finnish primary "
+           "stress is initial and exceptionless, espeak's mark lands on the first "
+           "syllable of 1,790 of the 1,792 polysyllabic tokens that carry one, and it "
+           "fires on invented words (`kelpolattinen` -> `kˈelpolˌatːɪnen`), which is "
+           "what shows it is a rule rather than a lookup. The secondary marks are "
+           "better than that: they are **quantity-sensitive**, sitting on the third "
+           "syllable of `ravintola` and shifting to the fourth in `ravintolassa` and "
+           "`yliopisto` because the third is light and the fourth heavy, which is the "
+           "rule Finnish grammars state. **Three systematic repairs, no lexical ones.** "
+           "`ɪ` -> `i` in REPAIR, because this voice writes a reduced short /i/ that "
+           "Finnish does not have -- 547 occurrences and not one after a stress mark, "
+           "and it was writing the same long /iː/ two ways (`kˈiːtos` beside "
+           "`pˈolɪːsɪ`). `fi` joins GEMINATE_DOUBLES, which is the repair that matters "
+           "most here: the notation was split by manner (285 `Cː` against 381 `CC`) "
+           "and half of Finnish gradation *is* a length alternation, so `Cː` would have "
+           "told every reader to print hattu and hatun identically. And loppukahdennus "
+           "is folded out in `fi_sandhi`, on 26 rows, because espeak wrote it on both "
+           "sides of the space and the preceding-word side invents words Finnish does "
+           "not have (`oleh`, `tullam`, `virhel`). **What is left imperfect, measured.** "
+           "The eight vowel *qualities* are broad: Finnish /ɑ/ is written `a`, so the "
+           "a/ä contrast survives (`æ` against `a`) but the backness of the first does "
+           "not show -- left alone because all 48 reader tables have rules for both "
+           "symbols, so the choice changes no respelling. The 155 function words espeak "
+           "demoted are repaired by `fi_stress`, which slightly over-marks in return: "
+           "`on`, `ei` and `en` come back with a primary they would not carry inside a "
+           "sentence, which is Hungarian's accepted trade and is filtered downstream by "
+           "each reader's `stress_min_syllables`. Four acronym readings needed "
+           "LOANWORDS entries and one of them was a real defect rather than a "
+           "preference: espeak returned `qˈuːˌær` for QR, writing a uvular stop "
+           "Finnish does not have. No curated Finnish sheet exists to score "
+           "syllable-agreement against, so this grade is a probe-based audit plus the "
+           "corpus-wide counts above -- and the corpus-wide number worth keeping is "
+           "that the finished column emits 30 IPA symbols and **every one was already "
+           "in the corpus**, so Finnish costs the other 48 reader tables no rule at "
+           "all."),
+    "hy": ("A-", "Eastern Armenian in the reformed orthography, read by espeak-ng's "
+           "`hy` voice out of this build's **system** espeak-ng-data 1.50 -- no "
+           "`espeakng_loader`, no `PHONEMIZER_ESPEAK_*`, so this column is "
+           "library-independent. `hyw`, the Western voice, was refused for a reason "
+           "recorded in `VOICES`: Western Armenian has undergone a stop shift "
+           "Eastern has not, so the two voices disagree on the identity of most "
+           "stops and a Western column would print the wrong sound on every one of "
+           "them for a traveller in Armenia.\n\n"
+           "**Three things earn the A and they are all measured on the finished "
+           "column.** The orthography is shallow -- one letter to one phoneme in "
+           "both directions, no schwa-deletion convention, no inherent vowel, every "
+           "vowel it pronounces is written -- so there is nothing of the kind that "
+           "keeps `hi` and `bn` at C. **Stress is derived and is right**: Armenian "
+           "stress falls on the final syllable unless the final vowel is the "
+           "unstressable ը, in which case it pulls back one, and the voice follows "
+           "that rule on **1,342 of the 1,348 marked polysyllables (99.6%)** -- "
+           "1,165 on the last vowel and 177 on the penult before a final ə. The six "
+           "exceptions are all hyphenated compounds (վայ-ֆայ, ինչ-որ, "
+           "բանալի-քարտ) where the mark lands on the first element, which is "
+           "defensible for a compound in any case. That is a blind positional rule "
+           "firing correctly, Finnish's case in mirror image, so unlike Punjabi's "
+           "and Kannada's the mark is kept rather than stripped. And the **three-way "
+           "stop and affricate series survives intact** -- բ/պ/փ, դ/տ/թ, գ/կ/ք, "
+           "ձ/ծ/ց, ջ/ճ/չ all come back distinct, with the count of `ʰ` reconciling "
+           "against the five aspirated letters, so the Hindi `dʰ` bug is "
+           "structurally impossible here. Cluster epenthesis is modelled too, which "
+           "no hand table could do: գնացք is `ɡənˈatsʰkʰ` and դրամ is `dəɾˈam`, "
+           "with the schwa Armenian really inserts.\n\n"
+           "**What keeps it off A is one real merge, and it is a merge rather than a "
+           "gap.** Armenian distinguishes the tap ր from the trill ռ in every "
+           "position; this voice writes `ɹ` for ր before a vowel and **`r` for both "
+           "ր and ռ in a coda**. Counted on the finished pack: the text writes ր 813 "
+           "times and ռ 86, and the column has 461 `ɾ` and 439 `r`, so roughly 350 "
+           "of the 813 ր -- about 43% -- print as a trill. Repairing it would mean "
+           "aligning the IPA back to the letters it came from, which is a different "
+           "kind of program from a substitution table, and the audible cost is "
+           "small: both members are rhotics and nearly every reader table spells "
+           "them with its own single r. `REPAIR[\"hy\"]` does take the onset half, "
+           "`ɹ` -> `ɾ`, because the tap is simply the right symbol there.\n\n"
+           "**Two notation repairs, and both exist to keep a new symbol out of the "
+           "other forty-nine reader tables.** ղ comes back as the uvular *trill* "
+           "`ʀ` U+0280, which is not an Armenian sound and is in no cell of this "
+           "corpus, and is folded to `ʁ` -- already in 1,249 cells of `fr` and `he`. "
+           "խ comes back as `χ` U+03C7 and the global `FOLD` takes it to `x`, which "
+           "is Georgian's decision for Georgian's reason. And այ comes back as the "
+           "diphthong `aɪ` where it is a vowel plus the glide յ; `ɪ` appears in this "
+           "column **only** after `a`, checked over 1,200 tokens, so `aɪ` -> `aj` is "
+           "exactly the digraph and it stops a table that spells `aɪ` as its own "
+           "\"eye\" from reading Հայաստան as *ha-EYE-a-stan*. **The finished column "
+           "emits 29 distinct characters and every one is already somewhere in the "
+           "corpus**, so Armenian costs no existing reader a rule -- checked against "
+           "the `ipa` column of all forty-nine other packs rather than assumed.\n\n"
+           "No curated Armenian sheet exists to score syllable-agreement against, so "
+           "the grade is a probe-based spot-check like Dutch's, Swedish's and "
+           "Kannada's rather than a corpus-wide measurement. Seven cells are empty "
+           "and all seven are by design: six `note` rows, which this script skips, "
+           "and `common-signs.pork-code`, whose whole content is the Latin "
+           "`B2 · BPK · bakso`."),
 }
 
 

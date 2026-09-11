@@ -1,0 +1,12 @@
+label,text
+_frame,{region}: {numbers}
+all services,yleinen hätänumero
+police,poliisi
+ambulance,ambulanssi
+fire,palokunta
+also works,toimii myös
+fire and ambulance,palokunta + ambulanssi
+medical,lääkäriapu
+tourist police,turistipoliisi
+police and ambulance,poliisi + ambulanssi
+gendarmerie,santarmit

@@ -1,0 +1,987 @@
+{
+  "source": "hy",
+  "accent": "hy-AM",
+  "status": "ready",
+  "version": "1",
+  "policy": {
+    "syllable_separator": "-",
+    "word_separator": " ",
+    "stress": "caps",
+    "tone": "drop",
+    "length": "none",
+    "max_onset": 3,
+    "fixups": "all",
+    "locale": "hy"
+  },
+  "phonemes": [
+    {
+      "slot": "coda",
+      "ipa": "ɲ",
+      "out": "ն"
+    },
+    {
+      "slot": "coda",
+      "ipa": "ʎ",
+      "out": "լ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "ն",
+      "if_nucleus_head": "i ɪ ɨ y ʏ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "լ",
+      "if_nucleus_head": "i ɪ ɨ y ʏ"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "",
+      "if_nucleus_head": "i ɪ ɨ"
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "պ"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʲ",
+      "out": "պ"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʼ",
+      "out": "պ"
+    },
+    {
+      "slot": "any",
+      "ipa": "p͈",
+      "out": "պպ"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʰ",
+      "out": "փ"
+    },
+    {
+      "slot": "any",
+      "ipa": "b",
+      "out": "բ"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʲ",
+      "out": "բ"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʰ",
+      "out": "բհ"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "տ"
+    },
+    {
+      "slot": "any",
+      "ipa": "t̪",
+      "out": "տ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʲ",
+      "out": "տ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈ",
+      "out": "տ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʼ",
+      "out": "տ"
+    },
+    {
+      "slot": "any",
+      "ipa": "t͈",
+      "out": "տտ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰ",
+      "out": "թ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʰ",
+      "out": "թ"
+    },
+    {
+      "slot": "any",
+      "ipa": "θ",
+      "out": "թ"
+    },
+    {
+      "slot": "any",
+      "ipa": "d",
+      "out": "դ"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʲ",
+      "out": "դ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖ",
+      "out": "դ"
+    },
+    {
+      "slot": "any",
+      "ipa": "dˤ",
+      "out": "դ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɗ",
+      "out": "դ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ð",
+      "out": "դ"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʰ",
+      "out": "դհ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʰ",
+      "out": "դհ"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "կ"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʲ",
+      "out": "կ"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʼ",
+      "out": "կ"
+    },
+    {
+      "slot": "any",
+      "ipa": "k͈",
+      "out": "կկ"
+    },
+    {
+      "slot": "any",
+      "ipa": "q",
+      "out": "կ"
+    },
+    {
+      "slot": "any",
+      "ipa": "qʼ",
+      "out": "կ"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰ",
+      "out": "ք"
+    },
+    {
+      "slot": "any",
+      "ipa": "qʰ",
+      "out": "ք"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡ",
+      "out": "գ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡʲ",
+      "out": "գ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡʰ",
+      "out": "գհ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "ծ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʲ",
+      "out": "ծ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts̪",
+      "out": "ծ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʼ",
+      "out": "ծ"
+    },
+    {
+      "slot": "any",
+      "ipa": "sʼ",
+      "out": "ծ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "ց"
+    },
+    {
+      "slot": "any",
+      "ipa": "dz",
+      "out": "ձ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "ճ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃʲ",
+      "out": "ճ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃʼ",
+      "out": "ճ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "ճ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "ճ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ͈",
+      "out": "ճճ"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "ճ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃʰ",
+      "out": "չ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "չ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂʰ",
+      "out": "չ"
+    },
+    {
+      "slot": "any",
+      "ipa": "cʰ",
+      "out": "չ"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒ",
+      "out": "ջ"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʑ",
+      "out": "ջ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "ջ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟʰ",
+      "out": "ջհ"
+    },
+    {
+      "slot": "any",
+      "ipa": "f",
+      "out": "ֆ"
+    },
+    {
+      "slot": "any",
+      "ipa": "fʲ",
+      "out": "ֆ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɸ",
+      "out": "ֆ"
+    },
+    {
+      "slot": "any",
+      "ipa": "pf",
+      "out": "պֆ"
+    },
+    {
+      "slot": "any",
+      "ipa": "v",
+      "out": "վ"
+    },
+    {
+      "slot": "any",
+      "ipa": "vʲ",
+      "out": "վ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʋ",
+      "out": "վ"
+    },
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "ս"
+    },
+    {
+      "slot": "any",
+      "ipa": "s̪",
+      "out": "ս"
+    },
+    {
+      "slot": "any",
+      "ipa": "sʲ",
+      "out": "ս"
+    },
+    {
+      "slot": "any",
+      "ipa": "s͈",
+      "out": "սս"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "զ"
+    },
+    {
+      "slot": "any",
+      "ipa": "zʲ",
+      "out": "զ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "շ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʂ",
+      "out": "շ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "շ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃʲ",
+      "out": "շ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒ",
+      "out": "ժ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʐ",
+      "out": "ժ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʑ",
+      "out": "ժ"
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "խ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "խ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ħ",
+      "out": "խ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɣ",
+      "out": "ղ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "ղ"
+    },
+    {
+      "slot": "any",
+      "ipa": "h",
+      "out": "հ"
+    },
+    {
+      "slot": "any",
+      "ipa": "m",
+      "out": "մ"
+    },
+    {
+      "slot": "any",
+      "ipa": "mʲ",
+      "out": "մ"
+    },
+    {
+      "slot": "any",
+      "ipa": "m̩",
+      "out": "մ"
+    },
+    {
+      "slot": "any",
+      "ipa": "n",
+      "out": "ն"
+    },
+    {
+      "slot": "any",
+      "ipa": "nʲ",
+      "out": "ն"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɳ",
+      "out": "ն"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɴ",
+      "out": "ն"
+    },
+    {
+      "slot": "any",
+      "ipa": "n̩",
+      "out": "ն"
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "ն"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "նգ"
+    },
+    {
+      "slot": "any",
+      "ipa": "l",
+      "out": "լ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɫ",
+      "out": "լ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭ",
+      "out": "լ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭʲ",
+      "out": "լ"
+    },
+    {
+      "slot": "any",
+      "ipa": "l̩",
+      "out": "լ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɬ",
+      "out": "լ"
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
+      "out": "ռ"
+    },
+    {
+      "slot": "any",
+      "ipa": "rʲ",
+      "out": "ռ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽ",
+      "out": "ռ"
+    },
+    {
+      "slot": "any",
+      "ipa": "r̩",
+      "out": "ռ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽʰ",
+      "out": "ռհ"
+    },
+    {
+      "slot": "any",
+      "ipa": "r̝",
+      "out": "ռժ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾ",
+      "out": "ր"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾʲ",
+      "out": "ր"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɹ",
+      "out": "ր"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɻ",
+      "out": "ր"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "յ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "յ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɥ",
+      "out": "յ"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "վ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰ",
+      "out": "վ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔʲ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʕ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˀ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʼ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ː",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̯",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "նյ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "լյ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "e",
+      "out": "է",
+      "when": [
+        "word_initial",
+        "no_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "e",
+      "out": "ե"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ",
+      "out": "է",
+      "when": [
+        "word_initial",
+        "no_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ",
+      "out": "ե"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ẽ",
+      "out": "էն",
+      "when": [
+        "word_initial",
+        "no_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ẽ",
+      "out": "են"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "o",
+      "out": "օ",
+      "when": [
+        "word_initial",
+        "no_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "o",
+      "out": "ո"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ",
+      "out": "օ",
+      "when": [
+        "word_initial",
+        "no_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ",
+      "out": "ո"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɒ",
+      "out": "օ",
+      "when": [
+        "word_initial",
+        "no_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɒ",
+      "out": "ո"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɤ",
+      "out": "օ",
+      "when": [
+        "word_initial",
+        "no_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɤ",
+      "out": "ո"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "õ",
+      "out": "օն",
+      "when": [
+        "word_initial",
+        "no_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "õ",
+      "out": "ոն"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ã",
+      "out": "ան",
+      "when": [
+        "word_initial",
+        "no_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ã",
+      "out": "ան"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ĩ",
+      "out": "ին",
+      "when": [
+        "word_initial",
+        "no_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ĩ",
+      "out": "ին"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ũ",
+      "out": "ուն",
+      "when": [
+        "word_initial",
+        "no_onset"
+      ]
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ũ",
+      "out": "ուն"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɪ",
+      "out": "յ",
+      "after_out": "ա ե է ի ո օ ու ը"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "a",
+      "out": "ա"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑ",
+      "out": "ա"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ",
+      "out": "ա"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌ",
+      "out": "ա"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "æ",
+      "out": "ա"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ə",
+      "out": "ը"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɨ",
+      "out": "ը"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɜ",
+      "out": "ը"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɵ",
+      "out": "ը"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "i",
+      "out": "ի"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɪ",
+      "out": "ի"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "u",
+      "out": "ու"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʊ",
+      "out": "ու"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯ",
+      "out": "ու"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʉ",
+      "out": "ու"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "uʲ",
+      "out": "ու"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "y",
+      "out": "յու"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʏ",
+      "out": "յու"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ø",
+      "out": "յո"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ",
+      "out": "յո"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɚ",
+      "out": "եր"
+    }
+  ],
+  "syllable_fixups": [],
+  "legend": "Նոր նշան չկա՝ բոլոր տառերը սովորական հայերեն են։ Գծիկը բաժանում է վանկերը։ ՄԵԾԱՏԱՌ վանկը շեշտվածն է։",
+  "derives_from": "**There is no bracketed Armenian pronunciation key to borrow, and there is something better: Armenian already writes every foreign word phonetically in its own alphabet, and has done since the fifth century.** Armenian lexicography and encyclopaedic practice do not print a pronunciation in brackets beside a foreign headword the way Croatian's and Italian's do -- they render the word itself in Armenian letters, once, and that spelling *is* the pronunciation, because the reformed orthography is one letter to one phoneme in both directions. So this table does not adapt a notation; it continues an orthographic convention, and every rule in it can be checked against an Armenian word somebody has already written. That is Georgian's argument in the same batch, and it is true of Armenian for the same reason.\n\n**The attestations used are this pack's own loanwords first**, because each is sourced to a dictionary rather than to this table's author: վայ-ֆայ fixes /w/ -> վ and /f/ -> ֆ, ռոումինգ fixes /ŋ/ -> նգ and /r/ -> ռ, բանկոմատ fixes /b/ -> բ and /k/ -> կ, ավտոբուս fixes /v/ -> վ, տաքսի fixes /t/ -> տ and /kʰ/ -> ք, վիզա fixes /z/ -> զ, and դեղատուն fixes /ʁ/ -> ղ. Names outside the pack supply the six sounds no loanword in it has: Վաշինգտոն and Հոլիվուդ again for /w/ -> վ, Մյունխեն for /y/ -> յու and /x/ -> խ, Գյոթե and Քյոլն for /ø œ/ -> յո, Նյու Յորք for /j/ -> յ, Ջոն for /dʒ/ -> ջ, and Ճապոնիա for the plain affricate /tʃ/ -> ճ.\n\n**The stress device is `caps`, and Armenian is the first non-Latin bicameral reader here to take it.** Georgian declined it because Mkhedruli is caseless and Amharic because Ethiopic is; Armenian has had two cases since Mesrop, `toLocaleUpperCase('hy')` maps every letter this table emits, and all-caps is what Armenian signage and headlines already use for emphasis. The one letter whose uppercase is not a single character is ու -> ՈՒ, which is the correct uppercase digraph and is also the `liga` pair the shipped face ligates, so it draws as one glyph either way. `և` is the letter with no uppercase at all -- `toLocaleUpperCase` answers `ԵՒ`, the classical two-letter spelling -- and no rule in this table emits it.",
+  "deviations": [
+    {
+      "rule": "**The plain voiceless series takes Armenian's plain voiceless letters and the aspirated series takes its aspirated ones: /p t k ts tʃ/ are պ տ կ ծ ճ and /pʰ tʰ kʰ tsʰ tʃʰ/ are փ թ ք ց չ.** Read against Armenian *naming* practice this looks wrong, because that practice is lexical rather than phonetic: Armenian writes Փարիզ and Չերչիլ with the aspirated letters and Պուշկին, Տոկիո and Ճապոնիա with the plain ones, on no principle this table can see.",
+      "why": "Because the IPA is all this table gets, and following it is both the only available rule and the more faithful one. The corpus's bare `p t k tʃ ts` come overwhelmingly from languages whose voiceless stops are genuinely unaspirated -- French, Spanish, Italian, Russian, Japanese, Indonesian, Turkish -- and outnumber the aspirated symbols roughly ten to one (23,166 `t` against 1,530 `tʰ`, 21,691 `k` against 1,752 `kʰ`). Holding փ թ ք ց չ back for the seven packs that write the aspirates because they contrast them (Mandarin, Korean, Thai, Hindi, Lao, Khmer and Armenian itself) means this table spells that contrast **exactly**, with ordinary letters and no device. **It is the only reader in the corpus that does so for the affricates as well**: Georgian, the one other three-way orthography here, has to spell /ts/ and /tsʰ/ both ც and /tʃ/ and /tʃʰ/ both ჩ, because its third series is ejective rather than aspirated -- so Hindi's च/छ and Mandarin's j/q arrive merged in Mkhedruli and distinct in Armenian. The cost is English and German, whose word-initial /p t k/ really are aspirated and are written bare; espeak does not mark that aspiration, so it is invisible to this table in any case."
+    },
+    {
+      "rule": "Vowel length is not written at all, where eight tables here write it with a colon, a doubled letter or an accent.",
+      "why": "Armenian has no phonemic vowel length and no spare device either. Doubling reads as two syllables, because every Armenian vowel letter is its own nucleus and the language has no vowel digraphs except ու; a colon after an Armenian letter is not a mark any Armenian reader has met; and the two accent devices in `core/respell.js` are dead here for Georgian's and Amharic's reason -- `VOWEL_LETTERS` and `ACCENTED` list Latin, Cyrillic and Greek vowels and no Armenian codepoint at all. Armenian's own `՛` shesht would be the native device and the engine has no way to ask for it."
+    },
+    {
+      "rule": "An epenthetic ը is **not** inserted into a cluster Armenian would break, even though Armenian itself inserts one: գնացք is [gənatsʰkʰ] and դրամ is [dəɾam].",
+      "why": "A respelling is a disposable hint rather than an Armenian word, and adding a vowel the source does not have makes the reader say one. Georgian's table declines the nominative -ի of a borrowed noun on exactly this ground, and Croatian's declines its standard's adapted-spelling rule. It also costs nothing audible: an Armenian reader supplies the schwa without being told to, which is why the language has the rule in the first place."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "the tap /ɾ/ against the trill /r/",
+      "out": "ր and ռ",
+      "why": "Listed here for the opposite reason to everything else in this block: this is **exact**, and it is exact in only three of the fifty tables. Armenian writes the tap ր and the trill ռ as two ordinary letters, so Spanish caro/carro, Japanese's tap, English's approximant and Hindi's flap keep their manner where Georgian's, Hebrew's, Amharic's and every Brahmic table's single rhotic letter throws it away. /ɹ/ and /ɻ/ go to the tap rather than the trill, being the weaker articulation of the two."
+    },
+    {
+      "sounds": "the uvular stops /q qʰ qʼ/ (Arabic and Persian qaf, Urdu ق, Klingon, and Georgian's own ყ)",
+      "out": "կ and ք",
+      "why": "Armenian has two uvular letters -- խ /χ/ and ղ /ʁ/ -- and both are **fricatives**, so neither can take a stop without trading a manner for a place. Georgian's ყ is the one table in the corpus that keeps this place, and it can only do so because ყ is a uvular *stop*. So the velar letters take it and the place is lost, which is what the other forty-eight tables do -- but the aspiration is kept, /q/ -> կ against /qʰ/ -> ք, which most of them cannot do either."
+    },
+    {
+      "sounds": "the ejectives /kʼ tʼ pʼ tsʼ tʃʼ sʼ/ (Amharic, Hausa, and Georgian's own six)",
+      "out": "կ տ պ ծ ճ ծ",
+      "why": "Armenian has no ejective series, so the glottalisation is lost and the plain voiceless letter carries the place and the manner. This is where Georgian is the better reader and says so: it has a whole ejective series and spells each one exactly. Written as explicit rules rather than left to decompose, which is what the forty-seven Latin and Brahmic tables do -- the stop matches and the `ʼ` falls through -- because an explicit rule is what keeps `--gaps` honest about the difference between a sound this table approximates and one it drops."
+    },
+    {
+      "sounds": "the Indic breathy-voiced stops /bʰ dʰ ɡʰ ɖʰ ɟʰ/ and the Czech ř",
+      "out": "բհ դհ գհ դհ ջհ, and ռժ",
+      "why": "Armenian's aspirated letters are *voiceless*, so they cannot take a breathy-voiced stop: փ for /bʰ/ would lose the voicing, which is the feature the Indic four-way series is built on. The voiced letter plus հ keeps both, and Armenian readers meet the sequence in Բհուտան. ř is ռժ on Czech's own description of it as a raised trill with friction."
+    },
+    {
+      "sounds": "the palatal stops and the Indic palatal affricate, which this corpus writes with the same symbol /c cʰ/",
+      "out": "ճ and չ",
+      "why": "`c` means two different things here and no single Armenian letter serves both. Georgian counted it: of the bare `c` a reader meets, about 71% are the Indic palatal affricate च (mr, pa, ml, ne, hi, gu, ur, kn) and 7% are Lao ຈ, which is also an affricate, against 12% that are a true palatal stop (cs, el, hu, tr) and 10% Vietnamese ch, which is between the two. So ճ is right on the great majority and one manner step off on the rest. **And Armenian gets the aspiration for free where Georgian cannot**: छ /cʰ/ is չ, so the Devanagari pair prints as two letters rather than one."
+    },
+    {
+      "sounds": "the pharyngeals /ħ ʕ/ and the glottals /ʔ ˀ/ (Arabic, Hebrew)",
+      "out": "խ, and nothing at all",
+      "why": "/ħ/ takes խ on Georgian's reading -- a voiceless fricative with audible friction beats հ, which is a weak glottal a reader will drop -- and voiced /ʕ/, the glottal stop and the Korean tense mark are written with nothing, because Armenian has no letter for any of them and an invented mark would print false certainty. This is the one block where Armenian is no better than the Latin tables."
+    },
+    {
+      "sounds": "the front rounded vowels /y ʏ ø œ/ (French, German, Turkish, Hungarian, Swedish, Finnish)",
+      "out": "յու and յո",
+      "why": "Armenian has no front rounded vowel and no umlaut device. The glide plus a back rounded vowel is the standard Armenian rendering and is attested on the names a reader already knows -- Մյունխեն, Ցյուրիխ, Գյոթե, Քյոլն -- which is exactly Georgian's იუ/იო and Russian's ю/ё in Armenian letters."
+    }
+  ],
+  "note": "**Armenian needs almost no slot conditioning, and the little it needs is not about consonants.** Every Brahmic table here spells a consonant three ways -- full letter, subjoined form, coda -- because the script writes it differently depending on what is around it; Hebrew and Arabic need positional forms; Amharic needs 196 generated `syllable_fixups` to fuse a bare consonant onto a vowel letter. The Armenian alphabet has none of that: it is bicameral but otherwise flat -- no vowel signs, no conjuncts, no positional forms, no combining marks -- and it writes a vowel with a full letter in every position, so one rule per phoneme is nearly the whole table and `syllable_fixups` is empty.\n\n**The eight conditioned rules are three facts.** Three of them are the palatal nasal and the palatal lateral, whose Armenian spelling ends in the glide letter յ: a digraph whose second letter is a glide cannot close a syllable (`coda`) and must not repeat its յ before a front vowel (`if_nucleus_head`). The other four are the Armenian reading rule that no other script in this corpus has: **word-initial ո is /vo/ and word-initial ե is /je/**, so `օ` and `է` take those slots under `when: [\"word_initial\", \"no_onset\"]` and the plain letters take every other. Without them ոստիկան would be read *vostikan* and երկու *yerku* -- which is correct for an Armenian *word* and wrong for a respelling, where the letters stand for sounds and nothing else.\n\n**And one is the offglide.** Armenian writes the second element of a diphthong with the glide letter յ -- այ, էյ, ոյ, ույ -- never with the vowel ի, so `after_out: \"ա ե է ի ո օ ու ը\"` asks whether this nucleus has already emitted a vowel letter and spells the tail յ when it has. That is Croatian's device in another alphabet and it is worth one rule rather than a hand-written list: it covers `aɪ`, `eɪ`, `ɛɪ`, `əɪ`, `oɪ` and the ten rarer ones at once. It has to be written *before* the unconditioned rule for `ɪ`, because `createRespeller` sorts by IPA length and then by slot specificity and leaves an exact tie to file order -- the shadowing that cost the kana table 99 rows.",
+  "policy_note": "`max_onset` is 3, and Armenian earns it: the language opens words on three consonants (ստրուկ, սպրդել) and on clusters no Latin orthography here does (շնորհակալություն, գնացք, փրկարար), so onset maximisation cannot hand this reader a cluster they cannot pronounce -- which is the question `max_onset` exists to ask. Armenian's own answer to a cluster it will not open is an epenthetic ը rather than a resyllabification, and this table does not insert one; see `deviations`. `syllable_separator` is the hyphen, the corpus default and what thirty-five of the fifty tables use; Armenian has no native syllable-division mark, and the hyphen is already inside the pack's own text (վայ-ֆայ) as a within-word joiner, so it is a mark this reader meets. `fixups` is `all` and the list is empty, which is not an oversight -- see the note on why this script needs none."
+}

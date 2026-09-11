@@ -1,0 +1,13 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+introductions.my-name-is,Nimeni on {}.,,nˈimeni ˈon {},"predicative nominative, so the slot needs no case",2,fi-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,Hauska tutustua.,,hˈauska tˈutustˌua,,2,fi-agent-v1;ipa=espeak
+introductions.what-is-your-name,Mikä sinun nimesi on?,,mˈikæ sˈinun nˈimesi ˈon,,2,fi-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,Matkustamme yhdessä.,,mˈatkustˌamme ˈyhdessæ,,2,fi-agent-v1;ipa=espeak
+introductions.this-is-my-friend,Tämä on ystäväni.,,tˈæmæ ˈon ˈystævˌæni,,2,fi-agent-v1;ipa=espeak
+introductions.i-am-from,Olen kotoisin täältä: {}.,,ˈoleŋ kˈotoisin tˈæːltæ {},"'I am from here: {}' -- kotoisin governs the elative (Suomesta), which a bare filler cannot supply",2,fi-agent-v1;ipa=espeak
+introductions.where-are-you-from,Mistä olet kotoisin?,,mˈistæ ˈolet kˈotoisin,,2,fi-agent-v1;ipa=espeak
+introductions.how-are-you,Mitä kuuluu?,,mˈitæ kˈuːluː,"the ordinary Finnish greeting-question, literally 'what is heard'",2,fi-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,Olen turisti.,,ˈolen tˈuristi,,2,fi-agent-v1;ipa=espeak
+introductions.this-is-my-husband-wife,Tämä on mieheni / vaimoni.,,tˈæmæ ˈon mˈieheni / vˈaimoni,,2,fi-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,Tämä on tyttäreni / poikani.,,tˈæmæ ˈon tˈyttærˌeni / pˈoikani,,2,fi-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,Matkustan yksin.,,mˈatkustan ˈyksin,,2,fi-agent-v1;ipa=espeak

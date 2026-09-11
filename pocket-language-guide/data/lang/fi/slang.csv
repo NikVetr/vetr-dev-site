@@ -1,0 +1,15 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+slang.thats-good,Kiva!,,kˈiva,,2,fi-agent-v1;ipa=espeak
+slang.thats-great,Mahtavaa!,,mˈahtavaː,,2,fi-agent-v1;ipa=espeak
+slang.i-love-it,Tykkään tästä tosi paljon!,,tˈykkæːn tˈæstæ tˈosi pˈaljon,,2,fi-agent-v1;ipa=espeak
+slang.thats-bad,Ei kaksista.,,ˈei kˈaksista,"idiomatic 'not great', literally 'not of two' -- a hedge about a thing, never about a person",2,fi-agent-v1;ipa=espeak
+slang.delicious,Tosi hyvää!,,tˈosi hˈyvæː,,2,fi-agent-v1;ipa=espeak
+slang.thats-pricey,Aika suolaista.,,ˈaika sˈuolaista,"'fairly salty' -- the Finnish idiom for a steep price, a comment and not an accusation",2,fi-agent-v1;ipa=espeak
+slang.exactly,Just noin!,,jˈust nˈoin,,2,fi-agent-v1;ipa=espeak
+slang.no-worries,Ei se mitään.,,ˈei sˈe mˈitæːn,,2,fi-agent-v1;ipa=espeak
+slang.youre-welcome,Ei kestä.,,ˈei kˈestæ,"the reply to thanks Finns actually use, literally 'it does not last'",2,fi-agent-v1;ipa=espeak
+slang.seriously,Eikä!,,ˈeikæ,,2,fi-agent-v1;ipa=espeak
+slang.im-good-thanks,"Kiitos, ei tarvitse.",,"kˈiːtos, ˈei tˈarvitse",,2,fi-agent-v1;ipa=espeak
+slang.lets-go,Mennään!,,mˈennæːn,,2,fi-agent-v1;ipa=espeak
+slang.cheers,Kippis!,,kˈippis,,2,fi-agent-v1;ipa=espeak
+slang.see-you,Nähdään!,,nˈæhdæːn,,2,fi-agent-v1;ipa=espeak

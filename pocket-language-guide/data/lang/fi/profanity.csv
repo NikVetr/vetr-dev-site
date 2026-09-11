@@ -1,0 +1,11 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+profanity.oh-my-god,Voi luoja!,Herranjumala!,vˈoi lˈuoja,"'oh Lord' -- an oath of shock, religious in form and profanity in no register",2,fi-agent-v1;ipa=espeak
+profanity.damn,Hitto!,Hitsi!,hˈitto,"hitto is a softened devil-word: the ordinary mild curse at a situation, never at a person. hitsi is milder still",2,fi-agent-v1;ipa=espeak
+profanity.expletive,Paska!,,pˈaska,"'shit' -- the everyday coarse expletive, aimed at a situation",2,fi-agent-v1;ipa=espeak
+profanity.strong-expletive,Vittu!,,vˈittu,"Finnish's strongest general expletive. Anatomical in origin, but as a bare interjection it is aimed at nothing and nobody, which is what keeps it inside the section's rule -- the words Finnish aims at a person (perkele in address, the mother formulas) are out of scope",2,fi-agent-v1;ipa=espeak
+profanity.intensifier,vitun,,vˈitun,"genitive of the word above, used attributively before a noun: vitun kylmä 'fucking cold'. Recognition only",2,fi-agent-v1;ipa=espeak
+profanity.frustration,Tämä on ihan syvältä.,,tˈæmæ ˈon ˈihan sˈyvæltæ,"idiomatic 'this is rubbish', literally 'this is completely from deep'; coarse but the one row here a traveller can safely say aloud",2,fi-agent-v1;ipa=espeak
+profanity.thats-rude,Tuo on epäkohteliasta.,,tˈuo ˈon ˈepækˌohteliˌasta,"the warning, not an insult back",2,fi-agent-v1;ipa=espeak
+profanity.excuse-my-language,Anteeksi kielenkäyttöni.,,ˈanteːksi kˈieleŋkˌæyttøni,'sorry for my language' -- polite in every register,2,fi-agent-v1;ipa=espeak
+profanity.strength-warning,"Nämä ovat tässä tunnistamista eikä käyttöä varten: sanan voima ei säily käännöksessä. Sana, joka näyttää tässä lievältä kirosanalta, voi olla viereisessä kielessä täysin mahdoton sanoa, ja kielen vahvin sana on usein juuri se, joka tästä osiosta jäi pois.",,,,2,fi-agent-v1
+profanity.japanese-register,"Japani ei tee tätä juuri lainkaan sanastolla. Halveksunta kulkee kieliopissa: töykeä toisen persoonan pronomini, paljas imperatiivi, lyhennetyt verbimuodot. Suuttumus on päätteessä eikä sanassa, jonka voisi etsiä sanakirjasta, ja yllä olevat rivit ovat lähes koko sanavarasto.",,,,2,fi-agent-v1

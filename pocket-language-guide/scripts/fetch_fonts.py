@@ -96,6 +96,51 @@ SOURCES = {
         f"{GFONTS}/notosansgeorgian/NotoSansGeorgian%5Bwdth,wght%5D.ttf",
     "NotoSerifGeorgian-var.ttf":
         f"{GFONTS}/notoserifgeorgian/NotoSerifGeorgian%5Bwdth,wght%5D.ttf",
+    # Armenian, and Noto is chosen with a **measured qualification** rather than
+    # simply chosen. Against HarfBuzz, `vendor/fontkit.esm.js` reproduces the glyph
+    # run, the glyph ids, the GPOS offsets and every advance **exactly** -- 0
+    # divergences over 2,496 real tokens, 586 real strings and a 67,696-string
+    # exhaustive cube, in all four candidate files and both shipped subsets -- and
+    # `armn` is absent from fontkit's script->shaper map, so both engines run the
+    # Default shaper, which is the one an alphabet with no marks and no reordering
+    # needs. Nor is that pass vacuous: `liga` changes the glyph run on **761 of
+    # 2,496** tokens, reaching 943 ligature glyphs (783 of them the ու digraph
+    # `uni05780582`, which has no codepoint at all), and `kern` moves an advance on
+    # 522 to 1,061 depending on the face. See tmp/hy/armenian.md section 1.
+    #
+    # **The qualification is 8 NULL MarkBasePos base anchors, and unlike Georgian's
+    # zero they are reachable.** They sit on the seven Armenian vowel letters Ա Ո Օ
+    # ՠ ա ո օ and on the dotted circle, for the one mark class that holds U+0326,
+    # U+0327 and U+0328 -- comma below, cedilla and ogonek. Shaped through this
+    # project's own fontkit, 21 of the 1,365 (Armenian letter x mark) pairs throw
+    # `Cannot read properties of null (reading 'xCoordinate')`, which in
+    # `core/measure.js` is a crash rather than a bad glyph. `ARMN_EXCLUDE` in
+    # subset_fonts.py drops exactly those three codepoints from the request, which
+    # prunes the lookup and takes the throw count to **0 in the shipped subset** at a
+    # cost of two glyphs; none of the three occurs anywhere in this corpus, in any
+    # reader table's charset or in any pack's `ipa` column. Measured on the subset
+    # rather than on the donor, per Lao's rule.
+    #
+    # **The variable files, not the hinted statics**, which is Georgian's finding
+    # reproduced exactly: `NotoSansArmenian-Regular.ttf` from notofonts.github.io has
+    # a 105-codepoint cmap with **2 of the 95 ASCII codepoints**, where the Google
+    # Fonts variable has 430 with all 95, 84 of Latin-1, `·` and `—`. The pack quotes
+    # `Wi-Fi`, `WC`, `QR կոդով`, `eSIM`, `SIM քարտ`, `Tax Free` and
+    # `B2 · BPK · bakso`, so the static would have printed boxes. The statics also
+    # hold **zero** NULL anchors, which makes them the tempting choice and the wrong
+    # one -- the ASCII gap is unconditional where the crash is avoidable.
+    #
+    # **The serif is fetched and not shipped**, which is worth keeping rather than
+    # dropping the entry: it is the file the legibility measurement in
+    # subset_fonts.py's `FACES` comment was taken on, and re-running that
+    # measurement needs the donor. Noto Serif Armenian shapes and positions
+    # identically to the sans and holds the same NULL anchors, so the refusal is
+    # legibility at the floor -- դ/ղ and գ/զ differ only by a foot on one stem and
+    # XOR at 0.057-0.060 at 4.4pt against the sans's 0.140, which is Thai's level.
+    "NotoSansArmenian-var.ttf":
+        f"{GFONTS}/notosansarmenian/NotoSansArmenian%5Bwdth,wght%5D.ttf",
+    "NotoSerifArmenian-var.ttf":
+        f"{GFONTS}/notoserifarmenian/NotoSerifArmenian%5Bwdth,wght%5D.ttf",
     # Lao, and the choice is Phetsarath rather than a Noto face -- the only
     # candidate on which **HarfBuzz and this project's fontkit produce the same
     # glyph run**. fontkit has no Lao shaper (`lao ` is absent from its

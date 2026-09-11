@@ -8,6 +8,7 @@ am,el,,girīkinnya,ɡɨrikɨɲːa
 am,en,,ingilīzinnya,ʔɨnɡɨlizɨɲːa
 am,es,,sipanīsh,sɨpaniʃ
 am,fa,,pershīyannya,pərʃijaɲːa
+am,fi,,fīnlandinnya,
 am,fil,,fīlīpīninnya,filipinɨɲːa
 am,fr,,ferensayinnya,fərənsajɨɲːa
 am,gu,,gujartīnnya,ɡudʒartiɲːa
@@ -16,6 +17,7 @@ am,he,,ʽibraystʼ,ʔɨbrajstʼ
 am,hi,,hindinnya,hɨndɨɲːa
 am,hr,,kroshiyannya,kroʃɨjaɲːa
 am,hu,,hāngarīnnya,hanɡariɲːa
+am,hy,,armēnnya,
 am,id,,īndonēzhyannya,ʔindoneʒjaɲːa
 am,it,,tʼalīyaninnya,tʼalijanɨɲːa
 am,ja,,japaninnya,dʒapanɨɲːa
@@ -55,6 +57,7 @@ ar,el,,al-yūnānīyah,ʔaljˌuːnaːnˈijjah
 ar,en,,al-injilīzīyah,ʔalʔˌinɡliˈizijˌah
 ar,es,,al-isbānīyah,ʔalʔsbaːnˈijjah
 ar,fa,,al-fārisīyah,ʔalfˌaːɹisˈijjah
+ar,fi,,al-finlandīyah,
 ar,fil,,al-filibbīnīyah,ʔalflbˈiːnaijjah
 ar,fr,,al-faransīyah,ʔalfrnsˈijjah
 ar,gu,,al-ghūjārātīyah,ʔalɣˌuːdʒaːɹaːtˈijjah
@@ -63,6 +66,7 @@ ar,he,,al-ʿibrīyah,ʔalʕabɹˈijjah
 ar,hi,,al-hindīyah,ʔalhindˈijjah
 ar,hr,,al-Kurwātīyah,ʔalkˌirwaːtˈijjah
 ar,hu,,al-hunghārīyah,ʔalhnɣaːɹˈijjah
+ar,hy,,al-Armanīyah,
 ar,id,,al-indūnīsīyah,ʔalʔndˌuːniːsˈijjah
 ar,it,,al-īṭālīyah,ʔalʔˌiːt̪aːlˈijjah
 ar,ja,,al-yābānīyah,ʔaljˌaːbaːnˈijjah
@@ -103,6 +107,7 @@ bn,el,,grika,ɡɾˈik
 bn,en,,iṁreji,ˈiŋɾeɟˌi
 bn,es,,spyāniśa,ʃpˈæniʃ
 bn,fa,,phārsi,fˈarʃi
+bn,fi,,phiniśa,
 bn,fil,,philipinō,fˈilipˌino
 bn,fr,,pharāsi,fˈɔɾaʃˌi
 bn,gu,,gujarāṭi,ɡˈuɟɔɾˌaʈi
@@ -111,6 +116,7 @@ bn,he,,hibru,hˈibɾu
 bn,hi,,hindi,hˈindi
 bn,hr,,krōẏēśīẏa,kɾˈoeʃˌij
 bn,hu,,hāṅgerīẏa,hˈaŋɡeɾˌij
+bn,hy,,ārmēniẏa,
 bn,id,,indoneśīẏa,ˈindonˌeʃij
 bn,it,,itālīẏa,ˈitalˌij
 bn,ja,,jāpāni,ɟˈapanˌi
@@ -151,6 +157,7 @@ cs,el,řecky,,r̝ˈetski
 cs,en,anglicky,,ˈaŋɡlitski
 cs,es,španělsky,,ʃpˈaɲelski
 cs,fa,persky,,pˈerski
+cs,fi,finsky,,
 cs,fil,filipínsky,,fˈilipˌiːnski
 cs,fr,francouzsky,,frˈantsoʊsski
 cs,gu,gudžarátsky,,ɡˈudʒarˌaːtski
@@ -159,6 +166,7 @@ cs,he,hebrejsky,,hˈebreɪski
 cs,hi,hindsky,,hˈintski
 cs,hr,chorvatsky,,xˈorvatski
 cs,hu,maďarsky,,mˈaɟarski
+cs,hy,arménsky,,
 cs,id,indonésky,,ˈindonˌeːski
 cs,it,italsky,,ˈitalski
 cs,ja,japonsky,,jˈaponski
@@ -199,6 +207,7 @@ de,el,,,ɡɾˈiːçɪʃ
 de,en,,,ˈɛŋlɪʃ
 de,es,,,ʃpˈɑnɪʃ
 de,fa,,,pˈɛɾzɪʃ
+de,fi,,,
 de,fil,,,fˌiːliːpˈiːnoː
 de,fr,,,frantsˈøːzɪʃ
 de,gu,,,ɡˈuːjarˌɑtiː
@@ -207,6 +216,7 @@ de,he,,,hɛbɾˈɛːɪʃ
 de,hi,,,hˈɪndiː
 de,hr,,,kɾoːˈɑːtɪʃ
 de,hu,,,ˈʊnɡˌɑrɪʃ
+de,hy,,,
 de,id,,,ˌɪndoːnˈeːzɪʃ
 de,it,,,ˌiːtalɪˈeːnɪʃ
 de,ja,,,japˈɑnɪʃ
@@ -247,6 +257,7 @@ el,el,Ελληνικά,Ellinika,ˌelinikˈa
 el,en,,Anglika,ˌaŋɡlikˈa
 el,es,,Ispanika,ˌispanikˈa
 el,fa,,Persika,pˌeɾsikˈa
+el,fi,,Finlandika,
 el,fil,,Filippiniká,fˌilipˌinikˈa
 el,fr,,Gallika,ɣˌalikˈa
 el,gu,,Gkoutzaratika,ɡˌudzaɾˌatikˈa
@@ -255,6 +266,7 @@ el,he,,Evraika,ˌevɾaɪkˈa
 el,hi,,Chinti,çˈidi
 el,hr,,Kroatika,kɾˌoatikˈa
 el,hu,,Oungrika,ˌuŋɡɾikˈa
+el,hy,,Armenika,
 el,id,,Indonisiaka,ˌinðonˌisjakˈa
 el,it,,Italika,ˌitalikˈa
 el,ja,,Iaponika,ˌiapˌonikˈa
@@ -295,6 +307,7 @@ en,el,,,ɡɹˈiːk
 en,en,English,,ˈɪŋɡlɪʃ
 en,es,,,spˈænɪʃ
 en,fa,,,pˈɜːʒən
+en,fi,,,
 en,fil,,,fˌɪlɪpˈiːnoʊ
 en,fr,,,fɹˈɛntʃ
 en,gu,,,ɡˌʊdʒɐɹˈɑːɾi
@@ -303,6 +316,7 @@ en,he,,,hˈiːbɹuː
 en,hi,,,hˈɪndi
 en,hr,,,kɹoʊˈeɪʃən
 en,hu,,,hʌŋɡˈɛɹiən
+en,hy,,,
 en,id,,,ɪndoʊnˈiːʒən
 en,it,,,ɪtˈæliən
 en,ja,,,dʒˌæpənˈiːz
@@ -343,6 +357,7 @@ es,el,,,ɡɾiˈeɡo
 es,en,,,iŋɡlˈes
 es,es,español,,ˌespaɲˈol
 es,fa,,,pˈeɾsa
+es,fi,,,
 es,fil,,,fˌilipˈino
 es,fr,,,fɾansˈes
 es,gu,,,ɡˌuʝaɾatˈi
@@ -351,6 +366,7 @@ es,he,,,ebɾˈeo
 es,hi,,,ˈindi
 es,hr,,,kɾoˈata
 es,hu,,,ˈuŋɡaɾo
+es,hy,,,
 es,id,,,ˌindonˈesjo
 es,it,,,ˌitaljˈano
 es,ja,,,xˌaponˈes
@@ -391,6 +407,7 @@ fa,el,,yunāni,junɑni
 fa,en,,engelisi,enɡelisi
 fa,es,,espāniyāyi,espɑnijɑi
 fa,fa,,fārsi,fɑrsi
+fa,fi,,fanlāndi,
 fa,fil,,fīlīpīnī,filipini
 fa,fr,,farānsavi,farɑnsavi
 fa,gu,,gojarāti,ɡodʒarɑti
@@ -399,6 +416,7 @@ fa,he,عِبری,ebri,ʔebri
 fa,hi,,hendi,hendi
 fa,hr,,korvāt,krovɑt
 fa,hu,,majāri,madʒɑri
+fa,hy,,armanī,
 fa,id,,andoneziyāyi,andonezijɑi
 fa,it,,itāliyāyi,itɑliɑi
 fa,ja,,zhāponi,ʒɑponi
@@ -430,6 +448,56 @@ fa,ur,,urdu,ordu
 fa,vi,,viyetnāmi,vijetnɑmi
 fa,yo,,yorubāyi,jurubɑi
 fa,zh-Hans,,chini,tʃini
+fi,am,amharan,,ˈamharan
+fi,ar,arabian,,ˈarabian
+fi,bn,bengalin,,bˈeŋŋalin
+fi,cs,tšekin,,tʃˈekin
+fi,de,saksan,,sˈaksan
+fi,el,kreikan,,krˈeikan
+fi,en,englannin,,ˈeŋlannin
+fi,es,espanjan,,ˈespanjan
+fi,fa,persian,,pˈersian
+fi,fi,suomen,,sˈuomen
+fi,fil,filipinon,,fˈilipinon
+fi,fr,ranskan,,rˈanskan
+fi,gu,gudžaratin,,ɡˈudʒaratin
+fi,ha,hausan,,hˈausan
+fi,he,heprean,,hˈeprean
+fi,hi,hindin,,hˈindin
+fi,hr,kroatian,,krˈoatian
+fi,hu,unkarin,,ˈuŋkarin
+fi,hy,armenian,,
+fi,id,indonesian,,ˈindonˌesian
+fi,it,italian,,ˈitalian
+fi,ja,japanin,,jˈapanin
+fi,ka,georgian,,ɡˈeorɡian
+fi,km,khmerin,,khmˈerin
+fi,kn,kannadan,,kˈannadan
+fi,ko,korean,,kˈorean
+fi,lo,laon,,lˈaon
+fi,ml,malajalamin,,mˈalajˌalamin
+fi,mr,marathin,,mˈarathin
+fi,ms,malaijin,,mˈalaijin
+fi,ne,nepalin,,nˈepalin
+fi,nl,hollannin,,hˈollannin
+fi,pa,pandžabin,,pˈandʒabin
+fi,pl,puolan,,pˈuolan
+fi,pt,portugalin,,pˈortuɡalin
+fi,qya,quenyan,,kˈuenyan
+fi,ro,romanian,,rˈomanian
+fi,ru,venäjän,,vˈenæjæn
+fi,sv,ruotsin,,rˈuotsin
+fi,sw,swahilin,,svˈahilin
+fi,ta,tamilin,,tˈamilin
+fi,te,telugun,,tˈeluɡun
+fi,th,thain,,thˈain
+fi,tlh,klingonin,,klˈiŋŋonin
+fi,tr,turkin,,tˈurkin
+fi,uk,ukrainan,,ˈukrainan
+fi,ur,urdun,,ˈurdun
+fi,vi,vietnamin,,vˈietnamin
+fi,yo,joruban,,jˈoruban
+fi,zh-Hans,kiinan,,kˈiːnan
 fil,am,,,amhaɾik
 fil,ar,Arabe,,aɾabɛ
 fil,bn,,,baŋla
@@ -439,6 +507,7 @@ fil,el,Griyego,,ɡɾijɛɡo
 fil,en,,,iŋlɛs
 fil,es,Espanyol,,ɛspaɲol
 fil,fa,Persiyano,,pɛɾsijano
+fil,fi,,,
 fil,fil,Filipino,,filipino
 fil,fr,Pranses,,pɾansɛs
 fil,gu,,,ɡudʒaɾati
@@ -447,6 +516,7 @@ fil,he,Hebreo,,hɛbɾɛo
 fil,hi,,,hindi
 fil,hr,Kroasyano,,kɾoasjano
 fil,hu,Hungaro,,huŋaɾo
+fil,hy,Armeniano,,
 fil,id,Indonesiyo,,indonɛsijo
 fil,it,Italyano,,italjano
 fil,ja,Hapon,,hapon
@@ -487,6 +557,7 @@ fr,el,,,ɡʁˈɛk
 fr,en,,,ɑ̃ɡlˈɛ
 fr,es,,,ɛspanjˈɔl
 fr,fa,,,pɛʁsˈɑ̃
+fr,fi,,,
 fr,fil,,,filipinˈo
 fr,fr,français,,fʁɑ̃sˈɛ
 fr,gu,,,ɡudʒaʁatˈi
@@ -495,6 +566,7 @@ fr,he,,,ebʁˈø
 fr,hi,,,indˈi
 fr,hr,,,kʁɔˈat
 fr,hu,,,ɔ̃ɡʁwˈa
+fr,hy,,,
 fr,id,,,ɛ̃donezjˈɛ̃
 fr,it,,,italjˈɛ̃
 fr,ja,,,ʒaponˈɛ
@@ -535,6 +607,7 @@ gu,el,,grīk,ɡɾiːk
 gu,en,,aṁgrējī,ʌŋɡɾeːɟi
 gu,es,,spēniś,speːnɪʃ
 gu,fa,,phārasī,pʰaːɾʌsi
+gu,fi,,phiniś,
 gu,fil,,philipinō,pʰɪlɪpɪnoː
 gu,fr,,phrēnc,pʰɾeːnc
 gu,gu,,gujarātī,ɡuɟɾaːti
@@ -543,6 +616,7 @@ gu,he,,hībru,hiːbɾu
 gu,hi,,hindī,hɪndi
 gu,hr,,krōēśiyan,kɾoːeːʃɪjən
 gu,hu,,haṁgēriyan,həŋɡeːɾɪjən
+gu,hy,,ārmēniyana,
 gu,id,,inḍōnēśiyan,ɪnɖoːneːʃɪjən
 gu,it,,iṭāliyan,ɪʈaːlɪjən
 gu,ja,,jāpānījh,ɟaːpaːniːz
@@ -583,6 +657,7 @@ ha,el,,,ɡirkantʃi
 ha,en,,,turantʃi
 ha,es,,,sifanijantʃi
 ha,fa,,,farisantʃi
+ha,fi,,,
 ha,fil,,,dan filifin
 ha,fr,,,faransantʃi
 ha,gu,,,ɡudʒarati
@@ -591,6 +666,7 @@ ha,he,,,ibranantʃi
 ha,hi,,,harʃen hindi
 ha,hr,,,kuroʃijan
 ha,hu,,,harʃen hunɡari
+ha,hy,,,
 ha,id,,,harʃen indunusija
 ha,it,,,italijantʃi
 ha,ja,,,dʒapanantʃi
@@ -631,6 +707,7 @@ he,el,,yevanit,jevanˈit
 he,en,,anglit,anɡlˈit
 he,es,,sefaradit,sefaʁadˈit
 he,fa,,parsit,paʁsˈit
+he,fi,,finit,
 he,fil,,filipinit,filipinˈit
 he,fr,,tsarfatit,tsaʁfatˈit
 he,gu,,gojarti,ɡojaʁtˈi
@@ -639,6 +716,7 @@ he,he,,‘ivrit,ivʁˈit
 he,hi,,híndi,hˈindi
 he,hr,,kroatit,kʁoatˈit
 he,hu,,hungarit,hunɡaʁˈit
+he,hy,,armenit,
 he,id,,indonezit,indonezˈit
 he,it,,italqit,italkˈit
 he,ja,,yapanit,japanˈit
@@ -678,6 +756,7 @@ hi,el,,yūnānī,juːnˈaːni
 hi,en,,aṁgrezī,ʌŋɡɾˈeːzi
 hi,es,,speniś,spˈeːnɪʃ
 hi,fa,,fārsī,fˈaːɾsˌi
+hi,fi,,finiś,
 hi,fil,,filipīno,fˌɪlɪpˈiːnoː
 hi,fr,,freṁc,fɾˈẽːc
 hi,gu,,gujarātī,ɡˌʊɟɾˈaːti
@@ -686,6 +765,7 @@ hi,he,,hibrū,hˈɪbɾuː
 hi,hi,हिन्दी,hindī,hˈɪndi
 hi,hr,,kroeśiyāī,kɾˌoːeːʃɪjˈaːi
 hi,hu,,haṁgeriyāī,hˌəŋɡeːɾɪjˈaːi
+hi,hy,,ārmeniyāī,
 hi,id,,iṁḍoneśiyāī,ˌĩɖoːnˌeːʃɪjˈaːi
 hi,it,,itālvī,ɪtˈaːlʋˌi
 hi,ja,,jāpānī,ɟaːpˈaːni
@@ -726,6 +806,7 @@ hr,el,,,ɡrtʃki
 hr,en,,,enɡleski
 hr,es,,,ʃpaɲolski
 hr,fa,,,perzijski
+hr,fi,,,
 hr,fil,,,filipinski
 hr,fr,,,frantsuski
 hr,gu,,,ɡudʒaratski
@@ -734,6 +815,7 @@ hr,he,,,xebrejski
 hr,hi,,,xˈintski
 hr,hr,,,xrvaːtski
 hr,hu,,,madʑarski
+hr,hy,,,
 hr,id,,,indonezijski
 hr,it,,,talijanski
 hr,ja,,,japanski
@@ -774,6 +856,7 @@ hu,el,,,ɡˈørøɡ
 hu,en,,,ˈɑnɡol
 hu,es,,,ʃpˈɑɲol
 hu,fa,,,pˈɛrʒɑ
+hu,fi,,,
 hu,fil,,,fˈilippiːnoː
 hu,fr,,,frˈɑntsiɑ
 hu,gu,,,ɡˈudʒɑraːti
@@ -782,6 +865,7 @@ hu,he,,,hˈeːbɛr
 hu,hi,,,hˈindi
 hu,hr,,,hˈorvaːt
 hu,hu,magyar,,mˈɑɟɑr
+hu,hy,,,
 hu,id,,,ˈindoneːz
 hu,it,,,ˈolɑs
 hu,ja,,,jˈɑpaːn
@@ -813,6 +897,56 @@ hu,ur,,,ˈurdu
 hu,vi,,,vˈiɛtnaːmi
 hu,yo,,,jˈorubɑ
 hu,zh-Hans,,,kˈiːnɑi
+hy,am,,amhareren,ˌamhaɾeɾˈen
+hy,ar,,araberen,ˌaɾabeɾˈen
+hy,bn,,bengaleren,bˌenɡaleɾˈen
+hy,cs,,ch’ekheren,tʃʰˌexeɾˈen
+hy,de,,germaneren,ɡˌermaneɾˈen
+hy,el,,hunaren,hˌunaɾˈen
+hy,en,,angleren,ˌanɡleɾˈen
+hy,es,,ispaneren,ˌispaneɾˈen
+hy,fa,,parskeren,pˌarskeɾˈen
+hy,fi,,finneren,fˌinneɾˈen
+hy,fil,,filipineren,fˌilipˌineɾˈen
+hy,fr,,franseren,fəɾˌanseɾˈen
+hy,gu,,gujarat’i,ɡˌudʒaɾatʰˈi
+hy,ha,,hausa,hˌausˈa
+hy,he,,yebrayeren,jˌebɾajeɾˈen
+hy,hi,,hindi,hindˈi
+hy,hr,,khorvat’eren,xˌorvatʰeɾˈen
+hy,hu,,hungareren,hˌunɡaɾeɾˈen
+hy,hy,,hayeren,hˌajeɾˈen
+hy,id,,indonezeren,ˌindonˌezeɾˈen
+hy,it,,italeren,ˌitaleɾˈen
+hy,ja,,chaponeren,tʃˌaponeɾˈen
+hy,ka,,vrats’eren,vəɾˌatsʰeɾˈen
+hy,km,,k’mereren,kʰəmˌeɾeɾˈen
+hy,kn,,kannada,kˌannadˈa
+hy,ko,,koreyeren,kˌoɾeeɾˈen
+hy,lo,,laoseren,lˌaoseɾˈen
+hy,ml,,malayalam,mˌalajalˈam
+hy,mr,,marat’i,mˌaɾatʰˈi
+hy,ms,,malayeren,mˌalajeɾˈen
+hy,ne,,nepaleren,nˌepaleɾˈen
+hy,nl,,holanderen,hˌolandeɾˈen
+hy,pa,,p’enjaberen,pʰˌendʒabeɾˈen
+hy,pl,,leheren,lˌeheɾˈen
+hy,pt,,portugaleren,pˌortuɡˌaleɾˈen
+hy,qya,,,kˈajə
+hy,ro,,rrumineren,rˌumineɾˈen
+hy,ru,,rruseren,rˌuseɾˈen
+hy,sv,,shvederen,ʃəvˌedeɾˈen
+hy,sw,,suahili,svˌahilˈi
+hy,ta,,t’amileren,tʰˌamileɾˈen
+hy,te,,t’elugu,tʰˌeluɡˈu
+hy,th,,t’ayeren,tʰˌajeɾˈen
+hy,tlh,,klingon,kəlinɡˈon
+hy,tr,,t’urk’eren,tʰˌurkʰeɾˈen
+hy,uk,,ukraineren,ˌukɾaˌineɾˈen
+hy,ur,,urdu,urdˈu
+hy,vi,,viyetnameren,vˌietnˌameɾˈen
+hy,yo,,yoruba,jˌoɾubˈa
+hy,zh-Hans,,ch’inaren,tʃʰˌinaɾˈen
 id,am,,,amhˈarik
 id,ar,,,ˈarab
 id,bn,,,bəŋˈali
@@ -822,6 +956,7 @@ id,el,,,junˈani
 id,en,,,ˈiŋɡris
 id,es,,,spˈaɲol
 id,fa,,,pərsˈia
+id,fi,,,
 id,fil,,,fˌilipˈino
 id,fr,,,prˈantʃis
 id,gu,,,ɡudʒˈarat
@@ -830,6 +965,7 @@ id,he,,,ibrˈani
 id,hi,,,hˈindi
 id,hr,,,krˌoasˈia
 id,hu,,,hˌuŋarˈia
+id,hy,,,
 id,id,Indonesia,,ˌindonəsˈia
 id,it,,,ˌitalˈia
 id,ja,,,dʒˈɛpaŋ
@@ -870,6 +1006,7 @@ it,el,,,ɡrˈɛko
 it,en,,,iŋɡlˈeze
 it,es,,,spaɲˈɔlo
 it,fa,,,persjˈano
+it,fi,,,
 it,fil,,,filippˈino
 it,fr,,,frantʃˈeze
 it,gu,,,ɡʊjaɾˈatɪ
@@ -878,6 +1015,7 @@ it,he,,,ebrˈaɪko
 it,hi,,,ˈindɪ
 it,hr,,,kroˈato
 it,hu,,,ʊŋɡerˈeze
+it,hy,,,
 it,id,,,indonezjˈano
 it,it,italiano,,italiˈano
 it,ja,,,dʒapponˈeze
@@ -918,6 +1056,7 @@ ja,el,,girishago,ɡiɾiɕaɡo
 ja,en,,eigo,eiɡo
 ja,es,,supeingo,sɯpeiɴɡo
 ja,fa,,perushiago,peɾɯɕiaɡo
+ja,fi,,finrandogo,
 ja,fil,,firipinogo,ɸiɾipinoɡo
 ja,fr,,furansugo,ɸɯɾaɴsɯɡo
 ja,gu,,gujarātogo,ɡɯdʑaɾaːtoɡo
@@ -926,6 +1065,7 @@ ja,he,,heburaigo,hebɯɾaiɡo
 ja,hi,,hindīgo,çiɴdiːɡo
 ja,hr,,kuroachiago,kɯɾoatɕiaɡo
 ja,hu,,hangarīgo,haɴɡaɾiːɡo
+ja,hy,,arumeniago,
 ja,id,,indoneshiago,iɴdoneɕiaɡo
 ja,it,,itariago,itaɾiaɡo
 ja,ja,日本語,nihongo,ɲihoɴɡo
@@ -965,6 +1105,7 @@ ka,el,,berdznuli,berdznuli
 ka,en,,inglisuri,inɡlisuri
 ka,es,,espanuri,espʼanuri
 ka,fa,,sparsuli,spʼarsuli
+ka,fi,,pinuri,
 ka,fil,,pilipinuri,pʰilipʼinuri
 ka,fr,,pranguli,pʰranɡuli
 ka,gu,,gujarati,ɡudʒaratʰi
@@ -973,6 +1114,7 @@ ka,he,,ebrauli,ebrauli
 ka,hi,,hindi,hindi
 ka,hr,,khorvatuli,xorvatʼuli
 ka,hu,,ungruli,unɡruli
+ka,hy,,somkhuri,
 ka,id,,indoneziuri,indoneziuri
 ka,it,,italiuri,itʼaliuri
 ka,ja,,iaponuri,iapʼonuri
@@ -1013,6 +1155,7 @@ kn,el,,grīk,ɡriːk
 kn,en,,iṁgliṣ,iŋɡliʂ
 kn,es,,spyāniṣ,spjaːniʂ
 kn,fa,,parśiyan,parʃijan
+kn,fi,,phinniś,
 kn,fil,,philipino,pʰilipino
 kn,fr,,phreṁc,pʰreɲc
 kn,gu,,gujarāti,ɡuɟaraːti
@@ -1021,6 +1164,7 @@ kn,he,,hībrū,hiːbruː
 kn,hi,,hiṁdi,hindi
 kn,hr,,kroyēśiyan,krojeːʃijan
 kn,hu,,haṁgēriyan,haŋɡeːrijan
+kn,hy,,armēniyan,
 kn,id,,iṁḍōnēśiyan,iɳɖoːneːʃijan
 kn,it,,iṭāliyan,iʈaːlijan
 kn,ja,,jāpanīs,ɟaːpaniːs
@@ -1061,6 +1205,7 @@ ko,el,,geuriseu-eo,kɯɾisɯʌ
 ko,en,,yeongeo,jʌŋʌ
 ko,es,,seupeineo,sɯpʰeinʌ
 ko,fa,,pereusia-eo,pʰeɾɯsiaʌ
+ko,fi,,pillandeu-eo,
 ko,fil,,pillipin-eo,pʰillipʰinʌ
 ko,fr,,peurangseu-eo,pʰɯɾaŋsɯʌ
 ko,gu,,gujarateueo,kudʑaɾatʰɯʌ
@@ -1069,6 +1214,7 @@ ko,he,,hibeurieo,hibɯɾiʌ
 ko,hi,,hindi-eo,hindiʌ
 ko,hr,,keuroatiaeo,kʰɯɾoatʰiaʌ
 ko,hu,,heonggari-eo,hʌŋɡaɾiʌ
+ko,hy,,areumeniaeo,
 ko,id,,indonesia-eo,indonesiaʌ
 ko,it,,itallia-eo,itʰalliaʌ
 ko,ja,,ilboneo,ilbonʌ
@@ -1108,6 +1254,7 @@ lo,el,,krik,kriːk˧˩
 lo,en,,angkit,ʔaŋ˩kit˧˥
 lo,es,,sapènnis,saʔ˧˥pɛːn˩nit˧
 lo,fa,,peuxian,pɤː˩sia̯n˧˥
+lo,fi,,finnis,
 lo,fil,,filipinô,fiː˧˥liʔ˧piː˩noː˧˥
 lo,fr,,frang,fraŋ˧
 lo,gu,,koucharati,kuː˩caː˩raː˧˥tiʔ˧˥
@@ -1116,6 +1263,7 @@ lo,he,,hipriou,hiːp˥˨riw˧˥
 lo,hi,,hindi,hin˧˥diʔ˧˥
 lo,hr,,khōrēthian,kʰroː˧˥ʔeː˩tʰia̯n˧˥
 lo,hu,,hangkarian,haŋ˧˥kaː˩ria̯n˧˥
+lo,hy,,amenyan,
 lo,id,,indônéxian,ʔin˩doː˩neː˧˥sia̯n˧˥
 lo,it,,italian,ʔiʔ˧˥taː˩lia̯n˧˥
 lo,ja,,gnipoun,ɲiː˧pun˧
@@ -1156,6 +1304,7 @@ ml,el,,grīkkŭ,ɡɾiːkkɨ
 ml,en,,iṁglīṣŭ,imɡliːʂɨ
 ml,es,,sŭ‌pāniṣŭ,sbaːniʂɨ
 ml,fa,,pērṣyan,peːɾʂjan
+ml,fi,,phinniṣŭ,
 ml,fil,,philippinō,pʰilippinoː
 ml,fr,,phrañcŭ,pʰɾaɲcɨ
 ml,gu,,gujaṟātti,ɡuɟaraːtti
@@ -1164,6 +1313,7 @@ ml,he,,hībru,hiːbɾu
 ml,hi,,hindi,hindi
 ml,hr,,kroyēṣyan,kɾojeːʂjan
 ml,hu,,haṁgēṟiyan,hamɡeːrijan
+ml,hy,,armēniyan,
 ml,id,,intōnēṣyan,indoːneːʂjan
 ml,it,,iṟṟāliyan,iʈʈaːlijan
 ml,ja,,jāppanīsŭ,ɟaːppaniːsɨ
@@ -1204,6 +1354,7 @@ mr,el,,grīka,ɡɾˈiːk
 mr,en,,iṁgrajī,ˈĩɡɾəɟˌii
 mr,es,,spêniśa,spˈɛnɪʃ
 mr,fa,,phārasī,pʰˈaːɾsˌi
+mr,fi,,phiniśa,
 mr,fil,,philipinō,pʰˈɪlɪpˌɪnoː
 mr,fr,,phrēṁca,pʰɾˈẽːc
 mr,gu,,gujarātī,ɡˌʊzɾˈaːti
@@ -1212,6 +1363,7 @@ mr,he,,hibrū,hˈɪbɾuː
 mr,hi,,hiṁdī,hˈĩdi
 mr,hr,,kroēśiyana,kɾoːˈeːʃɪjˌən
 mr,hu,,haṁgēriyana,həŋɡˈeːɾɪjˌən
+mr,hy,,armeniyana,
 mr,id,,iṁḍōnēśiyana,ˌĩɖoːnˈeːʃɪjˌən
 mr,it,,iṭāliyana,ɪʈˈaːlɪjˌən
 mr,ja,,japānī,zəpˈaːni
@@ -1252,6 +1404,7 @@ ms,el,,,ɡrˈɛəʔ
 ms,en,,,iŋɡˈəres
 ms,es,,,səpˈaɲol
 ms,fa,,,pˈarsi
+ms,fi,,,
 ms,fil,,,fˌilipˈinə
 ms,fr,,,pərˈantʃes
 ms,gu,,,ɡudʒˈarat
@@ -1260,6 +1413,7 @@ ms,he,,,ibrˈani
 ms,hi,,,hˈindi
 ms,hr,,,tʃrˌoatˈiə
 ms,hu,,,hˈuŋarj
+ms,hy,,,
 ms,id,,,ˌindonˈeɪsiə
 ms,it,,,itˈali
 ms,ja,,,dʒˈəpon
@@ -1300,6 +1454,7 @@ ne,el,,grīka,ɡɾˈɪːkə
 ne,en,,aṅgrējī,əŋɡɾˈeːɟi
 ne,es,,spēnī,spˈeːni
 ne,fa,,phārasi,pʰˈaːɾəsˌiː
+ne,fi,,phinisa,
 ne,fil,,philipini,pʰˈɪlɪpˌɪni
 ne,fr,,phrānsēli,pʰɾˈaːnseːlˌiː
 ne,gu,,gujarātī,ɡˌuɟəɾˈaːti
@@ -1308,6 +1463,7 @@ ne,he,,hibru,hˈɪbɾu
 ne,hi,,hindī,hˈɪndi
 ne,hr,,kroyasiyālī,kɾˌoːjəsɪjˈaːli
 ne,hu,,haṅgēriyālī,hˌəŋɡeːɾɪjˈaːli
+ne,hy,,ārmeniyālī,
 ne,id,,inḍōnēsiyālī,ˌɪnɖoːnˌeːsɪjˈaːli
 ne,it,,iṭālēlī,ˌɪʈaːlˈeːli
 ne,ja,,jāpānī,ɟaːpˈaːni
@@ -1348,6 +1504,7 @@ nl,el,,,ɣrˈiks
 nl,en,,,ˈɛŋəls
 nl,es,,,spˈaːns
 nl,fa,,,pˈɛrzis
+nl,fi,,,
 nl,fil,,,fˌilipˈɛɪns
 nl,fr,,,frˈɑns
 nl,gu,,,ɣˈyjaːrˌaːti
@@ -1356,6 +1513,7 @@ nl,he,,,hˈɛbreʊs
 nl,hi,,,hˈɪndi
 nl,hr,,,kroːˈaːtis
 nl,hu,,,hˈɔŋaːrs
+nl,hy,,,
 nl,id,,,ˌɪndoːnˈeːzis
 nl,it,,,ˌitaːliˈaːns
 nl,ja,,,jˈaːpɑns
@@ -1396,6 +1554,7 @@ pa,el,,yūnānī,junani
 pa,en,,aṁgarēzī,ʌŋɡəɾezi
 pa,es,,sapēnī,səpeni
 pa,fa,,fārasī,faɾəsi
+pa,fi,,phiniś,
 pa,fil,,philīpinō,pʰɪlipɪno
 pa,fr,,pharāṁsīsī,pʰəɾãsisi
 pa,gu,,gujarātī,ɡʊɟəɾati
@@ -1404,6 +1563,7 @@ pa,he,,hibarū,hɪbəɾu
 pa,hi,,hiṁdī,hɪndi
 pa,hr,,krōēśiāī,kɾoeʃɪai
 pa,hu,,haṁgarīāī,hənɡəɾiai
+pa,hy,,aramīnīāī,
 pa,id,,iṁḍōnēśīāī,ɪɳɖoneʃiai
 pa,it,,itālavī,ɪtaləʋi
 pa,ja,,japānī,ɟəpani
@@ -1444,6 +1604,7 @@ pl,el,po grecku,,pɔ ɡrˈɛtsku
 pl,en,po angielsku,,pɔ aŋɡʲˈɛlsku
 pl,es,po hiszpańsku,,pɔ xiʃpˈaɲsku
 pl,fa,po persku,,pɔ pˈɛrsku
+pl,fi,po fińsku,,
 pl,fil,po filipińsku,,pɔ fˌilipˈiɲsku
 pl,fr,po francusku,,pɔ frantsˈusku
 pl,gu,po gudżarati,,pɔ ɡˌudʒarˈatʲi
@@ -1452,6 +1613,7 @@ pl,he,po hebrajsku,,pɔ xɛbrˈajsku
 pl,hi,po hindi,,pɔ xˈindʲi
 pl,hr,po chorwacku,,pɔ xɔrvˈatsku
 pl,hu,po węgiersku,,pɔ vɛŋɡʲˈɛrsku
+pl,hy,po ormiańsku,,
 pl,id,po indonezyjsku,,pɔ ˌindɔnɛzˈɨjsku
 pl,it,po włosku,,pɔ vwˈɔsku
 pl,ja,po japońsku,,pɔ japˈɔɲsku
@@ -1492,6 +1654,7 @@ pt,el,,,ɡrˈeɡʊ
 pt,en,,,iŋɡlˈes
 pt,es,,,ˌespɐ̃ɲˈɔl
 pt,fa,,,pˈɛɾəsæ
+pt,fi,,,
 pt,fil,,,fˌilipˈinʊ
 pt,fr,,,frɐ̃ŋsˈes
 pt,gu,,,ɡˌuzeɾˈatʃy
@@ -1500,6 +1663,7 @@ pt,he,,,ˌebrˈaɪkʊ
 pt,hi,,,iŋdʒˈi
 pt,hr,,,krˌoˈatæ
 pt,hu,,,ˈũŋɡæɾʊ
+pt,hy,,,
 pt,id,,,ˌiŋdonˈɛzjʊ
 pt,it,,,ˌitaliˈɐ̃nʊ
 pt,ja,,,ʒˌaponˈes
@@ -1541,6 +1705,7 @@ ro,el,,,ɡrˈeakə
 ro,en,,,eŋɡlˈezə
 ro,es,,,spanjˈolə
 ro,fa,,,persˈanə
+ro,fi,,,
 ro,fil,,,fˌilipinˈezə
 ro,fr,,,frantʃˈezə
 ro,gu,,,ɡˌuʒaɾˈatʲ
@@ -1549,6 +1714,7 @@ ro,he,,,ebrˈaɪkə
 ro,hi,,,hˈindʲ
 ro,hr,,,krˈɔatə
 ro,hu,,,maɡjˈaɾə
+ro,hy,,,
 ro,id,,,ˌindonezjˈanə
 ro,it,,,ˌitaljˈanə
 ro,ja,,,ʒˌaponˈezə
@@ -1589,6 +1755,7 @@ ru,el,греческом,grecheskom,ɡrʲˈetʃʲiskʌm
 ru,en,английском,angliyskom,anɡɭʲˈijskʌm
 ru,es,испанском,ispanskom,ɪspˈɑnskʌm
 ru,fa,персидском,persidskom,pʲirsʲˈidskʌm
+ru,fi,финском,finskom,
 ru,fil,,filippinskiy,fʲiɭʲippʲˈinskʲij
 ru,fr,французском,frantsuzskom,frantsˈusskʌm
 ru,gu,гуджарати,gudzharati,ɡudʒˈɑrʌtʲɪ
@@ -1597,6 +1764,7 @@ ru,he,иврите,ivrite,ɪvrʲˈitʲi
 ru,hi,хинди,khindi,xˈindʲɪ
 ru,hr,хорватском,khorvatskom,xʌrvˈɑtskʌm
 ru,hu,венгерском,vengerskom,vʲinɡʲˈerskʌm
+ru,hy,армянском,armyanskom,
 ru,id,индонезийском,indoneziyskom,ɪndʌnʲˈeʑijskʌm
 ru,it,итальянском,italʼyanskom,ɪtaɭjˈjanskʌm
 ru,ja,японском,yaponskom,japˈonskʌm
@@ -1637,6 +1805,7 @@ sv,el,,,ɡrˈeːkɪskˌa
 sv,en,,,ˈɛŋəlskˌa
 sv,es,,,spˈanska
 sv,fa,,,pˈɛʂɪskˌa
+sv,fi,,,
 sv,fil,,,fˈiːlɪpˌɪnska
 sv,fr,,,frˈanska
 sv,gu,,,ɡˈʉjarˌɑːtiː
@@ -1645,6 +1814,7 @@ sv,he,,,hˈɛbrəˌɪska
 sv,hi,,,hˈɪndiː
 sv,hr,,,krˈuːatˌɪska
 sv,hu,,,ˈɵŋəʂkˌa
+sv,hy,,,
 sv,id,,,ˈɪndɔnəsˌɪska
 sv,it,,,ˈiːtalˌiːənskˌa
 sv,ja,,,jˈɑːpanskˌa
@@ -1685,6 +1855,7 @@ sw,el,,,kˌiɡirˈiki
 sw,en,,,kˌiiŋɡerˈeza
 sw,es,,,kˌihispanˈia
 sw,fa,,,kˌiaɟˈemi
+sw,fi,,,
 sw,fil,,,kˌifilipˈino
 sw,fr,,,kˌifarˈansa
 sw,gu,,,kˌiɡuɟarˈati
@@ -1693,6 +1864,7 @@ sw,he,,,kˌiebranˈia
 sw,hi,,,kihˈindi
 sw,hr,,,kˌikorasˈia
 sw,hu,,,kˌihuŋɡarˈia
+sw,hy,,,
 sw,id,,,kˌiindˌonesˈia
 sw,it,,,kˌiitˌaliˈano
 sw,ja,,,kˌiɟapˈani
@@ -1733,6 +1905,7 @@ ta,el,,kirēkkam,ɡɾeːkkʌm
 ta,en,,āṅkilam,aːŋɡilʌm
 ta,es,,spāṉiṣ,spaːniʂ
 ta,fa,,perṣiyaṉ,perʂijʌn
+ta,fi,,phiṉṉiṣ,
 ta,fil,,philipiṉō,filibinoː
 ta,fr,,pireñcu,fɾeɲtʃɯ
 ta,gu,,kujarātti,ɡudʒʌɾaːtti
@@ -1741,6 +1914,7 @@ ta,he,,hīprū,hiːbɾɯ
 ta,hi,,inti,indi
 ta,hr,,kurōṣiyan,kuɾoːʂijʌn
 ta,hu,,haṅkēriyaṉ,hʌŋɡeːɾijʌn
+ta,hy,,ārmēniyaṉ,
 ta,id,,intōṉēṣiyaṉ,indoːneːʂijʌn
 ta,it,,ittāliyaṉ,ittaːlijʌn
 ta,ja,,jāppaṉīs,dʒaːppʌniːs
@@ -1781,6 +1955,7 @@ te,el,,grīk,ɡriːk
 te,en,,iṁglīṣ,iŋɡliːʂ
 te,es,,spāniṣ,spaːniʂ
 te,fa,,parṣiyan,parʂijan
+te,fi,,phinniṣ,
 te,fil,,philipinō,pʰilipinoː
 te,fr,,phreṁc,pʰreɲtʃ
 te,gu,,gujarātī,ɡudʒaraːtiː
@@ -1789,6 +1964,7 @@ te,he,,hībrū,hiːbruː
 te,hi,,hiṁdī,hindiː
 te,hr,,kroyēṣiyan,krojeːʂijan
 te,hu,,haṁgēriyan,haŋɡeːrijan
+te,hy,,ārmīniyan,
 te,id,,iṁḍōnēṣiyan,iɳɖoːneːʂijan
 te,it,,iṭāliyan,iʈaːlijan
 te,ja,,japanīs,dʒapaniːs
@@ -1829,6 +2005,7 @@ th,el,,krik,kriːk˨˩
 th,en,,angkrit,ʔaŋ˧kri˨˩
 th,es,,sapen,sa˨˩peːn˧
 th,fa,,poesia,pɤː˧sia̯˧
+th,fi,,finlaen,
 th,fil,,filippin,fiʔ˦˥lip˦˥pin˧
 th,fr,,farangset,fa˨˩raŋ˨˩seːt˨˩
 th,gu,,khutcharat,kʰuʔ˦˥tɕʰa˦˥raː˧tɔː˧
@@ -1837,6 +2014,7 @@ th,he,,hibru,hiʔ˦˥bɔː˧
 th,hi,,hindi,hin˧diː˧
 th,hr,,khroechia,kʰroːn˧ʔeː˧tɕʰia̯˧
 th,hu,,hangkari,haŋ˧kaː˧riː˧
+th,hy,,armenia,
 th,id,,indonisia,ʔin˧doː˧niː˧sia̯˧
 th,it,,itali,ʔiʔ˨˩taː˧liː˧
 th,ja,,yipun,jiː˥˩pun˨˩
@@ -1877,6 +2055,7 @@ tlh,el, ,'elaDya' Hol,ʔɛlɑɖjɑʔ xol
 tlh,en, ,DIvI' Hol,ɖɪvɪʔ xol
 tlh,es, ,'eSpanya' Hol,ʔɛʂpʰɑnjɑʔ xol
 tlh,fa, ,varSI Hol,vɑrʂɪ xol
+tlh,fi, ,SuwomI Hol,
 tlh,fil, ,pIlIpIno Hol,pʰɪlɪpʰɪno xol
 tlh,fr, ,vIraS Hol,vɪrɑʂ xol
 tlh,gu, ,ghujaratI Hol,ɣudʒɑrɑtʰɪ xol
@@ -1885,6 +2064,7 @@ tlh,he, ,'IvghIt Hol,ʔɪvɣɪtʰ xol
 tlh,hi, ,HInDIy Hol,xɪnɖɪj xol
 tlh,hr, ,HurvatISqa Hol,xurvɑtʰɪʂqʰɑ xol
 tlh,hu, ,maDyar Hol,mɑɖjɑr xol
+tlh,hy, ,Hayeren Hol,
 tlh,id, ,'InDoneSya' Hol,ʔɪnɖonɛʂjɑʔ xol
 tlh,it, ,'Italya' Hol,ʔɪtʰɑljɑʔ xol
 tlh,ja, ,nIpon Hol,nɪpʰon xol
@@ -1924,6 +2104,7 @@ tr,el,,,junandʒˈa
 tr,en,,,ɪnɟˈilɪzdʒɛ
 tr,es,,,ɪspanjɔɫdʒˈa
 tr,fa,,,farstʃˈa
+tr,fi,,,
 tr,fil,,,filipˈɪndʒɛ
 tr,fr,,,fransɯzdʒˈa
 tr,gu,,,ɟydʒeɾattʃˈa
@@ -1932,6 +2113,7 @@ tr,he,,,ɪbranˈidʒɛ
 tr,hi,,,hˈɪnttʃɛ
 tr,hr,,,hɯrvattʃˈa
 tr,hu,,,madʒardʒˈa
+tr,hy,,,
 tr,id,,,ændonˈɛzdʒɛ
 tr,it,,,itaɫjandʒˈa
 tr,ja,,,ʒapɔndʒˈa
@@ -1972,6 +2154,7 @@ uk,el,грецькою,hretskoiu,hrɛtskˈoju
 uk,en,англійською,anhliiskoiu,anhʎˈiːjskoju
 uk,es,іспанською,ispanskoiu,iːspˈanskoju
 uk,fa,перською,perskoiu,pɛrskˈoju
+uk,fi,фінською,finskoiu,
 uk,fil,,filippinska,fiːʎˈiːppiːnska
 uk,fr,французькою,frantsuzkoiu,frantsˈuzkoju
 uk,gu,,hudzharati,hudʒarˈatiː
@@ -1980,6 +2163,7 @@ uk,he,івритом,ivrytom,iːʋrˈɪtom
 uk,hi,гінді,hindi,hˈiːndiː
 uk,hr,хорватською,khorvatskoiu,xorʋˈatskoju
 uk,hu,угорською,uhorskoiu,uhˈorskoju
+uk,hy,вірменською,virmenskoiu,
 uk,id,індонезійською,indoneziiskoiu,iːndonˈɛziːjskoju
 uk,it,італійською,italiiskoiu,iːtaʎˈiːjskoju
 uk,ja,японською,yaponskoiu,japˈonskoju
@@ -2020,6 +2204,7 @@ ur,el,,yūnānī,jɔnˈaːni
 ur,en,,angrezī,anɡɾˈeːzi
 ur,es,,hispānvī,hˌəspˈaːnʋi
 ur,fa,,fārsī,fˈaːɾsˌiː
+ur,fi,,fīnīś,
 ur,fil,,filipino,fˌəlipˈiːnoː
 ur,fr,,fransīsī,fəɾˈaːnsisˌiː
 ur,gu,,gujrātī,ɡˌəɟɾˈaːti
@@ -2028,6 +2213,7 @@ ur,he,,ibrānī,ˌabɾˈaːni
 ur,hi,,hindī,hˈɪndi
 ur,hr,,,kəɾˈaːti
 ur,hu,,hangerīn,hˌənɡiɾˈiːn
+ur,hy,,ārmīniyā’ī,
 ur,id,,indoneśiyāī,ˌanɖoːnˈiːsjaːˌiː
 ur,it,,iṭālvī,atˈaːlʋi
 ur,ja,,jāpānī,ɟaːpˈaːni
@@ -2068,6 +2254,7 @@ vi,el,Hy Lạp,,hi˧ laːp˨˩ˀ
 vi,en,Anh,,aɲ˧
 vi,es,Tây Ban Nha,,t̪əɪ˧ baːn˧ ɲaː˧
 vi,fa,,,t̪iɛ̯ŋ˧˥ baː˧ t̪y˧
+vi,fi,Phần Lan,,
 vi,fil,Filipino,,fɪlɪpiːnəʊ˧
 vi,fr,Pháp,,faːp˧˥
 vi,gu,Gujarati,,ɡʊdʒɐɹɑːti˧
@@ -2076,6 +2263,7 @@ vi,he,Do Thái,,zɔ˧ taːj˧˥
 vi,hi,Hindi,,hɪndi˧
 vi,hr,Croatia,,kɹəʊeɪʃə˧
 vi,hu,Hungary,,hʌŋɡəɹi˧
+vi,hy,Armenia,,
 vi,id,Indonesia,,ɪndəʊniːziə̯˧
 vi,it,Ý,,i˧˥
 vi,ja,Nhật,,ɲət̪˨˩ˀ
@@ -2116,6 +2304,7 @@ yo,el,,,e˩de˩ ɡiriki
 yo,en,,,e˩de˩ ɡɛ˩ɛ˥si˩
 yo,es,,,e˩de˩ si˥kpa˥ni˥i˩ʃi˩
 yo,fa,,,e˩de˩ kpasia
+yo,fi,,,
 yo,fil,,,e˩de˩ filikpino
 yo,fr,,,e˩de˩ farãse˥
 yo,gu,,,e˩de˩ ɡudʒarati
@@ -2124,6 +2313,7 @@ yo,he,,,e˩de˩ heberu
 yo,hi,,,e˩de˩ hi˥n̩˥di˩
 yo,hr,,,e˩de˩ kroatia
 yo,hu,,,e˩de˩ hũɡaria
+yo,hy,,,
 yo,id,,,e˩de˩ ĩdone˥ʃi˥a˩
 yo,it,,,e˩de˩ i˥ta˥li˩
 yo,ja,,,e˩de˩ dʒa˩kpa˥a˩nu˩
@@ -2164,6 +2354,7 @@ zh-Hans,el,,Xīlàyǔ,ɕi˥la˥˩y˧˩˧
 zh-Hans,en,,Yīngyǔ,iŋ˥y˧˩˧
 zh-Hans,es,,Xībānyáyǔ,ɕi˥pan˥ja˧˥y˧˩˧
 zh-Hans,fa,,Bōsīyǔ,pwɔ˥sɯ˥y˧˩˧
+zh-Hans,fi,,Fēnlányǔ,
 zh-Hans,fil,,Fēilǜbīnyǔ,feɪ˥ly˥˩pin˥y˧˩˧
 zh-Hans,fr,,Fǎyǔ,fa˧˩˧y˧˩˧
 zh-Hans,gu,,Gǔjílātèyǔ,ku˧˩˧tɕi˧˥la˥tʰɤ˥˩y˧˩˧
@@ -2172,6 +2363,7 @@ zh-Hans,he,,Xībóláiyǔ,ɕi˥pwɔ˧˥laɪ˧˥y˧˩˧
 zh-Hans,hi,,Yìndìyǔ,in˥˩ti˥˩y˧˩˧
 zh-Hans,hr,,Kèluódìyàyǔ,kʰɤ˥˩lwɔ˧˥ti˥˩ja˥˩y˧˩˧
 zh-Hans,hu,,Xiōngyálìyǔ,ɕjʊŋ˥ja˧˥li˥˩y˧˩˧
+zh-Hans,hy,,yàměiníyàyǔ,
 zh-Hans,id,,Yìndùníxīyàyǔ,in˥˩tu˥˩ni˧˥ɕi˥ja˥˩y˧˩˧
 zh-Hans,it,,Yìdàlìyǔ,i˥˩ta˥˩li˥˩y˧˩˧
 zh-Hans,ja,,Rìyǔ,ʐɨ˥˩y˧˩˧

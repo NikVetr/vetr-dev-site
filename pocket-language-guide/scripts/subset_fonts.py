@@ -263,6 +263,50 @@ ETHI_RANGES = [(0x1200, 0x137F)]
 # exhaustive cube and 3,370 real tokens, in both faces (tmp/ka/georgian.md).
 GEOR_RANGES = [(0x10D0, 0x10FF)]
 
+# The whole Armenian block, for Georgian's reason and one of its own.
+#
+# 91 of the 96 codepoints are assigned and the subsetter intersects with the cmap
+# anyway. The corpus writes 39 letters, `։ ՝ ՞ ՜ ՛` and nothing else; the block is
+# requested whole so the add-your-own-term editor can type ՈՒ, ՙ, ՚ or the dram sign
+# ֏ offline with no font to fall back to.
+#
+# The reason of its own is the one the Brahmic and Lao blocks have: **Armenian
+# reaches glyphs that have no codepoint at all.** `liga` ligates ո+ւ to
+# `uni05780582` and Ո+Ւ to `uni05480552` -- the ու digraph, which is the ordinary
+# spelling of /u/ and fires on 783 of 2,496 real tokens -- and neither has a
+# codepoint. `subset_source`'s `layout_features = ["*"]` is what keeps the lookups
+# that reach them, and the closure is what keeps the glyphs.
+#
+# U+FB13..FB17 are deliberately **not** requested. They are the five presentation
+# forms ﬓ ﬔ ﬕ ﬖ ﬗ, which the same `liga` reaches from մ+ն, մ+ե, մ+ի, վ+ն and մ+խ,
+# so the glyphs arrive through the layout closure rather than through the cmap --
+# 160 times over the same token list. Requesting them would add a second encoding of
+# a glyph NFC does not normalise away, and `hy.check` in tmp/hy/hy.py refuses to
+# write one for the same reason. This is Hebrew's Alphabetic-Presentation-Forms
+# decision in a script that actually fires the ligatures.
+ARMN_RANGES = [(0x0530, 0x058F)]
+# Three codepoints subtracted from the **Latin** side of the `armn` request, and the
+# reason is a crash rather than a size.
+#
+# `LATIN_RANGES` asks every stack for U+0300..036F, and both Noto Armenian variables
+# hold a MarkBasePos lookup whose second mark class -- U+0326 comma below, U+0327
+# cedilla, U+0328 ogonek -- has a **NULL base anchor** on the seven Armenian vowel
+# letters Ա Ո Օ ՠ ա ո օ and on the dotted circle. That is the crash that refused Noto
+# for Telugu, Gurmukhi, Gujarati and Malayalam: `getAnchor` dereferences the NULL and
+# `core/measure.js` throws. Measured through this project's own fontkit, **21 of the
+# 1,365 (Armenian letter x mark) pairs throw** in the donor and in a subset built
+# with the marks in; dropping these three prunes the lookup's second class and takes
+# the count to **0**, at a cost of two glyphs and with the mark/mkmk machinery for
+# the other twelve marks left intact.
+#
+# Safe because none of the three is reachable from the corpus: they appear in no
+# `text`, no `romanization_*`, no `ipa` cell in any of the forty-nine packs, in no
+# reader table's `charset.json` entry, and in none of the shared registry or concept
+# files. The combining marks the corpus does use -- U+0300 U+0301 U+0303 U+0304
+# U+0310 U+031D U+0325 U+0329 U+032A U+032F U+0348 -- are all in the *first* mark
+# class, whose anchors are present. See tmp/hy/armenian.md section 3.
+ARMN_EXCLUDE = {0x0326, 0x0327, 0x0328}
+
 # Klingon pIqaD and Tengwar. These are the two scripts here that are **not in
 # Unicode**: both proposals were rejected, so they live in the Private Use Area by
 # allocation of the ConScript Unicode Registry, and nothing about them can be
@@ -614,6 +658,27 @@ FACES = {
     ("geor", 700, False): "NotoSansGeorgian-var.ttf",
     ("geor-serif", 400, False): "NotoSerifGeorgian-var.ttf",
     ("geor-serif", 700, False): "NotoSerifGeorgian-var.ttf",
+    # Armenian, and **sans only**, which is Lao's, Khmer's, Telugu's, Gujarati's,
+    # Kannada's and Malayalam's outcome reached for a new reason: Noto Serif Armenian
+    # neither throws nor diverges -- 0 differences against HarfBuzz over the same
+    # 67,696-string cube, 0 NULL anchors after `ARMN_EXCLUDE` -- it is **refused on
+    # legibility at the floor**.
+    #
+    # Armenian has three minimal pairs that differ only by a foot or a tail on one
+    # stem: դ/ղ, գ/զ and ը/ր. `tmp/hy/calibrate2.py` renders every letter at a
+    # candidate floor and XORs each pair, the method every addition since Bengali has
+    # used. At 4.4pt the two sans faces sit at **0.140 and 0.141**, better than Latin
+    # at the same floor (O/Q, 0.126); the two serif faces sit at **0.060 and 0.057**,
+    # which is Thai's 0.062 at 5.4 -- the most confusable script this project ships.
+    # And raising the floor does not rescue them: at 5.0 they are 0.054 and 0.047, at
+    # 5.4 0.078 and 0.080, at 6.0 0.089 and 0.091. `min_size_pt` is per *script* and
+    # not per face, so shipping the serif would have pinned every Armenian sheet --
+    # sans ones included -- to Devanagari's floor to protect a typeface option, which
+    # is the defect summary.md's "Type size is not one multiplier" section describes.
+    # A serif Armenian sheet therefore sets its Armenian in the sans, which
+    # `core/fonts.js` already does by design.
+    ("armn", 400, False): "NotoSansArmenian-var.ttf",
+    ("armn", 700, False): "NotoSansArmenian-var.ttf",
 }
 
 # Sources that need a Latin face grafted in, and the face to graft.
@@ -983,7 +1048,65 @@ ALL_LANGS = ["en", "es", "fr", "de", "ko", "ar", "zh-Hans", "ja",
              # outside older packs' repertoire are the ejective marker `ʼ` U+02BC,
              # already requested by Amharic, and `ʁ q χ`, already requested by
              # Arabic, Persian and German.
-             "ka"]
+             "ka",
+             # Armenian. `ARMN_RANGES` above already requests the whole Armenian
+             # block unconditionally for the `armn` stack, so this entry in the
+             # `latin` union is for the pack's `romanization_bgn` and `ipa` columns --
+             # which the Latin faces draw on every pair whose target is Armenian --
+             # and for the rows that quote Latin on a sign: `Wi-Fi`, `WC`,
+             # `QR կոդով`, `SIM քարտ`, `eSIM`, `Tax Free`, `PIN կոդ` and
+             # `B2 · BPK · bakso`. Georgian's, Khmer's, Lao's and Malayalam's shape
+             # exactly.
+             #
+             # **And it costs the union one character, measured against the cmaps of
+             # all sixteen shipped Latin faces rather than assumed.** The romanisation
+             # is BGN/PCGN 1981 (re-validated November 2022), whose only non-ASCII
+             # character is the aspirate mark `’` **U+2019**, named in note 6 of that
+             # document -- not U+02BC, which is what Amharic's `romanization_bgn` and
+             # Georgian's ejectives use. It arrives through `LATIN_RANGES`' General
+             # Punctuation block and is in every shipped Latin cmap, checked. The
+             # `ipa` column brings nothing new at all: espeak's `ʀ` is folded to `ʁ`
+             # and its `χ` to `x` before the column is written, which is Persian's
+             # `q1` -> `q` decision for Persian's reason -- a new IPA symbol costs
+             # every one of the other forty-eight reader tables a rule.
+             "hy",
+             # Finnish, which needs no stack of its own -- `Latn` already routes to
+             # `latin` -- but does need naming here, for Polish's, Croatian's and
+             # Italian's reason: a Latin language left out of this union is the
+             # omission Italian shipped with for a whole language generation and
+             # survived only by luck.
+             #
+             # **And it costs the union nothing, measured rather than assumed.** The
+             # whole pack including its `ipa` column, both registry files, the `Yö`
+             # badge, the section titles, the emergency labels and the reader table's
+             # legend come to **86 distinct codepoints**, of which fourteen are
+             # non-ASCII: `Ä ä ö` (already requested by German and Swedish), `š`
+             # (Czech and Croatian; Finnish orthography uses the caron letters for
+             # the postalveolars itself), `ž` (Czech), `€` (already in
+             # `LATIN_RANGES`' Currency Symbols block), and the eight IPA characters
+             # `æ ø ŋ ɡ ʃ ˈ ˌ ː`, every one of which older packs already need. In the
+             # cmap of all sixteen shipped `latin*.ttf` faces, checked with
+             # `getBestCmap()` in tmp/fi/fontcheck.py -- **0 of 86 missing**. `å` is
+             # in the Finnish alphabet and in no row of the pack: it is there for
+             # Swedish proper names, so it arrives through Swedish's own entry.
+             #
+             # That the `ipa` column brings nothing new is a consequence of two
+             # repairs rather than luck: `REPAIR["fi"]` folds espeak's
+             # stress-conditioned `ɪ` back to `i` and its `q` to `k`, and
+             # `GEMINATE_DOUBLES` turns its `Cː` into `CC`. There is no romanisation
+             # column, Finnish being Latin already.
+             #
+             # **One knock-on, and it is in another stack.** Finnish as a *target*
+             # grows the Korean reader's respelling charset by thirteen Hangul
+             # syllables, two of which -- `룜` (paljon) and `얫` (jättää, Jättäkää) --
+             # are outside the KS X 1001 rows `cjk-kr` requests below, so the
+             # Korean faces cannot draw them today. `respell_chars` unions
+             # `charset.json` into each stack, so one run of `npm run
+             # respell:charset` followed by this script closes it; until then
+             # `tests/fonts.test.mjs` cannot see it either, because the shipped
+             # charset has no `fi` key. Bengali did the same thing to the Hindi
+             # reader's `deva` subset.
+             "fi"]
 STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                "latin-serif": ALL_LANGS, "latin-cond-serif": ALL_LANGS,
                "cjk-sc": ["zh-Hans"], "cjk-sc-serif": ["zh-Hans"],
@@ -1017,6 +1140,7 @@ STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                "mlym": ["ml"],
                "ethi": ["am"], "ethi-serif": ["am"],
                "geor": ["ka"], "geor-serif": ["ka"],
+               "armn": ["hy"],
                "hebrew": ["he"], "hebrew-serif": ["he"]}
 
 
@@ -1139,6 +1263,9 @@ def coverage(stack):
         chars |= expand(HEBREW_RANGES)
     elif stack.startswith("geor"):
         chars |= expand(GEOR_RANGES)
+    elif stack.startswith("armn"):
+        chars |= expand(ARMN_RANGES)
+        chars -= ARMN_EXCLUDE
     return chars
 
 

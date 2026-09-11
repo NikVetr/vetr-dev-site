@@ -1,0 +1,8 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,Mistä voi ostaa lippuja?,,mˈistæ vˈoi ˈostaː lˈippuja,,2,fi-agent-v1;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,Tarvitseeko varata etukäteen?,,tˈarvitsˌeːko vˈarata ˈetukæteːn,,2,fi-agent-v1;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,Mihin asti sisään pääsee?,,mˈihin ˈasti sˈisæːm pˈæːseː,,2,fi-agent-v1;ipa=espeak
+attractions-tickets.are-there-lockers,Onko täällä säilytyslokeroita?,,ˈoŋko tˈæːllæ sˈæilytˌyslokerˌoita,,2,fi-agent-v1;ipa=espeak
+attractions-tickets.may-i-take-photos,Saako täällä kuvata?,,sˈaːko tˈæːllæ kˈuvata,,2,fi-agent-v1;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,Ottaisitko meistä kuvan?,,ˈottaisˌitko mˈeistæ kˈuvan,,2,fi-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,Voisitko ottaa meistä kuvan?,,vˈoisitko ˈottaː mˈeistæ kˈuvan,,2,fi-agent-v1;ipa=espeak

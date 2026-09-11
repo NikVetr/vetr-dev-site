@@ -219,6 +219,24 @@ const VOWEL_LETTERS = /[aeiouáéíóúàèìòùâêîôûäëïöüåãõẽĩ
 const ACCENTED = /[áéíóúàèìòùёãõẽĩũâêîôûάέήίόύώΐΰåäö]/i;
 /** A mark of either kind, for stripping one back off. */
 const MARKS = /[\u0300-\u036f]/gu;
+/**
+ * The two marks a *device* composes, as opposed to a diacritic that is part of a
+ * letter -- which is the distinction `length: 'double'` has to make and could not.
+ *
+ * The second copy of a doubled vowel is the bare letter, because `àà` is a sequence
+ * no orthography writes and the mark belongs to the syllable once. That was right
+ * for the only two tables that had the policy: Italian's mark comes from
+ * `STRESS_DEVICE.grave` and Swahili emits none at all. It is wrong for the first
+ * table whose *own long vowels are spelt with a letter that carries a diacritic*:
+ * Finnish writes /æː/ `ää` and /øː/ `öö`, and stripping U+0308 off the second copy
+ * gave `käa` and `köot` -- the silent no-op this file already warns a new table to
+ * check its own vowels for, in the one device that had not been checked.
+ *
+ * Narrowing the strip to the grave and the acute leaves both existing tables
+ * byte-identical (Italian's `sàari` still comes out `àa`, Swahili has no mark to
+ * strip) and is what makes `ää` reachable.
+ */
+const DEVICE_MARKS = /[\u0300\u0301]/gu;
 
 /**
  * Put a mark on the one letter of the nucleus that carries it.
@@ -914,7 +932,7 @@ export function createRespeller({ rules, targetIpa, target = '' }) {
         const mark = policy.length === 'double'
           // The second copy is the bare letter: the mark belongs to the syllable
           // once, and `àà` is a character sequence no orthography writes.
-          ? (/** @type {string} */ c) => c + c.normalize('NFD').replace(MARKS, '')
+          ? (/** @type {string} */ c) => c + c.normalize('NFD').replace(DEVICE_MARKS, '').normalize('NFC')
           // Czech spells vowel length with its own diacritic (á é í ó ú ý) rather
           // than approximating with a colon, and `accent` is that device: the
           // same combining-acute composition `STRESS_DEVICE.acute` already uses,

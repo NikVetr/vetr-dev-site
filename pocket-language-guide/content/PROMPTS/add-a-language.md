@@ -306,7 +306,7 @@ is only a grouping.
 | 3 | ~~`uk` Ukrainian, `nl` Dutch, `ro` Romanian~~ | Cyrillic reuse and two Latin, all with espeak voices |
 | 4 | **`my` refused**, `km` Khmer **draft**, ~~`lo` Lao~~ | the hard batch: complex stacking, and `word_break: dict` for the second and third time |
 | 5 | ~~`fil` Filipino, `ms` Malay~~, `zh-Hant` **not a language** | two Latin; the variant question is settled above -- `zh-Hant` is `script_alt`, not a row |
-| 6 | ~~`am` Amharic, `ka` Georgian~~, `hy` Armenian | three scripts nothing else in the corpus resembles |
+| 6 | ~~`am` Amharic, `ka` Georgian, `hy` Armenian~~ **done** | three scripts nothing else in the corpus resembles |
 | 7 | ~~`pa` Punjabi, `gu` Gujarati~~, **`si` refused** | Brahmic breadth |
 | 8 | ~~`kn` Kannada, `ml` Malayalam, `ne` Nepali~~ | completes the Indic set |
 | 9 | ~~`cs` Czech, `sv` Swedish~~, `fi` Finnish | European Latin, and Finnish's agglutination is Hungarian's problem again |
@@ -314,7 +314,7 @@ is only a grouping.
 `hr` Croatian was added off-roadmap as language 46, for a reason the batches do not
 capture: Croatia is among the highest-traffic destinations without a card, and Gaj's
 Latin cost the font and respelling machinery nothing. **What is actually left** is
-`hy` Armenian and `fi` Finnish -- two refusals (`my`, `si`) are closed until
+`fi` Finnish -- two refusals (`my`, `si`) are closed until
 fontkit gains a shaper, and `zh-Hant` is not a row.
 
 **Georgian went in as language 47 and is the counter-example the last three
@@ -488,6 +488,74 @@ end -- which is the right place to insert it.
   anchors belong to*. The cube was clean because the language was broken. So a
   zero-throw result is only evidence when you have separately confirmed that the
   shaper being exercised is the one the script actually needs.
+
+**Armenian went in as language 49 and closes batch 6, and three of its findings are
+here rather than only in tmp/hy/armenian.md** because each one generalises.
+
+**The non-vacuity of a clean cube can be a *substitution* and not only a kern, and
+Armenian is where that first happened.** Run Georgian's way, `armn` comes back
+exactly clean -- 0 throws, 0 glyph-run differences, 0 GPOS-offset differences and 0
+advance differences over 3,695 real tokens, 1,426 real strings and a 67,696-string
+exhaustive cube, in all four candidate files and both shipped subsets -- and for the
+right reason, `armn` being absent from fontkit's script-to-shaper map and falling to
+the **Default** shaper, which is also what HarfBuzz picks (traced under
+`set_message_func`: `liga` and `ccmp` in GSUB, `kern`/`mark`/`mkmk` in GPOS under
+`script tag 'armn'`, no syllable machinery). What makes it a stronger result than
+Georgian's is *what the lookups do*: `liga` changes the glyph run on **761 of 2,496
+tokens (30.5%)**, reaching 943 ligature glyphs, **783 of which are `uni05780582` --
+the ու digraph, the ordinary spelling of /u/, and a glyph with no codepoint at all**.
+Georgian fired zero substitutions over its whole cube and had to rest on `kern`. So
+when a script's ligatures are the hazard, they are also the evidence.
+
+**And the hazard Lao warned about is real here and was caught by measuring the
+subset.** U+FB13-FB17 are reached from մ+ն, մ+ե, մ+ի, վ+ն and մ+խ -- 160 times over
+the same token list -- so the block is subset whole and the presentation forms are
+deliberately **not** requested: the glyphs arrive through the layout closure, and
+requesting the codepoints would add a second encoding of a glyph NFC does not
+normalise away.
+
+**A `min_size_pt` can refuse a typeface, and here it did.** Noto Serif Armenian
+neither throws nor diverges, and is not shipped: Armenian has three minimal pairs
+that differ only by a foot or a tail on one stem -- դ/ղ, գ/զ, ը/ր -- and the serif
+faces XOR at **0.060 and 0.057** at 4.4pt against Latin's O/Q at 0.126 and the
+sans's ա/պ at **0.140**, which is Thai's 0.062 at 5.4, the most confusable script
+this project ships. Raising the floor does not rescue them (0.054/0.047 at 5.0,
+0.078/0.080 at 5.4, 0.089/0.091 at 6.0), and `min_size_pt` is per *script* rather
+than per face -- so shipping the serif would have pinned every Armenian sheet, sans
+ones included, to Devanagari's floor to protect a typeface option. **Sans-only for a
+legibility reason rather than a crash is new**, and the general form is: measure
+every candidate face at the floor before deciding how many to ship, because the
+floor is the one registry number a second face can force upwards.
+
+**Armenian's line box is set by its punctuation and not by its letters**, which is
+the third thing worth carrying. The 39-letter alphabet spans 1.0150em -- Latin's
+tier -- and the pack's 849 real rows span 1.0710em, because `՞` U+055E sits at
+0.8260em, **0.056em above the tallest letter**, and it goes *inside* the word over
+the stressed vowel rather than at the end of the clause. So it is on every one of
+the pack's ~200 questions rather than in a corner, and `leading_factor` is **1.12**
+where the letters alone would have said 1.02. Any script whose sentence marks are
+in-word should be measured over real sentences and not over its alphabet.
+
+Two smaller results, both reusable:
+
+- **The romaniser has to be run against its own standard's worked examples.**
+  `hy.translit` derives `romanization_bgn` mechanically and reproduces all **37**
+  examples in the BGN/PCGN 2022 document -- but only after two bugs the examples
+  found and nothing else would have: `ով` came out `ovv`, and `Ո՞ւր` came out
+  `Vowr?` because the in-word question mark sat between ո and ւ and broke the ու
+  digraph lookahead. A derived column is only as good as the table it was derived
+  from, and a published table usually ships its own test set.
+- **Armenian needs a case device on eight of the 44 slot rows and no more**, which is
+  further than Croatian's reading reaches. Its accusative of an inanimate noun is
+  the nominative, a destination takes the bare form, a numeral takes none, and an
+  ending on a numeral or a Latin-letter word is written **with a hyphen** as ordinary
+  orthography (`ժամը {}-ին`, `{}-ից`, `{}-ով`, `{}-ում`) rather than as a device. The
+  eight that really govern an oblique case take the **բութ `՝`** U+055D, Armenian's
+  own mark for introducing an explanation -- apposition in native punctuation rather
+  than an imported ASCII colon. And the `{target}`/`{source}` rows need nothing at
+  all, Armenian language names being adverbials in -երեն that take no ending, so all
+  50 of its `language-names.csv` rows leave `name` empty where Polish had to
+  hand-write `po X-u` twenty-eight times.
 
 **A case language has to decide what to do with the 44 slot rows, and the corpus is
 now split three ways rather than two.** A `{}` filler is a bare dictionary-form noun,

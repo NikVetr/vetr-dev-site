@@ -1,0 +1,12 @@
+label,text
+_frame,{region}՝ {numbers}
+all services,միասնական համար
+police,ոստիկանություն
+ambulance,շտապօգնություն
+fire,հրշեջ
+also works,նաև գործում է
+fire and ambulance,հրշեջ + շտապօգնություն
+medical,բժշկական օգնություն
+tourist police,զբոսաշրջային ոստիկանություն
+police and ambulance,ոստիկանություն + շտապօգնություն
+gendarmerie,ժանդարմերիա
