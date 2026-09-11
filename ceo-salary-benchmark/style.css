@@ -627,15 +627,13 @@ thead button[data-active="true"][data-direction="asc"]::after { content: "↑"; 
   position: relative;
   display: inline-block;
   box-sizing: border-box;
-  width: auto;
-  max-width: 100%;
+  width: max-content;
   min-height: calc(var(--header-control-size) * 2 + var(--header-control-gap));
   padding-right: var(--header-control-size);
 }
 .header-controls > button[data-sort] {
   width: auto;
-  max-width: 100%;
-  min-width: 0;
+  min-width: max-content;
   min-height: calc(var(--header-control-size) * 2 + var(--header-control-gap));
   justify-content: flex-start;
   white-space: normal;
@@ -757,8 +755,7 @@ a.organization-name:hover { color: var(--green); text-decoration: underline; tex
 .weight-column, .weight-cell { width: 82px; min-width: 82px; }
 #weight-column-label { line-height: 1.05; }
 #weight-column-label > span { display: block; white-space: nowrap; }
-.score-column, .score-cell { width: 56px; min-width: 56px; max-width: 56px; }
-.score-column .header-controls { width: 100%; }
+.score-column, .score-cell { min-width: 56px; }
 .score-cell { text-align: right; }
 .weight-input { width: 68px; min-width: 68px; border: 1px solid var(--line-dark); border-radius: 4px; padding: 5px 8px; font-size: 10px; font-variant-numeric: tabular-nums; text-align: right; }
 .weight-input::-webkit-inner-spin-button, .weight-input::-webkit-outer-spin-button { margin: 0; appearance: none; }
