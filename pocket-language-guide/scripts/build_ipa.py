@@ -702,7 +702,36 @@ VOICES = {"en": "en-us", "es": "es-419", "fr": "fr-fr", "de": "de", "pt": "pt-br
           # other thirteen consonants come back doubled (`ˈillɐ`, `ˈɐmmɐ`, `ʈʈ`, 515
           # cells) -- one phenomenon, two notations. So `ml` joins
           # `GEMINATE_DOUBLES`, unlike `kn`, which had no `Cː` at all.
-          "ml": "ml"}
+          "ml": "ml",
+          # Croatian, and the Czech/Romanian/Telugu situation rather than the
+          # Marathi/Ukrainian one: `EspeakBackend.supported_languages()['hr'] ==
+          # 'Croatian'` against the plain system library with no `PHONEMIZER_ESPEAK_*`
+          # set, so 1.50's own data tree already has it and **the loader is never
+          # touched for `--only hr`** -- there is nothing here for it to fix, and
+          # setting it anyway would risk the cross-language drift the `uk` block above
+          # describes for no benefit.
+          #
+          # What this voice gets right is the part Croatian orthography is genuinely
+          # about: the digraphs and the two affricate pairs the alphabet distinguishes
+          # and most foreigners merge. `č`/`ć` come back `tʃ`/`tɕ` and `dž`/`đ` come
+          # back `dʒ`/`dʑ` -- four distinct sounds, four distinct transcriptions --
+          # and `lj`/`nj` come back `ʎ`/`ɲ` rather than as l+j and n+j. Syllabic r is
+          # right on every probe (vrh, prst, srce, četvrtak, trbuh) and regressive
+          # voicing assimilation is applied across a word boundary as well as inside
+          # a word (`zovite` after `vas` gives `vˈaz`, `Pred klasifikatorom` gives
+          # `pɾˈɛt`).
+          #
+          # What it gets wrong is **allophonic noise on a five-vowel system**, and
+          # it is systematic rather than lexical: over the pack's 904 chunks the
+          # column came back with `ɪ` 963 times against `i` 338, `æ` 843 against `a`
+          # 457, `ɛ` 725 against `e` 429, `ʊ` 355 against `u` 191, plus `ɑ` 105 and
+          # `ɾ` 309 against `r` 251. Croatian has five vowels and one rhotic and no
+          # reduction of any of them, so all six splits are folded in `REPAIR["hr"]`
+          # -- which is the one repair in this file that makes a language contribute
+          # *fewer* symbols to the other readers' tables rather than more.
+          #
+          # And **stress is not written above two syllables**: see `hr_stress`.
+          "hr": "hr"}
 
 # Phonemised one word at a time rather than a phrase at a time, which every other
 # espeak language is.
@@ -946,6 +975,13 @@ STRESS = {"fr": "phrase", "ko": "none", "vi": "none", "ja": "none",
 # anyway so that the next row that does quote one is asked the same question.
 NON_LATIN = {"zh-Hans", "ja", "ko", "th", "hi", "ar", "ru", "el", "tlh", "qya", "he",
              "fa", "ur",
+             # Georgian writes most of its loanwords in Mkhedruli -- ვაი-ფაი,
+             # სიმ ბარათი, პინ-კოდი, ბანკომატი, როუმინგი -- so this gate finds only
+             # the three cells that really are Latin on a Georgian sign: `eSIM`,
+             # the `QR` of `QR კოდი` and the `B2 · BPK · bakso` pork-code row, which
+             # is Indonesian and is a `note`-like verbatim quote. The first two have
+             # a `LOANWORDS["ka"]` reading.
+             "ka",
              # Bengali writes every loanword in its own script -- ওয়াই-ফাই, এটিএম, সিম,
              # প্ল্যাটফর্ম -- so the pack quotes no Latin at all and this gate finds
              # nothing to refuse. Named anyway, so the next row that does quote a
@@ -1855,6 +1891,46 @@ REPAIR = {
     # cost aspiration in ten more tables. Recorded as a cost.
     "ml": [("r.", "ɻ"), ("r̩", "ru"), ("ʲ", ""), ("ɐ", "a"), ("ə", "a"),
            ("ɪ", "i"), ("ʊ", "u"), ("ɕ", "ʃ")],
+    # **Croatian's is the one repair here that shrinks the corpus's symbol
+    # inventory instead of growing it.** Croatian has five vowels /a e i o u/, one
+    # rhotic /r/, one /n/ and one /x/, and nothing reduces: the standard descriptions
+    # (Barić et al., *Hrvatska gramatika*, §Fonologija; Landau et al. in the
+    # *Handbook of the IPA*, "Croatian") give five vowel qualities with a length
+    # contrast and no quality alternation by stress. This voice writes each of them
+    # two ways, split by stress and by neighbouring consonant rather than by anything
+    # phonemic, and the counts over the finished pack's 904 chunks say so plainly:
+    #
+    #   `ɪ` 963 : `i` 338      Oprostite `ˈopɾostˌɪtɛ`, hrvatski `xrvˈaːtskɪ`
+    #   `æ` 843 : `a` 457      Hvala `xvˈalæ`, žena `ʒˈɛnæ`
+    #   `ɛ` 725 : `e` 429      džem `dʒˈɛm` beside Gdje je `ɡdjˈe je`
+    #   `ʊ` 355 : `u` 191      hitnu `xˈitnʊ`
+    #   `ɑ` 105                Dobar dan `dˈobɑr dˈan` -- the pre-r allophone
+    #   `ɾ` 309 : `r` 251      razumijem `ɾˈazʊmˌɪjem` beside Dobar `dˈobɑr`
+    #
+    # So six folds, and the direction is chosen by which member is the phoneme rather
+    # than by which is more frequent -- `REPAIR["es"]`'s `ɛ`->`e` decision, made the
+    # same way and for the same reason: `core/respell.js` is handed phonemes. What
+    # falls out is that Croatian asks the other forty-five reader tables for *no*
+    # symbol they do not already have, and specifically not `æ ɑ ɪ ʊ ɾ`, four of
+    # which are exactly the class of thing that cost six scripts a letter they could
+    # not draw when the German column drifted.
+    #
+    # `ŋ` -> `n` is the same argument one step further: [ŋ] is Croatian /n/ before a
+    # velar (banka `bˈaŋkomæt`, lozinka, šunke, dengu -- 21 chunks, every one in that
+    # environment), with no more phonemic status than Spanish's [β ð ɣ], which
+    # `REPAIR["es"]` folds to their stops.
+    #
+    # `h` -> `x` is the last one and the only one with a stated cost. Croatian ⟨h⟩ is
+    # a single phoneme and the standard realisation is the velar fricative; espeak
+    # splits it positionally, writing `x` in an onset (hitno `xˈitno`, hodati
+    # `xˈodætɪ`, hvala) and `h` in a coda or between vowels (bih `bˈih`, trbuh
+    # `trbˈuh`, inhalator `ˈinhælˌætor`). Folding to `x` costs an English reader `kh`
+    # where they would otherwise have got `h`, on `hvala` among others, which slightly
+    # over-states a fricative Croatian articulates weakly -- taken over the
+    # alternative, because `h` would tell every reader that ⟨h⟩ is a laryngeal, and
+    # because a positional split is exactly what a phonemic column must not carry.
+    "hr": [("æ", "a"), ("ɑ", "a"), ("ɛ", "e"), ("ɪ", "i"), ("ʊ", "u"),
+           ("ɾ", "r"), ("ŋ", "n"), ("h", "x")],
 }
 
 
@@ -2622,6 +2698,13 @@ LOANWORDS = {
         "eSIM": "iˈsʲim",                         # и-си́м
         "QR": "kʲjuˈɑr",                          # кью-а́р
     },
+    # Georgian keeps two of these in Latin letters and no others -- see the
+    # `NON_LATIN` note. Both readings are the Georgian letter-names, which is how a
+    # Georgian speaker says an acronym: `eSIM` is *i-simi* (ი-სიმი) and `QR` is
+    # *kiu-ari* (ქიუ-არი), with the ejective-free aspirated ქ that the letter's own
+    # name has. Read through `KA` rather than written by ear, so the two cells are in
+    # the same phonology as the sentence around them.
+    "ka": {"eSIM": "isimi", "QR": "kʰiuari"},
     "th": {"eSIM": "ʔiː˧sim˧"},                   # อีซิม, straight out of thaig2p
     # No tone letters: the loan has no lexical tone to carry, and the readers who
     # keep tone would otherwise be shown one that was invented here.
@@ -2670,6 +2753,36 @@ LOANWORDS = {
     # word, and `f` happens to already be the right sound either way.
     "yo": {"Wi-Fi": "wajfaj", "eSIM": "iːsim", "SIM": "sim", "PIN": "pin",
            "QR": "kjuːɑːr", "ATM": "eːtiːɛm", "CFA": "siːɛfeː"},
+    # Croatian, and **every entry here is a row espeak read as a string of letter
+    # names**, which is a different failure from Greek's or Russian's: those got the
+    # wrong vowel, these got a schwa Croatian does not have. `WC` came back
+    # `dvˈostɾʊkˌo vətsˌə` -- *dvostruko ve ce*, "double v, c", spelled out as words
+    # -- on the eight rows of the toilets section, which is the single highest-value
+    # section on the sheet; `SIM` came back `sˈəˌɪmˌə`, `QR` `kvˈərˌə`, `PDV`
+    # `pˈədˌəvˌə` and `cm` `tsˈəmˌə`. All 18 of the pack's `ə` cells were one of
+    # those five, so the schwa count is the check that this table is complete.
+    #
+    # The readings are the ordinary Croatian ones. `WC` is *vece*, so common that it
+    # is often written that way; `PDV` is read as its three letter names *pe-de-ve*
+    # with the last one stressed, which is what a Croatian acronym does and the
+    # recognised exception to the no-final-stress rule `hr_stress` relies on; `cm` is
+    # read out in full as *centimetara*, the genitive plural the numeral in the slot
+    # governs, which is `LOANWORDS["ko"]`'s entry for the same row in another
+    # language. `Wi-Fi` is *vajfaj* and not espeak's `vˈifˈi`: the letter W is not
+    # Croatian and the word is said the English way, as it is in Hebrew and Russian.
+    # `shuttle` is *šatl* -- the pack prints the English spelling because that is what
+    # a Croatian shuttle-bus sign prints, and says the Croatian nativisation, which is
+    # the same split `boarding pass` and `check-in` avoid by living in `text_alt`.
+    #
+    # `PIN` needs no entry: this voice already returns `pˈin`, which is right.
+    #
+    # A loan value skips `normalise`, so these are written in the folded alphabet
+    # `REPAIR["hr"]` leaves behind -- `x` not `h`, `r` not `ɾ`, five vowels -- and
+    # they keep their own stress mark past two syllables, because a hand-written
+    # reading is the one place in this column the position is known.
+    "hr": {"Wi-Fi": "vˈajfaj", "eSIM": "esˈim", "SIM": "sˈim", "QR": "kjuˈar",
+           "PDV": "pedeˈve", "WC": "vˈetse", "cm": "tsentimˈetara",
+           "shuttle": "ʃˈatl", "Tax Free": "tˈaks frˈi"},
 }
 
 
@@ -2975,6 +3088,76 @@ def hu_stress(ipa):
     return " ".join(out)
 
 
+# ------------------------------------------------------------- Croatian stress
+# **Croatian stress is lexical, and espeak's is the first syllable.** Measured the
+# way `STRESS["kn"]` measures it, and the number is nearly as blunt: over the
+# finished pack's 1,016 distinct polysyllables the primary mark lands on the first
+# syllable **1,015 times** (the one exception, `ili`, gets a secondary mark and no
+# primary at all, which is the Greek function-word case). So this voice is applying
+# a rule rather than looking anything up, and Croatian's stress is not derivable --
+# ljekarna is lje-KAR-na, putovnica is pu-TOV-ni-ca, policija is po-LI-ci-ja, and
+# nothing in the spelling says which.
+#
+# But unlike Kannada's, half of that blind rule is **right by rule rather than by
+# luck**, which is why the mark is not simply dropped. Standard Croatian does not
+# accent the final syllable of a polysyllable at all -- the falling accents occur
+# only word-initially and the rising ones only on a non-final syllable, which is the
+# same statement twice -- so a **two-syllable** word is stressed on its first
+# syllable, always. A monosyllable is trivially right too. So the mark is kept at up
+# to two syllables and dropped above that, and the split is not arbitrary: every
+# mark this column prints is correct, and the words that carry none are exactly the
+# ones where espeak was guessing.
+#
+# What that buys, counted on the finished column: 1,274 of its 2,453 word tokens
+# carry a mark and every one of them is right by rule, and 1,179 (48%) print
+# unmarked -- against dropping the mark entirely, which is what Tamil, Telugu,
+# Punjabi, Gujarati and Kannada all do. Croatian vowels do not reduce, so an unmarked
+# polysyllable is fully intelligible -- the argument those five packs make -- and a
+# wrong mark here would be a capital for an English reader and an acute for a
+# Spanish, Russian or Greek one on a syllable the language contrasts.
+#
+# The stated exception is loanwords: Croatian dictionaries record final stress on
+# some (`recept`), and this rule marks them initially. It fires on disyllables only,
+# so the cost is bounded by that class and does not reach the long words where the
+# guessing would have been worst.
+#
+# The secondary marks go unconditionally, all 450 of them. No description of
+# Croatian gives it a secondary stress, and they come out of the same blind rule the
+# primary does -- `ˈanafˌilaktˌitʃki` for anafilaktički, which has one accent.
+#
+# **A syllabic r or l is a nucleus, and counting it is what makes the rule honest.**
+# Croatian has syllabic liquids (vrh, prst, srce, grlo, četvrtak) and this column
+# writes them as a plain `r` or `l`, so counting vowels alone reads `ɡrlˈo` as a
+# *mono*syllable and keeps a mark that sits on its second syllable -- where Croatian
+# says GR-lo. 20 word tokens over 15 distinct words are in that class and all 20 are
+# wrong, five of them on medical rows (Boli me trbuh, Boli me grlo, Vrti mi se,
+# Šećer u krvi, Moja krvna grupa). Counting them also promotes `četvrtak` from two
+# nuclei to three, which drops a mark that was wrong for the same reason: the word is
+# če-TVR-tak.
+#
+# So the surviving rule is one sentence with two halves, and both are provable rather
+# than probable: a mark **not** on the first nucleus of a polysyllable is *wrong*,
+# because standard Croatian does not accent a final syllable at all; and a mark on
+# the first nucleus of a word of three or more syllables is a *guess*, because that
+# is where this voice puts it unconditionally. Both go. What is left carries a mark
+# only where it is right by rule.
+def hr_stress(ipa):
+    out = []
+    for word in ipa.split():
+        word = word.replace("ˌ", "")
+        bare = word.replace("ˈ", "")
+        nuclei = [i for i, c in enumerate(bare)
+                  if (c in VOWELS and (i == 0 or bare[i - 1] not in VOWELS))
+                  or (c in "rl" and (i == 0 or bare[i - 1] not in VOWELS)
+                      and (i + 1 == len(bare) or bare[i + 1] not in VOWELS))]
+        # The mark sits immediately before its nucleus, so removing it shifts that
+        # nucleus to the mark's own index -- which is how a position in `word` is
+        # compared with a position in `bare`.
+        initial = "ˈ" not in word or len(nuclei) < 2 or word.index("ˈ") == nuclei[0]
+        out.append(word if len(nuclei) <= 2 and initial else word.replace("ˈ", ""))
+    return " ".join(out)
+
+
 # ------------------------------------------------------- Telugu final anusvara
 # **Word-final ం is [m], and this voice writes it `n`.** It is the one thing about
 # Telugu that the letters do not say and that a string fold cannot fix: 112 of the
@@ -3103,6 +3286,8 @@ def normalise(ipa, code, text=""):
         ipa = GEMINATE.sub(r"\1\1", ipa)
     if code == "hu":
         ipa = hu_stress(ipa)
+    if code == "hr":
+        ipa = hr_stress(ipa)
     return apply_stress(ipa, STRESS.get(code, "keep"))
 
 
@@ -3959,6 +4144,71 @@ def yo_to_ipa(word):
     return out
 
 
+# Georgian Mkhedruli, one letter to one phoneme. **No espeak route, and the voice
+# exists** -- which is the unusual part: `ka` *is* in this system's espeak-ng-data
+# 1.50, and it was measured against this table over 3,649 real Georgian Wikipedia
+# tokens before being refused (`tmp/ka/probe_espeak.py`). Two findings:
+#
+# - It agrees with this table on **98.96%** of them (3,611 of 3,649), so it adds
+#   almost nothing a table does not. What it adds in the other 38 is an
+#   **epenthetic `ə` inside consonant clusters** -- `ხანგრძლივი` comes back
+#   `xanɡrədzlivi`, `მღრღნელები` comes back `mɣrəɣnelebi`. Georgian has no
+#   epenthetic schwa; its phonotactics permit those clusters outright. That is a
+#   TTS pronounceability hack and it would print a vowel the language has not got.
+# - Its **ejectives are unmarked**, which is precisely where a Georgian IPA column
+#   goes wrong. espeak writes the *aspirated* series with `ʰ` and leaves the
+#   ejective series bare, so კ /kʼ/ came back `k`, ყ /qʼ/ came back `q`, and ჭ
+#   /tʃʼ/ came back **`c`** -- a voiceless palatal stop, a different sound in a
+#   different place.
+#
+# The three symbol choices, each argued against its alternative:
+#
+# - `ʼ` U+02BC on the six ejectives `kʼ pʼ tʼ qʼ tsʼ tʃʼ`. **It costs no reader
+#   table anything**: U+02BC is already in 464 cells of `am` and `ha`, so all
+#   forty-seven tables have been asked for it and are at zero gaps with it. `qʼ`
+#   is the one *sequence* new to the corpus -- `q` is in `ar`, `fa`, `tlh`, `ur`
+#   and `ʼ` in `am`, `ha`, but no pack has put them adjacent -- so it is checked
+#   with `respell_check --units`, which is the gate that can see a sequence whose
+#   halves each matched, the way the Hindi aspirated stops were found.
+# - **ღ is `ɣ` and ხ is `x`**, not `ʁ` and `χ`. Sourced -- the inventory in
+#   Wikipedia's Georgian phonology article, citing Aronson (1990) and Hewitt
+#   (1995), gives [ɣ] and [x] -- and it is also the choice that adds nothing,
+#   since `x` is in 2,030 cells across 23 packs and `ɣ` in 468 across 9, where
+#   **`χ` U+03C7 is in no cell of this corpus at all** and would have cost every
+#   reader table a rule. Khmer's `tɕ`-over-`c` and Persian's `q1`->`q` are the
+#   same trade.
+# - **The vowels are plain `a e i o u`.** The same inventory writes them [ä],
+#   [e̞], [i], [o̞], [u]: a central low and two *mid* mid-vowels, so `e`/`o` are
+#   nearer than `ɛ`/`ɔ` and the lowering diacritics are not worth a codepoint.
+#
+# **No stress**, which is Amharic's and Persian's answer. The sources disagree --
+# the phonetic study Wikipedia cites reports fixed initial stress, Hewitt's
+# grammar an initial stress for short words and an antepenultimate one for longer
+# -- Georgian stress is not phonemic either way, and espeak's placement is not
+# evidence: it landed on the first vowel in **3,647 of 3,647** tokens at every
+# length from one syllable to ten, which is a constant rather than a rule.
+KA = {
+    "ა": "a", "ბ": "b", "გ": "ɡ", "დ": "d", "ე": "e", "ვ": "v", "ზ": "z",
+    "თ": "tʰ", "ი": "i", "კ": "kʼ", "ლ": "l", "მ": "m", "ნ": "n", "ო": "o",
+    "პ": "pʼ", "ჟ": "ʒ", "რ": "r", "ს": "s", "ტ": "tʼ", "უ": "u", "ფ": "pʰ",
+    "ქ": "kʰ", "ღ": "ɣ", "ყ": "qʼ", "შ": "ʃ", "ჩ": "tʃʰ", "ც": "tsʰ",
+    "ძ": "dz", "წ": "tsʼ", "ჭ": "tʃʼ", "ხ": "x", "ჯ": "dʒ", "ჰ": "h",
+}
+
+
+def ka_to_ipa(word):
+    """One Georgian word. **Not lowercased**, because Mkhedruli is caseless.
+
+    Anything not in `KA` is carried out unchanged so a gate names it, which is the
+    same contract `YO`, `HA` and `FIL` have. In practice nothing reaches that
+    branch: the pack writes Mkhedruli and ASCII digits only, `tmp/ka/ka.py`'s
+    `check` refuses a Mtavruli, Asomtavruli, Nuskhuri or archaic-Mkhedruli
+    character at authoring time, and every Latin acronym the pack does quote is
+    either a `note` (skipped) or in `LOANWORDS["ka"]`.
+    """
+    return "".join(KA.get(c, c) for c in word)
+
+
 # Letters that are inside the IPA alphabet and still cannot appear in *Japanese*
 # IPA, so seeing one means a Hepburn mora went unconverted rather than that the
 # reading is exotic. `u` is the sharp one: Japanese /ɯ/ is never `u`, so a single
@@ -4133,6 +4383,19 @@ def route(code, chunks):
         # orthography is the script this table reads, the same shape of fact `ha`
         # and `fil` are in neither `ROMANISED` nor `NON_LATIN` for.
         return lambda chunk: " ".join(yo_to_ipa(w.lower()) for w in chunk.split()), "yo-g2p"
+    if code == "ka":
+        # Reads `row["text"]` itself, like `lo`, `ha`, `yo` and `fil` and unlike the
+        # six romanisation routes -- and `ka` *is* in `NON_LATIN`, because Georgian
+        # text is Mkhedruli and the Latin gate has something to check. **Not
+        # lowercased**: Mkhedruli is caseless and `.lower()` would be a no-op that
+        # implied otherwise. A word with no Mkhedruli character in it is skipped
+        # rather than read, for Lao's reason exactly: the only ones that arise are
+        # `language_name_ipa`'s fallbacks, where ICU has no Georgian display name and
+        # `languageName` answers with the bare code, and a Georgian G2P asked to read
+        # `qya` would invent a Georgian word.
+        return (lambda chunk: " ".join(ka_to_ipa(w) for w in chunk.split()
+                                       if any("\u10d0" <= c <= "\u10ff" for c in w)),
+                "ka-g2p")
     raise SystemExit(f"no route for {code}")
 
 
@@ -4859,6 +5122,31 @@ GRADE = {
            "syllable-agreement against, so this grade is a table read carefully rather "
            "than a corpus-wide measurement, the same honest bar Filipino's own entry "
            "sets."),
+    "ka": ("A-", "**a hand-written 33-letter table (`KA`) over Mkhedruli, chosen over an "
+           "espeak voice that does exist** -- which is why this grade is high and why "
+           "it is not an A. Georgian orthography is phonemic: one letter, one "
+           "phoneme, no allophony worth writing, no vowel reduction, no schwa "
+           "deletion, no orthographic gemination -- so a table is not an "
+           "approximation here, it is the mapping. The voice was measured against it "
+           "over 3,649 real Wikipedia tokens (`tmp/ka/probe_espeak.py`) and refused "
+           "on two counts: it agrees on 98.96% of them, and in the other 38 it "
+           "inserts an **epenthetic `ə` into consonant clusters** that Georgian does "
+           "not have (`ხანგრძლივი` -> `xanɡrədzlivi`), and it leaves **every ejective "
+           "unmarked**, giving კ /kʼ/ as `k`, ყ /qʼ/ as `q` and ჭ /tʃʼ/ as `c` -- a "
+           "palatal stop for an affricate. **The two disclosed gaps, neither hidden: "
+           "no stress mark and no uvular place.** Stress is not written because the "
+           "sources disagree (fixed-initial in the phonetic study, "
+           "initial-or-antepenultimate in Hewitt) and it is not phonemic in Georgian "
+           "either way; espeak's own placement is a constant, first vowel in 3,647 of "
+           "3,647 tokens, so it is not evidence. And ღ/ხ are written `ɣ`/`x` on "
+           "Aronson's and Hewitt's inventory rather than `ʁ`/`χ`, which loses the "
+           "post-velar place a narrow transcription would show -- accepted "
+           "deliberately, because `χ` is in no cell of this corpus and would have "
+           "cost all forty-seven reader tables a rule for one degree of backness. "
+           "The ejective `ʼ` U+02BC costs nothing, being already in `am` and `ha`; "
+           "`qʼ` is the one new *sequence* and is checked with `--units`, not "
+           "`--gaps`, because a sequence whose halves each match is exactly what "
+           "`--gaps` cannot see."),
     "yo": ("B+", "no espeak voice exists for `yo` either -- checked the same way `ha`'s "
            "absence was, against both this system's espeak-ng-data (1.50, 109 "
            "languages) and `espeakng_loader`'s newer bundled tree (140 languages): "
@@ -5005,6 +5293,39 @@ GRADE = {
            "probe-based audit of every symbol the voice emits, against all 41 reader "
            "tables, rather than a corpus-wide measurement -- like Kannada's, "
            "Gujarati's and Punjabi's."),
+    "hr": ("A-", "Gaj's alphabet is near-phonemic in the direction that matters -- one "
+           "letter or digraph per phoneme, read left to right, no schwa deletion and "
+           "no inherent vowel -- so the segmental derivation is the easy part and the "
+           "grade is set by two things above it. **What the voice gets right is the "
+           "part that separates Croatian from a naive reading of it**: the two "
+           "affricate pairs the alphabet distinguishes and foreigners merge come back "
+           "distinct (č `tʃ` against ć `tɕ`, dž `dʒ` against đ `dʑ`, probed on čaj / "
+           "ćevapi / džem / đak and on sviđati / Do viđenja), the digraphs lj and nj "
+           "come back as `ʎ` and `ɲ` rather than as two letters, syllabic r is right "
+           "on every probe (vrh, prst, srce, četvrtak, trbuh), and regressive voicing "
+           "assimilation is applied across a word boundary as well as inside a word "
+           "(`vas zovite` -> `vˈaz zˈovite`, `Pred klasifikatorom` -> `pret`). **What "
+           "it gets wrong is allophonic**, and it is repaired rather than graded "
+           "around: six folds in REPAIR above take Croatian's five vowels and one "
+           "rhotic back to five and one, which the measured counts justify to the "
+           "cell (`ɪ` 963 against `i` 338, and so on). **Stress is written only at up "
+           "to two syllables** -- see `hr_stress`, which measured espeak's mark on the "
+           "first syllable of 1,015 of the pack's 1,016 distinct polysyllables and "
+           "kept exactly the class where the first syllable is right by rule -- a "
+           "syllabic r or l counting as a nucleus, which is what catches the 20 "
+           "tokens where the mark sat on a second syllable (ɡrlˈo for GR-lo). That "
+           "leaves 1,179 of the shipped column's 2,453 word tokens unmarked, 48%, "
+           "state of the column rather than a defect in it. **The one thing genuinely missing is "
+           "length**: Croatian has a phonemic long/short contrast on every vowel and "
+           "this voice emitted `ː` on 7 of the pack's 904 chunks, so the column is "
+           "effectively quantity-blind -- Amharic's gemination problem in another "
+           "language, and unlike Amharic there is no authored romanisation column to "
+           "recover it from. Pitch accent is not written either and is not counted "
+           "against the grade: no reader table has a device for it, and standard "
+           "Croatian speech is itself split on whether it is realised. No curated "
+           "Croatian sheet exists to score syllable-agreement against, so this grade "
+           "is a probe-based audit plus the corpus-wide symbol and stress counts "
+           "above."),
 }
 
 

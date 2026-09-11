@@ -1,0 +1,13 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+introductions.my-name-is,ខ្ញុំឈ្មោះ {},,kʰɲom tɕʰmuəh {},,2,"Huffman, Modern Spoken Cambodian (Yale, 1970);ipa=km-analysis"
+introductions.nice-to-meet-you,រីករាយដែលបានជួប,សប្បាយចិត្តដែលបានជួប,riːkriəj dael baːn tɕuəp,Khmer has no everyday formula for this; both forms belong to the polite register,2,"Smyth, Colloquial Cambodian (Routledge); Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977);ipa=km-analysis"
+introductions.what-is-your-name,អ្នកឈ្មោះអ្វី?,,neəʔ tɕʰmuəh ʔwəj,,2,"Huffman, Modern Spoken Cambodian (Yale, 1970);ipa=km-analysis"
+introductions.we-are-traveling-together,យើងធ្វើដំណើរជាមួយគ្នា,,jəːŋ tʰwəː dɑmnaə tɕiəmuəjkniə,,2,"Huffman, Modern Spoken Cambodian (Yale, 1970);ipa=km-analysis"
+introductions.this-is-my-friend,នេះជាមិត្តរបស់ខ្ញុំ,,nih tɕiə mit rɔbɑh kʰɲom,,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977);ipa=km-analysis"
+introductions.i-am-from,ខ្ញុំមកពី {},,kʰɲom mɔːk piː {},,2,"Huffman, Modern Spoken Cambodian (Yale, 1970);ipa=km-analysis"
+introductions.where-are-you-from,អ្នកមកពីណា?,,neəʔ mɔːk piː naː,,2,"Huffman, Modern Spoken Cambodian (Yale, 1970);ipa=km-analysis"
+introductions.how-are-you,សុខសប្បាយជាទេ?,,sok sɑpbaːj tɕiə teː,"'are you well?' -- the ordinary Khmer greeting-question, not a health enquiry",2,"Huffman, Modern Spoken Cambodian (Yale, 1970); Smyth, Colloquial Cambodian (Routledge);ipa=km-analysis"
+introductions.i-am-a-tourist,ខ្ញុំជាអ្នកទេសចរណ៍,,kʰɲom tɕiə neəʔ teːsɑtɕɑː,,2,"Ministry of Tourism Khmer-language wording (ទេសចរណ៍); Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977);ipa=km-analysis"
+introductions.this-is-my-husband-wife,នេះជាប្តីរបស់ខ្ញុំ,នេះជាប្រពន្ធរបស់ខ្ញុំ,nih tɕiə bdəj rɔbɑh kʰɲom,"first form says husband, second says wife; Khmer has no word covering both",2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977);ipa=km-analysis"
+introductions.this-is-my-daughter-son,នេះជាកូនស្រីរបស់ខ្ញុំ,នេះជាកូនប្រុសរបស់ខ្ញុំ,nih tɕiə kounsrəj rɔbɑh kʰɲom,"first form says daughter, second says son",2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977);ipa=km-analysis"
+introductions.i-am-traveling-alone,ខ្ញុំធ្វើដំណើរម្នាក់ឯង,,kʰɲom tʰwəː dɑmnaə mneəʔʔaeŋ,,2,"Huffman, Modern Spoken Cambodian (Yale, 1970);ipa=km-analysis"

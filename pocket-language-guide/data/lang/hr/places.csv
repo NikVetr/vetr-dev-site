@@ -1,0 +1,8 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,Gdje mogu kupiti karte?,,ɡdjˈe mˈoɡu kupiti kˈarte,,2,hr-agent-v1;ipa=espeak
+attractions-tickets.do-i-need-a-reservation,Je li potrebna rezervacija?,,je li potrebna rezervatsija,,2,hr-agent-v1;ipa=espeak
+attractions-tickets.what-is-the-latest-entry-time,Do kada je moguć ulaz?,,dˈo kˈada je mˈoɡutɕ ˈulaz,,2,hr-agent-v1;ipa=espeak
+attractions-tickets.are-there-lockers,Ima li ormarića za prtljagu?,,ima li ormaritɕa zˈa prtʎaɡu,,2,hr-agent-v1;ipa=espeak
+attractions-tickets.may-i-take-photos,Smijem li fotografirati?,,smˈijem li fotoɡrafirati,,2,hr-agent-v1;ipa=espeak
+attractions-tickets.please-take-a-photo-of-us,"Molim vas, fotografirajte nas",,"mˈolim vˈas, fotoɡrafirajte nˈas",,2,hr-agent-v1;ipa=espeak
+attractions-tickets.could-you-take-a-photo-for-us,Možete li nas fotografirati?,,moʒete li nˈas fotoɡrafirati,,2,hr-agent-v1;ipa=espeak

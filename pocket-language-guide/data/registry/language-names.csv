@@ -14,6 +14,7 @@ am,gu,,gujartīnnya,ɡudʒartiɲːa
 am,ha,,hāwsanya,hawsaɲa
 am,he,,ʽibraystʼ,ʔɨbrajstʼ
 am,hi,,hindinnya,hɨndɨɲːa
+am,hr,,kroshiyannya,kroʃɨjaɲːa
 am,hu,,hāngarīnnya,hanɡariɲːa
 am,id,,īndonēzhyannya,ʔindoneʒjaɲːa
 am,it,,tʼalīyaninnya,tʼalijanɨɲːa
@@ -59,6 +60,7 @@ ar,gu,,al-ghūjārātīyah,ʔalɣˌuːdʒaːɹaːtˈijjah
 ar,ha,,al-Hawsā,ʔalhˈuːsaː
 ar,he,,al-ʿibrīyah,ʔalʕabɹˈijjah
 ar,hi,,al-hindīyah,ʔalhindˈijjah
+ar,hr,,al-Kurwātīyah,ʔalkˌirwaːtˈijjah
 ar,hu,,al-hunghārīyah,ʔalhnɣaːɹˈijjah
 ar,id,,al-indūnīsīyah,ʔalʔndˌuːniːsˈijjah
 ar,it,,al-īṭālīyah,ʔalʔˌiːt̪aːlˈijjah
@@ -104,6 +106,7 @@ bn,gu,,gujarāṭi,ɡˈuɟɔɾˌaʈi
 bn,ha,,hāusā,hˈauʃˌa
 bn,he,,hibru,hˈibɾu
 bn,hi,,hindi,hˈindi
+bn,hr,,krōẏēśīẏa,kɾˈoeʃˌij
 bn,hu,,hāṅgerīẏa,hˈaŋɡeɾˌij
 bn,id,,indoneśīẏa,ˈindonˌeʃij
 bn,it,,itālīẏa,ˈitalˌij
@@ -149,6 +152,7 @@ cs,gu,gudžarátsky,,ɡˈudʒarˌaːtski
 cs,ha,,,hˈaʊʃcina
 cs,he,hebrejsky,,hˈebreɪski
 cs,hi,hindsky,,hˈintski
+cs,hr,chorvatsky,,xˈorvatski
 cs,hu,maďarsky,,mˈaɟarski
 cs,id,indonésky,,ˈindonˌeːski
 cs,it,italsky,,ˈitalski
@@ -239,6 +243,7 @@ el,gu,,Gkoutzaratika,ɡˌudzaɾˌatikˈa
 el,ha,,Cháousa,xˈausˌa
 el,he,,Evraika,ˌevɾaɪkˈa
 el,hi,,Chinti,çˈidi
+el,hr,,Kroatika,kɾˌoatikˈa
 el,hu,,Oungrika,ˌuŋɡɾikˈa
 el,id,,Indonisiaka,ˌinðonˌisjakˈa
 el,it,,Italika,ˌitalikˈa
@@ -374,6 +379,7 @@ fa,gu,,gojarāti,ɡodʒarɑti
 fa,ha,,hosa'i,husɑi
 fa,he,عِبری,ebri,ʔebri
 fa,hi,,hendi,hendi
+fa,hr,,korvāt,krovɑt
 fa,hu,,majāri,madʒɑri
 fa,id,,andoneziyāyi,andonezijɑi
 fa,it,,itāliyāyi,itɑliɑi
@@ -419,6 +425,7 @@ fil,gu,,,ɡudʒaɾati
 fil,ha,,,hausa
 fil,he,Hebreo,,hɛbɾɛo
 fil,hi,,,hindi
+fil,hr,Kroasyano,,kɾoasjano
 fil,hu,Hungaro,,huŋaɾo
 fil,id,Indonesiyo,,indonɛsijo
 fil,it,Italyano,,italjano
@@ -509,6 +516,7 @@ gu,gu,,gujarātī,ɡuɟɾaːti
 gu,ha,,hausā,hɔsaː
 gu,he,,hībru,hiːbɾu
 gu,hi,,hindī,hɪndi
+gu,hr,,krōēśiyan,kɾoːeːʃɪjən
 gu,hu,,haṁgēriyan,həŋɡeːɾɪjən
 gu,id,,inḍōnēśiyan,ɪnɖoːneːʃɪjən
 gu,it,,iṭāliyan,ɪʈaːlɪjən
@@ -599,6 +607,7 @@ he,gu,,gojarti,ɡojaʁtˈi
 he,ha,,ha’usa,hausˈa
 he,he,,‘ivrit,ivʁˈit
 he,hi,,híndi,hˈindi
+he,hr,,kroatit,kʁoatˈit
 he,hu,,hungarit,hunɡaʁˈit
 he,id,,indonezit,indonezˈit
 he,it,,italqit,italkˈit
@@ -644,6 +653,7 @@ hi,gu,,gujarātī,ɡˌʊɟɾˈaːti
 hi,ha,,hausā,hˈɔːsaː
 hi,he,,hibrū,hˈɪbɾuː
 hi,hi,हिन्दी,hindī,hˈɪndi
+hi,hr,,kroeśiyāī,kɾˌoːeːʃɪjˈaːi
 hi,hu,,haṁgeriyāī,hˌəŋɡeːɾɪjˈaːi
 hi,id,,iṁḍoneśiyāī,ˌĩɖoːnˌeːʃɪjˈaːi
 hi,it,,itālvī,ɪtˈaːlʋˌi
@@ -674,6 +684,52 @@ hi,ur,,urdū,ˈʊɾduː
 hi,vi,,viyatnāmī,ʋˌɪjətnˈaːmi
 hi,yo,,yorūbā,joːɾˈuːbaː
 hi,zh-Hans,,cīnī,cˈiːni
+hr,am,,,amxarski
+hr,ar,,,arapski
+hr,bn,,,bˈanɡla
+hr,cs,,,tʃˈeʃki
+hr,de,,,ɲematʃki
+hr,el,,,ɡrtʃki
+hr,en,,,enɡleski
+hr,es,,,ʃpaɲolski
+hr,fa,,,perzijski
+hr,fil,,,filipinski
+hr,fr,,,frantsuski
+hr,gu,,,ɡudʒaratski
+hr,ha,,,xˈausa
+hr,he,,,xebrejski
+hr,hi,,,xˈintski
+hr,hr,,,xrvaːtski
+hr,hu,,,madʑarski
+hr,id,,,indonezijski
+hr,it,,,talijanski
+hr,ja,,,japanski
+hr,kn,,,karnatatʃki
+hr,ko,,,korejski
+hr,lo,,,lˈaoski
+hr,ml,,,malajalamski
+hr,mr,,,maratxski
+hr,ms,,,malajski
+hr,ne,,,nepalski
+hr,nl,,,nizozemski
+hr,pa,,,pandʒapski
+hr,pl,,,pˈoʎski
+hr,pt,,,portuɡalski
+hr,qya,quenya,,kvˈenja
+hr,ro,,,rumuɲski
+hr,ru,,,rˈuski
+hr,sv,,,ʃvˈetski
+hr,sw,,,svaxili
+hr,ta,,,tamilski
+hr,te,,,teluʃki
+hr,th,,,tajlantski
+hr,tlh,,,klinɡonski
+hr,tr,,,tˈurski
+hr,uk,,,ukrajinski
+hr,ur,,,ˈurtski
+hr,vi,,,vijetnamski
+hr,yo,,,jorupski
+hr,zh-Hans,,,kineski
 hu,am,,,ˈɑmhɑrɑ
 hu,ar,,,ˈɑrɑb
 hu,bn,,,bˈɑnɡlɑ
@@ -824,6 +880,7 @@ ja,gu,,gujarātogo,ɡɯdʑaɾaːtoɡo
 ja,ha,,Hausago,haɯsaɡo
 ja,he,,heburaigo,hebɯɾaiɡo
 ja,hi,,hindīgo,çiɴdiːɡo
+ja,hr,,kuroachiago,kɯɾoatɕiaɡo
 ja,hu,,hangarīgo,haɴɡaɾiːɡo
 ja,id,,indoneshiago,iɴdoneɕiaɡo
 ja,it,,itariago,itaɾiaɡo
@@ -869,6 +926,7 @@ kn,gu,,gujarāti,ɡuɟaraːti
 kn,ha,,hausā,haʊsaː
 kn,he,,hībrū,hiːbruː
 kn,hi,,hiṁdi,hindi
+kn,hr,,kroyēśiyan,krojeːʃijan
 kn,hu,,haṁgēriyan,haŋɡeːrijan
 kn,id,,iṁḍōnēśiyan,iɳɖoːneːʃijan
 kn,it,,iṭāliyan,iʈaːlijan
@@ -914,6 +972,7 @@ ko,gu,,gujarateueo,kudʑaɾatʰɯʌ
 ko,ha,,hausaeo,hausaʌ
 ko,he,,hibeurieo,hibɯɾiʌ
 ko,hi,,hindi-eo,hindiʌ
+ko,hr,,keuroatiaeo,kʰɯɾoatʰiaʌ
 ko,hu,,heonggari-eo,hʌŋɡaɾiʌ
 ko,id,,indonesia-eo,indonesiaʌ
 ko,it,,itallia-eo,itʰalliaʌ
@@ -959,6 +1018,7 @@ lo,gu,,koucharati,kuː˩caː˩raː˧˥tiʔ˧˥
 lo,ha,,haoxa,haw˧˥saː˧˥
 lo,he,,hipriou,hiːp˥˨riw˧˥
 lo,hi,,hindi,hin˧˥diʔ˧˥
+lo,hr,,khōrēthian,kʰroː˧˥ʔeː˩tʰia̯n˧˥
 lo,hu,,hangkarian,haŋ˧˥kaː˩ria̯n˧˥
 lo,id,,indônéxian,ʔin˩doː˩neː˧˥sia̯n˧˥
 lo,it,,italian,ʔiʔ˧˥taː˩lia̯n˧˥
@@ -1004,6 +1064,7 @@ ml,gu,,gujaṟātti,ɡuɟaraːtti
 ml,ha,,hausa,hausa
 ml,he,,hībru,hiːbɾu
 ml,hi,,hindi,hindi
+ml,hr,,kroyēṣyan,kɾojeːʂjan
 ml,hu,,haṁgēṟiyan,hamɡeːrijan
 ml,id,,intōnēṣyan,indoːneːʂjan
 ml,it,,iṟṟāliyan,iʈʈaːlijan
@@ -1049,6 +1110,7 @@ mr,gu,,gujarātī,ɡˌʊzɾˈaːti
 mr,ha,,hausā,hˈaʊsaː
 mr,he,,hibrū,hˈɪbɾuː
 mr,hi,,hiṁdī,hˈĩdi
+mr,hr,,kroēśiyana,kɾoːˈeːʃɪjˌən
 mr,hu,,haṁgēriyana,həŋɡˈeːɾɪjˌən
 mr,id,,iṁḍōnēśiyana,ˌĩɖoːnˈeːʃɪjˌən
 mr,it,,iṭāliyana,ɪʈˈaːlɪjˌən
@@ -1139,6 +1201,7 @@ ne,gu,,gujarātī,ɡˌuɟəɾˈaːti
 ne,ha,,hāusā,hˈaːʊsˌaː
 ne,he,,hibru,hˈɪbɾu
 ne,hi,,hindī,hˈɪndi
+ne,hr,,kroyasiyālī,kɾˌoːjəsɪjˈaːli
 ne,hu,,haṅgēriyālī,hˌəŋɡeːɾɪjˈaːli
 ne,id,,inḍōnēsiyālī,ˌɪnɖoːnˌeːsɪjˈaːli
 ne,it,,iṭālēlī,ˌɪʈaːlˈeːli
@@ -1229,6 +1292,7 @@ pa,gu,,gujarātī,ɡʊɟəɾati
 pa,ha,,hausā,hɔsa
 pa,he,,hibarū,hɪbəɾu
 pa,hi,,hiṁdī,hɪndi
+pa,hr,,krōēśiāī,kɾoeʃɪai
 pa,hu,,haṁgarīāī,hənɡəɾiai
 pa,id,,iṁḍōnēśīāī,ɪɳɖoneʃiai
 pa,it,,itālavī,ɪtaləʋi
@@ -1274,6 +1338,7 @@ pl,gu,po gudżarati,,pɔ ɡˌudʒarˈatʲi
 pl,ha,,,xˈawsa
 pl,he,po hebrajsku,,pɔ xɛbrˈajsku
 pl,hi,po hindi,,pɔ xˈindʲi
+pl,hr,po chorwacku,,pɔ xɔrvˈatsku
 pl,hu,po węgiersku,,pɔ vɛŋɡʲˈɛrsku
 pl,id,po indonezyjsku,,pɔ ˌindɔnɛzˈɨjsku
 pl,it,po włosku,,pɔ vwˈɔsku
@@ -1410,6 +1475,7 @@ ru,gu,гуджарати,gudzharati,ɡudʒˈɑrʌtʲɪ
 ru,ha,,khausa,xaˈusa
 ru,he,иврите,ivrite,ɪvrʲˈitʲi
 ru,hi,хинди,khindi,xˈindʲɪ
+ru,hr,хорватском,khorvatskom,xʌrvˈɑtskʌm
 ru,hu,венгерском,vengerskom,vʲinɡʲˈerskʌm
 ru,id,индонезийском,indoneziyskom,ɪndʌnʲˈeʑijskʌm
 ru,it,итальянском,italʼyanskom,ɪtaɭjˈjanskʌm
@@ -1545,6 +1611,7 @@ ta,gu,,kujarātti,ɡudʒʌɾaːtti
 ta,ha,,hausā,haʊsaː
 ta,he,,hīprū,hiːbɾɯ
 ta,hi,,inti,indi
+ta,hr,,kurōṣiyan,kuɾoːʂijʌn
 ta,hu,,haṅkēriyaṉ,hʌŋɡeːɾijʌn
 ta,id,,intōṉēṣiyaṉ,indoːneːʂijʌn
 ta,it,,ittāliyaṉ,ittaːlijʌn
@@ -1590,6 +1657,7 @@ te,gu,,gujarātī,ɡudʒaraːtiː
 te,ha,,hausā,haʊsaː
 te,he,,hībrū,hiːbruː
 te,hi,,hiṁdī,hindiː
+te,hr,,kroyēṣiyan,krojeːʂijan
 te,hu,,haṁgēriyan,haŋɡeːrijan
 te,id,,iṁḍōnēṣiyan,iɳɖoːneːʂijan
 te,it,,iṭāliyan,iʈaːlijan
@@ -1635,6 +1703,7 @@ th,gu,,khutcharat,kʰuʔ˦˥tɕʰa˦˥raː˧tɔː˧
 th,ha,,Haosa,haw˧ saː˧
 th,he,,hibru,hiʔ˦˥bɔː˧
 th,hi,,hindi,hin˧diː˧
+th,hr,,khroechia,kʰroːn˧ʔeː˧tɕʰia̯˧
 th,hu,,hangkari,haŋ˧kaː˧riː˧
 th,id,,indonisia,ʔin˧doː˧niː˧sia̯˧
 th,it,,itali,ʔiʔ˨˩taː˧liː˧
@@ -1680,6 +1749,7 @@ tlh,gu, ,ghujaratI Hol,ɣudʒɑrɑtʰɪ xol
 tlh,ha, ,HawSa Hol,xɑwʂɑ xol
 tlh,he, ,'IvghIt Hol,ʔɪvɣɪtʰ xol
 tlh,hi, ,HInDIy Hol,xɪnɖɪj xol
+tlh,hr, ,HurvatISqa Hol,xurvɑtʰɪʂqʰɑ xol
 tlh,hu, ,maDyar Hol,mɑɖjɑr xol
 tlh,id, ,'InDoneSya' Hol,ʔɪnɖonɛʂjɑʔ xol
 tlh,it, ,'Italya' Hol,ʔɪtʰɑljɑʔ xol
@@ -1770,6 +1840,7 @@ uk,gu,,hudzharati,hudʒarˈatiː
 uk,ha,,khausa,xaˈusa
 uk,he,івритом,ivrytom,iːʋrˈɪtom
 uk,hi,гінді,hindi,hˈiːndiː
+uk,hr,хорватською,khorvatskoiu,xorʋˈatskoju
 uk,hu,угорською,uhorskoiu,uhˈorskoju
 uk,id,індонезійською,indoneziiskoiu,iːndonˈɛziːjskoju
 uk,it,італійською,italiiskoiu,iːtaʎˈiːjskoju
@@ -1860,6 +1931,7 @@ vi,gu,Gujarati,,ɡʊdʒɐɹɑːti˧
 vi,ha,,,t̪iɛ̯ŋ˧˥ hawsaː˧
 vi,he,Do Thái,,zɔ˧ taːj˧˥
 vi,hi,Hindi,,hɪndi˧
+vi,hr,Croatia,,kɹəʊeɪʃə˧
 vi,hu,Hungary,,hʌŋɡəɹi˧
 vi,id,Indonesia,,ɪndəʊniːziə̯˧
 vi,it,Ý,,i˧˥
@@ -1950,6 +2022,7 @@ zh-Hans,gu,,Gǔjílātèyǔ,ku˧˩˧tɕi˧˥la˥tʰɤ˥˩y˧˩˧
 zh-Hans,ha,,Háosàyǔ,xɑʊ˧˥sa˥˩y˧˩˧
 zh-Hans,he,,Xībóláiyǔ,ɕi˥pwɔ˧˥laɪ˧˥y˧˩˧
 zh-Hans,hi,,Yìndìyǔ,in˥˩ti˥˩y˧˩˧
+zh-Hans,hr,,Kèluódìyàyǔ,kʰɤ˥˩lwɔ˧˥ti˥˩ja˥˩y˧˩˧
 zh-Hans,hu,,Xiōngyálìyǔ,ɕjʊŋ˥ja˧˥li˥˩y˧˩˧
 zh-Hans,id,,Yìndùníxīyàyǔ,in˥˩tu˥˩ni˧˥ɕi˥ja˥˩y˧˩˧
 zh-Hans,it,,Yìdàlìyǔ,i˥˩ta˥˩li˥˩y˧˩˧

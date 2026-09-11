@@ -18,6 +18,7 @@ from pathlib import Path
 from fontTools import subset
 from fontTools.merge import Merger
 from fontTools.ttLib import TTFont
+from fontTools.ttLib.tables.DefaultTable import DefaultTable
 from fontTools.ttLib.scaleUpem import scale_upem
 from fontTools.varLib import instancer
 
@@ -79,6 +80,33 @@ THAI_RANGES = [(0x0E00, 0x0E7F)]
 # of them -- Laos prices, buses and timetables are in ASCII numerals, which is
 # Hindi's and Tamil's answer rather than Bengali's and Arabic's.
 LAO_RANGES = [(0x0E80, 0x0EFF)]
+# The whole Khmer block, for Lao's, Bengali's and Telugu's reason and one of its own.
+#
+# Khmer OS Content positions **every** vowel sign, subscript and register shifter by
+# GSUB substitution -- 696 glyphs of precomposed and contextual forms under
+# `blwf abvf blws pres psts liga clig` and 52 `zz##` features, with a GPOS table that
+# declares two scripts and holds zero features and zero lookups. None of those output
+# glyphs has a codepoint, so the request has to be the block whole rather than the
+# letters the corpus happens to use today; `subset_source`'s `layout_features = ["*"]`
+# is what keeps the lookups that reach them. That GSUB-only design is also why this
+# face was chosen -- see tmp/khmer.md section 4 -- because it makes both of
+# fontkit's Khmer crash paths unreachable by construction.
+#
+# 100 of the block's 114 assigned codepoints are in the face and the subsetter
+# intersects with the cmap anyway. The fourteen it lacks are exactly the fourteen no
+# modern Khmer text writes: U+17B4/17B5, which Unicode's own note says are for
+# transliteration and must not appear in Khmer text; U+17DC/17DD, which are Pali-only;
+# and U+17F0..17F9, the archaic lek attak divination numerals. The riel sign `៛`
+# U+17DB **is** present, checked against the cmap rather than assumed, because
+# `numbers-money.riel-symbol` prints it.
+#
+# U+17E0..17E9, the Khmer digits, arrive with the block and no row can reach them:
+# the pack writes ASCII numerals, which is Hindi's, Tamil's, Telugu's and Lao's
+# answer rather than Bengali's -- and here it is measured rather than conventional.
+# The Khmer digits are `Script=Khmer`, so `core/measure.js`'s `BREAKS_ANYWHERE`
+# makes `wordish` false for them and the `IN_WORD` glue cannot weld them, which
+# means `១១៩` would offer a line break between each digit. See tmp/khmer.md section 1.
+KHMR_RANGES = [(0x1780, 0x17FF)]
 # The whole Hebrew block: 88 of its 135 codepoints are in both Hebrew faces, and the
 # subsetter intersects with the cmap anyway. The Alphabetic Presentation Forms block
 # is deliberately *not* here -- U+FB2A shin-with-dot and U+FB31 bet-with-dagesh are
@@ -280,6 +308,20 @@ FACES = {
     # tmp/lao.md section 5), so the typeface control falls back to sans for Lao.
     ("laoo", 400, False): "Phetsarath-Regular.ttf",
     ("laoo", 700, False): "Phetsarath-Bold.ttf",
+    # Khmer, and sans-only for Lao's, Telugu's, Gujarati's, Kannada's and Malayalam's
+    # reason: the only OFL Khmer serif is Noto Serif Khmer, which throws 19,041 times
+    # in 213,605 clusters on NULL MarkBasePos base anchors, so the typeface control
+    # falls back to sans for Khmer.
+    #
+    # Khmer OS Content is the **only** candidate of twenty-four whose fontkit output
+    # is identical to HarfBuzz's, glyph for glyph and advance for advance, with zero
+    # throws, over 260,015 clusters in both weights -- the 213,605-cluster cube of
+    # every cluster modern Khmer orthography writes plus a 46,410-cluster
+    # register-shifter cube. All six Noto Khmer faces are refused twice over, and
+    # Battambang, Suwannaphum, Hanuman and Nokora each on a fontkit defect Khmer is
+    # the only script here that can reach. See tmp/khmer.md sections 2 to 4.
+    ("khmr", 400, False): "Content-Regular.ttf",
+    ("khmr", 700, False): "Content-Bold.ttf",
     ("thai", 400, False): "NotoSansThai-var.ttf",
     ("thai", 700, False): "NotoSansThai-var.ttf",
     ("thai-serif", 400, False): "NotoSerifThai-var.ttf",
@@ -572,7 +614,18 @@ LATIN_DONOR = {"NotoSansArabic-Regular.ttf": "NotoSans-Regular.ttf",
                # Arabic's, so the em square really is rescaled: Phetsarath is 2048
                # units where Noto is 1000, and `scale_upem` is what makes that safe.
                "Phetsarath-Regular.ttf": "NotoSans-Regular.ttf",
-               "Phetsarath-Bold.ttf": "NotoSans-Bold.ttf"}
+               "Phetsarath-Bold.ttf": "NotoSans-Bold.ttf",
+               # Khmer OS Content is Phetsarath's case exactly, read off the same
+               # `getBestCmap()`: 35 codepoints of U+0020..024F -- the ASCII digits
+               # and punctuation -- so **no Latin letter of either case** and no `·`
+               # U+00B7, which `core/pack.js` joins the emergency numbers with. Every
+               # Khmer candidate measured shares that cost; Battambang, Suwannaphum,
+               # Nokora and Hanuman carry 98 codepoints and are also missing `·`
+               # and `…`. A different family rather than a sibling cut, as with
+               # Phetsarath, so the em square really is rescaled: Content is 2048
+               # units where Noto is 1000, and `scale_upem` is what makes that safe.
+               "Content-Regular.ttf": "NotoSans-Regular.ttf",
+               "Content-Bold.ttf": "NotoSans-Bold.ttf"}
 
 # The same graft in the other direction, for the two conscripts. No Noto face has a
 # pIqaD or a tengwar glyph -- neither script is in Unicode -- so the four Latin
@@ -838,7 +891,42 @@ ALL_LANGS = ["en", "es", "fr", "de", "ko", "ar", "zh-Hans", "ja",
              # every Latin face through `LATIN_RANGES` at the top of this file.
              # Measured against the shipped faces rather than inferred, the way
              # Persian's `پ چ ژ گ`, Ukrainian's `і ї є ґ` and Punjabi's `ġ` were.
-             "lo"]
+             "lo",
+             # Khmer. `KHMR_RANGES` above already requests the whole Khmer block
+             # unconditionally for the `khmr` stack, so this entry in the `latin`
+             # union is for the pack's `ipa` column -- which the Latin faces draw on
+             # every pair -- and for the rows that quote a Latin acronym (`ATM`,
+             # `SIM`, `Wi-Fi`, `PIN`, `QR`, all of which Cambodia writes in Latin).
+             # Lao's, Malayalam's, Kannada's, Gujarati's and Telugu's shape exactly.
+             #
+             # The `ipa` column adds **no codepoint any shipped Latin face lacks**,
+             # and that is the deliberate result of two notation choices rather than
+             # luck: Khmer's palatal stops are written `tɕ`/`tɕʰ` rather than `c`/`cʰ`
+             # and `ប`/`ដ` are written `b`/`d` rather than `ɓ`/`ɗ`, both chosen on
+             # reader-table cost -- `ɓ` has a rule in no reader table at all. Khmer is
+             # also not tonal, so unlike Thai, Lao, Vietnamese, Mandarin and Punjabi
+             # it brings no Chao tone letter. There is no romanisation column: see
+             # tmp/registry-km.md for why `geodept` carries no diacritic, and
+             # tmp/km/buildpack.py for why the cells are empty rather than derived.
+             "km",
+             # Croatian, which needs no stack of its own -- `Latn` already routes to
+             # `latin` -- but does need naming here, for Polish's and Italian's
+             # reason: a Latin language left out of this union is the omission
+             # Italian shipped with for a whole language generation and survived only
+             # by luck.
+             #
+             # **And it costs the union nothing, which was measured rather than
+             # assumed.** Gaj's alphabet is `č ć š ž đ` plus the digraphs `dž lj nj`,
+             # and every one of those letters is already requested: `č š ž` by Czech,
+             # `ć` by Polish, `đ` by Vietnamese, and the digraphs are two ordinary
+             # letters each. The `ipa` column adds nothing either -- `REPAIR["hr"]`
+             # folds Croatian's allophones down to five vowels and one rhotic, so the
+             # column's whole repertoire is `ɕ ɡ ɲ ʃ ʎ ʑ ʒ ˈ ː`, all of which older
+             # packs already need. Checked against the cmap of all sixteen shipped
+             # Latin faces over every cell of the pack, both registry files and the
+             # `Đđ` badge: nothing is absent from any of them. There is no
+             # romanisation column, Croatian being Latin already.
+             "hr"]
 STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                "latin-serif": ALL_LANGS, "latin-cond-serif": ALL_LANGS,
                "cjk-sc": ["zh-Hans"], "cjk-sc-serif": ["zh-Hans"],
@@ -861,6 +949,7 @@ STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                # change either.
                "arabic": ["ar", "fa", "ur"], "thai": ["th"], "thai-serif": ["th"],
                "laoo": ["lo"],
+               "khmr": ["km"],
                "deva": ["hi"], "deva-serif": ["hi"],
                "beng": ["bn"], "beng-serif": ["bn"],
                "taml": ["ta"], "taml-serif": ["ta"],
@@ -968,6 +1057,8 @@ def coverage(stack):
         chars |= expand(THAI_RANGES)
     elif stack.startswith("laoo"):
         chars |= expand(LAO_RANGES)
+    elif stack.startswith("khmr"):
+        chars |= expand(KHMR_RANGES)
     elif stack.startswith("deva"):
         chars |= expand(DEVA_RANGES)
     elif stack.startswith("beng"):
@@ -991,9 +1082,67 @@ def coverage(stack):
     return chars
 
 
+# Sources whose AAT tables are kept through the subset. @see aat_tables
+#
+# **Phetsarath has `morx` and `feat` too and is deliberately not here**, which is the
+# half of this decision that needed measuring. Lao does not need the repair: against
+# the browser its subset is already exact -- 0.03% aggregate over its 824 cells,
+# unchanged with the tables and without them -- so keeping them buys nothing, and it
+# costs something real. Every one of those 824 glyph runs changes when fontkit shapes
+# Lao through AAT instead of OpenType, and Phetsarath was *chosen* on its OpenType
+# behaviour: tmp/lao.md's argument is that it does the U+0EB3 decompose-and-reorder
+# entirely in GSUB `rlig` with no GPOS at all, which is why preview and export agree
+# by construction where every Noto Lao face disagrees. Moving a shipped language onto
+# a different shaping path with no measured gain would throw that argument away.
+AAT_SOURCES = {"Content-Regular.ttf", "Content-Bold.ttf"}
+
+
+def aat_tables(font, source=None):
+    """A font's AAT `morx`/`feat` as raw bytes, or `{}`.
+
+    **fontkit prefers AAT over OpenType whenever a font has a `morx` table**, and
+    `fontTools.subset` cannot subset one, so it drops it with a warning -- which
+    silently moves the shaper out from under us. Khmer OS Content is the one source
+    here that ships both, and dropping its `morx` is what put fontkit on its
+    OpenType path, where the chain-context *backtrack* defect recorded in
+    tmp/khmer.md section 2 mis-measures 11 of 17 probe clusters by up to 0.2832em
+    against HarfBuzz -- `ម៉ា`, `ថ្នា`, `ន្មា`, `កោ`, `កៅ`, `កើ`, and the whole of
+    `ម៉ោងប៉ុន្មាន` 20.6% too wide. Since Khmer is in `BREAKS_ANYWHERE` the solver
+    cuts it into one atom per cluster and `render/svg.js` draws each atom at an x the
+    measurer chose, so that surplus printed as **white space inside words** on half
+    the pack. Keeping the table takes it to zero.
+
+    This is also the answer to why the font hunt in tmp/khmer.md section 4 measured
+    Content as exact over 260,015 clusters: it measured the *donor*, which still had
+    `morx`, so fontkit never entered its OpenType path there at all. Lao's rule --
+    measure the subset you ship, not the upstream face -- with the Myanmar lesson on
+    top of it: a clean comparison is only evidence once the shaper being exercised is
+    the one the shipped file will use.
+
+    Carried as **bytes** rather than as the parsed table because the binary
+    references glyph *ids* while fontTools' object model references glyph *names*,
+    and the two halves of the build treat those differently: `retain_gids` keeps the
+    ids through the subset, and `Merger` keeps the ids through the Latin graft but
+    renames the unencoded glyphs, so re-attaching the parsed table fails on
+    `uni17C4.zz01` while the bytes stay valid.
+    """
+    if source is not None and source not in AAT_SOURCES:
+        return {}
+    return {tag: font.getTableData(tag) for tag in ("morx", "feat") if tag in font}
+
+
+def put_aat(font, saved):
+    """Re-attach what `aat_tables` saved. @see aat_tables"""
+    for tag, data in saved.items():
+        table = DefaultTable(tag)
+        table.data = data
+        font[tag] = table
+
+
 def subset_source(source, stack, weight, chars):
     """One source file, instanced to `weight` and cut down to `chars`."""
     font = TTFont(SRC / source, fontNumber=0)
+    aat = aat_tables(font, source)
     if "fvar" in font:
         axes = {"wght": weight}
         # Pin every axis the font has. Leaving one free keeps fvar and gvar alive,
@@ -1027,9 +1176,17 @@ def subset_source(source, stack, weight, chars):
     # glyphs that carry instructions, so a hinted face loses most of its Latin in
     # the exported PDF. Also makes the files meaningfully smaller.
     options.hinting = False
+    # An AAT source keeps every glyph and every glyph id, because `morx` names ids
+    # and a dropped slot would leave it pointing at the wrong glyph. It costs nothing
+    # worth counting: Content has 696 glyphs and the character request already keeps
+    # 695 of them.
+    if aat:
+        options.retain_gids = True
     subsetter = subset.Subsetter(options=options)
-    subsetter.populate(unicodes=chars & set(font.getBestCmap()))
+    subsetter.populate(unicodes=chars & set(font.getBestCmap()),
+                       glyphs=list(font.getGlyphOrder()) if aat else [])
     subsetter.subset(font)
+    put_aat(font, aat)
     return font
 
 
@@ -1078,6 +1235,9 @@ def add_copyright(font, credit):
 
 def build_face(stack, weight, italic, source, chars):
     font = subset_source(source, stack, weight, chars)
+    # `Merger` drops the tables it does not know how to merge, so they are held here
+    # and put back after the graft. @see aat_tables
+    aat = aat_tables(font)
     # At most one graft per face, and which one follows from the stack: a Latin face
     # borrows the two conscript blocks, a face of a family that ships no Latin
     # borrows Latin, and no face here needs both.
@@ -1101,6 +1261,7 @@ def build_face(stack, weight, italic, source, chars):
         # Name, so nothing else about the merge needs permission -- only the credit.
         if credit:
             add_copyright(font, credit)
+        put_aat(font, aat)
 
     # Pad every glyph out to a four-byte boundary.
     #

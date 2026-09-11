@@ -3,6 +3,7 @@
   "copyright": [
     "(c) 2014-2021 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'.",
     "(c) 2017-2024 Adobe (http://www.adobe.com/).",
+    "Copyright (c) 2010, Danh Hong (khmertype.blogspot.com), with Reserved Font Name Content. This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: http://scripts.sil.org/OFL",
     "Copyright (c) 2011, Ministry of Posts and Telecommunications, Laos (www.phetsarath.gov.la)",
     "Copyright (c) 2015 Indian Type Foundry (info@indiantypefoundry.com)",
     "Copyright (c) 2016, Ek Type. All rights reserved.",
@@ -342,6 +343,26 @@
       "ttfBytes": 179884,
       "woff2Bytes": 76792,
       "source": "Phetsarath-Bold.ttf"
+    },
+    {
+      "stack": "khmr",
+      "weight": 400,
+      "italic": false,
+      "file": "khmr-400",
+      "glyphs": 2218,
+      "ttfBytes": 429460,
+      "woff2Bytes": 95968,
+      "source": "Content-Regular.ttf"
+    },
+    {
+      "stack": "khmr",
+      "weight": 700,
+      "italic": false,
+      "file": "khmr-700",
+      "glyphs": 2218,
+      "ttfBytes": 425696,
+      "woff2Bytes": 98804,
+      "source": "Content-Bold.ttf"
     },
     {
       "stack": "thai",

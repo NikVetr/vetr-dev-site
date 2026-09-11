@@ -1,0 +1,11 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+profanity.oh-my-god,Bože moj!,O Bože!,bˈoʒe mˈoj,"my God -- an oath of shock, religious in form and profanity in no register",2,hr-agent-v1;src=HJP;ipa=espeak
+profanity.damn,Kvragu!,Do vraga!,kvrˈaɡu,"'to the devil' -- the ordinary mild curse at a situation, never at a person",2,hr-agent-v1;src=HJP;ipa=espeak
+profanity.expletive,Jebiga!,,jebiɡa,"lit. 'fuck it' -- the everyday coarse expletive, aimed at a situation rather than a person",2,hr-agent-v1;src=HJP;ipa=espeak
+profanity.strong-expletive,Kurac!,,kˈurats,"lit. 'dick' -- very strong, said at nothing. Croatian's strongest expletives are all aimed at a person's mother and are excluded here by the slur rule, so this is the strongest that is not aimed at anyone",2,hr-agent-v1;src=HJP;ipa=espeak
+profanity.intensifier,jebeni,usrani,jebeni,"vulgar intensifying adjective before a noun, agreeing in gender and case -- jebeni auto, jebena stvar. Recognition only",2,hr-agent-v1;src=HJP;ipa=espeak
+profanity.frustration,Ovo je sranje,,ˈovo je srˈaɲe,"'this is shit' -- a whole sentence, coarse but the one row here a traveller can say out loud",2,hr-agent-v1;src=HJP;ipa=espeak
+profanity.thats-rude,To je nepristojno,,tˈo je nepristojno,"that is impolite -- the warning, not an insult back",2,hr-agent-v1;src=HJP;ipa=espeak
+profanity.excuse-my-language,Oprostite na izrazu,,oprostite nˈa izrazu,'excuse the expression',2,hr-agent-v1;src=HJP;ipa=espeak
+profanity.strength-warning,"Ovdje su da ih prepoznate, a ne da ih koristite: snaga ne preživljava prijevod. Riječ koja je ovdje prevedena kao blaga kletva može biti neizgovoriva u jeziku uz nju, a najjača riječ nekog jezika često je upravo ona koju je ovaj odjeljak morao izostaviti.",,,,2,hr-agent-v1
+profanity.japanese-register,"Japanski to gotovo uopće ne radi rječnikom. Prezir prenosi gramatika -- oštra zamjenica za drugu osobu, goli imperativ, odsječni glagolski završeci -- pa ljutnja sjedi u završetku, a ne u riječi koju možete potražiti u rječniku. Redovi iznad blizu su cijelog rječnika koji za to postoji.",,,,2,gloss-only;scoped-away;hr-agent-v1

@@ -367,6 +367,34 @@ that hits them rather than during it:
   path. **No pack was written**, on the stated grounds that 769 rows of unreviewable
   Burmese for a language that cannot be printed is 769 rows that *look* reviewed.
 
+- **Sinhala is blocked too, and it is the sharper case, because fontkit selects the
+  *right* shaper and is wrong anyway.** `sinh` maps to the Universal shaper in the
+  registry, exactly as it does in HarfBuzz — so Burmese's caveat is satisfied and
+  the language still cannot be printed. `UniversalShaper.assignFeatures`
+  canonically decomposes a split vowel unconditionally and before GSUB, so ේ
+  U+0DDA becomes `VPre + halant` and ෝ U+0DDD becomes `VPre + VPst + halant`; the
+  USE syllable DFA declines to place a halant after a matra, HarfBuzz's machine has
+  a `broken_cluster` catch-all where fontkit's has none, and `nextSyllable` then
+  reads `.syllable` off a null `shaperInfo`. **`තේ` "tea" and `ලංකාවේ` "of Sri
+  Lanka" throw**, which in `core/measure.js` is a crash; `ලෝක`, `ආයුබෝවන්`,
+  `වේලාව`, `කෝපි` and `රෝහල` come back with a **dotted circle** and up to **30.2%**
+  too wide. It is not lexically unlucky — `-ේ` is the genitive/locative ending, so
+  **8.2% of 1,770 real Sinhala tokens throw** and 11.9% of running text carries one
+  of the two characters. Same defect in both fontkit copies and in
+  `foliojs/fontkit@master`, and the throw count is identical in five unrelated
+  families including one with no GPOS table at all, so **there is no face to choose
+  instead** — the NULL MarkBasePos crash that refused Noto for Telugu, Gurmukhi,
+  Gujarati and Malayalam is absent from twelve of the thirteen Sinhala candidates,
+  and Yaldevi would ship as it is. Every escape measured and refused, including a
+  one-hunk patch that removes all 4,804 cube throws and still leaves 1.31% of
+  clusters on a dotted circle and the rakaransaya's pre-base vowel on the wrong
+  side. **No pack was written**, on Burmese's grounds. The three registry numbers
+  were measured anyway so the next attempt need not: `leading_factor` **1.50** with
+  Noto Sans Sinhala or **1.40** with Yaldevi — **Kannada's tier, not Khmer's**,
+  because Sinhala has no vertical stack — `min_size_pt` **5.0**, `word_break`
+  **space** with 1,770 real rows giving 1,770 atoms and zero violations. See
+  tmp/si/sinhala.md.
+
 - **A fourth, and this one is *shipping*: Thai's `ห้องน้ำ` renders with a detached
   nikhahit.** `thai` and `lao ` are both absent from fontkit's shaper map, and
   HarfBuzz has a dedicated Thai/Lao shaper whose whole job is the U+0E33/U+0EB3
@@ -432,3 +460,49 @@ that hits them rather than during it:
   anchors belong to*. The cube was clean because the language was broken. So a
   zero-throw result is only evidence when you have separately confirmed that the
   shaper being exercised is the one the script actually needs.
+
+**A case language has to decide what to do with the 44 slot rows, and the corpus is
+now split three ways rather than two.** A `{}` filler is a bare dictionary-form noun,
+so a frame governing an oblique case is ungrammatical — and `ru`, `uk` and `cs` all
+took the natural frame and put the problem in `literal`, while `pl`, `hu` and `tr`
+all took a colon apposition (`Jestem z tego kraju: {}`). Croatian's addition split
+the difference **on which case the frame governs**, which is the reading those six
+packs make available but none of them states: an *accusative* frame is right as
+written for every masculine-inanimate and neuter noun, because that accusative is
+identical to the nominative, so `Trebam {}` and `Imate li {}?` keep the frame and say
+so; a *genitive, locative or instrumental* frame is wrong for everything, so those
+thirteen rows take the apposition. Worth knowing before writing 44 rows one way.
+
+Two smaller findings from the same addition, both reusable:
+
+- **One row was reworded rather than devised around, and that is the best outcome
+  available.** `utility-templates.is-there-nearby` is an existential, which takes the
+  genitive in Croatian as in Russian — but `Je li blizu {}?` ("is {} nearby") makes
+  the slot a *nominative subject* and needs no device at all. Look for the
+  nominative-subject rewrite before reaching for a colon.
+- **Numeral slots cannot be got right and every pack has taken the same trade.**
+  `{} noći` and `{} dana` are correct from two up because the paucal and the genitive
+  plural coincide; `{} godina` is correct from five up and wrong for two to four. No
+  single form of a Slavic noun serves every numeral, and `ru`, `uk`, `pl` and `cs`
+  all print the high form. Say so in `literal` rather than looking for a fifth
+  answer.
+
+**And a reader-table device worth knowing about before enumerating a list by hand:
+`after_out`.** Croatian writes a post-vocalic /j/ as `j` and never as `i`, so `aɪ`
+has to come out `aj` where `ɪ` alone is `i`. Swedish's table lists the four
+diphthongs it meets by hand and Czech's and Polish's do not do it at all, spelling
+`ai` and `ei`. Neither is necessary: `after_out: "a e i o u"` asks whether the slot
+has already emitted a vowel letter, which *is* the definition of an offglide, so one
+rule spells the whole tail — 1,678 `aɪ`, 614 `eɪ`, 191 `ɛɪ`, 83 `əɪ`, 71 `oɪ` and
+`ʌɪ ɔɪ ɑɪ ɐɪ æɪ ʊɪ uɪ iɪ yɪ ɨɪ aːɪ` besides. It has to be written *before* the
+unconditioned rule for the same symbol: `createRespeller` sorts by IPA length and
+then by slot specificity and leaves an exact tie to file order, which is the
+shadowing that cost the kana table 99 rows.
+
+**Finally: reusing a sibling table's key set does not make a table complete, and the
+hole is exactly one entry wide.** Croatian's phoneme list was built from Czech's,
+which is at zero gaps — but a table never reads its own language, so Czech's list has
+no rule for Czech's own `l̩` and `r̩`, and Croatian's first `--gaps` run reported 37
+of them. The general form: a sibling's key set is missing precisely the phonemes the
+sibling contributes, so check the new table against the *union* of every table's keys
+and not against the one it was copied from.

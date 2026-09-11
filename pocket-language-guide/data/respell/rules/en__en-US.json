@@ -851,6 +851,20 @@
     }
   ],
   "targets": {
+    "hr": {
+      "note": "**`tɕ` is `ch` for a Croatian target and `j` everywhere else, and the\nbase rule is the odd one.** English's base `tɕ` -> `j` is pinyin-shaped -- Beijing is\n*bay-JING* and 北京 is /peɪtɕiŋ/ -- and `ja` already overrides it to `ch` for exactly\nthis reason. Croatian needs the same override and needs it more: `tɕ` is the letter ć,\nit occurs on 64 cells of the pack, and `emergency-medical.help` is *Pomoć!*, which the\nbase rule spells *pomoj*. `dʑ` is left alone -- English `j` is a voiced affricate and\nso is Croatian đ -- and a bare `ɕ` never arrives from Croatian, every one of the 64\nbeing the second half of a `tɕ`.\n\nPolish had the same defect from the same base rule, and it is fixed in `pl` below --\nwhere the counts are, and the one place Polish differs from Croatian.",
+      "phonemes": [
+        { "slot": "any", "ipa": "tɕ", "out": "ch" }
+      ]
+    },
+    "pl": {
+      "note": "**Polish's alveolo-palatals, for Croatian's reason and from the same base rule.** The\nbase table spells `tɕ ɕ ʑ` for Mandarin -- pinyin `j` and `x` and the voiced pair --\nand Polish is not Mandarin: `ć ś ź` are its own letters. The base values made *Cześć*\ncome back `chesyj`, *być* `birj` and *bezpośrednie* `beh-spaw-SYRREH-dnyeh`. They are\nnot rare: `ɕ` is on 310 cells of the pack, `tɕ` on 191 and `ʑ` on 145.\n\n**119 of those `ɕ` are a bare `ś`, not the tail of a `tɕ`, and that is where Polish\ndiffers from Croatian.** Croatian needed no `ɕ` rule because every one of its 64 was\nthe second half of a `tɕ`; Polish needs one of its own.\n\n`dʑ` keeps the base `j` deliberately, rather than being moved for symmetry. English `j`\nis a voiced affricate and so is `dź`, and *Dziękuję* as `jen-KOO-yeh` is what an\nEnglish phrasebook prints. Polish writes no retroflex in this column at all -- espeak's\n`pl` gives `ʃ ʒ` for `sz` and `rz`, and the pack holds zero `ʂ` and zero `ʐ` -- so the\nbase `ʐ` -> `r`, which is pinyin `r` and would be badly wrong for `ż`, is never reached.",
+      "phonemes": [
+        { "slot": "any", "ipa": "tɕ", "out": "ch" },
+        { "slot": "any", "ipa": "ɕ", "out": "sh" },
+        { "slot": "any", "ipa": "ʑ", "out": "zh" }
+      ]
+    },
     "zh-Hans": {
       "splits": [],
       "phonemes": [

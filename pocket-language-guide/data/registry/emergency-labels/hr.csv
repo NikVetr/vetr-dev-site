@@ -1,0 +1,12 @@
+label,text
+_frame,{region}: {numbers}
+all services,sve službe
+police,policija
+ambulance,hitna pomoć
+fire,vatrogasci
+also works,također radi
+fire and ambulance,vatrogasci + hitna pomoć
+medical,medicinska pomoć
+tourist police,turistička policija
+police and ambulance,policija + hitna pomoć
+gendarmerie,žandarmerija

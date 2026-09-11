@@ -2107,3 +2107,95 @@ Chao letters this corpus's Lao `ipa` column writes.
   Verified to be **inherited rather than introduced**: the Thai table produces the
   identical shapes in Thai (`กเด`, `ว`, `ฟั่ด-กะ`), and `tmp/lo/cmp-all.mjs` shows
   every divergence between the two outputs is one of the six deviations above.
+
+## The forty-sixth reader: Croatian, and the alphabet that was built for this
+
+**Croatian has no published foreign-name transcription standard either**, and the
+shape of the gap is Czech's rather than Lao's: there is no Croatian
+หลักเกณฑ์การทับศัพท์ and no Croatian AkH. 12 rule 13, but the *slot* is already
+ordinary Croatian lexicography. The **Hrvatska enciklopedija** (Leksikografski zavod
+Miroslav Krleža) and **Anić and Goldstein's *Rječnik stranih riječi*** both print a
+bracketed pronunciation beside a foreign headword, in ordinary Croatian letters and
+no IPA — the same standing Kopaliński's brackets give Polish's table and the
+*Akademický slovník cizích slov*'s give Czech's.
+
+What the individual sound-to-letter decisions rest on is better than either, and it
+is the reason this table needed no invention: **Croatian's own *prilagođeno pisanje*
+is a transcription standard that already exists and is attested in bulk.** The
+**Hrvatski pravopis** (Institut za hrvatski jezik i jezikoslovlje, 2013, free at
+pravopis.hr) requires adapted spelling for names from languages not written in the
+Latin alphabet, so every Croatian text carries thousands of worked examples:
+Hruščov, Jelcin, Harkov, Čehov, Tokio, Hirošima, cunami, Šangaj, Peking, džihad,
+hadž, šeik. Where a sound reaches Croatian only through a loanword, the loanword is
+the evidence — viski, vikend, sendvič, menadžer, kamping, šoping, Gete, Nirnberg —
+and each such rule names its own word in the table's `approximations`.
+
+**The interesting finding is that Gaj's alphabet spells three things no other reader
+in this corpus can**, and all three are the alphabet rather than the table:
+
+- **`tɕ`/`dʑ` get ć and đ** while `tʃ`/`dʒ` get č and dž. Czech, Polish and every
+  other Latin reader here collapse the first pair onto the second, so Mandarin's
+  x-/j- series, Polish's *ćma* and *dźwig* and Japanese's ち and じ come out of this
+  table **exactly** rather than approximately.
+- **`ʎ` and `ɲ` get lj and nj**, where Czech has to write l and ň and Polish l and ń.
+  Italian's *gli* and *gn* and Spanish's *ll* and *ñ* are likewise exact.
+- **`x` gets a single h**, because Croatian h *is* a velar fricative — Bah for Bach,
+  Harkov — where Czech and Polish both spend `ch` and English spends `kh`.
+
+Four decisions worth recording because a neighbouring table made the opposite one:
+
+- **`θ`/`ð` are t and d, not s and z.** Czech and Polish both write s and z. Croatian
+  is unanimous the other way and attested in bulk: every Greek theta in a Croatian
+  word is a t (teatar, matematika, Atena, maraton, ritam), and English names follow
+  (Smit for Smith).
+- **Palatalisation is written where Croatian has a letter for the palatal consonant
+  and dropped where it does not** — Рязань is *Rjazanj* and Кремль is *Kremlj*, but
+  Пермь is *Perm*, Игорь is *Igor* and Василий is *Vasilij*. So `nʲ` → nj and
+  `lʲ`/`ɭʲ` → lj (178 cells of Russian on the second alone), and `tʲ`/`dʲ` fall
+  through the bare `ʲ` rule to t and d with every other palatalised consonant.
+  Czech's table writes ť and ď there because Czech has that letter; Croatian's `dj`
+  is the *historical spelling of đ* and would be read as one.
+- **The closing diphthongs take one rule, not a list.** Croatian writes a
+  post-vocalic /j/ as `j` and never as `i`, so `aɪ` must be *aj* where `ɪ` alone is
+  *i*. Swedish lists the four it meets by hand and Czech and Polish do it not at all
+  (spelling *ai*, *ei*). `after_out: "a e i o u"` asks whether the slot has already
+  emitted a vowel letter, which *is* the definition of an offglide — so one rule
+  spells the whole tail: 1,678 `aɪ`, 614 `eɪ`, 191 `ɛɪ`, 83 `əɪ`, 71 `oɪ` and the
+  long thin tail of `ʌɪ ɔɪ ɑɪ ɐɪ æɪ ʊɪ uɪ iɪ yɪ ɨɪ aːɪ` besides. The `ʊ` offglide
+  deliberately gets no such rule, because *au* and *ou* are already what Croatian
+  writes.
+- **Length is a colon**, joining de, nl, pl, sv and tr. Croatian has a phonemic
+  long/short contrast on every vowel, so the reader can produce length — but the
+  orthography writes none, and the marks Croatian dictionaries use for it are
+  inseparable from pitch accent (an acute means long *and* rising *and* stressed, so
+  `accent` would claim three things where the column knows one). Doubling was
+  rejected for Turkish's and Indonesian's reason: `aa` is not a Croatian sequence and
+  reads as two syllables.
+
+**Croatian also cost one *other* table a rule, and finding it turned up a defect that
+is already shipping.** `en__en-US.json`'s base `tɕ` → `j` is pinyin-shaped — Beijing
+is *bay-JING* and 北京 is /peɪtɕiŋ/ — and `ja` already overrides it to `ch` for
+exactly that reason. Croatian needs the same override and needs it more: `tɕ` is the
+letter ć, it is on 64 cells, and `emergency-medical.help` is *Pomoć!*, which the base
+rule spelled *pomoj*. A `targets.hr` block with one rule fixes it and cannot touch any
+other pair. **The defect is that Polish gets the base rule too**: *Cześć* comes back
+`chesyj` and *Dziękuję* `jen-KOO-yeh` — ć as `j` and ś as `sy`, both pinyin values on a
+language that is not Mandarin. `pl` wants overrides of its own, matching `ja`'s, and
+that would move shipped Polish cells, so it is left for the coordinating session and
+recorded in the `targets.hr` note where whoever reads that block will see it.
+
+### Still unverified, carried forward
+
+- **Whether a Croatian reader accepts đ for a palatal stop** — `ĐE-ku-ji` for Czech
+  *děkuji*, `Nađ` for Hungarian *Nagy* — is a reviewer question. The surname is real
+  and is the strongest evidence available, but a surname is a lexicalised borrowing
+  and a respelling is not.
+- **`ɬ`, `kʼ`, `tʼ` and the ejectives** lose their distinguishing feature entirely:
+  Croatian has no lateral fricative and no ejective series, and `--units` reports 41
+  phonemes spelt by decomposition, every one of them a base consonant plus a
+  diacritic that maps to nothing. That is the same decision Czech's table makes, and
+  it is a decision rather than a gap — but the 212 Amharic and Hausa `kʼ` cells print
+  as a plain k.
+- **The `ɕ`/`ʑ` merge onto š and ž** costs Mandarin and Polish a distinction the
+  affricates keep. There is no letter between š and s in Croatian and no repair
+  inside the alphabet.

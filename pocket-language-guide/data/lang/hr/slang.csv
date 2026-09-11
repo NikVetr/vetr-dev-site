@@ -1,0 +1,15 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+slang.thats-good,Dobro je,Fora je,dˈobro je,"fora is 'cool', informal",2,hr-agent-v1;ipa=espeak
+slang.thats-great,Super je,Ekstra je,sˈuper je,,2,hr-agent-v1;ipa=espeak
+slang.i-love-it,Baš mi se sviđa,,bˈaʃ mˈi sˈe svˈidʑa,'it really pleases me',2,hr-agent-v1;ipa=espeak
+slang.thats-bad,Loše je,Bezveze je,lˈoʃe je,"bezveze is 'pointless, no good'",2,hr-agent-v1;ipa=espeak
+slang.delicious,Baš je fino,Preukusno je,bˈaʃ je fˈino,'really tasty' -- said about food,2,hr-agent-v1;ipa=espeak
+slang.thats-pricey,Skupo je,Baš je skupo,skˈupo je,,2,hr-agent-v1;ipa=espeak
+slang.exactly,Točno tako,Baš tako,tˈotʃno tˈako,,2,hr-agent-v1;ipa=espeak
+slang.no-worries,Nema frke,Ništa strašno,nema frke,'no fuss' -- informal,2,hr-agent-v1;ipa=espeak
+slang.youre-welcome,Ništa,Ma ništa,nˈiʃta,'nothing' -- the reply to thanks a native actually uses,2,hr-agent-v1;ipa=espeak
+slang.seriously,Ozbiljno?,Stvarno?,ozbiʎno,,2,hr-agent-v1;ipa=espeak
+slang.im-good-thanks,"Ne treba, hvala",,"nˈe trˈeba, xvˈala","'no need, thanks'",2,hr-agent-v1;ipa=espeak
+slang.lets-go,Idemo,,idemo,,2,hr-agent-v1;ipa=espeak
+slang.cheers,Živjeli,,ʒivjeli,'may you live' -- the toast over a drink,2,hr-agent-v1;ipa=espeak
+slang.see-you,Vidimo se,,vidimo sˈe,'we see each other',2,hr-agent-v1;ipa=espeak

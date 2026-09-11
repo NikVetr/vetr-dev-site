@@ -202,6 +202,13 @@ export const LANGUAGE_MOTIFS = /** @type {const} */ ({
   // `phulkari` (pa) are the other diamond marks, both built from *solid* units on a
   // clean count, where a mat mi diamond is hollow and hooked.
   lo: 'matmi',
+  // `suhozid` is the dry-stone wall of the Croatian coast and islands, and it is
+  // the one entry in this table whose reasoning is mostly a refusal: `pleter`, the
+  // three-strand plait carved on ninth-century Croatian church screens and the
+  // motif a Croatian would name first, is the same art `ar` already holds as
+  // `interlace`. The design and the two refusals it rests on are argued at
+  // `emblems.suhozid`.
+  hr: 'suhozid',
 });
 /** @typedef {typeof LANGUAGE_MOTIFS[keyof typeof LANGUAGE_MOTIFS]} LanguageMotif */
 
@@ -516,6 +523,41 @@ const emblems = {
       p.m(50, 50); p.l(50 + Math.cos(a) * 43, 50 + Math.sin(a) * 43);
     }
   },
+  suhozid(p) {
+    // A dry-stone wall face -- the `suhozid` that terraces Pag, Hvar and every
+    // Dalmatian hillside, UNESCO-listed in 2018 with Croatia among the nominating
+    // states. Battered outline (wider at the base, because nothing holds it up but
+    // its own weight), one course line that is not straight, and joints that do not
+    // line up across it.
+    //
+    // **The mark is an irregular tessellation, and no other motif in this table is
+    // one.** Every unit here is a different size and no line continues across more
+    // than two stones, which is what a wall built without mortar looks like and what
+    // separates it from `azulejo`, `banig`, `ketupat` and `kawung`, all regular
+    // repeats. Named most carefully against `polder` (nl), the other motif that is
+    // land geometry rather than an object: a polder's strips are *parallel and
+    // evenly spaced* and unequal only in length, because they were surveyed; a
+    // suhozid's stones are unequal in every dimension, because they were the stones
+    // that came out of that field.
+    //
+    // **`pleter` was refused, and that is the interesting half of this entry.** The
+    // Croatian three-strand plait carved on ninth-century church screens is the
+    // motif a Croatian would name first, and it is the same art `ar` already holds
+    // as `interlace` -- Carolingian-era interlace ornament and Islamic strapwork are
+    // relatives, not two crafts -- so it falls to the rule that refused Telugu's
+    // `muggu`, Gujarati's `sathiya` and Kannada's `rangoli`: do not ship a second
+    // name for one art. `glagoljica` was refused for the reason Urdu's calligraphy
+    // was, and the Šestine umbrella for `bidri`'s reason, that its whole character is
+    // colour and these ornaments print as strokes.
+    p.m(10, 92); p.l(90, 92); p.l(81, 8); p.l(19, 8); p.close();
+    p.m(12, 58); p.l(37, 53); p.l(62, 57); p.l(88, 52);
+    p.m(31, 92); p.l(34, 55);
+    p.m(57, 92); p.l(54, 57);
+    p.m(74, 92); p.l(77, 54);
+    p.m(26, 56); p.l(28, 8);
+    p.m(49, 55); p.l(46, 8);
+    p.m(69, 56); p.l(72, 8);
+  },
   kurbits(p) {
     // The vase: kurbits (Dalarna's flower-painting tradition, the kind that
     // decorates a Dala horse) is always painted growing FROM a container,
@@ -803,6 +845,7 @@ const tracery = {
   polder(p) { p.m(5, 85); p.l(95, 85); p.m(30, 85); p.l(30, 30); p.m(55, 85); p.l(55, 15); p.m(80, 85); p.l(80, 40); },
   sklo(p) { p.m(50, 7); p.l(93, 50); p.l(50, 93); p.l(7, 50); p.close(); p.m(50, 7); p.l(50, 93); p.m(7, 50); p.l(93, 50); },
   kurbits(p) { p.m(50, 92); p.q(28, 65, 42, 42); p.q(56, 19, 70, 6); leaf(p, 42, 42, -24, -10, 11); },
+  suhozid(p) { p.m(6, 88); p.l(94, 88); p.l(88, 14); p.l(12, 14); p.close(); p.m(8, 54); p.l(50, 49); p.l(92, 53); p.m(34, 88); p.l(37, 51); p.m(66, 51); p.l(69, 14); },
   ketupat(p) {
     p.m(50, 8); p.l(76, 24); p.l(88, 50); p.l(76, 76); p.l(50, 92);
     p.l(24, 76); p.l(12, 50); p.l(24, 24); p.close();
@@ -899,8 +942,10 @@ export function languageCorner(motif, p) {
   // `telsem` joins this list where `bandhani` deliberately did not: the treatment is
   // for motifs built from straight *borders*, and a telsem is four straight bands
   // meeting at right angles where a field of tie-dye rings is the opposite.
+  // `suhozid` joins for `polder`'s reason: it is straight lines and right-ish angles
+  // all the way down, and a curved border would be the only curve on the card.
   const angular = ['rosette', 'interlace', 'compass', 'azulejo', 'kawung', 'meander',
-    'embroidery', 'polder', 'telsem', 'kasuti'].includes(motif);
+    'embroidery', 'polder', 'telsem', 'kasuti', 'suhozid'].includes(motif);
   if (angular) {
     p.m(7, 93); p.l(7, 7); p.l(93, 7);
     p.m(14, 65); p.l(14, 14); p.l(65, 14);

@@ -1,0 +1,16 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,Želim ići ovamo: {},,ʒˈelim ˈitɕi ovamo {},'I want to go here:' -- u and do take a case the bare name in the slot cannot carry,2,hr-agent-v1;ipa=espeak
+utility-templates.please-give-me,"Molim vas, dajte mi {}",,"mˈolim vˈas, dˈajte mˈi {}",the thing takes the accusative,2,hr-agent-v1;ipa=espeak
+utility-templates.may-i,Smijem li {}?,,smˈijem li {},the slot is an infinitive,2,hr-agent-v1;ipa=espeak
+utility-templates.please-do-not-add,"Molim vas, ne dodajte {}",,"mˈolim vˈas, nˈe dodajte {}",the thing takes the accusative,2,hr-agent-v1;ipa=espeak
+utility-templates.do-you-have,Imate li {}?,,imate li {},the thing takes the accusative,2,hr-agent-v1;ipa=espeak
+utility-templates.please-write-the-number,"Molim vas, napišite broj",,"mˈolim vˈas, napiʃite brˈoj",,2,hr-agent-v1;ipa=espeak
+utility-templates.i-need,Trebam {},,trˈebam {},the thing takes the accusative,2,hr-agent-v1;ipa=espeak
+utility-templates.is-there-nearby,Je li blizu {}?,,je li blˈizu {},"'is {} nearby' -- the slot is a nominative subject, so no case has to be adjusted",2,hr-agent-v1;ipa=espeak
+utility-templates.how-much-is,Koliko košta {}?,,koliko kˈoʃta {},the slot is a nominative subject,2,hr-agent-v1;ipa=espeak
+utility-templates.is-this,Je li ovo {}?,,je li ˈovo {},the slot is a nominative predicate,2,hr-agent-v1;ipa=espeak
+utility-templates.please,"{}, molim",,"{}, mˈolim",,2,hr-agent-v1;ipa=espeak
+utility-templates.i-am-looking-for,Tražim {},,trˈaʒim {},the thing takes the accusative,2,hr-agent-v1;ipa=espeak
+utility-templates.do-you-accept,Primate li {}?,,primate li {},the thing takes the accusative,2,hr-agent-v1;ipa=espeak
+utility-templates.i-cannot-find,Ne mogu naći {},,nˈe mˈoɡu nˈatɕi {},the thing takes the accusative,2,hr-agent-v1;ipa=espeak
+utility-templates.there-is-a-problem-with,Imam problem s ovim: {},,imam prˈoblem s ˈovim {},"'I have a problem with this:' -- s takes the instrumental, which a bare name cannot carry",2,hr-agent-v1;ipa=espeak

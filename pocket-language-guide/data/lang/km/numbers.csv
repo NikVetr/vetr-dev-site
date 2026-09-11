@@ -1,0 +1,102 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+numbers-money.l-ng,សូន្យ,0,soːn,,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Huffman, Modern Spoken Cambodian (Yale, 1970);ipa=km-analysis"
+numbers-money.y,មួយ,1,muəj,,2,"Huffman, Modern Spoken Cambodian (Yale, 1970); Jacob, Introduction to Cambodian (Oxford, 1968);ipa=km-analysis"
+numbers-money.r,ពីរ,2,piː,,2,"Huffman, Modern Spoken Cambodian (Yale, 1970); Jacob, Introduction to Cambodian (Oxford, 1968);ipa=km-analysis"
+numbers-money.li-ng,ពីរ + ឯកតារាប់,,piː ʔaektaː roap,,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Huffman, Modern Spoken Cambodian (Yale, 1970);ipa=km-analysis"
+numbers-money.s-n,បី,3,bəj,,2,"Huffman, Modern Spoken Cambodian (Yale, 1970); Jacob, Introduction to Cambodian (Oxford, 1968);ipa=km-analysis"
+numbers-money.s,បួន,4,buən,,2,"Huffman, Modern Spoken Cambodian (Yale, 1970); Jacob, Introduction to Cambodian (Oxford, 1968);ipa=km-analysis"
+numbers-money.w,ប្រាំ,5,pram,,2,"Huffman, Modern Spoken Cambodian (Yale, 1970); Jacob, Introduction to Cambodian (Oxford, 1968);ipa=km-analysis"
+numbers-money.li,ប្រាំមួយ,6,pram muəj,,2,"Huffman, Modern Spoken Cambodian (Yale, 1970); Jacob, Introduction to Cambodian (Oxford, 1968);ipa=km-analysis"
+numbers-money.q,ប្រាំពីរ,7,pram piː,,2,"Huffman, Modern Spoken Cambodian (Yale, 1970); Jacob, Introduction to Cambodian (Oxford, 1968);ipa=km-analysis"
+numbers-money.b,ប្រាំបី,8,pram bəj,,2,"Huffman, Modern Spoken Cambodian (Yale, 1970); Jacob, Introduction to Cambodian (Oxford, 1968);ipa=km-analysis"
+numbers-money.ji,ប្រាំបួន,9,pram buən,,2,"Huffman, Modern Spoken Cambodian (Yale, 1970); Jacob, Introduction to Cambodian (Oxford, 1968);ipa=km-analysis"
+numbers-money.sh,ដប់,10,dɑp,,2,"Huffman, Modern Spoken Cambodian (Yale, 1970); Jacob, Introduction to Cambodian (Oxford, 1968);ipa=km-analysis"
+numbers-money.y-b-i,មួយរយ,100,muəj rɔːj,,2,"Huffman, Modern Spoken Cambodian (Yale, 1970); Jacob, Introduction to Cambodian (Oxford, 1968);ipa=km-analysis"
+numbers-money.y-qi-n,មួយពាន់,1000,muəj poən,,2,"Huffman, Modern Spoken Cambodian (Yale, 1970); Jacob, Introduction to Cambodian (Oxford, 1968);ipa=km-analysis"
+numbers-money.y-w-n,មួយម៉ឺន,10000,muəj mɨn,,2,"Huffman, Modern Spoken Cambodian (Yale, 1970); Jacob, Introduction to Cambodian (Oxford, 1968);ipa=km-analysis"
+numbers-money.b-n,កន្លះ,1/2,kɑnlah,,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Huffman, Modern Spoken Cambodian (Yale, 1970);ipa=km-analysis"
+numbers-money.yu-n,យ៉ន់,,jɑn,,2,National Bank of Cambodia daily exchange-rate table (nbc.gov.kh/economic_research/exchange_rate.php);ipa=km-analysis
+numbers-money.ku-i,យ៉ន់ (និយាយ),,jɑn nijiəj,,2,"National Bank of Cambodia daily exchange-rate table (nbc.gov.kh/economic_research/exchange_rate.php); Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Huffman, Modern Spoken Cambodian (Yale, 1970);ipa=km-analysis"
+numbers-money.2-items,របស់ពីរ,,rɔpsɑ piː,,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Huffman, Modern Spoken Cambodian (Yale, 1970);ipa=km-analysis"
+numbers-money.yen,យេនជប៉ុន,,jeːn tɕɔːpon,,2,National Bank of Cambodia daily exchange-rate table (nbc.gov.kh/economic_research/exchange_rate.php);ipa=km-analysis
+numbers-money.yen-symbol,¥,,,,2,"Unicode Standard, Currency Symbols block (U+00A5); National Bank of Cambodia daily exchange-rate table (nbc.gov.kh/economic_research/exchange_rate.php)"
+atm-cash.where-is-an-atm,ម៉ាស៊ីន ATM នៅឯណា,ATM នៅឯណា,maːsiːn ʔeːtʰiːʔəm nɨw ʔaenaː,"machine ATM is where? The machine is asked for by the English letters, said ay-tee-em",2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Smyth, Colloquial Cambodian (Routledge);ipa=km-analysis"
+atm-cash.does-this-atm-take-foreign-cards,ម៉ាស៊ីននេះទទួលកាតបរទេសទេ,,maːsiːn nih tɔtuəl kaːt bɑrɑteːh teː,this machine accepts foreign cards or not? The final tee makes it a question and does not mean no here,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Huffman, Modern Spoken Cambodian (Yale, 1970);ipa=km-analysis"
+atm-cash.the-atm-kept-my-card,កាតជាប់ក្នុងម៉ាស៊ីន,,kaːt tɕoəp knoŋ maːsiːn,the card is stuck inside the machine,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Smyth, Colloquial Cambodian (Routledge);ipa=km-analysis"
+atm-cash.is-there-a-fee,មានកម្រៃទេ,,miən kɑmraj teː,,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Huffman, Modern Spoken Cambodian (Yale, 1970);ipa=km-analysis"
+atm-cash.the-card-was-declined,កាតប្រើមិនបាន,,kaːt praə min baːn,the card cannot be used,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Huffman, Modern Spoken Cambodian (Yale, 1970);ipa=km-analysis"
+atm-cash.what-is-the-exchange-rate,អត្រាប្តូរប្រាក់ប៉ុន្មាន,,ʔɑttraː pdoː praʔ ponmaːn,rate for changing money is how much? Ask in riel to one US dollar; the street rate sits near 4000,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Smyth, Colloquial Cambodian (Routledge);ipa=km-analysis"
+atm-cash.no-money-came-out,ម៉ាស៊ីនមិនចេញប្រាក់,,maːsiːn min tɕeɲ praʔ,,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Huffman, Modern Spoken Cambodian (Yale, 1970);ipa=km-analysis"
+atm-cash.where-can-i-change-money,ប្តូរប្រាក់បាននៅឯណា,,pdoː praʔ baːn nɨw ʔaenaː,where can money be changed?,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Huffman, Modern Spoken Cambodian (Yale, 1970);ipa=km-analysis"
+atm-cash.the-machine-is-out-of-service,ម៉ាស៊ីនខូច,,maːsiːn kʰoːtɕ,the machine is broken,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Smyth, Colloquial Cambodian (Routledge);ipa=km-analysis"
+atm-cash.please-give-me-smaller-notes,សូមប្តូរជាប្រាក់តូច,សូមប្តូរជាលុយតូច,soːm pdoː tɕiə praʔ toːtɕ,"please change it into small money: here that means 1000, 2000 and 5000 riel notes, since there is no coinage in use",2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Smyth, Colloquial Cambodian (Routledge);ipa=km-analysis"
+atm-cash.do-you-have-change,មានលុយរាយទេ,មានលុយតូចទេ,miən luj riəj teː,,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Smyth, Colloquial Cambodian (Routledge);ipa=km-analysis"
+atm-cash.may-i-pay-in,បង់ជា {} បានទេ,,bɑŋ tɕiə {} baːn teː,"pay in {} - is that possible? Dollars and riel both circulate, but a torn or marked dollar note is refused",2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Huffman, Modern Spoken Cambodian (Yale, 1970);ipa=km-analysis"
+atm-cash.please-charge-in-local-currency,សូមគិតជាប្រាក់រៀល,សូមគិតជារៀល,soːm kɨt tɕiə praʔ riəl,please reckon it in riel: card terminals here usually offer to charge in dollars and add a conversion fee,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Smyth, Colloquial Cambodian (Routledge);ipa=km-analysis"
+atm-cash.is-there-a-minimum-for-cards,ប្រើកាតបានយ៉ាងតិចប៉ុន្មាន,,praə kaːt baːn jaːŋ tetɕ ponmaːn,,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Huffman, Modern Spoken Cambodian (Yale, 1970);ipa=km-analysis"
+atm-cash.atm,ម៉ាស៊ីន ATM,ATM,maːsiːn ʔeːtʰiːʔəm,,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Smyth, Colloquial Cambodian (Routledge);ipa=km-analysis"
+atm-cash.banknote,ក្រដាសប្រាក់,លុយក្រដាស,krɑdaːh praʔ,,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Huffman, Modern Spoken Cambodian (Yale, 1970);ipa=km-analysis"
+atm-cash.coin,កាក់,,kaʔ,,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977);ipa=km-analysis"
+atm-cash.cash-only,ទទួលតែសាច់ប្រាក់,សាច់ប្រាក់,tɔtuəl tae satɕ praʔ,,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Smyth, Colloquial Cambodian (Routledge);ipa=km-analysis"
+atm-cash.fee,កម្រៃ,ថ្លៃសេវា,kɑmraj,,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977);ipa=km-analysis"
+atm-cash.change,ប្រាក់សល់,លុយសល់,praʔ sɑl,,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Smyth, Colloquial Cambodian (Routledge);ipa=km-analysis"
+atm-cash.exchange-rate,អត្រាប្តូរប្រាក់,,ʔɑttraː pdoː praʔ,,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977);ipa=km-analysis"
+atm-cash.bank,ធនាគារ,,tʰɔniəkiə,,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Huffman, Modern Spoken Cambodian (Yale, 1970);ipa=km-analysis"
+atm-cash.money-exchange,ប្តូរប្រាក់,ប្តូរលុយ,pdoː praʔ,,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Smyth, Colloquial Cambodian (Routledge);ipa=km-analysis"
+atm-cash.pin,លេខសម្ងាត់,PIN,leːk sɑmŋat,,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977);ipa=km-analysis"
+numbers-money.won,វូនកូរ៉េ,,wuːn koːreː,,2,National Bank of Cambodia daily exchange-rate table (nbc.gov.kh/economic_research/exchange_rate.php);ipa=km-analysis
+numbers-money.won-symbol,₩,,,,2,"Unicode Standard, Currency Symbols block (U+20A9); in general use on South Korean price tags"
+numbers-money.euro,អ៊ឺរ៉ូ,,ʔɨːroː,,2,National Bank of Cambodia daily exchange-rate table (nbc.gov.kh/economic_research/exchange_rate.php);ipa=km-analysis
+numbers-money.euro-symbol,€,,,,2,"Unicode Standard, Currency Symbols block (U+20AC); National Bank of Cambodia daily exchange-rate table (nbc.gov.kh/economic_research/exchange_rate.php)"
+numbers-money.lira,លីរ៉ាទួរគី,,liːraː tuəkiː,,2,CLDR / Intl.DisplayNames;ipa=km-analysis
+numbers-money.lira-symbol,₺,,,,2,"Unicode Standard, Currency Symbols block (U+20BA); adopted 2012, in general use on Turkish price tags"
+numbers-money.dong,ដុងវៀតណាម,,doŋ wiətnaːm,,2,National Bank of Cambodia daily exchange-rate table (nbc.gov.kh/economic_research/exchange_rate.php);ipa=km-analysis
+numbers-money.dong-symbol,₫,,,,2,"Unicode Standard, Currency Symbols block (U+20AB); in general use on Vietnamese price tags"
+numbers-money.ruble,រ៉ូបលរុស្ស៊ី,,roːbɑl ruhsiː,,2,CLDR / Intl.DisplayNames;ipa=km-analysis
+numbers-money.ruble-symbol,₽,,,,2,"Unicode Standard, Currency Symbols block (U+20BD); official since 2013, in general use on Russian price tags and ATMs"
+numbers-money.rupiah,រ៉ូពីឥណ្ឌូនេស៊ី,,roːpiː ʔənduːneːsiː,,2,National Bank of Cambodia daily exchange-rate table (nbc.gov.kh/economic_research/exchange_rate.php);ipa=km-analysis
+numbers-money.rupiah-symbol,សញ្ញារ៉ូពីឥណ្ឌូនេស៊ី,Rp,sɑɲɲiə roːpiː ʔənduːneːsiː,,2,National Bank of Cambodia daily exchange-rate table (nbc.gov.kh/economic_research/exchange_rate.php);ipa=km-analysis
+numbers-money.shilling,ស៊ីលិញអាហ្វ្រិកខាងកើត,,siːlɨɲ ʔaːhwrɨk kʰaːŋkaət,,2,"CLDR / Intl.DisplayNames; Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Huffman, Modern Spoken Cambodian (Yale, 1970);ipa=km-analysis"
+numbers-money.shilling-symbol,សញ្ញាស៊ីលិញ,TSh · KSh · USh,sɑɲɲiə siːlɨɲ,,2,CLDR / Intl.DisplayNames;ipa=km-analysis
+numbers-money.baht,បាតថៃ,,baːt tʰaj,,2,National Bank of Cambodia daily exchange-rate table (nbc.gov.kh/economic_research/exchange_rate.php);ipa=km-analysis
+numbers-money.baht-symbol,សញ្ញាបាតថៃ,,sɑɲɲiə baːt tʰaj,,2,CLDR / Intl.DisplayNames; National Bank of Cambodia daily exchange-rate table (nbc.gov.kh/economic_research/exchange_rate.php);ipa=km-analysis
+numbers-money.forint,ហ្វូរីនហុងគ្រី,,hwoːriːn hoŋkriː,,2,CLDR / Intl.DisplayNames;ipa=km-analysis
+numbers-money.forint-symbol,សញ្ញាហ្វូរីន,Ft,sɑɲɲiə hwoːriːn,,2,CLDR / Intl.DisplayNames;ipa=km-analysis
+numbers-money.rupee,រ៉ូពីឥណ្ឌា,,roːpiː ʔəndiə,,2,National Bank of Cambodia daily exchange-rate table (nbc.gov.kh/economic_research/exchange_rate.php);ipa=km-analysis
+numbers-money.rupee-symbol,₹,,,,2,"Unicode Standard, Currency Symbols block (U+20B9); India's own government-adopted rupee sign"
+numbers-money.dollar,ដុល្លារ,,dolliə,,2,"Huffman, Modern Spoken Cambodian (Yale, 1970); Smyth, Colloquial Cambodian (Routledge);ipa=km-analysis"
+numbers-money.dollar-symbol,$,,dolliə,,2,"Huffman, Modern Spoken Cambodian (Yale, 1970); Smyth, Colloquial Cambodian (Routledge);ipa=km-analysis"
+numbers-money.pound,ផោនអង់គ្លេស,,pʰaon ʔɑŋkleːh,,2,National Bank of Cambodia daily exchange-rate table (nbc.gov.kh/economic_research/exchange_rate.php);ipa=km-analysis
+numbers-money.pound-symbol,£,,,,2,"Unicode Standard, Currency Symbols block (U+00A3); National Bank of Cambodia daily exchange-rate table (nbc.gov.kh/economic_research/exchange_rate.php)"
+numbers-money.franc,ហ្វ្រង់,,hwrɑŋ,,2,National Bank of Cambodia daily exchange-rate table (nbc.gov.kh/economic_research/exchange_rate.php);ipa=km-analysis
+numbers-money.franc-symbol,សញ្ញាហ្វ្រង់,CHF · F CFA · FC,sɑɲɲiə hwrɑŋ,,2,National Bank of Cambodia daily exchange-rate table (nbc.gov.kh/economic_research/exchange_rate.php);ipa=km-analysis
+numbers-money.peso,ប៉េសូ,,peːsoː,,2,National Bank of Cambodia daily exchange-rate table (nbc.gov.kh/economic_research/exchange_rate.php);ipa=km-analysis
+numbers-money.peso-symbol,សញ្ញាប៉េសូ,₱,sɑɲɲiə peːsoː,,2,National Bank of Cambodia daily exchange-rate table (nbc.gov.kh/economic_research/exchange_rate.php);ipa=km-analysis
+numbers-money.real,រៀលប្រេស៊ីល,,riəl breːsiːl,,2,CLDR / Intl.DisplayNames;ipa=km-analysis
+numbers-money.real-symbol,សញ្ញារៀលប្រេស៊ីល,R$,sɑɲɲiə riəl breːsiːl,,2,CLDR / Intl.DisplayNames;ipa=km-analysis
+numbers-money.local-currency,ប្រាក់ក្នុងស្រុក,,brakknoŋsrok,,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Huffman, Modern Spoken Cambodian (Yale, 1970);ipa=km-analysis"
+numbers-money.lakh,ដប់ម៉ឺន,,dɑp məːn,,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Huffman, Modern Spoken Cambodian (Yale, 1970);ipa=km-analysis"
+numbers-money.crore,ដប់លាន,,dɑp liən,,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977); Huffman, Modern Spoken Cambodian (Yale, 1970);ipa=km-analysis"
+numbers-money.shekel,ស៊ីគែលអ៊ីស្រាអែល,,siːkɛːl ʔiːhriəʔael,,2,CLDR / Intl.DisplayNames;ipa=km-analysis
+numbers-money.shekel-symbol,₪,,,,2,"Unicode Standard, Currency Symbols block (U+20AA); Israel's own government-adopted new-shekel sign"
+numbers-money.rial,រៀលអ៊ីរ៉ង់,,riəl ʔiːrɑŋ,,2,CLDR / Intl.DisplayNames;ipa=km-analysis
+numbers-money.toman,ដប់រៀលអ៊ីរ៉ង់,,dɑp riəl ʔiːrɑŋ,,2,CLDR / Intl.DisplayNames;ipa=km-analysis
+numbers-money.zloty,ហ្សូទីប៉ូឡូញ,,hsoːtiː poːloːɲ,,2,CLDR / Intl.DisplayNames;ipa=km-analysis
+numbers-money.zloty-symbol,សញ្ញាហ្សូទី,zł,sɑɲɲiə hsoːtiː,,2,CLDR / Intl.DisplayNames;ipa=km-analysis
+numbers-money.hryvnia,ហ៊ូនីយ៉ាអ៊ុយក្រែន,,huːniːjaː ʔujkraen,,2,CLDR / Intl.DisplayNames;ipa=km-analysis
+numbers-money.hryvnia-symbol,₴,,,,2,"Unicode Standard, Currency Symbols block (U+20B4); in general use on Ukrainian price tags"
+numbers-money.leu,លូរូម៉ានី,,luː ruːmaːniː,,2,CLDR / Intl.DisplayNames;ipa=km-analysis
+numbers-money.leu-symbol,សញ្ញាលូរូម៉ានី,lei,sɑɲɲiə luː ruːmaːniː,,2,CLDR / Intl.DisplayNames;ipa=km-analysis
+numbers-money.koruna,កូរុណាឆេក,,koːrunaː tɕʰeːk,,2,CLDR / Intl.DisplayNames;ipa=km-analysis
+numbers-money.koruna-symbol,សញ្ញាកូរុណា,Kč,sɑɲɲiə koːrunaː,,2,CLDR / Intl.DisplayNames;ipa=km-analysis
+numbers-money.ringgit,រីងហ្គីតម៉ាឡេស៊ី,,riːŋhkiːt maːleːsiː,,2,National Bank of Cambodia daily exchange-rate table (nbc.gov.kh/economic_research/exchange_rate.php);ipa=km-analysis
+numbers-money.ringgit-symbol,សញ្ញារីងហ្គីត,RM,sɑɲɲiə riːŋhkiːt,,2,National Bank of Cambodia daily exchange-rate table (nbc.gov.kh/economic_research/exchange_rate.php);ipa=km-analysis
+numbers-money.krona,ក្រូណាស៊ុយអែត,,kroːnaː sujʔaet,,2,National Bank of Cambodia daily exchange-rate table (nbc.gov.kh/economic_research/exchange_rate.php);ipa=km-analysis
+numbers-money.krona-symbol,សញ្ញាក្រូណា,kr,sɑɲɲiə kroːnaː,,2,National Bank of Cambodia daily exchange-rate table (nbc.gov.kh/economic_research/exchange_rate.php);ipa=km-analysis
+numbers-money.nepali-rupee,រ៉ូពីនេប៉ាល់,,roːpiː neːpal,,2,CLDR / Intl.DisplayNames;ipa=km-analysis
+numbers-money.nepali-rupee-symbol,សញ្ញារ៉ូពីនេប៉ាល់,NRs,sɑɲɲiə roːpiː neːpal,,2,CLDR / Intl.DisplayNames;ipa=km-analysis
+numbers-money.birr,ប៊័រអេត្យូពី,,boa ʔeːtjuːpiː,,2,CLDR / Intl.DisplayNames;ipa=km-analysis
+numbers-money.naira,ណៃរ៉ានីហ្សេរីយ៉ា,,najraː niːhseːriːjaː,,2,National Bank of Cambodia daily exchange-rate table (nbc.gov.kh/economic_research/exchange_rate.php);ipa=km-analysis
+numbers-money.naira-symbol,₦,,,,2,"Unicode Standard, Currency Symbols block (U+20A6); National Bank of Cambodia daily exchange-rate table (nbc.gov.kh/economic_research/exchange_rate.php)"
+numbers-money.riel,រៀល,,riəl,,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977);ipa=km-analysis"
+numbers-money.riel-symbol,៛,,riəl,,2,"Headley et al., Cambodian-English Dictionary (Catholic University of America Press, 1977);ipa=km-analysis"

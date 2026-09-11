@@ -1,0 +1,13 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+introductions.my-name-is,Zovem se {},,zˈovem sˈe {},'I call myself {}',2,hr-agent-v1;ipa=espeak
+introductions.nice-to-meet-you,Drago mi je,,drˈaɡo mˈi je,'it is dear to me',2,hr-agent-v1;ipa=espeak
+introductions.what-is-your-name,Kako se zovete?,,kˈako sˈe zovete,,2,hr-agent-v1;ipa=espeak
+introductions.we-are-traveling-together,Putujemo zajedno,,putujemo zajedno,,2,hr-agent-v1;ipa=espeak
+introductions.this-is-my-friend,Ovo je moj prijatelj,Ovo je moja prijateljica,ˈovo je mˈoj prijateʎ,male friend / female friend,2,hr-agent-v1;ipa=espeak
+introductions.i-am-from,Ja sam iz ovog mjesta: {},,jˈaː sam ˈiz ˈovoɡ mjˈesta {},"'I am from this place:' -- iz takes the genitive, which a bare name in the slot cannot carry",2,hr-agent-v1;ipa=espeak
+introductions.where-are-you-from,Odakle ste?,,odakle ste,,2,hr-agent-v1;ipa=espeak
+introductions.how-are-you,Kako ste?,,kˈako ste,,2,hr-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,Turist sam,Turistkinja sam,tˈurist sam,man speaking / woman speaking,2,hr-agent-v1;ipa=espeak
+introductions.this-is-my-husband-wife,Ovo je moj muž,Ovo je moja žena,ˈovo je mˈoj mˈuʒ,husband / wife,2,hr-agent-v1;ipa=espeak
+introductions.this-is-my-daughter-son,Ovo je moja kći,Ovo je moj sin,ˈovo je mˈoja ktɕˈi,daughter / son,2,hr-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,Putujem sam,Putujem sama,putujem sam,man speaking / woman speaking,2,hr-agent-v1;ipa=espeak

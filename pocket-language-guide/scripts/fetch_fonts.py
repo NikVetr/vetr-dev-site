@@ -89,6 +89,42 @@ SOURCES = {
     # handles.
     "Phetsarath-Regular.ttf": f"{GFONTS}/phetsarath/Phetsarath-Regular.ttf",
     "Phetsarath-Bold.ttf": f"{GFONTS}/phetsarath/Phetsarath-Bold.ttf",
+    # Khmer, and the choice is Khmer OS Content -- Google Fonts publishes it as
+    # `Content` -- because it is the only one of twenty-four candidates whose
+    # **fontkit output is identical to HarfBuzz's**, glyph for glyph and advance for
+    # advance, with zero throws, across 260,015 clusters in both weights. Khmer is
+    # where three separate fontkit defects surface, and each one refuses a family:
+    # the NULL-MarkBasePos crash takes out all six Noto Khmer faces on `C + ំ`, the
+    # commonest sign in the language; a chain-context *backtrack* matched in the wrong
+    # direction costs Battambang Bold 5.99% of clusters an advance error up to 8.3%,
+    # on the very weight the `script` field draws the headword in; and a stale glyph
+    # cache makes Nokora, Battambang, Suwannaphum and Hanuman shape
+    # **order-dependently**, so `ក៉ុ` measures 92% too wide once `ស៊ើ` has gone
+    # through the same `Font`. Content is immune to all three by construction:
+    # it positions every vowel sign, subscript and register shifter in **GSUB** and
+    # its GPOS table holds zero features and zero lookups, so neither the NULL anchor
+    # nor `render/pdf.js`'s dropped-offset path exists, and it substitutes the
+    # shifters to unencoded glyphs rather than to `uni17BB`. See tmp/khmer.md.
+    #
+    # Real static Regular and Bold, so the stack needs no instancing -- Siemreap is
+    # the same design and exact on all 260,015 clusters, and is refused for being
+    # single-weight. upem 2048, which `scale_upem` handles for the Latin graft.
+    #
+    # OFL 1.1, "Copyright (c) 2010, Danh Hong (khmertype.blogspot.com)" -- and the
+    # Reserved Font Name needs stating, because tmp/khmer.md says there is none and
+    # the file says otherwise **twice, inconsistently**. It carries two nameID 0
+    # records: the Macintosh one, which upstream left alone, reserves "Khmer OS
+    # Content"; the Windows one, which Google Fonts rewrote when it renamed the
+    # family, reserves "Content" -- the family name the file itself uses. Read
+    # literally the second would make Google's own release a Modified Version using
+    # its own Reserved Font Name, so it is a search-and-replace artifact of the
+    # renaming rather than the author's reservation, and the real reserved name is
+    # "Khmer OS Content". The subset therefore keeps `Content`, as the Noto CJK
+    # subsets keep their names over Source Han Sans's reserved "Source". Recorded
+    # rather than settled: Abyssinica SIL was refused for a reservation on its own
+    # name, so if this one is read the other way the repair is to rename the subset.
+    "Content-Regular.ttf": f"{GFONTS}/content/Content-Regular.ttf",
+    "Content-Bold.ttf": f"{GFONTS}/content/Content-Bold.ttf",
     "NotoSansThai-var.ttf": f"{GFONTS}/notosansthai/NotoSansThai%5Bwdth,wght%5D.ttf",
     "NotoSerifThai-var.ttf": f"{GFONTS}/notoserifthai/NotoSerifThai%5Bwdth,wght%5D.ttf",
     # Bengali. Noto Sans Bengali rather than any Latin face: `NotoSans-var.ttf` has

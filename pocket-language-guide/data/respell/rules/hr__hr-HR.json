@@ -1,0 +1,892 @@
+{
+  "source": "hr",
+  "accent": "hr-HR",
+  "status": "ready",
+  "version": "1",
+  "derives_from": "Croatian has no single normative sound-to-letter standard for foreign pronunciations, so this table is built the way Czech's and Polish's were: from the *shape* the language's own reference works already use, plus attested transcriptions for each individual decision. The shape is a bracketed Croatian-letter pronunciation printed beside a foreign headword, which is ordinary Croatian lexicographic practice -- the Hrvatska enciklopedija (Leksikografski zavod Miroslav Krleža) and Anić and Goldstein's Rječnik stranih riječi both print one, in ordinary Croatian letters and no IPA. The individual sound-to-letter decisions come from Croatian's *prilagođeno pisanje* -- the adapted spelling the Hrvatski pravopis (Institut za hrvatski jezik i jezikoslovlje, 2013, published free online) requires for names from languages not written in the Latin alphabet, and which is therefore attested in bulk: Hruščov, Jelcin, Harkov, Čehov, Tokio, Hirošima, cunami, Šangaj, Peking, džihad, hadž, šeik. Where the sound reaches Croatian only through a loanword the loanword is the evidence, and each such rule names its own word in the list below. Croatian orthography is near-phonemic, so most of what a reader needs is simply Croatian spelling.",
+  "deviations": [
+    {
+      "rule": "The Hrvatski pravopis prescribes adapted spelling for names in non-Latin scripts and *original* spelling for names already written in the Latin alphabet -- Croatian writes Washington and München, not Vašington and Minhen. This column breaks that rule for every target, because it is not spelling a name: it is a disposable pronunciation hint, which is exactly the slot the encyclopaedia's own brackets fill and where the same conventions are applied to English, German and French alike (viski, vikend, sendvič, Gete, Nirnberg).",
+      "why": "The standard produces a permanent spelling; this column produces a hint that is thrown away with the card. Czech's table took the same licence from the same kind of source and for the same reason."
+    },
+    {
+      "rule": "Vowel length is written with a colon after the vowel, which is not a Croatian mark.",
+      "why": "Croatian has a phonemic long/short contrast on every vowel, so a reader can produce length -- but the orthography writes none, and the marks Croatian dictionaries use for it are inseparable from pitch accent: an acute means long *and* rising *and* stressed, so `accent` would claim three things where the column knows one. Doubling was rejected for Turkish's and Indonesian's reason, that `aa` is not a Croatian sequence and reads as two syllables. So the colon, which is what de, nl, pl, sv and tr all landed on, and one line of the legend teaches it."
+    },
+    {
+      "rule": "Stress is marked with capitals rather than with any of Croatian's four accent marks.",
+      "why": "The four marks encode place, length *and* contour together, and the `ipa` column knows only place -- and only above the two-syllable line at that. Capitals claim exactly what is known. They are also the low-light fallback the survey names for a Latin script with no free stress device."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "the palatal stops /c ɟ/ (Hungarian ty and gy, Czech ť and ď, Malayalam)",
+      "out": "ć and đ",
+      "why": "Croatian's ć and đ are alveolo-palatal affricates, one place of articulation away from a palatal stop and the nearest thing the alphabet has -- and unlike Czech's and Polish's answers they are single letters rather than a diacritic on a coronal. Attested rather than reasoned: the Croatian surname Nađ is Hungarian Nagy, which is this exact substitution made by Croatian speakers about their own names. The same two letters then take Mandarin's and Polish's /tɕ dʑ/ *exactly* rather than approximately, which is the one thing this table can do that no other Slavic reader here can: Czech and Polish both collapse /tɕ/ onto č. They are deliberately not used for the palatalised coronals /tʲ dʲ/, which Czech's table does write as ť and ď: those are not palatals, Croatian has no letter for them, and the obvious alternative dj is the historical spelling of đ, so it would be read as đ and collapse the distinction these rules exist to keep. Where palatalisation *is* written and where it is dropped is argued at the `tʲ`/`nʲ`/`lʲ` rules themselves."
+    },
+    {
+      "sounds": "the alveolo-palatal fricatives /ɕ ʑ/ and the retroflexes /ʂ ʐ ʈʂ ɖʐ/ (Mandarin, Polish, Russian's palatalised sibilants)",
+      "out": "š ž č dž",
+      "why": "Croatian has one postalveolar fricative series. The affricates keep the three-way distinction /tʃ tɕ/ and /dʒ dʑ/ because č ć and dž đ exist; the fricatives cannot, because there is no letter between š and s."
+    },
+    {
+      "sounds": "English /θ ð/",
+      "out": "t and d",
+      "why": "Croatian's own answer, and it is attested in bulk rather than chosen here: every Greek theta in a Croatian word is a t (teatar, matematika, Atena, maraton, ritam), and English names follow it (Smit for Smith). Czech and Polish both write s and z instead, so this is a real divergence between three neighbouring tables and not an oversight in one of them."
+    },
+    {
+      "sounds": "/x χ ç/ (German ach- and ich-Laut, Greek, Russian, Spanish j, Arabic)",
+      "out": "h",
+      "why": "Croatian h *is* a velar fricative, so this is the one common sound where the alphabet needs no digraph at all -- Bah for Bach, Harkov, Hruščov -- where Czech spends two letters on ch and English three on kh."
+    },
+    {
+      "sounds": "Czech /r̝/ (the letter ř)",
+      "out": "rž",
+      "why": "Croatian pronunciation guides render it as a rolled r followed by ž, which is also what a Croatian speaker produces. It is a two-letter answer to a one-letter sound and the cluster is a legal Croatian onset (prž-)."
+    },
+    {
+      "sounds": "the lateral fricative /ɬ/ (Klingon) and the retroflex and dark laterals /ɭ ɫ/ (Indic, Russian, English)",
+      "out": "l",
+      "why": "Croatian has l and lj and nothing else lateral. /ʎ/ does map exactly, onto lj, which Czech and Polish cannot do."
+    },
+    {
+      "sounds": "/w/ (English, Klingon, Mandarin)",
+      "out": "v",
+      "why": "There is no w in Gaj's alphabet at all -- nor q, x or y -- and Croatian loanwords are unanimous: viski, vikend, vaterpolo."
+    },
+    {
+      "sounds": "gemination, whether it arrives as `Cː` (Japanese, Arabic, Hindi) or as a doubled letter (Italian, Hungarian, Punjabi, Gujarati, Malayalam)",
+      "out": "the doubled consonant",
+      "why": "Croatian writes a double consonant only across a morpheme boundary (poddijalekt, izzvati), and established loanwords drop the geminate outright -- Hokaido for Hokkaido. Doubled anyway, and deliberately: the five packs whose `ipa` column already writes the geminate as two letters reach this table as two consonants and would print doubled whatever this rule said, so simplifying `Cː` would have made one reader spell one sound two ways depending on which pack it came from."
+    }
+  ],
+  "policy": {
+    "syllable_separator": "-",
+    "word_separator": " ",
+    "stress": "caps",
+    "stress_min_syllables": 2,
+    "length": "colon",
+    "tone": "drop",
+    "max_onset": 3,
+    "fixups": "all",
+    "locale": "hr"
+  },
+  "legend": "VELIKA SLOVA označavaju naglašeni slog, dvotočka duži samoglasnik. Ostalo se čita kao običan hrvatski.",
+  "phonemes": [
+    {
+      "slot": "any",
+      "ipa": "ʼ",
+      "out": ""
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "a",
+      "out": "a"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑ",
+      "out": "a"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ",
+      "out": "a"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌ",
+      "out": "a"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "æ",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "e",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ə",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɤ",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɜ",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ø",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "i",
+      "out": "i"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɪ",
+      "out": "j",
+      "after_out": "a e i o u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɪ",
+      "out": "i"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɨ",
+      "out": "i"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "o",
+      "out": "o"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ",
+      "out": "o"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɒ",
+      "out": "o"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɵ",
+      "out": "o"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "u",
+      "out": "u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʊ",
+      "out": "u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʉ",
+      "out": "u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "y",
+      "out": "i"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯ",
+      "out": "u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɚ",
+      "out": "er"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɝ",
+      "out": "er"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʏ",
+      "out": "i"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ã",
+      "out": "an"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑ̃",
+      "out": "an"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ̃",
+      "out": "an"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ̃",
+      "out": "on"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ẽ",
+      "out": "en"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ̃",
+      "out": "en"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ̃",
+      "out": "en"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ĩ",
+      "out": "in"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ũ",
+      "out": "un"
+    },
+    {
+      "slot": "any",
+      "ipa": "ː",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˑ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̯",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˀ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˌ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɥ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰ",
+      "out": "u"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʰ",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "b",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʰ",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "t̪",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "d",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɗ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰ",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡʰ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "q",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "qʰ",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "ć"
+    },
+    {
+      "slot": "any",
+      "ipa": "cʰ",
+      "out": "ć"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "đ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟʰ",
+      "out": "đ"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʲ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʲ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "nʲ",
+      "out": "nj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "m",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "m̩",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "n",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "n̩",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɳ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɴ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "nj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "n",
+      "before_onset": "k ɡ kʰ k͈ x"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "ng"
+    },
+    {
+      "slot": "any",
+      "ipa": "f",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɸ",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "v",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʋ",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "s̪",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "š"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʂ",
+      "out": "š"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "š"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒ",
+      "out": "ž"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʐ",
+      "out": "ž"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʑ",
+      "out": "ž"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɻ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "χ",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "h",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɦ",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ħ",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɣ",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "θ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ð",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʕ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "dˤ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "sˤ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "tˤ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ðˤ",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "zˤ",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "l",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɫ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɬ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "lj"
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɹ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽʰ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "r̝",
+      "out": "rž"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts̪",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts̪ʰ",
+      "out": "c"
+    },
+    {
+      "slot": "any",
+      "ipa": "dz",
+      "out": "dz"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "č"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃʰ",
+      "out": "č"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃʲ",
+      "out": "č"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "č"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂʰ",
+      "out": "č"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒ",
+      "out": "dž"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʐ",
+      "out": "dž"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "ć"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "ć"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʑ",
+      "out": "đ"
+    },
+    {
+      "slot": "any",
+      "ipa": "pf",
+      "out": "pf"
+    },
+    {
+      "slot": "any",
+      "ipa": "p͈",
+      "out": "pp"
+    },
+    {
+      "slot": "any",
+      "ipa": "t͈",
+      "out": "tt"
+    },
+    {
+      "slot": "any",
+      "ipa": "k͈",
+      "out": "kk"
+    },
+    {
+      "slot": "any",
+      "ipa": "s͈",
+      "out": "ss"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ͈",
+      "out": "ćć"
+    },
+    {
+      "slot": "any",
+      "ipa": "kː",
+      "out": "kk"
+    },
+    {
+      "slot": "any",
+      "ipa": "dː",
+      "out": "dd"
+    },
+    {
+      "slot": "any",
+      "ipa": "tː",
+      "out": "tt"
+    },
+    {
+      "slot": "any",
+      "ipa": "cː",
+      "out": "ćć"
+    },
+    {
+      "slot": "any",
+      "ipa": "pː",
+      "out": "pp"
+    },
+    {
+      "slot": "any",
+      "ipa": "bː",
+      "out": "bb"
+    },
+    {
+      "slot": "any",
+      "ipa": "t̪ː",
+      "out": "tt"
+    },
+    {
+      "slot": "any",
+      "ipa": "qː",
+      "out": "kk"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʰː",
+      "out": "dd"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰː",
+      "out": "tt"
+    },
+    {
+      "slot": "any",
+      "ipa": "̩",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "lʲ",
+      "out": "lj"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭʲ",
+      "out": "lj"
+    }
+  ],
+  "syllable_fixups": [],
+  "note": "**Croatian spells three things no other reader in this corpus can, and all three are its alphabet rather than this table's invention.** Gaj's alphabet was built one letter per phoneme in the 1830s and it kept the two palatal affricate series apart, so `tɕ`/`dʑ` get ć and đ while `tʃ`/`dʒ` get č and dž -- Czech, Polish and every other Latin reader here collapse the first pair onto the second. `ʎ` and `ɲ` get lj and nj, where Czech has to write ň and l and Polish ń and l. And `x` gets a single h, where Czech spends ch and Polish spends ch too. The consequence is that Mandarin's x- and j- series, Polish's ćma and dźwig and Italian's gli and gn come out of this table exactly rather than approximately.\n\n**What it cannot spell is length, and that is the alphabet again.** Croatian has the contrast and no letter for it, so the colon is borrowed -- see the second deviation. The one thing that follows and is worth knowing when reading the output: a Croatian respelling of Japanese or Hindi carries a mark no Croatian word does, on a great many rows.\n\n**And it emits no letter outside Gaj's alphabet except that colon.** There is no q, w, x or y anywhere in the table, checked rather than assumed, which is what keeps a Croatian respelling readable as Croatian.",
+  "policy_note": "`max_onset: 3` with no `reader_onsets`, which is Czech's and Polish's finding for Croatian's reason as well: Croatian opens native words with zdrav-, čvrst-, vrst-, mrtv- and skvrn-, so its own onset inventory already contains everything any of the corpus's other syllable structures can put at the head of a word and there is nothing for a syllable-opening predicate to restrict. `fixups: all` over an empty `syllable_fixups`, so the setting is inert today and does not have to be revisited if a fixup is ever added. `stress_min_syllables: 2` because a capitalised monosyllable is a shout rather than a hint. `length: colon` and `stress: caps` are argued in the deviations above; `tone: drop` because Croatian has pitch accent but no way to write it that is not also a claim about length and stress, so a borrowed tone mark would be read as one of those."
+}
