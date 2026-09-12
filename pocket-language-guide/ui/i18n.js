@@ -154,10 +154,40 @@ export function number(value, digits) {
 }
 
 /**
+ * Names the registry carries for the active locale, when the page has loaded them.
+ *
+ * Empty by default, because not every page pays for `language-names.csv` -- the
+ * gallery is built to load without the registries it does not need. A page that has
+ * the table calls `setLanguageNames` and every `languageName` call on it improves.
+ * @type {Record<string,string>}
+ */
+let registryNames = Object.create(null);
+
+/**
+ * Hand `languageName` the registry's own names for the active locale.
+ * @param {Record<string,string>} names  bcp47 -> name, in the active locale
+ */
+export function setLanguageNames(names) {
+  registryNames = names ?? Object.create(null);
+}
+
+/**
  * A language's name in the interface language. `Intl.DisplayNames` already knows
  * these for every locale the browser supports, which is a better answer than
  * carrying sixteen language names in eight catalogues and keeping them in step.
- * Falls back to the registry's English exonym where the browser has no opinion.
+ * Falls back to the registry's own table, and then to its English exonym.
+ *
+ * **The registry is consulted only where ICU is silent, and the order is the whole
+ * point.** `language-names.csv` exists to be substituted into "I do not speak
+ * {target}", so several of its cells are inflected for that frame rather than being
+ * dictionary forms -- Russian's Klingon is `клингонском`, the prepositional, and
+ * Polish's is `po klingońsku`. Preferring the registry over ICU would put a case
+ * form in a card title. Asking it second means it is reached only for a language ICU
+ * has never heard of, which in practice is Klingon and Quenya: Chromium's
+ * `Intl.DisplayNames` answers a bare `tlh` for *every* locale, so `fallback: 'none'`
+ * gives `null` and the gallery printed the English exonym on those two cards in all
+ * fifty interface languages. Node's fuller ICU does know them, which is why this
+ * only ever showed in a browser.
  *
  * **`fallback: 'none'` is what makes that last sentence true.** The default is
  * `fallback: 'code'`, under which `of()` returns *the code itself* rather than
@@ -172,10 +202,12 @@ export function number(value, digits) {
 export function languageName(code, fallback) {
   try {
     const names = new Intl.DisplayNames([active], { type: 'language', fallback: 'none' });
-    return names.of(code) ?? fallback;
+    const icu = names.of(code);
+    if (icu) return icu;
   } catch {
-    return fallback;
+    // No `Intl.DisplayNames` at all: the registry is still worth asking.
   }
+  return registryNames[code] || fallback;
 }
 
 /**

@@ -1,51 +1,51 @@
-bcp47,endonym,endonym_roman,exonym_en,script,script_alt,romanizations,default_accent,badge,badge_roman,status,regions,speak_label
-en,English,,English,Latn,,,en-US,Aa,,ready,GB;US;CA;AU;NZ;IE;ZA;IN,I speak
-es,Español,,Spanish,Latn,,,es-419,Áé,,ready,ES;MX;AR;CO;CL;PE,Hablo
-zh-Hans,简体中文,,Chinese (Simplified),Hans,Hant,pinyin,zh-CN,中,,ready,CN;SG;MY,我说
-ja,日本語,,Japanese,Jpan,,hepburn;kunrei,ja-JP,あ,,ready,JP,話せる言語
-ar,العربية,,Arabic,Arab,,ala-lc,ar-MSA,ع,,ready,SA;EG;AE;MA;JO;IQ,أتحدث
-fr,Français,,French,Latn,,,fr-FR,Àç,,ready,FR;CA;BE;CH;SN;CI,Je parle
-de,Deutsch,,German,Latn,,,de-DE,Äß,,ready,DE;AT;CH,Ich spreche
-pt,Português,,Portuguese,Latn,,,pt-BR,Ãç,,ready,PT;BR;AO;MZ,Eu falo
-ko,한국어,,Korean,Kore,,rr;mccune,ko-KR,한,,ready,KR,사용 언어
-hi,हिन्दी,,Hindi,Deva,,iast;hunterian,hi-IN,अ,,ready,IN,मैं बोलता हूँ
-th,ไทย,,Thai,Thai,,rtgs,th-TH,ก,,ready,TH,ฉันพูด
-ru,Русский,,Russian,Cyrl,,bgn,ru-RU,Яж,,ready,RU;BY;KZ;KG,Я говорю на
-id,Bahasa Indonesia,,Indonesian,Latn,,,id-ID,Aa,,ready,ID,Saya berbicara
-sw,Kiswahili,,Swahili,Latn,,,sw-KE,Aa,,ready,TZ;KE;UG;CD,Ninasema
-tr,Türkçe,,Turkish,Latn,,,tr-TR,Şğ,,ready,TR;CY,Konuştuğum dil
-vi,Tiếng Việt,,Vietnamese,Latn,,,vi-VN,Ệ,,ready,VN,Tôi nói
-it,Italiano,,Italian,Latn,,,it-IT,Èù,,ready,IT;CH;SM,Parlo
-el,Ελληνικά,,Greek,Grek,,elot,el-GR,Αω,,ready,GR;CY,Μιλάω
-hu,Magyar,,Hungarian,Latn,,,hu-HU,Őű,,ready,HU,Nyelvem
-tlh, ,tlhIngan Hol,Klingon,Piqd,,okrand,tlh-TA,,ab,ready,,jIjatlh
-qya,,Quenya,Quenya,Teng,,appendix-e,qya-EX,,ná,ready,,quetin
-he,עברית,,Hebrew,Hebr,,bgn,he-IL,אב,,ready,IL,השפה שלי
-fa,فارسی,,Persian,Arab,,bgn,fa-IR,گ,,ready,IR,زبانِ من
-bn,বাংলা,,Bengali,Beng,,iso15919,bn-BD,বা,,ready,BD;IN,আমি বলতে পারি
-ur,اردو,,Urdu,Arab,,bgn,ur-PK,ے,,ready,PK,میں بولتا ہوں
-pl,Polski,,Polish,Latn,,,pl-PL,Łł,,ready,PL,Mówię
-nl,Nederlands,,Dutch,Latn,,,nl-NL,IJ,,ready,NL;BE,Ik spreek
-ta,தமிழ்,,Tamil,Taml,,iso15919,ta-IN,தமி,,ready,IN;LK;SG;MY,நான் பேசுவது
-uk,Українська,,Ukrainian,Cyrl,,bgn,uk-UA,Її,,ready,UA,Я розмовляю українською
-te,తెలుగు,,Telugu,Telu,,iso15919,te-IN,తె,,ready,IN,నేను మాట్లాడతాను
-mr,मराठी,,Marathi,Deva,,iso15919,mr-IN,मरा,,ready,IN,मी बोलतो
-ro,Română,,Romanian,Latn,,,ro-RO,Șș,,ready,RO;MD,Eu vorbesc
-cs,Čeština,,Czech,Latn,,,cs-CZ,Řř,,ready,CZ,Mluvím
-pa,ਪੰਜਾਬੀ,,Punjabi,Guru,,iso15919,pa-IN,ਪੰ,,ready,IN;PK,ਮੈਨੂੰ ਆਉਂਦੀ ਹੈ
-fil,Filipino,,Filipino,Latn,,,fil-PH,Ff,,ready,PH,Nagsasalita ako ng
-sv,Svenska,,Swedish,Latn,,,sv-SE,Åå,,ready,SE,Jag talar
-ms,Bahasa Melayu,,Malay,Latn,,,ms-MY,Aa,,ready,MY;SG;BN,Saya bertutur
-gu,ગુજરાતી,,Gujarati,Gujr,,iso15919,gu-IN,ગુ,,ready,IN,મને આવડે છે
-ne,नेपाली,,Nepali,Deva,,iso15919,ne-NP,ने,,ready,NP;IN,म बोल्छु
-am,አማርኛ,,Amharic,Ethi,,bgn,am-ET,አማ,,ready,ET,እናገራለሁ
-kn,ಕನ್ನಡ,,Kannada,Knda,,iso15919,kn-IN,ಕನ್,,ready,IN,ನನಗೆ ಬರುವ ಭಾಷೆ
-ha,Hausa,,Hausa,Latn,,,ha-NG,Ha,,ready,NG;NE,Ina magana
-ml,മലയാളം,,Malayalam,Mlym,,iso15919,ml-IN,മല,,ready,IN,എനിക്ക് അറിയാവുന്ന ഭാഷ
-yo,Yorùbá,,Yoruba,Latn,,,yo-NG,Ọọ,,ready,NG,Mo ń sọ
-lo,ລາວ,,Lao,Laoo,,bgn,lo-LA,ກຂ,,ready,LA,ຂ້ອຍປາກພາສາ
-km,ខ្មែរ,,Khmer,Khmr,,,km-KH,ខ្ម,,ready,KH,ភាសាដែលខ្ញុំចេះ
-hr,Hrvatski,,Croatian,Latn,,,hr-HR,Đđ,,ready,HR,Govorim
-ka,ქართული,,Georgian,Geor,,national,ka-GE,ქა,,ready,GE,ვლაპარაკობ
-fi,Suomi,,Finnish,Latn,,,fi-FI,Yö,,ready,FI,Kieleni
-hy,Հայերեն,,Armenian,Armn,,bgn,hy-AM,Հա,,ready,AM,Խոսում եմ
+bcp47,endonym,endonym_roman,exonym_en,script,script_alt,romanizations,default_accent,badge,badge_roman,status,regions,speak_label,speak_label_roman
+en,English,,English,Latn,,,en-US,Aa,,ready,GB;US;CA;AU;NZ;IE;ZA;IN,I speak,
+es,Español,,Spanish,Latn,,,es-419,Áé,,ready,ES;MX;AR;CO;CL;PE,Hablo,
+zh-Hans,简体中文,,Chinese (Simplified),Hans,Hant,pinyin,zh-CN,中,,ready,CN;SG;MY,我说,
+ja,日本語,,Japanese,Jpan,,hepburn;kunrei,ja-JP,あ,,ready,JP,話せる言語,
+ar,العربية,,Arabic,Arab,,ala-lc,ar-MSA,ع,,ready,SA;EG;AE;MA;JO;IQ,أتحدث,
+fr,Français,,French,Latn,,,fr-FR,Àç,,ready,FR;CA;BE;CH;SN;CI,Je parle,
+de,Deutsch,,German,Latn,,,de-DE,Äß,,ready,DE;AT;CH,Ich spreche,
+pt,Português,,Portuguese,Latn,,,pt-BR,Ãç,,ready,PT;BR;AO;MZ,Eu falo,
+ko,한국어,,Korean,Kore,,rr;mccune,ko-KR,한,,ready,KR,사용 언어,
+hi,हिन्दी,,Hindi,Deva,,iast;hunterian,hi-IN,अ,,ready,IN,मैं बोलता हूँ,
+th,ไทย,,Thai,Thai,,rtgs,th-TH,ก,,ready,TH,ฉันพูด,
+ru,Русский,,Russian,Cyrl,,bgn,ru-RU,Яж,,ready,RU;BY;KZ;KG,Я говорю на,
+id,Bahasa Indonesia,,Indonesian,Latn,,,id-ID,Aa,,ready,ID,Saya berbicara,
+sw,Kiswahili,,Swahili,Latn,,,sw-KE,Aa,,ready,TZ;KE;UG;CD,Ninasema,
+tr,Türkçe,,Turkish,Latn,,,tr-TR,Şğ,,ready,TR;CY,Konuştuğum dil,
+vi,Tiếng Việt,,Vietnamese,Latn,,,vi-VN,Ệ,,ready,VN,Tôi nói,
+it,Italiano,,Italian,Latn,,,it-IT,Èù,,ready,IT;CH;SM,Parlo,
+el,Ελληνικά,,Greek,Grek,,elot,el-GR,Αω,,ready,GR;CY,Μιλάω,
+hu,Magyar,,Hungarian,Latn,,,hu-HU,Őű,,ready,HU,Nyelvem,
+tlh, ,tlhIngan Hol,Klingon,Piqd,,okrand,tlh-TA,,ab,ready,,,jIjatlh
+qya,,Quenya,Quenya,Teng,,appendix-e,qya-EX,,ná,ready,,,quetin
+he,עברית,,Hebrew,Hebr,,bgn,he-IL,אב,,ready,IL,השפה שלי,
+fa,فارسی,,Persian,Arab,,bgn,fa-IR,گ,,ready,IR,زبانِ من,
+bn,বাংলা,,Bengali,Beng,,iso15919,bn-BD,বা,,ready,BD;IN,আমি বলতে পারি,
+ur,اردو,,Urdu,Arab,,bgn,ur-PK,ے,,ready,PK,میں بولتا ہوں,
+pl,Polski,,Polish,Latn,,,pl-PL,Łł,,ready,PL,Mówię,
+nl,Nederlands,,Dutch,Latn,,,nl-NL,IJ,,ready,NL;BE,Ik spreek,
+ta,தமிழ்,,Tamil,Taml,,iso15919,ta-IN,தமி,,ready,IN;LK;SG;MY,நான் பேசுவது,
+uk,Українська,,Ukrainian,Cyrl,,bgn,uk-UA,Її,,ready,UA,Я розмовляю українською,
+te,తెలుగు,,Telugu,Telu,,iso15919,te-IN,తె,,ready,IN,నేను మాట్లాడతాను,
+mr,मराठी,,Marathi,Deva,,iso15919,mr-IN,मरा,,ready,IN,मी बोलतो,
+ro,Română,,Romanian,Latn,,,ro-RO,Șș,,ready,RO;MD,Eu vorbesc,
+cs,Čeština,,Czech,Latn,,,cs-CZ,Řř,,ready,CZ,Mluvím,
+pa,ਪੰਜਾਬੀ,,Punjabi,Guru,,iso15919,pa-IN,ਪੰ,,ready,IN;PK,ਮੈਨੂੰ ਆਉਂਦੀ ਹੈ,
+fil,Filipino,,Filipino,Latn,,,fil-PH,Ff,,ready,PH,Nagsasalita ako ng,
+sv,Svenska,,Swedish,Latn,,,sv-SE,Åå,,ready,SE,Jag talar,
+ms,Bahasa Melayu,,Malay,Latn,,,ms-MY,Aa,,ready,MY;SG;BN,Saya bertutur,
+gu,ગુજરાતી,,Gujarati,Gujr,,iso15919,gu-IN,ગુ,,ready,IN,મને આવડે છે,
+ne,नेपाली,,Nepali,Deva,,iso15919,ne-NP,ने,,ready,NP;IN,म बोल्छु,
+am,አማርኛ,,Amharic,Ethi,,bgn,am-ET,አማ,,ready,ET,እናገራለሁ,
+kn,ಕನ್ನಡ,,Kannada,Knda,,iso15919,kn-IN,ಕನ್,,ready,IN,ನನಗೆ ಬರುವ ಭಾಷೆ,
+ha,Hausa,,Hausa,Latn,,,ha-NG,Ha,,ready,NG;NE,Ina magana,
+ml,മലയാളം,,Malayalam,Mlym,,iso15919,ml-IN,മല,,ready,IN,എനിക്ക് അറിയാവുന്ന ഭാഷ,
+yo,Yorùbá,,Yoruba,Latn,,,yo-NG,Ọọ,,ready,NG,Mo ń sọ,
+lo,ລາວ,,Lao,Laoo,,bgn,lo-LA,ກຂ,,ready,LA,ຂ້ອຍປາກພາສາ,
+km,ខ្មែរ,,Khmer,Khmr,,,km-KH,ខ្ម,,ready,KH,ភាសាដែលខ្ញុំចេះ,
+hr,Hrvatski,,Croatian,Latn,,,hr-HR,Đđ,,ready,HR,Govorim,
+ka,ქართული,,Georgian,Geor,,national,ka-GE,ქა,,ready,GE,ვლაპარაკობ,
+fi,Suomi,,Finnish,Latn,,,fi-FI,Yö,,ready,FI,Kieleni,
+hy,Հայերեն,,Armenian,Armn,,bgn,hy-AM,Հա,,ready,AM,Խոսում եմ,

@@ -460,25 +460,44 @@ def build(code, check):
 # native cell a reader meets before any card is drawn -- the gallery card prints it
 # under its English title and the "I speak..." picker's own row is nothing else. Both
 # were Latin on two cards whose every other cell had gone native. `exonym_en` carries
-# "Klingon" and "Quenya" for the title above it, so a native endonym strands nobody,
-# and `speak_label` in the same row stays romanised on purpose: that is interface
-# chrome, and `data/i18n/{tlh,qya}.json` is romanised end to end for the same reason.
+# "Klingon" and "Quenya" for the title above it, so a native endonym strands nobody.
 #
-# `endonym_roman` and `badge_roman` are new and empty on the other twenty rows, which
-# costs them nothing: every consumer reads this table by header name -- `parseTable`
-# in `core/csv.js` for the app and its tests, `csv.DictReader` in `validate_data.py`
-# and `build_ipa.py`.
+# **`speak_label` goes native too, and the line it settles is not "chrome or card" but
+# "registry or catalogue".** It was left romanised on the argument that it is interface
+# chrome, the way `data/i18n/{tlh,qya}.json` is; but that catalogue's own note gives the
+# reason it stays Latin -- it labels the controls a reader operates, and one of those
+# controls "labels a column of *Latin* letters". `speak_label` labels no control. It is
+# one cell per language holding that language's own words for "I speak", it is drawn by
+# `renderSpeakCollage` in the same `.reader-picker` div as the `endonym` above, and the
+# other forty-nine rows of the column are in their own language's script end to end --
+# so a Latin `jIjatlh` beside a pIqaD endonym made this the single romanised native cell
+# left in the registry. `gallery.wantLabel`, the other half of the same question, stays
+# romanised and belongs to the catalogue: it is the accessible name of the `#want` grid.
+# The `--ui` stack in `style.css` already puts `plg-conscript` first precisely so that
+# "any chrome text [can] hold those glyphs -- a card's endonym, a picker row, a heading".
+#
+# `endonym_roman`, `badge_roman` and `speak_label_roman` are empty on the other rows,
+# which costs them nothing: every consumer reads this table by header name --
+# `parseTable` in `core/csv.js` for the app and its tests, `csv.DictReader` in
+# `validate_data.py` and `build_ipa.py`.
+#
+# **The fourth entry is the Quenya pass, which landed second.** It could not be added
+# by the first: seeding reads `speak_label_roman or speak_label`, so while `quetin` was
+# still Latin the entry would have reported the Quenya row stale on every run. Now that
+# both rows hold `speak_label_roman` and a derived native cell, neither is hand-typed
+# and `--check` re-derives both.
 #
 # The `badge` pass is here for readability rather than for correctness. A badge is a
 # choice of two codepoints, not a transliteration of anything, and the two conscript
 # ones were hand-written into the CSV -- where nobody can read them, so checking that
 # the Quenya badge spells what it claims to meant decoding five Private Use Area
 # codepoints against the CSUR chart by hand. `badge_roman` makes that a glance and
-# `--check` keeps the two in step. `languages.csv` therefore appears twice: each entry
-# rewrites the whole file, and the second pass reads what the first wrote.
+# `--check` keeps the two in step. `languages.csv` therefore appears three times: each
+# entry rewrites the whole file, and each pass reads what the one before it wrote.
 ROW_TABLES = [("language-names.csv", "locale", "name", "romanization"),
               ("languages.csv", "bcp47", "endonym", "endonym_roman"),
-              ("languages.csv", "bcp47", "badge", "badge_roman")]
+              ("languages.csv", "bcp47", "badge", "badge_roman"),
+              ("languages.csv", "bcp47", "speak_label", "speak_label_roman")]
 
 
 def build_rows(filename, code_column, native, roman_column, check):

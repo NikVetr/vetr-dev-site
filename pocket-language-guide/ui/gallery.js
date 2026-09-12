@@ -12,7 +12,9 @@ import {
 import { regionRow } from './flags.js';
 import { languagePicker } from './language-picker.js';
 import { openLightbox } from './lightbox.js';
-import { applyStatic, languageName, loadUiLanguage, regionList, t } from './i18n.js';
+import {
+  applyStatic, languageName, loadUiLanguage, regionList, setLanguageNames, t,
+} from './i18n.js';
 
 /** @param {string} tag @param {Record<string,string>} attrs @param {(Node|string)[]} kids */
 function el(tag, attrs = {}, kids = []) {
@@ -296,8 +298,21 @@ function renderSpeakCollage(languages, reader) {
 
 async function main() {
   registerOffline();
-  const { languages, coverage } = await loadLanguages();
+  const { languages, coverage, names } = await loadLanguages();
   const reader = readerLanguage(languages, coverage);
+  /**
+   * The registry's names for one locale, as `languageName` wants them.
+   *
+   * One locale's slice rather than the whole table, because that is what the
+   * function needs and the table is the O(N^2) one -- fifty rows out of two
+   * thousand two hundred.
+   * @param {string} locale
+   */
+  const useNamesFor = (locale) => setLanguageNames(Object.fromEntries(
+    names.filter((r) => r.locale === locale && r.name)
+      .map((r) => [r.bcp47, r.name]),
+  ));
+  useNamesFor(reader);
   // The interface language is the reader's own, so this has to happen before
   // anything is drawn -- including the static markup.
   await loadUiLanguage(reader, loadText);
@@ -355,6 +370,10 @@ async function main() {
   async function setReader(value) {
     setReaderLanguage(value);
     await loadUiLanguage(value, loadText);
+    // Before anything is redrawn, for the same reason the catalogue is: these are
+    // names the new reader sees, and `languageName` reads whichever slice it was
+    // last handed.
+    useNamesFor(value);
     applyStatic();
     header.select(value);
     header.relabel({ label: t('nav.readerHint'), options: pickerOptions() });

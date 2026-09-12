@@ -41,7 +41,7 @@ am,sw,,siwahīlīnnya,sɨwahiliɲːa
 am,ta,,tamīl,tamil
 am,te,,telugu,təluɡu
 am,th,,tay,taj
-am,tlh,,kilīngon,kɨlinɡon
+am,tlh,ክሊንጎን,kilīngon,kɨlinɡon
 am,tr,,turkinnya,turkɨɲːa
 am,uk,,yukrēninnya,jukrenɨɲːa
 am,ur,,urdunnya,ʔurduɲːa
@@ -91,7 +91,7 @@ ar,sw,,al-sawāḥilīyah,ʔassuːaːħlˈijjah
 ar,ta,,al-tāmīlīyah,ʔattˌaːmiːlˈijjah
 ar,te,,al-tīlūghūyah,ʔattˌiːluːɣuːˈijjah
 ar,th,,al-tāylāndīyah,ʔattˌaːjlaːndˈijjah
-ar,tlh,,al-klīnjūn,ʔalkliːndʒˈuːna
+ar,tlh,الكلينجون,al-klīnjūn,ʔalkliːndʒˈuːna
 ar,tr,,al-turkīyah,ʔattˌaɹakˈijjah
 ar,uk,,al-ūkrānīyah,ʔalʔˌuːkɹaːnˈijjah
 ar,ur,,al-urdīyah,ʔalʔˌawɹadˈijjah
@@ -141,7 +141,7 @@ bn,sw,,soẏāhili,ʃˈoahˌili
 bn,ta,,tāmila,tˈamil
 bn,te,,telugu,tˈeluɡˌu
 bn,th,,thāi,tʰˈai
-bn,tlh,,kliṅgana,klˈiŋɡɔn
+bn,tlh,ক্লিঙ্গন,kliṅgana,klˈiŋɡɔn
 bn,tr,,turki,tˈuɾki
 bn,uk,,iukrēnīẏa,ˈiukɾˌenij
 bn,ur,,urdu,ˈuɾdu
@@ -241,7 +241,7 @@ de,sw,,,zˈuːɑːˌɛliː
 de,ta,,,tamˈiːl
 de,te,,,tˈeːluːɡˌuː
 de,th,,,tˈaɪlˌɛndɪʃ
-de,tlh,,,klɪŋˈoːnɪʃ
+de,tlh,Klingonisch,,klɪŋˈoːnɪʃ
 de,tr,,,tˈyɾkɪʃ
 de,uk,,,ʊkɾˈaɪnɪʃ
 de,ur,,,ˈʊɾduː
@@ -291,7 +291,7 @@ el,sw,,Souachili,sˌuaçˈili
 el,ta,,Tamiliká,tˌamilikˈa
 el,te,,Teloúnkou,telˈuŋɡu
 el,th,,Tailandika,tˌaɪlanðikˈa
-el,tlh,,Klinnkon,klˈinɡon
+el,tlh,Κλίνγκον,Klinnkon,klˈinɡon
 el,tr,,Tourkika,tˌuɾcikˈa
 el,uk,,Oukranika,ˌukɾanikˈa
 el,ur,,Ourntou,ˈuɾdu
@@ -341,7 +341,7 @@ en,sw,,,swɑːhˈiːli
 en,ta,,,tˈæmɪl
 en,te,,,tɛlˈuːɡuː
 en,th,,,tˈaɪ
-en,tlh,,,klˈɪŋɡɑːn
+en,tlh,Klingon,,klˈɪŋɡɑːn
 en,tr,,,tˈɜːkɪʃ
 en,uk,,,juːkɹˈeɪniən
 en,ur,,,ˈʊɹduː
@@ -391,7 +391,7 @@ es,sw,,,swaxˈili
 es,ta,,,tamˈil
 es,te,,,telˈuɡu
 es,th,,,tˌaɪlandˈes
-es,tlh,,,klˈiŋɡon
+es,tlh,klingon,,klˈiŋɡon
 es,tr,,,tˈuɾko
 es,uk,,,ˌukɾanjˈano
 es,ur,,,ˈuɾdu
@@ -541,7 +541,7 @@ fil,sw,,,swahili
 fil,ta,,,tamil
 fil,te,,,tɛluɡu
 fil,th,,,thai
-fil,tlh,,,kliŋon
+fil,tlh,Klingon,,kliŋon
 fil,tr,Turko,,tuɾko
 fil,uk,Ukrainiano,,ukɾainiano
 fil,ur,,,uɾdu
@@ -591,7 +591,7 @@ fr,sw,,,swailˈi
 fr,ta,,,tamˈul
 fr,te,,,teluɡˈu
 fr,th,,,tˈaj
-fr,tlh,,,klɛ̃ɡˈɔ̃
+fr,tlh,klingon,,klɛ̃ɡˈɔ̃
 fr,tr,,,tˈyʁk
 fr,uk,,,ykʁɛnjˈɛ̃
 fr,ur,,,uʁdˈu
@@ -641,7 +641,7 @@ gu,sw,,svāhilī,sʋaːhɪli
 gu,ta,,tamil,təmɪl
 gu,te,,tēlugu,teːluɡu
 gu,th,,thāī,tʰaːi
-gu,tlh,,klingōn,klɪnɡoːn
+gu,tlh,ક્લિન્ગોન,klingōn,klɪnɡoːn
 gu,tr,,ṭarkiś,ʈəɾkɪʃ
 gu,uk,,yukrēniyan,jukɾeːnɪjən
 gu,ur,,urdū,ʊɾduː
@@ -740,7 +740,7 @@ he,sw,,sevahíli,sevahˈili
 he,ta,,tamilit,tamilˈit
 he,te,,telugo,teluɡˈo
 he,th,,ta’it,taˈit
-he,tlh,,qlingonit,klinɡonˈit
+he,tlh,קלינגונית,qlingonit,klinɡonˈit
 he,tr,,turqit,tuʁkˈit
 he,uk,,uqra’init,ukʁainˈit
 he,ur,,urdu,uʁdˈu
@@ -790,7 +790,7 @@ hi,sw,,svāhilī,sʋˈaːhɪlˌi
 hi,ta,,tamil,tˈʌmɪl
 hi,te,,telugū,tˈeːlʊɡˌuː
 hi,th,,thāī,tʰˈaːi
-hi,tlh,,kliṁgan,klˈĩɡən
+hi,tlh,क्लिंगन,kliṁgan,klˈĩɡən
 hi,tr,,turkī,tˈʊɾki
 hi,uk,,yūkreniyāī,jˈuːkɾeːnˌɪjaːˌi
 hi,ur,,urdū,ˈʊɾduː
@@ -840,7 +840,7 @@ hr,sw,,,svaxili
 hr,ta,,,tamilski
 hr,te,,,teluʃki
 hr,th,,,tajlantski
-hr,tlh,,,klinɡonski
+hr,tlh,klingonski,,klinɡonski
 hr,tr,,,tˈurski
 hr,uk,,,ukrajinski
 hr,ur,,,ˈurtski
@@ -890,7 +890,7 @@ hu,sw,,,sˈuɑheːli
 hu,ta,,,tˈɑmil
 hu,te,,,tˈɛluɡu
 hu,th,,,thˈɑi
-hu,tlh,,,klˈinɡon
+hu,tlh,klingon,,klˈinɡon
 hu,tr,,,tˈørøk
 hu,uk,,,ˈukraːn
 hu,ur,,,ˈurdu
@@ -932,7 +932,7 @@ hy,nl,,holanderen,hˌolandeɾˈen
 hy,pa,,p’enjaberen,pʰˌendʒabeɾˈen
 hy,pl,,leheren,lˌeheɾˈen
 hy,pt,,portugaleren,pˌortuɡˌaleɾˈen
-hy,qya,,,kˈajə
+hy,qya,քուենյա,k’uenya,kʰvenjˈa
 hy,ro,,rrumineren,rˌumineɾˈen
 hy,ru,,rruseren,rˌuseɾˈen
 hy,sv,,shvederen,ʃəvˌedeɾˈen
@@ -940,7 +940,7 @@ hy,sw,,suahili,svˌahilˈi
 hy,ta,,t’amileren,tʰˌamileɾˈen
 hy,te,,t’elugu,tʰˌeluɡˈu
 hy,th,,t’ayeren,tʰˌajeɾˈen
-hy,tlh,,klingon,kəlinɡˈon
+hy,tlh,կլինգոն,klingon,kəlinɡˈon
 hy,tr,,t’urk’eren,tʰˌurkʰeɾˈen
 hy,uk,,ukraineren,ˌukɾaˌineɾˈen
 hy,ur,,urdu,urdˈu
@@ -990,7 +990,7 @@ id,sw,,,swahˈili
 id,ta,,,tˈamil
 id,te,,,təlˈuɡu
 id,th,,,thˈaɪ
-id,tlh,,,klˈiŋon
+id,tlh,Klingon,,klˈiŋon
 id,tr,,,tˈurki
 id,uk,,,ukrˈaɪna
 id,ur,,,ˈurdu
@@ -1040,7 +1040,7 @@ it,sw,,,swahˈilɪ
 it,ta,,,tˈamil
 it,te,,,telˈuɡʊ
 it,th,,,taɪlandˈeze
-it,tlh,,,klˈiŋɡon
+it,tlh,klingon,,klˈiŋɡon
 it,tr,,,tˈurko
 it,uk,,,ʊkrˈaɪno
 it,ur,,,ˈurdʊ
@@ -1089,7 +1089,7 @@ ja,sw,,suwahirigo,sɯwaçiɾiɡo
 ja,ta,,tamirugo,tamiɾɯɡo
 ja,te,,Terugugo,teɾɯɡɯɡo
 ja,th,,taigo,taiɡo
-ja,tlh,,kuringongo,kɯɾiɴɡoɴɡo
+ja,tlh,クリンゴン語,kuringongo,kɯɾiɴɡoɴɡo
 ja,tr,,torukogo,toɾɯkoɡo
 ja,uk,,ukurainago,ɯkɯɾainaɡo
 ja,ur,,urudūgo,ɯɾɯdɯːɡo
@@ -1139,7 +1139,7 @@ ka,sw,,suahili,suahili
 ka,ta,,tamiluri,tʼamiluri
 ka,te,,telugu,tʼeluɡu
 ka,th,,tailanduri,tʼailanduri
-ka,tlh,,klingoni,kʼlinɡoni
+ka,tlh,კლინგონი,klingoni,kʼlinɡoni
 ka,tr,,turkuli,tʰurkʰuli
 ka,uk,,ukrainuli,ukʼrainuli
 ka,ur,,urdu,urdu
@@ -1189,7 +1189,7 @@ kn,sw,,svahili,svahili
 kn,ta,,tamiḷu,tamiɭu
 kn,te,,telugu,teluɡu
 kn,th,,thāy,tʰaːj
-kn,tlh,,kliṁgan,kliŋɡan
+kn,tlh,ಕ್ಲಿಂಗನ್,kliṁgan,kliŋɡan
 kn,tr,,ṭarkiś,ʈarkiʃ
 kn,uk,,ukrēniyan,ukreːnijan
 kn,ur,,urdu,urdu
@@ -1238,7 +1238,7 @@ ko,sw,,seuwahilli-eo,sɯwahilliʌ
 ko,ta,,tamil-eo,tʰamilʌ
 ko,te,,tellugu-eo,tʰelluɡuʌ
 ko,th,,taegugeo,tʰɛɡuɡʌ
-ko,tlh,,keullingeoneo,kʰɯlliŋʌnʌ
+ko,tlh,클링온어,keullingeoneo,kʰɯlliŋʌnʌ
 ko,tr,,twireukiye-eo,tʰwiɾɯkʰijeʌ
 ko,uk,,ukeuraina-eo,ukʰɯɾainaʌ
 ko,ur,,ureudu-eo,uɾɯduʌ
@@ -1288,7 +1288,7 @@ lo,sw,,xoahili,swaː˧˥hiː˧˥liʔ˧
 lo,ta,,thamil,tʰaː˧˥min˧˥
 lo,te,,téloukou,teː˩luː˧˥kuː˩
 lo,th,,thai,tʰaj˧˥
-lo,tlh,,khringkon,kʰriŋ˧˥kɔːn˩
+lo,tlh,ຄຣິງກອນ,khringkon,kʰriŋ˧˥kɔːn˩
 lo,tr,,theukhis,tʰɤː˧˥kʰit˧
 lo,uk,,youkhrénian,juː˩kʰreː˧˥nia̯n˧˥
 lo,ur,,ourdou,ʔuːn˩duː˩
@@ -1330,7 +1330,7 @@ ml,nl,,ḍaccŭ,ɖaccɨ
 ml,pa,,pañcābi,paɲcaːbi
 ml,pl,,pōḷiṣŭ,poːɭiʂɨ
 ml,pt,,pōrccugīsŭ,poːɾccuɡiːsɨ
-ml,qya,,qya,kaia
+ml,qya,ക്വെന്യാ,kvenyā,kvenjaː
 ml,ro,,ṟomāniyan,romaːnijan
 ml,ru,,ṟaṣyan,raʂjan
 ml,sv,,svīḍiṣŭ,sviːɖiʂɨ
@@ -1338,7 +1338,7 @@ ml,sw,,svāhili,svaːhili
 ml,ta,,tamiḻŭ,tamiɻɨ
 ml,te,,teluṅkŭ,teluŋɡ
 ml,th,,tāyŭ,taːjɨ
-ml,tlh,,kliṁgōṇ,klimɡoːɳ
+ml,tlh,ക്ലിംഗോൺ,kliṁgōṇ,klimɡoːɳ
 ml,tr,,ṭarkkiṣŭ,ʈaɾkkiʂɨ
 ml,uk,,ukrēniyan,ukɾeːnijan
 ml,ur,,uṟudu,urudu
@@ -1388,7 +1388,7 @@ mr,sw,,svāhilī,svˈaːhɪlˌi
 mr,ta,,tāmiḷa,tˈaːmɪɭ
 mr,te,,tēlugū,tˈeːlɡˌuː
 mr,th,,thāī,tʰˈaːi
-mr,tlh,,kliṁgôna,klˈĩɡɔn
+mr,tlh,क्लिंगॉन,kliṁgôna,klˈĩɡɔn
 mr,tr,,turkī,tˈʊɾki
 mr,uk,,yukrēniyana,jʊkɾˈeːnɪjˌən
 mr,ur,,urdū,ˈʊɾduː
@@ -1438,7 +1438,7 @@ ms,sw,,,swahˈili
 ms,ta,,,tˈamel
 ms,te,,,təlˈuɡu
 ms,th,,,thˈaɪ
-ms,tlh,,,klˈiŋon
+ms,tlh,Klingon,,klˈiŋon
 ms,tr,,,tˈurki
 ms,uk,,,ukrˈaɪne
 ms,ur,,,ˈurdu
@@ -1488,7 +1488,7 @@ ne,sw,,svāhilī,swˈaːhɪlˌiː
 ne,ta,,tāmila,tˈaːmɪl
 ne,te,,tēlugu,tˈeːluɡˌu
 ne,th,,thāī,tʰˈaːi
-ne,tlh,,kliṅgana,klˈɪŋɡən
+ne,tlh,क्लिङ्गन,kliṅgana,klˈɪŋɡən
 ne,tr,,ṭarkiśa,ʈˈʌrrkɪʃ
 ne,uk,,yukrēnī,jukɾˈeːni
 ne,ur,,urdu,ˈʊrrdu
@@ -1538,7 +1538,7 @@ nl,sw,,,sʋˈaːhilˌi
 nl,ta,,,tˈaːmɪl
 nl,te,,,tˈeːlyɣˌy
 nl,th,,,tˈɑj
-nl,tlh,,,klɪŋˈɔn
+nl,tlh,Klingon,,klɪŋˈɔn
 nl,tr,,,tˈʏrks
 nl,uk,,,ˌukraːˈins
 nl,ur,,,ˈʏrdy
@@ -1588,7 +1588,7 @@ pa,sw,,savāhilī,səʋahɪli
 pa,ta,,tamil,tʌmɪl
 pa,te,,tēlagū,teləɡu
 pa,th,,thāī,tʰai
-pa,tlh,,kaliṁgan,kəlɪŋɡən
+pa,tlh,ਕਲਿੰਗਨ,kaliṁgan,kəlɪŋɡən
 pa,tr,,turakī,tʊɾəki
 pa,uk,,yūkarēnīāī,jukəɾeniai
 pa,ur,,uradū,ʊɾədu
@@ -1688,14 +1688,63 @@ pt,sw,,,sˌuaˈili
 pt,ta,,,tˈɐ̃miʊ
 pt,te,,,tˈɛluɡʊ
 pt,th,,,tˌaɪlɐ̃ŋdˈes
-pt,tlh,,,kliŋɡˈoŋ
+pt,tlh,klingon,,kliŋɡˈoŋ
 pt,tr,,,tˈuɾəkʊ
 pt,uk,,,ˌukræniˈɐ̃nʊ
 pt,ur,,,uɾədˈu
 pt,vi,,,vˌietnæmˈitæ
 pt,yo,,,ˌioɾubˈa
 pt,zh-Hans,,,ʃinˈes
+qya,am, ,Amara lambë,ˈamara lˈambe
+qya,ar, ,Aravia lambë,arˈavia lˈambe
+qya,bn, ,Vanga lambë,vˈaŋɡa lˈambe
+qya,cs, ,Tyestina lambë,tjˈestina lˈambe
+qya,de, ,Loitya lambë,lˈojtja lˈambe
+qya,el, ,Ellinica lambë,ellˈinika lˈambe
+qya,en, ,Alvion lambë,ˈalvion lˈambe
+qya,es, ,Castellano lambë,kastˈellano lˈambe
+qya,fa, ,Fársi lambë,fˈaːrsi lˈambe
+qya,fi, ,Suomi lambë,sˈuomi lˈambe
+qya,fil, ,Filipino lambë,filˈipino lˈambe
+qya,fr, ,Hrancia lambë,rˈankia lˈambe
+qya,gu, ,Cuyaráti lambë,kujarˈaːti lˈambe
+qya,ha, ,Hausa lambë,hˈawsa lˈambe
+qya,he, ,Irvit lambë,ˈirvit lˈambe
+qya,hi, ,Hindi lambë,hˈindi lˈambe
+qya,hr, ,Horvatia lambë,horvˈatia lˈambe
+qya,hu, ,Matyar lambë,mˈatjar lˈambe
+qya,hy, ,Hayeren lambë,hˈajeren lˈambe
+qya,id, ,Indonesia lambë,indonˈesia lˈambe
+qya,it, ,Italya lambë,ˈitalja lˈambe
+qya,ja, ,Nihon lambë,nˈihon lˈambe
+qya,ka, ,Cartuli lambë,kˈartuli lˈambe
+qya,km, ,Cambolia lambë,kambˈolia lˈambe
+qya,kn, ,Cannala lambë,kˈannala lˈambe
+qya,ko, ,Hangut lambë,hˈaŋɡut lˈambe
+qya,lo, ,Lávo lambë,lˈaːvo lˈambe
+qya,ml, ,Malayálan lambë,malajˈaːlan lˈambe
+qya,mr, ,Marati lambë,mˈarati lˈambe
+qya,ms, ,Melayu lambë,mˈelaju lˈambe
+qya,ne, ,Nepáli lambë,nepˈaːli lˈambe
+qya,nl, ,Hollanda lambë,hollˈanda lˈambe
+qya,pa, ,Panyávi lambë,panjˈaːvi lˈambe
+qya,pl, ,Polonia lambë,polˈonia lˈambe
+qya,pt, ,Portuces lambë,pˈortukes lˈambe
 qya,qya,,Quenya,kwˈenja
+qya,ro, ,Romania lambë,romˈania lˈambe
+qya,ru, ,Rossia lambë,rˈossia lˈambe
+qya,sv, ,Suecia lambë,suˈekia lˈambe
+qya,sw, ,Cisuahili lambë,kisuˈahili lˈambe
+qya,ta, ,Tamil lambë,tˈamil lˈambe
+qya,te, ,Telucu lambë,tˈeluku lˈambe
+qya,th, ,Tai lambë,taj lˈambe
+qya,tlh, ,Hlingan lambë,lˈiŋɡan lˈambe
+qya,tr, ,Turcia lambë,tˈurkia lˈambe
+qya,uk, ,Uhraina lambë,urˈajna lˈambe
+qya,ur, ,Urtu lambë,ˈurtu lˈambe
+qya,vi, ,Viet lambë,vˈiet lˈambe
+qya,yo, ,Yoruva lambë,jˈoruva lˈambe
+qya,zh-Hans, ,Tyongwen lambë,tjˈoŋɡwen lˈambe
 ro,am,,,ˌamhaɾˈikə
 ro,ar,,,aɾˈabə
 ro,bn,,,bˌeŋɡalˈezə
@@ -1739,7 +1788,7 @@ ro,sw,,,swahˈilʲ
 ro,ta,,,tamˈilə
 ro,te,,,telˈuɡu
 ro,th,,,thˌaɪlandˈezə
-ro,tlh,,,klˌiŋɡonjˈanə
+ro,tlh,klingoniană,,klˌiŋɡonjˈanə
 ro,tr,,,tˈurkə
 ro,uk,,,ˌukraɪnˈeanə
 ro,ur,,,ˈurdu
@@ -1839,7 +1888,7 @@ sv,sw,,,svˈɑːhiːlˌiː
 sv,ta,,,tˈɑːmiːl
 sv,te,,,tˈeːlʉɡˌʉ
 sv,th,,,thˈɑːiːlˌɛndska
-sv,tlh,,,klˈɪŋɔnskˌa
+sv,tlh,klingonska,,klˈɪŋɔnskˌa
 sv,tr,,,tˈɵrkɪskˌa
 sv,uk,,,ˈɵkraˌɪnska
 sv,ur,,,ˈɵrdʉ
@@ -1889,7 +1938,7 @@ sw,sw,Kiswahili,,kˌiswahˈili
 sw,ta,,,kˌitamˈili
 sw,te,,,kˌitelˈuɡu
 sw,th,,,kiθˈai
-sw,tlh,,,kˌikliŋɡˈoni
+sw,tlh,Kiklingoni,,kˌikliŋɡˈoni
 sw,tr,,,kˌiturˈuki
 sw,uk,,,kˌiukraˈini
 sw,ur,,,kiˈurdu
@@ -1939,7 +1988,7 @@ ta,sw,,svāhili,svaːhili
 ta,ta,தமிழ்,tamiḻ,tʌmiɻ
 ta,te,,teluṅku,telɯŋɡɯ
 ta,th,,tāy,taːj
-ta,tlh,,kḷiṅkōṉ,kɭiŋɡoːn
+ta,tlh,க்ளிங்கோன்,kḷiṅkōṉ,kɭiŋɡoːn
 ta,tr,,turukkiṣ,tuɾɯkkiʂ
 ta,uk,,ukrainiyaṉ,ukɾaɪnijʌn
 ta,ur,,urutu,uɾɯdɯ
@@ -1989,7 +2038,7 @@ te,sw,,svāhili,sʋaːhili
 te,ta,,tamiḷaṁ,tamiɭam
 te,te,,telugu,teluɡu
 te,th,,thāy,tʰaːj
-te,tlh,,kliṁgān,kliŋɡaːn
+te,tlh,క్లింగాన్,kliṁgān,kliŋɡaːn
 te,tr,,ṭarkiṣ,ʈarkiʂ
 te,uk,,ukreyiniyan,ukrejinijan
 te,ur,,urdū,urduː
@@ -2039,7 +2088,7 @@ th,sw,,sawahili,sa˨˩waː˩˩˦ hiː˧ liː˧
 th,ta,,thamin,tʰa˦˥min˧
 th,te,,teluku,teː˧ luː˧ kuː˧
 th,th,ไทย,thai,tʰaj˧
-th,tlh,,khlingngon,kʰliʔ˦˥ŋɔː˧ ŋɔːn˧
+th,tlh,คลิงงอน,khlingngon,kʰliʔ˦˥ŋɔː˧ ŋɔːn˧
 th,tr,,turaki,tuʔ˨˩ra˦˥kiː˧
 th,uk,,yukhren,juː˧kʰreːn˧
 th,ur,,urodu,ʔuː˧rɔː˧duː˧
@@ -2138,7 +2187,7 @@ tr,sw,Svahilice,,svahilˈidʒɛ
 tr,ta,,,tamˈɪldʒɛ
 tr,te,,,teɫuɡˈʊ dilˈɪ
 tr,th,,,tajdʒˈa
-tr,tlh,,,klɪnɡɔndʒˈa
+tr,tlh,Klingonca,,klɪnɡɔndʒˈa
 tr,tr,Türkçe,,tˈørktʃɛ
 tr,uk,,,ʊkrajnadʒˈa
 tr,ur,,,ʊrdudʒˈa
@@ -2238,7 +2287,7 @@ ur,sw,,savāhilī,saʋˈaːhəlˌiː
 ur,ta,,tamil,tˈʌməl
 ur,te,,tīlgū,tˈeːlɡˌoː
 ur,th,,thāī,tʰˈaːi
-ur,tlh,,kalingan,kəlˈʌnɡən
+ur,tlh,کلنگن,kalingan,kəlˈʌnɡən
 ur,tr,,turkī,tˈʊɾki
 ur,uk,,yūkrīniyā’ī,jˌɔkɾˈiːnjaːˌiː
 ur,ur,,urdū,ˈʊɾdˌuː
@@ -2338,7 +2387,7 @@ yo,sw,,,e˩de˩ swahili
 yo,ta,,,e˩de˩ tamili
 yo,te,,,e˩de˩ teluɡu
 yo,th,,,e˩de˩ tai
-yo,tlh,,,e˩de˩ klĩɡoni
+yo,tlh,Èdè Klingoni,,e˩de˩ klĩɡoni
 yo,tr,,,e˩de˩ tɔɔkisi
 yo,uk,,,e˩de˩ ukania
 yo,ur,,,e˩de˩ udu
@@ -2387,7 +2436,7 @@ zh-Hans,sw,,Sīwǎxīlǐyǔ,sɯ˥wa˧˩˧ɕi˥li˧˩˧y˧˩˧
 zh-Hans,ta,,Tàimǐ'ěryǔ,tʰaɪ˥˩mi˧˩˧ɑɻ˧˩˧y˧˩˧
 zh-Hans,te,,Tàilúgùyǔ,tʰaɪ˥˩lu˧˥ku˥˩y˧˩˧
 zh-Hans,th,,Tàiyǔ,tʰaɪ˥˩y˧˩˧
-zh-Hans,tlh,,Kèlíngòngyǔ,kʰɤ˥˩lin˧˥kʊŋ˥˩y˧˩˧
+zh-Hans,tlh,克林贡语,Kèlíngòngyǔ,kʰɤ˥˩lin˧˥kʊŋ˥˩y˧˩˧
 zh-Hans,tr,,Tǔ'ěrqíyǔ,tʰu˧˩˧ɑɻ˧˩˧tɕʰi˧˥y˧˩˧
 zh-Hans,uk,,Wūkèlányǔ,u˥kʰɤ˥˩lan˧˥y˧˩˧
 zh-Hans,ur,,Wū'ěrdūyǔ,u˥ɑɻ˧˩˧tu˥y˧˩˧

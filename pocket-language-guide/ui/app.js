@@ -75,9 +75,23 @@ export function fontManifest() {
  * file, and only the second one may decide what to offer.
  */
 export async function loadLanguages() {
+  // **`language-names.csv` is loaded here too, and it is worth the fetch.** The
+  // gallery is built to load without the registries it does not need, and this is
+  // the O(N^2) one -- but it is 29KB gzipped, an order of magnitude under the pack
+  // index the same page already fetches, and it is the only place that knows what a
+  // language is called in a locale ICU has never heard of. Without it the Klingon
+  // and Quenya cards printed their English exonyms in all fifty interface
+  // languages, `Intl.DisplayNames` having no answer and the fallback being English
+  // by construction.
+  const [languages, coverage, names] = await Promise.all([
+    loadText('data/registry/languages.csv'),
+    loadText('data/coverage.json'),
+    loadText('data/registry/language-names.csv'),
+  ]);
   return {
-    languages: parseTable(await loadText('data/registry/languages.csv'), 'languages.csv'),
-    coverage: JSON.parse(await loadText('data/coverage.json')),
+    languages: parseTable(languages, 'languages.csv'),
+    coverage: JSON.parse(coverage),
+    names: parseTable(names, 'language-names.csv'),
   };
 }
 

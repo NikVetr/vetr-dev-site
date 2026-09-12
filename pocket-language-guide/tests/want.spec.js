@@ -131,3 +131,32 @@ test('the intro stacks before its two columns get too narrow to read', async ({ 
   expect(stacked, 'the language grid should sit below the heading, not beside it')
     .toBe(true);
 });
+
+test('a language ICU has never heard of is still named in the reader’s own script', async ({ page }) => {
+  // Klingon and Quenya printed their English exonyms on all fifty interface
+  // languages. `languageName` asks `Intl.DisplayNames` and falls back to the
+  // registry's `exonym_en`, and Chromium's ICU answers a bare `tlh` for *every*
+  // locale -- so `fallback: 'none'` gives null and English is what is left. Node's
+  // fuller ICU does know them, which is why this only ever showed in a browser and
+  // no test caught it.
+  //
+  // `language-names.csv` is the only place that knows the answer, so the gallery
+  // now loads it: 29KB gzipped against a pack index an order of magnitude bigger on
+  // the same page.
+  await page.setViewportSize({ width: 1600, height: 1000 });
+  await page.goto('/');
+  await expect(page.locator('.card').first()).toBeVisible();
+  const { pickReader } = await import('./controls.js');
+  await pickReader(page, '日本語');
+  await page.waitForFunction(() => document.documentElement.lang === 'ja');
+  await expect(page.locator('.card[data-lang="tlh"] .card-name')).toHaveText('クリンゴン語');
+  await expect(page.locator('.card[data-lang="qya"] .card-name')).toHaveText('クウェンヤ');
+  // The picker grid reads the same function, so it comes along.
+  await expect(page.locator('#want .want-btn[data-lang="tlh"] .want-name'))
+    .toHaveText('クリンゴン語');
+
+  // Not vacuous in the other direction either: a language ICU *does* know must
+  // still come from ICU, because the registry's column is inflected for the
+  // "I do not speak {target}" frame and would put a case form in a title.
+  await expect(page.locator('.card[data-lang="ru"] .card-name')).toHaveText('ロシア語');
+});
