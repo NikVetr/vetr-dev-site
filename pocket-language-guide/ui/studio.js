@@ -164,17 +164,20 @@ async function main() {
 
   attachPanelResizers(/** @type {HTMLElement} */ (document.querySelector('.studio')));
 
-  // The banner lives in the header now rather than in a bar of its own, so it is one
-  // line among the controls and there is nothing to hide it *from* -- the Hide button
-  // is gone with the bar. It still hides itself once the quiz has been through, since
-  // at that point it has been answered.
-  if (localStorage.getItem(BANNER_KEY) === '1') $('banner').hidden = true;
+  // **The banner does not hide any more, and the stored flag is cleared.** It lives
+  // in the header rather than in a bar of its own, so it is one line among the
+  // controls and costs nothing to keep -- which removed the reason to hide it from a
+  // reader, and then left the reason to hide it from *itself*: answering the quiz set
+  // a flag that never cleared, so a reader who answered it once could not reach it
+  // again. Re-running it is an obvious thing to want, the questionnaire being the one
+  // control that sets several others at once. The key is removed rather than merely
+  // ignored, so anyone already carrying it gets the banner back instead of holding a
+  // value nothing reads.
+  localStorage.removeItem(BANNER_KEY);
   $('quiz-open').addEventListener('click', async () => {
     const answers = await openQuiz();
     if (!answers) return;
     spec = applyQuiz(spec, ctx.corpus, answers);
-    $('banner').hidden = true;
-    localStorage.setItem(BANNER_KEY, '1');
     schedule();
   });
 
