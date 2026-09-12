@@ -237,6 +237,8 @@
   "gallery.saving": "Збереження…",
   "gallery.spokenIn": "{language} -- тут говорять: {regions}",
   "gallery.thumbAlt": "Перша сторона картки «{language}» за замовчуванням",
+  "gallery.wantLabel": "…а хочу розмовляти",
+  "gallery.wantPick": "Показати картку «{language}» першою",
   "handles.columnGap": "Проміжок колонок",
   "handles.gapReadout": "Проміжок {gap} pt · ширина колонки {width} pt",
   "handles.marginBottom": "Нижнє поле",

@@ -237,6 +237,8 @@
   "gallery.saving": "保存中…",
   "gallery.spokenIn": "{language}は{regions}で話されています",
   "gallery.thumbAlt": "既定の{language}ガイドの1面目",
+  "gallery.wantLabel": "…話したい言語",
+  "gallery.wantPick": "{language}のカードを先に表示する",
   "handles.columnGap": "段間",
   "handles.gapReadout": "段間 {gap}pt・段の幅 {width}pt",
   "handles.marginBottom": "下の余白",

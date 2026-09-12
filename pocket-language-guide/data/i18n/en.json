@@ -226,6 +226,8 @@
   "gallery.docTitle": "Pocket Language Guide — printable phrase cards for any language",
   "gallery.export": "Export",
   "gallery.heading": "Printable pocket guides",
+  "gallery.wantLabel": "…I want to speak",
+  "gallery.wantPick": "Show the {language} card first",
   "gallery.helpTranslate": "help translate",
   "gallery.lede": "Pick a language and get a pocket-sized phrase card built to print, cut and laminate. Every sheet is typeset to fill its columns exactly. Customise the sections and the layout, or take the default and export straight away.",
   "gallery.loading": "Loading languages…",

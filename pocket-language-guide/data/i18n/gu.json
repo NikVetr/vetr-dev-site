@@ -249,6 +249,8 @@
   "gallery.saving": "સચવાય છે…",
   "gallery.spokenIn": "{language} {regions} માં બોલાય છે",
   "gallery.thumbAlt": "મૂળ {language} માર્ગદર્શિકાની પહેલી બાજુ",
+  "gallery.wantLabel": "…અને મને બોલવી છે",
+  "gallery.wantPick": "{language} કાર્ડ પહેલાં બતાવો",
   "handles.columnGap": "કૉલમ વચ્ચેની જગ્યા",
   "handles.gapReadout": "જગ્યા {gap}pt · કૉલમ {width}pt પહોળી",
   "handles.marginBottom": "નીચેનો હાંસિયો",

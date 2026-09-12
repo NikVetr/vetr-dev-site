@@ -249,6 +249,8 @@
   "gallery.saving": "កំពុងរក្សាទុក…",
   "gallery.spokenIn": "ភាសា{language}ត្រូវបានគេនិយាយនៅ{regions}",
   "gallery.thumbAlt": "ទំព័រទីមួយនៃសៀវភៅដៃភាសា{language}តាមលំនាំដើម",
+  "gallery.wantLabel": "…ភាសាដែលខ្ញុំចង់និយាយ",
+  "gallery.wantPick": "បង្ហាញកាតភាសា{language}មុនគេ",
   "handles.columnGap": "គម្លាតរវាងជួរឈរ",
   "handles.gapReadout": "គម្លាត {gap}pt · ជួរឈរទទឹង {width}pt",
   "handles.marginBottom": "គែមខាងក្រោម",

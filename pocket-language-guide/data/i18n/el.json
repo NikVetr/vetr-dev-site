@@ -237,6 +237,8 @@
   "gallery.saving": "Αποθήκευση…",
   "gallery.spokenIn": "Η γλώσσα {language} μιλιέται εδώ: {regions}",
   "gallery.thumbAlt": "Η πρώτη όψη του προεπιλεγμένου οδηγού στα {language}",
+  "gallery.wantLabel": "…και θέλω να μιλήσω",
+  "gallery.wantPick": "Δείξτε πρώτα την κάρτα στα {language}",
   "handles.columnGap": "Απόσταση στηλών",
   "handles.gapReadout": "Απόσταση {gap} pt · πλάτος στήλης {width} pt",
   "handles.marginBottom": "Κάτω περιθώριο",

@@ -249,6 +249,8 @@
   "gallery.saving": "Ukládání…",
   "gallery.spokenIn": "Jazykem {language} se mluví v: {regions}",
   "gallery.thumbAlt": "První strana výchozího průvodce jazykem {language}",
+  "gallery.wantLabel": "…a chci mluvit",
+  "gallery.wantPick": "Zobrazit kartu {language} jako první",
   "handles.columnGap": "Mezera mezi sloupci",
   "handles.gapReadout": "Mezera {gap}pt · sloupce široké {width}pt",
   "handles.marginBottom": "Dolní okraj",

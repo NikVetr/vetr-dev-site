@@ -237,6 +237,8 @@
   "gallery.saving": "Wird gespeichert…",
   "gallery.spokenIn": "{language} wird in {regions} gesprochen",
   "gallery.thumbAlt": "Erste Seite des Standard-Sprachführers für {language}",
+  "gallery.wantLabel": "…und ich möchte sprechen",
+  "gallery.wantPick": "Die Karte für {language} zuerst zeigen",
   "handles.columnGap": "Spaltenabstand",
   "handles.gapReadout": "Abstand {gap} pt · Spalten {width} pt breit",
   "handles.marginBottom": "Unterer Rand",

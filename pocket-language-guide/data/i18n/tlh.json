@@ -186,6 +186,8 @@
   "gallery.saving": "pollu'taH…",
   "gallery.spokenIn": "{regions}Daq {language} jatlhlu'",
   "gallery.thumbAlt": "{language} 'echletHom mIllogh",
+  "gallery.wantLabel": "…jIjatlh vIneH",
+  "gallery.wantPick": "wa'DIch {language} 'echletHom yIcha'",
   "handles.columnGap": "war rulvaH",
   "handles.gapReadout": "rulvaH {gap}pt · warmey {width}pt vaS",
   "handles.marginBottom": "bIng veH",

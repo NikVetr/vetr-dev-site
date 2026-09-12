@@ -17,7 +17,7 @@
 <body>
 <a class="skip-link" href="#gallery" data-i18n="nav.skipToLanguages">Skip to the languages</a>
 <header class="site-header">
-  <div class="container">
+  <div class="container container-gallery">
     <a class="brand" href="./" data-i18n="nav.brand">Pocket Language Guide</a>
     <div class="spacer"></div>
     <div class="reader-picker">
@@ -27,13 +27,25 @@
   </div>
 </header>
 
-<main class="container">
-  <h1 data-i18n="gallery.heading">Printable pocket guides</h1>
-  <p class="lede" data-i18n="gallery.lede">
-    Pick a language and get a pocket-sized phrase card built to print, cut and laminate.
-    Every sheet is typeset to fill its columns exactly. Customise the sections and the
-    layout, or take the default and export straight away.
-  </p>
+<main class="container container-gallery">
+  <div class="gallery-intro">
+    <div>
+      <h1 data-i18n="gallery.heading">Printable pocket guides</h1>
+      <p class="lede" data-i18n="gallery.lede">
+        Pick a language and get a pocket-sized phrase card built to print, cut and laminate.
+        Every sheet is typeset to fill its columns exactly. Customise the sections and the
+        layout, or take the default and export straight away.
+      </p>
+    </div>
+    <!-- The other half of the header's question. "I speak" sits above in the site
+         header; this is the answer to "and I want to speak...", as a grid dense
+         enough to hold every language at once. Built by `ui/gallery.js`, because the
+         list is the registry and the labels are in the reader's language. -->
+    <div class="want">
+      <span class="want-label" id="want-label" data-i18n="gallery.wantLabel">…I want to speak</span>
+      <div id="want" class="want-grid" role="group" aria-labelledby="want-label"></div>
+    </div>
+  </div>
 
   <div id="gallery" class="gallery" aria-busy="true" tabindex="-1">
     <p class="muted" data-i18n="gallery.loading">Loading languages…</p>

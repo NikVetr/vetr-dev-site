@@ -237,6 +237,8 @@
   "gallery.saving": "A guardar…",
   "gallery.spokenIn": "Fala-se {language} em {regions}",
   "gallery.thumbAlt": "Primeira face do guia predefinido de {language}",
+  "gallery.wantLabel": "…e quero falar",
+  "gallery.wantPick": "Mostrar primeiro o cartão de {language}",
   "handles.columnGap": "Espaço entre colunas",
   "handles.gapReadout": "Espaço {gap} pt · colunas de {width} pt",
   "handles.marginBottom": "Margem inferior",

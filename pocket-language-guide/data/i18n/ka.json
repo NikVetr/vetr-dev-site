@@ -249,6 +249,8 @@
   "gallery.saving": "ინახება…",
   "gallery.spokenIn": "{language} — ლაპარაკობენ აქ: {regions}",
   "gallery.thumbAlt": "ნაგულისხმევი გზამკვლევის პირველი მხარე: {language}",
+  "gallery.wantLabel": "…და მინდა ვილაპარაკო",
+  "gallery.wantPick": "ბარათის პირველად ჩვენება: {language}",
   "handles.columnGap": "სვეტებს შორის დაშორება",
   "handles.gapReadout": "დაშორება {gap} pt · სვეტის სიგანე {width} pt",
   "handles.marginBottom": "ქვედა მინდორი",

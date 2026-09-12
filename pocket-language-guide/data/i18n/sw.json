@@ -237,6 +237,8 @@
   "gallery.saving": "Inahifadhi…",
   "gallery.spokenIn": "Lugha ya {language} inazungumzwa katika {regions}",
   "gallery.thumbAlt": "Uso wa kwanza wa mwongozo wa kawaida wa {language}",
+  "gallery.wantLabel": "…na nataka kusema",
+  "gallery.wantPick": "Onyesha kadi ya {language} kwanza",
   "handles.columnGap": "Nafasi kati ya safu",
   "handles.gapReadout": "Nafasi {gap}pt · safu upana {width}pt",
   "handles.marginBottom": "Ukingo wa chini",

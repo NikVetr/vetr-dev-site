@@ -249,6 +249,8 @@
  "gallery.saving": "ಉಳಿಸುತ್ತಿದೆ…",
  "gallery.spokenIn": "{language} {regions} ದಲ್ಲಿ ಮಾತನಾಡುತ್ತಾರೆ",
  "gallery.thumbAlt": "ಸಹಜ {language} ಮಾರ್ಗದರ್ಶಿಯ ಮೊದಲ ಮುಖ",
+ "gallery.wantLabel": "…ನನಗೆ ಬೇಕಾದ ಭಾಷೆ",
+ "gallery.wantPick": "{language} ಕಾರ್ಡನ್ನು ಮೊದಲು ತೋರಿಸಿ",
  "handles.columnGap": "ಕಂಬಗಳ ನಡುವಿನ ಅಂತರ",
  "handles.gapReadout": "ಅಂತರ {gap}pt · ಕಂಬಗಳ ಅಗಲ {width}pt",
  "handles.marginBottom": "ಕೆಳ ಅಂಚು",

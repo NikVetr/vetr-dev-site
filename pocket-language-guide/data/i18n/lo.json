@@ -249,6 +249,8 @@
   "gallery.saving": "ກຳລັງບັນທຶກ…",
   "gallery.spokenIn": "{language} ໃຊ້ຢູ່ {regions}",
   "gallery.thumbAlt": "ໜ້າທຳອິດຂອງຄູ່ມື {language} ຕາມຄ່າຕັ້ງຕົ້ນ",
+  "gallery.wantLabel": "…ຂ້ອຍຢາກປາກພາສາ",
+  "gallery.wantPick": "ສະແດງບັດ {language} ກ່ອນ",
   "handles.columnGap": "ໄລຍະຫ່າງລະຫວ່າງຫຼັກ",
   "handles.gapReadout": "ຫ່າງ {gap}pt · ຫຼັກກວ້າງ {width}pt",
   "handles.marginBottom": "ຂອບລຸ່ມ",

@@ -237,6 +237,8 @@
   "gallery.saving": "Wordt opgeslagen…",
   "gallery.spokenIn": "{language} wordt gesproken in {regions}",
   "gallery.thumbAlt": "Eerste zijde van het standaard zakwoordenboek voor {language}",
+  "gallery.wantLabel": "…en ik wil spreken",
+  "gallery.wantPick": "De kaart voor {language} eerst tonen",
   "handles.columnGap": "Kolomafstand",
   "handles.gapReadout": "Afstand {gap} pt · kolommen {width} pt breed",
   "handles.marginBottom": "Ondermarge",

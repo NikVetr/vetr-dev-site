@@ -237,6 +237,8 @@
   "gallery.saving": "Menyimpan…",
   "gallery.spokenIn": "Bahasa {language} dipakai di {regions}",
   "gallery.thumbAlt": "Sisi pertama panduan bahasa {language} versi bawaan",
+  "gallery.wantLabel": "…dan ingin bertutur",
+  "gallery.wantPick": "Tunjukkan kad bahasa {language} dahulu",
   "handles.columnGap": "Jarak kolom",
   "handles.gapReadout": "Jarak {gap}pt · lebar kolom {width}pt",
   "handles.marginBottom": "Margin bawah",

@@ -249,6 +249,8 @@
   "gallery.saving": "சேமிக்கப்படுகிறது…",
   "gallery.spokenIn": "{language} மொழி பேசப்படும் இடங்கள்: {regions}",
   "gallery.thumbAlt": "இயல்பு {language} வழிகாட்டியின் முதல் பக்கம்",
+  "gallery.wantLabel": "…நான் பேச விரும்புவது",
+  "gallery.wantPick": "{language} அட்டையை முதலில் காட்டுங்கள்",
   "handles.columnGap": "நிரல் இடைவெளி",
   "handles.gapReadout": "இடைவெளி {gap}pt · நிரல் அகலம் {width}pt",
   "handles.marginBottom": "கீழ் ஓரம்",

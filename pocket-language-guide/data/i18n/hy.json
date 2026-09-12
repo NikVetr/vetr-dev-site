@@ -249,6 +249,8 @@
   "gallery.saving": "Պահպանվում է…",
   "gallery.spokenIn": "{language} խոսում են՝ {regions}",
   "gallery.thumbAlt": "Լռելյայն {language} ուղեցույցի առաջին երեսը",
+  "gallery.wantLabel": "…և ուզում եմ խոսել",
+  "gallery.wantPick": "Ցուցադրե՛ք {language} քարտը առաջինը",
   "handles.columnGap": "Սյունակների բացվածքը",
   "handles.gapReadout": "Բացվածք {gap}pt · սյունակները {width}pt լայն",
   "handles.marginBottom": "Ստորին լուսանցք",

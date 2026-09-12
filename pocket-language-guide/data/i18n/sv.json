@@ -237,6 +237,8 @@
   "gallery.saving": "Sparar…",
   "gallery.spokenIn": "{language} talas i {regions}",
   "gallery.thumbAlt": "Första sidan av standardguiden för {language}",
+  "gallery.wantLabel": "…och jag vill tala",
+  "gallery.wantPick": "Visa kortet för {language} först",
   "handles.columnGap": "Kolumnavstånd",
   "handles.gapReadout": "Avstånd {gap} pt · kolumner {width} pt breda",
   "handles.marginBottom": "Nedre marginal",

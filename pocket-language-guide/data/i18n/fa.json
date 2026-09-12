@@ -237,6 +237,8 @@
   "gallery.saving": "در حال ذخیره…",
   "gallery.spokenIn": "به زبان {language} در {regions} صحبت می‌شود",
   "gallery.thumbAlt": "وجه اول راهنمای پیش‌فرض زبان {language}",
+  "gallery.wantLabel": "و زبانی که می‌خواهم",
+  "gallery.wantPick": "کارت زبان {language} را اول نشان دهید",
   "handles.columnGap": "فاصلهٔ ستون‌ها",
   "handles.gapReadout": "فاصله {gap} پوینت · عرض ستون {width} پوینت",
   "handles.marginBottom": "حاشیهٔ پایین",

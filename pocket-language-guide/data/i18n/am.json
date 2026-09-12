@@ -249,6 +249,8 @@
   "gallery.saving": "በማስቀመጥ ላይ…",
   "gallery.spokenIn": "{language} በ{regions} ይነገራል",
   "gallery.thumbAlt": "የመደበኛው {language} መምሪያ የመጀመሪያ ገጽ",
+  "gallery.wantLabel": "…መናገር እፈልጋለሁ",
+  "gallery.wantPick": "የ{language} ካርድን መጀመሪያ ያሳዩ",
   "handles.columnGap": "የአምድ ክፍተት",
   "handles.gapReadout": "ክፍተት {gap}pt · አምዶች {width}pt ስፋት",
   "handles.marginBottom": "የታች ኅዳግ",

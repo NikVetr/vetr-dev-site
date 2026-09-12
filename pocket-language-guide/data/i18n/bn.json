@@ -249,6 +249,8 @@
   "gallery.saving": "সংরক্ষণ হচ্ছে…",
   "gallery.spokenIn": "{language} ভাষা যেখানে বলা হয়: {regions}",
   "gallery.thumbAlt": "ডিফল্ট {language} গাইডের প্রথম পৃষ্ঠা",
+  "gallery.wantLabel": "…আর বলতে চাই",
+  "gallery.wantPick": "{language} কার্ডটি প্রথমে দেখান",
   "handles.columnGap": "কলামের মাঝের জায়গা",
   "handles.gapReadout": "জায়গা {gap}pt · কলাম {width}pt চওড়া",
   "handles.marginBottom": "নিচের মার্জিন",

@@ -237,6 +237,8 @@
   "gallery.saving": "Enregistrement…",
   "gallery.spokenIn": "Régions où l’on parle {language} : {regions}",
   "gallery.thumbAlt": "Première face du guide {language} par défaut",
+  "gallery.wantLabel": "…et je veux parler",
+  "gallery.wantPick": "Afficher d’abord la carte en {language}",
   "handles.columnGap": "Gouttière",
   "handles.gapReadout": "Gouttière {gap} pt · colonnes de {width} pt",
   "handles.marginBottom": "Marge du bas",

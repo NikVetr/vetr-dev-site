@@ -237,6 +237,8 @@
   "gallery.saving": "सहेजा जा रहा है…",
   "gallery.spokenIn": "{language} भाषा यहाँ बोली जाती है: {regions}",
   "gallery.thumbAlt": "डिफ़ॉल्ट {language} गाइड का पहला पृष्ठ",
+  "gallery.wantLabel": "…और बोलना चाहता हूँ",
+  "gallery.wantPick": "{language} कार्ड पहले दिखाएँ",
   "handles.columnGap": "कॉलम के बीच जगह",
   "handles.gapReadout": "जगह {gap}pt · कॉलम {width}pt चौड़े",
   "handles.marginBottom": "नीचे का हाशिया",

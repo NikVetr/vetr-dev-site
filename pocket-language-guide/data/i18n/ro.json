@@ -249,6 +249,8 @@
   "gallery.saving": "Se salvează…",
   "gallery.spokenIn": "{language}: se vorbește în {regions}",
   "gallery.thumbAlt": "Prima față a ghidului implicit de {language}",
+  "gallery.wantLabel": "…și vreau să vorbesc",
+  "gallery.wantPick": "Arată întâi cardul de {language}",
   "handles.columnGap": "Spațiu între coloane",
   "handles.gapReadout": "Spațiu {gap}pt · coloane late de {width}pt",
   "handles.marginBottom": "Margine jos",

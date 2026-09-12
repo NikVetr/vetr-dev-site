@@ -249,6 +249,8 @@
   "gallery.saving": "محفوظ ہو رہا ہے…",
   "gallery.spokenIn": "{language} یہاں بولی جاتی ہے: {regions}",
   "gallery.thumbAlt": "طے شدہ {language} گائیڈ کا پہلا رخ",
+  "gallery.wantLabel": "اور بولنا چاہتا ہوں",
+  "gallery.wantPick": "{language} کارڈ پہلے دکھائیے",
   "handles.columnGap": "کالموں کے درمیان فاصلہ",
   "handles.gapReadout": "فاصلہ {gap} پوائنٹ · کالم {width} پوائنٹ چوڑے",
   "handles.marginBottom": "نیچے کا حاشیہ",

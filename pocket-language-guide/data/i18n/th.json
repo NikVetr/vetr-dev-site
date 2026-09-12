@@ -237,6 +237,8 @@
   "gallery.saving": "กำลังบันทึก…",
   "gallery.spokenIn": "{language}ใช้พูดใน{regions}",
   "gallery.thumbAlt": "หน้าแรกของคู่มือ{language}แบบตั้งต้น",
+  "gallery.wantLabel": "…ฉันอยากพูด",
+  "gallery.wantPick": "แสดงการ์ด{language}ก่อน",
   "handles.columnGap": "ช่องไฟระหว่างคอลัมน์",
   "handles.gapReadout": "ช่องไฟ {gap}pt · คอลัมน์กว้าง {width}pt",
   "handles.marginBottom": "ขอบล่าง",

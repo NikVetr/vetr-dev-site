@@ -237,6 +237,8 @@
   "gallery.saving": "저장 중…",
   "gallery.spokenIn": "{language} 사용 지역: {regions}",
   "gallery.thumbAlt": "{language} 기본 가이드의 첫 면",
+  "gallery.wantLabel": "…말하고 싶은 언어",
+  "gallery.wantPick": "{language} 카드를 맨 앞에 놓기",
   "handles.columnGap": "단 간격",
   "handles.gapReadout": "간격 {gap}pt · 단 너비 {width}pt",
   "handles.marginBottom": "아래쪽 여백",

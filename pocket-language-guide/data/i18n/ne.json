@@ -237,6 +237,8 @@
   "gallery.saving": "सुरक्षित हुँदैछ…",
   "gallery.spokenIn": "{language} भाषा यहाँ बोलिन्छ: {regions}",
   "gallery.thumbAlt": "डिफल्ट {language} गाइडको पहिलो पृष्ठ",
+  "gallery.wantLabel": "…र बोल्न चाहन्छु",
+  "gallery.wantPick": "{language} कार्ड पहिले देखाउनुहोस्",
   "handles.columnGap": "कोलमबीचको ठाउँ",
   "handles.gapReadout": "ठाउँ {gap}pt · कोलम {width}pt चौडा",
   "handles.marginBottom": "तलको हाशिया",

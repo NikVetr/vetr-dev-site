@@ -237,6 +237,8 @@
   "gallery.saving": "שומר…",
   "gallery.spokenIn": "{language} מדוברת ב{regions}",
   "gallery.thumbAlt": "העמוד הראשון של מדריך ברירת המחדל ב{language}",
+  "gallery.wantLabel": "והשפה שארצה לדבר בה",
+  "gallery.wantPick": "להציג קודם את הכרטיס ב{language}",
   "handles.columnGap": "רווח בין טורים",
   "handles.gapReadout": "רווח {gap} נקודות · רוחב הטור {width} נקודות",
   "handles.marginBottom": "שוליים תחתונים",

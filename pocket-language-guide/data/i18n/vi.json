@@ -237,6 +237,8 @@
   "gallery.saving": "Đang lưu…",
   "gallery.spokenIn": "{language} được nói ở {regions}",
   "gallery.thumbAlt": "Mặt đầu tiên của cẩm nang {language} mặc định",
+  "gallery.wantLabel": "…và tôi muốn nói",
+  "gallery.wantPick": "Đưa thẻ {language} lên đầu",
   "handles.columnGap": "Khoảng cách cột",
   "handles.gapReadout": "Cách {gap}pt · cột rộng {width}pt",
   "handles.marginBottom": "Lề dưới",

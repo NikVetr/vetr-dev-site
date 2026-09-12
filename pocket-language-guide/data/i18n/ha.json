@@ -249,6 +249,8 @@
   "gallery.saving": "Ana ajiyewa…",
   "gallery.spokenIn": "Ana magana da {language} a {regions}",
   "gallery.thumbAlt": "Fuska ta farko ta jagorar {language} ta asali",
+  "gallery.wantLabel": "…kuma ina son magana",
+  "gallery.wantPick": "Nuna katin {language} da farko",
   "handles.columnGap": "Gibin ginshiƙi",
   "handles.gapReadout": "Gibi {gap}pt · ginshiƙi faɗin {width}pt",
   "handles.marginBottom": "Iyakar ƙasa",

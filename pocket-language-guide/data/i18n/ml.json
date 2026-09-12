@@ -249,6 +249,8 @@
  "gallery.saving": "സൂക്ഷിക്കുന്നു…",
  "gallery.spokenIn": "{regions} എന്നിവിടങ്ങളിൽ {language} സംസാരിക്കുന്നു",
  "gallery.thumbAlt": "സ്വതേയുള്ള {language} ഗൈഡിന്റെ ആദ്യ വശം",
+ "gallery.wantLabel": "…എനിക്ക് വേണ്ട ഭാഷ",
+ "gallery.wantPick": "{language} കാർഡ് ആദ്യം കാണിക്കുക",
  "handles.columnGap": "കള്ളികൾക്കിടയിലെ ഇടം",
  "handles.gapReadout": "ഇടം {gap}pt · കള്ളിയുടെ വീതി {width}pt",
  "handles.marginBottom": "താഴത്തെ അതിര്",

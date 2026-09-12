@@ -237,6 +237,8 @@
   "gallery.saving": "Kaydediliyor…",
   "gallery.spokenIn": "{language} şuralarda konuşuluyor: {regions}",
   "gallery.thumbAlt": "Varsayılan {language} rehberinin ilk yüzü",
+  "gallery.wantLabel": "…konuşmak istediğim dil",
+  "gallery.wantPick": "{language} kartını en başa alın",
   "handles.columnGap": "Sütun aralığı",
   "handles.gapReadout": "Aralık {gap}pt · sütun genişliği {width}pt",
   "handles.marginBottom": "Alt kenar boşluğu",

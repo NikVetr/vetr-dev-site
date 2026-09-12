@@ -238,6 +238,8 @@
   "gallery.saving": "Zapisywanie…",
   "gallery.spokenIn": "Językiem {language} mówi się tutaj: {regions}",
   "gallery.thumbAlt": "Pierwsza strona domyślnego przewodnika ({language})",
+  "gallery.wantLabel": "…a chcę mówić",
+  "gallery.wantPick": "Pokaż kartę ({language}) jako pierwszą",
   "handles.columnGap": "Światło między kolumnami",
   "handles.gapReadout": "Światło {gap}pt · kolumny szerokości {width}pt",
   "handles.marginBottom": "Margines dolny",

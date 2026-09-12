@@ -237,6 +237,8 @@
   "gallery.saving": "Mentés…",
   "gallery.spokenIn": "{language} nyelvet itt beszélik: {regions}",
   "gallery.thumbAlt": "{language} nyelvű alapértelmezett kalauz első oldala",
+  "gallery.wantLabel": "…amit beszélni szeretnék",
+  "gallery.wantPick": "{language} nyelvű kártya megjelenítése elsőként",
   "handles.columnGap": "Hasábtérköz",
   "handles.gapReadout": "Térköz {gap} pt · a hasábok {width} pt szélesek",
   "handles.marginBottom": "Alsó margó",

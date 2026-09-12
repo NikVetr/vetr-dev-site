@@ -237,6 +237,8 @@
   "gallery.saving": "جارٍ الحفظ…",
   "gallery.spokenIn": "يُتحدَّث بلغة {language} في {regions}",
   "gallery.thumbAlt": "الوجه الأول من دليل {language} الافتراضي",
+  "gallery.wantLabel": "وأريد أن أتحدث",
+  "gallery.wantPick": "اعرض بطاقة {language} أولًا",
   "handles.columnGap": "المسافة بين الأعمدة",
   "handles.gapReadout": "المسافة {gap} نقطة · عرض العمود {width} نقطة",
   "handles.marginBottom": "الهامش السفلي",

@@ -249,6 +249,8 @@
   "gallery.saving": "ਸਾਂਭ ਰਿਹਾ ਹੈ…",
   "gallery.spokenIn": "{language} ਬੋਲੀ {regions} ਵਿੱਚ ਬੋਲੀ ਜਾਂਦੀ ਹੈ",
   "gallery.thumbAlt": "ਮੂਲ {language} ਗਾਈਡ ਦਾ ਪਹਿਲਾ ਪੰਨਾ",
+  "gallery.wantLabel": "…ਤੇ ਮੈਨੂੰ ਬੋਲਣੀ ਹੈ",
+  "gallery.wantPick": "{language} ਕਾਰਡ ਪਹਿਲਾਂ ਦਿਖਾਓ",
   "handles.columnGap": "ਕਾਲਮਾਂ ਵਿਚਲੀ ਵਿੱਥ",
   "handles.gapReadout": "ਵਿੱਥ {gap}pt · ਕਾਲਮ {width}pt ਚੌੜੇ",
   "handles.marginBottom": "ਹੇਠਲਾ ਹਾਸ਼ੀਆ",

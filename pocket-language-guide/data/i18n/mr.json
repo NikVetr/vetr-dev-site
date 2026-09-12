@@ -249,6 +249,8 @@
   "gallery.saving": "साठवत आहे…",
   "gallery.spokenIn": "{language} भाषा {regions} इथे बोलली जाते",
   "gallery.thumbAlt": "मूळ {language} मार्गदर्शकाचे पहिले पान",
+  "gallery.wantLabel": "…आणि मला बोलायचे आहे",
+  "gallery.wantPick": "{language} कार्ड आधी दाखवा",
   "handles.columnGap": "कॉलममधील अंतर",
   "handles.gapReadout": "अंतर {gap}pt · कॉलम {width}pt रुंद",
   "handles.marginBottom": "तळाचा समास",

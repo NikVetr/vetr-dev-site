@@ -248,6 +248,8 @@
   "gallery.saving": "Tallennetaan…",
   "gallery.spokenIn": "Kieltä {language} puhutaan: {regions}",
   "gallery.thumbAlt": "Kielen {language} oletusoppaan ensimmäinen sivu",
+  "gallery.wantLabel": "…ja haluamani kieli",
+  "gallery.wantPick": "Näytä kielen {language} kortti ensin",
   "handles.columnGap": "Palstaväli",
   "handles.gapReadout": "Väli {gap} pt · palstat {width} pt leveitä",
   "handles.marginBottom": "Alamarginaali",

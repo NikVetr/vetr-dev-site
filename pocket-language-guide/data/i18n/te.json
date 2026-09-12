@@ -249,6 +249,8 @@
   "gallery.saving": "దాచుతోంది…",
   "gallery.spokenIn": "{language} {regions} లో మాట్లాడతారు",
   "gallery.thumbAlt": "మామూలు {language} గైడ్ మొదటి ముఖం",
+  "gallery.wantLabel": "…మాట్లాడాలని ఉంది",
+  "gallery.wantPick": "{language} కార్డును మొదట చూపించండి",
   "handles.columnGap": "గడుల మధ్య ఖాళీ",
   "handles.gapReadout": "ఖాళీ {gap}pt · గడుల వెడల్పు {width}pt",
   "handles.marginBottom": "కింది అంచు",

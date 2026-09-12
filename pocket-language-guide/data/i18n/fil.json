@@ -237,6 +237,8 @@
   "gallery.saving": "Sine-save…",
   "gallery.spokenIn": "Ginagamit ang {language} sa {regions}",
   "gallery.thumbAlt": "Unang panig ng bawaang gabay sa {language}",
+  "gallery.wantLabel": "…at gusto kong magsalita ng",
+  "gallery.wantPick": "Ipakita muna ang kard sa {language}",
   "handles.columnGap": "Puwang ng Kolum",
   "handles.gapReadout": "Puwang {gap}pt · lapad ng kolum {width}pt",
   "handles.marginBottom": "Margin sa Ibaba",

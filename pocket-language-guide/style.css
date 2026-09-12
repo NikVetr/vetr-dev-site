@@ -65,7 +65,58 @@ h3 { font-size: var(--fs-1); margin: 0 0 var(--space-1); }
    sat 250px inboard of the panel title it labels. Matches `.studio > section`
    padding so the two line up. */
 .container-wide { width: 100%; padding-inline: var(--space-2); }
+/* The gallery is a grid of thumbnails, not a column of prose, so it earns more of
+   the viewport than 1180px gives it: on a 1920px screen that left 370px of nothing
+   down each side and four cards across where six fit. Still inset rather than
+   flush -- a card touching the viewport edge reads as a bleed rather than a
+   layout -- and `.lede` keeps its own 62ch cap, so the sentence does not stretch
+   with the grid. The header carries the same class or the brand sits inboard of the
+   cards it labels, which is the mistake `.container-wide` above records. */
+.container-gallery { width: min(100% - 2.5rem, 1560px); }
 .lede { color: var(--muted); max-width: 62ch; margin: 0 0 var(--space-3); }
+/* Prose left, every language right. `minmax(0, 34rem)` rather than `auto` so the
+   heading column cannot be squeezed by a long language name, and `1fr` on the grid
+   so it takes whatever the viewport gives back. */
+.gallery-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 34rem) 1fr;
+  gap: var(--space-3) var(--space-4);
+  align-items: start;
+  padding-block: var(--space-3) 0;
+}
+.want { min-width: 0; }
+.want-label {
+  display: block; font-size: var(--fs--1); color: var(--muted);
+  margin-bottom: var(--space-1);
+}
+/* Dense enough that fifty languages are one glance rather than a scroll. The badge
+   is the language's own orthography and the name is what someone is actually
+   scanning for, so the name leads on size and the badge sits above it as the thing
+   that tells two Latin-alphabet neighbours apart. */
+.want-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(5.5rem, 1fr));
+  gap: var(--space-1);
+}
+.want-btn {
+  display: flex; flex-direction: column; align-items: center; gap: 0.1rem;
+  padding: 0.3rem 0.25rem; border: 1px solid var(--line); border-radius: 6px;
+  background: #fff; cursor: pointer; font: inherit; color: inherit;
+  text-align: center; min-width: 0;
+}
+.want-btn:hover { border-color: var(--accent-lift); background: var(--accent-soft); }
+.want-btn .want-badge {
+  font-size: 1rem; line-height: 1.1; color: var(--accent);
+}
+.want-btn .want-name {
+  font-size: var(--fs--1); line-height: 1.15; overflow-wrap: anywhere;
+}
+.want-btn[aria-pressed="true"] {
+  border-color: var(--accent); background: var(--accent-soft); font-weight: 600;
+}
+/* A card with nothing to show is still offered -- the gallery says so on the card
+   itself -- but it should not look like the same invitation. */
+.want-btn.thin .want-name { color: var(--muted); }
 .row { display: flex; gap: var(--space-2); align-items: center; flex-wrap: wrap; }
 .spacer { flex: 1; }
 .muted { color: var(--muted); }
@@ -144,7 +195,15 @@ label { display: block; }
 
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  /* 270px, not 240: the card head assumes a one-line language name, and below a
+     270px card the longest English name ("Simplified Chinese") wraps, which pushes
+     that one card's thumbnail 21px down while `grid-auto-rows: 1fr` holds the row
+     height -- so it reads as one card misaligned rather than one card taller. The
+     threshold was measured, between 265 and 270. It costs a column at 1920px, six
+     becoming five, and five is still a quarter more than the 1180px cap gave.
+     Long names in other locales can still wrap at a narrow card; that is older
+     than this rule and not fixed by it. */
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
   /* Equal rows: only some cards carry a coverage line, and rows sized to their own
      content left the first row standing 25px taller than the rest. */
   grid-auto-rows: 1fr;
@@ -189,6 +248,17 @@ label { display: block; }
      that happens to contain one of these characters. */
   font-display: block;
 }
+/* The card the language grid just brought up. A ring rather than a pulse: it has
+   to still read as chosen a minute later, when whatever motion delivered it is long
+   over, and a card that keeps blinking is a card you want to leave. */
+.card.chosen {
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 2px var(--accent-soft),
+    0 0 0 3px var(--accent-lift),
+    0 8px 22px -8px rgb(11 103 163 / 45%);
+}
+
 .card-badge {
   font-family: var(--ui);
   font-size: 1.25rem; line-height: 1; min-width: 1.6em; text-align: center; color: var(--accent);
@@ -469,6 +539,12 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
   inset-inline-start: 1px; inline-size: 3px; background: var(--accent);
 }
 .col-resizer:focus-visible { outline: none; }
+
+/* Below this the two intro columns each get too narrow for their job: the heading
+   wraps to four lines and the language grid to two names a row. */
+@media (max-width: 1080px) {
+  .gallery-intro { grid-template-columns: minmax(0, 1fr); }
+}
 
 @media (min-width: 701px) and (max-width: 1100px) {
   .studio {
@@ -1377,3 +1453,11 @@ button.big { justify-content: center; padding: 0.6em 1em; font-size: var(--fs-1)
 }
 .ornament-control p { margin: 5px 0 0; }
 .ornament-sample.elven { max-height: 100px; }
+
+/* The language grid moves a card into the top row, and `ui/gallery.js` animates the
+   move so it is clear which card went where rather than the grid simply being
+   different. Someone who has asked for less motion gets the same reorder with no
+   travel -- the class is what says "this one", and it is static. */
+@media (prefers-reduced-motion: reduce) {
+  .card { transition: none; }
+}

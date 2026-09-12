@@ -237,6 +237,8 @@
   "gallery.saving": "Salvataggio…",
   "gallery.spokenIn": "{language}: si parla in {regions}",
   "gallery.thumbAlt": "Prima facciata della guida predefinita di {language}",
+  "gallery.wantLabel": "…e voglio parlare",
+  "gallery.wantPick": "Mostra prima la scheda di {language}",
   "handles.columnGap": "Spazio tra le colonne",
   "handles.gapReadout": "Spazio {gap} pt · colonne di {width} pt",
   "handles.marginBottom": "Margine inferiore",

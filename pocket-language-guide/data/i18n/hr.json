@@ -249,6 +249,8 @@
   "gallery.saving": "Spremanje…",
   "gallery.spokenIn": "Jezik {language} govori se u: {regions}",
   "gallery.thumbAlt": "Prva strana zadanog vodiča za {language}",
+  "gallery.wantLabel": "…a želim govoriti",
+  "gallery.wantPick": "Prikaži prvo karticu za {language}",
   "handles.columnGap": "Razmak među stupcima",
   "handles.gapReadout": "Razmak {gap}pt · stupci široki {width}pt",
   "handles.marginBottom": "Donja margina",

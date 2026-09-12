@@ -249,6 +249,8 @@
   "gallery.saving": "Ń fi pamọ́…",
   "gallery.spokenIn": "A ń sọ {language} ní {regions}",
   "gallery.thumbAlt": "Ojú kìíní ìwé {language} déédé",
+  "gallery.wantLabel": "…mo fẹ́ sọ",
+  "gallery.wantPick": "Fi káàdì {language} hàn ní àkọ́kọ́",
   "handles.columnGap": "Àyè láàrin ọ̀wọ̀n",
   "handles.gapReadout": "Àyè {gap}pt · ọ̀wọ̀n fẹ̀ {width}pt",
   "handles.marginBottom": "Ìsàlẹ̀ ẹ̀gbẹ́",

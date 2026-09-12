@@ -237,6 +237,8 @@
   "gallery.saving": "正在保存…",
   "gallery.spokenIn": "{language}的使用地区：{regions}",
   "gallery.thumbAlt": "{language}默认指南的第一面",
+  "gallery.wantLabel": "…我想说",
+  "gallery.wantPick": "优先显示{language}卡片",
   "handles.columnGap": "栏间距",
   "handles.gapReadout": "栏间距 {gap}pt · 栏宽 {width}pt",
   "handles.marginBottom": "下页边距",
