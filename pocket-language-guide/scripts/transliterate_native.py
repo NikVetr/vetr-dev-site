@@ -278,7 +278,14 @@ def tengwar_word(word):
             units.append(Unit(NWALME if i == 0 else NUMEN))
             i += 1
             pending = units[-1]
-        elif ch in ("r", "w"):
+        elif ch in ("r", "w") and not word.startswith("rd", i):
+            # **`rd` has to be tested before the liquid branch, or it is
+            # unreachable.** `CONSONANTS` lists `("rd", [ARDA])`, but every `r`
+            # was being taken by `_liquid` first, so the loop below never saw the
+            # digraph and the bare `d` left after it matched no pattern -- the
+            # function raised on *arda*, the word its own tengwa is named after.
+            # Nothing in the corpus contains `rd` today, which is why it sat, and
+            # it is also why a Quenya adaptation of Urdu had to avoid the cluster.
             i = _liquid(word, i, units)
             pending = units[-1]
         else:

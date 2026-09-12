@@ -987,29 +987,47 @@ and the same thing he does himself with `DoyIchlan` and `maDyar`. Where key and
 author disagree the author wins: re-deriving Hungarian gives `majar` against his
 `maDyar`, so the attested twenty were left alone.
 
-**Quenya is named by nobody, and the gap is closed at the other end.** There are no
-Quenya names for the other twenty-one languages, and this is the fourth time the pack
-has hit that wall — no interrogative for "where", no emergency section, a 29%
-interface catalogue — so it gets the same answer. The reason is sharper than "no
-source": the Quenya reader table deliberately spells /b d ɡ/ as `b d g` and says of
-`thl` that it "is not a possible Quenya cluster", which is right for a *respelling*
-and fatal for a name, because Quenya's orthography has none of those letters. The
-obvious repair is worse — the CSUR block does have ando, anga and thúle, but **in the
-classical mode those spell `nd`, `ng` and `s`**, so borrowing their general-use values
-would make `Deutsch` read as `ndooty`. A mode is a mapping and half a mapping is not a
-transcription, so "transcribe rather than coin" is not on offer here; it would be
-twenty-one coinages.
+**Quenya names all forty-nine, and every name is a coinage rather than a
+transcription.** "Transcribe rather than coin" was never on offer, and the reason is
+sharper than "no source": the Quenya reader table deliberately spells /b d ɡ/ as
+`b d g` and says of `thl` that it "is not a possible Quenya cluster", which is right
+for a *respelling* and fatal for a name, because Quenya's orthography has none of
+those letters. The obvious repair is worse — the CSUR block does have ando, anga and
+thúle, but **in the classical mode those spell `nd`, `ng` and `s`**, so borrowing
+their general-use values would make `Deutsch` read as `ndooty`. A mode is a mapping
+and half a mapping is not a transcription.
 
-So `languageName` was fixed instead. It fell through to `Intl.DisplayNames`, and for a
+So each row reads `<adapted endonym> lambë`, which is the construction the Klingon
+rows already use with `Hol`, and it puts the invention in one place. `lambë` is
+attested for "language, tongue, dialect" (WJ/394) and is the word Tolkien reserves
+for the speech *of a particular country or people*, so the head noun is given rather
+than coined; the stem is the only coined element per row. Each stem is the language's
+own endonym read through Quenya's own sound laws instead of through English spelling
+— \*b > `v` (√BAL > *Vala*), initial \*d > `l`, medial \*ð > `l` (*Elda* against S.
+*Edhel*), /kr/ > `hr` on Tolkien's own *Hristo* for *Christus*, medial `sp` > `ps`,
+/ʃ ʒ z θ/ > `s`, and a final consonant dentalised because Quenya ends a word in
+l n r s t and nothing else. Thirteen arrive all but unchanged — `Nihon`, `Suomi`,
+`Hindi`, `Tamil`, `Hayeren`, `Fársi`, `Melayu`, `Hausa`, `Filipino`, `Indonesia`,
+`Rossia`, `Cartuli`, `Castellano`. **Five had to give the endonym up altogether**,
+because its cluster has no Quenya resolution that leaves the word recognisable and
+the pack's own rules forbid inventing an epenthesis to break one: `English` (`ngl`)
+is `Alvion` after Albion, `Polska` (`lsk`) is `Polonia`, `Nederlands` (`rl`) is
+`Hollanda`, `Svenska` (initial `sv`, then `nsk`) is `Suecia`, and Khmer's own
+`khmae` — an onset Quenya cannot begin a word with at all — is `Cambolia`. `Quenya`
+itself takes no `lambë`, being already the attested name of the language.
+
+`languageName` needed the same fix, and it is what keeps a *missing* row from being
+papered over. It fell through to `Intl.DisplayNames`, and for a
 locale ICU has no display data *for* — `tlh` and `qya` are CLDR subjects and neither
 is a display locale — that answers in **English**, which is how English in Latin
 letters was going to arrive inside a tengwar cell. It now returns nothing for such a
 locale and `fillLanguageSlots` blanks the cell, which is the rule its own comment
 already made for `ipa`. `scripts/build_ipa.py` had refused that fallback all along and
 says so at length; **the two disagreeing was the defect**, and the renderer is now in
-line with the pipeline. Nothing changes today, which is the point. The twenty-one
-hollow `qya` rows are gone, restoring the invariant `write_names` states — "the file
-never grows a row of five empty cells".
+line with the pipeline. It remains the rule that catches a *missing* row, and the
+invariant `write_names` states — "the file never grows a row of five empty cells" —
+is now met from the other side: all fifty `qya` rows carry a name, a romanisation and
+an `ipa`.
 
 **`text_alt` was the obvious home for the Latin and it was already taken.** Thirty-one
 rows carry an attested *lexical variant* there -- `fendë`/`ando` for door,
@@ -1049,6 +1067,19 @@ Latin and `transliterate_native.py` writes the native cell, the same discipline 
 packs and the two card-facing registry files. Re-deriving the first pass's Quenya badge
 from `Quenya` came back byte-identical, which re-verified a five-codepoint string that
 had previously been checked by hand against the CSUR chart.
+
+**`speak_label` is the third cell in that row and the last one that was still Latin.**
+It is not chrome, which was the argument for leaving it romanised: it labels no
+control, it is one cell per language holding that language's own words for "I speak",
+and `renderSpeakCollage` draws it in the same `.reader-picker` div as the `endonym`
+above it — so `jIjatlh` and `quetin` were the only two of fifty printed in an
+alphabet their own row had otherwise left behind. Both are now `speak_label_roman`
+plus a derived native cell, `ROW_TABLES` has the fourth entry that re-derives them,
+and the mode is the same classical mode the endonym commits to: `quetin` is quesse
+with the e-tehta, tinco with the i-tehta and a bare númen, U+E003 U+E046 U+E000
+U+E044 U+E010, which is the tehta-on-the-preceding-consonant reading that gives
+`Quenya` its own five codepoints. `data/i18n/{tlh,qya}.json` stays romanised, and so
+does `gallery.wantLabel`, because those really are the controls a reader operates.
 
 Two hazards were raised against this pack and both were measured rather than acted on,
 because the measurement said not to. The first was that Klingon's case-significant `I`
