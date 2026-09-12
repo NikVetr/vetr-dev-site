@@ -79,6 +79,25 @@ export const COMFORT = 0.45;
  */
 const BLANK_GIVEBACK = 0.25;
 const KEEP_GIVEBACK = 0.75;
+/**
+ * The keep gate, for a sheet already fitted at `AUTO_SCALE_MAX`.
+ *
+ * `KEEP_GIVEBACK` asks what fraction of the type size a pair of faces is worth, and
+ * at the ceiling that question has no answer: the sheet is not at 1.00 because it
+ * needs to be, it is at 1.00 because it may not be larger. The pair it is holding
+ * buys blank card and nothing else, so a ratio against 1.00 counts a loss that was
+ * never a gain -- which is how `qya <- ar` came to keep four faces with a third of
+ * the card empty when two faces fit at 0.74, refused by a hundredth.
+ *
+ * So at the ceiling the test is absolute rather than proportional, and 0.55 is where
+ * the two cases the engine has on record fall either side. Above it: `qya <- ar` at
+ * 0.74, `qya <- hi` at 0.66, `sv <- qya` at 0.63, `he <- qya` at 0.57, each halving
+ * its paper for type still larger than the Spanish reference sheet's own 0.47.
+ * Below it: `ar <- qya` at 0.45, which is `COMFORT` exactly -- the squeeze line -- and
+ * is the case `KEEP_GIVEBACK` above was written to refuse. Landing *on* the comfort
+ * floor to save paper is not a trade this makes; clearing it by a real margin is.
+ */
+const CEILING_GIVEBACK = 0.55;
 
 /** A column left this fraction of itself empty is reported as loose. */
 export const LOOSE_FRACTION = 0.06;
@@ -1090,7 +1109,13 @@ function solveFaces(build, box, spec, scaleFloor) {
     const fitted = fittedAt(faces);
     if (fitted === null || blankFraction(faces, fitted) < BLANK_GIVEBACK) break;
     const smaller = fittedAt(faces - FACE_STEP);
-    if (smaller === null || smaller < fitted * KEEP_GIVEBACK) break;
+    // A sheet pinned at the ceiling is not spending paper on type size, because it
+    // has none left to spend it on -- so the proportional test is the wrong one and
+    // `CEILING_GIVEBACK` says why.
+    const worth = fitted >= AUTO_SCALE_MAX - 1e-9
+      ? CEILING_GIVEBACK
+      : fitted * KEEP_GIVEBACK;
+    if (smaller === null || smaller < worth) break;
     faces -= FACE_STEP;
   }
 

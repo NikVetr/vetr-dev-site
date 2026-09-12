@@ -1144,3 +1144,55 @@ test('a table of phrases folds into two columns, a table of single words does no
       `${day} should keep its romanisation on the row's own baseline`);
   }
 });
+
+test('a sheet pinned at the scale ceiling gives back paper it cannot fill', async () => {
+  // The previews that prompted this were Quenya's: four faces at the full nominal
+  // 1.00 with a quarter to a third of the card blank, and the blank unevenly
+  // spread, so one column ended 40% short of its neighbour. The existing giveback
+  // would not shed the pair because `KEEP_GIVEBACK` compares the smaller fit to the
+  // current one, and at the ceiling that ratio counts a loss that was never a gain:
+  // the sheet is not at 1.00 because it needs to be, it is at 1.00 because it may
+  // not be larger, so the pair it holds buys blank card and nothing else.
+  //
+  // `qya <- ar` is the sharpest case: two faces fit at 0.74, which is more type than
+  // the Spanish reference sheet's own 0.47, and it was refused by a hundredth.
+  const thin = await referenceSpec('qya', 'ar');
+  await loadFontsFor(ctx, thin.target, thin.source);
+  const shed = (await buildSheet(ctx, thin)).plan;
+  assert.equal(shed.geometry.faces, 2, 'two faces, not four');
+  assert.ok(shed.scale >= 0.55 && shed.scale <= 1,
+    `expected a comfortable fit on the smaller card, got ${shed.scale}`);
+
+  // And the point of shedding: the card it produces is actually full. Measured on
+  // the plan the renderer draws rather than on a reconstruction of it -- rebuilding
+  // the atoms by hand to re-run `breakColumns` gave numbers that disagreed with the
+  // rendered page, which is the trap this file already records for `fillLanguageSlots`.
+  const box = contentBox(shed.geometry, thin.paper);
+  const cols = shed.geometry.columns;
+  const foot = box.top + box.height;
+  for (const face of shed.faces) {
+    const ends = Array.from({ length: cols }, () => box.top);
+    for (const run of face.runs) {
+      const i = Math.max(0, Math.min(cols - 1,
+        Math.round((run.x - box.left) / (box.colWidth + box.columnGap))));
+      ends[i] = Math.max(ends[i], run.y);
+    }
+    for (const end of ends) {
+      assert.ok(foot - end < box.height * 0.1,
+        `a column stops ${(((foot - end) / box.height) * 100).toFixed(0)}% short of the foot`);
+    }
+  }
+});
+
+test('and does not give back paper that would squeeze the type to its floor', async () => {
+  // The other half, and the reason the ceiling test is absolute rather than "fewest
+  // faces": `ar <- qya` sheds to two faces only at 0.45, which is `COMFORT` exactly
+  // -- the line below which auto spends another pair rather than read squeezed. A
+  // card at the comfort floor is not a better card than a card with some blank on
+  // it, so this one keeps its four faces even though it is 28% empty.
+  const squeezed = await referenceSpec('ar', 'qya');
+  await loadFontsFor(ctx, squeezed.target, squeezed.source);
+  const kept = (await buildSheet(ctx, squeezed)).plan;
+  assert.equal(kept.geometry.faces, 4, 'four faces kept');
+  assert.ok(kept.scale > COMFORT, `and read at ${kept.scale}, above the comfort floor`);
+});
