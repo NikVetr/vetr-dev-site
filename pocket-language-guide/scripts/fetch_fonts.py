@@ -137,6 +137,19 @@ SOURCES = {
     # identically to the sans and holds the same NULL anchors, so the refusal is
     # legibility at the floor -- դ/ղ and գ/զ differ only by a foot on one stem and
     # XOR at 0.057-0.060 at 4.4pt against the sans's 0.140, which is Thai's level.
+    # Odia, and the Georgian pair of decisions again: Noto, and the **Google Fonts
+    # variable** rather than notofonts.github.io's hinted static. Noto Sans Oriya
+    # holds zero NULL GPOS anchors, throws on none of 12,454 real tokens or 49,442
+    # cube strings in `vendor/fontkit.esm.js`, and reproduces HarfBuzz's glyph run,
+    # glyph ids, GPOS offsets and every advance -- with both engines running the
+    # *Indic* shaper under `ory2`, which is the shaper an abugida with a reph and a
+    # below-base vowel set needs. The static would have cost the pack its Latin: 39
+    # of 95 ASCII against the variable's 95, and the pack writes `eSIM`, `ATM`,
+    # `ORS` and `QR`. There is **no serif**: Noto Serif Oriya holds 688 NULL
+    # MarkBasePos base anchors and throws on 17 real tokens, which is Telugu's,
+    # Gurmukhi's, Gujarati's and Malayalam's outcome. See tmp/or/odia.md.
+    "NotoSansOriya-var.ttf":
+        f"{GFONTS}/notosansoriya/NotoSansOriya%5Bwdth,wght%5D.ttf",
     "NotoSansArmenian-var.ttf":
         f"{GFONTS}/notosansarmenian/NotoSansArmenian%5Bwdth,wght%5D.ttf",
     "NotoSerifArmenian-var.ttf":

@@ -285,6 +285,12 @@ GEOR_RANGES = [(0x10D0, 0x10FF)]
 # write one for the same reason. This is Hebrew's Alphabetic-Presentation-Forms
 # decision in a script that actually fires the ligatures.
 ARMN_RANGES = [(0x0530, 0x058F)]
+# Odia, plus the danda. U+0964 lives in the *Devanagari* block and is Odia's
+# full stop -- 3,296 of them in 320k characters of running Odia -- so a request
+# for U+0B00..0B7F alone would leave the pack's three prose `note` rows ending
+# in a box. Noto Sans Oriya carries U+0964 and U+0965; checked rather than
+# assumed, which is the Devanagari note above in miniature.
+ORYA_RANGES = [(0x0B00, 0x0B7F), (0x0964, 0x0965)]
 # Three codepoints subtracted from the **Latin** side of the `armn` request, and the
 # reason is a crash rather than a size.
 #
@@ -679,6 +685,37 @@ FACES = {
     # `core/fonts.js` already does by design.
     ("armn", 400, False): "NotoSansArmenian-var.ttf",
     ("armn", 700, False): "NotoSansArmenian-var.ttf",
+    # Odia, and **sans only for the reason that refused Noto's serif for Telugu,
+    # Gurmukhi, Gujarati and Malayalam** -- the NULL MarkBasePos base anchor. Noto
+    # Serif Oriya holds **688** of them, read directly with fontTools through the
+    # Extension subtables (tmp/ka/nullanchors.py), and they are reachable: through
+    # this project's own fontkit the serif throws on **17 of 12,454** real Odia
+    # tokens, `ଗାଆଁ` *village* among them, and on 1,243 of a 27,357-string cube.
+    # Anek Odia (1,209 NULL anchors, 140 real-token throws, `କ୍ରିୟା` among them) and
+    # Baloo Bhaina 2 (291, 474 throws, `ପ୍ରଦର୍ଶନ`) are refused the same way.
+    #
+    # **Noto Sans Oriya holds zero NULL anchors in every GPOS lookup type and throws
+    # on nothing**: 0 over 12,454 real tokens, 0 over a 49,442-string NFC cube of
+    # every consonant, conjunct, three-consonant stack and matra Odia writes, in
+    # both weights. Against HarfBuzz it reproduces the glyph run, the glyph ids, the
+    # GPOS offsets and **every advance to 0 font units**; 20 of the 12,454 tokens
+    # pick a different outline-identical alternate of the subjoined ra and differ by
+    # 6 units of *vertical* offset, which is 0.006em and no advance at all. Nor is
+    # that pass vacuous: GSUB changes the glyph run on 3,670 of the 4,000 commonest
+    # tokens (91.8%) and GPOS positions 2,977 glyphs across 2,205 of them. Both
+    # engines run the **Indic** shaper under script tag `ory2`, confirmed from
+    # HarfBuzz's own buffer trace, so Burmese's caveat is satisfied. See
+    # tmp/or/odia.md.
+    #
+    # **The Google Fonts variable and not notofonts.github.io's hinted static**, and
+    # the difference is the Latin repertoire, exactly as it was for Georgian: the
+    # static's cmap has 151 codepoints with **39 of the 95 ASCII** and 4 of Latin-1;
+    # the variable has 423 with all 95, 85 of Latin-1, `·`, `—` and `₹`. The pack
+    # quotes `eSIM`, `ORS`, `ATM`, `PIN`, `QR` and `B2 · BPK · bakso`, so the static
+    # would have printed those as boxes. With the variable nothing is missing, so
+    # this is the Bengali case and needs no `LATIN_DONOR` graft.
+    ("orya", 400, False): "NotoSansOriya-var.ttf",
+    ("orya", 700, False): "NotoSansOriya-var.ttf",
 }
 
 # Sources that need a Latin face grafted in, and the face to graft.
@@ -1106,7 +1143,56 @@ ALL_LANGS = ["en", "es", "fr", "de", "ko", "ar", "zh-Hans", "ja",
              # `tests/fonts.test.mjs` cannot see it either, because the shipped
              # charset has no `fi` key. Bengali did the same thing to the Hindi
              # reader's `deva` subset.
-             "fi"]
+             "fi",
+             # Uzbek, and **it costs the four Latin stacks nothing, measured rather
+             # than assumed.** The pack writes 80 distinct codepoints and exactly
+             # four are outside ASCII: `ʻ` U+02BB, the modifier letter turned comma
+             # of `oʻ` and `gʻ`; `ʼ` U+02BC, the tutuq belgisi; and the em dash and
+             # ellipsis of three `note` rows. All four are inside `LATIN_RANGES`
+             # already -- U+02BB and U+02BC through the Spacing Modifier Letters
+             # block (0x2B0..0x2FF), which every stack here requests -- so
+             # `coverage()` for `latin`, `latin-cond`, `latin-serif` and
+             # `latin-cond-serif` comes back at the same 5,764 codepoints with `uz`
+             # in this list as without it, and all sixteen shipped faces already
+             # carry all 80 (`getBestCmap()`, 0 missing). The entry is here so that
+             # a *future* Uzbek row outside ASCII is picked up, not because today's
+             # pack needs it.
+             #
+             # Javanese, which needs no stack of its own -- `Latn` already routes
+             # to `latin`, and the Javanese script is deliberately not in the
+             # registry at all (tmp/jv/decisions.md §1) -- but does need naming
+             # here for Polish's, Croatian's, Finnish's and Italian's reason: a
+             # Latin language left out of this union is the omission Italian
+             # shipped with for a whole language generation.
+             #
+             # **And it costs the four Latin stacks nothing, measured rather than
+             # assumed, twice over.** The pack, both registry files, the
+             # `language-names.csv` rows, the badge, the endonym, the speak label
+             # and the reader table's legend come to **102 distinct codepoints, of
+             # which 26 are outside ASCII**, and all sixteen shipped `latin*.ttf`
+             # faces carry all 102 (`getBestCmap()`, 0 missing). The 26 are: the
+             # middle dot `·`; the pack's own `é è É È`, which are the orthographic
+             # decision this addition turns on; `à á í ā ē ī ǎ`, the tone-marked
+             # pinyin the two `number-and-classifier-notes` rows quote, exactly as
+             # `id`, `ms` and `hr` quote it; and the thirteen IPA characters
+             # `ŋ ɔ ɖ ə ɛ ɡ ɪ ɲ ʃ ʈ ʊ ʒ ʔ ˈ`, every one of which older packs
+             # already need -- `ʈ` and `ɖ` through the nine Indic packs, which is
+             # what makes the dental/retroflex contrast free (see `GRADE["jv"]`).
+             # The second measurement is the one that matters here: `coverage()`
+             # for `latin` comes back at the same **5,821** codepoints with `jv` in
+             # this list as without it, so the four Latin subsets are unchanged by
+             # construction rather than by luck.
+             "jv",
+             # There is no romanisation column and no `ipa` character new to the
+             # corpus: `uz_to_ipa` was written to reuse symbols other packs already
+             # contribute -- see `GRADE["uz"]`.
+             "uz",
+             # Odia, which has a stack of its own but is in this union for the
+             # reason Bengali and Georgian are: its romanised, section-title and
+             # emergency-label columns are Latin and are drawn in the Latin faces.
+             # ISO 15919 costs those faces nothing new -- every one of the 26
+             # codepoints `or` writes there is already in all sixteen of them.
+             "or"]
 STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                "latin-serif": ALL_LANGS, "latin-cond-serif": ALL_LANGS,
                "cjk-sc": ["zh-Hans"], "cjk-sc-serif": ["zh-Hans"],
@@ -1141,6 +1227,7 @@ STACK_LANGS = {"latin": ALL_LANGS, "latin-cond": ALL_LANGS,
                "ethi": ["am"], "ethi-serif": ["am"],
                "geor": ["ka"], "geor-serif": ["ka"],
                "armn": ["hy"],
+               "orya": ["or"],
                "hebrew": ["he"], "hebrew-serif": ["he"]}
 
 
@@ -1266,6 +1353,8 @@ def coverage(stack):
     elif stack.startswith("armn"):
         chars |= expand(ARMN_RANGES)
         chars -= ARMN_EXCLUDE
+    elif stack.startswith("orya"):
+        chars |= expand(ORYA_RANGES)
     return chars
 
 

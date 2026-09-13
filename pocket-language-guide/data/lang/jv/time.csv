@@ -1,0 +1,44 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+time-scheduling.what-time-is-it,Sapunika jam pinten?,,sapuˈnikɔ dʒam ˈpɪntən,,2,jv-agent-v1;ipa=jv-g2p
+time-scheduling.how-many-minutes,Pinten menit?,,ˈpɪntən məˈnɪt,,2,jv-agent-v1;ipa=jv-g2p
+time-scheduling.what-time-should-we-meet,Kita pinanggih jam pinten?,,ˈkitɔ piˈnaŋɡɪh dʒam ˈpɪntən,,2,jv-agent-v1;ipa=jv-g2p
+time-scheduling.can-we-change-the-time,Saged ngéwahi jamipun?,,ˈsaɡəd ŋeˈwahi dʒaˈmipʊn,,2,jv-agent-v1;ipa=jv-g2p
+time-scheduling.when-is-convenient,Kapan wekdal ingkang sekéca?,,ˈkapan wəʔˈdal ˈɪŋkaŋ səˈketʃɔ,,2,jv-agent-v1;ipa=jv-g2p
+time-scheduling.what-is-today-s-date,Dinten menika tanggal pinten?,,ˈdɪntən məˈnikɔ ˈtaŋɡal ˈpɪntən,,2,jv-agent-v1;ipa=jv-g2p
+time-scheduling.what-day-is-it-today,Dinten menika dinten menapa?,,ˈdɪntən məˈnikɔ ˈdɪntən məˈnɔpɔ,,2,jv-agent-v1;ipa=jv-g2p
+time-scheduling.what-time-does-it-open,Bikak jam pinten?,,ˈbikaʔ dʒam ˈpɪntən,,2,jv-agent-v1;ipa=jv-g2p
+time-scheduling.what-time-does-it-close,Tutup jam pinten?,,ˈtutʊp dʒam ˈpɪntən,,2,jv-agent-v1;ipa=jv-g2p
+time-scheduling.how-long-does-it-take,Pinten dangunipun?,,ˈpɪntən daŋuˈnipʊn,,2,jv-agent-v1;ipa=jv-g2p
+time-words.today,dinten menika,,ˈdɪntən məˈnikɔ,,2,jv-agent-v1;ipa=jv-g2p
+time-words.tomorrow,bénjing énjing,sésuk,ˈbɛndʒɪŋ ˈɛndʒɪŋ,,2,jv-agent-v1;ipa=jv-g2p
+time-words.yesterday,kala wingi,,ˈkɔlɔ ˈwiŋi,,2,jv-agent-v1;ipa=jv-g2p
+time-words.this-week,minggu menika,,ˈmɪŋɡu məˈnikɔ,,2,jv-agent-v1;ipa=jv-g2p
+time-words.next-week,minggu ngajeng,,ˈmɪŋɡu ˈŋadʒəŋ,,2,jv-agent-v1;ipa=jv-g2p
+time-words.morning,énjing,,ˈɛndʒɪŋ,to about 11,2,jv-agent-v1;ipa=jv-g2p
+time-words.afternoon,siyang,sonten,ˈsijaŋ,"siyang to 3, sonten to dusk",2,jv-agent-v1;ipa=jv-g2p
+time-words.evening,sonten,dalu,ˈsɔntən,,2,jv-agent-v1;ipa=jv-g2p
+time-words.spring,mangsa semi,,ˈmaŋsɔ səˈmi,,2,jv-agent-v1;ipa=jv-g2p
+time-words.summer,mangsa panas,mangsa ketiga,ˈmaŋsɔ ˈpanas,ketiga = the dry season,2,jv-agent-v1;ipa=jv-g2p
+time-words.fall,mangsa gogrog,,ˈmaŋsɔ ˈɡɔɡrɔɡ,Java has only a wet and a dry season,2,jv-agent-v1;ipa=jv-g2p
+time-words.winter,mangsa asrep,mangsa rendheng,ˈmaŋsɔ ˈasrəp,rendheng = the wet season,2,jv-agent-v1;ipa=jv-g2p
+time-words.night,dalu,,ˈdalu,,2,jv-agent-v1;ipa=jv-g2p
+days-of-week.monday,Senèn,,səˈnɛn,,2,jv-agent-v1;ipa=jv-g2p
+days-of-week.tuesday,Slasa,,ˈslɔsɔ,,2,jv-agent-v1;ipa=jv-g2p
+days-of-week.wednesday,Rebo,,rəˈbɔ,,2,jv-agent-v1;ipa=jv-g2p
+days-of-week.thursday,Kemis,,kəˈmɪs,,2,jv-agent-v1;ipa=jv-g2p
+days-of-week.friday,Jemuwah,,dʒəˈmuwah,,2,jv-agent-v1;ipa=jv-g2p
+days-of-week.saturday,Setu,,səˈtu,,2,jv-agent-v1;ipa=jv-g2p
+days-of-week.sunday,Minggu,Akad,ˈmɪŋɡu,Akad is the older Javanese name,2,jv-agent-v1;ipa=jv-g2p
+months.january,Januari,,dʒanuˈari,,2,jv-agent-v1;ipa=jv-g2p
+months.february,Fèbruari,,fɛbruˈari,,2,jv-agent-v1;ipa=jv-g2p
+months.march,Maret,,ˈmarət,,2,jv-agent-v1;ipa=jv-g2p
+months.april,April,,ˈaprɪl,,2,jv-agent-v1;ipa=jv-g2p
+months.may,Mèi,,ˈmɛi,,2,jv-agent-v1;ipa=jv-g2p
+months.june,Juni,,ˈdʒuni,,2,jv-agent-v1;ipa=jv-g2p
+months.july,Juli,,ˈdʒuli,,2,jv-agent-v1;ipa=jv-g2p
+months.august,Agustus,,aˈɡʊstʊs,,2,jv-agent-v1;ipa=jv-g2p
+months.september,Séptèmber,,sɛpˈtɛmbər,,2,jv-agent-v1;ipa=jv-g2p
+months.october,Oktober,,ɔʔˈtɔbər,,2,jv-agent-v1;ipa=jv-g2p
+months.november,Novèmber,,nɔˈfɛmbər,,2,jv-agent-v1;ipa=jv-g2p
+months.december,Dèsèmber,,dɛˈsɛmbər,,2,jv-agent-v1;ipa=jv-g2p
+time-words.clock-offset,"Jam ing basa Swahili mènggok nem jam saking jam ingkang panjenengan tingali: saa moja menika jam pitu énjing, lan saa sita menika jam kalih welas awan. Ètang saking srengéngé mlethèk, sanès saking tengah dalu. Menawi mireng jam ing basa Swahili, nyuwun tulung supados dipuntedahaken ing angka.",,,,2,jv-agent-v1

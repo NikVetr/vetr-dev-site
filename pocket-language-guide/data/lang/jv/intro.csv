@@ -1,0 +1,13 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+introductions.my-name-is,Nami kula {},,ˈnami ˈkulɔ {},,2,jv-agent-v1;ipa=jv-g2p
+introductions.nice-to-meet-you,Bingah saged pinanggih,,ˈbiŋah ˈsaɡəd piˈnaŋɡɪh,,2,jv-agent-v1;ipa=jv-g2p
+introductions.what-is-your-name,Asma panjenengan sinten?,Naminipun sinten?,ˈasmɔ pandʒənəˈŋan ˈsɪntən,asma is the honorific word for a name,2,jv-agent-v1;ipa=jv-g2p
+introductions.we-are-traveling-together,Kula sedaya késah sesarengan,,ˈkulɔ səˈdɔjɔ ˈkesah səsarəˈŋan,,2,jv-agent-v1;ipa=jv-g2p
+introductions.this-is-my-friend,Menika kanca kula,,məˈnikɔ ˈkantʃɔ ˈkulɔ,,2,jv-agent-v1;ipa=jv-g2p
+introductions.i-am-from,Kula saking {},,ˈkulɔ ˈsakɪŋ {},,2,jv-agent-v1;ipa=jv-g2p
+introductions.where-are-you-from,Panjenengan saking pundi?,,pandʒənəˈŋan ˈsakɪŋ ˈpʊndi,,2,jv-agent-v1;ipa=jv-g2p
+introductions.how-are-you,Pripun kabaripun?,Kadospundi kabaripun?,ˈpripʊn kabaˈripʊn,,2,jv-agent-v1;ipa=jv-g2p
+introductions.i-am-a-tourist,Kula wisatawan,Kula plancongan,ˈkulɔ wisaˈtawan,,2,jv-agent-v1;ipa=jv-g2p
+introductions.this-is-my-husband-wife,Menika garwa kula,,məˈnikɔ ˈɡɔrwɔ ˈkulɔ,garwa covers husband and wife,2,jv-agent-v1;ipa=jv-g2p
+introductions.this-is-my-daughter-son,Menika laré kula,Laré èstri · Laré jaler,məˈnikɔ ˈlare ˈkulɔ,"èstri = girl, jaler = boy",2,jv-agent-v1;ipa=jv-g2p
+introductions.i-am-traveling-alone,Kula késah piyambakan,,ˈkulɔ ˈkesah pijamˈbakan,,2,jv-agent-v1;ipa=jv-g2p

@@ -642,6 +642,19 @@ VOICES = {"en": "en-us", "es": "es-419", "fr": "fr-fr", "de": "de", "pt": "pt-br
           # `ɡɐɖɖe`, and there is **not one consonant+`ː` sequence in the column**.
           # So `GEMINATE_DOUBLES` is not needed, unlike Punjabi's and Gujarati's.
           "kn": "kn",
+          # **espeak-ng has an Oriya voice and it is in the *system* 1.50 tree**, so
+          # no `espeakng_loader` is needed -- checked the way `nl`'s and `kn`'s were,
+          # by phonemising the pack under both libraries and comparing. The two
+          # builds are **identical on every row**, including the two defects below,
+          # so pointing this pack at the newer library would buy nothing and is not
+          # done. See `GRADE["or"]`.
+          #
+          # The voice gets the one thing a Devanagari-shaped assumption gets wrong:
+          # **Odia's inherent vowel is [ɔ] and not [ə]**, and it is not deleted
+          # word-finally -- କଟକ comes back `kˈɔʈkɔ`, which is the word. Two things
+          # it does not get are repaired on the way in and on the way out: `OR_WA`
+          # and `or_nukta`.
+          "or": "or",
           # Nepali is in this build's **system** espeak-ng-data (1.50) directly --
           # unlike `mr`/`uk`, no `espeakng_loader` is needed. Confirmed with
           # `EspeakBackend.supported_languages()['ne']` and a direct probe against the
@@ -1121,6 +1134,14 @@ NON_LATIN = {"zh-Hans", "ja", "ko", "th", "hi", "ar", "ru", "el", "tlh", "qya", 
              # comment describes, which is what the Telugu, Punjabi and Gujarati
              # pork-code rows record.
              "kn",
+             # Odia writes its loanwords in its own letters too -- ୱାଇ-ଫାଇ, ସିମ୍ କାର୍ଡ,
+             # ଏଟିଏମ୍, ପିନ୍, ଇ-ସିମ୍, କ୍ୟୁଆର୍ କୋଡ, ପ୍ଲାଟଫର୍ମ -- so the only `text` cell
+             # this gate finds is `common-signs.pork-code`, whose whole content is the
+             # verbatim `B2 · BPK · bakso`, which is the gate doing exactly the job the
+             # Telugu, Punjabi, Gujarati, Kannada and Malayalam pork-code rows record.
+             # `PIN`, `ORS`, `ATM`, `eSIM`, `QR` and `112` ride in `text_alt`, which
+             # takes no `ipa`.
+             "or",
              # Malayalam writes its loanwords in its own letters too -- എടിഎം,
              # വൈ-ഫൈ, പിൻ, ഇ-സിം, ക്യുആർ കോഡ്, പാസ്പോർട്ട്, പ്ലാറ്റ്ഫോം -- so no
              # `text` cell this script transcribes quotes Latin, checked over all
@@ -1217,6 +1238,24 @@ def bn_compose(text):
     return BN_BEFORE_MATRA.sub(lambda m: BN_NUKTA[m.group(0)], text)
 
 
+# ------------------------------------------------------------- Odia, on the way *in*
+# **This voice does not know ୱ U+0B71**, the letter modern Odia writes /w/ with, and
+# falls back to spelling the *letter names* out loud: ଭୁବନେଶ୍ୱର comes back as
+# `bʰˈɔ hɾˈɔʃʃoˌukaɾ bˈɔ dˈontenˌɔ ˈekaɾ tˈalbesˌɔ hˈalˈʌnt …`, twelve words of
+# Odia alphabet recitation for one place name. It does know ଵ U+0B35, the old VA
+# letter, and reads it correctly as [w]: ଦ୍ଵାର is `dwˈaɾɔ` and ଵାଇ-ଫାଇ is
+# `wˈaipʰˈai`. The two letters are the same sound in Odia and ଵ is simply the
+# spelling that has fallen out of use -- 7 occurrences against ୱ's 920 in 320k
+# characters of running Odia -- so the route substitutes on the way in and the pack
+# keeps the spelling Odia actually writes. 21 cells reach it.
+OR_WA = ("\u0B71", "\u0B35")
+
+
+def or_espeak(text):
+    """`text` with ୱ written as ଵ, which this voice can read. See `OR_WA`."""
+    return text.replace(*OR_WA)
+
+
 # Substitutions applied to every route's output before the alphabet is checked.
 # Each is either a G2P artefact or a codepoint no shipped face can draw; none of
 # them is a phonemic distinction in any language in the corpus.
@@ -1232,6 +1271,16 @@ FOLD = [
 # Per-language repairs, applied before FOLD. All of these are notation this
 # espeak-ng build emits that is not IPA at all; the value is what it stands for.
 REPAIR = {
+    # **Two proper nouns whose `th` is not Javanese's retroflex.** `JV_G` reads the
+    # digraph as [ʈ], which is right in every Javanese word and wrong in the two
+    # borrowed names that contain the letter pair by accident: Thailand and
+    # Marathi are [tailan] and [marati]. They are repaired rather than respelled
+    # because `Thailand` and `Marathi` are the spellings Javanese writes -- and
+    # rather than given `LOANWORDS` entries because `language_name_ipa` calls
+    # `pieces` without loans, so a loan would fix the corpus row and leave the
+    # `jv,th` and `jv,mr` cells of `language-names.csv` saying [ʈ].
+    "jv": [("ʈaˈiland", "taiˈland"), ("maˈraʈi", "maˈrati")],
+
     # espeak writes the trill as a doubled tap, gives <ll>/<y> as `jj` in some
     # words and `ʝ` in others, and has a pre-nasal allophone of /e/ that Spanish
     # does not contrast. β/ð/ɣ are folded to their stops for two reasons at once:
@@ -1277,6 +1326,61 @@ REPAIR = {
     # those with the same mark, on eleven rows.
     "bn": [("hr.", "ɽʰ"), ("r.", "ɽ")]
           + [(v + "ː", v) for v in "aeiouɔæɑɜãẽĩõũ"],
+    # Odia's two nukta consonants, and the aspirated one behaves exactly as
+    # Bengali's does: ଢ଼ is **`hr.`** with the aspiration written *before* the tap,
+    # not `r.h` as in Hindi. Nothing else can produce `hr.` -- no row in the pack
+    # has ହ immediately before ଡ଼, checked over the whole column.
+    #
+    # ଡ଼ is `r.` as everywhere else, but this voice adds an inherent vowel after it
+    # that the following matra should have suppressed, so the repair needs to look
+    # ahead and is in `or_nukta` rather than here.
+    # And **a bare letter is read as its *name***, which is Bengali's third
+    # weakness and Hungarian's bare definite article in another script; here two
+    # letters reach it and both are repaired. `ନ`, the pre-verbal negator, comes
+    # back `dˈontenˌɔ` -- ଦନ୍ତ୍ୟ ନ, "dental na", what an Odia primer calls the
+    # letter -- and the word is [nɔ], the letter with its inherent vowel. And a
+    # bare `ଇ` or `ଉ` gets the prefix `hɾˌɔʃʃo`, ହ୍ରସ୍ୱ "short", so `ଇ-ସିମ୍` comes
+    # back `hɾˌɔʃʃoˈisim` where the word is [isim]; dropping the prefix is enough
+    # because the letter itself is read correctly after it. Three cells.
+    #
+    # The original note follows, kept because it names the row:
+    # ଦନ୍ତ୍ୟ ନ, "dental na", which is what an Odia primer calls the letter. This is
+    # Hungarian's defect in another script: `REPAIR["hu"]` repairs the bare definite
+    # article `a` read as the letter for the same reason. One row reaches it --
+    # `police-consulate.i-will-not-sign-anything-i-cannot-read`, where ନ is the
+    # pre-verbal negator -- and the word is [nɔ], the letter with its inherent vowel.
+    # **ଳ comes back as `l̩`**, l with a syllabicity mark, which is not what the
+    # letter is: ଳ is the retroflex lateral [ɭ], and every other Indic pack in this
+    # corpus writes it ɭ -- ta 223 cells, ml 118, kn 97, gu 68, mr 64, te 32, and
+    # not one of them writes `l̩`. Left in it would be worse than a wrong symbol: it
+    # is *Czech's* syllabic l, so all 52 reader tables would spell Odia's ଳ the way
+    # they spell `vlk`. 67 cells.
+    #
+    # **ଜ and ଝ come back as `ɟ ɟʰ` while ଯ comes back `dʒ`**, and those are the
+    # same sound in Odia -- ଜ and ଯ are homophones, which is why ISO 15919 has to
+    # distinguish them by letter rather than by reading. So one of the two has to
+    # go, and **it is `dʒ` that goes**: `ɟ` is what hi (198 cells), bn (124), pa
+    # (155), gu (148), mr (91), ne (108), kn (40) and ml (30) all write, and
+    # folding the other way was tried and reverted because it cost nine reader
+    # tables a rule. `dʒʰ` splits into `dʒ` + `ʰ` in `phonemesOf`, and gu, hy, ka,
+    # kn, ml, pa, pl, ta and te have no rule for a bare `ʰ` -- so eight cells of
+    # this pack printed a raw IPA modifier letter on nine sheets until the fold was
+    # turned round. That is Klingon's `ɬ` in miniature and it is why the file says
+    # to prefer the repair that adds no new symbol.
+    #
+    # **The length marks are on the letter rather than the sound**, which is
+    # Bengali's defect in another script and is enumerated per vowel for Bengali's
+    # reason. Odia has no vowel length contrast at all -- ଇ/ଈ and ଉ/ଊ are spelling
+    # variants of one sound, and ଶୀତ and ଶିତ both come back `sˈitɔ` -- yet ଦୂର comes
+    # back `dˈuːɾɔ` and every word ending in ଳ comes back with `ɔː`. `ʰː` is the
+    # third: ଲକ୍ଷ comes back `lˈɔkʰkʰː`, a length mark on an aspirate, which is not
+    # notation at all.
+    # And `ʌ`, which Odia's vowel inventory does not contain at all -- it has
+    # a e i o u ɔ and their nasals and nothing else. One cell reaches it, ଜ୍ୱର
+    # *fever*, where `ଵ` + ର comes back `wʌɾ`; the vowel is ɔ.
+    "or": [("hr.", "ɽʰ"), ("dˈontenˌɔ", "nˈɔ"), ("hɾˌɔʃʃo", ""), ("hɾˈɔʃʃo", ""),
+           ("l\u0329", "ɭ"), ("dʒ", "ɟ"), ("ʰː", "ʰ"), ("ʌ", "ɔ")]
+          + [(v + "ː", v) for v in "aeiouɔʌãẽĩõũ"],
     # **Finnish has no vowel reduction, and this voice writes one.** Short /i/ comes
     # back as `ɪ` in every unstressed syllable and as `i` in every stressed one --
     # `tuli` is `tˈulɪ`, `poliisi` is `pˈolɪːsɪ`, `xylitoli` is `ksˈylɪtˌolɪ` -- and
@@ -2912,6 +3016,48 @@ LOANWORDS = {
     # word, and `f` happens to already be the right sound either way.
     "yo": {"Wi-Fi": "wajfaj", "eSIM": "iːsim", "SIM": "sim", "PIN": "pin",
            "QR": "kjuːɑːr", "ATM": "eːtiːɛm", "CFA": "siːɛfeː"},
+    # Uzbek keeps these five in Latin letters -- on the router, on the toilet door,
+    # in the phone shop -- exactly as Hebrew's, Filipino's and Croatian's press do,
+    # so the pack writes them that way and this gives the reading. Two of them
+    # would otherwise come out wrong through `UZ` rather than merely flat: `w` is
+    # not a letter of the Uzbek alphabet at all and would be carried out and
+    # refused by `ROUTE_FORBIDS["uz-g2p"]`, and `QR` lowercased is `qr`, two
+    # letters `UZ` reads happily as /qr/, which is a consonant cluster Uzbek
+    # phonotactics does not allow.
+    #
+    # `SIM` and `PIN` are said as words and not spelled out -- *sim karta*, *pin
+    # kod* -- so they take the plain reading. `Wi-Fi` is *vayfay*, which is also
+    # how it is written when somebody writes it out. `eSIM` is *i-sim*, the shape
+    # `he`, `fil`, `ha`, `yo` and `ka` all give it. `QR` and `WC` are spelled out,
+    # and the letter names are the ones the 1995 alphabet itself gives -- Q is
+    # *qu*, R is *er*, and W, which the alphabet has not got, takes the *ve* of V
+    # with C's *tse*, which is how *vetse* is said and often written.
+    "uz": {"Wi-Fi": "vajfaj", "eSIM": "isim", "SIM": "sim", "PIN": "pin",
+           "QR": "quer", "WC": "vetse"},
+    # Javanese keeps these in Latin letters exactly as Indonesian's and Filipino's
+    # press, routers and hotel signs do, and says them with Indonesian letter-names
+    # or as Indonesian-accented loans -- not by reading `JV_G` over them, which
+    # would give `WC` a [wtʃ] with no vowel in it and `check-out` a [tʃhətʃʔoʊt].
+    # The letter names are the Indonesian alphabet's (a, bé, cé, … èm, èn, pé, èr,
+    # ès, té, wé), which is what a Javanese schoolchild is taught to read an
+    # acronym aloud with, and the stress is on the last letter, which is where an
+    # Indonesian acronym takes it.
+    #
+    # The multi-word entries are one token each rather than two, because
+    # `loan_pattern` sorts longest first and a bare `bank` or `in` would match
+    # inside an ordinary Javanese word. `P3K` reads its digit as the Indonesian
+    # numeral, *pé-tiga-ka*, which is how the first-aid sign is said.
+    "jv": {"Wi-Fi": "wifi", "eSIM": "isim", "SIM": "sim", "PIN": "pin",
+           "QRIS": "kris", "ATM": "ateˈɛm", "HP": "haˈpe", "WC": "weˈtʃe",
+           "AC": "aˈtʃe", "MRT": "ɛmɛrˈte", "PPN": "pepeˈɛn",
+           "P3K": "petiɡaˈka", "Rp": "ɛrˈpe", "cm": "sɛntiˈmetər",
+           "check-in": "tʃɛˈkɪn", "check-out": "tʃɛˈkaʊt",
+           "Check-in": "tʃɛˈkɪn", "Check-out": "tʃɛˈkaʊt",
+           "power bank": "ˈpawər ˈbaŋ", "Money changer": "ˈmɔni ˈtʃendʒər",
+           "Dry cleaning": "ˈdraj ˈklinɪŋ", "Boarding pass": "ˈbɔrdɪŋ ˈpas",
+           "Laundry": "ˈlɔndri", "Gate": "ˈɡɛt", "Bank": "ˈbaŋ",
+           "online": "onˈlain", "tap in": "ˈtɛp ˈɪn",
+           "Shinkansen": "ʃinkanˈsɛn"},
     # Croatian, and **every entry here is a row espeak read as a string of letter
     # names**, which is a different failure from Greek's or Russian's: those got the
     # wrong vowel, these got a schwa Croatian does not have. `WC` came back
@@ -3559,6 +3705,67 @@ def pa_tone(text, ipa):
     return " ".join(out)
 
 
+# **ଡ଼ comes back with an inherent vowel the following matra should have deleted.**
+# The voice writes ଡ଼ as `r.` and then, unconditionally, `ɔ` -- so ପାଡ଼ା is
+# `pˈar.ɔˌa` where the word is [paɽa], ଓଡ଼ିଶା is `ˈor.ɔˌisa` where it is [oɽisa],
+# and ଗାଡ଼ି is `ɡˈar.ɔˌi`. Probed over ଡ଼ under every matra and bare: the `ɔ` is
+# there every time, and it is *correct* exactly when nothing follows, because then
+# it is the inherent vowel Odia really does pronounce (ପାଡ଼ is [paɽɔ]). So the
+# repair is conditional rather than a blanket substitution, and the stress mark
+# sits between the two -- `r.ɔˌa` -- which is why it is a regex and not a pair in
+# `REPAIR`. 50 of the pack's 922 cells reach it.
+# The stress mark lands on either side of the inherent vowel depending on which
+# syllable carries it -- ଗାଡ଼ି is `ɡˈar.ɔˌi` and ଚମଡ଼ା is `tʃˈɔmɔr.ˌɔa` -- so both
+# positions are optional and both are kept, because dropping a secondary stress
+# would move the prominence rather than the vowel.
+OR_NUKTA_VOWEL = re.compile("r\\.([ˈˌ]?)ɔ([ˈˌ]?)(?=[" + "".join(VOWELS) + "])")
+
+
+def or_nukta(ipa):
+    """ଡ଼ as [ɽ], with the spurious inherent vowel dropped. See `OR_NUKTA_VOWEL`."""
+    return OR_NUKTA_VOWEL.sub("ɽ\\1\\2", ipa).replace("r.", "ɽ").replace(".", "")
+
+
+# **Four Odia contrasts this voice collapses, and the spelling has all four.**
+# ଟ comes back as `t`, the same as ତ, so the retroflex/dental contrast is gone from
+# the voiceless unaspirated stop -- and ଟ is not marginal, it is in ଟଙ୍କା, ଟିକେଟ and
+# ଗୋଟିଏ. ଘ loses its aspiration and comes back as plain `ɡ`. ଣ and ଞ both come back
+# as `n`. None of the four is recoverable from the IPA, and all four are written in
+# the orthography, so they are recovered from it -- which is `pa_tone`'s and
+# `te_anusvara`'s device: align words to units, refuse if the counts differ, and
+# condition on the text.
+#
+# **Conditioned on the word containing no rival letter**, because two letters
+# collapsing to one symbol means the symbol cannot be assigned back when both are
+# present. Measured over the pack's 2,412 word tokens with an `ipa`: ଟ is
+# recoverable in 187 of 195 tokens, ଘ in 10 of 10, ଣ in 88 of 110 and ଞ in 3 of 7,
+# so 288 of 322 are repaired and the 34 that are not are left as the voice wrote
+# them rather than guessed at. See `GRADE["or"]`.
+OR_RECOVER = [("ଟ", "ତଥ", "t(?![ʰʃ])", "ʈ"),
+              ("ଘ", "ଗ", "ɡ(?!ʰ)", "ɡʰ"),
+              ("ଣ", "ନଞଙ", "n", "ɳ"),
+              ("ଞ", "ନଣଙ", "n", "ɲ")]
+
+
+def or_letters(text, ipa):
+    """The four contrasts espeak's Odia voice drops, put back from the spelling.
+
+    The `t` pattern excludes `tʰ` and `tʃ`: ଥ and ଚ are the other two letters whose
+    reading starts with `t`, and a word holding ଟ and ଚ together would otherwise
+    have its ଚ turned retroflex. See `OR_RECOVER`.
+    """
+    words, units = text.split(), ipa.split()
+    if len(words) != len(units):
+        return ipa
+    out = []
+    for word, unit in zip(words, units):
+        for letter, rivals, pattern, repl in OR_RECOVER:
+            if letter in word and not any(r in word for r in rivals):
+                unit = re.sub(pattern, repl, unit)
+        out.append(unit)
+    return " ".join(out)
+
+
 def normalise(ipa, code, text=""):
     for old, new in REPAIR.get(code, []):
         ipa = ipa.replace(old, new)
@@ -3570,6 +3777,10 @@ def normalise(ipa, code, text=""):
         ipa = el_stress(text, ipa)
     if code == "te":
         ipa = te_anusvara(text, ipa)
+    if code == "or":
+        # `or_nukta` first: it removes the `.` that would otherwise sit inside a
+        # word and make `or_letters`' word split disagree with the text's.
+        ipa = or_letters(text, or_nukta(ipa))
     if code == "pa":
         # Nasal first: `pa_tone` inserts a tone bar between the vowel and its coda,
         # which would then sit between the tilde and the stop `pa_nasal` matches on.
@@ -4518,6 +4729,138 @@ def ka_to_ipa(word):
     return "".join(KA.get(c, c) for c in word if c != "-")
 
 
+# Uzbek Latin, and **there is an espeak voice and it is refused**, which is
+# Georgian's situation rather than Filipino's. `EspeakBackend.supported_languages()
+# ['uz'] == 'Uzbek'` against the plain system library, no `PHONEMIZER_ESPEAK_*` set,
+# so 1.50's own tree has it. Measured against this table over the pack's own 1,046
+# word types and 2,067 tokens (`tmp/uz/probe_espeak.py`), it agrees on **157 of the
+# 1,046 (15.0%)**, and the disagreements are four defects rather than a long tail:
+#
+# - **The voice does not read `ʻ` U+02BB at all.** `oʻzbek` and `ozbek` both come
+#   back `ɔzbek`, so the two letters `oʻ` and `o` -- a phonemic contrast, `oʻt`
+#   "grass" against `ot` "horse" -- are merged on **67 word types**, and `gʻ`
+#   against `g` on **36**. This is the one that cannot be repaired downstream: by
+#   the time the column exists the distinction is gone. On four of the 36 it is
+#   worse than a merge -- `qoʻngʻiroq` comes back `qɔŋʔiɹɔq`, with the `gʻ` read as
+#   a **glottal stop**.
+# - **`sh` comes back as Latin `s` + `h`** on **138 types**: `besh` is `bɛsh`,
+#   `yaxshi` is `jaχshɪ`. Both letters are legal IPA, so `check_alphabet` cannot
+#   see it -- this would have shipped a column telling every reader that Uzbek's
+#   /ʃ/ is an /s/ followed by an /h/. (`ch` is handled correctly, as `tʃ`.)
+# - **Allophonic splits on a six-vowel system**, Croatian's finding again and
+#   bigger: `ɪ` for `i` on 582 types, `ɛ`/`æ` for `e` on 104, `ʊ` for `u` on 107,
+#   and `o`/`ɔ` used interchangeably for the *same* letter `o` on 29 (`aloqa` is
+#   `aloqa` and `arzonroq` is `arzɔnɹɔq`).
+# - **`ɹ` for `r`** on **183 types**. Uzbek's rhotic is a trill or a tap and is
+#   never an approximant.
+#
+# Only the last three are the kind of thing `REPAIR` fixes, and repairing them
+# would leave the first -- so the route is this table. Uzbek Latin is a phonemic
+# orthography designed in 1995 to be one, which is what makes a table the right
+# instrument here and not a compromise.
+#
+# **The symbol choices, each made to add nothing to the other forty-nine reader
+# tables**, checked against the `ipa` column of every other pack rather than
+# assumed:
+#
+# - **`x` for `x` and `ɣ` for `gʻ`**, not `χ` and `ʁ`. This is exactly Georgian's
+#   trade and for its reason: `χ` U+03C7 is in no cell of this corpus and `FOLD`
+#   would take it to `x` anyway, while `x` is in 2,354 cells across 25 packs and
+#   `ɣ` in 547 across 10. Uzbek's two are described as velar-to-uvular in free
+#   variation, so the velar pair is as defensible as the uvular one and costs
+#   nothing.
+# - **`ɔ` for `o` and plain `o` for `oʻ`.** The contrast is real and has to be
+#   written; which two symbols write it is free. `ɒ` is the narrower transcription
+#   of Uzbek `o` and is in **5 cells of 2 packs**, and `ɵ` for `oʻ` is in 122 of 2,
+#   where `ɔ` is in 6,157 of 25 and `o` in 23,687 of all 50. Same trade again.
+# - **The other vowels are plain `a e i u`**, Georgian's decision: Uzbek `a` is
+#   [a]~[æ] by context and `i` is [i]~[ɨ], neither contrastive, and a lowering or
+#   centring diacritic would cost a codepoint to say nothing.
+# - **The tutuq belgisi `ʼ` U+02BC is positional and mechanical**: after a vowel it
+#   lengthens it (`maʼno` [maːnɔ], `feʼl` [feːl], `eʼlon` [eːlɔn]) and after a
+#   consonant it is a glottal stop (`inʼyektor` [inʔjektɔr]). Nine word types carry
+#   it and the rule is right on all nine. `ː` and `ʔ` are both long-established
+#   here.
+# - **`ng` is /ŋ/, and /ŋɡ/ before `a`.** The letter pair writes one phoneme, but
+#   the same pair arises when the dative `-ga` or the participle `-gan` follows a
+#   stem in `n`, where the `ɡ` is really there -- `menga` [meŋɡa], `ekranga`
+#   [ekraŋɡa], `taqiqlangan` [taqiqlaŋɡan] -- and a following `a` is what separates
+#   the two, because /ŋ/ before /a/ inside a morpheme is vanishingly rare while
+#   `-ga`/`-gan` are two of the commonest suffixes in the language. The `-ngiz`,
+#   `-ngi` and word-final cases stay /ŋ/: `ismingiz` [ismiŋiz], `keyingi`
+#   [kejiŋi], `bering` [beriŋ]. And `n` before `gʻ` assimilates without absorbing
+#   it, so `qoʻngʻiroq` is [qoŋɣirɔq].
+#
+# **No stress**, which is Georgian's, Amharic's and Persian's answer and is a
+# refusal rather than an omission. Uzbek stress is final on the lexical word, but
+# a closed and very frequent set of endings is unstressed and pulls it back -- the
+# negative `-ma`, the question particle `-mi`, the predicative `-man/-san/-siz`,
+# `-dir`, `-chi` -- and two of those are homographs of *stressed* suffixes: `-ma`
+# is also a noun-former (`koʻrsatma`) and `-siz` is also the privative
+# ("without", `goʻshtsiz`). So the rule runs in opposite directions on the same
+# letters, which is Persian's case exactly, and a letter table cannot tell them
+# apart. The cost is stated rather than hidden: `olmá` "apple" and `ólma` "do not
+# take" are a real minimal pair and this column writes them the same. espeak's
+# placement is not evidence either -- it is the same voice refused above.
+UZ = {
+    "oʻ": "o", "gʻ": "ɣ", "sh": "ʃ", "ch": "tʃ",
+    "a": "a", "b": "b", "d": "d", "e": "e", "f": "f", "g": "ɡ", "h": "h",
+    "i": "i", "j": "dʒ", "k": "k", "l": "l", "m": "m", "n": "n",
+    "o": "ɔ", "p": "p", "q": "q", "r": "r", "s": "s", "t": "t", "u": "u",
+    "v": "v", "x": "x", "y": "j", "z": "z",
+}
+UZ_VOWELS = "aeiou"
+
+
+def uz_to_ipa(word):
+    """One Uzbek word, in the 1995 Latin orthography the pack writes.
+
+    Lowercased like the other table routes: a capital here is a sentence opening
+    or a proper noun, not a sound, and Uzbek's case pairing is one-to-one.
+
+    A bare hyphen is dropped, which is `ka_to_ipa`'s, `ha_to_ipa`'s and
+    `fil_to_ipa`'s rule and for the same reason -- it is a morpheme boundary in
+    the orthography and not a sound. Uzbek writes one in a reduplication
+    (`alohida-alohida` "separately", `borish-kelish` "round trip"), in
+    `oziq-ovqat` "food" and in `Wi-Fi`, and no shipped `ipa` cell in any pack
+    contains a hyphen.
+
+    Anything else not in `UZ` is carried out unchanged so a gate names it, which
+    is the contract `KA`, `YO`, `HA` and `FIL` have. `ROUTE_FORBIDS["uz-g2p"]` is
+    what catches it: `c`, `w` and `y` are legal IPA and are not Uzbek sounds, so
+    one surviving means a letter went unread.
+    """
+    word = word.lower()
+    out = []
+    i = 0
+    while i < len(word):
+        ch = word[i]
+        if ch == "-":
+            i += 1
+            continue
+        if ch == "ʼ":
+            out.append("ː" if i and word[i - 1] in UZ_VOWELS else "ʔ")
+            i += 1
+            continue
+        if word[i:i + 2] == "ng":
+            # `n` before `gʻ` assimilates to it, and the `gʻ` is still a letter of
+            # its own, so only the `n` is consumed here.
+            if word[i + 2:i + 3] == "ʻ":
+                out.append("ŋ")
+                i += 1
+                continue
+            out.append("ŋɡ" if word[i + 2:i + 3] == "a" else "ŋ")
+            i += 2
+            continue
+        if word[i:i + 2] in UZ:
+            out.append(UZ[word[i:i + 2]])
+            i += 2
+            continue
+        out.append(UZ.get(ch, ch))
+        i += 1
+    return "".join(out)
+
+
 # Letters that are inside the IPA alphabet and still cannot appear in *Japanese*
 # IPA, so seeing one means a Hepburn mora went unconverted rather than that the
 # reading is exotic. `u` is the sharp one: Japanese /ɯ/ is never `u`, so a single
@@ -4542,6 +4885,11 @@ ROUTE_FORBIDS = {
     # for י, `c` and `w` for nothing at all. `HE` is a whitelist and an unmatched
     # character is carried out, which is what makes the gate necessary.
     "bgn": set("cqwy"),
+    # `c`, `w` and `y` are all legal IPA and none of them is an Uzbek sound. `c`
+    # occurs in the orthography only inside `ch`, which `UZ` always rewrites; `w`
+    # occurs only in `Wi-Fi`, which is in `LOANWORDS["uz"]`; and `y` is always
+    # rewritten to `j`. So one surviving means a letter was carried out unread.
+    "uz-g2p": set("cwy"),
     # Every one of these is legal IPA and none of them is a sound Amharic has, so one
     # surviving means a BGN letter went unconverted. `q` and `x` are not letters of
     # this romanisation at all -- BGN writes ቀ as `k’` and Amharic has no velar
@@ -4615,6 +4963,220 @@ def thai_syllables():
     return chunk
 
 
+
+# ------------------------------------------------- Javanese (Latin) -> IPA
+# **No espeak voice exists for `jv`, and it does not exist upstream either.** The
+# check was the one `ha`'s note prescribes, run against both libraries this build
+# can reach: `espeak-ng-data/lang/poz/` holds `id`, `mi` and `ms` and no `jv`, in
+# the system 1.50 tree *and* in `espeakng_loader`'s newer bundled one -- the copy
+# `uk` and `mr` were found in -- and there is no `jv_dict` in either. So this is
+# the `fil`/`ha`/`yo` situation: a table over an orthography rather than a model
+# with an error rate. Javanese suits one, the reformed Latin orthography (*Pedoman
+# Umum Ejaan Bahasa Jawa Huruf Latin yang Disempurnakan*) being near-phonemic --
+# but it has one trap and one allophonic system, and the trap is what a table
+# seeded from the neighbours gets wrong.
+#
+# **The trap is the dental/retroflex series and not the breathy voicing.**
+# Javanese contrasts four coronal stops where Indonesian and Malay have two, and
+# writes them with digraphs: `t` and `d` are *dental*, `th` and `dh` are
+# *retroflex* [ʈ ɖ]. A table copied from `id` or `ms` -- the obvious move, both
+# being Latin-script Austronesian neighbours -- reads `th` as t+h and `dh` as d+h,
+# or folds all four onto /t/ and /d/, and either way `wutuh` stops contrasting
+# with `wuduk` and `tha` with `ta`. So the digraphs are first in the table and
+# `longest` finds them.
+#
+# The contrast costs the corpus **nothing new**: `ʈ` is already in 3,158 cells and
+# `ɖ` in 1,853, across the nine Indic packs, so all fifty shipped reader tables
+# have a rule for both -- counted in `data/lang/*/*.csv` before this table was
+# written rather than assumed. The dental member is written plain `t`/`d` for the
+# reason those same Indic packs write theirs plain: U+032A COMBINING BRIDGE BELOW
+# is in `vi` and `ar` only, no reader table spells `t̪` differently from `t`, and
+# the contrast that matters is carried by the retroflex member.
+#
+# **The breathy series is deliberately not written, on Hausa's `ɓ` rule.** The
+# `b d dh j g` series is phonetically slack- or breathy-voiced with the breath on
+# the following vowel -- [b̥ə̤] rather than [bə] -- which needs U+0325 and U+0324,
+# and **neither combining mark is anywhere in this corpus**. That is Klingon's
+# `ɬ`: a symbol no reader table can spell, bought at the price of fifty rules, to
+# keep a phonetic detail the audience cannot read back. The series is written
+# plain voiced and the simplification is disclosed in `GRADE["jv"]`.
+#
+# **The allophony that *is* implemented is the one that changes the word.**
+# Javanese spells /a/ one way and says it two: `apa` is [ɔpɔ] and `sabar` is
+# [sabar]. A column that wrote `apa` would hand all fifty reader tables the wrong
+# vowel on the commonest word shape in the language -- `kula`, `menika`, `sanga`,
+# `sedaya`, `basa` -- so the *a jejeg* is derived, together with the ordinary
+# closed-syllable laxing it interacts with. Both are stated in every descriptive
+# grammar (Horne, *Beginning Javanese*, 1961; Ras, *Inleiding tot het moderne
+# Javaans*, 1982; Ogloblin in Adelaar & Himmelmann, *The Austronesian Languages of
+# Asia and Madagascar*, 2005):
+#
+#   1. /i u e o/ are [ɪ ʊ ɛ ɔ] in a closed syllable -- `pinten` [pɪntən],
+#      `wonten` [wɔntən], `kénging` [kɛŋɪŋ], `matur` [matʊr].
+#   2. final open /a/ and /o/ are [ɔ], and that [ɔ] spreads leftwards through any
+#      open syllable holding /a/ or /o/ -- `kula` [kulɔ], `apa` [ɔpɔ], `sanga`
+#      [sɔŋɔ], `sedaya` [sədɔyɔ], `loro` [lɔrɔ].
+#   3. an open syllable's /o/ is [ɔ] before a *closed* syllable -- `mboten`
+#      [mbɔtən], `apotik` [apɔtɪʔ], `laporan` [lapɔran].
+#
+# **Rule 3 is /o/ and nothing else, and that restriction was measured rather than
+# assumed**, which is the only reason it is here at all. Javanese also laxes a
+# penult /i u/ in some environment -- `kuping` is [kʊpɪŋ] -- but neither statement
+# of it survives its own examples: "before a lax vowel of the same quality" gets
+# `kuping` wrong (u before ɪ, not before ʊ), and "before a closed syllable" turns
+# `tiyang` [tiyaŋ], `sirah` [sirah] and `mripat` [mripat] into *[tɪyaŋ], *[sɪrah],
+# *[mrɪpat]. For /o/ the same statement was run over every word of the finished
+# pack that can reach it -- 41 types, `mboten` 59 times, then `obat`, `nomer`,
+# `logam`, `apotik`, `kloset`, `dolar`, `koper`, `mobil`, `oktober`, `novèmber`,
+# `sowan`, `ojèk`, `lokèt`, `laporan`, `hotèl`, `forint`, `toman` -- and it is
+# right on all of them. So /i u/ are **absent and disclosed** rather than
+# approximated: `kuping` comes back [kupɪŋ] and `bocah` [botʃah] where careful
+# speech has [kʊpɪŋ] and [bɔtʃah]. That is a vowel quality every reader table
+# spells with the same letter either way, where the *a jejeg* is a different
+# vowel and `mboten` is the pack's fourth commonest word.
+#
+# **`e` is [ə] and the diacritic is authoritative.** `é` is /e/ and `è` is /ɛ/, as
+# every Javanese dictionary marks them (Poerwadarminta, *Baoesastra Djawa*, 1939;
+# Robson & Wibisono, *Javanese-English Dictionary*, 2002) and as the pack's `text`
+# column writes them -- the decision recorded in tmp/jv/decisions.md section 2. It
+# has to be marked, because the three-way /ə e ɛ/ contrast is not recoverable from
+# a bare `e`: `sèwu` [sɛwu] and `télu` [telu] are both open syllables. Rule 1
+# still applies on top, so a closed syllable is [ɛ] whichever of the two was
+# written, which is where most of the marks fall and is why a wrong mark there
+# costs nothing.
+#
+# **A coda `k` is [ʔ]** -- `tindak` [tindaʔ], `pitik` [pɪtɪʔ], `taksih`
+# [taʔsɪh]. A final [k] is not a possible Javanese word. "Coda" is read off
+# the syllabifier rather than off the next letter, so the `k` of `kloset` and
+# `Ukraina`, which opens a cluster, keeps its stop.
+#
+# **Stress is written, and positionally rather than looked up**, which is
+# Hungarian's case and not Filipino's. Javanese stress is not contrastive, so
+# there is no lexicon to miss, and it falls on the penult unless the penult holds
+# /ə/, in which case it moves to the ultima: `ˈkulɔ`, `səˈdɔyɔ`,
+# `pandʒənəˈŋan`. The objection that refused a mark for `ta te pa gu kn` was that
+# espeak's placement followed no rule those grammars state; nothing here is read
+# off a voice.
+JV_G = {
+    # Digraphs first (`longest` tries 3, 2, then 1). `dh`/`th` are the retroflex
+    # pair the note above is about; `ng` and `ny` are the nasals, and both compose
+    # correctly with a following plain letter, so `tangga` is `t a ŋ ɡ a` with no
+    # extra rule -- Filipino's own finding for its `ng`. `sy` and `kh` are the two
+    # Arabic-loan digraphs (`syarat`, `khusus`).
+    "dh": "ɖ", "th": "ʈ", "ng": "ŋ", "ny": "ɲ", "sy": "ʃ", "kh": "x",
+    "a": "a", "e": "ə", "é": "e", "è": "ɛ", "i": "i", "o": "o", "u": "u",
+    "b": "b", "c": "tʃ", "d": "d", "f": "f", "g": "ɡ", "h": "h", "j": "dʒ",
+    "k": "k", "l": "l", "m": "m", "n": "n", "p": "p", "q": "k", "r": "r",
+    "s": "s", "t": "t", "v": "f", "w": "w", "x": "ks", "y": "j", "z": "z",
+}
+JV_VOWELS = "aəeɛiou"
+JV_LAX = {"i": "ɪ", "u": "ʊ", "e": "ɛ", "o": "ɔ"}
+
+
+def jv_units(part):
+    """One hyphen-free word as [(grapheme, ipa)]."""
+    units, i = [], 0
+    while i < len(part):
+        grapheme = longest(JV_G, part, i)
+        if grapheme:
+            units.append((grapheme, JV_G[grapheme]))
+            i += len(grapheme)
+        elif part[i] == "'":
+            units.append(("'", "ʔ"))           # a glottal in casual spelling
+            i += 1
+        else:
+            units.append((part[i], part[i]))   # carried out, so a gate names it
+            i += 1
+    return units
+
+
+# The one cluster Javanese opens a syllable with that is not a single consonant:
+# a stop or fricative plus a liquid or glide. It has to be in the syllabifier
+# rather than special-cased in the /k/ rule, because it moves three answers at
+# once -- `Ukraina` is u-krai-na and not *uk-rai-na, so its /k/ is not a coda and
+# not a glottal stop, its /u/ is in an open syllable, and its stress is on the
+# penult of three syllables rather than of four. Measured over the pack: it fires
+# on `Ukraina`, `kloset`, `klosetipun` and `imigrasi` and nowhere else, and
+# `Malaysia` (j+s, whose second member is not a liquid) is correctly untouched.
+JV_GLIDES = "rlwj"
+
+
+def jv_syllabify(units):
+    """Unit indices grouped into syllables, onset-maximally.
+
+    One consonant between two vowels opens the second syllable, as does a
+    `JV_GLIDES` cluster; anything more closes the first.
+    """
+    nuclei = [i for i, (_, ipa) in enumerate(units) if ipa and ipa[0] in JV_VOWELS]
+    if not nuclei:
+        return [list(range(len(units)))] if units else []
+    starts = [0]
+    for prev, n in zip(nuclei, nuclei[1:]):
+        onset = 1 if n - prev > 1 else 0
+        if n - prev > 2 and units[n - 1][1][0] in JV_GLIDES:
+            onset = 2
+        starts.append(n - onset)
+    bounds = starts + [len(units)]
+    return [list(range(a, b)) for a, b in zip(bounds, bounds[1:])]
+
+
+def jv_part(part):
+    """One hyphen-free Javanese word as a list of syllables, already voweled."""
+    units = jv_units(part)
+    syls = jv_syllabify(units)
+    # Coda /k/ is a glottal stop -- `tindak` [tindaʔ], `taksih` [taʔsɪh] -- and
+    # "coda" is exactly "last unit of its syllable", which is why this waits for
+    # the syllabifier: the /k/ of `kloset` and `Ukraina` opens a cluster.
+    for syl in syls:
+        if units[syl[-1]][1] == "k":
+            units[syl[-1]] = (units[syl[-1]][0], "ʔ")
+    # One row per syllable: [unit index of the nucleus, its ipa, closed?, jejeg?].
+    # "Closed" is simply "something follows the nucleus inside the syllable".
+    # "Jejeg" marks an [ɔ] that came from rule 2 rather than rule 3, because only
+    # that one pulls a preceding /a/ with it -- see the spread loop.
+    nuclei = []
+    for s, syl in enumerate(syls):
+        at = next((i for i in syl if units[i][1] and units[i][1][0] in JV_VOWELS), None)
+        if at is not None:
+            nuclei.append([at, units[at][1], at != syl[-1], False, s == len(syls) - 1])
+    for n, (at, ipa, closed, _, last) in enumerate(nuclei):
+        if closed and ipa in JV_LAX:
+            nuclei[n][1] = JV_LAX[ipa]
+        elif last and not closed and ipa in "ao":
+            nuclei[n][1:4] = ["ɔ", False, True]       # rule 2, the a jejeg
+        elif ipa == "o" and n + 1 < len(nuclei) and nuclei[n + 1][2]:
+            nuclei[n][1] = "ɔ"                        # rule 3, /o/ only
+    # Leftward spread. An /o/ follows any [ɔ]; an /a/ follows only a jejeg one,
+    # because `apotik` is [apɔtɪʔ] and `laporan` [lapɔran] -- the /o/ that rule 3
+    # lowered does not pull the /a/ in front of it, where a final open /a/ does.
+    for n in range(len(nuclei) - 2, -1, -1):
+        if nuclei[n][2] or nuclei[n + 1][1] != "ɔ":
+            continue
+        if nuclei[n][1] == "o" or (nuclei[n][1] == "a" and nuclei[n + 1][3]):
+            nuclei[n][1] = "ɔ"
+            nuclei[n][3] = nuclei[n + 1][3]
+    for at, ipa, _, _, _ in nuclei:
+        units[at] = (units[at][0], ipa)
+    return ["".join(units[i][1] for i in syl) for syl in syls]
+
+
+def jv_to_ipa(word):
+    """One Javanese word, lowercased by the caller.
+
+    Each hyphen-separated part is segmented on its own -- `sami-sami`, `apa-apa`,
+    `undhak-undhakan` -- because the hyphen is a reduplication boundary and the
+    coda rules have to see the end of the first half. The parts are then joined
+    with nothing, which is what the orthography says a reduplication is, and carry
+    one stress between them, on the penult of the whole.
+    """
+    syls = [s for part in word.split("-") if part for s in jv_part(part)]
+    if len(syls) > 1:
+        at = len(syls) - 2
+        if "ə" in syls[at]:
+            at = len(syls) - 1
+        syls[at] = "ˈ" + syls[at]
+    return "".join(syls)
+
 # The one pack whose `ipa` column is written by hand rather than derived, so this
 # script neither fills it nor owns it. Khmer's column is the broad phonemic analysis
 # `tmp/km/SPEC.md` asked its author for, tagged `ipa=km-analysis`; the orthographic
@@ -4643,9 +5205,13 @@ def route(code, chunks):
         lexicon = espeak_lexicon(VOICES[code], [w for c in chunks for w in c.split()])
         return lambda chunk: " ".join(lexicon.get(w) or "" for w in chunk.split()), "espeak"
     if code in VOICES:
-        # `bn_compose` is the identity for every other language: those three
-        # sequences occur in no other pack, in no registry file and in no override.
-        pre = bn_compose if code == "bn" else (lambda text: text)
+        # Two languages rewrite their own script before the voice sees it, each for
+        # a defect of its own voice: Bengali composes three nukta letters
+        # (`bn_compose`) and Odia writes ୱ as ଵ (`or_espeak`). Both are the identity
+        # for every other language -- those sequences occur in no other pack, in no
+        # registry file and in no override -- so the dispatch is by code rather than
+        # applied to everything.
+        pre = {"bn": bn_compose, "or": or_espeak}.get(code, lambda text: text)
         lexicon = espeak_lexicon(VOICES[code], [pre(c) for c in chunks])
         return (lambda chunk: lexicon.get(pre(chunk))), "espeak"
     if code == "th":
@@ -4706,6 +5272,14 @@ def route(code, chunks):
         # orthography is the script this table reads, the same shape of fact `ha`
         # and `fil` are in neither `ROMANISED` nor `NON_LATIN` for.
         return lambda chunk: " ".join(yo_to_ipa(w.lower()) for w in chunk.split()), "yo-g2p"
+    if code == "jv":
+        # Reads `row["text"]` itself, not a romanisation column -- `jv` is in
+        # neither `ROMANISED` nor `NON_LATIN`, for `fil`'s, `ha`'s and `yo`'s
+        # reason: the script the pack's `text` column uses *is* the alphabet this
+        # table reads, so there is no separate romanisation to prefer and no
+        # wrong-script loanword for `latin_survives` to catch.
+        return lambda chunk: " ".join(jv_to_ipa(w.lower())
+                                      for w in chunk.split()), "jv-g2p"
     if code == "ka":
         # Reads `row["text"]` itself, like `lo`, `ha`, `yo` and `fil` and unlike the
         # six romanisation routes -- and `ka` *is* in `NON_LATIN`, because Georgian
@@ -4719,6 +5293,12 @@ def route(code, chunks):
         return (lambda chunk: " ".join(ka_to_ipa(w) for w in chunk.split()
                                        if any("\u10d0" <= c <= "\u10ff" for c in w)),
                 "ka-g2p")
+    if code == "uz":
+        # Reads `row["text"]` itself, like `fil`, `ha` and `yo` -- Uzbek's own
+        # script is Latin, so there is no romanisation column and `uz` is in
+        # neither `ROMANISED` nor `NON_LATIN`. Lowercased for the reason the other
+        # table routes are: a capital is orthography, not sound.
+        return lambda chunk: " ".join(uz_to_ipa(w) for w in chunk.split()), "uz-g2p"
     raise SystemExit(f"no route for {code}")
 
 
@@ -5290,6 +5870,43 @@ GRADE = {
            "of. What no reviewer should assume is checked: the dental/retroflex *nasal* contrast "
            "is now carried by a repair rather than by the dictionary, so a row where the "
            "assimilation reads wrong is a repair to question and not a lexicon entry"),
+    "or": ("C-", "espeak-ng has an Oriya voice in this build's *system* 1.50 tree, so "
+           "no `espeakng_loader` is needed -- and that was checked rather than assumed, "
+           "because this is the kind of voice a newer library might have fixed: phonemised "
+           "under `espeakng_loader`'s 1.52 the column is **identical on every row**, "
+           "including every defect below, so the loader buys nothing here and is not used. "
+           "**The one thing it gets right is the thing a Devanagari-shaped assumption gets "
+           "wrong**: Odia's inherent vowel is [ɔ] and not [ə], and it is not deleted "
+           "word-finally -- କଟକ comes back `kˈɔʈkɔ`, which is the word, where a Hindi-shaped "
+           "voice would have said [kəʈək]. Stress is kept for Bengali's reason: Odia stress "
+           "is initial and non-lexical and espeak puts it there. "
+           "**Nine artefacts are repaired and two of the repairs are structural.** ୱ is "
+           "unknown to the voice and makes it recite Odia letter *names* twelve words at a "
+           "time, so the route rewrites it as ଵ on the way in (`or_espeak`, 21 cells); ଡ଼ "
+           "comes back `r.` plus an inherent vowel the following matra should have deleted, "
+           "repaired conditionally in `or_nukta` (50 cells); ଳ comes back as Czech's "
+           "syllabic `l̩` rather than ɭ (67 cells); ଯ comes back `dʒ` where the homophonous "
+           "ଜ/ଝ come back `ɟ/ɟʰ`, and `dʒ` is the one that is folded away because "
+           "folding the other way cost nine reader tables a rule for a bare `ʰ`; the length marks are on the letter rather than "
+           "the sound, as in Bengali, and Odia has no vowel length at all; and two bare "
+           "letters are read as their names. All nine are in `REPAIR[\"or\"]` and "
+           "`or_nukta`. "
+           "**What is left is four collapsed contrasts and they are why this is not a C.** "
+           "The voice reads ଟ as plain `t`, the same symbol it gives ତ, so the "
+           "retroflex/dental contrast is gone from the voiceless unaspirated stop -- and ଟ "
+           "is in ଟଙ୍କା, ଟିକେଟ and ଗୋଟିଏ, not in a corner of the lexicon. ଘ loses its "
+           "aspiration. ଣ and ଞ both come back `n`. `or_letters` puts all four back from the "
+           "*spelling*, which is `pa_tone`'s and `te_anusvara`'s device, and it can only do "
+           "so where the word holds no rival letter: over the pack's 2,412 word tokens with "
+           "an `ipa` that is ଟ in 187 of 195, ଘ in 10 of 10, ଣ in 88 of 110 and ଞ in 3 of 7. "
+           "**So 34 word tokens keep the voice's collapsed reading**, ଆପଣଙ୍କ among them, and "
+           "they are left as written rather than guessed at -- a reviewer should read the "
+           "ଣ-and-ନ words first. "
+           "**And two smaller weaknesses are not repaired at all.** The inherent vowel is "
+           "dropped word-finally after ହ, ୟ and ଢ଼ where Odia keeps it (ପାହ comes back `pah` "
+           "for [paha]), which is Bengali's deletion problem in the other direction and in "
+           "fewer places. And ଐ/ଔ come back `oj`/`ow` where the readings are [ɔi]/[ɔu]: a "
+           "vowel-quality approximation rather than notation, and the glides are right"),
     "bn": ("C", "espeak-ng has a Bengali voice and it is a real one -- the consonant "
            "inventory comes back whole, retroflex against dental, all four aspirates, ঙ ঞ as "
            "/ŋ ɲ/, and the inherent vowel's /ɔ/ against /o/ right most of the time. Two "
@@ -5616,6 +6233,53 @@ GRADE = {
            "probe-based audit of every symbol the voice emits, against all 41 reader "
            "tables, rather than a corpus-wide measurement -- like Kannada's, "
            "Gujarati's and Punjabi's."),
+    "jv": ("B+", "**No espeak voice for `jv` exists anywhere this build can reach** -- "
+           "`espeak-ng-data/lang/poz/` holds `id`, `mi` and `ms` and no `jv`, in the "
+           "system 1.50 tree and in `espeakng_loader`'s newer bundled one alike, and "
+           "there is no `jv_dict` in either. So this is a hand-written table over the "
+           "orthography, `fil`'s and `ha`'s situation, and it grades like them: what "
+           "can be wrong is the table, and the table is 33 entries over a six-vowel, "
+           "twenty-consonant inventory with a near-phonemic spelling.\n\n"
+           "**The one thing a naive table gets wrong here is the coronal series, and "
+           "it is not wrong.** Javanese has four coronal stops where its two nearest "
+           "neighbours have two -- dental `t`/`d` against retroflex `th`/`dh` -- so a "
+           "table seeded from `id` or `ms` reads `dh` as d+h and stops `wuduk` "
+           "contrasting with `wutuh`. The digraphs are first in `JV_G` and come back "
+           "as `ɖ` and `ʈ`, which all fifty reader tables already have a rule for "
+           "(3,158 `ʈ` and 1,853 `ɖ` cells across the nine Indic packs), so the "
+           "contrast costs the corpus nothing.\n\n"
+           "**The *a jejeg* is derived, which is what makes this a B+ rather than a "
+           "C.** Javanese writes /a/ one way and says it two: a final open /a/ or "
+           "/o/ is [ɔ] and pulls the open syllable before it along, so `kula` is "
+           "[kulɔ], `apa` [ɔpɔ] and `sedaya` [sədɔjɔ]. A column that spelled these "
+           "with [a] would hand every reader table the wrong vowel on the commonest "
+           "word shape in the language. Closed-syllable laxing is derived beside it "
+           "(`pinten` [pɪntən], `wonten` [wɔntən], `matur` [matʊr]), and so is the "
+           "coda /k/ glottal (`tindak` [tindaʔ]).\n\n"
+           "**Three things are honestly absent.** (1) The *breathy* half of the stop "
+           "contrast: `b d dh j g` are phonetically slack-voiced with breath on the "
+           "following vowel, and writing that needs U+0325 and U+0324, neither of "
+           "which is anywhere in this corpus -- Hausa folded `ɓ` for exactly this "
+           "reason, and a symbol no reader can spell is not worth fifty rules. "
+           "(2) The penult harmony of /i u/: `kuping` comes back [kupɪŋ] where "
+           "careful speech has [kʊpɪŋ]. The /o/ half of that rule *is* implemented, "
+           "because it was measured over the finished pack's own 41 words that can "
+           "reach it and is right on all of them (`mboten` [mbɔtən] 59 times, "
+           "`apotik`, `laporan`, `mobil`, `hotèl`); the /i u/ half is refuted by "
+           "`tiyang`, `sirah` and `mripat` under either statement of it, so it is "
+           "left out. (3) A row whose `text` holds a bare digit is refused rather "
+           "than read -- `numbers-money.2-items`, `.li-ng` and `common-signs."
+           "pork-code` -- which is `fil`'s decision for `fil`'s reason.\n\n"
+           "**Stress is positional and written**, Hungarian's case rather than "
+           "Filipino's: Javanese stress is not contrastive, so there is no lexicon "
+           "to miss, and it sits on the penult unless the penult holds /ə/, when it "
+           "moves right (`ˈkulɔ`, `səˈdɔjɔ`, `pandʒənəˈŋan`). Nothing is read off a "
+           "voice, so the objection that stripped the mark for `ta te pa gu kn` "
+           "cannot arise.\n\n"
+           "**The rows a fluent speaker should read first are the open-syllable "
+           "`é`/`è` ones.** The diacritic is authoritative in this table, so a wrong "
+           "mark in an *open* syllable is a wrong vowel -- a closed syllable is [ɛ] "
+           "whichever was written, which is where most of them fall."),
     "hr": ("A-", "Gaj's alphabet is near-phonemic in the direction that matters -- one "
            "letter or digraph per phoneme, read left to right, no schwa deletion and "
            "no inherent vowel -- so the segmental derivation is the easy part and the "
@@ -5751,6 +6415,63 @@ GRADE = {
            "and all seven are by design: six `note` rows, which this script skips, "
            "and `common-signs.pork-code`, whose whole content is the Latin "
            "`B2 · BPK · bakso`."),
+    "uz": ("A-", "a letter-by-letter table over the 1995 Uzbek Latin alphabet, which "
+           "was designed to be phonemic and very nearly is -- so, like `ka` and "
+           "`tlh`, the only thing that can be wrong here is the table, and it is 26 "
+           "letters, two digraphs and four positional rules long.\n\n"
+           "**There is an espeak voice and it is refused, which is Georgian's "
+           "situation rather than Filipino's.** Measured against this table over the "
+           "pack's own 1,046 word types and 2,067 tokens, it agrees on **157 of the "
+           "1,046 (15.0%)**, and the disagreements are four defects rather than a "
+           "long tail. (1) **It does not read `ʻ` U+02BB at all**: `oʻzbek` and "
+           "`ozbek` both come back `ɔzbek`, so `oʻ` against `o` -- a phonemic "
+           "contrast, `oʻt` \"grass\" against `ot` \"horse\" -- is merged on 67 word "
+           "types and `gʻ` against `g` on 36, and on four of those the `gʻ` is read "
+           "as a **glottal stop** (`qoʻngʻiroq` -> `qɔŋʔiɹɔq`). That one cannot be "
+           "repaired downstream, because by the time the column exists the "
+           "distinction is gone. (2) **`sh` comes back as Latin `s` + `h`** on 138 "
+           "types -- `besh` is `bɛsh` -- and both letters are legal IPA, so "
+           "`check_alphabet` cannot see it: the column would have told every reader "
+           "that Uzbek /ʃ/ is an /s/ followed by an /h/. (3) Allophonic splits on a "
+           "six-vowel system, Croatian's finding and bigger: `ɪ` for `i` on 582 "
+           "types, `ɛ`/`æ` for `e` on 104, `ʊ` for `u` on 107, and `o`/`ɔ` used "
+           "interchangeably for the same letter on 29. (4) `ɹ` for `r` on 183. Only "
+           "the last two are the kind of thing `REPAIR` fixes.\n\n"
+           "**Three things earn the A- and each is measured on the finished "
+           "column.** The orthography is shallow in both directions -- no inherent "
+           "vowel, no schwa deletion, every vowel it pronounces is written -- so "
+           "nothing of the kind that keeps `hi` and `bn` at C exists here. The "
+           "**finished column emits 36 distinct characters and every one is already "
+           "somewhere in the corpus**, checked against the `ipa` column of all fifty "
+           "other packs rather than assumed, so Uzbek costs no existing reader "
+           "table a rule -- unlike Klingon's `ɬ` or Czech's `r̝`. And the two places "
+           "the orthography is *not* transparent are both handled by rule rather "
+           "than by a lexicon: the **tutuq belgisi** lengthens a preceding vowel and "
+           "is a glottal stop after a consonant (`maʼno` [maːnɔ], `feʼl` [feːl], "
+           "`inʼyektor` [inʔjektɔr]), which is right on all nine word types that "
+           "carry it; and **`ng` is /ŋ/, and /ŋɡ/ before `a`**, which separates the "
+           "digraph from the `n` + dative `-ga` / participle `-gan` sequence that "
+           "spells the same two letters (`menga` [meŋɡa], `ekranga` [ekraŋɡa], "
+           "`taqiqlangan` [taqiqlaŋɡan]) while leaving `-ngiz`, `-ngi` and the "
+           "word-final cases alone (`ismingiz` [ismiŋiz], `keyingi` [kejiŋi], "
+           "`bering` [beriŋ]).\n\n"
+           "**Three things are deliberately absent or wrong and are named here "
+           "rather than hidden.** **No stress**, which is Georgian's, Amharic's and "
+           "Persian's answer and is Persian's *reason*: Uzbek stress is final on the "
+           "lexical word, but the negative `-ma`, the question `-mi`, the "
+           "predicative `-man/-san/-siz`, `-dir` and `-chi` are unstressed and pull "
+           "it back -- and two of those are homographs of stressed suffixes, `-ma` "
+           "being also a noun-former (`koʻrsatma`) and `-siz` also the privative "
+           "(`goʻshtsiz`), so the rule runs in opposite directions on the same "
+           "letters and a letter table cannot tell them apart. The cost is a real "
+           "minimal pair this column writes the same way: `olmá` \"apple\" and "
+           "`ólma` \"do not take\". **`j` is `dʒ` everywhere**, which is right for "
+           "the native and Perso-Arabic stratum (`juma`, `joy`, `hojatxona`, "
+           "`tarjima`) and wrong for the Russian one; over the whole pack exactly "
+           "one word type is affected, `jeton`, which is /ʒetɔn/. And **`ng` is "
+           "/ŋ/ where a Russian loan has a real /nɡ/**: `ingalator` comes out "
+           "[iŋɡalatɔrim] by the before-`a` rule and so is right by luck, but a loan "
+           "with `ngi` or `ngo` in it would not be."),
 }
 
 

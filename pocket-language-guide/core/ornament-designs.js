@@ -322,6 +322,116 @@ export const LANGUAGE_MOTIFS = /** @type {const} */ ({
   // (pa), `kasuti` (kn), `dhaka` (ne) and `banig` (fil) are five already -- the
   // same count that refused Georgia's Khevsur cross-stitch and Finland's ryijy.
   hy: 'trchnagir',
+  // `tatahan` is the punchwork of wayang kulit -- the chisel half of *tatah
+  // sungging*, the craft that makes a shadow puppet -- so it is an art direction
+  // rather than an object, which is this table's own rule. Its mark is **a row of
+  // punched holes that changes shape along a contour**: `bubukan` rounds, then
+  // `inten-inten` diamonds, then `untu walang` grasshopper teeth, each register
+  // graded from large to small as the edge turns, with `tratasan` dashes cut
+  // parallel inside them. Nothing in it is a drawn line -- the contour the
+  // punches follow is never inked, because in a wayang it is the light coming
+  // through that draws it.
+  //
+  // **The refusal comes first, because batik is what a Javanese entry reaches for
+  // and batik is already held.** `kawung` (id) *is* Javanese batik -- four
+  // wax-resist ovals, named as such in this table three times over -- so a
+  // `batik` motif for Javanese would be the same art under a second name, which
+  // is the rule that refused Croatia's `pleter`, Telugu's `muggu`, Gujarat's
+  // `sathiya` and Karnataka's `rangoli`. Two further Javanese candidates fall to
+  // it as well: **`wayang` drawn as the puppet** would be a third figure motif
+  // beside `warli` (mr) and `trchnagir` (hy), and the **`gunungan`**, the
+  // flame-tipped leaf at the centre of a wayang screen, is the shape `kbach` (km)
+  // and `flame` (th) already hold. Naming the *chisel work* rather than the
+  // puppet is what gets past all three.
+  //
+  // Named against the four neighbours it could be confused with, on the mark
+  // rather than on the craft. `jali` (ur) is the other pierced motif and is the
+  // closest: a jali is a **regular** lattice cut through stone, every opening
+  // identical and set on the axes, so it reads as a field. A tatahan's punches
+  // are graded and change *kind* three times along one edge, so they read as a
+  // line. `bandhani` (gu) is the other field of small round marks, and its knots
+  // are all one size because the binding thread fixes it -- a tatahan hole is
+  // whichever chisel the worker picked up. `kolam` (ta) and `alpona` (bn) are the
+  // dot motifs, and there the dots are a scaffold the *line* loops around; here
+  // there is no line at all. And `himmeli` (fi) draws its nodes, which are straws
+  // meeting -- these are absences, which is the opposite kind of thing.
+  jv: 'tatahan',
+  // `hazorbof` (هزارباف, "thousand-weave") is the Central Asian name for the
+  // glazed-brick geometry of Timurid Samarkand and Bukhara -- the technique
+  // Golombek and Wilber's survey of Timurid architecture calls hazarbaf and the
+  // Iranian literature calls banna'i -- where the figure is made by *laying*
+  // glazed and unglazed bricks in a bond rather than by drawing, carving or
+  // dyeing anything. Shah-i-Zinda, the Registan piers, the Kalon minaret.
+  //
+  // **The mark is: the figure is quantised to the masonry module**, so no line
+  // can curve and every diagonal is an exact right-angled staircase on the
+  // bond's own grid. Nothing else in this table is quantised by the material it
+  // is made of except `matmi`, which is the first neighbour to name it against:
+  // ikat's quantisation is *ragged*, its edges feathered by picks the loom
+  // cannot place exactly, where a hazorbof step is exact because a brick is
+  // exact. `azulejo` (pt) is the other fired-clay surface and is the closest by
+  // craft, which is why the distinction is drawn on the mark: an azulejo is a
+  // unit with a figure *painted onto* it, and in hazorbof nothing is painted --
+  // the unit *is* the figure, a whole brick either glazed or bare. `minankari`
+  // (ka) is the other motif made of cells, and its cells are each cut to the
+  // figure and no two the same size, where a brick is uncuttable and every one
+  // identical. `suhozid` (hr) is the other masonry and is an *irregular*
+  // tessellation whose joints stop, where this is a regular bond whose figure
+  // runs across every course. `meander` (el) is the other motif built entirely
+  // of right angles, and a Greek key is a spiral that turns back into itself
+  // where a hazorbof lattice repeats. And the name is the last trap: it calls
+  // itself a weave, and it is not one -- `banig` (fil) and `ketupat` (ms) are
+  // interlacing, two sets of strips passing over and under, and no brick passes
+  // over or under anything.
+  //
+  // **The colour objection is the one that had to be answered first**, because
+  // it is what refused `bidri` for Kannada and the Sestine umbrella for
+  // Croatian: an art whose whole character is colour cannot survive printing as
+  // strokes. Hazorbof survives it, and for a structural reason rather than a
+  // lucky one -- its contrast is *binary and in one plane*, a glazed brick
+  // against a bare one of the same shape, so the figure is a field of marked and
+  // unmarked cells and that is exactly what a stroke drawing can carry. An
+  // inlay's bright line in a dark ground is not.
+  //
+  // **Three Uzbek motifs were refused.** `suzani`, the embroidery an Uzbek would
+  // name first, falls to the rule that refused Georgia's Khevsur cross-stitch
+  // and Finland's ryijy: `embroidery` (hu), `phulkari` (pa), `kasuti` (kn) and
+  // `dhaka` (ne) are four already. The ikat *abr* pattern is the same art `lo`
+  // holds as `matmi`, which is the rule that refused `pleter`, `muggu`,
+  // `sathiya` and `rangoli`. And `panjara`, the pierced wooden window lattice of
+  // Khiva, is `jali` (ur) in another material.
+  uz: 'hazorbof',
+  // `tarakasi` is Cuttack's silver filigree -- the GI-tagged ତାରକସି of the
+  // Kathajodi bank -- and its mark is the one thing a drawn wire does that
+  // nothing else in this table can: it **spirals to a stop**. A filigree curl is
+  // a length of wire coiled inward from its outer end and left ending in mid-air,
+  // soldered to a border and to nothing else, with no ground behind it at all.
+  //
+  // Named against the three neighbours it could be confused with, on the mark
+  // rather than on the craft. `interlace` (ar) is the closest by look and is the
+  // exact opposite by construction: strapwork whose lines never terminate, where
+  // every line here terminates and that is the whole point. `jali` (ur) is the
+  // other open figure, and a jali is material *removed* -- a grid of voids cut
+  // out of a solid slab, so its plane is still there behind the holes; a tarakasi
+  // has no plane, only added wire and air. And `minankari` (ka) is the other
+  // metalwork made of cells, and its cells are *closed* and filled with enamel,
+  // where a filigree coil is open and encloses nothing.
+  //
+  // **Two Odia motifs were refused, and neither for want of being Odishan.**
+  // `pattachitra`, the cloth-scroll painting of Raghurajpur that an Odia would
+  // name first, falls because its distinguishing mark is already claimed in as
+  // many words: `kalamkari` (te) is described above as "outlined first and filled
+  // after", drawing "a second contour inside its flower head", and that is
+  // precisely what a pattachitra's rekha and fill are. Two names for one mark is
+  // what refused `sathiya` and `rangoli`. And the **Konark wheel**, the other
+  // obvious reach, falls to this table's own preface -- "imaginative art
+  // directions, not national emblems or historical reproductions" -- which is the
+  // rule that refused Ethiopia's `meskel`: the chariot wheel is a specific
+  // twelfth-century monument, it is the Odisha state emblem, and it is printed on
+  // the twenty-rupee note. `jhoti`/`chita`, Odisha's rice-paste floor drawing,
+  // was never a candidate: `kolam` (ta) and `alpona` (bn) hold floor art and
+  // `muggu`, `sathiya` and `rangoli` were all refused for asking to be a third.
+  or: 'tarakasi',
 });
 /** @typedef {typeof LANGUAGE_MOTIFS[keyof typeof LANGUAGE_MOTIFS]} LanguageMotif */
 
@@ -373,6 +483,21 @@ function leaf(p, x, y, dx, dy, breadth) {
   const length = Math.hypot(dx, dy), nx = -dy / length * breadth, ny = dx / length * breadth;
   p.m(x, y); p.q(x + dx / 2 + nx, y + dy / 2 + ny, x + dx, y + dy);
   p.q(x + dx / 2 - nx, y + dy / 2 - ny, x, y);
+}
+/** A coil from its outer end inward, ending in mid-air -- the one mark a drawn
+ * wire makes that a cut, woven or painted line cannot. `from` is where the outer
+ * end sits, in radians, so a mirrored pair is two calls.
+ * @param {Pen} p @param {number} x @param {number} y @param {number} r
+ * @param {number} turns @param {number} from */
+function spiral(p, x, y, r, turns, from) {
+  const steps = Math.round(turns * 12);
+  p.m(x + Math.cos(from) * r, y + Math.sin(from) * r);
+  for (let i = 1; i <= steps; i += 1) {
+    const t = i / steps;
+    const a = from + t * turns * Math.PI * 2;
+    const rr = r * (1 - t * 0.85);
+    p.l(x + Math.cos(a) * rr, y + Math.sin(a) * rr);
+  }
 }
 /** @param {Pen} p @param {number} petals @param {number} radius */
 function flower(p, petals, radius) {
@@ -1003,6 +1128,53 @@ const emblems = {
     p.m(17, 58); p.l(8, 50);
     p.m(22, 55); p.l(8, 50);
   },
+  tatahan(p) {
+    // One worked edge and the eleven punches strung along it. The contour itself
+    // is deliberately not drawn: in a wayang the edge is where the light gets
+    // through, so the holes are the whole of the figure.
+    /** @param {number} t @returns {[number, number]} */
+    const at = (t) => [8 + 84 * t, 88 - 24 * t - 56 * t * t];
+    // `bubukan`, the round punch, graded down as the edge turns -- which is what
+    // separates this from `bandhani`'s one-size knots.
+    for (let i = 0; i < 4; i += 1) {
+      const [x, y] = at(i / 10), r = 7 - 0.7 * i;
+      oval(p, x, y, r, r);
+    }
+    // `inten-inten`, the diamond punch. The row changing kind partway along is
+    // the mark; a `jali` opening is the same opening the whole way across.
+    for (let i = 0; i < 4; i += 1) {
+      const [x, y] = at(0.42 + i / 12), r = 6 - 0.6 * i;
+      diamond(p, x, y, r, r * 1.35);
+    }
+    // `untu walang`, the grasshopper tooth, cut where the edge is tightest.
+    for (let i = 0; i < 3; i += 1) {
+      const [x, y] = at(0.78 + i / 14), r = 5 - 0.5 * i;
+      p.m(x - r, y + r); p.l(x, y - r); p.l(x + r, y + r); p.close();
+    }
+    // `tratasan`, the dash, cut as a second register parallel inside the first.
+    // It is what makes this a worked *edge* rather than a line of dots.
+    for (let i = 0; i < 4; i += 1) {
+      const [x, y] = at(0.1 + i / 8);
+      p.m(x - 11, y - 5); p.l(x - 5, y - 13);
+    }
+  },
+  hazorbof(p) {
+    // The bond. Four courses, and the joints staggered by half a brick between
+    // them, which is what makes the module rigid and the figure steppable.
+    p.m(6, 6); p.l(94, 6); p.l(94, 94); p.l(6, 94); p.close();
+    for (const y of [28, 50, 72]) { p.m(6, y); p.l(94, y); }
+    for (const [y0, y1, xs] of /** @type {[number, number, number[]][]} */ ([
+      [6, 28, [28, 50, 72]], [28, 50, [17, 39, 61, 83]],
+      [50, 72, [28, 50, 72]], [72, 94, [17, 39, 61, 83]]])) {
+      for (const x of xs) { p.m(x, y0); p.l(x, y1); }
+    }
+    // The figure, and the whole of the emblem's argument: it can only be a
+    // staircase, because a brick cannot be cut to a curve. Two of them, because
+    // one alone reads as a border and a hazorbof figure is a lattice that
+    // repeats -- and both run on the bond's own lines rather than across them.
+    p.m(6, 72); p.l(28, 72); p.l(28, 50); p.l(50, 50); p.l(50, 28); p.l(72, 28); p.l(72, 6);
+    p.m(28, 94); p.l(50, 94); p.l(50, 72); p.l(72, 72); p.l(72, 50); p.l(94, 50);
+  },
   minankari(p) {
     // A cloisonné plaque: one bent wire, closed cells, nothing crossing anything.
     // The outline is a pointed oval rather than a circle -- no other emblem here is
@@ -1021,6 +1193,20 @@ const emblems = {
     p.m(50, 83); p.l(50, 94);
     p.m(17, 63); p.l(31, 61);
     p.m(83, 37); p.l(69, 39);
+  },
+  tarakasi(p) {
+    // A mirrored pair of filigree coils and the frame wire they are soldered into.
+    // Each coil runs in from the side and **stops**, which is what separates this
+    // from `interlace`'s endless strapwork; the field behind them is left empty,
+    // which is what separates it from `jali`'s pierced plane. Drawn as a pair
+    // because a real tarakasi panel is filled by soldering curls in facing pairs
+    // into the border -- a single curl would read as one of `acanthus`'s scrolls.
+    spiral(p, 31, 50, 19, 1.75, Math.PI);
+    spiral(p, 69, 50, 19, 1.75, 0);
+    // The border, and it earns its place rather than framing for the sake of it: a
+    // curl has to be soldered to something, and without the closed wire the open
+    // field reads as an unfinished drawing instead of as air.
+    p.m(50, 7); p.q(97, 50, 50, 93); p.q(3, 50, 50, 7);
   },
 };
 
@@ -1153,6 +1339,26 @@ const tracery = {
     p.m(76, 34); p.l(92, 24);
     p.m(75, 44); p.l(92, 24);
   },
+  // The grading and the inner dashes go: at divider height a 7pt punch and a 5pt
+  // one are the same mark and the dashes close up against the rounds. What has to
+  // survive is that the row **changes shape partway along**, since a `bandhani`
+  // tracery is rings of one size on a diagonal and a `himmeli` tracery is nodes
+  // threaded on a line.
+  tatahan(p) {
+    for (const x of [12, 32, 52]) oval(p, x, 50, 9, 9);
+    for (const x of [74, 92]) diamond(p, x, 50, 6, 11);
+  },
+  // Two courses, one staggered joint against each, and the step between them.
+  // Four courses and their full bond close into a grey block at divider height,
+  // so what is kept is the least that still says *masonry with a staircase in
+  // it*: two course lines say bond, two offset joints say staggered, and the
+  // step is the figure. It has to survive because a `meander` tracery is also
+  // all right angles, and the difference is that a key turns back on itself.
+  hazorbof(p) {
+    p.m(6, 26); p.l(94, 26); p.m(6, 74); p.l(94, 74);
+    p.m(26, 6); p.l(26, 26); p.m(70, 74); p.l(70, 94);
+    p.m(6, 74); p.l(30, 74); p.l(30, 50); p.l(58, 50); p.l(58, 26);
+  },
   // Two closed cells and the tie between them, the nesting dropped: at divider
   // height three concentric wires close into a blot. What has to survive is that
   // the cells are *closed* and that nothing crosses, since an `interlace` tracery
@@ -1161,6 +1367,15 @@ const tracery = {
     p.m(28, 6); p.q(48, 50, 28, 94); p.q(8, 50, 28, 6);
     p.m(72, 6); p.q(92, 50, 72, 94); p.q(52, 50, 72, 6);
     p.m(48, 50); p.l(52, 50);
+  },
+  tarakasi(p) {
+    // One coil and the wire it runs in on, the border dropped: at divider height a
+    // closed cell around a spiral closes into a blot, which is the trade `kasuti`
+    // makes with its courses and `matmi` with its steps. What has to survive is
+    // that the line **ends**, since an `interlace` tracery is two overlapping
+    // diamonds and a `minankari` tracery is two closed cells.
+    p.m(4, 50); p.l(24, 50);
+    spiral(p, 55, 50, 30, 1.5, Math.PI);
   },
 };
 
@@ -1195,7 +1410,10 @@ export function languageCorner(motif, p) {
     'embroidery', 'polder', 'telsem', 'kasuti', 'suhozid',
     // `himmeli` joins for `polder`'s and `suhozid`'s reason: every stroke in it
     // is straight, so a curved border would be the only curve on the card.
-    'himmeli'].includes(motif);
+    'himmeli',
+    // `hazorbof` joins for the same reason and with the strongest claim of any
+    // of them: a curve is the one thing its material cannot make.
+    'hazorbof'].includes(motif);
   if (angular) {
     p.m(7, 93); p.l(7, 7); p.l(93, 7);
     p.m(14, 65); p.l(14, 14); p.l(65, 14);

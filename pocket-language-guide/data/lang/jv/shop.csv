@@ -1,0 +1,32 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+payment-receipt.pay-by-card,Mbayar mawi kertu?,,ˈmbajar ˈmawi kərˈtu,,2,jv-agent-v1;ipa=jv-g2p
+payment-receipt.pay-cash,Mbayar tunai?,,ˈmbajar tuˈnai,,2,jv-agent-v1;ipa=jv-g2p
+payment-receipt.pay-by-qr-code,Mbayar mawi QRIS?,,ˈmbajar ˈmawi kris,QRIS = the national QR standard,2,jv-agent-v1;ipa=jv-g2p+loan
+payment-receipt.a-receipt-please,Nyuwun struk,Kuitansi,ˈɲuwʊn strʊʔ,,2,jv-agent-v1;ipa=jv-g2p
+payment-receipt.please-write-the-number,"Nyuwun tulung, nyerat angkanipun",,"ˈɲuwʊn ˈtulʊŋ, ɲəˈrat aŋkaˈnipʊn",,2,jv-agent-v1;ipa=jv-g2p
+payment-receipt.how-much-in-total,Sedayanipun pinten?,,sədajaˈnipʊn ˈpɪntən,,2,jv-agent-v1;ipa=jv-g2p
+payment-receipt.can-we-pay-separately,Kénging mbayar piyambak-piyambak?,,ˈkeŋɪŋ ˈmbajar pijambaʔpiˈjambaʔ,,2,jv-agent-v1;ipa=jv-g2p
+payment-receipt.is-tax-included,Sampun kalebet pajeg?,,ˈsampʊn kaləˈbət ˈpadʒəɡ,,2,jv-agent-v1;ipa=jv-g2p
+payment-receipt.my-card-was-declined,Kertu kula mboten dipuntampi,,kərˈtu ˈkulɔ ˈmbɔtən dipʊnˈtampi,,2,jv-agent-v1;ipa=jv-g2p
+payment-receipt.the-bill-is-wrong,Kadosipun tagihanipun kirang leres,,kadoˈsipʊn taɡihaˈnipʊn ˈkiraŋ ləˈrəs,,2,jv-agent-v1;ipa=jv-g2p
+payment-receipt.i-already-paid,Kula sampun mbayar,,ˈkulɔ ˈsampʊn ˈmbajar,,2,jv-agent-v1;ipa=jv-g2p
+shopping.i-am-just-looking,Kula namung ningali rumiyin,,ˈkulɔ ˈnamʊŋ niˈŋali ruˈmijɪn,,2,jv-agent-v1;ipa=jv-g2p
+shopping.how-much-is-this,Menika pinten?,,məˈnikɔ ˈpɪntən,,2,jv-agent-v1;ipa=jv-g2p
+shopping.that-is-too-expensive,Awis sanget,Kelarangen,ˈawɪs ˈsaŋət,,2,jv-agent-v1;ipa=jv-g2p
+shopping.can-it-be-a-little-cheaper,Kénging kirang sekedhik?,,ˈkeŋɪŋ ˈkiraŋ səkəˈɖɪʔ,,2,jv-agent-v1;ipa=jv-g2p
+shopping.is-there-a-discount,Wonten diskon?,,ˈwɔntən ˈdɪskɔn,,2,jv-agent-v1;ipa=jv-g2p
+shopping.where-do-i-pay,Mbayar wonten pundi?,,ˈmbajar ˈwɔntən ˈpʊndi,,2,jv-agent-v1;ipa=jv-g2p
+shopping.i-will-take-this,Kula mendhet menika,,ˈkulɔ mənˈɖət məˈnikɔ,,2,jv-agent-v1;ipa=jv-g2p
+shopping.what-is-this,Menika menapa?,,məˈnikɔ məˈnɔpɔ,,2,jv-agent-v1;ipa=jv-g2p
+shopping.where-can-i-buy,Tumbas {} wonten pundi?,,ˈtʊmbas {} ˈwɔntən ˈpʊndi,,2,jv-agent-v1;ipa=jv-g2p
+shopping.do-you-have-this-in-stock,Taksih wonten stokipun?,,ˈtaʔsɪh ˈwɔntən stoˈkipʊn,,2,jv-agent-v1;ipa=jv-g2p
+shopping.two-of-these,"Ingkang menika kalih, nggih",,"ˈɪŋkaŋ məˈnikɔ ˈkalɪh, ŋɡɪh",,2,jv-agent-v1;ipa=jv-g2p
+shopping.what-is-it-made-of,Menika bahanipun menapa?,,məˈnikɔ bahaˈnipʊn məˈnɔpɔ,,2,jv-agent-v1;ipa=jv-g2p
+color-size-returns.do-you-have-another-color,Wonten warni sanès?,,ˈwɔntən ˈwarni ˈsanɛs,,2,jv-agent-v1;ipa=jv-g2p
+color-size-returns.do-you-have-another-size,Wonten ukuran sanès?,,ˈwɔntən uˈkuran ˈsanɛs,,2,jv-agent-v1;ipa=jv-g2p
+color-size-returns.may-i-try-it-on,Kénging dipuncoba?,,ˈkeŋɪŋ dipʊnˈtʃɔbɔ,,2,jv-agent-v1;ipa=jv-g2p
+color-size-returns.can-i-return-it,Kénging dipunwangsulaken?,,ˈkeŋɪŋ dipunwaŋsuˈlakən,,2,jv-agent-v1;ipa=jv-g2p
+color-size-returns.can-i-exchange-it,Kénging dipunlintu?,,ˈkeŋɪŋ dipuˈnlɪntu,,2,jv-agent-v1;ipa=jv-g2p
+color-size-returns.do-you-have-a-bag,Wonten kanthonganipun?,Krèsèk,ˈwɔntən kanʈoŋaˈnipʊn,,2,jv-agent-v1;ipa=jv-g2p
+tax-refund.can-i-get-a-tax-refund,Kénging nyuwun wangsulan PPN?,,ˈkeŋɪŋ ˈɲuwʊn waŋˈsulan pepeˈɛn,PPN = VAT,2,jv-agent-v1;ipa=jv-g2p+loan
+tax-refund.is-tax-free-shopping-available,Wonten wangsulan pajeg kanggé wisatawan?,VAT refund · Bébas pajeg,ˈwɔntən waŋˈsulan ˈpadʒəɡ ˈkaŋɡe wisaˈtawan,,2,jv-agent-v1;ipa=jv-g2p

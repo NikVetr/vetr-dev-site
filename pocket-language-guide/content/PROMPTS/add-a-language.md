@@ -643,3 +643,118 @@ no rule for Czech's own `l̩` and `r̩`, and Croatian's first `--gaps` run repor
 of them. The general form: a sibling's key set is missing precisely the phonemes the
 sibling contributes, so check the new table against the *union* of every table's keys
 and not against the one it was copied from.
+
+**Javanese went in after Croatian's argument and not the batch table's** — 82
+million speakers, the largest language with no pack, larger than seven that have
+one, and Latin-written, so the font machinery costs nothing: 102 codepoints
+against sixteen Latin faces, 0 missing, and `coverage("latin")` the same 5,821
+either way. Three of its findings generalise.
+
+**A politeness system that changes the *lexicon* has to be decided on the
+asymmetry of the error, and the corpus already has the axis to carry it.**
+Javanese has ngoko, madya and krama, and they are different words rather than
+different endings — *mangan*/*nedha*/*dhahar*, *kowé*/*sampéyan*/*panjenengan* —
+so a mixed card is incoherent rather than merely impolite. The deciding argument
+is not which level is most usual but **which one cannot fail badly**: krama to a
+stranger is at worst over-formal, which from a foreigner reads as careful, where
+ngoko gives offence and madya makes a claim about the addressee's standing. Madya
+is also the one a codified pack cannot have: *Baoesastra Djawa* and the
+*Bausastra Jawa* tag entries `ng`, `kr` and `ki` and there is no madya tag, so
+those rows would be guessed. And the level then rides on **`register` and the
+neutral/polite cluster pairs the bank already has** — `pronouns-verbs.you` /
+`.you-polite` and `social-basics.hello` / `.hello-polite` — rather than on
+anything new; `slang` and `profanity` stay ngoko because the concepts themselves
+are marked `casual`/`vulgar`/`taboo` and krama has no casual register. **The one
+thing refused was a `note` concept** saying all this on the card: a note prints
+source-side, so it would need 51 glosses, 49 of them prose about Javanese in
+languages the author cannot source — 49 rows that *look* reviewed, which is
+Burmese's objection in another shape.
+
+**Where no espeak voice exists, the orthography is the lever, and writing the
+diacritic in `text` is a toolchain decision rather than a preference.** Javanese
+running text often drops the é/è marks; dictionaries and schoolbooks keep them.
+With no `jv` voice in either library this build can reach, the `ipa` column is a
+hand table over the spelling — and /ə e ɛ/ is **not recoverable from a bare `e`**
+(`sèwu` [sɛwu] and `télu` [telu] are both open syllables), so an unmarked pack
+would have shipped a wrong vowel to every reader table. Write the marks. The
+residual risk is then bounded and reportable: closed-syllable laxing runs on top,
+so a closed syllable is [ɛ] whichever mark was typed, and only the open-syllable
+marks are a reviewer question.
+
+**And the method for a candidate allophonic rule is to run it over the finished
+pack's own words and keep only the half that survives.** Javanese lowers a penult
+vowel before a lax one, and both statements of it fail their own examples:
+"before a lax vowel of the same quality" gets `kuping` [kʊpɪŋ] wrong, and "before
+a closed syllable" turns `tiyang`, `sirah` and `mripat` into *[tɪyaŋ], *[sɪrah],
+*[mrɪpat]. Run over the pack, the **/o/ half is right on all 41 words that can
+reach it** (`mboten` 59 times, `apotik`, `laporan`, `mobil`, `hotèl`) and the
+/i u/ half is refuted, so the rule ships as /o/ only and the rest is disclosed in
+`GRADE["jv"]`. Czech's `slot: onset` reversal is the same lesson: measure the
+candidate against the corpus before writing it, and be willing to ship half of it.
+
+**One more for the motif table: the art your language would name first can be
+held by a *neighbour*, under a local name.** `batik` is the obvious Javanese
+motif and it is taken — `id` holds `kawung`, which *is* Javanese batik, four
+wax-resist ovals, and the table says so in three separate entries. That is
+`pleter` again but harder to see, because the clash is not a synonym. `wayang`
+drawn as the puppet falls to `warli` and `trchnagir` holding figures, and the
+`gunungan` falls to `kbach` and `flame` holding the leaf-and-flame. Naming the
+*chisel work* instead — `tatahan`, the graded punch-holes of a shadow puppet's
+edge — clears all three, and its own mark (a row of voids that changes shape
+along an undrawn contour) is named against `jali`, `bandhani`, `kolam` and
+`himmeli`.
+
+**Odia went in as language 54, the ninth Brahmic script, and it is the first
+*Indic* script attempt to pass** — so its numbers are here rather than only in
+tmp/or/odia.md, because Burmese and Sinhala left the impression that a complex
+script cannot. Run Georgian's way, `orya` comes back with **0 throws and an
+advance identical to 0 font units** over 12,454 real tokens, a 49,442-string NFC
+cube and 39,191 reader-table strings, in both weights and in the shipped subset.
+And for the right reason: `orya` and `ory2` are **in** fontkit's script-to-shaper
+map, pointing at the **Indic** shaper — the one `beng deva gujr guru knda mlym
+taml telu` already use — and HarfBuzz picks the same one under the same `ory2`
+tag, traced under `set_message_func`. Sinhala's `sinh` goes to the Universal
+shaper, which is where its refusal came from; an Indic-shaper script does not go
+there. Nor is the pass vacuous, and an abugida gives the largest margin of the
+three clean scripts: **GSUB changes the glyph run on 3,670 of 4,000 real tokens
+(91.8%)** and GPOS positions **2,977 glyphs across 55.1%** of them, where Georgian
+had to rest on `kern` and Armenian on `liga`.
+
+Four findings from it generalise.
+
+- **A glyph-run difference is not a defect until you measure its magnitude.** 20
+  of the 12,454 tokens pick a different subjoined-ra alternate, and Noto Sans
+  Oriya's 30 copies of that glyph are **outline-identical** — same contour, same
+  bbox, same advance — so the entire observable effect is **6 font units of
+  vertical offset, 0.006em, with no advance change at all**. `tmp/or/bound.py`
+  reports max |dx|, max |dy| and max |d-advance| in font units rather than a
+  count, which is what turned a scary 931-string cube number into a verdict. And
+  it is a **fifth** fontkit finding rather than the first one again: the selector
+  is a format-2 class chain context with `IgnoreMarks` and a *one*-glyph
+  backtrack, so tmp/km/patch-fk.py's reversal is a no-op here — applied, measured,
+  still 20.
+- **The reader column can be taller than the pack, and for Odia it is.** Every
+  script before this measured `leading_factor` on its own rows; Odia's respellings
+  of the other 52 languages reach **1.717em** against the pack's 1.329em, because
+  a respelled Arabic or Amharic cluster stacks three and four subjoined consonants
+  where no Odia word does. Measured the same way, every shipped factor already
+  covers its own respell column (Hebrew 1.20/1.149, Georgian 1.05/1.026, Armenian
+  1.12/1.019, Telugu 1.78/1.790, Bengali 1.45/1.517 with one string clipping), so
+  the honest number is **1.75**. Measure the respell column, not just the pack.
+- **The XOR ratio cannot pick a floor for a dot.** `calibrate.py`'s
+  differing-pixels-over-ink fraction is **scale-invariant** where the contrast is a
+  mark and its base, so Odia's ଢ/ଢ଼ reads 0.036–0.045 at every candidate size and
+  says nothing. `tmp/or/floor2.py` measures the feature once at 1000px per em and
+  multiplies: the nukta dot is **0.099em**, against Gujarati's 0.109, Devanagari's
+  0.110 and Bengali's 0.120, all three of which ship **5.4** — so Odia takes 5.4,
+  where at 0.535 × 0.540pt the dot is 2.7× the 0.20pt this paper holds. (Rendering
+  each candidate point size directly, as tmp/si/floor.py does, is unstable on a
+  subset at 37–50px per em and reported two contradictory numbers for one pair.)
+- **"Prefer the repair that adds no new symbol" is worth reading before choosing
+  an IPA notation, not after.** espeak's Odia gives `ɟ` for ଜ and `dʒ` for the
+  homophonous ଯ, so one had to go; folding to `dʒʰ` is better IPA and
+  `phonemesOf` splits it into `dʒ` + `ʰ`, which **nine reader tables have no rule
+  for** — gu, hy, ka, kn, ml, pa, pl, ta and te each printed a bare modifier
+  letter on eight cells until the fold was turned round to `dʒ → ɟ`, which is what
+  eight Indic packs already write. Klingon's `ɬ` in miniature, and the all-readers
+  `--gaps` sweep is what caught it.

@@ -1,0 +1,15 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+slang.thats-good,Apik,Kèrèn,ˈapɪʔ,good -- mild praise,2,jv-agent-v1;ipa=jv-g2p
+slang.thats-great,Mantep tenan!,Jos!,ˈmantəp təˈnan,really solid,2,jv-agent-v1;ipa=jv-g2p
+slang.i-love-it,Seneng banget!,,səˈnəŋ ˈbaŋət,I really like it,2,jv-agent-v1;ipa=jv-g2p
+slang.thats-bad,Kurang apik,,ˈkuraŋ ˈapɪʔ,not good enough,2,jv-agent-v1;ipa=jv-g2p
+slang.delicious,Énak tenan!,,ˈenaʔ təˈnan,really tasty,2,jv-agent-v1;ipa=jv-g2p
+slang.thats-pricey,Larang tenan!,,ˈlaraŋ təˈnan,really expensive,2,jv-agent-v1;ipa=jv-g2p
+slang.exactly,Bener banget!,Ya kuwi!,bəˈnər ˈbaŋət,exactly right,2,jv-agent-v1;ipa=jv-g2p
+slang.no-worries,Ora apa-apa,,ˈɔrɔ ɔpɔˈɔpɔ,it is nothing,2,jv-agent-v1;ipa=jv-g2p
+slang.youre-welcome,Padha-padha,Ora usah,pɔɖɔˈpɔɖɔ,same to you -- the casual reply to thanks,2,jv-agent-v1;ipa=jv-g2p
+slang.seriously,Tenané?,Mosok?,təˈnane,really? -- surprise,2,jv-agent-v1;ipa=jv-g2p
+slang.im-good-thanks,"Ora, suwun",,"ˈɔrɔ, ˈsuwʊn","no, thanks",2,jv-agent-v1;ipa=jv-g2p
+slang.lets-go,Ayo!,Yuk!,ˈɔjɔ,come on,2,jv-agent-v1;ipa=jv-g2p
+slang.cheers,Ayo diombé!,,ˈɔjɔ diˈɔmbe,"come on, drink up -- Javanese has no traditional toast",2,jv-agent-v1;ipa=jv-g2p
+slang.see-you,Dhisik ya!,,ˈɖisɪʔ jɔ,going on ahead -- casual parting,2,jv-agent-v1;ipa=jv-g2p

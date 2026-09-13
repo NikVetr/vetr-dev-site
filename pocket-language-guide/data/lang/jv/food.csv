@@ -1,0 +1,30 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+dietary-needs.no-meat,Tanpa daging,Mboten mawi daging,ˈtanpɔ ˈdaɡɪŋ,,2,jv-agent-v1;ipa=jv-g2p
+dietary-needs.no-eggs,Tanpa tigan,Mboten mawi tigan,ˈtanpɔ ˈtiɡan,tigan is the krama word for an egg,2,jv-agent-v1;ipa=jv-g2p
+dietary-needs.not-spicy,Mboten pedhes,Mboten mawi sambel,ˈmbɔtən pəˈɖəs,,2,jv-agent-v1;ipa=jv-g2p
+dietary-needs.less-spicy,Pedhesipun sekedhik kémawon,,pəɖəˈsipʊn səkəˈɖɪʔ keˈmawɔn,,2,jv-agent-v1;ipa=jv-g2p
+dietary-needs.no-peanuts,Tanpa kacang tanah,,ˈtanpɔ ˈkatʃaŋ ˈtanah,kacang alone is any bean or nut,2,jv-agent-v1;ipa=jv-g2p
+dietary-needs.no-nuts,Tanpa sedaya kacang-kacangan,,ˈtanpɔ səˈdɔjɔ katʃaŋkaˈtʃaŋan,,2,jv-agent-v1;ipa=jv-g2p
+dietary-needs.no-seafood,Tanpa ulam seganten,Tanpa urang lan kerang,ˈtanpɔ ˈulam səˈɡantən,ulam is the krama word for fish,2,jv-agent-v1;ipa=jv-g2p
+dietary-needs.i-am-vegetarian,Kula vegetarian murni,"Tanpa daging, ayam, ulam",ˈkulɔ fəɡətaˈrian ˈmʊrni,"murni signals strict, not less meat",2,jv-agent-v1;ipa=jv-g2p
+dietary-needs.i-am-vegan,Kula vegan,"Tanpa daging, tigan, susu",ˈkulɔ fəˈɡan,,2,jv-agent-v1;ipa=jv-g2p
+dietary-needs.i-do-not-eat,Kula mboten nedha {},,ˈkulɔ ˈmbɔtən nəˈɖɔ {},nedha is the krama word for eating,2,jv-agent-v1;ipa=jv-g2p
+dietary-needs.i-am-allergic-to,Kula alergi {},,ˈkulɔ alərˈɡi {},,2,jv-agent-v1;ipa=jv-g2p
+dietary-needs.does-it-contain-fish-stock,Wonten trasi utawi kaldu ulam?,,ˈwɔntən ˈtrasi uˈtawi ˈkaldu ˈulam,trasi = fermented shrimp paste,2,jv-agent-v1;ipa=jv-g2p
+dietary-needs.does-it-contain-pork-stock,Kuahipun mawi kaldu babi?,Wonten kaldu utawi balung babi?,kuaˈhipʊn ˈmawi ˈkaldu ˈbabi,,2,jv-agent-v1;ipa=jv-g2p
+dietary-needs.i-have-a-severe-allergy-to,Kula alergi awrat dhateng {},,ˈkulɔ alərˈɡi ˈawrat ˈɖatəŋ {},,2,jv-agent-v1;ipa=jv-g2p
+food-ordering.table-for-two,Méja kanggé tiyang kalih,,ˈmedʒɔ ˈkaŋɡe ˈtijaŋ ˈkalɪh,,2,jv-agent-v1;ipa=jv-g2p
+food-ordering.is-a-table-available,Wonten méja kothong?,,ˈwɔntən ˈmedʒɔ ˈkɔʈɔŋ,,2,jv-agent-v1;ipa=jv-g2p
+food-ordering.menu-please,Nyuwun daftar dhaharanipun,Nyuwun menunipun,ˈɲuwʊn ˈdaftar ɖaharaˈnipʊn,,2,jv-agent-v1;ipa=jv-g2p
+food-ordering.i-want-this,Kula badhé menika,,ˈkulɔ ˈbaɖe məˈnikɔ,,2,jv-agent-v1;ipa=jv-g2p
+food-ordering.do-you-have-drinking-water,Wonten toya pethak?,,ˈwɔntən ˈtɔjɔ pəˈʈaʔ,toya pethak = plain drinking water,2,jv-agent-v1;ipa=jv-g2p
+food-ordering.to-go-please,"Dipunbungkus, nggih",,"dipʊnˈbʊŋkʊs, ŋɡɪh",,2,jv-agent-v1;ipa=jv-g2p
+food-ordering.check-please,Nyuwun bonipun,Nyuwun strukipun,ˈɲuwʊn boˈnipʊn,,2,jv-agent-v1;ipa=jv-g2p
+food-ordering.does-it-contain,Menika mawi {}?,,məˈnikɔ ˈmawi {},"try: babi, angciu, trasi",2,jv-agent-v1;ipa=jv-g2p
+food-ordering.is-this-vegetarian,Menika vegetarian?,,məˈnikɔ fəɡətaˈrian,,2,jv-agent-v1;ipa=jv-g2p
+food-ordering.what-do-you-recommend,Ingkang éca mriki menapa?,,ˈɪŋkaŋ ˈetʃɔ ˈmriki məˈnɔpɔ,,2,jv-agent-v1;ipa=jv-g2p
+food-ordering.water-please,Nyuwun toya pethak,,ˈɲuwʊn ˈtɔjɔ pəˈʈaʔ,,2,jv-agent-v1;ipa=jv-g2p
+food-ordering.can-a-vegetarian-eat-this,"Menika mawi daging, ulam, utawi trasi?",,"məˈnikɔ ˈmawi ˈdaɡɪŋ, ˈulam, uˈtawi ˈtrasi",,2,jv-agent-v1;ipa=jv-g2p
+dietary-needs.no-pork,Tanpa babi,Tanpa babi lan gajih babi,ˈtanpɔ ˈbabi,gajih babi = lard,2,jv-agent-v1;ipa=jv-g2p
+dietary-needs.is-this-halal,Menika halal?,Wonten sertifikat halal?,məˈnikɔ ˈhalal,logo: BPJPH (was MUI),2,jv-agent-v1;ipa=jv-g2p
+dietary-needs.does-it-contain-pork-fat,Masakipun mawi gajih babi?,Wonten lisah babi utawi gajih babi?,masaˈkipʊn ˈmawi ˈɡadʒɪh ˈbabi,,2,jv-agent-v1;ipa=jv-g2p

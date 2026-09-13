@@ -2199,3 +2199,184 @@ recorded in the `targets.hr` note where whoever reads that block will see it.
 - **The `ɕ`/`ʑ` merge onto š and ž** costs Mandarin and Polish a distinction the
   affricates keep. There is no letter between š and s in Croatian and no repair
   inside the alphabet.
+
+## The fifty-second reader: Javanese, and the alphabet that already spells the retroflexes
+
+**Javanese has no published foreign-name transcription standard and, unlike
+Croatian, no lexicographic slot for one either.** Croatian's gap was Czech's --
+no standard, but the *Hrvatska enciklopedija* prints a bracketed pronunciation
+beside a foreign headword, so the practice exists even where the rule does not.
+Javanese has neither half. Poerwadarminta's *Baoesastra Djawa* (1939) and the
+Balai Bahasa Yogyakarta *Bausastra Jawa* (2011) are monolingual dictionaries of
+Javanese words; neither transcribes a foreign name, and there is no Javanese
+equivalent of Kopaliński's brackets or the *Akademický slovník cizích slov*. The
+one document with authority over the letters is the **Pedoman Umum Ejaan Bahasa
+Jawa Huruf Latin yang Disempurnakan** (Balai Bahasa, 2006), and it is an
+orthography rather than a transcription standard -- exactly Indonesian's EYD
+situation, which is why this table is adapted from `id__id-ID.json` and says so
+in its own `derives_from` rather than claiming a source it has not got.
+
+**What Javanese brings that Indonesian cannot is two distinctions its alphabet
+already carries**, and both are gains rather than preferences:
+
+- **The three front and central vowels come out apart.** Javanese writes the
+  pepet as bare `e`, /e/ as `é` and /ɛ/ as `è`, and every Javanese dictionary
+  and schoolbook prints all three. Indonesian's table has to spell /e/ and /ɛ/
+  the same `e` and reserve `ê` for the pepet, and its legend spends its one line
+  explaining that. Javanese spends no line on it: `é` `è` `e` are ordinary
+  spelling, and the reader gets three vowels where the Indonesian reader gets
+  two. It is also why the `jv` pack's own `text` column is written with the
+  marks -- see `GRADE["jv"]` and tmp/jv/decisions.md §2.
+- **The retroflex stops come out apart from the dentals**, because `th` and `dh`
+  are Javanese letters. `ʈ` is 3,158 cells of this corpus and `ɖ` 1,853, nearly
+  all of them the nine Indic packs, and every other Latin reader here folds both
+  onto t and d. This is the same shape of finding as Croatian's ć/đ and lj/nj: a
+  distinction the alphabet was already making, costing the table nothing.
+
+**And the price of the second one is stated rather than hidden.** Because `th` is
+the retroflex letter in Javanese, an aspirated /tʰ/ cannot be spelled `th` -- a
+Hindi reader's instinct and an English reader's alike -- so aspiration is dropped
+throughout, `tʰ` to t and `kʰ` to k. That is Indonesian's answer and costs the
+same as it costs there, Javanese having no aspirated series of its own to hear it
+with. The trade is recorded in the table's third `deviations` entry because it is
+the one place this table is *worse* than a naive one would look.
+
+Everything else follows Indonesian's table unchanged and for Indonesian's stated
+reasons: /θ/ and /ð/ to s and z (KBBI's own Arabic loans have already decided it
+and Javanese inherits the loans), `ʃ` to sy, `x` to kh, `ɲ` to ny, `ŋ` to ng, the
+Mandarin unaspirated series to the voiced letters under `unless_inventory`, and
+the `after_out` offglide rules. The syllable separator is the full stop, and the
+hyphen is refused for Indonesian's three reasons plus one of Javanese's own:
+reduplication is if anything commoner here (*apa-apa*, *sami-sami*,
+*undhak-undhakan*) and a Javanese hyphen also separates a base from a bound
+suffix in careful writing, which a respelling has no way to mean.
+
+`--gaps` is at zero over all fifty-one ready targets on the first run, and
+`--units` returns the identical 49-phoneme decomposition list `id` returns, which
+is the check that the adaptation changed the three things it meant to and nothing
+else.
+
+### Still unverified, carried forward
+
+- **Whether a Javanese reader accepts `dh`/`th` for a foreign retroflex** is the
+  reviewer question, and it is Croatian's `đ` question in another alphabet: the
+  letters are unambiguously Javanese, but they are native letters being asked to
+  spell a Hindi or Tamil sound rather than a Javanese one.
+- **`é` against `è` on an open syllable** is the other one, and it is the same
+  question the pack's own `text` column raises. A closed syllable is [ɛ] whichever
+  mark was written, so the risk is confined to open syllables -- but there the
+  mark is the vowel.
+- **The ejectives and `ɬ`** lose their distinguishing feature, Croatian's and
+  Czech's decision for their reason: Javanese has neither series and there is no
+  repair inside the alphabet. The 212 Amharic and Hausa `kʼ` cells print as a
+  plain k here too.
+
+## The fifty-first reader: Uzbek, and an alphabet that spells six things nobody else can
+
+**Uzbek has no published foreign-name pronunciation key**, and the shape of the
+gap is Croatian's rather than Turkish's: there is no Uzbek *Yazım Kılavuzu* §08
+sanctioning a bracketed *okunuş*, and no Uzbek Magay. What exists instead, and
+what this table is built on, is the **orthographic practice for writing foreign
+names**, which is sound-keyed rather than spelling-keyed and is attested in bulk.
+Three sources for it: the **«Oʻzbek tilining asosiy imlo qoidalari»**, the
+official orthography approved by Cabinet of Ministers resolution No. 339 of
+24 August 1995 alongside the Latin alphabet itself, whose rules for *oʻzlashma
+soʻzlar* govern how a borrowed word is written; the
+**«Oʻzbekiston milliy ensiklopediyasi»** (Toshkent, 2000–2006), whose headword
+practice is the de facto standard — *Shekspir, Vashington, Chikago, Myunxen,
+Gyote, Nyu-York, Xiroshima, Pekin*; and the **«Oʻzbek tilining imlo lugʻati»**,
+which records the same forms lexically. Where a sound reaches Uzbek only through
+a loanword, the loanword is the evidence, and each such rule names its own word
+in the table's `approximations`.
+
+**The finding is that the 1995 alphabet spells six things no other Latin reader
+in this corpus can**, which is Croatian's finding and a longer list, because the
+alphabet was designed for a Turkic language with a Perso-Arabic loan stratum:
+
+- **`q` is `q`** — 367 cells of Arabic, Persian, Urdu, Georgian and Klingon that
+  `hr`, `cs`, `pl`, `sv`, `fi` and `tr` all spell `k`.
+- **`x` and `h` are two letters**, so /x/ (2,354 cells) and /h/ (8,250) do not
+  merge. Croatian spends its single `h` on both, Czech spends `ch`, English
+  spends `kh`.
+- **`gʻ` is a letter for a voiced velar fricative**, so /ɣ/ is written rather
+  than approximated — and it is the *historically exact* correspondence rather
+  than a nearest fit, Uzbek's `gʻ` continuing the Arabic ghayn directly
+  (`gʻalaba` < غلبة, `bogʻ` < باغ).
+- **`ng` is the digraph for /ŋ/**, so unlike Turkish's `ng` — whose own
+  `approximations` note records that it "buys an unavoidable extra [g]" — it buys
+  nothing. 5,109 cells.
+- **`ʼ`, the tutuq belgisi, is a letter for the glottal stop**, so /ʔ/ (2,446
+  cells) is written rather than dropped, and Arabic /ʕ/ (224) takes it too —
+  which is exactly what Uzbek already does with the hamza and the ayn of its own
+  Arabic stratum, in *sanʼat*, *maʼno*, *taʼlim* and *aʼlo*. Every other Latin
+  table in the corpus drops both.
+- **The ejective series keeps its glottal release** — `kʼ pʼ tʼ qʼ tsʼ tʃʼ sʼ`,
+  1,040 cells of Georgian, Amharic and Hausa — because `Cʼ` is an ordinary Uzbek
+  letter sequence read [Cʔ], which is nearer to an ejective than the plain stop
+  `hr` and `cs` print there. Georgian's `qʼ` is the one *sequence* new to the
+  corpus and is checked with `--units`.
+
+Five decisions worth recording because a neighbouring table made the opposite
+one, or because the corpus had not needed the distinction before:
+
+- **`ɣ` is `gʻ` and `ʁ` is `r`, and that split is the interesting one.** The two
+  voiced dorsal fricatives in this corpus are two different things: `ɣ` is the
+  ghayn and its relatives (Arabic, Georgian, Greek, Dutch, Vietnamese, Klingon)
+  and has no rhotic function anywhere it occurs, while `ʁ` is in three packs and
+  in two of them it *is* the language's r — French r (698 cells) and Hebrew resh
+  (563) — which every Uzbek rendering writes `r`: *Parij, Fransiya, Viktor Gyugo,
+  Isroil*. Spelling those `gʻ` is phonetically defensible and unreadable, and the
+  first run of this table did it: *Paris* came out `pagʻi` and *pourboire*
+  `pugʻ-BVAGʻ`. Armenian ղ (200 cells) is the exception and takes a `targets.hy`
+  block, because there the segment really is a fricative and Uzbek really does
+  write it `gʻ` — *Qorabogʻ* for Ղարաբաղ.
+- **`θ`/`ð` are `t`/`d`**, joining Croatian and Turkish against Czech and Polish.
+  Uzbek's own Greek stratum is unanimous — *matematika, teatr, teologiya, ritm,
+  demokratiya* — and the corpus's θ is 103 Greek cells against 27 English.
+- **`y`/`ʏ`/`ʉ` are `yu` and `ø`/`œ`/`ɜ` are `yo`.** Uzbek has no front rounded
+  vowel and this is its attested device, inherited with the Russian loans:
+  *Myunxen, Gyote, Kyoln, byudjet, syujet, montyor*. Croatian writes `i` and `e`
+  there, having no such device; the cost here is a glide the source has not got.
+- **`ɪ` after a vowel is `y`, by one `after_out` rule.** Uzbek writes a
+  post-vocalic /j/ as `y` and never as `i` — *choy, may, poyezd, sayohat* — so
+  `aɪ` has to be `ay` where `ɪ` alone is `i`. Croatian's device, for Croatian's
+  reason. The `ʊ` offglide deliberately gets no counterpart, `au` and `ou` being
+  sequences Uzbek already writes.
+- **Length is a colon**, joining `de`, `nl`, `pl`, `sv`, `tr`, `hr` and `fi` —
+  and it was chosen against a native device, which is new here. Uzbek's own
+  length mark *is* the tutuq belgisi (`maʼno` is [maːno]), and it was rejected
+  for a reason no other table has had: **this table already emits `ʼ` for /ʔ/ and
+  /ʕ/**, so using it for length as well would make the column ambiguous on
+  exactly the Arabic and Hebrew rows where both occur. Doubling was rejected for
+  Turkish's and Croatian's reason — `aa` is not an Uzbek sequence and reads as
+  two syllables.
+
+**Uzbek also cost the gap detector a change, and it is Hausa's case a second
+time.** `respell_check.mjs`'s `IPA_ONLY` scans the Spacing Modifier Letters
+block, and `ʻ` U+02BB and `ʼ` U+02BC are *letters of this reader's own
+alphabet* that live inside it — 5,270 cells of this table's output, reported as
+the largest gap in the corpus until exempted, while `tests/fonts.test.mjs`
+stayed green throughout because both are drawable in all sixteen Latin faces.
+They join `ɗ` U+0257 in `DEVICE_MARKS`, which is why the sentence that used to
+end that comment — "no other script in this corpus reuses an IPA-range codepoint
+as one of its own letters" — is no longer true. The cost is stated at the
+exemption: U+02BC is also the IPA ejective mark, so a *future* table that leaves
+an ejective unmapped will not be reported. All fifty-three map it today.
+
+### Still unverified, carried forward
+
+- **Whether an Uzbek reader accepts `ʼ` for a foreign glottal stop** is the
+  reviewer question this table turns on. The letter is unambiguous *inside* a
+  word (*sanʼat*), which is where almost all of these occur, and it never opens
+  an Uzbek word — so a word-initial /ʔ/ is dropped by a rule rather than
+  written, which is right for Arabic and Hebrew but means the same phoneme is
+  spelt two ways depending on position.
+- **`yo` for `ɜ`** folds the English NURSE vowel in with German and French ö.
+  The two are 173 cells together and the rounding is wrong on the English 52.
+- **`ç` is `x`** on all 512 cells, which is right for the 473 German and Greek
+  ones (the palatal allophone of /x/, *ix* for *ich*) and wrong for the 39
+  Japanese ひ, where `h` would be right. A `targets.ja` block would fix it and
+  was judged not worth a second rule for one mora.
+- **`ɤ` and `ɵ` are `oʻ`** — 577 Mandarin and Lao cells on the first — which
+  loses rounding where `e` would have lost backness. Which loss an Uzbek reader
+  minds more is not something this table can settle.

@@ -168,11 +168,42 @@ const IPA_ONLY = /[\u0250-\u02af\u02b0-\u02ff\u0300-\u036f\u1d00-\u1d7f]/u;
  * range), Hausa's implosive-d letter happens to share its exact codepoint with
  * the IPA symbol for the same sound, so `ha__ha-NG.json` deliberately spells the
  * sound with it rather than folding it away the way every other reader's table
- * does. Scoped to this one codepoint rather than widening the mechanism, since
- * no other script in this corpus reuses an IPA-range codepoint as one of its own
- * letters.
+ * does.
+ *
+ * **`\u02bb` U+02BB and `\u02bc` U+02BC are Hausa's case again, and they are why the
+ * sentence that used to end this comment -- "no other script in this corpus
+ * reuses an IPA-range codepoint as one of its own letters" -- is no longer
+ * true.** Both are letters of the 1995 Uzbek Latin alphabet: U+02BB is the
+ * second half of `o\u02bb` and `g\u02bb`, and U+02BC is the tutuq belgisi, which
+ * `uz__uz-UZ.json` emits for /\u0294/ and /\u0295/ exactly as Uzbek writes the hamza and
+ * the ayn of its own Arabic stratum. Between them they are on 5,270 cells of
+ * that table's output, which without this exemption is the largest reported gap
+ * in the corpus -- and neither is a residue, both being perfectly drawable in
+ * all sixteen Latin faces.
+ *
+ * **So the exemptions split in two, because they were never one thing.** A device
+ * mark is something *any* reader's orthography composes -- an acute, a prime, a
+ * macron -- and is exempt wherever it appears. A letter that merely shares a
+ * codepoint with an IPA symbol is exempt only for the one reader whose alphabet it
+ * belongs to, which is what the sentence above was reaching for when it said
+ * "scoped to this one codepoint rather than widening the mechanism". Scoping by
+ * codepoint alone gave that up: U+02BC is also the IPA ejective mark, so exempting
+ * it outright meant no future table's unmapped ejective would ever be reported.
+ * Scoping by reader keeps both -- Uzbek's tutuq belgisi is its own letter, and an
+ * ejective left unmapped by the fifty-second table is still a gap.
  */
-const DEVICE_MARKS = new Set(['\u0301', '\u02b9', '\u0257', '\u0304']);
+const DEVICE_MARKS = new Set(['\u0301', '\u02b9', '\u0304']);
+
+/**
+ * A codepoint that is a letter of one reader's own alphabet and an IPA symbol at the
+ * same time, exempt for that reader and nobody else.
+ * @type {Map<string, string>}
+ */
+const OWN_LETTERS = new Map([
+  ['\u0257', 'ha'],   // Hausa's implosive d, the same codepoint as the IPA symbol
+  ['\u02bb', 'uz'],   // the second half of Uzbek's `oʻ` and `gʻ`
+  ['\u02bc', 'uz'],   // Uzbek's tutuq belgisi, also the IPA ejective mark
+]);
 
 /** Ignore what a reviewer would not call a disagreement. */
 const loose = (/** @type {string} */ s) => s.toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
@@ -189,6 +220,7 @@ for (const target of targets) {
   for (const r of rows) {
     for (const ch of r.out) {
       if (!IPA_ONLY.test(ch) || DEVICE_MARKS.has(ch)) continue;
+      if (OWN_LETTERS.get(ch) === table.source) continue;
       const g = gaps.get(ch) ?? { count: 0, examples: new Set() };
       g.count += 1;
       if (g.examples.size < 3) g.examples.add(`${target} ${r.ipa} -> ${r.out}`);

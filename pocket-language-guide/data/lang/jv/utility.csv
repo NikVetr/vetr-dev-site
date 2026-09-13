@@ -1,0 +1,16 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+utility-templates.i-want-to-go-to,Kula badhé dhateng {},,ˈkulɔ ˈbaɖe ˈɖatəŋ {},,2,jv-agent-v1;ipa=jv-g2p
+utility-templates.please-give-me,Nyuwun {},,ˈɲuwʊn {},,2,jv-agent-v1;ipa=jv-g2p
+utility-templates.may-i,Kénging kula {}?,,ˈkeŋɪŋ ˈkulɔ {},,2,jv-agent-v1;ipa=jv-g2p
+utility-templates.please-do-not-add,"Nyuwun tulung, mboten ngangge {}",,"ˈɲuwʊn ˈtulʊŋ, ˈmbɔtən ˈŋaŋɡə {}",,2,jv-agent-v1;ipa=jv-g2p
+utility-templates.do-you-have,Wonten {}?,,ˈwɔntən {},,2,jv-agent-v1;ipa=jv-g2p
+utility-templates.please-write-the-number,"Nyuwun tulung, nyerat angkanipun",,"ˈɲuwʊn ˈtulʊŋ, ɲəˈrat aŋkaˈnipʊn",,2,jv-agent-v1;ipa=jv-g2p
+utility-templates.i-need,Kula mbetahaken {},,ˈkulɔ mbətaˈhakən {},,2,jv-agent-v1;ipa=jv-g2p
+utility-templates.is-there-nearby,Wonten {} caket mriki?,,ˈwɔntən {} ˈtʃakət ˈmriki,,2,jv-agent-v1;ipa=jv-g2p
+utility-templates.how-much-is,{} pinten?,,{} ˈpɪntən,,2,jv-agent-v1;ipa=jv-g2p
+utility-templates.is-this,Menika {}?,,məˈnikɔ {},works for: Menika halal? Menika babi?,2,jv-agent-v1;ipa=jv-g2p
+utility-templates.please,Nyuwun {},,ˈɲuwʊn {},,2,jv-agent-v1;ipa=jv-g2p
+utility-templates.i-am-looking-for,Kula madosi {},,ˈkulɔ maˈdosi {},,2,jv-agent-v1;ipa=jv-g2p
+utility-templates.do-you-accept,Nampi {}?,,ˈnampi {},,2,jv-agent-v1;ipa=jv-g2p
+utility-templates.i-cannot-find,Kula mboten manggihaken {},,ˈkulɔ ˈmbɔtən maŋɡiˈhakən {},,2,jv-agent-v1;ipa=jv-g2p
+utility-templates.there-is-a-problem-with,Wonten masalah kaliyan {},,ˈwɔntən maˈsalah kaˈlijan {},,2,jv-agent-v1;ipa=jv-g2p

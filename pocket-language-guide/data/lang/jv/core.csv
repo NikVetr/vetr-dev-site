@@ -1,0 +1,47 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+pronouns-verbs.i-me,kula,aku,ˈkulɔ,"aku is ngoko, to a child or a close friend",2,jv-agent-v1;ipa=jv-g2p
+pronouns-verbs.we-us,kula sedaya,kita,ˈkulɔ səˈdɔjɔ,kita includes the person you are talking to,2,jv-agent-v1;ipa=jv-g2p
+pronouns-verbs.you,sampéyan,kowé,samˈpejan,kowé is ngoko and rude to a stranger,2,jv-agent-v1;ipa=jv-g2p
+pronouns-verbs.you-polite,panjenengan,Bapak · Ibu,pandʒənəˈŋan,Pak / Bu to a stranger,2,jv-agent-v1;ipa=jv-g2p
+pronouns-verbs.he-him,piyambakipun,dhèwèké,pijambaˈkipʊn,,2,jv-agent-v1;ipa=jv-g2p
+pronouns-verbs.she-her,piyambakipun,,pijambaˈkipʊn,one word for he and she,2,jv-agent-v1;ipa=jv-g2p
+pronouns-verbs.they-them,piyambakipun sedaya,tiyang-tiyang menika,pijambaˈkipʊn səˈdɔjɔ,,2,jv-agent-v1;ipa=jv-g2p
+pronouns-verbs.my-mine,kula,gadhahan kula,ˈkulɔ,goes after the noun: tas kula,2,jv-agent-v1;ipa=jv-g2p
+pronouns-verbs.your-yours,panjenengan,gadhahan panjenengan,pandʒənəˈŋan,goes after the noun,2,jv-agent-v1;ipa=jv-g2p
+pronouns-verbs.be-called-call,nami,nimbali,ˈnami,nami = to be named; nimbali = to call someone,2,jv-agent-v1;ipa=jv-g2p
+pronouns-verbs.have,gadhah,kagungan,ˈɡaɖah,kagungan of the person you are speaking to,2,jv-agent-v1;ipa=jv-g2p
+pronouns-verbs.do-not-have,mboten gadhah,,ˈmbɔtən ˈɡaɖah,,2,jv-agent-v1;ipa=jv-g2p
+pronouns-verbs.go,késah,tindak,ˈkesah,tindak of the person you are speaking to,2,jv-agent-v1;ipa=jv-g2p
+pronouns-verbs.come,dhateng,rawuh,ˈɖatəŋ,rawuh of the person you are speaking to,2,jv-agent-v1;ipa=jv-g2p
+pronouns-verbs.would-like,kepéngin,kersa,kəˈpeŋɪn,kersa of the person you are speaking to,2,jv-agent-v1;ipa=jv-g2p
+pronouns-verbs.want,badhé,,ˈbaɖe,also marks the future: badhé késah = going to go,2,jv-agent-v1;ipa=jv-g2p
+pronouns-verbs.look-for,madosi,nggolèki,maˈdosi,,2,jv-agent-v1;ipa=jv-g2p
+pronouns-verbs.buy,tumbas,mundhut,ˈtʊmbas,mundhut when the person you are speaking to buys,2,jv-agent-v1;ipa=jv-g2p
+pronouns-verbs.like,remen,seneng,rəˈmən,,2,jv-agent-v1;ipa=jv-g2p
+pronouns-verbs.need,mbetahaken,prelu,mbətaˈhakən,,2,jv-agent-v1;ipa=jv-g2p
+pronouns-verbs.there-is-have,wonten,,ˈwɔntən,,2,jv-agent-v1;ipa=jv-g2p
+pronouns-verbs.there-is-not-do-not-have,mboten wonten,,ˈmbɔtən ˈwɔntən,,2,jv-agent-v1;ipa=jv-g2p
+pronouns-verbs.want-to-verb,badhé + tembung kriya,,ˈbaɖe təmˈbʊŋ ˈkrijɔ,,2,jv-agent-v1;ipa=jv-g2p
+pronouns-verbs.want-thing,badhé + barang,nyuwun + barang,ˈbaɖe ˈbaraŋ,,2,jv-agent-v1;ipa=jv-g2p
+pronouns-verbs.need-thing,mbetahaken + barang,,mbətaˈhakən ˈbaraŋ,,2,jv-agent-v1;ipa=jv-g2p
+pronouns-verbs.looking-for-thing,madosi + barang,,maˈdosi ˈbaraŋ,,2,jv-agent-v1;ipa=jv-g2p
+question-words.what,menapa,apa,məˈnɔpɔ,,2,jv-agent-v1;ipa=jv-g2p
+question-words.where,wonten pundi,ing endi,ˈwɔntən ˈpʊndi,,2,jv-agent-v1;ipa=jv-g2p
+question-words.who,sinten,sapa,ˈsɪntən,,2,jv-agent-v1;ipa=jv-g2p
+question-words.which-one,ingkang pundi,,ˈɪŋkaŋ ˈpʊndi,,2,jv-agent-v1;ipa=jv-g2p
+question-words.when,kapan,bénjing menapa,ˈkapan,bénjing menapa only of the future,2,jv-agent-v1;ipa=jv-g2p
+question-words.how,kadospundi,piyé,kadɔsˈpʊndi,,2,jv-agent-v1;ipa=jv-g2p
+question-words.how-much-many,pinten,pira,ˈpɪntən,,2,jv-agent-v1;ipa=jv-g2p
+question-words.how-many,pinten kathahipun,,ˈpɪntən kaʈaˈhipʊn,,2,jv-agent-v1;ipa=jv-g2p
+question-words.why,kénging menapa,ngapa,ˈkeŋɪŋ məˈnɔpɔ,,2,jv-agent-v1;ipa=jv-g2p
+question-words.this,menika,punika,məˈnikɔ,krama has one word for this and that,2,jv-agent-v1;ipa=jv-g2p
+question-words.that,menika,punika,məˈnikɔ,krama has one word for this and that,2,jv-agent-v1;ipa=jv-g2p
+question-words.here,mriki,kéné,ˈmriki,,2,jv-agent-v1;ipa=jv-g2p
+question-words.there,mrika,kana,ˈmrikɔ,,2,jv-agent-v1;ipa=jv-g2p
+question-words.a-little,sekedhik,,səkəˈɖɪʔ,,2,jv-agent-v1;ipa=jv-g2p
+question-words.some,sawatawis,,sawaˈtawɪs,,2,jv-agent-v1;ipa=jv-g2p
+question-words.very,sanget,,ˈsaŋət,goes after the word: awis sanget,2,jv-agent-v1;ipa=jv-g2p
+question-words.too,kelangkung,,kəˈlaŋkʊŋ,or the ke- -en frame: kelarangen = too expensive,2,jv-agent-v1;ipa=jv-g2p
+question-words.also,ugi,,ˈuɡi,,2,jv-agent-v1;ipa=jv-g2p
+question-words.all-both,sedaya,kekalihipun,səˈdɔjɔ,kekalihipun = both of them,2,jv-agent-v1;ipa=jv-g2p
+question-words.how-much-what-price,reginipun pinten,,rəɡiˈnipʊn ˈpɪntən,,2,jv-agent-v1;ipa=jv-g2p

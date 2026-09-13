@@ -1,0 +1,10 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+profanity.oh-my-god,Adhuh Gusti!,Walah!,ˈaɖʊh ˈɡʊsti,oh Lord -- mild,2,jv-agent-v1;ipa=jv-g2p
+profanity.damn,Cilaka!,Bajigur!,tʃiˈlɔkɔ,disaster -- mild oath; bajigur is a minced bajingan,2,jv-agent-v1;ipa=jv-g2p
+profanity.expletive,Asu!,,ˈasu,dog -- coarse,2,jv-agent-v1;ipa=jv-g2p
+profanity.strong-expletive,Jancuk!,,ˈdʒantʃʊʔ,"strongest general oath; East Java, at nothing rather than at anyone",2,jv-agent-v1;ipa=jv-g2p
+profanity.frustration,Kacau tenan iki,,kaˈtʃau təˈnan ˈiki,this is a real mess -- mild,2,jv-agent-v1;ipa=jv-g2p
+profanity.thats-rude,Menika kasar,Kuwi kasar,məˈnikɔ ˈkasar,that is coarse,2,jv-agent-v1;ipa=jv-g2p
+profanity.excuse-my-language,"Ngapunten, basa kula kasar",,"ŋaˈpʊntən, ˈbɔsɔ ˈkulɔ ˈkasar","sorry, my language was coarse",2,jv-agent-v1;ipa=jv-g2p
+profanity.strength-warning,"Baris-baris menika wonten supados panjenengan mangertos, sanès supados dipunginakaken: abot-ènthèngipun tembung pisuhan mboten tumut kaalih-basa. Tembung ingkang ing ngriki katingal namung sumpah ènthèng saged kémawon mboten kénging dipunucapaken ing basa sacèlakipun, lan tembung ingkang paling kasar ing satunggaling basa asring malah tembung ingkang kedah dipuntilar saking pérangan menika.",,,,2,jv-agent-v1
+profanity.japanese-register,"Basa Jepang mèh mboten nindakaken bab menika lumantar tembung. Raos ngrèmèhaken dipunbekta déning paramasastra: tembung sesulih tiyang kaping kalih ingkang kasar, préntah ingkang gundhul, lan pungkasaning tembung kriya ingkang cekak. Dados nepsunipun dumunung ing pungkasan, sanès ing tembung ingkang saged dipunpadosi wonten bausastra, lan baris-baris ing nginggil mèh sedaya tembung ingkang wonten.",,,,2,jv-agent-v1

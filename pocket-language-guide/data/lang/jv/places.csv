@@ -1,0 +1,8 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,Tumbas tikèt wonten pundi?,,ˈtʊmbas ˈtikɛt ˈwɔntən ˈpʊndi,,2,jv-agent-v1;ipa=jv-g2p
+attractions-tickets.do-i-need-a-reservation,Prelu pesen rumiyin?,,prəˈlu pəˈsən ruˈmijɪn,,2,jv-agent-v1;ipa=jv-g2p
+attractions-tickets.what-is-the-latest-entry-time,Mlebet pungkasan jam pinten?,,mləˈbət pʊŋˈkasan dʒam ˈpɪntən,,2,jv-agent-v1;ipa=jv-g2p
+attractions-tickets.are-there-lockers,Wonten lokeripun?,,ˈwɔntən lokəˈripʊn,,2,jv-agent-v1;ipa=jv-g2p
+attractions-tickets.may-i-take-photos,Kénging motrèt?,,ˈkeŋɪŋ ˈmɔtrɛt,,2,jv-agent-v1;ipa=jv-g2p
+attractions-tickets.please-take-a-photo-of-us,"Nyuwun tulung, motrèt kula sedaya",,"ˈɲuwʊn ˈtulʊŋ, ˈmɔtrɛt ˈkulɔ səˈdɔjɔ",,2,jv-agent-v1;ipa=jv-g2p
+attractions-tickets.could-you-take-a-photo-for-us,Saged motrètaken kula sedaya?,,ˈsaɡəd motrɛˈtakən ˈkulɔ səˈdɔjɔ,,2,jv-agent-v1;ipa=jv-g2p

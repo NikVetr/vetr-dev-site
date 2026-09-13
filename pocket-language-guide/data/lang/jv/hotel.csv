@@ -1,0 +1,53 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+hotel-words.passport,Paspor,,ˈpaspɔr,,2,jv-agent-v1;ipa=jv-g2p
+hotel-words.room-key-card,Kertu kamar,,kərˈtu ˈkamar,,2,jv-agent-v1;ipa=jv-g2p
+hotel-words.check-in,Check-in,,tʃɛˈkɪn,,2,jv-agent-v1;ipa=jv-g2p+loan
+hotel-words.check-out,Check-out,,tʃɛˈkaʊt,,2,jv-agent-v1;ipa=jv-g2p+loan
+hotel-words.luggage-storage,Panitipan barang,,paniˈtipan ˈbaraŋ,,2,jv-agent-v1;ipa=jv-g2p
+hotel-basics.are-any-rooms-available,Wonten kamar kothong?,,ˈwɔntən ˈkamar ˈkɔʈɔŋ,,2,jv-agent-v1;ipa=jv-g2p
+hotel-basics.there-are-two-of-us,Kula sedaya tiyang kalih,,ˈkulɔ səˈdɔjɔ ˈtijaŋ ˈkalɪh,,2,jv-agent-v1;ipa=jv-g2p
+hotel-basics.i-have-a-reservation,Kula sampun pesen,Kula gadhah résèrvasi,ˈkulɔ ˈsampʊn pəˈsən,,2,jv-agent-v1;ipa=jv-g2p
+hotel-basics.can-i-charge-my-phone,Kénging ngecas HP?,,ˈkeŋɪŋ ŋəˈtʃas haˈpe,HP = mobile phone,2,jv-agent-v1;ipa=jv-g2p+loan
+hotel-basics.i-would-like-a-non-smoking-room,Nyuwun kamar bébas rokok,,ˈɲuwʊn ˈkamar ˈbebas ˈrɔkɔʔ,,2,jv-agent-v1;ipa=jv-g2p
+hotel-basics.i-would-like-a-quiet-room,Nyuwun kamar ingkang tentrem,,ˈɲuwʊn ˈkamar ˈɪŋkaŋ tənˈtrəm,,2,jv-agent-v1;ipa=jv-g2p
+hotel-basics.is-there-a-washing-machine,Wonten mesin umbah-umbah?,,ˈwɔntən məˈsɪn ʊmbahˈʊmbah,,2,jv-agent-v1;ipa=jv-g2p
+hotel-basics.is-wi-fi-free,Wi-Fi-nipun gratis?,,wifi ˈnipʊn ˈɡratɪs,,2,jv-agent-v1;ipa=jv-g2p+loan
+hotel-basics.how-much-per-night,Saben dalu pinten?,,ˈsabən ˈdalu ˈpɪntən,,2,jv-agent-v1;ipa=jv-g2p
+hotel-basics.is-breakfast-included,Kalebet sarapan?,,kaləˈbət saˈrapan,,2,jv-agent-v1;ipa=jv-g2p
+hotel-basics.may-i-see-the-room,Kénging ningali kamaripun?,,ˈkeŋɪŋ niˈŋali kamaˈripʊn,,2,jv-agent-v1;ipa=jv-g2p
+hotel-basics.for-nights,Kanggé {} dalu,,ˈkaŋɡe {} ˈdalu,,2,jv-agent-v1;ipa=jv-g2p
+hotel-basics.two-beds,Nyuwun pesaréan kalih,Nyuwun twin bed,ˈɲuwʊn pəsaˈrean ˈkalɪh,,2,jv-agent-v1;ipa=jv-g2p
+hotel-basics.is-there-air-conditioning,Wonten AC?,,ˈwɔntən aˈtʃe,,2,jv-agent-v1;ipa=jv-g2p+loan
+hotel-requests.can-i-check-out-later,Kénging check-out langkung siyang?,,ˈkeŋɪŋ tʃɛˈkaʊt ˈlaŋkʊŋ ˈsijaŋ,,2,jv-agent-v1;ipa=jv-g2p+loan
+hotel-requests.what-time-does-breakfast-start,Sarapan wiwit jam pinten?,,saˈrapan ˈwiwɪt dʒam ˈpɪntən,,2,jv-agent-v1;ipa=jv-g2p
+hotel-requests.can-i-store-my-luggage,Kénging nitipaken koper?,,ˈkeŋɪŋ nitiˈpakən ˈkɔpər,nitipaken = to leave in someone's care,2,jv-agent-v1;ipa=jv-g2p
+hotel-requests.no-housekeeping,Mboten prelu dipunresiki,,ˈmbɔtən prəˈlu dipunrəˈsiki,,2,jv-agent-v1;ipa=jv-g2p
+hotel-requests.another-towel-please,Nyuwun andhuk malih,,ˈɲuwʊn ˈanɖʊʔ ˈmalɪh,,2,jv-agent-v1;ipa=jv-g2p
+hotel-requests.what-time-is-check-out,Check-out jam pinten?,,tʃɛˈkaʊt dʒam ˈpɪntən,,2,jv-agent-v1;ipa=jv-g2p+loan
+hotel-requests.can-i-check-in-early,Kénging check-in langkung énjing?,,ˈkeŋɪŋ tʃɛˈkɪn ˈlaŋkʊŋ ˈɛndʒɪŋ,,2,jv-agent-v1;ipa=jv-g2p+loan
+hotel-requests.another-night,Kénging nambah setunggal dalu?,,ˈkeŋɪŋ ˈnambah səˈtʊŋɡal ˈdalu,,2,jv-agent-v1;ipa=jv-g2p
+hotel-requests.is-there-a-safe,Wonten lemari wesi?,Wonten safe deposit box?,ˈwɔntən ləˈmari wəˈsi,,2,jv-agent-v1;ipa=jv-g2p
+hotel-requests.another-blanket,Nyuwun kemul malih,,ˈɲuwʊn kəˈmʊl ˈmalɪh,,2,jv-agent-v1;ipa=jv-g2p
+hotel-requests.wake-up-call,"Nyuwun tulung, kula dipungugah jam {}",,"ˈɲuwʊn ˈtulʊŋ, ˈkulɔ dipuˈŋuɡah dʒam {}",,2,jv-agent-v1;ipa=jv-g2p
+room-problems.there-is-a-problem-with-the-room,Wonten masalah kaliyan kamaripun,,ˈwɔntən maˈsalah kaˈlijan kamaˈripʊn,,2,jv-agent-v1;ipa=jv-g2p
+room-problems.the-air-conditioning-is-broken,AC-nipun risak,,aˈtʃe ˈnipʊn ˈrisaʔ,,2,jv-agent-v1;ipa=jv-g2p+loan
+room-problems.there-is-no-hot-water,Mboten wonten toya anget,,ˈmbɔtən ˈwɔntən ˈtɔjɔ ˈaŋət,,2,jv-agent-v1;ipa=jv-g2p
+room-problems.can-i-change-rooms,Kénging pindhah kamar?,,ˈkeŋɪŋ ˈpɪnɖah ˈkamar,,2,jv-agent-v1;ipa=jv-g2p
+room-problems.the-room-is-too-noisy,Kamaripun rame sanget,,kamaˈripʊn ˈramə ˈsaŋət,,2,jv-agent-v1;ipa=jv-g2p
+room-problems.the-key-does-not-work,Kuncinipun mboten saged,,kʊntʃiˈnipʊn ˈmbɔtən ˈsaɡəd,,2,jv-agent-v1;ipa=jv-g2p
+room-problems.the-toilet-will-not-flush,Klosetipun mboten saged dipunsiram,,klosəˈtipʊn ˈmbɔtən ˈsaɡəd dipʊnˈsiram,,2,jv-agent-v1;ipa=jv-g2p
+room-problems.the-light-does-not-work,Lampunipun mboten murub,,lampuˈnipʊn ˈmbɔtən ˈmurʊb,,2,jv-agent-v1;ipa=jv-g2p
+room-problems.please-send-someone,"Nyuwun tulung, ngutus petugas kanggé ndandosi",,"ˈɲuwʊn ˈtulʊŋ, ˈŋutʊs pəˈtuɡas ˈkaŋɡe ndanˈdosi",,2,jv-agent-v1;ipa=jv-g2p
+room-problems.the-heating-does-not-work,Pemanasipun mboten lampah,,pəmanaˈsipʊn ˈmbɔtən ˈlampah,,2,jv-agent-v1;ipa=jv-g2p
+laundry.please-wash-these-clothes,"Nyuwun tulung, ageman menika dipunumbah",,"ˈɲuwʊn ˈtulʊŋ, aɡəˈman məˈnikɔ dipuˈnʊmbah",,2,jv-agent-v1;ipa=jv-g2p
+laundry.where-is-a-laundromat,Laundry wonten pundi?,,ˈlɔndri ˈwɔntən ˈpʊndi,,2,jv-agent-v1;ipa=jv-g2p+loan
+laundry.when-will-it-be-ready,Kapan rampungipun?,,ˈkapan rampuˈŋipʊn,,2,jv-agent-v1;ipa=jv-g2p
+laundry.how-much-per-kilo,Saben kilo pinten?,,ˈsabən ˈkilɔ ˈpɪntən,laundry kiloan = priced by weight,2,jv-agent-v1;ipa=jv-g2p
+laundry.can-it-be-ready-today,Saged rampung dinten menika?,,ˈsaɡəd ˈrampʊŋ ˈdɪntən məˈnikɔ,,2,jv-agent-v1;ipa=jv-g2p
+laundry.please-do-not-use-bleach,"Nyuwun tulung, mboten ngangge pemutih",,"ˈɲuwʊn ˈtulʊŋ, ˈmbɔtən ˈŋaŋɡə pəˈmutɪh",,2,jv-agent-v1;ipa=jv-g2p
+laundry.laundromat,Laundry,Binatu,ˈlɔndri,,2,jv-agent-v1;ipa=jv-g2p+loan
+laundry.please-iron-this,"Nyuwun tulung, menika dipunseterika",,"ˈɲuwʊn ˈtulʊŋ, məˈnikɔ dipʊnsətəˈrikɔ",,2,jv-agent-v1;ipa=jv-g2p
+laundry.detergent,Detèrjen,Sabun umbah-umbah,dəˈtɛrdʒən,,2,jv-agent-v1;ipa=jv-g2p
+laundry.dry-cleaning,Dry cleaning,,ˈdraj ˈklinɪŋ,cuci kering here means wash-and-dry,2,jv-agent-v1;ipa=jv-g2p+loan
+laundry.dryer,Mesin pengering,,məˈsɪn pəŋəˈrɪŋ,,2,jv-agent-v1;ipa=jv-g2p
+laundry.coin-operated,Ngangge arta logam,Self-service,ˈŋaŋɡə ˈartɔ ˈlɔɡam,,2,jv-agent-v1;ipa=jv-g2p

@@ -1,0 +1,1070 @@
+{
+  "source": "uz",
+  "accent": "uz-UZ",
+  "status": "ready",
+  "version": "1",
+  "derives_from": "**No published Uzbek pronunciation key for foreign names exists**, which is Croatian's and Czech's situation rather than Turkish's: there is no Uzbek TDK Yazim Kilavuzu §08 and no Uzbek Magay. What exists, and what this table is built on, is the orthographic practice for writing foreign names in Uzbek, which is sound-keyed rather than spelling-keyed and is attested in bulk. Three sources for it. (1) «Oʻzbek tilining asosiy imlo qoidalari», the official orthography approved by Cabinet of Ministers resolution No. 339 of 24 August 1995 alongside the Latin alphabet itself, whose rules for oʻzlashma soʻzlar govern how a borrowed word is written. (2) «Oʻzbekiston milliy ensiklopediyasi» (Toshkent, 2000-2006), whose headword practice for foreign names is the de facto standard: Shekspir, Vashington, Chikago, Myunxen, Gyote, Nyu-York, Xiroshima, Pekin, Sidney. (3) «Oʻzbek tilining imlo lugʻati» (Toshkent: Akademnashr), which records the same forms lexically. Where a sound reaches Uzbek only through a loanword, the loanword is the evidence, and each such rule names its own word in `approximations`. The one place this table goes beyond the practice is the tutuq belgisi for /ʔ/ and /ʕ/, which is not an invention either: it is what Uzbek already does with the hamza and the ayn of its own Arabic stratum, in sanʼat, maʼno, taʼlim and aʼlo.",
+  "deviations": [
+    {
+      "rule": "The encyclopaedia's practice writes a foreign name as one unbroken word (Vashington, Myunxen)",
+      "why": "It is naming one adopted word. This column respells a whole phrase of up to a dozen syllables, and an unbroken string of them invites an Uzbek reader to apply Uzbek phonotactics to the whole run. The syllable hyphen is the corpus's device and is not part of any source system here."
+    },
+    {
+      "rule": "Much of the practice is mediated through Russian spelling (Gyote from Гёте, not from Goethe)",
+      "why": "That is a transliteration keyed on an intermediate script, which fails RESPELL-SYSTEMS.md's own respelling test: change the spelling without changing the sound and the output moves. Only the sound-to-letter correspondences it establishes are taken -- ö -> yo, ü -> yu, /w/ -> v -- and they are applied to the ipa column directly."
+    }
+  ],
+  "approximations": [
+    {
+      "sounds": "/y ʏ ʉ/ (German, French, Mandarin, Swedish, Turkish, Hungarian)",
+      "out": "yu",
+      "why": "Uzbek has no front rounded vowel. `yu` is the attested rendering -- Myunxen, byudjet, syujet, Syurix -- and it buys a glide the source does not have, which is the cost. It is the same trade Russian's ю makes and Uzbek inherited it with the loans."
+    },
+    {
+      "sounds": "/ø œ ɜ/ (German, French, Swedish, Hungarian, English NURSE)",
+      "out": "yo",
+      "why": "Same gap and the same attested device: Gyote, Kyoln, montyor. `ɜ` is folded in with them because in this corpus it is German (121 cells) and English (52), where it writes the same mid central-to-front rounded region a `yo` answers; the English NURSE vowel is unrounded, which is the loss."
+    },
+    {
+      "sounds": "/θ ð/ (Greek, English, Arabic, Swahili)",
+      "out": "t, d",
+      "why": "Uzbek has neither. Every Greek theta in an Uzbek word is a t (matematika, teatr, teologiya, ritm) and every delta a d (demokratiya, dialog), and the corpus's θ is 103 Greek cells against 27 English. Czech and Polish write s and z; Croatian and Turkish write t and d, and Uzbek's own Greek stratum is unanimous with them."
+    },
+    {
+      "sounds": "/ç/ (German ich-Laut, Greek, Japanese)",
+      "out": "x",
+      "why": "The German and Greek 473 of the 512 cells are the palatal allophone of /x/, which Uzbek writes x (ix for ich, Myunxen for München). The 39 Japanese cells are ひ, where x is wrong and h would be right; a targets block would fix it and is not worth a second rule for one mora."
+    },
+    {
+      "sounds": "/ɤ ɵ/ (Mandarin, Lao, Thai, Russian, Swedish)",
+      "out": "oʻ",
+      "why": "A close-mid back vowel, which among Uzbek's six is `oʻ` and nothing else: `e` is front and `o` is open. The rounding of `oʻ` is the loss on the 577 Mandarin and Lao cells of /ɤ/, and it is a smaller one than fronting them would be."
+    },
+    {
+      "sounds": "/ʁ/ (French, Hebrew, Armenian)",
+      "out": "r, and gʻ for Armenian",
+      "why": "The two voiced dorsal fricatives in this corpus are two different things and take two different letters. `ɣ` is the ghayn and its relatives and has no rhotic function anywhere it occurs, so it is gʻ. `ʁ` is in three packs and in two of them it *is* the language's r -- French r (698 cells) and Hebrew resh (563) -- which every Uzbek rendering writes r: Parij, Fransiya, Viktor Gyugo, Isroil. Spelling those gʻ would be phonetically defensible and unreadable. Armenian ղ (200 cells) is the exception and takes a `targets.hy` block, because there the segment really is a fricative and Uzbek really does write it gʻ -- Qorabogʻ for Ղարաբաղ."
+    },
+    {
+      "sounds": "/ʒ ʐ ʑ dʒ dʑ ɟ/ (French, Mandarin, Russian, Arabic, Indic)",
+      "out": "j",
+      "why": "Uzbek `j` is genuinely two phonemes -- /dʒ/ in the native and Perso-Arabic stratum (jon, juma) and /ʒ/ in the Russian one (jurnal, garaj) -- so the letter covers both members of this list honestly, which no other Latin reader here can say. The affricate/fricative distinction is still lost."
+    },
+    {
+      "sounds": "/ɲ ʎ/ (Spanish, Italian, French, Indic, Croatian)",
+      "out": "ny, ly",
+      "why": "Uzbek has no palatal sonorant and writes the sequence: Boloniya, Kataloniya, senyor, Seviliya. The digraph can be misread as n+y across a syllable boundary, which is exactly what the hyphen in this column prevents."
+    },
+    {
+      "sounds": "/w/ (Mandarin, English, Arabic, Swahili, Korean, Japanese, Thai)",
+      "out": "v",
+      "why": "Uzbek has no /w/ letter, and v is what the practice writes (Vashington, viski, vatt). Uzbek /v/ is itself [w] beside a rounded vowel in much of the country, so the loss is smaller here than it is for Turkish, which records the same trade."
+    },
+    {
+      "sounds": "the ejectives /kʼ pʼ tʼ qʼ tsʼ tʃʼ sʼ/ (Georgian, Amharic, Hausa)",
+      "out": "the plain letter plus ʼ",
+      "why": "Uzbek has no ejective series, but `Cʼ` is an ordinary letter sequence read [Cʔ] -- the glottal release without the glottalic airstream -- which is nearer than the plain stop that hr and cs print on these 1,040 cells. Georgian's `qʼ` is the one sequence new to the corpus and is checked with `--units`."
+    },
+    {
+      "sounds": "tone (Mandarin, Thai, Vietnamese, Lao, Punjabi)",
+      "out": "dropped",
+      "why": "Uzbek is not tonal and has no device for it. `policy.tone: drop` is what every non-tonal reader here does."
+    }
+  ],
+  "policy": {
+    "syllable_separator": "-",
+    "word_separator": " ",
+    "stress": "caps",
+    "stress_min_syllables": 2,
+    "length": "colon",
+    "tone": "drop",
+    "max_onset": 2,
+    "locale": "uz",
+    "fixups": "all"
+  },
+  "legend": "BOSH HARFLAR urgʻuli boʻgʻinni, ikki nuqta choʻziq unlini bildiradi. Qolgani oddiy oʻzbekcha oʻqiladi.",
+  "phonemes": [
+    {
+      "slot": "onset",
+      "ipa": "ʔ",
+      "out": "",
+      "when": [
+        "word_initial"
+      ],
+      "after_out": ""
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "a",
+      "out": "a"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɑ",
+      "out": "a"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɐ",
+      "out": "a"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʌ",
+      "out": "a"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "æ",
+      "out": "a"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ə",
+      "out": "a"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "e",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɛ",
+      "out": "e"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "i",
+      "out": "i"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɨ",
+      "out": "i"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɯ",
+      "out": "i"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "o",
+      "out": "o"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɔ",
+      "out": "o"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɒ",
+      "out": "o"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɵ",
+      "out": "oʻ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɤ",
+      "out": "oʻ"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "u",
+      "out": "u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʊ",
+      "out": "u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "y",
+      "out": "yu"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʏ",
+      "out": "yu"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ʉ",
+      "out": "yu"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ø",
+      "out": "yo"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "œ",
+      "out": "yo"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɜ",
+      "out": "yo"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɚ",
+      "out": "er"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɝ",
+      "out": "er"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ã",
+      "out": "an"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ẽ",
+      "out": "en"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ĩ",
+      "out": "in"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "õ",
+      "out": "on"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ũ",
+      "out": "un"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɪ",
+      "out": "y",
+      "after_out": "a e i o u"
+    },
+    {
+      "slot": "nucleus",
+      "ipa": "ɪ",
+      "out": "i"
+    },
+    {
+      "slot": "any",
+      "ipa": "ː",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˑ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̯",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˀ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˌ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˈ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʲ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ˤ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "͈",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "ʼ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̚",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̥",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̬",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "̃",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "j",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɥ",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʝ",
+      "out": "y"
+    },
+    {
+      "slot": "any",
+      "ipa": "w",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɰ",
+      "out": ""
+    },
+    {
+      "slot": "any",
+      "ipa": "p",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʰ",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "p͈",
+      "out": "pp"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʲ",
+      "out": "p"
+    },
+    {
+      "slot": "any",
+      "ipa": "pʼ",
+      "out": "pʼ"
+    },
+    {
+      "slot": "any",
+      "ipa": "b",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʰ",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "bʲ",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɓ",
+      "out": "b"
+    },
+    {
+      "slot": "any",
+      "ipa": "t",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "t͈",
+      "out": "tt"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʲ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "t̪",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʰ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʼ",
+      "out": "tʼ"
+    },
+    {
+      "slot": "any",
+      "ipa": "d",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʲ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "d̪",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʰ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɗ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "dˤ",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "k",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʰ",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "k͈",
+      "out": "kk"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʲ",
+      "out": "k"
+    },
+    {
+      "slot": "any",
+      "ipa": "kʼ",
+      "out": "kʼ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "g",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡʰ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɡʲ",
+      "out": "g"
+    },
+    {
+      "slot": "any",
+      "ipa": "q",
+      "out": "q"
+    },
+    {
+      "slot": "any",
+      "ipa": "qʰ",
+      "out": "q"
+    },
+    {
+      "slot": "any",
+      "ipa": "qʼ",
+      "out": "qʼ"
+    },
+    {
+      "slot": "any",
+      "ipa": "c",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "cʰ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɟʰ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔ",
+      "out": "ʼ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʔʲ",
+      "out": "ʼ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʕ",
+      "out": "ʼ"
+    },
+    {
+      "slot": "any",
+      "ipa": "h",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɦ",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "ħ",
+      "out": "h"
+    },
+    {
+      "slot": "any",
+      "ipa": "x",
+      "out": "x"
+    },
+    {
+      "slot": "any",
+      "ipa": "χ",
+      "out": "x"
+    },
+    {
+      "slot": "any",
+      "ipa": "ç",
+      "out": "x"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɣ",
+      "out": "gʻ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʁ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "f",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɸ",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "fʲ",
+      "out": "f"
+    },
+    {
+      "slot": "any",
+      "ipa": "v",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʋ",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "vʲ",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "β",
+      "out": "v"
+    },
+    {
+      "slot": "any",
+      "ipa": "s",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "s̪",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "sʲ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "s͈",
+      "out": "ss"
+    },
+    {
+      "slot": "any",
+      "ipa": "sˤ",
+      "out": "s"
+    },
+    {
+      "slot": "any",
+      "ipa": "sʼ",
+      "out": "sʼ"
+    },
+    {
+      "slot": "any",
+      "ipa": "θ",
+      "out": "t"
+    },
+    {
+      "slot": "any",
+      "ipa": "z",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "zʲ",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "zˤ",
+      "out": "z"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʐ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʑ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ð",
+      "out": "d"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃ",
+      "out": "sh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʂ",
+      "out": "sh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɕ",
+      "out": "sh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʃʲ",
+      "out": "sh"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʒ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʰ",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʲ",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts̪",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "ts̪ʰ",
+      "out": "ts"
+    },
+    {
+      "slot": "any",
+      "ipa": "tsʼ",
+      "out": "tsʼ"
+    },
+    {
+      "slot": "any",
+      "ipa": "dz",
+      "out": "dz"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃʰ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃʲ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "tʃʼ",
+      "out": "chʼ"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʈʂʰ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕʰ",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "tɕ͈",
+      "out": "ch"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʒ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "dʑ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɖʐ",
+      "out": "j"
+    },
+    {
+      "slot": "any",
+      "ipa": "pf",
+      "out": "pf"
+    },
+    {
+      "slot": "any",
+      "ipa": "m",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "mʲ",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "m̩",
+      "out": "m"
+    },
+    {
+      "slot": "any",
+      "ipa": "n",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "nʲ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "n̩",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɳ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "n̪",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɴ",
+      "out": "n"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɲ",
+      "out": "ny"
+    },
+    {
+      "slot": "any",
+      "ipa": "ŋ",
+      "out": "ng"
+    },
+    {
+      "slot": "any",
+      "ipa": "l",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "lʲ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɫ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɭʲ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "l̩",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "l̪",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɬ",
+      "out": "l"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʎ",
+      "out": "ly"
+    },
+    {
+      "slot": "any",
+      "ipa": "r",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "rʲ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɾʲ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɽʰ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɻ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ɹ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "ʀ",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "r̩",
+      "out": "r"
+    },
+    {
+      "slot": "any",
+      "ipa": "r̝",
+      "out": "rj"
+    }
+  ],
+  "syllable_fixups": [
+    {
+      "match": "ng([kg])",
+      "out": "n\\1"
+    },
+    {
+      "match": "nng",
+      "out": "ng"
+    }
+  ],
+  "targets": {
+    "ja": {
+      "comment": "Japanese /ɯ/ is a compressed back vowel, not the Korean and Thai unrounded [ɯ] that Uzbek `i` answers, and every Uzbek rendering of Japanese writes u (sushi, Tokio, Fukusima, sumo). Turkish's block, for Turkish's reason.",
+      "phonemes": [
+        {
+          "slot": "nucleus",
+          "ipa": "ɯː",
+          "out": "u"
+        },
+        {
+          "slot": "nucleus",
+          "ipa": "ɯ",
+          "out": "u"
+        }
+      ]
+    },
+    "ko": {
+      "comment": "Korean eo /ʌ/ is [ʌ~ɔ] and Uzbek writes it o (Seul, Pxenyan, Pusan). Everywhere else in the corpus the same symbol is English STRUT, Russian reduction or the Hindi inherent vowel, all of which want a.",
+      "phonemes": [
+        {
+          "slot": "nucleus",
+          "ipa": "ʌ",
+          "out": "o"
+        }
+      ]
+    },
+    "pt": {
+      "comment": "espeak writes the Portuguese reduced final vowel [ɨ] as /y/, a front rounded vowel it is not: noite comes out /nˈoɪtʃy/. A logged G2P defect rather than a fact about Portuguese, and Uzbek `i` is the right letter for [ɨ], which is one of its own allophones. Uzbek's real /y/ rows -- fr, de, zh-Hans, sv -- keep yu.",
+      "phonemes": [
+        {
+          "slot": "nucleus",
+          "ipa": "y",
+          "out": "i"
+        }
+      ]
+    },
+    "vi": {
+      "comment": "The same espeak defect: Vietnamese u-horn is [ɨ~ɯ] and is written /y/, which is not the front rounded vowel.",
+      "phonemes": [
+        {
+          "slot": "nucleus",
+          "ipa": "y",
+          "out": "i"
+        }
+      ]
+    },
+    "hy": {
+      "comment": "Armenian ղ really is a voiced uvular fricative -- the base `ʁ` -> r rule is for French r and Hebrew resh, which are their languages' rhotics -- and Uzbek writes it gʻ, as its own name for Ղարաբաղ shows: Qorabogʻ. 200 cells, and `REPAIR[\"hy\"]` folds the voice's `ʀ` into this same symbol, so this block is the whole of it.",
+      "phonemes": [
+        {
+          "slot": "any",
+          "ipa": "ʁ",
+          "out": "gʻ"
+        }
+      ]
+    }
+  }
+}
