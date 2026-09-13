@@ -1,4 +1,19 @@
+import { existsSync } from 'node:fs';
 import { test, expect } from '@playwright/test';
+
+/**
+ * Whether a prerender has left `packs/` in place.
+ *
+ * `data/shell.json` names `packs/index.json`, and `sw.js` fails its install *whole*
+ * rather than half -- deliberately, so a partial shell never becomes the active one.
+ * So while `npm run prerender` is mid-rebuild, no worker ever takes charge, and
+ * every test here that saves a pack waits out `saveForOffline`'s own 120-second
+ * timeout before failing. Three minutes each, for a reason that has nothing to do
+ * with the code under test. Skipped with a sentence instead.
+ */
+const HAS_PACKS = existsSync('packs/index.json');
+const NEEDS_PACKS = 'packs/index.json is missing -- run `npm run prerender`; the '
+  + 'service worker cannot install without it, so no worker takes charge here';
 import { faceCount } from './counts.js';
 import { pickReader } from './controls.js';
 
@@ -26,6 +41,7 @@ async function save(page, target, source) {
 
 // The primary use case: abroad, no data, still needs to produce a printable file.
 test('saves a language for offline, then exports with the network off', async ({ page, context }) => {
+  test.skip(!HAS_PACKS, NEEDS_PACKS);
   await page.goto('/');
   await expect(page.locator('.card').first()).toBeVisible();
   await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
@@ -52,6 +68,7 @@ test('saves a language for offline, then exports with the network off', async ({
 // worker used to be asked for that file anyway, 404 on it, and report a partial
 // save -- leaving the button stuck on "Partly saved" with no explanation.
 test('saves a pair that has no curated respellings', async ({ page, context }) => {
+  test.skip(!HAS_PACKS, NEEDS_PACKS);
   await page.goto('/');
   await expect(page.locator('.card').first()).toBeVisible();
   await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
@@ -80,6 +97,8 @@ test('saves a pair that has no curated respellings', async ({ page, context }) =
 // used to carry on and print a sheet quietly missing whole sections, which for a
 // safety-critical artifact is worse than refusing.
 test('a failed data or font fetch is reported, not printed around', async ({ page }) => {
+  // No guard: this one routes fetches to 503 and asserts the error surface, so it
+  // needs no service worker and runs whether `packs/` is there or not.
   for (const pattern of ['**/data/lang/ja/social.csv', '**/data/fonts/cjk-jp-400.woff2']) {
     await page.route(pattern, (route) => route.fulfill({ status: 503, body: 'nope' }));
     await page.goto('/sheet.html?target=ja&source=en');
@@ -95,6 +114,7 @@ test('a failed data or font fetch is reported, not printed around', async ({ pag
 });
 
 test('a saved pack survives a shell change', async ({ page, context }) => {
+  test.skip(!HAS_PACKS, NEEDS_PACKS);
   await page.goto('/');
   await expect(page.locator('.card').first()).toBeVisible();
   await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
@@ -124,6 +144,7 @@ test('a saved pack survives a shell change', async ({ page, context }) => {
 });
 
 test('a shell file is never shadowed by a copy in the pack cache', async ({ page }) => {
+  test.skip(!HAS_PACKS, NEEDS_PACKS);
   // The shell is version-scoped and the pack cache is not, deliberately -- so a
   // file in both is a file a deploy cannot replace. `caches.match` searches caches
   // in creation order and the pack cache outlives the shell, so the stale copy is
@@ -162,4 +183,23 @@ test('a shell file is never shadowed by a copy in the pack cache', async ({ page
   // And the pack cache is still doing its job, so this is not passing by being
   // empty -- a saved pair is its corpus rows and its subset fonts.
   expect(packOnly).toBeGreaterThan(20);
+});
+
+test('a first visit does not reload itself when the worker takes charge', async ({ page }) => {
+  test.skip(!HAS_PACKS, NEEDS_PACKS);
+  // `controllerchange` is how a deploy reaches a page that is already open: the new
+  // worker claims it, and the page reloads so the reader sees the new shell rather
+  // than the one their tab was parsed from. The hazard is the other case, which
+  // fires the same event -- the *first* worker taking charge of a page that had
+  // none. Reloading there would reload every first visit, and a reload that
+  // re-registers could do it again.
+  await page.goto('/');
+  await expect(page.locator('.card').first()).toBeVisible();
+  await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
+  // A value that cannot survive a navigation.
+  await page.evaluate(() => { /** @type {any} */ (window).__plgSentinel = 'kept'; });
+  await page.waitForTimeout(1500);
+  expect(await page.evaluate(() => /** @type {any} */ (window).__plgSentinel)).toBe('kept');
+  // And the page is still usable rather than mid-reload.
+  await expect(page.locator('.card').first()).toBeVisible();
 });

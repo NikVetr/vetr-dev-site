@@ -287,6 +287,28 @@ export function download(blob, name) {
  */
 export function registerOffline() {
   if (!('serviceWorker' in navigator)) return;
+
+  // **A deploy has to land on the first load, not the second.** The worker serves
+  // cache-first and revalidates behind it, which is what makes the app instant and
+  // offline -- and it means the page a returning reader is looking at was parsed
+  // from the *previous* deploy's shell while the new worker installs underneath.
+  // The new worker calls `skipWaiting` and `clients.claim()`, so it takes control of
+  // this page immediately, but the HTML, CSS and modules already parsed are the old
+  // ones. Without this the reader has to load the page twice to see a change, which
+  // reads exactly like the change not having shipped.
+  //
+  // Guarded on there having *been* a controller, because `controllerchange` also
+  // fires the first time a worker takes charge of a page that had none -- reloading
+  // then would reload every first visit. And latched, because a reload during the
+  // handler would otherwise be able to re-enter it.
+  const had = navigator.serviceWorker.controller !== null;
+  let reloading = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (!had || reloading) return;
+    reloading = true;
+    window.location.reload();
+  });
+
   navigator.serviceWorker.register('sw.js', { scope: './' })
     .catch((err) => console.warn('[plg] offline support unavailable:', err.message));
 }
