@@ -9,7 +9,7 @@ import {
   loadText, loadLanguages, readerLanguage,
   registerOffline, setReaderLanguage, showFatal,
 } from './app.js';
-import { regionRow } from './flags.js';
+import { regionRow, setFlagColours } from './flags.js';
 import { languagePicker } from './language-picker.js';
 import { openLightbox } from './lightbox.js';
 import {
@@ -298,7 +298,8 @@ function renderSpeakCollage(languages, reader) {
 
 async function main() {
   registerOffline();
-  const { languages, coverage, names } = await loadLanguages();
+  const { languages, coverage, names, regions } = await loadLanguages();
+  setFlagColours(regions);
   const reader = readerLanguage(languages, coverage);
   /**
    * The registry's names for one locale, as `languageName` wants them.

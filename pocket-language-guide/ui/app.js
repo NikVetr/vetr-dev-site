@@ -83,15 +83,21 @@ export async function loadLanguages() {
   // and Quenya cards printed their English exonyms in all fifty interface
   // languages, `Intl.DisplayNames` having no answer and the fallback being English
   // by construction.
-  const [languages, coverage, names] = await Promise.all([
+  const [languages, coverage, names, regions] = await Promise.all([
     loadText('data/registry/languages.csv'),
     loadText('data/coverage.json'),
     loadText('data/registry/language-names.csv'),
+    // 30KB, and it is what turns the country-code fallback from a white box into
+    // that country's own colours on a platform with no flag glyphs.
+    loadText('data/registry/regions.csv'),
   ]);
   return {
     languages: parseTable(languages, 'languages.csv'),
     coverage: JSON.parse(coverage),
     names: parseTable(names, 'language-names.csv'),
+    regions: Object.fromEntries(
+      parseTable(regions, 'regions.csv').map((r) => [r.iso3166, r]),
+    ),
   };
 }
 

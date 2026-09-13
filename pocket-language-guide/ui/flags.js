@@ -12,6 +12,27 @@ export function flagEmoji(code) {
   return String.fromCodePoint(...[...code].map((c) => c.charCodeAt(0) + OFFSET));
 }
 
+/**
+ * Each region's two flag colours, when a page has loaded them.
+ *
+ * Empty by default: not every page pays for `regions.csv`. A page that has it calls
+ * `setFlagColours` and the code chips below stop being white boxes.
+ * @type {Record<string, string[]>}
+ */
+let colours = Object.create(null);
+
+/**
+ * Hand the chips the flag colours `data/registry/regions.csv` carries.
+ * @param {Record<string, {flag_colors?: string}>} regions  keyed by ISO 3166
+ */
+export function setFlagColours(regions) {
+  colours = Object.create(null);
+  for (const [code, row] of Object.entries(regions ?? {})) {
+    const parts = (row?.flag_colors ?? '').split(';').map((c) => c.trim()).filter(Boolean);
+    if (parts.length) colours[code] = parts;
+  }
+}
+
 /** @type {boolean|null} */ let supported = null;
 
 /**
@@ -36,6 +57,46 @@ export function flagsSupported() {
     supported = false;
   }
   return supported;
+}
+
+/**
+ * One country: the flag where the platform draws flags, and its code where it does
+ * not -- carrying that flag's own two colours as a split wash behind the letters.
+ *
+ * **Windows ships no glyph for a regional-indicator pair, and the fallback read as
+ * broken.** Two grey letters in a white box, twelve of them down a card, look like
+ * something that failed to load rather than a choice. The colours are the same
+ * `flag_colors` the sheet's own background wash uses, mixed most of the way to paper
+ * for the same reason it is: the letters have to stay legible on Ireland's green and
+ * on San Marino's white alike, and a chip that is 28% of a saturated flag colour is
+ * a country you can tell apart at a glance without guessing at contrast.
+ *
+ * Real flags were measured and refused. They never reach a renderer -- `regionRow`
+ * is called only from the gallery, the sheet options and the format panel -- so a
+ * webfont would have been enough, and Noto Color Emoji subset to the regional
+ * indicators is **795KB of woff2**: its flags are CBDT bitmaps, which do not
+ * compress, and the GSUB ligatures keep all 258 reachable so asking for 78 saves
+ * nothing. Four times the whole Latin face, in a shell that has to download
+ * completely for offline to work. An SVG set would be a tenth of that and sharper,
+ * and it is the right answer the day someone picks a licence for one.
+ * @param {string} code ISO 3166-1 alpha-2
+ */
+function chip(code) {
+  const node = document.createElement('span');
+  node.className = 'flag';
+  node.title = code;
+  if (flagsSupported()) {
+    node.textContent = flagEmoji(code);
+    return node;
+  }
+  node.textContent = code;
+  const own = colours[code];
+  if (own?.length) {
+    node.classList.add('tinted');
+    node.style.setProperty('--flag-a', own[0]);
+    node.style.setProperty('--flag-b', own[own.length - 1]);
+  }
+  return node;
 }
 
 /**
@@ -68,13 +129,7 @@ export function regionRow(regions, opts = {}) {
   row.setAttribute('role', 'img');
   row.setAttribute('aria-label', opts.label ?? `Spoken in ${codes.join(', ')}`);
 
-  for (const code of shown) {
-    const chip = document.createElement('span');
-    chip.className = 'flag';
-    chip.textContent = flagsSupported() ? flagEmoji(code) : code;
-    chip.title = code;
-    row.append(chip);
-  }
+  for (const code of shown) row.append(chip(code));
   const rest = codes.slice(shown.length);
   if (rest.length) {
     // The hidden flags are rendered, not summarised: pointing at "+3" should show
@@ -87,13 +142,7 @@ export function regionRow(regions, opts = {}) {
     more.title = rest.join(', ');
     const popover = document.createElement('span');
     popover.className = 'flag-rest';
-    for (const code of rest) {
-      const chip = document.createElement('span');
-      chip.className = 'flag';
-      chip.textContent = flagsSupported() ? flagEmoji(code) : code;
-      chip.title = code;
-      popover.append(chip);
-    }
+    for (const code of rest) popover.append(chip(code));
     more.append(popover);
     row.append(more);
   }

@@ -160,3 +160,44 @@ test('a language ICU has never heard of is still named in the reader’s own scr
   // "I do not speak {target}" frame and would put a case form in a title.
   await expect(page.locator('.card[data-lang="ru"] .card-name')).toHaveText('ロシア語');
 });
+
+test('where the platform draws no flags, the codes carry the flag’s colours', async ({ page }) => {
+  // Windows ships no glyph for a regional-indicator pair, so `ui/flags.js` detects
+  // that and shows country codes instead. Two grey letters in a white box, a dozen
+  // of them down a card, read as something that failed to load rather than as a
+  // choice -- which is how it was reported. The chips now carry that flag's own two
+  // colours, the same `flag_colors` the sheet's background wash uses.
+  //
+  // Forced here by making the width probe report a composed pair as no narrower
+  // than the two letters drawn separately, which is exactly what the platform
+  // without flag glyphs does.
+  await page.addInitScript(() => {
+    const measure = CanvasRenderingContext2D.prototype.measureText;
+    CanvasRenderingContext2D.prototype.measureText = function (text) {
+      return { ...measure.call(this, text), width: [...text].length * 16 };
+    };
+  });
+  await page.setViewportSize({ width: 1500, height: 900 });
+  await page.goto('/');
+  await expect(page.locator('.card').first()).toBeVisible();
+
+  const seen = await page.evaluate(() => {
+    const chips = [...document.querySelectorAll('.flags.as-codes .flag')]
+      .filter((c) => !c.classList.contains('more'));
+    return chips.map((c) => ({
+      code: c.textContent,
+      tinted: c.classList.contains('tinted'),
+      a: c.style.getPropertyValue('--flag-a'),
+      painted: getComputedStyle(c).backgroundImage.startsWith('linear-gradient'),
+    }));
+  });
+  // The fallback is actually in force, and on real cards -- not a selector matching
+  // nothing, which is the shape this suite has been caught by before.
+  expect(seen.length).toBeGreaterThan(20);
+  // Every region in the registry has two colours, so every chip should be tinted.
+  expect(seen.filter((c) => !c.tinted)).toEqual([]);
+  for (const c of seen.slice(0, 12)) {
+    expect(c.a, `${c.code} should carry a flag colour`).toMatch(/^#[0-9A-Fa-f]{6}$/);
+    expect(c.painted, `${c.code} should be painted with the split wash`).toBe(true);
+  }
+});
