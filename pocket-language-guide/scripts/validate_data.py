@@ -168,7 +168,23 @@ def main():
         if not row["legend"].strip():
             errors.append(f"{where}: no legend -- a system with no mark worth explaining "
                           "should have no row at all")
-        check_drawable(row["legend"], "latin", f"{where} {row['system']} legend")
+        # **Fatal, because a romanisation legend is the one cell that cannot
+        # degrade.** It prints in the `latin` stack whatever the target's script,
+        # so a native glyph in it is an empty box in the PDF with no system font to
+        # fall back to -- and a legend is precisely the row a reader consults when
+        # they cannot read something. Five rows shipped that way: Marathi, Punjabi,
+        # Gujarati and Nepali each illustrated a romanised letter with the letter it
+        # stands for, and Armenian named the schwa with `ը`. Each one already said
+        # the same thing in words beside the glyph, so the glyphs are gone and
+        # nothing was lost -- except in Punjabi's `x ġ = ਖ਼ ਗ਼`, whose whole content
+        # was two Gurmukhi letters, and which now names them instead.
+        #
+        # A warning was the wrong severity for a defect with no reading under which
+        # the output is acceptable. Everything else `check_drawable` guards is a cell
+        # a reader might merely find odd; this one is a box where the explanation
+        # should be.
+        check_drawable(row["legend"], "latin", f"{where} {row['system']} legend",
+                       fatal=True)
 
     for code, region in regions.items():
         if len(code) != 2 or code != code.upper() or not code.isalpha():
