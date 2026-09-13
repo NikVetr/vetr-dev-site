@@ -24,10 +24,16 @@ test.describe('help me decide', () => {
     await quiz.getByRole('button', { name: 'Build my sheet' }).click();
     await expect(quiz).toHaveCount(0);
 
-    // Fewer items than everything, and the banner steps out of the way.
+    // Fewer items than everything. **The banner does not step out of the way any
+    // more**, and that is the point of the change this assertion was updated for:
+    // hiding it once the quiz had been answered set a flag that never cleared, so a
+    // reader who answered it could never reach the questionnaire again -- and it is
+    // the one control that sets several others at once. It costs nothing to keep now
+    // that it is a line in the header rather than a bar of its own.
     const narrowed = await expectIncludedNot(page, all.included);
     expect(narrowed.included).toBeLessThan(all.included);
-    await expect(page.locator('.banner')).toBeHidden();
+    await expect(page.locator('.banner')).toBeVisible();
+    await expect(page.locator('#quiz-open')).toBeEnabled();
     // Large print asked for bigger type, not the same content shrunk.
     await expect(page.getByRole('radio', { name: 'X-large' })).toHaveAttribute('aria-checked', 'true');
     // The shown-fields control is a row of glyph toggles now, not checkboxes, and
