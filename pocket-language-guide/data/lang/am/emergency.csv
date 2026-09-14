@@ -51,7 +51,7 @@ medical-conditions.i-am-pregnant,ነፍሰ ጡር ነኝ,,nefse tʼur neny,nəfs
 medical-conditions.i-carry-an-adrenaline-injector,የአድሬናሊን መርፌ ይዣለሁ,,yeʼādrēnalīn merfē yizhallehu,jəʔadrenalin mərfe jɨʒalːəhu,I am holding an adrenaline needle,2,am-agent-v1;ipa=bgn-am
 medical-conditions.i-take-medicine-for,ለ{} መድኃኒት እወስዳለሁ,,le{} medhanīt iwesdallehu,lə {} mədhanit ʔɨwəsdalːəhu,,2,am-agent-v1;ipa=bgn-am
 medical-conditions.i-take-blood-thinners,ደም የሚያሳሳ መድኃኒት እወስዳለሁ,,dem yemīyasasa medhanīt iwesdallehu,dəm jəmijasasa mədhanit ʔɨwəsdalːəhu,medicine that thins blood,2,am-agent-v1;ipa=bgn-am
-medical-conditions.medicine-allergy,የመድኃኒት አለርጂ፦ {},,yemedhanīt ālerjī፦ {},jəmədhanit ʔalərdʒi {},,2,am-agent-v1;ipa=bgn-am
+medical-conditions.medicine-allergy,የመድኃኒት አለርጂ፦ {},,yemedhanīt ālerjī: {},jəmədhanit ʔalərdʒi {},,2,am-agent-v1;ipa=bgn-am
 medical-conditions.this-card-lists-my-conditions,ይህ ካርድ የህመሜን ዝርዝር ይዟል,,yih kard yehimemēn zirizir yizwal,jɨh kard jəhɨməmen zɨrɨzɨr jɨzwal,,2,am-agent-v1;ipa=bgn-am
 medical-conditions.this-is-my-medicine,ይህ የኔ መድኃኒት ነው,,yih yenē medhanīt new,jɨh jəne mədhanit nəw,,2,am-agent-v1;ipa=bgn-am
 medical-conditions.please-give-me-sugar-or-juice,እባክዎ ስኳር ወይም ጭማቂ ይስጡኝ,,ibakwo skwar weyim chʼimakʼī yistʼunny,ʔɨbakwo skwar wəjɨm tʃʼɨmakʼi jɨstʼuɲː,ስኳር alone is granulated sugar — diabetes is የስኳር በሽታ,2,am-agent-v1;ipa=bgn-am
