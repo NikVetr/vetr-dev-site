@@ -7,3 +7,15 @@ building-words.entrance,,,ando,ˈando,gate / great door,3,qya-attest
 building-words.men,,,nér,neːr,man,3,qya-attested-v1;src=PE17/190.1105;eldamo=q;native=quenya-classical;ipa=appendix-e
 building-words.women,,,nís,niːs,woman,3,qya-attested-v1;src=PE17/190.1106;eldamo=q;native=quenya-classical;ipa=appendix-e
 building-words.door,,ando,fendë,fˈende,ando is a great door or gate,3,qya-attested-v1;src=PE17/045.2114;eldamo=q;native=quenya-classical;ipa=appendix-e
+toilets.it-is-urgent, ,,sangië ná,sˈaŋɡie naː,it is a pressing need,1,qya-composed-v1;lex=VT44/08.3601 + LotR/0377.4203;grammar=PE22;native=quenya-classical;ipa=appendix-e
+toilets.out-of-order,,,urra,ˈurra,bad,3,qya-attested-v1;src=PE22/168.0314;eldamo=q;native=quenya-classical;ipa=appendix-e
+toilets.it-is-out-of-order, ,,urra ná,ˈurra naː,it is bad,1,qya-composed-v1;lex=PE22/168.0314 + LotR/0377.4203;grammar=PE22;native=quenya-classical;ipa=appendix-e
+toilets.not-for-drinking, ,,ála yulë,ˈaːla jˈule,do not drink,1,qya-composed-v1;lex=VT43/22.0109 + PE17/063.1702;grammar=PE22;native=quenya-classical;ipa=appendix-e
+toilets.where-can-i-wash-my-hands,  ,,massë polin hwalë,mˈasse pˈolin hwˈale,where can I wash,1,qya-composed-v1;lex=PE23/111.2701 + PE17/155.3304 + PE23/126.1101;grammar=PE22;native=quenya-classical;ipa=appendix-e
+toilets.is-the-tap-water-safe-to-drink,    ,,ma polin yulë sina nén,ma pˈolin jˈule sˈina neːn,can I drink this water,1,qya-composed-v1;lex=PE17/068.0102 + PE17/063.1702 + PE17/052.2911;grammar=PE22;native=quenya-classical;ipa=appendix-e
+building-help.i-am-lost,   ,,lá istan massë nányë,laː ˈistan mˈasse nˈaːnje,I do not know where I am,1,qya-composed-v1;lex=PE17/052.0405 + PE23/111.2701;grammar=PE22;native=quenya-classical;ipa=appendix-e
+in-a-building.is-this-the-correct-entrance,    ,,ma sina i mára ando,ma sˈina i mˈaːra ˈando,is this the proper gate,1,qya-composed-v1;lex=PE17/068.0102 + PE17/016.1806 + LotR/1122.4605;grammar=PE22;native=quenya-classical;ipa=appendix-e
+accessibility.need-to-sit-down, ,,merin harë,mˈerin hˈare,I wish to sit,1,qya-composed-v1;lex=MS/01.01 + PE17/162.3911;grammar=PE22;native=quenya-classical;ipa=appendix-e
+accessibility.hard-of-hearing,  ,,lá hlarin mai,laː lˈarin maj,I do not hear well,1,qya-composed-v1;lex=MC/222.1102 + VT47/06.2105;grammar=PE22;native=quenya-classical;ipa=appendix-e
+accessibility.visually-impaired,  ,,lá cenin mai,laː kˈenin maj,I do not see well,1,qya-composed-v1;lex=CPT/1296.3406 + VT47/06.2105;grammar=PE22;native=quenya-classical;ipa=appendix-e
+accessibility.help-me-carry,    ,,á asya nin colë sina,aː ˈasja nin kˈole sˈina,help me carry this,1,qya-composed-v1;lex=PE17/148.1604 + PE22/155.2107-1;grammar=PE22;native=quenya-classical;ipa=appendix-e

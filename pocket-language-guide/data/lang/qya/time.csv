@@ -30,3 +30,9 @@ months.september,,,Yavannië,javˈannie,Yavanna-ne
 months.october,,,Narquelië,narkwˈelie,Sun-fading,3,qya-attested-v1;src=LotR/1110.0401;eldamo=q;native=quenya-classical;ipa=appendix-e
 months.november,,,Hísimë,hˈiːsime,Misty-one,3,qya-attested-v1;src=LotR/1110.0402;eldamo=q;native=quenya-classical;ipa=appendix-e
 months.december,,,Ringarë,rˈiŋɡare,Coldness,3,qya-attested-v1;src=LotR/1110.0403;eldamo=q;native=quenya-classical;ipa=appendix-e
+time-scheduling.what-day-is-it-today,   ,,mana aurë ná síra,mˈana ˈawre naː sˈiːra,what day is today,1,qya-composed-v1;lex=PM/395.1401 + MC/222.3402 + VT43/09.3400;grammar=PE22;native=quenya-classical;ipa=appendix-e
+time-scheduling.how-long-does-it-take, ,,malca lúmë,mˈalka lˈuːme,how much time,1,qya-composed-v1;lex=PE22/124.0510 + Let/265.0109;grammar=PE23;native=quenya-classical;ipa=appendix-e
+time-scheduling.what-time-does-it-open, ,,mallumë latya,mˈallume lˈatja,at what time does it open,1,qya-composed-v1;lex=PE23/109.0710 + PE17/159.1207;grammar=PE22;native=quenya-classical;ipa=appendix-e
+time-scheduling.what-time-does-it-close, ,,mallumë holya,mˈallume hˈolja,at what time does it shut -- the source reads holya with a query,1,qya-composed-v1;lex=PE23/109.0710 + PE17/098.3110;grammar=PE22;native=quenya-classical;ipa=appendix-e
+time-scheduling.can-we-change-the-time,    ,,ma polilmë vista i lúmë,ma polˈilme vˈista i lˈuːme,can we change the hour,1,qya-composed-v1;lex=PE17/155.3304 + PE17/191.1610 + Let/265.0109;grammar=PE22;native=quenya-classical;ipa=appendix-e
+time-scheduling.what-time-should-we-meet, ,,mallumë omenuvalmë,mˈallume omenuvˈalme,at what time shall we meet -- omen- is reconstructed from omentië,1,qya-composed-v1;lex=PE23/109.0710 + PE17/013.1806-2;grammar=PE22;native=quenya-classical;ipa=appendix-e

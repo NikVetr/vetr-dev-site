@@ -1,2 +1,4 @@
 concept_id,text,text_alt,romanization_appendix-e,ipa,literal,confidence,provenance
 shopping.what-is-this, ,,mana sina,mˈana sˈina,what is this?,1,qya-composed-v1;lex=PE23/135.0514 + PE23/135.1413;grammar=PE22;native=quenya-classical;ipa=appendix-e
+shopping.i-am-just-looking, ,,cenin rië,kˈenin rˈie,I only look,1,qya-composed-v1;lex=CPT/1296.3406 + PE22/158.2803;grammar=PE22;native=quenya-classical;ipa=appendix-e
+color-size-returns.do-you-have-another-color,   ,,ma haryalyë hyana quilë,ma hˈarjalje hjˈana kwˈile,do you have another hue -- qile is Tolkien's 1910s word,1,qya-composed-v1;lex=MS/01.03 + VT49/14.4302 + QL/077.1801;grammar=PE22;native=quenya-classical;ipa=appendix-e

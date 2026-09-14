@@ -11,3 +11,6 @@ numbers-money.ji,,,nertë,nˈerte,,3,qya-attested-v1;src=PE17/095
 numbers-money.sh,,cëan,quëan,kwˈean,,3,qya-attested-v1;src=VT48/06.1506;eldamo=q;native=quenya-classical;ipa=appendix-e
 numbers-money.b-n,,peresta,perta,pˈerta,one half,3,qya-attested-v1;src=VT48/11.2601;eldamo=q;native=quenya-classical;ipa=appendix-e
 atm-cash.coin,,,malta,mˈalta,gold as material -- Quenya has no attested word for coin,3,qya-attested-v1;src=LotR/1123.0302;eldamo=q;native=quenya-classical;ipa=appendix-e
+numbers-money.l-ng,,,munta,mˈunta,nothing -- Quenya has no attested numeral for zero,1,qya-earlier-v1;src=PE14/048.2105;eldamo=nq;native=quenya-classical;ipa=appendix-e
+numbers-money.y-b-i,,,tuxa,tˈuksa,"hundred -- in the 1910s lexicon this counted 144, a duodecimal gross",1,qya-earlier-v1;src=PE14/049.3602;eldamo=nq;native=quenya-classical;ipa=appendix-e
+numbers-money.y-qi-n,,,húmë,hˈuːme,thousand; originally a great number,1,qya-earlier-v1;src=PE14/050.0307;eldamo=nq;native=quenya-classical;ipa=appendix-e

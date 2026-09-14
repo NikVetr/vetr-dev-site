@@ -7,3 +7,7 @@ utility-templates.i-need,  {},,sangienya ná
 utility-templates.is-this,  {},,sina ná {},sˈina naː {},this is it?,1,qya-composed-v1;lex=PE23/135.1413 + LotR/0377.4203;grammar=PE22;native=quenya-classical;ipa=appendix-e
 utility-templates.please,"{}, ",,"{}, mecin","{}, mˈekin",please -- mecin follows the request,1,qya-composed-v1;lex=PE22/166.2001;grammar=PE22;native=quenya-classical;ipa=appendix-e
 utility-templates.i-am-looking-for, {},,cestan {},kˈestan {},I seek it,1,qya-composed-v1;lex=PE17/156.2801;grammar=PE22;native=quenya-classical;ipa=appendix-e
+utility-templates.is-there-nearby,  {},,ma ëa {},ma ˈea {},is there any -- Quenya has no word for nearby,1,qya-composed-v1;lex=PE17/068.0102 + PE17/074.4215;grammar=PE22;native=quenya-classical;ipa=appendix-e
+utility-templates.please-do-not-add,  {},,ála anta {},ˈaːla ˈanta {},do not add it,1,qya-composed-v1;lex=VT43/22.0109 + Minor-Doc/1955-CT.0303;grammar=PE22;native=quenya-classical;ipa=appendix-e
+utility-templates.i-cannot-find,  {},,lá hirin {},laː hˈirin {},I do not find it,1,qya-composed-v1;lex=PE22/153.1903 + LotR/0378.0103;grammar=PE22;native=quenya-classical;ipa=appendix-e
+utility-templates.there-is-a-problem-with,  {},,urra ná {},ˈurra naː {},it is bad,1,qya-composed-v1;lex=PE22/168.0314 + LotR/0377.4203;grammar=PE22;native=quenya-classical;ipa=appendix-e

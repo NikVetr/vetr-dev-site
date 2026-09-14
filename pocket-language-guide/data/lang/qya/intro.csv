@@ -5,3 +5,7 @@ introductions.what-is-your-name, ,,mana essetya
 introductions.this-is-my-friend,  ,,sina ná málonya,sˈina naː mˈaːlonja,this is my friend,1,qya-composed-v1;lex=PE18/096.1502;grammar=PE22;native=quenya-classical;ipa=appendix-e
 introductions.i-am-from, {},,nányë {}llo,nˈaːnje {} llo,I am from it,1,qya-composed-v1;lex=LotR/0377.4203 + PE17/074;grammar=PE22;native=quenya-classical;ipa=appendix-e
 introductions.how-are-you, ,,manen nalyë,mˈanen nˈalje,how are you?,1,qya-composed-v1;lex=PM/395.1209 + PE17/075;grammar=PE22;native=quenya-classical;ipa=appendix-e
+introductions.where-are-you-from, ,,mallo tulilyë,mˈallo tˈulilje,whence do you come,1,qya-composed-v1;lex=PE22/124.1812 + LotR/0967.3504;grammar=PE22;native=quenya-classical;ipa=appendix-e
+introductions.this-is-my-husband-wife,   / ,,sina ná verunya / verinya,sˈina naː vˈerunja / vˈerinja,this is my husband / my wife,1,qya-composed-v1;lex=VT49/45.4103 + VT49/45.4106;grammar=Plotz;native=quenya-classical;ipa=appendix-e
+introductions.this-is-my-daughter-son,   / ,,sina ná yeldenya / yondonya,sˈina naː jˈeldenja / jˈondonja,this is my daughter / my son,1,qya-composed-v1;lex=PE17/190.3804 + PE17/170.2102;grammar=Plotz;native=quenya-classical;ipa=appendix-e
+introductions.i-am-traveling-alone, ,,lelyan erinqua,lˈeljan erˈinkwa,I travel alone,1,qya-composed-v1;lex=WJ/363.1103 + VT42/10.2002;grammar=PE22;native=quenya-classical;ipa=appendix-e

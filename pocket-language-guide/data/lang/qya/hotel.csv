@@ -1,0 +1,7 @@
+concept_id,text,text_alt,romanization_appendix-e,ipa,literal,confidence,provenance
+hotel-basics.are-any-rooms-available,   ,,ma ëa latina sambë,ma ˈea lˈatina sˈambe,is there a free room -- sambe is the Etymologies word,1,qya-composed-v1;lex=PE17/074.4215 + PE17/159.1304 + Ety/STAB.005;grammar=PE22;native=quenya-classical;ipa=appendix-e
+hotel-basics.may-i-see-the-room,    ,,ecë nin cenë i sambë,ˈeke nin kˈene i sˈambe,may I see the room,1,qya-composed-v1;lex=VT49/20.0907 + CPT/1296.3406 + Ety/STAB.005;grammar=PE22;native=quenya-classical;ipa=appendix-e
+hotel-basics.there-are-two-of-us, ,,nalmë atta,nˈalme ˈatta,we are two,1,qya-composed-v1;lex=PE17/074.4215 + PE17/095.3704;grammar=PE22;native=quenya-classical;ipa=appendix-e
+hotel-basics.for-nights,{} ,,{} lómi,{} lˈoːmi,{} nights,1,qya-composed-v1;lex=PE17/081.0102;grammar=Plotz;native=quenya-classical;ipa=appendix-e
+room-problems.there-is-no-hot-water,   ,,lá ëa lauca nén,laː ˈea lˈawka neːn,there is no warm water,1,qya-composed-v1;lex=PE22/153.1903 + PE18/093.0508 + PE17/052.2911;grammar=PE22;native=quenya-classical;ipa=appendix-e
+room-problems.the-light-does-not-work,   ,,i calma ná urra,i kˈalma naː ˈurra,the lamp is bad,1,qya-composed-v1;lex=LotR/1121.4203 + PE22/168.0314;grammar=PE22;native=quenya-classical;ipa=appendix-e

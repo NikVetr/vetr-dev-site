@@ -93,9 +93,28 @@ means "sourced", *not* "a fluent speaker has read it" — do not describe your o
 as reviewed.
 
 **Coverage below 100% is fine when it is a fact.** Klingon has no word for north or
-south; Quenya has no interrogative for "where", which empties every "Where is X?"
-concept. Record the reason in the pack's notes. What is not fine is a blank cell with
-no explanation.
+south — its compass has three points, `chan` east, `tIng` southwest and `'ev`
+northwest — which blanks those rows and makes
+`taxi.we-need-the-east-gate-not-the-south-gate` unsayable as written. Quenya has no
+attested verb "to write" (`tengwa-` is to *read* written matter) and no word for
+buy, sell, pay, price, money, coin or bank, which empties the whole of `shopping`,
+`payment-receipt` and `atm-cash`. Record the reason in the pack's notes. What is not
+fine is a blank cell with no explanation.
+
+**A period label is not a rejection, and that distinction cost this project a
+paradigm.** This paragraph used to say Quenya had no interrogative for "where" and
+that it emptied every "Where is X?" concept. That was wrong: Tolkien's 1948
+*Demonstrative, Relative and Correlative Stems* gives a full interrogative series off
+√MA — `massë` where, `mallo` whence, `manna` whither, `mallumë` at what time — and he
+wrote real sentences with it (`masse lante Veleriande, masse láta sí?`). Eldamo
+recommends the series for Neo-Quenya *unmarked*, i.e. not as a coinage. It was missed
+because the first pass filtered on `l="q"` alone, and these entries carry `l="mq"`,
+which labels the **period** the word belongs to rather than marking it unusable.
+Admitting that tier at `confidence: 1`, with the tier visible in `provenance`
+(`qya-earlier-v1`, `eldamo=mq`), unlocked nineteen rows including
+`question-words.where` and `directions.where-is`. So when a source marks its entries,
+read what the mark actually means before you treat it as a refusal — and keep the
+tier legible in `provenance` so a later reviewer can strip it if they disagree.
 
 **No duplicate `concept_id` within your pack.** `loadLanguage` keeps the last row and
 silently drops the rest. `validate_data.py` now catches this; it did not always.

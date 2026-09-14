@@ -1154,9 +1154,25 @@ test('a sheet pinned at the scale ceiling gives back paper it cannot fill', asyn
   // the sheet is not at 1.00 because it needs to be, it is at 1.00 because it may
   // not be larger, so the pair it holds buys blank card and nothing else.
   //
-  // `qya <- ar` is the sharpest case: two faces fit at 0.74, which is more type than
-  // the Spanish reference sheet's own 0.47, and it was refused by a hundredth.
-  const thin = await referenceSpec('qya', 'ar');
+  // `qya <- ar` was the sharpest case when this was written: two faces fit at 0.74,
+  // more type than the Spanish reference sheet's own 0.47, and it was refused by a
+  // hundredth.
+  //
+  // **That fixture expired, and the way it expired is worth recording.** The Quenya
+  // pack went from 206 rows to 296, and at 296 the four faces are genuinely full --
+  // every column within 1-4% of the foot, where this comment's "quarter to a third
+  // blank" was measured. So the giveback correctly stops firing, `blankFraction`
+  // never reaches `BLANK_GIVEBACK`, and the assertion failed for the right reason.
+  // A regression guard keyed to one pack's coverage expires as soon as that pack is
+  // filled in, which is the whole point of the project.
+  //
+  // So the sparseness is now specified rather than borrowed: Finnish is complete at
+  // 771 rows and `priority: core` trims the bank by importance, which is a property
+  // of the spec instead of a property of a language nobody has finished. To
+  // re-derive a fixture if this one ever expires too, raise `CEILING_GIVEBACK` to
+  // `KEEP_GIVEBACK` and look for a pair whose face count changes; `fi <- en` and
+  // `ka <- en` are the other two that did at the time of writing.
+  const thin = await referenceSpec('fi', 'ar', { priority: PRIORITY_STEPS.core });
   await loadFontsFor(ctx, thin.target, thin.source);
   const shed = (await buildSheet(ctx, thin)).plan;
   assert.equal(shed.geometry.faces, 2, 'two faces, not four');

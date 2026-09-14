@@ -36,3 +36,10 @@ question-words.some,,,ma,ma,something / anything,3,qya-attested-v1;src=PE1
 question-words.very,,,íta,ˈiːta,very / extremely,3,qya-attested-v1;src=PE17/112.1210;eldamo=q;native=quenya-classical;ipa=appendix-e
 question-words.also,,,ar,ar,and / also,3,qya-attested-v1;src=LotR/0377.3801;eldamo=q;native=quenya-classical;ipa=appendix-e
 question-words.all-both,,illi,ilyë,ˈilje,illi is the pronoun,3,qya-attested-v1;src=PE17/091.1213;eldamo=q;native=quenya-classical;ipa=appendix-e
+question-words.where,,,massë,mˈasse,where -- ma with the locative ending,1,qya-earlier-v1;src=PE23/111.2701;eldamo=mq;native=quenya-classical;ipa=appendix-e
+question-words.which-one,,,mana,mˈana,what / which,3,qya-attested-v1;src=PE23/135.0513;eldamo=q;native=quenya-classical;ipa=appendix-e
+question-words.why,,,maro,mˈaro,for what reason,1,qya-earlier-v1;src=PE23/112.1301;eldamo=mq;native=quenya-classical;ipa=appendix-e
+question-words.how-many,,,malli,mˈalli,how many,1,qya-earlier-v1;src=PE23/106.4604;eldamo=mq;native=quenya-classical;ipa=appendix-e
+question-words.how-much-many,,,malca,mˈalka,how much / how great,1,qya-earlier-v1;src=PE22/124.0510;eldamo=mq;native=quenya-classical;ipa=appendix-e
+question-words.how-much-what-price,,,malca,mˈalka,how much -- Quenya has no attested word for price,1,qya-earlier-v1;src=PE22/124.0510;eldamo=mq;native=quenya-classical;ipa=appendix-e
+pronouns-verbs.there-is-not-do-not-have, ,,lá ëa,laː ˈea,it does not exist,1,qya-composed-v1;lex=PE22/153.1903 + PE17/074.4215;grammar=PE22;native=quenya-classical;ipa=appendix-e

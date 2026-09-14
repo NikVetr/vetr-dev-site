@@ -28,3 +28,15 @@ common-signs.do-not-touch, ,,ála appa,ˈaːla ˈappa
 common-signs.open-operating,,,latina,lˈatina,free of obstacles,3,qya-attested-v1;src=PE17/159.1304;eldamo=q;native=quenya-classical;ipa=appendix-e
 common-signs.closed,,,pahta,pˈaxta,closed / shut,3,qya-attested-v1;src=PE17/171.1108;eldamo=q;native=quenya-classical;ipa=appendix-e
 common-signs.stopped-stop,,,metta,mˈetta,end / ending,3,qya-attested-v1;src=LotR/0967.3602;eldamo=q;native=quenya-classical;ipa=appendix-e
+directions.where-is,  {},,massë ná {},mˈasse naː {},where is it,1,qya-composed-v1;lex=PE23/111.2701 + LotR/0377.4203;grammar=PE23;native=quenya-classical;ipa=appendix-e
+directions.where-is-the-nearest,  {},,massë ná {},mˈasse naː {},where is it -- Quenya has no word for nearest,1,qya-composed-v1;lex=PE23/111.2701 + LotR/0377.4203;grammar=PE23;native=quenya-classical;ipa=appendix-e
+directions.how-do-i-get-to,  {},,manen menin {}nna,mˈanen mˈenin {} nna,how do I go to it,1,qya-composed-v1;lex=PM/395.1209 + VT49/23.3707;grammar=PE22;native=quenya-classical;ipa=appendix-e
+directions.where-am-i, ,,massë nányë,mˈasse nˈaːnje,where am I,1,qya-composed-v1;lex=PE23/111.2701 + PE17/074.4215;grammar=PE22;native=quenya-classical;ipa=appendix-e
+directions.can-i-walk-there,   ,,ma polin pata tanomenna,ma pˈolin pˈata tanomˈenna,can I walk to that place,1,qya-composed-v1;lex=PE17/068.0102 + PE17/181.3411 + PE17/034.2511;grammar=PE22;native=quenya-classical;ipa=appendix-e
+directions.can-you-show-me-the-way,    ,,á tana nin i tië,aː tˈana nin i tˈie,show me the path,1,qya-composed-v1;lex=MR/471.3501 + LotR/0377.3803;grammar=PE22;native=quenya-classical;ipa=appendix-e
+directions.how-long-on-foot, ,,malca lúmë,mˈalka lˈuːme,how much time -- Quenya has no phrase for on foot,1,qya-composed-v1;lex=PE22/124.0510 + Let/265.0109;grammar=PE23;native=quenya-classical;ipa=appendix-e
+quick-directions.go-straight,  ,,á menë téra,aː mˈene tˈeːra,go straight -- tera is straight in malle tera lende numenna,1,qya-composed-v1;lex=PE17/094.0601 + LR/047.1000;grammar=PE22;native=quenya-classical;ipa=appendix-e
+quick-directions.turn-left,  ,,á querë hyarmanna,aː kwˈere hjarmˈanna,turn to the left hand,1,qya-composed-v1;lex=VT49/21.1413 + VT47/06.3701;grammar=Plotz;native=quenya-classical;ipa=appendix-e
+quick-directions.turn-right,  ,,á querë formanna,aː kwˈere formˈanna,turn to the right hand,1,qya-composed-v1;lex=VT49/21.1413 + VT47/06.3612;grammar=Plotz;native=quenya-classical;ipa=appendix-e
+quick-directions.across-from-here,,,lanna,lˈanna,athwart / across,3,qya-attested-v1;src=PE17/065.2614;eldamo=q;native=quenya-classical;ipa=appendix-e
+border-customs.i-am-in-transit, ,,nányë lendassë,nˈaːnje lendˈasse,I am on a journey,1,qya-composed-v1;lex=PE17/060.3205 + PE17/074.4215;grammar=Plotz;native=quenya-classical;ipa=appendix-e
