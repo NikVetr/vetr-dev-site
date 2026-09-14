@@ -4,7 +4,7 @@ time-scheduling.what-time-should-we-meet, ,,ghorgh ma
 time-scheduling.what-day-is-it-today, ,,nuq DaHjaj,nuqʰ ɖɑxdʒɑdʒ,what is today?,1,tlh-composed-v1;lex=CK + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
 time-scheduling.what-time-does-it-open, ,,ghorgh poSlu',ɣorɣ pʰoʂluʔ,when is it opened?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
 time-scheduling.what-time-does-it-close, ,,ghorgh SoQlu',ɣorɣ ʂoqxluʔ,when is it closed?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-time-scheduling.how-long-does-it-take,  ,,'ar poH poQlu',ʔɑr pʰox pʰoqxluʔ,how much time is required?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+time-scheduling.how-long-does-it-take,  ,,poH 'ar poQlu',pʰox ʔɑr pʰoqxluʔ,how much time is required?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
 time-words.today,,,DaHjaj,ɖɑxdʒɑdʒ,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
 time-words.tomorrow,,,wa'leS,wɑʔlɛʂ,one day from now,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
 time-words.yesterday,,,wa'Hu',wɑʔxuʔ,one day ago,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
@@ -12,3 +12,15 @@ time-words.this-week,,,Hoghvam,xoɣvɑm,this week,1,tlh-compos
 time-words.morning,,,po,pʰo,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
 time-words.afternoon,,,pov,pʰov,afternoon,3,tlh-attested-v1;src=Saarbruecken qepHom'a' 2023;native=piqad-csur;ipa=okrand
 time-words.night,,,ram,rɑm,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+days-of-week.monday,,,DaSjaj,ɖɑʂdʒɑdʒ,,3,tlh-attested-v1;src=Saarbruecken qepHom'a' 2013;native=piqad-csur;ipa=okrand
+days-of-week.tuesday,,,povjaj,pʰovdʒɑdʒ,,3,tlh-attested-v1;src=Saarbruecken qepHom'a' 2013;native=piqad-csur;ipa=okrand
+days-of-week.wednesday,,,ghItlhjaj,ɣɪtɬdʒɑdʒ,,3,tlh-attested-v1;src=Saarbruecken qepHom'a' 2013;native=piqad-csur;ipa=okrand
+days-of-week.thursday,,,loghjaj,loɣdʒɑdʒ,,3,tlh-attested-v1;src=Saarbruecken qepHom'a' 2013;native=piqad-csur;ipa=okrand
+days-of-week.friday,,,buqjaj,buqʰdʒɑdʒ,,3,tlh-attested-v1;src=Saarbruecken qepHom'a' 2013;native=piqad-csur;ipa=okrand
+days-of-week.saturday,,,lojmItjaj,lodʒmɪtʰdʒɑdʒ,the formal name; ghInjaj is the everyday one,3,tlh-attested-v1;src=Saarbruecken qepHom'a' 2013;native=piqad-csur;ipa=okrand
+days-of-week.sunday, ,,jaj wa',dʒɑdʒ wɑʔ,"day one -- the Klingon week has six days, so a seventh is numbered",3,tlh-attested-v1;src=Saarbruecken qepHom'a' 2013;native=piqad-csur;ipa=okrand
+time-words.next-week, ,,Hogh veb,xoɣ vɛb,the next week,1,tlh-composed-v1;lex=TKD + KGT;grammar=TKD;native=piqad-csur;ipa=okrand
+time-words.summer, ,,qImroq tuj,qʰɪmroqʰ tʰudʒ,hot season -- Okrand's own way of naming a Terran season,1,tlh-composed-v1;lex=qep'a' 23 (2016) + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+time-words.winter, ,,qImroq bIr,qʰɪmroqʰ bɪr,cold season,1,tlh-composed-v1;lex=qep'a' 23 (2016) + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+time-scheduling.how-many-minutes, ,,tup 'ar,tʰupʰ ʔɑr,how many minutes?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+time-scheduling.can-we-change-the-time, ,,rep wIchoHlaH'a',rɛpʰ wɪtʃoxlɑxʔɑʔ,can we change the hour?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand

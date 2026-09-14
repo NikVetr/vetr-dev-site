@@ -11,3 +11,6 @@ utility-templates.is-this,{} ,,{} 'oH'a',{} ʔoxʔɑʔ,is it t
 utility-templates.i-am-looking-for,{} ,,{} vInej,{} vɪnɛdʒ,I am looking for it,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
 utility-templates.i-cannot-find,{} ,,{} vItu'laHbe',{} vɪtʰuʔlɑxbɛʔ,I cannot find it,3,tlh-attested-v1;src=TKD p.171;native=piqad-csur;ipa=okrand
 utility-templates.there-is-a-problem-with,{} ,,{} QapHa',{} qxɑpʰxɑʔ,it malfunctions,1,tlh-composed-v1;lex=KGT + TKD 4.3;grammar=TKD;native=piqad-csur;ipa=okrand
+utility-templates.do-you-accept,{} ,,{} DalajlaH'a',{} ɖɑlɑdʒlɑxʔɑʔ,can you accept {}?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+utility-templates.please,{} ,,{} vIneH,{} vɪnɛx,I want {} -- Klingon has no word for please,1,tlh-composed-v1;lex=TKD;grammar=TKD 6.2.5;native=piqad-csur;ipa=okrand
+utility-templates.please-do-not-add,{} ,,{} yIchelQo',{} jɪtʃɛlqxoʔ,do not add {},1,tlh-composed-v1;lex=TKD;grammar=TKD 4.3;native=piqad-csur;ipa=okrand

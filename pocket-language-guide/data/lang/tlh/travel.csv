@@ -57,3 +57,41 @@ common-signs.do-not-touch,,,yIHotQo',jɪxotʰqxoʔ,do no
 common-signs.open-operating,,,Qap,qxɑpʰ,be in operation,3,tlh-attested-v1;src=KGT;native=piqad-csur;ipa=okrand
 common-signs.closed,,,SoQ,ʂoqx,be closed,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
 common-signs.stopped-stop,,,mev,mɛv,stop / cease,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+directions.please-show-me-on-the-map, ,,pu'jInDaq HI'ang,pʰuʔdʒɪnɖɑqʰ xɪʔɑŋ,show me on the map,1,tlh-composed-v1;lex=qep'a' 14 (2007) + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+directions.where-is-the-nearest,  {} ,,nuqDaq 'oH {} Sum'e',nuqʰɖɑqʰ ʔox {} ʂumʔɛʔ,where is the nearby one?,1,tlh-composed-v1;lex=TKD p.170 + KGT;grammar=TKD;native=piqad-csur;ipa=okrand
+directions.can-you-show-me-the-way, ,,He HI'ang,xɛ xɪʔɑŋ,show me the route,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+directions.how-long-on-foot,   ,,yItmeH poH 'ar poQlu',jɪtʰmɛx pʰox ʔɑr pʰoqxluʔ,how much time is needed for walking?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+directions.which-exit,  ,,nuq 'elHa'meH lojmIt,nuqʰ ʔɛlxɑʔmɛx lodʒmɪtʰ,which way-out door?,1,tlh-composed-v1;lex=Saarbruecken qepHom'a' 2023 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+quick-directions.turn-left, ,,poSDaq yItlhe',pʰoʂɖɑqʰ jɪtɬɛʔ,turn to the left,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+quick-directions.turn-right, ,,nIHDaq yItlhe',nɪxɖɑqʰ jɪtɬɛʔ,turn to the right,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+taxi.please-send-me-the-address,  ,,Daq De' yIlI',ɖɑqʰ ɖɛʔ jɪlɪʔ,transmit the location data,1,tlh-composed-v1;lex=Star Trek III + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+taxi.please-use-the-meter, ,,juvwI' yIlo',dʒuvwɪʔ jɪloʔ,use the measuring device,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+transit-rides.what-is-the-next-stop,  ,,nuq Daq veb,nuqʰ ɖɑqʰ vɛb,what is the next place?,1,tlh-composed-v1;lex=KGT + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+transit-rides.please-tell-me-where-to-get-off, ,,jImejnISDI' HIja',dʒɪmɛdʒnɪʂɖɪʔ xɪdʒɑʔ,tell me when I must leave,1,tlh-composed-v1;lex=TKDA + TKD;grammar=TKD 6.2.2;native=piqad-csur;ipa=okrand
+transit-rides.which-platform, ,,nuq yaH,nuqʰ jɑx,which duty station?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+transit-rides.can-i-use-this-ticket,  ,,'elmeH chaw'vam vIlo'laH'a',ʔɛlmɛx tʃɑwʔvɑm vɪloʔlɑxʔɑʔ,can I use this entry pass?,1,tlh-composed-v1;lex=KLI 2011.09.30 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+transit-rides.i-went-past-my-stop, ,,DaqwIj vIjuSpu',ɖɑqʰwɪdʒ vɪdʒuʂpʰuʔ,I have passed my place,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+rail-station-words.fare, ,,DIlmeH Huch,ɖɪlmɛx xutʃ,price,3,tlh-attested-v1;src=TKD p.171;native=piqad-csur;ipa=okrand
+rail-station-words.ticket-gate,  ,,'elmeH chaw' lojmIt,ʔɛlmɛx tʃɑwʔ lodʒmɪtʰ,the entry-pass door,1,tlh-composed-v1;lex=KLI 2011.09.30 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+rail-station-words.final-stop, ,,Daq Qav,ɖɑqʰ qxɑv,the final place,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+rail-station-words.delayed,,,paS,pʰɑʂ,be late,3,tlh-attested-v1;src=KGT;native=piqad-csur;ipa=okrand
+border-customs.customs, ,,HIjmeH 'ap,xɪdʒmɛx ʔɑpʰ,customs fee,3,tlh-attested-v1;src=Saarbruecken qepHom'a' 2020;native=piqad-csur;ipa=okrand
+border-customs.boarding-pass, ,,'elmeH chaw',ʔɛlmɛx tʃɑwʔ,entry pass,3,tlh-attested-v1;src=KLI 2011.09.30;native=piqad-csur;ipa=okrand
+border-customs.nothing-to-declare, ,,pagh jIqem,pʰɑɣ dʒɪqʰɛm,I bring nothing,1,tlh-composed-v1;lex=TKD;grammar=TKD 6.4;native=piqad-csur;ipa=okrand
+border-customs.i-am-here-for-business,  ,,malja'mo' naDev jIH,mɑldʒɑʔmoʔ nɑɖɛv dʒɪx,I am here because of business,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+border-customs.i-am-visiting-family, ,,qorDu'wIj vISuch,qʰorɖuʔwɪdʒ vɪʂutʃ,I visit my family,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+border-customs.i-am-in-transit,,,jIlengtaH,dʒɪlɛŋtʰɑx,I am still travelling,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+border-customs.this-is-for-personal-use,  ,,vIlo'meH Doch 'oH,vɪloʔmɛx ɖotʃ ʔox,it is a thing for me to use,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+border-customs.this-is-a-gift, ,,nob 'oH,nob ʔox,it is a gift,1,tlh-composed-v1;lex=TKD;grammar=TKD 6.3;native=piqad-csur;ipa=okrand
+border-customs.i-have-a-return-ticket,   ,,cheghmeH 'elmeH chaw' vIghaj,tʃɛɣmɛx ʔɛlmɛx tʃɑwʔ vɪɣɑdʒ,I have an entry pass for returning,1,tlh-composed-v1;lex=KLI 2011.09.30 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+border-customs.how-long-may-i-stay,   ,,poH 'ar naDev jIratlhlaH,pʰox ʔɑr nɑɖɛv dʒɪrɑtɬlɑx,how much time can I remain here?,1,tlh-composed-v1;lex=KCD + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+border-customs.i-am-staying-at,{} ,,{}Daq jIratlh,{} ɖɑqʰ dʒɪrɑtɬ,I remain at {},1,tlh-composed-v1;lex=KCD + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+border-customs.where-do-i-collect-my-baggage,   ,,nuqDaq leng buqwIj vISuq,nuqʰɖɑqʰ lɛŋ buqʰwɪdʒ vɪʂuqʰ,where do I get my suitcase?,1,tlh-composed-v1;lex=TNK + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+border-customs.i-have-no-food-or-plants,   ,,Soj tI je vIghajbe',ʂodʒ tʰɪ dʒɛ vɪɣɑdʒbɛʔ,I do not have food or vegetation,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+border-customs.i-have-in-cash,{}  ,,{} Huch vIghaj,{} xutʃ vɪɣɑdʒ,I have {} money,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+pickup-meeting.where-is-the-pickup-point, ,,nuqDaq maghom,nuqʰɖɑqʰ mɑɣom,where do we meet?,1,tlh-composed-v1;lex=TKD p.170;grammar=TKD;native=piqad-csur;ipa=okrand
+pickup-meeting.please-pick-us-up-here,,,HIghoS,xɪɣoʂ,come to me!,3,tlh-attested-v1;src=TKD p.170;native=piqad-csur;ipa=okrand
+common-signs.no-smoking, ,,tlhIch yIpurQo',tɬɪtʃ jɪpʰurqxoʔ,do not inhale smoke!,1,tlh-composed-v1;lex=TNK;grammar=TKD 4.3;native=piqad-csur;ipa=okrand
+common-signs.no-photography, ,,mIllogh yIqonQo',mɪlloɣ jɪqʰonqxoʔ,do not record pictures!,1,tlh-composed-v1;lex=Saarbruecken qepHom'a' 2010 + TKD;grammar=TKD 4.3;native=piqad-csur;ipa=okrand
+place-words.visitor-center,  ,,chughwI' QaHmeH Daq,tʃuɣwɪʔ qxɑxmɛx ɖɑqʰ,the place for helping tourists,1,tlh-composed-v1;lex=qep'a' 33 (2026) + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+place-words.tourist-spot-sightseeing-area, ,,chughwI' Daq,tʃuɣwɪʔ ɖɑqʰ,the tourists' place,1,tlh-composed-v1;lex=qep'a' 33 (2026) + TKD;grammar=TKD;native=piqad-csur;ipa=okrand

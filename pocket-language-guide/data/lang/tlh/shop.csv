@@ -10,3 +10,15 @@ shopping.what-is-this, ,,Dochvam nuq,ɖotʃvɑm nuqʰ
 shopping.where-can-i-buy, {} ,,nuqDaq {} vIje'laH,nuqʰɖɑqʰ {} vɪdʒɛʔlɑx,where can I buy it?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
 shopping.what-is-it-made-of, ,,nuq lo'lu',nuqʰ loʔluʔ,what is used?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
 color-size-returns.do-you-have-a-bag, ,,buq Daghaj'a',buqʰ ɖɑɣɑdʒʔɑʔ,do you have a bag?,1,tlh-composed-v1;lex=Saarbruecken qepHom'a' 2010 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+shopping.how-much-is-this,    ,,Dochvetlh DIlmeH Huch 'ar DaneH,ɖotʃvɛtɬ ɖɪlmɛx xutʃ ʔɑr ɖɑnɛx,how much money do you want for that?,3,tlh-attested-v1;src=TKD p.171;native=piqad-csur;ipa=okrand
+shopping.i-am-just-looking, ,,vIbej neH,vɪbɛdʒ nɛx,I am only watching it,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+shopping.is-there-a-discount,,,DaqutlhmoHlaH'a',ɖɑqʰutɬmoxlɑxʔɑʔ,can you make it cheap?,1,tlh-composed-v1;lex=KGT + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+shopping.can-it-be-a-little-cheaper,,,matlhonglaH'a',mɑtɬoŋlɑxʔɑʔ,can we bargain?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+shopping.two-of-these,  ,,cha' Dochvam vIneH,tʃɑʔ ɖotʃvɑm vɪnɛx,I want these two things,1,tlh-composed-v1;lex=TKD;grammar=TKD 5.4;native=piqad-csur;ipa=okrand
+payment-receipt.please-write-the-number, ,,mI' yIghItlh,mɪʔ jɪɣɪtɬ,write the number,1,tlh-composed-v1;lex=TNK + KGT;grammar=TKD;native=piqad-csur;ipa=okrand
+payment-receipt.my-card-was-declined,  ,,Qapbe' Huch chaw'wIj,qxɑpʰbɛʔ xutʃ tʃɑwʔwɪdʒ,my credit card does not work,1,tlh-composed-v1;lex=TNK + KGT;grammar=TKD;native=piqad-csur;ipa=okrand
+payment-receipt.the-bill-is-wrong,  ,,lughbe' DIlmeH Huch,luɣbɛʔ ɖɪlmɛx xutʃ,the price is not right,1,tlh-composed-v1;lex=TKD p.171;grammar=TKD 4.3;native=piqad-csur;ipa=okrand
+color-size-returns.do-you-have-another-color,  ,,latlh qalmuS Daghaj'a',lɑtɬ qʰɑlmuʂ ɖɑɣɑdʒʔɑʔ,do you have another colour?,1,tlh-composed-v1;lex=qep'a' 26 (2019) + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+color-size-returns.may-i-try-it-on,,,vIwaHlaH'a',vɪwɑxlɑxʔɑʔ,can I try it out?,1,tlh-composed-v1;lex=KGT + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+color-size-returns.can-i-return-it,,,vItatlhlaH'a',vɪtʰɑtɬlɑxʔɑʔ,can I give it back?,1,tlh-composed-v1;lex=KLI 1999.07.19 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+color-size-returns.can-i-exchange-it,,,vItamlaH'a',vɪtʰɑmlɑxʔɑʔ,can I exchange it?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand

@@ -1,0 +1,5 @@
+concept_id,text,text_alt,romanization_okrand,ipa,literal,confidence,provenance
+attractions-tickets.where-can-i-buy-tickets,   ,,nuqDaq 'elmeH chaw' vIje'laH,nuqʰɖɑqʰ ʔɛlmɛx tʃɑwʔ vɪdʒɛʔlɑx,where can I buy an entry pass?,1,tlh-composed-v1;lex=KLI 2011.09.30 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+attractions-tickets.do-i-need-a-reservation, ,,pu'lor poQlu''a',pʰuʔlor pʰoqxluʔʔɑʔ,is a reservation required?,1,tlh-composed-v1;lex=qep'a' 33 (2026) + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+attractions-tickets.may-i-take-photos, ,,mIllogh vIqonlaH'a',mɪlloɣ vɪqʰonlɑxʔɑʔ,can I record pictures?,1,tlh-composed-v1;lex=Saarbruecken qepHom'a' 2010 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+attractions-tickets.could-you-take-a-photo-for-us,  ,,maHvaD mIllogh yIqon,mɑxvɑɖ mɪlloɣ jɪqʰon,record a picture for us,1,tlh-composed-v1;lex=Saarbruecken qepHom'a' 2010 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand

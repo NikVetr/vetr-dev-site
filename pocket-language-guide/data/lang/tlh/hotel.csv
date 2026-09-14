@@ -14,3 +14,28 @@ room-problems.can-i-change-rooms,  
 room-problems.the-room-is-too-noisy, ,,chuSqu' pa',tʃuʂqʰuʔ pʰɑʔ,the room is very noisy,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
 room-problems.the-key-does-not-work, ,,Qapbe' ngaQHa'moHwI',qxɑpʰbɛʔ ŋɑqxxɑʔmoxwɪʔ,the key does not work,1,tlh-composed-v1;lex=TNK + KGT;grammar=TKD;native=piqad-csur;ipa=okrand
 room-problems.the-light-does-not-work, ,,Qapbe' wovmoHwI',qxɑpʰbɛʔ wovmoxwɪʔ,the light does not work,1,tlh-composed-v1;lex=TNK + KGT;grammar=TKD;native=piqad-csur;ipa=okrand
+hotel-words.room-key-card,,,ngaQHa'moHwI',ŋɑqxxɑʔmoxwɪʔ,key,3,tlh-attested-v1;src=TNK;native=piqad-csur;ipa=okrand
+hotel-basics.is-breakfast-included, ,,nIQ tu'lu''a',nɪqx tʰuʔluʔʔɑʔ,is there breakfast? -- Klingon has no verb for including in a price,1,tlh-composed-v1;lex=TKD + CK;grammar=TKD;native=piqad-csur;ipa=okrand
+hotel-basics.for-nights,{} ,,{} ram,{} rɑm,{} nights,1,tlh-composed-v1;lex=TKD;grammar=TKD 5.4;native=piqad-csur;ipa=okrand
+hotel-basics.two-beds, ,,cha' QongDaq,tʃɑʔ qxoŋɖɑqʰ,two beds,1,tlh-composed-v1;lex=KGT + TKD;grammar=TKD 5.4;native=piqad-csur;ipa=okrand
+hotel-basics.i-would-like-a-quiet-room,  ,,pa' tam vIneH,pʰɑʔ tʰɑm vɪnɛx,I want a quiet room,1,tlh-composed-v1;lex=TKD;grammar=TKD 6.2.5;native=piqad-csur;ipa=okrand
+hotel-basics.is-wi-fi-free, ,,tlhab'a' 'Internet,tɬɑbʔɑʔ ʔɪntʰɛrnɛtʰ,is the Internet free?,1,tlh-composed-v1;lex=Saarbruecken qepHom'a' 2014 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+hotel-basics.can-i-charge-my-phone,  ,,ghogh HablI'wIj vIHujlaH'a',ɣoɣ xɑblɪʔwɪdʒ vɪxudʒlɑxʔɑʔ,can I charge my telephone?,1,tlh-composed-v1;lex=HQ 5.2 p.20 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+hotel-basics.is-there-a-washing-machine,  ,,Sut Say'moHwI' tu'lu''a',ʂutʰ ʂɑjʔmoxwɪʔ tʰuʔluʔʔɑʔ,is there a clothes-cleaner?,1,tlh-composed-v1;lex=TKD + CK;grammar=TKD;native=piqad-csur;ipa=okrand
+hotel-requests.another-blanket,  ,,latlh tlhIm vIneH,lɑtɬ tɬɪm vɪnɛx,I want another blanket,1,tlh-composed-v1;lex=KLI 2012.01.09 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+hotel-requests.can-i-store-my-luggage,  ,,leng buqwIj vIpollaH'a',lɛŋ buqʰwɪdʒ vɪpʰollɑxʔɑʔ,can I keep my suitcase?,1,tlh-composed-v1;lex=TNK + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+hotel-requests.another-night,   ,,latlh ram naDev jIratlhlaH'a',lɑtɬ rɑm nɑɖɛv dʒɪrɑtɬlɑxʔɑʔ,can I remain here another night?,1,tlh-composed-v1;lex=KCD + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+hotel-requests.what-time-does-breakfast-start,  ,,ghorgh tagh nIQ,ɣorɣ tʰɑɣ nɪqx,when does breakfast begin?,1,tlh-composed-v1;lex=TKDA + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+hotel-requests.what-time-is-check-out, ,,ghorgh jImejnIS,ɣorɣ dʒɪmɛdʒnɪʂ,when must I leave?,1,tlh-composed-v1;lex=TKDA + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+hotel-requests.wake-up-call,{} ,,{} HIvemmoH,{} xɪvɛmmox,wake me at {},1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+hotel-requests.no-housekeeping, ,,pa'wIj yISay'moHQo',pʰɑʔwɪdʒ jɪʂɑjʔmoxqxoʔ,do not clean my room!,1,tlh-composed-v1;lex=TKD;grammar=TKD 4.3;native=piqad-csur;ipa=okrand
+room-problems.there-is-a-problem-with-the-room, ,,qay' pa',qʰɑjʔ pʰɑʔ,the room is a problem,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+room-problems.the-heating-does-not-work, ,,Qapbe' tujmoHwI',qxɑpʰbɛʔ tʰudʒmoxwɪʔ,the heater does not work,1,tlh-composed-v1;lex=KGT + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+room-problems.the-air-conditioning-is-broken, ,,Qapbe' bIrmoHwI',qxɑpʰbɛʔ bɪrmoxwɪʔ,the cooler does not work,1,tlh-composed-v1;lex=KGT + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+room-problems.please-send-someone, ,,tI'wI' yIngeH,tʰɪʔwɪʔ jɪŋɛx,send a repairer,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+hotel-basics.i-would-like-a-non-smoking-room,   ,,tlhIch Hutlhbogh pa' vIneH,tɬɪtʃ xutɬboɣ pʰɑʔ vɪnɛx,I want a room that lacks smoke,1,tlh-composed-v1;lex=TKD;grammar=TKD 6.2.3;native=piqad-csur;ipa=okrand
+laundry.please-wash-these-clothes, ,,Sutvam tISay'moH,ʂutʰvɑm tʰɪʂɑjʔmox,clean these clothes,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+laundry.when-will-it-be-ready, ,,ghorgh rIn,ɣorɣ rɪn,when is it finished?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+laundry.can-it-be-ready-today, ,,DaHjaj rInlaH'a',ɖɑxdʒɑdʒ rɪnlɑxʔɑʔ,can it be finished today?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+laundry.where-is-a-laundromat,    ,,nuqDaq 'oH Sut Say'moHmeH Daq'e',nuqʰɖɑqʰ ʔox ʂutʰ ʂɑjʔmoxmɛx ɖɑqʰʔɛʔ,where is the clothes-cleaning place?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+laundry.please-iron-this, ,,Dochvam yIHabmoH,ɖotʃvɑm jɪxɑbmox,make this thing smooth,1,tlh-composed-v1;lex=TNK + TKD;grammar=TKD;native=piqad-csur;ipa=okrand

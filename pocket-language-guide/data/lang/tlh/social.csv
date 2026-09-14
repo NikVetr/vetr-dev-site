@@ -34,3 +34,33 @@ etiquette.is-this-allowed,,,chaw'lu''a',tʃɑwʔlu
 etiquette.may-i-enter,,,jI'ellaH'a',dʒɪʔɛllɑxʔɑʔ,can I enter?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
 etiquette.may-i-sit-here, ,,naDev jIba'laH'a',nɑɖɛv dʒɪbɑʔlɑxʔɑʔ,can I sit here?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
 etiquette.keep-the-change, ,,chuv yIpol,tʃuv jɪpʰol,keep the change,1,tlh-composed-v1;lex=Saarbruecken qepHom'a' 2020 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+social-basics.hello-polite,,,nuqneH,nuqʰnɛx,what do you want? -- Klingon has one greeting and it is not a polite one,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+social-basics.you-are-welcome,,,qay'be',qʰɑjʔbɛʔ,no problem -- Klingon has no set reply to thanks,3,tlh-attested-v1;src=TKD p.170;native=piqad-csur;ipa=okrand
+social-basics.excuse-me-sorry,,,qaSuj'a',qʰɑʂudʒʔɑʔ,am I disturbing you?,3,tlh-attested-v1;src=TKD p.170;native=piqad-csur;ipa=okrand
+social-basics.sorry,,,jItlhIj,dʒɪtɬɪdʒ,I apologize,1,tlh-composed-v1;lex=TKDA;grammar=TKD;native=piqad-csur;ipa=okrand
+communication.i-cannot-make-out-what-you-are-saying,  ,,Dajatlhbogh mu'mey vIyajlaHbe',ɖɑdʒɑtɬboɣ muʔmɛj vɪjɑdʒlɑxbɛʔ,I cannot understand the words you speak,1,tlh-composed-v1;lex=TKD;grammar=TKD 6.2.3;native=piqad-csur;ipa=okrand
+quick-responses.can-possible,-,,-laH,lɑx,goes on the verb: vIleghlaH = I can see it,3,tlh-attested-v1;src=TKD 4.2.5;native=piqad-csur;ipa=okrand
+quick-responses.cannot-not-possible,-,,-laHbe',lɑxbɛʔ,goes on the verb: vIleghlaHbe' = I cannot see it,1,tlh-composed-v1;lex=TKD 4.2.5 + TKD 4.3;grammar=TKD;native=piqad-csur;ipa=okrand
+quick-responses.cannot-not-allowed,,,chaw'be'lu',tʃɑwʔbɛʔluʔ,one does not permit it,1,tlh-composed-v1;lex=TKD;grammar=TKD 4.2.5;native=piqad-csur;ipa=okrand
+phone-translation.i-am-using-phone-translation, ,,mughwI' vIlo',muɣwɪʔ vɪloʔ,I use a translator,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+phone-translation.please-speak-toward-the-phone,  ,,ghogh HablI'Daq yIjatlh,ɣoɣ xɑblɪʔɖɑqʰ jɪdʒɑtɬ,speak at the telephone,1,tlh-composed-v1;lex=HQ 5.2 p.20 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+phone-translation.please-type-it-and-show-me,  ,,yIghItlh 'ej HI'ang,jɪɣɪtɬ ʔɛdʒ xɪʔɑŋ,write it and show me,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+phone-translation.one-sentence-at-a-time-please,  ,,wa' mu'tlhegh yIjatlh,wɑʔ muʔtɬɛɣ jɪdʒɑtɬ,speak one sentence,1,tlh-composed-v1;lex=TKD;grammar=TKD 5.4;native=piqad-csur;ipa=okrand
+phone-text-power.my-phone-battery-is-low,  ,,'ul 'aplo'wIj chIm,ʔul ʔɑpʰloʔwɪdʒ tʃɪm,my battery is empty,1,tlh-composed-v1;lex=TNK + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+phone-text-power.may-i-charge-my-phone-here,   ,,naDev ghogh HablI'wIj vIHujlaH'a',nɑɖɛv ɣoɣ xɑblɪʔwɪdʒ vɪxudʒlɑxʔɑʔ,can I charge my telephone here?,1,tlh-composed-v1;lex=HQ 5.2 p.20 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+phone-text-power.do-you-have-a-power-bank,  ,,'ul 'aplo' Daghaj'a',ʔul ʔɑpʰloʔ ɖɑɣɑdʒʔɑʔ,do you have a battery?,1,tlh-composed-v1;lex=TNK + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+phone-text-power.the-translation-may-be-inaccurate, ,,qarbe'law' mu'mey,qʰɑrbɛʔlɑwʔ muʔmɛj,the words seem inaccurate,1,tlh-composed-v1;lex=TKD;grammar=TKD 4.2.4;native=piqad-csur;ipa=okrand
+etiquette.is-tipping-expected,  ,,tlho' Huch poQlu''a',tɬoʔ xutʃ pʰoqxluʔʔɑʔ,is a tip required?,1,tlh-composed-v1;lex=Saarbruecken qepHom'a' 2020 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+etiquette.remove-shoes, ,,waqwIj vIteqnIS'a',wɑqʰwɪdʒ vɪtʰɛqʰnɪʂʔɑʔ,must I remove my shoes?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+etiquette.photo-of-you, ,,mIlloghlIj vIqonlaH'a',mɪlloɣlɪdʒ vɪqʰonlɑxʔɑʔ,can I record your picture?,1,tlh-composed-v1;lex=Saarbruecken qepHom'a' 2010 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+etiquette.did-not-mean-to-offend,  ,,qamaw 'e' vIHechbe',qʰɑmɑw ʔɛʔ vɪxɛtʃbɛʔ,I did not intend to offend you,1,tlh-composed-v1;lex=TKD;grammar=TKD 6.2.5;native=piqad-csur;ipa=okrand
+etiquette.what-is-customary,   ,,naDev nuq mIw motlh,nɑɖɛv nuqʰ mɪw motɬ,which procedure is usual here?,1,tlh-composed-v1;lex=TKDA + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+etiquette.dressed-appropriately, ,,lugh'a' SutwIj,luɣʔɑʔ ʂutʰwɪdʒ,is my clothing right?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+children.cannot-find-my-child, ,,puqwIj vItu'laHbe',pʰuqʰwɪdʒ vɪtʰuʔlɑxbɛʔ,I cannot find my child,1,tlh-composed-v1;lex=TKD p.171;grammar=TKD;native=piqad-csur;ipa=okrand
+children.make-an-announcement, ,,rI'wI' yIlo',rɪʔwɪʔ jɪloʔ,use the loudspeaker,1,tlh-composed-v1;lex=qep'a' 27 (2020) + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+children.child-age,{}   ,,{} ben boghpu' puqwIj,{} bɛn boɣpʰuʔ pʰuqʰwɪdʒ,my child was born {} years ago -- the Klingon way of giving an age,1,tlh-composed-v1;lex=KGT + msn 1996.12.12;grammar=TKD;native=piqad-csur;ipa=okrand
+children.high-chair,  ,,puq quS Daghaj'a',pʰuqʰ qʰuʂ ɖɑɣɑdʒʔɑʔ,do you have a child's chair?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+children.suitable-for-children, ,,puqpu'vaD QaQ'a',pʰuqʰpʰuʔvɑɖ qxɑqxʔɑʔ,is it good for children?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+children.do-children-pay, ,,DIlnIS'a' puqpu',ɖɪlnɪʂʔɑʔ pʰuqʰpʰuʔ,must children pay?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+children.minimum-age,  ,,nuq nen rav,nuqʰ nɛn rɑv,what is the minimum age?,1,tlh-composed-v1;lex=Klingon Monopoly + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+sim-data.may-i-use-your-wifi, ,,'InternetlIj vIlo'laH'a',ʔɪntʰɛrnɛtʰlɪdʒ vɪloʔlɑxʔɑʔ,can I use your Internet?,1,tlh-composed-v1;lex=Saarbruecken qepHom'a' 2014 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand

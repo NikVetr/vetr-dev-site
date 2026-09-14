@@ -5,3 +5,8 @@ food-ordering.do-you-have-drinking-water, ,,bIQ
 food-ordering.check-please, ,,Soj vIDIlnIS,ʂodʒ vɪɖɪlnɪʂ,I need to pay for the food,1,tlh-composed-v1;lex=KGT p.191 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
 food-ordering.what-do-you-recommend, ,,nuq Dachup,nuqʰ ɖɑtʃupʰ,what do you recommend?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
 food-ordering.water-please,,,bIQ,bɪqx,water,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+food-ordering.table-for-two,  ,,cha' nuvvaD raS,tʃɑʔ nuvvɑɖ rɑʂ,a table for two people,1,tlh-composed-v1;lex=KGT + TKD;grammar=TKD 5.4;native=piqad-csur;ipa=okrand
+food-ordering.is-a-table-available,  ,,raS chIm tu'lu''a',rɑʂ tʃɪm tʰuʔluʔʔɑʔ,is there an empty table?,1,tlh-composed-v1;lex=KGT + CK;grammar=TKD;native=piqad-csur;ipa=okrand
+food-ordering.to-go-please, ,,vInge' vIneH,vɪŋɛʔ vɪnɛx,I want to take it away,1,tlh-composed-v1;lex=TKD;grammar=TKD 6.2.5;native=piqad-csur;ipa=okrand
+food-ordering.does-it-contain,{} ,,{} ngaS'a',{} ŋɑʂʔɑʔ,does it contain {}?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+dietary-needs.i-do-not-eat,{} ,,{} vISoplaHbe',{} vɪʂopʰlɑxbɛʔ,I cannot eat it,3,tlh-attested-v1;src=TKD p.171;slot-substituted;native=piqad-csur;ipa=okrand

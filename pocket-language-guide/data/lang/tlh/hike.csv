@@ -33,3 +33,24 @@ trail-landmarks.start,,,bI'reS,bɪʔrɛʂ,the beginning,3,tlh-
 trail-landmarks.end,,,bertlham,bɛrtɬɑm,the end,3,tlh-attested-v1;src=HQ 12.2;native=piqad-csur;ipa=okrand
 trail-landmarks.sunset,,,tlhom,tɬom,dusk,3,tlh-attested-v1;src=qep'a' 23 (2016);native=piqad-csur;ipa=okrand
 trail-landmarks.water-point,,,bIQ,bɪqx,water,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+trail-words.summit, ,,HuD yor,xuɖ jor,the top of the mountain,1,tlh-composed-v1;lex=TKD + HQ 8.3 p.2;grammar=TKD;native=piqad-csur;ipa=okrand
+trail-words.trailhead, ,,taw bI'reS,tʰɑw bɪʔrɛʂ,where the road begins,1,tlh-composed-v1;lex=Saarbruecken qepHom'a' 2015 + HQ 12.2;grammar=TKD;native=piqad-csur;ipa=okrand
+trail-warnings.steep-slope,,,bo'ghey,boʔɣɛj,mountain slope,3,tlh-attested-v1;src=qep'a' 25 (2018);native=piqad-csur;ipa=okrand
+trail-warnings.first-aid-station,,,ropyaH,ropʰjɑx,infirmary,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+trail-landmarks.elevation,,,'Iv,ʔɪv,"altitude -- a different word from 'Iv who, spelled alike",3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+trail-landmarks.boardwalk-cliff-path, ,,qoj taw,qʰodʒ tʰɑw,cliff road,1,tlh-composed-v1;lex=TKD + Saarbruecken qepHom'a' 2015;grammar=TKD;native=piqad-csur;ipa=okrand
+trail-conditions.how-long-is-the-full-route,  ,,nuq He chuq,nuqʰ xɛ tʃuqʰ,what is the route's distance?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+trail-conditions.can-we-return-before-dark, ,,Hurghpa' macheghlaH'a',xurɣpʰɑʔ mɑtʃɛɣlɑxʔɑʔ,can we return before it is dark?,1,tlh-composed-v1;lex=TKD;grammar=TKD 6.2.2;native=piqad-csur;ipa=okrand
+trail-transport.do-you-have-a-map, ,,pu'jIn Daghaj'a',pʰuʔdʒɪn ɖɑɣɑdʒʔɑʔ,do you have a map?,1,tlh-composed-v1;lex=qep'a' 14 (2007) + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+trail-transport.where-can-we-buy-water,  ,,nuqDaq bIQ wIje'laH,nuqʰɖɑqʰ bɪqx wɪdʒɛʔlɑx,where can we buy water?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+trail-transport.where-can-we-refill-water,  ,,nuqDaq bIQ wISuqlaH,nuqʰɖɑqʰ bɪqx wɪʂuqʰlɑx,where can we get water?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+trail-transport.what-time-is-the-last-shuttle,   ,,ghorgh mej lupwI' Qav,ɣorɣ mɛdʒ lupʰwɪʔ qxɑv,when does the last bus leave?,1,tlh-composed-v1;lex=TNK + TKDA;grammar=TKD;native=piqad-csur;ipa=okrand
+trail-transport.how-long-is-the-queue, ,,tIn'a' lanSoy,tʰɪnʔɑʔ lɑnʂoj,is the line large?,1,tlh-composed-v1;lex=KLI 2020.04.21 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+trail-transport.how-long-is-the-wait,  ,,poH 'ar maloSnIS,pʰox ʔɑr mɑloʂnɪʂ,how much time must we wait?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+weather.storm,,,jev,dʒɛv,it storms,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+weather.flood,,,SoD,ʂoɖ,flood,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+weather.humid,,,yIQ,jɪqx,be wet,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+weather.how-cold-at-night, ,,bIrqu''a' ram,bɪrqʰuʔʔɑʔ rɑm,is the night very cold?,1,tlh-composed-v1;lex=TKD;grammar=TKD 4.3;native=piqad-csur;ipa=okrand
+hiking-parks.how-long-to-the-summit,    ,,HuD yorDaq poH 'ar poQlu',xuɖ jorɖɑqʰ pʰox ʔɑr pʰoqxluʔ,how much time is needed to the mountain top?,1,tlh-composed-v1;lex=TKD + HQ 8.3 p.2;grammar=TKD;native=piqad-csur;ipa=okrand
+hiking-parks.how-long-to-the-viewpoint,   ,,jorchanDaq poH 'ar poQlu',dʒortʃɑnɖɑqʰ pʰox ʔɑr pʰoqxluʔ,how much time is needed to the viewpoint?,1,tlh-composed-v1;lex=qep'a' 25 (2018) + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+hiking-parks.is-this-trail-suitable-for-beginners, ,,ngeD'a' tawvam,ŋɛɖʔɑʔ tʰɑwvɑm,is this road easy?,1,tlh-composed-v1;lex=Saarbruecken qepHom'a' 2015 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand

@@ -1,2 +1,6 @@
 concept_id,text,text_alt,romanization_okrand,ipa,literal,confidence,provenance
 profanity.expletive,,,Qu'vatlh,qxuʔvɑtɬ,an expletive; TKD translates it as none,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+profanity.damn,,,ghuy',ɣujʔ,a Klingon curse -- the base of ghuy'cha',3,tlh-attested-v1;src=HQ 8.4 p.13;native=piqad-csur;ipa=okrand
+profanity.frustration,  ,,veQ 'oH Dochvam'e',vɛqx ʔox ɖotʃvɑmʔɛʔ,this thing is garbage,1,tlh-composed-v1;lex=TKD;grammar=TKD 6.3;native=piqad-csur;ipa=okrand
+profanity.thats-rude,,,bIDoch,bɪɖotʃ,you are rude,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+profanity.strong-expletive,,,ghuy'cha',ɣujʔtʃɑʔ,"much stronger than 'darn it' -- a general curse, not aimed at anyone",3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand

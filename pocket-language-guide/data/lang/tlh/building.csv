@@ -6,7 +6,7 @@ accessibility.need-to-sit-down,,,jIba'nIS,dʒɪbɑʔnɪ�
 accessibility.help-me-carry,,,HIboQ,xɪboqx,assist me,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
 accessibility.speak-louder,,,yIjach,jɪdʒɑtʃ,shout!,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
 in-a-building.is-this-the-correct-entrance, ,,lugh'a' lojmItvam,luɣʔɑʔ lodʒmɪtʰvɑm,is this door right?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
-in-a-building.which-floor, ,,'ar patlh,ʔɑr pʰɑtɬ,which level?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+in-a-building.which-floor, ,,patlh 'ar,pʰɑtɬ ʔɑr,which level?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
 toilets.where-toilet,  ,,nuqDaq 'oH puchpa''e',nuqʰɖɑqʰ ʔox pʰutʃpʰɑʔʔɛʔ,where is the bathroom?,3,tlh-attested-v1;src=TKD p.170;native=piqad-csur;ipa=okrand
 toilets.where-public-toilet,  ,,nuqDaq 'oH puchpa''e',nuqʰɖɑqʰ ʔox pʰutʃpʰɑʔʔɛʔ,where is the bathroom?,3,tlh-attested-v1;src=TKD p.170;native=piqad-csur;ipa=okrand
 toilets.may-i-use-the-toilet, ,,puch vIlo'laH'a',pʰutʃ vɪloʔlɑxʔɑʔ,can I use the toilet?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
@@ -29,3 +29,17 @@ building-words.men,,,loD,loɖ,,3,tlh-attested-v1;src=TKD;native=piqad-c
 building-words.women,,,be',bɛʔ,,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
 building-words.door,,,lojmIt,lodʒmɪtʰ,door / gate,3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
 building-words.key,,,ngaQHa'moHwI',ŋɑqxxɑʔmoxwɪʔ,,3,tlh-attested-v1;src=TNK;native=piqad-csur;ipa=okrand
+building-help.where-is-reception,   ,,nuqDaq 'oH QaHmeH Daq'e',nuqʰɖɑqʰ ʔox qxɑxmɛx ɖɑqʰʔɛʔ,where is the place for helping?,1,tlh-composed-v1;lex=TKD + TKDA;grammar=TKD;native=piqad-csur;ipa=okrand
+building-help.what-room-number-is-this,  ,,nuq pa'vam mI',nuqʰ pʰɑʔvɑm mɪʔ,what is this room's number?,1,tlh-composed-v1;lex=TNK + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+in-a-building.do-you-have-wi-fi, ,,'Internet Daghaj'a',ʔɪntʰɛrnɛtʰ ɖɑɣɑdʒʔɑʔ,do you have the Internet?,1,tlh-composed-v1;lex=Saarbruecken qepHom'a' 2014 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+accessibility.how-many-steps, ,,ngep'oS 'ar,ŋɛpʰʔoʂ ʔɑr,how many stairs?,1,tlh-composed-v1;lex=KGT + TKD;grammar=TKD 6.4;native=piqad-csur;ipa=okrand
+accessibility.cannot-climb-stairs, ,,ngep'oSDaq jIyItlaHbe',ŋɛpʰʔoʂɖɑqʰ dʒɪjɪtʰlɑxbɛʔ,I cannot walk on the stairs,1,tlh-composed-v1;lex=KGT + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+accessibility.hard-of-hearing,,,jIQoylaHchu'be',dʒɪqxojlɑxtʃuʔbɛʔ,I cannot hear clearly,1,tlh-composed-v1;lex=CK + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+accessibility.visually-impaired,,,jIleghlaHchu'be',dʒɪlɛɣlɑxtʃuʔbɛʔ,I cannot see clearly,1,tlh-composed-v1;lex=CK + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+accessibility.take-your-arm, ,,DeSlIj vI'uchlaH'a',ɖɛʂlɪdʒ vɪʔutʃlɑxʔɑʔ,may I hold your arm?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+toilets.is-the-tap-water-safe-to-drink, ,,bIQ vItlhutlhlaH'a',bɪqx vɪtɬutɬlɑxʔɑʔ,can I drink the water?,1,tlh-composed-v1;lex=TKD p.171;grammar=TKD;native=piqad-csur;ipa=okrand
+toilets.may-i-have-the-toilet-key,  ,,puchpa' ngaQHa'moHwI' HInob,pʰutʃpʰɑʔ ŋɑqxxɑʔmoxwɪʔ xɪnob,give me the washroom key,1,tlh-composed-v1;lex=TNK + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+toilets.there-is-no-toilet-paper, ,,nav tu'lu'be',nɑv tʰuʔluʔbɛʔ,there is no paper,1,tlh-composed-v1;lex=CK + TKD;grammar=TKD 4.3;native=piqad-csur;ipa=okrand
+toilets.do-i-need-a-coin, ,,DeQ vIpoQ'a',ɖɛqx vɪpʰoqxʔɑʔ,do I need a coin?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+toilets.not-for-drinking,,,yItlhutlhQo',jɪtɬutɬqxoʔ,do not drink!,1,tlh-composed-v1;lex=TKD;grammar=TKD 4.3;native=piqad-csur;ipa=okrand
+toilets.is-there-a-toilet-on-board,  ,,DujvamDaq puchpa' tu'lu''a',ɖudʒvɑmɖɑqʰ pʰutʃpʰɑʔ tʰuʔluʔʔɑʔ,is there a washroom on this ship?,1,tlh-composed-v1;lex=TKD + CK;grammar=TKD;native=piqad-csur;ipa=okrand
