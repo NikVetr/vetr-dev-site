@@ -1,0 +1,317 @@
+<!doctype html><meta charset="utf-8"><title>Running b64 checks</title>
+<pre id="report">RUNNING</pre><iframe src="../index.html" id="app"></iframe>
+<script src="../decoder.js"></script>
+<script>
+const report = document.querySelector('#report');
+const outcomes = [];
+let failures = 0;
+function assert(value, message) { if (!value) throw new Error(message); }
+function test(name, fn) {
+  try { fn(); outcomes.push('PASS ' + name); }
+  catch (error) { failures++; outcomes.push('FAIL ' + name + ': ' + error.message); }
+}
+function encode(value, layers = 1) {
+  for (let i = 0; i < layers; i++) value = btoa(String.fromCharCode(...new TextEncoder().encode(value)));
+  return value;
+}
+const url = 'https://example.com/some/path?hello=world&n=42#section';
+function expectURLs(input, expected) {
+  const actual = B64.findLinks(input).links.map(item => item.url).sort();
+  assert(JSON.stringify(actual) === JSON.stringify(expected.map(item => new URL(item).href).sort()), JSON.stringify(actual));
+}
+test('direct link', () => expectURLs(url, [url]));
+for (let depth = 1; depth <= 12; depth++) test(depth + ' nested layers', () => {
+  const result = B64.findLinks(encode(url, depth));
+  assert(result.links.length === 1 && result.links[0].url === url && result.links[0].depth === depth, JSON.stringify(result));
+});
+test('more than twelve decode layers', () => expectURLs(encode(url, 20), [url]));
+test('trace follows the successful branch', () => {
+  const r = B64.findLinks(`${encode('unrelated text')} ${encode(url, 3)}`);
+  assert(JSON.stringify(r.links[0].steps.map(s => s.text)) === JSON.stringify([encode(url, 2), encode(url), url]), 'wrong ancestry');
+});
+test('decode plain text without links', () => {
+  const r = B64.findLinks(encode('a little magic', 2));
+  assert(r.steps.at(-1).text === 'a little magic' && !r.links.length, JSON.stringify(r));
+});
+test('UTF-8 recursive encoding', () => {
+  const text = 'https://example.com/😀 café こんにちは';
+  const r = B64.encodeLayers(text, 3);
+  assert(r.value === encode(text, 3) && r.steps.length === 3, 'incorrect encoding');
+});
+test('encoder and decoder roundtrip beyond twelve layers', () => expectURLs(B64.encodeLayers(url, 20).value, [url]));
+test('encoder preserves whitespace', () => assert(B64.encodeLayers('  a\n', 2).value === encode('  a\n', 2), 'whitespace lost'));
+test('encoder rejects invalid counts', () => {
+  for (const n of [0, -1, 100, 1.5, NaN, Infinity]) assert(!!B64.encodeLayers(url, n).error, `accepted ${n}`);
+});
+test('99 is accepted but excessive output is stopped', () => {
+  const r = B64.encodeLayers('x', 99);
+  assert(r.error.includes('exceeds 1 MB') && r.error.includes('Try ×') && !r.value, JSON.stringify(r));
+});
+test('encoder caps output growth', () => assert(!!B64.encodeLayers('a'.repeat(100000), 12).error, 'unbounded growth'));
+test('encoder handles large UTF-8 without argument overflow', () => {
+  const r = B64.encodeLayers('😀'.repeat(25000), 1);
+  assert(r.value.length === 133336 && !r.error && r.steps[0].text.length <= 181, 'large encoding failed');
+});
+test('message with multiple payloads', () => expectURLs(`Hey! ${encode(url, 3)} and "${encode('https://other.example/test', 2)}" enjoy.`, [url, 'https://other.example/test']));
+test('nested messages', () => expectURLs(encode(`Here it is: ${encode(url, 2)}!`, 2), [url]));
+test('unpadded', () => expectURLs(encode(url).replace(/=+$/, ''), [url]));
+test('URL-safe UTF-8', () => { const unicode = 'https://example.com/😀?q=ÿÿ'; expectURLs(encode(unicode).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''), [unicode]); });
+test('duplicates retain shallowest depth', () => { const r = B64.findLinks(`${encode(url, 3)} ${url} ${encode(url)}`); assert(r.links.length === 1 && r.links[0].depth === 0, JSON.stringify(r)); });
+test('sentence punctuation', () => expectURLs(`See (${url}).`, [url]));
+test('balanced parentheses', () => expectURLs('https://en.wikipedia.org/wiki/Base64_(encoding)', ['https://en.wikipedia.org/wiki/Base64_(encoding)']));
+test('www link', () => expectURLs(encode('www.example.com/page'), ['https://www.example.com/page']));
+test('reject non-web schemes', () => expectURLs(encode('javascript:alert(1) data:text/html,hello file:///etc/passwd'), []));
+test('invalid base64 and plain text', () => expectURLs('hello this is not a URL 😎 === *** ____ AAAAAAAA', []));
+test('JSON wrapper', () => expectURLs(encode(JSON.stringify({ link: encode(url) })), [url]));
+test('line-wrapped base64', () => expectURLs(encode(url).match(/.{1,24}/g).join('\n'), [url]));
+test('line-wrapped base64 in prose', () => expectURLs('Here is your link:\n' + encode(url).match(/.{1,24}/g).join('\n') + '\nEnjoy!', [url]));
+test('separate unpadded payload lines', () => expectURLs([url, 'https://second.example/'].map(u => encode(u).replace(/=+$/, '')).join('\n'), [url, 'https://second.example/']));
+test('separate nested payload lines', () => expectURLs([url, 'https://second.example/'].map(u => encode(u, 3).replace(/=+$/, '')).join('\n'), [url, 'https://second.example/']));
+test('oversized input', () => assert(!!B64.findLinks('A'.repeat(256001)).error, 'missing limit'));
+test('large input stays bounded', () => { const start = performance.now(); const r = B64.findLinks('YWJjZGVmZ2hp '.repeat(18000)); assert(performance.now() - start < 1500, 'too slow'); assert(!r.links.length, 'unexpected link'); });
+test('many trailing brackets stay bounded', () => { const start = performance.now(); expectURLs('https://example.com/' + ')'.repeat(200000), ['https://example.com/']); assert(performance.now() - start < 1500, 'too slow'); });
+
+async function browserTests() {
+  const frame = document.querySelector('#app');
+  if (!frame.contentDocument.querySelector('#source') || frame.contentDocument.readyState !== 'complete') await new Promise(resolve => frame.addEventListener('load', resolve, {once:true}));
+  const win = frame.contentWindow;
+  const doc = win.document;
+  const source = doc.querySelector('#source');
+  const layers = doc.querySelector('#encode-count');
+  function paste(target, text, replace = true) {
+    if (target === source && replace) source.setSelectionRange(0, source.value.length);
+    const data = new win.DataTransfer(); data.setData('text/plain', text);
+    const event = new win.ClipboardEvent('paste', {clipboardData:data, bubbles:true, cancelable:true});
+    target.dispatchEvent(event);
+    // Synthetic clipboard events have no native default action; emulate the
+    // browser's insertion only when the app leaves the paste uncancelled.
+    if (!event.defaultPrevented && target === source) {
+      source.dispatchEvent(new win.InputEvent('beforeinput', {inputType:'insertFromPaste', data:text, bubbles:true, cancelable:true}));
+      source.setRangeText(text, source.selectionStart, source.selectionEnd, 'end');
+      source.dispatchEvent(new win.InputEvent('input', {inputType:'insertFromPaste', data:text, bubbles:true}));
+    }
+    return event;
+  }
+  function done() { return new Promise((resolve, reject) => {
+    const deadline = Date.now() + 3000;
+    async function check() {
+      // Give background workers real execution time under headless virtual time.
+      await fetch('../decoder.js?tick=' + Math.random());
+      if (doc.querySelector('.results').getAttribute('aria-busy') === 'false') return resolve();
+      if (Date.now() > deadline) return reject(new Error('worker response timed out'));
+      setTimeout(check, 20);
+    } check();
+  }); }
+  paste(doc.body, encode(url, 3)); await done();
+  test('paste anywhere and worker render', () => { assert(source.value === encode(url, 3), 'textbox'); assert(doc.querySelector('#links a')?.href === url, doc.querySelector('#status').textContent); });
+  test('worker renders encoder and intermediate layers', () => {
+    assert(doc.querySelector('#encoded').value === encode(encode(url, 3), 3), 'missing encoding');
+    assert(doc.querySelectorAll('#links .step').length === 3 && doc.querySelector('#links details').open, 'missing decode trace');
+    assert(doc.querySelectorAll('#encode-trace .step').length === 3, 'missing encode trace');
+  });
+  layers.value = '5'; layers.dispatchEvent(new win.Event('input')); await done();
+  test('editable multiplier updates output', () => {
+    assert(doc.querySelector('#encoded').value === encode(source.value, 5), 'wrong count');
+    assert(doc.querySelector('#links a').href === url, 'decoder affected');
+  });
+  layers.value = '100'; layers.dispatchEvent(new win.Event('input')); await done();
+  test('invalid multiplier leaves decoding available', () => {
+    assert(doc.querySelector('#copy').disabled && !doc.querySelector('#encoded').value && doc.querySelector('#encode-status').textContent.includes('1–99'), 'invalid encoding shown');
+    assert(doc.querySelector('#links a').href === url, 'decoder blocked');
+  });
+  layers.value = '99'; layers.dispatchEvent(new win.Event('input')); await done();
+  test('99-layer UI gives a size limit without blocking links', () => {
+    assert(layers.getAttribute('aria-invalid') === 'false' && doc.querySelector('#encode-status').textContent.includes('exceeds 1 MB'), '99 rejected as an invalid count');
+    assert(doc.querySelector('#copy').disabled && doc.querySelector('#links a').href === url, 'unsafe output or missing link');
+  });
+  layers.value = '3'; layers.dispatchEvent(new win.Event('input')); await done();
+  let copied;
+  Object.defineProperty(win.navigator, 'clipboard', {configurable:true, value:{writeText:async value => {copied = value;}}});
+  doc.querySelector('#copy').click();
+  test('copy uses full encoded output', () => assert(copied === encode(source.value, 3), 'incorrect clipboard content'));
+  Object.defineProperty(win.navigator, 'clipboard', {configurable:true, value:{writeText:async () => {throw new Error('denied');}}});
+  doc.querySelector('#copy').click(); await new Promise(resolve => setTimeout(resolve, 0));
+  test('copy fallback selects the output', () => {
+    const output = doc.querySelector('#encoded');
+    assert(output.selectionStart === 0 && output.selectionEnd === output.value.length && doc.querySelector('#encode-status').textContent.includes('to copy'), 'fallback missing');
+  });
+  frame.style.width = '1200px'; frame.style.height = '800px';
+  test('desktop links sit beside the source', () => {
+    const input = doc.querySelector('.input-panel').getBoundingClientRect();
+    const result = doc.querySelector('.results').getBoundingClientRect();
+    const encoder = doc.querySelector('.encode-panel').getBoundingClientRect();
+    assert(result.left > input.right && encoder.right < input.left && Math.abs(result.top - input.top) < 2, 'wrong column layout');
+    assert(doc.querySelector('#links a').getBoundingClientRect().bottom < 700, 'link below viewport');
+    const action = doc.querySelector('#open-links').getBoundingClientRect();
+    assert(action.top >= input.bottom && Math.abs(action.left - input.left) < 2 && action.height >= 48, 'Enter button is not prominent below the source');
+  });
+  frame.style.width = '390px';
+  test('mobile prioritizes source and links', () => {
+    const input = doc.querySelector('.input-panel').getBoundingClientRect();
+    const result = doc.querySelector('.results').getBoundingClientRect();
+    const encoder = doc.querySelector('.encode-panel').getBoundingClientRect();
+    assert(result.top >= input.bottom && encoder.top >= result.bottom, 'wrong mobile order');
+    assert(doc.querySelector('#links a').getBoundingClientRect().bottom < 600, 'mobile link below viewport');
+  });
+  paste(source, encode('https://second.example/', 2)); await done();
+  test('repeat paste replaces previous message', () => { assert(doc.querySelectorAll('#links a').length === 1 && doc.querySelector('#links a').href === 'https://second.example/', 'old result persisted'); });
+  paste(doc.body, encode('<img src=x onerror="window.pwned=1">https://example.com/evil?x=<script>', 2)); await done();
+  test('safe result rendering and new tab', () => { const a = doc.querySelector('#links a'); assert(a && a.target === '_blank' && a.rel.includes('noopener') && a.rel.includes('noreferrer'), 'unsafe anchor'); assert(!doc.querySelector('#links img, #links script') && !win.pwned, 'HTML injection'); });
+  source.value = ''; source.dispatchEvent(new win.Event('input')); await done();
+  test('clear input clears both outputs', () => assert(!doc.querySelector('#links a') && doc.querySelector('#count').textContent === '0 links' && !doc.querySelector('#encoded').value && doc.querySelector('#copy').disabled, 'stale output'));
+  source.value = encode(url); source.dispatchEvent(new win.Event('input'));
+  source.value = 'nothing here'; source.dispatchEvent(new win.Event('input')); await done();
+  test('latest input wins', () => assert(!doc.querySelector('#links a'), 'stale response'));
+  test('no horizontal overflow at narrow width', () => assert(doc.documentElement.scrollWidth <= doc.documentElement.clientWidth, 'overflow'));
+  function shortcut(redo = false, apple = false, target = source) {
+    const event = new win.KeyboardEvent('keydown', {key:redo ? 'Z' : 'z', ctrlKey:!apple, metaKey:apple, shiftKey:redo, bubbles:true, cancelable:true});
+    target.dispatchEvent(event);
+    return event;
+  }
+  function edit(text, inputType = 'insertText', target = source) {
+    target.dispatchEvent(new win.InputEvent('beforeinput', {inputType, bubbles:true, cancelable:true}));
+    if (target === source) source.setRangeText(text, source.selectionStart, source.selectionEnd, 'end');
+    else target.value = text;
+    target.dispatchEvent(new win.InputEvent('input', {inputType, bubbles:true}));
+  }
+  paste(doc.body, 'alpha');
+  const nativePaste = paste(source, ' beta', false);
+  test('focused paste appends and preserves native behavior', () => assert(!nativePaste.defaultPrevented && source.value === 'alpha beta', 'paste replaced the message'));
+  shortcut(); await done();
+  test('Ctrl Z undoes a paste with its caret', () => assert(source.value === 'alpha' && source.selectionStart === 5 && source.selectionEnd === 5, 'undo lost text or caret'));
+  shortcut(true); await done();
+  test('Ctrl Shift Z redoes a paste', () => assert(source.value === 'alpha beta' && source.selectionStart === 10, 'redo failed'));
+  source.setSelectionRange(5, 5); paste(source, ',', false);
+  test('paste inserts at the cursor', () => assert(source.value === 'alpha, beta', 'incorrect insertion'));
+  shortcut(false, true);
+  test('Cmd Z restores insertion point', () => assert(source.value === 'alpha beta' && source.selectionStart === 5, 'Mac undo failed'));
+  source.setSelectionRange(0, 5); paste(source, 'omega', false);
+  test('paste replaces only the selection', () => assert(source.value === 'omega beta', 'selection replacement failed'));
+  shortcut(false, true);
+  test('undo restores replaced selection', () => assert(source.value === 'alpha beta' && source.selectionStart === 0 && source.selectionEnd === 5, 'selection not restored'));
+  shortcut(true, true);
+  test('Cmd Shift Z restores replacement', () => assert(source.value === 'omega beta', 'Mac redo failed'));
+  shortcut(); paste(source, 'NEW', false); shortcut(true);
+  test('new edit discards the redo branch', () => assert(source.value === 'NEW beta', 'stale redo restored'));
+  paste(doc.body, 'one'); paste(doc.body, 'two'); paste(doc.body, 'three');
+  shortcut(); shortcut();
+  test('successive pastes undo individually', () => assert(source.value === 'one', 'pastes grouped together'));
+  shortcut(true); shortcut(true);
+  test('successive pastes redo individually', () => assert(source.value === 'three', 'redo order wrong'));
+  source.setSelectionRange(0, source.value.length); edit('', 'deleteContentBackward'); shortcut();
+  test('clearing text is undoable', () => assert(source.value === 'three', 'clear lost history'));
+  paste(doc.body, 'base'); edit('a'); edit('b'); shortcut();
+  test('continuous typing undoes as a group', () => assert(source.value === 'base', 'typing not grouped'));
+  shortcut(true);
+  test('continuous typing redoes as a group', () => assert(source.value === 'baseab', 'typing redo failed'));
+  source.setSelectionRange(0, source.value.length); edit('replacement'); shortcut();
+  test('replacing a selection starts a separate undo step', () => assert(source.value === 'baseab', 'replacement merged with previous typing'));
+  layers.focus(); edit('5', 'insertText', layers); shortcut();
+  test('encoder count participates in undo', () => assert(layers.value === '3' && source.value === 'baseab', 'count undo failed'));
+  shortcut(true);
+  test('encoder count participates in redo', () => assert(layers.value === '5' && source.value === 'baseab', 'count redo failed'));
+  edit('3', 'insertReplacementText', layers);
+  paste(doc.body, 'menu undo');
+  const menu = new win.InputEvent('beforeinput', {inputType:'historyUndo', bubbles:true, cancelable:true});
+  source.dispatchEvent(menu);
+  test('native edit-menu undo uses the same history', () => assert(menu.defaultPrevented && source.value === 'baseab', 'native history diverged'));
+  source.focus(); source.setSelectionRange(source.value.length, source.value.length);
+  source.dispatchEvent(new win.InputEvent('beforeinput', {inputType:'insertCompositionText', bubbles:true, cancelable:true}));
+  source.setRangeText('日本', source.selectionStart, source.selectionEnd, 'end');
+  source.dispatchEvent(new win.InputEvent('input', {inputType:'insertCompositionText', isComposing:true, bubbles:true}));
+  source.dispatchEvent(new win.CompositionEvent('compositionend', {bubbles:true}));
+  shortcut();
+  test('composition commits as a single undoable edit', () => assert(source.value === 'baseab', 'composition history incorrect'));
+
+  const opened = [];
+  const originalOpen = win.open;
+  let blockTabs = false;
+  win.open = function (initialURL, target) {
+    if (blockTabs) return null;
+    const tab = {opener:win, document:doc.implementation.createHTMLDocument(''), close() {}, location:{replace(url) {
+      opened.push({url, target, opener:tab.opener, referrer:tab.document.querySelector('meta[name="referrer"]')?.content, initialURL});
+    }}};
+    return tab;
+  };
+  function enter(target = source, options = {}) {
+    const event = new win.KeyboardEvent('keydown', {key:'Enter', bubbles:true, cancelable:true, ...options});
+    target.dispatchEvent(event);
+    return event;
+  }
+  paste(source, encode(url + '\nhttps://second.example/\n' + url, 3)); await done();
+  const beforeEnter = source.value;
+  test('multiple results have separate clickable cards and an Enter hint', () => {
+    assert(doc.querySelectorAll('#links a').length === 2 && !doc.querySelector('#open-links').hidden && doc.querySelector('#open-label').textContent === 'Open all 2 links', 'missing actions');
+    assert([...doc.querySelectorAll('#links details')].every(item => !item.open), 'traces obscure multiple links');
+  });
+  const key = enter();
+  test('Enter opens all unique links in protected new tabs', () => {
+    assert(opened.length === 2 && opened[0].url === url && opened[1].url === 'https://second.example/', 'missing or duplicate navigation');
+    assert(opened.every(tab => tab.target === '_blank' && tab.opener === null && tab.referrer === 'no-referrer'), 'unsafe tab');
+    assert(key.defaultPrevented && source.value === beforeEnter, 'textbox changed');
+  });
+  test('Shift+Enter preserves native newline behavior', () => assert(!enter(source, {shiftKey:true}).defaultPrevented && opened.length === 2, 'newline shortcut intercepted'));
+  test('IME and modified Enter are ignored', () => {
+    for (const options of [{isComposing:true}, {ctrlKey:true}, {metaKey:true}, {altKey:true}]) assert(!enter(source, options).defaultPrevented, 'modified key intercepted');
+    assert(opened.length === 2, 'unexpected navigation');
+  });
+  test('held Enter does not open repeated tabs', () => assert(enter(source, {repeat:true}).defaultPrevented && opened.length === 2, 'repeat opened a tab'));
+  test('Enter leaves other controls native', () => {
+    for (const target of [layers, doc.querySelector('#copy'), doc.querySelector('#links a'), doc.querySelector('summary')]) assert(!enter(target).defaultPrevented, 'native control intercepted');
+    assert(opened.length === 2, 'unexpected navigation');
+  });
+  doc.querySelector('#open-links').click();
+  test('clicking the Enter hint opens all results too', () => assert(opened.length === 4, 'open-all button failed'));
+  blockTabs = true; enter();
+  test('blocked tabs leave links available with useful feedback', () => assert(opened.length === 4 && doc.querySelector('#open-status').textContent.includes('0 of 2 tabs opened') && doc.querySelectorAll('#links a').length === 2, 'missing popup feedback'));
+  blockTabs = false;
+  paste(source, encode('https://immediate.example/\nhttps://another.example/', 3));
+  enter();
+  test('immediate paste then Enter opens all current input before worker finishes', () => assert(opened.length === 6 && opened[4].url === 'https://immediate.example/' && opened[5].url === 'https://another.example/', 'missed or stale links'));
+  await done();
+  test('worker completion does not open extra tabs', () => assert(opened.length === 6, 'extra navigation'));
+  enter(doc.body);
+  test('Enter also works with the page focused', () => assert(opened.length === 8, 'page shortcut failed'));
+  paste(source, 'no link in this message'); enter(); await done(); enter();
+  source.value = ''; source.dispatchEvent(new win.Event('input')); enter();
+  test('no link or cleared text hides the hint and never opens stale tabs', () => assert(opened.length === 8 && doc.querySelector('#open-links').hidden, 'stale navigation or hint'));
+  paste(doc.body, encode('https://undo.example/', 2));
+  paste(doc.body, encode('https://redo.example/', 2));
+  shortcut(); enter(); await done();
+  test('undo immediately refreshes navigation and derived outputs', () => assert(opened.at(-1).url === 'https://undo.example/' && doc.querySelector('#links a').href === 'https://undo.example/' && doc.querySelector('#encoded').value === encode(source.value, 3), 'stale undo result'));
+  shortcut(true); enter(); await done();
+  test('redo immediately refreshes navigation and derived outputs', () => assert(opened.at(-1).url === 'https://redo.example/' && doc.querySelector('#links a').href === 'https://redo.example/', 'stale redo result'));
+  test('single result hint uses singular wording', () => assert(doc.querySelector('#open-label').textContent === 'Open link', 'wrong hint'));
+  blockTabs = true;
+  paste(doc.body, encode('https://blocked.example/', 2)); enter(); await done();
+  test('worker completion preserves popup-blocker feedback', () => assert(doc.querySelector('#open-status').textContent.includes('0 of 1 tabs opened'), 'worker erased feedback'));
+  const fullOpen = win.open;
+  let allowance = 1;
+  win.open = (...args) => allowance-- > 0 ? fullOpen(...args) : null;
+  blockTabs = false;
+  paste(doc.body, encode('https://first.example/\nhttps://next.example/\nhttps://last.example/', 2)); await done();
+  const startCount = opened.length;
+  enter();
+  test('partial opening reports remaining links beneath the source', () => {
+    assert(opened.length === startCount + 1 && opened.at(-1).url === 'https://first.example/', 'wrong first tab');
+    assert(doc.querySelector('#open-label').textContent === 'Open remaining 2 links' && !doc.querySelector('#open-status').hidden, 'missing retry state');
+    assert(doc.querySelector('#open-status').closest('.source-column'), 'feedback is not under the center panel');
+  });
+  allowance = 1; enter();
+  test('retry skips tabs already opened', () => assert(opened.length === startCount + 2 && opened.at(-1).url === 'https://next.example/' && doc.querySelector('#open-label').textContent === 'Open remaining link', 'duplicate or wrong retry'));
+  allowance = 1; enter();
+  test('repeated Enter can finish opening every link', () => assert(opened.length === startCount + 3 && opened.at(-1).url === 'https://last.example/' && doc.querySelector('#open-status').hidden, 'remaining link not opened'));
+  allowance = 0; enter();
+  paste(doc.body, 'https://fresh.example/'); await done();
+  allowance = 1; enter();
+  test('new input clears the blocked-tab retry queue', () => assert(opened.at(-1).url === 'https://fresh.example/', 'opened previous message'));
+  win.open = originalOpen;
+  win.eval('fallback()');
+  paste(doc.body, encode(url, 2)); await done();
+  test('worker fallback retains both operations', () => assert(doc.querySelector('#links a').href === url && doc.querySelector('#encoded').value === encode(source.value, 3), 'fallback failed'));
+}
+browserTests().catch(error => { failures++; outcomes.push('FAIL browser flow: ' + error.message); }).finally(() => {
+  report.textContent = outcomes.join('\n') + '\n' + (failures ? `FAILED: ${failures}` : `ALL ${outcomes.length} CHECKS PASSED`);
+  document.title = failures ? 'FAILED' : 'PASSED';
+});
+</script>
