@@ -116,3 +116,4 @@ taxi.please-get-me-there-in-time-for-the-shinkansen,Pakisigurado po na maaabutan
 place-words.scenic-area,magandang tanawin,,maɡandaŋ tanawin,,2,fil-agent-v1;ipa=fil-g2p
 rail-station-words.maglev,maglev,,maɡlɛv,,2,fil-agent-v1;ipa=fil-g2p
 common-signs.pork-code,mga kodigo ng baboy sa karatula,B1 = aso,maŋa kodiɡo naŋ baboj sa kaɾatula,,2,fil-agent-v1;ipa=fil-g2p
+transit-rides.where-do-i-pay-the-fare,Saan po ako magbabayad ng pamasahe?,,saan po ako maɡbabajad naŋ pamasahɛ,,2,translator-requests-v1;in-pack-neighbour;ipa=fil-g2p

@@ -42,3 +42,4 @@ months.october,Ekim,,ˈekɪm,,2,tr-agent-v1;ipa=espeak
 months.november,Kasım,,kˈasɯm,,2,tr-agent-v1;ipa=espeak
 months.december,Aralık,,ˈaɾaɫɯk,,2,tr-agent-v1;ipa=espeak
 time-words.clock-offset,"Svahili saati şafakta başlar, telefonunuzdaki saatten altı saat kaymıştır: saa moja 7:00, saa sita 12:00, saa kumi 16:00 demektir. Karışıklığı önlemek için saati rakamla söyleyin ya da Batı saati için saa ngapi za kizungu diye sorun.",,,,2,tr-notes-v1
+time-scheduling.what-time-do-you-reopen,Saat kaçta yeniden açılıyor?,,saˈat katʃtˈa jenidˈæn atʃɯɫˈɯjɔr,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

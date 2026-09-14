@@ -42,3 +42,4 @@ months.october,oktober,,ɔktˈoːbər,,2,nl-agent-v1;ipa=espeak
 months.november,november,,noːvˈɛmbər,,2,nl-agent-v1;ipa=espeak
 months.december,december,,deːsˈɛmbər,,2,nl-agent-v1;ipa=espeak
 time-words.clock-offset,"De Swahili klok begint bij zonsopgang, zes uur verschoven ten opzichte van die op uw telefoon: saa moja is 7:00, saa sita is 12:00 's middags, saa kumi is 16:00. Zeg het cijfer, of vraag saa ngapi za kizungu voor de westerse klok.",,,,2,nl-agent-v1
+time-scheduling.what-time-do-you-reopen,Hoe laat gaat het weer open?,,hˈu lˈaːt ɣˈaːt hət ʋˈɪːr ˈoːpən,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

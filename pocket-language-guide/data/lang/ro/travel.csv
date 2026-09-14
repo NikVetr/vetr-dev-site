@@ -116,3 +116,4 @@ taxi.please-get-me-there-in-time-for-the-shinkansen,Duceți-mă acolo la timp pe
 place-words.scenic-area,zonă panoramică,,zˈonə pˌanoɾamˈikə,,1,reader-gloss-v1;ipa=espeak
 rail-station-words.maglev,maglev,tren cu levitație magnetică,maɡlˈev,,1,reader-gloss-v1;ipa=espeak
 common-signs.pork-code,coduri pentru carne de porc,,kodˈurʲ pˌentru kˈarne de pˈork,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
+transit-rides.where-do-i-pay-the-fare,Unde se plătește călătoria?,,ˈunde se plətˈeʃte kˌələtˈoɾja,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

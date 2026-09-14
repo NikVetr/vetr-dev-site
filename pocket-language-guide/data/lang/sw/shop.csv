@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,Naweza kubadilisha?,,nawˈeza kˌubadilˈi�
 color-size-returns.do-you-have-a-bag,"Je, mna mfuko?",,"ɟˈe, ˈm̩na mfˈuko",,2,sw-agent-v1;ipa=espeak
 tax-refund.can-i-get-a-tax-refund,Naweza kurudishiwa kodi?,,nawˈeza kˌurudiʃˈiwa kˈodi,,2,sw-agent-v1;ipa=espeak
 tax-refund.is-tax-free-shopping-available,"Je, kuna ununuzi bila kodi?",,"ɟˈe, kˈuna ˌununˈuzi bˌila kˈodi",,2,sw-agent-v1;ipa=espeak
+payment-receipt.can-i-pay-by-mobile-money,Kulipa kwa M-Pesa?,Kulipa kwa pesa ya simu?,kulˈipa kwa m̩pˈesa,"M-Pesa reaches Kenya, Tanzania and eastern DR Congo; in Uganda ask for MTN MoMo or Airtel Money",2,"translator-requests-v1;in-pack-neighbour;src=Safaricom and Vodacom ""Lipa na M-Pesa"" merchant wording;ipa=espeak"
+payment-receipt.what-is-the-cover-charge,Gharama ya meza kwa kila mtu ni kiasi gani?,,ɣarˈama ja mˈeza kwa kˈila ˈm̩tu ni kiˈasi ɡˈani,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

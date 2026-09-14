@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,Zan iya musanya shi?,,zan ija musanja ʃi,,
 color-size-returns.do-you-have-a-bag,Kuna da jaka?,,kuna da dʒaka,,2,ha-agent-v1;ipa=ha-g2p
 tax-refund.can-i-get-a-tax-refund,Zan iya samun a mayar mini da haraji?,,zan ija samun a majar mini da haradʒi,,2,ha-agent-v1;ipa=ha-g2p
 tax-refund.is-tax-free-shopping-available,Akwai sayayya ba tare da haraji ba?,,akwai sajajja ba tare da haradʒi ba,,2,ha-agent-v1;ipa=ha-g2p
+payment-receipt.can-i-pay-by-mobile-money,Zan iya biya da kudin waya?,,zan ija bija da kudin waja,can I pay with phone money?,2,translator-requests-v1;in-pack-neighbour;ipa=ha-g2p
+payment-receipt.what-is-the-cover-charge,Nawa kudin zama ga kowane mutum?,,nawa kudin zama ɡa kowane mutum,how much is the seat charge for each person?,2,translator-requests-v1;in-pack-neighbour;ipa=ha-g2p

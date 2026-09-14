@@ -42,3 +42,4 @@ months.october,listopad,,listopad,,2,hr-agent-v1;ipa=espeak
 months.november,studeni,,studeni,,2,hr-agent-v1;ipa=espeak
 months.december,prosinac,,prosinats,,2,hr-agent-v1;ipa=espeak
 time-words.clock-offset,"Svahilski sat počinje u zoru i pomaknut je šest sati od onoga na vašem mobitelu: saa moja je 7:00, saa sita je podne, saa kumi je 16:00. Na broj koji čujete dodajte šest da dobijete vrijeme sa svog sata. Vrijeme možete reći i brojkom ili pitati saa ngapi za kizungu za zapadni sat.",,,,2,gloss-only;scoped-away;hr-agent-v1
+time-scheduling.what-time-do-you-reopen,U koliko sati se ponovno otvara?,,u koliko sˈati sˈe ponovno otvara,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

@@ -30,3 +30,5 @@ shopping.where-can-i-buy,Dove posso comprare {}?,,dˈove pˈɔsso komprˈare {},
 shopping.do-you-have-this-in-stock,Ce l'avete disponibile?,,tʃe lavˌete disponˈibile,,2,it-agent-v1;ipa=espeak
 shopping.two-of-these,"Due di questi, per favore",,"dˈue dɪ kwˈestɪ, per favˈore",,2,it-agent-v1;ipa=espeak
 shopping.what-is-it-made-of,Di che cosa è fatto?,,dɪ ke kˈɔza e fˈatto,,2,it-agent-v1;ipa=espeak
+payment-receipt.can-i-pay-by-mobile-money,Posso pagare con il mobile money?,,pˈɔsso paɡˈare kon il mˈɔbile mˈonei,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+payment-receipt.what-is-the-cover-charge,Quant'è il coperto?,pane e coperto,kwante il kopˈɛrto,"a fixed charge per person, neither a service charge nor a tip",2,"translator-requests-v1;in-pack-neighbour;src=Italian restaurant bill wording (coperto, pane e coperto);ipa=espeak"

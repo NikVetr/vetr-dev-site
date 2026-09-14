@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,આ બદલી શકાય?,,ā badalī 
 color-size-returns.do-you-have-a-bag,થેલી મળશે?,,thēlī maḷaśē?,tʰeːli məɭʌʃeː,will a bag be got?,2,gu-agent-v1;ipa=espeak
 tax-refund.can-i-get-a-tax-refund,ટૅક્સ પાછો મળશે?,,ṭêks pāchō maḷaśē?,ʈɛks paːcʰoː məɭʌʃeː,will the tax be got back?,2,gu-agent-v1;ipa=espeak
 tax-refund.is-tax-free-shopping-available,ટૅક્સ-ફ્રી ખરીદી થાય છે?,,ṭêks-phrī kharīdī thāy chē?,ʈɛksəpʰɾi kʰəɾiːdi tʰaːjə cʰeː,does tax-free shopping happen?,2,gu-agent-v1;ipa=espeak
+payment-receipt.can-i-pay-by-mobile-money,મોબાઇલ મની ચાલશે?,,mōbāil manī cālaśē?,moːbaːɪl mʌni caːlʌʃeː,will mobile money run?,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+payment-receipt.what-is-the-cover-charge,વ્યક્તિદીઠ નિયત ચાર્જ કેટલો છે?,,vyaktidīṭh niyat cārj kēṭalō chē?,ʋjəktɪdiːʈʰ nɪjət caːɾɟ keːʈʌloː cʰeː,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

@@ -42,3 +42,4 @@ months.october,Oktober,,ɔʔˈtɔbər,,2,jv-agent-v1;ipa=jv-g2p
 months.november,Novèmber,,nɔˈfɛmbər,,2,jv-agent-v1;ipa=jv-g2p
 months.december,Dèsèmber,,dɛˈsɛmbər,,2,jv-agent-v1;ipa=jv-g2p
 time-words.clock-offset,"Jam ing basa Swahili mènggok nem jam saking jam ingkang panjenengan tingali: saa moja menika jam pitu énjing, lan saa sita menika jam kalih welas awan. Ètang saking srengéngé mlethèk, sanès saking tengah dalu. Menawi mireng jam ing basa Swahili, nyuwun tulung supados dipuntedahaken ing angka.",,,,2,jv-agent-v1
+time-scheduling.what-time-do-you-reopen,Bikak malih jam pinten?,,ˈbikaʔ ˈmalɪh dʒam ˈpɪntən,,2,translator-requests-v1;in-pack-neighbour;ipa=jv-g2p

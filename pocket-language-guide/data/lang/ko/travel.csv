@@ -116,3 +116,4 @@ rail-station-words.ticket-validator,개찰기,검표기,gaechalgi,kɛtɕʰalɡi,
 rail-station-words.maglev,자기부상열차,,jagibusangyeolcha,tɕaɡibusaŋjʌltɕʰa,,1,reader-gloss-v1;roman=generated;ipa=rr
 common-signs.pork-code,돼지고기 은어,,dwaejigogi euneo,twɛdʑiɡoɡi ɯnʌ,,2,pork-code-agent-v1;lppom-mui;ipa=rr
 rail-station-words.fare,요금,,yogeum,joɡɯm,,2,fare-agent-v1;in-pack-neighbour;ipa=rr
+transit-rides.where-do-i-pay-the-fare,요금은 어디서 내요?,,yogeumeun eodiseo naeyo?,joɡɯmɯn ʌdisʌ nɛjo,,2,translator-requests-v1;in-pack-neighbour;ipa=rr

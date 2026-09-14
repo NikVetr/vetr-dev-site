@@ -42,3 +42,4 @@ months.october,Οκτώβριος,Οκτωβρίου,Oktovrios,oktˈovɾiˌos,,2
 months.november,Νοέμβριος,Νοεμβρίου,Noemvrios,noˈemvɾiˌos,,2,el-agent-v1;roman=elot743;ipa=espeak
 months.december,Δεκέμβριος,Δεκεμβρίου,Dekemvrios,ðecˈemvɾiˌos,,2,el-agent-v1;roman=elot743;ipa=espeak
 time-words.clock-offset,"Στα Σουαχίλι το ρολόι αρχίζει με την ανατολή και μετράει έξι ώρες λιγότερες από το δικό σας: προσθέστε έξι στον αριθμό που ακούτε. saa moja είναι 7:00, saa sita το μεσημέρι, saa kumi 16:00. Πιο ασφαλές είναι να λέτε την ώρα με ψηφία ή να ρωτάτε saa ngapi za kizungu, την ώρα του δυτικού ρολογιού.",,,,,2,el-notes-v1
+time-scheduling.what-time-do-you-reopen,Τι ώρα ανοίγει πάλι;,,Ti ora anoigei pali;,tˈi ˈoɾ anˈiji pˈali,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

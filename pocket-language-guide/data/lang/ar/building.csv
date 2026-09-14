@@ -8,7 +8,7 @@ accessibility.elevator,هل يوجد مصعد؟,أسانسير,hal yūjad miṣ�
 toilets.is-it-only-for-customers,هل هو للزبائن فقط؟,,hal huwa lil-zabāʾin faqaṭ?,hˈal hˈuːa llzbaːʔn fˈaqat̪,,2,ar-agent-v1;ipa=espeak
 accessibility.ramp,هل يوجد منحدر؟,,hal yūjad munḥadar?,hˈal jwdʒd mˈunħadˌar,,2,ar-agent-v1;ipa=espeak
 toilets.toilet-wc,دورة مياه,WC,dawrat miyāh,dˈawɹa mˈiːaːh,water closet,2,ar-agent-v1;ipa=espeak
-accessibility.how-many-steps,كم عدد الدرجات؟,,kam ʿadad al-darajāt?,kˌiiluˈu mitˌar ʕˈadad ʔaddrdʒˈaːt,,2,ar-agent-v1;ipa=espeak
+accessibility.how-many-steps,كم عدد الدرجات؟,,kam ʿadad al-darajāt?,kˈam ʕˈadad ʔaddrdʒˈaːt,,2,ar-agent-v1;ipa=espeak
 toilets.is-it-free,هل هو مجاني؟,,hal huwa majjānī?,hˈal hˈuːa mˈadʒdʒaːnˌiːj,,2,ar-agent-v1;ipa=espeak
 accessibility.cannot-climb-stairs,لا أستطيع صعود السلالم,,lā astaṭīʿ ṣuʿūd al-salālim,lˈaː ʔstt̪ˈiːʕ s̪ˈuʕuːd ʔasslaːlm,,2,ar-agent-v1;ipa=espeak
 toilets.do-i-need-a-coin,هل أحتاج إلى قطعة نقدية؟,,hal aḥtāj ilá qiṭʿah naqdīyah?,hˈal ʔħtˈaːdʒ ʔˈilaː qˈit̪ʕa nˈaqdiːjˌa,,2,ar-agent-v1;ipa=espeak
@@ -22,7 +22,7 @@ accessibility.help-me-carry,ساعدني في حمل هذا من فضلك,,sāʿ
 toilets.there-is-no-toilet-paper,لا يوجد ورق حمّام,,lā yūjad waraq ḥammām,lˈaː jwdʒd wˈaɹaq ħmmˈaːm,,2,ar-agent-v1;ipa=espeak
 accessibility.board-first,هل يمكنني الصعود أولاً؟,,hal yumkinunī al-ṣuʿūd awwalan?,hˈal jmknnˈiː ʔas̪s̪ˈuʕuːd ʔˈuːlaː,,2,ar-agent-v1;ipa=espeak
 toilets.toilet-paper,ورق حمّام,ورق تواليت,waraq ḥammām,wˈaɹaq ħmmˈaːm,,2,ar-agent-v1;ipa=espeak
-accessibility.door-width,كم عرض الباب؟,,kam ʿarḍ al-bāb?,kˌiiluˈu mitˌar ʕˈardˤ ʔalbˈaːb,,2,ar-agent-v1;ipa=espeak
+accessibility.door-width,كم عرض الباب؟,,kam ʿarḍ al-bāb?,kˈam ʕˈardˤ ʔalbˈaːb,,2,ar-agent-v1;ipa=espeak
 toilets.it-is-out-of-order,إنه معطّل,,innah muʿaṭṭal,ʔˈinh mʕt̪ːl,,2,ar-agent-v1;ipa=espeak
 accessibility.wheelchair-width,عرض الكرسي المتحرك {} سم,,ʿarḍ al-kursī al-mutaḥarrik {} sm,ʕˈardˤ ʔalkˈursiːj ʔalmutˈaħarɹˌik {} sˈamm,,2,ar-agent-v1;ipa=espeak
 toilets.out-of-order,معطّل,خارج الخدمة,muʿaṭṭal,mʕt̪ːl,,2,ar-agent-v1;ipa=espeak

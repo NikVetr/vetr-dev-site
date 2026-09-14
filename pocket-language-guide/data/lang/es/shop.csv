@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,¿Puedo cambiarlo?,,pwˈedo kambjˈaɾlo,,2
 color-size-returns.do-you-have-a-bag,¿Tiene una bolsa?,,tjˈene ˈuna bˈolsa,,2,es-agent-v1;ipa=espeak
 tax-refund.can-i-get-a-tax-refund,¿Puedo pedir la devolución del IVA?,,pwˈedo pedˈiɾ la dˌebolusjˈon del ˌiˌubeˈa,,2,es-agent-v1;ipa=espeak
 tax-refund.is-tax-free-shopping-available,¿Hay compras libres de impuestos?,,ˈaɪ kˈompɾas lˈibɾes de impwˈestos,,2,es-agent-v1;ipa=espeak
+payment-receipt.can-i-pay-by-mobile-money,¿Puedo pagar con dinero móvil?,,pwˈedo paɡˈaɾ kon dinˈeɾo mˈobil,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+payment-receipt.what-is-the-cover-charge,¿Cuánto es el cubierto?,,kwˈanto ˈes el kubjˈeɾto,Spain charges the bread as an item you can decline rather than as a fixed per-person cover,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

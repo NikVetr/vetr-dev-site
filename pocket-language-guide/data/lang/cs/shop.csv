@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,Mohu to vyměnit?,,mˈohu tˈo vˈimɲeɲit
 color-size-returns.do-you-have-a-bag,Máte tašku?,,mˌaːte tˈaʃku,,2,cs-agent-v1;ipa=espeak
 tax-refund.can-i-get-a-tax-refund,Mohu dostat vrácení daně?,,mˈohu dˈostat vrˈaːtseɲiː dˈaɲe,,2,cs-agent-v1;ipa=espeak
 tax-refund.is-tax-free-shopping-available,Je tu Tax Free?,,je tˈu tˈaks frˈee,"'Tax Free' is kept as the international loan term, as on Czech shop signage",2,cs-agent-v1;ipa=espeak
+payment-receipt.can-i-pay-by-mobile-money,Platba mobilními penězi?,,plˈadba mˈobilɲˌiːmi pˈeɲezi,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+payment-receipt.what-is-the-cover-charge,Kolik je couvert?,,kˈolik je tsˈoʊvert,the per-person cover charge an Italian or Portuguese bill carries,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

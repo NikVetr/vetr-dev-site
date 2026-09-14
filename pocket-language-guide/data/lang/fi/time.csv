@@ -42,3 +42,4 @@ months.october,lokakuu,,lˈokakuː,,2,fi-agent-v1;ipa=espeak
 months.november,marraskuu,,mˈarraskuː,,2,fi-agent-v1;ipa=espeak
 months.december,joulukuu,,jˈoulukuː,,2,fi-agent-v1;ipa=espeak
 time-words.clock-offset,"Swahilin kello alkaa auringonnoususta, kuusi tuntia puhelimesi kellosta jäljessä: saa moja on 7.00, saa sita on keskipäivä ja saa kumi on 16.00. Sano pelkkä numero tai kysy saa ngapi za kizungu, jos haluat länsimaisen kellonajan.",,,,2,fi-agent-v1
+time-scheduling.what-time-do-you-reopen,Mihin aikaan avataan uudelleen?,,mˈihin ˈaikaːn ˈavataːn ˈuːdelleːn,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

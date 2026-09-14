@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,Kicserélhetem?,,kˈitʃɛreːlhɛtɛm,,2,h
 color-size-returns.do-you-have-a-bag,Kaphatok egy szatyrot?,,kˈɑphɑtok ˈɛɟ sˈɑcrot,,2,hu-agent-v1;ipa=espeak
 tax-refund.can-i-get-a-tax-refund,Kaphatok áfa-visszatérítést?,,kˈɑphɑtok ˈaːfɑvissɑteːriːteːʃt,,2,hu-agent-v1;ipa=espeak
 tax-refund.is-tax-free-shopping-available,Lehet itt tax free vásárolni?,,lˈɛhɛt ˈitt tˈɑks frˈɛɛ vˈaːʃaːrolni,,2,hu-agent-v1;ipa=espeak
+payment-receipt.can-i-pay-by-mobile-money,Mobilpénzzel fizethetek?,,mˈobilpeːnzzɛl fˈizɛthɛtɛk,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+payment-receipt.what-is-the-cover-charge,Mennyi a terítékdíj?,,mˈɛɲɲi ˈɑ tˈɛriːteːkdiːj,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

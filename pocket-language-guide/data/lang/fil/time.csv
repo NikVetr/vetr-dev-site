@@ -42,3 +42,4 @@ months.october,Oktubre,,oktubɾɛ,,2,fil-agent-v1;ipa=fil-g2p
 months.november,Nobyembre,,nobjɛmbɾɛ,,2,fil-agent-v1;ipa=fil-g2p
 months.december,Disyembre,,disjɛmbɾɛ,,2,fil-agent-v1;ipa=fil-g2p
 time-words.clock-offset,"Nagsisimula ang orasan ng Swahili sa pagsikat ng araw, anim na oras ang pagkakaiba sa oras ng inyong telepono: saa moja ay ika-7:00, saa sita ay tanghali, saa kumi ay ika-16:00. Sabihin ang numero, o itanong ang saa ngapi za kizungu para sa oras na Kanluranin.",,,,2,fil-agent-v1
+time-scheduling.what-time-do-you-reopen,Anong oras po muling bumubukas?,,anoŋ oɾas po muliŋ bumubukas,,2,translator-requests-v1;in-pack-neighbour;ipa=fil-g2p

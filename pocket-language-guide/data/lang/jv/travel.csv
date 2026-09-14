@@ -116,3 +116,4 @@ transit-rides.do-i-need-to-validate,Menika prelu tap in rumiyin?,,məˈnikɔ pr�
 rail-station-words.ticket-validator,Mesin validasi,Gate,məˈsɪn faliˈdasi,bus: mesin validasi; rail: gate,2,jv-agent-v1;ipa=jv-g2p
 common-signs.pork-code,B2 · samcan · bakut · sio bak · cu nyuk,saksang · BPK · char siu,,"B1 is dog, not pork; bak- in bakso and bakmi is Hokkien for meat",2,jv-agent-v1
 rail-station-words.fare,Tarif,Ongkos,ˈtarɪf,,2,jv-agent-v1;ipa=jv-g2p
+transit-rides.where-do-i-pay-the-fare,Ongkosipun dibayar ing pundi?,,ɔŋkoˈsipʊn diˈbajar ɪŋ ˈpʊndi,,2,translator-requests-v1;in-pack-neighbour;ipa=jv-g2p

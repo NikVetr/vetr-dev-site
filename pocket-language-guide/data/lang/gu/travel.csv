@@ -116,3 +116,4 @@ transit-rides.do-i-need-to-validate,ટિકિટ પંચ કરાવવી
 rail-station-words.ticket-validator,ટિકિટ પંચ મશીન,,ṭikiṭ paṁc maśīn,ʈɪkɪʈ pʌɲc məʃiːn,punching machine,2,gu-agent-v1;ipa=espeak
 common-signs.pork-code,B2 · BPK · bakso જેવા કોડ = ભૂંડનું માંસ,,B2 · BPK · bakso jēvā kōḍ = bhūṁḍanuṁ māṁs,,"codes like B2, BPK and bakso mean pork",2,gu-agent-v1
 rail-station-words.fare,ભાડું,,bhāḍuṁ,bʰaːɖũ,fare,2,gu-agent-v1;ipa=espeak
+transit-rides.where-do-i-pay-the-fare,ભાડું ક્યાં આપવાનું છે?,,bhāḍuṁ kyāṁ āpavānuṁ chē?,bʰaːɖũ kjã aːpʋaːnũ cʰeː,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

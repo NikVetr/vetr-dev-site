@@ -116,3 +116,4 @@ rail-station-words.ticket-validator,validatör,turnike,validatˈœr,,2,tr-agent-
 rail-station-words.maglev,maglev,manyetik tren,maɡlˈɛv,,1,reader-gloss-v1;ipa=espeak
 common-signs.pork-code,domuz kodları,,dˈomʊz kɔdɫaɾˈɯ,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
 rail-station-words.fare,bilet ücreti,ücret,bilˈɛt ødʒretˈɪ,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak
+transit-rides.where-do-i-pay-the-fare,Ücreti nereye ödeyeceğim?,,ødʒretˈɪ nˈeɾejɛ œdejedʒˈejɪm,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

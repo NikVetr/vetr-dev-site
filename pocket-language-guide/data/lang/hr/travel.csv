@@ -116,3 +116,4 @@ transit-rides.do-i-need-to-validate,Moram li poništiti ovu kartu?,,mˈoram li p
 rail-station-words.ticket-validator,poništavač karata,,poniʃtavatʃ karata,,2,hr-agent-v1;ipa=espeak
 common-signs.pork-code,oznake za svinjetinu na natpisima,,oznake zˈa sviɲetinu nˈa natpisima,,2,gloss-only;scoped-away;hr-agent-v1;ipa=espeak
 rail-station-words.fare,cijena vožnje,,tsijena vˈoʒɲe,,2,hr-agent-v1;ipa=espeak
+transit-rides.where-do-i-pay-the-fare,Gdje se plaća vožnja?,,ɡdjˈe sˈe plˈatɕa vˈoʒɲa,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

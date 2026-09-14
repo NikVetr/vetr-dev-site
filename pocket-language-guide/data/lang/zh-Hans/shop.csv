@@ -30,3 +30,5 @@ payment-receipt.the-bill-is-wrong,账单好像不对,,zhàngdān hǎoxiàng bú 
 shopping.two-of-these,这个要两个,,zhège yào liǎng gè,ʈʂɤ˥˩kɤ jɑʊ˥˩ ljɑŋ˧˩˧ kɤ˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
 payment-receipt.i-already-paid,我已经付了,,wǒ yǐjīng fù le,wɔ˧˩˧ i˧˩˧tɕiŋ˥ fu˥˩ lɤ,,2,zh-Hans-agent-v1;ipa=pinyin
 shopping.what-is-it-made-of,这是什么做的？,,zhè shì shénme zuò de?,ʈʂɤ˥˩ ʂɨ˥˩ ʂən˧˥mɤ tswɔ˥˩ tɤ,,2,zh-Hans-agent-v1;ipa=pinyin
+payment-receipt.can-i-pay-by-mobile-money,可以用手机钱包吗？,,kěyǐ yòng shǒujī qiánbāo ma?,kʰɤ˧˩˧i˧˩˧ jʊŋ˥˩ ʂoʊ˧˩˧tɕi˥ tɕʰjɛn˧˥pɑʊ˥ ma,"can I use a phone wallet? -- in east Africa the balance sits on the phone and is paid to a till number, not scanned",2,translator-requests-v1;in-pack-neighbour;ipa=pinyin
+payment-receipt.what-is-the-cover-charge,餐位费多少钱？,,cānwèifèi duōshao qián?,tsʰan˥weɪ˥˩feɪ˥˩ twɔ˥ʂɑʊ tɕʰjɛn˧˥,,2,translator-requests-v1;in-pack-neighbour;ipa=pinyin

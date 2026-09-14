@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,இதை மாற்றிக் கொ�
 color-size-returns.do-you-have-a-bag,பை இருக்கிறதா?,,pai irukkiṟatā?,paɪ iɾɯkkirʌdaː,,2,ta-agent-v1;ipa=espeak
 tax-refund.can-i-get-a-tax-refund,வரி திரும்பக் கிடைக்குமா?,,vari tirumpak kiṭaikkumā?,vʌɾi tiɾɯmbʌk kiɖaɪkkɯmaː,,2,ta-agent-v1;ipa=espeak
 tax-refund.is-tax-free-shopping-available,வரி இல்லாத கொள்முதல் வசதி உள்ளதா?,,vari illāta koḷmutal vacati uḷḷatā?,vʌɾi illaːdʌ koɭmɯdʌl vʌsʌdi uɭɭʌdaː,,2,ta-agent-v1;ipa=espeak
+payment-receipt.can-i-pay-by-mobile-money,மொபைல் பணத்தில் செலுத்தலாமா?,,mopail paṇattil celuttalāmā?,mobaɪl pʌɳʌttil selɯttʌlaːmaː,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+payment-receipt.what-is-the-cover-charge,ஒருவருக்கான நிலையான கட்டணம் எவ்வளவு?,,oruvarukkāṉa nilaiyāṉa kaṭṭaṇam evvaḷavu?,oɾɯvʌɾɯkkaːnʌ nilaɪjaːnʌ kʌʈʈʌɳʌm evvʌɭʌvɯ,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

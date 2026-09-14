@@ -42,3 +42,4 @@ months.october,ऑक्टोबर,,ôkṭōbara,ɔkʈˈoːbəɾ,,2,mr-agent-v
 months.november,नोव्हेंबर,,nōvhēṁbara,nˈoːvhẽːbˌəɾ,,2,mr-agent-v1;ipa=espeak
 months.december,डिसेंबर,,ḍisēṁbara,ɖɪsˈẽːbəɾ,,2,mr-agent-v1;ipa=espeak
 time-words.clock-offset,"स्वाहिली घड्याळ पहाटेपासून सुरू होते आणि तुमच्या फोनवरच्या घड्याळापेक्षा सहा तास मागे असते: साआ मोजा म्हणजे ७:००, साआ सिता म्हणजे दुपारी १२:००, साआ कुमी म्हणजे १६:००. आकडा तसाच सांगा, किंवा पाश्चात्य वेळेसाठी 'साआ न्गापी झा किझुंगू' असे विचारा.",,"svāhilī ghaḍyāḷa pahāṭēpāsūna surū hōtē āṇi tumacyā phōnavaracyā ghaḍyāḷāpēkṣā sahā tāsa māgē asatē: sāā mōjā mhaṇajē 7:00, sāā sitā mhaṇajē dupārī 12:00, sāā kumī mhaṇajē 16:00. ākaḍā tasāca sāṁgā, kiṁvā pāścātya vēḷēsāṭhī 'sāā ngāpī jhā kijhuṁgū' asē vicārā.",,,2,mr-notes-v1
+time-scheduling.what-time-do-you-reopen,हे किती वाजता पुन्हा उघडते?,,hē kitī vājatā punhā ughaḍatē?,hˈeː kˈɪti vˈaːztˌaː pˈʊnhaː ˈʊɡʰəɖteː,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

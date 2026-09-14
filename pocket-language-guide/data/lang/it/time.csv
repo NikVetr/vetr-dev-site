@@ -42,3 +42,4 @@ months.december,dicembre,,ditʃˈɛmbre,,2,it-agent-v1;ipa=espeak
 time-words.night,la notte,,la nˈɔtte,,2,it-agent-v1;ipa=espeak
 time-scheduling.how-long-does-it-take,Quanto tempo ci vuole?,,kwˈanto tˈɛmpo tʃɪ vʊˈɔle,,2,it-agent-v1;ipa=espeak
 time-words.clock-offset,"L'orologio swahili parte dall'alba e conta sei ore in meno del suo: saa moja sono le 7:00, saa sita è mezzogiorno, saa kumi sono le 16:00. Aggiunga sei al numero che sente per avere l'ora del suo orologio. Dica l'ora in cifre, oppure chieda saa ngapi za kizungu per l'ora occidentale.",,,,2,it-agent-v1
+time-scheduling.what-time-do-you-reopen,A che ora riapre?,,a ke ˈora riˈapre,a shop on riposo is neither closed nor temporarily closed,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

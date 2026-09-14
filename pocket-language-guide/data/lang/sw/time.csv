@@ -42,3 +42,4 @@ months.october,Oktoba,Mwezi wa kumi,oktˈoba,,2,sw-agent-v1;ipa=espeak
 months.november,Novemba,Mwezi wa kumi na moja,novˈemba,,2,sw-agent-v1;ipa=espeak
 months.december,Desemba,Mwezi wa kumi na mbili,desˈemba,,2,sw-agent-v1;ipa=espeak
 time-words.clock-offset,,,,,2,coordinator-gaps-v2
+time-scheduling.what-time-do-you-reopen,Inafunguliwa tena saa ngapi?,,ˌinafˌuŋɡulˈiwa tˈena sˈaa ŋɡˈapi,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

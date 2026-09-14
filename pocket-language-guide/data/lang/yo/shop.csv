@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,Ṣé mo lè pààrọ̀ rẹ̀?,,ʃe˥ mo 
 color-size-returns.do-you-have-a-bag,Ṣé ẹ ní àpò?,,ʃe˥ ɛ ni˥ a˩kpo˩,,2,yo-agent-v1;ipa=yo-g2p
 tax-refund.can-i-get-a-tax-refund,Ṣé mo lè gba owó orí mi padà?,,ʃe˥ mo le˩ ɡba owo˥ ori˥ mi kpada˩,,2,yo-agent-v1;ipa=yo-g2p
 tax-refund.is-tax-free-shopping-available,Ṣé rírajà láì sí owó orí wà níbí?,,ʃe˥ ri˥radʒa˩ la˥i˩ si˥ owo˥ ori˥ wa˩ ni˥bi˥,,2,yo-agent-v1;ipa=yo-g2p
+payment-receipt.can-i-pay-by-mobile-money,Ṣé mo lè fi owó orí fóònù san owó?,,ʃe˥ mo le˩ fi owo˥ ori˥ fo˥o˩nu˩ sã owo˥,can I pay with the money on the phone?,2,translator-requests-v1;in-pack-neighbour;ipa=yo-g2p
+payment-receipt.what-is-the-cover-charge,Èló ni owó ìjókòó fún ẹnìkọ̀ọ̀kan?,,e˩lo˥ ni owo˥ i˩dʒo˥ko˩o˥ fũ˥ ɛni˩kɔ˩ɔ˩kã,,2,translator-requests-v1;in-pack-neighbour;ipa=yo-g2p

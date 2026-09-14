@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,Kann ich das umtauschen?,,kˌan ɪç das ˈ
 color-size-returns.do-you-have-a-bag,Haben Sie eine Tüte?,Haben Sie ein Sackerl?,hˌɑːbən ziː ˌaɪnə tˈyːtə,,2,de-agent-v1;ipa=espeak
 tax-refund.can-i-get-a-tax-refund,Bekomme ich die MwSt. zurück?,Bekomme ich die Mehrwertsteuer zurück?,bəkˈɔmə ɪç diː ˌɛmvˈeː ˌɛstˈeː tsuːrˈyk,,2,de-agent-v1;ipa=espeak
 tax-refund.is-tax-free-shopping-available,Ist Tax Free möglich?,Gibt es eine Ausfuhrbescheinigung?,ɪst tˈɑːks fɹˈiː mˈøːklɪç,,2,de-agent-v1;ipa=espeak
+payment-receipt.can-i-pay-by-mobile-money,Mit Mobile Money zahlen?,,mɪt moːbˈiːlə mˈoːnaɪ tsˈɑːlən,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+payment-receipt.what-is-the-cover-charge,Was kostet das Gedeck?,,vˈas kˈɔstət das ɡədˈɛk,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

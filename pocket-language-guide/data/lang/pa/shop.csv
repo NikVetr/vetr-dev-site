@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,ਮੈਂ ਇਹ ਬਦਲ ਸਕਦਾ ਹ
 color-size-returns.do-you-have-a-bag,ਲਿਫ਼ਾਫ਼ਾ ਹੈ?,,lifāfā hai?,lɪfafa hɛ,is there a bag?,2,pa-agent-v1;ipa=espeak
 tax-refund.can-i-get-a-tax-refund,ਮੈਨੂੰ ਟੈਕਸ ਵਾਪਸ ਮਿਲ ਸਕਦਾ ਹੈ?,,mainūṁ ṭaikas vāpas mil sakadā hai?,mɛnũ ʈɛkəs ʋapəs mɪl sʌkəda hɛ,can I get the tax back?,2,pa-agent-v1;ipa=espeak
 tax-refund.is-tax-free-shopping-available,ਇੱਥੇ ਟੈਕਸ ਤੋਂ ਬਿਨਾਂ ਖ਼ਰੀਦ ਹੋ ਸਕਦੀ ਹੈ?,,itthē ṭaikas tōṁ bināṁ k͟harīd hō sakadī hai?,ɪttʰe ʈɛkəs tõ bɪnã xəɾid ho sʌkədi hɛ,can buying without tax happen here?,2,pa-agent-v1;ipa=espeak
+payment-receipt.can-i-pay-by-mobile-money,ਮੋਬਾਈਲ ਮਨੀ ਨਾਲ ਪੈਸੇ ਦੇ ਸਕਦੇ ਹਾਂ?,,mōbāīl manī nāl paisē dē sakadē hāṁ?,mobail mʌni nal pɛse de sʌkəde hã,can one pay with mobile money?,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+payment-receipt.what-is-the-cover-charge,ਹਰ ਬੰਦੇ ਦਾ ਤੈਅ ਖਰਚਾ ਕਿੰਨਾ ਹੈ?,,har bandē dā taia kharacā kiṁnā hai?,hʌɾ bʌnde da tɛə kʰʌɾəca kɪnna hɛ,how much is the fixed charge per person?,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

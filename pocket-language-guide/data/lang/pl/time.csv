@@ -42,3 +42,4 @@ months.october,październik,,paʑdʑˈɛrɲik,,2,pl-agent-v1;ipa=espeak
 months.november,listopad,,listˈɔpat,,2,pl-agent-v1;ipa=espeak
 months.december,grudzień,,ɡrˈudʑɛɲ,,2,pl-agent-v1;ipa=espeak
 time-words.clock-offset,"Zegar suahili liczy od wschodu słońca i jest przesunięty o sześć godzin względem tego w telefonie: saa moja to 7:00, saa sita to południe, saa kumi to 16:00. Do usłyszanej liczby proszę dodać sześć, żeby otrzymać godzinę ze swojego zegarka. Godzinę można też podać cyfrą albo zapytać o czas zachodni: saa ngapi za kizungu.",,,,2,pl-notes-v1
+time-scheduling.what-time-do-you-reopen,O której znowu otwierają?,,ɔ ktˌurɛj znˈɔvu ˌɔtfʲɛrˈajɔ̃,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

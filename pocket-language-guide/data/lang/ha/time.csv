@@ -42,3 +42,4 @@ months.october,Oktoba,,oktoba,,2,ha-agent-v1;ipa=ha-g2p
 months.november,Nuwamba,,nuwamba,,2,ha-agent-v1;ipa=ha-g2p
 months.december,Disamba,,disamba,,2,ha-agent-v1;ipa=ha-g2p
 time-words.clock-offset,"Agogon Kiswahili yana farawa daga fitowar rana, sa'o'i shida daga agogon waya: saa moja = 7:00, saa sita = 12:00, saa kumi = 16:00. Ku fadi lambobin ko ku tambaya da saa ngapi za kizungu domin sanin lokacin turawa (na yamma).",,,,2,ha-notes-v1
+time-scheduling.what-time-do-you-reopen,Da karfe nawa ake sake budewa?,,da karfe nawa ake sake budewa,at hour how-much one opens again (impersonal),2,translator-requests-v1;in-pack-neighbour;ipa=ha-g2p

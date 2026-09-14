@@ -116,3 +116,4 @@ transit-rides.do-i-need-to-validate,Czy trzeba skasować ten bilet?,,tʃɨ tʃˈ
 rail-station-words.ticket-validator,kasownik,,kasˈɔvɲik,the word printed on the machine,2,pl-agent-v1;ipa=espeak
 common-signs.pork-code,kody wieprzowiny,,kˈɔdɨ vʲˌɛpʃɔvˈinɨ,,2,pl-gloss-v1;ipa=espeak
 rail-station-words.fare,opłata za przejazd,,ɔpwˈata za pʃˈɛjast,,2,pl-agent-v1;ipa=espeak
+transit-rides.where-do-i-pay-the-fare,Gdzie płacę za przejazd?,,ɡdʑˈɛ pwˈatsɛ za pʃˈɛjast,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

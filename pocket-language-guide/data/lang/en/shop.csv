@@ -30,3 +30,5 @@ shopping.where-can-i-buy,Where can I buy {}?,,wˌɛɹ kæn aɪ bˈaɪ {},,2,expa
 shopping.do-you-have-this-in-stock,Do you have this in stock?,,dˈuː juː hæv ðɪs ɪn stˈɑːk,,2,expansion-v1;ipa=espeak
 shopping.two-of-these,"Two of these, please",,"tˈuː ʌv ðˈiːz, plˈiːz",,2,expansion-v1;ipa=espeak
 shopping.what-is-it-made-of,What is it made of?,,wˌʌt ɪz ɪt mˈeɪd ʌv,,2,expansion-v1;ipa=espeak
+payment-receipt.can-i-pay-by-mobile-money,Pay by mobile money?,,pˈeɪ baɪ mˈoʊbəl mˈʌni,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+payment-receipt.what-is-the-cover-charge,How much is the cover charge?,,hˌaʊ mˈʌtʃ ɪz ðə kˈʌvɚ tʃˈɑːɹdʒ,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

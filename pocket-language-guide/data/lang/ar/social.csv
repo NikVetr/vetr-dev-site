@@ -5,13 +5,13 @@ etiquette.is-this-allowed,هل هذا مسموح؟,,hal hādhā masmūḥ?,hˈal
 sim-data.may-i-use-your-wifi,هل يمكنني استخدام الواي فاي؟,,hal yumkinunī istikhdām al-wāy fāy?,hˈal jmknnˈiː ˈistixdˌaːm ʔalˈuːi faːˌi,,2,ar-agent-v1;ipa=espeak
 children.make-an-announcement,أرجو الإعلان في مكبّر الصوت,,arjū al-iʿlān fī mukabbir al-ṣawt,ʔrdʒˈuː ʔalʔˈiʕlaːn fˈiː mkbːr ʔas̪s̪ˈawt,,2,ar-agent-v1;ipa=espeak
 etiquette.is-tipping-expected,هل البقشيش متوقع؟,هل الإكرامية معتادة؟,hal al-baqshīsh mutawaqqaʿ?,hˈal ʔalbˈaqʃiːʃ mutˈawaqːˌaʕ,,2,ar-agent-v1;ipa=espeak
-sim-data.how-much-data-is-included,كم حجم البيانات؟,كم جيجا؟,kam ḥajm al-bayānāt?,kˌiiluˈu mitˌar ħˈadʒm ʔalbiːˌaːnaːt,,2,ar-agent-v1;ipa=espeak
+sim-data.how-much-data-is-included,كم حجم البيانات؟,كم جيجا؟,kam ḥajm al-bayānāt?,kˈam ħˈadʒm ʔalbiːˌaːnaːt,,2,ar-agent-v1;ipa=espeak
 children.child-age,عمر طفلي {} سنوات,,ʿumr ṭiflī {} sanawāt,ʕˈumr t̪ˈafliːj {} snuːˌaːt,,2,ar-agent-v1;ipa=espeak
 etiquette.is-service-included,هل الخدمة مشمولة؟,,hal al-khidmah mashmūlah?,hˈal ʔalxˈidma mʃmˈuːlt,,2,ar-agent-v1;ipa=espeak
 sim-data.do-you-need-my-passport,هل تحتاج جواز سفري؟,,hal taḥtāj jawāz safarī?,hˈal tħtˈaːdʒ dʒˈawaːz sˈafaɹˌiːj,,2,ar-agent-v1;ipa=espeak
 children.high-chair,هل لديكم كرسي أطفال؟,,hal ladaykum kursī aṭfāl?,hˈal ldiːkm kˈursiːj ʔt̪fˈaːl,,2,ar-agent-v1;ipa=espeak
 etiquette.may-i-enter,هل يمكنني الدخول؟,,hal yumkinunī al-dukhūl?,hˈal jmknnˈiː ʔaddˈuxuːl,,2,ar-agent-v1;ipa=espeak
-sim-data.how-long-is-it-valid,كم مدة الصلاحية؟,,kam muddat al-ṣalāḥīyah?,kˌiiluˈu mitˌar mˈudːa ʔas̪s̪alˈaːħiːjˌa,,2,ar-agent-v1;ipa=espeak
+sim-data.how-long-is-it-valid,كم مدة الصلاحية؟,,kam muddat al-ṣalāḥīyah?,kˈam mˈudːa ʔas̪s̪alˈaːħiːjˌa,,2,ar-agent-v1;ipa=espeak
 children.baby-changing-room,أين غرفة تغيير الحفاضات؟,غرفة الأمهات,ayna ghurfat taghyīr al-ḥafāḍāt?,ʔˈajna ɣˈurfa tˈaɣjiːr ʔalħfˈaːdˤaːt,,2,ar-agent-v1;ipa=espeak
 etiquette.remove-shoes,هل أخلع حذائي؟,,hal akhlaʿ ḥidhāʾī?,hˈal ʔxlʕ ħðˈaːʔiː,,2,ar-agent-v1;ipa=espeak
 sim-data.please-activate-it,فعّلها من فضلك,,faʿʿilhā min faḍlak,fʕʕlhaː mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak

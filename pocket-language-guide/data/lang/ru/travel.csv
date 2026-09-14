@@ -116,3 +116,4 @@ rail-station-words.ticket-validator,валидатор,компостер,valida
 rail-station-words.maglev,маглев,поезд на магнитной подушке,,mˈɑɡɭʲif,,1,reader-gloss-v1;ipa=espeak
 common-signs.pork-code,коды свинины,,kody svininy,kˈodɨ svʲinʲˈinɨ,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
 rail-station-words.fare,стоимость проезда,проезд,stoimostʼ proyezda,stˈoimʌstʲ prʌjˈezda,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak
+transit-rides.where-do-i-pay-the-fare,Где оплатить проезд?,,Gde oplatitʼ proyezd?,ɡdʲˈe ʌpɭatʲˈitʲ prʌjˈest,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

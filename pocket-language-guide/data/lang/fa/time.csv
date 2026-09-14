@@ -42,3 +42,4 @@ months.october,اکتبر,مهر/آبان,oktobr,oktobr,,2,fa-agent-v1;ipa=espea
 months.november,نوامبر,آبان/آذر,novāmbr,novɑmbr,,2,fa-agent-v1;ipa=espeak
 months.december,دسامبر,آذر/دی,desāmbr,desɑmbr,,2,fa-agent-v1;ipa=espeak
 time-words.clock-offset,ساعتِ سواحیلی از سپیده‌دم شروع می‌شود نه از نیمه‌شب، و شش ساعت با ساعتِ گوشیِ شما فاصله دارد: عددی که می‌شنوید شش تا کمتر است. پس شش را به آنچه می‌شنوید بیفزایید، و شش را از آنچه روی گوشی‌تان است کم کنید تا به سواحیلی بگویید. سا موجا هفتِ صبح است، سا سیتا ظهر و سا کومی چهارِ بعدازظهر. مطمئن‌تر آن است که وقت را با عدد بگویید، یا با عبارتِ سا نگاپی زا کیزونگو ساعتِ غربی را بپرسید.,,,,,2,fa-notes-v1
+time-scheduling.what-time-do-you-reopen,چه ساعتی دوباره باز می‌شود؟,,che sā‘ati dobāre bāz mishavad?,tʃe sɑʔati dobɑre bɑz miʃavad,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

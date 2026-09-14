@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,Voinko vaihtaa tämän?,,vˈoiŋko vˈaihta
 color-size-returns.do-you-have-a-bag,Saisinko kassin?,,sˈaisiŋko kˈassin,,2,fi-agent-v1;ipa=espeak
 tax-refund.can-i-get-a-tax-refund,Voinko saada arvonlisäveron palautuksen?,,vˈoiŋko sˈaːda ˈarvonlˌisæverom pˈalautˌuksen,"arvonlisävero, not vero alone: veronpalautus in Finnish is the annual income-tax refund, which is a different thing entirely",2,fi-agent-v1;ipa=espeak
 tax-refund.is-tax-free-shopping-available,Onko täällä verovapaata myyntiä?,,ˈoŋko tˈæːllæ vˈerovapˌaːta mˈyːntiæ,Finnish shops sign this in English as TAX FREE; the Finnish phrase is what a clerk answers to,2,fi-agent-v1;ipa=espeak
+payment-receipt.can-i-pay-by-mobile-money,Voiko maksaa mobiilirahalla?,,vˈoiko mˈaksaː mˈobiːlirahalla,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+payment-receipt.what-is-the-cover-charge,Paljonko on kattausmaksu?,,pˈaljoŋko ˈoŋ kˈattausmˌaksu,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

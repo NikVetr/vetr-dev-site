@@ -4,7 +4,7 @@ payment-receipt.pay-cash,أدفع نقداً؟,,adfaʿ naqdan?,ʔdfʕ nqdˈaː,,
 payment-receipt.pay-by-qr-code,أدفع بالرمز؟,أدفع بكود كيو آر؟,adfaʿ bi-al-ramz?,ʔdfʕ birɹˈamz,pay by the code,2,ar-agent-v1;ipa=espeak
 payment-receipt.a-receipt-please,إيصال من فضلك,فاتورة من فضلك,īṣāl min faḍlak,ʔˈiːs̪aːl mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
 payment-receipt.please-write-the-number,اكتب الرقم من فضلك,,uktub al-raqm min faḍlak,ˈaktb ʔarɹˈaqm mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
-payment-receipt.how-much-in-total,كم المجموع؟,,kam al-majmūʿ?,kˌiiluˈu mitˌar ʔalmˈadʒmuːʕ,,2,ar-agent-v1;ipa=espeak
+payment-receipt.how-much-in-total,كم المجموع؟,,kam al-majmūʿ?,kˈam ʔalmˈadʒmuːʕ,,2,ar-agent-v1;ipa=espeak
 payment-receipt.can-we-pay-separately,هل ندفع بشكل منفصل؟,,hal nadfaʿ bi-shakl munfaṣil?,hˈal ndfʕ bʃkl mˈunfas̪ˌil,,2,ar-agent-v1;ipa=espeak
 payment-receipt.is-tax-included,هل الضريبة مشمولة؟,,hal al-ḍarībah mashmūlah?,hˈal ʔadˤdˤˈaɹiːbˌa mʃmˈuːlt,,2,ar-agent-v1;ipa=espeak
 payment-receipt.my-card-was-declined,رُفضت بطاقتي,,rufiḍat biṭāqatī,ɹˈufdˤt bt̪aːqtˌiː,,2,ar-agent-v1;ipa=espeak
@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,هل يمكن استبداله؟,,hal yumki
 color-size-returns.do-you-have-a-bag,هل لديك كيس؟,,hal ladayk kīs?,hˈal ldiːkˌa kˈajs,,2,ar-agent-v1;ipa=espeak
 tax-refund.can-i-get-a-tax-refund,هل يمكنني استرداد الضريبة؟,,hal yumkinunī istirdād al-ḍarībah?,hˈal jmknnˈiː ˈistirdˌaːd ʔadˤdˤˈaɹiːbˌa,,2,ar-agent-v1;ipa=espeak
 tax-refund.is-tax-free-shopping-available,هل هناك تسوّق معفى من الضريبة؟,,hal hunāk tasawwuq muʿfá min al-ḍarībah?,hˈal hˈunaːkˌa tsˈuːq mˈuʕfaː mˈin ʔadˤdˤˈaɹiːbˌa,,2,ar-agent-v1;ipa=espeak
+payment-receipt.can-i-pay-by-mobile-money,أدفع بمحفظة الهاتف؟,,adfaʿ bi-maḥfaẓat al-hātif?,ʔdfʕ bmħfðt ʔalhˈaːtif,pay by the phone wallet,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+payment-receipt.what-is-the-cover-charge,ما هو الرسم الثابت لكل شخص؟,كم الرسم الثابت لكل شخص؟,mā huwa al-rasm al-thābit li-kull shakhṣ?,mˈaː hˈuːa ʔarɹˈasm ʔaθθˈaːbit lkl ʃˈaxs̪,what is the fixed charge per person?,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

@@ -116,3 +116,4 @@ common-signs.stopped-stop,रोकिनुहोस्,,rōkinuhōs,ɾˌoːkɪ
 rail-station-words.ticket-validator,टिकट भ्यालिडेटर,,ṭikaṭa bhyāliḍēṭara,ʈˈɪkəʈ bʰjˌaːlɪɖˈeːʈəɾˌə,,2,ne-agent-v1;ipa=espeak
 common-signs.pork-code,सुँगुरको मासुको कोड,,sum̐gurakō māsukō kōḍa,sũɡˈuɾəkˌoː mˈaːsukˌoː kˈoːɖ,,2,ne-agent-v1;ipa=espeak
 rail-station-words.fare,भाडा,,bhāḍā,bʰˈaːɖaː,,2,ne-agent-v1;ipa=espeak
+transit-rides.where-do-i-pay-the-fare,भाडा कहाँ तिर्ने?,,bhāḍā kahām̐ tirnē?,bʰˈaːɖaː kˈʌhã tˈɪrrneː,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

@@ -116,3 +116,4 @@ rail-station-words.ticket-validator,Mesin validasi,Gate,mˈəsen vˌalidˈasi,ba
 rail-station-words.maglev,Maglev,kereta magnet,mˈaɡləv,,1,reader-gloss-v1;ipa=espeak
 common-signs.pork-code,Tiada logo Halal JAKIM · bak kut teh · char siu,siu yuk · sio bak,tiˈadə lˈoɡo hˈalal dʒˈakem bˈaʔ kˈut tˈɛh tʃˈar sˈiu,"the JAKIM Halal logo's absence is the main signal in Malaysia (""no pork no lard"" signage is not itself a halal certificate); bak kut teh and char siu are pork dishes by name",2,pork-code-agent-v1;jakim;ipa=espeak
 rail-station-words.fare,Tambang,Tarif,tˈambaŋ,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak
+transit-rides.where-do-i-pay-the-fare,Bayar tambang di mana?,,bˈajar tˈambaŋ dimˈanə,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

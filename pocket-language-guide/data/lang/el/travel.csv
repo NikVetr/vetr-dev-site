@@ -116,3 +116,4 @@ rail-station-words.ticket-validator,Ακυρωτικό μηχάνημα,Ακυρ
 rail-station-words.maglev,Μαγνητικό τρένο,,,mˌaɣnitikˈo tɾˈeno,,1,reader-gloss-v1;ipa=espeak
 common-signs.pork-code,κωδικοί χοιρινού,,kodikoi choirinou,kˌoðicˈi çˌiɾinˈu,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
 rail-station-words.fare,Κόμιστρο,,Komistro,kˈomistɾˌo,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak
+transit-rides.where-do-i-pay-the-fare,Πού πληρώνω το κόμιστρο;,,Pou plirono to komistro;,pˈu pliɾˈono to kˈomistɾˌo,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

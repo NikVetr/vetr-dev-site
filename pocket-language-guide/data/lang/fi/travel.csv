@@ -116,3 +116,4 @@ taxi.please-get-me-there-in-time-for-the-shinkansen,Viekää minut ajoissa Shink
 common-signs.pork-code,sianlihan koodit kylteissä,,sˈianlihaŋ kˈoːdit kˈylteissæ,"B1 = koira, B2 = sianliha",2,fi-agent-v1;ipa=espeak
 rail-station-words.maglev,magneettijuna,,mˈaɡneːttˌijuna,,2,fi-agent-v1;ipa=espeak
 place-words.scenic-area,nähtävyysalue,,nˈæhtævˌyːsalˌue,,2,fi-agent-v1;ipa=espeak
+transit-rides.where-do-i-pay-the-fare,Missä matkalippu maksetaan?,,mˈissæ mˈatkalˌippu mˈaksetaːn,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

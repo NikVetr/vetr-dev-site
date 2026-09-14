@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,Mogu li ovo zamijeniti?,,mˈoɡu li ˈovo z
 color-size-returns.do-you-have-a-bag,Imate li vrećicu?,,imate li vretɕitsu,,2,hr-agent-v1;ipa=espeak
 tax-refund.can-i-get-a-tax-refund,Mogu li dobiti povrat PDV-a?,,mˈoɡu li dobiti pˈovrat pedeˈve ˈa,,2,hr-agent-v1;ipa=espeak+loan
 tax-refund.is-tax-free-shopping-available,Ima li ovdje Tax Free?,,ima li ˈovdje tˈaks frˈi,,2,hr-agent-v1;ipa=espeak+loan
+payment-receipt.can-i-pay-by-mobile-money,Plaćanje novcem s mobitela?,,platɕaɲe nˈoftsem s mobitela,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+payment-receipt.what-is-the-cover-charge,Koliko iznosi couvert?,,koliko iznosi tsˈouvert,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

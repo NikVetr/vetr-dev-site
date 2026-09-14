@@ -116,3 +116,4 @@ rail-station-words.ticket-validator,Mesin validasi,Gate,mˈɛsin vˌalidˈasi,bu
 rail-station-words.maglev,Maglev,kereta magnet,mˈaɡləv,,1,reader-gloss-v1;ipa=espeak
 common-signs.pork-code,B2 · BPK · samcan · bakut · cu nyuk,siobak · saksang · char siu,bˈe dˈua bˌepˌekˈa sˈamtʃan bˈakut tʃˈu ɲˈuk,"B1 is dog (Batak biang), not pork; bak- in bakso/bakmi/bakpao is Hokkien for meat",2,pork-code-agent-v1;lppom-mui;ipa=espeak
 rail-station-words.fare,Tarif,Ongkos,tˈarif,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak
+transit-rides.where-do-i-pay-the-fare,Bayar ongkos di mana?,,bˈajar ˈoŋkos di mˈana,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

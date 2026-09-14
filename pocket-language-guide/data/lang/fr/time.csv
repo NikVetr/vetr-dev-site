@@ -42,3 +42,4 @@ months.october,octobre,,ɔktˈɔbʁ,,2,fr-agent-v1;ipa=espeak
 months.november,novembre,,novˈɑ̃bʁ,,2,fr-agent-v1;ipa=espeak
 months.december,décembre,,desˈɑ̃bʁ,,2,fr-agent-v1;ipa=espeak
 time-words.clock-offset,"En swahili, l'heure part de l'aube, décalée de six heures sur votre montre : saa moja = 7 h, saa sita = midi, saa kumi = 16 h. Dites le chiffre, ou demandez saa ngapi za kizungu pour l'heure occidentale.",,,,2,fr-notes-v1
+time-scheduling.what-time-do-you-reopen,À quelle heure ça rouvre ?,,a kɛl œʁ sa ʁˈuvʁ,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

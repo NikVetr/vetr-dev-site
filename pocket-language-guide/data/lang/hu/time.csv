@@ -42,3 +42,4 @@ months.october,október,,ˈoktoːbɛr,,2,hu-agent-v1;ipa=espeak
 months.november,november,,nˈovɛmbɛr,,2,hu-agent-v1;ipa=espeak
 months.december,december,,dˈɛtsɛmbɛr,,2,hu-agent-v1;ipa=espeak
 time-words.clock-offset,"A szuahéli óra napkeltétől számol, hat órával elcsúszva a telefonján lévőhöz képest: saa moja 7:00, saa sita dél, saa kumi 16:00. Adjon hatot a hallott számhoz, és megkapja a saját órája szerinti időt. Mondja az időt számmal, vagy kérdezzen rá a nyugati órára: saa ngapi za kizungu.",,,,2,hu-agent-v1
+time-scheduling.what-time-do-you-reopen,Mikor nyit ki újra?,,mˈikor ɲˈit kˈi ˈuːjrɑ,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

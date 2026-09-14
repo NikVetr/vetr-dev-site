@@ -1490,7 +1490,25 @@ REPAIR = {
            ("nahˈiːn", "nahˈĩː"), ("huːn", "hũː"),
            ("w", "ʋ"), ("r", "ɾ")],
     # espeak inserts a stray `.` before a long vowel in Arabic: `i.ː` for `iː`.
-    "ar": [(".", "")],
+    #
+    # **And it reads a bare كم as the kilometre abbreviation.** كم is *kam*, "how
+    # much / how many", and the voice expands it to `kˌiiluˈu mitˌar` -- "kilo
+    # meter" -- on all 21 rows of the pack that begin with it. That is the whole of
+    # the pack's interrogative spine: `question-words.how-much-many` is the bare
+    # word, and `what-time-is-it`, `how-much-in-total`, `how-far-is-it`,
+    # `how-many-times-a-day` and `how-long-may-i-stay` all open with it, so every
+    # Arabic sheet was telling all 52 readers to say "kilometre" for the most
+    # frequent question word in the language.
+    #
+    # Safe as a bare string replacement, which was measured rather than assumed:
+    # `kˌiiluˈu` occurs 21 times and every one is followed by ` mitˌar`, so no row
+    # means kilometre by it. The prefixed forms never had the defect -- بكم comes
+    # back `bˈakam` because the ب stops the abbreviation matching -- and the pack's
+    # one genuine kilo, الكيلو in `laundry.how-much-per-kilo`, is `ʔalkˈiːluː`,
+    # which is a different string: the abbreviation expansion writes `ii` where the
+    # real word has `iː`. Stressed `kˈam` because every Arabic row carries a mark,
+    # monosyllables included (`hˈum`, `lˈajj`).
+    "ar": [(".", ""), ("kˌiiluˈu mitˌar", "kˈam")],
     # `u"` is the fronted /u/ between palatalised consonants, and `ɪ^` is what a
     # soft sign on a final consonant comes out as: `dvʲˈerɪ^` for дверь /dvʲerʲ/.
     # And espeak writes ы as `y`, which in IPA is the close front *rounded* vowel:

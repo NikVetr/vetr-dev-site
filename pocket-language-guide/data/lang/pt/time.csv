@@ -42,3 +42,4 @@ months.october,outubro,,ˌowtˈubrʊ,,2,pt-agent-v1;ipa=espeak
 months.november,novembro,,nˌovˈeɪmbrʊ,,2,pt-agent-v1;ipa=espeak
 months.december,dezembro,,dˌezˈeɪmbrʊ,,2,pt-agent-v1;ipa=espeak
 time-words.clock-offset,"O relógio suaíli começa ao amanhecer e conta seis horas a menos do que o relógio de pulso: saa moja são as 7:00, saa sita é o meio-dia, saa kumi são as 16:00. Some seis horas ao número que ouvir. Diga a hora em algarismos ou pergunte saa ngapi za kizungu para a hora ocidental.",,,,2,pt-notes-v1
+time-scheduling.what-time-do-you-reopen,A que horas reabre?,,a ky ˈɔɾæz xˌeˈabry,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,می‌شود عوض کنم؟,,mishavad ‘
 color-size-returns.do-you-have-a-bag,کیسه دارید؟,,kise dārid?,kise dɑrid,,2,fa-agent-v1;ipa=espeak
 tax-refund.can-i-get-a-tax-refund,می‌شود مالیات را پس بگیرم؟,,mishavad māliyāt rā pas begiram?,miʃavad mɑliɑt rɑ pas beɡiram,,2,fa-agent-v1;ipa=espeak
 tax-refund.is-tax-free-shopping-available,خریدِ معاف از مالیات دارید؟,,kharid-e mo‘āf az māliyāt dārid?,xaride moʔɑf az mɑliɑt dɑrid,,2,fa-agent-v1;ipa=espeak
+payment-receipt.can-i-pay-by-mobile-money,با کیف پولِ موبایل می‌شود؟,,bā kif-e pul-e mobāyl mishavad?,bɑ kif pule mobɑjl miʃavad,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+payment-receipt.what-is-the-cover-charge,هزینه ثابت برای هر نفر چقدر است؟,,hazine-ye sābet barā-ye har nafar cheqadr ast?,hazine sɑbet barɑje har nafar tʃeqadr ast,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

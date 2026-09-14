@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,Можна обміняти?,,Mozhna obmini
 color-size-returns.do-you-have-a-bag,Пакет є?,,Paket ye?,pakˈɛt jˈɛ,,2,uk-agent-v1;ipa=espeak
 tax-refund.can-i-get-a-tax-refund,Можна повернути податок?,,Mozhna povernuty podatok?,mˈoʒna poʋˈɛrnutɪ podatˈok,,2,uk-agent-v1;ipa=espeak
 tax-refund.is-tax-free-shopping-available,У вас є такс-фрі?,,U vas ye taks-fri?,ˈu ʋˈas jˈɛ tˈaksfriː,,2,uk-agent-v1;ipa=espeak
+payment-receipt.can-i-pay-by-mobile-money,Мобільними грошима?,,Mobilnymy hroshyma?,mobˈiːʎnɪmɪ hroʃˈɪma,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+payment-receipt.what-is-the-cover-charge,Скільки коштує куверт?,,Skilky koshtuie kuvert?,skˈiːʎkɪ koʃtˈujɛ kuʋˈɛrt,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,Puwede ko po ba itong ipagpalit?,,puwɛdɛ 
 color-size-returns.do-you-have-a-bag,Meron po ba kayong bag?,,mɛɾon po ba kajoŋ baɡ,,2,fil-agent-v1;ipa=fil-g2p
 tax-refund.can-i-get-a-tax-refund,Puwede po ba akong makakuha ng tax refund?,,puwɛdɛ po ba akoŋ makakuha naŋ taks ɾɛfund,,2,fil-agent-v1;ipa=fil-g2p
 tax-refund.is-tax-free-shopping-available,May tax-free shopping po ba dito?,,maj taksfɾɛɛ shoppiŋ po ba dito,,2,fil-agent-v1;ipa=fil-g2p
+payment-receipt.can-i-pay-by-mobile-money,Puwede po bang bayaran gamit ang mobile money?,,puwɛdɛ po baŋ bajaɾan ɡamit aŋ mobilɛ monɛj,,2,translator-requests-v1;in-pack-neighbour;ipa=fil-g2p
+payment-receipt.what-is-the-cover-charge,Magkano po ang bayad sa upuan kada tao?,,maɡkano po aŋ bajad sa upuan kada tao,,2,translator-requests-v1;in-pack-neighbour;ipa=fil-g2p

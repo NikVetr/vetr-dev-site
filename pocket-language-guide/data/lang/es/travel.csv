@@ -116,3 +116,4 @@ transit-rides.do-i-need-to-validate,¿Tengo que validar este boleto?,este billet
 rail-station-words.ticket-validator,validadora,canceladora · validador,bˌalidadˈoɾa,,2,es-agent-v1;ipa=espeak
 common-signs.pork-code,códigos de cerdo,,kˈodiɡos de sˈeɾdo,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
 rail-station-words.fare,tarifa,pasaje,taɾˈifa,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak
+transit-rides.where-do-i-pay-the-fare,¿Dónde se paga el pasaje?,,dˈonde se pˈaɡa el pasˈaxe,where is the fare paid?,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

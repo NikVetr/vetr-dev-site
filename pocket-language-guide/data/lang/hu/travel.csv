@@ -116,3 +116,4 @@ rail-station-words.ticket-validator,jegykezelő,,jˈɛɟkɛzɛløː,,2,hu-agent-
 rail-station-words.maglev,mágnesvasút,maglev,mˈaːɡnɛʃvɑʃuːt,,1,reader-gloss-v1;ipa=espeak
 common-signs.pork-code,sertéshús-kódok,,ʃˈɛrteːʃhuːʃkoːdok,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
 rail-station-words.fare,viteldíj,,vˈitɛldiːj,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak
+transit-rides.where-do-i-pay-the-fare,Hol fizetem a viteldíjat?,,hˈol fˈizɛtɛm ˈɑ vˈitɛldiːjɑt,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

@@ -42,3 +42,4 @@ months.october,अक्टूबर,,akṭūbar,ʌkʈˈuːbəɾ,,2,hi-agent-v1;
 months.november,नवंबर,,navaṁbar,nəʋˈʌmbəɾ,,2,hi-agent-v1;ipa=espeak
 months.december,दिसंबर,,disaṁbar,dɪsˈʌmbəɾ,,2,hi-agent-v1;ipa=espeak
 time-words.clock-offset,"स्वाहिली घड़ी सूरज निकलने से शुरू होती है और आपकी घड़ी से छह घंटे हटकर चलती है: जो संख्या सुनें उसमें छह जोड़ दीजिए, वही आपकी घड़ी का समय है। saa moja = 7:00, saa sita = दोपहर 12:00, saa kumi = 16:00। उलझन से बचने के लिए समय अंकों में बताइए, या पश्चिमी समय के लिए saa ngapi za kizungu पूछिए।",,,,,2,hi-notes-v1
+time-scheduling.what-time-do-you-reopen,कितने बजे फिर खुलता है?,,kitne baje phir khultā hai?,kˈɪtnˌeː bˈʌɟeː pʰˈɪɾ kʰˈʊltˌaː hɛː,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

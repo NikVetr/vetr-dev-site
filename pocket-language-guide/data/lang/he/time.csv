@@ -42,3 +42,4 @@ months.october,אוקטובר,אוֹקְטוֹבֶּר,oqtóber,oktˈobeʁ,,2,he
 months.november,נובמבר,נוֹבֶמְבֶּר,novémber,novˈembeʁ,,2,he-agent-v1;ipa=bgn
 months.december,דצמבר,דֶּצֶמְבֶּר,detsémber,detsˈembeʁ,,2,he-agent-v1;ipa=bgn
 time-words.clock-offset,"השעון בסווהילית מתחיל עם הזריחה ומראה שש שעות פחות מהשעון שלכם: הוסיפו שש למספר שאתם שומעים, והפחיתו שש כשאתם אומרים שעה. saa moja היא שבע בבוקר, saa sita היא שתים עשרה בצהריים ו-saa kumi היא ארבע אחר הצהריים. בטוח יותר לנקוב במספר או לשאול saa ngapi za kizungu, השעה בשעון המערבי.",,,,,2,he-notes-v1
+time-scheduling.what-time-do-you-reopen,באיזו שעה פותחים שוב?,בְּאֵיזוֹ שָׁעָה פּוֹתְחִים שׁוּב?,be’éyzo sha‘a potẖim shuv?,beˈejzo ʃaˈa potxˈim ʃˈuv,at what hour do they open again?,2,translator-requests-v1;in-pack-neighbour;ipa=bgn

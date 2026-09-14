@@ -116,3 +116,4 @@ transit-rides.do-i-need-to-validate,हे तिकीट व्हॅलिड
 rail-station-words.ticket-validator,तिकीट व्हॅलिडेटर,,tikīṭa vhêliḍēṭara,tɪkˈiːʈ vhˌɛlɪɖˈeːʈəɾ,the machine itself,2,mr-agent-v1;ipa=espeak
 common-signs.pork-code,डुकराचा कोड,,ḍukarācā kōḍa,ɖˌʊkɾˈaːcaː kˈoːɖ,Indonesian shops sign pork with a code rather than the word,2,mr-agent-v1;ipa=espeak
 rail-station-words.fare,भाडे,,bhāḍē,bʰˈaːɖeː,,2,mr-agent-v1;ipa=espeak
+transit-rides.where-do-i-pay-the-fare,भाडे कुठे भरायचे?,,bhāḍē kuṭhē bharāyacē?,bʰˈaːɖeː kˈʊʈʰeː bʰəɾˈaːjcˌeː,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

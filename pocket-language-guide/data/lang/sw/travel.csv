@@ -116,3 +116,4 @@ rail-station-words.ticket-validator,Mashine ya tiketi,Validator,maʃˈine ja tik
 rail-station-words.maglev,Treni ya sumaku,,trˈeni ja sumˈaku,,1,reader-gloss-v1;ipa=espeak
 common-signs.pork-code,Misimbo ya nguruwe,,misˈimbo ja ŋɡurˈuwe,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
 rail-station-words.fare,Nauli,,naˈuli,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak
+transit-rides.where-do-i-pay-the-fare,Nalipa nauli wapi?,,nalˈipa naˈuli wˈapi,on a daladala or a matatu you hand it to the kondakta,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

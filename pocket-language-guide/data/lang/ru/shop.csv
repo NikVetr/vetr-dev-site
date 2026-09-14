@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,Можно обменять?,,Mozhno obmeny
 color-size-returns.do-you-have-a-bag,Пакет есть?,,Paket yestʼ?,pakʲˈet jestʲ,,2,ru-agent-v1;ipa=espeak
 tax-refund.can-i-get-a-tax-refund,Можно вернуть налог?,,Mozhno vernutʼ nalog?,mˈoʒnʌ vʲirnˈutʲ naɭˈok,,2,ru-agent-v1;ipa=espeak
 tax-refund.is-tax-free-shopping-available,У вас есть такс-фри?,,U vas yestʼ taks-fri?,ˈu vˈɑs jestʲ tˈaksfrʲi,,2,ru-agent-v1;ipa=espeak
+payment-receipt.can-i-pay-by-mobile-money,Мобильными деньгами?,,Mobilʼnymi denʼgami?,mʌbʲˈiɭnɨmʲɪ dʲinɡˈɑmʲɪ,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+payment-receipt.what-is-the-cover-charge,Сколько стоит куверт?,,Skolʼko stoit kuvert?,skˈoɭkʌ stʌˈit kuvʲˈert,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

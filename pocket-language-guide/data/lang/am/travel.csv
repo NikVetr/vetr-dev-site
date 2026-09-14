@@ -116,3 +116,4 @@ transit-rides.do-i-need-to-validate,ቲኬቱ መታተም አለበት?,,tīkē
 rail-station-words.ticket-validator,ቲኬት ማተሚያ,,tīkēt matemīya,tiket matəmija,,2,am-agent-v1;ipa=bgn-am
 common-signs.pork-code,B2 · BPK · bakso,,B2 · BPK · bakso,,,2,am-agent-v1
 rail-station-words.fare,የመጓጓዣ ክፍያ,,yemegwagwazha kifiya,jəməɡwaɡwaʒa kɨfɨja,,2,am-agent-v1;ipa=bgn-am
+transit-rides.where-do-i-pay-the-fare,የመጓጓዣ ክፍያ የት ይከፈላል?,,yemegwagwazha kifiya yet yikkefelal?,jəməɡwaɡwaʒa kɨfɨja jət jɨkːəfəlal,where is the transport payment paid?,2,translator-requests-v1;in-pack-neighbour;ipa=bgn-am

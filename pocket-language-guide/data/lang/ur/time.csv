@@ -42,3 +42,4 @@ months.october,اکتوبر,,aktūbar,ˌaktˈoːbəɾ,,2,ur-agent-v1;ipa=espeak
 months.november,نومبر,,nawambar,nˈoːmbəɾ,,2,ur-agent-v1;ipa=espeak
 months.december,دسمبر,,disambar,dɪsˈambaɾ,,2,ur-agent-v1;ipa=espeak
 time-words.clock-offset,سواحیلی گھڑی سورج نکلنے سے شروع ہوتی ہے، آدھی رات سے نہیں، اور آپ کے فون کی گھڑی سے چھ گھنٹے ہٹ کر چلتی ہے: جو عدد سنیں اُس میں چھ جوڑ دیجیے، وہی آپ کی گھڑی کا وقت ہے، اور سواحیلی میں کہنے کے لیے اپنی گھڑی سے چھ گھٹا دیجیے۔ سا موجا صبح سات بجے ہے، سا سیتا دوپہر اور سا کومی شام چار بجے۔ محفوظ راستہ یہ ہے کہ وقت گِن کر بتائیے، یا سا نگاپی زا کیزونگو کہہ کر مغربی وقت پوچھ لیجیے۔,,,,,2,ur-agent-v1
+time-scheduling.what-time-do-you-reopen,کتنے بجے دوبارہ کھلتا ہے؟,,kitne baje dobārah khultā hai?,kˈɪtneː bˈʌɟeː doːbˈaːɾˌa kʰˈʊltaː hɛ,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

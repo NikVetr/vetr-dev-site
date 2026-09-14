@@ -116,3 +116,4 @@ transit-rides.do-i-need-to-validate,இந்த டிக்கெட்டை 
 rail-station-words.ticket-validator,டிக்கெட் உறுதி இயந்திரம்,,ṭikkeṭ uṟuti iyantiram,ʈikkeʈ urɯdi ijʌndiɾʌm,,2,ta-agent-v1;ipa=espeak
 common-signs.pork-code,பன்றி இறைச்சிக் குறியீடுகள்,,paṉṟi iṟaiccik kuṟiyīṭukaḷ,pʌnri iraɪtʃːik kurijiːɖɯɡʌɭ,"Indonesian signs code pork rather than naming it: B2, BPK, samcan, bakut, cu nyuk, siobak, saksang. B1 is dog, not pork; bak- in bakso and bakmi is Hokkien for meat, and most Indonesian bakso is beef",2,ta-agent-v1;ipa=espeak
 rail-station-words.fare,கட்டணம்,,kaṭṭaṇam,kʌʈʈʌɳʌm,,2,ta-agent-v1;ipa=espeak
+transit-rides.where-do-i-pay-the-fare,கட்டணம் எங்கே செலுத்த வேண்டும்?,,kaṭṭaṇam eṅkē celutta vēṇṭum?,kʌʈʈʌɳʌm eŋɡeː selɯttʌ veːɳɖɯm,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

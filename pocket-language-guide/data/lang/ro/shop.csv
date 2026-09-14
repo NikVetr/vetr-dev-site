@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,Pot să-l schimb?,Pot să o schimb?,pot sə
 color-size-returns.do-you-have-a-bag,Aveți o pungă?,,avˌetsʲ o pˈuŋɡə,,2,ro-agent-v1;ipa=espeak
 tax-refund.can-i-get-a-tax-refund,Pot obține restituirea TVA-ului?,,pot obtsˈine restitwˈiɾea tˌevˌeˈauluɪ,,2,ro-agent-v1;ipa=espeak
 tax-refund.is-tax-free-shopping-available,Faceți tax free?,,fˈatʃetsʲ tˈaks frˈee,,2,ro-agent-v1;ipa=espeak
+payment-receipt.can-i-pay-by-mobile-money,Pot plăti cu bani de pe telefon?,,pot plətʲˈi ku bˈanʲ de pe tˌelefˈon,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+payment-receipt.what-is-the-cover-charge,Cât costă couvert-ul?,,kˈɨt kˈostə koʊvˈertul,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

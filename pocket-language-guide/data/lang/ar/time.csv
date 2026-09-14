@@ -1,6 +1,6 @@
 concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
-time-scheduling.what-time-is-it,كم الساعة؟,,kam al-sāʿah?,kˌiiluˈu mitˌar ʔassˈaːʕa,,2,ar-agent-v1;ipa=espeak
-time-scheduling.how-many-minutes,كم دقيقة؟,,kam daqīqah?,kˌiiluˈu mitˌar dˈaqiːqˌa,,2,ar-agent-v1;ipa=espeak
+time-scheduling.what-time-is-it,كم الساعة؟,,kam al-sāʿah?,kˈam ʔassˈaːʕa,,2,ar-agent-v1;ipa=espeak
+time-scheduling.how-many-minutes,كم دقيقة؟,,kam daqīqah?,kˈam dˈaqiːqˌa,,2,ar-agent-v1;ipa=espeak
 time-scheduling.what-time-should-we-meet,في أيّ ساعة نتقابل؟,,fī ayy sāʿah nataqābal?,fˈiː ʔˈiː sˈaːʕa ntqˈaːbl,,2,ar-agent-v1;ipa=espeak
 time-scheduling.can-we-change-the-time,هل يمكن تغيير الموعد؟,,hal yumkin taghyīr al-mawʿid?,hˈal jmkˈunna tˈaɣjiːr ʔalmˈawʕid,,2,ar-agent-v1;ipa=espeak
 time-scheduling.when-is-convenient,متى يناسبك؟,,matá yunāsibuk?,mˈataː jnˈaːsbka,,2,ar-agent-v1;ipa=espeak
@@ -8,7 +8,7 @@ time-scheduling.what-is-today-s-date,ما تاريخ اليوم؟,,mā tārīkh 
 time-scheduling.what-day-is-it-today,أيّ يوم اليوم؟,,ayy yawm al-yawm?,ʔˈiː jˈawm ʔaljˈawm,,2,ar-agent-v1;ipa=espeak
 time-scheduling.what-time-does-it-open,متى يفتح؟,,matá yaftaḥ?,mˈataː jftħ,,2,ar-agent-v1;ipa=espeak
 time-scheduling.what-time-does-it-close,متى يغلق؟,,matá yughliq?,mˈataː jɣlq,,2,ar-agent-v1;ipa=espeak
-time-scheduling.how-long-does-it-take,كم يستغرق؟,,kam yastaghriq?,kˌiiluˈu mitˌar jstɣrq,,2,ar-agent-v1;ipa=espeak
+time-scheduling.how-long-does-it-take,كم يستغرق؟,,kam yastaghriq?,kˈam jstɣrq,,2,ar-agent-v1;ipa=espeak
 time-words.today,اليوم,,al-yawm,ʔaljˈawm,,2,ar-agent-v1;ipa=espeak
 time-words.tomorrow,غداً,بكرة,ghadan,ɣdˈaː,,2,ar-agent-v1;ipa=espeak
 time-words.yesterday,أمس,امبارح,ams,ʔˈams,,2,ar-agent-v1;ipa=espeak
@@ -42,3 +42,4 @@ months.october,أكتوبر,تشرين الأول,uktūbir,ʔˈuktuːbˌar,,2,ar
 months.november,نوفمبر,تشرين الثاني,nūfambir,nˈuːfimbˌir,,2,ar-agent-v1;ipa=espeak
 months.december,ديسمبر,كانون الأول,dīsambir,dˈiːsambˌir,,2,ar-agent-v1;ipa=espeak
 time-words.clock-offset,"الساعة السواحيلية تبدأ من الفجر لا من منتصف الليل: العدد الذي تسمعه أقل بست ساعات مما على ساعتك، فأضف ستًا إلى ما تسمعه، واطرح ستًا مما على ساعتك لتقوله بالسواحيلية. سا موجا هي السابعة صباحًا، وسا سيتا الظهر، وسا كومي الرابعة عصرًا. والأسلم أن تقول الوقت بالأرقام، أو تسأل عن التوقيت الغربي بعبارة سا نغابي زا كيزونغو.",,,,,2,ar-notes-v1
+time-scheduling.what-time-do-you-reopen,متى يفتح مرة أخرى؟,,matá yaftaḥ marrah ukhrá?,mˈataː jftħ mˈarɹa ʔˈuxɹaː,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

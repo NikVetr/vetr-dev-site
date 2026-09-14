@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,אפשר להחליף?,אֶפְשָׁר ל�
 color-size-returns.do-you-have-a-bag,אפשר שקית?,אֶפְשָׁר שַׂקִּית?,efshar saqit?,efʃˈaʁ sakˈit,can I have a bag?,2,he-agent-v1;ipa=bgn
 tax-refund.can-i-get-a-tax-refund,אפשר לקבל החזר מע״ם?,אֶפְשָׁר לְקַבֵּל הֶחְזֵר מַע״ם?,efshar leqabel heẖzer ma‘am?,efʃˈaʁ lekabˈel hexzˈeʁ maˈam,can I get a VAT refund?,2,he-agent-v1;ipa=bgn
 tax-refund.is-tax-free-shopping-available,יש כאן קניות בלי מע״ם?,יֵשׁ כָּאן קְנִיּוֹת בְּלִי מַע״ם?,yesh kan qeniyot beli ma‘am?,jˈeʃ kˈan kenijˈot belˈi maˈam,is there shopping without VAT here?,2,he-agent-v1;ipa=bgn
+payment-receipt.can-i-pay-by-mobile-money,אפשר לשלם בכסף מהנייד?,אֶפְשָׁר לְשַׁלֵּם בְּכֶסֶף מֵהַנַּיָּיד?,efshar leshalem bekhesef mehanayad?,efʃˈaʁ leʃalˈem bexesˈef mehanajˈad,can one pay with money from the mobile?,2,translator-requests-v1;in-pack-neighbour;ipa=bgn
+payment-receipt.what-is-the-cover-charge,כמה עולה החיוב הקבוע לאדם?,כַּמָּה עוֹלֶה הַחִיּוּב הַקָּבוּעַ לְאָדָם?,káma ole hakhiyuv hakavúa le’adam?,kˈama olˈe haxijˈuv hakavˈua leadˈam,how much is the fixed charge per person?,2,translator-requests-v1;in-pack-neighbour;ipa=bgn

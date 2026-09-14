@@ -42,3 +42,4 @@ months.october,octombrie,,oktˈombrje,,2,ro-agent-v1;ipa=espeak
 months.november,noiembrie,,nojˈembrje,,2,ro-agent-v1;ipa=espeak
 months.december,decembrie,,detʃˈembrje,,2,ro-agent-v1;ipa=espeak
 time-words.clock-offset,"Ceasul swahili începe de la răsăritul soarelui și este cu șase ore în urma celui de pe telefonul dumneavoastră: saa moja înseamnă 7:00, saa sita înseamnă amiază, saa kumi înseamnă 16:00. Adăugați șase la numărul auzit ca să obțineți ora de pe ceasul dumneavoastră. Spuneți ora în cifre, sau întrebați saa ngapi za kizungu pentru ora occidentală.",,,,2,ro-agent-v1
+time-scheduling.what-time-do-you-reopen,La ce oră se redeschide?,,la tʃe ˈorə se redeskˈide,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

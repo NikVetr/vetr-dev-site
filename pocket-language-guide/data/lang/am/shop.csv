@@ -30,3 +30,5 @@ shopping.where-can-i-buy,{} የት መግዛት እችላለሁ?,,{} yet megzat 
 shopping.do-you-have-this-in-stock,ይህ በክምችት አለ?,,yih bekimichit āle?,jɨh bəkɨmɨtʃɨt ʔalə,is this in the store?,2,am-agent-v1;ipa=bgn-am
 shopping.two-of-these,ከዚህ ሁለት እባክዎ,,kezzīh hulett ibakwo,kəzːih hulətː ʔɨbakwo,two from this please,2,am-agent-v1;ipa=bgn-am
 shopping.what-is-it-made-of,ከምን የተሰራ ነው?,,kemin yeteserra new?,kəmɨn jətəsərːa nəw,from what is it made?,2,am-agent-v1;ipa=bgn-am
+payment-receipt.can-i-pay-by-mobile-money,በቴሌብር መክፈል?,በሞባይል ገንዘብ መክፈል?,betelebir mekfel?,bətələbɨr məkfəl,to pay by telebirr? -- Ethio telecom's wallet is the one a shop will have; M-PESA Ethiopia is the other,2,translator-requests-v1;in-pack-neighbour;src=Ethio telecom telebirr merchant-payment wording;ipa=bgn-am
+payment-receipt.what-is-the-cover-charge,በየሰው የተወሰነ ክፍያ ስንት ነው?,,beyesew yetewessene kifiya sint new?,bəjəsəw jətəwəsːənə kɨfɨja sɨnt nəw,how much is the fixed charge per person?,2,translator-requests-v1;in-pack-neighbour;ipa=bgn-am

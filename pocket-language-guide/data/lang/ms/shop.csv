@@ -1,7 +1,7 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 payment-receipt.pay-by-card,Bayar pakai kad?,,bˈajar pˈakaɪ kˈad,,2,ms-agent-v1;ipa=espeak
 payment-receipt.pay-cash,Bayar tunai?,,bˈajar tˈunaɪ,,2,ms-agent-v1;ipa=espeak
-payment-receipt.pay-by-qr-code,Bayar pakai QRIS?,,bˈajar pˈakaɪ krˈis,QRIS = the national QR standard,2,ms-agent-v1;ipa=espeak
+payment-receipt.pay-by-qr-code,Bayar pakai DuitNow QR?,,bˈajar pˈakaɪ dˈuet nˈow kjˌuːˈar,DuitNow QR = the national QR standard,2,ms-agent-v1;corrected=QRIS is Indonesia's standard and Malaysia's is DuitNow QR (Payments Network Malaysia);ipa=espeak
 payment-receipt.a-receipt-please,Minta resit,,mˈintə rˈəset,,2,ms-agent-v1;ipa=espeak
 payment-receipt.please-write-the-number,Tolong tulis angkanya,,tˈoloŋ tˈules aŋkˈəɲə,,2,ms-agent-v1;ipa=espeak
 payment-receipt.how-much-in-total,Totalnya berapa?,,totˈalɲə bərˈapə,,2,ms-agent-v1;ipa=espeak
@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,Boleh ditukar?,,bˈoleh ditˈukar,,2,ms-age
 color-size-returns.do-you-have-a-bag,Ada beg plastik?,Plastik?,ˈadə bˈɛɡ plˈasteʔ,,2,ms-agent-v1;ipa=espeak
 tax-refund.can-i-get-a-tax-refund,Boleh minta pemulangan SST?,,bˈoleh mˈintə pəmulˈaŋan ˌɛsˌɛstˈiː,SST = Malaysia's Sales and Service Tax,2,ms-agent-v1;ipa=espeak
 tax-refund.is-tax-free-shopping-available,Ada Skim Pemulangan Pelancong?,Bebas cukai,ˈadə skˈim pəmulˈaŋan pəlˈantʃoŋ,Skim Pemulangan Pelancong (Tourist Refund Scheme) is run by Kastam (Malaysian Customs),2,ms-agent-v1;ipa=espeak
+payment-receipt.can-i-pay-by-mobile-money,Bayar pakai duit dalam telefon?,,bˈajar pˈakaɪ dˈuet dˈalam telˈifon,money held on the phone itself,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+payment-receipt.what-is-the-cover-charge,Berapa caj tempat setiap orang?,,bərˈapə tʃˈadʒ tˈəmpat sətˈiap ˈɔraŋ,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

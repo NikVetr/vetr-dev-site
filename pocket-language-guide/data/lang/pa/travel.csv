@@ -116,3 +116,4 @@ transit-rides.do-i-need-to-validate,ਇਹ ਟਿਕਟ ਪੰਚ ਕਰਾਉ�
 rail-station-words.ticket-validator,ਟਿਕਟ ਪੰਚ ਕਰਨ ਵਾਲੀ ਮਸ਼ੀਨ,,ṭikaṭ paṁc karan vālī maśīn,ʈɪkəʈ pʌnc kʌɾən ʋali məʃin,the machine that punches a ticket,2,pa-agent-v1;ipa=espeak
 common-signs.pork-code,B2 · BPK · bakso ਵਰਗੇ ਕੋਡ = ਸੂਰ ਦਾ ਮਾਸ,,B2 · BPK · bakso varagē kōḍ = sūr dā mās,,"codes like B2, BPK and bakso mean pork",2,pa-agent-v1
 rail-station-words.fare,ਕਿਰਾਇਆ,,kirāiā,kɪɾaɪa,,2,pa-agent-v1;ipa=espeak
+transit-rides.where-do-i-pay-the-fare,ਕਿਰਾਇਆ ਕਿੱਥੇ ਦੇਣਾ ਹੈ?,,kirāiā kitthē dēṇā hai?,kɪɾaɪa kɪttʰe deɳa hɛ,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

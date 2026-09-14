@@ -42,3 +42,4 @@ months.october,Oktober,,oktˈobər,,2,ms-agent-v1;ipa=espeak
 months.november,November,,novˈɛmbər,,2,ms-agent-v1;ipa=espeak
 months.december,Disember,,disˈɛmbeɾr,,2,ms-agent-v1;ipa=espeak
 time-words.clock-offset,"Jam Swahili dikira dari waktu matahari terbit dan berbeza enam jam daripada jam di telefon anda: angka yang anda dengar sentiasa enam lebih kecil, jadi tambah enam untuk mendapat jam anda. saa moja = pukul 07:00, saa sita = 12:00 tengah hari, saa kumi = 16:00. Untuk mengelakkan kekeliruan, sebutkan waktu dengan angka, atau tanya saa ngapi za kizungu untuk jam Barat.",,,,2,ms-notes-v1
+time-scheduling.what-time-do-you-reopen,Buka semula jam berapa?,,bˈukə səmˈulə dʒˈam bərˈapə,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,Değiştirebilir miyim?,,dejɪʃtiɾebilˈ�
 color-size-returns.do-you-have-a-bag,Poşet var mı?,,poʃˈɛt vˈar mɯ,,2,tr-agent-v1;ipa=espeak
 tax-refund.can-i-get-a-tax-refund,KDV iadesi alabilir miyim?,,kˌadˌɛvˈɛ iadesˈɪ aɫabilˈɪr mˈijɪm,,2,tr-agent-v1;ipa=espeak
 tax-refund.is-tax-free-shopping-available,Vergisiz alışveriş var mı?,Tax free var mı?,vɛrɟˈisɪz aɫɯʃveɾˈɪʃ vˈar mɯ,,2,tr-agent-v1;ipa=espeak
+payment-receipt.can-i-pay-by-mobile-money,Mobil parayla olur mu?,,mobˈɪl pˈaɾajɫa oɫˈʊr mʊ,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+payment-receipt.what-is-the-cover-charge,Kuver ne kadar?,Ekmek ücretli mi?,kuvˈɛr nˈɛ kadˈar,a meyhane bill carries kuver; elsewhere the same charge appears as bread,2,translator-requests-v1;in-pack-neighbour;src=Turkish restaurant and meyhane bill wording (kuver);ipa=espeak

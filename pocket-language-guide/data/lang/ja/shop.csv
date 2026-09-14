@@ -30,3 +30,5 @@ payment-receipt.the-bill-is-wrong,会計が間違っているようです,,kaike
 shopping.two-of-these,これを二つください,,kore o futatsu kudasai,koɾe o ɸɯtatsɯ kɯdasai,,2,ja-agent-v1;ipa=hepburn
 payment-receipt.i-already-paid,もう払いました,,mō haraimashita,moː haɾaimaɕita,,2,ja-agent-v1;ipa=hepburn
 shopping.what-is-it-made-of,材料は何ですか？,,zairyō wa nan desu ka?,zaiɾjoː wa naɴ desɯ ka,,2,ja-agent-v1;ipa=hepburn
+payment-receipt.can-i-pay-by-mobile-money,モバイルマネーで払えますか？,,mobairu manē de haraemasu ka?,mobaiɾɯ maneː de haɾaemasɯ ka,,2,translator-requests-v1;in-pack-neighbour;ipa=hepburn
+payment-receipt.what-is-the-cover-charge,席料はいくらですか？,,sekiryō wa ikura desu ka?,sekiɾjoː wa ikɯɾa desɯ ka,"Japan's nearest thing is otoshi-dai, the charge for the dish an izakaya brings unasked",2,translator-requests-v1;in-pack-neighbour;ipa=hepburn

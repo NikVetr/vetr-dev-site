@@ -116,3 +116,4 @@ transit-rides.do-i-need-to-validate,এই টিকিটটা পাঞ্চ
 rail-station-words.ticket-validator,টিকিট পাঞ্চ মেশিন,,ṭikiṭa pāñca meśina,ʈˈikiʈ pˈantʃɔ mˈeʃin,,2,bn-agent-v1;ipa=espeak
 common-signs.pork-code,শুকরের মাংসের সংকেত,,śukarera māṁsera saṁketa,ʃˈukɔɾˌeɾ mˈaŋʃeɾ ʃˈɔŋketˌo,,2,bn-gloss-v1;ipa=espeak
 rail-station-words.fare,ভাড়া,,bhāṛā,bʰˈaɽa,,2,bn-agent-v1;ipa=espeak
+transit-rides.where-do-i-pay-the-fare,ভাড়া কোথায় দিতে হবে?,,bhāṛā kothāẏa dite habe?,bʰˈaɽa kˈotʰaj dˈite hˈɔbe,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

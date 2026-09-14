@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,Posso trocar?,,pˌɔsʊ trokˈar,,2,pt-agen
 color-size-returns.do-you-have-a-bag,Tem um saco?,uma sacola,teɪŋ ũŋ sˈakʊ,,2,pt-agent-v1;ipa=espeak
 tax-refund.can-i-get-a-tax-refund,Posso pedir o reembolso do IVA?,,pˌɔsʊ pedʒˈiɾ ʊ xˌeeɪmbˈolsʊ dʊ ˌivˌeˈa,,2,pt-agent-v1;ipa=espeak
 tax-refund.is-tax-free-shopping-available,Fazem tax free?,Há isenção de IVA para turistas?,fˌazeɪŋ tˈaks frˈi,,2,pt-agent-v1;ipa=espeak
+payment-receipt.can-i-pay-by-mobile-money,Pagar com dinheiro móvel?,,paɡˈar koŋ dʒˌiɲˈeɪɾʊ mˈɔvɛʊ,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+payment-receipt.what-is-the-cover-charge,Quanto é o couvert?,,kwˈɐ̃ŋtw ɛ ʊ kowvˈeɾətʃ,,2,translator-requests-v1;in-pack-neighbour;src=Portuguese restaurant bill wording (couvert);ipa=espeak

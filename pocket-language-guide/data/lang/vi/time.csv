@@ -42,3 +42,4 @@ months.october,Tháng mười,Tháng 10,taːŋ˧˥ myə̯j˨˩,,2,vi-agent-v1;ip
 months.november,Tháng mười một,Tháng 11,taːŋ˧˥ myə̯j˨˩ mot̪˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 months.december,Tháng mười hai,Tháng 12,taːŋ˧˥ myə̯j˨˩ haːj˧,,2,vi-agent-v1;ipa=espeak
 time-words.clock-offset,"Giờ Swahili tính từ lúc mặt trời mọc nên lệch sáu tiếng với đồng hồ của bạn: số nghe được luôn nhỏ hơn sáu, cộng sáu vào thì ra giờ trên đồng hồ; muốn nói giờ của mình thì trừ sáu. saa moja = 7:00, saa sita = 12 giờ trưa, saa kumi = 16:00. Cho chắc, hãy nói giờ bằng số, hoặc hỏi saa ngapi za kizungu để lấy giờ kiểu phương Tây.",,,,2,vi-notes-v1
+time-scheduling.what-time-do-you-reopen,Mấy giờ mở cửa lại ạ?,,məɪ˧˥ zəː˨˩ məː˧˩˧ kyə̯˧˩˧ laːj˨˩ˀ aː˨˩ˀ,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

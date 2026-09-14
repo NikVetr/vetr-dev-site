@@ -116,3 +116,4 @@ transit-rides.do-i-need-to-validate,上车前需要验票吗？,,shàng chē qi�
 rail-station-words.ticket-validator,闸机,閘機,zhájī,ʈʂa˧˥tɕi˥,,2,zh-Hans-agent-v1;ipa=pinyin
 common-signs.pork-code,猪肉代号,,zhūròu dàihào,ʈʂu˥ʐoʊ˥˩ taɪ˥˩xɑʊ˥˩,,2,pork-code-agent-v1;lppom-mui;ipa=pinyin
 rail-station-words.fare,车费,票价,chēfèi,ʈʂʰɤ˥feɪ˥˩,,2,fare-agent-v1;in-pack-neighbour;ipa=pinyin
+transit-rides.where-do-i-pay-the-fare,车费在哪里付？,,chēfèi zài nǎlǐ fù?,ʈʂʰɤ˥feɪ˥˩ tsaɪ˥˩ na˧˩˧li˧˩˧ fu˥˩,,2,translator-requests-v1;in-pack-neighbour;ipa=pinyin

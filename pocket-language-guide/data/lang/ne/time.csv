@@ -42,3 +42,4 @@ months.october,अक्टोबर,,akṭōbara,əkʈˈoːbəɾˌə,,2,ne-agen
 months.november,नोभेम्बर,,nōbhēmbara,noːbʰˈeːmbəɾˌə,,2,ne-agent-v1;ipa=espeak
 months.december,डिसेम्बर,,ḍisēmbara,ɖɪsˈeːmbəɾˌə,,2,ne-agent-v1;ipa=espeak
 time-words.clock-offset,"स्वाहिली घडी सूर्योदयदेखि सुरु हुन्छ, तपाईंको फोनको भन्दा छ घण्टा फरक: saa moja भनेको 7:00, saa sita भनेको मध्यान्ह, saa kumi भनेको 16:00 हो। अंकमा भन्नुहोस्, वा पश्चिमी घडीका लागि saa ngapi za kizungu सोध्नुहोस्।",,"svāhilī ghaḍī sūryōdayadēkhi suru huncha, tapāīṁkō phōnakō bhandā cha ghaṇṭā pharaka: saa moja bhanēkō 7:00, saa sita bhanēkō madhyānha, saa kumi bhanēkō 16:00 hō. aṁkamā bhannuhōs, vā paścimī ghaḍīkā lāgi saa ngapi za kizungu sōdhnuhōs.",,,2,ne-agent-v1
+time-scheduling.what-time-do-you-reopen,यो कति बजे फेरि खुल्छ?,,yō kati bajē phēri khulcha?,jˈoː kˈʌtɪ bˈʌɟeː pʰˈeːɾɪ kʰˈulcʰə,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

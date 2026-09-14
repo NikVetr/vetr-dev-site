@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,మార్చుకోవచ్చా?,,m
 color-size-returns.do-you-have-a-bag,సంచి ఉందా?,,saṁci uṁdā?,saɲtʃi undaː,,2,te-agent-v1;ipa=espeak
 tax-refund.can-i-get-a-tax-refund,పన్ను తిరిగి వస్తుందా?,,pannu tirigi vastuṁdā?,pannu tiriɡi ʋastundaː,,2,te-agent-v1;ipa=espeak
 tax-refund.is-tax-free-shopping-available,టాక్స్ ఫ్రీ షాపింగ్ ఉందా?,,ṭāks phrī ṣāpiṁg uṁdā?,ʈaːks pʰriː ʂaːpiŋɡ undaː,,2,te-agent-v1;ipa=espeak
+payment-receipt.can-i-pay-by-mobile-money,మొబైల్ మనీతో కట్టవచ్చా?,,mobail manītō kaṭṭavaccā?,mobaɪl maniːtoː kaʈʈaʋatʃtʃaː,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+payment-receipt.what-is-the-cover-charge,ఒక్కరికి నిర్ణీత ఛార్జీ ఎంత?,,okkariki nirṇīta chārjī eṁta?,okkariki nirɳiːta tʃʰaːrdʒiː enta,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

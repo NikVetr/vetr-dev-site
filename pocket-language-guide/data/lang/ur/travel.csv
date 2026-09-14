@@ -115,3 +115,4 @@ common-signs.stopped-stop,رکیے,رک جائیں,rukiye,ɾˈʌkjeː,"stop; the
 transit-rides.do-i-need-to-validate,کیا ٹکٹ پنچ کرانا پڑے گا؟,,kyā ṭikaṭ panch karānā paṛe gā?,kjˈaː ʈˈɪkɪʈ pˈʌnc kəɾˈaːnaː pˈʌɽeː ɡaː,"must the ticket be punched; Pakistan has no validate-before-boarding machine -- a conductor punches or checks the ticket, and metro fares are tapped at the gate",2,ur-agent-v1;ipa=espeak
 common-signs.pork-code,تختی پر سؤر کا کوڈ,,takhtī par su’ar kā koḍ,tˈʌxtˌiː pˈʌɾ səˈoːɾ kaː kˈoːɖ,,2,ur-agent-v1;ipa=espeak
 rail-station-words.fare,کرایہ,,kirāya,kˌəɾaːjˈaa,,2,ur-agent-v1;ipa=espeak
+transit-rides.where-do-i-pay-the-fare,کرایہ کہاں دینا ہے؟,,kirāya kahāñ denā hai?,kˌəɾaːjˈaa kˈʌhãː dˈeːnaː hɛ,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

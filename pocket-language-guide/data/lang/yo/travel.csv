@@ -116,3 +116,4 @@ transit-rides.do-i-need-to-validate,Ṣé mo nílò láti fi àmì sí tikẹ́t
 rail-station-words.ticket-validator,ẹ̀rọ ìdánilójú tikẹ́tì,,ɛ˩rɔ i˩da˥nilo˥dʒu˥ tikɛ˥ti˩,,2,yo-agent-v1;ipa=yo-g2p
 common-signs.pork-code,àmì ẹran ẹlẹ́dẹ̀ lórí àwọn àmì oúnjẹ,,a˩mi˩ ɛrã ɛlɛ˥dɛ˩ lo˥ri˥ a˩wɔ̃ a˩mi˩ oũ˥dʒɛ,,2,yo-agent-v1;ipa=yo-g2p
 rail-station-words.fare,owó ọkọ̀,,owo˥ ɔkɔ˩,,2,yo-agent-v1;ipa=yo-g2p
+transit-rides.where-do-i-pay-the-fare,Níbo ni mo máa san owó ọkọ̀?,,ni˥bo ni mo ma˥a sã owo˥ ɔkɔ˩,,2,translator-requests-v1;in-pack-neighbour;ipa=yo-g2p

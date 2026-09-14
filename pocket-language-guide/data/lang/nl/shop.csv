@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,Kan ik dit ruilen?,,kɑn ɪk dɪt rˈœylə
 color-size-returns.do-you-have-a-bag,Heeft u een tas?,,heːft y ən tˈɑs,,2,nl-agent-v1;ipa=espeak
 tax-refund.can-i-get-a-tax-refund,Kan ik belasting terugvragen?,,kɑn ɪk bəlˈɑstɪŋ tərˈʏxvrˌaːɣən,,2,nl-agent-v1;ipa=espeak
 tax-refund.is-tax-free-shopping-available,Is belastingvrij winkelen mogelijk?,,ɪs bəlˈɑstɪŋvrˌɛɪ ʋˈɪŋkələn mˈoːɣələk,,2,nl-agent-v1;ipa=espeak
+payment-receipt.can-i-pay-by-mobile-money,Met mobiel geld betalen?,,mɛt moːbˈil ɣˈɛlt bətˈaːlən,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+payment-receipt.what-is-the-cover-charge,Wat kost het couvert?,,ʋɑt kˈɔst hət kˈʌʊvɛrt,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,교환할 수 있어요?,,gyohwanhal su iss
 color-size-returns.do-you-have-a-bag,봉투 있어요?,,bongtu isseoyo?,poŋtʰu is͈ʌjo,,2,ko-agent-v1;ipa=rr
 tax-refund.can-i-get-a-tax-refund,택스리펀 돼요?,부가세 환급 돼요?,taekseuripeon dwaeyo?,tʰɛksɯɾipʰʌn twɛjo,,2,ko-agent-v1;ipa=rr
 tax-refund.is-tax-free-shopping-available,사후면세점이에요?,,sahumyeonsejeomieyo?,sahumjʌnsedʑʌmiejo,tax-refund shop,2,ko-agent-v1;ipa=rr
+payment-receipt.can-i-pay-by-mobile-money,모바일머니로 돼요?,,mobailmeoniro dwaeyo?,mobailmʌniɾo twɛjo,,2,translator-requests-v1;in-pack-neighbour;ipa=rr
+payment-receipt.what-is-the-cover-charge,한 사람당 기본 요금이 얼마예요?,,han saramdang gibon yogeumi eolmayeyo?,han saɾamdaŋ kibon joɡɯmi ʌlmajejo,how much is the basic per-person charge?,2,translator-requests-v1;in-pack-neighbour;ipa=rr

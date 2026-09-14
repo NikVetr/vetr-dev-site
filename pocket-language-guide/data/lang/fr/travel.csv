@@ -116,3 +116,4 @@ transit-rides.do-i-need-to-validate,Je dois valider mon billet ?,Faut-il compost
 rail-station-words.ticket-validator,valideur,composteur,validˈœʁ,,2,coordinator-gaps-v2;ipa=espeak
 common-signs.pork-code,codes pour le porc,,kod puʁ lə pˈɔʁk,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
 rail-station-words.fare,tarif,prix du billet,taʁˈif,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak
+transit-rides.where-do-i-pay-the-fare,Où faut-il payer le trajet ?,,u fotil pɛje lə tʁaʒˈɛ,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

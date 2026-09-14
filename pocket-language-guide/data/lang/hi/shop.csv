@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,क्या यह बदला जा स
 color-size-returns.do-you-have-a-bag,क्या थैली मिलेगी?,क्या बैग है?,kyā thailī milegī?,kjaː tʰˈɛːli mɪlˈeːɡi,,2,hi-agent-v1;ipa=espeak
 tax-refund.can-i-get-a-tax-refund,क्या टैक्स वापस मिलेगा?,,kyā ṭaiks vāpas milegā?,kjaː ʈˈɛːks ʋˈaːpəs mɪlˈeːɡaː,,2,hi-agent-v1;ipa=espeak
 tax-refund.is-tax-free-shopping-available,क्या टैक्स-फ़्री खरीदारी होती है?,,kyā ṭaiks-frī kharīdārī hotī hai?,kjaː ʈˈɛːksəfɾi kʰˌəɾidˈaːɾi hˈoːti hɛː,,2,hi-agent-v1;ipa=espeak
+payment-receipt.can-i-pay-by-mobile-money,मोबाइल मनी चलेगा?,,mobāil manī calegā?,moːbˈaːɪl mˈʌni cəlˈeːɡaː,will mobile money work?,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+payment-receipt.what-is-the-cover-charge,प्रति व्यक्ति तय शुल्क कितना है?,,prati vyakti tay śulk kitnā hai?,pɾˈʌtɪ ʋjˈʌktɪ tˈʌɛj ʃˈʊlk kˈɪtnˌaː hɛː,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

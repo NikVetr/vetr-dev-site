@@ -42,3 +42,4 @@ months.october,ตุลาคม,ต.ค.,tulakhom,tuʔ˨˩laː˧kʰom˧,,2,th-
 months.november,พฤศจิกายน,พ.ย.,phruetsachikayon,pʰrɯt˦˥tɕiʔ˨˩kaː˧jon˧,,2,th-agent-v1;ipa=thaig2p
 months.december,ธันวาคม,ธ.ค.,thanwakhom,tʰan˧waː˧kʰom˧,,2,th-agent-v1;ipa=thaig2p
 time-words.clock-offset,"นาฬิกาสวาฮีลี เริ่มนับชั่วโมงตอนฟ้าสาง ไม่ใช่เที่ยงคืน เลขที่ได้ยิน จึงน้อยกว่าเวลาบนมือถือ 6 ชั่วโมง ให้บวก 6 เข้าไป saa moja = 7:00, saa sita = เที่ยงวัน, saa kumi = 16:00 ควรบอกเวลาเป็นตัวเลข หรือถาม saa ngapi za kizungu เพื่อขอเวลาแบบตะวันตก",,,,,2,th-notes-v1
+time-scheduling.what-time-do-you-reopen,เปิดอีกกี่โมง,,poet ik ki mong,pɤːt˨˩ ʔiːk˨˩ kiː˨˩ moːŋ˧,,2,translator-requests-v1;in-pack-neighbour;ipa=thaig2p

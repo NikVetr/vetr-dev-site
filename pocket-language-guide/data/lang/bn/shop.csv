@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,বদলে নেওয়া যাব�
 color-size-returns.do-you-have-a-bag,একটা ব্যাগ আছে কি?,,ekaṭā byāga āche ki?,ˈækʈa bˈæɡ ˈatʃʰe ki,,2,bn-agent-v1;ipa=espeak
 tax-refund.can-i-get-a-tax-refund,ভ্যাট ফেরত পাওয়া যাবে কি?,,bhyāṭa pherata pāoẏā yābe ki?,bʰˈæʈ fˈeɾɔtˌo pˈaoˌa dʒˈabe ki,,2,bn-agent-v1;ipa=espeak
 tax-refund.is-tax-free-shopping-available,ট্যাক্স-ফ্রি কেনাকাটার ব্যবস্থা আছে কি?,,ṭyāksa-phri kenākāṭāra byabasthā āche ki?,ʈˈækʃɔfɾi kˈenakˌaʈaɾ bˈæbɔstʰˌa ˈatʃʰe ki,,2,bn-agent-v1;ipa=espeak
+payment-receipt.can-i-pay-by-mobile-money,মোবাইলে টাকা দেওয়া যাবে কি?,,mobāile ṭākā deoẏā yābe ki?,mˈobaˌile ʈˈaka dˈeoˌa dʒˈabe ki,"may the money be given by phone? -- bKash and Nagad in Bangladesh, M-Pesa in east Africa",2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+payment-receipt.what-is-the-cover-charge,জনপ্রতি নির্দিষ্ট চার্জ কত?,,janaprati nirdiṣṭa cārja kata?,ɟˈɔnɔpɾˌɔti nˈiɾdiʃʈˌɔ tʃˈaɾɟɔ kˈɔto,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

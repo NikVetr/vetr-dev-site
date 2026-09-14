@@ -42,3 +42,4 @@ months.october,Oṣù Ọ̀wàrà,,oʃu˩ ɔ˩wa˩ra˩,,2,yo-agent-v1;ipa=yo-g2p
 months.november,Oṣù Bélú,,oʃu˩ be˥lu˥,,2,yo-agent-v1;ipa=yo-g2p
 months.december,Oṣù Ọ̀pẹ̀,,oʃu˩ ɔ˩kpɛ˩,,2,yo-agent-v1;ipa=yo-g2p
 time-words.clock-offset,"Agogo Kiswahili máa ń bẹ̀rẹ̀ láti àfẹ̀mọ́júmọ́, ó sì yàtọ̀ sí àgọ́gọ fóònù rẹ ní wákàtí mẹ́fà: saa moja jẹ́ 7:00, saa sita jẹ́ ọ̀sán gangan, saa kumi jẹ́ 16:00. Sọ nọ́mbà náà, tàbí béèrè saa ngapi za kizungu bí o bá fẹ́ mọ̀ ní àgọ́gọ ìwọ̀ oòrùn.",,,,2,yo-notes-v1
+time-scheduling.what-time-do-you-reopen,Wákàtí mélòó ni wọ́n máa tún ṣí i?,,wa˥ka˩ti˥ me˥lo˩o˥ ni wɔ̃˥ ma˥a tũ˥ ʃi˥ i,,2,translator-requests-v1;in-pack-neighbour;ipa=yo-g2p

@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,Puis-je l'échanger ?,,pyiʒ leʃɑ̃ʒˈe
 color-size-returns.do-you-have-a-bag,Avez-vous un sac ?,,avevuz œ̃ sˈak,,2,fr-agent-v1;ipa=espeak
 tax-refund.can-i-get-a-tax-refund,Puis-je avoir la détaxe ?,,pyiʒ avwaʁ la detˈaks,,2,fr-agent-v1;ipa=espeak
 tax-refund.is-tax-free-shopping-available,Faites-vous la détaxe ?,,fɛtvu la detˈaks,,2,fr-agent-v1;ipa=espeak
+payment-receipt.can-i-pay-by-mobile-money,Payer par mobile money ?,,pɛje paʁ mobil monˈɛ,"""mobile money"" is the term in use in French-speaking west Africa",2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+payment-receipt.what-is-the-cover-charge,Combien coûte le couvert ?,,kɔ̃bjɛ̃ kut lə kuvˈɛʁ,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

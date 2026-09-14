@@ -42,3 +42,4 @@ months.december,December,,dɪsˈɛmbɚ,,2,latex-reference-v2;ipa=espeak
 time-words.night,night,,nˈaɪt,,2,japanese-reviewed-v6;ipa=espeak
 time-scheduling.how-long-does-it-take,How long does it take?,,hˌaʊ lˈɔŋ dˈʌz ɪt tˈeɪk,,2,japanese-reviewed-v6;ipa=espeak
 time-words.clock-offset,"The Swahili clock starts at dawn, six hours off the one on your phone: saa moja is 7:00, saa sita is noon, saa kumi is 16:00. Say the numeral, or ask saa ngapi za kizungu for the Western clock.",,,,2,coordinator-gaps-v2
+time-scheduling.what-time-do-you-reopen,What time does it reopen?,,wˌʌt tˈaɪm dˈʌz ɪt ɹɪˈoʊpən,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

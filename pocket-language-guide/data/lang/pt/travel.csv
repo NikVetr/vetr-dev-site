@@ -116,3 +116,4 @@ rail-station-words.ticket-validator,o validador,a máquina de validação,ʊ vˌ
 rail-station-words.maglev,o maglev,o trem de levitação magnética,ʊ maɡlˈev,,1,reader-gloss-v1;ipa=espeak
 common-signs.pork-code,códigos de porco,,kˈɔdʒiɡʊz dʒy pˈoɾəkʊ,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
 rail-station-words.fare,a tarifa,o preço do bilhete,a tˌaɾˈifæ,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak
+transit-rides.where-do-i-pay-the-fare,Onde pago a passagem?,Onde pago o bilhete?,ˌoŋdʒy pˈaɡw a pˌasˈaʒeɪŋ,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

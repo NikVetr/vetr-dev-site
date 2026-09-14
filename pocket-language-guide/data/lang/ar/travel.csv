@@ -12,7 +12,7 @@ border-customs.i-am-in-transit,أنا مسافر عابر,ترانزيت,anā mu
 border-customs.i-have-in-cash,معي {} نقداً,,maʿī {} naqdan,mˈaʕj {} nqdˈaː,,2,ar-agent-v1;ipa=espeak
 border-customs.this-is-a-gift,هذه هدية,,hādhihi hadīyah,haˈaðihˌi hˈadiːjˌa,,2,ar-agent-v1;ipa=espeak
 border-customs.where-do-i-collect-my-baggage,أين أستلم أمتعتي؟,,ayna astalim amtiʿatī?,ʔˈajna ʔstlm ʔmtʕtˈiː,,2,ar-agent-v1;ipa=espeak
-border-customs.how-long-may-i-stay,كم يمكنني البقاء؟,,kam yumkinunī al-baqāʾ?,kˌiiluˈu mitˌar jmknnˈiː ʔalbˈaqaːʔ,,2,ar-agent-v1;ipa=espeak
+border-customs.how-long-may-i-stay,كم يمكنني البقاء؟,,kam yumkinunī al-baqāʾ?,kˈam jmknnˈiː ʔalbˈaqaːʔ,,2,ar-agent-v1;ipa=espeak
 border-customs.i-have-a-connecting-flight,لديّ رحلة متّصلة,رحلة ترانزيت,ladayya riḥlah muttaṣilah,ldiː ɹˈiħla mtːs̪lt,,2,ar-agent-v1;ipa=espeak
 border-customs.may-i-have-an-entry-stamp,أريد ختم الدخول من فضلك,,urīd khatm al-dukhūl min faḍlak,ʔɹˈiːd xˈatam ʔaddˈuxuːl mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
 border-customs.visa,تأشيرة,فيزا,taʾshīrah,tʔʃˈiːrt,,2,ar-agent-v1;ipa=espeak
@@ -27,13 +27,13 @@ border-customs.boarding-pass,بطاقة الصعود,,biṭāqat al-ṣuʿūd,b�
 directions.where-is,أين {}؟,,ayna {}?,ʔˈajna {},,2,ar-agent-v1;ipa=espeak
 directions.how-do-i-get-to,كيف أصل إلى {}؟,,kayf aṣil ilá {}?,kˈajfa ʔˈas̪l ʔˈilaː {},,2,ar-agent-v1;ipa=espeak
 directions.is-it-far,هل هو بعيد؟,,hal huwa baʿīd?,hˈal hˈuːa bˈaʕiːd,,2,ar-agent-v1;ipa=espeak
-directions.how-long-on-foot,كم يستغرق سيراً؟,,kam yastaghriq sayran?,kˌiiluˈu mitˌar jstɣrq siːɹˌaː,how long on foot,2,ar-agent-v1;ipa=espeak
+directions.how-long-on-foot,كم يستغرق سيراً؟,,kam yastaghriq sayran?,kˈam jstɣrq siːɹˌaː,how long on foot,2,ar-agent-v1;ipa=espeak
 directions.please-show-me-on-the-map,أرني على الخريطة من فضلك,,arinī ʿalá al-kharīṭah min faḍlak,ʔrnˈiː ʕˈalaː ʔalxˈaɹiːt̪ˌa mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
 directions.where-is-the-nearest,أين أقرب {}؟,,ayna aqrab {}?,ʔˈajna ʔˈaqɹab {},,2,ar-agent-v1;ipa=espeak
 directions.where-am-i,أين أنا؟,,ayna anā?,ʔˈajna ˈana,,2,ar-agent-v1;ipa=espeak
 directions.which-way,في أيّ اتجاه؟,,fī ayy ittijāh?,fˈiː ʔˈiː ˈitːidʒˌaːh,,2,ar-agent-v1;ipa=espeak
 directions.can-i-walk-there,هل يمكن المشي؟,,hal yumkin al-mashy?,hˈal jmkˈunna ʔalmˈaʃj,,2,ar-agent-v1;ipa=espeak
-directions.how-far-is-it,كم المسافة؟,,kam al-masāfah?,kˌiiluˈu mitˌar ʔalmˈasaːfˌa,,2,ar-agent-v1;ipa=espeak
+directions.how-far-is-it,كم المسافة؟,,kam al-masāfah?,kˈam ʔalmˈasaːfˌa,,2,ar-agent-v1;ipa=espeak
 directions.which-exit,أيّ مخرج؟,,ayy makhraj?,ʔˈiː mˈuxɹidʒ,,2,ar-agent-v1;ipa=espeak
 directions.can-you-show-me-the-way,هل تدلّني على الطريق؟,,hal tadullunī ʿalá al-ṭarīq?,hˈal tdllnˈiː ʕˈalaː ʔat̪ˈaɹiːq,,2,ar-agent-v1;ipa=espeak
 directions.north,شمال,,shamāl,ʃˈamaːl,,2,ar-agent-v1;ipa=espeak
@@ -116,3 +116,4 @@ transit-rides.do-i-need-to-validate,هل يجب تمرير التذكرة قبل
 rail-station-words.ticket-validator,قارئ البطاقات,جهاز التأشير,qāriʾ al-biṭāqāt,qˈaːɹiʔ ʔalbt̪aːqˌaːt,card reader,1,ar-gaps-v1;ipa=espeak
 common-signs.pork-code,رموز لحم الخنزير,,rumūz laḥm al-khinzīr,rmˈuːz lˈaħm ʔalxˈinziːr,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
 rail-station-words.fare,أجرة,ثمن التذكرة,ujrah,ʔˈudʒɹa,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak
+transit-rides.where-do-i-pay-the-fare,أين أدفع الأجرة؟,,ayna adfaʿ al-ujrah?,ʔˈajna ʔdfʕ ʔalʔˈudʒɹa,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

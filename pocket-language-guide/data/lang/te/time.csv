@@ -42,3 +42,4 @@ months.october,అక్టోబరు,,akṭōbaru,akʈoːbaru,,2,te-agent-v1;
 months.november,నవంబరు,,navaṁbaru,naʋambaru,,2,te-agent-v1;ipa=espeak
 months.december,డిసెంబరు,,ḍiseṁbaru,ɖisembaru,,2,te-agent-v1;ipa=espeak
 time-words.clock-offset,"స్వాహిలీ గడియారం తెల్లవారుజాము నుంచి మొదలవుతుంది — మీ ఫోన్ గడియారం కంటే ఆరు గంటల తేడా: saa moja అంటే ఉదయం 7, saa sita అంటే మధ్యాహ్నం 12, saa kumi అంటే సాయంత్రం 4. అంకెను చెప్పండి, లేదా పాశ్చాత్య గడియారం కావాలంటే saa ngapi za kizungu అని అడగండి.",,"svāhilī gaḍiyāraṁ tellavārujāmu nuṁci modalavutuṁdi — mī phōn gaḍiyāraṁ kaṁṭē āru gaṁṭala tēḍā: saa moja aṁṭē udayaṁ 7, saa sita aṁṭē madhyāhnaṁ 12, saa kumi aṁṭē sāyaṁtraṁ 4. aṁkenu ceppaṁḍi, lēdā pāścātya gaḍiyāraṁ kāvālaṁṭē saa ngapi za kizungu ani aḍagaṁḍi.",,,2,te-notes-v1
+time-scheduling.what-time-do-you-reopen,ఎన్ని గంటలకు మళ్ళీ తెరుస్తారు?,,enni gaṁṭalaku maḷḷī terustāru?,enni ɡaɳʈalaku maɭɭiː terustaːru,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak

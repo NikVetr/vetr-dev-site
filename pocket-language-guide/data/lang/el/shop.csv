@@ -30,3 +30,5 @@ color-size-returns.can-i-exchange-it,Μπορώ να το αλλάξω;,,Boro na
 color-size-returns.do-you-have-a-bag,Έχετε μια σακούλα;,,Echete mia sakoula;,ˈeçetˌe mɲa sakˈula,,2,el-agent-v1;roman=elot743;ipa=espeak
 tax-refund.can-i-get-a-tax-refund,Μπορώ να πάρω επιστροφή ΦΠΑ;,,Boro na paro epistrofi FPA;,boɾˈo na pˈaɾo ˌepistɾofˈi fˌipˌiˈalfa,refund of VAT,2,el-agent-v1;roman=elot743;ipa=espeak
 tax-refund.is-tax-free-shopping-available,Κάνετε αφορολόγητες αγορές;,,Kanete aforologites agores;,kˈanetˌe ˌafoɾolˈojitˌes ˌaɣoɾˈes,,2,el-agent-v1;roman=elot743;ipa=espeak
+payment-receipt.can-i-pay-by-mobile-money,Με χρήματα από το κινητό;,,Me chrimata apo to kinito;,me xɾˈimat apˈo to cˌinitˈo,with money from the mobile,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+payment-receipt.what-is-the-cover-charge,Πόσο είναι το κουβέρ;,Χρεώνετε το ψωμί;,Poso einai to kouver;,pˈoso ˈine to kuvˈeɾ,a Greek bill carries either kouver or a per-person charge for the bread,2,translator-requests-v1;in-pack-neighbour;src=Greek restaurant bill wording (κουβέρ);ipa=espeak

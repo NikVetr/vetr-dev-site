@@ -42,3 +42,4 @@ months.december,十二月,,shí'èryuè,ʂɨ˧˥ɑɻ˥˩ɥœ˥˩,,2,latex-refere
 time-scheduling.how-long-does-it-take,要多久？,,yào duōjiǔ?,jɑʊ˥˩ twɔ˥tɕjoʊ˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
 time-words.night,夜里,,yèlǐ,jɛ˥˩li˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
 time-words.clock-offset,斯瓦希里语的时刻从天亮算起，不从午夜算起，数字比手机上的钟点小六：听到的数字加六，才是手机上的时间；要说给别人听，就把手机上的时间减六。saa moja 是早上 7 点，saa sita 是正午，saa kumi 是 16 点。怕弄错就直接说数字，或者问 saa ngapi za kizungu，要西式时间。,,,,,2,zh-Hans-notes-v1
+time-scheduling.what-time-do-you-reopen,几点再开门？,,jǐ diǎn zài kāimén?,tɕi˧˩˧ tjɛn˧˩˧ tsaɪ˥˩ kʰaɪ˥mən˧˥,,2,translator-requests-v1;in-pack-neighbour;ipa=pinyin
