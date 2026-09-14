@@ -261,9 +261,15 @@ export function headBands(spec) {
   const legacy = /** @type {any} */ (spec.head);
   if (legacy && typeof legacy.at === 'string') {
     if (legacy.at === 'none') return { top: null, bottom: null };
+    // `span` and `fill` postdate the `at` form, so a spec carrying `at` usually has
+    // neither and gets the default. It is not always usual, though: a hand-written
+    // spec or a dev script can set `at` beside them, and hardcoding `span: 'full'`
+    // here dropped both without a word -- which is how a tab that was working came
+    // to look like a tab that was not.
     /** @type {import('../types.js').HeadBand} */
     const band = {
-      span: 'full',
+      span: legacy.span ?? 'full',
+      ...(legacy.fill ? { fill: legacy.fill } : {}),
       left: legacy.left,
       center: legacy.center,
       right: legacy.right,
@@ -765,14 +771,46 @@ export function layout(input) {
       );
       // A theme colour key, resolved the way `themeColors` keys are so that a role
       // reads as the section colour the reader already sees on the card.
-      const key = bandSpec.colour;
-      const bandColour = key
-        ? spec.themeColors?.[key]
-          ?? (key.startsWith('roles.')
-            ? theme.colors.roles?.[key.slice(6)]
-            : /** @type {any} */ (theme.colors)[key])
+      /** @param {string|undefined} which */
+      const themeColour = (which) => (which
+        ? spec.themeColors?.[which]
+          ?? (which.startsWith('roles.')
+            ? theme.colors.roles?.[which.slice(6)]
+            : /** @type {any} */ (theme.colors)[which])
           ?? null
-        : null;
+        : null);
+      /**
+       * `fill: 'section'` takes the colour of whichever section owns most of this
+       * face, so a tab says what the card is about without anyone naming it -- and
+       * says something *different* on each face, which is the point when the cards
+       * are printed and stacked. Weighted by height rather than counted by heading,
+       * because a section with twenty rows is more what the face is about than one
+       * with two, and `placed` is already carrying exactly that for the sections
+       * wash.
+       */
+      const modalRole = () => {
+        /** @type {Map<string, number>} */ const byRole = new Map();
+        for (const p of placed) {
+          if (!p.colorRole) continue;
+          byRole.set(p.colorRole, (byRole.get(p.colorRole) ?? 0) + p.h);
+        }
+        let best = null;
+        let most = 0;
+        // Ties break on the role name so a face cannot change colour between two
+        // otherwise identical solves.
+        for (const [role, h] of [...byRole].sort((a, b) => a[0].localeCompare(b[0]))) {
+          if (h > most) { most = h; best = role; }
+        }
+        return best ? themeColour(`roles.${best}`) : null;
+      };
+      const fillColour = bandSpec.fill === 'section'
+        ? modalRole()
+        : themeColour(bandSpec.fill);
+      // On a tab the type is white, because the tab is a solid colour chosen to be
+      // seen from the edge of a stack and any of the theme's inks would be reading
+      // dark on dark. A `colour` set alongside still wins: someone who has asked
+      // for a particular ink has asked for it.
+      const bandColour = themeColour(bandSpec.colour) ?? (fillColour ? '#ffffff' : null);
       /** @param {import('../types.js').HeadPart} part */
       const styleOf = (part) => ({
         ...style,
@@ -838,6 +876,48 @@ export function layout(input) {
               : box.left + box.width / 2,
           span === 'left' ? 'start' : span === 'right' ? 'end' : 'mid',
         ]];
+
+      // **The tab, drawn before the type that sits on it.**
+      //
+      // Flush with the page edge rather than with the content box, which is the
+      // whole point of it: a card in a stack is identified by the colour showing
+      // past the card in front, so a tab inset by the margin is a tab you cannot
+      // see. It runs to the paper's edge on the side `span` names, and to the band's
+      // own edge vertically -- `contentBox` has already taken that strip out of the
+      // margin, so the rectangle is filling space the columns never had.
+      //
+      // `span: 'full'` gets the whole width, which is a bar rather than a tab and is
+      // the right answer for someone who wants one: it is still a colour you can see
+      // from the edge, just on both corners at once.
+      if (fillColour) {
+        const padX = size * 0.9;
+        const padY = size * 0.45;
+        const top = y - size * (edge === 'top' ? 1.0 : 0.85);
+        const bottom = y + size * (edge === 'top' ? 0.45 : 0.6);
+        const ink = placedHead.filter(([parts]) => parts.length);
+        if (ink.length) {
+          const spans = ink.map(([parts, anchor, align]) => {
+            const total = widthOf(parts);
+            const start = align === 'end' ? anchor - total
+              : align === 'mid' ? anchor - total / 2 : anchor;
+            return [start, start + total];
+          });
+          const from = Math.min(...spans.map(([a]) => a)) - padX;
+          const to = Math.max(...spans.map(([, b]) => b)) + padX;
+          // Bleed to the paper edge on whichever side the tab is anchored to, so the
+          // colour reaches the corner. A centred tab has no edge to reach and keeps
+          // its own width.
+          const x0 = span === 'right' ? from : span === 'center' ? from : 0;
+          const x1 = span === 'left' ? to : span === 'center' ? to : geometry.pageW;
+          face.rects.unshift({
+            x: Math.max(0, x0),
+            y: top - padY * 0,
+            w: Math.min(geometry.pageW, x1) - Math.max(0, x0),
+            h: bottom - top,
+            fill: fillColour,
+          });
+        }
+      }
 
       for (const [parts, anchor, align] of placedHead) {
         if (!parts.length) continue;

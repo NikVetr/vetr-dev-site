@@ -143,6 +143,10 @@
  * @property {HeadSlot|HeadSlot[]} [center]
  * @property {HeadSlot|HeadSlot[]} [right]
  * @property {string} [text]  for a `custom` slot
+ * @property {string} [fill]  a theme colour key. Set, the band's content sits on a
+ *   solid rectangle of that colour in white type, flush with the page edge at
+ *   whichever corner `span` names -- a tab, so a stack of printed cards can be told
+ *   apart by their edges without reading them. Unset, the band is type on paper.
  * @property {string} [colour]  a theme colour key -- `ink`, `muted`, or
  *   `roles.<role>` -- for every part in this band. Unset keeps the default, which is
  *   muted with emphasis promoted to ink; set, it colours the whole band and emphasis

@@ -1708,9 +1708,35 @@ export function headControl({ spec, onChange, colourKeys = [] }) {
       className: 'small muted', textContent: t('format.headColour'),
     }), colour);
 
+    // **The tab**: the same band, on a solid rectangle flush with the corner, in
+    // white. A stack of printed cards is hard to tell apart face-on, and this is the
+    // one thing on a sheet that is visible from its edge. `section` is the useful
+    // default rather than a colour name -- it takes whichever section owns most of
+    // that face, so each face is a different colour and the colour means something.
+    const fill = /** @type {HTMLSelectElement} */ (document.createElement('select'));
+    fill.className = 'select';
+    fill.id = `${which}-fill`;
+    fill.append(Object.assign(document.createElement('option'), {
+      value: '', textContent: t('format.headFill.none'),
+    }));
+    fill.append(Object.assign(document.createElement('option'), {
+      value: 'section', textContent: t('format.headFill.section'),
+    }));
+    for (const key of colourKeys) {
+      fill.append(Object.assign(document.createElement('option'), {
+        value: key, textContent: t(`colour.${key.replace('roles.', '')}`),
+      }));
+    }
+    fill.addEventListener('change', () => push({ fill: fill.value || undefined }));
+    const fillField = document.createElement('div');
+    fillField.className = 'numeric-custom';
+    fillField.append(Object.assign(document.createElement('span'), {
+      className: 'small muted', textContent: t('format.headFill'),
+    }), fill);
+
     const slots = document.createElement('div');
     slots.className = 'head-slots';
-    slots.append(span.group, ...sides.map((sd) => sd.wrap), text, colourField);
+    slots.append(span.group, ...sides.map((sd) => sd.wrap), text, fillField, colourField);
 
     /** @param {import('../core/types.js').SheetSpec} from */
     const paint = (from) => {
@@ -1719,6 +1745,7 @@ export function headControl({ spec, onChange, colourKeys = [] }) {
       slots.hidden = !band;
       span.select(band?.span ?? 'full');
       colour.value = band?.colour ?? '';
+      fill.value = band?.fill ?? '';
       // The free-text box is only useful where a position asks for the reader's text.
       text.hidden = !SIDES.some((side) => listOf(/** @type {any} */ (band)?.[side]).has('custom'));
       for (const { side, boxes } of sides) {

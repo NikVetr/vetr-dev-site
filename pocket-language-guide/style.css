@@ -1086,7 +1086,15 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
    rather than as one three-way choice. */
 .head-band { display: flex; flex-direction: column; gap: 4px; }
 .head-band + .head-band { margin-block-start: var(--space-2); }
-.head-on { display: flex; align-items: center; gap: 6px; font-weight: 600; cursor: pointer; }
+/* The band's on/off label reads as a setting like any other. It was the panel's
+   base size and semibold where every other label is `--fs--1` at normal weight,
+   which made "Header" and "Footer" look like headings for the controls under them
+   rather than the two checkboxes they are. Matches `.head-side label`, its own
+   siblings, exactly. */
+.head-on {
+  display: flex; align-items: center; gap: 6px; cursor: pointer;
+  font-size: var(--fs--1);
+}
 .head-band[hidden] { display: none; }
 .flag-picker { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 10px; }
 .flag-choice { display: flex; align-items: center; gap: 5px; cursor: pointer; min-width: 0; }
@@ -1449,7 +1457,10 @@ button.big { justify-content: center; padding: 0.6em 1em; font-size: var(--fs-1)
   border: 1px solid var(--line); border-radius: var(--radius-sm);
   margin: 0; padding: 0.2em 0.5em 0.4em;
 }
-.head-side legend { font-size: 0.7rem; color: var(--muted); padding: 0 0.3em; }
+/* `--fs--1`, not a hardcoded 0.7rem: the app's only other legends -- the quiz's
+   and the drill's -- both take the token, and this one was 11.2px against their
+   12.48px for no reason anyone recorded. */
+.head-side legend { font-size: var(--fs--1); color: var(--muted); padding: 0 0.3em; }
 .head-side label {
   display: flex; align-items: center; gap: 0.35em;
   font-size: var(--fs--1); cursor: pointer; padding: 0.05em 0;

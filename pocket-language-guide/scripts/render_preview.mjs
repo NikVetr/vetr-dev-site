@@ -51,8 +51,11 @@ const spec = {
   head: args.head
     ? (([at, slots]) => {
       const [left = 'none', right = 'none'] = (slots ?? '').split(',');
-      return /** @type {import('../core/types.js').RunningHead} */ ({
+      return /** @type {any} */ ({
         at, left, right, text: args.headText ?? 'If found, call +1 555 0100',
+        // `--headSpan left --headFill roles.comm` draws the corner tab.
+        ...(args.headSpan ? { span: args.headSpan } : {}),
+        ...(args.headFill ? { fill: args.headFill } : {}),
       });
     })(args.head.split(':'))
     : undefined,
