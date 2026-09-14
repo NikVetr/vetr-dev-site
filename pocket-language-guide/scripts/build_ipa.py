@@ -3141,6 +3141,19 @@ LOANWORDS = {
     # initial stress mark, which is where Finnish always puts it.
     "fi": {"eSIM": "ˈeːsim", "SIM": "sˈim", "QR": "kˈuːær", "wc": "vˈeːseː",
            "cm": "sˈenttiæ"},
+
+    # **A homograph rather than a loan mis-read, which is the same defect wearing
+    # another hat.** Persian writes the Uzbek som سوم, and unvocalised سوم is also
+    # the ordinary word *sevvom* "third" -- so espeak returns the ordinal, and the
+    # cell read `sevvom` for a currency. Twelve spellings were probed and none
+    # reaches /suːm/ from the letters: a damma gives `sovm`, and it is the wrong
+    # diacritic anyway, since a damma marks /o/ where this word wants /uː/ and the
+    # unvocalised spelling already says /suːm/ for the loanword. So the text stays
+    # correct and the reading is named here instead.
+    #
+    # `سوم` occurs on exactly one Persian row, so keying the whole string is safe;
+    # the pack has no ordinal row that would collide with it.
+    "fa": {"سوم": "suːm"},
 }
 
 

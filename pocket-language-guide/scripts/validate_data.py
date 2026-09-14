@@ -361,6 +361,25 @@ def main():
                     errors.append(f"{rel}: {cid} is right-to-left and holds more than "
                                   f"one digit ({text!r}), which will print reversed. "
                                   "Spell it out and move the numeral to text_alt.")
+                # **`confidence` has to parse everywhere, not only in the gated
+                # sections.** The safety gate below reads the column and scores a
+                # malformed cell as -1, so a bad value in one of those six sections
+                # is already an error -- but outside them nothing looked at the
+                # column at all. `data/lang/uz/numbers.csv` carried a whole
+                # provenance sentence there on 67 rows, with the pack's
+                # dictionaries pushed into `provenance` beside it, and it survived
+                # three sweeps of that pack because `numbers-money` is not
+                # safety-critical and so the cell was never read.
+                #
+                # A set rather than an int parse with a range, because the legal
+                # values are few and named: 2 is the ordinary sourced tier that
+                # almost every row claims, 0 is an unsourced placeholder (three
+                # rows, all in `profanity`/`slang`), and the two conlang packs tier
+                # 3 for an attested string against 1 for one composed from attested
+                # morphemes.
+                if row["confidence"].strip() not in {"0", "1", "2", "3"}:
+                    errors.append(f"{rel}: {cid} has confidence "
+                                  f"{row['confidence']!r}, which is not one of 0-3")
                 section = concepts[cid]["section_id"]
                 if section in SAFETY_CRITICAL:
                     try:
