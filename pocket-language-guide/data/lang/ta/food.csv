@@ -28,3 +28,5 @@ food-ordering.can-a-vegetarian-eat-this,சைவம் சாப்பிடு
 dietary-needs.no-pork,பன்றி இறைச்சி வேண்டாம்,,paṉṟi iṟaicci vēṇṭām,pʌnri iraɪtʃːi veːɳɖaːm,no pig meat,2,ta-agent-v1;ipa=espeak
 dietary-needs.is-this-halal,இது ஹலாலா?,,itu halālā?,idɯ hʌlaːlaː,,2,ta-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,இதில் பன்றிக் கொழுப்பு உள்ளதா?,,itil paṉṟik koḻuppu uḷḷatā?,idil pʌnrik koɻɯppɯ uɭɭʌdaː,,2,ta-agent-v1;ipa=espeak
+dietary-needs.no-sesame,"எள், நல்லெண்ணெய் வேண்டாம்",எள் வேண்டாம்,"eḷ, nalleṇṇey vēṇṭām","eɭ, nʌlleɳɳej veːɳɖaːm","no sesame or gingelly oil -- நல்லெண்ணெய் 'good oil' is sesame oil and is the default cooking oil, so a cook does not hear எள் in it",2,"Tamil Lexicon (University of Madras, DSAL), எள் eḷ 'Sesame ... Sesamum indicum'; frame from this pack's dietary-needs.no-peanuts;ipa=espeak"
+dietary-needs.is-this-kosher,இது கோஷெரா?,,itu kōṣerā?,idɯ ɡoːʂeɾaː,,2,Tamil Wikipedia கஷ்ருட் ('உணவு கோஷெர் என்றழைக்கப்படுகிறது'); frame from this pack's dietary-needs.is-this-halal;ipa=espeak

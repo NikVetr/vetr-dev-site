@@ -745,13 +745,14 @@ Named because each looks obviously right until you try to fill nineteen cells.
   `shopping.that-is-too-expensive`, so this is a `data/respell/rules/en__en-US.json`
   nucleus rule rather than anything about the data.
 
-## Two the Hebrew pack asked for
+## ~~Two the Hebrew pack asked for~~ — shipped
 
 Both are Israel's version of a trap the bank already handles for somewhere else, and
 both are staged rather than added for the usual reason: a universal concept costs
 every one of the twenty-two packs a row, and a scoped one costs twenty-one gloss rows.
 
-- **`dietary-needs.is-this-kosher`, the mirror of `is-this-halal`.** The halal row is
+- **~~`dietary-needs.is-this-kosher`, the mirror of `is-this-halal`~~ — shipped.**
+  The halal row is
   *universal* and argues for itself: "askable anywhere -- a traveller who needs it
   needs it in Japan too". Every word of that applies to kosher, which is also a
   certification with a visible mark (a הכשר badge) rather than a judgement a cook
@@ -759,10 +760,63 @@ every one of the twenty-two packs a row, and a scoped one costs twenty-one gloss
   `he` would be wrong for the same reason scoping halal would be. The Hebrew is
   `זֶה כָּשֵׁר?` and the other twenty-one need a word they mostly already have as a
   loan (`kosher`, `коше́рный`, `コーシャ`, `کوشر`).
-- **`dietary-needs.no-sesame`.** Sesame is one of the fourteen allergens Israeli
+- **~~`dietary-needs.no-sesame`~~ — shipped.** Sesame is one of the fourteen
+  allergens Israeli
   labelling names, and tehina is in or beside a very large share of what a visitor
   is served -- the same shape as the Vietnamese fish-sauce case that got
   `does-it-contain-fish-stock` its own row, and as the Hungarian `zsír` case. It is
   also the one major allergen with no row of its own: `no-nuts` and `no-peanuts`
   have one each, and sesame has to go through `i-am-allergic-to {}`, which is a slot
   the traveller has to fill in a language they do not write. `בְּלִי שֻׁמְשוֹם`.
+
+**Both shipped, both universal, and the argument above is why each is shaped the way
+it is.** `no-sesame` is `refphrase`/`word`, its own cluster, rank 1006 and importance
+0.690, so it reads between `no-nuts` and `no-seafood` in the allergen block by score
+even though its rank sits in the appended block -- renumbering seven rows of a shared
+file mid-flight is the wholesale rewrite `add-a-language.md` forbids. `is-this-kosher`
+is `entry`/`phrase`, rank 14, importance 0.780, `cluster_rank` 2 in
+`dietary-needs.exclude` below `no-pork` and `is-this-halal`; it scores below halal
+rather than beside it, because the mark is present in far fewer of the countries this
+corpus covers, so a card that already carries halal gains less from this than from a
+first allergen row.
+
+**The counts are the interesting half. `no-sesame` filled 50 of 51 packs;
+`is-this-kosher` filled 35.** Sesame is a crop with a dictionary entry everywhere: the
+fifteen EU languages took Annex II point 11 of Regulation (EU) 1169/2011 verbatim, the
+Indic ones came from the DSAL dictionaries each pack already cites (Kittel's ಎಳ್ಳು,
+Molesworth's तीळ, Brown's నువ్వులు, the Tamil Lexicon's எள், Platts's तिल, Praharaj's
+ତିଳ), and the rest from the language's own encyclopaedia plus the pack's existing
+sources. Only Yoruba is blank, and the finding is narrow: the only attestations for
+Yoruba sesame (`ẹ̀kúkú`, `èkúkú`) are Nigerian forum threads and health blogs, which
+is the one source class this project's own rule names as inadmissible -- Useful
+Tropical Plants lists no Yoruba name for *Sesamum indicum* and PROTA was not
+reachable.
+
+**The kosher word is where the corpus thins out, and the pattern is sharp enough to be
+worth recording.** Sixteen packs are blank -- `sw te mr pa gu ne am kn ha ml yo lo km
+ka uz or` -- and in almost all of them the *concept* is attested while the *word* is
+not: the only form anything has printed is a transliteration of **kashrut**, the name
+of the law (Malayalam's `കഷ്‌റുത്`, Nepali's `काशृत`, Uzbek's `Kashrut`), which is an
+encyclopaedia headword and not a word to show a cook. **The test that separated the
+blanks from the fills was whether a source used the term of the *food* rather than of
+the law**, and three packs turned on exactly that sentence: Tamil, Urdu and Armenian
+all have kashrut-titled articles, but each one's lead then names the adjective --
+`உணவு கோஷெர் என்றழைக்கப்படுகிறது`, `انھیں کوشر کہا جاتا ہے`, `Կաշրութ կամ կոշեր` --
+so those three filled where Malayalam and Nepali did not.
+
+**The thirty-five that filled did so because someone with standing in the language
+had published the food term**: a national dictionary (Duden `koscher`,
+Le Robert `casher`, Treccani `kasher`, Priberam `kosher`, PWN `koszerny`, ÚJČ `košer`,
+DEX `cușer`, SAOL `kosher`, Kuznetsov `кошерный`), or the certifying body's own
+localised site -- **the Orthodox Union publishes in thirteen of these languages**
+(`oukosher.org/{br,cn,es,fr,hi,id,it,jp,ko,ms,th,tl,vn}`), which is the single most
+useful source this entry turned up and is worth reaching for again. Two near-misses
+were refused on the project's own rule rather than on doubt: Georgian has `კოშერი` and
+`ქოშერი` in circulation but every instance found was machine-translated content or a
+bare Wikidata label, and Swahili and Amharic have nothing but auto-translated
+certification-vendor pages. **And two of the shipped rows rest on an encyclopaedia
+because the national dictionary declines to carry the word**: `koşer` is absent from
+TDK's Güncel Türkçe Sözlük and `κοσέρ` from the Triantafyllidis dictionary, both
+queried directly, so `provenance` says so on those two rows rather than implying a
+lexicographic source there is not. The Turkish row also carries a warning in
+`literal` that a reader needs: `koşer` is **not** `kaşar`, which is a cheese.

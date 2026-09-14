@@ -28,3 +28,4 @@ food-ordering.can-a-vegetarian-eat-this,શાકાહારી આ ખાઈ �
 dietary-needs.no-pork,ભૂંડનું માંસ નહીં,,bhūṁḍanuṁ māṁs nahīṁ,bʰunɖʌnũ mãs nʌhĩ,no pig meat,2,gu-agent-v1;ipa=espeak
 dietary-needs.is-this-halal,આ હલાલ છે?,,ā halāl chē?,aː həlaːl cʰeː,is this halal?,2,gu-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,આમાં ભૂંડની ચરબી છે?,,āmāṁ bhūṁḍanī carabī chē?,aːmã bʰunɖʌni cəɾʌbi cʰeː,is there pig fat in this?,2,gu-agent-v1;ipa=espeak
+dietary-needs.no-sesame,તલ નહીં,,tal nahīṁ,tʌl nʌhĩ,,2,Gujarati Wikipedia તલ; Platts (DSAL) for the shared Indo-Aryan form til; frame from this pack's dietary-needs.no-peanuts;ipa=espeak

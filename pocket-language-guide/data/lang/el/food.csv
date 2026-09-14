@@ -28,3 +28,5 @@ food-ordering.can-a-vegetarian-eat-this,Μπορεί να το φάει χορτ
 dietary-needs.no-pork,Χωρίς χοιρινό και αλλαντικά,,Choris choirino kai allantika,xoɾˈis çˌiɾinˈo ke ˌaladikˈa,also no ham or cured meat,2,el-agent-v1;roman=elot743;ipa=espeak
 dietary-needs.is-this-halal,Είναι χαλάλ αυτό;,,Einai chalal afto;,ˈine xalˈal aftˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,Έχει χοιρινό λίπος ή λαρδί;,,Echei choirino lipos i lardi;,ˈeçi çˌiɾinˈo lˈipos ˈi laɾðˈi,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak
+dietary-needs.no-sesame,Χωρίς σουσάμι και ταχίνι,Χωρίς σησάμι,Choris sousami kai tachini,xoɾˈis susˈami ke taçˈini,σησάμι is the label word and σουσάμι what everyone says; ταχίνι is sesame paste,2,"Regulation (EU) No 1169/2011 Annex II point 11, Greek text (EUR-Lex CELEX 32011R1169) ('Σπόροι σησαμιού'); Greek Wikipedia Σουσάμι;ipa=espeak"
+dietary-needs.is-this-kosher,Είναι κοσέρ αυτό;,,Einai koser afto;,ˈine kosˈeɾ aftˈo,,2,"Greek Wikipedia Κοσέρ; absent from the Triantafyllidis dictionary, which was queried; frame from this pack's dietary-needs.is-this-halal;ipa=espeak"

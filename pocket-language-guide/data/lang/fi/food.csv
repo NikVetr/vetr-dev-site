@@ -28,3 +28,5 @@ food-ordering.can-a-vegetarian-eat-this,Voiko kasvissyöjä syödä tätä?,,vˈ
 dietary-needs.no-pork,"Ei sianlihaa, ei kinkkua, ei pekonia eikä makkaraa.",,"ˈei sˈianlihaː, ˈei kˈiŋkkua, ˈei pˈekonˌia ˈeikæ mˈakkaraː",,2,fi-agent-v1;ipa=espeak
 dietary-needs.is-this-halal,Onko tämä halal?,,ˈoŋko tˈæmæ hˈalal,,2,fi-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,Onko tässä sianrasvaa tai laardia?,,ˈoŋko tˈæssæ sˈianrˌasvaː tˈai lˈaːrdia,,2,fi-agent-v1;ipa=espeak
+dietary-needs.no-sesame,Ei seesaminsiemeniä.,Ei seesamia.,ˈei sˈeːsamˌinsiemˌeniæ,,2,"Regulation (EU) No 1169/2011 Annex II point 11, Finnish text (EUR-Lex CELEX 32011R1169);ipa=espeak"
+dietary-needs.is-this-kosher,Onko tämä košer?,Onko tämä kosher?,ˈoŋko tˈæmæ kˈoʃer,,2,Finnish Wikipedia Košer ('Košer tai kosher'); frame from this pack's dietary-needs.is-this-halal;ipa=espeak

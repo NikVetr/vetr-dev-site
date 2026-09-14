@@ -28,3 +28,5 @@ food-ordering.can-a-vegetarian-eat-this,Können Vegetarier das essen?,,kˌœnən
 dietary-needs.no-pork,"Kein Schweinefleisch, kein Speck.","Kein Schweinefleisch, kein Speck, kein Schmalz, keine Gelatine.","kˈaɪn ʃvˈaɪnɛflˌaɪʃ, kˈaɪn ʃpˈɛk","no pork, no bacon",2,de-gaps-v1;ipa=espeak
 dietary-needs.is-this-halal,Ist das halal?,Haben Sie ein Halal-Zertifikat?,ɪst das hˈɑlɑːl,shop signs: HELAL (Turkish),2,de-gaps-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,Ist Schweineschmalz darin?,Ist Speck oder Schmalz darin?,ɪst ʃvˈaɪnɛʃmˌalts dɑːrˈɪn,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak
+dietary-needs.no-sesame,Kein Sesam.,"Keine Sesamsamen, kein Sesamöl, kein Tahin.",kˈaɪn zˈeːzɑːm,,2,"Regulation (EU) No 1169/2011 Annex II point 11, German text (EUR-Lex CELEX 32011R1169);ipa=espeak"
+dietary-needs.is-this-kosher,Ist das koscher?,Haben Sie ein Koscher-Zertifikat?,ɪst das kˈɔʃɜ,,2,"Duden, Stichwort koscher (Adjektiv); frame from this pack's dietary-needs.is-this-halal;ipa=espeak"

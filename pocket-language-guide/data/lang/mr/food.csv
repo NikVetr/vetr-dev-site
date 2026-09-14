@@ -28,3 +28,4 @@ food-ordering.can-a-vegetarian-eat-this,शाकाहारी व्यक्
 dietary-needs.no-pork,डुकराचे मांस नको,,ḍukarācē māṁsa nakō,ɖˌʊkɾˈaːceː mˈãs nˈʌkoː,,2,mr-agent-v1;ipa=espeak
 dietary-needs.is-this-halal,हे हलाल आहे का?,,hē halāla āhē kā?,hˈeː həlˈaːl ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,यात डुकराची चरबी आहे का?,,yāta ḍukarācī carabī āhē kā?,jˈaːt ɖˌʊkɾˈaːci cˈʌɾbˌi ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
+dietary-needs.no-sesame,तीळ नको,,tīḷa nakō,tˈiːɭ nˈʌkoː,,2,"Molesworth, A Dictionary, Marathi and English (DSAL), तीळ tīḷa 'Sesamum-seed'; frame from this pack's dietary-needs.no-peanuts;ipa=espeak"

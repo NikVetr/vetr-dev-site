@@ -16,6 +16,8 @@ dietary-needs.does-it-contain-pork-fat,יש בזה שמן חזיר?,יֵשׁ ב�
 dietary-needs.i-have-a-severe-allergy-to,יש לי אלרגיה קשה ל{},יֵשׁ לִי אַלֶּרְגְּיָה קָשָׁה לְ{},yesh li alérgya qasha le{},jˈeʃ lˈi alˈeʁɡja kaʃˈa lˈe {},I have a severe allergy to {},2,he-agent-v1;ipa=bgn
 dietary-needs.no-pork,בלי חזיר,בְּלִי חֲזִיר,beli ẖazir,belˈi xazˈiʁ,without pork -- also sold as basar lavan,2,he-allergen-v1;ipa=bgn
 dietary-needs.is-this-halal,זה חלאל?,זֶה חָלָאל?,ze ẖalal?,zˈe xalˈal,is this halal?,2,he-agent-v1;ipa=bgn
+dietary-needs.no-sesame,בלי שומשום,בְּלִי שׁוּמְשׁוֹם,beli shumshom,belˈi ʃumʃˈom,without sesame -- tehina is sesame and is in most salatim and sauces,2,"requested by the Hebrew pack translator (content/PROPOSED-CONCEPTS.md), who supplied the vocalised form; frame from this pack's dietary-needs.no-peanuts;ipa=bgn"
+dietary-needs.is-this-kosher,זה כשר?,זֶה כָּשֵׁר?,ze kasher?,zˈe kaʃˈeʁ,is this kosher? -- the badge on the door is the hekhsher,2,requested by the Hebrew pack translator (content/PROPOSED-CONCEPTS.md); Israeli rabbinate kashrut (hekhsher) certification wording; frame from this pack's dietary-needs.is-this-halal;ipa=bgn
 food-ordering.table-for-two,"שלחן לשנים, בבקשה","שֻׁלְחָן לִשְׁנַיִם, בְּבַקָּשָׁה","shulẖan lishnáyim, bevaqasha","ʃulxˈan liʃnˈajim, bevakaʃˈa","a table for two, please",2,he-agent-v1;ipa=bgn
 food-ordering.is-a-table-available,יש שלחן פנוי?,יֵשׁ שֻׁלְחָן פָּנוּי?,yesh shulẖan panuy?,jˈeʃ ʃulxˈan panˈuj,is there a free table?,2,he-agent-v1;ipa=bgn
 food-ordering.menu-please,"תפריט, בבקשה","תַּפְרִיט, בְּבַקָּשָׁה","tafrit, bevaqasha","tafʁˈit, bevakaʃˈa","menu, please",2,he-agent-v1;ipa=bgn

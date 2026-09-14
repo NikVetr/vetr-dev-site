@@ -28,3 +28,5 @@ dietary-needs.i-have-a-severe-allergy-to,我对{}严重过敏,,wǒ duì {} yánz
 dietary-needs.no-pork,不要猪肉,,bú yào zhūròu,pu˧˥ jɑʊ˥˩ ʈʂu˥ʐoʊ˥˩,,2,zh-Hans-gaps-v1;ipa=pinyin
 dietary-needs.is-this-halal,这个是清真的吗？,,zhège shì qīngzhēn de ma?,ʈʂɤ˥˩kɤ ʂɨ˥˩ tɕʰiŋ˥ʈʂən˥ tɤ ma,,2,zh-Hans-gaps-v1;ipa=pinyin
 dietary-needs.does-it-contain-pork-fat,里面有猪油吗？,用猪油炒的吗？,lǐmiàn yǒu zhūyóu ma?,li˧˩˧mjɛn˥˩ joʊ˧˩˧ ʈʂu˥joʊ˧˥ ma,,2,pork-fat-agent-v1;in-pack-frame;ipa=pinyin
+dietary-needs.no-sesame,不要芝麻和香油,不要芝麻,bú yào zhīma hé xiāngyóu,pu˧˥ jɑʊ˥˩ ʈʂɨ˥ma xɤ˧˥ ɕjɑŋ˥joʊ˧˥,香油 / 麻油 is sesame oil and is a different word from the seed,2,Chinese Wikipedia 芝麻; frame from this pack's dietary-needs.no-peanuts;ipa=pinyin
+dietary-needs.is-this-kosher,这个是洁食吗？,这个有犹太洁食认证吗？,zhège shì jiéshí ma?,ʈʂɤ˥˩kɤ ʂɨ˥˩ tɕjɛ˧˥ʂɨ˧˥ ma,jieshi is the certification term; a shop is likelier to know the English word,2,"Chinese kosher-certification trade usage (kosherhalal.net, cleanfoods.net, koshercheck.org China), which renders the term 洁食 / 犹太洁食; frame from this pack's dietary-needs.is-this-halal;ipa=pinyin"

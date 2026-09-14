@@ -28,3 +28,5 @@ food-ordering.can-a-vegetarian-eat-this,Czy wegetarianin może to zjeść?,,tʃ�
 dietary-needs.no-pork,"Bez wieprzowiny, szynki i wędlin",,"bˈɛz vʲˌɛpʃɔvˈinɨ, ʃˈɨŋki i vˈɛndlin","no pork, ham or cured meats",2,pl-agent-v1;ipa=espeak
 dietary-needs.is-this-halal,Czy to jest halal?,,tʃɨ tɔ jɛst xˈalal,,2,pl-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,Czy jest w tym smalec?,,tʃɨ jɛst f tɨm smˈalɛts,"smalec is pork lard, which Polish cooking uses as seasoning",2,pl-agent-v1;ipa=espeak
+dietary-needs.no-sesame,Bez sezamu,,bˈɛs sɛzˈamu,,2,"Regulation (EU) No 1169/2011 Annex II point 11, Polish text (EUR-Lex CELEX 32011R1169);ipa=espeak"
+dietary-needs.is-this-kosher,Czy to jest koszerne?,,tʃɨ tɔ jɛst kɔʃˈɛrnɛ,,2,"Słownik języka polskiego PWN, hasło koszerny; frame from this pack's dietary-needs.is-this-halal;ipa=espeak"

@@ -28,3 +28,5 @@ food-ordering.can-a-vegetarian-eat-this,"Ini pakai daging, ikan, atau belacan?",
 dietary-needs.no-pork,Tanpa babi,Tanpa babi dan lemak babi,tˈanpə bˈabi,lemak babi = lard,2,ms-gaps-v1;ipa=espeak
 dietary-needs.is-this-halal,Ini halal?,Ada sijil Halal JAKIM?,ˈini hˈalal,logo: Halal JAKIM (Malaysia's halal authority),2,ms-gaps-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,Masaknya pakai lemak babi?,Ada minyak babi atau lemak babi?,masˈakɲə pˈakaɪ lˈɛmaʔ bˈabi,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak
+dietary-needs.no-sesame,Tanpa bijan,Tanpa bijan dan minyak bijan,tˈanpə bˈidʒan,,2,Malay Wikipedia Bijan; frame from this pack's dietary-needs.no-peanuts;ipa=espeak
+dietary-needs.is-this-kosher,Ini kosher?,Ada sijil kosher?,ˈini kˈoʃeɾr,,2,OU Kosher edisi Bahasa Melayu (oukosher.org/ms); frame from this pack's dietary-needs.is-this-halal;ipa=espeak

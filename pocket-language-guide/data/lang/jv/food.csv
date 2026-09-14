@@ -28,3 +28,5 @@ food-ordering.can-a-vegetarian-eat-this,"Menika mawi daging, ulam, utawi trasi?"
 dietary-needs.no-pork,Tanpa babi,Tanpa babi lan gajih babi,ˈtanpɔ ˈbabi,gajih babi = lard,2,jv-agent-v1;ipa=jv-g2p
 dietary-needs.is-this-halal,Menika halal?,Wonten sertifikat halal?,məˈnikɔ ˈhalal,logo: BPJPH (was MUI),2,jv-agent-v1;ipa=jv-g2p
 dietary-needs.does-it-contain-pork-fat,Masakipun mawi gajih babi?,Wonten lisah babi utawi gajih babi?,masaˈkipʊn ˈmawi ˈɡadʒɪh ˈbabi,,2,jv-agent-v1;ipa=jv-g2p
+dietary-needs.no-sesame,Tanpa wijèn,,ˈtanpɔ ˈwidʒɛn,,2,Javanese Wikipedia Wijèn; frame from this pack's dietary-needs.no-peanuts;ipa=jv-g2p
+dietary-needs.is-this-kosher,Menika kosher?,Wonten sertifikat kosher?,məˈnikɔ ˈkɔshər,,2,Javanese Wikipedia Kosher ('panganan diarani kosher'); frame from this pack's dietary-needs.is-this-halal;ipa=jv-g2p

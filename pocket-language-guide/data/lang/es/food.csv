@@ -28,3 +28,5 @@ food-ordering.can-a-vegetarian-eat-this,¿Un vegetariano puede comer esto?,,ˈum
 dietary-needs.no-pork,Sin cerdo ni jamón ni embutidos,Sin chancho ni puerco,sin sˈeɾdo nˈi xamˈon nˈi ˌembutˈidos,also no lard or broth,2,es-gaps-v1;ipa=espeak
 dietary-needs.is-this-halal,¿Esto es halal?,¿Tiene certificación halal?,ˈesto ˈes alˈal,,2,es-gaps-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,¿Lleva manteca de cerdo?,¿Lleva grasa de cerdo?,ʝˈeba mantˈeka de sˈeɾdo,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak
+dietary-needs.no-sesame,Sin sésamo ni ajonjolí,Sin ajonjolí,sin sˈesamo nˈi ˌaxoŋxolˈi,ajonjolí is the Latin American word; sésamo is the EU label term,2,"Regulation (EU) No 1169/2011 Annex II point 11, Spanish text (EUR-Lex CELEX 32011R1169); Spanish Wikipedia Sesamum indicum for ajonjolí;ipa=espeak"
+dietary-needs.is-this-kosher,¿Esto es kosher?,¿Tiene certificación kosher?,ˈesto ˈes kosˈeɾ,,2,"OU Kosher, edición española (oukosher.org/es); frame from this pack's dietary-needs.is-this-halal;ipa=espeak"

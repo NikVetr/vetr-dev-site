@@ -28,3 +28,5 @@ dietary-needs.i-have-a-severe-allergy-to,{}に重いアレルギーがありま�
 dietary-needs.no-pork,豚肉なしでお願いします,豚由来のものはすべてなしでお願いします,butaniku nashi de onegaishimasu,bɯtaɲikɯ naɕi de oneɡaiɕimasɯ,,2,ja-gaps-v1;ipa=hepburn
 dietary-needs.is-this-halal,これはハラールですか？,ハラール認証はありますか？,kore wa harāru desu ka?,koɾe wa haɾaːɾɯ desɯ ka,,2,ja-gaps-v1;ipa=hepburn
 dietary-needs.does-it-contain-pork-fat,ラードは入っていますか？,豚の脂は入っていますか？,rādo wa haitteimasu ka?,ɾaːdo wa haitteimasɯ ka,,2,pork-fat-agent-v1;in-pack-frame;ipa=hepburn
+dietary-needs.no-sesame,ごまとごま油なしでお願いします,ごまなしでお願いします,goma to goma abura nashi de onegaishimasu,ɡoma to ɡoma abɯɾa naɕi de oneɡaiɕimasɯ,ごま油 is a separate word from ごま and is in almost everything,2,Japanese Wikipedia ゴマ (ごま / 胡麻); frame from this pack's dietary-needs.no-peanuts;ipa=hepburn
+dietary-needs.is-this-kosher,これはコーシャですか？,コーシャ認証はありますか？,kore wa kōsha desu ka?,koɾe wa koːɕa desɯ ka,,2,"OU Kosher 日本語版 (oukosher.org/jp), which renders the term コーシャ; frame from this pack's dietary-needs.is-this-halal;ipa=hepburn"

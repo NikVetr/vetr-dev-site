@@ -28,3 +28,5 @@ food-ordering.can-a-vegetarian-eat-this,Это можно вегетарианц
 dietary-needs.no-pork,Без свинины.,свинина,Bez svininy.,bʲˈes svʲinʲˈinɨ,,2,ru-gaps-v1;ipa=espeak
 dietary-needs.is-this-halal,Это халяль?,Это халяльное?,Eto khalyalʼ?,ˈɛtʌ xˈɑɭʲʌɭ,,2,ru-gaps-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,Здесь есть свиной жир или сало?,Готовили на свином сале?,Zdesʼ yestʼ svinoy zhir ili salo?,ʑdʲˈesʲ jestʲ svʲinˈoj ʒˈɨr ˈiɭʲɪ sˈɑɭʌ,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak
+dietary-needs.no-sesame,Без кунжута.,,Bez kunzhuta.,bʲˈes kunʒˈuta,,2,"ТР ТС 022/2011 (Customs Union technical regulation on food labelling), allergen list item кунжут; Russian Wikipedia Кунжут индийский;ipa=espeak"
+dietary-needs.is-this-kosher,Это кошерное?,Это кошерный продукт?,Eto koshernoye?,ˈɛtʌ kʌʃˈɛrnʌjɪ,,2,"Большой толковый словарь русского языка (Кузнецов), статья кошерный; frame from this pack's dietary-needs.is-this-halal;ipa=espeak"

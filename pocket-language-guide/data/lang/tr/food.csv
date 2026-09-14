@@ -28,3 +28,5 @@ food-ordering.can-a-vegetarian-eat-this,Vejetaryen bunu yiyebilir mi?,,veʒetarj
 dietary-needs.no-pork,Domuz eti olmasın.,Domuz eti yok.,dˈomʊz etˈɪ ɔɫmasˈɯn,,2,tr-gaps-v1;ipa=espeak
 dietary-needs.is-this-halal,Bu helal mi?,Helal sertifikalı mı?,bʊ heɫˈaɫ mɪ,,2,tr-gaps-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,İçinde domuz yağı var mı?,Domuz yağıyla mı pişti?,itʃɪndˈɛ dˈomʊz jaːˈɯ vˈar mɯ,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak
+dietary-needs.no-sesame,Susam ve tahin olmasın.,Susam olmasın.,sˈusam vɛ tahˈɪn ɔɫmasˈɯn,"tahin (sesame paste) is in helva, çörek and pide",2,Turkish Wikipedia Susam; frame from this pack's dietary-needs.no-peanuts;ipa=espeak
+dietary-needs.is-this-kosher,Bu koşer mi?,Koşer sertifikalı mı?,bʊ koʃˈɛr mɪ,"koşer, not kaşar -- kaşar is a cheese",2,"Turkish Wikipedia Koşer ('Koşer veya kaşer ... ürünlerdir'); absent from TDK Güncel Türkçe Sözlük, which was queried; frame from this pack's dietary-needs.is-this-halal;ipa=espeak"

@@ -28,3 +28,5 @@ food-ordering.can-a-vegetarian-eat-this,คนมังสวิรัติก�
 dietary-needs.no-pork,ไม่ใส่หมู น้ำมันหมู น้ำซุปหมู,,"mai sai mu, namman mu, nam sup mu",maj˥˩ saj˨˩ muː˩˩˦ naːm˦˥man˧muː˩˩˦ naːm˦˥ sup˦˥ muː˩˩˦,,2,th-gaps-v1;ipa=thaig2p
 dietary-needs.is-this-halal,อันนี้ฮาลาลไหม,มีตราฮาลาลไหม,an ni halan mai,ʔan˧niː˦˥ haː˧laː˧lɔː˧ maj˩˩˦,look for the diamond mark,2,th-gaps-v1;ipa=thaig2p
 dietary-needs.does-it-contain-pork-fat,ใส่น้ำมันหมูไหม,ผัดด้วยน้ำมันหมูไหม,sai namman mu mai,saj˨˩ naːm˦˥man˧muː˩˩˦ maj˩˩˦,,2,pork-fat-agent-v1;in-pack-frame;ipa=thaig2p
+dietary-needs.no-sesame,ไม่ใส่งา,ไม่ใส่งาและน้ำมันงา,mai sai nga,maj˥˩ saj˨˩ ŋaː˧,งา is the seed; น้ำมันงา is its oil,2,Thai Wikipedia งา (พืช); frame from this pack's dietary-needs.no-peanuts;ipa=thaig2p
+dietary-needs.is-this-kosher,อันนี้โคเชอร์ไหม,มีตราโคเชอร์ไหม,an ni khochoe mai,ʔan˧niː˦˥ kʰoː˧ tɕʰɤː˥˩ maj˩˩˦,,2,"OU Kosher ฉบับภาษาไทย (oukosher.org/th), which renders the term โคเชอร์; frame from this pack's dietary-needs.is-this-halal;ipa=thaig2p"

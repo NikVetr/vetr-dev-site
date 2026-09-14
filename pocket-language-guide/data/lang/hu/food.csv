@@ -28,3 +28,5 @@ food-ordering.can-a-vegetarian-eat-this,Ezt megeheti egy vegetáriánus?,,ˈɛst
 dietary-needs.no-pork,"Sertéshús, sonka, kolbász, szalonna és zsír nélkül",,"ʃˈɛrteːʃhuːʃ, ʃˈonkɑ, kˈolbaːs, sˈɑlonnɑ ˈeːʃ ʒˈiːr nˈeːlkyl",,2,hu-agent-v1;ipa=espeak
 dietary-needs.is-this-halal,Ez halal?,,ˈɛz hˈɑlɑl,,2,hu-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,Van benne sertészsír vagy szalonna?,,vˈɑn bˈɛnnɛ ʃˈɛrteːʃʒiːr vˈɑɟ sˈɑlonnɑ,lard is a default cooking fat in Hungary,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak
+dietary-needs.no-sesame,Szezámmag nélkül,Szezámmag és szezámolaj nélkül,sˈɛzaːmmɑɡ nˈeːlkyl,,2,"Regulation (EU) No 1169/2011 Annex II point 11, Hungarian text (EUR-Lex CELEX 32011R1169);ipa=espeak"
+dietary-needs.is-this-kosher,Ez kóser?,,ˈɛz kˈoːʃɛr,,2,"WikiSzótár.hu, kóser ('a zsidó vallás étkezésre ... szabályainak megfelel'); frame from this pack's dietary-needs.is-this-halal;ipa=espeak"

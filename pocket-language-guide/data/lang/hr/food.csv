@@ -28,3 +28,5 @@ food-ordering.can-a-vegetarian-eat-this,Može li vegetarijanac ovo jesti?,,mˈo�
 dietary-needs.no-pork,"Bez svinjetine, šunke, slanine i suhomesnatih proizvoda",,"bˈes sviɲetine, ʃˈunke, slanine i suxomesnatix proizvoda","suhomesnati proizvodi is the everyday Croatian umbrella for cured and smoked meats, which pršut and kulen fall under",2,hr-agent-v1;ipa=espeak
 dietary-needs.is-this-halal,Je li ovo halal?,,je li ˈovo xˈalal,,2,hr-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,Ima li u ovome svinjske masti?,,ima li u ovome svˈiɲske mˈasti,"mast is lard; the Croatian word for butter is maslac, so the two cannot be confused the way Spanish manteca can",2,hr-agent-v1;ipa=espeak
+dietary-needs.no-sesame,Bez sezama,,bˈes sezama,,2,"Regulation (EU) No 1169/2011 Annex II point 11, Croatian text (EUR-Lex CELEX 32011R1169);ipa=espeak"
+dietary-needs.is-this-kosher,Je li ovo košer?,,je li ˈovo kˈoʃer,,2,Croatian Wikipedia Košer ('Košer hrana jest ona hrana koja je u skladu s propisima židovskog zakona'); frame from this pack's dietary-needs.is-this-halal;ipa=espeak

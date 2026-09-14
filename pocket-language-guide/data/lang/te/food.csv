@@ -16,6 +16,7 @@ dietary-needs.i-have-a-severe-allergy-to,నాకు {} తీవ్రమై�
 dietary-needs.no-pork,"పంది మాంసం, హామ్, బేకన్, సాసేజ్ వద్దు",,"paṁdi māṁsaṁ, hām, bēkan, sāsēj vaddu","pandi maːnsam, haːm, beːkan, saːseːdʒ ʋaddu",the cured forms are named because they read as seasoning rather than as meat,2,te-agent-v1;ipa=espeak
 dietary-needs.is-this-halal,ఇది హలాల్ ఏనా?,,idi halāl ēnā?,idi halaːl eːnaː,,2,te-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,ఇందులో పంది కొవ్వు ఉందా?,,iṁdulō paṁdi kovvu uṁdā?,induloː pandi koʋʋu undaː,,2,te-agent-v1;ipa=espeak
+dietary-needs.no-sesame,నువ్వులు వద్దు,,nuvvulu vaddu,nuʋʋulu ʋaddu,,2,"Brown, A Telugu-English Dictionary (1903, DSAL), నువ్వు nuvvu 'Sesamum'; frame from this pack's dietary-needs.no-peanuts;ipa=espeak"
 food-ordering.table-for-two,ఇద్దరికి టేబుల్,,iddariki ṭēbul,iddariki ʈeːbul,,2,te-agent-v1;ipa=espeak
 food-ordering.is-a-table-available,టేబుల్ ఖాళీ ఉందా?,,ṭēbul khāḷī uṁdā?,ʈeːbul kʰaːɭiː undaː,,2,te-agent-v1;ipa=espeak
 food-ordering.menu-please,మెనూ ఇవ్వండి,,menū ivvaṁḍi,menuː iʋʋaɳɖi,,2,te-agent-v1;ipa=espeak

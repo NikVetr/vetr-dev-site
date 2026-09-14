@@ -28,3 +28,5 @@ food-ordering.can-a-vegetarian-eat-this,کیا سبزی خور یہ کھا سک�
 dietary-needs.no-pork,سؤر کا گوشت، ہیم اور بیکن نہیں,,"su’ar kā gosht, hem aur baikan nahīñ",səˈoːɾ kaː ɡˈoːʃt hˈeːm ɔɾ bˈeːkən nahˈĩː,"pork is not sold in most of Pakistan, but ham and bacon appear on hotel breakfast menus and read as seasoning rather than as meat",2,ur-allergen-v1;ipa=espeak
 dietary-needs.is-this-halal,کیا یہ حلال ہے؟,,kyā yah halāl hai?,kjˈaː jeːh həlˈaːl hɛ,,2,ur-allergen-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,کیا اس میں سؤر کی چربی ہے؟,,kyā is meñ su’ar kī charbī hai?,kjˈaː ɪs mˈẽ səˈoːɾ ki cˈʌɾbˌiː hɛ,,2,ur-allergen-v1;ipa=espeak
+dietary-needs.no-sesame,تل نہیں,,til nahīñ,tˈʌl nahˈĩː,,2,"Platts, A Dictionary of Urdu, Classical Hindi, and English (DSAL), تل til 'the sesamum plant, Sesamum indicum'; frame from this pack's dietary-needs.no-peanuts;ipa=espeak"
+dietary-needs.is-this-kosher,کیا یہ کوشر ہے؟,,kyā yah koshar hai?,kjˈaː jeːh kˈoːʃəɾ hɛ,,2,Urdu Wikipedia کشروت ('انھیں کوشر کہا جاتا ہے'); frame from this pack's dietary-needs.is-this-halal;ipa=espeak

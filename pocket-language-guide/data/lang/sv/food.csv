@@ -28,3 +28,5 @@ food-ordering.can-a-vegetarian-eat-this,Kan en vegetarian äta det här?,,kan ɛ
 dietary-needs.no-pork,"Inget fläsk, ingen skinka, ingen bacon eller korv.",,"ˈɪŋət flˈɛsk, ˈɪŋən sxˈɪŋka, ˈɪŋən bˈakuːn ˌɛlər kˈɔrv",,2,sv-agent-v1;ipa=espeak
 dietary-needs.is-this-halal,Är det här halal?,,ɛːr deːt hˈɛːr hˈɑːlal,,2,sv-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,Innehåller den ister eller flott från fläsk?,,ˈɪnəhˌɔlər dɛn ˈɪstər ˌɛlər flˈɔt froːn flˈɛsk,,2,sv-agent-v1;ipa=espeak
+dietary-needs.no-sesame,Inga sesamfrön,Ingen sesam,ˈɪŋa sˈeːsamfrˌøːn,,2,"Regulation (EU) No 1169/2011 Annex II point 11, Swedish text (EUR-Lex CELEX 32011R1169);ipa=espeak"
+dietary-needs.is-this-kosher,Är det här kosher?,,ɛːr deːt hˈɛːr kˈɔshər,,2,"Svenska Akademiens ordböcker (svenska.se), uppslagsord kosher; frame from this pack's dietary-needs.is-this-halal;ipa=espeak"

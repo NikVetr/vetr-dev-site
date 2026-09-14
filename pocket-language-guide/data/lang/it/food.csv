@@ -28,3 +28,5 @@ food-ordering.can-a-vegetarian-eat-this,Un vegetariano può mangiare questo?,,ʊ
 dietary-needs.no-pork,"Senza maiale, salumi, pancetta o guanciale",Senza carne di maiale né strutto,"sˌɛntsa majˈale, salˈumɪ, pantʃˈetta o ɡwantʃˈale",,2,it-agent-v1;ipa=espeak
 dietary-needs.is-this-halal,È halal?,Ha la certificazione halal?,e hˈalal,,2,it-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,Contiene strutto o lardo?,Contiene grasso di maiale?,kontjˈɛne strˈutto o lˈardo,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak
+dietary-needs.no-sesame,Senza sesamo,,sˌɛntsa sˈɛzamo,,2,"Regulation (EU) No 1169/2011 Annex II point 11, Italian text (EUR-Lex CELEX 32011R1169);ipa=espeak"
+dietary-needs.is-this-kosher,È kasher?,Ha la certificazione kosher?,e kaʃˈɛr,also written kosher,2,"Treccani, Vocabolario, lemma kasher; OU Kosher edizione italiana (oukosher.org/it);ipa=espeak"

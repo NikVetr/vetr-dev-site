@@ -16,6 +16,8 @@ dietary-needs.i-have-a-severe-allergy-to,Ik heb een ernstige allergie voor {}.,,
 dietary-needs.no-pork,"Geen varkensvlees, ham, spek of worst.",,"ɣˈeːn vˌɑrkənsflˈeːs, hˈɑm, spˈɛk ɔf ʋˈɔrst","names ham, bacon and sausage explicitly, matching the concept's own reasoning about cured pork read as seasoning",2,nl-med-v1;ipa=espeak
 dietary-needs.is-this-halal,Is dit halal?,,ɪs dɪt hˈaːlɑl,,2,nl-med-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,Zit er reuzel in?,,zˈɪt ər rˈøːzəl ˈɪn,"reuzel (pork lard) is the actual Dutch/Belgian kitchen word, used in frying fries and pastry",2,nl-med-v1;ipa=espeak
+dietary-needs.no-sesame,Geen sesam,Geen sesamzaad,ɣˈeːn sˈeːzɑm,,2,"Regulation (EU) No 1169/2011 Annex II point 11, Dutch text (EUR-Lex CELEX 32011R1169);ipa=espeak"
+dietary-needs.is-this-kosher,Is dit koosjer?,,ɪs dɪt kˈoːʃər,,2,Dutch Wikipedia Kasjroet ('wordt in het Nederlands traditioneel koosjer genoemd'); frame from this pack's dietary-needs.is-this-halal;ipa=espeak
 food-ordering.table-for-two,"Een tafel voor twee, alstublieft.",,"ən tˈaːfəl vɔːr tʋˈeː, ˌɑlstʏblˈift",,2,nl-agent-v1;ipa=espeak
 food-ordering.is-a-table-available,Is er een tafel vrij?,,ɪs ər ən tˈaːfəl vrˈɛɪ,,2,nl-agent-v1;ipa=espeak
 food-ordering.menu-please,"Het menu, alstublieft.",,"hət mənˈy, ˌɑlstʏblˈift",,2,nl-agent-v1;ipa=espeak

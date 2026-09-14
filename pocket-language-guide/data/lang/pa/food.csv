@@ -28,3 +28,4 @@ food-ordering.can-a-vegetarian-eat-this,ਸ਼ਾਕਾਹਾਰੀ ਇਹ ਖ�
 dietary-needs.no-pork,ਸੂਰ ਦਾ ਮਾਸ ਨਾ ਪਾਓ,,sūr dā mās nā pāō,suɾ da mas na pao,do not put pork meat in,2,pa-agent-v1;ipa=espeak
 dietary-needs.is-this-halal,ਇਹ ਹਲਾਲ ਹੈ?,,ih halāl hai?,ɪ˥ həlal hɛ,is this halal?,2,pa-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,ਇਸ ਵਿੱਚ ਸੂਰ ਦੀ ਚਰਬੀ ਹੈ?,,is vicc sūr dī carabī hai?,ɪs ʋɪc suɾ di cʌɾəbi hɛ,is there pork fat in this?,2,pa-agent-v1;ipa=espeak
+dietary-needs.no-sesame,ਤਿਲ ਨਹੀਂ,,til nahīṁ,tɪl nʌhĩ,,2,"The Panjabi Dictionary (Singh, DSAL), ਤਿਲ til 'Sesame seed (Sesamum ... indicum)'; frame from this pack's dietary-needs.no-peanuts;ipa=espeak"

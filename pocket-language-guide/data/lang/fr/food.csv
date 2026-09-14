@@ -28,3 +28,5 @@ food-ordering.can-a-vegetarian-eat-this,Un végétarien peut-il manger ça ?,,�
 dietary-needs.no-pork,Sans porc ni lardons,sans porc ni charcuterie,sɑ̃ pɔʁk ni laʁdˈɔ̃,lardons = bacon bits,2,fr-gaps-v1;ipa=espeak
 dietary-needs.is-this-halal,C'est halal ?,C'est certifié halal ?,sɛ alˈal,ask who certifies it,2,fr-gaps-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,Y a-t-il du saindoux ou des lardons ?,graisse de porc,i atil dy sɛ̃du u de laʁdˈɔ̃,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak
+dietary-needs.no-sesame,Sans sésame,sans graines de sésame ni tahini,sɑ̃ sezˈam,,2,"Regulation (EU) No 1169/2011 Annex II point 11, French text (EUR-Lex CELEX 32011R1169);ipa=espeak"
+dietary-needs.is-this-kosher,C'est casher ?,C'est certifié casher ?,sɛ kaʃˈe,,2,"Le Robert, entrée casher ('conforme aux prescriptions rituelles de la loi juive'); OU Kosher édition française (oukosher.org/fr);ipa=espeak"

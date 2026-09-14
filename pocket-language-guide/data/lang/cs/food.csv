@@ -16,6 +16,8 @@ dietary-needs.i-have-a-severe-allergy-to,Mám těžkou alergii na {},,maːm cˈe
 dietary-needs.no-pork,"Bez vepřového masa, šunky, slaniny a uzenin",,"bˈez vˈepr̝ovˌeːho mˈasa, ʃˈuŋki, slˈaɲini a ˈuzeɲin","names ham, bacon and sausage individually, matching the corpus's Spanish/French rows: in Czech cooking cured pork reads as seasoning rather than meat, so 'no meat' alone does not reach it",2,cs-agent-v1;ipa=espeak
 dietary-needs.is-this-halal,Je to halal?,,je tˈo hˈalal,,2,cs-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,Obsahuje to sádlo?,,ˈopsahˌuje tˈo sˈaːdlo,"sádlo (pork lard) -- traditional in Czech cooking itself (chlebíček se sádlem), so this is not a marginal question here",2,cs-agent-v1;ipa=espeak
+dietary-needs.no-sesame,Bez sezamu,,bˈessezˌamu,,2,"Regulation (EU) No 1169/2011 Annex II point 11, Czech text (EUR-Lex CELEX 32011R1169);ipa=espeak"
+dietary-needs.is-this-kosher,Je to košer?,,je tˈo kˈoʃer,,2,"Internetová jazyková příručka ÚJČ AV ČR, heslo košer; frame from this pack's dietary-needs.is-this-halal;ipa=espeak"
 food-ordering.table-for-two,"Stůl pro dva, prosím",,"stˈuːl prˈodva, prˈosiːm",,2,cs-agent-v1;ipa=espeak
 food-ordering.is-a-table-available,Je volný stůl?,,je vˈolniː stˈuːl,,2,cs-agent-v1;ipa=espeak
 food-ordering.menu-please,"Jídelní lístek, prosím",,"jˈiːdelɲiː lˈiːstek, prˈosiːm",,2,cs-agent-v1;ipa=espeak

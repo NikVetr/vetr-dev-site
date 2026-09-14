@@ -16,6 +16,8 @@ dietary-needs.i-have-a-severe-allergy-to,May matinding allergy po ako sa {},,maj
 dietary-needs.no-pork,"Walang baboy, ham, bacon, o longganisa",,"walaŋ baboj, ham, bakon, o loŋɡanisa",,2,fil-agent-v1;ipa=fil-g2p
 dietary-needs.is-this-halal,Halal po ba ito?,,halal po ba ito,,2,fil-agent-v1;ipa=fil-g2p
 dietary-needs.does-it-contain-pork-fat,May manteca ng baboy po ba ito?,,maj mantɛka naŋ baboj po ba ito,,2,fil-agent-v1;ipa=fil-g2p
+dietary-needs.no-sesame,Walang linga,Walang sesame,walaŋ liŋa,linga is the Filipino word; a label usually says sesame,2,Tagalog Wikipedia Linga; frame from this pack's dietary-needs.no-peanuts;ipa=fil-g2p
+dietary-needs.is-this-kosher,Kosher po ba ito?,,koshɛɾ po ba ito,,2,OU Kosher Philippines (oukosher.org/tl); frame from this pack's dietary-needs.is-this-halal;ipa=fil-g2p
 food-ordering.table-for-two,Mesa po para sa dalawa,,mɛsa po paɾa sa dalawa,,2,fil-agent-v1;ipa=fil-g2p
 food-ordering.is-a-table-available,May bakanteng mesa po ba?,,maj bakantɛŋ mɛsa po ba,,2,fil-agent-v1;ipa=fil-g2p
 food-ordering.menu-please,Menu po,,mɛnu po,,2,fil-agent-v1;ipa=fil-g2p

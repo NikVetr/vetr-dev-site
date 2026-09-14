@@ -28,3 +28,5 @@ food-ordering.can-a-vegetarian-eat-this,Người ăn chay ăn được không �
 dietary-needs.no-pork,Không thịt lợn,Không thịt heo,xoŋ˧ tit̪˨˩ˀ ləːn˨˩ˀ,,2,vi-gaps-v1;ipa=espeak
 dietary-needs.is-this-halal,Đây có phải đồ Halal không ạ?,Món này có phải Halal không ạ?,ɗəɪ˧ kɔ˧˥ faːj˧˩˧ ɗo˨˩ haləl˧ xoŋ˧ aː˨˩ˀ,,2,vi-gaps-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,Món này có mỡ lợn không ạ?,Món này có mỡ heo không ạ?,mɔn˧˥ naj˨˩ kɔ˧˥ məː˧ˀ˥ ləːn˨˩ˀ xoŋ˧ aː˨˩ˀ,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak
+dietary-needs.no-sesame,Không mè,Không vừng,xoŋ˧ mɛ˨˩,"mè in the south, vừng in the north",2,Vietnamese Wikipedia Vừng; frame from this pack's dietary-needs.no-peanuts;ipa=espeak
+dietary-needs.is-this-kosher,Đây có phải đồ Kosher không ạ?,Món này có phải Kosher không ạ?,ɗəɪ˧ kɔ˧˥ faːj˧˩˧ ɗo˨˩ kəʊʃə˧ xoŋ˧ aː˨˩ˀ,,2,OU Kosher bản tiếng Việt (oukosher.org/vn); frame from this pack's dietary-needs.is-this-halal;ipa=espeak

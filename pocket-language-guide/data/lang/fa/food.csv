@@ -16,6 +16,8 @@ dietary-needs.i-have-a-severe-allergy-to,به {} حساسیتِ شدید دار�
 dietary-needs.no-pork,بدونِ گوشتِ خوک,,bedun-e gusht-e khuk,bedune ɡuʃte xuk,,2,fa-allergen-v1;ipa=espeak
 dietary-needs.is-this-halal,این حلال است؟,,in halāl ast?,in halɑl ast,"in Iran the answer is yes by law, so the question that does work there is whether a dish is vegetarian or has meat broth in it",2,fa-allergen-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,چربیِ خوک دارد؟,روغنِ خوک,charbi-ye khuk dārad?,tʃarbie xuk dɑrad,,2,fa-allergen-v1;ipa=espeak
+dietary-needs.no-sesame,بدونِ کنجد و اَرده,بدونِ کنجد,bedun-e konjed va arde,bedune kondʒed va arde,ارده (arde) is sesame paste and is in halva and most sweets,2,Persian Wikipedia کنجد; frame from this pack's dietary-needs.no-peanuts;ipa=espeak
+dietary-needs.is-this-kosher,این کوشِر است؟,,in kusher ast?,in kuʃer ast,,2,Persian Wikipedia کوشر; frame from this pack's dietary-needs.is-this-halal;ipa=espeak
 food-ordering.table-for-two,میزِ دو نفره,,miz-e do nafare,mize do nafare,,2,fa-agent-v1;ipa=espeak
 food-ordering.is-a-table-available,میز خالی دارید؟,,miz-e khāli dārid?,miz xɑli dɑrid,,2,fa-agent-v1;ipa=espeak
 food-ordering.menu-please,منو لطفاً,لیستِ غذا,menu lotfan,meno lotfan,,2,fa-agent-v1;ipa=espeak

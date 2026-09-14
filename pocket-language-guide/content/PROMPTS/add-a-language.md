@@ -156,8 +156,32 @@ ships a row with no pronunciation as surely as a missing ipa build does. Seven
 `FIELD_SIDE.roman` is `latin`, so the romanisation is drawn in the **Latin** face
 whatever the pack's script, and U+20B9 happens to be in all sixteen of them.
 `֏` U+058F and `৳` U+09F3 are not in any of them, so the dram and taka symbol rows
-carry `dram` and `ṭākā` there instead. A sign in a romanisation cell is a box in
-the PDF and nothing checks it.
+carry `dram` and `ṭākā` there instead. A sign in a romanisation cell is a box in the
+PDF; `validate_data.py` now names every one of them with "Romanise it or drop it"
+attached, which is how 32 cells carrying a Devanagari danda or an Ethiopic full stop
+were found and fixed. It is a warning rather than an error, so read the warnings.
+
+**For the five `ROMANISED` packs the romanisation column is doubly load-bearing, and
+Amharic is the sharpest trap in the corpus.** `zh-Hans`, `ja`, `ko`, `he` and `am`
+read that column letter by letter to build `ipa`, and a letter the route's table does
+not know **passes through untouched** — into the `ipa` cell, which is then not IPA at
+all, and from there through `fillLanguageSlots` into every reader's respelling and
+every reader's font subset. Nothing catches it on the way: the character is not IPA
+but no gate rejects one, `respell_check --gaps` stays silent because a rule *did*
+fire, and `build_ipa.py --check` reads current because the column is reproducible
+from the bad input. It has happened twice:
+
+- `am,or` in `language-names.csv` romanised Odia `ōdiya`. BGN/PCGN Amharic has no
+  `ō`, so `AM_VOWELS` had no entry, the `ipa` cell read `ōdɨja`, the word-initial
+  `ʔ` rule never fired, and `ō` U+014D reached the Odia reader's charset, where
+  `tests/fonts.test.mjs` failed with `orya cannot draw ō U+14D`.
+- A sesame row was written `selīṭ` in the BGN form, where this pack spells the
+  ejective ጥ as `tʼ` (`metʼetʼ`, `tʼikʼīt`). `ṭ` U+1E6D had no entry either, so it
+  landed in the `ipa` column and then in **all fifty** reader charsets at once.
+
+So write the romanisation in the spelling the pack already uses, not the spelling the
+standard's table prints, and check the built `ipa` cell afterwards rather than
+trusting that a green `--check` means a correct column.
 
 ## The IPA engine
 

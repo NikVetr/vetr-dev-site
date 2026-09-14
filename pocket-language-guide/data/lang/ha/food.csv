@@ -28,3 +28,4 @@ food-ordering.can-a-vegetarian-eat-this,Mai cin ganye zai iya cin wannan?,,mai t
 dietary-needs.no-pork,Babu alade,,babu alade,,2,ha-agent-v1;ipa=ha-g2p
 dietary-needs.is-this-halal,Wannan halal ne?,,wannan halal ne,,2,ha-agent-v1;ipa=ha-g2p
 dietary-needs.does-it-contain-pork-fat,Yana da kitsen alade a ciki?,,jana da kitsʼen alade a tʃiki,fat of pig inside,2,ha-agent-v1;ipa=ha-g2p
+dietary-needs.no-sesame,Babu riɗi,,babu riɗi,,2,Hausa Wikipedia Riɗi; Nigerian beniseed (riɗi) export-crop usage; frame from this pack's dietary-needs.no-peanuts;ipa=ha-g2p

@@ -16,6 +16,8 @@ dietary-needs.i-have-a-severe-allergy-to,Am o alergie severă la {},,am o ˌaler
 dietary-needs.no-pork,"Fără carne de porc, șuncă sau cârnați",Fără slănină sau untură,"fˈərə kˈarne de pˈork, ʃˈunkə saʊ kɨrnˈatsʲ",,2,ro-agent-v1;ipa=espeak
 dietary-needs.is-this-halal,Este halal?,Are certificare halal?,jˌeste halˈal,,2,ro-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,Conține untură sau slănină?,Conține grăsime de porc?,kontsˈine untˈuɾə saʊ slənˈinə,untura (rendered pork fat) is used in Romanian cooking as a seasoning medium the way manteca/strutto/Schmalz are,2,ro-agent-v1;ipa=espeak
+dietary-needs.no-sesame,Fără susan,,fˈərə susˈan,,2,"Regulation (EU) No 1169/2011 Annex II point 11, Romanian text (EUR-Lex CELEX 32011R1169);ipa=espeak"
+dietary-needs.is-this-kosher,Este cușer?,Are certificare cușer?,jˌeste kuʃˈer,also written kosher,2,"DEX via dexonline, cușer adj. invar. ('Despre mâncăruri și băuturi, în practica religiei mozaice'); frame from this pack's dietary-needs.is-this-halal;ipa=espeak"
 food-ordering.table-for-two,O masă pentru doi,,o mˈasə pˌentru dˈoj,,2,ro-agent-v1;ipa=espeak
 food-ordering.is-a-table-available,Aveți o masă liberă?,,avˌetsʲ o mˈasə lˈibeɾˌə,,2,ro-agent-v1;ipa=espeak
 food-ordering.menu-please,"Meniul, vă rog",,"menˈiʊl, və rˈoɡ",,2,ro-agent-v1;ipa=espeak
