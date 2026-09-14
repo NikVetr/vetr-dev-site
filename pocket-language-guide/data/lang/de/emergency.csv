@@ -62,7 +62,7 @@ body-parts.skin,Haut,,hˈaʊt,,2,de-agent-v1;ipa=espeak
 medical-conditions.please-give-me-sugar-or-juice,Bitte geben Sie mir Zucker oder Saft.,,bˈɪtə ɡˈeːbən ziː miːɾ tsˈʊkɜ ˌoːdɜ zˈaft,,2,de-agent-v1;ipa=espeak
 pharmacy-symptoms.antihistamine,Antihistaminikum,Antiallergikum,ˌantiːhˈɪstamˌiːniːkˌʊm,,2,de-agent-v1;ipa=espeak
 police-consulate.no-thank-you-i-am-not-interested,"Nein danke, kein Interesse.",,"nˈaɪn dˈaŋkə, kˈaɪn ˌɪntərˈɛsə",,2,de-agent-v1;ipa=espeak
-medical-conditions.inject-it-into-my-outer-thigh,Bitte in den äußeren Oberschenkel spritzen.,,bˈɪtə ɪn deːn ˈɔøsərən ˌoːbɜʃˈɛŋkəl ʃpɾˈɪtsən,,2,de-agent-v1;ipa=espeak
+medical-conditions.inject-it-into-my-outer-thigh,Bitte in den äußeren Oberschenkel spritzen.,,bˈɪtə ɪn deːn ˈɔɪsərən ˌoːbɜʃˈɛŋkəl ʃpɾˈɪtsən,,2,de-agent-v1;ipa=espeak
 pharmacy-symptoms.anti-diarrhea-medicine,Mittel gegen Durchfall,Loperamid,mˈɪtəl ɡˌeːɡən dʊɾçfˈal,,2,de-agent-v1;ipa=espeak
 police-consulate.someone-attacked-me,Ich wurde angegriffen.,,ɪç vˌʊɾdə ˈanɡəɡɾˌɪfən,,2,de-agent-v1;ipa=espeak
 medical-conditions.my-blood-type-is,Meine Blutgruppe ist {}.,,mˌaɪnə blˈʊtɡɾʊpə ɪst {},,2,de-agent-v1;ipa=espeak
@@ -131,7 +131,7 @@ lost-rescue.my-companion-is-missing,Meine Begleitung wird vermisst.,,mˌaɪnə b
 lost-rescue.please-look-at-my-current-location,Bitte schauen Sie auf meinen Standort.,,bˈɪtə ʃˈaʊən ziː aʊf mˌaɪnən ʃtˈandɔɾt,,2,de-agent-v1;ipa=espeak
 lost-rescue.my-child-is-missing,Mein Kind wird vermisst.,,maɪn kˈɪnt vˌɪɾt fɛɾmˈɪst,,2,de-agent-v1;ipa=espeak
 lost-rescue.i-do-not-know-where-i-am,"Ich weiß nicht, wo ich bin.",,"ɪç vˈaɪs nˈɪçt, vˌoː ɪç bɪn",,2,de-agent-v1;ipa=espeak
-lost-rescue.my-friend-is-hurt,Mein Freund ist verletzt.,,maɪn frˈɔønt ɪst fɛɾlˈɛtst,,2,de-agent-v1;ipa=espeak
+lost-rescue.my-friend-is-hurt,Mein Freund ist verletzt.,,maɪn frˈɔɪnt ɪst fɛɾlˈɛtst,,2,de-agent-v1;ipa=espeak
 lost-rescue.i-lost-my-wallet,Ich habe meine Geldbörse verloren.,Ich habe mein Portemonnaie verloren.,ɪç hɑːbə mˌaɪnə ɡˈɛldbœɾzə fɛɾlˈoːrən,,2,de-agent-v1;ipa=espeak
 lost-rescue.i-lost-my-bag,Ich habe meine Tasche verloren.,,ɪç hɑːbə mˌaɪnə tˈaʃə fɛɾlˈoːrən,,2,de-agent-v1;ipa=espeak
 lost-rescue.where-is-lost-and-found,Wo ist das Fundbüro?,,vˌoː ɪst das fˈʊndbyːrˌoː,,2,de-agent-v1;ipa=espeak

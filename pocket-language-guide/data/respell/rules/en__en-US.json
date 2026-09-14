@@ -619,6 +619,11 @@
     },
     {
       "slot": "nucleus",
+      "ipa": "ɔɪ",
+      "out": "oy"
+    },
+    {
+      "slot": "nucleus",
       "ipa": "eɪ",
       "out": "ay"
     },

@@ -10,6 +10,7 @@ import { readFile } from 'node:fs/promises';
 import {
   consonantRuns, createRespeller, onsetClusters, phonemeInventory, syllabify,
 } from '../core/respell.js';
+import { parseTable } from '../core/csv.js';
 
 const rules = JSON.parse(await readFile('data/respell/rules/en__en-US.json', 'utf8'));
 
@@ -567,5 +568,54 @@ test('no reader emits a mark or a jamo with nothing to attach to', async () => {
     const jamo = [...(/** @type {string} */ (chars))]
       .filter((c) => /[ᄀ-ᇿꥠ-꥿ힰ-퟿]/u.test(c));
     assert.deepEqual(jamo, [], `${reader} emits uncomposed jamo: ${jamo.join('')}`);
+  }
+});
+
+test('German eu is one nucleus, so every reader gives heute two syllables', async () => {
+  // espeak writes the eu/au diphthong `ɔø`, and `ø` is not one of the offglides
+  // (`ɪʊ`) a nucleus span absorbs -- so the span stopped after the `ɔ` and the `ø`
+  // opened a syllable of its own. Fifty-one of the fifty-three reader tables spelt
+  // a two-syllable word with three: *HO-e-te* for a Croatian reader, *хо́-э-те* for
+  // a Russian one, *ホ・エ・タ* for a Japanese one, where the word is *HOY-tuh*. Only
+  // `ar` and `ur` escaped it, by having a rule for the pair already.
+  //
+  // The fix is in the generator rather than here: `REPAIR["de"]` folds `ɔø` to
+  // `ɔɪ`, which is a normal broad transcription of the diphthong and is the
+  // offglide the engine already models, so all fifty-three tables spell it correctly
+  // with no new rule. Teaching the syllabifier a diphthong table instead was tried
+  // and reverted: this module's own header reserves G2P normalisation for
+  // `scripts/build_ipa.py`, on the grounds that an engine which second-guesses its
+  // input cannot be reasoned about. So the corpus is asserted here too.
+  //
+  // The fixture is the whole German column, because a respeller is built against the
+  // target's phoneme inventory and cluster table. Handed `heute` on its own the
+  // Russian reader has no evidence German has a voiceless /t/ between vowels and
+  // writes *хо́й-де*; the claim under test is about the shipped sheet, so the
+  // fixture has to be the shipped language.
+  const files = ['emergency', 'food', 'hike', 'hotel', 'intro', 'numbers', 'shop',
+    'slang', 'social', 'time', 'travel', 'core', 'building', 'places', 'utility'];
+  /** @type {string[]} */ const german = [];
+  let today = '';
+  for (const name of files) {
+    const raw = await readFile(`data/lang/de/${name}.csv`, 'utf8').catch(() => '');
+    if (!raw) continue;
+    for (const row of parseTable(raw, name)) {
+      if (!row.ipa) continue;
+      assert.ok(!row.ipa.includes('ɔø'), `${row.concept_id} still carries espeak's raw ɔø`);
+      german.push(row.ipa);
+      if (row.concept_id === 'time-words.today') today = row.ipa;
+    }
+  }
+  assert.ok(german.length > 700, `expected the German column, got ${german.length} rows`);
+  assert.equal(today, 'hˈɔɪtə', 'heute, as the repaired generator writes it');
+
+  // Two syllables, and the first one carries the diphthong rather than splitting it.
+  for (const [reader, accent, want] of [['en', 'en-US', 'HOY-tuh'],
+    ['ru', 'ru-RU', 'хо́й-те'], ['cs', 'cs-CZ', 'HOI-te'],
+    ['tr', 'tr-TR', 'HOY-tı'], ['ja', 'ja-JP', 'ホイ・タ']]) {
+    const table = JSON.parse(
+      await readFile(`data/respell/rules/${reader}__${accent}.json`, 'utf8'));
+    const say = createRespeller({ rules: table, targetIpa: german, target: 'de' });
+    assert.equal(say.respell(today), want, `${reader} reading heute`);
   }
 });

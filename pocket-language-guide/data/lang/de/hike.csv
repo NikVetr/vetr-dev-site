@@ -1,7 +1,7 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 weather.forecast,Wie ist die Wettervorhersage?,,viː ɪst diː vˈɛtɜfˌoːɾhɜzˌɑːɡə,,2,de-agent-v1;ipa=espeak
-weather.will-it-rain,Regnet es heute?,Wird es heute regnen?,rˈɛɡnət ɛs hˈɔøtə,,2,de-agent-v1;ipa=espeak
-weather.is-it-safe-today,Ist es heute sicher?,,ɪst ɛs hˈɔøtə zˈɪçɜ,,2,de-agent-v1;ipa=espeak
+weather.will-it-rain,Regnet es heute?,Wird es heute regnen?,rˈɛɡnət ɛs hˈɔɪtə,,2,de-agent-v1;ipa=espeak
+weather.is-it-safe-today,Ist es heute sicher?,,ɪst ɛs hˈɔɪtə zˈɪçɜ,,2,de-agent-v1;ipa=espeak
 weather.how-cold-at-night,Wie kalt wird es nachts?,,viː kˈalt vˌɪɾt ɛs nˈaxts,,2,de-agent-v1;ipa=espeak
 weather.rain,Regen,,rˈeːɡən,,2,de-agent-v1;ipa=espeak
 weather.snow,Schnee,,ʃnˈeː,,2,de-agent-v1;ipa=espeak
@@ -11,7 +11,7 @@ weather.ice,Glatteis,Eisglätte,ɡlˈataɪs,,2,de-agent-v1;ipa=espeak
 weather.fog,Nebel,,nˈeːbəl,,2,de-agent-v1;ipa=espeak
 weather.heat,Hitze,heiß,hˈɪtsə,,2,de-agent-v1;ipa=espeak
 weather.cold,Kälte,kalt,kˈɛltə,,2,de-agent-v1;ipa=espeak
-weather.humid,feucht,schwül,fˈɔøçt,,2,de-agent-v1;ipa=espeak
+weather.humid,feucht,schwül,fˈɔɪçt,,2,de-agent-v1;ipa=espeak
 weather.sunrise,Sonnenaufgang,,zˈɔnənˌaʊfɡaŋ,,2,de-agent-v1;ipa=espeak
 weather.flood,Hochwasser,Überschwemmung,hˈoːxvˌasɜ,,2,de-agent-v1;ipa=espeak
 weather.avalanche-risk,Lawinengefahr,,lˈɑviːnˌɛnɡeːfˌɑːɾ,,2,de-agent-v1;ipa=espeak

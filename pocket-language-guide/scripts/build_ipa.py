@@ -1607,7 +1607,31 @@ REPAIR = {
     # hart hˈaɾt -- and the mark appears only after a short u, in wurde, Sturm, Burg
     # and Furcht. Long /uː/ is unaffected (Kurs kˈuːɾs, Durst dˈuːɾst). So `??` is
     # `ʊɾ`, written the same way espeak writes the rest of the series.
-    "de": [("??", "ʊɾ")],
+    #
+    # **`ɔø` is this espeak's spelling of the eu/äu diphthong, and it is the one
+    # German vowel no reader could read.** *heute* is `hˈɔøtə`, *Freund* `frˈɔønt`,
+    # *neun* `nˈɔøn`, *Euro* `ˈɔøroː`. The offglide set in `core/respell.js` is
+    # `ɪʊ`, so a nucleus span stopped after the `ɔ` and `ø` started a syllable of
+    # its own: fifty-one of the fifty-three reader tables spelt a two-syllable word
+    # with three -- *HO-e-te* for a Croatian reader, *хо́-э-те* for a Russian one,
+    # *ホ・エ・タ* for a Japanese one, where the word is *HOY-tuh*. The remaining two
+    # (`ar`, `ur`) only escaped it by having a rule for the pair already.
+    #
+    # Written `ɔɪ` rather than the citation form `ɔʏ` because this column is
+    # phonemic and `ɪ` is the offglide the engine already models -- with it every
+    # one of the fifty-three tables spells the word correctly with no new rule,
+    # since each already renders /ɔɪ/ in its own orthography (*oi*, *oj*, *ой*,
+    # *オイ*, *ঐ*, *oy*). It is also a normal broad transcription of the diphthong
+    # rather than an invention. The alternative -- teaching the syllabifier a
+    # diphthong table -- was tried and reverted: this module's own header reserves
+    # G2P normalisation for the generator, on the grounds that an engine which
+    # second-guesses its input cannot be reasoned about.
+    #
+    # Unambiguous as a bare string replacement, which was checked rather than
+    # assumed: all 17 German cells containing `ɔø` are the eu/äu diphthong, none is
+    # `ɔøː`, and every standalone `ø` in the pack is a long `øː` (*schön*, *möchte*)
+    # that never follows an `ɔ`.
+    "de": [("??", "ʊɾ"), ("ɔø", "ɔɪ")],
     # Greek writes a few consonants double and pronounces every one of them single
     # -- and espeak follows the spelling for exactly one of them. Of the doubles in
     # the corpus (λλ, μμ, ππ, ββ, νν, γγ, κκ, ττ) it correctly gives a single
