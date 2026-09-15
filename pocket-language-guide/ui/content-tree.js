@@ -96,6 +96,55 @@ function el(tag, attrs = {}, kids = []) {
  */
 
 /**
+ * The row editor: one text box per shown column, saving into the same `overrides`
+ * layer the CSV import writes.
+ *
+ * Exported because the tree is no longer the only place a row is edited. On a phone
+ * the three panels are stacked, so picking a row on the card used to scroll a
+ * screen and a half to the content list; `ui/item-popup.js` now offers the same
+ * controls over the card instead, and it must offer the *same* editor rather than a
+ * second one that drifts from it.
+ * @param {object} config
+ * @param {string} config.conceptId
+ * @param {Record<string,string>} config.values   current text per field
+ * @param {string} config.target @param {string} config.source  for `lang`
+ * @param {(values:Record<string,string>)=>void} config.onSave
+ * @param {()=>void} [config.onClose]
+ */
+export function itemEditForm({ conceptId, values, target, source, onSave, onClose }) {
+  /** @type {Record<string, HTMLInputElement>} */ const boxes = {};
+  const form = el('form', { class: 'item-edit' });
+  for (const [field, value] of Object.entries(values)) {
+    const id = `edit-${conceptId}-${field}`;
+    const box = /** @type {HTMLInputElement} */ (el('input', {
+      type: 'text', id, value,
+      lang: TARGET_FIELDS.has(/** @type {any} */ (field)) ? target : source,
+    }));
+    boxes[field] = box;
+    form.append(el('label', { for: id }, [
+      el('span', { class: 'small muted', text: t(`field.${field}`) }), box,
+    ]));
+  }
+  const close = () => { form.remove(); onClose?.(); };
+  form.append(el('div', { class: 'row' }, [
+    el('button', { type: 'submit', text: t('tree.saveEdit') }),
+    el('button', { type: 'button', class: 'ghost', text: t('quiz.cancel') }),
+  ]));
+  form.querySelector('.ghost')?.addEventListener('click', close);
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    /** @type {Record<string,string>} */ const out = {};
+    for (const [field, b] of Object.entries(boxes)) out[field] = b.value.trim();
+    close();
+    onSave(out);
+  });
+  form.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') { event.preventDefault(); close(); }
+  });
+  return form;
+}
+
+/**
  * Build the tree. Returns an updater to call after each solve.
  * @param {TreeInput} input
  * @returns {(spec:import('../core/types.js').SheetSpec,
@@ -292,35 +341,14 @@ export function createTree(input) {
       // most disruptive one and gave no way to just look at a row on the page.
       const openEditor = () => {
         if (li.querySelector('.item-edit')) return;
-        const fields = Object.keys(cells);
-        /** @type {Record<string, HTMLInputElement>} */ const boxes = {};
-        const form = el('form', { class: 'item-edit' });
-        for (const field of fields) {
-          const id = `edit-${concept.conceptId}-${field}`;
-          const box2 = /** @type {HTMLInputElement} */ (el('input', {
-            type: 'text', id, value: cells[field].textContent ?? '',
-            lang: TARGET_FIELDS.has(/** @type {any} */ (field)) ? spec.target : spec.source,
-          }));
-          boxes[field] = box2;
-          form.append(el('label', { for: id }, [
-            el('span', { class: 'small muted', text: t(`field.${field}`) }), box2,
-          ]));
-        }
-        const close = () => form.remove();
-        form.append(el('div', { class: 'row' }, [
-          el('button', { type: 'submit', text: t('tree.saveEdit') }),
-          el('button', { type: 'button', class: 'ghost', text: t('quiz.cancel') }),
-        ]));
-        form.querySelector('.ghost')?.addEventListener('click', close);
-        form.addEventListener('submit', (event) => {
-          event.preventDefault();
-          /** @type {Record<string,string>} */ const values = {};
-          for (const [field, b] of Object.entries(boxes)) values[field] = b.value.trim();
-          close();
-          input.onEdit?.(concept.conceptId, values);
-        });
-        form.addEventListener('keydown', (event) => {
-          if (event.key === 'Escape') { event.preventDefault(); close(); }
+        const form = itemEditForm({
+          conceptId: concept.conceptId,
+          values: Object.fromEntries(
+            Object.entries(cells).map(([f, cell]) => [f, cell.textContent ?? '']),
+          ),
+          target: spec.target,
+          source: spec.source,
+          onSave: (values) => input.onEdit?.(concept.conceptId, values),
         });
         li.append(form);
         /** @type {HTMLElement} */ (form.querySelector('input'))?.focus();

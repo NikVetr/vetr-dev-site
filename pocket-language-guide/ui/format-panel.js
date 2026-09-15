@@ -700,6 +700,12 @@ export function createFormatPanel(input) {
   root.replaceChildren(
     panelField(t('format.card'), [size.group, size.custom]),
     phoneField,
+    // Beside the phone it belongs to. It was sixteen fields further down, between
+    // the duplex options and the PNG resolution, even though it and `phoneField`
+    // are gated on the same `screen` flag and appear and disappear together -- so
+    // choosing a phone revealed two controls at opposite ends of a long panel and
+    // only one of them looked related to the choice.
+    reserveField,
     panelField(t('format.columns'), [columns.group]),
     panelField(t('format.faces'), [faces.group]),
     panelField(t('format.priority'), [priority.group]),
@@ -716,7 +722,6 @@ export function createFormatPanel(input) {
     panelField(t('format.ink'), [ink.group]),
     cutField,
     flipField,
-    reserveField,
     panelField(t('format.pngResolution'), [dpi.group]),
     panelField(t('format.columnsShown'), [fieldSet.group]),
     paper.wrap,

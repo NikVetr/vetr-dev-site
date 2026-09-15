@@ -1594,3 +1594,46 @@ button.big { justify-content: center; padding: 0.6em 1em; font-size: var(--fs-1)
 @media (prefers-reduced-motion: reduce) {
   .card { transition: none; }
 }
+
+/* --- the row popup ------------------------------------------------------- */
+
+/* Editing one row over the card, for a phone. The studio's three panels stack at
+   this width with the card first, so the bidirectional link that makes the studio
+   work on a desktop -- tap a row, the list scrolls to it -- sent the reader a
+   screen and a half away from what they had just tapped. Anchored to the row by
+   `ui/item-popup.js`, which measures it: the height depends on how many columns the
+   sheet shows, so there is no constant to place it by. */
+.item-popup {
+  position: fixed; z-index: 40; inline-size: min(17rem, calc(100vw - 1rem));
+  display: flex; flex-direction: column; gap: var(--space-1);
+  background: var(--paper); color: var(--ink);
+  border: 1px solid var(--muted); border-radius: var(--radius);
+  box-shadow: 0 6px 20px rgb(17 24 32 / 22%);
+  padding: var(--space-2); font-size: var(--fs--1);
+}
+.item-popup-title {
+  margin: 0 1.4em 0 0; font-weight: 700; line-height: 1.25;
+  /* A long phrase must not push the panel wider than the screen. */
+  overflow-wrap: anywhere;
+}
+.item-popup-close {
+  position: absolute; inset-block-start: 2px; inset-inline-end: 2px;
+  border: 0; background: none; color: var(--muted);
+  font-size: 1.1rem; line-height: 1; padding: 0.2em 0.35em; cursor: pointer;
+}
+.item-popup-close:hover, .item-popup-close:focus-visible { color: var(--ink); }
+.item-popup-rows { display: flex; flex-direction: column; gap: 0.2em; }
+.item-popup-toggle { display: flex; gap: 0.5em; align-items: baseline; cursor: pointer; }
+.item-popup-palette { display: flex; gap: 0.3em; margin-block-start: 0.2em; }
+.item-popup-chip {
+  inline-size: 1.4rem; block-size: 1.4rem; border-radius: 4px;
+  border: 1px solid var(--line); cursor: pointer; padding: 0;
+}
+/* The one in use, marked rather than only coloured -- five chips of solid colour
+   say nothing about which is current. */
+.item-popup-chip[aria-current="true"] { outline: 2px solid var(--ink); outline-offset: 1px; }
+/* The shared row editor, which the tree lays out in a wide panel and this one has
+   to fit into 17rem: one field per line rather than side by side. */
+.item-popup .item-edit { display: flex; flex-direction: column; gap: 0.3em; }
+.item-popup .item-edit label { display: flex; flex-direction: column; gap: 0.1em; }
+.item-popup .item-edit input { inline-size: 100%; }

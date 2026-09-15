@@ -23,7 +23,9 @@ import { nextIndex } from './keys.js';
  * @property {(index:number|null)=>void} onFocus
  * @property {() => void} [onGrid]  back to the grid of every face, from the button
  *   that leads the thumbnail strip
- * @property {(conceptId:string)=>void} onPick
+ * @property {(conceptId:string, box:HTMLElement)=>void} onPick  the hit box comes
+ *   with it, because a caller may want to put something beside the row rather
+ *   than only know which row it was -- see `ui/item-popup.js`.
  * @property {(conceptId:string|null)=>void} onHover
  * @property {string[]} [duplex]  card sides, front and back interleaved: when
  *   present the canvas shows the pairs superimposed instead of the faces
@@ -239,7 +241,7 @@ function faceNode(input, svg, index, interactive) {
     box.style.width = `${(hit.w / pageW) * 100}%`;
     box.style.height = `${(hit.h / pageH) * 100}%`;
     box.title = t('preview.showInList');
-    box.addEventListener('click', () => input.onPick(conceptId));
+    box.addEventListener('click', () => input.onPick(conceptId, box));
     box.addEventListener('mouseenter', () => input.onHover(conceptId));
     box.addEventListener('mouseleave', () => input.onHover(null));
     box.addEventListener('focus', () => {

@@ -20,6 +20,7 @@ import {
 import { createFormatPanel } from './format-panel.js';
 import { createTree, revealItem } from './content-tree.js';
 import { renderFaces, highlight } from './preview.js';
+import { openItemPopup, closeItemPopup } from './item-popup.js';
 import { exportSheetCsv, importSheetCsv, loadEdits, saveEdits, clearEdits } from './io.js';
 import { openQuiz, applyQuiz } from './quiz.js';
 import { openDrill } from './drill.js';
@@ -38,6 +39,14 @@ const SOLVE_DEBOUNCE_MS = 260;
 const THEME_IDS = ['latex-reference', 'cvd-safe'];
 
 const $ = (/** @type {string} */ id) => /** @type {HTMLElement} */ (document.getElementById(id));
+
+/**
+ * Narrow enough that the three panels are stacked rather than side by side.
+ *
+ * The same 700px the layout uses. Read per gesture rather than latched, so rotating
+ * a phone gets the behaviour that matches what is actually on screen.
+ */
+const narrow = () => matchMedia('(max-width: 700px)').matches;
 
 /**
  * The plan as it will be printed, for whichever finish is chosen.
@@ -365,6 +374,9 @@ async function main() {
 
   function renderCanvas() {
     if (!plan) return;
+    // The popup is anchored to a hit box this is about to replace, so it can no
+    // longer be pointing at anything true.
+    closeItemPopup();
     detachHandles?.();
     detachHandles = null;
 
@@ -415,7 +427,75 @@ async function main() {
         focused = null;
         renderCanvas();
       },
-      onPick: (id) => revealItem($('tree'), id),
+      // **On a phone the content list is a screen and a half away, so the row is
+      // edited over the card instead.** The three panels stack at this width with
+      // the card first, so scrolling to the list -- which is the right answer on a
+      // desktop, where both are in front of you -- threw the reader away from the
+      // thing they had just tapped. The popup offers the same four decisions the
+      // list does for a row, and keeps "show in list" as a way back for the things
+      // it does not do.
+      onPick: (id, box) => {
+        if (!narrow() || !built) { revealItem($('tree'), id); return; }
+        const { theme, targetRows, sourceRows, sectionTitles } = built;
+        const concept = ctx.corpus.concepts[id];
+        const sectionId = concept?.section_id ?? '';
+        const section = ctx.corpus.sectionById[sectionId];
+        // The solved row carries the generated columns -- respelling, romanisation --
+        // which the corpus does not, so the editor opens on what the sheet actually
+        // prints. A row the solve dropped falls back to the two authored sides.
+        const row = blocks.flatMap((b) => b.rows ?? []).find((r) => r.conceptId === id);
+        const values = row
+          ? Object.fromEntries(Object.entries(/** @type {any} */ (row.values))
+            .filter(([field]) => spec.fieldSet.includes(/** @type {any} */ (field))
+              && field !== 'numeral')
+            .map(([field, v]) => [field, String(v ?? '')]))
+          : {
+            script: targetRows[id]?.text ?? '',
+            gloss: sourceRows[id]?.text ?? '',
+          };
+        const role = spec.sectionColors?.[sectionId] ?? section?.color_role ?? '';
+        const roles = /** @type {Record<string,string>} */ (theme?.colors?.roles ?? {});
+        openItemPopup({
+          conceptId: id,
+          anchor: box,
+          title: values.script || values.gloss || id,
+          sectionId,
+          sectionTitle: sectionTitles?.[sectionId] || section?.title_en || sectionId,
+          itemOn: spec.selection.items[id] !== false
+            && spec.selection.sections[sectionId] !== false,
+          sectionOn: spec.selection.sections[sectionId] !== false,
+          colour: String(roles[role] ?? ''),
+          colours: Object.entries(roles).map(([r, hex]) => ({ role: r, hex: String(hex) })),
+          values,
+          target: spec.target,
+          source: spec.source,
+          onToggle: (patch) => {
+            marked = null;
+            spec = {
+              ...spec,
+              selection: {
+                sections: { ...spec.selection.sections, ...(patch.sections ?? {}) },
+                items: { ...spec.selection.items, ...(patch.items ?? {}) },
+              },
+              sectionColors: { ...spec.sectionColors, ...(patch.sectionColors ?? {}) },
+            };
+            schedule();
+          },
+          onEdit: (conceptId, next) => {
+            const held = edits.overrides[conceptId];
+            edits = {
+              ...edits,
+              overrides: {
+                ...edits.overrides,
+                [conceptId]: { values: next, include: held?.include ?? true },
+              },
+            };
+            saveEdits(spec.target, spec.source, edits);
+            schedule();
+          },
+          onReveal: (conceptId) => revealItem($('tree'), conceptId),
+        });
+      },
       onHover: (id) => highlight($('face-area'), id),
     });
 

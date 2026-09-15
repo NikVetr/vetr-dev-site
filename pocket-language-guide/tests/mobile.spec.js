@@ -103,3 +103,83 @@ test.describe('a multi-page export', () => {
     await expect(panel.getByRole('button', { name: /zip/i })).toBeVisible();
   });
 });
+
+test.describe('editing a row on a phone', () => {
+  test.use({ viewport: PHONE, hasTouch: true, isMobile: true });
+
+  test('a row is edited over the card, not a screen and a half away', async ({ page }) => {
+    // The studio's three panels stack at this width with the card first, so the
+    // bidirectional link that makes the studio work on a desktop -- tap a row on the
+    // card and the content list scrolls to it -- threw the reader away from the thing
+    // they had just tapped, to a checkbox they then had to find.
+    await page.goto('/customize.html?target=es&source=en');
+    await expect(page.locator('.face.focused .hit').first()).toBeAttached();
+    await page.locator('.face.focused .hit').nth(3).click();
+
+    const popup = page.locator('.item-popup');
+    await expect(popup).toBeVisible();
+    // It names the row it is editing, which is the one thing a docked sheet could
+    // not tell you, and it is why this is anchored rather than docked.
+    await expect(popup.locator('.item-popup-title')).not.toBeEmpty();
+    // Entirely on screen even for a row near an edge.
+    const box = await popup.boundingBox();
+    const size = page.viewportSize();
+    expect(box.x).toBeGreaterThanOrEqual(0);
+    expect(box.y).toBeGreaterThanOrEqual(0);
+    expect(box.x + box.width).toBeLessThanOrEqual(size.width + 1);
+    expect(box.y + box.height).toBeLessThanOrEqual(size.height + 1);
+    // The four decisions the content list offers for a row.
+    await expect(popup.locator('.item-popup-toggle')).toHaveCount(2);
+    expect(await popup.locator('.item-popup-chip').count()).toBe(5);
+    await expect(popup.getByRole('button', { name: /edit text/i })).toBeVisible();
+    await expect(popup.getByRole('button', { name: /show in list/i })).toBeVisible();
+
+    // Escape closes it, and so does a tap outside.
+    await page.keyboard.press('Escape');
+    await expect(popup).toHaveCount(0);
+  });
+
+  test('switching a row off from the popup takes it off the sheet', async ({ page }) => {
+    await page.goto('/customize.html?target=es&source=en');
+    await expect(page.locator('.face.focused .hit').first()).toBeAttached();
+    const hit = page.locator('.face.focused .hit').nth(3);
+    await hit.click();
+    const popup = page.locator('.item-popup');
+    const title = await popup.locator('.item-popup-title').textContent();
+    // The row's own words are on the card; unticking it should take them off.
+    await expect(page.locator('.face.focused svg')).toContainText(title.trim());
+    await popup.locator('.item-popup-toggle input').first().uncheck();
+    // A re-solve replaces the hit layer the popup is anchored to, so it closes
+    // itself rather than pointing at a row that has moved.
+    await expect(popup).toHaveCount(0);
+    await expect(page.locator('.face.focused svg')).not.toContainText(title.trim());
+  });
+
+  test('the editor in the popup is the list\'s own, and it saves', async ({ page }) => {
+    await page.goto('/customize.html?target=es&source=en');
+    await expect(page.locator('.face.focused .hit').first()).toBeAttached();
+    await page.locator('.face.focused .hit').nth(3).click();
+    const popup = page.locator('.item-popup');
+    await popup.getByRole('button', { name: /edit text/i }).click();
+    // `.item-edit` is the tree's own form, shared rather than copied: a second
+    // editor would drift from the first, and this one already writes to the
+    // `overrides` layer the CSV import uses.
+    const form = popup.locator('form.item-edit');
+    await expect(form).toBeVisible();
+    const first = form.locator('input').first();
+    await first.fill('Hasta luego');
+    await form.getByRole('button', { name: /save/i }).click();
+    await expect(page.locator('.face.focused svg')).toContainText('Hasta luego');
+  });
+});
+
+test('on a desktop a picked row still reveals itself in the list', async ({ page }) => {
+  // The popup is the phone's answer, not a replacement: with both panes in front of
+  // you, scrolling the list to the row is the better one and stays.
+  await page.setViewportSize({ width: 1680, height: 1000 });
+  await page.goto('/customize.html?target=es&source=en');
+  await expect(page.locator('.face.focused .hit').first()).toBeAttached();
+  await page.locator('.face.focused .hit').nth(3).click();
+  await expect(page.locator('.item-popup')).toHaveCount(0);
+  await expect(page.locator('#tree .items li.lit, #tree details[open]').first()).toBeAttached();
+});
