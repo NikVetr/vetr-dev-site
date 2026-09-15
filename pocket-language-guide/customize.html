@@ -70,6 +70,9 @@
 
   <section data-i18n-label="studio.contentPanel" aria-label="Content">
     <h2 class="panel-title" data-i18n="studio.contentPanel">Content</h2>
+    <!-- Where the rendered images go on a touch device with no share sheet, so they
+         can be saved by pressing and holding. A zip is unopenable there. -->
+    <figure class="saved-images" id="saved-images" hidden></figure>
     <ul class="warnings" id="warnings"></ul>
     <div class="row small" style="margin-bottom: .5rem;">
       <button type="button" class="ghost" id="all-on" data-i18n="studio.allOn">All on</button>

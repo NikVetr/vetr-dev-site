@@ -10,7 +10,10 @@ import {
 import { buildSheet, stacksFor } from '../core/sheet.js';
 import { isElven } from '../core/elven-frame.js';
 import { defaultSelection } from '../core/pack.js';
-import { faceSvgs, exportPdf, exportPng, exportSvg, loadIcons } from './export.js';
+import {
+  faceSvgs, exportPdf, exportPng, exportSvg, loadIcons,
+  showSavedImages, reportExportError,
+} from './export.js';
 import {
   typefaceGlyph, inkGlyph, dpiGlyph, paddingGlyph, PADDING_CHOICES, customGlyph,
   priorityOptions, segmented, numericChoice, panelField,
@@ -106,6 +109,22 @@ async function main() {
     spec = { ...spec, ...patch };
     schedule();
   };
+
+  /**
+   * Narrow enough that the warning list is past the fold.
+   *
+   * The page stacks at 700px, and stacked it is 3900pt tall on a 844pt screen with
+   * the warnings at 1622pt -- so an error saying the sheet does not fit was two
+   * screens below the controls that caused it. Read per solve rather than latched,
+   * so rotating a phone or resizing gets the behaviour that matches the layout.
+   */
+  const narrow = () => matchMedia('(max-width: 700px)').matches;
+
+  /** The auto-applied fit fix, kept so it can be named and given back. */
+  /** @type {{label:string, before:Partial<import('../core/types.js').SheetSpec>}|null} */
+  let autoFix = null;
+  /** Set when the reader takes it back, so the next solve does not reapply it. */
+  let refused = false;
 
   // --- controls -----------------------------------------------------------
 
@@ -288,7 +307,34 @@ async function main() {
     reserve.sync(spec.geometry);
     await afterPaint();
     manifest = await ensureFontCss(ctx, spec.target, spec.source, spec.typeface, isElven(spec));
-    const built = await buildSheet(ctx, spec);
+    let built = await buildSheet(ctx, spec);
+
+    // **A fit error that cannot be read is a fit error that cannot be fixed.** The
+    // solver already works out what would make the sheet fit and hangs it on the
+    // warning as `fixes`; on a wide screen those are offered as buttons further
+    // down, which is the studio's behaviour and now this page's too. At phone width
+    // that list is off the bottom of a 3900pt page, so the first fix is applied
+    // instead and named in the notice above, where it is the first thing under the
+    // preview -- with the undo beside it, which is what was asked for.
+    //
+    // Only the first fix, and only once: `findFixes` orders them by how little they
+    // concede, so the first is the cheapest, and applying more than one would
+    // compound concessions nobody asked for. No control needs syncing afterwards
+    // because the patches change `geometry.columns`, `autoFaces` or `selection`,
+    // and this page exposes none of those -- the notice is the only place the
+    // change is visible, which is exactly why it says what it did.
+    const blocker = built.plan.warnings.find((w) => w.severity === 'error' && w.fixes?.length);
+    if (blocker && narrow() && !autoFix && !refused) {
+      const fix = /** @type {import('../core/types.js').WarningFix[]} */ (blocker.fixes)[0];
+      const keys = /** @type {(keyof import('../core/types.js').SheetSpec)[]} */
+        (Object.keys(fix.patch));
+      autoFix = {
+        label: fix.label,
+        before: Object.fromEntries(keys.map((k) => [k, spec[k]])),
+      };
+      spec = { ...spec, ...fix.patch };
+      built = await buildSheet(ctx, spec);
+    }
     plan = built.plan;
 
     const container = $('faces');
@@ -313,9 +359,49 @@ async function main() {
       .map((w) => {
         const li = document.createElement('li');
         li.className = w.severity;
-        li.textContent = warningText(w);
+        li.append(document.createTextNode(warningText(w)));
+        // The solver's own remedies, as buttons rather than as prose a reader has
+        // to translate into a control. The studio has offered these since it had
+        // warnings at all; this page showed the sentence and no way to act on it.
+        if (!w.fixes?.length) return li;
+        const row = document.createElement('div');
+        row.className = 'row fixes';
+        for (const fix of w.fixes) {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'fix';
+          button.textContent = fix.label;
+          button.addEventListener('click', () => {
+            // Taking a fix by hand is not the automatic one, so it must not be
+            // offered back as though it were.
+            autoFix = null;
+            refused = true;
+            set(fix.patch);
+          });
+          row.append(button);
+        }
+        li.append(row);
         return li;
       }));
+
+    const notice = $('fit-notice');
+    notice.replaceChildren();
+    notice.hidden = !autoFix;
+    if (autoFix) {
+      const said = document.createElement('span');
+      said.textContent = t('quick.autofit', { fix: autoFix.label });
+      const undo = document.createElement('button');
+      undo.type = 'button';
+      undo.className = 'fix';
+      undo.textContent = t('quick.autofitUndo');
+      undo.addEventListener('click', () => {
+        const back = /** @type {Partial<import('../core/types.js').SheetSpec>} */ (autoFix?.before);
+        autoFix = null;
+        refused = true;
+        set(back);
+      });
+      notice.append(said, undo);
+    }
     $('status').dataset.busy = '0';
     // A screen has no sheets, and saying it has half of one is worse than saying
     // nothing: this line is the only place the page reports what it produced.
@@ -334,22 +420,27 @@ async function main() {
   }
 
   const name = `${target.exonym_en.toLowerCase().replace(/\W+/g, '-').replace(/^-|-$/g, '')}-pocket-guide`;
+
   const input = () => {
     if (!plan) throw new Error('nothing solved yet');
     return {
       plan, manifest, icons, name,
+      showInline: (/** @type {any[]} */ files) => showSavedImages($('saved-images'), files),
       stacks: stacksFor(ctx.corpus, spec.target, spec.source, spec.typeface, isElven(spec)),
     };
   };
 
+  /** Nothing-to-export is a sentence; anything else is still fatal. */
+  const failed = (/** @type {unknown} */ err) => reportExportError(err, $('status'), showFatal);
+
   $('pdf').addEventListener('click', () => withBusy($('pdf'), t('common.buildingPdf'), () => exportPdf(
     input(),
     { title: t('quick.heading', { language: targetName }), language: choice.source },
-  )).catch(showFatal));
+  )).catch(failed));
   $('png').addEventListener('click', () => withBusy($('png'), t('common.rendering'),
-    (onProgress) => exportPng({ ...input(), onProgress }, dpi)).catch(showFatal));
+    (onProgress) => exportPng({ ...input(), onProgress }, dpi)).catch(failed));
   $('svg').addEventListener('click', () => withBusy($('svg'), t('common.buildingSvg'),
-    () => exportSvg(input())).catch(showFatal));
+    () => exportSvg(input())).catch(failed));
 
   await refresh();
 }

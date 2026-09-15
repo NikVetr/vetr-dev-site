@@ -13,7 +13,10 @@ import { contentBox } from '../core/solve/index.js';
 import { elvenInset, isElven } from '../core/elven-frame.js';
 import { proposeBalance } from '../core/solve/weights.js';
 import { foldCards, splitCards } from '../render/impose.js';
-import { faceSvgs, exportPdf, exportPng, exportSvg, loadIcons } from './export.js';
+import {
+  faceSvgs, exportPdf, exportPng, exportSvg, loadIcons,
+  showSavedImages, reportExportError,
+} from './export.js';
 import { createFormatPanel } from './format-panel.js';
 import { createTree, revealItem } from './content-tree.js';
 import { renderFaces, highlight } from './preview.js';
@@ -586,8 +589,12 @@ async function main() {
       icons,
       name: finish.mode ? `${name()}-${finish.mode === 'fold' ? 'fold' : 'cards'}` : name(),
       stacks: stacksFor(ctx.corpus, spec.target, spec.source, spec.typeface, isElven(spec)),
+      showInline: (/** @type {any[]} */ files) => showSavedImages($('saved-images'), files),
     };
   };
+
+  /** Nothing-to-export is a sentence; anything else is still fatal. */
+  const failed = (/** @type {unknown} */ err) => reportExportError(err, $('status'), showFatal);
 
   $('pdf').addEventListener('click', () => withBusy($('pdf'), t('common.buildingPdf'), () => exportPdf(
     exportInput(),
@@ -597,11 +604,11 @@ async function main() {
       }),
       language: spec.source,
     },
-  )).catch(showFatal));
+  )).catch(failed));
   $('png').addEventListener('click', () => withBusy($('png'), t('common.rendering'),
-    (onProgress) => exportPng({ ...exportInput(), onProgress }, pngDpi)).catch(showFatal));
+    (onProgress) => exportPng({ ...exportInput(), onProgress }, pngDpi)).catch(failed));
   $('svg').addEventListener('click', () => withBusy($('svg'), t('common.buildingSvg'),
-    () => exportSvg(exportInput())).catch(showFatal));
+    () => exportSvg(exportInput())).catch(failed));
 
   $('csv-out').addEventListener('click', () => {
     exportSheetCsv({ corpus: ctx.corpus, blocks, spec, edits, name: name() });

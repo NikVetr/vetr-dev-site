@@ -513,6 +513,31 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
 .tree-color .chip-fill {
   inline-size: 0.85em; block-size: 0.85em; border-radius: 2px; display: block;
 }
+/* The rendered pages, in the page, for a touch device with no share sheet. Full
+   width and stacked: the point is to have something big enough to press and hold,
+   which is how both mobile platforms save a picture. */
+.saved-images {
+  margin: 0; display: flex; flex-direction: column; gap: var(--space-2);
+}
+.saved-images[hidden] { display: none; }
+.saved-images figcaption { font-size: var(--fs--1); color: var(--muted); }
+.saved-images img {
+  display: block; width: 100%; height: auto;
+  border: 1px solid var(--line); border-radius: var(--radius-sm); background: #fff;
+}
+
+/* The applied-fit notice. Warm rather than red: something was changed *for* the
+   reader and can be taken straight back, which is a different message from an error
+   they have to go and solve. It sits at the top of the export block, which on a
+   phone puts it directly under the preview. */
+.fit-notice {
+  display: flex; flex-wrap: wrap; gap: var(--space-1); align-items: center;
+  background: #fdf4e3; color: #7a5209;
+  border-radius: var(--radius-sm); padding: 0.4em 0.55em;
+  font-size: var(--fs--1);
+}
+.fit-notice[hidden] { display: none; }
+
 .warnings { list-style: none; margin: 0 0 var(--space-2); padding: 0; font-size: var(--fs--1); }
 .warnings li { padding: 0.3em 0.5em; border-radius: var(--radius-sm); margin-bottom: 2px; }
 .warnings li.error { background: #fdecea; color: #7d1b15; }
@@ -544,6 +569,13 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
    wraps to four lines and the language grid to two names a row. */
 @media (max-width: 1080px) {
   .gallery-intro { grid-template-columns: minmax(0, 1fr); }
+  /* Fifty-two language buttons are a compact block beside the heading on a desktop
+     and 922pt of wall on a phone, which put the first card 1230pt down: a screen and
+     a half of controls before any of the thing they control. Capped and scrolled,
+     which is the same treatment the sheet preview gets one breakpoint along, and for
+     the same reason. About three and a half rows, so it is visibly a scrollable
+     list rather than looking like the whole of it. */
+  .want-grid { max-block-size: 30svh; overflow: auto; }
 }
 
 @media (min-width: 701px) and (max-width: 1100px) {
@@ -575,6 +607,29 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
   .studio > .canvas { order: -1; }
   .studio > section:first-of-type, .studio > section:last-of-type { max-height: 70vh; }
   .face-grid { grid-template-columns: 1fr; }
+
+  /* **The focused face had no height at all here, so the preview was a 56px
+     sliver.** `.face-fit` is a `container-type: size` and `.face.focused` asks it
+     for `100cqh`; the rule above takes the viewport height off the body, so the
+     flex chain `.canvas > #face-area > .face-fit` has no definite block size, every
+     `flex: 1` resolves to 0, and `min(100%, calc(0 * aspect))` is 0. Measured on a
+     390x844 phone: `.face-fit` 0 tall, `.face.focused` 2x2, its `<svg>` 0x0.
+     The thumbnail strip still drew, which is why the panel looked present but
+     empty.
+     Sized against the viewport instead, which is definite at every width, keeping
+     the same "whichever binds first" rule the desktop version states. `svh` rather
+     than `dvh` so the card does not resize while a mobile toolbar slides away. */
+  #face-area, .face-fit { flex: none; }
+  /* `container-type: size` implies `contain: size`, so `.face-fit` is laid out as
+     though it had no contents -- which with an auto height means zero, and the face
+     then overflowed a 56pt scroll box instead of being on the page. The container
+     only exists to answer `100cqh`, and the rule below asks the viewport instead,
+     so here it is not needed at all. */
+  .face-fit { block-size: auto; container-type: normal; }
+  .face.focused {
+    inline-size: min(100%, calc(58svh * var(--face-aspect, 1.4)));
+    max-block-size: 58svh;
+  }
 }
 
 .hit.lit { background: rgb(11 103 163 / 18%); box-shadow: inset 0 0 0 1px var(--accent); }
@@ -1298,6 +1353,46 @@ button.big { justify-content: center; padding: 0.6em 1em; font-size: var(--fs-1)
 @media (max-width: 860px) {
   .sheet-body { grid-template-columns: 1fr; }
   .sheet-preview .face-grid { grid-template-columns: 1fr; }
+}
+
+/* On a phone the options stack to 1400pt of form, which put the preview 1708pt down
+   -- two screens past the fold -- and the status line and the warnings with it. So
+   the reader met a page of controls and never saw the sheet they were controlling,
+   or the message saying it did not fit.
+   Reordered to preview, then what the sheet says about itself, then the knobs. The
+   preview keeps two columns here (the rule above is for the tablet width, where
+   there is room for one big one) because eight faces one-per-row is 2129pt, which
+   would push the controls as far down as they were before. Capped and scrolled
+   instead, so the whole sheet is still reachable without costing the rest of the
+   page its place. */
+@media (max-width: 700px) {
+  .sheet-body { display: flex; flex-direction: column; }
+  /* 40svh, chosen by measuring rather than by eye: the page starts 279pt down, so
+     this is what leaves the export buttons, the status line and the warnings inside
+     the first screen on an 844pt phone. At 52svh the status fell to 978pt -- past
+     the fold again, which is the whole complaint. */
+  .sheet-preview {
+    order: -1; max-block-size: 40svh; overflow: auto;
+    border: 1px solid var(--line); border-radius: var(--radius-sm);
+    padding: var(--space-1); background: var(--surface-2);
+  }
+  .sheet-preview .face-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sheet-options { display: flex; flex-direction: column; }
+  /* The export buttons, the status line and the warnings, directly under the sheet
+     they describe. Its rule and top margin were a seam under the controls; above
+     them it needs neither. */
+  .export-block {
+    order: -1; border-top: none; margin-top: 0; padding-top: 0;
+    display: flex; flex-direction: column;
+  }
+  /* What the sheet says about itself comes before what you can do with it. With the
+     buttons above them the status line landed at 877pt on an 844pt phone -- 33pt
+     past the fold, which is the same bug one scroll lower. Reordering costs the
+     buttons nothing (the primary one is still inside the first screen) and is
+     better than shrinking the preview again to buy the room. */
+  #fit-notice { order: -3; }
+  #status { order: -2; }
+  #warnings { order: -1; }
 }
 
 /* A long printer name should wrap in its own menu rather than being cut off. */

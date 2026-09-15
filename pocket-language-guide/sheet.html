@@ -36,6 +36,10 @@
       <div id="controls"></div>
 
       <div class="export-block">
+        <!-- Where a fit error gets applied rather than only reported. On a phone the
+             warning list below is past the fold, so the solver's own first fix is
+             taken and named here, with the undo beside it. -->
+        <div class="fit-notice" id="fit-notice" hidden></div>
         <button type="button" class="primary big" id="pdf" data-i18n="common.exportPdf">Export PDF</button>
         <!-- Above the buttons it applies to, not below them. -->
         <div id="dpi-control"></div>
@@ -44,6 +48,9 @@
           <button type="button" id="svg" data-i18n="common.svg">SVG</button>
         </div>
         <p class="status" id="status"></p>
+        <!-- Where the rendered images go on a touch device with no share sheet, so
+             they can be saved by pressing and holding. A zip is unopenable there. -->
+        <figure class="saved-images" id="saved-images" hidden></figure>
         <ul class="warnings" id="warnings"></ul>
       </div>
     </form>
