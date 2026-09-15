@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f7f2">
+  <meta name="description" content="Paste anywhere to unwrap Base64 links, explore each layer, or encode your own.">
+  <meta name="referrer" content="no-referrer">
+  <title>b64 — a little link magic</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231f6048'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='monospace' font-weight='bold' font-size='34' fill='%23f6f7f2'%3E64%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <script src="decoder.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header>
+      <h1 class="brand">b<span>64</span><span class="brand-spark" aria-hidden="true">✳</span></h1>
+      <span class="tagline">a little link magic</span>
+      <span class="local-note"><span class="dot" aria-hidden="true"></span> all local</span>
+    </header>
+
+    <div class="workbench">
+      <div class="source-column">
+        <section class="panel input-panel" aria-labelledby="source-label">
+          <div class="panel-heading"><label id="source-label" for="source">Your text</label><kbd id="paste-key">Ctrl V</kbd></div>
+          <textarea id="source" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="Paste anything here…" aria-keyshortcuts="Enter Control+z Meta+z Control+Shift+z Meta+Shift+z" title="Enter opens all links. Shift+Enter adds a newline." autofocus></textarea>
+        </section>
+        <button id="open-links" class="open-hint" type="button" hidden><kbd>↵ Enter</kbd><span id="open-label">Open link</span></button>
+        <p id="open-status" role="status" aria-live="polite" hidden></p>
+      </div>
+
+      <span class="connector encode-connector" aria-hidden="true">←</span>
+      <section class="panel encode-panel" aria-labelledby="encode-heading" aria-busy="false">
+        <div class="panel-heading">
+          <h2 id="encode-heading">Encode</h2>
+          <label class="multiplier" title="Number of encoding layers (1–99)"><span aria-hidden="true">×</span><input id="encode-count" type="number" min="1" max="99" step="1" value="3" aria-label="Number of encoding layers"></label>
+        </div>
+        <div class="encode-body">
+          <textarea id="encoded" readonly spellcheck="false" aria-label="Encoded result" placeholder="A few layers of mystery." rows="4"></textarea>
+          <div class="encode-actions"><span id="encode-status" role="status" aria-live="polite"></span><button id="copy" type="button" disabled>Copy <span aria-hidden="true">⧉</span></button></div>
+          <div id="encode-trace"></div>
+        </div>
+      </section>
+
+      <span class="connector decode-connector" aria-hidden="true">→</span>
+      <section class="panel results" aria-labelledby="results-heading" aria-busy="false">
+        <div class="panel-heading"><h2 id="results-heading">Decode</h2><span class="count" id="count" aria-live="polite">0 links</span></div>
+        <div class="decode-body">
+          <p id="status" role="status" aria-live="polite" aria-atomic="true">Links land here.</p>
+          <ul id="links"></ul>
+          <div id="decode-trace"></div>
+        </div>
+      </section>
+    </div>
+    <noscript><p>Enable JavaScript to use this app.</p></noscript>
+  </main>
+</body>
+</html>
