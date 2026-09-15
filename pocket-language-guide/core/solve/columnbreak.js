@@ -30,12 +30,23 @@ const LAST_COLUMN_RELIEF = 0.15;
 
 /**
  * @param {Atom[]} atoms
- * @param {number} height   usable column height in points
+ * @param {number|number[]} height  usable column height in points: one number when
+ *   every column is the same, or one per bin when a corner tab makes them differ --
+ *   a `left` tab costs its line to the first column only, so the others are taller
+ *   by the band's height
  * @param {number} bins     columns x faces
  * @returns {BreakResult}
  */
 export function breakColumns(atoms, height, bins) {
   const n = atoms.length;
+  // Per-bin capacity. A scalar is the common case and stays one comparison; an array
+  // is what a corner tab produces, and every use of a column's height below is the
+  // height of the column the DP is filling at that moment, so the substitution is
+  // local rather than structural.
+  const cap = Array.isArray(height)
+    ? (/** @type {number} */ k) => height[k]
+    : () => /** @type {number} */ (height);
+  const tallest = Array.isArray(height) ? Math.max(...height) : height;
   const empty = { columns: [], slack: [], cost: Infinity, failure: /** @type {string|null} */ (null) };
   // No content is a valid assignment: every column is empty and entirely slack.
   // Returning bare `[]` here instead made the caller read slack[bin] as undefined
@@ -43,18 +54,20 @@ export function breakColumns(atoms, height, bins) {
   if (!n) {
     return {
       columns: Array.from({ length: bins }, () => []),
-      slack: Array.from({ length: bins }, () => height),
+      slack: Array.from({ length: bins }, (_, k) => cap(k)),
       cost: 0,
       failure: null,
     };
   }
 
-  const tooTall = atoms.findIndex((a) => a.height > height + 0.01);
+  // Against the tallest column: an atom that will not fit the roomiest one cannot
+  // fit anywhere, and the DP refuses it per column on the way past.
+  const tooTall = atoms.findIndex((a) => a.height > tallest + 0.01);
   if (tooTall >= 0) {
     return {
       ...empty,
       failure: `atom ${tooTall} in section ${atoms[tooTall].sectionId} is `
-        + `${atoms[tooTall].height.toFixed(1)}pt tall but a column holds only ${height.toFixed(1)}pt`,
+        + `${atoms[tooTall].height.toFixed(1)}pt tall but a column holds only ${tallest.toFixed(1)}pt`,
     };
   }
   // Fewer blocks than columns: fill the ones that can be filled and leave the rest
@@ -82,7 +95,8 @@ export function breakColumns(atoms, height, bins) {
     return {
       ...partial,
       columns: [...partial.columns, ...Array.from({ length: bins - starts }, () => [])],
-      slack: [...partial.slack, ...Array.from({ length: bins - starts }, () => height)],
+      slack: [...partial.slack,
+        ...Array.from({ length: bins - starts }, (_, t) => cap(starts + t))],
     };
   }
 
@@ -100,14 +114,14 @@ export function breakColumns(atoms, height, bins) {
       let used = 0;
       for (let j = i; j < n; j += 1) {
         used += atoms[j].height + (j > i ? atoms[j].gapBefore.natural : 0);
-        if (used > height + 0.01) break;
+        if (used > cap(k) + 0.01) break;
         // A non-final column must leave enough atoms to fill the columns after it.
         if (!last && n - (j + 1) < bins - (k + 1)) break;
         // A heading is bound to the rows it introduces, so no column may end
         // here -- but taller runs starting at `i` are still worth trying.
         if (atoms[j].keepWithNext) continue;
-        const slack = height - used;
-        const ragged = (slack / height) ** 2 * SLACK_WEIGHT * (last ? LAST_COLUMN_RELIEF : 1);
+        const slack = cap(k) - used;
+        const ragged = (slack / cap(k)) ** 2 * SLACK_WEIGHT * (last ? LAST_COLUMN_RELIEF : 1);
         const total = base + opening + ragged;
         if (total < cost[k + 1][j + 1]) {
           cost[k + 1][j + 1] = total;
@@ -118,7 +132,10 @@ export function breakColumns(atoms, height, bins) {
   }
 
   if (cost[bins][n] === Infinity) {
-    return { ...empty, failure: `content does not fit in ${bins} columns of ${height.toFixed(1)}pt` };
+    return {
+      ...empty,
+      failure: `content does not fit in ${bins} columns of ${tallest.toFixed(1)}pt`,
+    };
   }
 
   /** @type {number[][]} */ const columns = [];
@@ -131,7 +148,7 @@ export function breakColumns(atoms, height, bins) {
     for (let j = start; j < end; j += 1) {
       used += atoms[j].height + (j > start ? atoms[j].gapBefore.natural : 0);
     }
-    slack.unshift(height - used);
+    slack.unshift(cap(k - 1) - used);
     end = start;
   }
   return { columns, slack, cost: cost[bins][n], failure: null };

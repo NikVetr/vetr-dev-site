@@ -7,19 +7,19 @@ phone-text-power,social,comm,1,smartphone,"Phone, text + power",5,universal,core
 sim-data,social,comm,1,signal,"SIM, data + Wi-Fi",6,universal,core;social,0.76,0
 introductions,intro,stay,1,circle-user,Introductions,7,universal,social;family,0.70,1
 etiquette,social,comm,1,hand-coins,Tipping + etiquette,8,universal,core;social,0.62,1
-slang,slang,comm,1,messages-square,Slang (casual),9,universal,social,0.36,0
-profanity,profanity,comm,1,triangle-alert,Profanity (strong),10,universal,social,0.24,0
-time-scheduling,time,stay,1,clock,Time + scheduling,11,universal,core;transit,0.85,1
-time-words,time,stay,1,hourglass,Time words,12,universal,core,0.78,1
-days-of-week,time,stay,1,calendar-days,Days of the week,13,universal,core,0.62,1
-months,time,stay,1,calendar,Months,14,universal,core,0.50,1
-pronouns-verbs,core,comm,1,languages,Core words + patterns,15,universal,core,0.92,1
-question-words,core,comm,1,circle-help,Question + small words,16,universal,core,0.90,1
-payment-receipt,shop,money,3,credit-card,Payment + receipt,17,universal,shopping;food,0.82,1
-numbers-money,numbers,money,1,arrow-down-0-1,Numbers + money,18,universal,core;shopping,0.96,1
-atm-cash,numbers,money,1,banknote,ATM + cash,19,universal,core;shopping,0.84,1
-dietary-needs,food,money,3,leaf,Dietary needs,20,universal,food;health,0.80,1
-utility-templates,utility,comm,1,clipboard-list,Utility templates,21,universal,core,0.86,1
+pronouns-verbs,core,comm,1,languages,Core words + patterns,9,universal,core,0.92,1
+question-words,core,comm,1,circle-help,Question + small words,10,universal,core,0.90,1
+utility-templates,utility,comm,1,clipboard-list,Utility templates,11,universal,core,0.86,1
+slang,slang,comm,1,messages-square,Slang (casual),12,universal,social,0.36,0
+profanity,profanity,comm,1,triangle-alert,Profanity (strong),13,universal,social,0.24,0
+time-scheduling,time,stay,1,clock,Time + scheduling,14,universal,core;transit,0.85,1
+time-words,time,stay,1,hourglass,Time words,15,universal,core,0.78,1
+days-of-week,time,stay,1,calendar-days,Days of the week,16,universal,core,0.62,1
+months,time,stay,1,calendar,Months,17,universal,core,0.50,1
+payment-receipt,shop,money,3,credit-card,Payment + receipt,18,universal,shopping;food,0.82,1
+numbers-money,numbers,money,1,arrow-down-0-1,Numbers + money,19,universal,core;shopping,0.96,1
+atm-cash,numbers,money,1,banknote,ATM + cash,20,universal,core;shopping,0.84,1
+dietary-needs,food,money,3,leaf,Dietary needs,21,universal,food;health,0.80,1
 shopping,shop,money,1,shopping-bag,Shopping,22,universal,shopping,0.74,1
 color-size-returns,shop,money,2,ruler,"Color, size + returns",23,universal,shopping,0.55,1
 tax-refund,shop,money,3,receipt,Tax refund,24,universal,shopping;business,0.40,1

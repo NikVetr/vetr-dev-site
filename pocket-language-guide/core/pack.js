@@ -28,6 +28,15 @@ export async function loadCorpus(loadText) {
   const paper = index(await read('data/registry/paper.csv'), 'preset_id');
   const regions = index(await read('data/registry/regions.csv'), 'iso3166');
   const sectionRows = await read('data/registry/sections.csv');
+  // The five colour roles' own names, for a super-section label: a face's sections
+  // are all of a theme far more often than not, and the role is already the colour
+  // that says so. Registry rather than `data/i18n/`, for the reason the section
+  // headings are: `core/` renders the sheet and must not reach into the interface's
+  // catalogues. English only for now, which is the documented fallback for a
+  // section title whose locale file is incomplete.
+  const roleTitles = Object.fromEntries(
+    (await read('data/registry/roles.csv')).map((r) => [r.color_role, r.title_en]),
+  );
   // How many concepts each language actually has rows for. `status` in the
   // registry is an editorial intent ("we mean to do Spanish"); this is the fact,
   // and it is what decides whether a language can be offered as a target or a
@@ -84,6 +93,7 @@ export async function loadCorpus(loadText) {
     regions,
     sections: sectionRows,
     sectionById: index(sectionRows, 'section_id'),
+    roleTitles,
     groups,
     conceptsByGroup,
     concepts: index(Object.values(conceptsByGroup).flat(), 'concept_id'),

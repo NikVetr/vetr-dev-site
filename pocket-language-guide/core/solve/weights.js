@@ -110,32 +110,60 @@ export function proposeBalance(input) {
 
   // Greedy by value per point: the classic knapsack heuristic, and the ordering a
   // person would defend -- most useful thing that fits, then the next.
-  const ranked = candidates
-    .map((c) => ({ concept: c, value: valueOf(c), cost: height.get(c.concept_id) ?? Infinity }))
-    .filter((c) => Number.isFinite(c.cost) && c.cost > 0)
-    .sort((a, b) => b.value / b.cost - a.value / a.cost);
+  //
+  // **Re-picked every round rather than sorted once.** The objective is submodular:
+  // a cluster's second item is worth `CLUSTER_DECAY` of its first, so taking one
+  // item changes what its siblings are worth, and opening a section changes what
+  // everything in that section *costs*. Sorting once and re-pricing while walking
+  // the fixed order got the skipping right and the ordering wrong -- a sibling whose
+  // value had just been cut kept its original rank, so it could still be taken ahead
+  // of an equally cheap item from a cluster nothing had been taken from, which is
+  // the redundancy this scorer exists to avoid. Re-selecting the best each round is
+  // the textbook greedy for a monotone submodular objective under a knapsack
+  // constraint, and it is what earns the (1 - 1/e) guarantee that makes searching
+  // the subsets unnecessary.
+  //
+  // O(n) per round over a few dozen rounds, which is nothing next to one measure
+  // pass -- the costs are already in hand before this starts.
+  const pool = candidates
+    .map((c) => ({ concept: c, cost: height.get(c.concept_id) ?? Infinity }))
+    .filter((c) => Number.isFinite(c.cost) && c.cost > 0);
 
   /** @type {import('../types.js').DiffEntry[]} */ const adds = [];
   let budget = slack;
   /** @type {Record<string,number>} */ const takenFromCluster = { ...clusterUse };
   /** Sections this pass has already paid a heading for. */
   const opened = new Set(liveSections);
-  for (const item of ranked) {
+
+  /** What an item is worth and costs *now*, given what this pass has taken. */
+  const priceNow = (/** @type {{concept:any, cost:number}} */ item) => {
     const section = item.concept.section_id;
     // Bringing back a hidden section costs its heading as well as the row, and only
     // for the first item taken from it. Charging it keeps the estimate honest: a
     // proposal that promised to fill 12pt and actually filled 22 would overflow the
     // sheet the reader was told it would tidy.
     const overhead = opened.has(section) ? 0 : (headingHeight.get(section) ?? 0);
-    const cost = item.cost + overhead;
-    if (budget < cost) continue;
-    const cluster = item.concept.cluster_id;
-    // Re-price against choices made earlier in this same pass.
-    const taken = takenFromCluster[cluster] ?? 0;
+    const taken = takenFromCluster[item.concept.cluster_id] ?? 0;
     const value = Number(item.concept.importance) * CLUSTER_DECAY ** taken;
-    if (value < 0.15) continue;
-    budget -= cost;
-    takenFromCluster[cluster] = taken + 1;
+    return { cost: item.cost + overhead, overhead, taken, value };
+  };
+
+  const left = new Set(pool);
+  for (;;) {
+    /** @type {{item:any, priced:any}|null} */ let best = null;
+    let bestRatio = -Infinity;
+    for (const item of left) {
+      const priced = priceNow(item);
+      if (priced.value < 0.15 || budget < priced.cost) continue;
+      const ratio = priced.value / priced.cost;
+      if (ratio > bestRatio) { bestRatio = ratio; best = { item, priced }; }
+    }
+    if (!best) break;
+    const { item, priced } = best;
+    left.delete(item);
+    const section = item.concept.section_id;
+    budget -= priced.cost;
+    takenFromCluster[item.concept.cluster_id] = priced.taken + 1;
     opened.add(section);
     adds.push({
       conceptId: item.concept.concept_id,
@@ -143,10 +171,10 @@ export function proposeBalance(input) {
       label: `${input.targetRows[item.concept.concept_id].text} — `
         + `${input.sourceRows[item.concept.concept_id].text}`,
       reason: [
-        `fills ${cost.toFixed(0)}pt`,
-        overhead ? `opens ${corpus.sectionById[section].title_en}` : '',
-        taken
-          ? `${taken} similar item(s) already in, so counted lower`
+        `fills ${priced.cost.toFixed(0)}pt`,
+        priced.overhead ? `opens ${corpus.sectionById[section].title_en}` : '',
+        priced.taken
+          ? `${priced.taken} similar item(s) already in, so counted lower`
           : `importance ${Number(item.concept.importance).toFixed(2)}`,
       ].filter(Boolean).join('; '),
     });
@@ -166,9 +194,8 @@ export function proposeBalance(input) {
   // Nothing fit. Say what the cheapest thing would have cost rather than just "no",
   // because the reader's next move depends on which it is: a near miss means one
   // fewer face or a larger type size, and a wide miss means the sheet is simply full.
-  const cheapest = ranked.reduce((best, item) => {
-    const cost = item.cost
-      + (opened.has(item.concept.section_id) ? 0 : headingHeight.get(item.concept.section_id) ?? 0);
+  const cheapest = pool.reduce((best, item) => {
+    const cost = priceNow(item).cost;
     return cost < best ? cost : best;
   }, Infinity);
   return {

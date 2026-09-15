@@ -60,20 +60,17 @@ test.describe('on a phone', () => {
   });
 });
 
-test.describe('on a touch device', () => {
+test.describe('a multi-page export', () => {
   test.use({ viewport: PHONE, hasTouch: true, isMobile: true });
 
-  test('several images go to the share sheet rather than a zip', async ({ page }) => {
+  test('offers each page on its own instead of one zip', async ({ page }) => {
     // Neither mobile OS unzips by default, so the archive a desktop wants is a file
     // the reader cannot open -- and the phone-screen preset produces 25 of them.
+    // The share sheet alone was not enough: `navigator.share` needs transient user
+    // activation, and rasterising 25 faces outlasts the activation from the export
+    // button, so it throws and the reader was dropped back to the zip.
     await page.addInitScript(() => {
-      window.__shared = null;
       window.__downloads = [];
-      navigator.canShare = (d) => Array.isArray(d?.files) && d.files.length > 0;
-      navigator.share = async (d) => {
-        window.__shared = { count: d.files.length, types: [...new Set(d.files.map((f) => f.type))] };
-      };
-      // Any download is a failure of the policy under test, so record instead.
       const click = HTMLAnchorElement.prototype.click;
       HTMLAnchorElement.prototype.click = function patched() {
         if (this.download) { window.__downloads.push(this.download); return; }
@@ -89,10 +86,20 @@ test.describe('on a touch device', () => {
     });
     await expect(page.locator('#status')).toContainText('image(s)');
     await page.locator('#png').click();
-    await expect.poll(() => page.evaluate(() => window.__shared), { timeout: 120_000 }).not.toBeNull();
-    const shared = await page.evaluate(() => window.__shared);
-    expect(shared.count).toBeGreaterThan(1);
-    expect(shared.types).toEqual(['image/png']);
+
+    const panel = page.locator('#saved-images');
+    await expect(panel).toBeVisible({ timeout: 120_000 });
+    const pages = panel.locator('.saved-page');
+    expect(await pages.count()).toBeGreaterThan(1);
+    // Every page has its own picture, its own save and its own open.
+    await expect(pages.first().locator('img')).toBeVisible();
+    await expect(pages.first().locator('button')).toHaveCount(1);
+    const open = pages.first().locator('a[target="_blank"]');
+    await expect(open).toHaveAttribute('href', /^blob:/);
+    // And nothing was downloaded without being asked for -- least of all a zip.
     expect(await page.evaluate(() => window.__downloads)).toEqual([]);
+
+    // The zip is still one click for whoever wants it.
+    await expect(panel.getByRole('button', { name: /zip/i })).toBeVisible();
   });
 });

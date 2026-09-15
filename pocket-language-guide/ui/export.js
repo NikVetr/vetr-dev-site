@@ -55,9 +55,9 @@ function withStyle(svg, css) {
  * @property {string} name
  * @property {(done:number, total:number)=>void} [onProgress] called per face, so a
  *   six-face 600dpi export can say how far along it is instead of just freezing
- * @property {(files:{name:string,bytes:Uint8Array,type:string}[])=>void} [showInline]
- *   render the images into the page, for a touch device with no share sheet: the
- *   only way left to get a picture out of the browser is a press-and-hold save
+ * @property {(files:{name:string,bytes:Uint8Array,type:string}[], name:string)=>void} [present]
+ *   lay out a multi-page result in the page: one row per page with its own save and
+ *   open. Without it a many-page export falls back to a single zip
  */
 
 /**
@@ -74,14 +74,15 @@ export class NothingToExport extends Error {}
  * Hand several files to the platform's share sheet, which on iOS and Android is
  * where "Save N Images to Photos" lives.
  *
- * Gated on a coarse pointer as well as on support, because the question is not
- * whether the browser *can* share but whether the reader can unzip: a desktop
- * about to print wants the archive, and Chrome on Windows would otherwise open a
- * share dialog in front of them.
+ * **Called from a click of its own, never after the render.** `navigator.share`
+ * requires transient user activation, and rasterising twenty-five faces takes long
+ * enough that the activation from the export button has expired by the time the
+ * files exist -- so calling it there throws `NotAllowedError` and the reader is
+ * dropped back to a zip, which is the thing they were trying to avoid. The results
+ * panel gives it a button of its own, so the activation is fresh.
  * @param {ZipEntry[]} files @param {string} name
  */
-async function shareFiles(files, name) {
-  if (!matchMedia('(pointer: coarse)').matches) return false;
+export async function shareFiles(files, name) {
   const list = files.map((f) => new File([/** @type {BlobPart} */ (f.bytes.slice())], f.name,
     { type: f.type }));
   if (!navigator.canShare?.({ files: list })) return false;
@@ -95,33 +96,47 @@ async function shareFiles(files, name) {
   }
 }
 
-/**
- * Deliver one file, or several. Firing download() once per face made Chrome raise
- * its "Download multiple files?" prompt and gate all but the first, which is why
- * the many-file case is an archive.
- *
- * On a phone an archive is the wrong answer -- there is no unzip on either mobile
- * OS by default, so the file a reader gets is one they cannot open. So a touch
- * device is offered the share sheet first, and where that is unavailable the caller
- * may render the images into the page for a press-and-hold save.
- * @param {ZipEntry[]} files @param {string} name
- * @param {((files:ZipEntry[])=>void)} [showInline]
- */
-async function deliver(files, name, showInline) {
-  if (!files.length) throw new NothingToExport('the solve produced no pages');
-  if (files.length === 1) {
-    download(new Blob([/** @type {BlobPart} */ (files[0].bytes)], { type: files[0].type }), files[0].name);
-    return;
-  }
-  if (await shareFiles(files, name)) return;
-  if (showInline && matchMedia('(pointer: coarse)').matches) {
-    showInline(files);
-    return;
-  }
+/** One file as a download. @param {ZipEntry} file */
+export function downloadOne(file) {
+  download(new Blob([/** @type {BlobPart} */ (file.bytes.slice())], { type: file.type }), file.name);
+}
+
+/** Every file as one archive. @param {ZipEntry[]} files @param {string} name */
+export function downloadZip(files, name) {
   download(
     new Blob([/** @type {BlobPart} */ (zip(files).slice())], { type: 'application/zip' }),
     `${name}.zip`,
   );
+}
+
+/**
+ * Deliver one file, or hand several to the caller to lay out.
+ *
+ * One file is a download, which is what a download is for. Several used to be a zip
+ * -- because firing `download()` per face makes Chrome raise its "Download multiple
+ * files?" prompt and gate all but the first -- and a zip is the wrong answer on a
+ * phone, where neither mobile OS unzips by default and the file a reader gets is one
+ * they cannot open. It is also the wrong answer to guess at: the platform sniffing
+ * this used to do (share sheet on a coarse pointer, images in the page otherwise,
+ * zip on a desktop) had three branches, two of which the reader could not predict.
+ *
+ * So several files are now *shown*: one row per page, each with its own save and
+ * open, plus save-all and download-as-zip for the whole set. Same behaviour
+ * everywhere, nothing automatic, and the zip is still one click for whoever wants it.
+ * @param {ZipEntry[]} files @param {string} name
+ * @param {((files:ZipEntry[], name:string)=>void)} [present]
+ */
+async function deliver(files, name, present) {
+  if (!files.length) throw new NothingToExport('the solve produced no pages');
+  if (files.length === 1) {
+    downloadOne(files[0]);
+    return;
+  }
+  if (present) {
+    present(files, name);
+    return;
+  }
+  downloadZip(files, name);
 }
 
 /** @typedef {{name:string, bytes:Uint8Array, type:string}} ZipEntry */
@@ -130,30 +145,87 @@ async function deliver(files, name, showInline) {
 /** @type {string[]} */ let shownUrls = [];
 
 /**
- * Put the rendered pages in the page itself, captioned, as the last delivery route.
+ * Lay out a multi-page export: one row per page, each with its own save and open,
+ * and the whole set offered as a share or as a zip.
  *
- * Both pages need this and it is delivery rather than layout, so it lives beside
- * the other delivery in this module rather than being written twice. Neither mobile
- * OS unzips by default, so on a touch device with no share sheet the archive is a
- * file the reader cannot open -- but a plain `<img>` is something both platforms
- * save to the camera roll on a press and hold.
- * @param {HTMLElement|null} box @param {ZipEntry[]} files
+ * This is what the many-file case delivers now, everywhere, rather than the three
+ * platform-sniffed branches it had before. The owner's ask was exact -- "each face
+ * gets its own button" and "an open in new tab button too" -- and it happens to be
+ * the robust answer as well: a per-file download needs no API the browser might
+ * lack and no activation that might have expired, which is how a phone ended up
+ * with a zip it could not open despite a share-sheet path existing.
+ *
+ * Both pages need this and it is delivery rather than layout, so it lives beside the
+ * rest of the delivery here rather than being written twice.
+ * @param {HTMLElement|null} box @param {ZipEntry[]} files @param {string} name
  */
-export function showSavedImages(box, files) {
+export function showSavedImages(box, files, name) {
   if (!box) return;
   for (const url of shownUrls) URL.revokeObjectURL(url);
   shownUrls = [];
+
   const caption = document.createElement('figcaption');
-  caption.textContent = t('quick.pressAndHold');
+  caption.textContent = t('export.pages', { count: files.length });
   box.replaceChildren(caption);
+
+  // The whole set. `shareFiles` is on a button of its own precisely so its click is
+  // the activation it needs; see its own note.
+  const all = document.createElement('div');
+  all.className = 'row';
+  // `in` rather than a truthiness test: the type says `canShare` is always defined,
+  // and on a desktop without file sharing it is the property that is absent.
+  if ('canShare' in navigator) {
+    const share = document.createElement('button');
+    share.type = 'button';
+    share.textContent = t('export.saveAll');
+    share.addEventListener('click', () => { shareFiles(files, name); });
+    all.append(share);
+  }
+  const asZip = document.createElement('button');
+  asZip.type = 'button';
+  asZip.className = 'ghost';
+  asZip.textContent = t('export.asZip');
+  asZip.addEventListener('click', () => downloadZip(files, name));
+  all.append(asZip);
+  box.append(all);
+
   for (const [i, file] of files.entries()) {
     const url = URL.createObjectURL(new Blob([/** @type {BlobPart} */ (file.bytes.slice())],
       { type: file.type }));
     shownUrls.push(url);
+
+    const row = document.createElement('div');
+    row.className = 'saved-page';
+
+    // The picture itself, which on both mobile platforms is savable by pressing and
+    // holding it -- the route that needs no button at all.
     const img = document.createElement('img');
     img.src = url;
     img.alt = t('quick.imageOf', { n: i + 1, total: files.length });
-    box.append(img);
+
+    const label = document.createElement('span');
+    label.className = 'saved-page-label';
+    label.textContent = t('quick.imageOf', { n: i + 1, total: files.length });
+
+    const save = document.createElement('button');
+    save.type = 'button';
+    save.textContent = t('export.savePage');
+    save.addEventListener('click', () => downloadOne(file));
+
+    // A real link rather than a scripted `window.open`, so it is middle-clickable,
+    // long-pressable and not eaten by a popup blocker.
+    const open = document.createElement('a');
+    open.className = 'btn ghost';
+    open.href = url;
+    open.target = '_blank';
+    open.rel = 'noopener';
+    open.textContent = t('export.openPage');
+
+    const buttons = document.createElement('div');
+    buttons.className = 'row';
+    buttons.append(label, save, open);
+    row.append(img, buttons);
+    box.append(row);
   }
   box.hidden = false;
 }
@@ -234,7 +306,7 @@ export async function exportPng(input, dpi = 600) {
       URL.revokeObjectURL(url);
     }
   }
-  await deliver(files, `${input.name}-${dpi}dpi`, input.showInline);
+  await deliver(files, `${input.name}-${dpi}dpi`, input.present);
 }
 
 /** @param {ExportInput} input @param {{title?:string, language?:string}} meta */

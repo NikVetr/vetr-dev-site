@@ -1212,3 +1212,105 @@ test('and does not give back paper that would squeeze the type to its floor', as
   assert.equal(kept.geometry.faces, 4, 'four faces kept');
   assert.ok(kept.scale > COMFORT, `and read at ${kept.scale}, above the comfort floor`);
 });
+
+test('a corner tab costs only the columns it covers', async () => {
+  // This file's own engine used to say the opposite in as many words -- "a tab still
+  // costs its line, because the columns above or below it end where they end" -- and
+  // charged every column the band's height whatever its span. The owner reported the
+  // consequence twice, in the same terms both times: `left`, `right` and `center`
+  // behaved exactly like `across`, indenting all four columns, so three of the four
+  // options described a distinction the layout did not make. The whole point of a
+  // corner tab is to keep the furniture out of the other columns' way.
+  //
+  // Asserted *within* one solve rather than against a bandless one: a band can change
+  // the face count, the face count changes the scale, and the scale moves the first
+  // baseline -- so comparing absolute y between two solves measures the type size as
+  // much as the band. The claim is about the columns of one face relative to each
+  // other, and that is what is checked.
+  /** @param {import('../core/types.js').HeadBand} head */
+  const firstInk = async (head) => {
+    const one = await referenceSpec('es', 'en', { head });
+    await loadFontsFor(ctx, one.target, one.source);
+    const { plan } = await buildSheet(ctx, one);
+    const columns = plan.geometry.columns;
+    // The horizontal metrics do not depend on the bands -- `contentBox` takes their
+    // height off the top and bottom only -- so a bandless box gives the right
+    // column pitch for every case here. Dividing the page width by the column count
+    // instead put the hits in the wrong buckets: the columns are inset by the
+    // margins and separated by gaps, so the last column had no hits at all.
+    const geom = contentBox(one.geometry, one.paper);
+    const pitch = geom.colWidth + geom.columnGap;
+    const tops = Array.from({ length: columns }, () => Infinity);
+    // Hit boxes rather than runs, because a hit is content: the band's own folio
+    // sits in the first column's x-range and above the columns, and measuring runs
+    // reported it as column 0 starting 11pt higher than its neighbours under a
+    // *full* band. Every hit, not only the ones carrying a `conceptId`: a column
+    // that opens with a section heading has no concept at its top, so filtering to
+    // concepts measured the first row *under* the heading and made level columns
+    // look staggered by the height of one.
+    for (const hit of plan.faces[0].hits) {
+      const c = Math.min(columns - 1,
+        Math.max(0, Math.round((hit.x - geom.left) / pitch)));
+      tops[c] = Math.min(tops[c], hit.y);
+    }
+    return tops;
+  };
+
+  // A full-width bar is the one that genuinely costs everybody: all columns level.
+  const full = await firstInk({ span: 'full', left: 'page', fill: 'section' });
+  assert.ok(Math.max(...full) - Math.min(...full) < 1.5,
+    `a full band should indent every column alike, got ${full.join(' ')}`);
+
+  // A left tab pays for itself out of the first column only, which must therefore
+  // start lower than every other column by about the band's height.
+  const left = await firstInk({ span: 'left', left: 'page', fill: 'section' });
+  const restOfLeft = left.slice(1);
+  assert.ok(left[0] > Math.max(...restOfLeft) + 4,
+    `a left tab should indent only its own column, got ${left.join(' ')}`);
+  assert.ok(Math.max(...restOfLeft) - Math.min(...restOfLeft) < 1.5,
+    `the columns a left tab misses should be level, got ${left.join(' ')}`);
+
+  // And a right tab out of the last, which is the mirror and catches an off-by-one
+  // in the column-to-bin mapping that a left-only test would pass.
+  const right = await firstInk({ span: 'right', left: 'page', fill: 'section' });
+  const last = right.length - 1;
+  const restOfRight = right.slice(0, last);
+  assert.ok(right[last] > Math.max(...restOfRight) + 4,
+    `a right tab should indent only the last column, got ${right.join(' ')}`);
+  assert.ok(Math.max(...restOfRight) - Math.min(...restOfRight) < 1.5,
+    `the columns a right tab misses should be level, got ${right.join(' ')}`);
+});
+
+test('a face can wear the name of its own theme, in white on a solid tab', async () => {
+  // The identification problem this answers, in the owner's words: a stack of cards
+  // printed on white paper is hard to tell apart. A tab is a colour you can see from
+  // the edge, and the `theme` slot puts the word on it -- "Essentials", "Travel" --
+  // so a face says what it is about without being read.
+  //
+  // The five colour roles *are* the thematic grouping: the section wash already says
+  // which one a face belongs to, so there is nothing new to group and no second
+  // taxonomy for anyone to keep in step. The label and the `fill: 'section'` colour
+  // are taken from the same computed dominant role, which is why they cannot disagree.
+  const spec = await referenceSpec('es', 'en', {
+    head: { span: 'left', left: 'theme', fill: 'section' },
+  });
+  await loadFontsFor(ctx, spec.target, spec.source);
+  const { plan } = await buildSheet(ctx, spec);
+
+  const titles = new Set(['Essentials', 'Money & food', 'Travel', 'Stay & time', 'Emergency']);
+  for (const [i, face] of plan.faces.entries()) {
+    // The tab is unshifted to the front of the rect list and runs to the page edge.
+    const tab = face.rects[0];
+    assert.ok(tab && tab.x === 0 && tab.w > 0 && tab.w < plan.pageW,
+      `face ${i + 1} should carry a left tab, got ${JSON.stringify(tab)}`);
+    // White and bold, which is what makes it legible on a saturated fill and a title
+    // rather than furniture: every other slot is a number or a key, set small and quiet.
+    const label = face.runs.find((r) => r.bold && r.fill === '#ffffff');
+    assert.ok(label, `face ${i + 1} should carry a bold white label`);
+    assert.ok(titles.has(label.text),
+      `face ${i + 1} label ${label.text} is not a theme name`);
+    // The tab's colour is a role colour, not the ink or the rule.
+    assert.match(tab.fill ?? '', /^#[0-9A-Fa-f]{6}$/);
+    assert.notEqual(tab.fill, '#FFFFFF');
+  }
+});

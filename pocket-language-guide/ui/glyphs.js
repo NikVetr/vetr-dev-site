@@ -1053,6 +1053,13 @@ export function redrawGlyphs(group, glyphs) {
  * The shapes are not interchangeable: 16:9 and 20:9 differ by a quarter of the
  * screen's height, which is a whole section of the card. So the ratio is in the
  * label, because it is the fact that decides.
+ *
+ * **Which phones a shape covers is written out under the ladder.** It used to live
+ * only in the segment's `title`, which on a phone -- the one device this control is
+ * about -- is nowhere at all, because there is no hover. A reader with a 16 Plus
+ * could not tell from a caption reading "iPhone 15/16" that their phone was in it,
+ * and it is: same shape, bigger glass. So each preset carries a `models` roll and
+ * the chosen one is shown as text.
  * @param {Object} config
  * @param {Record<string, any>} config.geometry
  * @param {import('../core/types.js').Geometry} config.value
@@ -1064,32 +1071,47 @@ export function phoneControl({ geometry, value, onChange }) {
     ([, g]) => g.pageW === at.pageW && g.pageH === at.pageH,
   )?.[0] ?? '';
 
+  const roll = document.createElement('p');
+  roll.className = 'small muted panel-note';
+  // Empty for a custom size, which matches no preset and so covers no named phone.
+  const describe = (/** @type {string} */ id) => { roll.textContent = id ? geometry[id].models : ''; };
+
   const group = segmented({
     label: t('format.phoneLong'),
     value: idOf(value),
-    // The name is `model · model · ratio`: the models are what the reader recognises
-    // and the ratio is what actually differs, and 2.17:1 against 2.22:1 is not a
-    // difference the glyph can draw at 30px. Both lines, rather than the ratio in a
-    // tooltip nobody opens.
+    // The name is `family · family · ratio`: the families are what the reader
+    // recognises and the ratio is what actually differs, and 2.17:1 against 2.22:1 is
+    // not a difference the glyph can draw at 30px. Every family in the name reaches
+    // the caption -- the middle one used to be dropped on the floor -- and the ratio
+    // goes on its own line, rather than into a tooltip nobody opens.
     options: models.map(([id, g]) => {
       const parts = g.name.split('·').map((/** @type {string} */ part) => part.trim());
       const ratio = /:\d|column/.test(parts[parts.length - 1]) ? parts.pop() : '';
       return {
         value: id,
-        caption: parts[0],
+        caption: parts.join(' · '),
         sub: ratio,
-        title: `${g.name} — ${g.note}`,
+        title: `${g.name} — ${g.models}`,
         glyph: pageGlyph({ pageW: g.pageW, pageH: g.pageH, columns: g.columns }),
       };
     }),
-    onChange: (id) => onChange({ geometry: { ...geometry[id] } }),
+    onChange: (id) => {
+      describe(id);
+      onChange({ geometry: { ...geometry[id] } });
+    },
   });
+  describe(idOf(value));
+
+  const wrap = document.createElement('div');
+  wrap.append(group.group, roll);
 
   return {
-    group: group.group,
+    group: wrap,
     /** @param {import('../core/types.js').Geometry} next */
     sync(next) {
-      group.select(idOf(next));
+      const id = idOf(next);
+      group.select(id);
+      describe(id);
     },
   };
 }
@@ -1151,6 +1173,28 @@ export function relabelGlyphs(group, labels) {
  * specification, and the thing to trust is the band drawn on the canvas, which is
  * why it is drawn: a reader can hold the phone up against it. Custom takes exact
  * fractions for anyone who has measured their own screen.
+ *
+ * What the two systems *do* publish, and what these fractions are built out of.
+ * iOS safe-area insets, portrait: 47pt at the top on the notch generations (iPhone
+ * 12/13/14), 50pt on the mini, 59pt on the Dynamic Island ones (14 Pro onward), and
+ * 34pt at the bottom for the home indicator on all of them; a lock-screen control
+ * is at least a 44pt tap target (Apple's HIG minimum). Android, from AOSP:
+ * `status_bar_height_portrait` 24dp and `navigation_bar_height` 48dp in
+ * `core/res/res/values/dimens.xml`; `keyguard_clock_top_margin` 18dp and
+ * `keyguard_status_view_bottom_margin` 20dp in `packages/SystemUI/res/values`; and
+ * `keyguard_affordance_vertical_offset` 32dp -- the bottom shortcut icons -- in
+ * `packages/SystemUI/res-keyguard/values`.
+ *
+ * What neither publishes is the one measurement that dominates the top band: how
+ * tall the big clock itself is. Apple states no size for it, and AOSP's Material You
+ * clock sizes its own text at runtime instead of from a dimen. So the top stays an
+ * estimate built on sourced parts -- island or status bar, a date line, and a clock
+ * of roughly 100-140pt -- which puts the foot of the band near 30% of a 852pt
+ * iPhone, and near the same fraction of a 667pt SE, because the furniture is
+ * anchored to the top and roughly fixed in size while the screen below it is
+ * shorter. That is why one pair of fractions serves every preset: a per-model
+ * table would be arithmetic on an estimate, which is false precision, and the
+ * fractions are already ahead of the estimate's own error bars.
  *
  * Both ends, because both systems put controls at the bottom -- the flashlight and
  * camera on one, two shortcut buttons on the other -- and a phrase under those is
@@ -1224,6 +1268,13 @@ export function reserveControl({ value, onChange }) {
   };
   const top = pct(t('format.reserveTop'));
   const bottom = pct(t('format.reserveBottom'));
+  // What the bands are *for*, in words. The field is titled "Keep clear for the
+  // clock" and drawn as a phone with a clock in a shaded band, and that was still
+  // not enough to say "lock screen" to a reader who went looking for the setting
+  // and asked for it to be added.
+  const hint = document.createElement('p');
+  hint.className = 'small muted panel-note';
+  hint.textContent = t('format.reserveHint');
   const custom = document.createElement('div');
   custom.className = 'numeric-custom';
   const unit = () => {
@@ -1286,8 +1337,11 @@ export function reserveControl({ value, onChange }) {
   });
   paint();
 
+  const wrap = document.createElement('div');
+  wrap.append(group.group, hint);
+
   return {
-    group: group.group,
+    group: wrap,
     custom,
     /** @param {import('../core/types.js').Geometry} next */
     sync(next) {
@@ -1545,7 +1599,9 @@ export function backgroundControl({
  */
 export function headControl({ spec, onChange, colourKeys = [] }) {
   /** @type {import('../core/types.js').HeadSlot[]} */
-  const SLOTS = ['page', 'pair', 'region', 'legend', 'custom'];
+  // `theme` last before `custom`: it is the newest and the only one that names a
+  // group of sections rather than a fact about the sheet.
+  const SLOTS = ['page', 'pair', 'region', 'legend', 'theme', 'custom'];
   const SIDES = /** @type {const} */ (['left', 'center', 'right']);
   const SPANS = /** @type {const} */ (['full', 'left', 'center', 'right']);
   /** A position may hold a bare slot in a spec saved before it became a list. */

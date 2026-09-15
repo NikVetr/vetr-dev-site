@@ -1,5 +1,29 @@
 import { test, expect } from '@playwright/test';
 
+/**
+ * Every renderer takes the ornaments without error.
+ *
+ * PDF and SVG are one file and download directly. A multi-page PNG does not: eight
+ * faces used to arrive as one zip, which is unopenable on a phone, so they are laid
+ * out one row per page with their own save button and the download happens when a
+ * page is asked for. Waiting for a `download` event on the PNG button is therefore
+ * waiting for something that no longer happens by itself.
+ * @param {import('@playwright/test').Page} page
+ */
+async function exportsCleanly(page) {
+  for (const id of ['pdf', 'svg']) {
+    const download = page.waitForEvent('download', { timeout: 120_000 });
+    await page.locator(`#${id}`).click();
+    expect(await (await download).failure()).toBeNull();
+  }
+  await page.locator('#png').click();
+  const panel = page.locator('#saved-images');
+  await expect(panel).toBeVisible({ timeout: 120_000 });
+  const first = page.waitForEvent('download', { timeout: 120_000 });
+  await panel.locator('.saved-page').first().getByRole('button').click();
+  expect(await (await first).failure()).toBeNull();
+}
+
 test('Quenya grows a reserved frame, exports it and restores Classic exactly', async ({ page }) => {
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
@@ -16,11 +40,7 @@ test('Quenya grows a reserved frame, exports it and restores Classic exactly', a
   expect(await positions()).not.toEqual(before);
   await expect(page.locator('#ornament-hint')).toContainText('page count may change');
   expect(await page.locator('.ornament-sample path').count()).toBeGreaterThan(10);
-  for (const id of ['pdf', 'svg', 'png']) {
-    const download = page.waitForEvent('download', { timeout: 120_000 });
-    await page.locator(`#${id}`).click();
-    expect(await (await download).failure()).toBeNull();
-  }
+  await exportsCleanly(page);
   await page.selectOption('#ornament-style', 'classic');
   await expect(page.locator('.face.focused .ornament')).toHaveCount(0);
   expect(await positions()).toEqual(before);
@@ -41,11 +61,7 @@ test('style is opt-in, decorates the sheet and exports through every renderer', 
   await expect(page.locator('.face.focused .ornament').first()).toBeAttached();
   await expect(page.locator('.ornament-control p').first()).toHaveText('Language-inspired');
   expect(await textPositions()).toEqual(before);
-  for (const id of ['pdf', 'svg', 'png']) {
-    const download = page.waitForEvent('download', { timeout: 120_000 });
-    await page.locator(`#${id}`).click();
-    expect(await (await download).failure()).toBeNull();
-  }
+  await exportsCleanly(page);
   await selection.selectOption('classic');
   await expect(page.locator('.face.focused .ornament')).toHaveCount(0);
   expect(await textPositions()).toEqual(before);

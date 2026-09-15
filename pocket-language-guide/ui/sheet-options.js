@@ -425,7 +425,8 @@ async function main() {
     if (!plan) throw new Error('nothing solved yet');
     return {
       plan, manifest, icons, name,
-      showInline: (/** @type {any[]} */ files) => showSavedImages($('saved-images'), files),
+      present: (/** @type {any[]} */ files, /** @type {string} */ pages) =>
+        showSavedImages($('saved-images'), files, pages),
       stacks: stacksFor(ctx.corpus, spec.target, spec.source, spec.typeface, isElven(spec)),
     };
   };

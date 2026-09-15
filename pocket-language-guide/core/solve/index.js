@@ -290,7 +290,7 @@ export function headBands(spec) {
  * there is a face to put a folio number on -- so this reads the *spec* rather than the
  * text. A band whose three positions are empty reserves nothing, which is what lets
  * the control leave a band switched on while the reader empties it.
- * @param {import('../types.js').HeadBand|null} band
+ * @param {import('../types.js').HeadBand|null|undefined} band
  */
 function bandAsks(band) {
   if (!band) return false;
@@ -311,6 +311,68 @@ function headBandPt(input) {
     top: bandAsks(bands.top) ? pt : 0,
     bottom: bandAsks(bands.bottom) ? pt : 0,
   };
+}
+
+/**
+ * Which columns a band's span actually sits over.
+ *
+ * **A corner tab now costs only the columns it covers.** This file used to say the
+ * opposite in as many words -- "a tab still costs its line, because the columns
+ * above or below it end where they end" -- and charged every column the band's
+ * height whatever its span. The owner reported the consequence twice, and it is the
+ * right report: the whole point of putting the furniture in one corner is to keep it
+ * out of the way of the other columns, and if all four are indented anyway then
+ * `left`, `right` and `center` differ from `across` only in where a few words sit.
+ * Three of the four options were describing a distinction the layout did not make.
+ *
+ * Coverage comes from the span rather than from the painted tab's width, which is
+ * the only non-circular choice: the tab is sized by the text it holds, the text is
+ * fitted to the content box, and the box is what this decides. It is also what a
+ * reader expects a control called "left tab" to mean.
+ * @param {import('../types.js').HeadBand|null|undefined} band
+ * @param {number} columns
+ * @returns {Set<number>} column indices, empty where the band asks for nothing
+ */
+function bandColumns(band, columns) {
+  if (!bandAsks(band)) return new Set();
+  const span = band?.span ?? 'full';
+  if (span === 'full') return new Set(Array.from({ length: columns }, (_, c) => c));
+  if (span === 'left') return new Set([0]);
+  if (span === 'right') return new Set([columns - 1]);
+  // Centre: the middle column, or both of them on an even count, because a tab
+  // centred between two columns overhangs each of them.
+  const mid = (columns - 1) / 2;
+  return new Set(columns % 2 ? [mid] : [Math.floor(mid), Math.ceil(mid)]);
+}
+
+/**
+ * Per-bin column tops and heights, given a content box already charged the full
+ * band height. A column the band does not cover gets that height back, and starts
+ * higher by it.
+ *
+ * Indexed by bin -- `face * columns + column` -- which is the breaker's own index,
+ * so the two never have to be reconciled.
+ * @param {SolveInput} input
+ * @param {{top:number, height:number}} box
+ * @param {number} faces @param {number} columns
+ */
+function columnGeometry(input, box, faces, columns) {
+  const band = headBandPt(input);
+  const bands = headBands(input.spec);
+  const covers = {
+    top: bandColumns(bands.top, columns),
+    bottom: bandColumns(bands.bottom, columns),
+  };
+  /** @type {number[]} */ const tops = [];
+  /** @type {number[]} */ const heights = [];
+  for (let bin = 0; bin < faces * columns; bin += 1) {
+    const c = bin % columns;
+    const above = covers.top.has(c) ? 0 : band.top;
+    const below = covers.bottom.has(c) ? 0 : band.bottom;
+    tops.push(box.top - above);
+    heights.push(box.height + above + below);
+  }
+  return { tops, heights };
 }
 
 /**
@@ -348,8 +410,9 @@ function headSize({ theme, spec, corpus }) {
  * @param {number} face  zero-based
  * @param {number} faces
  * @param {import('../types.js').HeadBand} band
+ * @param {string|null} [theme]  the face's dominant colour role, for `theme`
  */
-function headText(input, face, faces, band) {
+function headText(input, face, faces, band, theme) {
   const { spec, corpus } = input;
   const name = (/** @type {string} */ code) => corpus.languages[code]?.exonym_en ?? code;
 
@@ -400,6 +463,17 @@ function headText(input, face, faces, band) {
         parts.push({ text: parts.length ? ` \u2022 ${respell}` : respell, bold: false });
       }
       return parts;
+    }
+    // The face's own super-section, bold, for the solid tab a stack of printed
+    // cards is told apart by. The five colour roles *are* the thematic grouping --
+    // the wash already says which one a face belongs to, and this puts the word on
+    // it -- so there is nothing new to group and nothing for a reader to maintain.
+    // Bold because it is a title rather than furniture: every other slot here is a
+    // number or a key, set small and quiet, and this one is the thing you read from
+    // across a table.
+    if (slot === 'theme') {
+      const title = theme ? input.corpus.roleTitles?.[theme] : '';
+      return title ? [{ text: title, bold: true }] : [];
     }
     if (slot === 'custom') return [{ text: (band.text ?? '').trim(), bold: false }];
     return [];
@@ -491,6 +565,12 @@ export function layout(input) {
   const bands = headBands(spec);
   const frame = elvenInset(spec);
   const box = contentBox(spec.geometry, spec.paper, band, frame);
+  // Which columns the bands sit over, and so which of them pay for the line. `box`
+  // stays charged for both bands; `columnGeometry` hands the height back to the
+  // columns a corner tab does not cover.
+  const cols = (/** @type {number} */ faces) => columnGeometry(
+    input, box, faces, spec.geometry.columns,
+  );
   /** @type {import('../types.js').Warning[]} */ const warnings = [];
 
   const targetScript = corpus.scripts[corpus.languages[spec.target].script];
@@ -519,7 +599,8 @@ export function layout(input) {
 
   const autoFaces = spec.autoFaces !== false;
   const resolved = autoFaces
-    ? solveFaces(measureOnly, box, spec, scaleFloor)
+    ? solveFaces(measureOnly, box, spec, scaleFloor,
+      (/** @type {number} */ n) => cols(n).heights)
     : { faces: spec.geometry.faces, scale: null };
   const faces = resolved.faces;
   const bins = faces * spec.geometry.columns;
@@ -654,7 +735,8 @@ export function layout(input) {
         + 'in the content panel.',
     });
   }
-  const broken = breakColumns(atoms, box.height, bins);
+  const faceCols = cols(faces);
+  const broken = breakColumns(atoms, faceCols.heights, bins);
   if (broken.failure) {
     // Only speak once. The no-fit warning above already explains this in the
     // reader's terms and carries the remedies; the breaker's own message is
@@ -694,7 +776,9 @@ export function layout(input) {
       const indices = broken.columns[bin] ?? [];
       const x = box.left + c * (box.colWidth + box.columnGap);
       const columnAtoms = indices.map((i) => atoms[i]);
-      const { offsets, residual } = placeColumn(columnAtoms, box.top, broken.slack[bin]);
+      const { offsets, residual } = placeColumn(
+        columnAtoms, faceCols.tops[bin], broken.slack[bin],
+      );
       looseness.push(residual);
       // Slack the glue could not absorb without opening a canyon is left over, and
       // it has to go *somewhere*. Against a neighbour it goes at the bottom, because
@@ -744,7 +828,25 @@ export function layout(input) {
       if (!band[edge]) continue;
       const bandSpec = /** @type {import('../types.js').HeadBand} */ (bands[edge]);
       const size = headSize(input);
-      const { left, center, right } = headText(input, f, faces, bandSpec);
+      // The face's dominant colour role, by placed height. Computed once, before
+      // the band's text, so the `theme` label and a `fill: 'section'` tab cannot
+      // disagree about which section a face is mostly about.
+      const faceTheme = (() => {
+        /** @type {Map<string, number>} */ const byRole = new Map();
+        for (const p of placed) {
+          if (!p.colorRole) continue;
+          byRole.set(p.colorRole, (byRole.get(p.colorRole) ?? 0) + p.h);
+        }
+        let best = null;
+        let most = 0;
+        // Ties break on the role name so a face cannot change colour between two
+        // otherwise identical solves.
+        for (const [role, h] of [...byRole].sort((a, b) => a[0].localeCompare(b[0]))) {
+          if (h > most) { most = h; best = role; }
+        }
+        return best;
+      })();
+      const { left, center, right } = headText(input, f, faces, bandSpec, faceTheme);
       const y = edge === 'top'
         ? box.top - size * 0.9
         : box.top + box.height + size * 1.35;
@@ -788,23 +890,10 @@ export function layout(input) {
        * with two, and `placed` is already carrying exactly that for the sections
        * wash.
        */
-      const modalRole = () => {
-        /** @type {Map<string, number>} */ const byRole = new Map();
-        for (const p of placed) {
-          if (!p.colorRole) continue;
-          byRole.set(p.colorRole, (byRole.get(p.colorRole) ?? 0) + p.h);
-        }
-        let best = null;
-        let most = 0;
-        // Ties break on the role name so a face cannot change colour between two
-        // otherwise identical solves.
-        for (const [role, h] of [...byRole].sort((a, b) => a[0].localeCompare(b[0]))) {
-          if (h > most) { most = h; best = role; }
-        }
-        return best ? themeColour(`roles.${best}`) : null;
-      };
+      // `section` follows the face's own dominant role; any other value is an
+      // explicit theme colour key; empty is no tab at all.
       const fillColour = bandSpec.fill === 'section'
-        ? modalRole()
+        ? (faceTheme ? themeColour(`roles.${faceTheme}`) : null)
         : themeColour(bandSpec.fill);
       // On a tab the type is white, because the tab is a solid colour chosen to be
       // seen from the edge of a stack and any of the theme's inks would be reading
@@ -866,9 +955,15 @@ export function layout(input) {
         // concatenated into one group at the chosen edge, bullet-joined as a single
         // position's slots already are, and given the whole width to fit in -- so a
         // reader who wants the furniture out of the way of the outer columns can put
-        // it in one corner instead of spreading it over three. The distinction is
-        // where the content sits, not how tall the band is: a tab still costs its
-        // line, because the columns above or below it end where they end.
+        // it in one corner instead of spreading it over three.
+        //
+        // This used to add that the distinction was only where the content sits,
+        // because "a tab still costs its line" across the whole face. It no longer
+        // does: `bandColumns` charges the band to the columns its span actually
+        // covers, so a `left` tab indents the first column and leaves the rest at
+        // the paper's own margin. The old behaviour made three of the four options
+        // indistinguishable from `across` -- the owner reported it twice -- because
+        // the reserved strip spanned the face even though the ink did not.
         : [[
           fit(joinParts([left, center, right]), box.width),
           span === 'left' ? box.left
@@ -1047,7 +1142,10 @@ function findFixes(input, box, scaleFloor) {
       blocks, theme, spec: { ...spec, geometry }, corpus, measurer, registry,
       colWidth: probeBox.colWidth, scale: scaleFloor, withPaint: false,
     });
-    return !breakColumns(atoms, probeBox.height, geometry.faces * geometry.columns).failure;
+    const probeHeights = columnGeometry(
+      { ...input, spec: candidate }, probeBox, geometry.faces, geometry.columns,
+    ).heights;
+    return !breakColumns(atoms, probeHeights, geometry.faces * geometry.columns).failure;
   };
 
   if (spec.autoFaces === false) {
@@ -1093,7 +1191,10 @@ function findFixes(input, box, scaleFloor) {
       colWidth: box.colWidth, scale: scaleFloor, withPaint: false,
     });
     const bins = spec.geometry.faces * spec.geometry.columns;
-    if (breakColumns(atoms, box.height, bins).failure) continue;
+    const shedHeights = columnGeometry(
+      input, box, spec.geometry.faces, spec.geometry.columns,
+    ).heights;
+    if (breakColumns(atoms, shedHeights, bins).failure) continue;
     const count = Object.keys(dropped).length;
     fixes.push({
       label: `Drop the ${count} least important ${count === 1 ? 'section' : 'sections'}`,
@@ -1133,14 +1234,15 @@ function findFixes(input, box, scaleFloor) {
  * @param {number} scaleFloor
  * @returns {{faces:number, scale:number|null}}
  */
-function solveFaces(build, box, spec, scaleFloor) {
+function solveFaces(build, box, spec, scaleFloor,
+  /** @type {(faces:number)=>number[]} */ roomFor) {
   const columns = spec.geometry.columns;
   /** @param {number} faces @param {number} scale */
   const fitsAt = (faces, scale) => !breakColumns(
-    build(scale), box.height, faces * columns,
+    build(scale), roomFor(faces), faces * columns,
   ).failure;
   /** @param {number} faces */
-  const fittedAt = (faces) => autofit(build, box.height, faces * columns, scaleFloor);
+  const fittedAt = (faces) => autofit(build, roomFor(faces), faces * columns, scaleFloor);
   /**
    * The fraction of the card the content leaves empty.
    *
@@ -1152,9 +1254,14 @@ function solveFaces(build, box, spec, scaleFloor) {
    */
   const blankFraction = (faces, scale) => {
     const bins = faces * columns;
-    const broken = breakColumns(build(scale), box.height, bins);
+    const heights = roomFor(faces);
+    const broken = breakColumns(build(scale), heights, bins);
     if (broken.failure) return 0;
-    return broken.slack.reduce((a, b) => a + b, 0) / (bins * box.height);
+    // Against the sum of the columns' own heights, not bins times one of them: with
+    // a corner tab they differ, and dividing by the charged height would report
+    // whitespace the taller columns never had.
+    const room = heights.reduce((/** @type {number} */ a, /** @type {number} */ b) => a + b, 0);
+    return broken.slack.reduce((a, b) => a + b, 0) / room;
   };
 
   const anchor = Math.max(1, spec.geometry.faces || FACE_STEP);
@@ -1226,7 +1333,7 @@ function solveFaces(build, box, spec, scaleFloor) {
  * only has to bracket around it -- which matters because each probe re-measures
  * and re-breaks the whole sheet.
  * @param {(scale:number)=>import('./atoms.js').Atom[]} build
- * @param {number} height @param {number} bins @param {number} scaleFloor
+ * @param {number|number[]} height @param {number} bins @param {number} scaleFloor
  * @returns {number|null}
  */
 function autofit(build, height, bins, scaleFloor) {
@@ -1238,7 +1345,12 @@ function autofit(build, height, bins, scaleFloor) {
 
   const atoms = build(1);
   const natural = atoms.reduce((sum, a, i) => sum + a.height + (i ? a.gapBefore.natural : 0), 0);
-  const guess = clamp(Math.sqrt((height * bins) / Math.max(1, natural)));
+  // The starting guess needs total room rather than one column's height, which
+  // with a corner tab are no longer the same number.
+  const room = Array.isArray(height)
+    ? height.reduce((a, b) => a + b, 0)
+    : height * bins;
+  const guess = clamp(Math.sqrt(room / Math.max(1, natural)));
 
   let lo = scaleFloor;
   let hi = AUTO_SCALE_MAX;

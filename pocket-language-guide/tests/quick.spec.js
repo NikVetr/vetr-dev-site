@@ -54,8 +54,15 @@ test.describe('the quick export page', () => {
     // Scoped to the resolution control: there is a "Phone screen" card size too, and
     // an unscoped name match found both.
     await page.locator('#dpi-control').getByRole('radio', { name: 'Screen' }).click();
-    const png = page.waitForEvent('download', { timeout: 120_000 });
+    // A multi-page PNG export does not download: this sheet is eight faces, and eight
+    // files used to arrive as one zip, which is unopenable on a phone. They are laid
+    // out instead, one row per page with its own save, and the download happens when
+    // a page is actually asked for.
     await page.locator('#png').click();
+    const panel = page.locator('#saved-images');
+    await expect(panel).toBeVisible({ timeout: 120_000 });
+    const png = page.waitForEvent('download', { timeout: 120_000 });
+    await panel.locator('.saved-page').first().getByRole('button').click();
     expect((await png).suggestedFilename()).toContain('150dpi');
 
     await expect(page.locator('#to-studio')).toHaveAttribute(

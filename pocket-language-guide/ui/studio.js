@@ -589,7 +589,8 @@ async function main() {
       icons,
       name: finish.mode ? `${name()}-${finish.mode === 'fold' ? 'fold' : 'cards'}` : name(),
       stacks: stacksFor(ctx.corpus, spec.target, spec.source, spec.typeface, isElven(spec)),
-      showInline: (/** @type {any[]} */ files) => showSavedImages($('saved-images'), files),
+      present: (/** @type {any[]} */ files, /** @type {string} */ pages) =>
+        showSavedImages($('saved-images'), files, pages),
     };
   };
 

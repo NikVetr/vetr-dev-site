@@ -521,9 +521,16 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
 }
 .saved-images[hidden] { display: none; }
 .saved-images figcaption { font-size: var(--fs--1); color: var(--muted); }
-.saved-images img {
+/* One page per row: the picture, then its own save and open. Big enough to press
+   and hold, which is the route that needs no button at all on either mobile OS. */
+.saved-page { display: flex; flex-direction: column; gap: var(--space-1); }
+.saved-page img {
   display: block; width: 100%; height: auto;
   border: 1px solid var(--line); border-radius: var(--radius-sm); background: #fff;
+}
+.saved-page .row { align-items: center; gap: var(--space-1); }
+.saved-page-label {
+  font-size: var(--fs--1); color: var(--muted); margin-inline-end: auto;
 }
 
 /* The applied-fit notice. Warm rather than red: something was changed *for* the
@@ -626,6 +633,13 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
      only exists to answer `100cqh`, and the rule below asks the viewport instead,
      so here it is not needed at all. */
   .face-fit { block-size: auto; container-type: normal; }
+  /* The strip is eight thumbnails in a row that may not shrink, so it scrolls
+     sideways instead of squeezing. `flex: 0 1 8rem` let them compress to fit the
+     width: eight across 408pt came out 35x25pt each, too small to tell one face
+     from another and too small to hit. Fixed at 4.5rem they overflow and the strip
+     scrolls, which is what a filmstrip should do on a phone. */
+  .face-strip { overflow-x: auto; overscroll-behavior-x: contain; }
+  .face-strip .face { flex: 0 0 4.5rem; max-inline-size: 4.5rem; }
   .face.focused {
     inline-size: min(100%, calc(58svh * var(--face-aspect, 1.4)));
     max-block-size: 58svh;

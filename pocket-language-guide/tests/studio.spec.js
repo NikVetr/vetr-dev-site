@@ -419,7 +419,13 @@ test('the clock band survives a custom phone size', async ({ page }) => {
 
   // And through a custom size, which is what the flag on the geometry buys over
   // asking which preset the numbers still match.
-  await page.locator('.panel-field', { hasText: 'Card' })
+  //
+  // Scoped by the field's own title rather than by `hasText`, which matches any
+  // descendant text: the phone ladder now prints the models each preset covers, and
+  // the generic card's roll calls it "a plain 2.5x5.5in card", so `hasText: 'Card'`
+  // found two fields and both have a Custom segment.
+  await page.locator('.panel-field')
+    .filter({ has: page.locator('.panel-field-title', { hasText: /^Card$/ }) })
     .getByRole('radio', { name: 'Custom' }).click();
   await expect(clock).toBeVisible();
 });
@@ -593,11 +599,24 @@ test('choosing a phone reveals the models, with their aspect ratios', async ({ p
   await expect(pixel).toBeVisible();
   await expect(pixel).toHaveAttribute('title', /2\.22:1/);
 
-  // And picking one changes the sheet's shape. The face div carries the page's own
+  // **Which phones a shape covers, written out under the ladder.** A 16 Plus is the
+  // same 19.5:9 as a 16 -- which is why it fits -- and a caption reading "iPhone
+  // 15/16" was no way to find that out. The roll used to be in the segment's
+  // `title`, which on a phone is nowhere at all.
+  await expect(field).toContainText('Any phone');
+  await field.getByRole('radio', { name: 'iPhone Plus' }).click();
+  await expect(field).toContainText('16 Plus');
+
+  // And a named model arrives with the clock band already set, which is the whole
+  // reason a wallpaper preset knows which phone it is for.
+  const clock = page.locator('.panel-field', { hasText: 'Keep clear for the clock' });
+  await expect(clock.getByRole('radio', { name: 'iPhone', exact: true })).toBeChecked();
+
+  // Picking one changes the sheet's shape. The face div carries the page's own
   // aspect, so that is the thing to watch.
   const aspect = () => page.locator('.face.focused')
     .evaluate((el) => Number(getComputedStyle(el).getPropertyValue('--face-aspect')));
-  await expect.poll(aspect, { timeout: 120_000 }).toBeCloseTo(180 / 396, 2);
+  await expect.poll(aspect, { timeout: 120_000 }).toBeCloseTo(196 / 425, 2);
   await field.getByRole('radio', { name: 'iPhone SE' }).click();
   await expect.poll(aspect, { timeout: 120_000 }).toBeCloseTo(1 / 1.778, 2);
 });

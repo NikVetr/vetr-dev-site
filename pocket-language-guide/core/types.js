@@ -117,7 +117,7 @@
  * side and a folio on the other -- and a folio belongs in a corner. `custom` takes
  * `text`; the rest are derived, so they stay right when the pair or the region
  * changes.
- * @typedef {'none'|'page'|'pair'|'region'|'legend'|'custom'} HeadSlot
+ * @typedef {'none'|'page'|'pair'|'region'|'legend'|'theme'|'custom'} HeadSlot
  *
  * A line of furniture along one edge, in three positions.
  *
