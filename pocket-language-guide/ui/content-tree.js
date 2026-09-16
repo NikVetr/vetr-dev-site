@@ -8,7 +8,24 @@
 // would throw away scroll position and which sections are expanded, and -- because
 // a solve is debounced -- would swap the checkbox out from under a reader who is
 // working through a list of them.
+//
+// **The rows keep their checkboxes.** `ui/chips.js` turned the app's short-label
+// toggles into fade-and-desaturate buttons, and this list is where that stops.
+// Three reasons, in order of weight. A row here is not a short label: it is up to
+// six cells of text in two languages, and a saturation difference across a
+// paragraph is a far weaker cue than a tick beside it -- with eight hundred of them
+// the reader is reading, not scanning. The row already spends its clicks: one shows
+// the row on the card, a double-click or the pencil edits it, and the code below
+// explicitly stops the wrapping label from toggling the box, which is the very
+// gesture a chip is. And a row is the one toggle in the app that is genuinely
+// *unavailable* rather than merely off -- `item.box.disabled = !on` when its
+// section is off -- for which the native control already has the platform's own
+// look, a few rows under the chips of the picker at the head of the same panel.
+//
+// The section chips are where sections did become buttons, which is the half of the
+// list that is a short label being scanned.
 
+import { createSectionPicker } from './chips.js';
 import { number, t } from './i18n.js';
 import { nextIndex } from './keys.js';
 
@@ -78,6 +95,8 @@ function el(tag, attrs = {}, kids = []) {
 /**
  * @typedef {Object} TreeInput
  * @property {HTMLElement} root
+ * @property {HTMLElement} pickerRoot  where the phone's section grid goes -- the
+ *   head of the same panel, built from the same filtered lists this tree is
  * @property {Awaited<ReturnType<import('../core/sheet.js').createSheetContext>>['corpus']} corpus
  * @property {Record<string,Record<string,string>>} targetRows
  * @property {Record<string,Record<string,string>>} sourceRows
@@ -155,10 +174,14 @@ export function createTree(input) {
   const { root, corpus, theme, spec } = input;
 
   /** @type {{sectionId:string, box:HTMLInputElement, count:HTMLElement,
-   *          swatch:HTMLElement, menu:HTMLElement, icon:Element|null, role:string,
+   *          swatch:HTMLElement, menu:HTMLElement, icon:Element|null,
+   *          chipIcon:Element|null, role:string,
    *          items:{conceptId:string, box:HTMLInputElement,
    *                  cells:Record<string,HTMLElement>, row:HTMLElement}[]}[]} */
   const sections = [];
+  /** The same sections as the phone's grid needs them. @type
+   * {import('./chips.js').ChipSection[]} */
+  const pickerSections = [];
   /** @type {Node[]} */ const nodes = [];
   /** The one colour menu that is open, if any. One at a time, and one listener for
    * the whole tree rather than fifty. */
@@ -213,6 +236,10 @@ export function createTree(input) {
     // it, which is the one shape that reads as "this is the colour, press to change
     // it" without a label.
     const icon = section.icon ? sectionIcon(input.icons, section.icon, color) : null;
+    // A second copy for the section's chip in the picker. One node cannot be in two
+    // places, and the mark is what makes a grid of sixty names scannable -- and what
+    // the chip's desaturation acts on.
+    const chipIcon = section.icon ? sectionIcon(input.icons, section.icon, color) : null;
     const chip = el('span', { class: 'chip-fill', style: `background:${color}` });
     const swatch = el('button', {
       type: 'button', class: 'tree-color',
@@ -385,12 +412,22 @@ export function createTree(input) {
       swatch,
       menu,
       icon,
+      chipIcon,
       role: section.color_role,
+    });
+    pickerSections.push({
+      sectionId: section.section_id, title, icon: chipIcon, items: concepts,
     });
     nodes.push(el('li', {}, [el('details', { open: '' }, [summary, list])]));
   }
 
   root.replaceChildren(...nodes);
+  const updatePicker = createSectionPicker({
+    root: input.pickerRoot,
+    corpus,
+    sections: pickerSections,
+    onToggle: input.onToggle,
+  });
 
   return (/** @type {import('../core/types.js').SheetSpec} */ nextSpec,
     /** @type {import('../core/types.js').Block[]} */ blocks,
@@ -411,9 +448,11 @@ export function createTree(input) {
       const next = theme.colors.roles[role];
       const mark = section.swatch.firstElementChild;
       if (mark instanceof HTMLElement) mark.style.background = next;
-      // The icon takes the colour too, since it is the mark the sheet prints.
-      const drawn = section.icon;
-      if (drawn instanceof SVGElement) drawn.setAttribute('stroke', next);
+      // The icon takes the colour too, since it is the mark the sheet prints -- and
+      // so does the chip's copy of it in the picker.
+      for (const drawn of [section.icon, section.chipIcon]) {
+        if (drawn instanceof SVGElement) drawn.setAttribute('stroke', next);
+      }
       // And the menu's own mark, which is what says *which* of the five is in
       // effect. Without this the swatch changed colour and the menu went on
       // pointing at the role the section started with.
@@ -459,6 +498,7 @@ export function createTree(input) {
       }
       section.count.textContent = `${included}/${section.items.length}`;
     }
+    updatePicker(nextSpec, blocks);
   };
 }
 

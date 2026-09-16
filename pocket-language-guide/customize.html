@@ -100,6 +100,11 @@
         <span class="spacer"></span>
         <span class="muted" id="counts"></span>
       </div>
+      <!-- The phone's section grid, hidden by CSS above 700px: on a desktop the
+           tree below is already a resizable panel with every section's own tick in
+           front of you. `ui/chips.js` fills it, from the same filtered lists the
+           tree is built from. -->
+      <div class="section-picker" id="section-picker"></div>
       <div class="diff" id="diff" hidden></div>
       <div id="add-term"></div>
       <ul class="tree" id="tree"><li class="muted loading" data-i18n="studio.loadingTree">Loading the phrase list…</li></ul>

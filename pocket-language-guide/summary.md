@@ -192,6 +192,8 @@ pair is a runtime join on `concept_id`:
 | Path | Holds |
 |---|---|
 | `data/registry/` | languages (with the countries each is spoken in), scripts, sections, paper/printer presets, regions |
+| `data/registry/roles.csv` | the five colour roles' own names, for a super-section tab: Essentials, Money & food, Travel, Stay & time, Emergency |
+| `data/registry/redundancy.csv` | a sparse pair table of substitutes, `partial`/`duplicate`/`none`, with the pass count it was agreed by |
 | `data/concepts/<group>.csv` | the language-independent concept bank: importance, coverage cluster, slot count, template |
 | `data/lang/<bcp47>/<group>.csv` | one language's `text`, romanizations, IPA, confidence, provenance |
 | `data/respell/overrides/<target>__<source>__<accent>.csv` | pronunciations spelled for a reader of the *source* language |
@@ -304,6 +306,38 @@ IPA.
 with their current text and a proposed frame, and the eleven that need a translator
 rather than a noun swap.
 
+### Redundancy is a sparse pair table, not a group
+
+`cluster_id` on a concept was the whole of the redundancy model, and measurement
+retired it as sufficient. A pilot of 765 candidate pairs, rated three times
+independently, found **54 real relations of which 49 (90.7%) cross a cluster**, so a
+group model cannot express them: `room-problems.the-toilet-will-not-flush` and
+`toilets.the-toilet-will-not-flush` are the same sentence in two sections.
+
+Worse, where `cluster_id` *is* populated it is mostly wrong. 94.7% of the corpus's
+2,357 same-cluster pairs live in two clusters -- `numbers-money.currency` (65
+members) and `.misc` (18) -- which hold currency word/symbol pairs and the number
+line. Those are **complements**: `validate_data.py` separately requires a currency
+word and its symbol to travel together, while the old flat `CLUSTER_DECAY` was
+discounting exactly that pair. So the table both adds cross-group edges and retracts
+false within-group ones, which is why it carries `none` rows as well.
+
+The relation is **ternary** -- `none`/`partial`/`duplicate`, keep-factors 1/0.7/0.35
+-- and the reason is in the rating data rather than in taste: inter-rater agreement
+is Fleiss κ = 0.60 on *whether* a relation exists and near-unanimous on its *level*
+once existence is agreed, so finer strength grades would refine under a gate that is
+itself only moderately reliable. The scorer could not use more either, ranking by
+value-per-point among candidates whose importance steps by 0.02. At this sparsity
+the file is 4KB, where staying diffable and hand-reviewable beats packing it.
+
+**Absent means unrated, never independent.** Only `toilets` and `emergency-medical`
+are rated so far, plus the cross-section candidates touching them; everywhere else
+falls back to the cluster prior, and `numbers-money` is the known hazard where that
+prior is actively wrong. Raw judgements live in
+`data/registry/redundancy-ratings/passes.csv`, in a subdirectory `build_shell.mjs`
+deliberately does not scan, and `scripts/build_redundancy.py` rebuilds and checks
+the table from them.
+
 ## The solver
 
 `core/solve/` in dependency order:
@@ -313,6 +347,14 @@ rather than a noun swap.
   **fused** with the first rows it introduces, which makes a stranded heading
   structurally impossible rather than a penalty to tune. Measurement and per-row
   width solving happen here exactly once.
+- **`columnbreak.js`** takes a per-*bin* height, not one number. A corner tab costs
+  only the columns its span covers, so the columns it misses are taller by the band's
+  height and start higher; `bandColumns` and `columnGeometry` in `index.js` work out
+  which those are and hand the height back. This reversed a documented decision --
+  the engine used to say "a tab still costs its line" and charge every column -- which
+  made `left`, `right` and `center` indistinguishable from `across` and was reported
+  twice. Renderers needed nothing, because a `LayoutPlan` is absolute positions: only
+  the placement loop's column top changed.
 - **`rowsplit.js`** — column widths inside an item. Phrase rows solve per row so a
   long phrase can borrow width from a short gloss; reference tables solve one
   split for the whole group.
@@ -2475,6 +2517,108 @@ Four fixes came out of it, none of them in the data:
   the right edge of its own shaded box. Three translators wrote around it by inserting
   spaces into their prose by hand before anyone found the cause. Section titles had
   the same bug for the same reason.
+
+## The furniture band, and telling a stack of cards apart
+
+A printed card in a stack is identified by the colour showing past the card in front
+of it, which is what the header/footer band's `fill` is for. Three properties, on
+deliberately separate axes:
+
+- **`span`** — `full`/`left`/`center`/`right`: where the band's *content* sits, along
+  the width. It is also what decides which columns pay for the band's height.
+- **`fillReach`** — `band`/`corner`/`edge`: how far the band's *colour* goes, into
+  the page's own margin. `band` is the strip with paper above it; `corner` runs it on
+  to the page edge, flush on two sides; `edge` adds a rail down the outer margin for
+  the whole height of the face. Reach deliberately does **not** feed `bandColumns`,
+  because a bigger mark is not a bigger ask — all three produce byte-identical hit
+  boxes.
+- **`fill`** — a theme colour key, or `section` for the face's own dominant colour
+  role by placed height.
+
+A literal full-column stripe was built and refused: a saturated block the width of a
+column puts that column's vocabulary in black on saturated colour, and since the row
+shade is opaque it reads as a broken venetian blind. The colour goes where there is
+no type instead. A mono sheet prints the tab in the ink, because `ink-mode.mono`
+promises in those words that section colours are gone, and a rail the height of the
+face cannot be the exception a chip was.
+
+The **`theme` slot** puts the face's super-section on that tab in bold white —
+Essentials, Money & food, Travel, Stay & time, Emergency, from
+`data/registry/roles.csv`. The five colour roles *are* the thematic grouping, so
+nothing new is grouped and there is no second taxonomy to keep in step; the label and
+a `fill: 'section'` colour come from one computed role and so cannot disagree. Three
+sections moved to make the themes hold — `pronouns-verbs`, `question-words` and
+`utility-templates` are basic language rather than a topic — which took the worst
+face from a label winning by two points to winning by nineteen. Two role
+*recolourings* that would have been tidier still were reverted: `golden.test.mjs`
+guards the reference sheet's group-to-colour mapping, on the grounds that changing it
+changes what the sheet means.
+
+## The phone
+
+The studio is three panels side by side on a desktop and stacked on a phone, and
+almost everything in this section exists because that stacking breaks an assumption
+the desktop layout made silently.
+
+**The focused face had no size at all.** `.face-fit` is a `container-type: size` and
+the focused face sizes itself with `min(100%, calc(100cqh * aspect))`; the stacked
+layout takes the viewport height off the body, so every `flex: 1` in the chain
+resolved to 0 and the face came out 2x2 with a 0x0 SVG inside a 56pt sliver. It is
+sized against the viewport here instead. `container-type: size` also had to go,
+because it implies `contain: size` -- the element is laid out as though it had no
+contents, which with an auto height is zero.
+
+**Editing happens over the card.** Tapping a row scrolls the content list to it,
+which is right when both panes are in front of you and wrong when the list is a
+screen and a half below: `ui/item-popup.js` offers the four decisions the list
+offers for a row -- this row, its section, that section's colour, its text -- and
+keeps "show in list" as the way to what it does not do. The editor inside it is the
+tree's own `itemEditForm`, extracted and shared rather than copied, so an edit made
+from the card lands in the same `edits.overrides` layer the CSV import writes. It is
+anchored to the row rather than docked, because which row you are editing is the one
+thing a docked sheet cannot tell you, and it closes on a re-solve because the hit box
+it is anchored to is about to be replaced.
+
+**Sections are chips, and picking one chooses its rows.** `ui/chips.js` is the
+toggle idiom -- a real `<input type="checkbox">` stretched transparently over its
+label, saturated when on and `saturate(0.12)` when off, keeping its solid border and
+fill so "off" never reads as "unavailable", which is a state the tree separately
+has. The section grid picks rows with the same greedy the balance button uses, via
+`substitutesOf()` from `weights.js` rather than a second scorer, against a budget in
+rows that defaults to what the card already carries -- so a chip tap gives a
+different card rather than a smaller one. On an unrated section the cluster prior is
+charged **once per cluster** rather than once per cluster-mate, and that detail is
+load-bearing: compounded, a 12-row budget produced a card counting "0 1 2 4 6 7 8 9",
+where charging once makes a cut take a prefix.
+
+The chips are deliberately not everywhere. The tree's ~780 item rows stay
+checkboxes, because a saturation shift across a paragraph of two languages is a
+weaker cue than a tick beside it; so do the quiz's interests, where each option
+carries a hint a phone cannot put in a tooltip, and onboarding is where clarity
+beats density.
+
+**The header is 73pt rather than 156**, sticky, so that was 83pt off every screen:
+brand, Export PDF and a `☰` disclosure, then the info line. Export PDF stays out of
+the menu because burying a primary action is a real cost. **Scroll boxes fade at the
+bottom and stop fading when they reach it** -- a 1pt sentinel watched by an
+`IntersectionObserver` rooted on the scroll box, asked of the last row rather than
+computed from heights, because the tree opens and closes underneath and a measured
+height would be wrong within a tap.
+
+**A multi-page PNG is laid out, not zipped.** Neither mobile OS unzips, and the
+phone-screen preset produces twenty-five images, so the archive was a file the reader
+could not open. One row per page with its own save and open, plus save-all and
+download-as-zip for the set. The share sheet alone was not enough:
+`navigator.share` needs transient user activation and rasterising twenty-five faces
+outlasts the activation from the export button, so it threw and dropped the reader
+back to the zip -- it has a button of its own now, so its click is its activation.
+
+**The lock screen is drawn over the space the card leaves for it.** Reserved space is
+invisible, so a phone preset looked like it had merely made the sheet smaller. The
+date, clock, widget tiles, corner controls and home indicator are drawn dashed and
+unfilled -- the sheet's own ink is solid, so an outline reads as a guide -- and they
+cannot reach an export because they are not in the `LayoutPlan` at all, but a DOM
+overlay the preview adds afterwards.
 
 ## Deliberately not built yet
 

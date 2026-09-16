@@ -259,6 +259,7 @@ async function main() {
       treeKey = nextTreeKey;
       updateTree = createTree({
         root: $('tree'),
+        pickerRoot: $('section-picker'),
         corpus: ctx.corpus,
         sectionTitles: built.sectionTitles,
         targetRows,

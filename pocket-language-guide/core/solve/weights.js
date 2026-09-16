@@ -51,8 +51,11 @@ const RELATION_KEEP = { none: 1, partial: 0.7, duplicate: 0.35 };
  * are in `numbers-money.currency` and `numbers-money.misc`, which hold the number
  * line and the currency word/symbol pairs, and those are complements. Rating
  * `numbers-money` is the single highest-value thing left to do here.
+ *
+ * Exported because `ui/chips.js` prices the same candidates against the same table
+ * and must not carry a second copy of this number.
  */
-const CLUSTER_KEEP = 0.55;
+export const CLUSTER_KEEP = 0.55;
 
 /** Ignore slivers: a column short by less than this is not worth disturbing. */
 const MIN_WORTH_FILLING_PT = 8;

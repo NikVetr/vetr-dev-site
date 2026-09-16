@@ -19,6 +19,7 @@
 // -- and is a different thing entirely. Separate module, separate `drill.*` message
 // namespace, separate button.
 
+import { chipToggle } from './chips.js';
 import { fieldsFor, fieldLabels } from './format-panel.js';
 import { nextIndex } from './keys.js';
 import { t } from './i18n.js';
@@ -506,30 +507,35 @@ export function openDrill({ blocks, corpus, spec }) {
        */
       function columnGroup(own, other, legend, hint) {
         /** @type {HTMLInputElement[]} */ const boxes = [];
+        // Chips rather than a column of checkboxes. Seven column names -- "Japanese",
+        // "Hepburn", "English" -- are exactly the short labels `ui/chips.js` is for,
+        // and the two lists were fourteen full-width rows above the fold in a dialog
+        // whose point is the question below them.
         const options = columns.map((field) => {
-          const box = /** @type {HTMLInputElement} */ (el('input', {
-            type: 'checkbox', value: field,
-          }));
-          box.checked = own.has(field);
-          box.addEventListener('change', () => {
-            if (box.checked) {
-              own.add(field);
-              other.delete(field);
-            } else {
-              own.delete(field);
-            }
-            refresh();
+          const chip = chipToggle({
+            label: labels[field].caption,
+            title: labels[field].title,
+            checked: own.has(field),
+            onChange: (on) => {
+              if (on) {
+                own.add(field);
+                other.delete(field);
+              } else {
+                own.delete(field);
+              }
+              refresh();
+            },
           });
-          boxes.push(box);
-          return el('label', { class: 'quiz-option', title: labels[field].title }, [
-            box, el('span', { text: labels[field].caption }),
-          ]);
+          // Which cell this is, for the specs that drive the dialog by column.
+          chip.box.value = field;
+          boxes.push(chip.box);
+          return chip.label;
         });
         return {
           node: el('fieldset', {}, [
             el('legend', { text: legend }),
             el('p', { class: 'small muted', text: hint, style: 'margin:0 0 .2em' }),
-            ...options,
+            el('div', { class: 'chip-grid' }, options),
           ]),
           sync: () => boxes.forEach((box, i) => { box.checked = own.has(columns[i]); }),
         };

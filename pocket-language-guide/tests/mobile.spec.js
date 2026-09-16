@@ -386,3 +386,199 @@ test('on a desktop a picked row still reveals itself in the list', async ({ page
   await expect(page.locator('.item-popup')).toHaveCount(0);
   await expect(page.locator('#tree .items li.lit, #tree details[open]').first()).toBeAttached();
 });
+
+test.describe('the section picker on a phone', () => {
+  test.use({ viewport: PHONE, hasTouch: true, isMobile: true });
+
+  /** The studio, solved, with the picker's chips built.
+   * @param {import('@playwright/test').Page} page */
+  const studio = async (page) => {
+    await page.goto('/customize.html?target=es&source=en');
+    await expect(page.locator('.face.focused svg')).toBeVisible();
+    await expect(page.locator('.section-chips .chip-toggle').first()).toBeVisible();
+  };
+
+  /** A section's chip, by name. "Directions" is a prefix of "Quick directions", so
+   * the accessible name is matched from its start rather than anywhere in it.
+   * @param {import('@playwright/test').Page} page @param {string} name */
+  const chip = (page, name) => page.locator('.section-chips')
+    .getByRole('checkbox', { name: new RegExp(`^${name.replace('+', '\\+')} `) });
+
+  /** A row's tick in the list below, which is where the picker's choices show.
+   * @param {import('@playwright/test').Page} page @param {string} id */
+  const item = (page, id) => page.locator(`#tree li[data-concept="${id}"] input[type="checkbox"]`);
+
+  /** How the chip is drawn, with the pointer parked off it -- `:hover` lifts the
+   * fade on purpose, which is the state a test must not measure.
+   * @param {import('@playwright/test').Page} page @param {import('@playwright/test').Locator} at */
+  const look = async (page, at) => {
+    await page.mouse.move(2, 2);
+    return at.evaluate((el) => {
+      const style = getComputedStyle(el);
+      return {
+        filter: style.filter,
+        opacity: Number(style.opacity),
+        borderStyle: style.borderStyle,
+        background: style.backgroundColor,
+        cursor: style.cursor,
+      };
+    });
+  };
+
+  test('a section is a button, saturated on and desaturated off', async ({ page }) => {
+    // Ticking three sections out of sixty down a stacked list is a minute of
+    // scrolling, which is the whole reason this grid exists -- and the reason a chip
+    // has to say which state it is in from across the panel rather than from a 13px
+    // tick. Whether it *looks* right is a question for a screenshot and was settled
+    // by one; this pins the two mechanisms that carry it and, more importantly, that
+    // "off" cannot be mistaken for "unavailable".
+    await studio(page);
+    const toilets = chip(page, 'Toilets');
+    // Still a real `<input type="checkbox">`. Everything below comes from CSS off
+    // `:checked`, so the space bar, the tab stop, the form semantics and "checkbox,
+    // checked" are the platform's rather than something re-implemented on a div.
+    await expect(toilets).toHaveAttribute('type', 'checkbox');
+    await expect(toilets).toBeChecked();
+    // The label the input is stretched over, which is the shape a reader sees.
+    const shape = toilets.locator('xpath=..');
+
+    const on = await look(page, shape);
+    await toilets.uncheck();
+    const off = await look(page, shape);
+
+    expect(on.filter).toBe('none');
+    expect(on.opacity).toBe(1);
+    expect(off.filter).toContain('saturate');
+    expect(off.opacity).toBeLessThan(1);
+    // And off is still legible and still obviously pressable: barely dimmed, with
+    // its full border and its full fill, because those are what say "press me".
+    expect(off.opacity).toBeGreaterThan(0.75);
+    expect(off.borderStyle).toBe('solid');
+    expect(off.background).not.toBe('rgba(0, 0, 0, 0)');
+    expect(off.cursor).toBe('pointer');
+    // "Off" and "unavailable" stay in different controls rather than in two shades
+    // of one: a chip is never unavailable, and the rows of a switched-off section --
+    // which genuinely are -- kept the native checkbox and the platform's own look
+    // for it, four pixels below in the same panel.
+    await expect(item(page, 'toilets.where-toilet')).toBeDisabled();
+    await expect(toilets).toBeEnabled();
+  });
+
+  test('the space bar still toggles it, because it is still a checkbox', async ({ page }) => {
+    await studio(page);
+    const toilets = chip(page, 'Toilets');
+    await toilets.focus();
+    await expect(toilets).toBeChecked();
+    await page.keyboard.press('Space');
+    await expect(toilets).not.toBeChecked();
+    await page.keyboard.press('Space');
+    await expect(toilets).toBeChecked();
+  });
+
+  test('switching a section on picks its rows by importance and redundancy', async ({ page }) => {
+    // The point of the thing: a lock-screen card wants three sections and thirty
+    // rows, not three sections and everything in them.
+    await studio(page);
+    await page.locator('#all-off').click();
+    // The chips are what `apply` reads, so they have to have caught up with "All
+    // off" before one of them is pressed -- otherwise the press turns the other
+    // fifty-eight back on.
+    await expect(page.locator('.section-chips input:checked')).toHaveCount(0);
+
+    const rows = page.locator('.picker-budget input[type="number"]');
+    await rows.fill('10');
+    await rows.press('Tab');
+    await chip(page, 'Toilets').check();
+
+    // Ten rows out of the twenty-five `toilets` could show, and the two it leaves
+    // behind are the second and third most important rows in the section:
+    //
+    //   `where-public-toilet` (0.90) shares `toilets.where-toilet`'s cluster, and
+    //   nothing has rated the pair, so it takes the cluster prior once.
+    //   `toilet-wc` (0.86) is rated `partial` against three rows that are already on
+    //   -- `where-toilet`, `where-public-toilet` and `may-i-use-the-toilet` -- and
+    //   rated pairs compound, so two of them leave it worth 0.42.
+    //
+    // `accessible-toilet`, at 0.68 and substituting for nothing on the card, goes on
+    // ahead of both. That inversion is the feature; plain importance cannot produce it.
+    await expect(item(page, 'toilets.where-toilet')).toBeChecked();
+    await expect(item(page, 'toilets.accessible-toilet')).toBeChecked();
+    await expect(item(page, 'toilets.where-public-toilet')).not.toBeChecked();
+    await expect(item(page, 'toilets.toilet-wc')).not.toBeChecked();
+    // Ten rows asked for, ten rows on the card.
+    await expect(page.locator('#tree .items input[type="checkbox"]:checked')).toHaveCount(10);
+  });
+
+  test('an unrated section does not lose its number line', async ({ page }) => {
+    // `numbers-money` is outside the redundancy pilot, so every pair in it falls
+    // back to the `cluster_id` prior -- and `numbers-money.misc` *is* the number
+    // line, a cluster of complements the prior is simply wrong about. Compounded
+    // once per cluster-mate it deletes counting: measured, a 12-row budget came out
+    // "0 1 2 4 6 7 8 9". Charged once per cluster, every remaining mate carries the
+    // same single factor, so their order is their importance order and a cut takes a
+    // prefix.
+    await studio(page);
+    await page.locator('#all-off').click();
+    await expect(page.locator('.section-chips input:checked')).toHaveCount(0);
+    const rows = page.locator('.picker-budget input[type="number"]');
+    await rows.fill('8');
+    await rows.press('Tab');
+    await chip(page, 'Numbers + money').check();
+
+    await expect(page.locator('#tree .items input[type="checkbox"]:checked')).toHaveCount(8);
+    const kept = await page.locator('#tree li[data-concept^="numbers-money."]').evaluateAll(
+      (all) => all
+        .filter((li) => /** @type {HTMLInputElement} */ (li.querySelector('input')).checked)
+        .map((li) => li.querySelector('.gloss')?.textContent),
+    );
+    // Zero through six with no holes, plus the currency word nothing on the card
+    // stands in for. Not "0 1 2 4 6 7 8 9".
+    expect(kept).toEqual(['0', '1', '2', '3', '4', '5', '6', 'euro']);
+  });
+
+  test('the budget starts at the size of the card, so a tap does not shrink it', async ({ page }) => {
+    await studio(page);
+    const rows = page.locator('.picker-budget input[type="number"]');
+    const before = Number(await rows.inputValue());
+    // Read off the card rather than from a round number somebody chose: a picker
+    // that cut a 600-row sheet to forty would be deleting content to answer a
+    // question about sections.
+    expect(before).toBeGreaterThan(100);
+
+    await chip(page, 'Toilets').uncheck();
+    await expect(item(page, 'toilets.where-toilet')).not.toBeChecked();
+    // One section fewer, and the rest of the card still on it.
+    await expect(item(page, 'social-basics.hello')).toBeChecked();
+    expect(await page.locator('#tree .items input[type="checkbox"]:checked').count())
+      .toBeGreaterThan(before - 100);
+    expect(Number(await rows.inputValue())).toBe(before);
+  });
+
+  test('the drill\'s column lists use the same chips', async ({ page }) => {
+    // Fourteen full-width checkbox rows above the fold, in a dialog whose point is
+    // the question underneath them.
+    await studio(page);
+    await page.locator('#header-more').click();
+    await page.locator('#header-menu #drill-open').click();
+    const drill = page.locator('dialog.drill');
+    await expect(drill).toBeVisible();
+    await expect(drill.locator('fieldset .chip-grid')).toHaveCount(2);
+    await expect(drill.locator('fieldset .chip-toggle').first()).toBeVisible();
+    // And a column is still shown or filled in, never both.
+    const asked = drill.locator('fieldset').nth(1);
+    await asked.locator('input[value="gloss"]').check();
+    await expect(drill.locator('fieldset').first().locator('input[value="gloss"]'))
+      .not.toBeChecked();
+  });
+});
+
+test('the section picker is a phone control only', async ({ page }) => {
+  // On a desktop the content panel is a resizable column with every section's own
+  // tick already in front of you, so a second way to say the same thing would only
+  // be a second thing to keep in step with the first.
+  await page.setViewportSize({ width: 1680, height: 1000 });
+  await page.goto('/customize.html?target=es&source=en');
+  await expect(page.locator('.face.focused svg')).toBeVisible();
+  await expect(page.locator('#section-picker')).toBeHidden();
+  await expect(page.locator('.tree summary input[type=checkbox]').first()).toBeVisible();
+});

@@ -17,6 +17,7 @@
 // editing is the one thing a bottom sheet cannot tell you. Clamped into the viewport
 // so a row in a corner does not open a panel half off the screen.
 
+import { chipToggle } from './chips.js';
 import { itemEditForm } from './content-tree.js';
 import { t } from './i18n.js';
 
@@ -98,19 +99,20 @@ export function openItemPopup(config) {
   close.textContent = '×';
   close.addEventListener('click', closeItemPopup);
 
-  /** A labelled checkbox. @param {string} label @param {boolean} on
+  /** A labelled toggle, as a chip. @param {string} label @param {boolean} on
    * @param {(value:boolean)=>void} set */
   const toggle = (label, on, set) => {
-    const box = document.createElement('input');
-    box.type = 'checkbox';
-    box.checked = on;
-    box.addEventListener('change', () => set(box.checked));
-    const wrap = document.createElement('label');
-    wrap.className = 'item-popup-toggle';
-    wrap.append(box, Object.assign(document.createElement('span'), { textContent: label }));
-    return wrap;
+    const chip = chipToggle({ label, checked: on, onChange: set, title: label });
+    chip.label.classList.add('item-popup-toggle');
+    return chip.label;
   };
 
+  // Chips rather than two checkbox rows, wrapping and so sharing one line whenever
+  // the section's name is short enough -- "Toilets" does, "Social + basics" does
+  // not. Not really a saving in English either way: it is here because this panel
+  // sits over the card at arm's length on a phone, and "is this row on the sheet"
+  // is the question in it a reader wants answered from a glance rather than from
+  // finding a 13px tick.
   const rows = document.createElement('div');
   rows.className = 'item-popup-rows';
   rows.append(
