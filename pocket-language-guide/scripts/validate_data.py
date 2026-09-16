@@ -16,6 +16,8 @@ from pathlib import Path
 
 from fontTools.ttLib import TTFont
 
+import build_redundancy
+
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 
@@ -645,12 +647,53 @@ def main():
                 errors.append(f"{rel}: the _frame has no {token}, so the "
                               "emergency note would print without it")
 
+    # **The redundancy table has to match the judgements it came from.**
+    # `registry/redundancy.csv` says which concepts substitute for which, and
+    # `core/solve/weights.js` discounts an item once for every substitute already on
+    # the card. It is aggregated from the independent rating passes in the file
+    # beside it, so a row edited here by hand is a judgement nobody made. Regenerate
+    # with `python3 scripts/build_redundancy.py`.
+    rel = "registry/redundancy-ratings/passes.csv"
+    pass_rows = load(rel)
+    unknown = {r["relation"] for r in pass_rows} - set(build_redundancy.RELATIONS)
+    if unknown:
+        errors.append(f"{rel}: {', '.join(sorted(unknown))} is not a relation")
+    else:
+        expected = build_redundancy.build_table(build_redundancy.load_concepts(),
+                                                build_redundancy.aggregate(pass_rows))
+        if [dict(r) for r in load("registry/redundancy.csv")] != expected:
+            errors.append("registry/redundancy.csv does not match "
+                          f"{rel} -- run `python3 scripts/build_redundancy.py`")
+
+    seen = set()
+    for n, row in enumerate(load("registry/redundancy.csv"), start=2):
+        where = f"registry/redundancy.csv:{n}"
+        for side in ("concept_a", "concept_b"):
+            if row[side] not in concepts:
+                errors.append(f"{where}: unknown concept {row[side]!r}")
+        # Symmetric, so each pair is stored once in id order. Both directions on
+        # disk would be two rows that could disagree.
+        if row["concept_a"] >= row["concept_b"]:
+            errors.append(f"{where}: {row['concept_a']!r} x {row['concept_b']!r} "
+                          "is not in id order")
+        if (row["concept_a"], row["concept_b"]) in seen:
+            errors.append(f"{where}: duplicate pair")
+        seen.add((row["concept_a"], row["concept_b"]))
+        if int(row["passes"] or 0) < 2:
+            errors.append(f"{where}: rated by {row['passes']} pass(es); one judge is "
+                          "one judge, so a relation needs at least two")
+        if int(row["agree"] or 0) > int(row["passes"] or 0):
+            errors.append(f"{where}: {row['agree']} of {row['passes']} passes agreed")
+
     reviewed = sum(1 for r in regions.values() if int(r["confidence"] or 0) >= MIN_SAFE_CONFIDENCE)
     if reviewed < len(regions):
         warnings.append(f"registry/regions.csv: {len(regions) - reviewed} of {len(regions)} "
                         "regions have unreviewed emergency numbers, which are withheld "
                         "from sheets until a fluent speaker confirms them")
 
+    rated_pairs = len({(r["concept_a"], r["concept_b"]) for r in pass_rows})
+    print(f"data/registry/redundancy.csv  {len(seen)} relations from {rated_pairs} "
+          f"rated pairs of {len(concepts) * (len(concepts) - 1) // 2}")
     print(f"data/coverage.json  " + ", ".join(
         f"{c}={n}" for c, n in coverage["languages"].items() if n))
 

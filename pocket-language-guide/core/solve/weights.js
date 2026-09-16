@@ -2,9 +2,16 @@
 //
 // Two things make an item worth its space: how important it is on its own, and how
 // much it adds to what is already there. A sheet with "Hello" on it gains little
-// from "Hello (polite)" -- they answer the same need -- so value decays with each
-// item already chosen from the same coverage cluster. That is the whole point of
-// cluster_id in the corpus.
+// from "Hello (polite)" -- they answer the same need -- so an item's value is
+// discounted once by every substitute already on the card.
+//
+// Which items substitute for which comes from `data/registry/redundancy.csv`, a
+// sparse ternary table over concept pairs, with `cluster_id` standing in for the
+// pairs nobody has rated yet. The two say different things and the table is the
+// more precise of them: a cluster is flat and disjoint, so it cannot say that
+// `toilets.water-sign`'s two rows ("drinking water" / "not for drinking") are
+// opposites rather than substitutes, and it cannot say that
+// `room-problems.the-toilet-will-not-flush` is word for word the row in `toilets`.
 //
 // Nothing is applied here. The result is a reviewable diff: the solver is guessing
 // at what a traveller wants, and it should have to ask.
@@ -13,8 +20,39 @@ import { appliesTo } from '../pack.js';
 import { buildAtoms } from './atoms.js';
 import { breakColumns } from './columnbreak.js';
 
-/** Value of the k-th item taken from one cluster, relative to the first. */
-const CLUSTER_DECAY = 0.55;
+/**
+ * How much of an item's value survives one rated substitute already being in.
+ *
+ * Ternary because that is the resolution three independent passes over the pilot
+ * actually support. **The noisy judgement is whether a relation exists at all**: of
+ * the 90 pairs any judge called related, only 25 were called related by all three
+ * (Fleiss kappa 0.60 on that binary call). The *level* is the reliable part -- of
+ * the 27 pairs all three agreed were related, 25 agreed which of the two levels it
+ * was. A finer scale would be subdividing under a gate that is itself only
+ * moderately reliable.
+ *
+ * It is also all the greedy can use: it ranks by value per point among candidates
+ * whose `importance` steps by about 0.02, so "full value / a haircut / barely worth
+ * the row" is the distinction that moves a decision, and a fifth of a level is not.
+ * The same numbers are why `partial` is a 30% cut and not a deletion -- a relation
+ * two judges of three could see should lower a row, not remove it.
+ */
+const RELATION_KEEP = { none: 1, partial: 0.7, duplicate: 0.35 };
+
+/**
+ * The same figure for a pair inside one `cluster_id` that nothing has rated: the
+ * flat decay the table is refining, kept as the prior so that unrated sections
+ * behave exactly as they did before the table existed.
+ *
+ * It is a prior and not a measurement, and the pilot suggests a pessimistic one:
+ * five of the six rated same-cluster pairs came back `partial` (0.7) rather than
+ * anything harsher, and the sixth -- "drinking water" / "not for drinking" -- is not
+ * a relation at all. Corpus-wide it is worse than that: 94% of same-cluster pairs
+ * are in `numbers-money.currency` and `numbers-money.misc`, which hold the number
+ * line and the currency word/symbol pairs, and those are complements. Rating
+ * `numbers-money` is the single highest-value thing left to do here.
+ */
+const CLUSTER_KEEP = 0.55;
 
 /** Ignore slivers: a column short by less than this is not worth disturbing. */
 const MIN_WORTH_FILLING_PT = 8;
@@ -50,19 +88,6 @@ export function proposeBalance(input) {
   // How much room there is to play with: slack the glue could not absorb, which is
   // exactly the whitespace a reader would notice.
   const slack = plan.looseness.reduce((a, b) => a + b, 0);
-
-  /** How many items from each cluster are already in. */
-  /** @type {Record<string,number>} */ const clusterUse = {};
-  for (const id of included) {
-    const cluster = corpus.concepts[id]?.cluster_id;
-    if (cluster) clusterUse[cluster] = (clusterUse[cluster] ?? 0) + 1;
-  }
-
-  /** @param {Record<string,string>} concept */
-  const valueOf = (concept) => {
-    const used = clusterUse[concept.cluster_id] ?? 0;
-    return Number(concept.importance) * CLUSTER_DECAY ** used;
-  };
 
   if (slack < MIN_WORTH_FILLING_PT) {
     return {
@@ -112,39 +137,61 @@ export function proposeBalance(input) {
   // person would defend -- most useful thing that fits, then the next.
   //
   // **Re-picked every round rather than sorted once.** The objective is submodular:
-  // a cluster's second item is worth `CLUSTER_DECAY` of its first, so taking one
-  // item changes what its siblings are worth, and opening a section changes what
-  // everything in that section *costs*. Sorting once and re-pricing while walking
-  // the fixed order got the skipping right and the ordering wrong -- a sibling whose
-  // value had just been cut kept its original rank, so it could still be taken ahead
-  // of an equally cheap item from a cluster nothing had been taken from, which is
-  // the redundancy this scorer exists to avoid. Re-selecting the best each round is
-  // the textbook greedy for a monotone submodular objective under a knapsack
-  // constraint, and it is what earns the (1 - 1/e) guarantee that makes searching
-  // the subsets unnecessary.
+  // an item's value is multiplied by a keep-factor below 1 for every substitute
+  // already in, so taking one item changes what its substitutes are worth, and
+  // opening a section changes what everything in that section *costs*. (A product
+  // of factors in (0, 1] over a growing set is non-increasing, which is exactly the
+  // diminishing-returns property the bound needs; the old flat
+  // `0.55 ** clusterCount` was the special case where every factor was equal.)
+  //
+  // Sorting once and re-pricing while walking the fixed order got the skipping
+  // right and the ordering wrong -- a sibling whose value had just been cut kept its
+  // original rank, so it could still be taken ahead of an equally cheap item nothing
+  // substitutes for, which is the redundancy this scorer exists to avoid. Re-selecting
+  // the best each round is the textbook greedy for a monotone submodular objective
+  // under a knapsack constraint, and it is what earns the (1 - 1/e) guarantee that
+  // makes searching the subsets unnecessary.
   //
   // O(n) per round over a few dozen rounds, which is nothing next to one measure
   // pass -- the costs are already in hand before this starts.
   const pool = candidates
-    .map((c) => ({ concept: c, cost: height.get(c.concept_id) ?? Infinity }))
+    .map((c) => ({
+      concept: c,
+      cost: height.get(c.concept_id) ?? Infinity,
+      substitutes: substitutesOf(corpus, c),
+    }))
     .filter((c) => Number.isFinite(c.cost) && c.cost > 0);
 
   /** @type {import('../types.js').DiffEntry[]} */ const adds = [];
   let budget = slack;
-  /** @type {Record<string,number>} */ const takenFromCluster = { ...clusterUse };
+  /** What the card would carry: what it has now, plus what this pass has taken. */
+  const onCard = new Set(included);
   /** Sections this pass has already paid a heading for. */
   const opened = new Set(liveSections);
 
-  /** What an item is worth and costs *now*, given what this pass has taken. */
-  const priceNow = (/** @type {{concept:any, cost:number}} */ item) => {
+  /**
+   * What an item is worth and costs *now*, given what this pass has taken.
+   * @param {{concept:any, cost:number, substitutes:Map<string,number>}} item
+   */
+  const priceNow = (item) => {
     const section = item.concept.section_id;
     // Bringing back a hidden section costs its heading as well as the row, and only
     // for the first item taken from it. Charging it keeps the estimate honest: a
     // proposal that promised to fill 12pt and actually filled 22 would overflow the
     // sheet the reader was told it would tidy.
     const overhead = opened.has(section) ? 0 : (headingHeight.get(section) ?? 0);
-    const taken = takenFromCluster[item.concept.cluster_id] ?? 0;
-    const value = Number(item.concept.importance) * CLUSTER_DECAY ** taken;
+    let keep = 1;
+    let taken = 0;
+    // `factor === 1` is a pair the raters looked at and called independent. It is in
+    // the map to shadow the cluster it shares, not to be counted: reporting "1
+    // similar item already in" for a row whose value was not touched would be
+    // telling the reader the opposite of what the table says.
+    for (const [other, factor] of item.substitutes) {
+      if (factor === 1 || !onCard.has(other)) continue;
+      keep *= factor;
+      taken += 1;
+    }
+    const value = Number(item.concept.importance) * keep;
     return { cost: item.cost + overhead, overhead, taken, value };
   };
 
@@ -163,7 +210,7 @@ export function proposeBalance(input) {
     left.delete(item);
     const section = item.concept.section_id;
     budget -= priced.cost;
-    takenFromCluster[item.concept.cluster_id] = priced.taken + 1;
+    onCard.add(item.concept.concept_id);
     opened.add(section);
     adds.push({
       conceptId: item.concept.concept_id,
@@ -208,6 +255,31 @@ export function proposeBalance(input) {
         + 'One fewer face, or a larger type size, would take up the space instead.'
       : `${slack.toFixed(0)}pt of whitespace, but nothing left is worth the space.`,
   };
+}
+
+/**
+ * Everything that would make this concept worth less, and how much of its value
+ * each one leaves. Sparse by construction -- most concepts substitute for nothing
+ * at all, so most of these maps are empty and the loop that reads them is free.
+ *
+ * A rated pair wins over the cluster it may also share, in both directions: a
+ * cluster-mate the raters called `none` keeps its full value, and a pair in two
+ * different clusters that the raters called `duplicate` is discounted even though
+ * `cluster_id` has no way to say so.
+ * @param {BalanceInput['corpus']} corpus
+ * @param {Record<string,string>} concept
+ * @returns {Map<string,number>}
+ */
+export function substitutesOf(corpus, concept) {
+  /** @type {Map<string,number>} */ const out = new Map();
+  const rated = corpus.redundancy[concept.concept_id] ?? {};
+  for (const [other, relation] of Object.entries(rated)) {
+    out.set(other, RELATION_KEEP[/** @type {keyof typeof RELATION_KEEP} */ (relation)]);
+  }
+  for (const other of corpus.conceptsByCluster[concept.cluster_id] ?? []) {
+    if (other !== concept.concept_id && !out.has(other)) out.set(other, CLUSTER_KEEP);
+  }
+  return out;
 }
 
 /**

@@ -16,6 +16,28 @@ function index(rows, key) {
   return out;
 }
 
+/** The three levels `data/registry/redundancy.csv` is allowed to record. */
+const RELATIONS = new Set(['none', 'partial', 'duplicate']);
+
+/**
+ * `concept_id -> concept_id -> relation`, both ways round. Redundancy is symmetric
+ * -- which of two substitutes the card should keep is already settled by
+ * `importance` -- so the file stores each pair once, in id order.
+ * @param {Record<string,string>[]} rows
+ */
+function redundancyTable(rows) {
+  /** @type {Record<string,Record<string,string>>} */ const out = {};
+  for (const row of rows) {
+    if (!RELATIONS.has(row.relation)) {
+      throw new Error(`redundancy.csv: ${row.concept_a} x ${row.concept_b} `
+        + `has unknown relation "${row.relation}"`);
+    }
+    (out[row.concept_a] ??= {})[row.concept_b] = row.relation;
+    (out[row.concept_b] ??= {})[row.concept_a] = row.relation;
+  }
+  return out;
+}
+
 /**
  * Registries plus the language-independent concept bank.
  * @param {LoadText} loadText
@@ -80,6 +102,17 @@ export async function loadCorpus(loadText) {
     rows.sort((a, b) => Number(a.rank) - Number(b.rank));
     conceptsByGroup[group] = rows;
   }
+  const allConcepts = Object.values(conceptsByGroup).flat();
+
+  // Which concepts stand in for which. `cluster_id` is the flat version of this:
+  // one disjoint group per concept, so it cannot say that two members of a cluster
+  // are opposites ("drinking water" / "not for drinking") or that the same sentence
+  // is filed under two sections. This table is the *delta* from it -- only the
+  // pairs a rated judgement puts somewhere `cluster_id` alone would not -- so
+  // `solve/weights.js` reads the two together. See scripts/build_redundancy.py.
+  const redundancy = redundancyTable(await read('data/registry/redundancy.csv'));
+  /** @type {Record<string,string[]>} */ const conceptsByCluster = {};
+  for (const c of allConcepts) (conceptsByCluster[c.cluster_id] ??= []).push(c.concept_id);
 
   return {
     scripts,
@@ -96,7 +129,9 @@ export async function loadCorpus(loadText) {
     roleTitles,
     groups,
     conceptsByGroup,
-    concepts: index(Object.values(conceptsByGroup).flat(), 'concept_id'),
+    concepts: index(allConcepts, 'concept_id'),
+    redundancy,
+    conceptsByCluster,
   };
 }
 
