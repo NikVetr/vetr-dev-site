@@ -14,6 +14,7 @@ import {
   faceSvgs, exportPdf, exportPng, exportSvg, loadIcons,
   showSavedImages, reportExportError,
 } from './export.js';
+import { lockScreenPreview } from './preview.js';
 import {
   typefaceGlyph, inkGlyph, dpiGlyph, paddingGlyph, PADDING_CHOICES, customGlyph,
   priorityOptions, segmented, numericChoice, panelField,
@@ -349,6 +350,11 @@ async function main() {
         holder.className = 'face';
         holder.setAttribute('aria-label', t('preview.faceOf', { n: i + 1, total: svgs.length }));
         holder.innerHTML = svg;
+        // What is going to sit on top of a lock screen, where the card reserves room
+        // for it. A DOM overlay rather than part of the plan, so it cannot reach an
+        // export.
+        const lock = lockScreenPreview(plan);
+        if (lock) holder.prepend(lock);
         container.append(holder);
       }
     }

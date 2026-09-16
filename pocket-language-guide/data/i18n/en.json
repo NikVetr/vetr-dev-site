@@ -287,6 +287,8 @@
   "preview.duplexNote": "Each card with its own back laid over it in red. If the red words belong on the back of the black ones, the flip setting matches your printer. If they are the same column twice, switch it.",
   "preview.faceOf": "Face {n} of {total}",
   "preview.faces": "Faces",
+  "preview.lockDate": "Monday 15 September",
+  "preview.lockTime": "9:41",
   "preview.rowsOnFace": "Rows on this face",
   "preview.showInList": "Show in the content list",
   "quick.autofit": "This did not fit, so we changed one thing to make it: {fix}.",

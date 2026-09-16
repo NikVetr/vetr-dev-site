@@ -65,7 +65,12 @@ export function renderFaces(input) {
   // -- which is positioned against the face -- offset from the ink it annotates.
   const fit = document.createElement('div');
   fit.className = 'face-fit';
-  fit.append(faceNode(input, svgs[focused], focused, true));
+  const face = faceNode(input, svgs[focused], focused, true);
+  // Over the card, under the hit boxes: it is a guide, so it must not take a tap
+  // meant for a row. `pointer-events: none` on the overlay does the rest.
+  const lock = lockScreenPreview(input.plan);
+  if (lock) face.prepend(lock);
+  fit.append(face);
   root.append(fit);
 
   if (svgs.length > 1) {
@@ -96,6 +101,112 @@ export function renderFaces(input) {
     root.append(strip);
   }
   refocus(root, resume);
+}
+
+/**
+ * The lock screen's own furniture, drawn over the reserved bands — **preview only**.
+ *
+ * A phone preset reserves a strip at the top and bottom so no word on the card ends
+ * up under the clock or the buttons. Reserved space is invisible, though: the
+ * preview showed a card with a wide empty margin and nothing to say why, so the
+ * setting looked like it had simply made the sheet smaller. This draws what is going
+ * to be there.
+ *
+ * Everything is dashed and unfilled, which is the whole of how it says "not yours":
+ * the sheet's own ink is solid, so an outline in a dashed stroke reads as a guide at
+ * a glance and cannot be mistaken for something that will print. It never reaches
+ * the export because it is not in the `LayoutPlan` at all — the renderers draw the
+ * plan, and this is a DOM overlay the preview adds on top.
+ *
+ * In page units against the plan's own `pageW`/`pageH`, so it lines up with the
+ * reserved bands exactly rather than approximately.
+ * @param {import('../core/types.js').LayoutPlan} plan
+ * @returns {SVGSVGElement|null} null where nothing is reserved
+ */
+export function lockScreenPreview(plan) {
+  const { reserve } = plan.geometry;
+  const top = plan.pageH * (reserve?.top ?? 0);
+  const bottom = plan.pageH * (reserve?.bottom ?? 0);
+  if (top <= 0 && bottom <= 0) return null;
+
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('viewBox', `0 0 ${plan.pageW} ${plan.pageH}`);
+  svg.setAttribute('preserveAspectRatio', 'none');
+  svg.setAttribute('aria-hidden', 'true');
+  svg.setAttribute('focusable', 'false');
+  // Inline rather than a class: this is the only element that needs these three
+  // properties, and `style.css` is being edited elsewhere.
+  svg.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none';
+
+  const W = plan.pageW;
+  /** Dash length scales with the page so it reads the same on a 180pt phone and a
+   * 448pt tablet. @param {SVGElement} node */
+  const dashed = (node) => {
+    node.setAttribute('fill', 'none');
+    node.setAttribute('stroke', '#8a97a4');
+    node.setAttribute('stroke-width', String(W / 260));
+    node.setAttribute('stroke-dasharray', `${W / 90} ${W / 120}`);
+    svg.append(node);
+    return node;
+  };
+  /** @param {number} x @param {number} y @param {number} w @param {number} h @param {number} r */
+  const box = (x, y, w, h, r) => {
+    const rect = document.createElementNS(NS, 'rect');
+    rect.setAttribute('x', String(x)); rect.setAttribute('y', String(y));
+    rect.setAttribute('width', String(w)); rect.setAttribute('height', String(h));
+    rect.setAttribute('rx', String(r));
+    return dashed(rect);
+  };
+  /** Outlined glyphs, not filled ones: the dashes have to read *through* the
+   * numerals, and a filled 9:41 would be a solid mark on a sheet whose own marks are
+   * solid. @param {string} text @param {number} y @param {number} size */
+  const label = (text, y, size) => {
+    const node = document.createElementNS(NS, 'text');
+    node.setAttribute('x', String(W / 2));
+    node.setAttribute('y', String(y));
+    node.setAttribute('text-anchor', 'middle');
+    node.setAttribute('font-size', String(size));
+    node.setAttribute('font-family', 'system-ui, sans-serif');
+    node.setAttribute('font-weight', '600');
+    node.textContent = text;
+    return dashed(node);
+  };
+
+  if (top > 0) {
+    // The iOS shape, which is also near enough Android's: a small date line, the
+    // clock under it at several times the size, then a widget row. Sized off the
+    // band rather than off the page, so a bigger reserve draws a bigger clock and
+    // the preview keeps telling the truth about how much room it took.
+    const dateY = top * 0.26;
+    label(t('preview.lockDate'), dateY, Math.min(top * 0.13, W / 16));
+    label(t('preview.lockTime'), top * 0.66, Math.min(top * 0.42, W / 4));
+    // Two widget tiles on the row under the clock, which is where iOS puts them.
+    const tileH = top * 0.17;
+    const tileW = W * 0.3;
+    const tileY = top - tileH - top * 0.06;
+    box(W / 2 - tileW - W * 0.02, tileY, tileW, tileH, tileH * 0.28);
+    box(W / 2 + W * 0.02, tileY, tileW, tileH, tileH * 0.28);
+  }
+
+  if (bottom > 0) {
+    // The two corner controls and the home indicator. Round, because both platforms
+    // draw them round and a rounded square would read as another widget.
+    const y0 = plan.pageH - bottom;
+    const r = Math.min(bottom * 0.26, W * 0.07);
+    for (const cx of [W * 0.22, W * 0.78]) {
+      const circle = document.createElementNS(NS, 'circle');
+      circle.setAttribute('cx', String(cx));
+      circle.setAttribute('cy', String(y0 + bottom * 0.42));
+      circle.setAttribute('r', String(r));
+      dashed(circle);
+    }
+    const barW = W * 0.34;
+    const barH = Math.max(bottom * 0.05, W / 160);
+    box(W / 2 - barW / 2, plan.pageH - bottom * 0.28, barW, barH, barH / 2);
+  }
+
+  return svg;
 }
 
 /**

@@ -86,3 +86,42 @@ test('style controls localize in LTR and RTL interfaces and render their own des
   }
   expect(paths.size).toBe(3);
 });
+
+test('the lock screen furniture is drawn in the preview and never in an export', async ({ page }) => {
+  // Reserved space is invisible, so a phone preset showed a card with a wide empty
+  // margin and nothing to say why -- the setting looked like it had just made the
+  // sheet smaller. The clock, date, widgets and buttons that are going to be there
+  // are drawn over the reserved bands instead, dashed and unfilled, which is how
+  // they say "not yours": the sheet's own ink is solid.
+  const errors = [];
+  page.on('pageerror', (e) => errors.push(String(e)));
+  await page.goto('/customize.html?target=es&source=en');
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+  // No reserve on paper, so nothing to draw.
+  await expect(page.locator('.face.focused > svg[aria-hidden="true"]')).toHaveCount(0);
+
+  await page.getByRole('radio', { name: 'Phone screen' }).click();
+  await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+  const whichPhone = page.locator('.panel-field')
+    .filter({ has: page.locator('.panel-field-title', { hasText: /^Which phone$/ }) });
+  await whichPhone.getByRole('radio', { name: /iPhone 12-17/ }).click();
+
+  const lock = page.locator('.face.focused > svg[aria-hidden="true"]');
+  await expect(lock).toHaveCount(1, { timeout: 90_000 });
+  await expect(lock.locator('text')).toHaveCount(2);
+  // Dashed, which is the whole of how it reads as a guide rather than as ink.
+  const dashed = await lock.locator('[stroke-dasharray]').count();
+  expect(dashed).toBeGreaterThan(4);
+  // It must not eat a tap meant for a row underneath it.
+  expect(await lock.evaluate((el) => getComputedStyle(el).pointerEvents)).toBe('none');
+
+  // **And it is not in the plan**, so no renderer can draw it: the export path goes
+  // through `faceSvgs`, which reads the LayoutPlan, and this is a DOM overlay added
+  // on top of the face afterwards.
+  const inPlan = await page.evaluate(() => {
+    const svg = document.querySelector('.face.focused svg:not([aria-hidden])');
+    return (svg?.textContent ?? '').includes('9:41');
+  });
+  expect(inPlan).toBe(false);
+  expect(errors).toEqual([]);
+});
