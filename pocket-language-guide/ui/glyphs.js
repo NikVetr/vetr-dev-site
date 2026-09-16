@@ -1054,12 +1054,14 @@ export function redrawGlyphs(group, glyphs) {
  * screen's height, which is a whole section of the card. So the ratio is in the
  * label, because it is the fact that decides.
  *
- * **Which phones a shape covers is written out under the ladder.** It used to live
- * only in the segment's `title`, which on a phone -- the one device this control is
- * about -- is nowhere at all, because there is no hover. A reader with a 16 Plus
- * could not tell from a caption reading "iPhone 15/16" that their phone was in it,
- * and it is: same shape, bigger glass. So each preset carries a `models` roll and
- * the chosen one is shown as text.
+ * **Which phones a shape covers is in the caption.** It used to be only in the
+ * segment's `title`, which on a phone -- the one device this control is about -- is
+ * nowhere at all, because there is no hover: a reader with a 16 Plus could not tell
+ * from a caption reading "iPhone 15/16" that their phone was in it, and it is, being
+ * the same shape with bigger glass. Naming every family in the caption is what
+ * answers that. A `models` paragraph under the buttons was tried as well and
+ * removed -- it said the same thing a second time at ten times the length -- so the
+ * roll now serves only as the hover tooltip, where prose costs nothing.
  * @param {Object} config
  * @param {Record<string, any>} config.geometry
  * @param {import('../core/types.js').Geometry} config.value
@@ -1071,22 +1073,24 @@ export function phoneControl({ geometry, value, onChange }) {
     ([, g]) => g.pageW === at.pageW && g.pageH === at.pageH,
   )?.[0] ?? '';
 
-  const roll = document.createElement('p');
-  roll.className = 'small muted panel-note';
-  // Empty for a custom size, which matches no preset and so covers no named phone.
-  const describe = (/** @type {string} */ id) => { roll.textContent = id ? geometry[id].models : ''; };
-
   const group = segmented({
     label: t('format.phoneLong'),
     value: idOf(value),
-    // The name is `family · family · ratio`: the families are what the reader
+    // The name is `family · family · size, ratio`: the families are what the reader
     // recognises and the ratio is what actually differs, and 2.17:1 against 2.22:1 is
-    // not a difference the glyph can draw at 30px. Every family in the name reaches
-    // the caption -- the middle one used to be dropped on the floor -- and the ratio
-    // goes on its own line, rather than into a tooltip nobody opens.
+    // not a difference the glyph can draw at 30px. Every family reaches the caption
+    // -- the middle one used to be dropped on the floor.
+    //
+    // **The diagonal is dropped and the ratio kept.** "6.5in, 2.17:1" on the sub line
+    // was two facts where the control only turns on one: the presets are grouped by
+    // *shape*, and the inch figure is the diagonal each was sized from, which is an
+    // engineering note rather than something to choose between. It stays in `note`,
+    // which is where the sourcing record lives.
     options: models.map(([id, g]) => {
       const parts = g.name.split('·').map((/** @type {string} */ part) => part.trim());
-      const ratio = /:\d|column/.test(parts[parts.length - 1]) ? parts.pop() : '';
+      const tail = /:\d|column/.test(parts[parts.length - 1]) ? parts.pop() : '';
+      // `6.5in, 2.17:1` -> `2.17:1`; `1 column` has no ratio and keeps its own words.
+      const ratio = (tail.match(/[\d.]+:[\d.]+/) ?? [tail])[0];
       return {
         value: id,
         caption: parts.join(' · '),
@@ -1095,23 +1099,22 @@ export function phoneControl({ geometry, value, onChange }) {
         glyph: pageGlyph({ pageW: g.pageW, pageH: g.pageH, columns: g.columns }),
       };
     }),
-    onChange: (id) => {
-      describe(id);
-      onChange({ geometry: { ...geometry[id] } });
-    },
+    onChange: (id) => onChange({ geometry: { ...geometry[id] } }),
   });
-  describe(idOf(value));
 
+  // No roll of covered models under the ladder. It was added because the models were
+  // only in a `title`, unreachable on a touch device -- but the fix that actually
+  // answers "is my 16 Plus in this?" is naming the families in the caption, which the
+  // line above now does. A paragraph of prose under the buttons said it a second
+  // time and at ten times the length.
   const wrap = document.createElement('div');
-  wrap.append(group.group, roll);
+  wrap.append(group.group);
 
   return {
     group: wrap,
     /** @param {import('../core/types.js').Geometry} next */
     sync(next) {
-      const id = idOf(next);
-      group.select(id);
-      describe(id);
+      group.select(idOf(next));
     },
   };
 }
