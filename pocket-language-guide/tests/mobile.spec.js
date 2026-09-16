@@ -173,6 +173,209 @@ test.describe('editing a row on a phone', () => {
   });
 });
 
+test.describe('the studio\'s chrome on a phone', () => {
+  test.use({ viewport: PHONE, hasTouch: true, isMobile: true });
+
+  /** The studio, solved, with its phone chrome built. @param {import('@playwright/test').Page} page */
+  const studio = async (page) => {
+    await page.goto('/customize.html?target=es&source=en');
+    await expect(page.locator('.face.focused svg')).toBeVisible();
+    await expect(page.locator('.panel-toggle')).toHaveCount(2);
+  };
+
+  test('the header is one line of actions over one line of information', async ({ page }) => {
+    // It was four lines and 156pt tall -- brand, pair, a full-width banner and a row
+    // of four buttons -- on an 844pt phone, and sticky, so it cost that on every
+    // screen. And it was not aligned: the sheet page's `#status { order: -2 }` is a
+    // bare id selector in a `max-width: 700px` block, so it reached this header too
+    // and put the status line to the *left* of the brand on the first line.
+    await studio(page);
+    const header = await page.locator('.site-header').boundingBox();
+    expect(header.height).toBeLessThan(96);
+
+    const box = async (sel) => page.locator(sel).boundingBox();
+    const brand = await box('.brand');
+    const pdf = await box('#pdf');
+    const more = await box('#header-more');
+    const pair = await box('#pair');
+    const status = await box('#status');
+    // Line one: the brand, then the primary action and the disclosure, in that order.
+    expect(Math.round(pdf.y)).toBe(Math.round(brand.y + (brand.height - pdf.height) / 2));
+    expect(brand.x).toBeLessThan(pdf.x);
+    expect(pdf.x).toBeLessThan(more.x);
+    expect(more.x + more.width).toBeLessThanOrEqual(390);
+    // Line two: what the sheet is and how it came out, under the brand and level
+    // with each other rather than scattered up the first line.
+    expect(pair.y).toBeGreaterThan(brand.y + brand.height - 1);
+    expect(Math.round(pair.y)).toBe(Math.round(status.y));
+    expect(pair.x).toBeLessThan(status.x);
+    // Export PDF is the page's primary action and stays out of the menu; the rest
+    // are in it, and there is one of each rather than a visible copy and a hidden one.
+    await expect(page.locator('.site-header .container > #pdf')).toBeVisible();
+    for (const sel of ['#banner', '#drill-open', '#png', '.back-link']) {
+      await expect(page.locator(`#header-menu > ${sel}`)).toHaveCount(1);
+      await expect(page.locator(sel)).toHaveCount(1);
+    }
+    await expect(page.locator('#png')).toBeHidden();
+    const wide = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth);
+    expect(wide).toBe(false);
+  });
+
+  test('the menu is a disclosure, and closes the four ways it has to', async ({ page }) => {
+    await studio(page);
+    const more = page.locator('#header-more');
+    const menu = page.locator('#header-menu');
+    await expect(more).toHaveAttribute('aria-expanded', 'false');
+    await expect(menu).toBeHidden();
+
+    await more.click();
+    await expect(more).toHaveAttribute('aria-expanded', 'true');
+    await expect(menu).toBeVisible();
+    // Entirely on screen, which a panel hung off the right edge of a 390pt phone
+    // is not guaranteed to be.
+    const box = await menu.boundingBox();
+    expect(box.x).toBeGreaterThanOrEqual(0);
+    expect(box.x + box.width).toBeLessThanOrEqual(390);
+
+    // The button that opened it closes it again.
+    await more.click();
+    await expect(menu).toBeHidden();
+
+    // Escape, with focus handed back rather than left on something unrendered.
+    await more.click();
+    await page.locator('#png').focus();
+    await page.keyboard.press('Escape');
+    await expect(menu).toBeHidden();
+    expect(await page.evaluate(() => document.activeElement.id)).toBe('header-more');
+
+    // A press outside it.
+    await more.click();
+    await page.locator('#pair').click();
+    await expect(menu).toBeHidden();
+
+    // And choosing something: the quiz opens and the menu it was chosen from is gone.
+    await more.click();
+    await page.locator('#header-menu #quiz-open').click();
+    await expect(menu).toBeHidden();
+    await expect(page.locator('dialog.quiz')).toBeVisible();
+  });
+
+  test('each panel folds into its own bar, and opening one folds the other', async ({ page }) => {
+    await studio(page);
+    const bars = page.locator('.panel-toggle');
+    // The bar is the panel's own title, not a second heading above it.
+    await expect(page.locator('.panel-title > .panel-toggle')).toHaveCount(2);
+    await expect(bars.first()).toHaveText(/format/i);
+    await expect(bars.nth(1)).toHaveText(/content/i);
+    // Nothing is folded away from a reader who has not asked for it.
+    await expect(bars.first()).toHaveAttribute('aria-expanded', 'true');
+    await expect(page.locator('#format-body')).toBeVisible();
+    await expect(page.locator('#content-body')).toBeVisible();
+
+    await bars.nth(1).click();
+    await expect(bars.nth(1)).toHaveAttribute('aria-expanded', 'false');
+    await expect(page.locator('#content-body')).toBeHidden();
+    await expect(page.locator('#format-body')).toBeVisible();
+
+    // Opening one folds the other, which is what makes the bars worth having.
+    await bars.nth(1).click();
+    await expect(page.locator('#content-body')).toBeVisible();
+    await expect(page.locator('#format-body')).toBeHidden();
+
+    // Folded, a panel is exactly its bar -- and with both folded the card, both bars
+    // and the way into either of them are on the first screen, which is the whole
+    // point of the thing on a phone.
+    await bars.nth(1).click();
+    await page.evaluate(() => scrollTo(0, 0));
+    const last = page.locator('.studio > section').last();
+    const section = await last.boundingBox();
+    const bar = await last.locator('.panel-title').boundingBox();
+    // The bar and the 1px rule the panel already drew under itself, and nothing else.
+    expect(section.height).toBeLessThanOrEqual(bar.height + 1);
+    expect(section.y + section.height).toBeLessThan(PHONE.height);
+  });
+
+  test('a panel fades at its foot while there is more below the cut', async ({ page }) => {
+    // A scrolling box that ends where the viewport ends looks like a list that ends
+    // there. The fade says otherwise -- and has to stop saying it at the bottom,
+    // because a fade that cannot know where it is is a lie.
+    await studio(page);
+    const format = page.locator('.studio > section').first();
+    await expect(format).not.toHaveClass(/at-end/);
+    expect(await format.evaluate((s) => getComputedStyle(s).maskImage)).toContain('linear-gradient');
+
+    await format.evaluate((s) => { s.scrollTop = s.scrollHeight; });
+    await expect(format).toHaveClass(/at-end/);
+    expect(await format.evaluate((s) => getComputedStyle(s).maskImage)).toBe('none');
+
+    // And back: it is the panel's own last row that answers, not a height measured
+    // once, so scrolling away from the bottom brings the fade back.
+    await format.evaluate((s) => { s.scrollTop = 0; });
+    await expect(format).not.toHaveClass(/at-end/);
+  });
+
+  test('a folded list is opened by the things that put something in it', async ({ page }) => {
+    // "Show in list" on the card's row popup scrolls the content list to that row.
+    // With the list folded into its bar that would move nothing anyone can see.
+    await studio(page);
+    await page.locator('.panel-toggle').nth(1).click();
+    await expect(page.locator('#content-body')).toBeHidden();
+
+    // Back to the top first, and wait for the scroll event that takes us there to
+    // land: the row popup dismisses itself on a scroll, so a click dispatched in the
+    // same frame as one is undone by it. A finger never does this; Playwright's
+    // scroll-then-click does.
+    await page.evaluate(() => new Promise((done) => {
+      scrollTo(0, 0);
+      requestAnimationFrame(() => requestAnimationFrame(done));
+    }));
+    await page.locator('.face.focused .hit').nth(3).click();
+    await page.locator('.item-popup').getByRole('button', { name: /show in list/i }).click();
+    await expect(page.locator('#content-body')).toBeVisible();
+    await expect(page.locator('#tree .items li.lit, #tree details[open]').first()).toBeAttached();
+  });
+});
+
+test('the phone\'s chrome is built and taken down at the breakpoint', async ({ page }) => {
+  // Turning a phone to landscape crosses 700px, and what belongs at 844 wide is the
+  // desktop header -- in the order the desktop was built for, which is why the
+  // controls are put back against markers rather than re-stated in a second list.
+  await page.setViewportSize({ width: 844, height: 390 });
+  await page.goto('/customize.html?target=es&source=en');
+  await expect(page.locator('.face.focused svg')).toBeVisible();
+  const order = () => page.evaluate(() => [...document.querySelectorAll('.site-header .container > *')]
+    .map((el) => el.id || el.className.replace(/\s+/g, '.')).join(' '));
+  const laid = await order();
+  expect(laid).toContain('drill-open pdf png btn.ghost.back-link');
+  await expect(page.locator('.panel-toggle')).toHaveCount(0);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(page.locator('#header-menu > #png')).toBeAttached();
+  await expect(page.locator('.panel-toggle')).toHaveCount(2);
+
+  await page.setViewportSize({ width: 844, height: 390 });
+  await expect(page.locator('.site-header .container > #png')).toBeVisible();
+  await expect(page.locator('.panel-toggle')).toHaveCount(0);
+  expect(await order()).toBe(laid);
+});
+
+test('none of the phone\'s chrome is on a desktop', async ({ page }) => {
+  // The desktop studio is a viewport-height grid with all three panels in front of
+  // you: there is nothing to fold away and nothing to hide in a menu.
+  await page.setViewportSize({ width: 1680, height: 1000 });
+  await page.goto('/customize.html?target=es&source=en');
+  await expect(page.locator('.face.focused svg')).toBeVisible();
+  await expect(page.locator('.panel-toggle')).toHaveCount(0);
+  await expect(page.locator('#header-more')).toBeHidden();
+  await expect(page.locator('#header-menu')).toBeHidden();
+  for (const sel of ['#banner', '#drill-open', '#pdf', '#png', '.back-link']) {
+    await expect(page.locator(`.site-header .container > ${sel}`)).toBeVisible();
+  }
+  const panels = page.locator('.studio > section:nth-of-type(1), .studio > section:nth-of-type(3)');
+  expect(await panels.evaluateAll((all) => all.map((s) => getComputedStyle(s).maskImage)))
+    .toEqual(['none', 'none']);
+});
+
 test('on a desktop a picked row still reveals itself in the list', async ({ page }) => {
   // The popup is the phone's answer, not a replacement: with both panes in front of
   // you, scrolling the list to the row is the better one and stays.

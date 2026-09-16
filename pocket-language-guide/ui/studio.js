@@ -25,7 +25,7 @@ import { exportSheetCsv, importSheetCsv, loadEdits, saveEdits, clearEdits } from
 import { openQuiz, applyQuiz } from './quiz.js';
 import { openDrill } from './drill.js';
 import { attachHandles } from './handles.js';
-import { attachPanelResizers } from './panels.js';
+import { attachPanelResizers, attachPhoneChrome, revealPanel } from './panels.js';
 import { createAddTerm } from './add-term.js';
 import {
   warningText, applyStatic, languageName, loadUiLanguage, number, t,
@@ -174,7 +174,12 @@ async function main() {
 
   // --- banner and quiz ----------------------------------------------------
 
-  attachPanelResizers(/** @type {HTMLElement} */ (document.querySelector('.studio')));
+  const studio = /** @type {HTMLElement} */ (document.querySelector('.studio'));
+  attachPanelResizers(studio);
+  // The header's overflow menu and the panels' collapse bars, at the stacked width
+  // only. See `ui/panels.js` for why both are built rather than written in the
+  // markup: the markup is the desktop's, and this is taken down again above 700px.
+  attachPhoneChrome(studio);
 
   // **The banner does not hide any more, and the stored flag is cleared.** It lives
   // in the header rather than in a bar of its own, so it is one line among the
@@ -493,7 +498,12 @@ async function main() {
             saveEdits(spec.target, spec.source, edits);
             schedule();
           },
-          onReveal: (conceptId) => revealItem($('tree'), conceptId),
+          onReveal: (conceptId) => {
+            // The list may be folded into its bar on a phone, in which case
+            // scrolling it to the row would move nothing anyone can see.
+            revealPanel($('tree'));
+            revealItem($('tree'), conceptId);
+          },
         });
       },
       onHover: (id) => highlight($('face-area'), id),
@@ -669,8 +679,12 @@ async function main() {
       icons,
       name: finish.mode ? `${name()}-${finish.mode === 'fold' ? 'fold' : 'cards'}` : name(),
       stacks: stacksFor(ctx.corpus, spec.target, spec.source, spec.typeface, isElven(spec)),
-      present: (/** @type {any[]} */ files, /** @type {string} */ pages) =>
-        showSavedImages($('saved-images'), files, pages),
+      present: (/** @type {any[]} */ files, /** @type {string} */ pages) => {
+        showSavedImages($('saved-images'), files, pages);
+        // They land in the content panel, which on a phone the reader may have
+        // folded away -- and then the export would look like it had done nothing.
+        revealPanel($('saved-images'));
+      },
     };
   };
 

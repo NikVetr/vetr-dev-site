@@ -181,6 +181,12 @@ label { display: block; }
 /* A long endonym must not set the header's width. */
 .reader-picker select { min-width: 0; max-width: 100%; text-overflow: ellipsis; }
 
+/* The studio's hamburger and the panel it opens. Both are dead above 700px -- the
+   desktop header has room for every control at once -- and everything that gives
+   them a shape is in the phone block further down. `.header-menu` keeps this rule
+   at every width, so the `hidden` attribute is what closes it. */
+.header-more, .header-menu { display: none; }
+
 /* Out of flow and off the top until focused, so it costs no layout and never
    widens the page; z-index clears the sticky header. */
 .skip-link {
@@ -644,6 +650,131 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
     inline-size: min(100%, calc(58svh * var(--face-aspect, 1.4)));
     max-block-size: 58svh;
   }
+
+  /* --- the header ------------------------------------------------------- */
+
+  /* **It was four rows and 156px of a 844pt phone, and the header is sticky, so it
+     cost that on every screen.** Brand, pair, a full-width banner, and a row of
+     four buttons -- and not aligned either: the brand sat in the middle of the
+     first line with the status line to the left of it, because the sheet page's
+     `#status { order: -2 }` was a bare id selector in a `max-width: 700px` block
+     and reached this header too. (Scoped where it belongs, further down.)
+     Two rows now. The action line -- the brand, Export PDF, and a disclosure for
+     everything else -- then the pair and the status under it as the small info line.
+     Export PDF is out of the menu deliberately: it is what the page is for, and one
+     tap is the difference between a primary action and a hidden one.
+     `.studio-header` throughout rather than `.site-header`: the gallery's header is
+     a brand and a language picker and the sheet page's is a brand and two links, and
+     neither of them has the problem this block is here to solve. */
+  .studio-header { padding: var(--space-1) 0; }
+  .studio-header .container { gap: var(--space-1) var(--space-2); }
+  /* `order` rather than a different source order, so the desktop header keeps the
+     one it is built for. */
+  .studio-header .brand { order: 1; margin-inline-end: auto; }
+  .studio-header #pdf { order: 2; }
+  .header-more { order: 3; }
+  .header-break { order: 4; }
+  .studio-header #pair { order: 5; }
+  .studio-header #status { order: 6; }
+  .header-menu { order: 7; }
+  /* A full-width item of no height: whatever follows it starts a new line however
+     long the two labels happen to be in the reader's language, which packing them
+     by measured width would only get right in English. */
+  .header-break { flex: 0 0 100%; block-size: 0; }
+  /* Two facts about the sheet on one line, so they need a divider rather than just a
+     gap. Neutral, so it settles on the correct side of a right-to-left line. */
+  .studio-header #status::before { content: '·'; margin-inline-end: 0.4em; }
+  .studio-header .container > .spacer:not(.header-break) { display: none; }
+  /* Small enough that the brand, the primary action and the disclosure share one
+     line: the header's padding leaves 366px at 390, and these three want 322. */
+  .studio-header .container > button, .studio-header .container > .btn {
+    font-size: var(--fs--1); padding: 0.45em 0.7em;
+  }
+  .header-more {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0.4em 0.5em;
+  }
+  /* Three lines, drawn rather than set: ☰ is in few of the faces this app loads. */
+  .more-glyph {
+    inline-size: 1.15rem; block-size: 1.15rem;
+    fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round;
+  }
+  /* Against the header rather than the page, so it hangs off the bottom edge of the
+     bar it belongs to; `inset-inline-end` matches `.container-wide`'s padding, so its
+     edge lines up with the button that opened it. */
+  .header-menu:not([hidden]) {
+    position: absolute; top: 100%; inset-inline-end: var(--space-2); z-index: 25;
+    display: flex; flex-direction: column; align-items: stretch; gap: var(--space-1);
+    margin-block-start: var(--space-1); padding: var(--space-1);
+    min-inline-size: 10rem; max-inline-size: calc(100vw - var(--space-3));
+    /* The same scale as the buttons it was folded out of, which they lose by no
+       longer being the header's own children. */
+    font-size: var(--fs--1);
+    background: var(--paper); border: 1px solid var(--line);
+    border-radius: var(--radius); box-shadow: 0 6px 20px rgb(17 24 32 / 18%);
+  }
+  .header-menu > button, .header-menu > .btn {
+    justify-content: flex-start; padding: 0.5em 0.7em;
+  }
+  /* The banner is a bar of its own on a desktop; in the menu it is one item among
+     the rest, so it loses the rule that separated it from them. */
+  .header-menu > .banner {
+    border: 0; border-radius: var(--radius-sm); flex-wrap: wrap; gap: var(--space-1);
+  }
+
+  /* --- the two long panels ---------------------------------------------- */
+
+  /* Each of the two capped, scrolling panels gets its own title as a bar: it
+     collapses the panel to that bar, and expanding one folds the other away. Only
+     here -- on a desktop the three panels are a viewport-height grid and all of it
+     is in front of you at once, so there is nothing to fold. `ui/panels.js` builds
+     the buttons, and only at this width.
+     The padding moves from the panel to its body so the bar is full-bleed and a
+     collapsed panel is exactly one bar tall. */
+  .studio > section:has(> .panel-body) { padding: 0; }
+  .panel-body { padding: var(--space-2); }
+  .studio > section > .panel-title {
+    position: sticky; top: 0; z-index: 1; margin: 0;
+    padding: var(--space-1) var(--space-2);
+    background: var(--surface); border-block-end: 1px solid var(--line);
+  }
+  /* The section already carries the rule between panels, so a collapsed one must not
+     draw a second line 1px above it. */
+  .studio > section.collapsed > .panel-title { border-block-end: 0; }
+  /* The existing title, still the heading, with a real button inside it. The two
+     inherits are not decoration: the HTML rendering spec resets `text-transform` and
+     `letter-spacing` on form controls, so without them the bar read "Format" in the
+     panel's body face while every other panel title on the page read "FORMAT". */
+  .panel-toggle {
+    display: flex; align-items: center; inline-size: 100%;
+    background: none; border: 0; border-radius: 0; padding: 0;
+    color: inherit; text-align: start;
+    text-transform: inherit; letter-spacing: inherit;
+  }
+  .panel-toggle:hover { background: none; color: var(--ink); }
+  /* A chevron, from a rotated corner of a border. Physical sides on purpose: this
+     one points up and down, and up does not mirror. */
+  .panel-toggle::after {
+    content: ''; inline-size: 0.45em; block-size: 0.45em; margin-inline-start: auto;
+    border: 1.5px solid currentColor; border-top: 0; border-left: 0;
+    transform: rotate(45deg); margin-block-end: 0.2em;
+  }
+  .panel-toggle[aria-expanded="true"]::after {
+    transform: rotate(-135deg); margin-block: 0.2em 0;
+  }
+
+  /* A fade at the foot of a panel that has more below the cut, which is the commonest
+     reason a reader misses content: a box that ends where the viewport ends looks
+     like a list that ends there. `at-end` comes off an observer watching a sentinel
+     at the foot of the body (`ui/panels.js`) rather than from the height of anything,
+     so it is right while the tree is opened and closed -- a fade that cannot know it
+     has reached the bottom is a lie, and worse than no fade. */
+  .studio > section:has(> .panel-body) {
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 1.6rem), transparent);
+  }
+  .studio > section.at-end, .studio > section.collapsed { mask-image: none; }
+  /* Takes no room: it only has to be the last thing in the scroll box. */
+  .scroll-end { block-size: 1px; margin-block-start: -1px; }
 }
 
 .hit.lit { background: rgb(11 103 163 / 18%); box-shadow: inset 0 0 0 1px var(--accent); }
@@ -1404,9 +1535,13 @@ button.big { justify-content: center; padding: 0.6em 1em; font-size: var(--fs-1)
      past the fold, which is the same bug one scroll lower. Reordering costs the
      buttons nothing (the primary one is still inside the first screen) and is
      better than shrinking the preview again to buy the room. */
-  #fit-notice { order: -3; }
-  #status { order: -2; }
-  #warnings { order: -1; }
+  /* **Scoped to the block they reorder.** As bare id selectors they reached the
+     *studio's* header too -- which is a flex row at this width -- and threw its
+     status line ahead of the brand on the first line, which was half of the
+     "buttons and info are not very well aligned" report. */
+  .export-block > #fit-notice { order: -3; }
+  .export-block > #status { order: -2; }
+  .export-block > #warnings { order: -1; }
 }
 
 /* A long printer name should wrap in its own menu rather than being cut off. */

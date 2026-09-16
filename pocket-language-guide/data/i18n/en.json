@@ -383,6 +383,7 @@
   "studio.importSkipped": "\n\nSkipped:\n{problems}",
   "studio.imported": "Imported {updated} edits and {added} new items.{skipped}",
   "studio.loadingTree": "Loading the phrase list…",
+  "studio.moreActions": "More actions",
   "studio.nothingToLayOut": "nothing to lay out",
   "studio.pagesLabel": "Pages",
   "studio.pair": "{target} to {source}",

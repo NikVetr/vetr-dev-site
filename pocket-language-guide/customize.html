@@ -15,7 +15,7 @@
 </head>
 <body>
 <a class="skip-link" href="#face-area" data-i18n="nav.skipToSheet">Skip to the sheet</a>
-<header class="site-header">
+<header class="site-header studio-header">
   <!-- The studio is full-width, so its header must be too: the shared .container
        cap left the brand 250px inboard of the panel it sits above. -->
   <div class="container container-wide">
@@ -26,7 +26,9 @@
       <span data-i18n="studio.bannerQuestion">Too many options?</span>
       <button type="button" class="ghost" id="quiz-open" data-i18n="studio.helpMeDecide">Help me decide.</button>
     </span>
-    <div class="spacer"></div>
+    <!-- A spacer on a desktop; on a phone the rule that forces the info line under
+         the action line, so the header is two short rows rather than four. -->
+    <div class="spacer header-break"></div>
     <span class="status" id="status"></span>
     <!-- The study side of the card. Deliberately not next to the banner's "Help me
          decide", which is the onboarding questionnaire and a different thing: this
@@ -36,6 +38,18 @@
     <button type="button" class="primary" id="pdf" data-i18n="common.exportPdf">Export PDF</button>
     <button type="button" id="png" data-i18n="common.png">PNG</button>
     <a class="btn ghost back-link" href="./" data-i18n="nav.back">← All languages</a>
+    <!-- Phone only, hidden by CSS above 700px. `ui/panels.js` moves the banner, the
+         quiz, PNG and the way out into the panel at that width and puts them back
+         above it, so there is one of each control rather than a duplicate set --
+         Export PDF stays on the header's own line, being what the page is for. -->
+    <button type="button" class="header-more" id="header-more"
+            aria-expanded="false" aria-controls="header-menu"
+            data-i18n-label="studio.moreActions" aria-label="More actions">
+      <svg class="more-glyph" viewBox="0 0 16 16" aria-hidden="true">
+        <path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/>
+      </svg>
+    </button>
+    <div class="header-menu" id="header-menu" hidden></div>
   </div>
 </header>
 
@@ -43,16 +57,20 @@
   <h1 class="visually-hidden" data-i18n="studio.heading">Customise a pocket language guide</h1>
   <section data-i18n-label="studio.formattingLabel" aria-label="Formatting">
     <h2 class="panel-title" data-i18n="studio.formatPanel">Format</h2>
-    <div id="format"></div>
+    <!-- Everything the panel's title bar collapses on a phone, in one region so the
+         bar can name it with `aria-controls`. A plain block on a desktop. -->
+    <div class="panel-body" id="format-body">
+      <div id="format"></div>
 
-    <h2 class="panel-title" style="margin-top: 1.2rem;" data-i18n="studio.filesPanel">Files</h2>
-    <div class="row">
-      <button type="button" id="svg" data-i18n="common.svg">SVG</button>
-      <button type="button" id="csv-out" data-i18n="studio.exportCsv">Export CSV</button>
-      <button type="button" id="csv-in" data-i18n="studio.importCsv">Import CSV</button>
-      <!-- Driven by the button above, so it is not its own tab stop. -->
-      <input type="file" id="csv-file" accept=".csv,text/csv" class="visually-hidden"
-             tabindex="-1" aria-hidden="true">
+      <h2 class="panel-title" style="margin-top: 1.2rem;" data-i18n="studio.filesPanel">Files</h2>
+      <div class="row">
+        <button type="button" id="svg" data-i18n="common.svg">SVG</button>
+        <button type="button" id="csv-out" data-i18n="studio.exportCsv">Export CSV</button>
+        <button type="button" id="csv-in" data-i18n="studio.importCsv">Import CSV</button>
+        <!-- Driven by the button above, so it is not its own tab stop. -->
+        <input type="file" id="csv-file" accept=".csv,text/csv" class="visually-hidden"
+               tabindex="-1" aria-hidden="true">
+      </div>
     </div>
   </section>
 
@@ -70,20 +88,22 @@
 
   <section data-i18n-label="studio.contentPanel" aria-label="Content">
     <h2 class="panel-title" data-i18n="studio.contentPanel">Content</h2>
-    <!-- Where the rendered images go on a touch device with no share sheet, so they
-         can be saved by pressing and holding. A zip is unopenable there. -->
-    <figure class="saved-images" id="saved-images" hidden></figure>
-    <ul class="warnings" id="warnings"></ul>
-    <div class="row small" style="margin-bottom: .5rem;">
-      <button type="button" class="ghost" id="all-on" data-i18n="studio.allOn">All on</button>
-      <button type="button" class="ghost" id="all-off" data-i18n="studio.allOff">All off</button>
-      <button type="button" class="ghost" id="balance" data-i18n="studio.balance">Balance columns</button>
-      <span class="spacer"></span>
-      <span class="muted" id="counts"></span>
+    <div class="panel-body" id="content-body">
+      <!-- Where the rendered images go on a touch device with no share sheet, so they
+           can be saved by pressing and holding. A zip is unopenable there. -->
+      <figure class="saved-images" id="saved-images" hidden></figure>
+      <ul class="warnings" id="warnings"></ul>
+      <div class="row small" style="margin-bottom: .5rem;">
+        <button type="button" class="ghost" id="all-on" data-i18n="studio.allOn">All on</button>
+        <button type="button" class="ghost" id="all-off" data-i18n="studio.allOff">All off</button>
+        <button type="button" class="ghost" id="balance" data-i18n="studio.balance">Balance columns</button>
+        <span class="spacer"></span>
+        <span class="muted" id="counts"></span>
+      </div>
+      <div class="diff" id="diff" hidden></div>
+      <div id="add-term"></div>
+      <ul class="tree" id="tree"><li class="muted loading" data-i18n="studio.loadingTree">Loading the phrase list…</li></ul>
     </div>
-    <div class="diff" id="diff" hidden></div>
-    <div id="add-term"></div>
-    <ul class="tree" id="tree"><li class="muted loading" data-i18n="studio.loadingTree">Loading the phrase list…</li></ul>
   </section>
 </main>
 
