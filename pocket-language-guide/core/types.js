@@ -143,10 +143,25 @@
  * @property {HeadSlot|HeadSlot[]} [center]
  * @property {HeadSlot|HeadSlot[]} [right]
  * @property {string} [text]  for a `custom` slot
- * @property {string} [fill]  a theme colour key. Set, the band's content sits on a
- *   solid rectangle of that colour in white type, flush with the page edge at
- *   whichever corner `span` names -- a tab, so a stack of printed cards can be told
- *   apart by their edges without reading them. Unset, the band is type on paper.
+ * @property {string} [fill]  a theme colour key, or `section` for whichever section
+ *   owns most of the face. Set, the band's content sits on a solid rectangle of that
+ *   colour in white type, flush with the page edge at whichever corner `span` names
+ *   -- a tab, so a stack of printed cards can be told apart by their edges without
+ *   reading them. Unset, the band is type on paper.
+ * @property {'band'|'corner'|'edge'} [fillReach]  how much of the face's edge that
+ *   rectangle takes. `span` says where the band's *content* sits; this says how far
+ *   its *colour* goes, and the two are different axes -- the content is placed
+ *   horizontally, the colour grows vertically, into the margin the columns never had.
+ *   `band` (the default, and what a tab has always been) is the band's own strip,
+ *   projecting in from the side: there is paper above it. `corner` runs on to the
+ *   page's own top or bottom edge, so the colour fills the corner and is flush on two
+ *   sides. `edge` adds a rail of the same colour down the outer margin beside the
+ *   column the tab sits over, from the top of the face to the bottom, for a stack
+ *   fanned sideways rather than offset up the page -- except under `span: 'center'`,
+ *   which has no outer margin to run down and keeps the corner alone, the same reason
+ *   a centred tab does not bleed sideways either. None of the three costs a column
+ *   anything: a tab is charged to the columns its `span` covers and no more, and the
+ *   rail runs outside the content box, so `bandColumns` does not read this.
  * @property {string} [colour]  a theme colour key -- `ink`, `muted`, or
  *   `roles.<role>` -- for every part in this band. Unset keeps the default, which is
  *   muted with emphasis promoted to ink; set, it colours the whole band and emphasis

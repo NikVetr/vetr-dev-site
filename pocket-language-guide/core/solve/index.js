@@ -261,15 +261,16 @@ export function headBands(spec) {
   const legacy = /** @type {any} */ (spec.head);
   if (legacy && typeof legacy.at === 'string') {
     if (legacy.at === 'none') return { top: null, bottom: null };
-    // `span` and `fill` postdate the `at` form, so a spec carrying `at` usually has
-    // neither and gets the default. It is not always usual, though: a hand-written
-    // spec or a dev script can set `at` beside them, and hardcoding `span: 'full'`
-    // here dropped both without a word -- which is how a tab that was working came
-    // to look like a tab that was not.
+    // `span`, `fill` and `fillReach` all postdate the `at` form, so a spec carrying
+    // `at` usually has none of them and gets the defaults. It is not always usual,
+    // though: a hand-written spec or a dev script can set `at` beside them, and
+    // hardcoding `span: 'full'` here dropped both without a word -- which is how a
+    // tab that was working came to look like a tab that was not.
     /** @type {import('../types.js').HeadBand} */
     const band = {
       span: legacy.span ?? 'full',
       ...(legacy.fill ? { fill: legacy.fill } : {}),
+      ...(legacy.fillReach ? { fillReach: legacy.fillReach } : {}),
       left: legacy.left,
       center: legacy.center,
       right: legacy.right,
@@ -329,6 +330,11 @@ function headBandPt(input) {
  * the only non-circular choice: the tab is sized by the text it holds, the text is
  * fitted to the content box, and the box is what this decides. It is also what a
  * reader expects a control called "left tab" to mean.
+ *
+ * `fillReach` is deliberately not read here. A corner or full-edge tab is a bigger
+ * *mark* and not a bigger *ask*: it grows into the page's own margin and into the
+ * strip this function has already charged, never into a column. So the three reaches
+ * fit the same content, which is the only way furniture may behave.
  * @param {import('../types.js').HeadBand|null|undefined} band
  * @param {number} columns
  * @returns {Set<number>} column indices, empty where the band asks for nothing
@@ -847,7 +853,10 @@ export function layout(input) {
         return best;
       })();
       const { left, center, right } = headText(input, f, faces, bandSpec, faceTheme);
-      const y = edge === 'top'
+      // The band's own baseline: one line of furniture with half a line of air on
+      // each side of it. A tab that reaches past the band's strip moves it, which is
+      // `y` a few lines down; this is where it sits when nothing has.
+      const baseline = edge === 'top'
         ? box.top - size * 0.9
         : box.top + box.height + size * 1.35;
       // The reader's own face: a running head is read by whoever the sheet is
@@ -892,14 +901,66 @@ export function layout(input) {
        */
       // `section` follows the face's own dominant role; any other value is an
       // explicit theme colour key; empty is no tab at all.
-      const fillColour = bandSpec.fill === 'section'
+      const fillRole = bandSpec.fill === 'section'
         ? (faceTheme ? themeColour(`roles.${faceTheme}`) : null)
         : themeColour(bandSpec.fill);
+      // Black and white means black and white. `makePalette` collapses every role to
+      // the ink for the columns and the `ink-mode.mono` warning promises it in those
+      // words -- "section colours are gone" -- and the tab was the one mark still
+      // printing in colour under it, because it resolves `theme.colors` itself rather
+      // than going through that palette. It cost little while a tab was a chip in a
+      // corner; a `fillReach: 'edge'` rail is the height of the face and makes the
+      // contradiction impossible to miss. White type on black is what a filing tab
+      // wants anyway. Low ink keeps its colour, for the reason the same warning
+      // gives: the coloured marks carry the section coding, and only the shading goes.
+      const fillColour = fillRole && spec.inkMode === 'mono' ? theme.colors.ink : fillRole;
       // On a tab the type is white, because the tab is a solid colour chosen to be
       // seen from the edge of a stack and any of the theme's inks would be reading
       // dark on dark. A `colour` set alongside still wins: someone who has asked
       // for a particular ink has asked for it.
       const bandColour = themeColour(bandSpec.colour) ?? (fillColour ? '#ffffff' : null);
+      /**
+       * **How far the colour reaches, and where that leaves the type.**
+       *
+       * `span` places the band's content along the width; this is the other axis,
+       * and it is the one a reader looking at a stack of cards cares about. Three
+       * values, each strictly more ink than the last and none of them costing a
+       * column a single point -- see `bandColumns`.
+       *
+       * `band` is what a tab has always been: the band's own strip, bleeding to the
+       * paper on the side `span` names, with paper still showing above it. `corner`
+       * runs the same rectangle on to the page's own edge, so the colour is flush on
+       * two sides and the corner is solid. `edge` keeps that corner and adds a rail
+       * down the outer margin for the whole height of the face.
+       *
+       * **The rail is the margin, not the column.** "The whole column" is what was
+       * asked for and it is not what can be printed: a column is full of black
+       * vocabulary at 5-9pt, and a saturated stripe behind it costs the card the one
+       * thing on it that has to be read. The margin beside the column is empty by
+       * construction -- `contentBox` starts the columns at `box.left` -- so a rail
+       * there is full-height colour that touches nothing. It is the thumb index a
+       * dictionary uses, and it identifies a fanned stack the way a corner tab
+       * identifies an offset one.
+       */
+      const reach = fillColour ? (bandSpec.fillReach ?? 'band') : 'band';
+      // The fill's rectangle. Its *inner* edge never moves, whatever the reach: that
+      // edge is the boundary with the columns, and the columns are where they are.
+      const strip = edge === 'top'
+        ? { top: reach === 'band' ? baseline - size : 0, bottom: baseline + size * 0.45 }
+        : {
+          top: baseline - size * 0.85,
+          bottom: reach === 'band' ? baseline + size * 0.6 : geometry.pageH,
+        };
+      // A corner or an edge tab is two to three times the height of the band's strip,
+      // and type left on the strip's own baseline reads as having slid to the bottom
+      // of it. So the line is centred in whatever shape the fill makes -- optically,
+      // a third of the type size above the baseline, which is about where the middle
+      // of a cap sits. It moves up into the margin, which is the one direction with
+      // nothing in it. Unchanged for `band`, so every tab printed so far still sets
+      // its line exactly where it did.
+      const y = reach === 'band'
+        ? baseline
+        : (strip.top + strip.bottom) / 2 + size * 0.35;
       /** @param {import('../types.js').HeadPart} part */
       const styleOf = (part) => ({
         ...style,
@@ -977,18 +1038,16 @@ export function layout(input) {
       // Flush with the page edge rather than with the content box, which is the
       // whole point of it: a card in a stack is identified by the colour showing
       // past the card in front, so a tab inset by the margin is a tab you cannot
-      // see. It runs to the paper's edge on the side `span` names, and to the band's
-      // own edge vertically -- `contentBox` has already taken that strip out of the
-      // margin, so the rectangle is filling space the columns never had.
+      // see. It runs to the paper's edge on the side `span` names, and vertically as
+      // far as `fillReach` asks -- `contentBox` has already taken the band's strip
+      // out of the margin, and the rest of the margin was never a column's either,
+      // so every one of the three reaches fills space the columns never had.
       //
       // `span: 'full'` gets the whole width, which is a bar rather than a tab and is
       // the right answer for someone who wants one: it is still a colour you can see
       // from the edge, just on both corners at once.
       if (fillColour) {
         const padX = size * 0.9;
-        const padY = size * 0.45;
-        const top = y - size * (edge === 'top' ? 1.0 : 0.85);
-        const bottom = y + size * (edge === 'top' ? 0.45 : 0.6);
         const ink = placedHead.filter(([parts]) => parts.length);
         if (ink.length) {
           const spans = ink.map(([parts, anchor, align]) => {
@@ -1006,11 +1065,36 @@ export function layout(input) {
           const x1 = span === 'left' ? to : span === 'center' ? to : geometry.pageW;
           face.rects.unshift({
             x: Math.max(0, x0),
-            y: top - padY * 0,
+            y: strip.top,
             w: Math.min(geometry.pageW, x1) - Math.max(0, x0),
-            h: bottom - top,
+            h: strip.bottom - strip.top,
             fill: fillColour,
           });
+          // The rail, in the margin outside the columns the span covers: the left one
+          // for a left tab, the right one for a right tab, both for a bar across the
+          // face. A centred tab has no outer margin to run down -- the same reason it
+          // does not bleed sideways either -- so it keeps the corner and no rail.
+          //
+          // `frame` comes off each end, so the rail stops short of an ornamental
+          // border rather than running under it: `contentBox` folds the frame's own
+          // width into `box.left`, and without this the elven sheet's gold vine was
+          // drawn down the middle of a saturated blue stripe. Zero wherever there is
+          // no frame, which is every sheet but the elven one.
+          if (reach === 'edge') {
+            const rails = span === 'center' ? [] : [
+              ...(span === 'right' ? [] : [[0, box.left - frame]]),
+              ...(span === 'left' ? [] : [[box.left + box.width + frame, geometry.pageW]]),
+            ];
+            for (const [railFrom, railTo] of rails) {
+              face.rects.unshift({
+                x: railFrom,
+                y: 0,
+                w: railTo - railFrom,
+                h: geometry.pageH,
+                fill: fillColour,
+              });
+            }
+          }
         }
       }
 

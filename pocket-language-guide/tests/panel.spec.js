@@ -47,7 +47,10 @@ test('the header can be a solid tab, flush with the corner, in white', async ({ 
   await page.goto('/customize.html?target=es&source=en');
   await expect(page.locator('.panel-field-title').first()).toBeVisible();
   await page.locator('.head-on input').first().check();
-  await page.locator('#head-fill').selectOption('section');
+  // The fill is a glyph ladder now, not a `<select>`: `#head-fill` is the revealed
+  // list of theme colour keys, and "by section" is a segment. Same idiom the header
+  // test further down already uses.
+  await page.getByRole('radio', { name: 'By section' }).first().click();
   await page.waitForTimeout(2500);
 
   /** The band's own rectangle: in the strip above the columns, a line or so tall. */

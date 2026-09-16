@@ -1607,6 +1607,7 @@ export function headControl({ spec, onChange, colourKeys = [] }) {
   const SLOTS = ['page', 'pair', 'region', 'legend', 'theme', 'custom'];
   const SIDES = /** @type {const} */ (['left', 'center', 'right']);
   const SPANS = /** @type {const} */ (['full', 'left', 'center', 'right']);
+  const REACHES = /** @type {const} */ (['band', 'corner', 'edge']);
   /** A position may hold a bare slot in a spec saved before it became a list. */
   const listOf = (/** @type {any} */ held) => new Set(
     (Array.isArray(held) ? held : [held]).filter(Boolean));
@@ -1769,33 +1770,90 @@ export function headControl({ spec, onChange, colourKeys = [] }) {
 
     // **The tab**: the same band, on a solid rectangle flush with the corner, in
     // white. A stack of printed cards is hard to tell apart face-on, and this is the
-    // one thing on a sheet that is visible from its edge. `section` is the useful
-    // default rather than a colour name -- it takes whichever section owns most of
-    // that face, so each face is a different colour and the colour means something.
-    const fill = /** @type {HTMLSelectElement} */ (document.createElement('select'));
-    fill.className = 'select';
-    fill.id = `${which}-fill`;
-    fill.append(Object.assign(document.createElement('option'), {
-      value: '', textContent: t('format.headFill.none'),
-    }));
-    fill.append(Object.assign(document.createElement('option'), {
-      value: 'section', textContent: t('format.headFill.section'),
-    }));
+    // one thing on a sheet that is visible from its edge.
+    //
+    // Three glyph segments rather than a dropdown of eight colour names, which is
+    // what this was and was the last control in the panel that named a thing instead
+    // of drawing it. A row of eight chips would have been no better: the real choice
+    // underneath the colour list is whether each face takes its *own* section's
+    // colour -- so a cut stack is five colours and the colour means something -- or
+    // whether the whole set shares one. The theme keys are the tail of the second
+    // answer, and they appear once it has been given.
+    const fixed = /** @type {HTMLSelectElement} */ (document.createElement('select'));
+    fixed.className = 'select';
+    fixed.id = `${which}-fill`;
     for (const key of colourKeys) {
-      fill.append(Object.assign(document.createElement('option'), {
+      fixed.append(Object.assign(document.createElement('option'), {
         value: key, textContent: t(`colour.${key.replace('roles.', '')}`),
       }));
     }
-    fill.addEventListener('change', () => push({ fill: fill.value || undefined }));
-    const fillField = document.createElement('div');
-    fillField.className = 'numeric-custom';
-    fillField.append(Object.assign(document.createElement('span'), {
-      className: 'small muted', textContent: t('format.headFill'),
-    }), fill);
+    fixed.addEventListener('change', () => push({ fill: fixed.value }));
+    const fixedField = document.createElement('div');
+    fixedField.className = 'numeric-custom';
+    fixedField.append(Object.assign(document.createElement('span'), {
+      className: 'small muted', textContent: t('format.headFillOne'),
+    }), fixed);
+
+    const fill = segmented({
+      label: t('format.headFill'),
+      value: 'none',
+      options: [
+        {
+          value: 'none',
+          caption: t('format.headFill.none'),
+          title: t('format.headFillTitle.none'),
+          glyph: headFillGlyph('none'),
+        },
+        {
+          value: 'section',
+          caption: t('format.headFill.perFace'),
+          title: t('format.headFill.section'),
+          glyph: headFillGlyph('section'),
+        },
+        // Dropped where the caller offers no keys -- the export page's own copy of
+        // this control passes none -- because a segment that opens an empty list is
+        // worse than one segment fewer.
+        ...(colourKeys.length ? [{
+          value: 'one',
+          caption: t('format.headFill.oneColour'),
+          title: t('format.headFillTitle.one'),
+          glyph: headFillGlyph('one'),
+        }] : []),
+      ],
+      onChange: (value) => push({
+        fill: value === 'none' ? undefined : value === 'section' ? 'section' : fixed.value,
+      }),
+    });
+
+    // How far that rectangle reaches: the band's own strip, the corner, or the whole
+    // outer edge of the face. A different question from `span`, which places the
+    // band's *content* along the width -- this is the other axis, and it decides
+    // whether a stack is read offset up the page or fanned sideways. It costs the
+    // columns nothing either way, so it sits beside the tab rather than beside the
+    // geometry. Hidden until there is a tab for it to shape.
+    const reach = segmented({
+      label: t('format.headReach'),
+      value: 'band',
+      options: REACHES.map((id) => ({
+        value: id,
+        caption: t(`format.headReach.${id}`),
+        title: t(`format.headReachTitle.${id}`),
+        glyph: headReachGlyph(id),
+      })),
+      onChange: (value) => push({
+        fillReach: /** @type {'band'|'corner'|'edge'} */ (value),
+      }),
+    });
+    const reachField = document.createElement('div');
+    reachField.className = 'numeric-custom';
+    reachField.append(reach.group);
 
     const slots = document.createElement('div');
     slots.className = 'head-slots';
-    slots.append(span.group, ...sides.map((sd) => sd.wrap), text, fillField, colourField);
+    slots.append(
+      span.group, ...sides.map((sd) => sd.wrap), text,
+      fill.group, fixedField, reachField, colourField,
+    );
 
     /** @param {import('../core/types.js').SheetSpec} from */
     const paint = (from) => {
@@ -1804,7 +1862,17 @@ export function headControl({ spec, onChange, colourKeys = [] }) {
       slots.hidden = !band;
       span.select(band?.span ?? 'full');
       colour.value = band?.colour ?? '';
-      fill.value = band?.fill ?? '';
+      // Any fill that is not `section` is a theme key, which is the `one` segment
+      // with that key chosen underneath it.
+      const tab = !band?.fill ? 'none' : band.fill === 'section' ? 'section' : 'one';
+      fill.select(tab);
+      if (tab === 'one') fixed.value = band.fill;
+      // `!colourKeys.length` as well as the segment, because the export page's copy of
+      // this control offers no keys and a spec made in the studio can still arrive
+      // here with one: an empty select is worse than no select.
+      fixedField.hidden = tab !== 'one' || !colourKeys.length;
+      reach.select(band?.fillReach ?? 'band');
+      reachField.hidden = tab === 'none';
       // The free-text box is only useful where a position asks for the reader's text.
       text.hidden = !SIDES.some((side) => listOf(/** @type {any} */ (band)?.[side]).has('custom'));
       for (const { side, boxes } of sides) {
@@ -1836,6 +1904,79 @@ export function headControl({ spec, onChange, colourKeys = [] }) {
       paint(next);
     },
   };
+}
+
+/**
+ * How far a tab's colour reaches, drawn as the colour itself on a face.
+ *
+ * The one thing a reader is choosing here is *where the ink lands*, so the glyph is
+ * the ink: an accent block on a page with its columns in, and the three options
+ * differ only in how much of the page's own edge that block takes. Drawn as a left
+ * tab in all three, because the side is the neighbouring control's question and
+ * varying it here would make two controls look like one.
+ *
+ * The first column starts lower than the other two in all three, which is true and is
+ * the point: a tab is charged to the column it sits over, and no reach charges
+ * anything on top of that. The rail runs in the margin, clear of the first column
+ * rather than over it -- also true, and the reason `edge` is printable at all.
+ * @param {'band'|'corner'|'edge'} reach
+ */
+export function headReachGlyph(reach) {
+  const box = 30;
+  const svg = frame(box, box);
+  svg.append(svgEl('rect', { x: 3, y: 5, width: 24, height: 18, rx: 1.5, class: 'g-page' }));
+  // The columns stop short of the page on all four sides, because the margin is
+  // where the whole difference between these three options lives: without that
+  // clearance the rail would read as a fourth column rather than as the edge.
+  for (let c = 0; c < 3; c += 1) {
+    const top = c === 0 ? 11.8 : 7.5;
+    svg.append(svgEl('rect', {
+      x: 7 + c * 6.4, y: top, width: 5.2, height: 21.5 - top, class: 'g-col',
+    }));
+  }
+  // Down to 11 in all three: the tab's inner edge is the boundary with the columns,
+  // and it is the one edge of it that does not move.
+  const top = reach === 'band' ? 8 : 5;
+  svg.append(svgEl('rect', { x: 3, y: top, width: 9.5, height: 11 - top, class: 'g-accent' }));
+  if (reach === 'edge') {
+    svg.append(svgEl('rect', { x: 3, y: 5, width: 3, height: 18, class: 'g-accent' }));
+  }
+  return svg;
+}
+
+/**
+ * What a tab is for, drawn as the thing it is for: two cards of the same set.
+ *
+ * This replaced a dropdown of eight colour names, and a row of eight identical chips
+ * would have been no better -- the panel is handed the theme's colour *keys* and not
+ * its hexes, so it cannot draw them, and the question underneath the colour list is
+ * not "which blue" but "does each card get its own colour or do they all share one".
+ * So the glyphs show two cards and differ in whether their tabs match.
+ * @param {'none'|'section'|'one'} kind
+ */
+export function headFillGlyph(kind) {
+  const box = 30;
+  const svg = frame(box, box);
+  // Two cards side by side rather than a fanned stack of three, which is what this
+  // drew first. The stack was the truer picture and it did not survive 30px: at the
+  // offset that fits, the cards behind showed as hairlines and all three glyphs read
+  // as one smudge. Two whole cards answer the actual question -- do their tabs match?
+  // -- at a size where the answer is legible.
+  const marks = kind === 'section' ? ['g-accent', 'g-ink'] : ['g-accent', 'g-accent'];
+  for (let i = 0; i < 2; i += 1) {
+    const x = 1 + i * 15.5;
+    svg.append(svgEl('rect', { x, y: 5, width: 12.5, height: 20, rx: 1.2, class: 'g-page' }));
+    for (let c = 0; c < 2; c += 1) {
+      svg.append(svgEl('rect', {
+        x: x + 2 + c * 4.8, y: 12, width: 4, height: 11, class: 'g-col',
+      }));
+    }
+    // No tab is not no band: the words are still there, in the ink, on paper.
+    svg.append(kind === 'none'
+      ? svgEl('rect', { x: x + 2, y: 8, width: 5, height: 1.6, rx: 0.7, class: 'g-ink faint' })
+      : svgEl('rect', { x, y: 5, width: 6, height: 5, class: marks[i] }));
+  }
+  return svg;
 }
 
 /**

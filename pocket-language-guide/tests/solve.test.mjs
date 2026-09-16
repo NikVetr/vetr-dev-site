@@ -1281,6 +1281,140 @@ test('a corner tab costs only the columns it covers', async () => {
     `the columns a right tab misses should be level, got ${right.join(' ')}`);
 });
 
+test('a tab may fill the corner or run the whole edge, and neither costs a column anything', async () => {
+  // Two more tabs, asked for in these words: one that "covers the entire corner
+  // instead of just projecting in from the side (so it would be flush with the top of
+  // the face)", and one that "can span the entire column it sits above or below".
+  //
+  // Both are `fillReach`, which is deliberately not a `span`. `span` says where the
+  // band's *content* sits and it runs along the width; this says how far the band's
+  // *colour* goes and it runs the other way, into the page's own margin. Keeping them
+  // apart is what lets the two be chosen independently, and what makes the last
+  // assertion in this test true.
+  //
+  // **The rail is the margin, not the column.** The literal request cannot be
+  // printed: a column is full of black vocabulary at 5-9pt, and a saturated stripe
+  // behind it costs the card the one thing on it that has to be read -- rendered and
+  // looked at, and it turns the first column into a broken venetian blind. The margin
+  // beside the column is empty by construction, since `contentBox` starts the columns
+  // at `box.left`, so full-height colour there is the thumb index a dictionary uses:
+  // it identifies a fanned stack the way a corner tab identifies an offset one, and it
+  // touches nothing.
+  /** @param {Partial<import('../core/types.js').SheetSpec>} overrides */
+  const solve = async (overrides) => {
+    const one = await referenceSpec('es', 'en', overrides);
+    await loadFontsFor(ctx, one.target, one.source);
+    const { plan, theme: used } = await buildSheet(ctx, one);
+    return { plan, theme: used, geom: contentBox(one.geometry, one.paper) };
+  };
+  /** @type {import('../core/types.js').HeadBand} */
+  const tab = { span: 'left', left: 'theme', fill: 'section' };
+  const band = await solve({ head: tab });
+  const corner = await solve({ head: { ...tab, fillReach: 'corner' } });
+  const edge = await solve({ head: { ...tab, fillReach: 'edge' } });
+
+  /** The fill's own rectangles: the only ones that start at the paper's left edge. */
+  const fills = (/** @type {any} */ o) => o.plan.faces[0].rects
+    .filter((/** @type {any} */ r) => r.x === 0 && r.w > 0);
+  const near = (/** @type {number} */ a, /** @type {number} */ b) => Math.abs(a - b) < 1e-9;
+
+  // `band` is the default and is what a tab has always been: the band's own strip,
+  // with paper still showing above it.
+  assert.equal(fills(band).length, 1, 'the default tab is one rectangle');
+  assert.ok(fills(band)[0].y > 0,
+    `the default tab leaves paper above it, got y ${fills(band)[0].y}`);
+
+  // `corner` is that same rectangle run on to the page's own edge: flush on two sides,
+  // and grown *upwards* only. Its inner edge may not move, because that edge is the
+  // boundary with the columns and the columns are where they are.
+  const [cornerTab] = fills(corner);
+  assert.equal(fills(corner).length, 1);
+  assert.equal(cornerTab.y, 0, 'a corner tab is flush with the top of the face');
+  assert.ok(near(cornerTab.w, fills(band)[0].w), 'and no wider: it grows up, not sideways');
+  assert.ok(near(cornerTab.h, fills(band)[0].y + fills(band)[0].h),
+    `and down to the same inner edge, got ${cornerTab.h}`);
+  assert.ok(cornerTab.h > fills(band)[0].h + 1, 'so it is taller than the strip it grew from');
+
+  // `edge` keeps that corner and adds a rail down the outer margin for the whole
+  // height of the face -- and the rail stops at the first column's own edge, which is
+  // the assertion that says it is furniture rather than a wash.
+  const rail = fills(edge).find((/** @type {any} */ r) => near(r.h, edge.plan.pageH));
+  assert.ok(rail, `an edge tab should carry a full-height rail, got ${JSON.stringify(fills(edge))}`);
+  assert.equal(rail.y, 0, 'the rail runs from the top of the page');
+  assert.ok(rail.w > 0 && rail.w <= edge.geom.left + 1e-9,
+    `the rail must stop where the first column starts: ${rail.w} against ${edge.geom.left}`);
+  assert.ok(fills(edge).some((/** @type {any} */ r) => r.y === 0 && r.h < edge.plan.pageH),
+    'and it keeps the corner block the label sits on');
+
+  // The label stays white, bold, on the fill and above the words in its own column.
+  // White type over a column of black vocabulary is the one thing that would make this
+  // a defect instead of a mark, so it is asserted rather than assumed -- and a corner
+  // or edge fill is two to three times the strip's height, which is why the line is
+  // re-centred in it rather than left on the strip's own baseline.
+  for (const [name, o] of /** @type {const} */ ([['band', band], ['corner', corner], ['edge', edge]])) {
+    const label = o.plan.faces[0].runs.find((/** @type {any} */ r) => r.bold && r.fill === '#ffffff');
+    assert.ok(label, `${name}: the tab carries a bold white label`);
+    const chip = fills(o).find((/** @type {any} */ r) => r.h < o.plan.pageH);
+    assert.ok(label.y > chip.y && label.y < chip.y + chip.h,
+      `${name}: the baseline ${label.y} should sit inside the fill ${chip.y}..${chip.y + chip.h}`);
+    // Optically centred, within a third of the type size of the fill's middle. Left on
+    // the strip's baseline the line reads as having slid to the bottom of the block.
+    const middle = chip.y + chip.h / 2;
+    assert.ok(Math.abs(label.y - label.size * 0.35 - middle) < label.size / 3,
+      `${name}: the line sits ${(label.y - label.size * 0.35 - middle).toFixed(2)}pt off centre`);
+    const ownColumn = o.plan.faces[0].hits.filter((/** @type {any} */ h) => h.x < chip.x + chip.w);
+    const firstInk = Math.min(...ownColumn.map((/** @type {any} */ h) => h.y));
+    assert.ok(label.y < firstInk,
+      `${name}: the label at ${label.y} must sit above its column's first row at ${firstInk}`);
+  }
+
+  // **And not one of the three moves a single word.** The reach is charged to the
+  // page's own margin, which `contentBox` never gave a column, so all three fit the
+  // same vocabulary in the same places. `bandColumns` reads the `span` and not this,
+  // on purpose: a bigger mark is not a bigger ask. If this ever fails, a decoration
+  // has started editing the card.
+  const hitsOf = (/** @type {any} */ o) => o.plan.faces.flatMap(
+    (/** @type {any} */ f, /** @type {number} */ i) => f.hits.map(
+      (/** @type {any} */ h) => `${i} ${h.x.toFixed(4)} ${h.y.toFixed(4)}`),
+  );
+  assert.deepEqual(hitsOf(corner), hitsOf(band), 'a corner tab must not move the vocabulary');
+  assert.deepEqual(hitsOf(edge), hitsOf(band), 'and nor may an edge tab');
+
+  // A right tab mirrors it, which catches the off-by-one a left-only test would pass.
+  const right = await solve({ head: { ...tab, span: 'right', fillReach: 'edge' } });
+  const rightRail = right.plan.faces[0].rects
+    .find((/** @type {any} */ r) => near(r.h, right.plan.pageH));
+  assert.ok(rightRail, 'a right edge tab carries a rail too');
+  assert.ok(near(rightRail.x + rightRail.w, right.plan.pageW),
+    `which reaches the right edge of the paper, got ${rightRail.x + rightRail.w}`);
+  assert.ok(rightRail.x >= right.geom.left + right.geom.width - 1e-9,
+    `and starts outside the last column, at ${rightRail.x}`);
+
+  // A centred tab has no outer margin to run down -- the same reason it does not bleed
+  // sideways either -- so `edge` gives it the flush corner and no rail.
+  const middle = await solve({ head: { ...tab, span: 'center', fillReach: 'edge' } });
+  assert.ok(!middle.plan.faces[0].rects.some((/** @type {any} */ r) => near(r.h, middle.plan.pageH)),
+    'a centred tab has no edge to run a rail down');
+  assert.ok(middle.plan.faces[0].rects.some((/** @type {any} */ r) => r.y === 0 && r.w > 0),
+    'but it is still flush with the top of the face');
+
+  // Black and white means black and white. The tab resolves `theme.colors` itself
+  // rather than going through `makePalette`, so it was the one mark on a mono sheet
+  // still printing a section colour -- against an `ink-mode.mono` warning that
+  // promises "section colours are gone" in those words. It cost little while a tab was
+  // a chip; a rail is the height of the face.
+  const mono = await solve({ head: { ...tab, fillReach: 'edge' }, inkMode: 'mono' });
+  assert.ok(fills(mono).length >= 2, 'the mono sheet still gets its corner and its rail');
+  for (const r of fills(mono)) {
+    assert.equal(r.fill.toLowerCase(), mono.theme.colors.ink.toLowerCase(),
+      'a mono tab prints in the ink, not in a role colour');
+  }
+  // Low ink keeps the colour, for the reason the same warning gives: the coloured
+  // marks carry the section coding and only the shading goes.
+  const low = await solve({ head: { ...tab, fillReach: 'edge' }, inkMode: 'low-ink' });
+  assert.notEqual(fills(low)[0].fill.toLowerCase(), low.theme.colors.ink.toLowerCase());
+});
+
 test('a face can wear the name of its own theme, in white on a solid tab', async () => {
   // The identification problem this answers, in the owner's words: a stack of cards
   // printed on white paper is hard to tell apart. A tab is a colour you can see from
