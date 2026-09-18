@@ -131,3 +131,42 @@ test('two changes to the band in one breath both survive', async ({ page }) => {
     .toMatch(/Spanish|English/);
   await expect(page.locator('#head-left-pair')).toBeChecked();
 });
+
+test('the tab takes a colour the reader can see before choosing it', async ({ page }) => {
+  // The band's ink and the tab's shared colour were the last two `<select>` elements
+  // in a panel where every other option is a drawn glyph. They are swatch rows now,
+  // because a colour is the one setting a line drawing cannot express -- the option
+  // *is* its appearance -- and a list of six names made the reader translate
+  // "Getting around" into green.
+  //
+  // What this asserts is the part a swatch can get wrong and a dropdown cannot: that
+  // the square the reader taps is painted the colour the sheet then prints. So it
+  // reads the hex off the swatch and looks for that same hex on the face.
+  await page.setViewportSize({ width: 1700, height: 1000 });
+  await page.goto('/customize.html?target=es&source=en');
+  await expect(page.locator('.panel-field-title').first()).toBeVisible();
+  await page.locator('.head-on input').first().check();
+  await page.getByRole('radio', { name: 'One colour' }).first().click();
+
+  const row = page.locator('#head-fill-colour');
+  await expect(row).toBeVisible();
+  // The five section roles plus the body ink, which is every colour on the card.
+  await expect(row.locator('.swatch-pick')).toHaveCount(6);
+
+  const swatch = row.locator('[data-colour="roles.alert"]');
+  const hex = await swatch.evaluate((el) => {
+    const [r, g, b] = getComputedStyle(el).backgroundColor.match(/\d+/g).map(Number);
+    return `#${[r, g, b].map((n) => n.toString(16).padStart(2, '0')).join('')}`.toUpperCase();
+  });
+  // Not paper and not black: the swatch is showing the theme's real colour rather
+  // than an unstyled button.
+  expect(hex).not.toBe('#FFFFFF');
+  expect(hex).not.toBe('#000000');
+
+  await swatch.click();
+  // Marked, not merely coloured -- six solid squares say nothing about which is in use.
+  await expect(swatch).toHaveAttribute('aria-current', 'true');
+  await expect.poll(async () => page.locator('.face.focused svg rect').evaluateAll(
+    (ns) => ns.map((n) => (n.getAttribute('fill') ?? '').toUpperCase()),
+  ), { timeout: 60_000 }).toContain(hex);
+});

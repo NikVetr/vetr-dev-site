@@ -2591,6 +2591,21 @@ charged **once per cluster** rather than once per cluster-mate, and that detail 
 load-bearing: compounded, a 12-row budget produced a card counting "0 1 2 4 6 7 8 9",
 where charging once makes a cut take a prefix.
 
+**Colour is the one setting that cannot be a glyph, so it is a swatch.** Every other
+option in the format panel is a little line drawing, because a choice between four
+page shapes or three row spacings is a shape question and a list of words makes the
+reader translate words back into shapes. A colour has no shape: the option *is* its
+appearance. So `swatchRow()` in `ui/chips.js` is a row of six coloured buttons -- the
+five section roles plus the body ink -- with the one in use marked by an outline
+rather than only coloured, since six blocks of solid colour say nothing about which
+is current. One implementation serves three callers: the card's row popup, and the
+furniture band's ink and tab colours, which were the last two `<select>` elements in
+that panel. It reads the theme's hexes through a function rather than taking a list,
+so recolouring the palette recolours the swatches on the next paint. The content
+tree keeps its own disclosure button instead, which is a genuinely different
+interaction -- it opens *over* a dense list of sections, where a row of six would not
+fit.
+
 The chips are deliberately not everywhere. The tree's ~780 item rows stay
 checkboxes, because a saturation shift across a paragraph of two languages is a
 weaker cue than a tick beside it; so do the quiz's interests, where each option

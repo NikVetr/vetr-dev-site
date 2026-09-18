@@ -665,7 +665,16 @@ export function createFormatPanel(input) {
   // The theme's own colour keys, so a band can only ever be a colour already on the
   // card -- the five section roles plus the body ink.
   const head = headControl({
-    spec, onChange: emit, colourKeys: COLOUR_BAND_KEYS,
+    spec,
+    onChange: emit,
+    colours: () => {
+      const hexes = theme.hexes();
+      return COLOUR_BAND_KEYS.map((key) => ({
+        key,
+        hex: hexes[key] ?? '#000000',
+        label: t(`colour.${key.replace('roles.', '')}`),
+      }));
+    },
   });
   const headField = head.field;
 

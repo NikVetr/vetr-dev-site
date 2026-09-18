@@ -470,8 +470,10 @@ async function main() {
           itemOn: spec.selection.items[id] !== false
             && spec.selection.sections[sectionId] !== false,
           sectionOn: spec.selection.sections[sectionId] !== false,
-          colour: String(roles[role] ?? ''),
-          colours: Object.entries(roles).map(([r, hex]) => ({ role: r, hex: String(hex) })),
+          role,
+          colours: Object.entries(roles).map(([r, hex]) => ({
+            key: r, hex: String(hex), label: t(`colour.${r}`),
+          })),
           values,
           target: spec.target,
           source: spec.source,

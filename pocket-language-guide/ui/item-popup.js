@@ -17,7 +17,7 @@
 // editing is the one thing a bottom sheet cannot tell you. Clamped into the viewport
 // so a row in a corner does not open a panel half off the screen.
 
-import { chipToggle } from './chips.js';
+import { chipToggle, swatchRow } from './chips.js';
 import { itemEditForm } from './content-tree.js';
 import { t } from './i18n.js';
 
@@ -68,8 +68,8 @@ function place(panel, anchor) {
  * @param {string} config.sectionTitle
  * @param {boolean} config.itemOn
  * @param {boolean} config.sectionOn
- * @param {string} config.colour             the section's current role colour
- * @param {{role:string, hex:string}[]} config.colours  the palette to choose from
+ * @param {string} config.role               the section's current colour role
+ * @param {{key:string, hex:string, label:string}[]} config.colours  the palette
  * @param {Record<string,string>} config.values  the row's text per shown column
  * @param {string} config.target @param {string} config.source
  * @param {(patch:{sections?:Record<string,boolean>, items?:Record<string,boolean>,
@@ -122,31 +122,20 @@ export function openItemPopup(config) {
       (on) => config.onToggle({ sections: { [config.sectionId]: on } })),
   );
 
-  // The section's colour, as the five chips rather than a cycling button: the
+  // The section's colour, as the five swatches rather than a cycling button: the
   // colour is the sheet's whole category encoding, so the choice should be in front
-  // of you. Same argument the tree's own swatch menu makes.
+  // of you. The same row the format panel's band uses, from `chips.js`.
   if (config.colours.length) {
-    const palette = document.createElement('div');
-    palette.className = 'item-popup-palette';
-    palette.setAttribute('role', 'group');
-    palette.setAttribute('aria-label', t('tree.recolour', { section: config.sectionTitle }));
-    for (const { role, hex } of config.colours) {
-      const chip = document.createElement('button');
-      chip.type = 'button';
-      chip.className = 'item-popup-chip';
-      chip.style.background = hex;
-      chip.title = role;
-      chip.setAttribute('aria-label', role);
-      if (hex.toLowerCase() === config.colour.toLowerCase()) {
-        chip.setAttribute('aria-current', 'true');
-      }
-      chip.addEventListener('click', () => {
-        config.onToggle({ sectionColors: { [config.sectionId]: role } });
+    const palette = swatchRow({
+      colours: config.colours,
+      label: t('tree.recolour', { section: config.sectionTitle }),
+      onPick: (key) => {
+        config.onToggle({ sectionColors: { [config.sectionId]: key } });
         closeItemPopup();
-      });
-      palette.append(chip);
-    }
-    rows.append(palette);
+      },
+    });
+    palette.paint(config.role);
+    rows.append(palette.row);
   }
 
   const actions = document.createElement('div');

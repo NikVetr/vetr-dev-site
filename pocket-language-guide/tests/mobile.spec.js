@@ -130,7 +130,7 @@ test.describe('editing a row on a phone', () => {
     expect(box.y + box.height).toBeLessThanOrEqual(size.height + 1);
     // The four decisions the content list offers for a row.
     await expect(popup.locator('.item-popup-toggle')).toHaveCount(2);
-    expect(await popup.locator('.item-popup-chip').count()).toBe(5);
+    expect(await popup.locator('.swatch-row .swatch-pick').count()).toBe(5);
     await expect(popup.getByRole('button', { name: /edit text/i })).toBeVisible();
     await expect(popup.getByRole('button', { name: /show in list/i })).toBeVisible();
 

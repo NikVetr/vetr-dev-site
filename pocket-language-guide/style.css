@@ -1353,6 +1353,30 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
   inline-size: 2rem; block-size: 1.7rem; padding: 0; cursor: pointer;
   border: 1px solid var(--line); border-radius: var(--radius-sm); background: none;
 }
+/* A row of colour swatches, one of which is current: the card's row popup and the
+   header/footer band's two colour settings, which were the last two `<select>`s in a
+   panel where everything else is a drawn glyph. Six across fits a 260px panel because
+   these carry no captions -- unlike `.swatches` above, where the caption *is* the
+   point, here the reader has already been told what they are colouring by the field
+   label, and what is left to say is only "which". */
+.swatch-row { display: flex; flex-wrap: wrap; gap: 0.3em; }
+.swatch-pick {
+  inline-size: 1.4rem; block-size: 1.4rem; border-radius: 4px; padding: 0;
+  border: 1px solid var(--line); cursor: pointer;
+}
+/* "No colour of its own", drawn as paper with a rule through it so it is not read as
+   a choice of white. The same idiom the ink-mode and fill glyphs use for `none`. */
+.swatch-pick-none {
+  background: var(--paper);
+  background-image: linear-gradient(to top right,
+    transparent calc(50% - 0.5px), var(--line) calc(50% - 0.5px),
+    var(--line) calc(50% + 0.5px), transparent calc(50% + 0.5px));
+}
+/* The one in use, marked rather than only coloured -- six blocks of solid colour say
+   nothing about which is current. */
+.swatch-pick[aria-current="true"] { outline: 2px solid var(--ink); outline-offset: 1px; }
+.swatch-pick:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
 /* The background panel's own column: a swatch, a labelled slider and, in flag mode,
    one toggle per country the language serves. */
 .background-custom { display: flex; flex-direction: column; gap: 6px; }
@@ -1840,14 +1864,9 @@ button.big { justify-content: center; padding: 0.6em 1em; font-size: var(--fs-1)
 /* The chip idiom carries the look. All this adds is that a long section name wraps
    inside the chip rather than widening the panel past the row it is anchored to. */
 .item-popup-toggle { max-inline-size: 100%; }
-.item-popup-palette { flex: 1 0 100%; display: flex; gap: 0.3em; margin-block-start: 0.2em; }
-.item-popup-chip {
-  inline-size: 1.4rem; block-size: 1.4rem; border-radius: 4px;
-  border: 1px solid var(--line); cursor: pointer; padding: 0;
-}
-/* The one in use, marked rather than only coloured -- five chips of solid colour
-   say nothing about which is current. */
-.item-popup-chip[aria-current="true"] { outline: 2px solid var(--ink); outline-offset: 1px; }
+/* The shared swatch row, on its own line under the two chips rather than trailing
+   them: it is a different question from "is this row on the sheet". */
+.item-popup .swatch-row { flex: 1 0 100%; margin-block-start: 0.2em; }
 /* The shared row editor, which the tree lays out in a wide panel and this one has
    to fit into 17rem: one field per line rather than side by side. */
 .item-popup .item-edit { display: flex; flex-direction: column; gap: 0.3em; }

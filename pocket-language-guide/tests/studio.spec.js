@@ -751,7 +751,9 @@ test('the furniture band takes three positions, several slots each', async ({ pa
   const spread = await page.locator('.face.focused svg text').evaluateAll(
     (ns) => ns.map((n) => Number(n.getAttribute('x'))),
   );
-  await page.locator('#foot-colour').selectOption('roles.alert');
+  // A swatch, not a dropdown: the band's colour is the one setting in this panel
+  // whose options can only be shown rather than named.
+  await page.locator('#foot-colour [data-colour="roles.alert"]').click();
   const field = page.locator('.panel-field', { hasText: 'Header / footer' });
   await field.getByRole('radio', { name: 'Right tab', exact: true }).click();
   await expect.poll(async () => {

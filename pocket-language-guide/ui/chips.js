@@ -26,6 +26,81 @@ import { t } from './i18n.js';
 /** @typedef {Awaited<ReturnType<import('../core/pack.js').loadCorpus>>} Corpus */
 
 /**
+ * A row of colour swatches, one of which is current.
+ *
+ * Shared because the app had grown two of these and the format panel was about to
+ * need two more: the row popup's palette, and the header/footer band's ink and tab
+ * colour, which were the last two `<select>`s in a panel where every other option is
+ * a drawn glyph. A colour is the one setting a glyph cannot draw -- the option *is*
+ * its appearance -- so it is a swatch rather than a line drawing, and a row of six
+ * rather than a menu: they fit, the current one can be marked, and a reader who wants
+ * the emergency band red should not have to open anything to get it.
+ *
+ * The content tree keeps its own disclosure button, which is a genuinely different
+ * interaction -- it opens *over* a dense list of sections where a row of six would
+ * not fit -- and is left alone rather than forced through here.
+ * @param {object} config
+ * @param {{key:string, hex:string, label:string}[]} config.colours
+ * @param {string} config.label  the group's accessible name
+ * @param {(key:string)=>void} config.onPick
+ * @param {{key:string, label:string}} [config.none]  an opt-out swatch, drawn as paper
+ * @param {string} [config.id]
+ */
+export function swatchRow({ colours, label, onPick, none, id }) {
+  const row = document.createElement('div');
+  row.className = 'swatch-row';
+  row.setAttribute('role', 'group');
+  row.setAttribute('aria-label', label);
+  if (id) row.id = id;
+
+  /** @type {Map<string, HTMLButtonElement>} */
+  const chips = new Map();
+  /** @param {string} key @param {string} hex @param {string} name */
+  const chip = (key, hex, name) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'swatch-pick';
+    // Left to the stylesheet where there is no hex: an inline `background` shorthand
+    // would clear the `background-image` the opt-out swatch is drawn with.
+    if (hex) button.style.background = hex;
+    button.title = name;
+    button.dataset.colour = key;
+    button.setAttribute('aria-label', name);
+    button.addEventListener('click', () => onPick(key));
+    row.append(button);
+    chips.set(key, button);
+    return button;
+  };
+
+  if (none) {
+    // Paper with a rule through it, the way "no fill" is drawn everywhere else here,
+    // so it is not mistaken for white as a choice of colour.
+    chip(none.key, '', none.label).classList.add('swatch-pick-none');
+  }
+  for (const { key, hex, label: name } of colours) chip(key, hex, name);
+
+  return {
+    row,
+    /**
+     * @param {string} current  the key in use
+     * @param {{key:string, hex:string}[]} [next]  fresh hexes, when the palette moved
+     */
+    paint(current, next) {
+      for (const { key, hex } of next ?? []) {
+        const chipEl = chips.get(key);
+        if (chipEl) chipEl.style.background = hex;
+      }
+      // Marked, not merely coloured: six blocks of solid colour say nothing about
+      // which one is in use.
+      for (const [key, chipEl] of chips) {
+        if (key === current) chipEl.setAttribute('aria-current', 'true');
+        else chipEl.removeAttribute('aria-current');
+      }
+    },
+  };
+}
+
+/**
  * One section as the grid needs it: a name, a mark, and the rows it could put on
  * the card. Built by `ui/content-tree.js`, which already filters the corpus down
  * to what this pair can actually show.

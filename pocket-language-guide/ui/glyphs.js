@@ -8,6 +8,7 @@
 // 3-column A6 and a 3-column 4x6 differ only in proportion, and nobody should have
 // to hover to find out which is which.
 
+import { swatchRow } from './chips.js';
 import { nextIndex } from './keys.js';
 import { PERCENT_FIRST, regionName, t, uiLanguage } from './i18n.js';
 import { PRIORITY_STEPS } from '../core/pack.js';
@@ -1015,6 +1016,9 @@ export function paletteControl({ themes, themeId, themeColors, onChange }) {
   return {
     group: group.group,
     custom,
+    /** Every colour in effect, keyed as the theme files key them. The furniture
+     * band's swatches are drawn from this, so a recoloured palette shows up there. */
+    hexes: () => currentColours(),
     /** The five section-role colours in effect, which is what the ink-mode glyph
      * draws with -- a custom palette has to show up there too. */
     colours: () => COLOUR_KEYS.filter((c) => c.key.startsWith('roles.'))
@@ -1598,9 +1602,11 @@ export function backgroundControl({
  * @param {Object} config
  * @param {import('../core/types.js').SheetSpec} config.spec
  * @param {(patch:Partial<import('../core/types.js').SheetSpec>)=>void} config.onChange
- * @param {string[]} [config.colourKeys]  theme colour keys a band may be set in
+ * @param {() => {key:string, hex:string, label:string}[]} [config.colours]  the
+ *   theme colours a band may be set in, read live so recolouring the palette
+ *   recolours the swatches
  */
-export function headControl({ spec, onChange, colourKeys = [] }) {
+export function headControl({ spec, onChange, colours = () => [] }) {
   /** @type {import('../core/types.js').HeadSlot[]} */
   // `theme` last before `custom`: it is the newest and the only one that names a
   // group of sections rather than a fact about the sheet.
@@ -1767,52 +1773,62 @@ export function headControl({ spec, onChange, colourKeys = [] }) {
       return { side, boxes, wrap };
     });
 
+    // The colours on offer, which are the theme's own: a band can only ever be a
+    // colour already on the card. Keys are fixed; the hexes move when the reader
+    // recolours the palette, so `paint` reads them again.
+    const palette = colours();
+
     // Colour, which is a separate question from emphasis: "make the emergency number
-    // red" is not "make it bold". The choices are the theme's own keys, so a band can
-    // only ever be a colour already on the card.
-    const colour = /** @type {HTMLSelectElement} */ (document.createElement('select'));
-    colour.className = 'select';
-    colour.id = `${which}-colour`;
-    colour.append(Object.assign(document.createElement('option'), {
-      value: '', textContent: t('format.headColour.default'),
-    }));
-    for (const key of colourKeys) {
-      colour.append(Object.assign(document.createElement('option'), {
-        value: key, textContent: t(`colour.${key.replace('roles.', '')}`),
-      }));
-    }
-    colour.addEventListener('change', () => push({ colour: colour.value || undefined }));
+    // red" is not "make it bold".
+    //
+    // Swatches rather than a dropdown of six colour names -- this and the tab colour
+    // below were the last two controls in the panel that named a thing instead of
+    // showing it. A colour is the one setting the panel's line-drawing glyphs cannot
+    // express, because the option *is* its appearance, so it gets the swatch row from
+    // `chips.js` that the card's own row popup uses.
+    const colour = swatchRow({
+      colours: palette,
+      label: t('format.headColour'),
+      id: `${which}-colour`,
+      none: { key: '', label: t('format.headColour.default') },
+      onPick: (key) => push({ colour: key || undefined }),
+    });
     const colourField = document.createElement('div');
     colourField.className = 'numeric-custom';
     colourField.append(Object.assign(document.createElement('span'), {
       className: 'small muted', textContent: t('format.headColour'),
-    }), colour);
+    }), colour.row);
+    // Nothing to choose between where the caller offers no colours -- the export
+    // page's own copy of this control -- and a lone opt-out swatch with nothing to
+    // opt out of is worse than no row. The band still takes the theme's default.
+    colourField.hidden = !palette.length;
 
     // **The tab**: the same band, on a solid rectangle flush with the corner, in
     // white. A stack of printed cards is hard to tell apart face-on, and this is the
     // one thing on a sheet that is visible from its edge.
     //
     // Three glyph segments rather than a dropdown of eight colour names, which is
-    // what this was and was the last control in the panel that named a thing instead
-    // of drawing it. A row of eight chips would have been no better: the real choice
-    // underneath the colour list is whether each face takes its *own* section's
+    // what this was: a row of eight chips would have been no better, because the real
+    // choice underneath the colour list is whether each face takes its *own* section's
     // colour -- so a cut stack is five colours and the colour means something -- or
-    // whether the whole set shares one. The theme keys are the tail of the second
-    // answer, and they appear once it has been given.
-    const fixed = /** @type {HTMLSelectElement} */ (document.createElement('select'));
-    fixed.className = 'select';
-    fixed.id = `${which}-fill`;
-    for (const key of colourKeys) {
-      fixed.append(Object.assign(document.createElement('option'), {
-        value: key, textContent: t(`colour.${key.replace('roles.', '')}`),
-      }));
-    }
-    fixed.addEventListener('change', () => push({ fill: fixed.value }));
+    // whether the whole set shares one. Which colour is the tail of the second answer,
+    // and it appears as a swatch row once that answer has been given.
+
+    // Which colour, once the reader has said they all share one. Held here as well
+    // as in the spec, because the `one` segment has to send *some* key the moment it
+    // is chosen and the band may never have carried one.
+    let fixedKey = palette[0]?.key ?? 'ink';
+    const fixed = swatchRow({
+      colours: palette,
+      label: t('format.headFillOne'),
+      id: `${which}-fill-colour`,
+      onPick: (key) => { fixedKey = key; push({ fill: key }); },
+    });
     const fixedField = document.createElement('div');
     fixedField.className = 'numeric-custom';
     fixedField.append(Object.assign(document.createElement('span'), {
       className: 'small muted', textContent: t('format.headFillOne'),
-    }), fixed);
+    }), fixed.row);
 
     const fill = segmented({
       label: t('format.headFill'),
@@ -1833,7 +1849,7 @@ export function headControl({ spec, onChange, colourKeys = [] }) {
         // Dropped where the caller offers no keys -- the export page's own copy of
         // this control passes none -- because a segment that opens an empty list is
         // worse than one segment fewer.
-        ...(colourKeys.length ? [{
+        ...(palette.length ? [{
           value: 'one',
           caption: t('format.headFill.oneColour'),
           title: t('format.headFillTitle.one'),
@@ -1841,7 +1857,7 @@ export function headControl({ spec, onChange, colourKeys = [] }) {
         }] : []),
       ],
       onChange: (value) => push({
-        fill: value === 'none' ? undefined : value === 'section' ? 'section' : fixed.value,
+        fill: value === 'none' ? undefined : value === 'section' ? 'section' : fixedKey,
       }),
     });
 
@@ -1881,16 +1897,20 @@ export function headControl({ spec, onChange, colourKeys = [] }) {
       on.checked = Boolean(band);
       slots.hidden = !band;
       span.select(band?.span ?? 'full');
-      colour.value = band?.colour ?? '';
       // Any fill that is not `section` is a theme key, which is the `one` segment
       // with that key chosen underneath it.
       const tab = !band?.fill ? 'none' : band.fill === 'section' ? 'section' : 'one';
       fill.select(tab);
-      if (tab === 'one') fixed.value = band.fill;
-      // `!colourKeys.length` as well as the segment, because the export page's copy of
-      // this control offers no keys and a spec made in the studio can still arrive
-      // here with one: an empty select is worse than no select.
-      fixedField.hidden = tab !== 'one' || !colourKeys.length;
+      if (tab === 'one') fixedKey = band.fill;
+      // Hexes as well as the mark, because the palette above this control can have
+      // moved since the row was built.
+      const now = colours();
+      colour.paint(band?.colour ?? '', now);
+      fixed.paint(fixedKey, now);
+      // `!palette.length` as well as the segment, because the export page's copy of
+      // this control offers no colours and a spec made in the studio can still arrive
+      // here with a fill: an empty row is worse than no row.
+      fixedField.hidden = tab !== 'one' || !palette.length;
       reach.select(band?.fillReach ?? 'band');
       reachField.hidden = tab === 'none';
       // The free-text box is only useful where a position asks for the reader's text.
@@ -1971,11 +1991,11 @@ export function headReachGlyph(reach) {
 /**
  * What a tab is for, drawn as the thing it is for: two cards of the same set.
  *
- * This replaced a dropdown of eight colour names, and a row of eight identical chips
- * would have been no better -- the panel is handed the theme's colour *keys* and not
- * its hexes, so it cannot draw them, and the question underneath the colour list is
- * not "which blue" but "does each card get its own colour or do they all share one".
- * So the glyphs show two cards and differ in whether their tabs match.
+ * This replaced a dropdown of eight colour names, and a row of eight swatches would
+ * have been no better on its own -- the question underneath the colour list is not
+ * "which blue" but "does each card get its own colour or do they all share one". So
+ * the glyphs show two cards and differ in whether their tabs match, and the swatch
+ * row for picking the shared one appears beneath, where it is an answer to something.
  * @param {'none'|'section'|'one'} kind
  */
 export function headFillGlyph(kind) {
