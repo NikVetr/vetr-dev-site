@@ -88,3 +88,46 @@ test('the header can be a solid tab, flush with the corner, in white', async ({ 
   expect(left.rect.x).toBeCloseTo(0, 1);
   expect(left.rect.w).toBeLessThan(left.page_w * 0.8);
 });
+
+test('two changes to the band in one breath both survive', async ({ page }) => {
+  // `push` used to read the band back out of the spec the app last handed down, and
+  // that only catches up after a solve, which is debounced. So a second gesture
+  // inside the same window was built on the spec as it was *before* the first, and
+  // the first was silently discarded. The panel gained two more ladders when the tab
+  // got a shape and a fill ladder, which made a pair of quick taps much easier to hit.
+  await page.setViewportSize({ width: 1700, height: 1000 });
+  await page.goto('/customize.html?target=es&source=en');
+  await expect(page.locator('.panel-field-title').first()).toBeVisible();
+
+  // Switch the header on, then -- without waiting for the solve -- tick a slot and
+  // choose a corner. Both are changes to the same band.
+  await page.locator('.head-on input').first().check();
+  await page.waitForTimeout(1500);
+  // **Both gestures in one tick.** Driven from the page rather than through two
+  // Playwright actions: each of those waits for actionability, which is long enough
+  // for the 260ms solve debounce to fire between them, and the bug only exists
+  // inside one window. This is the gesture pair a thumb actually makes.
+  await page.evaluate(() => {
+    const tick = /** @type {HTMLInputElement} */ (document.getElementById('head-left-pair'));
+    tick.click();
+    const span = [...document.querySelectorAll('[role=radio]')]
+      .find((r) => /Left tab/.test(r.textContent || ''));
+    /** @type {HTMLElement} */ (span)?.click();
+  });
+  // **Asserted on the sheet, not on the checkbox.** The tick stays visually checked
+  // either way -- the control only repaints when the app hands a spec back down --
+  // so the DOM checkbox cannot see this bug. What the reader loses is the slot on
+  // the card, so that is what is checked.
+  await page.waitForTimeout(3500);
+  const band = await page.evaluate(() => {
+    const svg = document.querySelector('.face.focused svg');
+    // The band sits above the columns; the content box starts around y=14 on this
+    // card, so anything higher is furniture.
+    return [...(svg?.querySelectorAll('text') ?? [])]
+      .filter((t) => +(t.getAttribute('y') ?? 99) < 13)
+      .map((t) => t.textContent).join(' ');
+  });
+  expect(band, 'the pair asked for in the first gesture must still be on the card')
+    .toMatch(/Spanish|English/);
+  await expect(page.locator('#head-left-pair')).toBeChecked();
+});

@@ -1613,6 +1613,24 @@ export function headControl({ spec, onChange, colourKeys = [] }) {
     (Array.isArray(held) ? held : [held]).filter(Boolean));
 
   let held = spec;
+  /**
+   * The editor's own bands, authoritative between solves.
+   *
+   * **Two changes inside one debounce window used to lose the first.** `push` read
+   * the bands back out of `held`, and `held` only caught up when the app called
+   * `paint` after a solve -- which is debounced. So ticking the pair and then
+   * immediately choosing a left tab sent the second patch built on the spec as it
+   * was *before* the pair, and the pair came back unticked. The panel gained two
+   * more ladders recently, which made a gesture pair like that much easier to hit.
+   *
+   * So the editor keeps its own copy, updates it on every push, and adopts the app's
+   * version whenever `paint` runs -- the app stays authoritative across a solve, and
+   * the editor is authoritative within one.
+   */
+  let bands = /** @type {{head:import('../core/types.js').HeadBand|null,
+   *                      foot:import('../core/types.js').HeadBand|null}} */ ({
+    head: null, foot: null,
+  });
 
   /**
    * The old shape, read once so the control opens on whatever was saved.
@@ -1657,16 +1675,18 @@ export function headControl({ spec, onChange, colourKeys = [] }) {
 
     /** @param {Partial<import('../core/types.js').HeadBand>|null} patch */
     const push = (patch) => {
-      const current = bandsOf(held);
-      const next = patch === null ? undefined : {
+      const next = patch === null ? null : {
         span: 'full', left: [], center: [], right: [],
-        .../** @type {any} */ (current[which]), ...patch, text: text.value,
+        .../** @type {any} */ (bands[which]), ...patch, text: text.value,
       };
+      // Recorded before it is sent, so a second gesture in the same debounce window
+      // builds on this one rather than on the spec as it was two changes ago.
+      bands = { ...bands, [which]: next };
       // Both fields every time, so a legacy `head.at` is written out of the spec on
       // the first touch rather than lingering beside the new shape.
       onChange(/** @type {Partial<import('../core/types.js').SheetSpec>} */ ({
-        head: which === 'head' ? next : (current.head ?? undefined),
-        foot: which === 'foot' ? next : (current.foot ?? undefined),
+        head: bands.head ?? undefined,
+        foot: bands.foot ?? undefined,
       }));
     };
     text.addEventListener('change', () => push({}));
@@ -1892,6 +1912,10 @@ export function headControl({ spec, onChange, colourKeys = [] }) {
   /** @param {import('../core/types.js').SheetSpec} from */
   const paint = (from) => {
     held = from;
+    // The app's spec wins across a solve: it has been through `headBands`, so it
+    // carries any migration of the legacy `at` shape and anything another control
+    // changed.
+    bands = bandsOf(from);
     head.paint(from);
     foot.paint(from);
   };
