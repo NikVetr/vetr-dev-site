@@ -105,6 +105,69 @@ function sprig(p, q, n, size, aspect) {
   }
 }
 
+/** One leaf of the elven vine.
+ *
+ * `s` is the blade's length in pen-y units, so a leaf is always the same fraction
+ * of the band's height, and `(ax, ay)` is a unit direction *on paper* which the
+ * box's `aspect` turns back into pen space. That is the whole reason this helper
+ * exists: pen space is stretched onto the box, so a leaf given a fixed pen
+ * direction stands upright in a square corner and lies flat along the stem on a
+ * 119x2 divider -- which is exactly how this style's leaves used to come out,
+ * squashed ellipses threaded on the line rather than blades struck off it.
+ *
+ * The blade is asymmetric: one margin carries nearly all the breadth and the tip
+ * runs out past both, which is a vine leaf hanging off its stalk, and is drawn
+ * against `laurel`'s `sprig` -- the symmetric lanceolate blade of a cut branch,
+ * set in opposite pairs. Below about a 1:25 band there is no room for two margins
+ * a stroke apart, so the leaf is the outer margin alone: one bowed stroke, which
+ * still reads as a blade where a straight barb reads as a tick. The threshold is
+ * set where it is so that the whole of one kind of box falls on one side of it: a
+ * 5.4pt heading flourish carries an outline at every width the layout hands it,
+ * and a 3.2pt divider or a 2.1pt gutter -- where the two margins would come out a
+ * fifth of a point apart -- carries none.
+ * @param {Pen} p @param {number} x @param {number} y @param {number} s
+ * @param {number} ax @param {number} ay @param {number} aspect */
+function vineLeaf(p, x, y, s, ax, ay, aspect) {
+  const dx = ax * s * aspect, dy = ay * s;
+  const flat = aspect < 0.04, breadth = flat ? 0.15 : 0.38;
+  // The belly falls on the side the blade came from, never the side it points at,
+  // so a leaf thrown at the edge of a band keeps its breadth inside the box.
+  const belly = ay < 0 ? breadth : -breadth;
+  const nx = -ay * belly * s * aspect, ny = ax * belly * s;
+  p.m(x, y);
+  p.c(x + dx * 0.2 + nx, y + dy * 0.2 + ny,
+    x + dx * 0.68 + nx * 0.92, y + dy * 0.68 + ny * 0.92, x + dx, y + dy);
+  if (flat) return;
+  p.c(x + dx * 0.66 - nx * 0.5, y + dy * 0.66 - ny * 0.5,
+    x + dx * 0.22 - nx * 0.42, y + dy * 0.22 - ny * 0.42, x, y);
+  // A midrib needs a blade as deep as it is long to keep white on both sides of
+  // it, which only a square box has: in a band the vein would print into both
+  // margins at once. Gold midribs on closed leaves are the elven frame's own
+  // mark, so where there is room the corner carries them too.
+  if (aspect > 0.5 && s >= 16) {
+    p.m(x, y);
+    p.q(x + dx * 0.5 + nx * 0.22, y + dy * 0.5 + ny * 0.22, x + dx * 0.94, y + dy * 0.94);
+  }
+}
+
+/** A tendril: a coil that leaves the stem at `x,y`, curls away in the direction
+ * `from` and winds *inward*, tightening as it goes, which is the way round a real
+ * tendril coils and the difference between this and a drawn spiral. A turn and a
+ * half, so the outer turn crosses the stalk it came in on -- the vine running
+ * through itself, which is the elven mark and the one interlace a corner this
+ * small has room for. Successive turns have to stand a stroke and a half apart or
+ * the coil prints as a disc, so it is the first thing a small corner gives up.
+ * @param {Pen} p @param {number} x @param {number} y @param {number} r
+ * @param {number} from radians */
+function tendril(p, x, y, r, from) {
+  const cx = x + Math.cos(from) * r, cy = y + Math.sin(from) * r, steps = 14;
+  for (let i = 0; i <= steps; i += 1) {
+    const t = i / steps, a = from + Math.PI + 5.6 * t, k = r * (1 - 0.78 * t);
+    const px = cx + Math.cos(a) * k, py = cy + Math.sin(a) * k;
+    if (i) p.l(px, py); else p.m(px, py);
+  }
+}
+
 /** One strip of a two-strip plait. It travels between two lanes, meets its
  * partner at every cell's midpoint, and where it passes *under* its line stops
  * short on both sides of the crossing. That gap is the entire difference between
@@ -170,27 +233,50 @@ export function ornamentRule(motif, x, y, w, h, color) {
   if (isLanguageEmblem(motif)) {
     languageRule(motif, p, w - pad * 2, h - pad * 2);
   } else if (motif === 'botanical') {
-    // The elven vine, and this is the half of it worth keeping now that `laurel`
-    // no longer shares the design: it *wanders*. The stem is an S rather than a
-    // branch and the leaves alternate rather than pair, where `laurel` below is
-    // the same plant cut, bound and finished, in opposite pairs on a straight
-    // stem. The tendril that says the vine is still growing is kept for the
-    // corner and deliberately not attempted here: a coil in a band twelve times
-    // wider than it is tall comes out as a flat squiggle, not a curl.
-    const n = cells(w, h, 5.2, 3);
-    p.m(0, 55); p.c(18, 62, 23, 35, 43, 50);
-    p.m(57, 50); p.c(77, 65, 82, 38, 100, 45);
-    for (let k = 0; k < n; k += 1) {
-      const o = 8 + (k + 0.5) * (32 / n);
-      for (const [i, a] of [o, 100 - o].entries()) {
-        const s = (k + i) % 2 ? -1 : 1;
-        p.m(a, 50); p.c(a - 3 * s, 50 - 15 * s, a - s, 50 - 32 * s, a + 7 * s, 50 - 38 * s);
-        p.c(a + 8 * s, 50 - 13 * s, a + 4 * s, 50 - 5 * s, a, 50);
-      }
+    // The elven vine: *one growing shoot*, not a border pattern. Tolkien's own
+    // idiom is asymmetric and still growing, so the marks are a stem that wanders
+    // off the line, single leaves of unequal size alternating along it -- never a
+    // pair, never twice the same length in a row -- and a bud at the bends
+    // between them. `laurel` below is the same plant cut, bound and finished:
+    // opposite pairs at one constant angle on a straight stem, with a tie. The
+    // tendril that says this one is still growing lives in the corner and is
+    // deliberately not attempted here -- a coil in a band twelve times wider than
+    // it is tall comes out as a flat squiggle, not a curl.
+    //
+    // Nothing is measured in bare pen units. A node stands 1.2 band-heights from
+    // the next and a leaf is a fixed fraction of the band deep, so the shoot has
+    // one shape on paper from the 46x2.1 gutter to the 220x18 swatch. The stem's
+    // wander is eleven pen units either side of the middle, a third of a point
+    // peak to peak on a 2pt section divider, where it reads as a slack line
+    // rather than as a wave: that is the trade a 1.4pt band forces -- it can show
+    // the wander or the leaves, and the leaves are what say vine.
+    const n = cells(w, h, 1.2, 18), c = 100 / n, mid = 50, amp = 11;
+    // A leaf reaches half a cell along the band and no further, which keeps one
+    // leaf clear of the next node's and keeps the first and last inside the box.
+    // The cap earns its keep on the 2pt sliver beside the card cut, where the box
+    // arrives taller than it is wide and a paper angle stretched into it would
+    // throw the blade clear off the page.
+    const aspect = Math.min(0.77 / n, (h - pad * 2) / (w - pad * 2));
+    p.m(0, mid + amp);
+    for (let i = 0; i < n; i += 1) {
+      const up = i % 2 ? -1 : 1;
+      p.c(i * c + c / 3, mid + amp * up, (i + 1) * c - c / 3, mid - amp * up,
+        (i + 1) * c, mid - amp * up);
     }
-    // The bud the two stems run into, and its one vein.
-    p.m(43, 50); p.q(50, 5, 57, 50); p.q(50, 95, 43, 50);
-    p.m(47, 50); p.l(53, 50);
+    for (let i = 0; i < n; i += 1) {
+      // The leaf stands where the stem crosses the middle of the band, because
+      // that is the one place a blade has a whole half-band to stand in, and it
+      // takes the side of the bend the stem is running into. Three unequal
+      // lengths against two sides come back into step only every sixth node, so
+      // no two neighbours match and neither does any pair across the stem: the
+      // silhouette never settles into the rhythm `laurel` below is built on.
+      const side = i % 2 ? 1 : -1;
+      vineLeaf(p, (i + 0.5) * c, mid, [48, 30, 40][i % 3], 0.5, side * 0.87, aspect);
+      // A bud at the bend in between, drawn as a short blade raking hard along
+      // the stem, which is what an unopened leaf is -- and only where the band is
+      // deep enough to carry a second mark at a node.
+      if (fine && i % 2) vineLeaf(p, i * c, mid - amp * side, 18, 0.9, -side * 0.44, aspect);
+    }
   } else if (motif === 'laurel') {
     // A wreath, which is a branch *cut and bound* -- and that is the whole of
     // what separates it from `botanical` above, whose design it used to share
@@ -350,17 +436,58 @@ function corner(motif, size, color, x, y, right, bottom) {
   if (isLanguageEmblem(motif)) {
     languageCorner(motif, p);
   } else if (motif === 'botanical') {
-    // The vine again, doubled: two stems running the same course at different
-    // depths, leaves alternating along them, and the tendrils coiling off into
-    // the open quadrant. It wanders where the laurel corner is bound.
-    p.m(5, 94); p.c(34, 72, 0, 28, 40, 12); p.c(69, 0, 84, 21, 94, 5);
-    p.m(10, 88); p.c(48, 63, 18, 40, 54, 23); p.c(76, 14, 83, 28, 94, 16);
-    for (const [a, b] of [[16, 65], [20, 42], [42, 26]]) {
-      p.m(a, b); p.c(a - 16, b - 3, a - 12, b - 19, a, b - 24);
-      p.c(a + 9, b - 12, a + 5, b - 5, a, b);
+    // The vine where the box is square, which is the only place this style can
+    // draw what it is actually about. The stem hugs both edges and bends round
+    // the corner, so the mark reads as a corner rather than as an arc of a
+    // wreath; a branch leaves it low down and grows out across the open quadrant;
+    // and both tips end in a tendril of one and a half turns, which crosses its
+    // own stalk. That crossing is the elven mark -- Tolkien's vines run through
+    // themselves -- and a coiling tendril is the one place a corner this small
+    // has room for one.
+    //
+    // Two stems crossing each other was tried and refused, twice over. A second
+    // line that hugs the same corner runs *parallel* to the first, because two
+    // brackets around one corner are nested, and the pair then encloses a long
+    // lens that reads as one enormous leaf beside leaves of the same shape --
+    // which is what the previous doubled-stem corner drew. A line that comes in
+    // from a box edge instead crosses at a good angle but has nowhere to go
+    // afterwards: the stem sits five units off each edge, so there is no room
+    // past the crossing for the shoot to continue, and a shoot that stops is a
+    // cut end.
+    //
+    // Leaves stand *off* the stem at nodes and rake the way it grows, unequal in
+    // size and longest at the root. The previous corner strung them *along* the
+    // stem, overlapping it, which read as a chain of links rather than a plant.
+    // Against `laurel`'s corner, which is bound at the diagonal with a fillet and
+    // pairs its leaves, and against `berry` (ru), whose fruit are closed circles.
+    //
+    // 0.35pt of stroke in a 9pt box is a quarter of the whole drawing, so detail
+    // is spent by size: the coil needs its turns a stroke and a half apart, which
+    // the smallest corner cannot give, and there the branch goes too -- what is
+    // left is the stem with three large leaves, which is a drawing rather than a
+    // reduction of one.
+    const detail = size >= 18 ? 2 : size >= 12 ? 1 : 0;
+    p.m(5, 96); p.q(5, 12, 58, 6); p.q(78, 2, 90, 16);
+    if (detail) {
+      // The branch runs out along the *diagonal*, which is the one direction in a
+      // corner box that is neither arm. A branch that stayed alongside the stem
+      // closed a long lens with it and the pair read as one enormous leaf beside
+      // leaves of the same shape -- which is what the previous doubled-stem
+      // corner drew -- and a branch struck off square made a T with it.
+      p.m(6.2, 72.6); p.c(14, 62, 38, 64, 52, 42);
+      tendril(p, 52, 42, 10, 0.57);
     }
-    p.m(40, 48); p.c(67, 43, 70, 30, 62, 27); p.c(52, 23, 47, 34, 53, 37);
-    p.m(31, 74); p.c(56, 72, 49, 52, 38, 60); p.c(32, 65, 40, 68, 43, 64);
+    if (detail === 2) tendril(p, 90, 16, 8, 2.43);
+    for (const [x, y, s, ax, ay] of /** @type {[number,number,number,number,number][]} */ (
+      detail ? [
+        [34.8, 13.9, 24, 0.859, 0.511], [16.9, 65.5, 26, 0.758, 0.652],
+        [33.1, 58.7, 30, 0.259, -0.966],
+        ...(detail === 2 ? [[74.3, 6, 15, 0.216, 0.976], [18.25, 31.5, 13, -0.862, -0.507],
+          [5.3, 88, 14, 0.9, 0.44]] : []),
+      ] : [
+        [8.3, 58.9, 32, 0.966, -0.258], [18.25, 31.5, 34, 0.998, 0.068],
+        [43.3, 9.6, 26, 0.744, 0.669],
+      ])) vineLeaf(p, x, y, s, ax, ay, 1);
   } else if (motif === 'laurel') {
     // One wreath bound at the corner: the tie sits on the corner's own diagonal
     // and a branch springs from it along each edge, each a single sweep rather
