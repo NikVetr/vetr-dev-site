@@ -320,7 +320,8 @@ members) and `.misc` (18) -- which hold currency word/symbol pairs and the numbe
 line. Those are **complements**: `validate_data.py` separately requires a currency
 word and its symbol to travel together, while the old flat `CLUSTER_DECAY` was
 discounting exactly that pair. So the table both adds cross-group edges and retracts
-false within-group ones, which is why it carries `none` rows as well.
+false within-group ones, which is why it carries `none` rows as well — 120 of them
+hold the number line alone, where a discount would delete counting from the card.
 
 The relation is **ternary** -- `none`/`partial`/`duplicate`, keep-factors 1/0.7/0.35
 -- and the reason is in the rating data rather than in taste: inter-rater agreement
@@ -328,12 +329,32 @@ is Fleiss κ = 0.60 on *whether* a relation exists and near-unanimous on its *le
 once existence is agreed, so finer strength grades would refine under a gate that is
 itself only moderately reliable. The scorer could not use more either, ranking by
 value-per-point among candidates whose importance steps by 0.02. At this sparsity
-the file is 4KB, where staying diffable and hand-reviewable beats packing it.
+the file is 21KB, where staying diffable and hand-reviewable beats packing it.
 
-**Absent means unrated, never independent.** Only `toilets` and `emergency-medical`
-are rated so far, plus the cross-section candidates touching them; everywhere else
-falls back to the cluster prior, and `numbers-money` is the known hazard where that
-prior is actively wrong. Raw judgements live in
+**A row says how it was decided.** `provenance` is `rated` or `rule:<name>`, and the
+distinction is load-bearing because the two kinds of row carry different evidence. A
+`rated` row has pass counts and a majority behind it; an *asserted* row has none,
+because nobody rated it — it follows from a rule in `scripts/build_redundancy.py`
+that the validator re-derives and compares, and a rule row claiming any passes is an
+error. The table is 310 rows: 116 rated and 194 asserted. That split is what keeps a
+36%-of-the-corpus section affordable. `numbers-money` alone is 4,012 candidate pairs,
+the rules decide 1,304 of them, and only 194 need writing down — the rest are
+recoverable from `cluster_id`, or can never co-print because their `applies_to` are
+disjoint, which `core/pack.js` filters before any scorer sees them.
+
+Two of those rules were **overturned by the spot-check that was meant to confirm
+them**, both unanimously across three independent passes, which is the argument for
+sampling rules rather than trusting them. A currency word against its own symbol was
+asserted independent, on the grounds that `validate_data.py` makes it an *error* for
+the two to have different `applies_to`; the raters called it `partial`, and the real
+finding is that a co-print constraint cannot be smuggled in as a keep-factor of 1 at
+all. It stays enforced on `applies_to`, and on the priority ladder, where a pair
+straddling a step prints one of the two — as `numbers-money.pound` and
+`pound-symbol` did on the English card until their importances were levelled.
+
+**Absent means unrated, never independent.** `toilets`, `emergency-medical` and
+`numbers-money` are rated, plus the cross-section candidates touching them;
+everywhere else falls back to the cluster prior. Raw judgements live in
 `data/registry/redundancy-ratings/passes.csv`, in a subdirectory `build_shell.mjs`
 deliberately does not scan, and `scripts/build_redundancy.py` rebuilds and checks
 the table from them.
@@ -2587,9 +2608,15 @@ has. The section grid picks rows with the same greedy the balance button uses, v
 `substitutesOf()` from `weights.js` rather than a second scorer, against a budget in
 rows that defaults to what the card already carries -- so a chip tap gives a
 different card rather than a smaller one. On an unrated section the cluster prior is
-charged **once per cluster** rather than once per cluster-mate, and that detail is
-load-bearing: compounded, a 12-row budget produced a card counting "0 1 2 4 6 7 8 9",
-where charging once makes a cut take a prefix.
+charged **once per cluster** rather than once per cluster-mate: the prior is a single
+guess about a flat group and compounding it *k* times claims *k* observations where
+there is one. Neither form can hole a cluster -- after *k* mates are on the card
+every remaining mate carries the same factor, so a cut is always a prefix -- but
+compounding cuts one too shallow, and measured over every section, every cluster of
+two or more and every budget, the two forms differ in exactly five sections, all of
+them still entirely unrated: `police-consulate`, `medical-conditions`,
+`border-customs`, `pharmacy-symptoms`, `dietary-needs`. Rating those retires the
+departure, because a rated pair never reaches the prior.
 
 **Colour is the one setting that cannot be a glyph, so it is a swatch.** Every other
 option in the format panel is a little line drawing, because a choice between four

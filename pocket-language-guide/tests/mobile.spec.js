@@ -509,14 +509,20 @@ test.describe('the section picker on a phone', () => {
     await expect(page.locator('#tree .items input[type="checkbox"]:checked')).toHaveCount(10);
   });
 
-  test('an unrated section does not lose its number line', async ({ page }) => {
-    // `numbers-money` is outside the redundancy pilot, so every pair in it falls
-    // back to the `cluster_id` prior -- and `numbers-money.misc` *is* the number
-    // line, a cluster of complements the prior is simply wrong about. Compounded
-    // once per cluster-mate it deletes counting: measured, a 12-row budget came out
-    // "0 1 2 4 6 7 8 9". Charged once per cluster, every remaining mate carries the
-    // same single factor, so their order is their importance order and a cut takes a
-    // prefix.
+  test('the number line is cut deep, and prints one word for two', async ({ page }) => {
+    // `numbers-money.misc` *is* the number line: a cluster of complements, which the
+    // `cluster_id` prior is simply wrong about. The prior only ever cuts a cluster as
+    // a prefix -- see `valueOf` in `ui/chips.js` for why that holds however it is
+    // charged -- but it cuts this one far too early, because a digit is worth no less
+    // for its neighbours being present. Now that the section is rated the table says
+    // so outright: the digits keep each other at full value, so their order is their
+    // importance order and the line is as deep as the budget allows.
+    //
+    // Mandarin has two words for two -- er for counting and liang before a
+    // classifier -- and that is the one substitutable pair in the line. So eight
+    // slots buy eight numbers and not seven plus a second way to say one of them.
+    // This is the thing a rated pair knows and no cluster charge can express: liang
+    // is a cluster-mate of every digit and a substitute for exactly one of them.
     await studio(page);
     await page.locator('#all-off').click();
     await expect(page.locator('.section-chips input:checked')).toHaveCount(0);
@@ -531,9 +537,10 @@ test.describe('the section picker on a phone', () => {
         .filter((li) => /** @type {HTMLInputElement} */ (li.querySelector('input')).checked)
         .map((li) => li.querySelector('.gloss')?.textContent),
     );
-    // Zero through six with no holes, plus the currency word nothing on the card
-    // stands in for. Not "0 1 2 4 6 7 8 9".
-    expect(kept).toEqual(['0', '1', '2', '3', '4', '5', '6', 'euro']);
+    // Zero through seven, with only one word for two. Not
+    // "0 1 2 2+classifier 3 4 5 6", which is what dropping the rated pair gives, and
+    // not the two or three digits an unrated number line would be cut to.
+    expect(kept).toEqual(['0', '1', '2', '3', '4', '5', '6', '7']);
   });
 
   test('the budget starts at the size of the card, so a tap does not shrink it', async ({ page }) => {

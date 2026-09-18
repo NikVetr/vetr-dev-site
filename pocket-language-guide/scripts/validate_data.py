@@ -84,6 +84,80 @@ LANGUAGE_SLOT = re.compile(r"\{(?:target|source)\}")
 # capitalises neither them nor the days and months.
 LOWERCASE_LANGUAGE_NAMES = {"fr", "es", "pt", "ru", "it", "hu"}
 
+# **Every symbol allowed in an `ipa` cell.**
+#
+# `check_drawable` already asks whether a codepoint can be *drawn* in the latin
+# stack, and that is a different question: `t` with a dot below, U+1E6D, is in Noto
+# Sans and drew perfectly. It is also not an IPA symbol. It reached the `ipa` column
+# because for the five ROMANISED packs -- Mandarin, Japanese, Korean, Hebrew, Amharic
+# -- `build_ipa.py` reads the *romanisation* column rather than the native script, so
+# an unconverted letter passes straight through, and from there into the charset and
+# the subset font of all 50 readers of that pack. It shipped.
+#
+# So the inventory is the check. Held as a set rather than a range test because IPA
+# is not a contiguous block: it borrows a dozen Latin letters, the Greek beta, theta
+# and chi, half a dozen modifier letters and the tone bars, and a range wide enough
+# to cover all of that would readmit the orthography this is meant to exclude.
+#
+# Combining marks are accepted wholesale by `unicodedata.combining`, since the
+# diacritics are an open set in practice and a mark is never an orthographic leak on
+# its own -- it is the base letter that carries the error.
+IPA_SYMBOLS = set(
+    # All twenty-six basic Latin letters, every one of which is an IPA symbol --
+    # several at values an English reader would not guess: `c` is the voiceless
+    # palatal plosive, `q` the voiceless uvular, `y` the close front rounded vowel,
+    # `j` the palatal approximant. So this line cannot narrow the check and is not
+    # trying to; the exclusions that matter are the accented Latin letters a
+    # romanisation is written in, and those are absent.
+    "abcdefghijklmnopqrstuvwxyz"
+    # Consonants and vowels from the extended blocks.
+    "æçðøħŋœǀǁǂǃɐɑɒɓɔɕɖɗɘəɛɜɞɟɠɡɢɣɤɥɦɧɨɪɬɭɮɯɰɱɲɳɴɵɶɸɹɺɻɽɾʀʁʂʃʄʈʉʊʋʌʍʎʏʐʑʒʔʕʘʙʛʜʝʟʡʢ"
+    # Greek, which IPA borrows for three fricatives.
+    "βθχ"
+    # Velarised l and the two rhotic schwas, which are single codepoints.
+    "ɫɚɝ"
+    # Superscripts: aspiration, palatalisation, labialisation, pharyngealisation,
+    # nasal release, and the pre-nasalised stops the African packs need.
+    "ʰʱʲʷʸˀˤᵐⁿᵑ"
+    # The ejective, U+02BC. Amharic, Hausa and Georgian between them use it
+    # 1,041 times. Deliberately *not* joined here by the ASCII apostrophe or
+    # U+2019: no `ipa` cell in the corpus holds either, and one appearing would
+    # mean a leaked orthographic apostrophe or an ejective that failed to
+    # normalise -- exactly what this check exists to catch, so admitting them
+    # would blind it.
+    "ʼ"
+    # Suprasegmentals: the two stress marks, length, half-length, extra-short.
+    "ˈˌːˑ˘"
+    # Tone: Chao letters for Mandarin, Thai, Lao, Vietnamese, Yoruba and Punjabi,
+    # and the two contour arrows.
+    "˥˦˧˨˩↗↘"
+    # NFC forms of vowel + combining tilde. The corpus is NFC-normalised, so these
+    # are what a nasal vowel actually looks like on disk rather than a base plus
+    # U+0303 -- and rejecting them would fail every Hindi, Punjabi and Yoruba pack.
+    "ãẽĩõũỹñ"
+    # Punctuation a transcription carries through from the phrase it transcribes,
+    # plus the two braces, which hold `{}`, `{target}` and `{source}`.
+    " .,;:!?-|\u2016()[]/{}"
+    # Digits and the percent sign, for the rows that transcribe a figure.
+    "0123456789%"
+    # Zero-width joiner and the tie bar, both of which bind two symbols into one.
+    "\u200d\u0361"
+)
+
+
+def check_ipa_symbols(value, where):
+    """Complain about anything in an `ipa` cell that is not a phonetic symbol."""
+    stray = sorted({ch for ch in value
+                    if ch not in IPA_SYMBOLS and not unicodedata.combining(ch)})
+    if stray:
+        shown = ", ".join(f"{ch!r} (U+{ord(ch):04X})" for ch in stray)
+        errors.append(f"{where} has {shown} in its ipa, which is not a phonetic "
+                      "symbol. Either the G2P leaked an orthographic letter -- the "
+                      "usual cause, and it will reach the font subset of every "
+                      "reader of this pack -- or the symbol is real and belongs in "
+                      "IPA_SYMBOLS.")
+
+
 # Every Hebrew point: the vowels, the dagesh, the shin/sin dots and the two qamats
 # forms. Not the geresh U+05F3, which is a letter-modifying character the unpointed
 # spelling keeps -- `ג׳` is /dʒ/ in both columns.
@@ -332,6 +406,7 @@ def main():
                     # `col` is None for a row with extra cells, which `load` reports.
                     if col and (col.startswith("romanization_") or col == "ipa"):
                         check_drawable(value or "", "latin", f"{rel}:{line} {cid} {col}")
+                check_ipa_symbols(row.get("ipa") or "", f"{rel}:{line} {cid}")
                 # `ipa` is the one column in the corpus that no human wrote, so a
                 # cell has to say which route produced it -- `provenance` carries an
                 # `ipa=<method>` element, and `ipa=reviewed` is the only value that
@@ -605,6 +680,34 @@ def main():
             errors.append(f"concepts: {cid!r} applies to {word or '(all)'} but "
                           f"{cid + '-symbol'!r} applies to {symbol or '(all)'}; a word "
                           f"and its symbol have to print on the same cards")
+        # **And they must fall on the same side of every priority step**, which is
+        # the other way the pair can come apart and the one that had actually
+        # happened. Sharing `applies_to` only says they reach the same *cards*; the
+        # ladder then decides which rows on a card print, and a pair straddling a
+        # step prints one of the two.
+        #
+        # `numbers-money.pound` was 0.790 against `pound-symbol` 0.730 where every
+        # other currency pair in the file is 0.800/0.740, so at `wide` -- whose step
+        # is 0.74 -- the English card printed the word `pound` and no `GBP`, on the
+        # most-read pack in the corpus. Nothing looked, because the scope check above
+        # was satisfied and each row's own importance is perfectly reasonable.
+        #
+        # The steps are duplicated from `PRIORITY_STEPS` in `core/pack.js` rather
+        # than parsed out of it: four numbers, and a regex over JavaScript to read
+        # them would be the more fragile of the two couplings.
+        try:
+            above = {step for step in (0.74, 0.82, 0.95)
+                     if (float(concept["importance"]) >= step)
+                     != (float(sibling["importance"]) >= step)}
+        except ValueError:
+            above = set()  # a malformed importance is already an error elsewhere
+        if above:
+            errors.append(f"concepts: {cid!r} at importance {concept['importance']} "
+                          f"and {cid + '-symbol'!r} at {sibling['importance']} "
+                          f"straddle the priority step(s) {sorted(above)}, so a card "
+                          "at that level prints one of the pair. Give them "
+                          "importances on the same side of every step.")
+
     # The emergency note's service words and its frame come from the registry in the
     # reader's language. Absent, they fall back to English, which is what every
     # sheet not glossed into English was printing.

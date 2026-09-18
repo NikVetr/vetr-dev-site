@@ -156,18 +156,30 @@ const MIN_ROWS = 4;
  * **The one departure: the cluster prior is charged once per cluster rather than
  * once per cluster-mate.** A rated pair is an observation and compounds with the
  * next; the cluster prior is a single guess about a whole flat group, and
- * compounding it `k` times claims `k` observations where there is one. On this
- * corpus that claim is not merely unearned, it is wrong in a way that breaks the
- * card: `numbers-money.misc` is the number line, so with `cero uno dos` on, `tres`
- * is worth `0.884 x 0.55**3` and the greedy walks off and leaves a card that counts
- * "0 1 2 4 6 7 8 9" -- measured, and exactly the failure `core/pack.js` refuses to
- * run a decay for at all.
+ * compounding it `k` times claims `k` observations where there is one.
  *
- * Charged once, it has a property worth having: after the first member of a cluster
- * is taken every other member carries exactly one 0.55, so their order reverts to
- * their `importance` order, and a cut takes a *prefix* of the cluster. The number
- * line comes out 0 through 9, in order, and "hello (polite)" still cannot arrive
- * before "hello".
+ * What compounding does *not* do is put a hole in a cluster, and it is worth being
+ * precise about that because this comment used to claim it did. After `k` mates are
+ * on the card every remaining mate of that cluster carries the same `0.55**k`, so
+ * their relative order is still their `importance` order, and the greedy takes them
+ * in that order -- a cut is a prefix under either form. If the highest-importance
+ * mate loses to an outside row then so does every mate below it, which is the whole
+ * proof. So "hello (polite)" cannot arrive before "hello" whichever way the prior is
+ * charged, and the number line cannot come out holed.
+ *
+ * What compounding does is cut a cluster too *shallow*. Charged `k` times the second
+ * mate is already worth 55% and the third 30%, so the greedy walks off to an
+ * unrelated row while the cluster still has something to say. Measured across every
+ * section, every cluster of two or more and every budget from two rows to the
+ * section's size, the two forms choose differently in exactly five sections --
+ * `police-consulate`, `medical-conditions`, `border-customs`, `pharmacy-symptoms`
+ * and `dietary-needs` -- and every one of them is a section whose clusters are still
+ * entirely unrated. In each case charging once buys the second mate:
+ * `my-passport-was-stolen` over `i-need-it-for-my-insurance` at a fifteen-row
+ * `police-consulate`, `my-blood-sugar-is-low` over `i-need-my-inhaler` at thirteen
+ * rows of `medical-conditions`, `is-this-kosher` over `does-it-contain-pork-fat` at
+ * eighteen of `dietary-needs`. Rating those five sections would retire the
+ * departure, because a rated pair does not use the prior at all.
  * @param {{weight:number, substitutes:Map<string,number>, rated:Record<string,string>}} item
  * @param {Set<string>} onCard
  */
