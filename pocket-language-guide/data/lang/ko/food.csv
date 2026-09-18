@@ -30,3 +30,6 @@ dietary-needs.is-this-halal,이거 할랄이에요?,할랄 인증 받았어요?,
 dietary-needs.does-it-contain-pork-fat,돼지기름 들어갔어요?,라드 들어갔어요?,dwaejigireum deureogasseoyo?,twɛdʑiɡiɾɯm tɯɾʌɡas͈ʌjo,,2,pork-fat-agent-v1;in-pack-frame;ipa=rr
 dietary-needs.no-sesame,참깨하고 참기름 빼 주세요,참깨 빼 주세요,chamkkaehago chamgireum ppae juseyo,tɕʰamk͈ɛhaɡo tɕʰamɡiɾɯm p͈ɛ tɕusejo,참기름 (sesame oil) is a different word from 참깨 and is in most 반찬,2,Korean Wikipedia 참깨; frame from this pack's dietary-needs.no-peanuts;ipa=rr
 dietary-needs.is-this-kosher,이거 코셔예요?,코셔 인증 받았어요?,igeo kosyeoyeyo?,iɡʌ kʰosjʌjejo,,2,"OU Kosher 한국어판 (oukosher.org/ko), which renders the term 코셔; frame from this pack's dietary-needs.is-this-halal;ipa=rr"
+dietary-needs.no-onion-garlic,양파와 마늘 빼 주세요,,yangpawa maneul ppae juseyo,jaŋpʰawa manɯl p͈ɛ tɕusejo,,2,no-allium-v1;in-pack-frame;ko.wikipedia Yangpa + Maneul;ipa=rr
+dietary-needs.does-it-contain-dried-fish,젓갈 들어갔어요?,,jeotgal deureogasseoyo?,tɕʌtkal tɯɾʌɡas͈ʌjo,"jeotgal = salted fermented seafood, in most kimchi",2,hidden-fish-v1;in-pack-frame;ko.wikipedia 젓갈;ipa=rr
+food-ordering.does-it-cost-more-at-a-table,테이블에서 먹으면 더 비싸요?,,teibeureseo meogeumyeon deo bissayo?,tʰeibɯɾesʌ mʌɡɯmjʌn tʌ pis͈ajo,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=rr"

@@ -30,3 +30,6 @@ dietary-needs.is-this-halal,Is this halal?,,ɪz ðɪs hˈæləl,,2,coordinator-g
 dietary-needs.does-it-contain-pork-fat,Does it contain pork fat?,Does it contain lard?,dˈʌz ɪt kəntˈeɪn pˈoːɹk fˈæt,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak
 dietary-needs.no-sesame,No sesame,"No sesame seeds, sesame oil or tahini",nˈoʊ sˈɛsɐmi,,2,"Regulation (EU) No 1169/2011 Annex II point 11, English text (EUR-Lex CELEX 32011R1169);ipa=espeak"
 dietary-needs.is-this-kosher,Is this kosher?,Is there a kosher certificate?,ɪz ðɪs kˈoʊʃɚ,"marks: OU, OK, Star-K, KLBD",2,Orthodox Union kosher certification (oukosher.org); frame from this pack's dietary-needs.is-this-halal;ipa=espeak
+dietary-needs.no-onion-garlic,No onion or garlic,"No onion, garlic, shallot or leek",nˈoʊ ˈʌniən ɔːɹ ɡˈɑːɹlɪk,,2,no-allium-v1;in-pack-frame;English text of this pack's own dietary-needs rows;ipa=espeak
+dietary-needs.does-it-contain-dried-fish,Does it contain dried fish?,Does it contain shrimp paste or dried fish?,dˈʌz ɪt kəntˈeɪn dɹˈaɪd fˈɪʃ,,2,hidden-fish-v1;in-pack-frame;English text of this pack's own dietary-needs rows;ipa=espeak
+food-ordering.does-it-cost-more-at-a-table,Does it cost more at a table?,Is it cheaper at the counter?,dˈʌz ɪt kˈɔst mˈoːɹ æɾə tˈeɪbəl,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=espeak"

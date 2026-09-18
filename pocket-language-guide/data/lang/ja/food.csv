@@ -30,3 +30,6 @@ dietary-needs.is-this-halal,これはハラールですか？,ハラール認証
 dietary-needs.does-it-contain-pork-fat,ラードは入っていますか？,豚の脂は入っていますか？,rādo wa haitteimasu ka?,ɾaːdo wa haitteimasɯ ka,,2,pork-fat-agent-v1;in-pack-frame;ipa=hepburn
 dietary-needs.no-sesame,ごまとごま油なしでお願いします,ごまなしでお願いします,goma to goma abura nashi de onegaishimasu,ɡoma to ɡoma abɯɾa naɕi de oneɡaiɕimasɯ,ごま油 is a separate word from ごま and is in almost everything,2,Japanese Wikipedia ゴマ (ごま / 胡麻); frame from this pack's dietary-needs.no-peanuts;ipa=hepburn
 dietary-needs.is-this-kosher,これはコーシャですか？,コーシャ認証はありますか？,kore wa kōsha desu ka?,koɾe wa koːɕa desɯ ka,,2,"OU Kosher 日本語版 (oukosher.org/jp), which renders the term コーシャ; frame from this pack's dietary-needs.is-this-halal;ipa=hepburn"
+dietary-needs.no-onion-garlic,玉ねぎとにんにくなしでお願いします,,tamanegi to ninniku nashi de onegaishimasu,tamaneɡi to ɲiɴɲikɯ naɕi de oneɡaiɕimasɯ,,2,no-allium-v1;in-pack-frame;ja.wikipedia Tamanegi + Ninniku;ipa=hepburn
+dietary-needs.does-it-contain-dried-fish,干物は入っていますか？,,himono wa haitteimasu ka?,çimono wa haitteimasɯ ka,,2,hidden-fish-v1;in-pack-frame;ja.wikipedia 干物;ipa=hepburn
+food-ordering.does-it-cost-more-at-a-table,テーブルだと高くなりますか？,,tēburu da to takaku narimasu ka?,teːbɯɾɯ da to takakɯ naɾimasɯ ka,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=hepburn"

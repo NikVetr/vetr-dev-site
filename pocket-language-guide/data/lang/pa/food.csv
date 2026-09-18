@@ -29,3 +29,6 @@ dietary-needs.no-pork,ਸੂਰ ਦਾ ਮਾਸ ਨਾ ਪਾਓ,,sūr dā mās
 dietary-needs.is-this-halal,ਇਹ ਹਲਾਲ ਹੈ?,,ih halāl hai?,ɪ˥ həlal hɛ,is this halal?,2,pa-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,ਇਸ ਵਿੱਚ ਸੂਰ ਦੀ ਚਰਬੀ ਹੈ?,,is vicc sūr dī carabī hai?,ɪs ʋɪc suɾ di cʌɾəbi hɛ,is there pork fat in this?,2,pa-agent-v1;ipa=espeak
 dietary-needs.no-sesame,ਤਿਲ ਨਹੀਂ,,til nahīṁ,tɪl nʌhĩ,,2,"The Panjabi Dictionary (Singh, DSAL), ਤਿਲ til 'Sesame seed (Sesamum ... indicum)'; frame from this pack's dietary-needs.no-peanuts;ipa=espeak"
+dietary-needs.no-onion-garlic,"ਪਿਆਜ਼, ਲਸਣ ਨਾ ਪਾਓ",,"piāz, lasaṇ nā pāō","pɪaz, lʌsəɳ na pao",do not put onion or garlic in,2,no-allium-v1;in-pack-frame;pa.wikipedia Piaz + Lasan;ipa=espeak
+dietary-needs.does-it-contain-dried-fish,ਇਸ ਵਿੱਚ ਸੁੱਕੀ ਮੱਛੀ ਹੈ?,,is vicc sukkī macchī hai?,ɪs ʋɪc sʊkki mʌcʰcʰi hɛ,,2,hidden-fish-v1;in-pack-frame;pa.wikipedia ਸੁੱਕੇ ਮੇਵੇ (Dried fruit) + ਮੱਛੀ;ipa=espeak
+food-ordering.does-it-cost-more-at-a-table,ਮੇਜ਼ ਉੱਤੇ ਜ਼ਿਆਦਾ ਮਹਿੰਗਾ ਹੈ?,,mēz uttē ziādā mahiṁgā hai?,mez ʊtte zɪada məhɪŋɡa hɛ,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=espeak"

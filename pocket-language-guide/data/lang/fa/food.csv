@@ -30,3 +30,6 @@ food-ordering.is-this-vegetarian,این غذا گیاهی است؟,,in ghazā gi
 food-ordering.what-do-you-recommend,چه پیشنهاد می‌کنید؟,,che pishnehād mikonid?,tʃe piʃnahɑd mikonid,,2,fa-agent-v1;ipa=espeak
 food-ordering.water-please,آب لطفاً,,āb lotfan,ɑb lotfan,,2,fa-agent-v1;ipa=espeak
 food-ordering.can-a-vegetarian-eat-this,گیاهخوار می‌تواند این را بخورد؟ آبِ گوشت دارد؟,,giyāhkhār mitavānad in rā bekhorad? āb-e gusht dārad?,ɡiɑhxɑr mitavɑnad in rɑ bexord ɑbe ɡuʃt dɑrad,"the second half is the one that matters in Iran: rice, stews and soups are commonly built on meat broth even when no meat is visible",2,fa-agent-v1;ipa=espeak
+dietary-needs.no-onion-garlic,بدونِ پیاز و سیر,,bedun-e piyāz va sir,bedune piɑz va sir,,2,no-allium-v1;in-pack-frame;fa.wikipedia Piyaz + Sir;ipa=espeak
+dietary-needs.does-it-contain-dried-fish,ماهیِ خشک دارد؟,,māhi-ye khoshk dārad?,mɑhie xoʃk dɑrad,,2,hidden-fish-v1;in-pack-frame;fa.wikipedia ماهی خشک;ipa=espeak
+food-ordering.does-it-cost-more-at-a-table,سرِ میز گران‌تر است؟,,sar-e miz gerān-tar ast?,sare miz ɡerɑntar ast,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=espeak"

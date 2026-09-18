@@ -30,3 +30,6 @@ dietary-needs.is-this-halal,Ez halal?,,ˈɛz hˈɑlɑl,,2,hu-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,Van benne sertészsír vagy szalonna?,,vˈɑn bˈɛnnɛ ʃˈɛrteːʃʒiːr vˈɑɟ sˈɑlonnɑ,lard is a default cooking fat in Hungary,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak
 dietary-needs.no-sesame,Szezámmag nélkül,Szezámmag és szezámolaj nélkül,sˈɛzaːmmɑɡ nˈeːlkyl,,2,"Regulation (EU) No 1169/2011 Annex II point 11, Hungarian text (EUR-Lex CELEX 32011R1169);ipa=espeak"
 dietary-needs.is-this-kosher,Ez kóser?,,ˈɛz kˈoːʃɛr,,2,"WikiSzótár.hu, kóser ('a zsidó vallás étkezésre ... szabályainak megfelel'); frame from this pack's dietary-needs.is-this-halal;ipa=espeak"
+dietary-needs.no-onion-garlic,Hagyma és fokhagyma nélkül,,hˈɑɟmɑ ˈeːʃ fˈokhɑɟmɑ nˈeːlkyl,,2,no-allium-v1;in-pack-frame;hu.wikipedia Voroshagyma + Fokhagyma;ipa=espeak
+dietary-needs.does-it-contain-dried-fish,Van benne szárított hal?,,vˈɑn bˈɛnnɛ sˈaːriːtott hˈɑl,,2,"hidden-fish-v1;in-pack-frame;hu.wikipedia, which uses szaritott hal in sixteen articles including Male and Nordatlantens Brygge;ipa=espeak"
+food-ordering.does-it-cost-more-at-a-table,Asztalnál drágább?,,ˈɑstɑlnaːl drˈaːɡaːbb,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=espeak"

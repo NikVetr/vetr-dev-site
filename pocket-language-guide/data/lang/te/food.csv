@@ -29,3 +29,6 @@ food-ordering.is-this-vegetarian,ఇది శాకాహారమా?,,idi ś�
 food-ordering.what-do-you-recommend,ఏది బాగుంటుంది?,,ēdi bāguṁṭuṁdi?,eːdi baːɡuɳʈundi,which one is good,2,te-agent-v1;ipa=espeak
 food-ordering.water-please,నీళ్ళు ఇవ్వండి,,nīḷḷu ivvaṁḍi,niːɭɭu iʋʋaɳɖi,,2,te-agent-v1;ipa=espeak
 food-ordering.can-a-vegetarian-eat-this,శాకాహారి ఇది తినవచ్చా?,,śākāhāri idi tinavaccā?,ʃaːkaːhaːri idi tinaʋatʃtʃaː,,2,te-agent-v1;ipa=espeak
+dietary-needs.no-onion-garlic,"ఉల్లిపాయ, వెల్లుల్లి వద్దు",,"ullipāya, vellulli vaddu","ullipaːja, ʋellulli ʋaddu",no onion or garlic,2,no-allium-v1;in-pack-frame;te.wikipedia Ullipaya + Vellulli;ipa=espeak
+dietary-needs.does-it-contain-dried-fish,ఇందులో ఎండు చేపలు ఉన్నాయా?,,iṁdulō eṁḍu cēpalu unnāyā?,induloː eɳɖu tʃeːpalu unnaːjaː,,2,hidden-fish-v1;in-pack-frame;te.wikipedia ఎండు ఫలము (Dried fruit) + ఎండు పశుగ్రాసం (Hay) + చేప;ipa=espeak
+food-ordering.does-it-cost-more-at-a-table,టేబుల్ వద్ద ఎక్కువ ధరా?,,ṭēbul vadda ekkuva dharā?,ʈeːbul ʋadda ekkuʋa dʰaraː,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=espeak"

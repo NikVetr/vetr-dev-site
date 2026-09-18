@@ -30,3 +30,6 @@ dietary-needs.is-this-halal,Isto é halal?,Tem certificação halal?,ˈistw ɛ a
 dietary-needs.does-it-contain-pork-fat,Leva banha de porco?,Leva gordura de porco?,lˈɛvæ bˈɐ̃ɲæ dʒy pˈoɾəkʊ,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak
 dietary-needs.no-sesame,Sem gergelim,Sem sésamo,sˈeɪŋ ʒˌeɾəʒelˈiŋ,gergelim in Brazil; sésamo in Portugal and on the EU label,2,"Regulation (EU) No 1169/2011 Annex II point 11, Portuguese text (EUR-Lex CELEX 32011R1169); Portuguese Wikipedia Sesamum indicum for gergelim;ipa=espeak"
 dietary-needs.is-this-kosher,Isto é kosher?,Tem certificação kosher?,ˈistw ɛ koʃˈer,,2,"Dicionário Priberam da Língua Portuguesa, entrada kosher; OU Kosher edição brasileira (oukosher.org/br);ipa=espeak"
+dietary-needs.no-onion-garlic,Sem cebola nem alho,,sˈeɪŋ sˌebˈolæ nˈeɪŋ ˈaljʊ,,2,no-allium-v1;in-pack-frame;pt.wikipedia Cebola + Alho;ipa=espeak
+dietary-needs.does-it-contain-dried-fish,Leva peixe seco?,,lˈɛvæ pˈeɪʃy sˈekʊ,,2,hidden-fish-v1;in-pack-frame;pt.wikipedia Salga de peixe + Fruta seca;ipa=espeak
+food-ordering.does-it-cost-more-at-a-table,Custa mais à mesa ou na esplanada?,Quanto custa ao balcão?,kˈustæ mˈaɪz ˌaː mˈezæ ow na ˌesplænˈadæ,ASAE requires any esplanada or exterior-space surcharge to be stated in the price list,2,"table-price-v1;in-pack-frame;ASAE, Precos em servicos de restauracao and Afixacao de precos;ipa=espeak"

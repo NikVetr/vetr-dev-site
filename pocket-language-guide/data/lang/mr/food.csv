@@ -29,3 +29,6 @@ dietary-needs.no-pork,डुकराचे मांस नको,,ḍukarācē
 dietary-needs.is-this-halal,हे हलाल आहे का?,,hē halāla āhē kā?,hˈeː həlˈaːl ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,यात डुकराची चरबी आहे का?,,yāta ḍukarācī carabī āhē kā?,jˈaːt ɖˌʊkɾˈaːci cˈʌɾbˌi ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
 dietary-needs.no-sesame,तीळ नको,,tīḷa nakō,tˈiːɭ nˈʌkoː,,2,"Molesworth, A Dictionary, Marathi and English (DSAL), तीळ tīḷa 'Sesamum-seed'; frame from this pack's dietary-needs.no-peanuts;ipa=espeak"
+dietary-needs.no-onion-garlic,कांदा-लसूण नको,,kāṁdā-lasūṇa nakō,kˈãdaːlsuːɳ nˈʌkoː,,2,no-allium-v1;in-pack-frame;mr.wikipedia Kanda + Lasun;ipa=espeak
+dietary-needs.does-it-contain-dried-fish,यात सुका मासा आहे का?,,yāta sukā māsā āhē kā?,jˈaːt sˈʊkaː mˈaːsaː ˈaːheː kˈaː,,2,hidden-fish-v1;in-pack-frame;mr.wikipedia सुकामेवा (Dried fruit) + मासा;ipa=espeak
+food-ordering.does-it-cost-more-at-a-table,टेबलावर जास्त महाग आहे का?,,ṭēbalāvara jāsta mahāga āhē kā?,ʈˌeːblˈaːvəɾ zˈaːst məhˈaːɡ ˈaːheː kˈaː,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=espeak"

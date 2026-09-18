@@ -29,3 +29,6 @@ dietary-needs.no-pork,የአሳማ ስጋ የሌለው,,yeʼāsama siga yellēle
 dietary-needs.is-this-halal,ይህ ሐላል ነው?,,yih hālal new?,jɨh halal nəw,,2,am-agent-v1;ipa=bgn-am
 dietary-needs.does-it-contain-pork-fat,የአሳማ ስብ አለበት?,,yeʼāsama sib āllebet?,jəʔasama sɨb ʔalːəbət,,2,am-agent-v1;ipa=bgn-am
 dietary-needs.no-sesame,ሰሊጥ የሌለው,,selītʼ yellēlew,səlitʼ jəlːeləw,which has no sesame,2,Amharic Wikipedia ሰሊጥ; Ethiopian Commodity Exchange sesame (ሰሊጥ) contract wording; frame from this pack's dietary-needs.no-peanuts;ipa=bgn-am
+dietary-needs.no-onion-garlic,ሽንኩርትና ነጭ ሽንኩርት የሌለው,,shinkurtna nechʼ shinkurt yellēlew,ʃɨnkurtna nətʃʼ ʃɨnkurt jəlːeləw,which has no onion or garlic,2,no-allium-v1;in-pack-frame;am.wikipedia Allium cepa (shinkurt) + Allium sativum (nech shinkurt);ipa=bgn-am
+dietary-needs.does-it-contain-dried-fish,የደረቀ ዓሳ አለበት?,,yederekʼe ʽasa āllebet?,jədərəkʼə ʔasa ʔalːəbət,,2,hidden-fish-v1;in-pack-frame;Abyssinica Amharic-English Dictionary (ደረቅ dry); fish word from this pack's dietary-needs.does-it-contain-fish-stock;ipa=bgn-am
+food-ordering.does-it-cost-more-at-a-table,በጠረጴዛ ላይ የበለጠ ውድ ነው?,,betʼerepʼēza lay yebeletʼe wid new?,bətʼərəpʼeza laj jəbələtʼə wɨd nəw,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=bgn-am"

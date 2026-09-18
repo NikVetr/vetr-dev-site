@@ -30,3 +30,6 @@ dietary-needs.is-this-halal,Це халяль?,Це халяльне?,Tse khalia
 dietary-needs.does-it-contain-pork-fat,Тут є свинячий жир або сало?,Готували на свинячому салі?,Tut ye svyniachyi zhyr abo salo?,tˈut jˈɛ zʋɪɲˈatʃɪj ʒˈɪr abˈo sˈalo,,2,uk-agent-v1;ipa=espeak
 dietary-needs.no-sesame,Без кунжуту.,,Bez kunzhutu.,bˈɛs kunʒˈutu,,2,Ukrainian Wikipedia Кунжут індійський; ТР ТС 022/2011 allergen list item кунжут;ipa=espeak
 dietary-needs.is-this-kosher,Це кошерне?,Це кошерна їжа?,Tse kosherne?,tsˈɛ koʃˈɛrnɛ,,2,Ukrainian Wikipedia Кошерна їжа; frame from this pack's dietary-needs.is-this-halal;ipa=espeak
+dietary-needs.no-onion-garlic,Без цибулі та часнику.,,Bez tsybuli ta chasnyku.,bˈɛs tsɪbˈuʎiː tˈa tʃasnˈɪku,,2,no-allium-v1;in-pack-frame;uk.wikipedia Tsybulia horodnia + Chasnyk horodnii;ipa=espeak
+dietary-needs.does-it-contain-dried-fish,Тут є в'ялена риба?,,Tut ye vialena ryba?,tˈut jˈɛ ʋjalˈɛna rˈɪba,,2,hidden-fish-v1;in-pack-frame;uk.wikipedia В'ялення риби;ipa=espeak
+food-ordering.does-it-cost-more-at-a-table,За столиком дорожче?,,Za stolykom dorozhche?,zˈa stolˈɪkom dorˈoʃtʃɛ,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=espeak"

@@ -30,3 +30,6 @@ food-ordering.is-this-vegetarian,Vegetarian po ba ito?,,vɛɡɛtaɾian po ba ito
 food-ordering.what-do-you-recommend,Ano po ang irerekomenda niyo?,,ano po aŋ iɾɛɾɛkomɛnda nijo,,2,fil-agent-v1;ipa=fil-g2p
 food-ordering.water-please,Tubig po,,tubiɡ po,,2,fil-agent-v1;ipa=fil-g2p
 food-ordering.can-a-vegetarian-eat-this,Puwede po bang kainin ito ng vegetarian?,,puwɛdɛ po baŋ kainin ito naŋ vɛɡɛtaɾian,,2,fil-agent-v1;ipa=fil-g2p
+dietary-needs.no-onion-garlic,Walang sibuyas at bawang,,walaŋ sibujas at bawaŋ,,2,no-allium-v1;in-pack-frame;tl.wikipedia Sibuyas + Bawang;ipa=fil-g2p
+dietary-needs.does-it-contain-dried-fish,Mayroon po bang bagoong o patis ito?,,majɾoon po baŋ baɡooŋ o patis ito,"bagoong = fermented fish or shrimp paste, patis = fish sauce",2,hidden-fish-v1;in-pack-frame;tl.wikipedia Bagoong + Patis (Fish sauce);ipa=fil-g2p
+food-ordering.does-it-cost-more-at-a-table,Mas mahal po ba kapag sa mesa?,,mas mahal po ba kapaɡ sa mɛsa,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=fil-g2p"

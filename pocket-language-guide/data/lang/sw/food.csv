@@ -29,3 +29,6 @@ dietary-needs.no-pork,Bila nyama ya nguruwe,,bˌila ɲˈama ja ŋɡurˈuwe,witho
 dietary-needs.is-this-halal,"Je, hii ni halali?",,"ɟˈe, hˌii ni halˈali",,2,sw-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,"Je, kuna mafuta ya nguruwe ndani?",,"ɟˈe, kˈuna mafˈuta ja ŋɡurˈuwe ndˈani",,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak
 dietary-needs.no-sesame,Bila ufuta,,bˌila ufˈuta,,2,Swahili Wikipedia Ufuta; Tanzanian agricultural-extension usage for the crop; frame from this pack's dietary-needs.no-peanuts;ipa=espeak
+dietary-needs.no-onion-garlic,Bila kitunguu na kitunguu saumu,,bˌila kˌituŋɡˈuu na kˌituŋɡˈuu saˈumu,without onion or garlic,2,no-allium-v1;in-pack-frame;sw.wikipedia Kitunguu + Kitunguu saumu;ipa=espeak
+dietary-needs.does-it-contain-dried-fish,"Je, kuna dagaa ndani?",,"ɟˈe, kˈuna daɡˈaa ndˈani","dagaa = dried sardines, used the way fish sauce is used in southeast Asia",2,hidden-fish-v1;in-pack-frame;sw.wikipedia Dagaa + Ufunda;ipa=espeak
+food-ordering.does-it-cost-more-at-a-table,"Je, ni ghali zaidi mezani?",,"ɟˈe, ni ɣˈali zaˈidi mezˈani",,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=espeak"

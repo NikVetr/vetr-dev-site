@@ -30,3 +30,6 @@ dietary-needs.is-this-halal,Är det här halal?,,ɛːr deːt hˈɛːr hˈɑːlal
 dietary-needs.does-it-contain-pork-fat,Innehåller den ister eller flott från fläsk?,,ˈɪnəhˌɔlər dɛn ˈɪstər ˌɛlər flˈɔt froːn flˈɛsk,,2,sv-agent-v1;ipa=espeak
 dietary-needs.no-sesame,Inga sesamfrön,Ingen sesam,ˈɪŋa sˈeːsamfrˌøːn,,2,"Regulation (EU) No 1169/2011 Annex II point 11, Swedish text (EUR-Lex CELEX 32011R1169);ipa=espeak"
 dietary-needs.is-this-kosher,Är det här kosher?,,ɛːr deːt hˈɛːr kˈɔshər,,2,"Svenska Akademiens ordböcker (svenska.se), uppslagsord kosher; frame from this pack's dietary-needs.is-this-halal;ipa=espeak"
+dietary-needs.no-onion-garlic,"Ingen lök, ingen vitlök",,"ˈɪŋən lˈøːk, ˈɪŋən vˈɪtløːk",,2,no-allium-v1;in-pack-frame;sv.wikipedia Lok (art) (lead names lok) + Vitlok;ipa=espeak
+dietary-needs.does-it-contain-dried-fish,Innehåller den torkad fisk?,,ˈɪnəhˌɔlər dɛn tˈɔrkad fˈɪsk,,2,hidden-fish-v1;in-pack-frame;sv.wikipedia Torrfisk + Torkad frukt;ipa=espeak
+food-ordering.does-it-cost-more-at-a-table,Är det dyrare vid bordet?,,ɛːr deːt dˈyːrarə viːd bˈuːrdət,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=espeak"

@@ -30,3 +30,6 @@ dietary-needs.is-this-halal,Bu helal mi?,Helal sertifikalı mı?,bʊ heɫˈaɫ m
 dietary-needs.does-it-contain-pork-fat,İçinde domuz yağı var mı?,Domuz yağıyla mı pişti?,itʃɪndˈɛ dˈomʊz jaːˈɯ vˈar mɯ,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak
 dietary-needs.no-sesame,Susam ve tahin olmasın.,Susam olmasın.,sˈusam vɛ tahˈɪn ɔɫmasˈɯn,"tahin (sesame paste) is in helva, çörek and pide",2,Turkish Wikipedia Susam; frame from this pack's dietary-needs.no-peanuts;ipa=espeak
 dietary-needs.is-this-kosher,Bu koşer mi?,Koşer sertifikalı mı?,bʊ koʃˈɛr mɪ,"koşer, not kaşar -- kaşar is a cheese",2,"Turkish Wikipedia Koşer ('Koşer veya kaşer ... ürünlerdir'); absent from TDK Güncel Türkçe Sözlük, which was queried; frame from this pack's dietary-needs.is-this-halal;ipa=espeak"
+dietary-needs.no-onion-garlic,Soğan ve sarımsak olmasın.,,soːˈan vɛ sˈaɾɯmsak ɔɫmasˈɯn,,2,no-allium-v1;in-pack-frame;tr.wikipedia Sogan + Sarimsak;ipa=espeak
+dietary-needs.does-it-contain-dried-fish,İçinde kurutulmuş balık var mı?,,itʃɪndˈɛ kuɾutʊɫmˈʊʃ baɫˈɯk vˈar mɯ,,2,hidden-fish-v1;in-pack-frame;tr.wikipedia Kurutulmuş balık;ipa=espeak
+food-ordering.does-it-cost-more-at-a-table,Masada daha pahalı mı?,,mˈasada dahˈa pahaɫˈɯ mɯ,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=espeak"

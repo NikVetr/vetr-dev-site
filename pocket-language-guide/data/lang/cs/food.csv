@@ -30,3 +30,6 @@ food-ordering.is-this-vegetarian,Je to vegetariánské?,,je tˈo vˈeɡetˌariˌ
 food-ordering.what-do-you-recommend,Co doporučujete?,,tsˈo dˈoporˌutʃujˌete,"present tense, formal vy -- avoids the gendered past-tense form of doporučit",2,cs-agent-v1;ipa=espeak
 food-ordering.water-please,"Vodu, prosím",,"vˈodu, prˈosiːm",,2,cs-agent-v1;ipa=espeak
 food-ordering.can-a-vegetarian-eat-this,Může to jíst vegetarián?,,mˈuːʒe tˈo jˈiːst vˈeɡetˌariaːn,,2,cs-agent-v1;ipa=espeak
+dietary-needs.no-onion-garlic,Bez cibule a česneku,,bˈestsibˌule a tʃˈesneku,,2,no-allium-v1;in-pack-frame;cs.wikipedia Cibule kuchynska + Cesnek kuchynsky;ipa=espeak
+dietary-needs.does-it-contain-dried-fish,Obsahuje to sušenou rybu?,,ˈopsahˌuje tˈo sˈuʃenoʊ rˈibu,,2,hidden-fish-v1;in-pack-frame;cs.wikipedia Solena ryba + Susene maso;ipa=espeak
+food-ordering.does-it-cost-more-at-a-table,Je to u stolu dražší?,,je tˈo ˈu stˈolu drˈaʃʃiː,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=espeak"

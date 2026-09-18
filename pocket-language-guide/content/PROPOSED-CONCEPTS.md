@@ -11,6 +11,18 @@ packs a row, and until they have it the validator names them in its coverage
 warning. So these are staged rather than added, and the note beside each is the
 argument for where it belongs.
 
+**The corpus is 53 packs now, and the cost sentence above needs one correction that
+matters whenever a scope is being weighed.** A universal concept and a scoped one cost the
+same number of rows -- 53 either way -- because `applies_to` decides which *target* sheets
+print a row and any language can be the source that glosses another's sheet. What differs
+is what the validator says about a gap. A universal concept with a missing row shows up
+only in that language's coverage percentage, which is the silent case; a *scoped* one with
+a missing gloss is named language by language, with the count of pairs it then fails to
+print on. So a scope is the cheaper choice in warnings as well as the honest one about
+printing, and a universal concept has to be filled everywhere or its gap goes unreported.
+Measured on the batch below: three concepts and 153 pack rows moved the warning count from
+195 to 197, and both new warnings are the two conlang packs.
+
 An entry that has landed keeps its argument and gains a `— shipped` heading, because
 the argument is the record of why the row is shaped the way it is. Everything under
 `## Strong cases` is now shipped, the romanisation legend included -- that one turned
@@ -417,13 +429,65 @@ service uses: ไข้เลือดออก, sốt xuất huyết, demam ber
 
 ## Worth doing, lower urgency
 
-### `dietary-needs.jain` and `dietary-needs.no-onion-garlic`
+### ~~`dietary-needs.no-onion-garlic`~~ — shipped. `.jain` refused, and the refusal is the finding
 
 Raised by the Hindi translator. Indian kitchens are set up to answer exactly these
 two, and `शुद्ध शाकाहारी` does not cover either. `no-onion-garlic` is currently
 reachable by filling `utility-templates.please-do-not-add {}` with प्याज़-लहसुन,
 which works but buries it. Scope `hi`, possibly `hi;th;id` for the Buddhist
 vegetarian overlap.
+
+**`no-onion-garlic` shipped**, universal, rank 1014, importance 0.650, its own cluster.
+Universal rather than the `hi` the request asked for, and the reason is the halal row's:
+`applies_to` names the *target*, so scoping it to Hindi prints the row only on a card for
+India, and a Jain or an observant Vaishnava avoids alliums in Tokyo too. The Buddhist
+overlap the entry guessed at is real and wider than `hi;th;id` -- onion and garlic are two
+of the five pungent roots, and the Chinese and Vietnamese encyclopaedia articles for garlic
+and the onion say so themselves (`為佛教中的五辛之一`; `một trong năm loại rau cay không
+được ăn trong Ngũ tân`) -- which is an argument for universal rather than for a third code
+in the scope.
+
+**Fifty of the fifty-three filled.** Each row is the pack's own `no-pork` or `no-meat`
+negation frame with the two bulbs named from the language's own encyclopaedia article for
+*Allium cepa* and *Allium sativum*. Three things came out of filling it:
+
+- **The genus word is a trap in three packs, and the row names both bulbs because of it.**
+  Indonesian `bawang` is the genus and Javanese `bawang` on its own is the *garlic*, so
+  `Tanpa bawang` is ambiguous in one and wrong in the other; Thai `หอม` is also the word
+  for *fragrant*, so the row says `หัวหอม`. And where the kitchen's allium is the shallot
+  rather than the onion the row names the shallot, because that is what is in the pan --
+  `bawang merah`, `brambang`, `หอมแดง`.
+- **Yoruba is blank, and it is the sesame blank again.** `yo.wikipedia` has an article for
+  the onion (`Àlùbọ́sà`) and none for garlic; searched for `àyù`, `aayu`, `ata ilẹ` and
+  `Allium sativum` it returns nothing, and **its own cookery articles print the English
+  word `garlic` untranslated** -- `Derssa` reads *a ṣe pẹ̀lú garlic, cumin, red chili
+  pepper flakes*. Everything else on offer is an aggregator, a forum thread or a
+  translation site, which is the one source class this project's rule names as
+  inadmissible. Half a row, the onion alone, would misstate the concept, so there is none.
+- Klingon and Quenya have no row, for the same reason neither has a `no-pork` row.
+
+**`jain` is refused, and the reason is `is-this-kosher`'s own test applied to a second
+label.** The bank has taken an identity label as a row twice, for halal and for kosher, and
+both times on one ground: the label names a *checkable mark* that exists in the countries
+this corpus covers, so the answer is verifiable and the question is worth asking. Jain food
+has no mark and no certifying body publishing in these languages. Read the way the kosher
+entry read `kashrut`, the numbers are sharper than that argument needs. **`Jainism` has an
+encyclopaedia article in 46 of the 53 languages and `Jain vegetarianism` in nine** -- `ar
+bn es fr hi ml te th zh` -- and four of those nine are descriptive titles *about* the
+religion's diet (`Vegetarianismo jaina`, `Végétarisme jaïn`, `耆那教素食主義`) rather than a
+word a cook reads off a plate. That is exactly the split the kosher row found between the
+name of the law and the word the food carries, and it falls the same way: scoped to the
+Indian-language targets where the label does work, the concept would still need a gloss in
+41 packs whose only attested form is the encyclopaedia headword for the religion, and the
+validator would name all 41.
+
+What the request needs is now covered twice over -- `no-onion-garlic` carries the allium
+half in every pack, and the root-vegetable half is reachable through
+`dietary-needs.i-do-not-eat {}` and `utility-templates.please-do-not-add {}`. **What is not
+covered is the label itself, which really is the efficient request in an Indian kitchen**,
+and the concept to propose if anyone revisits this is `dietary-needs.no-root-vegetables`:
+a function rather than an identity, which is the shape `slang.csv` established and the
+shape every filled row in this file has.
 
 ### ~~`rail-station-words.fare`~~ — shipped. `.conductor` staged, and the split is the finding
 
@@ -498,7 +562,7 @@ stock row -- see the pork entry at the top of this file for what that clustering
 buys and for the two rows it narrowed. The `manteca` warning is why the Spanish row
 is `¿Lleva manteca de cerdo?` and not `¿Lleva manteca?`.
 
-### `dietary-needs.no-dried-fish`
+### ~~`dietary-needs.no-dried-fish`~~ — shipped as `.does-it-contain-dried-fish`, and it absorbed the jeotgal request
 
 Swahili again: `dagaa` (dried sardines) is used across Tanzanian and Kenyan cooking
 the way fish sauce is used in southeast Asia, and
@@ -506,7 +570,60 @@ the way fish sauce is used in southeast Asia, and
 serve `th` (`กะปิ`) and `id` (`terasi`), both of which their translators flagged
 separately — so this is one concept three packs want.
 
-### `pharmacy-symptoms.jeotgal` — or a wider "hidden animal ingredient" concept
+**Shipped**, scoped `bn;fil;ha;id;jv;km;ko;lo;ms;sw;th;vi;yo;zh-Hans`, rank 1015,
+importance 0.660, cluster `dietary-needs.hidden-fish` at rank 1 beside the fish-stock row.
+Four decisions, and one finding that is worth more than any of them.
+
+**A question rather than a request, which is what the name changed.** The entry proposes
+`no-dried-fish`; the bank's own split puts a *request* in a `no-` concept and a *question
+to a cook* in a `does-it-contain-` one, which is why `no-seafood` and
+`does-it-contain-fish-stock` are two concepts and not one. Dagaa, กะปิ and terasi are
+already in the dish by the time you are looking at it, so it is the question.
+
+**The stock row is the liquid half of the vector and this is the paste half, so they share
+a cluster.** Broth, dashi and fish sauce there; dried fish and fermented shrimp paste here
+-- the same question about a different vector, which is the `hidden-pork` clustering
+exactly. Stock keeps `cluster_rank` 0, because a broth reaches more of the countries this
+corpus covers than a paste does.
+
+**Scoped rather than universal, on the `conductor` test.** A row asking a Czech or a
+Georgian cook about shrimp paste teaches a question with no true answer, where a fermented
+fish or shrimp paste is a base seasoning of every cuisine in the scope. Two codes went in
+that the entry does not name, and they are the find: **West Africa is a fifth region with
+this vector**, and `yo.wikipedia`'s own cookery articles say so -- `Edikang ikong` lists
+`ẹja gbígbẹ` and `edé` among its base ingredients and `Ekwang` does the same, as do
+`ha.wikipedia`'s `Soup Kandia` and `Miyar Eru` with `busasshen kifi`. `ja` is deliberately
+**out**: 煮干し and 鰹節 are dashi, which the stock row already has.
+
+**Eight packs were already routing around this concept inside the stock row, and five of
+them had given up the broth question to do it.** That is the strongest evidence in this
+file that a concept was missing, and it is worth reading as a list: `km` asked only about
+`ប្រហុក` and `ទឹកត្រី`, `lo` only about `ນ້ຳປາ` and `ປາແດກ`, `th` and `vi` only about
+`น้ำปลา` and `nước mắm`, and `id`, `jv` and `ms` folded `terasi`, `trasi` and `belacan`
+into `text` beside the broth. Five of those rows are narrowed to the liquid now and the
+paste is here, which is the repair the Greek and Hungarian rows took when
+`does-it-contain-pork-fat` shipped: leaving them would print `terasi or fish broth` and
+`terasi` as two rows of one card, which reads as a mistake. `bn`'s stock row is untouched,
+because it asks about the fish itself -- Bengali cooking has no stock as a separate item --
+and `ko`'s and `sw`'s were already about broth.
+
+All 51 natural packs filled. **The 37 out-of-scope glosses say *dried fish* rather than
+*shrimp paste***, because that is the phrase a reader needs in order to recognise the row,
+and each is the pack's own stock-row frame with the dried-fish term from the language's own
+encyclopaedia. Fourteen of those terms are article titles in their own right -- `ഉണക്കമീൻ`,
+`கருவாடு`, `ଶୁଖୁଆ`, `干物`, `Trockenfisch`, `Kurutulmuş balık`, `Չորացրած ձուկ`,
+`سمك مجفف`, `ماهی خشک`, `Torrfisk`, `Sztokfisz`, `Stokvis`, `Pescado seco`, `Kapakala` --
+and the rest are composed from the adjective the same encyclopaedia uses of dried fruit,
+hay or raisins plus the pack's own word for fish. **Four were settled by asking each wiki
+whether it *uses* the phrase rather than whether it has an article for it**, which is a
+cheaper test than a langlink sweep and found what the sweep could not: `szárított hal` in
+sixteen Hungarian articles, `quritilgan baliq` in fourteen Uzbek ones, `ხმელი თევზი` in two
+Georgian ones and `सुक्खा माछा` in one Nepali one. Amharic is the one row resting on a
+dictionary rather than an encyclopaedia -- `ደረቅ` in the Abyssinica Amharic-English
+dictionary -- and its `provenance` says so rather than implying an encyclopaedic source
+there is not.
+
+### ~~`pharmacy-symptoms.jeotgal`~~ — shipped inside the concept above. The wider concept is refused
 
 The Korean translator's version of the same problem: 젓갈, salted fermented seafood,
 is in most 김치, which is a shellfish trap in a dish nobody thinks of as seafood.
@@ -514,6 +631,31 @@ Along with the unasked 반찬 that arrives anyway. Together with `no-dried-fish`
 the pork-stock row above, this suggests the real gap is one concept shaped like
 "what is in this that I would not expect", filled per language — which is a design
 question rather than a row.
+
+**The narrow concept won, and the entry's own framing is why.** 젓갈 shipped as the Korean
+row of `dietary-needs.does-it-contain-dried-fish` -- `젓갈 들어갔어요?` -- which is dagaa,
+กะปิ and terasi under a fourth name.
+
+**Two things about the request are worth correcting rather than adopting.** It is filed
+under `pharmacy-symptoms` and it is not a symptom: it is a question to a cook, which is
+`dietary-needs`. Both sections are safety-gated, so nothing was lost by the mistake except
+the section. And the unasked 반찬 that arrives anyway is a different problem from a hidden
+ingredient -- it is a dish nobody ordered, which `dietary-needs.i-do-not-eat {}` and a
+pointed finger already reach.
+
+**The wider concept is the vaguer answer rather than the better one, and the bank has
+already decided this once.** The pork problem was exactly this shape, and it shipped as
+*three* concepts split by vector -- meat, stock, fat -- rather than as one `hidden-pork`
+question, for the reason recorded at the top of this file: only `text` is guaranteed to
+print, so a row has to name a thing the cook recognises. A row asking "what is in this that
+I would not expect?" asks the cook to do the traveller's thinking and returns prose the
+traveller cannot read. It is also `food-ordering.does-it-contain {}` with a vaguer slot,
+and that row is already in all 53 packs. The gap the three requests share is real, but it
+is a gap in *coverage of vectors*, and the way to close it is one more `does-it-contain-`
+row at a time -- which is what stock, fat and now dried fish are. A fourth is already
+named and not taken: the European hidden fish is the anchovy, in Worcestershire sauce, in
+puttanesca, in a Caesar dressing and in Janssons frestelse, and it is a *cured* fish rather
+than a dried or fermented one. Whoever proposes it should read this paragraph first.
 
 ### ~~A `note` row for a language's one unavoidable warning~~ — built
 
@@ -581,7 +723,7 @@ Recorded because they came out of the same work and would otherwise be lost.
 
 ## From the Italian pack
 
-### `food-ordering.is-it-cheaper-at-the-counter` and a `common-signs` pair for it
+### ~~`food-ordering.is-it-cheaper-at-the-counter`~~ — shipped as `.does-it-cost-more-at-a-table`. The `common-signs` pair is refused
 
 The single most common concrete surprise for a visitor to Italy, and the bank has
 nothing that reaches it. An espresso taken standing `al banco` is priced by the
@@ -602,6 +744,39 @@ Not Italy-only, which is the argument for a universal concept rather than a scop
 one: Portugal and Spain price a coffee the same way at the counter versus the
 terrace, and France's `au comptoir` / `en terrasse` is the same distinction with a
 statutory price list behind it.
+
+**Shipped**, scoped `es;fr;it;pt`, rank 1011, importance 0.690, its own cluster. Three
+decisions.
+
+**The question, not the sign pair -- and "the second is the cheaper one" is the half of
+this entry that does not hold.** `common-signs.at-the-counter` and `.table-service` would
+be two `ref` words in a shared-width table instead of one `entry` phrase, which is cheaper
+in vertical space and more expensive in rows. But the deciding argument is the one this
+file already made against `common-signs.orario-continuato`: a reference word is *the
+absence of the problem rather than the problem*. `al banco` glossed "at the counter" does
+not tell a reader that the price differs, and not knowing that the price differs is the
+entire harm. The question contains the fact. The counter word rides in `text_alt` on the
+four in-scope rows, so a reader who wants to match the posted list still can.
+
+**Asked from the table side rather than the counter side, and the reason is countable.**
+All 53 packs already carry a word for a table, from `food-ordering.table-for-two`, and
+**not one carries a word for a bar counter** -- so `is it cheaper at the counter` would
+have needed 47 new nouns in languages where a counter is not a priced place at all, where
+`does it cost more at a table` composes out of each pack's own rows. That is the
+`conductor` → `where-do-i-pay-the-fare` move again: the same fact asked through the term
+every pack can already say.
+
+**The scope rests on posted-price rules rather than on custom**, which is what let `el` and
+`tr` be refused without guessing. France's *arrêté du 27 mars 1987* requires the menu to
+show the `au comptoir` and the `en salle` price whenever they differ; Italy's price-display
+rules for `pubblici esercizi` require the table-service component to be stated separately;
+Spain's consumer authorities require any `barra`/`mesa`/`terraza` difference to be itemised
+in figures rather than as a percentage; Portugal's ASAE requires the same of an
+`esplanada` surcharge. Greece and Turkey have no standing-espresso tier for such a rule to
+attach to, so they are out, on the reading that kept `es` out of the cover charge.
+
+All 51 natural packs filled; the 47 glosses are each pack's own `table-for-two` and
+`that-is-too-expensive` recombined, and the four in-scope rows name both tiers.
 
 ### ~~`payment-receipt.what-is-the-cover-charge`~~ — shipped, scoped `el;it;pt;tr`
 
@@ -644,7 +819,7 @@ normal, which is Italy, Spain, Greece, much of Latin America and most of the Gul
 close at midday — is the sign-side half of the same fact, and is the weaker half:
 it is the absence of the problem rather than the problem.
 
-### Weaker: a restricted-traffic-zone sign
+### Weaker: a restricted-traffic-zone sign — read, and refused. The entry was right about itself
 
 Driving into an Italian historic centre through a `ZTL` (zona a traffico limitato)
 is an automatic fine issued by camera, and the sign is a bare white circle with a
@@ -653,6 +828,27 @@ Italian pack cannot carry it: the bank has no driving content at all, so a singl
 `common-signs` row would be orphaned among words about trains and trails. Recorded
 so the next person who proposes a driving section has the strongest argument for one
 already written down.
+
+**Refused, and both of the things that came out of checking it strengthen the entry's own
+argument rather than weakening it.**
+
+The first is that the orphaning is worse than "no driving content". Read against
+`sections.csv`, the corpus has 59 sections and **not one of them addresses a reader who is
+driving**: `taxi`, `transit-rides`, `rail-station-words` and `pickup-meeting` are all about
+being carried, there is no `place-words.parking`, and `common-signs` is ten words about
+doors and thresholds plus three about opening hours. A `ZTL` row would be the only row in
+the bank spoken to a driver, sitting in a table a pedestrian reads.
+
+The second is that a sign word is the wrong instrument for this harm even once the section
+exists. The fine is issued by a camera at the boundary, so what a reader needs is to have
+known *before getting into the car* -- which is a question to a hotel or a hire desk
+("can I drive to the hotel?", "is this street a restricted zone?") rather than three
+letters to recognise at speed through a windscreen. A phrase card is consulted standing
+still. So this entry is evidence for a driving section's first *question*, not for a
+`common-signs` row, and it already says so in as many words.
+
+Left staged on that basis. Nothing about it is wrong; it is a row with no section to sit in
+and no moment at which a reader would reach for it.
 
 ## Notes that are facts about a country, not concepts (Italian pack)
 

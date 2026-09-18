@@ -30,3 +30,6 @@ dietary-needs.is-this-halal,Czy to jest halal?,,tʃɨ tɔ jɛst xˈalal,,2,pl-ag
 dietary-needs.does-it-contain-pork-fat,Czy jest w tym smalec?,,tʃɨ jɛst f tɨm smˈalɛts,"smalec is pork lard, which Polish cooking uses as seasoning",2,pl-agent-v1;ipa=espeak
 dietary-needs.no-sesame,Bez sezamu,,bˈɛs sɛzˈamu,,2,"Regulation (EU) No 1169/2011 Annex II point 11, Polish text (EUR-Lex CELEX 32011R1169);ipa=espeak"
 dietary-needs.is-this-kosher,Czy to jest koszerne?,,tʃɨ tɔ jɛst kɔʃˈɛrnɛ,,2,"Słownik języka polskiego PWN, hasło koszerny; frame from this pack's dietary-needs.is-this-halal;ipa=espeak"
+dietary-needs.no-onion-garlic,Bez cebuli i czosnku,,bˈɛs tsɛbˈuli i tʃˈɔsŋku,,2,no-allium-v1;in-pack-frame;pl.wikipedia Cebula zwyczajna + Czosnek pospolity;ipa=espeak
+dietary-needs.does-it-contain-dried-fish,Czy jest w tym suszona ryba?,,tʃɨ jɛst f tɨm suʃˈɔna rˈɨba,,2,hidden-fish-v1;in-pack-frame;pl.wikipedia Sztokfisz + Suszenie zywnosci;ipa=espeak
+food-ordering.does-it-cost-more-at-a-table,Czy przy stoliku jest drożej?,,tʃɨ pʃɨ stɔlˈiku jɛzd drˈɔʒɛj,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=espeak"

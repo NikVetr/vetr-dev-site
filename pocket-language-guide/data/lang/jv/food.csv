@@ -10,7 +10,7 @@ dietary-needs.i-am-vegetarian,Kula vegetarian murni,"Tanpa daging, ayam, ulam",�
 dietary-needs.i-am-vegan,Kula vegan,"Tanpa daging, tigan, susu",ˈkulɔ fəˈɡan,,2,jv-agent-v1;ipa=jv-g2p
 dietary-needs.i-do-not-eat,Kula mboten nedha {},,ˈkulɔ ˈmbɔtən nəˈɖɔ {},nedha is the krama word for eating,2,jv-agent-v1;ipa=jv-g2p
 dietary-needs.i-am-allergic-to,Kula alergi {},,ˈkulɔ alərˈɡi {},,2,jv-agent-v1;ipa=jv-g2p
-dietary-needs.does-it-contain-fish-stock,Wonten trasi utawi kaldu ulam?,,ˈwɔntən ˈtrasi uˈtawi ˈkaldu ˈulam,trasi = fermented shrimp paste,2,jv-agent-v1;ipa=jv-g2p
+dietary-needs.does-it-contain-fish-stock,Wonten kaldu ulam?,,ˈwɔntən ˈkaldu ˈulam,"narrowed to the liquid half: the paste moved to dietary-needs.does-it-contain-dried-fish, so the two do not print as one card's two rows saying the same thing",2,jv-agent-v1;ipa=jv-g2p
 dietary-needs.does-it-contain-pork-stock,Kuahipun mawi kaldu babi?,Wonten kaldu utawi balung babi?,kuaˈhipʊn ˈmawi ˈkaldu ˈbabi,,2,jv-agent-v1;ipa=jv-g2p
 dietary-needs.i-have-a-severe-allergy-to,Kula alergi awrat dhateng {},,ˈkulɔ alərˈɡi ˈawrat ˈɖatəŋ {},,2,jv-agent-v1;ipa=jv-g2p
 food-ordering.table-for-two,Méja kanggé tiyang kalih,,ˈmedʒɔ ˈkaŋɡe ˈtijaŋ ˈkalɪh,,2,jv-agent-v1;ipa=jv-g2p
@@ -30,3 +30,6 @@ dietary-needs.is-this-halal,Menika halal?,Wonten sertifikat halal?,məˈnikɔ ˈ
 dietary-needs.does-it-contain-pork-fat,Masakipun mawi gajih babi?,Wonten lisah babi utawi gajih babi?,masaˈkipʊn ˈmawi ˈɡadʒɪh ˈbabi,,2,jv-agent-v1;ipa=jv-g2p
 dietary-needs.no-sesame,Tanpa wijèn,,ˈtanpɔ ˈwidʒɛn,,2,Javanese Wikipedia Wijèn; frame from this pack's dietary-needs.no-peanuts;ipa=jv-g2p
 dietary-needs.is-this-kosher,Menika kosher?,Wonten sertifikat kosher?,məˈnikɔ ˈkɔshər,,2,Javanese Wikipedia Kosher ('panganan diarani kosher'); frame from this pack's dietary-needs.is-this-halal;ipa=jv-g2p
+dietary-needs.no-onion-garlic,Mboten mawi brambang lan bawang,,ˈmbɔtən ˈmawi ˈbrambaŋ lan ˈbawaŋ,krama; brambang is the shallot and bawang on its own is garlic in Javanese,2,no-allium-v1;in-pack-frame;jv.wikipedia Bawang (garlic) + Brambang (Shallot);ipa=jv-g2p
+dietary-needs.does-it-contain-dried-fish,Wonten trasi utawi ulam asin?,,ˈwɔntən ˈtrasi uˈtawi ˈulam ˈasɪn,"krama; trasi = fermented shrimp paste, ulam asin (ngoko iwak asin) = salted dried fish",2,hidden-fish-v1;in-pack-frame;jv.wikipedia Trasi + Iwak asin;ipa=jv-g2p
+food-ordering.does-it-cost-more-at-a-table,Menawi wonten méja langkung awis?,,məˈnawi ˈwɔntən ˈmedʒɔ ˈlaŋkʊŋ ˈawɪs,krama,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=jv-g2p"

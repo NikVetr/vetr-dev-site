@@ -30,3 +30,6 @@ food-ordering.is-this-vegetarian,Acesta este vegetarian?,,atʃˌesta jˌeste vˌ
 food-ordering.what-do-you-recommend,Ce recomandați?,,tʃe rekˌomandˈatsʲ,,2,ro-agent-v1;ipa=espeak
 food-ordering.water-please,"Apă, vă rog",,"ˈapə, və rˈoɡ",,2,ro-agent-v1;ipa=espeak
 food-ordering.can-a-vegetarian-eat-this,Poate un vegetarian să mănânce asta?,,pˌɔate un vˌedʒetaɾjˈan sə mənˈɨntʃe ˈasta,,2,ro-agent-v1;ipa=espeak
+dietary-needs.no-onion-garlic,Fără ceapă și usturoi,,fˈərə tʃˈeapə ʃi ˌustuɾˈoj,,2,no-allium-v1;in-pack-frame;ro.wikipedia Ceapa + Usturoi;ipa=espeak
+dietary-needs.does-it-contain-dried-fish,Conține pește uscat?,,kontsˈine pˈeʃte uskˈat,,2,hidden-fish-v1;in-pack-frame;ro.wikipedia Batog + Uscare;ipa=espeak
+food-ordering.does-it-cost-more-at-a-table,La masă e mai scump?,,la mˈasə je maɪ skˈump,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=espeak"

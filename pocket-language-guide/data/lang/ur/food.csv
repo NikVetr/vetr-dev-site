@@ -30,3 +30,6 @@ dietary-needs.is-this-halal,کیا یہ حلال ہے؟,,kyā yah halāl hai?,kj
 dietary-needs.does-it-contain-pork-fat,کیا اس میں سؤر کی چربی ہے؟,,kyā is meñ su’ar kī charbī hai?,kjˈaː ɪs mˈẽ səˈoːɾ ki cˈʌɾbˌiː hɛ,,2,ur-allergen-v1;ipa=espeak
 dietary-needs.no-sesame,تل نہیں,,til nahīñ,tˈʌl nahˈĩː,,2,"Platts, A Dictionary of Urdu, Classical Hindi, and English (DSAL), تل til 'the sesamum plant, Sesamum indicum'; frame from this pack's dietary-needs.no-peanuts;ipa=espeak"
 dietary-needs.is-this-kosher,کیا یہ کوشر ہے؟,,kyā yah koshar hai?,kjˈaː jeːh kˈoːʃəɾ hɛ,,2,Urdu Wikipedia کشروت ('انھیں کوشر کہا جاتا ہے'); frame from this pack's dietary-needs.is-this-halal;ipa=espeak
+dietary-needs.no-onion-garlic,پیاز اور لہسن نہیں,,piyāz aur lahsan nahīñ,pjˈaːz ɔɾ lˈɛhsən nahˈĩː,,2,no-allium-v1;in-pack-frame;ur.wikipedia Piyaz + Lahsan;ipa=espeak
+dietary-needs.does-it-contain-dried-fish,کیا اس میں خشک مچھلی ہے؟,,kyā is meñ khushk machhlī hai?,kjˈaː ɪs mˈẽ xˈʊʃk mˈʌcʰlˌiː hɛ,,2,hidden-fish-v1;in-pack-frame;ur.wikipedia خشک میوہ (Dried fruit) + مچھلی;ipa=espeak
+food-ordering.does-it-cost-more-at-a-table,کیا میز پر زیادہ مہنگا ہے؟,,kyā mez par ziyāda mahngā hai?,kjˈaː mˈeːz pˈʌɾ zjˈaːda mˈɛhnɡaː hɛ,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=espeak"

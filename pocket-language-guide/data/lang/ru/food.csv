@@ -30,3 +30,6 @@ dietary-needs.is-this-halal,Это халяль?,Это халяльное?,Eto 
 dietary-needs.does-it-contain-pork-fat,Здесь есть свиной жир или сало?,Готовили на свином сале?,Zdesʼ yestʼ svinoy zhir ili salo?,ʑdʲˈesʲ jestʲ svʲinˈoj ʒˈɨr ˈiɭʲɪ sˈɑɭʌ,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak
 dietary-needs.no-sesame,Без кунжута.,,Bez kunzhuta.,bʲˈes kunʒˈuta,,2,"ТР ТС 022/2011 (Customs Union technical regulation on food labelling), allergen list item кунжут; Russian Wikipedia Кунжут индийский;ipa=espeak"
 dietary-needs.is-this-kosher,Это кошерное?,Это кошерный продукт?,Eto koshernoye?,ˈɛtʌ kʌʃˈɛrnʌjɪ,,2,"Большой толковый словарь русского языка (Кузнецов), статья кошерный; frame from this pack's dietary-needs.is-this-halal;ipa=espeak"
+dietary-needs.no-onion-garlic,Без лука и чеснока.,,Bez luka i chesnoka.,bʲˈes ɭˈuka ˈi tʃʲisnʌkˈɑ,,2,no-allium-v1;in-pack-frame;ru.wikipedia Luk repchatyy (lead names luk) + Chesnok;ipa=espeak
+dietary-needs.does-it-contain-dried-fish,Здесь есть сушёная рыба?,,Zdesʼ yestʼ sushënaya ryba?,ʑdʲˈesʲ jestʲ suʃˈonʌja rˈɨba,,2,hidden-fish-v1;in-pack-frame;ru.wikipedia Вяление рыбы + Сушка;ipa=espeak
+food-ordering.does-it-cost-more-at-a-table,За столиком дороже?,,Za stolikom dorozhe?,zˈɑ stˈoɭʲikʌm dʌrˈoʒɨ,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=espeak"

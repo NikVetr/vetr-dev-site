@@ -30,3 +30,6 @@ food-ordering.is-this-vegetarian,Is dit vegetarisch?,,ɪs dɪt vˌeːɣətˈaːr
 food-ordering.what-do-you-recommend,Wat raadt u aan?,,ʋɑt rˈaːt y ˈaːn,,2,nl-agent-v1;ipa=espeak
 food-ordering.water-please,"Water, alstublieft.",,"ʋˈaːtər, ˌɑlstʏblˈift",,2,nl-agent-v1;ipa=espeak
 food-ordering.can-a-vegetarian-eat-this,Kan een vegetariër dit eten?,,kɑn ən vˈeːɣətˌaːriər dɪt ˈeːtən,,2,nl-agent-v1;ipa=espeak
+dietary-needs.no-onion-garlic,"Geen ui, geen knoflook",,"ɣˈeːn ˈœy, ɣˈeːn knɔflˈoːk",,2,no-allium-v1;in-pack-frame;nl.wikipedia Ui (plant) + Knoflook;ipa=espeak
+dietary-needs.does-it-contain-dried-fish,Zit er gedroogde vis in?,,zˈɪt ər ɣədrˈoːɣdə vˈɪs ˈɪn,,2,hidden-fish-v1;in-pack-frame;nl.wikipedia Stokvis + Drogen (voedselconservering);ipa=espeak
+food-ordering.does-it-cost-more-at-a-table,Is het aan tafel duurder?,,ɪs hət aːn tˈaːfəl dˈyrdər,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=espeak"

@@ -29,3 +29,6 @@ dietary-needs.no-pork,सुँगुरको मासु चाहिँद�
 dietary-needs.is-this-halal,के यो हलाल हो?,,kē yō halāla hō?,kˈeː jˈoː həlˈaːl hoː,,2,ne-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,के यसमा सुँगुरको बोसो छ?,,kē yasamā sum̐gurakō bōsō cha?,kˈeː jˈʌsəmˌaː sũɡˈuɾəkˌoː bˈoːsoː cʰˈə,,2,ne-agent-v1;ipa=espeak
 dietary-needs.no-sesame,तिल चाहिँदैन,,tila cāhim̐daina,tˈɪl cˌaːhĩdˈɛːnə,,2,Nepali Wikipedia कालो तिल; Platts (DSAL) for the shared Indo-Aryan form til; frame from this pack's dietary-needs.no-peanuts;ipa=espeak
+dietary-needs.no-onion-garlic,प्याज-लसुन चाहिँदैन,,pyāja-lasuna cāhim̐daina,pːjˈaːɟlʌsun cˌaːhĩdˈɛːnə,,2,no-allium-v1;in-pack-frame;ne.wikipedia Pyaj + Lasun;ipa=espeak
+dietary-needs.does-it-contain-dried-fish,के यसमा सुक्खा माछा छ?,,kē yasamā sukkhā māchā cha?,kˈeː jˈʌsəmˌaː sˈukkʰaː mˈaːcʰaː cʰˈə,,2,"hidden-fish-v1;in-pack-frame;ne.wikipedia, which uses सुक्खा माछा in तानिन्थारी क्षेत्र;ipa=espeak"
+food-ordering.does-it-cost-more-at-a-table,टेबलमा बस्दा महँगो हुन्छ?,,ṭēbalamā basdā maham̐gō huncha?,ʈˈeːbəlˌəmaː bˈʌsdaː mˌəhãɡˈoː hˈuncʰə,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=espeak"

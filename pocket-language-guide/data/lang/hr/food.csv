@@ -30,3 +30,6 @@ dietary-needs.is-this-halal,Je li ovo halal?,,je li ˈovo xˈalal,,2,hr-agent-v1
 dietary-needs.does-it-contain-pork-fat,Ima li u ovome svinjske masti?,,ima li u ovome svˈiɲske mˈasti,"mast is lard; the Croatian word for butter is maslac, so the two cannot be confused the way Spanish manteca can",2,hr-agent-v1;ipa=espeak
 dietary-needs.no-sesame,Bez sezama,,bˈes sezama,,2,"Regulation (EU) No 1169/2011 Annex II point 11, Croatian text (EUR-Lex CELEX 32011R1169);ipa=espeak"
 dietary-needs.is-this-kosher,Je li ovo košer?,,je li ˈovo kˈoʃer,,2,Croatian Wikipedia Košer ('Košer hrana jest ona hrana koja je u skladu s propisima židovskog zakona'); frame from this pack's dietary-needs.is-this-halal;ipa=espeak
+dietary-needs.no-onion-garlic,Bez luka i češnjaka,,bˈez lˈuka i tʃeʃɲaka,,2,no-allium-v1;in-pack-frame;hr.wikipedia Crveni luk (lead names obicni luk) + Cesnjak;ipa=espeak
+dietary-needs.does-it-contain-dried-fish,Ima li u ovome sušene ribe?,,ima li u ovome suʃene rˈibe,,2,hidden-fish-v1;in-pack-frame;hr.wikipedia Suseni bakalar + Susenje;ipa=espeak
+food-ordering.does-it-cost-more-at-a-table,Je li za stolom skuplje?,,je li zˈa stˈolom skˈupʎe,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=espeak"

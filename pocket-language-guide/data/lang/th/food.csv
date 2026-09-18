@@ -10,7 +10,7 @@ dietary-needs.i-am-vegetarian,กินมังสวิรัติ,กิน�
 dietary-needs.i-am-vegan,กินเจ,วีแกน,kin che,kin˧tɕeː˧,"no meat, fish sauce, egg",2,th-agent-v1;ipa=thaig2p
 dietary-needs.i-do-not-eat,ไม่กิน{},,mai kin {},maj˥˩ kin˧ {},,2,th-agent-v1;ipa=thaig2p
 dietary-needs.i-am-allergic-to,แพ้{},,phae {},pʰɛː˦˥ {},,2,th-agent-v1;ipa=thaig2p
-dietary-needs.does-it-contain-fish-stock,ใส่น้ำปลาไหม,ใส่น้ำปลาหรือกะปิไหม,sai nam pla mai,saj˨˩ naːm˦˥plaː˧ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+dietary-needs.does-it-contain-fish-stock,ใส่น้ำปลาไหม,,sai nam pla mai,saj˨˩ naːm˦˥plaː˧ maj˩˩˦,"narrowed to the liquid half: the paste moved to dietary-needs.does-it-contain-dried-fish, so the two do not print as one card's two rows saying the same thing",2,th-agent-v1;ipa=thaig2p
 dietary-needs.does-it-contain-pork-stock,น้ำซุปทำจากหมูไหม,น้ำซุปต้มกระดูกหมูไหม,nam sup tham chak mu mai,naːm˦˥ sup˦˥ tʰam˧ tɕaːk˨˩ muː˩˩˦ maj˩˩˦,,2,th-pork-stock-v1;ipa=thaig2p
 dietary-needs.i-have-a-severe-allergy-to,แพ้{}รุนแรง อาจถึงตาย,,"phae {} runraeng, at thueng tai",pʰɛː˦˥ {} run˧rɛːŋ˧ ʔaːt˨˩ tʰɯŋ˩˩˦taːj˧,may be fatal,2,th-agent-v1;ipa=thaig2p
 food-ordering.table-for-two,โต๊ะสองคน,,to song khon,toʔ˦˥ sɔːŋ˩˩˦ kʰon˧,,2,th-agent-v1;ipa=thaig2p
@@ -30,3 +30,6 @@ dietary-needs.is-this-halal,อันนี้ฮาลาลไหม,มีต
 dietary-needs.does-it-contain-pork-fat,ใส่น้ำมันหมูไหม,ผัดด้วยน้ำมันหมูไหม,sai namman mu mai,saj˨˩ naːm˦˥man˧muː˩˩˦ maj˩˩˦,,2,pork-fat-agent-v1;in-pack-frame;ipa=thaig2p
 dietary-needs.no-sesame,ไม่ใส่งา,ไม่ใส่งาและน้ำมันงา,mai sai nga,maj˥˩ saj˨˩ ŋaː˧,งา is the seed; น้ำมันงา is its oil,2,Thai Wikipedia งา (พืช); frame from this pack's dietary-needs.no-peanuts;ipa=thaig2p
 dietary-needs.is-this-kosher,อันนี้โคเชอร์ไหม,มีตราโคเชอร์ไหม,an ni khochoe mai,ʔan˧niː˦˥ kʰoː˧ tɕʰɤː˥˩ maj˩˩˦,,2,"OU Kosher ฉบับภาษาไทย (oukosher.org/th), which renders the term โคเชอร์; frame from this pack's dietary-needs.is-this-halal;ipa=thaig2p"
+dietary-needs.no-onion-garlic,ไม่ใส่หัวหอม กระเทียม,ไม่ใส่หอมแดง,"mai sai hua hom, krathiam",maj˥˩ saj˨˩ hua̯˩˩˦hɔːm˩˩˦ kra˨˩raʔ˨˩tʰia̯m˧,,2,no-allium-v1;in-pack-frame;th.wikipedia Hom yai (lead names hua hom) + Krathiam + Hom daeng (Shallot);ipa=thaig2p
+dietary-needs.does-it-contain-dried-fish,ใส่กะปิไหม,ใส่ปลาแห้งไหม,sai kapi mai,saj˨˩ kaʔ˨˩piʔ˨˩ maj˩˩˦,"kapi = fermented shrimp paste, the base of most curry pastes",2,hidden-fish-v1;in-pack-frame;th.wikipedia กะปิ;ipa=thaig2p
+food-ordering.does-it-cost-more-at-a-table,นั่งโต๊ะแพงกว่าไหม,,nang to phaeng kwa mai,naŋ˥˩ toʔ˦˥ pʰɛːŋ˧ kwaː˨˩ maj˩˩˦,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=thaig2p"

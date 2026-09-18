@@ -29,3 +29,6 @@ dietary-needs.no-pork,ભૂંડનું માંસ નહીં,,bhūṁ�
 dietary-needs.is-this-halal,આ હલાલ છે?,,ā halāl chē?,aː həlaːl cʰeː,is this halal?,2,gu-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-fat,આમાં ભૂંડની ચરબી છે?,,āmāṁ bhūṁḍanī carabī chē?,aːmã bʰunɖʌni cəɾʌbi cʰeː,is there pig fat in this?,2,gu-agent-v1;ipa=espeak
 dietary-needs.no-sesame,તલ નહીં,,tal nahīṁ,tʌl nʌhĩ,,2,Gujarati Wikipedia તલ; Platts (DSAL) for the shared Indo-Aryan form til; frame from this pack's dietary-needs.no-peanuts;ipa=espeak
+dietary-needs.no-onion-garlic,"ડુંગળી, લસણ નહીં",,"ḍuṁgaḷī, lasaṇ nahīṁ","ɖunɡʌɭi, ləsʌɳ nʌhĩ",no onion or garlic,2,no-allium-v1;in-pack-frame;gu.wikipedia Dungali + Lasan;ipa=espeak
+dietary-needs.does-it-contain-dried-fish,આમાં સૂકી માછલી છે?,,āmāṁ sūkī māchalī chē?,aːmã suːki maːcʰʌli cʰeː,,2,hidden-fish-v1;in-pack-frame;gu.wikipedia સુકો મેવો (Dried fruit) + માછલી;ipa=espeak
+food-ordering.does-it-cost-more-at-a-table,ટેબલ પર વધુ મોંઘું છે?,,ṭēbal par vadhu mōṁghuṁ chē?,ʈeːbʌl pʌɾ ʋʌdʰu monɡʰũ cʰeː,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=espeak"

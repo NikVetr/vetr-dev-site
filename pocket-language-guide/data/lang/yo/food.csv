@@ -28,3 +28,5 @@ food-ordering.can-a-vegetarian-eat-this,Ṣé ajewéwe lè jẹ èyí?,,ʃe˥ ad
 dietary-needs.no-pork,Láì sí ẹran ẹlẹ́dẹ̀,,la˥i˩ si˥ ɛrã ɛlɛ˥dɛ˩,,2,yo-agent-v1;ipa=yo-g2p
 dietary-needs.is-this-halal,Ṣé halal ni èyí?,,ʃe˥ halal ni e˩ji˥,,2,yo-agent-v1;ipa=yo-g2p
 dietary-needs.does-it-contain-pork-fat,Ṣé ọ̀rá ẹlẹ́dẹ̀ wà nínú rẹ̀?,,ʃe˥ ɔ˩ra˥ ɛlɛ˥dɛ˩ wa˩ ni˥nu˥ rɛ˩,,2,yo-agent-v1;ipa=yo-g2p
+dietary-needs.does-it-contain-dried-fish,Ṣé ẹja gbígbẹ tàbí edé wà nínú rẹ̀?,,ʃe˥ ɛdʒa ɡbi˥ɡbɛ ta˩bi˥ ede˥ wa˩ ni˥nu˥ rɛ˩,"dried fish or crayfish, the base of most Yoruba soups",2,"hidden-fish-v1;in-pack-frame;yo.wikipedia Edikang ikong + Ekwang + Kenkey, which name eja gbigbe and ede among the base ingredients; yo.wikipedia Edé (Shrimp);ipa=yo-g2p"
+food-ordering.does-it-cost-more-at-a-table,Ṣé ó wọ́n jù ní tábìlì?,,ʃe˥ o˥ wɔ̃˥ dʒu˩ ni˥ ta˥bi˩li˩,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=yo-g2p"

@@ -10,7 +10,7 @@ dietary-needs.i-am-vegetarian,Saya vegetarian murni,"Tanpa daging, ayam, ikan",s
 dietary-needs.i-am-vegan,Saya vegan,"Tanpa daging, telur, susu",sˈaja vˈɛɡan,,2,id-agent-v1;ipa=espeak
 dietary-needs.i-do-not-eat,Saya tidak makan {},,sˈaja tˈidak mˈakan {},,2,id-agent-v1;ipa=espeak
 dietary-needs.i-am-allergic-to,Saya alergi {},,sˈaja alˈɛrɡi {},,2,id-agent-v1;ipa=espeak
-dietary-needs.does-it-contain-fish-stock,Ada terasi atau kaldu ikan?,,ˈada tərˈasi ˌataʊ kˈaldu ˈikan,terasi = fermented shrimp paste,2,id-agent-v1;ipa=espeak
+dietary-needs.does-it-contain-fish-stock,Ada kaldu ikan?,,ˈada kˈaldu ˈikan,"narrowed to the liquid half: the paste moved to dietary-needs.does-it-contain-dried-fish, so the two do not print as one card's two rows saying the same thing",2,id-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-stock,Kuahnya pakai kaldu babi?,Ada kaldu atau tulang babi?,kuˈahɲa pˈakaɪ kˈaldu bˈabi,,2,id-pork-stock-v1;ipa=espeak
 dietary-needs.i-have-a-severe-allergy-to,Saya alergi berat {},Saya alergi parah terhadap {},sˈaja alˈɛrɡi bˈɛrat {},,2,id-agent-v1;ipa=espeak
 food-ordering.table-for-two,Meja untuk dua orang,,mˈɛdʒa ˌuntuk dˈua ˈoraŋ,,2,id-agent-v1;ipa=espeak
@@ -30,3 +30,6 @@ dietary-needs.is-this-halal,Ini halal?,Ada sertifikat halal?,ˈini hˈalal,logo:
 dietary-needs.does-it-contain-pork-fat,Masaknya pakai lemak babi?,Ada minyak babi atau lemak babi?,masˈakɲa pˈakaɪ lˈɛmak bˈabi,,2,pork-fat-agent-v1;in-pack-frame;ipa=espeak
 dietary-needs.no-sesame,Tanpa wijen,Tanpa wijen dan minyak wijen,tˈanpa wˈidʒən,,2,Indonesian Wikipedia Wijen; frame from this pack's dietary-needs.no-peanuts;ipa=espeak
 dietary-needs.is-this-kosher,Ini kosher?,Ada sertifikat kosher?,ˈini kˈoshər,,2,OU Kosher edisi Bahasa Indonesia (oukosher.org/id); frame from this pack's dietary-needs.is-this-halal;ipa=espeak
+dietary-needs.no-onion-garlic,Tanpa bawang merah dan bawang putih,Tanpa bawang bombai juga,tˈanpa bˈawaŋ mˈɛrah dan bˈawaŋ pˈutih,bawang merah is the shallot an Indonesian kitchen actually uses; bawang bombai is the European onion,2,no-allium-v1;in-pack-frame;id.wikipedia Bawang putih + Bawang merah (Shallot) + Bawang bombai;ipa=espeak
+dietary-needs.does-it-contain-dried-fish,Ada terasi atau ikan asin?,,ˈada tərˈasi ˌataʊ ˈikan ˈasin,"terasi = fermented shrimp paste, ikan asin = salted dried fish",2,hidden-fish-v1;in-pack-frame;id.wikipedia Terasi + Ikan asin;ipa=espeak
+food-ordering.does-it-cost-more-at-a-table,Lebih mahal kalau di meja?,,lˈɛbih mˈahal kˈalaʊ di mˈɛdʒa,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=espeak"

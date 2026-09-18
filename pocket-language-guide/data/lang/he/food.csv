@@ -30,3 +30,6 @@ food-ordering.is-this-vegetarian,זה צמחוני?,זֶה צִמְחוֹנִי?
 food-ordering.what-do-you-recommend,מה ממליצים כאן?,מָה מַמְלִיצִים כָּאן?,ma mamlitsim kan?,mˈa mamlitsˈim kˈan,what do they recommend here?,2,he-agent-v1;ipa=bgn
 food-ordering.water-please,"מים, בבקשה","מַיִם, בְּבַקָּשָׁה","máyim, bevaqasha","mˈajim, bevakaʃˈa","water, please",2,he-agent-v1;ipa=bgn
 food-ordering.can-a-vegetarian-eat-this,צמחוני יכול לאכול את זה?,צִמְחוֹנִי יָכוֹל לֶאֱכוֹל אֶת זֶה?,tsimẖoni yakhol le’ekhol et ze?,tsimxonˈi jaxˈol leexˈol ˈet zˈe,can a vegetarian eat this?,2,he-agent-v1;ipa=bgn
+dietary-needs.no-onion-garlic,בלי בצל ובלי שום,בְּלִי בָּצָל וּבְלִי שׁוּם,beli batsal uvli shum,belˈi batsˈal uvlˈi ʃˈum,without onion and without garlic,2,no-allium-v1;in-pack-frame;he.wikipedia Betsal ha-ginah (lead names batsal) + Shum;ipa=bgn
+dietary-needs.does-it-contain-dried-fish,יש בזה דגים יבשים?,יֵשׁ בְּזֶה דָּגִים יְבֵשִׁים?,yesh beze dagim yeveshim?,jˈeʃ bezˈe daɡˈim jeveʃˈim,,2,hidden-fish-v1;in-pack-frame;he.wikipedia פירות יבשים (Dried fruit) + ייבוש מזון;ipa=bgn
+food-ordering.does-it-cost-more-at-a-table,זה יותר יקר בשלחן?,זֶה יוֹתֵר יָקָר בַּשֻּׁלְחָן?,ze yoter yaqar bashulẖan?,zˈe jotˈeʁ jakˈaʁ baʃulxˈan,,2,"table-price-v1;in-pack-neighbour, from this pack's food-ordering.table-for-two and shopping.that-is-too-expensive;ipa=bgn"
