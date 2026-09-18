@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { createSheetContext, buildSheet } from '../core/sheet.js';
 import { proposeBalance, substitutesOf } from '../core/solve/weights.js';
 import { contentBox } from '../core/solve/index.js';
+import { parseTable } from '../core/csv.js';
 import { referenceSpec } from '../scripts/spec.mjs';
 
 const ctx = await createSheetContext({
@@ -85,14 +86,35 @@ test('whitespace is filled with items that fit, and never over budget', async ()
 test('near-duplicates are discounted, so a cluster is not filled up', async () => {
   const { input } = await sheetWithGaps(4);
   const diff = proposeBalance(input);
-  const clusters = diff.adds.map((a) => input.corpus.concepts[a.conceptId].cluster_id);
-  /** @type {Record<string,number>} */ const counts = {};
-  for (const c of clusters) counts[c] = (counts[c] ?? 0) + 1;
-  const worst = Math.max(0, ...Object.values(counts));
-  assert.ok(worst <= 3, `one cluster took ${worst} slots, so the decay is not biting`);
-  assert.ok(diff.adds.some((a) => /counted lower/.test(a.reason))
-    || Object.keys(counts).length === diff.adds.length,
-  'expected either discounted reasons or one item per cluster');
+  /** @type {Record<string,string[]>} */ const byCluster = {};
+  for (const add of diff.adds) {
+    const cluster = input.corpus.concepts[add.conceptId].cluster_id;
+    (byCluster[cluster] ??= []).push(add.conceptId);
+  }
+  // **A cap on slots per cluster was the wrong invariant, and the table is why.**
+  // This asserted `worst <= 3` and now fails at 5: the five are 0, 1, 8, 9 and 10,
+  // the digits this harness punched out of the number line, and putting them back
+  // is the correct answer rather than a decay that stopped biting.
+  // `numbers-money.misc` is one `cluster_id` of complements, so what the test should
+  // require is that the pass only fills a cluster up where the *table* says its
+  // members do not substitute -- three or fewer otherwise.
+  for (const [cluster, ids] of Object.entries(byCluster)) {
+    if (ids.length <= 3) continue;
+    for (const a of ids) {
+      for (const b of ids) {
+        if (a >= b) continue;
+        assert.equal(input.corpus.redundancy[a]?.[b], 'none',
+          `${cluster} took ${ids.length} slots, and ${a} x ${b} is `
+          + `${input.corpus.redundancy[a]?.[b] ?? 'unrated'} rather than independent`);
+      }
+    }
+  }
+  // "or at least one proposal says `counted lower`" used to be asserted here too.
+  // It no longer holds and should not: on this sheet the pass reaches only cheap
+  // reference rows and nothing it takes has a substitute already in, which is the
+  // right outcome and not a broken discount. That the discount fires, and says so,
+  // is `a rated substitute cuts a proposal` below, on a sheet that reaches the
+  // rated pairs.
 });
 
 test('the redundancy table says what cluster_id cannot', () => {
@@ -195,4 +217,68 @@ test('a rated substitute cuts a proposal, and the reason says so', async () => {
   // could have held -- `toilets.may-i-have-the-toilet-key` against
   // `building-words.key`, two sections apart. That is the whole point of the table.
   assert.ok(byTable > 0, 'no proposal was cut by a cross-cluster rated relation');
+});
+
+/**
+ * The counting sequence, as the priority ladder and the section picker both have to
+ * be able to cut it: a *prefix*. `0 1 2 4 6` is a broken card, and the only thing
+ * that stops a value-ranking greedy producing one is that no digit discounts
+ * another -- if 3 were worth less for 2 being present it would sort below rows from
+ * other sections and the sequence would come back with holes in it.
+ *
+ * `numbers-money.misc` is one `cluster_id`, so before the table said otherwise the
+ * flat prior discounted every digit by every other one. `scripts/build_redundancy.py`
+ * asserts these pairs `none` by rule (`number-line`), and three independent passes
+ * over a sample of 11 of them agreed.
+ */
+test('no digit of the number line discounts another', async () => {
+  const { corpus } = ctx;
+  // By the English gloss, not the slug: every number row's `slug_en` is `item`.
+  const english = parseTable(await readFile('data/lang/en/numbers.csv', 'utf8'), 'en');
+  const digits = english
+    .filter((r) => /^\d$|^10$/.test(r.text))
+    .map((r) => corpus.concepts[r.concept_id])
+    .filter((c) => c.section_id === 'numbers-money');
+  assert.equal(digits.length, 11, `expected 0-10, found ${digits.length}`);
+  for (const a of digits) {
+    const substitutes = substitutesOf(corpus, a);
+    for (const b of digits) {
+      if (a === b) continue;
+      assert.equal(substitutes.get(b.concept_id), 1,
+        `${a.slug_en} discounts ${b.slug_en} by ${substitutes.get(b.concept_id)}, `
+        + 'so a budget cut can perforate the number line');
+    }
+  }
+});
+
+/**
+ * A currency word and its `-symbol` row have to carry *one* relation between them,
+ * whatever that relation is. They are 31 pairs of identical shape, so a table that
+ * rated some and asserted others at a different level would price the yen and the
+ * euro differently for no reason in the world -- which is exactly what happened
+ * while the rule said `none` and the raters said `partial`, until the rule was
+ * corrected to what the passes measured.
+ *
+ * This does not assert *which* level: that is the raters' to change. It asserts the
+ * pairs are all in the table and all agree. Note what no keep-factor can do,
+ * though: `scripts/validate_data.py` separately requires the two rows to have the
+ * same `applies_to`, because "both or neither" is a constraint and this table holds
+ * marginal value. A budget that ranks by value orphans currency words; measured
+ * corpus-wide it orphans about one per target.
+ */
+test('a currency word and its symbol carry one relation', () => {
+  const { corpus } = ctx;
+  const pairs = Object.values(corpus.concepts)
+    .filter((c) => corpus.concepts[`${c.concept_id}-symbol`])
+    .map((c) => [c.concept_id, `${c.concept_id}-symbol`]);
+  assert.ok(pairs.length > 20, `expected the currency pairs, found ${pairs.length}`);
+  const levels = new Set();
+  for (const [word, symbol] of pairs) {
+    const relation = corpus.redundancy[word]?.[symbol];
+    assert.ok(relation, `${word} x ${symbol} has no row, so the flat cluster prior `
+      + 'decides it -- and the prior is the thing the table exists to replace');
+    levels.add(relation);
+  }
+  assert.equal(levels.size, 1,
+    `the word/symbol pairs carry ${[...levels].join(' and ')}; one shape, one relation`);
 });

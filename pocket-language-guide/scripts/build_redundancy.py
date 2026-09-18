@@ -5,6 +5,8 @@
     python3 scripts/build_redundancy.py               # aggregate the passes, write the table
     python3 scripts/build_redundancy.py --check       # verify the committed table is current
     python3 scripts/build_redundancy.py --worksheet toilets,emergency-medical
+    python3 scripts/build_redundancy.py --spot-check  # a sheet that tests the rules
+    python3 scripts/build_redundancy.py --strata      # what that sheet is drawn from
 
 **What this is for.** When a card is small the app has to choose which of 861
 concepts to print, and two of them can answer the same need. `cluster_id` says so
@@ -34,14 +36,40 @@ fifth of a level does not.
 agreed with it. Nothing here invents a rating: a pair absent from the passes file
 is unrated, and stays absent.
 
+**Two provenances, and never one dressed as the other.** Most of the table is
+rated. `numbers-money` is *asserted*, by the named rules in `RULES` below, because
+it is 36% of the candidate pairs and its content is a set of tokens for writing a
+price rather than prose -- a rule about it is more defensible than 12,000
+judgements, and it is checkable, which a judgement is not. So every row carries
+`provenance`: `rated`, with the pass counts it was aggregated from, or
+`rule:<name>`, with **no pass counts at all**, because none were made.
+`scripts/validate_data.py` rejects a `rule:` row that claims any. Where a pair is
+both, the rating wins -- the rule is the cheap estimate and the judgement is the
+measurement.
+
+`--spot-check` is how the rules are tested rather than trusted: a sheet stratified
+by (rule, cluster), rated by the same independent passes and the same rubric. The
+first round of it rated 49 asserted pairs and **overturned two rules, 15 pairs, all
+unanimous** -- see `word-and-its-symbol` and `generic-and-named-currency`, which
+carry what the passes said and why the rule had been wrong. A rule the spot-check
+contradicts is corrected here; it is not averaged with the judgement.
+
 ## What the committed table contains
 
-Every rated pair whose relation **differs from what `cluster_id` alone would say**.
-That is: every non-`none` pair, plus the same-cluster pairs the raters called
-`none` -- those need a row precisely because the scorer's fallback for an unrated
-same-cluster pair is the old flat cluster decay, and without the row it would keep
-discounting a pair three judges said was not redundant. Everything else is
-recoverable from `cluster_id`, so storing it would be storing a copy.
+Every pair whose relation **differs from what `cluster_id` alone would say**. That
+is: every non-`none` pair, plus the same-cluster pairs called `none` -- those need a
+row precisely because the scorer's fallback for an unrated same-cluster pair is the
+old flat cluster decay, and without the row it would keep discounting a pair three
+judges, or a rule, said was not redundant. Everything else is recoverable from
+`cluster_id`, so storing it would be storing a copy.
+
+That filter is what keeps the asserted half small. The rules decide 1,304 pairs and
+only 194 of them need a row; and `can_co_occur` never let them near the 1,994
+same-cluster pairs whose `applies_to` scopes are disjoint, which would otherwise
+have been 1,994 rows restating `applies_to`. A sample of 21 of those was rated as a
+control and came back `none` 21 times, so they are independent on the merits as
+well as unreachable -- and those 21 do carry rows, because a judgement is recorded
+wherever one was made. Only the *rule* stops at what a card can hold.
 
 ## The candidate set
 
@@ -149,7 +177,12 @@ def read_csv(path):
 
 
 def load_concepts():
-    """concept_id -> {section_id, cluster_id, gloss, tokens}, in corpus order."""
+    """concept_id -> {section_id, cluster_id, kind, scope, gloss, tokens}, in corpus order.
+
+    `scope` is `applies_to` parsed: the set of targets the row can print on, or
+    `None` for every target. The rules below need it, because two rows with
+    disjoint scopes never reach one card.
+    """
     english = {}
     for path in sorted((DATA / "lang/en").glob("*.csv")):
         for row in read_csv(path):
@@ -160,9 +193,12 @@ def load_concepts():
             cid = row["concept_id"]
             text = f"{english.get(cid, '')} {row['slug_en'].replace('-', ' ')}".lower()
             words = re.sub(r"[^a-z0-9' ]", " ", text).split()
+            only = (row.get("applies_to") or "").strip()
             out[cid] = {
                 "section_id": row["section_id"],
                 "cluster_id": row["cluster_id"],
+                "kind": row["kind"],
+                "scope": frozenset(only.split(";")) if only else None,
                 "gloss": english.get(cid, ""),
                 "tokens": {w for w in words if len(w) > 1 and w not in STOPWORDS},
             }
@@ -200,6 +236,174 @@ def group_by(concepts, field):
     return out
 
 
+# ---------------------------------------------------------------------------
+# Asserted relations: `numbers-money`, derived rather than rated
+# ---------------------------------------------------------------------------
+#
+# `numbers-money` is 4,012 of the 11,224 candidate pairs -- 36% -- and it is also
+# 2,236 of the corpus's 2,357 same-`cluster_id` pairs, which is to say: it is where
+# the cluster prior does nearly all of its work, and where the pilot found that
+# prior to be wrong. `numbers-money.currency` (65 members) and `.misc` (18) hold
+# the number line and the currency word/symbol pairs, and both are **complements**.
+#
+# Rating 4,012 pairs pairwise, three times, would be 12,000 judgements to rediscover
+# a structure that is mechanical: this section is not prose, it is a set of tokens
+# for writing and reading a price, and a rule can say which of them stand in for
+# each other. So these relations are *asserted* by the rules below rather than
+# rated, `provenance` on every row says which rule put it there, and a sample is
+# rated pairwise anyway (`--spot-check`) to test the rules. A rated verdict always
+# wins over an asserted one: the rule is the cheap estimate and the judgement is
+# the measurement.
+SECTION = "numbers-money"
+
+
+def can_co_occur(a, b):
+    """Whether one card could carry both rows.
+
+    `applies_to` scopes a row to named targets and `core/pack.js`'s `appliesTo`
+    drops the rest before `buildBlocks` ever sees them -- `solve/weights.js` applies
+    the same filter to its candidates, and had to be fixed once for not doing so
+    ("the Japanese yen on a Spanish sheet"). So two rows with disjoint scopes are
+    never on one sheet together, no scorer can ever read a row about the pair, and
+    asserting a relation for it would be storing a restatement of `applies_to`.
+    That is 1,994 of the 2,236 same-cluster pairs here: every won-against-euro,
+    every taka-against-krona. They get no row, and the rules below never see them.
+    """
+    return a["scope"] is None or b["scope"] is None or bool(a["scope"] & b["scope"])
+
+
+def denotes(concept):
+    """What the row is a name *for*: an amount, or a unit of money.
+
+    Two rows with the same key are two ways of writing one thing. Two rows with
+    different keys are two different things, and on a price tag two different things
+    are complements -- you need the number and the unit, and you need 3 as well as 7.
+
+    Read off the English gloss because that is where the corpus says it: the number
+    rows are glossed `0`, `10`, `1,000`, `1/2`, `100,000`; the counted forms add a
+    suffix (`2 + classifier`, `2 items`) and denote the same amount. A trailing
+    parenthetical says which *form* a money row is, not which money -- `yuan` and
+    `yuan (spoken)` are one currency -- so it is not part of the key.
+    """
+    amount = re.fullmatch(r"([\d,]+|1/2)(?: items?| \+ classifier)?", concept["gloss"])
+    if amount:
+        return ("amount", amount.group(1).replace(",", ""))
+    return ("money", re.sub(r"\s*\([^)]*\)$", "", concept["gloss"]).casefold())
+
+
+# Each rule takes the two (id, concept) sides and returns a relation or `None`.
+# Ordered: the first that answers wins, so the narrow rules come before the broad
+# ones. The name is what lands in `provenance`, which is how a row in the committed
+# table names the argument that put it there.
+RULES = (
+    # **A currency word and its own symbol are a partial substitute -- and that is
+    # the one place a rule here was overruled.** This rule asserted `none`, citing
+    # `scripts/validate_data.py`, which makes it an *error* for `X` and `X-symbol`
+    # to have different `applies_to`: "the name of the money and the sign beside a
+    # price ... a card carrying one without the other is not a shorter card, it is a
+    # sign nobody can read or a word nobody can point at". The spot-check rated 11
+    # of these pairs and all three passes called every one of them `partial`, 11 for
+    # 11, with no dissent.
+    #
+    # The judges were right and the citation was the wrong kind of evidence. The
+    # validator's rule is a **co-print constraint** -- both rows or neither -- and
+    # this table holds **marginal value**, which is a different quantity: once the
+    # card says `euro`, the sign `EUR` is genuinely worth less than a row nothing
+    # else covers, and "same referent, different register" is rubric level 1 in so
+    # many words. A constraint cannot be smuggled in as a keep-factor of 1, and the
+    # attempt hid the real finding, which is that **nothing in a keep-factor can
+    # enforce the constraint at all.** `validate_data.py` has to keep enforcing it
+    # on `applies_to`, and a redundancy-aware `priority` budget would need its own
+    # enforcement -- measured, it orphans currency words without one.
+    # 31 pairs: 30 in `.currency`, plus `yen`/`yen-symbol` in `.yen`.
+    ("word-and-its-symbol",
+     lambda a, ca, b, cb: "partial" if b == f"{a}-symbol" or a == f"{b}-symbol"
+     else None),
+
+    # **`local-currency` against a named currency that shares its scope is not a
+    # substitute either -- the second rule the spot-check corrected.**
+    # `numbers-money.local-currency` ("local currency") is the hedge for a language
+    # spoken across several currency zones; scoped `ar;ru;ta`, the only 4 pairs it
+    # can reach are `ruble` and `rupee` and their symbols. This rule guessed
+    # `partial`, reading the generic row as answering much of what the named one
+    # does. All three passes rated all 4 pairs `none`, and the rubric says why in its
+    # own words: level 0 "INCLUDES ... a general word and a different specific one".
+    # The generic row is what a traveller points at across the border where the
+    # named one is no use, so having the ruble does not make it worth less.
+    #
+    # Kept as a named rule rather than folded into `distinct-currency`, which would
+    # now reach the same verdict, because the two arguments are different and this
+    # one has three passes behind it.
+    ("generic-and-named-currency",
+     lambda a, ca, b, cb: "none" if f"{SECTION}.local-currency" in (a, b)
+     and denotes(ca)[0] == denotes(cb)[0] == "money" else None),
+
+    # **Two rows for the same amount in different form are partial substitutes.**
+    # Three pairs, all of them a language's own grammar showing through: `2` against
+    # `2 + classifier` (Chinese er / liang) and against `2 items` (Japanese futatsu),
+    # and `yuan` against `yuan (spoken)` (yuan / kuai). Level 1 rather than 2 because
+    # each is the rubric's "narrower case" or "different register" -- the counted form
+    # is what you must say before a measure word, and the corpus explains it in
+    # `number-and-classifier-notes` -- and level 1 rather than 0 because a card that
+    # already prints one has said the number.
+    ("same-value-restated",
+     lambda a, ca, b, cb: "partial" if denotes(ca) == denotes(cb) else None),
+
+    # **The number line is a complement, not a set of substitutes.** 119 pairs of
+    # `.misc`: the digits 0-9, then 10, 100, 1,000, 10,000, 1/2, and `lakh`/`crore`
+    # in their own cluster. A card that can count needs all of them -- dropping 3
+    # from 0-10 is a defect and not a saving -- which is why `core/pack.js` refuses
+    # to run any decay in the priority ladder ("a decay would delete counting from
+    # the card") and why `ui/chips.js` charges the cluster prior once per cluster
+    # instead of once per mate, having measured a card that counted "0 1 2 4 6 7 8 9".
+    # Both of those are workarounds for this table not saying it; this is the table
+    # saying it.
+    ("number-line",
+     lambda a, ca, b, cb: "none" if denotes(ca)[0] == denotes(cb)[0] == "amount"
+     else None),
+
+    # **Two different currencies are not substitutes for each other.** Where two
+    # named currencies share a target they are the money of two different countries
+    # that speak the language -- euro and franc on a German card (Germany, then
+    # Switzerland), dollar and riel on a Khmer one (both circulate in Cambodia),
+    # rupee and pound and dollar on an English one -- so a traveller who has one
+    # still fully needs the other. `rial`/`toman` is the sharpest case: two units of
+    # one Iranian currency, a factor of ten apart, and knowing only one of them is
+    # the standard way to be overcharged. 53 pairs, all of them inside `.currency`,
+    # where the prior was discounting them 45%.
+    ("distinct-currency",
+     lambda a, ca, b, cb: "none" if denotes(ca)[0] == denotes(cb)[0] == "money"
+     else None),
+
+    # **A number and a unit of money are the two halves of a price.** 32 pairs, all
+    # of them `.misc`, where the number line sits in one cluster with `yuan` and
+    # `yuan (spoken)`. Nothing about "5" answers the need "yuan" answers.
+    ("amount-and-currency", lambda a, ca, b, cb: "none"),
+)
+
+
+def derive_asserted(concepts):
+    """(a, b) -> (relation, rule) for every `numbers-money` pair a rule decides.
+
+    Notes are excluded: the rules read a gloss as a number or a unit of money, and
+    `number-and-classifier-notes` is a paragraph of prose. Its one same-cluster pair
+    is the Chinese note against the Japanese one, which `can_co_occur` would drop
+    anyway.
+    """
+    ids = sorted(cid for cid, c in concepts.items()
+                 if c["section_id"] == SECTION and c["kind"] != "note")
+    out = {}
+    for a, b in itertools.combinations(ids, 2):
+        if not can_co_occur(concepts[a], concepts[b]):
+            continue
+        for name, rule in RULES:
+            relation = rule(a, concepts[a], b, concepts[b])
+            if relation:
+                out[(a, b)] = (relation, name)
+                break
+    return out
+
+
 def aggregate(rows):
     """(a, b) -> (relation, passes, agree). Median of the passes; ties round down.
 
@@ -220,33 +424,39 @@ def aggregate(rows):
     return out
 
 
-def build_table(concepts, verdicts):
-    """The rows to commit: every rated pair `cluster_id` alone would get wrong."""
+def build_table(concepts, verdicts, asserted):
+    """The rows to commit: every pair `cluster_id` alone would get wrong.
+
+    `provenance` is `rated` or `rule:<name>`, and it is the whole of the
+    distinction: a rated row carries the pass counts it was aggregated from, and an
+    asserted row carries none, because there were none. A rule is not a judgement
+    and must not be able to look like two of them. Where both exist the rating wins.
+    """
+    merged = {pair: (relation, f"rule:{rule}", "", "")
+              for pair, (relation, rule) in asserted.items()}
+    merged.update({pair: (relation, "rated", str(passes), str(agree))
+                   for pair, (relation, passes, agree) in verdicts.items()})
     rows = []
-    for (a, b), (relation, passes, agree) in sorted(verdicts.items()):
+    for (a, b), (relation, provenance, passes, agree) in sorted(merged.items()):
         same_cluster = concepts[a]["cluster_id"] == concepts[b]["cluster_id"]
         if relation == "none" and not same_cluster:
             continue
         rows.append({"concept_a": a, "concept_b": b, "relation": relation,
-                     "passes": str(passes), "agree": str(agree)})
+                     "provenance": provenance, "passes": passes, "agree": agree})
     return rows
 
 
 def write_table(rows):
-    header = ["concept_a", "concept_b", "relation", "passes", "agree"]
+    header = ["concept_a", "concept_b", "relation", "provenance", "passes", "agree"]
     with TABLE.open("w", encoding="utf-8", newline="") as fh:
         writer = csv.DictWriter(fh, header, lineterminator=NEWLINE)
         writer.writeheader()
         writer.writerows(rows)
 
 
-def worksheet(concepts, pairs, section_ids, controls, seed):
-    """The rating sheet for one pilot: candidates touching `section_ids`, plus
-    controls drawn from the pairs the filter threw away, shuffled together so a
-    judge cannot tell one from the other."""
-    wanted = [p for p in pairs
-              if concepts[p[0]]["section_id"] in section_ids
-              or concepts[p[1]]["section_id"] in section_ids]
+def render_sheet(concepts, wanted, pairs, controls, seed):
+    """`wanted` plus `controls` negative controls drawn from the pairs the filter
+    threw away, shuffled together so a judge cannot tell one from the other."""
     rng = random.Random(seed)
     excluded = set()
     ids = sorted(concepts)
@@ -255,13 +465,68 @@ def worksheet(concepts, pairs, section_ids, controls, seed):
         a, b = sorted(rng.sample(ids, 2))
         if (a, b) not in candidate_set:
             excluded.add((a, b))
-    sheet = wanted + sorted(excluded)
+    sheet = list(wanted) + sorted(excluded)
     rng.shuffle(sheet)
     lines = []
     for n, (a, b) in enumerate(sheet, start=1):
         lines.append(f"{n}\tA: {concepts[a]['gloss']}  [{concepts[a]['section_id']}]"
                      f"\tB: {concepts[b]['gloss']}  [{concepts[b]['section_id']}]")
     return sheet, lines
+
+
+def worksheet(concepts, pairs, section_ids, controls, seed):
+    """The rating sheet for one pilot: every candidate touching `section_ids`."""
+    wanted = [p for p in pairs
+              if concepts[p[0]]["section_id"] in section_ids
+              or concepts[p[1]]["section_id"] in section_ids]
+    return render_sheet(concepts, wanted, pairs, controls, seed)
+
+
+def spot_check(concepts, pairs, asserted, per_stratum, controls, seed):
+    """A rating sheet that tests the rules rather than replacing them.
+
+    Stratified by (what decided the pair, the structure it sits in) and sampled
+    `per_stratum` deep, so every rule is probed inside every cluster it reaches and
+    no stratum can be swamped by a bigger one -- a uniform sample of the 4,012 pairs
+    would be 95% currency rows two languages apart and would test nothing. The two
+    strata no rule owns are the ones that most need probing:
+
+      * `out-of-scope` -- pairs `can_co_occur` dropped. If a judge calls won against
+        euro a duplicate, then `applies_to` is the only thing keeping them apart and
+        the decision not to store the pair rests entirely on it.
+      * `unruled` -- candidates the rules never reached: the cross-section pairs, and
+        the `number-and-classifier-notes` prose that `denotes` cannot read.
+
+    Stratifying by the thing under test is the point here and not a bias: the
+    question is whether each rule holds, which needs power in each rule's own class.
+    """
+    by_stratum = collections.defaultdict(list)
+    keep = {(r["concept_a"], r["concept_b"]) for r in build_table(concepts, {}, asserted)}
+    for pair in pairs:
+        a, b = pair
+        if concepts[a]["section_id"] != SECTION and concepts[b]["section_id"] != SECTION:
+            continue
+        if pair in asserted:
+            # A rule that decides a cross-cluster `none` puts no row in the table,
+            # so there is nothing there for a judge to overturn.
+            if pair not in keep:
+                continue
+            label = asserted[pair][1]
+        elif not can_co_occur(concepts[a], concepts[b]):
+            label = "out-of-scope"
+        else:
+            label = "unruled"
+        shared = concepts[a]["cluster_id"] == concepts[b]["cluster_id"]
+        structure = (concepts[a]["cluster_id"] if shared
+                     else f"{concepts[a]['section_id']} x {concepts[b]['section_id']}")
+        by_stratum[(label, structure)].append(pair)
+
+    rng = random.Random(seed)
+    wanted = []
+    for key in sorted(by_stratum):
+        group = by_stratum[key]
+        wanted += sorted(rng.sample(group, min(per_stratum, len(group))))
+    return render_sheet(concepts, wanted, pairs, controls, seed), by_stratum
 
 
 def ingest(sheet, answer_files):
@@ -310,13 +575,37 @@ def merge_passes(fresh, sheet):
     return rows
 
 
-def stats(concepts, pairs, rows, verdicts):
+def stats(concepts, pairs, rows, verdicts, asserted, table):
     total = len(concepts) * (len(concepts) - 1) // 2
     cross = [p for p in pairs
              if concepts[p[0]]["section_id"] != concepts[p[1]]["section_id"]]
     print(f"{len(concepts)} concepts, {total} unordered pairs")
     print(f"candidate set {len(pairs)} ({100 * len(pairs) / total:.2f}%): "
           f"{len(pairs) - len(cross)} within-section, {len(cross)} cross-section")
+
+    # The two provenances, counted separately, because they are not the same kind of
+    # claim and averaging them would hide which is which.
+    by_rule = collections.Counter(r["provenance"] for r in table)
+    print(f"table {len(table)} rows: {by_rule['rated']} rated, "
+          f"{len(table) - by_rule['rated']} asserted by rule")
+    for name, _ in RULES:
+        if by_rule[f"rule:{name}"]:
+            reached = sum(1 for r, n in asserted.values() if n == name)
+            print(f"  rule:{name:26s} {by_rule[f'rule:{name}']:5d} rows "
+                  f"({reached} pairs decided, the rest recoverable from cluster_id)")
+    # Where a rated pair and a rule cover the same pair, the rating is what the table
+    # carries. That overlap is the spot-check, and its size is how much of the rule
+    # set has been tested pairwise.
+    tested = set(verdicts) & set(asserted)
+    if tested:
+        agreed = sum(1 for p in tested if verdicts[p][0] == asserted[p][0])
+        print(f"  spot-check  {len(tested)} asserted pairs also rated, "
+              f"{agreed} ({100 * agreed / len(tested):.0f}%) agree with their rule")
+        for pair in sorted(tested):
+            if verdicts[pair][0] != asserted[pair][0]:
+                print(f"    overturned  {pair[0]} x {pair[1]}: "
+                      f"rule:{asserted[pair][1]} said {asserted[pair][0]}, "
+                      f"{verdicts[pair][1]} passes said {verdicts[pair][0]}")
     if not verdicts:
         return
     rated = len(verdicts)
@@ -370,9 +659,14 @@ def main():
     ap.add_argument("--stats", action="store_true", help="print the measurement only")
     ap.add_argument("--worksheet", metavar="SECTIONS",
                     help="emit a rating sheet for these comma-separated sections")
+    ap.add_argument("--spot-check", type=int, nargs="?", const=10, metavar="N",
+                    help="emit a rating sheet that tests the numbers-money rules: N "
+                         "pairs per (rule, cluster) stratum, default 10")
+    ap.add_argument("--strata", action="store_true",
+                    help="print the spot-check strata and their sizes")
     ap.add_argument("--ingest", nargs="+", metavar="ANSWERS",
                     help="one answer file per independent pass, for the --worksheet "
-                         "given (same sections, controls and seed)")
+                         "or --spot-check given (same arguments, controls and seed)")
     ap.add_argument("--controls", type=int, default=100,
                     help="negative controls to mix into the worksheet")
     ap.add_argument("--seed", type=int, default=20260915)
@@ -380,13 +674,26 @@ def main():
 
     concepts = load_concepts()
     pairs = candidates(concepts)
+    asserted = derive_asserted(concepts)
 
+    sheet = lines = None
     if args.worksheet:
         sections = set(args.worksheet.split(","))
         unknown = sections - {c["section_id"] for c in concepts.values()}
         if unknown:
             sys.exit(f"unknown section(s): {', '.join(sorted(unknown))}")
         sheet, lines = worksheet(concepts, pairs, sections, args.controls, args.seed)
+    elif args.spot_check or args.strata:
+        (sheet, lines), strata = spot_check(concepts, pairs, asserted,
+                                            args.spot_check or 10, args.controls,
+                                            args.seed)
+        if args.strata:
+            for key in sorted(strata):
+                print(f"{key[0]:28s} {key[1]:44s} {len(strata[key]):5d}")
+            print(f"{len(sheet) - args.controls} sampled + {args.controls} controls")
+            return 0
+
+    if sheet is not None:
         if not args.ingest:
             print("\n".join(f"# {line}".rstrip() for line in RUBRIC.splitlines()))
             print("#")
@@ -399,7 +706,7 @@ def main():
         print(f"{PASSES.relative_to(ROOT)}: {len(sheet)} pairs "
               f"x {len(args.ingest)} passes")
     elif args.ingest:
-        sys.exit("--ingest needs the --worksheet it was rated against")
+        sys.exit("--ingest needs the --worksheet or --spot-check it was rated against")
 
     rows = read_csv(PASSES) if PASSES.exists() else []
     for n, row in enumerate(rows, start=2):
@@ -409,10 +716,10 @@ def main():
             sys.exit(f"{PASSES.name}:{n}: {row['concept_a']} x {row['concept_b']} "
                      "names a concept the corpus does not have")
     verdicts = aggregate(rows)
-    table = build_table(concepts, verdicts)
+    table = build_table(concepts, verdicts, asserted)
 
     if args.stats:
-        stats(concepts, pairs, rows, verdicts)
+        stats(concepts, pairs, rows, verdicts, asserted, table)
         return 0
 
     if args.check:
@@ -424,7 +731,7 @@ def main():
         return 0
 
     write_table(table)
-    stats(concepts, pairs, rows, verdicts)
+    stats(concepts, pairs, rows, verdicts, asserted, table)
     print(f"wrote {TABLE.relative_to(ROOT)}: {len(table)} rows")
     return 0
 
