@@ -443,12 +443,39 @@ is wrong in Argentina. It wants either a scope, which would be arbitrary, or a
 different concept -- "who do I pay on the bus?" is a phrase rather than a word, and it
 would earn its row.
 
+**Shipped as `transit-rides.where-do-i-pay-the-fare`, universal -- and the "who" became
+a "where", which is the better argument.** "Who do I pay?" fails this entry's own test:
+in Tokyo the answer is a farebox and in Berlin a ticket bought before boarding, so it
+would print a question whose premise is false in four packs, which is the same defect
+as printing 車掌 glossed "conductor". *Where* do I pay the fare has a true answer in
+all 53 and still gets a matatu passenger pointed at the kondakta. It went in
+`transit-rides` rather than `rail-station-words`, which is a table of `ref` words and
+would have had to print a phrase as a noun, and each pack's row is built on the `fare`
+word this same request produced one concept over.
+
 One incidental finding from filling `fare`: the Thai printed term `ค่าโดยสาร` triggers
 the `thaig2p` phantom-syllable defect (`kʰaː˥˩doːj˧saːn˩˩˦ra˦˥`, four syllables where
 Thai has three), the same class as `ขอบคุณ` → *kop-kun-na*. `ค่ารถ` is what a passenger
 says, comes back clean, and carries `ค่าโดยสาร` in `text_alt`.
 
-### `payment-receipt.can-i-pay-by-mobile-money`
+### ~~`payment-receipt.can-i-pay-by-mobile-money`~~ — shipped, scoped `am;sw`
+
+**Shipped, and the scope was read off the packs rather than off the argument below.**
+Reading `pay-by-qr-code` across all 53 showed that wherever a wallet is paid by
+*scanning*, the QR row already reaches it and the pack says so itself: `id` and `jv`
+print `QRIS` in `text`, `hi` carries `यूपीआई चलेगा?` in `text_alt`, `kn` and `ml` carry
+ಯುಪಿಐ/യുപിഐ, `ur`'s literal names Raast, JazzCash and Easypaisa, and `bn`'s names
+bKash and Nagad. So the Indic packs and Indonesian are **out**, and UPI is a different
+animal -- a bank-to-bank rail initiated by a QR -- which wants its own concept if
+anyone wants one. What is different in KE/TZ/UG and ET is a till or paybill number
+keyed on the phone, not a scan. `fr` (SN, CI) and `ha` (NE) were weighed and refused
+on a majority-of-regions rule: unlike the franc, which a Senegal card must print
+because the currency is what a traveller counts, a fourth payment method is a row
+taken from something else on a card read in France or Kano.
+
+The Swahili pack was already routing around the gap inside the QR row's `text_alt`
+(`Kulipa kwa M-Pesa?`) -- exactly the burial the translator described.
+
 
 Also Swahili. Mobile money is how East Africa pays, and it sits next to a QR-code
 row that the region barely uses. Scope `sw` at minimum; Indonesian and Indian
@@ -576,7 +603,15 @@ one: Portugal and Spain price a coffee the same way at the counter versus the
 terrace, and France's `au comptoir` / `en terrasse` is the same distinction with a
 statutory price list behind it.
 
-### `payment-receipt.what-is-the-cover-charge`
+### ~~`payment-receipt.what-is-the-cover-charge`~~ — shipped, scoped `el;it;pt;tr`
+
+**Shipped.** `es` is deliberately out: a Spanish bill charges the bread as an item you
+can decline, not a fixed per-person cover. Given its own cluster rather than a rung of
+`etiquette.service-charge`, on the dengue precedent -- different money, so a card with
+one gains a full row from the other. One find recorded rather than acted on: Japan's
+お通し代 is the same shape, and it sits in the `ja` row's `literal` rather than being
+asserted into the scope.
+
 
 Italy's `coperto` is a fixed per-person charge that appears on a restaurant bill and
 is neither a service charge nor a tip. `etiquette.is-service-included` does not find
@@ -588,7 +623,15 @@ The same concept serves Portugal's `couvert`, Greece's and Turkey's bread-and-co
 lines, and the `pane e coperto` of a menu written before 2000. It belongs beside
 `is-service-included` rather than replacing it, because they are different money.
 
-### `time-scheduling.what-time-do-you-reopen`
+### ~~`time-scheduling.what-time-do-you-reopen`~~ — shipped, scoped `ar;el;es;fa;it`
+
+**Shipped**, mapped through `regions.csv`. `fa` is in because Iran's bazaars keep the
+same midday break and it is the Gulf's other shore; `pt` is out because Portugal's
+lunch closing is a small-town pattern and Brazil, which most `pt` cards serve, has
+none. The Greek pack was already routing around this one too --
+`what-time-does-it-close` carried `Κλείνει το μεσημέρι;` in `text_alt` with the
+literal "also: does it close at midday? (siesta)".
+
 
 `common-signs` carries open, closed and temporarily-closed, and `time-scheduling`
 carries opening and closing time — but a shop that is shut at two in the afternoon
