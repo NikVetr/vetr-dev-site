@@ -808,7 +808,7 @@ export const DEFAULT_PADDING = 1.4;
  * Each is the largest cut in the distribution that still fills a real card,
  * measured against every language in `data/coverage.json` at the default spacing:
  *
- *   - `essential` (11 concepts under 5 headings) fits **one phone face at full
+ *   - `essential` (10 concepts under 5 headings) fits **one phone face at full
  *     nominal type** in every language. That is the whole point of the top step:
  *     one image, set as a lock screen. One phone face holds about 23 concepts with
  *     every field pushed to its script's floor, 18 at the comfort threshold and
@@ -817,7 +817,7 @@ export const DEFAULT_PADDING = 1.4;
  *     floor. So this is the only step in the distribution that fits one, and it
  *     fits with room rather than by a hair.
  *   - `core` (145) fits one sheet of photo paper: two faces of the 7x5in card.
- *   - `wide` (304) fits two sheets, four faces -- the count both hand-built
+ *   - `wide` (288) fits two sheets, four faces -- the count both hand-built
  *     reference sheets settled on.
  *   - `all` keeps everything, which is six to eight faces. The default: trimming
  *     the corpus is for fitting a card the content will not fit, and the reference
@@ -833,6 +833,19 @@ export const DEFAULT_PADDING = 1.4;
  * decay would delete counting from the card. Plain importance is monotone in
  * `cluster_rank` in 110 of the 114 clustered pairs, so a cut takes cluster prefixes
  * anyway: it never offers `hello (polite)` without `hello`.
+ *
+ * **Measured against the alternative rather than assumed.** Once the redundancy
+ * table covered `numbers-money` the obvious next move was to make each step a
+ * marginal-value budget of the same size, using `solve/weights.js`'s own scorer.
+ * Run per target across all 53 it was rejected, for a reason that is a property of
+ * the data and not of the implementation: `partial` discounts a currency symbol
+ * exactly when its word is present, so a budget drops the symbol and keeps the
+ * word on essentially every target -- and a card carrying one without the other is
+ * a sign nobody can read. A co-print constraint is not expressible as a
+ * keep-factor, which is why it stays enforced in `validate_data.py` against both
+ * `applies_to` and these steps. The swap at `core` is also a policy change rather
+ * than a fix: it trades `i-need-insulin`, `where-is` and `where-public-toilet` for
+ * 36 rows of the number line.
  */
 export const PRIORITY_STEPS = { all: 0, wide: 0.74, core: 0.82, essential: 0.95 };
 

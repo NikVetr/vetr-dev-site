@@ -1742,16 +1742,34 @@ in the distribution that still fills a real card:
 
 | step | floor | phrases | fits |
 |---|---|---|---|
-| Everything | 0 | 827 | 6–8 faces of 7×5 |
-| Broad | 0.74 | 326 | four faces — what both hand-built originals settled on |
+| Everything | 0 | 864 | 6–8 faces of 7×5 |
+| Broad | 0.74 | 362 | four faces — what both hand-built originals settled on |
 | Core | 0.82 | 148 | one sheet |
 | Essential | 0.95 | 10 | **one phone face at full nominal type, in all twenty natural languages** |
+
+Counts are corpus-wide; a given pair sees fewer, because a concept scoped to another
+language never reaches it — 288 at Broad and 145 at Core, averaged over the 53
+targets.
 
 **The top step is the one place the two constructed languages fall short of a
 preset**, and it is worth stating plainly rather than leaving to the coverage table:
 Klingon carries 5 of the 10 and Quenya 3. What is missing is the ambulance, the
 allergic reaction and the polite greeting — a lexicon written for a television series
 has no pharmacy in it, and the safety gate would refuse an invented one anyway.
+
+**A floor rather than a budget, and that was re-decided with numbers once the
+redundancy table grew.** The obvious successor is to make each step a
+marginal-value budget of the same size, using the scorer the balance button and the
+section chips already share. Measured per target across all 53, it was rejected —
+and for a property of the data rather than of the implementation. `partial`
+discounts a currency symbol exactly when its word is present, so a budget keeps
+`euro` and drops `€` on essentially every target, and a card carrying one without
+the other is a sign nobody can read. A co-print constraint cannot be written as a
+keep-factor at all, which is why it lives in `validate_data.py` instead, enforced
+against both `applies_to` and these steps. The swap at Core is also a policy change
+and not a fix: it trades `i-need-insulin`, `where-is` and `where-public-toilet` for
+36 rows of the number line. A floor also keeps the steps *nested*, so a step means
+the same thing on every pair.
 
 There is a cliff above the top step, which is why it is where it is: the next rung
 down is 35 phrases under *twelve* headings, and it overflows one phone face even at

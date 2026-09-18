@@ -215,11 +215,19 @@ test('every corpus file keeps its CRLF line endings', async () => {
   // "line" and `csv.reader` refuses the whole file — which is a confusing way to
   // find out, since the error names a newline rather than a file. Nothing enforced
   // it until seven files were rewritten with LF and the generator stopped.
+  //
+  // **Every line, not one line.** This asked only whether the file contained a
+  // `\r\n` anywhere, which a file with one CRLF line and eight hundred LF lines
+  // passes -- and that file is exactly what breaks the generator, because
+  // `load_rows` splits on `\r\n` and would read the eight hundred as a single
+  // record. So count: a corpus file has as many `\r\n` as it has `\n`.
   const { glob } = await import('node:fs/promises');
   /** @type {string[]} */ const wrong = [];
   for await (const path of glob('data/lang/*/*.csv')) {
-    const raw = await readFile(path);
-    if (!raw.includes('\r\n')) wrong.push(path);
+    const raw = await readFile(path, 'utf8');
+    const lines = raw.split('\n').length - 1;
+    const crlf = raw.split('\r\n').length - 1;
+    if (crlf !== lines) wrong.push(`${path} (${crlf} of ${lines})`);
   }
-  assert.deepEqual(wrong, [], `these want CRLF: ${wrong.join(', ')}`);
+  assert.deepEqual(wrong, [], `these want CRLF on every line: ${wrong.join(', ')}`);
 });

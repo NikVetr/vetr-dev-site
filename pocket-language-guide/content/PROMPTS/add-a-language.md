@@ -205,6 +205,12 @@ forced by what is available:
   `tests/fonts.test.mjs`, two steps downstream: /ʏ/ has a rule in only five reader
   tables, so it fell through as a literal and six scripts were asked to draw a letter
   they do not have.
+
+  **`--only` also rewrites `data/registry/language-names.csv` for every code in
+  the list**, which is a cross-agent hazard rather than a bug: if someone else is
+  editing that file, your ipa run can regenerate their in-progress rows out from
+  under them. It is the one registry file the generator writes. Check its hash
+  before and after, and say in your handoff that you touched it.
 - **A romanisation route**, where no voice exists. Hebrew, Klingon and Quenya read
   their `romanization_*` column letter by letter. `ROMANISED` and `NON_LATIN` are the
   tables to add to.
@@ -394,12 +400,17 @@ neither a currency of its own:
   Yoruba card prints `F CFA` with no word beside it, and the pack's own word for
   it prints nowhere. `validate_data.py` does not catch a pack row whose concept
   is not scoped to that pack, which is why it sat.
-- **`numbers-money.lakh` and `numbers-money.crore` are scoped
-  `gu;hi;kn;ml;mr;ne;pa;ta;te`, without `bn`**, and the Bengali pack carries
-  authored rows for both with Bengali-specific literals ("a Bengali price board
-  writes ১,০০,০০০, not 100,000"). Bengali's regions are `BD;IN`, both of which
-  group digits that way and use both words. This is the same omission the
-  `numbers-money.rupee` widening in this sweep repaired one row over.
+- ~~**`numbers-money.lakh` and `numbers-money.crore` are scoped without `bn`**~~ —
+  fixed, and `ur` turned out to be missing too. Both packs carried authored,
+  sourced rows whose own notes said the country uses the system: "a Bengali price
+  board writes ১,০০,০০০, not 100,000", and "the everyday unit above ten thousand
+  in Pakistan". The rows existed and simply never printed. Worth knowing that
+  **nothing catches this class and nothing reasonably can**: a pack row for a
+  concept the pack is not scoped to is the ordinary gloss row, which is how the
+  O(N) join works, and a gloss row legitimately carries a `text_alt` too — 183 of
+  them do, mostly secondary glosses like "Brazilian real". So the signal that
+  looked promising is noise, and the check is to read a new language against the
+  concepts its *neighbours* are scoped to.
 
 **Georgian went in as language 47 and is the counter-example the last three
 script attempts needed**, so its numbers are here rather than only in
