@@ -302,17 +302,19 @@ async function main() {
   setFlagColours(regions);
   const reader = readerLanguage(languages, coverage);
   /**
-   * The registry's names for one locale, as `languageName` wants them.
+   * The registry's rows for one locale, as `languageName` wants them.
    *
    * One locale's slice rather than the whole table, because that is what the
    * function needs and the table is the O(N^2) one -- fifty rows out of two
-   * thousand two hundred.
+   * thousand two hundred. The rows themselves rather than a `bcp47 -> name` map,
+   * because the table has two name columns and picking between them is
+   * `setLanguageNames`' job: this is a gallery, it has no view on Czech
+   * declension.
    * @param {string} locale
    */
-  const useNamesFor = (locale) => setLanguageNames(Object.fromEntries(
-    names.filter((r) => r.locale === locale && r.name)
-      .map((r) => [r.bcp47, r.name]),
-  ));
+  const useNamesFor = (locale) => setLanguageNames(
+    names.filter((r) => r.locale === locale),
+  );
   useNamesFor(reader);
   // The interface language is the reader's own, so this has to happen before
   // anything is drawn -- including the static markup.

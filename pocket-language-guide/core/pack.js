@@ -382,6 +382,15 @@ export async function loadRespellRules(loadText, source, accent) {
  *
  * `locale` is the language doing the naming -- the language of the cell the name
  * will be written into -- and `bcp47` is the language being named.
+ *
+ * **The table's fourth column, `title`, is deliberately not read here.** It is the
+ * dictionary form of the eleven cells whose `name` is inflected, and it exists for
+ * the one thing a sheet never does: print a language name on its own. A sheet only
+ * ever prints one inside the sentence the cell was written for, so `{target}` in
+ * `Nemluvím {target}` wants `klingonsky` and would be wrong with `klingonština`.
+ * The title is `ui/i18n.js`'s business -- card headings, page headings, column
+ * captions -- and this module must not import from `ui/`. Nor does it need an
+ * `ipa`: `build_ipa.py` phonemises what gets spoken, and nothing speaks a heading.
  * @param {Record<string,string>[]} rows
  * @returns {Record<string, Record<string,{name:string, roman:string, ipa:string}>>}
  */

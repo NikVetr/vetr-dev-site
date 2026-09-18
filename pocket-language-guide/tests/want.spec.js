@@ -161,6 +161,41 @@ test('a language ICU has never heard of is still named in the reader’s own scr
   await expect(page.locator('.card[data-lang="ru"] .card-name')).toHaveText('ロシア語');
 });
 
+test('a card is headed with the language, not with "in the language"', async ({ page }) => {
+  // The registry's `name` is the form the sentence slot needs, so Russian carries
+  // `клингонском` -- the prepositional of `на {target}` -- and Polish `po
+  // klingońsku`. For the fifty languages ICU knows that never surfaced, because
+  // `languageName` asks ICU first and gets the nominative. For the two it does not,
+  // the registry *is* the answer, and the Klingon card came out headed
+  // `клингонском`: "in Klingon", on a card whose neighbours all say `английский`.
+  //
+  // The `title` column is the dictionary form for those cells and
+  // `setLanguageNames` prefers it. `tests/language-titles.test.mjs` holds the source
+  // for each one; this is the reproduction.
+  await page.setViewportSize({ width: 1600, height: 1000 });
+  const { pickReader } = await import('./controls.js');
+
+  await page.goto('/');
+  await expect(page.locator('.card').first()).toBeVisible();
+  await pickReader(page, 'Русский');
+  await page.waitForFunction(() => document.documentElement.lang === 'ru');
+  await expect(page.locator('.card[data-lang="tlh"] .card-name')).toHaveText('клингонский');
+  // The `#want` grid and the picker's own list read the same function.
+  await expect(page.locator('#want .want-btn[data-lang="tlh"] .want-name'))
+    .toHaveText('клингонский');
+  // Quenya is indeclinable in Russian, so its cell is already a title and stays
+  // one -- the column is sparse on purpose and an empty cell means "no change".
+  await expect(page.locator('.card[data-lang="qya"] .card-name')).toHaveText('квенья');
+
+  // Polish, where the slot form is a whole prepositional phrase rather than a case
+  // ending, so the two forms share no suffix and a rule could not have derived one
+  // from the other.
+  await pickReader(page, 'Polski');
+  await page.waitForFunction(() => document.documentElement.lang === 'pl');
+  await expect(page.locator('.card[data-lang="tlh"] .card-name')).toHaveText('klingoński');
+  await expect(page.locator('.card[data-lang="qya"] .card-name')).toHaveText('Quenya');
+});
+
 test('where the platform draws no flags, the codes carry the flag’s colours', async ({ page }) => {
   // Windows ships no glyph for a regional-indicator pair, so `ui/flags.js` detects
   // that and shows country codes instead. Two grey letters in a white box, a dozen

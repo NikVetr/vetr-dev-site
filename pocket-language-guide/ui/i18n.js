@@ -164,11 +164,26 @@ export function number(value, digits) {
 let registryNames = Object.create(null);
 
 /**
- * Hand `languageName` the registry's own names for the active locale.
- * @param {Record<string,string>} names  bcp47 -> name, in the active locale
+ * Hand `languageName` the registry's rows for the active locale.
+ *
+ * **The rows rather than a prepared map, because choosing between the table's two
+ * name columns is this module's job and not its caller's.** `language-names.csv`
+ * carries a `name` in the case or adverbial form the sentence slot needs -- Czech
+ * `klingonsky`, Russian `клингонском` -- and a `title` beside it on the eleven rows
+ * where that form is not also the dictionary one. Everything that calls
+ * `languageName` wants the title (see below), so the choice is the same at every
+ * call site and belongs here once; a caller handed a flat map has to remember to
+ * write `row.title || row.name`, and a caller writing `row.name` is exactly how the
+ * prepositional reached a card title.
+ * @param {Record<string,string>[]} rows  the `language-names.csv` rows whose
+ *   `locale` is the active one
  */
-export function setLanguageNames(names) {
-  registryNames = names ?? Object.create(null);
+export function setLanguageNames(rows) {
+  registryNames = Object.create(null);
+  for (const row of rows ?? []) {
+    const name = row.title || row.name;
+    if (name) registryNames[row.bcp47] = name;
+  }
 }
 
 /**
@@ -188,6 +203,31 @@ export function setLanguageNames(names) {
  * gives `null` and the gallery printed the English exonym on those two cards in all
  * fifty interface languages. Node's fuller ICU does know them, which is why this
  * only ever showed in a browser.
+ *
+ * **Which is why those two cards, and only those two, printed the case form -- and
+ * why this is a title and has no `form` argument.** With the interface in Russian
+ * the Klingon card was headed `клингонском`, "in Klingon", because the second step
+ * is the only one Klingon and Quenya ever reach. The `title` column of the registry
+ * is the dictionary form for the eleven cells where the slot form is not one, and
+ * `setLanguageNames` prefers it, so `клингонский` is what the card now says.
+ *
+ * It takes no `'title' | 'slot'` argument because there is nothing to disambiguate:
+ * all seventeen calls to this function want a standalone name. Seven are drawn with
+ * no sentence around them at all -- the gallery card, the `#want` button, the
+ * picker's `aside` here and in the lightbox, the collator key the grid is sorted on,
+ * and the two column captions in the format panel. Four more are headings:
+ * `quick.heading` on the page and again on the exported PDF, and both halves of
+ * `studio.pair`. The remaining six are inserts into catalogue templates that were
+ * translated to take the nominative and to carry the case themselves -- `На языке:
+ * {language}`, `Jazykem {language} se mluví v`, `Kieltä {language} puhutaan` -- which
+ * is why they read correctly for the fifty languages ICU names and read correctly
+ * for these two only once the registry stops handing them a case form.
+ *
+ * The slot form has exactly one consumer in the codebase and it is not this function:
+ * `fillLanguageSlots` in `core/pack.js` reads the `name` column straight off the
+ * table, in a module that must not import from `ui/`. Two forms, two functions, two
+ * files -- the distinction is already structural, and a mode parameter would be a
+ * second way of spelling it that took the same value at all seventeen call sites.
  *
  * **`fallback: 'none'` is what makes that last sentence true.** The default is
  * `fallback: 'code'`, under which `of()` returns *the code itself* rather than
