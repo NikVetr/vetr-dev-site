@@ -321,6 +321,20 @@ export function download(blob, name) {
  */
 export function registerOffline() {
   if (!('serviceWorker' in navigator)) return;
+  // **Not in the native bundle.** A WebView serves from the application's own
+  // container, so every file is already local and a worker would add a second cache
+  // in front of them -- pure overhead, and a stale-shell bug waiting on an app that
+  // updates through a store rather than over the network. `scripts/build_mobile.mjs`
+  // overwrites `data/native.json` with `serviceWorker: false` and leaves `sw.js` out
+  // of the bundle. The file ships on the web too, saying `true`, so this is a cached
+  // hit rather than a 404 on every page load -- and so the two builds run identical
+  // JavaScript rather than differing by a build-time substitution.
+  loadText('data/native.json').then((text) => {
+    if (JSON.parse(text).serviceWorker !== false) registerWorker();
+  }).catch(() => registerWorker());
+}
+
+function registerWorker() {
 
   // **A deploy has to land on the first load, not the second.** The worker serves
   // cache-first and revalidates behind it, which is what makes the app instant and

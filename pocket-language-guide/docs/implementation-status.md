@@ -466,3 +466,63 @@ What the browser tests pin down, beyond the reducer's own coverage:
   A stationary long press still dismisses, and adding a timer to stop it would also
   swallow a slow deliberate tap — which is the commoner gesture from someone who is
   face down on a massage table.
+
+---
+
+## N0 — Deterministic mobile bundle
+
+**Status: complete.** `scripts/build_mobile.mjs` (also `npm run mobile`), twelve
+tests across `tests/mobile-build.test.mjs` and `tests/mobile-bundle.spec.js`.
+
+`dist/mobile` is **59.2 MB, 1,437 files**, built from an allowlist rather than a
+denylist — the repository holds test fixtures, Python environments, research notes
+and, until this round, an 8.6 MB dump of glyph advance widths committed by accident.
+A denylist would have shipped all of it and gone stale at the next new directory.
+
+| class | files | MB |
+|---|---|---|
+| fonts | 157 | 42.5 |
+| data | 1,112 | 12.1 |
+| packs | 105 | 2.3 |
+| vendor | 5 | 1.4 |
+| code | 58 | 1.0 |
+
+**The fonts are irreducible and the packs are not.** 31 MB of that 42.5 is `.ttf`,
+and the temptation is to drop it with PDF export — but the solver measures advance
+widths from the `.ttf` through fontkit, so it is load-bearing for *layout*. A bundle
+without it does not typeset. The packs are the opposite: 114 MB in the repository,
+because thumbnails and faces both grow as the square of the language count, and
+`PACK_SOURCES` ships one reader language's worth (2.3 MB).
+
+That trim needed **no gallery change**, which is the part worth recording. The
+gallery already draws a placeholder card whenever `packs/index.json` does not list a
+pair, so writing a *trimmed index* is what stops the request. Nothing 404s, and a
+test asserts the index and the shipped directories agree in both directions.
+
+**No service worker in the bundle.** A WebView serves from the app's own container,
+so a worker would be a second cache in front of files that are already local — and a
+stale-shell bug on an app that updates through a store. `sw.js` is left out and
+`data/native.json` says `serviceWorker: false`. The same file ships on the web saying
+`true`, so `registerOffline` reads a cached value rather than 404ing on every page
+load, and the two builds run byte-identical JavaScript. Both directions are tested:
+the bundle registers none, the website still does.
+
+The browser tests open each of the four pages **with the network cut** — everything
+outside `dist/mobile` is aborted, not merely counted, because a page that works by
+quietly falling back to the website is the exact failure being looked for. All four
+open clean: no 404, no off-site request, no page error.
+
+### Also done, and not strictly N0
+
+`dist/`, `ios/` and `android/` are gitignored. There is no deployment pipeline to
+exclude them from — the site is plain GitHub Pages off `main`, so publication *is*
+`git push`, and an ignore entry is the only thing between a native build directory
+and the public web.
+
+### Not done
+
+- **No Capacitor project yet** (N1). No dependency added, no `capacitor.config.ts`,
+  no application identifier — §1.2 and N1 both require owner approval on identity
+  before anything is distributed, and nothing before N1 needs one.
+- **No device build of any kind.** A Linux machine cannot produce an iOS result, and
+  nothing here has been run on a phone.

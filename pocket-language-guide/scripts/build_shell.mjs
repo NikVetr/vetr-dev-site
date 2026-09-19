@@ -32,7 +32,7 @@ const ENTRY_FILES = [
   'style.css', 'conversation.css',
   'favicon.svg', 'manifest.webmanifest',
   'vendor/fontkit.esm.js', 'vendor/pdf-lib.esm.js',
-  'data/presets.json', 'data/icons.json', 'data/coverage.json',
+  'data/presets.json', 'data/icons.json', 'data/coverage.json', 'data/native.json',
   'data/fonts/manifest.json',
   // The only *face* in the shell, and only because of two cards. Every other
   // script-glyph badge in the gallery is drawn by the reader's own system font --

@@ -11,6 +11,7 @@
     "fonts": "python3 scripts/subset_fonts.py",
     "validate": "python3 scripts/validate_data.py",
     "prerender": "node scripts/prerender_packs.mjs",
+    "mobile": "node scripts/build_mobile.mjs",
     "postprerender": "python3 scripts/optimize_thumbs.py",
     "test:unit": "node --test tests/*.test.mjs",
     "test": "npm run validate && npm run check && npm run test:unit && npx playwright test",
