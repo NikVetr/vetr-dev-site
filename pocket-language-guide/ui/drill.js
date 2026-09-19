@@ -82,7 +82,17 @@ const LATIN_CELLS = new Set(['roman', 'ipa']);
  * @param {string} value
  */
 export function normalise(value) {
-  const nfc = value.normalize('NFC').toLowerCase().replace(/\s+/gu, ' ').trim();
+  // **An open slot is dropped wherever it falls, not only at an edge.** The rule
+  // above already said nobody types `{}`, and the edge strip only made that true for
+  // a row that ends in one. `place-words.stay-at` is `zhù {} wǎn`, and asked as a
+  // fill-in-the-blank it was unanswerable: every answer a learner can type was
+  // marked wrong, including the card's own wording, because the expected string
+  // carried two braces in the middle of it. Nothing landed on such a row until the
+  // bank grew past the seed that had been picking a different one.
+  const nfc = value.normalize('NFC').toLowerCase()
+    .replace(/\{\}/gu, ' ')
+    .replace(/\s+/gu, ' ')
+    .trim();
   const stripped = nfc.replace(/^[\p{P}\p{S}\s]+|[\p{P}\p{S}\s]+$/gu, '');
   return stripped || nfc;
 }

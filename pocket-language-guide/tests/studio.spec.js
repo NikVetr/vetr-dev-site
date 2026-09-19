@@ -6,6 +6,20 @@ import { translated, withoutPack } from './registry.js';
 
 const STUDIO = '/customize.html?target=zh-Hans&source=en';
 
+/**
+ * The settings field with this heading.
+ *
+ * By its *title*, not by `hasText` over the whole field. A panel field concatenates
+ * the captions of every glyph in it, with no separator, so a substring filter reads
+ * across the joins between them -- and `hasText` is case-insensitive on top of that.
+ * "Tab colour" followed by "Strip" is `colourStrip`, which matched a filter looking
+ * for the Colours field and handed back the Header / footer one instead. The
+ * captions either side of that join are both correct and either may change again.
+ * @param {import('@playwright/test').Page} page @param {string} title
+ */
+const field = (page, title) => page.locator('.panel-field')
+  .filter({ has: page.locator('.panel-field-title', { hasText: title }) }).first();
+
 test.describe('studio', () => {
   test.beforeEach(async ({ page }) => {
     await page.addInitScript(() => localStorage.clear());
@@ -189,8 +203,8 @@ test.describe('studio', () => {
     async ({ page }) => {
       await page.goto(STUDIO);
       await expect(page.locator('.face.focused')).toBeVisible();
-      const finish = page.locator('.panel-field').filter({ hasText: 'Finishing' }).first();
-      const flip = page.locator('.panel-field').filter({ hasText: 'Printer flip' }).first();
+      const finish = field(page, 'Finishing');
+      const flip = field(page, 'Printer flip');
 
       // **The axis is meaningless until there is something to cut or fold**, so it is
       // not offered until then. It used to be folded into the finish control as
@@ -232,7 +246,7 @@ test.describe('studio', () => {
     await page.goto(STUDIO);
     await expect(page.locator('.face.focused')).toBeVisible();
     // Paper has a back, so the finishing control is there to begin with.
-    const finish = page.locator('.panel-field').filter({ hasText: 'Finishing' }).first();
+    const finish = field(page, 'Finishing');
     await expect(finish).toBeVisible();
 
     await page.getByRole('radio', { name: 'Phone screen' }).click();
@@ -242,7 +256,7 @@ test.describe('studio', () => {
 
     // The whole corpus needs many wallpapers; the top priority step needs one.
     await expect(page.locator('#status')).toHaveText(/\d+ faces at/, { timeout: 120_000 });
-    const priorityField = page.locator('.panel-field').filter({ hasText: 'Priority' }).first();
+    const priorityField = field(page, 'Priority');
     await priorityField.getByRole('radio', { name: 'Essential' }).click();
     await expect(page.locator('#status')).toHaveText(/^1 faces at/, { timeout: 120_000 });
     // One face means one image and no thumbnail strip to choose between them.
@@ -289,7 +303,7 @@ test('Custom takes a card size and a palette of your own', async ({ page }) => {
   const before = await faceCount(page);
 
   // Card: the boxes stay shut until Custom is chosen, then they drive the geometry.
-  const cardField = page.locator('.panel-field').filter({ hasText: 'Card' }).first();
+  const cardField = field(page, 'Card');
   await expect(cardField.locator('.numeric-custom')).toBeHidden();
   await cardField.getByRole('radio', { name: 'Custom' }).click();
   const boxes = cardField.locator('.numeric-box');
@@ -308,7 +322,7 @@ test('Custom takes a card size and a palette of your own', async ({ page }) => {
 
   // Colours: six swatches, and changing one repaints the sheet without touching
   // the theme's typography.
-  const colourField = page.locator('.panel-field').filter({ hasText: 'Colours' }).first();
+  const colourField = field(page, 'Colours');
   await expect(colourField.locator('.swatches')).toBeHidden();
   await colourField.getByRole('radio', { name: 'Custom' }).click();
   await expect(colourField.locator('.swatches')).toBeVisible();

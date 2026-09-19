@@ -131,7 +131,13 @@ test.describe('quiz mode', () => {
     // is the reproducibility the seed exists for.
     await page.keyboard.press('Enter');
     const verdict = await drill.locator('.drill-mark').innerText();
-    const want = verdict.replace(/^.*?Answer:\s*/s, '').trim();
+    // **Drop the bidi isolates the verdict wraps its insert in.** `t()` puts FSI and
+    // PDI around any placeholder carrying letters, so the sentence keeps its own
+    // direction when the answer runs the other way. They are invisible, they are
+    // part of the rendered text, and a reader typing this answer would never produce
+    // them -- so scraping them out of the page and typing them back in is the test
+    // inventing a failure the product does not have.
+    const want = verdict.replace(/^.*?Answer:\s*/s, '').replace(/[\u2068\u2069]/g, '').trim();
     expect(want).not.toBe('');
     const stripped = want.normalize('NFD').replace(/\p{Mn}/gu, '').normalize('NFC');
     // 100% of this pack's pinyin carries a tone mark, so there is always one to drop.

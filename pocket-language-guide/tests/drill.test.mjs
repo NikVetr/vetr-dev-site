@@ -21,6 +21,13 @@ test('normalise drops case and the punctuation around a phrase', () => {
   assert.equal(normalise('¿Dónde está el baño?'), 'dónde está el baño');
   assert.equal(normalise('Hol van ez: {}?'), 'hol van ez');
   assert.equal(normalise('Two  spaces'), 'two spaces');
+  // **A slot in the middle of a phrase, not only at the end.** `place-words.stay-at`
+  // is `zhù {} wǎn`, and asked as a fill-in-the-blank it was unanswerable: the edge
+  // strip left the braces where they were, so every string a learner can type was
+  // graded wrong -- the card's own wording included. Both sides normalise to the
+  // same thing now, so typing the slot or leaving it out are both right.
+  assert.equal(normalise('zhù {} wǎn'), 'zhù wǎn');
+  assert.equal(normalise('zhù wǎn'), normalise('zhù {} wǎn'));
   // Interior punctuation is part of the word, so it stays.
   assert.equal(normalise("D'accord"), "d'accord");
   // A bare currency sign is entirely `\p{S}`. Stripping would leave an empty
