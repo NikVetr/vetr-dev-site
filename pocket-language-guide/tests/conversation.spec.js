@@ -173,3 +173,126 @@ test('an unavailable button is drawn in place, not removed', async ({ page }) =>
     { id: 'c', off: false },
   ]);
 });
+
+// --- replies (C3) -----------------------------------------------------------
+
+/** The same board with the two-way interaction switched on. */
+const REPLIES = `${BOARD}&replies=1`;
+
+test('a reply is offered only where there are answers, and only when asked for', async ({ page }) => {
+  await page.goto(REPLIES);
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+
+  // B08's other half. `avoid` carries a reply set; `stop` does not, and a board must
+  // not put a Reply control on every statement.
+  await page.locator('[data-button="stop"]').click();
+  await expect(page.locator('.board-controls')).toHaveCount(0);
+  await page.locator('.board-message').click();
+
+  await page.locator('[data-button="avoid"]').click();
+  await expect(page.locator('.board-controls button')).toHaveCount(1);
+  // The listener reads this one too, so it is in their language and not the owner's.
+  await expect(page.locator('.board-controls button')).toHaveText(/\p{Script=Han}/u);
+  // ...and it is still just a message until someone presses it. No forced reply
+  // screen after a statement.
+  await expect(page.locator('.board-answers')).toHaveCount(0);
+});
+
+test('the answers are the listener\'s, and the chosen one comes back as the owner\'s', async ({ page }) => {
+  // B09. The question stays on screen while the answers are offered, because
+  // somebody choosing between six answers should not have to remember what was
+  // asked.
+  await page.goto(REPLIES);
+  await page.locator('[data-button="avoid"]').click();
+  const asked = await page.locator('.board-message-text').textContent();
+  await page.locator('.board-controls button').click();
+
+  await expect(page.locator('.board-answers')).toBeVisible();
+  await expect(page.locator('.board-answer')).toHaveCount(6);
+  await expect(page.locator('.board-asked')).toHaveText(asked ?? '');
+  // Every answer is in the listener's language and carries their direction.
+  await expect(page.locator('.board-answers')).toHaveAttribute('lang', 'zh-Hans');
+  for (const text of await page.locator('.board-answer').allTextContents()) {
+    expect(text, 'an answer the listener cannot read').toMatch(/\p{Script=Han}/u);
+  }
+
+  // Choosing one shows it to the owner, in the owner's language, large.
+  await page.locator('.board-answer').first().click();
+  const back = page.locator('.board-message-text');
+  await expect(back).toHaveAttribute('lang', 'en');
+  await expect(back).toContainText(/avoid/i);
+  // The presentation reverses; the meaning and whose sentence it is do not.
+  await expect(page.locator('.board-message-gloss')).toHaveAttribute('lang', 'zh-Hans');
+  // An incoming answer is tinted, so the owner can see at a glance that this is the
+  // reply and not something they said.
+  await expect(page.locator('.board-stage')).toHaveClass(/board-stage-incoming/);
+});
+
+test('an uncertain answer and a rejection are both reachable, and say what they say', async ({ page }) => {
+  // B10. "None of these" must show *that* meaning rather than inventing a
+  // substantive answer, and it must not launch anything.
+  await page.goto(REPLIES);
+  await page.locator('[data-button="avoid"]').click();
+  await page.locator('.board-controls button').click();
+  const answers = await page.locator('.board-answer').allTextContents();
+  // One answer admits uncertainty and one rejects the set. Both are requirements of
+  // the specification, not decoration.
+  expect(answers.some((a) => a.includes('不确定')), `no uncertain answer in ${answers}`).toBe(true);
+
+  await page.locator('.board-answer').last().click();
+  await expect(page.locator('.board-message-text')).toContainText(/none of these/i);
+  // ...and it is an answer like any other: one tap returns to the owner's grid.
+  await page.locator('.board-message').click();
+  await expect(page.locator('[data-button="avoid"]')).toBeVisible();
+});
+
+test('cancelling a reply claims no answer and goes back to the question', async ({ page }) => {
+  await page.goto(REPLIES);
+  await page.locator('[data-button="avoid"]').click();
+  const asked = await page.locator('.board-message-text').textContent();
+  await page.locator('.board-controls button').click();
+  await expect(page.locator('.board-answers')).toBeVisible();
+
+  // Close is the listener's control, so it is in the listener's language.
+  const close = page.locator('.board-close');
+  await expect(close).toHaveAttribute('lang', 'zh-Hans');
+  // ...and actually *in* it. The attribute alone passed while the button said
+  // "Close", because the listener's catalogue had no such key and fell back to
+  // English -- which is the designed fallback and exactly wrong on the one surface
+  // the listener has to read.
+  await expect(close).toHaveText(/\p{Script=Han}/u);
+  await close.click();
+  // Back to the question, not to the grid: cancelling is "I have not answered", not
+  // "we are done".
+  await expect(page.locator('.board-message-text')).toHaveText(asked ?? '');
+  await expect(page.locator('.board-answers')).toHaveCount(0);
+  // Escape does the same thing, one view at a time.
+  await page.locator('.board-controls button').click();
+  await page.keyboard.press('Escape');
+  await expect(page.locator('.board-message-text')).toHaveText(asked ?? '');
+});
+
+test('the listener never changes what language the owner reads', async ({ page }) => {
+  // B11, and the reason `loadCatalogue` exists. The reply surface is drawn from the
+  // listener's catalogue; if it went through `loadUiLanguage` it would move the
+  // owner's own preference and flip the document's direction under them.
+  await page.goto(REPLIES);
+  // After the board is up, not after `goto`: the bootstrap sets `lang` and `dir`
+  // asynchronously, so a baseline taken too early records the empty document and the
+  // test then "catches" its own race instead of a regression.
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  const before = await page.evaluate(() => ({
+    lang: document.documentElement.lang,
+    dir: document.documentElement.dir,
+    saved: localStorage.getItem('plg.reader'),
+  }));
+  await page.locator('[data-button="avoid"]').click();
+  await page.locator('.board-controls button').click();
+  await page.locator('.board-answer').nth(1).click();
+  await expect(page.locator('.board-message-text')).toBeVisible();
+  expect(await page.evaluate(() => ({
+    lang: document.documentElement.lang,
+    dir: document.documentElement.dir,
+    saved: localStorage.getItem('plg.reader'),
+  }))).toEqual(before);
+});

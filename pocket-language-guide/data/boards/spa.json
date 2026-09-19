@@ -48,7 +48,8 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "massage-spa.please-avoid-this-area"
-          }
+          },
+          "replySetId": "avoid-area"
         },
         {
           "id": "focus",
@@ -153,5 +154,58 @@
       ]
     }
   },
-  "replySets": {}
+  "replySets": {
+    "avoid-area": {
+      "buttons": [
+        {
+          "id": "will-avoid",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "massage-spa.reply-i-will-avoid-that-area"
+          }
+        },
+        {
+          "id": "which-area",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "massage-spa.reply-which-area-exactly"
+          }
+        },
+        {
+          "id": "cannot-avoid",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "massage-spa.reply-cannot-avoid-this-treatment"
+          }
+        },
+        {
+          "id": "does-it-hurt",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "massage-spa.reply-does-it-hurt-there"
+          }
+        },
+        {
+          "id": "ask-supervisor",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "massage-spa.reply-ask-supervisor"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "massage-spa.reply-none-of-these"
+          }
+        }
+      ]
+    }
+  }
 }

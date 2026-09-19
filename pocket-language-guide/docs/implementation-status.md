@@ -469,6 +469,54 @@ What the browser tests pin down, beyond the reducer's own coverage:
 
 ---
 
+## C3 — Optional replies
+
+**Status: complete.** Six answer concepts, the reply set wired to
+`massage-spa.please-avoid-this-area`, and five browser tests on top of the reducer
+coverage P1 already had.
+
+That message is the right one to make two-way: a therapist may genuinely need to
+answer it rather than comply. The answers are complete meanings rather than a
+yes/no, which §4.4 requires where polarity is ambiguous — "I will avoid that area"
+and "I cannot avoid that area for this treatment" are different answers and both are
+plausible. One admits uncertainty (我不确定，需要问一下主管) and one rejects the set
+outright (这里面没有我想说的), both of which the specification requires in every
+reply set.
+
+Two wordings were reasoned rather than translated. "Does it hurt there?" became
+"Does **that area** hurt?" — the section's own note on the question warns that a
+deictic "there" is not always clear, and that applies just as much to the answer. And
+项目 rather than 疗程 for the refusal: the occupational standard's term for one
+bookable service is 按摩服务项目, while 疗程 is a course of several sessions and would
+overstate what is being declined.
+
+### The bug the screenshot caught
+
+The Close button said **"Close"**, in English, on the one surface the listener has to
+read. `loadCatalogue` falls back to English for a key the listener's catalogue does
+not carry, which is the right behaviour and exactly wrong here — and the test passed,
+because it asserted `lang="zh-Hans"` on an element whose *text* was English. An
+attribute is not a translation.
+
+`board.reply` and `board.close` are in `data/i18n/zh-Hans.json` now, and the tests
+assert the controls actually render Han script rather than merely claiming to. 关闭
+is not an invention: it is this catalogue's own translation of "Close" at
+`studio.close` and `gallery.previewClose`. 回复 is the standard term and is flagged
+for review below.
+
+### Awaiting a fluent reader
+
+Every row is `confidence: 2`, which in this corpus means *sourced* and explicitly not
+*read by a fluent speaker*. Three are worth a native eye first, and one is mine:
+
+- `reply-cannot-avoid-this-treatment` — is 这个项目无法避开这个部位 how a therapist
+  would actually decline?
+- `reply-ask-supervisor` — 主管 against 店长 in a chain.
+- `reply-none-of-these` — does 这里面 read naturally of buttons on a screen?
+- `board.reply` = 回复, which I added rather than a researcher.
+
+---
+
 ## N0 — Deterministic mobile bundle
 
 **Status: complete.** `scripts/build_mobile.mjs` (also `npm run mobile`), twelve
