@@ -119,7 +119,11 @@ test('a saved pack survives a shell change', async ({ page, context }) => {
   await expect(page.locator('.card').first()).toBeVisible();
   await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
 
-  const saved = await save(page, 'zh-Hans', 'en');
+  // **Japanese, not Mandarin, and the pair matters now.** A conversation board's
+  // corpus is precached in the shell, so saving `zh-Hans__en` leaves only its fonts
+  // for the pack cache and this test would be asserting about an empty half of the
+  // system. `ja__en` is an ordinary pair, which is the case this is named for.
+  const saved = await save(page, 'ja', 'en');
   expect(saved.ok, `did not cache: ${JSON.stringify(saved.failed)}`).toBe(true);
 
   // Named URLs really are in the pack cache, not merely reported as cached.
@@ -127,7 +131,7 @@ test('a saved pack survives a shell change', async ({ page, context }) => {
     const cache = await caches.open('plg-packs');
     return (await cache.keys()).map((r) => new URL(r.url).pathname);
   });
-  expect(cached).toContain('/data/lang/zh-Hans/social.csv');
+  expect(cached).toContain('/data/lang/ja/social.csv');
   expect(cached.some((u) => u.endsWith('.woff2'))).toBe(true);
 
   // The pack cache is not version-scoped, because `VERSION` is a content hash of
@@ -137,9 +141,11 @@ test('a saved pack survives a shell change', async ({ page, context }) => {
   expect(names).toContain('plg-packs');
   expect(names.some((n) => n.startsWith('plg-') && n.endsWith('-shell'))).toBe(true);
 
-  // And it still works with the network off, which is the point.
+  // And it still works with the network off, which is the point. The pair that was
+  // saved, not another one: a sheet needs its subset fonts and those are exactly
+  // what a save is for, so asking for a pair nobody saved would test the opposite.
   await context.setOffline(true);
-  await page.goto('/customize.html?target=zh-Hans&source=en');
+  await page.goto('/customize.html?target=ja&source=en');
   await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
 });
 
@@ -181,8 +187,19 @@ test('a shell file is never shadowed by a copy in the pack cache', async ({ page
   });
   expect(overlap).toEqual([]);
   // And the pack cache is still doing its job, so this is not passing by being
-  // empty -- a saved pair is its corpus rows and its subset fonts.
-  expect(packOnly).toBeGreaterThan(20);
+  // empty. `zh-Hans__en` is deliberately the pair used here, because it is a
+  // conversation board's pair and therefore has the *largest* overlap with the
+  // shell -- its whole corpus is precached, which is what makes it the sharpest
+  // test of the skip. What is left for the pack cache is the pair's subset fonts,
+  // so that is what is asserted rather than a count that moves whenever a board
+  // declares another pair.
+  expect(packOnly).toBeGreaterThan(10);
+  const fonts = await page.evaluate(async () => {
+    const pack = await caches.open('plg-packs');
+    return (await pack.keys()).map((r) => new URL(r.url).pathname)
+      .filter((p) => p.endsWith('.woff2') || p.endsWith('.ttf')).length;
+  });
+  expect(fonts, 'the pair\'s subset fonts belong in the pack cache').toBeGreaterThan(10);
 });
 
 test('a first visit does not reload itself when the worker takes charge', async ({ page }) => {
@@ -202,4 +219,74 @@ test('a first visit does not reload itself when the worker takes charge', async 
   expect(await page.evaluate(() => /** @type {any} */ (window).__plgSentinel)).toBe('kept');
   // And the page is still usable rather than mid-reload.
   await expect(page.locator('.card').first()).toBeVisible();
+});
+
+// --- conversation boards (C5) -----------------------------------------------
+
+test('a board works on a cold offline visit with nothing saved', async ({ page, context }) => {
+  // **O01, and the reason a board's corpus is in the shell.** Everything else in
+  // this app is something a reader chose in advance -- they browsed the gallery,
+  // opened a sheet, and if they meant to use it abroad they saved the pair. Someone
+  // face down on a massage table in a country whose language they do not speak did
+  // none of that and has no signal to do it now.
+  //
+  // Measured before it was fixed: offline without the pair saved, the board came up
+  // with zero buttons and `LoadError: data/concepts/social.csv: HTTP 504`, because
+  // `loadCorpus` reads every concept group and `loadLanguage` asks every group of
+  // each language. Deliberately *no* `save()` call here -- adding one would make
+  // this pass for the wrong reason and stop testing the thing it is named for.
+  test.skip(!HAS_PACKS, NEEDS_PACKS);
+  await page.goto('/');
+  await expect(page.locator('.card').first()).toBeVisible();
+  await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
+
+  /** @type {string[]} */ const errors = [];
+  page.on('pageerror', (e) => errors.push(String(e).slice(0, 140)));
+  await context.setOffline(true);
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=spa&replies=1');
+
+  await expect(page.locator('.board-cell').first()).toBeVisible({ timeout: 30_000 });
+  // The whole grid, not merely a page that rendered: a board that resolves half its
+  // phrases draws the rest disabled, which is a different failure wearing the same
+  // face.
+  await expect(page.locator('.board-cell')).toHaveCount(9);
+  await expect(page.locator('.board-cell-off')).toHaveCount(0);
+  await expect(page.locator('#board-status')).toBeEmpty();
+
+  // A message, a submenu and a reply, all with the network off -- the three things
+  // that each read from a different part of the corpus.
+  await page.locator('[data-button="stop"]').click();
+  await expect(page.locator('.board-message-text')).toHaveText(/\p{Script=Han}/u);
+  await page.locator('.board-message').click();
+
+  await page.locator('[data-button="focus"]').click();
+  await expect(page.locator('[data-button="shoulders"]')).toBeVisible();
+  await page.locator('#board-up').click();
+
+  await page.locator('[data-button="avoid"]').click();
+  await page.locator('.board-controls button').click();
+  await expect(page.locator('.board-answer')).toHaveCount(6);
+
+  expect(errors).toEqual([]);
+});
+
+test('a shell update does not pull a message out from under a conversation', async ({ page, context }) => {
+  // O04. `registerOffline` reloads the page when a new worker takes charge, which is
+  // what makes a deploy land on the first visit rather than the second -- and a
+  // reload while somebody is holding the phone out to a stranger would take the
+  // sentence off the screen mid-sentence. The guard is that the reload only fires
+  // where a controller was *already* present and the page has not navigated since.
+  test.skip(!HAS_PACKS, NEEDS_PACKS);
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=spa');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
+
+  await page.locator('[data-button="stop"]').click();
+  const shown = await page.locator('.board-message-text').textContent();
+
+  // Offline, so no update can arrive; the message must still be there after the
+  // worker has had every chance to do something about it.
+  await context.setOffline(true);
+  await page.waitForTimeout(2500);
+  await expect(page.locator('.board-message-text')).toHaveText(shown ?? '');
 });

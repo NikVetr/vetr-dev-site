@@ -517,6 +517,132 @@ Every row is `confidence: 2`, which in this corpus means *sourced* and explicitl
 
 ---
 
+## Language audit — two independent passes
+
+Two reviewers read all sixteen `massage-spa` concepts and the two listener-facing UI
+strings, **independently and without access to each other's output**, which is the
+method the redundancy ratings already use here. Where they agree is a result; where
+they disagree is a question, and is recorded as one rather than resolved by picking
+the more confident reviewer.
+
+| | pass 1 | pass 2 |
+|---|---|---|
+| `ok` | 16 | 17 |
+| `weak` | 2 | 1 |
+| `wrong` | 0 | 0 |
+
+### Agreed, and changed
+
+**`reply-cannot-avoid-this-treatment`: 无法避开 → 避不开.** Both reached the same
+diagnosis independently and proposed the same replacement — 无法 is written and
+official register, and spoken Mandarin negates ability with the V-不-C potential
+complement. The row now reads 这个项目避不开这个部位.
+
+**The `erb-sl-guide-2` citation overreached, on eight rows.** Both said so. It is a
+Hong Kong Employees Retraining Board code of conduct being used to source mainland
+usage, and the single clause either reviewer could verify is about 力度 — so the tag
+stays on the three pressure rows and comes off the rest, where the citations already
+present carry the claim. Both also said the mainland source was underused:
+`mohrss-anmo-2023`, the 2023 occupational standard, is now on seven rows instead of
+two.
+
+The two reviewers **contradict each other on whether the ERB guide exists at all** —
+pass 1 could not find it or the attributed sentence; pass 2 quotes clause 12 verbatim
+and explains the negative result, that the PDF interleaves spaces between characters
+so a plain search misses it. Pass 2's account is the more specific and explains the
+other, but this is exactly why the tag was narrowed rather than defended.
+
+### Verified defects, also changed
+
+Neither of these is a matter of taste and both were checked directly:
+
+- **The English and the Mandarin disagreed about who was refusing.** The Mandarin
+  subject is 这个项目 and the row's own `literal` says "this service cannot avoid";
+  the English said "**I** cannot avoid that area", relocating the constraint from the
+  booking to the person and making it the personal refusal §4.4 says it must not be.
+  Now "This treatment cannot avoid that area".
+- **A concept note stated a fact that is not true.** It said
+  `reply-i-will-avoid-that-area` "reuses the 避开 / 部位 of the question it answers".
+  The question is 请不要按这个部位 and contains no 避开 — only 部位 is reused.
+- `zh.wikipedia=頸` — a traditional character — in the provenance of a row in a
+  simplified pack.
+
+### A recorded rationale that was wrong
+
+The note on `stronger-pressure` said 请用力一点 was chosen over the canonical
+请重一点 to avoid a one-character minimal pair with 请轻一点 on the two buttons where
+misreading matters most. **That cannot be the reason.** `renderGrid` labels cells in
+the *owner's* language and `renderMessage` shows one Mandarin sentence at a time, so
+the two Mandarin strings never appear together — confirmed against the code and
+against a screenshot of the grid, which reads "Stronger pressure, please" and "More
+gently, please" in English.
+
+Both reviewers endorsed the wording anyway, on better grounds: 用力 is the idiom the
+trade uses, and it is not Taiwan-marked (Taiwan's word is 力道). The note says that
+now. The wording was right and the reason was not, which is the more dangerous of the
+two to leave lying around, because a reason gets reused.
+
+### Disagreed, and left alone
+
+**`focus-on-feet`: 脚 or 脚部.** Pass 1 called it `weak` — all three siblings are
+disyllabic (肩膀 / 背部 / 脖子) and the trade's own form is 足部 — and pass 2 called
+it `ok`. One reviewer of two, on naturalness rather than correctness, is not enough
+to move a string that neither called wrong. It goes to the fluent reader with the
+rest.
+
+### Still awaiting a fluent reader
+
+Nothing here moves any row past `confidence: 2`, which in this corpus means *sourced*
+and explicitly not *read by a fluent speaker*. Neither reviewer is one and both said
+so. Open questions, in the order worth asking them:
+
+1. `focus-on-feet` — 脚 or 脚部, where the reviewers split.
+2. `reply-cannot-avoid-this-treatment` — is 这个项目避不开这个部位 how a therapist
+   actually declines?
+3. `reply-none-of-these` — does 这里面 read naturally of buttons on a screen? Both
+   said yes; neither can hear it.
+4. `board.reply` = 回复, which I added rather than a researcher.
+
+Recorded and not chased: the machine-derived IPA splits 不要 as two words, gives
+下来 and 里面 full tones where the neutral is optional, applies no tone sandhi, and
+writes 确 as `tɕʰɥœ`. These come from `build_ipa.py`'s pinyin route rather than from
+the rows, so they are a generator question and would move every Mandarin row at once.
+
+---
+
+## The gate had a dead link, and it had never run
+
+`npm run check` was one `&&` chain, and `respell_check --charset --check` was last in
+it. `build_ipa.py --check` sits in the middle and **cannot pass on this machine**:
+Ukrainian and Marathi are built against the newer espeak that `espeakng-loader`
+ships, so a plain check asks the system library for `uk` and gets `RuntimeError:
+language "uk" is not supported`. In a `&&` chain that ends the run. The last check
+had therefore never executed here, and `data/respell/charset.json` went stale,
+was committed, and was pushed.
+
+What was actually stale was two Korean syllables, 붜 and 응, added by the board's
+English wording. **Bookkeeping rather than a shipped defect** — the font subsets
+already carry both, which 243 tests in `tests/fonts.test.mjs` and
+`tests/respell.test.mjs` confirm. But the file feeds `subset_fonts.py`, so the next
+person to rebuild fonts from it would have produced a subset one glyph short, and
+that is the failure mode this corpus has paid for before.
+
+`scripts/check_all.mjs` replaces the chain. It runs all eight checks, reports every
+failure rather than the first, and handles the espeak split the way
+`content/PROMPTS/add-a-language.md` prescribes: everything but `uk` and `mr` against
+the system library, then those two against the loader's. A machine without the
+loader gets an explicit `skipped` line rather than a silent gap where two languages
+used to be. It proved itself on its first run by reporting two failures at once
+where the chain would have shown one.
+
+**One new coupling to know about.** A conversation board's corpus is in the shell
+(see C5), so editing `data/concepts/` or either board language now invalidates the
+shell manifest. That is correct — those files are precached, so a change has to bump
+the worker — but it caught me three times in one session. The order that works is:
+land every data and code change, *then* build the shell, *then* run the gate.
+
+---
+
 ## N0 — Deterministic mobile bundle
 
 **Status: complete.** `scripts/build_mobile.mjs` (also `npm run mobile`), twelve

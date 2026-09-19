@@ -58,6 +58,54 @@ const DATA_DIRS = ['data/registry', 'data/registry/section-titles',
   'data/registry/emergency-labels', 'data/themes', 'data/respell/overrides',
   'data/respell/rules', 'data/i18n', 'data/boards'];
 
+/**
+ * The corpus a conversation board needs, for every pair a board declares.
+ *
+ * **A board is the one surface that has to work with no preparation.** Everything
+ * else in the app is something a reader chose in advance: they browsed the gallery,
+ * they opened a sheet, and if they meant to use it abroad they saved the pair.
+ * Someone face down on a massage table in a country whose language they do not speak
+ * did not do any of that, and has no signal to do it now.
+ *
+ * Measured rather than assumed: offline without the pair saved, the board came up
+ * with zero buttons and `LoadError: data/concepts/social.csv: HTTP 504`, because
+ * `loadCorpus` reads every concept group and `loadLanguage` asks for every group of
+ * each language. So the shell carries them.
+ *
+ * Bounded by *declared board pairs*, not by languages, which is what keeps this from
+ * growing with the registry: 204KB of concepts plus 284KB for the one pair a board
+ * serves today, against a 4.4MB shell. The fonts are not here and are not needed --
+ * a board draws in the system stack, with no `ensureFontCss` and no subset.
+ */
+async function boardCorpus() {
+  /** @type {string[]} */ const out = [];
+  let index;
+  try {
+    index = JSON.parse(await readFile(join(ROOT, 'data/boards/index.json'), 'utf8'));
+  } catch {
+    return out;  // no boards shipped yet
+  }
+  /** @type {Set<string>} */ const languages = new Set();
+  for (const board of index.boards) {
+    for (const pair of board.pairs) for (const code of pair.split('__')) languages.add(code);
+  }
+  const groups = (await readdir(join(ROOT, 'data/concepts')))
+    .filter((f) => f.endsWith('.csv'));
+  for (const group of groups) out.push(`data/concepts/${group}`);
+  for (const code of languages) {
+    for (const group of groups) {
+      // A language legitimately has no file for some groups, and `loadLanguage`
+      // tolerates that -- but the shell may not name a file that is not there.
+      const rel = `data/lang/${code}/${group}`;
+      try {
+        await stat(join(ROOT, rel));
+        out.push(rel);
+      } catch { /* this pack does not carry that group */ }
+    }
+  }
+  return out;
+}
+
 /** @param {string} dir @returns {Promise<string[]>} */
 async function walk(dir) {
   /** @type {string[]} */ const out = [];
@@ -74,6 +122,7 @@ async function walk(dir) {
 // does; without dedup the first run and every run after it disagreed.
 const files = [...new Set([
   ...ENTRY_FILES,
+  ...(await boardCorpus()),
   ...(await Promise.all(CODE_DIRS.map(walk))).flat(),
   ...(await Promise.all(DATA_DIRS.map(async (dir) => (await readdir(join(ROOT, dir)))
     .filter((f) => f.endsWith('.csv') || f.endsWith('.json'))

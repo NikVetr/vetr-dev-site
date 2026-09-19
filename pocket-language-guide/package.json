@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "serve": "npx http-server . -p 8080 -c-1",
-    "check": "tsc -p jsconfig.json && node scripts/build_shell.mjs --check && node scripts/check_i18n.mjs --check && python3 scripts/transliterate_native.py --check && python3 scripts/build_ipa.py --check && node scripts/respell_check.mjs --charset --check",
+    "check": "node scripts/check_all.mjs",
     "respell:charset": "node scripts/respell_check.mjs --charset",
     "fonts": "python3 scripts/subset_fonts.py",
     "validate": "python3 scripts/validate_data.py",
