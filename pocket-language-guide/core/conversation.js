@@ -1,0 +1,337 @@
+// Conversation boards: what a board is, what it resolves to, and where a tap goes.
+//
+// A board is a stable grid of short buttons labelled in the owner's language. One
+// tap shows the whole message in the listener's language, very large; one tap on
+// that message returns to the exact grid it came from. That is the entire
+// interaction, and everything here exists to make those two sentences true.
+//
+// **This module is pure.** It reads a board definition and a corpus and returns
+// text and state; it touches no DOM, fetches nothing, and stores nothing. The
+// browser half lives in `ui/conversation*.js`, and the split is what lets the
+// navigation table in the specification be a unit-test fixture rather than a
+// Playwright script.
+//
+// **It does not typeset.** A board never builds a `SheetSpec`, never runs the
+// solver, and never asks which rows survived a layout. `core/pack.js` is a 44KB
+// data-only module -- it imports `core/csv.js` and nothing else -- so resolving a
+// phrase costs a corpus join and no more. A board is a view over language content,
+// not a small sheet.
+//
+// **Terms are indexed, not copied.** A button names a concept that already exists
+// wherever one does: the spa board's comfort node points at
+// `hotel-requests.another-towel-please` and its closing node at
+// `social-basics.thank-you`, rather than either growing a spa-flavoured twin. Board
+// nodes are subsections and they overlap freely -- the same concept may be reachable
+// from several of them, on this board and on others. That is the point. An entry is
+// a per-language realization of a language-independent concept, which is what keeps
+// the corpus O(N) rather than O(N^2); a duplicated concept multiplies by fifty-three,
+// has to be translated again, and drifts from its twin. New concepts are for
+// meanings the corpus genuinely cannot say.
+
+import { appliesTo } from './pack.js';
+
+/** How many levels of submenu a board may nest. Deeper is a menu tree, not a board. */
+const MAX_DEPTH = 3;
+/** Buttons per node. Twelve is the specification's upper bound for one screen. */
+const MAX_BUTTONS = 12;
+
+/**
+ * @typedef {Object} BoardButton
+ * @property {string} id            stable placement, not a label and not an index
+ * @property {'message'|'submenu'} kind
+ * @property {string} [nodeId]      for `submenu`: the child node
+ * @property {PhraseRef} [phraseRef] for `message`: what it says
+ * @property {string} [labelKey]    optional short interface wording, never spoken
+ * @property {string} [replySetId]  for `message`: answers the listener may give
+ */
+
+/**
+ * What a button says, named by meaning rather than by string.
+ *
+ * `corpus` is a concept id and is the normal case. `custom` is one of the owner's
+ * own phrases, which carries its text with it because no concept describes it.
+ * @typedef {{kind:'corpus', id:string} | {kind:'custom', id:string}} PhraseRef
+ */
+
+/**
+ * @typedef {Object} BoardNode
+ * @property {BoardButton[]} buttons
+ * @property {string} [titleKey]
+ */
+
+/**
+ * @typedef {Object} Board
+ * @property {1} schemaVersion
+ * @property {string} id
+ * @property {string} titleKey
+ * @property {string} rootNodeId
+ * @property {Record<string, BoardNode>} nodes
+ * @property {Record<string, {buttons:BoardButton[]}>} [replySets]
+ * @property {string[]} [pairs]   `target__source` codes this board is complete for
+ */
+
+/**
+ * One side of a resolved message: the text, and what a renderer needs to draw it.
+ * @typedef {Object} PhraseSide
+ * @property {string} text
+ * @property {string} lang
+ * @property {'ltr'|'rtl'} dir
+ */
+
+/**
+ * @typedef {Object} ResolvedPhrase
+ * @property {string} id
+ * @property {PhraseSide} listener   the big text, in the language being spoken to
+ * @property {PhraseSide} owner      the small confirmation, in the owner's language
+ * @property {string} provenance     where the wording came from
+ * @property {number} confidence     0-3, as everywhere else in the corpus
+ * @property {boolean} custom        the owner wrote it, so it is unreviewed
+ */
+
+/**
+ * The whole of a board session. Small on purpose.
+ *
+ * `path` is the stack of node ids, so returning from a message lands on the node it
+ * was opened from rather than on the board's root -- which is the specification's
+ * one hard navigation requirement and the reason this is a stack and not a field.
+ *
+ * There is deliberately no transcript. A board is a conversation aid, not a log of
+ * a private exchange, and the specification is explicit that a cold launch restores
+ * the board and not the last thing that was said.
+ * @typedef {Object} BoardState
+ * @property {string} boardId
+ * @property {'grid'|'message'|'reply'|'answer'} view
+ * @property {string[]} path            node ids, deepest last; never empty
+ * @property {string|null} buttonId     the message being shown, when there is one
+ * @property {string|null} answerId     the reply chosen, in the `answer` view
+ * @property {boolean} replies          whether this session offers replies at all
+ */
+
+/**
+ * Read a board definition, or say exactly what is wrong with it.
+ *
+ * Returns a list of problems rather than throwing on the first, because a board is
+ * authored data and an author fixing six things wants to see six things. An empty
+ * list means the board is structurally sound; it says nothing about whether the
+ * corpus can supply its text, which is `missingPhrases`' question.
+ * @param {any} board
+ * @returns {string[]}
+ */
+export function validateBoard(board) {
+  /** @type {string[]} */ const problems = [];
+  if (!board || typeof board !== 'object') return ['not an object'];
+  if (board.schemaVersion !== 1) problems.push(`schemaVersion ${board.schemaVersion} is not 1`);
+  if (!board.id) problems.push('no id');
+  const nodes = board.nodes && typeof board.nodes === 'object' ? board.nodes : null;
+  if (!nodes) return [...problems, 'no nodes'];
+  if (!nodes[board.rootNodeId]) problems.push(`rootNodeId ${board.rootNodeId} is not a node`);
+
+  /** @type {Set<string>} */ const buttonIds = new Set();
+  for (const [nodeId, node] of Object.entries(nodes)) {
+    const buttons = /** @type {any} */ (node)?.buttons;
+    if (!Array.isArray(buttons) || !buttons.length) {
+      problems.push(`${nodeId}: no buttons`);
+      continue;
+    }
+    // Twelve is a design bound from the specification, not a technical one: past
+    // that the cells are too small to hit and the answer is a submenu.
+    if (buttons.length > MAX_BUTTONS) {
+      problems.push(`${nodeId}: ${buttons.length} buttons, more than ${MAX_BUTTONS}`);
+    }
+    for (const button of buttons) {
+      if (!button.id) { problems.push(`${nodeId}: a button with no id`); continue; }
+      // Unique across the board, not merely within a node, because a placement is
+      // what persistence and the editor both key on.
+      const key = `${nodeId}/${button.id}`;
+      if (buttonIds.has(key)) problems.push(`${key}: duplicate button id`);
+      buttonIds.add(key);
+      if (button.kind === 'submenu') {
+        if (!nodes[button.nodeId]) problems.push(`${key}: submenu to unknown node ${button.nodeId}`);
+      } else if (button.kind === 'message') {
+        const ref = button.phraseRef;
+        if (!ref || (ref.kind !== 'corpus' && ref.kind !== 'custom') || !ref.id) {
+          problems.push(`${key}: a message with no usable phraseRef`);
+        }
+      } else {
+        // An enum, not an open set: the format carries no actions, no URLs and no
+        // expressions, so a board file can never be a program.
+        problems.push(`${key}: kind ${button.kind} is neither message nor submenu`);
+      }
+    }
+  }
+
+  // Reachability and depth in one walk from the root.
+  /** @type {Map<string, number>} */ const depth = new Map([[board.rootNodeId, 0]]);
+  const queue = [board.rootNodeId];
+  while (queue.length) {
+    const id = /** @type {string} */ (queue.shift());
+    for (const button of nodes[id]?.buttons ?? []) {
+      if (button.kind !== 'submenu' || !nodes[button.nodeId]) continue;
+      if (depth.has(button.nodeId)) continue;
+      depth.set(button.nodeId, /** @type {number} */ (depth.get(id)) + 1);
+      queue.push(button.nodeId);
+    }
+  }
+  for (const id of Object.keys(nodes)) {
+    // An unreachable node is dead weight that still has to be translated and
+    // reviewed, so it is a problem rather than a curiosity.
+    if (!depth.has(id)) problems.push(`${id}: not reachable from the root`);
+    else if (/** @type {number} */ (depth.get(id)) >= MAX_DEPTH) {
+      problems.push(`${id}: nested ${depth.get(id)} deep, past ${MAX_DEPTH - 1}`);
+    }
+  }
+  return problems;
+}
+
+/** Every phrase a board can ask for, including its reply sets. @param {Board} board */
+export function phrasesOf(board) {
+  /** @type {PhraseRef[]} */ const refs = [];
+  const sets = Object.values(board.replySets ?? {});
+  for (const node of [...Object.values(board.nodes), ...sets]) {
+    for (const button of node.buttons) if (button.phraseRef) refs.push(button.phraseRef);
+  }
+  // Deduplicated on the way out, because indexing the same term into two
+  // subsections is the intended usage and must not look like two dependencies.
+  const seen = new Set();
+  return refs.filter((r) => !seen.has(`${r.kind}:${r.id}`) && seen.add(`${r.kind}:${r.id}`));
+}
+
+/**
+ * One button's text, in both languages, or `null` if the corpus cannot supply it.
+ *
+ * `null` rather than a partial result or an English stand-in. A board that shows the
+ * owner's own language to the listener has not degraded gracefully, it has failed
+ * silently in the one place where failing silently is worst -- and the specification
+ * says so twice. `missingPhrases` is how a caller finds out *before* the board opens,
+ * so a reader never meets a dead button.
+ *
+ * Scope is checked with `appliesTo`, the same helper the sheet uses, so a concept
+ * scoped away from this target is unavailable here too rather than quietly resolving
+ * to a gloss row that happens to exist.
+ * @param {PhraseRef} ref
+ * @param {ResolveContext} ctx
+ * @returns {ResolvedPhrase|null}
+ */
+export function resolvePhrase(ref, ctx) {
+  if (ref.kind === 'custom') {
+    const own = ctx.custom?.[ref.id];
+    if (!own?.listener || !own?.owner) return null;
+    return {
+      id: ref.id,
+      listener: { text: own.listener, lang: ctx.listener, dir: ctx.listenerDir },
+      owner: { text: own.owner, lang: ctx.owner, dir: ctx.ownerDir },
+      provenance: 'custom',
+      confidence: 0,
+      custom: true,
+    };
+  }
+  const concept = ctx.corpus.concepts[ref.id];
+  if (!concept || !appliesTo(concept, ctx.listener)) return null;
+  const listener = ctx.listenerRows[ref.id];
+  const owner = ctx.ownerRows[ref.id];
+  if (!listener?.text || !owner?.text) return null;
+  return {
+    id: ref.id,
+    listener: { text: listener.text, lang: ctx.listener, dir: ctx.listenerDir },
+    owner: { text: owner.text, lang: ctx.owner, dir: ctx.ownerDir },
+    provenance: listener.provenance ?? '',
+    confidence: Number(listener.confidence ?? 0),
+    custom: false,
+  };
+}
+
+/**
+ * @typedef {Object} ResolveContext
+ * @property {{concepts:Record<string,any>}} corpus
+ * @property {Record<string,Record<string,string>>} listenerRows
+ * @property {Record<string,Record<string,string>>} ownerRows
+ * @property {string} listener
+ * @property {string} owner
+ * @property {'ltr'|'rtl'} listenerDir
+ * @property {'ltr'|'rtl'} ownerDir
+ * @property {Record<string,{owner:string, listener:string}>} [custom]
+ */
+
+/**
+ * Which of a board's phrases this pair cannot say. Empty means the board is usable.
+ * @param {Board} board @param {ResolveContext} ctx
+ */
+export function missingPhrases(board, ctx) {
+  return phrasesOf(board).filter((ref) => !resolvePhrase(ref, ctx)).map((ref) => ref.id);
+}
+
+/**
+ * Where a tap goes.
+ *
+ * The whole navigation table from the specification, as one total function over the
+ * state above. A reducer rather than handlers on elements, because "tapping the
+ * message returns to the grid it was opened from" is a statement about state and
+ * proving it by clicking through a browser is slower and weaker than proving it
+ * here.
+ *
+ * Unknown actions return the state unchanged rather than throwing: a stray event
+ * during a transition should do nothing, which is also what makes a second tap
+ * arriving with the first harmless.
+ * @param {BoardState} state
+ * @param {{type:'open', buttonId:string, kind:'message'|'submenu', nodeId?:string}
+ *   | {type:'dismiss'} | {type:'up'} | {type:'reply'} | {type:'answer', answerId:string}
+ *   | {type:'cancelReply'}} action
+ * @returns {BoardState}
+ */
+export function reduce(state, action) {
+  switch (action.type) {
+    case 'open':
+      if (state.view !== 'grid') return state;
+      return action.kind === 'submenu' && action.nodeId
+        ? { ...state, path: [...state.path, action.nodeId] }
+        : { ...state, view: 'message', buttonId: action.buttonId };
+
+    case 'dismiss':
+      // From either message view, straight back to the grid the message was opened
+      // from -- `path` was never popped, so it is still exactly that grid. An
+      // answer dismisses to the owner's originating grid too, completing the
+      // exchange rather than unwinding through the question.
+      if (state.view !== 'message' && state.view !== 'answer') return state;
+      return { ...state, view: 'grid', buttonId: null, answerId: null };
+
+    case 'up':
+      // Grid-level only, and never off the root. Message views have no Back
+      // control by design; Escape and the system Back gesture route to `dismiss`.
+      if (state.view !== 'grid' || state.path.length < 2) return state;
+      return { ...state, path: state.path.slice(0, -1) };
+
+    case 'reply':
+      if (state.view !== 'message' || !state.replies) return state;
+      return { ...state, view: 'reply' };
+
+    case 'cancelReply':
+      // Back to the question, which is still on screen behind the answers, rather
+      // than to the grid: cancelling is "I have not answered", not "we are done".
+      if (state.view !== 'reply') return state;
+      return { ...state, view: 'message' };
+
+    case 'answer':
+      if (state.view !== 'reply') return state;
+      return { ...state, view: 'answer', answerId: action.answerId };
+
+    default:
+      return state;
+  }
+}
+
+/** A session opened on a board's root grid. @param {Board} board @param {boolean} replies */
+export function openBoard(board, replies = false) {
+  return /** @type {BoardState} */ ({
+    boardId: board.id,
+    view: 'grid',
+    path: [board.rootNodeId],
+    buttonId: null,
+    answerId: null,
+    replies,
+  });
+}
+
+/** The node currently on screen. @param {Board} board @param {BoardState} state */
+export function currentNode(board, state) {
+  return board.nodes[state.path[state.path.length - 1]];
+}

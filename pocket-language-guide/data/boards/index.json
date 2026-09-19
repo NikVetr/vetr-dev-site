@@ -1,0 +1,11 @@
+{
+  "boards": [
+    {
+      "id": "spa",
+      "titleKey": "boards.spa.title",
+      "pairs": [
+        "zh-Hans__en"
+      ]
+    }
+  ]
+}

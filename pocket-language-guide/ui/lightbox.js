@@ -13,7 +13,12 @@
 import { languagePicker } from './language-picker.js';
 import { nextIndex } from './keys.js';
 import { languageName, t } from './i18n.js';
-import { browserSheetContext, ensureFontCss, fontManifest, loadText } from './app.js';
+// `./app.js` is a static import and costs nothing: it loads the typesetting engine
+// on demand, so the four helpers below arrive without it. The three heavy modules in
+// `faceSheet` stay dynamic, because a reader who never opens a card never needs them.
+import {
+  browserSheetContext, ensureFontCss, fontManifest, loadText, makeSpec,
+} from './app.js';
 
 /** @param {string} tag @param {Record<string,string>} attrs @param {(Node|string)[]} kids */
 function el(tag, attrs = {}, kids = []) {
@@ -150,12 +155,11 @@ function faceSheet(target, source, solved) {
   const job = (async () => {
     const kept = await cached(key);
     if (kept?.length) return kept;
-    const [{ buildSheet }, { faceSvgs, loadIcons }, { defaultSelection }, { makeSpec }] =
+    const [{ buildSheet }, { faceSvgs, loadIcons }, { defaultSelection }] =
       await Promise.all([
         import('../core/sheet.js'),
         import('./export.js'),
         import('../core/pack.js'),
-        import('./app.js'),
       ]);
     const ctx = await browserSheetContext();
     presetsOnce ??= loadText('data/presets.json').then(JSON.parse);

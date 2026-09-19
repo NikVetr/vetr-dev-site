@@ -1,0 +1,237 @@
+/* The conversation board.
+ *
+ * Its own file rather than more of `style.css`, because almost nothing here is
+ * shared with the rest of the app: the sheet pages are dense panels of small
+ * controls, and this is a dozen large targets and one screen-filling message. The
+ * tokens and the base type scale still come from `style.css`, which this page also
+ * links, so a board looks like the same product.
+ *
+ * Everything is namespaced `board-` for the same reason.
+ */
+
+.board-body {
+  /* The grid should fill the phone, not sit in a column. `100dvh` rather than
+     `100vh` so the address bar collapsing does not leave the last row under it. */
+  min-block-size: 100dvh;
+  display: flex;
+  flex-direction: column;
+  /* A notch or a home indicator must not cover a button someone is reaching for
+     in a hurry. `viewport-fit=cover` in the page's meta is what makes these real. */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+           env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+.board-header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--line-soft);
+  /* Quiet on purpose. The header is orientation, not a place to work, and every
+     pixel it takes is a pixel off the buttons. */
+  font-size: var(--fs--1);
+}
+.board-brand { font-size: var(--fs--1); }
+.board-pair { margin: 0; color: var(--muted); }
+
+.board-main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  min-block-size: 0;
+}
+
+/* Parent navigation sits on the grid and never on a message. Quiet, because it is
+   not the thing anyone came here to press. */
+.board-up {
+  align-self: flex-start;
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+.board-up[hidden] { display: none; }
+
+/* **Large, even, and in the author's order.**
+ *
+ * `auto-fit` with a wide floor gives two columns on a phone and three or four on a
+ * tablet without a media query, and `1fr` rows make every cell the same height
+ * whatever its label says -- which is what keeps the arrangement recognisable when
+ * a reader comes back to it. Nothing here reorders by use, recency or importance.
+ */
+.board-grid {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  grid-auto-rows: 1fr;
+  gap: var(--space-2);
+  min-block-size: 0;
+}
+
+.board-cell {
+  /* The design target is well past the 48px minimum: these are pressed by someone
+     who is face down on a massage table, or holding the phone out at arm's length. */
+  min-block-size: 4.5rem;
+  padding: var(--space-2);
+  font-size: var(--fs-1);
+  line-height: 1.2;
+  /* Centred with flex, not `text-align`. `style.css` makes every button an
+     `inline-flex`, so the label is an anonymous flex item packed to the start and
+     `text-align: center` does nothing to it -- which is why a one-line label sat
+     left while a two-line one looked centred by accident. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow-wrap: anywhere;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+}
+.board-cell:hover { border-color: var(--accent); }
+.board-cell:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* A submenu is a different kind of act from saying something, and saying so in the
+   surface rather than with an added glyph keeps the label the whole label. */
+.board-cell-more { background: var(--surface); border-style: dashed; }
+/* Drawn, not removed: a grid that closes a gap is a grid whose buttons have moved. */
+.board-cell-off { opacity: 0.4; cursor: not-allowed; }
+
+.board-status { margin: 0; color: var(--muted); font-size: var(--fs--1); }
+.board-status:empty { display: none; }
+
+/* --- the message ------------------------------------------------------------- */
+
+/* "Full-screen" means the app's viewport, not the Fullscreen API: that needs a
+   permission, it is refused inside some in-app browsers, and it would take the
+   system's own back gesture away from the reader. */
+.board-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  padding: calc(env(safe-area-inset-top) + var(--space-2))
+           calc(env(safe-area-inset-right) + var(--space-2))
+           calc(env(safe-area-inset-bottom) + var(--space-2))
+           calc(env(safe-area-inset-left) + var(--space-2));
+  gap: var(--space-2);
+}
+.board-stage[hidden] { display: none; }
+/* An answer coming back the other way, tinted so the owner can see at a glance that
+   this is the reply and not something they said. */
+.board-stage-incoming { background: var(--accent-soft); }
+
+/* The whole surface is the dismiss target, so it is a button and it fills the
+   stage. No visible Back control and no instruction paragraph: the accessible name
+   carries the return action for anyone who cannot see that the card is tappable. */
+.board-message {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-3);
+  inline-size: 100%;
+  min-block-size: 0;
+  padding: var(--space-3);
+  border: none;
+  border-radius: var(--radius);
+  background: none;
+  color: var(--ink);
+  text-align: center;
+  cursor: pointer;
+  /* Long text scrolls rather than being clipped. `contain` is deliberately absent:
+     the fitter measures `scrollHeight` against `clientHeight` and needs both real. */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.board-message:focus-visible { outline: 2px solid var(--accent); outline-offset: -4px; }
+
+/* As large as the box allows, from CSS first; `fitMessage` only closes the gap for
+   a long custom phrase, and stops at a floor rather than shrinking to nothing. */
+.board-message-text {
+  margin: 0;
+  font-size: clamp(2rem, 11vw, 5.5rem);
+  line-height: 1.15;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+/* The owner's own wording: a confirmation that the right button was pressed, not
+   part of what is being said to anyone, so it is small and grey. */
+.board-message-gloss {
+  margin: 0;
+  font-size: var(--fs-1);
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+/* A cue that there is more to read, only when there is. Set by the fitter, because
+   whether the text overflows is a measurement and not something CSS can ask. */
+.board-message-scrolls {
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 2.5rem), transparent);
+}
+
+/* Reply and Speak are siblings of the surface, never children: a button inside a
+   button is invalid, and worse, ambiguous about which one a tap meant. Being
+   siblings is also what stops their clicks reaching the dismiss handler. */
+.board-controls { display: flex; justify-content: center; gap: var(--space-2); flex: 0 0 auto; }
+.board-control {
+  min-block-size: 3rem;
+  padding: 0 var(--space-3);
+  font-size: var(--fs-1);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  cursor: pointer;
+}
+.board-control:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* --- replies ----------------------------------------------------------------- */
+
+/* The question stays on screen above the answers. Someone asked "does this contain
+   peanuts?" should not have to hold the question in their head while choosing. */
+.board-asked {
+  margin: 0;
+  flex: 0 0 auto;
+  font-size: clamp(1.1rem, 4vw, 1.8rem);
+  color: var(--muted);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.board-answers {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  grid-auto-rows: 1fr;
+  gap: var(--space-2);
+  min-block-size: 0;
+  overflow-y: auto;
+}
+.board-answer {
+  min-block-size: 4rem;
+  padding: var(--space-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: clamp(1.1rem, 4.5vw, 2rem);
+  line-height: 1.2;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+.board-answer:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.board-close { align-self: center; flex: 0 0 auto; }
+
+/* Landscape on a phone is short, not merely wide: the message has to give back the
+   space the gloss and the controls were taking. */
+@media (orientation: landscape) and (max-height: 500px) {
+  .board-cell { min-block-size: 3rem; font-size: var(--fs-0); }
+  .board-message-text { font-size: clamp(1.6rem, 7vh, 3rem); }
+  .board-control { min-block-size: 2.5rem; }
+}

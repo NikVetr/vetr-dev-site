@@ -9,8 +9,29 @@ import {
   DEFAULT_PADDING, defaultSelection, hasContent, paperSpec, respellOverrideFile,
 } from '../core/pack.js';
 import { messagesReady, t } from './i18n.js';
-import { createSheetContext, stacksFor } from '../core/sheet.js';
-import { familyFor, fontFaceCss } from '../render/fonts.js';
+
+/**
+ * **The typesetting engine is loaded on demand, not on import.**
+ *
+ * This module is the shared bootstrap: most of what it exports is small -- fetch a
+ * file, read the reader's language, show a fatal error -- and every page imports it
+ * for those. Three of its functions need the solver and the font registry, and
+ * while they were named at the top of the file every importer paid for them.
+ *
+ * The bill was 969KB of `vendor/fontkit.esm.js`, reached by
+ * `app.js -> core/sheet.js -> core/fonts.js -> fontkit`, plus `core/measure.js` and
+ * eight files of `core/solve/`. The gallery fetched all of it before the reader had
+ * touched anything -- two thirds of that page's JavaScript, on the landing page,
+ * which is the one thing a phone on a bad connection has to get through first. Its
+ * own header claimed the opposite, and `ui/lightbox.js` had already been written to
+ * import the heavy modules lazily; a static edge in the same file defeated it.
+ *
+ * So the three heavy functions import what they need when they are called. Each was
+ * already asynchronous or already returned a promise, so no caller changes, and the
+ * memoised handles below mean the cost is paid once.
+ */
+const sheetModule = () => import('../core/sheet.js');
+const fontsModule = () => import('../render/fonts.js');
 
 const READER_KEY = 'plg.reader';
 
@@ -48,12 +69,17 @@ export async function loadBytes(rel) {
  * nothing in it depends on which pair is being drawn -- so the lightbox was paying
  * for all of that again on every language change, which is the most expensive
  * thing between a click and a card.
- * @type {ReturnType<typeof createSheetContext>|null}
+ * @type {Promise<Awaited<ReturnType<
+ *   typeof import('../core/sheet.js').createSheetContext>>>|null}
  */
 let context = null;
 
 export function browserSheetContext() {
-  context ??= createSheetContext({ loadText, loadBytes });
+  // Still synchronous and still memoised: it returns the same promise it always
+  // did, with the module fetch folded into the front of it.
+  context ??= sheetModule().then(({ createSheetContext }) => createSheetContext({
+    loadText, loadBytes,
+  }));
   return context;
 }
 
@@ -136,7 +162,9 @@ export function setReaderLanguage(code) {
  * @param {boolean} [serifHeadings]
  */
 export async function ensureFontCss(ctx, target, source, typeface = 'sans', serifHeadings = false) {
-  const manifest = await fontManifest();
+  const [manifest, { stacksFor }, { familyFor, fontFaceCss }] = await Promise.all([
+    fontManifest(), sheetModule(), fontsModule(),
+  ]);
   const stacks = stacksFor(ctx.corpus, target, source, typeface, serifHeadings);
   const id = `plg-fonts-${stacks.join('-')}`;
   if (!document.getElementById(id)) {
@@ -327,6 +355,7 @@ export function registerOffline() {
 export async function saveForOffline({ corpus, target, source, manifest }) {
   if (!('serviceWorker' in navigator)) throw new Error('this browser cannot save for offline');
   const registration = await navigator.serviceWorker.ready;
+  const { stacksFor } = await sheetModule();
   const stacks = stacksFor(corpus, target, source);
   /** @type {string[]} */ const urls = [];
   for (const group of corpus.groups) {

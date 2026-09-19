@@ -4,6 +4,12 @@
 //
 // The one exception is the lightbox in `ui/lightbox.js`, which typesets the whole
 // sheet -- and only when a reader opens one.
+//
+// That was the intent and for a while it was not the fact. `ui/lightbox.js` loads the
+// engine lazily, but it reaches four helpers through `ui/app.js`, and `ui/app.js`
+// named `core/sheet.js` at the top of the file -- so the whole solver and 969KB of
+// fontkit arrived on this page anyway, before the reader had touched anything.
+// `ui/app.js` imports them on demand now, and this page is nine modules and 89KB.
 
 import {
   loadText, loadLanguages, readerLanguage,
@@ -35,12 +41,13 @@ function el(tag, attrs = {}, kids = []) {
  *   with the face count and type scale the pre-render settled on
  * @property {string} reader
  * @property {{total:number, languages:Record<string,number>}} coverage
+ * @property {Set<string>} boardPairs  `target__source` pairs a board covers
  * @property {(source:string)=>Promise<void>} onReaderChange
  */
 
 /** @param {Record<string,string>} lang @param {GalleryContext} gallery */
 function card(lang, gallery) {
-  const { reader, coverage } = gallery;
+  const { reader, coverage, boardPairs } = gallery;
   const name = languageName(lang.bcp47, lang.exonym_en);
   const key = `${lang.bcp47}__${reader}`;
   const hasPack = gallery.solved.has(key);
@@ -93,6 +100,16 @@ function card(lang, gallery) {
     actions.push(el('a', {
       class: 'btn', href: `customize.html${query}`, text: t('gallery.customise'),
     }));
+    // **Only where a board exists for this pair.** A conversation board is authored
+    // content, not a view the corpus can generate, and it needs text on both sides --
+    // so offering it on every card would advertise a page that opens onto a grid of
+    // dead buttons for any reader it was not written for. A pair with no board simply
+    // has the two buttons it had.
+    if (boardPairs.has(key)) {
+      actions.push(el('a', {
+        class: 'btn', href: `conversation.html${query}`, text: t('gallery.converse'),
+      }));
+    }
     // **No "Offline" button here.** It said "Offline" and did something that needs a
     // sentence to explain -- fetch this pair's data and its subset fonts into the
     // service worker cache -- so it read as a state ("this is offline") rather than
@@ -334,6 +351,19 @@ async function main() {
     // No pre-rendered packs yet; cards still work, they just have no thumbnail.
   }
 
+  // Which *pairs* a conversation board covers. Pairs and not targets, because
+  // resolving a phrase needs a row on both sides: a board written in Mandarin and
+  // English serves an English reader, and would hand a French one a grid of dead
+  // buttons. Authored content, so it is a list rather than something the corpus
+  // implies -- and absent, every card simply keeps the two buttons it had.
+  /** @type {Set<string>} */ const boardPairs = new Set();
+  try {
+    const boards = JSON.parse(await loadText('data/boards/index.json'));
+    for (const board of boards.boards) for (const pair of board.pairs) boardPairs.add(pair);
+  } catch {
+    // No boards shipped yet.
+  }
+
   const mount = /** @type {HTMLElement} */ (document.getElementById('reader'));
   // Collapsed it shows only the endonym -- "Deutsch", not "Deutsch (German)" --
   // because that is the word you scan for. The name in the reader's own language
@@ -416,7 +446,7 @@ async function main() {
       .sort((a, b) => collator.compare(label(a), label(b)) || have(b) - have(a));
     const grid = /** @type {HTMLElement} */ (document.getElementById('gallery'));
     /** @type {GalleryContext} */ const context = {
-      languages, solved, coverage, reader: readerCode, onReaderChange: setReader,
+      languages, solved, coverage, boardPairs, reader: readerCode, onReaderChange: setReader,
     };
     grid.replaceChildren(...shown.map((l) => card(l, context)));
     grid.setAttribute('aria-busy', 'false');

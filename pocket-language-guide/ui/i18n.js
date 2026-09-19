@@ -37,21 +37,16 @@ let active = 'en';
  * @param {(rel:string)=>Promise<string>} loadText
  */
 export async function loadUiLanguage(code, loadText) {
-  english = JSON.parse(await loadText('data/i18n/en.json'));
-  overlay = {};
-  active = code;
-  if (code !== 'en') {
-    try {
-      overlay = JSON.parse(await loadText(`data/i18n/${code}.json`));
-    } catch {
-      // Not translated yet. English is a perfectly good answer.
-      active = 'en';
-    }
-  }
+  // The same read `loadCatalogue` does; the difference is only that this one is
+  // installed as the interface language and that one is not.
+  const chosen = await loadCatalogue(code, loadText);
+  english = chosen.base;
+  overlay = chosen.words;
   // Follows the language actually rendered, not the one asked for: if Arabic has no
   // catalogue yet we show English, and English in a right-to-left document would be
   // worse than either.
-  direction = RTL_UI.has(active.split('-')[0]) ? 'rtl' : 'ltr';
+  active = chosen.code;
+  direction = chosen.dir;
   document.documentElement.lang = active;
   document.documentElement.dir = direction;
   return { code: active, dir: direction };
@@ -85,7 +80,21 @@ export async function loadUiLanguage(code, loadText) {
  * @param {Record<string, string|number>} [vars]
  */
 export function t(key, vars) {
-  const template = overlay[key] ?? english[key];
+  return lookup(overlay, english, key, vars);
+}
+
+/**
+ * One message, from a catalogue with English underneath it.
+ *
+ * Shared by `t` and by `loadCatalogue`, because the interface language and a
+ * listener-facing surface ask the same question of different catalogues, and the
+ * placeholder and bidi-isolation rules above are the part that must not diverge
+ * between them.
+ * @param {Record<string,string>} words @param {Record<string,string>} base
+ * @param {string} key @param {Record<string, string|number>} [vars]
+ */
+function lookup(words, base, key, vars) {
+  const template = words[key] ?? base[key];
   if (template === undefined) {
     // A missing key is a bug in the catalogue, not in the caller, and it should be
     // loud in development without breaking the page for a reader.
@@ -96,6 +105,50 @@ export function t(key, vars) {
   return template.replace(/\{(\w+)\}/g, (whole, name) => (
     name in vars ? isolate(String(vars[name])) : whole
   ));
+}
+
+/**
+ * A second catalogue, read without becoming the interface language.
+ *
+ * The conversation board shows one surface to its owner and another to the person
+ * they are talking to, and the listener's surface has to be labelled in the
+ * listener's language: a Reply control, a Close control, the answers themselves.
+ * `loadUiLanguage` cannot do that job. It is the *interface* language, and it sets
+ * four module globals and the `lang` and `dir` of `document.documentElement` --
+ * calling it to render a reply would silently change the owner's own preference,
+ * which is the one thing section 4.4 of the board specification forbids outright.
+ *
+ * So this returns a lookup and touches nothing. English underneath for the same
+ * reason `t` has it: a catalogue that has not been translated yet should fall back
+ * to a real sentence rather than to a key. The direction comes back with it, because
+ * a caller putting this text on screen needs `dir` on that element and nowhere else.
+ *
+ * Not cached here. A board holds its listener catalogue for as long as it is open
+ * and that is the right lifetime; a module-level cache would be a second piece of
+ * global state, which is the thing this exists to avoid.
+ * @param {string} code
+ * @param {(rel:string)=>Promise<string>} loadText
+ */
+export async function loadCatalogue(code, loadText) {
+  const base = JSON.parse(await loadText('data/i18n/en.json'));
+  /** @type {Record<string,string>} */ let words = {};
+  let resolved = 'en';
+  if (code !== 'en') {
+    try {
+      words = JSON.parse(await loadText(`data/i18n/${code}.json`));
+      resolved = code;
+    } catch {
+      // Not translated yet, which is not an error: English is a real answer.
+    }
+  }
+  return {
+    code: resolved,
+    words,
+    base,
+    dir: /** @type {'ltr'|'rtl'} */ (RTL_UI.has(resolved.split('-')[0]) ? 'rtl' : 'ltr'),
+    /** @param {string} key @param {Record<string, string|number>} [vars] */
+    t: (key, vars) => lookup(words, base, key, vars),
+  };
 }
 
 /** Whether a catalogue has been loaded yet. A fatal can fire before one has. */

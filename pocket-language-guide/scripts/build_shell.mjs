@@ -28,7 +28,8 @@ const CODE_DIRS = ['core', 'render', 'ui'];
 
 /** Individual files the app cannot start without. */
 const ENTRY_FILES = [
-  'index.html', 'sheet.html', 'customize.html', 'style.css',
+  'index.html', 'sheet.html', 'customize.html', 'conversation.html',
+  'style.css', 'conversation.css',
   'favicon.svg', 'manifest.webmanifest',
   'vendor/fontkit.esm.js', 'vendor/pdf-lib.esm.js',
   'data/presets.json', 'data/icons.json', 'data/coverage.json',
@@ -50,9 +51,12 @@ const ENTRY_FILES = [
 /** Everything in these directories, non-recursively. */
 // data/i18n is in here because the interface has to keep working offline in the
 // reader's own language, not fall back to English the moment the network goes.
+// `data/boards` holds the conversation boards, which are small JSON files a board
+// page cannot open without -- and a board is the one surface meant to work in a
+// basement with no signal, so it is precached rather than fetched on demand.
 const DATA_DIRS = ['data/registry', 'data/registry/section-titles',
   'data/registry/emergency-labels', 'data/themes', 'data/respell/overrides',
-  'data/respell/rules', 'data/i18n'];
+  'data/respell/rules', 'data/i18n', 'data/boards'];
 
 /** @param {string} dir @returns {Promise<string[]>} */
 async function walk(dir) {

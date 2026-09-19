@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- No `user-scalable=no` and no `maximum-scale`: the specification forbids
+     disabling zoom, and someone holding this out at arm's length in bad light is
+     exactly the reader who needs to pinch it larger. -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-i18n="board.docTitle">Conversation — Pocket Language Guide</title>
+<meta name="description" content="Tap a phrase and show it, full-screen, in the other person's language. Works offline.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="conversation.css">
+<link rel="manifest" href="manifest.webmanifest">
+</head>
+<body class="board-body">
+
+<!-- The owner's side. A header small enough that the grid is what the page is. -->
+<header class="board-header">
+  <a class="brand board-brand" href="./" data-i18n="nav.brand">Pocket Language Guide</a>
+  <div class="spacer"></div>
+  <!-- Board title and the pair, as a statement of what is about to be shown to
+       whom. Filled by `ui/conversation.js`. -->
+  <p class="board-pair" id="board-pair"></p>
+</header>
+
+<main class="board-main">
+  <!-- The parent control lives on the grid, never on a message: a message has no
+       visible Back by design. Hidden at the root. -->
+  <button type="button" id="board-up" class="board-up" hidden>
+    <span aria-hidden="true">←</span> <span id="board-up-label"></span>
+  </button>
+  <div id="board-grid" class="board-grid" aria-busy="true"></div>
+  <p id="board-status" class="board-status" role="status"></p>
+</main>
+
+<!-- The message surface is inserted here rather than over the whole document, so a
+     board embedded in a future native shell keeps its own bounds. -->
+<div id="board-stage" class="board-stage" hidden></div>
+
+<script type="module" src="ui/conversation.js"></script>
+</body>
+</html>

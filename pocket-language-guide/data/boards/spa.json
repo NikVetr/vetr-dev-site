@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "id": "spa",
+  "titleKey": "boards.spa.title",
+  "rootNodeId": "main",
+  "pairs": [
+    "zh-Hans__en"
+  ],
+  "nodes": {
+    "main": {
+      "buttons": [
+        {
+          "id": "stronger",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "massage-spa.stronger-pressure"
+          }
+        },
+        {
+          "id": "gentler",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "massage-spa.more-gently"
+          }
+        },
+        {
+          "id": "just-right",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "massage-spa.that-pressure-is-good"
+          },
+          "labelKey": "boards.spa.justRight"
+        },
+        {
+          "id": "hurts",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "emergency-medical.it-hurts-here"
+          }
+        },
+        {
+          "id": "avoid",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "massage-spa.please-avoid-this-area"
+          }
+        },
+        {
+          "id": "focus",
+          "kind": "submenu",
+          "nodeId": "areas",
+          "labelKey": "boards.spa.focus"
+        },
+        {
+          "id": "pause",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "massage-spa.please-pause"
+          }
+        },
+        {
+          "id": "stop",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "massage-spa.please-stop"
+          }
+        },
+        {
+          "id": "comfort",
+          "kind": "submenu",
+          "nodeId": "comfort",
+          "labelKey": "boards.spa.comfort"
+        }
+      ]
+    },
+    "areas": {
+      "buttons": [
+        {
+          "id": "shoulders",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "massage-spa.focus-on-shoulders"
+          }
+        },
+        {
+          "id": "back",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "massage-spa.focus-on-back"
+          }
+        },
+        {
+          "id": "neck",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "massage-spa.focus-on-neck"
+          }
+        },
+        {
+          "id": "feet",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "massage-spa.focus-on-feet"
+          }
+        },
+        {
+          "id": "gentler",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "massage-spa.more-gently"
+          }
+        },
+        {
+          "id": "stop",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "massage-spa.please-stop"
+          }
+        }
+      ]
+    },
+    "comfort": {
+      "buttons": [
+        {
+          "id": "towel",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hotel-requests.another-towel-please"
+          }
+        },
+        {
+          "id": "thanks",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.thank-you"
+          }
+        }
+      ]
+    }
+  },
+  "replySets": {}
+}

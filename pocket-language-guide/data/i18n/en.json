@@ -414,5 +414,19 @@
   "warn.no-fit.auto": "Even {faces} faces will not hold this at a legible size, at {columns} columns per face.",
   "warn.no-fit.pinned": "The content will not fit {faces} faces at {columns} columns per face without going below a legible size.",
   "warn.nothing-selected": "Nothing is selected, so the sheet is blank. Switch a section back on in the content panel.",
-  "warn.paper-too-coarse": "This paper needs {script} text at {floor}pt, but the theme sets its {field} column at {size}pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+  "warn.paper-too-coarse": "This paper needs {script} text at {floor}pt, but the theme sets its {field} column at {size}pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type.",
+  "board.docTitle": "Conversation \u2014 Pocket Language Guide",
+  "board.pair": "{source} \u2192 {target}",
+  "board.up": "Back",
+  "board.dismiss": "Close this message",
+  "board.reply": "Reply",
+  "board.close": "Close",
+  "board.unavailable": "Not translated for this pair yet",
+  "board.someMissing": "{count} phrases on this board are not translated for this pair yet.",
+  "gallery.converse": "Converse",
+  "boards.spa.title": "Massage and spa",
+  "board.wrongPair": "The {board} board is written for these language pairs only: {pairs}.",
+  "boards.spa.focus": "Focus on\u2026",
+  "boards.spa.comfort": "Comfort",
+  "boards.spa.justRight": "That's good \u2014 keep it there"
 }
