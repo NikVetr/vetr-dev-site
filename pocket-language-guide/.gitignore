@@ -3,3 +3,6 @@ tmp/
 .DS_Store
 test-results/
 __pycache__/
+dist/
+ios/
+android/
