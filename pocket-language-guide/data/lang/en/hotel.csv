@@ -51,3 +51,13 @@ room-problems.the-toilet-will-not-flush,The toilet will not flush,,ðə tˈɔɪl
 room-problems.the-light-does-not-work,The light does not work,,ðə lˈaɪt dʌznˌɑːt wˈɜːk,,2,expansion-v1;ipa=espeak
 room-problems.please-send-someone,Please send someone to fix it,,plˈiːz sˈɛnd sˈʌmwʌn tə fˈɪks ɪt,,2,expansion-v1;ipa=espeak
 room-problems.the-heating-does-not-work,The heating does not work,,ðə hˈiːɾɪŋ dʌznˌɑːt wˈɜːk,,2,expansion-v1;ipa=espeak
+massage-spa.please-stop,Please stop,,plˈiːz stˈɑːp,,2,spa-board-v1;ipa=espeak
+massage-spa.please-pause,Please pause,,plˈiːz pˈɔːz,,2,spa-board-v1;ipa=espeak
+massage-spa.please-avoid-this-area,Please avoid this area,,plˈiːz ɐvˈɔɪd ðɪs ˈɛɹiə,,2,spa-board-v1;ipa=espeak
+massage-spa.stronger-pressure,"Stronger pressure, please",,"stɹˈɔŋɡɚ pɹˈɛʃɚ, plˈiːz",,2,spa-board-v1;ipa=espeak
+massage-spa.more-gently,"More gently, please",,"mˈoːɹ dʒˈɛntli, plˈiːz",,2,spa-board-v1;ipa=espeak
+massage-spa.that-pressure-is-good,"That pressure is good, please keep it there",,"ðæt pɹˈɛʃɚɹ ɪz ɡˈʊd, plˈiːz kˈiːp ɪt ðˈɛɹ",,2,spa-board-v1;ipa=espeak
+massage-spa.focus-on-shoulders,Please focus on my shoulders,,plˈiːz fˈoʊkəs ˌɔn maɪ ʃˈoʊldɚz,,2,spa-board-v1;ipa=espeak
+massage-spa.focus-on-back,Please focus on my back,,plˈiːz fˈoʊkəs ˌɔn maɪ bˈæk,,2,spa-board-v1;ipa=espeak
+massage-spa.focus-on-neck,Please focus on my neck,,plˈiːz fˈoʊkəs ˌɔn maɪ nˈɛk,,2,spa-board-v1;ipa=espeak
+massage-spa.focus-on-feet,Please focus on my feet,,plˈiːz fˈoʊkəs ˌɔn maɪ fˈiːt,,2,spa-board-v1;ipa=espeak

@@ -51,3 +51,13 @@ hotel-basics.two-beds,要两张床,,yào liǎng zhāng chuáng,jɑʊ˥˩ ljɑŋ�
 hotel-requests.another-blanket,请再给一条毯子,,qǐng zài gěi yì tiáo tǎnzi,tɕʰiŋ˧˩˧ tsaɪ˥˩ keɪ˧˩˧ i˥˩ tʰjɑʊ˧˥ tʰan˧˩˧tsɯ,,2,zh-Hans-agent-v1;ipa=pinyin
 hotel-basics.is-there-air-conditioning,有空调吗？,,yǒu kōngtiáo ma?,joʊ˧˩˧ kʰʊŋ˥tʰjɑʊ˧˥ ma,,2,zh-Hans-agent-v1;ipa=pinyin
 hotel-requests.wake-up-call,请{}叫我起床,,qǐng {} jiào wǒ qǐchuáng,tɕʰiŋ˧˩˧ {} tɕjɑʊ˥˩ wɔ˧˩˧ tɕʰi˧˩˧ʈʂʰwɑŋ˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
+massage-spa.please-stop,请停下来，不要继续了,,"qǐng tíng xiàlái, bú yào jìxù le","tɕʰiŋ˧˩˧ tʰiŋ˧˥ ɕja˥˩laɪ˧˥, pu˧˥ jɑʊ˥˩ tɕi˥˩ɕy˥˩ lɤ",please stop; do not continue,2,spa-board-v1;erb-sl-guide-2;in-pack-frame;ipa=pinyin
+massage-spa.please-pause,请暂停一下,,qǐng zàntíng yíxià,tɕʰiŋ˧˩˧ tsan˥˩tʰiŋ˧˥ i˧˥ɕja˥˩,please pause for a moment,2,spa-board-v1;moe-dict;in-pack-frame;ipa=pinyin
+massage-spa.please-avoid-this-area,请不要按这个部位,,qǐng bú yào àn zhège bùwèi,tɕʰiŋ˧˩˧ pu˧˥ jɑʊ˥˩ an˥˩ ʈʂɤ˥˩kɤ pu˥˩weɪ˥˩,please do not press this part of the body,2,spa-board-v1;moe-dict;zh.wikipedia=推拿;in-pack-frame;ipa=pinyin
+massage-spa.stronger-pressure,请用力一点,,qǐng yònglì yìdiǎn,tɕʰiŋ˧˩˧ jʊŋ˥˩li˥˩ i˥˩tjɛn˧˩˧,please use a little more force,2,spa-board-v1;erb-sl-guide-2;moe-dict;in-pack-frame;ipa=pinyin
+massage-spa.more-gently,请轻一点,,qǐng qīng yìdiǎn,tɕʰiŋ˧˩˧ tɕʰiŋ˥ i˥˩tjɛn˧˩˧,please be a little lighter,2,spa-board-v1;erb-sl-guide-2;in-pack-frame;ipa=pinyin
+massage-spa.that-pressure-is-good,力度正好，请保持这样,,"lìdù zhènghǎo, qǐng bǎochí zhèyàng","li˥˩tu˥˩ ʈʂɤŋ˥˩xɑʊ˧˩˧, tɕʰiŋ˧˩˧ pɑʊ˧˩˧ʈʂʰɨ˧˥ ʈʂɤ˥˩jɑŋ˥˩",the pressure is just right; please keep it like this,2,spa-board-v1;erb-sl-guide-2;moe-dict;ipa=pinyin
+massage-spa.focus-on-shoulders,请重点按摩肩膀,,qǐng zhòngdiǎn ànmó jiānbǎng,tɕʰiŋ˧˩˧ ʈʂʊŋ˥˩tjɛn˧˩˧ an˥˩mwɔ˧˥ tɕjɛn˥pɑŋ˧˩˧,please make the shoulders the focus of the massage,2,spa-board-v1;erb-sl-guide-2;zh.wikipedia=肩;ipa=pinyin
+massage-spa.focus-on-back,请重点按摩背部,,qǐng zhòngdiǎn ànmó bèibù,tɕʰiŋ˧˩˧ ʈʂʊŋ˥˩tjɛn˧˩˧ an˥˩mwɔ˧˥ peɪ˥˩pu˥˩,please make the back the focus of the massage,2,spa-board-v1;erb-sl-guide-2;ipa=pinyin
+massage-spa.focus-on-neck,请重点按摩脖子,,qǐng zhòngdiǎn ànmó bózi,tɕʰiŋ˧˩˧ ʈʂʊŋ˥˩tjɛn˧˩˧ an˥˩mwɔ˧˥ pwɔ˧˥tsɯ,please make the neck the focus of the massage,2,spa-board-v1;erb-sl-guide-2;zh.wikipedia=頸;ipa=pinyin
+massage-spa.focus-on-feet,请重点按摩脚,,qǐng zhòngdiǎn ànmó jiǎo,tɕʰiŋ˧˩˧ ʈʂʊŋ˥˩tjɛn˧˩˧ an˥˩mwɔ˧˥ tɕjɑʊ˧˩˧,please make the feet the focus of the massage,2,spa-board-v1;erb-sl-guide-2;ipa=pinyin

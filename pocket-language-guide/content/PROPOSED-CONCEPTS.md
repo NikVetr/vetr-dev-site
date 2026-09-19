@@ -429,6 +429,35 @@ service uses: ไข้เลือดออก, sốt xuất huyết, demam ber
 
 ## Worth doing, lower urgency
 
+### `body-parts.shoulder`, `.neck`, `.calf` — researched, staged, waiting on a gloss sweep
+
+The section carries fifteen words — head, stomach, back, throat, tooth, chest, eye,
+ear, leg, arm, foot, hand, knee, ankle, skin — and these three are not among them,
+which is a gap on its own merits: a pharmacy row that points at where it hurts needs
+a shoulder as much as it needs a knee.
+
+They came up while building the conversation board's spa content, and were
+deliberately **not** shipped with it. The board did not need them: its "please focus
+on my shoulders" rows are complete idiomatic sentences rather than a template plus a
+noun, because Mandarin will not take the template — 按摩背部 is idiomatic and 按摩背
+is not, while 按摩脚 is right, so the noun form varies with the body part. Shipping
+three *universal* words translated into two languages would have added 153
+missing-gloss warnings against a baseline of 197, buying the board nothing.
+
+So they belong in a gloss sweep with their fifty-one siblings rather than in a
+feature branch. The Mandarin is researched and sourced: 肩膀 (zh.wikipedia 肩, lead
+「肩，俗稱肩膀」), 脖子 (zh.wikipedia 頸, lead 「又稱脖子」 — the colloquial form, to
+match this pack's 肚子, 耳朵, 眼睛 rather than the clinical 颈部), 小腿 (MOE
+重編國語辭典修訂本). Importances 0.755, 0.745 and 0.690, which slot them between
+`throat` and `tooth`, and between `leg` and `arm`, and just under `skin`.
+
+**One narrowing to carry forward.** 小腿 is the *lower leg*, not the calf muscle.
+Mandarin has no everyday word for the muscle alone — 腓腸肌 is anatomical and
+zh.wikipedia offers no colloquial name — so the `literal` column has to say so rather
+than imply a precision the word does not have. Any language added later should be
+asked the same question rather than assumed to split the two the way English does.
+
+
 ### ~~`dietary-needs.no-onion-garlic`~~ — shipped. `.jain` refused, and the refusal is the finding
 
 Raised by the Hindi translator. Indian kitchens are set up to answer exactly these
