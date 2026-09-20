@@ -1,0 +1,3 @@
+variant,concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+speaker_gender=feminine,introductions.i-am-from,मी {} ची आहे,,mī {} cī āhē,mˈi {} cˈi ˈaːheː,,2,mr-variants-v1;rule=postposition-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,introductions.i-am-traveling-alone,मी एकटी प्रवास करत आहे,,mī ēkaṭī pravāsa karata āhē,mˈi ˈeːkʈˌi pɾəvˈaːs kˈʌɾət ˈaːheː,,2,mr-variants-v1;rule=predicative-adjective-agrees-with-nominative-subject;ipa=espeak

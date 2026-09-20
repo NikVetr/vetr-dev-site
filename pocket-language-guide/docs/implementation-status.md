@@ -1134,7 +1134,41 @@ language declares, a variant of a phrase the pack does not have, a variant with 
 text, an axis with one value, an axis whose default is not one of its values, and an
 axis named for the listener.
 
-### Two things deliberately not done
+### The wordings, through the research loop
+
+Three agents, one per family, each given `content/PROMPTS/speaker-variants.md` and the
+survey. **Most of this turned out to be re-filing rather than translating.** The packs
+had been handling speaker gender ad hoc for a long time — a slash inside the sentence,
+or the feminine parked in `text_alt` — so where the pack already carried the form it
+was taken verbatim, on the grounds that reviewed content beats a fresh derivation.
+All 19 Romanian rows, all 32 Czech, 33 of 34 Croatian and 12 of 14 Russian came out of
+the pack. French is the exception and is derived throughout, from rules a first-year
+textbook states.
+
+Both passes excluded the same four categories, independently, which is some evidence
+the prompt is saying what it means to say:
+
+- **Third-party gender** — `my friend is hurt`, `my child is missing` — even where the
+  pack already had both forms sitting there.
+- **Grammatical gender of an object.** `Zginął mi paszport` against `Zginęła mi torba`
+  agrees with the lost item, not the speaker. Romanian's `prea scump / scumpă` agrees
+  with the thing being sold. Both look exactly like the real cases.
+- **Polite address.** Polish `Jak się pan/pani nazywa?` splits on the *listener's*
+  title. That is the reply-neutrality hazard, not an axis.
+- **`I am pregnant`**, feminine-only in all five Slavic packs, with no masculine
+  counterpart for a variant to be a variant *of*.
+
+Greek came out at two rows, which is a finding rather than a shortfall: that pack
+systematically prefers `έχω` + noun to `είμαι` + adjective, and `έχω` never agrees.
+The Romance pass also found the coverage script's first-person filter is wrong in both
+directions — `obrigado / obrigada` inflects for the speaker and its English is "Thank
+you" — so the report now prints counts rather than a fraction and says so.
+
+`build_ipa.py` filled the new `ipa` cells without being modified: it globs
+`data/lang/<code>/*.csv`, so it found `variants.csv` on its own. Ukrainian needed the
+usual `espeakng-loader` split. No base row changed.
+
+### What is not done
 
 **The base rows still carry the old ad-hoc forms.** 113 first-person rows hold a slash
 inside the sentence (`Estoy perdido/a`, `Ztratil jsem se / ztratila jsem se`), and
@@ -1152,6 +1186,16 @@ would be a second questionnaire, about a third party, during an emergency, to pr
 a sentence whose gender the listener can see for themselves. The rule is to write them
 with a grammatically fixed word — Russian *ребёнок* is masculine whatever the child's
 sex — and that is recorded in the prompt.
+
+**The board half is not exercised in a browser.** `spa` is the only board and it
+serves `zh-Hans__en`; neither language declares an axis, so the settings control never
+appears there and the variant path on the board is covered by unit tests only. It
+cannot be fixed by adding a pair to the board: the 16 `massage-spa` concepts exist in
+Mandarin and English and nowhere else, so every other pair reports 17 missing phrases.
+A gloss sweep for those concepts is the next content batch, and it is what would make
+the board available for more than one pair — which is worth doing for its own sake.
+The cheat sheet's half *is* exercised end to end, in `tests/speaker.spec.js`: a real
+Russian sheet solved twice, `Я заблудился` before and `Я заблудилась` after.
 
 ### Also in this batch
 

@@ -1,0 +1,13 @@
+variant,concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+speaker_gender=feminine,accessibility.cannot-climb-stairs,میں سیڑھیاں نہیں چڑھ سکتی,,maiñ sīṛhiyāñ nahīñ chaṛh saktī,mˈẽ sˈeːɽʰjãː nahˈĩː cˈʌɽʰ sˈʌktˌiː,,2,ur-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,border-customs.i-am-here-for-business,میں کاروبار کے لیے آئی ہوں,,maiñ kārobār ke liye ā’ī hūñ,mˈẽ kˌaːɾoːbˈaːɾ keː lˈiːeː ˈaːi hũː,,2,ur-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,border-customs.i-am-staying-at,میں {} میں ٹھہری ہوں,,maiñ {} meñ ṭhahrī hūñ,mˈẽ {} mˈẽ ʈʰˈʌhɾi hũː,,2,ur-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,border-customs.i-am-visiting-family,میں اپنے خاندان سے ملنے آئی ہوں,,maiñ apne khāndān se milne ā’ī hūñ,mˈẽ ˈapnˌeː xˈaːndaːn seː mˈɪlneː ˈaːi hũː,,2,ur-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,building-help.i-am-lost,میں راستہ بھول گئی ہوں,,maiñ rāsta bhūl ga’ī hūñ,mˈẽ ɾˈaːstˌa bhˈuːl ɡˈai hũː,,2,ur-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,dietary-needs.i-do-not-eat,میں {} نہیں کھاتی,,maiñ {} nahīñ khātī,mˈẽ {} nahˈĩː kʰˈaːti,,2,ur-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,introductions.i-am-traveling-alone,میں اکیلی سفر کر رہی ہوں,,maiñ akelī safar kar rahī hūñ,mˈẽ akˈeːli safˈaɾ kaɾ ɾˈʌhi hũː,,2,ur-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,lost-rescue.i-cannot-get-down,میں نیچے نہیں اتر سکتی,,maiñ nīche nahīñ utar saktī,mˈẽ nˈiːceː nahˈĩː ʊtˈaɾ sˈʌktˌiː,,2,ur-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,lost-rescue.i-cannot-walk,میں چل نہیں سکتی,,maiñ chal nahīñ saktī,mˈẽ cˈʌl nahˈĩː sˈʌktˌiː,,2,ur-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,police-consulate.i-am-calling-the-police,میں پولیس کو بلا رہی ہوں,,maiñ pulis ko bulā rahī hūñ,mˈẽ pʊlˈiːs kˈoː bˈʌlaː ɾˈʌhi hũː,,2,ur-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,police-consulate.i-will-not-sign-anything-i-cannot-read,جو میں پڑھ نہ سکوں اس پر دستخط نہیں کروں گی,,jo maiñ paṛh na sakūñ us par dastkhat nahīñ karūñ gī,ɟˈoː mˈẽ pˈʌɽʰ nˈa sˈʌkõː ɪs pˈʌɾ dˌastxˈat nahˈĩː kˈaɾũː ɡi,,2,ur-variants-v1;rule=future-tense-agrees-with-subject;ipa=espeak
+speaker_gender=feminine,shopping.i-am-just-looking,بس دیکھ رہی ہوں,,bas dekh rahī hūñ,bˈʌs dˈeːkʰ ɾˈʌhi hũː,,2,ur-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak

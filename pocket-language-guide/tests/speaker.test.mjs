@@ -202,7 +202,7 @@ test('every shipped variant file is reachable, and none of it empties a row', as
       assert.equal(variantKey(list, from), key,
         `${language}: ${key} is not a key its axes can produce`);
     }
-    const rows = {};
+    /** @type {Record<string, Record<string,string>>} */ const rows = {};
     for (const group of ['core', 'emergency', 'intro', 'travel', 'building']) {
       try {
         for (const row of parseTable(await load(`data/lang/${language}/${group}.csv`), group)) {

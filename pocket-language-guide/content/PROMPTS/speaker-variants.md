@@ -114,6 +114,26 @@ will out-gender them.**
 - **Thai, Khmer** — the particle reveals the *responder's* sex, not the traveller's.
   Not a hazard. Omit the particle, or pick one and say so in the provenance.
 
+## "We" is a third party too
+
+**Never write a variant for a concept whose subject is *we*** —
+`introductions.we-are-traveling-together`, `lost-rescue.we-are-here`,
+`children.car-seat`, `taxi.we-need-to-catch-the-high-speed-train`.
+
+This is the third-party rule below wearing a plural, and it is easy to miss because
+the sentence *is* about the speaker: they are one of the "we". But the agreement is
+with the whole group, and in Hindi, Urdu, Punjabi and the Romance and Slavic languages
+a mixed group takes the masculine plural. So a feminine variant selected by the
+*speaker's* gender says "we, all of us women", which is false for a woman travelling
+with her husband — and the base row's masculine plural was already correct for her.
+
+Two such rows were written in the first pass (`hi` and `ur`, both re-filed from a
+`text_alt` the packs already carried) and removed. Punjabi's would have needed the
+distinct feminine plural ਰਹੀਆਂ, which is what made it visible.
+
+Where a language distinguishes an all-female plural and you think a traveller might
+want it, that is a *companion* question and the answer is still no — see below.
+
 ## Third-party gender
 
 Five concepts inflect for the gender of someone who is neither speaker nor listener:

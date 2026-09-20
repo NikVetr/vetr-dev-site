@@ -1,0 +1,8 @@
+variant,concept_id,text,text_alt,romanization_iast,ipa,literal,confidence,provenance
+speaker_gender=feminine,accessibility.cannot-climb-stairs,मैं सीढ़ियाँ नहीं चढ़ सकती,,maiṁ sīṛhiyāṁ nahīṁ caṛh saktī,mɛ̃ sˈiːɽʰɪjˌã nˈʌhĩ cˈʌɽʰ sˈʌktˌi,,2,hi-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,border-customs.i-am-here-for-business,मैं काम से आई हूँ,,maiṁ kām se āī hūṁ,mɛ̃ kˈaːm seː ˈaːi hũ,,2,hi-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,border-customs.i-am-visiting-family,मैं परिवार से मिलने आई हूँ,,maiṁ parivār se milne āī hūṁ,mɛ̃ pˌəɾɪʋˈaːɾ seː mˈɪlnˌeː ˈaːi hũ,,2,hi-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,building-help.i-am-lost,मैं रास्ता भटक गई हूँ,,maiṁ rāstā bhaṭak gaī hūṁ,mɛ̃ ɾˈaːstaː bʰˈʌʈək ɡˈʌi hũ,,2,hi-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,dietary-needs.i-do-not-eat,मैं {} नहीं खाती,,maiṁ {} nahīṁ khātī,mɛ̃ {} nˈʌhĩ kʰˈaːti,,2,hi-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,lost-rescue.i-cannot-get-down,मैं नीचे नहीं उतर सकती,,maiṁ nīce nahīṁ utar saktī,mɛ̃ nˈiːceː nˈʌhĩ ˈʊtəɾ sˈʌktˌi,,2,hi-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,lost-rescue.i-cannot-walk,मैं चल नहीं सकती,,maiṁ cal nahīṁ saktī,mɛ̃ cˈʌl nˈʌhĩ sˈʌktˌi,,2,hi-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak

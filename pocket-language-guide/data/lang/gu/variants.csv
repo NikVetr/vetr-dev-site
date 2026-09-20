@@ -1,0 +1,10 @@
+variant,concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
+speaker_gender=feminine,accessibility.cannot-climb-stairs,હું સીડી ચઢી શકતી નથી,,huṁ sīḍī caḍhī śakatī nathī,hũ siːɖi cʌɖʰi ʃəkʌti nʌtʰi,,2,gu-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,border-customs.i-am-here-for-business,હું કામ માટે આવી છું,,huṁ kām māṭē āvī chuṁ,hũ kaːm maːʈeː aːʋi cʰũ,,2,gu-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,border-customs.i-am-visiting-family,હું કુટુંબને મળવા આવી છું,,huṁ kuṭuṁbanē maḷavā āvī chuṁ,hũ kuʈunbʌneː məɭʌʋaː aːʋi cʰũ,,2,gu-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,building-help.i-am-lost,હું રસ્તો ભૂલી ગઈ છું,,huṁ rastō bhūlī gaī chuṁ,hũ ɾʌstoː bʰuːli ɡʌi cʰũ,,2,gu-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,dietary-needs.i-do-not-eat,હું {} ખાતી નથી,,huṁ {} khātī nathī,hũ {} kʰaːti nʌtʰi,,2,gu-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,introductions.i-am-from,હું {} ની છું,,huṁ {} nī chuṁ,hũ {} ni cʰũ,,2,gu-variants-v1;rule=postposition-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,introductions.i-am-traveling-alone,હું એકલી પ્રવાસ કરું છું,,huṁ ēkalī pravās karuṁ chuṁ,hũ eːkʌli pɾəʋaːs kʌɾũ cʰũ,,2,gu-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,lost-rescue.i-cannot-get-down,હું નીચે ઊતરી શકતી નથી,,huṁ nīcē ūtarī śakatī nathī,hũ niːceː utʌɾi ʃəkʌti nʌtʰi,,2,gu-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,lost-rescue.i-cannot-walk,હું ચાલી શકતી નથી,,huṁ cālī śakatī nathī,hũ caːli ʃəkʌti nʌtʰi,,2,gu-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
