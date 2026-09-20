@@ -589,3 +589,80 @@ test('Speak is the owner’s control and Reply is the listener’s', async ({ pa
   await speak.click();
   await expect(page.locator('.board-message-text')).toBeVisible();
 });
+
+// --- the shapes a phone actually comes in (C7) -------------------------------
+
+for (const [name, width, height, scale] of /** @type {[string,number,number,number][]} */ ([
+  ['a narrow portrait phone', 360, 640, 1],
+  ['a short landscape phone', 740, 360, 1],
+  ['a phone with enlarged system text', 390, 844, 1.6],
+])) {
+  test(`nothing is cut off on ${name}`, async ({ page }) => {
+    // §9.2 asks for these three to be *looked at*, and the reason is that each has
+    // produced a defect the behavioural tests could not see. Enlarged text is the
+    // sharpest: at 1.6x the header ran off the right edge and read
+    // "Englis / Simpli / Chines", because a flex item will not shrink below its
+    // content unless told it may. This is that check, automated -- it cannot judge
+    // whether a layout looks good, but it can say whether anything has been cut off.
+    await page.setViewportSize({ width, height });
+    if (scale !== 1) {
+      await page.addInitScript((z) => {
+        addEventListener('DOMContentLoaded', () => {
+          document.documentElement.style.fontSize = `${16 * z}px`;
+        });
+      }, scale);
+    }
+    await page.goto(`${BOARD}&replies=1`);
+    await expect(page.locator('.board-cell').first()).toBeVisible();
+
+    const spilled = await page.evaluate(() => {
+      /** @type {string[]} */ const bad = [];
+      const named = (/** @type {HTMLElement} */ n) => n.dataset.button || n.id || n.className;
+      for (const n of document.querySelectorAll(
+        '.board-cell, .board-up, .board-edit, .board-pair, .board-brand, .board-grid-title')) {
+        const el = /** @type {HTMLElement} */ (n);
+        const r = el.getBoundingClientRect();
+        if (r.width === 0) continue;
+        // Past either edge of the viewport, or clipped inside its own box.
+        if (r.right > innerWidth + 1 || r.left < -1) bad.push(`${named(el)} off-screen`);
+        if (el.scrollWidth > el.clientWidth + 1) bad.push(`${named(el)} clipped`);
+      }
+      return bad;
+    });
+    expect(spilled).toEqual([]);
+
+    // And a message, which is the surface that has to hold the most text.
+    await page.locator('[data-button="stop"]').click();
+    const text = page.locator('.board-message-text');
+    await expect(text).toBeVisible();
+    const fits = await text.evaluate((n) => {
+      const box = /** @type {HTMLElement} */ (n.closest('.board-message'));
+      // It may scroll -- that is the designed answer for a long phrase -- but it
+      // must never be cut off sideways, which would lose a word silently.
+      return n.scrollWidth <= n.clientWidth + 1 && box.scrollHeight >= n.scrollHeight;
+    });
+    expect(fits).toBe(true);
+  });
+}
+
+test('a tap reaches the message inside the frame budget', async ({ page }) => {
+  // §9.3 asks for p95 under 100ms on the test device, warm. Measured to the next
+  // animation frame, which is when the reader could first see it. Not a benchmark
+  // of anyone's phone -- a tripwire for the day something starts solving, fetching
+  // or re-reading the corpus on the tap path, which is the failure that would make
+  // this slow.
+  await page.goto(BOARD);
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  /** @type {number[]} */ const times = [];
+  for (let i = 0; i < 12; i += 1) {
+    times.push(await page.evaluate(() => {
+      const t0 = performance.now();
+      /** @type {HTMLElement} */ (document.querySelector('[data-button="stop"]')).click();
+      return new Promise((done) => requestAnimationFrame(() => done(performance.now() - t0)));
+    }));
+    await page.locator('.board-message').click();
+  }
+  times.sort((a, b) => a - b);
+  const p95 = times[Math.floor(times.length * 0.95)];
+  expect(p95, `p95 was ${p95.toFixed(0)}ms over ${times.length} taps`).toBeLessThan(100);
+});

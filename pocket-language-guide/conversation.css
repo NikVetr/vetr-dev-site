@@ -50,9 +50,20 @@
   /* Quiet on purpose. The header is orientation, not a place to work, and every
      pixel it takes is a pixel off the buttons. */
   font-size: var(--fs--1);
+  /* **Wraps rather than clips at enlarged text.** At a 1.6x system text size the
+     pair ran off the right edge and read "Englis / Simpli / Chines" -- a flex item
+     will not shrink below its content unless it is told it may, and a long language
+     name has no break opportunity a browser will take on its own. Found by looking
+     at a screenshot at that setting, which is why §9.2 asks for one. */
+  flex-wrap: wrap;
 }
-.board-brand { font-size: var(--fs--1); }
-.board-pair { margin: 0; color: var(--muted); }
+.board-brand { font-size: var(--fs--1); min-inline-size: 0; }
+.board-pair {
+  margin: 0;
+  color: var(--muted);
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
 
 .board-main {
   flex: 1 1 auto;

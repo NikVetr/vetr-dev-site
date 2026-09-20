@@ -445,7 +445,7 @@ always produces the same sheet, and the committed packs never churn.
 
 ## Pages
 
-Three separate HTML entry points rather than one SPA, so the gallery loads fast
+Four separate HTML entry points rather than one SPA, so the gallery loads fast
 and offline on a phone without paying for the solver, `pdf-lib` or a CJK font.
 
 - **`index.html`** — gallery. Cards keep a fixed header: the flags sit in a grid to
@@ -586,6 +586,85 @@ and offline on a phone without paying for the solver, `pdf-lib` or a CJK font.
   - **`ui/add-term.js`** — adding one phrase should not require exporting a CSV and
     importing it back, so this writes the same `edits.extras` entry an import
     would. The two paths are the same path.
+
+## Conversation boards
+
+A fourth surface, and the only one that is not about paper. `conversation.html` is a
+stable grid of large buttons labelled in the owner's language; one tap fills the
+screen with the whole idiomatic message in the listener's language; one tap anywhere
+on that message returns to the exact grid it came from. There is no visible Back
+control on a message and no instruction paragraph — the surface's accessible name
+carries the return action for anyone who cannot see that the card is tappable.
+
+**It is a view over the corpus, not a small sheet.** No `SheetSpec`, no solver, no
+fontkit: `core/pack.js` is a 44KB data-only join, so showing a phrase costs a corpus
+lookup and nothing else. Two tests hold that line, one walking the import graph and
+one counting network requests while a message is on screen. Measured, a tap reaches
+the screen in a median 11ms.
+
+**Terms are indexed, never copied.** A board node is a subsection and nodes overlap
+freely: `please stop` and `more gently` sit on the root grid *and* inside the
+body-area submenu, because someone two taps deep must still be able to say stop.
+`it hurts here`, `another towel, please` and `thank you` are existing concepts from
+three other sections, on the board by reference. Sixteen `massage-spa` concepts were
+added only for meanings the corpus genuinely could not say.
+
+- **`core/conversation.js`** is pure — no DOM, no fetch, no storage. Board typedefs,
+  `validateBoard` (which reports every problem rather than the first), `resolvePhrase`,
+  `missingPhrases`, and a `reduce` that *is* the navigation table. Every transition
+  in the specification is a unit test, which is what makes "a message opened from a
+  submenu returns to that submenu" a property of a stack rather than something to
+  hope the DOM remembers.
+- **`resolvePhrase` returns `null` rather than a partial result.** A board showing
+  the owner's own language to the listener has not degraded gracefully. Scope goes
+  through `appliesTo`, the sheet's own helper, so a concept scoped away from this
+  listener is unreachable here too.
+- **A board declares the *pairs* it serves**, not the targets, because resolving
+  needs a row on both sides. The gallery offers the link only for a pair it covers,
+  and a direct URL for an uncovered pair is a plain refusal naming the ones it does.
+  `spa` serves `zh-Hans__en` and no others until a gloss sweep runs.
+
+**Colour is the coding.** The five role colours a printed sheet uses for its
+sections: red for stop, pause and *it hurts*; blue for the pressure axis; orange for
+*avoid*; green for *focus on*; purple for comfort. Solid on the grid, and the
+full-screen message takes the colour of the button that opened it, white on solid —
+so the owner can see they pressed the right one without reading their own language
+back. Someone face down on a massage table reaching for *stop* is looking for a red
+rectangle, not reading.
+
+**A submenu says its prompt once.** "Please focus on…" is a heading over four body
+parts rather than four cells repeating five words. That is owner-language
+presentation only: the listener always gets one complete idiomatic sentence, because
+Mandarin will not take the template — 按摩背部 is idiomatic where 按摩背 is not.
+
+**Replies are optional and one-directional per message.** A reply set offers the
+listener a few complete answers in their own language; the chosen one comes back in
+the owner's, on a paper-coloured surface so it reads as *incoming*. Every set carries
+an uncertain answer and a rejection, because a listener who will not use the board is
+not the same as one who is unsure, and neither may be forced into the nearest
+substantive answer. The listener's controls are drawn from `loadCatalogue`, a scoped
+read that mutates none of the interface globals — showing a Reply button must never
+move the owner's own language or the document's direction.
+
+**Personal buttons are not printed rows.** `ui/board-store.js` keeps `plg.boards`,
+separately from the studio's `plg.edits.<pair>`: a *phrase* is a sentence the owner
+wrote and carries its own text, a *placement* is the fact that it sits on one node of
+one board, and one phrase can have several. So removing a button is not deleting a
+sentence, and making a button to say "no peanuts" to a waiter does not add a row to
+every card that pair prints. The app does not translate and the editor says so; a
+half-written phrase saves but draws disabled.
+
+**A board works with no preparation.** Its corpus is precached in the shell, bounded
+by declared board pairs rather than by languages — everything else in this app is
+something a reader chose in advance, and someone face down in a country whose
+language they do not speak chose nothing and has no signal now.
+
+**Speech refuses to guess.** `ui/platform/speech.js` maps `zh-Hans` to `zh-CN` and
+excludes Cantonese outright; Klingon and Quenya map to no voice at all rather than
+being read aloud in English. Matching is on subtag boundaries, because a prefix test
+hands Hausa to a Hawaiian voice. Audio is off until pressed, every utterance cancels
+the last, and a device with no voice simply has no button. **No audio has been heard
+on any device.**
 
 ## Typeface, and what "font options" costs
 

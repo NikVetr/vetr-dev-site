@@ -517,6 +517,70 @@ Every row is `confidence: 2`, which in this corpus means *sourced* and explicitl
 
 ---
 
+## C7 — Web release gate
+
+**Status: passed, for a text release.** The feature can ship on the web independently
+of any store.
+
+| | |
+|---|---|
+| `npm run check` | 8/8 — types, shell, i18n, native script, IPA across all 53 packs, respell charset |
+| `validate_data.py` | 880 concepts, 60 sections, 53 languages, **0 errors**, 213 warnings |
+| `node --test` | **633 pass, 0 fail** |
+| `npx playwright test` | **155 pass, 0 fail** |
+
+The 213 warnings are the standing ones plus sixteen new: one per `massage-spa`
+concept, saying fifty-one languages have no gloss for it. That is the honest signal,
+not a defect, and it is the reason the board serves one pair.
+
+### No printed sheet moved
+
+Checked rather than assumed, because a new section could quietly grow every card.
+`massage-spa` is `default_on=0`, and its importances run 0.21–0.38 — so **no concept
+in it reaches any priority step** (`wide` 0.74, `core` 0.82, `essential` 0.95), and
+the step counts are unchanged at 362 / 148 / 10. Independently, `gallery.spec.js`
+compares a stored pack against a fresh solve and passes, which would not survive a
+changed sheet.
+
+### The three shapes a phone comes in
+
+§9.2 asks for these to be looked at, and each has now produced a defect the
+behavioural tests could not see, so all three are automated: narrow portrait, short
+landscape, and **1.6× system text**. The last is where the header ran off the right
+edge reading "Englis / Simpli / Chines" — a flex item does not shrink below its
+content unless told it may. The test measures whether anything is off-screen or
+clipped inside its own box, which is a thing a machine can check; whether a layout
+*looks* good still is not.
+
+### Performance
+
+Tap to visible message, warm, measured to the next animation frame over twelve taps
+on this machine: **median 11ms, p95 52ms**, against §9.3's target of p95 under 100ms.
+Now a test, less as a benchmark than as a tripwire for the day something starts
+solving, fetching or re-reading the corpus on the tap path.
+
+This is a desktop Chromium on a 32-core machine. It is **not** a phone measurement
+and no phone measurement exists.
+
+### What a release would have to say
+
+- **One pair.** The spa board serves `zh-Hans__en`. Any other reader gets a plain
+  refusal naming the pairs it does serve.
+- **Offline needs no preparation** for a board: its corpus is in the shell, tested by
+  a cold offline visit with nothing saved. A printed *sheet* still needs its pair
+  saved, because that is where the fonts come from.
+- **Personal buttons do not travel.** They persist on the device and there is no
+  export or import, so a new phone starts empty. §5.4's portable package is the one
+  C4 item not built.
+- **Speech is untested audio.** Sixteen unit tests and one browser test cover the
+  logic and the refusals; nothing has been heard. Every line of §9.2's physical
+  matrix is outstanding.
+- **The Mandarin is sourced, not reviewed.** `confidence: 2` throughout, two
+  independent reviewers, and four strings still waiting on a fluent reader — one of
+  which is on a button that says *stop*.
+
+---
+
 ## C6 — Speech
 
 **Status: the adapter and the wiring are done; nothing has been heard.**
