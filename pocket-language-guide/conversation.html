@@ -28,9 +28,14 @@
 <main class="board-main">
   <!-- The parent control lives on the grid, never on a message: a message has no
        visible Back by design. Hidden at the root. -->
-  <button type="button" id="board-up" class="board-up" hidden>
-    <span aria-hidden="true">←</span> <span id="board-up-label"></span>
-  </button>
+  <div class="board-bar">
+    <button type="button" id="board-up" class="board-up" hidden>
+      <span aria-hidden="true">←</span> <span id="board-up-label"></span>
+    </button>
+    <div class="spacer"></div>
+    <!-- Owner-only. `ui/conversation.js` hides it on every view but the grid. -->
+    <button type="button" id="board-edit" class="board-edit" hidden></button>
+  </div>
   <div id="board-grid" class="board-grid" aria-busy="true"></div>
   <p id="board-status" class="board-status" role="status"></p>
 </main>

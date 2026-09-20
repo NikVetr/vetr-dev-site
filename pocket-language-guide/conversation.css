@@ -96,6 +96,66 @@
 .board-up:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .board-up[hidden] { display: none; }
 
+/* The grid's own chrome: back on the left, the owner's editor on the right. The
+   two are pushed apart because they are opposites -- one is how you get out of a
+   submenu, the other is the only control here that is not part of a conversation. */
+.board-bar { display: flex; align-items: center; gap: var(--space-2); }
+.board-bar .spacer { flex: 1 1 auto; }
+
+/* Quiet, and quiet on purpose. Editing is not something anyone does while holding
+   the phone out to a stranger, and the button should not compete with the things
+   that are. Hidden on every view but the grid, by `ui/conversation.js`. */
+.board-edit {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: var(--fs--1);
+}
+.board-edit[hidden] { display: none; }
+
+/* --- the owner's editor ------------------------------------------------------ */
+
+.board-editor {
+  inline-size: min(34rem, 94vw);
+  max-block-size: 88svh;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  color: var(--ink);
+  background: var(--paper);
+  overflow-y: auto;
+}
+.board-editor::backdrop { background: rgb(0 0 0 / 0.45); }
+.board-editor-head { display: flex; align-items: baseline; gap: var(--space-2); }
+.board-editor-head h2 { margin: 0; font-size: var(--fs-2); flex: 1 1 auto; }
+.board-editor-close {
+  border: none; background: none; font-size: var(--fs-2);
+  line-height: 1; color: var(--muted); cursor: pointer;
+}
+.board-editor-status:empty { display: none; }
+.board-editor-status { margin: var(--space-2) 0 0; font-size: var(--fs--1); }
+.board-editor-error { color: var(--alert); font-weight: 600; }
+
+.board-editor-list { list-style: none; margin: var(--space-2) 0; padding: 0; }
+.board-editor-row {
+  display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap;
+  padding: var(--space-2) 0; border-bottom: 1px solid var(--line-soft);
+}
+.board-editor-said { flex: 1 1 12rem; display: flex; flex-direction: column; min-inline-size: 0; }
+.board-editor-said .small { overflow-wrap: anywhere; }
+
+.board-editor-form { display: flex; flex-direction: column; gap: var(--space-2); }
+.board-editor-field { display: flex; flex-direction: column; gap: 0.15em; }
+.board-editor-field input { inline-size: 100%; }
+/* The exact text that will be shown, not an approximation: a reader who previewed
+   one thing and showed a stranger another has been misled by their own app. */
+.board-editor-previewed {
+  display: flex; flex-direction: column; gap: 0.2em;
+  padding: var(--space-2); border-radius: var(--radius); background: var(--surface);
+}
+.board-editor-preview { margin: 0; font-size: var(--fs-2); overflow-wrap: anywhere; }
+.board-editor-preview-empty { font-size: var(--fs-0); color: var(--muted); font-style: italic; }
+
 /* The heading a node's buttons complete -- "Please focus on…" over the body parts.
    Spans the grid, so the buttons below it read as its continuation, and is sized to
    its own line rather than to a button. */

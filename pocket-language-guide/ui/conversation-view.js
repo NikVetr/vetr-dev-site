@@ -139,8 +139,11 @@ function fitCells(root) {
  * @param {string} config.replyLabel         in the *listener's* language
  * @param {boolean} [config.incoming]        an answer coming back the other way
  * @param {import('../core/conversation.js').ColourRole} [config.colour]
+ * @param {(()=>void)|null} [config.onSpeak]  null where no voice can say this
+ * @param {string} [config.speakLabel]        in the *owner's* language
  */
-export function renderMessage(stage, phrase, { onDismiss, onReply, replyLabel, incoming, colour }) {
+export function renderMessage(stage, phrase,
+  { onDismiss, onReply, replyLabel, incoming, colour, onSpeak, speakLabel = '' }) {
   stage.replaceChildren();
   stage.hidden = false;
   stage.className = 'board-stage';
@@ -197,9 +200,25 @@ export function renderMessage(stage, phrase, { onDismiss, onReply, replyLabel, i
     if (!moved) onDismiss();
   });
 
+  const controls = document.createElement('div');
+  controls.className = 'board-controls';
+
+  // **Speak is the owner's control, and Reply is the listener's.** They sit side by
+  // side and are labelled from different catalogues for that reason: the owner
+  // presses Speak, so it is in their language; the listener presses Reply, so it is
+  // in theirs. Audio is off until pressed -- nothing is spoken on open, on restore,
+  // or on changing a setting -- and a device with no voice for this language simply
+  // has no button, because text has to work regardless.
+  if (onSpeak) {
+    const speakButton = document.createElement('button');
+    speakButton.type = 'button';
+    speakButton.className = 'board-control board-speak';
+    speakButton.textContent = speakLabel;
+    speakButton.addEventListener('click', () => onSpeak());
+    controls.append(speakButton);
+  }
+
   if (onReply) {
-    const controls = document.createElement('div');
-    controls.className = 'board-controls';
     const reply = document.createElement('button');
     reply.type = 'button';
     reply.className = 'board-control';
@@ -210,8 +229,11 @@ export function renderMessage(stage, phrase, { onDismiss, onReply, replyLabel, i
     reply.dir = phrase.listener.dir;
     reply.addEventListener('click', onReply);
     controls.append(reply);
-    stage.append(controls);
   }
+  // A sibling of the surface, never a child: a button inside a button is invalid,
+  // and being a sibling is what structurally stops a control's click reaching the
+  // dismiss handler.
+  if (controls.childElementCount) stage.append(controls);
 
   fitMessage(big, surface);
   surface.focus();

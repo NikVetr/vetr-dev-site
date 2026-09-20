@@ -517,6 +517,123 @@ Every row is `confidence: 2`, which in this corpus means *sourced* and explicitl
 
 ---
 
+## C6 — Speech
+
+**Status: the adapter and the wiring are done; nothing has been heard.**
+`ui/platform/speech.js`, sixteen unit tests against a deterministic fake, one browser
+test, and a Speak control on the message.
+
+**The part that matters is what it refuses to say.** §6.2 forbids silently
+substituting a language, and the substitutions on offer here are real ones:
+
+- **Simplified Chinese never takes a Cantonese voice.** `zh-Hans` is a script tag,
+  not a voice; it maps to `zh-CN`, accepts `zh-SG`/`cmn`, falls back to `zh-TW` last,
+  and excludes `zh-HK` and `yue-*` outright. A bare `zh` voice is ambiguous and
+  skipped.
+- **Klingon and Quenya map to no voice at all**, which is the only correct answer for
+  a constructed language written in pIqaD and Tengwar. Sending their text to an
+  English voice would be a defect wearing the costume of a fallback. Tested: nothing
+  reaches the engine even with an English voice installed.
+- **Matching is on subtag boundaries**, because a prefix test hands Hausa (`ha`) to a
+  Hawaiian (`haw-US`) voice.
+- Retired ISO codes are accepted as aliases — `iw` for Hebrew, `in` for Indonesian,
+  `jw` for Javanese — because Java kept the 1989 replacements and Android's speech
+  locales inherit them.
+
+Remote voices are listed but never chosen automatically; `unknown` may be, since
+refusing everywhere `localService` is unimplemented would disable speech on whole
+platforms, but it is never *reported* as local. Every new utterance cancels the last,
+so "stronger" can never arrive after "stop".
+
+**Speak is the owner's control; Reply is the listener's.** They sit side by side and
+are labelled from different catalogues, because different people press them. Both are
+siblings of the message surface rather than children, which is what structurally
+stops a control's click reaching the dismiss handler.
+
+Audio is off until pressed. Nothing speaks on load, on restore, or on changing a
+setting, and a device with no voice for the language simply has no button — text
+never waits on audio.
+
+### Not verified, and not claimable
+
+No audio was heard on any device. Chromium here enumerates **zero** voices, which the
+browser test pins as a legitimate state rather than a failure. Everything in §9.2's
+physical matrix is outstanding: a real iPhone and a real Android, speaker against
+headphones against Bluetooth, silent mode, call interruption, resumed foreground,
+airplane-mode cold start, and whether any of the Mandarin is intelligible. The
+locale table is reasoned from ISO 639 and platform tagging conventions; **no device's
+actual voice inventory was consulted.**
+
+Deliberately absent: speak-on-selection (§1.2 puts it behind testing), voice-choice
+persistence (the adapter guarantees a stable id; storing it belongs with the other
+settings), and any embedded engine — §6.5 is explicit that a model runtime is not a
+prerequisite and it would not solve a measured problem here.
+
+---
+
+## C4 — The owner's own buttons
+
+**Status: complete** for everything but the portable package. `ui/board-store.js`,
+`ui/board-editor.js`, eleven unit tests and seven browser tests.
+
+### Two records, because removing a button is not deleting a sentence
+
+A **phrase** is something the owner wrote, which has no concept behind it and so
+carries its own text. A **placement** is the fact that a button sits on some node of
+some board, in some position. One phrase can have several placements. That shape is
+the whole reason `removePlacement` and `deletePhrase` are different operations: a
+reader tidying a board has not asked to destroy words they typed, and may have them
+on another board. Deleting warns when a phrase is placed more than once.
+
+### The boundary that matters most
+
+`ui/io.js` keeps `plg.edits.<pair>` for the *sheet*, and its flags decide what gets
+printed. Nothing in the board store writes there. Making a button to say "no
+peanuts" to a waiter must not add a row to every card the reader prints for that
+pair — §5.2's requirement — and a test asserts the sheet's own edits are
+**byte-identical** after a board round-trip. The one deliberate bridge is
+`fromSheetExtra`, which *copies* a studio entry onto a board so editing the copy
+cannot rewrite what the card prints.
+
+### The app does not translate, and the form says so
+
+There is no backend and inventing one is out of scope. Three fields — a short label,
+the complete sentence in the owner's language, the complete sentence in the
+listener's — and a line admitting why the third is empty. A half-written phrase is
+still saved, because the reader may be coming back to it, and is drawn on the board
+**disabled**: `resolvePhrase` refuses one, so it can never reach a listener, and
+hiding it would move every button after it. The preview shows the exact text that
+will be displayed, not an approximation of it.
+
+The editor opens from the grid and nowhere else. The listener must not find it by
+tapping, and the owner must not open it while holding the phone out to a stranger.
+
+### Three bugs found while building it
+
+- **A full disk poisoned every later save.** `queue = queue.then(...)` on a rejected
+  promise stays rejected, so one quota error would have stopped the reader saving
+  anything again — even after freeing space or shortening the sentence. The chain
+  now recovers while the caller still gets the rejection. Found by a test that was
+  written for something else.
+- **The board asked the disk what the reader had just typed.** `withOwn` re-read
+  storage on every repaint while the write was still queued, so a new button only
+  appeared after a reload. The page hydrates once and is authoritative; the editor
+  hands back a new value. Which is §5.3's rule that a late read must not overwrite a
+  fresh edit.
+- **A test harness that defeated its own persistence tests.** `addInitScript` runs on
+  every navigation, so clearing storage there wiped what a test had just written the
+  moment it reloaded. Both persistence tests passed alone and failed together until
+  that was found.
+
+### Not done
+
+The portable JSON package of §5.4 — export, import, conflict preview, size caps,
+rejection of unsafe keys and broken references. The store is shaped for it (versioned
+schema, phrases separable from placements) but none of it is written, and a board
+cannot yet be moved between installations.
+
+---
+
 ## The board, looked at rather than tested
 
 Four changes the owner asked for after using it, and one bug that found itself.

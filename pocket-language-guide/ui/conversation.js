@@ -19,6 +19,9 @@ import {
   validateBoard, resolvePhrase, missingPhrases, reduce, openBoard, currentNode,
 } from '../core/conversation.js';
 import { renderGrid, renderMessage, renderReply, clearStage } from './conversation-view.js';
+import { openBoardEditor } from './board-editor.js';
+import { speech } from './platform/speech.js';
+import { read as readPersonal, placedOn } from './board-store.js';
 import { applyStatic, loadCatalogue, loadUiLanguage, languageName, t } from './i18n.js';
 
 const $ = (/** @type {string} */ id) => /** @type {HTMLElement} */ (document.getElementById(id));
@@ -74,6 +77,7 @@ async function main() {
   // `scripts.csv` says Arabic script runs right to left.
   const dirOf = (/** @type {string} */ code) => /** @type {'ltr'|'rtl'} */ (
     corpus.scripts[corpus.languages[code]?.script]?.direction === 'rtl' ? 'rtl' : 'ltr');
+  /** @type {import('../core/conversation.js').ResolveContext} */
   const ctx = {
     corpus,
     listenerRows,
@@ -83,6 +87,17 @@ async function main() {
     listenerDir: dirOf(listener),
     ownerDir: dirOf(owner),
   };
+
+  // **Whether anything can say this language, asked once and re-asked if the list
+  // fills in later.** Browsers often return an empty voice list on first call and
+  // populate it afterwards, so a Speak control that was absent at first paint has to
+  // be able to appear. Nothing here makes a sound, and nothing waits on it: the text
+  // is drawn whatever this returns.
+  let canSpeak = speech.getCapabilities(listener).voices.length > 0;
+  speech.onVoicesChanged(() => {
+    const now = speech.getCapabilities(listener).voices.length > 0;
+    if (now !== canSpeak) { canSpeak = now; paint(); }
+  });
 
   $('board-pair').textContent = t('board.pair', {
     target: languageName(listener, corpus.languages[listener]?.exonym_en ?? listener),
@@ -109,6 +124,34 @@ async function main() {
   }
 
   let state = openBoard(board, params.get('replies') === '1');
+  const pair = `${listener}__${owner}`;
+  // Hydrated once. The page is authoritative from here; the editor hands back a new
+  // value rather than the page asking the disk what was just written.
+  let personal = readPersonal();
+
+  /**
+   * The node as the reader has it: the author's buttons, then their own.
+   *
+   * Appended rather than mixed in, and never sorted -- the author's arrangement is
+   * the one a reader has learned, and their own additions go where they put them.
+   * `custom` phrases carry their text, so `resolvePhrase` reads them out of the
+   * store rather than the corpus.
+   * @param {import('../core/conversation.js').BoardNode} node
+   */
+  const withOwn = (node) => {
+    const mine = placedOn(personal.data, `${boardId}/${state.path.at(-1)}`, pair);
+    ctx.custom = Object.fromEntries(mine.map((p) => [p.id, { owner: p.owner, listener: p.listener }]));
+    return {
+      ...node,
+      buttons: [
+        ...node.buttons,
+        ...mine.map((p) => /** @type {import('../core/conversation.js').BoardButton} */ ({
+          id: p.id, kind: 'message', colour: 'stay',
+          phraseRef: { kind: 'custom', id: p.id },
+        })),
+      ],
+    };
+  };
 
   /** @param {import('../core/conversation.js').BoardButton} button */
   const phraseOf = (button) => (button.phraseRef
@@ -120,6 +163,10 @@ async function main() {
     // No short label written, so the owner's own full wording is the label. Better
     // than the concept id, and it is the sentence they are about to show anyway.
     const phrase = phraseOf(button);
+    // A phrase the reader wrote carries its own short label; theirs wins, because
+    // they chose it for this button.
+    const own = personal.data.phrases[button.id];
+    if (own?.label) return own.label;
     return phrase?.owner.text ?? button.id;
   };
 
@@ -127,17 +174,22 @@ async function main() {
   const dispatch = (action) => {
     const next = reduce(state, action);
     if (next === state) return;
+    // **Silence before anything else.** Never queue the next sentence behind the
+    // last: "stronger" arriving after "stop" is the worst thing this could do.
+    speech.stop();
     state = next;
     paint();
   };
 
   function paint() {
     const stage = $('board-stage');
-    const node = currentNode(board, state);
+    const node = withOwn(currentNode(board, state));
 
+    if (state.view !== 'grid') $('board-edit').hidden = true;
     if (state.view === 'grid') {
       clearStage(stage);
       $('board-up').hidden = state.path.length < 2;
+      $('board-edit').hidden = false;
       $('board-up-label').textContent = t('board.up');
       renderGrid($('board-grid'), node, {
         lang: owner,
@@ -175,6 +227,10 @@ async function main() {
         onReply: state.replies && set ? () => dispatch({ type: 'reply' }) : null,
         replyLabel: theirs.t('board.reply'),
         colour: button.colour,
+        // The owner presses this one, so it is labelled in their language -- unlike
+        // Reply, which the listener presses.
+        onSpeak: canSpeak ? () => { speech.speakPhrase(phrase).catch(() => {}); } : null,
+        speakLabel: t('board.speak'),
       });
       return;
     }
@@ -213,6 +269,21 @@ async function main() {
   }
 
   $('board-up').addEventListener('click', () => dispatch({ type: 'up' }));
+
+  // **Owner-only, and reachable from the grid alone.** Never from a message or a
+  // reply: the person being spoken to must not find the editor by tapping, and the
+  // owner must not open it while holding the phone out to a stranger.
+  const editButton = $('board-edit');
+  editButton.textContent = t('editor.open');
+  editButton.addEventListener('click', () => openBoardEditor({
+    at: `${boardId}/${state.path.at(-1)}`,
+    pair,
+    owner,
+    listener,
+    listenerDir: ctx.listenerDir,
+    state: personal,
+    onChange: (next) => { personal = { ...personal, data: next }; paint(); },
+  }));
 
   // Escape and the system Back gesture are alternative routes out, not visible
   // controls added to the message. Inside a reply they unwind one view at a time,

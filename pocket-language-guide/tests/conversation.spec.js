@@ -413,3 +413,179 @@ test('the way back does not look like something you are saying', async ({ page }
   );
   expect(roles).not.toContain(bg);
 });
+
+// --- the owner's own buttons (C4) -------------------------------------------
+
+/** @param {import('@playwright/test').Page} page */
+async function addOwn(page, label, own, theirs) {
+  await page.locator('#board-edit').click();
+  const box = page.locator('.board-editor');
+  await expect(box).toBeVisible();
+  const fields = box.locator('.board-editor-field input');
+  await fields.nth(0).fill(label);
+  await fields.nth(1).fill(own);
+  if (theirs !== undefined) await fields.nth(2).fill(theirs);
+  await box.getByRole('button', { name: 'Save', exact: true }).click();
+  return box;
+}
+
+// **Cleared once, not on every navigation.** `addInitScript` runs again on each
+// `goto` and each `reload`, so clearing storage there wipes what the test just
+// wrote the moment it reloads -- which is exactly what the persistence tests below
+// are for, and both of them passed alone and failed together until this was found.
+test.beforeEach(async ({ page }) => {
+  await page.goto(BOARD);
+  await page.evaluate(() => localStorage.clear());
+});
+
+test('a phrase you write appears on the board and survives a reload', async ({ page }) => {
+  await page.goto(BOARD);
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  const before = await page.locator('.board-cell').count();
+
+  const box = await addOwn(page, 'No peanuts', 'I cannot eat peanuts', '我不能吃花生');
+  await box.locator('.board-editor-close').click();
+  await expect(page.locator('.board-cell')).toHaveCount(before + 1);
+
+  // Placement is the reader's and is kept. Nothing reorders by use.
+  await page.reload();
+  await expect(page.locator('.board-cell')).toHaveCount(before + 1);
+  const labels = await page.locator('.board-cell').allTextContents();
+  expect(labels.at(-1)).toBe('No peanuts');
+  // ...and it says the listener's sentence, not the owner's.
+  await page.locator('.board-cell').last().click();
+  await expect(page.locator('.board-message-text')).toHaveText('我不能吃花生');
+  await expect(page.locator('.board-message-gloss')).toHaveText('I cannot eat peanuts');
+});
+
+test('the app does not pretend to translate, and says so', async ({ page }) => {
+  // §5.2: there is no backend and inventing one is out of scope, so the form has to
+  // admit it rather than leave a reader waiting for a translation that never comes.
+  await page.goto(BOARD);
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('#board-edit').click();
+  await expect(page.locator('.board-editor')).toContainText(/does not translate/i);
+
+  // A half-written phrase saves -- the reader may be coming back to it -- and stays
+  // off the board, because `resolvePhrase` will not resolve one.
+  const fields = page.locator('.board-editor .board-editor-field input');
+  await fields.nth(0).fill('Half');
+  await fields.nth(1).fill('Only my side');
+  await page.locator('.board-editor').getByRole('button', { name: 'Save', exact: true }).click();
+  await expect(page.locator('.board-editor-list li')).toHaveCount(1);
+  await page.locator('.board-editor-close').click();
+  // Drawn, and drawn unavailable -- the same treatment an author's button gets when
+  // the corpus cannot supply it, because the rule is the same: a grid that hides a
+  // gap is a grid whose buttons have moved. `resolvePhrase` refuses a half-written
+  // phrase, so it can never reach a listener.
+  const half = page.locator('.board-cell', { hasText: 'Half' });
+  await expect(half).toHaveCount(1);
+  await expect(half).toBeDisabled();
+});
+
+test('the preview is the exact text the listener will be shown', async ({ page }) => {
+  await page.goto(BOARD);
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('#board-edit').click();
+  const fields = page.locator('.board-editor .board-editor-field input');
+  await fields.nth(2).fill('我对花生过敏');
+  await expect(page.locator('.board-editor-preview')).toHaveText('我对花生过敏');
+  await expect(page.locator('.board-editor-preview')).toHaveAttribute('lang', 'zh-Hans');
+});
+
+test('removing a button from a screen is not deleting the phrase', async ({ page }) => {
+  await page.goto(BOARD);
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  const before = await page.locator('.board-cell').count();
+  const box = await addOwn(page, 'Tea please', 'I would like tea', '我想要茶');
+
+  await box.getByRole('button', { name: 'Remove from this screen' }).click();
+  await expect(box.locator('.board-editor-list li')).toHaveCount(0);
+  await box.locator('.board-editor-close').click();
+  await expect(page.locator('.board-cell')).toHaveCount(before);
+
+  // The sentence itself is still stored -- losing a placement must not lose words
+  // the reader typed by hand.
+  const kept = await page.evaluate(() => JSON.parse(localStorage.getItem('plg.boards') ?? '{}'));
+  expect(Object.values(kept.phrases ?? {})).toHaveLength(1);
+});
+
+test('a board button never changes what a sheet prints', async ({ page }) => {
+  // **The semantic boundary in §5.2.** The studio keeps `plg.edits.<pair>`, whose
+  // flags decide what is printed. Making a button to say "no peanuts" to a waiter
+  // must not add a row to every card the reader prints for that pair.
+  await page.goto(BOARD);
+  await page.evaluate(() => localStorage.setItem('plg.edits.zh-Hans__en', JSON.stringify({
+    overrides: {}, extras: [{ concept_id: 'own-1', gloss: 'mine', script: '我的' }],
+  })));
+  const before = await page.evaluate(() => localStorage.getItem('plg.edits.zh-Hans__en'));
+
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  const box = await addOwn(page, 'No peanuts', 'I cannot eat peanuts', '我不能吃花生');
+  await box.getByRole('button', { name: 'Remove from this screen' }).click();
+  await box.locator('.board-editor-close').click();
+
+  expect(await page.evaluate(() => localStorage.getItem('plg.edits.zh-Hans__en'))).toBe(before);
+});
+
+test('the editor is owner-only and cannot be reached from a message', async ({ page }) => {
+  // The listener must not find it by tapping, and the owner must not open it while
+  // holding the phone out to a stranger.
+  await page.goto(`${BOARD}&replies=1`);
+  await expect(page.locator('#board-edit')).toBeVisible();
+  await page.locator('[data-button="avoid"]').click();
+  await expect(page.locator('#board-edit')).toBeHidden();
+  await page.locator('.board-controls button').click();
+  await expect(page.locator('#board-edit')).toBeHidden();
+  await page.locator('.board-close').click();
+  await page.locator('.board-message').click();
+  await expect(page.locator('#board-edit')).toBeVisible();
+});
+
+test('damaged storage is reported rather than presented as empty', async ({ page }) => {
+  // A reader whose storage is corrupt has lost sentences they typed by hand,
+  // possibly about an allergy. An editor that opens blank invites them to type over
+  // what is still there.
+  await page.goto(BOARD);
+  await page.evaluate(() => localStorage.setItem('plg.boards', '{not json'));
+  await page.reload();
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('#board-edit').click();
+  await expect(page.locator('.board-editor-status')).toContainText(/could not be read/i);
+  // ...and the unreadable record is still on disk, not overwritten by the read.
+  expect(await page.evaluate(() => localStorage.getItem('plg.boards'))).toMatch(/not json/);
+});
+
+test('a device with no voice still shows every message', async ({ page }) => {
+  // A01. Chromium here enumerates no voices, which is the case worth pinning: text
+  // must never wait on audio, and a board with no Speak control is a working board.
+  await page.goto(BOARD);
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('[data-button="stop"]').click();
+  await expect(page.locator('.board-message-text')).toHaveText(/\p{Script=Han}/u);
+  // Nothing was spoken, and nothing is pending, on open.
+  expect(await page.evaluate(() => speechSynthesis.speaking || speechSynthesis.pending)).toBe(false);
+});
+
+test('Speak is the owner’s control and Reply is the listener’s', async ({ page }) => {
+  // They sit side by side and are labelled from different catalogues, because
+  // different people press them. Asserted through a stubbed voice list, since this
+  // machine has none — the point is which language each label is in, not audio.
+  await page.addInitScript(() => {
+    const voice = { name: 'Test', lang: 'zh-CN', localService: true, default: true, voiceURI: 'test' };
+    Object.defineProperty(speechSynthesis, 'getVoices', { value: () => [voice] });
+  });
+  await page.goto(`${BOARD}&replies=1`);
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('[data-button="avoid"]').click();
+
+  const speak = page.locator('.board-speak');
+  await expect(speak).toHaveText('Speak');
+  // The listener's control, in Han script; the owner's, in Latin. Different people.
+  await expect(page.locator('.board-controls button').last()).toHaveText(/\p{Script=Han}/u);
+
+  // Speak is a sibling of the message surface, not a child -- which is what stops
+  // its click reaching the dismiss handler. Pressing it must not close the message.
+  await speak.click();
+  await expect(page.locator('.board-message-text')).toBeVisible();
+});
