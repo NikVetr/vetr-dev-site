@@ -336,7 +336,7 @@ export function renderMessage(stage, phrase,
  *
  * @param {HTMLElement} stage
  * @param {import('../core/conversation.js').ResolvedPhrase} question
- * @param {{id:string, phrase:import('../core/conversation.js').ResolvedPhrase}[]} answers
+ * @param {{id:string, phrase:import('../core/conversation.js').ResolvedPhrase, entry?:boolean}[]} answers
  * @param {object} config
  * @param {(id:string)=>void} config.onAnswer
  * @param {()=>void} config.onCancel
@@ -361,11 +361,15 @@ export function renderReply(stage, question, answers, { onAnswer, onCancel, clos
   list.className = 'board-answers';
   list.lang = question.listener.lang;
   list.dir = question.listener.dir;
-  for (const { id, phrase } of answers) {
+  for (const { id, phrase, entry } of answers) {
     const choice = document.createElement('button');
     choice.type = 'button';
     choice.className = 'board-answer';
-    // The listener's own reading of their own answer.
+    // The one that opens a keypad is marked, because it is the only answer here
+    // that does not answer anything by itself.
+    if (entry) choice.classList.add('board-answer-entry');
+    // The listener's own reading of their own answer -- including a quantity, which
+    // is formatted from a number rather than stored as a sentence.
     choice.textContent = phrase.listener.text;
     choice.addEventListener('click', () => onAnswer(id));
     list.append(choice);
@@ -441,4 +445,121 @@ export function fitMessage(text, box) {
   };
   run();
   if (document.fonts?.status !== 'loaded') document.fonts?.ready.then(run);
+}
+
+/**
+ * The keypad, for an answer the grid did not offer.
+ *
+ * **The question stays on screen throughout**, exactly as it does behind the answer
+ * list — someone typing a number should not have to remember what they are
+ * answering. Confirm and Cancel are both present and both say what they do; cancel
+ * goes back to the answers, because a listener who opened this by mistake wanted the
+ * list they were just looking at.
+ *
+ * What is confirmed is a **number and a unit**, never a string. The owner's reading
+ * of it is formatted from that value in their own language, so the two sides cannot
+ * drift and no wording has to exist for it in any of the fifty-one.
+ *
+ * @param {HTMLElement} stage
+ * @param {import('../core/conversation.js').ResolvedPhrase} question
+ * @param {object} config
+ * @param {(value:import('../core/duration.js').Duration)=>void} config.onConfirm
+ * @param {()=>void} config.onCancel
+ * @param {(raw:string, unit:'minute'|'hour'|'day')=>string|null} config.check
+ *   validates and returns the listener's reading of it, or null
+ * @param {Record<string,string>} config.words  labels, in the listener's language
+ * @param {import('../core/conversation.js').ColourRole} [config.colour]
+ */
+export function renderEntry(stage, question, { onConfirm, onCancel, check, words, colour }) {
+  stage.replaceChildren();
+  stage.hidden = false;
+  stage.className = 'board-stage board-stage-entry';
+  if (colour) stage.classList.add(`board-role-${colour}`);
+
+  const asked = document.createElement('p');
+  asked.className = 'board-asked';
+  asked.textContent = question.listener.text;
+  asked.lang = question.listener.lang;
+  asked.dir = question.listener.dir;
+
+  const amount = document.createElement('input');
+  // `inputmode` rather than `type="number"`, which brings spinners nobody wants on a
+  // phone and a locale-dependent parse. The value is validated as digits anyway.
+  amount.type = 'text';
+  amount.inputMode = 'numeric';
+  amount.className = 'board-entry-amount';
+  amount.setAttribute('aria-label', words.amount);
+
+  /** @type {'minute'|'hour'|'day'} */ let unit = 'minute';
+  const units = document.createElement('div');
+  units.className = 'board-entry-units';
+  units.setAttribute('role', 'group');
+  units.setAttribute('aria-label', words.unit);
+  /** @type {HTMLButtonElement[]} */ const unitButtons = [];
+  for (const which of /** @type {const} */ (['minute', 'hour', 'day'])) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'board-entry-unit';
+    b.textContent = words[which];
+    b.dataset.unit = which;
+    b.addEventListener('click', () => {
+      unit = which;
+      for (const other of unitButtons) {
+        other.classList.toggle('board-entry-unit-on', other.dataset.unit === which);
+      }
+      sync();
+    });
+    unitButtons.push(b);
+    units.append(b);
+  }
+  unitButtons[0].classList.add('board-entry-unit-on');
+
+  // The exact text the owner will be shown, updating as it is typed. The same rule
+  // the custom-phrase editor follows: a preview that is not the thing itself has
+  // misled whoever read it.
+  const preview = document.createElement('p');
+  preview.className = 'board-entry-preview';
+  preview.lang = question.listener.lang;
+  preview.dir = question.listener.dir;
+
+  const confirm = document.createElement('button');
+  confirm.type = 'button';
+  confirm.className = 'board-control board-entry-confirm';
+  confirm.textContent = words.confirm;
+
+  const sync = () => {
+    const said = check(amount.value, unit);
+    preview.textContent = said ?? words.invalid;
+    preview.classList.toggle('board-entry-preview-empty', !said);
+    confirm.disabled = !said;
+  };
+  amount.addEventListener('input', sync);
+  sync();
+
+  confirm.addEventListener('click', () => {
+    if (check(amount.value, unit)) onConfirm({ amount: Number(amount.value.trim()), unit });
+  });
+  // Enter confirms, which is what a numeric keypad's own key will send.
+  amount.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' && !confirm.disabled) confirm.click();
+  });
+
+  const cancel = document.createElement('button');
+  cancel.type = 'button';
+  cancel.className = 'board-control board-close';
+  cancel.textContent = words.cancel;
+  cancel.addEventListener('click', onCancel);
+
+  const row = document.createElement('div');
+  row.className = 'board-entry-row';
+  row.lang = question.listener.lang;
+  row.dir = question.listener.dir;
+  row.append(amount, units);
+
+  const actions = document.createElement('div');
+  actions.className = 'board-controls';
+  actions.append(cancel, confirm);
+
+  stage.append(asked, row, preview, actions);
+  amount.focus();
 }

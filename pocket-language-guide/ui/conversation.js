@@ -18,7 +18,11 @@ import { loadCorpus, loadLanguage } from '../core/pack.js';
 import {
   validateBoard, resolvePhrase, missingPhrases, reduce, openBoard, currentNode,
 } from '../core/conversation.js';
-import { renderGrid, renderMessage, renderReply, clearStage } from './conversation-view.js';
+import {
+  renderGrid, renderMessage, renderReply, renderEntry, clearStage,
+} from './conversation-view.js';
+import { resolveValue } from '../core/conversation.js';
+import { parseAmount, formatDuration, unitName } from '../core/duration.js';
 import { openBoardEditor } from './board-editor.js';
 import { speech } from './platform/speech.js';
 import { read as readPersonal, placedOn } from './board-store.js';
@@ -239,13 +243,59 @@ async function main() {
     if (!set) { dispatch({ type: 'dismiss' }); return; }
 
     if (state.view === 'reply') {
-      const answers = set.buttons
-        .map((/** @type {any} */ b) => ({ id: b.id, phrase: phraseOf(b) }))
-        .filter((/** @type {any} */ a) => a.phrase);
+      // Three kinds of answer on one grid: a phrase from the corpus, a quantity
+      // formatted from a number, and the one that opens a keypad. All three are
+      // drawn the same way, because to the person tapping they are the same act.
+      const answers = set.buttons.map((/** @type {any} */ b) => {
+        if (b.kind === 'value') return { id: b.id, phrase: resolveValue(b.value, ctx) };
+        if (b.kind === 'entry') {
+          return {
+            id: b.id,
+            entry: true,
+            phrase: /** @type {any} */ ({
+              listener: { text: theirs.t('board.otherAmount'), lang: listener, dir: ctx.listenerDir },
+              owner: { text: t('board.otherAmount'), lang: owner, dir: ctx.ownerDir },
+            }),
+          };
+        }
+        return { id: b.id, phrase: phraseOf(b) };
+      }).filter((/** @type {any} */ a) => a.phrase);
+
       renderReply(stage, phrase, answers, {
-        onAnswer: (id) => dispatch({ type: 'answer', answerId: id }),
+        onAnswer: (id) => {
+          const chosen = set.buttons.find((/** @type {any} */ b) => b.id === id);
+          if (chosen?.kind === 'entry') { dispatch({ type: 'enter' }); return; }
+          dispatch({ type: 'answer', answerId: id, value: chosen?.value });
+        },
         onCancel: () => dispatch({ type: 'cancelReply' }),
         closeLabel: theirs.t('board.close'),
+        colour: button.colour,
+      });
+      return;
+    }
+
+    if (state.view === 'entry') {
+      renderEntry(stage, phrase, {
+        onCancel: () => dispatch({ type: 'cancelEntry' }),
+        onConfirm: (value) => dispatch({ type: 'confirmEntry', value }),
+        // Validated and previewed in one call, so the button's enabled state and the
+        // text under it can never disagree about whether the input is an answer.
+        check: (raw, unit) => {
+          const read = parseAmount(raw, unit);
+          return read.ok ? formatDuration(read.duration, listener) : null;
+        },
+        words: {
+          amount: theirs.t('board.amount'),
+          unit: theirs.t('board.unit'),
+          // From CLDR, not from a catalogue: three more keys in fifty-one languages
+          // would each be an invitation to invent a word that already exists.
+          minute: unitName('minute', listener) ?? t('board.minutes'),
+          hour: unitName('hour', listener) ?? t('board.hours'),
+          day: unitName('day', listener) ?? t('board.days'),
+          confirm: theirs.t('board.confirm'),
+          cancel: theirs.t('board.close'),
+          invalid: theirs.t('board.notAnAmount'),
+        },
         colour: button.colour,
       });
       return;
@@ -254,8 +304,12 @@ async function main() {
     // The answer, read back to the owner. Their language is the big text now, and
     // the listener's the small one -- the presentation reverses, the meaning does
     // not, and neither does whose sentence it is.
+    // A quantity beats a named answer: it is what the keypad produced, and it has no
+    // button behind it to look up.
     const chosen = set.buttons.find((/** @type {any} */ b) => b.id === state.answerId);
-    const answer = chosen && phraseOf(chosen);
+    const answer = state.answerValue
+      ? resolveValue(state.answerValue, ctx)
+      : (chosen && phraseOf(chosen));
     if (!answer) { dispatch({ type: 'dismiss' }); return; }
     renderMessage(stage, {
       ...answer, listener: answer.owner, owner: answer.listener,
@@ -264,7 +318,7 @@ async function main() {
       onReply: null,
       replyLabel: '',
       incoming: true,
-      colour: chosen.colour,
+      colour: chosen?.colour ?? button.colour,
     });
   }
 

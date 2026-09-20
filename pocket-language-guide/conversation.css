@@ -391,6 +391,59 @@
 .board-answer:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .board-close { align-self: center; flex: 0 0 auto; }
 
+/* The answer that opens a keypad rather than answering anything: dashed, the same
+   way a submenu says "not yet" on the owner's grid. */
+.board-answer-entry { border-style: dashed; }
+
+/* --- the keypad --------------------------------------------------------------- */
+
+/* Centred, not stacked at the top: the keypad is four controls on an otherwise
+   empty screen, and pushing them under the question left most of it blank. */
+.board-stage-entry { justify-content: center; gap: var(--space-3); }
+.board-entry-row { display: flex; gap: var(--space-2); align-items: stretch; flex-wrap: wrap; }
+.board-entry-amount {
+  flex: 1 1 6rem;
+  min-inline-size: 5rem;
+  font-size: clamp(1.6rem, 8vw, 3rem);
+  text-align: center;
+  padding: var(--space-2);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+}
+.board-entry-units { display: flex; gap: var(--space-1); flex: 2 1 12rem; }
+.board-entry-unit {
+  flex: 1 1 0;
+  min-block-size: 3.5rem;
+  font-size: var(--fs-1);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+}
+/* Which unit is in force, marked rather than merely tinted -- the number beside it
+   means something different for each, so this is not decoration. */
+.board-entry-unit-on {
+  background: var(--ink);
+  color: #fff;
+  border-color: var(--ink);
+  font-weight: 600;
+}
+/* The exact text the owner will read, updating as it is typed. A preview that is
+   not the thing itself has misled whoever read it. */
+.board-entry-preview {
+  margin: 0;
+  font-size: clamp(1.4rem, 7vw, 2.6rem);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.board-entry-preview-empty { font-size: var(--fs-0); color: var(--muted); font-style: italic; }
+/* On a coloured stage the preview needs the treatment the question already had --
+   it was left at `--ink`, which is dark type on a saturated fill. */
+.board-stage-entry[class*="board-role-"] .board-entry-preview { color: #fff; }
+.board-stage-entry[class*="board-role-"] .board-entry-preview-empty { color: rgb(255 255 255 / 0.8); }
+.board-entry-confirm:disabled { opacity: 0.45; cursor: not-allowed; }
+
 /* Landscape on a phone is short, not merely wide: the message has to give back the
    space the gloss and the controls were taking. */
 @media (orientation: landscape) and (max-height: 500px) {

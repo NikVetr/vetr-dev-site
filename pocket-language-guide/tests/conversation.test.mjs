@@ -12,7 +12,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import {
   validateBoard, phrasesOf, resolvePhrase, missingPhrases,
-  reduce, openBoard, currentNode,
+  reduce, openBoard, currentNode, resolveValue,
 } from '../core/conversation.js';
 import { loadCorpus } from '../core/pack.js';
 
@@ -244,4 +244,63 @@ test('the real corpus can answer a board, with no sheet in sight', async () => {
     'hotel-requests.another-towel-please']) {
     assert.ok(corpus.concepts[id], `${id} is not in the corpus, so it cannot be indexed`);
   }
+});
+
+// --- answers that are a quantity ---------------------------------------------
+
+test('a structured answer is said to both people, from one value', () => {
+  // No stored text, so the two sides cannot disagree, and no language needs a row.
+  const said = resolveValue({ amount: 15, unit: 'minute' }, ctx);
+  assert.equal(said?.listener.text, '15分钟');
+  assert.equal(said?.owner.text, '15 minutes');
+  assert.equal(said?.listener.lang, 'zh-Hans');
+  assert.equal(said?.provenance, 'cldr');
+});
+
+test('a language with no formatter gets no quantity, rather than an English one', () => {
+  // `Intl` falls back to the runtime default for a tag it does not know, which would
+  // put "15 minutes" on a Klingon screen.
+  assert.equal(resolveValue({ amount: 15, unit: 'minute' }, { ...ctx, listener: 'tlh' }), null);
+  assert.equal(resolveValue({ amount: 15, unit: 'minute' }, { ...ctx, owner: 'qya' }), null);
+});
+
+test('a board may not carry a quantity that is not one', () => {
+  const bad = structuredClone(board);
+  bad.replySets.ok.buttons.push({ id: 'v1', kind: 'value', value: { amount: 0, unit: 'minute' } });
+  bad.replySets.ok.buttons.push({ id: 'v2', kind: 'value', value: { amount: 5, unit: 'fortnight' } });
+  bad.replySets.ok.buttons.push({ id: 'v3', kind: 'value' });
+  bad.replySets.ok.buttons.push({ id: 'e1', kind: 'entry', entry: 'parsecs' });
+  const problems = validateBoard(bad);
+  assert.equal(problems.filter((p) => p.includes('whole amount')).length, 3, problems.join('; '));
+  assert.ok(problems.some((p) => p.includes('unknown entry parsecs')));
+});
+
+test('the keypad is reached from the answers and cancels back to them', () => {
+  let s = openBoard(board, true);
+  s = reduce(s, { type: 'open', buttonId: 'hurts', kind: 'message' });
+  s = reduce(s, { type: 'reply' });
+  s = reduce(s, { type: 'enter' });
+  assert.equal(s.view, 'entry');
+  // Back to the list they were just looking at, not to the question and not to the
+  // grid: someone who opened the keypad by mistake wanted the answers.
+  assert.equal(reduce(s, { type: 'cancelEntry' }).view, 'reply');
+
+  s = reduce(s, { type: 'confirmEntry', value: { amount: 45, unit: 'minute' } });
+  assert.equal(s.view, 'answer');
+  assert.deepEqual(s.answerValue, { amount: 45, unit: 'minute' });
+  // The value travels, not the text of one -- so the owner's reading of it is
+  // formatted fresh in their own language.
+  assert.equal(resolveValue(/** @type {any} */ (s.answerValue), ctx)?.owner.text, '45 minutes');
+
+  // Dismissing clears it, so the next message cannot inherit the last answer.
+  s = reduce(s, { type: 'dismiss' });
+  assert.equal(s.view, 'grid');
+  assert.equal(s.answerValue, null);
+});
+
+test('the keypad cannot be opened from anywhere but the answers', () => {
+  let s = openBoard(board, true);
+  assert.deepEqual(reduce(s, { type: 'enter' }), s);
+  s = reduce(s, { type: 'open', buttonId: 'hurts', kind: 'message' });
+  assert.deepEqual(reduce(s, { type: 'enter' }), s);
 });

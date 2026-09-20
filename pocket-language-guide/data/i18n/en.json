@@ -453,5 +453,13 @@
   "editor.none": "You have not added any buttons to this screen yet.",
   "editor.damaged": "Your saved buttons could not be read. Nothing has been overwritten \u2014 do not add new ones until this is sorted out.",
   "board.speak": "Speak",
-  "board.canAnswer": "They can answer this one"
+  "board.canAnswer": "They can answer this one",
+  "board.otherAmount": "Another amount\u2026",
+  "board.amount": "How many",
+  "board.unit": "Minutes, hours or days",
+  "board.minutes": "minutes",
+  "board.hours": "hours",
+  "board.days": "days",
+  "board.confirm": "Confirm",
+  "board.notAnAmount": "Enter a whole number"
 }

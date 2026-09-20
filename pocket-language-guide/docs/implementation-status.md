@@ -985,3 +985,70 @@ catches the bug it was written for (`button:hover` in `style.css` outranks a bar
 design as well.
 
 **Gate:** 8/8 checks, 880 concepts / 0 errors, 161 browser tests, 633 unit tests.
+
+## Batch B — answers that are a quantity
+
+"How long is the wait?" is answered with a number and a unit, and that is the one
+kind of answer this project does not have to translate. `core/duration.js` stores
+`{ amount: 15, unit: 'minute' }` and formats it per side at the moment of display.
+
+**This works in all fifty-one natural languages at once, with no new rows.** CLDR —
+data every browser already ships — carries Russian's минута / минуты / минут, Polish's
+22 *minuty*, Arabic's دقائق, Mandarin's 15分钟, and Bengali and Burmese in *their own
+numerals* (১৫, ၁၅). None of it is written down in this repository and none of it can
+go stale. The keypad's three unit buttons come from the same place, via
+`Intl.formatToParts`: three more catalogue keys in fifty-one languages would each
+have been an invitation to invent a word that already exists.
+
+**It refuses rather than guesses.** `Intl` falls back to the runtime's default locale
+for a tag it has never heard of, which would put "15 minutes" on a Klingon screen —
+the silent substitution this project refuses everywhere else. `supportedLocalesOf` is
+asked first, and the two constructed languages come back as `null`, which is the same
+answer the corpus gives for them.
+
+The flow: the wait question carries a reply set of *no wait*, six common durations,
+*another amount…*, *I don't know* and *none of these*. The keypad has an amount, a
+unit, a live preview of the exact text the listener will read, and Confirm/Cancel.
+The question stays on screen throughout. Cancel returns to the answers, not to the
+question and not to the grid. Confirm shows the owner the same value formatted in
+their own language — the **value** travels, never the text of one, so the two sides
+cannot disagree.
+
+`parseAmount` refuses `0`, `-5`, `1.5`, `abc` and `900`. An answer nobody meant is
+worse here than no answer, because it is shown to a stranger as fact.
+
+Three concepts are **indexed rather than written**: the question itself
+(`trail-transport.how-long-is-the-wait`, already universal), `social-basics.i-do-not-know`,
+and `massage-spa.reply-none-of-these`. One was added.
+
+### A board answer reached every printed card
+
+The added concept went into `quick-responses`, which is semantically right and is
+`default_on=1` and universal — so it printed on **every card**, moved four lines of
+the reference sheet, and staled all 2,756 packs. Three tests caught it: the golden
+baseline, a drill test whose question pool had changed, and the offline board test.
+
+I had said earlier that board content cannot move a printed sheet. That was true of
+`massage-spa` because it is `default_on=0` and scoped; it is not a property of board
+content, and I overstated it.
+
+The fix uses the mechanism that already exists rather than adding one: a
+**`board-answers` section with `default_on=0`** — "in the bank, not on the card",
+which is exactly what a listener's reply is. The golden passes again, no re-render
+was needed, and *board display stays independent of print layout* now holds
+structurally rather than by luck.
+
+### Also found
+
+`validateBoard` walked `board.nodes` only, so **reply-set buttons had never been
+validated** — an unknown kind, a broken `phraseRef` or a duplicate id passed and
+failed at the reader instead. Pre-existing; they are in the walk now, while staying
+out of the reachability check, which is a question about the grid.
+
+### Open, and not acted on
+
+`我不知道` is correct as an answer, but mainland service staff would more often say
+`我不清楚` or `不好说`. That is register, not error, and `social-basics.i-do-not-know`
+is general-purpose across the corpus — retuning it for one reply grid would change
+every other use. A softer staff form would have to be a new concept. Flagged for the
+owner rather than decided.

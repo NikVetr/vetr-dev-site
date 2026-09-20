@@ -59,3 +59,4 @@ body-parts,emergency,alert,3,person-standing,Body parts,57,universal,core;health
 lost-rescue,emergency,alert,1,search,Lost items + rescue,58,universal,core;health,0.86,1
 police-consulate,emergency,alert,1,shield-alert,"Police, theft + consulate",59,universal,core,0.88,1
 massage-spa,hotel,stay,3,leaf,Massage + spa,60,universal,lodging,0.38,0
+board-answers,social,comm,3,leaf,Answers they may give,61,universal,core,0.36,0

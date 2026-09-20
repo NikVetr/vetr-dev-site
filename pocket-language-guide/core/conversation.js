@@ -29,6 +29,7 @@
 // meanings the corpus genuinely cannot say.
 
 import { appliesTo } from './pack.js';
+import { formatDuration, supports as supportsUnits } from './duration.js';
 
 /** How many levels of submenu a board may nest. Deeper is a menu tree, not a board. */
 const MAX_DEPTH = 3;
@@ -36,11 +37,15 @@ const MAX_DEPTH = 3;
 const MAX_BUTTONS = 12;
 /** @type {Set<string>} The sheet's five section-role colours, and no others. */
 const COLOURS = new Set(['comm', 'money', 'move', 'stay', 'alert']);
+/** @type {Set<string>} Units a structured answer may be counted in. */
+const UNITS = new Set(['minute', 'hour', 'day']);
 
 /**
  * @typedef {Object} BoardButton
  * @property {string} id            stable placement, not a label and not an index
- * @property {'message'|'submenu'} kind
+ * @property {'message'|'submenu'|'value'|'entry'} kind
+ * @property {import('./duration.js').Duration} [value]  for `value`: what it answers
+ * @property {'duration'} [entry]   for `entry`: which keypad it opens
  * @property {string} [nodeId]      for `submenu`: the child node
  * @property {PhraseRef} [phraseRef] for `message`: what it says
  * @property {string} [labelKey]    optional short interface wording, never spoken
@@ -114,10 +119,12 @@ const COLOURS = new Set(['comm', 'money', 'move', 'stay', 'alert']);
  * the board and not the last thing that was said.
  * @typedef {Object} BoardState
  * @property {string} boardId
- * @property {'grid'|'message'|'reply'|'answer'} view
+ * @property {'grid'|'message'|'reply'|'answer'|'entry'} view
  * @property {string[]} path            node ids, deepest last; never empty
  * @property {string|null} buttonId     the message being shown, when there is one
  * @property {string|null} answerId     the reply chosen, in the `answer` view
+ * @property {import('./duration.js').Duration|null} [answerValue]  a typed or tapped
+ *   quantity, when the answer is one. Structured, never the text of one.
  * @property {boolean} replies          whether this session offers replies at all
  */
 
@@ -141,7 +148,17 @@ export function validateBoard(board) {
   if (!nodes[board.rootNodeId]) problems.push(`rootNodeId ${board.rootNodeId} is not a node`);
 
   /** @type {Set<string>} */ const buttonIds = new Set();
-  for (const [nodeId, node] of Object.entries(nodes)) {
+  // **Reply sets are buttons too, and were not being checked.** This walked
+  // `board.nodes` alone, so a reply carrying an unknown kind, a broken `phraseRef`
+  // or a duplicate id passed validation and failed at the reader instead. They live
+  // beside the nodes rather than inside them because they are reached from a message
+  // and not from the grid -- which is a navigation fact, not a reason to trust them.
+  const everyNode = Object.entries({
+    ...nodes,
+    ...Object.fromEntries(Object.entries(board.replySets ?? {})
+      .map(([id, set]) => [`replySets/${id}`, set])),
+  });
+  for (const [nodeId, node] of everyNode) {
     const buttons = /** @type {any} */ (node)?.buttons;
     if (!Array.isArray(buttons) || !buttons.length) {
       problems.push(`${nodeId}: no buttons`);
@@ -163,7 +180,16 @@ export function validateBoard(board) {
       if (button.colour && !COLOURS.has(button.colour)) {
         problems.push(`${key}: colour ${button.colour} is not one of ${[...COLOURS].join(', ')}`);
       }
-      if (button.kind === 'submenu') {
+      if (button.kind === 'value') {
+        // A quantity, not a sentence: the one answer that needs no translation, and
+        // therefore the one that has to be checked structurally instead.
+        const v = button.value;
+        if (!v || !Number.isInteger(v.amount) || v.amount < 1 || !UNITS.has(v.unit)) {
+          problems.push(`${key}: value must be a whole amount and one of ${[...UNITS].join(', ')}`);
+        }
+      } else if (button.kind === 'entry') {
+        if (button.entry !== 'duration') problems.push(`${key}: unknown entry ${button.entry}`);
+      } else if (button.kind === 'submenu') {
         if (!nodes[button.nodeId]) problems.push(`${key}: submenu to unknown node ${button.nodeId}`);
       } else if (button.kind === 'message') {
         const ref = button.phraseRef;
@@ -192,7 +218,8 @@ export function validateBoard(board) {
   }
   for (const id of Object.keys(nodes)) {
     // An unreachable node is dead weight that still has to be translated and
-    // reviewed, so it is a problem rather than a curiosity.
+    // reviewed, so it is a problem rather than a curiosity. Reply sets are not in
+    // this walk: they are reached from a message, not from the grid.
     if (!depth.has(id)) problems.push(`${id}: not reachable from the root`);
     else if (/** @type {number} */ (depth.get(id)) >= MAX_DEPTH) {
       problems.push(`${id}: nested ${depth.get(id)} deep, past ${MAX_DEPTH - 1}`);
@@ -271,6 +298,40 @@ export function resolvePhrase(ref, ctx) {
  */
 
 /**
+ * A quantity, said to both people at once.
+ *
+ * The shape of a `ResolvedPhrase`, so the views that draw a message do not need to
+ * know whether it came from the corpus or from a keypad — but built from a number
+ * and a unit rather than from any stored text. Both sides are formatted at the
+ * moment of display, which is why one structured value serves fifty-one languages
+ * and none of them needs a row: `Intl` carries the plural rules, and Bengali gets
+ * Bengali numerals without anyone writing them down.
+ *
+ * `null` where either language has no formatter, exactly as `resolvePhrase` returns
+ * `null` rather than half an answer. The two constructed languages are that case,
+ * and a board for one of them simply cannot offer a duration.
+ * @param {import('./duration.js').Duration} value
+ * @param {ResolveContext} ctx
+ * @returns {ResolvedPhrase|null}
+ */
+export function resolveValue(value, ctx) {
+  if (!supportsUnits(ctx.listener) || !supportsUnits(ctx.owner)) return null;
+  const listener = formatDuration(value, ctx.listener);
+  const owner = formatDuration(value, ctx.owner);
+  if (!listener || !owner) return null;
+  return {
+    id: `duration:${value.amount}:${value.unit}`,
+    listener: { text: listener, lang: ctx.listener, dir: ctx.listenerDir },
+    owner: { text: owner, lang: ctx.owner, dir: ctx.ownerDir },
+    // CLDR, through the runtime. Not a translation anybody made, and not one that
+    // can go stale -- which is the whole reason this is a number and not a sentence.
+    provenance: 'cldr',
+    confidence: 3,
+    custom: false,
+  };
+}
+
+/**
  * Which of a board's phrases this pair cannot say. Empty means the board is usable.
  * @param {Board} board @param {ResolveContext} ctx
  */
@@ -291,9 +352,11 @@ export function missingPhrases(board, ctx) {
  * during a transition should do nothing, which is also what makes a second tap
  * arriving with the first harmless.
  * @param {BoardState} state
- * @param {{type:'open', buttonId:string, kind:'message'|'submenu', nodeId?:string}
- *   | {type:'dismiss'} | {type:'up'} | {type:'reply'} | {type:'answer', answerId:string}
- *   | {type:'cancelReply'}} action
+ * @param {{type:'open', buttonId:string, kind:string, nodeId?:string}
+ *   | {type:'dismiss'} | {type:'up'} | {type:'reply'}
+ *   | {type:'answer', answerId:string, value?:import('./duration.js').Duration}
+ *   | {type:'cancelReply'} | {type:'enter'} | {type:'cancelEntry'}
+ *   | {type:'confirmEntry', value:import('./duration.js').Duration}} action
  * @returns {BoardState}
  */
 export function reduce(state, action) {
@@ -310,7 +373,9 @@ export function reduce(state, action) {
       // answer dismisses to the owner's originating grid too, completing the
       // exchange rather than unwinding through the question.
       if (state.view !== 'message' && state.view !== 'answer') return state;
-      return { ...state, view: 'grid', buttonId: null, answerId: null };
+      return {
+        ...state, view: 'grid', buttonId: null, answerId: null, answerValue: null,
+      };
 
     case 'up':
       // Grid-level only, and never off the root. Message views have no Back
@@ -330,7 +395,27 @@ export function reduce(state, action) {
 
     case 'answer':
       if (state.view !== 'reply') return state;
-      return { ...state, view: 'answer', answerId: action.answerId };
+      return {
+        ...state, view: 'answer', answerId: action.answerId, answerValue: action.value ?? null,
+      };
+
+    case 'enter':
+      // The keypad. Reached only from the reply grid, so cancelling has somewhere
+      // unambiguous to go back to.
+      if (state.view !== 'reply') return state;
+      return { ...state, view: 'entry' };
+
+    case 'cancelEntry':
+      // Back to the answers, not to the question and not to the grid: someone who
+      // opened the keypad by mistake wanted the list they were just looking at.
+      if (state.view !== 'entry') return state;
+      return { ...state, view: 'reply' };
+
+    case 'confirmEntry':
+      if (state.view !== 'entry') return state;
+      // The value travels; no text is stored, so nothing can disagree with itself
+      // in the two languages it is about to be shown in.
+      return { ...state, view: 'answer', answerId: null, answerValue: action.value };
 
     default:
       return state;
@@ -345,6 +430,7 @@ export function openBoard(board, replies = false) {
     path: [board.rootNodeId],
     buttonId: null,
     answerId: null,
+    answerValue: null,
     replies,
   });
 }

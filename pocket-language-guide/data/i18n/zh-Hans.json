@@ -379,5 +379,10 @@
   "ornament.frameHint": "交织的精灵风边框会在文字周围预留空间，排版和页数可能会改变。",
   "ornament.lowInk": "省墨模式使用经典实线。切换到彩色或单色模式后，将恢复所选风格。",
   "board.reply": "\u56de\u590d",
-  "board.close": "\u5173\u95ed"
+  "board.close": "\u5173\u95ed",
+  "board.otherAmount": "其他时长",
+  "board.confirm": "确认",
+  "board.amount": "数量",
+  "board.unit": "单位",
+  "board.notAnAmount": "请输入整数"
 }

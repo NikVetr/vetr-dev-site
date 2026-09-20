@@ -249,7 +249,7 @@ test('a board works on a cold offline visit with nothing saved', async ({ page, 
   // The whole grid, not merely a page that rendered: a board that resolves half its
   // phrases draws the rest disabled, which is a different failure wearing the same
   // face.
-  await expect(page.locator('.board-cell')).toHaveCount(9);
+  await expect(page.locator('.board-cell')).toHaveCount(10);
   await expect(page.locator('.board-cell-off')).toHaveCount(0);
   await expect(page.locator('#board-status')).toBeEmpty();
 
@@ -266,6 +266,17 @@ test('a board works on a cold offline visit with nothing saved', async ({ page, 
   await page.locator('[data-button="avoid"]').click();
   await page.locator('.board-controls button').click();
   await expect(page.locator('.board-answer')).toHaveCount(6);
+  await page.locator('.board-close').click();
+  await page.locator('.board-message').click();
+
+  // A duration reply, which reads from three different concept groups and from
+  // CLDR -- none of which may need the network either.
+  await page.locator('[data-button="wait"]').click();
+  await page.locator('.board-controls button').first().click();
+  await expect(page.locator('.board-answer').first()).toHaveText(/\p{Script=Han}/u);
+  await page.locator('.board-answer-entry').click();
+  await page.locator('.board-entry-amount').fill('25');
+  await expect(page.locator('.board-entry-preview')).toHaveText('25分钟');
 
   expect(errors).toEqual([]);
 });

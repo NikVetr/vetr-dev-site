@@ -87,6 +87,16 @@
           "nodeId": "comfort",
           "labelKey": "boards.spa.comfort",
           "colour": "stay"
+        },
+        {
+          "id": "wait",
+          "kind": "message",
+          "colour": "stay",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "trail-transport.how-long-is-the-wait"
+          },
+          "replySetId": "how-long"
         }
       ]
     },
@@ -232,6 +242,87 @@
             "id": "massage-spa.reply-none-of-these"
           },
           "colour": "money"
+        }
+      ]
+    },
+    "how-long": {
+      "buttons": [
+        {
+          "id": "nowait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.there-is-no-wait"
+          }
+        },
+        {
+          "id": "d5m",
+          "kind": "value",
+          "value": {
+            "amount": 5,
+            "unit": "minute"
+          }
+        },
+        {
+          "id": "d10m",
+          "kind": "value",
+          "value": {
+            "amount": 10,
+            "unit": "minute"
+          }
+        },
+        {
+          "id": "d15m",
+          "kind": "value",
+          "value": {
+            "amount": 15,
+            "unit": "minute"
+          }
+        },
+        {
+          "id": "d30m",
+          "kind": "value",
+          "value": {
+            "amount": 30,
+            "unit": "minute"
+          }
+        },
+        {
+          "id": "d1h",
+          "kind": "value",
+          "value": {
+            "amount": 1,
+            "unit": "hour"
+          }
+        },
+        {
+          "id": "d2h",
+          "kind": "value",
+          "value": {
+            "amount": 2,
+            "unit": "hour"
+          }
+        },
+        {
+          "id": "other",
+          "kind": "entry",
+          "entry": "duration"
+        },
+        {
+          "id": "dunno",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "massage-spa.reply-none-of-these"
+          }
         }
       ]
     }

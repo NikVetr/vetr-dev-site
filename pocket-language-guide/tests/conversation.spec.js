@@ -731,3 +731,105 @@ test('a tap reaches the message inside the frame budget', async ({ page }) => {
   const p95 = times[Math.floor(times.length * 0.95)];
   expect(p95, `p95 was ${p95.toFixed(0)}ms over ${times.length} taps`).toBeLessThan(100);
 });
+
+// --- answers that are a quantity (Batch B) -----------------------------------
+
+/** @param {import('@playwright/test').Page} page */
+async function openWaitAnswers(page) {
+  await page.goto(`${BOARD}&replies=1`);
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('[data-button="wait"]').click();
+  await page.locator('.board-controls button').first().click();
+  await expect(page.locator('.board-answer').first()).toBeVisible();
+}
+
+test('durations are offered in the listener’s language, from numbers', async ({ page }) => {
+  // No row in any language says "15 minutes". The value is `{15, minute}` and CLDR
+  // does the rest, which is why this works in fifty-one languages at once.
+  await openWaitAnswers(page);
+  const answers = await page.locator('.board-answer').allTextContents();
+  // "No wait" first, because it is the answer everyone hopes for; then the ladder.
+  expect(answers[0]).toBe('不用等，现在就可以');
+  expect(answers.slice(1, 7)).toEqual(['5分钟', '10分钟', '15分钟', '30分钟', '1小时', '2小时']);
+  // ...and the keypad's own button is in the listener's language too, not English.
+  await expect(page.locator('.board-answer-entry')).toHaveText(/\p{Script=Han}/u);
+});
+
+test('the question stays on screen while an answer is chosen and typed', async ({ page }) => {
+  // Someone answering "how long is the wait" should not have to remember what they
+  // are answering, and that holds through the keypad as well as the list.
+  await openWaitAnswers(page);
+  const asked = await page.locator('.board-asked').textContent();
+  expect(asked).toMatch(/\p{Script=Han}/u);
+  await page.locator('.board-answer-entry').click();
+  await expect(page.locator('.board-asked')).toHaveText(asked ?? '');
+});
+
+test('a typed duration confirms in the owner’s language and cancels back to the answers', async ({ page }) => {
+  await openWaitAnswers(page);
+  await page.locator('.board-answer-entry').click();
+
+  // Cancel returns to the answers, not to the question and not to the grid.
+  await page.locator('.board-close').click();
+  await expect(page.locator('.board-answer')).toHaveCount(10);
+
+  await page.locator('.board-answer-entry').click();
+  const confirm = page.locator('.board-entry-confirm');
+  // Nothing typed is not an answer, so Confirm is not offered.
+  await expect(confirm).toBeDisabled();
+  await page.locator('.board-entry-amount').fill('45');
+  // The preview is the exact text the listener reads, updating as it is typed.
+  await expect(page.locator('.board-entry-preview')).toHaveText('45分钟');
+  await expect(confirm).toBeEnabled();
+
+  await confirm.click();
+  // The value travelled, not the text: the owner's reading is formatted fresh.
+  await expect(page.locator('.board-message-text')).toHaveText('45 minutes');
+  await expect(page.locator('.board-message-text')).toHaveAttribute('lang', 'en');
+});
+
+test('the unit changes what the same number means, in both languages', async ({ page }) => {
+  await openWaitAnswers(page);
+  await page.locator('.board-answer-entry').click();
+  await page.locator('.board-entry-amount').fill('3');
+  await expect(page.locator('.board-entry-preview')).toHaveText('3分钟');
+  await page.locator('[data-unit="hour"]').click();
+  await expect(page.locator('.board-entry-preview')).toHaveText('3小时');
+  await page.locator('.board-entry-confirm').click();
+  await expect(page.locator('.board-message-text')).toHaveText('3 hours');
+});
+
+test('a keypad refuses what is not an amount, rather than showing it to a stranger', async ({ page }) => {
+  await openWaitAnswers(page);
+  await page.locator('.board-answer-entry').click();
+  const amount = page.locator('.board-entry-amount');
+  const confirm = page.locator('.board-entry-confirm');
+  for (const bad of ['0', '-5', '1.5', 'abc', '900']) {
+    await amount.fill(bad);
+    await expect(confirm, `"${bad}" should not be confirmable`).toBeDisabled();
+  }
+  await amount.fill('20');
+  await expect(confirm).toBeEnabled();
+});
+
+test('the keypad’s own text is legible on the coloured stage', async ({ page }) => {
+  // The preview was left at the body ink and drawn dark on a saturated fill -- the
+  // same miss as the question, which had already been given white type.
+  await openWaitAnswers(page);
+  await page.locator('.board-answer-entry').click();
+  await page.locator('.board-entry-amount').fill('45');
+  const seen = await page.locator('.board-entry-preview').evaluate((n) => ({
+    fg: getComputedStyle(n).color,
+    bg: getComputedStyle(/** @type {HTMLElement} */ (n.closest('.board-stage'))).backgroundColor,
+  }));
+  const lum = (/** @type {string} */ css) => {
+    const [r, g, b] = (css.match(/\d+/g) ?? []).map(Number).map((v) => {
+      const c = v / 255;
+      return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+    });
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  };
+  const ratio = (Math.max(lum(seen.fg), lum(seen.bg)) + 0.05)
+    / (Math.min(lum(seen.fg), lum(seen.bg)) + 0.05);
+  expect(ratio, `${seen.fg} on ${seen.bg}`).toBeGreaterThan(4.5);
+});
