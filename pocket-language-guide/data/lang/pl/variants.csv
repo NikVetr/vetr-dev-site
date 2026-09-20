@@ -1,0 +1,13 @@
+variant,concept_id,text,text_alt,ipa,literal,confidence,provenance
+speaker_gender=feminine,building-help.i-am-lost,Zgubiłam się,,zɡubʲˈiwam ɕɛ,,2,pl-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,emergency-medical.i-am-sick,Jestem chora,,jˌɛstɛm xˈɔra,,2,pl-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,emergency-medical.i-am-injured,Jestem ranna,,jˌɛstɛm rˈanna,,2,pl-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,dietary-needs.i-am-vegetarian,Jestem wegetarianką,,jˌɛstɛm vˌɛɡɛtarjˈaŋkɔ̃,,2,pl-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,dietary-needs.i-am-vegan,Jestem weganką,,jˌɛstɛm vɛɡˈaŋkɔ̃,,2,pl-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,introductions.i-am-a-tourist,Jestem turystką,,jˌɛstɛm turˈɨstkɔ̃,,2,pl-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,introductions.i-am-traveling-alone,Podróżuję sama,,pˌɔdruʒˈujɛ sˈama,,2,pl-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,etiquette.did-not-mean-to-offend,Nie chciałam nikogo obrazić,,ɲɛ xtɕˈawam ɲikˈɔɡɔ ɔbrˈazitɕ,,2,pl-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,etiquette.dressed-appropriately,Czy jestem odpowiednio ubrana?,,tʃɨ jˌɛstɛm ˌɔtpɔvʲˈɛdɲɔ ubrˈana,,2,pl-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,police-consulate.am-i-under-arrest,Czy jestem zatrzymana?,,tʃɨ jˌɛstɛm zˌatʃɨmˈana,,2,pl-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,sim-data.i-would-like-a-tourist-sim,Chciałabym kartę SIM dla turystów,,xtɕˈawabˌɨm kˈartɛ ˌɛsˌiˈɛm dla turˈɨstuf,,2,pl-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,transit-rides.i-went-past-my-stop,Przejechałam swój przystanek,,pʃˌɛjɛxˈawam sfˈuj pʃɨstˈanɛk,,2,pl-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak

@@ -1,0 +1,14 @@
+variant,concept_id,text,text_alt,ipa,literal,confidence,provenance
+speaker_gender=feminine,building-help.i-am-lost,Estou perdida,,estˌow pˌeɾədʒˈidæ,,2,pt-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,dietary-needs.i-am-allergic-to,Sou alérgica a {},,sow ˌalˈɛɾəʒikæ ˈa {},,2,pt-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,emergency-medical.i-am-injured,Estou ferida,,estˌow fˌeɾˈidæ,,2,pt-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,introductions.i-am-traveling-alone,Viajo sozinha,,vˌiˈaʒʊ sˌozˈiɲæ,,2,pt-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,Sou alérgica à aspirina e ao ibuprofeno,,sow ˌalˈɛɾəʒik ˌaː ˌaspiɾˈinæ i aʊ ˌibuprofˈenʊ,,2,pt-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,medical-conditions.i-am-allergic-to-penicillin,Sou alérgica à penicilina,,sow ˌalˈɛɾəʒik ˌaː pˌenisilˈinæ,,2,pt-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,medical-conditions.i-am-allergic-to-sulfa-drugs,Sou alérgica a sulfamidas,,sow ˌalˈɛɾəʒikæ a sˌuwfæmˈidæs,,2,pt-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,police-consulate.i-was-robbed,Fui roubada,,fuɪ xˌowbˈadæ,,2,pt-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,police-consulate.am-i-under-arrest,Estou detida?,,estˌow dˌetʃˈidæ,,2,pt-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,police-consulate.no-thank-you-i-am-not-interested,"Não, obrigada. Não tenho interesse",,"nˈɐ̃ʊ̃, ˌobriɡˈadæ nˌɐ̃ʊ̃ tˌeɲʊ ˌiŋteɾˈesy",,2,pt-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,police-consulate.someone-attacked-me,Fui agredida,,fuɪ ˌaɡredʒˈidæ,,2,pt-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,social-basics.thank-you,Obrigada,,ˌobriɡˈadæ,,2,pt-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,etiquette.dressed-appropriately,Estou vestida adequadamente?,,estˌow vˌestʃˈidæ ˌadekwˌadæmˈeɪŋtʃy,,2,pt-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak

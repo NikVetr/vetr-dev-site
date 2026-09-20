@@ -176,3 +176,48 @@ test('the shipped registry parses, and declares nothing it cannot back', async (
     }
   }
 });
+
+test('every shipped variant file is reachable, and none of it empties a row', async () => {
+  // Against the real files rather than a fixture, because the failure this catches is
+  // a data one: a variant written under a key the registry cannot produce, or for a
+  // concept this pack has no row for, is invisible -- it simply never resolves, and
+  // the reader sees the masculine wording with no sign anything was written for them.
+  // `validate_data.py` fails on both; this is the same claim from the side that
+  // actually does the lookup, so the mechanism and the gate cannot drift apart.
+  const { readFile } = await import('node:fs/promises');
+  const { parseTable } = await import('../core/csv.js');
+  const { loadVariants } = await import('../core/pack.js');
+
+  const load = (/** @type {string} */ rel) => readFile(rel, 'utf8');
+  const shipped = readAxes(parseTable(await load('data/registry/speaker-axes.csv'), 'axes'));
+
+  for (const [language, list] of Object.entries(shipped)) {
+    const variants = await loadVariants(load, language);
+    const keys = Object.keys(variants);
+    if (!keys.length) continue;                    // no wordings written yet: a known gap
+    for (const key of keys) {
+      // Producible from this language's own axes, and never the all-defaults key --
+      // that is the base row, which lives in the section file.
+      const from = Object.fromEntries(key.split('|').map((part) => part.split('=')));
+      assert.equal(variantKey(list, from), key,
+        `${language}: ${key} is not a key its axes can produce`);
+    }
+    const rows = {};
+    for (const group of ['core', 'emergency', 'intro', 'travel', 'building']) {
+      try {
+        for (const row of parseTable(await load(`data/lang/${language}/${group}.csv`), group)) {
+          rows[row.concept_id] = row;
+        }
+      } catch { /* a pack legitimately has no file for some groups */ }
+    }
+    const voiced = applyVariants(rows, variants, keys[0]);
+    let changed = 0;
+    for (const [id, row] of Object.entries(voiced)) {
+      // A variant may only ever replace a wording, never remove one: a blank cell in
+      // the file means "inherit", so nothing it touches may come out empty.
+      assert.ok(row.text.trim(), `${language}/${id} came out of a variant with no text`);
+      if (row !== rows[id]) changed += 1;
+    }
+    assert.ok(changed > 0, `${language} ships a variants file that changes nothing`);
+  }
+});

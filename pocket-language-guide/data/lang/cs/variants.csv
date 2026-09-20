@@ -1,0 +1,33 @@
+variant,concept_id,text,text_alt,ipa,literal,confidence,provenance
+speaker_gender=feminine,building-help.i-am-lost,Ztratila jsem se,,strˈacila jsem se,,2,cs-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,accessibility.hard-of-hearing,Jsem nedoslýchavá,,jsem nˈedoslˌiːxavaː,,2,cs-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,accessibility.visually-impaired,Jsem zrakově postižená,,jsem zrˈakovje pˈosciʒˌenaː,,2,cs-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,emergency-medical.i-am-sick,Jsem nemocná,,jsem nˈemotsnaː,,2,cs-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,emergency-medical.i-am-injured,Jsem zraněná,,jsem zrˈaɲenaː,,2,cs-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,medical-conditions.i-am-diabetic,Jsem diabetička,,jsem dˈijabˌecitʃka,,2,cs-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,medical-conditions.i-am-allergic-to-penicillin,Jsem alergická na penicilin,,jsem ˈalerɡˌitskaː na pˈeɲitsˌilin,,2,cs-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,Jsem alergická na aspirin a ibuprofen,,jsem ˈalerɡˌitskaː nˈaaspˌirin a ˈibuprˌofen,,2,cs-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,medical-conditions.i-am-allergic-to-sulfa-drugs,Jsem alergická na sulfonamidy,,jsem ˈalerɡˌitskaː na sˈulfonˌamidi,,2,cs-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,lost-rescue.i-lost-my-passport,Ztratila jsem pas,,strˈacila jsem pˈas,,2,cs-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,lost-rescue.i-lost-my-phone,Ztratila jsem telefon,,strˈacila jsem tˈelefon,,2,cs-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,lost-rescue.i-sprained-my-ankle,Vymkla jsem si kotník,,vˈimkla jsem si kˈotɲiːk,,2,cs-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,lost-rescue.i-lost-my-wallet,Ztratila jsem peněženku,,strˈacila jsem pˈeɲeʒˌeŋku,,2,cs-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,lost-rescue.i-lost-my-bag,Ztratila jsem tašku,,strˈacila jsem tˈaʃku,,2,cs-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,lost-rescue.i-left-it-on-the-train,Nechala jsem to ve vlaku,,nˈexala jsem tˈo vˈe vlˈaku,,2,cs-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,police-consulate.i-was-robbed,Byla jsem okradena,,bˌila jsem ˈokradˌena,,2,cs-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,police-consulate.am-i-under-arrest,Jsem zatčena?,,jsem zˈattʃena,,2,cs-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,police-consulate.i-did-not-agree-to-this-price,S touto cenou jsem nesouhlasila,,s tˈoʊto tsˈenoʊ jsem nˈesoʊhlˌasila,,2,cs-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,dietary-needs.i-am-vegetarian,Jsem vegetariánka,,jsem vˈeɡetˌariˌaːŋka,,2,cs-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,dietary-needs.i-am-vegan,Jsem veganka,,jsem vˈeɡaŋka,,2,cs-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,dietary-needs.i-am-allergic-to,Jsem alergická na {},,jsem ˈalerɡˌitskaː na {},,2,cs-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,hotel-basics.i-would-like-a-non-smoking-room,Chtěla bych nekuřácký pokoj,,xcˈela bix nˈekur̝ˌaːtskiː pˈokoj,,2,cs-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,hotel-basics.i-would-like-a-quiet-room,Chtěla bych tichý pokoj,,xcˈela bix cˈixiː pˈokoj,,2,cs-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,introductions.i-am-a-tourist,Jsem turistka,,jsem tˈuristka,,2,cs-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,introductions.i-am-traveling-alone,Cestuji sama,,tsˈestuji sˈama,,2,cs-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,payment-receipt.i-already-paid,Už jsem zaplatila,,ˈuʒ jsem zˈaplacˌila,,2,cs-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,sim-data.i-would-like-a-tourist-sim,Chtěla bych turistickou SIM kartu,,xcˈela bix tˈuristˌitskoʊ ˈesˌiːˌem kˈartu,,2,cs-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,etiquette.dressed-appropriately,Jsem oblečená vhodně?,,jsem ˈobletʃˌenaː fhˈodɲe,,2,cs-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,etiquette.did-not-mean-to-offend,Nechtěla jsem nikoho urazit,,nˈexcela jsem ɲˈikoho ˈurazit,,2,cs-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,transit-rides.i-went-past-my-stop,Přejela jsem svou zastávku,,pr̝ˈejela jsem svˈoʊ zˈastaːfku,,2,cs-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,border-customs.i-am-a-tourist,Jsem turistka,,jsem tˈuristka,,2,cs-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,pronouns-verbs.would-like,chtěla bych,,xcˈela bix,,2,cs-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak

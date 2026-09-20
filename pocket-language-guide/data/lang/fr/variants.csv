@@ -1,0 +1,11 @@
+variant,concept_id,text,text_alt,ipa,literal,confidence,provenance
+speaker_gender=feminine,accessibility.hard-of-hearing,Je suis malentendante,,ʒə syi malɑ̃tɑ̃dˈɑ̃t,,2,fr-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,accessibility.visually-impaired,Je suis malvoyante,,ʒə syi malvwajˈɑ̃t,,2,fr-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,building-help.i-am-lost,Je suis perdue,,ʒə syi pɛʁdˈy,,2,fr-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,dietary-needs.i-am-vegan,Je suis végétalienne,,ʒə syi veʒetaljˈɛn,,2,fr-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,dietary-needs.i-am-vegetarian,Je suis végétarienne,,ʒə syi veʒetaʁjˈɛn,,2,fr-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,emergency-medical.i-am-injured,Je suis blessée,,ʒə syi blɛsˈe,,2,fr-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,introductions.i-am-traveling-alone,Je voyage seule,,ʒə vwajaʒ sˈœl,,2,fr-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,transit-rides.i-am-in-a-hurry,Je suis pressée,,ʒə syi pʁɛsˈe,,2,fr-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,police-consulate.i-was-robbed,J'ai été volée,,ʒe ete volˈe,,2,fr-variants-v1;rule=etre-passive-agrees-with-subject;ipa=espeak
+speaker_gender=feminine,police-consulate.someone-attacked-me,On m'a agressée,,ɔ̃ ma aɡʁɛsˈe,,2,fr-variants-v1;rule=avoir-agrees-with-preceding-object-clitic;ipa=espeak

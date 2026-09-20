@@ -1,0 +1,35 @@
+variant,concept_id,text,text_alt,ipa,literal,confidence,provenance
+speaker_gender=feminine,building-help.i-am-lost,Izgubila sam se,,izɡubila sam sˈe,,2,hr-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,accessibility.board-first,Mogu li ući prva?,,mˈoɡu li ˈutɕi prva,,2,hr-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,accessibility.hard-of-hearing,Nagluha sam,,naɡluxa sam,,2,hr-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,accessibility.visually-impaired,Slabovidna sam,,slabovidna sam,,2,hr-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,emergency-medical.i-am-sick,Bolesna sam,,bolesna sam,,2,hr-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,emergency-medical.i-am-injured,Povrijeđena sam,,povrijedʑena sam,,2,hr-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,medical-conditions.i-am-allergic-to-penicillin,Alergična sam na penicilin,,alerɡitʃna sam nˈa penitsilin,,2,hr-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,Alergična sam na aspirin i ibuprofen,,alerɡitʃna sam nˈa aspirin i ibuprofen,,2,hr-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,medical-conditions.i-am-allergic-to-sulfa-drugs,Alergična sam na sulfonamide,,alerɡitʃna sam nˈa sulfonamide,,2,hr-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,lost-rescue.i-lost-my-passport,Izgubila sam putovnicu,,izɡubila sam putovnitsu,,2,hr-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,lost-rescue.i-lost-my-phone,Izgubila sam mobitel,,izɡubila sam mobitel,,2,hr-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,lost-rescue.i-sprained-my-ankle,Iskrenula sam gležanj,,iskrenula sam ɡlˈeʒaɲ,,2,hr-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,lost-rescue.i-lost-my-wallet,Izgubila sam novčanik,,izɡubila sam noftʃanik,,2,hr-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,lost-rescue.i-lost-my-bag,Izgubila sam torbu,,izɡubila sam tˈorbu,,2,hr-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,lost-rescue.i-left-it-on-the-train,Ostavila sam to u vlaku,,ostavila sam tˈo u vlˈaku,,2,hr-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,police-consulate.i-was-robbed,Opljačkana sam,,opʎatʃkana sam,,2,hr-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,police-consulate.am-i-under-arrest,Jesam li uhićena?,,jˈesam li uxitɕena,,2,hr-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,police-consulate.no-thank-you-i-am-not-interested,"Ne, hvala, nisam zainteresirana",,"nˈe, xvˈala, nisam zainteresirana",,2,hr-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,police-consulate.i-did-not-agree-to-this-price,Nisam se složila s ovom cijenom,,nisam sˈe sloʒila s ˈovom tsijenom,,2,hr-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,dietary-needs.i-am-vegetarian,Vegetarijanka sam,,veɡetarijanka sam,,2,hr-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,dietary-needs.i-am-vegan,Veganka sam,,veɡanka sam,,2,hr-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,dietary-needs.i-am-allergic-to,Alergična sam na {},,alerɡitʃna sam nˈa {},,2,hr-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,hotel-basics.i-would-like-a-non-smoking-room,Željela bih sobu za nepušače,,ʒeʎela bˈix sˈobu zˈa nepuʃatʃe,,2,hr-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,hotel-basics.i-would-like-a-quiet-room,Željela bih tihu sobu,,ʒeʎela bˈix tˈixu sˈobu,,2,hr-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,introductions.i-am-a-tourist,Turistkinja sam,,turistkiɲa sam,,2,hr-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,introductions.i-am-traveling-alone,Putujem sama,,putujem sˈama,,2,hr-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,payment-receipt.i-already-paid,Već sam platila,,vˈetɕ sam platila,,2,hr-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,etiquette.dressed-appropriately,Jesam li prikladno odjevena?,,jˈesam li prikladno odjevena,,2,hr-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,etiquette.did-not-mean-to-offend,Nisam vas htjela uvrijediti,,nisam vˈas xtjˈela uvrijediti,,2,hr-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,transit-rides.i-went-past-my-stop,Prošla sam svoju stanicu,,prˈoʃla sam svˈoju stanitsu,,2,hr-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,border-customs.i-am-a-tourist,Turistkinja sam,,turistkiɲa sam,,2,hr-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,border-customs.i-am-staying-at,Odsjela sam ovdje: {},,otsjela sam ˈovdje {},,2,hr-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,sim-data.i-would-like-a-tourist-sim,Željela bih turističku SIM karticu,,ʒeʎela bˈix turistitʃku sˈim kartitsu,,2,hr-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak+loan
+speaker_gender=feminine,pronouns-verbs.would-like,htjela bih,,xtjˈela bˈix,,2,hr-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak

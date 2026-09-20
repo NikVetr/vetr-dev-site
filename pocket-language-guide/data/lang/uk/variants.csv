@@ -1,0 +1,15 @@
+variant,concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+speaker_gender=feminine,building-help.i-am-lost,Я заблукала.,,Ya zablukala.,jˈa zablˈukala,,2,uk-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,accessibility.visually-impaired,Я слабозора.,,Ya slabozora.,jˈa slabˈozora,,2,uk-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,accessibility.board-first,Можна мені зайти першою?,,Mozhna meni zaity pershoiu?,mˈoʒna mˈɛɲiː zˈajtɪ pɛrʃˈoju,,2,uk-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,emergency-medical.i-am-sick,Я хвора.,,Ya khvora.,jˈa ɣʋˈora,,2,uk-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,dietary-needs.i-am-vegan,Я веганка.,,Ya vehanka.,jˈa ʋɛhˈanka,,2,uk-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,dietary-needs.i-am-vegetarian,Я вегетаріанка.,,Ya vehetarianka.,jˈa ʋɛhɪtˈariːanka,,2,uk-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,introductions.i-am-a-tourist,Я туристка.,,Ya turystka.,jˈa turˈɪstka,,2,uk-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,border-customs.i-am-a-tourist,Я туристка.,,Ya turystka.,jˈa turˈɪstka,,2,uk-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,introductions.i-am-traveling-alone,Я подорожую сама.,,Ya podorozhuiu sama.,jˈa podorˈoʒuju sˈama,,2,uk-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,etiquette.did-not-mean-to-offend,Я не хотіла вас образити.,,Ya ne khotila vas obrazyty.,jˈa nˈɛ xotˈiːla ʋˈas obrˈazɪtɪ,,2,uk-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,police-consulate.am-i-under-arrest,Я заарештована?,,Ya zaareshtovana?,jˈa zaarˈɛʃtoʋana,,2,uk-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,etiquette.dressed-appropriately,Я нормально одягнена?,,Ya normalno odiahnena?,jˈa normˈaʎno odjˈahnɛna,,2,uk-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,transit-rides.i-went-past-my-stop,Я проїхала свою зупинку.,,Ya proikhala svoiu zupynku.,jˈa projˈiːxala zʋˈoju zupˈɪnku,,2,uk-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,pronouns-verbs.would-like,хотіла б,,khotila b,xotˈiːla b,,2,uk-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak

@@ -1,0 +1,10 @@
+variant,concept_id,text,text_alt,ipa,literal,confidence,provenance
+speaker_gender=feminine,building-help.i-am-lost,Mi sono persa,,mɪ sˌono pˈɛrsa,,2,it-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,dietary-needs.i-am-vegan,Sono vegana,,sˌono veɡˈana,,2,it-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,dietary-needs.i-am-vegetarian,Sono vegetariana,,sˌono vedʒetariˈana,,2,it-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,emergency-medical.i-am-injured,Sono ferita,,sˌono ferˈita,,2,it-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,emergency-medical.i-am-sick,Sono malata,,sˌono malˈata,,2,it-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,introductions.i-am-a-tourist,Sono una turista,,sˌono ˌʊna tʊrˈista,,2,it-variants-v1;rule=indefinite-article-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,introductions.i-am-traveling-alone,Viaggio da sola,,vjˈadʒdʒo da sˈola,,2,it-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,police-consulate.i-was-robbed,Mi hanno derubata,,mɪ ˌanno derʊbˈata,,2,it-variants-v1;rule=avere-agrees-with-preceding-object-clitic;ipa=espeak
+speaker_gender=feminine,police-consulate.someone-attacked-me,Mi hanno aggredita,,mɪ ˌanno aɡɡredˈita,,2,it-variants-v1;rule=avere-agrees-with-preceding-object-clitic;ipa=espeak

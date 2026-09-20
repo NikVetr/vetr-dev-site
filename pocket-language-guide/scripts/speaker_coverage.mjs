@@ -12,13 +12,16 @@
 // `scripts/validate_data.py` owns the things that *are* errors -- a variant whose
 // base row does not exist, a key no language declares.
 //
-// The candidate set is a heuristic and is named as one: concepts whose **English**
-// gloss is first person. It is the same filter the original survey used, it is
-// checked against the bank rather than against any one language, and it is right
-// about the direction even where it is wrong about a particular row -- "Thank you"
-// is a candidate in Portuguese (*obrigado/obrigada*) and not in Russian, and no
-// column in the corpus records that difference. Treat the denominator as "phrases
-// worth reading through", not as a target to reach.
+// The first-person count is a heuristic and is named as one: concepts whose **English**
+// gloss begins with I / my / we / me. It is the same filter the original survey used
+// and it is a reading list, not a denominator -- it is wrong in both directions and
+// has to be. It over-counts, because most first-person sentences do not agree with
+// anything. It also under-counts, and that is the more interesting half: Portuguese
+// *obrigado / obrigada* inflects for the speaker and its English is "Thank you", and
+// "Am I under arrest?" begins with a verb. No column in the corpus records which
+// phrases agree in which language, and inventing one would be writing the survey's
+// answer down twice. So whoever writes the wordings reads past this list, and the
+// report counts what they wrote rather than what the list predicted.
 
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { parseTable } from '../core/csv.js';
@@ -117,12 +120,16 @@ if (process.argv.includes('--json')) {
   console.log(JSON.stringify(report, null, 2));
 } else {
   const pad = (/** @type {string|number} */ s, /** @type {number} */ n) => String(s).padEnd(n);
-  console.log(`${pad('lang', 6)}${pad('covered', 10)}${pad('rows', 6)}${pad('slashed', 9)}`);
+  // Counts side by side rather than as a fraction: a variant is legitimately written
+  // for a concept the first-person filter never listed, so `concepts` over `1st-person`
+  // would be a ratio of two things that do not divide.
+  console.log(`${pad('lang', 6)}${pad('wordings', 10)}${pad('concepts', 10)}${pad('1st-person', 12)}${pad('slashed', 9)}`);
   for (const r of report) {
     console.log(
       pad(r.language, 6)
-      + pad(`${r.covered}/${r.candidates}`, 10)
-      + pad(r.rows, 6)
+      + pad(r.rows, 10)
+      + pad(r.covered, 10)
+      + pad(r.candidates, 12)
       + pad(r.slashed.length, 9)
       + (r.unknownKeys.length ? ` unknown keys: ${r.unknownKeys.join(', ')}` : '')
       + (r.strayConcepts.length ? ` no base row: ${r.strayConcepts.join(', ')}` : ''),

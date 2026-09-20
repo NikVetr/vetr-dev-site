@@ -1,0 +1,20 @@
+variant,concept_id,text,text_alt,ipa,literal,confidence,provenance
+speaker_gender=feminine,accessibility.board-first,Pot urca prima?,,pot urkˈa prˈima,,2,ro-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,dietary-needs.i-am-allergic-to,Sunt alergică la {},,sunt ˌalerdʒˈikə la {},,2,ro-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,dietary-needs.i-am-vegan,Sunt vegană,,sunt veɡˈanə,,2,ro-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,dietary-needs.i-am-vegetarian,Sunt vegetariană,,sunt vˌedʒetaɾjˈanə,,2,ro-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,emergency-medical.i-am-injured,Sunt rănită,,sunt rənˈitə,,2,ro-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,emergency-medical.i-am-sick,Sunt bolnavă,,sunt bolnˈavə,,2,ro-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,etiquette.dressed-appropriately,Sunt îmbrăcată potrivit?,,sunt ˌɨmbrəkˈatə pˌotrivˈit,,2,ro-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,introductions.i-am-a-tourist,Sunt turistă,,sunt tuɾˈistə,,2,ro-variants-v1;rule=agent-noun-has-distinct-feminine-form;ipa=espeak
+speaker_gender=feminine,introductions.i-am-traveling-alone,Călătoresc singură,,kˌələtoɾˈesk sˈiŋɡuɾˌə,,2,ro-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,Sunt alergică la aspirină și ibuprofen,,sunt ˌalerdʒˈikə la ˌaspiɾˈinə ʃi ˌibuprofˈen,,2,ro-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,medical-conditions.i-am-allergic-to-penicillin,Sunt alergică la penicilină,,sunt ˌalerdʒˈikə la pˌenitʃilˈinə,,2,ro-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,medical-conditions.i-am-allergic-to-sulfa-drugs,Sunt alergică la sulfamide,,sunt ˌalerdʒˈikə la sˌulfamˈide,,2,ro-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,medical-conditions.i-am-diabetic,Sunt diabetică,,sunt djˌabetˈikə,,2,ro-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,pharmacy-symptoms.i-feel-dizzy,Mă simt amețită,,mə sˈimt ˌametsˈitə,,2,ro-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,police-consulate.am-i-under-arrest,Sunt arestată?,,sunt ˌaɾestˈatə,,2,ro-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,police-consulate.i-was-robbed,Am fost jefuită,,am fost ʒefwˈitə,,2,ro-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,police-consulate.no-thank-you-i-am-not-interested,"Nu, mulțumesc, nu sunt interesată",,"nˈu, mˌultsumˈesk, nu sunt ˌinteɾesˈatə",,2,ro-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,police-consulate.someone-attacked-me,Am fost atacată,,am fost ˌatakˈatə,,2,ro-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,transit-rides.i-am-in-a-hurry,Sunt grăbită,,sunt ɡrəbˈitə,,2,ro-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak

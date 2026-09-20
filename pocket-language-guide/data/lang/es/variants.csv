@@ -1,0 +1,12 @@
+variant,concept_id,text,text_alt,ipa,literal,confidence,provenance
+speaker_gender=feminine,dietary-needs.i-am-allergic-to,Soy alérgica a {},,sˈoɪ alˈeɾxika ˈa {},,2,es-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,dietary-needs.i-am-vegan,Soy vegana,,sˈoɪ beɡˈana,,2,es-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,dietary-needs.i-am-vegetarian,Soy vegetariana,,sˈoɪ bˌexetaɾjˈana,,2,es-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,emergency-medical.i-am-injured,Estoy herida,,estˈoɪ eɾˈida,,2,es-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,emergency-medical.i-am-sick,Estoy enferma,,estˈoɪ emfˈeɾma,,2,es-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,introductions.i-am-traveling-alone,Viajo sola,,bjˈaxo sˈola,,2,es-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,Soy alérgica a la aspirina y al ibuprofeno,,sˈoɪ alˈeɾxika a la ˌaspiɾˈina i al ˌibupɾofˈeno,,2,es-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,medical-conditions.i-am-allergic-to-penicillin,Soy alérgica a la penicilina,,sˈoɪ alˈeɾxika a la pˌenisilˈina,,2,es-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,medical-conditions.i-am-allergic-to-sulfa-drugs,Soy alérgica a las sulfamidas,,sˈoɪ alˈeɾxika a las sˌulfamˈidas,,2,es-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,police-consulate.am-i-under-arrest,¿Estoy detenida?,,estˈoɪ dˌetenˈida,,2,es-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,etiquette.dressed-appropriately,¿Voy vestida apropiadamente?,,bˈoɪ bestˈida ˌapɾopjˈadamente,,2,es-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
