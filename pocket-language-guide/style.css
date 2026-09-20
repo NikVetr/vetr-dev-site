@@ -1872,3 +1872,28 @@ button.big { justify-content: center; padding: 0.6em 1em; font-size: var(--fs-1)
 .item-popup .item-edit { display: flex; flex-direction: column; gap: 0.3em; }
 .item-popup .item-edit label { display: flex; flex-direction: column; gap: 0.1em; }
 .item-popup .item-edit input { inline-size: 100%; }
+
+/* --- how you speak --------------------------------------------------------
+   Shared by the conversation board and the cheat sheet, because it is one fact
+   about the reader and not two settings. It borrows the onboarding dialog's frame:
+   a short form answered once is a short form answered once, wherever it opens. */
+dialog.speaker-settings {
+  border: 1px solid var(--line); border-radius: var(--radius);
+  padding: var(--space-3); max-width: 34rem; width: calc(100% - 2rem);
+  font: inherit; color: var(--ink); background: var(--paper);
+  max-height: calc(100dvh - 4rem); overflow: auto;
+}
+dialog.speaker-settings::backdrop { background: rgb(17 24 32 / 45%); }
+dialog.speaker-settings h2 { margin: 0 0 var(--space-1); font-size: var(--fs-2); }
+.speaker-lede { margin: 0 0 var(--space-2); }
+.speaker-axis {
+  border: 1px solid var(--line-soft); border-radius: var(--radius-sm);
+  padding: var(--space-2); margin: 0 0 var(--space-2);
+}
+.speaker-axis legend { font-size: var(--fs--1); color: var(--muted); padding-inline: 0.3em; }
+/* Why the question is being asked, next to the question. A form that asks someone
+   their gender without saying what it changes has not earned the answer. */
+.speaker-why { margin: 0 0 var(--space-2); font-size: var(--fs--1); color: var(--muted); }
+.speaker-option {
+  display: flex; gap: 0.5em; align-items: baseline; padding: 0.2em 0; cursor: pointer;
+}

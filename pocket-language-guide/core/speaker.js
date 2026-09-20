@@ -119,7 +119,15 @@ export function variantKey(axes, profile) {
 }
 
 /**
- * One phrase's wording for this speaker, falling back to the base text.
+ * One concept's row as this speaker says it, falling back to the row on disk.
+ *
+ * A whole row rather than just `text`, because a wording that changes changes with
+ * its pronunciation: a Russian woman's `Я заблудилась` is romanised *ya zabludilas*
+ * and has its own IPA, and a card that varied the script while leaving the
+ * respelling masculine would be teaching her to say the wrong thing out loud. A
+ * variant row's non-empty cells win and its blank ones inherit — the same rule an
+ * edited CSV follows everywhere else here — so a variant that changes one suffix is
+ * one cell, not a duplicated row.
  *
  * **Refuses an incoming phrase outright.** What the listener taps is theirs to say,
  * and inflecting it for the owner's gender would be putting words in a stranger's
@@ -129,26 +137,68 @@ export function variantKey(axes, profile) {
  * caller.
  * @param {object} args
  * @param {string} args.conceptId
- * @param {string} args.base                 the row's own `text`
- * @param {Record<string, Record<string, string>>} args.variants  key -> concept -> text
+ * @param {Record<string,string>} args.row   the language pack's own row
+ * @param {VariantTable} args.variants
  * @param {string|null} args.key             from `variantKey`
  * @param {boolean} [args.incoming]          true for anything the listener says
- * @returns {{text:string, varied:boolean}}
+ * @returns {{row:Record<string,string>, varied:boolean}}
  */
-export function variantOf({ conceptId, base, variants, key, incoming }) {
-  if (incoming || !key) return { text: base, varied: false };
+export function variantOf({ conceptId, row, variants, key, incoming }) {
+  if (incoming || !key) return { row, varied: false };
   const said = variants[key]?.[conceptId];
-  return said ? { text: said, varied: true } : { text: base, varied: false };
+  if (!said) return { row, varied: false };
+  const merged = { ...row };
+  for (const [field, value] of Object.entries(said)) if (value) merged[field] = value;
+  return { row: merged, varied: true };
 }
 
 /**
- * Which declared axes this reader has actually answered, for a pair.
+ * Every row of a language's `variants.csv`, as `key -> concept_id -> partial row`.
  *
- * What a settings screen shows as outstanding, and what an honest coverage report
- * counts. An unanswered axis is not an error — the language's default is a real
- * wording, and the corpus has been shipping it all along.
+ * Sparse twice over: most languages have no such file at all, and the ones that do
+ * carry a row only for the concepts that genuinely differ. A reader who has answered
+ * nothing never looks in here.
+ * @typedef {Record<string, Record<string, Record<string,string>>>} VariantTable
+ */
+
+/**
+ * A whole language pack as this speaker says it.
+ *
+ * The sheet's entry point, where the board uses `variantOf` one phrase at a time. A
+ * printed card is all the traveller's own speech, so there is no incoming case to
+ * keep apart and the substitution can happen once, before anything is measured —
+ * which matters, because the solver decides what fits by measuring these exact
+ * strings. Returns the table unchanged when there is nothing to do, which is the
+ * common case.
+ * @param {Record<string, Record<string,string>>} rows
+ * @param {VariantTable} variants
+ * @param {string|null} key
+ */
+export function applyVariants(rows, variants, key) {
+  const said = key ? variants[key] : null;
+  if (!said) return rows;
+  const out = { ...rows };
+  for (const conceptId of Object.keys(said)) {
+    if (out[conceptId]) out[conceptId] = variantOf({ conceptId, row: out[conceptId], variants, key }).row;
+  }
+  return out;
+}
+
+/**
+ * Which declared axes this reader has not answered, for a pair.
+ *
+ * What a settings screen shows as outstanding, and what the board says under the
+ * grid so that a masculine default is never silently shown to someone it is wrong
+ * for. Not an error: the language's default is a real wording and the corpus has
+ * been printing it all along.
+ *
+ * **Presence, not validity.** Declining to answer is an answer — it is stored as an
+ * empty value and the axis stops being outstanding, because a reader who said
+ * "rather not say" has been asked and a line that keeps telling them so is a nag.
+ * `variantKey` ignores an empty value exactly as it ignores an unset one, so the
+ * wording is the same either way; only the asking stops.
  * @param {SpeakerAxis[]} axes @param {SpeakerProfile} profile
  */
 export function unanswered(axes, profile) {
-  return axes.filter((axis) => !axis.values.includes(profile[axis.axis]));
+  return axes.filter((axis) => !(axis.axis in profile));
 }

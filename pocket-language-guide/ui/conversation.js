@@ -13,8 +13,10 @@
 
 import {
   loadText, loadLanguages, readerLanguage, registerOffline, showFatal,
+  deferUpdates, applyUpdateIfIdle,
 } from './app.js';
-import { loadCorpus, loadLanguage } from '../core/pack.js';
+import { loadCorpus, loadLanguage, loadVariants } from '../core/pack.js';
+import { axesFor, variantKey } from '../core/speaker.js';
 import {
   validateBoard, resolvePhrase, missingPhrases, reduce, openBoard, currentNode,
 } from '../core/conversation.js';
@@ -25,7 +27,9 @@ import { resolveValue } from '../core/conversation.js';
 import { parseAmount, formatDuration, unitName } from '../core/duration.js';
 import { openBoardEditor } from './board-editor.js';
 import { speech } from './platform/speech.js';
+import { keepAwake } from './platform/wake.js';
 import { read as readPersonal, placedOn } from './board-store.js';
+import { openSpeakerSettings, readProfile, noticeFor } from './speaker-settings.js';
 import { applyStatic, loadCatalogue, loadUiLanguage, languageName, t } from './i18n.js';
 
 const $ = (/** @type {string} */ id) => /** @type {HTMLElement} */ (document.getElementById(id));
@@ -92,6 +96,27 @@ async function main() {
     ownerDir: dirOf(owner),
   };
 
+  // **Whose voice the outgoing messages are in.** Fetched for whichever of the two
+  // languages declares an axis at all — usually neither, and never more than two
+  // small files — so that answering the question later needs no round trip and no
+  // reload. `variantKey` is recomputed on every change; the tables are not.
+  const asked = axesFor(corpus.speakerAxes, [listener, owner]);
+  const variants = Object.fromEntries(await Promise.all(
+    [listener, owner]
+      .filter((code) => corpus.speakerAxes[code]?.length)
+      .map(async (code) => [code, await loadVariants(loadText, code)]),
+  ));
+  let profile = readProfile();
+  const voice = () => {
+    for (const [code, side] of /** @type {const} */ ([[listener, 'listenerVoice'], [owner, 'ownerVoice']])) {
+      const table = variants[code];
+      ctx[side] = table
+        ? { key: variantKey(corpus.speakerAxes[code] ?? [], profile), variants: table }
+        : undefined;
+    }
+  };
+  voice();
+
   // **Whether anything can say this language, asked once and re-asked if the list
   // fills in later.** Browsers often return an empty voice list on first call and
   // populate it afterwards, so a Speak control that was absent at first paint has to
@@ -123,9 +148,23 @@ async function main() {
   // moment; the cells the corpus cannot supply are drawn unavailable from the start,
   // and the grid never rearranges to hide them.
   const gaps = new Set(missingPhrases(board, ctx));
-  if (gaps.size) {
-    $('board-status').textContent = t('board.someMissing', { count: String(gaps.size) });
-  }
+
+  /**
+   * The two things worth saying under the grid, and neither is an error.
+   *
+   * The second is the one that matters here: where a language does inflect for who
+   * is speaking and the reader has not said, the board is showing the masculine
+   * form, and it says so rather than letting a silent default stand. A line of text,
+   * not a modal — somebody who opened this to show a stranger a sentence should not
+   * first have to answer a question about themselves.
+   */
+  const sayStatus = () => {
+    $('board-status').textContent = [
+      gaps.size ? t('board.someMissing', { count: String(gaps.size) }) : '',
+      noticeFor(corpus.speakerAxes, [listener, owner], profile) ?? '',
+    ].filter(Boolean).join(' ');
+  };
+  sayStatus();
 
   let state = openBoard(board, params.get('replies') === '1');
   const pair = `${listener}__${owner}`;
@@ -157,9 +196,12 @@ async function main() {
     };
   };
 
-  /** @param {import('../core/conversation.js').BoardButton} button */
-  const phraseOf = (button) => (button.phraseRef
-    ? resolvePhrase(button.phraseRef, ctx) : null);
+  /**
+   * @param {import('../core/conversation.js').BoardButton} button
+   * @param {boolean} [incoming] true when the *listener* is the one who taps it
+   */
+  const phraseOf = (button, incoming) => (button.phraseRef
+    ? resolvePhrase(button.phraseRef, ctx, incoming) : null);
 
   /** @param {import('../core/conversation.js').BoardButton} button */
   const labelOf = (button) => {
@@ -188,12 +230,20 @@ async function main() {
   function paint() {
     const stage = $('board-stage');
     const node = withOwn(currentNode(board, state));
+    // Held for exactly as long as a sentence is being read by someone else. A
+    // stranger reading an unfamiliar script off a phone held at arm's length will
+    // often take longer than the display timeout, and the screen going dark means
+    // starting the exchange over.
+    keepAwake(state.view !== 'grid');
+    // A waiting deploy installs here, between things, and nowhere else.
+    applyUpdateIfIdle();
 
-    if (state.view !== 'grid') $('board-edit').hidden = true;
+    if (state.view !== 'grid') { $('board-edit').hidden = true; $('board-settings').hidden = true; }
     if (state.view === 'grid') {
       clearStage(stage);
       $('board-up').hidden = state.path.length < 2;
       $('board-edit').hidden = false;
+      $('board-settings').hidden = !asked.length;
       $('board-up-label').textContent = t('board.up');
       renderGrid($('board-grid'), node, {
         lang: owner,
@@ -233,8 +283,18 @@ async function main() {
         colour: button.colour,
         // The owner presses this one, so it is labelled in their language -- unlike
         // Reply, which the listener presses.
-        onSpeak: canSpeak ? () => { speech.speakPhrase(phrase).catch(() => {}); } : null,
+        // The promise is handed on rather than swallowed: the button's presence is a
+        // claim that this device can read the sentence out, made before anything is
+        // tried, so an engine that then refuses has to say so instead of leaving the
+        // owner tapping a dead control while somebody waits.
+        onSpeak: canSpeak ? () => speech.speakPhrase(phrase) : null,
         speakLabel: t('board.speak'),
+        speakError: (/** @type {string} */ reason) => {
+          const said = t(`speech.${reason}`);
+          // An unfamiliar reason is still a failure worth reporting; a bare key is
+          // not what to report it with.
+          return said === `speech.${reason}` ? t('speech.synthesis-failed') : said;
+        },
       });
       return;
     }
@@ -258,7 +318,10 @@ async function main() {
             }),
           };
         }
-        return { id: b.id, phrase: phraseOf(b) };
+        // **The listener's own sentence, so the owner's profile must not touch it.**
+        // `resolvePhrase` refuses to vary an incoming phrase at all; supplied replies
+        // are written naturally neutral in both languages instead.
+        return { id: b.id, phrase: phraseOf(b, true) };
       }).filter((/** @type {any} */ a) => a.phrase);
 
       renderReply(stage, phrase, answers, {
@@ -309,7 +372,7 @@ async function main() {
     const chosen = set.buttons.find((/** @type {any} */ b) => b.id === state.answerId);
     const answer = state.answerValue
       ? resolveValue(state.answerValue, ctx)
-      : (chosen && phraseOf(chosen));
+      : (chosen && phraseOf(chosen, true));
     if (!answer) { dispatch({ type: 'dismiss' }); return; }
     renderMessage(stage, {
       ...answer, listener: answer.owner, owner: answer.listener,
@@ -339,6 +402,21 @@ async function main() {
     onChange: (next) => { personal = { ...personal, data: next }; paint(); },
   }));
 
+  // **Only where there is something to ask.** Thirty-one of the fifty-three languages
+  // declare no axis, and for those pairs this control does not exist at all rather
+  // than opening onto an empty form. Owner-only and grid-only, like the editor: a
+  // settings screen is not part of a live conversation.
+  const settingsButton = $('board-settings');
+  if (asked.length) {
+    settingsButton.textContent = t('speaker.open');
+    settingsButton.addEventListener('click', () => openSpeakerSettings({
+      axes: corpus.speakerAxes,
+      languages: [listener, owner],
+      profile,
+      onChange: (next) => { profile = next; voice(); sayStatus(); paint(); },
+    }));
+  }
+
   // Escape and the system Back gesture are alternative routes out, not visible
   // controls added to the message. Inside a reply they unwind one view at a time,
   // which `reduce` already decides.
@@ -348,6 +426,12 @@ async function main() {
     else if (state.view !== 'grid') dispatch({ type: 'dismiss' });
     else dispatch({ type: 'up' });
   });
+
+  // **A deploy must not take the sentence off the screen.** The default guard is
+  // "no dialog is open"; the board adds the case the default cannot see, which is a
+  // message the owner is holding out to a stranger. `paint` re-checks, so the update
+  // lands the moment they close it.
+  deferUpdates(() => state.view === 'grid' && !document.querySelector('dialog[open]'));
 
   paint();
   registerOffline();

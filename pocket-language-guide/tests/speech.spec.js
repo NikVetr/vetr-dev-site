@@ -66,3 +66,44 @@ test('no voices is a reported state, not a broken board', async ({ page }) => {
   await page.locator('.board-cell:not(.board-cell-more):not(.board-cell-off)').first().click();
   await expect(page.locator('.board-message-text')).toBeVisible();
 });
+
+test('a voice that fails says so, rather than leaving a dead button', async ({ page }) => {
+  // **The one path a real engine will not produce on demand.** The Speak button's
+  // presence is a claim, made before anything is tried, that this device can read the
+  // sentence out; when the engine then refuses, silence leaves the owner tapping a
+  // dead control in front of somebody who is waiting. So the engine is replaced with
+  // one that has a voice and fails to use it -- the only way to reach the branch, and
+  // still no audio.
+  await page.addInitScript(() => {
+    class Utterance {
+      constructor(/** @type {string} */ text) {
+        Object.assign(this, { text, voice: null, lang: '', rate: 1 });
+      }
+    }
+    const synth = Object.assign(new EventTarget(), {
+      speaking: false,
+      pending: false,
+      getVoices: () => [{ name: 'Fake', lang: 'zh-CN', localService: true, voiceURI: 'fake' }],
+      cancel() {},
+      speak(/** @type {any} */ utterance) {
+        setTimeout(() => utterance.onerror?.({ error: 'synthesis-failed' }), 0);
+      },
+    });
+    Object.defineProperty(window, 'speechSynthesis', { value: synth, configurable: true });
+    Object.defineProperty(window, 'SpeechSynthesisUtterance', { value: Utterance, configurable: true });
+  });
+
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=spa');
+  await page.locator('.board-cell:not(.board-cell-more):not(.board-cell-off)').first().click();
+  await expect(page.locator('.board-message-text')).toBeVisible();
+
+  const speak = page.locator('.board-speak');
+  await expect(speak).toBeVisible();
+  await speak.click();
+
+  // The owner's language, because the owner is who pressed it and who can act on it.
+  const trouble = page.locator('.board-speech-trouble');
+  await expect(trouble).toHaveText('The voice stopped. Try again, or show the text.');
+  // And the sentence is still on screen: a failed reading must not cost the text.
+  await expect(page.locator('.board-message-text')).toBeVisible();
+});

@@ -9,16 +9,24 @@ import { createFontRegistry } from './fonts.js';
 import { createMeasurer } from './measure.js';
 import {
   loadCorpus, loadLanguage, loadRespellOverrides, loadRespellRules, loadSectionTitles,
+  loadVariants,
   loadEmergencyLabels, fillLanguageSlots, buildBlocks,
 } from './pack.js';
 import { createRespeller } from './respell.js';
+import { applyVariants, variantKey } from './speaker.js';
 import { layout } from './solve/index.js';
 import { isElven } from './elven-frame.js';
 
 /**
- * Generated respellings, keyed `target__source__accent`. Module scope rather than
- * per-context: it is a pure function of committed data, so two contexts cannot
- * disagree about it.
+ * Generated respellings, keyed `target__source__accent__voice`. Module scope rather
+ * than per-context: it is a pure function of committed data and the reader's own
+ * profile, so two contexts cannot disagree about it.
+ *
+ * The fourth part of the key is not decoration. A respelling is derived from the
+ * target row's `ipa`, and a speaker variant replaces that row -- so the moment the
+ * reader says they are speaking as a woman, the same pair has a different answer.
+ * Keyed on three parts it returned the previous voice's respellings, which is the
+ * quiet version of exactly the defect this feature exists to fix.
  * @type {Map<string, Record<string,string>>}
  */
 const generated = new Map();
@@ -106,7 +114,8 @@ export function stacksFor(corpus, target, source, typeface = 'sans', serifHeadin
  * @returns {Promise<Record<string,string>>}
  */
 async function generatedRespellings(ctx, spec, targetRows) {
-  const key = `${spec.target}__${spec.source}__${spec.accent}`;
+  const voice = variantKey(ctx.corpus.speakerAxes[spec.target] ?? [], spec.speaker ?? {});
+  const key = `${spec.target}__${spec.source}__${spec.accent}__${voice ?? ''}`;
   const held = generated.get(key);
   if (held) return held;
   // A reader whose language has no rule table gets nothing, which is the state of
@@ -170,6 +179,31 @@ function withThemeColors(theme, colors) {
 }
 
 /**
+ * Both packs in the reader's own voice, or exactly the packs that were loaded.
+ *
+ * Nothing is fetched and nothing is copied when the reader has answered nothing, or
+ * when neither language declares an axis — which is the common case, and the one
+ * every committed pack thumbnail is rendered under.
+ * @param {SheetContext} ctx
+ * @param {import('./types.js').SheetSpec} spec
+ * @param {Record<string,Record<string,string>>} targetRows
+ * @param {Record<string,Record<string,string>>} sourceRows
+ */
+async function voiced(ctx, spec, targetRows, sourceRows) {
+  const profile = spec.speaker;
+  if (!profile || !Object.keys(profile).length) return [targetRows, sourceRows];
+  const axes = ctx.corpus.speakerAxes;
+  const keys = [spec.target, spec.source].map((code) => variantKey(axes[code] ?? [], profile));
+  if (!keys[0] && !keys[1]) return [targetRows, sourceRows];
+  const tables = await Promise.all([spec.target, spec.source].map((code, i) => (
+    keys[i] ? loadVariants(ctx.loadText, code) : Promise.resolve({}))));
+  return [
+    applyVariants(targetRows, tables[0], keys[0]),
+    applyVariants(sourceRows, tables[1], keys[1]),
+  ];
+}
+
+/**
  * Join the corpus for a pair and solve the sheet. Returns the intermediate pieces
  * too, because the studio needs the same rows for its content tree and must not
  * re-derive them -- and because forgetting to load the fonts first is exactly the
@@ -188,10 +222,18 @@ export async function buildSheet(ctx, spec, edits) {
   // cells -- and the one that would hurt is `solve/weights.js`, which *measures*
   // candidate rows to decide what fits, so an unfilled placeholder there makes the
   // balance solver offer a row of the wrong height.
-  const [targetRows, sourceRows] = await Promise.all([
+  const [loadedTarget, loadedSource] = await Promise.all([
     loadLanguage(loadText, spec.target, corpus.groups),
     loadLanguage(loadText, spec.source, corpus.groups),
   ]);
+  // **Whose voice the card is in, settled before anything is measured.** Every
+  // sentence on a cheat sheet is the traveller's own, so if they have said they are
+  // speaking as a woman then `Estoy perdido` is simply the wrong row — and the
+  // respelling under it is wrong too, which is why a variant replaces the row rather
+  // than the string. Both sides: the target is what they will say, the gloss is their
+  // own language describing themselves, and both inflect. Applied here rather than at
+  // draw time because the solver decides what fits by measuring these exact strings.
+  const [targetRows, sourceRows] = await voiced(ctx, spec, loadedTarget, loadedSource);
   const pair = { target: spec.target, source: spec.source };
   fillLanguageSlots(targetRows, {
     ...pair, locale: spec.target, names: corpus.languageNames[spec.target],

@@ -6,6 +6,7 @@
 // concept_id. Adding a language is one directory, and every pair with it works.
 
 import { parseTable } from './csv.js';
+import { readAxes } from './speaker.js';
 
 /** @typedef {(relPath:string)=>Promise<string>} LoadText */
 
@@ -49,6 +50,12 @@ export async function loadCorpus(loadText) {
   const languages = index(await read('data/registry/languages.csv'), 'bcp47');
   const paper = index(await read('data/registry/paper.csv'), 'preset_id');
   const regions = index(await read('data/registry/regions.csv'), 'iso3166');
+  // Which languages inflect the traveller's own speech for something about the
+  // traveller, and what the settings screen may therefore ask. Empty for 31 of the
+  // 53, which is the point of keeping it in a registry rather than in code: a reader
+  // whose languages have no first-person gender agreement is never asked their
+  // gender. See `core/speaker.js` and `data/registry/NOTES.md`.
+  const speakerAxes = readAxes(await read('data/registry/speaker-axes.csv'));
   const sectionRows = await read('data/registry/sections.csv');
   // The five colour roles' own names, for a super-section label: a face's sections
   // are all of a theme far more often than not, and the role is already the colour
@@ -117,6 +124,7 @@ export async function loadCorpus(loadText) {
   return {
     scripts,
     languages,
+    speakerAxes,
     coverage,
     respellOverrides,
     respellRules,
@@ -242,6 +250,36 @@ export async function loadLanguage(loadText, bcp47, groups) {
     }
   }
   return rows;
+}
+
+/**
+ * One language's speaker variants, or an empty table where the file was never written.
+ *
+ * `data/lang/<bcp47>/variants.csv` sits beside the section files and has their
+ * columns plus a leading `variant`, which is a key from `core/speaker.js`. Absent for
+ * every language with no declared axis and for most of the 22 that have one, because
+ * only the concepts that genuinely differ get a row.
+ * @param {LoadText} loadText @param {string} bcp47
+ * @returns {Promise<import('./speaker.js').VariantTable>}
+ */
+export async function loadVariants(loadText, bcp47) {
+  const rel = `data/lang/${bcp47}/variants.csv`;
+  /** @type {import('./speaker.js').VariantTable} */ const out = {};
+  let text;
+  try {
+    text = await loadText(rel);
+  } catch (err) {
+    // Absent is the normal case here, unlike in `loadLanguage`: most languages have
+    // no variants at all, so a 404 is data, not a fault. Anything else still throws.
+    if (isMissingFile(err)) return out;
+    throw err;
+  }
+  for (const row of parseTable(text, rel)) {
+    const { variant, ...fields } = row;
+    if (!variant || !row.concept_id) continue;
+    (out[variant] ??= {})[row.concept_id] = fields;
+  }
+  return out;
 }
 
 /**

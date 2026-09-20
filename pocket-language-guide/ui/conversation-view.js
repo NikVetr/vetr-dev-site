@@ -225,11 +225,15 @@ function watchCells(root) {
  * @param {string} config.replyLabel         in the *listener's* language
  * @param {boolean} [config.incoming]        an answer coming back the other way
  * @param {import('../core/conversation.js').ColourRole} [config.colour]
- * @param {(()=>void)|null} [config.onSpeak]  null where no voice can say this
+ * @param {(()=>void|Promise<unknown>)|null} [config.onSpeak]  null where no voice
+ *   can say this. A rejection is reported rather than swallowed, so the promise is
+ *   handed on rather than caught by the caller.
  * @param {string} [config.speakLabel]        in the *owner's* language
+ * @param {(reason:string)=>string} [config.speakError]  a speech failure's `reason`
+ *   in the owner's words
  */
 export function renderMessage(stage, phrase,
-  { onDismiss, onReply, replyLabel, incoming, colour, onSpeak, speakLabel = '' }) {
+  { onDismiss, onReply, replyLabel, incoming, colour, onSpeak, speakLabel = '', speakError }) {
   stage.replaceChildren();
   stage.hidden = false;
   stage.className = 'board-stage';
@@ -295,12 +299,27 @@ export function renderMessage(stage, phrase,
   // in theirs. Audio is off until pressed -- nothing is spoken on open, on restore,
   // or on changing a setting -- and a device with no voice for this language simply
   // has no button, because text has to work regardless.
+  // **A voice that fails has to say so.** The button's presence is a claim that the
+  // device can read this out, and it is made before anything is tried -- so when the
+  // engine then refuses, silence leaves the owner tapping a dead control in front of
+  // someone who is waiting. One line, next to the button, in the owner's language,
+  // because the owner is the one who pressed it and the one who can do something
+  // about it. Cleared on the next attempt, so a retry that works looks like it did.
+  const trouble = document.createElement('p');
+  trouble.className = 'board-speech-trouble';
+  trouble.setAttribute('role', 'status');
+
   if (onSpeak) {
     const speakButton = document.createElement('button');
     speakButton.type = 'button';
     speakButton.className = 'board-control board-speak';
     speakButton.textContent = speakLabel;
-    speakButton.addEventListener('click', () => onSpeak());
+    speakButton.addEventListener('click', () => {
+      trouble.textContent = '';
+      Promise.resolve(onSpeak()).catch((err) => {
+        trouble.textContent = speakError?.(err?.reason ?? 'synthesis-failed') ?? '';
+      });
+    });
     controls.append(speakButton);
   }
 
@@ -319,7 +338,7 @@ export function renderMessage(stage, phrase,
   // A sibling of the surface, never a child: a button inside a button is invalid,
   // and being a sibling is what structurally stops a control's click reaching the
   // dismiss handler.
-  if (controls.childElementCount) stage.append(controls);
+  if (controls.childElementCount) stage.append(controls, trouble);
 
   fitMessage(big, surface);
   surface.focus();

@@ -451,3 +451,16 @@
   .board-message-text { font-size: clamp(1.6rem, 7vh, 3rem); }
   .board-control { min-block-size: 2.5rem; }
 }
+
+/* A voice that failed, said next to the button that promised it. White, because it
+   sits on the message's own colour; sized down, because it is an aside to the owner
+   and not part of what is being shown to anyone. */
+.board-speech-trouble:empty { display: none; }
+.board-speech-trouble {
+  margin: 0;
+  padding: 0 var(--space-3) var(--space-2);
+  font-size: var(--fs--1);
+  color: rgb(255 255 255 / 0.9);
+  text-align: center;
+}
+.board-stage-incoming .board-speech-trouble { color: var(--muted); }

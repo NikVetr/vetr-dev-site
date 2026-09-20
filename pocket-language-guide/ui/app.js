@@ -9,6 +9,7 @@ import {
   DEFAULT_PADDING, defaultSelection, hasContent, paperSpec, respellOverrideFile,
 } from '../core/pack.js';
 import { messagesReady, t } from './i18n.js';
+import { readProfile } from './speaker-settings.js';
 
 /**
  * **The typesetting engine is loaded on demand, not on import.**
@@ -231,6 +232,12 @@ export function makeSpec(ctx, presets, choice) {
     accent: accentFor(ctx.corpus, choice.source),
     romanization,
     register: 'neutral',
+    // **Whose voice the card is in.** Read here, so every entry point gets it: the
+    // quick page, the studio and the pre-render script all build their spec through
+    // this one function, and a card exported in one voice and reprinted in another
+    // would be a silent change to the words. Empty for every reader who has not
+    // answered, which is what the corpus has always printed.
+    speaker: readProfile(),
     region,
     fieldSet: ['script', 'roman', 'gloss', 'respell', 'numeral'],
     geometry: { ...geometry },
@@ -334,6 +341,48 @@ export function registerOffline() {
   }).catch(() => registerWorker());
 }
 
+/**
+ * Whether it is safe to reload this page out from under the reader right now.
+ *
+ * The default is "no modal is open", which is true of every page here without any
+ * of them having to say so: an open `<dialog>` is a half-finished thought — a phrase
+ * being typed, a quiz being answered, an import being reviewed — and throwing it
+ * away to install an update the reader did not ask for is a bad trade at any speed.
+ * The conversation board replaces this with a stricter one, because it has a worse
+ * case than a lost sentence.
+ * @type {() => boolean}
+ */
+let idle = () => !document.querySelector('dialog[open]');
+let updateWaiting = false;
+let reloading = false;
+
+/**
+ * Hold page reloads until this page says it is between things.
+ *
+ * Called once, at bootstrap, by a page that knows something the default does not.
+ * @param {() => boolean} isIdle
+ */
+export function deferUpdates(isIdle) {
+  idle = isIdle;
+}
+
+/**
+ * Install a waiting update if now is a good moment, otherwise keep waiting.
+ *
+ * Safe to call as often as you like; it does nothing unless a new worker has
+ * actually taken over. Pages call it when they reach a resting state — the board
+ * calls it from `paint`, and a closing dialog triggers it for everyone else.
+ */
+export function applyUpdateIfIdle() {
+  if (!updateWaiting || reloading || !idle()) return;
+  reloading = true;
+  window.location.reload();
+}
+
+// `close` does not bubble, so this listens in the capture phase. Every modal in the
+// app is a `<dialog>`, which makes this the one place that has to know about them.
+document.addEventListener('close', () => applyUpdateIfIdle(), true);
+
 function registerWorker() {
 
   // **A deploy has to land on the first load, not the second.** The worker serves
@@ -345,16 +394,22 @@ function registerWorker() {
   // ones. Without this the reader has to load the page twice to see a change, which
   // reads exactly like the change not having shipped.
   //
+  // **But not while the reader is in the middle of something.** The reload used to
+  // be unconditional, and the worst version of that is specific: the owner is
+  // holding the phone out to a stranger with a full-screen sentence on it, a deploy
+  // lands, and the sentence vanishes and the grid comes back. Second worst is a
+  // half-typed phrase in the editor. So the reload waits for `idle`, and the page
+  // that knows what "busy" means says so — an update that arrives a minute late has
+  // cost nobody anything.
+  //
   // Guarded on there having *been* a controller, because `controllerchange` also
   // fires the first time a worker takes charge of a page that had none -- reloading
-  // then would reload every first visit. And latched, because a reload during the
-  // handler would otherwise be able to re-enter it.
+  // then would reload every first visit.
   const had = navigator.serviceWorker.controller !== null;
-  let reloading = false;
   navigator.serviceWorker.addEventListener('controllerchange', () => {
-    if (!had || reloading) return;
-    reloading = true;
-    window.location.reload();
+    if (!had) return;
+    updateWaiting = true;
+    applyUpdateIfIdle();
   });
 
   navigator.serviceWorker.register('sw.js', { scope: './' })

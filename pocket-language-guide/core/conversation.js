@@ -30,6 +30,7 @@
 
 import { appliesTo } from './pack.js';
 import { formatDuration, supports as supportsUnits } from './duration.js';
+import { variantOf } from './speaker.js';
 
 /** How many levels of submenu a board may nest. Deeper is a menu tree, not a board. */
 const MAX_DEPTH = 3;
@@ -253,11 +254,17 @@ export function phrasesOf(board) {
  * Scope is checked with `appliesTo`, the same helper the sheet uses, so a concept
  * scoped away from this target is unavailable here too rather than quietly resolving
  * to a gloss row that happens to exist.
+ *
+ * `incoming` says whose sentence this is, and it is the whole of the speaker-profile
+ * rule: an outgoing message is the owner speaking, so it takes whatever wording they
+ * have said is theirs, and a reply the *listener* taps is not the owner's to inflect.
+ * `variantOf` enforces the refusal, so a caller cannot break it by forgetting.
  * @param {PhraseRef} ref
  * @param {ResolveContext} ctx
+ * @param {boolean} [incoming] true for a reply the listener taps, false for a message
  * @returns {ResolvedPhrase|null}
  */
-export function resolvePhrase(ref, ctx) {
+export function resolvePhrase(ref, ctx, incoming = false) {
   if (ref.kind === 'custom') {
     const own = ctx.custom?.[ref.id];
     if (!own?.listener || !own?.owner) return null;
@@ -272,9 +279,10 @@ export function resolvePhrase(ref, ctx) {
   }
   const concept = ctx.corpus.concepts[ref.id];
   if (!concept || !appliesTo(concept, ctx.listener)) return null;
-  const listener = ctx.listenerRows[ref.id];
-  const owner = ctx.ownerRows[ref.id];
-  if (!listener?.text || !owner?.text) return null;
+  const base = { listener: ctx.listenerRows[ref.id], owner: ctx.ownerRows[ref.id] };
+  if (!base.listener?.text || !base.owner?.text) return null;
+  const listener = say(ctx.listenerVoice, ref.id, base.listener, incoming);
+  const owner = say(ctx.ownerVoice, ref.id, base.owner, incoming);
   return {
     id: ref.id,
     listener: { text: listener.text, lang: ctx.listener, dir: ctx.listenerDir },
@@ -286,6 +294,28 @@ export function resolvePhrase(ref, ctx) {
 }
 
 /**
+ * One side's row as the owner says it. Factored out because both sides take the
+ * same treatment and the `incoming` refusal has to be the same one on each.
+ * @param {SpeakerVoice|undefined} voice
+ * @param {string} conceptId
+ * @param {Record<string,string>} row
+ * @param {boolean} incoming
+ */
+function say(voice, conceptId, row, incoming) {
+  if (!voice?.key) return row;
+  return variantOf({ conceptId, row, variants: voice.variants, key: voice.key, incoming }).row;
+}
+
+/**
+ * How one language's rows are bent to the person holding the phone: the key their
+ * settings resolve to, and that language's sparse variant table. Absent for every
+ * language with no declared axis, and for every reader who has answered nothing.
+ * @typedef {Object} SpeakerVoice
+ * @property {string|null} key
+ * @property {import('./speaker.js').VariantTable} variants
+ */
+
+/**
  * @typedef {Object} ResolveContext
  * @property {{concepts:Record<string,any>}} corpus
  * @property {Record<string,Record<string,string>>} listenerRows
@@ -295,6 +325,8 @@ export function resolvePhrase(ref, ctx) {
  * @property {'ltr'|'rtl'} listenerDir
  * @property {'ltr'|'rtl'} ownerDir
  * @property {Record<string,{owner:string, listener:string}>} [custom]
+ * @property {SpeakerVoice} [listenerVoice]
+ * @property {SpeakerVoice} [ownerVoice]
  */
 
 /**

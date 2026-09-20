@@ -137,6 +137,38 @@ test('a concept scoped away from this listener is not reachable through a board'
   assert.equal(resolvePhrase({ kind: 'corpus', id: 'a.elsewhere' }, ctx), null);
 });
 
+test('a message is in the owner\'s voice and a reply is never bent to it', () => {
+  // The two halves of the speaker-profile rule, at the seam where they meet. A board
+  // is two people sharing one screen, and the same concept can be on both sides of
+  // it: `a.dunno` is something the traveller might say and also something the person
+  // behind the counter might tap. Which of them is speaking decides whether the
+  // traveller's profile applies -- so this is checked here rather than trusted to
+  // whoever writes the next reply set.
+  const voiced = {
+    ...ctx,
+    listenerVoice: {
+      key: 'speaker_gender=feminine',
+      variants: { 'speaker_gender=feminine': { 'a.stop': { text: '请停下（女）' }, 'a.dunno': { text: '我不确定（女）' } } },
+    },
+    ownerVoice: {
+      key: 'speaker_gender=feminine',
+      variants: { 'speaker_gender=feminine': { 'a.stop': { text: 'Please stop (f)' } } },
+    },
+  };
+  // Outgoing: both sides take the wording she said is hers, because both sides are
+  // her -- the listener's language is what she is showing them, not what they say.
+  const said = resolvePhrase({ kind: 'corpus', id: 'a.stop' }, voiced);
+  assert.equal(said?.listener.text, '请停下（女）');
+  assert.equal(said?.owner.text, 'Please stop (f)');
+  // Incoming: refused, even though a variant exists and the key is set. Inflecting
+  // what a stranger taps would put words in their mouth and tell them something
+  // about the traveller they never asked.
+  const reply = resolvePhrase({ kind: 'corpus', id: 'a.dunno' }, voiced, true);
+  assert.equal(reply?.listener.text, '我不确定');
+  // A concept with no variant is unchanged either way, which is the common case.
+  assert.equal(resolvePhrase({ kind: 'corpus', id: 'a.hurts' }, voiced)?.listener.text, '很痛');
+});
+
 test("the owner's own phrase carries its text and admits it is unreviewed", () => {
   const withCustom = { ...ctx, custom: { mine: { owner: 'No peanuts', listener: '不要花生' } } };
   const got = resolvePhrase({ kind: 'custom', id: 'mine' }, withCustom);

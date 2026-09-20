@@ -102,6 +102,14 @@ async function boardCorpus() {
         out.push(rel);
       } catch { /* this pack does not carry that group */ }
     }
+    // The wordings that depend on who is speaking, where the language has any. Same
+    // rule as the groups above: absent for most, and the shell may not name a file
+    // that is not there. It belongs here rather than in the registry scan because it
+    // is per language and only the board's own pairs are carried.
+    try {
+      await stat(join(ROOT, `data/lang/${code}/variants.csv`));
+      out.push(`data/lang/${code}/variants.csv`);
+    } catch { /* this language asks nothing about the speaker, or has no wordings yet */ }
   }
   return out;
 }

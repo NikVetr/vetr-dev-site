@@ -194,6 +194,12 @@
  * @property {string} accent
  * @property {string} romanization
  * @property {string} register
+ * @property {Record<string,string>} [speaker]  what the reader has told the app
+ *   about themselves, per axis — `{ speaker_gender: 'feminine' }`. Part of the spec
+ *   rather than a global, because it changes the words and therefore the measured
+ *   widths, and an exported sheet that did not carry it would come back different.
+ *   Absent means unset, which resolves to every language's own declared default and
+ *   is what the corpus has been printing all along. See `core/speaker.js`.
  * @property {string} region  ISO 3166-1 alpha-2; supplies local emergency numbers
  * @property {FieldId[]} fieldSet
  * @property {Geometry} geometry

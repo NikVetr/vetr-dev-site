@@ -666,6 +666,49 @@ hands Hausa to a Hawaiian voice. Audio is off until pressed, every utterance can
 the last, and a device with no voice simply has no button. **No audio has been heard
 on any device.**
 
+## Whose voice the card is in
+
+A woman holds up a Russian card that says `Я заблудился` and it is in a man's voice.
+A translator cannot do better — one sentence, no speaker, so it picks the citation
+form. **This app's phrases are a fixed set, so it can ask once and never ask again**,
+which is the advantage a small inflexible board has over a flexible translator.
+
+**Only meaningful choices are offered.** `data/registry/speaker-axes.csv` declares one
+axis, `speaker_gender`, for 22 of 53 languages; the other 31 ask nothing and their
+readers see no control. **No politeness axis exists for any language** — every
+politeness system here (Japanese, Korean, Javanese, Thai, Khmer, Vietnamese, Filipino,
+Bengali, Persian, the European T–V distinctions) is selected by the *addressee*, and a
+card shown to a stranger has one correct setting. Politeness is a content invariant
+for the packs, not a question. `data/registry/NOTES.md` carries the survey, per
+language, with sources and confidence.
+
+**Nothing is inferred and no default is silent.** Unset resolves to the row on disk,
+which is the masculine — and where that is happening the app says so, under the grid
+and beside the control on the cheat sheet. Declining is stored as an answer, so
+"rather not say" stops the asking without pretending to be a choice of form.
+
+**A variant replaces the row, not the string.** `data/lang/<code>/variants.csv` is
+sparse twice over — absent for most languages, and a row only where a wording
+genuinely differs — with the language's own columns plus a leading `variant`, where a
+blank cell inherits. It has to be the row because the pronunciation moves with the
+wording: `Я заблудилась` is romanised *ya zabludilas*, and varying the script while
+leaving the respelling masculine teaches her to say the wrong thing out loud.
+
+**An incoming reply is never inflected for the owner.** `variantOf` refuses a phrase
+marked `incoming`, so this is structural rather than remembered — it matters because
+the same concept can be on both sides of the screen, and bending what a stranger taps
+to the traveller's gender would put words in their mouth and leak a profile nobody
+asked for. Supplied replies are written naturally neutral in both languages instead;
+`content/PROMPTS/speaker-variants.md` lists the per-language traps, including the two
+languages (Amharic, Hausa) whose first person is ungendered and whose *second* person
+is not — no axis, real hazard.
+
+One setting, four surfaces: the board, the quick page and the studio open the same
+dialog, the profile rides in `SheetSpec.speaker` so an exported sheet carries the
+voice it was built in, and the drill inherits it because it drills the blocks the
+sheet solved. `buildSheet` applies it **before anything is measured**, since the
+solver decides what fits by measuring these exact strings.
+
 ## Typeface, and what "font options" costs
 
 `spec.typeface` is `sans` or `serif`. Stack names gain a suffix -- `latin` becomes

@@ -21,6 +21,7 @@ import {
 import { familyFor } from '../render/fonts.js';
 import { languageName, t } from './i18n.js';
 import { ornamentControl } from './ornament-control.js';
+import { speakerControl } from './speaker-settings.js';
 
 const COLUMN_CHOICES = [1, 2, 3, 4, 5, 6];
 /** Theme colour keys a furniture band may be set in, named as the theme files key them. */
@@ -706,7 +707,17 @@ export function createFormatPanel(input) {
     onChange: (next) => emit({ fieldSet: [...next, 'numeral'] }),
   });
 
+  // The same one setting as the quick page and the conversation board: one fact
+  // about the reader, asked once, wherever they happen to be when they answer it.
+  const voice = speakerControl({
+    axes: corpus.speakerAxes,
+    languages: [spec.target, spec.source],
+    profile: spec.speaker ?? {},
+    onChange: (next) => emit({ speaker: next }),
+  });
+
   root.replaceChildren(
+    ...(voice ? [panelField(t('speaker.title'), [voice.button, voice.note])] : []),
     panelField(t('format.card'), [size.group, size.custom]),
     phoneField,
     // Beside the phone it belongs to. It was sixteen fields further down, between

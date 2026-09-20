@@ -22,6 +22,7 @@ import {
 } from './glyphs.js';
 import { familyFor } from '../render/fonts.js';
 import { regionRow } from './flags.js';
+import { speakerControl } from './speaker-settings.js';
 import {
   warningText, applyStatic, languageName, loadUiLanguage, number, regionList, t,
 } from './i18n.js';
@@ -268,7 +269,18 @@ async function main() {
     return wrap;
   };
 
+  // **Whose voice the card is in**, on the page someone prints from rather than
+  // buried in the studio. Absent for the 31 languages that decline to ask, which is
+  // the point: a control that opens onto an empty form is worse than no control.
+  const voice = speakerControl({
+    axes: ctx.corpus.speakerAxes,
+    languages: [choice.target, choice.source],
+    profile: spec.speaker ?? {},
+    onChange: (next) => set({ speaker: next }),
+  });
+
   $('controls').replaceChildren(
+    ...(voice ? [panelField(t('speaker.title'), [voice.button, voice.note])] : []),
     panelField(t('format.cardSize'), [card.group, card.custom]),
     reserveField,
     panelField(t('format.priority'), [priority.group]),

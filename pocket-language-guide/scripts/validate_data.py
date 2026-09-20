@@ -487,6 +487,69 @@ def main():
             warnings.append(f"lang/{code}: {len(seen & applicable)} of {len(applicable)} "
                             f"concepts ({100 * len(seen & applicable) // max(1, len(applicable))}%)")
 
+    # --- speaker variants -------------------------------------------------
+    #
+    # `data/lang/<code>/variants.csv` holds the wordings a language needs when the
+    # traveller speaking is a woman rather than a man. Sparse by design and absent
+    # for most languages, so nothing here requires a file to exist -- coverage is
+    # reported by `scripts/speaker_coverage.mjs`, which is a gap list and not a
+    # gate. What is an error is a row that can never be read: a key no language
+    # declares, or a variant of a phrase this pack does not have.
+    axes = defaultdict(dict)
+    for row in load("registry/speaker-axes.csv"):
+        held = axes[row["language"]].setdefault(row["axis"], {"values": [], "default": None})
+        held["values"].append(row["value"])
+        if row["default"] == "1":
+            held["default"] = row["value"]
+    for code, declared in sorted(axes.items()):
+        if code not in languages:
+            errors.append(f"speaker-axes.csv: unknown language {code!r}")
+        for axis, held in sorted(declared.items()):
+            # An axis with one value is not a choice, and one whose default is not
+            # among its values leaves every reader in an unreachable state.
+            if len(held["values"]) < 2:
+                errors.append(f"speaker-axes.csv: {code}/{axis} offers "
+                              f"{len(held['values'])} value(s), so it is not a choice")
+            if held["default"] not in held["values"]:
+                errors.append(f"speaker-axes.csv: {code}/{axis} defaults to "
+                              f"{held['default']!r}, which is not one of its values")
+            # Never about the listener. Replies are written neutral instead, and a
+            # questionnaire about a stranger is what this design refuses.
+            if re.search(r"listener|addressee|hearer", axis, re.I):
+                errors.append(f"speaker-axes.csv: {code}/{axis} is about the listener, "
+                              "which must never be asked -- write the reply neutral")
+    for path in sorted(DATA.glob("lang/*/variants.csv")):
+        code = path.parent.name
+        rel = path.relative_to(DATA)
+        declared = axes.get(code, {})
+        if not declared:
+            errors.append(f"{rel}: {code} declares no axis in speaker-axes.csv, "
+                          "so no variant of it can ever be selected")
+        # Every key the registry can actually produce. Sorted `axis=value` pairs,
+        # matching `variantKey` in core/speaker.js, and never the all-defaults one --
+        # that is the base row, which lives in the section file.
+        keys = {f"{axis}={value}"
+                for axis, held in declared.items()
+                for value in held["values"] if value != held["default"]}
+        base = set()
+        for group in groups:
+            src = DATA / f"lang/{code}/{group}.csv"
+            if src.exists():
+                base |= {r["concept_id"] for r in load(src.relative_to(DATA))}
+        for line, row in enumerate(load(rel), start=2):
+            where = f"{rel}:{line}"
+            if row["variant"] not in keys:
+                errors.append(f"{where}: variant {row['variant']!r} is not a key "
+                              f"{code} can produce -- want one of {sorted(keys)}")
+            if row["concept_id"] not in concepts:
+                errors.append(f"{where}: unknown concept_id {row['concept_id']!r}")
+            elif row["concept_id"] not in base:
+                errors.append(f"{where}: {code} has no base row for "
+                              f"{row['concept_id']!r}, so this variant is unreachable")
+            if not (row.get("text") or "").strip():
+                errors.append(f"{where}: no text -- a variant with nothing to say "
+                              "should not have a row")
+
     for path in sorted((DATA / "respell/overrides").glob("*.csv")):
         for row in load(path.relative_to(DATA)):
             if row["concept_id"] not in concepts:

@@ -461,5 +461,22 @@
   "board.hours": "hours",
   "board.days": "days",
   "board.confirm": "Confirm",
-  "board.notAnAmount": "Enter a whole number"
+  "board.notAnAmount": "Enter a whole number",
+  "speaker.title": "How you speak",
+  "speaker.lede": "Some languages change a sentence depending on who is saying it. Answer once here and every phrase will be in your own voice — on the board, on the cheat sheet and in the practice drills. Nothing is guessed, and nothing leaves this device.",
+  "speaker.open": "How you speak",
+  "speaker.done": "Done",
+  "speaker.unspecified": "Rather not say — use the standard wording",
+  "speaker.nothingToAsk": "Neither of these languages changes a phrase according to who is speaking, so there is nothing to set.",
+  "speaker.unset": "{axes}: not set, so these phrases use the standard wording.",
+  "speaker.speaker_gender": "Speaking as",
+  "speaker.speaker_gender.why": "In these languages a verb or an adjective about yourself changes form. “I am lost” and “thank you” are different sentences depending on the answer.",
+  "speaker.speaker_gender.masculine": "A man",
+  "speaker.speaker_gender.feminine": "A woman",
+  "speech.no-voice": "This device has no voice for that language.",
+  "speech.remote-only": "The only voice for that language needs a connection.",
+  "speech.loading": "Voices are still loading — try again in a moment.",
+  "speech.unsupported": "This browser cannot read text aloud.",
+  "speech.unmapped": "There is no voice for that language anywhere.",
+  "speech.synthesis-failed": "The voice stopped. Try again, or show the text."
 }

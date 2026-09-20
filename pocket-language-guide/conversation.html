@@ -33,7 +33,10 @@
       <span aria-hidden="true">←</span> <span id="board-up-label"></span>
     </button>
     <div class="spacer"></div>
-    <!-- Owner-only. `ui/conversation.js` hides it on every view but the grid. -->
+    <!-- Owner-only, both of them. `ui/conversation.js` hides them on every view but
+         the grid, and leaves the settings control hidden entirely for a pair whose
+         languages ask nothing about the speaker. -->
+    <button type="button" id="board-settings" class="board-edit" hidden></button>
     <button type="button" id="board-edit" class="board-edit" hidden></button>
   </div>
   <div id="board-grid" class="board-grid" aria-busy="true"></div>

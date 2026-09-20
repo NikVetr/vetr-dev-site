@@ -1052,3 +1052,119 @@ out of the reachability check, which is a question about the grid.
 is general-purpose across the corpus — retuning it for one reply grid would change
 every other use. A softer staff form would have to be a new concept. Flagged for the
 owner rather than decided.
+
+## Batch C — whose voice the card is in
+
+The complaint this batch exists for is one sentence long: *a woman shows a Russian
+card that says* `Я заблудился` *and it is in a man's voice.* A general translation
+tool cannot do better — it is handed one sentence and no speaker, so it picks the
+citation form, which is the masculine in every language here. **This app's phrases
+are a fixed set, so it can ask once, in advance, and never ask again.** That is the
+whole advantage a small inflexible board has over a flexible translator.
+
+### Only meaningful choices, which meant surveying first
+
+Before writing a settings screen it was worth knowing what there is to ask, so a
+survey went through all 53 ready languages asking one narrow question: *does a
+**first-person** phrase **in this corpus** change according to a property of the
+speaker?* Not "does the language have gender" — most grammar summaries illustrate the
+third person, and several first drafts were wrong until the paradigm itself was read.
+
+The answer is in `data/registry/speaker-axes.csv` (44 rows) with the full reasoning,
+sources and confidence per language in `data/registry/NOTES.md`:
+
+- **One axis, `speaker_gender`, for 22 of 53 languages.** 31 declare nothing and
+  their readers are asked nothing — the settings control is not rendered at all.
+- **No politeness axis anywhere.** Every politeness system in this set — Japanese,
+  Korean, Javanese, Thai, Khmer, Vietnamese, Filipino, Bengali, Persian, and the
+  European T–V distinctions — is oriented to the *addressee*, and a card shown to a
+  stranger has exactly one correct setting. Politeness is a **content invariant** for
+  the packs, not a question for the traveller. Javanese is the one language where a
+  register axis would arguably be worth asking; the pack is uniformly *krama* and
+  declaring `{krama, ngoko}` would offer a second value that is always wrong here.
+- **Nothing about the listener.** Where second-person forms are gendered it is
+  recorded as a hazard for reply *content*, never as a question.
+
+### The mechanism
+
+`core/speaker.js` (`readAxes`, `axesFor`, `variantKey`, `variantOf`, `applyVariants`,
+`unanswered`) and a sparse per-language file `data/lang/<code>/variants.csv` — the
+language's own columns plus a leading `variant`, where a blank cell inherits and only
+the cells that genuinely differ are written. Three properties are structural rather
+than remembered:
+
+**A variant replaces the row, not the string.** `Я заблудилась` is romanised
+*ya zabludilas*, and a card that varied the script while leaving the respelling
+masculine would be teaching her to say the wrong thing out loud. That was the first
+thing to get wrong and is now what `variantOf` is shaped around.
+
+**An incoming reply is never inflected for the owner.** `variantOf` refuses a phrase
+marked `incoming`, so a caller cannot break the rule by forgetting it. The board
+resolves reply-set buttons through that path — `tests/conversation.test.mjs` checks
+the awkward case, where the *same concept* (`I don't know`) is something the traveller
+might say and also something the person behind the counter might tap. Bending the
+second to the traveller's gender would put words in a stranger's mouth and leak the
+traveller's profile to someone who never asked.
+
+**No silent masculine default.** Unset is a real stored state that resolves to the
+row on disk — but where a pair *does* inflect and the reader has not said, the app
+says so, in a line under the grid and beside the control on the cheat sheet. Declining
+is stored as an answer, so "rather not say" stops the asking without pretending to be
+a choice of form.
+
+### One setting, four surfaces
+
+`ui/speaker-settings.js` holds the storage and the form; the conversation board, the
+quick page and the studio panel all open the same dialog, and the profile rides in
+`SheetSpec.speaker` so an exported sheet carries the voice it was built in. The
+cheat sheet applies it once in `buildSheet`, **before anything is measured** — the
+solver decides what fits by measuring these exact strings — and the practice drill
+inherits it for free, because it drills the blocks the sheet solved. Storage is
+`localStorage`, not a cookie: a fact about the reader's own body has no business
+being sent to a server on every request, and it is the same key the native shell's
+`Preferences` will map onto.
+
+### Honest coverage
+
+`scripts/speaker_coverage.mjs` reports rather than fails, because a declared axis with
+no wordings yet is a known state the reader is told about, and turning it red would
+mean either declaring fewer axes than the grammar warrants or shipping wordings nobody
+has checked. `scripts/validate_data.py` owns what really is an error: a variant key no
+language declares, a variant of a phrase the pack does not have, a variant with no
+text, an axis with one value, an axis whose default is not one of its values, and an
+axis named for the listener.
+
+### Two things deliberately not done
+
+**The base rows still carry the old ad-hoc forms.** 113 first-person rows hold a slash
+inside the sentence (`Estoy perdido/a`, `Ztratil jsem se / ztratila jsem se`), and
+several packs park a feminine in `text_alt`, which is that cell's other and unrelated
+job. Cleaning them is the right fix and changes what every card prints, which stales
+2,756 committed pack thumbnails — so it is its own pass with a pre-render settle
+rather than a rider on this one. `speaker_coverage.mjs` counts the backlog and
+`content/PROMPTS/speaker-variants.md` says how to clear it. Until then a woman who
+answers sees the clean sentence and a man still sees the slash, which is an odd
+asymmetry and strictly an improvement.
+
+**No `companion_gender` axis.** Five concepts inflect for the gender of someone who is
+neither speaker nor listener (`my friend is hurt`, `my child is missing`, …). An axis
+would be a second questionnaire, about a third party, during an emergency, to produce
+a sentence whose gender the listener can see for themselves. The rule is to write them
+with a grammatically fixed word — Russian *ребёнок* is masculine whatever the child's
+sex — and that is recorded in the prompt.
+
+### Also in this batch
+
+**An update no longer interrupts a sentence.** The service worker's
+`controllerchange` handler reloaded the page unconditionally, so a deploy landing
+while the owner held the phone out to a stranger took the sentence off the screen.
+Reloads now wait for `idle`, which defaults to "no `<dialog>` is open" — true of every
+page without any of them having to say so — and the board narrows it to "and no
+message is showing". The update lands the moment they close it.
+
+**The screen stays awake while a message is up.** `ui/platform/wake.js`, held for
+exactly as long as a sentence is on screen. A stranger reading an unfamiliar script
+off a phone at arm's length routinely takes longer than a 15-second display timeout,
+and the screen going dark means starting the exchange again. Best-effort and silent
+when unavailable, and re-acquired on `visibilitychange`, because the platform drops
+the lock whenever the page is hidden and does not give it back.
