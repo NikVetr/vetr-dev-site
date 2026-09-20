@@ -1,0 +1,15 @@
+variant,concept_id,text,text_alt,romanization_ala-lc,ipa,literal,confidence,provenance
+speaker_gender=feminine,accessibility.visually-impaired,أنا ضعيفة البصر,,anā ḍaʿīfat al-baṣar,ˈana dˤʕˈiːft ʔalbˈas̪ar,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,border-customs.i-am-a-tourist,أنا سائحة,,anā sāʾiḥah,ˈana saːʔħt,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,border-customs.i-am-in-transit,أنا مسافرة عابرة,,anā musāfirah ʿābirah,ˈana msˈaːfrt ʕˈaːbrt,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,border-customs.i-am-staying-at,أنا مقيمة في {},,anā muqīmah fī {},ˈana mqˈimt fˈiː {},,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,building-help.i-am-lost,أنا تائهة,,anā tāʾihah,ˈana tˈaːʔht,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,dietary-needs.i-am-vegan,أنا نباتية صرفة,,anā nabātīyah ṣirfah,ˈana nˌabaːtˈijjah s̪rft,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,dietary-needs.i-am-vegetarian,أنا نباتية,,anā nabātīyah,ˈana nˌabaːtˈijjah,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,emergency-medical.i-am-injured,أنا مصابة,,anā muṣābah,ˈana ms̪ˈaːbt,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,emergency-medical.i-am-sick,أنا مريضة,,anā marīḍah,ˈana mɹˈiːdˤt,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,introductions.i-am-a-tourist,أنا سائحة,,anā sāʾiḥah,ˈana saːʔħt,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,medical-conditions.i-am-diabetic,أنا مصابة بالسكري,,anā muṣābah bi-al-sukkarī,ˈana ms̪ˈaːbt bissˈukːaɹˌiːj,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,pharmacy-symptoms.i-think-i-have-dengue,أظنّ أنّني مصابة بحمّى الضنك,,aẓunn annanī muṣābah bi-ḥummá al-ḍank,ʔðnn ʔnnnˈiː ms̪ˈaːbt bħmma ʔadˤdˤˈank,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,pharmacy-symptoms.i-think-i-have-malaria,أظنّ أنّني مصابة بالملاريا,,aẓunn annanī muṣābah bi-al-malāriyā,ʔðnn ʔnnnˈiː ms̪ˈaːbt bilmalˈaːɹiːˌaː,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,police-consulate.am-i-under-arrest,هل أنا موقوفة؟,,hal anā mawqūfah?,hˈal ˈana mˈuːqwft,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak

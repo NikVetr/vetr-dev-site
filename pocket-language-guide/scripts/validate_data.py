@@ -531,12 +531,15 @@ def main():
         keys = {f"{axis}={value}"
                 for axis, held in declared.items()
                 for value in held["values"] if value != held["default"]}
-        base = set()
+        base_rows = {}
         for group in groups:
             src = DATA / f"lang/{code}/{group}.csv"
             if src.exists():
-                base |= {r["concept_id"] for r in load(src.relative_to(DATA))}
-        for line, row in enumerate(load(rel), start=2):
+                for r in load(src.relative_to(DATA)):
+                    base_rows[r["concept_id"]] = r
+        base = set(base_rows)
+        variants = load(rel)
+        for line, row in enumerate(variants, start=2):
             where = f"{rel}:{line}"
             if row["variant"] not in keys:
                 errors.append(f"{where}: variant {row['variant']!r} is not a key "
@@ -549,6 +552,46 @@ def main():
             if not (row.get("text") or "").strip():
                 errors.append(f"{where}: no text -- a variant with nothing to say "
                               "should not have a row")
+            # The same slot rule the group files are held to, because a variant
+            # replaces the row it patches: `أنا مقيمة في {}` that lost its `{}` would
+            # print a sentence with the place silently missing from it, to a border
+            # officer, and nothing else here would notice.
+            elif row["concept_id"] in concepts:
+                want = int(concepts[row["concept_id"]]["slots"] or 0)
+                got = row["text"].count("{}")
+                if got != want:
+                    errors.append(f"{where}: has {got} slots, concept declares {want}")
+        # **A variant that changes the wording and not the pronunciation.** `ipa`
+        # feeds the respelling column, which is what the reader actually says out
+        # loud, so a blank cell here inherits the other gender's pronunciation and
+        # the card teaches her to say the wrong thing -- the exact failure the
+        # row-based variant design exists to prevent. `build_ipa.py` fills this for
+        # every language it has a route for, so in practice this catches the ones it
+        # does not: Khmer's column is hand-analysed. A warning, because the fix is a
+        # reader of that language rather than a rule.
+        blind = [row["concept_id"] for row in variants
+                 if not (row.get("ipa") or "").strip()
+                 and (row.get("text") or "").strip()
+                 and (base_rows.get(row["concept_id"], {}).get("ipa") or "").strip()]
+        if blind:
+            warnings.append(f"{rel}: {len(blind)} "
+                            f"{'variant inherits' if len(blind) == 1 else 'variants inherit'} "
+                            "the other gender's pronunciation while changing the "
+                            f"wording ({', '.join(blind[:3])})")
+        # Hebrew's `text_alt` is `text` with the vowel points added, which the group
+        # loop above enforces -- so a variant that changes `text` and leaves
+        # `text_alt` blank inherits the *other* gender's pointed spelling. A warning
+        # rather than an error: 55 rows arrived this way and the pointing cannot be
+        # derived from the unpointed string, so closing it needs a reader of Hebrew
+        # and not a rule. Aggregated, because 55 identical lines say nothing 1 does.
+        if code == "he":
+            stale = sum(1 for row in variants
+                        if not (row.get("text_alt") or "").strip()
+                        and (base_rows.get(row["concept_id"], {}).get("text_alt") or "").strip())
+            if stale:
+                warnings.append(f"{rel}: {stale} variant{'' if stale == 1 else 's'} change "
+                                "`text` but inherit the other gender's pointed "
+                                "spelling in `text_alt`")
 
     for path in sorted((DATA / "respell/overrides").glob("*.csv")):
         for row in load(path.relative_to(DATA)):

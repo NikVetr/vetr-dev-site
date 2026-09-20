@@ -1,0 +1,2 @@
+variant,concept_id,text,text_alt,ipa,literal,confidence,provenance
+speaker_gender=feminine,quick-responses.yes-right,ចាស,,tɕaːh,,2,km-variants-v1;rule=polite-response-particle-selected-by-speaker-sex;ipa=km-analysis

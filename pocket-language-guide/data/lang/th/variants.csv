@@ -1,0 +1,4 @@
+variant,concept_id,text,text_alt,romanization_rtgs,ipa,literal,confidence,provenance
+speaker_gender=feminine,pronouns-verbs.i-me,ดิฉัน,,dichan,diʔ˨˩tɕʰan˩˩˦,,2,th-variants-v1;rule=polite-particle-or-pronoun-selected-by-speaker-sex;ipa=thaig2p
+speaker_gender=feminine,pronouns-verbs.my-mine,ของดิฉัน,,khong dichan,kʰɔːŋ˩˩˦ diʔ˨˩tɕʰan˩˩˦,,2,th-variants-v1;rule=polite-particle-or-pronoun-selected-by-speaker-sex;ipa=thaig2p
+speaker_gender=feminine,social-basics.hello-polite,สวัสดีค่ะ,,sawatdi kha,sa˨˩wat˦˥diː˧ kʰaʔ˨˩,,2,th-variants-v1;rule=polite-particle-or-pronoun-selected-by-speaker-sex;ipa=thaig2p

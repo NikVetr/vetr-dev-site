@@ -1,0 +1,56 @@
+variant,concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
+speaker_gender=feminine,accessibility.cannot-climb-stairs,אני לא יכולה לעלות במדרגות,,ani lo yekhola la‘alot bemadregot,anˈi lˈo jexolˈa laalˈot bemadʁeɡˈot,,2,he-variants-v1;rule=stative-adjective-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,accessibility.hard-of-hearing,אני כבדת שמיעה,,ani kvadat shemi‘a,anˈi kvadˈat ʃemiˈa,,2,he-variants-v1;rule=stative-adjective-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,accessibility.need-to-sit-down,אני צריכה לשבת,,ani tsrikha lashévet,anˈi tsʁixˈa laʃˈevet,,2,he-variants-v1;rule=stative-adjective-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,border-customs.i-am-a-tourist,אני תיירת,,ani tayeret,anˈi tajeʁˈet,,2,he-variants-v1;rule=nisba-adjective-or-role-noun-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,border-customs.i-am-staying-at,אני מתאכסנת ב{},,ani mit’akhsenet be{},anˈi mitaxsenˈet bˈe {},,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,border-customs.i-am-staying-for-days,אני נשארת {} ימים,,ani nish’eret {} yamim,anˈi niʃeʁˈet {} jamˈim,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,border-customs.i-am-visiting-family,אני מבקרת משפחה,,ani mevaqeret mishpaẖa,anˈi mevakeʁˈet miʃpaxˈa,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,communication.i-cannot-read-it,אני לא יכולה לקרא את זה,,ani lo yekhola liqro et ze,anˈi lˈo jexolˈa likʁˈo ˈet zˈe,,2,he-variants-v1;rule=stative-adjective-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,communication.i-cannot-read-understand,אני לא יודעת לקרא,,ani lo yoda‘at liqro,anˈi lˈo jodaˈat likʁˈo,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,communication.i-do-not-speak-this-language,אני לא מדברת {target},,ani lo medaberet {target},anˈi lˈo medabeʁˈet {target},,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,communication.i-do-not-understand,אני לא מבינה,,ani lo mevina,anˈi lˈo mevinˈa,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,communication.i-do-not-understand-spoken,אני לא מבינה מה שאומרים,,ani lo mevina ma sheomrim,anˈi lˈo mevinˈa mˈa ʃeomʁˈim,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,communication.i-speak-only-a-little-of-this,אני מדברת קצת {target},,ani medaberet qetsat {target},anˈi medabeʁˈet ketsˈat {target},,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,dietary-needs.i-am-vegan,אני טבעונית,,ani tiv‘onit,anˈi tivonˈit,,2,he-variants-v1;rule=nisba-adjective-or-role-noun-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,dietary-needs.i-am-vegetarian,אני צמחונית,,ani tsimẖonit,anˈi tsimxonˈit,,2,he-variants-v1;rule=nisba-adjective-or-role-noun-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,dietary-needs.i-do-not-eat,אני לא אוכלת {},,ani lo ókhelet {},anˈi lˈo ˈoxelet {},,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,emergency-medical.i-cannot-breathe,אני לא יכולה לנשם,,ani lo yekhola linshom,anˈi lˈo jexolˈa linʃˈom,,2,he-variants-v1;rule=stative-adjective-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,emergency-medical.i-feel-unwell,אני לא מרגישה טוב,,ani lo margisha tov,anˈi lˈo maʁɡiʃˈa tˈov,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,emergency-medical.i-need-a-doctor,אני צריכה רופא,,ani tsrikha rofe,anˈi tsʁixˈa ʁofˈe,,2,he-variants-v1;rule=stative-adjective-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,emergency-medical.i-think-a-bone-is-broken,אני חושבת שיש לי שבר,,ani ẖoshevet sheyesh li shéver,anˈi xoʃevˈet ʃejˈeʃ lˈi ʃˈeveʁ,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,introductions.i-am-a-tourist,אני תיירת,,ani tayeret,anˈi tajeʁˈet,,2,he-variants-v1;rule=nisba-adjective-or-role-noun-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,introductions.i-am-traveling-alone,אני מטיילת לבד,,ani metayelet levad,anˈi metajelˈet levˈad,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,lost-rescue.i-cannot-find-my-hotel,אני לא מוצאת את המלון שלי,,ani lo motset et hamalon sheli,anˈi lˈo motsˈet ˈet hamalˈon ʃelˈi,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,lost-rescue.i-cannot-get-down,אני לא יכולה לרדת,,ani lo yekhola larédet,anˈi lˈo jexolˈa laʁˈedet,,2,he-variants-v1;rule=stative-adjective-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,lost-rescue.i-cannot-walk,אני לא יכולה ללכת,,ani lo yekhola lalékhet,anˈi lˈo jexolˈa lalˈexet,,2,he-variants-v1;rule=stative-adjective-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,lost-rescue.i-do-not-know-where-i-am,אני לא יודעת איפה אני,,ani lo yoda‘at éyfo ani,anˈi lˈo jodaˈat ˈejfo anˈi,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,lost-rescue.please-look-at-my-current-location,תסתכלו איפה אני נמצאת עכשיו,,tistaklu éyfo ani nimtset ‘akhshav,tistaklˈu ˈejfo anˈi nimtsˈet axʃˈav,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,directions.where-am-i,איפה אני נמצאת?,,éyfo ani nimtset?,ˈejfo anˈi nimtsˈet,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,medical-conditions.i-need-insulin,אני צריכה אינסולין,,ani tsrikha insúlin,anˈi tsʁixˈa insˈulin,,2,he-variants-v1;rule=stative-adjective-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,medical-conditions.i-need-my-inhaler,אני צריכה את המשאף שלי,,ani tsrikha et hamash’ef sheli,anˈi tsʁixˈa ˈet hamaʃˈef ʃelˈi,,2,he-variants-v1;rule=stative-adjective-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,medical-conditions.i-take-blood-thinners,אני לוקחת מדללי דם,,ani loqaẖat medalley dam,anˈi lokaxˈat medˈallej dˈam,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,medical-conditions.i-take-medicine-for,אני לוקחת תרופות נגד {},,ani loqaẖat terufot néged {},anˈi lokaxˈat teʁufˈot nˈeɡed {},,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,pharmacy-symptoms.i-am-vomiting,אני מקיאה,,ani meqi’a,anˈi mekiˈa,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,pharmacy-symptoms.i-need-a-malaria-test,אני צריכה בדיקת מלריה,,ani tsrikha bediqat malarya,anˈi tsʁixˈa bedikˈat malaʁjˈa,,2,he-variants-v1;rule=stative-adjective-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,pharmacy-symptoms.i-need-medicine-for,אני צריכה תרופה נגד {},,ani tsrikha terufa néged {},anˈi tsʁixˈa teʁufˈa nˈeɡed {},,2,he-variants-v1;rule=stative-adjective-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,pharmacy-symptoms.i-think-i-have-dengue,אני חושבת שיש לי דנגי,,ani ẖoshevet sheyesh li dengi,anˈi xoʃevˈet ʃejˈeʃ lˈi denɡˈi,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,pharmacy-symptoms.i-think-i-have-malaria,אני חושבת שיש לי מלריה,,ani ẖoshevet sheyesh li malarya,anˈi xoʃevˈet ʃejˈeʃ lˈi malaʁjˈa,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,pharmacy-symptoms.i-think-it-is-infected,אני חושבת שזה נדבק,,ani ẖoshevet sheze nidbaq,anˈi xoʃevˈet ʃezˈe nidbˈak,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,phone-translation.i-am-using-phone-translation,אני משתמשת בתרגום מהטלפון,,ani mishtameshet betargum mehatélefon,anˈi miʃtameʃˈet betaʁɡˈum mehatˈelefon,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,police-consulate.am-i-under-arrest,אני עצורה?,,ani ‘atsura?,anˈi atsuʁˈa,,2,he-variants-v1;rule=stative-adjective-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,police-consulate.am-i-free-to-go,אני חופשית ללכת?,,ani ẖofshit lalékhet?,anˈi xofʃˈit lalˈexet,,2,he-variants-v1;rule=nisba-adjective-or-role-noun-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,police-consulate.i-am-calling-the-police,אני מתקשרת למשטרה,,ani mitqasheret lamishtara,anˈi mitkaʃeʁˈet lamiʃtaʁˈa,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,police-consulate.i-need-a-written-police-report,אני צריכה אישור בכתב על התלונה,,ani tsrikha ishur bikhtav ‘al hatluna,anˈi tsʁixˈa iʃˈuʁ bixtˈav ˈal hatlunˈa,,2,he-variants-v1;rule=stative-adjective-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,police-consulate.i-need-an-interpreter,אני צריכה מתרגמן,,ani tsrikha meturgman,anˈi tsʁixˈa metuʁɡmˈan,,2,he-variants-v1;rule=stative-adjective-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,police-consulate.i-need-it-for-my-insurance,אני צריכה את זה בשביל הביטוח,,ani tsrikha et ze bishvil habitúaẖ,anˈi tsʁixˈa ˈet zˈe biʃvˈil habitˈuax,,2,he-variants-v1;rule=stative-adjective-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,police-consulate.i-will-not-sign-anything-i-cannot-read,אני לא חותמת על מה שאני לא יכולה לקרא,,ani lo ẖotemet ‘al ma she’ani lo yekhola liqro,anˈi lˈo xotemˈet ˈal mˈa ʃeanˈi lˈo jexolˈa likʁˈo,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,pronouns-verbs.need-thing,צריכה…,,tsrikha…,tsʁixˈa,,2,he-variants-v1;rule=stative-adjective-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,shopping.i-am-just-looking,אני רק מסתכלת,,ani raq mistakelet,anˈi ʁˈak mistakelˈet,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,social-basics.i-do-not-know,אני לא יודעת,,ani lo yoda‘at,anˈi lˈo jodaˈat,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,social-basics.sorry,אני מצטערת,,ani mitsta‘eret,anˈi mitstaeʁˈet,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,taxi.i-will-get-off-here,אני יורדת כאן,,ani yoredet kan,anˈi joʁedˈet kˈan,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,transit-rides.i-am-in-a-hurry,אני ממהרת,,ani memaheret,anˈi memaheʁˈet,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,utility-templates.i-am-looking-for,אני מחפשת {},,ani meẖapeset {},anˈi mexapesˈet {},,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,utility-templates.i-cannot-find,אני לא מוצאת {},,ani lo motset {},anˈi lˈo motsˈet {},,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,utility-templates.i-need,אני צריכה {},,ani tsrikha {},anˈi tsʁixˈa {},,2,he-variants-v1;rule=stative-adjective-agrees-in-gender;ipa=bgn

@@ -692,7 +692,10 @@ sparse twice over — absent for most languages, and a row only where a wording
 genuinely differs — with the language's own columns plus a leading `variant`, where a
 blank cell inherits. It has to be the row because the pronunciation moves with the
 wording: `Я заблудилась` is romanised *ya zabludilas*, and varying the script while
-leaving the respelling masculine teaches her to say the wrong thing out loud.
+leaving the respelling masculine teaches her to say the wrong thing out loud. All 22
+declaring languages have a file; `scripts/speaker_coverage.mjs` says how much is in
+each and what is still missing, and it reports rather than fails, because a declared
+axis with no wordings yet is a state the reader is told about.
 
 **An incoming reply is never inflected for the owner.** `variantOf` refuses a phrase
 marked `incoming`, so this is structural rather than remembered — it matters because

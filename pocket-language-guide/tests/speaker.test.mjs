@@ -202,8 +202,15 @@ test('every shipped variant file is reachable, and none of it empties a row', as
       assert.equal(variantKey(list, from), key,
         `${language}: ${key} is not a key its axes can produce`);
     }
+    // **Every group, from the concept bank's own filenames.** This listed five by
+    // hand and Khmer's single row lives in a sixth, so a correct file failed the
+    // assertion below -- a test scanning less than the app does will eventually
+    // accuse the data of a defect that is its own.
+    const { readdir } = await import('node:fs/promises');
+    const groups = (await readdir('data/concepts'))
+      .filter((f) => f.endsWith('.csv')).map((f) => f.slice(0, -4));
     /** @type {Record<string, Record<string,string>>} */ const rows = {};
-    for (const group of ['core', 'emergency', 'intro', 'travel', 'building']) {
+    for (const group of groups) {
       try {
         for (const row of parseTable(await load(`data/lang/${language}/${group}.csv`), group)) {
           rows[row.concept_id] = row;
@@ -213,10 +220,14 @@ test('every shipped variant file is reachable, and none of it empties a row', as
     const voiced = applyVariants(rows, variants, keys[0]);
     let changed = 0;
     for (const [id, row] of Object.entries(voiced)) {
+      // **Only the rows a variant touched.** Walking all of them instead accused Thai
+      // of a defect belonging to the bank: a `note` row carries its prose on the
+      // reader's side, so its target `text` is legitimately empty and always was.
+      if (row === rows[id]) continue;
+      changed += 1;
       // A variant may only ever replace a wording, never remove one: a blank cell in
       // the file means "inherit", so nothing it touches may come out empty.
-      assert.ok(row.text.trim(), `${language}/${id} came out of a variant with no text`);
-      if (row !== rows[id]) changed += 1;
+      assert.ok(row.text?.trim(), `${language}/${id} came out of a variant with no text`);
     }
     assert.ok(changed > 0, `${language} ships a variants file that changes nothing`);
   }

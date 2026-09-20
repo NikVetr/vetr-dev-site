@@ -1168,6 +1168,28 @@ you" — so the report now prints counts rather than a fraction and says so.
 `data/lang/<code>/*.csv`, so it found `variants.csv` on its own. Ukrainian needed the
 usual `espeakng-loader` split. No base row changed.
 
+**All 22 declaring languages now have a file — 302 wordings.** Hebrew is the largest
+at 55, as the survey predicted: its present tense inflects for gender and not for
+person, so every present-tense `אני …` changes. Arabic is 14, and only nominal
+sentences — its 1sg *verbs* do not inflect, which is the thing a naive pass would get
+backwards. The three smallest are findings rather than shortfalls: **German is two
+rows**, because the pack had already neutralised three of the five candidate concepts
+("Ich habe Diabetes", "Ich esse vegetarisch") and only `Ich bin Tourist` still uses a
+role noun — if that one is ever reworded, German's axis has nothing left and should be
+dropped, which is the alternative the survey itself named. **Thai is three**, because
+only five rows in that pack print a politeness particle or a 1sg pronoun at all and
+the rest carry none to vary. **Khmer is one**, the narrow reading, confirmed by the
+base row's own `literal`, which states the scope was a deliberate decision:
+បាទ/ចាស is the one row in the pack that prints both, "everywhere else they are left
+off a card that cannot know its holder's sex."
+
+Two defects in my own work, both caught by the agents rather than by me. The test that
+walks the shipped variant files listed five concept groups by hand, so Khmer's single
+row — which lives in a sixth — made a correct file fail; it reads the group list from
+`data/concepts/` now. And it asserted over every row in the pack rather than over the
+rows a variant touched, which accused Thai of an empty `text` belonging to a `note`,
+whose prose is on the reader's side by design.
+
 ### What is not done
 
 **The base rows still carry the old ad-hoc forms.** 113 first-person rows hold a slash
@@ -1187,6 +1209,17 @@ a sentence whose gender the listener can see for themselves. The rule is to writ
 with a grammatically fixed word — Russian *ребёнок* is masculine whatever the child's
 sex — and that is recorded in the prompt.
 
+**Two pronunciation gaps, both now warned about by `validate_data.py`.** A variant
+replaces the row precisely so the pronunciation moves with the wording, and in two
+places it cannot yet. **Hebrew's 55 rows inherit the other gender's pointed spelling**
+in `text_alt`: unpointed Hebrew is what the card prints and what the variants change,
+but `text_alt` is the *pointed* reading of it, and the points cannot be derived from
+the unpointed string. The romanisation and the IPA are right — Hebrew's IPA route
+reads the romanisation column, which the pass filled — so only the pointed alternate,
+which is off by default and used by the drill, is stale. **Khmer's one row inherits
+`baːt`**, the masculine particle's pronunciation, because Khmer has no automated IPA
+route and its column is hand-analysed. Both want a reader of the language, not a rule.
+
 **The board half is not exercised in a browser.** `spa` is the only board and it
 serves `zh-Hans__en`; neither language declares an axis, so the settings control never
 appears there and the variant path on the board is covered by unit tests only. It
@@ -1196,6 +1229,18 @@ A gloss sweep for those concepts is the next content batch, and it is what would
 the board available for more than one pair — which is worth doing for its own sake.
 The cheat sheet's half *is* exercised end to end, in `tests/speaker.spec.js`: a real
 Russian sheet solved twice, `Я заблудился` before and `Я заблудилась` after.
+
+**A round trip through the CSV would pin the voice, and is left alone on purpose.**
+`importSheetCsv` writes an override for every row in the file, not only the changed
+ones — so exporting a card in her voice and re-importing it freezes those wordings as
+edits, which then outrank the profile forever. This is pre-existing (it pins the
+masculine today for anyone who round-trips) and the profile only makes it visible, but
+it does defeat "share the resolved wording" for anyone who uses the CSV. The obvious
+fix — only record an override where a cell differs — needs a baseline the importer
+does not have: comparing against the *rendered* rows is wrong, because those already
+include the reader's own earlier edits, so an unchanged re-import would delete them.
+Getting that wrong loses someone's work, which is worse than the defect, so it wants
+its own change rather than a rider on this one.
 
 ### Also in this batch
 

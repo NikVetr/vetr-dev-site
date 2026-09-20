@@ -23,7 +23,7 @@ let wanted = false;
 
 async function take() {
   const api = /** @type {any} */ (navigator).wakeLock;
-  if (!wanted || held || !api || document.visibilityState !== 'visible') return;
+  if (!wanted || held || !api || globalThis.document?.visibilityState !== 'visible') return;
   try {
     held = await api.request('screen');
     // The platform can release it on its own -- a system dialog, low battery -- and
@@ -42,6 +42,8 @@ export function keepAwake(on) {
   held = null;
 }
 
-document.addEventListener('visibilitychange', () => {
+// Guarded, like `speech.js`'s own listeners: importing this from a Node test must not
+// throw before the test has asserted anything.
+globalThis.document?.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible') take();
 });

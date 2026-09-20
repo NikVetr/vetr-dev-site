@@ -381,7 +381,10 @@ export function applyUpdateIfIdle() {
 
 // `close` does not bubble, so this listens in the capture phase. Every modal in the
 // app is a `<dialog>`, which makes this the one place that has to know about them.
-document.addEventListener('close', () => applyUpdateIfIdle(), true);
+// Guarded like `ui/platform/speech.js`'s: these modules are expected to survive being
+// imported by a Node test, and an unguarded listener at module scope would make that
+// import throw rather than the test fail on something it meant to check.
+globalThis.document?.addEventListener('close', () => applyUpdateIfIdle(), true);
 
 function registerWorker() {
 

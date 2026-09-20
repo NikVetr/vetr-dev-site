@@ -73,6 +73,14 @@ files are real.
 7. Registry rows: `languages.csv`, `scripts.csv` if the script is new, and
    `language-names.csv`.
 8. `applies_to` sweep across `data/concepts/*.csv`.
+9. **Does your language change a first-person sentence according to who is saying
+   it?** If it does — a participle, a predicative adjective, a role noun, a politeness
+   particle chosen by the speaker's sex — it needs rows in
+   `data/registry/speaker-axes.csv` and a `data/lang/<code>/variants.csv`. Twenty-two
+   of the fifty-three do. See `content/PROMPTS/speaker-variants.md`, which also carries
+   the reply-neutrality rules your *supplied replies* have to satisfy **even if your
+   language declares no axis** — Amharic and Hausa have an ungendered first person and
+   a gendered second person, which is the case the registry cannot express.
 
 ## The corpus
 

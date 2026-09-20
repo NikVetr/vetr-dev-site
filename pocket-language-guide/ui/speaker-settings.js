@@ -135,9 +135,13 @@ export function openSpeakerSettings({ axes, languages, profile, onChange }) {
     none.addEventListener('change', () => { held[axis.axis] = ''; commit(); });
     options.push(el('label', { class: 'speaker-option' }, [none, t('speaker.unspecified')]));
 
+    // An axis that landed without its explanation gets no explanation, rather than a
+    // paragraph reading `speaker.x.why`. The label falls back to the slug because an
+    // ugly label is still a usable question; a raw key as prose is not.
+    const why = t(`speaker.${axis.axis}.why`);
     return el('fieldset', { class: 'speaker-axis' }, [
       el('legend', { text: words(axis.axis) }),
-      el('p', { class: 'speaker-why', text: t(`speaker.${axis.axis}.why`) }),
+      ...(why === `speaker.${axis.axis}.why` ? [] : [el('p', { class: 'speaker-why', text: why })]),
       ...options,
     ]);
   });

@@ -1,0 +1,3 @@
+variant,concept_id,text,text_alt,ipa,literal,confidence,provenance
+speaker_gender=feminine,introductions.i-am-a-tourist,Ich bin Touristin.,,ɪç bɪn tˈuːrɪstˌɪn,,2,de-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,border-customs.i-am-a-tourist,Ich bin Touristin.,,ɪç bɪn tˈuːrɪstˌɪn,,2,de-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
