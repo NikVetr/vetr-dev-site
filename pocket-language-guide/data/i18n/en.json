@@ -428,5 +428,10 @@
   "board.wrongPair": "The {board} board is written for these language pairs only: {pairs}.",
   "boards.spa.focus": "Focus on\u2026",
   "boards.spa.comfort": "Comfort",
-  "boards.spa.justRight": "That's good \u2014 keep it there"
+  "boards.spa.justRight": "That's good \u2014 keep it there",
+  "boards.spa.focusOn": "Please focus on\u2026",
+  "boards.body.shoulders": "my shoulders",
+  "boards.body.back": "my back",
+  "boards.body.neck": "my neck",
+  "boards.body.feet": "my feet"
 }

@@ -15,6 +15,8 @@ import { t } from './i18n.js';
 const MIN_MESSAGE_PX = 28;
 /** And above this, stop growing: past it a short message reads as a poster. */
 const MAX_MESSAGE_PX = 150;
+/** Below this a grid label is no longer readable at arm's length; shorten it instead. */
+const MIN_CELL_PX = 12;
 /** A pointer that travels further than this was a scroll or a drag, not a tap. */
 const TAP_SLOP_PX = 10;
 
@@ -34,16 +36,41 @@ const TAP_SLOP_PX = 10;
  * @param {(button:import('../core/conversation.js').BoardButton)=>boolean} config.available
  * @param {(button:import('../core/conversation.js').BoardButton)=>void} config.onPick
  * @param {string} config.lang  the owner's language, which the labels are in
+ * @param {string} [config.title]  a heading the buttons complete, owner-language
  */
-export function renderGrid(root, node, { label, available, onPick, lang }) {
+export function renderGrid(root, node, { label, available, onPick, lang, title }) {
   root.replaceChildren();
   root.lang = lang;
   root.removeAttribute('aria-busy');
+
+  // **A heading the buttons complete, and only the owner ever sees it.** Four rows
+  // reading "Please focus on my shoulders / my back / my neck / my feet" spend most
+  // of a small screen saying the same five words, and a reader scanning them is
+  // reading the part that does not vary. Said once with an ellipsis, the buttons can
+  // be the body part alone.
+  //
+  // This is a *presentation* choice in the owner's language and nothing more. The
+  // listener is still shown one complete idiomatic sentence -- the board format
+  // forbids assembling a message from parts, and Mandarin would not take the
+  // template anyway, since 按摩背部 is idiomatic where 按摩背 is not. So the split
+  // lives in the catalogue, where each language decides for itself whether its own
+  // prompt divides that way, and never in the corpus.
+  if (title) {
+    const heading = document.createElement('p');
+    heading.className = 'board-grid-title';
+    heading.textContent = title;
+    heading.lang = lang;
+    root.append(heading);
+  }
+
   for (const button of node.buttons) {
     const cell = document.createElement('button');
     cell.type = 'button';
     cell.className = 'board-cell';
     cell.dataset.button = button.id;
+    // The sheet's own five section colours. Someone face down, reaching for `stop`,
+    // is looking for a red rectangle and not reading at all.
+    if (button.colour) cell.classList.add(`board-role-${button.colour}`);
     if (button.kind === 'submenu') cell.classList.add('board-cell-more');
     cell.textContent = label(button);
     // **A button the corpus cannot supply is visibly unavailable, not missing.**
@@ -57,6 +84,38 @@ export function renderGrid(root, node, { label, available, onPick, lang }) {
     cell.addEventListener('click', () => onPick(button));
     root.append(cell);
   }
+  fitCells(root);
+}
+
+/**
+ * Shrink any label that does not fit its cell, and no further than it has to.
+ *
+ * The cells are a fixed grid so that the arrangement never moves, which means a long
+ * label cannot be given more room -- it has to be given smaller type. CSS cannot ask
+ * whether text overflows, so this measures, and only the cells that overflow pay.
+ *
+ * A floor rather than a fit at any cost: below it the label is no longer a thing
+ * anyone can read across a dim room, and the honest answer is a shorter `labelKey`
+ * in the board. `That's good -- keep it there` is exactly that case and has one.
+ * @param {HTMLElement} root
+ */
+function fitCells(root) {
+  const run = () => {
+    for (const cell of root.querySelectorAll('.board-cell')) {
+      const box = /** @type {HTMLElement} */ (cell);
+      box.style.fontSize = '';
+      let size = Number.parseFloat(getComputedStyle(box).fontSize);
+      for (let i = 0; i < 12 && size > MIN_CELL_PX; i += 1) {
+        if (box.scrollHeight <= box.clientHeight) break;
+        size = Math.max(MIN_CELL_PX, size * 0.92);
+        box.style.fontSize = `${size}px`;
+      }
+    }
+  };
+  run();
+  // The labels are set in the interface face, which may not have arrived yet; a fit
+  // against a fallback is a fit against the wrong advance widths.
+  if (document.fonts?.status !== 'loaded') document.fonts?.ready.then(run);
 }
 
 /**
@@ -79,11 +138,20 @@ export function renderGrid(root, node, { label, available, onPick, lang }) {
  * @param {(()=>void)|null} config.onReply   null when this session shows only
  * @param {string} config.replyLabel         in the *listener's* language
  * @param {boolean} [config.incoming]        an answer coming back the other way
+ * @param {import('../core/conversation.js').ColourRole} [config.colour]
  */
-export function renderMessage(stage, phrase, { onDismiss, onReply, replyLabel, incoming }) {
+export function renderMessage(stage, phrase, { onDismiss, onReply, replyLabel, incoming, colour }) {
   stage.replaceChildren();
   stage.hidden = false;
+  stage.className = 'board-stage';
   stage.classList.toggle('board-stage-incoming', Boolean(incoming));
+  // **The same colour the button was, filling the screen.** That is what makes it
+  // colour *coding* rather than decoration: the red rectangle the owner pressed is
+  // the red screen they are now holding up, so they can see they pressed the right
+  // one without reading their own language back. White type on all five, which is
+  // also why the roles are the printed sheet's -- those hexes were already chosen
+  // dark enough to carry it.
+  if (colour) stage.classList.add(`board-role-${colour}`);
 
   const surface = document.createElement('button');
   surface.type = 'button';
@@ -165,10 +233,15 @@ export function renderMessage(stage, phrase, { onDismiss, onReply, replyLabel, i
  * @param {(id:string)=>void} config.onAnswer
  * @param {()=>void} config.onCancel
  * @param {string} config.closeLabel  in the listener's language
+ * @param {import('../core/conversation.js').ColourRole} [config.colour]
  */
-export function renderReply(stage, question, answers, { onAnswer, onCancel, closeLabel }) {
+export function renderReply(stage, question, answers, { onAnswer, onCancel, closeLabel, colour }) {
   stage.replaceChildren();
   stage.hidden = false;
+  stage.className = 'board-stage';
+  // The question's own colour, so the answers read as part of the same exchange
+  // rather than as a new screen that happens to have appeared.
+  if (colour) stage.classList.add(`board-role-${colour}`);
 
   const asked = document.createElement('p');
   asked.className = 'board-asked';

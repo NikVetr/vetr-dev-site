@@ -34,6 +34,8 @@ import { appliesTo } from './pack.js';
 const MAX_DEPTH = 3;
 /** Buttons per node. Twelve is the specification's upper bound for one screen. */
 const MAX_BUTTONS = 12;
+/** @type {Set<string>} The sheet's five section-role colours, and no others. */
+const COLOURS = new Set(['comm', 'money', 'move', 'stay', 'alert']);
 
 /**
  * @typedef {Object} BoardButton
@@ -43,6 +45,17 @@ const MAX_BUTTONS = 12;
  * @property {PhraseRef} [phraseRef] for `message`: what it says
  * @property {string} [labelKey]    optional short interface wording, never spoken
  * @property {string} [replySetId]  for `message`: answers the listener may give
+ * @property {ColourRole} [colour]  which of the sheet's five role colours it takes
+ */
+
+/**
+ * The five colours a printed sheet already codes its sections with.
+ *
+ * Reused here rather than invented, so a reader who has seen a card meets the same
+ * vocabulary: red is the thing you say when something is wrong, green is where you
+ * want the work done. On a board it does more than it does on paper -- someone face
+ * down, reaching for *stop*, is looking for a red rectangle and not reading at all.
+ * @typedef {'comm'|'money'|'move'|'stay'|'alert'} ColourRole
  */
 
 /**
@@ -56,7 +69,8 @@ const MAX_BUTTONS = 12;
 /**
  * @typedef {Object} BoardNode
  * @property {BoardButton[]} buttons
- * @property {string} [titleKey]
+ * @property {string} [titleKey]  a heading the node's buttons complete, in the
+ *   owner's language -- see `renderGrid` for why only the owner ever sees a fragment
  */
 
 /**
@@ -145,6 +159,10 @@ export function validateBoard(board) {
       const key = `${nodeId}/${button.id}`;
       if (buttonIds.has(key)) problems.push(`${key}: duplicate button id`);
       buttonIds.add(key);
+      // An enum, so a board file cannot name a colour that is not on the card.
+      if (button.colour && !COLOURS.has(button.colour)) {
+        problems.push(`${key}: colour ${button.colour} is not one of ${[...COLOURS].join(', ')}`);
+      }
       if (button.kind === 'submenu') {
         if (!nodes[button.nodeId]) problems.push(`${key}: submenu to unknown node ${button.nodeId}`);
       } else if (button.kind === 'message') {

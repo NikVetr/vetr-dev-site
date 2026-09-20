@@ -141,6 +141,7 @@ async function main() {
       $('board-up-label').textContent = t('board.up');
       renderGrid($('board-grid'), node, {
         lang: owner,
+        title: node.titleKey ? t(node.titleKey) : undefined,
         label: labelOf,
         available: (button) => (button.kind === 'submenu'
           ? true : Boolean(phraseOf(button))),
@@ -173,6 +174,7 @@ async function main() {
         // answers to offer. There is no reply screen after every statement.
         onReply: state.replies && set ? () => dispatch({ type: 'reply' }) : null,
         replyLabel: theirs.t('board.reply'),
+        colour: button.colour,
       });
       return;
     }
@@ -188,6 +190,7 @@ async function main() {
         onAnswer: (id) => dispatch({ type: 'answer', answerId: id }),
         onCancel: () => dispatch({ type: 'cancelReply' }),
         closeLabel: theirs.t('board.close'),
+        colour: button.colour,
       });
       return;
     }
@@ -205,6 +208,7 @@ async function main() {
       onReply: null,
       replyLabel: '',
       incoming: true,
+      colour: chosen.colour,
     });
   }
 

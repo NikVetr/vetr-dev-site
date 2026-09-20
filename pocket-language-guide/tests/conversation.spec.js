@@ -296,3 +296,120 @@ test('the listener never changes what language the owner reads', async ({ page }
     saved: localStorage.getItem('plg.reader'),
   }))).toEqual(before);
 });
+
+// --- colour coding and legibility -------------------------------------------
+
+/** Relative luminance, for asking whether white type can sit on a colour. */
+const LUMA = `(css) => {
+  const [r, g, b] = css.match(/\\d+/g).map(Number).map((v) => {
+    const c = v / 255;
+    return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}`;
+
+test('white type is never left on a light background, hovered or not', async ({ page }) => {
+  // **The bug this exists for got past fourteen passing tests, twice.** `style.css`
+  // styles every `button`, and `button:hover { background: var(--surface) }` is one
+  // specificity point above a bare `.board-cell` -- so a coloured cell under the
+  // pointer took a pale grey background while keeping its white type and became
+  // invisible. A touch device leaves the last-tapped element hovered, so the cell
+  // that lands under a finger after a submenu opens is exactly the one that would
+  // disappear.
+  //
+  // Both times it was found by looking at a screenshot. This is the assertion that
+  // does not need someone to look: wherever the type is white, the thing behind it
+  // must actually be dark.
+  await page.goto(BOARD);
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+
+  /** @param {import('@playwright/test').Locator} cell */
+  const check = async (cell, where) => {
+    const { fg, bg } = await cell.evaluate((n) => ({
+      fg: getComputedStyle(n).color, bg: getComputedStyle(n).backgroundColor,
+    }));
+    if (!/255,\s*255,\s*255/.test(fg)) return;
+    const luma = await page.evaluate(([css, fn]) => eval(fn)(css), [bg, LUMA]);
+    // 0.4 is well clear of the five role colours, the lightest of which is under
+    // 0.2, and well below `--surface` at 0.88.
+    expect(luma, `${where}: white type on ${bg}`).toBeLessThan(0.4);
+  };
+
+  const cells = page.locator('.board-cell');
+  for (let i = 0; i < await cells.count(); i += 1) {
+    await check(cells.nth(i), `cell ${i} at rest`);
+    await cells.nth(i).hover();
+    await check(cells.nth(i), `cell ${i} hovered`);
+  }
+
+  // And the full-screen message, which is the other surface that went white on grey.
+  await page.locator('[data-button="stop"]').click();
+  await expect(page.locator('.board-message-text')).toBeVisible();
+  const stage = page.locator('.board-stage');
+  const { fg, bg } = await stage.evaluate((n) => {
+    const text = /** @type {HTMLElement} */ (n.querySelector('.board-message-text'));
+    return { fg: getComputedStyle(text).color, bg: getComputedStyle(n).backgroundColor };
+  });
+  expect(fg).toMatch(/255,\s*255,\s*255/);
+  expect(await page.evaluate(([css, fn]) => eval(fn)(css), [bg, LUMA])).toBeLessThan(0.4);
+});
+
+test('a message wears the colour of the button that opened it', async ({ page }) => {
+  // That is what makes it coding rather than decoration: the owner can see they
+  // pressed the right one without reading their own language back off the screen.
+  await page.goto(BOARD);
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  for (const [id, role] of [['stop', 'alert'], ['gentler', 'comm'], ['avoid', 'money']]) {
+    const cell = page.locator(`[data-button="${id}"]`);
+    await expect(cell).toHaveClass(new RegExp(`board-role-${role}`));
+    const want = await cell.evaluate((n) => getComputedStyle(n).backgroundColor);
+    await cell.click();
+    await expect(page.locator('.board-stage')).toHaveClass(new RegExp(`board-role-${role}`));
+    expect(await page.locator('.board-stage')
+      .evaluate((n) => getComputedStyle(n).backgroundColor)).toBe(want);
+    await page.locator('.board-message').click();
+  }
+});
+
+test('a submenu says its prompt once, and the buttons finish it', async ({ page }) => {
+  // Four cells reading "Please focus on my shoulders / my back / ..." spend most of
+  // a small screen on the words that do not vary. The prompt is owner-language
+  // presentation only -- the listener still gets one complete idiomatic sentence,
+  // which the last assertion here is the guard for.
+  await page.goto(BOARD);
+  await page.locator('[data-button="focus"]').click();
+  await expect(page.locator('.board-grid-title')).toHaveText(/focus on/i);
+  // Said once, not per button.
+  for (const label of await page.locator('[data-button^="my"], .board-cell').allTextContents()) {
+    expect(label.toLowerCase()).not.toContain('focus on');
+  }
+  await expect(page.locator('[data-button="shoulders"]')).toHaveText('my shoulders');
+
+  // ...and the listener is shown the whole sentence, not the fragment.
+  await page.locator('[data-button="shoulders"]').click();
+  const shown = await page.locator('.board-message-text').textContent();
+  expect((shown ?? '').length).toBeGreaterThan(4);
+  expect(shown).toMatch(/\p{Script=Han}/u);
+});
+
+test('the way back does not look like something you are saying', async ({ page }) => {
+  // It sits among coloured buttons that are all things to show a stranger, so the
+  // one control that is not must read as chrome: grey, arrowed, and big enough to
+  // hit without looking.
+  await page.goto(BOARD);
+  await page.locator('[data-button="focus"]').click();
+  const up = page.locator('#board-up');
+  await expect(up).toBeVisible();
+  await expect(up).toContainText('←');
+  const box = await up.boundingBox();
+  expect(box?.height ?? 0).toBeGreaterThanOrEqual(44);
+  const { bg, fg } = await up.evaluate((n) => ({
+    bg: getComputedStyle(n).backgroundColor, fg: getComputedStyle(n).color,
+  }));
+  expect(fg).toMatch(/255,\s*255,\s*255/);
+  // Grey, and not one of the five role colours a substantive button wears.
+  const roles = await page.locator('.board-cell').evaluateAll(
+    (ns) => ns.map((n) => getComputedStyle(n).backgroundColor),
+  );
+  expect(roles).not.toContain(bg);
+});

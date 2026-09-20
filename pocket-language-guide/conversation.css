@@ -9,6 +9,26 @@
  * Everything is namespaced `board-` for the same reason.
  */
 
+/* **`style.css` styles every `button`, and its `:hover` outranks a bare class.**
+   `button:hover { background: var(--surface) }` is specificity (0,1,1) where
+   `.board-cell` and `.board-message` are (0,1,0), so any board button under the
+   pointer took a pale grey background -- and since these carry white type, they
+   went invisible. Not a desktop curiosity: a touch device leaves the last-tapped
+   element hovered, so the element that lands under a finger after a transition is
+   exactly the one that disappears. It cost two screens before it was spotted, both
+   times by looking rather than by a test.
+
+   So every board button states what its background is when hovered, and this rule
+   is the floor under the ones that want no background at all. */
+.board-body .board-message:hover,
+.board-body .board-message:focus-visible,
+.board-body .board-message:active {
+  background: none;
+}
+.board-body .board-answer:hover, .board-body .board-answer:focus-visible {
+  background: var(--role, var(--paper));
+}
+
 .board-body {
   /* The grid should fill the phone, not sit in a column. `100dvh` rather than
      `100vh` so the address bar collapsing does not leave the last row under it. */
@@ -43,15 +63,50 @@
   min-block-size: 0;
 }
 
-/* Parent navigation sits on the grid and never on a message. Quiet, because it is
-   not the thing anyone came here to press. */
+/* **The five colours a printed sheet codes its sections with**, reused rather than
+   invented. Three are already tokens in `style.css` -- the accent is `comm`, the
+   alert is `alert`, the ok is `move` -- so only the other two are spelled out, from
+   `data/themes/latex-reference.json`. Every one was chosen dark enough to carry
+   white type on paper, which is what makes them usable filling a screen. */
+.board-role-comm  { --role: var(--accent); }
+.board-role-alert { --role: var(--alert); }
+.board-role-move  { --role: var(--ok); }
+.board-role-money { --role: #b45100; }
+.board-role-stay  { --role: #6d3aa5; }
+
+/* Parent navigation sits on the grid and never on a message. Distinct from the
+   substantive buttons on purpose -- grey where they are coloured, and carrying an
+   arrow -- because the one thing it must never be is mistaken for something you are
+   saying to the person in front of you. Large enough to hit without looking, since
+   backing out of a submenu is the gesture most likely to be made in a hurry. */
 .board-up {
   align-self: flex-start;
-  background: none;
-  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  min-block-size: 3rem;
+  padding: 0 var(--space-3);
+  font-size: var(--fs-1);
+  border: none;
+  border-radius: var(--radius);
+  background: var(--muted);
+  color: #fff;
+}
+.board-up:hover { background: var(--ink); }
+.board-up:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.board-up[hidden] { display: none; }
+
+/* The heading a node's buttons complete -- "Please focus on…" over the body parts.
+   Spans the grid, so the buttons below it read as its continuation, and is sized to
+   its own line rather than to a button. */
+.board-grid:has(.board-grid-title) { grid-template-rows: auto; }
+.board-grid-title {
+  grid-column: 1 / -1;
+  align-self: end;
+  margin: 0;
+  font-size: var(--fs-2);
   color: var(--muted);
 }
-.board-up[hidden] { display: none; }
 
 /* **Large, even, and in the author's order.**
  *
@@ -64,6 +119,11 @@
   flex: 1 1 auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  /* Explicitly one content-sized row first, so a node's heading takes the height of
+     a line rather than the height of a button -- `grid-auto-rows: 1fr` applies to
+     the implicit rows after it, which are the ones holding buttons. Harmless on a
+     grid with no heading: the first button row is then the `auto` one and sizes to
+     the same content as its siblings. */
   grid-auto-rows: 1fr;
   gap: var(--space-2);
   min-block-size: 0;
@@ -87,15 +147,35 @@
   overflow-wrap: anywhere;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: var(--paper);
+  /* Solid colour and white type where a role is set; paper where one is not, so a
+     board that has not been coloured still works. */
+  background: var(--role, var(--paper));
   color: var(--ink);
   cursor: pointer;
 }
-.board-cell:hover { border-color: var(--accent); }
-.board-cell:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-/* A submenu is a different kind of act from saying something, and saying so in the
-   surface rather than with an added glyph keeps the label the whole label. */
-.board-cell-more { background: var(--surface); border-style: dashed; }
+/* White type only where there is a colour under it. A plain cell keeps the ink. */
+.board-cell[class*="board-role-"] { color: #fff; border-color: transparent; }
+/* **The hover has to restate the background.** `style.css` has
+   `button:hover { background: var(--surface) }`, which is one specificity point
+   above `.board-cell` and therefore wins -- so a coloured cell under the pointer
+   turned pale grey while keeping its white type, and became invisible. Not a
+   desktop-only curiosity: a touch device leaves the last-tapped element hovered, so
+   the cell that lands under a finger after a submenu opens is exactly the one that
+   would disappear. Which is how this was found. */
+.board-cell:hover, .board-cell:focus-visible {
+  background: var(--role, var(--surface));
+  filter: brightness(1.08);
+}
+.board-cell:not([class*="board-role-"]):hover { filter: none; border-color: var(--accent); }
+.board-cell:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; filter: none; }
+/* A submenu is a different kind of act from saying something. Dashed rather than a
+   glyph, which would eat into a label that is already tight. The attribute selector
+   is there to outrank `.board-cell[class*=...]` above, which sets a transparent
+   border and would otherwise erase this. */
+.board-cell.board-cell-more[class*="board-role-"] {
+  border: 2px dashed rgba(255, 255, 255, 0.6);
+}
+.board-cell-more:not([class*="board-role-"]) { background: var(--surface); border-color: var(--line); }
 /* Drawn, not removed: a grid that closes a gap is a grid whose buttons have moved. */
 .board-cell-off { opacity: 0.4; cursor: not-allowed; }
 
@@ -121,9 +201,20 @@
   gap: var(--space-2);
 }
 .board-stage[hidden] { display: none; }
-/* An answer coming back the other way, tinted so the owner can see at a glance that
-   this is the reply and not something they said. */
-.board-stage-incoming { background: var(--accent-soft); }
+/* Filled with the colour of the button that opened it, which is what makes the
+   coding worth having: the owner sees the red they pressed without reading. */
+.board-stage[class*="board-role-"] { background: var(--role); }
+.board-stage[class*="board-role-"] .board-message { color: #fff; }
+.board-stage[class*="board-role-"] .board-message-gloss { color: rgba(255, 255, 255, 0.78); }
+.board-stage[class*="board-role-"] .board-asked { color: rgba(255, 255, 255, 0.85); }
+.board-stage[class*="board-role-"] .board-message:focus-visible { outline-color: #fff; }
+/* An answer coming back the other way. Paper rather than the answer's own colour --
+   the owner has to be able to tell at a glance that this is the reply and not
+   something they said, and a second full-bleed colour would not say that. */
+.board-stage-incoming[class*="board-role-"] { background: var(--paper); }
+.board-stage-incoming[class*="board-role-"] .board-message { color: var(--ink); }
+.board-stage-incoming[class*="board-role-"] .board-message-gloss { color: var(--muted); }
+.board-stage-incoming { border-block-start: 10px solid var(--role, var(--accent)); }
 
 /* The whole surface is the dismiss target, so it is a button and it fills the
    stage. No visible Back control and no instruction paragraph: the accessible name

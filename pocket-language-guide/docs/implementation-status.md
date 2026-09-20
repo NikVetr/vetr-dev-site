@@ -517,6 +517,56 @@ Every row is `confidence: 2`, which in this corpus means *sourced* and explicitl
 
 ---
 
+## The board, looked at rather than tested
+
+Four changes the owner asked for after using it, and one bug that found itself.
+
+**Labels fit their cells.** A bounded fitter shrinks any label that overflows, down
+to a floor below which nothing is readable at arm's length — past that the honest
+answer is a shorter `labelKey`, which is what "That's good — keep it there" has.
+
+**Colour coding, from the five roles the printed sheets already use.** Red for
+stop, pause and *it hurts*; blue for the pressure axis; orange for *avoid*; green
+for *focus on*; purple for comfort. Solid on the grid, and the full-screen message
+takes **the colour of the button that opened it**, white type on solid. That is what
+makes it coding rather than decoration: the owner can see they pressed the right one
+without reading their own language back off the screen. Those five hexes were chosen
+for a printed card, dark enough to carry white type, which is what makes them usable
+filling a phone.
+
+**A submenu says its prompt once.** Four cells reading "Please focus on my shoulders
+/ my back / my neck / my feet" spend most of a small screen on the words that do not
+vary. The node carries a heading with an ellipsis and the buttons are the body part
+alone. This is **owner-language presentation and nothing else** — the listener is
+still shown one complete idiomatic sentence, because the board format forbids
+assembling a message from parts and Mandarin would not take the template anyway
+(按摩背部 is idiomatic, 按摩背 is not). The split lives in the catalogue, where each
+language decides whether its own prompt divides that way.
+
+**The way back does not look like something you are saying.** It sits among coloured
+buttons that are all things to hold up to a stranger, so it is grey, arrowed, 3rem
+tall, and a test asserts its background is none of the five role colours.
+
+### The bug, and why fourteen tests missed it
+
+`style.css` styles every `button`, and `button:hover { background: var(--surface) }`
+is specificity (0,1,1) against a bare `.board-cell` at (0,1,0). So a coloured button
+under the pointer took a pale grey background **while keeping its white type**, and
+disappeared. It hit the grid first and the full-screen message second.
+
+Not a desktop curiosity. A touch device leaves the last-tapped element hovered, so
+the button that lands under a finger after a submenu opens is exactly the one that
+vanishes — which is how it was reproduced.
+
+Both times it was found by looking at a screenshot, with fourteen behavioural tests
+passing. They asserted what the DOM *said* and never what it *looked like*. So there
+is now a test that measures the relative luminance behind any white text — every
+cell, at rest and hovered, and the message surface — and fails if the thing behind it
+is not actually dark. Confirmed by reinstating the bug: it fails with
+`cell 0 hovered: white type on rgb(244, 246, 248)`.
+
+---
+
 ## Language audit — two independent passes
 
 Two reviewers read all sixteen `massage-spa` concepts and the two listener-facing UI

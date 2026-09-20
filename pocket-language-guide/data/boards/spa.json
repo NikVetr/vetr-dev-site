@@ -15,7 +15,8 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "massage-spa.stronger-pressure"
-          }
+          },
+          "colour": "comm"
         },
         {
           "id": "gentler",
@@ -23,7 +24,8 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "massage-spa.more-gently"
-          }
+          },
+          "colour": "comm"
         },
         {
           "id": "just-right",
@@ -32,7 +34,8 @@
             "kind": "corpus",
             "id": "massage-spa.that-pressure-is-good"
           },
-          "labelKey": "boards.spa.justRight"
+          "labelKey": "boards.spa.justRight",
+          "colour": "comm"
         },
         {
           "id": "hurts",
@@ -40,7 +43,8 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "emergency-medical.it-hurts-here"
-          }
+          },
+          "colour": "alert"
         },
         {
           "id": "avoid",
@@ -49,13 +53,15 @@
             "kind": "corpus",
             "id": "massage-spa.please-avoid-this-area"
           },
-          "replySetId": "avoid-area"
+          "replySetId": "avoid-area",
+          "colour": "money"
         },
         {
           "id": "focus",
           "kind": "submenu",
           "nodeId": "areas",
-          "labelKey": "boards.spa.focus"
+          "labelKey": "boards.spa.focus",
+          "colour": "move"
         },
         {
           "id": "pause",
@@ -63,7 +69,8 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "massage-spa.please-pause"
-          }
+          },
+          "colour": "alert"
         },
         {
           "id": "stop",
@@ -71,13 +78,15 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "massage-spa.please-stop"
-          }
+          },
+          "colour": "alert"
         },
         {
           "id": "comfort",
           "kind": "submenu",
           "nodeId": "comfort",
-          "labelKey": "boards.spa.comfort"
+          "labelKey": "boards.spa.comfort",
+          "colour": "stay"
         }
       ]
     },
@@ -89,7 +98,9 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "massage-spa.focus-on-shoulders"
-          }
+          },
+          "labelKey": "boards.body.shoulders",
+          "colour": "move"
         },
         {
           "id": "back",
@@ -97,7 +108,9 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "massage-spa.focus-on-back"
-          }
+          },
+          "labelKey": "boards.body.back",
+          "colour": "move"
         },
         {
           "id": "neck",
@@ -105,7 +118,9 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "massage-spa.focus-on-neck"
-          }
+          },
+          "labelKey": "boards.body.neck",
+          "colour": "move"
         },
         {
           "id": "feet",
@@ -113,7 +128,9 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "massage-spa.focus-on-feet"
-          }
+          },
+          "labelKey": "boards.body.feet",
+          "colour": "move"
         },
         {
           "id": "gentler",
@@ -121,7 +138,8 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "massage-spa.more-gently"
-          }
+          },
+          "colour": "comm"
         },
         {
           "id": "stop",
@@ -129,9 +147,11 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "massage-spa.please-stop"
-          }
+          },
+          "colour": "alert"
         }
-      ]
+      ],
+      "titleKey": "boards.spa.focusOn"
     },
     "comfort": {
       "buttons": [
@@ -141,7 +161,8 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "hotel-requests.another-towel-please"
-          }
+          },
+          "colour": "stay"
         },
         {
           "id": "thanks",
@@ -149,7 +170,8 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "social-basics.thank-you"
-          }
+          },
+          "colour": "stay"
         }
       ]
     }
@@ -163,7 +185,8 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "massage-spa.reply-i-will-avoid-that-area"
-          }
+          },
+          "colour": "money"
         },
         {
           "id": "which-area",
@@ -171,7 +194,8 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "massage-spa.reply-which-area-exactly"
-          }
+          },
+          "colour": "money"
         },
         {
           "id": "cannot-avoid",
@@ -179,7 +203,8 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "massage-spa.reply-cannot-avoid-this-treatment"
-          }
+          },
+          "colour": "money"
         },
         {
           "id": "does-it-hurt",
@@ -187,7 +212,8 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "massage-spa.reply-does-it-hurt-there"
-          }
+          },
+          "colour": "money"
         },
         {
           "id": "ask-supervisor",
@@ -195,7 +221,8 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "massage-spa.reply-ask-supervisor"
-          }
+          },
+          "colour": "money"
         },
         {
           "id": "none-of-these",
@@ -203,7 +230,8 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "massage-spa.reply-none-of-these"
-          }
+          },
+          "colour": "money"
         }
       ]
     }
