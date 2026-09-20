@@ -17,6 +17,8 @@ const MIN_MESSAGE_PX = 28;
 const MAX_MESSAGE_PX = 150;
 /** Below this a grid label is no longer readable at arm's length; shorten it instead. */
 const MIN_CELL_PX = 12;
+/** And above this a three-word label starts to look like a headline. */
+const MAX_CELL_PX = 40;
 /** A pointer that travels further than this was a scroll or a drag, not a tap. */
 const TAP_SLOP_PX = 10;
 
@@ -68,11 +70,31 @@ export function renderGrid(root, node, { label, available, onPick, lang, title }
     cell.type = 'button';
     cell.className = 'board-cell';
     cell.dataset.button = button.id;
-    // The sheet's own five section colours. Someone face down, reaching for `stop`,
-    // is looking for a red rectangle and not reading at all.
-    if (button.colour) cell.classList.add(`board-role-${button.colour}`);
+    // **Colour says what a button *does*, not what it is about.** It was the five
+    // section colours of a printed sheet, which made a handsome grid and a hard one
+    // to read: five saturated fills behind white type, and the label -- the thing a
+    // reader is actually looking for -- fighting its own background. Neutral cells
+    // and dark text give the words the contrast, and the one distinction left worth
+    // drawing is the one that changes what happens next: whether this message can be
+    // answered, or only shown.
     if (button.kind === 'submenu') cell.classList.add('board-cell-more');
-    cell.textContent = label(button);
+    else if (button.replySetId) cell.classList.add('board-cell-asks');
+    // The label is its own element so the fitter can size the text without touching
+    // the cell, whose height is the grid's to decide.
+    const text = document.createElement('span');
+    text.className = 'board-cell-label';
+    text.textContent = label(button);
+    cell.append(text);
+    // Reinforced with a mark, because colour alone is not a signal: roughly one man
+    // in twelve cannot use it, and a tinted cell in bright sun is a white cell.
+    if (button.kind !== 'submenu' && button.replySetId) {
+      const mark = document.createElement('span');
+      mark.className = 'board-cell-mark';
+      mark.textContent = '\u21A9';
+      mark.setAttribute('aria-hidden', 'true');
+      cell.append(mark);
+      cell.title = t('board.canAnswer');
+    }
     // **A button the corpus cannot supply is visibly unavailable, not missing.**
     // Removing it would move every button after it, and a grid that rearranges
     // itself when content is incomplete is the one thing the layout must never do.
@@ -84,39 +106,103 @@ export function renderGrid(root, node, { label, available, onPick, lang, title }
     cell.addEventListener('click', () => onPick(button));
     root.append(cell);
   }
-  fitCells(root);
+  watchCells(root);
 }
 
 /**
- * Shrink any label that does not fit its cell, and no further than it has to.
+ * Set every label as large as fits its own cell, in both directions.
  *
- * The cells are a fixed grid so that the arrangement never moves, which means a long
- * label cannot be given more room -- it has to be given smaller type. CSS cannot ask
- * whether text overflows, so this measures, and only the cells that overflow pay.
+ * **Grows as well as shrinks, and each cell answers for itself.** The cells are a
+ * fixed grid so the arrangement never moves, which means a label cannot be given
+ * more room — only more or less type. A short label has no reason to wear the size a
+ * long one was forced down to, so "Please stop" is set large and "That's good — keep
+ * it there" is set smaller, and both fill their box.
  *
- * A floor rather than a fit at any cost: below it the label is no longer a thing
- * anyone can read across a dim room, and the honest answer is a shorter `labelKey`
- * in the board. `That's good -- keep it there` is exactly that case and has one.
+ * Both dimensions, because either can be the binding one: a long word overflows
+ * sideways at a size three lines would have fitted vertically. Wrapping stays
+ * natural — `overflow-wrap: anywhere` is the last resort for a word with no break in
+ * it, and nothing here truncates, ellipsizes or clips. If a label genuinely cannot
+ * be read at the floor, the answer is a shorter `labelKey` in the board, not a
+ * smaller size.
+ *
+ * A binary search rather than a walk: the answer is anywhere in a 12–40px range and
+ * eight probes settle it to under a pixel, where stepping by 8% took thirty layouts
+ * to cross the same distance. Still the browser's own text layout throughout — the
+ * print solver measures advance widths for paper and has no business here.
  * @param {HTMLElement} root
  */
 function fitCells(root) {
-  const run = () => {
-    for (const cell of root.querySelectorAll('.board-cell')) {
-      const box = /** @type {HTMLElement} */ (cell);
-      box.style.fontSize = '';
-      let size = Number.parseFloat(getComputedStyle(box).fontSize);
-      for (let i = 0; i < 12 && size > MIN_CELL_PX; i += 1) {
-        if (box.scrollHeight <= box.clientHeight) break;
-        size = Math.max(MIN_CELL_PX, size * 0.92);
-        box.style.fontSize = `${size}px`;
+  for (const node of root.querySelectorAll('.board-cell')) {
+    const cell = /** @type {HTMLElement} */ (node);
+    const label = /** @type {HTMLElement} */ (cell.querySelector('.board-cell-label'));
+    if (!label) continue;
+    // **Against the cell's content box, not the label's own size.** The label is a
+    // block with `height: auto`, so it grows to hold whatever it is given and can
+    // never overflow *itself* -- comparing it to its own `scrollHeight` said every
+    // size fitted and set the whole grid at the ceiling. What is fixed is the cell,
+    // whose height the grid decides; the room inside it is that minus its padding.
+    const box = getComputedStyle(cell);
+    // Physical padding, not the logical `paddingBlockStart` family: `getComputedStyle`
+    // does not resolve those everywhere, and an empty string parses to `NaN`, which
+    // makes every comparison below false and pins the whole grid at the floor. The
+    // padding here is symmetric, so there is nothing for the logical names to buy.
+    const room = {
+      h: cell.clientHeight - Number.parseFloat(box.paddingTop)
+        - Number.parseFloat(box.paddingBottom),
+      w: cell.clientWidth - Number.parseFloat(box.paddingLeft)
+        - Number.parseFloat(box.paddingRight),
+    };
+    if (!(room.h > 0 && room.w > 0)) continue;
+    // A pixel of slack, because `scrollWidth` and `scrollHeight` are integers and the
+    // room they are compared against is not: a label filling a 153.6px box reports
+    // 154 and failed the test at every size, which pinned the grid at the floor.
+    // **Measured with normal wrapping, so a size that would split a word counts as
+    // too big.** `overflow-wrap: anywhere` lets any size "fit", because a word can
+    // always be broken between two letters -- which is how "Comfort" came to be set
+    // at the ceiling and drawn as "Comfor / t". Words break between words while a
+    // size is being chosen; `anywhere` goes back on afterwards as the last resort
+    // for a word that cannot fit even at the floor, because nothing here may clip.
+    label.style.overflowWrap = 'normal';
+    const fits = (/** @type {number} */ px) => {
+      label.style.fontSize = `${px}px`;
+      return label.scrollHeight <= room.h + 1 && label.scrollWidth <= room.w + 1;
+    };
+    let lo = MIN_CELL_PX;
+    let hi = MAX_CELL_PX;
+    if (!fits(hi)) {
+      for (let i = 0; i < 8; i += 1) {
+        const mid = (lo + hi) / 2;
+        if (fits(mid)) lo = mid; else hi = mid;
       }
+      // `lo` is the last size known to fit; the loop may have left `hi` set.
+      label.style.fontSize = `${lo}px`;
     }
-  };
-  run();
-  // The labels are set in the interface face, which may not have arrived yet; a fit
-  // against a fallback is a fit against the wrong advance widths.
-  if (document.fonts?.status !== 'loaded') document.fonts?.ready.then(run);
+    label.style.overflowWrap = '';
+  }
 }
+
+/**
+ * Refit a grid whenever anything that could change the answer changes.
+ *
+ * Four things do, and each has to be watched separately. The **font** arrives late,
+ * and a fit measured against a fallback is a fit against the wrong advance widths.
+ * The **cell size** changes on rotation, on a window resize, and — the one that is
+ * easy to miss — when the reader turns up their system text size, because that moves
+ * `rem` and so moves the grid's own track sizes. A `ResizeObserver` on the grid sees
+ * all three of those as one event. The **labels** change when the board navigates,
+ * which is `renderGrid` calling this again.
+ * @param {HTMLElement} root
+ */
+function watchCells(root) {
+  fitCells(root);
+  if (document.fonts?.status !== 'loaded') document.fonts?.ready.then(() => fitCells(root));
+  // One observer per grid element, replaced when the grid is re-rendered into the
+  // same node -- otherwise every navigation would leave another one behind.
+  observer?.disconnect();
+  observer = new ResizeObserver(() => fitCells(root));
+  observer.observe(root);
+}
+/** @type {ResizeObserver|null} */ let observer = null;
 
 /**
  * The listener's message, filling the screen.

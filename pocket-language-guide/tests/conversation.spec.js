@@ -308,50 +308,111 @@ const LUMA = `(css) => {
   return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 }`;
 
-test('white type is never left on a light background, hovered or not', async ({ page }) => {
-  // **The bug this exists for got past fourteen passing tests, twice.** `style.css`
-  // styles every `button`, and `button:hover { background: var(--surface) }` is one
-  // specificity point above a bare `.board-cell` -- so a coloured cell under the
-  // pointer took a pale grey background while keeping its white type and became
-  // invisible. A touch device leaves the last-tapped element hovered, so the cell
-  // that lands under a finger after a submenu opens is exactly the one that would
-  // disappear.
-  //
-  // Both times it was found by looking at a screenshot. This is the assertion that
-  // does not need someone to look: wherever the type is white, the thing behind it
-  // must actually be dark.
+test('every grid label has real contrast against its own cell', async ({ page }) => {
+  // **This began as "white type is never on a light background", and the grid it was
+  // written for is gone.** The cells were five saturated fills with white type; they
+  // are neutral with dark type now, so that assertion would pass by finding no white
+  // text at all. The question underneath it is the one that survives: can the label
+  // be read? So it measures the contrast ratio, at rest and hovered, which also
+  // still catches the original bug -- `style.css` has
+  // `button:hover { background: var(--surface) }` at a specificity above a bare
+  // `.board-cell`, and a cell that changes colour under the pointer is exactly how
+  // white-on-white happened twice.
   await page.goto(BOARD);
   await expect(page.locator('.board-cell').first()).toBeVisible();
 
-  /** @param {import('@playwright/test').Locator} cell */
-  const check = async (cell, where) => {
-    const { fg, bg } = await cell.evaluate((n) => ({
-      fg: getComputedStyle(n).color, bg: getComputedStyle(n).backgroundColor,
-    }));
-    if (!/255,\s*255,\s*255/.test(fg)) return;
-    const luma = await page.evaluate(([css, fn]) => eval(fn)(css), [bg, LUMA]);
-    // 0.4 is well clear of the five role colours, the lightest of which is under
-    // 0.2, and well below `--surface` at 0.88.
-    expect(luma, `${where}: white type on ${bg}`).toBeLessThan(0.4);
-  };
+  const ratio = `(fg, bg) => {
+    const lum = (css) => {
+      const [r, g, b] = css.match(/\\d+/g).map(Number).map((v) => {
+        const c = v / 255;
+        return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+      });
+      return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    };
+    const a = lum(fg); const b2 = lum(bg);
+    return (Math.max(a, b2) + 0.05) / (Math.min(a, b2) + 0.05);
+  }`;
 
   const cells = page.locator('.board-cell');
   for (let i = 0; i < await cells.count(); i += 1) {
-    await check(cells.nth(i), `cell ${i} at rest`);
-    await cells.nth(i).hover();
-    await check(cells.nth(i), `cell ${i} hovered`);
+    for (const when of ['at rest', 'hovered']) {
+      if (when === 'hovered') await cells.nth(i).hover();
+      const { fg, bg } = await cells.nth(i).evaluate((n) => ({
+        fg: getComputedStyle(n).color, bg: getComputedStyle(n).backgroundColor,
+      }));
+      const got = await page.evaluate(([f, b, fn]) => eval(fn)(f, b), [fg, bg, ratio]);
+      // 4.5:1 is the ordinary-text threshold. These are large, so it is stricter
+      // than it has to be -- which is the right side to be wrong on for a label
+      // someone reads face down in a dim room.
+      expect(got, `cell ${i} ${when}: ${fg} on ${bg}`).toBeGreaterThan(4.5);
+    }
   }
 
-  // And the full-screen message, which is the other surface that went white on grey.
+  // The full-screen message keeps its colour and its white type, so the original
+  // form of this check still applies there.
   await page.locator('[data-button="stop"]').click();
-  await expect(page.locator('.board-message-text')).toBeVisible();
   const stage = page.locator('.board-stage');
-  const { fg, bg } = await stage.evaluate((n) => {
-    const text = /** @type {HTMLElement} */ (n.querySelector('.board-message-text'));
-    return { fg: getComputedStyle(text).color, bg: getComputedStyle(n).backgroundColor };
-  });
-  expect(fg).toMatch(/255,\s*255,\s*255/);
-  expect(await page.evaluate(([css, fn]) => eval(fn)(css), [bg, LUMA])).toBeLessThan(0.4);
+  const { fg, bg } = await stage.evaluate((n) => ({
+    fg: getComputedStyle(/** @type {HTMLElement} */ (n.querySelector('.board-message-text'))).color,
+    bg: getComputedStyle(n).backgroundColor,
+  }));
+  expect(await page.evaluate(([f, b, fn]) => eval(fn)(f, b), [fg, bg, ratio])).toBeGreaterThan(4.5);
+});
+
+test('a label is as large as its own cell allows, and is never broken mid-word', async ({ page }) => {
+  // At a phone width, where the cells are small enough that the answer differs
+  // between labels. On a desktop the grid is wide and every label reaches the
+  // ceiling, which would make the comparison below vacuous.
+  await page.setViewportSize({ width: 390, height: 844 });
+  // Each cell answers for itself: a short label has no reason to wear the size a
+  // long one was forced down to. And the fitter measures with normal wrapping, so a
+  // size that would split a word counts as too big -- `overflow-wrap: anywhere` lets
+  // *any* size "fit", which is how "Comfort" came to be set at the ceiling and drawn
+  // as "Comfor / t".
+  await page.goto(BOARD);
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  const seen = await page.locator('.board-cell-label').evaluateAll((ns) => ns.map((n) => {
+    const cell = /** @type {HTMLElement} */ (n.parentElement);
+    const box = getComputedStyle(cell);
+    const room = {
+      h: cell.clientHeight - parseFloat(box.paddingTop) - parseFloat(box.paddingBottom),
+      w: cell.clientWidth - parseFloat(box.paddingLeft) - parseFloat(box.paddingRight),
+    };
+    return {
+      text: n.textContent ?? '',
+      px: parseFloat(getComputedStyle(n).fontSize),
+      overflows: n.scrollHeight > room.h + 1 || n.scrollWidth > room.w + 1,
+    };
+  }));
+  expect(seen.length).toBeGreaterThan(5);
+  for (const cell of seen) {
+    // Nothing spills, and nothing is below the floor at which a label stops being
+    // readable at arm's length.
+    expect(cell.overflows, `"${cell.text}" overflows its cell`).toBe(false);
+    expect(cell.px, `"${cell.text}" is ${cell.px}px`).toBeGreaterThanOrEqual(12);
+  }
+  // The sizes genuinely differ, which is the whole point -- one global size would
+  // make every short label as small as the longest one.
+  expect(new Set(seen.map((c) => Math.round(c.px))).size).toBeGreaterThan(1);
+  // The shortest label is set larger than the longest.
+  const byLength = [...seen].sort((a, b) => a.text.length - b.text.length);
+  expect(byLength[0].px).toBeGreaterThan(byLength.at(-1)?.px ?? 0);
+});
+
+test('a message that can be answered is marked, not only tinted', async ({ page }) => {
+  // Colour alone excludes roughly one man in twelve and washes out in sunlight, and
+  // this is the distinction that changes what happens after the tap.
+  await page.goto(`${BOARD}&replies=1`);
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  const asks = page.locator('[data-button="avoid"]');
+  await expect(asks).toHaveClass(/board-cell-asks/);
+  await expect(asks.locator('.board-cell-mark')).toHaveCount(1);
+  // ...and a show-only message has neither.
+  const shows = page.locator('[data-button="stop"]');
+  await expect(shows).not.toHaveClass(/board-cell-asks/);
+  await expect(shows.locator('.board-cell-mark')).toHaveCount(0);
+  // A submenu is still recognisable as neither.
+  await expect(page.locator('[data-button="focus"]')).toHaveClass(/board-cell-more/);
 });
 
 test('a message wears the colour of the button that opened it', async ({ page }) => {
@@ -359,16 +420,20 @@ test('a message wears the colour of the button that opened it', async ({ page })
   // pressed the right one without reading their own language back off the screen.
   await page.goto(BOARD);
   await expect(page.locator('.board-cell').first()).toBeVisible();
+  // **The grid no longer wears these colours and the message still does.** The cells
+  // went neutral so the labels could have the contrast; the full-screen message kept
+  // its role colour, because there it is the only thing on screen and has no label
+  // to compete with. So the colour is read off the stage, not off the cell.
+  /** @type {Set<string>} */ const seen = new Set();
   for (const [id, role] of [['stop', 'alert'], ['gentler', 'comm'], ['avoid', 'money']]) {
-    const cell = page.locator(`[data-button="${id}"]`);
-    await expect(cell).toHaveClass(new RegExp(`board-role-${role}`));
-    const want = await cell.evaluate((n) => getComputedStyle(n).backgroundColor);
-    await cell.click();
-    await expect(page.locator('.board-stage')).toHaveClass(new RegExp(`board-role-${role}`));
-    expect(await page.locator('.board-stage')
-      .evaluate((n) => getComputedStyle(n).backgroundColor)).toBe(want);
+    await page.locator(`[data-button="${id}"]`).click();
+    const stage = page.locator('.board-stage');
+    await expect(stage).toHaveClass(new RegExp(`board-role-${role}`));
+    seen.add(await stage.evaluate((n) => getComputedStyle(n).backgroundColor));
     await page.locator('.board-message').click();
   }
+  // Three roles, three different colours -- not one class applied three times.
+  expect(seen.size).toBe(3);
 });
 
 test('a submenu says its prompt once, and the buttons finish it', async ({ page }) => {

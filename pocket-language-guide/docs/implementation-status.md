@@ -931,3 +931,57 @@ and the public web.
   before anything is distributed, and nothing before N1 needs one.
 - **No device build of any kind.** A Linux machine cannot produce an iOS result, and
   nothing here has been run on a phone.
+
+---
+
+# Second round — requested after using it on a phone
+
+## Batch A — a readable grid
+
+**Colour says what a button does, not what it is about.** The cells were the five
+section colours of a printed sheet: a handsome grid, and a hard one to read, because
+the label — the thing a reader is actually looking for — was fighting a saturated
+fill. Neutral cells and dark type give the words the contrast. The one distinction
+left worth drawing is the one that changes what happens next: a message that can be
+**answered** is tinted *and* carries a small `↩`, because colour alone excludes
+roughly one man in twelve and washes out in sunlight. Submenus stay dashed and a
+shade back. The full-screen message is untouched and keeps its role colour, where it
+is the only thing on screen and has no label to compete with.
+
+**Each label is as large as its own cell allows, in both directions.** A short label
+has no reason to wear the size a long one was forced down to: at phone width "Please
+stop" is 40px and "That's good — keep it there" is 26px, and both fill their box. A
+binary search over 12–40px settles in eight probes. It refits when the font arrives,
+and a `ResizeObserver` on the grid catches rotation, resize and a change of system
+text size in one — that last because enlarging system text moves `rem`, which moves
+the grid's track sizes. Browser text layout throughout; the print solver measures
+advance widths for paper and has no business here.
+
+### Four ways a fit measurement can lie
+
+Each of these pinned the entire grid at one size, and none of them is a logic error:
+
+1. **Everything at the ceiling.** The label was compared to its own `scrollHeight` —
+   but it is a block with `height: auto`, so it grows to hold whatever it is given
+   and can never overflow itself. The fixed thing is the cell.
+2. **Everything at the floor.** `getComputedStyle` did not resolve the logical
+   `paddingBlockStart` family here, and an empty string parses to `NaN`, which makes
+   every comparison false.
+3. **Still at the floor.** `scrollWidth` is an integer and the room it is compared
+   against is not: a label filling a 153.6px box reports 154 and failed by 0.4px at
+   every size.
+4. **"Comfort" drawn as "Comfor / t"** — visible only in a screenshot.
+   `overflow-wrap: anywhere` means *any* size fits, because a word can always break
+   between two letters. Sizes are chosen against normal wrapping now, with `anywhere`
+   restored afterwards as the last resort, since nothing here may clip.
+
+### A test rewritten rather than deleted
+
+`white type is never left on a light background` guarded a grid that no longer has
+white type — it would have passed by finding none. It measures the **contrast
+ratio** now, at rest and hovered, on every cell and on the message. That still
+catches the bug it was written for (`button:hover` in `style.css` outranks a bare
+`.board-cell`, which is how a cell went white-on-white twice) and applies to the new
+design as well.
+
+**Gate:** 8/8 checks, 880 concepts / 0 errors, 161 browser tests, 633 unit tests.
