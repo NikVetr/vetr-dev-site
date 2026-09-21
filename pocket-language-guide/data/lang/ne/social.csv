@@ -99,3 +99,25 @@ children.car-seat,हामीलाई बच्चाको कार सि�
 children.stroller,बच्चा गुडाउने गाडी,,baccā guḍāunē gāḍī,bˈʌccˌaː ɡuɖˈaːʊnˌeː ɡˈaːɖi,,2,ne-agent-v1;ipa=espeak
 children.playground,खेल्ने मैदान छ?,,khēlnē maidāna cha?,kʰˈeːlneː mɛːdˈaːn cʰˈə,,2,ne-agent-v1;ipa=espeak
 social-basics.politeness-particles,"थाईमा शिष्टता वाक्यको अन्त्यमा एउटा शब्द थपेर देखाइन्छ: पुरुष भए लगभग हरेक कुराको अन्त्यमा khrap थप्छन्, महिला भए kha। प्रश्न सोध्दा महिलाले kha लाई उकालो सुरमा भन्छिन्। यहाँका हरूहरूमा यो शब्द छैन, त्यसैले आफैं थप्नुहोस्।",,"thāīmā śiṣṭatā vākyakō antyamā ēuṭā śabda thapēra dēkhāincha: puruṣa bhaē lagabhaga harēka kurākō antyamā khrap thapchan, mahilā bhaē kha. praśna sōdhdā mahilālē kha lāī ukālō suramā bhanchin. yahām̐kā harūharūmā yō śabda chaina, tyasailē āphaiṁ thapnuhōs.",,,2,ne-agent-v1
+board-answers.can-you-walk,हिँड्न मिल्छ?,,him̐ḍna milcha?,hˈĩɖnə mˈɪlcʰə,"'milcha' (milnu, to be possible) is impersonal and invariant",2,ne-board-answers-v1;ipa=espeak
+board-answers.card-or-cash,कार्ड कि नगद?,,kārḍa ki nagada?,kˈaːrrɖə kˈɪ nˈʌɡəd,,2,ne-board-answers-v1;ipa=espeak
+board-answers.help-is-coming,सहयोग आउँदै छ,,sahayōga āum̐dai cha,sˌəhəjˈoːɡ ˌaːũdˈɛː cʰˈə,"progressive -dai cha, invariant for gender",2,ne-board-answers-v1;rule=progressive-invariant;ipa=espeak
+board-answers.how-many,कति चाहियो?,,kati cāhiyō?,kˈʌtɪ cˈaːhɪjˌoː,"'cāhiyō' is the ordinary invariant want-form already used in this pack, not the -eko/-eki participle",2,ne-board-answers-v1;ipa=espeak
+board-answers.i-am-calling-an-ambulance,म एम्बुलेन्स बोलाउँदै छु,,ma ēmbulēnsa bōlāum̐dai chu,mə ˌeːmbulˈeːnsə bˌoːlaːũdˈɛː cʰˈu,"progressive -dai chu is invariant for gender, unlike the -eko/-eki resultative",2,ne-board-answers-v1;rule=progressive-invariant;ipa=espeak
+board-answers.i-am-calling-the-police,म प्रहरीलाई बोलाउँदै छु,,ma praharīlāī bōlāum̐dai chu,mə pɾˌəhəɾɪːlˈaːi bˌoːlaːũdˈɛː cʰˈu,"matches the pack's existing, already gender-safe police-consulate.i-am-calling-the-police wording",2,ne-board-answers-v1;rule=progressive-invariant;ipa=espeak
+board-answers.i-do-not-have-a-phone,मसँग फोन छैन,,masam̐ga phōna chaina,məʃˈãɡ pʰˈoːn cʰˈɛːnə,,2,ne-board-answers-v1;ipa=espeak
+board-answers.i-will-find-someone,सहयोग गर्न सक्ने कोही भेटिनेछ,,sahayōga garna saknē kōhī bhēṭinēcha,sˌəhəjˈoːɡ ɡˈʌrrnə sˈʌkneː kˈoːhi bʰˌeːʈɪnˈeːcʰə,"someone who can help will be found -- future tense (-nēcha), not the -eko/-eki participle, and 'kōhī' has no gender",2,ne-board-answers-v1;rule=future-tense-invariant;ipa=espeak
+board-answers.i-will-show-you,म बाटो देखाउनेछु,,ma bāṭō dēkhāunēchu,mə bˈaːʈoː dˌeːkʰaːʊnˈeːcʰu,"future tense (-nēchu), not the -eko/-eki participle -- the only construction Nepali genders for the speaker",2,ne-board-answers-v1;rule=future-tense-invariant;ipa=espeak
+board-answers.i-will-write-it-down,म यो लेखिदिनेछु,,ma yō lēkhidinēchu,mə jˈoː lˌeːkʰɪdɪnˈeːcʰu,"future tense, invariant",2,ne-board-answers-v1;rule=future-tense-invariant;ipa=espeak
+board-answers.it-is-closed,बन्द छ,,banda cha,bˈʌndə cʰˈə,,2,ne-board-answers-v1;ipa=espeak
+board-answers.it-is-over-there,त्यहाँ छ,,tyahām̐ cha,tjˈʌhã cʰˈə,,2,ne-board-answers-v1;ipa=espeak
+board-answers.none-of-these,यीमध्ये मेरो कुरा छैन,,yīmadhyē mērō kurā chaina,jɪːmˈʌdʰjeː mˈeːɾoː kˈuɾaː cʰˈɛːnə,none of these is my point,2,ne-board-answers-v1;ipa=espeak
+board-answers.not-possible,त्यसो हुन सक्दैन,,tyasō huna sakdaina,tjˈʌsoː hˈunə səkdˈɛːnə,"that cannot happen -- habitual 'sak-', not the -eko/-eki participle",2,ne-board-answers-v1;ipa=espeak
+board-answers.please-wait,एक छिन,,ēka china,ˈeːkə cʰˈɪn,,2,ne-board-answers-v1;ipa=espeak
+board-answers.say-it-again,फेरि एकपल्ट?,,phēri ēkapalṭa?,pʰˈeːɾɪ ˌeːkəpˈʌlʈə,,2,ne-board-answers-v1;ipa=espeak
+board-answers.stay-here,यहीँ बस्नु राम्रो,,yahīm̐ basnu rāmrō,jˈʌhĩ bˈʌsnuʲˌu ɾˈaːmɾoː,'rāmrō' is an invariant Nepali adjective,2,ne-board-answers-v1;ipa=espeak
+board-answers.the-hospital-is-close,अस्पताल नजिकै छ,,aspatāla najikai cha,ˌəspətˈaːl nˈʌɟɪkˌɛː cʰˈə,,2,ne-board-answers-v1;ipa=espeak
+board-answers.there-is-no-wait,"पर्खन पर्दैन, अहिले भित्र जानुहोस्",,"parkhana pardaina, ahilē bhitra jānuhōs","pˈʌrrkʰən pərrdˈɛːnə, ˈʌhɪlˌeː bʰˈɪtɾə ɟˌaːnuhˈoːs","-nuhos imperative, invariant for gender",2,ne-board-answers-v1;ipa=espeak
+board-answers.we-do-not-have-it,हामीसँग यो छैन,,hāmīsam̐ga yō chaina,hˌaːmɪːʃˈãɡ jˈoː cʰˈɛːnə,,2,ne-board-answers-v1;ipa=espeak
+board-answers.what-is-your-name,नाम के हो?,,nāma kē hō?,nˈaːmə kˈeː hoː,,2,ne-board-answers-v1;ipa=espeak
+board-answers.where-does-it-hurt,कहाँ दुख्छ?,,kahām̐ dukhcha?,kˈʌhã dˈukʰcʰə,,2,ne-board-answers-v1;ipa=espeak

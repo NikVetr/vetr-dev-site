@@ -99,3 +99,25 @@ children.car-seat,Potrzebujemy fotelika dla dziecka,,pˌɔtʃɛbujˈɛmɨ fˌɔt
 children.stroller,wózek,,vˈuzɛk,,2,pl-agent-v1;ipa=espeak
 children.playground,Czy jest tu plac zabaw?,,tʃɨ jɛst tˈu plˈadʑ zˈabaf,,2,pl-agent-v1;ipa=espeak
 social-basics.politeness-particles,"Grzeczność po tajsku: prawie każde zdanie kończy się słowem khrap, jeśli mówi mężczyzna, albo kha, jeśli mówi kobieta. W pytaniu kobieta mówi kha z intonacją wznoszącą. W wierszach tego przewodnika tej cząstki nie ma, więc proszę ją dodać samodzielnie.",,,,2,pl-notes-v1
+board-answers.there-is-no-wait,"Nie ma kolejki, można już wejść",,"ɲˈɛma kɔlˈɛjki, mˈɔʒna jˈuʒ vˈɛjɕtɕ",,2,pl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.none-of-these,"Nie ma tu tego, co chcę powiedzieć",,"ɲˈɛma tˈu tˈɛɡɔ, tsˈɔ xtsˈɛ pɔvʲˈɛdʑɛtɕ",,2,pl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.it-is-closed,U nas zamknięte,,ˈu nˈaz zamkɲˈɛntɛ,we're closed; distinct register from common-signs.closed's nieczynne,2,pl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.we-do-not-have-it,Nie mamy tego,,ɲɛ mˌamɨ tˈɛɡɔ,,2,pl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.card-or-cash,Karta czy gotówka?,,kˈarta tʃɨ ɡɔtˈufka,,2,pl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.please-wait,"Chwilę, proszę",,"xfˈilɛ, prˈɔʃɛ",,2,pl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.it-is-over-there,To jest tam,,tɔ jɛst tˈam,,2,pl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-will-show-you,Pokażę drogę,,pɔkˈaʒɛ drˈɔɡɛ,,2,pl-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.how-many,Ile?,,ˈilɛ,,2,pl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.not-possible,To niemożliwe,,tɔ ɲˌɛmɔʒlˈivɛ,,2,pl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.say-it-again,"Jeszcze raz, proszę?",,"jˈɛʃtʃɛ rˈas, prˈɔʃɛ",,2,pl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-will-write-it-down,Zapiszę to,,zapˈiʃɛ tɔ,,2,pl-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.i-am-calling-an-ambulance,Zadzwonię po karetkę,,zadʑvˈɔɲɛ pɔ karˈɛtkɛ,,2,pl-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.i-am-calling-the-police,Dzwonię na policję,,dʑvˈɔɲɛ na pɔlˈitsjɛ,,2,pl-agent-v1;board-answers-v1;matches police-consulate.i-am-calling-the-police;ipa=espeak
+board-answers.help-is-coming,Pomoc już jest w drodze,,pˈɔmɔts jˈuʃ jɛzd w drˈɔdʑɛ,,2,pl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.where-does-it-hurt,Gdzie boli?,,ɡdʑˈɛ bˈɔli,,2,pl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.can-you-walk,Czy można chodzić?,,tʃɨ mˈɔʒna xˈɔdʑitɕ,,2,pl-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.stay-here,Lepiej zostać tutaj,,lˈɛpʲɛj zˈɔstatɕ tˈutaj,,2,pl-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.what-is-your-name,Proszę o imię,,prˈɔʃɛ ɔ ˈimjɛ,"asks for the name rather than addressing pan/pani; a request, not a question",2,pl-agent-v1;board-answers-v1;reply-neutrality-rule;pan-pani-avoided;ipa=espeak
+board-answers.the-hospital-is-close,Szpital jest blisko,,ʃpˈital jɛzd blˈiskɔ,,2,pl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-do-not-have-a-phone,Nie mam telefonu,,ɲˈɛmam tˌɛlɛfˈɔnu,,2,pl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-will-find-someone,"Znajdę kogoś, kto może pomóc",,"znˈajdɛ kˈɔɡɔɕ, ktˈɔ mˈɔʒɛ pˈɔmuts",,2,pl-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak

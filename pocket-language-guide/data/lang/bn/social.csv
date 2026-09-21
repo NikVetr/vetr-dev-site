@@ -99,3 +99,25 @@ children.car-seat,আমাদের বাচ্চার জন্য কা�
 children.stroller,বাচ্চার গাড়ি,স্ট্রলার,bāccāra gāṛi,bˈatʃtʃaɾ ɡˈaɽi,,2,bn-agent-v1;ipa=espeak
 children.playground,খেলার জায়গা আছে কি?,,khelāra jāẏagā āche ki?,kʰˈelaɾ ɟˈajɔɡˌa ˈatʃʰe ki,,2,bn-agent-v1;ipa=espeak
 social-basics.politeness-particles,"থাই ভদ্রতা: পুরুষ হলে প্রায় যেকোনো বাক্যের শেষে krap, মহিলা হলে ka জুড়ে দিন। মহিলা প্রশ্ন করলে ka-টা উঁচু সুরে বলেন। এখানের সারিগুলোতে এই কণাটা নেই, তাই নিজে যোগ করে নিন।",,"thāi bhadratā: puruṣa hale prāẏa yekono bākyera śeṣe krap, mahilā hale ka juṛe dina. mahilā praśna karale ka-ṭā um̐cu sure balena. ekhānera sārigulote ei kaṇāṭā nei, tāi nije yoga kare nina.",,,2,bn-notes-v1
+board-answers.can-you-walk,হাঁটা কি সম্ভব?,,hām̐ṭā ki sambhaba?,hˈãʈa ki ʃˈɔmbʰɔb,"Bengali has no grammatical gender at all, so this needed no special construction",2,bn-board-answers-v1;ipa=espeak
+board-answers.card-or-cash,কার্ড না নগদ?,,kārḍa nā nagada?,kˈaɾɖɔ nˈa nˈɔɡɔd,,2,bn-board-answers-v1;ipa=espeak
+board-answers.help-is-coming,সাহায্য আসছে,,sāhāyya āsachē,ʃˈahadʒːˌɔ ˈaʃɔtʃʰˌe,,2,bn-board-answers-v1;ipa=espeak
+board-answers.how-many,কতগুলো লাগবে?,,katagulo lāgabē?,kˈɔtɔɡˌulo lˈaɡɔbˌe,,2,bn-board-answers-v1;ipa=espeak
+board-answers.i-am-calling-an-ambulance,আমি অ্যাম্বুলেন্স ডাকছি,,āmi ayāmbulensa ḍākachi,ˌami ˈæmbulˌenʃɔ ɖˈakɔtʃʰˌi,,2,bn-board-answers-v1;ipa=espeak
+board-answers.i-am-calling-the-police,আমি পুলিশ ডাকছি,,āmi puliśa ḍākachi,ˌami pˈuliʃ ɖˈakɔtʃʰˌi,matches the pack's existing police-consulate.i-am-calling-the-police wording,2,bn-board-answers-v1;ipa=espeak
+board-answers.i-do-not-have-a-phone,আমার কাছে ফোন নেই,,āmāra kāchē phōna nei,ˌamaɾ kˈatʃʰe fˈon nˈei,,2,bn-board-answers-v1;ipa=espeak
+board-answers.i-will-find-someone,আমি সাহায্য করার মতো কাউকে খুঁজব,,āmi sāhāyya karāra matō kāukē khum̐jaba,ˌami ʃˈahadʒːˌɔ kˈɔɾaɾ mˈɔto kˈaukˌe kʰˈũɟɔb,,2,bn-board-answers-v1;ipa=espeak
+board-answers.i-will-show-you,আমি রাস্তা দেখিয়ে দিচ্ছি,,āmi rāstā dēkhiyē dicchi,ˌami ɾˈasta dˈekʰiˌe dˈitʃtʃʰi,,2,bn-board-answers-v1;ipa=espeak
+board-answers.i-will-write-it-down,আমি এটা লিখে দিচ্ছি,,āmi ēṭā likhē dicchi,ˌami ˌeʈa lˈikʰe dˈitʃtʃʰi,,2,bn-board-answers-v1;ipa=espeak
+board-answers.it-is-closed,বন্ধ আছে,,bandha āchē,bˈɔndʰɔ ˈatʃʰe,,2,bn-board-answers-v1;ipa=espeak
+board-answers.it-is-over-there,ওখানে আছে,,ōkhānē āchē,ˈokʰanˌe ˈatʃʰe,,2,bn-board-answers-v1;ipa=espeak
+board-answers.none-of-these,এর মধ্যে আমার কথাটা নেই,,ēra madhyē āmāra kathāṭā nei,ˌeɾ mˌɔdʰːe ˌamaɾ kˈɔtʰaʈˌa nˈei,my point is not among these,2,bn-board-answers-v1;ipa=espeak
+board-answers.not-possible,এটা সম্ভব নয়,,ēṭā sambhaba naẏa,ˌeʈa ʃˈɔmbʰɔb nˈɔj,,2,bn-board-answers-v1;ipa=espeak
+board-answers.please-wait,এক মিনিট,,ēka miniṭa,ˈek mˈiniʈ,,2,bn-board-answers-v1;ipa=espeak
+board-answers.say-it-again,আরেকবার?,,ārēkabāra?,ˈaɾekˌɔbaɾ,,2,bn-board-answers-v1;ipa=espeak
+board-answers.stay-here,এখানে থাকাই ভালো,,ēkhānē thākāi bhālō,ˈekʰanˌe tʰˈakaˌi bʰˈalo,,2,bn-board-answers-v1;ipa=espeak
+board-answers.the-hospital-is-close,হাসপাতাল কাছেই,,hāsapātāla kāchei,hˈaʃɔpˌatal kˈatʃʰeˌi,,2,bn-board-answers-v1;ipa=espeak
+board-answers.there-is-no-wait,"অপেক্ষা করতে হবে না, এখন ভিতরে যান",,"apēkṣā karatē habē nā, ēkhana bhitarē yāna","ˈɔpekʰkʰˌa kˈɔɾɔtˌe hˈɔbe nˈa, ˈekʰɔn bʰˈitɔɾˌe dʒˈan",,2,bn-board-answers-v1;ipa=espeak
+board-answers.we-do-not-have-it,আমাদের কাছে এটা নেই,,āmādēra kāchē ēṭā nei,ˌamadˌeɾ kˈatʃʰe ˌeʈa nˈei,,2,bn-board-answers-v1;ipa=espeak
+board-answers.what-is-your-name,নাম কী?,,nāma kī?,nˈam kˈi,,2,bn-board-answers-v1;ipa=espeak
+board-answers.where-does-it-hurt,কোথায় ব্যথা করছে?,,kōthāẏa byathā karachē?,kˈotʰaj bˈætʰa kˈɔɾɔtʃʰˌe,,2,bn-board-answers-v1;ipa=espeak

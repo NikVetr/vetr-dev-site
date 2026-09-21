@@ -99,3 +99,25 @@ children.car-seat,ہمیں بچے کی کار سیٹ چاہیے,,hameñ bachche 
 children.stroller,پرام,بچہ گاڑی,prām,pəɾˈaːm,,2,ur-agent-v1;ipa=espeak
 children.playground,کیا کھیل کا میدان ہے؟,,kyā khel kā maidān hai?,kjˈaː kʰˈeːl kaː meːdˈaːn hɛ,,2,ur-agent-v1;ipa=espeak
 social-basics.politeness-particles,تھائی میں ادب جملے کے آخر میں ایک لفظ سے آتا ہے: مرد تقریباً ہر بات کے بعد کھراپ لگاتے ہیں اور خواتین کھا۔ سوال پوچھتے وقت خاتون کھا کو چڑھتے سُر میں کہتی ہے۔ اِس کارڈ کی سطروں میں یہ لفظ نہیں ہے، کیونکہ درست انتخاب بولنے والے اور جملے کی نوعیت پر ہے؛ اپنے حساب سے لگا لیجیے۔,,,,,2,ur-agent-v1
+board-answers.can-you-walk,کیا چلنا ممکن ہے؟,,kyā calnā mumkin hai?,kjˈaː cˈʌlnˌaː mˈʊmkˌɪn hɛ,,2,ur-board-answers-v1;ipa=espeak
+board-answers.card-or-cash,کارڈ یا نقد؟,,kārḍ yā naqad?,kˈaːɾɖ jˈaː nˈʌqəd,,2,ur-board-answers-v1;ipa=espeak
+board-answers.help-is-coming,مدد آ رہی ہے,,madad ā rahī hai,mˈʌdəd ˈaː ɾˈʌhi hɛ,,2,ur-board-answers-v1;ipa=espeak
+board-answers.how-many,کتنے چاہئیں؟,,kitne chāhi'eñ?,kˈɪtneː cˈaːhẽː,,2,ur-board-answers-v1;ipa=espeak
+board-answers.i-am-calling-an-ambulance,مجھے ایمبولینس بلانی پڑے گی,,mujhe aimbūlens bulānī paṛe gī,mˌʊɟʰeː ˌeːmboːlˈiːns bəlˈaːni pˈʌɽeː ɡi,"I will have to call an ambulance -- the obligative agrees with the (feminine) object, not the speaker; the pack's own police-consulate.i-am-calling-the-police uses a gendered progressive instead, so this is deliberately a different construction",2,ur-board-answers-v1;rule=obligative-agrees-with-object-not-speaker;ipa=espeak
+board-answers.i-am-calling-the-police,مجھے پولیس بلانی پڑے گی,,mujhe pulis bulānī paṛe gī,mˌʊɟʰeː pʊlˈiːs bəlˈaːni pˈʌɽeː ɡi,"I will have to call the police -- safe obligative, not the pack's existing gendered progressive میں پولیس کو بلا رہا/رہی ہوں",2,ur-board-answers-v1;rule=obligative-agrees-with-object-not-speaker;ipa=espeak
+board-answers.i-do-not-have-a-phone,میرے پاس فون نہیں ہے,,mere pās fon nahīñ hai,mˈeːɾeː pˈaːs fˈoːn nahˈĩː hɛ,,2,ur-board-answers-v1;ipa=espeak
+board-answers.i-will-find-someone,مدد کرنے والا کوئی مل جائے گا,,madad karne wālā ko'ī mil jā'e gā,mˈʌdəd kˌaɾneː ʋˈaːlaː kˈoːi mˈɪl ɟˈaːeː ɡaː,"someone who can help will be found -- third person, no reference to the speaker",2,ur-board-answers-v1;rule=third-person-avoids-speaker-agreement;ipa=espeak
+board-answers.i-will-show-you,مجھے راستہ دکھانا ہے,,mujhe rāsta dikhānā hai,mˌʊɟʰeː ɾˈaːstˌa dəkʰˈaːnaː hɛ,I have to show the way -- dikhaanaa defaults masculine regardless of the speaker,2,ur-board-answers-v1;rule=obligative-agrees-with-object-not-speaker;ipa=espeak
+board-answers.i-will-write-it-down,مجھے یہ لکھ لینا ہے,,mujhe yah likh lenā hai,mˌʊɟʰeː jeːh lˈɪkʰ lˈeːnaː hɛ,I have to write this down -- lenaa defaults masculine since 'yah' has no gender,2,ur-board-answers-v1;rule=obligative-agrees-with-object-not-speaker;ipa=espeak
+board-answers.it-is-closed,بند ہے,,band hai,bˈʌnd hɛ,,2,ur-board-answers-v1;ipa=espeak
+board-answers.it-is-over-there,وہاں ہے,,wahāñ hai,ʋˈʌhãː hɛ,,2,ur-board-answers-v1;ipa=espeak
+board-answers.none-of-these,ان میں میری بات نہیں ہے,,in meñ merī bāt nahīñ hai,ɪn mˈẽ mˈeːɾi bˈaːt nahˈĩː hɛ,"my point is not among these -- 'merii' agrees with 'baat' (fem.), not the speaker",2,ur-board-answers-v1;rule=possessive-agrees-with-possessed-noun-not-speaker;ipa=espeak
+board-answers.not-possible,ایسا نہیں ہو سکتا,,aisā nahīñ ho saktā,ˈeːsaː nahˈĩː hˈoː sˈʌktˌaː,"that cannot happen -- impersonal, saktaa defaults masculine since 'aisaa' has no gender",2,ur-board-answers-v1;ipa=espeak
+board-answers.please-wait,بس ایک منٹ,,bas ek minaṭ,bˈʌs ˈeːk mˈɪnɪʈ,,2,ur-board-answers-v1;ipa=espeak
+board-answers.say-it-again,ایک بار پھر؟,,ek bār phir?,ˈeːk bˈaːɾ pʰˈɪɾ,,2,ur-board-answers-v1;ipa=espeak
+board-answers.stay-here,یہیں رکنا بہتر ہے,,yahīñ ruknā behtar hai,jahˈĩː ɾˈʊknaː bɛhtˈaɾ hɛ,,2,ur-board-answers-v1;ipa=espeak
+board-answers.the-hospital-is-close,ہسپتال پاس ہی ہے,,haspatāl pās hī hai,hˌəsəptˈaːl pˈaːs hˈiː hɛ,,2,ur-board-answers-v1;ipa=espeak
+board-answers.there-is-no-wait,انتظار نہیں ہے، ابھی اندر آ جائیے,,"intazār nahīñ hai, abhī andar ā jā'iye",ˌɪntɪzˈaːɾ nahˈĩː hɛ ˈabʰi ˈandaɾ ˈaː ɟˈaːjeː,"-iye imperative, invariant for gender",2,ur-board-answers-v1;ipa=espeak
+board-answers.we-do-not-have-it,ہمارے پاس یہ نہیں ہے,,hamāre pās yah nahīñ hai,həmˈaːɾeː pˈaːs jeːh nahˈĩː hɛ,,2,ur-board-answers-v1;ipa=espeak
+board-answers.what-is-your-name,نام کیا ہے؟,,nām kyā hai?,nˈaːm kjˈaː hɛ,,2,ur-board-answers-v1;ipa=espeak
+board-answers.where-does-it-hurt,کہاں درد ہے؟,,kahāñ dard hai?,kˈʌhãː dˈʌɾd hɛ,,2,ur-board-answers-v1;ipa=espeak

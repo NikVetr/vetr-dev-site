@@ -99,3 +99,25 @@ children.car-seat,Chúng tôi cần ghế ô tô cho bé,,tʃuŋ˧˥ t̪oj˧ kə
 children.stroller,Xe đẩy,Xe đẩy em bé,sɛ˧ ɗəɪ˧˩˧,,2,vi-agent-v1;ipa=espeak
 children.playground,Có khu vui chơi không ạ?,,kɔ˧˥ xu˧ vuj˧ tʃəːj˧ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 social-basics.politeness-particles,"Tiếng Thái đặt phép lịch sự ở cuối câu, đúng chỗ chữ ạ của tiếng Việt, nhưng chọn theo người nói: nam nói khrap, nữ nói kha. Khi đặt câu hỏi, nữ nói kha với giọng lên. Các câu trong thẻ này đã bỏ tiếng đó, bạn tự thêm cho đúng với mình.",,,,2,vi-notes-v1
+board-answers.can-you-walk,Đi lại được không?,,ɗi˧ laːj˨˩ˀ ɗyə̯c˨˩ˀ xoŋ˧,,2,vi-agent-v1;ipa=espeak
+board-answers.card-or-cash,Thẻ hay tiền mặt?,,tɛ˧˩˧ haj˧ t̪iɛ̯n˨˩ mat̪˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+board-answers.help-is-coming,Cứu hộ đang đến,,kiw˧˥ ho˨˩ˀ ɗaːŋ˧ ɗen˧˥,,2,vi-agent-v1;ipa=espeak
+board-answers.how-many,Lấy bao nhiêu?,,ləɪ˧˥ baːw˧ ɲiɛ̯w˧,,2,vi-agent-v1;ipa=espeak
+board-answers.i-am-calling-an-ambulance,Tôi sẽ gọi xe cấp cứu,,t̪oj˧ sɛ˧ˀ˥ ɣɔj˨˩ˀ sɛ˧ kəp˧˥ kiw˧˥,,2,vi-agent-v1;ipa=espeak
+board-answers.i-am-calling-the-police,Tôi sẽ gọi công an,,t̪oj˧ sɛ˧ˀ˥ ɣɔj˨˩ˀ koŋ˧ aːn˧,,2,vi-agent-v1;matches police-consulate.i-am-calling-the-police;ipa=espeak
+board-answers.i-do-not-have-a-phone,Tôi không có điện thoại,,t̪oj˧ xoŋ˧ kɔ˧˥ ɗiɛ̯n˨˩ˀ twaːj˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+board-answers.i-will-find-someone,Tôi sẽ tìm người giúp,,t̪oj˧ sɛ˧ˀ˥ t̪im˨˩ ŋyə̯j˨˩ zup˧˥,,2,vi-agent-v1;ipa=espeak
+board-answers.i-will-show-you,Tôi sẽ chỉ đường,,t̪oj˧ sɛ˧ˀ˥ tʃi˧˩˧ ɗyə̯ŋ˨˩,,2,vi-agent-v1;ipa=espeak
+board-answers.i-will-write-it-down,Tôi sẽ viết ra,,t̪oj˧ sɛ˧ˀ˥ viɛ̯t̪˧˥ zaː˧,,2,vi-agent-v1;ipa=espeak
+board-answers.it-is-closed,Đóng cửa rồi,,ɗɔŋ˧˥ kyə̯˧˩˧ zoj˨˩,,2,vi-agent-v1;ipa=espeak
+board-answers.it-is-over-there,Ở đằng kia,,əː˧˩˧ ɗaŋ˨˩ kiə̯˧,,2,vi-agent-v1;ipa=espeak
+board-answers.none-of-these,Trong này không có điều tôi muốn nói,,tʃɔŋ˧ naj˨˩ xoŋ˧ kɔ˧˥ ɗiɛ̯w˨˩ t̪oj˧ muə̯n˧˥ nɔj˧˥,,2,vi-agent-v1;ipa=espeak
+board-answers.not-possible,Không thể được,,xoŋ˧ te˧˩˧ ɗyə̯c˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+board-answers.please-wait,Xin chờ một chút,,sin˧ tʃəː˨˩ mot̪˨˩ˀ tʃut̪˧˥,,2,vi-agent-v1;ipa=espeak
+board-answers.say-it-again,Xin nói lại,,sin˧ nɔj˧˥ laːj˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+board-answers.stay-here,Ở đây là tốt nhất,,əː˧˩˧ ɗəɪ˧ laː˨˩ t̪ot̪˧˥ ɲət̪˧˥,,2,vi-agent-v1;ipa=espeak
+board-answers.the-hospital-is-close,Bệnh viện ở gần đây,,beɲ˨˩ˀ viɛ̯n˨˩ˀ əː˧˩˧ ɣən˨˩ ɗəɪ˧,,2,vi-agent-v1;ipa=espeak
+board-answers.there-is-no-wait,"Không cần chờ, vào được rồi",,"xoŋ˧ kən˨˩ tʃəː˨˩, vaːw˨˩ ɗyə̯c˨˩ˀ zoj˨˩",,2,vi-agent-v1;ipa=espeak
+board-answers.we-do-not-have-it,Chúng tôi không có,,tʃuŋ˧˥ t̪oj˧ xoŋ˧ kɔ˧˥,,2,vi-agent-v1;ipa=espeak
+board-answers.what-is-your-name,Xin cho hỏi tên gì ạ?,,sin˧ tʃɔ˧ hɔj˧˩˧ t̪en˧ zi˨˩ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+board-answers.where-does-it-hurt,Đau ở đâu?,,ɗaw˧ əː˧˩˧ ɗəw˧,,2,vi-agent-v1;ipa=espeak

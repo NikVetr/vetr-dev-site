@@ -99,3 +99,25 @@ children.car-seat,Gyerekülésre van szükségünk,,ɟˈɛrɛkyleːʃrɛ vˈɑn 
 children.stroller,babakocsi,,bˈɑbɑkotʃi,,2,hu-agent-v1;ipa=espeak
 children.playground,Van itt játszótér?,,vˈɑn ˈitt jˈaːtstsoːteːr,,2,hu-agent-v1;ipa=espeak
 social-basics.politeness-particles,"Udvariasság a thai nyelvben: szinte minden mondat végére tegye oda a khrap szót, ha férfi, és a kha szót, ha nő. Kérdésben a nő a kha szót emelkedő hangmenettel mondja. Az itteni sorokból ez a szó kimaradt, tegye hozzá maga.",,,,2,hu-agent-v1
+board-answers.there-is-no-wait,"Nincs várakozás, most beléphet",,"nˈintʃ vˈaːrɑkozaːʃ, mˈoʃt bˈɛleːphɛt",,2,hu-agent-v1;board-answers-v1;ipa=espeak
+board-answers.none-of-these,"Ezek között nincs, amit mondani szeretnék",,"ˈɛzɛk kˈøzøtt nˈintʃ, ˈɑmit mˈondɑni sˈɛrɛtneːk",,2,hu-agent-v1;board-answers-v1;ipa=espeak
+board-answers.it-is-closed,Zárva vagyunk,,zˈaːrvɑ vˈɑɟunk,"lit. 'we are closed'; the idiom a Hungarian shop uses about itself, distinct from the bare sign word zárva",2,hu-agent-v1;board-answers-v1;ipa=espeak
+board-answers.we-do-not-have-it,Az nincs,,ˈɑz nˈintʃ,,2,hu-agent-v1;board-answers-v1;ipa=espeak
+board-answers.card-or-cash,Kártyával vagy készpénzzel?,,kˈaːrcaːvɑl vˈɑɟ kˈeːspeːnzzɛl,,2,hu-agent-v1;board-answers-v1;ipa=espeak
+board-answers.please-wait,"Egy pillanatot, kérem",,"ˈɛɟ pˈillɑnɑtot, kˈeːrɛm","nominal, no imperative verb; distinct from communication.please-wait-a-moment's várjon",2,hu-agent-v1;board-answers-v1;ipa=espeak
+board-answers.it-is-over-there,Ott van,,ˈott vˈɑn,,2,hu-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-will-show-you,Megmutatom az utat,,mˈɛɡmutɑtom ˈɑz ˈutɑt,,2,hu-agent-v1;board-answers-v1;ipa=espeak
+board-answers.how-many,Hányat szeretne?,,hˈaːɲɑt sˈɛrɛtnɛ,,2,hu-agent-v1;board-answers-v1;ipa=espeak
+board-answers.not-possible,Az nem lehetséges,,ˈɑz nˈɛm lˈɛhɛtʃtʃeːɡɛʃ,,2,hu-agent-v1;board-answers-v1;ipa=espeak
+board-answers.say-it-again,"Még egyszer, kérem?",,"mˈeːɡ ˈɛɟsɛr, kˈeːrɛm",,2,hu-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-will-write-it-down,Leírom,,lˈɛiːrom,,2,hu-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-am-calling-an-ambulance,Hívom a mentőt,,hˈiːvom ˈɑ mˈɛntøːt,,2,hu-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-am-calling-the-police,Hívom a rendőrséget,,hˈiːvom ˈɑ rˈɛndøːrʃeːɡɛt,,2,hu-agent-v1;board-answers-v1;matches police-consulate.i-am-calling-the-police;ipa=espeak
+board-answers.help-is-coming,Jön a segítség,,jˈøn ˈɑ ʃˈɛɡiːtʃtʃeːɡ,,2,hu-agent-v1;board-answers-v1;ipa=espeak
+board-answers.where-does-it-hurt,Hol fáj?,,hˈol fˈaːj,,2,hu-agent-v1;board-answers-v1;ipa=espeak
+board-answers.can-you-walk,Lehet gyalogolni?,,lˈɛhɛt ɟˈɑloɡolni,,2,hu-agent-v1;board-answers-v1;ipa=espeak
+board-answers.stay-here,Legjobb itt maradni,,lˈɛɡjobb ˈitt mˈɑrɑdni,,2,hu-agent-v1;board-answers-v1;ipa=espeak
+board-answers.what-is-your-name,Mi a neve?,,mˈi ˈɑ nˈɛvɛ,"an alternative formal construction to introductions.what-is-your-name's Hogy hívják?, kept distinct rather than duplicated",2,hu-agent-v1;board-answers-v1;ipa=espeak
+board-answers.the-hospital-is-close,A kórház közel van,,ˈɑ kˈoːrhaːz kˈøzɛl vˈɑn,,2,hu-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-do-not-have-a-phone,Nincs telefonom,,nˈintʃ tˈɛlɛfonom,,2,hu-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-will-find-someone,"Keresek valakit, aki tud segíteni",,"kˈɛrɛʃɛk vˈɑlɑkit, ˈɑki tˈud ʃˈɛɡiːtɛni",,2,hu-agent-v1;board-answers-v1;ipa=espeak

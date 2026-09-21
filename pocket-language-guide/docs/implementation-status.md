@@ -1430,3 +1430,108 @@ carries the language-independent concept bank — which every pair needs — plu
 languages the app opens with. Any other pair is one somebody chose, which means they
 were in the app with a connection, which is when Save for offline is the honest
 answer, and it is the rule a sheet has always followed.
+
+## Batch G — all fifty-three languages, in eight waves
+
+1,122 rows of content took Converse from **two pairs to 2,550 per board**, and the
+projection in Batch F was exact. Eight agents by language family, each given
+`content/PROMPTS/board-answers.md` rather than a prompt-embedded brief — which turned
+out to matter: later agents read the earlier packs' rows and adopted their row order
+and provenance tags without being told to, and one read a mid-flight edit to the brief
+and reasoned about whether it applied to its own languages.
+
+| | listeners | pairs |
+|---|---|---|
+| directions | 52 | 2,652 |
+| emergency, intro, transport, food, shopping, time | 51 | 2,550 |
+| massage and spa | 1 | 1 |
+
+**Zero rows, across all 51 natural languages, where a gendered form was unavoidable.**
+No masculine default was substituted for a missing neutral anywhere.
+
+### What each family had to route around
+
+The constraint is that **two people of unknown gender** are in one short sentence: the
+stranger saying it and the traveller reading it. Every family solved it differently.
+
+- **Slavic** — the past is an l-participle that agrees with the speaker, so every
+  first-person row uses a present or perfective future (`Вызываю скорую`). Polish
+  forced the only real rework: "what is your name" needs `pan/pani`, so it became
+  `Proszę o imię`, which is what a clinic desk says and addresses nobody.
+- **Indo-Aryan** — the future is gendered too, so it is not the escape it is in
+  Slavic. The answer was the **dative-subject obligative** the packs already use:
+  `मुझे एंबुलेंस बुलानी पड़ेगी`, where the agreement attaches to *एंबुलेंस*, a feminine
+  noun, and never to the speaker. "I will find someone" dropped the first person
+  entirely: `मदद करने वाला कोई मिल जाएगा`.
+- **Hebrew** — the sharpest catch in the batch. The present inflects for gender and
+  not person; the future for person and not gender. So every first-person row is
+  future (`אני אתקשר לאמבולנס`) — and the existing
+  `police-consulate.i-am-calling-the-police` was **refused as a source**, because it
+  is present tense (`אני מתקשר`) and therefore does leak the speaker's sex.
+- **Hausa** — no axis but a real second-person hazard. Impersonal `a` (`Za a iya
+  tafiya?`), grammatical rather than human agreement (`Ina ciwon yake?` agrees with
+  *ciwo*), and for "what is your name" the possessive dropped entirely, because every
+  option — 2nd-person `-nka/-nki`, 3rd-person `-sa/-ta` — is sexed.
+- **Thai and Khmer** — a cost, not a win. The polite particle is selected by the
+  *speaker's* sex and the speaker is a stranger, so all 22 rows drop ครับ/ค่ะ and
+  បាទ/ចាស. Thai reads **noticeably blunter** as a result. Offering both is the paired
+  alternative the design forbids; the survey's own advice was to omit or pick one.
+  Omitted, and now named rather than silent.
+
+### The English steering is a hazard note, not a template
+
+The Germanic agent declined the impersonal wording and wrote `Können Sie gehen?` and
+`Bleiben Sie hier`, on the grounds that *Sie* and its imperative carry no gender and
+the paraphrase would be a stilted sentence bought for nothing. That is right, and it
+is right structurally: a concept here is a language-independent *meaning*. The brief
+now says so, with German as the worked example.
+
+### Two refusals that were correct
+
+**Yoruba declined `dietary-needs.no-sesame`.** Three candidate words with three
+referents — one names the confection, one is independently given as the Igbo term and
+also means "cocoon" in Yoruba, one comes from an ethnobotanical inventory under a
+medicinal use — none tone-marked, and Yoruba tone is phonemic. On an allergen row.
+A 458-page English-Yoruba dictionary has no "sesame" headword at all.
+
+That refusal exposed a bad rule rather than a bad agent: all-or-nothing cost Yoruba
+the whole Eating-out board over one seed. `SLACK = 1` in the board index now lets a
+board tolerate **one** missing phrase, because the app has always drawn an
+unresolvable button in place and disabled and reported the count under the grid. One
+dim button in twelve is usable and disclosed; two reads as broken, which is why it is
+not higher.
+
+**Klingon wrote 20 of 22 and Quenya 11**, both refusing on grammar rather than taste.
+Klingon's `'ar` is bound to the noun it questions and never stands alone, and
+`-laH`/`-laHbe'` always attaches to a specific verb — so "How many?" and "That is not
+possible" have no honest context-free rendering, and stretching the pack's existing
+`Qapbe'` to cover the second would have blurred two rows into one. Quenya has no word
+for money, ambulance, police, telephone or hospital. Both used the existing confidence
+tiers: **3** for a bare attested headword used as its own answer (`SoQ`, `pa'`,
+`Pahta`, `Tanomë`, `Lacárima`), **1** for anything composed, with morphemes recorded.
+
+### Three defects the tooling caught that reading would not have
+
+- **Uzbek**: the G2P leaked `ʻ` (U+02BB) into the `ipa` column, which the validator
+  refuses because an orthographic letter there reaches the font subset of every reader
+  of the pack. The cause was one character upstream — Uzbek uses `ʻ` for the `oʻ`/`gʻ`
+  digraphs and `ʼ` for the glottal after a consonant, and counting the pack settled
+  it: 324 uses of the first, every one after *o* or *g*; 10 of the second, after
+  *a*/*e*/*n*. The new row's `maʻqul` was the single exception in either direction.
+- **Khmer has no automated IPA route** — its column is entirely hand-analysed and
+  tagged `ipa=km-analysis` — so its 22 rows were the only ones in the batch with an
+  empty pronunciation, which would have printed a blank respelling. Analysed by hand
+  afterwards. While doing it the agent corrected a rule I had given it: the bantak
+  shortens the vowel without leniting the final consonant, and my two examples had
+  both happened to end in ស, which does lenite.
+- **A report contained a Gujarati sentence written in Bengali script.** The data was
+  correct; the write-up was not. A script-block check across all seven Indo-Aryan
+  packs found 154 rows, none in the wrong script.
+
+### Still open
+
+`massage-spa`'s 18 concepts are Mandarin-only, so that board stays at one pair — a
+separate and much less useful project. `dietary-needs.no-sesame` wants a Yoruba source.
+The Khmer pack is internally inconsistent on two transcriptions (បិទ as both `bət` and
+`bɨt`, ចូល as both `tɕoul` and `tɕoːl`), found while analysing the new rows and left
+alone. And none of the 1,122 rows has been read by a fluent speaker of anything.

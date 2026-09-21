@@ -99,3 +99,25 @@ children.car-seat,Kula mbetahaken kursi mobil kanggé laré,,ˈkulɔ mbətaˈhak
 children.stroller,Krèta bayi,Stroller,ˈkrɛtɔ ˈbaji,,2,jv-agent-v1;ipa=jv-g2p
 children.playground,Wonten papan dolanan laré?,,ˈwɔntən ˈpapan doˈlanan ˈlare,,2,jv-agent-v1;ipa=jv-g2p
 social-basics.politeness-particles,"Kasopanan basa Thai wonten ing pungkasaning ukara: tiyang jaler nutup mèh sedaya ukara mawi khrap, tiyang èstri mawi kha. Tiyang èstri ingkang nyuwun pirsa mungel kha kanthi swanten minggah. Baris ing ngriki sengaja mboten ngemot partikel menika, dados panjenengan kedah nambahi piyambak.",,,,2,jv-agent-v1
+board-answers.can-you-walk,Panjenengan saged mlampah?,,pandʒənəˈŋan ˈsaɡəd ˈmlampah,,2,jv-agent-v1;ipa=jv-g2p
+board-answers.card-or-cash,Kertu utawa tunai?,,kərˈtu uˈtɔwɔ tuˈnai,,2,jv-agent-v1;ipa=jv-g2p
+board-answers.help-is-coming,Pitulungan badhé dhateng,,pituˈluŋan ˈbaɖe ˈɖatəŋ,,2,jv-agent-v1;ipa=jv-g2p
+board-answers.how-many,Pinten?,,ˈpɪntən,,2,jv-agent-v1;ipa=jv-g2p
+board-answers.i-am-calling-an-ambulance,Kula badhé nélpon ambulan,,ˈkulɔ ˈbaɖe ˈnɛlpɔn amˈbulan,,2,jv-agent-v1;ipa=jv-g2p
+board-answers.i-am-calling-the-police,Kula badhé nélpon polisi,,ˈkulɔ ˈbaɖe ˈnɛlpɔn poˈlisi,,2,jv-agent-v1;matches police-consulate.i-am-calling-the-police;ipa=jv-g2p
+board-answers.i-do-not-have-a-phone,Kula mboten gadhah HP,,ˈkulɔ ˈmbɔtən ˈɡaɖah haˈpe,,2,jv-agent-v1;ipa=jv-g2p+loan
+board-answers.i-will-find-someone,Kula badhé pados tiyang ingkang saged mbiyantu,,ˈkulɔ ˈbaɖe ˈpadɔs ˈtijaŋ ˈɪŋkaŋ ˈsaɡəd mbiˈjantu,,2,jv-agent-v1;ipa=jv-g2p
+board-answers.i-will-show-you,Kula badhé nedahaken margi,,ˈkulɔ ˈbaɖe nədaˈhakən ˈmarɡi,,2,jv-agent-v1;ipa=jv-g2p
+board-answers.i-will-write-it-down,Kula badhé nyerat,,ˈkulɔ ˈbaɖe ɲəˈrat,,2,jv-agent-v1;ipa=jv-g2p
+board-answers.it-is-closed,Sampun tutup,,ˈsampʊn ˈtutʊp,,2,jv-agent-v1;ipa=jv-g2p
+board-answers.it-is-over-there,Wonten mrika,,ˈwɔntən ˈmrikɔ,,2,jv-agent-v1;ipa=jv-g2p
+board-answers.none-of-these,Mboten wonten ingkang leres,,ˈmbɔtən ˈwɔntən ˈɪŋkaŋ ləˈrəs,'none of these is correct' -- register-safe paraphrase of 'is what I want to say',2,jv-agent-v1;ipa=jv-g2p
+board-answers.not-possible,Mboten saged,,ˈmbɔtən ˈsaɡəd,,2,jv-agent-v1;ipa=jv-g2p
+board-answers.please-wait,"Nyuwun tulung, ngentosi sekedhap",,"ˈɲuwʊn ˈtulʊŋ, ŋənˈtosi səkəˈɖap",,2,jv-agent-v1;ipa=jv-g2p
+board-answers.say-it-again,"Nyuwun tulung, dipunambali",,"ˈɲuwʊn ˈtulʊŋ, dipunamˈbali",,2,jv-agent-v1;ipa=jv-g2p
+board-answers.stay-here,Wonten mriki langkung sae,,ˈwɔntən ˈmriki ˈlaŋkʊŋ ˈsaə,,2,jv-agent-v1;ipa=jv-g2p
+board-answers.the-hospital-is-close,Rumah sakit wonten caket mriki,,ˈrumah ˈsakɪt ˈwɔntən ˈtʃakət ˈmriki,,2,jv-agent-v1;ipa=jv-g2p
+board-answers.there-is-no-wait,"Mboten perlu ngentosi, sampun saged mlebet",,"ˈmbɔtən pəˈrlu ŋənˈtosi, ˈsampʊn ˈsaɡəd mləˈbət",,2,jv-agent-v1;ipa=jv-g2p
+board-answers.we-do-not-have-it,Kula mboten gadhah,,ˈkulɔ ˈmbɔtən ˈɡaɖah,"kula, not kita -- kula never includes the addressee, so it renders the exclusive reading without a dedicated kami/kita split",2,jv-agent-v1;ipa=jv-g2p
+board-answers.what-is-your-name,Asma panjenengan sinten?,,ˈasmɔ pandʒənəˈŋan ˈsɪntən,,2,jv-agent-v1;ipa=jv-g2p
+board-answers.where-does-it-hurt,Sakitipun wonten pundi?,,sakiˈtipʊn ˈwɔntən ˈpʊndi,,2,jv-agent-v1;ipa=jv-g2p

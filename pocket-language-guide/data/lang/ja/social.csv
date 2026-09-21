@@ -99,3 +99,25 @@ social-basics.okay-fine-i-am-okay,大丈夫です,,daijōbu desu,daidʑoːbɯ de
 communication.please-show-me-the-text,{target}の文を見せてください,,{target} no bun o misete kudasai,{target} no bɯɴ o misete kɯdasai,,2,language-slots-v1;ipa=hepburn
 communication.please-write-it-in-roman-letters,ローマ字で書いてください,,rōmaji de kaite kudasai,ɾoːmadʑi de kaite kɯdasai,,2,japanese-reviewed-v6;ipa=hepburn
 social-basics.politeness-particles,タイ語の丁寧さは文末の一語。 男性はほぼ何にでも khrap、女性は kha を付けます。 女性が質問するときは kha を上がり調子で言います。 この表はこの語を省いてあります。 自分に合う方を付けてください。,,,,,2,ja-notes-v1
+board-answers.there-is-no-wait,待ち時間はなく、今すぐ入れます,,"machijikan wa naku, ima sugu hairemasu","matɕidʑikaɴ wa nakɯ, ima sɯɡɯ haiɾemasɯ",,2,ja-agent-v1;board-answers-v1;ipa=hepburn
+board-answers.none-of-these,言いたいことはこの中にありません,,iitai koto wa kono naka ni arimasen,iːtai koto wa kono naka ɲi aɾimaseɴ,,2,ja-agent-v1;board-answers-v1;ipa=hepburn
+board-answers.it-is-closed,閉店です,,heiten desu,heiteɴ desɯ,lit. 'closed [for the day]'; adds です to common-signs.closed's bare 閉店 for a spoken register,2,ja-agent-v1;board-answers-v1;ipa=hepburn
+board-answers.we-do-not-have-it,それはありません,,sore wa arimasen,soɾe wa aɾimaseɴ,,2,ja-agent-v1;board-answers-v1;ipa=hepburn
+board-answers.card-or-cash,カードと現金、どちらですか？,,"kādo to genkin, dochira desu ka?","kaːdo to ɡeɴkiɴ, dotɕiɾa desɯ ka",,2,ja-agent-v1;board-answers-v1;ipa=hepburn
+board-answers.please-wait,少々お待ちください,,shōshō omachi kudasai,ɕoːɕoː omatɕi kɯdasai,the standard counter phrase; more formal than communication.please-wait-a-moment's 少し待ってください,2,ja-agent-v1;board-answers-v1;ipa=hepburn
+board-answers.it-is-over-there,あそこです,,asoko desu,asoko desɯ,,2,ja-agent-v1;board-answers-v1;ipa=hepburn
+board-answers.i-will-show-you,道案内します,,michi annai shimasu,mitɕi aɴnai ɕimasɯ,,2,ja-agent-v1;board-answers-v1;ipa=hepburn
+board-answers.how-many,いくつ要りますか？,,ikutsu irimasu ka?,ikɯtsɯ iɾimasɯ ka,,2,ja-agent-v1;board-answers-v1;ipa=hepburn
+board-answers.not-possible,それは無理です,,sore wa muri desu,soɾe wa mɯɾi desɯ,,2,ja-agent-v1;board-answers-v1;ipa=hepburn
+board-answers.say-it-again,もう一度お願いします,,mō ichido onegai shimasu,moː itɕido oneɡai ɕimasɯ,"verbless 'one more time, please'; distinct from communication.please-say-it-again's imperative 言ってください",2,ja-agent-v1;board-answers-v1;ipa=hepburn
+board-answers.i-will-write-it-down,書きます,,kakimasu,kakimasɯ,,2,ja-agent-v1;board-answers-v1;ipa=hepburn
+board-answers.i-am-calling-an-ambulance,救急車を呼びます,,kyūkyūsha o yobimasu,kjɯːkjɯːɕa o jobimasɯ,,2,ja-agent-v1;board-answers-v1;ipa=hepburn
+board-answers.i-am-calling-the-police,警察を呼びます,,keisatsu o yobimasu,keisatsɯ o jobimasɯ,,2,ja-agent-v1;board-answers-v1;matches police-consulate.i-am-calling-the-police;ipa=hepburn
+board-answers.help-is-coming,すぐに助けが来ます,,sugu ni tasuke ga kimasu,sɯɡɯ ɲi tasɯke ɡa kimasɯ,,2,ja-agent-v1;board-answers-v1;ipa=hepburn
+board-answers.where-does-it-hurt,どこが痛いですか？,,doko ga itai desu ka?,doko ɡa itai desɯ ka,,2,ja-agent-v1;board-answers-v1;ipa=hepburn
+board-answers.can-you-walk,歩けますか？,,arukemasu ka?,aɾɯkemasɯ ka,,2,ja-agent-v1;board-answers-v1;ipa=hepburn
+board-answers.stay-here,ここにいるのが一番です,,koko ni iru no ga ichiban desu,koko ɲi iɾɯ no ɡa itɕibaɴ desɯ,,2,ja-agent-v1;board-answers-v1;ipa=hepburn
+board-answers.what-is-your-name,名前は何ですか？,,namae wa nan desu ka?,namae wa naɴ desɯ ka,drops introductions.what-is-your-name's honorific お- prefix for a more direct register; still です/ます polite,2,ja-agent-v1;board-answers-v1;ipa=hepburn
+board-answers.the-hospital-is-close,病院はすぐ近くです,,byōin wa sugu chikaku desu,bjoːiɴ wa sɯɡɯ tɕikakɯ desɯ,,2,ja-agent-v1;board-answers-v1;ipa=hepburn
+board-answers.i-do-not-have-a-phone,スマホがありません,,sumaho ga arimasen,sɯmaho ɡa aɾimaseɴ,,2,ja-agent-v1;board-answers-v1;ipa=hepburn
+board-answers.i-will-find-someone,手伝える人を探します,,tetsudaeru hito o sagashimasu,tetsɯdaeɾɯ çito o saɡaɕimasɯ,,2,ja-agent-v1;board-answers-v1;ipa=hepburn

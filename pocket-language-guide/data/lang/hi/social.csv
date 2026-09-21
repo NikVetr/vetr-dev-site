@@ -99,3 +99,25 @@ children.car-seat,हमें बच्चे की कार सीट चा
 children.stroller,प्रैम,बच्चा गाड़ी,praim,pɾˈɛːm,,2,hi-agent-v1;ipa=espeak
 children.playground,क्या खेल का मैदान है?,,kyā khel kā maidān hai?,kjaː kʰˈeːl kaː mɛːdˈaːn hɛː,,2,hi-agent-v1;ipa=espeak
 social-basics.politeness-particles,"थाई में शिष्टता वाक्य के अंत में एक शब्द से आती है, कुछ वैसे ही जैसे आप और तुम का चुनाव: पुरुष लगभग हर बात के बाद khrap जोड़ते हैं, महिलाएँ kha। सवाल पूछते समय महिला kha को चढ़ते सुर में कहती है। यहाँ दी गई पंक्तियों में यह शब्द नहीं है, इसलिए अपने हिसाब से जोड़ लीजिए।",,,,,2,hi-notes-v1
+board-answers.can-you-walk,क्या चलना संभव है?,,kyā calanā sambhav hai?,kjaː cˈʌlnˌaː sˈʌmbʰəʋ hɛː,,2,hi-board-answers-v1;ipa=espeak
+board-answers.card-or-cash,कार्ड या नकद?,,kārḍ yā nakad?,kˈaːɾɖ jˈaː nˈʌkəd,,2,hi-board-answers-v1;ipa=espeak
+board-answers.help-is-coming,मदद आ रही है,,madad ā rahī hai,mˈʌdəd ˈaː ɾˌəhi hɛː,,2,hi-board-answers-v1;ipa=espeak
+board-answers.how-many,कितने चाहिए?,,kitne cāhie?,kˈɪtnˌeː cˈaːhɪˌeː,,2,hi-board-answers-v1;ipa=espeak
+board-answers.i-am-calling-an-ambulance,मुझे एंबुलेंस बुलानी पड़ेगी,,mujhe aṁbuleṁs bulānī paṛegī,mˌʊɟʰeː ˌẽːbʊlˈẽːs bʊlˈaːni pəɽˈeːɡi,"I will have to call an ambulance -- the obligative padegii agrees with the (feminine) object, not the speaker",2,hi-board-answers-v1;rule=obligative-agrees-with-object-not-speaker;ipa=espeak
+board-answers.i-am-calling-the-police,मुझे पुलिस बुलानी पड़ेगी,,mujhe pulis bulānī paṛegī,mˌʊɟʰeː pˈʊlɪs bʊlˈaːni pəɽˈeːɡi,"matches the traveller-side police-consulate.i-am-calling-the-police wording, already gender-safe in this pack",2,hi-board-answers-v1;rule=obligative-agrees-with-object-not-speaker;ipa=espeak
+board-answers.i-do-not-have-a-phone,मेरे पास फ़ोन नहीं है,,mere pās fon nahīṁ hai,mˌeːɾeː pˈaːs fˈoːn nˈʌhĩ hɛː,,2,hi-board-answers-v1;ipa=espeak
+board-answers.i-will-find-someone,मदद करने वाला कोई मिल जाएगा,,madad karne vālā koī mil jāegā,mˈʌdəd kˈʌɾnˌeː ʋˈaːlaː kˈoːi mˈɪl ɟaːˈeːɡaː,"someone who can help will be found -- third person, no reference to the speaker at all",2,hi-board-answers-v1;rule=third-person-avoids-speaker-agreement;ipa=espeak
+board-answers.i-will-show-you,मुझे रास्ता दिखाना है,,mujhe rāstā dikhānā hai,mˌʊɟʰeː ɾˈaːstaː dɪkʰˈaːnaː hɛː,I have to show the way -- dikhaanaa defaults masculine regardless of the speaker,2,hi-board-answers-v1;rule=obligative-agrees-with-object-not-speaker;ipa=espeak
+board-answers.i-will-write-it-down,मुझे यह लिख लेना है,,mujhe yah likh lenā hai,mˌʊɟʰeː jˌəh lˈɪkʰ lˈeːnaː hɛː,I have to write this down -- lenaa defaults masculine since 'yah' has no gender,2,hi-board-answers-v1;rule=obligative-agrees-with-object-not-speaker;ipa=espeak
+board-answers.it-is-closed,बंद है,,band hai,bˈʌnd hɛː,,2,hi-board-answers-v1;ipa=espeak
+board-answers.it-is-over-there,वहाँ है,,vahāṁ hai,ʋˈʌhã hɛː,,2,hi-board-answers-v1;ipa=espeak
+board-answers.none-of-these,इनमें मेरी बात नहीं है,,inmeṁ merī bāt nahīṁ hai,ˈɪnmˌẽː mˌeːɾi bˈaːt nˈʌhĩ hɛː,"my point is not among these -- 'merii' agrees with 'baat' (fem.), not the speaker",2,hi-board-answers-v1;rule=possessive-agrees-with-possessed-noun-not-speaker;ipa=espeak
+board-answers.not-possible,ऐसा नहीं हो सकता,,aisā nahīṁ ho saktā,ˈɛːsaː nˈʌhĩ hoː sˈʌktˌaː,"that cannot happen -- impersonal, saktā defaults masculine since 'aisā' has no gender",2,hi-board-answers-v1;ipa=espeak
+board-answers.please-wait,बस एक मिनट,,bas ek minaṭ,bˈʌs ˈeːk mˈɪnəʈ,,2,hi-board-answers-v1;ipa=espeak
+board-answers.say-it-again,एक बार फिर?,,ek bār phir?,ˈeːk bˈaːɾ pʰˈɪɾ,,2,hi-board-answers-v1;ipa=espeak
+board-answers.stay-here,यहीं रुकना बेहतर है,,yahīṁ ruknā behtar hai,jˈʌhĩ ɾˈʊknˌaː bˈeːhətˌəɾ hɛː,,2,hi-board-answers-v1;ipa=espeak
+board-answers.the-hospital-is-close,अस्पताल पास ही है,,aspatāl pās hī hai,ˌʌspətˈaːl pˈaːs hˈi hɛː,,2,hi-board-answers-v1;ipa=espeak
+board-answers.there-is-no-wait,"इंतज़ार नहीं है, अभी अंदर आ जाइए",,"intazār nahīṁ hai, abhī andar ā jāie","ˌĩtzˈaːɾ nˈʌhĩ hɛː, ˈʌbʰi ˈʌndəɾ ˈaː ɟˈaːɪˌeː","-iye imperative, invariant for gender",2,hi-board-answers-v1;ipa=espeak
+board-answers.we-do-not-have-it,हमारे पास यह नहीं है,,hamāre pās yah nahīṁ hai,həmˌaːɾeː pˈaːs jˌəh nˈʌhĩ hɛː,,2,hi-board-answers-v1;ipa=espeak
+board-answers.what-is-your-name,नाम क्या है?,,nām kyā hai?,nˈaːm kjaː hɛː,,2,hi-board-answers-v1;ipa=espeak
+board-answers.where-does-it-hurt,कहाँ दर्द है?,,kahāṁ dard hai?,kˈʌhã dˈʌɾd hɛː,,2,hi-board-answers-v1;ipa=espeak

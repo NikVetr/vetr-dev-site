@@ -32,8 +32,17 @@ sentence the way a phrasebook would:
    The English has already been steered for this. "I will show **the way**" rather
    than "show you"; "One moment, please" rather than the imperative "wait"; "What is
    the name?" rather than "your name"; "Is walking possible?" rather than "Can you
-   walk?"; "Staying here is best" rather than "Stay here". **Keep that steering in
-   your language.** A second-person pronoun, an imperative, or an object clitic
+   walk?"; "Staying here is best" rather than "Stay here".
+
+   **That steering records a hazard; it is not a template.** A concept in this corpus
+   is a language-independent *meaning*, and each language renders it the way that
+   language actually says it — so where the hazard does not exist, say the natural
+   thing. German and Dutch address a stranger with *Sie* / *u* and neither the pronoun
+   nor the imperative carries gender, so `Können Sie gehen?` and `Bleiben Sie hier`
+   are right there, and forcing `Ist Gehen möglich?` would be a stilted sentence
+   bought for nothing. Where the hazard *is* real — Arabic, Hebrew, Polish, Czech,
+   the Indo-Aryan languages — keep the steering, because there the English wording is
+   the whole reason the row is sayable at all. A second-person pronoun, an imperative, or an object clitic
    pointing at the traveller is what out-genders them in Arabic (أنتَ/أنتِ,
    تفضّل/تفضّلي), Hebrew (אתה/את, חכה/חכי), Polish (pan/pani plus a gendered
    participle), Czech (byl jste / byla jste) and the Indo-Aryan languages

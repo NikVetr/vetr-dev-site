@@ -99,3 +99,25 @@ children.car-seat,Çocuk oto koltuğu gerekiyor.,,tʃodʒˈʊk otˈɔ kɔɫtˈʊ
 children.stroller,bebek arabası,,bebˈɛk aɾabasˈɯ,,2,tr-agent-v1;ipa=espeak
 children.playground,Oyun alanı var mı?,,ojˈʊn aɫanˈɯ vˈar mɯ,,2,tr-agent-v1;ipa=espeak
 social-basics.politeness-particles,"Tay dilinde nezaket: cümlenin sonuna erkekseniz khrap, kadınsanız kha ekleyin. Kadın soru sorarken kha sözcüğünü yükselen tonla söyler. Buradaki satırlarda bu sözcük yok, kendiniz ekleyin.",,,,2,tr-notes-v1
+board-answers.can-you-walk,Yürümek mümkün mü?,,jyɾymˈɛk mømkˈøn mø,,2,tr-agent-v1;ipa=espeak
+board-answers.card-or-cash,Kart mı nakit mi?,,kˈart mɯ nakˈɪt mɪ,,2,tr-agent-v1;ipa=espeak
+board-answers.help-is-coming,Yardım geliyor.,,jardˈɯm ɟelˈijɔr,,2,tr-agent-v1;ipa=espeak
+board-answers.how-many,Kaç tane?,,kˈatʃ tanˈɛ,,2,tr-agent-v1;ipa=espeak
+board-answers.i-am-calling-an-ambulance,Ambulans çağırıyorum.,,ambuɫˈans tʃaːɯɾˈɯjoɾʊm,,2,tr-agent-v1;ipa=espeak
+board-answers.i-am-calling-the-police,Polisi arıyorum.,,polisˈɪ aɾˈɯjoɾʊm,,2,tr-agent-v1;ipa=espeak
+board-answers.i-do-not-have-a-phone,Telefonum yok.,,telefˈonʊm jˈɔk,,2,tr-agent-v1;ipa=espeak
+board-answers.i-will-find-someone,Yardım edebilecek birini bulacağım.,,jardˈɯm edebiledʒˈɛk biɾinˈɪ buɫadʒˈaːɯm,,2,tr-agent-v1;ipa=espeak
+board-answers.i-will-show-you,Yolu göstereceğim.,,joɫˈʊ ɟœsteɾedʒˈejɪm,,2,tr-agent-v1;ipa=espeak
+board-answers.i-will-write-it-down,Yazacağım.,,jazadʒˈaːɯm,,2,tr-agent-v1;ipa=espeak
+board-answers.it-is-closed,Kapalı.,,kapaɫˈɯ,,2,tr-agent-v1;ipa=espeak
+board-answers.it-is-over-there,Orada.,,ˈoɾada,,2,tr-agent-v1;ipa=espeak
+board-answers.none-of-these,Bunlardan hiçbirini demek istemiyorum.,,bʊnɫardˈan hɪtʃbiɾinˈɪ demˈɛk ɪstemˈijoɾʊm,,2,tr-agent-v1;ipa=espeak
+board-answers.not-possible,Bu mümkün değil.,,bʊ mømkˈøn dˈejɪl,,2,tr-agent-v1;ipa=espeak
+board-answers.please-wait,"Bir dakika, lütfen.",,"bɪr dakikˈa, løtfˈæn",,2,tr-agent-v1;ipa=espeak
+board-answers.say-it-again,"Bir daha, lütfen?",,"bɪr dahˈa, løtfˈæn",,2,tr-agent-v1;ipa=espeak
+board-answers.stay-here,Burada kalmak en iyisi.,,bˈuɾada kaɫmˈak ˈæn ijisˈɪ,,2,tr-agent-v1;ipa=espeak
+board-answers.the-hospital-is-close,Hastane yakın.,,hastanˈɛ jakˈɯn,,2,tr-agent-v1;ipa=espeak
+board-answers.there-is-no-wait,"Sıra yok, şimdi girebilirsiniz.",,"sɯɾˈa jˈɔk, ʃɪmdˈɪ ɟiɾebilˈɪrsinɪz",,2,tr-agent-v1;ipa=espeak
+board-answers.we-do-not-have-it,Bizde yok.,,bɪzdˈɛ jˈɔk,,2,tr-agent-v1;ipa=espeak
+board-answers.what-is-your-name,Adınız ne?,,adɯnˈɯz nˈɛ,,2,tr-agent-v1;ipa=espeak
+board-answers.where-does-it-hurt,Neresi ağrıyor?,,neɾesˈɪ aːɾˈɯjɔr,,2,tr-agent-v1;ipa=espeak

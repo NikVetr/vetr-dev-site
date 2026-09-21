@@ -99,3 +99,25 @@ phone-text-power.the-translation-may-be-inaccurate,Die Übersetzung kann falsch 
 phone-text-power.please-confirm,Bitte bestätigen Sie.,,bˈɪtə bəʃtˈɛːtɪɡən ziː,,2,de-agent-v1;ipa=espeak
 phone-text-power.may-i-charge-my-phone-here,Darf ich hier mein Handy laden?,,dˈaɾf ɪç hˈiːɾ maɪn hˈɛndiː lˈɑːdən,,2,de-agent-v1;ipa=espeak
 social-basics.politeness-particles,"Höflichkeit im Thai: Hängen Sie khrap (als Mann) oder kha (als Frau) an fast jeden Satz an. Stellt eine Frau eine Frage, sagt sie stattdessen kha mit steigendem Ton. Die Zeilen hier lassen die Partikel weg; ergänzen Sie sie selbst.",,,,2,de-notes-v1
+board-answers.there-is-no-wait,"Keine Wartezeit, Sie können gleich reingehen.",,"kˈaɪnə vˈaɾteːtsˌaɪt, ziː kˌœnən ɡlˈaɪç rˈaɪŋeːən",,2,de-agent-v1;board-answers-v1;ipa=espeak
+board-answers.none-of-these,Nichts davon passt.,,nˈɪçts dɑːfˈɔn pˈast,,2,de-agent-v1;board-answers-v1;ipa=espeak
+board-answers.it-is-closed,Wir haben zu.,,viːɾ hˌɑːbən tsˈuː,"colloquial 'zu', distinct register from common-signs.closed's 'geschlossen'",2,de-agent-v1;board-answers-v1;ipa=espeak
+board-answers.we-do-not-have-it,Das haben wir nicht.,,das hˌɑːbən viːɾ nˈɪçt,,2,de-agent-v1;board-answers-v1;ipa=espeak
+board-answers.card-or-cash,Karte oder bar?,,kˈaɾtə ˌoːdɜ bˈɑːɾ,,2,de-agent-v1;board-answers-v1;ipa=espeak
+board-answers.please-wait,"Moment, bitte.",,"moːmˈɛnt, bˈɪtə",,2,de-agent-v1;board-answers-v1;ipa=espeak
+board-answers.it-is-over-there,Das ist dort drüben.,,das ɪst dˈɔɾt dɾˈyːbən,,2,de-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-will-show-you,Ich zeige Ihnen den Weg.,,ɪç tsˈaɪɡə ˌiːnən deːn vˈeːk,,2,de-agent-v1;board-answers-v1;ipa=espeak
+board-answers.how-many,Wie viele?,,viː fˈiːlə,,2,de-agent-v1;board-answers-v1;ipa=espeak
+board-answers.not-possible,Das geht nicht.,,das ɡˈeːt nˈɪçt,,2,de-agent-v1;board-answers-v1;ipa=espeak
+board-answers.say-it-again,"Noch einmal, bitte?",,"nɔx ˈaɪnmˌɑːl, bˈɪtə",,2,de-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-will-write-it-down,Ich schreibe es auf.,,ɪç ʃrˈaɪbə ɛs ˈaʊf,,2,de-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-am-calling-an-ambulance,Ich rufe einen Rettungswagen.,,ɪç rˈuːfə ˌaɪnən rˈɛtʊŋsvˌɑːɡən,,2,de-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-am-calling-the-police,Ich rufe die Polizei.,,ɪç rˈuːfə diː pˌoːliːtsˈaɪ,,2,de-agent-v1;board-answers-v1;matches police-consulate.i-am-calling-the-police;ipa=espeak
+board-answers.help-is-coming,Hilfe ist auf dem Weg.,,hˈɪlfə ɪst aʊf deːm vˈeːk,,2,de-agent-v1;board-answers-v1;ipa=espeak
+board-answers.where-does-it-hurt,Wo tut es weh?,,vˌoː tˈuːt ɛs vˈeː,,2,de-agent-v1;board-answers-v1;ipa=espeak
+board-answers.can-you-walk,Können Sie gehen?,,kˌœnən ziː ɡˈeːən,,2,de-agent-v1;board-answers-v1;ipa=espeak
+board-answers.stay-here,Bleiben Sie hier.,,blˈaɪbən ziː hˈiːɾ,,2,de-agent-v1;board-answers-v1;ipa=espeak
+board-answers.what-is-your-name,Wie heißen Sie?,,viː hˈaɪsən ziː,,2,de-agent-v1;board-answers-v1;matches introductions.what-is-your-name;ipa=espeak
+board-answers.the-hospital-is-close,Das Krankenhaus ist ganz nah.,,das kɾˈankənhˌaʊs ɪst ɡˌants nˈɑː,,2,de-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-do-not-have-a-phone,Ich habe kein Handy.,,ɪç hɑːbə kˈaɪn hˈɛndiː,,2,de-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-will-find-someone,"Ich finde jemanden, der helfen kann.",,"ɪç fˈɪndə jˈeːmandən, dɛɾ hˈɛlfən kˌan",,2,de-agent-v1;board-answers-v1;ipa=espeak

@@ -64,3 +64,23 @@ children.suitable-for-children, ,,p
 children.do-children-pay, ,,DIlnIS'a' puqpu',ɖɪlnɪʂʔɑʔ pʰuqʰpʰuʔ,must children pay?,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
 children.minimum-age,  ,,nuq nen rav,nuqʰ nɛn rɑv,what is the minimum age?,1,tlh-composed-v1;lex=Klingon Monopoly + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
 sim-data.may-i-use-your-wifi, ,,'InternetlIj vIlo'laH'a',ʔɪntʰɛrnɛtʰlɪdʒ vɪloʔlɑxʔɑʔ,can I use your Internet?,1,tlh-composed-v1;lex=Saarbruecken qepHom'a' 2014 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+board-answers.can-you-walk,,,bIyItlaH'a',bɪjɪtʰlɑxʔɑʔ,can you walk?,1,tlh-composed-v1;lex=TKD (yIt) + TKD 4.2.5 (-laH);grammar=TKD;native=piqad-csur;ipa=okrand
+board-answers.card-or-cash,   ,,Huch chaw' Huch ghap,xutʃ tʃɑwʔ xutʃ ɣɑpʰ,"credit card, money, or?",1,"tlh-composed-v1;lex=TNK (Huch chaw') + TKD (Huch, ghap);grammar=TKD;native=piqad-csur;ipa=okrand"
+board-answers.help-is-coming, ,,paw QaH,pʰɑw qxɑx,help arrives,1,tlh-composed-v1;lex=TKD (paw) + TKDA (QaH);grammar=TKD;native=piqad-csur;ipa=okrand
+board-answers.i-am-calling-an-ambulance,  ,,chach Duj vItlhob,tʃɑtʃ ɖudʒ vɪtɬob,I request an ambulance,1,tlh-composed-v1;lex=TNK (chach Duj) + TKD (tlhob);grammar=TKD;native=piqad-csur;ipa=okrand
+board-answers.i-am-calling-the-police, ,,ghan'Iq vItlhob,ɣɑnʔɪqʰ vɪtɬob,I request the police force,1,tlh-composed-v1;lex=qep'a' 25 (2018) (ghan'Iq) + TKD (tlhob);grammar=TKD;native=piqad-csur;ipa=okrand
+board-answers.i-do-not-have-a-phone, ,,HablI' vIghajbe',xɑblɪʔ vɪɣɑdʒbɛʔ,I do not have a telephone,1,tlh-composed-v1;lex=HQ 5.2 p.20 (HablI') + TKD (ghaj);grammar=TKD;native=piqad-csur;ipa=okrand
+board-answers.i-will-find-someone,  ,,QaHlaHbogh vay' vItu',qxɑxlɑxboɣ vɑjʔ vɪtʰuʔ,I will find somebody who can help,1,"tlh-composed-v1;lex=TKD (QaH, vay', tu');grammar=TKD 4.2.5 (-laH), TKD 4.2.9/6.2.3 (-bogh);native=piqad-csur;ipa=okrand"
+board-answers.i-will-show-you, ,,He vI'ang,xɛ vɪʔɑŋ,I show the way,1,tlh-composed-v1;lex=TKD (He) + KGT ('ang);grammar=TKD;native=piqad-csur;ipa=okrand
+board-answers.i-will-write-it-down,,,vIghItlh,vɪɣɪtɬ,I write it down,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+board-answers.it-is-closed,,,SoQ,ʂoqx,"be closed, be shut",3,tlh-attested-v1;src=TKD;native=piqad-csur;ipa=okrand
+board-answers.it-is-over-there,,,pa',pʰɑʔ,"there, over there",3,tlh-attested-v1;src=TKD 3.3.5;native=piqad-csur;ipa=okrand
+board-answers.none-of-these, ,,Dochmeyvam vIjatlhbe',ɖotʃmɛjvɑm vɪdʒɑtɬbɛʔ,I do not say these things,1,"tlh-composed-v1;lex=TKD (Doch, jatlh); -mey+-vam stacking per paq'batlh 2ed p.135 (mu'meyvam jatlh);grammar=TKD 3.3.4 (-vam);native=piqad-csur;ipa=okrand"
+board-answers.please-wait,,,yIloS,jɪloʂ,wait,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+board-answers.say-it-again,,,yIjatlhqa',jɪdʒɑtɬqʰɑʔ,say it again,1,tlh-composed-v1;lex=TKD 4.2.3;grammar=TKD;native=piqad-csur;ipa=okrand
+board-answers.stay-here, ,,naDev yIba',nɑɖɛv jɪbɑʔ,sit/stay here,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+board-answers.the-hospital-is-close,  ,,Sum ropyaH qach,ʂum ropʰjɑx qʰɑtʃ,the hospital is near,1,tlh-composed-v1;lex=TNK (ropyaH qach) + KGT (Sum);grammar=TKD;native=piqad-csur;ipa=okrand
+board-answers.there-is-no-wait,   ,,mImbe'lu' 'ej DaH yI'el,mɪmbɛʔluʔ ʔɛdʒ ɖɑx jɪʔɛl,"there is no delay, and now, enter",1,"tlh-composed-v1;lex=TKD (mIm, 'ej, DaH, 'el);grammar=TKD (-be', -lu');native=piqad-csur;ipa=okrand"
+board-answers.we-do-not-have-it,,,wIghajbe',wɪɣɑdʒbɛʔ,we do not have it,1,"tlh-composed-v1;lex=TKD;grammar=TKD (verb prefix table, wI-);native=piqad-csur;ipa=okrand"
+board-answers.what-is-your-name,  ,,nuq 'oH ponglIj'e',nuqʰ ʔox pʰoŋlɪdʒʔɛʔ,what is your name?,1,"tlh-composed-v1;lex=TKD (nuq, 'oH, pong);grammar=TKD (pronoun-as-copula w/ -'e' topic marker);native=piqad-csur;ipa=okrand"
+board-answers.where-does-it-hurt, ,,nuqDaq 'oy',nuqʰɖɑqʰ ʔojʔ,where hurts?,1,"tlh-composed-v1;lex=TKD (nuqDaq, 'oy');grammar=TKD ('nuqDaq' is just 'nuq' plus '-Daq');native=piqad-csur;ipa=okrand"

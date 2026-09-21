@@ -99,3 +99,25 @@ children.car-seat,A nílò àga ọkọ̀ fún ọmọdé,,a ni˥lo˩ a˩ɡa ɔk
 children.stroller,kẹ̀kẹ́ ọmọ,,kɛ˩kɛ˥ ɔmɔ,,2,yo-agent-v1;ipa=yo-g2p
 children.playground,Ṣé ibi eré ọmọdé wà?,,ʃe˥ ibi ere˥ ɔmɔde˥ wa˩,,2,yo-agent-v1;ipa=yo-g2p
 social-basics.politeness-particles,"Ìwà ọ̀wọ̀ nínú èdè Thai: fi khrap parí ó fẹ́rẹ́ jẹ́ gbólóhùn kọ̀ọ̀kan bí ọkùnrin bá ni ẹ, tí ó bá jẹ́ obìnrin, kí ó fi kha parí i. Obìnrin tí ó bá ń béèrè ìbéèrè a fi ohùn tí ó ń gòkè lọ sọ kha ní ìdí rẹ̀. Àwọn ọ̀rọ̀ tí ó wà níhìn-ín kò ní ọ̀rọ̀-ìlọ́sọ́ọ́ yìí, nítorí náà, fi ti ẹ kún un fúnra rẹ.",,,,2,yo-notes-v1
+board-answers.there-is-no-wait,"Kò sí dídúró, ẹ lè wọlé báyìí",,"ko˩ si˥ di˥du˥ro˥, ɛ le˩ wɔle˥ ba˥ji˩i˥",,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
+board-answers.none-of-these,Kò sí ọ̀kan nínú àwọn èyí tí mo fẹ́ sọ,,ko˩ si˥ ɔ˩kã ni˥nu˥ a˩wɔ̃ e˩ji˥ ti˥ mo fɛ˥ sɔ,,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
+board-answers.it-is-closed,Wọ́n ti i,,wɔ̃˥ ti i,they have closed it,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
+board-answers.we-do-not-have-it,A kò ní i,,a ko˩ ni˥ i,we do not have it,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
+board-answers.card-or-cash,Káàdì tàbí owó lásán?,,ka˥a˩di˩ ta˩bi˥ owo˥ la˥sã˥,,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
+board-answers.please-wait,"Ẹ jọ̀wọ́, ìṣẹ́jú kan",,"ɛ dʒɔ˩wɔ˥, i˩ʃɛ˥dʒu˥ kã","please, a minute",2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
+board-answers.it-is-over-there,Ó wà níbẹ̀,,o˥ wa˩ ni˥bɛ˩,,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
+board-answers.i-will-show-you,Mo máa fi ọ̀nà hàn,,mo ma˥a fi ɔ˩na˩ hã˩,,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
+board-answers.how-many,Mélòó ni ẹ fẹ́?,,me˥lo˩o˥ ni ɛ fɛ˥,how many is it that you want,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
+board-answers.not-possible,Èyí kò ṣeéṣe,,e˩ji˥ ko˩ ʃee˥ʃe,,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
+board-answers.say-it-again,"Ẹ jọ̀wọ́, ẹ tún sọ ọ́",,"ɛ dʒɔ˩wɔ˥, ɛ tũ˥ sɔ ɔ˥",,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
+board-answers.i-will-write-it-down,Mo máa kọ ọ́ sílẹ̀,,mo ma˥a kɔ ɔ˥ si˥lɛ˩,,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
+board-answers.i-am-calling-an-ambulance,Mo ń pe ọkọ̀ alaisan,,mo n̩˥ kpe ɔkɔ˩ alaisã,,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
+board-answers.i-am-calling-the-police,Mo ń pe ọlọ́pàá,,mo n̩˥ kpe ɔlɔ˥kpa˩a˥,,2,yo-agent-v1;board-answers-v1;matches police-consulate.i-am-calling-the-police;ipa=yo-g2p
+board-answers.help-is-coming,Ìrànlọ́wọ́ ń bọ̀,,i˩rã˩lɔ˥wɔ˥ n̩˥ bɔ˩,,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
+board-answers.where-does-it-hurt,Níbo ni ó ń dùn ẹ?,,ni˥bo ni o˥ n̩˥ dũ˩ ɛ,,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
+board-answers.can-you-walk,Ṣé ẹ lè rìn?,,ʃe˥ ɛ le˩ rĩ˩,,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
+board-answers.stay-here,Ó dára kí ẹ dúró síbí,,o˥ da˥ra ki˥ ɛ du˥ro˥ si˥bi˥,it is good that you stay here,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
+board-answers.what-is-your-name,Kí ni orúkọ yín?,,ki˥ ni oru˥kɔ jĩ˥,formal yín -- introductions.what-is-your-name uses informal rẹ,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
+board-answers.the-hospital-is-close,Ilé ìwòsàn wà nítòsí,,ile˥ i˩wo˩sã˩ wa˩ ni˥to˩si˥,,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
+board-answers.i-do-not-have-a-phone,Mi ò ní fóònù,,mi o˩ ni˥ fo˥o˩nu˩,,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
+board-answers.i-will-find-someone,Màá wá ẹnìkan tí ó lè ràn yín lọ́wọ́,,ma˩a˥ wa˥ ɛni˩kã ti˥ o˥ le˩ rã˩ jĩ˥ lɔ˥wɔ˥,,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p

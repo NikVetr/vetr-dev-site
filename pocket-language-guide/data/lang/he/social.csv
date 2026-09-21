@@ -99,3 +99,25 @@ children.stroller,עגלת תינוק,עֲגָלַת תִּינוֹק,‘agalat 
 children.playground,יש גן שעשועים?,יֵשׁ גַּן שַׁעֲשׁוּעִים?,yesh gan sha‘ashu‘im?,jˈeʃ ɡˈan ʃaaʃuˈim,,2,he-agent-v1;ipa=bgn
 communication.please-write-it-in-roman-letters,אפשר לכתב את זה באותיות לטיניות?,אֶפְשָׁר לִכְתֹּב אֶת זֶה בְּאוֹתִיּוֹת לָטִינִיּוֹת?,efshar likhtov et ze beotiyot latiniyot?,efʃˈaʁ lixtˈov ˈet zˈe beotijˈot latinijˈot,in Latin letters,2,he-scope-v1;ipa=bgn
 social-basics.politeness-particles,"נימוס בתאית נשען על מילית בסוף המשפט: גבר מוסיף khrap ואישה kha. בשאלה הגבר נשאר עם khrap והאישה אומרת kha בטון עולה. השורות בכרטיס הזה נכתבו בלי המילית, כי הצורה הנכונה תלויה במי שמדבר; הוסיפו אותה בעצמכם.",,,,,2,he-notes-v1
+board-answers.can-you-walk,אפשר ללכת ברגל?,אֶפְשָׁר לָלֶכֶת בָּרֶגֶל?,efshar lalekhet baregel?,efʃˈaʁ lalexˈet baʁeɡˈel,is it possible to walk on foot?,2,he-agent-v1;ipa=bgn
+board-answers.card-or-cash,כרטיס או מזומן?,כַּרְטִיס אוֹ מְזוּמָּן?,kartis o mezuman?,kaʁtˈis ˈo mezumˈan,,2,he-agent-v1;ipa=bgn
+board-answers.help-is-coming,העזרה בדרך,הָעֶזְרָה בַּדֶּרֶךְ,ha‘ezra baderekh,haezʁˈa badeʁˈex,the help is on the way,2,he-agent-v1;ipa=bgn
+board-answers.how-many,כמה?,כַּמָּה?,kama?,kamˈa,,2,he-agent-v1;ipa=bgn
+board-answers.i-am-calling-an-ambulance,אני אתקשר לאמבולנס,אֲנִי אֶתְקַשֵּׁר לְאַמְבּוּלַנְס,ani etkasher le’ambulans,anˈi etkaʃˈeʁ leambulˈans,,2,he-agent-v1;ipa=bgn
+board-answers.i-am-calling-the-police,אני אתקשר למשטרה,אֲנִי אֶתְקַשֵּׁר לַמִּשְׁטָרָה,ani etkasher lamishtara,anˈi etkaʃˈeʁ lamiʃtaʁˈa,,2,he-agent-v1;ipa=bgn
+board-answers.i-do-not-have-a-phone,אין לי טלפון,אֵין לִי טֶלֶפוֹן,eyn li telefon,ejn lˈi telefˈon,,2,he-agent-v1;ipa=bgn
+board-answers.i-will-find-someone,אני אמצא מישהו שיכול לעזור,אֲנִי אֶמְצָא מִישֶׁהוּ שֶׁיָּכוֹל לַעֲזוֹר,ani emtsa mishehu she-yakhol la‘azor,anˈi emtsˈa miʃehˈu ʃejaxˈol laazˈoʁ,,2,he-agent-v1;ipa=bgn
+board-answers.i-will-show-you,אני אראה את הדרך,אֲנִי אַרְאֶה אֶת הַדֶּרֶךְ,ani ar’e et haderekh,anˈi aʁˈe ˈet hadeʁˈex,,2,he-agent-v1;ipa=bgn
+board-answers.i-will-write-it-down,אני אכתוב את זה,אֲנִי אֶכְתּוֹב אֶת זֶה,ani ekhtov et ze,anˈi extˈov ˈet zˈe,,2,he-agent-v1;ipa=bgn
+board-answers.it-is-closed,סגור,סָגוּר,sagur,saɡˈuʁ,,2,he-agent-v1;ipa=bgn
+board-answers.it-is-over-there,זה שם,זֶה שָׁם,ze sham,zˈe ʃˈam,,2,he-agent-v1;ipa=bgn
+board-answers.none-of-these,אין כאן את מה שרציתי לומר,אֵין כָּאן אֶת מָה שֶׁרָצִיתִי לוֹמַר,eyn kan et ma she-ratsiti lomar,ejn kˈan ˈet mˈa ʃeʁatsitˈi lomˈaʁ,,2,he-agent-v1;ipa=bgn
+board-answers.not-possible,זה אי אפשר,זֶה אִי אֶפְשָׁר,ze i efshar,zˈe ˈi efʃˈaʁ,,2,he-agent-v1;ipa=bgn
+board-answers.please-wait,"רגע, בבקשה","רֶגַע, בְּבַקָּשָׁה","réga‘, bevaqasha","ʁˈeɡa, bevakaʃˈa","a moment, please",2,he-agent-v1;ipa=bgn
+board-answers.say-it-again,"עוד פעם, בבקשה?","עוֹד פַּעַם, בְּבַקָּשָׁה?","od pa‘am, bevaqasha?","ˈod paˈam, bevakaʃˈa",,2,he-agent-v1;ipa=bgn
+board-answers.stay-here,להישאר כאן זה הכי טוב,לְהִישָּׁאֵר כָּאן זֶה הֲכִי טוֹב,lehisha’er kan ze hakhi tov,lehiʃaˈeʁ kˈan zˈe haxˈi tˈov,,2,he-agent-v1;ipa=bgn
+board-answers.the-hospital-is-close,בית החולים קרוב,בֵּית הַחוֹלִים קָרוֹב,beyt ha-ẖolim qarov,bejt haxolˈim kaʁˈov,,2,he-agent-v1;ipa=bgn
+board-answers.there-is-no-wait,"אין תור, אפשר להכנס עכשיו","אֵין תּוֹר, אֶפְשָׁר לְהִכָּנֵס עַכְשָׁיו","eyn tor, efshar lehikanes akhshav","ejn tˈoʁ, efʃˈaʁ lehikanˈes axʃˈav","there is no line, it is possible to enter now",2,he-agent-v1;ipa=bgn
+board-answers.we-do-not-have-it,אין לנו את זה,אֵין לָנוּ אֶת זֶה,eyn lanu et ze,ejn lanˈu ˈet zˈe,,2,he-agent-v1;ipa=bgn
+board-answers.what-is-your-name,מה השם?,מָה הַשֵּׁם?,ma hashem?,mˈa haʃˈem,,2,he-agent-v1;ipa=bgn
+board-answers.where-does-it-hurt,איפה כואב?,אֵיפֹה כּוֹאֵב?,eyfo ko’ev?,ejfˈo koˈev,,2,he-agent-v1;ipa=bgn

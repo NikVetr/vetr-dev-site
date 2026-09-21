@@ -99,3 +99,25 @@ children.car-seat,ต้องการคาร์ซีท,,tongkan kha sit,t�
 children.stroller,รถเข็นเด็ก,สตรอลเลอร์,rot khen dek,rot˦˥kʰen˩˩˦ dek˨˩,,2,th-agent-v1;ipa=thaig2p
 children.playground,มีสนามเด็กเล่นไหม,,mi sanam dek len mai,miː˧ sa˨˩naːm˩˩˦dek˨˩len˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
 social-basics.politeness-particles,,,,,,2,coordinator-gaps-v2
+board-answers.can-you-walk,เดินได้ไหม,,doen dai mai,dɤːn˧ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+board-answers.card-or-cash,บัตรหรือเงินสด,,bat rue ngoen sot,bat˨˩ rɯː˩˩˦ ŋɤn˧sot˨˩,,2,th-agent-v1;ipa=thaig2p
+board-answers.help-is-coming,ความช่วยเหลือกำลังมา,,khwam chuai luea kamlang ma,kʰwaːm˧tɕʰua̯j˥˩lɯa̯˩˩˦ kam˧laŋ˧ maː˧,,2,th-agent-v1;ipa=thaig2p
+board-answers.how-many,เอาเท่าไร,,ao thaorai,ʔaw˧ tʰaw˥˩raj˧,,2,th-agent-v1;ipa=thaig2p
+board-answers.i-am-calling-an-ambulance,จะโทรเรียกรถพยาบาล,,cha tho riak rot phayaban,tɕaʔ˨˩ tʰoː˧ ria̯k˥˩ rot˦˥pʰa˦˥jaː˧baːn˧,,2,th-agent-v1;ipa=thaig2p
+board-answers.i-am-calling-the-police,จะโทรเรียกตำรวจ,,cha tho riak tamruat,tɕaʔ˨˩ tʰoː˧ ria̯k˥˩ tam˧rua̯t˥˩,,2,th-agent-v1;matches police-consulate.i-am-calling-the-police;ipa=thaig2p
+board-answers.i-do-not-have-a-phone,ไม่มีมือถือ,,mai mi muethue,maj˥˩ miː˧ mɯː˧tʰɯː˩˩˦,,2,th-agent-v1;ipa=thaig2p
+board-answers.i-will-find-someone,จะไปหาคนช่วย,,cha pai ha khon chuai,tɕaʔ˨˩ paj˧haː˩˩˦ kʰon˧ tɕʰua̯j˥˩,,2,th-agent-v1;ipa=thaig2p
+board-answers.i-will-show-you,จะชี้ทางให้,,cha chi thang hai,tɕaʔ˨˩ tɕʰiː˦˥tʰaːŋ˧ haj˥˩,,2,th-agent-v1;ipa=thaig2p
+board-answers.i-will-write-it-down,จะเขียนให้,,cha khian hai,tɕaʔ˨˩ kʰia̯n˩˩˦ haj˥˩,,2,th-agent-v1;ipa=thaig2p
+board-answers.it-is-closed,ปิดแล้ว,,pit laew,pit˨˩ lɛːw˦˥,,2,th-agent-v1;ipa=thaig2p
+board-answers.it-is-over-there,อยู่ตรงนั้น,,yu trong nan,juː˨˩ troŋ˧nan˦˥,,2,th-agent-v1;ipa=thaig2p
+board-answers.none-of-these,ไม่มีสิ่งที่อยากพูด,,mai mi sing thi yak phut,maj˥˩ miː˧ siŋ˨˩ tʰiː˥˩ jaːk˨˩ pʰuːt˥˩,,2,th-agent-v1;ipa=thaig2p
+board-answers.not-possible,เป็นไปไม่ได้,,pen pai mai dai,pen˧paj˧maj˥˩daːj˥˩,,2,th-agent-v1;ipa=thaig2p
+board-answers.please-wait,รอสักครู่,,ro sak khru,rɔː˧ sak˨˩kʰruː˥˩,,2,th-agent-v1;ipa=thaig2p
+board-answers.say-it-again,รบกวนพูดอีกครั้ง,,ropkuan phut ik khrang,rop˦˥kua̯n˧ pʰuːt˥˩ ʔiːk˨˩kʰraŋ˦˥,,2,th-agent-v1;ipa=thaig2p
+board-answers.stay-here,อยู่ที่นี่ดีที่สุด,,yu thi ni di thisut,juː˨˩ tʰiː˥˩niː˥˩ diː˧ tʰiː˥˩sut˨˩,,2,th-agent-v1;ipa=thaig2p
+board-answers.the-hospital-is-close,โรงพยาบาลอยู่ใกล้ๆ,,rong phayaban yu klai klai,roːŋ˧pʰa˦˥jaː˧baːn˧ juː˨˩ klaj˥˩ ŋɔː˧,,2,th-agent-v1;ipa=thaig2p
+board-answers.there-is-no-wait,ไม่ต้องรอ เข้าไปได้เลย,,mai tong ro khao pai dai loei,maj˥˩tɔŋ˥˩ rɔː˧ kʰaw˥˩paj˧ daːj˥˩ lɤːj˧,,2,th-agent-v1;ipa=thaig2p
+board-answers.we-do-not-have-it,ไม่มี,,mai mi,maj˥˩ miː˧,,2,th-agent-v1;ipa=thaig2p
+board-answers.what-is-your-name,คุณชื่ออะไร,,khun chue arai,kʰun˧na˦˥ tɕʰɯː˥˩ ʔaʔ˨˩raj˧,,2,th-agent-v1;ipa=thaig2p
+board-answers.where-does-it-hurt,เจ็บที่ไหน,,chep thi nai,tɕep˨˩ tʰiː˥˩naj˩˩˦,,2,th-agent-v1;ipa=thaig2p

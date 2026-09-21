@@ -99,3 +99,25 @@ etiquette.did-not-mean-to-offend,ላስቀይም አልፈለግኩም,,laskʼey
 etiquette.what-is-customary,እዚህ የተለመደው ምን ነው?,,izzīh yetelemedew min new?,ʔɨzːih jətələmədəw mɨn nəw,,2,am-agent-v1;ipa=bgn-am
 etiquette.keep-the-change,ዝርዝሩን ይያዙት,,zirizirun yiyazut,zɨrɨzɨrun jɨjazut,keep the change,2,am-agent-v1;ipa=bgn-am
 social-basics.politeness-particles,የታይ ጨዋነት፦ ወንድ ከሆኑ ሁሉንም ነገር ክራፕ ብለው ይጨርሱ፤ ሴት ከሆኑ ካ ይበሉ። ሴት ጥያቄ ስትጠይቅ ካ የሚለውን ከፍ ባለ ቃና ትናገራለች። ከላይ ያሉት መስመሮች ቅንጣቱን አልያዙም ስለዚህ እርስዎ ይጨምሩ።,,yetay chʼewanet: wend kehonu hulunim neger kirap bilew yichʼersu; sēt kehonu ka yibelu. sēt tʼiyakʼē sititʼeyikʼ ka yemīlewin kef bale kʼana tinnagerallech. kelay yallut mesmeroch kʼintʼatun ālyazum silezzīh irsiwo yichʼemru.,,,2,am-agent-v1
+board-answers.can-you-walk,መራመድ ይቻላል?,,meramed yichalal?,məraməd jɨtʃalal,,2,am-agent-v1;ipa=bgn-am
+board-answers.card-or-cash,በካርድ ወይስ በጥሬ ገንዘብ?,,bekard weys betʼirē genzeb?,bəkard wəjs bətʼɨre ɡənzəb,,2,am-agent-v1;ipa=bgn-am
+board-answers.help-is-coming,እርዳታ እየመጣ ነው,,irdata iyyemetʼa new,ʔɨrdata ʔɨjːəmətʼa nəw,,2,am-agent-v1;ipa=bgn-am
+board-answers.how-many,ስንት?,,sint?,sɨnt,,2,am-agent-v1;ipa=bgn-am
+board-answers.i-am-calling-an-ambulance,አምቡላንስ እየጠራሁ ነው,,āmbulans iyyetʼerahu new,ʔambulans ʔɨjːətʼərahu nəw,,2,am-agent-v1;ipa=bgn-am
+board-answers.i-am-calling-the-police,ፖሊስ እየጠራሁ ነው,,polīs iyyetʼerahu new,polis ʔɨjːətʼərahu nəw,,2,am-agent-v1;ipa=bgn-am
+board-answers.i-do-not-have-a-phone,ስልክ የለኝም,,silk yellenyim,sɨlk jəlːəɲɨm,,2,am-agent-v1;ipa=bgn-am
+board-answers.i-will-find-someone,የሚረዳ ሰው ማግኘት እፈልጋለሁ,,yemīredda sew magnyet ichilallehu,jəmirədːa səw maɡɲət ʔɨtʃɨlalːəhu,,2,am-agent-v1;ipa=bgn-am
+board-answers.i-will-show-you,መንገዱን አሳያለሁ,,mengedun asayallehu,mənɡədun ʔasajalːəhu,,2,am-agent-v1;ipa=bgn-am
+board-answers.i-will-write-it-down,ይህን እጻፋለሁ,,yihin itsʼafallehu,jɨhɨn ʔɨsʼafalːəhu,,2,am-agent-v1;ipa=bgn-am
+board-answers.it-is-closed,ዝግ ነው,,zig new,zɨɡ nəw,,2,am-agent-v1;ipa=bgn-am
+board-answers.it-is-over-there,እዚያ ነው,,izziya new,ʔɨzːɨja nəw,,2,am-agent-v1;ipa=bgn-am
+board-answers.none-of-these,ከእነዚህ አንዱም አይደለም,,keʼinezzih andum āydellem,kəʔɨnəzːɨh ʔandum ʔajdəlːəm,,2,am-agent-v1;ipa=bgn-am
+board-answers.not-possible,ይህ አይቻልም,,yih āyichalim,jɨh ʔajɨtʃalɨm,,2,am-agent-v1;ipa=bgn-am
+board-answers.please-wait,ጥቂት ጊዜ እባክዎ,,tʼikʼīt gīzē ibakwo,tʼɨkʼit ɡize ʔɨbakwo,,2,am-agent-v1;ipa=bgn-am
+board-answers.say-it-again,አንድ ጊዜ ደግሞ እባክዎ?,,ānd gīzē degmo ibakwo?,ʔand ɡize dəɡmo ʔɨbakwo,,2,am-agent-v1;ipa=bgn-am
+board-answers.stay-here,የተሻለው ቦታ እዚህ ነው,,yeteshalew bota izzih new,jətəʃaləw bota ʔɨzːɨh nəw,,2,am-agent-v1;ipa=bgn-am
+board-answers.the-hospital-is-close,ሆስፒታሉ በቅርብ ነው,,hospītalu bekʼirb new,hospitalu bəkʼɨrb nəw,,2,am-agent-v1;ipa=bgn-am
+board-answers.there-is-no-wait,የመጠበቅ ጊዜ የለም፤ አሁን መግባት ይቻላል,,yemetʼebeq gīzē yellem; ahun megbat yichalal,,,2,am-agent-v1
+board-answers.we-do-not-have-it,ይህ የለንም,,yih yellenim,jɨh jəlːənɨm,,2,am-agent-v1;ipa=bgn-am
+board-answers.what-is-your-name,ስም ማን ነው?,,sim man new?,sɨm man nəw,,2,am-agent-v1;ipa=bgn-am
+board-answers.where-does-it-hurt,የት ያማል?,,yet yamal?,jət jamal,,2,am-agent-v1;ipa=bgn-am

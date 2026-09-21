@@ -99,3 +99,25 @@ children.car-seat,ਸਾਨੂੰ ਬੱਚੇ ਵਾਲੀ ਕਾਰ ਸੀਟ 
 children.stroller,ਬੱਚੇ ਵਾਲੀ ਪ੍ਰੈਮ,,baccē vālī praim,bʌcce ʋali pɾɛm,child's pram,2,pa-agent-v1;ipa=espeak
 children.playground,ਬੱਚਿਆਂ ਦੇ ਖੇਡਣ ਦੀ ਥਾਂ ਹੈ?,,bacciāṁ dē khēḍaṇ dī thāṁ hai?,bʌccɪã de kʰeɖəɳ di tʰã hɛ,is there a place for children to play?,2,pa-agent-v1;ipa=espeak
 social-basics.politeness-particles,"ਥਾਈ ਵਿੱਚ ਗੱਲ ਦੇ ਅੰਤ ਵਿੱਚ ਇੱਕ ਨਿਮਰਤਾ ਵਾਲਾ ਸ਼ਬਦ ਲਾਇਆ ਜਾਂਦਾ ਹੈ, ਜੋ ਬੋਲਣ ਵਾਲੇ ਦੇ ਲਿੰਗ ਅਤੇ ਗੱਲ ਸਵਾਲ ਹੈ ਜਾਂ ਨਹੀਂ, ਇਸ ਉੱਤੇ ਨਿਰਭਰ ਕਰਦਾ ਹੈ — ਇਸ ਲਈ ਇਹ ਇੱਥੇ ਨਹੀਂ ਛਾਪਿਆ ਗਿਆ।",,"thāī vicc gall dē aṁt vicc ikk nimaratā vālā śabad lāiā jāṁdā hai, jō bōlaṇ vālē dē liṁg atē gall savāl hai jāṁ nahīṁ, is uttē nirabhar karadā hai — is laī ih itthē nahīṁ chāpiā giā.",,"Thai adds a politeness word at the end of an utterance, depending on the speaker's gender and on whether it is a question, so it is not printed here",2,pa-agent-v1
+board-answers.can-you-walk,ਤੁਰਨਾ ਸੰਭਵ ਹੈ?,,turanā sambhav hai?,tʊɾəna sʌ˥nbəʋ hɛ,,2,pa-board-answers-v1;ipa=espeak
+board-answers.card-or-cash,ਕਾਰਡ ਜਾਂ ਨਗਦ?,,kāraḍ jāṁ nagad?,kaɾəɖ ɟã nʌɡəd,,2,pa-board-answers-v1;ipa=espeak
+board-answers.help-is-coming,ਮਦਦ ਆ ਰਹੀ ਹੈ,,madad ā rahī hai,mʌdəd a ɾəhi hɛ,,2,pa-board-answers-v1;ipa=espeak
+board-answers.how-many,ਕਿੰਨੇ ਚਾਹੀਦੇ ਹਨ?,,kiṁnē cāhīdē han?,kɪnne cahide hən,,2,pa-board-answers-v1;ipa=espeak
+board-answers.i-am-calling-an-ambulance,ਮੈਨੂੰ ਐਂਬੂਲੈਂਸ ਬੁਲਾਉਣੀ ਪਵੇਗੀ,,mainūṁ aiṁbūlaiṁs bulāuṇī pavēgī,mɛnũ ɛmbulɛ̃s bʊlaʊɳi pəʋeɡi,"I will have to call an ambulance -- the obligative agrees with the (feminine) object, not the speaker",2,pa-board-answers-v1;rule=obligative-agrees-with-object-not-speaker;ipa=espeak
+board-answers.i-am-calling-the-police,ਮੈਨੂੰ ਪੁਲਿਸ ਬੁਲਾਉਣੀ ਪਵੇਗੀ,,mainūṁ pulis bulāuṇī pavēgī,mɛnũ pʊlɪs bʊlaʊɳi pəʋeɡi,"I will have to call the police -- safe obligative, not the pack's existing gendered progressive ਮੈਂ ਪੁਲਿਸ ਨੂੰ ਫ਼ੋਨ ਕਰ ਰਿਹਾ/ਰਹੀ ਹਾਂ",2,pa-board-answers-v1;rule=obligative-agrees-with-object-not-speaker;ipa=espeak
+board-answers.i-do-not-have-a-phone,ਮੇਰੇ ਕੋਲ ਫ਼ੋਨ ਨਹੀਂ ਹੈ,,mērē kōl fōn nahīṁ hai,meɾe kol fon nʌhĩ hɛ,,2,pa-board-answers-v1;ipa=espeak
+board-answers.i-will-find-someone,ਮਦਦ ਕਰਨ ਵਾਲਾ ਕੋਈ ਮਿਲ ਜਾਵੇਗਾ,,madad karan vālā kōī mil jāvēgā,mʌdəd kʌɾən ʋala koi mɪl ɟaʋeɡa,"someone who can help will be found -- third person, no reference to the speaker",2,pa-board-answers-v1;rule=third-person-avoids-speaker-agreement;ipa=espeak
+board-answers.i-will-show-you,ਮੈਨੂੰ ਰਾਹ ਦਿਖਾਉਣਾ ਹੈ,,mainūṁ rāh dikhāuṇā hai,mɛnũ ɾa˥ dɪkʰaʊɳa hɛ,I have to show the way -- dikhaauṇaa defaults masculine regardless of the speaker,2,pa-board-answers-v1;rule=obligative-agrees-with-object-not-speaker;ipa=espeak
+board-answers.i-will-write-it-down,ਮੈਨੂੰ ਇਹ ਲਿਖ ਲੈਣਾ ਹੈ,,mainūṁ ih likh laiṇā hai,mɛnũ ɪ˥ lɪkʰ lɛɳa hɛ,I have to write this down -- laiṇaa defaults masculine since 'ih' has no gender,2,pa-board-answers-v1;rule=obligative-agrees-with-object-not-speaker;ipa=espeak
+board-answers.it-is-closed,ਬੰਦ ਹੈ,,baṁd hai,bʌnd hɛ,,2,pa-board-answers-v1;ipa=espeak
+board-answers.it-is-over-there,ਉੱਥੇ ਹੈ,,utthē hai,ʊttʰe hɛ,,2,pa-board-answers-v1;ipa=espeak
+board-answers.none-of-these,ਇਨ੍ਹਾਂ ਵਿੱਚੋਂ ਮੇਰੀ ਗੱਲ ਨਹੀਂ ਹੈ,,inhāṁ vicchōṁ mērī gall nahīṁ hai,ɪ˥nã ʋɪccõ meɾi ɡʌl nʌhĩ hɛ,"my point is not among these -- 'mērī' agrees with 'gall' (fem.), not the speaker",2,pa-board-answers-v1;rule=possessive-agrees-with-possessed-noun-not-speaker;ipa=espeak
+board-answers.not-possible,ਇਹ ਨਹੀਂ ਹੋ ਸਕਦਾ,,ih nahīṁ hō sakadā,ɪ˥ nʌhĩ ho sʌkəda,"this cannot happen -- impersonal, sakadā defaults masculine since 'ih' has no gender",2,pa-board-answers-v1;ipa=espeak
+board-answers.please-wait,ਬਸ ਇੱਕ ਮਿੰਟ,,bas ikk miṁṭ,bʌs ɪk mɪɳʈ,,2,pa-board-answers-v1;ipa=espeak
+board-answers.say-it-again,ਇੱਕ ਵਾਰੀ ਫਿਰ?,,ikk vārī phir?,ɪk ʋaɾi pʰɪɾ,,2,pa-board-answers-v1;ipa=espeak
+board-answers.stay-here,ਇੱਥੇ ਹੀ ਰੁਕਣਾ ਬਿਹਤਰ ਹੈ,,itthē hī rukaṇā bihatar hai,ɪttʰe hi ɾʊkəɳa bɪhətəɾ hɛ,,2,pa-board-answers-v1;ipa=espeak
+board-answers.the-hospital-is-close,ਹਸਪਤਾਲ ਨੇੜੇ ਹੀ ਹੈ,,hasapatāl nēṛē hī hai,həsəpətal neɽe hi hɛ,,2,pa-board-answers-v1;ipa=espeak
+board-answers.there-is-no-wait,"ਇੰਤਜ਼ਾਰ ਨਹੀਂ ਹੈ, ਹੁਣੇ ਅੰਦਰ ਆ ਜਾਓ",,"iṁtazār nahīṁ hai, huṇē aṁdar ā jāō","ɪntəzaɾ nʌhĩ hɛ, hʊɳe ʌndəɾ a ɟao","-ō imperative, invariant for gender",2,pa-board-answers-v1;ipa=espeak
+board-answers.we-do-not-have-it,ਸਾਡੇ ਕੋਲ ਇਹ ਨਹੀਂ ਹੈ,,sāḍē kōl ih nahīṁ hai,saɖe kol ɪ˥ nʌhĩ hɛ,,2,pa-board-answers-v1;ipa=espeak
+board-answers.what-is-your-name,ਨਾਂ ਕੀ ਹੈ?,,nāṁ kī hai?,nã ki hɛ,,2,pa-board-answers-v1;ipa=espeak
+board-answers.where-does-it-hurt,ਕਿੱਥੇ ਦਰਦ ਹੈ?,,kitthē dard hai?,kɪttʰe dʌɾəd hɛ,,2,pa-board-answers-v1;ipa=espeak

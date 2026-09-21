@@ -99,3 +99,25 @@ children.stroller,rattaat / lastenvaunut,,rˈattaːt / lˈastenvˌaunut,"rattaat
 children.playground,Onko täällä leikkipaikka?,,ˈoŋko tˈæːllæ lˈeikkipˌaikka,,2,fi-agent-v1;ipa=espeak
 communication.please-write-it-in-roman-letters,Kirjoittaisitko sen latinalaisin kirjaimin?,,kˈirjoittˌaisitko sˈen lˈatinalˌaisiŋ kˈirjaimin,,2,fi-agent-v1;ipa=espeak
 social-basics.politeness-particles,"Thain kohteliaisuus: lisää lähes minkä tahansa perään khrap, jos olet mies, ja kha, jos olet nainen. Nainen sanoo kysymyksen lopussa kha nousevalla sävelkululla. Näiltä riveiltä partikkeli puuttuu, joten lisää se itse.",,,,2,fi-agent-v1
+board-answers.there-is-no-wait,"Ei jonoa, voitte mennä sisään nyt.",,"ˈei jˈonoa, vˈoitte mˈennæ sˈisæːn nˈyt",,2,fi-agent-v1;board-answers-v1;ipa=espeak
+board-answers.none-of-these,"Näiden joukossa ei ole sitä, mitä haluan sanoa.",,"nˈæiden jˈoukossa ˈei ˈole sˈitæ, mˈitæ hˈaluan sˈanoa",,2,fi-agent-v1;board-answers-v1;ipa=espeak
+board-answers.it-is-closed,Olemme kiinni.,,ˈolemme kˈiːnni,"lit. 'we are shut'; kiinni is the spoken word for a closed shop, where suljettu (the sign word) is written register",2,fi-agent-v1;board-answers-v1;ipa=espeak
+board-answers.we-do-not-have-it,Sitä ei ole.,,sˈitæ ˈei ˈole,,2,fi-agent-v1;board-answers-v1;ipa=espeak
+board-answers.card-or-cash,Kortilla vai käteisellä?,,kˈortilla vˈai kˈæteisellæ,,2,fi-agent-v1;board-answers-v1;ipa=espeak
+board-answers.please-wait,Hetkinen.,,hˈetkinen,"shorter than communication.please-wait-a-moment's Hetkinen, kiitos.; the bare form is what is said quickly across a counter",2,fi-agent-v1;board-answers-v1;ipa=espeak
+board-answers.it-is-over-there,Se on tuolla.,,sˈe ˈon tˈuolla,,2,fi-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-will-show-you,Näytän tien.,,nˈæytæn tˈien,,2,fi-agent-v1;board-answers-v1;ipa=espeak
+board-answers.how-many,Kuinka monta haluaisitte?,,kˈuiŋka mˈonta hˈaluˌaisitte,,2,fi-agent-v1;board-answers-v1;ipa=espeak
+board-answers.not-possible,Se ei onnistu.,,sˈe ˈei ˈonnistu,,2,fi-agent-v1;board-answers-v1;ipa=espeak
+board-answers.say-it-again,Vielä kerran?,,vˈielæ kˈerran,,2,fi-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-will-write-it-down,Kirjoitan sen ylös.,,kˈirjoitan sˈen ˈyløs,,2,fi-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-am-calling-an-ambulance,Soitan ambulanssin.,,sˈoitan ˈambulˌanssin,,2,fi-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-am-calling-the-police,Soitan poliisille.,,sˈoitam pˈoliːsˌille,,2,fi-agent-v1;board-answers-v1;matches police-consulate.i-am-calling-the-police;ipa=espeak
+board-answers.help-is-coming,Apua on tulossa.,,ˈapua ˈon tˈulossa,,2,fi-agent-v1;board-answers-v1;ipa=espeak
+board-answers.where-does-it-hurt,Mihin sattuu?,,mˈihin sˈattuː,,2,fi-agent-v1;board-answers-v1;ipa=espeak
+board-answers.can-you-walk,Voiko kävellä?,,vˈoiko kˈævellæ,,2,fi-agent-v1;board-answers-v1;ipa=espeak
+board-answers.stay-here,On parasta jäädä tähän.,,ˈom pˈarasta jˈæːdæ tˈæhæn,,2,fi-agent-v1;board-answers-v1;ipa=espeak
+board-answers.what-is-your-name,Mikä nimi on?,,mˈikæ nˈimi ˈon,"drops the informal possessive sinun that introductions.what-is-your-name carries, per this concept's own steering away from a second-person possessive",2,fi-agent-v1;board-answers-v1;ipa=espeak
+board-answers.the-hospital-is-close,Sairaala on lähellä.,,sˈairaːla ˈon lˈæhellæ,,2,fi-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-do-not-have-a-phone,Minulla ei ole puhelinta.,,mˈinulla ˈei ˈole pˈuhelˌinta,,2,fi-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-will-find-someone,"Etsin jonkun, joka voi auttaa.",,"ˈetsin jˈoŋkun, jˈoka vˈoi ˈauttaː",,2,fi-agent-v1;board-answers-v1;ipa=espeak

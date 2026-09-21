@@ -99,3 +99,25 @@ phone-text-power.the-translation-may-be-inaccurate,La traducción puede ser inex
 phone-text-power.please-confirm,"Confírmelo, por favor",,"komfˈiɾmelo, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
 phone-text-power.may-i-charge-my-phone-here,¿Puedo cargar el teléfono aquí?,,pwˈedo kaɾɡˈaɾ el telˈefono akˈi,,2,es-agent-v1;ipa=espeak
 social-basics.politeness-particles,"Cortesía en tailandés: termine casi cualquier frase con khrap si es hombre, con kha si es mujer. Si una mujer pregunta, kha se dice con tono ascendente. Las filas de esta guía omiten la partícula; añádala usted.",,,,2,es-notes-v1
+board-answers.there-is-no-wait,"No hay espera, ya se puede entrar",,"nˈo ˈaɪ espˈeɾa, ʝˈa se pwˈede entɾˈaɾ",,2,es-agent-v1;board-answers-v1;ipa=espeak
+board-answers.none-of-these,Ninguna de estas opciones es lo que quiero decir,,niŋɡˈuna de ˈestas opsjˈones ˈes lo ke kjˈeɾo desˈiɾ,,2,es-agent-v1;board-answers-v1;ipa=espeak
+board-answers.it-is-closed,Está cerrado,,estˈa serˈado,,2,es-agent-v1;board-answers-v1;ipa=espeak
+board-answers.we-do-not-have-it,No lo tenemos,,nˈo lo tenˈemos,,2,es-agent-v1;board-answers-v1;ipa=espeak
+board-answers.card-or-cash,¿Tarjeta o efectivo?,,taɾxˈeta o ˌefektˈibo,,2,es-agent-v1;board-answers-v1;ipa=espeak
+board-answers.please-wait,"Un momento, por favor",,"ˈun momˈento, poɾ fabˈoɾ",,2,es-agent-v1;board-answers-v1;ipa=espeak
+board-answers.it-is-over-there,Está allí,,estˈa aʝˈi,,2,es-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-will-show-you,Voy a mostrar el camino,,bˈoɪ a mostɾˈaɾ el kamˈino,,2,es-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.how-many,¿Cuántos quiere?,,kwˈantos kjˈeɾe,,2,es-agent-v1;board-answers-v1;ipa=espeak
+board-answers.not-possible,Eso no es posible,,ˈeso nˈo ˈes posˈible,,2,es-agent-v1;board-answers-v1;ipa=espeak
+board-answers.say-it-again,"¿Otra vez, por favor?",,"ˈotɾa bˈes, poɾ fabˈoɾ",,2,es-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-will-write-it-down,Voy a escribirlo,,bˈoɪ a ˌeskɾibˈiɾlo,,2,es-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.i-am-calling-an-ambulance,Voy a llamar a una ambulancia,,bˈoɪ a ʝamˈaɾ a ˈuna ˌambulˈansja,,2,es-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.i-am-calling-the-police,Voy a llamar a la policía,,bˈoɪ a ʝamˈaɾ a la pˌolisˈia,,2,es-agent-v1;board-answers-v1;matches police-consulate.i-am-calling-the-police;ipa=espeak
+board-answers.help-is-coming,La ayuda está en camino,,la aʝˈuda estˈa en kamˈino,,2,es-agent-v1;board-answers-v1;ipa=espeak
+board-answers.where-does-it-hurt,¿Dónde le duele?,,dˈonde le dwˈele,,2,es-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.can-you-walk,¿Se puede caminar?,,se pwˈede kˌaminˈaɾ,,2,es-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.stay-here,Lo mejor es quedarse aquí,,lo mexˈoɾ ˈes kedˈaɾse akˈi,,2,es-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.what-is-your-name,¿Cómo se llama?,,kˈomo se ʝˈama,,2,es-agent-v1;board-answers-v1;reply-neutrality-rule;matches introductions.what-is-your-name;ipa=espeak
+board-answers.the-hospital-is-close,El hospital está cerca,,el ˌospitˈal estˈa sˈeɾka,,2,es-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-do-not-have-a-phone,No tengo teléfono,,nˈo tˈeŋɡo telˈefono,,2,es-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-will-find-someone,Voy a buscar a alguien que pueda ayudar,,bˈoɪ a buskˈaɾ a ˈalɡjen ke pwˈeda ˌaʝudˈaɾ,,2,es-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak

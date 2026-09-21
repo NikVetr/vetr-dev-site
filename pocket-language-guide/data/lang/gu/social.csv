@@ -99,3 +99,25 @@ children.car-seat,અમને બાળકની કાર સીટ જોઈ�
 children.stroller,બાળગાડી,પ્રૅમ,bāḷagāḍī,baːɭɡaːɖi,child-cart,2,gu-agent-v1;ipa=espeak
 children.playground,બાળકોને ખેલવાની જગ્યા છે?,,bāḷakōnē khēlavānī jagyā chē?,baːɭkoːneː kʰeːlʋaːni ɟʌɡjaː cʰeː,is there a place for children to play?,2,gu-agent-v1;ipa=espeak
 social-basics.politeness-particles,"થાઈમાં નમ્રતા વાક્યના છેડે આવતા એક શબ્દથી દેખાય છે, જરાક તમે અને તું ના ભેદ જેવી: પુરુષ લગભગ દરેક વાત પછી khrap ઉમેરે છે, સ્ત્રી kha. સવાલ પૂછતી વખતે સ્ત્રી kha ને ચઢતા સૂરમાં કહે છે. અહીં છાપેલી પંક્તિઓમાં એ શબ્દ નથી, તેથી તમારી જાતે ઉમેરી લેવો.",,"thāīmāṁ namratā vākyanā chēḍē āvatā ēk śabdathī dēkhāy chē, jarāk tamē anē tuṁ nā bhēd jēvī: puruṣ lagabhag darēk vāt pachī khrap umērē chē, strī kha. savāl pūchatī vakhatē strī kha nē caḍhatā sūramāṁ kahē chē. ahīṁ chāpēlī paṁktiōmāṁ ē śabd nathī, tēthī tamārī jātē umērī lēvō.",,,2,gu-agent-v1
+board-answers.can-you-walk,ચાલવું શક્ય છે?,,cālavuṁ śakya chē?,caːlʌʋũ ʃʌkjə cʰeː,,2,gu-board-answers-v1;ipa=espeak
+board-answers.card-or-cash,કાર્ડ કે રોકડ?,,kārḍ kē rōkaḍ?,kaːɾɖ keː ɾoːkʌɖ,,2,gu-board-answers-v1;ipa=espeak
+board-answers.help-is-coming,મદદ આવી રહી છે,,madad āvī rahī chē,mədʌd aːʋi ɾʌhi cʰeː,,2,gu-board-answers-v1;ipa=espeak
+board-answers.how-many,કેટલા જોઈએ છે?,,kēṭalā jōīē chē?,keːʈʌlaː ɟoːiːeː cʰeː,,2,gu-board-answers-v1;ipa=espeak
+board-answers.i-am-calling-an-ambulance,મારે એમ્બ્યુલન્સ બોલાવવી પડશે,,mārē ēmbyulans bōlāvavī paḍaśē,maːɾeː eːmbjulʌns boːlaːʋʌʋi pəɖʌʃeː,"I will have to call an ambulance -- the obligative agrees with the (feminine) object, not the speaker",2,gu-board-answers-v1;rule=obligative-agrees-with-object-not-speaker;ipa=espeak
+board-answers.i-am-calling-the-police,મારે પોલીસ બોલાવવી પડશે,,mārē pōlīs bōlāvavī paḍaśē,maːɾeː poːliːs boːlaːʋʌʋi pəɖʌʃeː,"matches the pack's existing, already gender-safe police-consulate.i-am-calling-the-police wording",2,gu-board-answers-v1;rule=obligative-agrees-with-object-not-speaker;ipa=espeak
+board-answers.i-do-not-have-a-phone,મારી પાસે ફોન નથી,,mārī pāsē phōn nathī,maːɾi paːseː pʰoːn nʌtʰi,,2,gu-board-answers-v1;ipa=espeak
+board-answers.i-will-find-someone,મદદ કરનાર કોઈ મળી જશે,,madad karanār kōī maḷī jaśē,mədʌd kəɾʌnaːɾ koːi mʌɭi ɟʌʃeː,"someone who can help will be found -- third person, no reference to the speaker",2,gu-board-answers-v1;rule=third-person-avoids-speaker-agreement;ipa=espeak
+board-answers.i-will-show-you,મારે રસ્તો બતાવવો પડશે,,mārē rastō batāvavō paḍaśē,maːɾeː ɾʌstoː bətaːʋʌʋoː pəɖʌʃeː,"I have to show the way -- batāvavō agrees with the masculine 'rasto', not the speaker",2,gu-board-answers-v1;rule=obligative-agrees-with-object-not-speaker;ipa=espeak
+board-answers.i-will-write-it-down,મારે આ લખી લેવું પડશે,,mārē ā lakhī lēvuṁ paḍaśē,maːɾeː aː lʌkʰi leːʋũ pəɖʌʃeː,I have to write this down -- lēvuṁ defaults neuter since 'ā' has no gender,2,gu-board-answers-v1;rule=obligative-agrees-with-object-not-speaker;ipa=espeak
+board-answers.it-is-closed,બંધ છે,,baṁdh chē,bʌndʰ cʰeː,,2,gu-board-answers-v1;ipa=espeak
+board-answers.it-is-over-there,ત્યાં છે,,tyāṁ chē,tjã cʰeː,,2,gu-board-answers-v1;ipa=espeak
+board-answers.none-of-these,આમાંથી કંઈ મારી વાત નથી,,āmāṁthī kaṁī mārī vāt nathī,aːmãtʰi kʌni maːɾi ʋaːt nʌtʰi,"none of these is my point -- 'mārī' agrees with 'vāt' (fem.), not the speaker",2,gu-board-answers-v1;rule=possessive-agrees-with-possessed-noun-not-speaker;ipa=espeak
+board-answers.not-possible,આવું નહીં થઈ શકે,,āvuṁ nahīṁ thaī śakē,aːʋũ nʌhĩ tʰʌi ʃʌkeː,"this cannot happen -- matches the pack's own quick-responses.cannot-not-possible construction, impersonal",2,gu-board-answers-v1;ipa=espeak
+board-answers.please-wait,બસ એક મિનિટ,,bas ēk miniṭ,bʌs eːk mɪnɪʈ,,2,gu-board-answers-v1;ipa=espeak
+board-answers.say-it-again,ફરી એક વાર?,,pharī ēk vār?,pʰʌɾi eːk ʋaːɾ,,2,gu-board-answers-v1;ipa=espeak
+board-answers.stay-here,અહીં જ રહેવું સારું છે,,ahīṁ ja rahēvuṁ sāruṁ chē,ɛhĩ ɟə ɾəheːʋũ saːɾũ cʰeː,"'sāruṁ' agrees with the neuter gerund 'rahēvuṁ', not with anyone's gender",2,gu-board-answers-v1;ipa=espeak
+board-answers.the-hospital-is-close,હૉસ્પિટલ નજીક જ છે,,hospiṭal najīk ja chē,hɔspɪʈʌl nəɟiːk ɟə cʰeː,,2,gu-board-answers-v1;ipa=espeak
+board-answers.there-is-no-wait,"કોઈ રાહ જોવાની નથી, હવે અંદર આવો",,"kōī rāh jōvānī nathī, havē andar āvō","koːi ɾaːh ɟoːʋaːni nʌtʰi, hʌʋeː ʌndəɾ aːʋoː","-ō imperative, invariant for gender",2,gu-board-answers-v1;ipa=espeak
+board-answers.we-do-not-have-it,અમારી પાસે આ નથી,,amārī pāsē ā nathī,ʌmaːɾi paːseː aː nʌtʰi,,2,gu-board-answers-v1;ipa=espeak
+board-answers.what-is-your-name,નામ શું છે?,,nām śuṁ chē?,naːm ʃũ cʰeː,,2,gu-board-answers-v1;ipa=espeak
+board-answers.where-does-it-hurt,ક્યાં દુખે છે?,,kyāṁ dukhē chē?,kjã dukʰeː cʰeː,,2,gu-board-answers-v1;ipa=espeak

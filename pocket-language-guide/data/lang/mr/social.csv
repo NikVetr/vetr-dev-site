@@ -99,3 +99,25 @@ children.car-seat,आम्हाला मुलांची कार सी�
 children.stroller,बाळगाडी,,bāḷagāḍī,bˌaːɭɡˈaːɖi,,2,mr-agent-v1;ipa=espeak
 children.playground,मुलांसाठी खेळण्याची जागा आहे का?,,mulāṁsāṭhī khēḷaṇyācī jāgā āhē kā?,mˌʊlãsˈaːʈʰi kʰˌeːɭɳjˈaːci zˈaːɡaː ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
 social-basics.politeness-particles,"थाई भाषेत नम्रता दाखवण्यासाठी वाक्याच्या शेवटी शब्द जोडतात: पुरुष असाल तर 'खाप', स्त्री असाल तर 'खा'. प्रश्न विचारताना स्त्री 'खा' चढत्या सुरात म्हणते. इथल्या ओळींमध्ये हा शब्द जोडलेला नाही, तो तुम्ही स्वतः जोडायचा आहे.",,"thāī bhāṣēta namratā dākhavaṇyāsāṭhī vākyācyā śēvaṭī śabda jōḍatāta: puruṣa asāla tara 'khāpa', strī asāla tara 'khā'. praśna vicāratānā strī 'khā' caḍhatyā surāta mhaṇatē. ithalyā ōḷīṁmadhyē hā śabda jōḍalēlā nāhī, tō tumhī svataḥ jōḍāyacā āhē.",,,2,mr-notes-v1
+board-answers.can-you-walk,चालणं शक्य आहे का?,,cālaṇaṁ śakya āhē kā?,cˈaːləɳˌən ʃˈʌkjə ˈaːheː kˈaː,'cālaṇaṁ' is the neuter gerund used as subject; the impersonal question carries no gender at all,2,mr-board-answers-v1;ipa=espeak
+board-answers.card-or-cash,कार्ड की रोख?,,kārḍa kī rōkha?,kˈaːɾɖ kˈi ɾˈoːkʰ,,2,mr-board-answers-v1;ipa=espeak
+board-answers.help-is-coming,मदत येत आहे,,madata yēta āhē,mˈʌdət jˈeːt ˈaːheː,"progressive gerund + āhē, invariant regardless of speaker",2,mr-board-answers-v1;rule=progressive-gerund-invariant;ipa=espeak
+board-answers.how-many,किती हवेत?,,kitī havēta?,kˈɪti həvˈeːt,"'havēta' agrees with the (unstated, plural) counted item, not the speaker",2,mr-board-answers-v1;ipa=espeak
+board-answers.i-am-calling-an-ambulance,मी अँब्युलन्स बोलावत आहे,,mī am̐byulansa bōlāvata āhē,mˈi ˌʌnbjʊlˈʌns boːlˈaːvət ˈaːheː,"progressive gerund + āhē is invariant for gender in Marathi, unlike the habitual present",2,mr-board-answers-v1;rule=progressive-gerund-invariant;ipa=espeak
+board-answers.i-am-calling-the-police,मी पोलिसांना बोलावत आहे,,mī pōlisāṁnā bōlāvata āhē,mˈi pˌoːlɪsˈãnaː boːlˈaːvət ˈaːheː,"matches the pack's existing, already gender-safe police-consulate.i-am-calling-the-police wording",2,mr-board-answers-v1;rule=progressive-gerund-invariant;ipa=espeak
+board-answers.i-do-not-have-a-phone,माझ्याकडे फोन नाही,,mājhyākaḍē phōna nāhī,mˈaːɟʰjaːkɖeː pʰˈoːn nˈaːhi,,2,mr-board-answers-v1;ipa=espeak
+board-answers.i-will-find-someone,मला मदत करणारं कोणीतरी भेटेल,,malā madata karaṇāraṁ kōṇītarī bhēṭēla,mˈʌlaː mˈʌdət kˌəɾɳˈaːɾən koːɳˈiːtɾˌi bʰeːʈˈeːl,"someone who can help will be found to me -- 'bhēṭēla' is future 3sg agreeing with the ungendered 'kōṇītarī', and Marathi future does not mark gender in any case",2,mr-board-answers-v1;rule=future-tense-invariant;ipa=espeak
+board-answers.i-will-show-you,मी वाट दाखवीन,,mī vāṭa dākhavīna,mˈi vˈaːʈ dˌaːkʰvˈiːn,"Marathi future tense (-īn) does not mark gender, unlike the present habitual or past",2,mr-board-answers-v1;rule=future-tense-invariant;ipa=espeak
+board-answers.i-will-write-it-down,मी हे लिहून घेईन,,mī hē lihūna ghēīna,mˈi hˈeː lɪhˈuːn ɡʰeːˈiːn,"future tense, invariant",2,mr-board-answers-v1;rule=future-tense-invariant;ipa=espeak
+board-answers.it-is-closed,बंद आहे,,baṁda āhē,bˈʌnd ˈaːheː,,2,mr-board-answers-v1;ipa=espeak
+board-answers.it-is-over-there,तिथे आहे,,tithē āhē,tˈɪtʰeː ˈaːheː,,2,mr-board-answers-v1;ipa=espeak
+board-answers.none-of-these,यातलं काहीच मला म्हणायचं नाही,,yātalaṁ kāhīca malā mhaṇāyacaṁ nāhī,jˈaːtəlˌən kaːhˈiːc mˈʌlaː mhəɳˈaːjəcˌən nˈaːhi,"'mhaṇāyacaṁ' agrees with the neuter 'kāhīca' (nothing), not with the speaker",2,mr-board-answers-v1;rule=obligative-agrees-with-object-not-speaker;ipa=espeak
+board-answers.not-possible,असं शक्य नाही,,asaṁ śakya nāhī,ˈʌsən ʃˈʌkjə nˈaːhi,"that is not possible -- 'śakya' is an invariant adjective, no verb agreement at all",2,mr-board-answers-v1;ipa=espeak
+board-answers.please-wait,एक मिनिट,,ēka miniṭa,ˈeːk mˈɪnɪʈ,,2,mr-board-answers-v1;ipa=espeak
+board-answers.say-it-again,परत एकदा?,,parata ēkadā?,pˈʌɾət ˈeːkdˌaː,,2,mr-board-answers-v1;ipa=espeak
+board-answers.stay-here,इथेच थांबणं चांगलं,,ithēca thāmbaṇaṁ cāṁgalaṁ,ɪtʰˈeːc tʰˈãbəɳˌən cˈãɡəlˌən,"'cāṁgalaṁ' agrees with the neuter gerund 'thāmbaṇaṁ', not with anyone's gender",2,mr-board-answers-v1;ipa=espeak
+board-answers.the-hospital-is-close,रुग्णालय जवळच आहे,,rugṇālaya javaḷaca āhē,ɾʊɡɳˈaːlˌɛj zˈʌvəɭˌəc ˈaːheː,,2,mr-board-answers-v1;ipa=espeak
+board-answers.there-is-no-wait,"वाट पाहायची गरज नाही, आत या",,"vāṭa pāhāyacī garaja nāhī, āta yā","vˈaːʈ paːhˈaːjcˌi ɡˈʌɾəz nˈaːhi, ˈaːt jˈaː","'yā' is the tumhi-imperative of yēṇē, invariant for gender",2,mr-board-answers-v1;ipa=espeak
+board-answers.we-do-not-have-it,आमच्याकडे हे नाही,,āmacyākaḍē hē nāhī,ˌaːmcjˈaːkɖˌeː hˈeː nˈaːhi,,2,mr-board-answers-v1;ipa=espeak
+board-answers.what-is-your-name,नाव काय आहे?,,nāva kāya āhē?,nˈaːv kˈaːj ˈaːheː,,2,mr-board-answers-v1;ipa=espeak
+board-answers.where-does-it-hurt,कुठे दुखत आहे?,,kuṭhē dukhata āhē?,kˈʊʈʰeː dˈʊkʰət ˈaːheː,,2,mr-board-answers-v1;ipa=espeak

@@ -99,3 +99,25 @@ children.car-seat,Precisamos de uma cadeira auto,cadeirinha para o carro,prˌesi
 children.stroller,o carrinho de bebé,o carrinho de bebê,ʊ kˌaxˈiɲʊ dʒy bebˈɛ,,2,pt-agent-v1;ipa=espeak
 children.playground,Há um parque infantil?,playground · parquinho,a ũŋ pˈaɾəkj ˌiŋfɐ̃ŋtʃˈiʊ,,2,pt-agent-v1;ipa=espeak
 social-basics.politeness-particles,"Cortesia em tailandês: acrescente khrap no fim de quase tudo se for homem, kha se for mulher. Numa pergunta, a mulher diz kha com o tom a subir. As frases deste guia não trazem a partícula: junte a sua.",,,,2,pt-notes-v1
+board-answers.there-is-no-wait,"Não há espera, já pode entrar",,"nˌɐ̃ʊ̃ a ˌespˈɛɾæ, ʒˈa pˌɔdʒj eɪŋtrˈar",,2,pt-agent-v1;board-answers-v1;ipa=espeak
+board-answers.none-of-these,Nenhuma destas opções é o que quero dizer,,nˌeɲˈumæ dˈɛstæz opsˈõjz ɛ ʊ ky kˈɛɾʊ dʒizˈer,,2,pt-agent-v1;board-answers-v1;ipa=espeak
+board-answers.it-is-closed,Está fechado,,estˌa fˌeʃˈadʊ,,2,pt-agent-v1;board-answers-v1;ipa=espeak
+board-answers.we-do-not-have-it,Não temos isso,,nˌɐ̃ʊ̃ tˌemʊz ˈisʊ,,2,pt-agent-v1;board-answers-v1;ipa=espeak
+board-answers.card-or-cash,Cartão ou dinheiro?,,kaɾətˈɐ̃ʊ̃ ow dʒˌiɲˈeɪɾʊ,,2,pt-agent-v1;board-answers-v1;ipa=espeak
+board-answers.please-wait,"Um momento, por favor",,"ũŋ mˌomˈeɪŋtʊ, por favˈor",,2,pt-agent-v1;board-answers-v1;matches communication.please-wait-a-moment;ipa=espeak
+board-answers.it-is-over-there,Está ali,Está lá,estˌa alˈi,,2,pt-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-will-show-you,Vou mostrar o caminho,,vow mostrˈaɾ ʊ kˌæmˈiɲʊ,,2,pt-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.how-many,Quantos quer?,,kwˈɐ̃ŋtʊs kˈɛr,,2,pt-agent-v1;board-answers-v1;ipa=espeak
+board-answers.not-possible,Isso não é possível,,ˈisʊ nˌɐ̃ʊ̃ ɛ pˌosˈiveʊ,,2,pt-agent-v1;board-answers-v1;ipa=espeak
+board-answers.say-it-again,"Mais uma vez, por favor?",,"mˈaɪz ˌumæ vˈes, por favˈor",,2,pt-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-will-write-it-down,Vou escrevê-lo,,vow ˌeskrevˈelʊ,,2,pt-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.i-am-calling-an-ambulance,Vou chamar uma ambulância,,vow ʃæmˈaɾ ˌumæ ˌɐ̃mbulˈɐ̃ŋsjæ,,2,pt-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.i-am-calling-the-police,Vou chamar a polícia,,vow ʃæmˈaɾ a pˌolˈisjæ,,2,pt-agent-v1;board-answers-v1;matches police-consulate.i-am-calling-the-police;ipa=espeak
+board-answers.help-is-coming,A ajuda está a caminho,,a ˌaʒˈudæ estˌa a kˌæmˈiɲʊ,,2,pt-agent-v1;board-answers-v1;ipa=espeak
+board-answers.where-does-it-hurt,Onde lhe dói?,,ˌoŋdʒy ʎˈy dˈɔɪ,,2,pt-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.can-you-walk,É possível andar?,,ɛ pˌosˈiveʊ ɐ̃ŋdˈar,,2,pt-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.stay-here,O melhor é ficar aqui,,ʊ meljˈɔɾ ɛ fikˈaɾ akˈi,,2,pt-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.what-is-your-name,Como se chama?,,kˌomʊ sy ʃˈɐ̃mæ,,2,pt-agent-v1;board-answers-v1;reply-neutrality-rule;matches introductions.what-is-your-name;ipa=espeak
+board-answers.the-hospital-is-close,O hospital está perto,,ʊ ˌospitˈaʊ estˌa pˈɛɾətʊ,,2,pt-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-do-not-have-a-phone,Não tenho telemóvel,celular,nˌɐ̃ʊ̃ tˌeɲʊ tˌelemˈɔvɛʊ,,2,pt-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-will-find-someone,Vou procurar alguém que possa ajudar,,vow prˌokuɾˈaɾ aʊɡˈeɪŋ ky pˈɔsæ ˌaʒudˈar,,2,pt-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak

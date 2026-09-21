@@ -99,3 +99,25 @@ children.stroller,keken yara,,keken jara,wheeled cart of children,2,ha-agent-v1;
 children.playground,Akwai wurin wasan yara?,,akwai wurin wasan jara,,2,ha-agent-v1;ipa=ha-g2p
 social-basics.politeness-particles,"Ladabin Thai: kammala kusan kowace jimla da khrap idan kai namiji ne, kha idan kai mace ce. Mace da take yin tambaya takan ce kha da murya mai hawa. Layukan da ke nan ba su da wannan kalma, don haka ku kara ta da kanku.",,,,2,ha-notes-v1
 communication.please-write-it-in-roman-letters,Don Allah ka rubuta shi da haruffan Roman,,don allah ka rubuta ʃi da haruffan roman,,2,ha-notes-v1;ipa=ha-g2p
+board-answers.there-is-no-wait,"Babu jira, ana iya shiga yanzu",,"babu dʒira, ana ija ʃiɡa janzu",,2,ha-agent-v1;board-answers-v1;ipa=ha-g2p
+board-answers.none-of-these,Babu abin da nake nufi a cikin wannan,,babu abin da nake nufi a tʃikin wannan,there is nothing that I mean within this -- reworded from say to mean to avoid a want-plus-complement construction,2,ha-agent-v1;board-answers-v1;ipa=ha-g2p
+board-answers.it-is-closed,An rufe,,an rufe,it has been closed,2,ha-agent-v1;board-answers-v1;ipa=ha-g2p
+board-answers.we-do-not-have-it,Ba mu da shi ba,,ba mu da ʃi ba,,2,ha-agent-v1;board-answers-v1;ipa=ha-g2p
+board-answers.card-or-cash,Kati ko kudin hannu?,,kati ko kudin hannu,"card or cash -- bare nominal, no verb or pronoun",2,ha-agent-v1;board-answers-v1;reply-neutrality-rule;kai-ke-avoided;ipa=ha-g2p
+board-answers.please-wait,"A jira kadan, don Allah",,"a dʒira kadan, don allah","let one wait a bit, please -- impersonal a-, not ka/ki",2,ha-agent-v1;board-answers-v1;kai-ke-avoided;ipa=ha-g2p
+board-answers.it-is-over-there,Yana can,,jana tʃan,,2,ha-agent-v1;board-answers-v1;ipa=ha-g2p
+board-answers.i-will-show-you,Zan nuna hanya,,zan nuna hanja,,2,ha-agent-v1;board-answers-v1;ipa=ha-g2p
+board-answers.how-many,Guda nawa?,,ɡuda nawa,"how many pieces -- bare nominal, no verb or pronoun",2,ha-agent-v1;board-answers-v1;reply-neutrality-rule;kai-ke-avoided;ipa=ha-g2p
+board-answers.not-possible,Wannan ba zai yiwu ba,,wannan ba zai jiwu ba,,2,ha-agent-v1;board-answers-v1;ipa=ha-g2p
+board-answers.say-it-again,"A sake fadi, don Allah?",,"a sake fadi, don allah","may it be said again, please -- impersonal a-, not ka/ki",2,ha-agent-v1;board-answers-v1;reply-neutrality-rule;kai-ke-avoided;ipa=ha-g2p
+board-answers.i-will-write-it-down,Zan rubuta shi,,zan rubuta ʃi,,2,ha-agent-v1;board-answers-v1;ipa=ha-g2p
+board-answers.i-am-calling-an-ambulance,Ina kiran motar asibiti,,ina kiran motar asibiti,I am calling car-of-hospital,2,ha-agent-v1;board-answers-v1;ipa=ha-g2p
+board-answers.i-am-calling-the-police,Ina kiran 'yan sanda,,ina kiran ʔʲan sanda,,2,ha-agent-v1;board-answers-v1;matches police-consulate.i-am-calling-the-police;ipa=ha-g2p
+board-answers.help-is-coming,Taimako yana zuwa,,taimako jana zuwa,,2,ha-agent-v1;board-answers-v1;ipa=ha-g2p
+board-answers.where-does-it-hurt,Ina ciwon yake?,,ina tʃiwon jake,"where is the pain -- agreement is with ciwo (pain), not the addressee",2,ha-agent-v1;board-answers-v1;reply-neutrality-rule;kai-ke-avoided;ipa=ha-g2p
+board-answers.can-you-walk,Za a iya tafiya?,,za a ija tafija,"will one be able to walk -- impersonal a-, not ka/ki",2,ha-agent-v1;board-answers-v1;reply-neutrality-rule;kai-ke-avoided;ipa=ha-g2p
+board-answers.stay-here,"Zama a nan, shi ne mafi kyau",,"zama a nan, ʃi ne mafi kjau","staying here, it is the best -- dummy shi, not ka/ki",2,ha-agent-v1;board-answers-v1;reply-neutrality-rule;kai-ke-avoided;ipa=ha-g2p
+board-answers.what-is-your-name,Menene suna?,,menene suna,what is the name -- suna with no -nka/-nki suffix,2,ha-agent-v1;board-answers-v1;reply-neutrality-rule;kai-ke-avoided;ipa=ha-g2p
+board-answers.the-hospital-is-close,Asibiti yana kusa,,asibiti jana kusa,,2,ha-agent-v1;board-answers-v1;ipa=ha-g2p
+board-answers.i-do-not-have-a-phone,Ba ni da waya,,ba ni da waja,,2,ha-agent-v1;board-answers-v1;ipa=ha-g2p
+board-answers.i-will-find-someone,Zan nemo wanda zai iya taimaka,,zan nemo wanda zai ija taimaka,,2,ha-agent-v1;board-answers-v1;ipa=ha-g2p

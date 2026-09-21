@@ -67,6 +67,24 @@ function needs(board) {
   return [...ids];
 }
 
+/**
+ * How many of a board's phrases a language may be short and still be offered it.
+ *
+ * **One, and the reason is Yoruba and a sesame seed.** All-or-nothing cost Yoruba the
+ * whole Eating-out board because `dietary-needs.no-sesame` has no Yoruba gloss — and
+ * it has none because the sources disagree about which word means the seed rather
+ * than the confection or the Igbo term, with no tone marks, on an allergen row. That
+ * is a correct refusal to guess, and it should not also cost a reader eleven working
+ * buttons.
+ *
+ * The app already draws an unresolvable button **in place and disabled**, and says
+ * how many there are under the grid, because a grid that closes a gap is a grid whose
+ * buttons have moved. So one dim button out of a dozen is a board someone can use and
+ * has been told about. Two starts to read as broken, which is why this is not higher:
+ * the threshold exists to absorb a single sourcing gap, not to ship a half-empty board.
+ */
+const SLACK = 1;
+
 const have = packs();
 const codes = Object.keys(have).sort();
 const index = json('data/boards/index.json');
@@ -75,9 +93,11 @@ const index = json('data/boards/index.json');
 for (const entry of index.boards) {
   const board = json(`data/boards/${entry.id}.json`);
   const ids = needs(board);
-  entry.listeners = codes.filter((code) => ids.every(
-    (id) => have[code].has(id) && appliesTo(concepts[id], code)));
-  entry.owners = codes.filter((code) => ids.every((id) => have[code].has(id)));
+  const short = (/** @type {string} */ code, /** @type {(id:string)=>boolean} */ ok) => (
+    ids.filter((id) => !ok(id)).length);
+  entry.listeners = codes.filter((code) => short(
+    code, (id) => have[code].has(id) && appliesTo(concepts[id], code)) <= SLACK);
+  entry.owners = codes.filter((code) => short(code, (id) => have[code].has(id)) <= SLACK);
   delete entry.pairs;
   // What stands between this board and a language, so a gap is a work list rather
   // than a silence. Counted per language, since one missing concept is one row to

@@ -99,3 +99,25 @@ children.car-seat,Нам потрібне дитяче автокрісло.,,Na
 children.stroller,візок,,vizok,ʋiːzˈok,,2,uk-agent-v1;ipa=espeak
 children.playground,Є дитячий майданчик?,,Ye dytiachyi maidanchyk?,jˈɛ dɪtjˈatʃɪj majdantʃˈɪk,,2,uk-agent-v1;ipa=espeak
 social-basics.politeness-particles,"Ввічливість тайською: майже кожне речення закінчується часткою — khrap, якщо говорить чоловік, або kha, якщо жінка. У запитанні чоловік лишає khrap, а жінка каже kha з висхідною інтонацією. У рядках цього довідника цієї частки немає — додавайте її самостійно.",,"Vvichlyvist taiskoiu: maizhe kozhne rechennia zakinchuietsia chastkoiu — khrap, yakshcho hovoryt cholovik, abo kha, yakshcho zhinka. U zapytanni cholovik lyshaie khrap, a zhinka kazhe kha z vyskhidnoiu intonatsiieiu. U riadkakh tsoho dovidnyka tsiiei chastky nemaie — dodavaite yii samostiino.",,,2,uk-notes-v1
+board-answers.there-is-no-wait,"Черги немає, можна заходити.",,"Cherhy nemaie, mozhna zakhodyty.","tʃˈɛrhɪ nɛmˈajɛ, mˈoʒna zaxˈodɪtɪ",,2,uk-agent-v1;board-answers-v1;ipa=espeak
+board-answers.none-of-these,"Тут немає того, що я хочу сказати.",,"Tut nemaie toho, shcho ya khochu skazaty.","tˈut nɛmˈajɛ tˈoho, ʃtʃˈo jˈa xˈotʃu skazˈatɪ",,2,uk-agent-v1;board-answers-v1;ipa=espeak
+board-answers.it-is-closed,У нас закрито.,,U nas zakryto.,ˈu nˈaz zakrˈɪto,,2,uk-agent-v1;board-answers-v1;ipa=espeak
+board-answers.we-do-not-have-it,У нас цього немає.,,U nas tsoho nemaie.,ˈu nˈas tsˈoho nɛmˈajɛ,,2,uk-agent-v1;board-answers-v1;ipa=espeak
+board-answers.card-or-cash,Картка чи готівка?,,Kartka chy hotivka?,kˈartka tʃˈɪ hotˈiːfka,,2,uk-agent-v1;board-answers-v1;ipa=espeak
+board-answers.please-wait,"Одну хвилинку, будь ласка.",,"Odnu khvylynku, bud laska.","ˈodnu ɣʋɪlˈɪnku, bˈud lˈaska",,2,uk-agent-v1;board-answers-v1;ipa=espeak
+board-answers.it-is-over-there,Це там.,,Tse tam.,tsˈɛ tˈam,,2,uk-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-will-show-you,Покажу дорогу.,,Pokazhu dorohu.,pokˈaʒu dorˈohu,,2,uk-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.how-many,Скільки?,,Skilky?,skˈiːʎkɪ,,2,uk-agent-v1;board-answers-v1;ipa=espeak
+board-answers.not-possible,Це неможливо.,,Tse nemozhlyvo.,tsˈɛ nɛmˈoʒlɪʋo,,2,uk-agent-v1;board-answers-v1;ipa=espeak
+board-answers.say-it-again,"Ще раз, будь ласка?",,"Shche raz, bud laska?","ʃtʃˈɛ rˈaz, bˈud lˈaska",,2,uk-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-will-write-it-down,Запишу це.,,Zapyshu tse.,zapˈɪʃu tsˈɛ,,2,uk-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.i-am-calling-an-ambulance,Викликаю швидку.,,Vyklykaiu shvydku.,ʋɪklˈɪkaju ʃʋˈɪtku,,2,uk-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.i-am-calling-the-police,Я дзвоню в поліцію.,,Ya dzvoniu v politsiiu.,jˈa dzʋˈoɲu f poʎˈiːtsiːju,,2,uk-agent-v1;board-answers-v1;matches police-consulate.i-am-calling-the-police;ipa=espeak
+board-answers.help-is-coming,Допомога вже в дорозі.,,Dopomoha vzhe v dorozi.,dopˈomoha ʋʒˈɛ ʋ dorˈoziː,,2,uk-agent-v1;board-answers-v1;ipa=espeak
+board-answers.where-does-it-hurt,Де болить?,,De bolyt?,dˈɛ bˈolɪt,,2,uk-agent-v1;board-answers-v1;ipa=espeak
+board-answers.can-you-walk,Можна йти?,,Mozhna yty?,mˈoʒna jtˈɪ,,2,uk-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.stay-here,Краще залишитися тут.,,Krashche zalyshytysia tut.,krˈaʃtʃɛ zalɪʃˈɪtɪsja tˈut,,2,uk-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.what-is-your-name,Як вас звати?,,Yak vas zvaty?,jˈaɡ ʋˈaz zʋˈatɪ,,2,uk-agent-v1;board-answers-v1;reply-neutrality-rule;matches introductions.what-is-your-name;ipa=espeak
+board-answers.the-hospital-is-close,Лікарня близько.,,Likarnia blyzko.,ʎiːkˈarɲa blˈɪzko,,2,uk-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-do-not-have-a-phone,У мене немає телефону.,,U mene nemaie telefonu.,ˈu mˈɛnɛ nɛmˈajɛ tɛlˈɛfonu,,2,uk-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-will-find-someone,"Я знайду когось, хто може допомогти.",,"Ya znaidu kohos, khto mozhe dopomohty.","jˈa znˈajdu kˈohos, xtˈo mˈoʒɛ dopˈomohtɪ",,2,uk-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak

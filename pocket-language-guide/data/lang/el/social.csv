@@ -99,3 +99,25 @@ children.car-seat,Χρειαζόμαστε παιδικό κάθισμα αυτ�
 children.stroller,καρότσι μωρού,καροτσάκι,karotsi morou,kaɾˈotsi moɾˈu,,2,el-agent-v1;roman=elot743;ipa=espeak
 children.playground,Υπάρχει παιδική χαρά;,,Yparchei paidiki chara;,ipˈaɾçi pˌeðicˈi xaɾˈa,,2,el-agent-v1;roman=elot743;ipa=espeak
 social-basics.politeness-particles,"Ευγένεια στα Ταϊλανδικά: σχεδόν κάθε φράση κλείνει με μόριο ευγένειας, khrap αν μιλάει άντρας, kha αν μιλάει γυναίκα. Στην ερώτηση ο άντρας κρατάει το khrap, ενώ η γυναίκα λέει kha με ανοδικό τόνο. Οι φράσεις της κάρτας δεν το περιλαμβάνουν, γιατί εξαρτάται από το ποιος μιλάει: προσθέστε το δικό σας.",,,,,2,el-notes-v1
+board-answers.there-is-no-wait,"Δεν υπάρχει αναμονή, μπορείτε να μπείτε τώρα.",,"Den yparchei anamoni, boreite na beite tora.","ðˈen ipˈaɾçi ˌanamonˈi, boɾˈite na bˈite tˈoɾa",,2,el-agent-v1;board-answers-v1;roman=elot743;ipa=espeak
+board-answers.none-of-these,Κανένα από αυτά δεν είναι αυτό που θέλω να πω.,,Kanena apo afta den einai afto pou thelo na po.,kanˈen apˈo aftˈa ðˈen ˈine aftˈo pu θˈelo na pˈo,,2,el-agent-v1;board-answers-v1;roman=elot743;ipa=espeak
+board-answers.it-is-closed,Κλείσαμε.,,Kleisame.,klˈisamˌe,,2,el-agent-v1;board-answers-v1;roman=elot743;ipa=espeak
+board-answers.we-do-not-have-it,Δεν το έχουμε.,,Den to echoume.,ðˈen do ˈexumˌe,,2,el-agent-v1;board-answers-v1;roman=elot743;ipa=espeak
+board-answers.card-or-cash,Κάρτα ή μετρητά;,,Karta i metrita;,kˈaɾta ˈi mˌetɾitˈa,,2,el-agent-v1;board-answers-v1;roman=elot743;ipa=espeak
+board-answers.please-wait,"Μια στιγμή, παρακαλώ.",,"Mia stigmi, parakalo.","mɲa stiɣmˈi, pˌaɾakalˈo",,2,el-agent-v1;board-answers-v1;roman=elot743;ipa=espeak
+board-answers.it-is-over-there,Είναι εκεί πέρα.,,Einai ekei pera.,ˈine ecˈi pˈeɾa,,2,el-agent-v1;board-answers-v1;roman=elot743;ipa=espeak
+board-answers.i-will-show-you,Θα σας δείξω τον δρόμο.,,Tha sas deixo ton dromo.,θa saz ðˈikso ton ðɾˈomo,,2,el-agent-v1;board-answers-v1;roman=elot743;ipa=espeak
+board-answers.how-many,Πόσα θέλετε;,,Posa thelete;,pˈosa θˈeletˌe,,2,el-agent-v1;board-answers-v1;roman=elot743;ipa=espeak
+board-answers.not-possible,Δεν γίνεται.,,Den ginetai.,ðˈen jˈinetˌe,,2,el-agent-v1;board-answers-v1;roman=elot743;ipa=espeak
+board-answers.say-it-again,"Άλλη μια φορά, παρακαλώ;",,"Alli mia fora, parakalo;","ˈali mɲa foɾˈa, pˌaɾakalˈo",,2,el-agent-v1;board-answers-v1;roman=elot743;ipa=espeak
+board-answers.i-will-write-it-down,Θα το σημειώσω.,,Tha to simeioso.,θa to simçˈoso,,2,el-agent-v1;board-answers-v1;roman=elot743;ipa=espeak
+board-answers.i-am-calling-an-ambulance,Καλώ ασθενοφόρο.,,Kalo asthenoforo.,kalˈo ˌasθenofˈoɾo,,2,el-agent-v1;board-answers-v1;roman=elot743;ipa=espeak
+board-answers.i-am-calling-the-police,Καλώ την αστυνομία,,Kalo tin astynomia,kalˈo tin ˌastinomˈia,,2,el-agent-v1;board-answers-v1;roman=elot743;matches police-consulate.i-am-calling-the-police;ipa=espeak
+board-answers.help-is-coming,Η βοήθεια έρχεται.,,I voitheia erchetai.,i voˈiθça ˈeɾçetˌe,,2,el-agent-v1;board-answers-v1;roman=elot743;ipa=espeak
+board-answers.where-does-it-hurt,Πού πονάτε;,,Pou ponate;,pˈu ponˈate,,2,el-agent-v1;board-answers-v1;roman=elot743;ipa=espeak
+board-answers.can-you-walk,Μπορείτε να περπατήσετε;,,Boreite na perpatisete;,boɾˈite na pˌeɾpatˈisetˌe,,2,el-agent-v1;board-answers-v1;roman=elot743;ipa=espeak
+board-answers.stay-here,Καλύτερα να μείνετε εδώ.,,Kalytera na meinete edo.,kalˈiteɾˌa na mˈinetˌe eðˈo,,2,el-agent-v1;board-answers-v1;roman=elot743;ipa=espeak
+board-answers.what-is-your-name,Πώς σας λένε;,,Pos sas lene;,pˈos saz lˈene,,2,el-agent-v1;board-answers-v1;roman=elot743;matches introductions.what-is-your-name;ipa=espeak
+board-answers.the-hospital-is-close,Το νοσοκομείο είναι κοντά.,,To nosokomeio einai konta.,to nˌosokomˈio ˈine kodˈa,,2,el-agent-v1;board-answers-v1;roman=elot743;ipa=espeak
+board-answers.i-do-not-have-a-phone,Δεν έχω κινητό.,,Den echo kinito.,ðˈen ˈexo cˌinitˈo,,2,el-agent-v1;board-answers-v1;roman=elot743;ipa=espeak
+board-answers.i-will-find-someone,Θα βρω κάποιον που μπορεί να βοηθήσει.,,Tha vro kapoion pou borei na voithisei.,θa vɾˈo kˈapiˌom bu boɾˈi na voɪθˈisi,,2,el-agent-v1;board-answers-v1;roman=elot743;ipa=espeak

@@ -99,3 +99,25 @@ children.car-seat,We hebben een kinderzitje nodig.,,ʋə hˌɛbən ən kˈɪndə
 children.stroller,kinderwagen,,kˈɪndərʋˌaːɣən,,2,nl-agent-v1;ipa=espeak
 children.playground,Is er een speeltuin?,,ɪs ər ən spˈeːltœyn,,2,nl-agent-v1;ipa=espeak
 social-basics.politeness-particles,"Thaise beleefdheid: eindig vrijwel elke zin met khrap als u een man bent, kha als u een vrouw bent. Een vrouw die een vraag stelt, zegt in plaats daarvan kha met een stijgende toon. De zinnen hier laten het partikel weg, dus voeg het zelf toe.",,,,2,nl-agent-v1
+board-answers.there-is-no-wait,"Geen wachttijd, u kunt nu naar binnen.",,"ɣˈeːn ʋˈɑxtɛɪt, y kʏnt nˈy naːr bˈɪnən",,2,nl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.none-of-these,Niets hiervan is wat ik wil zeggen.,,nˌits hˈirvɑn ɪs ʋɑt ɪk ʋɪl zˈɛɣən,,2,nl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.it-is-closed,We zijn dicht.,,ʋə zɛɪn dˈɪxt,"colloquial 'dicht', distinct register from common-signs.closed's 'gesloten'",2,nl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.we-do-not-have-it,Dat hebben we niet.,,dɑt hˌɛbən ʋə nˈit,,2,nl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.card-or-cash,Kaart of contant?,,kˈaːrt ɔf kɔntˈɑnt,,2,nl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.please-wait,"Een moment, alstublieft.",,"ən moːmˈɛnt, ˌɑlstʏblˈift",,2,nl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.it-is-over-there,Dat is daar.,,dɑt ɪs dˈaːr,,2,nl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-will-show-you,Ik wijs u de weg.,,ɪk ʋɛɪs y də ʋˈɛx,,2,nl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.how-many,Hoeveel?,,huvˈeːl,,2,nl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.not-possible,Dat kan niet.,,dɑt kɑn nˈit,,2,nl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.say-it-again,"Nog een keer, alstublieft?",,"nˈɔx ən kˈɪːr, ˌɑlstʏblˈift",,2,nl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-will-write-it-down,Ik schrijf het op.,,ɪk sxrˈɛɪf hət ˈɔp,,2,nl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-am-calling-an-ambulance,Ik bel een ambulance.,,ɪk bˈɛl ən ˈɑmbylˌɑnsə,,2,nl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-am-calling-the-police,Ik bel de politie.,,ɪk bˈɛl də poːlˈitsi,,2,nl-agent-v1;board-answers-v1;matches police-consulate.i-am-calling-the-police;ipa=espeak
+board-answers.help-is-coming,Hulp is onderweg.,,hˈʏlp ɪs ˈɔndərʋˌɛx,,2,nl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.where-does-it-hurt,Waar doet het pijn?,,ʋˈaːr dˈut hət pˈɛɪn,,2,nl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.can-you-walk,Kunt u lopen?,,kʏnt y lˈoːpən,,2,nl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.stay-here,U blijft het beste hier.,,y blˈɛɪft hət bˈɛstə hˈir,,2,nl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.what-is-your-name,Hoe heet u?,,hˈu hˈeːt y,,2,nl-agent-v1;board-answers-v1;matches introductions.what-is-your-name;ipa=espeak
+board-answers.the-hospital-is-close,Het ziekenhuis is dichtbij.,,hət zˈikɛnhˌœys ɪs dɪxtbˈɛɪ,,2,nl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-do-not-have-a-phone,Ik heb geen telefoon.,,ɪk hɛp ɣˈeːn tˌeːləfˈoːn,,2,nl-agent-v1;board-answers-v1;ipa=espeak
+board-answers.i-will-find-someone,Ik ga iemand zoeken die kan helpen.,,ɪk ɣˈaː ˈimɑnt zˈukən di kɑn hˈɛlpən,,2,nl-agent-v1;board-answers-v1;ipa=espeak
