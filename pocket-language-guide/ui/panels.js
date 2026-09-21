@@ -1,3 +1,4 @@
+import * as store from './platform/store.js';
 // The studio's panel chrome: the seams between them on a desktop, and on a phone a
 // header that fits and a bar on each panel that folds it away.
 //
@@ -24,7 +25,7 @@ function attach(studio, seams) {
   /** @type {Record<string, number>} */
   let held = {};
   try {
-    held = JSON.parse(localStorage.getItem(KEY) ?? '{}');
+    held = JSON.parse(store.get(KEY) ?? '{}');
   } catch {
     // A corrupt value is the same as none: fall back to the CSS ratios.
   }
@@ -32,7 +33,7 @@ function attach(studio, seams) {
     if (held[seam.prop]) studio.style.setProperty(seam.prop, `${held[seam.prop]}px`);
   }
 
-  const save = () => localStorage.setItem(KEY, JSON.stringify(held));
+  const save = () => store.set(KEY, JSON.stringify(held));
 
   for (const seam of seams) {
     /** @param {number} width */

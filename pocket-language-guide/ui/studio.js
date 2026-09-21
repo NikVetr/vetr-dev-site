@@ -27,6 +27,7 @@ import { openDrill } from './drill.js';
 import { attachHandles } from './handles.js';
 import { attachPanelResizers, attachPhoneChrome, revealPanel } from './panels.js';
 import { createAddTerm } from './add-term.js';
+import * as store from './platform/store.js';
 import {
   warningText, applyStatic, languageName, loadUiLanguage, number, t,
 } from './i18n.js';
@@ -190,7 +191,7 @@ async function main() {
   // control that sets several others at once. The key is removed rather than merely
   // ignored, so anyone already carrying it gets the banner back instead of holding a
   // value nothing reads.
-  localStorage.removeItem(BANNER_KEY);
+  store.remove(BANNER_KEY);
   $('quiz-open').addEventListener('click', async () => {
     const answers = await openQuiz();
     if (!answers) return;

@@ -1,0 +1,8 @@
+{
+  "appId": "dev.vetr.pocketlanguageguide",
+  "appName": "Pocket Language Guide",
+  "webDir": "dist/mobile",
+  "android": {
+    "adjustMarginsForEdgeToEdge": "disable"
+  }
+}

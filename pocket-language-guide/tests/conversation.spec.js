@@ -132,16 +132,27 @@ test('a message with no answers offers no reply, and gaps are reported', async (
   await expect(page.locator('#board-status')).toBeEmpty();
 });
 
-test('a board refuses a pair it was not written for', async ({ page }) => {
-  // A board needs text on *both* sides, so one written in Mandarin and English is a
-  // board for an English reader. Opening it as Quenya is a clear refusal naming the
-  // pairs it does serve -- better than letting every button resolve to nothing and
-  // reporting ten unavailable phrases, which is true and tells the reader nothing.
+test('a board refuses a language it cannot say, and names it', async ({ page }) => {
+  // A board needs text on *both* sides, so one whose phrases have no Quenya is not a
+  // board for a Quenya listener -- better a clear refusal than letting every button
+  // resolve to nothing and reporting ten unavailable phrases, which is true and
+  // tells the reader nothing.
+  //
+  // It names the **language**, not the pairs it does serve. That list used to be one
+  // pair; it is computed from the corpus now and is most of a fifty-three-language
+  // registry, which is not something a reader can act on.
   await page.goto('/conversation.html?target=qya&source=en&board=spa');
   const shown = page.locator('body');
-  await expect(shown).toContainText(/written for these language pairs only/i);
-  await expect(shown).toContainText('zh-Hans__en');
+  await expect(shown).toContainText(/does not have every phrase it needs/i);
+  await expect(shown).toContainText('Quenya');
   await expect(page.locator('.board-cell')).toHaveCount(0);
+
+  // ...and the topic list simply does not offer it, which is the path a reader
+  // actually takes: a board they cannot use is absent rather than broken.
+  await page.goto('/conversation.html?target=qya&source=en');
+  await expect(page.locator('#board-title')).toHaveText('What is this about?');
+  await expect(page.locator('.board-cell')).toHaveCount(0);
+  await expect(page.locator('#board-status')).not.toBeEmpty();
 });
 
 test('an unavailable button is drawn in place, not removed', async ({ page }) => {
@@ -868,9 +879,12 @@ test('converse opens the topics, not a board', async ({ page }) => {
   await expect(page.locator('#board-title')).toHaveText('What is this about?');
   const topics = page.locator('.board-cell');
   await expect(topics.first()).toBeVisible();
-  expect(await topics.allTextContents()).toEqual(
-    ['Meeting people', 'Directions', 'Getting around', 'Eating out', 'Shopping', 'Time', 'Massage and spa'],
-  );
+  // Emergency first, and in the authored order throughout -- nothing here sorts by
+  // use or by name. Someone who has learned where a topic is must find it there.
+  expect(await topics.allTextContents()).toEqual([
+    'Emergency', 'Meeting people', 'Directions', 'Getting around',
+    'Eating out', 'Shopping', 'Time', 'Massage and spa',
+  ]);
   // Nothing on this screen is owner-only chrome: there is no board to edit yet.
   await expect(page.locator('#board-edit')).toBeHidden();
 

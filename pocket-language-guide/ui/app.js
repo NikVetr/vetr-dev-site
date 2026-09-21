@@ -10,6 +10,7 @@ import {
 } from '../core/pack.js';
 import { messagesReady, t } from './i18n.js';
 import { readProfile } from './speaker-settings.js';
+import * as store from './platform/store.js';
 
 /**
  * **The typesetting engine is loaded on demand, not on import.**
@@ -110,7 +111,13 @@ export async function loadLanguages() {
   // and Quenya cards printed their English exonyms in all fifty interface
   // languages, `Intl.DisplayNames` having no answer and the fallback being English
   // by construction.
-  const [languages, coverage, names, regions] = await Promise.all([
+  // **Every page's first await, which is why the personal store is opened here.**
+  // Inside the native shell `store.ready()` reads the durable store into memory so
+  // that `readerLanguage` below -- and everything else that reads synchronously --
+  // sees the reader's own settings rather than an empty one. It resolves instantly
+  // on the web, where `localStorage` needs no opening.
+  const [, languages, coverage, names, regions] = await Promise.all([
+    store.ready(),
     loadText('data/registry/languages.csv'),
     loadText('data/coverage.json'),
     loadText('data/registry/language-names.csv'),
@@ -137,7 +144,7 @@ export async function loadLanguages() {
  */
 export function readerLanguage(languages, coverage) {
   const usable = new Set(languages.filter((l) => hasContent(coverage, l.bcp47)).map((l) => l.bcp47));
-  const saved = localStorage.getItem(READER_KEY);
+  const saved = store.get(READER_KEY);
   if (saved && usable.has(saved)) return saved;
   for (const tag of navigator.languages ?? []) {
     if (usable.has(tag)) return tag;
@@ -150,7 +157,7 @@ export function readerLanguage(languages, coverage) {
 
 /** @param {string} code */
 export function setReaderLanguage(code) {
-  localStorage.setItem(READER_KEY, code);
+  store.set(READER_KEY, code);
 }
 
 /**

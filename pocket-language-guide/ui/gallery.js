@@ -359,7 +359,16 @@ async function main() {
   /** @type {Set<string>} */ const boardPairs = new Set();
   try {
     const boards = JSON.parse(await loadText('data/boards/index.json'));
-    for (const board of boards.boards) for (const pair of board.pairs) boardPairs.add(pair);
+    // The same two-list membership the board page uses, flattened into the pairs
+    // this gallery actually draws -- it already knows which pairs have content, so
+    // the product is small here even though the registry is 2,756 ordered pairs.
+    for (const board of boards.boards) {
+      for (const listener of board.listeners) {
+        for (const owner of board.owners) {
+          if (listener !== owner) boardPairs.add(`${listener}__${owner}`);
+        }
+      }
+    }
   } catch {
     // No boards shipped yet.
   }

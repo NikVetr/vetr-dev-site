@@ -54,6 +54,13 @@ const ENTRY_FILES = [
 // `data/boards` holds the conversation boards, which are small JSON files a board
 // page cannot open without -- and a board is the one surface meant to work in a
 // basement with no signal, so it is precached rather than fetched on demand.
+/**
+ * The pair a board opens with when the query string names none: `ui/conversation.js`
+ * falls back to Mandarin for the listener and the reader's own language for the
+ * owner, which for a first visit is English.
+ */
+const DEFAULT_BOARD_PAIR = ['zh-Hans', 'en'];
+
 const DATA_DIRS = ['data/registry', 'data/registry/section-titles',
   'data/registry/emergency-labels', 'data/themes', 'data/respell/overrides',
   'data/respell/rules', 'data/i18n', 'data/boards'];
@@ -85,10 +92,18 @@ async function boardCorpus() {
   } catch {
     return out;  // no boards shipped yet
   }
-  /** @type {Set<string>} */ const languages = new Set();
-  for (const board of index.boards) {
-    for (const pair of board.pairs) for (const code of pair.split('__')) languages.add(code);
-  }
+  // **Bounded by the default pair, not by what the boards can serve.** They used to
+  // declare one pair each and the shell carried both its languages; the pairs are
+  // computed from the corpus now, and every board that is not the massage one serves
+  // most of the registry -- so "every language a board mentions" is every language,
+  // and the shell would grow from 4.4MB to something nobody downloads on a hotel
+  // wifi. The concept bank below is language-independent and every pair needs it, so
+  // it stays; the *rows* are the two the app opens with when nobody has chosen. Any
+  // other pair is a pair someone picked, which means they were in the app with a
+  // connection, which is when Save for offline is the honest answer -- the same rule
+  // a sheet has always followed.
+  const languages = new Set(DEFAULT_BOARD_PAIR);
+  if (!index.boards.length) return out;
   const groups = (await readdir(join(ROOT, 'data/concepts')))
     .filter((f) => f.endsWith('.csv'));
   for (const group of groups) out.push(`data/concepts/${group}`);

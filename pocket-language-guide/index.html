@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- `viewport-fit=cover` so `env(safe-area-inset-*)` reports real numbers: on a
+     notched phone, and inside the native shell, the page draws behind the notch and
+     the home indicator and pads itself back out in `style.css`. Still no
+     `user-scalable=no` and no `maximum-scale` anywhere: disabling zoom is forbidden. -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title data-i18n="gallery.docTitle">Pocket Language Guide — printable phrase cards for any language</title>
 <meta name="description" content="Free, printable pocket-sized vocabulary and phrase guides. Pick a language, customise it, export a high-resolution PDF or PNG. Works offline.">
 <meta name="color-scheme" content="light">

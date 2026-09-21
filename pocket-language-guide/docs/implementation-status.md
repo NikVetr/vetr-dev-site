@@ -1345,3 +1345,88 @@ that made them asserted its *third* anchor after applying the first two and wrot
 file only at the end, so the `AssertionError` discarded work that had already
 succeeded. The symptom was a board whose title was empty, and it cost a Playwright
 timeout to find. Apply one edit per write, or write before the next assert.
+
+## Batch F — the shell, the emergency, and the arithmetic behind "all pairs"
+
+### N1, and the app-side of N3 and N4
+
+Capacitor 7 is pinned with **three plugins and no more** — App, Preferences, Share —
+because those are the only ones an implemented feature uses. `capacitor.config.json`
+and the adapters under `ui/platform/` are committed; `ios/` and `android/` stay
+gitignored, which is unusual for a Capacitor project and deliberate: publication here
+*is* `git push`, so a native project at the repository root would be served to the
+public web. `docs/native.md` says how to regenerate them.
+
+**Safe areas, once, everywhere.** `viewport-fit=cover` was on the board alone, so the
+gallery, the quick page and the studio drew under the notch. One
+`env(safe-area-inset-*)` rule on `body` now covers all four, plus the three
+`position: fixed` overlays that escape that box — `.board-stage`, `dialog.lightbox`
+and `.donate`. The board's own copy of the rule was removed: two elements padding for
+the same notch is how a phone ends up with a two-notch margin.
+
+**Durable personal storage.** A WKWebView's `localStorage` is evictable under storage
+pressure, and for a store holding the only copy of someone's own phrases that is not
+acceptable. `ui/platform/store.js` mirrors `Preferences` into memory at start-up so
+that all fourteen synchronous call sites keep working unchanged, and writes through
+behind the reader. An install that predates the adapter migrates **forward only**,
+and the source copy is not deleted — `tests/store.test.mjs` checks that a stale web
+copy cannot overwrite something saved after the upgrade.
+
+**Android Back.** Unhandled in a WebView it exits the application, so a reader holding
+a sentence out to a stranger who presses Back meaning "close this" would quit. An open
+`<dialog>` closes first, then the page unwinds one step, and only an unconsumed press
+leaves. Escape and Back go through the same `unwind()` so they cannot drift apart.
+
+The one decision here that cannot be checked without a device is
+`adjustMarginsForEdgeToEdge: "disable"` — CSS owns the insets, Capacitor adds none.
+Letting both act is the "padding twice" the plan warns about; getting it wrong the
+other way puts the header under the status bar. It is the first thing to try on an
+Android phone, and the fix is one word.
+
+### The emergency board
+
+First in the topic list, 36 buttons, all existing concepts: Help, this is an
+emergency, call an ambulance, call the police, I need a doctor, I cannot breathe,
+where is the nearest hospital, plus *Hurt or ill…* and *Lost or stolen…*.
+
+Ten new `board-answers` concepts for what a **bystander** says, which is a different
+speech act from anything the corpus had: 我要叫救护车了, 救援马上就到, 医院就在附近,
+哪里疼？, 您最好待在这里, 我去找能帮忙的人. Three had to be reworded before they were
+written, because their natural English is second-person and that out-genders the
+traveller in Arabic, Hebrew, Polish and the Indo-Aryan languages: *"Is walking
+possible?"*, *"Staying here is best"*, *"What is the name?"*. All three use 您 in
+Mandarin, deliberately not the 你 the older rows use.
+
+### "All pairs" is 1,122 rows, and here is the arithmetic
+
+`scripts/build_board_index.mjs` computes, per board, **which languages can be the
+listener and which can be the owner** — two lists, not a list of pairs, for the same
+reason the corpus is O(N): 53 languages are 2,756 ordered pairs and the ones that work
+are the product. The two questions differ, which matters: a listener must have the row
+*and* be inside the concept's `applies_to` scope, because that is what `resolvePhrase`
+checks; an owner needs only the row, because that side is a gloss. Gated in
+`npm run check` like the shell manifest.
+
+Run today, every board serves two pairs. The blocker is **entirely** the 22
+`board-answers` concepts, which exist in Mandarin and English alone; the ordinary
+phrases the boards use are already near-universal, short by one to three languages
+each. Translating those 22 into the remaining 51 languages projects to:
+
+| board | today | after |
+|---|---|---|
+| emergency, intro, transport, shopping, time | 2 | 2,550 each |
+| directions | 2 | 2,652 |
+| eating out | 2 | 2,450 |
+| massage and spa | 2 | 1 |
+
+**1,122 rows takes Converse from two pairs to about 2,550 per board**, with no
+per-pair work anywhere. Massage stays where it is: its 18 `massage-spa` concepts are
+Mandarin-only, which is a separate project and a much less useful one.
+
+One consequence had to be handled rather than discovered. `boardCorpus` precached
+every language a board declared; with computed lists that is every language, and the
+offline shell would go from 4.4MB to something nobody downloads on hotel wifi. It
+carries the language-independent concept bank — which every pair needs — plus the two
+languages the app opens with. Any other pair is one somebody chose, which means they
+were in the app with a connection, which is when Save for offline is the honest
+answer, and it is the rule a sheet has always followed.

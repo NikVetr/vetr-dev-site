@@ -111,3 +111,13 @@ board-answers.how-many,要多少？,,yào duōshao?,jɑʊ˥˩ twɔ˥ʂɑʊ,want 
 board-answers.not-possible,这个没办法,,zhège méi bànfǎ,ʈʂɤ˥˩kɤ meɪ˧˥ pan˥˩fa˧˩˧,no way to do this,2,board-answers-v1;zh-wiktionary;ipa=pinyin
 board-answers.say-it-again,麻烦再说一遍,,máfan zài shuō yí biàn,ma˧˥fan tsaɪ˥˩ ʂwɔ˥ i˧˥ pjɛn˥˩,"sorry to trouble you, say it once more",2,board-answers-v1;ipa=pinyin
 board-answers.i-will-write-it-down,我写下来,,wǒ xiě xiàlai,wɔ˧˩˧ ɕjɛ˧˩˧ ɕja˥˩laɪ,,2,board-answers-v1;ipa=pinyin
+board-answers.i-am-calling-an-ambulance,我要叫救护车了,,wǒ yào jiào jiùhùchē le,wɔ˧˩˧ jɑʊ˥˩ tɕjɑʊ˥˩ tɕjoʊ˥˩xu˥˩ʈʂʰɤ˥ lɤ,I'm about to call an ambulance,2,board-answers-v2;in-pack-neighbour;ipa=pinyin
+board-answers.i-am-calling-the-police,我要报警了,,wǒ yào bàojǐng le,wɔ˧˩˧ jɑʊ˥˩ pɑʊ˥˩tɕiŋ˧˩˧ lɤ,,2,board-answers-v2;matches police-consulate.i-am-calling-the-police;ipa=pinyin
+board-answers.help-is-coming,救援马上就到,,jiùyuán mǎshàng jiù dào,tɕjoʊ˥˩ɥœn˧˥ ma˧˩˧ʂɑŋ˥˩ tɕjoʊ˥˩ tɑʊ˥˩,Rescue is arriving right away,2,board-answers-v2;in-pack-neighbour;ipa=pinyin
+board-answers.where-does-it-hurt,哪里疼？,,nǎlǐ téng?,na˧˩˧li˧˩˧ tʰɤŋ˧˥,,2,board-answers-v2;in-pack-neighbour;ipa=pinyin
+board-answers.can-you-walk,您能走路吗？,,nín néng zǒulù ma?,nin˧˥ nɤŋ˧˥ tsoʊ˧˩˧lu˥˩ ma,Can you (polite) walk?,2,board-answers-v2;in-pack-neighbour;polite-register;ipa=pinyin
+board-answers.stay-here,您最好待在这里,,nín zuìhǎo dāi zài zhèlǐ,nin˧˥ tsweɪ˥˩xɑʊ˧˩˧ taɪ˥ tsaɪ˥˩ ʈʂɤ˥˩li˧˩˧,You had better stay here,2,board-answers-v2;polite-register;ipa=pinyin
+board-answers.what-is-your-name,您叫什么名字？,,nín jiào shénme míngzi?,nin˧˥ tɕjɑʊ˥˩ ʂən˧˥mɤ miŋ˧˥tsɯ,What is your (polite) name?,2,board-answers-v2;in-pack-neighbour;polite-register;ipa=pinyin
+board-answers.the-hospital-is-close,医院就在附近,,yīyuàn jiù zài fùjìn,i˥ɥœn˥˩ tɕjoʊ˥˩ tsaɪ˥˩ fu˥˩tɕin˥˩,,2,board-answers-v2;in-pack-neighbour;ipa=pinyin
+board-answers.i-do-not-have-a-phone,我没有手机,,wǒ méiyǒu shǒujī,wɔ˧˩˧ meɪ˧˥joʊ˧˩˧ ʂoʊ˧˩˧tɕi˥,,2,board-answers-v2;in-pack-neighbour;ipa=pinyin
+board-answers.i-will-find-someone,我去找能帮忙的人,,wǒ qù zhǎo néng bāngmáng de rén,wɔ˧˩˧ tɕʰy˥˩ ʈʂɑʊ˧˩˧ nɤŋ˧˥ pɑŋ˥mɑŋ˧˥ tɤ ʐən˧˥,,2,board-answers-v2;in-pack-neighbour;ipa=pinyin

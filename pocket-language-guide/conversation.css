@@ -35,10 +35,9 @@
   min-block-size: 100dvh;
   display: flex;
   flex-direction: column;
-  /* A notch or a home indicator must not cover a button someone is reaching for
-     in a hurry. `viewport-fit=cover` in the page's meta is what makes these real. */
-  padding: env(safe-area-inset-top) env(safe-area-inset-right)
-           env(safe-area-inset-bottom) env(safe-area-inset-left);
+  /* The safe-area padding this used to repeat is on `body` in `style.css` now, for
+     every page rather than this one. Stated once, in one place: two elements padding
+     for the same notch is how a phone ends up with a two-notch margin. */
 }
 
 .board-header {

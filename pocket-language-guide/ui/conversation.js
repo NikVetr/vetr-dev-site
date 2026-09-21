@@ -30,6 +30,7 @@ import { parseAmount, formatDuration, unitName } from '../core/duration.js';
 import { openBoardEditor } from './board-editor.js';
 import { speech } from './platform/speech.js';
 import { keepAwake } from './platform/wake.js';
+import { onBack } from './platform/shell.js';
 import { read as readPersonal, placedOn } from './board-store.js';
 import { openSpeakerSettings, readProfile, noticeFor } from './speaker-settings.js';
 import { applyStatic, loadCatalogue, loadUiLanguage, languageName, t } from './i18n.js';
@@ -70,14 +71,26 @@ function toPicker() {
  * are most likely to hit with no signal.
  * @param {string} owner @param {string} listener
  */
+/**
+ * Whether this pair can hold this board.
+ *
+ * **Two lists, not a list of pairs.** `scripts/build_board_index.mjs` works out, per
+ * board, which languages have every concept it names -- as a listener, where the
+ * concept's `applies_to` scope is checked too, and as an owner, where it is not,
+ * because the owner side is only a gloss. The pairs that work are the product, which
+ * is how 53 languages describe 2,756 combinations in two short arrays.
+ * @param {{listeners:string[], owners:string[]}} board
+ * @param {string} listener @param {string} owner
+ */
+const serves = (board, /** @type {string} */ listener, /** @type {string} */ owner) => (
+  board.listeners.includes(listener) && board.owners.includes(owner));
+
+/** @param {string} owner @param {string} listener */
 async function showPicker(owner, listener) {
   const index = JSON.parse(await loadText('data/boards/index.json'));
-  const pair = `${listener}__${owner}`;
   /** @type {Map<string,string>} */ const titles = new Map();
-  // A board serves pairs, not targets, so one this pair cannot say is not offered.
-  // Absent `pairs` means every pair, which no board claims today.
   for (const board of index.boards) {
-    if (!board.pairs || board.pairs.includes(pair)) titles.set(board.id, t(board.titleKey));
+    if (serves(board, listener, owner)) titles.set(board.id, t(board.titleKey));
   }
   $('board-title').textContent = t('board.pickTopic');
   document.title = t('board.docTitle');
@@ -203,9 +216,18 @@ async function main() {
   // sides, so a board written in Mandarin and English is a board for an English
   // reader. Saying so plainly beats letting `missingPhrases` report that every
   // button is unavailable, which is true and tells the reader nothing.
-  if (board.pairs && !board.pairs.includes(`${listener}__${owner}`)) {
+  const listed = JSON.parse(await loadText('data/boards/index.json'))
+    .boards.find((/** @type {any} */ b) => b.id === boardId);
+  if (!listed || !serves(listed, listener, owner)) {
+    // Naming the side that is short, rather than listing the pairs it does serve:
+    // that list used to be one pair and is now most of a fifty-three-language
+    // registry, which tells a reader nothing they can act on.
     throw new Error(t('board.wrongPair', {
-      board: t(board.titleKey), pairs: board.pairs.join(', '),
+      board: t(board.titleKey),
+      language: languageName(
+        listed && listed.owners.includes(owner) ? listener : owner,
+        named[listed && listed.owners.includes(owner) ? listener : owner]?.exonym_en ?? '',
+      ),
     }));
   }
 
@@ -510,15 +532,28 @@ async function main() {
     }));
   }
 
-  // Escape and the system Back gesture are alternative routes out, not visible
-  // controls added to the message. Inside a reply they unwind one view at a time,
-  // which `reduce` already decides.
-  addEventListener('keydown', (event) => {
-    if (event.key !== 'Escape') return;
-    if (state.view === 'reply') dispatch({ type: 'cancelReply' });
-    else if (state.view !== 'grid') dispatch({ type: 'dismiss' });
-    else dispatch({ type: 'up' });
-  });
+  /**
+   * One step back out of wherever we are, and whether there was one to take.
+   *
+   * Escape and Android's system Back are the same question asked two ways, so they
+   * are answered once. Neither is a visible control added to the message -- the
+   * design has no Back button there, and packaging the app is not permission to add
+   * one. `false` means this page has nothing left to unwind, which on Android is
+   * what lets the press reach the shell and leave the board.
+   */
+  const unwind = () => {
+    if (state.view === 'reply') { dispatch({ type: 'cancelReply' }); return true; }
+    if (state.view !== 'grid') { dispatch({ type: 'dismiss' }); return true; }
+    if (state.path.length > 1) { dispatch({ type: 'up' }); return true; }
+    return false;
+  };
+
+  addEventListener('keydown', (event) => { if (event.key === 'Escape') unwind(); });
+  // **Android Back is not browser Back.** Unhandled, it closes the application --
+  // so a reader holding a sentence out to a stranger who presses it meaning "close
+  // this" would quit the app instead. At a board's root it is unconsumed on purpose:
+  // the page behind is the topic list, which is where Back should go.
+  onBack(unwind);
 
   // **A deploy must not take the sentence off the screen.** The default guard is
   // "no dialog is open"; the board adds the case the default cannot see, which is a

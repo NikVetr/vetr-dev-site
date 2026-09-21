@@ -8,6 +8,7 @@
 
 import { parseTable, serialize, stripFormulaGuard } from '../core/csv.js';
 import { download } from './app.js';
+import * as store from './platform/store.js';
 
 const EDIT_KEY = 'plg.edits';
 
@@ -22,7 +23,7 @@ export const CSV_HEADER = [
 /** @param {string} target @param {string} source @returns {SheetEdits} */
 export function loadEdits(target, source) {
   try {
-    const raw = localStorage.getItem(`${EDIT_KEY}.${target}__${source}`);
+    const raw = store.get(`${EDIT_KEY}.${target}__${source}`);
     if (raw) {
       const parsed = JSON.parse(raw);
       return { overrides: parsed.overrides ?? {}, extras: parsed.extras ?? [] };
@@ -35,12 +36,12 @@ export function loadEdits(target, source) {
 
 /** @param {string} target @param {string} source @param {SheetEdits} edits */
 export function saveEdits(target, source, edits) {
-  localStorage.setItem(`${EDIT_KEY}.${target}__${source}`, JSON.stringify(edits));
+  store.set(`${EDIT_KEY}.${target}__${source}`, JSON.stringify(edits));
 }
 
 /** @param {string} target @param {string} source */
 export function clearEdits(target, source) {
-  localStorage.removeItem(`${EDIT_KEY}.${target}__${source}`);
+  store.remove(`${EDIT_KEY}.${target}__${source}`);
 }
 
 /**

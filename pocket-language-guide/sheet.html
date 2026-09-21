@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- `viewport-fit=cover` so `env(safe-area-inset-*)` reports real numbers: on a
+     notched phone, and inside the native shell, the page draws behind the notch and
+     the home indicator and pads itself back out in `style.css`. Still no
+     `user-scalable=no` and no `maximum-scale` anywhere: disabling zoom is forbidden. -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title data-i18n="quick.docTitle">Export a pocket guide</title>
 <meta name="color-scheme" content="light">
 <link rel="icon" href="favicon.svg">

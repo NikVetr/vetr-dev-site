@@ -1,3 +1,4 @@
+import * as store from './platform/store.js';
 // What a reader has made their own on a conversation board, and where it is kept.
 //
 // Two things live here and they are deliberately different shapes. A **phrase** is a
@@ -15,7 +16,8 @@
 // different shapes. They can be brought together deliberately -- `fromSheetExtra`
 // adapts one of the sheet's own custom entries onto a board -- but never by accident.
 //
-// Storage is `localStorage`, which is right for this: a bounded number of short
+// Storage goes through `ui/platform/store.js` -- `localStorage` on the web, the
+// native durable store in the app shell -- which is right for this: a bounded number of short
 // text records, no binaries, no audio, no exports. The interface is async anyway,
 // because the native build will put it on Capacitor Preferences and the callers
 // should not have to change when it does.
@@ -78,7 +80,7 @@ function migrate(raw) {
 export function read() {
   let raw = null;
   try {
-    raw = localStorage.getItem(KEY);
+    raw = store.get(KEY);
   } catch {
     // Private mode, or storage disabled. Not damage: there is simply nothing.
     return { data: empty(), damaged: false };
@@ -108,7 +110,7 @@ let queue = Promise.resolve();
 export function write(data) {
   const done = queue.then(() => {
     try {
-      localStorage.setItem(KEY, JSON.stringify(data));
+      store.set(KEY, JSON.stringify(data));
     } catch (err) {
       // Quota, or storage refused. Loud, because the reader thinks they just saved.
       throw new Error(`could not save your buttons: ${/** @type {Error} */ (err).message}`);

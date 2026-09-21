@@ -18,13 +18,14 @@
 // where a pair does inflect and the reader has not answered, `noticeFor` says so
 // out loud rather than letting a silent masculine default stand.
 //
-// Storage is `localStorage`, as everywhere else here: one small object, synchronous,
-// and already the thing the native shell's `Preferences` maps onto. A cookie would
-// send it to the server on every request, which for a fact about the reader's own
-// body is exactly wrong — nothing about this profile ever leaves the device.
+// Storage goes through `ui/platform/store.js`, as every personal thing here does:
+// `localStorage` on the web, the native durable store inside the app shell. A cookie
+// would send it to the server on every request, which for a fact about the reader's
+// own body is exactly wrong — nothing about this profile ever leaves the device.
 
 import { axesFor, unanswered } from '../core/speaker.js';
 import { t } from './i18n.js';
+import * as store from './platform/store.js';
 
 const KEY = 'plg.speaker';
 
@@ -34,7 +35,7 @@ const KEY = 'plg.speaker';
  */
 export function readProfile() {
   try {
-    const held = JSON.parse(localStorage.getItem(KEY) ?? '{}');
+    const held = JSON.parse(store.get(KEY) ?? '{}');
     return held && typeof held === 'object' ? held : {};
   } catch {
     // A corrupt value is the same as none: every language's own default, which is
@@ -45,7 +46,7 @@ export function readProfile() {
 
 /** @param {import('../core/speaker.js').SpeakerProfile} profile */
 export function writeProfile(profile) {
-  localStorage.setItem(KEY, JSON.stringify(profile));
+  store.set(KEY, JSON.stringify(profile));
 }
 
 /**

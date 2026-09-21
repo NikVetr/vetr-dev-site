@@ -1,52 +1,98 @@
 {
   "boards": [
     {
+      "id": "emergency",
+      "titleKey": "boards.emergency.title",
+      "listeners": [
+        "en",
+        "zh-Hans"
+      ],
+      "owners": [
+        "en",
+        "zh-Hans"
+      ]
+    },
+    {
       "id": "intro",
       "titleKey": "boards.intro.title",
-      "pairs": [
-        "zh-Hans__en"
+      "listeners": [
+        "en",
+        "zh-Hans"
+      ],
+      "owners": [
+        "en",
+        "zh-Hans"
       ]
     },
     {
       "id": "directions",
       "titleKey": "boards.directions.title",
-      "pairs": [
-        "zh-Hans__en"
+      "listeners": [
+        "en",
+        "zh-Hans"
+      ],
+      "owners": [
+        "en",
+        "zh-Hans"
       ]
     },
     {
       "id": "transport",
       "titleKey": "boards.transport.title",
-      "pairs": [
-        "zh-Hans__en"
+      "listeners": [
+        "en",
+        "zh-Hans"
+      ],
+      "owners": [
+        "en",
+        "zh-Hans"
       ]
     },
     {
       "id": "food",
       "titleKey": "boards.food.title",
-      "pairs": [
-        "zh-Hans__en"
+      "listeners": [
+        "en",
+        "zh-Hans"
+      ],
+      "owners": [
+        "en",
+        "zh-Hans"
       ]
     },
     {
       "id": "shopping",
       "titleKey": "boards.shopping.title",
-      "pairs": [
-        "zh-Hans__en"
+      "listeners": [
+        "en",
+        "zh-Hans"
+      ],
+      "owners": [
+        "en",
+        "zh-Hans"
       ]
     },
     {
       "id": "time",
       "titleKey": "boards.time.title",
-      "pairs": [
-        "zh-Hans__en"
+      "listeners": [
+        "en",
+        "zh-Hans"
+      ],
+      "owners": [
+        "en",
+        "zh-Hans"
       ]
     },
     {
       "id": "spa",
       "titleKey": "boards.spa.title",
-      "pairs": [
-        "zh-Hans__en"
+      "listeners": [
+        "zh-Hans"
+      ],
+      "owners": [
+        "en",
+        "zh-Hans"
       ]
     }
   ]

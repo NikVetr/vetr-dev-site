@@ -425,7 +425,7 @@
   "board.someMissing": "{count} phrases on this board are not translated for this pair yet.",
   "gallery.converse": "Converse",
   "boards.spa.title": "Massage and spa",
-  "board.wrongPair": "The {board} board is written for these language pairs only: {pairs}.",
+  "board.wrongPair": "The {board} board does not have every phrase it needs in {language} yet.",
   "boards.spa.focus": "Focus on\u2026",
   "boards.spa.comfort": "Comfort",
   "boards.spa.justRight": "That's good \u2014 keep it there",
@@ -492,5 +492,10 @@
   "boards.directions.title": "Directions",
   "boards.transport.title": "Getting around",
   "boards.intro.title": "Meeting people",
-  "board.legendAnswer": "Tinted, with ↩: they can answer these."
+  "board.legendAnswer": "Tinted, with ↩: they can answer these.",
+  "boards.emergency.title": "Emergency",
+  "boards.emergency.medical": "Hurt or ill…",
+  "boards.emergency.medicalTitle": "What is wrong",
+  "boards.emergency.lost": "Lost or stolen…",
+  "boards.emergency.lostTitle": "Lost, stolen or in trouble"
 }
