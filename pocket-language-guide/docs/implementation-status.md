@@ -1257,3 +1257,91 @@ off a phone at arm's length routinely takes longer than a 15-second display time
 and the screen going dark means starting the exchange again. Best-effort and silent
 when unavailable, and re-acquired on `visibilitychange`, because the platform drops
 the lock whenever the page is hidden and does not give it back.
+
+## Batch E — a board is a situation, not a phrasebook
+
+Five pieces of feedback from using the Mandarin board on a phone, four of which had
+one cause.
+
+### The blue tint and the ↩ meant nothing, because replies were switched off
+
+Reply screens were built behind `?replies=1` while they were being written, and the
+flag never came off. The effect was worse than a missing feature: `renderGrid` marks
+a cell that *can be answered* with a tint and a ↩, and with the flag off those cells
+behaved exactly like every other one — the Reply control they promise never appeared.
+So the one distinction the grid draws was decoration, and a question shown to a
+stranger had no way for them to answer it, which is the board failing at the thing it
+is for. Replies are on unless a session passes `replies=0`.
+
+The mark also needed explaining. It carried a `title` attribute, which is invisible to
+a finger. A one-line legend now sits under the grid — and only on a grid that has such
+a cell, because a key to a symbol that is not on screen is noise.
+
+### The board never filled its language slots
+
+Seven concepts name a language: `communication.do-you-speak-english` is
+`你会说{source}吗？` in the pack, and the pair supplies the name. The sheet has always
+called `fillLanguageSlots`; the board never did, so any board carrying one of those
+phrases would have shown a stranger the literal string `{source}`. They are exactly
+the phrases a board wants — "I do not speak Chinese", "please write it down" — so the
+fix was to fill them rather than to keep them off every board.
+
+### Seven boards, and a topic grid in front of them
+
+A board is a **situation**. What someone needs face down on a massage table and what
+they need in a taxi have almost nothing in common, and one grid holding both is a grid
+you have to read rather than glance at. Converse now opens the list of situations —
+Meeting people, Directions, Getting around, Eating out, Shopping, Time, Massage and
+spa — and each board names itself in a bolded `h1` in the bar, beside the owner-only
+controls. The root Back no longer vanishes; it says **All topics** and goes there.
+
+The picker loads one small JSON file and nothing else — no corpus, no language packs —
+because it is the screen someone lands on and the one they are most likely to reach
+with no signal.
+
+**99 buttons across the seven, and not one new translated phrase.** Every button is an
+existing concept referenced by id, which is what the O(N) corpus is for: `toilets.where-toilet`
+on the Directions board, `dietary-needs.no-peanuts` under "I cannot eat…", the
+`quick-directions` set doing double duty as the *answers* to "which way?" — the person
+being asked taps "turn left" in their own language and the traveller reads it in theirs.
+
+Two fixes to the massage board while its structure was open: **Comfort is gone as a
+submenu** — "another towel" and "thank you" are buttons on the main grid, because two
+buttons never earned a screen of their own — and **"How long is the wait?" moved to the
+Time board**, which is not a thing anyone says face down on a massage table.
+
+### What the other person can now say back
+
+Eleven concepts in `board-answers`, which is `default_on=0` and therefore prints on
+nothing. They are what staff actually say: 关门了, 我们没有这个, 请稍等, 我带路,
+这个没办法, 麻烦再说一遍, 刷卡还是现金？ Each question kind gets the answers that fit
+it — a stock question offers "we do not have it" and "how many?", a directions question
+offers the seven `quick-directions` plus "I will show the way", a time question offers
+"it is closed" and "I will write it down" — and every set ends with an uncertain answer
+and a refusal, because someone who will not use the board is not the same as someone
+who is unsure.
+
+Three of the eleven were reworded away from second-person address before they were
+written: "I will show **the way**" rather than "show you", "One moment, please" rather
+than the imperative "wait", "One more time, please?" rather than "say it again". Those
+are the reply-neutrality rules from `speaker-variants.md` doing their job in advance —
+an imperative or an object pronoun aimed at the traveller is gendered in Arabic,
+Hebrew, Polish and the Indo-Aryan languages, and it is far cheaper to avoid it now
+than to discover it in eleven packs later.
+
+### The clipping check earned its keep the moment it was widened
+
+`nothing is cut off on …` ran against the massage board only, which is ten short
+labels. Pointed at the topic list and at "Getting around" — twelve buttons and whole
+phrases for names — it immediately found the board's own title **clipped inside its
+box at a 1.6× system text size**. Same cause as the header bug it was written for: a
+flex row will not let an item shrink below its content, and Back plus two owner-only
+buttons leave a long topic name no room. The bar wraps now, as the header already did.
+
+### A mistake worth recording
+
+Two edits — the language slots and the board title — were silently lost. The script
+that made them asserted its *third* anchor after applying the first two and wrote the
+file only at the end, so the `AssertionError` discarded work that had already
+succeeded. The symptom was a board whose title was empty, and it cost a Playwright
+timeout to find. Apply one edit per write, or write before the next assert.

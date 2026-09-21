@@ -70,7 +70,10 @@ test('a message opened from a submenu returns to that submenu', async ({ page })
   await expect(page.locator('#board-up')).toBeVisible();
   await page.locator('#board-up').click();
   await expect(page.locator('[data-button="hurts"]')).toBeVisible();
-  await expect(page.locator('#board-up')).toBeHidden();
+  // At the root the control stays, because the root has a parent now: the topic
+  // list. It used to vanish here, which left a board with no way out of itself.
+  await expect(page.locator('#board-up')).toBeVisible();
+  await expect(page.locator('#board-up-label')).toHaveText('All topics');
 });
 
 test('the buttons stay where they were put', async ({ page }) => {
@@ -117,9 +120,11 @@ test('showing a phrase does not load the solver, fontkit or pdf-lib', async ({ p
   expect(names.filter((n) => /fontkit|pdf-lib|core\/solve|render\//.test(n))).toEqual([]);
 });
 
-test('show-only offers no reply, and the reader is told what is missing', async ({ page }) => {
-  // B08. The default session shows only; a Reply control appears with `replies=1`
-  // and only on a message that has answers, which this board has none of yet.
+test('a message with no answers offers no reply, and gaps are reported', async ({ page }) => {
+  // B08. There is no reply screen after every statement: the control appears only on
+  // a message that has answers, and "it hurts here" is not a question. Replies are on
+  // by default now -- while they were behind `?replies=1` the tint and the ↩ mark that
+  // promise an answer were decorating cells that behaved like every other one.
   await board(page);
   await page.locator('[data-button="hurts"]').click();
   await expect(page.locator('.board-controls')).toHaveCount(0);
@@ -657,6 +662,26 @@ test('Speak is the owner’s control and Reply is the listener’s', async ({ pa
 
 // --- the shapes a phone actually comes in (C7) -------------------------------
 
+/** Everything in the chrome a narrow or enlarged screen can push off its edge. */
+async function noSpill(/** @type {import('@playwright/test').Page} */ page) {
+  const spilled = await page.evaluate(() => {
+    /** @type {string[]} */ const bad = [];
+    const named = (/** @type {HTMLElement} */ n) => n.dataset.button || n.id || n.className;
+    for (const n of document.querySelectorAll(
+      '.board-cell, .board-up, .board-edit, .board-pair, .board-brand, .board-grid-title,'
+      + ' .board-title, .board-legend')) {
+      const el = /** @type {HTMLElement} */ (n);
+      const r = el.getBoundingClientRect();
+      if (r.width === 0) continue;
+      // Past either edge of the viewport, or clipped inside its own box.
+      if (r.right > innerWidth + 1 || r.left < -1) bad.push(`${named(el)} off-screen`);
+      if (el.scrollWidth > el.clientWidth + 1) bad.push(`${named(el)} clipped`);
+    }
+    return bad;
+  });
+  expect(spilled).toEqual([]);
+}
+
 for (const [name, width, height, scale] of /** @type {[string,number,number,number][]} */ ([
   ['a narrow portrait phone', 360, 640, 1],
   ['a short landscape phone', 740, 360, 1],
@@ -677,24 +702,20 @@ for (const [name, width, height, scale] of /** @type {[string,number,number,numb
         });
       }, scale);
     }
+
+    // **The topic list and the densest board, as well as the one this was written
+    // against.** Massage is ten short labels; "Getting around" is twelve and the
+    // picker's are whole phrases, so a board title, a legend or a long topic name
+    // runs off the edge there first.
+    for (const at of ['', '&board=transport']) {
+      await page.goto(`/conversation.html?target=zh-Hans&source=en${at}`);
+      await expect(page.locator('.board-cell').first()).toBeVisible();
+      await noSpill(page);
+    }
+
     await page.goto(`${BOARD}&replies=1`);
     await expect(page.locator('.board-cell').first()).toBeVisible();
-
-    const spilled = await page.evaluate(() => {
-      /** @type {string[]} */ const bad = [];
-      const named = (/** @type {HTMLElement} */ n) => n.dataset.button || n.id || n.className;
-      for (const n of document.querySelectorAll(
-        '.board-cell, .board-up, .board-edit, .board-pair, .board-brand, .board-grid-title')) {
-        const el = /** @type {HTMLElement} */ (n);
-        const r = el.getBoundingClientRect();
-        if (r.width === 0) continue;
-        // Past either edge of the viewport, or clipped inside its own box.
-        if (r.right > innerWidth + 1 || r.left < -1) bad.push(`${named(el)} off-screen`);
-        if (el.scrollWidth > el.clientWidth + 1) bad.push(`${named(el)} clipped`);
-      }
-      return bad;
-    });
-    expect(spilled).toEqual([]);
+    await noSpill(page);
 
     // And a message, which is the surface that has to hold the most text.
     await page.locator('[data-button="stop"]').click();
@@ -736,7 +757,10 @@ test('a tap reaches the message inside the frame budget', async ({ page }) => {
 
 /** @param {import('@playwright/test').Page} page */
 async function openWaitAnswers(page) {
-  await page.goto(`${BOARD}&replies=1`);
+  // The wait question lives on the Time board now, not the massage one. "How long is
+  // the wait" is not a thing anyone says face down on a massage table, and a board is
+  // a situation rather than a phrasebook.
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=time');
   await expect(page.locator('.board-cell').first()).toBeVisible();
   await page.locator('[data-button="wait"]').click();
   await page.locator('.board-controls button').first().click();
@@ -832,4 +856,56 @@ test('the keypad’s own text is legible on the coloured stage', async ({ page }
   const ratio = (Math.max(lum(seen.fg), lum(seen.bg)) + 0.05)
     / (Math.min(lum(seen.fg), lum(seen.bg)) + 0.05);
   expect(ratio, `${seen.fg} on ${seen.bg}`).toBeGreaterThan(4.5);
+});
+
+// --- the topic picker --------------------------------------------------------
+
+test('converse opens the topics, not a board', async ({ page }) => {
+  // A board is a situation. What someone needs face down on a massage table and what
+  // they need in a taxi have almost nothing in common, and one grid holding both
+  // would be a grid you have to read rather than glance at.
+  await page.goto('/conversation.html?target=zh-Hans&source=en');
+  await expect(page.locator('#board-title')).toHaveText('What is this about?');
+  const topics = page.locator('.board-cell');
+  await expect(topics.first()).toBeVisible();
+  expect(await topics.allTextContents()).toEqual(
+    ['Meeting people', 'Directions', 'Getting around', 'Eating out', 'Shopping', 'Time', 'Massage and spa'],
+  );
+  // Nothing on this screen is owner-only chrome: there is no board to edit yet.
+  await expect(page.locator('#board-edit')).toBeHidden();
+
+  await page.locator('[data-button="time"]').click();
+  await expect(page.locator('#board-title')).toHaveText('Time');
+  // The board names itself and the topic list is one tap away, which is the whole
+  // point of the root control no longer vanishing.
+  await expect(page.locator('#board-up')).toBeVisible();
+  await expect(page.locator('#board-up-label')).toHaveText('All topics');
+  await page.locator('#board-up').click();
+  await expect(page.locator('#board-title')).toHaveText('What is this about?');
+});
+
+test('the mark that promises an answer is explained, and only where it is used', async ({ page }) => {
+  // The tint and the ↩ were unreadable: a `title` attribute is invisible to a finger,
+  // so the one distinction the grid draws was decoration. A legend says it once.
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=shopping');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await expect(page.locator('#board-legend')).toHaveText(/they can answer these/);
+  await expect(page.locator('.board-cell-asks').first()).toBeVisible();
+
+  // ...and the Reply control it promises actually appears, with no query string.
+  await page.locator('[data-button="stock"]').click();
+  await expect(page.locator('.board-message')).toBeVisible();
+  const reply = page.locator('.board-controls button').first();
+  await expect(reply).toBeVisible();
+  await reply.click();
+  // The answers are the listener's own language, for the listener to tap.
+  const answers = page.locator('.board-answer');
+  await expect(answers.first()).toBeVisible();
+  expect(await answers.first().textContent()).toMatch(/\p{Script=Han}/u);
+
+  // A grid where nothing can be answered says nothing about a mark it does not draw.
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=spa');
+  await page.locator('[data-button="focus"]').click();
+  await expect(page.locator('[data-button="shoulders"]')).toBeVisible();
+  await expect(page.locator('#board-legend')).toBeEmpty();
 });

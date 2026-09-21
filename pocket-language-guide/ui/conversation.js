@@ -15,7 +15,9 @@ import {
   loadText, loadLanguages, readerLanguage, registerOffline, showFatal,
   deferUpdates, applyUpdateIfIdle,
 } from './app.js';
-import { loadCorpus, loadLanguage, loadVariants } from '../core/pack.js';
+import {
+  loadCorpus, loadLanguage, loadVariants, fillLanguageSlots,
+} from '../core/pack.js';
 import { axesFor, variantKey } from '../core/speaker.js';
 import {
   validateBoard, resolvePhrase, missingPhrases, reduce, openBoard, currentNode,
@@ -48,15 +50,74 @@ const $ = (/** @type {string} */ id) => /** @type {HTMLElement} */ (document.get
  */
 let openedFrom = /** @type {string|null} */ (null);
 
+/** Drop back to the list of conversations, keeping the pair. */
+function toPicker() {
+  const next = new URLSearchParams(location.search);
+  next.delete('board');
+  location.search = next.toString();
+}
+
+/**
+ * Which conversation this is, asked before any of it.
+ *
+ * A board is a situation, not a phrasebook: what someone needs to say face down on a
+ * massage table and what they need in a taxi have almost nothing in common, and a
+ * single grid holding both would be a grid you have to read. So the first screen is
+ * the situation, and every board after it is small enough to use without reading.
+ *
+ * Deliberately cheap. This loads one small JSON file and nothing else -- no corpus,
+ * no language packs -- because it is the screen someone lands on and the one they
+ * are most likely to hit with no signal.
+ * @param {string} owner @param {string} listener
+ */
+async function showPicker(owner, listener) {
+  const index = JSON.parse(await loadText('data/boards/index.json'));
+  const pair = `${listener}__${owner}`;
+  /** @type {Map<string,string>} */ const titles = new Map();
+  // A board serves pairs, not targets, so one this pair cannot say is not offered.
+  // Absent `pairs` means every pair, which no board claims today.
+  for (const board of index.boards) {
+    if (!board.pairs || board.pairs.includes(pair)) titles.set(board.id, t(board.titleKey));
+  }
+  $('board-title').textContent = t('board.pickTopic');
+  document.title = t('board.docTitle');
+  if (!titles.size) {
+    $('board-status').textContent = t('board.noBoards');
+    $('board-grid').removeAttribute('aria-busy');
+    return;
+  }
+  renderGrid($('board-grid'), { buttons: [...titles.keys()].map((id) => ({ id, kind: 'submenu' })) }, {
+    lang: owner,
+    label: (button) => titles.get(button.id) ?? button.id,
+    available: () => true,
+    onPick: (button) => {
+      const next = new URLSearchParams(location.search);
+      next.set('board', button.id);
+      location.search = next.toString();
+    },
+  });
+  registerOffline();
+}
+
 async function main() {
   const params = new URLSearchParams(location.search);
   const { languages, coverage } = await loadLanguages();
   const owner = params.get('source') || readerLanguage(languages, coverage);
   const listener = params.get('target') || 'zh-Hans';
-  const boardId = params.get('board') || 'spa';
+  const boardId = params.get('board');
 
   await loadUiLanguage(owner, loadText);
   applyStatic();
+
+  // The pair, before either branch: it is the same statement of who is about to be
+  // shown what, whether or not a board has been chosen yet.
+  const named = Object.fromEntries(languages.map((l) => [l.bcp47, l]));
+  $('board-pair').textContent = t('board.pair', {
+    target: languageName(listener, named[listener]?.exonym_en ?? listener),
+    source: languageName(owner, named[owner]?.exonym_en ?? owner),
+  });
+
+  if (!boardId) { await showPicker(owner, listener); return; }
 
   const board = JSON.parse(await loadText(`data/boards/${boardId}.json`));
   const problems = validateBoard(board);
@@ -73,6 +134,16 @@ async function main() {
     loadLanguage(loadText, listener, corpus.groups),
     loadLanguage(loadText, owner, corpus.groups),
   ]);
+  // **Seven concepts name a language, and the name comes from the pair.** The sheet
+  // has always filled these; the board never did, so `do-you-speak-english` would
+  // have shown a stranger the literal string `{source}`. They are exactly the phrases
+  // a board wants -- "I do not speak Chinese", "please write it down" -- so the fix is
+  // to fill them here too rather than to keep them off every board.
+  const slots = { target: listener, source: owner };
+  fillLanguageSlots(listenerRows, {
+    ...slots, locale: listener, names: corpus.languageNames[listener],
+  });
+  fillLanguageSlots(ownerRows, { ...slots, locale: owner, names: corpus.languageNames[owner] });
 
   // **The listener's own catalogue, read without becoming the interface language.**
   // `loadUiLanguage` above set the owner's; calling it again for the listener would
@@ -128,11 +199,6 @@ async function main() {
     if (now !== canSpeak) { canSpeak = now; paint(); }
   });
 
-  $('board-pair').textContent = t('board.pair', {
-    target: languageName(listener, corpus.languages[listener]?.exonym_en ?? listener),
-    source: languageName(owner, corpus.languages[owner]?.exonym_en ?? owner),
-  });
-
   // **A board serves pairs, not targets.** Resolving a phrase needs a row on both
   // sides, so a board written in Mandarin and English is a board for an English
   // reader. Saying so plainly beats letting `missingPhrases` report that every
@@ -166,7 +232,16 @@ async function main() {
   };
   sayStatus();
 
-  let state = openBoard(board, params.get('replies') === '1');
+  $('board-title').textContent = t(board.titleKey);
+  document.title = `${t(board.titleKey)} \u2014 ${t('nav.brand')}`;
+
+  // **Replies are on unless a session says otherwise.** They were behind `?replies=1`
+  // while the reply screen was being built, and the effect was that the "can be
+  // answered" tint and its ↩ mark meant nothing: those cells behaved exactly like
+  // every other one, because the Reply control they promise never appeared. A
+  // question shown to a stranger with no way for them to answer it is the board
+  // failing at the thing it is for.
+  let state = openBoard(board, params.get('replies') !== '0');
   const pair = `${listener}__${owner}`;
   // Hydrated once. The page is authoritative from here; the editor hands back a new
   // value rather than the page asking the disk what was just written.
@@ -238,13 +313,28 @@ async function main() {
     // A waiting deploy installs here, between things, and nowhere else.
     applyUpdateIfIdle();
 
-    if (state.view !== 'grid') { $('board-edit').hidden = true; $('board-settings').hidden = true; }
+    if (state.view !== 'grid') {
+      $('board-edit').hidden = true;
+      $('board-settings').hidden = true;
+      $('board-legend').textContent = '';
+    }
     if (state.view === 'grid') {
       clearStage(stage);
-      $('board-up').hidden = state.path.length < 2;
+      // At the root the parent is the topic list, not a node -- so the control stays
+      // rather than vanishing, and says where it goes. Somewhere to go back *to* is
+      // the difference between one board and the whole app.
+      const atRoot = state.path.length < 2;
+      $('board-up').hidden = false;
       $('board-edit').hidden = false;
       $('board-settings').hidden = !asked.length;
-      $('board-up-label').textContent = t('board.up');
+      $('board-up-label').textContent = atRoot ? t('board.allTopics') : t('board.up');
+      // **The key to the only distinction the grid draws**, and only where the grid
+      // draws it. A tint and a mark that nobody can decode are decoration -- the
+      // `title` attribute that carried this is invisible to a finger -- and a legend
+      // on a grid with nothing to answer would be noise.
+      $('board-legend').textContent = state.replies
+        && node.buttons.some((/** @type {any} */ b) => b.replySetId)
+        ? t('board.legendAnswer') : '';
       renderGrid($('board-grid'), node, {
         lang: owner,
         title: node.titleKey ? t(node.titleKey) : undefined,
@@ -385,7 +475,10 @@ async function main() {
     });
   }
 
-  $('board-up').addEventListener('click', () => dispatch({ type: 'up' }));
+  $('board-up').addEventListener('click', () => {
+    if (state.view === 'grid' && state.path.length < 2) { toPicker(); return; }
+    dispatch({ type: 'up' });
+  });
 
   // **Owner-only, and reachable from the grid alone.** Never from a message or a
   // reply: the person being spoken to must not find the editor by tapping, and the

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "id": "spa",
-  "titleKey": "boards.spa.title",
+  "id": "intro",
+  "titleKey": "boards.intro.title",
   "rootNodeId": "main",
   "pairs": [
     "zh-Hans__en"
@@ -10,83 +10,95 @@
     "main": {
       "buttons": [
         {
-          "id": "stronger",
+          "id": "hello",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.stronger-pressure"
+            "id": "social-basics.hello-polite"
           },
           "colour": "comm"
         },
         {
-          "id": "gentler",
+          "id": "nospeak",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.more-gently"
+            "id": "communication.i-do-not-speak-this-language"
           },
           "colour": "comm"
         },
         {
-          "id": "just-right",
+          "id": "doyou",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.that-pressure-is-good"
+            "id": "communication.do-you-speak-english"
           },
           "colour": "comm",
-          "labelKey": "boards.spa.justRight"
+          "replySetId": "understood"
         },
         {
-          "id": "hurts",
+          "id": "slowly",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "emergency-medical.it-hurts-here"
+            "id": "communication.please-speak-more-slowly"
           },
-          "colour": "alert"
+          "colour": "comm"
         },
         {
-          "id": "avoid",
+          "id": "write",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.please-avoid-this-area"
+            "id": "communication.please-write-it-down"
           },
-          "colour": "money",
-          "replySetId": "avoid-area"
+          "colour": "comm"
         },
         {
-          "id": "focus",
-          "kind": "submenu",
-          "nodeId": "areas",
-          "labelKey": "boards.spa.focus",
-          "colour": "move"
-        },
-        {
-          "id": "pause",
+          "id": "dontget",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.please-pause"
+            "id": "communication.i-do-not-understand"
           },
-          "colour": "alert"
+          "colour": "comm",
+          "replySetId": "understood"
         },
         {
-          "id": "stop",
+          "id": "help",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.please-stop"
+            "id": "communication.can-you-help-me"
           },
-          "colour": "alert"
+          "colour": "alert",
+          "replySetId": "yes-no"
         },
         {
-          "id": "towel",
+          "id": "nice",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "hotel-requests.another-towel-please"
+            "id": "introductions.nice-to-meet-you"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "yourname",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "introductions.what-is-your-name"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "sorry",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.excuse-me-sorry"
           },
           "colour": "stay"
         },
@@ -98,122 +110,120 @@
             "id": "social-basics.thank-you"
           },
           "colour": "stay"
-        }
-      ]
-    },
-    "areas": {
-      "titleKey": "boards.spa.focusOn",
-      "buttons": [
-        {
-          "id": "shoulders",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "massage-spa.focus-on-shoulders"
-          },
-          "colour": "move",
-          "labelKey": "boards.body.shoulders"
         },
         {
-          "id": "back",
+          "id": "bye",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.focus-on-back"
+            "id": "social-basics.goodbye"
           },
-          "colour": "move",
-          "labelKey": "boards.body.back"
-        },
-        {
-          "id": "neck",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "massage-spa.focus-on-neck"
-          },
-          "colour": "move",
-          "labelKey": "boards.body.neck"
-        },
-        {
-          "id": "feet",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "massage-spa.focus-on-feet"
-          },
-          "colour": "move",
-          "labelKey": "boards.body.feet"
-        },
-        {
-          "id": "gentler",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "massage-spa.more-gently"
-          },
-          "colour": "comm"
-        },
-        {
-          "id": "stop",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "massage-spa.please-stop"
-          },
-          "colour": "alert"
+          "colour": "stay"
         }
       ]
     }
   },
   "replySets": {
-    "avoid-area": {
+    "yes-no": {
       "buttons": [
         {
-          "id": "reply-i-will-avoid-that-area",
+          "id": "yes-right",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.reply-i-will-avoid-that-area"
+            "id": "quick-responses.yes-right"
           }
         },
         {
-          "id": "reply-which-area-exactly",
+          "id": "no-not",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.reply-which-area-exactly"
+            "id": "quick-responses.no-not"
           }
         },
         {
-          "id": "reply-cannot-avoid-this-treatment",
+          "id": "not-possible",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.reply-cannot-avoid-this-treatment"
+            "id": "board-answers.not-possible"
           }
         },
         {
-          "id": "reply-does-it-hurt-there",
+          "id": "please-wait",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.reply-does-it-hurt-there"
+            "id": "board-answers.please-wait"
           }
         },
         {
-          "id": "reply-ask-supervisor",
+          "id": "i-do-not-know",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.reply-ask-supervisor"
+            "id": "social-basics.i-do-not-know"
           }
         },
         {
-          "id": "reply-none-of-these",
+          "id": "none-of-these",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.reply-none-of-these"
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "understood": {
+      "buttons": [
+        {
+          "id": "yes-right",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.yes-right"
+          }
+        },
+        {
+          "id": "no-not",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.no-not"
+          }
+        },
+        {
+          "id": "say-it-again",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.say-it-again"
+          }
+        },
+        {
+          "id": "i-will-write-it-down",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-write-it-down"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
           }
         }
       ]

@@ -270,7 +270,12 @@ test('a board works on a cold offline visit with nothing saved', async ({ page, 
   await page.locator('.board-message').click();
 
   // A duration reply, which reads from three different concept groups and from
-  // CLDR -- none of which may need the network either.
+  // CLDR -- none of which may need the network either. On the Time board, because
+  // that is where the wait question lives now; navigating to a *second* board with
+  // the network off is the better test anyway, since the shell has to carry every
+  // board a pair declares and not only the one someone happened to open first.
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=time');
+  await expect(page.locator('.board-cell').first()).toBeVisible({ timeout: 30_000 });
   await page.locator('[data-button="wait"]').click();
   await page.locator('.board-controls button').first().click();
   await expect(page.locator('.board-answer').first()).toHaveText(/\p{Script=Han}/u);

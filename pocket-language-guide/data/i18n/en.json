@@ -478,5 +478,19 @@
   "speech.loading": "Voices are still loading — try again in a moment.",
   "speech.unsupported": "This browser cannot read text aloud.",
   "speech.unmapped": "There is no voice for that language anywhere.",
-  "speech.synthesis-failed": "The voice stopped. Try again, or show the text."
+  "speech.synthesis-failed": "The voice stopped. Try again, or show the text.",
+  "board.pickTopic": "What is this about?",
+  "board.allTopics": "All topics",
+  "board.noBoards": "No conversation boards have been written for this pair yet.",
+  "boards.time.title": "Time",
+  "boards.time.when": "When…",
+  "boards.time.whenTitle": "When?",
+  "boards.shopping.title": "Shopping",
+  "boards.food.title": "Eating out",
+  "boards.food.avoid": "I cannot eat…",
+  "boards.food.avoidTitle": "Please, none of this…",
+  "boards.directions.title": "Directions",
+  "boards.transport.title": "Getting around",
+  "boards.intro.title": "Meeting people",
+  "board.legendAnswer": "Tinted, with ↩: they can answer these."
 }

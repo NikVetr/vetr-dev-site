@@ -602,6 +602,15 @@ lookup and nothing else. Two tests hold that line, one walking the import graph 
 one counting network requests while a message is on screen. Measured, a tap reaches
 the screen in a median 11ms.
 
+**A board is a situation, and the first screen is which one.** Converse opens a grid
+of topics -- Meeting people, Directions, Getting around, Eating out, Shopping, Time,
+Massage and spa -- because what someone needs face down on a massage table and what
+they need in a taxi have almost nothing in common, and one grid holding both is a grid
+you have to read rather than glance at. That screen loads one small JSON file and no
+corpus at all, which matters: it is where someone lands, and the most likely place to
+be with no signal. Each board names itself in the bar and the root Back says **All
+topics**.
+
 **Terms are indexed, never copied.** A board node is a subsection and nodes overlap
 freely: `please stop` and `more gently` sit on the root grid *and* inside the
 body-area submenu, because someone two taps deep must still be able to say stop.
@@ -636,6 +645,16 @@ rectangle, not reading.
 parts rather than four cells repeating five words. That is owner-language
 presentation only: the listener always gets one complete idiomatic sentence, because
 Mandarin will not take the template — 按摩背部 is idiomatic where 按摩背 is not.
+
+**Replies are on, and the mark that promises one is explained.** A tinted cell with a
+↩ can be answered; the legend under the grid says so, and appears only on a grid that
+has one. Both were dead for a while -- the reply screen was built behind `?replies=1`
+and the flag never came off -- so those cells wore a promise and behaved like every
+other button. Ninety-nine buttons across the seven boards, and **not one new translated
+phrase**: every one is an existing concept referenced by id, which is what the O(N)
+corpus is for. `quick-directions` does double duty as the *answers* to "which way?",
+so the person being asked taps "turn left" in their own language and the traveller
+reads it in theirs.
 
 **Replies are optional and one-directional per message.** A reply set offers the
 listener a few complete answers in their own language; the chosen one comes back in

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "id": "spa",
-  "titleKey": "boards.spa.title",
+  "id": "food",
+  "titleKey": "boards.food.title",
   "rootNodeId": "main",
   "pairs": [
     "zh-Hans__en"
@@ -10,155 +10,169 @@
     "main": {
       "buttons": [
         {
-          "id": "stronger",
+          "id": "table",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.stronger-pressure"
+            "id": "food-ordering.is-a-table-available"
           },
-          "colour": "comm"
+          "colour": "money",
+          "replySetId": "yes-no"
         },
         {
-          "id": "gentler",
+          "id": "menu",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.more-gently"
+            "id": "food-ordering.menu-please"
           },
-          "colour": "comm"
+          "colour": "money"
         },
         {
-          "id": "just-right",
+          "id": "recommend",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.that-pressure-is-good"
+            "id": "food-ordering.what-do-you-recommend"
           },
-          "colour": "comm",
-          "labelKey": "boards.spa.justRight"
+          "colour": "money"
         },
         {
-          "id": "hurts",
+          "id": "this",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "emergency-medical.it-hurts-here"
+            "id": "food-ordering.i-want-this"
+          },
+          "colour": "money"
+        },
+        {
+          "id": "veg",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "dietary-needs.i-am-vegetarian"
           },
           "colour": "alert"
         },
         {
           "id": "avoid",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "massage-spa.please-avoid-this-area"
-          },
-          "colour": "money",
-          "replySetId": "avoid-area"
-        },
-        {
-          "id": "focus",
           "kind": "submenu",
-          "nodeId": "areas",
-          "labelKey": "boards.spa.focus",
-          "colour": "move"
-        },
-        {
-          "id": "pause",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "massage-spa.please-pause"
-          },
+          "nodeId": "avoid",
+          "labelKey": "boards.food.avoid",
           "colour": "alert"
         },
         {
-          "id": "stop",
+          "id": "isveg",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.please-stop"
+            "id": "food-ordering.is-this-vegetarian"
           },
-          "colour": "alert"
+          "colour": "alert",
+          "replySetId": "yes-no"
         },
         {
-          "id": "towel",
+          "id": "water",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "hotel-requests.another-towel-please"
+            "id": "food-ordering.water-please"
           },
-          "colour": "stay"
+          "colour": "money"
         },
         {
-          "id": "thanks",
+          "id": "togo",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "social-basics.thank-you"
+            "id": "food-ordering.to-go-please"
           },
-          "colour": "stay"
+          "colour": "money"
+        },
+        {
+          "id": "check",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "food-ordering.check-please"
+          },
+          "colour": "money"
         }
       ]
     },
-    "areas": {
-      "titleKey": "boards.spa.focusOn",
+    "avoid": {
+      "titleKey": "boards.food.avoidTitle",
       "buttons": [
         {
-          "id": "shoulders",
+          "id": "no-meat",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.focus-on-shoulders"
+            "id": "dietary-needs.no-meat"
           },
-          "colour": "move",
-          "labelKey": "boards.body.shoulders"
+          "colour": "alert"
         },
         {
-          "id": "back",
+          "id": "no-pork",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.focus-on-back"
+            "id": "dietary-needs.no-pork"
           },
-          "colour": "move",
-          "labelKey": "boards.body.back"
+          "colour": "alert"
         },
         {
-          "id": "neck",
+          "id": "no-seafood",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.focus-on-neck"
+            "id": "dietary-needs.no-seafood"
           },
-          "colour": "move",
-          "labelKey": "boards.body.neck"
+          "colour": "alert"
         },
         {
-          "id": "feet",
+          "id": "no-peanuts",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.focus-on-feet"
+            "id": "dietary-needs.no-peanuts"
           },
-          "colour": "move",
-          "labelKey": "boards.body.feet"
+          "colour": "alert"
         },
         {
-          "id": "gentler",
+          "id": "no-nuts",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.more-gently"
+            "id": "dietary-needs.no-nuts"
           },
-          "colour": "comm"
+          "colour": "alert"
         },
         {
-          "id": "stop",
+          "id": "no-eggs",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.please-stop"
+            "id": "dietary-needs.no-eggs"
+          },
+          "colour": "alert"
+        },
+        {
+          "id": "no-sesame",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "dietary-needs.no-sesame"
+          },
+          "colour": "alert"
+        },
+        {
+          "id": "not-spicy",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "dietary-needs.not-spicy"
           },
           "colour": "alert"
         }
@@ -166,54 +180,54 @@
     }
   },
   "replySets": {
-    "avoid-area": {
+    "yes-no": {
       "buttons": [
         {
-          "id": "reply-i-will-avoid-that-area",
+          "id": "yes-right",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.reply-i-will-avoid-that-area"
+            "id": "quick-responses.yes-right"
           }
         },
         {
-          "id": "reply-which-area-exactly",
+          "id": "no-not",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.reply-which-area-exactly"
+            "id": "quick-responses.no-not"
           }
         },
         {
-          "id": "reply-cannot-avoid-this-treatment",
+          "id": "not-possible",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.reply-cannot-avoid-this-treatment"
+            "id": "board-answers.not-possible"
           }
         },
         {
-          "id": "reply-does-it-hurt-there",
+          "id": "please-wait",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.reply-does-it-hurt-there"
+            "id": "board-answers.please-wait"
           }
         },
         {
-          "id": "reply-ask-supervisor",
+          "id": "i-do-not-know",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.reply-ask-supervisor"
+            "id": "social-basics.i-do-not-know"
           }
         },
         {
-          "id": "reply-none-of-these",
+          "id": "none-of-these",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.reply-none-of-these"
+            "id": "board-answers.none-of-these"
           }
         }
       ]

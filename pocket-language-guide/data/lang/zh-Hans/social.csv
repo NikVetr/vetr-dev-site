@@ -100,3 +100,14 @@ social-basics.okay-fine-i-am-okay,我没事,,wǒ méi shì,wɔ˧˩˧ meɪ˧˥ ʂ
 communication.please-write-it-in-roman-letters,请写拼音,,qǐng xiě pīnyīn,tɕʰiŋ˧˩˧ ɕjɛ˧˩˧ pʰin˥in˥,,2,zh-Hans-agent-v1;ipa=pinyin
 social-basics.politeness-particles,泰语的礼貌不在动词上，而在句尾的一个语气词：男性说话几乎句句以 khrap 收尾，女性用 kha，女性提问时还要把 kha 读成升调。一句话印哪一个都会对一半读者是错的，所以本表的句子一律不带，请按自己的性别补上。,,,,,2,zh-Hans-notes-v1
 board-answers.there-is-no-wait,不用等，现在就可以,,"bú yòng děng, xiànzài jiù kěyǐ","pu˧˥ jʊŋ˥˩ tɤŋ˧˩˧, ɕjɛn˥˩tsaɪ˥˩ tɕjoʊ˥˩ kʰɤ˧˩˧i˧˩˧",no need to wait; now is already fine,2,no-wait-v1;moe-dict;in-pack-neighbour;ipa=pinyin
+board-answers.none-of-these,这里面没有我想说的,,zhè lǐmiàn méiyǒu wǒ xiǎng shuō de,ʈʂɤ˥˩ li˧˩˧mjɛn˥˩ meɪ˧˥joʊ˧˩˧ wɔ˧˩˧ ɕjɑŋ˧˩˧ ʂwɔ˥ tɤ,what I want to say is not in here,2,board-answers-v1;in-pack-frame;ipa=pinyin
+board-answers.it-is-closed,关门了,,guānmén le,kwan˥mən˧˥ lɤ,the door is closed,2,board-answers-v1;ipa=pinyin
+board-answers.we-do-not-have-it,我们没有这个,,wǒmen méiyǒu zhège,wɔ˧˩˧mən meɪ˧˥joʊ˧˩˧ ʈʂɤ˥˩kɤ,,2,board-answers-v1;ipa=pinyin
+board-answers.card-or-cash,刷卡还是现金？,,shuākǎ háishi xiànjīn?,ʂwa˥kʰa˧˩˧ xaɪ˧˥ʂɨ ɕjɛn˥˩tɕin˥,swipe-card or cash,2,board-answers-v1;ipa=pinyin
+board-answers.please-wait,请稍等,,qǐng shāo děng,tɕʰiŋ˧˩˧ ʂɑʊ˥ tɤŋ˧˩˧,please wait briefly,2,board-answers-v1;ipa=pinyin
+board-answers.it-is-over-there,在那边,,zài nàbiān,tsaɪ˥˩ na˥˩pjɛn˥,,2,board-answers-v1;ipa=pinyin
+board-answers.i-will-show-you,我带路,,wǒ dàilù,wɔ˧˩˧ taɪ˥˩lu˥˩,I lead the way,2,board-answers-v1;zh-wiktionary;ipa=pinyin
+board-answers.how-many,要多少？,,yào duōshao?,jɑʊ˥˩ twɔ˥ʂɑʊ,want how much,2,board-answers-v1;ipa=pinyin
+board-answers.not-possible,这个没办法,,zhège méi bànfǎ,ʈʂɤ˥˩kɤ meɪ˧˥ pan˥˩fa˧˩˧,no way to do this,2,board-answers-v1;zh-wiktionary;ipa=pinyin
+board-answers.say-it-again,麻烦再说一遍,,máfan zài shuō yí biàn,ma˧˥fan tsaɪ˥˩ ʂwɔ˥ i˧˥ pjɛn˥˩,"sorry to trouble you, say it once more",2,board-answers-v1;ipa=pinyin
+board-answers.i-will-write-it-down,我写下来,,wǒ xiě xiàlai,wɔ˧˩˧ ɕjɛ˧˩˧ ɕja˥˩laɪ,,2,board-answers-v1;ipa=pinyin

@@ -32,6 +32,10 @@
     <button type="button" id="board-up" class="board-up" hidden>
       <span aria-hidden="true">←</span> <span id="board-up-label"></span>
     </button>
+    <!-- Which conversation this is. The page's only `h1`, because on a board the
+         topic *is* the page -- and it sits in the bar rather than the header so the
+         brand line stays one quiet row. -->
+    <h1 class="board-title" id="board-title"></h1>
     <div class="spacer"></div>
     <!-- Owner-only, both of them. `ui/conversation.js` hides them on every view but
          the grid, and leaves the settings control hidden entirely for a pair whose
@@ -40,6 +44,10 @@
     <button type="button" id="board-edit" class="board-edit" hidden></button>
   </div>
   <div id="board-grid" class="board-grid" aria-busy="true"></div>
+  <!-- What the tinted cells and their ↩ mean, said only on a grid that has one. A
+       mark nobody can decode is decoration; the `title` attribute that carried this
+       is invisible to a finger. -->
+  <p id="board-legend" class="board-legend"></p>
   <p id="board-status" class="board-status" role="status"></p>
 </main>
 

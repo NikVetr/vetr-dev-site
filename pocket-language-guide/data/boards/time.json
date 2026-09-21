@@ -1,0 +1,374 @@
+{
+  "schemaVersion": 1,
+  "id": "time",
+  "titleKey": "boards.time.title",
+  "rootNodeId": "main",
+  "pairs": [
+    "zh-Hans__en"
+  ],
+  "nodes": {
+    "main": {
+      "buttons": [
+        {
+          "id": "now",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-scheduling.what-time-is-it"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "trail-transport.how-long-is-the-wait"
+          },
+          "colour": "stay",
+          "replySetId": "how-long"
+        },
+        {
+          "id": "takes",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-scheduling.how-long-does-it-take"
+          },
+          "colour": "stay",
+          "replySetId": "how-long"
+        },
+        {
+          "id": "minutes",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-scheduling.how-many-minutes"
+          },
+          "colour": "stay",
+          "replySetId": "how-long"
+        },
+        {
+          "id": "opens",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-scheduling.what-time-does-it-open"
+          },
+          "colour": "stay",
+          "replySetId": "when"
+        },
+        {
+          "id": "closes",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-scheduling.what-time-does-it-close"
+          },
+          "colour": "stay",
+          "replySetId": "when"
+        },
+        {
+          "id": "meet",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-scheduling.what-time-should-we-meet"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "change",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-scheduling.can-we-change-the-time"
+          },
+          "colour": "stay",
+          "replySetId": "yes-no"
+        },
+        {
+          "id": "convenient",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-scheduling.when-is-convenient"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "day",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-scheduling.what-day-is-it-today"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "when",
+          "kind": "submenu",
+          "nodeId": "when",
+          "labelKey": "boards.time.when",
+          "colour": "comm"
+        }
+      ]
+    },
+    "when": {
+      "titleKey": "boards.time.whenTitle",
+      "buttons": [
+        {
+          "id": "today",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-words.today"
+          },
+          "colour": "comm"
+        },
+        {
+          "id": "tomorrow",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-words.tomorrow"
+          },
+          "colour": "comm"
+        },
+        {
+          "id": "this-week",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-words.this-week"
+          },
+          "colour": "comm"
+        },
+        {
+          "id": "next-week",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-words.next-week"
+          },
+          "colour": "comm"
+        },
+        {
+          "id": "morning",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-words.morning"
+          },
+          "colour": "comm"
+        },
+        {
+          "id": "afternoon",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-words.afternoon"
+          },
+          "colour": "comm"
+        },
+        {
+          "id": "evening",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-words.evening"
+          },
+          "colour": "comm"
+        },
+        {
+          "id": "night",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-words.night"
+          },
+          "colour": "comm"
+        }
+      ]
+    }
+  },
+  "replySets": {
+    "how-long": {
+      "buttons": [
+        {
+          "id": "nowait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.there-is-no-wait"
+          }
+        },
+        {
+          "id": "d5m",
+          "kind": "value",
+          "value": {
+            "amount": 5,
+            "unit": "minute"
+          }
+        },
+        {
+          "id": "d10m",
+          "kind": "value",
+          "value": {
+            "amount": 10,
+            "unit": "minute"
+          }
+        },
+        {
+          "id": "d15m",
+          "kind": "value",
+          "value": {
+            "amount": 15,
+            "unit": "minute"
+          }
+        },
+        {
+          "id": "d30m",
+          "kind": "value",
+          "value": {
+            "amount": 30,
+            "unit": "minute"
+          }
+        },
+        {
+          "id": "d1h",
+          "kind": "value",
+          "value": {
+            "amount": 1,
+            "unit": "hour"
+          }
+        },
+        {
+          "id": "d2h",
+          "kind": "value",
+          "value": {
+            "amount": 2,
+            "unit": "hour"
+          }
+        },
+        {
+          "id": "other",
+          "kind": "entry",
+          "entry": "duration"
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "yes-no": {
+      "buttons": [
+        {
+          "id": "yes-right",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.yes-right"
+          }
+        },
+        {
+          "id": "no-not",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.no-not"
+          }
+        },
+        {
+          "id": "not-possible",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.not-possible"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "when": {
+      "buttons": [
+        {
+          "id": "it-is-closed",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.it-is-closed"
+          }
+        },
+        {
+          "id": "i-will-write-it-down",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-write-it-down"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    }
+  }
+}

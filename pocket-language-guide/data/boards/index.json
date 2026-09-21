@@ -1,6 +1,48 @@
 {
   "boards": [
     {
+      "id": "intro",
+      "titleKey": "boards.intro.title",
+      "pairs": [
+        "zh-Hans__en"
+      ]
+    },
+    {
+      "id": "directions",
+      "titleKey": "boards.directions.title",
+      "pairs": [
+        "zh-Hans__en"
+      ]
+    },
+    {
+      "id": "transport",
+      "titleKey": "boards.transport.title",
+      "pairs": [
+        "zh-Hans__en"
+      ]
+    },
+    {
+      "id": "food",
+      "titleKey": "boards.food.title",
+      "pairs": [
+        "zh-Hans__en"
+      ]
+    },
+    {
+      "id": "shopping",
+      "titleKey": "boards.shopping.title",
+      "pairs": [
+        "zh-Hans__en"
+      ]
+    },
+    {
+      "id": "time",
+      "titleKey": "boards.time.title",
+      "pairs": [
+        "zh-Hans__en"
+      ]
+    },
+    {
       "id": "spa",
       "titleKey": "boards.spa.title",
       "pairs": [

@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "id": "transport",
+  "titleKey": "boards.transport.title",
+  "rootNodeId": "main",
+  "pairs": [
+    "zh-Hans__en"
+  ],
+  "nodes": {
+    "main": {
+      "buttons": [
+        {
+          "id": "takeme",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "taxi.please-take-me-here"
+          },
+          "colour": "move"
+        },
+        {
+          "id": "meter",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "taxi.please-use-the-meter"
+          },
+          "colour": "move"
+        },
+        {
+          "id": "stophere",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "taxi.please-stop-here"
+          },
+          "colour": "alert"
+        },
+        {
+          "id": "waitforme",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "taxi.can-you-wait-for-me-here"
+          },
+          "colour": "move",
+          "replySetId": "yes-no"
+        },
+        {
+          "id": "tickets",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "transit-rides.two-tickets"
+          },
+          "colour": "money"
+        },
+        {
+          "id": "platform",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "transit-rides.which-platform"
+          },
+          "colour": "move"
+        },
+        {
+          "id": "nextone",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "transit-rides.what-time-is-the-next-one"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "direct",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "transit-rides.is-this-direct"
+          },
+          "colour": "move",
+          "replySetId": "yes-no"
+        },
+        {
+          "id": "transfer",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "transit-rides.do-i-need-to-transfer"
+          },
+          "colour": "move",
+          "replySetId": "yes-no"
+        },
+        {
+          "id": "getoff",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "transit-rides.please-tell-me-where-to-get-off"
+          },
+          "colour": "move"
+        },
+        {
+          "id": "hurry",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "transit-rides.i-am-in-a-hurry"
+          },
+          "colour": "alert"
+        },
+        {
+          "id": "delayed",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "transit-rides.is-it-delayed"
+          },
+          "colour": "stay",
+          "replySetId": "yes-no"
+        }
+      ]
+    }
+  },
+  "replySets": {
+    "yes-no": {
+      "buttons": [
+        {
+          "id": "yes-right",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.yes-right"
+          }
+        },
+        {
+          "id": "no-not",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.no-not"
+          }
+        },
+        {
+          "id": "not-possible",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.not-possible"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    }
+  }
+}
