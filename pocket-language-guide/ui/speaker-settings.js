@@ -260,7 +260,16 @@ export function personalSection({ gather, apply, forget, read, save }) {
     // **Refused whole or applied whole.** A reader who cannot tell which half of an
     // import landed is worse off than one who was told it did not.
     if (!got.ok) {
-      status.textContent = `${t('personal.refused')} ${got.problems.join('; ')}`;
+      // The sentence is translated; the diagnostics under it are not, and cannot
+      // usefully be -- they name keys and indices out of the reader's own file
+      // (`placement spa/main: not a list`). Left in English, but *tagged* as English:
+      // untagged, a Hebrew or Urdu interface reorders a Latin string full of brackets
+      // and colons into nonsense, and a screen reader says it with the wrong phonology.
+      status.replaceChildren(
+        t('personal.refused'),
+        ' ',
+        el('span', { lang: 'en', dir: 'ltr', text: got.problems.join('; ') }),
+      );
       status.classList.add('speaker-refused');
     } else {
       status.classList.remove('speaker-refused');

@@ -104,18 +104,55 @@ if (unused.length) {
   for (const k of unused) console.log(`  ${k}`);
 }
 
+/**
+ * Prose left in English counts as translated, which is how a gap hides.
+ *
+ * A key copied from `en.json` into a catalogue rather than left absent is *present*,
+ * so coverage counts it and nothing ever reports it again: four sentences under
+ * `format.headSpanTitle` sat in English in nineteen catalogues at 93% coverage.
+ * Leaving the key out would have been visible; copying it was not.
+ *
+ * Three words is the line, and it needs no allowlist. Below it sit every value that
+ * is *legitimately* the same in both languages -- the romanisation standards
+ * `ALA-LC` and `BGN/PCGN`, French "Communication", a pattern like `{source} → {target}`
+ * that has no words in it at all. Above it, a sentence.
+ * @param {string} value
+ */
+function proseWords(value) {
+  return value.replace(/\{[^}]*\}|[^A-Za-z ]/g, ' ').split(/\s+/).filter(Boolean).length;
+}
+
 // Coverage of the other catalogues, which is information rather than a fault.
 const dir = await readdir(join(ROOT, 'data/i18n'));
 const others = dir.filter((f) => f.endsWith('.json') && f !== 'en.json').sort();
-if (others.length) console.log('\ntranslation coverage:');
+/** @type {Map<string, string[]>} */ const stillEnglish = new Map();
+/** Held back so the coverage table stays the last thing printed, and so the
+ * one-line summary `check_all.mjs` shows is a number rather than a tail of a list. */
+/** @type {string[]} */ const coverage = [];
 for (const file of others) {
   const overlay = JSON.parse(await readFile(join(ROOT, 'data/i18n', file), 'utf8'));
   const have = [...keys].filter((k) => typeof overlay[k] === 'string').length;
+  for (const k of keys) {
+    if (overlay[k] === english[k] && proseWords(english[k]) >= 3) {
+      if (!stillEnglish.has(k)) stillEnglish.set(k, []);
+      /** @type {string[]} */ (stillEnglish.get(k)).push(file.replace('.json', ''));
+    }
+  }
   const strayKeys = Object.keys(overlay).filter((k) => !k.startsWith('_') && !keys.has(k));
   const pct = ((have / keys.size) * 100).toFixed(0);
-  console.log(`  ${file.replace('.json', '').padEnd(9)} ${have}/${keys.size}  ${pct}%`
+  coverage.push(`  ${file.replace('.json', '').padEnd(9)} ${have}/${keys.size}  ${pct}%`
     + (strayKeys.length ? `  (${strayKeys.length} keys not in en.json)` : ''));
 }
+
+if (stillEnglish.size) {
+  const total = [...stillEnglish.values()].reduce((n, l) => n + l.length, 0);
+  console.log(`\n${total} values still in English, over ${stillEnglish.size} keys:`);
+  for (const [k, langs] of [...stillEnglish].sort((a, b) => b[1].length - a[1].length)) {
+    console.log(`  ${String(langs.length).padStart(3)}  ${k.padEnd(30)} ${langs.join(' ')}`);
+  }
+}
+if (coverage.length) console.log('\ntranslation coverage:');
+for (const line of coverage) console.log(line);
 
 // A missing key is a defect in shipped behaviour -- the reader sees the bare key --
 // so it fails the build. An unused key only wastes a translator's time, which is

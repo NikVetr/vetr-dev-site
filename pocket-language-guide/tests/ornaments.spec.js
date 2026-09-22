@@ -125,3 +125,28 @@ test('the lock screen furniture is drawn in the preview and never in an export',
   expect(inPlan).toBe(false);
   expect(errors).toEqual([]);
 });
+
+test('the lock screen shows the reader’s own date, not a translated one', async ({ page }) => {
+  // The clock and date are sample data, not interface text, so they come from CLDR
+  // rather than from 52 hand-written strings -- see `lockSample` in `ui/preview.js`.
+  // Two things have to hold and neither is obvious: a locale `Intl` knows must get
+  // its own notation, and a language `Intl` has never heard of must fall back to the
+  // catalogue rather than being silently answered in the runtime's own language,
+  // which is what `Intl` does by default and what `supports` exists to refuse.
+  for (const [source, wants] of /** @type {[string,RegExp][]} */ ([
+    ['ja', /9月15日月曜日/],
+    // Quenya is not a locale and never will be, so this is the English floor.
+    ['qya', /September/],
+  ])) {
+    await page.goto(`/customize.html?target=es&source=${source}`);
+    await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+    await page.getByRole('radio', { name: source === 'ja' ? 'スマホ' : 'Phone screen' }).click();
+    await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });
+    // The model, by its own name: a phone is called an iPhone in every catalogue,
+    // which is what makes this step locale-independent while the preset above is not.
+    await page.getByRole('radio', { name: /iPhone 12-17/ }).click();
+    const lock = page.locator('.face.focused > svg[aria-hidden="true"]');
+    await expect(lock).toHaveCount(1, { timeout: 90_000 });
+    await expect(lock.locator('text').first()).toHaveText(wants);
+  }
+});

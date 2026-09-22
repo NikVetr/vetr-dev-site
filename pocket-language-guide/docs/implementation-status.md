@@ -2377,3 +2377,136 @@ the neighbouring `board.minutes` now says *Minit*, so two buttons in one widget
 disagree; plus *Donasi*, *lembar*, *jaringan*, *setelan* and a `preview.duplexNote`
 that is Indonesian end to end. That is a language job and goes to the next wave, not
 into this commit.
+
+## Batch L — the rest of the interface, and what the translators found
+
+### 47 keys behind the menu, in fifty languages
+
+What the ☰ menu on the board still said in English: "Edit buttons", "Settings", and
+behind them two panels headed "Your own buttons" and "Your own phrases and settings".
+Five families — `editor.*`, `personal.*`, `speaker.*`, `speech.*`, `settings.*` — and
+unlike the board chrome of the previous batch these are not labels. They are the
+privacy promise, the delete confirmation and the data-loss warning, which is why the
+brief they were given names three of them as load-bearing and forbids softening:
+
+> A translation that renders *"nothing is sent anywhere"* as *"your data is safe"* is
+> a worse statement than the English, because it is the wording a service that *does*
+> transmit would also use.
+
+Fifty of the 52 catalogues now sit at **494/532 (93%)**, up from 447. Quenya is
+partial by design and Klingon declines what its published lexicon cannot say.
+
+**The session limit killed four of the six agents mid-flight**, which is worth
+recording because the recovery was cheap and the reason it was cheap is a line in the
+brief. Nothing was corrupted — four groups had already finished — and the agent that
+died having fully drafted Amharic and Arabic had written its draft to disk as it went,
+because the brief tells it to. That draft was handed to a review pass rather than
+retranslated, and the review is what earned its keep:
+
+- **Amharic `ቁልፍ` for "button"** — already spent. The corpus glosses
+  `building-words.key` as ቁልፍ, and so do the hotel key-card and toilet-key rows, and
+  `am.json`'s own `_note` uses it for "catalogue key". Exactly the hazard the brief
+  names with the Greek πίνακας/πινακίδα pair. Now `አዝራር`.
+- **Amharic wrote `ስክሪን` for "screen"** where the file already says `መስኮት` three
+  times, and used the ፀ series in five keys where `am.json` uses ጸ sixty-four times
+  and ፀ never.
+- **Arabic `editor.confirmDeleteMany` used the 3–10 plural.** `ui/board-editor.js:167`
+  only fires that string when the count is above one, so **two is the commonest case**
+  and Arabic wants the dual there. Recast around an invariant head with the count in a
+  parenthetical, which is that file's own documented dodge.
+- **Arabic `speaker.unspecified` ended in a masculine imperative** — one gendered token
+  in the one string whose entire job is not to assume the reader's gender.
+
+The re-run used four agents of two or three languages each rather than six of eight to
+ten. Smaller units are the lever, not lower concurrency: a limit then costs a fraction
+of a group instead of most of a wave.
+
+### The lock screen was asking 52 people to write a date
+
+`preview.lockDate` and `preview.lockTime` are sample data drawn into the lock-screen
+mock — "Monday 15 September" and the canonical 9:41 — and they were about to be handed
+to 52 translators. They are not interface text. Every locale writes a date in its own
+order and a clock in its own cycle, CLDR knows both, and asking for them by hand is 52
+chances to put the month before the day in a language that does not, for no
+information the platform was not already holding.
+
+So `lockSample` in `ui/preview.js` derives both, and reuses `supports()` from
+`core/quantity.js` rather than writing a second copy of the same refusal — because
+`Intl` answers a tag it has never heard of in the *runtime's* language rather than
+admitting it cannot, which would put an English date on a Klingon card. Japanese now
+reads 9月15日月曜日, Finnish `maanantai 15. syyskuuta`, Korean `AM 9:41`; Klingon and
+Quenya fall to the English in the catalogue, which stays as the floor.
+
+### Half a message in the reader's language and half in English
+
+`personal.refused` is a translated sentence — "Not loaded — nothing was changed:" —
+concatenated with `got.problems.join('; ')`, and those problems are hard-coded English
+in `core/personal.js`: `placement spa/main: not a list`, `phrase p1: needs a sentence
+on both sides`. Seventeen of them.
+
+Translating them would be wrong. They name keys and indices out of the reader's own
+file and there is nothing in them a traveller can act on. But leaving them untagged is
+also wrong, and visibly so in four of the languages this batch just finished: an
+untagged Latin string full of brackets and colons reorders into nonsense in a Hebrew,
+Arabic, Urdu or Persian interface, and a screen reader pronounces it with the wrong
+phonology. They are now a `<span lang="en" dir="ltr">` under the translated sentence —
+still English, but *saying* it is English.
+
+The refusal path had no test at all, which is the half that matters: a reader who
+cannot tell whether an import half-landed is worse off than one who was told it did
+not. It has one now, and it checks that nothing landed as well as what was said.
+
+### A note that said the work was done, and a CSV that said otherwise
+
+`tlh.json`'s `_board_note` recorded five Klingon section titles as written. They were
+never in `data/registry/section-titles/tlh.csv`, which had not changed since
+`8137e9e9` — the note landed and the data edit did not. The gap survived because a
+`_note` is prose that nothing checks against the file it describes, and because
+nobody had reason to re-read it. Both halves exist now, and one of the five changed on
+the way in: `accessibility` is `naw'`, TKD's noun for *access*, not the `vIHlaHmeH`
+("in order to be able to move") the note had planned — two of that section's nine rows
+are `jIQoylaHchu'be'` and `jIleghlaHchu'be'`, hearing and sight, which a purpose clause
+about moving does not head.
+
+The same pass narrowed a claim the note made too strongly. "Klingon has no attested
+word for tax" is wrong — `{rup}` is in TKD. It is a *verb*; there is no noun for a tax
+and none for a refund, which is the real reason `tax-refund` stays English, and now
+the stated one.
+
+### Quenya: 26 of 47, and the refusals are the deliverable
+
+Quenya went 135/532 → 161/532 and the twenty-one omissions are sorted by *why*, which
+is the part worth keeping. Most are a missing word — Late Quenya has `tecil` "pen" and
+`sarmë` "writing" and no verb *to write*; `hep-` "save" is a reconstruction. But three
+were refused for a better reason than absence:
+
+- **`editor.removeHere` is indistinguishable from `editor.delete`** without a word for
+  *screen*, and two buttons under one label is worse than one button in English.
+- **`personal.forget` would be `á aucirë ilya`** — which is already `studio.allOff`,
+  word for word. One turns print sections off; the other destroys everything the
+  reader has written. The destructive one stays English.
+- **`settings.*` would be `cilmë` "choice"**, already spent on `quick.optionsLabel`
+  and `board.menu`.
+
+Nineteen of the 43 section titles Quenya still lacks are sections with **no Quenya rows
+at all**, where a heading would head an empty panel. Four more are collisions rather
+than gaps: English has two names where Quenya has one — quick-responses would also be
+`hanquentar`, trail-landmarks also `tengwar`.
+
+And the audit corrected the catalogue's own note: `qya.json` listed `véra` among
+twelve absent roots, but the adjective *véra* "personal, private, own" is attested
+unmarked at PM/340.2707, and the whole `editor.*` family now turns on it.
+
+### Prose left in English counts as translated, which is how a gap hides
+
+Four sentences under `format.headSpanTitle` were sitting in English in **nineteen
+catalogues that report 93% coverage**. They were not missing — they had been *copied*
+from `en.json` rather than left absent, so every coverage count since has called them
+done. Leaving a key out is visible; copying it is not.
+
+`check_i18n.mjs` now reports any value byte-identical to English whose prose runs to
+three words or more, and the threshold needs no allowlist to be right. Below it sit
+every value that legitimately matches: the romanisation standards `ALA-LC` and
+`BGN/PCGN`, French *Communication*, and a pattern like `{source} → {target}` with no
+words in it at all. Above it, a sentence somebody meant to translate. The report finds
+exactly the 76 and nothing else.

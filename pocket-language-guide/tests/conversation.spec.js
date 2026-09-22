@@ -625,6 +625,39 @@ test('removing a button from a screen is not deleting the phrase', async ({ page
   expect(Object.values(kept.phrases ?? {})).toHaveLength(1);
 });
 
+test('the menu panels hold the longest language, not only English', async ({ page }) => {
+  // Every panel behind the menu was laid out against English and then translated
+  // into 51 languages, several of which run half as long again. Javanese is the
+  // worst case in this catalogue on all six of the long strings -- `personal.lede`
+  // 191 characters against English's 116, `speaker.lede` 307 against 238 -- so it
+  // is the one that says whether the panels were sized or merely fitted. Re-derive
+  // with a max over `data/i18n/*.json` if the catalogues change shape.
+  for (const [w, h] of /** @type {[number,number][]} */ ([[390, 844], [360, 640], [1440, 900]])) {
+    for (const item of [0, 1]) {
+      await page.setViewportSize({ width: w, height: h });
+      await page.goto('/conversation.html?target=zh-Hans&source=jv&board=spa');
+      await expect(page.locator('.board-cell').first()).toBeVisible();
+      await page.locator('#board-menu').click();
+      // By position, not by name: the names are Javanese here, which is the point.
+      await page.locator('.board-menu-panel button').nth(item).click();
+      const panel = page.locator('dialog[open]').last();
+      await expect(panel).toBeVisible();
+      const held = await panel.evaluate((d) => {
+        const r = d.getBoundingClientRect();
+        return {
+          past: Math.round(Math.max(r.bottom - innerHeight, -r.top)),
+          // A panel too tall for the screen must scroll rather than run off it.
+          scrolls: d.scrollHeight > d.clientHeight + 1,
+          fits: d.scrollHeight <= d.clientHeight + 1,
+        };
+      });
+      const where = `${w}x${h} panel ${item}`;
+      expect(held.past, `${where}: off the screen`).toBeLessThanOrEqual(0);
+      expect(held.fits || held.scrolls, `${where}: content lost`).toBe(true);
+    }
+  }
+});
+
 test('a board button never changes what a sheet prints', async ({ page }) => {
   // **The semantic boundary in §5.2.** The studio keeps `plg.edits.<pair>`, whose
   // flags decide what is printed. Making a button to say "no peanuts" to a waiter
@@ -1091,6 +1124,55 @@ test('the beacon is seen from across a road, and stays under the flash limit', a
   await expect(page.locator('[data-button="sos"]')).toBeVisible();
 });
 
+test('a bad import changes nothing, and does not pretend to translate why', async ({ page }) => {
+  // The export half of this is covered below; the refusal half was not covered at
+  // all, which is the half that matters -- a reader who cannot tell whether an
+  // import half-landed is worse off than one who was told it did not.
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=spa');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.evaluate(() => localStorage.setItem('plg.boards', JSON.stringify({
+    schemaVersion: 1,
+    phrases: {
+      keep: {
+        id: 'keep', label: 'mine', owner: 'Mine', listener: '我的',
+        pair: 'zh-Hans__en', created: '2026-09-21T00:00:00.000Z',
+      },
+    },
+    placements: { 'spa/main': ['keep'] },
+  })));
+  await page.reload();
+  await expect(page.locator('[data-button="keep"]')).toBeVisible();
+
+  await fromMenu(page, 'Settings');
+  const dialog = page.locator('dialog.speaker-settings');
+  await expect(dialog).toBeVisible();
+  // A package whose placement names a board this build does not have.
+  await dialog.locator('input[type="file"]').setInputFiles({
+    name: 'broken.json',
+    mimeType: 'application/json',
+    buffer: Buffer.from(JSON.stringify({
+      version: 1,
+      boards: { phrases: {}, placements: { 'no-such-board/main': ['ghost'] } },
+    })),
+  });
+
+  const status = dialog.locator('[role="status"]');
+  await expect(status).toContainText('Not loaded');
+  // The sentence is translated; the diagnostic under it names a key out of the
+  // reader's own file and is not. It has to say which it is, or a right-to-left
+  // interface reorders the brackets and colons into nonsense and a screen reader
+  // pronounces English with the wrong phonology.
+  const detail = status.locator('span[lang="en"]');
+  await expect(detail).toHaveAttribute('dir', 'ltr');
+  await expect(detail).toContainText('no-such-board');
+
+  // And nothing landed: refused whole, not in part.
+  await page.keyboard.press('Escape');
+  await expect(page.locator('[data-button="keep"]')).toBeVisible();
+  const stored = await page.evaluate(() => JSON.parse(localStorage.getItem('plg.boards') ?? '{}'));
+  expect(Object.keys(stored.phrases ?? {})).toEqual(['keep']);
+});
+
 test('personal data can be carried off the device, and deleted from it', async ({ page }) => {
   // §5.4. There is no account and no server, so the only copy of someone's own
   // phrases is on one device -- which means there has to be a way to get it off.
@@ -1469,11 +1551,15 @@ test('a board is a board at every size, not a window full of columns', async ({ 
     const shape = await page.evaluate(() => {
       const cells = [...document.querySelectorAll('.board-cell')];
       const box = cells[0].getBoundingClientRect();
+      const grid = /** @type {HTMLElement} */ (document.querySelector('.board-grid'))
+        .getBoundingClientRect();
       return {
         columns: new Set(cells.map((c) => Math.round(c.getBoundingClientRect().left))).size,
         aspect: box.width / box.height,
         past: Math.round(Math.max(...cells.map((c) => c.getBoundingClientRect().bottom)))
           - innerHeight,
+        gridWidth: Math.round(grid.width),
+        offCentre: Math.round(Math.abs(grid.left - (innerWidth - grid.right))),
       };
     });
     // Never one column: that is twelve rows and a board nobody can take in at a
@@ -1484,6 +1570,11 @@ test('a board is a board at every size, not a window full of columns', async ({ 
     expect(shape.aspect, name).toBeGreaterThan(0.5);
     // And the whole grid is on the screen, which is what the definite height bought.
     expect(shape.past, name).toBeLessThanOrEqual(0);
+    // The other half of the wide-screen answer: the grid is capped and centred
+    // rather than stretched. Without the cap the two ends of a row on a 1680px
+    // monitor are an arm's length apart, which is not a board either.
+    expect(shape.gridWidth, name).toBeLessThanOrEqual(Math.min(w, 800));
+    expect(shape.offCentre, name).toBeLessThanOrEqual(1);
   }
 
   // The answer grid is the same kind of grid on the same kind of screen, and was the

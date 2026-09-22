@@ -11,7 +11,8 @@
 // the strip is one stop and the hit layer is one stop, each walked with the arrow
 // keys -- the same contract the settings panels use, hence the shared key handling.
 
-import { t } from './i18n.js';
+import { supports } from '../core/quantity.js';
+import { t, uiLanguage } from './i18n.js';
 import { nextIndex } from './keys.js';
 
 /**
@@ -104,6 +105,36 @@ export function renderFaces(input) {
 }
 
 /**
+ * The date and clock on the lock-screen mock, in the interface language's notation.
+ *
+ * Not a translation. Every locale writes a date in its own order and a clock in its
+ * own cycle, and CLDR already knows both -- so asking fifty-two people to hand-write
+ * "Monday 15 September" is fifty-two chances to put the month before the day in a
+ * language that does not, for no information the platform was not already holding.
+ * Same argument the keypad's unit words make, and it reuses their refusal: `supports`
+ * is asked first, because `Intl` answers a tag it has never heard of in the runtime's
+ * own language rather than admitting it cannot.
+ *
+ * The catalogue keeps the English as the floor under Klingon and Quenya, which are
+ * not locales and never will be. The instant is fixed and formatted in UTC, so the
+ * clock reads 9:41 wherever the page is opened.
+ */
+function lockSample() {
+  const locale = uiLanguage();
+  if (!supports(locale, 'time')) {
+    return { date: t('preview.lockDate'), time: t('preview.lockTime') };
+  }
+  const when = new Date(Date.UTC(2025, 8, 15, 9, 41));
+  const utc = { timeZone: 'UTC' };
+  return {
+    date: new Intl.DateTimeFormat(locale,
+      { ...utc, weekday: 'long', day: 'numeric', month: 'long' }).format(when),
+    time: new Intl.DateTimeFormat(locale,
+      { ...utc, hour: 'numeric', minute: '2-digit' }).format(when),
+  };
+}
+
+/**
  * The lock screen's own furniture, drawn over the reserved bands — **preview only**.
  *
  * A phone preset reserves a strip at the top and bottom so no word on the card ends
@@ -179,8 +210,9 @@ export function lockScreenPreview(plan) {
     // band rather than off the page, so a bigger reserve draws a bigger clock and
     // the preview keeps telling the truth about how much room it took.
     const dateY = top * 0.26;
-    label(t('preview.lockDate'), dateY, Math.min(top * 0.13, W / 16));
-    label(t('preview.lockTime'), top * 0.66, Math.min(top * 0.42, W / 4));
+    const lock = lockSample();
+    label(lock.date, dateY, Math.min(top * 0.13, W / 16));
+    label(lock.time, top * 0.66, Math.min(top * 0.42, W / 4));
     // Two widget tiles on the row under the clock, which is where iOS puts them.
     const tileH = top * 0.17;
     const tileW = W * 0.3;
