@@ -28,7 +28,7 @@ test('answering once changes the wording on the card', async ({ page }) => {
   await expect(notice).toHaveText(/not set/);
   expect(await drawn(page)).toContain('\u0437\u0430\u0431\u043b\u0443\u0434\u0438\u043b\u0441\u044f');
 
-  await page.getByRole('button', { name: 'How you speak' }).click();
+  await page.getByRole('button', { name: 'Settings' }).click();
   const dialog = page.locator('dialog.speaker-settings');
   await expect(dialog).toBeVisible();
   // Only the question Russian actually asks. A settings screen that asks everyone
@@ -55,10 +55,19 @@ test('answering once changes the wording on the card', async ({ page }) => {
   expect(await drawn(page)).toContain('\u0437\u0430\u0431\u043b\u0443\u0434\u0438\u043b\u0430\u0441\u044c');
 });
 
-test('a pair that asks nothing shows no control', async ({ page }) => {
-  // Thirty-one of the fifty-three languages declare no axis. For those pairs the
-  // field does not exist, rather than opening onto an empty form.
+test('a pair that asks nothing still offers settings, and asks nothing', async ({ page }) => {
+  // Thirty-one of the fifty-three languages declare no axis, and for those pairs
+  // there is no voice question to put. **The control is still there**, because the
+  // same dialog holds the reader's own phrases and a Save-a-copy button that only
+  // appears for Russian readers is a backup nobody can find. The dialog says for
+  // itself that there is nothing to ask.
   await page.goto('/sheet.html?target=zh-Hans&source=en');
   await expect(page.locator('.face').first()).toBeVisible({ timeout: 120_000 });
-  await expect(page.getByRole('button', { name: 'How you speak' })).toHaveCount(0);
+  await page.getByRole('button', { name: 'Settings' }).click();
+  const dialog = page.locator('dialog.speaker-settings');
+  await expect(dialog).toBeVisible();
+  // No axis question at all -- but the dialog still exists, for the section below.
+  await expect(dialog.locator('.speaker-axis')).toHaveCount(0);
+  await expect(dialog.getByText(/does not change a phrase|nothing to set/i)).toBeVisible();
+  await expect(dialog.getByRole('button', { name: 'Save a copy' })).toBeVisible();
 });

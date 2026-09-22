@@ -200,3 +200,38 @@ export function importSheetCsv(text, corpus, current) {
 
   return { edits, updated, added, problems };
 }
+
+/**
+ * Every pair's saved sheet edits, and the way to put them back.
+ *
+ * Keyed by pair, which is how they are stored: a reader who has corrected a Russian
+ * respelling and a Japanese gloss has two separate things, and a portable copy has
+ * to carry both without merging them.
+ */
+export function allEdits() {
+  /** @type {Record<string, unknown>} */ const out = {};
+  for (const pair of store.keys(`${EDIT_KEY}.`)) {
+    const raw = store.get(pair);
+    if (!raw) continue;
+    try {
+      out[pair.slice(EDIT_KEY.length + 1)] = JSON.parse(raw);
+    } catch {
+      // A corrupt entry is not carried forward. It cannot be used here either.
+    }
+  }
+  return out;
+}
+
+/** @param {Record<string, unknown>} edits keyed by pair */
+export function restoreEdits(edits) {
+  for (const [pair, value] of Object.entries(edits)) {
+    store.set(`${EDIT_KEY}.${pair}`, JSON.stringify(value));
+  }
+}
+
+/** Drop every pair's edits. @returns {number} how many pairs were cleared */
+export function forgetEdits() {
+  const keys = [...store.keys(`${EDIT_KEY}.`)];
+  for (const key of keys) store.remove(key);
+  return keys.length;
+}

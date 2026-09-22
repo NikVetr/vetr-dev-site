@@ -1,6 +1,6 @@
 concept_id,text,text_alt,romanization_rtgs,ipa,literal,confidence,provenance
 social-basics.hello,สวัสดี,สวัสดีครับ/ค่ะ,sawatdi,sa˨˩wat˦˥diː˧,,2,th-agent-v1;ipa=thaig2p
-social-basics.hello-polite,สวัสดีครับ/ค่ะ,,sawatdi khrap / kha,sa˨˩wat˦˥diː˧ kʰrap˦˥ / kʰaʔ˨˩,"-krap if male, -kha if female",2,th-agent-v1;ipa=thaig2p
+social-basics.hello-polite,สวัสดีครับ,,sawatdi khrap,,,2,th-agent-v1;ipa=thaig2p
 social-basics.good-morning,สวัสดีตอนเช้า,อรุณสวัสดิ์,sawatdi ton chao,sa˨˩wat˦˥diː˧ tɔːn˧tɕʰaw˦˥,,2,th-agent-v1;ipa=thaig2p
 social-basics.good-evening,สวัสดีตอนเย็น,สายัณห์สวัสดิ์,sawatdi ton yen,sa˨˩wat˦˥diː˧ tɔːn˧jen˧,,2,th-agent-v1;ipa=thaig2p
 social-basics.goodbye,ลาก่อน,บาย,la kon,laː˧kɔːn˨˩,,2,th-agent-v1;ipa=thaig2p

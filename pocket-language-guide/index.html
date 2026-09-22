@@ -46,7 +46,14 @@
          enough to hold every language at once. Built by `ui/gallery.js`, because the
          list is the registry and the labels are in the reader's language. -->
     <div class="want">
-      <span class="want-label" id="want-label" data-i18n="gallery.wantLabel">…I want to speak</span>
+      <!-- Folds away once a language is chosen, so the card that was just reeled to
+           the top row is reachable without scrolling past fifty buttons. The label
+           stays as the control, and names the choice when it is shut. -->
+      <button type="button" class="want-toggle" id="want-toggle"
+              aria-expanded="true" aria-controls="want">
+        <span class="want-label" id="want-label" data-i18n="gallery.wantLabel">…I want to speak</span>
+        <span class="want-chosen" id="want-chosen"></span>
+      </button>
       <div id="want" class="want-grid" role="group" aria-labelledby="want-label"></div>
     </div>
   </div>

@@ -97,8 +97,11 @@ test('a sound board validates, and every way of being unsound is reported', () =
   // All three at once, not the first: an author fixing three things wants three.
   assert.ok(problems.some((p) => p.includes('unknown node nowhere')), problems.join('; '));
   assert.ok(problems.some((p) => p.includes('orphan: not reachable')), problems.join('; '));
-  // The kind is an enum, so a board file can never carry a URL or an expression.
-  assert.ok(problems.some((p) => p.includes('neither message nor submenu')), problems.join('; '));
+  // The kind is an enum, so a board file can never carry a URL or an expression --
+  // and the refusal names the whole set, because an author who used the wrong word
+  // wants to know which words there are.
+  assert.ok(problems.some((p) => p.includes('kind action is not one of')), problems.join('; '));
+  assert.ok(problems.some((p) => p.includes('beacon')), problems.join('; '));
 });
 
 test('a term indexed into two subsections is one dependency, not two', () => {

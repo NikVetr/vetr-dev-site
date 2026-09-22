@@ -105,8 +105,11 @@ function el(tag, attrs = {}, kids = []) {
  * @param {string[]} config.languages          the pair, or every language in play
  * @param {import('../core/speaker.js').SpeakerProfile} config.profile
  * @param {(next:import('../core/speaker.js').SpeakerProfile)=>void} config.onChange
+ * @param {HTMLElement} [config.extra]  a section the page supplies, shown under the
+ *   axes -- the conversation board puts the reader's own phrases here, because this
+ *   is the broader settings screen and that is the same kind of thing
  */
-export function openSpeakerSettings({ axes, languages, profile, onChange }) {
+export function openSpeakerSettings({ axes, languages, profile, onChange, extra }) {
   const asked = axesFor(axes, languages);
   /** @type {import('../core/speaker.js').SpeakerProfile} */ let held = { ...profile };
 
@@ -140,17 +143,22 @@ export function openSpeakerSettings({ axes, languages, profile, onChange }) {
     // paragraph reading `speaker.x.why`. The label falls back to the slug because an
     // ugly label is still a usable question; a raw key as prose is not.
     const why = t(`speaker.${axis.axis}.why`);
-    return el('fieldset', { class: 'speaker-axis' }, [
+    return el('fieldset', { class: 'speaker-block speaker-axis' }, [
       el('legend', { text: words(axis.axis) }),
       ...(why === `speaker.${axis.axis}.why` ? [] : [el('p', { class: 'speaker-why', text: why })]),
       ...options,
     ]);
   });
 
+  // **The dialog is the settings screen, not only the voice question.** It holds the
+  // reader's own phrases too, and those exist whether or not their languages inflect
+  // -- so the heading is the general one and the voice part introduces itself.
   panel.append(
-    el('h2', { text: t('speaker.title') }),
-    el('p', { class: 'speaker-lede', text: t('speaker.lede') }),
-    ...(fields.length ? fields : [el('p', { class: 'speaker-why', text: t('speaker.nothingToAsk') })]),
+    el('h2', { text: t('settings.title') }),
+    ...(fields.length
+      ? [el('p', { class: 'speaker-lede', text: t('speaker.lede') }), ...fields]
+      : [el('p', { class: 'speaker-why', text: t('speaker.nothingToAsk') })]),
+    ...(extra ? [extra] : []),
     el('form', { method: 'dialog' }, [el('button', { text: t('speaker.done') })]),
   );
   document.body.append(panel);
@@ -162,8 +170,11 @@ export function openSpeakerSettings({ axes, languages, profile, onChange }) {
 /**
  * The cheat sheet's half of the same setting: a button and the line beside it.
  *
- * `null` when neither language declares an axis, so a panel simply leaves the field
- * out rather than showing a control that opens onto an empty form. The wrapper is
+ * **Always returned, unlike the voice question inside it.** It used to be `null` when
+ * neither language declared an axis -- which was right while the dialog only asked
+ * about voice, and wrong the moment it also held the reader's own phrases: on a pair
+ * that asks nothing, the way to save a copy of them disappeared. The dialog says so
+ * itself when there is no axis to offer. The wrapper is
  * the caller's — the studio and the quick page each have their own field chrome, and
  * this module stays free of the studio's control library so the conversation board
  * does not have to download it.
@@ -172,15 +183,15 @@ export function openSpeakerSettings({ axes, languages, profile, onChange }) {
  * @param {string[]} config.languages
  * @param {import('../core/speaker.js').SpeakerProfile} config.profile
  * @param {(next:import('../core/speaker.js').SpeakerProfile)=>void} config.onChange
+ * @param {() => HTMLElement} [config.extra]  built on open, so it reads current state
  */
-export function speakerControl({ axes, languages, profile, onChange }) {
-  if (!axesFor(axes, languages).length) return null;
+export function speakerControl({ axes, languages, profile, onChange, extra }) {
   let held = profile;
 
   const button = document.createElement('button');
   button.type = 'button';
   button.className = 'chip';
-  button.textContent = t('speaker.open');
+  button.textContent = t('settings.open');
 
   const note = document.createElement('p');
   note.className = 'speaker-why';
@@ -192,7 +203,85 @@ export function speakerControl({ axes, languages, profile, onChange }) {
     languages,
     profile: held,
     onChange: (next) => { held = next; say(); onChange(next); },
+    extra: extra?.(),
   }));
 
   return { button, note };
+}
+
+/**
+ * The reader's own data: save a copy, load one, or delete the lot.
+ *
+ * It lives in this dialog because this is the broader settings screen and because
+ * the profile above it is the same kind of thing — a fact about the reader, held on
+ * one device, that they should be able to carry or destroy. Three buttons and a
+ * status line; there is nothing here worth a page.
+ *
+ * **Nothing leaves the device unless a finger says so.** "Save a copy" writes a file
+ * the reader chose to write. There is no sync, no upload, and none of this text is
+ * put in a URL, a log or an analytics event — some of it is dietary and medical.
+ * @param {object} config
+ * @param {() => import('../core/personal.js').PersonalPackage} config.gather
+ * @param {(data:import('../core/personal.js').PersonalPackage) => number} config.apply
+ *   returns how many phrases arrived
+ * @param {() => void} config.forget
+ * @param {(text:string) => ReturnType<typeof import('../core/personal.js').readPackage>} config.read
+ * @param {(blob:Blob, name:string) => void} config.save
+ */
+export function personalSection({ gather, apply, forget, read, save }) {
+  const status = el('p', { class: 'speaker-why', role: 'status' });
+
+  const download = el('button', { type: 'button', class: 'chip', text: t('personal.export') });
+  download.addEventListener('click', () => {
+    const made = gather();
+    // A package from someone who has written nothing is a stamp and a version.
+    // Saying so beats handing them a file that restores nothing.
+    if (!made.boards && !made.speaker && !made.edits) {
+      status.textContent = t('personal.nothing');
+      return;
+    }
+    const stamp = made.created.slice(0, 10);
+    save(new Blob([JSON.stringify(made, null, 2)], { type: 'application/json' }),
+      `pocket-language-guide-${stamp}.json`);
+    status.textContent = '';
+  });
+
+  // A real file input rather than a drop zone: it is the one control every phone
+  // and every screen reader already knows, and the native shell's document picker
+  // answers it without a plugin.
+  const file = /** @type {HTMLInputElement} */ (
+    el('input', { type: 'file', accept: 'application/json,.json', class: 'visually-hidden' }));
+  const upload = el('button', { type: 'button', class: 'chip', text: t('personal.import') });
+  upload.addEventListener('click', () => file.click());
+  file.addEventListener('change', async () => {
+    const chosen = file.files?.[0];
+    if (!chosen) return;
+    const got = read(await chosen.text());
+    // **Refused whole or applied whole.** A reader who cannot tell which half of an
+    // import landed is worse off than one who was told it did not.
+    if (!got.ok) {
+      status.textContent = `${t('personal.refused')} ${got.problems.join('; ')}`;
+      status.classList.add('speaker-refused');
+    } else {
+      status.classList.remove('speaker-refused');
+      status.textContent = t('personal.loaded', { phrases: String(apply(got.data)) });
+    }
+    file.value = '';
+  });
+
+  const wipe = el('button', { type: 'button', class: 'chip', text: t('personal.forget') });
+  wipe.addEventListener('click', () => {
+    // Confirmed, because the saved copy is the only way back and there is no server
+    // holding a second one.
+    if (!globalThis.confirm(t('personal.confirm'))) return;
+    forget();
+    status.textContent = t('personal.gone');
+  });
+
+  return el('fieldset', { class: 'speaker-block' }, [
+    el('legend', { text: t('personal.heading') }),
+    el('p', { class: 'speaker-why', text: t('personal.lede') }),
+    el('div', { class: 'speaker-actions' }, [download, upload, wipe, file]),
+    status,
+  ]);
 }

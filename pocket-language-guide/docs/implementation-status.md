@@ -1535,3 +1535,188 @@ separate and much less useful project. `dietary-needs.no-sesame` wants a Yoruba 
 The Khmer pack is internally inconsistent on two transcriptions (បិទ as both `bət` and
 `bɨt`, ចូល as both `tɕoul` and `tɕoːl`), found while analysing the new rows and left
 alone. And none of the 1,122 rows has been read by a fluent speaker of anything.
+
+## Batch H — seven things from using it on a phone
+
+### A word broken in half, and two causes
+
+A screenshot showed `supervisor` set as `supervis / or`. Two things had to be true
+for that, and **either fix alone is sufficient** — worth knowing before someone
+deletes one as redundant:
+
+- `overflow-wrap: anywhere` on the message surface. It is now `break-word`, which
+  only ever breaks a word that cannot fit a line *by itself*.
+- The fitter grew the text while checking **height only**. With `anywhere`, growing
+  never overflowed sideways — the browser silently absorbed it by splitting a word —
+  so the loop had no signal to stop. It measures width too now, against the box that
+  actually clips rather than the paragraph, which sizes itself to its own content in
+  a flex column and so never reports overflow.
+
+On a 390px screen the message drops from 126px to 54px and nothing breaks.
+`tests/conversation.spec.js` walks the rendered text character by character and
+fails if a line starts mid-word; checked by reverting each fix in turn.
+
+The same `anywhere` was on every surface a phrase is read from, and all of them are
+`break-word` now. `.board-pair` and `.board-title` keep it deliberately: they are
+chrome, and `anywhere` is what lets a flex item shrink below its content, which is
+the fix that stopped the header clipping at 1.6× text.
+
+### The mark on an answerable cell
+
+Two overlapping speech bubbles, drawn inline from the owner's own SVG, in place of
+`↩` — which said "this goes back", the opposite of what the cell does. It sits in
+whichever **outer corner the label is not using**: `placeMark` measures the first and
+last line box of the wrapped label and moves the icon to the short end. "Where do I
+pay?" wraps 109/153 and takes the top corner; "Pay by card?" wraps 132/109 and takes
+the bottom. `inset-inline-end`, so a right-to-left board mirrors it.
+
+### The picker folds once it has been used
+
+Fifty language buttons is the right density for choosing and the wrong thing to leave
+between a reader and the Export / Customise / Converse buttons on the card they just
+chose. Picking one now folds the grid and names the choice in the label, which still
+reads as an answered question; the state is remembered, as the studio's panels are.
+Measured after the fold: the chosen card lands at y=309 with its actions ending at
+659 in an 844px viewport, at scroll 0 — directly reachable, for every language tried.
+
+### The beacon, and the one place this app moves
+
+`ui/platform/beacon.js`. Everywhere else a transition would be decoration and the
+information is better given statically; here the motion **is** the feature, because a
+distress signal that does not move is not one.
+
+Two modes for two situations. **SOS** flashes the whole screen white-on-black in
+Morse — the brightest thing a phone can do, and a signal a stranger may recognise
+without reading a word. **Attention** holds one word still and runs a light around
+the edge of the display, which is what catches an eye that is not pointed at the
+screen. Tapping anywhere stops either; so does Escape and Android Back, which take
+the beacon before the board's own state because it is over the whole screen.
+
+**The dot is 300ms, and that is a safety property.** WCAG puts the photosensitive
+seizure threshold at three flashes per second; measured, this runs at **1.00**. The
+test counts transitions over three seconds rather than reading the constant, so
+shortening the dot without thinking goes red.
+
+`kind: 'beacon'` is a new board-button kind with its own two-value enum, validated
+like the others — a board file naming its own signal would be a board file describing
+behaviour, which is the line this format does not cross. The two sit together at the
+end of the emergency grid, away from the phrases, so a thumb reaching for "it hurts
+here" never lands on a strobing screen. They replaced the emergency number (a fact,
+better on the printed card) and "I do not speak X" (one tap away on Meeting people).
+
+### A trap the board generator set
+
+`mkboards.py` writes `index.json` in the *authored* shape, with `pairs`;
+`build_board_index.mjs` replaces that with the computed `listeners`/`owners` the app
+reads. Regenerating the boards without re-running the builder left the file half
+written, and the board page died on `undefined.includes`. The generator runs the
+builder itself now, so the two cannot be out of step.
+
+### Also
+
+The reply grid's way out was a centred, answer-sized button, which read as a
+thirteenth option; it is small, in the lower inline-start corner, with an arrow, and
+still in the listener's language. The board title is larger, bold and in the accent
+colour, which also tells it apart from the grey pair line without a rule or a box.
+
+### §5.4 — the reader's own data, in a file they can carry
+
+There is no account and no server, which is the point, and it means the only copy of
+someone's own phrases is on one device. `core/personal.js` builds and reads a
+versioned JSON package; `ui/speaker-settings.js` gains Save a copy / Load a copy /
+Delete everything, and `tests/personal.test.mjs` covers the rules.
+
+**It is inert.** JSON with sentences in it: no URLs, no scripts, no templates,
+nothing fetched or evaluated, and every string rendered into a text node. A file
+someone was sent by a stranger cannot do anything except add phrases they can read
+first. The shape walk refuses `__proto__`, `constructor` and `prototype` keys, caps
+nesting at eight, and rejects anything that is not text, a number, a boolean or a
+shallow container of those.
+
+**It is validated whole, before anything is written.** `readPackage` returns problems
+or a value, never both — a half-applied import is worse than a refused one, because
+the reader cannot tell which half landed. A placement naming a board or a screen this
+build does not have is reported rather than imported, which is the plan's rule that
+an import must never claim success for something that cannot be used. Passing no
+board list turns that check off, which is what a plain backup restore wants.
+
+**A newer package is refused rather than guessed at**, because it was written by a
+later build and this one cannot know what it left out. The cap is 2 MiB counted in
+*bytes* — one emoji is four — and it is checked before the parse.
+
+What travels is the reader's *work*: their phrases and placements, their speaker
+profile, their per-pair sheet edits. What does not is this device's preferences —
+studio column widths, whether a banner is dismissed — because carrying those to
+another phone would be presumptuous rather than helpful.
+
+**Settings are now offered on every pair.** The button was gated on the pair
+declaring a speaker axis, which is 22 languages of 53 — so on the Mandarin board that
+ships by default, the export was unreachable. A backup button that appears only for
+Russian readers is one nobody can find.
+
+### And then on every page, which took undoing a rule
+
+`speakerControl` returned `null` when neither language declared an axis. That was
+right while the dialog only asked about voice — and wrong the moment it also held the
+reader's own phrases, because on a pair that asks nothing the way to save a copy of
+them disappeared. It always returns a control now, labelled Settings, and the dialog
+says for itself when there is no voice question to put.
+
+The storage half lives in `ui/personal-data.js` rather than three times over: which
+keys are read, which are written, and what happens after. It is its own module so the
+gallery does not pull the board store and the sheet editor in just to know the
+reader's language. Each page supplies `onChanged`, because reloading means different
+things — the board has the new phrases in front of the reader and repaints, while a
+sheet page holds a solved layout built from the edits that just changed underneath it
+and starts again rather than keeping a second, quieter copy of `buildSheet`.
+
+### Not done in this batch
+
+N2's native file delivery. On a device the Save-a-copy download goes through the
+browser path, which inside a WebView may do nothing at all.
+
+### The slashed rows a reader actually meets
+
+Of 410 slashed rows across the corpus, **33 are on a conversation board** and only
+**12 of those are gender pairs**. The rest are the concept doing its job:
+`quick-responses.yes-right` is "yes / right", two glosses of one meaning, and
+`communication.i-cannot-read-understand` is "I cannot read / understand", two
+genuine alternatives. A sweep told to "split the slashes" would have destroyed both,
+so `speaker_coverage.mjs --slashed` prints the English beside each row and the prompt
+now names an example of each kind.
+
+The twelve are split: base row masculine, feminine in `variants.csv`, stale
+`"(male speaker) / (female speaker)"` notes cleared from `literal` — 113 → 101
+first-person slashed rows. Czech's four `i-lost-my-*` masculines were reconstructed
+from the existing feminine rows programmatically rather than retyped, so no diacritic
+could slip.
+
+**Two judgement calls came back rather than being guessed at.** French's
+`Bonjour madame / monsieur` is the *listener's* gender on a card held out to a
+stranger; bare `Bonjour` is fully polite and the guess disappears at no cost, so it
+was changed. Spanish's `Mi hijo/a se ha perdido` is the *child's* gender, which the
+no-companion-axis rule covers — the recommendation is `Mi hijo` as the RAE-sanctioned
+generic, matching the Russian ребёнок precedent the prompt already cites, with
+`mi criatura`/`mi peque` rejected as register-risky on a missing-child card and
+`mi niño` rejected because it splits identically. Left for the owner.
+`es children.child-age` has the same shape and is flagged, untouched.
+
+**Mandarin now says 您 to a stranger** on the four board rows that said 你.
+`introductions.what-is-your-name` became `您怎么称呼？` rather than a literal
+`您叫什么名字？`, on the grounds that the corpus already holds the brusque intake
+register as `board-answers.what-is-your-name` for a first responder, and an
+introductions card is the warmer context.
+
+### Two test failures worth the record
+
+`speaker.spec.js` asserted "one axis question" by counting `.speaker-axis`, and the
+new personal-data section reused that class for its frame — so the count was two. The
+fix was to model it rather than work around it: `.speaker-block` is the frame every
+section shares and `.speaker-axis` means *a question about the reader*, so counting
+it counts questions.
+
+The delete-everything test failed because `onChanged` read the board store before its
+own queued write had landed, and the grid still showed a phrase the status line had
+just called deleted. It chains off the write now, with `finally` rather than `then`,
+because a refused write still has to repaint — a screen that keeps claiming something
+that did not happen is the worse failure.

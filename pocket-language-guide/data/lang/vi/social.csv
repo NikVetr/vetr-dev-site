@@ -1,6 +1,6 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 social-basics.hello,Xin chào,,sin˧ tʃaːw˨˩,,2,vi-agent-v1;ipa=espeak
-social-basics.hello-polite,Chào anh / chị ạ,,tʃaːw˨˩ aɲ˧ / tʃi˨˩ˀ aː˨˩ˀ,"anh = m., chị = f.",2,vi-agent-v1;ipa=espeak
+social-basics.hello-polite,Xin chào,,,,2,vi-agent-v1;ipa=espeak
 social-basics.good-morning,Chào buổi sáng,,tʃaːw˨˩ buə̯j˧˩˧ saːŋ˧˥,,2,vi-agent-v1;ipa=espeak
 social-basics.good-evening,Chào buổi tối,,tʃaːw˨˩ buə̯j˧˩˧ t̪oj˧˥,,2,vi-agent-v1;ipa=espeak
 social-basics.goodbye,Tạm biệt,,t̪aːm˨˩ˀ biɛ̯t̪˨˩ˀ,,2,vi-agent-v1;ipa=espeak

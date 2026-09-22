@@ -1,5 +1,6 @@
 variant,concept_id,text,text_alt,ipa,literal,confidence,provenance
 speaker_gender=feminine,building-help.i-am-lost,Estou perdida,,estˌow pˌeɾədʒˈidæ,,2,pt-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,dietary-needs.i-am-vegetarian,Sou vegetariana,,sow vˌeʒetˌaɾiˈɐ̃næ,,2,pt-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
 speaker_gender=feminine,dietary-needs.i-am-allergic-to,Sou alérgica a {},,sow ˌalˈɛɾəʒikæ ˈa {},,2,pt-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
 speaker_gender=feminine,emergency-medical.i-am-injured,Estou ferida,,estˌow fˌeɾˈidæ,,2,pt-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
 speaker_gender=feminine,introductions.i-am-traveling-alone,Viajo sozinha,,vˌiˈaʒʊ sˌozˈiɲæ,,2,pt-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak

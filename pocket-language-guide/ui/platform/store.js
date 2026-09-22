@@ -99,6 +99,27 @@ export function set(key, value) {
   localStorage.setItem(key, value);
 }
 
+/**
+ * Every key this app owns that starts with `prefix`.
+ *
+ * Needed because the sheet edits are one entry per language pair rather than one
+ * entry with the pairs inside it -- so gathering them for a portable copy, or
+ * deleting them, means asking what is there. Namespaced by the caller, and this
+ * never returns anything outside `plg.`: another origin's keys are not ours to
+ * enumerate, let alone carry away.
+ * @param {string} prefix @returns {string[]}
+ */
+export function keys(prefix) {
+  const want = prefix.startsWith(PREFIX) ? prefix : PREFIX + prefix;
+  if (mirror) return [...mirror.keys()].filter((k) => k.startsWith(want));
+  /** @type {string[]} */ const out = [];
+  for (let i = 0; i < localStorage.length; i += 1) {
+    const key = localStorage.key(i);
+    if (key?.startsWith(want)) out.push(key);
+  }
+  return out;
+}
+
 /** @param {string} key */
 export function remove(key) {
   if (mirror) {

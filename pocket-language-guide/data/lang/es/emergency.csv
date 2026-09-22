@@ -102,7 +102,7 @@ emergency-medical.help,¡Auxilio!,¡Socorro!,aʊksˈiljo,,2,es-agent-v1;ipa=espe
 emergency-medical.please-call-an-ambulance,"Llame a una ambulancia, por favor",,"ʝˈame a ˈuna ˌambulˈansja, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
 emergency-medical.i-need-a-doctor,Necesito un médico,,nˌesesˈito ˈun mˈediko,,2,es-agent-v1;ipa=espeak
 emergency-medical.i-am-sick,Estoy enfermo/a,,estˈoɪ emfˈeɾmo / ˈa,,2,es-agent-v1;ipa=espeak
-emergency-medical.i-am-injured,Estoy herido/a,,estˈoɪ eɾˈido / ˈa,,2,es-agent-v1;ipa=espeak
+emergency-medical.i-am-injured,Estoy herido,,estˈoɪ eɾˈido,,2,es-agent-v1;ipa=espeak
 emergency-medical.it-hurts-here,Me duele aquí,,me dwˈele akˈi,,2,es-agent-v1;ipa=espeak
 emergency-medical.where-is-a-pharmacy,¿Dónde hay una farmacia?,,dˈonde ˈaɪ ˈuna faɾmˈasja,,2,es-agent-v1;ipa=espeak
 emergency-medical.please-take-me-to-a-hospital,"Lléveme a un hospital, por favor",,"ʝˈebeme a ˈun ˌospitˈal, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
@@ -129,7 +129,7 @@ lost-rescue.i-sprained-my-ankle,Me torcí el tobillo,,me toɾsˈi el tobˈiʝo,,
 lost-rescue.please-contact-rescue,Avise al equipo de rescate,Llame al rescate de montaña,abˈise al ekˈipo de reskˈate,,2,es-agent-v1;ipa=espeak
 lost-rescue.my-companion-is-missing,No encuentro a mi acompañante,,nˈo enkwˈentɾo a mi ˌakompaɲˈante,,2,es-agent-v1;ipa=espeak
 lost-rescue.please-look-at-my-current-location,Mire mi ubicación actual,,mˈiɾe mi ˌubikasjˈon aktwˈal,,2,es-agent-v1;ipa=espeak
-lost-rescue.my-child-is-missing,Mi hijo/a se ha perdido,,mi ˈixo / a se ˈa peɾdˈido,,2,es-agent-v1;ipa=espeak
+lost-rescue.my-child-is-missing,Mi hijo se ha perdido,,,,2,es-agent-v1;src=RAE-DLE;ipa=espeak
 lost-rescue.i-do-not-know-where-i-am,No sé dónde estoy,,nˈo sˈe dˈonde estˈoɪ,,2,es-agent-v1;ipa=espeak
 lost-rescue.my-friend-is-hurt,Mi amigo/a está herido/a,,mi amˈiɡo / a estˈa eɾˈido / ˈa,,2,es-agent-v1;ipa=espeak
 lost-rescue.i-lost-my-wallet,Perdí mi cartera,Perdí mi billetera,peɾdˈi mi kaɾtˈeɾa,,2,es-agent-v1;ipa=espeak

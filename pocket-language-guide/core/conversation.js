@@ -44,7 +44,10 @@ const UNITS = new Set(['minute', 'hour', 'day']);
 /**
  * @typedef {Object} BoardButton
  * @property {string} id            stable placement, not a label and not an index
- * @property {'message'|'submenu'|'value'|'entry'} kind
+ * @property {'message'|'submenu'|'value'|'entry'|'beacon'} kind
+ * @property {'sos'|'attention'} [beacon]  for `beacon`: which signal it runs. Not a
+ *   phrase and not spoken -- the one button on a board that is about being *seen*
+ *   rather than read, for when nobody is looking at the screen yet.
  * @property {import('./duration.js').Duration} [value]  for `value`: what it answers
  * @property {'duration'} [entry]   for `entry`: which keypad it opens
  * @property {string} [nodeId]      for `submenu`: the child node
@@ -192,6 +195,13 @@ export function validateBoard(board) {
         if (button.entry !== 'duration') problems.push(`${key}: unknown entry ${button.entry}`);
       } else if (button.kind === 'submenu') {
         if (!nodes[button.nodeId]) problems.push(`${key}: submenu to unknown node ${button.nodeId}`);
+      } else if (button.kind === 'beacon') {
+        // Also an enum, and deliberately a short one. A board file naming its own
+        // signal would be a board file describing behaviour, which is the line this
+        // format does not cross.
+        if (button.beacon !== 'sos' && button.beacon !== 'attention') {
+          problems.push(`${key}: unknown beacon ${button.beacon}`);
+        }
       } else if (button.kind === 'message') {
         const ref = button.phraseRef;
         if (!ref || (ref.kind !== 'corpus' && ref.kind !== 'custom') || !ref.id) {
@@ -200,7 +210,8 @@ export function validateBoard(board) {
       } else {
         // An enum, not an open set: the format carries no actions, no URLs and no
         // expressions, so a board file can never be a program.
-        problems.push(`${key}: kind ${button.kind} is neither message nor submenu`);
+        problems.push(`${key}: kind ${button.kind} is not one of message, submenu, `
+          + 'value, entry or beacon');
       }
     }
   }

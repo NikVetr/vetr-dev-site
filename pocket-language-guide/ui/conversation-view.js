@@ -78,6 +78,7 @@ export function renderGrid(root, node, { label, available, onPick, lang, title }
     // drawing is the one that changes what happens next: whether this message can be
     // answered, or only shown.
     if (button.kind === 'submenu') cell.classList.add('board-cell-more');
+    else if (button.kind === 'beacon') cell.classList.add('board-cell-beacon');
     else if (button.replySetId) cell.classList.add('board-cell-asks');
     // The label is its own element so the fitter can size the text without touching
     // the cell, whose height is the grid's to decide.
@@ -88,11 +89,7 @@ export function renderGrid(root, node, { label, available, onPick, lang, title }
     // Reinforced with a mark, because colour alone is not a signal: roughly one man
     // in twelve cannot use it, and a tinted cell in bright sun is a white cell.
     if (button.kind !== 'submenu' && button.replySetId) {
-      const mark = document.createElement('span');
-      mark.className = 'board-cell-mark';
-      mark.textContent = '\u21A9';
-      mark.setAttribute('aria-hidden', 'true');
-      cell.append(mark);
+      cell.append(answerMark());
       cell.title = t('board.canAnswer');
     }
     // **A button the corpus cannot supply is visibly unavailable, not missing.**
@@ -108,6 +105,43 @@ export function renderGrid(root, node, { label, available, onPick, lang, title }
   }
   watchCells(root);
 }
+
+/**
+ * The mark on a cell the other person can answer.
+ *
+ * **Two overlapping speech bubbles, not a return arrow.** `↩` says "this goes back",
+ * which is the opposite of what the cell does; two bubbles say a conversation, which
+ * is exactly what it does. Drawn rather than set as a character, because there is no
+ * glyph for this that every phone has and a missing one would render as tofu in the
+ * corner of a button.
+ *
+ * Inline, and it is 500 bytes: a board is the one surface that has to work with no
+ * preparation, and a sprite or an icon fetch is one more thing to have not arrived.
+ */
+function answerMark() {
+  const svg = document.createElementNS(SVG, 'svg');
+  svg.setAttribute('class', 'board-cell-mark');
+  svg.setAttribute('viewBox', '0 0 256 208');
+  svg.setAttribute('aria-hidden', 'true');
+  // The lower bubble is drawn in front and knocks a gap out of the upper one, so the
+  // two read as separate at 14px instead of merging into a blob.
+  const defs = document.createElementNS(SVG, 'defs');
+  defs.innerHTML = `<path id="plg-b-up" d="${UPPER}"/><path id="plg-b-lo" d="${LOWER}"/>`
+    + '<mask id="plg-b-cut" maskUnits="userSpaceOnUse" x="0" y="0" width="256" height="208">'
+    + '<rect width="256" height="208" fill="white"/>'
+    + '<use href="#plg-b-lo" fill="black" stroke="black" stroke-width="10" stroke-linejoin="round"/>'
+    + '</mask>';
+  svg.append(defs);
+  svg.insertAdjacentHTML('beforeend',
+    '<use href="#plg-b-up" fill="currentColor" mask="url(#plg-b-cut)"/>'
+    + '<use href="#plg-b-lo" fill="currentColor"/>');
+  return svg;
+}
+const SVG = 'http://www.w3.org/2000/svg';
+const UPPER = 'M38 8H127C143.6 8 157 21.4 157 38V86C157 102.6 143.6 116 127 116H60L23 144C20.4 146 18 '
+  + '144.1 18.6 140.8L24 110C14 104 8 93 8 80V38C8 21.4 21.4 8 38 8Z';
+const LOWER = 'M133 57H219C235 57 248 70 248 86V142C248 157.4 236.1 170 221 171L222 198C222.2 201.7 '
+  + '218.1 203.3 215.6 200.6L188 171H133C117 171 104 158 104 142V86C104 70 117 57 133 57Z';
 
 /**
  * Set every label as large as fits its own cell, in both directions.
@@ -178,7 +212,32 @@ function fitCells(root) {
       label.style.fontSize = `${lo}px`;
     }
     label.style.overflowWrap = '';
+    placeMark(cell, label);
   }
+}
+
+/**
+ * Put the answer mark in whichever outer corner the label is not using.
+ *
+ * A centred label wraps to lines of different widths, and the corner next to the
+ * *short* line is the one with room. So: measure the first and last line boxes, and
+ * sit the mark beside whichever is narrower — top when the first line is shorter,
+ * bottom when the last one is. On a single-line label the two are the same line and
+ * it stays at the top, which is where it has always been.
+ *
+ * Trailing edge either way, so it never collides with the reading edge, and
+ * `inset-inline-end` rather than `right` so a right-to-left board mirrors it.
+ * @param {HTMLElement} cell @param {HTMLElement} label
+ */
+function placeMark(cell, label) {
+  const mark = cell.querySelector('.board-cell-mark');
+  if (!mark) return;
+  const range = document.createRange();
+  range.selectNodeContents(label);
+  const lines = [...range.getClientRects()].filter((r) => r.height > 0);
+  // One line, or none to measure: leave it where it was rather than guessing.
+  const low = lines.length > 1 && lines[lines.length - 1].width < lines[0].width;
+  mark.classList.toggle('board-cell-mark-low', low);
 }
 
 /**
@@ -397,12 +456,22 @@ export function renderReply(stage, question, answers, { onAnswer, onCancel, clos
   // Cancelling claims no answer at all, which is a different thing from answering
   // "I don't know" -- and both have to be reachable, because a listener who will
   // not use the board is not the same as a listener who is unsure.
+  // **Small, and in the corner.** It was a centred control the size of an answer,
+  // which put a way *out* of the question among the ways to answer it -- and the
+  // listener's eye goes to the middle. An arrow plus the word, at the lower inline
+  // start, reads as "back" rather than as a thirteenth option. `inline-start`, not
+  // left, so an Arabic or Hebrew board puts it under the edge that reader starts
+  // from. Still the listener's language: they are the one pressing it.
   const close = document.createElement('button');
   close.type = 'button';
-  close.className = 'board-control board-close';
-  close.textContent = closeLabel;
+  close.className = 'board-back';
   close.lang = question.listener.lang;
   close.dir = question.listener.dir;
+  const arrow = document.createElement('span');
+  arrow.className = 'board-back-arrow';
+  arrow.textContent = '\u2190';
+  arrow.setAttribute('aria-hidden', 'true');
+  close.append(arrow, document.createTextNode(` ${closeLabel}`));
   close.addEventListener('click', onCancel);
 
   stage.append(asked, list, close);
@@ -435,7 +504,29 @@ export function fitMessage(text, box) {
   const run = () => {
     text.style.fontSize = '';
     let size = Number.parseFloat(getComputedStyle(text).fontSize);
-    const fits = () => box.scrollHeight <= box.clientHeight;
+    // **Both axes, and the second one is the bug this was written to fix.** The test
+    // used to be height alone, and with `overflow-wrap: anywhere` growing the text
+    // never overflowed sideways -- the browser just broke a word instead. So the
+    // loop happily grew until `supervisor` was set across two lines as
+    // `supervis / or`, which is what a phone actually showed a stranger.
+    //
+    // Measuring against `normal` is what makes the width test mean something: with
+    // any breaking allowed, an over-long word is silently absorbed and `scrollWidth`
+    // never exceeds `clientWidth`. Forbidding it for the measurement lets the word
+    // overflow, which is the signal to stop growing. The CSS keeps `break-word` for
+    // the real render, so a word longer than the whole line still breaks rather than
+    // running off the screen -- but only after the fitter has failed to avoid it.
+    const fits = () => {
+      const held = text.style.overflowWrap;
+      text.style.overflowWrap = 'normal';
+      // The *box* on both axes, not the paragraph. A `<p>` in a flex column sizes
+      // itself to its own content, so its `scrollWidth` equals its `clientWidth`
+      // even when that content is wider than the screen -- the overflow only shows
+      // up against the element that actually clips.
+      const ok = box.scrollHeight <= box.clientHeight && box.scrollWidth <= box.clientWidth + 1;
+      text.style.overflowWrap = held;
+      return ok;
+    };
     // **It grows as well as shrinks.** The CSS clamp is in `vw`, which is the right
     // unit for not overflowing sideways and blind to the other axis -- so on a tall
     // phone a four-character message was set at 43px in 844px of screen. The whole

@@ -685,6 +685,29 @@ hands Hausa to a Hawaiian voice. Audio is off until pressed, every utterance can
 the last, and a device with no voice simply has no button. **No audio has been heard
 on any device.**
 
+## The reader's own data, and the one place this app moves
+
+**Everything personal is local, so there has to be a way to carry it.** No account,
+no server — which is the point, and it means the only copy of someone's phrases is on
+one device. `core/personal.js` builds and reads a versioned JSON package; Settings on
+the board, the quick page and the studio all offer Save a copy / Load a copy / Delete
+everything. The package is **inert**: JSON with sentences in it, nothing fetched or
+evaluated, every string rendered into a text node, unsafe keys and eight-deep nesting
+refused, 2 MiB counted in bytes and checked before the parse. It is validated
+**whole** and returns problems or a value, never both, because a half-applied import
+is worse than a refused one — and a placement naming a board this build does not have
+is reported rather than imported, so nothing is ever called imported that cannot be
+used. What travels is the reader's work; what does not is this device's preferences.
+
+**The beacon is the one thing here that moves.** Everywhere else a transition would
+be decoration and the same information is better given statically. A distress signal
+that does not move is not one: on the emergency board, SOS flashes the whole screen
+white-on-black in Morse, and Attention holds one word still while a light runs the
+edge of the display, which is what catches an eye not pointed at the phone. **The dot
+is 300ms and that is a safety property** — WCAG puts the photosensitive threshold at
+three flashes a second and this measures 1.00. The test counts real transitions
+rather than reading the constant.
+
 ## Whose voice the card is in
 
 A woman holds up a Russian card that says `Я заблудился` and it is in a man's voice.

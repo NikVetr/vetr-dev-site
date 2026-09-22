@@ -3,6 +3,7 @@
 //   node scripts/speaker_coverage.mjs            the report
 //   node scripts/speaker_coverage.mjs --json     the same, machine-readable
 //   node scripts/speaker_coverage.mjs ru         the rows in `ru` worth reading through
+//   node scripts/speaker_coverage.mjs ru --slashed   only the rows still to clean up
 //
 // **Reports rather than fails.** A declared axis with no variant rows yet is an
 // honest, known state: the reader sees the language's default wording and the app
@@ -83,7 +84,14 @@ const only = process.argv.slice(2).find((a) => !a.startsWith('--'));
 if (only) {
   const rows = pack(only);
   const english = pack('en');
-  for (const id of [...want].filter((id) => rows[id]).sort()) {
+  // `--slashed` narrows the worklist to the migration backlog: rows whose `text`
+  // still carries a slashed dual form, which is the thing a reader has to do
+  // grammar on at a hotel counter. The third column is the English, so whoever is
+  // splitting the form can see which half is which.
+  const wanted = process.argv.includes('--slashed')
+    ? [...want].filter((id) => rows[id] && /\S\s*\/\s*\S/.test(rows[id].text ?? ''))
+    : [...want].filter((id) => rows[id]);
+  for (const id of wanted.sort()) {
     console.log([id, rows[id].text, english[id]?.text ?? ''].join('\t'));
   }
   process.exit(0);

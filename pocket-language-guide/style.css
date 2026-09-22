@@ -94,10 +94,32 @@ h3 { font-size: var(--fs-1); margin: 0 0 var(--space-1); }
   padding-block: var(--space-3) 0;
 }
 .want { min-width: 0; }
+/* **The picker folds, because once it has been used it is in the way.** Fifty
+   buttons is the right density for choosing and the wrong thing to leave between a
+   reader and the Export / Customise / Converse buttons on the card they just chose.
+   Shut, it keeps the label and adds the language, so it still reads as an answered
+   question rather than as a missing control. Same chevron as the studio's panels. */
+.want-toggle {
+  display: flex; align-items: baseline; gap: var(--space-1); inline-size: 100%;
+  background: none; border: 0; padding: 0; margin-bottom: var(--space-1);
+  font: inherit; color: inherit; text-align: start; cursor: pointer;
+}
+.want-toggle::after {
+  content: ''; inline-size: 0.45em; block-size: 0.45em; margin-inline-start: auto;
+  border: 1.5px solid var(--muted); border-top: 0; border-left: 0;
+  transform: rotate(45deg); margin-block-end: 0.2em; flex: 0 0 auto;
+}
+.want-toggle[aria-expanded="true"]::after {
+  transform: rotate(-135deg); margin-block: 0.2em 0;
+}
+.want-toggle:hover .want-label, .want-toggle:focus-visible .want-label { color: var(--ink); }
+.want-chosen { font-size: var(--fs--1); font-weight: 600; color: var(--accent); min-inline-size: 0; }
+.want-chosen:empty { display: none; }
 .want-label {
   display: block; font-size: var(--fs--1); color: var(--muted);
-  margin-bottom: var(--space-1);
+  margin-bottom: 0;
 }
+.want-grid[hidden] { display: none; }
 /* Dense enough that fifty languages are one glance rather than a scroll. The badge
    is the language's own orthography and the name is what someone is actually
    scanning for, so the name leads on size and the badge sits above it as the thing
@@ -1907,14 +1929,28 @@ dialog.speaker-settings {
 dialog.speaker-settings::backdrop { background: rgb(17 24 32 / 45%); }
 dialog.speaker-settings h2 { margin: 0 0 var(--space-1); font-size: var(--fs-2); }
 .speaker-lede { margin: 0 0 var(--space-2); }
-.speaker-axis {
+/* The frame is shared by every section of the dialog; `.speaker-axis` marks the ones
+   that are a *question about the reader*, and nothing else, so counting them counts
+   questions. Their own phrases are a section, not a question. */
+.speaker-block {
   border: 1px solid var(--line-soft); border-radius: var(--radius-sm);
   padding: var(--space-2); margin: 0 0 var(--space-2);
 }
-.speaker-axis legend { font-size: var(--fs--1); color: var(--muted); padding-inline: 0.3em; }
+.speaker-block legend { font-size: var(--fs--1); color: var(--muted); padding-inline: 0.3em; }
 /* Why the question is being asked, next to the question. A form that asks someone
    their gender without saying what it changes has not earned the answer. */
 .speaker-why { margin: 0 0 var(--space-2); font-size: var(--fs--1); color: var(--muted); }
 .speaker-option {
   display: flex; gap: 0.5em; align-items: baseline; padding: 0.2em 0; cursor: pointer;
+}
+
+/* The settings dialog's own action row: three chips that do different-sized things,
+   so they wrap rather than squeeze on a phone. */
+.speaker-actions { display: flex; flex-wrap: wrap; gap: var(--space-1); margin-block-end: var(--space-2); }
+.speaker-refused { color: var(--alert); }
+/* Reachable by a screen reader and by the button that clicks it, invisible to
+   everyone else -- `display: none` would stop the click working. */
+.visually-hidden {
+  position: absolute; inline-size: 1px; block-size: 1px;
+  margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
 }

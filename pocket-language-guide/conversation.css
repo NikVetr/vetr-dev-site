@@ -121,10 +121,18 @@
    it has to be unmistakable at a glance -- someone opening the app in a taxi needs
    to know they are not still in the massage board -- without taking a row of its
    own from the grid, which is what the page is for. */
+/* **The topic, and the first thing to read.** It was set at body size and blended
+   into the bar; a board is a situation and someone opening this in a taxi needs to
+   know at a glance they are not still in the massage board. Larger, heavier, and in
+   the accent colour -- which also distinguishes it from the grey pair line above it
+   without adding a rule or a box. Still not a heading size: every pixel the bar
+   takes is a pixel off the grid, which is what the page is for. */
 .board-title {
   margin: 0;
-  font-size: var(--fs-0);
+  font-size: var(--fs-1);
   font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--accent);
   min-inline-size: 0;
   overflow-wrap: anywhere;
 }
@@ -181,7 +189,10 @@
   display: flex; flex-direction: column; gap: 0.2em;
   padding: var(--space-2); border-radius: var(--radius); background: var(--surface);
 }
-.board-editor-preview { margin: 0; font-size: var(--fs-2); overflow-wrap: anywhere; }
+/* The exact text the listener will be shown, so it wraps the way the message
+   surface does -- a preview that breaks a word the real thing would not is not a
+   preview. */
+.board-editor-preview { margin: 0; font-size: var(--fs-2); overflow-wrap: break-word; }
 .board-editor-preview-empty { font-size: var(--fs-0); color: var(--muted); font-style: italic; }
 
 /* The heading a node's buttons complete -- "Please focus on…" over the body parts.
@@ -230,7 +241,10 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  overflow-wrap: anywhere;
+  /* Never mid-word here either: `fitCells` measures against `normal` and settles on
+     a size where every word fits its cell, so this only catches a single word longer
+     than the cell it is in. */
+  overflow-wrap: break-word;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   /* **Neutral, with the contrast spent on the words.** Five saturated fills behind
@@ -248,19 +262,38 @@
    sunlight -- and because this is the distinction that changes what happens after
    the tap. */
 .board-cell-asks { background: var(--accent-soft); border-color: var(--accent); }
+/* Two overlapping speech bubbles: this cell is a conversation, not a way back. It
+   sits in whichever outer corner the label is not using -- `placeMark` measures the
+   first and last line of the wrapped label and moves it to the short end. */
 .board-cell-mark {
   position: absolute;
   inset-block-start: 0.3rem;
-  inset-inline-end: 0.45rem;
-  font-size: var(--fs--1);
-  line-height: 1;
+  inset-inline-end: 0.4rem;
+  inline-size: 0.95rem;
+  block-size: auto;
   color: var(--accent);
+  opacity: 0.85;
+  pointer-events: none;
+}
+.board-cell-mark-low {
+  inset-block-start: auto;
+  inset-block-end: 0.3rem;
 }
 
 /* A submenu is a different kind of act from saying something: it says nothing at
    all. Dashed and a shade back, which reads as "not yet" without a glyph eating
    into a label that is already tight. */
 .board-cell-more { background: var(--surface); border-style: dashed; }
+/* The two buttons that are not something to say. They are about being seen, so they
+   are the one place on the grid that keeps a solid fill -- and they are next to each
+   other at the end, away from the phrases, so a thumb reaching for "it hurts here"
+   never lands on a strobing screen. */
+.board-cell-beacon {
+  background: var(--alert);
+  border-color: var(--alert);
+  color: #fff;
+}
+.board-cell-beacon:hover { background: var(--alert); filter: brightness(0.93); }
 
 .board-cell:hover { background: var(--surface-2); }
 .board-cell-asks:hover { background: var(--accent-soft); filter: brightness(0.97); }
@@ -343,7 +376,13 @@
   font-size: clamp(2rem, 11vw, 5.5rem);
   line-height: 1.15;
   font-weight: 600;
-  overflow-wrap: anywhere;
+  /* **Never mid-word.** `anywhere` lets the browser break `supervisor` into
+     `supervis / or`, which it did on a real phone -- and a reader sounding that out
+     to a stranger is being actively misled. It is the same class of defect as
+     clipping a word, and in a script they cannot read it is invisible to them.
+     `break-word` only ever breaks a word that cannot fit a line by itself, and the
+     fitter shrinks the text until none of them do, so in practice nothing breaks. */
+  overflow-wrap: break-word;
 }
 /* The owner's own wording: a confirmation that the right button was pressed, not
    part of what is being said to anyone, so it is small and grey. */
@@ -351,7 +390,8 @@
   margin: 0;
   font-size: var(--fs-1);
   color: var(--muted);
-  overflow-wrap: anywhere;
+  /* Not mid-word: this is the same sentence, read back to the owner. */
+  overflow-wrap: break-word;
 }
 /* A cue that there is more to read, only when there is. Set by the fitter, because
    whether the text overflows is a measurement and not something CSS can ask. */
@@ -384,7 +424,13 @@
   font-size: clamp(1.1rem, 4vw, 1.8rem);
   color: var(--muted);
   text-align: center;
-  overflow-wrap: anywhere;
+  /* **Never mid-word.** `anywhere` lets the browser break `supervisor` into
+     `supervis / or`, which it did on a real phone -- and a reader sounding that out
+     to a stranger is being actively misled. It is the same class of defect as
+     clipping a word, and in a script they cannot read it is invisible to them.
+     `break-word` only ever breaks a word that cannot fit a line by itself, and the
+     fitter shrinks the text until none of them do, so in practice nothing breaks. */
+  overflow-wrap: break-word;
 }
 .board-answers {
   flex: 1 1 auto;
@@ -409,9 +455,42 @@
   background: var(--paper);
   color: var(--ink);
   cursor: pointer;
-  overflow-wrap: anywhere;
+  /* **Never mid-word.** `anywhere` lets the browser break `supervisor` into
+     `supervis / or`, which it did on a real phone -- and a reader sounding that out
+     to a stranger is being actively misled. It is the same class of defect as
+     clipping a word, and in a script they cannot read it is invisible to them.
+     `break-word` only ever breaks a word that cannot fit a line by itself, and the
+     fitter shrinks the text until none of them do, so in practice nothing breaks. */
+  overflow-wrap: break-word;
 }
 .board-answer:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* The way out of a question, in the corner rather than among the answers. Quiet: it
+   is not one of the things the listener came here to press, and a centred control
+   the size of an answer read as a thirteenth option. */
+.board-back {
+  align-self: flex-start;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35em;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--muted);
+  font: inherit;
+  font-size: var(--fs--1);
+  padding: 0.35em 0.7em;
+  cursor: pointer;
+}
+.board-back:hover { background: var(--surface); color: var(--ink); }
+.board-back:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* The arrow points the way the reader came from, which on a right-to-left board is
+   the other way. */
+[dir="rtl"] .board-back-arrow { transform: scaleX(-1); display: inline-block; }
+
+/* The keypad's own Cancel keeps the centred, full-size treatment: it sits beside
+   Confirm as one of a pair, and a pair of buttons that do opposite things should be
+   the same size. */
 .board-close { align-self: center; flex: 0 0 auto; }
 
 /* The answer that opens a keypad rather than answering anything: dashed, the same
@@ -458,7 +537,8 @@
   margin: 0;
   font-size: clamp(1.4rem, 7vw, 2.6rem);
   text-align: center;
-  overflow-wrap: anywhere;
+  /* Not mid-word: this is the same sentence, read back to the owner. */
+  overflow-wrap: break-word;
 }
 .board-entry-preview-empty { font-size: var(--fs-0); color: var(--muted); font-style: italic; }
 /* On a coloured stage the preview needs the treatment the question already had --
@@ -487,3 +567,61 @@
   text-align: center;
 }
 .board-stage-incoming .board-speech-trouble { color: var(--muted); }
+
+/* --- the beacon -------------------------------------------------------------
+   The one place in this app that moves, and the motion is the feature: a distress
+   signal that does not flash is not a distress signal. Everything else here gives
+   its information statically on purpose.
+
+   The dot is 300ms (`ui/platform/beacon.js`), so the fastest this ever gets is under
+   two flashes a second, against the three-per-second photosensitive threshold. That
+   bound is a safety property, not a taste. */
+.beacon {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: calc(env(safe-area-inset-top) + var(--space-3))
+           calc(env(safe-area-inset-right) + var(--space-3))
+           calc(env(safe-area-inset-bottom) + var(--space-3))
+           calc(env(safe-area-inset-left) + var(--space-3));
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+.beacon-word {
+  margin: 0;
+  font-size: clamp(3rem, 22vw, 12rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-align: center;
+  overflow-wrap: break-word;
+}
+.beacon-hint { margin: 0; font-size: var(--fs--1); color: rgb(255 255 255 / 0.6); }
+
+/* SOS: the whole screen is the lamp. White on black at full area is the brightest
+   thing a phone can do, and brightness is the only thing that carries at distance. */
+.beacon-sos { background: #000; }
+.beacon-sos.beacon-lit { background: #fff; color: #000; }
+.beacon-sos.beacon-lit .beacon-hint { color: rgb(0 0 0 / 0.55); }
+
+/* Attention: a word held still, with a light running the edge of the display. The
+   travelling light is what catches an eye that is not pointed at the screen; the
+   word is what it has to say once the eye arrives. */
+.beacon-attention { background: #11151a; }
+.beacon-edge { position: absolute; background: var(--alert); opacity: 0.15; }
+.beacon-edge-top, .beacon-edge-bottom { inset-inline: 0; block-size: 0.9rem; }
+.beacon-edge-top { inset-block-start: 0; }
+.beacon-edge-bottom { inset-block-end: 0; }
+.beacon-edge-left, .beacon-edge-right { inset-block: 0; inline-size: 0.9rem; }
+.beacon-edge-left { inset-inline-start: 0; }
+.beacon-edge-right { inset-inline-end: 0; }
+.beacon-attention[data-edge="0"] .beacon-edge-top,
+.beacon-attention[data-edge="1"] .beacon-edge-right,
+.beacon-attention[data-edge="2"] .beacon-edge-bottom,
+.beacon-attention[data-edge="3"] .beacon-edge-left { opacity: 1; }

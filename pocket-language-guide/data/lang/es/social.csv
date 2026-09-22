@@ -6,7 +6,7 @@ sim-data.may-i-use-your-wifi,¿Me permite usar su wifi?,,me peɾmˈite usˈaɾ s
 children.make-an-announcement,"Avise por el altavoz, por favor",por megafonía · por altoparlante,"abˈise poɾ el ˌaltabˈos, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
 etiquette.is-tipping-expected,¿Se acostumbra dejar propina?,,se ˌakostˈumbɾa dexˈaɾ pɾopˈina,,2,es-agent-v1;ipa=espeak
 sim-data.how-much-data-is-included,¿Cuántos datos incluye?,,kwˈantos dˈatos inklˈuʝe,,2,es-agent-v1;ipa=espeak
-children.child-age,Mi hijo/a tiene {} años,,mi ˈixo / a tjˈene {} ˈaɲos,,2,es-agent-v1;ipa=espeak
+children.child-age,Mi hijo tiene {} años,,,,2,es-agent-v1;src=RAE-DLE;ipa=espeak
 etiquette.is-service-included,¿El servicio está incluido?,,el seɾbˈisjo estˈa ˌinkluˈido,,2,es-agent-v1;ipa=espeak
 sim-data.do-you-need-my-passport,¿Necesita mi pasaporte?,,nˌesesˈita mi pˌasapˈoɾte,,2,es-agent-v1;ipa=espeak
 children.high-chair,¿Tienen silla alta para niños?,trona · periquera,tjˈenen sˈiʝa ˈalta pˌaɾa nˈiɲos,,2,es-agent-v1;ipa=espeak

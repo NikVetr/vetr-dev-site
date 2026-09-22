@@ -21,6 +21,7 @@ import { openLightbox } from './lightbox.js';
 import {
   applyStatic, languageName, loadUiLanguage, regionList, setLanguageNames, t,
 } from './i18n.js';
+import * as store from './platform/store.js';
 
 /** @param {string} tag @param {Record<string,string>} attrs @param {(Node|string)[]} kids */
 function el(tag, attrs = {}, kids = []) {
@@ -259,6 +260,30 @@ function renderWantGrid(shown, coverage, readerCode, onPick) {
   }));
 }
 
+/**
+ * Open or shut the language picker, and remember which.
+ *
+ * Remembered rather than reset on every visit, the way the studio's panels are: a
+ * reader who folded it away meant it, and a reader who has not touched it gets it
+ * open, which is the state a first visit needs.
+ * @param {boolean} open @param {string} [chosen] the language name, when shut
+ */
+function setWantOpen(open, chosen) {
+  const toggle = document.getElementById('want-toggle');
+  const grid = document.getElementById('want');
+  const said = document.getElementById('want-chosen');
+  if (!toggle || !grid) return;
+  toggle.setAttribute('aria-expanded', String(open));
+  grid.hidden = !open;
+  // The chosen language reads as the answer to the label's question, so it is shown
+  // only while the question is folded up -- with the grid open it is already marked
+  // on the button itself.
+  if (said) said.textContent = open ? '' : (chosen ?? said.textContent ?? '');
+  store.set(WANT_KEY, open ? 'open' : 'shut');
+}
+
+const WANT_KEY = 'plg.want-open';
+
 /** How many other languages to show beside the reader's own. */
 const COLLAGE_DEPTH = 5;
 
@@ -468,10 +493,24 @@ async function main() {
         button.setAttribute('aria-pressed',
           String(button.getAttribute('data-lang') === code));
       }
+      // **Folded the moment it has been used.** The card is now in the top row and
+      // the three things to do with it are on it; leaving fifty buttons above them
+      // means scrolling past the question to reach its answer.
+      const row = languages.find((l) => l.bcp47 === code);
+      setWantOpen(false, languageName(code, row?.exonym_en ?? code));
       // `reelToTopRow` owns the scroll: it has to happen before the cards are
       // transformed, or it measures the wrong position.
       if (!chosen) return;
     });
+
+    const toggle = document.getElementById('want-toggle');
+    if (toggle && !toggle.dataset.wired) {
+      toggle.dataset.wired = '1';
+      toggle.addEventListener('click', () => {
+        setWantOpen(toggle.getAttribute('aria-expanded') === 'false');
+      });
+      if (store.get(WANT_KEY) === 'shut') setWantOpen(false);
+    }
   }
 
   render(reader);

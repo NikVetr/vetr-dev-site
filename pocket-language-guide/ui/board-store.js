@@ -250,3 +250,22 @@ export function fromSheetExtra(extra, pair) {
     pair,
   };
 }
+
+/**
+ * Replace the whole personal store, or empty it.
+ *
+ * The two halves of a portable copy. `write` is the same queued, verified write
+ * every edit goes through, so an import cannot bypass the check that the disk
+ * accepted it -- and `forget()` empties rather than removing the key, because an
+ * absent store and an emptied one are the same thing to `read` and one of them
+ * leaves less to go wrong.
+ * @param {BoardPersonal} data
+ */
+export function replaceAll(data) {
+  return write({ ...empty(), ...data, schemaVersion: VERSION });
+}
+
+/** Empty it. The confirmation is the caller's; this just does it. */
+export function forgetAll() {
+  return write(empty());
+}

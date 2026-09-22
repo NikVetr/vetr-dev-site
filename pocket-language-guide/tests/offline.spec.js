@@ -266,7 +266,7 @@ test('a board works on a cold offline visit with nothing saved', async ({ page, 
   await page.locator('[data-button="avoid"]').click();
   await page.locator('.board-controls button').click();
   await expect(page.locator('.board-answer')).toHaveCount(6);
-  await page.locator('.board-close').click();
+  await page.locator('.board-back').click();
   await page.locator('.board-message').click();
 
   // A duration reply, which reads from three different concept groups and from

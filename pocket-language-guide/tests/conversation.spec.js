@@ -269,8 +269,9 @@ test('cancelling a reply claims no answer and goes back to the question', async 
   await page.locator('.board-controls button').click();
   await expect(page.locator('.board-answers')).toBeVisible();
 
-  // Close is the listener's control, so it is in the listener's language.
-  const close = page.locator('.board-close');
+  // The way back is the listener's control, so it is in the listener's language --
+  // small and in the corner, not centred among the answers.
+  const close = page.locator('.board-back');
   await expect(close).toHaveAttribute('lang', 'zh-Hans');
   // ...and actually *in* it. The attribute alone passed while the button said
   // "Close", because the listener's catalogue had no such key and fell back to
@@ -618,7 +619,7 @@ test('the editor is owner-only and cannot be reached from a message', async ({ p
   await expect(page.locator('#board-edit')).toBeHidden();
   await page.locator('.board-controls button').click();
   await expect(page.locator('#board-edit')).toBeHidden();
-  await page.locator('.board-close').click();
+  await page.locator('.board-back').click();
   await page.locator('.board-message').click();
   await expect(page.locator('#board-edit')).toBeVisible();
 });
@@ -922,4 +923,147 @@ test('the mark that promises an answer is explained, and only where it is used',
   await page.locator('[data-button="focus"]').click();
   await expect(page.locator('[data-button="shoulders"]')).toBeVisible();
   await expect(page.locator('#board-legend')).toBeEmpty();
+});
+
+test('a message never breaks a word in half', async ({ page }) => {
+  // **Reported from a phone: "supervisor" was set as "supervis / or".** A reader
+  // sounding that out to a stranger is being actively misled, and in a script they
+  // cannot read the damage is invisible to them. The cause was a fitter that grew
+  // the text while `overflow-wrap: anywhere` quietly absorbed the overflow by
+  // breaking words, so growing never looked like it had gone too far.
+  //
+  // Two changes fix it and **either one alone is sufficient**, which is worth knowing
+  // before someone deletes one as redundant: the CSS is now `break-word`, which only
+  // breaks a word that cannot fit a line by itself, and the fitter now measures width
+  // as well as height so it stops before any word gets that long. Checked by
+  // reverting each in turn -- this test only goes red when both are gone.
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=spa');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('[data-button="avoid"]').click();
+  await page.locator('.board-controls button').first().click();
+  await expect(page.locator('.board-answer').first()).toBeVisible();
+  // "I am not sure, I need to ask my supervisor" -- the longest answer on the board,
+  // and the one that produced the screenshot.
+  await page.locator('.board-answer').nth(4).click();
+
+  const broken = await page.locator('.board-message-text').evaluate((node) => {
+    // Walk the text one character at a time and group by line box: where a line
+    // starts on a character that is not preceded by a space, the browser split a
+    // word to get there.
+    const text = node.textContent ?? '';
+    const point = node.firstChild;
+    if (!point) return ['no text node'];
+    const range = document.createRange();
+    /** @type {string[]} */ const bad = [];
+    let top = null;
+    for (let i = 0; i < text.length; i += 1) {
+      range.setStart(point, i);
+      range.setEnd(point, i + 1);
+      const rect = range.getBoundingClientRect();
+      if (!rect.height) continue;
+      if (top !== null && rect.top > top + 1 && !/\s/.test(text[i - 1] ?? ' ')) {
+        bad.push(`${text.slice(Math.max(0, i - 8), i)} / ${text.slice(i, i + 8)}`);
+      }
+      top = rect.top;
+    }
+    return bad;
+  });
+  expect(broken).toEqual([]);
+});
+
+// --- the beacon ---------------------------------------------------------------
+
+test('the beacon is seen from across a road, and stays under the flash limit', async ({ page }) => {
+  // **The one thing in this app that moves**, because a distress signal that does
+  // not move is not one. Everywhere else the same information is given statically.
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=emergency');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await expect(page.locator('.board-cell-beacon')).toHaveCount(2);
+
+  await page.locator('[data-button="sos"]').click();
+  await expect(page.locator('.beacon')).toBeVisible();
+
+  // **A safety property, not a style one.** WCAG puts the photosensitive seizure
+  // threshold at three flashes per second; a Morse dot of 300ms keeps this at one.
+  // Counted rather than asserted from the constant, so shortening the dot without
+  // thinking about it goes red here.
+  const flips = await page.evaluate(async () => {
+    const node = /** @type {HTMLElement} */ (document.querySelector('.beacon'));
+    let last = node.classList.contains('beacon-lit');
+    let n = 0;
+    const started = performance.now();
+    while (performance.now() - started < 3000) {
+      await new Promise((r) => { setTimeout(r, 20); });
+      const now = node.classList.contains('beacon-lit');
+      if (now !== last) { n += 1; last = now; }
+    }
+    return n;
+  });
+  expect(flips / 2 / 3).toBeLessThan(3);
+  expect(flips).toBeGreaterThan(0);
+
+  // Tapping anywhere stops it: someone who has just been found should not have to
+  // hunt for a control.
+  await page.locator('.beacon').click();
+  await expect(page.locator('.beacon')).toHaveCount(0);
+
+  // The other mode is a word held still with a light running the edge of the
+  // display -- the travelling light is what catches an eye not pointed at the phone.
+  await page.locator('[data-button="attention"]').click();
+  await expect(page.locator('.beacon-attention')).toBeVisible();
+  await expect(page.locator('.beacon-word')).toHaveText('HELP');
+  const edges = await page.evaluate(async () => {
+    const node = /** @type {HTMLElement} */ (document.querySelector('.beacon'));
+    const seen = new Set();
+    for (let i = 0; i < 12; i += 1) {
+      seen.add(node.dataset.edge);
+      await new Promise((r) => { setTimeout(r, 200); });
+    }
+    return [...seen].sort();
+  });
+  expect(edges).toEqual(['0', '1', '2', '3']);
+
+  // Escape leaves the beacon and nothing else: the grid is exactly where it was.
+  await page.keyboard.press('Escape');
+  await expect(page.locator('.beacon')).toHaveCount(0);
+  await expect(page.locator('[data-button="sos"]')).toBeVisible();
+});
+
+test('personal data can be carried off the device, and deleted from it', async ({ page }) => {
+  // §5.4. There is no account and no server, so the only copy of someone's own
+  // phrases is on one device -- which means there has to be a way to get it off.
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=spa');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.evaluate(() => localStorage.setItem('plg.boards', JSON.stringify({
+    schemaVersion: 1,
+    phrases: {
+      p1: {
+        id: 'p1', label: 'no peanuts', owner: 'No peanuts', listener: '不要花生',
+        pair: 'zh-Hans__en', created: '2026-09-21T00:00:00.000Z',
+      },
+    },
+    placements: { 'spa/main': ['p1'] },
+  })));
+  await page.reload();
+  await expect(page.locator('[data-button="p1"]')).toBeVisible();
+
+  // **Offered on every pair**, not only the 22 languages that ask about voice: a
+  // backup button that appears for Russian readers alone is one nobody can find.
+  await page.locator('#board-settings').click();
+  const dialog = page.locator('dialog.speaker-settings');
+  await expect(dialog).toBeVisible();
+
+  const save = page.waitForEvent('download');
+  await dialog.getByRole('button', { name: 'Save a copy' }).click();
+  const file = await save;
+  expect(file.suggestedFilename()).toMatch(/^pocket-language-guide-\d{4}-\d{2}-\d{2}\.json$/);
+
+  // Deleting is confirmed, because the saved copy is the only way back.
+  page.once('dialog', (d) => d.accept());
+  await dialog.getByRole('button', { name: 'Delete everything' }).click();
+  await expect(dialog.locator('[role="status"]')).toHaveText('Deleted.');
+  await page.keyboard.press('Escape');
+  await expect(page.locator('[data-button="p1"]')).toHaveCount(0);
 });

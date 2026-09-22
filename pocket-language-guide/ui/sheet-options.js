@@ -5,7 +5,7 @@
 
 import {
   browserSheetContext, ensureFontCss, loadText, loadLanguages, makeSpec,
-  pairFromQuery, readerLanguage, showFatal, afterPaint, withBusy,
+  pairFromQuery, readerLanguage, showFatal, afterPaint, withBusy, download,
 } from './app.js';
 import { buildSheet, stacksFor } from '../core/sheet.js';
 import { isElven } from '../core/elven-frame.js';
@@ -22,7 +22,8 @@ import {
 } from './glyphs.js';
 import { familyFor } from '../render/fonts.js';
 import { regionRow } from './flags.js';
-import { speakerControl } from './speaker-settings.js';
+import { speakerControl, personalSection } from './speaker-settings.js';
+import { personalWiring } from './personal-data.js';
 import {
   warningText, applyStatic, languageName, loadUiLanguage, number, regionList, t,
 } from './i18n.js';
@@ -277,6 +278,15 @@ async function main() {
     languages: [choice.target, choice.source],
     profile: spec.speaker ?? {},
     onChange: (next) => set({ speaker: next }),
+    // The same settings dialog the board opens, so the reader's own phrases and
+    // their saved card edits can be carried off a machine that only ever prints.
+    // A reload afterwards, because this page holds a solved layout built from the
+    // edits that just changed underneath it -- re-deriving that by hand would be a
+    // second, quieter copy of `buildSheet`.
+    extra: () => personalSection(personalWiring({
+      save: download,
+      onChanged: () => location.reload(),
+    })),
   });
 
   $('controls').replaceChildren(

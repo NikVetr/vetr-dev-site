@@ -497,5 +497,22 @@
   "boards.emergency.medical": "Hurt or ill…",
   "boards.emergency.medicalTitle": "What is wrong",
   "boards.emergency.lost": "Lost or stolen…",
-  "boards.emergency.lostTitle": "Lost, stolen or in trouble"
+  "boards.emergency.lostTitle": "Lost, stolen or in trouble",
+  "boards.emergency.sos": "Flash SOS",
+  "boards.emergency.attention": "Attract attention",
+  "beacon.help": "HELP",
+  "beacon.sos": "SOS",
+  "beacon.dismiss": "Tap anywhere to stop",
+  "personal.heading": "Your own phrases and settings",
+  "personal.lede": "Everything here lives on this device and nowhere else. Save a copy to move it to another phone, or to keep a backup.",
+  "personal.export": "Save a copy",
+  "personal.import": "Load a copy…",
+  "personal.forget": "Delete everything",
+  "personal.confirm": "Delete every phrase you have written, your settings and your saved card edits? This cannot be undone, and a saved copy is the only way back.",
+  "personal.nothing": "You have not written anything yet, so there is nothing to save.",
+  "personal.loaded": "Loaded {phrases} phrases. Nothing was changed until now.",
+  "personal.refused": "Not loaded — nothing was changed:",
+  "personal.gone": "Deleted.",
+  "settings.open": "Settings",
+  "settings.title": "Settings"
 }

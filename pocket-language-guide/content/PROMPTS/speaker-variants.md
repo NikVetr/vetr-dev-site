@@ -75,6 +75,18 @@ all of them bad on a card:
 | the feminine parked in `text_alt` | `ru`, `pl`, `hr`, `uk`, `pt`, `hi`, `de` | move it to a variant row and clear `text_alt` |
 | a bare ending in `text_alt` | `fr` `végétarienne` | write the whole sentence in the variant row |
 
+`node scripts/speaker_coverage.mjs <code> --slashed` prints that language's backlog:
+the first-person rows whose `text` still carries a slash, with the English beside
+them so you can see which half is which.
+
+**Not every slash is a gender pair, and the filter cannot tell.** Czech's
+`communication.i-cannot-read-understand` is `Neumím to přečíst / nerozumím tomu` —
+"I cannot read / understand", two genuine alternatives offered to the reader, which
+is what that concept means and must stay. Spanish's `Estoy perdido/a` is a gender
+pair and must not. Read the English before splitting anything: if both halves say
+the same thing about different speakers it is a variant, and if they say different
+things it is the row.
+
 A slash makes the reader do grammar at a hotel counter in bad light, and `text_alt`
 means "a second *wording*" everywhere else in the corpus — Traditional forms for
 `zh-Hans`, a periphrasis for a construction that will not take a slot — so using it

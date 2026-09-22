@@ -102,22 +102,18 @@
           "replySetId": "which-way"
         },
         {
-          "id": "number",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "emergency-medical.what-is-the-emergency-number"
-          },
-          "colour": "comm"
+          "id": "sos",
+          "kind": "beacon",
+          "beacon": "sos",
+          "labelKey": "boards.emergency.sos",
+          "colour": "alert"
         },
         {
-          "id": "nospeak",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "communication.i-do-not-speak-this-language"
-          },
-          "colour": "comm"
+          "id": "attention",
+          "kind": "beacon",
+          "beacon": "attention",
+          "labelKey": "boards.emergency.attention",
+          "colour": "alert"
         }
       ]
     },

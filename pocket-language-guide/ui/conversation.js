@@ -13,12 +13,12 @@
 
 import {
   loadText, loadLanguages, readerLanguage, registerOffline, showFatal,
-  deferUpdates, applyUpdateIfIdle,
+  deferUpdates, applyUpdateIfIdle, download,
 } from './app.js';
 import {
   loadCorpus, loadLanguage, loadVariants, fillLanguageSlots,
 } from '../core/pack.js';
-import { axesFor, variantKey } from '../core/speaker.js';
+import { variantKey } from '../core/speaker.js';
 import {
   validateBoard, resolvePhrase, missingPhrases, reduce, openBoard, currentNode,
 } from '../core/conversation.js';
@@ -30,9 +30,13 @@ import { parseAmount, formatDuration, unitName } from '../core/duration.js';
 import { openBoardEditor } from './board-editor.js';
 import { speech } from './platform/speech.js';
 import { keepAwake } from './platform/wake.js';
+import { startBeacon, stopBeacon } from './platform/beacon.js';
 import { onBack } from './platform/shell.js';
 import { read as readPersonal, placedOn } from './board-store.js';
-import { openSpeakerSettings, readProfile, noticeFor } from './speaker-settings.js';
+import {
+  openSpeakerSettings, readProfile, noticeFor, personalSection,
+} from './speaker-settings.js';
+import { personalWiring } from './personal-data.js';
 import { applyStatic, loadCatalogue, loadUiLanguage, languageName, t } from './i18n.js';
 
 const $ = (/** @type {string} */ id) => /** @type {HTMLElement} */ (document.getElementById(id));
@@ -184,7 +188,6 @@ async function main() {
   // languages declares an axis at all — usually neither, and never more than two
   // small files — so that answering the question later needs no round trip and no
   // reload. `variantKey` is recomputed on every change; the tables are not.
-  const asked = axesFor(corpus.speakerAxes, [listener, owner]);
   const variants = Object.fromEntries(await Promise.all(
     [listener, owner]
       .filter((code) => corpus.speakerAxes[code]?.length)
@@ -268,6 +271,11 @@ async function main() {
   // Hydrated once. The page is authoritative from here; the editor hands back a new
   // value rather than the page asking the disk what was just written.
   let personal = readPersonal();
+  // Which screens a placement may name. Only this board's, because that is what is
+  // loaded -- a package for another board is not refused, it simply has nothing here
+  // to check against, which is the plain-backup case.
+  /** @type {Record<string, Set<string>>} */
+  const knownScreens = { [boardId]: new Set(Object.keys(board.nodes)) };
 
   /**
    * The node as the reader has it: the author's buttons, then their own.
@@ -348,7 +356,7 @@ async function main() {
       const atRoot = state.path.length < 2;
       $('board-up').hidden = false;
       $('board-edit').hidden = false;
-      $('board-settings').hidden = !asked.length;
+      $('board-settings').hidden = false;
       $('board-up-label').textContent = atRoot ? t('board.allTopics') : t('board.up');
       // **The key to the only distinction the grid draws**, and only where the grid
       // draws it. A tint and a mark that nobody can decode are decoration -- the
@@ -361,9 +369,30 @@ async function main() {
         lang: owner,
         title: node.titleKey ? t(node.titleKey) : undefined,
         label: labelOf,
-        available: (button) => (button.kind === 'submenu'
+        // A submenu and a beacon are always available: neither is a phrase, so
+        // neither can be missing from the corpus.
+        available: (button) => (button.kind === 'submenu' || button.kind === 'beacon'
           ? true : Boolean(phraseOf(button))),
         onPick: (button) => {
+          // **Not a state change, and deliberately not part of the board's own
+          // machine.** A beacon is not something being said -- there is no message,
+          // no reply, nothing to return from -- so it takes over the screen and hands
+          // it straight back. Leaving `state` alone means the grid is exactly where
+          // it was when the beacon stops, which is what someone who has just been
+          // found needs.
+          if (button.kind === 'beacon') {
+            speech.stop();
+            startBeacon({
+              mode: button.beacon === 'sos' ? 'sos' : 'attention',
+              label: t(button.beacon === 'sos' ? 'beacon.sos' : 'beacon.help'),
+              dismiss: t('beacon.dismiss'),
+              // The screen is the signal, so it must not sleep while one is running
+              // -- and the lock goes back to following the message view afterwards.
+              onStop: () => keepAwake(state.view !== 'grid'),
+            });
+            keepAwake(true);
+            return;
+          }
           openedFrom = button.id;
           dispatch({
             type: 'open', buttonId: button.id, kind: button.kind, nodeId: button.nodeId,
@@ -521,14 +550,32 @@ async function main() {
   // declare no axis, and for those pairs this control does not exist at all rather
   // than opening onto an empty form. Owner-only and grid-only, like the editor: a
   // settings screen is not part of a live conversation.
+  // **Always offered, unlike the voice question inside it.** The axes are only worth
+  // asking about for 22 of 53 languages, but the reader's own phrases are theirs on
+  // every pair -- and a Save-a-copy button that appears only for Russian readers is
+  // a backup nobody can find.
   const settingsButton = $('board-settings');
-  if (asked.length) {
-    settingsButton.textContent = t('speaker.open');
+  {
+    settingsButton.textContent = t('settings.open');
     settingsButton.addEventListener('click', () => openSpeakerSettings({
       axes: corpus.speakerAxes,
       languages: [listener, owner],
       profile,
       onChange: (next) => { profile = next; voice(); sayStatus(); paint(); },
+      extra: personalSection(personalWiring({
+        save: download,
+        // **What this build can actually show**, so an import naming a screen that
+        // is not here is refused rather than reported as a success with the phrases
+        // parked where nobody can reach them.
+        boards: knownScreens,
+        onChanged: () => {
+          personal = readPersonal();
+          profile = readProfile();
+          voice();
+          sayStatus();
+          paint();
+        },
+      })),
     }));
   }
 
@@ -542,6 +589,9 @@ async function main() {
    * what lets the press reach the shell and leave the board.
    */
   const unwind = () => {
+    // A beacon first: it is over the whole screen, so it is what "back" means while
+    // one is running, and it is not part of the board's own state.
+    if (document.querySelector('.beacon')) { stopBeacon(); return true; }
     if (state.view === 'reply') { dispatch({ type: 'cancelReply' }); return true; }
     if (state.view !== 'grid') { dispatch({ type: 'dismiss' }); return true; }
     if (state.path.length > 1) { dispatch({ type: 'up' }); return true; }
