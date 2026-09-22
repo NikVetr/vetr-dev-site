@@ -306,3 +306,58 @@ test('a shell update does not pull a message out from under a conversation', asy
   await page.waitForTimeout(2500);
   await expect(page.locator('.board-message-text')).toHaveText(shown ?? '');
 });
+
+test('a board opened with a connection opens again without one', async ({ page, context }) => {
+  // **Reported as "converse does not work for most languages".** The shell carries
+  // the concept bank and the default pair's rows and no more, which is right -- fifty
+  // languages of rows is some seven megabytes -- but it meant that with the network
+  // off, converse worked in Mandarin and nowhere else, because Mandarin is the pair
+  // the shell ships with. Opening a board is the moment there demonstrably *is* a
+  // connection, so that is when the pair it is using gets kept.
+  /** @type {string[]} */ let reads = [];
+  page.on('request', (r) => { if (r.url().includes('/data/lang/de/')) reads.push(r.url()); });
+  await page.goto('/conversation.html?target=de&source=en&board=emergency');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  // The worker has to be in charge before the network goes, or the offline visit is
+  // testing the browser's cache rather than this app's.
+  await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
+  const labels = await page.locator('.board-cell').allTextContents();
+  // The worker answers when it has finished, and the page does not wait on it.
+  await expect.poll(async () => page.evaluate(async () => {
+    const cache = await caches.open('plg-packs');
+    return (await cache.keys()).filter((r) => r.url.includes('/data/lang/de/')).length;
+  }), { timeout: 30_000 }).toBeGreaterThan(0);
+
+  /** @type {string[]} */ const errors = [];
+  page.on('pageerror', (e) => errors.push(String(e).slice(0, 160)));
+  await context.setOffline(true);
+  try {
+    await page.goto('/conversation.html?target=de&source=en&board=emergency');
+    await expect(page.locator('.board-cell').first()).toBeVisible({ timeout: 30_000 });
+    // The whole grid, in the same order, with nothing drawn unavailable: a board that
+    // resolves half its phrases is a different failure wearing the same face.
+    expect(await page.locator('.board-cell').allTextContents()).toEqual(labels);
+    await expect(page.locator('.board-cell[disabled]')).toHaveCount(0);
+    // German declares an axis about who is speaking, so the board reads its
+    // `variants.csv` too -- leaving that out of the list cost exactly this visit,
+    // with `LoadError: data/lang/de/variants.csv: HTTP 504`.
+    expect(errors).toEqual([]);
+  } finally {
+    await context.setOffline(false);
+  }
+
+  // **Asked for once, not on every open.** `cache.add` always fetches, which is what
+  // the Save button wants -- a pack saved before a data change gets the new rows by
+  // being asked for again. A board warms its own pair on every open, and re-fetching
+  // sixty files each time would spend a connection the reader may be paying for on
+  // rows already in hand. Counted against the cold open, where the page's own reads
+  // and the worker's are both in the total.
+  const cold = reads.length;
+  reads = [];
+  await page.goto('/conversation.html?target=de&source=en&board=intro');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.waitForTimeout(2500);
+  // The page reads every group of both languages whatever the board is, so the only
+  // thing that can differ between the two opens is what the worker went back for.
+  expect(reads.length).toBeLessThan(cold);
+});

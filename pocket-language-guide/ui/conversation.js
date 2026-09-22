@@ -13,7 +13,7 @@
 
 import {
   loadText, loadLanguages, readerLanguage, registerOffline, showFatal,
-  deferUpdates, applyUpdateIfIdle, download,
+  deferUpdates, applyUpdateIfIdle, download, keepBoardOffline,
 } from './app.js';
 import {
   loadCorpus, loadLanguage, loadVariants, fillLanguageSlots,
@@ -635,6 +635,22 @@ async function main() {
 
   paint();
   registerOffline();
+  // **This pair now opens without a connection.** The shell ships the concept bank
+  // and one pair's rows and no more, which is right -- fifty-one languages of rows is
+  // seven megabytes nobody should download before asking for anything -- but it meant
+  // that offline, converse worked in Mandarin and nowhere else. Opening a board is
+  // the honest moment to fix that: there is a connection right now, this is the pair
+  // that matters, and this screen is the one written for the case where the signal is
+  // gone. Nothing waits on it and nothing reports it: the board is already drawn, and
+  // a reader can do nothing about a cache write that failed.
+  keepBoardOffline({
+    groups: corpus.groups,
+    target: listener,
+    source: owner,
+    // The keys of the table this page already built, so the list is the files that
+    // were really fetched rather than a guess at which languages have one.
+    variants: Object.keys(variants),
+  }).catch(() => {});
 }
 
 main().catch(showFatal);

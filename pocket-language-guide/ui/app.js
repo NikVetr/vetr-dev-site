@@ -427,13 +427,75 @@ function registerWorker() {
 }
 
 /**
+ * Hand the worker a list of URLs to keep, and wait for it to say whether it did.
+ *
+ * The protocol, once, for the two callers that use it: a sheet being saved for
+ * offline, which needs fonts and the solver's inputs, and a board that has just
+ * opened, which needs neither. What they share is this -- and a timeout, because a
+ * worker that never answers must not leave a button spinning forever.
+ * @param {string[]} urls
+ * @param {boolean} [onlyMissing] skip what is already kept, instead of refreshing it
+ * @returns {Promise<{ok:boolean, failed:string[], total:number}>}
+ */
+async function keepOffline(urls, onlyMissing = false) {
+  if (!('serviceWorker' in navigator)) throw new Error('this browser cannot save for offline');
+  const registration = await navigator.serviceWorker.ready;
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error('saving for offline timed out')), 120000);
+    /** @param {MessageEvent} event */
+    const onMessage = (event) => {
+      if (event.data?.type !== 'cache-urls-done') return;
+      clearTimeout(timer);
+      navigator.serviceWorker.removeEventListener('message', onMessage);
+      resolve(event.data);
+    };
+    navigator.serviceWorker.addEventListener('message', onMessage);
+    registration.active?.postMessage({ type: 'cache-urls', urls, onlyMissing });
+  });
+}
+
+/**
+ * Keep the rows a board is using, so the same pair opens with no connection.
+ *
+ * **The shell carries the concept bank and one pair's rows, and no more, on purpose:**
+ * fifty-one languages of rows is some seven megabytes, which is not a thing to
+ * download on hotel wifi before anyone has asked for anything. The consequence was
+ * reported as a defect and is one -- offline, converse worked in Mandarin and in
+ * nothing else, because Mandarin is the pair the shell ships with.
+ *
+ * Opening a board is the honest moment to fix that. It means there *is* a connection
+ * right now, it names exactly which pair matters, and a board is the one screen in
+ * this app written for the case where the connection is gone. A pack's rows are
+ * 100-160KB, and usually only one of the two is fetched: the worker skips anything it
+ * finds in the shell cache, which is where the reader's own side of most pairs already
+ * is, and that is also what stops this shadowing a shipped file.
+ *
+ * No fonts and no solver, unlike `saveForOffline`: a board draws in the system stack
+ * and has never loaded either.
+ *
+ * `variants` is named by the caller rather than guessed at, because the caller has
+ * already fetched exactly those files: it is the languages that declare an axis about
+ * who is speaking, which is 22 of 53. Asking for one that does not exist would have
+ * the worker report a failed save, and leaving one out cost the German board its
+ * offline visit -- `LoadError: data/lang/de/variants.csv: HTTP 504`.
+ * @param {{groups:string[], target:string, source:string, variants?:string[]}} pair
+ */
+export function keepBoardOffline({ groups, target, source, variants = [] }) {
+  return keepOffline([
+    ...groups.flatMap((group) => [
+      `data/lang/${target}/${group}.csv`,
+      `data/lang/${source}/${group}.csv`,
+    ]),
+    ...variants.map((code) => `data/lang/${code}/variants.csv`),
+  ], true);
+}
+
+/**
  * Ask the worker to cache everything one language pair needs, so the sheet can be
  * rebuilt and exported with no network at all.
  * @param {{corpus:any, target:string, source:string, manifest:any}} args
  */
 export async function saveForOffline({ corpus, target, source, manifest }) {
-  if (!('serviceWorker' in navigator)) throw new Error('this browser cannot save for offline');
-  const registration = await navigator.serviceWorker.ready;
   const { stacksFor } = await sheetModule();
   const stacks = stacksFor(corpus, target, source);
   /** @type {string[]} */ const urls = [];
@@ -452,18 +514,7 @@ export async function saveForOffline({ corpus, target, source, manifest }) {
     urls.push(`data/fonts/${face.file}.woff2`, `data/fonts/${face.file}.ttf`);
   }
 
-  return new Promise((resolve, reject) => {
-    const timer = setTimeout(() => reject(new Error('saving for offline timed out')), 120000);
-    /** @param {MessageEvent} event */
-    const onMessage = (event) => {
-      if (event.data?.type !== 'cache-urls-done') return;
-      clearTimeout(timer);
-      navigator.serviceWorker.removeEventListener('message', onMessage);
-      resolve(event.data);
-    };
-    navigator.serviceWorker.addEventListener('message', onMessage);
-    registration.active?.postMessage({ type: 'cache-urls', urls });
-  });
+  return keepOffline(urls);
 }
 
 /** @param {unknown} err */

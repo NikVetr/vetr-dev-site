@@ -676,10 +676,22 @@ sentence, and making a button to say "no peanuts" to a waiter does not add a row
 every card that pair prints. The app does not translate and the editor says so; a
 half-written phrase saves but draws disabled.
 
-**A board works with no preparation.** Its corpus is precached in the shell, bounded
-by declared board pairs rather than by languages — everything else in this app is
-something a reader chose in advance, and someone face down in a country whose
-language they do not speak chose nothing and has no signal now.
+**A board works with no preparation.** Its corpus is precached in the shell —
+everything else in this app is something a reader chose in advance, and someone face
+down in a country whose language they do not speak chose nothing and has no signal
+now. The shell carries the concept bank, which every pair needs, and the rows for the
+pair the app opens with; fifty-one languages of rows is some seven megabytes, which is
+not a thing to download before anyone has asked for anything.
+
+**And a pair that has been opened once stays open.** That bound was reported as a
+defect and was one: with the network off, converse worked in Mandarin and nowhere
+else, because Mandarin is the pair the shell ships with. Opening a board is the moment
+there demonstrably *is* a connection, so that is when the pair it is using gets kept —
+100-160KB of rows per language, usually only one of the two, and no fonts or solver.
+The worker skips whatever the shell already has, which is both why the reader's own
+side is free and why this cannot shadow a shipped file. It includes the speaker-variant table
+where the language has one, which is the file whose absence cost the German board its
+offline visit.
 
 **Speech refuses to guess.** `ui/platform/speech.js` maps `zh-Hans` to `zh-CN` and
 excludes Cantonese outright; Klingon and Quenya map to no voice at all rather than

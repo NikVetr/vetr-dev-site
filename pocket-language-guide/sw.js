@@ -13,7 +13,7 @@
 // and it drifted: seven modules were missing, so the studio would have failed with
 // the network off. VERSION is a content hash of those files, so a deploy re-primes
 // the cache without anyone remembering to bump anything.
-const VERSION = 'plg-da2c2f9491f7';
+const VERSION = 'plg-70c2670a050e';
 const SHELL_CACHE = `${VERSION}-shell`;
 /**
  * **Not version-scoped, deliberately.** The shell has to be replaced wholesale on a
@@ -164,9 +164,18 @@ self.addEventListener('message', (event) => {
     // They still count toward `total`, because the reader asked for a pair and got
     // one; what is reported is whether the pair is saved, not how many requests it
     // took.
+    //
+    // **`onlyMissing` is the difference between keeping and refreshing.** `cache.add`
+    // always fetches, which is what the Save button wants: a pack saved before a data
+    // change gets the new rows by being asked for again. A board warms its own pair
+    // every time it opens, and re-fetching sixty files on each open would spend a
+    // connection the reader may be paying for on rows already in hand -- so that
+    // caller asks for the pair to be *present*, not fresh.
     /** @type {string[]} */ const wanted = [];
     for (const url of data.urls) {
-      if (!(await shell.match(url, { ignoreSearch: true }))) wanted.push(url);
+      if (await shell.match(url, { ignoreSearch: true })) continue;
+      if (data.onlyMissing && await cache.match(url, { ignoreSearch: true })) continue;
+      wanted.push(url);
     }
     const results = await Promise.allSettled(wanted.map((u) => cache.add(u)));
     const failed = wanted.filter((/** @type {string} */ _, /** @type {number} */ i) => results[i].status === 'rejected');

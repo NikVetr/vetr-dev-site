@@ -1925,8 +1925,43 @@ enough to need the ellipsis".
 
 ### Not done in this batch
 
-- "Converse does not work for most languages" on the live site was a stale deployment:
-  every pair probed locally works with zero errors. This checkpoint is the fix.
+- Nothing, in the end, about "converse does not work for most languages" — see below.
+  It was not a stale deployment.
 - The unit words under the keypad still come from CLDR with the catalogue as a floor.
   That floor is now read from the *listener's* catalogue rather than the owner's, which
   is where it belonged: it is their screen.
+
+### "Converse does not work for most languages" was not a stale deploy
+
+That was the first guess and it was wrong, which is worth recording because the
+evidence for it was circumstantial and the check was cheap. The live site's
+`data/boards/index.json` already listed 51 listeners; `data/lang/de/social.csv` on the
+live host already had all 22 `board-answers` rows; and driven through a real browser
+against the live URL, with the service worker in charge, German, Japanese, Swahili and
+Tamil all opened the emergency board with twelve buttons, none disabled and no console
+errors. Fifty of the fifty-two languages work; the two that do not are Klingon and
+Quenya, which say so in a sentence naming the board and the language.
+
+What does reproduce the report is the network being off. The deployed shell precaches
+corpus rows for **two** languages — `en` and `zh-Hans` — because the bound is the
+default pair, and that bound is right: per-language rows across the registry come to
+something like seven megabytes, which is not a thing to push at someone before they
+have asked for anything. But the consequence is exactly what was reported, in the
+situation this screen exists for: offline, converse worked in Mandarin and in nothing
+else.
+
+So opening a board now keeps the pair it is using. That is the honest moment — it
+means there is a connection *right now*, it names which pair matters, and the reader
+has demonstrably asked for it. 100-160KB of rows per language and usually only one of
+the two, no fonts and no solver (a board has never loaded either), and the worker
+already skips anything it finds in the shell cache -- which is both why the reader's
+own side is free and why this cannot shadow a shipped file. The message protocol was factored out of
+`saveForOffline` rather than copied, since the difference between the two callers is
+only what goes in the list.
+
+One file had to be named that was not obvious: `data/lang/<code>/variants.csv`. German
+declares an axis about who is speaking, so the board reads that table, and the first
+version of the warm left it out — which cost precisely the visit it was written to
+fix, with `LoadError: data/lang/de/variants.csv: HTTP 504`. The caller names the
+languages rather than the helper guessing, because the caller has already fetched
+exactly those files.
