@@ -82,7 +82,7 @@ pharmacy-symptoms.cough-medicine,Ubat batuk,,ˈubat bˈatoʔ,,2,ms-agent-v1;ipa=
 pharmacy-symptoms.is-this-safe-during-pregnancy,Ini aman untuk ibu hamil?,,ˈini ˈaman ˈuntoʔ ˈibu hˈamel,,2,ms-agent-v1;ipa=espeak
 body-parts.head,Kepala,,kəpˈalə,,2,ms-agent-v1;ipa=espeak
 body-parts.stomach,Perut,,pˈərot,,2,ms-agent-v1;ipa=espeak
-body-parts.back,Punggung,,pˈuŋɡoŋ,,2,ms-agent-v1;ipa=espeak
+body-parts.back,Belakang,,bəlˈakaŋ,,2,ms-agent-v1;fix=DBP-belakang;ipa=espeak
 body-parts.throat,Tenggorokan,,tˌɛŋɡɔrˈokan,,2,ms-agent-v1;ipa=espeak
 body-parts.tooth,Gigi,,ɡˈiɡi,,2,ms-agent-v1;ipa=espeak
 body-parts.chest,Dada,,dˈadə,,2,ms-agent-v1;ipa=espeak

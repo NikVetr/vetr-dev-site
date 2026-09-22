@@ -2946,7 +2946,10 @@ Named so nobody has to rediscover the gap:
   `content/PROMPTS/`: `translate-section.md` for the rows, and
   `reader-side-notes.md` for the notes and the emergency labels -- the second of
   which carries what all nineteen languages learned about the `_frame`, so nobody
-  rediscovers that a preposition cannot work.
+  rediscovers that a preposition cannot work. A twentieth language also needs a
+  `data/i18n/<code>.json` catalogue, which is a different job with different
+  hazards and has its own brief in `interface-strings.md`: the chrome has to agree
+  with the printed sheet it ships beside, and its placeholders cannot inflect.
 
   **Two build steps are not optional and neither is checked by `npm run validate`.**
   A new language is a new *target* for the other eighteen reader tables, so their

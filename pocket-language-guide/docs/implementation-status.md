@@ -2262,3 +2262,118 @@ generator's own header now.
 And the Korean subsets needed rebuilding: the new rows gave the respeller new IPA, and
 a Korean reader's respelling of it emits `뉙` and `댠`, which `cjk-kr` could not draw.
 `tests/fonts.test.mjs` caught it — that test exists because this has happened before.
+
+### Concepts with identical English, and why most of them are right
+
+Sweeping the English corpus for texts carried by more than one concept turns up seven
+pairs. My first reading was that they were the duplication the "index, don't
+duplicate" rule exists to prevent. That reading was wrong, and the reason is
+structural: **`section_id` is a single column on a concept**, and `core/pack.js`
+builds a sheet section by exact match on it. A board can index a concept from any
+section — that is what the spa board does with `another-towel-please` and `thank-you`
+— but a *sheet* section cannot. Two sections that both need a term genuinely need two
+concepts under this schema, and deleting one would silently empty a row out of a
+printed card.
+
+Of the seven:
+
+- **Three are documented distinctions and should stay.** `board-answers.i-am-calling-the-police`'s
+  own note says it is textually identical to the traveller's row and separate because
+  a different person says it; `border-customs.i-am-a-tourist` is one of four answers
+  to "purpose of visit" that have to stay grammatically parallel; and
+  `trail-warnings.closed` against `common-signs.closed` is a distinction **English
+  cannot make and eighteen languages do** — a trail is *gesperrt* and a shop is
+  *geschlossen*.
+- **One was a real duplicate and is gone** — `massage-spa.reply-none-of-these`, which
+  was on no board at all and so cost a section nothing.
+- **Three are structurally required and have drifted**: luggage-storage across
+  `hotel-words`/`place-words` (9 languages disagree, Spanish over an article),
+  the toilet-will-not-flush row across `room-problems`/`toilets` (3), and
+  please-write-the-number across `payment-receipt`/`utility-templates` (14). These
+  should *agree* unless there is a reason, and where there is one it belongs in
+  `notes`. That is a review job, not a deletion.
+
+### The board spoke English to everyone who was not English
+
+Reported from a screenshot with the interface set to Italian: the topic picker said
+"Context", the tiles said "Emergency / Introductions / Directions", and the submenu
+heading said "What is wrong". Every *phrase* on the board was translated — that is
+the corpus, and it had been right all along — but the board's own chrome was not in
+the catalogues at all. 54 keys existed in `en.json` and in no other file: 36
+`boards.*` (eight board titles and the submenu headings under them) and 18 `board.*`
+(the controls, the keypad, the status lines).
+
+Six agents, seven to nine languages each, against a brief distilled from what the
+board wave itself had already learned. **All 52 catalogues now carry all 54**, moving
+each from 394/533 to 447/532 (84%). Italian end to end: "Argomento", then
+"Emergenza | Presentazioni | Indicazioni | Spostarsi | Mangiare fuori | Acquisti |
+Orari | Massaggi e spa", then "Che cosa non va". Klingon takes 392/532 and Quenya
+135/532, both partial by design and both now recording in their own `_note` exactly
+which keys they declined and why — `tlh` has no word for *massage* in the published
+lexicon and no verb for *flash* that takes Latin letters as an object.
+
+That brief is now `content/PROMPTS/interface-strings.md`, because the same eight
+problems came back in six independent reports and the next wave should not rediscover
+them: which of `t()` and `theirs.t()` a string is read through and therefore whether
+it is a label or signage; reuse over translation, with the printed section title as
+the arbiter when the two could disagree; the fact that `{count}` and `{language}` are
+substituted raw and so cannot be made to agree with anything; and the way a heading
+completed by its buttons ("Please focus on…" over *the shoulders*) simply cannot be
+translated into a verb-final language without re-casting both halves.
+
+### The checker could not see the keys it was being asked about
+
+`check_i18n.mjs` scanned `ui/`, the root HTML and `data/presets.json`, and reported 75
+keys as "in the catalogue but never referenced". It was wrong about 42 of them: board
+titles and button labels are named by key from `data/boards/*.json`, which is the
+whole mechanism that lets the chrome be read in the owner's language, and the scan
+never opened those files. Adding them — and moving three keypad error keys out of a
+ternary and into a table beside the `ENTRY_LABEL` one already there, so the existing
+`…Key:` pattern can see them — takes the list from 75 to 33.
+
+Which is what made the one real dead key findable. `boards.spa.comfort` is referenced
+by nothing: not a board, not the UI, only `en.json`. Two agents flagged it
+independently and translated it anyway, being unable to prove the negative from inside
+their own slice. It is deleted from all 51 catalogues that had it. The remaining 33
+are keys reached through a computed string, which is a different problem.
+
+### Two things the reader could see
+
+**The donate link was jammed against the right edge of a phone.** It is
+`position: fixed` bottom-right on a desktop, and the mobile override made it static
+but left it `display: inline-flex` — on which `margin: auto` does nothing, because an
+inline-level box is not laid out by the block centring rule. `display: flex` plus
+`inline-size: fit-content` centres it. Pinned by a test that checks the two gaps are
+within a pixel of each other, on both the gallery and the sheet page, at 390px and at
+360px — and that the desktop pill is still `position: fixed`. 25 lines of dead
+`.page-footer` and duplicate `.donate` rules went with it.
+
+**Every board message was one word wide.** `.board-message` is a `<button>`, and a
+button's UA stylesheet sets `align-items: center`, which makes a stretch-sized child
+shrink to max-content instead. So the paragraph inside was as wide as its longest
+unbroken line, `lineRoom()` measured that instead of the box, and the fit test
+compared a number with itself and always passed: Russian `Извините` drew 810px inside
+a 368px card. `align-items: stretch` on the message; clearance went from −349px to
++27px.
+
+### The Malay corpus disagreed with its own note
+
+`data/lang/ms/emergency.csv` glossed *back* as **Punggung**. Kamus Dewan gives
+*punggung* as "pantat, bokong, pinggul" and tags the dorsal sense **Id** —
+Indonesian; the Malaysian word for the part of the body behind the chest is
+*belakang*. The corpus already knew this: `data/lang/ms/hotel.csv:61` writes the spa
+row as "Tolong urut **belakang** terutamanya" and its own `notes` cell says
+"belakang, not punggung, which in Malaysian Malay is the buttocks". One row had
+simply never been brought into line, and it is the row a traveller taps while
+pointing at their own back in a clinic.
+
+Now `Belakang`, with `build_ipa.py --only ms` deriving `bəlˈakaŋ` — the same string
+the spa phrase already carried, which is the check that the fix is consistent rather
+than merely different.
+
+Found by the agent translating the Malay board chrome, which also reported that
+`ms.json` leaks Indonesian in keys nobody has swept: `board.unit` says *Menit* while
+the neighbouring `board.minutes` now says *Minit*, so two buttons in one widget
+disagree; plus *Donasi*, *lembar*, *jaringan*, *setelan* and a `preview.duplexNote`
+that is Indonesian end to end. That is a language job and goes to the next wave, not
+into this commit.

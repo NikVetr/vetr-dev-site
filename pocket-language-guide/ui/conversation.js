@@ -51,6 +51,13 @@ const ENTRY_LABEL = /** @type {Record<string,string>} */ ({
   count: 'board.otherNumber',
 });
 
+/** What the keypad says when what has been typed is not a time, a number or a length. */
+const ENTRY_INVALID = /** @type {Record<string,string>} */ ({
+  duration: 'board.notAnAmount',
+  clock: 'board.notATime',
+  count: 'board.notANumber',
+});
+
 /**
  * Which grid cell opened the message on screen.
  *
@@ -549,8 +556,7 @@ async function main() {
           day: unitName('day', listener) ?? theirs.t('board.days'),
           confirm: theirs.t('board.confirm'),
           cancel: theirs.t('board.close'),
-          invalid: theirs.t(kind === 'clock' ? 'board.notATime'
-            : kind === 'count' ? 'board.notANumber' : 'board.notAnAmount'),
+          invalid: theirs.t(ENTRY_INVALID[kind] ?? 'board.notAnAmount'),
         },
         colour: button.colour,
       });

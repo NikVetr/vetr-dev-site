@@ -1787,36 +1787,18 @@ button.big { justify-content: center; padding: 0.6em 1em; font-size: var(--fs-1)
    into the flow at the end of the page. */
 @media (max-width: 640px) {
   .donate {
-    position: static; display: inline-flex;
-    margin: var(--space-2) auto var(--space-3); background: var(--paper);
+    position: static;
+    /* **`inline-flex` with `margin: auto` does not centre.** Auto side margins only
+       centre a *block-level* box, so the pill sat hard against the reading edge with
+       the margins collapsed to nothing -- measured at `left: 0` on a 390px phone. A
+       block-level flex box sized to its own content is the same pill and does centre. */
+    display: flex;
+    inline-size: fit-content;
+    margin: var(--space-2) auto var(--space-3);
+    background: var(--paper);
   }
 }
 
-/* On the two working pages, not the gallery: the gallery is the front door and has
-   its own business. Named for GiveWell in the label rather than left as a bare
-   "Donate", because a donate button on a personal site reads as "pay the author"
-   and this one does not do that -- it goes to a charity evaluator. Saying so is the
-   whole point of it, so it belongs in the text and not only in the href. */
-.page-footer {
-  display: flex; justify-content: center;
-  padding: var(--space-2) var(--space-3) var(--space-3);
-  /* The studio is a flex column of exactly the viewport height, so this must not
-     be allowed to shrink -- and must not grow either, or it takes the canvas's
-     room. */
-  flex: 0 0 auto;
-}
-.donate {
-  display: inline-flex; align-items: center; gap: 0.4em;
-  font-size: var(--fs--1); color: var(--muted); text-decoration: none;
-  border: 1px solid var(--line); border-radius: 999px;
-  padding: 0.3em 0.85em; background: var(--paper);
-}
-.donate:hover, .donate:focus-visible {
-  color: var(--ink); border-color: var(--muted); outline: none;
-}
-/* The heart is the only coloured thing in the bar, which is what keeps the link
-   subtle while still reading as a donate button. */
-.donate-mark { color: #b3261e; font-size: 1.05em; line-height: 1; }
 
 /* The section colour menu. Five roles, the current one marked, opened from the
    section's own icon -- which used to advance to the next role on each click, a

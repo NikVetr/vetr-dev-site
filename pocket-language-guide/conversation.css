@@ -305,7 +305,15 @@
     inline-size: min(100%, 60rem);
     max-block-size: min(100%, 34rem);
   }
-  .board-asked, .board-message { inline-size: min(100%, 60rem); }
+  /* The question over the answers is capped so it lines up with the panel under it.
+     **The message is not, and must not be.** It is one sentence shown as large as the
+     screen allows, to be read across a counter -- capping its box to 60rem on a
+     1680px window would have the fitter shrink `最近的医院在哪里？` from 150px to about
+     100 for no reason. It is the one thing here that wants the whole width.
+     (It was in this rule and had no effect, because `.board-message`'s own
+     `inline-size: 100%` is declared later in the file and a media query adds no
+     specificity. Measured at 1658px wide, which is what sent me looking.) */
+  .board-asked { inline-size: min(100%, 60rem); }
   /* The way out stays at the reading edge rather than centring with everything else
      -- it is a way *back*, and in the middle it reads as one more answer. Lined up
      with the panel's own edge, which on a wide screen is nowhere near the screen's. */

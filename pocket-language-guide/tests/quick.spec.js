@@ -94,3 +94,31 @@ test('the donate link is a corner overlay on every page', async ({ page }) => {
   // And no footer band is left behind on any of them.
   await expect(page.locator('.page-footer')).toHaveCount(0);
 });
+
+test('on a phone the donate link is centred, not shoved against the edge', async ({ page }) => {
+  // On a narrow screen the pill leaves the corner and goes back into the flow at the
+  // end of the page, because fixed it would sit on the last row of content. It was
+  // meant to centre there and did not: `display: inline-flex` with `margin: … auto`
+  // centres nothing, because auto side margins only centre a *block-level* box. It
+  // sat at `left: 0` on a 390px phone.
+  for (const [w, h] of /** @type {[number,number][]} */ ([[390, 844], [360, 640]])) {
+    await page.setViewportSize({ width: w, height: h });
+    for (const path of ['/', '/sheet.html?target=es&source=en']) {
+      await page.goto(path);
+      const link = page.locator('a.donate');
+      await expect(link).toBeVisible();
+      const where = await link.evaluate((el) => {
+        const box = el.getBoundingClientRect();
+        return {
+          position: getComputedStyle(el).position,
+          left: Math.round(box.left),
+          right: Math.round(innerWidth - box.right),
+        };
+      });
+      // In the flow, and the same distance from both edges.
+      expect(where.position, `${path} at ${w}`).toBe('static');
+      expect(Math.abs(where.left - where.right), `${path} at ${w}: off-centre`)
+        .toBeLessThanOrEqual(1);
+    }
+  }
+});

@@ -41,7 +41,15 @@ async function sources(dir) {
  * whose caption is a description rather than a dimension says which key to draw it
  * from, so the reference lives in JSON and the scan has to follow it there.
  */
-const DATA = ['data/presets.json'];
+const DATA = ['data/presets.json'].concat(
+  // Every conversation board names its own title and its buttons' labels by key --
+  // that is the whole reason the chrome can be read in the owner's language -- so a
+  // scan that skips them calls 54 live keys dead and cannot spot a real dead one.
+  (await readdir(join(ROOT, 'data/boards')))
+    .filter((f) => f.endsWith('.json') && f !== 'index.json')
+    .sort()
+    .map((f) => `data/boards/${f}`),
+);
 
 const files = (await Promise.all(CODE.map(sources))).flat()
   .filter((rel) => !NOT_A_CONSUMER.has(rel))
@@ -60,7 +68,7 @@ for (const rel of files) {
     /\b"?(?:caption|text|label|hint|title|note)Key"?:\s*['"]([\w.-]+)['"]/g,
     // ... and a few sit in a map from a value to its key, looked up at draw time
     // (which field is shown, which cut mode is chosen).
-    /:\s*'((?:field|cut|common)\.[\w.-]+)'/g,
+    /:\s*'((?:field|cut|common|board)\.[\w.-]+)'/g,
   ];
   for (const re of patterns) {
     for (const m of text.matchAll(re)) {
