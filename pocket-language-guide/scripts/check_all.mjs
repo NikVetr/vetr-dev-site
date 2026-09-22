@@ -80,7 +80,15 @@ for (const check of checks) {
   // On success the summary is the last line; on failure it is the first line that
   // says what went wrong. Taking the last line either way printed `Node.js v22.22.1`
   // for anything that threw, which is the least useful line in the output.
-  const say = ok ? lines.at(-1) : (lines.find((l) => /error|stale|fail/i.test(l)) ?? lines[0]);
+  // **Ranked, not first-match.** `build_ipa` prints a per-language table before its
+  // verdict, and Korean's row says "2 G2P failed" -- so a plain /fail/ search picked
+  // that row and reported a language that was not the problem, while the line naming
+  // the actually-stale file sat three lines below. `stale` and `error` name a cause;
+  // `fail` is often just a column in a report.
+  const pick = (/** @type {RegExp} */ re) => lines.find((l) => re.test(l));
+  const say = ok
+    ? lines.at(-1)
+    : (pick(/\bstale\b/i) ?? pick(/\berror\b/i) ?? pick(/fail/i) ?? lines[0]);
   console.log(`${ok ? 'ok  ' : 'FAIL'}  ${check.name.padEnd(8)} ${(say ?? '').trim().slice(0, 96)}`);
 }
 

@@ -1720,3 +1720,20 @@ own queued write had landed, and the grid still showed a phrase the status line 
 just called deleted. It chains off the write now, with `finally` rather than `then`,
 because a refused write still has to repaint — a screen that keeps claiming something
 that did not happen is the worse failure.
+
+### A mistake in the process, not the code
+
+Checkpoint 7 went out with three rows whose `ipa` column was empty, which would fail
+`build_ipa.py --check` on the pushed state. Cause: `git add -A` while an agent was
+still writing. The gate I ran and quoted was green for the tree as it stood *before*
+those edits landed, and the commit swept them in unverified.
+
+The rule that follows is narrow and worth keeping: **the settle sequence — regenerate,
+rebuild the shell, run the gate — has to be the last thing that happens before
+`git add`, with nothing writing to the checkout in between.** Committing by explicit
+pathspec instead of `-A` is the cheap version of the same protection, and is what the
+earlier checkpoints in this session did while agents were in flight.
+
+Fixed in the following commit rather than by rewriting history: the push had already
+happened, and a force-push to a branch that *is* the deployment is worse than a
+second commit that says what it is.
