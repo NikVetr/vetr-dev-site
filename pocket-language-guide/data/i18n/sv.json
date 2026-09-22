@@ -247,7 +247,7 @@
   "handles.marginRight": "Höger marginal",
   "handles.marginTop": "Övre marginal",
   "nav.back": "← Alla språk",
-  "nav.brand": "Pocket Language Guide",
+  "nav.brand": "Phraselet",
   "nav.donate": "Donera",
   "nav.readerHint": "— välj det språk du redan läser",
   "nav.skipToLanguages": "Hoppa till språken",
@@ -377,5 +377,15 @@
   "ornament.starforge": "Stjärnsmedja",
   "ornament.hint": "Dekorativa kanter, med oförändrad textstorlek och oförändrade mellanrum. Hörnutsmyckningar dyker upp där det finns plats.",
   "ornament.frameHint": "En sammanflätad alvisk ram tar upp plats runt texten. Anpassningen och antalet sidor kan ändras.",
-  "ornament.lowInk": "Bläcksnål utskrift använder de klassiska linjerna. Din valda stil återkommer i färg eller svartvitt."
+  "ornament.lowInk": "Bläcksnål utskrift använder de klassiska linjerna. Din valda stil återkommer i färg eller svartvitt.",
+  "board.reply": "Svara",
+  "board.close": "Stäng",
+  "board.otherAmount": "Annan tid…",
+  "board.amount": "Hur många",
+  "board.unit": "Minuter, timmar eller dagar",
+  "board.confirm": "Bekräfta",
+  "board.notAnAmount": "Ange ett heltal",
+  "beacon.help": "HJÄLP",
+  "beacon.sos": "SOS",
+  "beacon.dismiss": "Tryck var som helst för att stoppa"
 }

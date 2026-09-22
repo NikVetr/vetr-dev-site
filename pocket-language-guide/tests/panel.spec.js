@@ -170,3 +170,64 @@ test('the tab takes a colour the reader can see before choosing it', async ({ pa
     (ns) => ns.map((n) => (n.getAttribute('fill') ?? '').toUpperCase()),
   ), { timeout: 60_000 }).toContain(hex);
 });
+
+test('on a phone the panels are rows of one screen, and a bar is their seam', async ({ page }) => {
+  // Stacked and page-scrolled, each panel's bar was sticky *to its panel* -- so
+  // scrolling slid the Format bar under the site header and left the reader inside a
+  // 32,000px list with no visible label on it. A column that fills the viewport keeps
+  // every bar on screen, which is what makes them headers rather than captions.
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/customize.html?target=zh-Hans&source=en');
+  await expect(page.locator('.panel-toggle').first()).toBeVisible();
+
+  /** Every row, in the order it appears on screen -- which is not source order: the
+   * preview carries `order: -1` so the card is the first thing on a phone. */
+  const rows = () => page.evaluate(() => [...document.querySelectorAll('.studio > section')]
+    .sort((a, b) => Number(getComputedStyle(a).order) - Number(getComputedStyle(b).order))
+    .map((s) => ({
+      at: s.getAttribute('aria-label'),
+      top: Math.round(s.getBoundingClientRect().top),
+      h: Math.round(s.getBoundingClientRect().height),
+      folded: s.classList.contains('collapsed'),
+    })));
+
+  const rest = await rows();
+  expect(rest.map((r) => r.at)).toEqual(['Pages', 'Formatting', 'Content']);
+  // The page itself does not scroll, which is what keeps all three bars in view.
+  expect(await page.evaluate(() => document.documentElement.scrollHeight - innerHeight))
+    .toBe(0);
+
+  // **The bar is the seam.** Dragging it up takes room from the panel above and gives
+  // it to this one; nothing below moves, which is what makes it a seam rather than a
+  // reflow.
+  const bar = page.locator('section[aria-label="Content"] > .panel-title');
+  const box = /** @type {{x:number,y:number,width:number,height:number}} */ (
+    await bar.boundingBox());
+  const drag = async (dy) => {
+    const now = /** @type {{x:number,y:number,width:number,height:number}} */ (
+      await bar.boundingBox());
+    await page.mouse.move(now.x + now.width / 2, now.y + now.height / 2);
+    await page.mouse.down();
+    await page.mouse.move(now.x + now.width / 2, now.y + now.height / 2 + dy, { steps: 10 });
+    await page.mouse.up();
+  };
+  await drag(-120);
+  const moved = await rows();
+  expect(moved[1].h).toBeLessThan(rest[1].h - 100);
+  expect(moved[2].h).toBeGreaterThan(rest[2].h + 100);
+  expect(moved[0].h).toBe(rest[0].h);
+
+  // Dragged down onto its own panel until nothing is left of it, which *is* folding
+  // it and is drawn as folded rather than as an empty box held open.
+  await drag(700);
+  const shut = await rows();
+  expect(shut[2].folded).toBe(true);
+  expect(shut[2].h).toBeLessThan(box.height + 4);
+
+  // And a tap is still a tap: the same bar opens it again, and opening one panel
+  // folds the other, which is the accordion this width has always had.
+  await bar.click();
+  const open = await rows();
+  expect(open[2].folded).toBe(false);
+  expect(open[1].folded).toBe(true);
+});

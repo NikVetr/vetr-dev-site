@@ -247,7 +247,7 @@
   "handles.marginRight": "Jobb margó",
   "handles.marginTop": "Felső margó",
   "nav.back": "← Minden nyelv",
-  "nav.brand": "Pocket Language Guide",
+  "nav.brand": "Phraselet",
   "nav.donate": "Támogatás",
   "nav.readerHint": "— válassza ki azt a nyelvet, amit már olvas",
   "nav.skipToLanguages": "Tovább a nyelvekre",
@@ -377,5 +377,15 @@
   "ornament.starforge": "Csillagkovácsműhely",
   "ornament.hint": "Díszítő szegélyek változatlan szövegmérettel és térközökkel. A sarokdíszek ott jelennek meg, ahol van elég hely.",
   "ornament.frameHint": "A fonott tündekeret helyet foglal a szöveg körül. Az elrendezés és az oldalszám változhat.",
-  "ornament.lowInk": "A tintatakarékos mód a klasszikus vonalakat használja. Színes vagy egyszínű módban visszatér a választott stílus."
+  "ornament.lowInk": "A tintatakarékos mód a klasszikus vonalakat használja. Színes vagy egyszínű módban visszatér a választott stílus.",
+  "board.reply": "Válasz",
+  "board.close": "Bezárás",
+  "board.otherAmount": "Más mennyiség…",
+  "board.amount": "Mennyi",
+  "board.unit": "Perc, óra vagy nap",
+  "board.confirm": "Megerősítés",
+  "board.notAnAmount": "Írjon be egész számot",
+  "beacon.help": "SEGÍTSÉG",
+  "beacon.sos": "SOS",
+  "beacon.dismiss": "A leállításhoz koppintson bárhová"
 }

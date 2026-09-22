@@ -247,7 +247,7 @@
   "handles.marginRight": "ขอบขวา",
   "handles.marginTop": "ขอบบน",
   "nav.back": "← ทุกภาษา",
-  "nav.brand": "Pocket Language Guide",
+  "nav.brand": "Phraselet",
   "nav.donate": "บริจาค",
   "nav.readerHint": "— เลือกภาษาที่คุณอ่านได้อยู่แล้ว",
   "nav.skipToLanguages": "ข้ามไปที่ภาษา",
@@ -377,5 +377,15 @@
   "ornament.starforge": "เตาหลอมดวงดาว",
   "ornament.hint": "เส้นขอบตกแต่งโดยคงขนาดตัวอักษรและระยะห่างเดิม ลวดลายตามมุมจะแสดงเมื่อมีพื้นที่ว่างเท่านั้น",
   "ornament.frameHint": "กรอบเอลฟ์ลายสานเว้นพื้นที่รอบข้อความ การจัดวางและจำนวนหน้าอาจเปลี่ยนไป",
-  "ornament.lowInk": "โหมดประหยัดหมึกใช้เส้นแบบคลาสสิก รูปแบบที่คุณเลือกจะกลับมาเมื่อเปลี่ยนเป็นโหมดสีหรือสีเดียว"
+  "ornament.lowInk": "โหมดประหยัดหมึกใช้เส้นแบบคลาสสิก รูปแบบที่คุณเลือกจะกลับมาเมื่อเปลี่ยนเป็นโหมดสีหรือสีเดียว",
+  "board.reply": "ตอบกลับ",
+  "board.close": "ปิด",
+  "board.otherAmount": "จำนวนอื่น…",
+  "board.amount": "จำนวน",
+  "board.unit": "นาที ชั่วโมง หรือวัน",
+  "board.confirm": "ยืนยัน",
+  "board.notAnAmount": "กรุณากรอกจำนวนเต็ม",
+  "beacon.help": "ช่วยด้วย",
+  "beacon.sos": "SOS",
+  "beacon.dismiss": "กรุณาแตะที่ใดก็ได้เพื่อหยุด"
 }

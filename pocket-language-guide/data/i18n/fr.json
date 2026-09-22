@@ -247,7 +247,7 @@
   "handles.marginRight": "Marge de droite",
   "handles.marginTop": "Marge du haut",
   "nav.back": "← Toutes les langues",
-  "nav.brand": "Pocket Language Guide",
+  "nav.brand": "Phraselet",
   "nav.donate": "Faire un don",
   "nav.readerHint": "— choisissez la langue que vous lisez déjà",
   "nav.skipToLanguages": "Aller aux langues",
@@ -377,5 +377,15 @@
   "ornament.starforge": "Forge stellaire",
   "ornament.hint": "Bordures décoratives, sans changer la taille du texte ni l’espacement. Les ornements d’angle apparaissent là où il reste de la place.",
   "ornament.frameHint": "Un cadre elfique entrelacé réserve de l’espace autour du texte. La mise en page et le nombre de pages peuvent changer.",
-  "ornament.lowInk": "Le mode économie d’encre utilise les traits classiques. Votre style revient en couleur ou en monochrome."
+  "ornament.lowInk": "Le mode économie d’encre utilise les traits classiques. Votre style revient en couleur ou en monochrome.",
+  "board.reply": "Répondre",
+  "board.close": "Fermer",
+  "board.otherAmount": "Autre durée…",
+  "board.amount": "Combien",
+  "board.unit": "Minutes, heures ou jours",
+  "board.confirm": "Confirmer",
+  "board.notAnAmount": "Entrez un nombre entier",
+  "beacon.help": "SECOURS",
+  "beacon.sos": "SOS",
+  "beacon.dismiss": "Touchez n’importe où pour l’arrêter"
 }

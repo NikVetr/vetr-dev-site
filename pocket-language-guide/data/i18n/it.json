@@ -247,7 +247,7 @@
   "handles.marginRight": "Margine destro",
   "handles.marginTop": "Margine superiore",
   "nav.back": "← Tutte le lingue",
-  "nav.brand": "Pocket Language Guide",
+  "nav.brand": "Phraselet",
   "nav.donate": "Donare",
   "nav.readerHint": "— scelga la lingua che già legge",
   "nav.skipToLanguages": "Vai alle lingue",
@@ -377,5 +377,15 @@
   "ornament.starforge": "Forgia stellare",
   "ornament.hint": "Bordi decorativi, senza cambiare le dimensioni del testo o la spaziatura. Gli ornamenti agli angoli compaiono dove c’è spazio.",
   "ornament.frameHint": "Una cornice elfica intrecciata riserva spazio intorno al testo. L’impaginazione e il numero di pagine possono cambiare.",
-  "ornament.lowInk": "La modalità risparmio inchiostro usa le linee classiche. Il tuo stile riappare a colori o in monocromia."
+  "ornament.lowInk": "La modalità risparmio inchiostro usa le linee classiche. Il tuo stile riappare a colori o in monocromia.",
+  "board.reply": "Rispondi",
+  "board.close": "Chiudi",
+  "board.otherAmount": "Altra durata…",
+  "board.amount": "Quanti",
+  "board.unit": "Minuti, ore o giorni",
+  "board.confirm": "Conferma",
+  "board.notAnAmount": "Inserisca un numero intero",
+  "beacon.help": "AIUTO",
+  "beacon.sos": "SOS",
+  "beacon.dismiss": "Tocchi ovunque per fermarlo"
 }

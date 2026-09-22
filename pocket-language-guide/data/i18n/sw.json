@@ -247,7 +247,7 @@
   "handles.marginRight": "Ukingo wa kulia",
   "handles.marginTop": "Ukingo wa juu",
   "nav.back": "← Lugha zote",
-  "nav.brand": "Pocket Language Guide",
+  "nav.brand": "Phraselet",
   "nav.donate": "Changia",
   "nav.readerHint": "— chagua lugha unayoisoma tayari",
   "nav.skipToLanguages": "Rukia lugha",
@@ -377,5 +377,15 @@
   "ornament.starforge": "Tanuru la nyota",
   "ornament.hint": "Mipaka yenye mapambo, bila kubadili ukubwa wa maandishi au nafasi zake. Mapambo ya pembe huonekana palipo na nafasi.",
   "ornament.frameHint": "Fremu ya elf iliyosokotwa inahitaji nafasi kuzunguka maandishi. Mpangilio na idadi ya kurasa vinaweza kubadilika.",
-  "ornament.lowInk": "Hali ya kuokoa wino hutumia mistari ya kawaida. Mtindo uliochagua hurudi ukitumia rangi au rangi moja."
+  "ornament.lowInk": "Hali ya kuokoa wino hutumia mistari ya kawaida. Mtindo uliochagua hurudi ukitumia rangi au rangi moja.",
+  "board.reply": "Jibu",
+  "board.close": "Funga",
+  "board.otherAmount": "Kiasi kingine…",
+  "board.amount": "Kiasi",
+  "board.unit": "Dakika, saa au siku",
+  "board.confirm": "Thibitisha",
+  "board.notAnAmount": "Weka namba kamili",
+  "beacon.help": "Msaada",
+  "beacon.sos": "SOS",
+  "beacon.dismiss": "Gusa mahali popote ili kusimama"
 }

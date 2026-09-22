@@ -247,7 +247,7 @@
   "handles.marginRight": "Rechter Rand",
   "handles.marginTop": "Oberer Rand",
   "nav.back": "← Alle Sprachen",
-  "nav.brand": "Pocket Language Guide",
+  "nav.brand": "Phraselet",
   "nav.donate": "Spenden",
   "nav.readerHint": "— wählen Sie die Sprache, die Sie schon lesen",
   "nav.skipToLanguages": "Zu den Sprachen springen",
@@ -377,5 +377,15 @@
   "ornament.starforge": "Sternenschmiede",
   "ornament.hint": "Dekorative Ränder bei unveränderter Schriftgröße und unveränderten Abständen. Eckverzierungen erscheinen dort, wo Platz ist.",
   "ornament.frameHint": "Ein verschlungener Elbenrahmen benötigt Platz um den Text. Einpassung und Seitenzahl können sich ändern.",
-  "ornament.lowInk": "Der Tintensparmodus verwendet die klassischen Linien. In Farbe oder Schwarzweiß erscheint dein gewählter Stil wieder."
+  "ornament.lowInk": "Der Tintensparmodus verwendet die klassischen Linien. In Farbe oder Schwarzweiß erscheint dein gewählter Stil wieder.",
+  "board.reply": "Antworten",
+  "board.close": "Schließen",
+  "board.otherAmount": "Andere Dauer…",
+  "board.amount": "Wie viele",
+  "board.unit": "Minuten, Stunden oder Tage",
+  "board.confirm": "Bestätigen",
+  "board.notAnAmount": "Geben Sie eine ganze Zahl ein",
+  "beacon.help": "HILFE",
+  "beacon.sos": "SOS",
+  "beacon.dismiss": "Tippen Sie irgendwo, um zu stoppen"
 }

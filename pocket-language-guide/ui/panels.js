@@ -118,6 +118,29 @@ const bodyOf = (section) => (
   /** @type {HTMLElement|null} */ (section.querySelector(':scope > .panel-body')));
 
 /**
+ * Fold a panel away, or put it back.
+ *
+ * Shared, because a panel reaches this state two ways now: its bar can be tapped,
+ * and its bar can be dragged down onto itself until there is nothing left but the
+ * bar -- which is the same state and must not be a second representation of it.
+ * @param {HTMLElement} section @param {boolean} open
+ */
+function setOpen(section, open) {
+  /** @type {HTMLElement|null} */
+  (section.querySelector('.panel-toggle'))?.setAttribute('aria-expanded', String(open));
+  const body = bodyOf(section);
+  if (body) body.hidden = !open;
+  section.classList.toggle('collapsed', !open);
+}
+
+/** The least the preview may be dragged to. Below this there is nothing to preview. */
+const PREVIEW_MIN = 96;
+/** A drag this short is a tap: the bar is both a button and a seam. */
+const SLOP = 6;
+/** Where the reader put the seams, so they are not re-placed on every visit. */
+const ROWS_KEY = 'plg.studio-rows';
+
+/**
  * Everything in the header but the brand, the info line and Export PDF, in one
  * disclosure.
  *
@@ -196,13 +219,7 @@ function panelBars(studio) {
     [...studio.querySelectorAll(':scope > section')].filter(bodyOf));
   /** @type {(() => void)[]} */ const undo = [];
 
-  /** @param {HTMLElement} section @param {boolean} open */
-  const set = (section, open) => {
-    /** @type {HTMLElement} */ (section.querySelector('.panel-toggle'))
-      .setAttribute('aria-expanded', String(open));
-    /** @type {HTMLElement} */ (bodyOf(section)).hidden = !open;
-    section.classList.toggle('collapsed', !open);
-  };
+  const set = setOpen;
 
   for (const section of sections) {
     const title = /** @type {HTMLElement} */ (section.querySelector(':scope > .panel-title'));
@@ -263,6 +280,150 @@ function panelBars(studio) {
 }
 
 /**
+ * Drag a panel's bar to hand its room to the panel above it.
+ *
+ * **The bar is the seam.** On a desktop each panel has a visible seam beside it and
+ * the pointer has room to find one; on a phone the panels are rows of a column, and
+ * the boundary between two rows is exactly where the lower one's bar already is.
+ * Adding a second grabbable strip a few pixels tall, under a finger, would be a worse
+ * control than the one already there — so the bar does both jobs: a tap folds the
+ * panel, and a drag moves the seam it sits on.
+ *
+ * What a drag means is the physical thing: the bar follows the finger, so the panel
+ * *above* grows by as much as this one loses. Nothing below moves, which is what
+ * makes it feel like a seam rather than a reflow. Dragging down onto the bar's own
+ * panel until nothing is left of it is the same as folding it, and says so — the
+ * panel collapses and the room goes where a fold sends it.
+ *
+ * Tap and drag are told apart by distance, the way the message surface tells a scroll
+ * from a tap: under {@link SLOP} pixels the press was a tap and the button's own
+ * click stands, over it the click is swallowed.
+ * @param {HTMLElement} studio
+ * @returns {() => void} puts the heights back
+ */
+function panelSeams(studio) {
+  // **Screen order, which is not source order**: the preview carries `order: -1` so
+  // the card is the first thing on a phone. A seam that used the DOM's order would
+  // hand the Format panel's room to the panel it is not next to.
+  const rows = /** @type {HTMLElement[]} */ ([...studio.querySelectorAll(':scope > section')])
+    .sort((a, b) => Number(getComputedStyle(a).order) - Number(getComputedStyle(b).order));
+
+  /** @type {Record<string, number>} */ let held = {};
+  try {
+    held = JSON.parse(store.get(ROWS_KEY) ?? '{}');
+  } catch {
+    // A corrupt value is the same as none: fall back to the CSS defaults.
+  }
+  /** What a row is called in the record. Its label, so the record survives a
+   * reordering of the markup. @param {HTMLElement} row */
+  const nameOf = (row) => row.getAttribute('aria-label') ?? '';
+  /** The least a row may be: a panel keeps its bar, the preview keeps enough to be
+   * one. @param {HTMLElement} row */
+  const floorOf = (row) => {
+    const bar = /** @type {HTMLElement|null} */ (row.querySelector(':scope > .panel-title'));
+    return bar ? bar.getBoundingClientRect().height : PREVIEW_MIN;
+  };
+  /** @param {HTMLElement} row @param {number} px */
+  const size = (row, px) => {
+    held[nameOf(row)] = Math.round(px);
+    row.style.flex = `0 0 ${Math.round(px)}px`;
+  };
+
+  // The panel the stylesheet gave the slack to has no height of its own to restore,
+  // and giving it one would stop it absorbing. Read with the selector the stylesheet
+  // uses rather than as "the last row", so the two cannot come to disagree about
+  // which panel that is -- they only coincide because the preview is pulled to the
+  // top of the column by `order` from the middle of the markup.
+  const absorber = /** @type {HTMLElement|null} */ (
+    studio.querySelector(':scope > section:has(> .panel-body):last-of-type'));
+  for (const row of rows) {
+    if (row !== absorber && held[nameOf(row)]) size(row, held[nameOf(row)]);
+  }
+
+  /** @type {(() => void)[]} */ const undo = [];
+  for (const [i, row] of rows.entries()) {
+    const bar = /** @type {HTMLElement|null} */ (row.querySelector(':scope > .panel-title'));
+    const above = rows[i - 1];
+    if (!bar) continue;
+    if (!above) { bar.classList.add('no-seam'); continue; }
+
+    let dragged = false;
+    /** @param {PointerEvent} event */
+    const onDown = (event) => {
+      if (event.button !== 0) return;
+      const startY = event.clientY;
+      const startAbove = above.getBoundingClientRect().height;
+      const startOwn = row.getBoundingClientRect().height;
+      // Clamped as a pair: a drag past either floor stops there rather than
+      // overshooting and snapping back when the finger comes the other way.
+      const lowest = floorOf(above) - startAbove;
+      const highest = startOwn - floorOf(row);
+      dragged = false;
+
+      /** @param {PointerEvent} move */
+      const onMove = (move) => {
+        const dy = Math.max(lowest, Math.min(move.clientY - startY, highest));
+        if (!dragged && Math.abs(move.clientY - startY) < SLOP) return;
+        if (!dragged) {
+          dragged = true;
+          bar.classList.add('dragging');
+          // **Taken only once this is a drag.** Capturing on the press retargets the
+          // click to the bar, which is where the toggle button *is not* -- so every
+          // tap stopped folding the panel. Taken here, the capture is wanted: the
+          // pointer is about to leave a 30px bar, and the click it eats is one that
+          // should not have happened.
+          bar.setPointerCapture(move.pointerId);
+        }
+        // Nothing left of this panel but its bar is a folded panel, and is drawn as
+        // one -- a body with no height is not a state anybody asked for. Its dragged
+        // height goes with it, so that opening it again opens it to something.
+        const folded = startOwn - dy <= floorOf(row) + 2;
+        size(above, startAbove + dy);
+        if (row !== absorber) {
+          if (folded) { delete held[nameOf(row)]; row.style.flex = ''; }
+          else size(row, startOwn - dy);
+        }
+        setOpen(row, !folded);
+      };
+      const onUp = () => {
+        bar.classList.remove('dragging');
+        removeEventListener('pointermove', onMove);
+        removeEventListener('pointerup', onUp);
+        removeEventListener('pointercancel', onUp);
+        if (!dragged) return;
+        store.set(ROWS_KEY, JSON.stringify(held));
+        // **Cleared a turn later, not here.** The click that has to be swallowed is
+        // dispatched after this handler returns, and a drag that ended off the bar
+        // produces no click on it at all -- so clearing the flag in the click
+        // handler left it set, and the next genuine tap was eaten instead.
+        setTimeout(() => { dragged = false; }, 0);
+      };
+      addEventListener('pointermove', onMove);
+      addEventListener('pointerup', onUp);
+      addEventListener('pointercancel', onUp);
+    };
+    /** A press that turned into a drag is not also a press of the button inside the
+     * bar. Capture, so it is stopped before the toggle sees it. @param {Event} e */
+    const onClick = (e) => {
+      if (!dragged) return;
+      e.stopPropagation();
+      e.preventDefault();
+    };
+
+    bar.addEventListener('pointerdown', onDown);
+    bar.addEventListener('click', onClick, true);
+    undo.push(() => {
+      bar.removeEventListener('pointerdown', onDown);
+      bar.removeEventListener('click', onClick, true);
+      bar.classList.remove('dragging', 'no-seam');
+      row.style.flex = '';
+      above.style.flex = '';
+    });
+  }
+  return () => { for (const fn of undo) fn(); };
+}
+
+/**
  * Make sure `el` is not inside a panel that is folded away.
  *
  * Two things arrive in the content panel without the reader having asked for them
@@ -294,7 +455,7 @@ export function attachPhoneChrome(studio) {
       undo = null;
       return;
     }
-    const parts = [headerMenu(), panelBars(studio)];
+    const parts = [headerMenu(), panelBars(studio), panelSeams(studio)];
     undo = () => { for (const part of parts) part(); };
   };
   stacked.addEventListener('change', sync);

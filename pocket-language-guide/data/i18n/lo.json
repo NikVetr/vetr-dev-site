@@ -259,7 +259,7 @@
   "handles.marginRight": "ຂອບຂວາ",
   "handles.marginTop": "ຂອບເທິງ",
   "nav.back": "← ພາສາທັງໝົດ",
-  "nav.brand": "ຄູ່ມືພາສາຂະໜາດພົກ",
+  "nav.brand": "Phraselet",
   "nav.donate": "ບໍລິຈາກ",
   "nav.readerHint": "— ເລືອກພາສາທີ່ເຈົ້າອ່ານໄດ້ແລ້ວ",
   "nav.skipToLanguages": "ຂ້າມໄປຫາພາສາ",
@@ -377,5 +377,15 @@
   "warn.no-fit.auto": "ແມ່ນແຕ່ {faces} ໜ້າກໍໃສ່ອັນນີ້ບໍ່ໄດ້ໃນຂະໜາດທີ່ອ່ານໄດ້ ທີ່ {columns} ຫຼັກຕໍ່ໜ້າ",
   "warn.no-fit.pinned": "ເນື້ອຫາໃສ່ {faces} ໜ້າ ທີ່ {columns} ຫຼັກຕໍ່ໜ້າ ບໍ່ໄດ້ ໂດຍບໍ່ຕ່ຳກວ່າຂະໜາດທີ່ອ່ານໄດ້",
   "warn.nothing-selected": "ບໍ່ໄດ້ເລືອກຫຍັງ ບັດຈຶ່ງເປົ່າ ໃຫ້ເປີດພາກໃດໜຶ່ງກັບຄືນໃນແຜງເນື້ອຫາ",
-  "warn.paper-too-coarse": "ເຈ້ຍນີ້ຕ້ອງການຕົວອັກສອນ {script} ທີ່ {floor}pt ແຕ່ຮູບແບບຕັ້ງຫຼັກ {field} ໄວ້ທີ່ {size}pt ຫຼັກນັ້ນຖືກຂະຫຍາຍໃຫ້ອ່ານໄດ້ ຊຶ່ງກິນບ່ອນຢູ່ບ່ອນອື່ນ ເຈ້ຍຮູບຖ່າຍຮັບຕົວອັກສອນລະອຽດກວ່າ"
+  "warn.paper-too-coarse": "ເຈ້ຍນີ້ຕ້ອງການຕົວອັກສອນ {script} ທີ່ {floor}pt ແຕ່ຮູບແບບຕັ້ງຫຼັກ {field} ໄວ້ທີ່ {size}pt ຫຼັກນັ້ນຖືກຂະຫຍາຍໃຫ້ອ່ານໄດ້ ຊຶ່ງກິນບ່ອນຢູ່ບ່ອນອື່ນ ເຈ້ຍຮູບຖ່າຍຮັບຕົວອັກສອນລະອຽດກວ່າ",
+  "board.reply": "ຕອບ",
+  "board.close": "ປິດ",
+  "board.otherAmount": "ຈຳນວນອື່ນ…",
+  "board.amount": "ຈຳນວນ",
+  "board.unit": "ນາທີ ຊົ່ວໂມງ ຫຼືມື້",
+  "board.confirm": "ຢືນຢັນ",
+  "board.notAnAmount": "ກະລຸນາປ້ອນເລກຈຳນວນເຕັມ",
+  "beacon.help": "ຊ່ວຍດ້ວຍ",
+  "beacon.sos": "SOS",
+  "beacon.dismiss": "ແຕະບ່ອນໃດກໍໄດ້ເພື່ອຢຸດ"
 }

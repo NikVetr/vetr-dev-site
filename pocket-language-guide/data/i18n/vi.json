@@ -247,7 +247,7 @@
   "handles.marginRight": "Lề phải",
   "handles.marginTop": "Lề trên",
   "nav.back": "← Tất cả ngôn ngữ",
-  "nav.brand": "Cẩm nang bỏ túi",
+  "nav.brand": "Phraselet",
   "nav.donate": "Quyên góp",
   "nav.readerHint": "— chọn ngôn ngữ mà bạn đã đọc được",
   "nav.skipToLanguages": "Bỏ qua, đến danh sách ngôn ngữ",
@@ -377,5 +377,15 @@
   "ornament.starforge": "Lò rèn tinh tú",
   "ornament.hint": "Viền trang trí giữ nguyên cỡ chữ và khoảng cách. Họa tiết góc chỉ xuất hiện khi có chỗ trống.",
   "ornament.frameHint": "Khung tiên đan xen dành khoảng trống quanh văn bản. Bố cục và số trang có thể thay đổi.",
-  "ornament.lowInk": "Chế độ tiết kiệm mực dùng đường viền cổ điển. Kiểu đã chọn sẽ trở lại khi chuyển sang chế độ màu hoặc đơn sắc."
+  "ornament.lowInk": "Chế độ tiết kiệm mực dùng đường viền cổ điển. Kiểu đã chọn sẽ trở lại khi chuyển sang chế độ màu hoặc đơn sắc.",
+  "board.reply": "Trả lời",
+  "board.close": "Đóng",
+  "board.otherAmount": "Số lượng khác…",
+  "board.amount": "Số lượng",
+  "board.unit": "Phút, giờ hoặc ngày",
+  "board.confirm": "Xác nhận",
+  "board.notAnAmount": "Vui lòng nhập số nguyên",
+  "beacon.help": "Cứu với",
+  "beacon.sos": "SOS",
+  "beacon.dismiss": "Chạm vào bất kỳ đâu để dừng"
 }

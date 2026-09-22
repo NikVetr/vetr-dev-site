@@ -6,7 +6,7 @@
      disabling zoom, and someone holding this out at arm's length in bad light is
      exactly the reader who needs to pinch it larger. -->
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title data-i18n="board.docTitle">Conversation — Pocket Language Guide</title>
+<title data-i18n="board.docTitle">Conversation — Phraselet</title>
 <meta name="description" content="Tap a phrase and show it, full-screen, in the other person's language. Works offline.">
 <meta name="color-scheme" content="light">
 <link rel="icon" href="favicon.svg">
@@ -18,7 +18,7 @@
 
 <!-- The owner's side. A header small enough that the grid is what the page is. -->
 <header class="board-header">
-  <a class="brand board-brand" href="./" data-i18n="nav.brand">Pocket Language Guide</a>
+  <a class="brand board-brand" href="./" data-i18n="nav.brand">Phraselet</a>
   <div class="spacer"></div>
   <!-- Board title and the pair, as a statement of what is about to be shown to
        whom. Filled by `ui/conversation.js`. -->
@@ -26,28 +26,31 @@
 </header>
 
 <main class="board-main">
-  <!-- The parent control lives on the grid, never on a message: a message has no
-       visible Back by design. Hidden at the root. -->
+  <!-- **One row**: back, the topic, and one owner-only menu. It was back, the topic,
+       `Settings` and `Edit buttons`, which on a phone wrapped the bar onto a second
+       line and spent it on two words nobody reads twice.
+
+       The parent control lives on the grid and never on a message -- a message has no
+       visible Back by design -- and it is present at the root too, where it leads out
+       to the topic list rather than up a submenu. -->
   <div class="board-bar">
+    <!-- An arrow and nothing else. Where it goes is obvious from where you are, and
+         a word beside it was a word competing with the topic. -->
     <button type="button" id="board-up" class="board-up" hidden>
-      <span aria-hidden="true">←</span> <span id="board-up-label"></span>
+      <span class="board-up-arrow" aria-hidden="true">←</span>
     </button>
     <!-- Which conversation this is. The page's only `h1`, because on a board the
          topic *is* the page -- and it sits in the bar rather than the header so the
          brand line stays one quiet row. -->
     <h1 class="board-title" id="board-title"></h1>
     <div class="spacer"></div>
-    <!-- Owner-only, both of them. `ui/conversation.js` hides them on every view but
-         the grid, and leaves the settings control hidden entirely for a pair whose
-         languages ask nothing about the speaker. -->
-    <button type="button" id="board-settings" class="board-edit" hidden></button>
-    <button type="button" id="board-edit" class="board-edit" hidden></button>
+    <!-- Owner-only, and one control rather than two. `ui/conversation.js` hides it
+         on every view but the grid: a menu is not part of a live conversation. -->
+    <button type="button" id="board-menu" class="board-menu" hidden aria-haspopup="true">
+      <span class="board-menu-bars" aria-hidden="true"></span>
+    </button>
   </div>
   <div id="board-grid" class="board-grid" aria-busy="true"></div>
-  <!-- What the tinted cells and their ↩ mean, said only on a grid that has one. A
-       mark nobody can decode is decoration; the `title` attribute that carried this
-       is invisible to a finger. -->
-  <p id="board-legend" class="board-legend"></p>
   <p id="board-status" class="board-status" role="status"></p>
 </main>
 

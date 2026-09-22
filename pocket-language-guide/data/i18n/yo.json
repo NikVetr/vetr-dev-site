@@ -259,7 +259,7 @@
   "handles.marginRight": "Ọ̀tún ẹ̀gbẹ́",
   "handles.marginTop": "Òkè ẹ̀gbẹ́",
   "nav.back": "← Gbogbo èdè",
-  "nav.brand": "Pocket Language Guide",
+  "nav.brand": "Phraselet",
   "nav.donate": "Ṣètọrẹ",
   "nav.readerHint": "— yan èdè tí o ti mọ̀ kà tẹ́lẹ̀",
   "nav.skipToLanguages": "Lọ tààrà sí àwọn èdè",
@@ -377,5 +377,15 @@
   "warn.no-fit.auto": "Kódà ojú {faces} kò ní gbá èyí ní ìwọ̀n tí a lè kà, ní ọ̀wọ̀n {columns} fún ojú kọ̀ọ̀kan.",
   "warn.no-fit.pinned": "Àkóónú náà kò ní kún ojú {faces} ní ọ̀wọ̀n {columns} fún ojú kọ̀ọ̀kan láì sọ̀ kalẹ̀ ju ìwọ̀n tí a lè kà.",
   "warn.nothing-selected": "Kò sí ohun tí a yàn, nítorí náà ìwé náà òfìfo ni. Tún ẹ̀ka kan ṣí nínú páànù àkóónú.",
-  "warn.paper-too-coarse": "Ìwé yìí nílò ọ̀rọ̀ {script} ní {floor}pt, ṣùgbọ́n àwòṣe náà ti gbé ọ̀wọ̀n {field} sí {size}pt. A ti fẹ̀ ọ̀wọ̀n náà kí ó lè kà, èyí tí ó ń jẹ àyè lóhun mìíràn. Ìwé fọ́tò a gbá lẹ́tà tí ó kéré jù."
+  "warn.paper-too-coarse": "Ìwé yìí nílò ọ̀rọ̀ {script} ní {floor}pt, ṣùgbọ́n àwòṣe náà ti gbé ọ̀wọ̀n {field} sí {size}pt. A ti fẹ̀ ọ̀wọ̀n náà kí ó lè kà, èyí tí ó ń jẹ àyè lóhun mìíràn. Ìwé fọ́tò a gbá lẹ́tà tí ó kéré jù.",
+  "board.reply": "Dáhùn",
+  "board.close": "Ti",
+  "board.otherAmount": "Iye mìíràn…",
+  "board.amount": "Iye",
+  "board.unit": "Ìṣẹ́jú, wákàtí, tàbí ọjọ́",
+  "board.confirm": "Jẹ́rìí",
+  "board.notAnAmount": "Tẹ nọ́mbà odidi kan",
+  "beacon.help": "Ẹ̀gbà mí",
+  "beacon.sos": "SOS",
+  "beacon.dismiss": "Tẹ ibikíbi láti dá a duro"
 }

@@ -21,7 +21,24 @@ import { openLightbox } from './lightbox.js';
 import {
   applyStatic, languageName, loadUiLanguage, regionList, setLanguageNames, t,
 } from './i18n.js';
-import * as store from './platform/store.js';
+
+/**
+ * Publish the site header's height, so what sticks under it knows where under it is.
+ *
+ * The header is `position: sticky; top: 0`, and the picker's label sticks below it.
+ * That offset cannot be written into the stylesheet: the header wraps to two lines
+ * on a narrow phone, to one on a wide one, and grows again when the reader turns up
+ * their system text size -- all of which a `ResizeObserver` sees and none of which a
+ * media query does.
+ */
+function trackHeaderHeight() {
+  const header = document.querySelector('.site-header');
+  if (!header) return;
+  const set = () => document.documentElement.style.setProperty(
+    '--header-h', `${Math.round(header.getBoundingClientRect().height)}px`);
+  new ResizeObserver(set).observe(header);
+  set();
+}
 
 /** @param {string} tag @param {Record<string,string>} attrs @param {(Node|string)[]} kids */
 function el(tag, attrs = {}, kids = []) {
@@ -261,11 +278,18 @@ function renderWantGrid(shown, coverage, readerCode, onPick) {
 }
 
 /**
- * Open or shut the language picker, and remember which.
+ * Open or shut the language picker.
  *
- * Remembered rather than reset on every visit, the way the studio's panels are: a
- * reader who folded it away meant it, and a reader who has not touched it gets it
- * open, which is the state a first visit needs.
+ * **Not remembered between visits.** It folds itself the moment a language has been
+ * picked, which is the common case, so persisting that state meant almost every
+ * return visit opened on a page whose first control was collapsed -- and the picker
+ * is the thing the page is for. A reader who wants it out of the way is one tap from
+ * it; a reader who wanted to change language and found it folded has to work out
+ * that the grey line is a button.
+ *
+ * Nothing else about the picker is remembered either: which card was reeled to the
+ * top row is a reordering of this visit, not a setting. The one thing that does
+ * persist is the reader's *own* language, which is the site header's business.
  * @param {boolean} open @param {string} [chosen] the language name, when shut
  */
 function setWantOpen(open, chosen) {
@@ -279,10 +303,7 @@ function setWantOpen(open, chosen) {
   // only while the question is folded up -- with the grid open it is already marked
   // on the button itself.
   if (said) said.textContent = open ? '' : (chosen ?? said.textContent ?? '');
-  store.set(WANT_KEY, open ? 'open' : 'shut');
 }
-
-const WANT_KEY = 'plg.want-open';
 
 /** How many other languages to show beside the reader's own. */
 const COLLAGE_DEPTH = 5;
@@ -362,6 +383,7 @@ async function main() {
   // anything is drawn -- including the static markup.
   await loadUiLanguage(reader, loadText);
   applyStatic();
+  trackHeaderHeight();
 
   // The face count and type scale the pre-render settled on, kept rather than
   // discarded: they are the answer to the expensive half of solving a sheet, and
@@ -509,7 +531,6 @@ async function main() {
       toggle.addEventListener('click', () => {
         setWantOpen(toggle.getAttribute('aria-expanded') === 'false');
       });
-      if (store.get(WANT_KEY) === 'shut') setWantOpen(false);
     }
   }
 

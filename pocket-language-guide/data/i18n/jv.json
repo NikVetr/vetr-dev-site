@@ -248,7 +248,7 @@
   "handles.marginRight": "Margin tengen",
   "handles.marginTop": "Margin nginggil",
   "nav.back": "← Sedaya basa",
-  "nav.brand": "Pocket Language Guide",
+  "nav.brand": "Phraselet",
   "nav.donate": "Nyumbang",
   "nav.readerHint": "— pilih basa ingkang sampun panjenengan waos",
   "nav.skipToLanguages": "Langsung dhateng daftar basa",
@@ -377,5 +377,15 @@
   "warn.no-fit.auto": "Sanadyan {faces} sisi mboten badhé ngemot isi menika ing ukuran ingkang taksih kawaos, kanthi {columns} kolom saben sisi.",
   "warn.no-fit.pinned": "Isi menika mboten badhé mlebet ing {faces} sisi kanthi {columns} kolom saben sisi tanpa mandhap saking ukuran ingkang taksih kawaos.",
   "warn.nothing-selected": "Mboten wonten ingkang dipunpilih, dados lembaripun kothong. Salah satunggaling bagéan dipunuripaken malih ing panel isi.",
-  "warn.paper-too-coarse": "Kertas menika nyuwun teks {script} paling mboten {floor}pt, déné téma netepaken kolom {field} ing {size}pt. Kolom punika dipunagengaken supados tetep kawaos, lan punika ngentèkaken papan ing panggènan sanès. Kertas foto sanggem ngasta aksara ingkang langkung lembat."
+  "warn.paper-too-coarse": "Kertas menika nyuwun teks {script} paling mboten {floor}pt, déné téma netepaken kolom {field} ing {size}pt. Kolom punika dipunagengaken supados tetep kawaos, lan punika ngentèkaken papan ing panggènan sanès. Kertas foto sanggem ngasta aksara ingkang langkung lembat.",
+  "board.reply": "Wangsulan",
+  "board.close": "Tutup",
+  "board.otherAmount": "Cacah sanès…",
+  "board.amount": "Cacah",
+  "board.unit": "Menit, jam, utawi dinten",
+  "board.confirm": "Konfirmasi",
+  "board.notAnAmount": "Cacah ingkang dipunèntri kedah wetah",
+  "beacon.help": "Tulung",
+  "beacon.sos": "SOS",
+  "beacon.dismiss": "Panggènan pundi kémawon dipunpencet supados mandheg"
 }

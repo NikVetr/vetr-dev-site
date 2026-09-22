@@ -23,11 +23,12 @@ import {
   validateBoard, resolvePhrase, missingPhrases, reduce, openBoard, currentNode,
 } from '../core/conversation.js';
 import {
-  renderGrid, renderMessage, renderReply, renderEntry, clearStage,
+  renderGrid, renderMessage, renderReply, renderEntry, clearStage, fitMessage,
 } from './conversation-view.js';
 import { resolveValue } from '../core/conversation.js';
 import { parseAmount, formatDuration, unitName } from '../core/duration.js';
 import { openBoardEditor } from './board-editor.js';
+import { openBoardMenu } from './board-menu.js';
 import { speech } from './platform/speech.js';
 import { keepAwake } from './platform/wake.js';
 import { startBeacon, stopBeacon } from './platform/beacon.js';
@@ -97,7 +98,17 @@ async function showPicker(owner, listener) {
     if (serves(board, listener, owner)) titles.set(board.id, t(board.titleKey));
   }
   $('board-title').textContent = t('board.pickTopic');
+  $('board-title').title = t('board.pickTopic');
   document.title = t('board.docTitle');
+  // **The context list has a parent too**, and it is the card this was opened from.
+  // Without this the only way off the first screen of Converse was the browser's own
+  // Back, which a reader who arrived from the app's own link does not think of as
+  // available -- and which does not exist at all in the native shell.
+  const out = $('board-up');
+  out.hidden = false;
+  out.setAttribute('aria-label', t('board.toGallery'));
+  out.title = t('board.toGallery');
+  out.addEventListener('click', () => { location.href = './'; });
   if (!titles.size) {
     $('board-status').textContent = t('board.noBoards');
     $('board-grid').removeAttribute('aria-busy');
@@ -257,7 +268,11 @@ async function main() {
   };
   sayStatus();
 
+  // The title is `nowrap` and ellipsises at enlarged text rather than costing the
+  // grid a row, so the full name goes in `title` too -- and it is on the context grid
+  // in full either way, which is where a reader who cannot read it here will look.
   $('board-title').textContent = t(board.titleKey);
+  $('board-title').title = t(board.titleKey);
   document.title = `${t(board.titleKey)} \u2014 ${t('nav.brand')}`;
 
   // **Replies are on unless a session says otherwise.** They were behind `?replies=1`
@@ -343,28 +358,18 @@ async function main() {
     // A waiting deploy installs here, between things, and nowhere else.
     applyUpdateIfIdle();
 
-    if (state.view !== 'grid') {
-      $('board-edit').hidden = true;
-      $('board-settings').hidden = true;
-      $('board-legend').textContent = '';
-    }
+    if (state.view !== 'grid') $('board-menu').hidden = true;
     if (state.view === 'grid') {
       clearStage(stage);
       // At the root the parent is the topic list, not a node -- so the control stays
       // rather than vanishing, and says where it goes. Somewhere to go back *to* is
       // the difference between one board and the whole app.
+      // The arrow says "out of here" wherever you are: up a submenu, or back to the
+      // context list from a board's root. Its accessible name says which.
       const atRoot = state.path.length < 2;
       $('board-up').hidden = false;
-      $('board-edit').hidden = false;
-      $('board-settings').hidden = false;
-      $('board-up-label').textContent = atRoot ? t('board.allTopics') : t('board.up');
-      // **The key to the only distinction the grid draws**, and only where the grid
-      // draws it. A tint and a mark that nobody can decode are decoration -- the
-      // `title` attribute that carried this is invisible to a finger -- and a legend
-      // on a grid with nothing to answer would be noise.
-      $('board-legend').textContent = state.replies
-        && node.buttons.some((/** @type {any} */ b) => b.replySetId)
-        ? t('board.legendAnswer') : '';
+      $('board-menu').hidden = false;
+      $('board-up').setAttribute('aria-label', atRoot ? t('board.allTopics') : t('board.up'));
       renderGrid($('board-grid'), node, {
         lang: owner,
         title: node.titleKey ? t(node.titleKey) : undefined,
@@ -382,10 +387,24 @@ async function main() {
           // found needs.
           if (button.kind === 'beacon') {
             speech.stop();
+            // **The word on it is the stranger's, not the reader's.** A beacon exists
+            // to be read by whoever is walking past, so the one thing on this screen
+            // that must not be in the reader's language is the word itself. The
+            // corpus already carries it -- reviewed, in the native script, for every
+            // pack that can be a listener -- so this is the same phrase the `Help`
+            // cell says, shown at the size of the display instead of spoken.
+            // `beacon.dismiss` stays the reader's, because it is the reader who has
+            // to know how to stop it.
+            const help = ctx.listenerRows['emergency-medical.help'];
             startBeacon({
               mode: button.beacon === 'sos' ? 'sos' : 'attention',
-              label: t(button.beacon === 'sos' ? 'beacon.sos' : 'beacon.help'),
+              label: button.beacon === 'sos'
+                ? theirs.t('beacon.sos')
+                : (help?.text || theirs.t('beacon.help')),
+              lang: listener,
+              dir: ctx.listenerDir,
               dismiss: t('beacon.dismiss'),
+              fit: fitMessage,
               // The screen is the signal, so it must not sleep while one is running
               // -- and the lock goes back to following the message view afterwards.
               onStop: () => keepAwake(state.view !== 'grid'),
@@ -492,10 +511,12 @@ async function main() {
           amount: theirs.t('board.amount'),
           unit: theirs.t('board.unit'),
           // From CLDR, not from a catalogue: three more keys in fifty-one languages
-          // would each be an invitation to invent a word that already exists.
-          minute: unitName('minute', listener) ?? t('board.minutes'),
-          hour: unitName('hour', listener) ?? t('board.hours'),
-          day: unitName('day', listener) ?? t('board.days'),
+          // would each be an invitation to invent a word that already exists. The
+          // catalogue is only the floor under a locale `Intl` has no units for --
+          // and it is the listener's catalogue, because this is their screen.
+          minute: unitName('minute', listener) ?? theirs.t('board.minutes'),
+          hour: unitName('hour', listener) ?? theirs.t('board.hours'),
+          day: unitName('day', listener) ?? theirs.t('board.days'),
           confirm: theirs.t('board.confirm'),
           cancel: theirs.t('board.close'),
           invalid: theirs.t('board.notAnAmount'),
@@ -531,12 +552,41 @@ async function main() {
     dispatch({ type: 'up' });
   });
 
-  // **Owner-only, and reachable from the grid alone.** Never from a message or a
-  // reply: the person being spoken to must not find the editor by tapping, and the
-  // owner must not open it while holding the phone out to a stranger.
-  const editButton = $('board-edit');
-  editButton.textContent = t('editor.open');
-  editButton.addEventListener('click', () => openBoardEditor({
+  // **One owner-only control, opening a menu.** It was two buttons reading `Settings`
+  // and `Edit buttons`, which on a phone wrapped the bar onto a second line -- and
+  // the topic, which is the thing worth reading, had to share the first one. Three
+  // bars is the icon every phone already means "menu" by, so the row fits and the
+  // topic gets the space.
+  //
+  // Owner-only and grid-only, like the editor it holds: the person being spoken to
+  // must not find the editor by tapping, and the owner must not open it while
+  // holding the phone out to a stranger.
+  const menuButton = $('board-menu');
+  menuButton.setAttribute('aria-label', t('board.menu'));
+  menuButton.title = t('board.menu');
+
+  const openSettings = () => openSpeakerSettings({
+    axes: corpus.speakerAxes,
+    languages: [listener, owner],
+    profile,
+    onChange: (next) => { profile = next; voice(); sayStatus(); paint(); },
+    extra: personalSection(personalWiring({
+      save: download,
+      // **What this build can actually show**, so an import naming a screen that is
+      // not here is refused rather than reported as a success with the phrases
+      // parked where nobody can reach them.
+      boards: knownScreens,
+      onChanged: () => {
+        personal = readPersonal();
+        profile = readProfile();
+        voice();
+        sayStatus();
+        paint();
+      },
+    })),
+  });
+
+  const openEditor = () => openBoardEditor({
     at: `${boardId}/${state.path.at(-1)}`,
     pair,
     owner,
@@ -544,40 +594,12 @@ async function main() {
     listenerDir: ctx.listenerDir,
     state: personal,
     onChange: (next) => { personal = { ...personal, data: next }; paint(); },
-  }));
+  });
 
-  // **Only where there is something to ask.** Thirty-one of the fifty-three languages
-  // declare no axis, and for those pairs this control does not exist at all rather
-  // than opening onto an empty form. Owner-only and grid-only, like the editor: a
-  // settings screen is not part of a live conversation.
-  // **Always offered, unlike the voice question inside it.** The axes are only worth
-  // asking about for 22 of 53 languages, but the reader's own phrases are theirs on
-  // every pair -- and a Save-a-copy button that appears only for Russian readers is
-  // a backup nobody can find.
-  const settingsButton = $('board-settings');
-  {
-    settingsButton.textContent = t('settings.open');
-    settingsButton.addEventListener('click', () => openSpeakerSettings({
-      axes: corpus.speakerAxes,
-      languages: [listener, owner],
-      profile,
-      onChange: (next) => { profile = next; voice(); sayStatus(); paint(); },
-      extra: personalSection(personalWiring({
-        save: download,
-        // **What this build can actually show**, so an import naming a screen that
-        // is not here is refused rather than reported as a success with the phrases
-        // parked where nobody can reach them.
-        boards: knownScreens,
-        onChanged: () => {
-          personal = readPersonal();
-          profile = readProfile();
-          voice();
-          sayStatus();
-          paint();
-        },
-      })),
-    }));
-  }
+  menuButton.addEventListener('click', () => openBoardMenu(menuButton, [
+    { label: t('editor.open'), run: openEditor },
+    { label: t('settings.open'), run: openSettings },
+  ]));
 
   /**
    * One step back out of wherever we are, and whether there was one to take.

@@ -247,7 +247,7 @@
   "handles.marginRight": "Rechtermarge",
   "handles.marginTop": "Bovenmarge",
   "nav.back": "← Alle talen",
-  "nav.brand": "Pocket Language Guide",
+  "nav.brand": "Phraselet",
   "nav.donate": "Doneren",
   "nav.readerHint": "— kies de taal die u al leest",
   "nav.skipToLanguages": "Naar de talen springen",
@@ -377,5 +377,15 @@
   "ornament.starforge": "Sterrensmidse",
   "ornament.hint": "Decoratieve randen bij ongewijzigd lettertype en ongewijzigde afstanden. Hoekversieringen verschijnen waar ruimte is.",
   "ornament.frameHint": "Een verstrengeld elfenlijst heeft ruimte rond de tekst nodig. Inpassing en aantal zijden kunnen veranderen.",
-  "ornament.lowInk": "De inktbesparende stand gebruikt de klassieke lijnen. In kleur of zwart-wit verschijnt uw gekozen stijl weer."
+  "ornament.lowInk": "De inktbesparende stand gebruikt de klassieke lijnen. In kleur of zwart-wit verschijnt uw gekozen stijl weer.",
+  "board.reply": "Beantwoorden",
+  "board.close": "Sluiten",
+  "board.otherAmount": "Andere duur…",
+  "board.amount": "Hoeveel",
+  "board.unit": "Minuten, uren of dagen",
+  "board.confirm": "Bevestigen",
+  "board.notAnAmount": "Voer een geheel getal in",
+  "beacon.help": "HELP",
+  "beacon.sos": "SOS",
+  "beacon.dismiss": "Tik ergens om te stoppen"
 }

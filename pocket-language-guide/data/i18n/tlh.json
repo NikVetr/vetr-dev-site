@@ -196,7 +196,7 @@
   "handles.marginRight": "nIH veH",
   "handles.marginTop": "Dung veH",
   "nav.back": "← Hoch Holmey",
-  "nav.brand": "'echletHom Hol De'wI'",
+  "nav.brand": "Phraselet",
   "nav.donate": "yInob",
   "nav.readerHint": "— Hol DalaDbogh yIwIv",
   "nav.skipToLanguages": "Holmey yIghoS",
@@ -326,5 +326,15 @@
   "ornament.hint": "nav veHmey 'IHmoH mIlloghmey. choHbe' ngutlh 'ab, rulvaH je. navDaq Daq chIm tu'lu'chugh, pa' mIllogh lanlu'.",
   "ornament.frameHint": "ghItlh Dech Sor DuQwI' rurwI'. logh lo'. chaq choH ghItlh meH 'ej chaq choH nav mI'.",
   "ornament.lowInk": "rItlh puS Dalo'DI', yamtaw motlh lo'lu'. rItlh puS Dalo'be'DI', mIllogh Segh Dalo'qa'.",
-  "_ornament_note": "Style labels use descriptive editorial paraphrases: mIllogh Segh (picture type), porDu' mIllogh (leaf picture), tlheghmey mIllogh (rope picture), Hov QuQ (star engine). These are not canonical names for the designs. yu'egh (wave), tlhegh (rope), Hov (star) and QuQ (engine) are TKD vocabulary; see https://klingonska.org/dict/. The low-ink hint says ordinary rules are used with little ink, and the chosen picture type returns when little ink is no longer used."
+  "_ornament_note": "Style labels use descriptive editorial paraphrases: mIllogh Segh (picture type), porDu' mIllogh (leaf picture), tlheghmey mIllogh (rope picture), Hov QuQ (star engine). These are not canonical names for the designs. yu'egh (wave), tlhegh (rope), Hov (star) and QuQ (engine) are TKD vocabulary; see https://klingonska.org/dict/. The low-ink hint says ordinary rules are used with little ink, and the chosen picture type returns when little ink is no longer used.",
+  "board.reply": "yIjang",
+  "board.close": "yISoQmoH",
+  "board.otherAmount": "latlh poH…",
+  "board.amount": "poH 'ar",
+  "board.unit": "tupmey, repmey, jajmey ghap",
+  "board.confirm": "yIlaj",
+  "board.notAnAmount": "mI' naQ yIghItlh",
+  "beacon.help": "ghoQaH",
+  "beacon.dismiss": "mevmeH yIHot",
+  "_board_note": "Conversation-board and beacon strings. Every root is TKD or its addendum, as in the rest of this file: jang (answer, reply), SoQ (be closed), laj (accept), mI' (number), ghItlh (write), mev (stop, cease), Hot (touch, feel), poH (period of time), tup (minute), rep (hour), jaj (day), ghap (or, joining nouns) and 'ar (how many, how much -- TKD 6.4) are TKD; naQ (be full, be whole, be entire) and latlh (additional one, other one) are TKDA. beacon.help is ghoQaH, the canon form data/lang/tlh/emergency.csv already carries for emergency-medical.help (src=Star Trek VI): its object is plural, so it says \"help us\" rather than \"help\", and it stays romanised because that row carries no pIqaD either. TWO STRINGS ARE REWORDED rather than translated, because the English is not sayable. board.amount is poH 'ar, \"how much time\": 'ar follows the noun it counts, so a bare \"how many\" is not a Klingon phrase, and the corpus already composes it this way at time-scheduling.how-long-does-it-take. beacon.dismiss is mevmeH yIHot, \"touch it so that it stops\", which drops \"anywhere\" -- jIH is the viewing screen, but it is also the pronoun \"me\", so jIH yIHot would read as \"touch me\". WHAT IS NOT HERE: beacon.sos. SOS is a Morse sequence rather than an abbreviation of words, and every roman.* key in this file already leaves a standards initialism as printed, so the Latin letters fall back from English unchanged."
 }

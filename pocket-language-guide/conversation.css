@@ -31,8 +31,18 @@
 
 .board-body {
   /* The grid should fill the phone, not sit in a column. `100dvh` rather than
-     `100vh` so the address bar collapsing does not leave the last row under it. */
-  min-block-size: 100dvh;
+     `100vh` so the address bar collapsing does not leave the last row under it.
+
+     **Exactly the screen, not at least the screen.** With a floor the page could
+     grow past the viewport, and `grid-auto-rows: 1fr` on a grid with no definite
+     height sizes its rows to their content -- so the emergency board settled on six
+     118px rows where 111px would have fitted, and the last row, which is the two
+     beacons, hung 38px off the bottom of the screen with nothing to say it was
+     there. A definite height gives `1fr` something to divide. `.board-main` scrolls
+     instead of clipping for the case the floor was protecting: at a 1.6x system text
+     size the cells' own 4.5rem minimum can exceed the screen, and a board that
+     scrolls is fine where a board with a row cut off the bottom edge is not. */
+  block-size: 100dvh;
   display: flex;
   flex-direction: column;
   /* The safe-area padding this used to repeat is on `body` in `style.css` now, for
@@ -71,6 +81,7 @@
   gap: var(--space-2);
   padding: var(--space-2);
   min-block-size: 0;
+  overflow: auto;
 }
 
 /* **The five colours a printed sheet codes its sections with**, reused rather than
@@ -89,52 +100,84 @@
    arrow -- because the one thing it must never be is mistaken for something you are
    saying to the person in front of you. Large enough to hit without looking, since
    backing out of a submenu is the gesture most likely to be made in a hurry. */
+/* An arrow, square, and nothing else. Where it goes is obvious from where you are --
+   up a submenu, or out to the context list -- and the word that used to sit beside it
+   was a word competing with the topic for the only row there is. The accessible name
+   still says which, so nothing is lost to a screen reader. */
 .board-up {
-  align-self: flex-start;
-  display: flex;
+  flex: 0 0 auto;
+  display: inline-flex;
   align-items: center;
-  gap: 0.5em;
-  min-block-size: 3rem;
-  padding: 0 var(--space-3);
-  font-size: var(--fs-1);
-  border: none;
+  justify-content: center;
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  padding: 0;
+  border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: var(--muted);
-  color: #fff;
+  background: none;
+  color: var(--muted);
+  font-size: var(--fs-1);
+  line-height: 1;
+  cursor: pointer;
 }
-.board-up:hover { background: var(--ink); }
+.board-up:hover { background: var(--surface); color: var(--ink); }
 .board-up:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .board-up[hidden] { display: none; }
+/* The arrow points the way the reader came from, which on a right-to-left board is
+   the other way. A glyph is not text and gets no bidi treatment, so it is turned
+   over here. */
+[dir="rtl"] .board-up-arrow { display: inline-block; transform: scaleX(-1); }
 
 /* The grid's own chrome: back on the left, the owner's editor on the right. The
    two are pushed apart because they are opposites -- one is how you get out of a
    submenu, the other is the only control here that is not part of a conversation. */
-/* **Wraps, for the same reason the header does.** At a 1.6x system text size the
-   board's own name was clipped inside its box: a flex row will not let an item shrink
-   below its content, and Back plus two owner-only buttons leave a long topic name no
-   room. Found by the clipping check, not by looking -- which is why that check now
-   covers the topic list and the densest board as well as the one it was written for. */
-.board-bar { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
+/* **One row, and it stays one row.** It wrapped at enlarged text when it held Back,
+   the topic and two named buttons; with an arrow and an icon there is room, and the
+   topic shrinks to fit rather than pushing anything onto a second line. */
+.board-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-inline-size: 0;
+  /* Named so `.board-title` can size itself against this row rather than the
+     viewport: the space it has is what the arrow and the menu leave, not what the
+     screen is. */
+  container-type: inline-size;
+}
 .board-bar .spacer { flex: 1 1 auto; }
 
 /* The topic, stated once. Bold and at the reading size rather than a heading size:
    it has to be unmistakable at a glance -- someone opening the app in a taxi needs
    to know they are not still in the massage board -- without taking a row of its
    own from the grid, which is what the page is for. */
-/* **The topic, and the first thing to read.** It was set at body size and blended
-   into the bar; a board is a situation and someone opening this in a taxi needs to
-   know at a glance they are not still in the massage board. Larger, heavier, and in
-   the accent colour -- which also distinguishes it from the grey pair line above it
-   without adding a rule or a box. Still not a heading size: every pixel the bar
-   takes is a pixel off the grid, which is what the page is for. */
+/* **The topic, and the first thing to read.** Larger and heavier than the body, in
+   the accent colour, which also tells it apart from the grey pair line above without
+   a rule or a box. It fills whatever the arrow and the menu leave and shrinks rather
+   than wrapping: this bar is one row, and a topic on two lines would cost the grid
+   a row it needs more. `clamp` against the container rather than a fixed size, so a
+   long name like "Massage and spa" comes down instead of pushing the menu off. */
 .board-title {
+  flex: 1 1 auto;
+  min-inline-size: 0;
   margin: 0;
-  font-size: var(--fs-1);
+  /* `--fs-3` is the page-heading size, which is what this is: taking the two named
+     buttons out of the bar is what made the room for the topic to be set like one.
+     `min`, not `clamp`, because a floor is what turns "as large as fits" into "large
+     enough to need an ellipsis", and truncating a topic is not on offer. Tied to the
+     bar's own width, so an enlarged system text size moves the body copy around it
+     without pushing this over the edge. */
+  font-size: min(7.5cqi, var(--fs-3));
   font-weight: 700;
   letter-spacing: -0.01em;
+  line-height: 1.2;
   color: var(--accent);
-  min-inline-size: 0;
-  overflow-wrap: anywhere;
+  /* **One line in practice, never a truncated one.** `nowrap` plus an ellipsis kept
+     the bar to a row and paid for it by cutting a topic's name in half, which is the
+     one thing nothing here is allowed to do -- and at a 1.6x system text size, where
+     the two 44px controls and the rem-sized gaps eat the row, it did. Sized against
+     the bar instead, a topic fits on one line at every ordinary setting and is
+     allowed to take a second rather than lose a syllable. */
+  overflow-wrap: break-word;
 }
 .board-title:empty { display: none; }
 
@@ -255,29 +298,37 @@
 }
 /* Sized by `fitCells`, which asks how large this can be in both directions. No
    `font-size` here: whatever CSS set would be overwritten on the first measure. */
-.board-cell-label { display: block; inline-size: 100%; }
+.board-cell-label { display: block; inline-size: 100%; position: relative; z-index: 1; }
 
 /* A message that can be answered, against one that can only be shown. Tinted *and*
    marked, because colour alone excludes roughly one man in twelve and washes out in
    sunlight -- and because this is the distinction that changes what happens after
    the tap. */
 .board-cell-asks { background: var(--accent-soft); border-color: var(--accent); }
-/* Two overlapping speech bubbles: this cell is a conversation, not a way back. It
-   sits in whichever outer corner the label is not using -- `placeMark` measures the
-   first and last line of the wrapped label and moves it to the short end. */
+/* Two overlapping speech bubbles: this cell is a conversation, not a way back.
+   **A watermark filling the cell, not a badge in its corner.** In the corner it was
+   an icon, and an icon invites the question of what it does -- which is what the
+   legend under the grid used to answer. Filling the button at a tenth of the ink, it
+   stops being a control to interpret and becomes the surface the words sit on: read
+   as texture at arm's length, unmistakable up close, and never once mistaken for
+   something to press. It also frees the corner, so nothing has to measure which end
+   of a wrapped label has room.
+
+   Behind the label, which is why the two carry z-indices: an absolutely positioned
+   box paints over in-flow text whatever the source order says. `left`/`top` rather
+   than the logical pair because centring is symmetric and the physical names need no
+   mirror on a right-to-left board. */
 .board-cell-mark {
   position: absolute;
-  inset-block-start: 0.3rem;
-  inset-inline-end: 0.4rem;
-  inline-size: 0.95rem;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: 0;
+  inline-size: 72%;
   block-size: auto;
   color: var(--accent);
-  opacity: 0.85;
+  opacity: 0.12;
   pointer-events: none;
-}
-.board-cell-mark-low {
-  inset-block-start: auto;
-  inset-block-end: 0.3rem;
 }
 
 /* A submenu is a different kind of act from saying something: it says nothing at
@@ -300,12 +351,6 @@
 .board-cell:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 /* Drawn, not removed: a grid that closes a gap is a grid whose buttons have moved. */
 .board-cell-off { opacity: 0.45; cursor: not-allowed; }
-
-/* The key to the one distinction the grid draws. Quiet, and absent on a grid where
-   nothing can be answered -- a legend for a symbol that is not on screen is noise. */
-.board-legend { margin: 0; color: var(--muted); font-size: var(--fs--1); }
-.board-legend:empty { display: none; }
-.board-legend .board-legend-mark { color: var(--accent); font-weight: 700; }
 
 .board-status { margin: 0; color: var(--muted); font-size: var(--fs--1); }
 .board-status:empty { display: none; }
@@ -352,10 +397,25 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  /* **Stated, because the browser's own default for a `button` is `center`** -- and
+     a centred flex item is shrink-to-fit, which means the paragraph inside grew to
+     its own max-content width instead of the width of this box. Two things followed.
+     The text overflowed the screen: `Извините` was drawn 810px wide in a 368px box,
+     and `காவல்துறையை அழையுங்கள்` ran 349px past the edge. And the fitter could not
+     see it, because `lineRoom` measures the paragraph's own content box -- which,
+     being shrink-to-fit, was exactly as wide as the ink in it, so the width test was
+     comparing a number with itself and passing at every size. Stretching the items
+     is what makes that test mean something. */
+  align-items: stretch;
   gap: var(--space-3);
   inline-size: 100%;
   min-block-size: 0;
-  padding: var(--space-3);
+  /* **Wider than it is tall.** The focus ring is drawn 4px inside this box, and at
+     an even `--space-3` a message set at the ceiling came within a few pixels of it
+     -- close enough to read as clipped, which is the one thing this screen must
+     never look like. The extra room costs nothing: `fitMessage` measures against the
+     content box, so a roomier margin simply settles on a slightly smaller size. */
+  padding: var(--space-3) var(--space-4);
   border: none;
   border-radius: var(--radius);
   background: none;
@@ -399,6 +459,46 @@
   mask-image: linear-gradient(to bottom, #000 calc(100% - 2.5rem), transparent);
 }
 
+/* **Turned sideways, when the phone is the wrong way round for the sentence.** A
+   long phrase in a portrait window is set small because the *width* runs out first,
+   while the screen's long axis goes unused. Turning the whole stage puts the sentence
+   along that axis, and on a 400x800 phone that is twice the line length and roughly
+   twice the type size -- the difference between a phrase readable across a counter
+   and one that is not.
+
+   The whole stage rather than the text alone, because a rotated text box still has
+   to be laid out, measured and scrolled: swapping the stage's own dimensions and
+   turning it means everything inside lays out honestly in a landscape box, `fitMessage`
+   measures the box it will really occupy, and the Reply control ends up the right way
+   up for someone reading the turned screen. A transform on the text alone would need
+   its box faked in JavaScript and would leave the controls facing the other way.
+
+   `100dvh`/`100dvw` swapped exactly, so the turned stage covers the viewport and no
+   more; `translate` before `rotate` centres it on the viewport's middle, which the
+   rotation then leaves alone. The insets rotate with it -- the edge that was the top
+   is now on the right -- so a notch is still avoided. */
+.board-stage-turned {
+  /* The controls go to the trailing edge rather than the foot. A row of 3rem buttons
+     costs an eighth of a 390px-tall stage where it cost a twentieth of an 844px one,
+     and the point of turning the screen was to gain room for the sentence, not to
+     spend it on the same controls in a shorter box. */
+  flex-direction: row;
+  /* Physical `inset`, against the logical sizes below: centring is symmetric, so
+     there is nothing here for a right-to-left page to mirror, and a logical
+     `inset-inline-start` would have put the box's near edge on the right and then
+     translated it the wrong way. */
+  inset: auto auto auto 50%;
+  top: 50%;
+  inline-size: 100dvh;
+  block-size: 100dvw;
+  translate: -50% -50%;
+  rotate: 90deg;
+  padding: calc(env(safe-area-inset-right) + var(--space-2))
+           calc(env(safe-area-inset-bottom) + var(--space-2))
+           calc(env(safe-area-inset-left) + var(--space-2))
+           calc(env(safe-area-inset-top) + var(--space-2));
+}
+
 /* Reply and Speak are siblings of the surface, never children: a button inside a
    button is invalid, and worse, ambiguous about which one a tap meant. Being
    siblings is also what stops their clicks reaching the dismiss handler. */
@@ -413,6 +513,44 @@
   cursor: pointer;
 }
 .board-control:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.board-stage-turned .board-controls { flex-direction: column; }
+
+/* The turn control is the quiet one: no words, square, small, and an outline rather
+   than a fill. Pressed, it fills, because "the screen is currently turned" is a
+   state and not an action. */
+.board-turn {
+  align-self: center;
+  flex: 0 0 auto;
+  inline-size: 2.4rem;
+  min-block-size: 2.4rem;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+}
+.board-turn svg { inline-size: 1.35rem; block-size: auto; }
+.board-turn[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.board-stage[class*="board-role-"] .board-turn {
+  background: rgb(255 255 255 / 0.14);
+  border-color: rgb(255 255 255 / 0.45);
+  color: #fff;
+}
+.board-stage[class*="board-role-"] .board-turn[aria-pressed="true"] {
+  background: #fff;
+  color: var(--ink);
+}
+/* An incoming answer is on paper whatever its role colour is, so the white-on-white
+   pair above has to be undone for it. */
+.board-stage-incoming[class*="board-role-"] .board-turn {
+  background: var(--surface);
+  border-color: var(--line);
+  color: var(--muted);
+}
+.board-stage-incoming[class*="board-role-"] .board-turn[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+}
 
 /* --- replies ----------------------------------------------------------------- */
 
@@ -595,6 +733,11 @@
 }
 .beacon-word {
   margin: 0;
+  /* Against the screen, not against the word: `.beacon` centres its children, and a
+     centred flex item is shrink-to-fit -- which makes the fitter's width test compare
+     the ink with itself. The same declaration `.board-message` needs, for the same
+     reason. */
+  align-self: stretch;
   font-size: clamp(3rem, 22vw, 12rem);
   font-weight: 800;
   line-height: 1;
@@ -610,18 +753,103 @@
 .beacon-sos.beacon-lit { background: #fff; color: #000; }
 .beacon-sos.beacon-lit .beacon-hint { color: rgb(0 0 0 / 0.55); }
 
-/* Attention: a word held still, with a light running the edge of the display. The
-   travelling light is what catches an eye that is not pointed at the screen; the
-   word is what it has to say once the eye arrives. */
-.beacon-attention { background: #11151a; }
-.beacon-edge { position: absolute; background: var(--alert); opacity: 0.15; }
-.beacon-edge-top, .beacon-edge-bottom { inset-inline: 0; block-size: 0.9rem; }
-.beacon-edge-top { inset-block-start: 0; }
-.beacon-edge-bottom { inset-block-end: 0; }
-.beacon-edge-left, .beacon-edge-right { inset-block: 0; inline-size: 0.9rem; }
-.beacon-edge-left { inset-inline-start: 0; }
-.beacon-edge-right { inset-inline-end: 0; }
-.beacon-attention[data-edge="0"] .beacon-edge-top,
-.beacon-attention[data-edge="1"] .beacon-edge-right,
-.beacon-attention[data-edge="2"] .beacon-edge-bottom,
-.beacon-attention[data-edge="3"] .beacon-edge-left { opacity: 1; }
+/* Attention: a word held still, with one light travelling the edge of the display.
+   The travelling light is what catches an eye that is not pointed at the screen; the
+   word is what it has to say once the eye arrives.
+
+   **Amber, not red, and moving rather than flashing.** Four edges taking turns read
+   as a flash in the corner of the eye and as four separate lights up close, which is
+   not what a beacon looks like; one point going round continuously is, and the eye
+   tracks it. Amber is the colour a hazard light actually is -- red on a dark screen
+   reads as an error state, and this is not an error, it is someone asking to be
+   seen.
+
+   The light's position comes from `--beacon-x` / `--beacon-y` / `--beacon-rot`, set
+   per frame in `ui/platform/beacon.js`. Doing the perimeter arithmetic there rather
+   than in `calc` keeps it to four lines of readable maths instead of four clamped
+   terms that are all evaluated every frame, and CSS has no way to express "which
+   side am I on" without them. No transition is declared: the animation *is* the
+   position update, and a transition would smear the light across the corner. */
+.beacon-attention { background: #0b0d10; }
+.beacon-light {
+  position: absolute;
+  /* Physical, not logical: the lap position is computed in physical pixels from the
+     top-left, so a right-to-left page anchoring this to the top *right* would send
+     the light off the side of the screen. A travelling light has no reading order to
+     mirror anyway. */
+  top: 0;
+  left: 0;
+  inline-size: 30vmin;
+  block-size: 0.8rem;
+  border-radius: 999px;
+  /* A streak rather than a dot: the taper is what reads as motion even in a still
+     photograph of the screen, and it is what a rotating beacon looks like. */
+  background: linear-gradient(90deg, rgb(255 176 32 / 0), #ffb020 55%, rgb(255 176 32 / 0));
+  translate: calc(var(--beacon-x, 0) * 1px) calc(var(--beacon-y, 0) * 1px);
+  rotate: calc(var(--beacon-rot, 0) * 1deg);
+  transform-origin: 50% 50%;
+  will-change: translate;
+}
+
+
+/* Three bars, drawn rather than typed: there is no glyph for this that every phone
+   has, and a missing one is tofu in the corner of the only row the bar gets. */
+.board-menu {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: none;
+  cursor: pointer;
+}
+.board-menu[hidden] { display: none; }
+.board-menu:hover { background: var(--surface); }
+.board-menu-bars, .board-menu-bars::before, .board-menu-bars::after {
+  display: block;
+  inline-size: 1.05rem;
+  block-size: 2px;
+  border-radius: 2px;
+  background: var(--muted);
+}
+.board-menu-bars { position: relative; }
+.board-menu-bars::before, .board-menu-bars::after { content: ''; position: absolute; inset-inline: 0; }
+.board-menu-bars::before { inset-block-start: -0.33rem; }
+.board-menu-bars::after { inset-block-start: 0.33rem; }
+.board-menu:hover .board-menu-bars,
+.board-menu:hover .board-menu-bars::before,
+.board-menu:hover .board-menu-bars::after { background: var(--ink); }
+
+/* The menu itself: anchored at the top, because that is where the button is, and
+   narrow, because it holds two words. */
+dialog.board-menu-panel {
+  margin: 0 0 0 auto;
+  inset-block-start: calc(env(safe-area-inset-top) + 3.2rem);
+  inset-inline-end: var(--space-2);
+  inline-size: min(14rem, calc(100vw - 2rem));
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.25rem;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 6px 24px rgb(17 24 32 / 18%);
+}
+dialog.board-menu-panel::backdrop { background: rgb(17 24 32 / 25%); }
+.board-menu-item {
+  display: block;
+  inline-size: 100%;
+  text-align: start;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: inherit;
+  font: inherit;
+  padding: 0.55em 0.7em;
+  cursor: pointer;
+}
+.board-menu-item:hover { background: var(--surface); }
+.board-menu-item:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }

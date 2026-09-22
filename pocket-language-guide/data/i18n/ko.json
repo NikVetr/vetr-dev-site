@@ -247,7 +247,7 @@
   "handles.marginRight": "오른쪽 여백",
   "handles.marginTop": "위쪽 여백",
   "nav.back": "← 전체 언어",
-  "nav.brand": "포켓 언어 가이드",
+  "nav.brand": "Phraselet",
   "nav.donate": "기부",
   "nav.readerHint": "— 이미 읽을 수 있는 언어를 골라 주세요",
   "nav.skipToLanguages": "언어 목록으로 바로가기",
@@ -377,5 +377,15 @@
   "ornament.starforge": "별의 대장간",
   "ornament.hint": "글자 크기와 간격은 그대로 두고 장식 테두리를 더합니다. 모서리 장식은 여백이 있을 때만 나타납니다.",
   "ornament.frameHint": "서로 얽힌 엘프풍 테두리를 위해 글 주위에 여백을 둡니다. 배치와 페이지 수가 달라질 수 있습니다.",
-  "ornament.lowInk": "잉크 절약 모드에서는 기본 실선을 사용합니다. 컬러 또는 단색 모드로 바꾸면 선택한 스타일이 다시 나타납니다."
+  "ornament.lowInk": "잉크 절약 모드에서는 기본 실선을 사용합니다. 컬러 또는 단색 모드로 바꾸면 선택한 스타일이 다시 나타납니다.",
+  "board.reply": "답장",
+  "board.close": "닫기",
+  "board.otherAmount": "다른 수량…",
+  "board.amount": "수량",
+  "board.unit": "분, 시간 또는 일",
+  "board.confirm": "확인",
+  "board.notAnAmount": "정수를 입력하세요",
+  "beacon.help": "도와주세요",
+  "beacon.sos": "SOS",
+  "beacon.dismiss": "아무 곳이나 누르면 멈춰요"
 }

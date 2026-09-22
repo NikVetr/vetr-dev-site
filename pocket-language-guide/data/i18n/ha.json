@@ -259,7 +259,7 @@
   "handles.marginRight": "Iyakar dama",
   "handles.marginTop": "Iyakar sama",
   "nav.back": "← Dukan harsuna",
-  "nav.brand": "Pocket Language Guide",
+  "nav.brand": "Phraselet",
   "nav.donate": "Bayar da gudummawa",
   "nav.readerHint": "— zaɓi harshen da ka riga ka sani",
   "nav.skipToLanguages": "Tsallake zuwa harsuna",
@@ -377,5 +377,15 @@
   "warn.no-fit.auto": "Ko da fuska {faces} ba za su riƙe wannan a girman da za a iya karantawa ba, a ginshiƙi {columns} a kowace fuska.",
   "warn.no-fit.pinned": "Abin cikin ba zai cika fuska {faces} a ginshiƙi {columns} a kowace fuska ba tare da zuwa ƙasa da girman karantuwa ba.",
   "warn.nothing-selected": "Ba a zaɓi komai ba, don haka takardar babu kome. Kunna sashe a fanel na abin ciki.",
-  "warn.paper-too-coarse": "Wannan takardar tana bukatar rubutun {script} a {floor}pt, amma salon yana saita ginshiƙin {field} a {size}pt. Ana faɗaɗa wannan ginshiƙi domin ya kasance mai karantuwa, wanda ke cinye fili a wani wuri. Takardar hoto tana riƙewa da ƙaramin rubutu mafi kyau."
+  "warn.paper-too-coarse": "Wannan takardar tana bukatar rubutun {script} a {floor}pt, amma salon yana saita ginshiƙin {field} a {size}pt. Ana faɗaɗa wannan ginshiƙi domin ya kasance mai karantuwa, wanda ke cinye fili a wani wuri. Takardar hoto tana riƙewa da ƙaramin rubutu mafi kyau.",
+  "board.reply": "Amsa",
+  "board.close": "Rufe",
+  "board.otherAmount": "Wani adadi…",
+  "board.amount": "Adadi",
+  "board.unit": "Mintuna, sa'o'i, ko kwana",
+  "board.confirm": "Tabbatar",
+  "board.notAnAmount": "Shigar da cikakken lamba",
+  "beacon.help": "Taimako",
+  "beacon.sos": "SOS",
+  "beacon.dismiss": "Ka taɓa ko'ina, sai ya tsaya"
 }

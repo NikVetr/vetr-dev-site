@@ -98,11 +98,24 @@ h3 { font-size: var(--fs-1); margin: 0 0 var(--space-1); }
    buttons is the right density for choosing and the wrong thing to leave between a
    reader and the Export / Customise / Converse buttons on the card they just chose.
    Shut, it keeps the label and adds the language, so it still reads as an answered
-   question rather than as a missing control. Same chevron as the studio's panels. */
+   question rather than as a missing control. Same chevron as the studio's panels.
+
+   **And it stays put while the list under it is scrolled.** Fifty-two buttons is
+   more than one screen on a phone, so the question they answer used to scroll off
+   the top and leave a reader looking at a wall of unlabelled languages with no
+   visible way to fold them away. Stuck below the site header -- whose height is not
+   a constant, hence `--header-h` from `ui/gallery.js` -- it is always the thing
+   above the grid, which is what a header is for. */
 .want-toggle {
   display: flex; align-items: baseline; gap: var(--space-1); inline-size: 100%;
-  background: none; border: 0; padding: 0; margin-bottom: var(--space-1);
+  background: var(--paper); border: 0; padding: 0; margin-bottom: var(--space-1);
   font: inherit; color: inherit; text-align: start; cursor: pointer;
+  position: sticky;
+  top: var(--header-h, 0px);
+  /* Over the grid it covers, under the site header it sits below. */
+  z-index: 2;
+  /* Room for the descenders of what scrolls beneath, so the two never touch. */
+  padding-block: 0.15rem 0.25rem;
 }
 .want-toggle::after {
   content: ''; inline-size: 0.45em; block-size: 0.45em; margin-inline-start: auto;
@@ -717,11 +730,36 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
    running the page to 11,000px. */
 @media (max-width: 700px) {
   .studio > .col-resizer { display: none; }
-  body:has(> .studio) { display: block; height: auto; }
-  .studio { grid-template-columns: 1fr; grid-template-rows: none; }
+  /* **Three rows of one screen, not one page of three panels.** Stacked and
+     page-scrolled, each panel's own bar was sticky to the panel -- so scrolling the
+     page slid the Format bar under the site header and left the reader inside a
+     32,000px list with no visible label on it and no way to fold it away without
+     scrolling back. A column that fills the viewport puts every bar permanently on
+     screen, which is what makes them headers rather than captions, and it is the
+     layout the desktop already uses; the only thing a phone changes is the axis.
+     `ui/panels.js` then lets a bar be dragged to hand its room to the panel above. */
+  body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
+  .studio {
+    display: flex;
+    flex-direction: column;
+    min-block-size: 0;
+    overflow: hidden;
+  }
   .studio > section { border-inline-end: none; border-bottom: 1px solid var(--line); }
-  .studio > .canvas { order: -1; }
-  .studio > section:first-of-type, .studio > section:last-of-type { max-height: 70vh; }
+  /* The preview leads, and its default is the height a face already wants: on a
+     phone the card is width-bound, so a full-width face plus its filmstrip comes to
+     about this, and anything more is empty paper. */
+  .studio > .canvas { order: -1; flex: 0 0 42svh; min-block-size: 6rem; }
+  .studio > section:has(> .panel-body) { flex: 0 0 22svh; min-block-size: 0; }
+  /* One of them absorbs whatever the others are not using, or the column would have
+     to add up to exactly the viewport by arithmetic. The content list is the one that
+     always has more to show, so it is the one that gets the slack. */
+  .studio > section:has(> .panel-body):last-of-type { flex: 1 1 auto; }
+  /* **Beats a dragged height on purpose.** A folded panel is its bar and nothing
+     else, whatever it was sized to before folding -- and the room it gives up has to
+     reach the panel that was just opened. An inline style would otherwise hold the
+     empty box open. */
+  .studio > section.collapsed { flex: 0 0 auto !important; }
   .face-grid { grid-template-columns: 1fr; }
 
   /* **The focused face had no height at all here, so the preview was a 56px
@@ -840,7 +878,19 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
     position: sticky; top: 0; z-index: 1; margin: 0;
     padding: var(--space-1) var(--space-2);
     background: var(--surface); border-block-end: 1px solid var(--line);
+    /* It is also the seam between this panel and the one above it, so it is the
+       thing you drag to move that seam. `row-resize` rather than `ns-resize`: the
+       gesture moves a row boundary, and the pointer is over the row's own bar. */
+    cursor: row-resize;
+    /* A drag on a bar must not also be a text selection or the browser's own
+       scroll, which on a touch screen is what a vertical drag means by default. */
+    touch-action: none;
+    user-select: none;
   }
+  /* The first panel on screen is the preview, which has no bar; the bar above the
+     top of the column would have nothing to give room to. */
+  .studio > section:has(> .panel-body) > .panel-title.no-seam { cursor: default; }
+  .studio > section > .panel-title.dragging { background: var(--accent-soft); }
   /* The section already carries the rule between panels, so a collapsed one must not
      draw a second line 1px above it. */
   .studio > section.collapsed > .panel-title { border-block-end: 0; }

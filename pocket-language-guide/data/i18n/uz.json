@@ -259,7 +259,7 @@
   "handles.marginRight": "Oʻng chet",
   "handles.marginTop": "Yuqori chet",
   "nav.back": "← Barcha tillar",
-  "nav.brand": "Choʻntak til yoʻlchisi",
+  "nav.brand": "Phraselet",
   "nav.donate": "Xayriya",
   "nav.readerHint": "— oʻzingiz oʻqiy oladigan tilni tanlang",
   "nav.skipToLanguages": "Tillarga oʻtish",
@@ -377,5 +377,15 @@
   "warn.no-fit.auto": "Bir yuzda {columns} ustun boʻlganda {faces} yuz ham buni oʻqish mumkin boʻlgan oʻlchamda sigʻdira olmaydi.",
   "warn.no-fit.pinned": "Bir yuzda {columns} ustun boʻlganda mazmun {faces} yuzga oʻqish mumkin boʻlgan oʻlchamdan pasaymasdan sigʻmaydi.",
   "warn.nothing-selected": "Hech narsa tanlanmagan, shuning uchun varaq boʻsh. Mazmun panelida biror boʻlimni qaytadan yoqing.",
-  "warn.paper-too-coarse": "Bu qogʻoz uchun {script} matni {floor}pt boʻlishi kerak, mavzu esa {field} ustunini {size}pt qilib belgilagan. Oʻqilishi uchun u ustun kattalashtirildi, bu esa boshqa joydan joy oladi. Foto qogʻoz mayda harfni koʻtaradi."
+  "warn.paper-too-coarse": "Bu qogʻoz uchun {script} matni {floor}pt boʻlishi kerak, mavzu esa {field} ustunini {size}pt qilib belgilagan. Oʻqilishi uchun u ustun kattalashtirildi, bu esa boshqa joydan joy oladi. Foto qogʻoz mayda harfni koʻtaradi.",
+  "beacon.help": "Yordam bering",
+  "beacon.sos": "SOS",
+  "beacon.dismiss": "Toʻxtatish uchun istalgan joyga teging",
+  "board.reply": "Javob berish",
+  "board.close": "Yopish",
+  "board.amount": "Qancha",
+  "board.unit": "Daqiqa, soat yoki kun",
+  "board.otherAmount": "Boshqa miqdor…",
+  "board.confirm": "Tasdiqlash",
+  "board.notAnAmount": "Butun son kiriting"
 }

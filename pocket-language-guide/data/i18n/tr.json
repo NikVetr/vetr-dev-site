@@ -247,7 +247,7 @@
   "handles.marginRight": "Sağ kenar boşluğu",
   "handles.marginTop": "Üst kenar boşluğu",
   "nav.back": "← Tüm diller",
-  "nav.brand": "Cep Dil Rehberi",
+  "nav.brand": "Phraselet",
   "nav.donate": "Bağış",
   "nav.readerHint": "— zaten okuyabildiğiniz dili seçin",
   "nav.skipToLanguages": "Dillere geç",
@@ -377,5 +377,15 @@
   "ornament.starforge": "Yıldız ocağı",
   "ornament.hint": "Metin boyutu ve aralıkları değişmeden dekoratif kenarlıklar eklenir. Köşe süsleri, boş alan varsa görünür.",
   "ornament.frameHint": "İç içe geçmiş elf çerçevesi metnin çevresinde yer ayırır. Yerleşim ve sayfa sayısı değişebilir.",
-  "ornament.lowInk": "Mürekkep tasarrufu modunda klasik çizgiler kullanılır. Renkli veya tek renkli moda geçince seçtiğiniz stil geri gelir."
+  "ornament.lowInk": "Mürekkep tasarrufu modunda klasik çizgiler kullanılır. Renkli veya tek renkli moda geçince seçtiğiniz stil geri gelir.",
+  "beacon.help": "İmdat",
+  "beacon.sos": "SOS",
+  "beacon.dismiss": "Durdurmak için herhangi bir yere dokunun",
+  "board.reply": "Yanıtla",
+  "board.close": "Kapat",
+  "board.amount": "Ne kadar",
+  "board.unit": "Dakika, saat veya gün",
+  "board.otherAmount": "Başka bir miktar…",
+  "board.confirm": "Onayla",
+  "board.notAnAmount": "Tam sayı girin"
 }

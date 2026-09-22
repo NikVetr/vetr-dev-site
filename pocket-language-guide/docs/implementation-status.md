@@ -1737,3 +1737,196 @@ earlier checkpoints in this session did while agents were in flight.
 Fixed in the following commit rather than by rewriting history: the push had already
 happened, and a force-push to a branch that *is* the deployment is worse than a
 second commit that says what it is.
+
+## Batch I — twelve things from a second afternoon on a phone
+
+Twelve requests, one of which turned out to be a real defect wearing the costume of a
+taste complaint. In order of how much they changed.
+
+### "The text pushes flush against the white outline" was an overflow
+
+Reported as a margin being too tight. It was not: on a 390pt phone the message
+`Извините` was being drawn **810px wide inside a 368px box**, and Tamil's
+`காவல்துறையை அழையுங்கள்` ran 349px past the edge of the screen. Four languages
+probed, three of them overflowing, every one of them at the fitter's ceiling.
+
+The cause is one declaration nobody wrote. `.board-message` is a `<button>`, and the
+HTML rendering spec gives a button `align-items: center` — so its flex children are
+**shrink-to-fit**, and the paragraph inside grew to its own max-content width rather
+than to the width of the box. Two things followed from that, and the second is why it
+survived a fitter that was written specifically to catch this:
+
+- The text overflowed, because nothing was constraining it.
+- `fitMessage` could not see the overflow. Its width test is
+  `widestLine(text) <= lineRoom(text)`, and `lineRoom` measures the paragraph's own
+  content box — which, being shrink-to-fit, was **exactly as wide as the ink in it**.
+  The test was comparing a number with itself and passing at every size, so the only
+  thing bounding the type was `MAX_MESSAGE_PX`.
+
+`align-items: stretch`, stated. The tightest ink-to-edge clearance across Mandarin,
+German, Tamil and Russian went from **−349px to +27px**, and no message on any of the
+four boards overflows its screen in either orientation.
+
+This is the same class of defect as the mid-word break in Batch H and has the same
+moral: a fitter that measures the element it is sizing against *itself* will always
+say yes. The width has to come from the box that clips.
+
+### And the screen can be turned
+
+Requested as "a small semicircle-arrow button in the bottom margin to rotate the
+displayed text… to fit big text", and it earns its place for a reason that only became
+clear after the fix above. Nothing here breaks a word in half, so a long word sets the
+type size: `английском?` is eleven characters, and in 310px of line it holds the whole
+message to 42px. Turned, the line is 750px and the same message is set at about 100px.
+Measured on `最近的医院在哪里？`: **108px over four lines upright, 126px on one line
+sideways.**
+
+The whole stage turns, not the text: a rotated text box still has to be laid out,
+measured and scrolled, so swapping the stage's own dimensions and rotating it means
+everything inside lays out honestly in a landscape box and the Reply control comes out
+the right way up for whoever is reading the turned screen. The controls move to the
+trailing edge rather than staying at the foot, because a row of 3rem buttons costs an
+eighth of a 390px-tall stage where it cost a twentieth of an 844px one — turning the
+screen to gain room and then spending it on the same controls is no gain.
+
+One thing had to be taught to the fitter: `getClientRects` reports **viewport** space,
+so on a turned stage every line came back with its length in `height` and its
+thickness in `width`, which reads as a line far too wide for its box at every size and
+pinned the text at the floor. The turn is a paint-time rotation and changes no layout,
+so the fit drops it for the measurement and restores it in the same synchronous block.
+
+A `ResizeObserver` on the surface came with it, closing a gap nobody had reported:
+turning the phone over used to leave a message set for the other orientation.
+
+### The beacon is amber, moves, and speaks to the stranger
+
+Four edges taking turns was a flash in the corner of the eye and four separate lights
+up close. One point going round the perimeter continuously is what a beacon looks
+like, and the eye tracks it. `requestAnimationFrame` against the clock, one lap in
+2.6s; the perimeter arithmetic is four subtractions in JavaScript rather than four
+clamped `calc` terms, because the four sides are genuinely four cases. Amber `#ffb020`
+rather than red: red on a dark screen reads as an error state, and this is not an
+error, it is someone asking to be seen.
+
+**And the word on it is the listener's.** A beacon exists to be read by whoever walks
+past, so the one thing on that screen that cannot be in the reader's language is the
+word itself. It comes from `emergency-medical.help` in the listener's pack — reviewed,
+in the native script, present for all 51 languages that can be a listener — rather
+than from a second translation of "Help" living in the interface catalogue. Mandarin
+shows `救命！`. `beacon.dismiss` stays the reader's, because the reader is the one who
+has to know how to stop it.
+
+### The answer mark became a watermark, and the legend went with it
+
+Requested as "centre them in the button, really big and faint like a watermark" and
+"remove the note at the bottom clarifying what they do, which should be obvious by
+design" — and the two halves of that are the same point. In the corner it was an icon,
+and an icon invites the question of what it means, which is what the legend answered
+in words on a screen whose whole job is to be read at a glance. At 72% of the cell and
+0.12 opacity it stops being a control to interpret and becomes the surface the words
+sit on. `placeMark`, which measured which end of a wrapped label had room, is gone
+with the corner it was choosing between.
+
+### The phone's customise screen is three rows of one screen
+
+Stacked and page-scrolled, each panel's bar was sticky *to its panel* — so scrolling
+the page slid the Format bar under the site header and left the reader inside a
+32,000px list with no visible label on it. A column that fills the viewport puts every
+bar permanently on screen, which is what makes them headers rather than captions, and
+it is the layout the desktop already uses; the only thing a phone changes is the axis.
+
+**The bar is also the seam.** On a desktop each panel has a visible seam beside it; on
+a phone the boundary between two rows is exactly where the lower one's bar already is,
+and adding a second grabbable strip a few pixels tall under a finger would be a worse
+control than the one already there. So a tap folds the panel and a drag moves the seam,
+told apart by six pixels of travel — and dragging a bar down onto its own panel until
+nothing is left of it *is* folding it, and says so.
+
+Two details cost a debugging pass each. Taking the pointer capture on `pointerdown`
+retargets the click to the bar, which is where the toggle button is not, so every tap
+stopped folding — the capture is taken when the drag starts instead, where the click it
+eats is one that should not have happened. And the flag that swallows a drag's click
+has to be cleared a turn later rather than in the click handler, because a drag that
+ends off the bar produces no click on it at all, and the stale flag ate the next
+genuine tap.
+
+### The picker stays where it is, and opens
+
+Fifty-two buttons is more than one screen, so the question they answer used to scroll
+off the top and leave a reader looking at a wall of unlabelled languages with no
+visible way to fold them away. Stuck below the site header — whose height is not a
+constant and so comes from a `ResizeObserver` as `--header-h` — it is always the thing
+above the grid.
+
+The fold no longer persists. It folds itself the moment a language has been picked,
+which is the common case, so remembering that meant almost every return visit opened
+on a page whose first control was collapsed — and the picker is what the page is for.
+Nothing else about the picker is remembered either: which card was reeled to the top
+row is this visit's reordering, not a setting. The reader's *own* language, in the
+site header, is the thing that persists.
+
+### The bar is one row, and nothing in it is truncated
+
+Settings and Edit buttons became one three-bar menu (`ui/board-menu.js`, a `<dialog>`
+so Escape, Android Back and update deferral come free), which gave the topic the room
+to be the first thing you read: bold, accent-coloured, and sized against the bar with
+`cqi` rather than the viewport.
+
+`nowrap` plus an ellipsis kept it to one row and paid for it by cutting a topic's name
+in half, which nothing here is allowed to do — and at a 1.6× system text size, where
+two 44px controls and rem-sized gaps eat the row, it did: "Getting around" wanted 164px
+and had 160px. `min(5.5cqi, var(--fs-2))` with wrapping allowed as the last resort
+gives one line at every ordinary setting and a second line rather than a lost syllable
+at the extremes. A floor in a `clamp` is what turns "as large as fits" into "large
+enough to need the ellipsis".
+
+### Also
+
+- "What is this about?" is **Context**, and the context page has its own way out
+  (`All languages`). The within-board control is an arrow and nothing else: where it
+  goes is obvious from where you are, and the word beside it was competing with the
+  topic for the only row there is. The accessible name still says which.
+- The project is **Phraselet** — 52 catalogues, the web manifest and the native
+  `appName`. The `appId` and the URL are untouched deliberately; five catalogues that
+  had *translated* "Pocket Language Guide" were reset to the English name, because a
+  product name is not a phrase.
+- **Ten listener-facing interface keys, previously present in Mandarin alone.** These
+  are the strings shown to the stranger — Reply, Close, the keypad's labels, the
+  beacon's word — so every one of them being English was the reply button appearing in
+  the owner's language, which is how it was reported. All **fifty natural-language
+  catalogues now carry exactly the same 388 keys**, which is the first time that has
+  been true of anything but `en`. `beacon.help` was aligned against each language's own
+  reviewed `emergency-medical.help` row rather than translated afresh; five independent
+  agents, briefed separately, each arrived at that alignment or at the same wording.
+
+  The distress word is not the dictionary word, which is most of what the research was
+  for: Spanish and Portuguese `SOCORRO` rather than *ayuda*, French `SECOURS` rather
+  than *aide*, Polish `POMOCY` in the genitive rather than nominative *Pomoc*, Croatian
+  `Upomoć` rather than *pomoć*, Finnish `APUA`, Armenian `Օգնությու՜ն` with the emphasis
+  mark inside the word. Whether the international signal is written `SOS` or
+  transliterated was settled per language from that language's own sources: Arabic,
+  Persian, Amharic and the Indic catalogues transliterate, Greek, Russian and Ukrainian
+  keep the Latin letters, because the point of a beacon is to be recognised regardless
+  of script.
+
+  **Klingon and Quenya were done last and deliberately incompletely.** Nine of ten keys
+  for `tlh` and six for `qya`, each traced to Okrand or to Eldamo with a citation, and
+  the rest left to the English fallback rather than filled with invented compounds —
+  there is no attested Quenya word for *minute*, so `board.unit` names no units at all.
+  Two were reworded rather than translated, because the English is a suggestion:
+  Klingon's `'ar` must follow the noun it counts, so "How many" became `poH 'ar`, "how
+  much time". Both files record the sourcing and the omissions in a `_board_note`,
+  following the `_ornament_note` precedent already in them. The one that mattered
+  functionally: `tlh`'s corpus row has a blank `text` — Klingon is romanised-only here
+  — so the beacon genuinely falls through to the catalogue for that pack, which is what
+  the fallback is for.
+- The board's back arrow and menu are 44px again. 2.1rem looked right in the bar and
+  is 33.6px, which is under the floor for a control meant to be hit without looking.
+
+### Not done in this batch
+
+- "Converse does not work for most languages" on the live site was a stale deployment:
+  every pair probed locally works with zero errors. This checkpoint is the fix.
+- The unit words under the keypad still come from CLDR with the catalogue as a floor.
+  That floor is now read from the *listener's* catalogue rather than the owner's, which
+  is where it belonged: it is their screen.

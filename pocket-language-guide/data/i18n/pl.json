@@ -248,7 +248,7 @@
   "handles.marginRight": "Margines prawy",
   "handles.marginTop": "Margines górny",
   "nav.back": "← Wszystkie języki",
-  "nav.brand": "Kieszonkowy przewodnik językowy",
+  "nav.brand": "Phraselet",
   "nav.donate": "Wsprzyj",
   "nav.readerHint": "— wybierz język, który już czytasz",
   "nav.skipToLanguages": "Przejdź do języków",
@@ -377,5 +377,15 @@
   "warn.no-fit.auto": "Nawet {faces} stron nie zmieści tego w czytelnym stopniu pisma, przy {columns} kolumnach na stronę.",
   "warn.no-fit.pinned": "Treść nie zmieści się na {faces} stronach przy {columns} kolumnach na stronę bez zejścia poniżej czytelnego stopnia pisma.",
   "warn.nothing-selected": "Nic nie jest wybrane, więc arkusz jest pusty. Włącz z powrotem którąś sekcję w panelu treści.",
-  "warn.paper-too-coarse": "Ten papier wymaga tekstu w piśmie {script} w stopniu {floor}pt, a motyw ustawia kolumnę {field} na {size}pt. Ta kolumna jest powiększana, żeby pozostała czytelna, co zabiera miejsce w innych. Papier fotograficzny utrzyma drobniejsze pismo."
+  "warn.paper-too-coarse": "Ten papier wymaga tekstu w piśmie {script} w stopniu {floor}pt, a motyw ustawia kolumnę {field} na {size}pt. Ta kolumna jest powiększana, żeby pozostała czytelna, co zabiera miejsce w innych. Papier fotograficzny utrzyma drobniejsze pismo.",
+  "board.reply": "Odpowiedz",
+  "board.close": "Zamknij",
+  "board.otherAmount": "Inna ilość…",
+  "board.amount": "Ile",
+  "board.unit": "Minuty, godziny lub dni",
+  "board.confirm": "Potwierdź",
+  "board.notAnAmount": "Wpisz liczbę całkowitą",
+  "beacon.help": "POMOCY",
+  "beacon.sos": "SOS",
+  "beacon.dismiss": "Dotknij gdziekolwiek, aby zatrzymać"
 }

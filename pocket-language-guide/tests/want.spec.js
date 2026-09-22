@@ -236,3 +236,46 @@ test('where the platform draws no flags, the codes carry the flag’s colours', 
     expect(c.painted, `${c.code} should be painted with the split wash`).toBe(true);
   }
 });
+
+test('the picker opens expanded, and its label stays above the list', async ({ page }) => {
+  // Two things, and both are about the picker being what the page is for. It folds
+  // itself the moment a language has been picked, which is the common case -- so
+  // remembering that state meant almost every return visit opened on a page whose
+  // first control was collapsed. And fifty-two buttons is more than one screen, so
+  // the question they answer used to scroll off the top and leave a reader looking at
+  // a wall of unlabelled languages with no visible way to fold them away.
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto('/');
+  const toggle = page.locator('#want-toggle');
+  await expect(page.locator('#gallery')).toHaveAttribute('aria-busy', 'false');
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+
+  // Picking folds it, and the fold does not survive a reload. Nothing about the
+  // picker does: which card was reeled to the top row is this visit's reordering
+  // rather than a setting, and the reader's own language is the header's business.
+  await page.locator('#want .want-btn[data-lang="ja"]').click();
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  await expect(page.locator('#want-chosen')).not.toBeEmpty();
+  await page.reload();
+  await expect(page.locator('#gallery')).toHaveAttribute('aria-busy', 'false');
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+
+  // Stuck under the site header, whose height is not a constant and so is published
+  // by a `ResizeObserver` as `--header-h`.
+  const stuck = await page.evaluate(async () => {
+    const label = /** @type {HTMLElement} */ (document.getElementById('want-toggle'));
+    const header = /** @type {HTMLElement} */ (document.querySelector('.site-header'));
+    scrollTo(0, Math.round(label.getBoundingClientRect().top + scrollY
+      - header.getBoundingClientRect().height + 120));
+    await new Promise((r) => { setTimeout(r, 120); });
+    return {
+      label: Math.round(label.getBoundingClientRect().top),
+      under: Math.round(header.getBoundingClientRect().bottom),
+      published: getComputedStyle(document.documentElement).getPropertyValue('--header-h'),
+    };
+  });
+  expect(stuck.published).toMatch(/^\d+px$/);
+  // Pinned to the header's lower edge rather than scrolled past it.
+  expect(stuck.label).toBeGreaterThanOrEqual(stuck.under - 2);
+  expect(stuck.label).toBeLessThan(stuck.under + 12);
+});

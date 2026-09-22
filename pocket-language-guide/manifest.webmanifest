@@ -1,6 +1,6 @@
 {
-  "name": "Pocket Language Guide",
-  "short_name": "Pocket Guide",
+  "name": "Phraselet",
+  "short_name": "Phraselet",
   "description": "Printable pocket-sized vocabulary and phrase guides for any language pair.",
   "start_url": "./",
   "scope": "./",

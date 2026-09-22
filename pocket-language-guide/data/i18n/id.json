@@ -247,7 +247,7 @@
   "handles.marginRight": "Margin kanan",
   "handles.marginTop": "Margin atas",
   "nav.back": "← Semua bahasa",
-  "nav.brand": "Pocket Language Guide",
+  "nav.brand": "Phraselet",
   "nav.donate": "Donasi",
   "nav.readerHint": "— pilih bahasa yang sudah Anda baca",
   "nav.skipToLanguages": "Lompat ke daftar bahasa",
@@ -377,5 +377,15 @@
   "ornament.starforge": "Tempa bintang",
   "ornament.hint": "Tepi dekoratif dengan ukuran teks dan jarak yang tetap sama. Hiasan sudut muncul jika ada ruang kosong.",
   "ornament.frameHint": "Bingkai elf berjalin menyisakan ruang di sekeliling teks. Tata letak dan jumlah halaman dapat berubah.",
-  "ornament.lowInk": "Mode hemat tinta menggunakan garis klasik. Gaya pilihan Anda kembali dalam mode warna atau monokrom."
+  "ornament.lowInk": "Mode hemat tinta menggunakan garis klasik. Gaya pilihan Anda kembali dalam mode warna atau monokrom.",
+  "board.reply": "Balas",
+  "board.close": "Tutup",
+  "board.otherAmount": "Jumlah lain…",
+  "board.amount": "Jumlah",
+  "board.unit": "Menit, jam, atau hari",
+  "board.confirm": "Konfirmasi",
+  "board.notAnAmount": "Masukkan bilangan bulat",
+  "beacon.help": "Tolong",
+  "beacon.sos": "SOS",
+  "beacon.dismiss": "Ketuk di mana saja untuk berhenti"
 }

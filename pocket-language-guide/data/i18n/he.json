@@ -247,7 +247,7 @@
   "handles.marginRight": "שוליים ימניים",
   "handles.marginTop": "שוליים עליונים",
   "nav.back": "כל השפות →",
-  "nav.brand": "מדריך שפה לכיס",
+  "nav.brand": "Phraselet",
   "nav.donate": "תרומה",
   "nav.readerHint": "— בחר את השפה שאתה כבר קורא",
   "nav.skipToLanguages": "דילוג לשפות",
@@ -377,5 +377,15 @@
   "ornament.starforge": "נפחיית הכוכבים",
   "ornament.hint": "גבולות מעוטרים, ללא שינוי בגודל הטקסט ובריווח. עיטורי פינות מופיעים כשיש מקום פנוי.",
   "ornament.frameHint": "מסגרת אלפית שזורה שומרת מקום סביב הטקסט. הפריסה ומספר העמודים עשויים להשתנות.",
-  "ornament.lowInk": "במצב חיסכון בדיו משתמשים בקווים הקלאסיים. הסגנון שבחרת חוזר במצב צבעוני או בצבע אחד."
+  "ornament.lowInk": "במצב חיסכון בדיו משתמשים בקווים הקלאסיים. הסגנון שבחרת חוזר במצב צבעוני או בצבע אחד.",
+  "beacon.help": "הצילו",
+  "beacon.sos": "SOS",
+  "beacon.dismiss": "יש לגעת בכל מקום במסך כדי לעצור",
+  "board.reply": "תשובה",
+  "board.close": "סגירה",
+  "board.amount": "כמה",
+  "board.unit": "דקות, שעות או ימים",
+  "board.otherAmount": "כמות אחרת…",
+  "board.confirm": "אישור",
+  "board.notAnAmount": "יש להזין מספר שלם"
 }

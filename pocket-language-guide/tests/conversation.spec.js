@@ -73,7 +73,7 @@ test('a message opened from a submenu returns to that submenu', async ({ page })
   // At the root the control stays, because the root has a parent now: the topic
   // list. It used to vanish here, which left a board with no way out of itself.
   await expect(page.locator('#board-up')).toBeVisible();
-  await expect(page.locator('#board-up-label')).toHaveText('All topics');
+  await expect(page.locator('#board-up')).toHaveAttribute('aria-label', 'All topics');
 });
 
 test('the buttons stay where they were put', async ({ page }) => {
@@ -150,7 +150,7 @@ test('a board refuses a language it cannot say, and names it', async ({ page }) 
   // ...and the topic list simply does not offer it, which is the path a reader
   // actually takes: a board they cannot use is absent rather than broken.
   await page.goto('/conversation.html?target=qya&source=en');
-  await expect(page.locator('#board-title')).toHaveText('What is this about?');
+  await expect(page.locator('#board-title')).toHaveText('Context');
   await expect(page.locator('.board-cell')).toHaveCount(0);
   await expect(page.locator('#board-status')).not.toBeEmpty();
 });
@@ -488,7 +488,10 @@ test('the way back does not look like something you are saying', async ({ page }
   const { bg, fg } = await up.evaluate((n) => ({
     bg: getComputedStyle(n).backgroundColor, fg: getComputedStyle(n).color,
   }));
-  expect(fg).toMatch(/255,\s*255,\s*255/);
+  // Chrome, not type: the filled grey button this used to be became an outlined
+  // square when the bar went to one row, so what is checked is that the arrow is
+  // drawn in the muted grey rather than in white on a colour.
+  expect(fg).not.toMatch(/255,\s*255,\s*255/);
   // Grey, and not one of the five role colours a substantive button wears.
   const roles = await page.locator('.board-cell').evaluateAll(
     (ns) => ns.map((n) => getComputedStyle(n).backgroundColor),
@@ -498,9 +501,21 @@ test('the way back does not look like something you are saying', async ({ page }
 
 // --- the owner's own buttons (C4) -------------------------------------------
 
+/**
+ * Reach one of the owner's two controls, which now live behind the three bars.
+ *
+ * Two named buttons cost the bar a second row on a phone, and the row they cost was
+ * the one the topic needed -- so the test reaches them the way a reader does.
+ * @param {import('@playwright/test').Page} page @param {string} name
+ */
+async function fromMenu(page, name) {
+  await page.locator('#board-menu').click();
+  await page.locator('.board-menu-item', { hasText: name }).click();
+}
+
 /** @param {import('@playwright/test').Page} page */
 async function addOwn(page, label, own, theirs) {
-  await page.locator('#board-edit').click();
+  await fromMenu(page, 'Edit buttons');
   const box = page.locator('.board-editor');
   await expect(box).toBeVisible();
   const fields = box.locator('.board-editor-field input');
@@ -545,7 +560,7 @@ test('the app does not pretend to translate, and says so', async ({ page }) => {
   // admit it rather than leave a reader waiting for a translation that never comes.
   await page.goto(BOARD);
   await expect(page.locator('.board-cell').first()).toBeVisible();
-  await page.locator('#board-edit').click();
+  await fromMenu(page, 'Edit buttons');
   await expect(page.locator('.board-editor')).toContainText(/does not translate/i);
 
   // A half-written phrase saves -- the reader may be coming back to it -- and stays
@@ -568,7 +583,7 @@ test('the app does not pretend to translate, and says so', async ({ page }) => {
 test('the preview is the exact text the listener will be shown', async ({ page }) => {
   await page.goto(BOARD);
   await expect(page.locator('.board-cell').first()).toBeVisible();
-  await page.locator('#board-edit').click();
+  await fromMenu(page, 'Edit buttons');
   const fields = page.locator('.board-editor .board-editor-field input');
   await fields.nth(2).fill('我对花生过敏');
   await expect(page.locator('.board-editor-preview')).toHaveText('我对花生过敏');
@@ -614,14 +629,14 @@ test('the editor is owner-only and cannot be reached from a message', async ({ p
   // The listener must not find it by tapping, and the owner must not open it while
   // holding the phone out to a stranger.
   await page.goto(`${BOARD}&replies=1`);
-  await expect(page.locator('#board-edit')).toBeVisible();
+  await expect(page.locator('#board-menu')).toBeVisible();
   await page.locator('[data-button="avoid"]').click();
-  await expect(page.locator('#board-edit')).toBeHidden();
+  await expect(page.locator('#board-menu')).toBeHidden();
   await page.locator('.board-controls button').click();
-  await expect(page.locator('#board-edit')).toBeHidden();
+  await expect(page.locator('#board-menu')).toBeHidden();
   await page.locator('.board-back').click();
   await page.locator('.board-message').click();
-  await expect(page.locator('#board-edit')).toBeVisible();
+  await expect(page.locator('#board-menu')).toBeVisible();
 });
 
 test('damaged storage is reported rather than presented as empty', async ({ page }) => {
@@ -632,7 +647,7 @@ test('damaged storage is reported rather than presented as empty', async ({ page
   await page.evaluate(() => localStorage.setItem('plg.boards', '{not json'));
   await page.reload();
   await expect(page.locator('.board-cell').first()).toBeVisible();
-  await page.locator('#board-edit').click();
+  await fromMenu(page, 'Edit buttons');
   await expect(page.locator('.board-editor-status')).toContainText(/could not be read/i);
   // ...and the unreadable record is still on disk, not overwritten by the read.
   expect(await page.evaluate(() => localStorage.getItem('plg.boards'))).toMatch(/not json/);
@@ -680,8 +695,8 @@ async function noSpill(/** @type {import('@playwright/test').Page} */ page) {
     /** @type {string[]} */ const bad = [];
     const named = (/** @type {HTMLElement} */ n) => n.dataset.button || n.id || n.className;
     for (const n of document.querySelectorAll(
-      '.board-cell, .board-up, .board-edit, .board-pair, .board-brand, .board-grid-title,'
-      + ' .board-title, .board-legend')) {
+      '.board-cell, .board-up, .board-menu, .board-pair, .board-brand,'
+      + ' .board-grid-title, .board-title')) {
       const el = /** @type {HTMLElement} */ (n);
       const r = el.getBoundingClientRect();
       if (r.width === 0) continue;
@@ -877,7 +892,7 @@ test('converse opens the topics, not a board', async ({ page }) => {
   // they need in a taxi have almost nothing in common, and one grid holding both
   // would be a grid you have to read rather than glance at.
   await page.goto('/conversation.html?target=zh-Hans&source=en');
-  await expect(page.locator('#board-title')).toHaveText('What is this about?');
+  await expect(page.locator('#board-title')).toHaveText('Context');
   const topics = page.locator('.board-cell');
   await expect(topics.first()).toBeVisible();
   // Emergency first, and in the authored order throughout -- nothing here sorts by
@@ -887,25 +902,30 @@ test('converse opens the topics, not a board', async ({ page }) => {
     'Eating out', 'Shopping', 'Time', 'Massage and spa',
   ]);
   // Nothing on this screen is owner-only chrome: there is no board to edit yet.
-  await expect(page.locator('#board-edit')).toBeHidden();
+  await expect(page.locator('#board-menu')).toBeHidden();
 
   await page.locator('[data-button="time"]').click();
   await expect(page.locator('#board-title')).toHaveText('Time');
   // The board names itself and the topic list is one tap away, which is the whole
   // point of the root control no longer vanishing.
   await expect(page.locator('#board-up')).toBeVisible();
-  await expect(page.locator('#board-up-label')).toHaveText('All topics');
+  await expect(page.locator('#board-up')).toHaveAttribute('aria-label', 'All topics');
   await page.locator('#board-up').click();
-  await expect(page.locator('#board-title')).toHaveText('What is this about?');
+  await expect(page.locator('#board-title')).toHaveText('Context');
 });
 
-test('the mark that promises an answer is explained, and only where it is used', async ({ page }) => {
-  // The tint and the ↩ were unreadable: a `title` attribute is invisible to a finger,
-  // so the one distinction the grid draws was decoration. A legend says it once.
+test('the mark that promises an answer is drawn, and only where it is used', async ({ page }) => {
+  // **Drawn large and faint across the button, not badged into its corner.** In the
+  // corner it was an icon, and an icon invites the question of what it means -- which
+  // is what the legend under the grid used to answer, in words, on a screen whose
+  // whole job is to be read at a glance. Filling the button it is a surface rather
+  // than a control, so there is nothing left to explain and the legend is gone.
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=shopping');
   await expect(page.locator('.board-cell').first()).toBeVisible();
-  await expect(page.locator('#board-legend')).toHaveText(/they can answer these/);
-  await expect(page.locator('.board-cell-asks').first()).toBeVisible();
+  await expect(page.locator('#board-legend')).toHaveCount(0);
+  const marked = page.locator('.board-cell-asks').first();
+  await expect(marked).toBeVisible();
+  await expect(marked.locator('.board-cell-mark')).toHaveCount(1);
 
   // ...and the Reply control it promises actually appears, with no query string.
   await page.locator('[data-button="stock"]').click();
@@ -918,11 +938,11 @@ test('the mark that promises an answer is explained, and only where it is used',
   await expect(answers.first()).toBeVisible();
   expect(await answers.first().textContent()).toMatch(/\p{Script=Han}/u);
 
-  // A grid where nothing can be answered says nothing about a mark it does not draw.
+  // A grid where nothing can be answered draws no mark at all.
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=spa');
   await page.locator('[data-button="focus"]').click();
   await expect(page.locator('[data-button="shoulders"]')).toBeVisible();
-  await expect(page.locator('#board-legend')).toBeEmpty();
+  await expect(page.locator('.board-cell-mark')).toHaveCount(0);
 });
 
 test('a message never breaks a word in half', async ({ page }) => {
@@ -1013,17 +1033,36 @@ test('the beacon is seen from across a road, and stays under the flash limit', a
   // display -- the travelling light is what catches an eye not pointed at the phone.
   await page.locator('[data-button="attention"]').click();
   await expect(page.locator('.beacon-attention')).toBeVisible();
-  await expect(page.locator('.beacon-word')).toHaveText('HELP');
-  const edges = await page.evaluate(async () => {
-    const node = /** @type {HTMLElement} */ (document.querySelector('.beacon'));
-    const seen = new Set();
-    for (let i = 0; i < 12; i += 1) {
-      seen.add(node.dataset.edge);
-      await new Promise((r) => { setTimeout(r, 200); });
+  // **The word is the stranger's, not the reader's.** A beacon exists to be read by
+  // whoever walks past, so the one thing on this screen that cannot be in the
+  // reader's language is the word on it -- and it is the corpus's own reviewed
+  // wording, not a second translation of `Help` living in the interface catalogue.
+  const word = page.locator('.beacon-word');
+  await expect(word).toHaveAttribute('lang', 'zh-Hans');
+  expect(await word.textContent()).toMatch(/\p{Script=Han}/u);
+
+  // One light going round, rather than four edges taking turns. Sampled over a full
+  // lap and sorted into sides: a travelling light visits all four, and -- the part
+  // that makes it a travel rather than a switch -- it is somewhere new every frame.
+  const path = await page.evaluate(async () => {
+    const light = /** @type {HTMLElement} */ (document.querySelector('.beacon-light'));
+    /** @type {Set<string>} */ const sides = new Set();
+    /** @type {Set<number>} */ const spots = new Set();
+    for (let i = 0; i < 30; i += 1) {
+      const r = light.getBoundingClientRect();
+      const x = (r.left + r.right) / 2;
+      const y = (r.top + r.bottom) / 2;
+      if (y < 8) sides.add('top');
+      else if (y > innerHeight - 8) sides.add('bottom');
+      else if (x < 8) sides.add('left');
+      else if (x > innerWidth - 8) sides.add('right');
+      spots.add(Math.round(x) * 10000 + Math.round(y));
+      await new Promise((r2) => { setTimeout(r2, 100); });
     }
-    return [...seen].sort();
+    return { sides: [...sides].sort(), spots: spots.size };
   });
-  expect(edges).toEqual(['0', '1', '2', '3']);
+  expect(path.sides).toEqual(['bottom', 'left', 'right', 'top']);
+  expect(path.spots).toBeGreaterThan(20);
 
   // Escape leaves the beacon and nothing else: the grid is exactly where it was.
   await page.keyboard.press('Escape');
@@ -1051,7 +1090,7 @@ test('personal data can be carried off the device, and deleted from it', async (
 
   // **Offered on every pair**, not only the 22 languages that ask about voice: a
   // backup button that appears for Russian readers alone is one nobody can find.
-  await page.locator('#board-settings').click();
+  await fromMenu(page, 'Settings');
   const dialog = page.locator('dialog.speaker-settings');
   await expect(dialog).toBeVisible();
 
@@ -1066,4 +1105,113 @@ test('personal data can be carried off the device, and deleted from it', async (
   await expect(dialog.locator('[role="status"]')).toHaveText('Deleted.');
   await page.keyboard.press('Escape');
   await expect(page.locator('[data-button="p1"]')).toHaveCount(0);
+});
+
+// --- what the screen can actually hold (I) ------------------------------------
+
+test('no message is drawn wider than the screen it is on', async ({ page }) => {
+  // **Reported as "the text pushes flush against the white outline". It was not
+  // flush, it was off the edge**: `Извините` was drawn 810px wide in a 368px box and
+  // Tamil's `காவல்துறையை அழையுங்கள்` ran 349px past the screen. `.board-message` is a
+  // `<button>`, the HTML rendering spec gives a button `align-items: center`, and a
+  // centred flex item is shrink-to-fit -- so the paragraph grew to its own
+  // max-content width, and `fitMessage`'s width test, which measures that
+  // paragraph's content box, was comparing the ink with itself and passing at every
+  // size. Four scripts, every cell, both orientations, measured as ink against the
+  // viewport rather than as any box metric, because a box is what lied last time.
+  await page.setViewportSize({ width: 390, height: 844 });
+  for (const [target, board] of [['zh-Hans', 'emergency'], ['de', 'emergency'],
+    ['ta', 'emergency'], ['ru', 'intro']]) {
+    await page.goto(`/conversation.html?target=${target}&source=en&board=${board}`);
+    await expect(page.locator('.board-cell').first()).toBeVisible();
+    const cells = page.locator('.board-cell:not([disabled])');
+    for (let i = 0; i < await cells.count(); i += 1) {
+      const cell = cells.nth(i);
+      if ((await cell.getAttribute('class') ?? '').includes('beacon')) continue;
+      await cell.click();
+      const big = page.locator('.board-message-text');
+      if (!(await big.count())) { await page.keyboard.press('Escape'); continue; }
+      for (const turned of [false, true]) {
+        if (turned) await page.locator('.board-turn').click();
+        const gap = await big.evaluate((el) => {
+          const range = document.createRange();
+          range.selectNodeContents(el);
+          let near = Infinity;
+          for (const box of range.getClientRects()) {
+            if (!box.height) continue;
+            near = Math.min(near, box.left, box.top,
+              innerWidth - box.right, innerHeight - box.bottom);
+          }
+          return Math.round(near);
+        });
+        expect(gap, `${target} ${await big.textContent()}${turned ? ' turned' : ''}`)
+          .toBeGreaterThan(0);
+      }
+      await page.locator('.board-turn').click();
+      await page.locator('.board-message').click({ position: { x: 3, y: 3 } });
+      await expect(page.locator('.board-stage')).toBeHidden();
+    }
+  }
+});
+
+test('turning the screen sideways sets a long phrase larger', async ({ page }) => {
+  // Nothing here breaks a word in half, so the longest word in a message sets the
+  // type size -- eleven characters of Russian hold one to 42px in 310px of line. The
+  // turn is worth the long axis of the phone, and the fitter has to measure it with
+  // the rotation dropped: client rects are reported in viewport space, so a turned
+  // stage hands back every line's thickness where its length belongs, which reads as
+  // far too wide at every size and pinned the text at the floor.
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=emergency');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('[data-button="hospital"]').click();
+  const big = page.locator('.board-message-text');
+  const size = () => big.evaluate((el) => Number.parseFloat(getComputedStyle(el).fontSize));
+  const lines = () => big.evaluate((el) => {
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    return [...range.getClientRects()].filter((r) => r.height > 0).length;
+  });
+  const upright = { px: await size(), lines: await lines() };
+  const turn = page.locator('.board-turn');
+  await turn.click();
+  await expect(turn).toHaveAttribute('aria-pressed', 'true');
+  const sideways = { px: await size(), lines: await lines() };
+  // Nine characters: four lines at 108px upright, one line at 126px sideways.
+  expect(sideways.px).toBeGreaterThan(upright.px);
+  expect(sideways.lines).toBeLessThan(upright.lines);
+  // And the stage still covers exactly the screen, rather than a rotated box hanging
+  // off two edges of it.
+  const stage = await page.locator('.board-stage').evaluate((el) => {
+    const r = el.getBoundingClientRect();
+    return [Math.round(r.left), Math.round(r.top), Math.round(r.width), Math.round(r.height)];
+  });
+  expect(stage).toEqual([0, 0, 390, 844]);
+  // Turning it back is the same control, and returns the same size.
+  await turn.click();
+  expect(await size()).toBeCloseTo(upright.px, 0);
+});
+
+test('every row of a board is on the screen', async ({ page }) => {
+  // `grid-auto-rows: 1fr` needs a definite height to divide, and the page had only a
+  // floor -- so the emergency board settled on six 118px rows where 111px fitted and
+  // hung its last row, the two beacons, 38px off the bottom edge. A board whose
+  // safety controls are half drawn below the fold is worse than one that scrolls.
+  for (const [w, h, board] of /** @type {[number,number,string][]} */ ([
+    [390, 844, 'emergency'], [360, 640, 'emergency'], [390, 844, 'transport'],
+  ])) {
+    await page.setViewportSize({ width: w, height: h });
+    await page.goto(`/conversation.html?target=zh-Hans&source=en&board=${board}`);
+    await expect(page.locator('.board-cell').first()).toBeVisible();
+    const fit = await page.evaluate(() => {
+      const cells = [...document.querySelectorAll('.board-cell')];
+      return {
+        past: Math.max(...cells.map((c) => Math.round(c.getBoundingClientRect().bottom)))
+          - innerHeight,
+        scrolls: document.documentElement.scrollHeight - innerHeight,
+      };
+    });
+    expect(fit.past, `${board} at ${w}x${h}`).toBeLessThanOrEqual(0);
+    expect(fit.scrolls).toBe(0);
+  }
 });

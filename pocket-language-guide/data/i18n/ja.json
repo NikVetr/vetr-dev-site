@@ -247,7 +247,7 @@
   "handles.marginRight": "右の余白",
   "handles.marginTop": "上の余白",
   "nav.back": "← 言語一覧へ",
-  "nav.brand": "Pocket Language Guide",
+  "nav.brand": "Phraselet",
   "nav.donate": "寄付",
   "nav.readerHint": "— すでに読める言語を選んでください",
   "nav.skipToLanguages": "言語一覧へスキップ",
@@ -377,5 +377,15 @@
   "ornament.starforge": "星の鍛冶場",
   "ornament.hint": "文字の大きさと間隔を変えずに、飾り罫を加えます。隅の飾りは、空きがある場合に表示されます。",
   "ornament.frameHint": "編み込まれたエルフ風の枠のために、文字の周囲に余白を確保します。配置やページ数が変わる場合があります。",
-  "ornament.lowInk": "節約印刷ではクラシックの実線を使います。カラーまたはモノクロに戻すと、選んだスタイルが再び表示されます。"
+  "ornament.lowInk": "節約印刷ではクラシックの実線を使います。カラーまたはモノクロに戻すと、選んだスタイルが再び表示されます。",
+  "board.reply": "返信",
+  "board.close": "閉じる",
+  "board.otherAmount": "その他の数量…",
+  "board.amount": "数量",
+  "board.unit": "分・時間・日",
+  "board.confirm": "確定",
+  "board.notAnAmount": "整数を入力してください",
+  "beacon.help": "助けて",
+  "beacon.sos": "SOS",
+  "beacon.dismiss": "どこでもタップすると止まります"
 }

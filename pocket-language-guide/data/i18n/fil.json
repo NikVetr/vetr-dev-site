@@ -247,7 +247,7 @@
   "handles.marginRight": "Margin sa Kanan",
   "handles.marginTop": "Margin sa Itaas",
   "nav.back": "← Lahat ng Wika",
-  "nav.brand": "Pocket Language Guide",
+  "nav.brand": "Phraselet",
   "nav.donate": "Mag-donate",
   "nav.readerHint": "— piliin ang wikang nababasa na ninyo",
   "nav.skipToLanguages": "Lumaktaw sa Listahan ng Wika",
@@ -377,5 +377,15 @@
   "ornament.starforge": "Panday-Bituin",
   "ornament.hint": "Palamuting gilid na pantay ang sukat ng teksto at puwang. Lumalabas ang palamuti sa sulok kung may bakanteng puwang.",
   "ornament.frameHint": "Ang balangkas ng duwende na magkakaugnay ay nag-iiwan ng puwang sa palibot ng teksto. Maaaring magbago ang ayos at bilang ng pahina.",
-  "ornament.lowInk": "Gumagamit ang mode na matipid sa tinta ng klasikong guhit. Babalik ang inyong piniling estilo sa mode na may kulay o monochrome."
+  "ornament.lowInk": "Gumagamit ang mode na matipid sa tinta ng klasikong guhit. Babalik ang inyong piniling estilo sa mode na may kulay o monochrome.",
+  "board.reply": "Sagutin",
+  "board.close": "Isara",
+  "board.otherAmount": "Ibang bilang…",
+  "board.amount": "Bilang",
+  "board.unit": "Minuto, oras, o araw",
+  "board.confirm": "Kumpirmahin",
+  "board.notAnAmount": "Ilagay ang buong numero",
+  "beacon.help": "Tulong",
+  "beacon.sos": "SOS",
+  "beacon.dismiss": "Pindutin ang kahit saan para tumigil"
 }

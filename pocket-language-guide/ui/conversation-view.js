@@ -107,6 +107,51 @@ export function renderGrid(root, node, { label, available, onPick, lang, title }
 }
 
 /**
+ * The width of the widest line this element actually draws.
+ *
+ * **Not `scrollWidth`.** On a block element whose width is fixed by its container,
+ * `scrollWidth` reports the container's width even when a word paints past it — 154
+ * against a 153.6px box, for `Emergency` at a size that then wrapped to
+ * `Emergenc / y`. The box metric cannot see the overflow it is clamped to, so the
+ * width test it backed was never able to fail.
+ *
+ * A `Range` over the text reports one rectangle per line box, measured from the ink
+ * rather than from the box, which is the number the fitter needs: if the widest line
+ * is wider than the room, the size is too big and a word is about to be broken.
+ * @param {HTMLElement} el
+ */
+function widestLine(el) {
+  const range = document.createRange();
+  range.selectNodeContents(el);
+  let widest = 0;
+  for (const rect of range.getClientRects()) {
+    if (rect.height > 0 && rect.width > widest) widest = rect.width;
+  }
+  return widest;
+}
+
+/**
+ * The exact width a line of text has to fit in, in fractional pixels.
+ *
+ * **`clientWidth` will not do, and neither will a pixel of slack.** `clientWidth`
+ * rounds — it says 154 for a box that is really 153.6 — and the old comparison added
+ * a pixel on top of that to absorb integer `scrollWidth`. Between them they let a
+ * line of 153.9 pass as fitting a box of 153.6, which is exactly the margin
+ * `Emergency` was breaking in: measured as fitting, then wrapped by the browser.
+ *
+ * Both sides of the comparison are fractions now, so no slack is needed on the
+ * width and none is given. Height keeps its pixel, because `scrollHeight` is still
+ * an integer.
+ * @param {HTMLElement} el
+ */
+function lineRoom(el) {
+  const box = getComputedStyle(el);
+  return el.getBoundingClientRect().width
+    - Number.parseFloat(box.paddingLeft) - Number.parseFloat(box.paddingRight)
+    - Number.parseFloat(box.borderLeftWidth) - Number.parseFloat(box.borderRightWidth);
+}
+
+/**
  * The mark on a cell the other person can answer.
  *
  * **Two overlapping speech bubbles, not a return arrow.** `↩` says "this goes back",
@@ -199,7 +244,10 @@ function fitCells(root) {
     label.style.overflowWrap = 'normal';
     const fits = (/** @type {number} */ px) => {
       label.style.fontSize = `${px}px`;
-      return label.scrollHeight <= room.h + 1 && label.scrollWidth <= room.w + 1;
+      // Height from the box, width from the ink: see `widestLine`. Measuring width
+      // with `scrollWidth` here reported the cell's own width whatever the text did,
+      // so five of the eight topic labels were set at a size that broke a word.
+      return label.scrollHeight <= room.h + 1 && widestLine(label) <= lineRoom(label);
     };
     let lo = MIN_CELL_PX;
     let hi = MAX_CELL_PX;
@@ -212,32 +260,7 @@ function fitCells(root) {
       label.style.fontSize = `${lo}px`;
     }
     label.style.overflowWrap = '';
-    placeMark(cell, label);
   }
-}
-
-/**
- * Put the answer mark in whichever outer corner the label is not using.
- *
- * A centred label wraps to lines of different widths, and the corner next to the
- * *short* line is the one with room. So: measure the first and last line boxes, and
- * sit the mark beside whichever is narrower — top when the first line is shorter,
- * bottom when the last one is. On a single-line label the two are the same line and
- * it stays at the top, which is where it has always been.
- *
- * Trailing edge either way, so it never collides with the reading edge, and
- * `inset-inline-end` rather than `right` so a right-to-left board mirrors it.
- * @param {HTMLElement} cell @param {HTMLElement} label
- */
-function placeMark(cell, label) {
-  const mark = cell.querySelector('.board-cell-mark');
-  if (!mark) return;
-  const range = document.createRange();
-  range.selectNodeContents(label);
-  const lines = [...range.getClientRects()].filter((r) => r.height > 0);
-  // One line, or none to measure: leave it where it was rather than guessing.
-  const low = lines.length > 1 && lines[lines.length - 1].width < lines[0].width;
-  mark.classList.toggle('board-cell-mark-low', low);
 }
 
 /**
@@ -398,11 +421,86 @@ export function renderMessage(stage, phrase,
   // and being a sibling is what structurally stops a control's click reaching the
   // dismiss handler.
   if (controls.childElementCount) stage.append(controls, trouble);
+  // In the margin, and not in that row: Speak and Reply are part of the exchange and
+  // this is a control over how the screen is drawn. It is also the only one of the
+  // three that is always there, so keeping it separate is what lets a message with
+  // nothing to say back have no controls at all.
+  stage.append(turnControl(stage, surface, big));
 
-  fitMessage(big, surface);
+  watchMessage(big, surface);
   surface.focus();
   return surface;
 }
+
+/**
+ * Whether the stage is turned sideways. Module state, deliberately.
+ *
+ * Someone showing phrases in a verbose language wants every one of them turned, not
+ * one, so the choice outlives the message it was made on. It does not outlive the
+ * page: a preference this cheap to re-make is not worth a stored key, and a board
+ * that opened sideways after a restart would be a surprise nobody asked for.
+ */
+let turned = false;
+
+/**
+ * The control that turns the message sideways, and the reason it is a control.
+ *
+ * A long sentence in a portrait window runs out of *width* first and is set small
+ * with the screen's long axis unused. Turning it is worth roughly double the type
+ * size — but which way round the phone should be is the owner's call, made in front
+ * of the person they are showing it to, so it is a button and not a measurement. A
+ * semicircular arrow says "turn this" in no language.
+ *
+ * @param {HTMLElement} stage @param {HTMLElement} surface @param {HTMLElement} text
+ */
+function turnControl(stage, surface, text) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'board-control board-turn';
+  button.setAttribute('aria-label', t('board.turn'));
+  button.setAttribute('aria-pressed', String(turned));
+  button.title = t('board.turn');
+  const svg = document.createElementNS(SVG, 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('aria-hidden', 'true');
+  svg.setAttribute('fill', 'none');
+  svg.setAttribute('stroke', 'currentColor');
+  svg.setAttribute('stroke-width', '2');
+  svg.setAttribute('stroke-linecap', 'round');
+  svg.setAttribute('stroke-linejoin', 'round');
+  svg.innerHTML = '<path d="M5 14a7 7 0 0 1 14 0"/><path d="M15.8 11.6 19 14.8l3.2-3.2"/>';
+  button.append(svg);
+  stage.classList.toggle('board-stage-turned', turned);
+  button.addEventListener('click', () => {
+    turned = !turned;
+    button.setAttribute('aria-pressed', String(turned));
+    stage.classList.toggle('board-stage-turned', turned);
+    // The box is a different shape now, so the size that filled the old one is the
+    // wrong answer. The observer would catch this too; doing it here means the text
+    // is never drawn at the stale size for a frame.
+    fitMessage(text, surface);
+  });
+  return button;
+}
+
+/**
+ * Refit a message whenever the box it is in changes shape.
+ *
+ * Fitting once was a gap, not a decision: turning the phone over changes both axes
+ * and left a message set for the other orientation — small in landscape, overflowing
+ * in portrait. The same observer covers the turn control and a system text-size
+ * change, for the same reason the grid has one.
+ * @param {HTMLElement} text @param {HTMLElement} box
+ */
+function watchMessage(text, box) {
+  fitMessage(text, box);
+  shape?.disconnect();
+  // A dismissed stage is `display: none`, which reports a 0x0 box and would send
+  // the fitter down thirty pointless steps to the floor on every dismissal.
+  shape = new ResizeObserver(() => { if (box.clientHeight > 0) fitMessage(text, box); });
+  shape.observe(box);
+}
+/** @type {ResizeObserver|null} */ let shape = null;
 
 /**
  * The listener's answers, over the question they are answering.
@@ -502,6 +600,16 @@ export function fitMessage(text, box) {
   // fallback face is a fit against the wrong advance widths, and the correction
   // lands as a visible jump just as the reader starts reading.
   const run = () => {
+    // **Measured with the turn undone.** `getClientRects` reports viewport space, so
+    // on a turned stage every line comes back with its length in `height` and its
+    // thickness in `width` -- which read as a line far too wide for its box at every
+    // size, and pinned the text at the floor. The turn is a paint-time rotation and
+    // changes no layout, so dropping it for the measurement measures exactly the box
+    // the text will occupy, and restoring it in the same synchronous block means
+    // nothing is ever painted untured.
+    const stage = box.parentElement?.classList.contains('board-stage-turned')
+      ? box.parentElement : null;
+    if (stage) stage.style.rotate = 'none';
     text.style.fontSize = '';
     let size = Number.parseFloat(getComputedStyle(text).fontSize);
     // **Both axes, and the second one is the bug this was written to fix.** The test
@@ -519,11 +627,11 @@ export function fitMessage(text, box) {
     const fits = () => {
       const held = text.style.overflowWrap;
       text.style.overflowWrap = 'normal';
-      // The *box* on both axes, not the paragraph. A `<p>` in a flex column sizes
-      // itself to its own content, so its `scrollWidth` equals its `clientWidth`
-      // even when that content is wider than the screen -- the overflow only shows
-      // up against the element that actually clips.
-      const ok = box.scrollHeight <= box.clientHeight && box.scrollWidth <= box.clientWidth + 1;
+      // Height from the box that clips, width from the ink -- the same asymmetry
+      // `widestLine` exists for, and for the same reason: no box metric on a
+      // container-width element can report the word hanging out of it.
+      const ok = box.scrollHeight <= box.clientHeight
+        && widestLine(text) <= lineRoom(text);
       text.style.overflowWrap = held;
       return ok;
     };
@@ -552,6 +660,7 @@ export function fitMessage(text, box) {
       }
     }
     box.classList.toggle('board-message-scrolls', box.scrollHeight > box.clientHeight + 1);
+    if (stage) stage.style.rotate = '';
   };
   run();
   if (document.fonts?.status !== 'loaded') document.fonts?.ready.then(run);

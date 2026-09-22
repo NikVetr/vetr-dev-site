@@ -247,7 +247,7 @@
   "handles.marginRight": "Margen derecho",
   "handles.marginTop": "Margen superior",
   "nav.back": "← Todos los idiomas",
-  "nav.brand": "Pocket Language Guide",
+  "nav.brand": "Phraselet",
   "nav.donate": "Donar",
   "nav.readerHint": "— elija el idioma que ya sabe leer",
   "nav.skipToLanguages": "Saltar a los idiomas",
@@ -377,5 +377,15 @@
   "ornament.starforge": "Forja estelar",
   "ornament.hint": "Bordes decorativos, con el mismo tamaño de texto y espaciado. Los adornos de las esquinas aparecen donde hay espacio.",
   "ornament.frameHint": "Un marco élfico entrelazado reserva espacio alrededor del texto. El ajuste y el número de páginas pueden cambiar.",
-  "ornament.lowInk": "El modo de ahorro de tinta usa las líneas clásicas. Tu estilo vuelve al usar color o monocromo."
+  "ornament.lowInk": "El modo de ahorro de tinta usa las líneas clásicas. Tu estilo vuelve al usar color o monocromo.",
+  "board.reply": "Responder",
+  "board.close": "Cerrar",
+  "board.otherAmount": "Otra cantidad…",
+  "board.amount": "Cuántos",
+  "board.unit": "Minutos, horas o días",
+  "board.confirm": "Confirmar",
+  "board.notAnAmount": "Introduzca un número entero",
+  "beacon.help": "SOCORRO",
+  "beacon.sos": "SOS",
+  "beacon.dismiss": "Toque en cualquier lugar para detenerlo"
 }

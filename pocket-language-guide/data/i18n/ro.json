@@ -259,7 +259,7 @@
   "handles.marginRight": "Margine dreapta",
   "handles.marginTop": "Margine sus",
   "nav.back": "← Toate limbile",
-  "nav.brand": "Pocket Language Guide",
+  "nav.brand": "Phraselet",
   "nav.donate": "Donează",
   "nav.readerHint": "— alegeți limba pe care o citiți deja",
   "nav.skipToLanguages": "Sări la limbi",
@@ -377,5 +377,15 @@
   "warn.no-fit.auto": "Nici {faces} fețe nu încap la o dimensiune lizibilă, cu {columns} coloane pe față.",
   "warn.no-fit.pinned": "Conținutul nu încape în {faces} fețe cu {columns} coloane pe față fără a coborî sub o dimensiune lizibilă.",
   "warn.nothing-selected": "Nu este selectat nimic, așa că foaia iese goală. Reactivați o secțiune în panoul de conținut.",
-  "warn.paper-too-coarse": "Această hârtie are nevoie de text {script} la {floor}pt, dar tema fixează coloana {field} la {size}pt. Acea coloană este mărită ca să rămână lizibilă, ceea ce ocupă spațiu în altă parte. Hârtia foto ține un corp mai fin."
+  "warn.paper-too-coarse": "Această hârtie are nevoie de text {script} la {floor}pt, dar tema fixează coloana {field} la {size}pt. Acea coloană este mărită ca să rămână lizibilă, ceea ce ocupă spațiu în altă parte. Hârtia foto ține un corp mai fin.",
+  "board.reply": "Răspunde",
+  "board.close": "Închide",
+  "board.otherAmount": "Altă durată…",
+  "board.amount": "Câte",
+  "board.unit": "Minute, ore sau zile",
+  "board.confirm": "Confirmă",
+  "board.notAnAmount": "Introduceți un număr întreg",
+  "beacon.help": "AJUTOR",
+  "beacon.sos": "SOS",
+  "beacon.dismiss": "Atingeți oriunde pentru a opri"
 }

@@ -259,7 +259,7 @@
   "handles.marginRight": "የቀኝ ኅዳግ",
   "handles.marginTop": "የላይ ኅዳግ",
   "nav.back": "← ሁሉም ቋንቋዎች",
-  "nav.brand": "የኪስ ቋንቋ መምሪያ",
+  "nav.brand": "Phraselet",
   "nav.donate": "ይለግሱ",
   "nav.readerHint": "— አስቀድመው የሚያነቡትን ቋንቋ ይምረጡ",
   "nav.skipToLanguages": "ወደ ቋንቋዎቹ ይለፉ",
@@ -377,5 +377,15 @@
   "warn.no-fit.auto": "{faces} ገጽ እንኳ በአንድ ገጽ {columns} አምድ ይህን በሚነበብ መጠን አይይዘውም።",
   "warn.no-fit.pinned": "ይዘቱ ከመነበብ መጠን በታች ሳይወርድ በአንድ ገጽ {columns} አምድ ባለው {faces} ገጽ አይገባም።",
   "warn.nothing-selected": "ምንም አልተመረጠም፤ ስለዚህ ወረቀቱ ባዶ ነው። በይዘቱ ክፍል ውስጥ አንድ ክፍል መልሰው ያብሩ።",
-  "warn.paper-too-coarse": "ይህ ወረቀት የ{script} ጽሑፍ በ{floor}pt ይፈልጋል፤ ገጽታው ግን የ{field} አምዱን በ{size}pt ያደርገዋል። ያ አምድ እንዲነበብ ተልቆአል፤ ይህም በሌላ ቦታ ቦታ ያስከፍላል። የፎቶ ወረቀት ቀጭን ፊደል ይይዛል።"
+  "warn.paper-too-coarse": "ይህ ወረቀት የ{script} ጽሑፍ በ{floor}pt ይፈልጋል፤ ገጽታው ግን የ{field} አምዱን በ{size}pt ያደርገዋል። ያ አምድ እንዲነበብ ተልቆአል፤ ይህም በሌላ ቦታ ቦታ ያስከፍላል። የፎቶ ወረቀት ቀጭን ፊደል ይይዛል።",
+  "beacon.help": "እርዱኝ",
+  "beacon.sos": "ኤስ ኦ ኤስ",
+  "beacon.dismiss": "ለማቆም የትም ቦታ ይንኩ",
+  "board.reply": "ይመልሱ",
+  "board.close": "ይዝጉ",
+  "board.amount": "ምን ያህል",
+  "board.unit": "ደቂቃዎች፣ ሰዓቶች ወይም ቀናት",
+  "board.otherAmount": "ሌላ መጠን…",
+  "board.confirm": "ያረጋግጡ",
+  "board.notAnAmount": "ሙሉ ቁጥር ያስገቡ"
 }

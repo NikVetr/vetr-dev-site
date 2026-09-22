@@ -259,7 +259,7 @@
   "handles.marginRight": "Pravý okraj",
   "handles.marginTop": "Horní okraj",
   "nav.back": "← Všechny jazyky",
-  "nav.brand": "Pocket Language Guide",
+  "nav.brand": "Phraselet",
   "nav.donate": "Přispět",
   "nav.readerHint": "— vyberte jazyk, který už čtete",
   "nav.skipToLanguages": "Přejít na jazyky",
@@ -377,5 +377,15 @@
   "warn.no-fit.auto": "Ani {faces} stran toto neudrží v čitelné velikosti, při {columns} sloupcích na stranu.",
   "warn.no-fit.pinned": "Obsah se nevejde na {faces} stran při {columns} sloupcích na stranu bez ztráty čitelnosti.",
   "warn.nothing-selected": "Nic není vybráno, list je tedy prázdný. Zapněte znovu nějakou sekci v panelu obsahu.",
-  "warn.paper-too-coarse": "Tento papír vyžaduje text {script} o velikosti {floor}pt, ale motiv nastavuje sloupec {field} na {size}pt. Tento sloupec se zvětší, aby zůstal čitelný, což ubere místo jinde. Fotopapír unese jemnější písmo."
+  "warn.paper-too-coarse": "Tento papír vyžaduje text {script} o velikosti {floor}pt, ale motiv nastavuje sloupec {field} na {size}pt. Tento sloupec se zvětší, aby zůstal čitelný, což ubere místo jinde. Fotopapír unese jemnější písmo.",
+  "board.reply": "Odpovědět",
+  "board.close": "Zavřít",
+  "board.otherAmount": "Jiná doba…",
+  "board.amount": "Kolik",
+  "board.unit": "Minuty, hodiny nebo dny",
+  "board.confirm": "Potvrdit",
+  "board.notAnAmount": "Zadejte celé číslo",
+  "beacon.help": "POMOC",
+  "beacon.sos": "SOS",
+  "beacon.dismiss": "Klepněte kamkoli pro zastavení"
 }

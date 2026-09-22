@@ -646,11 +646,14 @@ parts rather than four cells repeating five words. That is owner-language
 presentation only: the listener always gets one complete idiomatic sentence, because
 Mandarin will not take the template — 按摩背部 is idiomatic where 按摩背 is not.
 
-**Replies are on, and the mark that promises one is explained.** A tinted cell with a
-↩ can be answered; the legend under the grid says so, and appears only on a grid that
-has one. Both were dead for a while -- the reply screen was built behind `?replies=1`
-and the flag never came off -- so those cells wore a promise and behaved like every
-other button. Ninety-nine buttons across the seven boards, and **not one new translated
+**Replies are on, and the mark that promises one is a watermark.** A tinted cell
+whose face carries two faint speech bubbles can be answered. The mark fills the button
+at a tenth of the ink rather than badging its corner: in the corner it was an icon,
+and an icon invites the question of what it means — which is what a legend under the
+grid used to answer, in words, on a screen whose whole job is to be read at a glance.
+Both the mark and the reply screen were dead for a while -- the screen was built
+behind `?replies=1` and the flag never came off -- so those cells wore a promise and
+behaved like every other button. Ninety-nine buttons across the seven boards, and **not one new translated
 phrase**: every one is an existing concept referenced by id, which is what the O(N)
 corpus is for. `quick-directions` does double duty as the *answers* to "which way?",
 so the person being asked taps "turn left" in their own language and the traveller
@@ -702,11 +705,33 @@ used. What travels is the reader's work; what does not is this device's preferen
 **The beacon is the one thing here that moves.** Everywhere else a transition would
 be decoration and the same information is better given statically. A distress signal
 that does not move is not one: on the emergency board, SOS flashes the whole screen
-white-on-black in Morse, and Attention holds one word still while a light runs the
-edge of the display, which is what catches an eye not pointed at the phone. **The dot
-is 300ms and that is a safety property** — WCAG puts the photosensitive threshold at
-three flashes a second and this measures 1.00. The test counts real transitions
-rather than reading the constant.
+white-on-black in Morse, and Attention holds one word still while a single amber light
+travels the edge of the display, which is what catches an eye not pointed at the
+phone. **The dot is 300ms and that is a safety property** — WCAG puts the
+photosensitive threshold at three flashes a second and this measures 1.00. The test
+counts real transitions rather than reading the constant, and for the travelling light
+it samples a full lap and checks that it visits all four sides and is somewhere new
+every frame.
+
+Four edges taking turns was the first attempt, and it read as a flash in the corner of
+the eye and as four separate lights up close. One point going round continuously is
+what a beacon looks like, and the eye tracks it. Amber rather than red, because red on
+a dark screen reads as an error state and this is not an error — it is someone asking
+to be seen. **And the word on it is the listener's**, taken from
+`emergency-medical.help` in their own pack rather than from a second translation of
+"Help" in the interface catalogue: a beacon exists to be read by whoever walks past.
+Only "tap anywhere to stop" stays in the reader's language, because the reader is the
+one who has to stop it.
+
+**The message screen can be turned sideways.** Nothing here breaks a word in half, so
+a long word sets the type size — eleven characters of Russian hold a message to 42px
+in 310px of line. Turned, the line is 750px and the same message is set at about
+100px, which is the difference between readable across a counter and not. The whole
+stage rotates rather than the text alone, so everything inside lays out in a genuine
+landscape box and the Reply control comes out the right way up for whoever is reading
+it; the fit drops the rotation for its own measurements, because client rects are
+reported in viewport space and would otherwise hand the fitter every line's thickness
+where its length belongs.
 
 ## Whose voice the card is in
 
@@ -2765,6 +2790,23 @@ changes what the sheet means.
 The studio is three panels side by side on a desktop and stacked on a phone, and
 almost everything in this section exists because that stacking breaks an assumption
 the desktop layout made silently.
+
+**It is three rows of one screen, not one page of three panels.** Page-scrolled, each
+panel's bar was sticky *to its panel*, so scrolling slid the Format bar under the site
+header and left the reader inside a 32,000px list with no visible label on it. A column
+that fills the viewport keeps every bar on screen, which is what makes them headers
+rather than captions -- the same model the desktop uses, turned through ninety degrees.
+
+**And the bar is the seam.** On a desktop each panel has a visible seam beside it; on a
+phone the boundary between two rows is exactly where the lower one's bar already is,
+and a second grabbable strip a few pixels tall under a finger would be a worse control
+than the one already there. So a tap folds the panel, a drag moves the seam -- the
+panel above grows by what this one gives up, and nothing below it moves -- and dragging
+a bar down onto its own panel until only the bar is left *is* folding it, and is drawn
+that way. Told apart by six pixels of travel, the same way the message surface tells a
+scroll from a tap. The pointer capture is taken when the drag starts rather than on the
+press, because capturing early retargets the click to the bar, which is where the
+toggle button is not.
 
 **The focused face had no size at all.** `.face-fit` is a `container-type: size` and
 the focused face sizes itself with `min(100%, calc(100cqh * aspect))`; the stacked
