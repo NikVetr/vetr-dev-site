@@ -26,7 +26,9 @@ import {
   renderGrid, renderMessage, renderReply, renderEntry, clearStage, fitMessage,
 } from './conversation-view.js';
 import { resolveValue } from '../core/conversation.js';
-import { parseAmount, formatDuration, unitName } from '../core/duration.js';
+import {
+  parseAmount, parseClock, parseCount, formatQuantity, unitName,
+} from '../core/quantity.js';
 import { openBoardEditor } from './board-editor.js';
 import { openBoardMenu } from './board-menu.js';
 import { speech } from './platform/speech.js';
@@ -41,6 +43,13 @@ import { personalWiring } from './personal-data.js';
 import { applyStatic, loadCatalogue, loadUiLanguage, languageName, t } from './i18n.js';
 
 const $ = (/** @type {string} */ id) => /** @type {HTMLElement} */ (document.getElementById(id));
+
+/** What the cell that opens each keypad says, in whichever language is reading it. */
+const ENTRY_LABEL = /** @type {Record<string,string>} */ ({
+  duration: 'board.otherAmount',
+  clock: 'board.atTime',
+  count: 'board.otherNumber',
+});
 
 /**
  * Which grid cell opened the message on screen.
@@ -476,9 +485,12 @@ async function main() {
           return {
             id: b.id,
             entry: true,
+            // Three keypads means three cells, and a set may carry two of them --
+            // `board.otherAmount` on both would be two identical tiles opening
+            // different keyboards.
             phrase: /** @type {any} */ ({
-              listener: { text: theirs.t('board.otherAmount'), lang: listener, dir: ctx.listenerDir },
-              owner: { text: t('board.otherAmount'), lang: owner, dir: ctx.ownerDir },
+              listener: { text: theirs.t(ENTRY_LABEL[b.entry] ?? 'board.otherAmount'), lang: listener, dir: ctx.listenerDir },
+              owner: { text: t(ENTRY_LABEL[b.entry] ?? 'board.otherAmount'), lang: owner, dir: ctx.ownerDir },
             }),
           };
         }
@@ -491,7 +503,7 @@ async function main() {
       renderReply(stage, phrase, answers, {
         onAnswer: (id) => {
           const chosen = set.buttons.find((/** @type {any} */ b) => b.id === id);
-          if (chosen?.kind === 'entry') { dispatch({ type: 'enter' }); return; }
+          if (chosen?.kind === 'entry') { dispatch({ type: 'enter', answerId: id }); return; }
           dispatch({ type: 'answer', answerId: id, value: chosen?.value });
         },
         onCancel: () => dispatch({ type: 'cancelReply' }),
@@ -502,17 +514,31 @@ async function main() {
     }
 
     if (state.view === 'entry') {
+      // Which keypad, from the button that opened it. `duration` is the default and
+      // the only one boards had until the tree audits found that a clock time and a
+      // bare number were unsayable -- which is why a board asked "what time does it
+      // open?" and its answer space contained no time at all.
+      const kind = set.buttons
+        .find((/** @type {any} */ b) => b.id === state.answerId)?.entry ?? 'duration';
       renderEntry(stage, phrase, {
+        kind,
         onCancel: () => dispatch({ type: 'cancelEntry' }),
         onConfirm: (value) => dispatch({ type: 'confirmEntry', value }),
-        // Validated and previewed in one call, so the button's enabled state and the
-        // text under it can never disagree about whether the input is an answer.
+        // Validated, parsed and previewed in one call, so the button's enabled state,
+        // the text under it and the value that is confirmed cannot disagree about
+        // what was typed.
         check: (raw, unit) => {
-          const read = parseAmount(raw, unit);
-          return read.ok ? formatDuration(read.duration, listener) : null;
+          const read = kind === 'clock' ? parseClock(raw)
+            : kind === 'count' ? parseCount(raw)
+              : parseAmount(raw, unit);
+          if (!read.ok) return null;
+          const said = formatQuantity(read.value, listener);
+          return said ? { value: read.value, said } : null;
         },
         words: {
           amount: theirs.t('board.amount'),
+          time: theirs.t('board.time'),
+          number: theirs.t('board.number'),
           unit: theirs.t('board.unit'),
           // From CLDR, not from a catalogue: three more keys in fifty-one languages
           // would each be an invitation to invent a word that already exists. The
@@ -523,7 +549,8 @@ async function main() {
           day: unitName('day', listener) ?? theirs.t('board.days'),
           confirm: theirs.t('board.confirm'),
           cancel: theirs.t('board.close'),
-          invalid: theirs.t('board.notAnAmount'),
+          invalid: theirs.t(kind === 'clock' ? 'board.notATime'
+            : kind === 'count' ? 'board.notANumber' : 'board.notAnAmount'),
         },
         colour: button.colour,
       });

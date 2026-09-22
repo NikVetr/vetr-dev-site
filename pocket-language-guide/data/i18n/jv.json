@@ -387,5 +387,11 @@
   "board.notAnAmount": "Cacah ingkang dipunèntri kedah wetah",
   "beacon.help": "Tulung",
   "beacon.sos": "SOS",
-  "beacon.dismiss": "Panggènan pundi kémawon dipunpencet supados mandheg"
+  "beacon.dismiss": "Panggènan pundi kémawon dipunpencet supados mandheg",
+  "board.atTime": "Jam tartamtu…",
+  "board.otherNumber": "Angka…",
+  "board.time": "Wekdal",
+  "board.number": "Angka",
+  "board.notATime": "Wekdal kedah dipunpilih",
+  "board.notANumber": "Angka ingkang dipunèntri kedah wetah"
 }

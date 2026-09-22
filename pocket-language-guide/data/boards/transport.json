@@ -138,7 +138,7 @@
             "id": "transit-rides.which-platform"
           },
           "colour": "move",
-          "replySetId": "point-it-out"
+          "replySetId": "platform"
         },
         {
           "id": "nextone",
@@ -355,6 +355,7 @@
           "id": "d5m",
           "kind": "value",
           "value": {
+            "kind": "duration",
             "amount": 5,
             "unit": "minute"
           }
@@ -363,6 +364,7 @@
           "id": "d10m",
           "kind": "value",
           "value": {
+            "kind": "duration",
             "amount": 10,
             "unit": "minute"
           }
@@ -371,6 +373,7 @@
           "id": "d15m",
           "kind": "value",
           "value": {
+            "kind": "duration",
             "amount": 15,
             "unit": "minute"
           }
@@ -379,6 +382,7 @@
           "id": "d30m",
           "kind": "value",
           "value": {
+            "kind": "duration",
             "amount": 30,
             "unit": "minute"
           }
@@ -387,6 +391,7 @@
           "id": "d1h",
           "kind": "value",
           "value": {
+            "kind": "duration",
             "amount": 1,
             "unit": "hour"
           }
@@ -395,6 +400,7 @@
           "id": "d2h",
           "kind": "value",
           "value": {
+            "kind": "duration",
             "amount": 2,
             "unit": "hour"
           }
@@ -403,6 +409,11 @@
           "id": "other",
           "kind": "entry",
           "entry": "duration"
+        },
+        {
+          "id": "at",
+          "kind": "entry",
+          "entry": "clock"
         },
         {
           "id": "i-will-write-it-down",
@@ -582,6 +593,71 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "platform": {
+      "buttons": [
+        {
+          "id": "number",
+          "kind": "entry",
+          "entry": "count"
+        },
+        {
+          "id": "this-way",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.this-way"
+          }
+        },
+        {
+          "id": "that-way",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.that-way"
+          }
+        },
+        {
+          "id": "on-the-left",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.on-the-left"
+          }
+        },
+        {
+          "id": "on-the-right",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.on-the-right"
+          }
+        },
+        {
+          "id": "i-will-show-you",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-show-you"
           }
         },
         {

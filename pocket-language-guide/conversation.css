@@ -527,6 +527,38 @@
   cursor: pointer;
 }
 .board-control:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* **Reply is not one control among three.** Speak and the turn control are the
+   owner's, and they are holding the phone; this one is for the stranger they are
+   holding it out to, who has a second to work out what to do with a screen in a
+   language they can read and an interface they have never seen. So it is filled
+   where the others are outlined, bold, a size larger, and it carries an arrow.
+
+   White on the coloured stage, taking the stage's own role colour for its text --
+   the same relationship the message has to the background, so the two read as one
+   screen rather than as a button pasted on one. */
+.board-reply {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  font-size: var(--fs-2);
+  font-weight: 700;
+  min-block-size: 3.4rem;
+  padding-inline: var(--space-4);
+  border-color: transparent;
+  background: var(--accent);
+  color: var(--paper);
+}
+.board-reply:hover { background: var(--accent); filter: brightness(1.08); }
+.board-stage[class*="board-role-"] .board-reply {
+  background: var(--paper);
+  color: var(--role);
+}
+.board-stage[class*="board-role-"] .board-reply:hover { background: var(--paper); filter: brightness(0.95); }
+/* The arrow points the way the reader is going, which on a right-to-left board is
+   the other way. A glyph is not text and gets no bidi treatment. */
+.board-reply-arrow { font-size: 0.85em; line-height: 1; }
+[dir="rtl"] .board-reply-arrow { display: inline-block; transform: scaleX(-1); }
 .board-stage-turned .board-controls { flex-direction: column; }
 
 /* The turn control is the quiet one in the row: no words, square, and an outline
@@ -601,7 +633,11 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: clamp(1.1rem, 4.5vw, 2rem);
+  /* No `font-size` here: `fitCells` sizes each answer against its own button, the
+     way the grid has since a phone drew `Comfor / t`. A `vw` clamp is blind both to
+     how much text a cell holds and to how tall the screen is -- sideways on a
+     740x360 phone it resolved to 33px and drew `这里面没有我想说的` out through the
+     bottom of its own button. */
   line-height: 1.2;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -616,7 +652,22 @@
      fitter shrinks the text until none of them do, so in practice nothing breaks. */
   overflow-wrap: break-word;
 }
+.board-answer-label { display: block; inline-size: 100%; }
 .board-answer:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* **A short screen is a different shape, not a smaller one.** Held sideways there is
+   width to spare and no height at all: four columns of ten answers leaves a last row
+   of two and a scroll, where five columns leaves a last row of five and none. The
+   floor comes down so more columns fit, the question gives back the room it does not
+   need, and the fitter takes care of the type -- which is the whole reason the floor
+   can move at all. */
+@media (max-height: 520px) {
+  .board-answers { grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr)); }
+  .board-answer { min-block-size: 3rem; padding: var(--space-1); }
+  .board-asked { font-size: clamp(1rem, 2.4vw, 1.3rem); }
+  .board-stage { gap: var(--space-1); }
+  .board-stage-entry { gap: var(--space-2); }
+}
 /* The way out of a question, in the corner rather than among the answers. Quiet: it
    is not one of the things the listener came here to press, and a centred control
    the size of an answer read as a thirteenth option. */
@@ -706,6 +757,7 @@
   .board-cell { min-block-size: 3rem; font-size: var(--fs-0); }
   .board-message-text { font-size: clamp(1.6rem, 7vh, 3rem); }
   .board-control { min-block-size: 2.5rem; }
+  .board-reply { min-block-size: 2.8rem; font-size: var(--fs-1); padding-inline: var(--space-3); }
 }
 
 /* A voice that failed, said next to the button that promised it. White, because it

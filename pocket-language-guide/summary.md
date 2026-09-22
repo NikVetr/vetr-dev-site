@@ -666,14 +666,19 @@ instructions, so the owner showed "No peanuts" and the waiter had no way to say 
 or "I will ask the kitchen"; `time`'s answer space for *what time does it open?*
 contained no time at all, and its only substantive cell was *It is closed*, which the
 owner read back as a false statement when the answer was *opens at ten*; *Where am I?*
-offered eight ways to send somebody somewhere. 115 of 168 buttons can now be answered,
+offered eight ways to send somebody somewhere. 116 of 168 buttons can now be answered,
 against about thirty, and the whole batch cost one constructed language on one board --
 every phrase it names was already in all fifty-one natural packs, because the answers
 were in the corpus and simply not indexed into the sets that needed them.
 
-The cap on the format is that **there is no way to answer with a number.** `entry`
-takes a duration and `value` takes minute/hour/day, so a clock time, a platform number
-and a price cannot be said. That is why *What time is it?* has no reply set at all.
+**And there are three kinds of number, not one.** A duration answers *how long*, a
+clock answers *when*, and a bare count is a platform, a price, a how-many. Until the
+audits, only the first existed — which is how the answer space for "what time does it
+open?" came to contain no time, and why *What time is it?* had no reply set at all.
+Each needs no translation: `Intl` carries the plural rules for a duration, whether a
+locale writes twelve- or twenty-four-hour clocks, and which digits it uses. The clock
+is asked for with the platform's own `<input type="time">`, so the stranger is shown
+the control their phone always shows them and one unambiguous `HH:MM` crosses back.
 
 **Replies are optional and one-directional per message.** A reply set offers the
 listener a few complete answers in their own language; the chosen one comes back in

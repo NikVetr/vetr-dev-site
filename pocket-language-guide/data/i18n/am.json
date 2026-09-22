@@ -387,5 +387,11 @@
   "board.unit": "ደቂቃዎች፣ ሰዓቶች ወይም ቀናት",
   "board.otherAmount": "ሌላ መጠን…",
   "board.confirm": "ያረጋግጡ",
-  "board.notAnAmount": "ሙሉ ቁጥር ያስገቡ"
+  "board.notAnAmount": "ሙሉ ቁጥር ያስገቡ",
+  "board.atTime": "የተወሰነ ሰዓት…",
+  "board.otherNumber": "ቁጥር…",
+  "board.time": "ስንት ሰዓት",
+  "board.number": "ቁጥሩ",
+  "board.notATime": "ሰዓት ይምረጡ",
+  "board.notANumber": "ሙሉ ቁጥር ያስገቡ"
 }

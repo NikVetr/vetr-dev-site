@@ -387,5 +387,11 @@
   "board.notAnAmount": "Zadejte celé číslo",
   "beacon.help": "POMOC",
   "beacon.sos": "SOS",
-  "beacon.dismiss": "Klepněte kamkoli pro zastavení"
+  "beacon.dismiss": "Klepněte kamkoli pro zastavení",
+  "board.atTime": "Přesný čas…",
+  "board.otherNumber": "Číslo…",
+  "board.time": "V kolik hodin",
+  "board.number": "Číslo",
+  "board.notATime": "Vyberte čas",
+  "board.notANumber": "Zadejte celé číslo"
 }

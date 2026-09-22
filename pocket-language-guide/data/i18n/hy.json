@@ -387,5 +387,11 @@
   "board.notAnAmount": "Մուտքագրե՛ք ամբողջ թիվ",
   "beacon.help": "Օգնությու՜ն",
   "beacon.sos": "SOS",
-  "beacon.dismiss": "Հպե՛ք ցանկացած տեղում՝ դադարեցնելու համար"
+  "beacon.dismiss": "Հպե՛ք ցանկացած տեղում՝ դադարեցնելու համար",
+  "board.atTime": "Որոշակի ժամ…",
+  "board.otherNumber": "Թիվ…",
+  "board.time": "Ժամ",
+  "board.number": "Թիվ",
+  "board.notATime": "Ընտրե՛ք ժամ",
+  "board.notANumber": "Մուտքագրե՛ք ամբողջ թիվ"
 }

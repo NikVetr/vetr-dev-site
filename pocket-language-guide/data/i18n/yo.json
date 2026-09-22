@@ -387,5 +387,11 @@
   "board.notAnAmount": "Tẹ nọ́mbà odidi kan",
   "beacon.help": "Ẹ̀gbà mí",
   "beacon.sos": "SOS",
-  "beacon.dismiss": "Tẹ ibikíbi láti dá a duro"
+  "beacon.dismiss": "Tẹ ibikíbi láti dá a duro",
+  "board.atTime": "Àkókò…",
+  "board.otherNumber": "Nọ́mbà…",
+  "board.time": "Àkókò",
+  "board.number": "Nọ́mbà",
+  "board.notATime": "Yan àkókò",
+  "board.notANumber": "Tẹ nọ́mbà odidi kan"
 }

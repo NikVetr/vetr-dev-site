@@ -387,5 +387,11 @@
   "board.notAnAmount": "Введите целое число",
   "beacon.help": "ПОМОГИТЕ",
   "beacon.sos": "SOS",
-  "beacon.dismiss": "Коснитесь экрана, чтобы остановить"
+  "beacon.dismiss": "Коснитесь экрана, чтобы остановить",
+  "board.atTime": "Точное время…",
+  "board.otherNumber": "Число…",
+  "board.time": "Время",
+  "board.number": "Число",
+  "board.notATime": "Выберите время",
+  "board.notANumber": "Введите целое число"
 }

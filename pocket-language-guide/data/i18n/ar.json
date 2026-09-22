@@ -387,5 +387,11 @@
   "board.unit": "دقائق أو ساعات أو أيام",
   "board.otherAmount": "كمية أخرى…",
   "board.confirm": "تأكيد",
-  "board.notAnAmount": "يُرجى إدخال عدد صحيح"
+  "board.notAnAmount": "يُرجى إدخال عدد صحيح",
+  "board.atTime": "وقت محدد…",
+  "board.otherNumber": "رقم…",
+  "board.time": "الوقت",
+  "board.number": "الرقم",
+  "board.notATime": "يُرجى اختيار وقت",
+  "board.notANumber": "يُرجى إدخال عدد صحيح"
 }

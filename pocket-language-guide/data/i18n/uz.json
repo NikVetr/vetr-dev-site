@@ -387,5 +387,11 @@
   "board.unit": "Daqiqa, soat yoki kun",
   "board.otherAmount": "Boshqa miqdor…",
   "board.confirm": "Tasdiqlash",
-  "board.notAnAmount": "Butun son kiriting"
+  "board.notAnAmount": "Butun son kiriting",
+  "board.atTime": "Soat…",
+  "board.otherNumber": "Son…",
+  "board.time": "Soat",
+  "board.number": "Son",
+  "board.notATime": "Soat tanlang",
+  "board.notANumber": "Butun son kiriting"
 }

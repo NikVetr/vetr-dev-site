@@ -387,5 +387,11 @@
   "board.unit": "דקות, שעות או ימים",
   "board.otherAmount": "כמות אחרת…",
   "board.confirm": "אישור",
-  "board.notAnAmount": "יש להזין מספר שלם"
+  "board.notAnAmount": "יש להזין מספר שלם",
+  "board.atTime": "שעה מסוימת…",
+  "board.otherNumber": "מספר…",
+  "board.time": "שעה",
+  "board.number": "מספר",
+  "board.notATime": "יש לבחור שעה",
+  "board.notANumber": "יש להזין מספר שלם"
 }

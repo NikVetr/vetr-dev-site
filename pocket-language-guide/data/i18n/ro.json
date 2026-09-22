@@ -387,5 +387,11 @@
   "board.notAnAmount": "Introduceți un număr întreg",
   "beacon.help": "AJUTOR",
   "beacon.sos": "SOS",
-  "beacon.dismiss": "Atingeți oriunde pentru a opri"
+  "beacon.dismiss": "Atingeți oriunde pentru a opri",
+  "board.atTime": "La ora…",
+  "board.otherNumber": "Un număr…",
+  "board.time": "La ce oră",
+  "board.number": "Numărul",
+  "board.notATime": "Alegeți o oră",
+  "board.notANumber": "Introduceți un număr întreg"
 }

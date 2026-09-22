@@ -387,5 +387,11 @@
   "board.notAnAmount": "Shigar da cikakken lamba",
   "beacon.help": "Taimako",
   "beacon.sos": "SOS",
-  "beacon.dismiss": "Ka taɓa ko'ina, sai ya tsaya"
+  "beacon.dismiss": "Ka taɓa ko'ina, sai ya tsaya",
+  "board.atTime": "Wani lokaci…",
+  "board.otherNumber": "Wata lamba…",
+  "board.time": "Lokaci",
+  "board.number": "Lamba",
+  "board.notATime": "Zaɓi lokaci",
+  "board.notANumber": "Shigar da cikakken lamba"
 }

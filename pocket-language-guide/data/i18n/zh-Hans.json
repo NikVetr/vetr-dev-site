@@ -387,5 +387,11 @@
   "board.notAnAmount": "请输入整数",
   "beacon.help": "救命",
   "beacon.sos": "SOS",
-  "beacon.dismiss": "点按任意位置即可停止"
+  "beacon.dismiss": "点按任意位置即可停止",
+  "board.atTime": "具体时间",
+  "board.otherNumber": "具体数字",
+  "board.time": "时间",
+  "board.number": "数字",
+  "board.notATime": "请选择时间",
+  "board.notANumber": "请输入整数"
 }

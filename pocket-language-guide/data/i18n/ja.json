@@ -387,5 +387,11 @@
   "board.notAnAmount": "整数を入力してください",
   "beacon.help": "助けて",
   "beacon.sos": "SOS",
-  "beacon.dismiss": "どこでもタップすると止まります"
+  "beacon.dismiss": "どこでもタップすると止まります",
+  "board.atTime": "時刻を指定…",
+  "board.otherNumber": "数字を入力…",
+  "board.time": "時刻",
+  "board.number": "数字",
+  "board.notATime": "時刻を選んでください",
+  "board.notANumber": "整数を入力してください"
 }

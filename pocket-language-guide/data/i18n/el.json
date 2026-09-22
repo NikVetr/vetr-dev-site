@@ -387,5 +387,11 @@
   "board.notAnAmount": "Εισαγάγετε έναν ακέραιο αριθμό",
   "beacon.help": "ΒΟΗΘΕΙΑ",
   "beacon.sos": "SOS",
-  "beacon.dismiss": "Πατήστε οπουδήποτε για να σταματήσει"
+  "beacon.dismiss": "Πατήστε οπουδήποτε για να σταματήσει",
+  "board.atTime": "Συγκεκριμένη ώρα…",
+  "board.otherNumber": "Αριθμός…",
+  "board.time": "Τι ώρα",
+  "board.number": "Ο αριθμός",
+  "board.notATime": "Επιλέξτε ώρα",
+  "board.notANumber": "Εισαγάγετε έναν ακέραιο αριθμό"
 }

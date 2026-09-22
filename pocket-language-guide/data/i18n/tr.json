@@ -387,5 +387,11 @@
   "board.unit": "Dakika, saat veya gün",
   "board.otherAmount": "Başka bir miktar…",
   "board.confirm": "Onayla",
-  "board.notAnAmount": "Tam sayı girin"
+  "board.notAnAmount": "Tam sayı girin",
+  "board.atTime": "Saat…",
+  "board.otherNumber": "Bir sayı…",
+  "board.time": "Saat kaç",
+  "board.number": "Sayı",
+  "board.notATime": "Saat seçin",
+  "board.notANumber": "Tam sayı girin"
 }

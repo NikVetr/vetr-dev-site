@@ -387,5 +387,11 @@
   "board.notAnAmount": "Entrez un nombre entier",
   "beacon.help": "SECOURS",
   "beacon.sos": "SOS",
-  "beacon.dismiss": "Touchez n’importe où pour l’arrêter"
+  "beacon.dismiss": "Touchez n’importe où pour l’arrêter",
+  "board.atTime": "Heure précise…",
+  "board.otherNumber": "Un nombre…",
+  "board.time": "À quelle heure",
+  "board.number": "Le nombre",
+  "board.notATime": "Choisissez une heure",
+  "board.notANumber": "Entrez un nombre entier"
 }

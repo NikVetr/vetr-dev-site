@@ -387,5 +387,11 @@
   "board.notAnAmount": "Vui lòng nhập số nguyên",
   "beacon.help": "Cứu với",
   "beacon.sos": "SOS",
-  "beacon.dismiss": "Chạm vào bất kỳ đâu để dừng"
+  "beacon.dismiss": "Chạm vào bất kỳ đâu để dừng",
+  "board.atTime": "Giờ cụ thể…",
+  "board.otherNumber": "Con số…",
+  "board.time": "Giờ",
+  "board.number": "Con số",
+  "board.notATime": "Vui lòng chọn giờ",
+  "board.notANumber": "Vui lòng nhập số nguyên"
 }

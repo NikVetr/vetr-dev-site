@@ -387,5 +387,11 @@
   "board.notAnAmount": "Wpisz liczbę całkowitą",
   "beacon.help": "POMOCY",
   "beacon.sos": "SOS",
-  "beacon.dismiss": "Dotknij gdziekolwiek, aby zatrzymać"
+  "beacon.dismiss": "Dotknij gdziekolwiek, aby zatrzymać",
+  "board.atTime": "O godzinie…",
+  "board.otherNumber": "Liczba…",
+  "board.time": "Która godzina",
+  "board.number": "Liczba",
+  "board.notATime": "Wybierz godzinę",
+  "board.notANumber": "Wpisz liczbę całkowitą"
 }

@@ -13,7 +13,8 @@
             "kind": "corpus",
             "id": "time-scheduling.what-time-is-it"
           },
-          "colour": "stay"
+          "colour": "stay",
+          "replySetId": "clock"
         },
         {
           "id": "wait",
@@ -199,6 +200,7 @@
           "id": "d5m",
           "kind": "value",
           "value": {
+            "kind": "duration",
             "amount": 5,
             "unit": "minute"
           }
@@ -207,6 +209,7 @@
           "id": "d10m",
           "kind": "value",
           "value": {
+            "kind": "duration",
             "amount": 10,
             "unit": "minute"
           }
@@ -215,6 +218,7 @@
           "id": "d15m",
           "kind": "value",
           "value": {
+            "kind": "duration",
             "amount": 15,
             "unit": "minute"
           }
@@ -223,6 +227,7 @@
           "id": "d30m",
           "kind": "value",
           "value": {
+            "kind": "duration",
             "amount": 30,
             "unit": "minute"
           }
@@ -231,6 +236,7 @@
           "id": "d1h",
           "kind": "value",
           "value": {
+            "kind": "duration",
             "amount": 1,
             "unit": "hour"
           }
@@ -239,6 +245,7 @@
           "id": "d2h",
           "kind": "value",
           "value": {
+            "kind": "duration",
             "amount": 2,
             "unit": "hour"
           }
@@ -375,6 +382,11 @@
             "kind": "corpus",
             "id": "time-words.tomorrow"
           }
+        },
+        {
+          "id": "at",
+          "kind": "entry",
+          "entry": "clock"
         },
         {
           "id": "i-will-write-it-down",
@@ -592,6 +604,7 @@
           "id": "d5m",
           "kind": "value",
           "value": {
+            "kind": "duration",
             "amount": 5,
             "unit": "minute"
           }
@@ -600,6 +613,7 @@
           "id": "d10m",
           "kind": "value",
           "value": {
+            "kind": "duration",
             "amount": 10,
             "unit": "minute"
           }
@@ -608,6 +622,7 @@
           "id": "d15m",
           "kind": "value",
           "value": {
+            "kind": "duration",
             "amount": 15,
             "unit": "minute"
           }
@@ -616,6 +631,7 @@
           "id": "d30m",
           "kind": "value",
           "value": {
+            "kind": "duration",
             "amount": 30,
             "unit": "minute"
           }
@@ -624,6 +640,7 @@
           "id": "d1h",
           "kind": "value",
           "value": {
+            "kind": "duration",
             "amount": 1,
             "unit": "hour"
           }
@@ -632,6 +649,7 @@
           "id": "d2h",
           "kind": "value",
           "value": {
+            "kind": "duration",
             "amount": 2,
             "unit": "hour"
           }
@@ -640,6 +658,39 @@
           "id": "other",
           "kind": "entry",
           "entry": "duration"
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "clock": {
+      "buttons": [
+        {
+          "id": "at",
+          "kind": "entry",
+          "entry": "clock"
+        },
+        {
+          "id": "i-will-write-it-down",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-write-it-down"
+          }
         },
         {
           "id": "i-do-not-know",

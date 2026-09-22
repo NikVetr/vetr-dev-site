@@ -387,5 +387,11 @@
   "board.notAnAmount": "Írjon be egész számot",
   "beacon.help": "SEGÍTSÉG",
   "beacon.sos": "SOS",
-  "beacon.dismiss": "A leállításhoz koppintson bárhová"
+  "beacon.dismiss": "A leállításhoz koppintson bárhová",
+  "board.atTime": "Pontos időpont…",
+  "board.otherNumber": "Szám…",
+  "board.time": "Időpont",
+  "board.number": "Szám",
+  "board.notATime": "Válasszon időpontot",
+  "board.notANumber": "Írjon be egész számot"
 }

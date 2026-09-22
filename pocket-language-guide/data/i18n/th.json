@@ -387,5 +387,11 @@
   "board.notAnAmount": "กรุณากรอกจำนวนเต็ม",
   "beacon.help": "ช่วยด้วย",
   "beacon.sos": "SOS",
-  "beacon.dismiss": "กรุณาแตะที่ใดก็ได้เพื่อหยุด"
+  "beacon.dismiss": "กรุณาแตะที่ใดก็ได้เพื่อหยุด",
+  "board.atTime": "เวลา…",
+  "board.otherNumber": "ตัวเลข…",
+  "board.time": "เวลา",
+  "board.number": "ตัวเลข",
+  "board.notATime": "กรุณาเลือกเวลา",
+  "board.notANumber": "กรุณากรอกจำนวนเต็ม"
 }

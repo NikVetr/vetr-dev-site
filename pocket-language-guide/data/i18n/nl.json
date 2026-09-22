@@ -387,5 +387,11 @@
   "board.notAnAmount": "Voer een geheel getal in",
   "beacon.help": "HELP",
   "beacon.sos": "SOS",
-  "beacon.dismiss": "Tik ergens om te stoppen"
+  "beacon.dismiss": "Tik ergens om te stoppen",
+  "board.atTime": "Tijdstip…",
+  "board.otherNumber": "Een getal…",
+  "board.time": "Hoe laat",
+  "board.number": "Getal",
+  "board.notATime": "Kies een tijd",
+  "board.notANumber": "Voer een geheel getal in"
 }

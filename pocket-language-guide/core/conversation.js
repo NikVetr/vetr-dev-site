@@ -29,7 +29,7 @@
 // meanings the corpus genuinely cannot say.
 
 import { appliesTo } from './pack.js';
-import { formatDuration, supports as supportsUnits } from './duration.js';
+import { formatQuantity } from './quantity.js';
 import { variantOf } from './speaker.js';
 
 /** How many levels of submenu a board may nest. Deeper is a menu tree, not a board. */
@@ -40,6 +40,8 @@ const MAX_BUTTONS = 12;
 const COLOURS = new Set(['comm', 'money', 'move', 'stay', 'alert']);
 /** @type {Set<string>} Units a structured answer may be counted in. */
 const UNITS = new Set(['minute', 'hour', 'day']);
+/** @type {Set<string>} The keypads a board may open. Each needs no translation. */
+const ENTRIES = new Set(['duration', 'clock', 'count']);
 
 /**
  * @typedef {Object} BoardButton
@@ -48,8 +50,12 @@ const UNITS = new Set(['minute', 'hour', 'day']);
  * @property {'sos'|'attention'} [beacon]  for `beacon`: which signal it runs. Not a
  *   phrase and not spoken -- the one button on a board that is about being *seen*
  *   rather than read, for when nobody is looking at the screen yet.
- * @property {import('./duration.js').Duration} [value]  for `value`: what it answers
- * @property {'duration'} [entry]   for `entry`: which keypad it opens
+ * @property {import('./quantity.js').Quantity} [value]  for `value`: what it answers
+ * @property {'duration'|'clock'|'count'} [entry]  for `entry`: which keypad it opens.
+ *   A duration is *how long*, a clock is *when*, a count is a bare number -- a
+ *   platform, a price, how many. All three are answers that need no translation,
+ *   which is what makes a keypad worth having where a phrase would cost fifty-one
+ *   rows.
  * @property {string} [nodeId]      for `submenu`: the child node
  * @property {PhraseRef} [phraseRef] for `message`: what it says
  * @property {string} [labelKey]    optional short interface wording, never spoken
@@ -126,7 +132,7 @@ const UNITS = new Set(['minute', 'hour', 'day']);
  * @property {string[]} path            node ids, deepest last; never empty
  * @property {string|null} buttonId     the message being shown, when there is one
  * @property {string|null} answerId     the reply chosen, in the `answer` view
- * @property {import('./duration.js').Duration|null} [answerValue]  a typed or tapped
+ * @property {import('./quantity.js').Quantity|null} [answerValue]  a typed or tapped
  *   quantity, when the answer is one. Structured, never the text of one.
  * @property {boolean} replies          whether this session offers replies at all
  */
@@ -185,13 +191,18 @@ export function validateBoard(board) {
       }
       if (button.kind === 'value') {
         // A quantity, not a sentence: the one answer that needs no translation, and
-        // therefore the one that has to be checked structurally instead.
+        // therefore the one that has to be checked structurally instead. Only a
+        // duration is worth presetting -- nobody offers six clock times on a grid --
+        // so this is narrower than what a keypad may return.
         const v = button.value;
-        if (!v || !Number.isInteger(v.amount) || v.amount < 1 || !UNITS.has(v.unit)) {
-          problems.push(`${key}: value must be a whole amount and one of ${[...UNITS].join(', ')}`);
+        if (!v || v.kind !== 'duration' || !Number.isInteger(v.amount) || v.amount < 1
+          || !UNITS.has(v.unit)) {
+          problems.push(`${key}: value must be a whole duration in ${[...UNITS].join(', ')}`);
         }
       } else if (button.kind === 'entry') {
-        if (button.entry !== 'duration') problems.push(`${key}: unknown entry ${button.entry}`);
+        if (!ENTRIES.has(button.entry)) {
+          problems.push(`${key}: entry ${button.entry} is not one of ${[...ENTRIES].join(', ')}`);
+        }
       } else if (button.kind === 'submenu') {
         if (!nodes[button.nodeId]) problems.push(`${key}: submenu to unknown node ${button.nodeId}`);
       } else if (button.kind === 'beacon') {
@@ -372,18 +383,19 @@ function say(voice, conceptId, row, incoming) {
  *
  * `null` where either language has no formatter, exactly as `resolvePhrase` returns
  * `null` rather than half an answer. The two constructed languages are that case,
- * and a board for one of them simply cannot offer a duration.
- * @param {import('./duration.js').Duration} value
+ * and a board for one of them simply cannot offer a quantity.
+ * @param {import('./quantity.js').Quantity} value
  * @param {ResolveContext} ctx
  * @returns {ResolvedPhrase|null}
  */
 export function resolveValue(value, ctx) {
-  if (!supportsUnits(ctx.listener) || !supportsUnits(ctx.owner)) return null;
-  const listener = formatDuration(value, ctx.listener);
-  const owner = formatDuration(value, ctx.owner);
+  const listener = formatQuantity(value, ctx.listener);
+  const owner = formatQuantity(value, ctx.owner);
   if (!listener || !owner) return null;
   return {
-    id: `duration:${value.amount}:${value.unit}`,
+    id: value.kind === 'clock' ? `clock:${value.hour}:${value.minute}`
+      : value.kind === 'count' ? `count:${value.amount}`
+        : `duration:${value.amount}:${value.unit}`,
     listener: { text: listener, lang: ctx.listener, dir: ctx.listenerDir },
     owner: { text: owner, lang: ctx.owner, dir: ctx.ownerDir },
     // CLDR, through the runtime. Not a translation anybody made, and not one that
@@ -417,9 +429,9 @@ export function missingPhrases(board, ctx) {
  * @param {BoardState} state
  * @param {{type:'open', buttonId:string, kind:string, nodeId?:string}
  *   | {type:'dismiss'} | {type:'up'} | {type:'reply'}
- *   | {type:'answer', answerId:string, value?:import('./duration.js').Duration}
- *   | {type:'cancelReply'} | {type:'enter'} | {type:'cancelEntry'}
- *   | {type:'confirmEntry', value:import('./duration.js').Duration}} action
+ *   | {type:'answer', answerId:string, value?:import('./quantity.js').Quantity}
+ *   | {type:'cancelReply'} | {type:'enter', answerId:string} | {type:'cancelEntry'}
+ *   | {type:'confirmEntry', value:import('./quantity.js').Quantity}} action
  * @returns {BoardState}
  */
 export function reduce(state, action) {
@@ -464,9 +476,11 @@ export function reduce(state, action) {
 
     case 'enter':
       // The keypad. Reached only from the reply grid, so cancelling has somewhere
-      // unambiguous to go back to.
+      // unambiguous to go back to -- and it records *which* keypad was tapped,
+      // because a set may offer more than one: a departure can be answered in
+      // minutes from now or at a time, and those are two cells and two keyboards.
       if (state.view !== 'reply') return state;
-      return { ...state, view: 'entry' };
+      return { ...state, view: 'entry', answerId: action.answerId };
 
     case 'cancelEntry':
       // Back to the answers, not to the question and not to the grid: someone who

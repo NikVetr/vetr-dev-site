@@ -387,5 +387,11 @@
   "board.notAnAmount": "Geben Sie eine ganze Zahl ein",
   "beacon.help": "HILFE",
   "beacon.sos": "SOS",
-  "beacon.dismiss": "Tippen Sie irgendwo, um zu stoppen"
+  "beacon.dismiss": "Tippen Sie irgendwo, um zu stoppen",
+  "board.atTime": "Genaue Uhrzeit…",
+  "board.otherNumber": "Eine Zahl…",
+  "board.time": "Uhrzeit",
+  "board.number": "Zahl",
+  "board.notATime": "Wählen Sie eine Uhrzeit aus",
+  "board.notANumber": "Geben Sie eine ganze Zahl ein"
 }

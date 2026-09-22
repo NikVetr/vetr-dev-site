@@ -387,5 +387,11 @@
   "board.notAnAmount": "Inserisca un numero intero",
   "beacon.help": "AIUTO",
   "beacon.sos": "SOS",
-  "beacon.dismiss": "Tocchi ovunque per fermarlo"
+  "beacon.dismiss": "Tocchi ovunque per fermarlo",
+  "board.atTime": "Ora precisa…",
+  "board.otherNumber": "Un numero…",
+  "board.time": "A che ora",
+  "board.number": "Il numero",
+  "board.notATime": "Scelga l’ora",
+  "board.notANumber": "Inserisca un numero intero"
 }

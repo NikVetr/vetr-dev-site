@@ -261,10 +261,10 @@ const LOWER = 'M133 57H219C235 57 248 70 248 86V142C248 157.4 236.1 170 221 171L
  * print solver measures advance widths for paper and has no business here.
  * @param {HTMLElement} root
  */
-function fitCells(root) {
-  for (const node of root.querySelectorAll('.board-cell')) {
+function fitCells(root, cellSel = '.board-cell', labelSel = '.board-cell-label') {
+  for (const node of root.querySelectorAll(cellSel)) {
     const cell = /** @type {HTMLElement} */ (node);
-    const label = /** @type {HTMLElement} */ (cell.querySelector('.board-cell-label'));
+    const label = /** @type {HTMLElement} */ (cell.querySelector(labelSel));
     if (!label) continue;
     // **Against the cell's content box, not the label's own size.** The label is a
     // block with `height: auto`, so it grows to hold whatever it is given and can
@@ -336,6 +336,25 @@ function watchCells(root) {
   observer.observe(root);
 }
 /** @type {ResizeObserver|null} */ let observer = null;
+
+/**
+ * The same, for the answer grid.
+ *
+ * Its own observer rather than a second use of the grid's, because the two are
+ * different elements with different lifetimes -- the answers are a screen over the
+ * grid, and disconnecting the grid's observer to watch them would leave the grid
+ * unfitted for the resize that happens while they are open.
+ * @param {HTMLElement} list
+ */
+function watchAnswers(list) {
+  const fit = () => fitCells(list, '.board-answer', '.board-answer-label');
+  fit();
+  if (document.fonts?.status !== 'loaded') document.fonts?.ready.then(fit);
+  answersObserver?.disconnect();
+  answersObserver = new ResizeObserver(fit);
+  answersObserver.observe(list);
+}
+/** @type {ResizeObserver|null} */ let answersObserver = null;
 
 /**
  * The listener's message, filling the screen.
@@ -459,12 +478,24 @@ export function renderMessage(stage, phrase,
   if (onReply) {
     const reply = document.createElement('button');
     reply.type = 'button';
-    reply.className = 'board-control';
+    // **The one control on this screen a stranger has to find**, and the only one
+    // addressed to them: everything else here is the owner's. It is drawn like it --
+    // filled, bold, larger than the rest of the row -- because somebody who has just
+    // been handed a phone showing a sentence in their own language has to see, in
+    // one glance and without reading the whole screen, that they can answer.
+    reply.className = 'board-control board-reply';
     // The listener is the one reading this, so it is in their language and carries
     // their direction. The owner never needs to read it.
-    reply.textContent = replyLabel;
     reply.lang = phrase.listener.lang;
     reply.dir = phrase.listener.dir;
+    // An arrow after the word, which says "this leads somewhere" in no language.
+    // Its own element rather than part of the string: a glyph gets no bidi treatment
+    // and has to be turned over by hand for a reader who starts from the right.
+    const onward = document.createElement('span');
+    onward.className = 'board-reply-arrow';
+    onward.textContent = '\u2192';
+    onward.setAttribute('aria-hidden', 'true');
+    reply.append(document.createTextNode(replyLabel), onward);
     reply.addEventListener('click', onReply);
     controls.append(reply);
   }
@@ -596,10 +627,21 @@ export function renderReply(stage, question, answers, { onAnswer, onCancel, clos
     if (entry) choice.classList.add('board-answer-entry');
     // The listener's own reading of their own answer -- including a quantity, which
     // is formatted from a number rather than stored as a sentence.
-    choice.textContent = phrase.listener.text;
+    //
+    // **In its own element, because these are fitted now.** The size was a `clamp`
+    // in `vw`, which is blind to how much text a cell holds and to how tall the
+    // screen is: on a 740x360 phone held sideways it resolved to 33px and drew
+    // `这里面没有我想说的` straight out through the bottom of its own button. The
+    // grid has solved this since the first phone report; the answers were the one
+    // surface still guessing.
+    const label = document.createElement('span');
+    label.className = 'board-answer-label';
+    label.textContent = phrase.listener.text;
+    choice.append(label);
     choice.addEventListener('click', () => onAnswer(id));
     list.append(choice);
   }
+  watchAnswers(list);
 
   // Cancelling claims no answer at all, which is a different thing from answering
   // "I don't know" -- and both have to be reachable, because a listener who will
@@ -731,21 +773,34 @@ export function fitMessage(text, box) {
  * goes back to the answers, because a listener who opened this by mistake wanted the
  * list they were just looking at.
  *
- * What is confirmed is a **number and a unit**, never a string. The owner's reading
+ * What is confirmed is a **structured quantity**, never a string. The owner's reading
  * of it is formatted from that value in their own language, so the two sides cannot
  * drift and no wording has to exist for it in any of the fifty-one.
+ *
+ * **Three keypads, because there are three things a number can be here.** *How long*
+ * is a duration and needs its unit chosen; *when* is a time of day, which the
+ * platform's own picker already knows how to ask for in the reader's convention; and
+ * a bare *count* is a platform number, a price, a how-many. The last two were the
+ * gap every tree audit found independently — with only a duration to offer, a board
+ * asked "what time does it open?" and had nowhere to put "ten".
+ *
+ * `check` both validates and parses, and hands back the value it parsed. The view
+ * used to re-derive it from the raw string after `check` had already done the work,
+ * which is two parsers to keep agreeing about what a number is.
  *
  * @param {HTMLElement} stage
  * @param {import('../core/conversation.js').ResolvedPhrase} question
  * @param {object} config
- * @param {(value:import('../core/duration.js').Duration)=>void} config.onConfirm
+ * @param {'duration'|'clock'|'count'} config.kind  which keypad
+ * @param {(value:import('../core/quantity.js').Quantity)=>void} config.onConfirm
  * @param {()=>void} config.onCancel
- * @param {(raw:string, unit:'minute'|'hour'|'day')=>string|null} config.check
- *   validates and returns the listener's reading of it, or null
+ * @param {(raw:string, unit:'minute'|'hour'|'day') =>
+ *   {value:import('../core/quantity.js').Quantity, said:string}|null} config.check
  * @param {Record<string,string>} config.words  labels, in the listener's language
  * @param {import('../core/conversation.js').ColourRole} [config.colour]
  */
-export function renderEntry(stage, question, { onConfirm, onCancel, check, words, colour }) {
+export function renderEntry(stage, question,
+  { kind = 'duration', onConfirm, onCancel, check, words, colour }) {
   stage.replaceChildren();
   stage.hidden = false;
   stage.className = 'board-stage board-stage-entry';
@@ -758,12 +813,27 @@ export function renderEntry(stage, question, { onConfirm, onCancel, check, words
   asked.dir = question.listener.dir;
 
   const amount = document.createElement('input');
-  // `inputmode` rather than `type="number"`, which brings spinners nobody wants on a
-  // phone and a locale-dependent parse. The value is validated as digits anyway.
-  amount.type = 'text';
-  amount.inputMode = 'numeric';
+  if (kind === 'clock') {
+    // **The platform's own picker, deliberately.** It hands back one unambiguous
+    // `HH:MM` whatever it displayed, and it is the control this device always shows
+    // for a time. Two text fields would be a worse control in every locale and a
+    // differently worse one in each.
+    //
+    // Honest limit: a browser draws this in the *device's* convention, not in the
+    // one named by `lang` -- so a Mandarin listener on an English phone gets a
+    // twelve-hour picker. The preview underneath is formatted in the listener's own
+    // language, which is where the convention that matters is shown, and the value
+    // crossing back carries no convention at all.
+    amount.type = 'time';
+  } else {
+    // `inputmode` rather than `type="number"`, which brings spinners nobody wants on
+    // a phone and a locale-dependent parse. The value is validated as digits anyway.
+    amount.type = 'text';
+    amount.inputMode = 'numeric';
+  }
   amount.className = 'board-entry-amount';
-  amount.setAttribute('aria-label', words.amount);
+  amount.setAttribute('aria-label', kind === 'clock' ? words.time
+    : kind === 'count' ? words.number : words.amount);
 
   /** @type {'minute'|'hour'|'day'} */ let unit = 'minute';
   const units = document.createElement('div');
@@ -803,16 +873,17 @@ export function renderEntry(stage, question, { onConfirm, onCancel, check, words
   confirm.textContent = words.confirm;
 
   const sync = () => {
-    const said = check(amount.value, unit);
-    preview.textContent = said ?? words.invalid;
-    preview.classList.toggle('board-entry-preview-empty', !said);
-    confirm.disabled = !said;
+    const read = check(amount.value, unit);
+    preview.textContent = read?.said ?? words.invalid;
+    preview.classList.toggle('board-entry-preview-empty', !read);
+    confirm.disabled = !read;
   };
   amount.addEventListener('input', sync);
   sync();
 
   confirm.addEventListener('click', () => {
-    if (check(amount.value, unit)) onConfirm({ amount: Number(amount.value.trim()), unit });
+    const read = check(amount.value, unit);
+    if (read) onConfirm(read.value);
   });
   // Enter confirms, which is what a numeric keypad's own key will send.
   amount.addEventListener('keydown', (event) => {
@@ -829,7 +900,9 @@ export function renderEntry(stage, question, { onConfirm, onCancel, check, words
   row.className = 'board-entry-row';
   row.lang = question.listener.lang;
   row.dir = question.listener.dir;
-  row.append(amount, units);
+  // A unit is a question only a duration has: a time of day and a bare number are
+  // each one thing, and three greyed buttons beside them would be furniture.
+  row.append(amount, ...(kind === 'duration' ? [units] : []));
 
   const actions = document.createElement('div');
   actions.className = 'board-controls';

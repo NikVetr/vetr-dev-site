@@ -387,5 +387,11 @@
   "board.notAnAmount": "შეიყვანეთ მთელი რიცხვი",
   "beacon.help": "მიშველეთ",
   "beacon.sos": "SOS",
-  "beacon.dismiss": "შეწყვეტისთვის შეეხეთ ნებისმიერ ადგილს"
+  "beacon.dismiss": "შეწყვეტისთვის შეეხეთ ნებისმიერ ადგილს",
+  "board.atTime": "ზუსტი დრო…",
+  "board.otherNumber": "რიცხვი…",
+  "board.time": "დრო",
+  "board.number": "რიცხვი",
+  "board.notATime": "აირჩიეთ დრო",
+  "board.notANumber": "შეიყვანეთ მთელი რიცხვი"
 }

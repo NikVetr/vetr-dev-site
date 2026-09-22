@@ -387,5 +387,11 @@
   "board.notAnAmount": "Masukkan nombor bulat",
   "beacon.help": "Tolong",
   "beacon.sos": "SOS",
-  "beacon.dismiss": "Ketik di mana-mana untuk berhenti"
+  "beacon.dismiss": "Ketik di mana-mana untuk berhenti",
+  "board.atTime": "Pukul…",
+  "board.otherNumber": "Nombor…",
+  "board.time": "Masa",
+  "board.number": "Nombor",
+  "board.notATime": "Pilih masa",
+  "board.notANumber": "Masukkan nombor bulat"
 }

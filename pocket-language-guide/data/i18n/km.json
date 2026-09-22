@@ -387,5 +387,11 @@
   "board.notAnAmount": "សូមបញ្ចូលជាលេខគត់",
   "beacon.help": "ជួយ",
   "beacon.sos": "SOS",
-  "beacon.dismiss": "សូមចុចកន្លែងណាមួយដើម្បីបញ្ឈប់"
+  "beacon.dismiss": "សូមចុចកន្លែងណាមួយដើម្បីបញ្ឈប់",
+  "board.atTime": "ម៉ោងជាក់លាក់…",
+  "board.otherNumber": "លេខ…",
+  "board.time": "ម៉ោង",
+  "board.number": "លេខ",
+  "board.notATime": "សូមជ្រើសរើសម៉ោង",
+  "board.notANumber": "សូមបញ្ចូលជាលេខគត់"
 }

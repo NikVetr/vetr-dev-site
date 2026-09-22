@@ -3,7 +3,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { formatDuration, supports, parseAmount, COMMON_WAITS, UNITS } from '../core/duration.js';
+import { formatDuration, supports, parseAmount, COMMON_WAITS, UNITS } from '../core/quantity.js';
 
 /** Every language the registry calls ready. */
 async function ready() {
@@ -21,15 +21,15 @@ test('plural rules come out right in the languages that have them', () => {
   // with Russian on 22 and not on 5; Arabic has a form for 3-10 of its own. None of
   // this is written down anywhere in this repository -- it is CLDR, which every
   // browser already ships.
-  assert.equal(formatDuration({ amount: 1, unit: 'minute' }, 'ru'), '1 минута');
-  assert.equal(formatDuration({ amount: 2, unit: 'minute' }, 'ru'), '2 минуты');
-  assert.equal(formatDuration({ amount: 5, unit: 'minute' }, 'ru'), '5 минут');
-  assert.equal(formatDuration({ amount: 22, unit: 'minute' }, 'pl'), '22 minuty');
-  assert.equal(formatDuration({ amount: 5, unit: 'minute' }, 'pl'), '5 minut');
-  assert.equal(formatDuration({ amount: 1, unit: 'minute' }, 'en'), '1 minute');
-  assert.equal(formatDuration({ amount: 15, unit: 'minute' }, 'en'), '15 minutes');
+  assert.equal(formatDuration({ kind: 'duration', amount: 1, unit: 'minute' }, 'ru'), '1 минута');
+  assert.equal(formatDuration({ kind: 'duration', amount: 2, unit: 'minute' }, 'ru'), '2 минуты');
+  assert.equal(formatDuration({ kind: 'duration', amount: 5, unit: 'minute' }, 'ru'), '5 минут');
+  assert.equal(formatDuration({ kind: 'duration', amount: 22, unit: 'minute' }, 'pl'), '22 minuty');
+  assert.equal(formatDuration({ kind: 'duration', amount: 5, unit: 'minute' }, 'pl'), '5 minut');
+  assert.equal(formatDuration({ kind: 'duration', amount: 1, unit: 'minute' }, 'en'), '1 minute');
+  assert.equal(formatDuration({ kind: 'duration', amount: 15, unit: 'minute' }, 'en'), '15 minutes');
   // Mandarin has no plural and no space; the formatter knows that too.
-  assert.equal(formatDuration({ amount: 15, unit: 'minute' }, 'zh-Hans'), '15分钟');
+  assert.equal(formatDuration({ kind: 'duration', amount: 15, unit: 'minute' }, 'zh-Hans'), '15分钟');
 });
 
 test('every ready language can say a duration, or is refused by name', async () => {
@@ -44,7 +44,7 @@ test('every ready language can say a duration, or is refused by name', async () 
 
   for (const code of codes.filter((c) => supports(c))) {
     for (const unit of UNITS) {
-      const said = formatDuration({ amount: 15, unit }, code);
+      const said = formatDuration({ kind: 'duration', amount: 15, unit }, code);
       assert.ok(said && said.length > 1, `${code} could not say 15 ${unit}`);
       // A numeral in *some* script. `\p{Nd}` rather than `\d`, because the
       // formatter uses each locale's own digits where that is the convention --
@@ -61,8 +61,8 @@ test('an unknown language is refused rather than answered in English', () => {
   // substitution this project refuses everywhere else, so it is refused here.
   assert.equal(supports('tlh'), false);
   assert.equal(supports('qya'), false);
-  assert.equal(formatDuration({ amount: 15, unit: 'minute' }, 'tlh'), null);
-  assert.equal(formatDuration({ amount: 15, unit: 'minute' }, 'qya'), null);
+  assert.equal(formatDuration({ kind: 'duration', amount: 15, unit: 'minute' }, 'tlh'), null);
+  assert.equal(formatDuration({ kind: 'duration', amount: 15, unit: 'minute' }, 'qya'), null);
   // A malformed tag throws inside `Intl`; it must come back as "no", not as a crash.
   assert.equal(supports('not a tag'), false);
 });
@@ -75,7 +75,7 @@ test('the offered waits are answers someone would actually give', () => {
 });
 
 test('a typed amount is read strictly, because it is shown to a stranger as fact', () => {
-  assert.deepEqual(parseAmount('20', 'minute'), { ok: true, duration: { amount: 20, unit: 'minute' } });
+  assert.deepEqual(parseAmount('20', 'minute'), { ok: true, value: { kind: 'duration', amount: 20, unit: 'minute' } });
   // Everything a keypad will happily produce that is not an answer.
   assert.equal(parseAmount('', 'minute').ok, false);
   assert.equal(parseAmount('  ', 'minute').ok, false);
@@ -98,7 +98,8 @@ test('a typed amount is read strictly, because it is shown to a stranger as fact
 test('the same value reads correctly to both people at once', () => {
   // The point of keeping it structured: one value, two languages, no round trip
   // through anybody's prose.
-  const wait = { amount: /** @type {number} */ (30), unit: /** @type {const} */ ('minute') };
+  const wait = /** @type {import('../core/quantity.js').Duration} */ (
+    { kind: 'duration', amount: 30, unit: 'minute' });
   assert.equal(formatDuration(wait, 'zh-Hans'), '30分钟');
   assert.equal(formatDuration(wait, 'en'), '30 minutes');
   assert.equal(formatDuration(wait, 'ru'), '30 минут');

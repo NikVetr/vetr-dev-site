@@ -387,5 +387,11 @@
   "board.notAnAmount": "Ilagay ang buong numero",
   "beacon.help": "Tulong",
   "beacon.sos": "SOS",
-  "beacon.dismiss": "Pindutin ang kahit saan para tumigil"
+  "beacon.dismiss": "Pindutin ang kahit saan para tumigil",
+  "board.atTime": "Tiyak na oras…",
+  "board.otherNumber": "Numero…",
+  "board.time": "Oras",
+  "board.number": "Numero",
+  "board.notATime": "Pumili ng oras",
+  "board.notANumber": "Ilagay ang buong numero"
 }

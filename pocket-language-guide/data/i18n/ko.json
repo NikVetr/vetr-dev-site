@@ -387,5 +387,11 @@
   "board.notAnAmount": "정수를 입력하세요",
   "beacon.help": "도와주세요",
   "beacon.sos": "SOS",
-  "beacon.dismiss": "아무 곳이나 누르면 멈춰요"
+  "beacon.dismiss": "아무 곳이나 누르면 멈춰요",
+  "board.atTime": "시각 지정…",
+  "board.otherNumber": "숫자 입력…",
+  "board.time": "시각",
+  "board.number": "숫자",
+  "board.notATime": "시각을 고르세요",
+  "board.notANumber": "정수를 입력하세요"
 }

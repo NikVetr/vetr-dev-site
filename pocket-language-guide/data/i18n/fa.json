@@ -387,5 +387,11 @@
   "board.unit": "دقیقه، ساعت یا روز",
   "board.otherAmount": "مقدار دیگر…",
   "board.confirm": "تأیید",
-  "board.notAnAmount": "یک عدد صحیح وارد کنید"
+  "board.notAnAmount": "یک عدد صحیح وارد کنید",
+  "board.atTime": "ساعت مشخص…",
+  "board.otherNumber": "یک عدد…",
+  "board.time": "چه ساعتی",
+  "board.number": "عدد",
+  "board.notATime": "ساعت را انتخاب کنید",
+  "board.notANumber": "یک عدد صحیح وارد کنید"
 }

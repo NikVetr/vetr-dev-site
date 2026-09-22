@@ -1976,7 +1976,7 @@ exist and to price every proposal against the board index's own reach computatio
 All three re-implemented that computation rather than trusting a description of it,
 which is why the numbers below are measured.
 
-**The finding under the finding: 115 of 168 buttons can now be answered, against
+**The finding under the finding: 116 of 168 buttons can now be answered, against
 about 30 before.** The boards were built as a way to *say* things and the reply sets
 were retrofitted, so the pattern was systematic rather than a handful of bad fits:
 
@@ -2052,9 +2052,9 @@ that follow were silently possible, and one of them I shipped for a few minutes.
 shipped boards rather than only a fixture, and the dead `pairs` field — superseded by
 the computed index and still sitting in all eight files — is gone.
 
-### What all three audits independently asked for, and did not get
+### What all three audits independently asked for — now done
 
-**There is no way to answer with a number.** `entry` accepts `'duration'` and nothing
+**There was no way to answer with a number.** `entry` accepts `'duration'` and nothing
 else, and `value` is minute/hour/day — so a clock time, a platform number and a price
 are all unrepresentable. That is why `time`'s *What time is it?* has no reply set, why
 `shopping`'s *How much is this?* gets a set that can only promise to write the price
@@ -2104,3 +2104,48 @@ the single largest remaining gap in the format.
   new and handles India naming twelve of them. An American browser in Tokyo now reads
   `話せる言語` behind `I speak`, and it survives to the phone, where there is room for
   exactly the two guesses and nothing else.
+
+### Three kinds of number
+
+`core/duration.js` is `core/quantity.js`, which is what its own first line always
+called it: *answers that are a quantity, not a sentence*. It now holds three.
+
+- **`clock`** — a time of day. The gap that produced a *wrong* answer rather than a
+  missing one: asked "what time does it open?" at eight in the morning, the only
+  substantive cell in the answer space was *It is closed*.
+- **`count`** — a bare number. A platform, a price, a how-many. `numbers-money` holds
+  single digits and magnitudes and a price is not spellable one tap at a time, so
+  "how much is this?" had nothing but a promise to write it down.
+- **`duration`** — unchanged, and now tagged like the other two.
+
+None of the three costs a translation, which is the whole reason a keypad is worth
+having here: `Intl` knows a locale's plural rules, whether it writes twelve- or
+twenty-four-hour clocks, and which digits it uses. Klingon and Quenya are refused for
+all three, as they already were for durations — `null` rather than an English time on
+a Klingon screen.
+
+**The clock is asked for with `<input type="time">`.** The platform's own picker knows
+this reader's convention and hands back one unambiguous `HH:MM` whatever it displayed;
+two text fields would be a worse control in every locale and a differently worse one in
+each. Measured: a Mandarin listener types into their own 24-hour control, the preview
+reads `14:30`, and the English owner reads `2:30 PM` off the same structured value.
+
+Three things had to change beyond the formatter.
+
+**Values are tagged.** `{amount, unit}` became `{kind: 'duration', amount, unit}`, and
+the eighteen presets in the board files with it. The alternative was discriminating on
+which fields a value happens to carry, which is the kind of implicitness that reads
+fine until somebody adds a fourth kind.
+
+**The parsers return one shape.** `parseAmount` returned `{ok, duration}`, and adding
+`{ok, clock}` and `{ok, count}` beside it made the caller's type a union it could not
+express — a signal the shape was wrong rather than the caller. All three return
+`{ok, value}` now, and `renderEntry`'s `check` hands back the value it parsed instead
+of the view re-deriving it from the raw string, which was two parsers keeping a private
+agreement about what a number is.
+
+**`enter` carries which keypad was tapped.** A set may offer two: `how-soon` answers a
+departure in minutes from now *or* at a time, which is two cells opening two different
+keyboards. The reducer recorded only that a keypad had been opened, so the first
+version rendered a duration pad for the clock cell — and the tell was that the cell
+said *Another duration* either way.

@@ -387,5 +387,11 @@
   "board.notAnAmount": "Ange ett heltal",
   "beacon.help": "HJÄLP",
   "beacon.sos": "SOS",
-  "beacon.dismiss": "Tryck var som helst för att stoppa"
+  "beacon.dismiss": "Tryck var som helst för att stoppa",
+  "board.atTime": "Klockslag…",
+  "board.otherNumber": "Ett tal…",
+  "board.time": "Klockslag",
+  "board.number": "Tal",
+  "board.notATime": "Välj ett klockslag",
+  "board.notANumber": "Ange ett heltal"
 }

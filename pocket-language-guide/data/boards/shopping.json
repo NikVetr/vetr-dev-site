@@ -380,6 +380,11 @@
     "price": {
       "buttons": [
         {
+          "id": "amount",
+          "kind": "entry",
+          "entry": "count"
+        },
+        {
           "id": "i-will-write-it-down",
           "kind": "message",
           "phraseRef": {

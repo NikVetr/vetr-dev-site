@@ -1312,3 +1312,140 @@ test('the SOS screen has nothing in the middle of it', async ({ page }) => {
   expect(await word.evaluate((el) => Math.round(el.getBoundingClientRect().width)))
     .toBeGreaterThan(100);
 });
+
+test('a time of day and a bare number are answers, not only a duration', async ({ page }) => {
+  // **The gap all three tree audits found independently.** With only a duration to
+  // offer, the answer space for "what time does it open?" contained no time at all --
+  // its one substantive cell was "It is closed", so at eight in the morning the owner
+  // read back a false statement when the answer was "opens at ten". A price and a
+  // platform number were unsayable for the same reason. None of the three needs a
+  // translation: CLDR formats all of them, which is why a keypad is worth having
+  // where a phrase would cost fifty-one rows.
+  await page.setViewportSize({ width: 390, height: 844 });
+
+  /** @param {string} board @param {string} button */
+  const keypad = async (board, button) => {
+    await page.goto(`/conversation.html?target=zh-Hans&source=en&board=${board}`);
+    await expect(page.locator('.board-cell').first()).toBeVisible();
+    await page.locator(`[data-button="${button}"]`).click();
+    await page.locator(EXCHANGE).first().click();
+    await expect(page.locator('.board-answer').first()).toBeVisible();
+  };
+
+  // A clock, asked for with the platform's own control: it knows this reader's
+  // convention, and hands back one unambiguous `HH:MM` whatever it displayed.
+  await keypad('time', 'now');
+  await page.locator('.board-answer-entry').click();
+  const field = page.locator('.board-entry-amount');
+  await expect(field).toHaveAttribute('type', 'time');
+  // No unit buttons: a time of day is one thing, and three greyed cells beside it
+  // would be furniture.
+  await expect(page.locator('.board-entry-units')).toHaveCount(0);
+  await field.fill('14:30');
+  // The listener sees their own convention...
+  await expect(page.locator('.board-entry-preview')).toHaveText('14:30');
+  await page.locator('.board-entry-confirm').click();
+  // ...and the owner reads theirs, from the same structured value.
+  await expect(page.locator('.board-message-text')).toHaveText('2:30 PM');
+
+  // A bare number, for a price. Same keypad shape, no units.
+  await keypad('shopping', 'howmuch');
+  await page.locator('.board-answer-entry').click();
+  await expect(page.locator('.board-entry-units')).toHaveCount(0);
+  await page.locator('.board-entry-amount').fill('250');
+  await expect(page.locator('.board-entry-preview')).toHaveText('250');
+  await page.locator('.board-entry-confirm').click();
+  await expect(page.locator('.board-message-text')).toHaveText('250');
+
+  // A duration still has its units, and still refuses what is not one.
+  await keypad('time', 'wait');
+  await page.locator('.board-answer-entry').click();
+  await expect(page.locator('.board-entry-units')).toHaveCount(1);
+  await page.locator('.board-entry-amount').fill('25');
+  await expect(page.locator('.board-entry-preview')).toHaveText('25分钟');
+  await page.locator('.board-entry-amount').fill('-3');
+  await expect(page.locator('.board-entry-confirm')).toBeDisabled();
+
+  // **Two keypads in one set, which is why the action carries which one was tapped.**
+  // A departure is answered in minutes from now or at a time, and those are two cells
+  // opening two different keyboards.
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=transport');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('[data-button="station"]').click();
+  await page.locator('[data-button="nextone"]').click();
+  await page.locator(EXCHANGE).first().click();
+  const entries = page.locator('.board-answer-entry');
+  await expect(entries).toHaveCount(2);
+  await entries.last().click();
+  await expect(page.locator('.board-entry-amount')).toHaveAttribute('type', 'time');
+});
+
+test('Reply is the one control drawn for the stranger, and the answers fit sideways', async ({ page }) => {
+  // Two things a phone showed. **Reply was one outlined control among three**, though
+  // it is the only one on the screen addressed to the person being handed the phone —
+  // who has a second to work out that a screen in their own language can be answered.
+  // And **the answers had no fitter**: their size was a `vw` clamp, blind to how much
+  // text a cell holds and to how tall the screen is, so held sideways it resolved to
+  // 33px and drew `这里面没有我想说的` out through the bottom of its own button.
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=directions');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('[data-button="which-way"]').click();
+
+  const reply = page.locator('.board-reply');
+  const turn = page.locator('.board-turn');
+  const shape = await reply.evaluate((el) => ({
+    px: Number.parseFloat(getComputedStyle(el).fontSize),
+    weight: getComputedStyle(el).fontWeight,
+    filled: getComputedStyle(el).backgroundColor,
+    arrow: (el.querySelector('.board-reply-arrow')?.textContent ?? '').trim(),
+  }));
+  expect(shape.weight).toBe('700');
+  expect(shape.arrow).toBe('→');
+  // Larger than the control beside it, and filled where that one is outlined.
+  expect(shape.px).toBeGreaterThan(
+    await turn.evaluate((el) => Number.parseFloat(getComputedStyle(el).fontSize)));
+  expect(shape.filled).not.toBe('rgba(0, 0, 0, 0)');
+
+  // The arrow is a glyph, so it gets no bidi treatment and is turned over by hand.
+  await page.goto('/conversation.html?target=ar&source=en&board=directions');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('[data-button="which-way"]').click();
+  await expect(page.locator('.board-reply')).toHaveAttribute('dir', 'rtl');
+  expect(await page.locator('.board-reply-arrow')
+    .evaluate((el) => getComputedStyle(el).transform)).not.toBe('none');
+
+  // Sideways: no answer overflows its own button, and the grid uses the width it has
+  // rather than leaving a short last row and a scroll.
+  await page.setViewportSize({ width: 740, height: 360 });
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=directions');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('[data-button="which-way"]').click();
+  await page.locator('.board-reply').click();
+  await expect(page.locator('.board-answer').first()).toBeVisible();
+  const grid = await page.evaluate(() => {
+    const list = /** @type {HTMLElement} */ (document.querySelector('.board-answers'));
+    const cells = [...document.querySelectorAll('.board-answer')];
+    let spill = 0;
+    for (const cell of cells) {
+      const range = document.createRange();
+      range.selectNodeContents(/** @type {Node} */ (cell.querySelector('.board-answer-label')));
+      const box = cell.getBoundingClientRect();
+      for (const ink of range.getClientRects()) {
+        if (!ink.height) continue;
+        spill = Math.max(spill, box.top - ink.top, ink.bottom - box.bottom,
+          box.left - ink.left, ink.right - box.right);
+      }
+    }
+    return {
+      spill: Math.round(spill),
+      scrolls: list.scrollHeight - list.clientHeight,
+      columns: new Set(cells.map((c) => Math.round(c.getBoundingClientRect().left))).size,
+    };
+  });
+  expect(grid.spill).toBeLessThanOrEqual(0);
+  expect(grid.scrolls).toBe(0);
+  // Ten answers across a 740px screen: five columns and two full rows, not four and
+  // a row of two.
+  expect(grid.columns).toBeGreaterThanOrEqual(5);
+});

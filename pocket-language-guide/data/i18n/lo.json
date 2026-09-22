@@ -387,5 +387,11 @@
   "board.notAnAmount": "ກະລຸນາປ້ອນເລກຈຳນວນເຕັມ",
   "beacon.help": "ຊ່ວຍດ້ວຍ",
   "beacon.sos": "SOS",
-  "beacon.dismiss": "ແຕະບ່ອນໃດກໍໄດ້ເພື່ອຢຸດ"
+  "beacon.dismiss": "ແຕະບ່ອນໃດກໍໄດ້ເພື່ອຢຸດ",
+  "board.atTime": "ເວລາ…",
+  "board.otherNumber": "ຕົວເລກ…",
+  "board.time": "ເວລາ",
+  "board.number": "ຕົວເລກ",
+  "board.notATime": "ກະລຸນາເລືອກເວລາ",
+  "board.notANumber": "ກະລຸນາປ້ອນເລກຈຳນວນເຕັມ"
 }
