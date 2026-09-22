@@ -3,9 +3,6 @@
   "id": "directions",
   "titleKey": "boards.directions.title",
   "rootNodeId": "main",
-  "pairs": [
-    "zh-Hans__en"
-  ],
   "nodes": {
     "main": {
       "buttons": [
@@ -27,7 +24,7 @@
             "id": "directions.where-am-i"
           },
           "colour": "move",
-          "replySetId": "which-way"
+          "replySetId": "where-am-i"
         },
         {
           "id": "toilet",
@@ -37,7 +34,7 @@
             "id": "toilets.where-toilet"
           },
           "colour": "move",
-          "replySetId": "which-way"
+          "replySetId": "where-toilet"
         },
         {
           "id": "far",
@@ -47,7 +44,7 @@
             "id": "directions.is-it-far"
           },
           "colour": "move",
-          "replySetId": "yes-no"
+          "replySetId": "far"
         },
         {
           "id": "onfoot",
@@ -86,7 +83,7 @@
             "id": "directions.can-you-show-me-the-way"
           },
           "colour": "move",
-          "replySetId": "yes-no"
+          "replySetId": "show-way"
         },
         {
           "id": "exit",
@@ -95,7 +92,8 @@
             "kind": "corpus",
             "id": "directions.which-exit"
           },
-          "colour": "move"
+          "colour": "move",
+          "replySetId": "which-exit"
         },
         {
           "id": "slowly",
@@ -249,11 +247,11 @@
     "how-long": {
       "buttons": [
         {
-          "id": "nowait",
+          "id": "across-from-here",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "board-answers.there-is-no-wait"
+            "id": "quick-directions.across-from-here"
           }
         },
         {
@@ -308,6 +306,362 @@
           "id": "other",
           "kind": "entry",
           "entry": "duration"
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "which-exit": {
+      "buttons": [
+        {
+          "id": "east",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "directions.east"
+          }
+        },
+        {
+          "id": "west",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "directions.west"
+          }
+        },
+        {
+          "id": "north",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "directions.north"
+          }
+        },
+        {
+          "id": "south",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "directions.south"
+          }
+        },
+        {
+          "id": "this-way",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.this-way"
+          }
+        },
+        {
+          "id": "i-will-show-you",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-show-you"
+          }
+        },
+        {
+          "id": "i-will-write-it-down",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-write-it-down"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "where-toilet": {
+      "buttons": [
+        {
+          "id": "go-straight",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.go-straight"
+          }
+        },
+        {
+          "id": "turn-left",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.turn-left"
+          }
+        },
+        {
+          "id": "turn-right",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.turn-right"
+          }
+        },
+        {
+          "id": "this-way",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.this-way"
+          }
+        },
+        {
+          "id": "on-the-left",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.on-the-left"
+          }
+        },
+        {
+          "id": "on-the-right",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.on-the-right"
+          }
+        },
+        {
+          "id": "i-will-show-you",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-show-you"
+          }
+        },
+        {
+          "id": "we-do-not-have-it",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.we-do-not-have-it"
+          }
+        },
+        {
+          "id": "out-of-order",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "toilets.it-is-out-of-order"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "far": {
+      "buttons": [
+        {
+          "id": "yes-right",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.yes-right"
+          }
+        },
+        {
+          "id": "no-not",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.no-not"
+          }
+        },
+        {
+          "id": "across-from-here",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.across-from-here"
+          }
+        },
+        {
+          "id": "a-little",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "question-words.a-little"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "show-way": {
+      "buttons": [
+        {
+          "id": "i-will-show-you",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-show-you"
+          }
+        },
+        {
+          "id": "yes-right",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.yes-right"
+          }
+        },
+        {
+          "id": "no-not",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.no-not"
+          }
+        },
+        {
+          "id": "not-possible",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.not-possible"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "i-will-find-someone",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-find-someone"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "where-am-i": {
+      "buttons": [
+        {
+          "id": "show-me-on-the-map",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "directions.please-show-me-on-the-map"
+          }
+        },
+        {
+          "id": "we-are-here",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "lost-rescue.we-are-here"
+          }
+        },
+        {
+          "id": "i-will-write-it-down",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-write-it-down"
+          }
+        },
+        {
+          "id": "i-will-show-you",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-show-you"
+          }
+        },
+        {
+          "id": "i-will-find-someone",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-find-someone"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
         },
         {
           "id": "i-do-not-know",

@@ -121,13 +121,62 @@ export function renderGrid(root, node, { label, available, onPick, lang, title }
  * @param {HTMLElement} el
  */
 function widestLine(el) {
+  let widest = 0;
+  for (const rect of lineRects(el)) if (rect.width > widest) widest = rect.width;
+  return widest;
+}
+
+/**
+ * The line boxes the text actually occupies, in order.
+ *
+ * A `Range` over the element's contents rather than the element's own box: the box is
+ * as wide as its container and says nothing about where the ink went. Zero-height
+ * rects are the collapsed ones a range reports at its edges.
+ * @param {HTMLElement} el
+ */
+function lineRects(el) {
   const range = document.createRange();
   range.selectNodeContents(el);
-  let widest = 0;
-  for (const rect of range.getClientRects()) {
-    if (rect.height > 0 && rect.width > widest) widest = rect.width;
-  }
-  return widest;
+  return [...range.getClientRects()].filter((rect) => rect.height > 0);
+}
+
+/** Scripts whose characters are all one width, so that columns can be aligned. */
+const SQUARE = /^[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}\p{P}\p{Zs}]+$/u;
+
+/**
+ * Where every character is the same width, align the characters rather than the lines.
+ *
+ * **Reported from a phone, and it is a real defect of centred text.** `救命！` set
+ * large enough to wrap breaks as `救` / `命！`, because no line may begin with a
+ * closing mark. Centre each line and the `救` sits on the screen's midline while the
+ * `命` is pushed half a character to the left of it by the `！` on its right — two
+ * characters that should be a column, visibly out of line.
+ *
+ * The fix is the one the owner described: align the lines to each other and centre the
+ * *block*, so the characters form a column and the punctuation is what sits off to the
+ * side. That needs the block to be as wide as its widest line, which is not a width
+ * CSS can name — `fit-content` on a Han string resolves to the full container, since
+ * the text can break between any two characters. So the width is measured here.
+ *
+ * **Only for scripts where it means anything.** Han, kana and Hangul are drawn on a
+ * fixed em square, so equal line lengths really are aligned columns. Latin is
+ * proportional: aligning the lines there would buy a ragged right edge and no column,
+ * which is why the test is on the text rather than on a setting. And nothing happens
+ * when the lines are already the same length -- a full grid of characters is balanced
+ * however it is aligned.
+ *
+ * Narrowing the box cannot cause an overflow: every line already fitted the width
+ * being set, because that width *is* one of the lines.
+ * @param {HTMLElement} text
+ */
+function alignColumns(text) {
+  text.style.inlineSize = '';
+  text.classList.remove('board-text-columns');
+  if (!SQUARE.test(text.textContent ?? '')) return;
+  const widths = lineRects(text).map((rect) => rect.width);
+  if (widths.length < 2 || Math.max(...widths) - Math.min(...widths) < 1) return;
+  text.style.inlineSize = `${Math.ceil(Math.max(...widths))}px`;
+  text.classList.add('board-text-columns');
 }
 
 /**
@@ -169,12 +218,14 @@ function answerMark() {
   svg.setAttribute('viewBox', '0 0 256 208');
   svg.setAttribute('aria-hidden', 'true');
   // The lower bubble is drawn in front and knocks a gap out of the upper one, so the
-  // two read as separate at 14px instead of merging into a blob.
+  // two read as separate rather than merging into a blob. The gap is wide -- 18 units
+  // of a 256-unit drawing -- because at 12% opacity behind a word there is no tonal
+  // difference between the two shapes to separate them, only the space.
   const defs = document.createElementNS(SVG, 'defs');
   defs.innerHTML = `<path id="plg-b-up" d="${UPPER}"/><path id="plg-b-lo" d="${LOWER}"/>`
     + '<mask id="plg-b-cut" maskUnits="userSpaceOnUse" x="0" y="0" width="256" height="208">'
     + '<rect width="256" height="208" fill="white"/>'
-    + '<use href="#plg-b-lo" fill="black" stroke="black" stroke-width="10" stroke-linejoin="round"/>'
+    + '<use href="#plg-b-lo" fill="black" stroke="black" stroke-width="18" stroke-linejoin="round"/>'
     + '</mask>';
   svg.append(defs);
   svg.insertAdjacentHTML('beforeend',
@@ -417,15 +468,12 @@ export function renderMessage(stage, phrase,
     reply.addEventListener('click', onReply);
     controls.append(reply);
   }
+  controls.append(turnControl(stage, surface, big));
   // A sibling of the surface, never a child: a button inside a button is invalid,
   // and being a sibling is what structurally stops a control's click reaching the
-  // dismiss handler.
-  if (controls.childElementCount) stage.append(controls, trouble);
-  // In the margin, and not in that row: Speak and Reply are part of the exchange and
-  // this is a control over how the screen is drawn. It is also the only one of the
-  // three that is always there, so keeping it separate is what lets a message with
-  // nothing to say back have no controls at all.
-  stage.append(turnControl(stage, surface, big));
+  // dismiss handler. The row is always drawn now, because the turn control is always
+  // in it -- Speak and Reply are the two that come and go.
+  stage.append(controls, trouble);
 
   watchMessage(big, surface);
   surface.focus();
@@ -449,7 +497,10 @@ let turned = false;
  * with the screen's long axis unused. Turning it is worth roughly double the type
  * size — but which way round the phone should be is the owner's call, made in front
  * of the person they are showing it to, so it is a button and not a measurement. A
- * semicircular arrow says "turn this" in no language.
+ * circling arrow says "turn this" in no language: three quarters of a turn rather
+ * than a half, because a half-circle with a head on it reads as "undo", and the head
+ * is a solid triangle whose tip carries past where the stroke stops, so the direction
+ * survives being drawn at 22 pixels.
  *
  * @param {HTMLElement} stage @param {HTMLElement} surface @param {HTMLElement} text
  */
@@ -463,12 +514,11 @@ function turnControl(stage, surface, text) {
   const svg = document.createElementNS(SVG, 'svg');
   svg.setAttribute('viewBox', '0 0 24 24');
   svg.setAttribute('aria-hidden', 'true');
-  svg.setAttribute('fill', 'none');
-  svg.setAttribute('stroke', 'currentColor');
-  svg.setAttribute('stroke-width', '2');
-  svg.setAttribute('stroke-linecap', 'round');
-  svg.setAttribute('stroke-linejoin', 'round');
-  svg.innerHTML = '<path d="M5 14a7 7 0 0 1 14 0"/><path d="M15.8 11.6 19 14.8l3.2-3.2"/>';
+  // Nine o'clock round clockwise to six, and the head is its own filled path: a
+  // stroked chevron at this size merges with the arc it sits on.
+  svg.innerHTML = '<path d="M5 11A7 7 0 1 1 13.4 17.6" fill="none" stroke="currentColor"'
+    + ' stroke-width="2" stroke-linecap="round"/>'
+    + '<path d="M13.6 14 13.6 21.2 7.2 17.6Z" fill="currentColor"/>';
   button.append(svg);
   stage.classList.toggle('board-stage-turned', turned);
   button.addEventListener('click', () => {
@@ -610,6 +660,11 @@ export function fitMessage(text, box) {
     const stage = box.parentElement?.classList.contains('board-stage-turned')
       ? box.parentElement : null;
     if (stage) stage.style.rotate = 'none';
+    // Both undone before measuring: a box narrowed to its own widest line is a box
+    // that reports its own ink as the room available, which is the measurement the
+    // width test exists to avoid.
+    text.style.inlineSize = '';
+    text.classList.remove('board-text-columns');
     text.style.fontSize = '';
     let size = Number.parseFloat(getComputedStyle(text).fontSize);
     // **Both axes, and the second one is the bug this was written to fix.** The test
@@ -660,6 +715,7 @@ export function fitMessage(text, box) {
       }
     }
     box.classList.toggle('board-message-scrolls', box.scrollHeight > box.clientHeight + 1);
+    alignColumns(text);
     if (stage) stage.style.rotate = '';
   };
   run();

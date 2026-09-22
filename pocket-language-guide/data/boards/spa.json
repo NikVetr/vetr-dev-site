@@ -3,9 +3,6 @@
   "id": "spa",
   "titleKey": "boards.spa.title",
   "rootNodeId": "main",
-  "pairs": [
-    "zh-Hans__en"
-  ],
   "nodes": {
     "main": {
       "buttons": [
@@ -16,7 +13,8 @@
             "kind": "corpus",
             "id": "massage-spa.stronger-pressure"
           },
-          "colour": "comm"
+          "colour": "comm",
+          "replySetId": "adjust"
         },
         {
           "id": "gentler",
@@ -25,7 +23,8 @@
             "kind": "corpus",
             "id": "massage-spa.more-gently"
           },
-          "colour": "comm"
+          "colour": "comm",
+          "replySetId": "adjust"
         },
         {
           "id": "just-right",
@@ -44,7 +43,8 @@
             "kind": "corpus",
             "id": "emergency-medical.it-hurts-here"
           },
-          "colour": "alert"
+          "colour": "alert",
+          "replySetId": "avoid-area"
         },
         {
           "id": "avoid",
@@ -88,7 +88,8 @@
             "kind": "corpus",
             "id": "hotel-requests.another-towel-please"
           },
-          "colour": "stay"
+          "colour": "stay",
+          "replySetId": "fetch"
         },
         {
           "id": "thanks",
@@ -112,7 +113,8 @@
             "id": "massage-spa.focus-on-shoulders"
           },
           "colour": "move",
-          "labelKey": "boards.body.shoulders"
+          "labelKey": "boards.body.shoulders",
+          "replySetId": "adjust"
         },
         {
           "id": "back",
@@ -122,7 +124,8 @@
             "id": "massage-spa.focus-on-back"
           },
           "colour": "move",
-          "labelKey": "boards.body.back"
+          "labelKey": "boards.body.back",
+          "replySetId": "adjust"
         },
         {
           "id": "neck",
@@ -132,7 +135,8 @@
             "id": "massage-spa.focus-on-neck"
           },
           "colour": "move",
-          "labelKey": "boards.body.neck"
+          "labelKey": "boards.body.neck",
+          "replySetId": "adjust"
         },
         {
           "id": "feet",
@@ -142,7 +146,8 @@
             "id": "massage-spa.focus-on-feet"
           },
           "colour": "move",
-          "labelKey": "boards.body.feet"
+          "labelKey": "boards.body.feet",
+          "replySetId": "adjust"
         },
         {
           "id": "gentler",
@@ -151,7 +156,8 @@
             "kind": "corpus",
             "id": "massage-spa.more-gently"
           },
-          "colour": "comm"
+          "colour": "comm",
+          "replySetId": "adjust"
         },
         {
           "id": "stop",
@@ -213,7 +219,111 @@
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "massage-spa.reply-none-of-these"
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "adjust": {
+      "buttons": [
+        {
+          "id": "okay-can",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.okay-can"
+          }
+        },
+        {
+          "id": "which-area",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "massage-spa.reply-which-area-exactly"
+          }
+        },
+        {
+          "id": "does-it-hurt",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "massage-spa.reply-does-it-hurt-there"
+          }
+        },
+        {
+          "id": "not-possible",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.not-possible"
+          }
+        },
+        {
+          "id": "ask-supervisor",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "massage-spa.reply-ask-supervisor"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "fetch": {
+      "buttons": [
+        {
+          "id": "okay-can",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.okay-can"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "we-do-not-have-it",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.we-do-not-have-it"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
           }
         }
       ]

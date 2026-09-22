@@ -339,3 +339,37 @@ test('the keypad cannot be opened from anywhere but the answers', () => {
   s = reduce(s, { type: 'open', buttonId: 'hurts', kind: 'message' });
   assert.deepEqual(reduce(s, { type: 'enter' }), s);
 });
+
+test('a reply set nothing offers, and a button offering nothing, are both reported', () => {
+  // **Both were silent, and one of them shipped.** The reachability walk only ever
+  // looked at nodes, because a reply set is reached from a message rather than from
+  // the grid -- so a button naming a set that does not exist drew a Reply control that
+  // opened nothing, and a set nothing named was worse than dead: the board index
+  // charges the board for every phrase in a set, so an orphan quietly costs the board
+  // the languages that cannot say answers nobody can reach.
+  const orphaned = structuredClone(board);
+  orphaned.replySets = { ...orphaned.replySets, ghost: { buttons: [
+    { id: 'x', kind: 'message', phraseRef: { kind: 'corpus', id: 'a.stop' } },
+  ] } };
+  assert.ok(validateBoard(orphaned).some((p) => p.includes('replySets/ghost: no button offers it')),
+    validateBoard(orphaned).join('; '));
+
+  const dangling = structuredClone(board);
+  dangling.nodes.main.buttons[0].replySetId = 'nope';
+  assert.ok(validateBoard(dangling).some((p) => p.includes('is not a reply set')),
+    validateBoard(dangling).join('; '));
+});
+
+test('every shipped board is sound, and its reply sets all connect', async () => {
+  // The eight boards themselves, not a fixture: the audit that rewrote them moved
+  // reply sets between buttons by id, and a typo in an id is exactly the mistake the
+  // two rules above exist to catch.
+  const { readdir, readFile } = await import('node:fs/promises');
+  const dir = new URL('../data/boards/', import.meta.url);
+  const files = (await readdir(dir)).filter((f) => f.endsWith('.json') && f !== 'index.json');
+  assert.ok(files.length >= 8, `only ${files.length} boards`);
+  for (const file of files) {
+    const shipped = JSON.parse(await readFile(new URL(file, dir), 'utf8'));
+    assert.deepEqual(validateBoard(shipped), [], file);
+  }
+});

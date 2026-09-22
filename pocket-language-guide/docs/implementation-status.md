@@ -1965,3 +1965,142 @@ version of the warm left it out — which cost precisely the visit it was writte
 fix, with `LoadError: data/lang/de/variants.csv: HTTP 504`. The caller names the
 languages rather than the helper guessing, because the caller has already fetched
 exactly those files.
+
+## Batch J — the answers, and ten things from looking at it again
+
+### Three Opus audits of the conversation trees, and what they found
+
+The report was *"sometimes the responses do not quite make sense"*. Three agents took
+the eight boards between them, each told to name fixes as concept ids that already
+exist and to price every proposal against the board index's own reach computation.
+All three re-implemented that computation rather than trusting a description of it,
+which is why the numbers below are measured.
+
+**The finding under the finding: 115 of 168 buttons can now be answered, against
+about 30 before.** The boards were built as a way to *say* things and the reply sets
+were retrofitted, so the pattern was systematic rather than a handful of bad fits:
+
+- **`food` had thirteen silent buttons**, including all eight allergen instructions.
+  The owner showed "No peanuts" and the waiter had no way to say yes, no, or "I will
+  ask the kitchen" — on the board where that answer matters most. One `kitchen` set of
+  seven existing ids covers all thirteen, and `board-answers.we-do-not-have-it`'s own
+  concept note turns out to have been written for exactly this ("the shopkeeper's *or
+  kitchen's* negative answer").
+- **`time`'s `when` set could not say a time.** Asked "what time does it open?" at
+  eight in the morning, the only substantive cell was *It is closed* — so the owner
+  read back a **false** statement when the answer was *opens at ten*. That is not a
+  thin answer, it is a wrong one manufactured by the layout.
+- **`Where am I?` offered eight ways to send someone somewhere.** A stranger asked
+  where you are wants to name a place or point at a map; the owner got *Turn left* with
+  no destination attached and turned left. The same defect sat on `emergency`'s *I do
+  not know where I am*.
+- **`Help!` offered a set with no way to offer or refuse help.** Two of its four
+  substantive cells were questions back, and a bystander whose true answer was "I am
+  calling an ambulance" could not say it — though that phrase was already on the board.
+- **`It hurts here` on the spa board had no reply at all**, while `avoid-area` — *I
+  will avoid that area* / *which area do you mean?* / *does that area hurt?* — sat one
+  button away. One line.
+- **`yes-no` was offered to questions about the world.** *That is not possible* answers
+  a request and is a non-sequitur against *is it delayed*, *is it far*, *is this
+  vegetarian* — the last of which is the owner's complaint word for word.
+
+**Reach cost of the whole batch: one constructed language on one board.** Every
+concept named is in all 51 natural packs; the only price is Klingon on `directions`,
+taken deliberately to buy `lost-rescue.we-are-here` (the one exact answer to "where am
+I?") and a compass set with all four points rather than two. 52 → 51 listeners there;
+every other board unchanged.
+
+### Depth, where it was actually earned
+
+`emergency` is now three deep: a `conditions` node under `Hurt or ill…` holding the
+twenty-two `medical-conditions` concepts that the twelve-button cap had locked out of
+every board — penicillin and aspirin allergies, an adrenaline injector and where it
+is, blood thinners, epilepsy. Its reader is the one holding the phone out to a
+paramedic, who is stationary; the tap is cheap and the phrases are not reachable any
+other way.
+
+`transport` went from twelve flat buttons to six and three nodes, split by **which
+vehicle you are standing in**. The argument is not tidiness: the board was at the cap
+and therefore closed, while `transit-rides` held five phrases a traveller needs more
+than *Please use the meter* — *where is the subway station*, *do I need to validate
+this*, *I went past my stop*. Nobody is in a taxi *and* at a ticket window, so every
+cell on the screen you land on is one you might press. The three phrases that cannot
+afford a tap — *stop here*, *I am in a hurry*, *take me here* — stay on the root and
+appear again inside the taxi node, which is what `spa` already does with *please stop*.
+
+`food` gained a `contains` node, because `avoid` could only *instruct*: a vegetarian in
+Vietnam needs "does it contain fish stock?" more than "no seafood", and six
+fully-formed, unscoped concepts existed that no board used.
+
+Three boards were told to stay as they were, and that is in the record too:
+`directions` is ten buttons of one situation with no division that is not arbitrary,
+`shopping` is flat and correct, `intro` is a greeting.
+
+### The validator was blind in one direction
+
+Applying the audit, a reply set went in and the button meant to point at it was given
+the wrong id. Nothing caught it: the reachability walk only ever looked at nodes,
+because a reply set is reached from a message rather than from the grid. Both failures
+that follow were silently possible, and one of them I shipped for a few minutes.
+
+- A button naming a set that does not exist draws a Reply control that opens nothing.
+- **A set nothing names is worse than dead.** `build_board_index.mjs` charges the board
+  for every phrase in every set, so an orphan quietly costs the board the languages
+  that cannot say answers no reader can reach.
+
+`validateBoard` now reports both, `tests/conversation.test.mjs` validates all eight
+shipped boards rather than only a fixture, and the dead `pairs` field — superseded by
+the computed index and still sitting in all eight files — is gone.
+
+### What all three audits independently asked for, and did not get
+
+**There is no way to answer with a number.** `entry` accepts `'duration'` and nothing
+else, and `value` is minute/hour/day — so a clock time, a platform number and a price
+are all unrepresentable. That is why `time`'s *What time is it?* has no reply set, why
+`shopping`'s *How much is this?* gets a set that can only promise to write the price
+down, and why a departure has to be answered in minutes-from-now rather than at a
+time. It is a code change rather than a data one, it costs no translation, and it is
+the single largest remaining gap in the format.
+
+### Ten things from looking at the screen again
+
+- **The rotate control is three quarters of a turn, not a half**, with a solid head
+  whose tip carries past where the stroke stops: a half-circle with an arrow on it
+  reads as "undo", and a stroked chevron merges with its own arc at 22 pixels. It sits
+  in the footer row with Speak and Reply now, square where they are words.
+- **The watermark cannot leave its button.** Given a width alone, its height came from
+  the artwork's own 256:208 and a short cell got a watermark taller than itself. With a
+  box in both directions the SVG's own `preserveAspectRatio` letterboxes it inside
+  whatever shape the grid gives it — worst clearance across a dense grid went from
+  extruding to 15px inside. The gap between the two bubbles is nearly twice what it
+  was, because at 12% opacity there is no tonal difference between the shapes to
+  separate them, only the space.
+- **Characters in a square script line up, and the punctuation sits outside them.**
+  `救命！` set large enough to wrap breaks as `救` / `命！`, because no line may begin
+  with a closing mark — and centring each line then puts the `救` on the midline while
+  the `命` is pushed half a character left of it. Aligning the lines to each other and
+  centring the block makes the characters the column and the punctuation the thing off
+  to the side. The block has to be as wide as its widest line, which is not a width CSS
+  can name: `fit-content` on a Han string is the full container, since it can break
+  anywhere. So it is measured. Only for Han, kana and Hangul, which are drawn on an em
+  square — Latin is proportional and aligning it would buy a ragged right edge and no
+  column.
+- **The SOS screen has nothing in the middle of it.** The Morse *is* the message, the
+  middle is the part doing the signalling, and `SOS` is not a word in most of these
+  languages. The word stays in the accessibility tree for the alert to announce, and
+  the one line that is not signal — how to stop it — is at the bottom edge.
+- The travelling light is a third of the screen long and nearly twice as thick: what
+  carries at a distance is the *amount* of moving light.
+- **The context list's buttons lost their dashed borders.** The dash says "this goes
+  deeper rather than saying something", which is information on a mixed grid and noise
+  on a screen where every button is one.
+- **The collage names the language of the place.** It used to say "I speak" in whichever
+  languages sorted first. A browser gives away two things that mean something: the
+  language the device is set to, and — the one that *moves when the reader does* — the
+  timezone. `data/registry/timezones.csv` is generated from IANA's own `zone1970.tab`
+  (public domain, and the reference copy of that mapping, with a shared zone taking its
+  most populous country because that is IANA's own ordering); `languages.csv` already
+  names the regions each language is spoken in, so region to language needs nothing
+  new and handles India naming twelve of them. An American browser in Tokyo now reads
+  `話せる言語` behind `I speak`, and it survives to the phone, where there is room for
+  exactly the two guesses and nothing else.

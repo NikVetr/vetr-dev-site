@@ -3,9 +3,6 @@
   "id": "intro",
   "titleKey": "boards.intro.title",
   "rootNodeId": "main",
-  "pairs": [
-    "zh-Hans__en"
-  ],
   "nodes": {
     "main": {
       "buttons": [
@@ -16,7 +13,8 @@
             "kind": "corpus",
             "id": "social-basics.hello-polite"
           },
-          "colour": "comm"
+          "colour": "comm",
+          "replySetId": "greeting"
         },
         {
           "id": "nospeak",
@@ -25,7 +23,8 @@
             "kind": "corpus",
             "id": "communication.i-do-not-speak-this-language"
           },
-          "colour": "comm"
+          "colour": "comm",
+          "replySetId": "understood"
         },
         {
           "id": "doyou",
@@ -35,7 +34,7 @@
             "id": "communication.do-you-speak-english"
           },
           "colour": "comm",
-          "replySetId": "understood"
+          "replySetId": "speaks"
         },
         {
           "id": "slowly",
@@ -44,7 +43,8 @@
             "kind": "corpus",
             "id": "communication.please-speak-more-slowly"
           },
-          "colour": "comm"
+          "colour": "comm",
+          "replySetId": "understood"
         },
         {
           "id": "write",
@@ -53,7 +53,8 @@
             "kind": "corpus",
             "id": "communication.please-write-it-down"
           },
-          "colour": "comm"
+          "colour": "comm",
+          "replySetId": "understood"
         },
         {
           "id": "dontget",
@@ -82,7 +83,8 @@
             "kind": "corpus",
             "id": "introductions.nice-to-meet-you"
           },
-          "colour": "stay"
+          "colour": "stay",
+          "replySetId": "greeting"
         },
         {
           "id": "yourname",
@@ -91,7 +93,8 @@
             "kind": "corpus",
             "id": "introductions.what-is-your-name"
           },
-          "colour": "stay"
+          "colour": "stay",
+          "replySetId": "understood"
         },
         {
           "id": "sorry",
@@ -100,7 +103,8 @@
             "kind": "corpus",
             "id": "social-basics.excuse-me-sorry"
           },
-          "colour": "stay"
+          "colour": "stay",
+          "replySetId": "courtesy"
         },
         {
           "id": "thanks",
@@ -109,7 +113,8 @@
             "kind": "corpus",
             "id": "social-basics.thank-you"
           },
-          "colour": "stay"
+          "colour": "stay",
+          "replySetId": "courtesy"
         },
         {
           "id": "bye",
@@ -195,6 +200,14 @@
           }
         },
         {
+          "id": "i-do-not-understand",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "communication.i-do-not-understand"
+          }
+        },
+        {
           "id": "say-it-again",
           "kind": "message",
           "phraseRef": {
@@ -208,6 +221,162 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "board-answers.i-will-write-it-down"
+          }
+        },
+        {
+          "id": "i-will-find-someone",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-find-someone"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "greeting": {
+      "buttons": [
+        {
+          "id": "hello",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.hello"
+          }
+        },
+        {
+          "id": "nice-to-meet-you",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "introductions.nice-to-meet-you"
+          }
+        },
+        {
+          "id": "how-are-you",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "introductions.how-are-you"
+          }
+        },
+        {
+          "id": "where-are-you-from",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "introductions.where-are-you-from"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "speaks": {
+      "buttons": [
+        {
+          "id": "yes-right",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.yes-right"
+          }
+        },
+        {
+          "id": "no-not",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.no-not"
+          }
+        },
+        {
+          "id": "a-little",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "question-words.a-little"
+          }
+        },
+        {
+          "id": "i-will-find-someone",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-find-someone"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "courtesy": {
+      "buttons": [
+        {
+          "id": "you-are-welcome",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.you-are-welcome"
+          }
+        },
+        {
+          "id": "no-problem",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.no-problem"
+          }
+        },
+        {
+          "id": "okay-fine",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.okay-fine-i-am-okay"
           }
         },
         {

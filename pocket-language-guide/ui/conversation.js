@@ -114,6 +114,10 @@ async function showPicker(owner, listener) {
     $('board-grid').removeAttribute('aria-busy');
     return;
   }
+  // Every button here goes deeper, so the dash that says so on a mixed grid has
+  // nothing to contrast with and is just twelve dashed boxes. They stay submenus --
+  // that is what they do -- and the stylesheet drops the marking for this one grid.
+  $('board-grid').classList.add('board-grid-topics');
   renderGrid($('board-grid'), { buttons: [...titles.keys()].map((id) => ({ id, kind: 'submenu' })) }, {
     lang: owner,
     label: (button) => titles.get(button.id) ?? button.id,

@@ -1542,8 +1542,14 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
 .speak.lead { color: var(--ink); font-weight: 600; }
 
 @media (max-width: 760px) {
-  /* On a narrow screen the collage would push the picker off; the lead is enough. */
-  .speak:not(.lead) { display: none; }
+  /* **The nearest two, not all of them and not one.** Five labels push the picker off
+     a narrow screen, and the lead alone says nothing about the app being multilingual
+     -- but the two behind it are now the device's own language and the language of the
+     place the reader appears to be in, which is the pair worth the room. Counted from
+     the end because the lead is last in source order and the nearest guesses are
+     beside it. */
+  .speak:not(:nth-last-child(-n+3)) { display: none; }
+  .speak:not(.lead) { font-size: 0.72rem; }
 }
 
 /* --- glyph settings controls ---------------------------------------------- */

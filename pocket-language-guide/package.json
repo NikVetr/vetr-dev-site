@@ -22,7 +22,8 @@
     "i18n": "node scripts/check_i18n.mjs",
     "ipa": "python3 scripts/build_ipa.py",
     "native": "python3 scripts/transliterate_native.py",
-    "boards": "node scripts/build_board_index.mjs"
+    "boards": "node scripts/build_board_index.mjs",
+    "timezones": "node scripts/build_timezones.mjs"
   },
   "devDependencies": {
     "@capacitor/android": "^7.6.9",

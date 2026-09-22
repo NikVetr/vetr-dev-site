@@ -3,9 +3,6 @@
   "id": "time",
   "titleKey": "boards.time.title",
   "rootNodeId": "main",
-  "pairs": [
-    "zh-Hans__en"
-  ],
   "nodes": {
     "main": {
       "buttons": [
@@ -26,7 +23,7 @@
             "id": "trail-transport.how-long-is-the-wait"
           },
           "colour": "stay",
-          "replySetId": "how-long"
+          "replySetId": "how-long-wait"
         },
         {
           "id": "takes",
@@ -75,7 +72,8 @@
             "kind": "corpus",
             "id": "time-scheduling.what-time-should-we-meet"
           },
-          "colour": "stay"
+          "colour": "stay",
+          "replySetId": "schedule"
         },
         {
           "id": "change",
@@ -94,7 +92,8 @@
             "kind": "corpus",
             "id": "time-scheduling.when-is-convenient"
           },
-          "colour": "stay"
+          "colour": "stay",
+          "replySetId": "schedule"
         },
         {
           "id": "day",
@@ -103,7 +102,8 @@
             "kind": "corpus",
             "id": "time-scheduling.what-day-is-it-today"
           },
-          "colour": "stay"
+          "colour": "stay",
+          "replySetId": "day-of-week"
         },
         {
           "id": "when",
@@ -195,14 +195,6 @@
   "replySets": {
     "how-long": {
       "buttons": [
-        {
-          "id": "nowait",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "board-answers.there-is-no-wait"
-          }
-        },
         {
           "id": "d5m",
           "kind": "value",
@@ -329,11 +321,59 @@
     "when": {
       "buttons": [
         {
+          "id": "open-now",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "common-signs.open-operating"
+          }
+        },
+        {
           "id": "it-is-closed",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
             "id": "board-answers.it-is-closed"
+          }
+        },
+        {
+          "id": "morning",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-words.morning"
+          }
+        },
+        {
+          "id": "afternoon",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-words.afternoon"
+          }
+        },
+        {
+          "id": "evening",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-words.evening"
+          }
+        },
+        {
+          "id": "night",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-words.night"
+          }
+        },
+        {
+          "id": "tomorrow",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-words.tomorrow"
           }
         },
         {
@@ -351,6 +391,255 @@
             "kind": "corpus",
             "id": "board-answers.please-wait"
           }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "day-of-week": {
+      "buttons": [
+        {
+          "id": "monday",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "days-of-week.monday"
+          }
+        },
+        {
+          "id": "tuesday",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "days-of-week.tuesday"
+          }
+        },
+        {
+          "id": "wednesday",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "days-of-week.wednesday"
+          }
+        },
+        {
+          "id": "thursday",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "days-of-week.thursday"
+          }
+        },
+        {
+          "id": "friday",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "days-of-week.friday"
+          }
+        },
+        {
+          "id": "saturday",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "days-of-week.saturday"
+          }
+        },
+        {
+          "id": "sunday",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "days-of-week.sunday"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "schedule": {
+      "buttons": [
+        {
+          "id": "today",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-words.today"
+          }
+        },
+        {
+          "id": "tomorrow",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-words.tomorrow"
+          }
+        },
+        {
+          "id": "this-week",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-words.this-week"
+          }
+        },
+        {
+          "id": "next-week",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-words.next-week"
+          }
+        },
+        {
+          "id": "morning",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-words.morning"
+          }
+        },
+        {
+          "id": "afternoon",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-words.afternoon"
+          }
+        },
+        {
+          "id": "evening",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-words.evening"
+          }
+        },
+        {
+          "id": "night",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-words.night"
+          }
+        },
+        {
+          "id": "i-will-write-it-down",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-write-it-down"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "how-long-wait": {
+      "buttons": [
+        {
+          "id": "nowait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.there-is-no-wait"
+          }
+        },
+        {
+          "id": "d5m",
+          "kind": "value",
+          "value": {
+            "amount": 5,
+            "unit": "minute"
+          }
+        },
+        {
+          "id": "d10m",
+          "kind": "value",
+          "value": {
+            "amount": 10,
+            "unit": "minute"
+          }
+        },
+        {
+          "id": "d15m",
+          "kind": "value",
+          "value": {
+            "amount": 15,
+            "unit": "minute"
+          }
+        },
+        {
+          "id": "d30m",
+          "kind": "value",
+          "value": {
+            "amount": 30,
+            "unit": "minute"
+          }
+        },
+        {
+          "id": "d1h",
+          "kind": "value",
+          "value": {
+            "amount": 1,
+            "unit": "hour"
+          }
+        },
+        {
+          "id": "d2h",
+          "kind": "value",
+          "value": {
+            "amount": 2,
+            "unit": "hour"
+          }
+        },
+        {
+          "id": "other",
+          "kind": "entry",
+          "entry": "duration"
         },
         {
           "id": "i-do-not-know",

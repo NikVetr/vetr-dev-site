@@ -309,6 +309,57 @@ function setWantOpen(open, chosen) {
 const COLLAGE_DEPTH = 5;
 
 /**
+ * Two guesses at a language the reader has not asked for.
+ *
+ * **The collage used to say "I speak" in whichever languages the registry happened to
+ * list first, which is decoration that means nothing.** These two mean something, and
+ * they are the only two a browser will give away.
+ *
+ * The **system language** is what the device is set to, and it is the first thing to
+ * offer someone whose browser is in a language the picker also has.
+ *
+ * The **place** is the more useful one, and the one that actually moves: a traveller's
+ * laptop is still in their own language, and what they need is the language of the
+ * street they are standing in. No browser will say which country that is, and every
+ * browser will say which timezone -- which is what `data/registry/timezones.csv` is
+ * for. From the region, `languages.csv` says what is spoken there, and it names
+ * several for the places that have several, so this returns the list rather than
+ * pretending there is one answer.
+ *
+ * Both are matched against the languages this app can show, on subtag boundaries, so
+ * a `de-AT` browser is offered German and a Hausa one is not offered Hawaiian.
+ * @param {Record<string,string>[]} languages the registry rows
+ * @returns {Promise<{system: string|null, place: string[]}>}
+ */
+async function guessedLanguages(languages) {
+  const usable = new Set(languages.map((l) => l.bcp47));
+  /** @param {string} tag @returns {string|null} */
+  const match = (tag) => {
+    if (usable.has(tag)) return tag;
+    const base = tag.split('-')[0];
+    return [...usable].find((code) => code === base || code.split('-')[0] === base) ?? null;
+  };
+
+  const system = (navigator.languages ?? []).map(match).find(Boolean) ?? null;
+
+  /** @type {string[]} */ let place = [];
+  const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  if (zone) {
+    // Generated, two columns, no quoting, with a comment header -- so a line scan
+    // rather than the RFC 4180 parser, which has nothing to do here.
+    const table = await loadText('data/registry/timezones.csv').catch(() => '');
+    const row = table.split('\n').find((line) => line.startsWith(`${zone},`));
+    const region = row?.split(',')[1]?.trim();
+    if (region) {
+      place = languages
+        .filter((l) => (l.regions ?? '').split(';').some((r) => r.trim() === region))
+        .map((l) => l.bcp47);
+    }
+  }
+  return { system, place };
+}
+
+/**
  * The ends of the fade. These are words, not texture: `--muted` at the 0.16 the
  * ramp used to bottom out at composites to 1.3:1 on the header's white, which
  * looks like a rendering fault rather than type. 0.62 holds 3.28:1 and, with the
@@ -322,15 +373,35 @@ const NEAREST = 0.9;
  * others receding behind it. Nothing moves -- a header that animates on its own is
  * a distraction on a page you came to read -- but it still says "this is where you
  * choose your language" to someone who reads none of the others.
+ * **The order is nearest-meaning-first, not registry order.** Behind the reader's own
+ * comes the language their device is set to, then the languages of the place they
+ * appear to be in, and only then whatever else fills the row -- so someone who opens
+ * this in Tokyo sees `話せる言語` behind `I speak` rather than whichever language
+ * sorts first. On a phone only the nearest two fit, which is exactly why they are the
+ * two worth having there.
  * @param {Record<string,string>[]} languages
  * @param {string} reader
+ * @param {{system: string|null, place: string[]}} guessed
  */
-function renderSpeakCollage(languages, reader) {
+function renderSpeakCollage(languages, reader, guessed) {
   const label = document.getElementById('reader-label');
   if (!label) return;
   const usable = languages.filter((l) => l.speak_label);
-  const mine = usable.find((l) => l.bcp47 === reader);
-  const others = usable.filter((l) => l.bcp47 !== reader).slice(0, COLLAGE_DEPTH);
+  const byCode = new Map(usable.map((l) => [l.bcp47, l]));
+  const mine = byCode.get(reader);
+  /** @type {Record<string,string>[]} */ const others = [];
+  /** @param {string|null|undefined} code */
+  const add = (code) => {
+    const lang = code ? byCode.get(code) : undefined;
+    if (lang && lang !== mine && !others.includes(lang) && others.length < COLLAGE_DEPTH) {
+      others.push(lang);
+    }
+  };
+  add(guessed.system);
+  for (const code of guessed.place) add(code);
+  // Padded out with the rest for a wide screen, where there is room for five and the
+  // point is the repetition. A phone shows the nearest two, which are the guesses.
+  for (const lang of usable) add(lang.bcp47);
   const fade = (NEAREST - FAINTEST) / Math.max(1, COLLAGE_DEPTH - 1);
 
   /** @param {Record<string,string>} lang @param {number} depth */
@@ -339,7 +410,11 @@ function renderSpeakCollage(languages, reader) {
     span.className = depth === 0 ? 'speak lead' : 'speak';
     span.textContent = lang.speak_label;
     span.lang = lang.bcp47;
-    if (lang.bcp47 === 'ar') span.dir = 'rtl';
+    // Which way the label runs. The same fact `scripts.csv` holds, named here rather
+    // than fetched, because the gallery does not otherwise read that file and this is
+    // one attribute on a decorative chip. It was hardcoded to Arabic until the guesses
+    // above made Hebrew, Persian and Urdu reachable.
+    if (['Arab', 'Hebr', 'Thaa'].includes(lang.script)) span.dir = 'rtl';
     // Each step back is fainter and slightly smaller, so the eye lands on the
     // reader's own first and reads the rest as context rather than as a list.
     if (depth > 0) {
@@ -440,7 +515,11 @@ async function main() {
     options: pickerOptions(),
     onChange: setReader,
   });
-  renderSpeakCollage(languages, reader);
+  // Asked once. Neither answer changes while the page is open -- the device's
+  // language and the timezone are settings, not state -- so the collage is redrawn
+  // from the same pair of guesses whenever the reader switches language.
+  const guessed = await guessedLanguages(languages);
+  renderSpeakCollage(languages, reader, guessed);
 
   /**
    * The reader's language, changed from either place it can be: the header picker,
@@ -466,7 +545,7 @@ async function main() {
     applyStatic();
     header.select(value);
     header.relabel({ label: t('nav.readerHint'), options: pickerOptions() });
-    renderSpeakCollage(languages, value);
+    renderSpeakCollage(languages, value, guessed);
     render(value);
   }
 

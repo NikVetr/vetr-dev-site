@@ -90,7 +90,6 @@ const UNITS = new Set(['minute', 'hour', 'day']);
  * @property {string} rootNodeId
  * @property {Record<string, BoardNode>} nodes
  * @property {Record<string, {buttons:BoardButton[]}>} [replySets]
- * @property {string[]} [pairs]   `target__source` codes this board is complete for
  */
 
 /**
@@ -230,12 +229,33 @@ export function validateBoard(board) {
   }
   for (const id of Object.keys(nodes)) {
     // An unreachable node is dead weight that still has to be translated and
-    // reviewed, so it is a problem rather than a curiosity. Reply sets are not in
-    // this walk: they are reached from a message, not from the grid.
+    // reviewed, so it is a problem rather than a curiosity.
     if (!depth.has(id)) problems.push(`${id}: not reachable from the root`);
     else if (/** @type {number} */ (depth.get(id)) >= MAX_DEPTH) {
       problems.push(`${id}: nested ${depth.get(id)} deep, past ${MAX_DEPTH - 1}`);
     }
+  }
+
+  // **Reply sets are reachable in the other direction, and both directions bite.**
+  // They are not in the walk above because a reply set is reached from a message
+  // rather than from the grid -- but a button naming a set that does not exist offers
+  // a Reply control that opens nothing, and a set nothing names is worse than dead:
+  // `scripts/build_board_index.mjs` charges the board for every phrase in it, so an
+  // orphan silently costs the board the languages that cannot say its answers. Both
+  // were reachable states while this only looked at nodes, and one of them shipped.
+  const sets = new Set(Object.keys(board.replySets ?? {}));
+  /** @type {Set<string>} */ const called = new Set();
+  for (const [nodeId, node] of Object.entries(nodes)) {
+    for (const button of /** @type {any} */ (node)?.buttons ?? []) {
+      if (!button.replySetId) continue;
+      called.add(button.replySetId);
+      if (!sets.has(button.replySetId)) {
+        problems.push(`${nodeId}/${button.id}: replySetId ${button.replySetId} is not a reply set`);
+      }
+    }
+  }
+  for (const id of sets) {
+    if (!called.has(id)) problems.push(`replySets/${id}: no button offers it`);
   }
   return problems;
 }

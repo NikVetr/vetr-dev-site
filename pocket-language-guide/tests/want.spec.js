@@ -279,3 +279,40 @@ test('the picker opens expanded, and its label stays above the list', async ({ p
   expect(stuck.label).toBeGreaterThanOrEqual(stuck.under - 2);
   expect(stuck.label).toBeLessThan(stuck.under + 12);
 });
+
+test('the collage names the language of the place, not whatever sorts first', async ({ browser }) => {
+  // It used to say "I speak" in whichever languages the registry listed first, which
+  // is decoration that means nothing. The two signals a browser gives away do mean
+  // something: what the device is set to, and — the one that actually moves when the
+  // reader does — the timezone, which `data/registry/timezones.csv` turns into a
+  // country and `languages.csv` turns into what is spoken there.
+  const context = await browser.newContext({
+    locale: 'en-US', timezoneId: 'Asia/Tokyo', viewport: { width: 1280, height: 800 },
+  });
+  const page = await context.newPage();
+  try {
+    await page.goto('/');
+    await expect(page.locator('#gallery')).toHaveAttribute('aria-busy', 'false');
+    const chips = () => page.evaluate(() => [...document.querySelectorAll('#reader-label .speak')]
+      .map((el) => ({
+        lang: el.lang,
+        lead: el.classList.contains('lead'),
+        shown: getComputedStyle(el).display !== 'none',
+      })));
+
+    const wide = await chips();
+    // The reader's own leads and is last in source order; the guess sits beside it.
+    expect(wide.at(-1)).toMatchObject({ lang: 'en', lead: true });
+    expect(wide.at(-2)?.lang).toBe('ja');
+
+    // **And it survives the phone**, where there is only room for the nearest two --
+    // which is the whole reason for choosing them by meaning rather than by sort.
+    await page.setViewportSize({ width: 390, height: 844 });
+    const narrow = (await chips()).filter((c) => c.shown);
+    expect(narrow.length).toBeLessThanOrEqual(3);
+    expect(narrow.map((c) => c.lang)).toContain('ja');
+    expect(narrow.at(-1)).toMatchObject({ lang: 'en', lead: true });
+  } finally {
+    await context.close();
+  }
+});

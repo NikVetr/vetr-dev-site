@@ -9,6 +9,15 @@ import { test, expect } from '@playwright/test';
 
 const BOARD = '/conversation.html?target=zh-Hans&source=en&board=spa';
 
+/**
+ * The controls that are part of the exchange, which is Speak and Reply.
+ *
+ * The turn control shares their row and is not one of them: it is always present and
+ * it is about how the screen is drawn rather than about what is being said, so every
+ * test that means "the button the listener presses" has to say so.
+ */
+const EXCHANGE = '.board-controls .board-control:not(.board-turn)';
+
 /** @param {import('@playwright/test').Page} page */
 async function board(page) {
   await page.goto(BOARD);
@@ -126,8 +135,15 @@ test('a message with no answers offers no reply, and gaps are reported', async (
   // by default now -- while they were behind `?replies=1` the tint and the ↩ mark that
   // promise an answer were decorating cells that behaved like every other one.
   await board(page);
-  await page.locator('[data-button="hurts"]').click();
-  await expect(page.locator('.board-controls')).toHaveCount(0);
+  // `please stop` rather than `it hurts here`: the reply-set audit gave the latter an
+  // answer space, and a therapist answering "which area do you mean?" is the point of
+  // that change. Stopping is an instruction with nothing to say back to it.
+  await page.locator('[data-button="stop"]').click();
+  // The row itself is always there -- the turn control is in it -- so what is
+  // asserted is that nothing in the *exchange* is offered on a message that cannot
+  // be answered and cannot be spoken.
+  await expect(page.locator(EXCHANGE))
+    .toHaveCount(0);
   // B16: nothing on this board is unavailable for en/zh-Hans, so no warning.
   await expect(page.locator('#board-status')).toBeEmpty();
 });
@@ -202,13 +218,15 @@ test('a reply is offered only where there are answers, and only when asked for',
   // B08's other half. `avoid` carries a reply set; `stop` does not, and a board must
   // not put a Reply control on every statement.
   await page.locator('[data-button="stop"]').click();
-  await expect(page.locator('.board-controls')).toHaveCount(0);
+  await expect(page.locator(EXCHANGE))
+    .toHaveCount(0);
   await page.locator('.board-message').click();
 
   await page.locator('[data-button="avoid"]').click();
-  await expect(page.locator('.board-controls button')).toHaveCount(1);
+  const reply = page.locator(EXCHANGE);
+  await expect(reply).toHaveCount(1);
   // The listener reads this one too, so it is in their language and not the owner's.
-  await expect(page.locator('.board-controls button')).toHaveText(/\p{Script=Han}/u);
+  await expect(reply).toHaveText(/\p{Script=Han}/u);
   // ...and it is still just a message until someone presses it. No forced reply
   // screen after a statement.
   await expect(page.locator('.board-answers')).toHaveCount(0);
@@ -221,7 +239,7 @@ test('the answers are the listener\'s, and the chosen one comes back as the owne
   await page.goto(REPLIES);
   await page.locator('[data-button="avoid"]').click();
   const asked = await page.locator('.board-message-text').textContent();
-  await page.locator('.board-controls button').click();
+  await page.locator(EXCHANGE).click();
 
   await expect(page.locator('.board-answers')).toBeVisible();
   await expect(page.locator('.board-answer')).toHaveCount(6);
@@ -249,7 +267,7 @@ test('an uncertain answer and a rejection are both reachable, and say what they 
   // substantive answer, and it must not launch anything.
   await page.goto(REPLIES);
   await page.locator('[data-button="avoid"]').click();
-  await page.locator('.board-controls button').click();
+  await page.locator(EXCHANGE).click();
   const answers = await page.locator('.board-answer').allTextContents();
   // One answer admits uncertainty and one rejects the set. Both are requirements of
   // the specification, not decoration.
@@ -266,7 +284,7 @@ test('cancelling a reply claims no answer and goes back to the question', async 
   await page.goto(REPLIES);
   await page.locator('[data-button="avoid"]').click();
   const asked = await page.locator('.board-message-text').textContent();
-  await page.locator('.board-controls button').click();
+  await page.locator(EXCHANGE).click();
   await expect(page.locator('.board-answers')).toBeVisible();
 
   // The way back is the listener's control, so it is in the listener's language --
@@ -284,7 +302,7 @@ test('cancelling a reply claims no answer and goes back to the question', async 
   await expect(page.locator('.board-message-text')).toHaveText(asked ?? '');
   await expect(page.locator('.board-answers')).toHaveCount(0);
   // Escape does the same thing, one view at a time.
-  await page.locator('.board-controls button').click();
+  await page.locator(EXCHANGE).click();
   await page.keyboard.press('Escape');
   await expect(page.locator('.board-message-text')).toHaveText(asked ?? '');
 });
@@ -304,7 +322,7 @@ test('the listener never changes what language the owner reads', async ({ page }
     saved: localStorage.getItem('plg.reader'),
   }));
   await page.locator('[data-button="avoid"]').click();
-  await page.locator('.board-controls button').click();
+  await page.locator(EXCHANGE).click();
   await page.locator('.board-answer').nth(1).click();
   await expect(page.locator('.board-message-text')).toBeVisible();
   expect(await page.evaluate(() => ({
@@ -632,7 +650,7 @@ test('the editor is owner-only and cannot be reached from a message', async ({ p
   await expect(page.locator('#board-menu')).toBeVisible();
   await page.locator('[data-button="avoid"]').click();
   await expect(page.locator('#board-menu')).toBeHidden();
-  await page.locator('.board-controls button').click();
+  await page.locator(EXCHANGE).click();
   await expect(page.locator('#board-menu')).toBeHidden();
   await page.locator('.board-back').click();
   await page.locator('.board-message').click();
@@ -679,7 +697,8 @@ test('Speak is the owner’s control and Reply is the listener’s', async ({ pa
   const speak = page.locator('.board-speak');
   await expect(speak).toHaveText('Speak');
   // The listener's control, in Han script; the owner's, in Latin. Different people.
-  await expect(page.locator('.board-controls button').last()).toHaveText(/\p{Script=Han}/u);
+  await expect(page.locator(EXCHANGE).last())
+    .toHaveText(/\p{Script=Han}/u);
 
   // Speak is a sibling of the message surface, not a child -- which is what stops
   // its click reaching the dismiss handler. Pressing it must not close the message.
@@ -790,7 +809,7 @@ async function openWaitAnswers(page) {
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=time');
   await expect(page.locator('.board-cell').first()).toBeVisible();
   await page.locator('[data-button="wait"]').click();
-  await page.locator('.board-controls button').first().click();
+  await page.locator(EXCHANGE).first().click();
   await expect(page.locator('.board-answer').first()).toBeVisible();
 }
 
@@ -930,7 +949,7 @@ test('the mark that promises an answer is drawn, and only where it is used', asy
   // ...and the Reply control it promises actually appears, with no query string.
   await page.locator('[data-button="stock"]').click();
   await expect(page.locator('.board-message')).toBeVisible();
-  const reply = page.locator('.board-controls button').first();
+  const reply = page.locator(EXCHANGE).first();
   await expect(reply).toBeVisible();
   await reply.click();
   // The answers are the listener's own language, for the listener to tap.
@@ -938,11 +957,13 @@ test('the mark that promises an answer is drawn, and only where it is used', asy
   await expect(answers.first()).toBeVisible();
   expect(await answers.first().textContent()).toMatch(/\p{Script=Han}/u);
 
-  // A grid where nothing can be answered draws no mark at all.
+  // The mark is drawn per cell and nowhere else: on the spa's body-area grid the four
+  // focus requests are answerable and `please stop` is not, so four of six wear it.
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=spa');
   await page.locator('[data-button="focus"]').click();
   await expect(page.locator('[data-button="shoulders"]')).toBeVisible();
-  await expect(page.locator('.board-cell-mark')).toHaveCount(0);
+  await expect(page.locator('[data-button="shoulders"] .board-cell-mark')).toHaveCount(1);
+  await expect(page.locator('[data-button="stop"] .board-cell-mark')).toHaveCount(0);
 });
 
 test('a message never breaks a word in half', async ({ page }) => {
@@ -961,7 +982,7 @@ test('a message never breaks a word in half', async ({ page }) => {
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=spa');
   await expect(page.locator('.board-cell').first()).toBeVisible();
   await page.locator('[data-button="avoid"]').click();
-  await page.locator('.board-controls button').first().click();
+  await page.locator(EXCHANGE).first().click();
   await expect(page.locator('.board-answer').first()).toBeVisible();
   // "I am not sure, I need to ask my supervisor" -- the longest answer on the board,
   // and the one that produced the screenshot.
@@ -1214,4 +1235,80 @@ test('every row of a board is on the screen', async ({ page }) => {
     expect(fit.past, `${board} at ${w}x${h}`).toBeLessThanOrEqual(0);
     expect(fit.scrolls).toBe(0);
   }
+});
+
+test('characters in a square script line up, and the punctuation sits outside them', async ({ page }) => {
+  // **Reported from a phone.** `救命！` set large enough to wrap breaks as `救` / `命！`,
+  // because no line may begin with a closing mark — and centring each line then puts
+  // the `救` on the midline while the `命` is pushed half a character left of it by the
+  // `！`. Two characters that should be a column, visibly out of line. Aligning the
+  // lines to each other and centring the block makes the characters the column and
+  // the punctuation the thing that sits off to the side.
+  await page.setViewportSize({ width: 390, height: 844 });
+  const lines = () => page.locator('.board-message-text').evaluate((el) => {
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    return {
+      columns: el.classList.contains('board-text-columns'),
+      lefts: [...range.getClientRects()].filter((r) => r.height > 0)
+        .map((r) => Math.round(r.left)),
+    };
+  });
+
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=emergency');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('[data-button="hospital"]').click();
+  const han = await lines();
+  expect(han.columns).toBe(true);
+  expect(han.lefts.length).toBeGreaterThan(1);
+  // Every line starts in the same place, which is what makes them a column.
+  expect(new Set(han.lefts).size).toBe(1);
+
+  // **Not for a proportional script.** Aligning Latin lines buys a ragged right edge
+  // and no column, because the characters are not on an em square to begin with.
+  await page.goto('/conversation.html?target=de&source=en&board=emergency');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('[data-button="hospital"]').click();
+  const latin = await lines();
+  expect(latin.columns).toBe(false);
+  expect(latin.lefts.length).toBeGreaterThan(1);
+  expect(new Set(latin.lefts).size).toBeGreaterThan(1);
+});
+
+test('the SOS screen has nothing in the middle of it', async ({ page }) => {
+  // The Morse *is* the message: the middle of the screen is the part doing the
+  // signalling, and a word there costs lit area on the white frames and competes with
+  // the flash on the black ones. `SOS` is also not a word in most of these languages.
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=emergency');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('[data-button="sos"]').click();
+  await expect(page.locator('.beacon-sos')).toBeVisible();
+  const shape = await page.evaluate(() => {
+    const word = /** @type {HTMLElement} */ (document.querySelector('.beacon-word'));
+    const hint = /** @type {HTMLElement} */ (document.querySelector('.beacon-hint'));
+    return {
+      // Present for the alert to announce, and taking no room.
+      announces: (word.textContent ?? '').length > 0,
+      wordInk: Math.round(word.getBoundingClientRect().width),
+      hintFromBottom: Math.round(innerHeight - hint.getBoundingClientRect().bottom),
+      middleClear: [...document.querySelectorAll('.beacon *')].every((el) => {
+        const r = el.getBoundingClientRect();
+        return r.width < 2 || r.top > innerHeight * 0.75 || r.bottom < innerHeight * 0.25;
+      }),
+    };
+  });
+  expect(shape.announces).toBe(true);
+  expect(shape.wordInk).toBeLessThan(3);
+  expect(shape.hintFromBottom).toBeLessThan(60);
+  expect(shape.middleClear).toBe(true);
+
+  // The attention beacon is the opposite case: its word is the point, and it is the
+  // listener's own.
+  await page.locator('.beacon').click({ position: { x: 4, y: 4 } });
+  await page.locator('[data-button="attention"]').click();
+  const word = page.locator('.beacon-word');
+  await expect(word).toHaveAttribute('lang', 'zh-Hans');
+  expect(await word.evaluate((el) => Math.round(el.getBoundingClientRect().width)))
+    .toBeGreaterThan(100);
 });

@@ -659,6 +659,22 @@ corpus is for. `quick-directions` does double duty as the *answers* to "which wa
 so the person being asked taps "turn left" in their own language and the traveller
 reads it in theirs.
 
+**Most buttons can be answered, and that took an audit to fix.** The boards were
+built as a way to *say* things and the reply sets were retrofitted, so the misfits were
+systematic: thirteen of `food`'s buttons were silent, including all eight allergen
+instructions, so the owner showed "No peanuts" and the waiter had no way to say yes, no
+or "I will ask the kitchen"; `time`'s answer space for *what time does it open?*
+contained no time at all, and its only substantive cell was *It is closed*, which the
+owner read back as a false statement when the answer was *opens at ten*; *Where am I?*
+offered eight ways to send somebody somewhere. 115 of 168 buttons can now be answered,
+against about thirty, and the whole batch cost one constructed language on one board --
+every phrase it names was already in all fifty-one natural packs, because the answers
+were in the corpus and simply not indexed into the sets that needed them.
+
+The cap on the format is that **there is no way to answer with a number.** `entry`
+takes a duration and `value` takes minute/hour/day, so a clock time, a platform number
+and a price cannot be said. That is why *What time is it?* has no reply set at all.
+
 **Replies are optional and one-directional per message.** A reply set offers the
 listener a few complete answers in their own language; the chosen one comes back in
 the owner's, on a paper-coloured surface so it reads as *incoming*. Every set carries

@@ -3,9 +3,6 @@
   "id": "shopping",
   "titleKey": "boards.shopping.title",
   "rootNodeId": "main",
-  "pairs": [
-    "zh-Hans__en"
-  ],
   "nodes": {
     "main": {
       "buttons": [
@@ -16,7 +13,8 @@
             "kind": "corpus",
             "id": "shopping.how-much-is-this"
           },
-          "colour": "money"
+          "colour": "money",
+          "replySetId": "price"
         },
         {
           "id": "looking",
@@ -64,7 +62,8 @@
             "kind": "corpus",
             "id": "shopping.that-is-too-expensive"
           },
-          "colour": "money"
+          "colour": "money",
+          "replySetId": "yes-no"
         },
         {
           "id": "cheaper",
@@ -83,7 +82,8 @@
             "kind": "corpus",
             "id": "shopping.i-will-take-this"
           },
-          "colour": "money"
+          "colour": "money",
+          "replySetId": "in-stock"
         },
         {
           "id": "where-pay",
@@ -112,7 +112,8 @@
             "kind": "corpus",
             "id": "payment-receipt.a-receipt-please"
           },
-          "colour": "money"
+          "colour": "money",
+          "replySetId": "yes-no"
         },
         {
           "id": "bag",
@@ -122,7 +123,7 @@
             "id": "color-size-returns.do-you-have-a-bag"
           },
           "colour": "money",
-          "replySetId": "yes-no"
+          "replySetId": "in-stock"
         }
       ]
     }
@@ -327,6 +328,14 @@
           }
         },
         {
+          "id": "cash-only",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "atm-cash.cash-only"
+          }
+        },
+        {
           "id": "yes-right",
           "kind": "message",
           "phraseRef": {
@@ -340,6 +349,50 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "quick-responses.no-not"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "price": {
+      "buttons": [
+        {
+          "id": "i-will-write-it-down",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-write-it-down"
+          }
+        },
+        {
+          "id": "how-many",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.how-many"
           }
         },
         {
