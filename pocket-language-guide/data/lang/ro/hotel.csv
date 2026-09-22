@@ -51,3 +51,18 @@ laundry.detergent,detergent,,dˌeterdʒˈent,,2,ro-agent-v1;ipa=espeak
 laundry.dry-cleaning,curățătorie chimică,,kˌuɾətsətˈoɾje kˈimikˌə,,2,ro-agent-v1;ipa=espeak
 laundry.dryer,uscător,,ˌuskətˈor,,2,ro-agent-v1;ipa=espeak
 laundry.coin-operated,cu monede,,ku monˈede,,2,ro-agent-v1;ipa=espeak
+massage-spa.please-stop,"Opriți, nu continuați",,"oprˈitsʲ, nu kˌontinwˈatsʲ",stop; do not continue,2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
+massage-spa.please-pause,"O pauză scurtă, vă rog",,"o paˈuzə skˈurtə, və rˈoɡ","a short pause, please",2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
+massage-spa.please-avoid-this-area,Vă rog evitați zona aceasta,,və rˈoɡ ˌevitˈatsʲ zˈona atʃˈeasta,please avoid this area,2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
+massage-spa.stronger-pressure,"Apăsați mai tare, vă rog",,"ˌapəsˈatsʲ maɪ tˈaɾe, və rˈoɡ","press harder, please",2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
+massage-spa.more-gently,"Mai ușor, vă rog",,"maɪ uʃˈor, və rˈoɡ","more lightly, please",2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
+massage-spa.that-pressure-is-good,"Presiunea este bună, țineți așa",,"presjˈunea jˌeste bˈunə, tsˈinetsʲ aʃˈa",the pressure is good; keep it like that,2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
+massage-spa.focus-on-shoulders,Vă rog insistați pe umeri,,və rˈoɡ ˌinsistˈatsʲ pe ˈumeɾʲ,please work mainly on the shoulders,2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
+massage-spa.focus-on-back,Vă rog insistați pe spate,,və rˈoɡ ˌinsistˈatsʲ pe spˈate,please work mainly on the back,2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
+massage-spa.focus-on-neck,Vă rog insistați pe ceafă,,və rˈoɡ ˌinsistˈatsʲ pe tʃˈeafə,"please work mainly on the nape -- ceafa rather than gat, which this pack already uses for the throat",2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
+massage-spa.focus-on-feet,Vă rog insistați pe tălpi,,və rˈoɡ ˌinsistˈatsʲ pe tˈəlpʲ,please work mainly on the soles of the feet,2,spa-board-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
+massage-spa.reply-i-will-avoid-that-area,"Bine, evit zona aceasta",,"bˈine, evˈit zˈona atʃˈeasta",fine; I am avoiding this area,2,spa-reply-v1;src=DEX;ro.wikipedia=Masaj;rule=present-tense-invariant-for-gender;ipa=espeak
+massage-spa.reply-which-area-exactly,"Care zonă, mai exact?",,"kˌaɾe zˈonə, maɪ eɡzˈakt","which area, more exactly?",2,spa-reply-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
+massage-spa.reply-cannot-avoid-this-treatment,La acest tratament zona aceasta nu poate fi ocolită,,la atʃˌest trˌatamˈent zˈona atʃˌeasta nu pˌɔate fˈi ˌokolˈitə,"in this treatment this area cannot be avoided -- ocolita agrees with zona, not with anyone's sex",2,spa-reply-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
+massage-spa.reply-does-it-hurt-there,Vă doare în zona aceasta?,,və dˈɔaɾe ɨn zˈona atʃˈeasta,does it hurt in this area?,2,spa-reply-v1;src=DEX;ro.wikipedia=Masaj;ipa=espeak
+massage-spa.reply-ask-supervisor,"Nu știu sigur, întreb persoana responsabilă",,"nu ʃtˈiʊ sˈiɡur, ɨntrˈeb persˈɔana respˌonsabˈilə","I do not know for sure; I will ask the person in charge -- responsabila agrees with persoana, not with the referent",2,spa-reply-v1;src=DEX;ro.wikipedia=Masaj;rule=adjective-agrees-with-persoana-not-referent;ipa=espeak

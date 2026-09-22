@@ -345,8 +345,8 @@ async function guessedLanguages(languages) {
   /** @type {string[]} */ let place = [];
   const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   if (zone) {
-    // Generated, two columns, no quoting, with a comment header -- so a line scan
-    // rather than the RFC 4180 parser, which has nothing to do here.
+    // Generated, two columns, no quoting, no comments -- so a line scan rather than
+    // the RFC 4180 parser, which has nothing to do here.
     const table = await loadText('data/registry/timezones.csv').catch(() => '');
     const row = table.split('\n').find((line) => line.startsWith(`${zone},`));
     const region = row?.split(',')[1]?.trim();

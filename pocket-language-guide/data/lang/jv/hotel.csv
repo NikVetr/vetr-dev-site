@@ -51,3 +51,18 @@ laundry.detergent,Detèrjen,Sabun umbah-umbah,dəˈtɛrdʒən,,2,jv-agent-v1;ipa
 laundry.dry-cleaning,Dry cleaning,,ˈdraj ˈklinɪŋ,cuci kering here means wash-and-dry,2,jv-agent-v1;ipa=jv-g2p+loan
 laundry.dryer,Mesin pengering,,məˈsɪn pəŋəˈrɪŋ,,2,jv-agent-v1;ipa=jv-g2p
 laundry.coin-operated,Ngangge arta logam,Self-service,ˈŋaŋɡə ˈartɔ ˈlɔɡam,,2,jv-agent-v1;ipa=jv-g2p
+massage-spa.please-stop,"Cekap, ampun dipunlajengaken",,"tʃəˈkap, ˈampʊn dipunladʒəˈŋakən",enough; do not continue,2,spa-board-v1;src=Bausastra;ipa=jv-g2p
+massage-spa.please-pause,Nyuwun kèndel sekedhap,,ˈɲuwʊn ˈkɛndəl səkəˈɖap,please stop for a moment,2,spa-board-v1;src=Bausastra;in-pack-frame;ipa=jv-g2p
+massage-spa.please-avoid-this-area,"Nyuwun tulung, panggenan punika ampun dipunpijet",,"ˈɲuwʊn ˈtulʊŋ, paŋɡəˈnan puˈnikɔ ˈampʊn dipʊnˈpidʒət",please do not massage this place,2,spa-board-v1;src=Bausastra;in-pack-frame;ipa=jv-g2p
+massage-spa.stronger-pressure,"Nyuwun tulung, langkung kiyat",,"ˈɲuwʊn ˈtulʊŋ, ˈlaŋkʊŋ ˈkijat","please, stronger",2,spa-board-v1;src=Bausastra;in-pack-frame;ipa=jv-g2p
+massage-spa.more-gently,"Alus kemawon, nyuwun tulung",,"ˈalʊs kəˈmawɔn, ˈɲuwʊn ˈtulʊŋ","gently only, please -- alus is Bausastra's 'ora kasab', of the touch; alon would have said slow",2,spa-board-v1;src=Bausastra;in-pack-frame;ipa=jv-g2p
+massage-spa.that-pressure-is-good,"Sae, kados makaten kemawon",,"ˈsaə, ˈkadɔs maˈkatən kəˈmawɔn",good; just like that,2,spa-board-v1;src=Bausastra;ipa=jv-g2p
+massage-spa.focus-on-shoulders,"Nyuwun tulung, mligi pundhak ingkang dipunpijet",,"ˈɲuwʊn ˈtulʊŋ, ˈmliɡi ˈpʊnɖaʔ ˈɪŋkaŋ dipʊnˈpidʒət","please, the shoulders specifically to be massaged",2,spa-board-v1;src=Bausastra;in-pack-frame;ipa=jv-g2p
+massage-spa.focus-on-back,"Nyuwun tulung, mligi geger ingkang dipunpijet",,"ˈɲuwʊn ˈtulʊŋ, ˈmliɡi ɡəˈɡər ˈɪŋkaŋ dipʊnˈpidʒət","please, the back specifically to be massaged",2,spa-board-v1;src=Bausastra;in-pack-frame;ipa=jv-g2p
+massage-spa.focus-on-neck,"Nyuwun tulung, mligi gulu ingkang dipunpijet",,"ˈɲuwʊn ˈtulʊŋ, ˈmliɡi ˈɡulu ˈɪŋkaŋ dipʊnˈpidʒət","please, the neck specifically to be massaged",2,spa-board-v1;src=Bausastra;in-pack-frame;ipa=jv-g2p
+massage-spa.focus-on-feet,"Nyuwun tulung, mligi suku ingkang dipunpijet",,"ˈɲuwʊn ˈtulʊŋ, ˈmliɡi ˈsuku ˈɪŋkaŋ dipʊnˈpidʒət","please, the feet specifically to be massaged -- suku covers leg and foot in this pack",2,spa-board-v1;src=Bausastra;in-pack-frame;ipa=jv-g2p
+massage-spa.reply-i-will-avoid-that-area,"Inggih, panggenan punika mboten kula pijet",,"ˈɪŋɡɪh, paŋɡəˈnan puˈnikɔ ˈmbɔtən ˈkulɔ ˈpidʒət",yes; I will not massage this place,2,spa-reply-v1;src=Bausastra;reply-neutrality-rule;ipa=jv-g2p
+massage-spa.reply-which-area-exactly,Ingkang pundi panggenanipun?,,ˈɪŋkaŋ ˈpʊndi paŋɡənaˈnipʊn,which is the place?,2,spa-reply-v1;src=Bausastra;reply-neutrality-rule;ipa=jv-g2p
+massage-spa.reply-cannot-avoid-this-treatment,Pijet punika mboten saged tanpa panggenan punika,,ˈpidʒət puˈnikɔ ˈmbɔtən ˈsaɡəd ˈtanpɔ paŋɡəˈnan puˈnikɔ,this massage is not possible without this place,2,spa-reply-v1;src=Bausastra;reply-neutrality-rule;ipa=jv-g2p
+massage-spa.reply-does-it-hurt-there,Panggenan punika sakit?,,paŋɡəˈnan puˈnikɔ ˈsakɪt,does this place hurt?,2,spa-reply-v1;src=Bausastra;reply-neutrality-rule;ipa=jv-g2p
+massage-spa.reply-ask-supervisor,"Kula mboten ngertos, kedah nyuwun pirsa dhateng pangageng",,"ˈkulɔ ˈmbɔtən ŋərˈtɔs, kəˈdah ˈɲuwʊn ˈpɪrsɔ ˈɖatəŋ paˈŋaɡəŋ",I do not know; I must ask the person in charge,2,spa-reply-v1;src=Bausastra;reply-neutrality-rule;ipa=jv-g2p

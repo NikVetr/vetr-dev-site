@@ -51,3 +51,18 @@ laundry.detergent,deterdžent za pranje,,deterdʒend zˈa prˈaɲe,,2,hr-agent-v
 laundry.dry-cleaning,kemijsko čišćenje,,kemijsko tʃiʃtɕeɲe,,2,hr-agent-v1;ipa=espeak
 laundry.dryer,sušilica,,suʃilitsa,,2,hr-agent-v1;ipa=espeak
 laundry.coin-operated,na kovanice,,nˈa kovanitse,,2,hr-agent-v1;ipa=espeak
+massage-spa.please-stop,"Prestanite, nemojte dalje",,"prestanite, nemojte dˈaʎe",stop; do not go on,2,spa-board-v1;src=Hrvatska-enciklopedija;ipa=espeak
+massage-spa.please-pause,"Kratka pauza, molim",,"krˈatka pˈauza, mˈolim","a short pause, please",2,spa-board-v1;src=Hrvatska-enciklopedija;ipa=espeak
+massage-spa.please-avoid-this-area,"Molim vas, izbjegavajte ovo područje",,"mˈolim vˈas, izbjeɡavajte ˈovo podrutʃje",please avoid this area,2,spa-board-v1;src=Hrvatska-enciklopedija;in-pack-frame;ipa=espeak
+massage-spa.stronger-pressure,Molim jači pritisak,,mˈolim jˈatʃi pritisak,"please, stronger pressure",2,spa-board-v1;src=Hrvatska-enciklopedija;ipa=espeak
+massage-spa.more-gently,"Nježnije, molim",,"ɲeʒnije, mˈolim","more gently, please",2,spa-board-v1;src=Hrvatska-enciklopedija;ipa=espeak
+massage-spa.that-pressure-is-good,"Pritisak je dobar, tako nastavite",,"pritisak je dˈobar, tˈako nastavite","the pressure is good; carry on like that -- dobar agrees with pritisak, not the speaker",2,spa-board-v1;src=Hrvatska-enciklopedija;ipa=espeak
+massage-spa.focus-on-shoulders,"Molim vas, masirajte uglavnom ramena",,"mˈolim vˈas, masirajte uɡlavnom ramena",please massage mainly the shoulders,2,spa-board-v1;src=Hrvatska-enciklopedija;ipa=espeak
+massage-spa.focus-on-back,"Molim vas, masirajte uglavnom leđa",,"mˈolim vˈas, masirajte uɡlavnom lˈedʑa",please massage mainly the back,2,spa-board-v1;src=Hrvatska-enciklopedija;ipa=espeak
+massage-spa.focus-on-neck,"Molim vas, masirajte uglavnom vrat",,"mˈolim vˈas, masirajte uɡlavnom vrˈat",please massage mainly the neck,2,spa-board-v1;src=Hrvatska-enciklopedija;ipa=espeak
+massage-spa.focus-on-feet,"Molim vas, masirajte uglavnom stopala",,"mˈolim vˈas, masirajte uɡlavnom stopala",please massage mainly the feet,2,spa-board-v1;src=Hrvatska-enciklopedija;ipa=espeak
+massage-spa.reply-i-will-avoid-that-area,"U redu, izbjegavat ću to područje",,"u rˈedu, izbjeɡavat tɕˈu tˈo podrutʃje",all right; I will avoid that area,2,spa-reply-v1;src=Hrvatska-enciklopedija;reply-neutrality-rule;rule=future-tense-invariant-for-gender;ipa=espeak
+massage-spa.reply-which-area-exactly,Koje točno područje?,,kˈoje tˈotʃno podrutʃje,which area exactly?,2,spa-reply-v1;src=Hrvatska-enciklopedija;reply-neutrality-rule;ipa=espeak
+massage-spa.reply-cannot-avoid-this-treatment,Ovaj tretman ne ide bez tog područja,,ˈovaj trˈetman nˈe ˈide bˈes tˈok podrutʃja,this treatment does not work without that area,2,spa-reply-v1;src=Hrvatska-enciklopedija;reply-neutrality-rule;ipa=espeak
+massage-spa.reply-does-it-hurt-there,Boli li vas ovo područje?,,bˈoli li vˈas ˈovo podrutʃje,does this area hurt you?,2,spa-reply-v1;src=Hrvatska-enciklopedija;reply-neutrality-rule;ipa=espeak
+massage-spa.reply-ask-supervisor,"Ne znam točno, moram pitati nadređenu osobu",,"nˈe znˈam tˈotʃno, mˈoram pitati nadredʑenu osobu","I do not know exactly; I must ask the superior -- nadredjenu agrees with osoba, not with the referent",2,spa-reply-v1;src=Hrvatska-enciklopedija;reply-neutrality-rule;rule=adjective-agrees-with-osoba-not-referent;ipa=espeak

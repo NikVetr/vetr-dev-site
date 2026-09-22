@@ -51,3 +51,18 @@ laundry.detergent,deterjan,,detɛrʒˈan,,2,tr-agent-v1;ipa=espeak
 laundry.dry-cleaning,kuru temizleme,,kuɾˈʊ temˈɪzlemɛ,,2,tr-agent-v1;ipa=espeak
 laundry.dryer,kurutma makinesi,,kuɾˈʊtma makinesˈɪ,,2,tr-agent-v1;ipa=espeak
 laundry.coin-operated,jetonlu,bozuk paralı,ʒetɔnɫˈʊ,,2,tr-agent-v1;ipa=espeak
+massage-spa.please-stop,"Lütfen durun, devam etmeyin.",,"løtfˈæn duɾˈʊn, devˈam ɛtmejˈɪn",please stop; do not continue,2,spa-board-v1;src=TDK-GTS;ipa=espeak
+massage-spa.please-pause,"Biraz ara verin, lütfen.",,"biɾˈaz aɾˈa veɾˈɪn, løtfˈæn","take a short break, please",2,spa-board-v1;src=TDK-GTS;ipa=espeak
+massage-spa.please-avoid-this-area,Lütfen bu bölgeye dokunmayın.,,løtfˈæn bʊ bœlɟejˈɛ dokʊnmajˈɯn,please do not touch this region,2,spa-board-v1;src=TDK-GTS;ipa=espeak
+massage-spa.stronger-pressure,Biraz daha sert bastırın.,,biɾˈaz dahˈa sˈɛrt bˈastɯɾɯn,press a little firmer,2,spa-board-v1;src=TDK-GTS;ipa=espeak
+massage-spa.more-gently,Lütfen hafifletin.,Daha hafif olsun.,løtfˈæn hafɪfletˈɪn,please lighten it,2,spa-board-v1;src=TDK-GTS;ipa=espeak
+massage-spa.that-pressure-is-good,"Böyle iyi, aynı şekilde devam edin.",,"bˈœjlɛ ijˈi, ajnˈɯ ʃekɪldˈɛ devˈam ɛdˈin",like this is good; carry on the same way,2,spa-board-v1;src=TDK-GTS;ipa=espeak
+massage-spa.focus-on-shoulders,Lütfen özellikle omuzlara masaj yapın.,,løtfˈæn œzællˈɪklɛ omʊzɫaɾˈa masˈaʒ japˈɯn,please massage especially the shoulders,2,spa-board-v1;src=TDK-GTS;ipa=espeak
+massage-spa.focus-on-back,Lütfen özellikle sırta masaj yapın.,,løtfˈæn œzællˈɪklɛ sɯrtˈa masˈaʒ japˈɯn,please massage especially the back,2,spa-board-v1;src=TDK-GTS;ipa=espeak
+massage-spa.focus-on-neck,Lütfen özellikle boyna masaj yapın.,Lütfen özellikle enseye masaj yapın.,løtfˈæn œzællˈɪklɛ bɔjnˈa masˈaʒ japˈɯn,"please massage especially the neck; the alt says the nape, which is the part the trade works",2,spa-board-v1;src=TDK-GTS;ipa=espeak
+massage-spa.focus-on-feet,Lütfen özellikle ayaklara masaj yapın.,,løtfˈæn œzællˈɪklɛ ajakɫaɾˈa masˈaʒ japˈɯn,please massage especially the feet,2,spa-board-v1;src=TDK-GTS;ipa=espeak
+massage-spa.reply-i-will-avoid-that-area,"Tamam, o bölgeye dokunmayacağım.",,"tamˈam, ɔ bœlɟejˈɛ dokʊnmajadʒˈaːɯm",all right; I will not touch that region,2,spa-reply-v1;src=TDK-GTS;ipa=espeak
+massage-spa.reply-which-area-exactly,Tam olarak hangi bölge?,,tˈam oɫaɾˈak hanɡˈɪ bœlɡˈɛ,exactly which region?,2,spa-reply-v1;src=TDK-GTS;ipa=espeak
+massage-spa.reply-cannot-avoid-this-treatment,Bu masajda o bölge atlanamaz.,,bʊ masaʒdˈa ɔ bœlɡˈɛ atɫanamˈaz,in this massage that region cannot be skipped,2,spa-reply-v1;src=TDK-GTS;ipa=espeak
+massage-spa.reply-does-it-hurt-there,Bu bölge ağrıyor mu?,,bʊ bœlɡˈɛ aːɾˈɯjɔr mʊ,does this region hurt?,2,spa-reply-v1;src=TDK-GTS;ipa=espeak
+massage-spa.reply-ask-supervisor,"Tam emin değilim, sorumluya sormam gerek.",,"tˈam emˈɪn dˈejilɪm, soɾʊmɫujˈa sɔrmˈam ɟeɾˈɛk",I am not quite sure; I need to ask the person in charge,2,spa-reply-v1;src=TDK-GTS;ipa=espeak

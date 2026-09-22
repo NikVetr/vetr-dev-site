@@ -51,3 +51,18 @@ laundry.detergent,sabulun wanki,,sabulun wanki,soap of washing,2,ha-agent-v1;ipa
 laundry.dry-cleaning,wanki busasshe,,wanki busasʃe,dry washing,2,ha-agent-v1;ipa=ha-g2p
 laundry.dryer,na'urar bushewa,,naʔurar buʃewa,machine of drying,2,ha-agent-v1;ipa=ha-g2p
 laundry.coin-operated,ana amfani da tsabar kudi,,ana amfani da tsʼabar kudi,one uses coins,2,ha-agent-v1;ipa=ha-g2p
+massage-spa.please-stop,"Ku tsaya, kada ku ci gaba",,"ku tsʼaja, kada ku tʃi ɡaba","stop; do not continue -- the pack's Don Allah frame is dropped here on purpose, this row ends the session",2,spa-board-v1;src=Bargery;kai-ke-avoided;ipa=ha-g2p
+massage-spa.please-pause,Don Allah ku dakata kadan,,don allah ku dakata kadan,please pause a little,2,spa-board-v1;src=Bargery;in-pack-frame;kai-ke-avoided;ipa=ha-g2p
+massage-spa.please-avoid-this-area,Don Allah kada ku taɓa wannan wurin,,don allah kada ku taba wannan wurin,please do not touch this place,2,spa-board-v1;src=Bargery;in-pack-frame;kai-ke-avoided;ipa=ha-g2p
+massage-spa.stronger-pressure,Don Allah ku kara karfi,,don allah ku kara karfi,please increase the force,2,spa-board-v1;src=Bargery;in-pack-frame;kai-ke-avoided;ipa=ha-g2p
+massage-spa.more-gently,Don Allah ku sassauta,,don allah ku sassauta,please ease off,2,spa-board-v1;src=Bargery;in-pack-frame;kai-ke-avoided;ipa=ha-g2p
+massage-spa.that-pressure-is-good,"Haka ya yi daidai, ku ci gaba haka",,"haka ja ji daidai, ku tʃi ɡaba haka",that is just right; carry on like that,2,spa-board-v1;src=Bargery;kai-ke-avoided;ipa=ha-g2p
+massage-spa.focus-on-shoulders,Don Allah ku tausa kafada musamman,,don allah ku tausa kafada musamman,please massage the shoulders especially,2,spa-board-v1;src=Bargery;in-pack-frame;kai-ke-avoided;ipa=ha-g2p
+massage-spa.focus-on-back,Don Allah ku tausa baya musamman,,don allah ku tausa baja musamman,please massage the back especially,2,spa-board-v1;src=Bargery;in-pack-frame;kai-ke-avoided;ipa=ha-g2p
+massage-spa.focus-on-neck,Don Allah ku tausa wuya musamman,,don allah ku tausa wuja musamman,please massage the neck especially,2,spa-board-v1;src=Bargery;in-pack-frame;kai-ke-avoided;ipa=ha-g2p
+massage-spa.focus-on-feet,Don Allah ku tausa tafin kafa musamman,,don allah ku tausa tafin kafa musamman,"please massage the soles of the feet especially -- tafin kafa rather than bare kafa, which this pack uses for the whole lower limb and which is a near-homograph of kafada",2,spa-board-v1;src=Bargery;in-pack-frame;kai-ke-avoided;ipa=ha-g2p
+massage-spa.reply-i-will-avoid-that-area,"To, ba zan taɓa wannan wurin ba",,"to, ba zan taba wannan wurin ba",all right; I will not touch this place,2,spa-reply-v1;src=Bargery;reply-neutrality-rule;ipa=ha-g2p
+massage-spa.reply-which-area-exactly,Wane wuri ne daidai?,,wane wuri ne daidai,which place exactly?,2,spa-reply-v1;src=Bargery;reply-neutrality-rule;kai-ke-avoided;ipa=ha-g2p
+massage-spa.reply-cannot-avoid-this-treatment,Ba a iya barin wannan wurin a wannan tausa,,ba a ija barin wannan wurin a wannan tausa,"this place cannot be left out in this massage -- impersonal a-, not ka/ki",2,spa-reply-v1;src=Bargery;reply-neutrality-rule;kai-ke-avoided;ipa=ha-g2p
+massage-spa.reply-does-it-hurt-there,Wannan wurin yana ciwo?,,wannan wurin jana tʃiwo,"does this place hurt -- agreement is with wuri, not the addressee",2,spa-reply-v1;src=Bargery;reply-neutrality-rule;kai-ke-avoided;ipa=ha-g2p
+massage-spa.reply-ask-supervisor,"Ban tabbata ba, sai na tambayi shugaba",,"ban tabbata ba, sai na tambaji ʃuɡaba",I am not certain; I must ask the person in charge,2,spa-reply-v1;src=Bargery;reply-neutrality-rule;ipa=ha-g2p

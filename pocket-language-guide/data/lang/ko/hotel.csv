@@ -51,3 +51,18 @@ room-problems.the-toilet-will-not-flush,물이 안 내려가요,,muri an naeryeo
 room-problems.the-light-does-not-work,불이 안 켜져요,,buri an kyeojyeoyo,puɾi an kʰjʌdʑjʌjo,,2,ko-agent-v1;ipa=rr
 room-problems.please-send-someone,사람 좀 보내 주세요,,saram jom bonae juseyo,saɾam tɕom ponɛ tɕusejo,,2,ko-agent-v1;ipa=rr
 room-problems.the-heating-does-not-work,난방이 안 돼요,,nanbangi an dwaeyo,nanbaŋi an twɛjo,,2,ko-agent-v1;ipa=rr
+massage-spa.please-stop,그만해 주세요,,geumanhae juseyo,kɯmanhɛ tɕusejo,"그만하다 is to quit, against 멈추다 in the pause row, which is to halt and resume",2,ko-agent-v1;spa-board-v1;ko.wikipedia=마사지;ipa=rr
+massage-spa.please-pause,잠깐만 멈춰 주세요,,jamkkanman meomchwo juseyo,tɕamk͈anman mʌmtɕʰwʌ tɕusejo,잠깐만 says for just a moment on its own,2,ko-agent-v1;spa-board-v1;ko.wikipedia=마사지;ipa=rr
+massage-spa.please-avoid-this-area,이 부위는 피해 주세요,,i buwineun pihae juseyo,i puwinɯn pʰihɛ tɕusejo,부위 is the anatomical region word the trade uses,2,ko-agent-v1;spa-board-v1;ko.wikipedia=마사지;ipa=rr
+massage-spa.stronger-pressure,좀 더 세게 해 주세요,,jom deo sege hae juseyo,tɕom tʌ seɡe hɛ tɕusejo,,2,ko-agent-v1;spa-board-v1;ko.wikipedia=마사지;ipa=rr
+massage-spa.more-gently,살살 해 주세요,,salsal hae juseyo,salsal hɛ tɕusejo,살살 is the idiomatic light-touch counterpart of 세게; 약하게 is the plainer word,2,ko-agent-v1;spa-board-v1;ko.wikipedia=마사지;ipa=rr
+massage-spa.that-pressure-is-good,"세기가 딱 좋아요, 그대로 해 주세요",,"segiga ttak joayo, geudaero hae juseyo","seɡiɡa t͈ak tɕoajo, kɯdɛɾo hɛ tɕusejo","the strength is exactly right, keep it as it is",2,ko-agent-v1;spa-board-v1;ko.wikipedia=마사지;ipa=rr
+massage-spa.focus-on-shoulders,어깨 위주로 해 주세요,,eokkae wijuro hae juseyo,ʌk͈ɛ widʑuɾo hɛ tɕusejo,위주로 = centred on; 목어깨 is the trade's name for the neck-and-shoulder service,2,ko-agent-v1;spa-board-v1;ko.wikipedia=마사지;ipa=rr
+massage-spa.focus-on-back,등 위주로 해 주세요,,deung wijuro hae juseyo,tɯŋ widʑuɾo hɛ tɕusejo,,2,ko-agent-v1;spa-board-v1;ko.wikipedia=마사지;ipa=rr
+massage-spa.focus-on-neck,목 위주로 해 주세요,,mok wijuro hae juseyo,mok widʑuɾo hɛ tɕusejo,목 is both neck and throat in Korean; the pack uses it for throat too,2,ko-agent-v1;spa-board-v1;ko.wikipedia=마사지;ipa=rr
+massage-spa.focus-on-feet,발 위주로 해 주세요,,bal wijuro hae juseyo,pal widʑuɾo hɛ tɕusejo,발마사지 is a service of its own in Korea,2,ko-agent-v1;spa-board-v1;ko.wikipedia=마사지;ipa=rr
+massage-spa.reply-i-will-avoid-that-area,"네, 그 부위는 피할게요",,"ne, geu buwineun pihalgeyo","ne, kɯ puwinɯn pʰihalɡejo","-ㄹ게요, the form the pack's other replies use for the responder's own next action",2,ko-agent-v1;spa-reply-v1;in-pack-neighbour;ipa=rr
+massage-spa.reply-which-area-exactly,어느 부위 말씀이세요?,,eoneu buwi malsseumiseyo?,ʌnɯ puwi mals͈ɯmisejo,말씀 honorifies the guest's words; asks what was said rather than what was pointed at,2,ko-agent-v1;spa-reply-v1;in-pack-neighbour;ipa=rr
+massage-spa.reply-cannot-avoid-this-treatment,이 시술은 그 부위를 피할 수 없어요,,i siseureun geu buwireul pihal su eopseoyo,i sisɯɾɯn kɯ puwiɾɯl pʰihal su ʌpsʌjo,"시술 is the trade's word for one performed treatment, as in 안마시술소",2,ko-agent-v1;spa-reply-v1;in-pack-neighbour;ipa=rr
+massage-spa.reply-does-it-hurt-there,이 부위가 아프세요?,,i buwiga apeuseyo?,i puwiɡa apʰɯsejo,"-세요 honorifies the guest, which is the asymmetry between the two sides of this board",2,ko-agent-v1;spa-reply-v1;in-pack-neighbour;ipa=rr
+massage-spa.reply-ask-supervisor,"잘 모르겠어요, 실장님께 여쭤볼게요",,"jal moreugesseoyo, siljangnimkke yeojjwobolgeyo","tɕal moɾɯɡes͈ʌjo, sildʑaŋnimk͈e jʌtɕ͈wʌbolɡejo",실장 is the shift supervisor at a Korean salon and carries no gender; 매니저 serves in a hotel spa,2,ko-agent-v1;spa-reply-v1;in-pack-neighbour;ipa=rr

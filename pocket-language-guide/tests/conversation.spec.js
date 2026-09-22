@@ -1449,3 +1449,63 @@ test('Reply is the one control drawn for the stranger, and the answers fit sidew
   // a row of two.
   expect(grid.columns).toBeGreaterThanOrEqual(5);
 });
+
+test('a board is a board at every size, not a window full of columns', async ({ page }) => {
+  // **Reported as "I am not sure the desktop view of converse works", and it did not.**
+  // `grid-auto-rows: 1fr` shares the height between the rows, which is right on a
+  // phone — and once the page was given a definite height so that every row would be
+  // on screen, it started doing the same to a 1000px window: twelve buttons came out
+  // as eight towers 147px wide and 435px tall, with "Please call the police" set one
+  // word to a line. The column floor is the other half: it has to be high enough that
+  // twelve buttons divide evenly on a screen held sideways and low enough that a
+  // 360px phone still fits two, and 10rem is the only value that is both.
+  for (const [w, h, name] of /** @type {[number,number,string][]} */ ([
+    [1680, 1000, 'a wide desktop'], [1280, 800, 'a laptop'], [820, 1180, 'a tablet'],
+    [740, 360, 'a phone held sideways'], [390, 844, 'a phone'], [360, 640, 'a small phone'],
+  ])) {
+    await page.setViewportSize({ width: w, height: h });
+    await page.goto('/conversation.html?target=zh-Hans&source=en&board=emergency');
+    await expect(page.locator('.board-cell').first()).toBeVisible();
+    const shape = await page.evaluate(() => {
+      const cells = [...document.querySelectorAll('.board-cell')];
+      const box = cells[0].getBoundingClientRect();
+      return {
+        columns: new Set(cells.map((c) => Math.round(c.getBoundingClientRect().left))).size,
+        aspect: box.width / box.height,
+        past: Math.round(Math.max(...cells.map((c) => c.getBoundingClientRect().bottom)))
+          - innerHeight,
+      };
+    });
+    // Never one column: that is twelve rows and a board nobody can take in at a
+    // glance, which is the whole premise of the format.
+    expect(shape.columns, name).toBeGreaterThan(1);
+    // Never a tower. Half as wide as it is tall is the limit; the broken desktop was
+    // 0.34 and the worst legitimate shape here is a phone showing six buttons.
+    expect(shape.aspect, name).toBeGreaterThan(0.5);
+    // And the whole grid is on the screen, which is what the definite height bought.
+    expect(shape.past, name).toBeLessThanOrEqual(0);
+  }
+
+  // The answer grid is the same kind of grid on the same kind of screen, and was the
+  // same eight towers until it got the same treatment.
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=directions');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('[data-button="which-way"]').click();
+  await page.locator('.board-reply').click();
+  await expect(page.locator('.board-answer').first()).toBeVisible();
+  const answers = await page.evaluate(() => {
+    const cells = [...document.querySelectorAll('.board-answer')];
+    const box = cells[0].getBoundingClientRect();
+    return {
+      aspect: box.width / box.height,
+      // The way out lines up with the panel rather than with the screen: it is a way
+      // *back*, and in the middle of a wide window it reads as one more answer.
+      backLeft: Math.round(document.querySelector('.board-back')
+        ?.getBoundingClientRect().left ?? -1),
+      gridLeft: Math.round(box.left),
+    };
+  });
+  expect(answers.aspect).toBeGreaterThan(0.5);
+  expect(answers.backLeft).toBe(answers.gridLeft);
+});

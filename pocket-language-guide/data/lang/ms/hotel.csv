@@ -51,3 +51,18 @@ laundry.detergent,Deterjen,Sabun cuci,detˈɛɾrdʒen,,2,ms-agent-v1;ipa=espeak
 laundry.dry-cleaning,Dry cleaning,,drj tʃləˈaneŋ,cuci kering here means wash-and-dry,2,ms-agent-v1;ipa=espeak
 laundry.dryer,Mesin pengering,,mˈəsen pəŋˈəreŋ,,2,ms-agent-v1;ipa=espeak
 laundry.coin-operated,Pakai koin,Self-service,pˈakaɪ kˈoen,,2,ms-agent-v1;ipa=espeak
+massage-spa.please-stop,"Berhenti, jangan teruskan",,"bərhˈənti, dʒˈaŋan təɾrˈuskan",stop; do not continue,2,spa-board-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
+massage-spa.please-pause,Rehat sekejap dulu,,rˈɛhat səkˈɛdʒap dˈulu,a short rest first,2,spa-board-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
+massage-spa.please-avoid-this-area,Tolong jangan urut bahagian ini,,tˈoloŋ dʒˈaŋan ˈurot bˌahaɡˈian ˈini,please do not massage this part,2,spa-board-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
+massage-spa.stronger-pressure,Tolong tekan kuat sedikit,,tˈoloŋ tˈəkan kˈuat sədˈiket,please press a little harder,2,spa-board-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
+massage-spa.more-gently,Kurangkan tekanan,Perlahan sedikit,kurˈaŋkan təkˈanan,"reduce the pressure; the alt is the spoken form -- perlahan in this sense is Kamus Dewan's 'tidak dgn tenaga yg banyak', not the speed sense",2,spa-board-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
+massage-spa.that-pressure-is-good,"Tekanan ini sesuai, kekalkan begini",,"təkˈanan ˈini səsˈuaɪ, kəkˈalkan bəɡˈini",this pressure is right; keep it like this,2,spa-board-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
+massage-spa.focus-on-shoulders,Tolong urut bahu terutamanya,,tˈoloŋ ˈurot bˈahu təɾrˌutamˈəɲə,please massage especially the shoulders,2,spa-board-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
+massage-spa.focus-on-back,Tolong urut belakang terutamanya,,tˈoloŋ ˈurot bəlˈakaŋ təɾrˌutamˈəɲə,"please massage especially the back -- belakang, not punggung, which in Malaysian Malay is the buttocks",2,spa-board-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
+massage-spa.focus-on-neck,Tolong urut leher terutamanya,Tolong urut tengkuk terutamanya,tˈoloŋ ˈurot lˈeheɾr təɾrˌutamˈəɲə,"please massage especially the neck; the alt names the nape, which is the part the trade works",2,spa-board-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
+massage-spa.focus-on-feet,Tolong urut kaki terutamanya,,tˈoloŋ ˈurot kˈaki təɾrˌutamˈəɲə,please massage especially the feet,2,spa-board-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
+massage-spa.reply-i-will-avoid-that-area,"Baik, saya tidak akan urut bahagian itu",,"bˈaɪʔ, sˈajə tˈidaʔ ˈakan ˈurot bˌahaɡˈian ˈitu",fine; I will not massage that part,2,spa-reply-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
+massage-spa.reply-which-area-exactly,Bahagian mana tepatnya?,,bˌahaɡˈian mˈanə təpˈatɲə,which part exactly?,2,spa-reply-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
+massage-spa.reply-cannot-avoid-this-treatment,Rawatan ini tidak boleh tanpa bahagian itu,,rawˈatan ˈini tˈidaʔ bˈoleh tˈanpə bˌahaɡˈian ˈitu,this treatment is not possible without that part,2,spa-reply-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
+massage-spa.reply-does-it-hurt-there,Bahagian ini sakit?,,bˌahaɡˈian ˈini sˈaket,does this part hurt?,2,spa-reply-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak
+massage-spa.reply-ask-supervisor,"Saya kurang pasti, saya perlu tanya penyelia",,"sˈajə kˈuraŋ pˈasti, sˈajə pˈəɾrlu tˈaɲə pəɲəlˈiə",I am not quite sure; I need to ask the supervisor,2,spa-reply-v1;src=DBP;ms.wikipedia=Urut;ipa=espeak

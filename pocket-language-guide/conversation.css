@@ -260,7 +260,14 @@
 .board-grid {
   flex: 1 1 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  /* **10rem, and the margin either side of it is thin.** The floor decides the
+     column count, and twelve buttons want a count that divides them: at 9rem a 740px
+     screen held sideways packed five, which is 5 + 5 + 2 and a ragged last row,
+     where four is 4 + 4 + 4. It cannot go higher than this, though -- at 11rem a
+     360px phone can no longer fit two columns and falls to one, which is twelve rows
+     and a board that scrolls. 10rem is the only floor that gives two columns at
+     360px and four at 740px. */
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
   /* Explicitly one content-sized row first, so a node's heading takes the height of
      a line rather than the height of a button -- `grid-auto-rows: 1fr` applies to
      the implicit rows after it, which are the ones holding buttons. Harmless on a
@@ -269,6 +276,40 @@
   grid-auto-rows: 1fr;
   gap: var(--space-2);
   min-block-size: 0;
+}
+
+/* **A board is a board on a desktop too, not a window full of columns.**
+   `grid-auto-rows: 1fr` shares the height between the rows, which is exactly right on
+   a phone -- and once the page was given a definite height so that every row would be
+   on screen, it started doing the same thing to a 1000px window. Twelve buttons came
+   out as eight towers 147px wide and 435px tall, with `Please call the police` set
+   one word per line. Reported as "I am not sure the desktop view works", and it did
+   not.
+
+   So past the width where a phone stops being the shape, the grid is a panel: capped,
+   centred, and no taller than a board wants to be. The cap is expressed in `rem` so
+   it is a number of buttons rather than a number of pixels, and it moves with the
+   reader's text size like everything else here. */
+@media (min-width: 46rem) {
+  .board-main { align-items: center; justify-content: center; }
+  .board-grid {
+    inline-size: min(100%, 48rem);
+    max-block-size: min(100%, 40rem);
+  }
+  .board-status, .board-bar { inline-size: min(100%, 48rem); }
+  /* The answers are the same kind of grid on the same kind of screen, and were the
+     same eight towers: 167 wide by 387 tall. Wider than the board's own panel,
+     because there are more of them and they hold whole sentences. */
+  .board-stage { align-items: center; justify-content: center; }
+  .board-answers {
+    inline-size: min(100%, 60rem);
+    max-block-size: min(100%, 34rem);
+  }
+  .board-asked, .board-message { inline-size: min(100%, 60rem); }
+  /* The way out stays at the reading edge rather than centring with everything else
+     -- it is a way *back*, and in the middle it reads as one more answer. Lined up
+     with the panel's own edge, which on a wide screen is nowhere near the screen's. */
+  .board-back { margin-inline-start: max(0px, calc((100% - 60rem) / 2)); }
 }
 
 .board-cell {

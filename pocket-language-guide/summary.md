@@ -659,6 +659,16 @@ corpus is for. `quick-directions` does double duty as the *answers* to "which wa
 so the person being asked taps "turn left" in their own language and the traveller
 reads it in theirs.
 
+**All eight boards reach fifty-one languages.** The massage board reached one until
+its sixteen concepts were written out of Mandarin: they had been authored for a
+Mandarin parlour and scoped `applies_to: zh-Hans`, which is what held the board back
+rather than anything about its tree. Five research agents wrote the other 49 packs
+from each language's own trade sources, and most of the work was in not translating
+the English — Thai splits the shoulder joint from the top of the shoulder and sells
+neck-and-shoulder as one service, Malay `pijat` is primarily a bedbug, Javanese `alon`
+is speed rather than softness, and every language's word for *slowly* was the trap
+that "more gently" had to avoid.
+
 **Most buttons can be answered, and that took an audit to fix.** The boards were
 built as a way to *say* things and the reply sets were retrofitted, so the misfits were
 systematic: thirteen of `food`'s buttons were silent, including all eight allergen

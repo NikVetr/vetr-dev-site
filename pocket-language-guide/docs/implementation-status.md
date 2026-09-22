@@ -2149,3 +2149,116 @@ departure in minutes from now *or* at a time, which is two cells opening two dif
 keyboards. The reducer recorded only that a keypad had been opened, so the first
 version rendered a duration pad for the clock cell — and the tell was that the cell
 said *Another duration* either way.
+
+## Batch K — the last board, and a desktop view that was broken
+
+### `spa` reached one language; it reaches fifty-one
+
+All sixteen `massage-spa` concepts were written for a Mandarin massage parlour and
+carried `applies_to: zh-Hans`, so seven boards served 51 listeners and the eighth
+served one. Nothing else about it was narrow. Five research agents wrote the rows for
+the 49 remaining packs against `content/PROMPTS/massage-spa.md`, and the board went
+**1 listener → 51, one pair → 2,550.** Corpus warnings fell 214 → 198, because
+sixteen "scoped to zh-Hans but has no gloss in…" lines retired at once.
+
+The briefs asked for trade vocabulary from sources of record rather than translated
+English, and that is most of what came back. A sample of what would have been wrong:
+
+- **Thai is a different trade**, and the agent holding it said where the Mandarin
+  framing broke. Thai splits ไหล่ (the shoulder joint) from **บ่า** (the top of the
+  shoulder), and the trade sells คอ บ่า ไหล่ as one unit — so 肩膀 has no single
+  counterpart, and `focus-on-shoulders` is บ่า because that is the part a Thai massage
+  works. It also noted that ดัด and ดึง — the assisted stretches that define the trade
+  — have no concept on this board at all. That is a gap in the concept set, not in the
+  Thai rows.
+- **Malay `pijat` is a false friend**: Kamus Dewan's primary Malaysian sense is the
+  bedbug. The trade word is `urut`.
+- **Javanese `alon` is speed**, not softness — Bausastra gives "rindhik, ora
+  kêbantêrên" — so `more-gently` uses `alus`, which the same dictionary defines of the
+  touch.
+- **Every language's word for *slowly* was the trap**, and every agent checked its own
+  `communication.please-speak-more-slowly` row to find it: Czech *pomaleji*, Tamil
+  *மெதுவாக*, Persian *آهسته‌تر*, Indonesian *pelan*, Marathi *हळू*. `more-gently` is
+  about pressure and avoids all of them.
+- **Russian and Ukrainian could not use `давление` / `тиск` for "that pressure is
+  good"**, because the bare noun reads first as *blood* pressure. Those rows name the
+  action instead.
+- **French law reserves *massage* to physiotherapists** (CSP L.4321-1), so a spa
+  performs a *soin* — which is the word `reply-cannot-avoid-this-treatment` uses,
+  sidestepping the question rather than picking a side.
+
+**Gender was the other half of the job.** The ten customer rows are spoken by the
+traveller, whose sex the app can ask about; the five therapist replies are tapped by
+someone the app knows nothing about and had to come out neutral with no slash. Arabic
+and Hebrew needed a third device, because a masculine imperative genders the
+*therapist* too: `أرجو` + maṣdar and `יש ל` + infinitive, both invariant. Czech's
+`vedoucí` is epicene only in the nominative, so that reply makes the supervisor the
+subject. Punjabi nearly shipped a `ਕਰਦੇ ਰਹੋ` that would have gendered the therapist —
+a hazard no `speaker_gender` axis can express. Two rows are recorded as generic
+masculine with the reason in `provenance`: Polish `kierownika` and Arabic `المسؤول`,
+because neither language has a neutral noun for the person and the concept requires
+naming one.
+
+### A duplicate concept, found five times over
+
+All five agents independently refused to translate `massage-spa.reply-none-of-these`,
+and they were right: it was byte-identical to `board-answers.none-of-these` in every
+pack that had both, and no board had referenced it since the reply-set audit. It is
+deleted — concept and 41 rows — and the general row's note now records that rather
+than describing itself as a generalisation of something that still exists. 902 → 901
+concepts.
+
+Two other things the agents found and did not fix, both outside their files and both
+worth doing:
+
+- **`data/lang/ms/emergency.csv`'s `body-parts.back` is `Punggung`**, which Kamus
+  Dewan gives as *pantat, bokong* in Malaysian Malay and marks the "back" sense `Id`.
+  A Malaysian pointing at that card is pointing at their buttocks.
+- **The Hausa pack is under-hooked** and disagrees with its own catalogue: `kudi` 49×
+  against `kuɗi` 2×, `karfi` 4× against the catalogue's `ƙarfi`. It wants one sweep,
+  not a per-row fix.
+
+And one they found in a file they did hold: `data/lang/am/social.csv` romanised ቅ as
+`q` in a single row, which is not in `build_ipa.py`'s Amharic table — so that row's
+`ipa` had been silently empty since it was written. Every other Amharic row writes
+`kʼ`. Fixed, and the cell now generates.
+
+### A note that was wrong twice
+
+`massage-spa.stronger-pressure`'s note said the shape of the wording could not matter,
+because "the grid labels its cells in the owner's language… so the two never appear
+together". Two agents checked it against the code instead and it is false:
+`labelOf` in `ui/conversation.js` falls back to the owner's own sentence when a button
+carries no `labelKey`, and neither `stronger` nor `gentler` has one on the spa board —
+so on the owner's grid those cells *are* those two sentences, adjacent. The note now
+says so and cites the line; `massage-spa.md` says it too. It had been reasoned about
+wrongly twice, which is the argument for checking rather than reasoning.
+
+### The desktop view of converse was broken, and it was Batch I's fault
+
+Reported as "I am not sure the desktop view of converse works currently", and it did
+not. Giving the page a definite height so that every row of a board would be on screen
+turned `grid-auto-rows: 1fr` loose on a 1000px window: twelve buttons came out as
+**eight towers 147px wide and 435px tall**, with "Please call the police" set one word
+to a line. The answers screen was worse at 167 × 387.
+
+Past the width where a phone stops being the shape, both grids are panels now: capped,
+centred, and no taller than a board wants to be. The column floor moved 9rem → 10rem,
+which is the only value that gives two columns on a 360px phone and four on one held
+sideways — 11rem drops a 360px phone to a single column and twelve rows. The way out
+of the answers keeps to the panel's edge rather than the screen's, because in the
+middle of a wide window it reads as a thirteenth answer. Pinned by a test that walks
+six viewport sizes and refuses any cell more than twice as tall as it is wide.
+
+### Two generated files that were not as generated as they looked
+
+`data/registry/timezones.csv` shipped with a comment header, because provenance
+belongs with the data. No other file in `data/registry` has one, and the tooling reads
+that directory with a bare `csv.DictReader`: the `#` line becomes the header, the
+first comment containing a comma overflows into the `None` key as a *list*, and
+`scripts/subset_fonts.py` dies calling `ord()` on it. It did. The provenance is in the
+generator's own header now.
+
+And the Korean subsets needed rebuilding: the new rows gave the respeller new IPA, and
+a Korean reader's respelling of it emits `뉙` and `댠`, which `cjk-kr` could not draw.
+`tests/fonts.test.mjs` caught it — that test exists because this has happened before.

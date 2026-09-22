@@ -20,7 +20,12 @@ the wording:
   not a polite request to conclude the treatment.
 - **They have to be unmistakable at a glance and out of focus.** `stronger-pressure`
   and `more-gently` are the pair most likely to be confused, and the board puts them
-  side by side. Choose wordings whose *shapes* differ, not only their meanings.
+  side by side. Choose wordings whose *shapes* differ, not only their meanings. This
+  is checkable rather than assumed: `labelOf` in `ui/conversation.js` falls back to
+  the owner's own sentence when a button carries no `labelKey`, and neither of these
+  two has one on the spa board — so on the owner's grid these cells are adjacent and
+  *are* these sentences. A note in `data/concepts/hotel.csv` denied it for a while;
+  it was wrong, and two agents caught it independently.
 - **`please-stop` is deliberately not softened.** It ends the session. A language whose
   ordinary polite register would pad it should still keep it blunt here, and say so in
   `notes` if that is a departure from how that language usually asks for something.

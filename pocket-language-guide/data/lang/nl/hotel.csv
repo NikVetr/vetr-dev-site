@@ -51,3 +51,18 @@ laundry.detergent,wasmiddel,,ʋˌɑsmɪdˈɛl,,2,nl-agent-v1;ipa=espeak
 laundry.dry-cleaning,stomerij,,stˌoːmərˈɛɪ,,2,nl-agent-v1;ipa=espeak
 laundry.dryer,droger,,drˈoːɣər,,2,nl-agent-v1;ipa=espeak
 laundry.coin-operated,muntautomaat,,mˌʏntʌʊtoːmˈaːt,sign on self-service machines,2,nl-agent-v1;ipa=espeak
+massage-spa.please-stop,"Stop, niet verdergaan.",,"stˈɔp, nˌit vˌɛrdərɣˈaːn",stop; do not go on,2,spa-board-v1;nl.wikipedia=Massage;ipa=espeak
+massage-spa.please-pause,"Even pauzeren, alstublieft.",,"ˈeːvən pʌʊzˈɪːrən, ˌɑlstʏblˈift","pause for a moment, please",2,spa-board-v1;nl.wikipedia=Massage;ipa=espeak
+massage-spa.please-avoid-this-area,"Dit gebied niet masseren, alstublieft.",,"dɪt ɣəbˈit nˌit mɑsˈɪːrən, ˌɑlstʏblˈift","do not massage this area, please",2,spa-board-v1;nl.wikipedia=Massage;ipa=espeak
+massage-spa.stronger-pressure,Mag het wat steviger?,,mɑx hət ʋɑt stˈeːvəɣər,may it be a bit firmer?,2,spa-board-v1;nl.wikipedia=Massage;ipa=espeak
+massage-spa.more-gently,"Wat zachter, alstublieft.",,"ʋɑt zˈɑxtər, ˌɑlstʏblˈift","a bit softer, please",2,spa-board-v1;nl.wikipedia=Massage;ipa=espeak
+massage-spa.that-pressure-is-good,"Zo is de druk goed, graag zo houden.",,"zoː ɪs də drˈʏk ɣˈut, ɣrˈaːx zoː hˈʌʊdən",the pressure is good like this; please keep it so,2,spa-board-v1;nl.wikipedia=Massage;ipa=espeak
+massage-spa.focus-on-shoulders,"Vooral de schouders masseren, alstublieft.",,"vˈɔːrɑl də sxˈʌʊdərs mɑsˈɪːrən, ˌɑlstʏblˈift","massage mainly the shoulders, please",2,spa-board-v1;nl.wikipedia=Massage;ipa=espeak
+massage-spa.focus-on-back,"Vooral de rug masseren, alstublieft.",,"vˈɔːrɑl də rˈʏx mɑsˈɪːrən, ˌɑlstʏblˈift","massage mainly the back, please",2,spa-board-v1;nl.wikipedia=Massage;ipa=espeak
+massage-spa.focus-on-neck,"Vooral de nek masseren, alstublieft.",,"vˈɔːrɑl də nˈɛk mɑsˈɪːrən, ˌɑlstʏblˈift","massage mainly the neck, please -- nek is the back of the neck, which is what the trade works; hals is the front",2,spa-board-v1;nl.wikipedia=Massage;ipa=espeak
+massage-spa.focus-on-feet,"Vooral de voeten masseren, alstublieft.",,"vˈɔːrɑl də vˈutən mɑsˈɪːrən, ˌɑlstʏblˈift","massage mainly the feet, please",2,spa-board-v1;nl.wikipedia=Massage;ipa=espeak
+massage-spa.reply-i-will-avoid-that-area,"Goed, ik laat dat gebied met rust.",,"ɣˈut, ɪk lˈaːt dɑt ɣəbˈid mɛt rˈʏst",fine; I will leave that area alone,2,spa-reply-v1;nl.wikipedia=Massage;ipa=espeak
+massage-spa.reply-which-area-exactly,Welk gebied precies?,,ʋˈɛlk ɣəbˈit preːsˈis,which area exactly?,2,spa-reply-v1;nl.wikipedia=Massage;ipa=espeak
+massage-spa.reply-cannot-avoid-this-treatment,Deze behandeling kan niet zonder dat gebied.,,dˌeːzə bəhˈɑndəlˌɪŋ kɑn nˌit zˈɔndər dɑt ɣəbˈit,this treatment is not possible without that area,2,spa-reply-v1;nl.wikipedia=Massage;ipa=espeak
+massage-spa.reply-does-it-hurt-there,Doet dit gebied pijn?,,dˈu tɪt ɣəbˈit pˈɛɪn,does this area hurt?,2,spa-reply-v1;nl.wikipedia=Massage;ipa=espeak
+massage-spa.reply-ask-supervisor,"Dat weet ik niet zeker, ik vraag het aan de leidinggevende.",,"dɑt ʋˈeːt ɪk nˌit zˈeːkər, ɪk vrˈaːx hət aːn də lˈɛɪdɪŋɣˌeːvəndə",I am not sure; I will ask the supervisor,2,spa-reply-v1;nl.wikipedia=Massage;ipa=espeak
