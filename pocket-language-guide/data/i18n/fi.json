@@ -528,5 +528,17 @@
   "quick.autofitUndo": "Kumoa",
   "quick.imageOf": "Sivu {n}/{total}",
   "quick.nothingToExport": "Vietävää ei ole vielä: arkki ei mahdu, joten sivuja ei syntynyt.",
-  "studio.moreActions": "Lisää toimintoja"
+  "studio.moreActions": "Lisää toimintoja",
+  "board.slow": "Sano uudelleen puolella nopeudella",
+  "board.switchTopic": "Vaihda aihetta",
+  "board.switchLanguage": "Vaihda kieltä",
+  "display.heading": "Mitä viestinäkymä näyttää",
+  "display.lede": "Kaikki tässä koskee näkymää, jonka ojennat jollekulle. Ota pois käytöstä se, mitä et tarvitse, tai ota ääntäminen käyttöön, jos opiskelet kieltä.",
+  "display.owner": "Oma sanamuotosi lauseen alla",
+  "display.roman": "Miten se sanotaan, omilla kirjaimillasi",
+  "display.ipa": "Miten se sanotaan, IPA:lla",
+  "display.speak": "Puhu-painike ja sen vieressä puolinopeuden painike",
+  "display.turn": "Painike, joka kääntää lauseen kyljelleen",
+  "display.voice": "Ääni",
+  "display.voiceAuto": "Valitaan automaattisesti"
 }

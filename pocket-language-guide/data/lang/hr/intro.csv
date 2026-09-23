@@ -7,7 +7,7 @@ introductions.this-is-my-friend,Ovo je moj prijatelj,Ovo je moja prijateljica,ˈ
 introductions.i-am-from,Ja sam iz ovog mjesta: {},,jˈaː sam ˈiz ˈovoɡ mjˈesta {},"'I am from this place:' -- iz takes the genitive, which a bare name in the slot cannot carry",2,hr-agent-v1;ipa=espeak
 introductions.where-are-you-from,Odakle ste?,,odakle ste,,2,hr-agent-v1;ipa=espeak
 introductions.how-are-you,Kako ste?,,kˈako ste,,2,hr-agent-v1;ipa=espeak
-introductions.i-am-a-tourist,Turist sam,Turistkinja sam,tˈurist sam,man speaking / woman speaking,2,hr-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,Turist sam,Turistkinja sam,tˈurist sam,,2,hr-agent-v1;ipa=espeak
 introductions.this-is-my-husband-wife,Ovo je moj muž,Ovo je moja žena,ˈovo je mˈoj mˈuʒ,husband / wife,2,hr-agent-v1;ipa=espeak
 introductions.this-is-my-daughter-son,Ovo je moja kći,Ovo je moj sin,ˈovo je mˈoja ktɕˈi,daughter / son,2,hr-agent-v1;ipa=espeak
-introductions.i-am-traveling-alone,Putujem sam,Putujem sama,putujem sam,man speaking / woman speaking,2,hr-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,Putujem sam,Putujem sama,putujem sam,,2,hr-agent-v1;ipa=espeak

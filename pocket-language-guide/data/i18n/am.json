@@ -528,5 +528,17 @@
   "quick.imageOf": "ከ{total} ገጽ {n}ኛው",
   "quick.nothingToExport": "ገና የሚወጣ ምንም የለም፦ ወረቀቱ አልተመጠነም፤ ስለዚህ አንድም ገጽ አልተሠራም።",
   "studio.moreActions": "ተጨማሪ እርምጃዎች",
-  "gallery.converse": "ይነጋገሩ"
+  "gallery.converse": "ይነጋገሩ",
+  "board.slow": "እንደገና በግማሽ ፍጥነት ያሰሙ",
+  "board.switchTopic": "ርዕሱን ይቀይሩ",
+  "board.switchLanguage": "ቋንቋውን ይቀይሩ",
+  "display.heading": "የመልእክቱ መስኮት የሚያሳየው",
+  "display.lede": "እዚህ ያለው ሁሉ ለሌላ ሰው ስለሚያሳዩት መስኮት ነው። የማይጠቀሙበትን ያጥፉ፤ ቋንቋውን እየተማሩ ከሆነ ደግሞ አጠራሩን ያብሩ።",
+  "display.owner": "የራስዎ አገላለጽ፣ ከዓረፍተ ነገሩ ስር",
+  "display.roman": "አጠራሩ፣ በራስዎ ፊደል",
+  "display.ipa": "አጠራሩ፣ በአይፒኤ",
+  "display.speak": "«ያሰሙ» እና ከጎኑ ያለው የግማሽ ፍጥነት አዝራር",
+  "display.turn": "ዓረፍተ ነገሩን ወደ ጎን የሚያዞረው አዝራር",
+  "display.voice": "ድምጽ",
+  "display.voiceAuto": "በራስ-ሰር የተመረጠ"
 }

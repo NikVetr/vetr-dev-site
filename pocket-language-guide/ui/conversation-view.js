@@ -439,9 +439,9 @@ export function renderMessage(stage, phrase,
   };
   const parts = [];
   if (show.owner) parts.push(part(phrase.owner.text, phrase.owner.lang, phrase.owner.dir, 'gloss-own'));
-  // Latin-ish by construction and read by the owner, so it takes their direction.
-  if (show.roman && phrase.listener.roman) {
-    parts.push(part(phrase.listener.roman, phrase.owner.lang, phrase.owner.dir, 'gloss-roman'));
+  // The owner's own letters, so it takes their language and direction.
+  if (show.roman && phrase.listener.say) {
+    parts.push(part(phrase.listener.say, phrase.owner.lang, phrase.owner.dir, 'gloss-say'));
   }
   if (show.ipa && phrase.listener.ipa) {
     parts.push(part(`/${phrase.listener.ipa}/`, 'und-fonipa', 'ltr', 'gloss-ipa'));

@@ -773,7 +773,9 @@ test('what the message screen carries is the reader’s choice, and it sticks', 
   const line = page.locator('.board-message-gloss');
   // Three parts, in reading order: what it means, how to say it, and the notation.
   await expect(line.locator('.gloss-own')).toHaveText('Please stop');
-  await expect(line.locator('.gloss-roman')).not.toBeEmpty();
+  // The card's `say` column, not pinyin: an English reader is shown `ching`, not `qǐng`.
+  await expect(line.locator('.gloss-say')).not.toBeEmpty();
+  await expect(line.locator('.gloss-say')).not.toContainText('qǐng');
   await expect(line.locator('.gloss-ipa')).toContainText('/');
   // The separator is a border between spans, not a pipe in the text, so that it
   // cannot be reordered into the wrong place beside a right-to-left gloss.

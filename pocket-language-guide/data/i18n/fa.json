@@ -528,5 +528,17 @@
   "quick.imageOf": "صفحهٔ {n} از {total}",
   "quick.nothingToExport": "هنوز چیزی برای خروجی گرفتن نیست: برگ جا نمی‌شود، پس هیچ صفحه‌ای ساخته نشد.",
   "studio.moreActions": "کارهای بیشتر",
-  "gallery.converse": "گفت‌وگو"
+  "gallery.converse": "گفت‌وگو",
+  "board.slow": "تکرار با نصف سرعت",
+  "board.switchTopic": "تغییر موضوع",
+  "board.switchLanguage": "تغییر زبان",
+  "display.heading": "آنچه صفحهٔ پیام نشان می‌دهد",
+  "display.lede": "همهٔ این‌ها دربارهٔ صفحه‌ای است که به کسی نشان می‌دهید. آنچه به کارتان نمی‌آید را خاموش کنید، یا اگر زبان را یاد می‌گیرید تلفظ را روشن کنید.",
+  "display.owner": "عبارت به زبان خودتان، زیر جمله",
+  "display.roman": "شیوهٔ گفتن، با حروف خودتان",
+  "display.ipa": "شیوهٔ گفتن، با آوانگاری",
+  "display.speak": "«پخش صدا» و دکمهٔ نصف سرعت کنار آن",
+  "display.turn": "دکمه‌ای که جمله را به پهلو می‌چرخاند",
+  "display.voice": "صدا",
+  "display.voiceAuto": "انتخاب خودکار"
 }

@@ -8,8 +8,8 @@ hotel-basics.are-any-rooms-available,Imate li slobodnih soba?,,imate li slobodni
 hotel-basics.there-are-two-of-us,Nas smo dvoje,,nˈas smo dvˈoje,,2,hr-agent-v1;ipa=espeak
 hotel-basics.i-have-a-reservation,Imam rezervaciju,,imam rezervatsiju,,2,hr-agent-v1;ipa=espeak
 hotel-basics.can-i-charge-my-phone,Mogu li napuniti mobitel?,,mˈoɡu li napuniti mobitel,,2,hr-agent-v1;ipa=espeak
-hotel-basics.i-would-like-a-non-smoking-room,Želio bih sobu za nepušače,Željela bih sobu za nepušače,ʒˈelio bˈix sˈobu zˈa nepuʃatʃe,man speaking / woman speaking,2,hr-agent-v1;ipa=espeak
-hotel-basics.i-would-like-a-quiet-room,Želio bih tihu sobu,Željela bih tihu sobu,ʒˈelio bˈix tˈixu sˈobu,man speaking / woman speaking,2,hr-agent-v1;ipa=espeak
+hotel-basics.i-would-like-a-non-smoking-room,Želio bih sobu za nepušače,Željela bih sobu za nepušače,ʒˈelio bˈix sˈobu zˈa nepuʃatʃe,,2,hr-agent-v1;ipa=espeak
+hotel-basics.i-would-like-a-quiet-room,Želio bih tihu sobu,Željela bih tihu sobu,ʒˈelio bˈix tˈixu sˈobu,,2,hr-agent-v1;ipa=espeak
 hotel-basics.is-there-a-washing-machine,Ima li perilica za rublje?,,ima li perilitsa zˈa rˈubʎe,,2,hr-agent-v1;ipa=espeak
 hotel-basics.is-wi-fi-free,Je li Wi-Fi besplatan?,,je li vˈajfaj besplatan,,2,hr-agent-v1;ipa=espeak+loan
 hotel-basics.how-much-per-night,Koliko košta noćenje?,,koliko kˈoʃta notɕeɲe,,2,hr-agent-v1;ipa=espeak

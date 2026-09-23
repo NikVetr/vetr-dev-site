@@ -1,6 +1,6 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 building-help.what-room-number-is-this,Qual é o número desta sala?,Que quarto é este?,kwˈaʊ ɛ ʊ nˈũmeɾʊ dˈɛstæ sˈalæ,,2,pt-agent-v1;ipa=espeak
-building-help.i-am-lost,Estou perdido,Estou perdida,estˌow pˌeɾədʒˈidʊ,-a if female,2,pt-agent-v1;ipa=espeak
+building-help.i-am-lost,Estou perdido,Estou perdida,estˌow pˌeɾədʒˈidʊ,,2,pt-agent-v1;ipa=espeak
 building-help.where-is-reception,Onde é a receção?,a recepção,ˌoŋdʒj ɛ a xˌesesˈɐ̃ʊ̃,,2,pt-agent-v1;ipa=espeak
 building-help.where-is-a-power-outlet,Onde há uma tomada?,,ˌoŋdʒy a ˌumæ tˌomˈadæ,,2,pt-agent-v1;ipa=espeak
 accessibility.step-free,Há acesso sem degraus?,,a ˌasˈɛsʊ sˈeɪŋ deɡrˈaʊs,,2,pt-agent-v1;ipa=espeak

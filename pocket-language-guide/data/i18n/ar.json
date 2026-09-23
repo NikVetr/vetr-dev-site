@@ -528,5 +528,17 @@
   "quick.imageOf": "الصفحة {n} من {total}",
   "quick.nothingToExport": "لا شيء للتصدير بعد: الورقة لا تتّسع، فلم تُنتج أي صفحة.",
   "studio.moreActions": "إجراءات أخرى",
-  "gallery.converse": "محادثة"
+  "gallery.converse": "محادثة",
+  "board.slow": "إعادة النطق بنصف السرعة",
+  "board.switchTopic": "تغيير الموضوع",
+  "board.switchLanguage": "تغيير اللغة",
+  "display.heading": "ما تعرضه شاشة الرسالة",
+  "display.lede": "كل ما هنا يتعلق بالشاشة التي تعرضها على شخص آخر. أوقف ما لا تستخدمه، أو شغّل النطق إذا كنت تتعلم اللغة.",
+  "display.owner": "صياغتك أنت، تحت الجملة",
+  "display.roman": "كيفية النطق، بحروفك أنت",
+  "display.ipa": "كيفية النطق، بالأبجدية الصوتية",
+  "display.speak": "زر «نطق» وزر نصف السرعة بجانبه",
+  "display.turn": "زر تدوير الجملة جانبيًا",
+  "display.voice": "الصوت",
+  "display.voiceAuto": "يُختار تلقائيًا"
 }

@@ -528,5 +528,17 @@
   "quick.imageOf": "{total} માંથી પાનું {n}",
   "quick.nothingToExport": "હજી ઉતારવા જેવું કંઈ નથી: શીટ જ બેસતી નથી, તેથી એકેય પાનું બન્યું નથી.",
   "studio.moreActions": "બીજાં કામ",
-  "gallery.converse": "વાતચીત"
+  "gallery.converse": "વાતચીત",
+  "board.slow": "અડધી ઝડપે ફરી બોલો",
+  "board.switchTopic": "વિષય બદલો",
+  "board.switchLanguage": "ભાષા બદલો",
+  "display.heading": "સંદેશાનો પડદો શું બતાવે",
+  "display.lede": "અહીંનું બધું એ પડદા વિશે છે જે તમે કોઈને બતાવો છો. જે વાપરતા ન હો તે બંધ કરો, અથવા ભાષા શીખતા હો તો ઉચ્ચાર ચાલુ કરો.",
+  "display.owner": "તમારા પોતાના શબ્દો, વાક્યની નીચે",
+  "display.roman": "કેવી રીતે બોલવું, તમારા પોતાના અક્ષરોમાં",
+  "display.ipa": "કેવી રીતે બોલવું, આઇપીએમાં",
+  "display.speak": "«બોલો» અને તેની બાજુનું અડધી ઝડપનું બટન",
+  "display.turn": "વાક્યને આડું ફેરવતું બટન",
+  "display.voice": "અવાજ",
+  "display.voiceAuto": "આપમેળે પસંદ કરેલો"
 }

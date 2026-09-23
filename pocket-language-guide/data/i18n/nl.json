@@ -528,5 +528,17 @@
   "quick.autofitUndo": "Ongedaan maken",
   "quick.imageOf": "Pagina {n} van {total}",
   "quick.nothingToExport": "Er valt nog niets te exporteren: het vel past niet, dus zijn er geen pagina’s gemaakt.",
-  "studio.moreActions": "Meer acties"
+  "studio.moreActions": "Meer acties",
+  "board.slow": "Nog eens uitspreken, op halve snelheid",
+  "board.switchTopic": "Onderwerp wijzigen",
+  "board.switchLanguage": "Taal wijzigen",
+  "display.heading": "Wat het berichtscherm laat zien",
+  "display.lede": "Alles hier gaat over het scherm dat u aan iemand voorhoudt. Zet uit wat u niet gebruikt, of zet de uitspraak aan als u de taal leert.",
+  "display.owner": "Uw eigen formulering, onder de zin",
+  "display.roman": "Hoe u het zegt, in uw eigen letters",
+  "display.ipa": "Hoe u het zegt, in IPA",
+  "display.speak": "Uitspreken, en de knop voor halve snelheid ernaast",
+  "display.turn": "De knop die de zin zijwaarts draait",
+  "display.voice": "Stem",
+  "display.voiceAuto": "Automatisch gekozen"
 }

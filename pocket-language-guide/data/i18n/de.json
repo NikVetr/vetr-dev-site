@@ -528,5 +528,17 @@
   "quick.autofitUndo": "Rückgängig machen",
   "quick.imageOf": "Seite {n} von {total}",
   "quick.nothingToExport": "Es gibt noch nichts zu exportieren: Das Blatt passt nicht, daher wurden keine Seiten erzeugt.",
-  "studio.moreActions": "Weitere Aktionen"
+  "studio.moreActions": "Weitere Aktionen",
+  "board.slow": "Noch einmal in halber Geschwindigkeit vorlesen",
+  "board.switchTopic": "Thema wechseln",
+  "board.switchLanguage": "Sprache wechseln",
+  "display.heading": "Was der Nachrichtenbildschirm zeigt",
+  "display.lede": "Alles hier betrifft den Bildschirm, den Sie jemandem hinhalten. Schalten Sie ab, was Sie nicht brauchen – oder schalten Sie die Aussprache ein, wenn Sie die Sprache lernen.",
+  "display.owner": "Ihr eigener Wortlaut, unter dem Satz",
+  "display.roman": "Wie man es ausspricht, in Ihren eigenen Buchstaben",
+  "display.ipa": "Wie man es ausspricht, in IPA",
+  "display.speak": "Vorlesen und daneben die Schaltfläche für halbe Geschwindigkeit",
+  "display.turn": "Die Schaltfläche, die den Satz zur Seite dreht",
+  "display.voice": "Stimme",
+  "display.voiceAuto": "Automatisch gewählt"
 }

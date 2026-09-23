@@ -13,7 +13,7 @@
 // and it drifted: seven modules were missing, so the studio would have failed with
 // the network off. VERSION is a content hash of those files, so a deploy re-primes
 // the cache without anyone remembering to bump anything.
-const VERSION = 'plg-d5bd3f873489';
+const VERSION = 'plg-853cc7e92867';
 const SHELL_CACHE = `${VERSION}-shell`;
 /**
  * **Not version-scoped, deliberately.** The shell has to be replaced wholesale on a
@@ -116,7 +116,21 @@ self.addEventListener('fetch', (event) => {
   // Stale-while-revalidate: instant offline, and a background refresh means a
   // deploy is picked up on the next visit without a hard reload.
   event.respondWith((async () => {
-    const cached = await caches.match(request, { ignoreSearch: true });
+    // **A page comes from the shell, never from the pack cache.** Every other file
+    // may be looked up across both caches, because the pack cache is where a saved
+    // language's rows and fonts live and it outlives a deploy on purpose. HTML is
+    // different: it is the one file whose *version* has to agree with the modules
+    // it loads, and a `customize.html` that reached the pack cache -- an older
+    // worker keyed pages by full URL, so a pair first opened months ago carried its
+    // own copy -- was being served under this week's JavaScript. `#section-picker`
+    // did not exist in that page, `createSectionPicker` called `replaceChildren` on
+    // the null it got, and the studio came up half-built with an error over it, on
+    // exactly the pairs that had been opened before that element was added.
+    // The shell is version-scoped, so a page from it and the modules from it agree
+    // by construction; a miss falls through to the network below.
+    const cached = request.mode === 'navigate'
+      ? await (await caches.open(SHELL_CACHE)).match(request, { ignoreSearch: true })
+      : await caches.match(request, { ignoreSearch: true });
     const fresh = fetch(request).then(async (response) => {
       if (response.ok) {
         // Refresh the file in whichever cache already owns it. A shell file stays

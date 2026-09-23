@@ -13,11 +13,13 @@
 
 import {
   loadText, loadLanguages, readerLanguage, registerOffline, showFatal,
-  deferUpdates, applyUpdateIfIdle, download, keepBoardOffline,
+  deferUpdates, applyUpdateIfIdle, download, keepBoardOffline, accentFor,
 } from './app.js';
 import {
   loadCorpus, loadLanguage, loadVariants, fillLanguageSlots,
+  loadRespellRules, loadRespellOverrides,
 } from '../core/pack.js';
+import { createRespeller } from '../core/respell.js';
 import { variantKey } from '../core/speaker.js';
 import {
   validateBoard, resolvePhrase, missingPhrases, reduce, openBoard, currentNode,
@@ -170,6 +172,37 @@ function inlineControl(label, hint, onOpen) {
 }
 
 /**
+ * How the owner would spell the listener's sounds -- the card's `say` column.
+ *
+ * Built the way `core/sheet.js` builds it and nowhere else: the reader's rule table
+ * keyed on their language *and accent* (Spanish respellings are `es-419`), the
+ * respeller bound to the listener's whole `ipa` column so it can read off the
+ * inventory and the syllable-opening clusters, and a hand-curated sheet first where
+ * one exists for the triple. `undefined` for a reader whose language has no table,
+ * which is a fact about the data and not a failure -- the line simply does not draw.
+ * @param {Awaited<ReturnType<typeof loadCorpus>>} corpus
+ * @param {string} listener @param {string} owner
+ * @param {Record<string,Record<string,string>>} listenerRows
+ * @returns {Promise<((conceptId:string, ipa:string)=>string)|undefined>}
+ */
+async function respellerFor(corpus, listener, owner, listenerRows) {
+  const accent = accentFor(corpus, owner);
+  if (!corpus.respellRules.has(`${owner}__${accent}`)) return undefined;
+  const [rules, curated] = await Promise.all([
+    loadRespellRules(loadText, owner, accent),
+    corpus.respellOverrides.has(`${listener}__${owner}__${accent}`)
+      ? loadRespellOverrides(loadText, listener, owner, accent)
+      : /** @type {Record<string,string>} */ ({}),
+  ]);
+  const respeller = createRespeller({
+    rules,
+    target: listener,
+    targetIpa: Object.values(listenerRows).map((row) => (row.ipa ?? '').trim()).filter(Boolean),
+  });
+  return (conceptId, ipa) => curated[conceptId] ?? (ipa ? respeller.respell(ipa) : '');
+}
+
+/**
  * @param {string} owner @param {string} listener
  * @param {{boards:{id:string, titleKey:string, listeners:string[], owners:string[]}[]}} index
  */
@@ -311,9 +344,7 @@ async function main() {
     owner,
     listenerDir: dirOf(listener),
     ownerDir: dirOf(owner),
-    // The first system the registry lists for this language is the one its pack
-    // fills, and the one the sheet prints by default.
-    listenerRoman: (named[listener]?.romanizations ?? '').split(',')[0].trim(),
+    respell: await respellerFor(corpus, listener, owner, listenerRows),
   };
 
   // What the message screen carries, which is the reader's own choice. Re-read

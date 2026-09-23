@@ -529,5 +529,16 @@
   "quick.nothingToExport": "Na razie nie ma czego eksportować: arkusz się nie mieści, więc nie powstała żadna strona.",
   "studio.moreActions": "Więcej działań",
   "gallery.converse": "Rozmawiaj",
-  "board.slow": "Powtórz o połowę wolniej"
+  "board.slow": "Powtórz o połowę wolniej",
+  "board.switchTopic": "Zmień temat",
+  "board.switchLanguage": "Zmień język",
+  "display.heading": "Co pokazuje ekran ze zwrotem",
+  "display.lede": "Wszystko tutaj dotyczy ekranu, który pokazujesz drugiej osobie. Wyłącz to, czego nie używasz, albo włącz wymowę, jeśli uczysz się tego języka.",
+  "display.owner": "Twoje własne sformułowanie, pod zwrotem",
+  "display.roman": "Jak to wymówić, w twoim alfabecie",
+  "display.ipa": "Jak to wymówić, w IPA",
+  "display.speak": "Odtwórz, i przycisk połowy prędkości obok niego",
+  "display.turn": "Przycisk obracający zwrot bokiem",
+  "display.voice": "Głos",
+  "display.voiceAuto": "Wybierany automatycznie"
 }

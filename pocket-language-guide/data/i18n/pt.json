@@ -528,5 +528,17 @@
   "quick.autofitUndo": "Anular a alteração",
   "quick.imageOf": "Página {n} de {total}",
   "quick.nothingToExport": "Ainda não há nada para exportar: a folha não cabe, por isso não foi produzida nenhuma página.",
-  "studio.moreActions": "Mais ações"
+  "studio.moreActions": "Mais ações",
+  "board.slow": "Ouvir outra vez, a meia velocidade",
+  "board.switchTopic": "Mudar de tema",
+  "board.switchLanguage": "Mudar de língua",
+  "display.heading": "O que o ecrã da mensagem mostra",
+  "display.lede": "Tudo o que está aqui diz respeito ao ecrã que estende a alguém. Desligue o que não usa, ou ligue a pronúncia se estiver a aprender a língua.",
+  "display.owner": "A sua própria redação, por baixo da frase",
+  "display.roman": "Como se diz, no seu próprio alfabeto",
+  "display.ipa": "Como se diz, em AFI",
+  "display.speak": "Ouvir, e o botão de meia velocidade ao lado",
+  "display.turn": "O controlo que vira a frase de lado",
+  "display.voice": "Voz",
+  "display.voiceAuto": "Escolhida automaticamente"
 }

@@ -528,5 +528,17 @@
   "quick.imageOf": "Halaman {n} dari {total}",
   "quick.nothingToExport": "Belum ada apa-apa untuk dieksport: helai itu tidak muat, jadi tiada halaman dihasilkan.",
   "studio.moreActions": "Tindakan lain",
-  "gallery.converse": "Berbual"
+  "gallery.converse": "Berbual",
+  "board.slow": "Sebut sekali lagi pada separuh kelajuan",
+  "board.switchTopic": "Tukar topik",
+  "board.switchLanguage": "Tukar bahasa",
+  "display.heading": "Apa yang dipaparkan pada skrin mesej",
+  "display.lede": "Semuanya di sini berkenaan skrin yang anda hulurkan kepada orang lain. Matikan yang tidak anda gunakan, atau hidupkan sebutan jika anda sedang mempelajari bahasa itu.",
+  "display.owner": "Kata-kata anda sendiri, di bawah ayat itu",
+  "display.roman": "Cara menyebutnya, dalam huruf anda sendiri",
+  "display.ipa": "Cara menyebutnya, dalam IPA",
+  "display.speak": "Sebut, dan butang separuh kelajuan di sebelahnya",
+  "display.turn": "Kawalan yang memusingkan ayat ke sisi",
+  "display.voice": "Suara",
+  "display.voiceAuto": "Dipilih secara automatik"
 }

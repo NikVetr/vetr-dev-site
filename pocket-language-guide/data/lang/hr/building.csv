@@ -1,6 +1,6 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 building-help.what-room-number-is-this,Koji je ovo broj sobe?,,kˈoji je ˈovo brˈoj sˈobe,,2,hr-agent-v1;ipa=espeak
-building-help.i-am-lost,Izgubio sam se,Izgubila sam se,izɡubio sam sˈe,man speaking / woman speaking,2,hr-agent-v1;ipa=espeak
+building-help.i-am-lost,Izgubio sam se,Izgubila sam se,izɡubio sam sˈe,,2,hr-agent-v1;ipa=espeak
 building-help.where-is-reception,Gdje je recepcija?,,ɡdjˈe je retseptsija,,2,hr-agent-v1;ipa=espeak
 building-help.where-is-a-power-outlet,Gdje je struja?,Gdje je utičnica?,ɡdjˈe je strˈuja,utičnica is the socket itself; struja is what people say,2,hr-agent-v1;ipa=espeak
 accessibility.step-free,Ima li pristup bez stepenica?,,ima li prˈistub bˈes stepenitsa,,2,hr-agent-v1;ipa=espeak
@@ -13,12 +13,12 @@ accessibility.need-to-sit-down,Moram sjesti,,mˈoram sjˈesti,,2,hr-agent-v1;ipa
 accessibility.accessible-restroom,Ima li prilagođeni toalet?,,ima li prilaɡodʑeni tˈoalet,,2,hr-agent-v1;ipa=espeak
 accessibility.station-assistance,Ima li na stanici pomoć za putnike?,,ima li nˈa stanitsi pˈomodʑ zˈa putnike,,2,hr-agent-v1;ipa=espeak
 accessibility.help-me-carry,"Molim vas, pomozite mi ovo nositi",,"mˈolim vˈas, pomozite mˈi ˈovo nositi",,2,hr-agent-v1;ipa=espeak
-accessibility.board-first,Mogu li ući prvi?,Mogu li ući prva?,mˈoɡu li ˈutɕi prvi,man speaking / woman speaking,2,hr-agent-v1;ipa=espeak
+accessibility.board-first,Mogu li ući prvi?,Mogu li ući prva?,mˈoɡu li ˈutɕi prvi,,2,hr-agent-v1;ipa=espeak
 accessibility.door-width,Koliko su široka vrata?,,koliko su ʃiroka vrˈata,,2,hr-agent-v1;ipa=espeak
 accessibility.wheelchair-width,Moja invalidska kolica široka su {} cm,,mˈoja invalitska kolitsa ʃiroka su {} tsentimˈetara,,2,hr-agent-v1;ipa=espeak+loan
-accessibility.hard-of-hearing,Nagluh sam,Nagluha sam,nˈaɡlux sam,man speaking / woman speaking,2,hr-agent-v1;ipa=espeak
+accessibility.hard-of-hearing,Nagluh sam,Nagluha sam,nˈaɡlux sam,,2,hr-agent-v1;ipa=espeak
 accessibility.speak-louder,"Molim vas, govorite glasnije",,"mˈolim vˈas, ɡovorite ɡlasnije",,2,hr-agent-v1;ipa=espeak
-accessibility.visually-impaired,Slabovidan sam,Slabovidna sam,slabovidan sam,man speaking / woman speaking,2,hr-agent-v1;ipa=espeak
+accessibility.visually-impaired,Slabovidan sam,Slabovidna sam,slabovidan sam,,2,hr-agent-v1;ipa=espeak
 accessibility.take-your-arm,Mogu li vas uzeti pod ruku?,,mˈoɡu li vˈas uzeti pˈod rˈuku,the standard sighted-guide request: the blind traveller holds the guide's arm,2,hr-agent-v1;ipa=espeak
 accessibility.guide-dog,Ovo je moj pas vodič,,ˈovo je mˈoj pˈas vˈoditʃ,,2,hr-agent-v1;ipa=espeak
 in-a-building.is-this-the-correct-entrance,Je li ovo pravi ulaz?,,je li ˈovo prˈavi ˈulaz,,2,hr-agent-v1;ipa=espeak

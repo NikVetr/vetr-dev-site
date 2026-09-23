@@ -80,7 +80,7 @@ etiquette.remove-shoes,Devo tirar os sapatos?,,dˈevʊ tʃiɾˈaɾ ʊs sˌapˈat
 etiquette.photo-of-you,Posso tirar uma foto sua?,,pˌɔsʊ tʃiɾˈaɾ ˌumæ fˈɔtʊ sˈuæ,,2,pt-agent-v1;ipa=espeak
 etiquette.may-i-sit-here,Posso sentar-me aqui?,Posso sentar aqui?,pˌɔsʊ seɪŋtˈarmj akˈi,,2,pt-agent-v1;ipa=espeak
 etiquette.queue-for,Esta é a fila para {}?,,ˌɛstæ ɛ a fˈilæ pˌaɾæ {},,2,pt-agent-v1;ipa=espeak
-etiquette.dressed-appropriately,Estou vestido adequadamente?,Estou vestida,estˌow vˌestʃˈidw ˌadekwˌadæmˈeɪŋtʃy,-a if female,2,pt-agent-v1;ipa=espeak
+etiquette.dressed-appropriately,Estou vestido adequadamente?,Estou vestida,estˌow vˌestʃˈidw ˌadekwˌadæmˈeɪŋtʃy,,2,pt-agent-v1;ipa=espeak
 etiquette.did-not-mean-to-offend,"Desculpe, não quis ofender",,"dˌeskˈuwpy, nˌɐ̃ʊ̃ kˈiz ˌofeɪŋdˈer",,2,pt-agent-v1;ipa=espeak
 etiquette.what-is-customary,O que é costume aqui?,,ʊ ky ɛ kˌostˈumj akˈi,,2,pt-agent-v1;ipa=espeak
 etiquette.keep-the-change,Fique com o troco,,fˈiky koŋ ʊ trˈokʊ,,2,pt-agent-v1;ipa=espeak

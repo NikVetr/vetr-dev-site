@@ -1,5 +1,5 @@
 {
-  "_note": "Haqiqat manbayi ingliz katalogi; bu uning ustidagi qatlam -- bu yerda yoʻq kalit ingliz tilida koʻrinadi. Uslub: tugmalar va buyruqlar harakat nomi shaklida (Saqlash, Yopish, Bekor qilish), oʻzbek dasturiy lokalizatsiyasi shunday yozadi; oʻquvchiga qaratilgan gaplar hurmatli koʻplik buyruq shaklida (Tanlang, Tekshiring); varaq tavsiflari shaxssiz. Atamalar: yuz — kartaning bir tomoni, varaq — bosilgan qogʻoz, karta — tayyor kartochka. ☰ menyusining 47 ta kaliti (editor / personal / speaker / speech / settings) qoʻshildi. Atamalar: button — tugma, suhbat taxtasining bir sahifasi — ekran, nutq sintezi ovozi — ovoz. editor.noTranslation va personal.lede dasturning aynan nima qilishi haqidagi aniq bayonotdir (hech qayerga yuborilmaydi, faqat shu qurilmada turadi), ularni “maʼlumotlaringiz xavfsiz” kabi mavhum vaʼda bilan almashtirmaslik kerak. Studiya, chiqarish va koʻrib chiqish boʻyicha 37 ta kalit qoʻshildi. Yorliq — kartaning chetidagi rangli izlash belgisi (fayl ajratgichidagi yorliq kabi, brauzer yorligʻi emas); fayl allaqachon shu soʻzni ishlatgani uchun saqlab qolindi. Yorliq shakli: tasma / burchak / qirra — “chet” bu faylda maydon (margin) maʼnosida band. format.headSlot.theme yuzning rang turkumini (colour.*) bildiradi, dizayn mavzusini (format.theme.*, warn.*dagi “mavzu”) emas, shuning uchun “turkum”. preview.lockDate va preview.lockTime CLDRdan keladi, qoʻshilmadi.",
+  "_note": "Haqiqat manbayi ingliz katalogi; bu uning ustidagi qatlam -- bu yerda yoʻq kalit ingliz tilida koʻrinadi. Uslub: tugmalar va buyruqlar harakat nomi shaklida (Saqlash, Yopish, Bekor qilish), oʻzbek dasturiy lokalizatsiyasi shunday yozadi; oʻquvchiga qaratilgan gaplar hurmatli koʻplik buyruq shaklida (Tanlang, Tekshiring); varaq tavsiflari shaxssiz. Atamalar: yuz — kartaning bir tomoni, varaq — bosilgan qogʻoz, karta — tayyor kartochka. ☰ menyusining 47 ta kaliti (editor / personal / speaker / speech / settings) qoʻshildi. Atamalar: button — tugma, suhbat taxtasining bir sahifasi — ekran, nutq sintezi ovozi — ovoz. editor.noTranslation va personal.lede dasturning aynan nima qilishi haqidagi aniq bayonotdir (hech qayerga yuborilmaydi, faqat shu qurilmada turadi), ularni “maʼlumotlaringiz xavfsiz” kabi mavhum vaʼda bilan almashtirmaslik kerak. Studiya, chiqarish va koʻrib chiqish boʻyicha 37 ta kalit qoʻshildi. Yorliq — kartaning chetidagi rangli izlash belgisi (fayl ajratgichidagi yorliq kabi, brauzer yorligʻi emas); fayl allaqachon shu soʻzni ishlatgani uchun saqlab qolindi. Yorliq shakli: tasma / burchak / qirra — “chet” bu faylda maydon (margin) maʼnosida band. format.headSlot.theme yuzning rang turkumini (colour.*) bildiradi, dizayn mavzusini (format.theme.*, warn.*dagi “mavzu”) emas, shuning uchun “turkum”. preview.lockDate va preview.lockTime CLDRdan keladi, qoʻshilmadi. Xabar ekrani (board.slow, board.switch*, display.*): «xabar» board.dismiss soʻzi, ekran / tugma / ovoz yuqoridagidek, «mavzu» board.pickTopic dan, «XFA» field.ipa dan. Tugma nomlari harakat nomi shaklida qoldi (oʻqish, oʻzgartirish).",
   "format.ornamentStyle": "Uslub",
   "ornament.classic": "Klassik · toʻliq chiziqlar",
   "ornament.language": "Tilga mos naqsh",
@@ -528,5 +528,17 @@
   "quick.imageOf": "{total} sahifadan {n}-si",
   "quick.nothingToExport": "Hozircha chiqaradigan narsa yoʻq: varaq sigʻmadi, shuning uchun sahifa hosil boʻlmadi.",
   "studio.moreActions": "Boshqa amallar",
-  "gallery.converse": "Suhbat"
+  "gallery.converse": "Suhbat",
+  "board.slow": "Yarim tezlikda yana bir bor oʻqish",
+  "board.switchTopic": "Mavzuni oʻzgartirish",
+  "board.switchLanguage": "Tilni oʻzgartirish",
+  "display.heading": "Xabar ekranida nima koʻrsatiladi",
+  "display.lede": "Bu yerdagi hamma narsa siz birovga koʻrsatadigan ekran haqida. Ishlatmaganingizni oʻchiring, til oʻrganayotgan boʻlsangiz talaffuzni yoqing.",
+  "display.owner": "Gap ostida oʻz soʻzlaringiz",
+  "display.roman": "Qanday aytilishi, oʻz harflaringizda",
+  "display.ipa": "Qanday aytilishi, XFA yozuvida",
+  "display.speak": "Ovoz chiqarib oʻqish tugmasi va uning yonidagi yarim tezlik tugmasi",
+  "display.turn": "Gapni yon tomonga buradigan tugma",
+  "display.voice": "Ovoz",
+  "display.voiceAuto": "Avtomatik tanlanadi"
 }

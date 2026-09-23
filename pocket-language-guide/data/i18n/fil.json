@@ -528,5 +528,17 @@
   "quick.imageOf": "Pahina {n} ng {total}",
   "quick.nothingToExport": "Wala pang mai-export: hindi kasya ang sheet, kaya walang nagawang pahina.",
   "studio.moreActions": "Iba Pang Aksyon",
-  "gallery.converse": "Mag-usap"
+  "gallery.converse": "Mag-usap",
+  "board.slow": "Sabihin ulit sa kalahating bilis",
+  "board.switchTopic": "Palitan ang paksa",
+  "board.switchLanguage": "Palitan ang wika",
+  "display.heading": "Ang ipinapakita ng screen ng mensahe",
+  "display.lede": "Lahat ng nandito ay tungkol sa screen na ipinapakita ninyo sa isang tao. Patayin ang hindi ninyo ginagamit, o buksan ang pagbigkas kung nag-aaral kayo ng wika.",
+  "display.owner": "Ang sarili ninyong pananalita, sa ilalim ng pangungusap",
+  "display.roman": "Kung paano ito sabihin, sa sarili ninyong mga titik",
+  "display.ipa": "Kung paano ito sabihin, sa IPA",
+  "display.speak": "Sabihin, at ang katabing buton ng kalahating bilis",
+  "display.turn": "Ang buton na nagpapatagilid sa pangungusap",
+  "display.voice": "Boses",
+  "display.voiceAuto": "Awtomatikong pinili"
 }

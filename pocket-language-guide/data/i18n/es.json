@@ -528,5 +528,17 @@
   "quick.autofitUndo": "Deshacer",
   "quick.imageOf": "Página {n} de {total}",
   "quick.nothingToExport": "Todavía no hay nada que exportar: la hoja no cabe, así que no se ha producido ninguna página.",
-  "studio.moreActions": "Más acciones"
+  "studio.moreActions": "Más acciones",
+  "board.slow": "Repetir a media velocidad",
+  "board.switchTopic": "Cambiar de tema",
+  "board.switchLanguage": "Cambiar de idioma",
+  "display.heading": "Lo que muestra la pantalla del mensaje",
+  "display.lede": "Todo lo de aquí se refiere a la pantalla que le muestra a alguien. Desactive lo que no use, o active la pronunciación si está aprendiendo el idioma.",
+  "display.owner": "Su propia redacción, debajo de la frase",
+  "display.roman": "Cómo se dice, en sus propias letras",
+  "display.ipa": "Cómo se dice, en AFI",
+  "display.speak": "Leer en voz alta, y el botón de media velocidad a su lado",
+  "display.turn": "El botón que gira la frase de lado",
+  "display.voice": "Voz",
+  "display.voiceAuto": "Elegida automáticamente"
 }

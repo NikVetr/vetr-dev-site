@@ -1,5 +1,5 @@
 {
-  "_note": "Lao interface catalogue. A partial overlay over en.json by contract. Built by tmp/lo/i18n.py, which asserts completeness against en.json, that every placeholder survives, that no category-Cf character is present, and that every Lao run parses through the same reader the pack rows go through. The studio, export and preview keys appended after that build were written by hand and are not yet in tmp/lo/i18n.py, so its completeness assertion needs the two deliberate gaps allowed for: preview.lockDate and preview.lockTime are left out on purpose, because the lock-screen mock now takes its sample date and time from CLDR and the English in en.json is only a floor for locales Intl has never heard of. ແຖບ does double duty as the head/foot band and as the tab, so the tab is ແຖບສີ wherever one sentence has to name both.",
+  "_note": "Lao interface catalogue. A partial overlay over en.json by contract. Built by tmp/lo/i18n.py, which asserts completeness against en.json, that every placeholder survives, that no category-Cf character is present, and that every Lao run parses through the same reader the pack rows go through. The studio, export and preview keys appended after that build were written by hand and are not yet in tmp/lo/i18n.py, so its completeness assertion needs the two deliberate gaps allowed for: preview.lockDate and preview.lockTime are left out on purpose, because the lock-screen mock now takes its sample date and time from CLDR and the English in en.json is only a floor for locales Intl has never heard of. ແຖບ does double duty as the head/foot band and as the tab, so the tab is ແຖບສີ wherever one sentence has to name both. Message-screen pass (board.slow, board.switch*, display.*): display.roman is ຕົວອັກສອນຂອງເຈົ້າເອງ «your own letters», because the line it switches is the card's say column -- the respelling in the reader's own script, as field.respell / field.title.respell already describe it -- and not the Latin romanisation; IPA stays ໄອພີເອ as in field.ipa; display.speak and display.turn name the controls as ປຸ່ມ, as editor.noListenerText already does.",
   "format.ornamentStyle": "ຮູບແບບລວດລາຍ",
   "ornament.classic": "ແບບເດີມ · ເສັ້ນຕັນ",
   "ornament.language": "ຕາມແຮງບັນດານໃຈຂອງພາສາ",
@@ -528,5 +528,17 @@
   "quick.imageOf": "ໜ້າ {n} ຈາກ {total}",
   "quick.nothingToExport": "ຍັງບໍ່ມີຫຍັງໃຫ້ສົ່ງອອກ ບັດຈັດບໍ່ພໍດີ ຈຶ່ງບໍ່ມີໜ້າໃດຖືກສ້າງຂຶ້ນ",
   "studio.moreActions": "ການດຳເນີນການເພີ່ມເຕີມ",
-  "gallery.converse": "ສົນທະນາ"
+  "gallery.converse": "ສົນທະນາ",
+  "board.slow": "ອ່ານອອກສຽງອີກເທື່ອໜຶ່ງ ດ້ວຍຄວາມໄວເຄິ່ງໜຶ່ງ",
+  "board.switchTopic": "ປ່ຽນສະຖານະການ",
+  "board.switchLanguage": "ປ່ຽນພາສາ",
+  "display.heading": "ສິ່ງທີ່ໜ້າຈໍຂໍ້ຄວາມສະແດງ",
+  "display.lede": "ທຸກຢ່າງຢູ່ນີ້ກ່ຽວກັບໜ້າຈໍທີ່ເຈົ້າຍື່ນໃຫ້ຄົນອື່ນເບິ່ງ ປິດສິ່ງທີ່ເຈົ້າບໍ່ໄດ້ໃຊ້ ຫຼື ເປີດການອອກສຽງຖ້າເຈົ້າກຳລັງຮຽນພາສານັ້ນ",
+  "display.owner": "ຖ້ອຍຄຳຂອງເຈົ້າເອງ ໃຕ້ປະໂຫຍກ",
+  "display.roman": "ວິທີອ່ານ ເປັນຕົວອັກສອນຂອງເຈົ້າເອງ",
+  "display.ipa": "ວິທີອ່ານ ເປັນໄອພີເອ",
+  "display.speak": "ປຸ່ມອ່ານອອກສຽງ ແລະ ປຸ່ມຄວາມໄວເຄິ່ງໜຶ່ງທີ່ຢູ່ຂ້າງມັນ",
+  "display.turn": "ປຸ່ມທີ່ຫັນປະໂຫຍກໄປທາງຂ້າງ",
+  "display.voice": "ສຽງເວົ້າ",
+  "display.voiceAuto": "ເລືອກອັດຕະໂນມັດ"
 }

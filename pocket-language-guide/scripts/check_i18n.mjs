@@ -64,8 +64,10 @@ for (const rel of files) {
     /data-i18n(?:-title|-label)?="([\w.-]+)"/g,
     // Constant tables hold the key rather than the string, because they are built
     // at module load -- before a catalogue exists -- and resolved when the control
-    // is drawn. Without this the scan calls all of them unused.
-    /\b"?(?:caption|text|label|hint|title|note)Key"?:\s*['"]([\w.-]+)['"]/g,
+    // is drawn. Without this the scan calls all of them unused. A bare `key:` is the
+    // same thing under a shorter name -- `ui/board-display.js` lists its checkboxes as
+    // `{ id, key }` -- and cost five false "unreferenced" entries until it was added.
+    /\b"?(?:(?:caption|text|label|hint|title|note)Key|key)"?:\s*['"]([\w.-]+)['"]/g,
     // ... and a few sit in a map from a value to its key, looked up at draw time
     // (which field is shown, which cut mode is chosen).
     /:\s*'((?:field|cut|common|board)\.[\w.-]+)'/g,

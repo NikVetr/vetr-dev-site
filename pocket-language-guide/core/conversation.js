@@ -104,8 +104,10 @@ const ENTRIES = new Set(['duration', 'clock', 'count']);
  * @property {string} text
  * @property {string} lang
  * @property {'ltr'|'rtl'} dir
- * @property {string} [roman]  how to say it, in the reader's own letters
- * @property {string} [ipa]    the same, for a reader who reads IPA
+ * @property {string} [say]  how to say it, in the reader's own letters -- the card's
+ *   `say` column, not a romanisation: katakana for a Japanese reader, Bengali letters
+ *   for a Bengali one, `nee how` for an English one
+ * @property {string} [ipa]  the same, for a reader who reads IPA
  */
 
 /**
@@ -331,15 +333,16 @@ export function resolvePhrase(ref, ctx, incoming = false) {
     id: ref.id,
     // **The pronunciation rides with the sentence, from the same row.** Taking it
     // here rather than looking it up again in the view is what keeps it correct
-    // under a speaker variant: `say` has already swapped the row for the reader's
-    // own gender where that matters, and Hebrew's "I am sick" is the case that
-    // proves it -- the script is identical for both genders and the romanisation
-    // and the IPA are not.
+    // under a speaker variant: `say` above has already swapped the row for the
+    // reader's own gender where that matters, and Hebrew's "I am sick" is the case
+    // that proves it -- the script is identical for both genders and the
+    // pronunciation is not. The respelling is derived from that same variant IPA
+    // by the hook the page supplies, which is the sheet's own respeller.
     listener: {
       text: listener.text,
       lang: ctx.listener,
       dir: ctx.listenerDir,
-      roman: (ctx.listenerRoman && listener[`romanization_${ctx.listenerRoman}`]) || '',
+      say: ctx.respell?.(ref.id, listener.ipa || '') || '',
       ipa: listener.ipa || '',
     },
     owner: { text: owner.text, lang: ctx.owner, dir: ctx.ownerDir },
@@ -381,7 +384,9 @@ function say(voice, conceptId, row, incoming) {
  * @property {'ltr'|'rtl'} listenerDir
  * @property {'ltr'|'rtl'} ownerDir
  * @property {Record<string,{owner:string, listener:string}>} [custom]
- * @property {string} [listenerRoman]  which `romanization_*` column to read, if any
+ * @property {(conceptId:string, ipa:string)=>string} [respell]  the reader's own
+ *   respelling of a sentence's IPA, curated where a curated one exists; absent for
+ *   a reader whose language has no rule table
  * @property {SpeakerVoice} [listenerVoice]
  * @property {SpeakerVoice} [ownerVoice]
  */

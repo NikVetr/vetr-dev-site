@@ -164,7 +164,7 @@ non-empty `ipa` and reports the unread count per language as the reviewer queue.
 
 ## Two things this cannot do honestly
 
-**Three IPA codepoints the shipped faces cannot draw.** `content/summary.md` says
+**Three IPA codepoints the shipped faces cannot draw.** `summary.md` says
 "every `latin*.ttf` already ships the full IPA repertoire including the Chao tone
 letters". Two thirds right: U+0250-02AF, U+02B0-02FF (Chao bars included) and
 U+0300-036F are complete in all sixteen Latin faces, but IPA also borrows three

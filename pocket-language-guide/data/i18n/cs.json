@@ -529,5 +529,16 @@
   "quick.nothingToExport": "Zatím není co exportovat: list se nevejde, takže nevznikly žádné strany.",
   "studio.moreActions": "Další akce",
   "gallery.converse": "Konverzovat",
-  "board.slow": "Přečíst znovu poloviční rychlostí"
+  "board.slow": "Přečíst znovu poloviční rychlostí",
+  "board.switchTopic": "Změnit téma",
+  "board.switchLanguage": "Změnit jazyk",
+  "display.heading": "Co zobrazuje obrazovka se zprávou",
+  "display.lede": "Vše zde se týká obrazovky, kterou někomu ukazujete. Vypněte, co nepoužíváte, nebo si zapněte výslovnost, pokud se jazyk učíte.",
+  "display.owner": "Vaše vlastní znění, pod větou",
+  "display.roman": "Jak to vyslovit, ve vašem písmu",
+  "display.ipa": "Jak to vyslovit, v IPA",
+  "display.speak": "Vyslovit a vedle něj tlačítko poloviční rychlosti",
+  "display.turn": "Tlačítko, které otočí větu na šířku",
+  "display.voice": "Hlas",
+  "display.voiceAuto": "Vybrán automaticky"
 }

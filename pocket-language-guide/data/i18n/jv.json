@@ -1,5 +1,5 @@
 {
-  "_note": "Register: krama for every sentence, bare stems on buttons (Èkspor, Simpen, Batal, Tutup), matching the pack's own level -- the studio addresses one reader and a Javanese interface that addressed them in ngoko would be the same discourtesy a ngoko card is. Terms of art: a printed face is sisi and a sheet is lembar, so \"4 faces / 2 sheets\" is \"4 sisi / 2 lembar\"; duplex is bolak-balik; typeface is jinis aksara; romanisation is romanisasi; the respelling field is Cara maos and the literal gloss Teges harfiah; \"glossed into\" is Teges ing basa. The divider is pamisah and \"garis\" is kept for the printed hairline (warn.hairline-too-thin), which is ink where the divider is not. Interpolation: Intl.DisplayNames hands Javanese the bare ethnonym (\"Inggris\", \"Jepang\", \"Jawa\"), which is a country or a people on its own, so every template that takes {language} carries the head noun basa in front of it -- \"Ing basa {language}\", \"Basa {language} dipunginakaken ing {regions}\", \"kertu basa {language}\", \"panduan basa {language}\". This is the same repair the Indonesian catalogue records, and it is needed here for the same reason and on the same six templates. Romanisation systems keep their Latin names -- Javanese has no settled form for Hepburn, Kunrei-shiki, McCune-Reischauer or Hunterian, and ALA-LC, BGN/PCGN, IAST and RTGS are standards initialisms -- except roman.rr, which is calqued as \"Romanisasi Révisi\". Orthography follows the pack: é = [e], è = [ɛ], bare e = [ə].",
+  "_note": "Register: krama for every sentence, bare stems on buttons (Èkspor, Simpen, Batal, Tutup), matching the pack's own level -- the studio addresses one reader and a Javanese interface that addressed them in ngoko would be the same discourtesy a ngoko card is. Terms of art: a printed face is sisi and a sheet is lembar, so \"4 faces / 2 sheets\" is \"4 sisi / 2 lembar\"; duplex is bolak-balik; typeface is jinis aksara; romanisation is romanisasi; the respelling field is Cara maos and the literal gloss Teges harfiah; \"glossed into\" is Teges ing basa. The divider is pamisah and \"garis\" is kept for the printed hairline (warn.hairline-too-thin), which is ink where the divider is not. Interpolation: Intl.DisplayNames hands Javanese the bare ethnonym (\"Inggris\", \"Jepang\", \"Jawa\"), which is a country or a people on its own, so every template that takes {language} carries the head noun basa in front of it -- \"Ing basa {language}\", \"Basa {language} dipunginakaken ing {regions}\", \"kertu basa {language}\", \"panduan basa {language}\". This is the same repair the Indonesian catalogue records, and it is needed here for the same reason and on the same six templates. Romanisation systems keep their Latin names -- Javanese has no settled form for Hepburn, Kunrei-shiki, McCune-Reischauer or Hunterian, and ALA-LC, BGN/PCGN, IAST and RTGS are standards initialisms -- except roman.rr, which is calqued as \"Romanisasi Révisi\". Orthography follows the pack: é = [e], è = [ɛ], bare e = [ə]. Message-screen keys (display.*): display.roman says \"miturut éjaan basa Jawi\", after field.title.respell -- the line shown is the say column (the respelling in the reader's own orthography, core/respell.js), not the romanisation; display.turn drops \"sideways\" the way board.turn already does.",
   "addTerm.add": "Tambahaken ing lembar",
   "addTerm.bothNeeded": "Kalih kolom basa kedah dipunisi.",
   "addTerm.inLanguage": "Ing basa {language}",
@@ -528,5 +528,17 @@
   "quick.imageOf": "Kaca {n} saking {total}",
   "quick.nothingToExport": "Dèrèng wonten ingkang saged dipunèkspor: lembaripun mboten cekap, pramila mboten wonten kaca ingkang kadamel.",
   "studio.moreActions": "Tumindak sanèsipun",
-  "gallery.converse": "Pacelathon"
+  "gallery.converse": "Pacelathon",
+  "board.slow": "Waosaken malih kanthi setengah kacepetan",
+  "board.switchTopic": "Gantos topik",
+  "board.switchLanguage": "Gantos basa",
+  "display.heading": "Menapa ingkang katingal ing layar pesen",
+  "display.lede": "Sedaya ingkang wonten ing ngriki gegayutan kaliyan layar ingkang panjenengan tedahaken dhateng tiyang sanès. Pejahaken ingkang mboten dipunginakaken, utawi uripaken pangucapan menawi panjenengan nembé sinau basanipun.",
+  "display.owner": "Tembung panjenengan piyambak, ing sangandhapipun ukara",
+  "display.roman": "Cara ngucapaken, miturut éjaan basa Jawi",
+  "display.ipa": "Cara ngucapaken, mawi IPA",
+  "display.speak": "Waosaken, lan tombol setengah kacepetan ing sisihipun",
+  "display.turn": "Tombol ingkang malangaken ukara",
+  "display.voice": "Swanten",
+  "display.voiceAuto": "Dipunpilih kanthi otomatis"
 }

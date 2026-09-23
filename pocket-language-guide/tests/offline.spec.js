@@ -223,6 +223,36 @@ test('a first visit does not reload itself when the worker takes charge', async 
 
 // --- conversation boards (C5) -----------------------------------------------
 
+test('a stale page in the pack cache is never served under current modules', async ({ page }) => {
+  // Reported as `Cannot read properties of null (reading 'replaceChildren')` on the
+  // studio, on some language pairs and not others, with the tree's checkboxes drawn
+  // and its labels blank. That is `createSectionPicker` finding no `#section-picker`
+  // -- an element added on 2026-09-15 -- because the page it was running in predated
+  // it. `caches.match` searches every cache, the pack cache outlives a deploy, and an
+  // older worker had keyed pages by their full URL: so the pairs first opened before
+  // that date each carried a page of their own, and got it back under this week's
+  // modules. The fix is a rule, not a guard: a navigation is answered from the
+  // version-scoped shell alone, where the page and its modules agree by construction.
+  test.skip(!HAS_PACKS, NEEDS_PACKS);
+  await page.goto('/');
+  await expect(page.locator('.card').first()).toBeVisible();
+  await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
+
+  // An old page, keyed by full URL, sitting where a deploy cannot reach it.
+  await page.evaluate(async () => {
+    const stale = '<!doctype html><html><body><h1>old page</h1></body></html>';
+    const cache = await caches.open('plg-packs');
+    await cache.put(new Request('/customize.html?target=zh-Hans&source=en'),
+      new Response(stale, { headers: { 'content-type': 'text/html' } }));
+  });
+
+  await page.goto('/customize.html?target=zh-Hans&source=en');
+  // The current page, with the element the current modules need in it.
+  await expect(page.locator('#section-picker')).toHaveCount(1);
+  await expect(page.locator('h1', { hasText: 'old page' })).toHaveCount(0);
+  await expect(page.locator('body > .container')).toHaveCount(0);
+});
+
 test('a board works on a cold offline visit with nothing saved', async ({ page, context }) => {
   // **O01, and the reason a board's corpus is in the shell.** Everything else in
   // this app is something a reader chose in advance -- they browsed the gallery,

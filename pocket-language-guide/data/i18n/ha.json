@@ -528,5 +528,17 @@
   "quick.imageOf": "Shafi {n} daga cikin {total}",
   "quick.nothingToExport": "Babu abin fitarwa tukuna: takardar ba ta shiga ba, don haka ba a samar da wani shafi ba.",
   "studio.moreActions": "Ƙarin ayyuka",
-  "gallery.converse": "Tattauna"
+  "gallery.converse": "Tattauna",
+  "board.slow": "Sake karanta shi a rabin gudu",
+  "board.switchTopic": "Canja jigo",
+  "board.switchLanguage": "Canja harshe",
+  "display.heading": "Abin da allon saƙo ke nuna",
+  "display.lede": "Duk abin da ke nan game da allon da kake nuna wa wani ne. Kashe abin da ba ka amfani da shi, ko kunna lafazi idan kana koyon harshen.",
+  "display.owner": "Kalmominka na kanka, ƙarƙashin jimlar",
+  "display.roman": "Yadda ake faɗinsa, da haruffanka",
+  "display.ipa": "Yadda ake faɗinsa, da IPA",
+  "display.speak": "Karanta da murya, da maɓallin rabin gudu kusa da shi",
+  "display.turn": "Maɓallin da ke juya jimlar a gefe",
+  "display.voice": "Murya",
+  "display.voiceAuto": "An zaɓa da kanta"
 }

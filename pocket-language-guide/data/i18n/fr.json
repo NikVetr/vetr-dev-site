@@ -528,5 +528,17 @@
   "quick.autofitUndo": "Annuler ce changement",
   "quick.imageOf": "Page {n} sur {total}",
   "quick.nothingToExport": "Il n’y a encore rien à exporter : la feuille ne tient pas, donc aucune page n’a été produite.",
-  "studio.moreActions": "Plus d’actions"
+  "studio.moreActions": "Plus d’actions",
+  "board.slow": "Réécouter à mi-vitesse",
+  "board.switchTopic": "Changer de sujet",
+  "board.switchLanguage": "Changer de langue",
+  "display.heading": "Ce que montre l’écran du message",
+  "display.lede": "Tout ici concerne l’écran que vous tendez à quelqu’un. Désactivez ce que vous n’utilisez pas, ou activez la prononciation si vous apprenez la langue.",
+  "display.owner": "Votre propre formulation, sous la phrase",
+  "display.roman": "Comment le dire, dans vos propres lettres",
+  "display.ipa": "Comment le dire, en API",
+  "display.speak": "Écouter, et le bouton mi-vitesse à côté",
+  "display.turn": "Le bouton qui fait pivoter la phrase",
+  "display.voice": "Voix",
+  "display.voiceAuto": "Choisie automatiquement"
 }

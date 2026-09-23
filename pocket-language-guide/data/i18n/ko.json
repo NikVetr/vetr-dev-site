@@ -1,5 +1,5 @@
 {
-  "_note": "한국어 UI 카탈로그. 정해 둔 규칙: (1) 어투 — 버튼·패널 제목·세그먼트 캡션은 한국 소프트웨어 관례대로 명사형(내보내기, 서식, 닫기)으로 두고, 독자에게 상황을 설명하는 본문·경고·힌트(gallery.lede, warn.*, studio.balanceBlocked)만 해요체로 썼습니다. (2) 용어 — typeface=글꼴(윈도우·오피스·한글·크롬이 모두 쓰는 표준어. 단 두 선택지 캡션은 인쇄 전통의 고딕/명조), face=면(양면 인쇄의 그 면. 용지 한 장 = 앞면+뒷면 2면), column=단(조판 단) 대 열(항목의 데이터 칸, format.columnsShown), romanisation=로마자 표기, gloss=뜻풀이, duplex=양면, margin=여백, padding=안쪽 여백, rule=선, laminate=코팅, typeset=조판. (3) 조사 — {language}, {region}, {source} 같은 자리표시자에는 조사를 바로 붙이지 않았습니다(로/으로, 은/는이 갈리므로). 대신 뒤에 한국어 명사(지역, 사용 지역, 뜻풀이)를 넣어 받았습니다. (4) 길이 — format.* 캡션은 한 줄에 여섯 자를 넘지 않게 맞췄습니다. 로마자 표기 방식은 영문 약칭이 아니라 한국에서 쓰는 이름으로 적었습니다(한어병음, 헵번식, 훈령식, 국어의 로마자 표기법, 매큔-라이샤워). 정착된 한국어 이름이 없는 규격(ALA-LC, BGN/PCGN, IAST, RTGS, Hunterian)은 원문 그대로 두었습니다. 구분선은 “일정/행마다”, 항목 배치는 “혼합/나란히/한 줄/줄마다 하나”. ☰ 메뉴의 47개 키(editor / personal / speaker / speech / settings)를 채웠습니다. 용어: button=버튼, 대화 보드의 한 화면=화면, 음성 합성의 목소리=음성. editor.noTranslation과 personal.lede는 소프트웨어가 무엇을 하는지에 대한 사실 진술(어디로도 전송하지 않음, 이 기기 안에만 있음)이므로 “데이터가 안전합니다” 같은 막연한 표현으로 바꾸면 안 됩니다. massage-spa와 board-answers 구역 이름은 boards.spa.title과 board.canAnswer의 어휘에 맞췄습니다. 스튜디오·내보내기·미리보기 37개 키를 채웠습니다. 탭(카드 옆면에 인쇄하는 색인 표시)에는 한국어 인쇄 고유어가 없고 제책에서 잘라 내는 반달색인이 그에 해당하므로, 파일 간지의 돌출부를 가리키는 일상어이자 이 파일이 이미 쓰던 “탭”을 유지했습니다. 탭 모양은 “띠/모서리/가장자리”. format.headSlot.theme은 면의 색 갈래(colour.*)이지 화면 테마(format.theme.*)가 아니므로 “분야”로 옮겼습니다. preview.lockDate와 preview.lockTime은 CLDR이 채우므로 비워 두었습니다.",
+  "_note": "한국어 UI 카탈로그. 정해 둔 규칙: (1) 어투 — 버튼·패널 제목·세그먼트 캡션은 한국 소프트웨어 관례대로 명사형(내보내기, 서식, 닫기)으로 두고, 독자에게 상황을 설명하는 본문·경고·힌트(gallery.lede, warn.*, studio.balanceBlocked)만 해요체로 썼습니다. (2) 용어 — typeface=글꼴(윈도우·오피스·한글·크롬이 모두 쓰는 표준어. 단 두 선택지 캡션은 인쇄 전통의 고딕/명조), face=면(양면 인쇄의 그 면. 용지 한 장 = 앞면+뒷면 2면), column=단(조판 단) 대 열(항목의 데이터 칸, format.columnsShown), romanisation=로마자 표기, gloss=뜻풀이, duplex=양면, margin=여백, padding=안쪽 여백, rule=선, laminate=코팅, typeset=조판. (3) 조사 — {language}, {region}, {source} 같은 자리표시자에는 조사를 바로 붙이지 않았습니다(로/으로, 은/는이 갈리므로). 대신 뒤에 한국어 명사(지역, 사용 지역, 뜻풀이)를 넣어 받았습니다. (4) 길이 — format.* 캡션은 한 줄에 여섯 자를 넘지 않게 맞췄습니다. 로마자 표기 방식은 영문 약칭이 아니라 한국에서 쓰는 이름으로 적었습니다(한어병음, 헵번식, 훈령식, 국어의 로마자 표기법, 매큔-라이샤워). 정착된 한국어 이름이 없는 규격(ALA-LC, BGN/PCGN, IAST, RTGS, Hunterian)은 원문 그대로 두었습니다. 구분선은 “일정/행마다”, 항목 배치는 “혼합/나란히/한 줄/줄마다 하나”. ☰ 메뉴의 47개 키(editor / personal / speaker / speech / settings)를 채웠습니다. 용어: button=버튼, 대화 보드의 한 화면=화면, 음성 합성의 목소리=음성. editor.noTranslation과 personal.lede는 소프트웨어가 무엇을 하는지에 대한 사실 진술(어디로도 전송하지 않음, 이 기기 안에만 있음)이므로 “데이터가 안전합니다” 같은 막연한 표현으로 바꾸면 안 됩니다. massage-spa와 board-answers 구역 이름은 boards.spa.title과 board.canAnswer의 어휘에 맞췄습니다. 스튜디오·내보내기·미리보기 37개 키를 채웠습니다. 탭(카드 옆면에 인쇄하는 색인 표시)에는 한국어 인쇄 고유어가 없고 제책에서 잘라 내는 반달색인이 그에 해당하므로, 파일 간지의 돌출부를 가리키는 일상어이자 이 파일이 이미 쓰던 “탭”을 유지했습니다. 탭 모양은 “띠/모서리/가장자리”. format.headSlot.theme은 면의 색 갈래(colour.*)이지 화면 테마(format.theme.*)가 아니므로 “분야”로 옮겼습니다. preview.lockDate와 preview.lockTime은 CLDR이 채우므로 비워 두었습니다. 메시지 화면의 display.* 키를 채웠습니다. display.roman은 “한글”로 적었습니다. 보이는 줄이 say 열(독자 자신의 표기법으로 적은 읽는 법, core/respell.js)이지 로마자가 아니기 때문입니다.",
   "addTerm.add": "시트에 추가",
   "addTerm.bothNeeded": "두 언어 칸을 모두 채워 주세요.",
   "addTerm.inLanguage": "{language} 표기",
@@ -528,5 +528,17 @@
   "quick.imageOf": "{total}쪽 중 {n}쪽",
   "quick.nothingToExport": "아직 내보낼 것이 없어요. 시트가 들어가지 않아 지면이 만들어지지 않았어요.",
   "studio.moreActions": "추가 작업",
-  "gallery.converse": "대화"
+  "gallery.converse": "대화",
+  "board.slow": "절반 속도로 다시 말하기",
+  "board.switchTopic": "주제 바꾸기",
+  "board.switchLanguage": "언어 바꾸기",
+  "display.heading": "메시지 화면에 보이는 것",
+  "display.lede": "여기 있는 건 모두 상대에게 내밀어 보이는 화면에 관한 거예요. 쓰지 않는 것은 끄고, 그 언어를 배우고 있다면 발음을 켜 두세요.",
+  "display.owner": "문장 아래의 내 표현",
+  "display.roman": "읽는 법(한글)",
+  "display.ipa": "읽는 법(IPA)",
+  "display.speak": "말하기와 그 옆의 절반 속도 버튼",
+  "display.turn": "문장을 옆으로 돌리는 버튼",
+  "display.voice": "음성",
+  "display.voiceAuto": "자동 선택"
 }

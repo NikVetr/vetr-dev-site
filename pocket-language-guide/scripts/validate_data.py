@@ -145,6 +145,14 @@ IPA_SYMBOLS = set(
 )
 
 
+# The whole vocabulary a translator's gender aside is made of, and nothing else --
+# so a `literal` that matches is a note about grammar, not a back-translation.
+GENDER_ASIDE = re.compile(
+    r"^(?:\W|male|female|masc(?:uline)?|fem(?:inine)?|speaker|speaking|man|woman|men|women"
+    r"|said|by|a|an|the|if|you|are|to|form|plural|singular|possessum|noun|or|and|vs|versus)*$",
+    re.I)
+
+
 def check_ipa_symbols(value, where):
     """Complain about anything in an `ipa` cell that is not a phonetic symbol."""
     stray = sorted({ch for ch in value
@@ -578,6 +586,25 @@ def main():
                             f"{'variant inherits' if len(blind) == 1 else 'variants inherit'} "
                             "the other gender's pronunciation while changing the "
                             f"wording ({', '.join(blind[:3])})")
+        # **An English grammar note in a column that prints.** `literal` is a printed,
+        # reader-selectable column, and six languages had used it as a translator's
+        # aside -- `man speaking / woman speaking`, `-a if female` -- on rows whose
+        # gender the variants table already handles. That prints a note about grammar
+        # on the card where a back-translation belongs, for a distinction the reader
+        # never sees. Three clauses, and the third is what makes it exact: the cell is
+        # nothing but gender vocabulary, a variant row exists, and `text` shows one
+        # form -- because where the text itself carries both (`ผม/ดิฉัน`) the literal
+        # is doing real work by saying which is which. Fifty-eight were cleared once
+        # by hand; this is so the next pack does not put them back.
+        covered = {row["concept_id"] for row in variants}
+        aside = [cid for cid, row in base_rows.items()
+                 if cid in covered and "/" not in (row.get("text") or "")
+                 and GENDER_ASIDE.fullmatch(re.sub(r"[^A-Za-z ]", " ", (row.get("literal") or "").strip()) or " ")
+                 and (row.get("literal") or "").strip()]
+        if aside:
+            warnings.append(f"{rel}: {len(aside)} `literal` cell{'' if len(aside) == 1 else 's'} "
+                            "carry an English gender note the variants already handle "
+                            f"({', '.join(aside[:3])})")
         # Hebrew's `text_alt` is `text` with the vowel points added, which the group
         # loop above enforces -- so a variant that changes `text` and leaves
         # `text_alt` blank inherits the *other* gender's pointed spelling. A warning

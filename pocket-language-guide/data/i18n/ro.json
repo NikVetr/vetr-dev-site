@@ -529,5 +529,16 @@
   "quick.nothingToExport": "Deocamdată nu este nimic de exportat: foaia nu încape, deci nu a rezultat nicio pagină.",
   "studio.moreActions": "Mai multe acțiuni",
   "gallery.converse": "Conversează",
-  "board.slow": "Repetă la jumătate de viteză"
+  "board.slow": "Repetă la jumătate de viteză",
+  "board.switchTopic": "Schimbă subiectul",
+  "board.switchLanguage": "Schimbă limba",
+  "display.heading": "Ce arată ecranul cu mesajul",
+  "display.lede": "Tot ce este aici privește ecranul pe care îl întindeți cuiva. Opriți ce nu folosiți, sau porniți pronunția dacă învățați limba.",
+  "display.owner": "Formularea dumneavoastră, sub frază",
+  "display.roman": "Cum se spune, în alfabetul dumneavoastră",
+  "display.ipa": "Cum se spune, în AFI",
+  "display.speak": "Rostește, și butonul de jumătate de viteză de lângă el",
+  "display.turn": "Butonul care rotește fraza lateral",
+  "display.voice": "Voce",
+  "display.voiceAuto": "Aleasă automat"
 }

@@ -45,7 +45,7 @@ transit-rides.is-it-delayed,Ima li kašnjenja?,,ima li kaʃɲeɲa,,2,hr-agent-v1
 transit-rides.i-am-in-a-hurry,U žurbi sam,,u ʒˈurbi sam,,2,hr-agent-v1;ipa=espeak
 transit-rides.which-platform,Koji peron?,,kˈoji pˈeron,,2,hr-agent-v1;ipa=espeak
 transit-rides.what-time-is-the-next-one,U koliko sati ide sljedeći?,,u koliko sˈati ˈide sʎedetɕi,,2,hr-agent-v1;ipa=espeak
-transit-rides.i-went-past-my-stop,Prošao sam svoju stanicu,Prošla sam svoju stanicu,prˈoʃao sam svˈoju stanitsu,man speaking / woman speaking,2,hr-agent-v1;ipa=espeak
+transit-rides.i-went-past-my-stop,Prošao sam svoju stanicu,Prošla sam svoju stanicu,prˈoʃao sam svˈoju stanitsu,,2,hr-agent-v1;ipa=espeak
 transit-rides.can-i-use-this-ticket,Mogu li koristiti ovu kartu?,,mˈoɡu li koristiti ˈovu kˈartu,,2,hr-agent-v1;ipa=espeak
 place-words.scenic-area,turističko područje,,turistitʃko podrutʃje,,2,gloss-only;scoped-away;hr-agent-v1;ipa=espeak
 place-words.visitor-center,turistički informativni centar,,turistitʃki informativni tsˈentar,,2,hr-agent-v1;ipa=espeak
@@ -55,7 +55,7 @@ place-words.service-desk,informacije,,informatsije,,2,hr-agent-v1;ipa=espeak
 place-words.bus-stop,autobusna stanica,autobusno stajalište,autobusna stanitsa,stajalište is the official sign word for a stop,2,hr-agent-v1;ipa=espeak
 place-words.luggage-storage,garderoba za prtljagu,,ɡarderoba zˈa prtʎaɡu,,2,hr-agent-v1;ipa=espeak
 place-words.tourist-spot-sightseeing-area,turistička atrakcija,,turistitʃka atraktsija,,2,hr-agent-v1;ipa=espeak
-border-customs.i-am-a-tourist,Turist sam,Turistkinja sam,tˈurist sam,man speaking / woman speaking,2,hr-agent-v1;ipa=espeak
+border-customs.i-am-a-tourist,Turist sam,Turistkinja sam,tˈurist sam,,2,hr-agent-v1;ipa=espeak
 border-customs.here-is-my-passport,Ovo je moja putovnica,,ˈovo je mˈoja putovnitsa,,2,hr-agent-v1;ipa=espeak
 border-customs.i-am-staying-for-days,Ostajem {} dana,,ostajem {} dˈana,"dana is both the paucal and the genitive plural of dan, so the frame is right from two days up",2,hr-agent-v1;ipa=espeak
 border-customs.nothing-to-declare,Nemam ništa za prijaviti,,nemam nˈiʃta zˈa prijaviti,,2,hr-agent-v1;ipa=espeak

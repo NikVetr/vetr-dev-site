@@ -1,5 +1,5 @@
 {
-  "_note": "简体中文界面译文。约定：界面标签用简短的动宾或名词短语（导出、隐藏、全选），只在原文本身是完整句子时才写成句子（gallery.lede、studio.balanceBlocked、warn.*）。句中使用全角标点（，。？：），与短语语料保持一致。人称：尽量不用人称代词，需要时用“您”。术语：typeface=字体；romanisation=罗马字转写（field.roman、format.romanisation）；column 分两义——版面上的分栏用“栏”（format.columns、handles.columnGap、warn.*），条目表格里的字段列用“列”（format.columnsShown、warn.paper-too-coarse）；face=面（一张纸的一个印面，“N 面”读作自然量词，全部面/各面用于集合）；sheet=张（纸）／版面（排好的页面）；duplex=双面；margin=页边距；gloss=释义（format.glossedInto=释义语言）；section=分区；IPA 用“国际音标”，PNG/SVG/CSV/PDF/Wi-Fi 保留原样。分栏控件的字号档为“自适应/小/中/大/特大”，留白档为“紧凑/标准/宽松/更宽/最宽”，均不超过 3 个汉字。 罗马字转写系统用中文里通行的名称，而非英文缩写（拼音、平文式、训令式、文化观光部2000年式、马科恩-赖肖尔）；无通行中文名的标准（ALA-LC、BGN/PCGN、IAST、RTGS、Hunterian）保留原名。分隔线档为“统一/逐行”，条目版式档为“混合/并排/单行/每行一项”。 ☰ 菜单的 47 个键（editor / personal / speaker / speech / settings）已补齐。术语：button=按钮；对话板的一屏=页面（印好的页面仍称“版面”）；语音合成的声音=语音。editor.noTranslation 和 personal.lede 是关于软件行为的事实陈述（不发送到任何地方、只留在本设备上），不得改写成“数据安全”“保护隐私”一类的笼统说法。注：board.reply 与 board.close 两行在磁盘上是 \\uXXXX 转义，属既有写法，未改动。 补齐工作室、导出与预览的 37 个键。“标签”指卡片边缘那块彩色索引标记（不是浏览器的“标签页”）：切出来的那种中文叫拇指索引，印上去的这种通行叫法就是标签，与本文件已有的“居中标签”一致。标签形状为“色条/边角/外缘”。format.headSlot.theme 指本面的颜色大类（colour.*），与配色主题（format.theme.*、warn.* 里的“主题”）不是一回事，故作“大类”。gallery.tagline 里的 Phraselet 是把产品名当普通名词用，保留拉丁文并加量词“卡”。preview.lockDate 与 preview.lockTime 由 CLDR 提供，未填。",
+  "_note": "简体中文界面译文。约定：界面标签用简短的动宾或名词短语（导出、隐藏、全选），只在原文本身是完整句子时才写成句子（gallery.lede、studio.balanceBlocked、warn.*）。句中使用全角标点（，。？：），与短语语料保持一致。人称：尽量不用人称代词，需要时用“您”。术语：typeface=字体；romanisation=罗马字转写（field.roman、format.romanisation）；column 分两义——版面上的分栏用“栏”（format.columns、handles.columnGap、warn.*），条目表格里的字段列用“列”（format.columnsShown、warn.paper-too-coarse）；face=面（一张纸的一个印面，“N 面”读作自然量词，全部面/各面用于集合）；sheet=张（纸）／版面（排好的页面）；duplex=双面；margin=页边距；gloss=释义（format.glossedInto=释义语言）；section=分区；IPA 用“国际音标”，PNG/SVG/CSV/PDF/Wi-Fi 保留原样。分栏控件的字号档为“自适应/小/中/大/特大”，留白档为“紧凑/标准/宽松/更宽/最宽”，均不超过 3 个汉字。 罗马字转写系统用中文里通行的名称，而非英文缩写（拼音、平文式、训令式、文化观光部2000年式、马科恩-赖肖尔）；无通行中文名的标准（ALA-LC、BGN/PCGN、IAST、RTGS、Hunterian）保留原名。分隔线档为“统一/逐行”，条目版式档为“混合/并排/单行/每行一项”。 ☰ 菜单的 47 个键（editor / personal / speaker / speech / settings）已补齐。术语：button=按钮；对话板的一屏=页面（印好的页面仍称“版面”）；语音合成的声音=语音。editor.noTranslation 和 personal.lede 是关于软件行为的事实陈述（不发送到任何地方、只留在本设备上），不得改写成“数据安全”“保护隐私”一类的笼统说法。注：board.reply 与 board.close 两行在磁盘上是 \\uXXXX 转义，属既有写法，未改动。 补齐工作室、导出与预览的 37 个键。“标签”指卡片边缘那块彩色索引标记（不是浏览器的“标签页”）：切出来的那种中文叫拇指索引，印上去的这种通行叫法就是标签，与本文件已有的“居中标签”一致。标签形状为“色条/边角/外缘”。format.headSlot.theme 指本面的颜色大类（colour.*），与配色主题（format.theme.*、warn.* 里的“主题”）不是一回事，故作“大类”。gallery.tagline 里的 Phraselet 是把产品名当普通名词用，保留拉丁文并加量词“卡”。preview.lockDate 与 preview.lockTime 由 CLDR 提供，未填。 递给对方看的页面（board.slow、board.switch*、display.*）：display.heading 不写“消息页面”，因为“消息”在中文界面里指通知，而这里指对话板上递给对方看的那一屏，按本文件“对话板的一屏=页面”的约定称“页面”；“情境”沿用 board.pickTopic，“语音”沿用 speech.*，“按钮”沿用 editor.*；display.roman 写“用您自己的文字写出”而非“罗马字转写”，因为这一行是在向不识术语的人解释那一列。",
   "addTerm.add": "添加到卡片",
   "addTerm.bothNeeded": "两个语言字段都需要填写。",
   "addTerm.inLanguage": "用{language}",
@@ -528,5 +528,17 @@
   "quick.imageOf": "第 {n} 页，共 {total} 页",
   "quick.nothingToExport": "暂时没有可导出的内容：版面排不下，因此没有生成页面。",
   "studio.moreActions": "更多操作",
-  "gallery.converse": "对话"
+  "gallery.converse": "对话",
+  "board.slow": "以半速再朗读一遍",
+  "board.switchTopic": "更换情境",
+  "board.switchLanguage": "更换语言",
+  "display.heading": "递给对方看的页面上显示什么",
+  "display.lede": "这里的一切都关于您递给对方看的那个页面。用不到的可以关掉；如果正在学这门语言，可以打开读音。",
+  "display.owner": "句子下方，您自己的说法",
+  "display.roman": "读音，用您自己的文字写出",
+  "display.ipa": "读音，用国际音标写出",
+  "display.speak": "“朗读”按钮，以及旁边的半速按钮",
+  "display.turn": "横向显示句子的按钮",
+  "display.voice": "语音",
+  "display.voiceAuto": "自动选择"
 }

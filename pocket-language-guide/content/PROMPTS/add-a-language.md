@@ -298,7 +298,8 @@ the romanisation for the romanised packs, which ICU cannot give at all.
 `emergency-labels/<code>.csv`'s `_frame` is the interpolation trap. **Every one of the
 first twenty-two languages rejected a naive preposition**; Hebrew was the first to
 take one, because its preposition's vowel is not written, and Persian the second, for
-a different reason. Read that discussion in `summary.md` before writing yours.
+a different reason. Read that discussion -- the Hebrew and Persian case histories in
+`docs/implementation-status.md` -- before writing yours.
 
 **Two corrections to advice this file used to give, both earned the hard way.**
 
