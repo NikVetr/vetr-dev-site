@@ -6,8 +6,11 @@
 
 import { parseTable } from '../core/csv.js';
 import {
-  DEFAULT_PADDING, defaultSelection, hasContent, paperSpec, respellOverrideFile,
+  DEFAULT_PADDING, defaultFieldSet, defaultSelection, hasContent, isSpoken, paperSpec,
+  respellOverrideFile,
 } from '../core/pack.js';
+
+export { isSpoken };
 import { messagesReady, t } from './i18n.js';
 import { readProfile } from './speaker-settings.js';
 import * as store from './platform/store.js';
@@ -246,7 +249,7 @@ export function makeSpec(ctx, presets, choice) {
     // answered, which is what the corpus has always printed.
     speaker: readProfile(),
     region,
-    fieldSet: ['script', 'roman', 'gloss', 'respell', 'numeral'],
+    fieldSet: defaultFieldSet(target),
     geometry: { ...geometry },
     paper: paperSpec(ctx.corpus, paperId),
     themeId: 'latex-reference',

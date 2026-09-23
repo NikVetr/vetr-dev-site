@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b67a3">
+<title data-i18n="signal.docTitle">Signal in Morse — Phraselet</title>
+<link rel="icon" href="favicon.svg">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="conversation.css">
+</head>
+<body class="page-signal">
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="./"><img class="brand-mark" src="favicon.svg" alt="" width="20" height="20"><span data-i18n="nav.brand">Phraselet</span></a>
+    <div class="spacer"></div>
+    <a class="btn ghost back-link" href="./" data-i18n="nav.back">← All languages</a>
+  </div>
+</header>
+
+<main class="container signal">
+  <h1 data-i18n="signal.heading">Signal in Morse</h1>
+  <p class="lede" data-i18n="signal.lede">Type what you need to say. The phone flashes it — the screen, and the lamp where the phone will lend it — in Morse, at a speed a person can read. SOS is one tap.</p>
+
+  <!-- Two directions, two boxes, no mode switch: a message you type is shown as
+       code as you type it, and code you have read off someone else's light is
+       shown as letters. Each box only ever goes one way, so neither needs a label
+       that changes. -->
+  <section class="signal-pane">
+    <label for="signal-text" data-i18n="signal.message">Your message</label>
+    <textarea id="signal-text" rows="3" autocomplete="off" autocapitalize="characters" spellcheck="false"></textarea>
+    <p class="signal-unsayable" id="signal-unsayable" role="status"></p>
+    <output id="signal-code" class="signal-code" for="signal-text" aria-live="polite"></output>
+    <div class="row signal-actions">
+      <label class="signal-speed">
+        <span data-i18n="signal.speed">Speed</span>
+        <select id="signal-speed">
+          <option value="5">5 wpm</option>
+          <option value="8" selected>8 wpm</option>
+          <option value="12">12 wpm</option>
+          <option value="20">20 wpm</option>
+        </select>
+      </label>
+      <span class="spacer"></span>
+      <button type="button" id="signal-sos" class="signal-sos">SOS</button>
+      <button type="button" id="signal-start" class="primary" data-i18n="signal.start">Signal</button>
+    </div>
+  </section>
+
+  <section class="signal-pane">
+    <label for="signal-received" data-i18n="signal.received">Code you received</label>
+    <textarea id="signal-received" rows="2" autocomplete="off" spellcheck="false" placeholder=".... . .-.. .--. / -- ."></textarea>
+    <output id="signal-decoded" class="signal-decoded" for="signal-received" aria-live="polite"></output>
+  </section>
+</main>
+
+<a class="donate" href="https://www.buymeacoffee.com/nikgvetr" target="_blank" rel="noopener" data-i18n="nav.donate">Donate</a>
+<script type="module" src="ui/signal.js"></script>
+</body>
+</html>

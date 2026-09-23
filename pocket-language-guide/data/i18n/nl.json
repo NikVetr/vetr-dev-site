@@ -539,5 +539,18 @@
   "display.speak": "Uitspreken, en de knop voor halve snelheid ernaast",
   "display.turn": "De knop die de zin zijwaarts draait",
   "display.voice": "Stem",
-  "display.voiceAuto": "Automatisch gekozen"
+  "display.voiceAuto": "Automatisch gekozen",
+  "drill.reveal": "Antwoord bekijken",
+  "format.headSlot.logo": "Phraselet-logo",
+  "gallery.signal": "Knipperen",
+  "board.rate": "Spreeksnelheid",
+  "signal.docTitle": "Knipperen in morse — Phraselet",
+  "signal.heading": "Knipperen in morse",
+  "signal.lede": "Typ wat u wilt zeggen. De telefoon knippert het in morse — op het scherm, en op de flitser als de telefoon dat toelaat — op een snelheid die iemand kan lezen. SOS is één tik.",
+  "signal.message": "Uw bericht",
+  "signal.received": "Ontvangen code",
+  "signal.speed": "Snelheid",
+  "signal.start": "Knipperen",
+  "signal.stop": "Stoppen",
+  "signal.unsayable": "Tekens zonder morsecode: {chars}"
 }

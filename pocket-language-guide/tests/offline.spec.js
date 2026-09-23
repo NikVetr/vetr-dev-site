@@ -294,7 +294,7 @@ test('a board works on a cold offline visit with nothing saved', async ({ page, 
   await page.locator('#board-up').click();
 
   await page.locator('[data-button="avoid"]').click();
-  await page.locator('.board-controls .board-control:not(.board-turn)').click();
+  await page.locator('.board-reply').click();
   await expect(page.locator('.board-answer')).toHaveCount(6);
   await page.locator('.board-back').click();
   await page.locator('.board-message').click();
@@ -307,7 +307,7 @@ test('a board works on a cold offline visit with nothing saved', async ({ page, 
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=time');
   await expect(page.locator('.board-cell').first()).toBeVisible({ timeout: 30_000 });
   await page.locator('[data-button="wait"]').click();
-  await page.locator('.board-controls .board-control:not(.board-turn)').first().click();
+  await page.locator('.board-reply').click();
   await expect(page.locator('.board-answer').first()).toHaveText(/\p{Script=Han}/u);
   await page.locator('.board-answer-entry').click();
   await page.locator('.board-entry-amount').fill('25');

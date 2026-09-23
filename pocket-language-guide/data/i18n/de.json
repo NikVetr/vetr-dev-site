@@ -539,5 +539,18 @@
   "display.speak": "Vorlesen und daneben die Schaltfläche für halbe Geschwindigkeit",
   "display.turn": "Die Schaltfläche, die den Satz zur Seite dreht",
   "display.voice": "Stimme",
-  "display.voiceAuto": "Automatisch gewählt"
+  "display.voiceAuto": "Automatisch gewählt",
+  "drill.reveal": "Antwort anzeigen",
+  "format.headSlot.logo": "Phraselet-Logo",
+  "gallery.signal": "Signalisieren",
+  "board.rate": "Sprechgeschwindigkeit",
+  "signal.docTitle": "Signalisieren mit Morsecode — Phraselet",
+  "signal.heading": "Signalisieren mit Morsecode",
+  "signal.lede": "Schreiben Sie, was Sie sagen möchten. Das Telefon blinkt es — auf dem Bildschirm und mit dem Kamerablitz — in Morsecode, in einer Geschwindigkeit, die man lesen kann. SOS ist ein einziges Tippen.",
+  "signal.message": "Ihre Nachricht",
+  "signal.received": "Empfangener Code",
+  "signal.speed": "Geschwindigkeit",
+  "signal.start": "Signalisieren",
+  "signal.stop": "Stopp",
+  "signal.unsayable": "Morsecode hat kein Zeichen für: {chars}"
 }

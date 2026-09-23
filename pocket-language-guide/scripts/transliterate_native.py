@@ -418,6 +418,10 @@ def build(code, check):
     stale = []
     written = 0
     for path in sorted((DATA / "lang" / code).glob("*.csv")):
+        # The Morse group's text is the Latin letter a code stands for, in every
+        # language: there is nothing to transliterate and `A` is not a Klingon letter.
+        if path.name == "morse.csv":
+            continue
         header_line, rows = load_rows(path)
         header = next(csv.reader([header_line]))
         changed = column not in header

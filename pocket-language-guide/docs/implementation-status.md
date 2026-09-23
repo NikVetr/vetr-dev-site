@@ -4000,3 +4000,82 @@ the first crop began at (−17, −17) instead of (42, 34) and the mark drew shi
 cut on the right and below. The alpha channel's bounding box is what to trust for
 a transparent render, and it put the ink at (59.5, 51.5) — inside the page all
 along.
+
+## Batch Q — the message screen's shape, the mark's colour, and Morse
+
+### Only the sentence turns
+
+Turning rotated the whole stage — controls and all — into a `100dvh`-by-`100dvw`
+box, which put the owner's buttons on their sides and made the speed control a
+pillar; and the speed list, opened from the foot of the screen, appeared under the
+header's corner, a screen away from the thumb that asked. Now the sentence alone
+turns, set `vertical-rl` with every glyph `sideways`, and the fitter measures lines
+as heights when the writing mode says so instead of un-rotating a stage to measure
+it. Speak, speed and Turn keep their places and sizes in both orientations. Reply
+moved out of that row into a foot under the sentence beside the owner's gloss: full
+width and much larger on a portrait phone, at the gloss's side in landscape, because
+it is the one control the stranger presses. `openBoardMenu` places its panel against
+the control that opened it — above when the control is in the lower half, below
+otherwise, kept inside the viewport.
+
+### The mark, larger and in the page's colour
+
+A smidge larger — 1.35em where it was 1.15 — and a hue per page through
+`hue-rotate` on a `--logo-hue` custom property set by a `body.page-*` class: green
+on the gallery, blue in the studio, orange on the quick sheet, a warm red on the
+board and the signaller. A rotation of hue leaves luminance and saturation where
+they were and the white untouched, so the two tones keep their contrast.
+
+### The mark on the card
+
+A `logo` slot in the header/footer control prints the mark in the band beside the
+folio, pair or emergency number. It is drawn as paths — `scripts/build_logo.mjs`
+flattens `favicon.svg`'s rotated rounded rectangles into absolute cubic curves in
+`core/logo-shapes.js`, since neither renderer transforms a path — and measured as
+one more part of the band's width, so the tab and the alignment account for it. Mono
+sheets get it in ink and paper. `solve.test.mjs` pins that the front bubble is drawn
+once in its own green, the folio prints to its right, no run is set for the mark's
+own part, and mono removes the green.
+
+### Morse
+
+A language card nobody speaks. `morse` joins the registry with its own script row,
+a `morse-code` section of 49 concepts whose text is the code, and a gloss file in
+every other language whose text is the letter; the validator, the IPA build, the
+prerender and every "I speak" control learn that a language with no `speak_label`
+is a target only. `signal.html` is its conversation: type, see the code, flash it on
+the screen and the lamp through the SOS beacon's new `morse` mode at 5–20 wpm,
+decode what you saw, one-tap SOS. The gallery card offers Customise and Signal, no
+Converse. `core/morse.js` is pinned by six unit tests and the page by four browser
+tests. `prerender_packs.mjs --only morse` renders its 53 pairs; on the way the
+script stopped wiping every other pack and its index on a partial run, which it had
+done since `--only` was added.
+
+What a language gets for free turned out to include five checks that assume it is
+spoken, each met on its own terms rather than waived: the sheet's default columns
+drop romanisation and respelling for a target with no sound (`defaultFieldSet` in
+`core/pack.js`, used by the app and the prerender alike); the IPA build and the
+native-script transliterator skip the Morse group, whose text is the Latin letter a
+code stands for; the language-name IPA table has no cell for a name no sentence
+asks about; the duration formatter refuses it by name beside Klingon and Quenya;
+and the per-language ornament table gained `telegraph` -- SOS as the key sends
+it -- since every ready language must have a motif of its own.
+
+### The wave
+
+Thirteen interface keys and the Morse section title, four agents of thirteen
+languages each. Every catalogue took the keys except where the brief's own rule
+held: Khmer has no sourceable term for Morse code and so omits the four keys that
+name it and its section title; Quenya omits three that need *screen*, *code* or
+*tap*; Yoruba omits the two that need a toned word for *speed*; Klingon wrote all
+thirteen -- {Degh} for the mark, {yIwovmoH} for the flashing -- but no section
+title, because that file derives pIqaD from the roman column and pIqaD cannot spell
+"Morse". Each omission is in the file's `_note`. Two terms rest on running text
+rather than an article of their own (Marathi, Odia) and one is a reconstruction from
+attested parts (Nepali); those are the first for a fluent reader to check.
+
+### Not yet
+
+The landing sentence is still the candidate in `en.json`, held from translation
+until the wording is agreed. The torch, and the Morse lamp with it, still wait on a
+phone.

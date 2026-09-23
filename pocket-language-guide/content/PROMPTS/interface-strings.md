@@ -169,3 +169,16 @@ might reasonably differ; and **any corpus row you found to be wrong on the way p
 That last one is not a distraction — the Malay board work is what established that
 `data/lang/ms/emergency.csv` glosses "back" as *punggung*, which Kamus Dewan tags as
 the Indonesian sense and which the Malay corpus already contradicts three rows later.
+
+## Section titles ride along, and one file cannot take a Latin name
+
+A key that names a section usually arrives with a row for
+`data/registry/section-titles/<code>.csv`, so the app and the printed card agree.
+Two of those files are not like the others. `tlh.csv` carries a `title_roman`
+column from which `transliterate_native.py` derives the pIqaD title, and pIqaD spells
+only Klingon's own letters: a proper name such as *Morse* has no representation and
+the row must be left out rather than forced through the `{...}` placeholder escape,
+which is for runtime inserts. `qya.csv` has no source to draw on for most modern
+terms at all. Leaving the row out is the right answer for both; say so in the
+report. The rows that do land keep the file's own line endings -- most are CRLF, a
+few (`am`, `gu`, `ha`) are LF -- and the case the file's other titles use.

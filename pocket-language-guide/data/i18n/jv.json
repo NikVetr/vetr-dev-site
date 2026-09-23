@@ -1,5 +1,5 @@
 {
-  "_note": "Register: krama for every sentence, bare stems on buttons (Èkspor, Simpen, Batal, Tutup), matching the pack's own level -- the studio addresses one reader and a Javanese interface that addressed them in ngoko would be the same discourtesy a ngoko card is. Terms of art: a printed face is sisi and a sheet is lembar, so \"4 faces / 2 sheets\" is \"4 sisi / 2 lembar\"; duplex is bolak-balik; typeface is jinis aksara; romanisation is romanisasi; the respelling field is Cara maos and the literal gloss Teges harfiah; \"glossed into\" is Teges ing basa. The divider is pamisah and \"garis\" is kept for the printed hairline (warn.hairline-too-thin), which is ink where the divider is not. Interpolation: Intl.DisplayNames hands Javanese the bare ethnonym (\"Inggris\", \"Jepang\", \"Jawa\"), which is a country or a people on its own, so every template that takes {language} carries the head noun basa in front of it -- \"Ing basa {language}\", \"Basa {language} dipunginakaken ing {regions}\", \"kertu basa {language}\", \"panduan basa {language}\". This is the same repair the Indonesian catalogue records, and it is needed here for the same reason and on the same six templates. Romanisation systems keep their Latin names -- Javanese has no settled form for Hepburn, Kunrei-shiki, McCune-Reischauer or Hunterian, and ALA-LC, BGN/PCGN, IAST and RTGS are standards initialisms -- except roman.rr, which is calqued as \"Romanisasi Révisi\". Orthography follows the pack: é = [e], è = [ɛ], bare e = [ə]. Message-screen keys (display.*): display.roman says \"miturut éjaan basa Jawi\", after field.title.respell -- the line shown is the say column (the respelling in the reader's own orthography, core/respell.js), not the romanisation; display.turn drops \"sideways\" the way board.turn already does.",
+  "_note": "Register: krama for every sentence, bare stems on buttons (Èkspor, Simpen, Batal, Tutup), matching the pack's own level -- the studio addresses one reader and a Javanese interface that addressed them in ngoko would be the same discourtesy a ngoko card is. Terms of art: a printed face is sisi and a sheet is lembar, so \"4 faces / 2 sheets\" is \"4 sisi / 2 lembar\"; duplex is bolak-balik; typeface is jinis aksara; romanisation is romanisasi; the respelling field is Cara maos and the literal gloss Teges harfiah; \"glossed into\" is Teges ing basa. The divider is pamisah and \"garis\" is kept for the printed hairline (warn.hairline-too-thin), which is ink where the divider is not. Interpolation: Intl.DisplayNames hands Javanese the bare ethnonym (\"Inggris\", \"Jepang\", \"Jawa\"), which is a country or a people on its own, so every template that takes {language} carries the head noun basa in front of it -- \"Ing basa {language}\", \"Basa {language} dipunginakaken ing {regions}\", \"kertu basa {language}\", \"panduan basa {language}\". This is the same repair the Indonesian catalogue records, and it is needed here for the same reason and on the same six templates. Romanisation systems keep their Latin names -- Javanese has no settled form for Hepburn, Kunrei-shiki, McCune-Reischauer or Hunterian, and ALA-LC, BGN/PCGN, IAST and RTGS are standards initialisms -- except roman.rr, which is calqued as \"Romanisasi Révisi\". Orthography follows the pack: é = [e], è = [ɛ], bare e = [ə]. Message-screen keys (display.*): display.roman says \"miturut éjaan basa Jawi\", after field.title.respell -- the line shown is the say column (the respelling in the reader's own orthography, core/respell.js), not the romanisation; display.turn drops \"sideways\" the way board.turn already does. Added 13 keys: drill.reveal, format.headSlot.logo, gallery.signal, board.rate and signal.* (the Morse-signal page). \"Sandi Morse\" follows the title of the Javanese Wikipedia article Sandi morse. \"Kacepetan\" reuses the word already established in display.speak; signal.lede follows the passive, subject-avoiding phrasing personal.lede already uses rather than a direct second-person imperative.",
   "addTerm.add": "Tambahaken ing lembar",
   "addTerm.bothNeeded": "Kalih kolom basa kedah dipunisi.",
   "addTerm.inLanguage": "Ing basa {language}",
@@ -539,5 +539,18 @@
   "display.speak": "Waosaken, lan tombol setengah kacepetan ing sisihipun",
   "display.turn": "Tombol ingkang malangaken ukara",
   "display.voice": "Swanten",
-  "display.voiceAuto": "Dipunpilih kanthi otomatis"
+  "display.voiceAuto": "Dipunpilih kanthi otomatis",
+  "drill.reveal": "Tingali wangsulan",
+  "format.headSlot.logo": "Tandha Phraselet",
+  "gallery.signal": "Sinyal",
+  "board.rate": "Kacepetan waosan",
+  "signal.docTitle": "Sinyal ing Sandi Morse — Phraselet",
+  "signal.heading": "Sinyal ing Sandi Morse",
+  "signal.lede": "Menapa ingkang badhé dipunwedharaken, kaserat wonten mriki. Telepon badhé ngedhap-edhapaken wontenipun ing Sandi Morse — wonten skrin saha lampu kamera — kanthi kacepetan ingkang saged dipunwaos ing tiyang. SOS cekap satunggal pencetan kémawon.",
+  "signal.message": "Pesen panjenengan",
+  "signal.received": "Sandi ingkang panjenengan tampi",
+  "signal.speed": "Kacepetan",
+  "signal.start": "Sinyal",
+  "signal.stop": "Mandheg",
+  "signal.unsayable": "Aksara ingkang mboten wonten ing Sandi Morse: {chars}"
 }

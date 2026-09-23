@@ -835,6 +835,25 @@ function itemRow(concept, target, source, respell, spec, override, custom) {
 export const DEFAULT_PADDING = 1.4;
 
 /**
+ * Whether anyone speaks the language -- whether it can be a reader's own, and so a
+ * sheet's source or a board's owner, and whether its words have a sound to romanise
+ * or respell. The registry says so by giving it an "I speak" label; Morse, which is
+ * learnt and never spoken, has none and is offered only as something to learn.
+ * @param {Record<string,string>} lang a languages.csv row
+ */
+export const isSpoken = (lang) => Boolean(lang.speak_label);
+
+/**
+ * The columns a sheet starts with. A language nobody speaks has nothing to
+ * pronounce, so its card is the code and the gloss alone -- a romanisation or
+ * respelling column would print empty and warn that it had.
+ * @param {Record<string,string>} target a languages.csv row
+ * @returns {import('./types.js').FieldId[]}
+ */
+export const defaultFieldSet = (target) => (isSpoken(target)
+  ? ['script', 'roman', 'gloss', 'respell', 'numeral'] : ['script', 'gloss', 'numeral']);
+
+/**
  * The `spec.priority` ladder: how far down the corpus, by `importance`, each step
  * keeps.
  *

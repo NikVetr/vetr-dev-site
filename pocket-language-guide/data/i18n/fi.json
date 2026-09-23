@@ -539,5 +539,18 @@
   "display.speak": "Puhu-painike ja sen vieressä puolinopeuden painike",
   "display.turn": "Painike, joka kääntää lauseen kyljelleen",
   "display.voice": "Ääni",
-  "display.voiceAuto": "Valitaan automaattisesti"
+  "display.voiceAuto": "Valitaan automaattisesti",
+  "drill.reveal": "Näytä vastaus",
+  "format.headSlot.logo": "Phraselet-logo",
+  "gallery.signal": "Vilkuta",
+  "board.rate": "Puhenopeus",
+  "signal.docTitle": "Merkinanto morseaakkosilla — Phraselet",
+  "signal.heading": "Merkinanto morseaakkosilla",
+  "signal.lede": "Kirjoita, mitä haluat sanoa. Puhelin vilkuttaa sen — näytöllä ja kameran valolla — morseaakkosina, nopeudella, jonka ihminen pystyy lukemaan. SOS lähtee yhdellä napautuksella.",
+  "signal.message": "Viestisi",
+  "signal.received": "Vastaanotettu koodi",
+  "signal.speed": "Nopeus",
+  "signal.start": "Vilkuta",
+  "signal.stop": "Pysäytä",
+  "signal.unsayable": "Morseaakkosissa ei ole merkkiä: {chars}"
 }

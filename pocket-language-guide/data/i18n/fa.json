@@ -539,5 +539,18 @@
   "display.speak": "«پخش صدا» و دکمهٔ نصف سرعت کنار آن",
   "display.turn": "دکمه‌ای که جمله را به پهلو می‌چرخاند",
   "display.voice": "صدا",
-  "display.voiceAuto": "انتخاب خودکار"
+  "display.voiceAuto": "انتخاب خودکار",
+  "drill.reveal": "نمایش پاسخ",
+  "format.headSlot.logo": "آرم Phraselet",
+  "gallery.signal": "علامت‌دهی",
+  "board.rate": "سرعت پخش",
+  "signal.docTitle": "علامت‌دهی با کد مورس — Phraselet",
+  "signal.heading": "علامت‌دهی با کد مورس",
+  "signal.lede": "آنچه باید بگویید را بنویسید. گوشی آن را — روی صفحه و با نور دوربین — به کد مورس، با سرعتی که یک نفر بتواند بخواند، چشمک می‌زند. فرستادن اس‌اواس فقط یک ضربه است.",
+  "signal.message": "پیام شما",
+  "signal.received": "کدی که دریافت کردید",
+  "signal.speed": "سرعت",
+  "signal.start": "علامت‌دهی",
+  "signal.stop": "توقف",
+  "signal.unsayable": "کد مورس برای این‌ها نشانه‌ای ندارد: {chars}"
 }

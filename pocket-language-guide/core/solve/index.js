@@ -4,6 +4,7 @@
 // lines, so every renderer -- DOM preview, SVG/PNG, PDF -- draws the same thing
 // and none of them makes a layout decision.
 
+import { LOGO_ASPECT, LOGO_SHAPES } from '../logo-shapes.js';
 import { resolveField } from '../fonts.js';
 import { emergencyNote } from '../pack.js';
 import { buildAtoms } from './atoms.js';
@@ -482,6 +483,10 @@ function headText(input, face, faces, band, theme) {
       return title ? [{ text: title, bold: true }] : [];
     }
     if (slot === 'custom') return [{ text: (band.text ?? '').trim(), bold: false }];
+    // The mark. A word joiner for text: not whitespace, so `spaceParts` keeps it,
+    // and zero width, so nothing is drawn where the paths go. The trailing space
+    // becomes the gap before whatever follows, by the same rule as every other part.
+    if (slot === 'logo') return [{ text: '\u2060 ', bold: false, logo: true }];
     return [];
   };
 
@@ -493,7 +498,10 @@ function headText(input, face, faces, band, theme) {
     for (const slot of slots) {
       const parts = one(slot).filter((p) => p.text);
       if (!parts.length) continue;
-      if (out.length) out.push({ text: ' \u2022', bold: false, sep: true });
+      // A bullet between words, not beside the mark: a mark is its own separator.
+      if (out.length && !out[out.length - 1].logo && !parts[0].logo) {
+        out.push({ text: ' \u2022', bold: false, sep: true });
+      }
       out.push(...parts);
     }
     return spaceParts(out);
@@ -504,6 +512,40 @@ function headText(input, face, faces, band, theme) {
     center: position(band.center),
     right: position(band.right),
   };
+}
+
+/** The mark's height in the band: a little over the type size, so it reads as a
+ * mark beside a line of type rather than as one more glyph in it.
+ * @param {number} size */
+const logoSize = (size) => size * 1.15;
+
+/**
+ * The logo as path marks, `h` points tall with its top-left corner at (`x`, `y`).
+ *
+ * The shapes are stored in a box one point tall with coordinates alternating x, y,
+ * so placing them is one pass over the numbers. In mono the greens become ink and
+ * the light card becomes paper: two tones, like everything else on a mono sheet.
+ * @param {number} x @param {number} y @param {number} h
+ * @param {string|null} ink  the ink colour when the sheet is mono, else null
+ * @returns {import('../types.js').PathMark[]}
+ */
+function logoMarks(x, y, h, ink) {
+  const dark = ink ?? '';
+  const tone = (/** @type {string} */ colour) => (!dark ? colour
+    : colour === '#ffffff' || colour === '#d6f2da' ? '#ffffff' : dark);
+  return LOGO_SHAPES.map((shape) => {
+    let axis = 0;
+    const d = shape.d.replace(/-?[\d.]+/g, (n) => {
+      axis += 1;
+      return (Number(n) * h + (axis % 2 ? x : y)).toFixed(3);
+    });
+    return {
+      x: 0, y: 0, w: h * LOGO_ASPECT, h, d,
+      fill: tone(shape.fill),
+      stroke: shape.stroke ? tone(shape.stroke) : 'none',
+      strokeWidth: (shape.strokeWidth ?? 0) * h,
+    };
+  });
 }
 
 /**
@@ -973,7 +1015,7 @@ export function layout(input) {
       });
       /** @param {import('../types.js').HeadPart[]} parts */
       const widthOf = (parts) => parts.reduce(
-        (sum, part) => sum + measurer.width(part.text, styleOf(part)),
+        (sum, part) => sum + (part.logo ? logoSize(size) * LOGO_ASPECT : measurer.width(part.text, styleOf(part))),
         0,
       );
       /** @param {import('../types.js').HeadPart[]} parts @param {number} room */
@@ -1103,6 +1145,13 @@ export function layout(input) {
         const total = widthOf(parts);
         let x = align === 'end' ? anchor - total : align === 'mid' ? anchor - total / 2 : anchor;
         for (const part of parts) {
+          if (part.logo) {
+            const h = logoSize(size);
+            (face.paths ??= []).push(...logoMarks(x, y - h + size * 0.12, h,
+              spec.inkMode === 'mono' ? theme.colors.ink : null));
+            x += h * LOGO_ASPECT;
+            continue;
+          }
           const partStyle = styleOf(part);
           face.runs.push({
             text: part.text,

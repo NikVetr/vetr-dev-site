@@ -539,5 +539,18 @@
   "display.speak": "ປຸ່ມອ່ານອອກສຽງ ແລະ ປຸ່ມຄວາມໄວເຄິ່ງໜຶ່ງທີ່ຢູ່ຂ້າງມັນ",
   "display.turn": "ປຸ່ມທີ່ຫັນປະໂຫຍກໄປທາງຂ້າງ",
   "display.voice": "ສຽງເວົ້າ",
-  "display.voiceAuto": "ເລືອກອັດຕະໂນມັດ"
+  "display.voiceAuto": "ເລືອກອັດຕະໂນມັດ",
+  "drill.reveal": "ເບິ່ງຄຳຕອບ",
+  "format.headSlot.logo": "ສັນຍາລັກ Phraselet",
+  "gallery.signal": "ກະພິບ",
+  "board.rate": "ຄວາມໄວການອ່ານອອກສຽງ",
+  "signal.docTitle": "ກະພິບເປັນມອດສະ — Phraselet",
+  "signal.heading": "ກະພິບເປັນມອດສະ",
+  "signal.lede": "ພິມສິ່ງທີ່ເຈົ້າຢາກເວົ້າ. ໂທລະສັບຈະກະພິບຂໍ້ຄວາມນັ້ນ — ທັງທີ່ໜ້າຈໍ ແລະ ທີ່ໄຟຫາກໂທລະສັບອະນຸຍາດ — ເປັນມອດສະ ດ້ວຍຄວາມໄວທີ່ຄົນອ່ານໄດ້. SOS ແຕະຄັ້ງດຽວ.",
+  "signal.message": "ຂໍ້ຄວາມຂອງເຈົ້າ",
+  "signal.received": "ລະຫັດທີ່ໄດ້ຮັບ",
+  "signal.speed": "ຄວາມໄວ",
+  "signal.start": "ກະພິບ",
+  "signal.stop": "ຢຸດ",
+  "signal.unsayable": "ຕົວອັກສອນທີ່ບໍ່ມີລະຫັດມອດສະ: {chars}"
 }

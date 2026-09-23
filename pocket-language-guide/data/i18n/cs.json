@@ -539,5 +539,18 @@
   "display.speak": "Vyslovit a vedle něj tlačítko poloviční rychlosti",
   "display.turn": "Tlačítko, které otočí větu na šířku",
   "display.voice": "Hlas",
-  "display.voiceAuto": "Vybrán automaticky"
+  "display.voiceAuto": "Vybrán automaticky",
+  "drill.reveal": "Zobrazit odpověď",
+  "format.headSlot.logo": "Logo Phraselet",
+  "gallery.signal": "Signalizovat",
+  "board.rate": "Rychlost mluvení",
+  "signal.docTitle": "Signalizace Morseovou abecedou — Phraselet",
+  "signal.heading": "Signalizace Morseovou abecedou",
+  "signal.lede": "Napište, co potřebujete sdělit. Telefon to zabliká — na displeji a bleskem fotoaparátu — Morseovou abecedou, rychlostí, kterou člověk stihne přečíst. SOS stačí jedno klepnutí.",
+  "signal.message": "Vaše zpráva",
+  "signal.received": "Přijatý kód",
+  "signal.speed": "Rychlost",
+  "signal.start": "Signalizovat",
+  "signal.stop": "Zastavit",
+  "signal.unsayable": "Morseova abeceda nemá znak pro: {chars}"
 }

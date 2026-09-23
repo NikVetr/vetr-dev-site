@@ -1610,7 +1610,7 @@ export function headControl({ spec, onChange, colours = () => [] }) {
   /** @type {import('../core/types.js').HeadSlot[]} */
   // `theme` last before `custom`: it is the newest and the only one that names a
   // group of sections rather than a fact about the sheet.
-  const SLOTS = ['page', 'pair', 'region', 'legend', 'theme', 'custom'];
+  const SLOTS = ['page', 'pair', 'region', 'legend', 'theme', 'logo', 'custom'];
   const SIDES = /** @type {const} */ (['left', 'center', 'right']);
   const SPANS = /** @type {const} */ (['full', 'left', 'center', 'right']);
   const REACHES = /** @type {const} */ (['band', 'corner', 'edge']);

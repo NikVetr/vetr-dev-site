@@ -16,7 +16,7 @@ const BOARD = '/conversation.html?target=zh-Hans&source=en&board=spa';
  * it is about how the screen is drawn rather than about what is being said, so every
  * test that means "the button the listener presses" has to say so.
  */
-const EXCHANGE = '.board-controls .board-control:not(.board-turn)';
+const EXCHANGE = '.board-reply';
 
 /** @param {import('@playwright/test').Page} page */
 async function board(page) {

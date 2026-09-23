@@ -539,5 +539,18 @@
   "display.speak": "زر «نطق» وزر نصف السرعة بجانبه",
   "display.turn": "زر تدوير الجملة جانبيًا",
   "display.voice": "الصوت",
-  "display.voiceAuto": "يُختار تلقائيًا"
+  "display.voiceAuto": "يُختار تلقائيًا",
+  "drill.reveal": "كشف الجواب",
+  "format.headSlot.logo": "شعار Phraselet",
+  "gallery.signal": "إشارة",
+  "board.rate": "سرعة النطق",
+  "signal.docTitle": "الإشارة بترميز مورس — Phraselet",
+  "signal.heading": "الإشارة بترميز مورس",
+  "signal.lede": "اكتب ما تحتاج إلى قوله. يومض به الهاتف — على الشاشة وبضوء الكاميرا — بترميز مورس، بسرعة يمكن لشخص قراءتها. إس أو إس نقرة واحدة فقط.",
+  "signal.message": "رسالتك",
+  "signal.received": "الترميز الذي استلمته",
+  "signal.speed": "السرعة",
+  "signal.start": "إشارة",
+  "signal.stop": "إيقاف",
+  "signal.unsayable": "لا يوجد رمز مورس لـ: {chars}"
 }

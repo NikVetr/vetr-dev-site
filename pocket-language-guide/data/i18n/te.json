@@ -11,7 +11,7 @@
   "ornament.hint": "అలంకార అంచులు; అక్షరాల పరిమాణం, ఖాళీ మారవు. చోటు ఉన్న మూలల్లో అలంకారం కనిపిస్తుంది.",
   "ornament.frameHint": "అల్లిన ఎల్వ్ చట్రం అక్షరాల చుట్టూ చోటు ఉంచుతుంది. అమరిక, పేజీల లెక్క మారవచ్చు.",
   "ornament.lowInk": "తక్కువ ఇంక్ మోడ్లో సాదా గీతలే వస్తాయి. రంగు లేదా నలుపు-తెలుపులో మీ శైలి తిరిగి వస్తుంది.",
-  "_note": "Telugu interface catalogue. Register: polite imperative (-ండి) in prose, dialogue and gallery buttons; bare imperative (చూపు, మార్చు, దాచు, మూసివేయి) on in-panel controls, which is the split the file already had. Terms of art: face = ముఖం, sheet = కాగితం, card = కార్డు, page = పేజీ, column = గడి, row = వరుస, section = విభాగం, margin and edge = అంచు, band = పట్టీ, save = దాచు, print = అచ్చు వేయి. The head/foot band and the coloured tab are both పట్టీ, so the tab is రంగు పట్టీ wherever the two could be confused (format.headFill*, format.headReach*); format.headSpan.* keeps the bare పట్టీ it was written with. PNG, SVG, CSV, PDF, IPA, dpi, pt are kept as-is; nav.brand stays Latin because it is the product name. Placeholders are substituted raw and cannot inflect, so {language}, {section} and {row} carry a Telugu head noun (భాష, విభాగం, వరుస) instead of a case suffix. Fixed in the studio/export wave: ఎగుమతి (export) and దిగుమతి (import) were swapped throughout the file — common.exportPdf, gallery.export, quick.docTitle, studio.exportCsv, studio.importCsv, studio.importFailed and the three warn.* rows that point the reader at the CSV import all said the opposite of what they meant. This _note previously held en.json's own note verbatim. Message-screen settings (board.slow, board.switch*, display.*): తెర = screen as in editor.*, బటన్ = button as in editor.* (format.reserveHint alone says బొత్తాలు), గొంతు = voice as in speech.*, సందర్భం = topic as in board.allTopics. IPA keeps the spaced head-noun shape (\"IPA లో\") the file uses after Latin inserts. display.voiceAuto is తనంతటే ఎంచుకుంటుంది, \"it chooses by itself\", beside format.faces.auto తనంతట.",
+  "_note": "Telugu interface catalogue. Register: polite imperative (-ండి) in prose, dialogue and gallery buttons; bare imperative (చూపు, మార్చు, దాచు, మూసివేయి) on in-panel controls, which is the split the file already had. Terms of art: face = ముఖం, sheet = కాగితం, card = కార్డు, page = పేజీ, column = గడి, row = వరుస, section = విభాగం, margin and edge = అంచు, band = పట్టీ, save = దాచు, print = అచ్చు వేయి. The head/foot band and the coloured tab are both పట్టీ, so the tab is రంగు పట్టీ wherever the two could be confused (format.headFill*, format.headReach*); format.headSpan.* keeps the bare పట్టీ it was written with. PNG, SVG, CSV, PDF, IPA, dpi, pt are kept as-is; nav.brand stays Latin because it is the product name. Placeholders are substituted raw and cannot inflect, so {language}, {section} and {row} carry a Telugu head noun (భాష, విభాగం, వరుస) instead of a case suffix. Fixed in the studio/export wave: ఎగుమతి (export) and దిగుమతి (import) were swapped throughout the file — common.exportPdf, gallery.export, quick.docTitle, studio.exportCsv, studio.importCsv, studio.importFailed and the three warn.* rows that point the reader at the CSV import all said the opposite of what they meant. This _note previously held en.json's own note verbatim. Message-screen settings (board.slow, board.switch*, display.*): తెర = screen as in editor.*, బటన్ = button as in editor.* (format.reserveHint alone says బొత్తాలు), గొంతు = voice as in speech.*, సందర్భం = topic as in board.allTopics. IPA keeps the spaced head-noun shape (\"IPA లో\") the file uses after Latin inserts. display.voiceAuto is తనంతటే ఎంచుకుంటుంది, \"it chooses by itself\", beside format.faces.auto తనంతట. మోర్స్ సంకేతం పాస్, పదమూడు కీలు: మోర్స్ కోడ్ అనేది తెలుగు వికీపీడియా వ్యాసం పేరు (Morse code), section-titles/te.csv లోనూ signal.heading/docTitle/lede/unsayable లోనూ అలాగే ఉంచబడింది. board.rate, signal.speed రెండూ display.speak లోని వేగం అనే పదాన్నే ఉపయోగిస్తాయి. gallery.signal, signal.start సాధారణ సంకేతం (signal) అనే పదాన్ని ఉపయోగిస్తాయి -- ఇది మోర్స్ కోడ్ అనే నిర్దిష్ట పదానికి భిన్నమైనది, ఆంగ్లం కూడా Signal ను Morse నుండి వేరుగా ఉంచినట్లే. signal.stop, drill.reveal beacon.dismiss లోని ఆపడానికి, drill.check లోని చూడు వేర్లను తిరిగి ఉపయోగిస్తాయి.",
   "addTerm.add": "కార్డులో చేర్చండి",
   "addTerm.bothNeeded": "రెండు భాషల గడులూ కావాలి.",
   "addTerm.inLanguage": "{language} లో",
@@ -539,5 +539,18 @@
   "display.speak": "వినిపించు బటన్, పక్కనే సగం వేగం బటన్",
   "display.turn": "వాక్యాన్ని పక్కకు తిప్పే బటన్",
   "display.voice": "గొంతు",
-  "display.voiceAuto": "తనంతటే ఎంచుకుంటుంది"
+  "display.voiceAuto": "తనంతటే ఎంచుకుంటుంది",
+  "drill.reveal": "జవాబు చూడు",
+  "format.headSlot.logo": "Phraselet చిహ్నం",
+  "gallery.signal": "సంకేతం ఇవ్వండి",
+  "board.rate": "వినిపించే వేగం",
+  "signal.docTitle": "మోర్స్ కోడ్ — Phraselet",
+  "signal.heading": "మోర్స్ కోడ్",
+  "signal.lede": "మీరు చెప్పాలనుకున్నది టైప్ చేయండి. ఫోన్ దాన్ని స్క్రీన్‌పైనా ఫ్లాష్ లైట్‌తోనూ మోర్స్ కోడ్‌లో, చదవగలిగే వేగంతో చూపిస్తుంది. SOS కోసం ఒక్క తాకిడి చాలు.",
+  "signal.message": "మీ సందేశం",
+  "signal.received": "మీకు వచ్చిన కోడ్",
+  "signal.speed": "వేగం",
+  "signal.start": "సంకేతం ఇవ్వండి",
+  "signal.stop": "ఆపు",
+  "signal.unsayable": "మోర్స్ కోడ్‌లో లేని అక్షరాలు: {chars}"
 }

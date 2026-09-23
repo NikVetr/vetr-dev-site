@@ -20,6 +20,9 @@ import build_redundancy
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
+# Languages nobody speaks: targets only. Morse is dots and dashes to learn, not a
+# reader's own language, so it has no speak label and glosses nothing.
+SILENT = {"morse"}
 
 # Wrong content here can cause harm, so machine-unreviewed rows (confidence < 2)
 # are refused outright rather than shown with a caveat.
@@ -226,7 +229,7 @@ def main():
             if len(region) != 2 or not region.isalpha() or region != region.upper():
                 errors.append(f"languages.csv: {code} has bad region code {region!r} "
                               "(want ISO 3166-1 alpha-2, uppercase)")
-        if not lang["speak_label"].strip():
+        if not lang["speak_label"].strip() and code not in SILENT:
             errors.append(f"languages.csv: {code} has no speak_label")
     for iso, script in scripts.items():
         if script["font_stack"] not in STACK_FACES:
@@ -294,6 +297,11 @@ def main():
 
     groups = sorted({s["group"] for s in sections.values()})
     ready = [c for c, l in languages.items() if l["status"] == "ready"]
+    # **Nobody speaks Morse.** It is a target -- a card of dots and dashes to learn --
+    # and never a sheet's source, so the checks that look at a language as a reader
+    # (its glosses of scoped concepts, its headings and emergency labels, its "I
+    # speak" label) skip it. The same set is `SILENT` in build_ipa.py.
+    spoken = [c for c in ready if c not in SILENT]
     partial = [c for c, l in languages.items() if l["status"] == "draft"]
 
     concepts = {}
@@ -747,7 +755,7 @@ def main():
         # no text in it: the Thai politeness note is read by everyone learning Thai,
         # which is everyone except Thai speakers.
         scope = {c.strip() for c in (concepts[cid].get("applies_to") or "").split(";") if c.strip()}
-        for code in sorted(set(ready) - scope):
+        for code in sorted(set(spoken) - scope):
             group = sections[concepts[cid]["section_id"]]["group"]
             rel = f"lang/{code}/{group}.csv"
             if not (DATA / rel).exists():
@@ -779,15 +787,15 @@ def main():
         if not scope or concept["default_template"] == "note":
             continue                              # notes have their own rule above
         group = sections[concept["section_id"]]["group"]
-        blank = [code for code in sorted(set(ready) - scope)
+        blank = [code for code in sorted(set(spoken) - scope)
                  if not (DATA / f"lang/{code}/{group}.csv").exists()
                  or not next((r for r in load(f"lang/{code}/{group}.csv")
                               if r["concept_id"] == cid and r["text"].strip()), None)]
         if blank:
             warnings.append(f"concepts: {cid!r} is scoped to {'/'.join(sorted(scope))} "
                             f"but has no gloss in {', '.join(blank)}, so it prints on "
-                            f"{len(ready) - len(scope) - len(blank)} of its "
-                            f"{len(ready) - len(scope)} pairs")
+                            f"{len(spoken) - len(scope) - len(blank)} of its "
+                            f"{len(spoken) - len(scope)} pairs")
 
     # **A word row and its symbol row must print on the same cards.** The pair is one
     # fact said twice -- the name of the money and the sign beside a price -- and a
@@ -856,7 +864,7 @@ def main():
     # asymmetry is why the U+30FB middle dot in thirty Korean and Chinese headings
     # went unnoticed until it drew a row of boxes: no check ever looked at a
     # language as a sheet's source.
-    for code in sorted(ready):
+    for code in sorted(spoken):
         stack = scripts.get(languages[code]["script"], {}).get("font_stack", "")
         rel = f"registry/section-titles/{code}.csv"
         if (DATA / rel).exists():

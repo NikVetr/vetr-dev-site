@@ -122,10 +122,21 @@ export function renderGrid(root, node, { label, available, onPick, lang, title }
  * @param {HTMLElement} el
  */
 function widestLine(el) {
+  const along = vertical(el) ? 'height' : 'width';
   let widest = 0;
-  for (const rect of lineRects(el)) if (rect.width > widest) widest = rect.width;
+  for (const rect of lineRects(el)) if (rect[along] > widest) widest = rect[along];
   return widest;
 }
+
+/**
+ * Whether the text is set turned -- `writing-mode: vertical-rl` with every glyph
+ * on its side -- so that "the length of a line" is a height on screen. Turning used
+ * to rotate the whole stage, controls and all; now only the sentence turns, the way
+ * a person turns a page to show it across a table, and the controls stay where the
+ * owner's thumb already is.
+ * @param {HTMLElement} el
+ */
+const vertical = (el) => getComputedStyle(el).writingMode.startsWith('vertical');
 
 /**
  * The line boxes the text actually occupies, in order.
@@ -171,12 +182,34 @@ function hangFits(el) {
   const ink = range.getBoundingClientRect();
   const box = el.getBoundingClientRect();
   const style = getComputedStyle(el);
+  if (vertical(el)) {
+    return ink.bottom <= box.bottom - Number.parseFloat(style.paddingBottom)
+      && ink.top >= box.top + Number.parseFloat(style.paddingTop);
+  }
   return ink.right <= box.right - Number.parseFloat(style.paddingRight)
     && ink.left >= box.left + Number.parseFloat(style.paddingLeft);
 }
 
 /** Scripts whose characters are all one width, so that columns can be aligned. */
 const SQUARE = /^[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}\p{P}\p{Zs}]+$/u;
+
+/**
+ * The text at the surface's full inline size with no column narrowing: the box the
+ * fitter measures against. Upright, that is the block-level default and clearing the
+ * style is enough. Turned, the inline size is the surface's *height*, and a vertical
+ * flow inside a column flex box does not take it by itself -- it sizes to its own
+ * content, so every line "fitted" a box exactly as long as the ink in it, which is
+ * how a Tamil sentence grew to 126px and 913px of column off both ends of the screen.
+ * @param {HTMLElement} text
+ */
+function fullSize(text) {
+  text.classList.remove('board-text-columns');
+  if (!vertical(text)) { text.style.inlineSize = ''; return; }
+  const box = /** @type {HTMLElement} */ (text.parentElement);
+  const style = getComputedStyle(box);
+  text.style.inlineSize = `${box.clientHeight
+    - Number.parseFloat(style.paddingTop) - Number.parseFloat(style.paddingBottom)}px`;
+}
 
 /**
  * Where every character is the same width, align the characters rather than the lines.
@@ -205,10 +238,10 @@ const SQUARE = /^[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=
  * @param {HTMLElement} text
  */
 function alignColumns(text) {
-  text.style.inlineSize = '';
-  text.classList.remove('board-text-columns');
+  fullSize(text);
   if (!SQUARE.test(text.textContent ?? '')) return;
-  const widths = lineRects(text).map((rect) => rect.width);
+  const along = vertical(text) ? 'height' : 'width';
+  const widths = lineRects(text).map((rect) => rect[along]);
   if (widths.length < 2 || Math.max(...widths) - Math.min(...widths) < 1) return;
   text.style.inlineSize = `${Math.ceil(Math.max(...widths))}px`;
   text.classList.add('board-text-columns');
@@ -230,6 +263,11 @@ function alignColumns(text) {
  */
 function lineRoom(el) {
   const box = getComputedStyle(el);
+  if (vertical(el)) {
+    return el.getBoundingClientRect().height
+      - Number.parseFloat(box.paddingTop) - Number.parseFloat(box.paddingBottom)
+      - Number.parseFloat(box.borderTopWidth) - Number.parseFloat(box.borderBottomWidth);
+  }
   return el.getBoundingClientRect().width
     - Number.parseFloat(box.paddingLeft) - Number.parseFloat(box.paddingRight)
     - Number.parseFloat(box.borderLeftWidth) - Number.parseFloat(box.borderRightWidth);
@@ -502,8 +540,16 @@ export function renderMessage(stage, phrase,
   small.append(...parts);
 
   surface.append(big);
-  if (parts.length) surface.append(small);
   stage.append(surface);
+  // **The gloss and Reply share a foot, outside the surface.** Reply is addressed to
+  // the stranger and so is the sentence; the gloss is the owner's confirmation. The
+  // foot stacks them on a portrait phone -- Reply full width under the sentence, big
+  // enough to be the obvious thing to press -- and sets them side by side in
+  // landscape, where height is what is short. Outside the surface because a button
+  // may not contain a button, and because a tap on Reply must not also dismiss.
+  const foot = document.createElement('div');
+  foot.className = 'board-foot';
+  if (parts.length) foot.append(small);
 
   // **A scroll is not a tap.** A long message scrolls inside the surface, and the
   // gesture that scrolls it ends with a click on most touch platforms. Comparing
@@ -597,7 +643,7 @@ export function renderMessage(stage, phrase,
     onward.setAttribute('aria-hidden', 'true');
     reply.append(document.createTextNode(replyLabel), onward);
     reply.addEventListener('click', onReply);
-    controls.append(reply);
+    foot.append(reply);
   }
   // Off only if the reader has said so: it is the control that makes a phone usable
   // held out across a counter, and the default is to have it.
@@ -606,6 +652,7 @@ export function renderMessage(stage, phrase,
   // and being a sibling is what structurally stops a control's click reaching the
   // dismiss handler. The row is always drawn now, because the turn control is always
   // in it -- Speak and Reply are the two that come and go.
+  if (foot.childElementCount) stage.append(foot);
   stage.append(controls, trouble);
 
   watchMessage(big, surface);
@@ -794,21 +841,10 @@ export function fitMessage(text, box) {
   // fallback face is a fit against the wrong advance widths, and the correction
   // lands as a visible jump just as the reader starts reading.
   const run = () => {
-    // **Measured with the turn undone.** `getClientRects` reports viewport space, so
-    // on a turned stage every line comes back with its length in `height` and its
-    // thickness in `width` -- which read as a line far too wide for its box at every
-    // size, and pinned the text at the floor. The turn is a paint-time rotation and
-    // changes no layout, so dropping it for the measurement measures exactly the box
-    // the text will occupy, and restoring it in the same synchronous block means
-    // nothing is ever painted untured.
-    const stage = box.parentElement?.classList.contains('board-stage-turned')
-      ? box.parentElement : null;
-    if (stage) stage.style.rotate = 'none';
-    // Both undone before measuring: a box narrowed to its own widest line is a box
-    // that reports its own ink as the room available, which is the measurement the
-    // width test exists to avoid.
-    text.style.inlineSize = '';
-    text.classList.remove('board-text-columns');
+    // Width and columns undone before measuring: a box narrowed to its own widest
+    // line is a box that reports its own ink as the room available, which is the
+    // measurement the width test exists to avoid.
+    fullSize(text);
     text.style.fontSize = '';
     let size = Number.parseFloat(getComputedStyle(text).fontSize);
     // **Both axes, and the second one is the bug this was written to fix.** The test
@@ -836,9 +872,12 @@ export function fitMessage(text, box) {
       // line and leaves the mark more room: judged against centred lines, an
       // eight-character question ending in `？` was refused every size above 58px
       // that the column layout would have carried at 120.
-      text.style.inlineSize = '';
-      text.classList.remove('board-text-columns');
-      let ok = box.scrollHeight <= box.clientHeight && widestLine(text) <= lineRoom(text);
+      fullSize(text);
+      // Overflow is checked along the block axis, which is across the screen when
+      // the text is turned: the sentence must fit the surface both ways.
+      const blocked = vertical(text)
+        ? box.scrollWidth <= box.clientWidth : box.scrollHeight <= box.clientHeight;
+      let ok = blocked && widestLine(text) <= lineRoom(text);
       if (ok) {
         alignColumns(text);
         ok = hangFits(text);
@@ -879,9 +918,9 @@ export function fitMessage(text, box) {
         if (fits()) break;
       }
     }
-    box.classList.toggle('board-message-scrolls', box.scrollHeight > box.clientHeight + 1);
+    box.classList.toggle('board-message-scrolls', vertical(text)
+      ? box.scrollWidth > box.clientWidth + 1 : box.scrollHeight > box.clientHeight + 1);
     alignColumns(text);
-    if (stage) stage.style.rotate = '';
   };
   run();
   if (document.fonts?.status !== 'loaded') document.fonts?.ready.then(run);

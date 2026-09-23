@@ -539,5 +539,18 @@
   "display.speak": "ਬੋਲੋ ਬਟਨ, ਤੇ ਉਸ ਦੇ ਨਾਲ ਦਾ ਅੱਧੀ ਰਫ਼ਤਾਰ ਵਾਲਾ ਬਟਨ",
   "display.turn": "ਲਿਖਤ ਨੂੰ ਪਾਸੇ ਵੱਲ ਘੁਮਾਉਣ ਵਾਲਾ ਬਟਨ",
   "display.voice": "ਆਵਾਜ਼",
-  "display.voiceAuto": "ਆਪੇ ਚੁਣੀ ਹੋਈ"
+  "display.voiceAuto": "ਆਪੇ ਚੁਣੀ ਹੋਈ",
+  "drill.reveal": "ਜਵਾਬ ਦੇਖੋ",
+  "format.headSlot.logo": "Phraselet ਨਿਸ਼ਾਨ",
+  "gallery.signal": "ਚਮਕਾਓ",
+  "board.rate": "ਬੋਲਣ ਦੀ ਰਫ਼ਤਾਰ",
+  "signal.docTitle": "ਮੋਰਸ ਵਿੱਚ ਸੰਕੇਤ — Phraselet",
+  "signal.heading": "ਮੋਰਸ ਵਿੱਚ ਸੰਕੇਤ",
+  "signal.lede": "ਤੁਸੀਂ ਜੋ ਕਹਿਣਾ ਚਾਹੁੰਦੇ ਹੋ ਉਹ ਲਿਖੋ। ਫ਼ੋਨ ਇਸ ਨੂੰ ਮੋਰਸ ਵਿੱਚ ਚਮਕਾਉਂਦਾ ਹੈ — ਸਕਰੀਨ ਉੱਤੇ, ਤੇ ਜਿੱਥੇ ਫ਼ੋਨ ਦੇਵੇ ਫਲੈਸ਼ ਉੱਤੇ ਵੀ — ਇੰਨੀ ਰਫ਼ਤਾਰ ਨਾਲ ਜੋ ਕੋਈ ਪੜ੍ਹ ਸਕੇ। SOS ਲਈ ਇੱਕੋ ਛੋਹ ਕਾਫ਼ੀ ਹੈ।",
+  "signal.message": "ਤੁਹਾਡਾ ਸੁਨੇਹਾ",
+  "signal.received": "ਮਿਲਿਆ ਕੋਡ",
+  "signal.speed": "ਰਫ਼ਤਾਰ",
+  "signal.start": "ਚਮਕਾਓ",
+  "signal.stop": "ਰੋਕੋ",
+  "signal.unsayable": "ਮੋਰਸ ਕੋਡ ਤੋਂ ਬਿਨਾਂ ਅੱਖਰ: {chars}"
 }

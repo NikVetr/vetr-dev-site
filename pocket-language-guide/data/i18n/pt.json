@@ -539,5 +539,18 @@
   "display.speak": "Ouvir, e o botão de meia velocidade ao lado",
   "display.turn": "O controlo que vira a frase de lado",
   "display.voice": "Voz",
-  "display.voiceAuto": "Escolhida automaticamente"
+  "display.voiceAuto": "Escolhida automaticamente",
+  "drill.reveal": "Ver resposta",
+  "format.headSlot.logo": "Logótipo Phraselet",
+  "gallery.signal": "Piscar",
+  "board.rate": "Velocidade da fala",
+  "signal.docTitle": "Sinal em código Morse — Phraselet",
+  "signal.heading": "Sinal em código Morse",
+  "signal.lede": "Escreva o que precisa de dizer. O telemóvel transmite-o em código Morse — no ecrã, e no flash onde o telemóvel o permitir — a uma velocidade que uma pessoa consegue ler. O SOS é um único toque.",
+  "signal.message": "A sua mensagem",
+  "signal.received": "Código recebido",
+  "signal.speed": "Velocidade",
+  "signal.start": "Piscar",
+  "signal.stop": "Parar",
+  "signal.unsayable": "Caracteres sem código Morse: {chars}"
 }

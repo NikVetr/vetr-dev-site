@@ -539,5 +539,18 @@
  "display.speak": "ഉച്ചരിക്കുക ബട്ടണും അതിനരികിലെ പകുതി-വേഗ ബട്ടണും",
  "display.turn": "വാചകം വശം തിരിക്കുന്ന ബട്ടൺ",
  "display.voice": "ശബ്ദം",
- "display.voiceAuto": "സ്വയം തിരഞ്ഞെടുക്കുന്നത്"
+ "display.voiceAuto": "സ്വയം തിരഞ്ഞെടുക്കുന്നത്",
+ "drill.reveal": "ഉത്തരം കാണുക",
+ "format.headSlot.logo": "Phraselet മുദ്ര",
+ "gallery.signal": "മിന്നിക്കുക",
+ "board.rate": "ഉച്ചാരണ വേഗം",
+ "signal.docTitle": "മോഴ്സിൽ മിന്നൽ — Phraselet",
+ "signal.heading": "മോഴ്സിൽ മിന്നൽ",
+ "signal.lede": "പറയേണ്ടത് ടൈപ്പ് ചെയ്യുക. ഫോൺ അത് മോഴ്സിൽ മിന്നിക്കും — സ്ക്രീനിലും, ഫോൺ അനുവദിക്കുന്നിടത്ത് ഫ്ലാഷിലും — ഒരാൾക്ക് വായിക്കാവുന്ന വേഗത്തിൽ. SOS ഒരു തൊടൽ മാത്രം.",
+ "signal.message": "നിങ്ങളുടെ സന്ദേശം",
+ "signal.received": "കിട്ടിയ കോഡ്",
+ "signal.speed": "വേഗം",
+ "signal.start": "മിന്നിക്കുക",
+ "signal.stop": "നിർത്തുക",
+ "signal.unsayable": "മോഴ്സ് കോഡ് ഇല്ലാത്ത അക്ഷരങ്ങൾ: {chars}"
 }

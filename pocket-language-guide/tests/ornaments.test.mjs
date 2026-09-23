@@ -147,7 +147,9 @@ test('all language designs preserve text layout, content clearance and card cuts
 test('all interface catalogues translate every style choice and help message', async () => {
   const keys = ['format.ornamentStyle', 'ornament.hint', 'ornament.frameHint', 'ornament.lowInk',
     ...ORNAMENT_STYLES.map(style => `ornament.${style}`)];
-  for (const code of Object.keys(LANGUAGE_MOTIFS)) {
+  // Every language with a motif has a catalogue but Morse, which nobody reads an
+  // interface in: its card is learnt, its chrome is the reader's own language.
+  for (const code of Object.keys(LANGUAGE_MOTIFS).filter((c) => c !== 'morse')) {
     const messages = JSON.parse(await readFile(`data/i18n/${code}.json`, 'utf8'));
     for (const key of keys) assert.equal(typeof messages[key], 'string', `${code}: ${key}`);
     assert.equal(new Set(ORNAMENT_STYLES.map(style => messages[`ornament.${style}`])).size,

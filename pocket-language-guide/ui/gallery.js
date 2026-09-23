@@ -12,7 +12,7 @@
 // `ui/app.js` imports them on demand now, and this page is nine modules and 89KB.
 
 import {
-  loadText, loadLanguages, readerLanguage,
+  isSpoken, loadText, loadLanguages, readerLanguage,
   registerOffline, setReaderLanguage, showFatal,
 } from './app.js';
 import { regionRow, setFlagColours } from './flags.js';
@@ -128,6 +128,15 @@ function card(lang, gallery) {
     if (boardPairs.has(key)) {
       actions.push(el('a', {
         class: 'btn', href: `conversation.html${query}`, text: t('gallery.converse'),
+      }));
+    }
+    // **Morse is a language whose conversation is light.** There is nothing to show
+    // a stranger a sentence in, so its second button is not the board but the
+    // signaller: type, and the phone flashes it. The one language named here rather
+    // than flagged in the registry, because it is the one that works this way.
+    if (lang.bcp47 === 'morse') {
+      actions.push(el('a', {
+        class: 'btn', href: `signal.html${query}`, text: t('gallery.signal'),
       }));
     }
     // **No "Offline" button here.** It said "Offline" and did something that needs a
@@ -388,7 +397,7 @@ const NEAREST = 0.9;
 function renderSpeakCollage(languages, reader, guessed) {
   const label = document.getElementById('reader-label');
   if (!label) return;
-  const usable = languages.filter((l) => l.speak_label);
+  const usable = languages.filter(isSpoken);
   const byCode = new Map(usable.map((l) => [l.bcp47, l]));
   const mine = byCode.get(reader);
   /** @type {Record<string,string>[]} */ const others = [];
@@ -504,7 +513,7 @@ async function main() {
   // The `aside` is each language's name *in the reader's language*, so the whole
   // list has to be rebuilt when the reader changes -- not just its selection.
   const pickerOptions = () => languages
-    .filter((l) => l.status !== 'planned')
+    .filter((l) => l.status !== 'planned' && isSpoken(l))
     .map((l) => ({
       value: l.bcp47,
       name: l.endonym,

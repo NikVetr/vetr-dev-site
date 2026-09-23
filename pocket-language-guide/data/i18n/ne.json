@@ -539,5 +539,18 @@
   "display.speak": "सुनाउनुहोस् बटन, र त्यसको छेउको आधा गतिको बटन",
   "display.turn": "पाठ छेउतिर घुमाउने बटन",
   "display.voice": "आवाज",
-  "display.voiceAuto": "स्वतः छानिएको"
+  "display.voiceAuto": "स्वतः छानिएको",
+  "drill.reveal": "उत्तर हेर्नुहोस्",
+  "format.headSlot.logo": "Phraselet प्रतीक",
+  "gallery.signal": "चम्काउनुहोस्",
+  "board.rate": "बोल्ने गति",
+  "signal.docTitle": "मोर्समा सङ्केत — Phraselet",
+  "signal.heading": "मोर्समा सङ्केत",
+  "signal.lede": "तपाईंले भन्न चाहनुभएको कुरा टाइप गर्नुहोस्। फोनले त्यो मोर्समा चम्काउँछ — स्क्रिनमा, र फोनले दिए फ्ल्याशमा पनि — मानिसले पढ्न सक्ने गतिमा। SOS एउटै छोइमा हुन्छ।",
+  "signal.message": "तपाईंको सन्देश",
+  "signal.received": "प्राप्त भएको कोड",
+  "signal.speed": "गति",
+  "signal.start": "चम्काउनुहोस्",
+  "signal.stop": "रोक्नुहोस्",
+  "signal.unsayable": "मोर्स कोड नभएका अक्षर: {chars}"
 }

@@ -17,6 +17,7 @@
     "test": "npm run validate && npm run check && npm run test:unit && npx playwright test",
     "vendor": "node scripts/build_vendor.mjs",
     "icons": "node scripts/extract_icons.mjs",
+    "logo": "node scripts/build_logo.mjs",
     "preview": "node scripts/render_preview.mjs",
     "shell": "node scripts/build_shell.mjs",
     "i18n": "node scripts/check_i18n.mjs",

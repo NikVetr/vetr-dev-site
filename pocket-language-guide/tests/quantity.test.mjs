@@ -37,10 +37,10 @@ test('every ready language can say a duration, or is refused by name', async () 
   // natural languages at once because none of them needs a translated string.
   const codes = await ready();
   const refused = codes.filter((c) => !supports(c));
-  // The two constructed languages, and only those. They have no CLDR data, and a
-  // board for one of them cannot offer a duration reply -- which is the honest
-  // answer, not a defect to paper over.
-  assert.deepEqual(refused.sort(), ['qya', 'tlh']);
+  // The two constructed languages and Morse, and only those. The first two have no
+  // CLDR data, and a board for one of them cannot offer a duration reply -- which is
+  // the honest answer, not a defect to paper over. Morse has no board at all.
+  assert.deepEqual(refused.sort(), ['morse', 'qya', 'tlh']);
 
   for (const code of codes.filter((c) => supports(c))) {
     for (const unit of UNITS) {

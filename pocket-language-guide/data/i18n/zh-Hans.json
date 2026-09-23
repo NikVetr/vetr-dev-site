@@ -1,5 +1,5 @@
 {
-  "_note": "简体中文界面译文。约定：界面标签用简短的动宾或名词短语（导出、隐藏、全选），只在原文本身是完整句子时才写成句子（gallery.lede、studio.balanceBlocked、warn.*）。句中使用全角标点（，。？：），与短语语料保持一致。人称：尽量不用人称代词，需要时用“您”。术语：typeface=字体；romanisation=罗马字转写（field.roman、format.romanisation）；column 分两义——版面上的分栏用“栏”（format.columns、handles.columnGap、warn.*），条目表格里的字段列用“列”（format.columnsShown、warn.paper-too-coarse）；face=面（一张纸的一个印面，“N 面”读作自然量词，全部面/各面用于集合）；sheet=张（纸）／版面（排好的页面）；duplex=双面；margin=页边距；gloss=释义（format.glossedInto=释义语言）；section=分区；IPA 用“国际音标”，PNG/SVG/CSV/PDF/Wi-Fi 保留原样。分栏控件的字号档为“自适应/小/中/大/特大”，留白档为“紧凑/标准/宽松/更宽/最宽”，均不超过 3 个汉字。 罗马字转写系统用中文里通行的名称，而非英文缩写（拼音、平文式、训令式、文化观光部2000年式、马科恩-赖肖尔）；无通行中文名的标准（ALA-LC、BGN/PCGN、IAST、RTGS、Hunterian）保留原名。分隔线档为“统一/逐行”，条目版式档为“混合/并排/单行/每行一项”。 ☰ 菜单的 47 个键（editor / personal / speaker / speech / settings）已补齐。术语：button=按钮；对话板的一屏=页面（印好的页面仍称“版面”）；语音合成的声音=语音。editor.noTranslation 和 personal.lede 是关于软件行为的事实陈述（不发送到任何地方、只留在本设备上），不得改写成“数据安全”“保护隐私”一类的笼统说法。注：board.reply 与 board.close 两行在磁盘上是 \\uXXXX 转义，属既有写法，未改动。 补齐工作室、导出与预览的 37 个键。“标签”指卡片边缘那块彩色索引标记（不是浏览器的“标签页”）：切出来的那种中文叫拇指索引，印上去的这种通行叫法就是标签，与本文件已有的“居中标签”一致。标签形状为“色条/边角/外缘”。format.headSlot.theme 指本面的颜色大类（colour.*），与配色主题（format.theme.*、warn.* 里的“主题”）不是一回事，故作“大类”。gallery.tagline 里的 Phraselet 是把产品名当普通名词用，保留拉丁文并加量词“卡”。preview.lockDate 与 preview.lockTime 由 CLDR 提供，未填。 递给对方看的页面（board.slow、board.switch*、display.*）：display.heading 不写“消息页面”，因为“消息”在中文界面里指通知，而这里指对话板上递给对方看的那一屏，按本文件“对话板的一屏=页面”的约定称“页面”；“情境”沿用 board.pickTopic，“语音”沿用 speech.*，“按钮”沿用 editor.*；display.roman 写“用您自己的文字写出”而非“罗马字转写”，因为这一行是在向不识术语的人解释那一列。",
+  "_note": "简体中文界面译文。约定：界面标签用简短的动宾或名词短语（导出、隐藏、全选），只在原文本身是完整句子时才写成句子（gallery.lede、studio.balanceBlocked、warn.*）。句中使用全角标点（，。？：），与短语语料保持一致。人称：尽量不用人称代词，需要时用“您”。术语：typeface=字体；romanisation=罗马字转写（field.roman、format.romanisation）；column 分两义——版面上的分栏用“栏”（format.columns、handles.columnGap、warn.*），条目表格里的字段列用“列”（format.columnsShown、warn.paper-too-coarse）；face=面（一张纸的一个印面，“N 面”读作自然量词，全部面/各面用于集合）；sheet=张（纸）／版面（排好的页面）；duplex=双面；margin=页边距；gloss=释义（format.glossedInto=释义语言）；section=分区；IPA 用“国际音标”，PNG/SVG/CSV/PDF/Wi-Fi 保留原样。分栏控件的字号档为“自适应/小/中/大/特大”，留白档为“紧凑/标准/宽松/更宽/最宽”，均不超过 3 个汉字。 罗马字转写系统用中文里通行的名称，而非英文缩写（拼音、平文式、训令式、文化观光部2000年式、马科恩-赖肖尔）；无通行中文名的标准（ALA-LC、BGN/PCGN、IAST、RTGS、Hunterian）保留原名。分隔线档为“统一/逐行”，条目版式档为“混合/并排/单行/每行一项”。 ☰ 菜单的 47 个键（editor / personal / speaker / speech / settings）已补齐。术语：button=按钮；对话板的一屏=页面（印好的页面仍称“版面”）；语音合成的声音=语音。editor.noTranslation 和 personal.lede 是关于软件行为的事实陈述（不发送到任何地方、只留在本设备上），不得改写成“数据安全”“保护隐私”一类的笼统说法。注：board.reply 与 board.close 两行在磁盘上是 \\uXXXX 转义，属既有写法，未改动。 补齐工作室、导出与预览的 37 个键。“标签”指卡片边缘那块彩色索引标记（不是浏览器的“标签页”）：切出来的那种中文叫拇指索引，印上去的这种通行叫法就是标签，与本文件已有的“居中标签”一致。标签形状为“色条/边角/外缘”。format.headSlot.theme 指本面的颜色大类（colour.*），与配色主题（format.theme.*、warn.* 里的“主题”）不是一回事，故作“大类”。gallery.tagline 里的 Phraselet 是把产品名当普通名词用，保留拉丁文并加量词“卡”。preview.lockDate 与 preview.lockTime 由 CLDR 提供，未填。 递给对方看的页面（board.slow、board.switch*、display.*）：display.heading 不写“消息页面”，因为“消息”在中文界面里指通知，而这里指对话板上递给对方看的那一屏，按本文件“对话板的一屏=页面”的约定称“页面”；“情境”沿用 board.pickTopic，“语音”沿用 speech.*，“按钮”沿用 editor.*；display.roman 写“用您自己的文字写出”而非“罗马字转写”，因为这一行是在向不识术语的人解释那一列。 摩尔斯电码信号部分，十三个键：摩尔斯电码是中文维基百科关于 Morse code 条目本身的标题，原样用于 section-titles/zh-Hans.csv 及 signal.heading/docTitle/lede/unsayable。board.rate 和 signal.speed 都沿用 display.speak 中已有的“速度”；board.rate 与board.speak 的“朗读”动词相连。gallery.signal 与 signal.start 使用通用的“发信号”，与专名“摩尔斯电码”分开——英文原文同样把 Signal 和 Morse 分开处理。signal.stop 与drill.reveal 分别沿用 beacon.dismiss 的“停止”和 drill.expected 的“答案”。",
   "addTerm.add": "添加到卡片",
   "addTerm.bothNeeded": "两个语言字段都需要填写。",
   "addTerm.inLanguage": "用{language}",
@@ -376,8 +376,8 @@
   "ornament.hint": "添加装饰边线，不改变字号和间距。角落有足够空间时才会显示花饰。",
   "ornament.frameHint": "交织的精灵风边框会在文字周围预留空间，排版和页数可能会改变。",
   "ornament.lowInk": "省墨模式使用经典实线。切换到彩色或单色模式后，将恢复所选风格。",
-  "board.reply": "\u56de\u590d",
-  "board.close": "\u5173\u95ed",
+  "board.reply": "回复",
+  "board.close": "关闭",
   "board.otherAmount": "其他时长",
   "board.confirm": "确认",
   "board.amount": "数量",
@@ -539,5 +539,18 @@
   "display.speak": "“朗读”按钮，以及旁边的半速按钮",
   "display.turn": "横向显示句子的按钮",
   "display.voice": "语音",
-  "display.voiceAuto": "自动选择"
+  "display.voiceAuto": "自动选择",
+  "drill.reveal": "查看答案",
+  "format.headSlot.logo": "Phraselet 标志",
+  "gallery.signal": "发信号",
+  "board.rate": "朗读速度",
+  "signal.docTitle": "摩尔斯电码 — Phraselet",
+  "signal.heading": "摩尔斯电码",
+  "signal.lede": "输入你想说的话。手机会用屏幕和闪光灯以摩尔斯电码闪烁出来，速度让人看得清。SOS 只需点按一次。",
+  "signal.message": "你的消息",
+  "signal.received": "你收到的代码",
+  "signal.speed": "速度",
+  "signal.start": "发信号",
+  "signal.stop": "停止",
+  "signal.unsayable": "摩尔斯电码中没有的字符：{chars}"
 }

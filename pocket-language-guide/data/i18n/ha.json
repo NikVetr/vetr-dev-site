@@ -539,5 +539,18 @@
   "display.speak": "Karanta da murya, da maɓallin rabin gudu kusa da shi",
   "display.turn": "Maɓallin da ke juya jimlar a gefe",
   "display.voice": "Murya",
-  "display.voiceAuto": "An zaɓa da kanta"
+  "display.voiceAuto": "An zaɓa da kanta",
+  "drill.reveal": "Nuna amsa",
+  "format.headSlot.logo": "Tambarin Phraselet",
+  "gallery.signal": "Haskaka",
+  "board.rate": "Gudun karantawa",
+  "signal.docTitle": "Sigina ta Lambar Morse — Phraselet",
+  "signal.heading": "Sigina ta Lambar Morse",
+  "signal.lede": "Rubuta abin da kake son faɗi. Wayar za ta haskaka shi — a allon waya da walƙiyar kyamara — cikin Lambar Morse, a gudun da mutum zai iya karantawa. Sanya SOS shafi ɗaya ne kawai.",
+  "signal.message": "Saƙonka",
+  "signal.received": "Lambar da ka samu",
+  "signal.speed": "Gudu",
+  "signal.start": "Haskaka",
+  "signal.stop": "Tsaya",
+  "signal.unsayable": "Babu Lambar Morse don: {chars}"
 }

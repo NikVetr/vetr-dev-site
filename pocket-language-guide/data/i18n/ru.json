@@ -539,5 +539,18 @@
   "display.speak": "«Озвучить» и кнопка половинной скорости рядом с ней",
   "display.turn": "Кнопка, которая поворачивает фразу боком",
   "display.voice": "Голос",
-  "display.voiceAuto": "Выбирается автоматически"
+  "display.voiceAuto": "Выбирается автоматически",
+  "drill.reveal": "Посмотреть ответ",
+  "format.headSlot.logo": "Логотип Phraselet",
+  "gallery.signal": "Сигнал",
+  "board.rate": "Скорость речи",
+  "signal.docTitle": "Сигнал азбукой Морзе — Phraselet",
+  "signal.heading": "Сигнал азбукой Морзе",
+  "signal.lede": "Введите то, что нужно сказать. Телефон подаёт это азбукой Морзе — на экране, а где телефон позволяет, ещё и вспышкой — со скоростью, которую человек может прочитать. SOS — это одно касание.",
+  "signal.message": "Ваше сообщение",
+  "signal.received": "Полученный код",
+  "signal.speed": "Скорость",
+  "signal.start": "Сигнал",
+  "signal.stop": "Остановить",
+  "signal.unsayable": "Символы без кода Морзе: {chars}"
 }

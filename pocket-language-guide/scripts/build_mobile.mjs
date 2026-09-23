@@ -48,7 +48,7 @@ const DIRS = [
 
 /** Individual files, each of which some page names directly. */
 const FILES = [
-  'index.html', 'sheet.html', 'customize.html', 'conversation.html',
+  'index.html', 'sheet.html', 'customize.html', 'conversation.html', 'signal.html',
   'style.css', 'conversation.css', 'favicon.svg', 'manifest.webmanifest',
   'data/presets.json', 'data/icons.json', 'data/coverage.json',
   // `data/native.json` is not here: it is written below, overwriting the web's copy.

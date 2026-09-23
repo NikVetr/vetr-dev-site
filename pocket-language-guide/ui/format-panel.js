@@ -23,7 +23,7 @@ import { languageName, t } from './i18n.js';
 import { ornamentControl } from './ornament-control.js';
 import { speakerControl, personalSection } from './speaker-settings.js';
 import { personalWiring } from './personal-data.js';
-import { download } from './app.js';
+import { download, isSpoken } from './app.js';
 
 const COLUMN_CHOICES = [1, 2, 3, 4, 5, 6];
 /** Theme colour keys a furniture band may be set in, named as the theme files key them. */
@@ -625,7 +625,7 @@ export function createFormatPanel(input) {
   const source = menu(
     'source', t('format.glossedInto'),
     languages
-      .filter((l) => l.bcp47 !== spec.target && hasContent(corpus.coverage, l.bcp47))
+      .filter((l) => l.bcp47 !== spec.target && isSpoken(l) && hasContent(corpus.coverage, l.bcp47))
       .map((l) => ({
         value: l.bcp47,
         text: t('gallery.pickerOption', { endonym: l.endonym, exonym: l.exonym_en }),

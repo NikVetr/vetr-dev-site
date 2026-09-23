@@ -922,6 +922,30 @@ test('the legend slot keys the columns that are on, and only those', async () =>
     "while the reader's own half stays in the reader's face");
 });
 
+test('the logo slot draws the mark as paths and takes its width from the band', async () => {
+  // The mark is the one head part that is not type: it goes on the face as path
+  // marks, and the parts beside it are set as if a word of its width stood there.
+  const base = await referenceSpec();
+  const { plan } = await buildSheet(ctx, {
+    ...base, head: { span: 'full', left: ['logo', 'page'] },
+  });
+  const face = plan.faces[0];
+  const marks = (face.paths ?? []).filter((p) => p.fill === '#158560');
+  assert.equal(marks.length, 1, 'the front bubble is drawn once, in its own green');
+  const folio = face.runs.find((r) => /^\s?1 \/ \d+$/.test(r.text));
+  assert.ok(folio, 'the folio still prints beside it');
+  const bubble = marks[0];
+  assert.ok(folio.x > bubble.x, 'and to the right of the mark');
+  // Nothing is set for the mark's own part: it is drawn, not typed.
+  assert.ok(!face.runs.some((r) => r.text.includes('\u2060')));
+
+  // In mono the greens give way to ink.
+  const mono = await buildSheet(ctx, {
+    ...base, inkMode: 'mono', head: { span: 'full', left: ['logo'] },
+  });
+  assert.ok(!(mono.plan.faces[0].paths ?? []).some((p) => p.fill === '#158560'));
+});
+
 test('the head band is never set below the reader script’s own floor', async () => {
   // `headSize` was the theme's smallest field size flat, which is 5.22pt where
   // `scripts.csv` asks 5.4 for Arabic, Devanagari and Thai. It cost nothing while

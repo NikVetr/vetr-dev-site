@@ -17,7 +17,7 @@ import { languageName, t } from './i18n.js';
 // on demand, so the four helpers below arrive without it. The three heavy modules in
 // `faceSheet` stay dynamic, because a reader who never opens a card never needs them.
 import {
-  browserSheetContext, ensureFontCss, fontManifest, loadText, makeSpec,
+  browserSheetContext, ensureFontCss, fontManifest, isSpoken, loadText, makeSpec,
 } from './app.js';
 
 /** @param {string} tag @param {Record<string,string>} attrs @param {(Node|string)[]} kids */
@@ -292,8 +292,9 @@ export function openLightbox({ languages, solved, target, source, onReaderChange
   // learning -- rather than the way the code names it. Each `aside` is a language
   // name in the *reader's* language, and the reader can be changed from inside this
   // dialog, so the list is a function rather than a value.
-  const options = () => languages
-    .filter((l) => l.status !== 'planned')
+  /** @param {(l: Record<string,string>) => boolean} keep */
+  const options = (keep = () => true) => languages
+    .filter((l) => l.status !== 'planned' && keep(l))
     .map((l) => ({
       value: l.bcp47,
       name: l.endonym,
@@ -304,7 +305,7 @@ export function openLightbox({ languages, solved, target, source, onReaderChange
     mount: sourceMount,
     label: t('gallery.previewReading'),
     value: pair.source,
-    options: options(),
+    options: options(isSpoken),
     // Choosing the language already on the other side means the reader wants the
     // pair the other way round, which is what a swap is. Filtering it out of the
     // list instead would have meant rebuilding both controls on every change.
@@ -426,7 +427,7 @@ export function openLightbox({ languages, solved, target, source, onReaderChange
     customiseLink.textContent = t('gallery.customise');
     swap.setAttribute('aria-label', t('gallery.previewSwap'));
     close.setAttribute('aria-label', t('gallery.previewClose'));
-    sourcePicker.relabel({ label: t('gallery.previewReading'), options: options() });
+    sourcePicker.relabel({ label: t('gallery.previewReading'), options: options(isSpoken) });
     targetPicker.relabel({ label: t('gallery.previewLearning'), options: options() });
   }
 

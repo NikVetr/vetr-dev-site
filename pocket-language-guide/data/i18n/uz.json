@@ -1,5 +1,5 @@
 {
-  "_note": "Haqiqat manbayi ingliz katalogi; bu uning ustidagi qatlam -- bu yerda yoʻq kalit ingliz tilida koʻrinadi. Uslub: tugmalar va buyruqlar harakat nomi shaklida (Saqlash, Yopish, Bekor qilish), oʻzbek dasturiy lokalizatsiyasi shunday yozadi; oʻquvchiga qaratilgan gaplar hurmatli koʻplik buyruq shaklida (Tanlang, Tekshiring); varaq tavsiflari shaxssiz. Atamalar: yuz — kartaning bir tomoni, varaq — bosilgan qogʻoz, karta — tayyor kartochka. ☰ menyusining 47 ta kaliti (editor / personal / speaker / speech / settings) qoʻshildi. Atamalar: button — tugma, suhbat taxtasining bir sahifasi — ekran, nutq sintezi ovozi — ovoz. editor.noTranslation va personal.lede dasturning aynan nima qilishi haqidagi aniq bayonotdir (hech qayerga yuborilmaydi, faqat shu qurilmada turadi), ularni “maʼlumotlaringiz xavfsiz” kabi mavhum vaʼda bilan almashtirmaslik kerak. Studiya, chiqarish va koʻrib chiqish boʻyicha 37 ta kalit qoʻshildi. Yorliq — kartaning chetidagi rangli izlash belgisi (fayl ajratgichidagi yorliq kabi, brauzer yorligʻi emas); fayl allaqachon shu soʻzni ishlatgani uchun saqlab qolindi. Yorliq shakli: tasma / burchak / qirra — “chet” bu faylda maydon (margin) maʼnosida band. format.headSlot.theme yuzning rang turkumini (colour.*) bildiradi, dizayn mavzusini (format.theme.*, warn.*dagi “mavzu”) emas, shuning uchun “turkum”. preview.lockDate va preview.lockTime CLDRdan keladi, qoʻshilmadi. Xabar ekrani (board.slow, board.switch*, display.*): «xabar» board.dismiss soʻzi, ekran / tugma / ovoz yuqoridagidek, «mavzu» board.pickTopic dan, «XFA» field.ipa dan. Tugma nomlari harakat nomi shaklida qoldi (oʻqish, oʻzgartirish).",
+  "_note": "Haqiqat manbayi ingliz katalogi; bu uning ustidagi qatlam -- bu yerda yoʻq kalit ingliz tilida koʻrinadi. Uslub: tugmalar va buyruqlar harakat nomi shaklida (Saqlash, Yopish, Bekor qilish), oʻzbek dasturiy lokalizatsiyasi shunday yozadi; oʻquvchiga qaratilgan gaplar hurmatli koʻplik buyruq shaklida (Tanlang, Tekshiring); varaq tavsiflari shaxssiz. Atamalar: yuz — kartaning bir tomoni, varaq — bosilgan qogʻoz, karta — tayyor kartochka. ☰ menyusining 47 ta kaliti (editor / personal / speaker / speech / settings) qoʻshildi. Atamalar: button — tugma, suhbat taxtasining bir sahifasi — ekran, nutq sintezi ovozi — ovoz. editor.noTranslation va personal.lede dasturning aynan nima qilishi haqidagi aniq bayonotdir (hech qayerga yuborilmaydi, faqat shu qurilmada turadi), ularni “maʼlumotlaringiz xavfsiz” kabi mavhum vaʼda bilan almashtirmaslik kerak. Studiya, chiqarish va koʻrib chiqish boʻyicha 37 ta kalit qoʻshildi. Yorliq — kartaning chetidagi rangli izlash belgisi (fayl ajratgichidagi yorliq kabi, brauzer yorligʻi emas); fayl allaqachon shu soʻzni ishlatgani uchun saqlab qolindi. Yorliq shakli: tasma / burchak / qirra — “chet” bu faylda maydon (margin) maʼnosida band. format.headSlot.theme yuzning rang turkumini (colour.*) bildiradi, dizayn mavzusini (format.theme.*, warn.*dagi “mavzu”) emas, shuning uchun “turkum”. preview.lockDate va preview.lockTime CLDRdan keladi, qoʻshilmadi. Xabar ekrani (board.slow, board.switch*, display.*): «xabar» board.dismiss soʻzi, ekran / tugma / ovoz yuqoridagidek, «mavzu» board.pickTopic dan, «XFA» field.ipa dan. Tugma nomlari harakat nomi shaklida qoldi (oʻqish, oʻzgartirish). MORZE SIGNALI bosqichi, oʻn uch kalit: Morze kodi -- oʻzbek Vikipediyasining Morse code haqidagi maqolasining oʻz sarlavhasi, section-titles/uz.csv da va signal.heading/docTitle/lede/unsayable da oʻzgartirilmagan holda ishlatildi. board.rate va signal.speed ikkisi ham display.speak dagi tezlik soʻzini ishlatadi; board.rate board.speak dagi oʻqish fe'liga bogʻlangan. gallery.signal va signal.start umumiy Signal berish iborasini ishlatadi, Morze kodi kabi maxsus nomdan alohida -- xuddi ingliz tilida ham Signal Morse dan ajratilgani kabi. signal.stop va drill.reveal beacon.dismiss dagi toʻxtatish/tegish va drill.expected dagi Javob soʻzlarini qayta ishlatadi.",
   "format.ornamentStyle": "Uslub",
   "ornament.classic": "Klassik · toʻliq chiziqlar",
   "ornament.language": "Tilga mos naqsh",
@@ -539,5 +539,18 @@
   "display.speak": "Ovoz chiqarib oʻqish tugmasi va uning yonidagi yarim tezlik tugmasi",
   "display.turn": "Gapni yon tomonga buradigan tugma",
   "display.voice": "Ovoz",
-  "display.voiceAuto": "Avtomatik tanlanadi"
+  "display.voiceAuto": "Avtomatik tanlanadi",
+  "drill.reveal": "Javobni koʻrish",
+  "format.headSlot.logo": "Phraselet belgisi",
+  "gallery.signal": "Signal berish",
+  "board.rate": "Oʻqish tezligi",
+  "signal.docTitle": "Morze kodi — Phraselet",
+  "signal.heading": "Morze kodi",
+  "signal.lede": "Aytmoqchi boʻlgan gapingizni yozing. Telefon uni ekranda va fonarikda Morze kodi bilan, oʻqib boʻladigan tezlikda chaqnatadi. SOS uchun bir marta teginish kifoya.",
+  "signal.message": "Xabaringiz",
+  "signal.received": "Siz olgan kod",
+  "signal.speed": "Tezlik",
+  "signal.start": "Signal berish",
+  "signal.stop": "Toʻxtatish",
+  "signal.unsayable": "Morze kodida yoʻq belgilar: {chars}"
 }

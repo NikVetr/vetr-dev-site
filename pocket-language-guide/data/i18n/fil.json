@@ -539,5 +539,18 @@
   "display.speak": "Sabihin, at ang katabing buton ng kalahating bilis",
   "display.turn": "Ang buton na nagpapatagilid sa pangungusap",
   "display.voice": "Boses",
-  "display.voiceAuto": "Awtomatikong pinili"
+  "display.voiceAuto": "Awtomatikong pinili",
+  "drill.reveal": "Ipakita ang sagot",
+  "format.headSlot.logo": "Logo ng Phraselet",
+  "gallery.signal": "Mag-signal",
+  "board.rate": "Bilis ng Pagsasalita",
+  "signal.docTitle": "Senyas sa Kodigong Morse — Phraselet",
+  "signal.heading": "Senyas sa Kodigong Morse",
+  "signal.lede": "Isulat ang kailangan mong sabihin. Ipapakita ito ng telepono — sa screen at sa flash ng camera — sa Kodigong Morse, sa bilis na kayang basahin ng tao. Isang tap lang ang SOS.",
+  "signal.message": "Ang Iyong Mensahe",
+  "signal.received": "Kodigong Natanggap Mo",
+  "signal.speed": "Bilis",
+  "signal.start": "Mag-signal",
+  "signal.stop": "Ihinto",
+  "signal.unsayable": "Walang kodigong Morse para sa: {chars}"
 }

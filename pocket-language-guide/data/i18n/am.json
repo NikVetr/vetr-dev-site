@@ -539,5 +539,18 @@
   "display.speak": "«ያሰሙ» እና ከጎኑ ያለው የግማሽ ፍጥነት አዝራር",
   "display.turn": "ዓረፍተ ነገሩን ወደ ጎን የሚያዞረው አዝራር",
   "display.voice": "ድምጽ",
-  "display.voiceAuto": "በራስ-ሰር የተመረጠ"
+  "display.voiceAuto": "በራስ-ሰር የተመረጠ",
+  "drill.reveal": "መልሱን አሳይ",
+  "format.headSlot.logo": "የPhraselet አርማ",
+  "gallery.signal": "ምልክት ያስተላልፉ",
+  "board.rate": "የንግግር ፍጥነት",
+  "signal.docTitle": "የሞርስ ኮድ ምልክት — Phraselet",
+  "signal.heading": "የሞርስ ኮድ ምልክት",
+  "signal.lede": "የሚናገሩትን ይጻፉ። ስልኩ በማያ ገጹና በካሜራው መብራት፣ በሞርስ ኮድ፣ ሰው ሊያነበው በሚችል ፍጥነት ብልጭ ድርግም ያደርገዋል። ኤስ ኦ ኤስ በአንድ ጠቅታ ብቻ ይላካል።",
+  "signal.message": "የእርስዎ መልእክት",
+  "signal.received": "የተቀበሉት ኮድ",
+  "signal.speed": "ፍጥነት",
+  "signal.start": "ምልክት ያስተላልፉ",
+  "signal.stop": "ያቁሙ",
+  "signal.unsayable": "ሞርስ ኮድ ምልክት የሌለው፦ {chars}"
 }

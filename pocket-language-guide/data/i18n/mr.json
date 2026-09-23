@@ -539,5 +539,18 @@
   "display.speak": "ऐकवा बटण, आणि त्याच्या शेजारचे निम्म्या वेगाचे बटण",
   "display.turn": "मजकूर आडवा फिरवणारे बटण",
   "display.voice": "आवाज",
-  "display.voiceAuto": "आपोआप निवडलेला"
+  "display.voiceAuto": "आपोआप निवडलेला",
+  "drill.reveal": "उत्तर बघा",
+  "format.headSlot.logo": "Phraselet बोधचिन्ह",
+  "gallery.signal": "फ्लॅश करा",
+  "board.rate": "बोलण्याचा वेग",
+  "signal.docTitle": "मोर्समध्ये फ्लॅश — Phraselet",
+  "signal.heading": "मोर्समध्ये फ्लॅश",
+  "signal.lede": "तुम्हाला काय सांगायचं आहे ते टाइप करा. फोन ते मोर्समध्ये फ्लॅश करतो — स्क्रीनवर, आणि फोन परवानगी देईल तिथे फ्लॅशवरही — माणसाला वाचता येईल अशा वेगात. SOS साठी एकच टॅप पुरतो.",
+  "signal.message": "तुमचा संदेश",
+  "signal.received": "मिळालेला कोड",
+  "signal.speed": "वेग",
+  "signal.start": "फ्लॅश करा",
+  "signal.stop": "थांबा",
+  "signal.unsayable": "मोर्स कोड नसलेली अक्षरे: {chars}"
 }

@@ -28,7 +28,7 @@ const CODE_DIRS = ['core', 'render', 'ui'];
 
 /** Individual files the app cannot start without. */
 const ENTRY_FILES = [
-  'index.html', 'sheet.html', 'customize.html', 'conversation.html',
+  'index.html', 'sheet.html', 'customize.html', 'conversation.html', 'signal.html',
   'style.css', 'conversation.css',
   'favicon.svg', 'manifest.webmanifest',
   'vendor/fontkit.esm.js', 'vendor/pdf-lib.esm.js',

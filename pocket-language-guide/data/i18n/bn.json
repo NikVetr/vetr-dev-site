@@ -539,5 +539,18 @@
   "display.speak": "«বলুন», আর তার পাশের অর্ধেক-গতির বোতাম",
   "display.turn": "বাক্যটি পাশে ঘোরানোর বোতাম",
   "display.voice": "কণ্ঠস্বর",
-  "display.voiceAuto": "স্বয়ংক্রিয়ভাবে বাছাই"
+  "display.voiceAuto": "স্বয়ংক্রিয়ভাবে বাছাই",
+  "drill.reveal": "উত্তর দেখুন",
+  "format.headSlot.logo": "Phraselet লোগো",
+  "gallery.signal": "সংকেত দিন",
+  "board.rate": "বলার গতি",
+  "signal.docTitle": "মোর্স কোডে সংকেত — Phraselet",
+  "signal.heading": "মোর্স কোডে সংকেত",
+  "signal.lede": "আপনার যা বলার প্রয়োজন তা লিখুন। ফোনটি তা মোর্স কোডে জ্বালিয়ে দেখাবে — পর্দায় আর ক্যামেরার আলোয় — এমন গতিতে যা মানুষ পড়তে পারে। এসওএস পাঠাতে একটাই ট্যাপ যথেষ্ট।",
+  "signal.message": "আপনার বার্তা",
+  "signal.received": "আপনার পাওয়া কোড",
+  "signal.speed": "গতি",
+  "signal.start": "সংকেত দিন",
+  "signal.stop": "থামান",
+  "signal.unsayable": "মোর্স কোডে যাদের সংকেত নেই: {chars}"
 }

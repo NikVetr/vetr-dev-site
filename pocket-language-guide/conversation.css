@@ -522,45 +522,22 @@
   mask-image: linear-gradient(to bottom, #000 calc(100% - 2.5rem), transparent);
 }
 
-/* **Turned sideways, when the phone is the wrong way round for the sentence.** A
-   long phrase in a portrait window is set small because the *width* runs out first,
-   while the screen's long axis goes unused. Turning the whole stage puts the sentence
-   along that axis, and on a 400x800 phone that is twice the line length and roughly
-   twice the type size -- the difference between a phrase readable across a counter
-   and one that is not.
+/* **Turned.** The owner's need is to be read across a counter, and a long phrase in
+   a portrait window is set small because the *width* runs out first while the
+   screen's long axis goes unused. Turning the sentence along that axis gives it
+   roughly twice the line length and twice the type size.
 
-   The whole stage rather than the text alone, because a rotated text box still has
-   to be laid out, measured and scrolled: swapping the stage's own dimensions and
-   turning it means everything inside lays out honestly in a landscape box, `fitMessage`
-   measures the box it will really occupy, and the Reply control ends up the right way
-   up for someone reading the turned screen. A transform on the text alone would need
-   its box faked in JavaScript and would leave the controls facing the other way.
-
-   `100dvh`/`100dvw` swapped exactly, so the turned stage covers the viewport and no
-   more; `translate` before `rotate` centres it on the viewport's middle, which the
-   rotation then leaves alone. The insets rotate with it -- the edge that was the top
-   is now on the right -- so a notch is still avoided. */
-.board-stage-turned {
-  /* The controls go to the trailing edge rather than the foot. A row of 3rem buttons
-     costs an eighth of a 390px-tall stage where it cost a twentieth of an 844px one,
-     and the point of turning the screen was to gain room for the sentence, not to
-     spend it on the same controls in a shorter box. */
-  flex-direction: row;
-  /* Physical `inset`, against the logical sizes below: centring is symmetric, so
-     there is nothing here for a right-to-left page to mirror, and a logical
-     `inset-inline-start` would have put the box's near edge on the right and then
-     translated it the wrong way. */
-  inset: auto auto auto 50%;
-  top: 50%;
-  inline-size: 100dvh;
-  block-size: 100dvw;
-  translate: -50% -50%;
-  rotate: 90deg;
-  padding: calc(env(safe-area-inset-right) + var(--space-2))
-           calc(env(safe-area-inset-bottom) + var(--space-2))
-           calc(env(safe-area-inset-left) + var(--space-2))
-           calc(env(safe-area-inset-top) + var(--space-2));
+   Only the sentence turns. This used to rotate the whole stage -- controls and all
+   -- which put the owner's buttons on their sides and the speed control on a pillar.
+   The person across the table reads the sentence; the owner's thumb stays where it
+   was. `sideways` turns every glyph, Han included: this is a page held sideways, not
+   vertical text. The box sizes itself from the writing mode, so the fitter measures
+   lines as heights and needs no un-rotating. */
+.board-stage-turned .board-message-text {
+  writing-mode: vertical-rl;
+  text-orientation: sideways;
 }
+.board-stage-turned .board-message { align-items: center; }
 
 /* Reply and Speak are siblings of the surface, never children: a button inside a
    button is invalid, and worse, ambiguous about which one a tap meant. Being
@@ -598,17 +575,29 @@
    White on the coloured stage, taking the stage's own role colour for its text --
    the same relationship the message has to the background, so the two read as one
    screen rather than as a button pasted on one. */
+/* The foot under the sentence: the owner's gloss and the stranger's Reply. A column
+   on a portrait phone, so Reply is the full width and the obvious thing to press; a
+   row in landscape, where height is the short axis and the gloss can share a line
+   with it. */
+.board-foot { display: flex; flex-direction: column; gap: var(--space-2); flex: 0 0 auto; }
 .board-reply {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.45em;
-  font-size: var(--fs-2);
+  font-size: var(--fs-3);
   font-weight: 700;
-  min-block-size: 3.4rem;
+  min-block-size: 4.5rem;
+  inline-size: 100%;
   padding-inline: var(--space-4);
   border-color: transparent;
   background: var(--accent);
   color: var(--paper);
+}
+@media (orientation: landscape) {
+  .board-foot { flex-direction: row; align-items: center; }
+  .board-foot .board-message-gloss { flex: 1 1 auto; justify-content: flex-start; }
+  .board-reply { inline-size: auto; flex: 0 0 auto; min-block-size: 3.4rem; }
 }
 .board-reply:hover { background: var(--accent); filter: brightness(1.08); }
 /* **Reply is drawn like the message, and the owner's controls are not.** Every
@@ -628,7 +617,6 @@
    the other way. A glyph is not text and gets no bidi treatment. */
 .board-reply-arrow { font-size: 0.85em; line-height: 1; }
 [dir="rtl"] .board-reply-arrow { display: inline-block; transform: scaleX(-1); }
-.board-stage-turned .board-controls { flex-direction: column; }
 
 /* The turn control is the quiet one in the row: no words, square, and an outline
    rather than a fill. Pressed, it fills, because "the screen is currently turned" is

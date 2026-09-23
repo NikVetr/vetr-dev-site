@@ -539,5 +539,18 @@
   "display.speak": "Sebut, dan butang separuh kelajuan di sebelahnya",
   "display.turn": "Kawalan yang memusingkan ayat ke sisi",
   "display.voice": "Suara",
-  "display.voiceAuto": "Dipilih secara automatik"
+  "display.voiceAuto": "Dipilih secara automatik",
+  "drill.reveal": "Lihat jawapan",
+  "format.headSlot.logo": "Logo Phraselet",
+  "gallery.signal": "Isyaratkan",
+  "board.rate": "Kelajuan sebutan",
+  "signal.docTitle": "Isyarat dalam Morse — Phraselet",
+  "signal.heading": "Isyarat dalam Morse",
+  "signal.lede": "Taip apa yang anda perlu katakan. Telefon akan mengisyaratkannya dalam Morse — pada skrin, dan pada lampu kilat jika telefon membenarkannya — pada kelajuan yang boleh dibaca seseorang. SOS hanya satu ketikan.",
+  "signal.message": "Mesej anda",
+  "signal.received": "Kod yang diterima",
+  "signal.speed": "Kelajuan",
+  "signal.start": "Isyaratkan",
+  "signal.stop": "Berhenti",
+  "signal.unsayable": "Aksara tanpa kod Morse: {chars}"
 }

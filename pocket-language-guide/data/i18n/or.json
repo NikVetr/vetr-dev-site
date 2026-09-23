@@ -539,5 +539,18 @@
  "display.speak": "କୁହନ୍ତୁ ବଟନ, ଆଉ ତା ପାଖର ଅଧା ବେଗର ବଟନ",
  "display.turn": "ଲେଖାକୁ ପାଖକୁ ଘୁରାଉଥିବା ବଟନ",
  "display.voice": "ସ୍ୱର",
- "display.voiceAuto": "ଆପେ ବଛାହୁଏ"
+ "display.voiceAuto": "ଆପେ ବଛାହୁଏ",
+ "drill.reveal": "ଉତ୍ତର ଦେଖନ୍ତୁ",
+ "format.headSlot.logo": "Phraselet ପ୍ରତୀକ",
+ "gallery.signal": "ଜାଳନ୍ତୁ",
+ "board.rate": "କହିବାର ବେଗ",
+ "signal.docTitle": "ମୋର୍ସରେ ସାଙ୍କେତ — Phraselet",
+ "signal.heading": "ମୋର୍ସରେ ସାଙ୍କେତ",
+ "signal.lede": "ଆପଣ କହିବାକୁ ଚାହୁଁଥିବା କଥା ଟାଇପ କରନ୍ତୁ। ଫୋନ୍ ତାକୁ ମୋର୍ସରେ ଜାଳେ — ପରଦାରେ, ଆଉ ଫୋନ୍ ଅନୁମତି ଦେଲେ ଫ୍ଲାସ୍‌ରେ ମଧ୍ୟ — ଜଣେ ଲୋକ ପଢ଼ିପାରିବା ଭଳି ବେଗରେ। SOS ପାଇଁ ଗୋଟିଏ ଛୁଆଁ ପୁରେ।",
+ "signal.message": "ଆପଣଙ୍କ ସନ୍ଦେଶ",
+ "signal.received": "ମିଳିଥିବା କୋଡ୍",
+ "signal.speed": "ବେଗ",
+ "signal.start": "ଜାଳନ୍ତୁ",
+ "signal.stop": "ରୋକନ୍ତୁ",
+ "signal.unsayable": "ମୋର୍ସ କୋଡ୍ ନଥିବା ଅକ୍ଷର: {chars}"
 }

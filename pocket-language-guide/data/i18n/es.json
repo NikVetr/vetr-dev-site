@@ -539,5 +539,18 @@
   "display.speak": "Leer en voz alta, y el botón de media velocidad a su lado",
   "display.turn": "El botón que gira la frase de lado",
   "display.voice": "Voz",
-  "display.voiceAuto": "Elegida automáticamente"
+  "display.voiceAuto": "Elegida automáticamente",
+  "drill.reveal": "Ver respuesta",
+  "format.headSlot.logo": "Logo de Phraselet",
+  "gallery.signal": "Señalizar",
+  "board.rate": "Velocidad de lectura",
+  "signal.docTitle": "Señal en código morse — Phraselet",
+  "signal.heading": "Señal en código morse",
+  "signal.lede": "Escriba lo que necesita decir. El teléfono lo hace parpadear —en la pantalla y con el flash de la cámara— en código morse, a una velocidad que una persona pueda leer. El SOS es un solo toque.",
+  "signal.message": "Su mensaje",
+  "signal.received": "Código que recibió",
+  "signal.speed": "Velocidad",
+  "signal.start": "Señalizar",
+  "signal.stop": "Detener",
+  "signal.unsayable": "El código morse no tiene símbolo para: {chars}"
 }

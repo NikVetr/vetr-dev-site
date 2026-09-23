@@ -1,7 +1,7 @@
 // The reference sheet's SheetSpec, shared by the dev scripts and the tests.
 import { readFile } from 'node:fs/promises';
 import { parseTable } from '../core/csv.js';
-import { DEFAULT_PADDING, defaultSelection, paperSpec } from '../core/pack.js';
+import { DEFAULT_PADDING, defaultFieldSet, defaultSelection, paperSpec } from '../core/pack.js';
 
 /** @returns {Promise<import('../core/types.js').SheetSpec>} */
 export async function referenceSpec(target = 'zh-Hans', source = 'en', overrides = {}) {
@@ -26,7 +26,7 @@ export async function referenceSpec(target = 'zh-Hans', source = 'en', overrides
     // The country a language is most associated with, which is where its local
     // emergency numbers come from.
     region: (lang.regions || '').split(';').filter(Boolean)[0] ?? '',
-    fieldSet: ['script', 'roman', 'gloss', 'respell', 'numeral'],
+    fieldSet: defaultFieldSet(lang),
     // faces: 0 in the preset means auto, which is what the app defaults to.
     geometry: { ...presets.geometry['card-7x5-4col'] },
     // From the registry, not written out here: the zeros this used to carry meant

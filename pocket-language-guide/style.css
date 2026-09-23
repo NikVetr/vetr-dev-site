@@ -288,7 +288,15 @@ label { display: block; }
    recognised on a second visit, not to be read on the first. `alt=""` because the
    word is the name; the picture repeats it. Same file as the favicon, so a reader
    who pins the tab sees the thing they saw in the header. */
-.brand-mark { block-size: 1.15em; inline-size: auto; }
+.brand-mark { block-size: 1.35em; inline-size: auto; filter: hue-rotate(var(--logo-hue, 0deg)); }
+/* The mark changes hue with the page and nothing else about it: `hue-rotate` turns
+   both greens together and leaves the white where it is, so the two tones keep
+   their contrast and the shape reads the same. Green on the gallery, where the
+   favicon matches it; blue in the studio, the app's own accent; orange on the quick
+   sheet; a warm red on the board. */
+body.page-studio { --logo-hue: 55deg; }
+body.page-sheet { --logo-hue: -125deg; }
+body.page-board { --logo-hue: 195deg; }
 .reader-picker { display: flex; align-items: center; gap: var(--space-1); font-size: var(--fs--1); min-width: 0; }
 /* A long endonym must not set the header's width. */
 .reader-picker select { min-width: 0; max-width: 100%; text-overflow: ellipsis; }
@@ -2016,3 +2024,21 @@ dialog.speaker-settings h2 { margin: 0 0 var(--space-1); font-size: var(--fs-2);
   position: absolute; inline-size: 1px; block-size: 1px;
   margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
 }
+
+/* The signaller: two boxes and one big button. The code is set monospaced and
+   large because it is the thing being learned; the received box mirrors it. */
+.signal { max-width: 40rem; padding-block: var(--space-3) var(--space-4); }
+.signal-pane { margin-block: var(--space-4); display: grid; gap: var(--space-2); }
+.signal-pane textarea { font: inherit; font-size: var(--fs-1); padding: var(--space-2); border: 1px solid var(--line); border-radius: var(--radius-sm); resize: vertical; }
+.signal-code, .signal-decoded {
+  display: block; min-block-size: 2.4em; padding: var(--space-2);
+  font-family: ui-monospace, Menlo, Consolas, monospace; font-size: var(--fs-2);
+  letter-spacing: 0.08em; word-break: break-all; color: var(--ink);
+  background: var(--surface); border-radius: var(--radius-sm);
+}
+.signal-unsayable:empty { display: none; }
+.signal-unsayable { margin: 0; font-size: var(--fs--1); color: var(--muted); }
+.signal-actions { align-items: center; gap: var(--space-2); }
+.signal-speed { display: inline-flex; align-items: center; gap: var(--space-1); font-size: var(--fs-0); color: var(--muted); }
+.signal-sos { font-weight: 700; letter-spacing: 0.1em; border-color: #b3261e; color: #b3261e; }
+body.page-signal { --logo-hue: 195deg; }

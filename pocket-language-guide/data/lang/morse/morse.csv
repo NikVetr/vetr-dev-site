@@ -1,0 +1,50 @@
+concept_id,text,text_alt,ipa,literal,confidence,provenance
+morse-code.letter-a,.-,,,,3,morse-v1;itu-r-m1677
+morse-code.letter-b,-...,,,,3,morse-v1;itu-r-m1677
+morse-code.letter-c,-.-.,,,,3,morse-v1;itu-r-m1677
+morse-code.letter-d,-..,,,,3,morse-v1;itu-r-m1677
+morse-code.letter-e,.,,,,3,morse-v1;itu-r-m1677
+morse-code.letter-f,..-.,,,,3,morse-v1;itu-r-m1677
+morse-code.letter-g,--.,,,,3,morse-v1;itu-r-m1677
+morse-code.letter-h,....,,,,3,morse-v1;itu-r-m1677
+morse-code.letter-i,..,,,,3,morse-v1;itu-r-m1677
+morse-code.letter-j,.---,,,,3,morse-v1;itu-r-m1677
+morse-code.letter-k,-.-,,,,3,morse-v1;itu-r-m1677
+morse-code.letter-l,.-..,,,,3,morse-v1;itu-r-m1677
+morse-code.letter-m,--,,,,3,morse-v1;itu-r-m1677
+morse-code.letter-n,-.,,,,3,morse-v1;itu-r-m1677
+morse-code.letter-o,---,,,,3,morse-v1;itu-r-m1677
+morse-code.letter-p,.--.,,,,3,morse-v1;itu-r-m1677
+morse-code.letter-q,--.-,,,,3,morse-v1;itu-r-m1677
+morse-code.letter-r,.-.,,,,3,morse-v1;itu-r-m1677
+morse-code.letter-s,...,,,,3,morse-v1;itu-r-m1677
+morse-code.letter-t,-,,,,3,morse-v1;itu-r-m1677
+morse-code.letter-u,..-,,,,3,morse-v1;itu-r-m1677
+morse-code.letter-v,...-,,,,3,morse-v1;itu-r-m1677
+morse-code.letter-w,.--,,,,3,morse-v1;itu-r-m1677
+morse-code.letter-x,-..-,,,,3,morse-v1;itu-r-m1677
+morse-code.letter-y,-.--,,,,3,morse-v1;itu-r-m1677
+morse-code.letter-z,--..,,,,3,morse-v1;itu-r-m1677
+morse-code.digit-0,-----,,,,3,morse-v1;itu-r-m1677
+morse-code.digit-1,.----,,,,3,morse-v1;itu-r-m1677
+morse-code.digit-2,..---,,,,3,morse-v1;itu-r-m1677
+morse-code.digit-3,...--,,,,3,morse-v1;itu-r-m1677
+morse-code.digit-4,....-,,,,3,morse-v1;itu-r-m1677
+morse-code.digit-5,.....,,,,3,morse-v1;itu-r-m1677
+morse-code.digit-6,-....,,,,3,morse-v1;itu-r-m1677
+morse-code.digit-7,--...,,,,3,morse-v1;itu-r-m1677
+morse-code.digit-8,---..,,,,3,morse-v1;itu-r-m1677
+morse-code.digit-9,----.,,,,3,morse-v1;itu-r-m1677
+morse-code.period,.-.-.-,,,,3,morse-v1;itu-r-m1677
+morse-code.comma,--..--,,,,3,morse-v1;itu-r-m1677
+morse-code.question,..--..,,,,3,morse-v1;itu-r-m1677
+morse-code.slash,-..-.,,,,3,morse-v1;itu-r-m1677
+morse-code.at,.--.-.,,,,3,morse-v1;itu-r-m1677
+morse-code.sos,...---...,,,,3,morse-v1;itu-r-m1677
+morse-code.help,.... . .-.. .--.,,,,3,morse-v1;itu-r-m1677
+morse-code.ok,--- -.-,,,,3,morse-v1;itu-r-m1677
+morse-code.yes,-.-- . ...,,,,3,morse-v1;itu-r-m1677
+morse-code.no,-. ---,,,,3,morse-v1;itu-r-m1677
+morse-code.wait,.-- .- .. -,,,,3,morse-v1;itu-r-m1677
+morse-code.water,.-- .- - . .-.,,,,3,morse-v1;itu-r-m1677
+morse-code.doctor,-.. --- -.-. - --- .-.,,,,3,morse-v1;itu-r-m1677

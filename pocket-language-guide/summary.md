@@ -359,6 +359,28 @@ everywhere else falls back to the cluster prior. Raw judgements live in
 deliberately does not scan, and `scripts/build_redundancy.py` rebuilds and checks
 the table from them.
 
+### A language nobody speaks
+
+Morse is a language in the registry — `morse`, script `Mors`, its own section
+`morse-code` of 49 rows: the letters, digits, five marks and eight prosign-and-word
+entries whose `text` is the code itself, `.-`, `-...`, `...---...` — because the
+things a language gets for free are exactly what it needs: a card in the gallery, a
+printed sheet glossed into every reader's language, a place in the section tree.
+What it does not get is the other half. It has no `speak_label`, and `isSpoken` in
+`ui/app.js` reads that as "no one's own language": it is left out of the "I speak"
+collage, the reader picker, the lightbox's reading side and the studio's gloss menu,
+and the validator (`SILENT`, mirrored in `build_ipa.py`, which leaves its `ipa`
+empty) skips the checks that look at a language as a reader. Every other language
+gets a `data/lang/<code>/morse.csv` whose text is the letter, since the gloss of
+`.-` is `A` in any alphabet.
+
+Its conversation is light rather than a board. `signal.html` (`ui/signal.js`,
+`core/morse.js`) shows the code as it is typed, names what Morse cannot encode
+rather than dropping it, decodes code typed the other way, and hands a unit list —
+1 and 3 lit, 0 dark, PARIS timing at 5–20 wpm — to the same beacon that flashes
+SOS, in a third `morse` mode that takes its pattern and unit length from the caller.
+The gallery card offers Signal in place of Converse.
+
 ## The solver
 
 `core/solve/` in dependency order:
@@ -746,12 +768,29 @@ arrow the other way round, and `isolate` in `ui/i18n.js` leaves a letterless ins
 unwrapped, so the sentinels survive the substitution intact.
 
 **What the message screen carries is a setting, not a decision.** The owner's own
-wording, Speak and its half-speed twin, and the control that turns the sentence
+wording, Speak and its speed control, and the control that turns the sentence
 sideways can each be switched off; how to say it in the reader's own letters, and the
-same in IPA, can each be switched on. The three that were always there default to on
-and the two new ones to off, which is `ui/board-display.js` — one record rather than
-five keys, because they are read together on every paint and written together from
-one dialog.
+same in IPA, can each be switched on. All but IPA default to on, which is
+`ui/board-display.js` — one record rather than six keys, because they are read
+together on every paint and written together from one dialog. The speed is a
+multiplier — 0.25, 0.5, 1, 2 — chosen from a list the control opens, and that list
+opens *against the control*: `openBoardMenu` places its panel above an anchor in the
+lower half of the screen and below one in the upper half, its near edge on the
+anchor's, because the stylesheet's default hung every panel under the header's
+corner, a screen away from the thumb at the foot that asked for it.
+
+**The shape of the screen is the same in both orientations, and only the sentence
+turns.** The surface is the sentence alone; under it a foot holds the owner's gloss
+and, where the board has answers, a Reply set large — full width and 4.5rem tall on a
+portrait phone, beside the gloss in landscape — because Reply is the one control the
+*stranger* presses, and a small button in a row of the owner's controls is not
+addressed to them. Speak, speed and Turn stay in their row beneath. Turning used to
+rotate the whole stage into a `100dvh`×`100dvw` box, which laid the owner's buttons
+on their sides and the speed control on a pillar; now it sets the sentence in
+`writing-mode: vertical-rl` with `text-orientation: sideways`, which is a page held
+sideways rather than vertical text, and the fitter measures lines as heights — a
+`vertical()` check on the writing mode in `widestLine`, `lineRoom`, `hangFits` and
+the overflow test — instead of un-rotating a stage to measure it.
 
 The pronunciation rides with the phrase out of `resolvePhrase`, not looked up again
 in the view, and that is what keeps it right under a speaker variant: `say` has
@@ -1398,6 +1437,7 @@ artifacts, following the `ceo-salary-benchmark/scripts/` precedent:
 ```bash
 npm run vendor      # esbuild → vendor/{fontkit,pdf-lib}.esm.js  (rarely)
 npm run icons       # Lucide SVG → data/icons.json, normalised to path data
+npm run logo        # favicon.svg → core/logo-shapes.js, the mark as flat path data for the band
 npm run prerender   # solve + render → packs/  (after any corpus or engine change)
                     #   thumbnails only, one per pair, then indexed down to a
                     #   fifth-bit palette: 240 pairs in 8.6MB rather than 27MB
@@ -1773,6 +1813,17 @@ face from a label winning by two points to winning by nineteen. Two role
 *recolourings* that would have been tidier still were reverted: `golden.test.mjs`
 guards the reference sheet's group-to-colour mapping, on the grounds that changing it
 changes what the sheet means.
+
+The **`logo` slot** puts the mark on the band. It is the one head part that is not
+type: `one('logo')` yields a part whose text is a word joiner — not whitespace, so
+`spaceParts` keeps it; zero width, so nothing is set where the paths go — flagged
+`logo`, and `widthOf` charges it `1.15 × size × LOGO_ASPECT` while the run loop
+emits `PathMark`s from `core/logo-shapes.js` in its place. No bullet is set beside
+it; a mark is its own separator. The shapes are generated from `favicon.svg` by
+`scripts/build_logo.mjs`, which flattens the favicon's rotated rounded rectangles
+into absolute cubic curves in a box one point tall, because neither renderer applies
+a transform to a path and pdf-lib's `drawSvgPath` would draw them unrotated. In mono
+the greens become ink and the light card paper, two tones like the rest of the sheet.
 
 ## The phone
 

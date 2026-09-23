@@ -52,6 +52,24 @@ export function openBoardMenu(anchor, items) {
   // on one of its children came from outside the panel.
   panel.addEventListener('click', (event) => { if (event.target === panel) panel.close(); });
   panel.showModal();
+  // **Against the control that opened it.** The stylesheet's default hangs the panel
+  // under the header's own corner, which is right for the menu behind the three
+  // bars and wrong for everything else that now opens one -- the speed control at
+  // the foot of the screen got its list at the top, a screen away from the thumb
+  // that asked. So: above the anchor when it sits in the lower half, below it
+  // otherwise, its near edge on the anchor's, kept inside the viewport. Physical
+  // pixels, because the rects are.
+  const at = anchor.getBoundingClientRect();
+  const me = panel.getBoundingClientRect();
+  const gap = 6;
+  const above = at.top > innerHeight / 2;
+  const top = above
+    ? Math.max(gap, at.top - gap - me.height)
+    : Math.min(innerHeight - me.height - gap, at.bottom + gap);
+  const start = document.documentElement.dir === 'rtl' ? at.right - me.width : at.left;
+  const left = Math.max(gap, Math.min(innerWidth - me.width - gap, start));
+  panel.style.margin = '0';
+  panel.style.inset = `${Math.round(top)}px auto auto ${Math.round(left)}px`;
   /** @type {HTMLElement|null} */ (panel.querySelector('button'))?.focus();
   return panel;
 }

@@ -539,5 +539,18 @@
   "display.speak": "«બોલો» અને તેની બાજુનું અડધી ઝડપનું બટન",
   "display.turn": "વાક્યને આડું ફેરવતું બટન",
   "display.voice": "અવાજ",
-  "display.voiceAuto": "આપમેળે પસંદ કરેલો"
+  "display.voiceAuto": "આપમેળે પસંદ કરેલો",
+  "drill.reveal": "જવાબ બતાવો",
+  "format.headSlot.logo": "Phraselet લોગો",
+  "gallery.signal": "સંકેત આપો",
+  "board.rate": "બોલવાની ઝડપ",
+  "signal.docTitle": "મોર્સ કોડમાં સંકેત — Phraselet",
+  "signal.heading": "મોર્સ કોડમાં સંકેત",
+  "signal.lede": "તમારે જે કહેવું છે તે લખો. ફોન તેને — સ્ક્રીન પર અને કેમેરાની લાઇટથી — મોર્સ કોડમાં, માણસ વાંચી શકે એવી ઝડપે, ઝબકાવે છે. એસઓએસ મોકલવા માટે એક જ ટૅપ બસ છે.",
+  "signal.message": "તમારો સંદેશો",
+  "signal.received": "તમને મળેલો કોડ",
+  "signal.speed": "ઝડપ",
+  "signal.start": "સંકેત આપો",
+  "signal.stop": "રોકો",
+  "signal.unsayable": "મોર્સ કોડમાં આના માટે સંકેત નથી: {chars}"
 }

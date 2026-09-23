@@ -15,6 +15,7 @@
 // Even the thumbnails grow as the square of the language count, so
 // `scripts/optimize_thumbs.py` runs after this one (via the `postprerender` hook)
 // and reindexes each screenshot to an exact palette: 16.4MB becomes 5.0MB.
+import { existsSync } from 'node:fs';
 import { readFile, writeFile, mkdir, rm } from 'node:fs/promises';
 import { gzipSync } from 'node:zlib';
 import { createSheetContext, buildSheet, stacksFor } from '../core/sheet.js';
@@ -32,23 +33,38 @@ const ctx = await createSheetContext({
 const manifest = JSON.parse(await readFile('data/fonts/manifest.json', 'utf8'));
 const icons = JSON.parse(await readFile('data/icons.json', 'utf8'));
 
-await rm('packs', { recursive: true, force: true });
 
 /** Pairs worth shipping: both sides need enough content to render. */
 const usable = Object.values(ctx.corpus.languages).filter((l) => l.status === 'ready');
+// `--only <code>` renders one target's row of the matrix; `--force` re-renders pairs
+// that already have a thumbnail. Adding one language to fifty-three used to mean
+// rendering all 2,756 pairs again to get its 52.
+const only = process.argv.includes('--only') ? process.argv[process.argv.indexOf('--only') + 1] : null;
+const force = process.argv.includes('--force');
+// A full forced run starts clean, so a pair that no longer exists leaves no pack
+// behind. A partial run never wipes: the other 2,700 packs are the point of it.
+if (force && !only) await rm('packs', { recursive: true, force: true });
 /** @type {{target:string, source:string}[]} */ const pairs = [];
 for (const target of usable) {
-  for (const source of usable) {
+  if (only && target.bcp47 !== only) continue;
+  // A source is a reader's own language, which Morse -- learnt, never spoken, and
+  // so without an "I speak" label -- is not.
+  for (const source of usable.filter((l) => l.speak_label)) {
     if (target.bcp47 !== source.bcp47) pairs.push({ target: target.bcp47, source: source.bcp47 });
   }
 }
 if (!pairs.length) throw new Error('no language pair has content on both sides');
 
 const local = await openLocalPage({ deviceScaleFactor: 2 });
+// A partial run keeps the index entries of every pack it did not touch; a full
+// forced run starts from nothing, as it does with the directory.
+/** @type {any[]} */ const prior = (force && !only) || !existsSync('packs/index.json')
+  ? [] : JSON.parse(await readFile('packs/index.json', 'utf8')).packs;
 /** @type {any[]} */ const index = [];
 
 for (const { target, source } of pairs) {
   const dir = `packs/${target}__${source}`;
+  if (!force && existsSync(`${dir}/thumb.png`) && existsSync(`${dir}/face-1.svg.gz`)) continue;
   await mkdir(dir, { recursive: true });
 
   const spec = { ...(await referenceSpec(target, source)), scale: 0 };
@@ -103,5 +119,7 @@ for (const { target, source } of pairs) {
 }
 
 await local.close();
-await writeFile('packs/index.json', `${JSON.stringify({ packs: index }, null, 2)}\n`);
-console.log(`packs/index.json  ${index.length} pack(s)`);
+const fresh = new Set(index.map((m) => `${m.target}__${m.source}`));
+const packs = [...prior.filter((m) => !fresh.has(`${m.target}__${m.source}`)), ...index];
+await writeFile('packs/index.json', `${JSON.stringify({ packs }, null, 2)}\n`);
+console.log(`packs/index.json  ${packs.length} pack(s), ${index.length} rendered now`);

@@ -87,7 +87,9 @@ async function acquireTorch() {
  * just been found should not have to hunt for a control.
  *
  * @param {object} config
- * @param {'sos'|'attention'} config.mode
+ * @param {'sos'|'attention'|'morse'} config.mode  `morse` flashes `config.units`
+ * @param {number[]} [config.units]  the unit list to flash: 1 and 3 lit, 0 dark
+ * @param {number} [config.unitMs]   how long a unit lasts; SOS keeps its own
  * @param {string} config.label      the word to show, in the *listener's* language
  * @param {string} config.lang       that language, so a shared glyph is drawn its way
  * @param {'ltr'|'rtl'} config.dir   and which way its punctuation falls
@@ -100,10 +102,14 @@ async function acquireTorch() {
  *   language's word for help turns out to be.
  * @param {() => void} [config.onStop]
  */
-export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop }) {
+export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop, units, unitMs }) {
+  // SOS is Morse with its pattern and speed fixed; the signaller supplies its own.
+  const flashing = mode === 'sos' || mode === 'morse';
+  const pattern = mode === 'morse' && units ? units : SOS;
+  const unit = mode === 'morse' && unitMs ? unitMs : DOT;
   stopBeacon();
   const root = document.createElement('div');
-  root.className = `beacon beacon-${mode}`;
+  root.className = `beacon beacon-${mode === 'morse' ? 'sos' : mode}`;
   root.setAttribute('role', 'alert');
 
   const word = document.createElement('p');
@@ -136,11 +142,11 @@ export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop }) {
   let at = 0;
   /** @type {{set:(on:boolean)=>void, release:()=>void}|null} */ let torch = null;
   const step = () => {
-    const unit = SOS[at % SOS.length];
-    root.classList.toggle('beacon-lit', unit > 0);
-    torch?.set(unit > 0);
+    const beat = pattern[at % pattern.length];
+    root.classList.toggle('beacon-lit', beat > 0);
+    torch?.set(beat > 0);
     at += 1;
-    timer = setTimeout(step, DOT * Math.max(1, unit));
+    timer = setTimeout(step, unit * Math.max(1, beat));
   };
 
   /**
@@ -189,7 +195,7 @@ export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop }) {
   // Ukrainian imperative would have broken across two lines at the same setting.
   fit?.(word, root);
 
-  if (mode === 'sos') {
+  if (flashing) {
     step();
     // The screen starts at once; the lamp joins when the camera answers.
     acquireTorch().then((got) => { torch = got; });

@@ -5244,6 +5244,9 @@ def jv_to_ipa(word):
 # *before* `build()` looks at whether any row is left to transcribe, which is why
 # this is a skip in `main` rather than a branch in `route`. See tmp/khmer.md §9.
 AUTHORED = {"km"}
+# Languages with nothing to pronounce. Morse is dots and dashes: its `text` is not
+# speech, no route exists for it, and every row leaves `ipa` empty by design.
+SILENT = {"morse"}
 
 
 def route(code, chunks):
@@ -5442,6 +5445,10 @@ def language_name_ipa(locales, subjects, rows):
         # and the rest read the name, CLDR's unless the registry overrides it.
         text = {}
         for subject in subjects:
+            # No sentence asks a stranger whether they speak Morse, so its name is
+            # never substituted and gets no cell -- the same emptiness as a refusal.
+            if subject in SILENT:
+                continue
             row = rows.get((locale, subject), {})
             # **A locale ICU cannot display in gets no fallback at all.** `tlh` and
             # `qya` are in CLDR as subjects and in neither case as a display locale,
@@ -6538,7 +6545,9 @@ def build(code):
             for row in csv.DictReader(fh):
                 concepts[row["concept_id"]] = row
 
-    files = sorted((DATA / "lang" / code).glob("*.csv"))
+    # The Morse group's rows are the letters a code stands for -- `A` glossing `.-`
+    # -- and print only on the Morse card, so there is nothing to pronounce.
+    files = sorted(p for p in (DATA / "lang" / code).glob("*.csv") if p.name != "morse.csv")
     source = ROMANISED.get(code)
     loans = LOANWORDS.get(code, {})
     plan = []                                     # (path, index, row, pieces)
@@ -6673,7 +6682,7 @@ def main():
     with (DATA / "registry/languages.csv").open(encoding="utf-8-sig") as fh:
         ready = [r["bcp47"] for r in csv.DictReader(fh) if r["status"] == "ready"]
     codes = [c for c in args.only.split(",") if c in ready] if args.only else ready
-    codes = [c for c in codes if c not in AUTHORED]     # see AUTHORED
+    codes = [c for c in codes if c not in AUTHORED and c not in SILENT]  # see AUTHORED, SILENT
 
     stale, repertoire, report = [], Counter(), []
     for code in codes:
@@ -6681,6 +6690,8 @@ def main():
         by_cid = {}
         written = 0
         for path in sorted((DATA / "lang" / code).glob("*.csv")):
+            if path.name == "morse.csv":
+                continue
             header, rows = load_rows(path)
             columns = header[1]
             # This script owns the whole column, not just the cells it can fill:

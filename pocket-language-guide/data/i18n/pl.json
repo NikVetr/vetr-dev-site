@@ -539,5 +539,18 @@
   "display.speak": "Odtwórz, i przycisk połowy prędkości obok niego",
   "display.turn": "Przycisk obracający zwrot bokiem",
   "display.voice": "Głos",
-  "display.voiceAuto": "Wybierany automatycznie"
+  "display.voiceAuto": "Wybierany automatycznie",
+  "drill.reveal": "Zobacz odpowiedź",
+  "format.headSlot.logo": "Logo Phraselet",
+  "gallery.signal": "Nadaj",
+  "board.rate": "Prędkość odtwarzania",
+  "signal.docTitle": "Sygnał w kodzie Morse’a — Phraselet",
+  "signal.heading": "Sygnał w kodzie Morse’a",
+  "signal.lede": "Wpisz, co chcesz powiedzieć. Telefon zasygnalizuje to alfabetem Morse’a — na ekranie, a tam, gdzie telefon na to pozwala, także fleszem — w tempie, które da się odczytać. SOS to jedno dotknięcie.",
+  "signal.message": "Twoja wiadomość",
+  "signal.received": "Odebrany kod",
+  "signal.speed": "Prędkość",
+  "signal.start": "Nadaj",
+  "signal.stop": "Zatrzymaj",
+  "signal.unsayable": "Znaki bez kodu Morse’a: {chars}"
 }

@@ -174,5 +174,16 @@
   "display.speak": "á quetë ar 0.5×",
   "display.turn": "á querë i tengwar",
   "display.voice": "óma",
-  "display.voiceAuto": "i senya óma"
+  "display.voiceAuto": "i senya óma",
+  "drill.reveal": "á cenë i hanquenta",
+  "format.headSlot.logo": "Phraselet tanna",
+  "gallery.signal": "á tinta",
+  "board.rate": "lintië as quetië",
+  "_signal_note": "Signal-in-Morse pass (drill.reveal, format.headSlot.logo, gallery.signal, board.rate, signal.*): ten of thirteen keys are here, three are not. REUSE: tinta- \"to kindle, set fire to\" is boards.emergency.sos's own verb (á tinta SOS) and is spent again on gallery.signal and signal.start (á tinta), because Morse and the beacon are the same physical act on this phone -- a flashing light -- and Quenya's one word for it should not become two. telya- \"to finish, wind up, conclude\" (WJ/411.2709) is speaker.done's own verb (á telya) and is spent again on signal.stop, for the same reason. tanna \"sign, token\" (MR/385.2903) is editor.label's word and is spent twice more, on format.headSlot.logo (Phraselet tanna) and on signal.heading (Morse tanna), because a logo and a section heading are both signs and Quenya has the one word for it. hanquenta \"answer\" (board.reply) gives drill.reveal á cenë i hanquenta, cen- \"to see\" being the verb á cenë already uses at gallery.wantPick. lintië \"speed\" (PE17/058.3310) is board.slow's own noun, spent again bare at signal.speed and joined to quetië \"speech, utterance\" (already display.roman's word) with the same connector display.heading uses (as, \"with\") for board.rate: lintië as quetië, \"speed with speech\", avoiding any case ending on either noun. signal.message is vérë eques, on editor.title's own model (vérë equessi, \"personal sayings\") rather than a possessive suffix on eques, whose stem-final consonant (equess-) is not attested taking one. WHAT IS NOT HERE. signal.lede needs screen, phone, hold out, tap and lend, none of which is attested -- the same gap display.lede was left out for. signal.received and signal.unsayable both need code, which is not attested and cannot be built from anything already spent in this file (a code is not a sign, a mark or a saying); rather than force tanna or eques into a sense neither carries, both are absent. THE SECTION TITLE. There is no Quenya Wikipedia, so morse-code has no sourced term and no row was added to section-titles/qya.csv, on the same footing as the nineteen empty sections _note already lists -- a coined word here would be exactly the invention this file has avoided everywhere else. \"Morse\" itself is a modern Earth surname with no possible Quenya form; it is left in Latin throughout, the same treatment SOS, PNG and the roman.* system names already get.",
+  "signal.docTitle": "Morse tanna — Phraselet",
+  "signal.heading": "Morse tanna",
+  "signal.message": "vérë eques",
+  "signal.speed": "lintië",
+  "signal.start": "á tinta",
+  "signal.stop": "á telya"
 }

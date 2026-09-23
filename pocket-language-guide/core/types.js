@@ -117,7 +117,7 @@
  * side and a folio on the other -- and a folio belongs in a corner. `custom` takes
  * `text`; the rest are derived, so they stay right when the pair or the region
  * changes.
- * @typedef {'none'|'page'|'pair'|'region'|'legend'|'theme'|'custom'} HeadSlot
+ * @typedef {'none'|'page'|'pair'|'region'|'legend'|'theme'|'logo'|'custom'} HeadSlot
  *
  * A line of furniture along one edge, in three positions.
  *
@@ -185,7 +185,11 @@
  * `latin` sets the part in the Latin face rather than the reader's, which the
  * romanisation half of the `legend` slot needs: it quotes the target's own marks, and
  * Noto Sans Thai, Devanagari and Hebrew draw none of `ǎ ǐ ǒ ǔ ṭ ḍ ṇ ṣ`.
- * @typedef {{text:string, bold:boolean, latin?:boolean, sep?:boolean}} HeadPart */
+ *
+ * `logo` marks the part that is the mark rather than type: its `text` is a word
+ * joiner, so it survives the trims that drop blank parts, and it is measured and
+ * drawn from `core/logo-shapes.js` instead of a face.
+ * @typedef {{text:string, bold:boolean, latin?:boolean, sep?:boolean, logo?:boolean}} HeadPart */
 
 /**
  * @typedef {Object} SheetSpec

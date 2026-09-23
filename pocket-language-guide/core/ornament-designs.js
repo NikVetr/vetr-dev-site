@@ -5,6 +5,10 @@ export const LANGUAGE_MOTIFS = /** @type {const} */ ({
   ru: 'berry', id: 'kawung', sw: 'sail', tr: 'tulip', vi: 'bamboo', it: 'acanthus',
   el: 'meander', hu: 'embroidery', he: 'pomegranate', fa: 'cypress',
   qya: 'botanical', tlh: 'starforge',
+  // `telegraph` is the code itself: dots and dashes, set as the key would send them.
+  // The one motif here that is not an art tradition, because Morse is not a people's
+  // language but a signal, and the signal is its own ornament.
+  morse: 'telegraph',
   // Art directions rather than emblems, on the same rule as the rest of this table.
   // `alpona` is Bengal's rice-paste floor drawing -- radial, vine-led, made freehand
   // for a festival and swept away after; `wycinanki` is Polish folk paper-cutting,
@@ -1194,6 +1198,17 @@ const emblems = {
     p.m(17, 63); p.l(31, 61);
     p.m(83, 37); p.l(69, 39);
   },
+  telegraph(p) {
+    // SOS as the key sends it: three dots, three dashes, three dots, in three rows,
+    // with the dashes three dots long. Dots are small filled-looking rings, because
+    // a pen has no dot.
+    for (const y of [22, 50, 78]) {
+      for (let i = 0; i < 3; i++) {
+        const x = 20 + i * 30;
+        if (y === 50) { p.m(x - 11, y); p.l(x + 11, y); } else oval(p, x, y, 4, 4);
+      }
+    }
+  },
   tarakasi(p) {
     // A mirrored pair of filigree coils and the frame wire they are soldered into.
     // Each coil runs in from the side and **stops**, which is what separates this
@@ -1237,6 +1252,7 @@ const tracery = {
   cypress(p) { p.m(10, 88); p.c(14, 34, 63, 44, 86, 8); p.c(71, 38, 99, 89, 10, 88); },
   alpona(p) { flower(p, 6, 40); },
   wycinanki(p) { p.m(50, 92); p.l(50, 8); p.m(8, 60); p.q(50, 6, 92, 60); },
+  telegraph(p) { oval(p, 12, 50, 5, 5); p.m(26, 50); p.l(50, 50); oval(p, 64, 50, 5, 5); p.m(78, 50); p.l(94, 50); },
   kolam(p) { p.m(50, 8); p.q(92, 8, 92, 50); p.q(92, 92, 50, 92); p.q(8, 92, 8, 50); p.q(8, 8, 50, 8); oval(p, 50, 50, 7, 7); },
   petrykivka(p) { p.m(8, 92); p.q(34, 66, 46, 44); oval(p, 62, 34, 26, 26); },
   jali(p) { for (const x of [28, 72]) { p.m(x - 20, 90); p.l(x - 20, 46); p.q(x, 4, x + 20, 46); p.l(x + 20, 90); } },

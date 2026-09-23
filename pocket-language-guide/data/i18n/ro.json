@@ -539,5 +539,18 @@
   "display.speak": "Rostește, și butonul de jumătate de viteză de lângă el",
   "display.turn": "Butonul care rotește fraza lateral",
   "display.voice": "Voce",
-  "display.voiceAuto": "Aleasă automat"
+  "display.voiceAuto": "Aleasă automat",
+  "drill.reveal": "Vezi răspunsul",
+  "format.headSlot.logo": "Sigla Phraselet",
+  "gallery.signal": "Semnalizează",
+  "board.rate": "Viteza vorbirii",
+  "signal.docTitle": "Semnalizare în Morse — Phraselet",
+  "signal.heading": "Semnalizare în Morse",
+  "signal.lede": "Scrieți ce aveți de spus. Telefonul semnalizează mesajul în Morse — pe ecran, și pe bliț unde telefonul permite — într-un ritm pe care o persoană îl poate citi. SOS înseamnă o singură atingere.",
+  "signal.message": "Mesajul dumneavoastră",
+  "signal.received": "Codul primit",
+  "signal.speed": "Viteză",
+  "signal.start": "Semnalizează",
+  "signal.stop": "Oprește",
+  "signal.unsayable": "Caractere fără cod Morse: {chars}"
 }
