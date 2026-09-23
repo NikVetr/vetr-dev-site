@@ -279,7 +279,16 @@ label { display: block; }
 /* Wraps rather than pushing the picker -- or, in the studio, the export buttons --
    off the side of a phone. */
 .site-header .container { display: flex; align-items: center; gap: var(--space-1) var(--space-3); flex-wrap: wrap; }
-.brand { font-weight: 700; text-decoration: none; color: var(--ink); white-space: nowrap; }
+.brand {
+  display: inline-flex; align-items: center; gap: 0.4em;
+  font-weight: 700; text-decoration: none; color: var(--ink); white-space: nowrap;
+}
+/* **The mark, and only the mark.** A speech bubble over a phrase card, in the logo's
+   own green, set at the height of the word beside it and no more: it is there to be
+   recognised on a second visit, not to be read on the first. `alt=""` because the
+   word is the name; the picture repeats it. Same file as the favicon, so a reader
+   who pins the tab sees the thing they saw in the header. */
+.brand-mark { block-size: 1.15em; inline-size: auto; }
 .reader-picker { display: flex; align-items: center; gap: var(--space-1); font-size: var(--fs--1); min-width: 0; }
 /* A long endonym must not set the header's width. */
 .reader-picker select { min-width: 0; max-width: 100%; text-overflow: ellipsis; }

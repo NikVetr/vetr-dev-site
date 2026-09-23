@@ -3976,3 +3976,27 @@ language grid 35px up. And its wording is under discussion: the second clause of
 one that shipped read as a solitary exercise rather than as something shown to a
 person, and a candidate that says so is in `en.json`, held back from the 51 other
 catalogues until the English is agreed.
+
+### The logo, in three places from one file
+
+A logo arrived — a speech bubble in front of a phrase card, in green — with the
+instruction to use it subtly. Three places, one file. `favicon.svg` *is* the mark
+now, cleaned of its editor cruft and two hidden layers and cropped to its ink, so
+a pinned tab shows the thing the header shows. The header's brand link carries the
+same file at the height of the word beside it, 17px next to a 21px "Phraselet" and
+14px on the board, with an empty `alt` because the word is the name; the wordmark
+moved into a span, since `applyStatic` overwrites the `data-i18n` element's text
+and would have wiped an image inside it. And the PWA manifest, whose `icons` had
+been `[]` since the start, now names launcher icons rendered from it — 192, 512
+and a 512 maskable on white at the 72% safe zone — in a `data/brand` the shell
+precaches, because an icon the worker never cached is a broken install offline.
+
+The colour stays the logo's. The app's accent is blue and the mark is green; at
+these sizes that is a small accent beside the name, not a palette change.
+
+One tool lied on the way. ImageMagick's plain `-trim` reported the mark's bounds
+at the image origin on a page render and again on a canvas 600 units larger, so
+the first crop began at (−17, −17) instead of (42, 34) and the mark drew shifted,
+cut on the right and below. The alpha channel's bounding box is what to trust for
+a transparent render, and it put the ink at (59.5, 51.5) — inside the page all
+along.

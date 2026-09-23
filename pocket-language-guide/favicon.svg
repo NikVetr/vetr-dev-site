@@ -1,5 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="5" fill="#0b67a3"/>
-  <rect x="6" y="8" width="8.5" height="16" rx="1.5" fill="#fff" opacity=".95"/>
-  <rect x="17.5" y="8" width="8.5" height="16" rx="1.5" fill="#fff" opacity=".7"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="42.5 34.5 459.0 365.5" version="1.1" role="img" aria-label="Phraselet">
+  <defs id="defs8" />
+  <title id="title1">Phraselet</title>
+  <g id="rear-card" style="display:inline">
+    <g transform="rotate(-16.889,770.24811,-603.68522)" id="g2" style="stroke:#158560;stroke-width:10;stroke-dasharray:none;stroke-opacity:1">
+      <rect x="-125.324" y="-121.105" width="250.64799" height="242.209" rx="45.376999" ry="46.660999" fill="#d6f2da" id="rect2" style="stroke:#158560;stroke-width:10;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+  </g>
+  <g id="rear-lines" fill="#14845c" style="display:inline">
+    <rect x="51.945595" y="166.44328" width="113.869" height="25.151682" rx="12.92" transform="rotate(-16.92156)" id="rect3" />
+    <rect x="52.889027" y="217.33344" width="90.377998" height="26.697001" rx="13.349" transform="rotate(-16.84856)" id="rect4" />
+    <rect x="54.067574" y="269.39703" width="65.84343" height="25.68428" rx="13.181" transform="rotate(-16.94256)" id="rect5" />
+  </g>
+  <g id="front-bubble" fill="#158560" style="display:inline">
+    <g transform="rotate(7.361,-1460.3376,2801.0667)" id="g6" style="stroke:#fffefe;stroke-width:10;stroke-dasharray:none;stroke-opacity:0.997085">
+      <path id="rect6" d="m -74.514412,-121.13057 c -28.159838,2.83786 -49.997288,26.442952 -49.997288,55.327472 l -7.3e-4,131.607181 c 0,30.810155 24.846611,55.613787 55.709397,55.613787 l 103.831277,-1.9e-4 48.871784,35.58255 c 2.366,2 3.915718,1.46655 4.649718,-1.60012 0.402542,-12.96364 0.814981,-25.92698 1.215435,-38.89069 20.698039,-8.10124 34.745429,-27.101732 34.745429,-50.705032 l 7.3e-4,-131.607181 c 0,-30.810155 -24.846607,-55.613787 -55.709393,-55.613787 l -137.604869,-8.5e-4 c -1.928924,0 -3.834167,0.0977 -5.71149,0.28686 z" style="stroke:#fffefe;stroke-width:10;stroke-dasharray:none;stroke-opacity:0.997085" />
+      
+    </g>
+  </g>
+  <g id="front-lines" fill="#ffffff" style="display:inline">
+    <rect x="288.76471" y="90.287354" width="156.466" height="27.597" rx="13.799" transform="rotate(7.1113214)" id="rect7" style="fill:#ffffff;fill-opacity:1" />
+    <rect x="331.58786" y="142.6899" width="113.427" height="28.16" rx="14.08" transform="rotate(7.3780984)" id="rect8-8" style="display:inline;fill:#ffffff;fill-opacity:0.997085" />
+  </g>
+  </svg>

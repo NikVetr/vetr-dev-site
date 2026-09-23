@@ -63,7 +63,7 @@ const DEFAULT_BOARD_PAIR = ['zh-Hans', 'en'];
 
 const DATA_DIRS = ['data/registry', 'data/registry/section-titles',
   'data/registry/emergency-labels', 'data/themes', 'data/respell/overrides',
-  'data/respell/rules', 'data/i18n', 'data/boards'];
+  'data/respell/rules', 'data/i18n', 'data/boards', 'data/brand'];
 
 /**
  * The corpus a conversation board needs, for every pair a board declares.
@@ -148,7 +148,9 @@ const files = [...new Set([
   ...(await boardCorpus()),
   ...(await Promise.all(CODE_DIRS.map(walk))).flat(),
   ...(await Promise.all(DATA_DIRS.map(async (dir) => (await readdir(join(ROOT, dir)))
-    .filter((f) => f.endsWith('.csv') || f.endsWith('.json'))
+    // `.png` for `data/brand`, the launcher icons the manifest names: an icon the
+    // worker never cached is a broken install prompt offline.
+    .filter((f) => f.endsWith('.csv') || f.endsWith('.json') || f.endsWith('.png'))
     .map((f) => `${dir}/${f}`)))).flat(),
 ])].sort();
 
