@@ -99,7 +99,7 @@ children.car-seat,எங்களுக்கு குழந்தைக்க�
 children.stroller,குழந்தைத் தள்ளுவண்டி,,kuḻantait taḷḷuvaṇṭi,kuɻʌndaɪt tʌɭɭɯvʌɳɖi,,2,ta-agent-v1;ipa=espeak
 children.playground,விளையாட்டு மைதானம் உள்ளதா?,,viḷaiyāṭṭu maitāṉam uḷḷatā?,viɭaɪjaːʈʈɯ maɪdaːnʌm uɭɭʌdaː,,2,ta-agent-v1;ipa=espeak
 social-basics.politeness-particles,"தாய் மொழியில் மரியாதை வாக்கியத்தின் இறுதியில் வரும் ஒரு சொல்லால் வருகிறது: ஆண் பேசினால் khrap, பெண் பேசினால் kha. பெண் கேள்வி கேட்கும்போது kha-வை ஏறு சுரத்தில் சொல்வார். இந்த வழிகாட்டியின் வரிகளில் அச்சொல் சேர்க்கப்படவில்லை, எனவே நீங்களே சேர்த்துக் கொள்ளுங்கள்.",,"tāy moḻiyil mariyātai vākkiyattiṉ iṟutiyil varum oru collāl varukiṟatu: āṇ pēciṉāl khrap, peṇ pēciṉāl kha. peṇ kēḷvi kēṭkumpōtu kha-vai ēṟu curattil colvār. inta vaḻikāṭṭiyiṉ varikaḷil accol cērkkappaṭavillai, eṉavē nīṅkaḷē cērttuk koḷḷuṅkaḷ.",,,2,ta-notes-v1
-board-answers.can-you-walk,நடக்க முடியுமா?,,naṭakka muṭiyumā?,nʌɖʌkkʌ muɖijɯmaː,,2,ta-agent-v1;ipa=espeak
+board-answers.can-you-walk,உங்களால் நடக்க முடியுமா?,,uṅkaḷāl naṭakka muṭiyumā?,uŋɡʌɭaːl nʌɖʌkkʌ muɖijɯmaː,,2,ta-agent-v1;board-answers-v3;ipa=espeak
 board-answers.card-or-cash,"அட்டையா, பணமா?",,"aṭṭaiyā, paṇamā?","aʈʈaɪjaː, pʌɳʌmaː",,2,ta-agent-v1;ipa=espeak
 board-answers.help-is-coming,உதவி வருகிறது,,utavi varukiṟatu,udʌvi vʌɾɯɡirʌdɯ,,2,ta-agent-v1;ipa=espeak
 board-answers.how-many,எத்தனை வேண்டும்?,,etaṉai vēṇṭum?,ettʌnaɪ veːɳɖɯm,,2,ta-agent-v1;ipa=espeak

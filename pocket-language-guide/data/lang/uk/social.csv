@@ -115,7 +115,7 @@ board-answers.i-am-calling-an-ambulance,Викликаю швидку.,,Vyklykai
 board-answers.i-am-calling-the-police,Я дзвоню в поліцію.,,Ya dzvoniu v politsiiu.,jˈa dzʋˈoɲu f poʎˈiːtsiːju,,2,uk-agent-v1;board-answers-v1;matches police-consulate.i-am-calling-the-police;ipa=espeak
 board-answers.help-is-coming,Допомога вже в дорозі.,,Dopomoha vzhe v dorozi.,dopˈomoha ʋʒˈɛ ʋ dorˈoziː,,2,uk-agent-v1;board-answers-v1;ipa=espeak
 board-answers.where-does-it-hurt,Де болить?,,De bolyt?,dˈɛ bˈolɪt,,2,uk-agent-v1;board-answers-v1;ipa=espeak
-board-answers.can-you-walk,Можна йти?,,Mozhna yty?,mˈoʒna jtˈɪ,,2,uk-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.can-you-walk,Ви можете йти?,,Vy mozhete yty?,ʋˈɪ moʒˈɛtɛ jtˈɪ,,2,uk-agent-v1;board-answers-v1;ipa=espeak
 board-answers.stay-here,Краще залишитися тут.,,Krashche zalyshytysia tut.,krˈaʃtʃɛ zalɪʃˈɪtɪsja tˈut,,2,uk-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
 board-answers.what-is-your-name,Як вас звати?,,Yak vas zvaty?,jˈaɡ ʋˈaz zʋˈatɪ,,2,uk-agent-v1;board-answers-v1;reply-neutrality-rule;matches introductions.what-is-your-name;ipa=espeak
 board-answers.the-hospital-is-close,Лікарня близько.,,Likarnia blyzko.,ʎiːkˈarɲa blˈɪzko,,2,uk-agent-v1;board-answers-v1;ipa=espeak

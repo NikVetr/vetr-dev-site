@@ -3879,3 +3879,18 @@ five display checkboxes unreferenced — made it read `key: 'gloss'` and
 `key: 'roles.alert'` in two other constant tables as *referenced and undefined*, and
 the gate failed on it. Reverted; `board-display.js` says `labelKey`, which is the
 convention the scanner already knew.
+
+### "Can you walk?" in the twenty-five that had no reason to dodge
+
+Twenty rows changed across twenty languages; five were already direct and the earlier
+count had misread them. What the rewrite turned up is that several of the old
+impersonals were not stilted but **wrong in meaning**: Russian and Ukrainian's "may
+one go?" asked permission to leave, and Hungarian, Finnish and Romanian asked whether
+the *route* was walkable. Indonesian, Malay and Vietnamese were left as they were,
+correctly -- a zero-pronoun question is the direct form in all three, and the natural
+spoken address to a stranger there is a gendered kin term, which is exactly why those
+packs drop the pronoun. Vietnamese is now named in the concept note's hazard set for
+that reason. Every `stay-here` row in the set was left: verbal-noun-plus-"best" is how
+each of these languages gives advice, and the note says an idiom is not a dodge. One
+Persian `stay-here` was the exception -- an infinitive-as-subject calque -- and became
+the ordinary *behtar ast* plus subjunctive.

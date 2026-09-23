@@ -99,7 +99,7 @@ children.car-seat,మాకు పిల్లల కార్ సీట్ క�
 children.stroller,పిల్లల బండి,స్ట్రోలర్,pillala baṁḍi,pillala baɳɖi,,2,te-agent-v1;ipa=espeak
 children.playground,ఆట స్థలం ఉందా?,,āṭa sthalaṁ uṁdā?,aːʈa stʰalam undaː,,2,te-agent-v1;ipa=espeak
 social-basics.politeness-particles,"థాయ్ భాషలో మర్యాద వాక్యం చివర వచ్చే ఒక మాటతో వస్తుంది: మగవారు దాదాపు ప్రతి మాట తరవాత khrap అని, ఆడవారు kha అని చేర్చుతారు. ఆడవారు ప్రశ్న అడిగేటప్పుడు kha ను పైకి ఎత్తిన స్వరంతో చెప్తారు. ఈ కార్డులోని వాక్యాలలో ఆ మాట లేదు, కాబట్టి మీరే చేర్చుకోండి.",,"thāy bhāṣalō maryāda vākyaṁ civara vaccē oka māṭatō vastuṁdi: magavāru dādāpu prati māṭa taravāta khrap ani, āḍavāru kha ani cērcutāru. āḍavāru praśna aḍigēṭappuḍu kha nu paiki ettina svaraṁtō ceptāru. ī kārḍulōni vākyālalō ā māṭa lēdu, kābaṭṭi mīrē cērcukōṁḍi.",,,2,te-notes-v1
-board-answers.can-you-walk,నడవడం సాధ్యమా?,,naḍavaḍaṁ sādhyamā?,naɖaʋaɖam saːdʰjamaː,,2,te-agent-v1;ipa=espeak
+board-answers.can-you-walk,మీరు నడవగలరా?,,mīru naḍavagalarā?,miːru naɖaʋaɡalaraː,,2,te-agent-v1;board-answers-v3;ipa=espeak
 board-answers.card-or-cash,"కార్డా, నగదా?",,"kārḍā, nagadā?","kaːrɖaː, naɡadaː",,2,te-agent-v1;ipa=espeak
 board-answers.help-is-coming,సహాయం వస్తోంది,,sahāyaṁ vastōṁdi,sahaːjam ʋastoːndi,,2,te-agent-v1;ipa=espeak
 board-answers.how-many,ఎన్ని కావాలి?,,enni kāvāli?,enni kaːʋaːli,,2,te-agent-v1;ipa=espeak

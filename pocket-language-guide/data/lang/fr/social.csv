@@ -115,7 +115,7 @@ board-answers.i-am-calling-an-ambulance,J'appelle une ambulance,,ʒapɛl yn ɑ̃
 board-answers.i-am-calling-the-police,J'appelle la police,,ʒapɛl la polˈis,,2,fr-agent-v1;board-answers-v1;matches police-consulate.i-am-calling-the-police;ipa=espeak
 board-answers.help-is-coming,Les secours arrivent,,le səkuʁz aʁˈiv,,2,fr-agent-v1;board-answers-v1;ipa=espeak
 board-answers.where-does-it-hurt,Où avez-vous mal ?,,u avevu mˈal,,2,fr-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
-board-answers.can-you-walk,Peut-on marcher ?,,pøtɔ̃ maʁʃˈe,,2,fr-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+board-answers.can-you-walk,Pouvez-vous marcher ?,,puvevu maʁʃˈe,,2,fr-agent-v1;board-answers-v1;ipa=espeak
 board-answers.stay-here,Mieux vaut rester ici,,mjø vo ʁɛste isˈi,,2,fr-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
 board-answers.what-is-your-name,Quel est le nom ?,,kɛl ɛ lə nˈɔ̃,,2,fr-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
 board-answers.the-hospital-is-close,L'hôpital est tout près,,lopital ɛ tu pʁˈɛ,,2,fr-agent-v1;board-answers-v1;ipa=espeak
