@@ -704,6 +704,11 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
    wraps to four lines and the language grid to two names a row. */
 @media (max-width: 1080px) {
   .gallery-intro { grid-template-columns: minmax(0, 1fr); }
+  /* One sentence over the language grid should not cost a screen's worth of air:
+     the intro's padding and the sentence's own margin were each sized for a
+     two-column desktop and stacked on a phone. */
+  .gallery-intro { padding-block: var(--space-1) 0; gap: var(--space-2); }
+  h1.lede { font-size: var(--fs-0); margin-bottom: var(--space-2); }
   /* Fifty-two language buttons are a compact block beside the heading on a desktop
      and 922pt of wall on a phone, which put the first card 1230pt down: a screen and
      a half of controls before any of the thing they control. Capped and scrolled,

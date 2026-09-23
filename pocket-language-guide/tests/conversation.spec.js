@@ -753,7 +753,10 @@ test('what the message screen carries is the reader’s choice, and it sticks', 
   await page.goto(BOARD);
   await expect(page.locator('.board-cell').first()).toBeVisible();
   await page.locator('[data-button="stop"]').click();
-  await expect(page.locator('.board-message-gloss')).toHaveText('Please stop');
+  // On by default: the owner's wording and how to say it; not IPA.
+  await expect(page.locator('.board-message-gloss .gloss-own')).toHaveText('Please stop');
+  await expect(page.locator('.board-message-gloss .gloss-say')).toBeVisible();
+  await expect(page.locator('.board-message-gloss .gloss-ipa')).toHaveCount(0);
   await expect(page.locator('.board-turn')).toHaveCount(1);
   await expect(page.locator('.board-speak')).toHaveCount(1);
 
@@ -763,7 +766,6 @@ test('what the message screen carries is the reader’s choice, and it sticks', 
   await expect(dialog).toBeVisible();
   const option = (/** @type {string} */ text) =>
     dialog.locator('.display-option', { hasText: text }).locator('input');
-  await option('own letters').check();
   await option('IPA').check();
   await option('sideways').uncheck();
   await option('half-speed').uncheck();
@@ -840,14 +842,11 @@ test('the header says what is loaded, and is also how you change it', async ({ p
   await expect(page.locator('#board-title')).toHaveText('Notfall');
 });
 
-test('the same sentence can be said again at half speed', async ({ page }) => {
-  // A stranger who did not catch a synthesised sentence needs it slower, not louder.
-  // The engine has had a `slow` rate since the keypad went in and nothing reached it.
-  //
-  // Stubbing the utterance as well as the voice list is what makes this assertable:
-  // `speak` sets `utterance.voice` to the chosen voice, and assigning a plain object
-  // to a real `SpeechSynthesisUtterance` throws -- which is why the test above only
-  // ever checked the labels and never pressed the button.
+test('the speed beside Speak is a setting on Speak, not a second Speak', async ({ page }) => {
+  // It began as a `0.5×` button that spoke by itself. A stranger who did not catch a
+  // sentence needs it slower; a fluent one may want it at pace; neither wants two
+  // buttons that both talk. So the control shows the multiplier Speak will use, opens
+  // the list of others, and never speaks -- and the choice is a setting, so it holds.
   await page.addInitScript(() => {
     const voice = { name: 'Test', lang: 'zh-CN', localService: true, default: true, voiceURI: 'test' };
     Object.defineProperty(speechSynthesis, 'getVoices', { value: () => [voice] });
@@ -866,24 +865,33 @@ test('the same sentence can be said again at half speed', async ({ page }) => {
   await expect(page.locator('.board-cell').first()).toBeVisible();
   await page.locator('[data-button="stop"]').click();
 
-  const slow = page.locator('.board-slow');
-  // A numeral needs no catalogue; the name it is announced by does.
-  await expect(slow).toHaveText('0.5×');
-  await expect(slow).toHaveAttribute('aria-label', /half speed/i);
-  // Beside Speak and smaller than it: the same act, second time around.
+  const rate = page.locator('.board-rate');
+  await expect(rate).toHaveText('1×');
+  await expect(rate).toHaveAttribute('aria-label', /speed/i);
+  // Beside Speak and smaller than it: a setting on the act, not a second act.
   const speakBox = await page.locator('.board-speak').boundingBox();
-  const slowBox = await slow.boundingBox();
-  expect(slowBox.x).toBeGreaterThanOrEqual(speakBox.x + speakBox.width - 2);
-  expect(slowBox.width).toBeLessThan(speakBox.width);
+  const rateBox = await rate.boundingBox();
+  expect(rateBox.x).toBeGreaterThanOrEqual(speakBox.x + speakBox.width - 2);
+  expect(rateBox.width).toBeLessThan(speakBox.width);
 
+  // Opening it speaks nothing; it offers the four speeds.
+  await rate.click();
+  const menu = page.locator('dialog.board-menu-panel');
+  await expect(menu.locator('button')).toHaveText(['0.25×', '0.5×', '1×', '2×']);
+  await menu.locator('button', { hasText: '0.5×' }).click();
+  await expect(page.locator('.board-rate')).toHaveText('0.5×');
+  expect(await page.evaluate(() => globalThis.__spoken.length)).toBe(0);
+
+  // Speak now reads at that speed, and the same sentence.
   await page.locator('.board-speak').click();
-  await slow.click();
-  await expect.poll(() => page.evaluate(() => globalThis.__spoken.length)).toBe(2);
-  const said = await page.evaluate(() => globalThis.__spoken);
-  expect(said.map((s) => s.rate)).toEqual([1, 0.5]);
-  // The same sentence both times -- slower, not different.
-  expect(said[0].text).toBe(said[1].text);
-  await expect(page.locator('.board-speech-trouble')).toHaveText('');
+  await expect.poll(() => page.evaluate(() => globalThis.__spoken.length)).toBe(1);
+  expect(await page.evaluate(() => globalThis.__spoken[0].rate)).toBe(0.5);
+
+  // A setting, so it survives the page going away.
+  await page.reload();
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('[data-button="stop"]').click();
+  await expect(page.locator('.board-rate')).toHaveText('0.5×');
 });
 
 test('Speak is the owner’s control and Reply is the listener’s', async ({ page }) => {
@@ -1383,6 +1391,46 @@ test('personal data can be carried off the device, and deleted from it', async (
 
 // --- what the screen can actually hold (I) ------------------------------------
 
+test('end punctuation hangs after the last character and weighs nothing in the centring', async ({ page }) => {
+  // Lines are centred on their words. A full stop or a question mark is not a word:
+  // counted, it shifts the last line half a glyph off the lines above it, which the
+  // eye reads as an error before it reads the sentence. So the trailing marks sit in
+  // a zero-width box after the last character -- centred as if absent, drawn where
+  // they fell -- and the fitter sizes the sentence knowing they are there, or a
+  // full-width `！` (a whole em) leaves the screen, which it did.
+  await page.setViewportSize({ width: 390, height: 844 });
+  for (const [target, button, mark] of /** @type {[string,string,string][]} */ ([
+    ['zh-Hans', 'help', '！'], ['de', 'stop', '.'],
+  ])) {
+    const board = target === 'zh-Hans' ? 'emergency' : 'spa';
+    await page.goto(`/conversation.html?target=${target}&source=en&board=${board}`);
+    await expect(page.locator('.board-cell').first()).toBeVisible();
+    await page.locator(`[data-button="${button}"]`).click();
+    const big = page.locator('.board-message-text');
+    const got = await big.evaluate((el, want) => {
+      const hang = /** @type {HTMLElement} */ (el.querySelector('.board-message-punct'));
+      if (!hang || !hang.textContent?.endsWith(want)) return { hang: hang?.textContent ?? null };
+      const body = document.createRange(); body.selectNodeContents(el); body.setEndBefore(hang);
+      const ink = document.createRange(); ink.selectNodeContents(hang);
+      const b = body.getBoundingClientRect(); const m = ink.getBoundingClientRect();
+      const box = /** @type {HTMLElement} */ (el.closest('.board-message')).getBoundingClientRect();
+      return {
+        hang: hang.textContent,
+        // The body is centred in its box without the mark...
+        offCentre: Math.round((b.left - box.left) - (box.right - b.right)),
+        // ...the mark starts where the body ends...
+        gapToMark: Math.round(m.left - b.right),
+        // ...and nothing leaves the screen.
+        onScreen: m.right <= innerWidth && m.left >= 0,
+      };
+    }, mark);
+    expect(got.hang, `${target}: the mark is hung`).toBe(mark);
+    expect(Math.abs(got.offCentre ?? 99), `${target}: body centred without the mark`).toBeLessThanOrEqual(2);
+    expect(Math.abs(got.gapToMark ?? 99), `${target}: mark sits after the last character`).toBeLessThanOrEqual(2);
+    expect(got.onScreen, `${target}: mark on screen`).toBe(true);
+  }
+});
+
 test('no message is drawn wider than the screen it is on', async ({ page }) => {
   // **Reported as "the text pushes flush against the white outline". It was not
   // flush, it was off the edge**: `Извините` was drawn 810px wide in a 368px box and
@@ -1501,6 +1549,9 @@ test('characters in a square script line up, and the punctuation sits outside th
   const lines = () => page.locator('.board-message-text').evaluate((el) => {
     const range = document.createRange();
     range.selectNodeContents(el);
+    // The hanging mark is what sits outside the column, so it is not one of the lines.
+    const hang = el.querySelector('.board-message-punct');
+    if (hang) range.setEndBefore(hang);
     return {
       columns: el.classList.contains('board-text-columns'),
       lefts: [...range.getClientRects()].filter((r) => r.height > 0)

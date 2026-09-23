@@ -577,13 +577,12 @@
 }
 .board-control:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-/* **Half speed is a satellite of Speak, not a third control.** It does the same
-   thing Speak does and is only reached after Speak has already been tried and
-   missed, so it is narrower and set in the smaller size -- enough to hit with a
+/* **The speed is a satellite of Speak, not a third control.** It changes how Speak
+   reads and does nothing on its own, so it is narrower and set in the smaller size -- enough to hit with a
    thumb, not enough to compete for the glance. `tabular-nums` because the face is a
    number and a proportional 0 next to a 5 wobbles. The reduced inline padding is
    what keeps the row to three controls' width on a 360px phone. */
-.board-slow {
+.board-rate {
   padding: 0 var(--space-2);
   font-size: var(--fs-0);
   font-variant-numeric: tabular-nums;
@@ -612,11 +611,19 @@
   color: var(--paper);
 }
 .board-reply:hover { background: var(--accent); filter: brightness(1.08); }
+/* **Reply is drawn like the message, and the owner's controls are not.** Every
+   other button on this row is the owner's -- Speak, the speed, the turn -- and they
+   stay outlined on the coloured stage. Reply is the one the stranger presses, so it
+   takes the stage's own colour, darkened, with the same bold white the sentence above
+   it is set in: the two read as one thing addressed to one person. */
 .board-stage[class*="board-role-"] .board-reply {
-  background: var(--paper);
-  color: var(--role);
+  background: color-mix(in oklab, var(--role) 68%, black);
+  color: #fff;
 }
-.board-stage[class*="board-role-"] .board-reply:hover { background: var(--paper); filter: brightness(0.95); }
+.board-stage[class*="board-role-"] .board-reply:hover {
+  background: color-mix(in oklab, var(--role) 58%, black);
+  filter: none;
+}
 /* The arrow points the way the reader is going, which on a right-to-left board is
    the other way. A glyph is not text and gets no bidi treatment. */
 .board-reply-arrow { font-size: 0.85em; line-height: 1; }
@@ -940,7 +947,9 @@
      what carries at a distance is the *amount* of moving light, and a streak a third
      of the screen long is still unmistakably one thing going round. */
   inline-size: 44vmin;
-  block-size: 1.35rem;
+  /* Three times what it was. At the distance a beacon is for, the streak's width is
+     most of what carries; a thin line vanishes into the bezel. */
+  block-size: 4rem;
   border-radius: 999px;
   /* A streak rather than a dot: the taper is what reads as motion even in a still
      photograph of the screen, and it is what a rotating beacon looks like. */
@@ -949,6 +958,13 @@
   rotate: calc(var(--beacon-rot, 0) * 1deg);
   transform-origin: 50% 50%;
   will-change: translate;
+}
+/* The second streak, half a lap behind, so there is always light on the far side of
+   the screen from the first: two points going round read as a rotating beacon where
+   one reads as a thing being chased. */
+.beacon-light-2 {
+  translate: calc(var(--beacon-x2, 0) * 1px) calc(var(--beacon-y2, 0) * 1px);
+  rotate: calc(var(--beacon-rot2, 0) * 1deg);
 }
 
 
@@ -1085,3 +1101,14 @@ dialog.board-menu-panel::backdrop { background: rgb(17 24 32 / 25%); }
   padding: 0.3rem 0;
 }
 .display-voice select { flex: 1 1 auto; min-inline-size: 0; }
+
+/* Trailing punctuation weighs nothing in the centring and sits where it fell: a
+   zero-width box whose glyph overflows visibly after the last character. `nowrap` so
+   a mark cannot be broken onto a line of its own. */
+.board-message-punct {
+  display: inline-block;
+  inline-size: 0;
+  overflow: visible;
+  white-space: nowrap;
+  vertical-align: baseline;
+}

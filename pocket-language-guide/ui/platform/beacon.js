@@ -49,6 +49,37 @@ export function stopBeacon() {
 }
 
 /**
+ * The phone's own lamp, where the platform will lend it.
+ *
+ * A screen is what the reader has; a torch is what carries. The web reaches the lamp
+ * only through the camera -- a rear-camera track whose capabilities include `torch`,
+ * then `applyConstraints` to switch it -- so this asks for the camera, which is a
+ * permission prompt the first time. In an SOS that is a fair ask. Where the platform
+ * has no lamp, refuses the camera or does not expose `torch` (iOS Safari today), it
+ * answers `null` and the screen flashes alone, exactly as before.
+ *
+ * Released with the beacon: a lamp left on after the screen has gone dark is the
+ * worst of both.
+ * @returns {Promise<{set:(on:boolean)=>void, release:()=>void}|null>}
+ */
+async function acquireTorch() {
+  const media = globalThis.navigator?.mediaDevices;
+  if (!media?.getUserMedia) return null;
+  try {
+    const stream = await media.getUserMedia({ video: { facingMode: 'environment' } });
+    const track = stream.getVideoTracks()[0];
+    const caps = /** @type {{torch?: boolean}} */ (track.getCapabilities?.() ?? {});
+    if (!caps.torch) { track.stop(); return null; }
+    return {
+      set: (on) => { track.applyConstraints(/** @type {any} */ ({ advanced: [{ torch: on }] })).catch(() => {}); },
+      release: () => track.stop(),
+    };
+  } catch {
+    return null;
+  }
+}
+
+/**
  * Run a beacon over the whole screen until it is dismissed.
  *
  * Takes over the display deliberately — it is not an indicator on a page, it is the
@@ -94,15 +125,20 @@ export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop }) {
   const light = document.createElement('span');
   light.className = 'beacon-light';
   light.setAttribute('aria-hidden', 'true');
-  if (mode === 'attention') root.append(light);
+  const light2 = document.createElement('span');
+  light2.className = 'beacon-light beacon-light-2';
+  light2.setAttribute('aria-hidden', 'true');
+  if (mode === 'attention') root.append(light, light2);
   document.body.append(root);
 
   /** @type {ReturnType<typeof setTimeout>|undefined} */ let timer;
   /** @type {number|undefined} */ let frame;
   let at = 0;
+  /** @type {{set:(on:boolean)=>void, release:()=>void}|null} */ let torch = null;
   const step = () => {
     const unit = SOS[at % SOS.length];
     root.classList.toggle('beacon-lit', unit > 0);
+    torch?.set(unit > 0);
     at += 1;
     timer = setTimeout(step, DOT * Math.max(1, unit));
   };
@@ -128,18 +164,23 @@ export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop }) {
     // Which side that lands on, and where along it. Written as four subtractions
     // rather than as a modulo table because the four sides are genuinely four cases
     // and the arithmetic is easier to check than to compress.
-    let x = 0;
-    let y = 0;
-    let rot = 0;
-    if (d < w) { x = d; y = 0; rot = 0; }
-    else if ((d -= w) < h) { x = w; y = d; rot = 90; }
-    else if ((d -= h) < w) { x = w - d; y = h; rot = 180; }
-    else { x = 0; y = h - (d - w); rot = 270; }
+    /** Where along the perimeter `d` px lands, and which way the streak points there. */
+    const place = (/** @type {number} */ d) => {
+      if (d < w) return { x: d, y: 0, rot: 0 };
+      if ((d -= w) < h) return { x: w, y: d, rot: 90 };
+      if ((d -= h) < w) return { x: w - d, y: h, rot: 180 };
+      return { x: 0, y: h - (d - w), rot: 270 };
+    };
     // The streak is placed by its own centre, so it straddles the edge it is on
-    // instead of hanging off the inside of it.
-    root.style.setProperty('--beacon-x', String(x - light.offsetWidth / 2));
-    root.style.setProperty('--beacon-y', String(y - light.offsetHeight / 2));
-    root.style.setProperty('--beacon-rot', String(rot));
+    // instead of hanging off the inside of it. The second is half a lap behind.
+    const one = place(d);
+    const two = place((d + (w + h)) % (2 * (w + h)));
+    root.style.setProperty('--beacon-x', String(one.x - light.offsetWidth / 2));
+    root.style.setProperty('--beacon-y', String(one.y - light.offsetHeight / 2));
+    root.style.setProperty('--beacon-rot', String(one.rot));
+    root.style.setProperty('--beacon-x2', String(two.x - light.offsetWidth / 2));
+    root.style.setProperty('--beacon-y2', String(two.y - light.offsetHeight / 2));
+    root.style.setProperty('--beacon-rot2', String(two.rot));
     frame = requestAnimationFrame(travel);
   };
 
@@ -148,10 +189,16 @@ export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop }) {
   // Ukrainian imperative would have broken across two lines at the same setting.
   fit?.(word, root);
 
-  if (mode === 'sos') step(); else travel();
+  if (mode === 'sos') {
+    step();
+    // The screen starts at once; the lamp joins when the camera answers.
+    acquireTorch().then((got) => { torch = got; });
+  } else travel();
 
   const stop = () => {
     clearTimeout(timer);
+    torch?.release();
+    torch = null;
     if (frame !== undefined) cancelAnimationFrame(frame);
     root.remove();
     onStop?.();

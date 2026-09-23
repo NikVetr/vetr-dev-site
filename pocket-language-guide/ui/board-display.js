@@ -9,8 +9,9 @@
 //
 // So they are settings. The three that were always there default to on, because
 // turning them on by default is what "always there" means and nobody should have to
-// go and find them. The two that are new default to off, because a line of IPA under
-// every phrase is a change to the screen a reader did not ask for.
+// go and find them. The pronunciation line is on too -- it is the reason most people
+// open the card -- and IPA is off, because a line of IPA under every phrase is a
+// change to the screen a reader did not ask for.
 //
 // Stored as one record rather than five keys: they are read together on every paint
 // and written together from one dialog, and five keys would be five chances for a
@@ -28,15 +29,19 @@ const KEY = 'plg.board-display';
  * @property {boolean} turn   the control that turns the sentence sideways
  * @property {boolean} roman  how to say the sentence, in the reader's own letters
  * @property {boolean} ipa    the same thing in IPA, for a reader who reads it
+ * @property {number} rate    how fast Speak reads, as a multiplier of the voice's own pace
  */
 
 /** @type {BoardDisplay} */
 export const DEFAULTS = {
-  owner: true, speak: true, turn: true, roman: false, ipa: false,
+  owner: true, speak: true, turn: true, roman: true, ipa: false, rate: 1,
 };
 
+/** The speeds Speak can be set to. Numerals, so no catalogue is involved. */
+export const RATES = [0.25, 0.5, 1, 2];
+
 /** The order they are offered in, which is the order they appear on screen. */
-export const OPTIONS = /** @type {{id:keyof BoardDisplay, labelKey:string}[]} */ ([
+export const OPTIONS = /** @type {{id:'owner'|'roman'|'ipa'|'speak'|'turn', labelKey:string}[]} */ ([
   { id: 'owner', labelKey: 'display.owner' },
   { id: 'roman', labelKey: 'display.roman' },
   { id: 'ipa', labelKey: 'display.ipa' },
@@ -59,6 +64,7 @@ export function readDisplay() {
     const held = JSON.parse(raw);
     const out = { ...DEFAULTS };
     for (const { id } of OPTIONS) if (typeof held?.[id] === 'boolean') out[id] = held[id];
+    if (RATES.includes(held?.rate)) out.rate = held.rate;
     return out;
   } catch {
     return { ...DEFAULTS };

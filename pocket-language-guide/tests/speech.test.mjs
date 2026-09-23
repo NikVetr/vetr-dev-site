@@ -333,14 +333,13 @@ test('what is spoken is the message, not the label or the gloss', () => {
     owner: { text: 'Another towel, please', lang: 'en', dir: 'ltr' },
     provenance: 'fixture', confidence: 3, custom: false,
   };
-  speech.speakPhrase(phrase, { rate: 'slow' }).catch(() => {});
+  speech.speakPhrase(phrase, { rate: 0.5 }).catch(() => {});
   const spoken = synth.spoken[0];
   assert.equal(spoken.text, phrase.listener.text);
   // The voice's own regional tag, not the code the board asked in.
   assert.equal(spoken.lang, 'zh-CN');
-  // Rate is named by the caller and numbered by the provider. Half, not the gentler
-  // 0.7 this used to be: the control that reaches it is labelled `0.5x`, and a
-  // button that names a number has to be that number.
+  // Rate is a number the caller chose from the speed control, handed straight to
+  // the voice: no name in between to drift from the numeral on the button.
   assert.equal(spoken.rate, 0.5);
 });
 

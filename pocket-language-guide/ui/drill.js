@@ -23,6 +23,7 @@ import { chipToggle } from './chips.js';
 import { fieldsFor, fieldLabels } from './format-panel.js';
 import { nextIndex } from './keys.js';
 import { t } from './i18n.js';
+import { speech } from './platform/speech.js';
 
 /** How many options a multiple-choice question offers, and the fewest it can be
  * asked with. Below two there is no question, so such a row is dropped. */
@@ -642,7 +643,7 @@ export function openDrill({ blocks, corpus, spec }) {
     /**
      * One question's own controls: its body, how to grade what is in them, and
      * where the keyboard should land.
-     * @typedef {{body:(Node|string)[], check:()=>void, focus:()=>HTMLElement|null}} Panel
+     * @typedef {{body:(Node|string)[], check:(revealed?:boolean)=>void, focus:()=>HTMLElement|null}} Panel
      */
 
     /**
@@ -730,19 +731,21 @@ export function openDrill({ blocks, corpus, spec }) {
         return {
           body: [promptOf(row), group, mark],
           focus: () => buttons[chosen < 0 ? 0 : chosen],
-          check: () => {
+          check: (revealed = false) => {
             const want = /** @type {string} */ (row.values[field]);
-            const right = chosen >= 0 && normalise(options[chosen]) === normalise(want);
+            const right = !revealed && chosen >= 0 && normalise(options[chosen]) === normalise(want);
             tally[right ? 'right' : 'wrong'] += 1;
             buttons.forEach((button, k) => {
               button.disabled = true;
               button.classList.toggle('right', normalise(options[k]) === normalise(want));
-              button.classList.toggle('wrong', k === chosen && !right);
+              button.classList.toggle('wrong', !revealed && k === chosen && !right);
             });
             mark.className = `drill-mark ${right ? 'right' : 'wrong'}`;
-            mark.textContent = right
-              ? t('drill.right')
-              : `${t('drill.wrong')} ${t('drill.expected', { answer: want })}`;
+            // Revealed is not a miss and is not told it is one: it counts as wrong
+            // in the tally, because the reader did not know it, and shows the answer.
+            mark.textContent = right ? t('drill.right')
+              : revealed ? t('drill.expected', { answer: want })
+                : `${t('drill.wrong')} ${t('drill.expected', { answer: want })}`;
           },
         };
       }
@@ -776,16 +779,17 @@ export function openDrill({ blocks, corpus, spec }) {
             ...body,
           ],
           focus: () => lines[0].pick,
-          check: () => {
+          check: (revealed = false) => {
             for (const line of lines) {
               const want = /** @type {string} */ (line.row.values[field]);
-              const right = normalise(line.pick.value) === normalise(want);
+              const right = !revealed && normalise(line.pick.value) === normalise(want);
               tally[right ? 'right' : 'wrong'] += 1;
+              if (revealed) line.pick.value = want;
               line.pick.disabled = true;
               line.mark.className = `drill-mark ${right ? 'right' : 'wrong'}`;
-              line.mark.textContent = right
-                ? t('drill.right')
-                : `${t('drill.wrong')} ${t('drill.expected', { answer: want })}`;
+              line.mark.textContent = right ? t('drill.right')
+                : revealed ? t('drill.expected', { answer: want })
+                  : `${t('drill.wrong')} ${t('drill.expected', { answer: want })}`;
             }
           },
         };
@@ -818,17 +822,22 @@ export function openDrill({ blocks, corpus, spec }) {
         return {
           body: [promptOf(row), ...body],
           focus: () => boxes[0].box,
-          check: () => {
+          check: (revealed = false) => {
             for (const entry of boxes) {
               const want = /** @type {string} */ (row.values[entry.field]);
-              const verdict = grade(entry.box.value, want);
+              const verdict = revealed ? 'wrong' : grade(entry.box.value, want);
               tally[verdict] += 1;
+              // Revealed, the answer goes into the box itself, where the reader
+              // would have typed it: the spelling is what they came to see.
+              if (revealed) entry.box.value = want;
               entry.box.readOnly = true;
               entry.mark.className = `drill-mark ${verdict}`;
               // The expected string prints on every outcome, not only on a miss: a
               // typo inside the budget is graded right, and the reader still has to
               // see the spelling they nearly had.
-              entry.mark.textContent = `${verdictText(verdict)} ${t('drill.expected', { answer: want })}`;
+              entry.mark.textContent = revealed
+                ? t('drill.expected', { answer: want })
+                : `${verdictText(verdict)} ${t('drill.expected', { answer: want })}`;
             }
           },
         };
@@ -850,6 +859,45 @@ export function openDrill({ blocks, corpus, spec }) {
         quit.addEventListener('click', done);
         let graded = false;
 
+        /** Grade the question, by answer or by giving up on it, and turn Check into Next. */
+        const settle = (/** @type {boolean} */ revealed) => {
+          graded = true;
+          panel.check(revealed);
+          // Gone rather than hidden: it is used once per question, and the house button
+          // rule sets a display that outranks `[hidden]`.
+          reveal.remove();
+          if (speak) speak.disabled = false;
+          action.textContent = at + 1 < questions.length ? t('drill.next') : t('drill.finish');
+          action.focus();
+        };
+
+        // **Not knowing is an answer.** A learner stuck on a row could only guess or
+        // close the quiz; either way they left without the one thing they wanted, the
+        // answer. This shows it, in place, and counts the question as missed -- which
+        // is what it was.
+        const reveal = el('button', { type: 'button', class: 'ghost', text: t('drill.reveal') });
+        reveal.addEventListener('click', () => { if (!graded) settle(true); });
+
+        // **Hearing it is part of learning it**, and the engine is the board's own.
+        // The target text of the row is what is read out -- in a matching question
+        // there are several rows, so no Speak there. Enabled at once when the target
+        // text is one of the columns shown, and only after grading when it is the
+        // column being asked for: a learner typing the word should not be able to
+        // have the answer read to them first.
+        const target = question.rows.length === 1 ? question.rows[0] : null;
+        const canSpeak = target && typeof target.values.script === 'string'
+          && speech.getCapabilities(spec.target).voices.length > 0;
+        const speak = canSpeak
+          ? /** @type {HTMLButtonElement} */ (el('button', { type: 'button', text: t('board.speak') }))
+          : null;
+        if (speak && target) {
+          speak.disabled = question.asks.includes('script');
+          speak.addEventListener('click', () => {
+            speech.speak({ text: /** @type {string} */ (target.values.script), locale: spec.target })
+              .catch(() => {});
+          });
+        }
+
         const form = /** @type {HTMLFormElement} */ (el('form', { class: 'drill-run' }, [
           el('div', { class: 'row drill-head' }, [
             el('span', {
@@ -860,17 +908,13 @@ export function openDrill({ blocks, corpus, spec }) {
             el('span', { class: 'small muted', text: t('drill.seedIs', { seed }) }),
           ]),
           ...panel.body,
-          el('div', { class: 'row', style: 'justify-content:flex-end' }, [quit, action]),
+          el('div', { class: 'row', style: 'justify-content:flex-end' }, [
+            ...(speak ? [speak] : []), reveal, quit, action,
+          ]),
         ]));
         form.addEventListener('submit', (event) => {
           event.preventDefault();
-          if (!graded) {
-            graded = true;
-            panel.check();
-            action.textContent = at + 1 < questions.length ? t('drill.next') : t('drill.finish');
-            action.focus();
-            return;
-          }
+          if (!graded) { settle(false); return; }
           at += 1;
           ask();
         });

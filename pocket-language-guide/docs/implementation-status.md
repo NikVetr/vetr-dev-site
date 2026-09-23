@@ -3894,3 +3894,85 @@ that reason. Every `stay-here` row in the set was left: verbal-noun-plus-"best" 
 each of these languages gives advice, and the note says an idiom is not a dodge. One
 Persian `stay-here` was the exception -- an infinitive-as-subject calque -- and became
 the ordinary *behtar ast* plus subjunctive.
+
+## Batch P — nine more notes from using it
+
+### The speed is a setting on Speak, not a second Speak
+
+The `0.5×` beside Speak spoke by itself, which made two buttons that both talk. It
+is now the multiplier Speak will use — `1×` by default, opening the list
+`0.25× 0.5× 1× 2×` — and it never speaks. The engine's rate became a plain number
+handed straight to the voice, so there is no name in between to drift from the
+numeral on the button. It is a setting, stored with the other display choices, so it
+holds across the page going away. Two agents' worth of `board.slow` translations
+became dead with it and were removed; `board.rate` replaces them and is English-only
+until the next wave.
+
+### End punctuation hangs, and the fitter had to learn three things about that
+
+Lines are centred on their words, and a final full stop or question mark is not a
+word: counted, it shifts the last line half a glyph off the lines above, which the
+eye reads as an error before it reads the sentence. The trailing marks now sit in a
+zero-width box after the last character — centred as if absent, drawn where they
+fell. Three consequences, each found by a test rather than foreseen:
+
+1. **The fitter could not see the mark.** A full-width `！` is a whole em of glyph
+   in a zero-wide box, so `救命！` was sized at 150px and the mark went 105px off a
+   390px phone. The mark is measured as ink and must land inside the text's box.
+2. **The wrong line.** The first check was `widest line + 2 × mark ≤ room`, and the
+   browser fills every wrapped line to the room — so the only size that satisfied it
+   was one where nothing wrapped, and an eight-character question came out at 30px.
+   The mark hangs off the *last* line; where it actually falls is what is measured.
+3. **Fitting is not monotone.** At 63px the eight characters wrap 4+4 and the full
+   last line pushes the mark off; at 95px they wrap 3+3+2 and the short last line
+   leaves it room; at 110px it is 2+2+2+2 and off again. The fitter stopped at the
+   first miss and left the question at 58px. While a mark hangs, the walk now runs
+   to the cap and keeps the largest size that fitted — 100px for that row, three
+   lines, mark inside. With nothing hanging the landscape is monotone and the early
+   stop stays, so the common case pays nothing.
+
+### Reply is drawn like the message; the owner's controls are not
+
+Every other button on the message row is the owner's — Speak, the speed, the turn —
+and stays outlined on the coloured stage. Reply is the one the stranger presses, so
+it now takes the stage's own colour, darkened, with the same bold white the sentence
+is set in: two things addressed to one person read as one thing.
+
+### The beacon: three times thicker, and a second streak half a lap behind
+
+At the distance a beacon is for, the streak's width is most of what carries. It is
+4rem where it was 1.35rem, and a second streak travels half a lap behind the first,
+so there is always light on the far side of the screen: two points going round read
+as a rotating beacon where one reads as a thing being chased. The perimeter placement
+became one function called twice rather than the four cases written out again.
+
+### SOS reaches for the lamp
+
+A screen is what the reader has; a torch is what carries. The web reaches the lamp
+only through the camera — a rear track whose capabilities include `torch`, then
+`applyConstraints` to switch it — so SOS now asks for the camera, which is a
+permission prompt the first time and a fair ask in an emergency. The screen starts
+flashing at once and the lamp joins when the camera answers; where the platform has
+no lamp, refuses, or does not expose `torch` (iOS Safari today) the screen flashes
+alone, exactly as before. Released with the beacon. **Not verifiable here** — the
+test browser has no camera — so this is the one change in the batch that waits on a
+phone.
+
+### The quiz can give up, and can be heard
+
+A learner stuck on a row could only guess or close the quiz, and either way left
+without the one thing they came for. "See answer" shows it where they would have
+typed it, says only what it is — a reveal is not "not quite" — and counts the
+question as missed, which is what it was; the button goes after one use. "Speak"
+reads the row's target text through the board's own engine: at once when that text
+is one of the columns shown, and only after grading when it is the column being asked
+for, or the button would read the answer to someone still typing it.
+
+### Smaller
+
+The pronunciation line is on by default — it is the reason most people open the
+card. The landing sentence is smaller and closer on a phone, which moved the
+language grid 35px up. And its wording is under discussion: the second clause of the
+one that shipped read as a solitary exercise rather than as something shown to a
+person, and a candidate that says so is in `en.json`, held back from the 51 other
+catalogues until the English is agreed.

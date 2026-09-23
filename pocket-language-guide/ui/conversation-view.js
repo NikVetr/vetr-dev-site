@@ -10,6 +10,7 @@
 // property of a reducer rather than something to hope the DOM remembers.
 
 import { t } from './i18n.js';
+import { openBoardMenu } from './board-menu.js';
 
 /** Below this, stop shrinking and let the text scroll instead. */
 const MIN_MESSAGE_PX = 28;
@@ -137,7 +138,41 @@ function widestLine(el) {
 function lineRects(el) {
   const range = document.createRange();
   range.selectNodeContents(el);
+  // The hanging punctuation is not part of any line: it weighs nothing in the
+  // centring and it must not register as a line of its own, which a zero-width box
+  // holding a whole em of glyph otherwise does.
+  const hang = el.querySelector(':scope > .board-message-punct');
+  if (hang) range.setEndBefore(hang);
   return [...range.getClientRects()].filter((rect) => rect.height > 0);
+}
+
+/**
+ * Whether the hanging end punctuation lands inside the text's own box.
+ *
+ * Measured as ink, like the lines: the span's box is zero wide by design, and a
+ * full-width `！` is a whole em of glyph outside it. The fitter has to know that,
+ * or it sizes the sentence as if the mark were not there and the mark goes off the
+ * screen -- which is what happened to `救命！` at 150px on a 390px phone.
+ *
+ * Geometry rather than arithmetic, and on both sides. The first version required
+ * `widest line + 2 * mark <= room`, and that is the wrong line: the mark hangs off
+ * the *last* one, while the browser fills every wrapped line to the room -- so the
+ * only size that could satisfy it was one where nothing wrapped, and an eight-character
+ * question came out at 30px on a single line. Where the mark actually fell is the
+ * question, so that is what is measured; the left edge is for a right-to-left text,
+ * whose end is on that side.
+ * @param {HTMLElement} el
+ */
+function hangFits(el) {
+  const hang = el.querySelector(':scope > .board-message-punct');
+  if (!hang) return true;
+  const range = document.createRange();
+  range.selectNodeContents(hang);
+  const ink = range.getBoundingClientRect();
+  const box = el.getBoundingClientRect();
+  const style = getComputedStyle(el);
+  return ink.right <= box.right - Number.parseFloat(style.paddingRight)
+    && ink.left >= box.left + Number.parseFloat(style.paddingLeft);
 }
 
 /** Scripts whose characters are all one width, so that columns can be aligned. */
@@ -377,11 +412,13 @@ function watchAnswers(list) {
  * @param {string} config.replyLabel         in the *listener's* language
  * @param {boolean} [config.incoming]        an answer coming back the other way
  * @param {import('../core/conversation.js').ColourRole} [config.colour]
- * @param {((rate:'normal'|'slow')=>void|Promise<unknown>)|null} [config.onSpeak]  null where no voice
+ * @param {(()=>void|Promise<unknown>)|null} [config.onSpeak]  null where no voice
  *   can say this. A rejection is reported rather than swallowed, so the promise is
  *   handed on rather than caught by the caller.
  * @param {string} [config.speakLabel]        in the *owner's* language
- * @param {string} [config.slowLabel]         the half-speed control's accessible name
+ * @param {number} [config.rate]              how fast Speak reads, shown on the control beside it
+ * @param {(rate:number)=>void} [config.onRate]  the reader picked another speed
+ * @param {string} [config.rateLabel]         the speed control's accessible name
  * @param {{owner:boolean, roman:boolean, ipa:boolean, turn?:boolean}} [config.show]  what the reader
  *   has asked the second line to carry; the controls are gated by the caller
  * @param {(reason:string)=>string} [config.speakError]  a speech failure's `reason`
@@ -389,8 +426,8 @@ function watchAnswers(list) {
  */
 export function renderMessage(stage, phrase,
   { onDismiss, onReply, replyLabel, incoming, colour, onSpeak, speakLabel = '',
-    slowLabel = '', speakError,
-    show = { owner: true, roman: false, ipa: false, turn: true } }) {
+    rate = 1, onRate, rateLabel = '', speakError,
+    show = { owner: true, roman: true, ipa: false, turn: true } }) {
   stage.replaceChildren();
   stage.hidden = false;
   stage.className = 'board-stage';
@@ -412,9 +449,25 @@ export function renderMessage(stage, phrase,
 
   const big = document.createElement('p');
   big.className = 'board-message-text';
-  big.textContent = phrase.listener.text;
   big.lang = phrase.listener.lang;
   big.dir = phrase.listener.dir;
+  // **The end punctuation hangs.** Lines are centred on their words, and a final
+  // full stop or question mark is not a word: counted, it shifts the last line half a
+  // glyph off the lines above it, which the eye reads as a mistake before it reads the
+  // sentence. So the trailing marks go in a zero-width box that overflows visibly --
+  // they sit exactly where they would have, after the last character, and weigh
+  // nothing in the centring. Zero width rather than an absolute position because a
+  // positioned inline still counts towards the box's scrollable overflow, and the
+  // fitter reads that.
+  const trailing = /[\p{P}\p{S}]+$/u.exec(phrase.listener.text);
+  const body = trailing ? phrase.listener.text.slice(0, -trailing[0].length) : phrase.listener.text;
+  big.append(document.createTextNode(body));
+  if (trailing) {
+    const punct = document.createElement('span');
+    punct.className = 'board-message-punct';
+    punct.textContent = trailing[0];
+    big.append(punct);
+  }
 
   // The owner's own wording, small and secondary: it is a confirmation that the
   // right button was pressed, not part of what is being said to anyone. Its own
@@ -491,33 +544,35 @@ export function renderMessage(stage, phrase,
   trouble.setAttribute('role', 'status');
 
   if (onSpeak) {
-    /** Both audio controls do the same thing at different speeds. @param {'normal'|'slow'} rate */
-    const say = (rate) => {
-      trouble.textContent = '';
-      Promise.resolve(onSpeak(rate)).catch((err) => {
-        trouble.textContent = speakError?.(err?.reason ?? 'synthesis-failed') ?? '';
-      });
-    };
     const speakButton = document.createElement('button');
     speakButton.type = 'button';
     speakButton.className = 'board-control board-speak';
     speakButton.textContent = speakLabel;
-    speakButton.addEventListener('click', () => say('normal'));
+    speakButton.addEventListener('click', () => {
+      trouble.textContent = '';
+      Promise.resolve(onSpeak()).catch((err) => {
+        trouble.textContent = speakError?.(err?.reason ?? 'synthesis-failed') ?? '';
+      });
+    });
     controls.append(speakButton);
 
-    // **Half speed, next to full speed.** A stranger who did not catch a synthesised
-    // sentence the first time needs it slower, not louder, and asking the owner to
-    // find a setting for that mid-conversation is asking them to look away. Its face
-    // is a numeral, which needs no translation and reads the same in every script;
-    // the accessible name is the sentence, and comes from the owner's catalogue
-    // because the owner is the one who presses it.
-    const slowButton = document.createElement('button');
-    slowButton.type = 'button';
-    slowButton.className = 'board-control board-slow';
-    slowButton.textContent = '0.5\u00d7';
-    if (slowLabel) slowButton.setAttribute('aria-label', slowLabel);
-    slowButton.addEventListener('click', () => say('slow'));
-    controls.append(slowButton);
+    // **The speed is a setting on Speak, not a second Speak.** A stranger who did not
+    // catch a synthesised sentence needs it slower, not louder; a fluent one may want
+    // it at pace. So the control beside Speak shows the multiplier Speak will use and
+    // opens the list of others -- it never speaks by itself. Its face is a numeral,
+    // which needs no translation and reads the same in every script; the accessible
+    // name comes from the owner's catalogue, because the owner is the one pressing it.
+    if (onRate) {
+      const rateButton = document.createElement('button');
+      rateButton.type = 'button';
+      rateButton.className = 'board-control board-rate';
+      rateButton.textContent = `${rate}\u00d7`;
+      if (rateLabel) rateButton.setAttribute('aria-label', rateLabel);
+      rateButton.setAttribute('aria-haspopup', 'menu');
+      rateButton.addEventListener('click', () => openBoardMenu(rateButton,
+        [0.25, 0.5, 1, 2].map((r) => ({ label: `${r}\u00d7`, run: () => onRate(r) }))));
+      controls.append(rateButton);
+    }
   }
 
   if (onReply) {
@@ -774,8 +829,20 @@ export function fitMessage(text, box) {
       // Height from the box that clips, width from the ink -- the same asymmetry
       // `widestLine` exists for, and for the same reason: no box metric on a
       // container-width element can report the word hanging out of it.
-      const ok = box.scrollHeight <= box.clientHeight
-        && widestLine(text) <= lineRoom(text);
+      // Width is measured on unconstrained lines, so the block is reset first --
+      // `alignColumns` does that itself -- and the mark is measured *after* it, on
+      // the layout the text will actually take. A square script's last line starts
+      // at the block's left edge, not centred, which is further left than a centred
+      // line and leaves the mark more room: judged against centred lines, an
+      // eight-character question ending in `？` was refused every size above 58px
+      // that the column layout would have carried at 120.
+      text.style.inlineSize = '';
+      text.classList.remove('board-text-columns');
+      let ok = box.scrollHeight <= box.clientHeight && widestLine(text) <= lineRoom(text);
+      if (ok) {
+        alignColumns(text);
+        ok = hangFits(text);
+      }
       text.style.overflowWrap = held;
       return ok;
     };
@@ -789,13 +856,22 @@ export function fitMessage(text, box) {
     // own value the answer is a handful of steps away, and a loop that cannot run
     // more than thirty times cannot become a frame-rate problem on a slow phone.
     if (fits()) {
+      // **With a mark hanging, fitting is not monotone in size.** Whether the mark
+      // stays on screen depends on how the lines happen to wrap: eight characters at
+      // 63px wrap 4+4 and the full last line pushes the mark off, at 95px they wrap
+      // 3+3+2 and the short last line leaves it room, at 110px it is 2+2+2+2 and off
+      // again. Stopping at the first miss left that question at 58px. So while a mark
+      // hangs the walk runs to the cap and keeps the largest size that fitted; with
+      // nothing hanging the landscape is monotone and the first miss is the answer.
+      const hanging = text.querySelector(':scope > .board-message-punct') !== null;
+      let best = size;
       for (let i = 0; i < 30 && size < MAX_MESSAGE_PX; i += 1) {
-        const bigger = Math.min(MAX_MESSAGE_PX, size * 1.08);
-        text.style.fontSize = `${bigger}px`;
-        // One step too far, so step back and keep the last size that fitted.
-        if (!fits()) { text.style.fontSize = `${size}px`; break; }
-        size = bigger;
+        size = Math.min(MAX_MESSAGE_PX, size * 1.08);
+        text.style.fontSize = `${size}px`;
+        if (fits()) { best = size; continue; }
+        if (!hanging) break;
       }
+      text.style.fontSize = `${best}px`;
     } else {
       for (let i = 0; i < 30 && size > MIN_MESSAGE_PX; i += 1) {
         size = Math.max(MIN_MESSAGE_PX, size * 0.92);

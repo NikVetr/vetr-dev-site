@@ -34,7 +34,7 @@ import {
 import { openBoardEditor } from './board-editor.js';
 import { openBoardMenu } from './board-menu.js';
 import {
-  readDisplay, displaySection, readVoice, voiceSection,
+  readDisplay, writeDisplay, displaySection, readVoice, voiceSection,
 } from './board-display.js';
 import { speech } from './platform/speech.js';
 import { keepAwake } from './platform/wake.js';
@@ -621,13 +621,13 @@ async function main() {
         // tried, so an engine that then refuses has to say so instead of leaving the
         // owner tapping a dead control while somebody waits.
         onSpeak: canSpeak && display.speak
-          ? (/** @type {'normal'|'slow'} */ rate) => speech.speakPhrase(phrase, {
-            rate, voiceId: chosenVoice || undefined,
-          })
+          ? () => speech.speakPhrase(phrase, { rate: display.rate, voiceId: chosenVoice || undefined })
           : null,
+        rate: display.rate,
+        onRate: (r) => { display = { ...display, rate: r }; writeDisplay(display); paint(); },
         show: display,
         speakLabel: t('board.speak'),
-        slowLabel: t('board.slow'),
+        rateLabel: t('board.rate'),
         speakError: (/** @type {string} */ reason) => {
           const said = t(`speech.${reason}`);
           // An unfamiliar reason is still a failure worth reporting; a bare key is

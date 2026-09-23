@@ -159,6 +159,85 @@ test.describe('quiz mode', () => {
     await expect(again.locator('.drill-mark')).toContainText(want);
   });
 
+  test('not knowing is an answer: See answer fills it in and counts the miss', async ({ page }) => {
+    // A learner stuck on a row could only guess or close the quiz, and either way
+    // left without the one thing they came for. Revealing shows the answer where they
+    // would have typed it, says only what it is -- a reveal is not "not quite" -- and
+    // counts the question as missed, which is what it was.
+    await page.goto(STUDIO);
+    const drill = await openDrill(page, 'reveal-1');
+    await drill.locator('select#drill-kind').selectOption('blank');
+    const asked = drill.locator('fieldset').nth(1);
+    await asked.locator('input[value="roman"]').check();
+    await asked.locator('input[value="script"]').uncheck();
+    await drill.getByRole('button', { name: 'Start' }).click();
+
+    const box = drill.locator('.drill-answer');
+    await expect(box).toHaveValue('');
+    const reveal = drill.getByRole('button', { name: 'See answer' });
+    await reveal.click();
+    await expect(box).not.toHaveValue('');
+    await expect(box).toHaveJSProperty('readOnly', true);
+    const mark = await drill.locator('.drill-mark').innerText();
+    expect(mark).toMatch(/^Answer:/);
+    expect(mark).not.toMatch(/Not quite/);
+    // Used once per question: it goes, and Check has become Next.
+    await expect(reveal).toBeHidden();
+    await expect(drill.getByRole('button', { name: /^(Next|Finish)$/ })).toBeVisible();
+  });
+
+  test('Speak reads the target text, and not before the reader has answered for it', async ({ page }) => {
+    // Hearing it is part of learning it. The engine is the board's own, stubbed here
+    // because this machine has no voices; what is asserted is *what* is read and
+    // *when* it may be. Shown as a prompt, the target text can be heard at once;
+    // asked for, it is held back until the question is graded, or the button would
+    // read the answer out to someone still typing it.
+    await page.addInitScript(() => {
+      const voice = { name: 'Test', lang: 'zh-CN', localService: true, default: true, voiceURI: 'test' };
+      Object.defineProperty(speechSynthesis, 'getVoices', { value: () => [voice] });
+      /** @type {{text:string, lang:string}[]} */ (globalThis).__spoken = [];
+      class FakeUtterance { constructor(/** @type {string} */ text) { this.text = text; } }
+      Object.defineProperty(window, 'SpeechSynthesisUtterance', { value: FakeUtterance, configurable: true });
+      Object.defineProperty(speechSynthesis, 'speak', {
+        configurable: true,
+        value: (/** @type {any} */ u) => {
+          globalThis.__spoken.push({ text: u.text, lang: u.lang });
+          setTimeout(() => u.onend && u.onend(), 5);
+        },
+      });
+    });
+    await page.goto(STUDIO);
+    // Target text shown, gloss asked: Speak is live from the start.
+    const drill = await openDrill(page, 'speak-1');
+    await drill.locator('select#drill-kind').selectOption('choice');
+    const shown = drill.locator('fieldset').nth(0);
+    const asked = drill.locator('fieldset').nth(1);
+    await shown.locator('input[value="script"]').check();
+    await asked.locator('input[value="gloss"]').check();
+    await asked.locator('input[value="script"]').uncheck().catch(() => {});
+    await drill.getByRole('button', { name: 'Start' }).click();
+    const speak = drill.getByRole('button', { name: 'Speak' });
+    await expect(speak).toBeEnabled();
+    await speak.click();
+    await expect.poll(() => page.evaluate(() => globalThis.__spoken.length)).toBe(1);
+    const said = await page.evaluate(() => globalThis.__spoken[0]);
+    expect(said.text).toMatch(/\p{Script=Han}/u);
+    expect(said.lang).toBe('zh-CN');
+
+    // Target text asked: Speak waits for the grade.
+    await drill.getByRole('button', { name: /Close/ }).click();
+    const again = await openDrill(page, 'speak-2');
+    await again.locator('select#drill-kind').selectOption('blank');
+    const asked2 = again.locator('fieldset').nth(1);
+    await asked2.locator('input[value="script"]').check();
+    await asked2.locator('input[value="roman"]').uncheck().catch(() => {});
+    await again.getByRole('button', { name: 'Start' }).click();
+    const speak2 = again.getByRole('button', { name: 'Speak' });
+    await expect(speak2).toBeDisabled();
+    await page.keyboard.press('Enter');
+    await expect(speak2).toBeEnabled();
+  });
+
   test('the same seed asks the same questions', async ({ page }) => {
     await page.goto(STUDIO);
     /** The four options of question one, which is the whole shuffled state in one line. */

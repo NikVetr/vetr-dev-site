@@ -51,7 +51,7 @@
  * @property {SpeechReason} [reason] present exactly when nothing would be spoken
  */
 
-/** @typedef {'normal'|'slow'} Rate */
+/** @typedef {number} Rate  a multiplier of the voice's own pace; 1 is as it speaks */
 
 /**
  * Rate as a name, not a number.
@@ -63,9 +63,6 @@
  * the native bridge's scale will not be this one.
  * @type {Record<Rate, number>}
  */
-// 0.5 rather than a gentler 0.7, because the control that reaches it is labelled
-// `0.5x` and a button that names a number has to be that number.
-const RATES = { normal: 1, slow: 0.5 };
 
 /** Local first, then unknown, and a remote service only when it is asked for by id. */
 const OFFLINE_RANK = { local: 0, unknown: 1, remote: 2 };
@@ -326,7 +323,7 @@ export function createSpeech(
    * @param {Rate} [request.rate]
    * @returns {Promise<'completed'|'cancelled'>}
    */
-  function speak({ text, locale, voiceId, rate = 'normal' }) {
+  function speak({ text, locale, voiceId, rate = 1 }) {
     // **Cancel first, always.** `speechSynthesis` is a queue: speaking without
     // cancelling means the gentler request the reader just replaced plays through
     // before the stop they replaced it with, which on a massage table is the exact
@@ -360,7 +357,7 @@ export function createSpeech(
       // hint about the text, and disagreeing with the voice they were also handed
       // has been known to cost the voice.
       utterance.lang = chosen.lang || spoken.locale;
-      utterance.rate = RATES[rate];
+      utterance.rate = rate;
       utterance.onend = () => {
         if (mine !== token) { resolve('cancelled'); return; }
         cancelPending = null;
