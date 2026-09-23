@@ -99,7 +99,7 @@ children.car-seat,Çocuk oto koltuğu gerekiyor.,,tʃodʒˈʊk otˈɔ kɔɫtˈʊ
 children.stroller,bebek arabası,,bebˈɛk aɾabasˈɯ,,2,tr-agent-v1;ipa=espeak
 children.playground,Oyun alanı var mı?,,ojˈʊn aɫanˈɯ vˈar mɯ,,2,tr-agent-v1;ipa=espeak
 social-basics.politeness-particles,"Tay dilinde nezaket: cümlenin sonuna erkekseniz khrap, kadınsanız kha ekleyin. Kadın soru sorarken kha sözcüğünü yükselen tonla söyler. Buradaki satırlarda bu sözcük yok, kendiniz ekleyin.",,,,2,tr-notes-v1
-board-answers.can-you-walk,Yürümek mümkün mü?,,jyɾymˈɛk mømkˈøn mø,,2,tr-agent-v1;ipa=espeak
+board-answers.can-you-walk,Yürüyebiliyor musunuz?,,jyɾyjebilˈijɔr mˈusunʊz,,2,tr-agent-v1;board-answers-v3;ipa=espeak
 board-answers.card-or-cash,Kart mı nakit mi?,,kˈart mɯ nakˈɪt mɪ,,2,tr-agent-v1;ipa=espeak
 board-answers.help-is-coming,Yardım geliyor.,,jardˈɯm ɟelˈijɔr,,2,tr-agent-v1;ipa=espeak
 board-answers.how-many,Kaç tane?,,kˈatʃ tanˈɛ,,2,tr-agent-v1;ipa=espeak

@@ -36,12 +36,12 @@ export const DEFAULTS = {
 };
 
 /** The order they are offered in, which is the order they appear on screen. */
-export const OPTIONS = /** @type {{id:keyof BoardDisplay, key:string}[]} */ ([
-  { id: 'owner', key: 'display.owner' },
-  { id: 'roman', key: 'display.roman' },
-  { id: 'ipa', key: 'display.ipa' },
-  { id: 'speak', key: 'display.speak' },
-  { id: 'turn', key: 'display.turn' },
+export const OPTIONS = /** @type {{id:keyof BoardDisplay, labelKey:string}[]} */ ([
+  { id: 'owner', labelKey: 'display.owner' },
+  { id: 'roman', labelKey: 'display.roman' },
+  { id: 'ipa', labelKey: 'display.ipa' },
+  { id: 'speak', labelKey: 'display.speak' },
+  { id: 'turn', labelKey: 'display.turn' },
 ]);
 
 /**
@@ -106,7 +106,7 @@ export function displaySection(current, onChange) {
       onChange({ ...held });
     });
     const text = document.createElement('span');
-    text.textContent = t(option.key);
+    text.textContent = t(option.labelKey);
     row.append(input, text);
     box.append(row);
   }

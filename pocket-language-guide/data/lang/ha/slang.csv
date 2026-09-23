@@ -1,11 +1,11 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 slang.thats-good,Da kyau,,da kjau,with goodness,2,ha-agent-v1;ipa=ha-g2p
 slang.thats-great,Madalla!,,madalla,a Hausa exclamation of hearty approval,2,ha-agent-v1;ipa=ha-g2p
-slang.i-love-it,Ina son shi kwarai,,ina son ʃi kwarai,,2,ha-agent-v1;ipa=ha-g2p
+slang.i-love-it,Ina son shi ƙwarai,,ina son ʃi kʼwarai,,2,ha-agent-v1;ipa=ha-g2p
 slang.thats-bad,Bai yi kyau ba,,bai ji kjau ba,it did not turn out well,2,ha-agent-v1;ipa=ha-g2p
-slang.delicious,Dadi!,,dadi,tasty! -- a one-word exclamation,2,ha-agent-v1;ipa=ha-g2p
+slang.delicious,Daɗi!,,daɗi,tasty! -- a one-word exclamation,2,ha-agent-v1;ipa=ha-g2p
 slang.thats-pricey,"Ai, tsada ce!",,"ai, tsʼada tʃe","casual exclamatory register, distinct from the neutral shopping.that-is-too-expensive",2,ha-agent-v1;ipa=ha-g2p
-slang.exactly,Hakika!,,hakika,indeed/certainly,2,ha-agent-v1;ipa=ha-g2p
+slang.exactly,Haƙiƙa!,,hakʼikʼa,indeed/certainly,2,ha-agent-v1;ipa=ha-g2p
 slang.no-worries,Babu damuwa,,babu damuwa,,2,ha-agent-v1;ipa=ha-g2p
 slang.youre-welcome,Kowane lokaci!,,kowane lokatʃi,any time!,2,ha-agent-v1;ipa=ha-g2p
 slang.seriously,Kai!,,kai,a common interjection of surprise/disbelief,2,ha-agent-v1;ipa=ha-g2p

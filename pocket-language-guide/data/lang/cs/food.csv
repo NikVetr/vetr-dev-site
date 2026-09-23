@@ -7,9 +7,9 @@ dietary-needs.no-peanuts,Bez arašídů,,bˈez ˈaraʃˌiːduː,,2,cs-agent-v1;i
 dietary-needs.no-nuts,Bez ořechů,,bˈezor̝ˌexuː,,2,cs-agent-v1;ipa=espeak
 dietary-needs.no-seafood,Bez mořských plodů,,bˈezmor̝skiːx plˈoduː,,2,cs-agent-v1;ipa=espeak
 dietary-needs.i-am-vegetarian,Jsem vegetarián,,jsem vˈeɡetˌariaːn,,2,cs-agent-v1;ipa=espeak
-dietary-needs.i-am-vegan,Jsem vegan / veganka,,jsem vˈeɡan / vˈeɡaŋka,,2,cs-agent-v1;ipa=espeak
+dietary-needs.i-am-vegan,Jsem vegan,,jsem vˈeɡan,,2,cs-agent-v1;ipa=espeak
 dietary-needs.i-do-not-eat,Nejím {},,nˈejiːm {},,2,cs-agent-v1;ipa=espeak
-dietary-needs.i-am-allergic-to,Jsem alergický / alergická na {},,jsem ˈalerɡˌitskiː / ˈalerɡˌitskaː na {},alergický (male speaker) / alergická (female speaker),2,cs-agent-v1;ipa=espeak
+dietary-needs.i-am-allergic-to,Jsem alergický na {},,jsem ˈalerɡˌitskiː na {},,2,cs-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-fish-stock,Obsahuje to rybí vývar?,,ˈopsahˌuje tˈo rˈibiː vˈiːvar,,2,cs-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-stock,Obsahuje to vepřový vývar?,,ˈopsahˌuje tˈo vˈepr̝oviː vˈiːvar,,2,cs-agent-v1;ipa=espeak
 dietary-needs.i-have-a-severe-allergy-to,Mám těžkou alergii na {},,maːm cˈeʃkoʊ ˈalerɡˌiji na {},,2,cs-agent-v1;ipa=espeak

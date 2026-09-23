@@ -7,7 +7,7 @@ introductions.this-is-my-friend,Toto je můj kamarád / moje kamarádka,,tˈoto 
 introductions.i-am-from,Jsem z {},,jsem zˈet {},"the place name takes the genitive case after z -- 'z Ameriky', 'z Německa' -- which a bare slot cannot inflect for every filler; this is a known limitation shared with the other case-marking Slavic packs",2,cs-agent-v1;ipa=espeak
 introductions.where-are-you-from,Odkud jste?,,ˈotkud jste,,2,cs-agent-v1;ipa=espeak
 introductions.how-are-you,Jak se máte?,,jˈak se mˈaːte,,2,cs-agent-v1;ipa=espeak
-introductions.i-am-a-tourist,Jsem turista / turistka,,jsem tˈurista / tˈuristka,,2,cs-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,Jsem turista,,jsem tˈurista,,2,cs-agent-v1;ipa=espeak
 introductions.this-is-my-husband-wife,Toto je můj manžel / moje manželka,,tˈoto je mˈuːj mˈanʒel / mˈoje mˈanʒelka,,2,cs-agent-v1;ipa=espeak
 introductions.this-is-my-daughter-son,Toto je moje dcera / můj syn,,tˈoto je mˈoje ttsˈera / mˈuːj sˈin,,2,cs-agent-v1;ipa=espeak
-introductions.i-am-traveling-alone,Cestuji sám / sama,,tsˈestuji sˈaːm / sˈama,sám (male speaker) / sama (female speaker),2,cs-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,Cestuji sám,,tsˈestuji sˈaːm,,2,cs-agent-v1;ipa=espeak

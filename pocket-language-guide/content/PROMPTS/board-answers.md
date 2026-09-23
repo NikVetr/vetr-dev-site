@@ -29,10 +29,14 @@ sentence the way a phrasebook would:
    never asks a stranger anything about themselves, so a reply that has to know their
    gender cannot be offered at all.
 
-   The English has already been steered for this. "I will show **the way**" rather
-   than "show you"; "One moment, please" rather than the imperative "wait"; "What is
-   the name?" rather than "your name"; "Is walking possible?" rather than "Can you
-   walk?"; "Staying here is best" rather than "Stay here".
+   The English has already been steered for this where English itself has the
+   hazard. "I will show **the way**" rather than "show you"; "One moment, please"
+   rather than the imperative "wait"; "What is the name?" rather than "your name".
+   Where English has no hazard the English is direct and the dodge is a per-language
+   decision: `can-you-walk` is "Can you walk?" in English, Turkish, Georgian and
+   Japanese and the impersonal "Is walking possible?" only where a second person
+   aimed at the traveller carries their gender -- the concept note in
+   `data/concepts/social.csv` lists that set by property, not by name.
 
    **That steering records a hazard; it is not a template.** A concept in this corpus
    is a language-independent *meaning*, and each language renders it the way that
@@ -60,7 +64,7 @@ sentence the way a phrasebook would:
 
 | concept_id (after `board-answers.`) | English | Mandarin |
 |---|---|---|
-| `can-you-walk` | Is walking possible? | 您能走路吗？ |
+| `can-you-walk` | Can you walk? | 您能走路吗？ |
 | `card-or-cash` | Card or cash? | 刷卡还是现金？ |
 | `help-is-coming` | Help is coming | 救援马上就到 |
 | `how-many` | How many? | 要多少？ |

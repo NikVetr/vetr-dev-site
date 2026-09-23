@@ -2,7 +2,7 @@ concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
 emergency-medical.help,הצילו!,הַצִּילוּ!,hatsílu!,hatsˈilu,save me -- the word shouted in an emergency,2,he-agent-v1;ipa=bgn
 emergency-medical.please-call-an-ambulance,"תתקשרו לאמבולנס, בבקשה","תִּתְקַשְּׁרוּ לְאַמְבּוּלַנְס, בְּבַקָּשָׁה","titqashru le’ambulans, bevaqasha","titkaʃʁˈu leambulˈans, bevakaʃˈa","call an ambulance, please",2,he-agent-v1;ipa=bgn
 emergency-medical.i-need-a-doctor,אני צריך רופא,אֲנִי צָרִיךְ רוֹפֵא,ani tsarikh rofe,anˈi tsaʁˈix ʁofˈe,a woman says tsrikha,2,he-agent-v1;ipa=bgn
-emergency-medical.i-am-sick,אני חולה,אֲנִי חוֹלֶה,ani ẖole,anˈi xolˈe,a woman says ẖola,2,he-agent-v1;ipa=bgn
+emergency-medical.i-am-sick,אני חולה,אֲנִי חוֹלֶה,ani ẖole,anˈi xolˈe,,2,he-agent-v1;ipa=bgn
 emergency-medical.i-am-injured,נפצעתי,נִפְצַעְתִּי,niftsá‘ti,niftsˈati,I have been injured,2,he-agent-v1;ipa=bgn
 emergency-medical.it-hurts-here,כואב לי כאן,כּוֹאֵב לִי כָּאן,ko’ev li kan,koˈev lˈi kˈan,it hurts me here,2,he-agent-v1;ipa=bgn
 emergency-medical.where-is-a-pharmacy,איפה יש בית מרקחת?,אֵיפֹה יֵשׁ בֵּית מִרְקַחַת?,éyfo yesh beyt mirqáẖat?,ˈejfo jˈeʃ bejt miʁkˈaxat,,2,he-agent-v1;ipa=bgn

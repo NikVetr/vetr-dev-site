@@ -1,14 +1,14 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-time-scheduling.what-time-is-it,Karfe nawa ne?,,karfe nawa ne,hour how-much is,2,ha-agent-v1;ipa=ha-g2p
+time-scheduling.what-time-is-it,Ƙarfe nawa ne?,,kʼarfe nawa ne,hour how-much is,2,ha-agent-v1;ipa=ha-g2p
 time-scheduling.how-many-minutes,Mintuna nawa?,,mintuna nawa,,2,ha-agent-v1;ipa=ha-g2p
-time-scheduling.what-time-should-we-meet,Karfe nawa za mu hadu?,,karfe nawa za mu hadu,hour how-much will we meet,2,ha-agent-v1;ipa=ha-g2p
+time-scheduling.what-time-should-we-meet,Ƙarfe nawa za mu haɗu?,,kʼarfe nawa za mu haɗu,hour how-much will we meet,2,ha-agent-v1;ipa=ha-g2p
 time-scheduling.can-we-change-the-time,Za mu iya canza lokacin?,,za mu ija tʃanza lokatʃin,,2,ha-agent-v1;ipa=ha-g2p
 time-scheduling.when-is-convenient,Yaushe ya fi dacewa?,,jauʃe ja fi datʃewa,when it more fits,2,ha-agent-v1;ipa=ha-g2p
 time-scheduling.what-is-today-s-date,Wane kwanan wata ne yau?,,wane kwanan wata ne jau,which day-of-month is today,2,ha-agent-v1;ipa=ha-g2p
 time-scheduling.what-day-is-it-today,Wace rana ce yau?,,watʃe rana tʃe jau,which day(f) is today,2,ha-agent-v1;ipa=ha-g2p
-time-scheduling.what-time-does-it-open,Da karfe nawa ake bude?,,da karfe nawa ake bude,at hour how-much one opens (impersonal),2,ha-agent-v1;ipa=ha-g2p
-time-scheduling.what-time-does-it-close,Da karfe nawa ake rufewa?,,da karfe nawa ake rufewa,at hour how-much one closes (impersonal),2,ha-agent-v1;ipa=ha-g2p
-time-scheduling.how-long-does-it-take,Tsawon lokaci nawa zai dauka?,,tsʼawon lokatʃi nawa zai dauka,length-of time how-much it-will take,2,ha-agent-v1;ipa=ha-g2p
+time-scheduling.what-time-does-it-open,Da ƙarfe nawa ake buɗe?,,da kʼarfe nawa ake buɗe,at hour how-much one opens (impersonal),2,ha-agent-v1;ipa=ha-g2p
+time-scheduling.what-time-does-it-close,Da ƙarfe nawa ake rufewa?,,da kʼarfe nawa ake rufewa,at hour how-much one closes (impersonal),2,ha-agent-v1;ipa=ha-g2p
+time-scheduling.how-long-does-it-take,Tsawon lokaci nawa zai ɗauka?,,tsʼawon lokatʃi nawa zai ɗauka,length-of time how-much it-will take,2,ha-agent-v1;ipa=ha-g2p
 time-words.today,yau,,jau,,2,ha-agent-v1;ipa=ha-g2p
 time-words.tomorrow,gobe,,ɡobe,,2,ha-agent-v1;ipa=ha-g2p
 time-words.yesterday,jiya,,dʒija,,2,ha-agent-v1;ipa=ha-g2p
@@ -41,5 +41,5 @@ months.september,Satumba,,satumba,,2,ha-agent-v1;ipa=ha-g2p
 months.october,Oktoba,,oktoba,,2,ha-agent-v1;ipa=ha-g2p
 months.november,Nuwamba,,nuwamba,,2,ha-agent-v1;ipa=ha-g2p
 months.december,Disamba,,disamba,,2,ha-agent-v1;ipa=ha-g2p
-time-words.clock-offset,"Agogon Kiswahili yana farawa daga fitowar rana, sa'o'i shida daga agogon waya: saa moja = 7:00, saa sita = 12:00, saa kumi = 16:00. Ku fadi lambobin ko ku tambaya da saa ngapi za kizungu domin sanin lokacin turawa (na yamma).",,,,2,ha-notes-v1
-time-scheduling.what-time-do-you-reopen,Da karfe nawa ake sake budewa?,,da karfe nawa ake sake budewa,at hour how-much one opens again (impersonal),2,translator-requests-v1;in-pack-neighbour;ipa=ha-g2p
+time-words.clock-offset,"Agogon Kiswahili yana farawa daga fitowar rana, sa'o'i shida daga agogon waya: saa moja = 7:00, saa sita = 12:00, saa kumi = 16:00. Ku faɗi lambobin ko ku tambaya da saa ngapi za kizungu domin sanin lokacin turawa (na yamma).",,,,2,ha-notes-v1
+time-scheduling.what-time-do-you-reopen,Da ƙarfe nawa ake sake buɗewa?,,da kʼarfe nawa ake sake buɗewa,at hour how-much one opens again (impersonal),2,translator-requests-v1;in-pack-neighbour;ipa=ha-g2p

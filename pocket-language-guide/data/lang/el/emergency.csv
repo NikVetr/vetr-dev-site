@@ -2,7 +2,7 @@ concept_id,text,text_alt,romanization_elot,ipa,literal,confidence,provenance
 emergency-medical.help,Βοήθεια!,,Voitheia!,voˈiθça,,2,el-agent-v1;roman=elot743;ipa=espeak
 emergency-medical.please-call-an-ambulance,"Καλέστε ασθενοφόρο, παρακαλώ",Πάρτε το 166 (ΕΚΑΒ),"Kaleste asthenoforo, parakalo","kalˈeste ˌasθenofˈoɾo, pˌaɾakalˈo",Ambulance is 166; 112 also works,2,el-agent-v1;roman=elot743;ipa=espeak
 emergency-medical.i-need-a-doctor,Χρειάζομαι γιατρό,,Chreiazomai giatro,xɾçˈazomˌe jatɾˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
-emergency-medical.i-am-sick,Είμαι άρρωστος / άρρωστη,Δεν είμαι καλά,Eimai arrostos / arrosti,ˈime ˈaɾostˌos / ˈaɾostˌi,,2,el-agent-v1;roman=elot743;ipa=espeak
+emergency-medical.i-am-sick,Είμαι άρρωστος,Δεν είμαι καλά,Eimai arrostos,ˈime ˈaɾostˌos,,2,el-agent-v1;roman=elot743;ipa=espeak
 emergency-medical.i-am-injured,Έχω τραυματιστεί,Τραυματίστηκα,Echo travmatistei,ˈexo tɾˌavmatistˈi,,2,el-agent-v1;roman=elot743;ipa=espeak
 emergency-medical.it-hurts-here,Πονάει εδώ,Πονάω εδώ,Ponaei edo,ponˈai eðˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
 emergency-medical.where-is-a-pharmacy,Πού υπάρχει φαρμακείο;,Πού είναι το φαρμακείο;,Pou yparchei farmakeio;,pˈu ipˈaɾçi fˌaɾmacˈio,,2,el-agent-v1;roman=elot743;ipa=espeak

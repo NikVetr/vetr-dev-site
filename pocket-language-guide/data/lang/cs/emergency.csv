@@ -2,7 +2,7 @@ concept_id,text,text_alt,ipa,literal,confidence,provenance
 emergency-medical.help,Pomoc!,,pˈomots,,2,cs-agent-v1;ipa=espeak
 emergency-medical.please-call-an-ambulance,Zavolejte prosím sanitku,,zˈavolˌeɪte prˈosiːm sˈanitku,,2,cs-agent-v1;ipa=espeak
 emergency-medical.i-need-a-doctor,Potřebuji doktora,,pˈotr̝ebˌuji dˈoktora,,2,cs-agent-v1;ipa=espeak
-emergency-medical.i-am-sick,Jsem nemocný / nemocná,,jsem nˈemotsniː / nˈemotsnaː,nemocný (male speaker) / nemocná (female speaker),2,cs-agent-v1;ipa=espeak
+emergency-medical.i-am-sick,Jsem nemocný,,jsem nˈemotsniː,,2,cs-agent-v1;ipa=espeak
 emergency-medical.i-am-injured,Jsem zraněný,,jsem zrˈaɲeniː,,2,cs-agent-v1;ipa=espeak
 emergency-medical.it-hurts-here,Tady to bolí,,tˈadi tˈo bˈoliː,,2,cs-agent-v1;ipa=espeak
 emergency-medical.where-is-a-pharmacy,Kde je lékárna?,,ɡdˈe je lˈeːkaːrna,,2,cs-agent-v1;ipa=espeak
@@ -24,7 +24,7 @@ medical-conditions.i-am-diabetic,Jsem diabetik,,jsem dˈijabˌetik,,2,cs-agent-v
 medical-conditions.i-need-insulin,Potřebuji inzulín,,pˈotr̝ebˌuji ˈinzuliːn,,2,cs-agent-v1;ipa=espeak
 medical-conditions.i-have-asthma,Mám astma,,maːm ˈastma,,2,cs-agent-v1;ipa=espeak
 medical-conditions.i-have-a-heart-condition,Mám srdeční onemocnění,,maːm sˈr̩detʃɲiː ˈonemˌotsɲeɲiː,,2,cs-agent-v1;ipa=espeak
-medical-conditions.i-am-allergic-to-penicillin,Jsem alergický / alergická na penicilin,,jsem ˈalerɡˌitskiː / ˈalerɡˌitskaː na pˈeɲitsˌilin,alergický (male speaker) / alergická (female speaker),2,cs-agent-v1;ipa=espeak
+medical-conditions.i-am-allergic-to-penicillin,Jsem alergický na penicilin,,jsem ˈalerɡˌitskiː na pˈeɲitsˌilin,,2,cs-agent-v1;ipa=espeak
 medical-conditions.i-have-epilepsy,Mám epilepsii,,maːm ˈepilˌepsiji,,2,cs-agent-v1;ipa=espeak
 medical-conditions.my-blood-sugar-is-low,Mám nízkou hladinu cukru v krvi,,maːm ɲˈiːskoʊ hlˈaɟinu tsˈukru v kˈr̩vi,,2,cs-agent-v1;ipa=espeak
 medical-conditions.i-need-my-inhaler,Potřebuji svůj inhalátor,,pˈotr̝ebˌuji svˈuːj ˈinhalˌaːtor,,2,cs-agent-v1;ipa=espeak
@@ -39,9 +39,9 @@ medical-conditions.please-give-me-sugar-or-juice,Dejte mi prosím cukr nebo šť
 medical-conditions.inject-it-into-my-outer-thigh,Píchněte mi to do vnější strany stehna,,pˈiːxɲete mi tˈo dˈovɲejʃiː strˈani stˈehna,,2,cs-agent-v1;ipa=espeak
 medical-conditions.my-blood-type-is,Moje krevní skupina je {},,mˈoje krˈevɲiː skˈupina je {},,2,cs-agent-v1;ipa=espeak
 medical-conditions.do-not-give-me,Nedávejte mi {},,nˈedaːvˌeɪte mi {},,2,cs-agent-v1;ipa=espeak
-medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,Jsem alergický / alergická na aspirin a ibuprofen,,jsem ˈalerɡˌitskiː / ˈalerɡˌitskaː nˈaaspˌirin a ˈibuprˌofen,alergický (male speaker) / alergická (female speaker),2,cs-agent-v1;ipa=espeak
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,Jsem alergický na aspirin a ibuprofen,,jsem ˈalerɡˌitskiː nˈaaspˌirin a ˈibuprˌofen,,2,cs-agent-v1;ipa=espeak
 medical-conditions.my-injector-is-in-my-bag,Můj autoinjektor je v tašce,,mˈuːj ˈaʊtoˌinjektor je v tˈaʃtse,,2,cs-agent-v1;ipa=espeak
-medical-conditions.i-am-allergic-to-sulfa-drugs,Jsem alergický / alergická na sulfonamidy,,jsem ˈalerɡˌitskiː / ˈalerɡˌitskaː na sˈulfonˌamidi,alergický (male speaker) / alergická (female speaker),2,cs-agent-v1;ipa=espeak
+medical-conditions.i-am-allergic-to-sulfa-drugs,Jsem alergický na sulfonamidy,,jsem ˈalerɡˌitskiː na sˈulfonˌamidi,,2,cs-agent-v1;ipa=espeak
 pharmacy-symptoms.which-pharmacy-is-open-now,Která lékárna má teď otevřeno?,,ktˈeraː lˈeːkaːrna maː tˈeɟ ˈotevr̝ˌeno,,2,cs-agent-v1;ipa=espeak
 pharmacy-symptoms.i-need-medicine-for,Potřebuji lék na {},,pˈotr̝ebˌuji lˈeːk na {},,2,cs-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-fever,Mám horečku,,maːm hˈoretʃku,,2,cs-agent-v1;ipa=espeak
@@ -99,7 +99,7 @@ lost-rescue.please-call-the-police,Zavolejte prosím policii,,zˈavolˌeɪte pr�
 lost-rescue.we-are-here,Jsme tady,,jsme tˈadi,,2,cs-agent-v1;ipa=espeak
 lost-rescue.please-look-at-my-location-pin,Podívejte se prosím na moji polohu,,pˈoɟiːvˌeɪte se prˈosiːm nˈamoji pˈolohu,,2,cs-agent-v1;ipa=espeak
 lost-rescue.i-cannot-walk,Nemohu chodit,,nˈemohu xˈoɟit,,2,cs-agent-v1;ipa=espeak
-lost-rescue.i-sprained-my-ankle,Vymkl jsem si / vymkla jsem si kotník,,vˈimkl̩ jsem si / vˈimkla jsem si kˈotɲiːk,vymkl (male speaker) / vymkla (female speaker),2,cs-agent-v1;ipa=espeak
+lost-rescue.i-sprained-my-ankle,Vymkl jsem si kotník,,vˈimkl̩ jsem si kˈotɲiːk,,2,cs-agent-v1;ipa=espeak
 lost-rescue.please-contact-rescue,Kontaktujte prosím záchrannou službu,,kˈontaktˌujte prˈosiːm zˈaːxranoʊ slˈuʒbu,,2,cs-agent-v1;ipa=espeak
 lost-rescue.my-companion-is-missing,Můj společník / moje společnice se pohřešuje,,mˈuːj spˈoletʃɲiːk / mˈoje spˈoletʃɲˌitse se pˈohr̝eʃˌuje,,2,cs-agent-v1;ipa=espeak
 lost-rescue.please-look-at-my-current-location,Podívejte se prosím na moji aktuální polohu,,pˈoɟiːvˌeɪte se prˈosiːm nˈamoji ˈaktuˌaːlɲiː pˈolohu,,2,cs-agent-v1;ipa=espeak
@@ -110,7 +110,7 @@ lost-rescue.i-lost-my-wallet,Ztratil jsem peněženku,,strˈacil jsem pˈeɲeʒ�
 lost-rescue.i-lost-my-bag,Ztratil jsem tašku,,strˈacil jsem tˈaʃku,,2,cs-agent-v1;ipa=espeak
 lost-rescue.where-is-lost-and-found,Kde je oddělení ztrát a nálezů?,,ɡdˈe je ˈodɟelˌeɲiː strˈaːt a nˈaːlezuː,,2,cs-agent-v1;ipa=espeak
 lost-rescue.i-cannot-find-my-hotel,Nemohu najít svůj hotel,,nˈemohu nˈajiːt svˈuːj hˈotel,,2,cs-agent-v1;ipa=espeak
-lost-rescue.i-left-it-on-the-train,Nechal jsem / nechala jsem to ve vlaku,,nˈexal jsem / nˈexala jsem tˈo vˈe vlˈaku,nechal (male speaker) / nechala (female speaker),2,cs-agent-v1;ipa=espeak
+lost-rescue.i-left-it-on-the-train,Nechal jsem to ve vlaku,,nˈexal jsem tˈo vˈe vlˈaku,,2,cs-agent-v1;ipa=espeak
 lost-rescue.i-cannot-get-down,Nemohu se dostat dolů,,nˈemohu se dˈostad dˈoluː,,2,cs-agent-v1;ipa=espeak
 police-consulate.where-is-the-police-station,Kde je policejní stanice?,,ɡdˈe je pˈolitsˌeɪɲiː stˈaɲitse,,2,cs-agent-v1;ipa=espeak
 police-consulate.i-want-to-report-a-theft,Chci nahlásit krádež,,xtsi nˈahlaːsit krˈaːdeʃ,,2,cs-agent-v1;ipa=espeak
@@ -122,14 +122,14 @@ police-consulate.i-want-to-contact-my-embassy,Chci kontaktovat své velvyslanect
 police-consulate.i-need-it-for-my-insurance,Potřebuji to pro pojišťovnu,,pˈotr̝ebˌuji tˈo pro pˈojiʃcˌovnu,,2,cs-agent-v1;ipa=espeak
 police-consulate.i-need-an-interpreter,Potřebuji tlumočníka,,pˈotr̝ebˌuji tlˈumotʃɲˌiːka,,2,cs-agent-v1;ipa=espeak
 police-consulate.please-leave-me-alone,Nechte mě prosím na pokoji,,nˈexte mɲˈe prˈosiːm nˈapokˌoji,,2,cs-agent-v1;ipa=espeak
-police-consulate.i-was-robbed,Byl jsem okraden / byla jsem okradena,,bil jsem ˈokraden / bˌila jsem ˈokradˌena,okraden (male speaker) / okradena (female speaker),2,cs-agent-v1;ipa=espeak
+police-consulate.i-was-robbed,Byl jsem okraden,,bil jsem ˈokraden,,2,cs-agent-v1;ipa=espeak
 police-consulate.i-want-a-lawyer,Chci právníka,,xtsi prˈaːvɲiːka,,2,cs-agent-v1;ipa=espeak
 police-consulate.please-notify-my-consulate,Informujte prosím můj konzulát,,ˈinformˌujte prˈosiːm mˈuːj kˈonzulaːt,,2,cs-agent-v1;ipa=espeak
 police-consulate.i-am-calling-the-police,Volám policii,,vˈolaːm pˈolitsˌiji,,2,cs-agent-v1;ipa=espeak
-police-consulate.am-i-under-arrest,Jsem zatčen / zatčena?,,jsem zˈattʃen / zˈattʃena,zatčen (male speaker) / zatčena (female speaker),2,cs-agent-v1;ipa=espeak
+police-consulate.am-i-under-arrest,Jsem zatčen?,,jsem zˈattʃen,,2,cs-agent-v1;ipa=espeak
 police-consulate.no-thank-you-i-am-not-interested,"Ne, děkuji, nemám zájem",,"nˈe, ɟˈekuji, nˈemaːm zˈaːjem",,2,cs-agent-v1;ipa=espeak
 police-consulate.someone-attacked-me,Někdo mě napadl,,ɲˈeɡdo mɲˈe nˈapadl̩,,2,cs-agent-v1;ipa=espeak
-police-consulate.i-did-not-agree-to-this-price,S touto cenou jsem nesouhlasil / nesouhlasila,,s tˈoʊto tsˈenoʊ jsem nˈesoʊhlˌasil / nˈesoʊhlˌasila,nesouhlasil (male speaker) / nesouhlasila (female speaker),2,cs-agent-v1;ipa=espeak
+police-consulate.i-did-not-agree-to-this-price,S touto cenou jsem nesouhlasil,,s tˈoʊto tsˈenoʊ jsem nˈesoʊhlˌasil,,2,cs-agent-v1;ipa=espeak
 police-consulate.please-write-the-report-number,Napište mi prosím číslo protokolu,,nˈapiʃte mi prˈosiːm tʃˈiːslo prˈotokˌolu,,2,cs-agent-v1;ipa=espeak
 police-consulate.it-happened-here,Stalo se to tady,,stˈalo se tˈo tˈadi,,2,cs-agent-v1;ipa=espeak
 police-consulate.may-i-have-a-copy-of-the-report,Mohu dostat kopii protokolu?,,mˈohu dˈostat kˈopiji prˈotokˌolu,,2,cs-agent-v1;ipa=espeak

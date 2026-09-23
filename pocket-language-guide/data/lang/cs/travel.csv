@@ -44,7 +44,7 @@ transit-rides.is-it-delayed,Má to zpoždění?,,maː tˈo spˈoʒɟeɲiː,,2,cs
 transit-rides.i-am-in-a-hurry,Spěchám,,spjˈexaːm,,2,cs-agent-v1;ipa=espeak
 transit-rides.which-platform,Které nástupiště?,,ktˈereː nˈaːstupˌiʃce,,2,cs-agent-v1;ipa=espeak
 transit-rides.what-time-is-the-next-one,V kolik jede další?,,v kˈolik jˈede dˈalʃiː,,2,cs-agent-v1;ipa=espeak
-transit-rides.i-went-past-my-stop,Přejel jsem / přejela jsem svou zastávku,,pr̝ˈejel jsem / pr̝ˈejela jsem svˈoʊ zˈastaːfku,přejel (male speaker) / přejela (female speaker),2,cs-agent-v1;ipa=espeak
+transit-rides.i-went-past-my-stop,Přejel jsem svou zastávku,,pr̝ˈejel jsem svˈoʊ zˈastaːfku,,2,cs-agent-v1;ipa=espeak
 transit-rides.can-i-use-this-ticket,Mohu použít tento lístek?,,mˈohu pˈoʊʒiːt tˈento lˈiːstek,,2,cs-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Musím si tuto jízdenku označit?,,mˈusiːm si tˈuto jˈiːzdeŋku ˈoznatʃit,"označit -- stamp/punch it, the Czech term for validating",2,cs-agent-v1;ipa=espeak
 place-words.visitor-center,informační centrum,,ˈinformˌatʃɲiː tsˈentrum,,2,cs-agent-v1;ipa=espeak
@@ -54,7 +54,7 @@ place-words.service-desk,informační přepážka,,ˈinformˌatʃɲiː pr̝ˈepa
 place-words.bus-stop,autobusová zastávka,,ˈaʊtobˌusovaː zˈastaːfka,,2,cs-agent-v1;ipa=espeak
 place-words.luggage-storage,úschovna zavazadel,,ˈuːsxovna zˈavazˌadel,,2,cs-agent-v1;ipa=espeak
 place-words.tourist-spot-sightseeing-area,turistická atrakce / oblast,,tˈuristˌitskaː ˈatraktse / ˈoblast,,2,cs-agent-v1;ipa=espeak
-border-customs.i-am-a-tourist,Jsem turista / turistka,,jsem tˈurista / tˈuristka,,2,cs-agent-v1;ipa=espeak
+border-customs.i-am-a-tourist,Jsem turista,,jsem tˈurista,,2,cs-agent-v1;ipa=espeak
 border-customs.here-is-my-passport,Tady je můj pas,,tˈadi je mˈuːj pˈas,,2,cs-agent-v1;ipa=espeak
 border-customs.i-am-staying-for-days,Zůstávám {} dní,,zˈuːstaːvaːm {} dɲˈiː,,2,cs-agent-v1;ipa=espeak
 border-customs.nothing-to-declare,Nic k proclení,,ɲˈits k prˈotsleɲiː,,2,cs-agent-v1;ipa=espeak

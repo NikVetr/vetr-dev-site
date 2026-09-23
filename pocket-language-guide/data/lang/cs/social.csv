@@ -50,7 +50,7 @@ phone-text-power.do-you-have-a-power-bank,Máte powerbanku?,,mˌaːte pˈoverbˌ
 phone-text-power.the-translation-may-be-inaccurate,Překlad nemusí být přesný,,pr̝ˈeklad nˈemusiː biːt pr̝ˈesniː,,2,cs-agent-v1;ipa=espeak
 phone-text-power.please-confirm,"Potvrďte to, prosím",,"pˈotvr̩cte tˈo, prˈosiːm",,2,cs-agent-v1;ipa=espeak
 phone-text-power.may-i-charge-my-phone-here,Mohu si tu nabít telefon?,,mˈohu si tˈu nˈabiːt tˈelefon,,2,cs-agent-v1;ipa=espeak
-sim-data.i-would-like-a-tourist-sim,Chtěl bych / chtěla bych turistickou SIM kartu,,xcˈel bix / xcˈela bix tˈuristˌitskoʊ ˈesˌiːˌem kˈartu,,2,cs-agent-v1;ipa=espeak
+sim-data.i-would-like-a-tourist-sim,Chtěl bych turistickou SIM kartu,,xcˈel bix tˈuristˌitskoʊ ˈesˌiːˌem kˈartu,,2,cs-agent-v1;ipa=espeak
 sim-data.may-i-use-your-wifi,Mohu použít vaši Wi-Fi?,,mˈohu pˈoʊʒiːt vˈaʃi vˈifi,,2,cs-agent-v1;ipa=espeak
 sim-data.how-much-data-is-included,Kolik dat je v ceně?,,kˈolik dˈat je v tsˈeɲe,,2,cs-agent-v1;ipa=espeak
 sim-data.do-you-need-my-passport,Potřebujete můj pas?,,pˈotr̝ebˌujete mˈuːj pˈas,,2,cs-agent-v1;ipa=espeak
@@ -79,8 +79,8 @@ etiquette.remove-shoes,Mám si zout boty?,,maːm si zˈoʊd bˈoti,,2,cs-agent-v
 etiquette.photo-of-you,Mohu vás vyfotit?,,mˈohu vˈaːs vˈifocit,,2,cs-agent-v1;ipa=espeak
 etiquette.may-i-sit-here,Mohu si tady sednout?,,mˈohu si tˈadi sˈednoʊt,,2,cs-agent-v1;ipa=espeak
 etiquette.queue-for,Je tohle fronta na {}?,,je tˈohle frˈonta na {},,2,cs-agent-v1;ipa=espeak
-etiquette.dressed-appropriately,Jsem oblečený / oblečená vhodně?,,jsem ˈobletʃˌeniː / ˈobletʃˌenaː fhˈodɲe,oblečený (male speaker) / oblečená (female speaker),2,cs-agent-v1;ipa=espeak
-etiquette.did-not-mean-to-offend,Nechtěl jsem / nechtěla jsem nikoho urazit,,nˈexcel jsem / nˈexcela jsem ɲˈikoho ˈurazit,nechtěl (male speaker) / nechtěla (female speaker),2,cs-agent-v1;ipa=espeak
+etiquette.dressed-appropriately,Jsem oblečený vhodně?,,jsem ˈobletʃˌeniː fhˈodɲe,,2,cs-agent-v1;ipa=espeak
+etiquette.did-not-mean-to-offend,Nechtěl jsem nikoho urazit,,nˈexcel jsem ɲˈikoho ˈurazit,,2,cs-agent-v1;ipa=espeak
 etiquette.what-is-customary,Co je tady zvykem?,,tsˈo je tˈadi zvˈikem,,2,cs-agent-v1;ipa=espeak
 etiquette.keep-the-change,"Nechte si drobné, prosím",,"nˈexte si drˈobneː, prˈosiːm",,2,cs-agent-v1;ipa=espeak
 children.cannot-find-my-child,Nemohu najít své dítě,,nˈemohu nˈajiːt svˈeː ɟˈiːce,"SAFETY-CRITICAL, see the concept's own note. Deliberately not built on ztratit ('lose'), which risks the same bereavement reading English 'I lost my child' has -- nemohu najít ('I cannot find') has no such reading",2,cs-agent-v1;ipa=espeak

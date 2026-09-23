@@ -1,45 +1,45 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 hotel-words.passport,fasfo,,fasfo,,2,ha-agent-v1;ipa=ha-g2p
-hotel-words.room-key-card,katin makullin daki,,katin makullin daki,card-of lock-of room,2,ha-agent-v1;ipa=ha-g2p
+hotel-words.room-key-card,katin makullin ɗaki,,katin makullin ɗaki,card-of lock-of room,2,ha-agent-v1;ipa=ha-g2p
 hotel-words.check-in,shiga,,ʃiɡa,entering/checking in,2,ha-agent-v1;ipa=ha-g2p
 hotel-words.check-out,fita,,fita,exiting/checking out,2,ha-agent-v1;ipa=ha-g2p
 hotel-words.luggage-storage,ajiyar kaya,,adʒijar kaja,,2,ha-agent-v1;ipa=ha-g2p
-hotel-basics.are-any-rooms-available,Akwai dakuna?,,akwai dakuna,,2,ha-agent-v1;ipa=ha-g2p
+hotel-basics.are-any-rooms-available,Akwai ɗakuna?,,akwai ɗakuna,,2,ha-agent-v1;ipa=ha-g2p
 hotel-basics.there-are-two-of-us,Mu biyu ne,,mu biju ne,,2,ha-agent-v1;ipa=ha-g2p
-hotel-basics.i-have-a-reservation,Na riga na yi ajiyar daki,,na riɡa na ji adʒijar daki,I already made reservation-of room,2,ha-agent-v1;ipa=ha-g2p
+hotel-basics.i-have-a-reservation,Na riga na yi ajiyar ɗaki,,na riɡa na ji adʒijar ɗaki,I already made reservation-of room,2,ha-agent-v1;ipa=ha-g2p
 hotel-basics.can-i-charge-my-phone,Zan iya cajin wayata?,,zan ija tʃadʒin wajata,,2,ha-agent-v1;ipa=ha-g2p
-hotel-basics.i-would-like-a-non-smoking-room,Ina son daki wanda ba a shan taba a ciki,,ina son daki wanda ba a ʃan taba a tʃiki,,2,ha-agent-v1;ipa=ha-g2p
-hotel-basics.i-would-like-a-quiet-room,Ina son daki mai shiru,,ina son daki mai ʃiru,,2,ha-agent-v1;ipa=ha-g2p
+hotel-basics.i-would-like-a-non-smoking-room,Ina son ɗaki wanda ba a shan taba a ciki,,ina son ɗaki wanda ba a ʃan taba a tʃiki,,2,ha-agent-v1;ipa=ha-g2p
+hotel-basics.i-would-like-a-quiet-room,Ina son ɗaki mai shiru,,ina son ɗaki mai ʃiru,,2,ha-agent-v1;ipa=ha-g2p
 hotel-basics.is-there-a-washing-machine,Akwai injin wanki?,,akwai indʒin wanki,,2,ha-agent-v1;ipa=ha-g2p
 hotel-basics.is-wi-fi-free,Wi-Fi kyauta ne?,,wajfaj kjauta ne,,2,ha-agent-v1;ipa=ha-g2p+loan
 hotel-basics.how-much-per-night,Nawa a kowane dare?,,nawa a kowane dare,,2,ha-agent-v1;ipa=ha-g2p
-hotel-basics.is-breakfast-included,An hada da karin kumallo?,,an hada da karin kumallo,,2,ha-agent-v1;ipa=ha-g2p
-hotel-basics.may-i-see-the-room,Zan iya ganin dakin?,,zan ija ɡanin dakin,,2,ha-agent-v1;ipa=ha-g2p
+hotel-basics.is-breakfast-included,An haɗa da ƙarin kumallo?,,an haɗa da kʼarin kumallo,,2,ha-agent-v1;ipa=ha-g2p
+hotel-basics.may-i-see-the-room,Zan iya ganin ɗakin?,,zan ija ɡanin ɗakin,,2,ha-agent-v1;ipa=ha-g2p
 hotel-basics.for-nights,Kwana {},,kwana {},nights {} -- kwana is the same unit border-customs uses for a stay of days,2,ha-agent-v1;ipa=ha-g2p
 hotel-basics.two-beds,"Gadaje biyu, don Allah",,"ɡadadʒe biju, don allah",,2,ha-agent-v1;ipa=ha-g2p
 hotel-basics.is-there-air-conditioning,Akwai AC?,Akwai na'urar sanyaya iska?,akwai eːsiː,AC is the everyday loanword; the alt is descriptive,2,ha-agent-v1;ipa=ha-g2p+loan
 hotel-requests.can-i-check-out-later,Zan iya fita daga baya?,,zan ija fita daɡa baja,,2,ha-agent-v1;ipa=ha-g2p
-hotel-requests.what-time-does-breakfast-start,Da karfe nawa ake fara karin kumallo?,,da karfe nawa ake fara karin kumallo,,2,ha-agent-v1;ipa=ha-g2p
+hotel-requests.what-time-does-breakfast-start,Da ƙarfe nawa ake fara ƙarin kumallo?,,da kʼarfe nawa ake fara kʼarin kumallo,,2,ha-agent-v1;ipa=ha-g2p
 hotel-requests.can-i-store-my-luggage,Zan iya ajiye kayana?,,zan ija adʒije kajana,,2,ha-agent-v1;ipa=ha-g2p
-hotel-requests.no-housekeeping,Kada a share daki,,kada a ʃare daki,do not clean the room,2,ha-agent-v1;ipa=ha-g2p
+hotel-requests.no-housekeeping,Kada a share ɗaki,,kada a ʃare ɗaki,do not clean the room,2,ha-agent-v1;ipa=ha-g2p
 hotel-requests.another-towel-please,"Wata tawul, don Allah",,"wata tawul, don allah",,2,ha-agent-v1;ipa=ha-g2p
-hotel-requests.what-time-is-check-out,Da karfe nawa ake fita?,,da karfe nawa ake fita,,2,ha-agent-v1;ipa=ha-g2p
+hotel-requests.what-time-is-check-out,Da ƙarfe nawa ake fita?,,da kʼarfe nawa ake fita,,2,ha-agent-v1;ipa=ha-g2p
 hotel-requests.can-i-check-in-early,Zan iya shiga da wuri?,,zan ija ʃiɡa da wuri,,2,ha-agent-v1;ipa=ha-g2p
 hotel-requests.another-night,Zan iya kwana wata dare?,,zan ija kwana wata dare,,2,ha-agent-v1;ipa=ha-g2p
 hotel-requests.is-there-a-safe,Akwai akwatin ajiya?,,akwai akwatin adʒija,box-of safekeeping,2,ha-agent-v1;ipa=ha-g2p
 hotel-requests.another-blanket,"Wani bargo, don Allah",,"wani barɡo, don allah",,2,ha-agent-v1;ipa=ha-g2p
-hotel-requests.wake-up-call,Don Allah ku tashe ni da karfe {},,don allah ku taʃe ni da karfe {},please wake me at hour {},2,ha-agent-v1;ipa=ha-g2p
-room-problems.there-is-a-problem-with-the-room,Akwai matsala da dakin,,akwai matsʼala da dakin,,2,ha-agent-v1;ipa=ha-g2p
+hotel-requests.wake-up-call,Don Allah ku tashe ni da ƙarfe {},,don allah ku taʃe ni da kʼarfe {},please wake me at hour {},2,ha-agent-v1;ipa=ha-g2p
+room-problems.there-is-a-problem-with-the-room,Akwai matsala da ɗakin,,akwai matsʼala da ɗakin,,2,ha-agent-v1;ipa=ha-g2p
 room-problems.the-air-conditioning-is-broken,AC ya lalace,,eːsiː ja lalatʃe,,2,ha-agent-v1;ipa=ha-g2p+loan
 room-problems.there-is-no-hot-water,Babu ruwan zafi,,babu ruwan zafi,,2,ha-agent-v1;ipa=ha-g2p
-room-problems.can-i-change-rooms,Zan iya canza daki?,,zan ija tʃanza daki,,2,ha-agent-v1;ipa=ha-g2p
-room-problems.the-room-is-too-noisy,Daki yana da hayaniya kwarai,,daki jana da hajanija kwarai,,2,ha-agent-v1;ipa=ha-g2p
+room-problems.can-i-change-rooms,Zan iya canza ɗaki?,,zan ija tʃanza ɗaki,,2,ha-agent-v1;ipa=ha-g2p
+room-problems.the-room-is-too-noisy,Ɗaki yana da hayaniya ƙwarai,,ɗaki jana da hajanija kʼwarai,,2,ha-agent-v1;ipa=ha-g2p
 room-problems.the-key-does-not-work,Makullin ba ya aiki,,makullin ba ja aiki,,2,ha-agent-v1;ipa=ha-g2p
 room-problems.the-toilet-will-not-flush,Ruwan bayan gida ba ya aiki,,ruwan bajan ɡida ba ja aiki,the water of the toilet is not working,2,ha-agent-v1;ipa=ha-g2p
 room-problems.the-light-does-not-work,Fitila ba ta aiki,,fitila ba ta aiki,,2,ha-agent-v1;ipa=ha-g2p
 room-problems.please-send-someone,Don Allah ku aiko wani ya gyara shi,,don allah ku aiko wani ja ɡjara ʃi,please send someone he-fix it,2,ha-agent-v1;ipa=ha-g2p
-room-problems.the-heating-does-not-work,Na'urar dumama ba ta aiki,,naʔurar dumama ba ta aiki,,2,ha-agent-v1;ipa=ha-g2p
-laundry.please-wash-these-clothes,Don Allah ku wanke wadannan tufafi,,don allah ku wanke wadannan tufafi,,2,ha-agent-v1;ipa=ha-g2p
+room-problems.the-heating-does-not-work,Na'urar ɗumama ba ta aiki,,naʔurar ɗumama ba ta aiki,,2,ha-agent-v1;ipa=ha-g2p
+laundry.please-wash-these-clothes,Don Allah ku wanke waɗannan tufafi,,don allah ku wanke waɗannan tufafi,,2,ha-agent-v1;ipa=ha-g2p
 laundry.where-is-a-laundromat,Ina wurin wanki yake?,,ina wurin wanki jake,,2,ha-agent-v1;ipa=ha-g2p
 laundry.when-will-it-be-ready,Yaushe zai gama?,,jauʃe zai ɡama,,2,ha-agent-v1;ipa=ha-g2p
 laundry.how-much-per-kilo,Nawa a kowane kilo?,,nawa a kowane kilo,,2,ha-agent-v1;ipa=ha-g2p
@@ -50,17 +50,17 @@ laundry.please-iron-this,Don Allah ku bugu wannan,,don allah ku buɡu wannan,iro
 laundry.detergent,sabulun wanki,,sabulun wanki,soap of washing,2,ha-agent-v1;ipa=ha-g2p
 laundry.dry-cleaning,wanki busasshe,,wanki busasʃe,dry washing,2,ha-agent-v1;ipa=ha-g2p
 laundry.dryer,na'urar bushewa,,naʔurar buʃewa,machine of drying,2,ha-agent-v1;ipa=ha-g2p
-laundry.coin-operated,ana amfani da tsabar kudi,,ana amfani da tsʼabar kudi,one uses coins,2,ha-agent-v1;ipa=ha-g2p
+laundry.coin-operated,ana amfani da tsabar kuɗi,,ana amfani da tsʼabar kuɗi,one uses coins,2,ha-agent-v1;ipa=ha-g2p
 massage-spa.please-stop,"Ku tsaya, kada ku ci gaba",,"ku tsʼaja, kada ku tʃi ɡaba","stop; do not continue -- the pack's Don Allah frame is dropped here on purpose, this row ends the session",2,spa-board-v1;src=Bargery;kai-ke-avoided;ipa=ha-g2p
-massage-spa.please-pause,Don Allah ku dakata kadan,,don allah ku dakata kadan,please pause a little,2,spa-board-v1;src=Bargery;in-pack-frame;kai-ke-avoided;ipa=ha-g2p
+massage-spa.please-pause,Don Allah ku dakata kaɗan,,don allah ku dakata kaɗan,please pause a little,2,spa-board-v1;src=Bargery;in-pack-frame;kai-ke-avoided;ipa=ha-g2p
 massage-spa.please-avoid-this-area,Don Allah kada ku taɓa wannan wurin,,don allah kada ku taba wannan wurin,please do not touch this place,2,spa-board-v1;src=Bargery;in-pack-frame;kai-ke-avoided;ipa=ha-g2p
-massage-spa.stronger-pressure,Don Allah ku kara karfi,,don allah ku kara karfi,please increase the force,2,spa-board-v1;src=Bargery;in-pack-frame;kai-ke-avoided;ipa=ha-g2p
+massage-spa.stronger-pressure,Don Allah ku ƙara ƙarfi,,don allah ku kʼara kʼarfi,please increase the force,2,spa-board-v1;src=Bargery;in-pack-frame;kai-ke-avoided;ipa=ha-g2p
 massage-spa.more-gently,Don Allah ku sassauta,,don allah ku sassauta,please ease off,2,spa-board-v1;src=Bargery;in-pack-frame;kai-ke-avoided;ipa=ha-g2p
 massage-spa.that-pressure-is-good,"Haka ya yi daidai, ku ci gaba haka",,"haka ja ji daidai, ku tʃi ɡaba haka",that is just right; carry on like that,2,spa-board-v1;src=Bargery;kai-ke-avoided;ipa=ha-g2p
-massage-spa.focus-on-shoulders,Don Allah ku tausa kafada musamman,,don allah ku tausa kafada musamman,please massage the shoulders especially,2,spa-board-v1;src=Bargery;in-pack-frame;kai-ke-avoided;ipa=ha-g2p
+massage-spa.focus-on-shoulders,Don Allah ku tausa kafaɗa musamman,,don allah ku tausa kafaɗa musamman,please massage the shoulders especially,2,spa-board-v1;src=Bargery;in-pack-frame;kai-ke-avoided;ipa=ha-g2p
 massage-spa.focus-on-back,Don Allah ku tausa baya musamman,,don allah ku tausa baja musamman,please massage the back especially,2,spa-board-v1;src=Bargery;in-pack-frame;kai-ke-avoided;ipa=ha-g2p
 massage-spa.focus-on-neck,Don Allah ku tausa wuya musamman,,don allah ku tausa wuja musamman,please massage the neck especially,2,spa-board-v1;src=Bargery;in-pack-frame;kai-ke-avoided;ipa=ha-g2p
-massage-spa.focus-on-feet,Don Allah ku tausa tafin kafa musamman,,don allah ku tausa tafin kafa musamman,"please massage the soles of the feet especially -- tafin kafa rather than bare kafa, which this pack uses for the whole lower limb and which is a near-homograph of kafada",2,spa-board-v1;src=Bargery;in-pack-frame;kai-ke-avoided;ipa=ha-g2p
+massage-spa.focus-on-feet,Don Allah ku tausa tafin ƙafa musamman,,don allah ku tausa tafin kʼafa musamman,"please massage the soles of the feet especially -- tafin kafa rather than bare kafa, which this pack uses for the whole lower limb and which is a near-homograph of kafada",2,spa-board-v1;src=Bargery;in-pack-frame;kai-ke-avoided;ipa=ha-g2p
 massage-spa.reply-i-will-avoid-that-area,"To, ba zan taɓa wannan wurin ba",,"to, ba zan taba wannan wurin ba",all right; I will not touch this place,2,spa-reply-v1;src=Bargery;reply-neutrality-rule;ipa=ha-g2p
 massage-spa.reply-which-area-exactly,Wane wuri ne daidai?,,wane wuri ne daidai,which place exactly?,2,spa-reply-v1;src=Bargery;reply-neutrality-rule;kai-ke-avoided;ipa=ha-g2p
 massage-spa.reply-cannot-avoid-this-treatment,Ba a iya barin wannan wurin a wannan tausa,,ba a ija barin wannan wurin a wannan tausa,"this place cannot be left out in this massage -- impersonal a-, not ka/ki",2,spa-reply-v1;src=Bargery;reply-neutrality-rule;kai-ke-avoided;ipa=ha-g2p

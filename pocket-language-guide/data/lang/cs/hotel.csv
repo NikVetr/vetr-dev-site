@@ -8,8 +8,8 @@ hotel-basics.are-any-rooms-available,Máte volné pokoje?,,mˌaːte vˈolneː p�
 hotel-basics.there-are-two-of-us,Jsme dva,,jsme dvˈa,,2,cs-agent-v1;ipa=espeak
 hotel-basics.i-have-a-reservation,Mám rezervaci,,maːm rˈezervˌatsi,,2,cs-agent-v1;ipa=espeak
 hotel-basics.can-i-charge-my-phone,Mohu si tu nabít telefon?,,mˈohu si tˈu nˈabiːt tˈelefon,,2,cs-agent-v1;ipa=espeak
-hotel-basics.i-would-like-a-non-smoking-room,Chtěl bych / chtěla bych nekuřácký pokoj,,xcˈel bix / xcˈela bix nˈekur̝ˌaːtskiː pˈokoj,,2,cs-agent-v1;ipa=espeak
-hotel-basics.i-would-like-a-quiet-room,Chtěl bych / chtěla bych tichý pokoj,,xcˈel bix / xcˈela bix cˈixiː pˈokoj,,2,cs-agent-v1;ipa=espeak
+hotel-basics.i-would-like-a-non-smoking-room,Chtěl bych nekuřácký pokoj,,xcˈel bix nˈekur̝ˌaːtskiː pˈokoj,,2,cs-agent-v1;ipa=espeak
+hotel-basics.i-would-like-a-quiet-room,Chtěl bych tichý pokoj,,xcˈel bix cˈixiː pˈokoj,,2,cs-agent-v1;ipa=espeak
 hotel-basics.is-there-a-washing-machine,Je tu pračka?,,je tˈu prˈatʃka,,2,cs-agent-v1;ipa=espeak
 hotel-basics.is-wi-fi-free,Je Wi-Fi zdarma?,,je vˈifi zdˈarma,,2,cs-agent-v1;ipa=espeak
 hotel-basics.how-much-per-night,Kolik to stojí za noc?,,kˈolik tˈo stˈojiː zˈanots,,2,cs-agent-v1;ipa=espeak

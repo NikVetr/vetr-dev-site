@@ -3812,3 +3812,70 @@ accent, bound to the listener's whole `ipa` column, curated sheet first -- and h
 it to `resolvePhrase` as a hook, so the variant-merged IPA is what gets respelled. The
 English stays as it was, because it is now true; the thirteen "Latin" wordings were
 sent back to the agent that wrote them.
+
+## Batch O — three corpus defects the translators had named, closed
+
+### A woman's card no longer makes her do grammar at a counter
+
+Twenty-eight base rows in cs, el and hr carried both genders with a slash —
+`Ztratil jsem se / ztratila jsem se` — although `variants.csv` already held the
+feminine for every one of them, so the reader who had set her profile got the clean
+row and everyone else got the slash. Every variant was checked to carry the full
+feminine sentence with its own IPA before the base was cut to the masculine, which is
+the unmarked citation form and the declared default. Rows where the slash separates two
+genuinely different words (`já / mě`) and rows about a *third* party's gender were left
+exactly as the convention says they must be.
+
+### Ten Hebrew rows that were right on the page and wrong out loud
+
+Hebrew does not write its vowels, so `אני חולה` is the same string for a man and a
+woman and nothing looked wrong. Its vocalised `text_alt`, its romanisation `ani ẖole`
+and its IPA `anˈi xolˈe` were all masculine, and the card taught a woman to say the
+wrong thing while showing her the right one. The sweep found **ten** such rows, not one:
+`חולה` and nine `רוצה` "I want" rows — the police report, the embassy, the lawyer, "I do
+not want to go with you". Each now has a feminine variant with pointed spelling,
+romanisation and IPA. The validator had to be obeyed on one point: a variant may not
+leave `text` blank, so it repeats the base string and the difference lives in the three
+columns that differ.
+
+### Hausa: 191 rows, and a premise of mine that was wrong
+
+The hooked letters ɓ, ɗ, ƙ were written bare across the pack — `kudi` for *kuɗi*,
+`kafa` for *ƙafa*, `daki` for *ɗaki* — while the same pack wrote `ɓace` and `ƙarfi`
+hooked elsewhere, so it contradicted itself. My first sizing named six words and 68
+rows; the sweep, done with each occurrence read in context, found **191 rows and 196
+cells**, and left bare the ones that are bare — `Kashi!` beside `ƙashi`, `shan taba`
+beside `Kada a taɓa`, `ya kasa` "failed" beside `jirgin ƙasa` "train".
+
+I had also written that "espeak's Hausa voice drops the implosives". **Hausa has no
+espeak voice.** `build_ipa.py` routes it through a hand-authored table that already
+maps ɗ→ɗ and ƙ→kʼ, so fixing the text fixed the pronunciation of both: 180 IPA cells
+followed the text. Only ɓ→b is folded, deliberately, because when the table was
+written no reader table had a rule for ɓ. Five of 53 do now. Unfolding it is a
+one-character edit plus 48 reader-table rules or a literal ɓ in 48 font subsets — a
+corpus-wide decision, left as one.
+
+### "Is walking possible?" was a dodge stated as a template
+
+The concept note authorised the impersonal wording because a direct second person is
+gendered in Arabic, Hebrew, Polish and Indo-Aryan, and carved out exactly one
+language: "Mandarin has no such hazard". Turkish, Uzbek, Georgian and Armenian have no
+grammatical gender at all and had taken the dodge anyway, and on a triage board "is
+walking possible" and "can *you* walk" are different questions. The note now states
+the rule by property — direct wherever the second person does not mark the
+addressee's gender, impersonal only where it does — and lists that set. It also pulls
+Bengali and Odia *out* of it: Indo-Aryan, but genderless. Six rows changed, each
+against a reference grammar; `stay-here` got the same treatment and Armenian's
+predicate superlative its definite `-ն`.
+
+Twenty-five more languages still carry the impersonal form with no hazard (fi, hu,
+ru, uk, fa, the Romance five, the South-East Asian set, the Dravidian four, bn, or, sw,
+jv). One concept, one wave, not started.
+
+### The checker, briefly wrong in the other direction
+
+Widening `check_i18n` to read a bare `key:` as a reference — to stop it calling the
+five display checkboxes unreferenced — made it read `key: 'gloss'` and
+`key: 'roles.alert'` in two other constant tables as *referenced and undefined*, and
+the gate failed on it. Reverted; `board-display.js` says `labelKey`, which is the
+convention the scanner already knew.

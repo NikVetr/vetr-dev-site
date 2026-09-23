@@ -9,7 +9,7 @@ payment-receipt.can-we-pay-separately,Můžeme platit zvlášť?,,mˈuːʒeme pl
 payment-receipt.is-tax-included,Je v ceně daň?,,je v tsˈeɲe dˈaɲ,,2,cs-agent-v1;ipa=espeak
 payment-receipt.my-card-was-declined,Moje karta byla odmítnuta,,mˈoje kˈarta bˌila ˈodmiːtnˌuta,,2,cs-agent-v1;ipa=espeak
 payment-receipt.the-bill-is-wrong,"Myslím, že účet nesouhlasí",,"mˈisliːm, ʒe ˈuːtʃet nˈesoʊhlˌasiː",,2,cs-agent-v1;ipa=espeak
-payment-receipt.i-already-paid,Už jsem zaplatil / zaplatila,,ˈuʒ jsem zˈaplacil / zˈaplacˌila,zaplatil (male speaker) / zaplatila (female speaker) -- Czech past tense agrees with the subject's gender,2,cs-agent-v1;ipa=espeak
+payment-receipt.i-already-paid,Už jsem zaplatil,,ˈuʒ jsem zˈaplacil,,2,cs-agent-v1;ipa=espeak
 shopping.i-am-just-looking,Jen se dívám,,jˈen se ɟˈiːvaːm,,2,cs-agent-v1;ipa=espeak
 shopping.how-much-is-this,Kolik to stojí?,,kˈolik tˈo stˈojiː,,2,cs-agent-v1;ipa=espeak
 shopping.that-is-too-expensive,To je moc drahé,,tˈo je mˈodʑ drˈaheː,,2,cs-agent-v1;ipa=espeak

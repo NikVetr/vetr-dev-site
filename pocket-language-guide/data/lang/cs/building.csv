@@ -1,6 +1,6 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 building-help.what-room-number-is-this,Jaké je to číslo pokoje?,,jˈakeː je tˈo tʃˈiːslo pˈokoje,,2,cs-agent-v1;ipa=espeak
-building-help.i-am-lost,Ztratil jsem se / ztratila jsem se,,strˈacil jsem se / strˈacila jsem se,ztratil (male speaker) / ztratila (female speaker),2,cs-agent-v1;ipa=espeak
+building-help.i-am-lost,Ztratil jsem se,,strˈacil jsem se,,2,cs-agent-v1;ipa=espeak
 building-help.where-is-reception,Kde je recepce?,,ɡdˈe je rˈetseptse,,2,cs-agent-v1;ipa=espeak
 building-help.where-is-a-power-outlet,Kde je zásuvka?,,ɡdˈe je zˈaːsufka,,2,cs-agent-v1;ipa=espeak
 accessibility.step-free,Je tu bezbariérový přístup?,,je tˈu bˈezbarˌieːrˌoviː pr̝ˈiːstup,,2,cs-agent-v1;ipa=espeak
@@ -16,9 +16,9 @@ accessibility.help-me-carry,Pomozte mi to prosím nést,,pˈomoste mi tˈo prˈo
 accessibility.board-first,Mohu nastoupit jako první?,,mˈohu nˈastoʊpit jˈako pˈr̩vɲiː,,2,cs-agent-v1;ipa=espeak
 accessibility.door-width,Jak široké jsou dveře?,,jˈak ʃˈirokeː jsoʊ dvˈer̝e,,2,cs-agent-v1;ipa=espeak
 accessibility.wheelchair-width,Můj vozík je {} cm široký,,mˈuːj vˈoziːk je {} tsˈentimˌetr̩ ʃˈirokiː,,2,cs-agent-v1;ipa=espeak
-accessibility.hard-of-hearing,Jsem nedoslýchavý / nedoslýchavá,,jsem nˈedoslˌiːxaviː / nˈedoslˌiːxavaː,nedoslýchavý (male speaker) / nedoslýchavá (female speaker),2,cs-agent-v1;ipa=espeak
+accessibility.hard-of-hearing,Jsem nedoslýchavý,,jsem nˈedoslˌiːxaviː,,2,cs-agent-v1;ipa=espeak
 accessibility.speak-louder,Mluvte prosím hlasitěji,,mlˈufte prˈosiːm hlˈasicˌeji,,2,cs-agent-v1;ipa=espeak
-accessibility.visually-impaired,Jsem zrakově postižený / postižená,,jsem zrˈakovje pˈosciʒˌeniː / pˈosciʒˌenaː,postižený (male speaker) / postižená (female speaker),2,cs-agent-v1;ipa=espeak
+accessibility.visually-impaired,Jsem zrakově postižený,,jsem zrˈakovje pˈosciʒˌeniː,,2,cs-agent-v1;ipa=espeak
 accessibility.take-your-arm,Mohu se vás držet za paži?,,mˈohu se vˈaːz dˈr̩ʒed zˈapaʒi,,2,cs-agent-v1;ipa=espeak
 accessibility.guide-dog,Toto je můj vodicí pes,,tˈoto je mˈuːj vˈoditsiː pˈes,,2,cs-agent-v1;ipa=espeak
 in-a-building.is-this-the-correct-entrance,Je tohle správný vchod?,,je tˈohle sprˈaːvniː fxˈot,,2,cs-agent-v1;ipa=espeak
