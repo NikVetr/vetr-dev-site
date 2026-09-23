@@ -24,7 +24,10 @@ test.describe('gallery', () => {
     // Chinese has a corpus, so it gets a real thumbnail and working buttons.
     const chinese = page.locator('.card', { hasText: translatedEndonym('zh-Hans') });
     await expect(chinese.locator('img.card-thumb')).toBeVisible();
-    await expect(chinese.getByRole('link', { name: 'Export' })).toBeVisible();
+    // Customise, not Export: the card offers the two things you do *next*, and
+    // exporting is what the customise page's own header is for. The lightbox still
+    // links straight to the quick page for a reader who wants the default.
+    await expect(chinese.getByRole('link', { name: 'Customise' })).toBeVisible();
 
     // And a language with no corpus must not offer a button that yields an empty
     // sheet, whatever its declared status says.
@@ -64,7 +67,7 @@ test.describe('gallery', () => {
     // Static markup, a card built in JS, and the picker's own accessible name --
     // three different mechanisms, all of which used to be left behind.
     await expect(page.locator('.skip-link')).toHaveText('Zu den Sprachen springen');
-    await expect(page.locator('.card').first().getByRole('link', { name: 'Exportieren' }))
+    await expect(page.locator('.card').first().getByRole('link', { name: 'Anpassen' }))
       .toBeVisible();
     await expect(page.locator('.lang-picker-button'))
       .toHaveAttribute('aria-label', /wählen Sie die Sprache/);

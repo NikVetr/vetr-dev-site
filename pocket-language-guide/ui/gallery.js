@@ -112,11 +112,13 @@ function card(lang, gallery) {
   if (!have) {
     actions.push(el('span', { class: 'tag planned', text: t('gallery.helpTranslate') }));
   } else {
+    // **No Export here.** Exporting is what you do once you have decided what is on
+    // the card, and deciding is the customise page -- which carries Export PDF and
+    // PNG in its own header. Two buttons on a card is a choice a reader can make at a
+    // glance; three was one of them asking them to commit to a default they had not
+    // seen yet.
     actions.push(el('a', {
-      class: 'btn primary', href: `sheet.html${query}`, text: t('gallery.export'),
-    }));
-    actions.push(el('a', {
-      class: 'btn', href: `customize.html${query}`, text: t('gallery.customise'),
+      class: 'btn primary', href: `customize.html${query}`, text: t('gallery.customise'),
     }));
     // **Only where a board exists for this pair.** A conversation board is authored
     // content, not a view the corpus can generate, and it needs text on both sides --

@@ -37,8 +37,10 @@ test('one tap shows the whole message, and one tap puts it away', async ({ page 
   await expect(big).toHaveAttribute('lang', 'zh-Hans');
   expect(await big.textContent()).toMatch(/\p{Script=Han}/u);
   // The owner's own wording is present but secondary, as a confirmation that the
-  // right button was pressed.
-  await expect(page.locator('.board-message-gloss')).toHaveAttribute('lang', 'en');
+  // right button was pressed. The language is on the span rather than the paragraph
+  // because that line can now carry three of them -- the meaning, the romanisation
+  // and the IPA -- and they are not all in the same one.
+  await expect(page.locator('.board-message-gloss .gloss-own')).toHaveAttribute('lang', 'en');
 
   // B05: no visible Back control and no instruction paragraph on the message.
   await expect(page.locator('.board-stage .board-up')).toHaveCount(0);
@@ -256,7 +258,7 @@ test('the answers are the listener\'s, and the chosen one comes back as the owne
   await expect(back).toHaveAttribute('lang', 'en');
   await expect(back).toContainText(/avoid/i);
   // The presentation reverses; the meaning and whose sentence it is do not.
-  await expect(page.locator('.board-message-gloss')).toHaveAttribute('lang', 'zh-Hans');
+  await expect(page.locator('.board-message-gloss .gloss-own')).toHaveAttribute('lang', 'zh-Hans');
   // An incoming answer is tinted, so the owner can see at a glance that this is the
   // reply and not something they said.
   await expect(page.locator('.board-stage')).toHaveClass(/board-stage-incoming/);
@@ -713,6 +715,173 @@ test('a device with no voice still shows every message', async ({ page }) => {
   await expect(page.locator('.board-message-text')).toHaveText(/\p{Script=Han}/u);
   // Nothing was spoken, and nothing is pending, on open.
   expect(await page.evaluate(() => speechSynthesis.speaking || speechSynthesis.pending)).toBe(false);
+});
+
+test('a board that cannot load says which file, instead of going blank', async ({ page }) => {
+  // Reported as "the converse grid is always blank when I first load it in a new
+  // language". That symptom has more than one cause and this fixes the part that is
+  // certainly wrong either way: `showFatal` prepends its box to `<body>`, which on
+  // every other page is a column that grows -- but this body is a `100dvh` flex
+  // column, so the box became a fourth row and squeezed the header, grid and
+  // controls into what was left. The one thing worth knowing, which file and what
+  // the server said, was being pushed off the screen by the board it was about.
+  await page.route('**/data/lang/zh-Hans/hotel.csv', (route) =>
+    route.fulfill({ status: 504, body: 'gone' }));
+  await page.goto(BOARD);
+
+  const box = page.locator('body > .container');
+  await expect(box).toBeVisible();
+  // Named, so the next report can say which file rather than "it was blank".
+  await expect(box).toContainText('data/lang/zh-Hans/hotel.csv');
+  await expect(box).toContainText('504');
+  // And the broken board is gone rather than sharing the screen with the reason.
+  await expect(page.locator('.board-main')).toHaveCount(0);
+  const where = await box.boundingBox();
+  expect(where.y).toBeLessThan(100);
+});
+
+test('what the message screen carries is the reader’s choice, and it sticks', async ({ page }) => {
+  // Every part of that screen used to be a fixed decision, and a fixed decision is
+  // wrong for somebody: a learner wants the pronunciation on it, someone handing the
+  // phone over wants nothing but the sentence. The three that were always there stay
+  // on by default; the two new ones are off, because a line of IPA under every
+  // phrase is a change nobody asked for.
+  await page.addInitScript(() => {
+    const voice = { name: 'Test', lang: 'zh-CN', localService: true, default: true, voiceURI: 'test' };
+    Object.defineProperty(speechSynthesis, 'getVoices', { value: () => [voice] });
+  });
+  await page.goto(BOARD);
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('[data-button="stop"]').click();
+  await expect(page.locator('.board-message-gloss')).toHaveText('Please stop');
+  await expect(page.locator('.board-turn')).toHaveCount(1);
+  await expect(page.locator('.board-speak')).toHaveCount(1);
+
+  await page.locator('.board-message').click();
+  await fromMenu(page, 'Settings');
+  const dialog = page.locator('dialog.speaker-settings');
+  await expect(dialog).toBeVisible();
+  const option = (/** @type {string} */ text) =>
+    dialog.locator('.display-option', { hasText: text }).locator('input');
+  await option('own letters').check();
+  await option('IPA').check();
+  await option('sideways').uncheck();
+  await option('half-speed').uncheck();
+  await page.keyboard.press('Escape');
+
+  await page.locator('[data-button="stop"]').click();
+  const line = page.locator('.board-message-gloss');
+  // Three parts, in reading order: what it means, how to say it, and the notation.
+  await expect(line.locator('.gloss-own')).toHaveText('Please stop');
+  await expect(line.locator('.gloss-roman')).not.toBeEmpty();
+  await expect(line.locator('.gloss-ipa')).toContainText('/');
+  // The separator is a border between spans, not a pipe in the text, so that it
+  // cannot be reordered into the wrong place beside a right-to-left gloss.
+  expect(await line.textContent()).not.toContain('|');
+  await expect(page.locator('.board-turn')).toHaveCount(0);
+  // Speak and the half-speed button go together: they are one capability.
+  await expect(page.locator('.board-speak')).toHaveCount(0);
+  await expect(page.locator('.board-slow')).toHaveCount(0);
+
+  // And it is a setting, not a session: it survives the page going away.
+  await page.reload();
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('[data-button="stop"]').click();
+  await expect(page.locator('.board-message-gloss .gloss-ipa')).toBeVisible();
+  await expect(page.locator('.board-speak')).toHaveCount(0);
+});
+
+test('the header says what is loaded, and is also how you change it', async ({ page }) => {
+  // The topic's name and the pair were the two facts on the header and the only way
+  // to act on either was to leave: up to the topic list and back down, or out to the
+  // gallery and start again. They are controls now, and **they look exactly as they
+  // did** -- a heading and a line of small print -- because a header that grows two
+  // more buttons is a header competing with the grid it sits above.
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=emergency');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+
+  const title = page.locator('#board-title .board-inline-switch');
+  await expect(title).toHaveText('Emergency');
+  // Unchanged appearance is the requirement, so it is the assertion.
+  const same = await page.evaluate(() => {
+    const b = getComputedStyle(document.querySelector('#board-title .board-inline-switch'));
+    const h = getComputedStyle(document.querySelector('#board-title'));
+    return b.fontSize === h.fontSize && b.fontWeight === h.fontWeight
+      && b.color === h.color && b.textDecorationLine === 'none';
+  });
+  expect(same, 'the control must not look like a button').toBe(true);
+
+  await title.click();
+  const menu = page.locator('dialog.board-menu-panel');
+  await expect(menu).toBeVisible();
+  // The other contexts, and the way back to all of them.
+  await expect(menu.locator('button', { hasText: 'Shopping' })).toBeVisible();
+  await expect(menu.locator('button', { hasText: 'All topics' })).toBeVisible();
+  await expect(menu.locator('button', { hasText: 'Emergency' })).toHaveCount(0);
+  await page.keyboard.press('Escape');
+
+  // Either half of the pair opens its own list, and picking one reloads the board on
+  // that language -- the whole interface with it, which is the point of the source.
+  const both = page.locator('#board-pair .board-inline-switch');
+  await expect(both).toHaveCount(2);
+  await both.first().click();
+  await expect(menu).toBeVisible();
+  // Fifty entries have to end before the screen does.
+  const fits = await menu.evaluate((d) => d.getBoundingClientRect().bottom <= innerHeight
+    && d.scrollHeight > d.clientHeight);
+  expect(fits, 'a long switcher must scroll inside the screen').toBe(true);
+  await menu.locator('button', { hasText: 'German' }).first().click();
+
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  expect(new URL(page.url()).searchParams.get('source')).toBe('de');
+  await expect(page.locator('#board-title')).toHaveText('Notfall');
+});
+
+test('the same sentence can be said again at half speed', async ({ page }) => {
+  // A stranger who did not catch a synthesised sentence needs it slower, not louder.
+  // The engine has had a `slow` rate since the keypad went in and nothing reached it.
+  //
+  // Stubbing the utterance as well as the voice list is what makes this assertable:
+  // `speak` sets `utterance.voice` to the chosen voice, and assigning a plain object
+  // to a real `SpeechSynthesisUtterance` throws -- which is why the test above only
+  // ever checked the labels and never pressed the button.
+  await page.addInitScript(() => {
+    const voice = { name: 'Test', lang: 'zh-CN', localService: true, default: true, voiceURI: 'test' };
+    Object.defineProperty(speechSynthesis, 'getVoices', { value: () => [voice] });
+    /** @type {{rate:number, text:string}[]} */ (globalThis).__spoken = [];
+    class FakeUtterance { constructor(/** @type {string} */ text) { this.text = text; } }
+    Object.defineProperty(window, 'SpeechSynthesisUtterance', { value: FakeUtterance, configurable: true });
+    Object.defineProperty(speechSynthesis, 'speak', {
+      configurable: true,
+      value: (/** @type {any} */ u) => {
+        globalThis.__spoken.push({ rate: u.rate, text: u.text });
+        setTimeout(() => u.onend && u.onend(), 5);
+      },
+    });
+  });
+  await page.goto(BOARD);
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('[data-button="stop"]').click();
+
+  const slow = page.locator('.board-slow');
+  // A numeral needs no catalogue; the name it is announced by does.
+  await expect(slow).toHaveText('0.5×');
+  await expect(slow).toHaveAttribute('aria-label', /half speed/i);
+  // Beside Speak and smaller than it: the same act, second time around.
+  const speakBox = await page.locator('.board-speak').boundingBox();
+  const slowBox = await slow.boundingBox();
+  expect(slowBox.x).toBeGreaterThanOrEqual(speakBox.x + speakBox.width - 2);
+  expect(slowBox.width).toBeLessThan(speakBox.width);
+
+  await page.locator('.board-speak').click();
+  await slow.click();
+  await expect.poll(() => page.evaluate(() => globalThis.__spoken.length)).toBe(2);
+  const said = await page.evaluate(() => globalThis.__spoken);
+  expect(said.map((s) => s.rate)).toEqual([1, 0.5]);
+  // The same sentence both times -- slower, not different.
+  expect(said[0].text).toBe(said[1].text);
+  await expect(page.locator('.board-speech-trouble')).toHaveText('');
 });
 
 test('Speak is the owner’s control and Reply is the listener’s', async ({ page }) => {

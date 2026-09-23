@@ -31,6 +31,9 @@ import {
 } from '../core/quantity.js';
 import { openBoardEditor } from './board-editor.js';
 import { openBoardMenu } from './board-menu.js';
+import {
+  readDisplay, displaySection, readVoice, voiceSection,
+} from './board-display.js';
 import { speech } from './platform/speech.js';
 import { keepAwake } from './platform/wake.js';
 import { startBeacon, stopBeacon } from './platform/beacon.js';
@@ -106,9 +109,71 @@ function toPicker() {
 const serves = (board, /** @type {string} */ listener, /** @type {string} */ owner) => (
   board.listeners.includes(listener) && board.owners.includes(owner));
 
-/** @param {string} owner @param {string} listener */
-async function showPicker(owner, listener) {
-  const index = JSON.parse(await loadText('data/boards/index.json'));
+
+/**
+ * Go somewhere else on this board page, by rewriting one query parameter.
+ *
+ * A full navigation rather than a re-render: the pair decides which corpus rows,
+ * which two catalogues and which speaker variants are loaded, and every one of those
+ * is read once during `main`. Re-deriving them in place would be a second, quieter
+ * copy of the boot sequence.
+ * @param {Record<string,string|null>} changes
+ */
+function goTo(changes) {
+  const next = new URLSearchParams(location.search);
+  for (const [key, value] of Object.entries(changes)) {
+    if (value === null) next.delete(key); else next.set(key, value);
+  }
+  location.search = next.toString();
+}
+
+/**
+ * The codes one side of the pair could take, with the other side held fixed.
+ *
+ * Restricted to the board in front of the reader when there is one, so switching a
+ * language cannot land them on a board that does not serve the pair they just asked
+ * for. With no board open it is the union across all of them, which is what the
+ * topic list is already showing.
+ * @param {{boards:{id:string, listeners:string[], owners:string[]}[]}} index
+ * @param {string|null} boardId @param {'listener'|'owner'} side @param {string} fixed
+ */
+function candidates(index, boardId, side, fixed) {
+  /** @type {Set<string>} */ const out = new Set();
+  for (const board of index.boards) {
+    if (boardId && board.id !== boardId) continue;
+    const mine = side === 'listener' ? board.listeners : board.owners;
+    const theirs = side === 'listener' ? board.owners : board.listeners;
+    if (theirs.includes(fixed)) for (const code of mine) out.add(code);
+  }
+  return [...out];
+}
+
+/**
+ * Turn an element that already says something into the control that changes it.
+ *
+ * **Appearance is deliberately untouched.** The title and the pair are statements of
+ * what is on screen, and they read correctly as statements; making them look like
+ * buttons would add two more things competing with the grid for a glance. So the
+ * button inherits everything visual from its parent and brings only a pointer, a
+ * role and a focus ring -- which is the accessible minimum for something that acts.
+ * @param {string} label @param {string} hint @param {(anchor:HTMLElement)=>void} onOpen
+ */
+function inlineControl(label, hint, onOpen) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'board-inline-switch';
+  button.textContent = label;
+  button.title = hint;
+  button.setAttribute('aria-haspopup', 'menu');
+  button.addEventListener('click', () => onOpen(button));
+  return button;
+}
+
+/**
+ * @param {string} owner @param {string} listener
+ * @param {{boards:{id:string, titleKey:string, listeners:string[], owners:string[]}[]}} index
+ */
+async function showPicker(owner, listener, index) {
   /** @type {Map<string,string>} */ const titles = new Map();
   for (const board of index.boards) {
     if (serves(board, listener, owner)) titles.set(board.id, t(board.titleKey));
@@ -160,12 +225,45 @@ async function main() {
   // The pair, before either branch: it is the same statement of who is about to be
   // shown what, whether or not a board has been chosen yet.
   const named = Object.fromEntries(languages.map((l) => [l.bcp47, l]));
-  $('board-pair').textContent = t('board.pair', {
-    target: languageName(listener, named[listener]?.exonym_en ?? listener),
-    source: languageName(owner, named[owner]?.exonym_en ?? owner),
-  });
+  /** @param {string} code */
+  const nameOf = (code) => languageName(code, named[code]?.exonym_en ?? code);
+  /** @type {{boards:{id:string, titleKey:string, listeners:string[], owners:string[]}[]}} */
+  const index = JSON.parse(await loadText('data/boards/index.json'));
 
-  if (!boardId) { await showPicker(owner, listener); return; }
+  // **The pair is the switcher for the pair.** Both names were already on screen
+  // saying exactly which two languages are loaded, and the only way to change either
+  // was to go back to the gallery and start again -- two navigations away from a
+  // fact the reader is looking straight at.
+  //
+  // `t` is asked for the sentence with two control characters standing in for the
+  // names, because the order is the catalogue's business (Urdu writes
+  // `{source} <- {target}`) and splitting the rendered string on the sentinels is the
+  // only way to find the halves without re-implementing the substitution here.
+  // Control characters rather than words: `isolate` in `ui/i18n.js` wraps an insert
+  // in FSI/PDI only when it contains a letter, so these two pass through clean.
+  const pairLine = $('board-pair');
+  pairLine.replaceChildren();
+  for (const piece of t('board.pair', { source: '\u0001', target: '\u0002' })
+    .split(/([\u0001\u0002])/)) {
+    if (piece !== '\u0001' && piece !== '\u0002') {
+      if (piece) pairLine.append(document.createTextNode(piece));
+      continue;
+    }
+    const side = piece === '\u0001' ? 'owner' : 'listener';
+    const code = side === 'owner' ? owner : listener;
+    pairLine.append(inlineControl(nameOf(code), t('board.switchLanguage'), (button) => {
+      const options = candidates(index, boardId, side, side === 'owner' ? listener : owner)
+        .filter((c) => c !== code)
+        .map((c) => ({ code: c, label: nameOf(c) }))
+        .sort((a, b) => a.label.localeCompare(b.label));
+      openBoardMenu(button, options.map((option) => ({
+        label: option.label,
+        run: () => goTo({ [side === 'owner' ? 'source' : 'target']: option.code }),
+      })));
+    }));
+  }
+
+  if (!boardId) { await showPicker(owner, listener, index); return; }
 
   const board = JSON.parse(await loadText(`data/boards/${boardId}.json`));
   const problems = validateBoard(board);
@@ -213,7 +311,17 @@ async function main() {
     owner,
     listenerDir: dirOf(listener),
     ownerDir: dirOf(owner),
+    // The first system the registry lists for this language is the one its pack
+    // fills, and the one the sheet prints by default.
+    listenerRoman: (named[listener]?.romanizations ?? '').split(',')[0].trim(),
   };
+
+  // What the message screen carries, which is the reader's own choice. Re-read
+  // rather than captured when it changes, so the dialog's checkbox and the screen
+  // behind it cannot disagree.
+  let display = readDisplay();
+  // Which voice reads the listener's sentence, when the reader has opinions.
+  let chosenVoice = readVoice(listener);
 
   // **Whose voice the outgoing messages are in.** Fetched for whichever of the two
   // languages declares an axis at all — usually neither, and never more than two
@@ -291,7 +399,21 @@ async function main() {
   // The title is `nowrap` and ellipsises at enlarged text rather than costing the
   // grid a row, so the full name goes in `title` too -- and it is on the context grid
   // in full either way, which is where a reader who cannot read it here will look.
-  $('board-title').textContent = t(board.titleKey);
+  // **The title of the context is the way to a different context.** It already
+  // names the one you are in; the alternative was the up-arrow back to the topic
+  // list and then a second tap, which is two navigations to change one thing.
+  const others = index.boards
+    .filter((b) => b.id !== boardId && serves(b, listener, owner))
+    .map((b) => ({ id: b.id, label: t(b.titleKey) }))
+    .sort((a, b) => a.label.localeCompare(b.label));
+  $('board-title').replaceChildren(
+    inlineControl(t(board.titleKey), t('board.switchTopic'), (button) => {
+      openBoardMenu(button, [
+        ...others.map((o) => ({ label: o.label, run: () => goTo({ board: o.id }) })),
+        { label: t('board.allTopics'), run: () => goTo({ board: null }) },
+      ]);
+    }),
+  );
   $('board-title').title = t(board.titleKey);
   document.title = `${t(board.titleKey)} \u2014 ${t('nav.brand')}`;
 
@@ -467,8 +589,14 @@ async function main() {
         // claim that this device can read the sentence out, made before anything is
         // tried, so an engine that then refuses has to say so instead of leaving the
         // owner tapping a dead control while somebody waits.
-        onSpeak: canSpeak ? () => speech.speakPhrase(phrase) : null,
+        onSpeak: canSpeak && display.speak
+          ? (/** @type {'normal'|'slow'} */ rate) => speech.speakPhrase(phrase, {
+            rate, voiceId: chosenVoice || undefined,
+          })
+          : null,
+        show: display,
         speakLabel: t('board.speak'),
+        slowLabel: t('board.slow'),
         speakError: (/** @type {string} */ reason) => {
           const said = t(`speech.${reason}`);
           // An unfamiliar reason is still a failure worth reporting; a bare key is
@@ -607,7 +735,14 @@ async function main() {
     languages: [listener, owner],
     profile,
     onChange: (next) => { profile = next; voice(); sayStatus(); paint(); },
-    extra: personalSection(personalWiring({
+    extra: [displaySection(display, (next) => { display = next; paint(); }),
+      voiceSection({
+        lang: listener,
+        voices: speech.getCapabilities(listener).voices,
+        current: chosenVoice,
+        onChange: (id) => { chosenVoice = id; },
+      }),
+      personalSection(personalWiring({
       save: download,
       // **What this build can actually show**, so an import naming a screen that is
       // not here is refused rather than reported as a success with the phrases
@@ -619,8 +754,8 @@ async function main() {
         voice();
         sayStatus();
         paint();
-      },
-    })),
+        },
+      }))],
   });
 
   const openEditor = () => openBoardEditor({
@@ -690,4 +825,18 @@ async function main() {
   }).catch(() => {});
 }
 
-main().catch(showFatal);
+main().catch((err) => {
+  // **The board has to get out of the way of its own error.** `showFatal` prepends a
+  // box to `<body>`, which on every other page is a column that grows -- but this
+  // body is a `100dvh` flex column, so the box became a fourth row and squeezed the
+  // header, the grid and the controls into what was left. The reader got a
+  // short board under a message, which reads as the board being broken in some new
+  // way rather than as the board having failed to load.
+  //
+  // This is also the diagnostic. A board that cannot load its rows is a blank grid
+  // to look at, and the one thing worth knowing -- which file, and what the server
+  // said -- is in the message that was being squeezed off the screen.
+  for (const part of ['.board-main', '.board-header']) document.querySelector(part)?.remove();
+  document.body.classList.remove('board-body');
+  showFatal(err);
+});

@@ -596,6 +596,39 @@ on that message returns to the exact grid it came from. There is no visible Back
 control on a message and no instruction paragraph — the surface's accessible name
 carries the return action for anyone who cannot see that the card is tappable.
 
+**The header is the two facts and also the two controls.** The topic's name and the
+pair say what is loaded; tapping either opens a list and changes it, without leaving
+the page. They are deliberately not drawn as buttons — a board's header sits above
+the grid the whole format depends on, and two more things competing for that glance
+would cost more than the navigation saves. `ui/conversation.js` splits
+`t('board.pair')` by rendering it with two control characters in place of the names
+and slicing on them, because the order is the catalogue's business: Urdu writes the
+arrow the other way round, and `isolate` in `ui/i18n.js` leaves a letterless insert
+unwrapped, so the sentinels survive the substitution intact.
+
+**What the message screen carries is a setting, not a decision.** The owner's own
+wording, Speak and its half-speed twin, and the control that turns the sentence
+sideways can each be switched off; how to say it in the reader's own letters, and the
+same in IPA, can each be switched on. The three that were always there default to on
+and the two new ones to off, which is `ui/board-display.js` — one record rather than
+five keys, because they are read together on every paint and written together from
+one dialog.
+
+The pronunciation rides with the phrase out of `resolvePhrase`, not looked up again
+in the view, and that is what keeps it right under a speaker variant: `say` has
+already swapped the row for the reader's own gender by then. The three parts are
+separated by a border between spans rather than a pipe in the text, because a pipe
+inside one element takes the direction of whatever it lands beside and a Hebrew gloss
+next to a Latin romanisation put it at the wrong end of the line.
+
+**Which voice reads it out is also a setting**, per language. The automatic pick
+prefers an on-device voice over one that needs the network, which is right for a
+traveller with no data — but a desktop Linux box exposes 8612 voices, because
+speech-dispatcher lists every espeak variant separately, and when every term in the
+ranking ties the pick falls through to alphabetical order. A name containing `+` now
+sorts behind one that does not, which costs nothing where the convention is unknown,
+and `ui/platform/speech.js` has accepted a `voiceId` since it was written.
+
 **It is a view over the corpus, not a small sheet.** No `SheetSpec`, no solver, no
 fontkit: `core/pack.js` is a 44KB data-only join, so showing a phrase costs a corpus
 lookup and nothing else. Two tests hold that line, one walking the import graph and

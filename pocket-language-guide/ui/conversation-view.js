@@ -377,15 +377,20 @@ function watchAnswers(list) {
  * @param {string} config.replyLabel         in the *listener's* language
  * @param {boolean} [config.incoming]        an answer coming back the other way
  * @param {import('../core/conversation.js').ColourRole} [config.colour]
- * @param {(()=>void|Promise<unknown>)|null} [config.onSpeak]  null where no voice
+ * @param {((rate:'normal'|'slow')=>void|Promise<unknown>)|null} [config.onSpeak]  null where no voice
  *   can say this. A rejection is reported rather than swallowed, so the promise is
  *   handed on rather than caught by the caller.
  * @param {string} [config.speakLabel]        in the *owner's* language
+ * @param {string} [config.slowLabel]         the half-speed control's accessible name
+ * @param {{owner:boolean, roman:boolean, ipa:boolean, turn?:boolean}} [config.show]  what the reader
+ *   has asked the second line to carry; the controls are gated by the caller
  * @param {(reason:string)=>string} [config.speakError]  a speech failure's `reason`
  *   in the owner's words
  */
 export function renderMessage(stage, phrase,
-  { onDismiss, onReply, replyLabel, incoming, colour, onSpeak, speakLabel = '', speakError }) {
+  { onDismiss, onReply, replyLabel, incoming, colour, onSpeak, speakLabel = '',
+    slowLabel = '', speakError,
+    show = { owner: true, roman: false, ipa: false, turn: true } }) {
   stage.replaceChildren();
   stage.hidden = false;
   stage.className = 'board-stage';
@@ -414,13 +419,37 @@ export function renderMessage(stage, phrase,
   // The owner's own wording, small and secondary: it is a confirmation that the
   // right button was pressed, not part of what is being said to anyone. Its own
   // `lang` and `dir`, because the two languages routinely run opposite ways.
+  //
+  // **Three things can share this line and each is off or on by itself**, so it is
+  // built from whatever is left rather than written out: the meaning, how to say it
+  // in the reader's own letters, and the same in IPA. The separator is a rule
+  // between spans rather than a `|` in the text, because a pipe inside one element
+  // picks up the direction of whatever it lands next to and a Hebrew gloss beside a
+  // Latin romanisation put it at the wrong end of the line.
   const small = document.createElement('p');
   small.className = 'board-message-gloss';
-  small.textContent = phrase.owner.text;
-  small.lang = phrase.owner.lang;
-  small.dir = phrase.owner.dir;
+  /** @param {string} text @param {string} lang @param {string} dir @param {string} cls */
+  const part = (text, lang, dir, cls) => {
+    const span = document.createElement('span');
+    span.className = cls;
+    span.textContent = text;
+    span.lang = lang;
+    span.dir = dir;
+    return span;
+  };
+  const parts = [];
+  if (show.owner) parts.push(part(phrase.owner.text, phrase.owner.lang, phrase.owner.dir, 'gloss-own'));
+  // Latin-ish by construction and read by the owner, so it takes their direction.
+  if (show.roman && phrase.listener.roman) {
+    parts.push(part(phrase.listener.roman, phrase.owner.lang, phrase.owner.dir, 'gloss-roman'));
+  }
+  if (show.ipa && phrase.listener.ipa) {
+    parts.push(part(`/${phrase.listener.ipa}/`, 'und-fonipa', 'ltr', 'gloss-ipa'));
+  }
+  small.append(...parts);
 
-  surface.append(big, small);
+  surface.append(big);
+  if (parts.length) surface.append(small);
   stage.append(surface);
 
   // **A scroll is not a tap.** A long message scrolls inside the surface, and the
@@ -462,17 +491,33 @@ export function renderMessage(stage, phrase,
   trouble.setAttribute('role', 'status');
 
   if (onSpeak) {
+    /** Both audio controls do the same thing at different speeds. @param {'normal'|'slow'} rate */
+    const say = (rate) => {
+      trouble.textContent = '';
+      Promise.resolve(onSpeak(rate)).catch((err) => {
+        trouble.textContent = speakError?.(err?.reason ?? 'synthesis-failed') ?? '';
+      });
+    };
     const speakButton = document.createElement('button');
     speakButton.type = 'button';
     speakButton.className = 'board-control board-speak';
     speakButton.textContent = speakLabel;
-    speakButton.addEventListener('click', () => {
-      trouble.textContent = '';
-      Promise.resolve(onSpeak()).catch((err) => {
-        trouble.textContent = speakError?.(err?.reason ?? 'synthesis-failed') ?? '';
-      });
-    });
+    speakButton.addEventListener('click', () => say('normal'));
     controls.append(speakButton);
+
+    // **Half speed, next to full speed.** A stranger who did not catch a synthesised
+    // sentence the first time needs it slower, not louder, and asking the owner to
+    // find a setting for that mid-conversation is asking them to look away. Its face
+    // is a numeral, which needs no translation and reads the same in every script;
+    // the accessible name is the sentence, and comes from the owner's catalogue
+    // because the owner is the one who presses it.
+    const slowButton = document.createElement('button');
+    slowButton.type = 'button';
+    slowButton.className = 'board-control board-slow';
+    slowButton.textContent = '0.5\u00d7';
+    if (slowLabel) slowButton.setAttribute('aria-label', slowLabel);
+    slowButton.addEventListener('click', () => say('slow'));
+    controls.append(slowButton);
   }
 
   if (onReply) {
@@ -499,7 +544,9 @@ export function renderMessage(stage, phrase,
     reply.addEventListener('click', onReply);
     controls.append(reply);
   }
-  controls.append(turnControl(stage, surface, big));
+  // Off only if the reader has said so: it is the control that makes a phone usable
+  // held out across a counter, and the default is to have it.
+  if (show.turn !== false) controls.append(turnControl(stage, surface, big));
   // A sibling of the surface, never a child: a button inside a button is invalid,
   // and being a sibling is what structurally stops a control's click reaching the
   // dismiss handler. The row is always drawn now, because the turn control is always

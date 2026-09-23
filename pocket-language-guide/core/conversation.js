@@ -104,6 +104,8 @@ const ENTRIES = new Set(['duration', 'clock', 'count']);
  * @property {string} text
  * @property {string} lang
  * @property {'ltr'|'rtl'} dir
+ * @property {string} [roman]  how to say it, in the reader's own letters
+ * @property {string} [ipa]    the same, for a reader who reads IPA
  */
 
 /**
@@ -327,7 +329,19 @@ export function resolvePhrase(ref, ctx, incoming = false) {
   const owner = say(ctx.ownerVoice, ref.id, base.owner, incoming);
   return {
     id: ref.id,
-    listener: { text: listener.text, lang: ctx.listener, dir: ctx.listenerDir },
+    // **The pronunciation rides with the sentence, from the same row.** Taking it
+    // here rather than looking it up again in the view is what keeps it correct
+    // under a speaker variant: `say` has already swapped the row for the reader's
+    // own gender where that matters, and Hebrew's "I am sick" is the case that
+    // proves it -- the script is identical for both genders and the romanisation
+    // and the IPA are not.
+    listener: {
+      text: listener.text,
+      lang: ctx.listener,
+      dir: ctx.listenerDir,
+      roman: (ctx.listenerRoman && listener[`romanization_${ctx.listenerRoman}`]) || '',
+      ipa: listener.ipa || '',
+    },
     owner: { text: owner.text, lang: ctx.owner, dir: ctx.ownerDir },
     provenance: listener.provenance ?? '',
     confidence: Number(listener.confidence ?? 0),
@@ -367,6 +381,7 @@ function say(voice, conceptId, row, incoming) {
  * @property {'ltr'|'rtl'} listenerDir
  * @property {'ltr'|'rtl'} ownerDir
  * @property {Record<string,{owner:string, listener:string}>} [custom]
+ * @property {string} [listenerRoman]  which `romanization_*` column to read, if any
  * @property {SpeakerVoice} [listenerVoice]
  * @property {SpeakerVoice} [ownerVoice]
  */

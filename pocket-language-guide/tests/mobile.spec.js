@@ -195,28 +195,30 @@ test.describe('the studio\'s chrome on a phone', () => {
 
     const box = async (sel) => page.locator(sel).boundingBox();
     const brand = await box('.brand');
-    const pdf = await box('#pdf');
+    // PNG, not PDF: on a phone the export that stays in the header is the picture
+    // -- it goes to the camera roll -- and PDF folds into the menu behind it.
+    const png = await box('#png');
     const more = await box('#header-more');
     const pair = await box('#pair');
     const status = await box('#status');
     // Line one: the brand, then the primary action and the disclosure, in that order.
-    expect(Math.round(pdf.y)).toBe(Math.round(brand.y + (brand.height - pdf.height) / 2));
-    expect(brand.x).toBeLessThan(pdf.x);
-    expect(pdf.x).toBeLessThan(more.x);
+    expect(Math.round(png.y)).toBe(Math.round(brand.y + (brand.height - png.height) / 2));
+    expect(brand.x).toBeLessThan(png.x);
+    expect(png.x).toBeLessThan(more.x);
     expect(more.x + more.width).toBeLessThanOrEqual(390);
     // Line two: what the sheet is and how it came out, under the brand and level
     // with each other rather than scattered up the first line.
     expect(pair.y).toBeGreaterThan(brand.y + brand.height - 1);
     expect(Math.round(pair.y)).toBe(Math.round(status.y));
     expect(pair.x).toBeLessThan(status.x);
-    // Export PDF is the page's primary action and stays out of the menu; the rest
-    // are in it, and there is one of each rather than a visible copy and a hidden one.
-    await expect(page.locator('.site-header .container > #pdf')).toBeVisible();
-    for (const sel of ['#banner', '#drill-open', '#png', '.back-link']) {
+    // PNG is the phone's primary action and stays out of the menu; the rest are in
+    // it, and there is one of each rather than a visible copy and a hidden one.
+    await expect(page.locator('.site-header .container > #png')).toBeVisible();
+    for (const sel of ['#banner', '#drill-open', '#pdf', '.back-link']) {
       await expect(page.locator(`#header-menu > ${sel}`)).toHaveCount(1);
       await expect(page.locator(sel)).toHaveCount(1);
     }
-    await expect(page.locator('#png')).toBeHidden();
+    await expect(page.locator('#pdf')).toBeHidden();
     const wide = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth);
     expect(wide).toBe(false);
   });
@@ -243,7 +245,7 @@ test.describe('the studio\'s chrome on a phone', () => {
 
     // Escape, with focus handed back rather than left on something unrendered.
     await more.click();
-    await page.locator('#png').focus();
+    await page.locator('#pdf').focus();
     await page.keyboard.press('Escape');
     await expect(menu).toBeHidden();
     expect(await page.evaluate(() => document.activeElement.id)).toBe('header-more');
@@ -350,7 +352,7 @@ test('the phone\'s chrome is built and taken down at the breakpoint', async ({ p
   await expect(page.locator('.panel-toggle')).toHaveCount(0);
 
   await page.setViewportSize({ width: 390, height: 844 });
-  await expect(page.locator('#header-menu > #png')).toBeAttached();
+  await expect(page.locator('#header-menu > #pdf')).toBeAttached();
   await expect(page.locator('.panel-toggle')).toHaveCount(2);
 
   await page.setViewportSize({ width: 844, height: 390 });

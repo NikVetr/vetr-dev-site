@@ -123,11 +123,25 @@ next agent would otherwise re-litigate.
 
 Append new keys in `en.json` order, after the file's last existing key. Then:
 
-- **Preserve the file's own indentation.** It is 2 spaces in most catalogues and
-  **1 space in `or.json`**. A reformatted file turns a 55-line diff into a 533-line
-  one and hides the actual change.
+- **Preserve the file's own indentation.** It is 2 spaces in 50 catalogues and
+  **1 space in `kn.json`, `ml.json` and `or.json`**. A reformatted file turns a
+  55-line diff into a 533-line one and hides the actual change. Do not take that
+  list on trust either — derive it, the way the agent who corrected this paragraph
+  did after being handed a version of it that named only `or.json`:
+
+  ```
+  python3 -c "
+  import pathlib
+  for p in sorted(pathlib.Path('data/i18n').glob('*.json')):
+      for ln in p.read_text().split(chr(10))[1:]:
+          if ln.startswith(' ') and '\":' in ln:
+              print(p.stem, len(ln) - len(ln.lstrip(' '))); break"
+  ```
 - **Preserve the trailing newline — or its absence.** `ha.json` and `ml.json` have
-  none. All catalogues are LF; none has a CR anywhere.
+  none; the other 51 do. All catalogues are LF; none has a CR anywhere. The
+  `data/registry/section-titles/*.csv` files are the opposite kind of trap: those
+  are a mix of CRLF and LF *per file*, so there is no rule to remember, only the
+  file in front of you.
 - **Round-trip before you write.** Load, re-serialise, compare bytes with the
   original; only then apply your change. This catches an indentation or escaping
   surprise before it reaches the file rather than after.

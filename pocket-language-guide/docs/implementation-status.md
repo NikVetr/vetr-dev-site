@@ -2510,3 +2510,113 @@ every value that legitimately matches: the romanisation standards `ALA-LC` and
 `BGN/PCGN`, French *Communication*, and a pattern like `{source} → {target}` with no
 words in it at all. Above it, a sentence somebody meant to translate. The report finds
 exactly the 76 and nothing else.
+
+## Batch M — nine notes from using it
+
+### The header says what is loaded, and is now how you change it
+
+The topic's name and the pair were the two facts on the board's header, and the only
+way to act on either was to leave: up to the topic list and back down, or out to the
+gallery and start over. Both are controls now, and **they look exactly as they did** —
+the test asserts the button's font, weight and colour against the heading's, because a
+header that grows two more buttons is a header competing with the grid above which it
+sits. An underline appears on hover, which is the pointer's own question rather than a
+claim made at rest.
+
+Splitting the pair took a trick worth recording. `t('board.pair')` renders
+`{source} -> {target}`, and Urdu renders it `{source} <- {target}` — the order is the
+catalogue's business. So `t` is asked for the sentence with two **control characters**
+standing in for the names, and the result is split on them: `isolate` in `ui/i18n.js`
+wraps an insert in FSI/PDI only when it contains a letter, so the two sentinels pass
+through clean and land exactly where that language puts its halves.
+
+The language list is fifty entries on a phone, which found a latent bug: the menu was
+written for two items, given a `top` and no ceiling, and grew straight off the bottom
+of the screen. It has a `max-block-size` now.
+
+### Half speed, and a path that had never been pressed
+
+The engine has had `RATES = { normal, slow }` since the keypad went in and **nothing
+ever called it with `slow`**. A half-speed control sits beside Speak now, smaller, its
+face a numeral that needs no catalogue and its accessible name a sentence that does.
+The rate moved 0.7 to 0.5, because a button that names a number has to be that number.
+
+Testing it needed the utterance stubbed as well as the voice list, and that is why it
+had never been tested: `speak` assigns `utterance.voice = chosen`, and assigning a
+plain object to a real `SpeechSynthesisUtterance` throws — so the existing test could
+check the labels and nothing else. With a fake utterance class the two presses record
+rate 1 and rate 0.5 on the same text.
+
+### Eight thousand six hundred voices, and the alphabet picking between them
+
+Reported as "the English voice sounds pretty weird — sort of a demonic whisper", and
+the cause is countable. `spd-say -L` on this machine lists **8612 voices**, because
+speech-dispatcher exposes every espeak *variant* as an entry of its own:
+`English (America)`, then a hundred of `English (America)+Andrea`, `+croak`,
+**`+whisper`**. All local, all matching `en` equally well, none flagged default — so
+every term in the sort tied and the pick fell through to `name.localeCompare`, which
+has no opinion about whether a voice sounds like a person.
+
+A name containing a `+` now sorts behind one that does not. It costs nothing on a
+platform without the convention: no name has one, every voice scores 0, and the order
+is what it always was — which is the other half of the test.
+
+And the reader can choose. `speak` has accepted a `voiceId` all along and no surface
+ever supplied one; there is a picker now, per language, defaulting to the automatic
+pick.
+
+### Five things about the message screen, which were five fixed decisions
+
+A fixed decision is wrong for somebody: a learner wants the pronunciation on screen, a
+reader handing the phone to a stranger wants nothing on it but the sentence, a reader
+whose device has no usable voice wants Speak gone rather than dead. So the owner's
+wording, Speak-and-half-speed, and the turn control can each be switched off, and two
+new lines switched on — how to say it in the reader's own letters, and the same in
+IPA. The three that were always there default to on; the two new ones to off.
+
+**The pronunciation rides with the phrase from the same row**, added in
+`resolvePhrase` rather than looked up in the view, and that is what keeps it correct
+under a speaker variant: `say` has already swapped the row for the reader's own gender
+where that matters. Hebrew's "I am sick" is the case that proves it — the script is
+identical for both genders and the romanisation and the IPA are not.
+
+The separator between the three is a border between spans, not a pipe character in the
+text. A pipe inside one element takes the direction of whatever it lands beside, and a
+Hebrew gloss next to a Latin romanisation put it at the wrong end of the line.
+
+### Smaller things
+
+**The landing page** was a heading over a paragraph saying what the brand two lines
+above already said. One sentence now, which moved the language grid **74px up** a
+phone screen. The two old keys were retired rather than reworded, because changing the
+English under 52 translations strands them silently — a new key leaves a visible gap
+instead.
+
+**Export left the cards.** They offer the two things you do next; exporting is what the
+customise page's own header is for. Checked before removing: the card lightbox still
+links to the quick page, so nothing was orphaned.
+
+**On a phone the header keeps PNG and folds PDF away**, the reverse of the desktop.
+Both are right: a PDF is what you print and printing happens at a desk, while the
+export that is any use on a phone is the picture — it goes to the camera roll and can
+be held up to a person. They swap emphasis too, or the header's only export would be
+the one drawn as an afterthought.
+
+### A board that cannot load now says so
+
+`showFatal` prepends its box to `<body>`, which on every other page is a column that
+grows. The board's body is a `100dvh` flex column, so the box became a fourth row and
+squeezed the header, the grid and the controls into what was left: a short board under
+a message, which reads as the board being broken in some new way rather than as the
+board having failed to load. The board is removed first now, and the message — which
+names the file and the status — has the page to itself.
+
+This was found by causing it. Adding `ui/board-display.js` without rebuilding
+`data/shell.json` left the module out of the precache, and the two offline board tests
+went from passing to a thirty-second wait for a `.board-cell` that never came. The
+symptom was a blank grid; the cause was one file returning 504; and the message that
+would have said so was being squeezed off the screen by the board it was about.
+
+That is not yet a demonstrated explanation of the reported blank grid, which did not
+reproduce on a fresh profile against the live site. It is the same shape, and the
+board will now name the file if it happens again.

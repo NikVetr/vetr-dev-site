@@ -135,8 +135,13 @@ test('the lock screen shows the reader’s own date, not a translated one', asyn
   // which is what `Intl` does by default and what `supports` exists to refuse.
   for (const [source, wants] of /** @type {[string,RegExp][]} */ ([
     ['ja', /9月15日月曜日/],
-    // Quenya is not a locale and never will be, so this is the English floor.
-    ['qya', /September/],
+    // Quenya is not a locale and never will be, so `supports` refuses and the
+    // catalogue answers instead. It used to answer in English; it now answers
+    // `Isilya 15 Yavannië`, because `data/lang/qya/time.csv` already had Monday and
+    // September at full confidence and the wave that filled the studio strings
+    // noticed. Either way this asserts the same thing: `Intl` was not allowed to
+    // guess, which is what it does with a tag it has never heard of.
+    ['qya', /Isilya/],
   ])) {
     await page.goto(`/customize.html?target=es&source=${source}`);
     await expect(page.locator('.face.focused')).toBeVisible({ timeout: 90_000 });

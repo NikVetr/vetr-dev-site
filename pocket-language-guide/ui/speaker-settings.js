@@ -105,9 +105,10 @@ function el(tag, attrs = {}, kids = []) {
  * @param {string[]} config.languages          the pair, or every language in play
  * @param {import('../core/speaker.js').SpeakerProfile} config.profile
  * @param {(next:import('../core/speaker.js').SpeakerProfile)=>void} config.onChange
- * @param {HTMLElement} [config.extra]  a section the page supplies, shown under the
- *   axes -- the conversation board puts the reader's own phrases here, because this
- *   is the broader settings screen and that is the same kind of thing
+ * @param {HTMLElement|HTMLElement[]} [config.extra]  sections the page supplies,
+ *   shown under the axes -- the conversation board puts what the message screen
+ *   carries and the reader's own phrases here, because this is the broader settings
+ *   screen and both are the same kind of thing
  */
 export function openSpeakerSettings({ axes, languages, profile, onChange, extra }) {
   const asked = axesFor(axes, languages);
@@ -158,7 +159,7 @@ export function openSpeakerSettings({ axes, languages, profile, onChange, extra 
     ...(fields.length
       ? [el('p', { class: 'speaker-lede', text: t('speaker.lede') }), ...fields]
       : [el('p', { class: 'speaker-why', text: t('speaker.nothingToAsk') })]),
-    ...(extra ? [extra] : []),
+    ...(extra ? [extra].flat() : []),
     el('form', { method: 'dialog' }, [el('button', { text: t('speaker.done') })]),
   );
   document.body.append(panel);

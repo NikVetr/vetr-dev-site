@@ -34,12 +34,13 @@
 <main class="container container-gallery">
   <div class="gallery-intro">
     <div>
-      <h1 data-i18n="gallery.heading">Printable pocket guides</h1>
-      <p class="lede" data-i18n="gallery.lede">
-        Pick a language and get a pocket-sized phrase card built to print, cut and laminate.
-        Every sheet is typeset to fill its columns exactly. Customise the sections and the
-        layout, or take the default and export straight away.
-      </p>
+      <!-- One sentence rather than a heading over a paragraph. The brand is already
+           in the site header two lines up, so a second "Printable pocket guides"
+           under it said the same thing twice and pushed the language grid -- the
+           thing the page is for -- below the fold on a phone. It stays an `h1`
+           because the page still needs one; `.lede` is what makes it read as a
+           statement rather than a title. -->
+      <h1 class="lede" data-i18n="gallery.tagline">Design, save, and print quick reference phraselets, or tab your way through curated conversation trees live.</h1>
     </div>
     <!-- The other half of the header's question. "I speak" sits above in the site
          header; this is the answer to "and I want to speak...", as a grid dense

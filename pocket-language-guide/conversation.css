@@ -577,6 +577,19 @@
 }
 .board-control:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
+/* **Half speed is a satellite of Speak, not a third control.** It does the same
+   thing Speak does and is only reached after Speak has already been tried and
+   missed, so it is narrower and set in the smaller size -- enough to hit with a
+   thumb, not enough to compete for the glance. `tabular-nums` because the face is a
+   number and a proportional 0 next to a 5 wobbles. The reduced inline padding is
+   what keeps the row to three controls' width on a 360px phone. */
+.board-slow {
+  padding: 0 var(--space-2);
+  font-size: var(--fs-0);
+  font-variant-numeric: tabular-nums;
+  margin-inline-start: calc(var(--space-1) * -1);
+}
+
 /* **Reply is not one control among three.** Speak and the turn control are the
    owner's, and they are holding the phone; this one is for the stranger they are
    holding it out to, who has a second to work out what to do with a screen in a
@@ -984,6 +997,15 @@ dialog.board-menu-panel {
   background: var(--paper);
   color: var(--ink);
   box-shadow: 0 6px 24px rgb(17 24 32 / 18%);
+  /* **It has to end before the screen does.** This began as two items and is now
+     also the language switcher, which on a phone is fifty -- and a `<dialog>` given
+     a `top` and no ceiling grows straight off the bottom edge, taking the last
+     entries with it. The height is what is left under the panel's own offset, less
+     the same gap it keeps at the top, so the list scrolls inside a box that ends
+     on screen. `dvh` for the reason `.board-body` uses it: the address bar. */
+  max-block-size: calc(100dvh - env(safe-area-inset-top) - 4.4rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 dialog.board-menu-panel::backdrop { background: rgb(17 24 32 / 25%); }
 .board-menu-item {
@@ -1000,3 +1022,66 @@ dialog.board-menu-panel::backdrop { background: rgb(17 24 32 / 25%); }
 }
 .board-menu-item:hover { background: var(--surface); }
 .board-menu-item:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+/* **A statement that is also a control.** The topic's name and the pair already say
+   what is loaded, and they read correctly as statements -- so making them look like
+   buttons would put two more things on the header competing with the grid for the
+   glance the grid needs. They inherit everything visual from the element they sit
+   in and bring only what something pressable owes a reader: a pointer, a role, and a
+   focus ring for anyone arriving by keyboard. The underline is on hover alone, which
+   is a pointer's own question ("is this live?") and not a claim made at rest. */
+.board-inline-switch {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  text-align: inherit;
+}
+.board-inline-switch:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+.board-inline-switch:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* **The second line can carry up to three things, and they need telling apart.**
+   The meaning, then how to say it, then the same in IPA -- so the separator is a
+   rule drawn between spans rather than a `|` typed into the text. A pipe inside one
+   element takes the direction of whatever it lands beside, and a Hebrew gloss next
+   to a Latin romanisation put it at the wrong end of the line; a border cannot be
+   reordered. `flex-wrap` because three parts do not fit one phone line, and the
+   separator disappears with the part it belonged to for free. */
+.board-message-gloss {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0 var(--space-2);
+}
+.board-message-gloss > * + * {
+  border-inline-start: 1px solid currentColor;
+  padding-inline-start: var(--space-2);
+  opacity: 0.85;
+}
+/* IPA is a notation, not a language: it is set apart so it is not mistaken for the
+   romanisation next to it, and it never inherits the gloss's own script. */
+.gloss-ipa { font-style: italic; }
+
+/* One question, one checkbox, the label the whole hit target. */
+.display-option {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding: 0.3rem 0;
+  cursor: pointer;
+}
+.display-option input { flex: none; }
+
+/* The voice is one line, not a block: a label and the platform's own select. */
+.display-voice {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding: 0.3rem 0;
+}
+.display-voice select { flex: 1 1 auto; min-inline-size: 0; }

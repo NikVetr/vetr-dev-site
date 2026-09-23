@@ -83,6 +83,12 @@ h3 { font-size: var(--fs-1); margin: 0 0 var(--space-1); }
    cards it labels, which is the mistake `.container-wide` above records. */
 .container-gallery { width: min(100% - 2.5rem, 1560px); }
 .lede { color: var(--muted); max-width: 62ch; margin: 0 0 var(--space-3); }
+/* The gallery's intro is one sentence doing both jobs: it is still the page's `h1`,
+   because the document needs one and the brand in the site header is a link rather
+   than a heading -- but it reads as a statement, so it takes the lede's colour and
+   measure instead of a heading's 2.1rem bold, which set as a banner over the thing
+   the page is actually for. */
+h1.lede { font-size: var(--fs-1); font-weight: 400; line-height: 1.45; }
 /* Prose left, every language right. `minmax(0, 34rem)` rather than `auto` so the
    heading column cannot be squeezed by a long language name, and `1fr` on the grid
    so it takes whatever the viewport gives back. */
@@ -800,10 +806,14 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
      first line with the status line to the left of it, because the sheet page's
      `#status { order: -2 }` was a bare id selector in a `max-width: 700px` block
      and reached this header too. (Scoped where it belongs, further down.)
-     Two rows now. The action line -- the brand, Export PDF, and a disclosure for
-     everything else -- then the pair and the status under it as the small info line.
-     Export PDF is out of the menu deliberately: it is what the page is for, and one
-     tap is the difference between a primary action and a hidden one.
+     Two rows now. The action line -- the brand, PNG, and a disclosure for everything
+     else -- then the pair and the status under it as the small info line.
+     **PNG rather than Export PDF, and only on a phone.** One export stays out of the
+     menu, because one tap is the difference between a primary action and a hidden
+     one -- and on a phone the one worth the tap is the picture. It goes to the
+     camera roll and can be held up to a person; a PDF needs an app to open and a
+     printer to be any use, and neither is at hand. The desktop header keeps PDF
+     first, where a printer is the point.
      `.studio-header` throughout rather than `.site-header`: the gallery's header is
      a brand and a language picker and the sheet page's is a brand and two links, and
      neither of them has the problem this block is here to solve. */
@@ -812,7 +822,7 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
   /* `order` rather than a different source order, so the desktop header keeps the
      one it is built for. */
   .studio-header .brand { order: 1; margin-inline-end: auto; }
-  .studio-header #pdf { order: 2; }
+  .studio-header #png { order: 2; }
   .header-more { order: 3; }
   .header-break { order: 4; }
   .studio-header #pair { order: 5; }

@@ -205,6 +205,34 @@ test('a local voice is preferred, and a remote service is used only by name', as
   assert.equal(alone.spoken[0]?.voice.name, 'Google 普通话');
 });
 
+test('a modified voice never beats the voice it modifies', () => {
+  // **Reported as "the English voice sounds like a demonic whisper".** A desktop
+  // Linux box exposes 8612 voices, because speech-dispatcher lists every espeak
+  // variant separately: `English (America)` and then a hundred of
+  // `English (America)+Andrea`, `+croak`, `+whisper`. All local, all matching `en`
+  // equally, none flagged default -- so every term in the sort tied and the pick
+  // fell through to alphabetical order, which has no opinion about whether a voice
+  // sounds like a person.
+  const base = voice('English (America)', 'en-US');
+  const whisper = voice('English (America)+whisper', 'en-US');
+  const croak = voice('English (America)+croak', 'en-US');
+  // Deliberately listed with the variants first and one of them sorting before the
+  // base, so neither input order nor the alphabet can be what produces the answer.
+  const { synth, speech } = adapter([croak, whisper, base]);
+
+  speech.speak({ text: 'hello', locale: 'en' }).catch(() => {});
+  assert.equal(synth.spoken[0]?.voice.name, 'English (America)');
+
+  // The variants are still offered -- a reader who wants a croak may pick one.
+  assert.equal(speech.getCapabilities('en').voices.length, 3);
+
+  // And on a platform with no such convention nothing moves: no name has a `+`,
+  // every voice scores the same, and the order is what it always was.
+  const plain = adapter([voice('Bravo', 'en-US'), voice('Alpha', 'en-US')]);
+  plain.speech.speak({ text: 'hello', locale: 'en' }).catch(() => {});
+  assert.equal(plain.synth.spoken[0]?.voice.name, 'Alpha');
+});
+
 test('an engine that will not say where it runs is unknown, never local', () => {
   // No `localService` at all, which is what an engine that does not implement the
   // field looks like from here.
@@ -310,8 +338,10 @@ test('what is spoken is the message, not the label or the gloss', () => {
   assert.equal(spoken.text, phrase.listener.text);
   // The voice's own regional tag, not the code the board asked in.
   assert.equal(spoken.lang, 'zh-CN');
-  // Rate is named by the caller and numbered by the provider.
-  assert.equal(spoken.rate, 0.7);
+  // Rate is named by the caller and numbered by the provider. Half, not the gentler
+  // 0.7 this used to be: the control that reaches it is labelled `0.5x`, and a
+  // button that names a number has to be that number.
+  assert.equal(spoken.rate, 0.5);
 });
 
 test('a browser with no speech at all still answers every question', async () => {

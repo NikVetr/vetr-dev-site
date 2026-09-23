@@ -63,7 +63,9 @@
  * the native bridge's scale will not be this one.
  * @type {Record<Rate, number>}
  */
-const RATES = { normal: 1, slow: 0.7 };
+// 0.5 rather than a gentler 0.7, because the control that reaches it is labelled
+// `0.5x` and a button that names a number has to be that number.
+const RATES = { normal: 1, slow: 0.5 };
 
 /** Local first, then unknown, and a remote service only when it is asked for by id. */
 const OFFLINE_RANK = { local: 0, unknown: 1, remote: 2 };
@@ -236,8 +238,27 @@ export function createSpeech(
       .sort((a, b) => OFFLINE_RANK[offlineOf(a)] - OFFLINE_RANK[offlineOf(b)]
         || matchRank(a.lang, spoken.match) - matchRank(b.lang, spoken.match)
         || (b.default ? 1 : 0) - (a.default ? 1 : 0)
+        || variantRank(a) - variantRank(b)
         || a.name.localeCompare(b.name));
   }
+
+  /**
+   * A modified voice, behind the voice it modifies.
+   *
+   * **A desktop Linux box offers eight thousand voices**, because speech-dispatcher
+   * exposes every espeak variant as an entry of its own: `English (America)` and
+   * then `English (America)+Andrea`, `+Boris`, `+croak`, `+whisper` and a hundred
+   * more, all of them local, all of them matching `en` equally well. Every term
+   * above this one ties, so the pick fell through to alphabetical order -- which
+   * has no opinion about whether a voice sounds like a person, and cheerfully
+   * hands back a croak or a whisper.
+   *
+   * `+` is espeak's own separator between a base voice and the variant applied to
+   * it, so this costs nothing on a platform that does not use the convention: no
+   * name contains one, every voice scores 0, and the order is exactly what it was.
+   * @param {SpeechSynthesisVoice} voice
+   */
+  const variantRank = (voice) => (voice.name.includes('+') ? 1 : 0);
 
   /** The voice a bare Speak would use: the best one that is not a remote service. */
   const autoPick = (/** @type {SpeechSynthesisVoice[]} */ voices) => voices

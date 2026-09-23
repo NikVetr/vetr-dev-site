@@ -156,8 +156,18 @@ function headerMenu() {
   if (!toggle || !menu) return () => {};
 
   const moved = [...document.querySelectorAll(
-    '.site-header #banner, .site-header #drill-open, .site-header #png, .site-header .back-link',
+    '.site-header #banner, .site-header #drill-open, .site-header #pdf, .site-header .back-link',
   )];
+  // **PNG is the export that stays out on a phone, and PDF is the one that folds
+  // away.** It is the other way round on a desktop and both are right: a PDF is what
+  // you print, and printing is a thing you do at a desk. On a phone the export that
+  // is any use is the picture -- it goes to the camera roll, and it can be held up to
+  // a person. So the two also swap emphasis, or the header's only export would be
+  // the one drawn as an afterthought.
+  const pdf = document.getElementById('pdf');
+  const png = document.getElementById('png');
+  pdf?.classList.remove('primary');
+  png?.classList.add('primary');
   // A comment left where each one was, so putting them back is exact rather than a
   // second statement of the header's source order that could disagree with the first.
   const marks = moved.map((el) => {
@@ -202,6 +212,8 @@ function headerMenu() {
     removeEventListener('pointerdown', onDown, true);
     removeEventListener('keydown', onKey);
     marks.forEach((mark, i) => mark.replaceWith(moved[i]));
+    png?.classList.remove('primary');
+    pdf?.classList.add('primary');
   };
 }
 
