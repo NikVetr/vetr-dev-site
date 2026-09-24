@@ -32,7 +32,7 @@ pharmacy-symptoms.i-have-a-headache,J'ai mal à la tête,,ʒe mal a la tˈɛt,,2
 police-consulate.i-need-it-for-my-insurance,J'en ai besoin pour mon assurance,,ʒɑ̃n e bəzwɛ̃ puʁ mɔ̃n asyʁˈɑ̃s,,2,fr-agent-v1;ipa=espeak
 body-parts.ear,l'oreille,,loʁˈɛj,,2,fr-agent-v1;ipa=espeak
 medical-conditions.i-am-pregnant,Je suis enceinte,,ʒə syiz ɑ̃sˈɛ̃t,,2,fr-agent-v1;ipa=espeak
-pharmacy-symptoms.paracetamol-acetaminophen,paracétamol (Doliprane),acétaminophène,paʁasetamɔl dolipʁˈan,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.paracetamol-acetaminophen,paracétamol (Doliprane),acétaminophène,paʁasetamˈɔl,,2,fr-agent-v1;ipa=espeak
 police-consulate.i-need-an-interpreter,J'ai besoin d'un interprète,,ʒe bəzwɛ̃ dœ̃n ɛ̃tɛʁpʁˈɛt,,2,fr-agent-v1;ipa=espeak
 body-parts.leg,la jambe,,la ʒˈɑ̃b,,2,fr-agent-v1;ipa=espeak
 medical-conditions.i-carry-an-adrenaline-injector,J'ai un auto-injecteur d'adrénaline,stylo d'adrénaline,ʒe œ̃n otoɛ̃ʒɛktœʁ dadʁenalˈin,,2,fr-agent-v1;ipa=espeak
@@ -63,7 +63,7 @@ medical-conditions.please-give-me-sugar-or-juice,Donnez-moi du sucre ou du jus,,
 pharmacy-symptoms.antihistamine,antihistaminique,,ɑ̃tjistaminˈik,,2,fr-agent-v1;ipa=espeak
 police-consulate.no-thank-you-i-am-not-interested,"Non merci, ça ne m'intéresse pas",,"nɔ̃ mɛʁsˈi, sa nə mɛ̃teʁɛs pˈa",,2,fr-agent-v1;ipa=espeak
 medical-conditions.inject-it-into-my-outer-thigh,Injectez-le dans la face externe de la cuisse,,ɛ̃ʒɛktelə dɑ̃ la fas ɛkstɛʁn də la kyˈis,,2,fr-agent-v1;ipa=espeak
-pharmacy-symptoms.anti-diarrhea-medicine,antidiarrhéique (lopéramide),Imodium,ɑ̃tidjaʁeik lopeʁamˈid,,2,fr-agent-v1;ipa=espeak
+pharmacy-symptoms.anti-diarrhea-medicine,antidiarrhéique (lopéramide),Imodium,ɑ̃tidjaʁeˈik,,2,fr-agent-v1;ipa=espeak
 police-consulate.someone-attacked-me,On m'a agressé,,ɔ̃ ma aɡʁɛsˈe,,2,fr-agent-v1;ipa=espeak
 medical-conditions.my-blood-type-is,Mon groupe sanguin est {},,mɔ̃ ɡʁup sɑ̃ɡɛ̃ ˈɛ {},,2,fr-agent-v1;ipa=espeak
 pharmacy-symptoms.is-this-safe-to-take-with,Puis-je le prendre avec {} ?,,pyiʒ lə pʁɑ̃dʁ avˈɛk {},,2,fr-agent-v1;ipa=espeak

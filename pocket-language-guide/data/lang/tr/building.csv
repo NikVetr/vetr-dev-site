@@ -14,8 +14,8 @@ accessibility.accessible-restroom,Engelli tuvaleti var mı?,,ænɟællˈɪ tuval
 accessibility.station-assistance,İstasyonda yardım var mı?,,ɪstasjɔndˈa jardˈɯm vˈar mɯ,,2,tr-agent-v1;ipa=espeak
 accessibility.help-me-carry,Taşımama yardım eder misiniz?,,taʃˈɯmama jardˈɯm edˈɛr mˈisinɪz,,2,tr-agent-v1;ipa=espeak
 accessibility.board-first,Önce ben binebilir miyim?,,ˈœndʒɛ bæn binebilˈɪr mˈijɪm,,2,tr-agent-v1;ipa=espeak
-accessibility.door-width,Kapı genişliği kaç cm?,,kapˈɯ ɟenɪʃlijˈɪ kˈatʃ dʒˌɛmˈɛ,,2,tr-agent-v1;ipa=espeak
-accessibility.wheelchair-width,Tekerlekli sandalyemin eni {} cm.,,tekɛrlɛklˈɪ sandaɫjemˈɪn enˈɪ {} dʒˌɛmˈɛ,,2,tr-agent-v1;ipa=espeak
+accessibility.door-width,Kapı genişliği kaç cm?,,kapˈɯ ɟenɪʃlijˈɪ kˈatʃ santimɛtrˈɛ,,2,tr-agent-v1;ipa=espeak
+accessibility.wheelchair-width,Tekerlekli sandalyemin eni {} cm.,,tekɛrlɛklˈɪ sandaɫjemˈɪn enˈɪ {} santimɛtrˈɛ,,2,tr-agent-v1;ipa=espeak
 accessibility.hard-of-hearing,İşitme engelliyim.,Az duyuyorum.,iʃˈɪtmɛ ænɟællˈijɪm,,2,tr-agent-v1;ipa=espeak
 accessibility.speak-louder,Daha yüksek sesle konuşur musunuz?,,dahˈa jˈøksɛk sˈɛslɛ konuʃˈʊr mˈusunʊz,,2,tr-agent-v1;ipa=espeak
 accessibility.visually-impaired,Görme engelliyim.,,ɟˈœrmɛ ænɟællˈijɪm,,2,tr-agent-v1;ipa=espeak

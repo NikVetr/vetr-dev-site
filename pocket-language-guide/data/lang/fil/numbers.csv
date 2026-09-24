@@ -43,7 +43,7 @@ atm-cash.money-exchange,palitan ng pera,,palitan naŋ pɛɾa,,2,fil-agent-v1;ipa
 atm-cash.pin,PIN,,pin,,2,fil-agent-v1;ipa=fil-g2p+loan
 numbers-money.li-ng,2 + panuring,,,,2,fil-agent-v1
 numbers-money.yu-n,yuan,,juan,,2,fil-agent-v1;ipa=fil-g2p
-numbers-money.ku-i,yuan (sinasalita),,juan sinasalita,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.ku-i,yuan (sinasalita),,juan,,2,fil-agent-v1;ipa=fil-g2p
 numbers-money.2-items,2 na piraso,,,,2,fil-agent-v1
 numbers-money.yen,yen,,jɛn,,2,fil-agent-v1;ipa=fil-g2p
 numbers-money.yen-symbol,¥,yen,,,2,fil-agent-v1
@@ -62,9 +62,9 @@ numbers-money.rupiah-symbol,Rp,rupiah,ɾp,,2,fil-agent-v1;ipa=fil-g2p
 numbers-money.shilling,shilling,,shilliŋ,,2,fil-agent-v1;ipa=fil-g2p
 numbers-money.shilling-symbol,Sh,shilling,sh,,2,fil-agent-v1;ipa=fil-g2p
 numbers-money.baht,baht,,baht,,2,fil-agent-v1;ipa=fil-g2p
-numbers-money.baht-symbol,baht (simbolo),baht,baht simbolo,"named rather than shown: the Thai baht sign is U+0E3F, which is in the Thai block, and this row is only ever a Filipino reader’s gloss, drawn in the Latin face",2,fil-agent-v1;ipa=fil-g2p
+numbers-money.baht-symbol,baht (simbolo),baht,baht,"named rather than shown: the Thai baht sign is U+0E3F, which is in the Thai block, and this row is only ever a Filipino reader’s gloss, drawn in the Latin face",2,fil-agent-v1;ipa=fil-g2p
 numbers-money.forint,forint,,foɾint,,2,fil-agent-v1;ipa=fil-g2p
-numbers-money.forint-symbol,forint (simbolo),,foɾint simbolo,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.forint-symbol,forint (simbolo),,foɾint,,2,fil-agent-v1;ipa=fil-g2p
 numbers-money.rupee,rupee,,ɾupɛɛ,,2,fil-agent-v1;ipa=fil-g2p
 numbers-money.rupee-symbol,₹,rupee,,,2,fil-agent-v1
 numbers-money.dollar,dolyar,$,doljaɾ,US · CA · AU · NZ,2,fil-agent-v1;ipa=fil-g2p
@@ -72,45 +72,45 @@ numbers-money.dollar-symbol,$,dolyar,,US · CA · AU · NZ,2,fil-agent-v1
 numbers-money.pound,pound,£,pound,GB,2,fil-agent-v1;ipa=fil-g2p
 numbers-money.pound-symbol,£,pound,,GB,2,fil-agent-v1
 numbers-money.franc,franc,,fɾank,,2,fil-agent-v1;ipa=fil-g2p
-numbers-money.franc-symbol,franc (simbolo),,fɾank simbolo,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.franc-symbol,franc (simbolo),,fɾank,,2,fil-agent-v1;ipa=fil-g2p
 numbers-money.real,real,real ng Brazil,ɾɛal,,2,fil-agent-v1;ipa=fil-g2p
-numbers-money.real-symbol,real (simbolo),,ɾɛal simbolo,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.real-symbol,real (simbolo),,ɾɛal,,2,fil-agent-v1;ipa=fil-g2p
 numbers-money.local-currency,lokal na pera,,lokal na pɛɾa,,2,fil-agent-v1;ipa=fil-g2p
 numbers-money.lakh,"100,000",,,,2,fil-agent-v1
 numbers-money.crore,"10,000,000",,,,2,fil-agent-v1
 numbers-money.shekel,shekel,,shɛkɛl,,2,fil-agent-v1;ipa=fil-g2p
-numbers-money.shekel-symbol,shekel (simbolo),,shɛkɛl simbolo,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.shekel-symbol,shekel (simbolo),,shɛkɛl,,2,fil-agent-v1;ipa=fil-g2p
 numbers-money.rial,rial,,ɾial,,2,fil-agent-v1;ipa=fil-g2p
 numbers-money.toman,10 rial,,,,2,fil-agent-v1
 numbers-money.zloty,zloty,,zlotj,,2,fil-agent-v1;ipa=fil-g2p
-numbers-money.zloty-symbol,zloty (simbolo),,zlotj simbolo,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.zloty-symbol,zloty (simbolo),,zlotj,,2,fil-agent-v1;ipa=fil-g2p
 numbers-money.hryvnia,hryvnia,,hɾjvnia,,2,fil-agent-v1;ipa=fil-g2p
-numbers-money.hryvnia-symbol,hryvnia (simbolo),,hɾjvnia simbolo,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.hryvnia-symbol,hryvnia (simbolo),,hɾjvnia,,2,fil-agent-v1;ipa=fil-g2p
 numbers-money.leu,leu,,lɛu,,2,fil-agent-v1;ipa=fil-g2p
-numbers-money.leu-symbol,leu (simbolo),,lɛu simbolo,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.leu-symbol,leu (simbolo),,lɛu,,2,fil-agent-v1;ipa=fil-g2p
 numbers-money.koruna,koruna,,koɾuna,,2,fil-agent-v1;ipa=fil-g2p
-numbers-money.koruna-symbol,koruna (simbolo),,koɾuna simbolo,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.koruna-symbol,koruna (simbolo),,koɾuna,,2,fil-agent-v1;ipa=fil-g2p
 numbers-money.number-and-classifier-notes,"Pagbuo ng numero: 11 = shi yi; 20 = er shi; 21 = er shi yi. Sa numero ng telepono, madalas na binibigkas ang 1 bilang yao. Sa pagitan ng numero at ng pangngalan, may panuring: ge (pangkalahatan), wei (tao), zhang (tiket, papel), bei (tasa), ping (bote). jiao / mao = 0.1 yuan; fen = 0.01 yuan.",,,,2,fil-agent-v1
 numbers-money.number-and-classifier-notes-2,"Pagbuo ng numero: 11 = juuichi; 20 = nijuu; 21 = nijuuichi. Mga tagabilang: -tsu (bagay), -mai (patag), -hon (mahaba), -nin (tao), -hai (tasa). Sa telepono: 0 = zero o maru, 4 = yon, 7 = nana, 9 = kyuu.",,,,2,fil-agent-v1
 numbers-money.krona,krona,,kɾona,,2,fil-agent-v1;ipa=fil-g2p
-numbers-money.krona-symbol,krona (simbolo),,kɾona simbolo,,2,fil-agent-v1;ipa=fil-g2p
+numbers-money.krona-symbol,krona (simbolo),,kɾona,,2,fil-agent-v1;ipa=fil-g2p
 numbers-money.ringgit,ringgit,,ɾiŋɡit,,2,gloss-only;scoped-away;name of the currency in this language;ipa=fil-g2p
-numbers-money.ringgit-symbol,ringgit (simbolo),,ɾiŋɡit simbolo,,2,gloss-only;scoped-away;name of the currency in this language;ipa=fil-g2p
+numbers-money.ringgit-symbol,ringgit (simbolo),,ɾiŋɡit,,2,gloss-only;scoped-away;name of the currency in this language;ipa=fil-g2p
 numbers-money.nepali-rupee,rupee ng Nepal,,ɾupɛɛ naŋ nɛpal,,2,gloss-only;scoped-away;name of the currency in this language;ipa=fil-g2p
-numbers-money.nepali-rupee-symbol,rupee ng Nepal (simbolo),,ɾupɛɛ naŋ nɛpal simbolo,,2,gloss-only;scoped-away;name of the currency in this language;ipa=fil-g2p
+numbers-money.nepali-rupee-symbol,rupee ng Nepal (simbolo),,ɾupɛɛ naŋ nɛpal,,2,gloss-only;scoped-away;name of the currency in this language;ipa=fil-g2p
 numbers-money.birr,birr,,biɾɾ,,2,fil-agent-v1;ipa=fil-g2p
 numbers-money.naira,Nigerian naira,,niɡɛɾian naiɾa,,2,naira-gloss-v1;cldr;ipa=fil-g2p
-numbers-money.naira-symbol,Nigerian naira (simbolo),,niɡɛɾian naiɾa simbolo,,2,naira-gloss-v1;cldr;ipa=fil-g2p
+numbers-money.naira-symbol,Nigerian naira (simbolo),,niɡɛɾian naiɾa,,2,naira-gloss-v1;cldr;ipa=fil-g2p
 numbers-money.riel,riel,,ɾiɛl,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
-numbers-money.riel-symbol,riel (simbolo),,ɾiɛl simbolo,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
+numbers-money.riel-symbol,riel (simbolo),,ɾiɛl,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
 numbers-money.dram,dram,,dɾam,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
-numbers-money.dram-symbol,dram (simbolo),,dɾam simbolo,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
+numbers-money.dram-symbol,dram (simbolo),,dɾam,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
 numbers-money.lari,lari,,laɾi,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
-numbers-money.lari-symbol,lari (simbolo),,laɾi simbolo,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
+numbers-money.lari-symbol,lari (simbolo),,laɾi,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
 numbers-money.kip,kip,,kip,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
-numbers-money.kip-symbol,kip (simbolo),,kip simbolo,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
+numbers-money.kip-symbol,kip (simbolo),,kip,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
 numbers-money.taka,taka,,taka,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
-numbers-money.taka-symbol,taka (simbolo),,taka simbolo,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
+numbers-money.taka-symbol,taka (simbolo),,taka,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
 numbers-money.pakistani-rupee,rupee ng Pakistan,,ɾupɛɛ naŋ pakistan,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
-numbers-money.pakistani-rupee-symbol,rupee ng Pakistan (simbolo),,ɾupɛɛ naŋ pakistan simbolo,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
+numbers-money.pakistani-rupee-symbol,rupee ng Pakistan (simbolo),,ɾupɛɛ naŋ pakistan,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p
 numbers-money.som,som,,som,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=fil-g2p

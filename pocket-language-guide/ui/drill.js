@@ -19,6 +19,7 @@
 // -- and is a different thing entirely. Separate module, separate `drill.*` message
 // namespace, separate button.
 
+import { sayable } from '../core/pack.js';
 import { chipToggle } from './chips.js';
 import { fieldsFor, fieldLabels } from './format-panel.js';
 import { nextIndex } from './keys.js';
@@ -893,7 +894,7 @@ export function openDrill({ blocks, corpus, spec }) {
         if (speak && target) {
           speak.disabled = question.asks.includes('script');
           speak.addEventListener('click', () => {
-            speech.speak({ text: /** @type {string} */ (target.values.script), locale: spec.target })
+            speech.speak({ text: sayable(/** @type {string} */ (target.values.script)), locale: spec.target })
               .catch(() => {});
           });
         }

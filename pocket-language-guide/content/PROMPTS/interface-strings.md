@@ -180,5 +180,7 @@ only Klingon's own letters: a proper name such as *Morse* has no representation 
 the row must be left out rather than forced through the `{...}` placeholder escape,
 which is for runtime inserts. `qya.csv` has no source to draw on for most modern
 terms at all. Leaving the row out is the right answer for both; say so in the
-report. The rows that do land keep the file's own line endings -- most are CRLF, a
-few (`am`, `gu`, `ha`) are LF -- and the case the file's other titles use.
+report. The rows that do land keep the file's own line endings -- most are CRLF and
+seven (`am`, `gu`, `ha`, `hr`, `hy`, `ka`, `kn`) are LF, but derive it per file rather
+than trusting this list -- and the case and joiner (`+`, a native "and", or a middle
+dot) the file's `numbers-money` title uses.

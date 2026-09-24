@@ -514,7 +514,7 @@
   "format.headReachTitle.edge": "Köşenin yanı sıra, aynı renkten bir ray sütunun dış tarafından yüzün boyunca aşağı iner; böylece yelpaze gibi açılmış bir deste yandan okunabilir. Ray kenar boşluğundan geçtiği için sütunun kendi sözcükleri beyaz üzerinde kalır. Ortadaki sekmenin ineceği bir dış kenar yoktur, ona yalnızca köşe düşer.",
   "format.headSlot.theme": "Bu yüzün konusu",
   "format.reserveHint": "Kilit ekranı saati ve tarihi üstte, kendi düğmelerini altta çizer. Bu bantlar o yeri boş bırakır, böylece karttaki hiçbir sözcük onların altında kalmaz.",
-  "gallery.tagline": "Hızlı başvuru için Phraselet kartları tasarlayın, kaydedin ve yazdırın; ya da özenle seçilmiş konuşma ağaçlarında, yüz yüzeyken dokunarak ilerleyin.",
+  "gallery.tagline": "Hızlı başvuru için kartlar tasarlayın, kaydedin ve yazdırın; ya da basit, özenle seçilmiş konuşmalar yüz yüze yapmak için telefonunuzu gösterin.",
   "picker.budget": "Kalacak satır sayısı",
   "picker.budgetTitle": "Seçtiğiniz bölümlerin tamamından kaç satırın kalacağı. En işe yarayanlar önce girer; hâlihazırda giren bir satırı yineleyen satır daha az sayılır.",
   "picker.sections": "Karttaki bölümler",

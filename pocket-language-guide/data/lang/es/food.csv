@@ -7,9 +7,9 @@ dietary-needs.no-peanuts,Sin cacahuete ni maní,Sin cacahuate,sin kˌakawˈete n
 dietary-needs.no-nuts,Sin frutos secos ni nueces,Sin frutos de cáscara,sim fɾˈutos sˈekos nˈi nwˈeses,,2,es-agent-v1;ipa=espeak
 dietary-needs.no-seafood,Sin mariscos ni pescado,,sin maɾˈiskos nˈi peskˈado,,2,es-agent-v1;ipa=espeak
 dietary-needs.i-am-vegetarian,Soy vegetariano,,sˈoɪ bˌexetaɾjˈano,,2,es-agent-v1;ipa=espeak
-dietary-needs.i-am-vegan,Soy vegano/a,,sˈoɪ beɡˈano / ˈa,,2,es-agent-v1;ipa=espeak
+dietary-needs.i-am-vegan,Soy vegano/a,,sˈoɪ beɡˈano,,2,es-agent-v1;ipa=espeak
 dietary-needs.i-do-not-eat,No como {},,nˈo kˈomo {},,2,es-agent-v1;ipa=espeak
-dietary-needs.i-am-allergic-to,Soy alérgico/a a {},,sˈoɪ alˈeɾxiko / a ˈa {},,2,es-agent-v1;ipa=espeak
+dietary-needs.i-am-allergic-to,Soy alérgico/a a {},,sˈoɪ alˈeɾxiko ˈa {},,2,es-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-fish-stock,¿Lleva caldo de pescado?,,ʝˈeba kˈaldo de peskˈado,,2,es-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-stock,¿Lleva caldo de cerdo?,¿Lleva caldo de chancho?,ʝˈeba kˈaldo de sˈeɾdo,,2,es-pork-stock-v1;ipa=espeak
 dietary-needs.i-have-a-severe-allergy-to,Tengo alergia grave a {},,tˈeŋɡo alˈeɾxja ɡɾˈabe ˈa {},,2,es-agent-v1;ipa=espeak

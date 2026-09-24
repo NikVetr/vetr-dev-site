@@ -139,8 +139,12 @@ test('all language designs preserve text layout, content clearance and card cuts
     const count = (/** @type {import('../core/types.js').LayoutPlan} */ plan) =>
       plan.faces.reduce((n, face) => n + (face.paths?.length ?? 0), 0);
     assert(count(decorated) > 0, target);
-    assert.equal(count(splitCards(decorated)), count(decorated), target);
-    assert.equal(count(foldCards(decorated)), count(decorated), target);
+    // A sparse card is set on one face and printed one-sided, and the studio offers
+    // no cut or fold for it (`setFinishable`): there is no back to pair it with.
+    if (decorated.faces.length % 2 === 0) {
+      assert.equal(count(splitCards(decorated)), count(decorated), target);
+      assert.equal(count(foldCards(decorated)), count(decorated), target);
+    }
   }
 });
 

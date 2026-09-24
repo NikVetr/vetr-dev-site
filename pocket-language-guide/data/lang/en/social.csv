@@ -1,6 +1,6 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 social-basics.hello,Hello,,həlˈoʊ,,2,latex-reference-v2;ipa=espeak
-social-basics.hello-polite,Hello (polite),,həlˈoʊ pəlˈaɪt,,2,latex-reference-v2;ipa=espeak
+social-basics.hello-polite,Hello (polite),,həlˈoʊ,,2,latex-reference-v2;ipa=espeak
 social-basics.good-morning,Good morning,,ɡˈʊd mˈɔːɹnɪŋ,,2,latex-reference-v2;ipa=espeak
 social-basics.good-evening,Good evening,,ɡˈʊd ˈiːvnɪŋ,,2,latex-reference-v2;ipa=espeak
 social-basics.goodbye,Goodbye,,ɡʊdbˈaɪ,,2,latex-reference-v2;ipa=espeak
@@ -14,7 +14,7 @@ communication.i-do-not-speak-this-language,I do not speak {target},,aɪ duːnˌ�
 communication.i-speak-only-a-little-of-this,I speak only a little {target},,aɪ spˈiːk ˈoʊnli ɐ lˈɪɾəl {target},,2,language-slots-v1;ipa=espeak
 communication.do-you-speak-english,Do you speak {source}?,,dˈuː juː spˈiːk {source},,2,language-slots-v1;ipa=espeak
 communication.please-speak-more-slowly,Please speak more slowly,,plˈiːz spˈiːk mˈoːɹ slˈoʊli,,2,latex-reference-v2;ipa=espeak
-communication.i-do-not-understand-spoken,I do not understand (spoken),,aɪ duːnˌɑːt ˌʌndɚstˈænd spˈoʊkən,,2,latex-reference-v2;ipa=espeak
+communication.i-do-not-understand-spoken,I do not understand (spoken),,aɪ duːnˌɑːt ˌʌndɚstˈænd,,2,latex-reference-v2;ipa=espeak
 communication.i-cannot-read-understand,I cannot read / understand,,aɪ kænˈɑːt ɹˈiːd / ˌʌndɚstˈænd,,2,latex-reference-v2;ipa=espeak
 communication.please-say-it-again,Please say it again,,plˈiːz sˈeɪ ɪɾ ɐɡˈɛn,,2,latex-reference-v2;ipa=espeak
 communication.please-write-it-down,Please write it down,,plˈiːz ɹˈaɪt ɪt dˈaʊn,,2,latex-reference-v2;ipa=espeak

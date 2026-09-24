@@ -540,13 +540,18 @@ export function renderMessage(stage, phrase,
   small.append(...parts);
 
   surface.append(big);
-  stage.append(surface);
-  // **The gloss and Reply share a foot, outside the surface.** Reply is addressed to
-  // the stranger and so is the sentence; the gloss is the owner's confirmation. The
-  // foot stacks them on a portrait phone -- Reply full width under the sentence, big
-  // enough to be the obvious thing to press -- and sets them side by side in
-  // landscape, where height is what is short. Outside the surface because a button
-  // may not contain a button, and because a tap on Reply must not also dismiss.
+  // **What the stranger reads, and what the owner holds.** The sentence and Reply
+  // are for the person across the table, so they share a box that turns with the
+  // Turn control -- Reply is set sideways beside the sentence, where "under it" is
+  // for someone reading the turned screen. The gloss, Speak, speed and Turn are the
+  // owner's, so they stay upright in one row at the foot and take as little of the
+  // screen as one line of small type and three buttons can. Reply is outside the
+  // surface because a button may not contain a button, and because a tap on Reply
+  // must not also dismiss.
+  const read = document.createElement('div');
+  read.className = 'board-read';
+  read.append(surface);
+  stage.append(read);
   const foot = document.createElement('div');
   foot.className = 'board-foot';
   if (parts.length) foot.append(small);
@@ -643,7 +648,7 @@ export function renderMessage(stage, phrase,
     onward.setAttribute('aria-hidden', 'true');
     reply.append(document.createTextNode(replyLabel), onward);
     reply.addEventListener('click', onReply);
-    foot.append(reply);
+    read.append(reply);
   }
   // Off only if the reader has said so: it is the control that makes a phone usable
   // held out across a counter, and the default is to have it.
@@ -652,8 +657,8 @@ export function renderMessage(stage, phrase,
   // and being a sibling is what structurally stops a control's click reaching the
   // dismiss handler. The row is always drawn now, because the turn control is always
   // in it -- Speak and Reply are the two that come and go.
-  if (foot.childElementCount) stage.append(foot);
-  stage.append(controls, trouble);
+  foot.append(controls);
+  stage.append(foot, trouble);
 
   watchMessage(big, surface);
   surface.focus();
@@ -774,6 +779,9 @@ export function renderReply(stage, question, answers, { onAnswer, onCancel, clos
     // The one that opens a keypad is marked, because it is the only answer here
     // that does not answer anything by itself.
     if (entry) choice.classList.add('board-answer-entry');
+    // The one that rejects the set is marked too: it is the door to the fuller
+    // translator rather than an answer, and it is drawn dark so it reads as one.
+    if (phrase.id === 'board-answers.none-of-these') choice.classList.add('board-answer-none');
     // The listener's own reading of their own answer -- including a quantity, which
     // is formatted from a number rather than stored as a sentence.
     //

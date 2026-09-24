@@ -844,6 +844,30 @@ export const DEFAULT_PADDING = 1.4;
 export const isSpoken = (lang) => Boolean(lang.speak_label);
 
 /**
+ * The part of a corpus text that is said aloud.
+ *
+ * A row's `text` may carry a label that is for the eye: a trailing parenthesis that
+ * tells two rows apart on the card -- `Hello (polite)`, `yen (symbol)`, `Forint
+ * (Zeichen)` -- or a bracketed slot that stands for a word the reader supplies,
+ * `want to [verb]` -- or, in twenty packs, `quero + infinitivo`, the same slot
+ * written with a spaced plus and the label after it. Neither is speech. The speech
+ * engine and the pronunciation columns take this rather than the text; the card
+ * prints the text. The same rule, character for character, is `spoken()` in
+ * scripts/build_ipa.py.
+ * @param {string} text
+ */
+export const sayable = (text) => text
+  .replace(/\s*[（(][^()（）]*[)）]\s*$/u, '')
+  .replace(/\s*\[[^\]]*\]/g, ' ')
+  .replace(/\s\+\s.*$/, '')
+  // `alérgico/a`: a Latin gender suffix after an unspaced slash. `1,000`: a
+  // thousands separator, which a voice reads as "one, zero zero zero".
+  .replace(/(?<=[a-zà-ÿ])\/[a-zà-ÿ]{1,2}\b/g, '')
+  .replace(/(?<=\d)[,\u00a0 ](?=\d{3}\b)/g, '')
+  .replace(/\s{2,}/g, ' ')
+  .trim();
+
+/**
  * The columns a sheet starts with. A language nobody speaks has nothing to
  * pronounce, so its card is the code and the gloss alone -- a romanisation or
  * respelling column would print empty and warn that it had.

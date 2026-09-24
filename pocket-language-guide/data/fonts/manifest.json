@@ -72,9 +72,9 @@
       "weight": 400,
       "italic": false,
       "file": "latin-cond-400",
-      "glyphs": 2818,
-      "ttfBytes": 400220,
-      "woff2Bytes": 131528,
+      "glyphs": 2819,
+      "ttfBytes": 400352,
+      "woff2Bytes": 131664,
       "source": "NotoSans-var.ttf"
     },
     {
@@ -82,9 +82,9 @@
       "weight": 700,
       "italic": false,
       "file": "latin-cond-700",
-      "glyphs": 2818,
-      "ttfBytes": 402044,
-      "woff2Bytes": 136420,
+      "glyphs": 2819,
+      "ttfBytes": 402176,
+      "woff2Bytes": 136272,
       "source": "NotoSans-var.ttf"
     },
     {
@@ -92,9 +92,9 @@
       "weight": 400,
       "italic": true,
       "file": "latin-cond-400i",
-      "glyphs": 2789,
-      "ttfBytes": 407840,
-      "woff2Bytes": 135528,
+      "glyphs": 2790,
+      "ttfBytes": 407972,
+      "woff2Bytes": 135744,
       "source": "NotoSans-Italic-var.ttf"
     },
     {
@@ -102,9 +102,9 @@
       "weight": 700,
       "italic": true,
       "file": "latin-cond-700i",
-      "glyphs": 2789,
-      "ttfBytes": 409384,
-      "woff2Bytes": 140108,
+      "glyphs": 2790,
+      "ttfBytes": 409516,
+      "woff2Bytes": 140084,
       "source": "NotoSans-Italic-var.ttf"
     },
     {

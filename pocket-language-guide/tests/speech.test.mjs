@@ -240,6 +240,7 @@ test('Apple\'s novelty shelf never beats a voice meant to be listened to', () =>
   // Albert is a strained half-whisper. The tier is in the URI, not the name:
   // `com.apple.speech.synthesis.voice.*` is that shelf, `com.apple.voice.compact.*`
   // the built-in voices, and `.enhanced.*`/`.premium.*` the downloaded natural ones.
+  /** @param {string} name @param {string} uri @param {boolean} [isDefault] */
   const apple = (name, uri, isDefault = false) => /** @type {any} */ ({
     voiceURI: uri, name, lang: 'en-US', localService: true, default: isDefault,
   });

@@ -4077,8 +4077,8 @@ attested parts (Nepali); those are the first for a fluent reader to check.
 ### Not yet
 
 The landing sentence is still the candidate in `en.json`, held from translation
-until the wording is agreed. The torch, and the Morse lamp with it, still wait on a
-phone.
+until the wording is agreed. (Since settled: the sentence is agreed and translated
+in Batch S, and the torch and the Morse lamp were confirmed working on an iPhone.)
 
 ## Batch R — the whisper, second report
 
@@ -4099,4 +4099,86 @@ order. Three unit cases pin it: shelf loses to compact, compact loses to enhance
 even when flagged default, and a device with nothing but the shelf still speaks.
 **Not verifiable here** — no Apple device in the test rig — so this waits on the
 phone like the torch does.
+
+## Batch S — whose controls turn, what is said, and a card that was mostly paper
+
+### The stranger's controls turn; the owner's do not
+
+The message screen is now two sets of controls. The sentence and Reply are the
+stranger's: they share a box that the Turn control turns, so a turned screen has the
+sentence sideways and Reply sideways beside it, on the side that is "below" for the
+person reading it. The gloss, how-to-say-it, Speak, speed and Turn are the owner's:
+one upright row at the foot, small type and three buttons, no more. Two flex
+details cost most of the time: a vertical flow inside a column flex box sizes to
+its own content, so the fitter now sets the turned text's inline size to the
+surface's height before measuring; and the wide-screen rule that centres the answer
+grid also centred this box, which sized it to the sentence's columns and carried
+Reply 385px off the left edge in landscape — the box and the foot now stretch.
+"None of these" in the answer grid is drawn as Reply is, dark with white type,
+since it is the way out to the translator and not an answer.
+
+### The landing page
+
+The tagline is the agreed sentence — "Design, save and print quick-reference phrase
+cards, or show your phone to have simple, curated conversations live." — and went
+to translators for the 52 catalogues with the two new Morse section titles. "…I want
+to speak" is bold. The bar stays: `position: sticky` sticks only inside the element's
+parent, and the toggle's parents ended where the language grid did, so it left the
+moment the cards began. On a phone the two wrappers are `display: contents`, the
+toggle's containing block is the page, and it sticks under the header for as long as
+there is page; the descriptive sentence scrolls away as it should. The brand is
+1rem on every page: it had inherited the board header's small size and the studio's,
+and was the one fixed thing that changed size between screens.
+
+### What is said
+
+"Hello (polite)" respelled for a Spanish reader as *he-lou pe-lait*. The label is
+for the eye, and `build_ipa.py` had been transcribing it — 1,073 rows across 48
+languages carried a trailing parenthesis, and `want to [verb]` carried its slot.
+`spoken()` strips both before transcription and `sayable` in `core/pack.js` is the
+same rule for the speech engine and the quiz; the column was regenerated (1,025
+rows in 66 files). The remaining classes went to two audit agents under a new
+brief, `content/PROMPTS/pronunciation-audit.md`, which asks for classes and rules
+rather than row fixes. They came back with four more rules and four rows:
+
+- a **spaced plus as a slot joiner** — `quero + infinitivo`, `2 + classifier`, 96
+  rows in 22 languages where English writes `[verb]` — is stripped from the plus on;
+- a **Latin gender suffix after an unspaced slash** — `alérgico/a`, `perso/a`, 17
+  rows in es/it/pt, which read as "alérgico slash a" — is dropped; Latin letters
+  only, so `丈夫/妻子` and `बस/रेल` keep both words;
+- a **thousands separator** — `1,000`, `100 000`, six rows in en/cs read as "one,
+  zero zero zero" — is collapsed to the numeral; a dot is left alone because Dutch
+  writes `100.000` and reads it right;
+- a **unit abbreviation** — `{} cm`, `см`, `սմ` — is expanded to the unit word for
+  the fifteen languages whose voices spelt the letters (`UNITS` in `build_ipa.py`);
+- and singly: Thai said the classifier and not the numeral in `2 ชิ้น`, because the
+  route kept only tokens with letters — numerals are now Thai number words; a bare
+  `ATM` cell in Malay and Swahili was one syllable where every sentence around it
+  spells the letters (`REPAIR`); Filipino's `CR` joins `WC` in its loanword table;
+  English `1/2` is `half` like the other 26 packs; and four Hindi, Marathi and
+  Nepali rows kept a clinical term — *anaphylaxis*, an allergen clause — in a
+  trailing parenthesis the label rule would silence, and now carry it in the
+  sentence with an em dash as their sibling packs do. The audits found the spaced
+  slash (`toilet / WC`), currency symbols, placeholders, acronyms in general and
+  editorial marks clean.
+
+### Morse in three sections, on one full face
+
+Letters, digits, and punctuation-with-signals are separate sections, so the card's
+preview carries all three and each can be switched off. The card was a quarter
+full: 49 one-line rows on the two faces the duplex parity allows, at a type size
+the theme caps at nominal. `SPARSE` in the solver: when the smallest face count
+leaves more than half the columns empty, an even anchor may come down to one face
+and the type may grow to `SCALE_MAX`. Morse renders on one face at 1.8×, full.
+`scripts/thumb_fullness.mjs` measured every committed first face against its page:
+the 53 Morse packs were the only ones under 80%; every other pair is full.
+
+The card's own glosses had a gap of my making: the letters and digits are
+universal, but the five punctuation names and the six signal words had gone out
+in English to every language. Two agents translated them — the signal words as
+`HELP — ayuda`, the English word the code spells and then the reader's word, both
+taken from rows the pack already had — leaving English only where nothing could be
+sourced: the punctuation names in Yoruba, Quenya and Klingon, and *doctor* in the
+last two. The "at sign" and "slash" in six languages are transliterated loans and
+the first thing a fluent reader should check.
 

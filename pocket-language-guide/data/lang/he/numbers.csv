@@ -41,7 +41,7 @@ atm-cash.money-exchange,המרת מטבע,הַמְרַת מַטְבֵּעַ,hamr
 atm-cash.pin,קוד סודי,קוֹד סוֹדִי,qod sodi,kˈod sodˈi,secret code,2,he-agent-v1;ipa=bgn
 numbers-money.shekel,שקל,שֶׁקֶל,shéqel,ʃˈekel,"shekel -- ₪, formally the new shekel",2,he-agent-v1;ipa=bgn
 numbers-money.shekel-symbol,₪,₪,sheqel,ʃekˈel,the symbol on a price tag,2,he-agent-v1;ipa=bgn
-numbers-money.li-ng,שתיים + מילת מניין,שְׁתַּיִים + מִילַּת מִנְיָין,shetáyim + milat minyan,ʃetˈajim milˈat minjˈan,two + a counting word,2,he-gloss-v1;ipa=bgn
+numbers-money.li-ng,שתיים + מילת מניין,שְׁתַּיִים + מִילַּת מִנְיָין,shetáyim + milat minyan,ʃetˈajim,two + a counting word,2,he-gloss-v1;ipa=bgn
 numbers-money.yu-n,יואן,יוּאָן,yu’an,juˈan,,2,he-gloss-v1;ipa=bgn
 numbers-money.ku-i,יואן בדיבור,יוּאָן בַּדִּיבּוּר,yu’an badibur,juˈan badibˈuʁ,yuan in speech,2,he-gloss-v1;ipa=bgn
 numbers-money.2-items,שני פריטים,שְׁנֵי פְּרִיטִים,sheney peritim,ʃˈenej peʁitˈim,two items,2,he-gloss-v1;ipa=bgn
@@ -104,13 +104,13 @@ numbers-money.naira-symbol,נאירה ניגרי (סמל),,naira nigeri,naiʁˈa
 numbers-money.riel,ריל,,ril,ʁˈil,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn
 numbers-money.riel-symbol,ריל (סמל),,ril,ʁˈil,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn
 numbers-money.dram,דראם,,dram,dʁˈam,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn
-numbers-money.dram-symbol,דראם (סמל),,dram (semel),dʁˈam semˈel,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn
+numbers-money.dram-symbol,דראם (סמל),,dram (semel),dʁˈam,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn
 numbers-money.lari,לארי,,lari,laʁˈi,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn
-numbers-money.lari-symbol,לארי (סמל),,lari (semel),laʁˈi semˈel,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn
+numbers-money.lari-symbol,לארי (סמל),,lari (semel),laʁˈi,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn
 numbers-money.kip,קיפ,,kip,kˈip,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn
-numbers-money.kip-symbol,קיפ (סמל),,kip (semel),kˈip semˈel,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn
+numbers-money.kip-symbol,קיפ (סמל),,kip (semel),kˈip,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn
 numbers-money.taka,טאקה,,takah,takˈah,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn
-numbers-money.taka-symbol,טאקה (סמל),,takah (semel),takˈah semˈel,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn
+numbers-money.taka-symbol,טאקה (סמל),,takah (semel),takˈah,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn
 numbers-money.pakistani-rupee,רופי פקיסטני,,rupi paqistani,ʁupˈi pakistanˈi,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn
-numbers-money.pakistani-rupee-symbol,רופי פקיסטני (סמל),,rupi paqistani (semel),ʁupˈi pakistanˈi semˈel,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn
+numbers-money.pakistani-rupee-symbol,רופי פקיסטני (סמל),,rupi paqistani (semel),ʁupˈi pakistanˈi,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn
 numbers-money.som,סום,,sum,sˈum,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=bgn

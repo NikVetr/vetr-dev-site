@@ -71759,8 +71759,8 @@
     {
       "target": "morse",
       "source": "en",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -71773,22 +71773,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "es",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -71801,22 +71793,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "zh-Hans",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -71829,22 +71813,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "ja",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -71857,22 +71833,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "ar",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -71885,22 +71853,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "fr",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -71913,22 +71873,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "de",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -71941,22 +71893,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "pt",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -71969,22 +71913,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "ko",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -71997,22 +71933,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "hi",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72025,22 +71953,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "th",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72053,22 +71973,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "ru",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72081,22 +71993,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "id",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72109,22 +72013,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "sw",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72137,22 +72033,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "tr",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72165,22 +72053,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "vi",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72193,22 +72073,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "it",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72221,22 +72093,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "el",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72249,22 +72113,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "hu",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72277,22 +72133,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "tlh",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72305,22 +72153,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "qya",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72333,22 +72173,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "he",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72361,22 +72193,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "fa",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72389,22 +72213,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "bn",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.78,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72417,22 +72233,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "ur",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72445,22 +72253,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "pl",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72473,22 +72273,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "nl",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72501,22 +72293,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "ta",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.71,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72529,22 +72313,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "uk",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72557,14 +72333,6 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -72572,7 +72340,7 @@
       "target": "morse",
       "source": "te",
       "scale": 1,
-      "faces": 2,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72590,17 +72358,17 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 7
+            "count": 3
           },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "3 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "mr",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72613,22 +72381,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "ro",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72641,22 +72401,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "cs",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72669,22 +72421,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "pa",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.78,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72697,22 +72441,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "fil",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72725,22 +72461,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "sv",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72753,22 +72481,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "ms",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72781,22 +72501,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "gu",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.78,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72809,22 +72521,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "ne",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72837,22 +72541,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "am",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72865,22 +72561,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "kn",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72893,22 +72581,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "ha",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72921,14 +72601,6 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -72936,7 +72608,7 @@
       "target": "morse",
       "source": "ml",
       "scale": 1,
-      "faces": 2,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72954,17 +72626,17 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 7
+            "count": 3
           },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "3 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "yo",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -72977,14 +72649,6 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -72992,7 +72656,7 @@
       "target": "morse",
       "source": "lo",
       "scale": 1,
-      "faces": 2,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -73010,9 +72674,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 7
+            "count": 3
           },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "3 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -73020,7 +72684,7 @@
       "target": "morse",
       "source": "km",
       "scale": 1,
-      "faces": 2,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -73038,17 +72702,17 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 7
+            "count": 3
           },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "3 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "hr",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -73061,22 +72725,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "ka",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -73089,22 +72745,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "fi",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -73117,22 +72765,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "hy",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -73145,22 +72785,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "uz",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -73173,22 +72805,14 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
     {
       "target": "morse",
       "source": "jv",
-      "scale": 1,
-      "faces": 2,
+      "scale": 1.8,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -73201,14 +72825,6 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 7
-          },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -73216,7 +72832,7 @@
       "target": "morse",
       "source": "or",
       "scale": 1,
-      "faces": 2,
+      "faces": 1,
       "pageW": 504,
       "pageH": 360,
       "items": 49,
@@ -73234,9 +72850,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 7
+            "count": 3
           },
-          "message": "7 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "3 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     }

@@ -2,7 +2,7 @@ concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
 numbers-money.l-ng,शून्य,,śūnya,ʃˈuːnjə,,2,ne-agent-v1;ipa=espeak
 numbers-money.y,एक,,ēka,ˈeːkə,,2,ne-agent-v1;ipa=espeak
 numbers-money.r,दुई,,duī,dˈui,,2,ne-agent-v1;ipa=espeak
-numbers-money.li-ng,2 + नाप्ने शब्द,,2 + nāpnē śabda,tˈuː nˈaːpneː ʃˈʌbdə,,2,ne-agent-v1;ipa=espeak
+numbers-money.li-ng,2 + नाप्ने शब्द,,2 + nāpnē śabda,tˈuː,,2,ne-agent-v1;ipa=espeak
 numbers-money.s-n,तीन,,tīna,tˈɪːn,,2,ne-agent-v1;ipa=espeak
 numbers-money.s,चार,,cāra,cˈaːɾə,,2,ne-agent-v1;ipa=espeak
 numbers-money.w,पाँच,,pām̐ca,pˈãc,,2,ne-agent-v1;ipa=espeak
@@ -16,7 +16,7 @@ numbers-money.y-qi-n,हजार,,hajāra,həɟˈaːɾə,,2,ne-agent-v1;ipa=esp
 numbers-money.y-w-n,दश हजार,,daśa hajāra,dˈʌʃ həɟˈaːɾə,,2,ne-agent-v1;ipa=espeak
 numbers-money.b-n,आधा,,ādhā,ˈaːdʰaː,,2,ne-agent-v1;ipa=espeak
 numbers-money.yu-n,युआन,,yuāna,juˈaːn,,2,ne-agent-v1;ipa=espeak
-numbers-money.ku-i,युआन (बोलचाल),,yuāna (bōlacāla),juˈaːn bˌoːləcˈaːl,,2,ne-agent-v1;ipa=espeak
+numbers-money.ku-i,युआन (बोलचाल),,yuāna (bōlacāla),juˈaːn,,2,ne-agent-v1;ipa=espeak
 numbers-money.number-and-classifier-notes,"संख्या जोडेर बनाइन्छ: 11 = shi yi, 20 = er shi, 21 = er shi yi। फोनमा 1 लाई प्रायः yao भनिन्छ। गन्ती सिधै नाउँसँग जोडिँदैन — बीचमा एउटा नाप्ने शब्द चाहिन्छ, जस्तै दुई टिकटको लागि liang zhang piao। ge (सामान्य), wei (मानिस), zhang (टिकट/चेप्टा वस्तु), bei (कप), ping (बोतल)। बोलचालमा yuan लाई kuai भनिन्छ; jiao/mao = 0.1 yuan, fen = 0.01 yuan।",,"saṁkhyā jōḍēra banāincha: 11 = shi yi, 20 = er shi, 21 = er shi yi. phōnamā 1 lāī prāyaḥ yao bhanincha. gantī sidhai nāum̐sam̐ga jōḍim̐daina — bīcamā ēuṭā nāpnē śabda cāhincha, jastai duī ṭikaṭakō lāgi liang zhang piao. ge (sāmānya), wei (mānisa), zhang (ṭikaṭa/cēpṭā vastu), bei (kapa), ping (bōtala). bōlacālamā yuan lāī kuai bhanincha; jiao/mao = 0.1 yuan, fen = 0.01 yuan.",,,2,ne-agent-v1
 numbers-money.2-items,2 वटा,,2 vaṭā,tˈuː wˈʌʈaː,,2,ne-agent-v1;ipa=espeak
 numbers-money.yen,येन,,yēna,jˈeːn,,2,ne-agent-v1;ipa=espeak

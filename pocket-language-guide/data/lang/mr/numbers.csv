@@ -2,7 +2,7 @@ concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
 numbers-money.l-ng,शून्य,,śūnya,ʃˈuːnjə,,2,mr-agent-v1;ipa=espeak
 numbers-money.y,एक,,ēka,ˈeːk,,2,mr-agent-v1;ipa=espeak
 numbers-money.r,दोन,,dōna,dˈoːn,,2,mr-agent-v1;ipa=espeak
-numbers-money.li-ng,2 + मापक शब्द,,2 + māpaka śabda,dˈoːn mˈaːpək ʃˈʌbd,,1,mr-gloss-v1;ipa=espeak
+numbers-money.li-ng,2 + मापक शब्द,,2 + māpaka śabda,dˈoːn,,1,mr-gloss-v1;ipa=espeak
 numbers-money.s-n,तीन,,tīna,tˈiːn,,2,mr-agent-v1;ipa=espeak
 numbers-money.s,चार,,cāra,cˈaːɾ,,2,mr-agent-v1;ipa=espeak
 numbers-money.w,पाच,,pāca,pˈaːc,,2,mr-agent-v1;ipa=espeak
@@ -16,7 +16,7 @@ numbers-money.y-qi-n,हजार,,hajāra,həzˈaːɾ,,2,mr-agent-v1;ipa=espeak
 numbers-money.y-w-n,दहा हजार,,dahā hajāra,dˈʌhaː həzˈaːɾ,,2,mr-agent-v1;ipa=espeak
 numbers-money.b-n,अर्धा,,ardhā,ˈʌɾdʰaː,,2,mr-agent-v1;ipa=espeak
 numbers-money.yu-n,युआन,,yuāna,jʊˈaːn,,2,mr-gloss-v1;ipa=espeak
-numbers-money.ku-i,युआन (बोलचालीत),,yuāna (bōlacālīta),jʊˈaːn bˌoːlcaːlˈiːt,,1,mr-gloss-v1;ipa=espeak
+numbers-money.ku-i,युआन (बोलचालीत),,yuāna (bōlacālīta),jʊˈaːn,,1,mr-gloss-v1;ipa=espeak
 numbers-money.number-and-classifier-notes,"संख्या जोडून तयार होतात: 11 = shi yi, 20 = er shi, 21 = er shi yi. फोनवर 1 अनेकदा yao असे म्हणतात. मोजताना संख्या थेट नामाला जोडली जात नाही -- मध्ये एक मापक शब्द लागतो, म्हणजे दोन तिकिटांसाठी liang zhang piao. ge (सर्वसाधारण), wei (माणसे), zhang (तिकिटे/सपाट वस्तू), bei (कप), ping (बाटल्या). बोलीभाषेत yuan ला kuai म्हणतात; jiao/mao = 0.1 yuan, fen = 0.01 yuan.",,"saṁkhyā jōḍūna tayāra hōtāta: 11 = shi yi, 20 = er shi, 21 = er shi yi. phōnavara 1 anēkadā yao asē mhaṇatāta. mōjatānā saṁkhyā thēṭa nāmālā jōḍalī jāta nāhī -- madhyē ēka māpaka śabda lāgatō, mhaṇajē dōna tikiṭāṁsāṭhī liang zhang piao. ge (sarvasādhāraṇa), wei (māṇasē), zhang (tikiṭē/sapāṭa vastū), bei (kapa), ping (bāṭalyā). bōlībhāṣēta yuan lā kuai mhaṇatāta; jiao/mao = 0.1 yuan, fen = 0.01 yuan.",,,2,mr-notes-v1
 numbers-money.2-items,2 वस्तू,,2 vastū,dˈoːn vˈʌstuː,,1,mr-gloss-v1;ipa=espeak
 numbers-money.yen,येन,,yēna,jˈeːn,,2,mr-gloss-v1;ipa=espeak

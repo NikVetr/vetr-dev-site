@@ -9,7 +9,7 @@ emergency-medical.where-is-a-pharmacy,मेडिकल कुठे आहे?
 emergency-medical.please-take-me-to-a-hospital,मला रुग्णालयात घेऊन चला,,malā rugṇālayāta ghēūna calā,mˈʌlaː ɾˌʊɡɳaːljˈaːt ɡʰˈeːun cˈʌlaː,,2,mr-agent-v1;ipa=espeak
 emergency-medical.i-feel-unwell,मला बरं वाटत नाही,,malā baraṁ vāṭata nāhī,mˈʌlaː bˈʌɾən vˈaːʈət nˈaːhi,,2,mr-agent-v1;ipa=espeak
 emergency-medical.this-is-an-emergency,ही इमर्जन्सी आहे,ही आणीबाणी आहे,hī imarjansī āhē,hˈi ˌɪmərzˈʌnsi ˈaːheː,,2,mr-agent-v1;ipa=espeak
-emergency-medical.i-am-having-a-severe-allergic-reaction,मला तीव्र ऍलर्जी झाली आहे (ऍनाफिलॅक्सिस),,malā tīvra êlarjī jhālī āhē (ênāphilêksisa),mˈʌlaː tˈiːvɾə ɛlˈʌɾɟiˌi ɟʰˈaːli ˈaːheː ˌɛnaːpʰɪlˈɛksɪs,anaphylaxis,2,mr-agent-v1;ipa=espeak
+emergency-medical.i-am-having-a-severe-allergic-reaction,ऍनाफिलॅक्सिस — मला तीव्र ऍलर्जी झाली आहे,,ênāphilêksisa — malā tīvra êlarjī jhālī āhē,ˌɛnaːpʰɪlˈɛksɪs mˈʌlaː tˈiːvɾə ɛlˈʌɾɟiˌi ɟʰˈaːli ˈaːheː,anaphylaxis,2,mr-agent-v1;ipa=espeak
 emergency-medical.i-cannot-breathe,मला श्वास घेता येत नाही,,malā śvāsa ghētā yēta nāhī,mˈʌlaː ʃvˈaːs ɡʰˈeːtaː jˈeːt nˈaːhi,"impersonal, no gender",2,mr-agent-v1;ipa=espeak
 emergency-medical.i-am-bleeding-badly,खूप रक्तस्त्राव होत आहे,,khūpa raktastrāva hōta āhē,kʰˈuːp ɾˌəktəstɾˈaːv hˈoːt ˈaːheː,impersonal,2,mr-agent-v1;ipa=espeak
 emergency-medical.i-have-chest-pain,छातीत दुखत आहे,,chātīta dukhata āhē,cʰaːtˈiːt dˈʊkʰət ˈaːheː,,2,mr-agent-v1;ipa=espeak

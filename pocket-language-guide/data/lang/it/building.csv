@@ -1,6 +1,6 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 building-help.what-room-number-is-this,Che numero di stanza è questo?,,ke nˈumero dɪ stˈantsa e kwˈesto,,2,it-agent-v1;ipa=espeak
-building-help.i-am-lost,Mi sono perso/a,,mɪ sˌono pˈɛrso / ˈaː,,2,it-agent-v1;ipa=espeak
+building-help.i-am-lost,Mi sono perso/a,,mɪ sˌono pˈɛrso,,2,it-agent-v1;ipa=espeak
 building-help.where-is-reception,Dov'è la reception?,,dovˈɛ la retʃˈeptjon,,2,it-agent-v1;ipa=espeak
 building-help.where-is-a-power-outlet,Dov'è una presa di corrente?,,dovˈɛ ˌʊna prˈeza dɪ korɾˈɛnte,,2,it-agent-v1;ipa=espeak
 in-a-building.is-this-the-correct-entrance,È questa l'entrata giusta?,,e kwˌɛsta lentrˈata dʒˈusta,,2,it-agent-v1;ipa=espeak
@@ -52,7 +52,7 @@ accessibility.station-assistance,C'è assistenza in stazione?,,tʃe assistˈɛnt
 accessibility.help-me-carry,"Mi aiuti a portare questo, per favore",,"mɪ ajˈutɪ a portˈare kwˈesto, per favˈore",,2,it-agent-v1;ipa=espeak
 accessibility.board-first,Posso salire prima degli altri?,,pˈɔsso salˈire prˈima dˌeʎɪ ˈaltrɪ,,2,it-agent-v1;ipa=espeak
 accessibility.door-width,Quanto è larga la porta?,,kwˈanto e lˈarɡa la pˈɔrta,,2,it-agent-v1;ipa=espeak
-accessibility.wheelchair-width,La mia sedia a rotelle è larga {} cm,,la mˌia sˈɛdia a rotˈɛlle e lˈarɡa {} tʃˌiˈɛmme,,2,it-agent-v1;ipa=espeak
+accessibility.wheelchair-width,La mia sedia a rotelle è larga {} cm,,la mˌia sˈɛdia a rotˈɛlle e lˈarɡa {} tʃentˈimetrɪ,,2,it-agent-v1;ipa=espeak
 accessibility.hard-of-hearing,Ho problemi di udito,Sono ipoacusico/a,o problˈɛmɪ dɪ ʊdˈito,,2,it-agent-v1;ipa=espeak
 accessibility.speak-louder,"Parli più forte, per favore",,"pˈarlɪ pjʊ fˈɔrte, per favˈore",,2,it-agent-v1;ipa=espeak
 accessibility.visually-impaired,Sono ipovedente,Ho problemi di vista,sˌono ipovedˈɛnte,,2,it-agent-v1;ipa=espeak

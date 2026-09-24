@@ -1281,6 +1281,13 @@ REPAIR = {
     # `jv,th` and `jv,mr` cells of `language-names.csv` saying [ʈ].
     "jv": [("ʈaˈiland", "taiˈland"), ("maˈraʈi", "maˈrati")],
 
+    # **A bare `ATM` is spelt out, as it is in every sentence around it.** Both voices
+    # read the acronym letter by letter with lowercase context on either side and as
+    # one unknown syllable, `ˈatm`, when the cell is the acronym alone; the reading
+    # given is the one the same pack uses for `ATM di mana?` and `ATM iko wapi?`.
+    "ms": [("ˈatm", "ˌeːtˌiːˈɛm")],
+    "sw": [("ˈatm", "ˌatˌiˈem")],
+
     # espeak writes the trill as a doubled tap, gives <ll>/<y> as `jj` in some
     # words and `ʝ` in others, and has a pre-nasal allophone of /e/ that Spanish
     # does not contrast. β/ð/ɣ are folded to their stops for two reasons at once:
@@ -3031,7 +3038,7 @@ LOANWORDS = {
     # the Latin letters, which is where a Filipino schoolchild is taught to read
     # an acronym aloud -- `ATM` is `ey-ti-em`, not `a-t-m`.
     "fil": {"Wi-Fi": "wajfaj", "eSIM": "isim", "SIM": "sim", "PIN": "pin",
-            "QR": "kjuar", "ATM": "eitiɛm", "WC": "dobolyusi", "card": "kaɾd"},
+            "QR": "kjuar", "ATM": "eitiɛm", "WC": "dobolyusi", "CR": "siar", "card": "kaɾd"},
     # Hausa keeps these in Latin letters exactly as Hebrew's and Filipino's press
     # and routers do, for the same reason: a Nigerian speaker says them with
     # English letter-names or the English word, not by reading `ha_to_ipa`'s
@@ -3248,6 +3255,59 @@ def clean(chunk):
     return "".join(c for c in chunk
                    if unicodedata.category(c)[0] in "LMN" or c.isspace()
                    or c in "'-\u200c").strip()
+
+
+LABEL_TAIL = re.compile(r"\s*[（(][^()（）]*[)）]\s*$")
+SLOT = re.compile(r"\s*\[[^\]]*\]")
+JOINED_SLOT = re.compile(r"\s\+\s.*$")
+# `alérgico/a`, `perso/a`: a Latin gender suffix after an unspaced slash, which the
+# variants table already says properly and which read aloud as "alérgico slash a".
+# Latin letters only, so `丈夫/妻子` and `बस/रेल` -- two words either side -- stay.
+GENDER_SUFFIX = re.compile(r"(?<=[a-zà-ÿ])/[a-zà-ÿ]{1,2}\b")
+# `1,000`, `100 000`: a thousands separator, which espeak reads as "one, zero zero
+# zero". Collapsed to the bare numeral; a dot is left alone because Dutch writes
+# `100.000` and its voice reads that correctly.
+DIGIT_GROUP = re.compile(r"(?<=\d)[,\u00a0 ](?=\d{3}\b)")
+
+
+def spoken(text):
+    """The part of a row's text that is said aloud.
+
+    A trailing parenthesis is a label for the eye -- `Hello (polite)`, `yen (symbol)`,
+    `Forint (Zeichen)` -- that tells two rows apart on the card, and a bracketed slot
+    -- `want to [verb]` -- stands for a word the reader supplies. Twenty packs write
+    that slot with a bare plus instead, `quero + infinitivo`, `2 + classifier`, and
+    the grammatical label after the plus is the slot's name too; all 96 such rows in
+    the corpus have the plus spaced and nothing spoken after it. None of this is
+    speech, and transcribing it put `pəlˈaɪt`, `vˈɜːb` and `infinitˈivo` into the ipa
+    column, from where the respelling read them back as words. The same rule,
+    character for character, is `sayable` in core/pack.js.
+    """
+    text = LABEL_TAIL.sub("", text)
+    text = SLOT.sub(" ", text)
+    text = JOINED_SLOT.sub("", text)
+    text = GENDER_SUFFIX.sub("", text)
+    text = DIGIT_GROUP.sub("", text)
+    return re.sub(r"\s{2,}", " ", text).strip()
+
+
+# **A unit abbreviation is said as the unit.** `{} cm` came out as the letter names
+# -- "see em", "tseh em", "es em" -- in the languages below, where every other pack
+# writes or says the word; the expansion is the word the sentence wants after a
+# number, and espeak transcribes it like any other. Whole tokens only.
+UNITS = {
+    "de": {"cm": "Zentimeter"}, "en": {"cm": "centimeters"}, "es": {"cm": "centímetros"},
+    "it": {"cm": "centimetri"}, "nl": {"cm": "centimeter"}, "pl": {"cm": "centymetrów"},
+    "sv": {"cm": "centimeter"}, "ru": {"см": "сантиметров"}, "uk": {"см": "сантиметрів"},
+    "tr": {"cm": "santimetre"}, "hy": {"սմ": "սանտիմետր"}, "ka": {"სმ": "სანტიმეტრი"},
+    "uz": {"sm": "santimetr"}, "id": {"cm": "sentimeter"}, "vi": {"cm": "xentimét"},
+}
+
+
+def expand_units(code, text):
+    for abbr, word in UNITS.get(code, {}).items():
+        text = re.sub(rf"(?<![^\W\d_]){re.escape(abbr)}(?![^\W\d_])", word, text)
+    return text
 
 
 def pieces(text, loans=()):
@@ -4983,6 +5043,7 @@ DECODER_STUCK = "…"
 def thai_syllables():
     """A cached Thai syllable -> IPA function, so a repeated word costs nothing."""
     from pythainlp.tokenize import syllable_tokenize, word_tokenize
+    from pythainlp.util import num_to_thaiword
     from pythainlp.transliterate import transliterate
     cache = {}
 
@@ -5013,8 +5074,11 @@ def thai_syllables():
         return g2p(word) if DECODER_STUCK in out else out
 
     def chunk(text):
-        return " ".join(filter(None, (one(w) for w in word_tokenize(text, engine="newmm")
-                                      if any(c.isalpha() for c in w))))
+        # A bare numeral is said as its Thai number word: `2 ชิ้น` is "song chin", and
+        # the letters-only filter used to drop the 2 and say only the classifier.
+        words = (num_to_thaiword(int(w)) if w.isdigit() else w
+                 for w in word_tokenize(text, engine="newmm"))
+        return " ".join(filter(None, (one(w) for w in words if any(c.isalpha() for c in w))))
     return chunk
 
 
@@ -6567,7 +6631,7 @@ def build(code):
             if not row["text"].strip():
                 skipped["no text"] += 1
                 continue
-            text = row[source] if source else row["text"]
+            text = expand_units(code, spoken(row[source] if source else row["text"]))
             if source and not text.strip():
                 skipped[f"no {source}"] += 1
                 continue

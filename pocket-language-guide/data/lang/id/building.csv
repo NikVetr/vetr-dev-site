@@ -15,7 +15,7 @@ accessibility.station-assistance,Ada bantuan di stasiun?,,ˈada bantˈuan di sta
 accessibility.help-me-carry,Tolong bantu bawa ini,,tˈoloŋ bˈantu bˈawa ˈini,,2,id-agent-v1;ipa=espeak
 accessibility.board-first,Boleh saya masuk dulu?,,bˈoləh sˈaja mˈasuk dˈulu,,2,id-agent-v1;ipa=espeak
 accessibility.door-width,Lebar pintunya berapa?,,lˈɛbar pintˈuɲa bərˈapa,,2,id-agent-v1;ipa=espeak
-accessibility.wheelchair-width,Kursi roda saya lebar {} cm,,kˈursi rˈoda sˈaja lˈɛbar {} tʃˌeəm,,2,id-agent-v1;ipa=espeak
+accessibility.wheelchair-width,Kursi roda saya lebar {} cm,,kˈursi rˈoda sˈaja lˈɛbar {} səntimˈɛtər,,2,id-agent-v1;ipa=espeak
 accessibility.hard-of-hearing,Pendengaran saya kurang,Saya sulit mendengar,pəndəŋˈaran sˈaja kˈuraŋ,,2,id-agent-v1;ipa=espeak
 accessibility.speak-louder,Tolong bicara lebih keras,,tˈoloŋ bitʃˈara lˈɛbih kˈɛras,,2,id-agent-v1;ipa=espeak
 accessibility.visually-impaired,Saya tunanetra,Penglihatan saya terbatas,sˈaja tˌunanˈɛtra,,2,id-agent-v1;ipa=espeak

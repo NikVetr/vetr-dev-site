@@ -21,10 +21,10 @@ pronouns-verbs.like,mít rád,,mˈiːt rˈaːt,"citation form for a male speaker
 pronouns-verbs.need,potřebovat,,pˈotr̝ebˌovat,,2,cs-agent-v1;ipa=espeak
 pronouns-verbs.there-is-have,je,,je,"'is' / 'there is', third person of být",2,cs-agent-v1;ipa=espeak
 pronouns-verbs.there-is-not-do-not-have,není,,nˈeɲiː,'is not' / 'there is not',2,cs-agent-v1;ipa=espeak
-pronouns-verbs.want-to-verb,chci + infinitiv,,xtsi ˈinfinˌitiv,chci ('I want') plus the infinitive,2,cs-agent-v1;ipa=espeak
-pronouns-verbs.want-thing,dám si + věc,,dˈaːm si vjˈets,dám si ('I'll have') plus the thing; the ordinary way to order or ask for something in a shop or restaurant,2,cs-agent-v1;ipa=espeak
-pronouns-verbs.need-thing,potřebuji + věc,,pˈotr̝ebˌuji vjˈets,"potřebuji ('I need') plus the thing, in the accusative -- potřebovat does not take the genitive in Czech",2,cs-agent-v1;ipa=espeak
-pronouns-verbs.looking-for-thing,hledám + věc,,hlˈedaːm vjˈets,"hledám ('I am looking for') plus the thing, in the accusative -- hledat does not take the genitive in Czech",2,cs-agent-v1;ipa=espeak
+pronouns-verbs.want-to-verb,chci + infinitiv,,xtsˈi,chci ('I want') plus the infinitive,2,cs-agent-v1;ipa=espeak
+pronouns-verbs.want-thing,dám si + věc,,dˈaːm si,dám si ('I'll have') plus the thing; the ordinary way to order or ask for something in a shop or restaurant,2,cs-agent-v1;ipa=espeak
+pronouns-verbs.need-thing,potřebuji + věc,,pˈotr̝ebˌuji,"potřebuji ('I need') plus the thing, in the accusative -- potřebovat does not take the genitive in Czech",2,cs-agent-v1;ipa=espeak
+pronouns-verbs.looking-for-thing,hledám + věc,,hlˈedaːm,"hledám ('I am looking for') plus the thing, in the accusative -- hledat does not take the genitive in Czech",2,cs-agent-v1;ipa=espeak
 question-words.what,co,,tsˈo,,2,cs-agent-v1;ipa=espeak
 question-words.where,kde,,ɡdˈe,,2,cs-agent-v1;ipa=espeak
 question-words.who,kdo,,ɡdˈo,,2,cs-agent-v1;ipa=espeak

@@ -15,7 +15,7 @@ accessibility.station-assistance,Есть сопровождение на ста
 accessibility.help-me-carry,"Помогите донести, пожалуйста.",,"Pomogite donesti, pozhaluysta.","pʌmʌɡʲˈitʲi dʌnʲisʲtʲˈi, pʌʒˈɑɭujsta",,2,ru-agent-v1;ipa=espeak
 accessibility.board-first,Можно мне зайти первым?,Можно мне зайти первой?,Mozhno mne zayti pervym?,mˈoʒnʌ mnʲˈe zajtʲˈi pʲˈervɨm,,2,ru-agent-v1;ipa=espeak
 accessibility.door-width,Какая ширина двери?,,Kakaya shirina dveri?,kakˈɑja ʃɨrʲinˈɑ dvʲˈerʲɪ,,2,ru-agent-v1;ipa=espeak
-accessibility.wheelchair-width,Ширина моей коляски {} см.,,Shirina moyey kolyaski {} sm.,ʃɨrʲinˈɑ mʌjˈej kʌɭʲˈɑskʲɪ {} ˌɛsˈɛm,,2,ru-agent-v1;ipa=espeak
+accessibility.wheelchair-width,Ширина моей коляски {} см.,,Shirina moyey kolyaski {} sm.,ʃɨrʲinˈɑ mʌjˈej kʌɭʲˈɑskʲɪ {} sʌntʲimʲˈetrʌf,,2,ru-agent-v1;ipa=espeak
 accessibility.hard-of-hearing,Я плохо слышу.,,Ya plokho slyshu.,ˈja pɭˈoxʌ sɭˈɨʃu,,2,ru-agent-v1;ipa=espeak
 accessibility.speak-louder,"Говорите громче, пожалуйста.",,"Govorite gromche, pozhaluysta.","ɡʌvʌrʲˈitʲi ɡrˈomtʃʲi, pʌʒˈɑɭujsta",,2,ru-agent-v1;ipa=espeak
 accessibility.visually-impaired,Я слабовидящий,Я слабовидящая,Ya slabovidyashchiy,ˈja sɭʌbʌvʲˈidʲʌɕij,,2,ru-agent-v1;ipa=espeak

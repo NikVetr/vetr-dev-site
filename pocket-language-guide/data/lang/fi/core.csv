@@ -21,10 +21,10 @@ pronouns-verbs.like,pitää,,pˈitæː,takes the elative: pidän tästä 'I like
 pronouns-verbs.need,tarvita,,tˈarvita,,2,fi-agent-v1;ipa=espeak
 pronouns-verbs.there-is-have,on,,ˈon,"existential: täällä on 'there is here', minulla on 'I have'",2,fi-agent-v1;ipa=espeak
 pronouns-verbs.there-is-not-do-not-have,ei ole,,ˈei ˈole,,2,fi-agent-v1;ipa=espeak
-pronouns-verbs.want-to-verb,haluan [tehdä],,hˈaluan tˈehdæ,the second verb stays in the first infinitive,2,fi-agent-v1;ipa=espeak
-pronouns-verbs.want-thing,haluan [jotakin],,hˈaluan jˈotakin,the object is partitive for an unbounded amount: haluan kahvia,2,fi-agent-v1;ipa=espeak
-pronouns-verbs.need-thing,tarvitsen [jotakin],,tˈarvitsen jˈotakin,tarvita always takes a partitive object,2,fi-agent-v1;ipa=espeak
-pronouns-verbs.looking-for-thing,etsin [jotakin],,ˈetsin jˈotakin,,2,fi-agent-v1;ipa=espeak
+pronouns-verbs.want-to-verb,haluan [tehdä],,hˈaluan,the second verb stays in the first infinitive,2,fi-agent-v1;ipa=espeak
+pronouns-verbs.want-thing,haluan [jotakin],,hˈaluan,the object is partitive for an unbounded amount: haluan kahvia,2,fi-agent-v1;ipa=espeak
+pronouns-verbs.need-thing,tarvitsen [jotakin],,tˈarvitsen,tarvita always takes a partitive object,2,fi-agent-v1;ipa=espeak
+pronouns-verbs.looking-for-thing,etsin [jotakin],,ˈetsin,,2,fi-agent-v1;ipa=espeak
 question-words.what,mikä / mitä,,mˈikæ / mˈitæ,nominative / partitive,2,fi-agent-v1;ipa=espeak
 question-words.where,missä,,mˈissæ,'in where'; mihin is 'to where' and mistä 'from where',2,fi-agent-v1;ipa=espeak
 question-words.who,kuka,,kˈuka,,2,fi-agent-v1;ipa=espeak

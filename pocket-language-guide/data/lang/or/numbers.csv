@@ -14,9 +14,9 @@ numbers-money.y-b-i,ଶହେ,100,śahē,sˈɔhe,ଏକ ଶତ is the written fo
 numbers-money.y-qi-n,ହଜାର,"1,000",hajāra,hˈɔɟaɾˌɔ,,2,"Praharaj, G. C., Pūrṇṇacandra Oṛiā Bhāṣākoṣa (1931-40), Digital Dictionaries of South Asia; Neukom & Patnaik, A Grammar of Oriya (Universität Zürich ASAS 17, 2003);ipa=espeak"
 numbers-money.y-w-n,ଦଶ ହଜାର,"10,000",daśa hajāra,dˈɔsɔ hˈɔɟaɾˌɔ,"ten thousand — Odia has no word for the myriad, because it groups a step further up at ଲକ୍ଷ",2,"Praharaj, G. C., Pūrṇṇacandra Oṛiā Bhāṣākoṣa (1931-40), Digital Dictionaries of South Asia; Neukom & Patnaik, A Grammar of Oriya (Universität Zürich ASAS 17, 2003);ipa=espeak"
 numbers-money.b-n,ଅଧା,1/2,adhā,ˈɔdʰa,half,2,"Praharaj, G. C., Pūrṇṇacandra Oṛiā Bhāṣākoṣa (1931-40), Digital Dictionaries of South Asia; Neukom & Patnaik, A Grammar of Oriya (Universität Zürich ASAS 17, 2003);ipa=espeak"
-numbers-money.li-ng,2 + ଗଣନା ଶବ୍ଦ,,2 + gaṇanā śabda,dˈuj ɡˈɔnɔnˌa sˈɔbdɔ,2 + a counting word,2,Odia gloss of the Mandarin classifier row;ipa=espeak
+numbers-money.li-ng,2 + ଗଣନା ଶବ୍ଦ,,2 + gaṇanā śabda,dˈuj,2 + a counting word,2,Odia gloss of the Mandarin classifier row;ipa=espeak
 numbers-money.yu-n,ୟୁଆନ୍,,ẏuān,jˈɔuˌan,,2,Odia name of the currency as written on an Odisha price board and in CLDR `or` currency data;ipa=espeak
-numbers-money.ku-i,ୟୁଆନ୍ (କଥିତ),,ẏuān (kathita),jˈɔuˌan kˈɔtʰitˌɔ,"yuan, as spoken",2,Odia name of the currency as written on an Odisha price board and in CLDR `or` currency data;ipa=espeak
+numbers-money.ku-i,ୟୁଆନ୍ (କଥିତ),,ẏuān (kathita),jˈɔuˌan,"yuan, as spoken",2,Odia name of the currency as written on an Odisha price board and in CLDR `or` currency data;ipa=espeak
 numbers-money.2-items,2 ଜିନିଷ,,2 jiniṣa,dˈuj ɟˈinisˌɔ,two things,2,Odia gloss of the Japanese counter row;ipa=espeak
 numbers-money.yen,ୟେନ୍,,ẏēn,jˈɔen,,2,Odia name of the currency as written on an Odisha price board and in CLDR `or` currency data;ipa=espeak
 numbers-money.yen-symbol,¥,ୟେନ୍,¥,,,2,Odia name of the currency as written on an Odisha price board and in CLDR `or` currency data

@@ -7,7 +7,7 @@ dietary-needs.no-peanuts,मूंगफली नहीं,,mūṁgphalī nahī
 dietary-needs.no-nuts,काजू-बादाम-मेवे नहीं,,kājū-bādām-meve nahīṁ,kˈaːɟuːbaːdaːmmeːʋeː nˈʌhĩ,"no cashew, almond or nuts",2,hi-agent-v1;ipa=espeak
 dietary-needs.no-seafood,मछली-झींगा नहीं,,machlī-jhīṁgā nahīṁ,mˈʌcʰlˌiɟʰĩɡaː nˈʌhĩ,no fish or prawn,2,hi-agent-v1;ipa=espeak
 dietary-needs.i-am-vegetarian,मैं शुद्ध शाकाहारी हूँ,मैं शाकाहारी हूँ,maiṁ śuddh śākāhārī hūṁ,mɛ̃ ʃˈʊdʰː ʃˌaːkaːhˈaːɾi hũ,pure vegetarian - no egg,2,hi-agent-v1;ipa=espeak
-dietary-needs.i-am-vegan,मैं वीगन हूँ (दूध-घी भी नहीं),,maiṁ vīgan hūṁ (dūdh-ghī bhī nahīṁ),mɛ̃ ʋˈiːɡən hũ dˈuːdʰɡʰi bʰˈi nˈʌhĩ,vegan - no milk or ghee,2,hi-agent-v1;ipa=espeak
+dietary-needs.i-am-vegan,मैं वीगन हूँ (दूध-घी भी नहीं),,maiṁ vīgan hūṁ (dūdh-ghī bhī nahīṁ),mɛ̃ ʋˈiːɡən hũ,vegan - no milk or ghee,2,hi-agent-v1;ipa=espeak
 dietary-needs.i-do-not-eat,मैं {} नहीं खाता,मैं {} नहीं खाती,maiṁ {} nahīṁ khātā,mɛ̃ {} nˈʌhĩ kʰˈaːtaː,,2,hi-agent-v1;ipa=espeak
 dietary-needs.i-am-allergic-to,मुझे {} से एलर्जी है,,mujhe {} se elarjī hai,mˌʊɟʰeː {} seː eːlˈʌɾɟi hɛː,,2,hi-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-fish-stock,क्या इसमें मछली का शोरबा है?,,kyā ismeṁ machlī kā śorbā hai?,kjaː ˈɪsmˌẽː mˈʌcʰlˌi kaː ʃˈoːɾbˌaː hɛː,,2,hi-agent-v1;ipa=espeak

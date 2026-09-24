@@ -20,6 +20,8 @@
 // device; a native provider can be a second factory with the same four methods,
 // which is the only seam this needs and a good deal less than a plugin framework.
 
+import { sayable } from '../../core/pack.js';
+
 /** @typedef {'local'|'remote'|'unknown'} Offline */
 
 /**
@@ -405,7 +407,7 @@ export function createSpeech(
    * @param {{voiceId?:string, rate?:Rate}} [options]
    */
   function speakPhrase(phrase, options = {}) {
-    return speak({ text: phrase.listener.text, locale: phrase.listener.lang, ...options });
+    return speak({ text: sayable(phrase.listener.text), locale: phrase.listener.lang, ...options });
   }
 
   /**

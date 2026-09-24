@@ -21,10 +21,10 @@ pronouns-verbs.like,нравится,,nravitsya,nrˈɑvʲitsʌ,,2,ru-agent-v1;ip
 pronouns-verbs.need,нужно,,nuzhno,nˈuʒnʌ,,2,ru-agent-v1;ipa=espeak
 pronouns-verbs.there-is-have,есть,,yestʼ,jestʲ,,2,ru-agent-v1;ipa=espeak
 pronouns-verbs.there-is-not-do-not-have,нет,,net,nʲˈet,,2,ru-agent-v1;ipa=espeak
-pronouns-verbs.want-to-verb,хочу [глагол],,khochu [glagol],xʌtʃʲˈu ɡɭaɡˈoɭ,,2,ru-agent-v1;ipa=espeak
-pronouns-verbs.want-thing,хочу [предмет],,khochu [predmet],xʌtʃʲˈu prʲidmʲˈet,,2,ru-agent-v1;ipa=espeak
-pronouns-verbs.need-thing,мне нужен [предмет],,mne nuzhen [predmet],mnʲˈe nˈuʒɨn prʲidmʲˈet,,2,ru-agent-v1;ipa=espeak
-pronouns-verbs.looking-for-thing,я ищу [предмет],,ya ishchu [predmet],ˈja ɪɕˈu prʲidmʲˈet,,2,ru-agent-v1;ipa=espeak
+pronouns-verbs.want-to-verb,хочу [глагол],,khochu [glagol],xʌtʃʲˈu,,2,ru-agent-v1;ipa=espeak
+pronouns-verbs.want-thing,хочу [предмет],,khochu [predmet],xʌtʃʲˈu,,2,ru-agent-v1;ipa=espeak
+pronouns-verbs.need-thing,мне нужен [предмет],,mne nuzhen [predmet],mnʲˈe nˈuʒɨn,,2,ru-agent-v1;ipa=espeak
+pronouns-verbs.looking-for-thing,я ищу [предмет],,ya ishchu [predmet],ˈja ɪɕˈu,,2,ru-agent-v1;ipa=espeak
 question-words.what,что,,chto,ʃto,,2,ru-agent-v1;ipa=espeak
 question-words.where,где,,gde,ɡdʲˈe,,2,ru-agent-v1;ipa=espeak
 question-words.who,кто,,kto,ktˈo,,2,ru-agent-v1;ipa=espeak

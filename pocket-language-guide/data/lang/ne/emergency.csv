@@ -9,7 +9,7 @@ emergency-medical.where-is-a-pharmacy,औषधि पसल कहाँ छ?,,
 emergency-medical.please-take-me-to-a-hospital,मलाई अस्पताल लानुहोस्,,malāī aspatāla lānuhōs,məlˈaːi ˌəspətˈaːl lˌaːnuhˈoːs,,2,ne-agent-v1;ipa=espeak
 emergency-medical.i-feel-unwell,मलाई सन्चो छैन,,malāī sancō chaina,məlˈaːi sˈʌncoː cʰˈɛːnə,,2,ne-agent-v1;ipa=espeak
 emergency-medical.this-is-an-emergency,यो आपतकालीन अवस्था हो,,yō āpatakālīna avasthā hō,jˈoː ˌaːpətˌəkaːlˈɪːn əwˈʌstʰaː hoː,,2,ne-agent-v1;ipa=espeak
-emergency-medical.i-am-having-a-severe-allergic-reaction,मलाई गम्भीर एलर्जी भइरहेको छ (एनाफाइलेक्सिस),,malāī gambhīra ēlarjī bhairahēkō cha (ēnāphāilēksisa),məlˈaːi ɡəmbʰˈɪːɾə eːlˈʌrrɟi bʰˌəɪɾəhˈeːkoː cʰˈə ˌeːnaːpʰˌaːɪlˈeːksɪs,,2,ne-agent-v1;ipa=espeak
+emergency-medical.i-am-having-a-severe-allergic-reaction,एनाफाइलेक्सिस — मलाई गम्भीर एलर्जी भइरहेको छ,,ēnāphāilēksisa — malāī gambhīra ēlarjī bhairahēkō cha,ˌeːnaːpʰˌaːɪlˈeːksɪs məlˈaːi ɡəmbʰˈɪːɾə eːlˈʌrrɟi bʰˌəɪɾəhˈeːkoː cʰˈə,anaphylaxis,2,ne-agent-v1;ipa=espeak
 emergency-medical.i-cannot-breathe,मलाई सास फेर्न सकिँदैन,,malāī sāsa phērna sakim̐daina,məlˈaːi sˈaːs pʰˈeːrrnə sˌəkĩdˈɛːnə,,2,ne-agent-v1;ipa=espeak
 emergency-medical.i-am-bleeding-badly,मलाई धेरै रगत बगिरहेको छ,,malāī dhērai ragata bagirahēkō cha,məlˈaːi dʰˈeːɾɛː ɾˈʌɡət bˌəɡɪɾəhˈeːkoː cʰˈə,,2,ne-agent-v1;ipa=espeak
 emergency-medical.i-have-chest-pain,मेरो छातीमा दुख्छ,,mērō chātīmā dukhcha,mˈeːɾoː cʰaːtˈɪːmaː dˈukʰcʰə,,2,ne-agent-v1;ipa=espeak

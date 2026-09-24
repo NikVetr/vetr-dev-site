@@ -135,7 +135,7 @@ h1.lede { font-size: var(--fs-1); font-weight: 400; line-height: 1.45; }
 .want-chosen { font-size: var(--fs--1); font-weight: 600; color: var(--accent); min-inline-size: 0; }
 .want-chosen:empty { display: none; }
 .want-label {
-  display: block; font-size: var(--fs--1); color: var(--muted);
+  display: block; font-size: var(--fs--1); font-weight: 600; color: var(--ink);
   margin-bottom: 0;
 }
 .want-grid[hidden] { display: none; }
@@ -282,6 +282,10 @@ label { display: block; }
 .brand {
   display: inline-flex; align-items: center; gap: 0.4em;
   font-weight: 700; text-decoration: none; color: var(--ink); white-space: nowrap;
+  /* Its own size, not the header's: the board's header is set small and the studio's
+     shrinks its buttons on a phone, and the brand used to shrink with each, so the
+     one fixed thing on every page changed size between pages. */
+  font-size: 1rem;
 }
 /* **The mark, and only the mark.** A speech bubble over a phrase card, in the logo's
    own green, set at the height of the word beside it and no more: it is there to be
@@ -726,6 +730,14 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
      two-column desktop and stacked on a phone. */
   .gallery-intro { padding-block: var(--space-1) 0; gap: var(--space-2); }
   h1.lede { font-size: var(--fs-0); margin-bottom: var(--space-2); }
+  /* **The bar stays while the cards scroll.** A sticky element sticks only inside
+     its own parent, and the toggle's parents ended where the language grid did -- so
+     it stayed put over the grid and left the moment the cards began, which is
+     exactly when someone wants it to change language. On a phone the intro is one
+     column anyway, so both wrappers give up their boxes and the toggle's containing
+     block becomes the page: it sticks under the header for as long as there is page. */
+  .gallery-intro, .want { display: contents; }
+  .want-toggle { margin-block-start: var(--space-1); }
   /* Fifty-two language buttons are a compact block beside the heading on a desktop
      and 922pt of wall on a phone, which put the first card 1230pt down: a screen and
      a half of controls before any of the thing they control. Capped and scrolled,

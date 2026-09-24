@@ -17,7 +17,7 @@ medical-conditions.i-have-a-heart-condition,Tengo una enfermedad del corazón,Te
 pharmacy-symptoms.i-have-diarrhea,Tengo diarrea,,tˈeŋɡo djarˈea,,2,es-agent-v1;ipa=espeak
 police-consulate.my-passport-was-stolen,Me robaron el pasaporte,,me robˈaɾon el pˌasapˈoɾte,,2,es-agent-v1;ipa=espeak
 body-parts.throat,la garganta,,la ɡaɾɡˈanta,,2,es-agent-v1;ipa=espeak
-medical-conditions.i-am-allergic-to-penicillin,Soy alérgico/a a la penicilina,,sˈoɪ alˈeɾxiko / a a la pˌenisilˈina,,2,es-agent-v1;ipa=espeak
+medical-conditions.i-am-allergic-to-penicillin,Soy alérgico/a a la penicilina,,sˈoɪ alˈeɾxiko a la pˌenisilˈina,,2,es-agent-v1;ipa=espeak
 pharmacy-symptoms.where-is-an-all-night-pharmacy,¿Dónde hay una farmacia de guardia?,farmacia de turno,dˈonde ˈaɪ ˈuna faɾmˈasja de ɡwˈaɾdja,,2,es-agent-v1;ipa=espeak
 police-consulate.someone-is-following-me,Alguien me está siguiendo,,ˈalɡjen me estˈa siɡjˈendo,,2,es-agent-v1;ipa=espeak
 body-parts.tooth,el diente,,el djˈente,,2,es-agent-v1;ipa=espeak
@@ -59,7 +59,7 @@ police-consulate.i-am-calling-the-police,Voy a llamar a la policía,,bˈoɪ a ʝ
 body-parts.ankle,el tobillo,,el tobˈiʝo,,2,es-agent-v1;ipa=espeak
 medical-conditions.this-is-my-medicine,Este es mi medicamento,,ˈeste ˈes mi mˌedikamˈento,,2,es-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-cough,Tengo tos,,tˈeŋɡo tˈos,,2,es-agent-v1;ipa=espeak
-police-consulate.am-i-under-arrest,¿Estoy detenido/a?,,estˈoɪ dˌetenˈido / ˈa,,2,es-agent-v1;ipa=espeak
+police-consulate.am-i-under-arrest,¿Estoy detenido/a?,,estˈoɪ dˌetenˈido,,2,es-agent-v1;ipa=espeak
 body-parts.skin,la piel,,la pjˈel,,2,es-agent-v1;ipa=espeak
 medical-conditions.please-give-me-sugar-or-juice,"Deme azúcar o jugo, por favor",Deme azúcar o zumo,"dˈeme asˈukaɾ o xˈuɡo, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
 pharmacy-symptoms.antihistamine,un antihistamínico,loratadina · cetirizina,ˈun ˌantiˌistamˈiniko,,2,es-agent-v1;ipa=espeak
@@ -73,13 +73,13 @@ police-consulate.i-did-not-agree-to-this-price,No acepté este precio,,nˈo ˌas
 medical-conditions.do-not-give-me,No me dé {},,nˈo me dˈe {},,2,es-agent-v1;ipa=espeak
 pharmacy-symptoms.i-feel-dizzy,Tengo mareos,,tˈeŋɡo maɾˈeos,,2,es-agent-v1;ipa=espeak
 police-consulate.please-write-the-report-number,"Escriba el número de denuncia, por favor",,"eskɾˈiba el nˈumeɾo de denˈunsja, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
-medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,Soy alérgico/a a la aspirina y al ibuprofeno,,sˈoɪ alˈeɾxiko / a a la ˌaspiɾˈina i al ˌibupɾofˈeno,,2,es-agent-v1;ipa=espeak
+medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,Soy alérgico/a a la aspirina y al ibuprofeno,,sˈoɪ alˈeɾxiko a la ˌaspiɾˈina i al ˌibupɾofˈeno,,2,es-agent-v1;ipa=espeak
 pharmacy-symptoms.ibuprofen,ibuprofeno,,ˌibupɾofˈeno,,2,es-agent-v1;ipa=espeak
 police-consulate.it-happened-here,Ocurrió aquí,,ˌokuriˈo akˈi,,2,es-agent-v1;ipa=espeak
 medical-conditions.my-injector-is-in-my-bag,Mi autoinyector está en mi bolso,,mi ˌaʊtoɪɲektˈoɾ estˈa en mi bˈolso,,2,es-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-sore-throat,Me duele la garganta,,me dwˈele la ɡaɾɡˈanta,,2,es-agent-v1;ipa=espeak
 police-consulate.may-i-have-a-copy-of-the-report,¿Me da una copia de la denuncia?,,me dˈa ˈuna kˈopja de la denˈunsja,,2,es-agent-v1;ipa=espeak
-medical-conditions.i-am-allergic-to-sulfa-drugs,Soy alérgico/a a las sulfamidas,Soy alérgico/a a las sulfas,sˈoɪ alˈeɾxiko / a a las sˌulfamˈidas,,2,es-agent-v1;ipa=espeak
+medical-conditions.i-am-allergic-to-sulfa-drugs,Soy alérgico/a a las sulfamidas,Soy alérgico/a a las sulfas,sˈoɪ alˈeɾxiko a las sˌulfamˈidas,,2,es-agent-v1;ipa=espeak
 pharmacy-symptoms.can-i-get-this-medicine-here,¿Tienen este medicamento?,,tjˈenen ˈeste mˌedikamˈento,,2,es-agent-v1;ipa=espeak
 police-consulate.i-will-not-sign-anything-i-cannot-read,No firmaré nada que no pueda leer,,nˈo fˌiɾmaɾˈe nˈada ke nˈo pwˈeda leˈeɾ,,2,es-agent-v1;ipa=espeak
 pharmacy-symptoms.bandage,una venda,una tirita · una curita,ˈuna bˈenda,,2,es-agent-v1;ipa=espeak
@@ -101,7 +101,7 @@ pharmacy-symptoms.is-this-safe-during-pregnancy,¿Es seguro en el embarazo?,,ˈe
 emergency-medical.help,¡Auxilio!,¡Socorro!,aʊksˈiljo,,2,es-agent-v1;ipa=espeak
 emergency-medical.please-call-an-ambulance,"Llame a una ambulancia, por favor",,"ʝˈame a ˈuna ˌambulˈansja, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
 emergency-medical.i-need-a-doctor,Necesito un médico,,nˌesesˈito ˈun mˈediko,,2,es-agent-v1;ipa=espeak
-emergency-medical.i-am-sick,Estoy enfermo/a,,estˈoɪ emfˈeɾmo / ˈa,,2,es-agent-v1;ipa=espeak
+emergency-medical.i-am-sick,Estoy enfermo/a,,estˈoɪ emfˈeɾmo,,2,es-agent-v1;ipa=espeak
 emergency-medical.i-am-injured,Estoy herido,,estˈoɪ eɾˈido,,2,es-agent-v1;ipa=espeak
 emergency-medical.it-hurts-here,Me duele aquí,,me dwˈele akˈi,,2,es-agent-v1;ipa=espeak
 emergency-medical.where-is-a-pharmacy,¿Dónde hay una farmacia?,,dˈonde ˈaɪ ˈuna faɾmˈasja,,2,es-agent-v1;ipa=espeak
@@ -131,7 +131,7 @@ lost-rescue.my-companion-is-missing,No encuentro a mi acompañante,,nˈo enkwˈe
 lost-rescue.please-look-at-my-current-location,Mire mi ubicación actual,,mˈiɾe mi ˌubikasjˈon aktwˈal,,2,es-agent-v1;ipa=espeak
 lost-rescue.my-child-is-missing,Mi hijo se ha perdido,,mi ˈixo se ˈa peɾdˈido,,2,es-agent-v1;src=RAE-DLE;ipa=espeak
 lost-rescue.i-do-not-know-where-i-am,No sé dónde estoy,,nˈo sˈe dˈonde estˈoɪ,,2,es-agent-v1;ipa=espeak
-lost-rescue.my-friend-is-hurt,Mi amigo/a está herido/a,,mi amˈiɡo / a estˈa eɾˈido / ˈa,,2,es-agent-v1;ipa=espeak
+lost-rescue.my-friend-is-hurt,Mi amigo/a está herido/a,,mi amˈiɡo estˈa eɾˈido,,2,es-agent-v1;ipa=espeak
 lost-rescue.i-lost-my-wallet,Perdí mi cartera,Perdí mi billetera,peɾdˈi mi kaɾtˈeɾa,,2,es-agent-v1;ipa=espeak
 lost-rescue.i-lost-my-bag,Perdí mi bolso,Perdí mi mochila,peɾdˈi mi bˈolso,,2,es-agent-v1;ipa=espeak
 lost-rescue.where-is-lost-and-found,¿Dónde están los objetos perdidos?,objetos extraviados,dˈonde estˈan los obxˈetos peɾdˈidos,,2,es-agent-v1;ipa=espeak

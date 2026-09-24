@@ -250,6 +250,24 @@ here are worse than none, so unreviewed ones are withheld and the studio says so
 rather than quietly leaving a gap. The validator refuses a confidence claim that
 comes without a source and a date.
 
+### What is said of a text
+
+A row's `text` may carry something for the eye: a trailing parenthesis that tells two
+rows apart on the card — `Hello (polite)`, `yen (symbol)`, `Forint (Zeichen)` — or a
+bracketed slot for a word the reader supplies, `want to [verb]`. The card prints
+them; nothing says them. `spoken()` in `scripts/build_ipa.py` strips both before
+transcription, and `sayable` in `core/pack.js` is the same rule for the speech
+engine and the quiz, so the `ipa` column, the respelling read from it and the voice
+agree. Before the rule, `pəlˈaɪt` and `vˈɜːb` were in the `ipa` of every language
+and a Spanish reader's how-to-say-it for "Hello (polite)" was *he-lou pe-lait*.
+The same function drops a spaced plus and what follows it (`quero + infinitivo` is
+the same slot written another way), a Latin gender suffix after an unspaced slash
+(`alérgico/a`), and a thousands separator (`1,000`); `expand_units` beside it says
+`cm` as the unit word in the languages whose voices spelt the letters.
+`content/PROMPTS/pronunciation-audit.md` is the brief for finding the next class of
+this: a class is fixed once in `spoken()`, never row by row, because the labels are
+wanted on the card.
+
 ### A cell that names a language
 
 Seven concepts in the bank name a language, and the O(N) shape is exactly why they
@@ -361,9 +379,10 @@ the table from them.
 
 ### A language nobody speaks
 
-Morse is a language in the registry — `morse`, script `Mors`, its own section
-`morse-code` of 49 rows: the letters, digits, five marks and eight prosign-and-word
-entries whose `text` is the code itself, `.-`, `-...`, `...---...` — because the
+Morse is a language in the registry — `morse`, script `Mors`, three sections of one
+group: `morse-code` (the letters), `morse-digits` and `morse-marks` (five marks and
+eight prosign-and-word entries), 49 rows whose `text` is the code itself, `.-`,
+`-...`, `...---...` — because the
 things a language gets for free are exactly what it needs: a card in the gallery, a
 printed sheet glossed into every reader's language, a place in the section tree.
 What it does not get is the other half. It has no `speak_label`, and `isSpoken` in
@@ -373,6 +392,15 @@ and the validator (`SILENT`, mirrored in `build_ipa.py`, which leaves its `ipa`
 empty) skips the checks that look at a language as a reader. Every other language
 gets a `data/lang/<code>/morse.csv` whose text is the letter, since the gloss of
 `.-` is `A` in any alphabet.
+
+Its card is the one sparse sheet in the gallery, and it is what `SPARSE` in
+`core/solve/index.js` exists for: forty-nine one-line rows covered a quarter of a
+two-face card at nominal size. When the smallest face count still leaves more than
+half the columns unfilled, an even anchor may come down to one face — printed
+one-sided — and the type may grow past the theme's sizes to `SCALE_MAX`, the same
+ceiling a reader's explicit choice has. Every other pack is over four fifths full and
+never reaches the rule; `scripts/thumb_fullness.mjs` reads the committed first faces
+and says so.
 
 Its conversation is light rather than a board. `signal.html` (`ui/signal.js`,
 `core/morse.js`) shows the code as it is typed, names what Morse cannot encode
@@ -779,18 +807,27 @@ lower half of the screen and below one in the upper half, its near edge on the
 anchor's, because the stylesheet's default hung every panel under the header's
 corner, a screen away from the thumb at the foot that asked for it.
 
-**The shape of the screen is the same in both orientations, and only the sentence
-turns.** The surface is the sentence alone; under it a foot holds the owner's gloss
-and, where the board has answers, a Reply set large — full width and 4.5rem tall on a
-portrait phone, beside the gloss in landscape — because Reply is the one control the
-*stranger* presses, and a small button in a row of the owner's controls is not
-addressed to them. Speak, speed and Turn stay in their row beneath. Turning used to
-rotate the whole stage into a `100dvh`×`100dvw` box, which laid the owner's buttons
-on their sides and the speed control on a pillar; now it sets the sentence in
-`writing-mode: vertical-rl` with `text-orientation: sideways`, which is a page held
-sideways rather than vertical text, and the fitter measures lines as heights — a
-`vertical()` check on the writing mode in `widestLine`, `lineRoom`, `hangFits` and
-the overflow test — instead of un-rotating a stage to measure it.
+**Two people, two sets of controls, and only the stranger's turn.** The sentence and
+Reply are for the person across the table, so they share a box (`.board-read`) that
+the Turn control turns: upright, Reply is set large and full width under the
+sentence; turned, the sentence is in `writing-mode: vertical-rl` with
+`text-orientation: sideways` — a page held sideways, not vertical text — and Reply
+stands beside it on the left, set the same way, which is "under the sentence" for
+someone reading the turned screen and the only place they can find the button to
+press it. The owner's gloss, how-to-say-it, Speak, speed and Turn are the owner's, so
+they stay upright in one row at the foot and take as little as one line of small type
+and three buttons can; the sentence gets the rest. Turning used to rotate the whole
+stage into a `100dvh`×`100dvw` box, which laid the owner's buttons on their sides
+and the speed control on a pillar. The fitter measures lines as heights when the
+writing mode says so — a `vertical()` check in `widestLine`, `lineRoom`, `hangFits`
+and the overflow test — and sizes the turned text to the surface's height first
+(`fullSize`), because a vertical flow inside a column flex box otherwise sizes to its
+own content and every line "fits" a box exactly as long as its ink. On a wide screen
+the stage centres its children for the answer grid, and the read box and the foot
+opt out with `align-self: stretch`, or a turned sentence's columns would size the box
+and carry Reply off the edge. In the answer grid, "none of these" is drawn as Reply
+is — the role's colour darkened, in white — because it is the door to the fuller
+translator, not one more answer.
 
 The pronunciation rides with the phrase out of `resolvePhrase`, not looked up again
 in the view, and that is what keeps it right under a speaker variant: `say` has
@@ -1438,6 +1475,7 @@ artifacts, following the `ceo-salary-benchmark/scripts/` precedent:
 npm run vendor      # esbuild → vendor/{fontkit,pdf-lib}.esm.js  (rarely)
 npm run icons       # Lucide SVG → data/icons.json, normalised to path data
 npm run logo        # favicon.svg → core/logo-shapes.js, the mark as flat path data for the band
+node scripts/thumb_fullness.mjs   # how full each pack's first face is, sparsest first
 npm run prerender   # solve + render → packs/  (after any corpus or engine change)
                     #   thumbnails only, one per pair, then indexed down to a
                     #   fifth-bit palette: 240 pairs in 8.6MB rather than 27MB

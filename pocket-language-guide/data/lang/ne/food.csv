@@ -7,7 +7,7 @@ dietary-needs.no-peanuts,बदाम चाहिँदैन,,badāma cāhim̐
 dietary-needs.no-nuts,नट्स चाहिँदैन,,naṭsa cāhim̐daina,nˈʌʈsə cˌaːhĩdˈɛːnə,tree nuts generically,2,ne-agent-v1;ipa=espeak
 dietary-needs.no-seafood,माछा-झिंगा चाहिँदैन,,māchā-jhiṁgā cāhim̐daina,mˈaːcʰaːɟʰɪŋɡaː cˌaːhĩdˈɛːnə,,2,ne-agent-v1;ipa=espeak
 dietary-needs.i-am-vegetarian,म शाकाहारी हुँ,,ma śākāhārī hum̐,mə ʃˌaːkaːhˈaːɾi hˈũ,,2,ne-agent-v1;ipa=espeak
-dietary-needs.i-am-vegan,म भेगान हुँ (दूध-घिउ पनि खाँदिन),,ma bhēgāna hum̐ (dūdha-ghiu pani khām̐dina),mə bʰeːɡˈaːn hˈũ dˈuːdʰɡʰɪʊ pˈʌnɪ kʰãdˈɪn,,2,ne-agent-v1;ipa=espeak
+dietary-needs.i-am-vegan,म भेगान हुँ — दूध-घिउ पनि खाँदिन,,ma bhēgāna hum̐ — dūdha-ghiu pani khām̐dina,mə bʰeːɡˈaːn hˈũ dˈuːdʰɡʰɪʊ pˈʌnɪ kʰãdˈɪn,I am vegan; I do not eat milk or ghee either,2,ne-agent-v1;ipa=espeak
 dietary-needs.i-do-not-eat,म {} खाँदिन,,ma {} khām̐dina,mə {} kʰãdˈɪn,,2,ne-agent-v1;ipa=espeak
 dietary-needs.i-am-allergic-to,मलाई {} बाट एलर्जी छ,,malāī {} bāṭa ēlarjī cha,məlˈaːi {} bˈaːʈə eːlˈʌrrɟi cʰˈə,,2,ne-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-fish-stock,के यसमा माछाको झोल छ?,,kē yasamā māchākō jhōla cha?,kˈeː jˈʌsəmˌaː maːcʰˈaːkoː ɟʰˈoːl cʰˈə,,2,ne-agent-v1;ipa=espeak

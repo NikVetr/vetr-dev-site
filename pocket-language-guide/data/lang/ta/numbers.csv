@@ -2,7 +2,7 @@ concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
 numbers-money.l-ng,பூஜ்ஜியம்,சுழியம்,pūjjiyam,puːdʒdʒijʌm,,2,ta-agent-v1;ipa=espeak
 numbers-money.y,ஒன்று,,oṉṟu,onrɯ,,2,ta-agent-v1;ipa=espeak
 numbers-money.r,இரண்டு,,iraṇṭu,iɾʌɳɖɯ,,2,ta-agent-v1;ipa=espeak
-numbers-money.li-ng,இரண்டு + அளவைச் சொல்,,iraṇṭu + aḷavaic col,iɾʌɳɖɯ aɭʌvaɪtʃːol,2 + classifier,2,ta-agent-v1;ipa=espeak
+numbers-money.li-ng,இரண்டு + அளவைச் சொல்,,iraṇṭu + aḷavaic col,iɾʌɳɖɯ,2 + classifier,2,ta-agent-v1;ipa=espeak
 numbers-money.s-n,மூன்று,,mūṉṟu,muːnrɯ,,2,ta-agent-v1;ipa=espeak
 numbers-money.s,நான்கு,,nāṉku,naːnɡɯ,,2,ta-agent-v1;ipa=espeak
 numbers-money.w,ஐந்து,,aintu,aɪndɯ,,2,ta-agent-v1;ipa=espeak
@@ -16,7 +16,7 @@ numbers-money.y-qi-n,ஆயிரம்,,āyiram,aːjiɾʌm,,2,ta-agent-v1;ipa=e
 numbers-money.y-w-n,பத்தாயிரம்,,pattāyiram,pʌttaːjiɾʌm,,2,ta-agent-v1;ipa=espeak
 numbers-money.b-n,அரை,1/2,arai,aɾaɪ,half,2,ta-agent-v1;ipa=espeak
 numbers-money.yu-n,யுவான்,,yuvāṉ,juvaːn,,2,ta-agent-v1;ipa=espeak
-numbers-money.ku-i,யுவான் (பேச்சு வழக்கு),,yuvāṉ (pēccu vaḻakku),juvaːn peːtʃːɯ vʌɻʌkkɯ,spoken,2,ta-agent-v1;ipa=espeak
+numbers-money.ku-i,யுவான் (பேச்சு வழக்கு),,yuvāṉ (pēccu vaḻakku),juvaːn,spoken,2,ta-agent-v1;ipa=espeak
 numbers-money.number-and-classifier-notes,"எண்களை இணைத்துச் சொல்லுங்கள்: 11 = shi yi, 20 = er shi, 21 = er shi yi. தொலைபேசி எண்ணில் 1 பெரும்பாலும் yao. எண்ணுக்கும் பொருளுக்கும் இடையே ஒரு அளவைச் சொல் கட்டாயம்: ge (பொது), wei (மனிதர்), zhang (டிக்கெட், தட்டையான பொருள்), bei (கோப்பை), ping (பாட்டில்). அளவைச் சொல்லுக்கு முன் இரண்டு என்பது liang, er அல்ல: liang zhang piao. jiao அல்லது mao = 0.1 யுவான்; fen = 0.01 யுவான்.",,"eṇkaḷai iṇaittuc colluṅkaḷ: 11 = shi yi, 20 = er shi, 21 = er shi yi. tolaipēci eṇṇil 1 perumpālum yao. eṇṇukkum poruḷukkum iṭaiyē oru aḷavaic col kaṭṭāyam: ge (potu), wei (maṉitar), zhang (ṭikkeṭ, taṭṭaiyāṉa poruḷ), bei (kōppai), ping (pāṭṭil). aḷavaic collukku muṉ iraṇṭu eṉpatu liang, er alla: liang zhang piao. jiao allatu mao = 0.1 yuvāṉ; fen = 0.01 yuvāṉ.",,,2,ta-notes-v1
 numbers-money.2-items,இரண்டு பொருள்,,iraṇṭu poruḷ,iɾʌɳɖɯ poɾɯɭ,,2,ta-agent-v1;ipa=espeak
 numbers-money.yen,யென்,,yeṉ,jen,,2,ta-agent-v1;ipa=espeak

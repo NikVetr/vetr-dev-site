@@ -2,7 +2,7 @@ concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
 numbers-money.l-ng,సున్నా,,sunnā,sunnaː,,2,te-agent-v1;ipa=espeak
 numbers-money.y,ఒకటి,,okaṭi,okaʈi,,2,te-agent-v1;ipa=espeak
 numbers-money.r,రెండు,,reṁḍu,reɳɖu,,2,te-agent-v1;ipa=espeak
-numbers-money.li-ng,రెండు + లెక్క పదం,,reṁḍu + lekka padaṁ,reɳɖu lekka padam,2 + classifier,2,te-agent-v1;ipa=espeak
+numbers-money.li-ng,రెండు + లెక్క పదం,,reṁḍu + lekka padaṁ,reɳɖu,2 + classifier,2,te-agent-v1;ipa=espeak
 numbers-money.s-n,మూడు,,mūḍu,muːɖu,,2,te-agent-v1;ipa=espeak
 numbers-money.s,నాలుగు,,nālugu,naːluɡu,,2,te-agent-v1;ipa=espeak
 numbers-money.w,ఐదు,,aidu,aɪdu,,2,te-agent-v1;ipa=espeak
@@ -16,7 +16,7 @@ numbers-money.y-qi-n,వేయి,,vēyi,ʋeːji,,2,te-agent-v1;ipa=espeak
 numbers-money.y-w-n,పది వేలు,,padi vēlu,padi ʋeːlu,,2,te-agent-v1;ipa=espeak
 numbers-money.b-n,సగం,1/2,sagaṁ,saɡam,half,2,te-agent-v1;ipa=espeak
 numbers-money.yu-n,యువాన్,,yuvān,juʋaːn,,2,te-currency-v1;cldr;ipa=espeak
-numbers-money.ku-i,యువాన్ (మాట్లాడేటప్పుడు),,yuvān (māṭlāḍēṭappuḍu),juʋaːn maːʈlaːɖeːʈappuɖu,spoken,2,te-currency-v1;cldr;ipa=espeak
+numbers-money.ku-i,యువాన్ (మాట్లాడేటప్పుడు),,yuvān (māṭlāḍēṭappuḍu),juʋaːn,spoken,2,te-currency-v1;cldr;ipa=espeak
 numbers-money.number-and-classifier-notes,"అంకెలను కలిపి చెప్పండి: 11 = shi yi, 20 = er shi, 21 = er shi yi. ఫోన్ నంబరులో 1 ను చాలా వరకు yao అంటారు. అంకెకూ వస్తువుకూ మధ్య ఒక లెక్క పదం తప్పనిసరి: ge (సాధారణం), wei (మనుషులు), zhang (టికెట్లు, బల్లపరుపు వస్తువులు), bei (గ్లాసులు), ping (సీసాలు). లెక్క పదం ముందు రెండు అంటే liang, er కాదు: liang zhang piao. jiao లేదా mao = 0.1 యువాన్; fen = 0.01 యువాన్.",,"aṁkelanu kalipi ceppaṁḍi: 11 = shi yi, 20 = er shi, 21 = er shi yi. phōn naṁbarulō 1 nu cālā varaku yao aṁṭāru. aṁkekū vastuvukū madhya oka lekka padaṁ tappanisari: ge (sādhāraṇaṁ), wei (manuṣulu), zhang (ṭikeṭlu, ballaparupu vastuvulu), bei (glāsulu), ping (sīsālu). lekka padaṁ muṁdu reṁḍu aṁṭē liang, er kādu: liang zhang piao. jiao lēdā mao = 0.1 yuvān; fen = 0.01 yuvān.",,,2,te-notes-v1
 numbers-money.2-items,రెండు వస్తువులు,,reṁḍu vastuvulu,reɳɖu ʋastuʋulu,,2,te-agent-v1;ipa=espeak
 numbers-money.yen,యెన్,,yen,jen,,2,te-currency-v1;cldr;ipa=espeak

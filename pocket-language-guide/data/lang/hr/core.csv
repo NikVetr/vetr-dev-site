@@ -21,10 +21,10 @@ pronouns-verbs.like,sviđati se,voljeti,svidʑati sˈe,'be pleasing to': sviđa 
 pronouns-verbs.need,trebati,,trebati,,2,hr-agent-v1;ipa=espeak
 pronouns-verbs.there-is-have,ima,,ˈima,,2,hr-agent-v1;ipa=espeak
 pronouns-verbs.there-is-not-do-not-have,nema,,nˈema,,2,hr-agent-v1;ipa=espeak
-pronouns-verbs.want-to-verb,želim + infinitiv,,ʒˈelim infinitiv,,2,hr-agent-v1;ipa=espeak
-pronouns-verbs.want-thing,želim + stvar,,ʒˈelim stvˈar,the thing takes the accusative,2,hr-agent-v1;ipa=espeak
-pronouns-verbs.need-thing,trebam + stvar,,trˈebam stvˈar,the thing takes the accusative,2,hr-agent-v1;ipa=espeak
-pronouns-verbs.looking-for-thing,tražim + stvar,,trˈaʒim stvˈar,the thing takes the accusative,2,hr-agent-v1;ipa=espeak
+pronouns-verbs.want-to-verb,želim + infinitiv,,ʒˈelim,,2,hr-agent-v1;ipa=espeak
+pronouns-verbs.want-thing,želim + stvar,,ʒˈelim,the thing takes the accusative,2,hr-agent-v1;ipa=espeak
+pronouns-verbs.need-thing,trebam + stvar,,trˈebam,the thing takes the accusative,2,hr-agent-v1;ipa=espeak
+pronouns-verbs.looking-for-thing,tražim + stvar,,trˈaʒim,the thing takes the accusative,2,hr-agent-v1;ipa=espeak
 question-words.what,što,šta,ʃtˈo,šta is the everyday spoken form,2,hr-agent-v1;ipa=espeak
 question-words.where,gdje,,ɡdjˈe,,2,hr-agent-v1;ipa=espeak
 question-words.who,tko,ko,tkˈo,ko is the everyday spoken form,2,hr-agent-v1;ipa=espeak

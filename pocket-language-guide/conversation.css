@@ -66,7 +66,7 @@
      at a screenshot at that setting, which is why §9.2 asks for one. */
   flex-wrap: wrap;
 }
-.board-brand { font-size: var(--fs--1); min-inline-size: 0; }
+.board-brand { min-inline-size: 0; }
 .board-pair {
   margin: 0;
   color: var(--muted);
@@ -314,6 +314,10 @@
      `inline-size: 100%` is declared later in the file and a media query adds no
      specificity. Measured at 1658px wide, which is what sent me looking.) */
   .board-asked { inline-size: min(100%, 60rem); }
+  /* The sentence's box and the owner's foot take the whole width whatever the
+     screen: the centring above is for the answers. Turned, a centred box would size
+     itself to the sentence's columns and carry Reply off the edge with it. */
+  .board-read, .board-foot { align-self: stretch; }
   /* The way out stays at the reading edge rather than centring with everything else
      -- it is a way *back*, and in the middle it reads as one more answer. Lined up
      with the panel's own edge, which on a wide screen is nowhere near the screen's. */
@@ -538,6 +542,10 @@
   text-orientation: sideways;
 }
 .board-stage-turned .board-message { align-items: center; }
+/* Turned, the surface's side padding is across the sentence's columns, where the
+   width is what is short: at the upright 1.8rem a nine-character question lost
+   one size step to it, which is the size the turn exists to gain. */
+.board-stage-turned .board-message { padding-inline: var(--space-2); }
 
 /* Reply and Speak are siblings of the surface, never children: a button inside a
    button is invalid, and worse, ambiguous about which one a tap meant. Being
@@ -575,11 +583,34 @@
    White on the coloured stage, taking the stage's own role colour for its text --
    the same relationship the message has to the background, so the two read as one
    screen rather than as a button pasted on one. */
-/* The foot under the sentence: the owner's gloss and the stranger's Reply. A column
-   on a portrait phone, so Reply is the full width and the obvious thing to press; a
-   row in landscape, where height is the short axis and the gloss can share a line
-   with it. */
-.board-foot { display: flex; flex-direction: column; gap: var(--space-2); flex: 0 0 auto; }
+/* The sentence and Reply, for the stranger: a column upright, and when turned a row
+   with Reply on the left, set sideways -- which is "under the sentence" for someone
+   reading the turned screen, and the only way they can find the button to press it. */
+.board-read { display: flex; flex-direction: column; gap: var(--space-2); flex: 1 1 auto; min-block-size: 0; min-inline-size: 0; }
+.board-stage-turned .board-read { flex-direction: row-reverse; }
+/* May shrink below its content: turned, the sentence's columns stack across the
+   screen and a flex item that keeps its content width pushes Reply off the edge,
+   where the fitter -- which sizes the text to this box -- never sees an overflow. */
+.board-read > .board-message { min-inline-size: 0; }
+.board-stage-turned .board-reply {
+  writing-mode: vertical-rl;
+  text-orientation: sideways;
+  inline-size: auto;
+  align-self: stretch;
+  /* Narrower than it is tall upright: it runs the full height, so the tap target is
+     large anyway, and every pixel of width here is a pixel off the sentence's
+     columns -- at 4.5rem a nine-character question lost 8px of type to it. */
+  min-block-size: 3.4rem;
+}
+/* The owner's foot: gloss and how-to-say-it on the left, Speak, speed and Turn on
+   the right, one row. These do not turn -- they are for the person holding the
+   phone -- and they take the least the screen can spare, so the sentence gets the rest. */
+.board-foot { display: flex; align-items: center; gap: var(--space-2); flex: 0 0 auto; }
+.board-foot .board-message-gloss { flex: 1 1 auto; min-inline-size: 0; justify-content: flex-start; text-align: start; font-size: var(--fs-0); }
+/* Smaller still on a phone held upright, where the row shares its width with three
+   buttons: the wording shrinks or wraps, and is never cut. */
+@media (max-width: 480px) { .board-foot .board-message-gloss { font-size: var(--fs--1); } }
+.board-foot .board-controls { flex: 0 0 auto; margin-inline-start: auto; }
 .board-reply {
   display: inline-flex;
   align-items: center;
@@ -595,9 +626,7 @@
   color: var(--paper);
 }
 @media (orientation: landscape) {
-  .board-foot { flex-direction: row; align-items: center; }
-  .board-foot .board-message-gloss { flex: 1 1 auto; justify-content: flex-start; }
-  .board-reply { inline-size: auto; flex: 0 0 auto; min-block-size: 3.4rem; }
+  .board-reply { min-block-size: 3.4rem; }
 }
 .board-reply:hover { background: var(--accent); filter: brightness(1.08); }
 /* **Reply is drawn like the message, and the owner's controls are not.** Every
@@ -757,6 +786,14 @@
 /* The answer that opens a keypad rather than answering anything: dashed, the same
    way a submenu says "not yet" on the owner's grid. */
 .board-answer-entry { border-style: dashed; }
+/* "None of these" is not an answer but the way out to the fuller translator, so it
+   is drawn as the Reply is -- the role's colour darkened, in white -- and not as one
+   more answer in the set. */
+.board-answer-none, .board-stage[class*="board-role-"] .board-answer-none {
+  background: color-mix(in oklab, var(--role, var(--accent)) 68%, black);
+  color: #fff;
+  border-color: transparent;
+}
 
 /* --- the keypad --------------------------------------------------------------- */
 

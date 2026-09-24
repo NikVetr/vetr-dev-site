@@ -514,7 +514,7 @@
   "format.headReachTitle.edge": "Narożnik, a do tego listwa w tym samym kolorze wzdłuż zewnętrznej krawędzi kolumny, na całej wysokości strony, żeby rozłożony wachlarzem plik kart dało się czytać z boku. Biegnie po marginesie, więc słowa w kolumnie zostają na bieli. Zakładka na środku nie ma zewnętrznej krawędzi, wzdłuż której mogłaby biec, i dostaje sam narożnik.",
   "format.headSlot.theme": "Temat tej strony",
   "format.reserveHint": "Ekran blokady rysuje u góry zegar z datą, a u dołu swoje przyciski. Te pasy zostawiają to miejsce puste, żeby żadne słowo z karty nie znalazło się pod nimi.",
-  "gallery.tagline": "Zaprojektuj, zapisz i wydrukuj podręczne karty Phraselet albo przeklikaj się na żywo przez gotowe drzewa rozmów.",
+  "gallery.tagline": "Zaprojektuj, zapisz i wydrukuj podręczne karty z gotowymi zwrotami, albo pokaż telefon, aby prowadzić proste, przygotowane rozmowy na żywo.",
   "picker.budget": "Ile wierszy zostawić",
   "picker.budgetTitle": "Ile wierszy zostawić z wybranych sekcji. Najbardziej przydatne trafiają na kartę pierwsze, a wiersz powtarzający ten, który już na niej jest, liczy się mniej.",
   "picker.sections": "Sekcje na karcie",

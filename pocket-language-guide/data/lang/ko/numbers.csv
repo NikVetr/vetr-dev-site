@@ -68,7 +68,7 @@ numbers-money.pound-symbol,파운드 기호,,paundeu giho,pʰaundɯ kiho,,2,read
 numbers-money.yen,엔,,en,en,,2,reader-gloss-v1;roman=generated;ipa=rr
 numbers-money.yen-symbol,¥,,,,,2,reader-gloss-v1
 numbers-money.yu-n,위안,,wian,wian,,2,reader-gloss-v1;roman=generated;ipa=rr
-numbers-money.ku-i,위안 (구어),,wian (gueo),wian kuʌ,,1,reader-gloss-v1;roman=generated;ipa=rr
+numbers-money.ku-i,위안 (구어),,wian (gueo),,,1,reader-gloss-v1;roman=generated
 numbers-money.li-ng,2 + 단위명사,,2 + danwimyeongsa,,,1,reader-gloss-v1;roman=generated
 numbers-money.2-items,2개,,2gae,,,1,reader-gloss-v1;roman=generated
 numbers-money.franc,프랑,,peurang,pʰɯɾaŋ,,2,currency-agent-v1;cldr;ipa=rr

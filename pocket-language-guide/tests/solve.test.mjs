@@ -529,7 +529,10 @@ test('a column with nothing to print says so, and stops once it is filled', asyn
     extras: [],
   });
   assert.deepEqual(dead(filled.plan), []);
-  assert.ok(filled.plan.faces.flatMap((f) => f.runs).some((r) => r.text === ipa),
+  // Reaches the page, possibly across two runs: a one-section sheet is sparse, so
+  // the solver sets it large on one face, and at that size a thirteen-character IPA
+  // token is wider than its cell and wraps -- which is a wrap, not a loss.
+  assert.ok(filled.plan.faces.flatMap((f) => f.runs).map((r) => r.text).join('').includes(ipa),
     'an imported IPA value should reach the page');
 
   // And the warning firing at all, which is the half that actually matters.
@@ -674,9 +677,18 @@ test('auto faces follows the card\'s own parity, so a screen can be one face', a
     priority: PRIORITY_STEPS.essential,
   });
   assert.equal(phone.plan.geometry.faces, 1, 'auto should not spend a second wallpaper');
-  const paper = await buildSheet(ctx, { ...spec, priority: PRIORITY_STEPS.essential });
+  const paper = await buildSheet(ctx, { ...spec, priority: PRIORITY_STEPS.core });
   assert.equal(paper.plan.geometry.faces % 2, 0,
     `paper got ${paper.plan.geometry.faces} faces, which has a blank back`);
+
+  // **Unless the card is sparse.** Forty-nine one-line rows of Morse covered a
+  // quarter of the two faces parity allows, at a type size the theme caps at
+  // nominal -- three parts paper in the gallery. Past `SPARSE`, the pair comes
+  // down to one face, printed one-sided, and the type grows into it.
+  const morse = await buildSheet(ctx, await referenceSpec('morse', 'en'));
+  assert.equal(morse.plan.geometry.faces, 1, 'a sparse card is one-sided');
+  assert.ok(morse.plan.scale > 1.5, `and set large: ${morse.plan.scale}`);
+  assert.equal(morse.plan.faces[0].hits.filter((h) => h.conceptId).length, 49);
 });
 
 test('a priority step nests, and never leaves a heading over nothing', async () => {

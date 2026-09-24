@@ -35,16 +35,16 @@ morse-code.digit-6,6,,,,,3,morse-v1;itu-r-m1677
 morse-code.digit-7,7,,,,,3,morse-v1;itu-r-m1677
 morse-code.digit-8,8,,,,,3,morse-v1;itu-r-m1677
 morse-code.digit-9,9,,,,,3,morse-v1;itu-r-m1677
-morse-code.period,Full stop,,,,,3,morse-v1;itu-r-m1677
-morse-code.comma,Comma,,,,,3,morse-v1;itu-r-m1677
-morse-code.question,Question mark,,,,,3,morse-v1;itu-r-m1677
-morse-code.slash,Slash,,,,,3,morse-v1;itu-r-m1677
-morse-code.at,At sign,,,,,3,morse-v1;itu-r-m1677
+morse-code.period,Կետ,,,,,3,morse-v1;itu-r-m1677
+morse-code.comma,Ստորակետ,,,,,3,morse-v1;itu-r-m1677
+morse-code.question,Հարցական նշան,,,,,3,morse-v1;itu-r-m1677
+morse-code.slash,Շեղագիծ,,,,,3,morse-v1;itu-r-m1677
+morse-code.at,Շնիկ,,,,,3,morse-v1;itu-r-m1677
 morse-code.sos,SOS,,,,,3,morse-v1;itu-r-m1677
-morse-code.help,Help,,,,,3,morse-v1;itu-r-m1677
+morse-code.help,HELP — օգնություն,,,,,3,morse-v1;itu-r-m1677
 morse-code.ok,OK,,,,,3,morse-v1;itu-r-m1677
-morse-code.yes,Yes,,,,,3,morse-v1;itu-r-m1677
-morse-code.no,No,,,,,3,morse-v1;itu-r-m1677
-morse-code.wait,Wait,,,,,3,morse-v1;itu-r-m1677
-morse-code.water,Water,,,,,3,morse-v1;itu-r-m1677
-morse-code.doctor,Doctor,,,,,3,morse-v1;itu-r-m1677
+morse-code.yes,YES — այո,,,,,3,morse-v1;itu-r-m1677
+morse-code.no,NO — ոչ,,,,,3,morse-v1;itu-r-m1677
+morse-code.wait,WAIT — սպասել,,,,,3,morse-v1;itu-r-m1677
+morse-code.water,WATER — ջուր,,,,,3,morse-v1;itu-r-m1677
+morse-code.doctor,DOCTOR — բժիշկ,,,,,3,morse-v1;itu-r-m1677

@@ -9,7 +9,7 @@ emergency-medical.where-is-a-pharmacy,दवा की दुकान कहा
 emergency-medical.please-take-me-to-a-hospital,मुझे अस्पताल ले चलिए,,mujhe aspatāl le calie,mˌʊɟʰeː ˌʌspətˈaːl lˈeː cˈʌlɪˌeː,,2,hi-agent-v1;ipa=espeak
 emergency-medical.i-feel-unwell,मेरी तबीयत ठीक नहीं है,,merī tabīyat ṭhīk nahīṁ hai,mˌeːɾi təbˈiːjət ʈʰˈiːk nˈʌhĩ hɛː,,2,hi-agent-v1;ipa=espeak
 emergency-medical.this-is-an-emergency,यह इमरजेंसी है,यह आपात स्थिति है,yah imarjeṁsī hai,jˌəh ˌɪməɾɟˈẽːsi hɛː,,2,hi-agent-v1;ipa=espeak
-emergency-medical.i-am-having-a-severe-allergic-reaction,मुझे गंभीर एलर्जी हो रही है (एनाफ़िलैक्सिस),,mujhe gaṁbhīr elarjī ho rahī hai (enāfilaiksis),mˌʊɟʰeː ɡəmbʰˈiːɾ eːlˈʌɾɟi hoː ɾˌəhi hɛː ˌeːnaːfɪlˈɛːksɪs,anaphylaxis,2,hi-agent-v1;ipa=espeak
+emergency-medical.i-am-having-a-severe-allergic-reaction,एनाफ़िलैक्सिस — मुझे गंभीर एलर्जी हो रही है,,enāfilaiksis — mujhe gaṁbhīr elarjī ho rahī hai,ˌeːnaːfɪlˈɛːksɪs mˌʊɟʰeː ɡəmbʰˈiːɾ eːlˈʌɾɟi hoː ɾˌəhi hɛː,anaphylaxis,2,hi-agent-v1;ipa=espeak
 emergency-medical.i-cannot-breathe,मुझे साँस नहीं आ रही है,,mujhe sāṁs nahīṁ ā rahī hai,mˌʊɟʰeː sˈãns nˈʌhĩ ˈaː ɾˌəhi hɛː,,2,hi-agent-v1;ipa=espeak
 emergency-medical.i-am-bleeding-badly,बहुत खून बह रहा है,,bahut khūn bah rahā hai,bˈʌhʊt kʰˈuːn bˈʌh ɾˌəhaː hɛː,,2,hi-agent-v1;ipa=espeak
 emergency-medical.i-have-chest-pain,मेरे सीने में दर्द है,,mere sīne meṁ dard hai,mˌeːɾeː sˈiːneː mẽː dˈʌɾd hɛː,,2,hi-agent-v1;ipa=espeak

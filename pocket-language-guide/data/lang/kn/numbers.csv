@@ -18,9 +18,9 @@ numbers-money.rupee,ರೂಪಾಯಿ,,rūpāyi,ruːpaːji,the Indian rupee,2,K
 numbers-money.rupee-symbol,₹,ರೂಪಾಯಿ ಚಿಹ್ನೆ,₹,,,2,Kannada name of the currency as written in Karnataka newspapers and in CLDR kn currency data
 numbers-money.lakh,ಲಕ್ಷ,"1,00,000",lakṣa,lakʂa,"a hundred thousand, and the grouping is the point: ₹5 ಲಕ್ಷ is 500,000",2,"Kittel, A Kannada-English Dictionary (DSAL); Univ. of Madras Kannada-English Dictionary (DSAL);ipa=espeak"
 numbers-money.crore,ಕೋಟಿ,"1,00,00,000",kōṭi,koːʈi,"a hundred lakh, ten million",2,"Kittel, A Kannada-English Dictionary (DSAL); Univ. of Madras Kannada-English Dictionary (DSAL);ipa=espeak"
-numbers-money.li-ng,2 + ಎಣಿಕೆ ಪದ,,2 + eṇike pada,eraɖu eɳike pada,2 + a counting word,2,Kannada gloss of the Mandarin classifier row;ipa=espeak
+numbers-money.li-ng,2 + ಎಣಿಕೆ ಪದ,,2 + eṇike pada,eraɖu,2 + a counting word,2,Kannada gloss of the Mandarin classifier row;ipa=espeak
 numbers-money.yu-n,ಯುವಾನ್,,yuvān,juvaːn,,2,Kannada name of the currency as written in Karnataka newspapers and in CLDR kn currency data;ipa=espeak
-numbers-money.ku-i,ಯುವಾನ್ (ಮಾತಿನಲ್ಲಿ),,yuvān (mātinalli),juvaːn maːtinalli,"yuan, as spoken",2,Kannada name of the currency as written in Karnataka newspapers and in CLDR kn currency data;ipa=espeak
+numbers-money.ku-i,ಯುವಾನ್ (ಮಾತಿನಲ್ಲಿ),,yuvān (mātinalli),juvaːn,"yuan, as spoken",2,Kannada name of the currency as written in Karnataka newspapers and in CLDR kn currency data;ipa=espeak
 numbers-money.2-items,2 ವಸ್ತು,,2 vastu,eraɖu vastu,two things,2,Kannada gloss of the Japanese counter row;ipa=espeak
 numbers-money.yen,ಯೆನ್,,yen,jen,,2,Kannada name of the currency as written in Karnataka newspapers and in CLDR kn currency data;ipa=espeak
 numbers-money.yen-symbol,¥,ಯೆನ್,¥,,,2,Kannada name of the currency as written in Karnataka newspapers and in CLDR kn currency data

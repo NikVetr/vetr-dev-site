@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import {
   buildBlocks, fillLanguageSlots, loadCorpus, loadLanguage, loadRespellOverrides,
+  sayable,
 } from '../core/pack.js';
 import { referenceSpec } from '../scripts/spec.mjs';
 
@@ -43,6 +44,21 @@ function fill(text, args, roman) {
   fillLanguageSlots(rows, { names: {}, ...args });
   return rows[ID];
 }
+
+test('what is said of a text is the text without its labels', () => {
+  // A trailing parenthesis tells two rows apart on the card and a bracketed or
+  // plus-joined slot names a word the reader supplies; none of it is speech. The
+  // same rule is `spoken()` in scripts/build_ipa.py, so the ipa column, the
+  // respelling read from it and the voice agree.
+  assert.equal(sayable('Hello (polite)'), 'Hello');
+  assert.equal(sayable('yen (symbol)'), 'yen');
+  assert.equal(sayable('want to [verb]'), 'want to');
+  assert.equal(sayable('quero + infinitivo'), 'quero');
+  assert.equal(sayable('2 + classifier'), '2');
+  // Optional speech inside the sentence stays: only the trailing label goes.
+  assert.equal(sayable('(Excuse me,) where is the station?'), '(Excuse me,) where is the station?');
+  assert.equal(sayable('Is it (very) spicy?'), 'Is it (very) spicy?');
+});
 
 test('a language slot is rendered in the language of the cell it sits in', () => {
   // The rule that matters, and the reason the narrower one ("target in the gloss,

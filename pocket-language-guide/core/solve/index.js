@@ -29,6 +29,17 @@ const SCALE_MAX = 1.8;
  * is the ceiling for that explicit choice.
  */
 const AUTO_SCALE_MAX = 1;
+/**
+ * The exception: a card that is mostly blank at nominal size is not airy, it is
+ * empty. When the smallest face count still leaves more than this fraction of the
+ * columns unfilled, the type may grow past the theme's sizes -- to `SCALE_MAX`, the
+ * same ceiling a reader's explicit choice has -- and an even anchor may come down to
+ * a single face, printed one-sided. Morse is the case: forty-nine one-line rows
+ * covered a quarter of a two-face card, and the gallery showed a thumbnail that was
+ * three parts paper. Every other pack in the gallery is over four fifths full and
+ * never reaches this.
+ */
+const SPARSE = 0.5;
 const AUTOFIT_STEPS = 7;
 /**
  * The fit search runs on a grid rather than on the continuum. 0.005 of scale is
@@ -1374,8 +1385,8 @@ function solveFaces(build, box, spec, scaleFloor,
   const fitsAt = (faces, scale) => !breakColumns(
     build(scale), roomFor(faces), faces * columns,
   ).failure;
-  /** @param {number} faces */
-  const fittedAt = (faces) => autofit(build, roomFor(faces), faces * columns, scaleFloor);
+  /** @param {number} faces @param {number} [ceiling] */
+  const fittedAt = (faces, ceiling) => autofit(build, roomFor(faces), faces * columns, scaleFloor, ceiling);
   /**
    * The fraction of the card the content leaves empty.
    *
@@ -1446,6 +1457,14 @@ function solveFaces(build, box, spec, scaleFloor,
     return { faces, scale: fitsAt(faces, spec.scale) ? spec.scale : null };
   }
 
+  // **A sparse card is set larger, and one-sided if it must be.** See `SPARSE`.
+  // One face first, because doubling the type on a card that is a quarter full
+  // still leaves half of it blank; then the type grows into whatever is left.
+  if (faces === FACE_STEP && fitsAt(1, 1) && blankFraction(faces, 1) > SPARSE) faces = 1;
+  if (fitsAt(faces, 1) && blankFraction(faces, 1) > SPARSE) {
+    return { faces, scale: fittedAt(faces, SCALE_MAX) };
+  }
+
   // Otherwise take another pair while the type would still be squeezed.
   //
   // "The fitted scale is below COMFORT" and "COMFORT does not fit" are the same
@@ -1467,12 +1486,13 @@ function solveFaces(build, box, spec, scaleFloor,
  * and re-breaks the whole sheet.
  * @param {(scale:number)=>import('./atoms.js').Atom[]} build
  * @param {number|number[]} height @param {number} bins @param {number} scaleFloor
+ * @param {number} [ceiling]  the most the type may grow; the theme's own size unless the card is sparse
  * @returns {number|null}
  */
-function autofit(build, height, bins, scaleFloor) {
+function autofit(build, height, bins, scaleFloor, ceiling = AUTO_SCALE_MAX) {
   const snap = (/** @type {number} */ s) => Math.round(s / SCALE_STEP) * SCALE_STEP;
   const clamp = (/** @type {number} */ s) => snap(
-    Math.min(AUTO_SCALE_MAX, Math.max(scaleFloor, s)),
+    Math.min(ceiling, Math.max(scaleFloor, s)),
   );
   const fits = (/** @type {number} */ scale) => !breakColumns(build(scale), height, bins).failure;
 
@@ -1486,11 +1506,11 @@ function autofit(build, height, bins, scaleFloor) {
   const guess = clamp(Math.sqrt(room / Math.max(1, natural)));
 
   let lo = scaleFloor;
-  let hi = AUTO_SCALE_MAX;
+  let hi = ceiling;
   if (fits(guess)) {
     lo = guess;
     hi = clamp(guess * 1.25);
-    if (fits(hi)) return hi === AUTO_SCALE_MAX ? AUTO_SCALE_MAX : hi;
+    if (fits(hi)) return hi === ceiling ? ceiling : hi;
   } else {
     hi = guess;
     lo = clamp(guess * 0.8);

@@ -15,7 +15,7 @@ accessibility.station-assistance,Czy na stacji jest asysta?,,tʃɨ na stˈatsji 
 accessibility.help-me-carry,Proszę mi pomóc to zanieść,,prˈɔʃɛ mi pˈɔmuts tɔ zˈaɲɛɕtɕ,,2,pl-agent-v1;ipa=espeak
 accessibility.board-first,Czy mogę wejść przed innymi?,,tʃɨ mˈɔɡɛ vˈɛjɕtɕ pʃɛt innˈɨmi,may I board before the others?,2,pl-agent-v1;ipa=espeak
 accessibility.door-width,Jak szerokie są drzwi?,,jˈak ʃɛrˈɔkʲɛ sɔ̃ dʒvˈi,drzwi is plural in Polish,2,pl-agent-v1;ipa=espeak
-accessibility.wheelchair-width,Mój wózek ma {} cm szerokości,,mˈuj vˈuzɛk mˈa {} tsˌɛˈɛm ʃˌɛrɔkˈɔɕtɕi,,2,pl-agent-v1;ipa=espeak
+accessibility.wheelchair-width,Mój wózek ma {} cm szerokości,,mˈuj vˈuzɛk mˈa {} tsˌɛntɨmˈɛtruf ʃˌɛrɔkˈɔɕtɕi,,2,pl-agent-v1;ipa=espeak
 accessibility.hard-of-hearing,Słabo słyszę,,swˈabɔ swˈɨʃɛ,I hear poorly,2,pl-agent-v1;ipa=espeak
 accessibility.speak-louder,Proszę mówić głośniej,,prˈɔʃɛ mˈuvidʑ ɡwˈɔɕɲɛj,,2,pl-agent-v1;ipa=espeak
 accessibility.visually-impaired,Słabo widzę,,swˈabɔ vˈidʑɛ,I see poorly,2,pl-agent-v1;ipa=espeak

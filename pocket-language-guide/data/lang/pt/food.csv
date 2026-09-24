@@ -7,9 +7,9 @@ dietary-needs.no-peanuts,Sem amendoim,,sˈeɪŋ ˌæmeɪŋdoˈiŋ,,2,pt-agent-v1
 dietary-needs.no-nuts,Sem frutos de casca rija,"Sem castanhas, nozes nem amêndoas",sˈeɪŋ frˈutʊz dʒy kˈaskæ xˈiʒæ,tree nuts; peanut is separate,2,pt-agent-v1;ipa=espeak
 dietary-needs.no-seafood,Sem marisco nem peixe,Sem frutos do mar nem peixe,sˈeɪŋ mˌaɾˈiskʊ nˈeɪŋ pˈeɪʃy,no shellfish or fish,2,pt-agent-v1;ipa=espeak
 dietary-needs.i-am-vegetarian,Sou vegetariano,,sow vˌeʒetˌaɾiˈɐ̃nʊ,,2,pt-agent-v1;ipa=espeak
-dietary-needs.i-am-vegan,Sou vegano/a,,sow vˌeɡˈɐ̃nʊ / ˈa,,2,pt-agent-v1;ipa=espeak
+dietary-needs.i-am-vegan,Sou vegano/a,,sow vˌeɡˈɐ̃nʊ,,2,pt-agent-v1;ipa=espeak
 dietary-needs.i-do-not-eat,Não como {},,nˌɐ̃ʊ̃ kˌomʊ {},,2,pt-agent-v1;ipa=espeak
-dietary-needs.i-am-allergic-to,Sou alérgico/a a {},,sow ˌalˈɛɾəʒikʊ / a ˈa {},,2,pt-agent-v1;ipa=espeak
+dietary-needs.i-am-allergic-to,Sou alérgico/a a {},,sow ˌalˈɛɾəʒikw ˈa {},,2,pt-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-fish-stock,Leva caldo de peixe?,,lˈɛvæ kˈaʊdʊ dʒy pˈeɪʃy,,2,pt-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-pork-stock,Leva caldo de porco?,O caldo é de porco?,lˈɛvæ kˈaʊdʊ dʒy pˈoɾəkʊ,,2,pt-pork-stock-v1;ipa=espeak
 dietary-needs.i-have-a-severe-allergy-to,Tenho alergia grave a {},,tˌeɲʊ ˌaleɾəʒˈiæ ɡrˈavj ˈa {},,2,pt-agent-v1;ipa=espeak

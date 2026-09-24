@@ -68,9 +68,9 @@ numbers-money.pound-symbol,สัญลักษณ์ปอนด์,,,san˩˩�
 numbers-money.yen,เยน,,,jeːn˧,,2,reader-gloss-v1;ipa=thaig2p
 numbers-money.yen-symbol,¥,,,,,2,reader-gloss-v1
 numbers-money.yu-n,หยวน,,,jua̯n˩˩˦,,2,reader-gloss-v1;ipa=thaig2p
-numbers-money.ku-i,หยวน (ภาษาพูด),,,jua̯n˩˩˦ pʰaː˧saː˩˩˦pʰuːt˥˩,,1,reader-gloss-v1;ipa=thaig2p
-numbers-money.li-ng,2 + ลักษณนาม,,,lak˦˥ka˨˩naʔ˦˥naːm˧,,1,reader-gloss-v1;ipa=thaig2p
-numbers-money.2-items,2 ชิ้น,,,tɕʰin˦˥,,1,reader-gloss-v1;ipa=thaig2p
+numbers-money.ku-i,หยวน (ภาษาพูด),,,jua̯n˩˩˦,,1,reader-gloss-v1;ipa=thaig2p
+numbers-money.li-ng,2 + ลักษณนาม,,,sɔːŋ˩˩˦,,1,reader-gloss-v1;ipa=thaig2p
+numbers-money.2-items,2 ชิ้น,,,sɔːŋ˩˩˦ tɕʰin˦˥,,1,reader-gloss-v1;ipa=thaig2p
 numbers-money.franc,ฟรังก์,,,fra˦˥ra˧,,2,currency-agent-v1;cldr;ipa=thaig2p
 numbers-money.franc-symbol,สัญลักษณ์ฟรังก์,,,san˩˩˦˥lak˦˥ fra˦˥ra˧,,2,currency-agent-v1;cldr;ipa=thaig2p
 numbers-money.peso,เปโซ,,,peː˧soː˧,,2,currency-agent-v1;cldr;ipa=thaig2p
@@ -83,7 +83,7 @@ numbers-money.crore,สิบล้าน,๑๐๐๐๐๐๐๐,sip lan,sip˨
 numbers-money.shekel,เชเกล,,,tɕʰeː˧ keː˧lɔː˧,,2,shekel-gloss-v1;cldr;ipa=thaig2p
 numbers-money.shekel-symbol,สัญลักษณ์เชเกล,,,san˩˩˦˥lak˦˥ tɕʰeː˧ keː˧lɔː˧,,2,shekel-gloss-v1;cldr;ipa=thaig2p
 numbers-money.rial,เรียล,,rian,ria̯ŋ˧,,2,rial-toman-gloss-v1;cldr;ipa=thaig2p
-numbers-money.toman,10 เรียล,,10 rian,ria̯ŋ˧,,2,rial-toman-gloss-v1;cldr;ipa=thaig2p
+numbers-money.toman,10 เรียล,,10 rian,sip˨˩ ria̯ŋ˧,,2,rial-toman-gloss-v1;cldr;ipa=thaig2p
 numbers-money.zloty,ซวอตี,,,sɔː˧ tiː˧,,2,gloss-only;scoped-away;name of the currency in this language;ipa=thaig2p
 numbers-money.zloty-symbol,สัญลักษณ์ซวอตี,,,san˩˩˦˥lak˦˥ sɔː˧ tiː˧,,2,gloss-only;scoped-away;name of the currency in this language;ipa=thaig2p
 numbers-money.hryvnia,ฮรีฟเนีย,,hrifnia,hɔː˧ riːp˦˥ nia̯˧,,2,gloss-only;scoped-away;name of the currency in this language;ipa=thaig2p

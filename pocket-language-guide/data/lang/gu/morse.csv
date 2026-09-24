@@ -35,16 +35,16 @@ morse-code.digit-6,6,,,,,3,morse-v1;itu-r-m1677
 morse-code.digit-7,7,,,,,3,morse-v1;itu-r-m1677
 morse-code.digit-8,8,,,,,3,morse-v1;itu-r-m1677
 morse-code.digit-9,9,,,,,3,morse-v1;itu-r-m1677
-morse-code.period,Full stop,,,,,3,morse-v1;itu-r-m1677
-morse-code.comma,Comma,,,,,3,morse-v1;itu-r-m1677
-morse-code.question,Question mark,,,,,3,morse-v1;itu-r-m1677
-morse-code.slash,Slash,,,,,3,morse-v1;itu-r-m1677
-morse-code.at,At sign,,,,,3,morse-v1;itu-r-m1677
+morse-code.period,પૂર્ણવિરામ,,,,,3,morse-v1;itu-r-m1677
+morse-code.comma,અલ્પવિરામ,,,,,3,morse-v1;itu-r-m1677
+morse-code.question,પ્રશ્નાર્થ ચિહ્ન,,,,,3,morse-v1;itu-r-m1677
+morse-code.slash,સ્લેશ,,,,,3,morse-v1;itu-r-m1677
+morse-code.at,એટ,,,,,3,morse-v1;itu-r-m1677
 morse-code.sos,SOS,,,,,3,morse-v1;itu-r-m1677
-morse-code.help,Help,,,,,3,morse-v1;itu-r-m1677
+morse-code.help,HELP — મદદ,,,,,3,morse-v1;itu-r-m1677
 morse-code.ok,OK,,,,,3,morse-v1;itu-r-m1677
-morse-code.yes,Yes,,,,,3,morse-v1;itu-r-m1677
-morse-code.no,No,,,,,3,morse-v1;itu-r-m1677
-morse-code.wait,Wait,,,,,3,morse-v1;itu-r-m1677
-morse-code.water,Water,,,,,3,morse-v1;itu-r-m1677
-morse-code.doctor,Doctor,,,,,3,morse-v1;itu-r-m1677
+morse-code.yes,YES — હા,,,,,3,morse-v1;itu-r-m1677
+morse-code.no,NO — ના,,,,,3,morse-v1;itu-r-m1677
+morse-code.wait,WAIT — થોભો,,,,,3,morse-v1;itu-r-m1677
+morse-code.water,WATER — પાણી,,,,,3,morse-v1;itu-r-m1677
+morse-code.doctor,DOCTOR — ડૉક્ટર,,,,,3,morse-v1;itu-r-m1677

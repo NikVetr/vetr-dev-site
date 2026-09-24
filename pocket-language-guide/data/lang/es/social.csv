@@ -1,6 +1,6 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 sim-data.i-would-like-a-tourist-sim,Quisiera una tarjeta SIM para turistas,,kisjˈeɾa ˈuna taɾxˈeta ˌeseˌiˈeme pˌaɾa tuɾˈistas,,2,es-agent-v1;ipa=espeak
-children.cannot-find-my-child,No encuentro a mi hijo/a,,nˈo enkwˈentɾo a mi ˈixo / ˈa,,2,es-agent-v1;ipa=espeak
+children.cannot-find-my-child,No encuentro a mi hijo/a,,nˈo enkwˈentɾo a mi ˈixo,,2,es-agent-v1;ipa=espeak
 etiquette.is-this-allowed,¿Está permitido esto?,,estˈa pˌeɾmitˈido ˈesto,,2,es-agent-v1;ipa=espeak
 sim-data.may-i-use-your-wifi,¿Me permite usar su wifi?,,me peɾmˈite usˈaɾ su wˈifi,,2,es-agent-v1;ipa=espeak
 children.make-an-announcement,"Avise por el altavoz, por favor",por megafonía · por altoparlante,"abˈise poɾ el ˌaltabˈos, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
@@ -25,7 +25,7 @@ children.minimum-age,¿Cuál es la edad mínima?,,kwˈal ˈes la edˈad mˈinima
 etiquette.queue-for,¿Esta es la fila para {}?,¿Esta es la cola para {}?,ˈesta ˈes la fˈila pˈaɾa {},,2,es-agent-v1;ipa=espeak
 sim-data.does-it-need-registration,¿Hay que registrarla?,,ˈaɪ ke rˌexistɾˈaɾla,,2,es-agent-v1;ipa=espeak
 children.do-children-pay,¿Los niños pagan?,,los nˈiɲos pˈaɡan,,2,es-agent-v1;ipa=espeak
-etiquette.dressed-appropriately,¿Voy vestido/a apropiadamente?,,bˈoɪ bestˈido / a ˌapɾopjˈadamente,,2,es-agent-v1;ipa=espeak
+etiquette.dressed-appropriately,¿Voy vestido/a apropiadamente?,,bˈoɪ bestˈido ˌapɾopjˈadamente,,2,es-agent-v1;ipa=espeak
 sim-data.i-have-no-signal,No tengo señal,,nˈo tˈeŋɡo seɲˈal,,2,es-agent-v1;ipa=espeak
 children.crib,¿Tienen cuna?,,tjˈenen kˈuna,,2,es-agent-v1;ipa=espeak
 etiquette.did-not-mean-to-offend,No quise ofender,,nˈo kˈise ˌofendˈeɾ,,2,es-agent-v1;ipa=espeak
