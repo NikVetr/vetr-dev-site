@@ -26,12 +26,17 @@ function el(tag, attrs = {}, kids = []) {
  * Open the menu under the control that asked for it.
  *
  * @param {HTMLElement} anchor  the button pressed, so focus can go back to it
- * @param {{label:string, run:()=>void}[]} items
+ * @param {{label:string, run:()=>void, current?:boolean}[]} items  `current` marks the
+ *   one in force, which is drawn as such and takes focus instead of the first
  */
 export function openBoardMenu(anchor, items) {
   const panel = /** @type {HTMLDialogElement} */ (el('dialog', { class: 'board-menu-panel' }));
   panel.append(...items.map((item) => {
     const button = el('button', { type: 'button', class: 'board-menu-item', text: item.label });
+    if (item.current) {
+      button.classList.add('board-menu-current');
+      button.setAttribute('aria-current', 'true');
+    }
     button.addEventListener('click', () => {
       // Closed before the action runs, so the action's own dialog is not opening
       // underneath this one -- two modals in the top layer at once is a stack the
@@ -57,19 +62,24 @@ export function openBoardMenu(anchor, items) {
   // bars and wrong for everything else that now opens one -- the speed control at
   // the foot of the screen got its list at the top, a screen away from the thumb
   // that asked. So: above the anchor when it sits in the lower half, below it
-  // otherwise, its near edge on the anchor's, kept inside the viewport. Physical
-  // pixels, because the rects are.
+  // otherwise, its near edge on the anchor's, kept inside the viewport.
+  //
+  // **The layout viewport, not `innerWidth`.** A fixed panel is placed in layout
+  // coordinates, and so is the anchor's rect; `innerHeight` is the *visual* viewport,
+  // which shrinks when a phone is pinch-zoomed -- so the clamp put the list a screen
+  // above the button for anyone zoomed in.
   const at = anchor.getBoundingClientRect();
   const me = panel.getBoundingClientRect();
+  const view = document.documentElement;
   const gap = 6;
-  const above = at.top > innerHeight / 2;
+  const above = at.top > view.clientHeight / 2;
   const top = above
     ? Math.max(gap, at.top - gap - me.height)
-    : Math.min(innerHeight - me.height - gap, at.bottom + gap);
-  const start = document.documentElement.dir === 'rtl' ? at.right - me.width : at.left;
-  const left = Math.max(gap, Math.min(innerWidth - me.width - gap, start));
+    : Math.min(view.clientHeight - me.height - gap, at.bottom + gap);
+  const start = view.dir === 'rtl' ? at.right - me.width : at.left;
+  const left = Math.max(gap, Math.min(view.clientWidth - me.width - gap, start));
   panel.style.margin = '0';
   panel.style.inset = `${Math.round(top)}px auto auto ${Math.round(left)}px`;
-  /** @type {HTMLElement|null} */ (panel.querySelector('button'))?.focus();
+  /** @type {HTMLElement|null} */ (panel.querySelector('.board-menu-current') ?? panel.querySelector('button'))?.focus();
   return panel;
 }

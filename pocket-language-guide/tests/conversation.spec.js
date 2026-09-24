@@ -877,7 +877,9 @@ test('the speed beside Speak is a setting on Speak, not a second Speak', async (
   // Opening it speaks nothing; it offers the four speeds.
   await rate.click();
   const menu = page.locator('dialog.board-menu-panel');
-  await expect(menu.locator('button')).toHaveText(['0.25×', '0.5×', '1×', '2×']);
+  await expect(menu.locator('button')).toHaveText(['0.125×', '0.25×', '0.5×', '0.75×', '1×', '1.25×', '1.5×', '2×']);
+  // The speed in force is marked and focused, not the first item.
+  await expect(menu.locator('.board-menu-current')).toHaveText('1×');
   await menu.locator('button', { hasText: '0.5×' }).click();
   await expect(page.locator('.board-rate')).toHaveText('0.5×');
   expect(await page.evaluate(() => globalThis.__spoken.length)).toBe(0);

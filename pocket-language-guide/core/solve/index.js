@@ -1050,20 +1050,24 @@ export function layout(input) {
       // line goes and is the one that gives way, because it is also the only one
       // whose absence loses nothing a reader can see is missing. Sized in that
       // order: corners first, then whatever is left over for the centre.
-      const leftW = widthOf(left);
-      const rightW = widthOf(right);
       const gap = size;
       const span = bandSpec.span ?? 'full';
+      // The corners first, then the middle in what they leave. **In the middle of
+      // what they leave, not of the face**: the centre's budget was the leftover
+      // width but it was anchored at the page's midpoint, so on a phone card whose
+      // pair label ran past the middle the pronunciation key was set on top of it.
+      // Measured from the fitted corners, since a corner may itself have been trimmed.
+      const leftFit = fit(left, Math.max(0, box.width - widthOf(right) - gap));
+      const rightFit = fit(right, Math.max(0, box.width - widthOf(leftFit) - gap));
+      const leftW = widthOf(leftFit);
+      const rightW = widthOf(rightFit);
+      const free = Math.max(0, box.width - leftW - rightW - gap * 2);
       /** @type {[import('../types.js').HeadPart[], number, 'start'|'end'|'mid'][]} */
       const placedHead = span === 'full'
         ? [
-          [fit(left, Math.max(0, box.width - rightW - gap)), box.left, 'start'],
-          [fit(right, Math.max(0, box.width - leftW - gap)), box.left + box.width, 'end'],
-          [
-            fit(center, Math.max(0, box.width - leftW - rightW - gap * 2)),
-            box.left + box.width / 2,
-            'mid',
-          ],
+          [leftFit, box.left, 'start'],
+          [rightFit, box.left + box.width, 'end'],
+          [fit(center, free), box.left + leftW + gap + free / 2, 'mid'],
         ]
         // **A tab rather than a rule across the face.** The three positions are
         // concatenated into one group at the chosen edge, bullet-joined as a single

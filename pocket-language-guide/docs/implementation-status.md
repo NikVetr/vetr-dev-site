@@ -4208,3 +4208,67 @@ languages and would have been a dead button for the other forty-six. Shopping's
 grid is full and its three proposals wait for a swap worth making. One real corpus
 gap surfaced: nothing anywhere says "please turn over" on a massage table.
 
+## Batch U — the bar that folds, Reply as its words, and speeds between
+
+### The landing bar on a phone
+
+Sticky was the first answer and iOS Chrome would not scroll back past it — the page
+stopped halfway up the language buttons. So on a phone the toggle is not sticky at
+all: `foldOnScroll` in `ui/gallery.js` folds the grid once the reader has scrolled
+past it and pins the toggle under the header as a bar (`position: fixed`, with a
+spacer holding its place); a tap on the bar scrolls back to where the grid lives
+and opens it; scrolling on down folds it again; at the top the bar sits in its own
+place, folded or open as the reader left it. The grid, when open, has a hairline
+and a fade where it continues, since it scrolls inside itself. Nothing of this on a
+desktop, where the grid sits beside the sentence with room for all of it.
+
+### The brand in one place
+
+Same size already; now the same spot. Every header's container takes a 1rem inset
+on a phone whatever the page's own container does, the board's header the same
+padding as the site's, the studio's the same vertical padding, and the brand a
+minimum height of the tallest control any header holds — so it no longer sits 6px
+higher on a page whose header has no picker. Measured: 16px from the left and 11px
+from the top on all five pages.
+
+### Reply as its words
+
+No fixed height and no full width. `fitFoot` sets Reply's type to four fifths of
+the sentence's and shrinks it until the label fits the box on one line; only if it
+cannot fit at 1rem does it wrap. So a short sentence gets a big Reply — 93px on a
+portrait phone — and a long one a smaller, and the button is its words plus a
+margin, taller as they are taller. Turned, the same along the height. The gloss
+beside the owner's controls takes the room the row gives it, from the body size
+down to the small one, at no more than two lines, and its parts are told apart by
+face — how-to-say-it in italic — rather than by a rule that a line break left
+standing before nothing.
+
+### Speeds
+
+Eight stops, 0.125× to 2×: 2× on a phone voice is faster than 2× on a podcast, so
+the useful speeds are between, and the slowest is for a word to be copied down. The
+list marks the speed in force with a tick and focuses it, instead of the first
+item; and it is placed in the layout viewport rather than `innerHeight`, which is
+the visual viewport and shrinks when the page is pinch-zoomed — that is what put the
+list a screen away from the button for anyone zoomed in.
+
+### The band's middle, in the middle of what is left
+
+"The pronunciation key runs into the card." On a phone card the head band's centre
+slot had the leftover width as its budget but the page's midpoint as its anchor, so
+a pair label that ran past the middle — `Chinese (Simplified) → Hindi` on 180pt —
+had the key set on top of it. The corners are fitted first and the centre is now
+anchored in the middle of what they leave, measured from the fitted corners since a
+corner may itself have been trimmed; with both corners empty that is the page's
+middle exactly, so every full-width band that was right stays where it was.
+
+### Not reproduced, not done
+
+Converse loads on a desktop viewport here in a quarter of a second, with the
+system's eight thousand voices or without, so "never loads on desktop" needs the
+address and what the screen shows. The Quenya packs measure over ninety per cent
+full on their first face; the small gap at the foot of two columns is the glue's
+own looseness, not blank paper, and is left. And the ornament styles: the brief is
+to design from image-generator references, which this session cannot produce —
+prompts are drafted for the reader to run, and the styles follow the images.
+

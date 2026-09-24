@@ -284,8 +284,19 @@ label { display: block; }
   font-weight: 700; text-decoration: none; color: var(--ink); white-space: nowrap;
   /* Its own size, not the header's: the board's header is set small and the studio's
      shrinks its buttons on a phone, and the brand used to shrink with each, so the
-     one fixed thing on every page changed size between pages. */
+     one fixed thing on every page changed size between pages. And its own height:
+     the header row is as tall as its tallest control -- a picker on one page, a back
+     button on another, nothing on a third -- and the brand, centred in it, sat 6px
+     higher or lower from page to page. As tall as the tallest of them, it stays put. */
   font-size: 1rem;
+  min-block-size: 2.25rem;
+}
+/* One inset on a phone whatever the page's own container does -- the gallery's is
+   wider, the studio's is full-bleed -- so the mark is in the same place on every
+   screen. */
+@media (max-width: 1080px) {
+  .site-header .container, .site-header .container-gallery { width: calc(100% - 2rem); }
+  .site-header .container-wide { width: 100%; padding-inline: 1rem; }
 }
 /* **The mark, and only the mark.** A speech bubble over a phrase card, in the logo's
    own green, set at the height of the word beside it and no more: it is there to be
@@ -730,14 +741,25 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
      two-column desktop and stacked on a phone. */
   .gallery-intro { padding-block: var(--space-1) 0; gap: var(--space-2); }
   h1.lede { font-size: var(--fs-0); margin-bottom: var(--space-2); }
-  /* **The bar stays while the cards scroll.** A sticky element sticks only inside
-     its own parent, and the toggle's parents ended where the language grid did -- so
-     it stayed put over the grid and left the moment the cards began, which is
-     exactly when someone wants it to change language. On a phone the intro is one
-     column anyway, so both wrappers give up their boxes and the toggle's containing
-     block becomes the page: it sticks under the header for as long as there is page. */
-  .gallery-intro, .want { display: contents; }
-  .want-toggle { margin-block-start: var(--space-1); }
+  /* **The bar folds and floats.** Sticky was the first answer and iOS Chrome would
+     not scroll back past it; so on a phone the toggle is not sticky at all.
+     `ui/gallery.js` folds the grid once the reader has scrolled past it and pins the
+     toggle under the header as a bar; a tap on the bar scrolls back and opens the
+     grid, and scrolling on down folds it again. Near the top the bar sits in its
+     own place, folded or open as the reader last left it. */
+  .want-toggle { position: static; }
+  .want-floating .want-toggle {
+    position: fixed; top: var(--header-h, 0px); left: 0; right: 0; z-index: 2;
+    inline-size: auto; padding-inline: 1rem; border-bottom: 1px solid var(--line);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+  /* Holds the bar's place in the flow while it floats, so nothing jumps. */
+  .want-floating::before { content: ''; display: block; block-size: 2rem; }
+  /* A scrollable grid says so: a hairline round it and a fade where it continues. */
+  .want-grid {
+    border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--space-1);
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 2rem), transparent);
+  }
   /* Fifty-two language buttons are a compact block beside the heading on a desktop
      and 922pt of wall on a phone, which put the first card 1230pt down: a screen and
      a half of controls before any of the thing they control. Capped and scrolled,
@@ -851,7 +873,9 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
      `.studio-header` throughout rather than `.site-header`: the gallery's header is
      a brand and a language picker and the sheet page's is a brand and two links, and
      neither of them has the problem this block is here to solve. */
-  .studio-header { padding: var(--space-1) 0; }
+  /* The same vertical padding as every other header: 5px less here put the brand
+     5px higher than on every other screen. */
+  .studio-header { padding: var(--space-2) 0; }
   .studio-header .container { gap: var(--space-1) var(--space-2); }
   /* `order` rather than a different source order, so the desktop header keeps the
      one it is built for. */

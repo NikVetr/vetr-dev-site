@@ -52,9 +52,11 @@
 
 .board-header {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: var(--space-2);
-  padding: var(--space-2) var(--space-3);
+  /* The same inset as every other page's header, so the brand does not step
+     sideways between screens. */
+  padding: var(--space-2) 1rem;
   border-bottom: 1px solid var(--line-soft);
   /* Quiet on purpose. The header is orientation, not a place to work, and every
      pixel it takes is a pixel off the buttons. */
@@ -595,12 +597,8 @@
 .board-stage-turned .board-reply {
   writing-mode: vertical-rl;
   text-orientation: sideways;
-  inline-size: auto;
-  align-self: stretch;
-  /* Narrower than it is tall upright: it runs the full height, so the tap target is
-     large anyway, and every pixel of width here is a pixel off the sentence's
-     columns -- at 4.5rem a nine-character question lost 8px of type to it. */
-  min-block-size: 3.4rem;
+  max-inline-size: none;
+  max-block-size: 100%;
 }
 /* The owner's foot: gloss and how-to-say-it on the left, Speak, speed and Turn on
    the right, one row. These do not turn -- they are for the person holding the
@@ -616,18 +614,23 @@
   align-items: center;
   justify-content: center;
   gap: 0.45em;
+  /* Sized by `fitFoot`: four fifths of the sentence, shrunk to fit on one line. No
+     fixed height and no full width -- the button is its words plus a margin, and
+     grows taller as its words do. */
   font-size: var(--fs-3);
+  line-height: 1.15;
   font-weight: 700;
-  min-block-size: 4.5rem;
-  inline-size: 100%;
-  padding-inline: var(--space-4);
+  align-self: center;
+  max-inline-size: 100%;
+  min-block-size: 0;
+  padding: 0.35em 0.9em;
   border-color: transparent;
   background: var(--accent);
   color: var(--paper);
 }
-@media (orientation: landscape) {
-  .board-reply { min-block-size: 3.4rem; }
-}
+.board-reply-line { white-space: nowrap; }
+.board-menu-current { font-weight: 700; background: var(--surface); }
+.board-menu-current::after { content: ' \2713'; }
 .board-reply:hover { background: var(--accent); filter: brightness(1.08); }
 /* **Reply is drawn like the message, and the owner's controls are not.** Every
    other button on this row is the owner's -- Speak, the speed, the turn -- and they
@@ -1099,14 +1102,11 @@ dialog.board-menu-panel::backdrop { background: rgb(17 24 32 / 25%); }
   justify-content: center;
   gap: 0 var(--space-2);
 }
-.board-message-gloss > * + * {
-  border-inline-start: 1px solid currentColor;
-  padding-inline-start: var(--space-2);
-  opacity: 0.85;
-}
-/* IPA is a notation, not a language: it is set apart so it is not mistaken for the
-   romanisation next to it, and it never inherits the gloss's own script. */
-.gloss-ipa { font-style: italic; }
+/* Told apart by face rather than by a rule between them: a rule where a line breaks
+   is a rule before nothing. The meaning is upright, how to say it is italic, and
+   the IPA already wears its slashes. */
+.gloss-say { font-style: italic; }
+.gloss-ipa { opacity: 0.85; }
 
 /* One question, one checkbox, the label the whole hit target. */
 .display-option {

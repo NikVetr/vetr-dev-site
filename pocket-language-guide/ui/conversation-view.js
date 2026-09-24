@@ -11,6 +11,7 @@
 
 import { t } from './i18n.js';
 import { openBoardMenu } from './board-menu.js';
+import { RATES } from './board-display.js';
 
 /** Below this, stop shrinking and let the text scroll instead. */
 const MIN_MESSAGE_PX = 28;
@@ -621,7 +622,7 @@ export function renderMessage(stage, phrase,
       if (rateLabel) rateButton.setAttribute('aria-label', rateLabel);
       rateButton.setAttribute('aria-haspopup', 'menu');
       rateButton.addEventListener('click', () => openBoardMenu(rateButton,
-        [0.25, 0.5, 1, 2].map((r) => ({ label: `${r}\u00d7`, run: () => onRate(r) }))));
+        RATES.map((r) => ({ label: `${r}\u00d7`, current: r === rate, run: () => onRate(r) }))));
       controls.append(rateButton);
     }
   }
@@ -714,6 +715,7 @@ function turnControl(stage, surface, text) {
     // wrong answer. The observer would catch this too; doing it here means the text
     // is never drawn at the stale size for a frame.
     fitMessage(text, surface);
+    fitFoot(surface);
   });
   return button;
 }
@@ -729,11 +731,63 @@ function turnControl(stage, surface, text) {
  */
 function watchMessage(text, box) {
   fitMessage(text, box);
+  fitFoot(box);
   shape?.disconnect();
   // A dismissed stage is `display: none`, which reports a 0x0 box and would send
   // the fitter down thirty pointless steps to the floor on every dismissal.
-  shape = new ResizeObserver(() => { if (box.clientHeight > 0) fitMessage(text, box); });
+  shape = new ResizeObserver(() => { if (box.clientHeight > 0) { fitMessage(text, box); fitFoot(box); } });
   shape.observe(box);
+}
+
+/**
+ * Size what sits around the sentence to the sentence.
+ *
+ * **Reply is as large as it can be and no wider than its words.** Its type is set
+ * to four fifths of the sentence's and shrunk until the label fits the box on one
+ * line; only if it cannot fit at 1rem does it wrap. So a short sentence gets a big
+ * Reply and a long one a smaller, and the button is never a bar of colour with a
+ * small word in it. Turned, the same along the height.
+ *
+ * **The gloss takes the room the row gives it**, from the body size down to the
+ * small one, at no more than two lines: the row's other half is three buttons, and
+ * a gloss set small beside them left a hand's width of nothing between the two.
+ * @param {HTMLElement} box  the message surface
+ */
+function fitFoot(box) {
+  const stage = box.closest('.board-stage');
+  const text = box.querySelector('.board-message-text');
+  if (!stage || !text) return;
+  const reply = /** @type {HTMLElement|null} */ (stage.querySelector('.board-reply'));
+  if (reply) {
+    const read = /** @type {HTMLElement} */ (reply.parentElement);
+    const along = vertical(reply) ? 'scrollHeight' : 'scrollWidth';
+    const room = vertical(reply) ? read.clientHeight : read.clientWidth;
+    // And no more than a fifth of the box across: a Reply set at four fifths of a
+    // turned sentence would stand beside it as wide as one of its columns, and the
+    // turn exists to give the sentence that width.
+    const across = vertical(reply) ? 'offsetWidth' : 'offsetHeight';
+    const most = (vertical(reply) ? read.clientWidth : read.clientHeight) * 0.2;
+    let size = Math.max(16, Number.parseFloat(getComputedStyle(text).fontSize) * 0.8);
+    reply.classList.add('board-reply-line');
+    reply.style.fontSize = `${size}px`;
+    while (size > 16 && (reply[along] > room || reply[across] > most)) {
+      size = Math.max(16, size * 0.92);
+      reply.style.fontSize = `${size}px`;
+    }
+    if (reply[along] > room) reply.classList.remove('board-reply-line');
+    // The sentence's box has just changed shape by however much Reply grew or
+    // shrank, so it is fitted again -- now, not a frame later when the observer
+    // notices, or the text is drawn overflowing for that frame.
+    fitMessage(/** @type {HTMLElement} */ (text), box);
+  }
+  const gloss = /** @type {HTMLElement|null} */ (stage.querySelector('.board-message-gloss'));
+  if (gloss) {
+    for (const size of ['1.05rem', '0.95rem', '0.9rem', '0.84rem', '0.78rem']) {
+      gloss.style.fontSize = size;
+      const line = Number.parseFloat(getComputedStyle(gloss).lineHeight);
+      if (gloss.scrollHeight <= line * 2.4) break;
+    }
+  }
 }
 /** @type {ResizeObserver|null} */ let shape = null;
 

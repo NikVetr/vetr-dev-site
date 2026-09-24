@@ -316,6 +316,31 @@ function setWantOpen(open, chosen) {
   if (said) said.textContent = open ? '' : (chosen ?? said.textContent ?? '');
 }
 
+/**
+ * On a phone, the language grid folds away as the reader scrolls past it and its
+ * toggle floats under the header as a bar -- fifty buttons are a screen and a half,
+ * and the thing the page is for is below them. Scrolling back to the top puts the
+ * bar back in its own place, still folded; a tap opens the grid again; scrolling on
+ * down folds it again. Nothing of this on a desktop, where the grid sits beside the
+ * sentence and there is room for all of it.
+ * @param {HTMLElement} toggle
+ */
+function foldOnScroll(toggle) {
+  const narrow = matchMedia('(max-width: 1080px)');
+  if (!want) return;
+  const check = () => {
+    if (!narrow.matches) { want.classList.remove('want-floating'); return; }
+    const past = scrollY > want.offsetTop + toggle.offsetHeight - headerHeight();
+    want.classList.toggle('want-floating', past);
+    if (past && toggle.getAttribute('aria-expanded') === 'true') setWantOpen(false);
+  };
+  addEventListener('scroll', check, { passive: true });
+  narrow.addEventListener('change', check);
+}
+const want = /** @type {HTMLElement|null} */ (document.querySelector('.want'));
+const headerHeight = () => Number.parseFloat(
+  getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 0;
+
 /** How many other languages to show beside the reader's own. */
 const COLLAGE_DEPTH = 5;
 
@@ -619,8 +644,15 @@ async function main() {
     if (toggle && !toggle.dataset.wired) {
       toggle.dataset.wired = '1';
       toggle.addEventListener('click', () => {
-        setWantOpen(toggle.getAttribute('aria-expanded') === 'false');
+        const opening = toggle.getAttribute('aria-expanded') === 'false';
+        // Opening from the floating bar: back to where the grid lives first, or the
+        // grid would open somewhere above the viewport.
+        if (opening && want?.classList.contains('want-floating')) {
+          scrollTo({ top: Math.max(0, want.offsetTop - headerHeight()), behavior: 'instant' });
+        }
+        setWantOpen(opening);
       });
+      foldOnScroll(toggle);
     }
   }
 
