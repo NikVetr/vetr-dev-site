@@ -88,11 +88,38 @@ false`, so `registerOffline` does not register one: a WebView already serves loc
 files, and a second cache in front of them is a stale-shell bug on an app that updates
 through a store.
 
+## The first Android build, and what it could and could not show
+
+Run on 2026-09-24 with the owner's go-ahead to install what testing needs. Nothing
+went system-wide: Temurin JDK 21 and the Android SDK (command-line tools, platform
+35, build-tools 35.0.0, the emulator, a Google APIs x86_64 image) live under
+`~/android-tools/`, and the scripts that drive them are in `tmp/`. Capacitor 7's
+Android library compiles for Java 21 — JDK 17 fails with `invalid source release:
+21` — which was the one false start.
+
+`npm run mobile`, `npx cap add android`, `npx cap sync android` and `./gradlew
+assembleDebug` produce a 42 MB debug APK. On the emulator it **installs, launches,
+the Capacitor bridge starts and registers App, Preferences and Share, and the
+WebView requests `https://localhost/`** with no error from the shell. That is the
+first time any of this has run outside a browser.
+
+What could not be shown is whether the page paints. This user is not in the `kvm`
+group, so the emulator ran without hardware acceleration, and an unaccelerated
+Android 15 image is not a usable device: within ninety seconds System UI stops
+responding, Google Play services crash, and the WebView's render process is taken
+down with them. Screenshots show the Capacitor launch screen and then the ANR
+dialog, and a debugger attached over the WebView's devtools socket (which needs
+`webContentsDebuggingEnabled`, set in the generated project only) reaches the page
+target but the renderer dies under it. Two things would finish the test, and either
+is enough: `sudo usermod -aG kvm $USER` and a fresh login, after which the same
+scripts run accelerated; or a physical Android phone with USB debugging, on which
+`npx cap run android` installs the same APK.
+
 ## Not done
 
-- **No device build of any kind has been run.** A Linux machine cannot produce an iOS
-  result, and no Android SDK is installed here. Everything above is verified in a
-  browser and by unit tests with a fake `Capacitor`; none of it has been on a phone.
+- **Not yet on a real phone.** A Linux machine cannot produce an iOS result, and the
+  Android build above stopped at the emulator's limits. Everything else is verified
+  in a browser and by unit tests with a fake `Capacitor`.
 - **N2 is only half done.** Handoff and the share path exist; routing the PDF, PNG,
   SVG, ZIP and CSV exports through native file delivery does not. On a device those
   still go through the browser download path, which in a WebView may do nothing.
