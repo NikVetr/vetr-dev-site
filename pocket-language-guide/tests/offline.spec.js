@@ -279,7 +279,8 @@ test('a board works on a cold offline visit with nothing saved', async ({ page, 
   // The whole grid, not merely a page that rendered: a board that resolves half its
   // phrases draws the rest disabled, which is a different failure wearing the same
   // face.
-  await expect(page.locator('.board-cell')).toHaveCount(10);
+  // Twelve since the board audit put the price and duration questions on the grid.
+  await expect(page.locator('.board-cell')).toHaveCount(12);
   await expect(page.locator('.board-cell-off')).toHaveCount(0);
   await expect(page.locator('#board-status')).toBeEmpty();
 
