@@ -12937,1678 +12937,6 @@
       ]
     },
     {
-      "target": "th",
-      "source": "en",
-      "scale": 0.81,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "es",
-      "scale": 0.79,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "zh-Hans",
-      "scale": 0.5,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "ja",
-      "scale": 0.72,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "ar",
-      "scale": 0.76,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Arabic",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "fr",
-      "scale": 0.74,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "de",
-      "scale": 0.73,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 1
-          },
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "pt",
-      "scale": 0.82,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "ko",
-      "scale": 0.51,
-      "faces": 8,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "hi",
-      "scale": 0.73,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Devanagari",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Devanagari text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "ru",
-      "scale": 0.76,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "id",
-      "scale": 0.79,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "sw",
-      "scale": 0.79,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 624,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "tr",
-      "scale": 0.86,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "vi",
-      "scale": 0.84,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "it",
-      "scale": 0.77,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "el",
-      "scale": 0.7,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "hu",
-      "scale": 0.78,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "tlh",
-      "scale": 0.73,
-      "faces": 6,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 425,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "qya",
-      "scale": 1,
-      "faces": 4,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 262,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Tengwar",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Tengwar text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "he",
-      "scale": 0.91,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "fa",
-      "scale": 0.71,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Arabic",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "bn",
-      "scale": 0.45,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Bengali",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Bengali text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "ur",
-      "scale": 0.64,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 624,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Arabic",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "pl",
-      "scale": 0.79,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "nl",
-      "scale": 0.74,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "ta",
-      "scale": 0.79,
-      "faces": 14,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "uk",
-      "scale": 0.77,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "te",
-      "scale": 0.59,
-      "faces": 12,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 624,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Telugu",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Telugu text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "mr",
-      "scale": 0.67,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 624,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Devanagari",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Devanagari text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "ro",
-      "scale": 0.84,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "cs",
-      "scale": 0.83,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "pa",
-      "scale": 0.6,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 624,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Gurmukhi",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Gurmukhi text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "fil",
-      "scale": 0.65,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "sv",
-      "scale": 0.78,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "ms",
-      "scale": 0.79,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "gu",
-      "scale": 0.73,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 624,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Gujarati",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Gujarati text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "ne",
-      "scale": 0.72,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 624,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Devanagari",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Devanagari text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "am",
-      "scale": 0.86,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 624,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Ethiopic",
-            "floor": "6.00",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Ethiopic text at 6.00pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "kn",
-      "scale": 0.79,
-      "faces": 12,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 624,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Kannada",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Kannada text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "ha",
-      "scale": 0.77,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 624,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "ml",
-      "scale": 0.64,
-      "faces": 12,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 624,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 1
-          },
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "yo",
-      "scale": 0.84,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 622,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "lo",
-      "scale": 1,
-      "faces": 12,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 624,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Lao",
-            "floor": "6.00",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Lao text at 6.00pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 1
-          },
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "km",
-      "scale": 0.74,
-      "faces": 12,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 623,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Khmer",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Khmer text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "hr",
-      "scale": 0.82,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "ka",
-      "scale": 0.64,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 624,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "fi",
-      "scale": 0.73,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 1
-          },
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "hy",
-      "scale": 0.58,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "uz",
-      "scale": 0.74,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 624,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 1
-          },
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "jv",
-      "scale": 0.68,
-      "faces": 10,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 625,
-      "warnings": [
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
-      "target": "th",
-      "source": "or",
-      "scale": 0.57,
-      "faces": 12,
-      "pageW": 504,
-      "pageH": 360,
-      "items": 624,
-      "warnings": [
-        {
-          "code": "paper-too-coarse",
-          "severity": "warn",
-          "params": {
-            "script": "Odia (Oriya)",
-            "floor": "5.40",
-            "field": "respell",
-            "size": "5.20"
-          },
-          "message": "This paper needs Odia (Oriya) text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
-        },
-        {
-          "code": "no-dictionary-breaking",
-          "severity": "warn",
-          "params": {
-            "script": "Thai"
-          },
-          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
-        },
-        {
-          "code": "margin-below-safe-area",
-          "severity": "warn",
-          "params": {
-            "inset": "8.5",
-            "preset": "et8550-5x7-photo-bordered"
-          },
-          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        }
-      ]
-    },
-    {
       "target": "ru",
       "source": "en",
       "scale": 0.72,
@@ -72853,6 +71181,1686 @@
             "count": 3
           },
           "message": "3 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "en",
+      "scale": 0.81,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "es",
+      "scale": 0.79,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "zh-Hans",
+      "scale": 0.5,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "ja",
+      "scale": 0.72,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "ar",
+      "scale": 0.76,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "fr",
+      "scale": 0.74,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "de",
+      "scale": 0.73,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "pt",
+      "scale": 0.82,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "ko",
+      "scale": 0.51,
+      "faces": 8,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "hi",
+      "scale": 0.73,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Devanagari",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Devanagari text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "ru",
+      "scale": 0.76,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "id",
+      "scale": 0.79,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "sw",
+      "scale": 0.79,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 624,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "tr",
+      "scale": 0.86,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "vi",
+      "scale": 0.84,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "it",
+      "scale": 0.77,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "el",
+      "scale": 0.71,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "hu",
+      "scale": 0.78,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "tlh",
+      "scale": 0.73,
+      "faces": 6,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 425,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "qya",
+      "scale": 1,
+      "faces": 4,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 262,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Tengwar",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Tengwar text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "he",
+      "scale": 0.91,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "fa",
+      "scale": 0.71,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "bn",
+      "scale": 0.45,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Bengali",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Bengali text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "ur",
+      "scale": 0.64,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 624,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Arabic",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Arabic text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "pl",
+      "scale": 0.79,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "nl",
+      "scale": 0.74,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "ta",
+      "scale": 0.79,
+      "faces": 14,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "uk",
+      "scale": 0.77,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "te",
+      "scale": 0.59,
+      "faces": 12,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 624,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Telugu",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Telugu text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "mr",
+      "scale": 0.67,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 624,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Devanagari",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Devanagari text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "ro",
+      "scale": 0.84,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "cs",
+      "scale": 0.87,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "pa",
+      "scale": 0.6,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 624,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Gurmukhi",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Gurmukhi text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "fil",
+      "scale": 0.65,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "sv",
+      "scale": 0.78,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "ms",
+      "scale": 0.79,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "gu",
+      "scale": 0.74,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 624,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Gujarati",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Gujarati text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "ne",
+      "scale": 0.72,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 624,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Devanagari",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Devanagari text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "am",
+      "scale": 0.86,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 624,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Ethiopic",
+            "floor": "6.00",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Ethiopic text at 6.00pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "kn",
+      "scale": 0.79,
+      "faces": 12,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 624,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Kannada",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Kannada text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "ha",
+      "scale": 0.77,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 624,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "ml",
+      "scale": 0.64,
+      "faces": 12,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 624,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "yo",
+      "scale": 0.84,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 622,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "lo",
+      "scale": 1,
+      "faces": 12,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 624,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Lao",
+            "floor": "6.00",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Lao text at 6.00pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "km",
+      "scale": 0.74,
+      "faces": 12,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 623,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Khmer",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Khmer text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "hr",
+      "scale": 0.82,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "ka",
+      "scale": 0.66,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 624,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "fi",
+      "scale": 0.73,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "hy",
+      "scale": 0.58,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "uz",
+      "scale": 0.74,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 624,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        },
+        {
+          "code": "loose-columns",
+          "severity": "info",
+          "params": {
+            "count": 1
+          },
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "jv",
+      "scale": 0.68,
+      "faces": 10,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 625,
+      "warnings": [
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
+        }
+      ]
+    },
+    {
+      "target": "th",
+      "source": "or",
+      "scale": 0.57,
+      "faces": 12,
+      "pageW": 504,
+      "pageH": 360,
+      "items": 624,
+      "warnings": [
+        {
+          "code": "paper-too-coarse",
+          "severity": "warn",
+          "params": {
+            "script": "Odia (Oriya)",
+            "floor": "5.40",
+            "field": "respell",
+            "size": "5.20"
+          },
+          "message": "This paper needs Odia (Oriya) text at 5.40pt, but the theme sets its respell column at 5.20pt. That column is enlarged to stay readable, which costs room elsewhere. Photo stock holds finer type."
+        },
+        {
+          "code": "no-dictionary-breaking",
+          "severity": "warn",
+          "params": {
+            "script": "Thai"
+          },
+          "message": "Thai needs dictionary line breaking, which is not implemented yet; lines may break mid-word."
+        },
+        {
+          "code": "margin-below-safe-area",
+          "severity": "warn",
+          "params": {
+            "inset": "8.5",
+            "preset": "et8550-5x7-photo-bordered"
+          },
+          "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
         }
       ]
     }

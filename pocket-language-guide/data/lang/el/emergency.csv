@@ -123,7 +123,7 @@ police-consulate.i-need-a-written-police-report,Χρειάζομαι έγγρα�
 police-consulate.i-want-to-contact-my-embassy,Θέλω να επικοινωνήσω με την πρεσβεία μου,,Thelo na epikoinoniso me tin presveia mou,θˈelo na ˌepicˌinonˈiso me tim bɾesvˈia mu,,2,el-agent-v1;roman=elot743;ipa=espeak
 police-consulate.i-need-it-for-my-insurance,Το χρειάζομαι για την ασφάλισή μου,Το χρειάζομαι για την ασφαλιστική μου εταιρεία,To chreiazomai gia tin asfalisi mou,to xɾçˈazomˌe jˈa tin asfˈalisi mu,,2,el-agent-v1;roman=elot743;ipa=espeak
 police-consulate.i-need-an-interpreter,Χρειάζομαι διερμηνέα,,Chreiazomai dierminea,xɾçˈazomˌe ðˌieɾminˈea,,2,el-agent-v1;roman=elot743;ipa=espeak
-police-consulate.please-leave-me-alone,"Παρακαλώ, μη με ενοχλείτε",Αφήστε με ήσυχο / ήσυχη,"Parakalo, mi me enochleite","pˌaɾakalˈo, mˈi me ˌenoxlˈite",Please do not bother me,2,el-agent-v1;roman=elot743;ipa=espeak
+police-consulate.please-leave-me-alone,"Παρακαλώ, μη με ενοχλείτε",Αφήστε με ήσυχο,"Parakalo, mi me enochleite","pˌaɾakalˈo, mˈi me ˌenoxlˈite",Please do not bother me,2,el-agent-v1;roman=elot743;ipa=espeak
 police-consulate.i-was-robbed,Με λήστεψαν,Έπεσα θύμα ληστείας,Me listepsan,me lˈistepsˌan,,2,el-agent-v1;roman=elot743;ipa=espeak
 police-consulate.i-want-a-lawyer,Θέλω δικηγόρο,,Thelo dikigoro,θˈelo ðˌiciɣˈoɾo,,2,el-agent-v1;roman=elot743;ipa=espeak
 police-consulate.please-notify-my-consulate,"Παρακαλώ, ειδοποιήστε το προξενείο μου",,"Parakalo, eidopoiiste to proxeneio mou","pˌaɾakalˈo, ˌiðopiˈiste to pɾˌoksenˈio mu",,2,el-agent-v1;roman=elot743;ipa=espeak
@@ -136,6 +136,6 @@ police-consulate.please-write-the-report-number,Γράψτε μου τον αρ�
 police-consulate.it-happened-here,Έγινε εδώ,Συνέβη εδώ,Egine edo,ˈejinˌe eðˈo,,2,el-agent-v1;roman=elot743;ipa=espeak
 police-consulate.may-i-have-a-copy-of-the-report,Μπορώ να έχω αντίγραφο της βεβαίωσης;,Μπορώ να έχω αντίγραφο της δήλωσης;,Boro na echo antigrafo tis vevaiosis;,boɾˈo na ˈexo adˈiɣɾafˌo tiz vevˈeosˌis,May I have a copy of the certificate?,2,el-agent-v1;roman=elot743;ipa=espeak
 police-consulate.i-will-not-sign-anything-i-cannot-read,Δεν θα υπογράψω κάτι που δεν μπορώ να διαβάσω,,Den tha ypograpso kati pou den boro na diavaso,ðˈen θa ˌipoɣɾˈapso kˈati pu ðˈen boɾˈo na ðˌiavˈaso,,2,el-agent-v1;roman=elot743;ipa=espeak
-police-consulate.am-i-free-to-go,Μπορώ να φύγω;,Είμαι ελεύθερος/η να φύγω;,Boro na fygo;,boɾˈo na fˈiɣo,,2,el-agent-v1;roman=elot743;ipa=espeak
+police-consulate.am-i-free-to-go,Μπορώ να φύγω;,Είμαι ελεύθερος να φύγω;,Boro na fygo;,boɾˈo na fˈiɣo,,2,el-agent-v1;roman=elot743;ipa=espeak
 police-consulate.i-do-not-want-to-go-with-you,Δεν θέλω να έρθω μαζί σας,,Den thelo na ertho mazi sas,ðˈen θˈelo na ˈeɾθo mazˈi sas,I do not want to come with you,2,el-agent-v1;roman=elot743;ipa=espeak
 pharmacy-symptoms.i-think-i-have-dengue,Νομίζω ότι έχω δάγκειο πυρετό,,Nomizo oti echo dankeio pyreto,nomˈizo ˈoti ˈexo ðˈaŋɡço pˌiɾetˈo,,2,dengue-agent-v1;in-pack-frame;ipa=espeak

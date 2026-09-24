@@ -60,9 +60,9 @@ border-customs.here-is-my-passport,यह मेरा पासपोर्ट 
 border-customs.i-am-staying-for-days,मुझे {} दिन रुकना है,,mujhe {} din ruknā hai,mˌʊɟʰeː {} dˈɪn ɾˈʊknˌaː hɛː,,2,hi-agent-v1;ipa=espeak
 border-customs.nothing-to-declare,कुछ घोषित करने को नहीं,,kuch ghoṣit karne ko nahīṁ,kˈʊcʰ ɡʰˈoːʂɪt kˈʌɾnˌeː koː nˈʌhĩ,,2,hi-agent-v1;ipa=espeak
 border-customs.i-am-staying-at,मुझे {} में रुकना है,,mujhe {} meṁ ruknā hai,mˌʊɟʰeː {} mẽː ɾˈʊknˌaː hɛː,,2,hi-agent-v1;ipa=espeak
-border-customs.i-am-here-for-business,मैं काम से आया हूँ,मैं काम से आई हूँ,maiṁ kām se āyā hūṁ,mɛ̃ kˈaːm seː ˈaːjaː hũ,,2,hi-agent-v1;ipa=espeak
+border-customs.i-am-here-for-business,मैं काम से आया हूँ,,maiṁ kām se āyā hūṁ,mɛ̃ kˈaːm seː ˈaːjaː hũ,,2,hi-agent-v1;ipa=espeak
 border-customs.i-have-a-return-ticket,मेरे पास वापसी का टिकट है,,mere pās vāpasī kā ṭikaṭ hai,mˌeːɾeː pˈaːs ʋˈaːpsˌi kaː ʈˈɪkəʈ hɛː,,2,hi-agent-v1;ipa=espeak
-border-customs.i-am-visiting-family,मैं परिवार से मिलने आया हूँ,मैं परिवार से मिलने आई हूँ,maiṁ parivār se milne āyā hūṁ,mɛ̃ pˌəɾɪʋˈaːɾ seː mˈɪlnˌeː ˈaːjaː hũ,,2,hi-agent-v1;ipa=espeak
+border-customs.i-am-visiting-family,मैं परिवार से मिलने आया हूँ,,maiṁ parivār se milne āyā hūṁ,mɛ̃ pˌəɾɪʋˈaːɾ seː mˈɪlnˌeː ˈaːjaː hũ,,2,hi-agent-v1;ipa=espeak
 border-customs.this-is-for-personal-use,यह मेरे इस्तेमाल के लिए है,,yah mere istemāl ke lie hai,jˌəh mˌeːɾeː ˌɪsteːmˈaːl keː lˈɪeː hɛː,,2,hi-agent-v1;ipa=espeak
 border-customs.i-am-in-transit,मैं ट्रांज़िट में हूँ,,maiṁ ṭrāṁzit meṁ hūṁ,mɛ̃ ʈɾˈãzɪʈ mẽː hũ,,2,hi-agent-v1;ipa=espeak
 border-customs.i-have-in-cash,मेरे पास {} नकद हैं,,mere pās {} nakad haiṁ,mˌeːɾeː pˈaːs {} nˈʌkəd hɛ̃,,2,hi-agent-v1;ipa=espeak

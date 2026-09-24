@@ -1,6 +1,6 @@
 concept_id,text,text_alt,romanization_iast,ipa,literal,confidence,provenance
 building-help.what-room-number-is-this,इस कमरे का नंबर क्या है?,,is kamre kā naṁbar kyā hai?,ˈɪs kˈʌmɾˌeː kaː nˈʌmbəɾ kjaː hɛː,,2,hi-agent-v1;ipa=espeak
-building-help.i-am-lost,मैं रास्ता भटक गया हूँ,मैं रास्ता भटक गई हूँ,maiṁ rāstā bhaṭak gayā hūṁ,mɛ̃ ɾˈaːstaː bʰˈʌʈək ɡˈʌjaː hũ,,2,hi-agent-v1;ipa=espeak
+building-help.i-am-lost,मैं रास्ता भटक गया हूँ,,maiṁ rāstā bhaṭak gayā hūṁ,mɛ̃ ɾˈaːstaː bʰˈʌʈək ɡˈʌjaː hũ,,2,hi-agent-v1;ipa=espeak
 building-help.where-is-reception,रिसेप्शन कहाँ है?,,risepśan kahāṁ hai?,ɾɪsˈeːpʃən kˈʌhã hɛː,,2,hi-agent-v1;ipa=espeak
 building-help.where-is-a-power-outlet,बिजली का सॉकेट कहाँ है?,,bijlī kā sokeṭ kahāṁ hai?,bˈɪɟlˌi kaː sɔkˈeːʈ kˈʌhã hɛː,,2,hi-agent-v1;ipa=espeak
 accessibility.step-free,क्या बिना सीढ़ी का रास्ता है?,,kyā binā sīṛhī kā rāstā hai?,kjaː bˌɪnaː sˈiːɽʰi kaː ɾˈaːstaː hɛː,,2,hi-agent-v1;ipa=espeak
@@ -8,7 +8,7 @@ accessibility.wheelchair-access,क्या व्हीलचेयर जा 
 accessibility.elevator,क्या लिफ़्ट है?,,kyā lifṭ hai?,kjaː lˈɪfʈ hɛː,,2,hi-agent-v1;ipa=espeak
 accessibility.ramp,क्या रैंप है?,,kyā raiṁp hai?,kjaː ɾˈɛ̃p hɛː,,2,hi-agent-v1;ipa=espeak
 accessibility.how-many-steps,कितनी सीढ़ियाँ हैं?,,kitnī sīṛhiyāṁ haiṁ?,kˈɪtnˌi sˈiːɽʰɪjˌã hɛ̃,,2,hi-agent-v1;ipa=espeak
-accessibility.cannot-climb-stairs,मैं सीढ़ियाँ नहीं चढ़ सकता,मैं सीढ़ियाँ नहीं चढ़ सकती,maiṁ sīṛhiyāṁ nahīṁ caṛh saktā,mɛ̃ sˈiːɽʰɪjˌã nˈʌhĩ cˈʌɽʰ sˈʌktˌaː,,2,hi-agent-v1;ipa=espeak
+accessibility.cannot-climb-stairs,मैं सीढ़ियाँ नहीं चढ़ सकता,,maiṁ sīṛhiyāṁ nahīṁ caṛh saktā,mɛ̃ sˈiːɽʰɪjˌã nˈʌhĩ cˈʌɽʰ sˈʌktˌaː,,2,hi-agent-v1;ipa=espeak
 accessibility.need-to-sit-down,मुझे बैठना है,,mujhe baiṭhnā hai,mˌʊɟʰeː bˈɛːʈʰnˌaː hɛː,,2,hi-agent-v1;ipa=espeak
 accessibility.accessible-restroom,क्या दिव्यांग शौचालय है?,,kyā divyāṁg śaucālay hai?,kjaː dɪʋjˈãɡ ʃɔːcˈaːlˌɛj hɛː,,2,hi-agent-v1;ipa=espeak
 accessibility.station-assistance,क्या स्टेशन पर मदद मिलेगी?,,kyā sṭeśan par madad milegī?,kjaː sʈˈeːʃən pˈʌɾ mˈʌdəd mɪlˈeːɡi,,2,hi-agent-v1;ipa=espeak

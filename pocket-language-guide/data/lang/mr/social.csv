@@ -3,7 +3,7 @@ social-basics.hello,हाय,,hāya,hˈaːj,"casual, among friends",2,mr-agent-
 social-basics.hello-polite,नमस्कार,,namaskāra,nˌəmskˈaːɾ,,2,mr-agent-v1;ipa=espeak
 social-basics.good-morning,शुभ सकाळ,नमस्कार,śubha sakāḷa,ʃˈʊbʰ səkˈaːɭ,नमस्कार serves too,2,mr-agent-v1;ipa=espeak
 social-basics.good-evening,शुभ संध्याकाळ,,śubha saṁdhyākāḷa,ʃˈʊbʰ sˌəndʰjaːkˈaːɭ,,2,mr-agent-v1;ipa=espeak
-social-basics.goodbye,येतो,येते,yētō,jˈeːtoː,male speaker / female speaker; lit. 'I'll come [again]' -- the everyday Marathi goodbye,2,mr-agent-v1;ipa=espeak
+social-basics.goodbye,येतो,,yētō,jˈeːtoː,lit. 'I'll come [again]' -- the everyday Marathi goodbye; masculine here and feminine in variants.csv,2,mr-agent-v1;ipa=espeak
 social-basics.thank-you,धन्यवाद,,dhanyavāda,dʰˌənjəvˈaːd,,2,mr-agent-v1;ipa=espeak
 social-basics.you-are-welcome,स्वागत आहे,,svāgata āhē,svˈaːɡət ˈaːheː,,2,mr-agent-v1;ipa=espeak
 social-basics.excuse-me-sorry,माफ करा,,māpha karā,mˈaːpʰ kˈʌɾaː,,2,mr-agent-v1;ipa=espeak

@@ -1,5 +1,5 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-medical-conditions.i-am-diabetic,Ich habe Diabetes.,Ich bin Diabetiker/-in.,ɪç hɑːbə dˌiːabˈeːtəs,,2,de-agent-v1;ipa=espeak
+medical-conditions.i-am-diabetic,Ich habe Diabetes.,Ich bin Diabetiker.,ɪç hɑːbə dˌiːabˈeːtəs,,2,de-agent-v1;ipa=espeak
 pharmacy-symptoms.which-pharmacy-is-open-now,Welche Apotheke hat jetzt offen?,Welche Apotheke hat Notdienst?,vˈɛlçə ˌapoːtˈeːkə hat jˌɛtst ˈɔfən,,2,de-agent-v1;ipa=espeak
 police-consulate.where-is-the-police-station,Wo ist die Polizeiwache?,Wo ist der Polizeiposten?,vˌoː ɪst diː pˈoːliːtsˌaɪvaxə,,2,de-agent-v1;ipa=espeak
 body-parts.head,Kopf,,kˈɔpf,,2,de-agent-v1;ipa=espeak

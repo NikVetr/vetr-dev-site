@@ -1,5 +1,5 @@
 concept_id,text,text_alt,romanization_rtgs,ipa,literal,confidence,provenance
-pronouns-verbs.i-me,ผม/ดิฉัน,ฉัน,phom / dichan,pʰom˩˩˦ / diʔ˨˩tɕʰan˩˩˦,male / female,2,th-agent-v1;ipa=thaig2p
+pronouns-verbs.i-me,ผม,ฉัน,phom,pʰom˩˩˦,,2,th-agent-v1;ipa=thaig2p
 pronouns-verbs.we-us,เรา,,rao,raw˧,,2,th-agent-v1;ipa=thaig2p
 pronouns-verbs.you,คุณ,,khun,kʰun˧na˦˥,,2,th-agent-v1;ipa=thaig2p
 pronouns-verbs.you-polite,ท่าน,,than,tʰaːn˥˩,,2,th-agent-v1;ipa=thaig2p

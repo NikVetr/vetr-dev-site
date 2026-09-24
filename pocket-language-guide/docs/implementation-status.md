@@ -4272,3 +4272,45 @@ own looseness, not blank paper, and is left. And the ornament styles: the brief 
 to design from image-generator references, which this session cannot produce —
 prompts are drafted for the reader to run, and the styles follow the images.
 
+## Batch V — the audit, and what it sent us to do
+
+Asked for a percentage: measured from the repository rather than from memory, the
+original plan is about 93% built (per-row split handles, Thai/Khmer dictionary
+breaking and digits inside right-to-left runs are what remain), the web product as
+extended — boards, quiz, speech, SOS, Morse, personal data, speaker voice — is
+complete against every request made of it, and the native shell is about a third
+done. Coverage: 2,809 of 2,809 pairs pre-rendered with no errors; all eight boards
+reach all 51×50 natural pairs; the IPA column is full in every language; 53 of 53
+reader respelling tables at zero gaps; 51 catalogues at 100% of achievable keys
+(Klingon 86%, Quenya 34% by policy); 49 of 53 section-title files complete; 52 of
+53 emergency-label files; 47 of 49 regions verified.
+
+**Speaker variants, the apparent gap, was mostly not one.** The coverage table
+showed Thai at 3 rows of 145 first-person statements, Greek at 2, Marathi at 2,
+Nepali and Khmer at 1 — and two agents reading each row's own grammar found the
+counts largely right: Thai's base rows deliberately omit the gendered particle, so
+five rows vary; Greek avoids agreement by construction outside two rows; Marathi
+has three; Nepali and Khmer one each; German two. What they found instead was the
+brief's own named defect still standing in eleven rows — the feminine form parked in
+`text_alt` beside a correct variant row — and Thai's "I" printing both pronouns with
+a slash. Fixed, with one Marathi and one Hindi row added. The seventy-five "slashed"
+first-person rows that remain are case pairs (I/me, my/mine) and possessed-noun
+agreement, not speaker gender, and stay.
+
+**Iraq is verified.** The earlier contradiction — the FCDO's 911/122/115 against
+Canada's "no centralised number" — resolved when the Ministry of Interior launched a
+unified 911 in July 2025, which the US Embassy Baghdad publishes; two sources agree
+and the row carries them, with the Kurdistan Region's police line (104) in the
+source cell rather than the numbers, since the numbers print in fifty languages and
+a parenthesis would not. DR Congo stays withheld: one source gives Kinshasa-only
+numbers and another says there are none.
+
+**The first Android build.** With the go-ahead to install what testing needs: JDK 21
+and the Android SDK (platform 35, build tools, emulator, a Google APIs image) in the
+home directory, nothing system-wide; `npm run mobile`, `cap add android`, `cap sync`,
+and Gradle produced a 42 MB debug APK — Capacitor 7 compiles for Java 21, which was
+the one false start. On a software-rendered emulator (this user is not in the `kvm`
+group) the app installs, launches, the Capacitor bridge starts and registers App,
+Preferences and Share, the WebView loads with no runtime error. `android/` stays
+gitignored as `docs/native.md` says.
+

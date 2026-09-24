@@ -28,7 +28,16 @@ not just changing the number.
 - **EG Egypt** — Seeded value correct. Egypt also runs 126 for tourist police; it was cut for space rather than for doubt, and is the natural fourth entry if the row can take one.
 - **ID Indonesia** — The seeded '112 all services' overclaimed. 112 is run by local governments and had reached only about 70 of 514 regencies and cities as of 2024, with nationwide coverage a target rather than a fact; 110 police and 119 ambulance are centrally run and work everywhere. Both are on the card.
 - **IN India** — 112 is genuinely nationwide -- C-DAC's ERSS is deployed in 28 states and integrated with third-party systems in the other 8 -- but 100 and 108 remain what many people dial and are still live, so they are carried behind it.
-- **IQ Iraq** — LEFT UNVERIFIED ON PURPOSE. The UK FCDO publishes 911 police, 122 ambulance, 115 fire. The Government of Canada says the opposite in as many words: 'There is no centralized number to reach emergency services. Research the contact information for local police and medical facilities, and carry it with you.' Two foreign ministries cannot both be right, and a number that does not answer is worse than a blank, so this stays withheld. The FCDO values are recorded in the cell so a reviewer with better sources has somewhere to start.
+- **IQ Iraq** — VERIFIED 2026-09-24, after being left unverified on purpose (below). The
+  contradiction resolved itself: Iraq's Ministry of Interior launched a unified 911
+  centre in Baghdad in July 2025, which the US Embassy Baghdad publishes ("The
+  emergency number in Iraq is 911"), and the UK FCDO publishes 911 police, 122
+  ambulance, 115 fire — two sources agreeing where Canada's older advice said none
+  existed. One caveat carried in the source cell rather than the numbers, because the
+  numbers print in fifty languages and a parenthesis would not: the Kurdistan Region's
+  police line is 104 (help.krd, corroborated by Kurdistan24); ambulance and fire are the
+  same there. A traveller heading to Erbil should know that.
+- **IQ Iraq, earlier** — LEFT UNVERIFIED ON PURPOSE. The UK FCDO publishes 911 police, 122 ambulance, 115 fire. The Government of Canada says the opposite in as many words: 'There is no centralized number to reach emergency services. Research the contact information for local police and medical facilities, and carry it with you.' Two foreign ministries cannot both be right, and a number that does not answer is worse than a blank, so this stays withheld. The FCDO values are recorded in the cell so a reviewer with better sources has somewhere to start.
 - **JO Jordan** — The PSD runs police, civil defence and the ambulance service together and publishes 911 as the unified number; the FCDO states '911 (ambulance, fire, police)'. The PSD's own site refused connections from here, so the citation leans on the FCDO.
 - **KR South Korea** — The National Fire Agency runs 119 for fire, rescue and EMS alike -- its own organisation pages list a 119 Rescue Division and a 119 Emergency Medical Service Division -- so the seeded 'fire and ambulance' is right. 1330 is the Korea Tourism Organization's interpretation hotline and genuinely useful to a foreigner, but it is not an emergency line and did not earn the space.
 - **MA Morocco** — The seeded 19 and 15 are the old landline short forms. From a mobile -- which is what a traveller has -- the numbers are 190 and 150. The gendarmerie's 177 is kept because it, not the police, is who answers outside the cities, which is exactly where a hiker on this app's trail sections would be.
@@ -38,3 +47,9 @@ not just changing the number.
 - **TH Thailand** — Four entries rather than three: 1155 is the Tourist Police, whose operators speak English, and for a foreigner that is often the call that actually gets somewhere. 1672 is the TAT information line, not an emergency number, and was cut.
 - **VN Viet Nam** — Seeded value correct. Vietnam's 112 is a civil-defence and disaster reporting line run by the Ministry of National Defence that routes to 113/114/115; it is not the general emergency number and is left off.
 - **IR Iran** — Two foreign ministries agree line for line, which is the opposite of the Iraq case one border away: the FCDO publishes ambulance 115, fire 125, police 110, and the Government of Canada publishes police 110, medical 115, firefighters 125 / 123. The 123 is Canada's alone and is the Red Crescent relief line rather than the fire brigade, so it is left off. `112` is widely repeated by travel blogs as also working in Iran and is published by neither ministry, so it is not carried — the same test that kept Vietnam's 112 off.
+- **CD DR Congo** — STILL WITHHELD, checked 2026-09-24. The UK FCDO gives Kinshasa-only
+  numbers (fire 118, police 112, no ambulance) and does not claim them outside the
+  capital; Australian Smartraveller says in as many words that there is no national
+  emergency number. The regulator ARPTC has piloted 112/126/164 in Kinshasa per the
+  Congolese press. One source with numbers against one saying there are none is not
+  two sources agreeing, so the cell stays blank and the note prints nothing.
