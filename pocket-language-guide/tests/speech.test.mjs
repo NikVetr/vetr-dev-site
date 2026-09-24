@@ -233,6 +233,37 @@ test('a modified voice never beats the voice it modifies', () => {
   assert.equal(plain.synth.spoken[0]?.voice.name, 'Alpha');
 });
 
+test('Apple\'s novelty shelf never beats a voice meant to be listened to', () => {
+  // **Reported again, from an iPhone: "weird whisper screaming".** Safari lists the
+  // MacinTalk shelf -- Albert, Fred, Whisper, Zarvox, Bad News -- as ordinary local
+  // `en-US` voices, none flagged default, and alphabetical order put Albert first.
+  // Albert is a strained half-whisper. The tier is in the URI, not the name:
+  // `com.apple.speech.synthesis.voice.*` is that shelf, `com.apple.voice.compact.*`
+  // the built-in voices, and `.enhanced.*`/`.premium.*` the downloaded natural ones.
+  const apple = (name, uri, isDefault = false) => /** @type {any} */ ({
+    voiceURI: uri, name, lang: 'en-US', localService: true, default: isDefault,
+  });
+  const albert = apple('Albert', 'com.apple.speech.synthesis.voice.Albert');
+  const whisper = apple('Whisper', 'com.apple.speech.synthesis.voice.Whisper');
+  const compact = apple('Samantha', 'com.apple.voice.compact.en-US.Samantha');
+  const enhanced = apple('Samantha (Enhanced)', 'com.apple.voice.enhanced.en-US.Samantha');
+
+  const { synth, speech } = adapter([albert, whisper, compact]);
+  speech.speak({ text: 'hello', locale: 'en' }).catch(() => {});
+  assert.equal(synth.spoken[0]?.voice.name, 'Samantha', 'the built-in voice over the shelf');
+
+  // A downloaded natural voice beats the built-in one, even flagged default: the
+  // flag marks the system's language choice, not its timbre.
+  const better = adapter([apple('Samantha', 'com.apple.voice.compact.en-US.Samantha', true), enhanced]);
+  better.speech.speak({ text: 'hello', locale: 'en' }).catch(() => {});
+  assert.equal(better.synth.spoken[0]?.voice.name, 'Samantha (Enhanced)');
+
+  // With nothing but the shelf, the shelf is still spoken -- a voice, not silence.
+  const only = adapter([whisper, albert]);
+  only.speech.speak({ text: 'hello', locale: 'en' }).catch(() => {});
+  assert.equal(only.synth.spoken[0]?.voice.name, 'Albert');
+});
+
 test('an engine that will not say where it runs is unknown, never local', () => {
   // No `localService` at all, which is what an engine that does not implement the
   // field looks like from here.

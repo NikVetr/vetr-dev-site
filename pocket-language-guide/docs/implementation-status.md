@@ -4079,3 +4079,24 @@ attested parts (Nepali); those are the first for a fluent reader to check.
 The landing sentence is still the candidate in `en.json`, held from translation
 until the wording is agreed. The torch, and the Morse lamp with it, still wait on a
 phone.
+
+## Batch R — the whisper, second report
+
+Reported again, this time from an iPhone: the default English voice is "weird
+whisper screaming". The desktop cause had been espeak's `+whisper` variant winning
+an alphabetical tie; the iPhone cause is the same tie won by a different shelf.
+Safari lists Apple's MacinTalk novelty voices — Albert, Fred, Whisper, Zarvox, Bad
+News — as ordinary local `en-US` voices, none flagged default, and *Albert* sorts
+first. Albert is a strained half-whisper.
+
+The tier is in the `voiceURI`, not the name: `com.apple.speech.synthesis.voice.*`
+is that shelf, `com.apple.voice.compact.*` the built-in voices, `.enhanced.*` and
+`.premium.*` the downloaded natural ones. `qualityRank` in `ui/platform/speech.js`
+now orders them so, folds the espeak `+` rule into the same scale, and sits ahead
+of `default` in the sort — the flag marks the system's choice of language, not of
+timbre. A platform with neither convention scores every voice 0 and keeps its
+order. Three unit cases pin it: shelf loses to compact, compact loses to enhanced
+even when flagged default, and a device with nothing but the shelf still speaks.
+**Not verifiable here** — no Apple device in the test rig — so this waits on the
+phone like the torch does.
+

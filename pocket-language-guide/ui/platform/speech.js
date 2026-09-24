@@ -234,28 +234,42 @@ export function createSpeech(
       .filter((voice) => matchRank(voice.lang, spoken.match) >= 0)
       .sort((a, b) => OFFLINE_RANK[offlineOf(a)] - OFFLINE_RANK[offlineOf(b)]
         || matchRank(a.lang, spoken.match) - matchRank(b.lang, spoken.match)
+        || qualityRank(a) - qualityRank(b)
         || (b.default ? 1 : 0) - (a.default ? 1 : 0)
-        || variantRank(a) - variantRank(b)
         || a.name.localeCompare(b.name));
   }
 
   /**
-   * A modified voice, behind the voice it modifies.
+   * Whether a voice sounds like a person, as far as its own platform admits.
+   *
+   * Every term above this one ties on a platform that offers many voices for one
+   * language, so the pick used to fall through to alphabetical order -- which has no
+   * opinion about timbre. Two platforms say more than the name does:
+   *
+   * **iOS and macOS** name the tier in the `voiceURI`. `com.apple.voice.premium.*`
+   * and `.enhanced.*` are the downloaded natural voices, `.compact.*` the built-in
+   * ones, and `com.apple.speech.synthesis.voice.*` is the MacinTalk shelf -- Fred,
+   * Albert, Whisper, Zarvox, Bad News -- which Safari lists as ordinary `en-US`
+   * voices. Alphabetical order put *Albert* first on an iPhone, and Albert is a
+   * strained half-whisper; the reader called it a whisper screaming, which it is.
    *
    * **A desktop Linux box offers eight thousand voices**, because speech-dispatcher
    * exposes every espeak variant as an entry of its own: `English (America)` and
-   * then `English (America)+Andrea`, `+Boris`, `+croak`, `+whisper` and a hundred
-   * more, all of them local, all of them matching `en` equally well. Every term
-   * above this one ties, so the pick fell through to alphabetical order -- which
-   * has no opinion about whether a voice sounds like a person, and cheerfully
-   * hands back a croak or a whisper.
+   * then `English (America)+Andrea`, `+Boris`, `+croak`, `+whisper`. `+` is espeak's
+   * own separator between a base voice and the variant applied to it.
    *
-   * `+` is espeak's own separator between a base voice and the variant applied to
-   * it, so this costs nothing on a platform that does not use the convention: no
-   * name contains one, every voice scores 0, and the order is exactly what it was.
+   * Anything else scores 0, so a platform without either convention keeps the order
+   * it had. Ahead of `default` because the flag marks the system's choice of
+   * *language*, not of timbre, and a novelty voice it happens to sit on still loses.
    * @param {SpeechSynthesisVoice} voice
    */
-  const variantRank = (voice) => (voice.name.includes('+') ? 1 : 0);
+  const qualityRank = (voice) => {
+    const uri = voice.voiceURI || '';
+    if (uri.startsWith('com.apple.speech.synthesis.voice.')) return 3;
+    if (voice.name.includes('+')) return 2;
+    if (uri.includes('.compact.')) return 1;
+    return 0;
+  };
 
   /** The voice a bare Speak would use: the best one that is not a remote service. */
   const autoPick = (/** @type {SpeechSynthesisVoice[]} */ voices) => voices
