@@ -241,6 +241,16 @@
       "titleKey": "boards.emergency.lostTitle",
       "buttons": [
         {
+          "id": "child",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "lost-rescue.my-child-is-missing"
+          },
+          "colour": "alert",
+          "replySetId": "who"
+        },
+        {
           "id": "passport",
           "kind": "message",
           "phraseRef": {
@@ -341,16 +351,6 @@
           "replySetId": "where-am-i"
         },
         {
-          "id": "child",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "lost-rescue.my-child-is-missing"
-          },
-          "colour": "alert",
-          "replySetId": "who"
-        },
-        {
           "id": "interpreter",
           "kind": "message",
           "phraseRef": {
@@ -393,11 +393,11 @@
           "colour": "alert"
         },
         {
-          "id": "injector-bag",
+          "id": "pregnant",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "medical-conditions.my-injector-is-in-my-bag"
+            "id": "medical-conditions.i-am-pregnant"
           },
           "colour": "alert"
         },

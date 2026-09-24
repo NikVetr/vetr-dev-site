@@ -53,6 +53,16 @@
           "nodeId": "onboard",
           "labelKey": "boards.transport.onboard",
           "colour": "move"
+        },
+        {
+          "id": "subway",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "transit-rides.where-is-the-subway-station"
+          },
+          "colour": "move",
+          "replySetId": "point-it-out"
         }
       ]
     },
@@ -75,7 +85,8 @@
             "kind": "corpus",
             "id": "taxi.please-use-the-meter"
           },
-          "colour": "money"
+          "colour": "money",
+          "replySetId": "yes-no-fact"
         },
         {
           "id": "waitforme",
@@ -114,6 +125,16 @@
           },
           "colour": "move",
           "replySetId": "wait-for-me"
+        },
+        {
+          "id": "pickup",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pickup-meeting.where-is-the-pickup-point"
+          },
+          "colour": "move",
+          "replySetId": "point-it-out"
         }
       ]
     },
@@ -179,16 +200,6 @@
           },
           "colour": "money",
           "replySetId": "yes-no-fact"
-        },
-        {
-          "id": "subway",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "transit-rides.where-is-the-subway-station"
-          },
-          "colour": "move",
-          "replySetId": "point-it-out"
         }
       ]
     },
@@ -222,7 +233,8 @@
             "kind": "corpus",
             "id": "transit-rides.please-tell-me-where-to-get-off"
           },
-          "colour": "move"
+          "colour": "move",
+          "replySetId": "acknowledge"
         },
         {
           "id": "nextstop",
@@ -593,6 +605,34 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "acknowledge": {
+      "buttons": [
+        {
+          "id": "okay-can",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.okay-can"
           }
         },
         {

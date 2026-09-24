@@ -565,6 +565,11 @@
           }
         },
         {
+          "id": "at",
+          "kind": "entry",
+          "entry": "clock"
+        },
+        {
           "id": "i-will-write-it-down",
           "kind": "message",
           "phraseRef": {

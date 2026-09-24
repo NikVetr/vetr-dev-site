@@ -99,6 +99,24 @@
             "id": "social-basics.thank-you"
           },
           "colour": "stay"
+        },
+        {
+          "id": "howmuch",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "shopping.how-much-is-this"
+          },
+          "colour": "money"
+        },
+        {
+          "id": "howlong",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-scheduling.how-long-does-it-take"
+          },
+          "colour": "stay"
         }
       ]
     },

@@ -73,7 +73,8 @@
             "kind": "corpus",
             "id": "directions.please-show-me-on-the-map"
           },
-          "colour": "move"
+          "colour": "move",
+          "replySetId": "map"
         },
         {
           "id": "showme",
@@ -333,6 +334,11 @@
     },
     "which-exit": {
       "buttons": [
+        {
+          "id": "number",
+          "kind": "entry",
+          "entry": "count"
+        },
         {
           "id": "east",
           "kind": "message",
@@ -667,6 +673,50 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "map": {
+      "buttons": [
+        {
+          "id": "it-is-over-there",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.it-is-over-there"
+          }
+        },
+        {
+          "id": "i-will-show-you",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-show-you"
+          }
+        },
+        {
+          "id": "not-possible",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.not-possible"
           }
         },
         {

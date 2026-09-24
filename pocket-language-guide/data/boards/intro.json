@@ -87,16 +87,6 @@
           "replySetId": "greeting"
         },
         {
-          "id": "yourname",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "introductions.what-is-your-name"
-          },
-          "colour": "stay",
-          "replySetId": "understood"
-        },
-        {
           "id": "sorry",
           "kind": "message",
           "phraseRef": {
@@ -122,6 +112,82 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "social-basics.goodbye"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "about",
+          "kind": "submenu",
+          "nodeId": "about",
+          "labelKey": "boards.intro.aboutTitle",
+          "colour": "stay"
+        }
+      ]
+    },
+    "about": {
+      "titleKey": "boards.intro.aboutTitle",
+      "buttons": [
+        {
+          "id": "yourname",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "introductions.what-is-your-name"
+          },
+          "colour": "stay",
+          "replySetId": "understood"
+        },
+        {
+          "id": "tourist",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "introductions.i-am-a-tourist"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "alone",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "introductions.i-am-traveling-alone"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "friend",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "introductions.this-is-my-friend"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "together",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "introductions.we-are-traveling-together"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "spouse",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "introductions.this-is-my-husband-wife"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "child",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "introductions.this-is-my-daughter-son"
           },
           "colour": "stay"
         }

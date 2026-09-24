@@ -108,6 +108,16 @@
           },
           "colour": "money",
           "replySetId": "pay"
+        },
+        {
+          "id": "tablefortwo",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "food-ordering.table-for-two"
+          },
+          "colour": "money",
+          "replySetId": "seating"
         }
       ]
     },

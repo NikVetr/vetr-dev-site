@@ -4182,3 +4182,29 @@ sourced: the punctuation names in Yoruba, Quenya and Klingon, and *doctor* in th
 last two. The "at sign" and "slash" in six languages are transliterated loans and
 the first thing a fluent reader should check.
 
+## Batch T — the boards, audited for what they say
+
+Asked whether the conversation trees had been audited for validity and usefulness:
+they had not — the three earlier board audits measured *reach*, which language
+pairs a board can serve. Two agents walked all eight boards as a traveller and a
+stranger would. Every board is structurally sound: no dead ends, no broken submenu
+returns, no answer that presupposes the stranger's gender, every label naming the
+phrase it opens. What they lacked was coverage, and a third agent applied the
+zero-cost proposals — every one priced with `build_board_index.mjs`'s own rule, and
+the index unchanged afterwards: 51 listeners, 51 owners, 2,550 pairs per board.
+
+Directions gained a numbered-exit entry and a reply set for "show me on the map";
+Emergency swapped the third epinephrine button for "I am pregnant" and moved "my
+child is missing" to the front of Lost; Food gained "a table for two"; Intro gained
+a "Who we are" submenu (the name question and six travelling-companion phrases that
+had no home), keeping Goodbye on the grid; Time's schedule replies gained a clock
+entry; Transport gained "please use the meter" and "tell me where to get off"
+answer sets, the pickup-point question, and the metro station on the top grid; Spa
+gained the price and duration questions. Three things were refused on their own
+terms: two template phrases with a slot no board can fill, an onion-and-garlic row
+that would have cost Yoruba the food board (it already carries the one gap the
+index tolerates), and "what time do you reopen", which is scoped to five siesta
+languages and would have been a dead button for the other forty-six. Shopping's
+grid is full and its three proposals wait for a swap worth making. One real corpus
+gap surfaced: nothing anywhere says "please turn over" on a massage table.
+
