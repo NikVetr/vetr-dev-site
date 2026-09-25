@@ -13,7 +13,8 @@ import {
 } from './app.js';
 import { loadUiLanguage, applyStatic, t } from './i18n.js';
 import { encode, decode, toUnits, unitMs } from '../core/morse.js';
-import { startBeacon, stopBeacon } from './platform/beacon.js';
+import { startBeacon } from './platform/beacon.js';
+import { keepAwake } from './platform/wake.js';
 
 const $ = (/** @type {string} */ id) => /** @type {HTMLElement} */ (document.getElementById(id));
 
@@ -54,8 +55,10 @@ async function main() {
     const units = toUnits(message);
     if (!units.length) return;
     start.textContent = t('signal.stop');
+    // The screen is the signal, so it must not sleep while one is running.
+    keepAwake(true);
     startBeacon({
-      mode: 'morse',
+      mode: message === 'SOS' ? 'sos' : 'morse',
       units,
       unitMs: unitMs(Number(speed.value)),
       // Nothing in the middle -- the middle of the screen is the light, as on the
@@ -65,12 +68,15 @@ async function main() {
       lang: 'und',
       dir: 'ltr',
       dismiss: encode(message).code,
-      onStop: () => { start.textContent = t('signal.start'); },
+      onStop: () => { start.textContent = t('signal.start'); keepAwake(false); },
     });
   };
   start.addEventListener('click', () => signal(text.value));
+  // **SOS is SOS.** The distress signal is the beacon's own fixed 300ms dot -- the
+  // pattern a stranger may recognise, at the pace the board flashes it -- and it
+  // does not follow the speed a sender chose for their own messages. `mode: 'sos'`
+  // is what says so; the units passed alongside are ignored for it.
   sos.addEventListener('click', () => signal('SOS'));
-  addEventListener('pagehide', stopBeacon);
 
   registerOffline();
 }

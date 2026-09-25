@@ -4474,3 +4474,36 @@ only until the next string wave.
 
 Checks: `tsc` clean; board suite 59/59 with Reply in the corner; theme unit test;
 studio, quick-sheet and gallery suites and the gate before the push.
+
+## Reliability I — the beacon, verified and closed
+
+An outside review of 6b392235 listed five findings against the beacon. Each was
+checked against the code before anything changed; all five held, one only in part.
+
+| finding | verdict | where |
+|---|---|---|
+| no central flash-rate limit; 20 wpm strobes at ~8 Hz | true | `core/morse.js` `unitMs`, `ui/platform/beacon.js` used it unclamped |
+| the signaller's SOS followed the chosen speed | true | `ui/signal.js` sent `mode: 'morse'` for SOS |
+| a camera answering after dismissal was never released | true | the late track landed in a closure `stop` had already run over |
+| stop/background/leave did not clean up | partly | explicit stop was complete; no `visibilitychange` anywhere, `pagehide` on the signal page only, no wake lock there |
+| a waiting deploy could reload mid-beacon | true | `applyUpdateIfIdle` asked only for no open dialog; a beacon is a `div` |
+
+**The fixes.** `MIN_UNIT_MS = 170` and `safeUnitMs` live in `core/morse.js`; the
+beacon clamps every unit it is handed, so the ceiling is enforced in the one module
+that flashes and no page's setting can be the thing that bypasses it. The signal
+page offers only the speeds that ceiling allows — 5 and 7 wpm — because a control
+that offers 20 and silently runs 7 is a control that lies. Its SOS button sends
+`mode: 'sos'`, the board's fixed 300ms dot. A `stopped` flag makes a late camera
+release itself. The beacon registers `visibilitychange` and `pagehide` itself and
+removes them on stop, so both pages get the same teardown, and the signal page
+holds a wake lock while flashing. `applyUpdateIfIdle` refuses while a `.beacon` is
+in the document and is nudged by a `beacon-stop` event when it leaves.
+
+**Tested as arithmetic and as failure paths.** `peakFlashRate` lays a pattern on a
+simulated clock and counts the busiest rolling second: a run of dots at the floor
+is under three, at the old 20 wpm it was not, and SOS at its own dot is two.
+`tests/beacon-rate.test.mjs` pins those with no screen and no waiting.
+`tests/signal.spec.js` forces a 20 wpm option into the select and reads the running
+unit off `data-unit` (≥170), checks SOS at 300, fakes a camera that answers 400ms
+after dismissal and counts one `track.stop()`, and hides the page to see the beacon
+go. These are automated checks; no device was flashed.

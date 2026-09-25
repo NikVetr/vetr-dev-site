@@ -384,7 +384,10 @@ export function deferUpdates(isIdle) {
  * calls it from `paint`, and a closing dialog triggers it for everyone else.
  */
 export function applyUpdateIfIdle() {
-  if (!updateWaiting || reloading || !idle()) return;
+  // A running beacon is the busiest a page can be, whatever its own `idle` says:
+  // it is not a state the board's machine knows about, so this is checked here for
+  // every page rather than asked of each predicate.
+  if (!updateWaiting || reloading || !idle() || document.querySelector('.beacon')) return;
   reloading = true;
   window.location.reload();
 }
@@ -395,6 +398,7 @@ export function applyUpdateIfIdle() {
 // imported by a Node test, and an unguarded listener at module scope would make that
 // import throw rather than the test fail on something it meant to check.
 globalThis.document?.addEventListener('close', () => applyUpdateIfIdle(), true);
+globalThis.document?.addEventListener('beacon-stop', () => applyUpdateIfIdle());
 
 function registerWorker() {
 

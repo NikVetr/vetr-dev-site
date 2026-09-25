@@ -116,3 +116,44 @@ export function toUnits(text) {
 export function unitMs(wpm) {
   return Math.round(60000 / (50 * wpm));
 }
+
+/**
+ * The shortest a unit is ever allowed to be, in milliseconds.
+ *
+ * WCAG's general flash threshold is three flashes a second. The fastest Morse can
+ * strobe is a run of dots -- one unit lit, one dark -- so a flash is two units, and
+ * two of these is 340ms: 2.94 a second. The beacon clamps every unit it is handed to
+ * this, so no speed setting, present or future, can be the one that bypasses it.
+ */
+export const MIN_UNIT_MS = 170;
+
+/** @param {number} ms  a unit somebody asked for @returns {number} one that is safe */
+export function safeUnitMs(ms) {
+  return Number.isFinite(ms) && ms > MIN_UNIT_MS ? ms : MIN_UNIT_MS;
+}
+
+/**
+ * The most times any rolling second of the pattern goes from dark to lit.
+ *
+ * The pattern is laid out on a clock twice over, so the repeat's join is counted
+ * too, and every onset asks how many onsets fall within the second that starts at it.
+ * This is what the ceiling is a ceiling on, and it is arithmetic, so the test for it
+ * needs no screen and no waiting.
+ * @param {number[]} units  1 and 3 lit, 0 dark, as `toUnits` gives
+ * @param {number} unitMs
+ */
+export function peakFlashRate(units, unitMs) {
+  /** @type {number[]} */ const onsets = [];
+  let t = 0;
+  for (const beat of [...units, ...units]) {
+    if (beat > 0) onsets.push(t);
+    t += unitMs * Math.max(1, beat);
+  }
+  let peak = 0;
+  for (let i = 0; i < onsets.length; i += 1) {
+    let n = 0;
+    while (i + n < onsets.length && onsets[i + n] < onsets[i] + 1000) n += 1;
+    peak = Math.max(peak, n);
+  }
+  return peak;
+}

@@ -37,10 +37,11 @@
       <label class="signal-speed">
         <span data-i18n="signal.speed">Speed</span>
         <select id="signal-speed">
-          <option value="5">5 wpm</option>
-          <option value="8" selected>8 wpm</option>
-          <option value="12">12 wpm</option>
-          <option value="20">20 wpm</option>
+          <!-- Only speeds the beacon's flash ceiling allows: 7 wpm is a 171ms unit,
+               the floor is 170. Faster settings were offered and silently clamped,
+               which is a control that lies; these two are what it can do. -->
+          <option value="5" selected>5 wpm</option>
+          <option value="7">7 wpm</option>
         </select>
       </label>
       <span class="spacer"></span>

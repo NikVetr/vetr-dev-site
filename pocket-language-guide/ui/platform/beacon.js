@@ -18,8 +18,13 @@
 // a distance where text does not.
 //
 // **Timing is a safety constraint, not a style.** WCAG puts the photosensitive
-// seizure threshold at three flashes per second; the dot below is 300ms, so the
-// fastest this ever gets is a little under two. Do not shorten it.
+// seizure threshold at three flashes per second; the dot below is 300ms, so SOS
+// never gets faster than a little under two. Do not shorten it. A signaller may
+// hand in its own unit, and that unit is clamped here -- `safeUnitMs`, 170ms at the
+// least -- so this module is the one place the ceiling is enforced and no page's
+// speed setting can be the thing that bypasses it.
+
+import { safeUnitMs } from '../../core/morse.js';
 
 /** Morse for SOS, in units: true is lit. Dot 1, dash 3, gap 1, letter gap 3. */
 const DOT = 300;
@@ -106,11 +111,13 @@ export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop, unit
   // SOS is Morse with its pattern and speed fixed; the signaller supplies its own.
   const flashing = mode === 'sos' || mode === 'morse';
   const pattern = mode === 'morse' && units ? units : SOS;
-  const unit = mode === 'morse' && unitMs ? unitMs : DOT;
+  const unit = mode === 'morse' && unitMs ? safeUnitMs(unitMs) : DOT;
   stopBeacon();
   const root = document.createElement('div');
   root.className = `beacon beacon-${mode === 'morse' ? 'sos' : mode}`;
   root.setAttribute('role', 'alert');
+  // The unit actually running, so a test can read the ceiling off the element.
+  root.dataset.unit = String(unit);
 
   const word = document.createElement('p');
   word.className = 'beacon-word';
@@ -204,19 +211,39 @@ export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop, unit
   // Ukrainian imperative would have broken across two lines at the same setting.
   fit?.(word, root);
 
+  let stopped = false;
   if (flashing) {
     step();
-    // The screen starts at once; the lamp joins when the camera answers.
-    acquireTorch().then((got) => { torch = got; });
+    // The screen starts at once; the lamp joins when the camera answers -- unless
+    // the beacon has already been dismissed by then, when the camera is let go at
+    // once. The first version assigned the late track to a closure `stop` had
+    // already run over, and the lamp stayed on until the page died.
+    acquireTorch().then((got) => {
+      if (stopped) got?.release();
+      else torch = got;
+    });
   } else travel();
 
+  // **Leaving is stopping.** A page put in the background has its timers throttled,
+  // so the pattern it would flash is not Morse any more; a page being left has no
+  // screen to flash. Either way the lamp must not be left lit with nothing
+  // watching it, so both are the same tap.
+  const onHide = () => { if (document.visibilityState === 'hidden') stopBeacon(); };
+  document.addEventListener('visibilitychange', onHide);
+  addEventListener('pagehide', stopBeacon);
+
   const stop = () => {
+    stopped = true;
     clearTimeout(timer);
     torch?.release();
     torch = null;
     if (frame !== undefined) cancelAnimationFrame(frame);
+    document.removeEventListener('visibilitychange', onHide);
+    removeEventListener('pagehide', stopBeacon);
     root.remove();
     onStop?.();
+    // Whoever holds page reloads back for a running beacon can let go now.
+    document.dispatchEvent(new Event('beacon-stop'));
   };
   root.addEventListener('click', () => stopBeacon());
   live = { stop };
