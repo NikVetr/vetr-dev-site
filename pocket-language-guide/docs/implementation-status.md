@@ -4609,3 +4609,25 @@ owner's machine, not on the code.**
 
 **iOS.** No macOS here; the iOS project cannot be generated or built. Blocked on
 hardware, accurately.
+
+## Remaining gates, as of the reliability batches
+
+Features existing is not the product being done. What still stands between this
+checkout and a release, by kind of evidence:
+
+- **Automated, missing.** WebKit: the project exists and the smoke set is tagged,
+  but no WebKit run has happened anywhere (host libraries; `npx playwright
+  install-deps webkit` with a password). Five catalogue keys are English-only
+  pending a string wave: `format.theme.parchment`, `personal.replace`,
+  `personal.failed`, and the pre-existing `preview.lockDate/lockTime` floor for
+  Klingon and Quenya.
+- **Emulator, done; device, not.** Persistence, offline start, delivery and its
+  cancellation are emulator results. The torch, the share sheet's destinations,
+  the wake lock's effect on a real screen and speech voices are a phone's to answer.
+- **iOS, nothing.** No Mac, so no project, no build, no simulator. Every iOS line in
+  `docs/native.md` is a plan.
+- **Owner decisions.** Icons, splash, signing, store metadata, an account for the
+  stores — none started, none startable without the owner.
+- **Fluent review.** The owner has forgone human audits; the catalogues and the
+  corpus are subagent-sourced against the reference lists in `content/PROMPTS/`,
+  and that is what they should be read as.
