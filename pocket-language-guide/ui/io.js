@@ -34,14 +34,17 @@ export function loadEdits(target, source) {
   return { overrides: {}, extras: [] };
 }
 
-/** @param {string} target @param {string} source @param {SheetEdits} edits */
+/**
+ * @param {string} target @param {string} source @param {SheetEdits} edits
+ * @returns {Promise<void>} settled when the edits are on disk, or refused
+ */
 export function saveEdits(target, source, edits) {
-  store.set(`${EDIT_KEY}.${target}__${source}`, JSON.stringify(edits));
+  return store.set(`${EDIT_KEY}.${target}__${source}`, JSON.stringify(edits));
 }
 
-/** @param {string} target @param {string} source */
+/** @param {string} target @param {string} source @returns {Promise<void>} */
 export function clearEdits(target, source) {
-  store.remove(`${EDIT_KEY}.${target}__${source}`);
+  return store.remove(`${EDIT_KEY}.${target}__${source}`);
 }
 
 /**
@@ -222,16 +225,15 @@ export function allEdits() {
   return out;
 }
 
-/** @param {Record<string, unknown>} edits keyed by pair */
-export function restoreEdits(edits) {
-  for (const [pair, value] of Object.entries(edits)) {
-    store.set(`${EDIT_KEY}.${pair}`, JSON.stringify(value));
-  }
+/** @param {Record<string, unknown>} edits keyed by pair @returns {Promise<void>} */
+export async function restoreEdits(edits) {
+  await Promise.all(Object.entries(edits).map(([pair, value]) => (
+    store.set(`${EDIT_KEY}.${pair}`, JSON.stringify(value)))));
 }
 
-/** Drop every pair's edits. @returns {number} how many pairs were cleared */
-export function forgetEdits() {
+/** Drop every pair's edits. @returns {Promise<number>} how many pairs were cleared */
+export async function forgetEdits() {
   const keys = [...store.keys(`${EDIT_KEY}.`)];
-  for (const key of keys) store.remove(key);
+  await Promise.all(keys.map((key) => store.remove(key)));
   return keys.length;
 }

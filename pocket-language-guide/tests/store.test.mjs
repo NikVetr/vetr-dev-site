@@ -101,3 +101,37 @@ test('ready is idempotent, because every page calls it', async () => {
   await a;
   assert.equal(store.get('plg.x'), '1');
 });
+
+test('a write says when it has landed, and a refused one says so too', async () => {
+  const { disk } = stage({ native: true });
+  const store = await load('durable');
+  await store.ready();
+  await store.set('plg.k', 'v');
+  assert.equal(disk.get('plg.k'), 'v');
+  // The durable store refuses: the mirror has the value, the promise says it did not
+  // reach the disk, and a caller that says "saved" has something to wait on.
+  const any = /** @type {any} */ (globalThis);
+  any.Capacitor.Plugins.Preferences.set = async () => { throw new Error('disk full'); };
+  await assert.rejects(store.set('plg.k2', 'v2'), /disk full/);
+  assert.equal(store.get('plg.k2'), 'v2');
+  assert.equal(disk.has('plg.k2'), false);
+});
+
+test('a deletion deletes the web copy too, so the migration cannot bring it back', async () => {
+  // Deleted on the device, the key was back on the next launch: the migration copies
+  // forward anything the durable store lacks, and the `localStorage` copy it had
+  // been migrated from was never touched.
+  const { web, disk } = stage({ native: true, local: { 'plg.edits.zh-Hans__en': 'old edits' } });
+  const store = await load('remove');
+  await store.ready();
+  await new Promise((r) => { setTimeout(r, 0); });
+  assert.equal(disk.get('plg.edits.zh-Hans__en'), 'old edits');
+  await store.remove('plg.edits.zh-Hans__en');
+  assert.equal(store.get('plg.edits.zh-Hans__en'), null);
+  assert.equal(disk.has('plg.edits.zh-Hans__en'), false);
+  assert.equal(web.has('plg.edits.zh-Hans__en'), false);
+  // And a second launch finds nothing to migrate.
+  const again = await load('remove2');
+  await again.ready();
+  assert.equal(again.get('plg.edits.zh-Hans__en'), null);
+});

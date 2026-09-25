@@ -128,7 +128,12 @@ export function readPackage(text, known = {}) {
   checkShape(raw, 0, 'package', problems);
   if (problems.length) return { ok: false, problems };
 
-  if (raw.boards) {
+  if (raw.boards !== undefined && !plain(raw.boards)) {
+    // `boards: 123` used to pass: truthy, so it was walked, and `.phrases ?? {}` made
+    // an empty store of it that then replaced the reader's own. A number is not a
+    // store and is said to be one.
+    problems.push('boards: not a set of phrases');
+  } else if (raw.boards) {
     const held = /** @type {any} */ (raw.boards);
     const phrases = held.phrases ?? {};
     const placements = held.placements ?? {};
@@ -137,15 +142,21 @@ export function readPackage(text, known = {}) {
     } else {
       for (const [id, phrase] of Object.entries(phrases)) {
         const p = /** @type {any} */ (phrase);
-        if (p?.id !== id) problems.push(`phrase ${id}: its own id says ${p?.id}`);
-        // Both sides or it cannot be shown. A half-written phrase is a legitimate
-        // saved state on the device that wrote it, but it is not something to carry
-        // to another one and call imported.
-        if (!p?.owner?.trim() || !p?.listener?.trim()) {
-          problems.push(`phrase ${id}: needs a sentence on both sides`);
+        if (!plain(p)) { problems.push(`phrase ${id}: not a phrase`); continue; }
+        // Every field is text, checked as a type before it is read as a value: a
+        // numeric owner used to reach `.trim()` and throw out of the import handler,
+        // which left the reader with no message and a file input that would not
+        // take the next file.
+        for (const field of ['id', 'label', 'owner', 'listener', 'pair']) {
+          if (typeof p[field] !== 'string') problems.push(`phrase ${id}: ${field} is not text`);
         }
-        if (typeof p?.pair !== 'string' || !/^[\w-]+__[\w-]+$/.test(p.pair)) {
-          problems.push(`phrase ${id}: ${p?.pair} is not a language pair`);
+        if (typeof p.id === 'string' && p.id !== id) problems.push(`phrase ${id}: its own id says ${p.id}`);
+        // A half-written phrase travels. It is a legitimate saved state -- the reader
+        // may be coming back to it -- and `resolvePhrase` refuses to show one, so it
+        // arrives exactly as it left: stored, on its screens, and not yet shown.
+        // Refusing it refused the whole copy for one unfinished line.
+        if (typeof p.pair === 'string' && !/^[\w-]+__[\w-]+$/.test(p.pair)) {
+          problems.push(`phrase ${id}: ${p.pair} is not a language pair`);
         }
       }
       for (const [at, ids] of Object.entries(placements)) {
@@ -163,8 +174,18 @@ export function readPackage(text, known = {}) {
       }
     }
   }
-  if (raw.speaker && !plain(raw.speaker)) problems.push('speaker: not a set of answers');
-  if (raw.edits && !plain(raw.edits)) problems.push('edits: not a set of pairs');
+  if (raw.speaker !== undefined && !plain(raw.speaker)) problems.push('speaker: not a set of answers');
+  else if (raw.speaker) {
+    for (const [axis, value] of Object.entries(raw.speaker)) {
+      if (typeof value !== 'string') problems.push(`speaker ${axis}: not text`);
+    }
+  }
+  if (raw.edits !== undefined && !plain(raw.edits)) problems.push('edits: not a set of pairs');
+  else if (raw.edits) {
+    for (const [pair, value] of Object.entries(raw.edits)) {
+      if (!plain(value)) problems.push(`edits ${pair}: not a set of edits`);
+    }
+  }
 
   return problems.length
     ? { ok: false, problems }

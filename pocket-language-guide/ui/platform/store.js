@@ -82,21 +82,28 @@ export function get(key) {
 }
 
 /**
+ * Write a value, and say when it has actually landed.
+ *
+ * The mirror is written first, so a read that follows sees the value at once and no
+ * caller waits on a disk to draw. The promise is the durable write: it settles when
+ * `Preferences` has taken the value, or rejects when it has not -- and on the web it
+ * rejects the way `localStorage` throws when the quota is gone. A caller that tells
+ * the reader "saved" awaits it before saying so; one that cannot show anything
+ * catches it and says so where it can.
  * @param {string} key @param {string} value
- * @throws the way `localStorage` does when the quota is gone -- callers report it
+ * @returns {Promise<void>}
  */
 export function set(key, value) {
   if (mirror) {
     mirror.set(key, value);
-    // Behind the mirror, so a caller never waits on a disk write to draw. A rejection
-    // is not swallowed silently: the reader has already been told the value is saved,
-    // so the console is the only place left to say otherwise.
-    prefs?.set({ key, value }).catch(
-      (/** @type {Error} */ err) => console.warn('[plg] native save failed:', err.message),
-    );
-    return;
+    return prefs ? prefs.set({ key, value }) : Promise.resolve();
   }
-  localStorage.setItem(key, value);
+  try {
+    localStorage.setItem(key, value);
+    return Promise.resolve();
+  } catch (err) {
+    return Promise.reject(err);
+  }
 }
 
 /**
@@ -120,12 +127,20 @@ export function keys(prefix) {
   return out;
 }
 
-/** @param {string} key */
+/**
+ * Delete a key, everywhere it is.
+ *
+ * On a device that means the web copy too. The migration in `ready()` copies forward
+ * anything the durable store lacks, which is right for an upgrade and wrong for a
+ * deletion: a key removed from the durable store alone was back on the next launch,
+ * carried in from the `localStorage` it had been migrated out of. Deleted is deleted.
+ * @param {string} key @returns {Promise<void>}
+ */
 export function remove(key) {
+  localStorage.removeItem(key);
   if (mirror) {
     mirror.delete(key);
-    prefs?.remove({ key }).catch(() => {});
-    return;
+    return prefs ? prefs.remove({ key }) : Promise.resolve();
   }
-  localStorage.removeItem(key);
+  return Promise.resolve();
 }

@@ -39,6 +39,14 @@ const BANNER_KEY = 'plg.banner-hidden';
 const SOLVE_DEBOUNCE_MS = 260;
 const THEME_IDS = ['latex-reference', 'cvd-safe', 'dark', 'parchment'];
 
+/**
+ * An edit the disk refused. The studio has no "saved" message to make a liar of --
+ * edits are kept as they are made -- so the console is where this goes; the editor
+ * and the portable copy, which do say "saved" and "loaded", await theirs.
+ * @param {Error} err
+ */
+const unsaved = (err) => console.warn('[plg] card edits not saved:', err.message);
+
 const $ = (/** @type {string} */ id) => /** @type {HTMLElement} */ (document.getElementById(id));
 
 /**
@@ -282,7 +290,7 @@ async function main() {
               [conceptId]: { values, include: held?.include ?? true },
             },
           };
-          saveEdits(spec.target, spec.source, edits);
+          saveEdits(spec.target, spec.source, edits).catch(unsaved);
           schedule();
         },
         onToggle: (patch) => {
@@ -326,7 +334,7 @@ async function main() {
         edits: () => edits,
         onAdd: (entry) => {
           edits = { ...edits, extras: [...edits.extras, entry] };
-          saveEdits(spec.target, spec.source, edits);
+          saveEdits(spec.target, spec.source, edits).catch(unsaved);
           // A new item is worth nothing if its section is switched off.
           spec = {
             ...spec,
@@ -499,7 +507,7 @@ async function main() {
                 [conceptId]: { values: next, include: held?.include ?? true },
               },
             };
-            saveEdits(spec.target, spec.source, edits);
+            saveEdits(spec.target, spec.source, edits).catch(unsaved);
             schedule();
           },
           onReveal: (conceptId) => {
@@ -719,7 +727,7 @@ async function main() {
     try {
       const result = importSheetCsv(await file.text(), ctx.corpus, edits);
       edits = result.edits;
-      saveEdits(spec.target, spec.source, edits);
+      saveEdits(spec.target, spec.source, edits).catch(unsaved);
       const skipped = result.problems.length
         ? t('studio.importSkipped', { problems: result.problems.slice(0, 8).join('\n') })
         : '';
@@ -740,7 +748,7 @@ async function main() {
     reset.className = 'ghost small';
     reset.textContent = t('studio.discardEdits');
     reset.addEventListener('click', () => {
-      clearEdits(spec.target, spec.source);
+      clearEdits(spec.target, spec.source).catch(unsaved);
       edits = loadEdits(spec.target, spec.source);
       schedule();
     });

@@ -33,25 +33,52 @@ export function personalWiring({ onChanged, save, boards }) {
       edits: allEdits(),
     }),
     read: (/** @type {string} */ text) => readPackage(text, boards ? { boards } : {}),
-    apply: (/** @type {import('../core/personal.js').PersonalPackage} */ data) => {
-      // Written in the order they are read back: the board store last, because it is
-      // the one with a queued write that can be refused, and a reader who has been
-      // told "loaded" should not find the phrases missing.
-      if (data.speaker) writeProfile(data.speaker);
-      if (data.edits) restoreEdits(data.edits);
-      // **`onChanged` waits for the board store.** Its writes are serialised behind
-      // a queue, so calling back straight away reads the store as it was a moment
-      // ago -- which showed up as an import that reported success while the old
-      // buttons were still on the grid. `finally`, not `then`: a refused write still
-      // has to repaint, or the screen keeps claiming something that did not happen.
-      if (data.boards) replaceAll(data.boards).catch(() => {}).finally(onChanged);
-      else onChanged();
+    apply: async (/** @type {import('../core/personal.js').PersonalPackage} */ data) => {
+      // **Whole, or undone whole.** The three stores are written together and every
+      // write is awaited; if any is refused, what was on the device before is put
+      // back -- all three parts, so a package that carried no speaker answers cannot
+      // leave the device with the file's phrases and its own old answers half-mixed
+      // -- and the refusal is what the reader is told. `onChanged` runs either way,
+      // because the screen has to show whichever state actually stands.
+      const before = buildPackage({ boards: readPersonal().data, speaker: readProfile(), edits: allEdits() });
+      try {
+        await put(data, false);
+      } catch (err) {
+        await put(before, true).catch(() => {});
+        throw err;
+      } finally {
+        onChanged();
+      }
       return Object.keys(data.boards?.phrases ?? {}).length;
     },
-    forget: () => {
-      forgetEdits();
-      writeProfile({});
-      forgetAll().catch(() => {}).finally(onChanged);
+    forget: async () => {
+      try {
+        await Promise.all([forgetEdits(), writeProfile({}), forgetAll()]);
+      } finally {
+        onChanged();
+      }
     },
   };
+}
+
+/**
+ * Write a package's parts to the three stores.
+ *
+ * Loading a copy writes only the parts it carries -- a file with phrases and no
+ * speaker answers leaves the device's answers alone, which is what a plain backup
+ * restore wants. Putting things *back* after a failure writes all three, with an
+ * absent part meaning empty, because the copy taken beforehand is the whole state.
+ * @param {import('../core/personal.js').PersonalPackage} pkg
+ * @param {boolean} whole
+ */
+async function put(pkg, whole) {
+  /** @type {Promise<unknown>[]} */ const jobs = [];
+  if (pkg.speaker || whole) jobs.push(writeProfile(pkg.speaker ?? {}));
+  if (pkg.edits || whole) {
+    jobs.push(whole
+      ? forgetEdits().then(() => restoreEdits(pkg.edits ?? {}))
+      : restoreEdits(pkg.edits ?? {}));
+  }
+  if (pkg.boards || whole) jobs.push(pkg.boards ? replaceAll(pkg.boards) : forgetAll());
+  await Promise.all(jobs);
 }

@@ -4507,3 +4507,45 @@ is under three, at the old 20 wpm it was not, and SOS at its own dot is two.
 unit off `data-unit` (≥170), checks SOS at 300, fakes a camera that answers 400ms
 after dismissal and counts one `track.stop()`, and hides the page to see the beacon
 go. These are automated checks; no device was flashed.
+
+## Reliability II — storage that says when it has landed, and a copy that loads whole or not at all
+
+The review's storage and import findings, checked first. There is no IndexedDB in
+this app; the store is `localStorage` on the web and Capacitor `Preferences` behind
+an in-memory mirror on a device (`ui/platform/store.js`).
+
+| finding | verdict | where |
+|---|---|---|
+| "saved" before the write lands; failures not surfaced | partly | the board editor already awaited a queued, loud write; the *native* tail was fire-and-forget with a `console.warn`, and the import swallowed its board write |
+| writes not serialised | partly | the board queue existed but awaited only the synchronous mirror write; sheet edits were unqueued |
+| migration re-imports deleted data | true | `remove()` never touched the `localStorage` copy the migration reads forward from |
+| wrong types throw or corrupt | true | `boards: 123` became an empty store and replaced the reader's own; a numeric `owner` threw out of the handler |
+| partial apply, success before writes finish, no snapshot | partly | speaker and edits written, board write swallowed; "loaded N" said synchronously |
+| unfinished phrases dropped | false as stated | they were *refused*, which refused the whole copy for one draft |
+
+**The store's promise is the durable write.** `set` writes the mirror, then returns
+`Preferences`' own promise (on the web, a promise that rejects the way `localStorage`
+throws). `remove` deletes the web copy as well, so the forward-only migration has
+nothing to bring back; the migration itself is unchanged, because with both copies
+gone on delete it is already one-way. The board queue awaits the write, so it is a
+chain on a device too. `saveEdits`, `restoreEdits`, `forgetEdits`, `clearEdits` and
+`writeProfile` return their promises; the studio and the settings dialog, which have
+no "saved" message to make a liar of, catch and warn; everything that *does* say
+saved, loaded or deleted awaits first.
+
+**Loading a copy is whole or undone whole.** `apply` takes a copy of the device's
+three parts, writes the package's parts together, and on any refusal writes the
+copy back — all three, with an absent part meaning empty — before rethrowing; the
+dialog says "loaded N" only after the writes settle and, on failure, says what was
+put back. A device with phrases on it is asked first, with the counts on both
+sides. `readPackage` checks every field's type before reading it as a value:
+`boards` must be an object, each phrase's five fields text, speaker answers text,
+edits objects. A half-written phrase now travels — the board already refuses to
+*show* one until both sides are there, which is the right gate — instead of
+refusing the whole file.
+
+Tests: `tests/personal.test.mjs` adds the numeric `boards`, numeric `owner`,
+non-text speaker and edits cases and the travelling draft; `tests/store.test.mjs`
+adds a refused native write that rejects while the mirror holds the value, and a
+deletion that a second launch cannot resurrect. Two catalogue keys,
+`personal.replace` and `personal.failed`, are English-only until the next wave.

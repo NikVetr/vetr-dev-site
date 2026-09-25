@@ -44,9 +44,12 @@ export function readProfile() {
   }
 }
 
-/** @param {import('../core/speaker.js').SpeakerProfile} profile */
+/**
+ * @param {import('../core/speaker.js').SpeakerProfile} profile
+ * @returns {Promise<void>} settled when the profile is on disk, or refused
+ */
 export function writeProfile(profile) {
-  store.set(KEY, JSON.stringify(profile));
+  return store.set(KEY, JSON.stringify(profile));
 }
 
 /**
@@ -116,7 +119,7 @@ export function openSpeakerSettings({ axes, languages, profile, onChange, extra 
 
   const panel = /** @type {HTMLDialogElement} */ (el('dialog', { class: 'speaker-settings' }));
   const commit = () => {
-    writeProfile(held);
+    writeProfile(held).catch((err) => console.warn('[plg] speaker profile not saved:', err.message));
     onChange({ ...held });
   };
 
@@ -228,9 +231,10 @@ export function speakerControl({ axes, languages, profile, onChange, extra }) {
  * put in a URL, a log or an analytics event — some of it is dietary and medical.
  * @param {object} config
  * @param {() => import('../core/personal.js').PersonalPackage} config.gather
- * @param {(data:import('../core/personal.js').PersonalPackage) => number} config.apply
- *   returns how many phrases arrived
- * @param {() => void} config.forget
+ * @param {(data:import('../core/personal.js').PersonalPackage) => Promise<number>} config.apply
+ *   settles with how many phrases arrived once every write has landed, or rejects
+ *   with what was put back in place
+ * @param {() => Promise<void>} config.forget
  * @param {(text:string) => ReturnType<typeof import('../core/personal.js').readPackage>} config.read
  * @param {(blob:Blob, name:string) => void} config.save
  */
@@ -278,19 +282,47 @@ export function personalSection({ gather, apply, forget, read, save }) {
       );
       status.classList.add('speaker-refused');
     } else {
-      status.classList.remove('speaker-refused');
-      status.textContent = t('personal.loaded', { phrases: String(apply(got.data)) });
+      // **What it replaces, before it does.** A copy loaded over a device with work
+      // on it is the one import that can lose something, so that case asks first --
+      // with the counts on both sides -- and a device with nothing to lose is not
+      // asked. Then "loaded" is said only after every write has landed; a write that
+      // fails puts the device's own data back and says that instead.
+      const here = gather();
+      const have = Object.keys(here.boards?.phrases ?? {}).length;
+      const asked = !have || globalThis.confirm(t('personal.replace', {
+        phrases: String(Object.keys(got.data.boards?.phrases ?? {}).length),
+        pairs: String(Object.keys(got.data.edits ?? {}).length),
+        have: String(have),
+      }));
+      if (asked) {
+        try {
+          const count = await apply(got.data);
+          status.classList.remove('speaker-refused');
+          status.textContent = t('personal.loaded', { phrases: String(count) });
+        } catch (err) {
+          status.replaceChildren(t('personal.failed'), ' ',
+            el('span', { lang: 'en', dir: 'ltr', text: /** @type {Error} */ (err).message }));
+          status.classList.add('speaker-refused');
+        }
+      }
     }
     file.value = '';
   });
 
   const wipe = el('button', { type: 'button', class: 'chip', text: t('personal.forget') });
-  wipe.addEventListener('click', () => {
+  wipe.addEventListener('click', async () => {
     // Confirmed, because the saved copy is the only way back and there is no server
-    // holding a second one.
+    // holding a second one. "Deleted" waits for the deletes.
     if (!globalThis.confirm(t('personal.confirm'))) return;
-    forget();
-    status.textContent = t('personal.gone');
+    try {
+      await forget();
+      status.classList.remove('speaker-refused');
+      status.textContent = t('personal.gone');
+    } catch (err) {
+      status.replaceChildren(t('personal.failed'), ' ',
+        el('span', { lang: 'en', dir: 'ltr', text: /** @type {Error} */ (err).message }));
+      status.classList.add('speaker-refused');
+    }
   });
 
   return el('fieldset', { class: 'speaker-block' }, [

@@ -574,6 +574,8 @@
   "personal.confirm": "Delete every phrase you have written, your settings and your saved card edits? This cannot be undone, and a saved copy is the only way back.",
   "personal.nothing": "You have not written anything yet, so there is nothing to save.",
   "personal.loaded": "Loaded {phrases} phrases. Nothing was changed until now.",
+  "personal.replace": "This copy holds {phrases} phrases and {pairs} edited cards. Loading it replaces the {have} phrases on this device. Continue?",
+  "personal.failed": "Not loaded — your own data was put back:",
   "personal.refused": "Not loaded — nothing was changed:",
   "personal.gone": "Deleted.",
   "settings.open": "Settings",

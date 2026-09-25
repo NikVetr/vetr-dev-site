@@ -79,7 +79,9 @@ test('everything wrong is reported at once, and nothing is applied', () => {
   assert.equal(got.ok, false);
   const said = got.ok === false ? got.problems.join('\n') : '';
   assert.match(said, /its own id says b/);
-  assert.match(said, /sentence on both sides/);
+  // A missing label is a wrong type, not a missing sentence: drafts with an empty
+  // side are legitimate and travel (tested below); a field that is not text is not.
+  assert.match(said, /label is not text/);
   assert.match(said, /not a language pair/);
   assert.match(said, /the same phrase twice/);
   assert.match(said, /no phrase missing/);
@@ -118,4 +120,33 @@ test('an oversized file is refused before it is parsed', () => {
   const got = readPackage(huge);
   assert.equal(got.ok, false);
   assert.match(got.ok === false ? got.problems[0] : '', /over the/);
+});
+
+test('a wrong type is refused, not thrown at, and does not become an empty store', () => {
+  // `boards: 123` used to read as a store with no phrases and replace the reader's own.
+  const number = readPackage(JSON.stringify({ version: PACKAGE_VERSION, created: 'x', boards: 123 }));
+  assert.equal(number.ok, false);
+  assert.ok(!number.ok && number.problems.some((p) => p.startsWith('boards:')));
+  // A numeric owner reached `.trim()` and threw out of the import handler.
+  const owner = readPackage(JSON.stringify({
+    version: PACKAGE_VERSION, created: 'x',
+    boards: { schemaVersion: 1, phrases: { p1: { ...MINE.phrases.p1, owner: 5 } }, placements: {} },
+  }));
+  assert.equal(owner.ok, false);
+  assert.ok(!owner.ok && owner.problems.includes('phrase p1: owner is not text'));
+  // Speaker answers and edits are checked the same way.
+  const speaker = readPackage(JSON.stringify({ version: PACKAGE_VERSION, created: 'x', speaker: { speaker_gender: 1 } }));
+  assert.ok(!speaker.ok && speaker.problems.includes('speaker speaker_gender: not text'));
+  const edits = readPackage(JSON.stringify({ version: PACKAGE_VERSION, created: 'x', edits: { 'zh-Hans__en': 'no' } }));
+  assert.ok(!edits.ok && edits.problems.includes('edits zh-Hans__en: not a set of edits'));
+});
+
+test('a half-written phrase travels, and arrives still unfinished', () => {
+  // A draft is a legitimate saved state on the device that wrote it, and refusing
+  // it refused the whole copy for one unfinished line. It goes through whole; the
+  // board refuses to *show* it until both sides are there, which is the right gate.
+  const draft = { ...MINE, phrases: { p1: { ...MINE.phrases.p1, listener: '' } } };
+  const got = round({ boards: draft }, KNOWN);
+  assert.equal(got.ok, true);
+  assert.equal(got.ok && got.data.boards?.phrases.p1.listener, '');
 });

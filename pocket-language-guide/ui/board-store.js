@@ -108,9 +108,11 @@ let queue = Promise.resolve();
 
 /** @param {BoardPersonal} data */
 export function write(data) {
-  const done = queue.then(() => {
+  const done = queue.then(async () => {
     try {
-      store.set(KEY, JSON.stringify(data));
+      // Awaited, so the chain is a chain on a device too: the store's promise is the
+      // durable write, and the next save cannot start until this one has landed.
+      await store.set(KEY, JSON.stringify(data));
     } catch (err) {
       // Quota, or storage refused. Loud, because the reader thinks they just saved.
       throw new Error(`could not save your buttons: ${/** @type {Error} */ (err).message}`);
