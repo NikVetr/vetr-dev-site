@@ -328,11 +328,20 @@ function setWantOpen(open, chosen) {
 function foldOnScroll(toggle) {
   const narrow = matchMedia('(max-width: 1080px)');
   if (!want) return;
+  let foldedByScroll = false;
   const check = () => {
     if (!narrow.matches) { want.classList.remove('want-floating'); return; }
-    const past = scrollY > want.offsetTop + toggle.offsetHeight - headerHeight();
+    // Past the whole grid, not past its toggle: folding the grid the moment its
+    // top went under the header folded it on the first nudge of a scroll. While any
+    // of it is in view it stays as the reader left it; once it has all gone under
+    // the header the bar takes over.
+    const past = scrollY > want.offsetTop + want.offsetHeight - headerHeight();
     want.classList.toggle('want-floating', past);
-    if (past && toggle.getAttribute('aria-expanded') === 'true') setWantOpen(false);
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    // What the scroll folded, the scroll back unfolds; what the reader folded, or a
+    // choice folded, stays folded until they ask.
+    if (past && open) { setWantOpen(false); foldedByScroll = true; }
+    else if (!past && foldedByScroll) { setWantOpen(true); foldedByScroll = false; }
   };
   addEventListener('scroll', check, { passive: true });
   narrow.addEventListener('change', check);

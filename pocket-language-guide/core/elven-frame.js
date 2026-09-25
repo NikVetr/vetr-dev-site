@@ -160,7 +160,8 @@ function vault(x, y, w, h, colours, bottom) {
 }
 
 /** @param {SheetSpec} spec @param {import('./types.js').Face} face
- * @param {{left:number,top:number,width:number,height:number,colWidth:number,columnGap:number}} box
+ * @param {{left:number,top:number,width:number,height:number,colWidth:number,columnGap:number,
+ *   gaps:number[], colX:(c:number)=>number}} box
  * @param {{top:number,bottom:number}} bands @param {string} ink @returns {PathMark[]} */
 export function elvenFrame(spec, face, box, bands, ink) {
   const inset = elvenInset(spec);
@@ -174,9 +175,10 @@ export function elvenFrame(spec, face, box, bands, ink) {
   /** @type {PathMark[]} */ const out = [];
   /** @type {{x:number,w:number,start:number,end:number,column:number}[]} */ const rails = [];
   for (let c = 0; c <= g.columns; c++) {
-    const colX = box.left + c * (box.colWidth + box.columnGap);
-    const x = c === 0 ? left : c === g.columns ? right : colX - box.columnGap + 0.5;
-    const w = c === 0 || c === g.columns ? outerW : box.columnGap - 1;
+    const colX = c < g.columns ? box.colX(c) : box.left + box.width;
+    const gap = c > 0 && c < g.columns ? box.gaps[c - 1] : box.columnGap;
+    const x = c === 0 ? left : c === g.columns ? right : colX - gap + 0.5;
+    const w = c === 0 || c === g.columns ? outerW : gap - 1;
     const outer = c === 0 || c === g.columns;
     const start = outer || !bands.top ? top + bandH * 0.94 : box.top;
     const end = outer || !bands.bottom ? bottom + bandH * 0.06 : box.top + box.height;
@@ -217,7 +219,8 @@ export function elvenFrame(spec, face, box, bands, ink) {
   }
   // Capitals grow from section rules, wholly within the gutter.
   for (const hit of face.hits.filter(h => !h.conceptId)) {
-    const c = Math.round((hit.x - box.left) / (box.colWidth + box.columnGap));
+    let c = 0;
+    while (c + 1 < g.columns && box.colX(c + 1) <= hit.x + 0.1) c += 1;
     const r = rails.filter(r => r.column === c && r.x + r.w <= hit.x + 0.01).at(-1);
     if (!r) continue;
     const endY = hit.y + hit.h - 1;
@@ -230,7 +233,7 @@ export function elvenFrame(spec, face, box, bands, ink) {
   }
   // Empty column feet become arched courts attached to the bottom frame.
   for (let c = 0; c < g.columns; c++) {
-    const x = box.left + c * (box.colWidth + box.columnGap);
+    const x = box.colX(c);
     const hits = face.hits.filter(hit => Math.abs(hit.x - x) < 0.1);
     if (!hits.length) continue;
     const from = rails.filter(r => r.column === c).at(-1);

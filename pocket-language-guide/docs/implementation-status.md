@@ -4347,3 +4347,84 @@ page scrolls to it, under the floating bar.
 `Capacitor.getPlatform()` is `android`, no console error, Converse opens the board
 picker. `docs/native.md` has the detail.
 
+
+## Batch X — two more screenshots, and the dark the phone is read in
+
+**The voices.** The list beside the speeds carried the best eight; the phone had
+more, and the one wanted was not among them. It carries them all now and scrolls,
+in a column whose height is bounded by the screen rather than the count.
+
+**Turned is a setting.** The Turn control was a fact about one message, kept in a
+module variable and lost on the way back to the grid. It is `turned` in
+`ui/board-display.js` now, written when pressed, and the answer grid turns with the
+sentence — the stranger chooses an answer from the same side of the table they read
+it — while the owner's context grid stays upright. The control moved into the bar
+that names the topic and the pair, which moved to the foot: both bars are the
+owner's, the top of the screen is the stranger's. The white outline stays on the
+message after it turns; it had been part of the unturned state's paint.
+
+**Answers filled at random.** A tap left the answer button tinted in its role's
+colour, and the grid came back with one answer filled in. The hover tint is scoped
+to `(hover: hover)`; a phone gets none. The context grid sits on the surface colour
+so its white buttons read as buttons.
+
+**Three boards.** Lodging (requests, room problems, laundry), sights and tickets
+(entrance, paying) and pharmacy (symptoms, over the counter, dosage, allergies) —
+the sections the audit had found under-served — authored against the corpus, with
+the English keys here and the fifty other catalogues in the same wave that carries
+the rest of this batch's strings.
+
+**Dark mode.** The screen follows the device, and the setting in the board's dialog
+and the studio's panel can pin it: `ui/theme.js`, `light-dark()` tokens, a head
+script that sets `[data-theme]` before paint. `data/themes/dark.json` is the
+palette for a card exported dark, and the solver paints non-white paper as a rect
+so the renderers' white-is-nothing rule holds. `summary.md` has the reasoning.
+
+**Bifold and trifold.** `geometry.fold` widens the gutters at the creases by
+`FOLD_GUTTER` and draws a dashed fold line down each on every face; `contentBox`
+hands the uneven gutters to the ornaments, the handles and the frame as `gaps` and
+`colX`. Rendered: a four-column face with `fold: 2` has its line at x=252 and no
+column touching it. The control offers only the folds the column count divides by.
+
+**Passport.** Two card presets, closed (88×125mm) and open (176×125mm, four
+columns): the size a traveller already carries a pocket for.
+
+**The landing fold.** The grid folded on the first nudge of a scroll — the threshold
+was its top passing under the header. It is the grid's bottom now, so while any of
+it is in view it stays as the reader left it; what the scroll folded the scroll back
+unfolds, and a grid the reader closed stays closed. Fold and unfold transition
+(`allow-discrete`, `@starting-style`). Probed at 390px: 80px of scroll leaves it
+open, 2500px folds it and floats the bar, back to 0 reopens it, and a manual close
+survives the round trip.
+
+**"…and I want to speak."** The landing label reads as the second half of the
+header's sentence.
+
+**The strings, in fifty-one catalogues.** Four Sonnet waves of thirteen languages,
+briefed against `content/PROMPTS/interface-strings.md`, for the thirty-four keys
+this batch added and the changed `gallery.wantLabel`. Most catalogues already had
+the "and" in their label from the earlier wave (`languages.csv`'s `speak_label`
+design put it there); the ones that did not — am, hu, ja, km, kn, ko, lo, ml, or,
+te, th, tlh, yo, qya — have it now, and ar and fa gained the leading ellipsis they
+had dropped. Reuse over translation throughout: board titles from the printed
+section titles, "What is wrong?" from the emergency board's own heading, the fold
+heading from `format.finish.fold`. Omissions, all recorded in the files' `_note`s:
+Klingon lacks the fold, appearance and pharmacy vocabulary; Quenya has `Mórë` for
+dark and nothing attested for the rest. `preview.lockDate/lockTime` stay out of
+every real locale by design — `ui/preview.js` formats them through CLDR and reads the
+keys only as the floor under Klingon and Quenya — and one wave that added them was
+reverted to the convention. Khmer's four `signal.*` keys were re-verified as
+unsourceable (no Khmer term for Morse in any dictionary of record or on Khmer
+Wikipedia) and stay on the English floor.
+
+**A rounding that would have cost 2,809 packs.** The first `colX` summed the gaps
+left of a column, which put column two at 131.162 where the shipped packs say
+131.163, and the gallery's byte-identity test caught it. The flat card is written
+exactly as it always was — `c * (colWidth + columnGap)` — with the fold gutters
+added on top, so a fresh solve of an unfolded card is the shipped face to the byte.
+
+Checks: `tsc` clean; unit suite 679/679; gate 9/9 after the shell rebuild; full
+Playwright 196/203 before the shell rebuild with the six offline failures and one
+gallery failure re-run green after it (the offline suite needed the new files in
+the shell manifest; the gallery one was the rounding above); board and studio
+suites re-run after the catalogues landed.

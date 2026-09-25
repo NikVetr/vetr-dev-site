@@ -381,7 +381,12 @@ function fitCells(root, cellSel = '.board-cell', labelSel = '.board-cell-label')
       // Height from the box, width from the ink: see `widestLine`. Measuring width
       // with `scrollWidth` here reported the cell's own width whatever the text did,
       // so five of the eight topic labels were set at a size that broke a word.
-      return label.scrollHeight <= room.h + 1 && widestLine(label) <= lineRoom(label);
+      // The block axis is across the cell when the grid is turned, and a label that
+      // overflows it did so out of the cell's side: the one turned answer of nine
+      // that wrapped to five lines drew its last character below its button.
+      const blocked = vertical(label)
+        ? label.scrollWidth <= room.w + 1 : label.scrollHeight <= room.h + 1;
+      return blocked && widestLine(label) <= lineRoom(label);
     };
     let lo = MIN_CELL_PX;
     let hi = MAX_CELL_PX;
@@ -472,6 +477,8 @@ function watchAnswers(list) {
  * @param {(id:string)=>void} [config.onVoice]  the reader picked a voice
  * @param {string} [config.voiceLabel]        the voice column's heading
  * @param {string} [config.voiceAutoLabel]    the automatic pick's label
+ * @param {boolean} [config.turned]          whether the sentence starts sideways
+ * @param {(turned:boolean)=>void} [config.onTurn]  the owner turned it
  * @param {{owner:boolean, roman:boolean, ipa:boolean, turn?:boolean}} [config.show]  what the reader
  *   has asked the second line to carry; the controls are gated by the caller
  * @param {(reason:string)=>string} [config.speakError]  a speech failure's `reason`
@@ -481,6 +488,7 @@ export function renderMessage(stage, phrase,
   { onDismiss, onReply, replyLabel, incoming, colour, onSpeak, speakLabel = '',
     rate = 1, onRate, rateLabel = '', speakError,
     voices = [], voiceId = '', onVoice, voiceLabel = '', voiceAutoLabel = '',
+    turned = false, onTurn,
     show = { owner: true, roman: true, ipa: false, turn: true } }) {
   stage.replaceChildren();
   stage.hidden = false;
@@ -638,12 +646,13 @@ export function renderMessage(stage, phrase,
       rateButton.setAttribute('aria-haspopup', 'menu');
       // The voices beside the speeds, when there is a choice: the two are the same
       // decision -- how this voice reads -- and a reader who wants a different one
-      // should not have to find the settings dialog to say so. The best eight, with
-      // the automatic pick first; the dialog still lists them all.
+      // should not have to find the settings dialog to say so. All of them, the
+      // automatic pick first, in a column that scrolls -- the desktop offers five
+      // hundred, and a reader who wants the ninth should not need another screen.
       const aside = onVoice && voices.length > 1 ? {
         title: voiceLabel,
         items: [{ label: voiceAutoLabel, current: !voiceId, run: () => onVoice('') },
-          ...voices.slice(0, 8).map((v) => ({ label: v.name, current: v.id === voiceId, run: () => onVoice(v.id) }))],
+          ...voices.map((v) => ({ label: v.name, current: v.id === voiceId, run: () => onVoice(v.id) }))],
       } : undefined;
       rateButton.addEventListener('click', () => openBoardMenu(rateButton,
         RATES.map((r) => ({ label: `${r}\u00d7`, current: r === rate, run: () => onRate(r) })), aside));
@@ -677,7 +686,8 @@ export function renderMessage(stage, phrase,
   }
   // Off only if the reader has said so: it is the control that makes a phone usable
   // held out across a counter, and the default is to have it.
-  if (show.turn !== false) controls.append(turnControl(stage, surface, big));
+  stage.classList.toggle('board-stage-turned', turned);
+  if (show.turn !== false) controls.append(turnControl(stage, surface, big, turned, onTurn));
   // A sibling of the surface, never a child: a button inside a button is invalid,
   // and being a sibling is what structurally stops a control's click reaching the
   // dismiss handler. The row is always drawn now, because the turn control is always
@@ -698,7 +708,6 @@ export function renderMessage(stage, phrase,
  * page: a preference this cheap to re-make is not worth a stored key, and a board
  * that opened sideways after a restart would be a surprise nobody asked for.
  */
-let turned = false;
 
 /**
  * The control that turns the message sideways, and the reason it is a control.
@@ -713,8 +722,10 @@ let turned = false;
  * survives being drawn at 22 pixels.
  *
  * @param {HTMLElement} stage @param {HTMLElement} surface @param {HTMLElement} text
+ * @param {boolean} turned  where it starts
+ * @param {(turned:boolean)=>void} [onTurn]  told on every press, so the choice can be kept
  */
-function turnControl(stage, surface, text) {
+function turnControl(stage, surface, text, turned, onTurn) {
   const button = document.createElement('button');
   button.type = 'button';
   button.className = 'board-control board-turn';
@@ -730,9 +741,9 @@ function turnControl(stage, surface, text) {
     + ' stroke-width="2" stroke-linecap="round"/>'
     + '<path d="M13.6 14 13.6 21.2 7.2 17.6Z" fill="currentColor"/>';
   button.append(svg);
-  stage.classList.toggle('board-stage-turned', turned);
   button.addEventListener('click', () => {
     turned = !turned;
+    onTurn?.(turned);
     button.setAttribute('aria-pressed', String(turned));
     stage.classList.toggle('board-stage-turned', turned);
     // The box is a different shape now, so the size that filled the old one is the
@@ -845,11 +856,14 @@ function fitFoot(box) {
  * @param {()=>void} config.onCancel
  * @param {string} config.closeLabel  in the listener's language
  * @param {import('../core/conversation.js').ColourRole} [config.colour]
+ * @param {boolean} [config.turned]  the answers set sideways, as the sentence was
  */
-export function renderReply(stage, question, answers, { onAnswer, onCancel, closeLabel, colour }) {
+export function renderReply(stage, question, answers, { onAnswer, onCancel, closeLabel, colour, turned = false }) {
   stage.replaceChildren();
   stage.hidden = false;
   stage.className = 'board-stage';
+  // The answers are the stranger's to read, so they turn with the sentence.
+  if (turned) stage.classList.add('board-stage-turned');
   // The question's own colour, so the answers read as part of the same exchange
   // rather than as a new screen that happens to have appeared.
   if (colour) stage.classList.add(`board-role-${colour}`);

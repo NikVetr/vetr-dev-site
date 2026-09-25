@@ -1,0 +1,692 @@
+{
+  "schemaVersion": 1,
+  "id": "pharmacy",
+  "titleKey": "boards.pharmacy.title",
+  "rootNodeId": "main",
+  "nodes": {
+    "main": {
+      "buttons": [
+        {
+          "id": "prescription",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.do-i-need-a-prescription"
+          },
+          "colour": "alert",
+          "replySetId": "yes-no"
+        },
+        {
+          "id": "can-get-here",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.can-i-get-this-medicine-here"
+          },
+          "colour": "comm",
+          "replySetId": "stock"
+        },
+        {
+          "id": "all-night-pharmacy",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.where-is-an-all-night-pharmacy"
+          },
+          "colour": "move",
+          "replySetId": "location"
+        },
+        {
+          "id": "which-pharmacy-open",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.which-pharmacy-is-open-now"
+          },
+          "colour": "move",
+          "replySetId": "location"
+        },
+        {
+          "id": "symptoms",
+          "kind": "submenu",
+          "nodeId": "symptoms",
+          "labelKey": "boards.pharmacy.symptoms",
+          "colour": "alert"
+        },
+        {
+          "id": "otc",
+          "kind": "submenu",
+          "nodeId": "otc",
+          "labelKey": "boards.pharmacy.otc",
+          "colour": "money"
+        },
+        {
+          "id": "dosage",
+          "kind": "submenu",
+          "nodeId": "dosage",
+          "labelKey": "boards.pharmacy.dosage",
+          "colour": "stay"
+        },
+        {
+          "id": "allergies",
+          "kind": "submenu",
+          "nodeId": "allergies",
+          "labelKey": "boards.pharmacy.allergies",
+          "colour": "alert"
+        },
+        {
+          "id": "severe",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.the-pain-is-severe"
+          },
+          "colour": "alert",
+          "replySetId": "noted"
+        },
+        {
+          "id": "infected",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.i-think-it-is-infected"
+          },
+          "colour": "alert",
+          "replySetId": "noted"
+        },
+        {
+          "id": "pregnancy-safe",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.is-this-safe-during-pregnancy"
+          },
+          "colour": "comm",
+          "replySetId": "yes-no"
+        },
+        {
+          "id": "thanks",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.thank-you"
+          },
+          "colour": "stay"
+        }
+      ]
+    },
+    "symptoms": {
+      "titleKey": "boards.pharmacy.symptomsTitle",
+      "buttons": [
+        {
+          "id": "fever",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.i-have-a-fever"
+          },
+          "colour": "alert",
+          "replySetId": "noted"
+        },
+        {
+          "id": "headache",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.i-have-a-headache"
+          },
+          "colour": "alert",
+          "replySetId": "noted"
+        },
+        {
+          "id": "cough",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.i-have-a-cough"
+          },
+          "colour": "alert",
+          "replySetId": "noted"
+        },
+        {
+          "id": "sore-throat",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.i-have-a-sore-throat"
+          },
+          "colour": "alert",
+          "replySetId": "noted"
+        },
+        {
+          "id": "stomach-ache",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.i-have-a-stomach-ache"
+          },
+          "colour": "alert",
+          "replySetId": "noted"
+        },
+        {
+          "id": "diarrhea",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.i-have-diarrhea"
+          },
+          "colour": "alert",
+          "replySetId": "noted"
+        },
+        {
+          "id": "vomiting",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.i-am-vomiting"
+          },
+          "colour": "alert",
+          "replySetId": "noted"
+        },
+        {
+          "id": "nauseous",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.i-feel-nauseous"
+          },
+          "colour": "alert",
+          "replySetId": "noted"
+        },
+        {
+          "id": "dizzy",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.i-feel-dizzy"
+          },
+          "colour": "alert",
+          "replySetId": "noted"
+        },
+        {
+          "id": "rash",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.i-have-a-rash"
+          },
+          "colour": "alert",
+          "replySetId": "noted"
+        },
+        {
+          "id": "cut",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.i-have-a-cut"
+          },
+          "colour": "alert",
+          "replySetId": "noted"
+        },
+        {
+          "id": "burn",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.i-have-a-burn"
+          },
+          "colour": "alert",
+          "replySetId": "noted"
+        }
+      ]
+    },
+    "otc": {
+      "titleKey": "boards.pharmacy.otcTitle",
+      "buttons": [
+        {
+          "id": "painkiller",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.painkiller"
+          },
+          "colour": "money",
+          "replySetId": "stock"
+        },
+        {
+          "id": "paracetamol",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.paracetamol-acetaminophen"
+          },
+          "colour": "money",
+          "replySetId": "stock"
+        },
+        {
+          "id": "ibuprofen",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.ibuprofen"
+          },
+          "colour": "money",
+          "replySetId": "stock"
+        },
+        {
+          "id": "antihistamine",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.antihistamine"
+          },
+          "colour": "money",
+          "replySetId": "stock"
+        },
+        {
+          "id": "anti-diarrhea",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.anti-diarrhea-medicine"
+          },
+          "colour": "money",
+          "replySetId": "stock"
+        },
+        {
+          "id": "rehydration-salts",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.rehydration-salts"
+          },
+          "colour": "money",
+          "replySetId": "stock"
+        },
+        {
+          "id": "motion-sickness",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.motion-sickness-tablets"
+          },
+          "colour": "money",
+          "replySetId": "stock"
+        },
+        {
+          "id": "cough-medicine",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.cough-medicine"
+          },
+          "colour": "money",
+          "replySetId": "stock"
+        },
+        {
+          "id": "bandage",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.bandage"
+          },
+          "colour": "money",
+          "replySetId": "stock"
+        },
+        {
+          "id": "antiseptic",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.antiseptic"
+          },
+          "colour": "money",
+          "replySetId": "stock"
+        },
+        {
+          "id": "antacid",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.antacid"
+          },
+          "colour": "money",
+          "replySetId": "stock"
+        }
+      ]
+    },
+    "dosage": {
+      "titleKey": "boards.pharmacy.dosageTitle",
+      "buttons": [
+        {
+          "id": "how-much",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.how-much-should-i-take"
+          },
+          "colour": "stay",
+          "replySetId": "count"
+        },
+        {
+          "id": "how-many-times",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.how-many-times-a-day"
+          },
+          "colour": "stay",
+          "replySetId": "count"
+        },
+        {
+          "id": "before-or-after-food",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.before-or-after-food"
+          },
+          "colour": "stay",
+          "replySetId": "noted"
+        },
+        {
+          "id": "safe-pregnancy",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "pharmacy-symptoms.is-this-safe-during-pregnancy"
+          },
+          "colour": "stay",
+          "replySetId": "yes-no"
+        }
+      ]
+    },
+    "allergies": {
+      "titleKey": "boards.pharmacy.allergiesTitle",
+      "buttons": [
+        {
+          "id": "penicillin",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "medical-conditions.i-am-allergic-to-penicillin"
+          },
+          "colour": "alert",
+          "replySetId": "noted"
+        },
+        {
+          "id": "aspirin-ibuprofen",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen"
+          },
+          "colour": "alert",
+          "replySetId": "noted"
+        },
+        {
+          "id": "sulfa",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "medical-conditions.i-am-allergic-to-sulfa-drugs"
+          },
+          "colour": "alert",
+          "replySetId": "noted"
+        },
+        {
+          "id": "asthma",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "medical-conditions.i-have-asthma"
+          },
+          "colour": "alert",
+          "replySetId": "noted"
+        },
+        {
+          "id": "injector",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "medical-conditions.i-carry-an-adrenaline-injector"
+          },
+          "colour": "alert",
+          "replySetId": "noted"
+        },
+        {
+          "id": "conditions-card",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "medical-conditions.this-card-lists-my-conditions"
+          },
+          "colour": "alert",
+          "replySetId": "noted"
+        },
+        {
+          "id": "this-is-my-medicine",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "medical-conditions.this-is-my-medicine"
+          },
+          "colour": "alert",
+          "replySetId": "noted"
+        },
+        {
+          "id": "injector-in-bag",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "medical-conditions.my-injector-is-in-my-bag"
+          },
+          "colour": "alert",
+          "replySetId": "noted"
+        }
+      ]
+    }
+  },
+  "replySets": {
+    "yes-no": {
+      "buttons": [
+        {
+          "id": "yes-right",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.yes-right"
+          }
+        },
+        {
+          "id": "no-not",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.no-not"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "stock": {
+      "buttons": [
+        {
+          "id": "okay-can",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.okay-can"
+          }
+        },
+        {
+          "id": "we-do-not-have-it",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.we-do-not-have-it"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "location": {
+      "buttons": [
+        {
+          "id": "it-is-over-there",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.it-is-over-there"
+          }
+        },
+        {
+          "id": "i-will-show-you",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-show-you"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "noted": {
+      "buttons": [
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "not-possible",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.not-possible"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "count": {
+      "buttons": [
+        {
+          "id": "amount",
+          "kind": "entry",
+          "entry": "count"
+        },
+        {
+          "id": "i-will-write-it-down",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-write-it-down"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    }
+  }
+}

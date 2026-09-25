@@ -33,6 +33,7 @@ import {
 } from '../core/quantity.js';
 import { openBoardEditor } from './board-editor.js';
 import { openBoardMenu } from './board-menu.js';
+import { themeSection } from './theme.js';
 import {
   readDisplay, writeDisplay, displaySection, readVoice, writeVoice, voiceSection,
 } from './board-display.js';
@@ -531,7 +532,7 @@ async function main() {
     // A waiting deploy installs here, between things, and nowhere else.
     applyUpdateIfIdle();
 
-    if (state.view !== 'grid') $('board-menu').hidden = true;
+    if (state.view !== 'grid') { $('board-menu').hidden = true; $('board-turn-bar').hidden = true; }
     if (state.view === 'grid') {
       clearStage(stage);
       // At the root the parent is the topic list, not a node -- so the control stays
@@ -542,6 +543,7 @@ async function main() {
       const atRoot = state.path.length < 2;
       $('board-up').hidden = false;
       $('board-menu').hidden = false;
+      $('board-turn-bar').hidden = false;
       $('board-up').setAttribute('aria-label', atRoot ? t('board.allTopics') : t('board.up'));
       renderGrid($('board-grid'), node, {
         lang: owner,
@@ -630,6 +632,8 @@ async function main() {
         onVoice: (id) => { chosenVoice = id; writeVoice(listener, id); paint(); },
         voiceLabel: t('display.voice'),
         voiceAutoLabel: t('display.voiceAuto'),
+        turned: display.turned,
+        onTurn: (v) => { display = { ...display, turned: v }; writeDisplay(display); paintTurn(); },
         show: display,
         speakLabel: t('board.speak'),
         rateLabel: t('board.rate'),
@@ -680,6 +684,7 @@ async function main() {
         onCancel: () => dispatch({ type: 'cancelReply' }),
         closeLabel: theirs.t('board.close'),
         colour: button.colour,
+        turned: display.turned,
       });
       return;
     }
@@ -765,6 +770,19 @@ async function main() {
   const menuButton = $('board-menu');
   menuButton.setAttribute('aria-label', t('board.menu'));
   menuButton.title = t('board.menu');
+  // **Turn, from the bar.** The same choice the message's own control makes, set
+  // before a message is shown: a phone laid on the counter is turned for the whole
+  // conversation, answers included, not one sentence at a time.
+  const turnButton = $('board-turn-bar');
+  turnButton.setAttribute('aria-label', t('board.turn'));
+  turnButton.title = t('board.turn');
+  const paintTurn = () => turnButton.setAttribute('aria-pressed', String(display.turned));
+  paintTurn();
+  turnButton.addEventListener('click', () => {
+    display = { ...display, turned: !display.turned };
+    writeDisplay(display);
+    paintTurn();
+  });
 
   const openSettings = () => openSpeakerSettings({
     axes: corpus.speakerAxes,
@@ -778,6 +796,7 @@ async function main() {
         current: chosenVoice,
         onChange: (id) => { chosenVoice = id; },
       }),
+      themeSection(),
       personalSection(personalWiring({
       save: download,
       // **What this build can actually show**, so an import naming a screen that is

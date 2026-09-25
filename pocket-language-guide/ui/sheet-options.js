@@ -70,7 +70,7 @@ async function main() {
   // encoding, so a reader who cannot use the default needs it before they print,
   // not after they find the studio.
   const themes = Object.fromEntries(await Promise.all(
-    ['latex-reference', 'cvd-safe'].map(async (id) => [id, await ctx.theme(id)]),
+    ['latex-reference', 'cvd-safe', 'dark'].map(async (id) => [id, await ctx.theme(id)]),
   ));
 
   const target = ctx.corpus.languages[choice.target];

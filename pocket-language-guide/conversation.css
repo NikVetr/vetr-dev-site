@@ -25,8 +25,13 @@
 .board-body .board-message:active {
   background: none;
 }
-.board-body .board-answer:hover, .board-body .board-answer:focus-visible {
-  background: var(--role, var(--paper));
+/* Only where hover means a pointer: on a phone the hover state is sticky after a
+   tap, and an answer filled with the role's own colour under black type was what a
+   reader saw for the rest of the screen. A tint, not the colour. */
+@media (hover: hover) {
+  .board-body .board-answer:hover {
+    background: color-mix(in oklab, var(--role, var(--accent)) 12%, var(--paper));
+  }
 }
 
 .board-body {
@@ -82,6 +87,8 @@
   flex-direction: column;
   gap: var(--space-2);
   padding: var(--space-2);
+  /* A floor under the buttons: white cells on a white page were one plane. */
+  background: var(--surface);
   min-block-size: 0;
   overflow: auto;
 }
@@ -111,8 +118,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  inline-size: 2.75rem;
-  block-size: 2.75rem;
+  inline-size: min(2.75rem, 48px);
+  block-size: min(2.75rem, 48px);
   padding: 0;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -141,6 +148,13 @@
   align-items: center;
   gap: var(--space-2);
   min-inline-size: 0;
+  /* **At the foot.** Back, the topic, Turn and the menu are the owner's, and the
+     foot of a phone is where the thumb is; the grid gets the top of the screen, where
+     the eye is. `order` rather than moving the markup, so the reading order for
+     assistive technology is still the bar first. */
+  order: 2;
+  padding-block-start: var(--space-1);
+  padding-block-end: env(safe-area-inset-bottom);
   /* Named so `.board-title` can size itself against this row rather than the
      viewport: the space it has is what the arrow and the menu leave, not what the
      screen is. */
@@ -168,7 +182,9 @@
      enough to need an ellipsis", and truncating a topic is not on offer. Tied to the
      bar's own width, so an enlarged system text size moves the body copy around it
      without pushing this over the edge. */
-  font-size: min(7.5cqi, var(--fs-3));
+  /* 6.5, not 7.5: the bar carries Turn as well as the menu now, and at 1.6x text the
+     longest topic word overran the room those two left. */
+  font-size: min(6.5cqi, var(--fs-3));
   font-weight: 700;
   letter-spacing: -0.01em;
   line-height: 1.2;
@@ -421,7 +437,18 @@
 /* Drawn, not removed: a grid that closes a gap is a grid whose buttons have moved. */
 .board-cell-off { opacity: 0.45; cursor: not-allowed; }
 
-.board-status { margin: 0; color: var(--muted); font-size: var(--fs--1); }
+.board-status { margin: 0; color: var(--muted); font-size: var(--fs--1); order: 1; }
+/* The bar's Turn: a control the size of the menu's, pressed when the stranger's
+   surfaces are set sideways. */
+.board-turn-bar {
+  display: inline-flex; align-items: center; justify-content: center;
+  /* Capped in pixels as the bar's other buttons are: at 1.6x text three
+     rem-sized buttons left the topic no room for its own longest word. 48px is
+     still a full tap target. */
+  min-inline-size: min(2.6rem, 48px); min-block-size: min(2.6rem, 48px); padding: 0;
+  border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); color: var(--ink); cursor: pointer;
+}
+.board-turn-bar[aria-pressed="true"] { background: var(--accent); color: var(--paper); border-color: transparent; }
 .board-status:empty { display: none; }
 
 /* --- the message ------------------------------------------------------------- */
@@ -449,7 +476,7 @@
 .board-stage[class*="board-role-"] .board-message { color: #fff; }
 .board-stage[class*="board-role-"] .board-message-gloss { color: rgba(255, 255, 255, 0.78); }
 .board-stage[class*="board-role-"] .board-asked { color: rgba(255, 255, 255, 0.85); }
-.board-stage[class*="board-role-"] .board-message:focus-visible { outline-color: #fff; }
+.board-stage[class*="board-role-"] .board-message { outline-color: rgba(255, 255, 255, 0.75); }
 /* An answer coming back the other way. Paper rather than the answer's own colour --
    the owner has to be able to tell at a glance that this is the reply and not
    something they said, and a second full-bleed colour would not say that. */
@@ -496,7 +523,12 @@
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
-.board-message:focus-visible { outline: 2px solid var(--accent); outline-offset: -4px; }
+/* **The frame stays.** It began as the focus ring, which the first tap gave the
+   surface and the Turn control took away; the owner liked the line around the
+   sentence and wanted it kept, so it is drawn on the surface itself and the ring
+   adds weight over it. */
+.board-message { outline: 2px solid var(--accent); outline-offset: -4px; }
+.board-message:focus-visible { outline-width: 3px; }
 
 /* As large as the box allows, from CSS first; `fitMessage` only closes the gap for
    a long custom phrase, and stops at a floor rather than shrinking to nothing. */
@@ -544,6 +576,11 @@
   text-orientation: sideways;
 }
 .board-stage-turned .board-message { align-items: center; }
+/* The answers turn with the sentence: they are the stranger's to read. The grid's
+   tracks follow the writing mode, so its columns run down the screen and its rows
+   across, and every label is set on its side. The owner's way out does not turn. */
+.board-stage-turned .board-asked,
+.board-stage-turned .board-answers { writing-mode: vertical-rl; text-orientation: sideways; }
 /* Turned, the surface's side padding is across the sentence's columns, where the
    width is what is short: at the upright 1.8rem a nine-character question lost
    one size step to it, which is the size the turn exists to gain. */
@@ -637,7 +674,7 @@
    and the voices take what is left, wrapping a long name rather than cutting it. */
 .board-menu-column:first-child { flex: 0 0 auto; }
 .board-menu-column:first-child .board-menu-item { white-space: nowrap; }
-.board-menu-column:last-child { min-inline-size: 0; flex: 1 1 auto; }
+.board-menu-column:last-child { min-inline-size: 0; flex: 1 1 auto; max-block-size: min(60vh, 24rem); overflow-y: auto; }
 .board-menu-column:last-child .board-menu-item { white-space: normal; overflow-wrap: break-word; }
 .board-menu-title { margin: 0 0 var(--space-1); padding-inline: var(--space-2); font-size: var(--fs--1); color: var(--muted); }
 .board-menu-current::after { content: ' \2713'; }
@@ -1013,8 +1050,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  inline-size: 2.75rem;
-  block-size: 2.75rem;
+  inline-size: min(2.75rem, 48px);
+  block-size: min(2.75rem, 48px);
   padding: 0;
   border: 1px solid var(--line);
   border-radius: var(--radius);

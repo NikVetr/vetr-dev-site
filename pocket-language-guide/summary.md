@@ -528,6 +528,14 @@ and offline on a phone without paying for the solver, `pdf-lib` or a CJK font.
   Changing the reader's language here changes it for the grid behind, so closing the
   lightbox never lands on a gallery that disagrees with it.
 
+  On a phone the "…and I want to speak" grid folds as the page scrolls past it and
+  its bar floats under the header, but not before: it folds only once the whole grid
+  has gone under the header, not on the first nudge, and what the scroll folded the
+  scroll back unfolds, while a grid the reader closed, or that closed because they
+  chose, stays closed until they tap it. The fold and unfold travel — `max-block-size`
+  and opacity transition, `display` transitions discretely with `allow-discrete`, and
+  `@starting-style` gives the unfold a height to grow from.
+
   Nothing that floats is drawn in a box, and that is a constraint rather than a
   preference: a panel over the card is a panel over the words, and the caret panels
   were sitting on two rows of the sheet. The carets are bare glyphs, ink rather than
@@ -800,9 +808,13 @@ wording, Speak and its speed control, and the control that turns the sentence
 sideways can each be switched off; how to say it in the reader's own letters, and the
 same in IPA, can each be switched on. All but IPA default to on, which is
 `ui/board-display.js` — one record rather than six keys, because they are read
-together on every paint and written together from one dialog. The speed is a
-multiplier — 0.25, 0.5, 1, 2 — chosen from a list the control opens, and that list
-opens *against the control*: `openBoardMenu` places its panel above an anchor in the
+together on every paint and written together from one dialog. Whether the screen is
+turned is in the same record: it is a fact about how the phone is being held across
+the table, not about one message, so it survives going back to the grid and opening
+the next. The speed is a multiplier — 0.25, 0.5, 1, 2 — chosen from a list the
+control opens with every voice the device has beside it, the current one ticked
+(the list scrolls; eight was a cap and the phone the owner reads it on had more), and
+that list opens *against the control*: `openBoardMenu` places its panel above an anchor in the
 lower half of the screen and below one in the upper half, its near edge on the
 anchor's, because the stylesheet's default hung every panel under the header's
 corner, a screen away from the thumb at the foot that asked for it.
@@ -816,7 +828,12 @@ stands beside it on the left, set the same way, which is "under the sentence" fo
 someone reading the turned screen and the only place they can find the button to
 press it. The owner's gloss, how-to-say-it, Speak, speed and Turn are the owner's, so
 they stay upright in one row at the foot and take as little as one line of small type
-and three buttons can; the sentence gets the rest. Turning used to rotate the whole
+and three buttons can; the sentence gets the rest. On the grid the same Turn sits in
+the bar that names the topic and the pair — a footer now rather than a sub-header,
+left of the settings control, because that bar is the owner's and the top of the
+screen is the stranger's — so a phone laid on the counter can be turned before the
+first message. When the message is turned the answer grid under it turns too, since
+the stranger is the one choosing an answer; the owner's own context grid does not. Turning used to rotate the whole
 stage into a `100dvh`×`100dvw` box, which laid the owner's buttons on their sides
 and the speed control on a pillar. The fitter measures lines as heights when the
 writing mode says so — a `vertical()` check in `widestLine`, `lineRoom`, `hangFits`
@@ -827,7 +844,11 @@ the stage centres its children for the answer grid, and the read box and the foo
 opt out with `align-self: stretch`, or a turned sentence's columns would size the box
 and carry Reply off the edge. In the answer grid, "none of these" is drawn as Reply
 is — the role's colour darkened, in white — because it is the door to the fuller
-translator, not one more answer.
+translator, not one more answer. The other answers are paper with ink on it, and only
+that: a tint on hover is scoped to `(hover: hover)`, because on a phone the tint
+stayed on whichever button was last touched and the grid came back with one answer
+filled in for no reason a reader could see. The context grid sits on the surface
+colour rather than the paper's, so its white buttons read as buttons.
 
 The pronunciation rides with the phrase out of `resolvePhrase`, not looked up again
 in the view, and that is what keeps it right under a speaker variant: `say` has
@@ -1103,6 +1124,19 @@ separation 0.148 against the reference's 0.019. The cost is semantic — green
 cannot coexist safely with red, so transport and outdoors lose it — which is why
 this is an alternative a reader chooses, not the default. Headings keep their
 icons and titles, so colour is never the only cue.
+
+`data/themes/dark.json` is the reference palette lifted for dark paper: the five
+roles brightened to hold contrast on `#14191E`, ink and muted inverted, shade a
+step above the paper. It exists because the screen has a dark mode and a card
+exported from a dark screen should not arrive white; the solver lays the paper down
+as a rect when a theme's paper is not white, and the renderers still draw nothing for
+white, so no existing card changes. The screen's own appearance is separate from the
+card's palette: `ui/theme.js` keeps one of `system`, `light`, `dark` under `plg.theme`,
+every token in `style.css` is a `light-dark()` pair under `color-scheme: light dark`,
+and `[data-theme]` on the root pins one side. A one-line script in each page's head
+sets that attribute before the stylesheet applies, so a reader who chose dark does
+not get a white flash on every load. The default is the device's setting, and the
+choice sits in the board's settings dialog and the studio's format panel.
 
 Each theme has both a `description` (prose) and a `note` (the note-template
 style). These once collided as one key and JSON silently kept the last;
@@ -1456,6 +1490,19 @@ back laid over it in red, its shading and rules dropped so the front stays
 readable. If the red words belong on the back of the black ones the flip setting
 matches the printer; if they are the same column twice, it does not. That is
 cheaper to learn there than after cutting.
+
+**A crease is a different thing from the folded finish, and it lives in the
+geometry.** `geometry.fold` — 2 or 3, offered only when the column count divides by
+it — says the face itself is to be folded into panels along its gutters. The gutters
+at the creases widen by `FOLD_GUTTER` (14pt) so no column is printed on the fold, and
+a dashed hairline in the rule colour runs down each on every face, front and back
+alike, because a fold is a fact about the paper and both sides have it. `contentBox`
+returns the per-gutter gaps and a `colX(c)` so the ornaments, the gutter handles and
+the frame all read the uneven gutters from one place. The passport presets are its
+natural companions: `passport-open` is two closed passports side by side, and a
+bifold on it folds to a card that fits the cover pocket. With the folded *finish*
+chosen as well on a four-column face, the midline it halves at is the bifold's
+crease, so the widened gutter and the line arrive exactly where that finish cuts.
 
 **A fold gets no overlay, and that is not an omission.** The overlay lays each face
 over the next, which is exactly right for a cut, where consecutive faces are one

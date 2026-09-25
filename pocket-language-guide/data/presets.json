@@ -63,6 +63,34 @@
       "faces": 6,
       "captionKey": "format.card.creditCard"
     },
+    "passport-closed": {
+      "name": "Passport, closed · 2 columns",
+      "pageW": 249.45,
+      "pageH": 354.33,
+      "marginTop": 5,
+      "marginBottom": 6,
+      "marginLeft": 6,
+      "marginRight": 6,
+      "columns": 2,
+      "columnGap": 3.5,
+      "faces": 4,
+      "captionKey": "format.card.passportClosed",
+      "note": "88 x 125 mm, the ICAO passport cover: slips inside the cover or a passport wallet."
+    },
+    "passport-open": {
+      "name": "Passport, open · 4 columns",
+      "pageW": 498.9,
+      "pageH": 354.33,
+      "marginTop": 5,
+      "marginBottom": 6,
+      "marginLeft": 6,
+      "marginRight": 6,
+      "columns": 4,
+      "columnGap": 3.5,
+      "faces": 4,
+      "captionKey": "format.card.passportOpen",
+      "note": "176 x 125 mm, an open passport: folds once down the spine to the closed size."
+    },
     "phone-1col": {
       "name": "Phone screen · 1 column",
       "pageW": 180,
@@ -95,7 +123,10 @@
       "screen": true,
       "phone": true,
       "aspect": 2.167,
-      "reserve": { "top": 0.30, "bottom": 0.12 },
+      "reserve": {
+        "top": 0.3,
+        "bottom": 0.12
+      },
       "note": "The commonest phone shape, 19.5:9, at the standard sizes. The logical aspects in the group run 2.164 (iPhone 12/13/14, 390x844pt) through 2.167 (Galaxy S22-S26, 1080x2340) and 2.168 (iPhone 14 Pro/15/16, 393x852pt) to 2.174 (iPhone 16 Pro/17, 402x874pt) -- half a percent end to end, which is a pixel and a half of crop on a 6in screen, so one preset covers all of them. Sized from 6.1in, the smallest standard iPhone; a 6.3in iPhone 17 or a 6.2in Galaxy S25 scales it up 3%. Apple point resolutions from the per-model tech specs at support.apple.com (121029 for the 16, 125089 for the 17, and siblings), cross-checked against ios-resolution.com; Samsung native resolutions from the model pages at gsmarena.com. Pixel 4a (5.81in) and Pixel 5 (6.0in) are this shape too and scale it down 5% and 2%.",
       "model": true,
       "models": "The 6.1-6.3in sizes, 19.5:9: iPhone 12, 13, 14, 15, 16 and 17, each in its standard and Pro form, and the 16e and 17e · Galaxy S22, S23, S24, S25 and S26 · Pixel 4a and Pixel 5. A Plus, Max, Air or Galaxy Ultra is the same shape on bigger glass -- it fits this card, but the iPhone Plus & Max preset is cut for it."
@@ -114,7 +145,10 @@
       "screen": true,
       "phone": true,
       "aspect": 2.168,
-      "reserve": { "top": 0.30, "bottom": 0.12 },
+      "reserve": {
+        "top": 0.3,
+        "bottom": 0.12
+      },
       "note": "The same 19.5:9 shape as the standard iPhones and the Galaxy S, sized for the big ones: 6.5in (iPhone Air, 420x912pt) through 6.9in (iPhone 17 Pro Max, 440x956pt; Galaxy S25/S26 Ultra, 1440x3120). A separate preset because the shape does not fix the size: a 6.7in Plus is a tenth more glass than a 6.1in iPhone, and a card sized from 6.1in comes out a tenth larger than it needs to be on it, so a tenth fewer rows fit than the screen could hold. Sized from 6.5in, the smallest in the band, so nothing here is scaled down; the two 6.4in Galaxy FE models are the exception, at 2% under. Sources as for the 6.1in preset.",
       "model": true,
       "models": "The 6.5-6.9in sizes, 19.5:9: iPhone 14, 15 and 16 Plus · iPhone 12 through 17 Pro Max · iPhone Air · Galaxy S22+ through S26+ · Galaxy S24, S25 and S26 Ultra · Galaxy S21/S23/S24/S25/S26 FE · Galaxy S25 Edge · Pixel 6 Pro and Pixel 7 Pro."
@@ -133,7 +167,10 @@
       "screen": true,
       "phone": true,
       "aspect": 2.166,
-      "reserve": { "top": 0.30, "bottom": 0.12 },
+      "reserve": {
+        "top": 0.3,
+        "bottom": 0.12
+      },
       "note": "19.5:9 again (375x812pt, 2.1653), sized from the 5.4in diagonal of the iPhone 12 mini and 13 mini. Its own preset because the 6.1in card scales *down* 11% here, and a type size 11% under the floor it was chosen against is a phrase the reader cannot read. Point resolution from support.apple.com/111877 (12 mini) and /111873 (13 mini).",
       "model": true,
       "models": "iPhone 12 mini and iPhone 13 mini, 5.4in. The same 19.5:9 shape as every other iPhone since the 12, sized for the smallest glass Apple made it in."
@@ -152,7 +189,10 @@
       "screen": true,
       "phone": true,
       "aspect": 2.222,
-      "reserve": { "top": 0.26, "bottom": 0.12 },
+      "reserve": {
+        "top": 0.26,
+        "bottom": 0.12
+      },
       "note": "20:9, the Pixel shape and much of Android. Not quite one number: the base Pixels since the 9 are 2424x1080 (2.244) and the Pro tier is 2856x1280 (2.231) or 2992x1344 (2.226), which Google's own spec sheets round to 20:9 or call 20.08:9 -- a 1% spread, against the 2.4% step down to 19.5:9. Sized from a 6.2in diagonal; a 6.7in Pixel Pro XL scales it up 8%, a 6.1in Pixel 8a down 2%. Native resolutions from the Pixel and Galaxy model pages at gsmarena.com and the Pixel articles at en.wikipedia.org, which carry Google's published figures.",
       "model": true,
       "models": "20:9, from 6.1in to 6.9in: every Pixel from the 5a to the 11 Pro XL except the 6 Pro and 7 Pro, which are 19.5:9 · Galaxy S20, S20+, S20 Ultra, S20 FE, S21, S21+ and S21 Ultra, before Samsung moved the line to 19.5:9 · much of the rest of Android."
@@ -171,7 +211,10 @@
       "screen": true,
       "phone": true,
       "aspect": 2.144,
-      "reserve": { "top": 0.26, "bottom": 0.12 },
+      "reserve": {
+        "top": 0.26,
+        "bottom": 0.12
+      },
       "note": "19.3:9 (1440x3088, 2.1444), which Samsung used for exactly two phones: the Galaxy S22 Ultra and S23 Ultra, both 6.8in. The S24 Ultra moved the panel to 1440x3120 -- exactly 19.5:9 -- and the S25 and S26 Ultra stayed there, so \"Galaxy S Ultra\" is no longer one shape and this preset names the two it is. Sized from 6.8in. Native resolutions from the model pages at gsmarena.com.",
       "model": true,
       "models": "Galaxy S22 Ultra and Galaxy S23 Ultra, 6.8in -- the only two Samsung phones at 19.3:9. An S24, S25 or S26 Ultra is 19.5:9 and belongs with the iPhone Plus & Max preset."
@@ -190,7 +233,10 @@
       "screen": true,
       "phone": true,
       "aspect": 1.778,
-      "reserve": { "top": 0.30, "bottom": 0.12 },
+      "reserve": {
+        "top": 0.3,
+        "bottom": 0.12
+      },
       "note": "16:9 (375x667pt, 1.7787), as on the iPhone SE and Android before the tall screens. Sized from the SE's 4.7in diagonal. The short screen is why the clock band is still near a third of it: the lock screen's furniture is anchored to the top and roughly fixed in size, so it takes a similar fraction of a 667pt screen as of an 852pt one. Point resolution from support.apple.com/111882 (SE 2nd generation) and /111866 (SE 3rd).",
       "model": true,
       "models": "iPhone SE, 2nd generation (2020) and 3rd generation (2022), 4.7in -- and the iPhone 6, 6s, 7 and 8, which are the same 375x667pt screen · Android before the tall screens."
@@ -209,7 +255,10 @@
       "screen": true,
       "phone": true,
       "aspect": 2.0,
-      "reserve": { "top": 0.26, "bottom": 0.12 },
+      "reserve": {
+        "top": 0.26,
+        "bottom": 0.12
+      },
       "note": "18:9, the first generation of tall Android screens, 2017-2018. Sized from a 5.8in diagonal. No model roll: the sourcing pass behind the other presets covered the Galaxy S line from the S20 and the Pixel line from the 4a, and this shape is older than both, so it names a ratio rather than phones it has not checked.",
       "model": true,
       "models": "The tall Android screens of 2017 and 2018, at a flat 18:9 (2.00) -- the step between the old 16:9 and today's 19.5:9 and 20:9. A phone of that generation is the one case here with no model roll behind it."

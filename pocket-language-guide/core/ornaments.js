@@ -610,7 +610,7 @@ export function cornerOrnaments(spec, face, box, color) {
 /** Slender flourishes in the existing column gutters give dense cards a visible
  * motif without borrowing space from text. Leave the card-cut seam clear.
  * @param {import('./types.js').SheetSpec} spec
- * @param {{left:number,top:number,colWidth:number,height:number}} box
+ * @param {{left:number,top:number,colWidth:number,height:number,gaps:number[],colX:(c:number)=>number}} box
  * @param {string} color @returns {PathMark[]} */
 export function gutterOrnaments(spec, box, color) {
   const motif = motifFor(spec.ornamentStyle, spec.target);
@@ -621,7 +621,8 @@ export function gutterOrnaments(spec, box, color) {
   if (height < 16) return [];
   /** @type {PathMark[]} */ const out = [];
   for (let c = 1; c < spec.geometry.columns; c += 1) {
-    const x = box.left + c * box.colWidth + (c - 0.5) * gap - width / 2;
+    // The middle of the gutter before column `c`, which a fold may have widened.
+    const x = box.colX(c) - box.gaps[c - 1] / 2 - width / 2;
     if (x < spec.geometry.pageW / 2 && x + width > spec.geometry.pageW / 2) continue;
     for (let y = box.top + 2; y + height <= box.top + box.height - 2; y += 86) {
       const rule = ornamentRule(motif, 0, 0, height, width, color);

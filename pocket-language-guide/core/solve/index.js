@@ -29,6 +29,8 @@ const SCALE_MAX = 1.8;
  * is the ceiling for that explicit choice.
  */
 const AUTO_SCALE_MAX = 1;
+/** How much wider a gutter is at a fold, in points: room for the crease and the line. */
+export const FOLD_GUTTER = 14;
 /**
  * The exception: a card that is mostly blank at nominal size is not airy, it is
  * empty. When the smallest face count still leaves more than this fraction of the
@@ -158,10 +160,26 @@ export function contentBox(g, paper, bands = { top: 0, bottom: 0 }, frame = 0) {
   const columnGap = g.columnGap + frame * 0.65;
   const width = g.pageW - left - right;
   const height = g.pageH - top - bottom;
+  // **A fold is a wider gutter.** A bifold card folds between its middle columns,
+  // a trifold at two places; the gutter there takes `FOLD_GUTTER` more so nothing
+  // is printed on the crease, and the dashed line the renderer draws down it shows
+  // where to fold. Every gap is listed, so a column's x is a sum rather than a
+  // multiple, and `colX` is the one place that sum is made.
+  const every = g.fold && g.columns % g.fold === 0 ? g.columns / g.fold : 0;
+  const gaps = Array.from({ length: Math.max(0, g.columns - 1) },
+    (_, i) => columnGap + (every && (i + 1) % every === 0 ? FOLD_GUTTER : 0));
+  const colWidth = (width - (g.columns - 1) * columnGap - (every ? (g.columns / every - 1) * FOLD_GUTTER : 0)) / g.columns;
+  // Written as the flat card always was -- `c * (colWidth + columnGap)` -- plus the
+  // fold gutters left of the column, so an unfolded card's coordinates are the same
+  // bytes they were and the shipped packs stay byte-identical to a fresh solve.
+  /** @param {number} c  the x of column `c`'s left edge */
+  const colX = (c) => left + c * (colWidth + columnGap) + (every ? Math.floor(c / every) * FOLD_GUTTER : 0);
+  const folds = gaps.flatMap((gap, i) => (every && (i + 1) % every === 0 ? [colX(i + 1) - gap / 2] : []));
   return {
     left, top, width, height,
-    colWidth: (width - columnGap * (g.columns - 1)) / g.columns,
+    colWidth,
     columnGap,
+    gaps, colX, folds,
     clipped: g.marginLeft < insetX || g.marginTop < insetY,
     insetX, insetY,
   };
@@ -833,7 +851,7 @@ export function layout(input) {
     for (let c = 0; c < spec.geometry.columns; c += 1) {
       const bin = f * spec.geometry.columns + c;
       const indices = broken.columns[bin] ?? [];
-      const x = box.left + c * (box.colWidth + box.columnGap);
+      const x = box.colX(c);
       const columnAtoms = indices.map((i) => atoms[i]);
       const { offsets, residual } = placeColumn(
         columnAtoms, faceCols.tops[bin], broken.slack[bin],
@@ -1206,6 +1224,22 @@ export function layout(input) {
       const gutters = gutterOrnaments(spec, box,
         spec.inkMode === 'mono' ? theme.colors.ink : theme.colors.roles.comm);
       if (gutters.length) (face.paths ??= []).push(...gutters);
+    }
+    // **The fold lines.** A dashed hairline in the rule colour down the middle of
+    // each widened gutter, from the top margin to the bottom, on every face: a fold
+    // is a fact about the paper, so every side has it.
+    for (const x of box.folds) {
+      let d = '';
+      for (let y = box.top; y < box.top + box.height; y += 6) d += `M${x.toFixed(2)} ${y.toFixed(2)}L${x.toFixed(2)} ${Math.min(y + 3, box.top + box.height).toFixed(2)}`;
+      (face.paths ??= []).push({ x: 0, y: 0, w: spec.geometry.pageW, h: spec.geometry.pageH, d, stroke: theme.colors.rule, strokeWidth: 0.5 });
+    }
+    // **Paper that is not white is painted.** The renderers assume white paper and
+    // draw nothing for it; a theme whose paper is dark -- `dark` -- has to lay it down
+    // itself, before the wash and the shading, or light ink prints on whatever is
+    // behind the face. White paper still draws nothing, so nothing already rendered
+    // changes by a byte.
+    if (theme.colors.paper.toUpperCase() !== '#FFFFFF') {
+      face.rects.unshift({ x: 0, y: 0, w: spec.geometry.pageW, h: spec.geometry.pageH, fill: theme.colors.paper });
     }
     face.rects.unshift(...backgroundRects({
       spec,

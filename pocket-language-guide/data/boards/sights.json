@@ -1,0 +1,504 @@
+{
+  "schemaVersion": 1,
+  "id": "sights",
+  "titleKey": "boards.sights.title",
+  "rootNodeId": "main",
+  "nodes": {
+    "main": {
+      "buttons": [
+        {
+          "id": "tickets-where",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "attractions-tickets.where-can-i-buy-tickets"
+          },
+          "colour": "money",
+          "replySetId": "location"
+        },
+        {
+          "id": "reservation",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "attractions-tickets.do-i-need-a-reservation"
+          },
+          "colour": "money",
+          "replySetId": "yes-no"
+        },
+        {
+          "id": "ticket-price",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "payment-receipt.how-much-in-total"
+          },
+          "colour": "money",
+          "replySetId": "price"
+        },
+        {
+          "id": "latest-entry",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "attractions-tickets.what-is-the-latest-entry-time"
+          },
+          "colour": "stay",
+          "replySetId": "clock"
+        },
+        {
+          "id": "opens",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-scheduling.what-time-does-it-open"
+          },
+          "colour": "stay",
+          "replySetId": "clock"
+        },
+        {
+          "id": "closes",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "time-scheduling.what-time-does-it-close"
+          },
+          "colour": "stay",
+          "replySetId": "clock"
+        },
+        {
+          "id": "photos",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "attractions-tickets.may-i-take-photos"
+          },
+          "colour": "comm",
+          "replySetId": "yes-no"
+        },
+        {
+          "id": "photo-of-us",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "attractions-tickets.please-take-a-photo-of-us"
+          },
+          "colour": "comm",
+          "replySetId": "yes-no"
+        },
+        {
+          "id": "photo-for-us",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "attractions-tickets.could-you-take-a-photo-for-us"
+          },
+          "colour": "comm",
+          "replySetId": "yes-no"
+        },
+        {
+          "id": "lockers",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "attractions-tickets.are-there-lockers"
+          },
+          "colour": "move",
+          "replySetId": "yes-no"
+        },
+        {
+          "id": "entrance",
+          "kind": "submenu",
+          "nodeId": "entrance",
+          "labelKey": "boards.sights.entrance",
+          "colour": "move"
+        },
+        {
+          "id": "payment",
+          "kind": "submenu",
+          "nodeId": "payment",
+          "labelKey": "boards.sights.payment",
+          "colour": "money"
+        }
+      ]
+    },
+    "entrance": {
+      "titleKey": "boards.sights.entranceTitle",
+      "buttons": [
+        {
+          "id": "entrance-word",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "building-words.entrance"
+          },
+          "colour": "move"
+        },
+        {
+          "id": "exit-word",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "building-words.exit"
+          },
+          "colour": "move"
+        },
+        {
+          "id": "correct-entrance",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "in-a-building.is-this-the-correct-entrance"
+          },
+          "colour": "move",
+          "replySetId": "yes-no"
+        },
+        {
+          "id": "step-free",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "accessibility.step-free"
+          },
+          "colour": "move",
+          "replySetId": "yes-no"
+        }
+      ]
+    },
+    "payment": {
+      "titleKey": "boards.sights.paymentTitle",
+      "buttons": [
+        {
+          "id": "pay-by-card",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "payment-receipt.pay-by-card"
+          },
+          "colour": "money",
+          "replySetId": "payment"
+        },
+        {
+          "id": "tax-included",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "payment-receipt.is-tax-included"
+          },
+          "colour": "money",
+          "replySetId": "yes-no"
+        },
+        {
+          "id": "pay-separately",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "payment-receipt.can-we-pay-separately"
+          },
+          "colour": "money",
+          "replySetId": "yes-no"
+        },
+        {
+          "id": "receipt",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "payment-receipt.a-receipt-please"
+          },
+          "colour": "money",
+          "replySetId": "yes-no"
+        },
+        {
+          "id": "card-declined",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "payment-receipt.my-card-was-declined"
+          },
+          "colour": "money",
+          "replySetId": "permission"
+        },
+        {
+          "id": "bill-wrong",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "payment-receipt.the-bill-is-wrong"
+          },
+          "colour": "money",
+          "replySetId": "permission"
+        },
+        {
+          "id": "already-paid",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "payment-receipt.i-already-paid"
+          },
+          "colour": "money",
+          "replySetId": "permission"
+        }
+      ]
+    }
+  },
+  "replySets": {
+    "yes-no": {
+      "buttons": [
+        {
+          "id": "yes-right",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.yes-right"
+          }
+        },
+        {
+          "id": "no-not",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.no-not"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "permission": {
+      "buttons": [
+        {
+          "id": "okay-can",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.okay-can"
+          }
+        },
+        {
+          "id": "not-possible",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.not-possible"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "clock": {
+      "buttons": [
+        {
+          "id": "at",
+          "kind": "entry",
+          "entry": "clock"
+        },
+        {
+          "id": "i-will-write-it-down",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-write-it-down"
+          }
+        },
+        {
+          "id": "it-is-closed",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.it-is-closed"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "price": {
+      "buttons": [
+        {
+          "id": "amount",
+          "kind": "entry",
+          "entry": "count"
+        },
+        {
+          "id": "i-will-write-it-down",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-write-it-down"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "location": {
+      "buttons": [
+        {
+          "id": "it-is-over-there",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.it-is-over-there"
+          }
+        },
+        {
+          "id": "i-will-show-you",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-show-you"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "payment": {
+      "buttons": [
+        {
+          "id": "card-or-cash",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.card-or-cash"
+          }
+        },
+        {
+          "id": "yes-right",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.yes-right"
+          }
+        },
+        {
+          "id": "no-not",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.no-not"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    }
+  }
+}

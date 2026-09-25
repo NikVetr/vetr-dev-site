@@ -13,7 +13,7 @@ import { flagEmoji, flagsSupported } from './flags.js';
 import {
   pageGlyph, facesGlyph, paddingGlyph, PADDING_CHOICES, inkGlyph,
   itemGlyph, finishGlyph, flipGlyph, priorityOptions,
-  customGlyph, numericChoice, fieldGlyph, toggles, cardSizeControl, paletteControl,
+  customGlyph, numericChoice, fieldGlyph, toggles, cardSizeControl, paletteControl, foldControl,
   redrawGlyphs, relabelGlyphs, reserveControl, phoneControl, splitGlyph,
   typeGlyph, typefaceGlyph, dpiGlyph, segmented, panelField, backgroundControl,
   headControl,
@@ -24,6 +24,7 @@ import { ornamentControl } from './ornament-control.js';
 import { speakerControl, personalSection } from './speaker-settings.js';
 import { personalWiring } from './personal-data.js';
 import { download, isSpoken } from './app.js';
+import { themeControl } from './theme.js';
 
 const COLUMN_CHOICES = [1, 2, 3, 4, 5, 6];
 /** Theme colour keys a furniture band may be set in, named as the theme files key them. */
@@ -738,9 +739,14 @@ export function createFormatPanel(input) {
     // only one of them looked related to the choice.
     reserveField,
     panelField(t('format.columns'), [columns.group]),
+    // Where the card folds, if it does: a wider gutter and a dashed line there.
+    panelField(t('format.fold'), [foldControl({ geometry: spec.geometry, onChange: emit }).group]),
     panelField(t('format.faces'), [faces.group]),
     panelField(t('format.priority'), [priority.group]),
     panelField(t('format.typeface'), [typefaceControl.group]),
+    // The screen's own appearance, beside the card's type: a reader who is here in
+    // the dark wants the panel dark, whatever colour the card prints.
+    panelField(t('display.theme'), [themeControl()]),
     panelField(t('format.typeSize'), [typeSize.group]),
     panelField(t('format.entryLayout'), [arrangement.group]),
     panelField(t('format.split'), [split.group]),

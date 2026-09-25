@@ -2,23 +2,28 @@
    style.css so the app does not look bolted on. */
 
 :root {
-  color-scheme: light;
+  /* **Both schemes from one palette.** Every token is a `light-dark()` pair and the
+     scheme decides which half is used: the device's, unless the reader has chosen
+     in a settings dialog, which `ui/theme.js` records on the root as `data-theme`.
+     No second stylesheet, no duplicated palette, and a rule that says `var(--paper)`
+     is right in the dark without knowing it. */
+  color-scheme: light dark;
 
-  --ink: #111820;
-  --muted: #3f4a55;
-  --line: #d7dee5;
-  --line-soft: #e8edf1;
-  --paper: #ffffff;
-  --surface: #f4f6f8;
-  --surface-2: #eaeff3;
-  --accent: #0b67a3;
-  --accent-soft: #e6f0f7;
+  --ink: light-dark(#111820, #e8edf2);
+  --muted: light-dark(#3f4a55, #a9b4bf);
+  --line: light-dark(#d7dee5, #3a444f);
+  --line-soft: light-dark(#e8edf1, #2b343d);
+  --paper: light-dark(#ffffff, #121619);
+  --surface: light-dark(#f4f6f8, #1a2026);
+  --surface-2: light-dark(#eaeff3, #232b33);
+  --accent: light-dark(#0b67a3, #5aa9e6);
+  --accent-soft: light-dark(#e6f0f7, #1d3446);
   /* The same accent lifted for use on a dimmed overlay -- the gallery lightbox
      puts controls over an 82%-black backdrop, where #0b67a3 is barely there.
      Holds 7.4:1 against that backdrop. */
   --accent-lift: #79c2ef;
-  --alert: #b3261e;
-  --ok: #237547;
+  --alert: light-dark(#b3261e, #f28b82);
+  --ok: light-dark(#237547, #6fcf97);
 
   --radius: 8px;
   --radius-sm: 5px;
@@ -265,6 +270,16 @@ label { display: block; }
 .field select, .field input { width: 100%; }
 
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; }
+/* A card is paper whatever the screen is: the thumbnails stay white, and a hairline
+   keeps them from floating on a dark page. Stated twice because a media query and
+   an attribute cannot share one selector list. */
+:root[data-theme="dark"] .card-thumb img { border: 1px solid var(--line); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .card-thumb img { border: 1px solid var(--line); }
+}
 
 /* --- site header --------------------------------------------------------- */
 
@@ -763,6 +778,15 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
     border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--space-1);
     mask-image: linear-gradient(to bottom, #000 calc(100% - 2rem), transparent);
   }
+  /* Folding and unfolding travel rather than blink: `display` transitions
+     discretely with `allow-discrete`, and `@starting-style` gives the unfold a
+     height to grow from. Browsers without either simply switch. */
+  .want-grid {
+    transition: max-block-size 0.25s ease, opacity 0.2s ease, display 0.25s allow-discrete;
+    opacity: 1;
+  }
+  .want-grid[hidden] { max-block-size: 0; opacity: 0; padding-block: 0; }
+  @starting-style { .want-grid { max-block-size: 0; opacity: 0; } }
   /* Fifty-two language buttons are a compact block beside the heading on a desktop
      and 922pt of wall on a phone, which put the first card 1230pt down: a screen and
      a half of controls before any of the thing they control. Capped and scrolled,
@@ -2091,3 +2115,7 @@ dialog.speaker-settings h2 { margin: 0 0 var(--space-1); font-size: var(--fs-2);
 .signal-speed { display: inline-flex; align-items: center; gap: var(--space-1); font-size: var(--fs-0); color: var(--muted); }
 .signal-sos { font-weight: 700; letter-spacing: 0.1em; border-color: #b3261e; color: #b3261e; }
 body.page-signal { --logo-hue: 195deg; }
+
+/* The appearance control: a word and a select, in the dialog and the studio alike. */
+.theme-control { display: flex; align-items: center; gap: var(--space-2); font-size: var(--fs-0); }
+.theme-control select { font: inherit; padding: 0.3em 0.5em; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--paper); color: var(--ink); }

@@ -69,7 +69,7 @@ export function attachHandles({ face, spec, onCommit }) {
     // Centre of the nth gutter, which moves as the gap changes because the
     // columns either side of it narrow.
     const box = boxFor({ columnGap: value });
-    return box.left + (gutter + 1) * box.colWidth + (gutter + 0.5) * box.columnGap;
+    return box.colX(gutter) + box.colWidth + box.gaps[gutter] / 2;
   }
 
   // Snap every handle back to the committed geometry, and -- for the gutters --

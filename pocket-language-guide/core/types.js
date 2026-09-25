@@ -89,6 +89,9 @@
  * @property {number} columns
  * @property {number} columnGap
  * @property {number} faces
+ * @property {number} [fold]  panels a face folds into, 2 or 3, when the columns
+ *   divide by it: the gutters at the folds widen by `FOLD_GUTTER` and a dashed fold
+ *   line is drawn down each. Absent or 0 is a flat card.
  * @property {boolean} [screen]  a preset that is displayed rather than printed --
  *   the phone card. It has no back, so there is nothing to duplex and no reason for
  *   its faces to come in pairs.

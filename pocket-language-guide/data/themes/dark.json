@@ -1,0 +1,33 @@
+{
+  "id": "dark",
+  "name": "Dark",
+  "description": "The reference theme's type scale on dark paper: for a card kept on a phone or read in a dim room rather than printed. Light ink on near-black, the row shade a shade lighter than the paper, and the five section colours lifted so they keep their contrast against it -- the same hues as the reference, brighter.",
+  "base": "latex-reference",
+  "note": {
+    "size": 5.24,
+    "leading": 6.55,
+    "pad": [
+      0.55,
+      1.25,
+      0.5,
+      1.75
+    ],
+    "radius": 1.2,
+    "spaceBefore": 0.55,
+    "stretch": 0.85
+  },
+  "colors": {
+    "ink": "#E8EDF2",
+    "muted": "#A9B4BF",
+    "rule": "#4A5563",
+    "shade": "#1C232B",
+    "paper": "#14191E",
+    "roles": {
+      "comm": "#5AA9E6",
+      "money": "#F0A35A",
+      "move": "#6FCF97",
+      "stay": "#B58AE6",
+      "alert": "#F28B82"
+    }
+  }
+}

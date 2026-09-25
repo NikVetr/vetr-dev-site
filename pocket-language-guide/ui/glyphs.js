@@ -996,7 +996,8 @@ export function paletteControl({ themes, themeId, themeColors, onChange }) {
     options: [
       ...Object.keys(themes).map((id) => ({
         value: id,
-        caption: id === 'cvd-safe' ? t('format.theme.accessible') : t('format.theme.reference'),
+        caption: id === 'cvd-safe' ? t('format.theme.accessible')
+          : id === 'dark' ? t('format.theme.dark') : t('format.theme.reference'),
         title: themes[id]?.name ?? id,
         glyph: paletteGlyph(roles(id)),
       })),
@@ -2038,4 +2039,39 @@ export function headSpanGlyph(span) {
     svg.append(svgEl('rect', { x, y: 9, width: w, height: 1.6, class: 'g-ink' }));
   }
   return svg;
+}
+
+/** A page with its fold lines, for the fold control. @param {number} panels */
+export function foldGlyph(panels) {
+  const svg = frame(30, 30);
+  svg.append(svgEl('rect', { x: 3, y: 7, width: 24, height: 16, rx: 1.5, class: 'g-page' }));
+  for (let i = 1; i < panels; i += 1) {
+    const x = 3 + (24 * i) / panels;
+    svg.append(svgEl('line', { x1: x, y1: 7, x2: x, y2: 23, class: 'g-line', 'stroke-dasharray': '1.5 1.5' }));
+  }
+  return svg;
+}
+
+/**
+ * Flat, bifold or trifold. Only the folds the column count can take are offered:
+ * a fold lands in a gutter, so three panels need columns in threes.
+ * @param {{geometry: import('../core/types.js').Geometry, onChange:(patch:{geometry:import('../core/types.js').Geometry})=>void}} config
+ */
+export function foldControl({ geometry, onChange }) {
+  const options = [0, 2, 3].filter((n) => !n || geometry.columns % n === 0).map((n) => ({
+    value: n,
+    caption: t(n === 0 ? 'format.fold.none' : n === 2 ? 'format.fold.bifold' : 'format.fold.trifold'),
+    title: t(n === 0 ? 'format.fold.none' : n === 2 ? 'format.fold.bifold' : 'format.fold.trifold'),
+    glyph: foldGlyph(Math.max(1, n)),
+  }));
+  return segmented({
+    label: t('format.fold'),
+    value: geometry.fold ?? 0,
+    options,
+    onChange: (n) => {
+      const next = { ...geometry };
+      if (n) next.fold = n; else delete next.fold;
+      onChange({ geometry: next });
+    },
+  });
 }

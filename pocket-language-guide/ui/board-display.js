@@ -30,11 +30,16 @@ const KEY = 'plg.board-display';
  * @property {boolean} roman  how to say the sentence, in the reader's own letters
  * @property {boolean} ipa    the same thing in IPA, for a reader who reads it
  * @property {number} rate    how fast Speak reads, as a multiplier of the voice's own pace
+ * @property {boolean} turned the stranger's surfaces set sideways, kept from message to message
  */
 
 /** @type {BoardDisplay} */
 export const DEFAULTS = {
   owner: true, speak: true, turn: true, roman: true, ipa: false, rate: 1,
+  // Whether the stranger's surfaces -- the sentence, Reply, the answers -- are set
+  // sideways. A preference rather than a moment's toggle, so a phone laid on the
+  // counter stays turned from one message to the next and into the answer grid.
+  turned: false,
 };
 
 /** The speeds Speak can be set to. Numerals, so no catalogue is involved. */
@@ -67,6 +72,7 @@ export function readDisplay() {
     const held = JSON.parse(raw);
     const out = { ...DEFAULTS };
     for (const { id } of OPTIONS) if (typeof held?.[id] === 'boolean') out[id] = held[id];
+    if (typeof held?.turned === 'boolean') out.turned = held.turned;
     if (RATES.includes(held?.rate)) out.rate = held.rate;
     return out;
   } catch {

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>try{var t=localStorage.getItem('plg.theme');if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>
 <!-- `viewport-fit=cover` so `env(safe-area-inset-*)` reports real numbers: on a
      notched phone, and inside the native shell, the page draws behind the notch and
      the home indicator and pads itself back out in `style.css`. Still no
@@ -52,7 +53,7 @@
            stays as the control, and names the choice when it is shut. -->
       <button type="button" class="want-toggle" id="want-toggle"
               aria-expanded="true" aria-controls="want">
-        <span class="want-label" id="want-label" data-i18n="gallery.wantLabel">…I want to speak</span>
+        <span class="want-label" id="want-label" data-i18n="gallery.wantLabel">…and I want to speak</span>
         <span class="want-chosen" id="want-chosen"></span>
       </button>
       <div id="want" class="want-grid" role="group" aria-labelledby="want-label"></div>

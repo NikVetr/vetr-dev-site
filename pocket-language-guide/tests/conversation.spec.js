@@ -1133,6 +1133,7 @@ test('converse opens the topics, not a board', async ({ page }) => {
   expect(await topics.allTextContents()).toEqual([
     'Emergency', 'Meeting people', 'Directions', 'Getting around',
     'Eating out', 'Shopping', 'Time', 'Massage and spa',
+    'Lodging', 'Sights and tickets', 'Pharmacy',
   ]);
   // Nothing on this screen is owner-only chrome: there is no board to edit yet.
   await expect(page.locator('#board-menu')).toBeHidden();

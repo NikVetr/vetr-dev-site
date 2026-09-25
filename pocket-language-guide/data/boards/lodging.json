@@ -1,0 +1,671 @@
+{
+  "schemaVersion": 1,
+  "id": "lodging",
+  "titleKey": "boards.lodging.title",
+  "rootNodeId": "main",
+  "nodes": {
+    "main": {
+      "buttons": [
+        {
+          "id": "reservation",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hotel-basics.i-have-a-reservation"
+          },
+          "colour": "stay",
+          "replySetId": "stock"
+        },
+        {
+          "id": "rooms-available",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hotel-basics.are-any-rooms-available"
+          },
+          "colour": "stay",
+          "replySetId": "stock"
+        },
+        {
+          "id": "check-in-early",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hotel-requests.can-i-check-in-early"
+          },
+          "colour": "stay",
+          "replySetId": "permission"
+        },
+        {
+          "id": "check-out-later",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hotel-requests.can-i-check-out-later"
+          },
+          "colour": "stay",
+          "replySetId": "permission"
+        },
+        {
+          "id": "checkout-time",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hotel-requests.what-time-is-check-out"
+          },
+          "colour": "stay",
+          "replySetId": "clock"
+        },
+        {
+          "id": "breakfast-time",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hotel-requests.what-time-does-breakfast-start"
+          },
+          "colour": "stay",
+          "replySetId": "clock"
+        },
+        {
+          "id": "wifi",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hotel-basics.is-wi-fi-free"
+          },
+          "colour": "comm",
+          "replySetId": "yes-no"
+        },
+        {
+          "id": "requests",
+          "kind": "submenu",
+          "nodeId": "requests",
+          "labelKey": "boards.lodging.requests",
+          "colour": "comm"
+        },
+        {
+          "id": "problem",
+          "kind": "submenu",
+          "nodeId": "problems",
+          "labelKey": "boards.lodging.problem",
+          "colour": "alert"
+        },
+        {
+          "id": "laundry",
+          "kind": "submenu",
+          "nodeId": "laundry",
+          "labelKey": "boards.lodging.laundry",
+          "colour": "move"
+        },
+        {
+          "id": "price",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hotel-basics.how-much-per-night"
+          },
+          "colour": "money",
+          "replySetId": "price"
+        },
+        {
+          "id": "thanks",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.thank-you"
+          },
+          "colour": "stay"
+        }
+      ]
+    },
+    "requests": {
+      "titleKey": "boards.lodging.requestsTitle",
+      "buttons": [
+        {
+          "id": "towel",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hotel-requests.another-towel-please"
+          },
+          "colour": "comm",
+          "replySetId": "stock"
+        },
+        {
+          "id": "blanket",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hotel-requests.another-blanket"
+          },
+          "colour": "comm",
+          "replySetId": "stock"
+        },
+        {
+          "id": "safe",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hotel-requests.is-there-a-safe"
+          },
+          "colour": "comm",
+          "replySetId": "yes-no"
+        },
+        {
+          "id": "luggage",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hotel-requests.can-i-store-my-luggage"
+          },
+          "colour": "comm",
+          "replySetId": "stock"
+        },
+        {
+          "id": "non-smoking",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hotel-basics.i-would-like-a-non-smoking-room"
+          },
+          "colour": "comm",
+          "replySetId": "stock"
+        },
+        {
+          "id": "quiet-room",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hotel-basics.i-would-like-a-quiet-room"
+          },
+          "colour": "comm",
+          "replySetId": "stock"
+        },
+        {
+          "id": "washing-machine",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hotel-basics.is-there-a-washing-machine"
+          },
+          "colour": "comm",
+          "replySetId": "yes-no"
+        },
+        {
+          "id": "ac",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hotel-basics.is-there-air-conditioning"
+          },
+          "colour": "comm",
+          "replySetId": "yes-no"
+        },
+        {
+          "id": "breakfast-included",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hotel-basics.is-breakfast-included"
+          },
+          "colour": "comm",
+          "replySetId": "yes-no"
+        },
+        {
+          "id": "see-room",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hotel-basics.may-i-see-the-room"
+          },
+          "colour": "comm",
+          "replySetId": "permission"
+        },
+        {
+          "id": "no-housekeeping",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hotel-requests.no-housekeeping"
+          },
+          "colour": "comm",
+          "replySetId": "permission"
+        },
+        {
+          "id": "another-night",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hotel-requests.another-night"
+          },
+          "colour": "comm",
+          "replySetId": "permission"
+        }
+      ]
+    },
+    "problems": {
+      "titleKey": "boards.lodging.problemTitle",
+      "buttons": [
+        {
+          "id": "general-problem",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "room-problems.there-is-a-problem-with-the-room"
+          },
+          "colour": "alert",
+          "replySetId": "permission"
+        },
+        {
+          "id": "ac-broken",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "room-problems.the-air-conditioning-is-broken"
+          },
+          "colour": "alert",
+          "replySetId": "permission"
+        },
+        {
+          "id": "no-hot-water",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "room-problems.there-is-no-hot-water"
+          },
+          "colour": "alert",
+          "replySetId": "permission"
+        },
+        {
+          "id": "noisy",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "room-problems.the-room-is-too-noisy"
+          },
+          "colour": "alert",
+          "replySetId": "permission"
+        },
+        {
+          "id": "change-rooms",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "room-problems.can-i-change-rooms"
+          },
+          "colour": "alert",
+          "replySetId": "permission"
+        },
+        {
+          "id": "key-broken",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "room-problems.the-key-does-not-work"
+          },
+          "colour": "alert",
+          "replySetId": "permission"
+        },
+        {
+          "id": "toilet-broken",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "room-problems.the-toilet-will-not-flush"
+          },
+          "colour": "alert",
+          "replySetId": "permission"
+        },
+        {
+          "id": "light-broken",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "room-problems.the-light-does-not-work"
+          },
+          "colour": "alert",
+          "replySetId": "permission"
+        },
+        {
+          "id": "heating-broken",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "room-problems.the-heating-does-not-work"
+          },
+          "colour": "alert",
+          "replySetId": "permission"
+        },
+        {
+          "id": "send-someone",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "room-problems.please-send-someone"
+          },
+          "colour": "alert",
+          "replySetId": "permission"
+        }
+      ]
+    },
+    "laundry": {
+      "titleKey": "boards.lodging.laundryTitle",
+      "buttons": [
+        {
+          "id": "wash-clothes",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "laundry.please-wash-these-clothes"
+          },
+          "colour": "move",
+          "replySetId": "permission"
+        },
+        {
+          "id": "where-laundromat",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "laundry.where-is-a-laundromat"
+          },
+          "colour": "move",
+          "replySetId": "location"
+        },
+        {
+          "id": "when-ready",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "laundry.when-will-it-be-ready"
+          },
+          "colour": "move",
+          "replySetId": "clock"
+        },
+        {
+          "id": "price-per-kilo",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "laundry.how-much-per-kilo"
+          },
+          "colour": "move",
+          "replySetId": "price"
+        },
+        {
+          "id": "ready-today",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "laundry.can-it-be-ready-today"
+          },
+          "colour": "move",
+          "replySetId": "yes-no"
+        },
+        {
+          "id": "no-bleach",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "laundry.please-do-not-use-bleach"
+          },
+          "colour": "move",
+          "replySetId": "permission"
+        },
+        {
+          "id": "iron-this",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "laundry.please-iron-this"
+          },
+          "colour": "move",
+          "replySetId": "permission"
+        }
+      ]
+    }
+  },
+  "replySets": {
+    "stock": {
+      "buttons": [
+        {
+          "id": "okay-can",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.okay-can"
+          }
+        },
+        {
+          "id": "we-do-not-have-it",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.we-do-not-have-it"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "permission": {
+      "buttons": [
+        {
+          "id": "okay-can",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.okay-can"
+          }
+        },
+        {
+          "id": "not-possible",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.not-possible"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "yes-no": {
+      "buttons": [
+        {
+          "id": "yes-right",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.yes-right"
+          }
+        },
+        {
+          "id": "no-not",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.no-not"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "clock": {
+      "buttons": [
+        {
+          "id": "at",
+          "kind": "entry",
+          "entry": "clock"
+        },
+        {
+          "id": "i-will-write-it-down",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-write-it-down"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "price": {
+      "buttons": [
+        {
+          "id": "amount",
+          "kind": "entry",
+          "entry": "count"
+        },
+        {
+          "id": "i-will-write-it-down",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-write-it-down"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "location": {
+      "buttons": [
+        {
+          "id": "it-is-over-there",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.it-is-over-there"
+          }
+        },
+        {
+          "id": "i-will-show-you",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-show-you"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    }
+  }
+}
