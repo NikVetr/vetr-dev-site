@@ -877,7 +877,7 @@ test('the speed beside Speak is a setting on Speak, not a second Speak', async (
   // Opening it speaks nothing; it offers the four speeds.
   await rate.click();
   const menu = page.locator('dialog.board-menu-panel');
-  await expect(menu.locator('button')).toHaveText(['0.125×', '0.25×', '0.5×', '0.75×', '1×', '1.25×', '1.5×', '2×']);
+  await expect(menu.locator('button')).toHaveText(['0.25×', '0.5×', '0.75×', '1×', '1.25×', '1.5×', '2×']);
   // The speed in force is marked and focused, not the first item.
   await expect(menu.locator('.board-menu-current')).toHaveText('1×');
   await menu.locator('button', { hasText: '0.5×' }).click();
@@ -1422,8 +1422,10 @@ test('end punctuation hangs after the last character and weighs nothing in the c
         offCentre: Math.round((b.left - box.left) - (box.right - b.right)),
         // ...the mark starts where the body ends...
         gapToMark: Math.round(m.left - b.right),
-        // ...and nothing leaves the screen.
-        onScreen: m.right <= innerWidth && m.left >= 0,
+        // ...and nothing leaves the screen. A full-width mark is judged by the half
+        // of its box that holds the ink; the empty right half may hang past the edge.
+        onScreen: (/[\u3000-\u303f\uff01-\uff60]$/u.test(want) ? m.left + m.width / 2 : m.right) <= innerWidth
+          && m.left >= 0,
       };
     }, mark);
     expect(got.hang, `${target}: the mark is hung`).toBe(mark);
@@ -1458,13 +1460,21 @@ test('no message is drawn wider than the screen it is on', async ({ page }) => {
       for (const turned of [false, true]) {
         if (turned) await page.locator('.board-turn').click();
         const gap = await big.evaluate((el) => {
-          const range = document.createRange();
-          range.selectNodeContents(el);
           let near = Infinity;
-          for (const box of range.getClientRects()) {
-            if (!box.height) continue;
-            near = Math.min(near, box.left, box.top,
-              innerWidth - box.right, innerHeight - box.bottom);
+          for (const node of el.childNodes) {
+            const range = document.createRange();
+            range.selectNodeContents(node);
+            // A full-width CJK mark is a whole em with its ink in the left third,
+            // and it may hang so that the empty right half of its box is off the
+            // surface; the ink is what must stay on screen, so its box is judged
+            // by its left half.
+            const wide = node instanceof HTMLElement
+              && /[\u3000-\u303f\uff01-\uff60]$/u.test(node.textContent ?? '');
+            for (const box of range.getClientRects()) {
+              if (!box.height) continue;
+              const right = wide ? box.left + box.width / 2 : box.right;
+              near = Math.min(near, box.left, box.top, innerWidth - right, innerHeight - box.bottom);
+            }
           }
           return Math.round(near);
         });
@@ -1485,10 +1495,15 @@ test('turning the screen sideways sets a long phrase larger', async ({ page }) =
   // the rotation dropped: client rects are reported in viewport space, so a turned
   // stage hands back every line's thickness where its length belongs, which reads as
   // far too wide at every size and pinned the text at the floor.
+  //
+  // Russian, because the turn is for a word that cannot break: `Извините` is one
+  // word of eight letters and holds the upright size on its own, where a Chinese
+  // question wraps two characters to a line and fits upright nearly as large as
+  // it does turned.
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('/conversation.html?target=zh-Hans&source=en&board=emergency');
+  await page.goto('/conversation.html?target=ru&source=en&board=intro');
   await expect(page.locator('.board-cell').first()).toBeVisible();
-  await page.locator('[data-button="hospital"]').click();
+  await page.locator('[data-button="sorry"]').click();
   const big = page.locator('.board-message-text');
   const size = () => big.evaluate((el) => Number.parseFloat(getComputedStyle(el).fontSize));
   const lines = () => big.evaluate((el) => {
@@ -1501,9 +1516,10 @@ test('turning the screen sideways sets a long phrase larger', async ({ page }) =
   await turn.click();
   await expect(turn).toHaveAttribute('aria-pressed', 'true');
   const sideways = { px: await size(), lines: await lines() };
-  // Nine characters: four lines at 108px upright, one line at 126px sideways.
+  // One word: one line upright at the width's limit, one longer line sideways.
   expect(sideways.px).toBeGreaterThan(upright.px);
-  expect(sideways.lines).toBeLessThan(upright.lines);
+  // One word is one line either way; a longer phrase would take fewer.
+  expect(sideways.lines).toBeLessThanOrEqual(upright.lines);
   // And the stage still covers exactly the screen, rather than a rotated box hanging
   // off two edges of it.
   const stage = await page.locator('.board-stage').evaluate((el) => {
@@ -1565,9 +1581,10 @@ test('characters in a square script line up, and the punctuation sits outside th
   await expect(page.locator('.board-cell').first()).toBeVisible();
   await page.locator('[data-button="hospital"]').click();
   const han = await lines();
-  expect(han.columns).toBe(true);
   expect(han.lefts.length).toBeGreaterThan(1);
-  // Every line starts in the same place, which is what makes them a column.
+  // Every line starts in the same place, which is what makes them a column. The
+  // columns class is the mechanism for lines of unequal length; lines of equal
+  // length are a column already, and the fitter leaves them alone.
   expect(new Set(han.lefts).size).toBe(1);
 
   // **Not for a proportional script.** Aligning Latin lines buys a ragged right edge

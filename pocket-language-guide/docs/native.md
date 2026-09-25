@@ -103,23 +103,26 @@ the Capacitor bridge starts and registers App, Preferences and Share, and the
 WebView requests `https://localhost/`** with no error from the shell. That is the
 first time any of this has run outside a browser.
 
-What could not be shown is whether the page paints. This user is not in the `kvm`
-group, so the emulator ran without hardware acceleration, and an unaccelerated
-Android 15 image is not a usable device: within ninety seconds System UI stops
+Without hardware acceleration nothing more could be shown: an unaccelerated
+Android 15 image is not a usable device — within ninety seconds System UI stops
 responding, Google Play services crash, and the WebView's render process is taken
-down with them. Screenshots show the Capacitor launch screen and then the ANR
-dialog, and a debugger attached over the WebView's devtools socket (which needs
-`webContentsDebuggingEnabled`, set in the generated project only) reaches the page
-target but the renderer dies under it. Two things would finish the test, and either
-is enough: `sudo usermod -aG kvm $USER` and a fresh login, after which the same
-scripts run accelerated; or a physical Android phone with USB debugging, on which
-`npx cap run android` installs the same APK.
+down with them. With the user added to the `kvm` group (and `sg kvm` for a shell
+that predates the login) the same emulator boots in fifteen seconds and **the app
+renders**: attached over the WebView's devtools socket (`webContentsDebuggingEnabled`,
+set in the generated project only, not in the committed config), the page reports
+`readyState complete`, the gallery's 53 cards and 53 language buttons, `Capacitor`
+present with `getPlatform() === 'android'` and `isNativePlatform() === true`, no
+console error, and a tap on Converse opens the board picker at
+`https://localhost/conversation.html?target=am&source=en`. Screenshots taken through
+the protocol match the browser's. Playwright cannot attach to an Android WebView
+(`Browser.setDownloadBehavior` is refused), so the probe speaks the protocol
+directly; `tmp/android-cdp.mjs` is that probe.
 
 ## Not done
 
-- **Not yet on a real phone.** A Linux machine cannot produce an iOS result, and the
-  Android build above stopped at the emulator's limits. Everything else is verified
-  in a browser and by unit tests with a fake `Capacitor`.
+- **Not yet on a real phone.** A Linux machine cannot produce an iOS result; the
+  Android build is verified on an emulator, not a device -- the torch, the share
+  sheet and the file delivery in N2 are the things an emulator cannot answer for.
 - **N2 is only half done.** Handoff and the share path exist; routing the PDF, PNG,
   SVG, ZIP and CSV exports through native file delivery does not. On a device those
   still go through the browser download path, which in a WebView may do nothing.

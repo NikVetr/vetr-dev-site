@@ -114,7 +114,16 @@ export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop, unit
 
   const word = document.createElement('p');
   word.className = 'beacon-word';
-  word.textContent = label;
+  // A trailing mark hangs, as on the board, so the word itself is centred: `救命!`
+  // set as three glyphs put the two that matter left of the middle.
+  const trailing = /[\p{P}\p{S}]+$/u.exec(label);
+  word.textContent = trailing ? label.slice(0, -trailing[0].length) : label;
+  if (trailing) {
+    const punct = document.createElement('span');
+    punct.className = 'board-message-punct';
+    punct.textContent = trailing[0];
+    word.append(punct);
+  }
   // The word is in someone else's language, inside a page that is in the reader's.
   // Without these two the trailing `!` of `النجدة!` lands on the wrong end of it,
   // and a Han character shared with Japanese gets drawn in the wrong region's shape.

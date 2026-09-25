@@ -28,10 +28,13 @@ function el(tag, attrs = {}, kids = []) {
  * @param {HTMLElement} anchor  the button pressed, so focus can go back to it
  * @param {{label:string, run:()=>void, current?:boolean}[]} items  `current` marks the
  *   one in force, which is drawn as such and takes focus instead of the first
+ * @param {{title:string, items:{label:string, run:()=>void, current?:boolean}[]}} [aside]
+ *   a second column beside the first, under its own heading
  */
-export function openBoardMenu(anchor, items) {
+export function openBoardMenu(anchor, items, aside) {
   const panel = /** @type {HTMLDialogElement} */ (el('dialog', { class: 'board-menu-panel' }));
-  panel.append(...items.map((item) => {
+  /** @param {{label:string, run:()=>void, current?:boolean}} item */
+  const entry = (item) => {
     const button = el('button', { type: 'button', class: 'board-menu-item', text: item.label });
     if (item.current) {
       button.classList.add('board-menu-current');
@@ -45,7 +48,18 @@ export function openBoardMenu(anchor, items) {
       item.run();
     });
     return button;
-  }));
+  };
+  if (aside) {
+    panel.classList.add('board-menu-columns');
+    panel.append(
+      el('div', { class: 'board-menu-column' }, items.map(entry)),
+      el('div', { class: 'board-menu-column' }, [
+        el('p', { class: 'board-menu-title', text: aside.title }), ...aside.items.map(entry),
+      ]),
+    );
+  } else {
+    panel.append(...items.map(entry));
+  }
   document.body.append(panel);
   panel.addEventListener('close', () => {
     panel.remove();

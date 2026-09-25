@@ -625,7 +625,14 @@ async function main() {
     // The language grid takes the same order as the cards, so the two read as one
     // list seen twice rather than two lists.
     renderWantGrid(shown, coverage, readerCode, (code) => {
-      const chosen = reelToTopRow(grid, code);
+      // On a phone the cards are one column and the grid above them folds: reeling
+      // a card to the top row moved it out from under the reader's scroll position,
+      // and reopening the grid lost the place again. So the card stays where it is
+      // and the page goes to it, after the fold so the offsets are the final ones.
+      const narrow = matchMedia('(max-width: 1080px)').matches;
+      const chosen = narrow
+        ? /** @type {HTMLElement|null} */ (grid.querySelector(`.card[data-lang="${code}"]`))
+        : reelToTopRow(grid, code);
       for (const button of document.querySelectorAll('#want .want-btn')) {
         button.setAttribute('aria-pressed',
           String(button.getAttribute('data-lang') === code));
@@ -635,9 +642,8 @@ async function main() {
       // means scrolling past the question to reach its answer.
       const row = languages.find((l) => l.bcp47 === code);
       setWantOpen(false, languageName(code, row?.exonym_en ?? code));
-      // `reelToTopRow` owns the scroll: it has to happen before the cards are
-      // transformed, or it measures the wrong position.
       if (!chosen) return;
+      if (narrow) chosen.scrollIntoView({ block: 'start' });
     });
 
     const toggle = document.getElementById('want-toggle');

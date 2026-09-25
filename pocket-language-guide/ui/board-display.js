@@ -38,9 +38,10 @@ export const DEFAULTS = {
 };
 
 /** The speeds Speak can be set to. Numerals, so no catalogue is involved. */
-// Podcast speeds, and slower: 2x on a phone voice is faster than 2x on a podcast,
-// so the useful stops are between, and the slowest is for a word to be copied down.
-export const RATES = [0.125, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 2];
+// Podcast speeds: 2x on a phone voice is faster than 2x on a podcast, so the useful
+// stops are between. Nothing below a quarter -- the engines floor there, and 0.125
+// sounded exactly like 0.25 on an iPhone.
+export const RATES = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 2];
 
 /** The order they are offered in, which is the order they appear on screen. */
 export const OPTIONS = /** @type {{id:'owner'|'roman'|'ipa'|'speak'|'turn', labelKey:string}[]} */ ([

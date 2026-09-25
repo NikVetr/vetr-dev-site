@@ -34,7 +34,7 @@ import {
 import { openBoardEditor } from './board-editor.js';
 import { openBoardMenu } from './board-menu.js';
 import {
-  readDisplay, writeDisplay, displaySection, readVoice, voiceSection,
+  readDisplay, writeDisplay, displaySection, readVoice, writeVoice, voiceSection,
 } from './board-display.js';
 import { speech } from './platform/speech.js';
 import { keepAwake } from './platform/wake.js';
@@ -625,6 +625,11 @@ async function main() {
           : null,
         rate: display.rate,
         onRate: (r) => { display = { ...display, rate: r }; writeDisplay(display); paint(); },
+        voices: speech.getCapabilities(listener).voices,
+        voiceId: chosenVoice,
+        onVoice: (id) => { chosenVoice = id; writeVoice(listener, id); paint(); },
+        voiceLabel: t('display.voice'),
+        voiceAutoLabel: t('display.voiceAuto'),
         show: display,
         speakLabel: t('board.speak'),
         rateLabel: t('board.rate'),

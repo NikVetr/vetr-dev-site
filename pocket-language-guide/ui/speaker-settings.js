@@ -154,7 +154,12 @@ export function openSpeakerSettings({ axes, languages, profile, onChange, extra 
   // **The dialog is the settings screen, not only the voice question.** It holds the
   // reader's own phrases too, and those exist whether or not their languages inflect
   // -- so the heading is the general one and the voice part introduces itself.
+  // Every change is committed as it is made, so closing is closing: the corner
+  // control and Done do the same thing, and the corner is where a thumb looks for it.
+  const close = el('button', { type: 'button', class: 'speaker-close', 'aria-label': t('gallery.previewClose') }, ['\u00d7']);
+  close.addEventListener('click', () => panel.close());
   panel.append(
+    close,
     el('h2', { text: t('settings.title') }),
     ...(fields.length
       ? [el('p', { class: 'speaker-lede', text: t('speaker.lede') }), ...fields]

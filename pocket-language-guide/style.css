@@ -748,6 +748,9 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
      grid, and scrolling on down folds it again. Near the top the bar sits in its
      own place, folded or open as the reader last left it. */
   .want-toggle { position: static; }
+  /* A card scrolled to from the language grid stops under the floating bar, not
+     behind it. */
+  .card { scroll-margin-top: calc(var(--header-h, 0px) + 2.6rem); }
   .want-floating .want-toggle {
     position: fixed; top: var(--header-h, 0px); left: 0; right: 0; z-index: 2;
     inline-size: auto; padding-inline: 1rem; border-bottom: 1px solid var(--line);
@@ -2032,6 +2035,16 @@ dialog.speaker-settings {
   font: inherit; color: var(--ink); background: var(--paper);
   max-height: calc(100dvh - 4rem); overflow: auto;
 }
+/* Closing from the corner. `position: relative` on the dialog so the corner is the
+   dialog's; large enough for a thumb, quiet enough not to read as a control the
+   form needs. */
+.speaker-settings { position: relative; }
+.speaker-close {
+  position: absolute; inset-block-start: var(--space-2); inset-inline-end: var(--space-2);
+  inline-size: 2.4rem; block-size: 2.4rem; border: 0; border-radius: 50%;
+  background: var(--surface); color: var(--ink); font-size: 1.5rem; line-height: 1; cursor: pointer;
+}
+.speaker-close:hover, .speaker-close:focus-visible { background: var(--line); }
 dialog.speaker-settings::backdrop { background: rgb(17 24 32 / 45%); }
 dialog.speaker-settings h2 { margin: 0 0 var(--space-1); font-size: var(--fs-2); }
 .speaker-lede { margin: 0 0 var(--space-2); }

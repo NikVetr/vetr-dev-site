@@ -153,8 +153,10 @@ function lineRects(el) {
   // The hanging punctuation is not part of any line: it weighs nothing in the
   // centring and it must not register as a line of its own, which a zero-width box
   // holding a whole em of glyph otherwise does.
+  // Unless the fitter has set it inline for this size, when it is part of its line
+  // and the column alignment has to count it.
   const hang = el.querySelector(':scope > .board-message-punct');
-  if (hang) range.setEndBefore(hang);
+  if (hang && !el.classList.contains('board-punct-inline')) range.setEndBefore(hang);
   return [...range.getClientRects()].filter((rect) => rect.height > 0);
 }
 
@@ -181,14 +183,21 @@ function hangFits(el) {
   const range = document.createRange();
   range.selectNodeContents(hang);
   const ink = range.getBoundingClientRect();
-  const box = el.getBoundingClientRect();
-  const style = getComputedStyle(el);
-  if (vertical(el)) {
-    return ink.bottom <= box.bottom - Number.parseFloat(style.paddingBottom)
-      && ink.top >= box.top + Number.parseFloat(style.paddingTop);
-  }
-  return ink.right <= box.right - Number.parseFloat(style.paddingRight)
-    && ink.left >= box.left + Number.parseFloat(style.paddingLeft);
+  // Against the surface's padding edge, not the text's own box: `alignColumns`
+  // narrows the text to its widest line, and a mark hanging past a full last line
+  // is still on the screen -- judged against the narrowed text it was refused, which
+  // held a six-character question to one line at 90px when three lines of two
+  // characters fitted at 140 with the mark in the margin.
+  // The padding box, because the padding is exactly where a hanging mark belongs.
+  const box = /** @type {HTMLElement} */ (el.parentElement).getBoundingClientRect();
+  // **A full-width mark is half empty.** `！` and `？` are a whole em in a CJK face
+  // with the ink in the left third, so a box that overhangs the surface by up to
+  // half of itself still has its ink on the screen -- and refusing that set `命！`
+  // inline as two glyphs, which put 命 a half-glyph left of the 救 above it.
+  const wide = /[\u3000-\u303f\uff01-\uff60]$/u.test(hang.textContent ?? '');
+  const slack = wide ? (vertical(el) ? ink.height : ink.width) / 2 : 0;
+  if (vertical(el)) return ink.bottom <= box.bottom + slack && ink.top >= box.top;
+  return ink.right <= box.right + slack && ink.left >= box.left;
 }
 
 /** Scripts whose characters are all one width, so that columns can be aligned. */
@@ -458,6 +467,11 @@ function watchAnswers(list) {
  * @param {number} [config.rate]              how fast Speak reads, shown on the control beside it
  * @param {(rate:number)=>void} [config.onRate]  the reader picked another speed
  * @param {string} [config.rateLabel]         the speed control's accessible name
+ * @param {{id:string, name:string}[]} [config.voices]  the voices for this language, best first
+ * @param {string} [config.voiceId]          the one chosen, or '' for the automatic pick
+ * @param {(id:string)=>void} [config.onVoice]  the reader picked a voice
+ * @param {string} [config.voiceLabel]        the voice column's heading
+ * @param {string} [config.voiceAutoLabel]    the automatic pick's label
  * @param {{owner:boolean, roman:boolean, ipa:boolean, turn?:boolean}} [config.show]  what the reader
  *   has asked the second line to carry; the controls are gated by the caller
  * @param {(reason:string)=>string} [config.speakError]  a speech failure's `reason`
@@ -466,6 +480,7 @@ function watchAnswers(list) {
 export function renderMessage(stage, phrase,
   { onDismiss, onReply, replyLabel, incoming, colour, onSpeak, speakLabel = '',
     rate = 1, onRate, rateLabel = '', speakError,
+    voices = [], voiceId = '', onVoice, voiceLabel = '', voiceAutoLabel = '',
     show = { owner: true, roman: true, ipa: false, turn: true } }) {
   stage.replaceChildren();
   stage.hidden = false;
@@ -621,8 +636,17 @@ export function renderMessage(stage, phrase,
       rateButton.textContent = `${rate}\u00d7`;
       if (rateLabel) rateButton.setAttribute('aria-label', rateLabel);
       rateButton.setAttribute('aria-haspopup', 'menu');
+      // The voices beside the speeds, when there is a choice: the two are the same
+      // decision -- how this voice reads -- and a reader who wants a different one
+      // should not have to find the settings dialog to say so. The best eight, with
+      // the automatic pick first; the dialog still lists them all.
+      const aside = onVoice && voices.length > 1 ? {
+        title: voiceLabel,
+        items: [{ label: voiceAutoLabel, current: !voiceId, run: () => onVoice('') },
+          ...voices.slice(0, 8).map((v) => ({ label: v.name, current: v.id === voiceId, run: () => onVoice(v.id) }))],
+      } : undefined;
       rateButton.addEventListener('click', () => openBoardMenu(rateButton,
-        RATES.map((r) => ({ label: `${r}\u00d7`, current: r === rate, run: () => onRate(r) }))));
+        RATES.map((r) => ({ label: `${r}\u00d7`, current: r === rate, run: () => onRate(r) })), aside));
       controls.append(rateButton);
     }
   }
@@ -714,7 +738,6 @@ function turnControl(stage, surface, text) {
     // The box is a different shape now, so the size that filled the old one is the
     // wrong answer. The observer would catch this too; doing it here means the text
     // is never drawn at the stale size for a frame.
-    fitMessage(text, surface);
     fitFoot(surface);
   });
   return button;
@@ -730,12 +753,11 @@ function turnControl(stage, surface, text) {
  * @param {HTMLElement} text @param {HTMLElement} box
  */
 function watchMessage(text, box) {
-  fitMessage(text, box);
   fitFoot(box);
   shape?.disconnect();
   // A dismissed stage is `display: none`, which reports a 0x0 box and would send
   // the fitter down thirty pointless steps to the floor on every dismissal.
-  shape = new ResizeObserver(() => { if (box.clientHeight > 0) { fitMessage(text, box); fitFoot(box); } });
+  shape = new ResizeObserver(() => { if (box.clientHeight > 0) fitFoot(box); });
   shape.observe(box);
 }
 
@@ -755,18 +777,34 @@ function watchMessage(text, box) {
  */
 function fitFoot(box) {
   const stage = box.closest('.board-stage');
-  const text = box.querySelector('.board-message-text');
+  const text = /** @type {HTMLElement|null} */ (box.querySelector('.board-message-text'));
   if (!stage || !text) return;
   const reply = /** @type {HTMLElement|null} */ (stage.querySelector('.board-reply'));
+  // **The sentence first, beside a Reply at its resting size.** A Reply still wearing
+  // the size it was given upright is, turned, a column as wide as the sentence's --
+  // the sentence was fitted into what that left and came out one column at 79px.
+  if (reply) reply.style.fontSize = '';
+  fitMessage(text, box);
   if (reply) {
     const read = /** @type {HTMLElement} */ (reply.parentElement);
     const along = vertical(reply) ? 'scrollHeight' : 'scrollWidth';
     const room = vertical(reply) ? read.clientHeight : read.clientWidth;
-    // And no more than a fifth of the box across: a Reply set at four fifths of a
-    // turned sentence would stand beside it as wide as one of its columns, and the
-    // turn exists to give the sentence that width.
+    // And across the box, no more than the sentence leaves unused -- or a fifth of
+    // the box, whichever is more. A Reply set at four fifths of a turned sentence
+    // would otherwise stand beside it as wide as one of its columns; but a sentence
+    // that fills one column of three has two columns of room, and a one-line
+    // sentence upright has most of the screen below it, and Reply may have that.
+    const along2 = vertical(reply) ? 'width' : 'height';
     const across = vertical(reply) ? 'offsetWidth' : 'offsetHeight';
-    const most = (vertical(reply) ? read.clientWidth : read.clientHeight) * 0.2;
+    const readAcross = vertical(reply) ? read.clientWidth : read.clientHeight;
+    const pad = getComputedStyle(box);
+    const boxPad = vertical(reply)
+      ? Number.parseFloat(pad.paddingLeft) + Number.parseFloat(pad.paddingRight)
+      : Number.parseFloat(pad.paddingTop) + Number.parseFloat(pad.paddingBottom);
+    // Less a margin: the sentence's columns are measured to the pixel, and a Reply
+    // that takes every one of the rest forces a refit that drops a column.
+    const spare = readAcross - text.getBoundingClientRect()[along2] - boxPad - 32;
+    const most = Math.max(readAcross * 0.2, spare);
     let size = Math.max(16, Number.parseFloat(getComputedStyle(text).fontSize) * 0.8);
     reply.classList.add('board-reply-line');
     reply.style.fontSize = `${size}px`;
@@ -775,10 +813,10 @@ function fitFoot(box) {
       reply.style.fontSize = `${size}px`;
     }
     if (reply[along] > room) reply.classList.remove('board-reply-line');
-    // The sentence's box has just changed shape by however much Reply grew or
-    // shrank, so it is fitted again -- now, not a frame later when the observer
-    // notices, or the text is drawn overflowing for that frame.
-    fitMessage(/** @type {HTMLElement} */ (text), box);
+    // The sentence's box has just changed shape by however much Reply grew, so it
+    // is fitted again -- now, not a frame later when the observer notices, or the
+    // text is drawn overflowing for that frame.
+    fitMessage(text, box);
   }
   const gloss = /** @type {HTMLElement|null} */ (stage.querySelector('.board-message-gloss'));
   if (gloss) {
@@ -935,6 +973,9 @@ export function fitMessage(text, box) {
       // eight-character question ending in `？` was refused every size above 58px
       // that the column layout would have carried at 120.
       fullSize(text);
+      // The mark hangs unless this size proves it cannot; a size that set it inline
+      // must not decide for the next one.
+      text.classList.remove('board-punct-inline');
       // Overflow is checked along the block axis, which is across the screen when
       // the text is turned: the sentence must fit the surface both ways.
       const blocked = vertical(text)
@@ -943,6 +984,18 @@ export function fitMessage(text, box) {
       if (ok) {
         alignColumns(text);
         ok = hangFits(text);
+        // **A mark that cannot hang sits in the line instead.** A full-width `？` is
+        // a whole em, and no margin is an em wide; refusing every size at which it
+        // would not hang held a seven-glyph question to one line at 36px, when set
+        // inline it wraps two to a line at 150. So the mark hangs where it can and
+        // takes its place where it cannot, size by size.
+        if (!ok && text.querySelector(':scope > .board-message-punct')) {
+          text.classList.add('board-punct-inline');
+          fullSize(text);
+          ok = (vertical(text) ? box.scrollWidth <= box.clientWidth : box.scrollHeight <= box.clientHeight)
+            && widestLine(text) <= lineRoom(text);
+          if (ok) alignColumns(text); else text.classList.remove('board-punct-inline');
+        }
       }
       text.style.overflowWrap = held;
       return ok;
@@ -965,14 +1018,24 @@ export function fitMessage(text, box) {
       // hangs the walk runs to the cap and keeps the largest size that fitted; with
       // nothing hanging the landscape is monotone and the first miss is the answer.
       const hanging = text.querySelector(':scope > .board-message-punct') !== null;
+      const inline = () => text.classList.contains('board-punct-inline');
       let best = size;
+      // The largest size at which the mark still hangs, kept apart: hanging is the
+      // layout wanted, and a size the mark only fits inline at is taken over it
+      // only for a clear gain -- `救命！` at 150 inline puts 命 half a glyph left of
+      // 救, and at 123 hanging it is under it.
+      let hung = inline() ? 0 : size;
       for (let i = 0; i < 30 && size < MAX_MESSAGE_PX; i += 1) {
         size = Math.min(MAX_MESSAGE_PX, size * 1.08);
         text.style.fontSize = `${size}px`;
-        if (fits()) { best = size; continue; }
+        if (fits()) { best = size; if (!inline()) hung = size; continue; }
         if (!hanging) break;
       }
+      if (hung >= best * 0.75) best = hung;
       text.style.fontSize = `${best}px`;
+      // The layout state -- columns, whether the mark hangs -- is the last size
+      // tried, not the best; one more pass sets it for the size that is kept.
+      if (hanging) fits();
     } else {
       for (let i = 0; i < 30 && size > MIN_MESSAGE_PX; i += 1) {
         size = Math.max(MIN_MESSAGE_PX, size * 0.92);

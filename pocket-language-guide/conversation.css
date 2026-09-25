@@ -630,6 +630,16 @@
 }
 .board-reply-line { white-space: nowrap; }
 .board-menu-current { font-weight: 700; background: var(--surface); }
+/* Two columns when the speeds bring the voices with them; a voice's name wraps
+   rather than being cut. */
+.board-menu-columns { display: flex; gap: var(--space-3); max-inline-size: min(92vw, 34rem); }
+/* The speeds keep their width -- `0.25×` broken over two lines is not a speed --
+   and the voices take what is left, wrapping a long name rather than cutting it. */
+.board-menu-column:first-child { flex: 0 0 auto; }
+.board-menu-column:first-child .board-menu-item { white-space: nowrap; }
+.board-menu-column:last-child { min-inline-size: 0; flex: 1 1 auto; }
+.board-menu-column:last-child .board-menu-item { white-space: normal; overflow-wrap: break-word; }
+.board-menu-title { margin: 0 0 var(--space-1); padding-inline: var(--space-2); font-size: var(--fs--1); color: var(--muted); }
 .board-menu-current::after { content: ' \2713'; }
 .board-reply:hover { background: var(--accent); filter: brightness(1.08); }
 /* **Reply is drawn like the message, and the owner's controls are not.** Every
@@ -1137,3 +1147,5 @@ dialog.board-menu-panel::backdrop { background: rgb(17 24 32 / 25%); }
   white-space: nowrap;
   vertical-align: baseline;
 }
+/* Set by the fitter at a size where the mark cannot hang: it takes its own width. */
+.board-punct-inline > .board-message-punct { display: inline; inline-size: auto; }

@@ -4314,3 +4314,36 @@ group) the app installs, launches, the Capacitor bridge starts and registers App
 Preferences and Share, the WebView loads with no runtime error. `android/` stays
 gitignored as `docs/native.md` says.
 
+## Batch W — the phone's own report
+
+Three screenshots from an iPhone, and a note on each.
+
+**The turned sentence and its Reply.** A one-column sentence stood beside a Reply at
+32px: the fifth-of-the-box cap that protects a sentence's columns was protecting
+columns that were not there. Reply may now take whatever the sentence leaves across
+the box, less a margin, and `fitFoot` owns the order — Reply back to its resting
+size, the sentence fitted, Reply sized from what is left, the sentence fitted
+again — because a Reply still wearing its upright size was, turned, a column as
+wide as the sentence's. And the hang rule that had held a six-character question
+to one line at 36px is gone: a mark is judged against the surface's padding box
+(the padding is where a hanging mark belongs), a full-width mark gets half its box
+of slack because its ink is in the left third, and a mark that cannot hang at a
+size sits inline for that size — taken over the hanging layout only for a clear
+gain, so `救命！` stays one centred line with the mark hung rather than two lines
+with 命 half a glyph left of 救. The beacon hangs its mark the same way now.
+
+**Speeds and voices.** No 0.125×: the engines floor at a quarter and it sounded
+exactly like 0.25× on the phone. The speed list carries the voices beside it — the
+best eight, the automatic pick first, the current one ticked — since which voice
+and how fast are one decision; the settings dialog still lists them all, and closes
+from a corner control as well as from Done.
+
+**The landing page.** On a phone a tap in the language grid no longer reels the
+card to the top row, which moved it out from under the reader's scroll position and
+lost the place again when the grid reopened; the card stays where it is and the
+page scrolls to it, under the floating bar.
+
+**Android, accelerated.** With `kvm` the emulator is a device: the app renders,
+`Capacitor.getPlatform()` is `android`, no console error, Converse opens the board
+picker. `docs/native.md` has the detail.
+
