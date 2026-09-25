@@ -253,7 +253,7 @@ test('a stale page in the pack cache is never served under current modules', asy
   await expect(page.locator('body > .container')).toHaveCount(0);
 });
 
-test('a board works on a cold offline visit with nothing saved', async ({ page, context }) => {
+test('a board works on a cold offline visit with nothing saved @smoke', async ({ page, context }) => {
   // **O01, and the reason a board's corpus is in the shell.** Everything else in
   // this app is something a reader chose in advance -- they browsed the gallery,
   // opened a sheet, and if they meant to use it abroad they saved the pair. Someone

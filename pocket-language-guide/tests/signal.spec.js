@@ -10,7 +10,7 @@ import { test, expect } from '@playwright/test';
 
 const SIGNAL = '/signal.html?target=morse&source=en';
 
-test('what you type is shown as code, and what Morse cannot say is named', async ({ page }) => {
+test('what you type is shown as code, and what Morse cannot say is named @smoke', async ({ page }) => {
   await page.goto(SIGNAL);
   const text = page.locator('#signal-text');
   await expect(text).toBeVisible();
@@ -71,7 +71,7 @@ test('Morse is a language to learn, not a language to speak', async ({ page }) =
   expect(offered.join(' ')).not.toMatch(/Morse/);
 });
 
-test('no speed setting can flash faster than the ceiling, and SOS keeps its own slow dot', async ({ page }) => {
+test('no speed setting can flash faster than the ceiling, and SOS keeps its own slow dot @smoke', async ({ page }) => {
   // The ceiling is the beacon's, not the page's: a speed the select never offered is
   // forced in here and still comes out at the floor. `data-unit` is the unit the
   // beacon is actually running, in ms.

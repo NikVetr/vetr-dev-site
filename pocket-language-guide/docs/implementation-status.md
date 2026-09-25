@@ -4549,3 +4549,63 @@ non-text speaker and edits cases and the travelling draft; `tests/store.test.mjs
 adds a refused native write that rejects while the mirror holds the value, and a
 deletion that a second launch cannot resurrect. Two catalogue keys,
 `personal.replace` and `personal.failed`, are English-only until the next wave.
+
+## Reliability III — the native path, committed and exercised
+
+The review's native and test findings, checked first.
+
+| finding | verdict | where |
+|---|---|---|
+| Android project only in ignored directories; no reproducible build | partly | `android/` is generated and gitignored by design (`docs/native.md`), `capacitor.config.json` committed; the build steps lived in a doc and in `tmp/` |
+| native sources could reach the website deployment | false | the boundary was explicit and enforced by `.gitignore`; nothing checked it |
+| file delivery incomplete | true | Share for one sentence only; every export and the backup went through an anchor click a WebView may ignore |
+| filesystem URL conversion wrong | false | there was no such conversion |
+| build metadata nondeterministic | false | `build_shell.mjs` hashes a fixed file list and its `--check` fails when stale |
+| no WebKit coverage | true | one project, system Chrome |
+
+**Committed.** `scripts/build_android.sh` (`npm run android`) bundles, adds or syncs
+the project and assembles the debug APK from a clean checkout, with the toolchain
+under `~/android-tools` or wherever `JAVA_HOME`/`ANDROID_HOME` point, and sets the
+devtools socket in the *generated* config only. `scripts/check_publish_boundary.mjs`
+is the gate's tenth check: nothing tracked under `android`, `ios`, `dist`, `tmp`,
+`node_modules`, `test-results`. `@capacitor/filesystem` joins the shell.
+
+**Delivery.** `deliver(blob, name)` in `ui/platform/shell.js` writes the bytes to the
+app's cache directory and hands the URI to the share sheet; `download` in
+`ui/app.js` tries it first and falls back to the anchor click when it answers
+`false` — so every PDF, PNG, SVG, ZIP, CSV and backup now takes the native route on
+a device without any caller changing. A dismissed sheet is `true`: the reader
+declined, and a browser download must not follow.
+
+**Emulator evidence** (Android 15 x86_64 under KVM, `tmp/android-native.mjs`;
+this is an emulator, not a phone):
+
+| check | result |
+|---|---|
+| plugins registered | App, Filesystem, Preferences, Share |
+| a phrase written through `Preferences`, HOME, force-stop, relaunch | on the board |
+| the same after `adb install -r` of the APK (an in-place update) | on the board |
+| cold start with wifi and data off, four runs | gallery 53 cards in ~5s each; board 13 cells with the phrase |
+| Save a copy from the board's settings | the Android chooser opened over the app |
+| BACK on the chooser | app focused again, zero blob URLs created (no browser fallback), no error shown |
+
+One offline start hung at "Loading languages…" for 40s during the first run; it
+followed a devtools-driven navigation issued as the radios were switching off and
+did not recur in four cold starts or the rerun, so it is recorded here and not
+called a defect.
+
+**A test artefact worth recording.** The first persistence run failed because the
+driver force-stopped the app the instant after the write. `SharedPreferences.apply`
+is asynchronous and a force-stop is not an exit any person performs; pressing HOME
+first — which runs the activity's stop — makes the write land, and that is the
+sequence the driver uses now.
+
+**WebKit.** `playwright.config.js` gains a `webkit` project, taken only when `WEBKIT=1`
+(`npm run test:webkit`), running the tests tagged `@smoke` — gallery, board,
+signal, offline — so the default run stays Chrome. Playwright's WebKit downloaded
+but will not launch here: the host lacks `libgstcodecparsers-1.0` and `libavif13`,
+and installing them needs a password this session does not have. **Blocked on the
+owner's machine, not on the code.**
+
+**iOS.** No macOS here; the iOS project cannot be generated or built. Blocked on
+hardware, accurately.

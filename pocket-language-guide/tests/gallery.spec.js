@@ -134,7 +134,7 @@ test.describe('gallery', () => {
     await expect(page.locator('dialog.lightbox')).toHaveCount(0);
   });
 
-  test('the card opens on a pre-rendered face, not on a blur', async ({ page }) => {
+  test('the card opens on a pre-rendered face, not on a blur @smoke', async ({ page }) => {
     // Laying a sheet out is about a second of arithmetic and none of it is network,
     // so for that second the reader used to be looking at the 480px card thumbnail
     // upscaled and dimmed. `prerender_packs.mjs` now ships the first face as 13KB of

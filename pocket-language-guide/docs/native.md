@@ -118,13 +118,25 @@ the protocol match the browser's. Playwright cannot attach to an Android WebView
 (`Browser.setDownloadBehavior` is refused), so the probe speaks the protocol
 directly; `tmp/android-cdp.mjs` is that probe.
 
+## Reproducible build, and what the emulator has shown since
+
+`npm run android` (`scripts/build_android.sh`) is the committed build: bundle, add or
+sync the project, assemble the debug APK. The gate's `publish` check keeps
+`android/`, `ios/` and `dist/` out of the tracked tree. `tmp/android-native.mjs` drives
+the emulator over adb and the WebView's devtools socket and has shown, on Android 15
+under KVM: a phrase written through `Preferences` survives HOME + force-stop +
+relaunch and an in-place `adb install -r`; four cold starts with wifi and data off
+load the gallery in ~5s and the board with the phrase on it; Save a copy opens the
+Android chooser through `deliver()` (Filesystem + Share), and BACK on it returns to
+the app with no browser download behind it. Emulator evidence, not a phone's.
+
 ## Not done
 
 - **Not yet on a real phone.** A Linux machine cannot produce an iOS result; the
-  Android build is verified on an emulator, not a device -- the torch, the share
-  sheet and the file delivery in N2 are the things an emulator cannot answer for.
-- **N2 is only half done.** Handoff and the share path exist; routing the PDF, PNG,
-  SVG, ZIP and CSV exports through native file delivery does not. On a device those
-  still go through the browser download path, which in a WebView may do nothing.
+  Android build is verified on an emulator, not a device -- the torch and the share
+  sheet's destinations are the things an emulator cannot answer for.
+- **N2 delivery is wired, not device-proven.** Every export and the backup go
+  through `deliver()` on a device; the emulator shows the chooser open and close.
+  What a real Files app or mail client does with the URI is for a phone to say.
 - **N5 and N6** — repeatable platform builds, icons, splash, signing, store metadata —
   are untouched, and all of them need owner decisions before they mean anything.

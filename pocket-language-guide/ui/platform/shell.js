@@ -78,3 +78,41 @@ export async function handOff(text, title) {
   }
   return false;
 }
+
+/**
+ * Deliver a file the reader asked for -- a PDF, a PNG, a zip, a backup -- on a
+ * device, where an `<a download>` click in a WebView may do nothing at all.
+ *
+ * The bytes are written to the app's own cache directory through the Filesystem
+ * plugin and the resulting URI handed to the share sheet, which is where a native
+ * app "saves a file": the reader picks Files, a drive, a mail, or another app. The
+ * cache directory because the file is theirs the moment they have taken it and the
+ * system may reclaim the copy afterwards. `false` means this is not a device, or
+ * the plugins are not here, and the caller falls back to the browser download.
+ *
+ * A dismissed sheet is `true`: the reader chose not to take it, which is not a
+ * failure and must not start a second delivery.
+ * @param {Blob} blob @param {string} name
+ * @returns {Promise<boolean>}
+ */
+export async function deliver(blob, name) {
+  const plugins = /** @type {any} */ (globalThis).Capacitor?.Plugins;
+  if (!isNative() || !plugins?.Filesystem?.writeFile || !plugins?.Share?.share) return false;
+  const bytes = new Uint8Array(await blob.arrayBuffer());
+  let data = '';
+  // Base64 in chunks: one call over the whole buffer overflows the argument list
+  // on a multi-megabyte PDF.
+  for (let i = 0; i < bytes.length; i += 0x8000) {
+    data += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+  }
+  try {
+    const { uri } = await plugins.Filesystem.writeFile({
+      path: name, data: btoa(data), directory: 'CACHE', recursive: true,
+    });
+    await plugins.Share.share({ url: uri, title: name, dialogTitle: name });
+    return true;
+  } catch (err) {
+    if (/** @type {Error} */ (err)?.name === 'AbortError' || /cancel/i.test(String(/** @type {Error} */ (err)?.message))) return true;
+    return false;
+  }
+}

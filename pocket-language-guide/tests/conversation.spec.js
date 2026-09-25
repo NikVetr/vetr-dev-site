@@ -1120,7 +1120,7 @@ test('the keypad’s own text is legible on the coloured stage', async ({ page }
 
 // --- the topic picker --------------------------------------------------------
 
-test('converse opens the topics, not a board', async ({ page }) => {
+test('converse opens the topics, not a board @smoke', async ({ page }) => {
   // A board is a situation. What someone needs face down on a massage table and what
   // they need in a taxi have almost nothing in common, and one grid holding both
   // would be a grid you have to read rather than glance at.
@@ -1704,7 +1704,7 @@ test('a time of day and a bare number are answers, not only a duration', async (
   await expect(page.locator('.board-entry-amount')).toHaveAttribute('type', 'time');
 });
 
-test('Reply is the one control drawn for the stranger, and the answers fit sideways', async ({ page }) => {
+test('Reply is the one control drawn for the stranger, and the answers fit sideways @smoke', async ({ page }) => {
   // Two things a phone showed. **Reply was one outlined control among three**, though
   // it is the only one on the screen addressed to the person being handed the phone —
   // who has a second to work out that a screen in their own language can be answered.

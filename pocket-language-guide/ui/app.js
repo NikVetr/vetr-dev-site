@@ -4,6 +4,7 @@
 // the registry and the pre-rendered packs, so it never pays for the solver, the
 // corpus or a CJK font; the studio loads everything.
 
+import { deliver } from './platform/shell.js';
 import { parseTable } from '../core/csv.js';
 import {
   DEFAULT_PADDING, defaultFieldSet, defaultSelection, hasContent, isSpoken, paperSpec,
@@ -321,8 +322,20 @@ export async function withBusy(button, label, run) {
   }
 }
 
-/** Trigger a download without leaving the page. @param {Blob} blob @param {string} name */
+/**
+ * Trigger a download without leaving the page.
+ *
+ * On a device the file goes through the native share sheet (`deliver`), because an
+ * anchor click in a WebView may do nothing; everywhere else, and on a device where
+ * that path is not available, it is the browser's own download.
+ * @param {Blob} blob @param {string} name
+ */
 export function download(blob, name) {
+  deliver(blob, name).then((taken) => { if (!taken) browserDownload(blob, name); });
+}
+
+/** @param {Blob} blob @param {string} name */
+function browserDownload(blob, name) {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
