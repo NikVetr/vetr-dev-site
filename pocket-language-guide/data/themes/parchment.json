@@ -1,0 +1,33 @@
+{
+  "id": "parchment",
+  "name": "Parchment",
+  "description": "The reference theme's type scale on cream paper, with navy ink and gold rules: the palette of an illuminated page rather than a printed form, drawn from a reference sheet for Quenya and at home under the elven frame or any language's motif. The row shade is a deeper cream, and the five section colours are the reference hues pulled toward earth and ink so they sit in the parchment rather than on it.",
+  "base": "latex-reference",
+  "note": {
+    "size": 5.24,
+    "leading": 6.55,
+    "pad": [
+      0.55,
+      1.25,
+      0.5,
+      1.75
+    ],
+    "radius": 1.2,
+    "spaceBefore": 0.55,
+    "stretch": 0.85
+  },
+  "colors": {
+    "ink": "#1F2B3C",
+    "muted": "#5A5344",
+    "rule": "#C9B784",
+    "shade": "#EFE5CC",
+    "paper": "#F6EEDB",
+    "roles": {
+      "comm": "#2E4A66",
+      "money": "#96652A",
+      "move": "#3B5F51",
+      "stay": "#5E4A7A",
+      "alert": "#8E3131"
+    }
+  }
+}

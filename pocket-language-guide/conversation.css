@@ -625,7 +625,10 @@
 /* The sentence and Reply, for the stranger: a column upright, and when turned a row
    with Reply on the left, set sideways -- which is "under the sentence" for someone
    reading the turned screen, and the only way they can find the button to press it. */
-.board-read { display: flex; flex-direction: column; gap: var(--space-2); flex: 1 1 auto; min-block-size: 0; min-inline-size: 0; }
+.board-read { position: relative; display: flex; flex-direction: column; gap: var(--space-2); flex: 1 1 auto; min-block-size: 0; min-inline-size: 0; }
+/* Reply in the corner the sentence's last line leaves: out of the flow, so the
+   sentence has the whole box, and placed by `fitFoot` from where the ink ended. */
+.board-reply-beside { position: absolute; margin: 0; max-inline-size: none; max-block-size: none; }
 .board-stage-turned .board-read { flex-direction: row-reverse; }
 /* May shrink below its content: turned, the sentence's columns stack across the
    screen and a flex item that keeps its content width pushes Reply off the edge,

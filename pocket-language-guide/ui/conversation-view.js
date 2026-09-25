@@ -775,11 +775,16 @@ function watchMessage(text, box) {
 /**
  * Size what sits around the sentence to the sentence.
  *
- * **Reply is as large as it can be and no wider than its words.** Its type is set
- * to four fifths of the sentence's and shrunk until the label fits the box on one
- * line; only if it cannot fit at 1rem does it wrap. So a short sentence gets a big
- * Reply and a long one a smaller, and the button is never a bar of colour with a
- * small word in it. Turned, the same along the height.
+ * **Reply is as large as the sentence's whitespace lets it be, and it is one of two
+ * rectangles.** The sentence's shape is ragged in exactly one place -- its last line
+ * ends short -- so there are two places Reply can stand: *below* the last line, in
+ * its own row with the whole width, or *beside* it, in the corner the short line
+ * leaves empty, with the sentence given the whole box. Both are tried and the one
+ * that leaves the two of them larger together is kept. Beside is what a turned
+ * sentence of two columns wants, where the second column ends halfway down and the
+ * corner under it is a third of the screen; below is what a one-line sentence wants,
+ * where beside it there is nothing. Reply's type is capped at four fifths of the
+ * sentence's either way and its label stays on one line.
  *
  * **The gloss takes the room the row gives it**, from the body size down to the
  * small one, at no more than two lines: the row's other half is three buttons, and
@@ -794,17 +799,22 @@ function fitFoot(box) {
   // **The sentence first, beside a Reply at its resting size.** A Reply still wearing
   // the size it was given upright is, turned, a column as wide as the sentence's --
   // the sentence was fitted into what that left and came out one column at 79px.
-  if (reply) reply.style.fontSize = '';
+  if (reply) {
+    reply.style.fontSize = '';
+    reply.style.left = reply.style.top = '';
+    reply.classList.remove('board-reply-beside');
+  }
   fitMessage(text, box);
   if (reply) {
+    const textSize = () => Number.parseFloat(getComputedStyle(text).fontSize);
     const read = /** @type {HTMLElement} */ (reply.parentElement);
+    // **Below.** Reply in its own row across the box, no wider than the sentence
+    // leaves unused -- or a fifth of the box, whichever is more. A Reply set at four
+    // fifths of a turned sentence would otherwise stand beside it as wide as one of
+    // its columns; but a sentence that fills one column of three has two columns of
+    // room, and a one-line sentence upright has most of the screen below it.
     const along = vertical(reply) ? 'scrollHeight' : 'scrollWidth';
     const room = vertical(reply) ? read.clientHeight : read.clientWidth;
-    // And across the box, no more than the sentence leaves unused -- or a fifth of
-    // the box, whichever is more. A Reply set at four fifths of a turned sentence
-    // would otherwise stand beside it as wide as one of its columns; but a sentence
-    // that fills one column of three has two columns of room, and a one-line
-    // sentence upright has most of the screen below it, and Reply may have that.
     const along2 = vertical(reply) ? 'width' : 'height';
     const across = vertical(reply) ? 'offsetWidth' : 'offsetHeight';
     const readAcross = vertical(reply) ? read.clientWidth : read.clientHeight;
@@ -816,18 +826,49 @@ function fitFoot(box) {
     // that takes every one of the rest forces a refit that drops a column.
     const spare = readAcross - text.getBoundingClientRect()[along2] - boxPad - 32;
     const most = Math.max(readAcross * 0.2, spare);
-    let size = Math.max(16, Number.parseFloat(getComputedStyle(text).fontSize) * 0.8);
-    reply.classList.add('board-reply-line');
-    reply.style.fontSize = `${size}px`;
-    while (size > 16 && (reply[along] > room || reply[across] > most)) {
-      size = Math.max(16, size * 0.92);
-      reply.style.fontSize = `${size}px`;
-    }
+    const below = shrinkReply(reply, textSize(), () => reply[along] <= room && reply[across] <= most);
     if (reply[along] > room) reply.classList.remove('board-reply-line');
     // The sentence's box has just changed shape by however much Reply grew, so it
     // is fitted again -- now, not a frame later when the observer notices, or the
     // text is drawn overflowing for that frame.
     fitMessage(text, box);
+    const belowScore = below * textSize();
+
+    // **Beside.** The sentence takes the whole box and Reply the corner its last
+    // line leaves. Not at the sentence's largest size only: fitted to the whole box
+    // the last line runs nearly to the edge and leaves no corner at all, so the
+    // sizes below it are walked -- eight steps, to about half -- and the one that
+    // leaves the two of them largest together is the one kept.
+    reply.classList.add('board-reply-beside');
+    reply.style.fontSize = '';
+    fitMessage(text, box);
+    const largest = textSize();
+    let best = { score: 0, size: largest, reply: 0, corner: /** @type {ReturnType<typeof freeCorner>} */ (null) };
+    for (let k = 0, size = largest; k < 9 && size >= MIN_MESSAGE_PX; k += 1, size *= 0.92) {
+      text.style.fontSize = `${size}px`;
+      if (!settle(text, box)) continue;
+      const corner = freeCorner(text, box);
+      if (!corner) continue;
+      const fitsCorner = () => reply.offsetWidth <= corner.w && reply.offsetHeight <= corner.h;
+      const px = shrinkReply(reply, size, fitsCorner);
+      if (!fitsCorner() || px * size <= best.score) continue;
+      best = { score: px * size, size, reply: px, corner };
+    }
+    if (best.corner && best.score >= belowScore) {
+      text.style.fontSize = `${best.size}px`;
+      settle(text, box);
+      reply.style.fontSize = `${best.reply}px`;
+      const at = read.getBoundingClientRect();
+      const { corner } = best;
+      reply.style.left = `${(corner.atLeft ? corner.left : corner.right - reply.offsetWidth) - at.left}px`;
+      reply.style.top = `${(corner.atTop ? corner.top : corner.bottom - reply.offsetHeight) - at.top}px`;
+    } else {
+      reply.classList.remove('board-reply-beside');
+      reply.classList.add('board-reply-line');
+      reply.style.fontSize = `${below}px`;
+      if (reply[along] > room) reply.classList.remove('board-reply-line');
+      fitMessage(text, box);
+    }
   }
   const gloss = /** @type {HTMLElement|null} */ (stage.querySelector('.board-message-gloss'));
   if (gloss) {
@@ -837,6 +878,75 @@ function fitFoot(box) {
       if (gloss.scrollHeight <= line * 2.4) break;
     }
   }
+}
+
+/**
+ * Reply's type from four fifths of the sentence's down, on one line, until `fits`.
+ * @param {HTMLElement} reply @param {number} textPx @param {() => boolean} fits
+ * @returns {number} the size settled on, 16 at the least
+ */
+function shrinkReply(reply, textPx, fits) {
+  let size = Math.max(16, textPx * 0.8);
+  reply.classList.add('board-reply-line');
+  reply.style.fontSize = `${size}px`;
+  while (size > 16 && !fits()) {
+    size = Math.max(16, size * 0.92);
+    reply.style.fontSize = `${size}px`;
+  }
+  return size;
+}
+
+/**
+ * The empty rectangle the sentence's last line leaves in the surface, in screen
+ * coordinates, and which of its corners Reply sits in.
+ *
+ * Along the line's own direction it runs from where the last line's ink ends -- the
+ * hanging mark included, which `lineRects` leaves out on purpose -- plus a buffer, to
+ * the surface's content edge; across, from the last line's leading edge to the
+ * surface's far edge, because nothing is written after the last line. Every line
+ * above it is at least as long, so a rectangle that starts level with the last line
+ * cannot touch them. A right-to-left sentence ends on the left and the corner is on
+ * that side; a turned one ends at the bottom and the corner is under it.
+ *
+ * Nothing at all when the sentence scrolls: there is no whitespace to lend.
+ * @param {HTMLElement} text @param {HTMLElement} box
+ * @returns {{left:number, top:number, right:number, bottom:number, w:number, h:number,
+ *   atLeft:boolean, atTop:boolean}|null}
+ */
+function freeCorner(text, box) {
+  if (box.classList.contains('board-message-scrolls')) return null;
+  const lines = lineRects(text);
+  if (!lines.length) return null;
+  const last = lines[lines.length - 1];
+  let end = { left: last.left, top: last.top, right: last.right, bottom: last.bottom };
+  const hang = text.querySelector(':scope > .board-message-punct');
+  if (hang && !text.classList.contains('board-punct-inline')) {
+    const range = document.createRange();
+    range.selectNodeContents(hang);
+    const ink = range.getBoundingClientRect();
+    end = { left: Math.min(end.left, ink.left), top: Math.min(end.top, ink.top),
+      right: Math.max(end.right, ink.right), bottom: Math.max(end.bottom, ink.bottom) };
+  }
+  const b = box.getBoundingClientRect();
+  const pad = getComputedStyle(box);
+  const inner = {
+    left: b.left + Number.parseFloat(pad.paddingLeft), right: b.right - Number.parseFloat(pad.paddingRight),
+    top: b.top + Number.parseFloat(pad.paddingTop), bottom: b.bottom - Number.parseFloat(pad.paddingBottom),
+  };
+  const buffer = Math.max(12, Number.parseFloat(getComputedStyle(text).fontSize) * 0.3);
+  const rtl = getComputedStyle(text).direction === 'rtl';
+  let r;
+  if (vertical(text)) {
+    // Columns right to left; the line runs down (or, right-to-left, up).
+    r = rtl
+      ? { left: inner.left, right: last.right, top: inner.top, bottom: end.top - buffer, atLeft: true, atTop: true }
+      : { left: inner.left, right: last.right, top: end.bottom + buffer, bottom: inner.bottom, atLeft: true, atTop: false };
+  } else {
+    r = rtl
+      ? { left: inner.left, right: end.left - buffer, top: last.top, bottom: inner.bottom, atLeft: true, atTop: false }
+      : { left: end.right + buffer, right: inner.right, top: last.top, bottom: inner.bottom, atLeft: false, atTop: false };
+  }
+  return { ...r, w: r.right - r.left, h: r.bottom - r.top };
 }
 /** @type {ResizeObserver|null} */ let shape = null;
 
@@ -973,47 +1083,7 @@ export function fitMessage(text, box) {
     // overflow, which is the signal to stop growing. The CSS keeps `break-word` for
     // the real render, so a word longer than the whole line still breaks rather than
     // running off the screen -- but only after the fitter has failed to avoid it.
-    const fits = () => {
-      const held = text.style.overflowWrap;
-      text.style.overflowWrap = 'normal';
-      // Height from the box that clips, width from the ink -- the same asymmetry
-      // `widestLine` exists for, and for the same reason: no box metric on a
-      // container-width element can report the word hanging out of it.
-      // Width is measured on unconstrained lines, so the block is reset first --
-      // `alignColumns` does that itself -- and the mark is measured *after* it, on
-      // the layout the text will actually take. A square script's last line starts
-      // at the block's left edge, not centred, which is further left than a centred
-      // line and leaves the mark more room: judged against centred lines, an
-      // eight-character question ending in `？` was refused every size above 58px
-      // that the column layout would have carried at 120.
-      fullSize(text);
-      // The mark hangs unless this size proves it cannot; a size that set it inline
-      // must not decide for the next one.
-      text.classList.remove('board-punct-inline');
-      // Overflow is checked along the block axis, which is across the screen when
-      // the text is turned: the sentence must fit the surface both ways.
-      const blocked = vertical(text)
-        ? box.scrollWidth <= box.clientWidth : box.scrollHeight <= box.clientHeight;
-      let ok = blocked && widestLine(text) <= lineRoom(text);
-      if (ok) {
-        alignColumns(text);
-        ok = hangFits(text);
-        // **A mark that cannot hang sits in the line instead.** A full-width `？` is
-        // a whole em, and no margin is an em wide; refusing every size at which it
-        // would not hang held a seven-glyph question to one line at 36px, when set
-        // inline it wraps two to a line at 150. So the mark hangs where it can and
-        // takes its place where it cannot, size by size.
-        if (!ok && text.querySelector(':scope > .board-message-punct')) {
-          text.classList.add('board-punct-inline');
-          fullSize(text);
-          ok = (vertical(text) ? box.scrollWidth <= box.clientWidth : box.scrollHeight <= box.clientHeight)
-            && widestLine(text) <= lineRoom(text);
-          if (ok) alignColumns(text); else text.classList.remove('board-punct-inline');
-        }
-      }
-      text.style.overflowWrap = held;
-      return ok;
-    };
+    const fits = () => settle(text, box);
     // **It grows as well as shrinks.** The CSS clamp is in `vw`, which is the right
     // unit for not overflowing sideways and blind to the other axis -- so on a tall
     // phone a four-character message was set at 43px in 844px of screen. The whole
@@ -1063,6 +1133,54 @@ export function fitMessage(text, box) {
   };
   run();
   if (document.fonts?.status !== 'loaded') document.fonts?.ready.then(run);
+}
+
+/**
+ * Lay the sentence out at its current size and say whether it fits the surface:
+ * `fitMessage`'s test, and the one step `fitFoot` repeats at sizes below the
+ * largest when it is looking for the size that leaves Reply a corner.
+ * @param {HTMLElement} text @param {HTMLElement} box
+ */
+function settle(text, box) {
+  const held = text.style.overflowWrap;
+  text.style.overflowWrap = 'normal';
+  // Height from the box that clips, width from the ink -- the same asymmetry
+  // `widestLine` exists for, and for the same reason: no box metric on a
+  // container-width element can report the word hanging out of it.
+  // Width is measured on unconstrained lines, so the block is reset first --
+  // `alignColumns` does that itself -- and the mark is measured *after* it, on
+  // the layout the text will actually take. A square script's last line starts
+  // at the block's left edge, not centred, which is further left than a centred
+  // line and leaves the mark more room: judged against centred lines, an
+  // eight-character question ending in `？` was refused every size above 58px
+  // that the column layout would have carried at 120.
+  fullSize(text);
+  // The mark hangs unless this size proves it cannot; a size that set it inline
+  // must not decide for the next one.
+  text.classList.remove('board-punct-inline');
+  // Overflow is checked along the block axis, which is across the screen when
+  // the text is turned: the sentence must fit the surface both ways.
+  const blocked = vertical(text)
+    ? box.scrollWidth <= box.clientWidth : box.scrollHeight <= box.clientHeight;
+  let ok = blocked && widestLine(text) <= lineRoom(text);
+  if (ok) {
+    alignColumns(text);
+    ok = hangFits(text);
+    // **A mark that cannot hang sits in the line instead.** A full-width `？` is
+    // a whole em, and no margin is an em wide; refusing every size at which it
+    // would not hang held a seven-glyph question to one line at 36px, when set
+    // inline it wraps two to a line at 150. So the mark hangs where it can and
+    // takes its place where it cannot, size by size.
+    if (!ok && text.querySelector(':scope > .board-message-punct')) {
+      text.classList.add('board-punct-inline');
+      fullSize(text);
+      ok = (vertical(text) ? box.scrollWidth <= box.clientWidth : box.scrollHeight <= box.clientHeight)
+        && widestLine(text) <= lineRoom(text);
+      if (ok) alignColumns(text); else text.classList.remove('board-punct-inline');
+    }
+  }
+  text.style.overflowWrap = held;
+  return ok;
 }
 
 /**

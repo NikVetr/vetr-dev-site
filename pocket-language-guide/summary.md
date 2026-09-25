@@ -826,7 +826,26 @@ sentence; turned, the sentence is in `writing-mode: vertical-rl` with
 `text-orientation: sideways` — a page held sideways, not vertical text — and Reply
 stands beside it on the left, set the same way, which is "under the sentence" for
 someone reading the turned screen and the only place they can find the button to
-press it. The owner's gloss, how-to-say-it, Speak, speed and Turn are the owner's, so
+press it.
+
+**Reply is one rectangle in one of two places, and the sentence's whitespace decides
+which.** A sentence is ragged in exactly one place — its last line ends short — so
+there are two rectangles Reply can have: its own row *below* the sentence, or the
+corner *beside* the last line, from where the ink ends to the surface's edge and
+from the last line's top to the bottom, which no earlier line can reach because
+every earlier line is at least as long. `fitFoot` tries both. Below is the row layout
+above; beside takes Reply out of the flow, gives the sentence the whole box, and
+walks the sentence's size down from its largest in eight steps — at its largest the
+last line runs to the edge and leaves no corner — keeping the size at which the two
+of them multiply out largest, then compares that against the row. A turned
+two-column question ends halfway down its second column and Reply takes the third
+of the screen under it at twice the size the row gave it, with the sentence larger
+too; a one-line sentence keeps the row, because beside it there is nothing. The
+hanging mark counts as ink, a right-to-left sentence's corner is on its left, a
+turned one's is under the last column (a turned right-to-left one's above it, where
+its lines end), a buffer of three tenths of the type size keeps the two apart, and
+a sentence that scrolls lends no corner at all. Reply's label stays on one line and
+its type at no more than four fifths of the sentence's, whichever place it takes. The owner's gloss, how-to-say-it, Speak, speed and Turn are the owner's, so
 they stay upright in one row at the foot and take as little as one line of small type
 and three buttons can; the sentence gets the rest. On the grid the same Turn sits in
 the bar that names the topic and the pair — a footer now rather than a sub-header,
@@ -1137,6 +1156,13 @@ and `[data-theme]` on the root pins one side. A one-line script in each page's h
 sets that attribute before the stylesheet applies, so a reader who chose dark does
 not get a white flash on every load. The default is the device's setting, and the
 choice sits in the board's settings dialog and the studio's format panel.
+
+`data/themes/parchment.json` is the reference scale on cream paper with navy ink,
+gold rules and the five roles pulled toward earth: the palette of the owner's
+reference sheet for Quenya — an illuminated page, parchment and gold leaf, not a
+printed form — offered as a theme rather than tied to the elven frame, because a
+cream card with navy type is a thing anyone might print. Under the frame the
+frame's own greens and golds sit in it rather than on it.
 
 Each theme has both a `description` (prose) and a `note` (the note-template
 style). These once collided as one key and JSON silently kept the last;

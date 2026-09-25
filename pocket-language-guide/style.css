@@ -156,7 +156,7 @@ h1.lede { font-size: var(--fs-1); font-weight: 400; line-height: 1.45; }
 .want-btn {
   display: flex; flex-direction: column; align-items: center; gap: 0.1rem;
   padding: 0.3rem 0.25rem; border: 1px solid var(--line); border-radius: 6px;
-  background: #fff; cursor: pointer; font: inherit; color: inherit;
+  background: var(--paper); cursor: pointer; font: inherit; color: inherit;
   text-align: center; min-width: 0;
 }
 .want-btn:hover { border-color: var(--accent-lift); background: var(--accent-soft); }
@@ -1992,7 +1992,7 @@ button.big { justify-content: center; padding: 0.6em 1em; font-size: var(--fs-1)
   max-height: 54px;
   margin-top: 8px;
   background: #fff;
-  border: 1px solid #dce3de;
+  border: 1px solid var(--line);
   border-radius: 4px;
 }
 .ornament-control p { margin: 5px 0 0; }

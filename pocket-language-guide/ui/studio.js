@@ -37,7 +37,7 @@ const BANNER_KEY = 'plg.banner-hidden';
 // has to be long enough that working down a list of checkboxes coalesces into one
 // solve rather than queueing one per click.
 const SOLVE_DEBOUNCE_MS = 260;
-const THEME_IDS = ['latex-reference', 'cvd-safe', 'dark'];
+const THEME_IDS = ['latex-reference', 'cvd-safe', 'dark', 'parchment'];
 
 const $ = (/** @type {string} */ id) => /** @type {HTMLElement} */ (document.getElementById(id));
 

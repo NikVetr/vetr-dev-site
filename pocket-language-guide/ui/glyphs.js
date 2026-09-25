@@ -997,7 +997,8 @@ export function paletteControl({ themes, themeId, themeColors, onChange }) {
       ...Object.keys(themes).map((id) => ({
         value: id,
         caption: id === 'cvd-safe' ? t('format.theme.accessible')
-          : id === 'dark' ? t('format.theme.dark') : t('format.theme.reference'),
+          : id === 'dark' ? t('format.theme.dark')
+            : id === 'parchment' ? t('format.theme.parchment') : t('format.theme.reference'),
         title: themes[id]?.name ?? id,
         glyph: paletteGlyph(roles(id)),
       })),

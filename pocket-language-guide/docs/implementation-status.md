@@ -4428,3 +4428,49 @@ Playwright 196/203 before the shell rebuild with the six offline failures and on
 gallery failure re-run green after it (the offline suite needed the new files in
 the shell manifest; the gallery one was the rounding above); board and studio
 suites re-run after the catalogues landed.
+
+## Batch Y — Reply in the corner, and the buttons dark mode forgot
+
+**Reply fits the sentence's whitespace.** The owner clarified the ask: Reply stays a
+rectangle; it is the *sentence* whose shape is irregular, and only at its last line,
+so there are exactly two rectangles to compare — the row below the sentence and the
+corner beside the last line. `fitFoot` tries both and keeps the one that leaves
+Reply and the sentence largest together. Fitted to the whole box the sentence's last
+line runs to the edge and leaves no corner, so the beside candidate walks the
+sentence's size down in eight steps of 8% and takes the best; `settle` is
+`fitMessage`'s fit test lifted out so the walk can lay the sentence out at a size
+and ask. `freeCorner` measures from the last line's ink — hanging mark included —
+plus a buffer of three tenths of the type size, mirrored for right-to-left and for a
+turned sentence (whose last line ends at the bottom, or the top when right-to-left),
+and returns nothing when the sentence scrolls. Probed at 390×844:
+
+| case | before: Reply / text | after: Reply / text | where |
+|---|---|---|---|
+| zh 我可以试一下吗？ turned | 25 / 108 | 57 / 138 | corner under the last column |
+| ja 処方箋は必要ですか？ turned | 25 / 108 | 51 / 115 | corner under the last column |
+| ar turned | 25 / 108 | 57 / 71 | corner above the last column, where its line ends |
+| en "Do I need a prescription?" turned | 38 / 93 | 38 / 93 | row kept: no corner worth having |
+| upright, all four | unchanged | unchanged | row kept |
+
+**Dark mode's white buttons.** The landing grid's language buttons kept a hardcoded
+white background under ink that had gone light, and read as grey on white. They
+take the paper token now. The other hardcoded whites were checked one by one and
+left: the studio's faces, the duplex cards, the saved-page images and the ornament
+sample are pictures of paper, and paper is white in either mode. Every page was
+screenshotted dark at phone and desktop widths and nothing else was found.
+
+**Parchment, from the reference sheet.** The owner's Quenya reference — an
+illuminated page, cream parchment, navy italic headings, gold rules and leaf-work
+in the margins — arrived as the style reference the earlier notes had asked for.
+What it changes that the elven frame did not already have is the *paper*: the
+frame's greens and golds were drawn on white. `data/themes/parchment.json` is that
+palette as a theme for any card, and the paper-rect mechanism the dark theme
+brought means it costs nothing new to render. The rest of the sheet's language —
+a title cartouche across the top, each section boxed with corner stars, painted
+side panels — is a larger design job and is noted here rather than started: the
+side panels are raster art the app does not ship, and the cartouche and boxes
+would be a new furniture form. The caption key `format.theme.parchment` is English
+only until the next string wave.
+
+Checks: `tsc` clean; board suite 59/59 with Reply in the corner; theme unit test;
+studio, quick-sheet and gallery suites and the gate before the push.
