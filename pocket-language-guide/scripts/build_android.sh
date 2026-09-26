@@ -21,6 +21,17 @@ export PATH="$JAVA_HOME/bin:$ANDROID_HOME/platform-tools:$PATH"
 
 npm run mobile -- --quiet
 [ -d android ] || npx cap add android
+# The beacon reaches the lamp through the camera, as it does in a browser, and a WebView
+# may ask for the camera only if the app declares it. Optional hardware, so a device
+# without a camera can still install the app.
+node -e '
+  const fs = require("fs"); const p = "android/app/src/main/AndroidManifest.xml";
+  let m = fs.readFileSync(p, "utf8");
+  if (!m.includes("android.permission.CAMERA")) {
+    m = m.replace("</manifest>", "    <uses-permission android:name=\"android.permission.CAMERA\" />\n    <uses-feature android:name=\"android.hardware.camera\" android:required=\"false\" />\n</manifest>");
+    fs.writeFileSync(p, m);
+  }
+'
 npx cap sync android
 # The devtools socket, for the emulator probe in docs/native.md. Debug builds only;
 # it lives in the generated project, never in the committed config.

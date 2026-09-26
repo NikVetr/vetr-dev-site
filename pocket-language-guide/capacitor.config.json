@@ -2,7 +2,10 @@
   "appId": "dev.vetr.pocketlanguageguide",
   "appName": "Phraselet",
   "webDir": "dist/mobile",
-  "android": {
-    "adjustMarginsForEdgeToEdge": "disable"
+  "plugins": {
+    "SystemBars": {
+      "insetsHandling": "native",
+      "initialViewportFitValueHint": "cover"
+    }
   }
 }

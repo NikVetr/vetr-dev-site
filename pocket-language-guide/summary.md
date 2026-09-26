@@ -2100,14 +2100,25 @@ overlay the preview adds afterwards.
 
 ## The native shell
 
-The same pages, wrapped by Capacitor (`capacitor.config.json`; `docs/native.md` has the
-detail and the emulator evidence). The bundle is an allowlist (`scripts/build_mobile.mjs`)
-with one reader language's pre-rendered cards, no service worker — every file is
-already local — and `data/native.json` saying so. `npm run android`
-(`scripts/build_android.sh`) regenerates the Android project, syncs it and assembles
-the debug APK; the project itself is generated and ignored, because this site is
-published by `git push` and a native project at the repository root would be served
-to the public web. The gate's `publish` check holds that boundary.
+The same pages, wrapped by Capacitor 8 (`capacitor.config.json`; `docs/native.md` has
+the detail and the emulator and simulator evidence). Capacitor 8 because iOS 27 will
+not launch an app built with its SDK that has not adopted the UIScene life cycle, and
+8's template has; both platforms share one version because they share one
+`package.json`. The bundle is an allowlist (`scripts/build_mobile.mjs`) with one reader
+language's pre-rendered cards, no service worker — every file is already local — and
+`data/native.json` saying so. `npm run android` (`scripts/build_android.sh`) and, on a
+Mac, `npm run ios` (`scripts/build_ios.sh`) regenerate each project, sync it and build;
+the iOS script is written for an SSH session (tools by path, macOS's bash 3.2, a
+deterministic version and build number) and has `--run`, `--device` and `--archive`
+modes, the last two signed. The projects themselves are generated and ignored,
+because this site is published by `git push` and a native project at the repository
+root would be served to the public web; the gate's `publish` check holds that
+boundary, and what the projects need beyond the template -- the camera declaration
+for the beacon's lamp, the devtools socket in a debug Android build -- the scripts
+write in on every run. `npm run check:android` and `npm run check:ios` drive the
+emulator and the simulator through launch, an offline start, persistence, the share
+sheet and its cancellation, and (on iOS) speech, the keyboard, safe areas and a trip
+to another app.
 
 Three seams keep platform detail out of the pages. `ui/platform/store.js` is
 `localStorage` on the web and, on a device, an in-memory mirror hydrated once from

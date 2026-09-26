@@ -4737,3 +4737,63 @@ gallery test requires.
 
 English-only until a string wave: `board.openTranslator`, `display.polite`,
 `display.politeCanada`, `editor.builtIn`.
+
+## Native I — the iOS app on the Mac, and both apps on Capacitor 8
+
+The owner's MacBook Air is the iOS build host now, reached from here as `ssh mba`.
+
+**Audit.** Xcode 27.0 (27A266a) with its first launch and licence done; the iOS 27.0
+SDK and simulator runtime, with iPhone 17, 17e, Air, 18 Pro and 18 Pro Max
+simulators; Node 26.0 and npm 11.12 and CocoaPods 1.17 from Homebrew (none of them on
+a non-interactive SSH PATH, which is why the script names them by path); macOS's own
+bash 3.2. No code-signing identity, no Xcode account, no provisioning profile; sudo
+needs a password (and nothing here needs it). Installed for testing: Meta's `idb`
+(companion 1.6.2 and client), `ios_webkit_debug_proxy`, Playwright's WebKit.
+
+**The first build installed and died.** iOS 27 refuses to launch an app built with
+its SDK that has not adopted the UIScene life cycle -- the log says so, "UIScene life
+cycle is required" -- and Capacitor 7's template has no scene delegate. Capacitor 8's
+has one and a scene proxy in its runtime, so the project moved to 8 on both platforms
+at once: iOS on Swift Package Manager and iOS 15, Android on compile SDK 36 (platform
+36 and build-tools 36 installed here), and SystemBars' `native` insets in place of the
+`adjustMarginsForEdgeToEdge` option v8 removed.
+
+**Scripts.** `scripts/build_ios.sh` (`npm run ios`) builds from a checkout of the pushed
+commit on the Mac (`~/repos/vetr-dev-site-ios`), SSH-safe and bash-3.2-safe, with a
+deterministic version (package.json) and build number (commit count); `--run` launches
+in the simulator, `--device` and `--archive` sign, and both stop at Xcode's own error
+without an account ("No Accounts"), which is where the owner's steps begin
+(docs/native.md, "Signing, a phone, and TestFlight"). `scripts/check_ios.mjs`
+(`npm run check:ios`) and `scripts/check_android.mjs` (`npm run check:android`, the
+emulator driver that lived in tmp/) are committed.
+
+**Evidence, simulator and emulator, not devices.** iOS, iPhone 17 simulator, 15 of
+15: first launch from a clean install; an offline start in which all 81 requests were
+answered from the app bundle; safe areas of 62pt and 34pt with header and footer clear;
+persistence through terminate + launch and a reinstall over the app; speech firing
+`start` and `end` from a real touch, 68 voices; typing into a touched field, which
+stays above the keyboard, and a full-height, unscrolled page after ✓; Save a copy and
+a 742 KB PDF export reaching the system share sheet; a touch outside it reported by
+the plugin as "Share canceled" with no browser download behind it; a trip to another
+app stopping a running beacon without reloading the page. Android, Android 15 emulator
+under KVM, 6 of 6 on Capacitor 8: launch with Filesystem, Preferences, Share and
+SystemBars; persistence through relaunch and `adb install -r`; a cold start with the
+radios off; the chooser opening and BACK cancelling it cleanly. Once, right after a
+check run had been killed mid-way, the emulator's first load of the board came up
+blank -- the page's script never ran -- and a reload drew it; the next full run did
+not reproduce it. Recorded, not explained.
+
+**Found on the way.** The 16px text-field rule (Batch Z) came out of this: the check's
+touches kept missing because the page was zoomed. So did a Batch Z bug: the footer's
+plus and Turn buttons take their `display` from a class, which outranked their
+`hidden`, so both showed on the topic list, the plus doing nothing; a `[hidden]` rule
+and an assertion in the topic-list test fixed it. And three harness facts worth
+keeping: the WebView's content is not in the simulator's accessibility tree, so web
+controls are touched at the point the page reports for them; a fresh simulator's
+keyboard opens with a one-time tip over it; and the share sheet announces itself by a
+"dismiss popup" region, which is also how it is cancelled.
+
+**Camera, for the lamp.** Both generated projects now declare the camera
+(`NSCameraUsageDescription`; an optional `CAMERA` permission), because the beacon
+reaches the torch through the camera as it does in Safari, where the owner reports it
+working on an iPhone. Neither emulator has a torch, so this is a device check.
