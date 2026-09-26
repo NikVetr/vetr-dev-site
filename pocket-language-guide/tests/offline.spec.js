@@ -1,5 +1,31 @@
 import { existsSync } from 'node:fs';
+import { spawn } from 'node:child_process';
 import { test, expect } from '@playwright/test';
+
+/**
+ * How this test goes offline, which depends on the engine.
+ *
+ * Chromium's `setOffline` fails the network and leaves the service worker to answer,
+ * which is what a phone with no signal does. Playwright's WebKit does not: under
+ * `setOffline` even a `fetch` the worker should answer from its cache fails, on
+ * Linux and on macOS alike -- while with the server really gone the same worker
+ * serves the same fetch and the same navigation, and the board draws all twelve
+ * buttons (measured, both engines). So in WebKit the page is served by a server of
+ * its own and "offline" is that server stopping: a real network failure, which is
+ * the thing under test, rather than an emulation that engine does not honour.
+ * @param {string} browserName @param {import('@playwright/test').BrowserContext} context
+ * @returns {Promise<{base:string, goOffline:() => Promise<void>}>}
+ */
+async function offlineHarness(browserName, context) {
+  if (browserName !== 'webkit') return { base: '', goOffline: () => context.setOffline(true) };
+  const port = 8150 + Math.floor(Math.random() * 40);
+  const server = spawn('npx', ['http-server', '.', '-p', String(port), '-c-1', '--silent'], { stdio: 'ignore' });
+  await new Promise((resolve) => { setTimeout(resolve, 1500); });
+  return {
+    base: `http://127.0.0.1:${port}`,
+    goOffline: async () => { server.kill('SIGKILL'); await new Promise((resolve) => { setTimeout(resolve, 1000); }); },
+  };
+}
 
 /**
  * Whether a prerender has left `packs/` in place.
@@ -253,7 +279,7 @@ test('a stale page in the pack cache is never served under current modules', asy
   await expect(page.locator('body > .container')).toHaveCount(0);
 });
 
-test('a board works on a cold offline visit with nothing saved @smoke', async ({ page, context }) => {
+test('a board works on a cold offline visit with nothing saved @smoke', async ({ page, context, browserName }) => {
   // **O01, and the reason a board's corpus is in the shell.** Everything else in
   // this app is something a reader chose in advance -- they browsed the gallery,
   // opened a sheet, and if they meant to use it abroad they saved the pair. Someone
@@ -266,14 +292,15 @@ test('a board works on a cold offline visit with nothing saved @smoke', async ({
   // each language. Deliberately *no* `save()` call here -- adding one would make
   // this pass for the wrong reason and stop testing the thing it is named for.
   test.skip(!HAS_PACKS, NEEDS_PACKS);
-  await page.goto('/');
+  const { base, goOffline } = await offlineHarness(browserName, context);
+  await page.goto(`${base}/`);
   await expect(page.locator('.card').first()).toBeVisible();
   await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
 
   /** @type {string[]} */ const errors = [];
   page.on('pageerror', (e) => errors.push(String(e).slice(0, 140)));
-  await context.setOffline(true);
-  await page.goto('/conversation.html?target=zh-Hans&source=en&board=spa&replies=1');
+  await goOffline();
+  await page.goto(`${base}/conversation.html?target=zh-Hans&source=en&board=spa&replies=1`);
 
   await expect(page.locator('.board-cell').first()).toBeVisible({ timeout: 30_000 });
   // The whole grid, not merely a page that rendered: a board that resolves half its

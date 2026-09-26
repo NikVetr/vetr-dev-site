@@ -4797,3 +4797,34 @@ keyboard opens with a one-time tip over it; and the share sheet announces itself
 (`NSCameraUsageDescription`; an optional `CAMERA` permission), because the beacon
 reaches the torch through the camera as it does in Safari, where the owner reports it
 working on an iPhone. Neither emulator has a torch, so this is a device check.
+
+## WebKit, and the gates that remain
+
+**WebKit runs on this machine now** (the owner installed the host libraries), and the
+`@smoke` set passes in it, 6 of 6 (`WEBKIT=1 npx playwright test --project=webkit`).
+One test failed first, and the failure was the harness's: under Playwright's
+`setOffline`, WebKit refuses even a `fetch` the service worker should answer from its
+cache -- on Linux and on macOS alike -- while with the server really stopped the same
+worker serves the same fetch and the same navigation, and the board draws all twelve
+buttons. So in WebKit the cold-offline board test serves itself and stops its own
+server, a real network failure, with every assertion unchanged; Chromium keeps its
+emulation. Both pass, twice each.
+
+**What still stands between this checkout and a release**, by kind of evidence:
+
+- **Automated, done:** Chromium 204 of 205 (one skipped by design), WebKit smoke 6 of 6,
+  unit tests, the ten-check gate, `check:android` 6 of 6 and `check:ios` 15 of 15.
+- **Emulator and simulator, not a phone:** the lamp (neither has a torch), what the
+  share sheet's destinations do with a file, how speech sounds, and the keyboard with
+  a real hand. The next step is the owner's iPhone, through `npm run ios -- --device`.
+- **Owner steps before a phone or TestFlight** (docs/native.md, "Signing, a phone, and
+  TestFlight"): an Xcode account on the Mac, the paid developer programme for
+  TestFlight, a settled bundle identifier and an App Store Connect record, Developer
+  Mode on the iPhone, and a way for codesign to reach the keychain over SSH.
+- **Owner decisions:** the app icon (Capacitor's placeholder today), splash, store text
+  and screenshots, and the privacy answers ("Data Not Collected").
+- **Strings:** four interface strings are English-only until the wave running now lands:
+  `board.openTranslator`, `display.polite`, `display.politeCanada`, `editor.builtIn`.
+- **Fluent review:** the owner has forgone human audits; the catalogues and the corpus
+  are subagent-sourced against the reference lists in `content/PROMPTS/`, and that is
+  what they should be read as.
