@@ -13,11 +13,17 @@
 //
 // A half-written phrase is still saved, because a reader may be coming back to it,
 // and `resolvePhrase` refuses to resolve one — so it can never reach a listener.
+//
+// **A tree is screens of the reader's own.** A screen is added here like a button and
+// opens like the board's submenus; its own buttons are added by opening it and pressing
+// the plus there. What is on a screen travels as a file -- saved from one board, loaded
+// onto any screen of the same pair, on this device or another.
 
 import {
   write, addPhrase, editPhrase, removePlacement, deletePhrase,
-  placementsOf, movePlacement, showBuiltIn,
+  placementsOf, movePlacement, showBuiltIn, placedOn, screenContents, graftContents,
 } from './board-store.js';
+import { buildButtons, readButtons } from '../core/personal.js';
 import { t } from './i18n.js';
 
 /** @param {string} tag @param {Record<string,string>} attrs @param {(Node|string)[]} kids */
@@ -44,11 +50,12 @@ function el(tag, attrs = {}, kids = []) {
  * @param {{data:import('./board-store.js').BoardPersonal, damaged:boolean}} config.state
  *   the page's own copy, hydrated once at start-up
  * @param {(next:import('./board-store.js').BoardPersonal)=>void} config.onChange
+ *   hand the new state back and repaint; the page is authoritative, not the disk
+ * @param {(blob:Blob, name:string)=>void} config.save  hand a file to the reader
  * @param {{id:string, label:string}[]} [config.builtIn]  the board's own buttons on this
  *   screen, each offered with a switch to hide it here
- *   hand the new state back and repaint; the page is authoritative, not the disk
  */
-export function openBoardEditor({ at, pair, owner, listener, listenerDir, state: held, onChange, builtIn = [] }) {
+export function openBoardEditor({ at, pair, owner, listener, listenerDir, state: held, onChange, save: deliver, builtIn = [] }) {
   const panel = /** @type {HTMLDialogElement} */ (el('dialog', { class: 'board-editor' }));
   // **Handed in, not read here.** Re-reading storage on every repaint meant the
   // board asked the disk what the reader had just typed while the write was still
@@ -73,6 +80,62 @@ export function openBoardEditor({ at, pair, owner, listener, listenerDir, state:
   };
 
   const status = el('p', { class: 'board-editor-status', role: 'status' });
+  const board = at.split('/')[0];
+
+  /** A labelled input. @param {string} key @param {HTMLElement} input */
+  const field = (key, input) => el('label', { class: 'board-editor-field' },
+    [el('span', { class: 'small muted', text: t(key) }), input]);
+
+  /**
+   * A screen's name: the one field a screen has. Adding one puts it on this screen;
+   * its own buttons are added by opening it on the board and pressing the plus there.
+   * @param {import('./board-store.js').CustomPhrase} [existing]
+   */
+  const screenForm = (existing) => {
+    const name = /** @type {HTMLInputElement} */ (el('input', { type: 'text', maxlength: '40' }));
+    if (existing) name.value = existing.label;
+    const add = el('button', { type: 'button', text: t(existing ? 'editor.save' : 'editor.addScreen') });
+    add.addEventListener('click', async () => {
+      const label = name.value.trim();
+      if (!label) return;
+      await commit(existing ? editPhrase(state.data, existing.id, { label })
+        : addPhrase(state.data, { label, owner: '', listener: '', pair, screen: true }, at).data);
+      draw();
+    });
+    return el('div', { class: 'board-editor-form board-editor-screen' },
+      [field('editor.screenName', name), el('div', { class: 'row' }, [add])]);
+  };
+
+  /** Save what is on this screen as a file, or load a file's buttons onto it. */
+  const transfer = () => {
+    const out = /** @type {HTMLButtonElement} */ (el('button', { type: 'button', class: 'ghost', text: t('editor.exportButtons') }));
+    out.disabled = !placedOn(state.data, at, pair).length;
+    out.addEventListener('click', () => deliver(
+      new Blob([JSON.stringify(buildButtons(pair, screenContents(state.data, at, pair)), null, 2)], { type: 'application/json' }),
+      `phraselet-buttons-${pair}.json`,
+    ));
+    const file = /** @type {HTMLInputElement} */ (el('input', { type: 'file', accept: 'application/json,.json', class: 'visually-hidden' }));
+    const load = el('button', { type: 'button', class: 'ghost', text: t('editor.importButtons') });
+    load.addEventListener('click', () => file.click());
+    file.addEventListener('change', async () => {
+      const chosen = file.files?.[0];
+      if (!chosen) return;
+      const got = readButtons(await chosen.text(), pair);
+      file.value = '';
+      if (!got.ok) {
+        // The sentence is the reader's; the diagnostics name keys out of the file and
+        // stay English, tagged as such so a right-to-left interface does not reorder them.
+        status.replaceChildren(t('personal.refused'), ' ', el('span', { lang: 'en', dir: 'ltr', text: got.problems.join('; ') }));
+        status.classList.add('board-editor-error');
+        return;
+      }
+      await commit(graftContents(state.data, got.data, at));
+      status.classList.remove('board-editor-error');
+      status.textContent = t('editor.imported', { count: String(Object.keys(got.data.phrases).length) });
+      draw();
+    });
+    return el('div', { class: 'row board-editor-transfer' }, [out, load, file]);
+  };
 
   /**
    * The form. Two complete sentences and a short label, and it does not pretend the
@@ -88,11 +151,6 @@ export function openBoardEditor({ at, pair, owner, listener, listenerDir, state:
       /** @type {HTMLInputElement} */ (own).value = existing.owner;
       /** @type {HTMLInputElement} */ (theirs).value = existing.listener;
     }
-
-    const field = (/** @type {string} */ key, /** @type {HTMLElement} */ input) => el(
-      'label', { class: 'board-editor-field' },
-      [el('span', { class: 'small muted', text: t(key) }), input],
-    );
 
     // **The preview is the exact text that will be shown**, not an approximation of
     // it: §5.2 asks for that because a reader who previewed one thing and showed a
@@ -160,14 +218,16 @@ export function openBoardEditor({ at, pair, owner, listener, listenerDir, state:
       draw();
     });
 
+    // What a screen holds, so deleting one says what goes with it.
+    const holds = phrase.screen ? (state.data.placements[`${board}/${phrase.id}`] ?? []).length : 0;
     const gone = el('button', { type: 'button', class: 'ghost', text: t('editor.delete') });
     gone.addEventListener('click', () => {
       // **A phrase may be on more than one board, and deleting it takes all of
       // them.** Saying how many is the difference between a delete and a surprise.
       const where = placementsOf(state.data, phrase.id);
-      const ask = where.length > 1
-        ? t('editor.confirmDeleteMany', { count: String(where.length) })
-        : t('editor.confirmDelete');
+      const ask = phrase.screen ? t('editor.confirmDeleteScreen', { count: String(holds) })
+        : where.length > 1 ? t('editor.confirmDeleteMany', { count: String(where.length) })
+          : t('editor.confirmDelete');
       // eslint-disable-next-line no-alert
       if (!confirm(ask)) return;
       commit(deletePhrase(state.data, phrase.id));
@@ -176,16 +236,19 @@ export function openBoardEditor({ at, pair, owner, listener, listenerDir, state:
 
     const edit = el('button', { type: 'button', class: 'ghost', text: t('editor.edit') });
     edit.addEventListener('click', () => {
-      body.replaceChildren(form(phrase));
+      body.replaceChildren(phrase.screen ? screenForm(phrase) : form(phrase));
     });
 
     return el('li', { class: 'board-editor-row' }, [
       el('div', { class: 'board-editor-said' }, [
         el('strong', { text: phrase.label || phrase.owner }),
-        el('span', { class: 'small muted', text: phrase.listener || t('editor.noListenerText') }),
+        el('span', { class: 'small muted', text: phrase.screen ? t('editor.screenHolds', { count: String(holds) })
+          : phrase.listener || t('editor.noListenerText') }),
       ]),
+      // A screen is not taken off one screen and left somewhere else: what is on it
+      // would have nowhere to be drawn. It is moved, renamed or deleted.
       el('div', { class: 'row' }, [move(-1, '↑', i === 0), move(1, '↓', i === total - 1),
-        edit, off, gone]),
+        edit, ...(phrase.screen ? [] : [off]), gone]),
     ]);
   };
 
@@ -225,6 +288,8 @@ export function openBoardEditor({ at, pair, owner, listener, listenerDir, state:
             /** @type {number} */ i) => row(p, i, placed.length)))
         : el('p', { class: 'small muted', text: t('editor.none') }),
       form(),
+      screenForm(),
+      transfer(),
     );
   }
 

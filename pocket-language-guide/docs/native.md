@@ -215,12 +215,33 @@ account in Accounts settings". What is left is the owner's:
 5. **For headless uploads**, create an App Store Connect API key (Users and Access >
    Integrations, App Manager role) and keep the `.p8` on the Mac, outside the
    repository.
-6. **Decide what the store sees**: an app icon (the build still carries Capacitor's
-   placeholder), and the privacy answers -- the app collects nothing and sends
-   nothing, which App Store Connect records as "Data Not Collected".
+6. **Decide what the store sees**: the icon and launch image are the site's own mark
+   (`scripts/build_app_icons.mjs` renders them from `favicon.svg`; replace the file
+   and re-run to change them), screenshots and store text are not written, and the
+   privacy answers -- the app collects nothing and sends nothing -- are what App
+   Store Connect records as "Data Not Collected".
 
 No administrator password is needed for any of this: Xcode's licence and first
 launch are already done.
+
+## An Android release
+
+`npm run android -- --release` builds a signed app bundle (`.aab`) for Google Play,
+versioned like the iOS build (package.json's version, the commit count as the version
+code). The key is passed to Gradle as injected signing properties -- what Android
+Studio does -- so nothing about it is written into the project; the script refuses to
+start without all four of `ANDROID_KEYSTORE`, `ANDROID_KEYSTORE_PASSWORD`,
+`ANDROID_KEY_ALIAS` and `ANDROID_KEY_PASSWORD`. Proven end to end with a throwaway key
+(built, then `jarsigner -verify`: "jar verified"). The owner's part:
+
+1. **A Play Console developer account**, and the same identity decision as iOS: the
+   application ID is effectively permanent once a listing exists.
+2. **An upload key**, kept outside the repository and backed up:
+   `keytool -genkeypair -keystore ~/keys/phraselet-upload.jks -alias upload -keyalg RSA -keysize 2048 -validity 10000`.
+   Play App Signing holds the key the store actually signs with; this one only
+   proves an upload is the owner's.
+3. **The internal testing track** first: upload the bundle there and install it on a
+   phone from the Play Store before anything wider.
 
 ## Not done
 
@@ -232,6 +253,6 @@ launch are already done.
 - **N2 delivery is wired, not device-proven.** Every export and the backup go
   through `deliver()` on a device; the emulator shows the chooser open and close.
   What a real Files app or mail client does with the URI is for a phone to say.
-- **N5 and N6.** Repeatable builds are done (`npm run android`, `npm run ios`) and
-  signing is wired to stop at the owner's steps above; icons, splash and store
-  metadata are untouched, and need owner decisions before they mean anything.
+- **N5 and N6.** Repeatable builds are done (`npm run android`, `npm run ios`),
+  signing is wired to stop at the owner's steps above, and the icons and launch
+  images are the site's mark; store screenshots and text are the owner's to write.

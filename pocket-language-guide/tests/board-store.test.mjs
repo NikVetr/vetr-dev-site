@@ -5,7 +5,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
   read, write, addPhrase, editPhrase, removePlacement, deletePhrase,
-  placementsOf, movePlacement, placedOn, fromSheetExtra,
+  placementsOf, movePlacement, placedOn, fromSheetExtra, screenContents, graftContents,
 } from '../ui/board-store.js';
 
 /** A `localStorage` that behaves, and can be told to misbehave. */
@@ -186,4 +186,58 @@ test('a sheet extra can be copied onto a board, and it is a copy', () => {
   // The source object is untouched: nothing here holds a reference back to it.
   assert.equal(extra.gloss, 'I am vegetarian');
   assert.equal(edited.phrases[id].owner, 'I eat no meat');
+});
+
+/** A screen of the reader's own, placed at `at`. @param {any} data @param {string} label @param {string} at */
+const screen = (data, label, at) => addPhrase(data, { label, owner: '', listener: '', pair: PAIR, screen: true }, at);
+const blank = () => ({ schemaVersion: 1, phrases: {}, placements: {} });
+
+test('a screen holds its own buttons, and deleting it takes them unless they are elsewhere', () => {
+  const s = screen(blank(), 'Allergies', AT);
+  const inside = `spa/${s.id}`;
+  const a = addPhrase(s.data, sample, inside);
+  const b = addPhrase(a.data, { ...sample, label: 'Also here' }, inside);
+  // The second button is on the screen and on the board's own node too.
+  const data = { ...b.data, placements: { ...b.data.placements, [AT]: [...b.data.placements[AT], b.id] } };
+  const after = deletePhrase(data, s.id);
+  assert.equal(after.phrases[s.id], undefined);
+  assert.equal(after.phrases[a.id], undefined, 'a button only on the screen goes with it');
+  assert.ok(after.phrases[b.id], 'a button also placed elsewhere stays there');
+  assert.deepEqual(after.placements[AT], [b.id]);
+  assert.equal(inside in after.placements, false);
+});
+
+test('a screen\'s buttons travel under fresh ids, keyed relative to where they were', () => {
+  // AT: phrase A and screen S; on S: phrase C and screen T; on T: phrase D -- and one
+  // phrase written for another pair, which does not travel with this one.
+  let d = addPhrase(blank(), { ...sample, label: 'A' }, AT);
+  const A = d.id;
+  const S = screen(d.data, 'S', AT);
+  d = addPhrase(S.data, { ...sample, label: 'C' }, `spa/${S.id}`);
+  const T = screen(d.data, 'T', `spa/${S.id}`);
+  d = addPhrase(T.data, { ...sample, label: 'D' }, `spa/${T.id}`);
+  d = addPhrase(d.data, { ...sample, label: 'other pair', pair: 'ja__en' }, AT);
+  const contents = screenContents(d.data, AT, PAIR);
+  assert.deepEqual(contents.placements['.'], [A, S.id]);
+  assert.equal(Object.keys(contents.phrases).length, 5);
+  assert.equal(contents.placements[T.id].length, 1);
+  // Two screens inside each other -- which a file written by hand can say -- are
+  // walked once each rather than for ever.
+  const looped = { ...d.data, placements: { ...d.data.placements, [`spa/${T.id}`]: [...d.data.placements[`spa/${T.id}`], S.id] } };
+  assert.equal(Object.keys(screenContents(looped, AT, PAIR).phrases).length, 5);
+
+  const landed = graftContents(blank(), contents, 'food/main');
+  const top = landed.placements['food/main'];
+  assert.equal(top.length, 2);
+  assert.ok(top.every((id) => !(id in contents.phrases)), 'every phrase under a new id');
+  const newS = top[1];
+  assert.equal(landed.phrases[newS].label, 'S');
+  assert.equal(landed.phrases[newS].screen, true);
+  const onS = landed.placements[`food/${newS}`];
+  assert.deepEqual(onS.map((id) => landed.phrases[id].label), ['C', 'T']);
+  assert.deepEqual(landed.placements[`food/${onS[1]}`].map((id) => landed.phrases[id].label), ['D']);
+  // Loaded twice, it adds rather than collides.
+  const twice = graftContents(landed, contents, 'food/main');
+  assert.equal(twice.placements['food/main'].length, 4);
+  assert.equal(Object.keys(twice.phrases).length, 10);
 });

@@ -55,8 +55,17 @@ const files = (await Promise.all(CODE.map(sources))).flat()
   .filter((rel) => !NOT_A_CONSUMER.has(rel))
   .concat(DATA);
 /** @type {Map<string, string[]>} */ const used = new Map();
+// Two more ways code names a key, used only to mark a key live and never to report
+// one missing -- a quoted dotted string is not always a message key: a key passed as
+// an argument or chosen in a ternary (`field('editor.label', ...)`,
+// `t(n === 0 ? 'format.fold.none' : ...)`), and a family built from a template
+// (`t(\`speech.${reason}\`)`), which marks every key under its static prefix.
+/** @type {Set<string>} */ const quoted = new Set();
+/** @type {string[]} */ const families = [];
 for (const rel of files) {
   const text = await readFile(join(ROOT, rel), 'utf8');
+  for (const m of text.matchAll(/['"]([\w-]+(?:\.[\w-]+)+)['"]/g)) quoted.add(m[1]);
+  for (const m of text.matchAll(/\bt\(\s*`([\w.-]+)\$\{/g)) families.push(m[1]);
   // `t('key')` and `warningText` aside, static markup carries the key in an
   // attribute. Both forms are matched so neither can drift on its own.
   const patterns = [
@@ -94,7 +103,8 @@ const byCode = [...keys].filter((k) => BY_CODE.some((p) => k.startsWith(p)));
 
 const missing = [...used.keys()].filter((k) => !keys.has(k)).sort();
 const unused = [...keys]
-  .filter((k) => !used.has(k) && !byCode.includes(k))
+  .filter((k) => !used.has(k) && !byCode.includes(k) && !quoted.has(k)
+    && !families.some((prefix) => k.startsWith(prefix)))
   .sort();
 
 console.log(`${keys.size} keys in en.json, ${used.size} referenced in ${files.length} files`);

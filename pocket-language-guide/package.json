@@ -23,6 +23,7 @@
     "vendor": "node scripts/build_vendor.mjs",
     "icons": "node scripts/extract_icons.mjs",
     "logo": "node scripts/build_logo.mjs",
+    "app-icons": "node scripts/build_app_icons.mjs",
     "preview": "node scripts/render_preview.mjs",
     "shell": "node scripts/build_shell.mjs",
     "i18n": "node scripts/check_i18n.mjs",

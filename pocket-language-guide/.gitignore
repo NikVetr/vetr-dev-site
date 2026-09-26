@@ -4,5 +4,7 @@ tmp/
 test-results/
 __pycache__/
 dist/
-ios/
-android/
+# The generated native projects, and the iOS build's derived data (scripts/build_*.sh).
+/ios/
+/android/
+/build/

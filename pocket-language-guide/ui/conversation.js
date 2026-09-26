@@ -11,7 +11,7 @@
 // view over language content, and `core/pack.js` is a data-only join. What this page
 // downloads is the corpus rows for two languages and a JSON file.
 
-import { wireSiteMenu, translatorLinks } from './site-menu.js';
+import { wireSiteMenu } from './site-menu.js';
 import {
   loadText, loadLanguages, readerLanguage, registerOffline, showFatal,
   deferUpdates, applyUpdateIfIdle, download, keepBoardOffline, accentFor,
@@ -26,7 +26,7 @@ import {
   validateBoard, resolvePhrase, missingPhrases, reduce, openBoard, currentNode,
 } from '../core/conversation.js';
 import {
-  renderGrid, renderMessage, renderReply, renderEntry, clearStage, fitMessage,
+  renderGrid, renderMessage, renderReply, renderEntry, clearStage, fitMessage, translatorLinks,
 } from './conversation-view.js';
 import { resolveValue } from '../core/conversation.js';
 import {
@@ -495,13 +495,23 @@ async function main() {
       ...node,
       buttons: [
         ...node.buttons.filter((b) => !hidden.includes(b.id)),
-        ...mine.map((p) => /** @type {import('../core/conversation.js').BoardButton} */ ({
-          id: p.id, kind: 'message', colour: 'stay',
-          phraseRef: { kind: 'custom', id: p.id },
-        })),
+        // A screen of the reader's own opens like the board's submenus do; its id is
+        // the node the path moves to, and what is on it is placed under that id.
+        ...mine.map((p) => /** @type {import('../core/conversation.js').BoardButton} */ (p.screen
+          ? { id: p.id, kind: 'submenu', nodeId: p.id, colour: 'stay' }
+          : { id: p.id, kind: 'message', colour: 'stay', phraseRef: { kind: 'custom', id: p.id } })),
       ],
     };
   };
+
+  /**
+   * The node the path is on: the board's own, or a screen the reader made, which the
+   * board file does not have and the personal store does. A screen deleted from under
+   * the path is an empty node rather than a crash, and Up leaves it.
+   * @returns {import('../core/conversation.js').BoardNode}
+   */
+  const nodeHere = () => currentNode(board, state)
+    ?? { title: personal.data.phrases[/** @type {string} */ (state.path.at(-1))]?.label ?? '', buttons: [] };
 
   /**
    * @param {import('../core/conversation.js').BoardButton} button
@@ -566,7 +576,7 @@ async function main() {
 
   function paint() {
     const stage = $('board-stage');
-    const node = withOwn(currentNode(board, state));
+    const node = withOwn(nodeHere());
     // Held for exactly as long as a sentence is being read by someone else. A
     // stranger reading an unfamiliar script off a phone held at arm's length will
     // often take longer than the display timeout, and the screen going dark means
@@ -595,7 +605,7 @@ async function main() {
       $('board-up').setAttribute('aria-label', atRoot ? t('board.allTopics') : t('board.up'));
       renderGrid($('board-grid'), node, {
         lang: owner,
-        title: node.titleKey ? t(node.titleKey) : undefined,
+        title: node.titleKey ? t(node.titleKey) : node.title,
         label: labelOf,
         // A submenu and a beacon are always available: neither is a phrase, so
         // neither can be missing from the corpus.
@@ -880,7 +890,7 @@ async function main() {
   const openEditor = () => openBoardEditor({
     at: `${boardId}/${state.path.at(-1)}`,
     // The board's own buttons on this screen, so the reader can switch them off.
-    builtIn: currentNode(board, state).buttons
+    builtIn: nodeHere().buttons
       .filter((b) => b.kind !== 'beacon')
       .map((b) => ({ id: b.id, label: labelOf(b) })),
     pair,
@@ -888,6 +898,7 @@ async function main() {
     listener,
     listenerDir: ctx.listenerDir,
     state: personal,
+    save: download,
     onChange: (next) => { personal = { ...personal, data: next }; paint(); },
   });
 

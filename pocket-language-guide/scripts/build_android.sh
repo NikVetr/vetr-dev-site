@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
-# Build the Android debug APK from a clean checkout, reproducibly.
+# Build the Android app from a clean checkout, reproducibly.
 #
-#   npm run android            # bundle, add/sync the project, assemble
-#   npm run android -- --sync  # bundle and sync only (no Gradle)
+#   npm run android               # bundle, add/sync the project, assemble the debug APK
+#   npm run android -- --sync     # bundle and sync only (no Gradle)
+#   npm run android -- --release  # a signed app bundle for Play, from the upload key in
+#                                 # ANDROID_KEYSTORE, ANDROID_KEYSTORE_PASSWORD,
+#                                 # ANDROID_KEY_ALIAS and ANDROID_KEY_PASSWORD
 #
 # The Android project itself (`android/`) is generated and gitignored: this site is
 # published by `git push` to GitHub Pages, so a native project at the repository root
@@ -12,6 +15,11 @@
 # build-tools), or wherever JAVA_HOME / ANDROID_HOME already point.
 set -euo pipefail
 cd "$(dirname "$0")/.."
+if [ "${1:-}" = "--release" ]; then
+  for v in ANDROID_KEYSTORE ANDROID_KEYSTORE_PASSWORD ANDROID_KEY_ALIAS ANDROID_KEY_PASSWORD; do
+    [ -n "${!v:-}" ] || { echo "$v is not set: a Play release is signed with the owner's upload key (docs/native.md, \"An Android release\")"; exit 1; }
+  done
+fi
 
 export JAVA_HOME="${JAVA_HOME:-$HOME/android-tools/jdk21}"
 export ANDROID_HOME="${ANDROID_HOME:-$HOME/android-tools/sdk}"
@@ -32,6 +40,22 @@ node -e '
     fs.writeFileSync(p, m);
   }
 '
+# The mark over the template's placeholders (scripts/build_app_icons.mjs draws them),
+# and a launch screen that centres it rather than eleven stretched bitmaps: one
+# drawable over the paper colour, dark when the phone is.
+RES=android/app/src/main/res
+cp -R assets/native/android/. "$RES/"
+rm -f "$RES"/drawable*/splash.png
+cat > "$RES/drawable/splash.xml" <<'XML'
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/launch_background" />
+    <item android:gravity="center" android:width="144dp" android:height="144dp" android:drawable="@mipmap/ic_launcher_foreground" />
+</layer-list>
+XML
+mkdir -p "$RES/values-night"
+printf '<?xml version="1.0" encoding="utf-8"?>\n<resources><color name="launch_background">#FFFFFF</color></resources>\n' > "$RES/values/launch_background.xml"
+printf '<?xml version="1.0" encoding="utf-8"?>\n<resources><color name="launch_background">#14191E</color></resources>\n' > "$RES/values-night/launch_background.xml"
 npx cap sync android
 # The devtools socket, for the emulator probe in docs/native.md. Debug builds only;
 # it lives in the generated project, never in the committed config.
@@ -42,5 +66,19 @@ node -e '
   fs.writeFileSync(p, JSON.stringify(c, null, 2));
 '
 if [ "${1:-}" = "--sync" ]; then exit 0; fi
+if [ "${1:-}" = "--release" ]; then
+  # Gradle's injected signing, which is what Android Studio passes: nothing about the
+  # key is written into the project, so nothing about it can be committed.
+  VERSION=$(node -p 'require("./package.json").version')
+  ( cd android && ./gradlew --quiet bundleRelease \
+      -Pandroid.injected.signing.store.file="$ANDROID_KEYSTORE" \
+      -Pandroid.injected.signing.store.password="$ANDROID_KEYSTORE_PASSWORD" \
+      -Pandroid.injected.signing.key.alias="$ANDROID_KEY_ALIAS" \
+      -Pandroid.injected.signing.key.password="$ANDROID_KEY_PASSWORD" \
+      -Pandroid.injected.version.name="$VERSION" \
+      -Pandroid.injected.version.code="$(git rev-list --count HEAD)" )
+  ls -la android/app/build/outputs/bundle/release/app-release.aab
+  exit 0
+fi
 ( cd android && ./gradlew --quiet assembleDebug )
 ls -la android/app/build/outputs/apk/debug/app-debug.apk

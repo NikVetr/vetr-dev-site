@@ -95,6 +95,97 @@ function checkShape(value, depth, at, problems) {
 }
 
 /**
+ * Every problem with a set of the reader's phrases and the lists that place them,
+ * whichever file they arrived in: a backup keys its placements `board/node`, a
+ * screen's worth of buttons keys them relative to itself, and `where` says what a key
+ * may name -- a problem with it, or null.
+ * @param {unknown} phrases @param {unknown} placements
+ * @param {(key: string) => string|null} where @param {string[]} problems
+ */
+function checkButtons(phrases, placements, where, problems) {
+  if (!plain(phrases) || !plain(placements)) {
+    problems.push('boards: phrases and placements must both be objects');
+    return;
+  }
+  for (const [id, phrase] of Object.entries(phrases)) {
+    const p = /** @type {any} */ (phrase);
+    if (!plain(p)) { problems.push(`phrase ${id}: not a phrase`); continue; }
+    // Every field is text, checked as a type before it is read as a value: a numeric
+    // owner used to reach `.trim()` and throw out of the import handler, which left
+    // the reader with no message and a file input that would not take the next file.
+    for (const field of ['id', 'label', 'owner', 'listener', 'pair']) {
+      if (typeof p[field] !== 'string') problems.push(`phrase ${id}: ${field} is not text`);
+    }
+    if (typeof p.id === 'string' && p.id !== id) problems.push(`phrase ${id}: its own id says ${p.id}`);
+    if (p.screen !== undefined && p.screen !== true) problems.push(`phrase ${id}: screen is not true`);
+    // A half-written phrase travels. It is a legitimate saved state -- the reader
+    // may be coming back to it -- and `resolvePhrase` refuses to show one, so it
+    // arrives exactly as it left: stored, on its screens, and not yet shown.
+    // Refusing it refused the whole copy for one unfinished line.
+    if (typeof p.pair === 'string' && !/^[\w-]+__[\w-]+$/.test(p.pair)) {
+      problems.push(`phrase ${id}: ${p.pair} is not a language pair`);
+    }
+  }
+  for (const [at, ids] of Object.entries(placements)) {
+    if (!Array.isArray(ids)) { problems.push(`placement ${at}: not a list`); continue; }
+    if (new Set(ids).size !== ids.length) problems.push(`placement ${at}: the same phrase twice`);
+    for (const id of ids) {
+      if (!phrases[id]) problems.push(`placement ${at}: no phrase ${id} in this package`);
+    }
+    const wrong = where(at);
+    if (wrong) problems.push(`placement ${at}: ${wrong}`);
+  }
+}
+
+/** What a file of one screen's buttons says it is, so a backup is not mistaken for one. */
+export const BUTTONS_KIND = 'phraselet-buttons';
+
+/**
+ * A screen's worth of the reader's own buttons, as a file: to hand to someone else,
+ * to move to another board, or to write by hand and load. `screenContents` in
+ * `ui/board-store.js` is what goes in it.
+ * @param {string} pair
+ * @param {{phrases: Record<string, unknown>, placements: Record<string, string[]>}} contents
+ */
+export function buildButtons(pair, contents) {
+  return { version: PACKAGE_VERSION, kind: BUTTONS_KIND, created: new Date().toISOString(), pair, ...contents };
+}
+
+/**
+ * Read a file of buttons for this pair, or say everything wrong with it. The same
+ * inertness and the same field checks as a backup; placements may name only the
+ * screen being loaded into (`.`) or a screen inside the file.
+ * @param {string} text @param {string} pair
+ * @returns {{ok:true, data:{phrases: Record<string, any>, placements: Record<string, string[]>}} | {ok:false, problems:string[]}}
+ */
+export function readButtons(text, pair) {
+  if (new TextEncoder().encode(text).length > MAX_PACKAGE_BYTES) {
+    return { ok: false, problems: [`over the ${MAX_PACKAGE_BYTES / 1024}KB limit`] };
+  }
+  /** @type {any} */ let raw;
+  try {
+    raw = JSON.parse(text);
+  } catch (err) {
+    return { ok: false, problems: [`not readable as JSON: ${/** @type {Error} */ (err).message}`] };
+  }
+  if (!plain(raw) || raw.kind !== BUTTONS_KIND) return { ok: false, problems: ['not a file of buttons'] };
+  if (raw.version !== PACKAGE_VERSION) {
+    return { ok: false, problems: [`version ${raw.version}, and this build reads ${PACKAGE_VERSION}`] };
+  }
+  // Buttons carry sentences in two particular languages; loaded onto another pair's
+  // board they would be stored and never shown, which is worse than refused.
+  if (raw.pair !== pair) return { ok: false, problems: [`written for ${raw.pair}, and this board is ${pair}`] };
+  /** @type {string[]} */ const problems = [];
+  checkShape(raw, 0, 'buttons', problems);
+  const { phrases, placements } = /** @type {any} */ (raw);
+  if (!problems.length) {
+    checkButtons(phrases, placements, (at) => (
+      at === '.' || phrases?.[at]?.screen ? null : 'names no screen in this file'), problems);
+  }
+  return problems.length ? { ok: false, problems } : { ok: true, data: { phrases, placements } };
+}
+
+/**
  * Read a package, or say everything wrong with it.
  *
  * `boards` is what this build can actually show: a placement naming a board or a node
@@ -136,45 +227,16 @@ export function readPackage(text, known = {}) {
   } else if (raw.boards) {
     const held = /** @type {any} */ (raw.boards);
     const phrases = held.phrases ?? {};
-    const placements = held.placements ?? {};
-    if (!plain(phrases) || !plain(placements)) {
-      problems.push('boards: phrases and placements must both be objects');
-    } else {
-      for (const [id, phrase] of Object.entries(phrases)) {
-        const p = /** @type {any} */ (phrase);
-        if (!plain(p)) { problems.push(`phrase ${id}: not a phrase`); continue; }
-        // Every field is text, checked as a type before it is read as a value: a
-        // numeric owner used to reach `.trim()` and throw out of the import handler,
-        // which left the reader with no message and a file input that would not
-        // take the next file.
-        for (const field of ['id', 'label', 'owner', 'listener', 'pair']) {
-          if (typeof p[field] !== 'string') problems.push(`phrase ${id}: ${field} is not text`);
-        }
-        if (typeof p.id === 'string' && p.id !== id) problems.push(`phrase ${id}: its own id says ${p.id}`);
-        // A half-written phrase travels. It is a legitimate saved state -- the reader
-        // may be coming back to it -- and `resolvePhrase` refuses to show one, so it
-        // arrives exactly as it left: stored, on its screens, and not yet shown.
-        // Refusing it refused the whole copy for one unfinished line.
-        if (typeof p.pair === 'string' && !/^[\w-]+__[\w-]+$/.test(p.pair)) {
-          problems.push(`phrase ${id}: ${p.pair} is not a language pair`);
-        }
-      }
-      for (const [at, ids] of Object.entries(held.hidden ?? {})) {
-        if (!Array.isArray(ids) || ids.some((id) => typeof id !== 'string')) problems.push(`hidden ${at}: not a list of button ids`);
-      }
-      for (const [at, ids] of Object.entries(placements)) {
-        if (!Array.isArray(ids)) { problems.push(`placement ${at}: not a list`); continue; }
-        if (new Set(ids).size !== ids.length) problems.push(`placement ${at}: the same phrase twice`);
-        for (const id of ids) {
-          if (!phrases[id]) problems.push(`placement ${at}: no phrase ${id} in this package`);
-        }
-        const [board, node] = at.split('/');
-        if (known.boards && !known.boards[board]) {
-          problems.push(`placement ${at}: this build has no board "${board}"`);
-        } else if (known.boards && node && !known.boards[board].has(node)) {
-          problems.push(`placement ${at}: board "${board}" has no screen "${node}"`);
-        }
-      }
+    checkButtons(phrases, held.placements ?? {}, (at) => {
+      const [board, node] = at.split('/');
+      if (!known.boards) return null;
+      if (!known.boards[board]) return `this build has no board "${board}"`;
+      // A screen of the reader's own is a node the board file does not have.
+      if (node && !known.boards[board].has(node) && !phrases[node]?.screen) return `board "${board}" has no screen "${node}"`;
+      return null;
+    }, problems);
+    for (const [at, ids] of Object.entries(held.hidden ?? {})) {
+      if (!Array.isArray(ids) || ids.some((id) => typeof id !== 'string')) problems.push(`hidden ${at}: not a list of button ids`);
     }
   }
   if (raw.speaker !== undefined && !plain(raw.speaker)) problems.push('speaker: not a set of answers');

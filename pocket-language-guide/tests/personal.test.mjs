@@ -2,7 +2,9 @@
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { buildPackage, readPackage, PACKAGE_VERSION, MAX_PACKAGE_BYTES } from '../core/personal.js';
+import {
+  buildPackage, readPackage, buildButtons, readButtons, PACKAGE_VERSION, MAX_PACKAGE_BYTES,
+} from '../core/personal.js';
 
 /** One written phrase, placed on one screen of one board. */
 const MINE = {
@@ -149,4 +151,42 @@ test('a half-written phrase travels, and arrives still unfinished', () => {
   const got = round({ boards: draft }, KNOWN);
   assert.equal(got.ok, true);
   assert.equal(got.ok && got.data.boards?.phrases.p1.listener, '');
+});
+
+/**
+ * A screen of the reader's own holding one phrase, as a backup would carry it.
+ * @type {import('../ui/board-store.js').BoardPersonal}
+ */
+const SCREENED = {
+  schemaVersion: 1,
+  phrases: {
+    s1: { id: 's1', label: 'Allergies', owner: '', listener: '', pair: 'zh-Hans__en', created: 'x', screen: /** @type {true} */ (true) },
+    p1: MINE.phrases.p1,
+  },
+  placements: { 'food/main': ['s1'], 'food/s1': ['p1'] },
+};
+
+test('a backup may place buttons on a screen of the reader\'s own, and on no other unknown one', () => {
+  assert.equal(round({ boards: SCREENED }, KNOWN).ok, true);
+  const stray = { ...SCREENED, placements: { ...SCREENED.placements, 'food/nowhere': ['p1'] } };
+  const got = round({ boards: stray }, KNOWN);
+  assert.ok(!got.ok && got.problems.some((p) => p.includes('has no screen "nowhere"')));
+});
+
+test('a file of buttons is read for its own pair, and names only its own screens', () => {
+  const contents = { phrases: SCREENED.phrases, placements: { '.': ['s1'], s1: ['p1'] } };
+  const text = JSON.stringify(buildButtons('zh-Hans__en', contents));
+  const got = readButtons(text, 'zh-Hans__en');
+  assert.equal(got.ok, true);
+  assert.deepEqual(got.ok && got.data.placements, contents.placements);
+  // Another pair's board would store the buttons and never show them.
+  const other = readButtons(text, 'ja__en');
+  assert.ok(!other.ok && other.problems[0].includes('written for zh-Hans__en'));
+  // A placement may name the screen loaded into, or a screen in the file -- not a sentence.
+  const bad = JSON.stringify(buildButtons('zh-Hans__en', { ...contents, placements: { '.': ['s1'], p1: ['s1'] } }));
+  const refused = readButtons(bad, 'zh-Hans__en');
+  assert.ok(!refused.ok && refused.problems.some((p) => p.includes('names no screen')));
+  // A backup is not a file of buttons, and is said not to be.
+  const backup = readButtons(JSON.stringify(buildPackage({ boards: SCREENED })), 'zh-Hans__en');
+  assert.ok(!backup.ok && backup.problems[0] === 'not a file of buttons');
 });

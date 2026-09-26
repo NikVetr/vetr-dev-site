@@ -34,6 +34,9 @@ const KEY = 'plg.boards';
  * @property {string} listener  the complete sentence, listener's language
  * @property {string} pair      `target__source`, because a phrase is written for one
  * @property {string} created   ISO date, so an editor can order by age
+ * @property {true} [screen]    a screen of the reader's own rather than a sentence: a
+ *   button that opens its own grid, titled by `label`, whose buttons are placed at
+ *   `board/<its id>`. `owner` and `listener` stay empty.
  */
 
 /**
@@ -141,8 +144,10 @@ const newId = () => `own-${Date.now().toString(36)}-${Math.random().toString(36)
  * an empty listener side until they fill it, paste it, or take the external handoff.
  * Storing a half-written phrase is correct -- they may be coming back to it -- and
  * `resolvePhrase` already refuses to show one, so it cannot reach a listener.
+ * A screen is added the same way, with `screen: true` and no sentences, and its own
+ * buttons then go on `board/<its id>`.
  * @param {BoardPersonal} data
- * @param {{label:string, owner:string, listener:string, pair:string}} phrase
+ * @param {{label:string, owner:string, listener:string, pair:string, screen?:true}} phrase
  * @param {string} at  `board/node`
  */
 export function addPhrase(data, phrase, at) {
@@ -217,10 +222,65 @@ export function placementsOf(data, id) {
  */
 export function deletePhrase(data, id) {
   const phrases = { ...data.phrases };
-  delete phrases[id];
-  /** @type {Record<string,string[]>} */ const placements = {};
-  for (const [at, ids] of Object.entries(data.placements)) {
-    placements[at] = ids.filter((p) => p !== id);
+  /** @type {Record<string,string[]>} */ const placements = { ...data.placements };
+  const drop = (/** @type {string} */ gone) => {
+    delete phrases[gone];
+    for (const [at, ids] of Object.entries(placements)) placements[at] = ids.filter((p) => p !== gone);
+    if (!data.phrases[gone]?.screen) return;
+    // A screen takes what is on it with it -- those buttons have nowhere else to be
+    // drawn -- except a button that is also on some other screen, which stays there.
+    for (const at of Object.keys(placements).filter((k) => k.endsWith(`/${gone}`))) {
+      const inside = placements[at];
+      delete placements[at];
+      for (const child of inside) {
+        if (!Object.values(placements).some((ids) => ids.includes(child))) drop(child);
+      }
+    }
+  };
+  drop(id);
+  return { ...data, phrases, placements };
+}
+
+/**
+ * Everything on one screen for one pair, the screens inside it included, with the
+ * placements keyed relative to it: `.` for the screen itself and a screen's own id
+ * for what is on that screen. The shape a screen's worth of buttons travels in.
+ * @param {BoardPersonal} data @param {string} at @param {string} pair
+ * @returns {{phrases: Record<string, CustomPhrase>, placements: Record<string, string[]>}}
+ */
+export function screenContents(data, at, pair) {
+  const board = at.split('/')[0];
+  /** @type {Record<string, CustomPhrase>} */ const phrases = {};
+  /** @type {Record<string, string[]>} */ const placements = {};
+  const walk = (/** @type {string} */ key, /** @type {string} */ rel) => {
+    placements[rel] = placedOn(data, key, pair).map((p) => p.id);
+    for (const id of placements[rel]) {
+      phrases[id] = data.phrases[id];
+      // Once each: the editor only nests screens as a tree, but a file written by
+      // hand can put two screens inside each other.
+      if (data.phrases[id].screen && !(id in placements)) walk(`${board}/${id}`, id);
+    }
+  };
+  walk(at, '.');
+  return { phrases, placements };
+}
+
+/**
+ * Put a screen's worth of buttons onto `at`, after whatever is there, every phrase
+ * under a fresh id -- so the same file loaded twice, or on a device that already has
+ * the buttons it came from, adds rather than collides.
+ * @param {BoardPersonal} data @param {ReturnType<typeof screenContents>} contents
+ * @param {string} at
+ */
+export function graftContents(data, contents, at) {
+  const board = at.split('/')[0];
+  const fresh = Object.fromEntries(Object.keys(contents.phrases).map((id) => [id, newId()]));
+  const phrases = { ...data.phrases };
+  for (const [id, p] of Object.entries(contents.phrases)) phrases[fresh[id]] = { ...p, id: fresh[id] };
+  const placements = { ...data.placements };
+  for (const [rel, ids] of Object.entries(contents.placements)) {
+    const key = rel === '.' ? at : `${board}/${fresh[rel]}`;
+    placements[key] = [...(placements[key] ?? []), ...ids.map((id) => fresh[id])];
   }
   return { ...data, phrases, placements };
 }

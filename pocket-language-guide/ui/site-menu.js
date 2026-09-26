@@ -36,29 +36,3 @@ function openAppearance() {
   document.body.append(panel);
   panel.showModal();
 }
-
-/** Google Translate's own codes where they differ from ours. */
-const GOOGLE = /** @type {Record<string,string>} */ ({ 'zh-Hans': 'zh-CN', fil: 'tl', jv: 'jw' });
-
-/**
- * A link that opens Google Translate set from one language to the other.
- *
- * A web address, on purpose: on a phone with the app installed the system hands it
- * to the app, and everywhere else it is the site -- one link that does the right
- * thing on each platform without asking which it is on. Apple's Translate publishes
- * no address a page can open, so there is no second link; the share sheet on an
- * iPhone offers it for any text the reader copies.
- * @param {string} from @param {string} to @param {string} label
- */
-export function translatorLinks(from, to, label) {
-  const p = document.createElement('p');
-  p.className = 'board-links';
-  const a = document.createElement('a');
-  a.className = 'btn';
-  a.href = `https://translate.google.com/?sl=${GOOGLE[from] ?? from}&tl=${GOOGLE[to] ?? to}&op=translate`;
-  a.target = '_blank';
-  a.rel = 'noopener';
-  a.textContent = `${label} \u2197`;
-  p.append(a);
-  return p;
-}

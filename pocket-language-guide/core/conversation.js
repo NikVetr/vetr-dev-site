@@ -88,6 +88,8 @@ const ENTRIES = new Set(['duration', 'clock', 'count']);
  * @property {BoardButton[]} buttons
  * @property {string} [titleKey]  a heading the node's buttons complete, in the
  *   owner's language -- see `renderGrid` for why only the owner ever sees a fragment
+ * @property {string} [title]  the heading of a screen the reader made, in their own
+ *   words rather than by key
  */
 
 /**

@@ -556,6 +556,63 @@ test.beforeEach(async ({ page }) => {
   await page.evaluate(() => localStorage.clear());
 });
 
+test('a screen of your own holds buttons, and what is on it travels as a file', async ({ page }) => {
+  // A tree is screens of the reader's own: added like a button, opened like the
+  // board's submenus, filled by pressing the plus once inside.
+  await page.goto(BOARD);
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('#board-add-bar').click();
+  const box = page.locator('.board-editor');
+  await box.locator('.board-editor-screen input').fill('Allergies');
+  await box.locator('.board-editor-screen button').click();
+  await expect(box.locator('.board-editor-list li')).toHaveCount(1);
+  await expect(box.locator('.board-editor-list li')).toContainText('buttons: 0');
+  await box.locator('.board-editor-close').click();
+
+  const opener = page.locator('.board-cell', { hasText: 'Allergies' });
+  await expect(opener).toHaveClass(/board-cell-more/);
+  await opener.click();
+  await expect(page.locator('.board-grid-title')).toHaveText('Allergies');
+  await expect(page.locator('.board-cell')).toHaveCount(0);
+  await addOwn(page, 'no peanuts', 'No peanuts, please', '请不要放花生');
+  await page.locator('.board-editor-close').click();
+  await expect(page.locator('.board-cell')).toHaveCount(1);
+  await page.locator('.board-cell').click();
+  await expect(page.locator('.board-message-text')).toHaveText('请不要放花生');
+  await page.locator('.board-message').click();
+
+  // Up to the board, and the screen says what it holds.
+  await page.locator('#board-up').click();
+  await page.locator('#board-add-bar').click();
+  await expect(box.locator('.board-editor-list li')).toContainText('buttons: 1');
+  // Saved as a file from the board's root: the screen and the button inside it.
+  const saving = page.waitForEvent('download');
+  await box.getByRole('button', { name: 'Save these buttons' }).click();
+  const file = await saving;
+  const written = JSON.parse(await (await import('node:fs/promises')).readFile(/** @type {string} */ (await file.path()), 'utf8'));
+  expect(written.kind).toBe('phraselet-buttons');
+  expect(Object.keys(written.phrases)).toHaveLength(2);
+
+  // Loaded back onto the same screen, it adds a second copy under new ids -- and a
+  // file for another pair is refused with nothing changed.
+  await box.locator('.board-editor-transfer input[type=file]').setInputFiles(/** @type {string} */ (await file.path()));
+  await expect(box.locator('[role=status]')).toContainText('Buttons and screens added: 2');
+  await expect(box.locator('.board-editor-list li')).toHaveCount(2);
+  await box.locator('.board-editor-transfer input[type=file]').setInputFiles({
+    name: 'other.json', mimeType: 'application/json',
+    buffer: Buffer.from(JSON.stringify({ ...written, pair: 'ja__en' })),
+  });
+  await expect(box.locator('[role=status]')).toContainText('written for ja__en');
+  await expect(box.locator('.board-editor-list li')).toHaveCount(2);
+
+  // Deleting a screen takes its buttons with it.
+  page.once('dialog', (d) => d.accept());
+  await box.locator('.board-editor-list li').first().getByRole('button', { name: 'Delete' }).click();
+  await expect(box.locator('.board-editor-list li')).toHaveCount(1);
+  const left = await page.evaluate(() => Object.keys(JSON.parse(localStorage.getItem('plg.boards') ?? '{}').phrases));
+  expect(left).toHaveLength(2);
+});
+
 test('a phrase you write appears on the board and survives a reload', async ({ page }) => {
   await page.goto(BOARD);
   await expect(page.locator('.board-cell').first()).toBeVisible();

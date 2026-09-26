@@ -4828,3 +4828,57 @@ emulation. Both pass, twice each.
 - **Fluent review:** the owner has forgone human audits; the catalogues and the corpus
   are subagent-sourced against the reference lists in `content/PROMPTS/`, and that is
   what they should be read as.
+
+## Batch AA — trees of the reader's own, dead strings, icons, and a release build
+
+**Trees.** The one request left from the sixteen notes: whole conversation trees,
+added by hand and moved by file. A screen is a personal entry marked `screen: true`,
+placed like any button; the page draws it as a submenu and, when the path enters it,
+takes the node from the personal store (`nodeHere`) because the board file does not
+have it. Its buttons sit under `board/<its id>`, so the existing ordering, moving and
+pair filtering apply unchanged, and deleting a screen takes what is on it except a
+button that is also on another screen. The editor adds a screen with one field, lists
+screens with what they hold, and saves what is on the current screen as a file of
+buttons -- placements keyed relative to the screen -- which loads onto any screen of
+the same pair under fresh ids and is refused, with nothing changed, for another pair.
+One validator serves backups and button files (`checkButtons`), and a backup may now
+place buttons on a reader's own screen. Tests: unit (cascading delete, round trip
+with fresh ids, pair filtering, the buttons reader's refusals, a backup with a screen)
+and a browser test through adding, filling, saving, loading and deleting a screen.
+
+**Dead strings.** The catalogue check read only `t('...')` calls and a few table
+shapes, so it called 42 keys unused, most of them live -- passed as arguments, chosen
+in ternaries, or built from templates. It now credits any quoted literal equal to a
+key and every key under a `t(\`prefix${...}\`)` template's static prefix, and what it
+still reported was genuinely dead: ten keys (the old board menu, a removed lede, the
+hidden offline button's six strings and two speaker strings), deleted from all
+fifty-two catalogues line by line, 521 lines.
+
+**Icons.** `scripts/build_app_icons.mjs` renders the mark from `favicon.svg` at each
+exact size a platform asks for, into committed sources under `assets/native/` (17
+files, 248K): an opaque 1024px iOS icon, a transparent launch image the iOS launch
+screen centres on the system background, and Android's legacy, round and adaptive
+foreground icons at five densities. They are tracked because the ignore rules for
+the generated projects are now anchored to the project root -- unanchored, `ios/` and
+`android/` also matched these two folders. The build scripts copy them over
+Capacitor's placeholders; Android's eleven stretched splash bitmaps become one drawable that
+centres the mark over the paper colour, dark at night. `@capacitor/assets` was the
+alternative and would have brought a second, older Capacitor CLI into the project.
+The iOS window now takes the system background, so nothing black shows behind the
+transparent WebView before the first paint; a headless simulator still shows its own
+black frames before the app's window exists, which a phone will settle.
+
+**The blank first load, chased.** The one unexplained Android symptom from the native
+batch -- a board that came up blank once, after a check run had been killed -- was put
+through twelve cold starts on the Capacitor 8 build (force-stop, launch, time to the
+gallery's first draw through the devtools socket): twelve of twelve drew all 53 cards,
+in 2.2 to 2.4 seconds. It does not reproduce, and is recorded as a harness artefact of
+the killed run rather than a defect.
+
+**An Android release, proven with a throwaway key.** `npm run android -- --release`
+builds a signed app bundle through Gradle's injected signing properties, so no key is
+written into the project; it refuses to start without all four key variables. Built
+with a key made for the purpose in `tmp/` and deleted after: `jarsigner -verify`
+reports "jar verified", signed by that key. The owner's Play steps are in
+docs/native.md, "An Android release".
+

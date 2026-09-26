@@ -889,7 +889,14 @@ and `ui/platform/speech.js` has accepted a `voiceId` since it was written.
 **What the owner can change about a board.** The editor (the plus in the footer)
 lists the board's own buttons on the current screen with a switch each — `hidden`
 in the personal store, per `board/node`, carried in the backup — under the reader's
-own buttons; the bars beside it open Settings, and the same bars sit in every page's
+own buttons. **A tree is screens of the reader's own**: a screen is a personal entry
+marked `screen`, placed like a button, drawn as a submenu, and its buttons are placed
+under `board/<its id>`, so ordering, moving and pair filtering are the ones buttons
+already have; deleting one takes its contents except a button also placed elsewhere.
+What is on a screen saves as a small file (`buildButtons`/`readButtons` in
+`core/personal.js`, relative placement keys, the backup's own field checks) and loads
+onto any screen of the same pair under fresh ids, so a tree can be handed to someone
+or written by hand; the bars beside it open Settings, and the same bars sit in every page's
 header (`ui/site-menu.js`), where on the other pages they open the appearance
 dialog. A display setting prefixes every request on both sides with the corpus's
 own "excuse me" row for each language — one reviewed sentence before another,
@@ -2110,7 +2117,11 @@ language's pre-rendered cards, no service worker — every file is already local
 Mac, `npm run ios` (`scripts/build_ios.sh`) regenerate each project, sync it and build;
 the iOS script is written for an SSH session (tools by path, macOS's bash 3.2, a
 deterministic version and build number) and has `--run`, `--device` and `--archive`
-modes, the last two signed. The projects themselves are generated and ignored,
+modes, the last two signed; the Android script's `--release` builds a Play bundle
+signed through Gradle's injected properties, so no key touches the project. The icons
+and launch images are the site's own mark, rendered at each platform size by
+`scripts/build_app_icons.mjs` into `assets/native/` and copied over the template's
+placeholders. The projects themselves are generated and ignored,
 because this site is published by `git push` and a native project at the repository
 root would be served to the public web; the gate's `publish` check holds that
 boundary, and what the projects need beyond the template -- the camera declaration

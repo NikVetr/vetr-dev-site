@@ -48,6 +48,22 @@ npm run mobile -- --quiet
 # The beacon reaches the phone's lamp through the camera, as it does in Safari, and a
 # WebView may ask for the camera only if the app says why. Nothing is recorded or shown.
 plutil -replace NSCameraUsageDescription -string "Phraselet uses the camera's flash only to flash an SOS or a Morse message. Nothing is recorded or shown." ios/App/App/Info.plist
+# Between the launch screen and the page's first paint the WebView is transparent, and
+# the window behind it is black by default: a black flash on every launch, in light
+# mode too. The window takes the system background, so light and dark each start in
+# their own colour. Loud if Capacitor's template stops creating the window this way.
+DELEGATE=ios/App/App/SceneDelegate.swift
+if ! grep -q "window?.backgroundColor = .systemBackground" "$DELEGATE"; then
+  grep -q "window = UIWindow(windowScene: windowScene)" "$DELEGATE" || { echo "$DELEGATE no longer creates its window as expected"; exit 1; }
+  sed -i '' 's/window = UIWindow(windowScene: windowScene)/&\
+        window?.backgroundColor = .systemBackground/' "$DELEGATE"
+fi
+# The mark over the template's placeholders (scripts/build_app_icons.mjs draws them).
+ASSETS=ios/App/App/Assets.xcassets
+cp assets/native/ios/AppIcon-512@2x.png "$ASSETS/AppIcon.appiconset/AppIcon-512@2x.png"
+for f in splash-2732x2732.png splash-2732x2732-1.png splash-2732x2732-2.png; do
+  cp assets/native/ios/splash-2732x2732.png "$ASSETS/Splash.imageset/$f"
+done
 npx cap sync ios
 if [ "$MODE" = "--sync" ]; then exit 0; fi
 
