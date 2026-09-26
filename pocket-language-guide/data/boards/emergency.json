@@ -920,14 +920,6 @@
           }
         },
         {
-          "id": "not-possible",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "board-answers.not-possible"
-          }
-        },
-        {
           "id": "i-do-not-know",
           "kind": "message",
           "phraseRef": {

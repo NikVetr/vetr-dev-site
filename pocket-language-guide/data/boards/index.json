@@ -3,6 +3,7 @@
     {
       "id": "emergency",
       "titleKey": "boards.emergency.title",
+      "icon": "shield-alert",
       "listeners": [
         "am",
         "ar",
@@ -113,6 +114,7 @@
     {
       "id": "intro",
       "titleKey": "boards.intro.title",
+      "icon": "circle-user",
       "listeners": [
         "am",
         "ar",
@@ -223,6 +225,7 @@
     {
       "id": "directions",
       "titleKey": "boards.directions.title",
+      "icon": "signpost",
       "listeners": [
         "am",
         "ar",
@@ -333,6 +336,7 @@
     {
       "id": "transport",
       "titleKey": "boards.transport.title",
+      "icon": "bus",
       "listeners": [
         "am",
         "ar",
@@ -443,6 +447,7 @@
     {
       "id": "food",
       "titleKey": "boards.food.title",
+      "icon": "utensils",
       "listeners": [
         "am",
         "ar",
@@ -553,6 +558,7 @@
     {
       "id": "shopping",
       "titleKey": "boards.shopping.title",
+      "icon": "shopping-bag",
       "listeners": [
         "am",
         "ar",
@@ -663,6 +669,7 @@
     {
       "id": "time",
       "titleKey": "boards.time.title",
+      "icon": "clock",
       "listeners": [
         "am",
         "ar",
@@ -773,6 +780,7 @@
     {
       "id": "spa",
       "titleKey": "boards.spa.title",
+      "icon": "leaf",
       "listeners": [
         "am",
         "ar",
@@ -883,6 +891,7 @@
     {
       "id": "lodging",
       "titleKey": "boards.lodging.title",
+      "icon": "hotel",
       "listeners": [
         "am",
         "ar",
@@ -993,6 +1002,7 @@
     {
       "id": "sights",
       "titleKey": "boards.sights.title",
+      "icon": "ticket",
       "listeners": [
         "am",
         "ar",
@@ -1103,6 +1113,7 @@
     {
       "id": "pharmacy",
       "titleKey": "boards.pharmacy.title",
+      "icon": "pill",
       "listeners": [
         "am",
         "ar",

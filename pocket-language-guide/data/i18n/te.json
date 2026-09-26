@@ -585,5 +585,8 @@
   "signal.speed": "వేగం",
   "signal.start": "సంకేతం ఇవ్వండి",
   "signal.stop": "ఆపు",
-  "signal.unsayable": "మోర్స్ కోడ్‌లో లేని అక్షరాలు: {chars}"
+  "signal.unsayable": "మోర్స్ కోడ్‌లో లేని అక్షరాలు: {chars}",
+  "format.theme.parchment": "తాళపత్రం",
+  "personal.replace": "ఈ కాపీలో {phrases} వాక్యాలు, {pairs} మార్చిన కార్డులు ఉన్నాయి. దీన్ని తీసుకుంటే, ఈ పరికరంలో ఉన్న {have} వాక్యాల స్థానంలో ఇవి వస్తాయి. కొనసాగించాలా?",
+  "personal.failed": "తీసుకోలేదు — మీ సొంత డేటా తిరిగి పెట్టబడింది:"
 }

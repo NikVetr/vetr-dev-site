@@ -34,6 +34,9 @@ taxi.we-need-to-catch-the-high-speed-train,हमें तेज़ ट्र�
 taxi.please-use-the-meter,मीटर से चलिए,,mīṭar se calie,mˈiːʈəɾ seː cˈʌlɪˌeː,go by the meter,2,hi-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,मुझे यहाँ उतरना है,,mujhe yahāṁ utarnā hai,mˌʊɟʰeː jˈʌhã ˈʊtəɾnaː hɛː,,2,hi-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,शिंकानसेन के लिए समय पर पहुँचाइए,,,ʃˌĩkaːnsˈeːn keː lˈɪeː sˈʌmˌɛj pˈʌɾ pəhˈũncaːˌɪeː,,1,reader-gloss-v1;ipa=espeak
+taxi.could-you-make-it-colder,एसी थोड़ा तेज़ कर दीजिए,,esī thoṛā tez kar dījie,ˈeːsi tʰˈoːɽaː tˈeːz kˈʌɾ dˈiːɟɪˌeː,turn the AC up a bit,2,hi-agent-v1;ipa=espeak
+taxi.could-you-make-it-warmer,एसी थोड़ा कम कर दीजिए,,esī thoṛā kam kar dījie,ˈeːsi tʰˈoːɽaː kˈʌm kˈʌɾ dˈiːɟɪˌeː,turn the AC down a bit,2,hi-agent-v1;ipa=espeak
+taxi.may-i-open-the-window,क्या मैं खिड़की खोलूँ?,,kyā maiṁ khiṛkī kholūṁ?,kjaː mɛ̃ kʰˈɪɽkˌi kʰˈoːlũ,,2,hi-agent-v1;ipa=espeak
 transit-rides.two-tickets,दो टिकट दीजिए,,do ṭikaṭ dījie,dˈoː ʈˈɪkəʈ dˈiːɟɪˌeː,,2,hi-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,मेट्रो स्टेशन कहाँ है?,,meṭro sṭeśan kahāṁ hai?,mˈeːʈɾoː sʈˈeːʃən kˈʌhã hɛː,,2,hi-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,क्या यह {} जाती है?,,kyā yah {} jātī hai?,kjaː jˌəh {} ɟˈaːti hɛː,,2,hi-agent-v1;ipa=espeak

@@ -34,6 +34,9 @@ taxi.we-need-to-catch-the-high-speed-train,ਸਾਨੂੰ ਤੇਜ਼ ਰਫ�
 taxi.please-use-the-meter,ਮੀਟਰ ਲਾ ਦਿਓ ਜੀ,,mīṭar lā diō jī,miʈəɾ la dɪo ɟi,put the meter on,2,pa-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,ਮੈਂ ਇੱਥੇ ਉੱਤਰਾਂਗਾ,,maiṁ itthē uttarāṁgā,mɛ̃ ɪttʰe ʊttəɾaŋɡa,I will get off here,2,pa-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,ਮੈਨੂੰ ਸ਼ਿੰਕਾਨਸੇਨ ਤੋਂ ਪਹਿਲਾਂ ਉੱਥੇ ਪਹੁੰਚਾ ਦਿਓ ਜੀ,,mainūṁ śiṁkānasēn tōṁ pahilāṁ utthē pahuṁcā diō jī,mɛnũ ʃɪŋkanəsen tõ pʌhɪlã ʊttʰe pʌhʊɲca dɪo ɟi,get me there before the shinkansen,2,pa-agent-v1;ipa=espeak
+taxi.could-you-make-it-colder,ਕੀ ਤੁਸੀਂ ਏਸੀ ਹੋਰ ਠੰਡਾ ਕਰੋਗੇ?,,kī tusīṁ ēsī hōr ṭhaṇḍā karōgē?,ki tʊsĩ esi hoɾ ʈʰʌnɖa kʌɾoɡe,will you make the AC more cold?,2,pa-agent-v1;ipa=espeak
+taxi.could-you-make-it-warmer,ਕੀ ਤੁਸੀਂ ਏਸੀ ਹੋਰ ਗਰਮ ਕਰੋਗੇ?,,kī tusīṁ ēsī hōr garam karōgē?,ki tʊsĩ esi hoɾ ɡʌɾəm kʌɾoɡe,will you make the AC more hot?,2,pa-agent-v1;ipa=espeak
+taxi.may-i-open-the-window,ਕੀ ਮੈਂ ਖਿੜਕੀ ਖੋਲ੍ਹ ਸਕਦਾ ਹਾਂ?,,kī maiṁ khiṛkī khōlh sakadā hāṁ?,ki mɛ̃ kʰɪɽəki kʰo˥l sʌkəda hã,"may I open the window? -- masculine ਸਕਦਾ, matching this file's existing masculine ਉੱਤਰਾਂਗਾ row (taxi.i-will-get-off-here); no feminine variant is carried in this section",2,pa-agent-v1;ipa=espeak
 transit-rides.two-tickets,ਦੋ ਟਿਕਟਾਂ,,dō ṭikaṭāṁ,do ʈɪkəʈã,,2,pa-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,ਮੈਟਰੋ ਸਟੇਸ਼ਨ ਕਿੱਥੇ ਹੈ?,,maiṭarō saṭēśan kitthē hai?,mɛʈəɾo səʈeʃən kɪttʰe hɛ,where is the metro station?,2,pa-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,ਇਹ ਬੱਸ / ਗੱਡੀ {} ਜਾਂਦੀ ਹੈ?,,ih bass / gaḍḍī {} jāṁdī hai?,ɪ˥ bʌs / ɡʌɖɖi {} ɟandi hɛ,does this bus / train go {}?,2,pa-agent-v1;ipa=espeak

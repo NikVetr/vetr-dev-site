@@ -113,6 +113,9 @@ common-signs.open-operating,deschis / în funcțiune,,deskˈis / ɨn funktsjˈun
 common-signs.closed,închis,,ɨnkˈis,,2,ro-agent-v1;ipa=espeak
 common-signs.stopped-stop,oprit / stop,,oprˈit / stˈop,,2,ro-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,Duceți-mă acolo la timp pentru Shinkansen,,dˈutʃetsʲimə akˈolo la tˈimp pˌentru ʃˌiŋkansˈen,,1,reader-gloss-v1;ipa=espeak
+taxi.could-you-make-it-colder,Puteți să faceți aerul condiționat mai rece?,,putˌetsʲ sə fˈatʃetsʲ ˈaɪerul kˌonditsjonˈat maɪ rˈetʃe,can you make the air conditioning colder?,2,ro-agent-v1;ipa=espeak
+taxi.could-you-make-it-warmer,Puteți să faceți aerul condiționat mai cald?,,putˌetsʲ sə fˈatʃetsʲ ˈaɪerul kˌonditsjonˈat maɪ kˈald,can you make the air conditioning warmer?,2,ro-agent-v1;ipa=espeak
+taxi.may-i-open-the-window,Pot să deschid fereastra?,,pot sə deskˈid feɾˈeastra,may I open the window?,2,ro-agent-v1;ipa=espeak
 place-words.scenic-area,zonă panoramică,,zˈonə pˌanoɾamˈikə,,1,reader-gloss-v1;ipa=espeak
 rail-station-words.maglev,maglev,tren cu levitație magnetică,maɡlˈev,,1,reader-gloss-v1;ipa=espeak
 common-signs.pork-code,coduri pentru carne de porc,,kodˈurʲ pˌentru kˈarne de pˈork,,2,pork-code-agent-v1;lppom-mui;ipa=espeak

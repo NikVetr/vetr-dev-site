@@ -16,6 +16,11 @@
   --paper: light-dark(#ffffff, #121619);
   --surface: light-dark(#f4f6f8, #1a2026);
   --surface-2: light-dark(#eaeff3, #232b33);
+  /* A button's face and a card's face. On white paper both are white; in the dark
+     they step up from the page rather than matching it, or a button on a dark page
+     is an outline and a card is a rule around nothing. */
+  --control: light-dark(#ffffff, #2a333d);
+  --raised: light-dark(#ffffff, #1a2026);
   --accent: light-dark(#0b67a3, #5aa9e6);
   --accent-soft: light-dark(#e6f0f7, #1d3446);
   /* The same accent lifted for use on a dimmed overlay -- the gallery lightbox
@@ -156,7 +161,7 @@ h1.lede { font-size: var(--fs-1); font-weight: 400; line-height: 1.45; }
 .want-btn {
   display: flex; flex-direction: column; align-items: center; gap: 0.1rem;
   padding: 0.3rem 0.25rem; border: 1px solid var(--line); border-radius: 6px;
-  background: var(--paper); cursor: pointer; font: inherit; color: inherit;
+  background: var(--control); cursor: pointer; font: inherit; color: inherit;
   text-align: center; min-width: 0;
 }
 .want-btn:hover { border-color: var(--accent-lift); background: var(--accent-soft); }
@@ -186,7 +191,7 @@ h1.lede { font-size: var(--fs-1); font-weight: 400; line-height: 1.45; }
 button, .btn {
   font: inherit;
   color: var(--ink);
-  background: var(--paper);
+  background: var(--control);
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
   padding: 0.4em 0.8em;
@@ -196,7 +201,7 @@ button, .btn {
   align-items: center;
   gap: 0.45em;
 }
-button:hover, .btn:hover { background: var(--surface); }
+button:hover, .btn:hover { background: var(--surface-2); }
 button:disabled { opacity: 0.5; cursor: not-allowed; }
 button.primary, .btn.primary {
   background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600;
@@ -276,9 +281,14 @@ label { display: block; }
 /* A card is paper whatever the screen is: the thumbnails stay white, and a hairline
    keeps them from floating on a dark page. Stated twice because a media query and
    an attribute cannot share one selector list. */
-:root[data-theme="dark"] .card-thumb img { border: 1px solid var(--line); }
+/* And in the dark the thumbnail is a dark card: inverted, with the hues turned back
+   round so the five section colours stay themselves. The pre-rendered PNGs are one
+   set of 2,809 files; a second set for the dark would double the largest thing in
+   the repository for a picture the studio re-typesets anyway. The lightbox's own
+   face is live SVG and takes the dark theme properly. */
+:root[data-theme="dark"] img.card-thumb { border: 1px solid var(--line); filter: invert(0.9) hue-rotate(180deg); }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .card-thumb img { border: 1px solid var(--line); }
+  :root:not([data-theme="light"]) img.card-thumb { border: 1px solid var(--line); filter: invert(0.9) hue-rotate(180deg); }
 }
 
 /* --- site header --------------------------------------------------------- */
@@ -372,7 +382,7 @@ body.page-board { --logo-hue: 195deg; }
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  background: var(--paper);
+  background: var(--raised);
 }
 .card-head {
   display: flex; align-items: flex-start; gap: var(--space-2); padding: var(--space-2);
@@ -793,7 +803,9 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
      which is the same treatment the sheet preview gets one breakpoint along, and for
      the same reason. About three and a half rows, so it is visibly a scrollable
      list rather than looking like the whole of it. */
-  .want-grid { max-block-size: 30svh; overflow: auto; }
+  /* Its own scroll ends at its own edge: chained to the page, the wheel that
+     reached the grid's bottom carried on and threw the page past the first card. */
+  .want-grid { max-block-size: 30svh; overflow: auto; overscroll-behavior: contain; }
 }
 
 @media (min-width: 701px) and (max-width: 1100px) {
@@ -2119,3 +2131,33 @@ body.page-signal { --logo-hue: 195deg; }
 /* The appearance control: a word and a select, in the dialog and the studio alike. */
 .theme-control { display: flex; align-items: center; gap: var(--space-2); font-size: var(--fs-0); }
 .theme-control select { font: inherit; padding: 0.3em 0.5em; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--paper); color: var(--ink); }
+
+/* --- the site menu ---------------------------------------------------------- */
+/* Three bars at the end of every header: Settings, wherever the reader is. Drawn
+   the way the board's own bars are, so it is one control across the app. */
+.site-menu {
+  flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
+  inline-size: 2.4rem; block-size: 2.4rem; padding: 0; border-radius: var(--radius-sm);
+}
+.site-menu .board-menu-bars, .site-menu .board-menu-bars::before, .site-menu .board-menu-bars::after {
+  display: block; inline-size: 1.05rem; block-size: 2px; background: currentColor; border-radius: 1px;
+}
+.site-menu .board-menu-bars { position: relative; }
+.site-menu .board-menu-bars::before, .site-menu .board-menu-bars::after { content: ''; position: absolute; left: 0; }
+.site-menu .board-menu-bars::before { top: -6px; }
+.site-menu .board-menu-bars::after { top: 6px; }
+.site-settings { min-inline-size: min(92vw, 22rem); }
+
+/* --- text fields under a finger ------------------------------------------------ */
+/* iOS zooms the page when a field set under 16px takes focus, and leaves it zoomed
+   after the keyboard has gone: the board's editor came back from one word of typing
+   at 111% -- 16 / 14.4 -- with its header off the top of the screen and a band of
+   nothing at the foot. Zoom itself stays on, because a reader who pinches must be
+   able to; the fields are simply never under 16px where a finger is the pointer.
+   Last in the file and `!important` because a dozen rules above size their own
+   fields for a desktop, and every one of them would otherwise have to remember. */
+@media (pointer: coarse) {
+  input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"]), select, textarea {
+    font-size: max(16px, 1em) !important;
+  }
+}

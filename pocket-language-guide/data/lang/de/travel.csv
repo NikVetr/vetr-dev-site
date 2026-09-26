@@ -59,6 +59,9 @@ taxi.we-need-to-catch-the-high-speed-train,Wir müssen den ICE erreichen.,Wir m�
 taxi.please-use-the-meter,Bitte mit Taxameter.,,bˈɪtə mɪt tˌaksamˈeːtɜ,,2,de-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,Ich steige hier aus.,,ɪç ʃtˈaɪɡə hˈiːɾ ˈaʊs,,2,de-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,Bitte rechtzeitig zum Shinkansen.,,bˈɪtə rˈɛçtsaɪtˌɪç tsʊm ʃˈɪnkanzən,,2,de-agent-v1;ipa=espeak
+taxi.could-you-make-it-colder,Könnten Sie die Klimaanlage bitte kühler stellen?,,kˈœntən ziː diː klˈiːmɑːnlˌɑːɡə bˈɪtə kˈyːlɜ ʃtˈɛlən,,2,de-agent-v1;ipa=espeak
+taxi.could-you-make-it-warmer,Könnten Sie die Klimaanlage bitte wärmer stellen?,,kˈœntən ziː diː klˈiːmɑːnlˌɑːɡə bˈɪtə vˈɛɾmɜ ʃtˈɛlən,,2,de-agent-v1;ipa=espeak
+taxi.may-i-open-the-window,Darf ich das Fenster öffnen?,,dˈaɾf ɪç das fˈɛnstɜ ˈœfnən,,2,de-agent-v1;ipa=espeak
 transit-rides.two-tickets,Zwei Fahrkarten.,Zwei Tickets.,tsvˈaɪ fˈɑːɾkaɾtən,,2,de-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,Wo ist die U-Bahn-Station?,,vˌoː ɪst diː ˈuːbɑːnʃtatsjoːn,,2,de-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,Fährt dieser Bus / Zug nach {}?,,fˈɛːɾt dˌiːzɜ bˈʊs / tsˈuːk nˈɑːx {},,2,de-agent-v1;ipa=espeak

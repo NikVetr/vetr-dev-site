@@ -34,6 +34,9 @@ taxi.we-need-to-catch-the-high-speed-train,Hızlı trene yetişmemiz gerek.,,hɯ
 taxi.please-use-the-meter,"Taksimetreyi açın, lütfen.",,"taksimˈɛtrejɪ atʃˈɯn, løtfˈæn",,2,tr-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,Burada ineceğim.,,bˈuɾada inedʒˈejɪm,,2,tr-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,Shinkansen'e yetişmem gerekiyor.,,shinkansenˈɛ jetɪʃmˈæm ɟeɾekˈijɔr,,1,reader-gloss-v1;ipa=espeak
+taxi.could-you-make-it-colder,Klimayı daha soğuk yapabilir misiniz?,,klˈimajɯ dahˈa soːˈʊk japabilˈɪr mˈisinɪz,could you make the AC colder?,2,tr-agent-v1;ipa=espeak
+taxi.could-you-make-it-warmer,Klimayı daha sıcak yapabilir misiniz?,,klˈimajɯ dahˈa sɯdʒˈak japabilˈɪr mˈisinɪz,could you make the AC warmer?,2,tr-agent-v1;ipa=espeak
+taxi.may-i-open-the-window,Camı açabilir miyim?,,dʒamˈɯ atʃabilˈɪr mˈijɪm,"may I open the window? -- cam (the car window/glass) is what a passenger names, not the building word pencere",2,tr-agent-v1;ipa=espeak
 transit-rides.two-tickets,İki bilet.,,ikˈɪ bilˈɛt,,2,tr-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,Metro istasyonu nerede?,,mɛtrˈɔ ɪstasjonˈʊ nˈeɾedɛ,,2,tr-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,{} otobüsü / treni bu mu?,,{} otobysˈø / trenˈɪ bʊ mʊ,,2,tr-agent-v1;ipa=espeak

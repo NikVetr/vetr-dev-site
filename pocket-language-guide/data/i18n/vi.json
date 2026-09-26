@@ -585,5 +585,8 @@
   "signal.speed": "Tốc độ",
   "signal.start": "Phát tín hiệu",
   "signal.stop": "Dừng",
-  "signal.unsayable": "Ký tự không có trong mã Morse: {chars}"
+  "signal.unsayable": "Ký tự không có trong mã Morse: {chars}",
+  "format.theme.parchment": "Giấy da",
+  "personal.replace": "Bản sao này có {phrases} câu và {pairs} thẻ đã chỉnh sửa. Nạp nó sẽ thay thế {have} câu hiện có trên thiết bị này. Tiếp tục?",
+  "personal.failed": "Không nạp — dữ liệu của riêng bạn đã được khôi phục:"
 }

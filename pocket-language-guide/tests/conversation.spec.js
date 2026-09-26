@@ -529,8 +529,9 @@ test('the way back does not look like something you are saying', async ({ page }
  * @param {import('@playwright/test').Page} page @param {string} name
  */
 async function fromMenu(page, name) {
-  await page.locator('#board-menu').click();
-  await page.locator('.board-menu-item', { hasText: name }).click();
+  // Two controls now, not a menu of two: the plus opens the editor, the bars open
+  // Settings. The name says which.
+  await page.locator(name === 'Edit buttons' ? '#board-add-bar' : '#board-menu').click();
 }
 
 /** @param {import('@playwright/test').Page} page */
@@ -639,9 +640,9 @@ test('the menu panels hold the longest language, not only English', async ({ pag
       await page.setViewportSize({ width: w, height: h });
       await page.goto('/conversation.html?target=zh-Hans&source=jv&board=spa');
       await expect(page.locator('.board-cell').first()).toBeVisible();
-      await page.locator('#board-menu').click();
-      // By position, not by name: the names are Javanese here, which is the point.
-      await page.locator('.board-menu-panel button').nth(item).click();
+      // The two panels have their own controls now -- the plus is the editor, the
+      // bars are Settings -- so they are opened by control, not by menu position.
+      await page.locator(item === 0 ? '#board-add-bar' : '#board-menu').click();
       const panel = page.locator('dialog[open]').last();
       await expect(panel).toBeVisible();
       const held = await panel.evaluate((d) => {
@@ -1137,6 +1138,10 @@ test('converse opens the topics, not a board @smoke', async ({ page }) => {
   ]);
   // Nothing on this screen is owner-only chrome: there is no board to edit yet.
   await expect(page.locator('#board-menu')).toBeHidden();
+  // Nor to add to or turn -- a class's `display` once outranked their `hidden`, and
+  // the plus sat here doing nothing.
+  await expect(page.locator('#board-add-bar')).toBeHidden();
+  await expect(page.locator('#board-turn-bar')).toBeHidden();
 
   await page.locator('[data-button="time"]').click();
   await expect(page.locator('#board-title')).toHaveText('Time');
@@ -1401,9 +1406,13 @@ test('end punctuation hangs after the last character and weighs nothing in the c
   // a zero-width box after the last character -- centred as if absent, drawn where
   // they fell -- and the fitter sizes the sentence knowing they are there, or a
   // full-width `！` (a whole em) leaves the screen, which it did.
+  //
+  // **Only a full-width mark hangs.** A Latin `.` is a sliver, and hung it sat
+  // against the edge of the screen looking dropped; it stays in the line, so German
+  // is checked the other way round -- no hanging box, the mark inside the text.
   await page.setViewportSize({ width: 390, height: 844 });
-  for (const [target, button, mark] of /** @type {[string,string,string][]} */ ([
-    ['zh-Hans', 'help', '！'], ['de', 'stop', '.'],
+  for (const [target, button, mark, hung] of /** @type {[string,string,string,boolean][]} */ ([
+    ['zh-Hans', 'help', '！', true], ['de', 'stop', '.', false],
   ])) {
     const board = target === 'zh-Hans' ? 'emergency' : 'spa';
     await page.goto(`/conversation.html?target=${target}&source=en&board=${board}`);
@@ -1429,6 +1438,11 @@ test('end punctuation hangs after the last character and weighs nothing in the c
           && m.left >= 0,
       };
     }, mark);
+    if (!hung) {
+      expect(got.hang, `${target}: a Latin mark is not hung`).toBe(null);
+      expect(await big.textContent(), `${target}: the mark stays in the sentence`).toMatch(/\.$/);
+      continue;
+    }
     expect(got.hang, `${target}: the mark is hung`).toBe(mark);
     expect(Math.abs(got.offCentre ?? 99), `${target}: body centred without the mark`).toBeLessThanOrEqual(2);
     expect(Math.abs(got.gapToMark ?? 99), `${target}: mark sits after the last character`).toBeLessThanOrEqual(2);

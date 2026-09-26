@@ -77,16 +77,6 @@
           "replySetId": "yes-no"
         },
         {
-          "id": "photo-of-us",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "attractions-tickets.please-take-a-photo-of-us"
-          },
-          "colour": "comm",
-          "replySetId": "yes-no"
-        },
-        {
           "id": "photo-for-us",
           "kind": "message",
           "phraseRef": {

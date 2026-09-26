@@ -94,6 +94,9 @@ export function renderGrid(root, node, { label, available, onPick, lang, title }
       cell.append(answerMark());
       cell.title = t('board.canAnswer');
     }
+    // A topic's icon, drawn as the answer mark is: a silhouette behind the word,
+    // for the eye that has stopped reading eleven titles and is looking for a shape.
+    if (button.icon) cell.append(iconMark(button.icon));
     // **A button the corpus cannot supply is visibly unavailable, not missing.**
     // Removing it would move every button after it, and a grid that rearranges
     // itself when content is incomplete is the one thing the layout must never do.
@@ -295,6 +298,27 @@ function lineRoom(el) {
  * Inline, and it is 500 bytes: a board is the one surface that has to work with no
  * preparation, and a sprite or an icon fetch is one more thing to have not arrived.
  */
+/**
+ * A section icon as a cell's watermark: the same Lucide path the printed sheet's
+ * headings carry, stroked rather than filled.
+ * @param {{d:string, viewBox:string, strokeWidth:number}} icon
+ */
+function iconMark(icon) {
+  const svg = document.createElementNS(SVG, 'svg');
+  svg.setAttribute('viewBox', icon.viewBox);
+  svg.setAttribute('class', 'board-cell-mark board-cell-icon');
+  svg.setAttribute('aria-hidden', 'true');
+  const path = document.createElementNS(SVG, 'path');
+  path.setAttribute('d', icon.d);
+  path.setAttribute('fill', 'none');
+  path.setAttribute('stroke', 'currentColor');
+  path.setAttribute('stroke-width', String(icon.strokeWidth));
+  path.setAttribute('stroke-linecap', 'round');
+  path.setAttribute('stroke-linejoin', 'round');
+  svg.append(path);
+  return svg;
+}
+
 function answerMark() {
   const svg = document.createElementNS(SVG, 'svg');
   svg.setAttribute('class', 'board-cell-mark');
@@ -399,6 +423,15 @@ function fitCells(root, cellSel = '.board-cell', labelSel = '.board-cell-label')
       label.style.fontSize = `${lo}px`;
     }
     label.style.overflowWrap = '';
+  }
+  // **The topics are one list at one size.** Each cell fitted alone set "Time" at
+  // the ceiling and "Sights and tickets" at half of it, which read as eleven
+  // unrelated buttons; the smallest size any of them needed is the size they all
+  // take, and the shorter words are still the shorter words.
+  if (root.classList.contains('board-grid-topics')) {
+    const labels = [...root.querySelectorAll(labelSel)].map((n) => /** @type {HTMLElement} */ (n));
+    const least = Math.min(...labels.map((l) => Number.parseFloat(l.style.fontSize) || MAX_CELL_PX));
+    for (const label of labels) label.style.fontSize = `${least}px`;
   }
 }
 
@@ -521,7 +554,10 @@ export function renderMessage(stage, phrase,
   // nothing in the centring. Zero width rather than an absolute position because a
   // positioned inline still counts towards the box's scrollable overflow, and the
   // fitter reads that.
-  const trailing = /[\p{P}\p{S}]+$/u.exec(phrase.listener.text);
+  // Only a full-width mark hangs. A CJK `？` is a whole em with its ink in the left
+  // third, and set inline it drags the last line half a glyph off centre; a Latin `?`
+  // is a sliver, and hung it sat against the edge of the screen looking dropped.
+  const trailing = /[\u3000-\u303f\uff01-\uff60]+$/u.exec(phrase.listener.text);
   const body = trailing ? phrase.listener.text.slice(0, -trailing[0].length) : phrase.listener.text;
   big.append(document.createTextNode(body));
   if (trailing) {
@@ -933,18 +969,22 @@ function freeCorner(text, box) {
     left: b.left + Number.parseFloat(pad.paddingLeft), right: b.right - Number.parseFloat(pad.paddingRight),
     top: b.top + Number.parseFloat(pad.paddingTop), bottom: b.bottom - Number.parseFloat(pad.paddingBottom),
   };
-  const buffer = Math.max(12, Number.parseFloat(getComputedStyle(text).fontSize) * 0.3);
+  // One distance three times over: the sentence sits the surface's padding in from
+  // the screen's edge, Reply sits that same padding in from the edge, and the gap
+  // between the two is that padding again -- along each axis its own value.
+  const gapX = Number.parseFloat(pad.paddingLeft);
+  const gapY = Number.parseFloat(pad.paddingTop);
   const rtl = getComputedStyle(text).direction === 'rtl';
   let r;
   if (vertical(text)) {
     // Columns right to left; the line runs down (or, right-to-left, up).
     r = rtl
-      ? { left: inner.left, right: last.right, top: inner.top, bottom: end.top - buffer, atLeft: true, atTop: true }
-      : { left: inner.left, right: last.right, top: end.bottom + buffer, bottom: inner.bottom, atLeft: true, atTop: false };
+      ? { left: inner.left, right: last.right - gapX, top: inner.top, bottom: end.top - gapY, atLeft: true, atTop: true }
+      : { left: inner.left, right: last.right - gapX, top: end.bottom + gapY, bottom: inner.bottom, atLeft: true, atTop: false };
   } else {
     r = rtl
-      ? { left: inner.left, right: end.left - buffer, top: last.top, bottom: inner.bottom, atLeft: true, atTop: false }
-      : { left: end.right + buffer, right: inner.right, top: last.top, bottom: inner.bottom, atLeft: false, atTop: false };
+      ? { left: inner.left, right: end.left - gapX, top: last.top, bottom: inner.bottom, atLeft: true, atTop: false }
+      : { left: end.right + gapX, right: inner.right, top: last.top, bottom: inner.bottom, atLeft: false, atTop: false };
   }
   return { ...r, w: r.right - r.left, h: r.bottom - r.top };
 }
@@ -1216,13 +1256,15 @@ function settle(text, box) {
  * @param {(raw:string, unit:'minute'|'hour'|'day') =>
  *   {value:import('../core/quantity.js').Quantity, said:string}|null} config.check
  * @param {Record<string,string>} config.words  labels, in the listener's language
+ * @param {boolean} [config.turned]  set sideways, as the sentence and the answers are
  * @param {import('../core/conversation.js').ColourRole} [config.colour]
  */
 export function renderEntry(stage, question,
-  { kind = 'duration', onConfirm, onCancel, check, words, colour }) {
+  { kind = 'duration', onConfirm, onCancel, check, words, colour, turned = false }) {
   stage.replaceChildren();
   stage.hidden = false;
   stage.className = 'board-stage board-stage-entry';
+  if (turned) stage.classList.add('board-stage-turned');
   if (colour) stage.classList.add(`board-role-${colour}`);
 
   const asked = document.createElement('p');

@@ -61,6 +61,11 @@ export function openBoardMenu(anchor, items, aside) {
     panel.append(...items.map(entry));
   }
   document.body.append(panel);
+  // The aside opens on the voice in use rather than at the top of five hundred: the
+  // current item is brought to the middle of its own column, and the page stays put.
+  const column = /** @type {HTMLElement|null} */ (panel.querySelector('.board-menu-column:last-child'));
+  const current = /** @type {HTMLElement|null} */ (column?.querySelector('.board-menu-current') ?? null);
+  if (column && current) column.scrollTop = current.offsetTop - column.clientHeight / 2 + current.offsetHeight / 2;
   panel.addEventListener('close', () => {
     panel.remove();
     // Back to the button that opened it, for whoever is not using a finger.

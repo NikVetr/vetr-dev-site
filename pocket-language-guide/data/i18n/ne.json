@@ -585,5 +585,8 @@
   "signal.speed": "गति",
   "signal.start": "चम्काउनुहोस्",
   "signal.stop": "रोक्नुहोस्",
-  "signal.unsayable": "मोर्स कोड नभएका अक्षर: {chars}"
+  "signal.unsayable": "मोर्स कोड नभएका अक्षर: {chars}",
+  "format.theme.parchment": "भोजपत्र",
+  "personal.replace": "यो प्रतिलिपिमा {phrases} वाक्य र {pairs} सम्पादन गरिएका कार्ड छन्। यसलाई ल्याउँदा यो डिभाइसमा भएका {have} वाक्य बदलिनेछन्। जारी राख्ने?",
+  "personal.failed": "लिइएन — तपाईंको आफ्नै डेटा फिर्ता राखियो:"
 }

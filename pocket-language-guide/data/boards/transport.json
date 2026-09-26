@@ -99,13 +99,34 @@
           "replySetId": "wait-for-me"
         },
         {
-          "id": "getoffhere",
+          "id": "colder",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "taxi.i-will-get-off-here"
+            "id": "taxi.could-you-make-it-colder"
           },
-          "colour": "move"
+          "colour": "stay",
+          "replySetId": "yes-no-fact"
+        },
+        {
+          "id": "warmer",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "taxi.could-you-make-it-warmer"
+          },
+          "colour": "stay",
+          "replySetId": "yes-no-fact"
+        },
+        {
+          "id": "window",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "taxi.may-i-open-the-window"
+          },
+          "colour": "stay",
+          "replySetId": "yes-no-fact"
         },
         {
           "id": "stophere",
@@ -589,14 +610,6 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "time-scheduling.how-many-minutes"
-          }
-        },
-        {
-          "id": "not-possible",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "board-answers.not-possible"
           }
         },
         {

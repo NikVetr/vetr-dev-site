@@ -585,5 +585,8 @@
   "signal.speed": "Viteză",
   "signal.start": "Semnalizează",
   "signal.stop": "Oprește",
-  "signal.unsayable": "Caractere fără cod Morse: {chars}"
+  "signal.unsayable": "Caractere fără cod Morse: {chars}",
+  "format.theme.parchment": "Pergament",
+  "personal.replace": "Această copie conține fraze: {phrases} și carduri editate: {pairs}. Încărcarea ei va înlocui frazele de pe acest dispozitiv (acum: {have}). Continuați?",
+  "personal.failed": "Nu s-a încărcat — datele dumneavoastră proprii au fost restaurate:"
 }

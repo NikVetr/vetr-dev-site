@@ -585,5 +585,8 @@
   "signal.speed": "ਰਫ਼ਤਾਰ",
   "signal.start": "ਚਮਕਾਓ",
   "signal.stop": "ਰੋਕੋ",
-  "signal.unsayable": "ਮੋਰਸ ਕੋਡ ਤੋਂ ਬਿਨਾਂ ਅੱਖਰ: {chars}"
+  "signal.unsayable": "ਮੋਰਸ ਕੋਡ ਤੋਂ ਬਿਨਾਂ ਅੱਖਰ: {chars}",
+  "format.theme.parchment": "ਚਰਮ-ਪੱਤਰ",
+  "personal.replace": "ਇਸ ਨਕਲ ਵਿੱਚ {phrases} ਵਾਕ ਤੇ {pairs} ਸੋਧੇ ਹੋਏ ਕਾਰਡ ਹਨ। ਇਸ ਨੂੰ ਲਿਆਉਣ ਨਾਲ ਇਸ ਡਿਵਾਈਸ ਦੇ {have} ਵਾਕ ਬਦਲ ਜਾਣਗੇ। ਅੱਗੇ ਵਧੀਏ?",
+  "personal.failed": "ਨਹੀਂ ਲਿਆ ਗਿਆ — ਤੁਹਾਡਾ ਆਪਣਾ ਡਾਟਾ ਵਾਪਸ ਰੱਖ ਦਿੱਤਾ ਗਿਆ:"
 }

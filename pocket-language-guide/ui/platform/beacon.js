@@ -123,7 +123,7 @@ export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop, unit
   word.className = 'beacon-word';
   // A trailing mark hangs, as on the board, so the word itself is centred: `救命!`
   // set as three glyphs put the two that matter left of the middle.
-  const trailing = /[\p{P}\p{S}]+$/u.exec(label);
+  const trailing = /[\u3000-\u303f\uff01-\uff60]+$/u.exec(label);
   word.textContent = trailing ? label.slice(0, -trailing[0].length) : label;
   if (trailing) {
     const punct = document.createElement('span');

@@ -35,11 +35,14 @@ export function writeTheme(theme) {
  * The control: a labelled select with the three choices, applying as it changes.
  * One element, so the board's dialog and the studio's panel can each place it.
  */
-export function themeControl() {
+export function themeControl(labelled = true) {
   const label = document.createElement('label');
   label.className = 'theme-control';
   const name = document.createElement('span');
   name.textContent = t('display.theme');
+  // Under a heading that already says Appearance the word is said once, by the
+  // heading; the label still names the control for a screen reader.
+  if (!labelled) { name.className = 'visually-hidden'; }
   const select = document.createElement('select');
   for (const theme of THEMES) {
     const option = document.createElement('option');
@@ -59,6 +62,6 @@ export function themeSection() {
   box.className = 'display-section';
   const heading = document.createElement('h3');
   heading.textContent = t('display.theme');
-  box.append(heading, themeControl());
+  box.append(heading, themeControl(false));
   return box;
 }

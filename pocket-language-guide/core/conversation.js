@@ -60,6 +60,8 @@ const ENTRIES = new Set(['duration', 'clock', 'count']);
  * @property {PhraseRef} [phraseRef] for `message`: what it says
  * @property {string} [labelKey]    optional short interface wording, never spoken
  * @property {string} [replySetId]  for `message`: answers the listener may give
+ * @property {{d:string, viewBox:string, strokeWidth:number}} [icon]  a topic cell's
+ *   watermark: the section icon of the board it opens, drawn behind the title
  * @property {ColourRole} [colour]  which of the sheet's five role colours it takes
  */
 
@@ -329,6 +331,10 @@ export function resolvePhrase(ref, ctx, incoming = false) {
   if (!base.listener?.text || !base.owner?.text) return null;
   const listener = say(ctx.listenerVoice, ref.id, base.listener, incoming);
   const owner = say(ctx.ownerVoice, ref.id, base.owner, incoming);
+  // **One reading, not the concept's range.** A gloss like "okay / can" documents
+  // what the concept covers, which is what a translator or the printed sheet wants;
+  // a person handed a phone wants one word. The first alternative is the head one.
+  const primary = (/** @type {string} */ text) => (text.includes(' / ') ? text.split(' / ')[0].trim() : text);
   return {
     id: ref.id,
     // **The pronunciation rides with the sentence, from the same row.** Taking it
@@ -339,13 +345,13 @@ export function resolvePhrase(ref, ctx, incoming = false) {
     // pronunciation is not. The respelling is derived from that same variant IPA
     // by the hook the page supplies, which is the sheet's own respeller.
     listener: {
-      text: listener.text,
+      text: primary(listener.text),
       lang: ctx.listener,
       dir: ctx.listenerDir,
       say: ctx.respell?.(ref.id, listener.ipa || '') || '',
       ipa: listener.ipa || '',
     },
-    owner: { text: owner.text, lang: ctx.owner, dir: ctx.ownerDir },
+    owner: { text: primary(owner.text), lang: ctx.owner, dir: ctx.ownerDir },
     provenance: listener.provenance ?? '',
     confidence: Number(listener.confidence ?? 0),
     custom: false,

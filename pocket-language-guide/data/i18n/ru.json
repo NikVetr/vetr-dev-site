@@ -585,5 +585,8 @@
   "signal.speed": "Скорость",
   "signal.start": "Сигнал",
   "signal.stop": "Остановить",
-  "signal.unsayable": "Символы без кода Морзе: {chars}"
+  "signal.unsayable": "Символы без кода Морзе: {chars}",
+  "format.theme.parchment": "Пергаментная",
+  "personal.replace": "В этой копии фраз: {phrases}, изменённых карточек: {pairs}. Загрузка заменит фразы на этом устройстве (сейчас их: {have}). Продолжить?",
+  "personal.failed": "Не загружено — ваши собственные данные восстановлены:"
 }

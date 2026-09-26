@@ -148,14 +148,6 @@
           }
         },
         {
-          "id": "not-possible",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "board-answers.not-possible"
-          }
-        },
-        {
           "id": "please-wait",
           "kind": "message",
           "phraseRef": {

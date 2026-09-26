@@ -585,5 +585,8 @@
   "signal.speed": "वेग",
   "signal.start": "फ्लॅश करा",
   "signal.stop": "थांबा",
-  "signal.unsayable": "मोर्स कोड नसलेली अक्षरे: {chars}"
+  "signal.unsayable": "मोर्स कोड नसलेली अक्षरे: {chars}",
+  "format.theme.parchment": "ताडपत्र",
+  "personal.replace": "या प्रतीत {phrases} वाक्ये आणि {pairs} बदललेली कार्डे आहेत. ही घेतल्यास, या डिव्हाइसवरील {have} वाक्यांच्या जागी ही येतील. पुढे जायचे?",
+  "personal.failed": "घेतले नाही — तुमचा स्वतःचा डेटा परत आला:"
 }

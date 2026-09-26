@@ -16,7 +16,7 @@
 
 import {
   write, addPhrase, editPhrase, removePlacement, deletePhrase,
-  placementsOf, movePlacement,
+  placementsOf, movePlacement, showBuiltIn,
 } from './board-store.js';
 import { t } from './i18n.js';
 
@@ -44,9 +44,11 @@ function el(tag, attrs = {}, kids = []) {
  * @param {{data:import('./board-store.js').BoardPersonal, damaged:boolean}} config.state
  *   the page's own copy, hydrated once at start-up
  * @param {(next:import('./board-store.js').BoardPersonal)=>void} config.onChange
+ * @param {{id:string, label:string}[]} [config.builtIn]  the board's own buttons on this
+ *   screen, each offered with a switch to hide it here
  *   hand the new state back and repaint; the page is authoritative, not the disk
  */
-export function openBoardEditor({ at, pair, owner, listener, listenerDir, state: held, onChange }) {
+export function openBoardEditor({ at, pair, owner, listener, listenerDir, state: held, onChange, builtIn = [] }) {
   const panel = /** @type {HTMLDialogElement} */ (el('dialog', { class: 'board-editor' }));
   // **Handed in, not read here.** Re-reading storage on every repaint meant the
   // board asked the disk what the reader had just typed while the write was still
@@ -189,11 +191,34 @@ export function openBoardEditor({ at, pair, owner, listener, listenerDir, state:
 
   const body = el('div', { class: 'board-editor-body' });
 
+  /**
+   * The board's own buttons, each with a switch. Off is a preference kept on this
+   * device; the button stays in the board and comes back with one tap.
+   */
+  const shipped = () => {
+    if (!builtIn.length) return [];
+    const hidden = state.data.hidden?.[at] ?? [];
+    return [
+      el('h3', { class: 'board-editor-sub', text: t('editor.builtIn') }),
+      // Its own classes, not the reader's list's: the two are different things, and a
+      // test that counts the reader's rows must not count these.
+      el('ul', { class: 'board-editor-shipped' }, builtIn.map((/** @type {{id:string, label:string}} */ b) => {
+        const box = /** @type {HTMLInputElement} */ (el('input', { type: 'checkbox' }));
+        box.checked = !hidden.includes(b.id);
+        box.addEventListener('change', () => { commit(showBuiltIn(state.data, at, b.id, box.checked)); });
+        return el('li', { class: 'board-editor-switch-row' },
+          [el('label', { class: 'board-editor-switch' }, [box, el('span', { text: b.label })])]);
+      })),
+      el('h3', { class: 'board-editor-sub', text: t('editor.title') }),
+    ];
+  };
+
   function draw() {
     const placed = (state.data.placements[at] ?? [])
       .map((/** @type {string} */ id) => state.data.phrases[id])
       .filter((/** @type {import('./board-store.js').CustomPhrase} */ p) => p && p.pair === pair);
     body.replaceChildren(
+      ...shipped(),
       placed.length
         ? el('ul', { class: 'board-editor-list' },
           placed.map((/** @type {import('./board-store.js').CustomPhrase} */ p,
@@ -218,7 +243,7 @@ export function openBoardEditor({ at, pair, owner, listener, listenerDir, state:
 
   panel.append(
     el('div', { class: 'board-editor-head' },
-      [el('h2', { text: t('editor.title') }), close]),
+      [el('h2', { text: t('editor.open') }), close]),
     status, body,
   );
   panel.addEventListener('close', () => panel.remove());

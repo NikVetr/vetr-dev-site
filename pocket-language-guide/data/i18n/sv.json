@@ -585,5 +585,8 @@
   "signal.speed": "Hastighet",
   "signal.start": "Signalera",
   "signal.stop": "Stoppa",
-  "signal.unsayable": "Morse saknar kod för: {chars}"
+  "signal.unsayable": "Morse saknar kod för: {chars}",
+  "format.theme.parchment": "Pergament",
+  "personal.replace": "Den här kopian innehåller {phrases} fraser och {pairs} redigerade kort. Om du läser in den ersätts de {have} fraserna på den här enheten. Fortsätta?",
+  "personal.failed": "Inte inläst – dina egna uppgifter har återställts:"
 }

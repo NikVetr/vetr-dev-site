@@ -11,6 +11,7 @@
 // view over language content, and `core/pack.js` is a data-only join. What this page
 // downloads is the corpus rows for two languages and a JSON file.
 
+import { wireSiteMenu, translatorLinks } from './site-menu.js';
 import {
   loadText, loadLanguages, readerLanguage, registerOffline, showFatal,
   deferUpdates, applyUpdateIfIdle, download, keepBoardOffline, accentFor,
@@ -205,13 +206,20 @@ async function respellerFor(corpus, listener, owner, listenerRows) {
 
 /**
  * @param {string} owner @param {string} listener
- * @param {{boards:{id:string, titleKey:string, listeners:string[], owners:string[]}[]}} index
+ * @param {{boards:{id:string, titleKey:string, listeners:string[], owners:string[], icon?:string}[]}} index
  */
 async function showPicker(owner, listener, index) {
   /** @type {Map<string,string>} */ const titles = new Map();
+  /** @type {Map<string,string>} */ const icons = new Map();
   for (const board of index.boards) {
-    if (serves(board, listener, owner)) titles.set(board.id, t(board.titleKey));
+    if (!serves(board, listener, owner)) continue;
+    titles.set(board.id, t(board.titleKey));
+    if (board.icon) icons.set(board.id, board.icon);
   }
+  // The section icons the printed sheet uses, for the topic cells' watermarks.
+  const art = /** @type {{viewBox:number, strokeWidth:number, paths:Record<string,string>}} */ (
+    JSON.parse(await loadText('data/icons.json')));
+  const viewBox = `0 0 ${art.viewBox} ${art.viewBox}`;
   $('board-title').textContent = t('board.pickTopic');
   $('board-title').title = t('board.pickTopic');
   document.title = t('board.docTitle');
@@ -233,7 +241,11 @@ async function showPicker(owner, listener, index) {
   // nothing to contrast with and is just twelve dashed boxes. They stay submenus --
   // that is what they do -- and the stylesheet drops the marking for this one grid.
   $('board-grid').classList.add('board-grid-topics');
-  renderGrid($('board-grid'), { buttons: [...titles.keys()].map((id) => ({ id, kind: 'submenu' })) }, {
+  renderGrid($('board-grid'), { buttons: [...titles.keys()].map((id) => ({
+    id, kind: 'submenu',
+    icon: icons.has(id) && art.paths[/** @type {string} */ (icons.get(id))]
+      ? { d: art.paths[/** @type {string} */ (icons.get(id))], viewBox, strokeWidth: art.strokeWidth } : undefined,
+  })) }, {
     lang: owner,
     label: (button) => titles.get(button.id) ?? button.id,
     available: () => true,
@@ -478,10 +490,11 @@ async function main() {
   const withOwn = (node) => {
     const mine = placedOn(personal.data, `${boardId}/${state.path.at(-1)}`, pair);
     ctx.custom = Object.fromEntries(mine.map((p) => [p.id, { owner: p.owner, listener: p.listener }]));
+    const hidden = /** @type {import('./board-store.js').BoardPersonal} */ (personal.data).hidden?.[`${boardId}/${state.path.at(-1)}`] ?? [];
     return {
       ...node,
       buttons: [
-        ...node.buttons,
+        ...node.buttons.filter((b) => !hidden.includes(b.id)),
         ...mine.map((p) => /** @type {import('../core/conversation.js').BoardButton} */ ({
           id: p.id, kind: 'message', colour: 'stay',
           phraseRef: { kind: 'custom', id: p.id },
@@ -496,6 +509,36 @@ async function main() {
    */
   const phraseOf = (button, incoming) => (button.phraseRef
     ? resolvePhrase(button.phraseRef, ctx, incoming) : null);
+
+  /**
+   * The phrase with the language's "excuse me" in front of it, on both sides.
+   *
+   * The excuse row's text is one reviewed sentence and the request another; they
+   * are joined the way two sentences are, with a stop from the excuse's own script
+   * when it does not carry one. Nothing is inflected and nothing is lowercased,
+   * because both are language-specific and this must hold in fifty-one.
+   * @param {import('../core/conversation.js').ResolvedPhrase} phrase
+   */
+  const politely = (phrase) => {
+    const excuse = resolvePhrase({ kind: 'corpus', id: 'social-basics.excuse-me-sorry' }, ctx);
+    if (!excuse) return phrase;
+    /** @param {string} lead @param {string} text */
+    const join = (lead, text) => {
+      if (!lead || text.startsWith(lead)) return text;
+      const stop = /[\p{P}]$/u.test(lead) ? '' : (/[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}]/u.test(lead) ? '\u3002' : '.');
+      return `${lead}${stop} ${text}`.replace('\u3002 ', '\u3002');
+    };
+    return {
+      ...phrase,
+      listener: {
+        ...phrase.listener,
+        text: join(excuse.listener.text, phrase.listener.text),
+        say: [excuse.listener.say, phrase.listener.say].filter(Boolean).join(' \u00b7 '),
+        ipa: [excuse.listener.ipa, phrase.listener.ipa].filter(Boolean).join(' | '),
+      },
+      owner: { ...phrase.owner, text: join(excuse.owner.text, phrase.owner.text) },
+    };
+  };
 
   /** @param {import('../core/conversation.js').BoardButton} button */
   const labelOf = (button) => {
@@ -532,7 +575,11 @@ async function main() {
     // A waiting deploy installs here, between things, and nowhere else.
     applyUpdateIfIdle();
 
-    if (state.view !== 'grid') { $('board-menu').hidden = true; $('board-turn-bar').hidden = true; }
+    if (state.view !== 'grid') { $('board-menu').hidden = true; $('board-turn-bar').hidden = true; $('board-add-bar').hidden = true; }
+    // Turned is for the whole tree, not one screen of it: the owner's grid turns
+    // with the sentence and the answers, so a phone laid on the counter reads one
+    // way from the first tap to the last.
+    $('board-grid').classList.toggle('board-grid-turned', display.turned);
     if (state.view === 'grid') {
       clearStage(stage);
       // At the root the parent is the topic list, not a node -- so the control stays
@@ -544,6 +591,7 @@ async function main() {
       $('board-up').hidden = false;
       $('board-menu').hidden = false;
       $('board-turn-bar').hidden = false;
+      $('board-add-bar').hidden = false;
       $('board-up').setAttribute('aria-label', atRoot ? t('board.allTopics') : t('board.up'));
       renderGrid($('board-grid'), node, {
         lang: owner,
@@ -609,7 +657,12 @@ async function main() {
 
     if (state.view === 'message') {
       const set = button.replySetId ? board.replySets?.[button.replySetId] : null;
-      renderMessage(stage, phrase, {
+      // **"Excuse me" first, when the owner wants it.** Both sides of the message
+      // open with the corpus's own "excuse me" row for their language -- one
+      // reviewed sentence in front of another, never a template -- except on the
+      // emergency board, where nobody softens "call an ambulance".
+      const shown = display.polite && boardId !== 'emergency' && !phrase.custom ? politely(phrase) : phrase;
+      renderMessage(stage, shown, {
         onDismiss: () => dispatch({ type: 'dismiss' }),
         // Offered only where the session allows replies *and* this message has
         // answers to offer. There is no reply screen after every statement.
@@ -623,7 +676,7 @@ async function main() {
         // tried, so an engine that then refuses has to say so instead of leaving the
         // owner tapping a dead control while somebody waits.
         onSpeak: canSpeak && display.speak
-          ? () => speech.speakPhrase(phrase, { rate: display.rate, voiceId: chosenVoice || undefined })
+          ? () => speech.speakPhrase(shown, { rate: display.rate, voiceId: chosenVoice || undefined })
           : null,
         rate: display.rate,
         onRate: (r) => { display = { ...display, rate: r }; writeDisplay(display); paint(); },
@@ -698,6 +751,7 @@ async function main() {
         .find((/** @type {any} */ b) => b.id === state.answerId)?.entry ?? 'duration';
       renderEntry(stage, phrase, {
         kind,
+        turned: display.turned,
         onCancel: () => dispatch({ type: 'cancelEntry' }),
         onConfirm: (value) => dispatch({ type: 'confirmEntry', value }),
         // Validated, parsed and previewed in one call, so the button's enabled state,
@@ -751,6 +805,14 @@ async function main() {
       incoming: true,
       colour: chosen?.colour ?? button.colour,
     });
+    // **The door to the fuller translator, opened.** "None of these" is the stranger
+    // saying the board has no answer for them; the next thing they need is a
+    // translator from their language into the owner's, and a link is cheaper than a
+    // hunt through the phone. In the reader's own language, because it is their hand
+    // on the phone now.
+    if (answer.id === 'board-answers.none-of-these') {
+      stage.append(translatorLinks(listener, owner, theirs.t('board.openTranslator')));
+    }
   }
 
   $('board-up').addEventListener('click', () => {
@@ -768,8 +830,8 @@ async function main() {
   // must not find the editor by tapping, and the owner must not open it while
   // holding the phone out to a stranger.
   const menuButton = $('board-menu');
-  menuButton.setAttribute('aria-label', t('board.menu'));
-  menuButton.title = t('board.menu');
+  menuButton.setAttribute('aria-label', t('settings.open'));
+  menuButton.title = t('settings.open');
   // **Turn, from the bar.** The same choice the message's own control makes, set
   // before a message is shown: a phone laid on the counter is turned for the whole
   // conversation, answers included, not one sentence at a time.
@@ -782,6 +844,8 @@ async function main() {
     display = { ...display, turned: !display.turned };
     writeDisplay(display);
     paintTurn();
+    // The grid under the bar turns at once, not on the next navigation.
+    paint();
   });
 
   const openSettings = () => openSpeakerSettings({
@@ -815,6 +879,10 @@ async function main() {
 
   const openEditor = () => openBoardEditor({
     at: `${boardId}/${state.path.at(-1)}`,
+    // The board's own buttons on this screen, so the reader can switch them off.
+    builtIn: currentNode(board, state).buttons
+      .filter((b) => b.kind !== 'beacon')
+      .map((b) => ({ id: b.id, label: labelOf(b) })),
     pair,
     owner,
     listener,
@@ -823,10 +891,15 @@ async function main() {
     onChange: (next) => { personal = { ...personal, data: next }; paint(); },
   });
 
-  menuButton.addEventListener('click', () => openBoardMenu(menuButton, [
-    { label: t('editor.open'), run: openEditor },
-    { label: t('settings.open'), run: openSettings },
-  ]));
+  // The bars are Settings and the plus is the editor: two controls for two things,
+  // rather than one control opening a menu of the two. The header's bars are the
+  // same Settings, so a reader who looks up finds the same door.
+  menuButton.addEventListener('click', openSettings);
+  wireSiteMenu(openSettings);
+  const addButton = $('board-add-bar');
+  addButton.setAttribute('aria-label', t('editor.open'));
+  addButton.title = t('editor.open');
+  addButton.addEventListener('click', openEditor);
 
   /**
    * One step back out of wherever we are, and whether there was one to take.

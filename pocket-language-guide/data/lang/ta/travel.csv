@@ -34,6 +34,9 @@ taxi.we-need-to-catch-the-high-speed-train,எங்களுக்கு வி
 taxi.please-use-the-meter,மீட்டர் போட்டுக் கொள்ளுங்கள்,,mīṭṭar pōṭṭuk koḷḷuṅkaḷ,miːʈʈʌr poːʈʈɯk koɭɭɯŋɡʌɭ,,2,ta-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,நான் இங்கே இறங்குகிறேன்,,nāṉ iṅkē iṟaṅkukiṟēṉ,naːn iŋɡeː irʌŋɡɯɡireːn,,2,ta-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,ஷின்கன்சென் ரயிலுக்கு நேரத்தில் சேர்த்துவிடுங்கள்,,ṣiṉkaṉceṉ rayilukku nērattil cērttuviṭuṅkaḷ,ʂinɡʌnsen ɾʌjilɯkkɯ neːɾʌttil seːrttɯviɖɯŋɡʌɭ,,2,ta-agent-v1;ipa=espeak
+taxi.could-you-make-it-colder,குளிரூட்டியை இன்னும் குளிராக வைக்க முடியுமா?,,kuḷirūṭṭiyai iṉṉum kuḻirāka vaikka muṭiyumā?,kuɭiɾɯʈʈijaɪ innɯm kuɭiɾaːɡʌ vaɪkkʌ muɖijɯmaː,can [you] set the AC even colder?,2,ta-agent-v1;ipa=espeak
+taxi.could-you-make-it-warmer,குளிரூட்டியை இன்னும் சூடாக வைக்க முடியுமா?,,kuḷirūṭṭiyai iṉṉum cūṭāka vaikka muṭiyumā?,kuɭiɾɯʈʈijaɪ innɯm suːɖaːɡʌ vaɪkkʌ muɖijɯmaː,can [you] set the AC even hotter?,2,ta-agent-v1;ipa=espeak
+taxi.may-i-open-the-window,நான் ஜன்னலைத் திறக்கலாமா?,,nāṉ jaṉṉalait tiṟakkalāmā?,naːn dʒʌnnʌlaɪt tirʌkkʌlaːmaː,may I open the window?,2,ta-agent-v1;ipa=espeak
 transit-rides.two-tickets,இரண்டு டிக்கெட்,,iraṇṭu ṭikkeṭ,iɾʌɳɖɯ ʈikkeʈ,,2,ta-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,மெட்ரோ நிலையம் எங்கே?,,meṭrō nilaiyam eṅkē?,meʈɾoː nilaɪjʌm eŋɡeː,,2,ta-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,இந்த பஸ் / ரயில் {} க்குப் போகுமா?,,inta pas / rayil {} kkup pōkumā?,indʌ bʌs / ɾʌjil {} kkɯp poːɡɯmaː,,2,ta-agent-v1;ipa=espeak

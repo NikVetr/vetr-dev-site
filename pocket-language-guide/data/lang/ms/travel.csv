@@ -34,6 +34,9 @@ taxi.we-need-to-catch-the-high-speed-train,Kami harus naik keretapi laju,,kˈami
 taxi.please-use-the-meter,Tolong pakai argo,,tˈoloŋ pˈakaɪ ˈarɡo,argo = the taxi meter,2,ms-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,Saya turun di sini,,sˈajə tˈuron di sˈini,,2,ms-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,Tolong tepat waktu untuk Shinkansen,,tˈoloŋ tˈəpat wˈaktu ˈuntoʔ ʃinkˈansən,,1,reader-gloss-v1;ipa=espeak
+taxi.could-you-make-it-colder,Boleh buat AC lebih sejuk?,,bˈoleh bˈuat ˌeːsˈiː lˈəbeh sˈədʒoʔ,could [you] make the AC colder?,2,ms-agent-v1;ipa=espeak
+taxi.could-you-make-it-warmer,Boleh buat AC lebih panas?,,bˈoleh bˈuat ˌeːsˈiː lˈəbeh pˈanas,could [you] make the AC warmer?,2,ms-agent-v1;ipa=espeak
+taxi.may-i-open-the-window,Boleh saya buka tingkap?,,bˈoleh sˈajə bˈukə tˈiŋkap,may I open the window?,2,ms-agent-v1;ipa=espeak
 transit-rides.two-tickets,Dua tiket,,dˈuə tˈikət,,2,ms-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,Stesen MRT di mana?,,stˈesen ˌɛmˌartˈiː dimˈanə,,2,ms-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,Bas / keretapi ini ke {}?,,bˈas / kərətˈapi ˈini kə {},,2,ms-agent-v1;ipa=espeak

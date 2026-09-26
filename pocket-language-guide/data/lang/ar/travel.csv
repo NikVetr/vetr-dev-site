@@ -59,6 +59,9 @@ taxi.we-need-to-catch-the-high-speed-train,نريد اللحاق بالقطار 
 taxi.please-use-the-meter,شغّل العدّاد من فضلك,,shaghghil al-ʿaddād min faḍlak,ʃɣɣl ʔalʕdːˈaːd mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,سأنزل هنا,,saʾanzil hunā,sʔnzl hˈunaː,,2,ar-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,أرجو الوصول قبل موعد القطار السريع,,arjū al-wuṣūl qabl mawʿid al-qiṭār al-sarīʿ,ʔrdʒˈuː ʔalwˈus̪uːl qˈabl mˈawʕid ʔalqˈit̪aːr ʔassˈaɹiːʕ,,2,ar-agent-v1;ipa=espeak
+taxi.could-you-make-it-colder,ارفع المكيف من فضلك,,irfaʿ al-mukayyif min faḍlak,ˈarfʕ ʔalmˈukajjˌaf mˈin fˈadˤlka,raise the AC,2,ar-agent-v1;ipa=espeak
+taxi.could-you-make-it-warmer,خفف المكيف من فضلك,,khaffif al-mukayyif min faḍlak,xˈaffaf ʔalmˈukajjˌaf mˈin fˈadˤlka,turn down the AC,2,ar-agent-v1;ipa=espeak
+taxi.may-i-open-the-window,هل يمكنني فتح النافذة؟,,hal yumkinunī fatḥ al-nāfidhah?,hˈal jmknnˈiː fˈatħ ʔannˈaːfiðˌa,,2,ar-agent-v1;ipa=espeak
 transit-rides.two-tickets,تذكرتان من فضلك,تذكرتين,tadhkiratān min faḍlak,tðkrtˈaːn mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,أين محطة المترو؟,,ayna maḥaṭṭat al-mitrū?,ʔˈajna mˈaħat̪t̪ˌa ʔalmˈitɹuː,,2,ar-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,هل يذهب هذا إلى {}؟,,hal yadhhab hādhā ilá {}?,hˈal jðhb haˈaðaˌa ʔˈilaː {},,2,ar-agent-v1;ipa=espeak

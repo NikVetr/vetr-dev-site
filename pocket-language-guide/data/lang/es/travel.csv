@@ -59,6 +59,9 @@ taxi.we-need-to-catch-the-high-speed-train,Tenemos que tomar el tren de alta vel
 taxi.please-use-the-meter,"Use el taxímetro, por favor",,"ˈuse el taksˈimetɾo, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,Me bajo aquí,,me bˌaxo akˈi,,2,es-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,Lléveme a tiempo para el tren de alta velocidad,para el AVE,ʝˈebeme a tjˈempo pˌaɾa el tɾˈen de ˈalta bˌelosidˈad,,2,es-agent-v1;ipa=espeak
+taxi.could-you-make-it-colder,"¿Podría bajar la temperatura del aire acondicionado, por favor?",,"podɾˈia baxˈaɾ la tˌempeɾatˈuɾa del ˈaɪɾe ˌakondˌisjonˈado, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
+taxi.could-you-make-it-warmer,"¿Podría subir la temperatura del aire acondicionado, por favor?",,"podɾˈia subˈiɾ la tˌempeɾatˈuɾa del ˈaɪɾe ˌakondˌisjonˈado, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
+taxi.may-i-open-the-window,¿Puedo abrir la ventana?,,pwˈedo abɾˈiɾ la bentˈana,,2,es-agent-v1;ipa=espeak
 transit-rides.two-tickets,"Dos boletos, por favor","Dos billetes, por favor","dˈos bolˈetos, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,¿Dónde está la estación de metro?,estación de subte,dˈonde estˈa la ˌestasjˈon de mˈetɾo,,2,es-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,¿Este autobús o tren va a {}?,,ˈeste ˌaʊtobˈus o tɾˈem bˈa ˈa {},,2,es-agent-v1;ipa=espeak

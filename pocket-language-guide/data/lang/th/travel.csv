@@ -34,6 +34,9 @@ taxi.we-need-to-catch-the-high-speed-train,ต้องขึ้นรถไฟ 
 taxi.please-use-the-meter,เปิดมิเตอร์ด้วย,กดมิเตอร์,poet mitoe duai,pɤːt˨˩ miʔ˦˥tɤː˧ dua̯j˥˩,,2,th-agent-v1;ipa=thaig2p
 taxi.i-will-get-off-here,ลงที่นี่,,long thi ni,loŋ˧ tʰiː˥˩niː˥˩,,2,th-agent-v1;ipa=thaig2p
 taxi.please-get-me-there-in-time-for-the-shinkansen,ขอให้ทันรถไฟชินคันเซ็ง,,,kʰɔː˩˩˦haj˥˩ tʰan˧ rot˦˥faj˧ tɕʰin˧ kʰan˧ seŋ˧,,1,reader-gloss-v1;ipa=thaig2p
+taxi.could-you-make-it-colder,ช่วยเปิดแอร์ให้เย็นขึ้นได้ไหม,,chuai poet ae hai yen khuen dai mai,tɕʰua̯j˥˩ pɤːt˨˩ ʔɛː˧ haj˥˩ jen˧ kʰɯn˥˩ daːj˥˩ maj˩˩˦,could [you] turn the AC to be colder?,2,th-agent-v1;ipa=thaig2p
+taxi.could-you-make-it-warmer,ช่วยเปิดแอร์ให้อุ่นขึ้นได้ไหม,,chuai poet ae hai un khuen dai mai,tɕʰua̯j˥˩ pɤːt˨˩ ʔɛː˧ haj˥˩ ʔun˨˩ kʰɯn˥˩ daːj˥˩ maj˩˩˦,could [you] turn the AC to be warmer?,2,th-agent-v1;ipa=thaig2p
+taxi.may-i-open-the-window,ขอเปิดหน้าต่างได้ไหม,,kho poet natang dai mai,kʰɔː˩˩˦ pɤːt˨˩ naː˥˩taːŋ˨˩ daːj˥˩ maj˩˩˦,may [I] open the window?,2,th-agent-v1;ipa=thaig2p
 transit-rides.two-tickets,ขอตั๋วสองใบ,,kho tua song bai,kʰɔː˩˩˦ tua̯˩˩˦ sɔːŋ˩˩˦ baj˧,,2,th-agent-v1;ipa=thaig2p
 transit-rides.where-is-the-subway-station,สถานีรถไฟฟ้าอยู่ไหน,MRT อยู่ไหน,sathani rotfaifa yu nai,sa˨˩tʰaː˩˩˦niː˧ rot˦˥faj˧faː˦˥ juː˨˩ naj˩˩˦,,2,th-agent-v1;ipa=thaig2p
 transit-rides.does-this-bus-train-go-to,คันนี้ไป{}ไหม,,khan ni pai {} mai,kʰan˧ niː˦˥ paj˧ {} maj˩˩˦,,2,th-agent-v1;ipa=thaig2p

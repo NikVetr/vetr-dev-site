@@ -4,6 +4,7 @@
 // told to sync afterwards, so no control ever has to read a value back out of the
 // DOM -- which is how a dragged margin used to get overwritten by a dropdown.
 
+import { wireSiteMenu } from './site-menu.js';
 import {
   browserSheetContext, ensureFontCss, loadText, loadLanguages, makeSpec,
   pairFromQuery, readerLanguage, setReaderLanguage, showFatal, afterPaint, withBusy,
@@ -79,6 +80,7 @@ async function main() {
   // own -- so it is loaded before anything is drawn, static markup included.
   await loadUiLanguage(choice.source, loadText);
   applyStatic();
+  wireSiteMenu();
   const ctx = await browserSheetContext();
   const presets = JSON.parse(await loadText('data/presets.json'));
   const icons = await loadIcons();

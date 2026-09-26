@@ -34,6 +34,9 @@ taxi.we-need-to-catch-the-high-speed-train,Moramo stići na brzi vlak,,moramo st
 taxi.please-use-the-meter,"Molim vas, uključite taksimetar",,"mˈolim vˈas, ukʎutʃite taksimetar",,2,hr-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,Izlazim ovdje,,izlazim ˈovdje,,2,hr-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,"Molim vas, dovezite me na vrijeme za shinkansen",,"mˈolim vˈas, dovezite mˈe nˈa vrijeme zˈa sxinkansen",,2,gloss-only;scoped-away;hr-agent-v1;ipa=espeak
+taxi.could-you-make-it-colder,Možete li pojačati klimu?,,moʒete li pojatʃati klˈimu,,2,hr-agent-v1;ipa=espeak
+taxi.could-you-make-it-warmer,Možete li smanjiti klimu?,,moʒete li smaɲiti klˈimu,,2,hr-agent-v1;ipa=espeak
+taxi.may-i-open-the-window,Mogu li otvoriti prozor?,,mˈoɡu li otvoriti prˈozor,,2,hr-agent-v1;ipa=espeak
 transit-rides.two-tickets,Dvije karte,,dvˈije kˈarte,,2,hr-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,Gdje je stanica podzemne željeznice?,,ɡdjˈe je stanitsa podʑemne ʒeʎeznitse,,2,hr-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,Ide li ovaj autobus / vlak ovamo: {}?,,ˈide li ˈovaj autobus / vlˈak ovamo {},'does this bus / train go here:' -- u and do take a case a bare name in the slot cannot carry,2,hr-agent-v1;ipa=espeak

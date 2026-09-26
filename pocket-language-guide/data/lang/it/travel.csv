@@ -68,6 +68,9 @@ common-signs.temporarily-closed,Chiuso temporaneamente,,kjˈuzo temporaneamˈent
 transit-rides.can-i-use-this-ticket,Posso usare questo biglietto?,,pˈɔsso ʊzˈare kwˌɛsto biʎˈetto,,2,it-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,Scendo qui,,ʃˈɛndo kwˈi,,2,it-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,Mi porti in tempo per lo Shinkansen,,mɪ pˈɔrtɪ in tˈɛmpo per lo ʃiŋkˈansen,,1,reader-gloss-v1;ipa=espeak
+taxi.could-you-make-it-colder,"Può abbassare la temperatura, per favore?",,"pʊˈɔ abbassˈare la temperatˈura, per favˈore",,2,it-agent-v1;ipa=espeak
+taxi.could-you-make-it-warmer,"Può alzare la temperatura, per favore?",,"pʊˈɔ altsˈare la temperatˈura, per favˈore",,2,it-agent-v1;ipa=espeak
+taxi.may-i-open-the-window,Posso aprire il finestrino?,,pˈɔsso aprˈire il finestrˈino,,2,it-agent-v1;ipa=espeak
 pickup-meeting.please-call-a-taxi,"Chiami un taxi, per favore",,"kjˈamɪ ʊn tˈaksɪ, per favˈore",,2,it-agent-v1;ipa=espeak
 common-signs.open-operating,In servizio,,in servˈitsio,,2,it-agent-v1;ipa=espeak
 common-signs.closed,Chiuso,,kjˈuzo,,2,it-agent-v1;ipa=espeak

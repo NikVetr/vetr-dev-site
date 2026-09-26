@@ -444,6 +444,7 @@
   "boards.body.neck": "my neck",
   "boards.body.feet": "my feet",
   "editor.title": "Your own buttons",
+  "editor.builtIn": "The board\u2019s own buttons on this screen",
   "editor.open": "Edit buttons",
   "editor.label": "Short label, for the button",
   "editor.owner": "What it means, in your language",
@@ -507,6 +508,8 @@
   "display.ipa": "How to say it, in IPA",
   "display.speak": "Speak, and the half-speed button beside it",
   "display.turn": "The control that turns the sentence sideways",
+  "display.polite": "Say \u201cexcuse me\u201d first, before every request",
+  "display.politeCanada": "In Canada? You may want this on.",
   "display.voice": "Voice",
   "display.voiceAuto": "Chosen automatically",
   "display.theme": "Appearance",
@@ -590,5 +593,6 @@
   "signal.stop": "Stop",
   "signal.unsayable": "Morse has no code for: {chars}",
   "board.menu": "Menu",
+  "board.openTranslator": "Open Google Translate",
   "board.toGallery": "All languages"
 }

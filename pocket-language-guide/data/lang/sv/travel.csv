@@ -113,6 +113,9 @@ common-signs.open-operating,öppet / i drift,,ˈœpət / iː drˈɪft,,2,sv-agen
 common-signs.closed,stängt,,stˈɛŋt,,2,sv-agent-v1;ipa=espeak
 common-signs.stopped-stop,stoppad / stopp,,stˈɔpad / stˈɔp,,2,sv-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,"Kör mig dit i tid för shinkansen, tack.",,"ɕˈøːr mˈɛj dˈiːt iː tˈiːd føːr sxˈɪŋkansən, tˈak",,2,gloss-only;scoped-away;sv-agent-v1;ipa=espeak
+taxi.could-you-make-it-colder,Kan du göra luftkonditioneringen kallare?,,kan dʉ jˈøːra lˌɵftkɔndiːsxˈuːneːrˌɪŋən kˈalarə,can you make the AC colder?,2,sv-agent-v1;ipa=espeak
+taxi.could-you-make-it-warmer,Kan du göra luftkonditioneringen varmare?,,kan dʉ jˈøːra lˌɵftkɔndiːsxˈuːneːrˌɪŋən vˈarmarə,can you make the AC warmer?,2,sv-agent-v1;ipa=espeak
+taxi.may-i-open-the-window,Får jag öppna fönstret?,,fˈoːr jɑːɡ ˈœpna fˈœnstrət,may I open the window?,2,sv-agent-v1;ipa=espeak
 place-words.scenic-area,naturskönt område,,nˈatʉrsxœnt ˈɔmroːdə,,2,gloss-only;scoped-away;sv-agent-v1;ipa=espeak
 rail-station-words.maglev,maglev,,mˈaɡləv,,2,gloss-only;scoped-away;sv-agent-v1;ipa=espeak
 common-signs.pork-code,koder för fläskkött på skyltar,,kˈoːdər føːr fləskkˈœt poː sxˈyltar,,2,gloss-only;scoped-away;sv-agent-v1;ipa=espeak

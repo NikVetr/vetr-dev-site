@@ -585,5 +585,8 @@
   "signal.speed": "رفتار",
   "signal.start": "سگنل",
   "signal.stop": "روکیں",
-  "signal.unsayable": "مورس کوڈ میں نہ ہونے والے حروف: {chars}"
+  "signal.unsayable": "مورس کوڈ میں نہ ہونے والے حروف: {chars}",
+  "format.theme.parchment": "پرچمنٹ",
+  "personal.replace": "اس نقل میں فقرے: {phrases}، اور ترمیم شدہ کارڈ: {pairs}۔ اسے درآمد کرنے سے اس ڈیوائس کے فقرے بدل جائیں گے (ابھی: {have})۔ جاری رکھیں؟",
+  "personal.failed": "درآمد نہیں ہوئی — آپ کا اپنا ڈیٹا واپس رکھ دیا گیا:"
 }

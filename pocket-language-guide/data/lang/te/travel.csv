@@ -34,6 +34,9 @@ taxi.we-need-to-catch-the-high-speed-train,మేము అతివేగ ర�
 taxi.please-use-the-meter,మీటర్ వేయండి,,mīṭar vēyaṁḍi,miːʈar ʋeːjaɳɖi,put the meter on,2,te-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,నేను ఇక్కడ దిగుతాను,,nēnu ikkaḍa digutānu,neːnu ikkaɖa diɡutaːnu,,2,te-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,షింకాన్సెన్ రైలుకు సమయానికి చేర్చండి,,ṣiṁkānsen railuku samayāniki cērcaṁḍi,ʂiŋkaːnsen raɪluku samajaːniki tʃeːrtʃaɳɖi,,2,te-agent-v1;ipa=espeak
+taxi.could-you-make-it-colder,ఏసీని ఇంకా చల్లగా చేస్తారా?,,ēsīni iṁkā callagā cēstārā?,eːsiːni iŋkaː tʃallaɡaː tʃeːstaːraː,will [you] make the AC colder?,2,te-agent-v1;ipa=espeak
+taxi.could-you-make-it-warmer,ఏసీని ఇంకా వేడిగా చేస్తారా?,,ēsīni iṁkā vēḍigā cēstārā?,eːsiːni iŋkaː ʋeːɖiɡaː tʃeːstaːraː,will [you] make the AC warmer?,2,te-agent-v1;ipa=espeak
+taxi.may-i-open-the-window,నేను కిటికీ తెరవగలనా?,,nēnu kiṭikī teravagalanā?,neːnu kiʈikiː teraʋaɡalanaː,can/may I open the window?,2,te-agent-v1;ipa=espeak
 transit-rides.two-tickets,రెండు టికెట్లు,,reṁḍu ṭikeṭlu,reɳɖu ʈikeʈlu,,2,te-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,మెట్రో స్టేషన్ ఎక్కడ ఉంది?,,meṭrō sṭēṣan ekkaḍa uṁdi?,meʈroː sʈeːʂan ekkaɖa undi,,2,te-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,ఈ బస్సు / రైలు {} వెళ్తుందా?,,ī bassu / railu {} veḷtuṁdā?,iː bassu / raɪlu {} ʋeɭtundaː,,2,te-agent-v1;ipa=espeak

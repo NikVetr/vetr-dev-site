@@ -585,5 +585,8 @@
   "signal.speed": "Kelajuan",
   "signal.start": "Isyaratkan",
   "signal.stop": "Berhenti",
-  "signal.unsayable": "Aksara tanpa kod Morse: {chars}"
+  "signal.unsayable": "Aksara tanpa kod Morse: {chars}",
+  "format.theme.parchment": "Perkamen",
+  "personal.replace": "Salinan ini mengandungi {phrases} frasa dan {pairs} kad yang disunting. Memuatkannya akan menggantikan {have} frasa pada peranti ini. Teruskan?",
+  "personal.failed": "Tidak dimuatkan — data anda sendiri dikembalikan:"
 }

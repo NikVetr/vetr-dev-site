@@ -585,5 +585,8 @@
   "signal.speed": "速度",
   "signal.start": "发信号",
   "signal.stop": "停止",
-  "signal.unsayable": "摩尔斯电码中没有的字符：{chars}"
+  "signal.unsayable": "摩尔斯电码中没有的字符：{chars}",
+  "format.theme.parchment": "羊皮纸",
+  "personal.replace": "此副本包含 {phrases} 条短语和 {pairs} 张已编辑的卡片。载入后将替换本设备上的 {have} 条短语。是否继续？",
+  "personal.failed": "未载入——已还原您自己的数据："
 }

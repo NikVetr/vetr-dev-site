@@ -875,13 +875,16 @@ export function cardSizeControl({ geometry, value, onChange }) {
   };
   custom.append(width.box, unit('×'), height.box, unit(t('format.inches')));
 
-  /** Which preset the current page size corresponds to, if any. */
+  /** The panel: the sheet unfolded to the one card the reader chose. */
+  const panel = () => foldedGeometry(current, 0);
+  /** Which preset the panel corresponds to, if any. */
   const presetOf = () => Object.entries(geometry).find(
-    ([, g]) => g.pageW === current.pageW && g.pageH === current.pageH,
+    ([, g]) => Math.abs(g.pageW - panel().pageW) < 0.01 && g.pageH === current.pageH,
   )?.[0] ?? '';
 
+  // The boxes hold the panel's size; the fold is put back on whatever they say.
   const push = () => onChange({
-    geometry: { ...current, pageW: width.points(), pageH: height.points() },
+    geometry: foldedGeometry({ ...panel(), pageW: width.points(), pageH: height.points() }, current.fold ?? 0),
   });
   width.box.addEventListener('change', push);
   height.box.addEventListener('change', push);
@@ -898,11 +901,12 @@ export function cardSizeControl({ geometry, value, onChange }) {
     // the old shape. Custom keeps the size that is there and just opens the boxes.
     onChange: (id) => {
       custom.hidden = id !== '';
-      if (id) onChange({ geometry: { ...geometry[id] } });
+      // A preset is a panel; the fold in force is kept and multiplied out.
+      if (id) onChange({ geometry: foldedGeometry({ ...geometry[id] }, current.fold ?? 0) });
     },
   });
   custom.hidden = presetOf() !== '';
-  width.set(current.pageW);
+  width.set(panel().pageW);
   height.set(current.pageH);
 
   return {
@@ -913,7 +917,7 @@ export function cardSizeControl({ geometry, value, onChange }) {
       current = next;
       group.select(presetOf());
       custom.hidden = presetOf() !== '';
-      width.set(next.pageW);
+      width.set(panel().pageW);
       height.set(next.pageH);
     },
   };
@@ -2054,12 +2058,31 @@ export function foldGlyph(panels) {
 }
 
 /**
- * Flat, bifold or trifold. Only the folds the column count can take are offered:
- * a fold lands in a gutter, so three panels need columns in threes.
+ * A geometry refolded into `n` panels.
+ *
+ * **The size the reader chose is the folded size.** A passport-cover card that folds
+ * in two is two passport covers of paper, not one cut in half: the panel keeps the
+ * width and the columns the reader picked, and the sheet is `n` of them side by
+ * side, with the solver widening the gutters at the creases. `n` of 0 is flat.
+ * @param {import('../core/types.js').Geometry} g @param {number} n
+ * @returns {import('../core/types.js').Geometry}
+ */
+export function foldedGeometry(g, n) {
+  const was = g.fold ?? 1;
+  const to = n || 1;
+  const next = { ...g, pageW: (g.pageW / was) * to, columns: Math.max(1, Math.round(g.columns / was)) * to };
+  if (n) next.fold = n; else delete next.fold;
+  return next;
+}
+
+/**
+ * Flat, bifold or trifold, offered whatever the column count: choosing a fold
+ * multiplies the panel out into the sheet, so the columns are always in threes when
+ * there are three panels.
  * @param {{geometry: import('../core/types.js').Geometry, onChange:(patch:{geometry:import('../core/types.js').Geometry})=>void}} config
  */
 export function foldControl({ geometry, onChange }) {
-  const options = [0, 2, 3].filter((n) => !n || geometry.columns % n === 0).map((n) => ({
+  const options = [0, 2, 3].map((n) => ({
     value: n,
     caption: t(n === 0 ? 'format.fold.none' : n === 2 ? 'format.fold.bifold' : 'format.fold.trifold'),
     title: t(n === 0 ? 'format.fold.none' : n === 2 ? 'format.fold.bifold' : 'format.fold.trifold'),
@@ -2069,10 +2092,6 @@ export function foldControl({ geometry, onChange }) {
     label: t('format.fold'),
     value: geometry.fold ?? 0,
     options,
-    onChange: (n) => {
-      const next = { ...geometry };
-      if (n) next.fold = n; else delete next.fold;
-      onChange({ geometry: next });
-    },
+    onChange: (n) => onChange({ geometry: foldedGeometry(geometry, n) }),
   });
 }

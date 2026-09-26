@@ -70,6 +70,9 @@ common-signs.temporarily-closed,በጊዜያዊነት ዝግ,,begīzēyawīnet z
 transit-rides.can-i-use-this-ticket,ይህን ቲኬት መጠቀም ይቻላል?,,yihin tīkēt metʼekʼem yichalal?,jɨhɨn tiket mətʼəkʼəm jɨtʃalal,,2,am-agent-v1;ipa=bgn-am
 taxi.i-will-get-off-here,እዚህ እወርዳለሁ,,izzīh iwerdallehu,ʔɨzːih ʔɨwərdalːəhu,,2,am-agent-v1;ipa=bgn-am
 taxi.please-get-me-there-in-time-for-the-shinkansen,እባክዎ ለሺንካንሰን በጊዜ ያድርሱኝ,,ibakwo leshīnkansen begīzē yadrisunny,ʔɨbakwo ləʃinkansən bəɡize jadrɨsuɲː,,2,am-agent-v1;ipa=bgn-am
+taxi.could-you-make-it-colder,እባክዎ የአየር ማቀዝቀዣውን ይጨምሩ,,ibakwo yeāyer makʼezkʼezhawin yichʼemru,ʔɨbakwo jəʔajər makʼəzkʼəʒawɨn jɨtʃʼəmru,please increase the air conditioner,2,am-agent-v1;ipa=bgn-am
+taxi.could-you-make-it-warmer,እባክዎ የአየር ማቀዝቀዣውን ይቀንሱ,,ibakwo yeāyer makʼezkʼezhawin yikʼensu,ʔɨbakwo jəʔajər makʼəzkʼəʒawɨn jɨkʼənsu,please decrease the air conditioner,2,am-agent-v1;ipa=bgn-am
+taxi.may-i-open-the-window,መስኮቱን ልክፈት?,,meskotun likifet?,məskotun lɨkɨfət,,2,am-agent-v1;ipa=bgn-am
 pickup-meeting.please-call-a-taxi,እባክዎ ታክሲ ይጥሩ,,ibakwo taksī yitʼiru,ʔɨbakwo taksi jɨtʼɨru,,2,am-agent-v1;ipa=bgn-am
 common-signs.open-operating,ክፍት / በስራ ላይ,,kift / besira lay,kɨft / bəsɨra laj,open / at work,2,am-agent-v1;ipa=bgn-am
 common-signs.closed,ዝግ,,zig,zɨɡ,,2,am-agent-v1;ipa=bgn-am

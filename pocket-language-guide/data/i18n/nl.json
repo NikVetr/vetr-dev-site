@@ -585,5 +585,8 @@
   "signal.speed": "Snelheid",
   "signal.start": "Knipperen",
   "signal.stop": "Stoppen",
-  "signal.unsayable": "Tekens zonder morsecode: {chars}"
+  "signal.unsayable": "Tekens zonder morsecode: {chars}",
+  "format.theme.parchment": "Perkament",
+  "personal.replace": "Deze kopie bevat {phrases} zinnen en {pairs} bewerkte kaarten. Als u deze laadt, vervangt dat de {have} zinnen op dit apparaat. Doorgaan?",
+  "personal.failed": "Niet geladen – uw eigen gegevens zijn teruggezet:"
 }

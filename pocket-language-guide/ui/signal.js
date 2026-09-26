@@ -8,6 +8,7 @@
 // which already knows how to flash a screen and a lamp to Morse timing because that
 // is what the SOS beacon does.
 
+import { wireSiteMenu } from './site-menu.js';
 import {
   loadText, loadLanguages, readerLanguage, registerOffline, showFatal,
 } from './app.js';
@@ -24,6 +25,7 @@ async function main() {
   const owner = params.get('source') || readerLanguage(languages, coverage);
   await loadUiLanguage(owner, loadText);
   applyStatic();
+  wireSiteMenu();
 
   const text = /** @type {HTMLTextAreaElement} */ ($('signal-text'));
   const code = /** @type {HTMLOutputElement} */ ($('signal-code'));

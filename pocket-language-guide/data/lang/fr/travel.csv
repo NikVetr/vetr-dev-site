@@ -59,6 +59,9 @@ taxi.we-need-to-catch-the-high-speed-train,Nous devons attraper le TGV,le train 
 taxi.please-use-the-meter,"Mettez le compteur, s'il vous plaît",,"mɛte lə kɔ̃tˈœʁ, sil vu plˈɛ",,2,fr-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,Je descends ici,,ʒə dɛsɑ̃z isˈi,,2,fr-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,Déposez-moi à temps pour le Shinkansen,,depozemwa a tɑ̃ puʁ lə ʃɛ̃kɑ̃sˈɛn,,2,fr-agent-v1;ipa=espeak
+taxi.could-you-make-it-colder,"Pourriez-vous monter la climatisation, s'il vous plaît ?",,"puʁjevu mɔ̃te la klimatizasjˈɔ̃, sil vu plˈɛ",turn up the air conditioning,2,fr-agent-v1;ipa=espeak
+taxi.could-you-make-it-warmer,"Pourriez-vous baisser la climatisation, s'il vous plaît ?",,"puʁjevu bɛse la klimatizasjˈɔ̃, sil vu plˈɛ",turn down the air conditioning,2,fr-agent-v1;ipa=espeak
+taxi.may-i-open-the-window,Puis-je ouvrir la fenêtre ?,,pyiʒ uvʁiʁ la fənˈɛtʁ,,2,fr-agent-v1;ipa=espeak
 transit-rides.two-tickets,Deux billets,,dø bijˈɛ,,2,fr-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,Où est la station de métro ?,,u ɛ la stasjɔ̃ də metʁˈo,,2,fr-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,Ce bus / train va-t-il à {} ?,,sə bˈys / tʁɛ̃ vatil ˌaaksɑ̃ɡʁˈav {},,2,fr-agent-v1;ipa=espeak

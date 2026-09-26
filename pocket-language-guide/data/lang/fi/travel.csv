@@ -113,6 +113,9 @@ common-signs.open-operating,auki / toiminnassa,,ˈauki / tˈoiminnˌassa,,2,fi-a
 common-signs.closed,suljettu,,sˈuljettu,,2,fi-agent-v1;ipa=espeak
 common-signs.stopped-stop,pysähtynyt / seis,,pˈysæhtynyt / sˈeis,,2,fi-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,Viekää minut ajoissa Shinkansen-junaan.,,vˈiekæː mˈinut ˈajoissa ʃˈiŋkansenjunaːn,,2,fi-agent-v1;ipa=espeak
+taxi.could-you-make-it-colder,Laittaisitteko ilmastoinnin viileämmälle?,,lˈaittaisˌitteko ˈilmastˌoinnin vˈiːleˌæmmælle,,2,fi-agent-v1;ipa=espeak
+taxi.could-you-make-it-warmer,Laittaisitteko ilmastoinnin lämpimämmälle?,,lˈaittaisˌitteko ˈilmastˌoinnin lˈæmpimˌæmmælle,,2,fi-agent-v1;ipa=espeak
+taxi.may-i-open-the-window,Saisinko avata ikkunan?,,sˈaisiŋko ˈavata ˈikkunan,,2,fi-agent-v1;ipa=espeak
 common-signs.pork-code,sianlihan koodit kylteissä,,sˈianlihaŋ kˈoːdit kˈylteissæ,"B1 = koira, B2 = sianliha",2,fi-agent-v1;ipa=espeak
 rail-station-words.maglev,magneettijuna,,mˈaɡneːttˌijuna,,2,fi-agent-v1;ipa=espeak
 place-words.scenic-area,nähtävyysalue,,nˈæhtævˌyːsalˌue,,2,fi-agent-v1;ipa=espeak

@@ -10,7 +10,7 @@
     "respell:charset": "node scripts/respell_check.mjs --charset",
     "fonts": "python3 scripts/subset_fonts.py",
     "validate": "python3 scripts/validate_data.py",
-    "prerender": "node scripts/prerender_packs.mjs",
+    "prerender": "node scripts/prerender_packs.mjs --jobs 12",
     "mobile": "node scripts/build_mobile.mjs",
     "android": "bash scripts/build_android.sh",
     "test:webkit": "WEBKIT=1 npx playwright test --project=webkit",

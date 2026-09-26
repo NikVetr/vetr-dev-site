@@ -34,6 +34,9 @@ taxi.we-need-to-catch-the-high-speed-train,Temos de apanhar o comboio rápido,Pr
 taxi.please-use-the-meter,"Ligue o taxímetro, por favor",,"lˈiɡj ʊ tˌaksˈimetrʊ, por favˈor",,2,pt-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,Saio aqui,,sˈaɪw akˈi,,2,pt-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,Leve-me a tempo para o Shinkansen,,lˈɛvymj a tˈeɪmpʊ pˌaɾæ ʊ ʃˌiŋkˈɐ̃ŋseɪŋ,,1,reader-gloss-v1;ipa=espeak
+taxi.could-you-make-it-colder,Pode deixar o ar condicionado mais frio?,,pˌɔdʒy deɪʃˈaɾ u ˈar kˌoŋdʒisˌionˈadʊ mˈaɪs frˈiʊ,could you make the AC colder?,2,pt-agent-v1;ipa=espeak
+taxi.could-you-make-it-warmer,Pode deixar o ar condicionado mais quente?,,pˌɔdʒy deɪʃˈaɾ u ˈar kˌoŋdʒisˌionˈadʊ mˈaɪs kˈeɪŋtʃy,could you make the AC warmer?,2,pt-agent-v1;ipa=espeak
+taxi.may-i-open-the-window,Posso abrir a janela?,,pˌɔsʊ abrˈiɾ a ʒˌænˈɛlæ,may I open the window?,2,pt-agent-v1;ipa=espeak
 transit-rides.two-tickets,Dois bilhetes,Duas passagens,dˈoɪz bˌiljˈetʃys,,2,pt-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,Onde fica a estação de metro?,estação de metrô,ˌoŋdʒy fˈikæ a ˌestasˈɐ̃ʊ̃ dʒy mˈɛtrʊ,,2,pt-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,Este autocarro ou comboio vai para {}?,Este ônibus ou trem vai para {}?,ˌestʃy ˌaʊtokˈaxw ow kˌombˈoɪʊ vaɪ pˌaɾæ {},,2,pt-agent-v1;ipa=espeak

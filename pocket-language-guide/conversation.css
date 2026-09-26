@@ -70,10 +70,15 @@
      pair ran off the right edge and read "Englis / Simpli / Chines" -- a flex item
      will not shrink below its content unless it is told it may, and a long language
      name has no break opportunity a browser will take on its own. Found by looking
-     at a screenshot at that setting, which is why §9.2 asks for one. */
-  flex-wrap: wrap;
+     at a screenshot at that setting, which is why §9.2 asks for one. The row itself
+     does not wrap: the pair may shrink and break inside its own box, and the bars at
+     the end stay on the row, where a menu control is looked for. */
+  flex-wrap: nowrap;
 }
-.board-brand { min-inline-size: 0; }
+.board-header .site-menu { flex: 0 0 auto; inline-size: 2rem; block-size: 2rem; }
+.board-pair { flex: 0 1 auto; text-align: end; }
+/* The brand keeps its word; the pair is what gives way on a narrow screen. */
+.board-brand { flex: 0 0 auto; }
 .board-pair {
   margin: 0;
   color: var(--muted);
@@ -176,15 +181,19 @@
   flex: 1 1 auto;
   min-inline-size: 0;
   margin: 0;
+  /* Four controls share the bar now, and at an enlarged text size the topic's
+     longest word can be wider than what they leave it: it breaks inside the word
+     before it clips, because clipping a topic is not on offer. */
+  overflow-wrap: anywhere;
   /* `--fs-3` is the page-heading size, which is what this is: taking the two named
      buttons out of the bar is what made the room for the topic to be set like one.
      `min`, not `clamp`, because a floor is what turns "as large as fits" into "large
      enough to need an ellipsis", and truncating a topic is not on offer. Tied to the
      bar's own width, so an enlarged system text size moves the body copy around it
      without pushing this over the edge. */
-  /* 6.5, not 7.5: the bar carries Turn as well as the menu now, and at 1.6x text the
-     longest topic word overran the room those two left. */
-  font-size: min(6.5cqi, var(--fs-3));
+  /* 5.5, from 6.5, from 7.5: the bar carries Add, Turn and the menu now, and at 1.6x
+     text the longest topic word overran the room those three left. */
+  font-size: min(5.5cqi, var(--fs-3));
   font-weight: 700;
   letter-spacing: -0.01em;
   line-height: 1.2;
@@ -194,8 +203,9 @@
      one thing nothing here is allowed to do -- and at a 1.6x system text size, where
      the two 44px controls and the rem-sized gaps eat the row, it did. Sized against
      the bar instead, a topic fits on one line at every ordinary setting and is
-     allowed to take a second rather than lose a syllable. */
-  overflow-wrap: break-word;
+     allowed to take a second rather than lose a syllable -- or, when four controls
+     and a 1.6x text size leave it less than its longest word, to break inside the
+     word (`anywhere`, above) rather than clip. */
 }
 .board-title:empty { display: none; }
 
@@ -363,7 +373,7 @@
   border-radius: var(--radius);
   /* **Neutral, with the contrast spent on the words.** Five saturated fills behind
      white type made a handsome grid and a hard one to read. */
-  background: var(--paper);
+  background: var(--control);
   color: var(--ink);
   cursor: pointer;
 }
@@ -446,9 +456,13 @@
      rem-sized buttons left the topic no room for its own longest word. 48px is
      still a full tap target. */
   min-inline-size: min(2.6rem, 48px); min-block-size: min(2.6rem, 48px); padding: 0;
-  border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); color: var(--ink); cursor: pointer;
+  border: 1px solid var(--line); border-radius: var(--radius); background: var(--control); color: var(--ink); cursor: pointer;
 }
 .board-turn-bar[aria-pressed="true"] { background: var(--accent); color: var(--paper); border-color: transparent; }
+/* `display` above outranks the user agent's `[hidden]`, so the owner's two footer
+   buttons showed where they were meant to be hidden -- the plus, dead, on the topic
+   list, before a board had wired it. */
+.board-turn-bar[hidden] { display: none; }
 .board-status:empty { display: none; }
 
 /* --- the message ------------------------------------------------------------- */
@@ -1189,3 +1203,21 @@ dialog.board-menu-panel::backdrop { background: rgb(17 24 32 / 25%); }
 }
 /* Set by the fitter at a size where the mark cannot hang: it takes its own width. */
 .board-punct-inline > .board-message-punct { display: inline; inline-size: auto; }
+
+/* --- the tree, turned ------------------------------------------------------- */
+/* The owner's grid turns with the sentence and the answers: one orientation from
+   the first tap to the last, for a phone laid on the counter. The grid's tracks
+   follow the writing mode, so its columns run down the screen. */
+.board-grid-turned { writing-mode: vertical-rl; text-orientation: sideways; }
+/* A topic's icon behind its word, a shade fainter than the answer mark. */
+.board-cell-icon { inline-size: 56%; block-size: 56%; opacity: 0.09; color: var(--ink); }
+/* The link out to a translator, under the answer that had none. */
+.board-links { margin: 0; padding: var(--space-2); text-align: center; }
+.board-links .btn { font-weight: 600; }
+/* The editor's two lists: the board's own buttons with a switch each, then the
+   reader's. */
+.board-editor-sub { margin: var(--space-2) 0 var(--space-1); font-size: var(--fs-0); color: var(--muted); font-weight: 600; }
+.board-editor-switch { display: flex; align-items: center; gap: var(--space-2); cursor: pointer; }
+.board-editor-switch input { inline-size: 1.15rem; block-size: 1.15rem; margin: 0; }
+.board-editor-shipped { list-style: none; margin: 0; padding: 0; }
+.board-editor-switch-row { padding: 0.45rem 0; border-bottom: 1px solid var(--line-soft); }

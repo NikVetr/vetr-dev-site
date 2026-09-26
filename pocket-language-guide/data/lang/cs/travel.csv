@@ -113,6 +113,9 @@ common-signs.open-operating,otevřeno / v provozu,,ˈotevr̝ˌeno / v prˈovozu,
 common-signs.closed,zavřeno,,zˈavr̝eno,,2,cs-agent-v1;ipa=espeak
 common-signs.stopped-stop,zastaveno / stop,,zˈastavˌeno / stˈop,,2,cs-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,Dovezte mě tam prosím včas na shinkansen,,dˈoveste mɲˈe tˈam prˈosiːm ftʃˈas nˈashiŋkˌansen,,2,gloss-only;scoped-away;cs-agent-v1;ipa=espeak
+taxi.could-you-make-it-colder,Mohli byste prosím snížit teplotu klimatizace?,,mˈohli bˌiste prˈosiːm sɲˈiːʒit tˈeplotu klˈimatˌizatse,,2,cs-agent-v1;ipa=espeak
+taxi.could-you-make-it-warmer,Mohli byste prosím zvýšit teplotu klimatizace?,,mˈohli bˌiste prˈosiːm zvˈiːʃit tˈeplotu klˈimatˌizatse,,2,cs-agent-v1;ipa=espeak
+taxi.may-i-open-the-window,Mohu otevřít okno?,,mˈohu ˈotevr̝iːt ˈokno,,2,cs-agent-v1;ipa=espeak
 place-words.scenic-area,turistická oblast,,tˈuristˌitskaː ˈoblast,,2,gloss-only;scoped-away;cs-agent-v1;ipa=espeak
 rail-station-words.maglev,maglev,,mˈaɡlev,,2,gloss-only;scoped-away;cs-agent-v1;ipa=espeak
 common-signs.pork-code,kódy pro vepřové na cedulích,,kˈoːdi prˈovepr̝ˌoveː nˈatsedˌuliːx,B1 = pes,2,gloss-only;scoped-away;cs-agent-v1;ipa=espeak

@@ -585,5 +585,8 @@
   "signal.speed": "ความเร็ว",
   "signal.start": "ส่งสัญญาณ",
   "signal.stop": "หยุด",
-  "signal.unsayable": "อักขระที่รหัสมอร์สไม่มี: {chars}"
+  "signal.unsayable": "อักขระที่รหัสมอร์สไม่มี: {chars}",
+  "format.theme.parchment": "ใบลาน",
+  "personal.replace": "สำเนานี้มี {phrases} ประโยคและการ์ดที่แก้ไข {pairs} ใบ การโหลดจะแทนที่ {have} ประโยคที่มีอยู่ในเครื่องนี้ ดำเนินการต่อไหม?",
+  "personal.failed": "ไม่ได้โหลด ข้อมูลของคุณเองถูกนำกลับคืนมา:"
 }

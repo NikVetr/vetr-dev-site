@@ -585,5 +585,8 @@
   "signal.speed": "Velocidade",
   "signal.start": "Piscar",
   "signal.stop": "Parar",
-  "signal.unsayable": "Caracteres sem código Morse: {chars}"
+  "signal.unsayable": "Caracteres sem código Morse: {chars}",
+  "format.theme.parchment": "Pergaminho",
+  "personal.replace": "Esta cópia contém {phrases} frases e {pairs} cartões editados. Ao carregá-la, substitui as {have} frases neste dispositivo. Continuar?",
+  "personal.failed": "Não foi carregado — os seus dados próprios foram repostos:"
 }

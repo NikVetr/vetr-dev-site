@@ -585,5 +585,8 @@
   "signal.speed": "ຄວາມໄວ",
   "signal.start": "ກະພິບ",
   "signal.stop": "ຢຸດ",
-  "signal.unsayable": "ຕົວອັກສອນທີ່ບໍ່ມີລະຫັດມອດສະ: {chars}"
+  "signal.unsayable": "ຕົວອັກສອນທີ່ບໍ່ມີລະຫັດມອດສະ: {chars}",
+  "format.theme.parchment": "ໃບລານ",
+  "personal.replace": "ສຳເນົານີ້ມີ {phrases} ປະໂຫຍກ ແລະ {pairs} ບັດທີ່ໄດ້ແກ້ໄວ້ ການໂຫຼດມັນຈະປ່ຽນແທນ {have} ປະໂຫຍກທີ່ຢູ່ໃນເຄື່ອງນີ້ ດຳເນີນຕໍ່ບໍ?",
+  "personal.failed": "ບໍ່ໄດ້ໂຫຼດ ຂໍ້ມູນຂອງເຈົ້າເອງຖືກເອົາຍ້ອນຄືນ:"
 }

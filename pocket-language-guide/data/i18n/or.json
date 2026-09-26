@@ -585,5 +585,8 @@
  "signal.speed": "ବେଗ",
  "signal.start": "ଜାଳନ୍ତୁ",
  "signal.stop": "ରୋକନ୍ତୁ",
- "signal.unsayable": "ମୋର୍ସ କୋଡ୍ ନଥିବା ଅକ୍ଷର: {chars}"
+ "signal.unsayable": "ମୋର୍ସ କୋଡ୍ ନଥିବା ଅକ୍ଷର: {chars}",
+ "format.theme.parchment": "ତାଳପତ୍ର",
+ "personal.replace": "ଏହି ନକଲରେ {phrases}ଟି ବାକ୍ୟ ଓ {pairs}ଟି ସମ୍ପାଦିତ କାର୍ଡ ଅଛି। ଏହାକୁ ଆଣିଲେ ଏହି ଡିଭାଇସରେ ଥିବା {have}ଟି ବାକ୍ୟ ବଦଳିଯିବ। ଆଗକୁ ବଢ଼ିବେ କି?",
+ "personal.failed": "ନିଆଗଲା ନାହିଁ — ଆପଣଙ୍କ ନିଜ ତଥ୍ୟ ଫେରାଇ ଦିଆଗଲା:"
 }

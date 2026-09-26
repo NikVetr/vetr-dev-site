@@ -34,6 +34,9 @@ taxi.we-need-to-catch-the-high-speed-train,हामीले छिटो र�
 taxi.please-use-the-meter,कृपया मिटर प्रयोग गर्नुहोस्,,kr̥payā miṭara prayōga garnuhōs,kɾˈɪpəjˌaː mˈɪʈəɾˌə pɾəjˈoːɡ ɡˌərrnuhˈoːs,,2,ne-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,म यहाँ ओर्लन्छु,,ma yahām̐ ōrlanchu,mə jˈʌhã ˈoːrrləncʰˌu,,2,ne-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,शिन्कान्सेनको लागि समयमै पुर्‍याइदिनुहोस्,,śinkānsēnakō lāgi samayamai pur{}yāidinuhōs,ʃɪnkˈaːnseːnˌəkoː lˈaːɡɪ sˈʌməjˌəmɛː pˌurrjaːˌɪdɪnuhˈoːs,,2,ne-agent-v1;ipa=espeak
+taxi.could-you-make-it-colder,एसी अझै चिसो बनाउनुहुन्छ?,,ēsī ajhai ciso banāunuhuncha?,ˈeːsi ˈʌɟʰɛː cˈɪsoː bˌənaːˌʊnuhˈuncʰə,will [you] make the AC even colder?,2,ne-agent-v1;ipa=espeak
+taxi.could-you-make-it-warmer,एसी अझै तातो बनाउनुहुन्छ?,,ēsī ajhai tāto banāunuhuncha?,ˈeːsi ˈʌɟʰɛː tˈaːtoː bˌənaːˌʊnuhˈuncʰə,will [you] make the AC even warmer?,2,ne-agent-v1;ipa=espeak
+taxi.may-i-open-the-window,मैले झ्याल खोल्न हुन्छ?,,maile jhyāl khōlna huncha?,mˈɛːleː ɟʰjˈaːl kʰˈoːlnə hˈuncʰə,may I (lit. by me) open the window?,2,ne-agent-v1;ipa=espeak
 transit-rides.two-tickets,दुईवटा टिकट दिनुहोस्,,duīvaṭā ṭikaṭa dinuhōs,duˈɪːwəʈˌaː ʈˈɪkəʈ dˌɪnuhˈoːs,,2,ne-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,मेट्रो स्टेशन कहाँ छ?,,mēṭrō sṭēśana kahām̐ cha?,mˈeːʈɾoː sʈˈeːʃən kˈʌhã cʰˈə,,2,ne-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,के यो बस/रेल {} जान्छ?,,kē yō basa/rēla {} jāncha?,kˈeː jˈoː bˈʌs / ɾˈeːl {} ɟˈaːncʰə,,2,ne-agent-v1;ipa=espeak

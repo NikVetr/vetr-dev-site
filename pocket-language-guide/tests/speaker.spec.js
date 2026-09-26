@@ -28,7 +28,7 @@ test('answering once changes the wording on the card', async ({ page }) => {
   await expect(notice).toHaveText(/not set/);
   expect(await drawn(page)).toContain('\u0437\u0430\u0431\u043b\u0443\u0434\u0438\u043b\u0441\u044f');
 
-  await page.getByRole('button', { name: 'Settings' }).click();
+  await page.locator('button.chip', { hasText: 'Settings' }).click();
   const dialog = page.locator('dialog.speaker-settings');
   await expect(dialog).toBeVisible();
   // Only the question Russian actually asks. A settings screen that asks everyone
@@ -63,11 +63,13 @@ test('a pair that asks nothing still offers settings, and asks nothing', async (
   // itself that there is nothing to ask.
   await page.goto('/sheet.html?target=zh-Hans&source=en');
   await expect(page.locator('.face').first()).toBeVisible({ timeout: 120_000 });
-  await page.getByRole('button', { name: 'Settings' }).click();
+  await page.locator('button.chip', { hasText: 'Settings' }).click();
   const dialog = page.locator('dialog.speaker-settings');
   await expect(dialog).toBeVisible();
   // No axis question at all -- but the dialog still exists, for the section below.
   await expect(dialog.locator('.speaker-axis')).toHaveCount(0);
-  await expect(dialog.getByText(/does not change a phrase|nothing to set/i)).toBeVisible();
+  // And it no longer says so in a sentence: a dialog that opens on "there is
+  // nothing to set" was clutter over the sections that are there.
+  await expect(dialog.getByText(/does not change a phrase|nothing to set/i)).toHaveCount(0);
   await expect(dialog.getByRole('button', { name: 'Save a copy' })).toBeVisible();
 });

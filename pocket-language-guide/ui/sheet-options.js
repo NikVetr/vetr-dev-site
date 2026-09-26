@@ -3,6 +3,7 @@
 // Deliberately a subset of the studio, sharing its controls so the two pages read
 // as one app rather than two. Everything not offered here is a studio decision.
 
+import { wireSiteMenu } from './site-menu.js';
 import {
   browserSheetContext, ensureFontCss, loadText, loadLanguages, makeSpec,
   pairFromQuery, readerLanguage, showFatal, afterPaint, withBusy, download,
@@ -62,6 +63,7 @@ async function main() {
   // own -- so it is loaded before anything is drawn, static markup included.
   await loadUiLanguage(choice.source, loadText);
   applyStatic();
+  wireSiteMenu();
   const ctx = await browserSheetContext();
   const presets = JSON.parse(await loadText('data/presets.json'));
   const icons = await loadIcons();

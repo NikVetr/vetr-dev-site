@@ -34,6 +34,9 @@ taxi.we-need-to-catch-the-high-speed-train,ہمیں تیز رفتار ٹرین �
 taxi.please-use-the-meter,میٹر سے چلیے,میٹر آن کر دیجیے,mīṭar se chaliye,mˈeːʈəɾ seː cˈʌljeː,go by the meter; meters are rare in Pakistan -- fares are agreed beforehand or set by the app,2,ur-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,مجھے یہاں اترنا ہے,,mujhe yahāñ utarnā hai,mˌʊɟʰeː jˈʌhãː ʊtˈaɾnaː hɛ,,2,ur-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,مجھے شنکانسن کے وقت پر پہنچا دیجیے,,mujhe shinkānsan ke waqt par pahunchā dījiye,mˌʊɟʰeː ʃˌənkˈaːnsən keː ʋˈaqt pˈʌɾ pahˈʊncaː diɟˈiːeː,,2,ur-agent-v1;ipa=espeak
+taxi.could-you-make-it-colder,کیا آپ اے سی ٹھنڈا کر سکتے ہیں؟,,kyā āp e sī ṭhanḍā kar sakte haiṁ?,kjˈaː ˌaːp ˈeː sˈiː ʈʰˈʌnɖaː kaɾ sˈʌktˌeː hẽ,can you make the AC cold?,2,ur-agent-v1;ipa=espeak
+taxi.could-you-make-it-warmer,کیا آپ اے سی گرم کر سکتے ہیں؟,,kyā āp e sī garam kar sakte haiṁ?,kjˈaː ˌaːp ˈeː sˈiː ɡˈaɾm kaɾ sˈʌktˌeː hẽ,can you make the AC warm?,2,ur-agent-v1;ipa=espeak
+taxi.may-i-open-the-window,کیا میں کھڑکی کھول لوں؟,,kyā maiṁ khiṛkī khol lūñ?,kjˈaː mˈẽ kʰˈɪɽki kʰˈoːl lˈõː,"shall I open the window? -- the gender-neutral optative, avoiding the masculine/feminine split of سکتا/سکتی that this section does not otherwise carry",2,ur-agent-v1;ipa=espeak
 transit-rides.two-tickets,دو ٹکٹ دیجیے,,do ṭikaṭ dījiye,dˈoː ʈˈɪkɪʈ diɟˈiːeː,,2,ur-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,میٹرو اسٹیشن کہاں ہے؟,,meṭro isṭeshan kahāñ hai?,mˈeːʈɾˌoː ɪsʈˈiːʃən kˈʌhãː hɛ,Lahore's Orange Line is Pakistan's only metro rail; elsewhere میٹرو is the bus rapid transit line,2,ur-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,کیا یہ {} جاتی ہے؟,,kyā yah {} jātī hai?,kjˈaː jeːh {} ɟˈaːti hɛ,"feminine agreement, which fits both بس and ٹرین",2,ur-agent-v1;ipa=espeak

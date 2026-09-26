@@ -34,6 +34,9 @@ taxi.we-need-to-catch-the-high-speed-train,Нам нужно успеть на �
 taxi.please-use-the-meter,"Включите счётчик, пожалуйста.",,"Vklyuchite schëtchik, pozhaluysta.","fkɭʲʉtʃʲˈitʲi ɕˈɵttʃʲik, pʌʒˈɑɭujsta",,2,ru-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,Я выйду здесь.,,Ya vyydu zdesʼ.,ˈja vˈɨjdu ʑdʲˈesʲ,,2,ru-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,Мне нужно успеть на синкансэн.,,,mnʲˈe nˈuʒnʌ uspʲˈetʲ nə sʲˈinkʌnsɛn,,1,reader-gloss-v1;ipa=espeak
+taxi.could-you-make-it-colder,Можете сделать кондиционер холоднее?,,Mozhete sdelatʼ konditsioner kholodneye?,mˌoʒɨtʲi ʑdʲˈeɭʌtʲ kʌndʲitsɨʌnʲˈer xʌɭʌdnʲˈejɪ,can you make the air conditioner colder?,2,ru-agent-v1;ipa=espeak
+taxi.could-you-make-it-warmer,Можете сделать кондиционер теплее?,,Mozhete sdelatʼ konditsioner tepleye?,mˌoʒɨtʲi ʑdʲˈeɭʌtʲ kʌndʲitsɨʌnʲˈer tʲipɭʲˈejɪ,can you make the air conditioner warmer?,2,ru-agent-v1;ipa=espeak
+taxi.may-i-open-the-window,Можно открыть окно?,,Mozhno otkrytʼ okno?,mˈoʒnʌ ʌtkrˈɨtʲ ʌknˈo,is it permitted [for me] to open the window? -- the ordinary way to ask permission for oneself,2,ru-agent-v1;ipa=espeak
 transit-rides.two-tickets,Два билета.,,Dva bileta.,dvˈɑ bʲiɭʲˈeta,,2,ru-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,Где станция метро?,,Gde stantsiya metro?,ɡdʲˈe stˈɑntsɨja mʲitrˈo,,2,ru-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,Этот автобус идёт до {} ?,,Etot avtobus idët do {} ?,ˈɛtʌt aftˈobus ɪdʲˈɵt dˈo {},,2,ru-agent-v1;ipa=espeak

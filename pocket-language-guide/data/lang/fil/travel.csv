@@ -113,6 +113,9 @@ transit-rides.i-went-past-my-stop,Nalagpasan ko po ang hintuan ko,,nalaɡpasan k
 transit-rides.can-i-use-this-ticket,Puwede ko po bang gamitin ang tiket na ito?,,puwɛdɛ ko po baŋ ɡamitin aŋ tikɛt na ito,,2,fil-agent-v1;ipa=fil-g2p
 transit-rides.do-i-need-to-validate,Kailangan ko po bang i-validate ang tiket na ito?,,kailaŋan ko po baŋ ivalidatɛ aŋ tikɛt na ito,,2,fil-agent-v1;ipa=fil-g2p
 taxi.please-get-me-there-in-time-for-the-shinkansen,Pakisigurado po na maaabutan namin ang Shinkansen,,pakisiɡuɾado po na maaabutan namin aŋ shinkansɛn,,2,fil-agent-v1;ipa=fil-g2p
+taxi.could-you-make-it-colder,Puwede po bang lakasan ang aircon?,,puwɛdɛ po baŋ lakasan aŋ aiɾkon,"Lakasan ang aircon = strengthen the aircon, i.e. colder, not a literal calque",2,fil-agent-v1;ipa=fil-g2p
+taxi.could-you-make-it-warmer,Puwede po bang hinaan ang aircon?,,puwɛdɛ po baŋ hinaan aŋ aiɾkon,"Hinaan ang aircon = weaken the aircon, i.e. warmer, not a literal calque",2,fil-agent-v1;ipa=fil-g2p
+taxi.may-i-open-the-window,Puwede ko po bang buksan ang bintana?,,puwɛdɛ ko po baŋ buksan aŋ bintana,,2,fil-agent-v1;ipa=fil-g2p
 place-words.scenic-area,magandang tanawin,,maɡandaŋ tanawin,,2,fil-agent-v1;ipa=fil-g2p
 rail-station-words.maglev,maglev,,maɡlɛv,,2,fil-agent-v1;ipa=fil-g2p
 common-signs.pork-code,mga kodigo ng baboy sa karatula,B1 = aso,maŋa kodiɡo naŋ baboj sa kaɾatula,,2,fil-agent-v1;ipa=fil-g2p

@@ -34,6 +34,9 @@ taxi.we-need-to-catch-the-high-speed-train,Chúng tôi phải kịp tàu cao t�
 taxi.please-use-the-meter,Xin bật đồng hồ,,sin˧ bət̪˨˩ˀ ɗoŋ˨˩ ho˨˩,,2,vi-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,Cho tôi xuống đây,,tʃɔ˧ t̪oj˧ suə̯ŋ˧˥ ɗəɪ˧,,2,vi-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,Xin cho kịp tàu Shinkansen,,sin˧ tʃɔ˧ kip˨˩ˀ t̪aw˨˩ ʃɪŋkansən˧,,1,reader-gloss-v1;ipa=espeak
+taxi.could-you-make-it-colder,Xin cho điều hòa lạnh hơn được không ạ?,,sin˧ tʃɔ˧ ɗiɛ̯w˨˩ hwaː˨˩ laɲ˨˩ˀ həːn˧ ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,could [you] please make the AC colder?,2,vi-agent-v1;ipa=espeak
+taxi.could-you-make-it-warmer,Xin cho điều hòa ấm hơn được không ạ?,,sin˧ tʃɔ˧ ɗiɛ̯w˨˩ hwaː˨˩ əm˧˥ həːn˧ ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,could [you] please make the AC warmer?,2,vi-agent-v1;ipa=espeak
+taxi.may-i-open-the-window,Cho tôi mở cửa sổ được không ạ?,,tʃɔ˧ t̪oj˧ məː˧˩˧ kyə̯˧˩˧ so˧˩˧ ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,"may I open the window? -- reuses this pack's ""cho tôi"" (let me) frame from taxi.i-will-get-off-here",2,vi-agent-v1;ipa=espeak
 transit-rides.two-tickets,Cho tôi hai vé,,tʃɔ˧ t̪oj˧ haːj˧ vɛ˧˥,,2,vi-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,Ga tàu điện ngầm ở đâu ạ?,Ga metro ở đâu ạ?,ɣaː˧ t̪aw˨˩ ɗiɛ̯n˨˩ˀ ŋəm˨˩ əː˧˩˧ ɗəw˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,Xe này có đi {} không ạ?,,sɛ˧ naj˨˩ kɔ˧˥ ɗi˧ {} xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak

@@ -20,6 +20,9 @@ taxi.please-stop-here,Please stop here,,plˈiːz stˈɑːp hˈɪɹ,,2,latex-refe
 taxi.can-you-wait-for-me-here,Can you wait for me here?,,kæn juː wˈeɪt fɔːɹ mˌiː hˈɪɹ,,2,latex-reference-v2;ipa=espeak
 taxi.we-need-to-catch-the-high-speed-train,We need to catch the high-speed train,,wiː nˈiːd tə kˈætʃ ðə hˈaɪspiːd tɹˈeɪn,,2,latex-reference-v2;ipa=espeak
 taxi.please-use-the-meter,Please use the meter,,plˈiːz jˈuːs ðə mˈiːɾɚ,,2,latex-reference-v2;ipa=espeak
+taxi.could-you-make-it-colder,Could you make it colder?,,kʊd juː mˌeɪk ɪt kˈoʊldɚ,,2,owner-v1;ipa=espeak
+taxi.could-you-make-it-warmer,Could you make it warmer?,,kʊd juː mˌeɪk ɪt wˈɔːɹmɚ,,2,owner-v1;ipa=espeak
+taxi.may-i-open-the-window,May I open the window?,,mˈeɪ aɪ ˈoʊpən ðə wˈɪndoʊ,,2,owner-v1;ipa=espeak
 transit-rides.two-tickets,Two tickets,,tˈuː tˈɪkɪts,,2,latex-reference-v2;ipa=espeak
 transit-rides.where-is-the-subway-station,Where is the subway station?,,wˌɛɹ ɪz ðə sˈʌbweɪ stˈeɪʃən,,2,latex-reference-v2;ipa=espeak
 transit-rides.does-this-bus-train-go-to,Does this bus / train go to {} ?,,dˈʌz ðɪs bˈʌs / tɹˈeɪn ɡˈoʊ tuː {},,2,latex-reference-v2;ipa=espeak

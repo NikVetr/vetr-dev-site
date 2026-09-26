@@ -159,6 +159,9 @@ export function readPackage(text, known = {}) {
           problems.push(`phrase ${id}: ${p.pair} is not a language pair`);
         }
       }
+      for (const [at, ids] of Object.entries(held.hidden ?? {})) {
+        if (!Array.isArray(ids) || ids.some((id) => typeof id !== 'string')) problems.push(`hidden ${at}: not a list of button ids`);
+      }
       for (const [at, ids] of Object.entries(placements)) {
         if (!Array.isArray(ids)) { problems.push(`placement ${at}: not a list`); continue; }
         if (new Set(ids).size !== ids.length) problems.push(`placement ${at}: the same phrase twice`);

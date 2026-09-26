@@ -31,6 +31,7 @@ const KEY = 'plg.board-display';
  * @property {boolean} ipa    the same thing in IPA, for a reader who reads it
  * @property {number} rate    how fast Speak reads, as a multiplier of the voice's own pace
  * @property {boolean} turned the stranger's surfaces set sideways, kept from message to message
+ * @property {boolean} polite "excuse me" said before every request, in both languages
  */
 
 /** @type {BoardDisplay} */
@@ -40,6 +41,10 @@ export const DEFAULTS = {
   // sideways. A preference rather than a moment's toggle, so a phone laid on the
   // counter stays turned from one message to the next and into the answer grid.
   turned: false,
+  // Whether every request opens with the language's "excuse me". Off by default:
+  // some owners want the softening every time and others find it indirect, and the
+  // corpus sentences are written to stand on their own.
+  polite: false,
 };
 
 /** The speeds Speak can be set to. Numerals, so no catalogue is involved. */
@@ -49,12 +54,13 @@ export const DEFAULTS = {
 export const RATES = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 2];
 
 /** The order they are offered in, which is the order they appear on screen. */
-export const OPTIONS = /** @type {{id:'owner'|'roman'|'ipa'|'speak'|'turn', labelKey:string}[]} */ ([
+export const OPTIONS = /** @type {{id:'owner'|'roman'|'ipa'|'speak'|'turn'|'polite', labelKey:string}[]} */ ([
   { id: 'owner', labelKey: 'display.owner' },
   { id: 'roman', labelKey: 'display.roman' },
   { id: 'ipa', labelKey: 'display.ipa' },
   { id: 'speak', labelKey: 'display.speak' },
   { id: 'turn', labelKey: 'display.turn' },
+  { id: 'polite', labelKey: 'display.polite' },
 ]);
 
 /**
@@ -104,11 +110,6 @@ export function displaySection(current, onChange) {
   heading.textContent = t('display.heading');
   box.append(heading);
 
-  const lede = document.createElement('p');
-  lede.className = 'speaker-why';
-  lede.textContent = t('display.lede');
-  box.append(lede);
-
   for (const option of OPTIONS) {
     const row = document.createElement('label');
     row.className = 'display-option';
@@ -124,6 +125,17 @@ export function displaySection(current, onChange) {
     text.textContent = t(option.labelKey);
     row.append(input, text);
     box.append(row);
+    // A wink for one country, from the device's own locale rather than a question
+    // nobody was asked: a Canadian phone with the softening off is told, once, that
+    // it might want it on.
+    if (option.id === 'polite' && /-CA$/i.test(navigator.language ?? '')) {
+      const hint = document.createElement('p');
+      hint.className = 'speaker-why display-hint';
+      hint.textContent = t('display.politeCanada');
+      hint.hidden = held.polite;
+      input.addEventListener('change', () => { hint.hidden = input.checked; });
+      box.append(hint);
+    }
   }
   return box;
 }

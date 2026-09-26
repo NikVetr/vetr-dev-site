@@ -17,6 +17,8 @@
 // and reindexes each screenshot to an exact palette: 16.4MB becomes 5.0MB.
 import { existsSync } from 'node:fs';
 import { readFile, writeFile, mkdir, rm } from 'node:fs/promises';
+import { spawn } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import { gzipSync } from 'node:zlib';
 import { createSheetContext, buildSheet, stacksFor } from '../core/sheet.js';
 import { planToSvg } from '../render/svg.js';
@@ -39,11 +41,20 @@ const usable = Object.values(ctx.corpus.languages).filter((l) => l.status === 'r
 // `--only <code>` renders one target's row of the matrix; `--force` re-renders pairs
 // that already have a thumbnail. Adding one language to fifty-three used to mean
 // rendering all 2,756 pairs again to get its 52.
-const only = process.argv.includes('--only') ? process.argv[process.argv.indexOf('--only') + 1] : null;
+const arg = (/** @type {string} */ flag) => (
+  process.argv.includes(flag) ? process.argv[process.argv.indexOf(flag) + 1] : null);
+const only = arg('--only');
 const force = process.argv.includes('--force');
+// `--jobs N` splits the pairs over N processes. The solve is single-threaded
+// arithmetic, so one process left every other core idle and a full re-render after
+// a corpus change took the better part of two hours. Each child renders every Nth
+// pair (`--shard k/N`) and hands back what it rendered; this process writes the
+// index in pair order, so it is the same file a single process writes.
+const jobs = Number(arg('--jobs') ?? 1);
+const shard = arg('--shard');
 // A full forced run starts clean, so a pair that no longer exists leaves no pack
 // behind. A partial run never wipes: the other 2,700 packs are the point of it.
-if (force && !only) await rm('packs', { recursive: true, force: true });
+if (force && !only && !shard) await rm('packs', { recursive: true, force: true });
 /** @type {{target:string, source:string}[]} */ const pairs = [];
 for (const target of usable) {
   if (only && target.bcp47 !== only) continue;
@@ -55,14 +66,43 @@ for (const target of usable) {
 }
 if (!pairs.length) throw new Error('no language pair has content on both sides');
 
-const local = await openLocalPage({ deviceScaleFactor: 2 });
 // A partial run keeps the index entries of every pack it did not touch; a full
 // forced run starts from nothing, as it does with the directory.
 /** @type {any[]} */ const prior = (force && !only) || !existsSync('packs/index.json')
   ? [] : JSON.parse(await readFile('packs/index.json', 'utf8')).packs;
+const key = (/** @type {{target:string, source:string}} */ m) => `${m.target}__${m.source}`;
+
+/** Write the index: the packs rendered now, in pair order, over the ones kept. @param {any[]} rendered */
+async function writeIndex(rendered) {
+  const order = new Map(pairs.map((p, i) => [key(p), i]));
+  rendered.sort((a, b) => (order.get(key(a)) ?? 0) - (order.get(key(b)) ?? 0));
+  const fresh = new Set(rendered.map(key));
+  const packs = [...prior.filter((m) => !fresh.has(key(m))), ...rendered];
+  await writeFile('packs/index.json', `${JSON.stringify({ packs }, null, 2)}\n`);
+  console.log(`packs/index.json  ${packs.length} pack(s), ${rendered.length} rendered now`);
+}
+
+if (jobs > 1) {
+  const passOn = process.argv.slice(2).filter((a, i, all) => a !== '--jobs' && all[i - 1] !== '--jobs');
+  const run = (/** @type {number} */ k) => new Promise((resolve, reject) => {
+    spawn(process.execPath, [fileURLToPath(import.meta.url), ...passOn, '--shard', `${k}/${jobs}`], { stdio: 'inherit' })
+      .on('exit', (code) => (code === 0 ? resolve(null) : reject(new Error(`shard ${k}/${jobs} exited ${code}`))));
+  });
+  await Promise.all(Array.from({ length: jobs }, (_, k) => run(k)));
+  /** @type {any[]} */ const rendered = [];
+  for (let k = 0; k < jobs; k += 1) {
+    rendered.push(...JSON.parse(await readFile(`tmp/prerender-shard-${k}.json`, 'utf8')));
+    await rm(`tmp/prerender-shard-${k}.json`);
+  }
+  await writeIndex(rendered);
+  process.exit(0);
+}
+
+const [k, n] = shard ? shard.split('/').map(Number) : [0, 1];
+const local = await openLocalPage({ deviceScaleFactor: 2 });
 /** @type {any[]} */ const index = [];
 
-for (const { target, source } of pairs) {
+for (const { target, source } of pairs.filter((_, i) => i % n === k)) {
   const dir = `packs/${target}__${source}`;
   if (!force && existsSync(`${dir}/thumb.png`) && existsSync(`${dir}/face-1.svg.gz`)) continue;
   await mkdir(dir, { recursive: true });
@@ -119,7 +159,9 @@ for (const { target, source } of pairs) {
 }
 
 await local.close();
-const fresh = new Set(index.map((m) => `${m.target}__${m.source}`));
-const packs = [...prior.filter((m) => !fresh.has(`${m.target}__${m.source}`)), ...index];
-await writeFile('packs/index.json', `${JSON.stringify({ packs }, null, 2)}\n`);
-console.log(`packs/index.json  ${packs.length} pack(s), ${index.length} rendered now`);
+if (shard) {
+  await mkdir('tmp', { recursive: true });
+  await writeFile(`tmp/prerender-shard-${k}.json`, JSON.stringify(index));
+} else {
+  await writeIndex(index);
+}

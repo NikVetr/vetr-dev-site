@@ -4631,3 +4631,109 @@ checkout and a release, by kind of evidence:
 - **Fluent review.** The owner has forgone human audits; the catalogues and the
   corpus are subagent-sourced against the reference lists in `content/PROMPTS/`,
   and that is what they should be read as.
+
+## Batch Z — a long list from the phone, worked through
+
+Sixteen notes in one message, taken in the order they could be shipped.
+
+**The landing grid.** Its own scroll now ends at its own edge (`overscroll-behavior:
+contain`): the wheel that reached the bottom of the language buttons was chaining
+to the page and throwing it past the first card. The "…and I want to speak" bar
+floats the moment its place goes under the header and folds only once the whole
+grid has — it was scrolling away with the grid and reappearing when the grid had
+gone, which read as a bar that blinks.
+
+**Dark mode, second pass.** Two tokens: `--control` for a button's face and
+`--raised` for a card's, both a step above the page in the dark where before page,
+container and button were one colour. The landing buttons, every `.btn` (Converse
+among them), the board cells and the footer's Turn button take `--control`; the
+gallery card takes `--raised`. The thumbnail is a dark card in the dark by
+`invert(0.9) hue-rotate(180deg)` — the 2,809 pre-rendered PNGs are one set, and a
+second would double the largest thing in the repository — and the earlier hairline
+rule had never applied because the thumbnail *is* the `img`, not its parent.
+
+**Three bars in every header.** `ui/site-menu.js`: Settings from the header on the
+gallery, the sheet page, the studio and the signal page, opening an Appearance
+dialog; on the board the same bars open the board's own Settings, so there is one
+door. The board's footer bars go straight to Settings too, and a plus beside them
+opens the editor — two controls for two things rather than a menu of two.
+
+**The editor** lists the board's own buttons on the current screen with a switch
+each, so pre-made buttons can be turned off (`hidden` in the personal store, per
+`board/node`, carried by the backup and checked by the validator). Whole custom
+*trees* — a reader's own submenu with its own screen — are not there yet: the
+board machine knows only the board file's nodes, and giving the personal store
+nodes of its own is a change to that machine, noted here rather than started.
+Import and export of a reader's buttons already travel in the backup.
+
+**Turned is the whole tree.** The owner's grid and the keypad turn with the
+sentence and the answers, so a phone laid on the counter reads one way from the
+first tap to the last. The Turn button repaints the grid at once.
+
+**Reply's three distances are one.** The corner rectangle now uses the surface's
+own padding as the gap between Reply and the sentence, per axis — so Reply sits
+the same distance from the screen's edge as the sentence does, and that far from
+the sentence.
+
+**Punctuation hangs only when it is full-width.** A CJK `？` is a whole em and
+inline drags the last line off centre; a Latin `?` hung sat against the screen's
+edge. The mark is judged by its code point, on the board and on the beacon.
+
+**One reading, not the concept's range.** `resolvePhrase` shows the first
+alternative of a slash gloss ("okay / can" → "okay") on both sides of a board
+phrase. The printed sheet is a lookup table and keeps the range.
+
+**The boards, de-duplicated** by a subagent against every board and reply set:
+three near-duplicate buttons removed (sights' second photo request, the taxi's "I
+will get off here" beside "Please stop here", time's "How many minutes?" beside
+"How long does it take?") and "Not possible" dropped from seven yes/no sets that
+also carried "No"; five pairs kept with reasons (help vs emergency, lost vs stolen,
+not-available vs not-possible in a kitchen, meet-when vs convenient-when, ready-when
+vs ready-today). Nothing removed is referenced by a test.
+
+**Topics** are one list at one size — each cell fitted alone set "Time" at the
+ceiling and "Sights and tickets" at half — and each carries its board's section
+icon as a watermark (`icon` on the board index entry, drawn the way the answer mark
+is). **The voice list** opens centred on the voice in use. **The settings dialog**
+lost its lede and its "nothing to set" sentence. **"None of these"** ends in a link
+that opens Google Translate from the listener's language to the owner's; Apple's
+Translate publishes no address a page can open, so there is no second link.
+
+**Folds, as the reader meant them.** The size chosen is the *folded* size: choosing
+bifold or trifold multiplies the panel out into the sheet (`foldedGeometry`), the
+columns with it, so a passport-cover card that folds in two is two passport covers
+of paper. Trifold is always offered — the column count follows the fold now, not
+the other way round — and a three-panel sheet renders with two fold lines.
+
+**"Excuse me" first.** A display setting prefixes every request on both sides with
+the corpus's own excuse-me row for each language — one reviewed sentence before
+another, joined as two sentences with the excuse's own script's full stop, never
+a template — except on the emergency board. Off by default. A phone whose locale
+is Canadian is told, under the switch, that it might want it on.
+
+**Taxi climate.** Three concepts — colder, warmer, may I open the window — in all
+fifty-three languages: English here, fifty-two by two subagent waves, which said
+what passengers actually say (almost everywhere "turn the air conditioning up or
+down" rather than "make it colder"), wrote no IPA, and left the rows to
+`build_ipa.py`. Quenya has none, having no taxi section at all; Klingon has all
+three from attested roots. The three buttons are on the taxi node with the yes/no
+reply set, and the board still reaches every language. Two things went wrong on the
+way and were caught by the build: two files rewritten in text mode lost their CRLF
+endings, which `build_ipa.py`'s byte-exact loader refused; and one Hebrew row used
+`ḥ` where the file writes `ẖ`, which the validator's IPA charset check refused.
+
+**Fields that do not zoom the page.** Found on the iOS simulator, true of Safari on
+any iPhone: a text field under 16px zooms the page when it takes focus and leaves it
+zoomed when the keyboard goes -- the board's editor came back at 111% (16 / 14.4),
+header off the top, a band of nothing at the foot. Zoom stays enabled; every text
+field is simply at least 16px wherever the pointer is coarse (`style.css`, last rule).
+
+**A full re-render in twenty minutes, not two hours.** `prerender_packs.mjs --jobs N`
+splits the pairs over N processes -- the solve is single-threaded, so one process
+left 31 cores idle -- and merges the index in pair order, so the file is the one a
+single process writes. `npm run prerender` uses twelve. All 2,809 packs were
+re-rendered for the new rows, the first face byte-identical to a fresh solve as the
+gallery test requires.
+
+English-only until a string wave: `board.openTranslator`, `display.polite`,
+`display.politeCanada`, `editor.builtIn`.

@@ -34,6 +34,9 @@ taxi.we-need-to-catch-the-high-speed-train,અમારે ઝડપી ટ્�
 taxi.please-use-the-meter,મીટરથી ચલાવો,,mīṭarathī calāvō,miːʈəɾʌtʰi cəlaːʋoː,run it by the meter,2,gu-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,મારે અહીં ઊતરવું છે,,mārē ahīṁ ūtaravuṁ chē,maːɾeː ɛhĩ utəɾʌʋũ cʰeː,I have to get off here,2,gu-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,શિંકાનસેન પહેલાં મને ત્યાં પહોંચાડો,,śiṁkānasēn pahēlāṁ manē tyāṁ pahōṁcāḍō,ʃɪnkaːnseːn pəheːlã mʌneː tjã pəhoncaːɖoː,get me there before the shinkansen,2,gu-agent-v1;ipa=espeak
+taxi.could-you-make-it-colder,જરા એસી થોડું વધારો,,jarā ēsī thōḍuṁ vadhārō,ɟʌɾaː eːsi tʰoːɖũ ʋədʰaːɾoː,increase the AC a little,2,gu-agent-v1;ipa=espeak
+taxi.could-you-make-it-warmer,જરા એસી થોડું ઓછું કરો,,jarā ēsī thōḍuṁ ōchuṁ karō,ɟʌɾaː eːsi tʰoːɖũ oːcʰũ kʌɾoː,decrease the AC a little,2,gu-agent-v1;ipa=espeak
+taxi.may-i-open-the-window,શું હું બારી ખોલી શકું?,,śuṁ huṁ bārī khōlī śakuṁ?,ʃũ hũ baːɾi kʰoːli ʃʌkũ,can I open the window,2,gu-agent-v1;ipa=espeak
 transit-rides.two-tickets,બે ટિકિટ આપો,,bē ṭikiṭ āpō,beː ʈɪkɪʈ aːpoː,give two tickets,2,gu-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,મેટ્રો સ્ટેશન ક્યાં છે?,,mēṭrō sṭēśan kyāṁ chē?,meːʈɾoː sʈeːʃʌn kjã cʰeː,where is the metro station?,2,gu-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,આ {} જાય છે?,,ā {} jāy chē?,aː {} ɟaːjə cʰeː,does this go {}?,2,gu-agent-v1;ipa=espeak

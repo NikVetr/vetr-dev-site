@@ -166,7 +166,7 @@ export function openSpeakerSettings({ axes, languages, profile, onChange, extra 
     el('h2', { text: t('settings.title') }),
     ...(fields.length
       ? [el('p', { class: 'speaker-lede', text: t('speaker.lede') }), ...fields]
-      : [el('p', { class: 'speaker-why', text: t('speaker.nothingToAsk') })]),
+      : []),
     ...(extra ? [extra].flat() : []),
     el('form', { method: 'dialog' }, [el('button', { text: t('speaker.done') })]),
   );

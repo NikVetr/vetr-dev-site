@@ -585,5 +585,8 @@
   "signal.speed": "Prędkość",
   "signal.start": "Nadaj",
   "signal.stop": "Zatrzymaj",
-  "signal.unsayable": "Znaki bez kodu Morse’a: {chars}"
+  "signal.unsayable": "Znaki bez kodu Morse’a: {chars}",
+  "format.theme.parchment": "Pergaminowy",
+  "personal.replace": "Ta kopia zawiera zwrotów: {phrases}, a zmienionych kart: {pairs}. Wczytanie jej zastąpi zwroty na tym urządzeniu (obecnie: {have}). Kontynuować?",
+  "personal.failed": "Nie wczytano — przywrócono dane zapisane tu wcześniej:"
 }

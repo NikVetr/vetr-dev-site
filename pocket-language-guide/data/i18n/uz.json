@@ -585,5 +585,8 @@
   "signal.speed": "Tezlik",
   "signal.start": "Signal berish",
   "signal.stop": "Toʻxtatish",
-  "signal.unsayable": "Morze kodida yoʻq belgilar: {chars}"
+  "signal.unsayable": "Morze kodida yoʻq belgilar: {chars}",
+  "format.theme.parchment": "Pergament",
+  "personal.replace": "Bu nusxada {phrases} ta ibora va {pairs} ta tahrirlangan karta bor. Uni yuklash bu qurilmadagi {have} ta iborani almashtiradi. Davom etilsinmi?",
+  "personal.failed": "Yuklanmadi — oʻzingizning maʻlumotlaringiz qaytarildi:"
 }

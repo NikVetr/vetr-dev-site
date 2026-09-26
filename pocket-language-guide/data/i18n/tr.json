@@ -585,5 +585,8 @@
   "signal.speed": "Hız",
   "signal.start": "Sinyal ver",
   "signal.stop": "Durdur",
-  "signal.unsayable": "Mors alfabesinde olmayan karakterler: {chars}"
+  "signal.unsayable": "Mors alfabesinde olmayan karakterler: {chars}",
+  "format.theme.parchment": "Parşömen",
+  "personal.replace": "Bu kopyada {phrases} ifade ve {pairs} düzenlenmiş kart var. Bunu yüklemek bu cihazdaki {have} ifadenin yerini alır. Devam edilsin mi?",
+  "personal.failed": "Yüklenmedi — kendi verileriniz geri getirildi:"
 }

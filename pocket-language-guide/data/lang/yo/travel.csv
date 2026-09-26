@@ -34,6 +34,9 @@ taxi.we-need-to-catch-the-high-speed-train,A nílò láti bá ọkọ̀ ojú iri
 taxi.please-use-the-meter,"Ẹ jọ̀wọ́, lo mítà",,"ɛ dʒɔ˩wɔ˥, lo mi˥ta˩",,2,yo-agent-v1;ipa=yo-g2p
 taxi.i-will-get-off-here,Màá sọ̀kalẹ̀ níbí,,ma˩a˥ sɔ˩kalɛ˩ ni˥bi˥,,2,yo-agent-v1;ipa=yo-g2p
 taxi.please-get-me-there-in-time-for-the-shinkansen,"Ẹ jọ̀wọ́, gbé mi dé ibẹ̀ kí n tó pàdánù ọkọ̀ ojú irin Shinkansen",,"ɛ dʒɔ˩wɔ˥, ɡbe˥ mi de˥ ibɛ˩ ki˥ n to˥ kpa˩da˥nu˩ ɔkɔ˩ odʒu˥ irĩ shĩkãsen",,2,yo-agent-v1;ipa=yo-g2p
+taxi.could-you-make-it-colder,"Ẹ jọ̀wọ́, ẹ lè mú amúlétutù tutù sí i?",,"ɛ dʒɔ˩wɔ˥, ɛ le˩ mu˥ amu˥le˥tutu˩ tutu˩ si˥ i","please, can you make the AC colder?",2,yo-agent-v1;ipa=yo-g2p
+taxi.could-you-make-it-warmer,"Ẹ jọ̀wọ́, ẹ lè mú amúlétutù gbóná sí i?",,"ɛ dʒɔ˩wɔ˥, ɛ le˩ mu˥ amu˥le˥tutu˩ ɡbo˥na˥ si˥ i","please, can you make the AC warmer?",2,yo-agent-v1;src=en.wiktionary gbona;ipa=yo-g2p
+taxi.may-i-open-the-window,Ṣé mo lè ṣí fèrèsé?,,ʃe˥ mo le˩ ʃi˥ fe˩re˩se˥,may I open the window?,2,yo-agent-v1;src=yo.wikipedia Fèrèsé;ipa=yo-g2p
 transit-rides.two-tickets,Tikẹ́tì méjì,,tikɛ˥ti˩ me˥dʒi˩,,2,yo-agent-v1;ipa=yo-g2p
 transit-rides.where-is-the-subway-station,Níbo ni ibùdókọ̀ abẹ́lẹ̀ wà?,,ni˥bo ni ibu˩do˥kɔ˩ abɛ˥lɛ˩ wa˩,,2,yo-agent-v1;ipa=yo-g2p
 transit-rides.does-this-bus-train-go-to,Ṣé ọkọ̀ yìí ń lọ sí {}?,,ʃe˥ ɔkɔ˩ ji˩i˥ n̩˥ lɔ si˥ {},,2,yo-agent-v1;ipa=yo-g2p

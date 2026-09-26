@@ -585,5 +585,8 @@
   "signal.speed": "Kasi",
   "signal.start": "Piga ishara",
   "signal.stop": "Simama",
-  "signal.unsayable": "Morse haina msimbo wa: {chars}"
+  "signal.unsayable": "Morse haina msimbo wa: {chars}",
+  "format.theme.parchment": "Karatasi ya kale",
+  "personal.replace": "Nakala hii ina misemo {phrases} na kadi {pairs} zilizohaririwa. Kuipakia kutabadilisha misemo {have} iliyopo kwenye kifaa hiki. Je, uendelee?",
+  "personal.failed": "Haikupakiwa — data yako mwenyewe imerudishwa:"
 }

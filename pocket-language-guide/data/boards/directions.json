@@ -212,14 +212,6 @@
           }
         },
         {
-          "id": "not-possible",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "board-answers.not-possible"
-          }
-        },
-        {
           "id": "please-wait",
           "kind": "message",
           "phraseRef": {
@@ -581,14 +573,6 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "quick-responses.no-not"
-          }
-        },
-        {
-          "id": "not-possible",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "board-answers.not-possible"
           }
         },
         {

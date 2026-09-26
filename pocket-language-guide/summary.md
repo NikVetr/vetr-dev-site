@@ -829,7 +829,9 @@ someone reading the turned screen and the only place they can find the button to
 press it.
 
 **Reply is one rectangle in one of two places, and the sentence's whitespace decides
-which.** A sentence is ragged in exactly one place — its last line ends short — so
+which.** (Its three distances are one: the surface's own padding is the gap between
+Reply and the sentence on each axis, so Reply sits as far from the screen's edge as
+the sentence does and that far from the sentence.) A sentence is ragged in exactly one place — its last line ends short — so
 there are two rectangles Reply can have: its own row *below* the sentence, or the
 corner *beside* the last line, from where the ink ends to the surface's edge and
 from the last line's top to the bottom, which no earlier line can reach because
@@ -883,6 +885,21 @@ speech-dispatcher lists every espeak variant separately, and when every term in 
 ranking ties the pick falls through to alphabetical order. A name containing `+` now
 sorts behind one that does not, which costs nothing where the convention is unknown,
 and `ui/platform/speech.js` has accepted a `voiceId` since it was written.
+
+**What the owner can change about a board.** The editor (the plus in the footer)
+lists the board's own buttons on the current screen with a switch each — `hidden`
+in the personal store, per `board/node`, carried in the backup — under the reader's
+own buttons; the bars beside it open Settings, and the same bars sit in every page's
+header (`ui/site-menu.js`), where on the other pages they open the appearance
+dialog. A display setting prefixes every request on both sides with the corpus's
+own "excuse me" row for each language — one reviewed sentence before another,
+joined as two sentences, never a template — except on the emergency board. Turned
+applies to the whole tree: the owner's grid and the keypad turn with the sentence
+and the answers. `resolvePhrase` shows one reading of a slash gloss ("okay / can" →
+"okay") on a board; the printed sheet keeps the range. The answer that says none of
+these fit ends in a link that opens Google Translate from the listener's language to
+the owner's — a web address, which a phone with the app installed hands to the app.
+Only a full-width mark hangs; a Latin `?` stays in its line.
 
 **It is a view over the corpus, not a small sheet.** No `SheetSpec`, no solver, no
 fontkit: `core/pack.js` is a 44KB data-only join, so showing a phrase costs a corpus
@@ -1031,7 +1048,27 @@ refused, 2 MiB counted in bytes and checked before the parse. It is validated
 **whole** and returns problems or a value, never both, because a half-applied import
 is worse than a refused one — and a placement naming a board this build does not have
 is reported rather than imported, so nothing is ever called imported that cannot be
-used. What travels is the reader's work; what does not is this device's preferences.
+used. Every field is checked as a *type* before it is read as a value — `boards` an
+object, a phrase's five fields text, speaker answers text, edits objects — because
+`boards: 123` once read as a store with no phrases and replaced the reader's own, and
+a numeric owner threw out of the handler. A half-written phrase travels: the board
+already refuses to *show* one until both sides are there, which is the right gate,
+and refusing it refused the whole file for one draft. What travels is the reader's
+work; what does not is this device's preferences.
+
+**Loading is whole or undone whole, and "saved" waits for the disk.** Every writer in
+`ui/platform/store.js` returns the durable write's own promise — Capacitor
+`Preferences`' on a device, a rejection the way `localStorage` throws on the web —
+and everything that tells the reader saved, loaded or deleted awaits it first; the
+studio, which says nothing when it keeps an edit, catches and warns. The board store
+queues its writes behind one promise chain that survives a refusal, so two rapid
+saves cannot land out of order on a phone either. Loading a copy takes a snapshot of
+the device's three parts, writes the package's parts together, and on any refusal
+writes the snapshot back — all three, an absent part meaning empty — before saying
+so; a device with phrases on it is asked first, with the counts on both sides. On a
+device, deleting a key deletes the `localStorage` copy too, because the forward-only
+migration from the pre-`Preferences` build was carrying deleted keys back on the next
+launch.
 
 **The beacon is the one thing here that moves.** Everywhere else a transition would
 be decoration and the same information is better given statically. A distress signal
@@ -1042,7 +1079,16 @@ phone. **The dot is 300ms and that is a safety property** — WCAG puts the
 photosensitive threshold at three flashes a second and this measures 1.00. The test
 counts real transitions rather than reading the constant, and for the travelling light
 it samples a full lap and checks that it visits all four sides and is somewhere new
-every frame.
+every frame. The Morse signaller hands the beacon its own unit, and the beacon clamps
+it: `MIN_UNIT_MS` (170) in `core/morse.js`, the shortest unit at which a run of dots —
+one lit, one dark — stays under three a second, enforced in the one module that
+flashes so no page's speed setting can be what bypasses it. The signal page offers
+only the speeds that allows, 5 and 7 wpm, and its SOS button sends the fixed dot, not
+the chosen speed. `peakFlashRate` lays a pattern on a simulated clock and counts the
+busiest rolling second, which is how the ceiling is tested without a screen. The
+beacon also owns its own teardown: a camera that answers after dismissal is released
+at once, `visibilitychange` and `pagehide` stop it, the signal page holds a wake lock
+while it runs, and a waiting deploy will not reload a page with a beacon on it.
 
 Four edges taking turns was the first attempt, and it read as a flash in the corner of
 the eye and as four separate lights up close. One point going round continuously is
@@ -1518,8 +1564,11 @@ matches the printer; if they are the same column twice, it does not. That is
 cheaper to learn there than after cutting.
 
 **A crease is a different thing from the folded finish, and it lives in the
-geometry.** `geometry.fold` — 2 or 3, offered only when the column count divides by
-it — says the face itself is to be folded into panels along its gutters. The gutters
+geometry.** `geometry.fold` — 2 or 3 — says the face itself is to be folded into
+panels along its gutters, and **the size the reader chose is the folded size**:
+`foldedGeometry` multiplies the panel out into the sheet, columns with it, so a
+passport-cover card folded in two is two passport covers of paper and the fold is
+always offered whatever the column count. The gutters
 at the creases widen by `FOLD_GUTTER` (14pt) so no column is printed on the fold, and
 a dashed hairline in the rule colour runs down each on every face, front and back
 alike, because a fold is a fact about the paper and both sides have it. `contentBox`
@@ -1551,7 +1600,10 @@ npm run logo        # favicon.svg → core/logo-shapes.js, the mark as flat path
 node scripts/thumb_fullness.mjs   # how full each pack's first face is, sparsest first
 npm run prerender   # solve + render → packs/  (after any corpus or engine change)
                     #   thumbnails only, one per pair, then indexed down to a
-                    #   fifth-bit palette: 240 pairs in 8.6MB rather than 27MB
+                    #   fifth-bit palette: 240 pairs in 8.6MB rather than 27MB.
+                    #   `--jobs 12`: the solve is single-threaded, so the pairs
+                    #   are split over twelve processes and the index merged in
+                    #   pair order -- 2,809 pairs in about twenty minutes
 npm run shell       # data/shell.json + the respell index + sw.js VERSION
 python3 scripts/fetch_fonts.py && python3 scripts/subset_fonts.py   # data/fonts/
 python3 scripts/transliterate_native.py   # tlh -> pIqaD, qya -> tengwar,
@@ -2025,6 +2077,12 @@ bottom and stop fading when they reach it** -- a 1pt sentinel watched by an
 computed from heights, because the tree opens and closes underneath and a measured
 height would be wrong within a tap.
 
+**A text field is never under 16px under a finger.** iOS zooms the page when a
+smaller field takes focus and leaves it zoomed after the keyboard has gone, which put
+the board's editor back at 111% with its header off the screen. Zoom stays enabled --
+a reader who pinches must be able to -- and the last rule in `style.css` holds every
+text field at 16px or more wherever the pointer is coarse.
+
 **A multi-page PNG is laid out, not zipped.** Neither mobile OS unzips, and the
 phone-screen preset produces twenty-five images, so the archive was a file the reader
 could not open. One row per page with its own save and open, plus save-all and
@@ -2039,6 +2097,29 @@ date, clock, widget tiles, corner controls and home indicator are drawn dashed a
 unfilled -- the sheet's own ink is solid, so an outline reads as a guide -- and they
 cannot reach an export because they are not in the `LayoutPlan` at all, but a DOM
 overlay the preview adds afterwards.
+
+## The native shell
+
+The same pages, wrapped by Capacitor (`capacitor.config.json`; `docs/native.md` has the
+detail and the emulator evidence). The bundle is an allowlist (`scripts/build_mobile.mjs`)
+with one reader language's pre-rendered cards, no service worker — every file is
+already local — and `data/native.json` saying so. `npm run android`
+(`scripts/build_android.sh`) regenerates the Android project, syncs it and assembles
+the debug APK; the project itself is generated and ignored, because this site is
+published by `git push` and a native project at the repository root would be served
+to the public web. The gate's `publish` check holds that boundary.
+
+Three seams keep platform detail out of the pages. `ui/platform/store.js` is
+`localStorage` on the web and, on a device, an in-memory mirror hydrated once from
+`Preferences` — because a WKWebView's `localStorage` is evictable — with reads
+synchronous and every write returning the durable promise. `ui/platform/shell.js`
+carries the back button, the one-way hand-off of a sentence to the share sheet, and
+`deliver()`, which writes an export or backup to the app's cache directory and hands
+its URI to the share sheet; `download()` in `ui/app.js` tries it first and falls back
+to the anchor click only when it answers `false`, so every PDF, PNG, SVG, ZIP, CSV and
+backup takes the native route without any caller knowing. `ui/platform/beacon.js`
+reaches the lamp through the camera where the platform lends it. What the emulator
+has shown, and what only a phone can, is in `docs/native.md`.
 
 ## Deliberately not built yet
 

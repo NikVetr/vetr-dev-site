@@ -34,6 +34,9 @@ taxi.we-need-to-catch-the-high-speed-train,आम्हाला हायस्
 taxi.please-use-the-meter,कृपया मीटरने चला,,kr̥payā mīṭaranē calā,kɾˈʊpjˌaː mˈiːʈəɾneː cˈʌlaː,,2,mr-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,मला इथे उतरायचे आहे,,malā ithē utarāyacē āhē,mˈʌlaː ˈɪtʰeː ˌʊtɾˈaːjcˌeː ˈaːheː,"impersonal intent, no gender",2,mr-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,शिंकानसेनसाठी वेळेत तिथे पोहोचवा,,śiṁkānasēnasāṭhī vēḷēta tithē pōhōcavā,ʃˌĩkaːnseːnsˈaːʈʰi veːɭˈeːt tˈɪtʰeː poːhˈoːcvˌaː,,2,mr-agent-v1;ipa=espeak
+taxi.could-you-make-it-colder,एसी जास्त थंड कराल का?,,ēsī jāsta thaṇḍa karāla kā?,ˈeːsi zˈaːst tʰˈʌɳɖ kəɾˈaːl kˈaː,will [you] make the AC colder?,2,mr-agent-v1;ipa=espeak
+taxi.could-you-make-it-warmer,एसी जास्त गरम कराल का?,,ēsī jāsta garama karāla kā?,ˈeːsi zˈaːst ɡˈʌɾəm kəɾˈaːl kˈaː,will [you] make the AC warmer?,2,mr-agent-v1;ipa=espeak
+taxi.may-i-open-the-window,मी खिडकी उघडू का?,,mī khiḍakī ughaḍū kā?,mˈi kʰˈɪɖkˌi ˈʊɡʰɖˌuː kˈaː,shall I open the window?,2,mr-agent-v1;ipa=espeak
 transit-rides.two-tickets,दोन तिकिटे,,dōna tikiṭē,dˈoːn tˈɪkɪʈˌeː,,2,mr-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,मेट्रो स्टेशन कुठे आहे?,,mēṭrō sṭēśana kuṭhē āhē?,mˈeːʈɾoː sʈˈeːʃən kˈʊʈʰeː ˈaːheː,,2,mr-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,ही बस/ट्रेन {} कडे जाते का?,,hī basa/ṭrēna {} kaḍē jātē kā?,hˈi bˈʌs / ʈɾˈeːn {} kˈʌɖeː zˈaːteː kˈaː,,2,mr-agent-v1;ipa=espeak

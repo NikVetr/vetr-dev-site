@@ -59,6 +59,9 @@ taxi.we-need-to-catch-the-high-speed-train,고속열차 타야 해요,KTX 타야
 taxi.please-use-the-meter,미터기로 가 주세요,,miteogiro ga juseyo,mitʰʌɡiɾo ka tɕusejo,,2,ko-agent-v1;ipa=rr
 taxi.i-will-get-off-here,여기서 내릴게요,,yeogiseo naerilgeyo,jʌɡisʌ nɛɾilɡejo,,2,ko-agent-v1;ipa=rr
 taxi.please-get-me-there-in-time-for-the-shinkansen,신칸센 시간에 맞춰 주세요,,sinkansen sigane matchwo juseyo,sinkʰansen siɡane mattɕʰwʌ tɕusejo,,1,reader-gloss-v1;roman=generated;ipa=rr
+taxi.could-you-make-it-colder,에어컨 온도 좀 낮춰 주세요,,eeokeon ondo jom natchwo juseyo,eʌkʰʌn ondo tɕom nattɕʰwʌ tɕusejo,,2,ko-agent-v1;ipa=rr
+taxi.could-you-make-it-warmer,에어컨 온도 좀 높여 주세요,,eeokeon ondo jom nopyeo juseyo,eʌkʰʌn ondo tɕom nopʰjʌ tɕusejo,,2,ko-agent-v1;ipa=rr
+taxi.may-i-open-the-window,창문 좀 열어도 될까요?,,changmun jom yeoreodo doelkkayo?,tɕʰaŋmun tɕom jʌɾʌdo twelk͈ajo,,2,ko-agent-v1;ipa=rr
 transit-rides.two-tickets,표 두 장이요,,pyo du jangiyo,pʰjo tu tɕaŋijo,,2,ko-agent-v1;ipa=rr
 transit-rides.where-is-the-subway-station,지하철역이 어디예요?,,jihacheollyeogi eodiyeyo?,tɕihatɕʰʌlljʌɡi ʌdijejo,,2,ko-agent-v1;ipa=rr
 transit-rides.does-this-bus-train-go-to,이거 {} 가요?,,igeo {} gayo?,iɡʌ {} kajo,,2,ko-agent-v1;ipa=rr

@@ -37,16 +37,6 @@
           "replySetId": "how-long"
         },
         {
-          "id": "minutes",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "time-scheduling.how-many-minutes"
-          },
-          "colour": "stay",
-          "replySetId": "how-long"
-        },
-        {
           "id": "opens",
           "kind": "message",
           "phraseRef": {
@@ -289,14 +279,6 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "quick-responses.no-not"
-          }
-        },
-        {
-          "id": "not-possible",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "board-answers.not-possible"
           }
         },
         {

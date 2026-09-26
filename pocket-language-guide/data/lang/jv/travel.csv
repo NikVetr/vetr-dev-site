@@ -34,6 +34,9 @@ taxi.we-need-to-catch-the-high-speed-train,Kula sedaya kedah numpak sepur cepet,
 taxi.please-use-the-meter,"Nyuwun tulung, ngangge argo",,"ˈɲuwʊn ˈtulʊŋ, ˈŋaŋɡə ˈarɡɔ",argo = the taxi meter,2,jv-agent-v1;ipa=jv-g2p
 taxi.i-will-get-off-here,Kula mandhap mriki,,ˈkulɔ ˈmanɖap ˈmriki,,2,jv-agent-v1;ipa=jv-g2p
 taxi.please-get-me-there-in-time-for-the-shinkansen,"Nyuwun tulung, sampun ngantos telat Shinkansen",,"ˈɲuwʊn ˈtulʊŋ, ˈsampʊn ˈŋantɔs təˈlat ʃinkanˈsɛn",,2,jv-agent-v1;ipa=jv-g2p+loan
+taxi.could-you-make-it-colder,"Nyuwun tulung, AC-ipun dipunasrepaken",,"ˈɲuwʊn ˈtulʊŋ, aˈtʃe ˈipʊn dipunasrəˈpakən",AC = loanword for air conditioner,2,jv-agent-v1;ipa=jv-g2p+loan
+taxi.could-you-make-it-warmer,"Nyuwun tulung, AC-ipun dipunbenteraken",,"ˈɲuwʊn ˈtulʊŋ, aˈtʃe ˈipʊn dipʊnbəntəˈrakən",AC = loanword for air conditioner,2,jv-agent-v1;ipa=jv-g2p+loan
+taxi.may-i-open-the-window,Kula kepareng mbikak cendhela?,,ˈkulɔ kəˈparəŋ ˈmbikaʔ tʃənɖəˈlɔ,,2,jv-agent-v1;ipa=jv-g2p
 transit-rides.two-tickets,Tikèt kalih,,ˈtikɛt ˈkalɪh,,2,jv-agent-v1;ipa=jv-g2p
 transit-rides.where-is-the-subway-station,Stasiun MRT wonten pundi?,,staˈsiʊn ɛmɛrˈte ˈwɔntən ˈpʊndi,,2,jv-agent-v1;ipa=jv-g2p+loan
 transit-rides.does-this-bus-train-go-to,Bis utawi sepur menika dhateng {}?,,bɪs uˈtawi səˈpʊr məˈnikɔ ˈɖatəŋ {},,2,jv-agent-v1;ipa=jv-g2p

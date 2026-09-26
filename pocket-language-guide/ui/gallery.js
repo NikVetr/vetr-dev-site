@@ -11,6 +11,7 @@
 // fontkit arrived on this page anyway, before the reader had touched anything.
 // `ui/app.js` imports them on demand now, and this page is nine modules and 89KB.
 
+import { wireSiteMenu } from './site-menu.js';
 import {
   isSpoken, loadText, loadLanguages, readerLanguage,
   registerOffline, setReaderLanguage, showFatal,
@@ -336,7 +337,10 @@ function foldOnScroll(toggle) {
     // of it is in view it stays as the reader left it; once it has all gone under
     // the header the bar takes over.
     const past = scrollY > want.offsetTop + want.offsetHeight - headerHeight();
-    want.classList.toggle('want-floating', past);
+    // The bar floats the moment its own place goes under the header, so it is never
+    // off the screen: it was scrolling away with the grid and reappearing only once
+    // the whole grid had gone, which read as a bar that blinks.
+    want.classList.toggle('want-floating', scrollY > want.offsetTop - headerHeight());
     const open = toggle.getAttribute('aria-expanded') === 'true';
     // What the scroll folded, the scroll back unfolds; what the reader folded, or a
     // choice folded, stays folded until they ask.
@@ -503,6 +507,7 @@ async function main() {
   // anything is drawn -- including the static markup.
   await loadUiLanguage(reader, loadText);
   applyStatic();
+  wireSiteMenu();
   trackHeaderHeight();
 
   // The face count and type scale the pre-render settled on, kept rather than

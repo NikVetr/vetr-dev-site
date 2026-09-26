@@ -34,6 +34,9 @@ taxi.we-need-to-catch-the-high-speed-train,Musimy zdążyć na pociąg ekspresow
 taxi.please-use-the-meter,Proszę włączyć taksometr,,prˈɔʃɛ vwˈɔntʃɨtɕ taksˈɔmɛtr,,2,pl-agent-v1;ipa=espeak
 taxi.i-will-get-off-here,Wysiadam tutaj,,vɨɕˈadam tˈutaj,,2,pl-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,Proszę zdążyć na shinkansen,,prˈɔʃɛ zdˈɔ̃ʒɨtɕ na ʃˈiŋkansɛn,,2,pl-gloss-v1;ipa=espeak
+taxi.could-you-make-it-colder,Proszę zrobić chłodniej,,prˈɔʃɛ zrˈɔbʲitɕ xwˈɔdɲɛj,"please make [it] colder -- impersonal adverbial comparative, the way Polish states ambient temperature",2,pl-agent-v1;ipa=espeak
+taxi.could-you-make-it-warmer,Proszę zrobić cieplej,,prˈɔʃɛ zrˈɔbʲitɕ tɕˈɛplɛj,please make [it] warmer,2,pl-agent-v1;ipa=espeak
+taxi.may-i-open-the-window,Czy mogę otworzyć okno?,,tʃɨ mˈɔɡɛ ɔtfˈɔʒɨtɕ ˈɔknɔ,may I open the window?,2,pl-agent-v1;ipa=espeak
 transit-rides.two-tickets,Dwa bilety,,dvˈa bʲilˈɛtɨ,,2,pl-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,Gdzie jest stacja metra?,,ɡdʑˈɛ jɛst stˈatsja mˈɛtra,,2,pl-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,Czy ten autobus / pociąg jedzie w to miejsce: {},,tʃɨ tɛn awtˈɔbus / pˈɔtɕɔŋk jˈɛdʑɛ f tɔ mʲˈɛjstsɛ {},,2,pl-agent-v1;ipa=espeak

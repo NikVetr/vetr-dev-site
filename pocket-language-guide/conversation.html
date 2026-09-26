@@ -24,6 +24,7 @@
   <!-- Board title and the pair, as a statement of what is about to be shown to
        whom. Filled by `ui/conversation.js`. -->
   <p class="board-pair" id="board-pair"></p>
+  <button type="button" id="site-menu" class="site-menu"><span class="board-menu-bars" aria-hidden="true"></span></button>
 </header>
 
 <main class="board-main">
@@ -49,10 +50,15 @@
          on every view but the grid: a menu is not part of a live conversation. -->
     <!-- Turn: the stranger's surfaces sideways for the whole conversation. Owner-only,
          like the menu beside it; the message keeps its own Turn as well. -->
+    <!-- Add: the reader's own buttons and trees. Its own control, so the bars can go
+         straight to Settings rather than to a menu of two. -->
+    <button type="button" id="board-add-bar" class="board-turn-bar board-add-bar" hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    </button>
     <button type="button" id="board-turn-bar" class="board-turn-bar" hidden aria-pressed="false">
       <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path d="M5 11A7 7 0 1 1 13.4 17.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M13.6 14 13.6 21.2 7.2 17.6Z" fill="currentColor"/></svg>
     </button>
-    <button type="button" id="board-menu" class="board-menu" hidden aria-haspopup="true">
+    <button type="button" id="board-menu" class="board-menu" hidden>
       <span class="board-menu-bars" aria-hidden="true"></span>
     </button>
   </div>

@@ -41,6 +41,9 @@ const KEY = 'plg.boards';
  * @property {number} schemaVersion
  * @property {Record<string, CustomPhrase>} phrases
  * @property {Record<string, string[]>} placements  `board/node` -> phrase ids, in order
+ * @property {Record<string, string[]>} [hidden]  `board/node` -> the board's own button
+ *   ids the reader has switched off there. Optional, so a store written before it
+ *   existed reads as nothing hidden.
  */
 
 /** @returns {BoardPersonal} */
@@ -178,6 +181,22 @@ export function removePlacement(data, id, at) {
     ...data,
     placements: { ...data.placements, [at]: (data.placements[at] ?? []).filter((p) => p !== id) },
   };
+}
+
+/**
+ * Switch one of the board's own buttons off, or back on, on one screen.
+ *
+ * The button is the author's and stays in the board file; only whether this reader
+ * sees it there is theirs. A grid never rearranges itself when content is missing,
+ * so a hidden button leaves a gap the way an unavailable one does -- it is removed,
+ * and the buttons after it move up, because that is what the reader asked for.
+ * @param {BoardPersonal} data @param {string} at @param {string} id @param {boolean} shown
+ */
+export function showBuiltIn(data, at, id, shown) {
+  const held = (data.hidden?.[at] ?? []).filter((h) => h !== id);
+  const hidden = { ...(data.hidden ?? {}), [at]: shown ? held : [...held, id] };
+  if (!hidden[at].length) delete hidden[at];
+  return { ...data, hidden };
 }
 
 /** Everywhere a phrase is placed, so a delete can say what it is about to break.
