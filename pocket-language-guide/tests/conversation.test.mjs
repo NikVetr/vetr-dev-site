@@ -133,6 +133,36 @@ test('a missing translation is unavailable, never quietly English', () => {
   assert.deepEqual(missingPhrases(board, ctx), []);
 });
 
+test('a fill-in says the reader\'s own detail in its slot, and waits blank without it', () => {
+  // "My name is {}": the name goes where the row leaves its slot, in the sentence, the
+  // IPA and the respelling alike -- the respeller passes `{}` through, and a person
+  // knows how to say their own name.
+  const named = {
+    ...ctx,
+    corpus: { concepts: { ...ctx.corpus.concepts, 'i.name': { concept_id: 'i.name', applies_to: '' } } },
+    listenerRows: { ...ctx.listenerRows, 'i.name': { text: '我叫{}', ipa: 'wɔ tɕjɑʊ {}', confidence: '2' } },
+    ownerRows: { ...ctx.ownerRows, 'i.name': { text: 'My name is {}' } },
+    respell: (/** @type {string} */ _id, /** @type {string} */ ipa) => ipa.replace('wɔ tɕjɑʊ', 'waw jyaow'),
+  };
+  const ref = { kind: /** @type {const} */ ('corpus'), id: 'i.name', fill: 'name' };
+  const blank = resolvePhrase(ref, named);
+  assert.equal(blank?.unfilled, 'name');
+  assert.equal(blank?.owner.text, 'My name is ____');
+  const said = resolvePhrase(ref, { ...named, details: { name: 'Nikolai' } });
+  assert.equal(said?.unfilled, undefined);
+  assert.equal(said?.listener.text, '我叫Nikolai');
+  assert.equal(said?.listener.say, 'waw jyaow Nikolai');
+  assert.equal(said?.listener.ipa, 'wɔ tɕjɑʊ Nikolai');
+  assert.equal(said?.owner.text, 'My name is Nikolai');
+  // A row with no slot cannot take a detail: unavailable, not the bare template.
+  const flat = { ...named, ownerRows: { ...named.ownerRows, 'i.name': { text: 'My name' } } };
+  assert.equal(resolvePhrase(ref, flat), null);
+  // And a board may only name a detail there is, on a phrase from the corpus.
+  const odd = structuredClone(board);
+  odd.nodes.main.buttons.push({ id: 'age', kind: 'message', phraseRef: { kind: 'corpus', id: 'a.stop', fill: 'age' } });
+  assert.ok(validateBoard(odd).some((p) => p.includes('fill age is not one of name')));
+});
+
 test('a concept scoped away from this listener is not reachable through a board', () => {
   // `appliesTo` is the sheet's own helper, so scope means the same thing in both
   // places -- a board must not resolve a concept the corpus says is not for this

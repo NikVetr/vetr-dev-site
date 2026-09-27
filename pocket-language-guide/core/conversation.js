@@ -42,6 +42,10 @@ const COLOURS = new Set(['comm', 'money', 'move', 'stay', 'alert']);
 const UNITS = new Set(['minute', 'hour', 'day']);
 /** @type {Set<string>} The keypads a board may open. Each needs no translation. */
 const ENTRIES = new Set(['duration', 'clock', 'count']);
+/** The reader's own details a button can say, in the slot its row leaves for one. */
+export const DETAILS = new Set(['name']);
+/** What an unfilled slot shows until the reader has said what goes in it. */
+const BLANK = '____';
 
 /**
  * @typedef {Object} BoardButton
@@ -82,7 +86,9 @@ const ENTRIES = new Set(['duration', 'clock', 'count']);
  *
  * `corpus` is a concept id and is the normal case. `custom` is one of the owner's
  * own phrases, which carries its text with it because no concept describes it.
- * @typedef {{kind:'corpus', id:string} | {kind:'custom', id:string}} PhraseRef
+ * `fill` names the reader's own detail -- one of `DETAILS` -- that goes in the slot a
+ * template row leaves for it: "My name is {}" says the name they have given.
+ * @typedef {{kind:'corpus', id:string, fill?:string} | {kind:'custom', id:string}} PhraseRef
  */
 
 /**
@@ -124,6 +130,9 @@ const ENTRIES = new Set(['duration', 'clock', 'count']);
  * @property {string} provenance     where the wording came from
  * @property {number} confidence     0-3, as everywhere else in the corpus
  * @property {boolean} custom        the owner wrote it, so it is unreviewed
+ * @property {string} [unfilled]     the detail a fill-in button is still waiting for;
+ *   the text then carries a blank, and the board asks for the detail instead of
+ *   showing it
  */
 
 /**
@@ -226,6 +235,8 @@ export function validateBoard(board) {
         const ref = button.phraseRef;
         if (!ref || (ref.kind !== 'corpus' && ref.kind !== 'custom') || !ref.id) {
           problems.push(`${key}: a message with no usable phraseRef`);
+        } else if (ref.fill !== undefined && (ref.kind !== 'corpus' || !DETAILS.has(ref.fill))) {
+          problems.push(`${key}: fill ${ref.fill} is not one of ${[...DETAILS].join(', ')} on a corpus phrase`);
         }
       } else {
         // An enum, not an open set: the format carries no actions, no URLs and no
@@ -333,6 +344,14 @@ export function resolvePhrase(ref, ctx, incoming = false) {
   if (!concept || !appliesTo(concept, ctx.listener)) return null;
   const base = { listener: ctx.listenerRows[ref.id], owner: ctx.ownerRows[ref.id] };
   if (!base.listener?.text || !base.owner?.text) return null;
+  // **A fill-in says the reader's own detail where the row leaves its slot**, as they
+  // wrote it -- in the sentence, the IPA and the respelling alike, since the respeller
+  // passes `{}` through and a person knows how to say their own name. A row with no
+  // slot cannot take one, and is unavailable rather than silently the template.
+  const fill = 'fill' in ref ? ref.fill : undefined;
+  if (fill && (!base.listener.text.includes('{}') || !base.owner.text.includes('{}'))) return null;
+  const detail = fill ? (ctx.details?.[fill] ?? '') : '';
+  const put = (/** @type {string} */ text) => (fill ? text.replace('{}', detail || BLANK) : text);
   const listener = say(ctx.listenerVoice, ref.id, base.listener, incoming);
   const owner = say(ctx.ownerVoice, ref.id, base.owner, incoming);
   // **One reading, not the concept's range.** A gloss like "okay / can" documents
@@ -349,16 +368,17 @@ export function resolvePhrase(ref, ctx, incoming = false) {
     // pronunciation is not. The respelling is derived from that same variant IPA
     // by the hook the page supplies, which is the sheet's own respeller.
     listener: {
-      text: primary(listener.text),
+      text: put(primary(listener.text)),
       lang: ctx.listener,
       dir: ctx.listenerDir,
-      say: ctx.respell?.(ref.id, listener.ipa || '') || '',
-      ipa: listener.ipa || '',
+      say: put(ctx.respell?.(ref.id, listener.ipa || '') || ''),
+      ipa: put(listener.ipa || ''),
     },
-    owner: { text: primary(owner.text), lang: ctx.owner, dir: ctx.ownerDir },
+    owner: { text: put(primary(owner.text)), lang: ctx.owner, dir: ctx.ownerDir },
     provenance: listener.provenance ?? '',
     confidence: Number(listener.confidence ?? 0),
     custom: false,
+    ...(fill && !detail ? { unfilled: fill } : {}),
   };
 }
 
@@ -394,6 +414,7 @@ function say(voice, conceptId, row, incoming) {
  * @property {'ltr'|'rtl'} listenerDir
  * @property {'ltr'|'rtl'} ownerDir
  * @property {Record<string,{owner:string, listener:string}>} [custom]
+ * @property {Record<string,string>} [details]  the reader's own details, for `fill`
  * @property {(conceptId:string, ipa:string)=>string} [respell]  the reader's own
  *   respelling of a sentence's IPA, curated where a curated one exists; absent for
  *   a reader whose language has no rule table

@@ -41,6 +41,7 @@ const MAX_DEPTH = 8;
  * @property {BoardPersonal} [boards]  phrases they wrote, and where they put them
  * @property {Record<string,string>} [speaker]  how they speak
  * @property {Record<string,unknown>} [edits]  per-pair sheet edits, keyed by pair
+ * @property {Record<string,string>} [about]  details a button says, such as their name
  */
 
 /**
@@ -50,7 +51,7 @@ const MAX_DEPTH = 8;
  * banner is dismissed are this device's preferences, not the reader's work, and
  * carrying them to another phone would be presumptuous rather than helpful.
  * @param {{boards?:BoardPersonal, speaker?:Record<string,string>,
- *          edits?:Record<string,unknown>}} parts
+ *          edits?:Record<string,unknown>, about?:Record<string,string>}} parts
  * @returns {PersonalPackage}
  */
 export function buildPackage(parts) {
@@ -59,6 +60,7 @@ export function buildPackage(parts) {
   if (parts.boards && Object.keys(parts.boards.phrases ?? {}).length) out.boards = parts.boards;
   if (parts.speaker && Object.keys(parts.speaker).length) out.speaker = parts.speaker;
   if (parts.edits && Object.keys(parts.edits).length) out.edits = parts.edits;
+  if (parts.about && Object.keys(parts.about).length) out.about = parts.about;
   return out;
 }
 
@@ -247,6 +249,12 @@ export function readPackage(text, known = {}) {
   else if (raw.speaker) {
     for (const [axis, value] of Object.entries(raw.speaker)) {
       if (typeof value !== 'string') problems.push(`speaker ${axis}: not text`);
+    }
+  }
+  if (raw.about !== undefined && !plain(raw.about)) problems.push('about: not a set of details');
+  else if (raw.about) {
+    for (const [fact, value] of Object.entries(raw.about)) {
+      if (typeof value !== 'string') problems.push(`about ${fact}: not text`);
     }
   }
   if (raw.edits !== undefined && !plain(raw.edits)) problems.push('edits: not a set of pairs');

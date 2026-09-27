@@ -246,7 +246,7 @@ export function personalSection({ gather, apply, forget, read, save }) {
     const made = gather();
     // A package from someone who has written nothing is a stamp and a version.
     // Saying so beats handing them a file that restores nothing.
-    if (!made.boards && !made.speaker && !made.edits) {
+    if (!made.boards && !made.speaker && !made.edits && !made.about) {
       status.textContent = t('personal.nothing');
       return;
     }

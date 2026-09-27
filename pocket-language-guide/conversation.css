@@ -450,6 +450,22 @@
 .board-cell:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 /* Drawn, not removed: a grid that closes a gap is a grid whose buttons have moved. */
 .board-cell-off { opacity: 0.45; cursor: not-allowed; }
+/* A button that says one of the reader's details, twice-marked: a box in the corner,
+   ticked once the detail is given, and the words greyed until then. Still a button --
+   the first press asks for the detail -- so greyed, not the unavailable fade. */
+.board-cell-box {
+  position: absolute; inset-block-start: 0.4rem; inset-inline-end: 0.4rem;
+  inline-size: 1rem; block-size: 1rem; border: 2px solid currentColor; border-radius: 3px;
+}
+.board-cell-set .board-cell-box::after {
+  content: ''; position: absolute; inset-inline-start: 0.26rem; inset-block-start: 0.04rem;
+  inline-size: 0.28rem; block-size: 0.55rem; border: solid currentColor; border-width: 0 2px 2px 0;
+  rotate: 45deg;
+}
+.board-cell-unset { color: var(--muted); background: var(--surface); }
+/* Held to clear, so the hold must not start a text selection or the iOS magnifier. */
+.board-cell-set { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+.board-cell-unset .board-cell-box { opacity: 0.7; }
 
 .board-status { margin: 0; color: var(--muted); font-size: var(--fs--1); order: 1; }
 /* The bar's Turn: a control the size of the menu's, pressed when the stranger's

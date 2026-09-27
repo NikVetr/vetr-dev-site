@@ -901,7 +901,17 @@ the reader's own can also carry the answers a stranger might give: the editor ad
 them one indented pair at a time (the answer in their language, its meaning in the
 reader's) with a minus beside each, they are stored as `replies` on the phrase, and
 the board builds a reply set `own/<id>` from them with "none of these" after, so Reply
-works on it exactly as on the board's own questions.
+works on it exactly as on the board's own questions. **A button can say one of the
+reader's own details.** A corpus template leaves a `{}` in its script, romanisation and
+IPA cells ("My name is {}" in every language), and a board button naming it with
+`fill: 'name'` puts the detail there -- in the sentence, the IPA and the respelling
+alike, since the respeller passes `{}` through and a person knows how to say their own
+name. `DETAILS` in `core/conversation.js` is the closed list (the name, for now), and
+`ui/about.js` keeps the details in `plg.about`, carried in a backup. Until the detail is
+given the button is greyed with an empty box in its corner and its label has a blank;
+the first press asks for the detail rather than showing a sentence with a hole, and a
+given one shows a ticked box and the value, and is cleared by a hold (or a right
+click). The settings dialog has the same field under "About you".
 What is on a screen saves as a small file (`buildButtons`/`readButtons` in
 `core/personal.js`, relative placement keys, the backup's own field checks) and loads
 onto any screen of the same pair under fresh ids, so a tree can be handed to someone

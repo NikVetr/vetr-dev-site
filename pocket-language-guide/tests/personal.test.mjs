@@ -202,3 +202,13 @@ test('the answers a button carries travel with it, and must be pairs of text', (
     assert.ok(!bad.ok && bad.problems.includes('phrase p1: replies are not a list of answers'));
   }
 });
+
+test('the details a button says travel in a backup, and must be text', () => {
+  const got = round({ boards: MINE, about: { name: 'Nikolai' } }, KNOWN);
+  assert.equal(got.ok, true);
+  assert.deepEqual(got.ok && got.data.about, { name: 'Nikolai' });
+  // A name alone is something to save.
+  assert.deepEqual(buildPackage({ about: { name: 'Nikolai' } }).about, { name: 'Nikolai' });
+  const bad = readPackage(JSON.stringify({ version: PACKAGE_VERSION, created: 'x', about: { name: 7 } }));
+  assert.ok(!bad.ok && bad.problems.includes('about name: not text'));
+});

@@ -12,6 +12,7 @@
 // downloads is the corpus rows for two languages and a JSON file.
 
 import { resumeSection, wireSiteMenu } from './site-menu.js';
+import { aboutSection, askDetail, readAbout, setDetail } from './about.js';
 import {
   loadText, loadLanguages, readerLanguage, registerOffline, showFatal,
   deferUpdates, applyUpdateIfIdle, download, keepBoardOffline, accentFor,
@@ -374,7 +375,12 @@ async function main() {
     listenerDir: dirOf(listener),
     ownerDir: dirOf(owner),
     respell: await respellerFor(corpus, listener, owner, listenerRows),
+    details: readAbout(),
   };
+  /** Re-read the reader's details after they change, and redraw with them. */
+  const detailsChanged = () => { ctx.details = readAbout(); paint(); };
+  /** @param {import('../core/conversation.js').BoardButton} button */
+  const fillOf = (button) => (button.phraseRef && 'fill' in button.phraseRef ? button.phraseRef.fill : undefined);
 
   // What the message screen carries, which is the reader's own choice. Re-read
   // rather than captured when it changes, so the dialog's checkbox and the screen
@@ -652,7 +658,16 @@ async function main() {
         // neither can be missing from the corpus.
         available: (button) => (button.kind === 'submenu' || button.kind === 'beacon'
           ? true : Boolean(phraseOf(button))),
+        detail: (button) => {
+          const fill = fillOf(button);
+          return fill ? (ctx.details?.[fill] ? 'set' : 'unset') : null;
+        },
+        onHold: (button) => { setDetail(/** @type {string} */ (fillOf(button)), ''); detailsChanged(); },
         onPick: (button) => {
+          // Not given yet: the first press asks for the detail rather than showing a
+          // sentence with a hole in it.
+          const unfilled = phraseOf(button)?.unfilled;
+          if (unfilled) { askDetail(unfilled, detailsChanged); return; }
           // **Not a state change, and deliberately not part of the board's own
           // machine.** A beacon is not something being said -- there is no message,
           // no reply, nothing to return from -- so it takes over the screen and hands
@@ -904,7 +919,8 @@ async function main() {
     languages: [listener, owner],
     profile,
     onChange: (next) => { profile = next; voice(); sayStatus(); paint(); },
-    extra: [displaySection(display, (next) => { display = next; paint(); }),
+    extra: [aboutSection(detailsChanged),
+      displaySection(display, (next) => { display = next; paint(); }),
       voiceSection({
         lang: listener,
         voices: speech.getCapabilities(listener).voices,

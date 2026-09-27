@@ -42,8 +42,12 @@ const TAP_SLOP_PX = 10;
  * @param {(button:import('../core/conversation.js').BoardButton)=>void} config.onPick
  * @param {string} config.lang  the owner's language, which the labels are in
  * @param {string} [config.title]  a heading the buttons complete, owner-language
+ * @param {(button:import('../core/conversation.js').BoardButton)=>'set'|'unset'|null} [config.detail]
+ *   for a button that says one of the reader's details, whether they have given it
+ * @param {(button:import('../core/conversation.js').BoardButton)=>void} [config.onHold]
+ *   what holding a button whose detail is set does
  */
-export function renderGrid(root, node, { label, available, onPick, lang, title }) {
+export function renderGrid(root, node, { label, available, onPick, lang, title, detail, onHold }) {
   root.replaceChildren();
   root.lang = lang;
   root.removeAttribute('aria-busy');
@@ -99,6 +103,25 @@ export function renderGrid(root, node, { label, available, onPick, lang, title }
     // A topic's mark, drawn as the answer mark is: a silhouette behind the word, for
     // the eye that has stopped reading eleven titles and is looking for a shape.
     if (button.icon) cell.append(topicMark(button.icon, `plg-topic-${button.id}`));
+    // **A fill-in button says whether the reader's detail is in it, twice**: a box in
+    // the corner, empty or ticked, and an empty one greyed as well, because a tint alone
+    // is easy to miss in sun. Holding a filled one clears it -- for the next country, or
+    // the next person to borrow the phone.
+    const state = detail?.(button);
+    let wasHeld = () => false;
+    if (state) {
+      const word = t(state === 'set' ? 'about.set' : 'about.unset');
+      cell.classList.add('board-cell-detail', `board-cell-${state}`);
+      const box = document.createElement('span');
+      box.className = 'board-cell-box';
+      box.setAttribute('aria-hidden', 'true');
+      const said = document.createElement('span');
+      said.className = 'visually-hidden';
+      said.textContent = word;
+      cell.append(box, said);
+      cell.title = word;
+      if (state === 'set' && onHold) wasHeld = holdable(cell, () => onHold(button));
+    }
     // **A button the corpus cannot supply is visibly unavailable, not missing.**
     // Removing it would move every button after it, and a grid that rearranges
     // itself when content is incomplete is the one thing the layout must never do.
@@ -107,10 +130,31 @@ export function renderGrid(root, node, { label, available, onPick, lang, title }
       cell.classList.add('board-cell-off');
       cell.title = t('board.unavailable');
     }
-    cell.addEventListener('click', () => onPick(button));
+    cell.addEventListener('click', () => { if (!wasHeld()) onPick(button); });
     root.append(cell);
   }
   watchCells(root);
+}
+
+/** How long a press has to last to be a hold rather than a tap. */
+const HOLD_MS = 600;
+
+/**
+ * Hold to act, on a control whose tap already means something else. Returns whether
+ * the press that just ended was a hold, so the click that ends it is not a tap too.
+ * @param {HTMLElement} cell @param {() => void} act
+ */
+function holdable(cell, act) {
+  let timer = 0;
+  let held = false;
+  const fire = () => { if (!held) { held = true; act(); } };
+  cell.addEventListener('pointerdown', () => { held = false; timer = window.setTimeout(fire, HOLD_MS); });
+  for (const end of ['pointerup', 'pointerleave', 'pointercancel']) {
+    cell.addEventListener(end, () => clearTimeout(timer));
+  }
+  // A long press is a context menu on Android, and a right click is one on a desktop.
+  cell.addEventListener('contextmenu', (event) => { event.preventDefault(); fire(); });
+  return () => held;
 }
 
 /**

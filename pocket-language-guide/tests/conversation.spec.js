@@ -2076,3 +2076,34 @@ test('a button of your own can carry the answers a stranger might give', async (
   // Read back to the owner in their own words.
   await expect(page.locator('.board-message-text')).toHaveText('Yes');
 });
+
+test('a button that says your name asks for it once, says it, and a hold clears it', async ({ page }) => {
+  // "My name is {}" is in the corpus in every language; the name is the one thing it
+  // cannot know. Unfilled, the button is greyed with an empty box -- two signals --
+  // and the first press asks for the name instead of showing a sentence with a hole.
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=intro');
+  await page.locator('[data-button="about"]').click();
+  const cell = page.locator('[data-button="myname"]');
+  await expect(cell).toHaveClass(/board-cell-unset/);
+  await expect(cell.locator('.board-cell-label')).toHaveText('My name is ____');
+  await cell.click();
+  const ask = page.locator('dialog.about-ask');
+  await expect(ask.locator('input')).toBeFocused();
+  await ask.locator('input').fill('Nikolai');
+  await ask.getByRole('button', { name: 'Save' }).click();
+  // Given, it is a normal button with a ticked box, and its label says the name.
+  await expect(cell).toHaveClass(/board-cell-set/);
+  await expect(cell.locator('.board-cell-label')).toHaveText('My name is Nikolai');
+  await cell.click();
+  await expect(page.locator('.board-message-text')).toHaveText('我叫Nikolai');
+  // The owner's own letters carry the name as they wrote it: they know how to say it.
+  await expect(page.locator('.gloss-say')).toContainText('Nikolai');
+  await dismiss(page);
+  // It is kept, and a hold -- a right click here -- clears it for the next person.
+  await page.reload();
+  await page.locator('[data-button="about"]').click();
+  await expect(cell).toHaveClass(/board-cell-set/);
+  await cell.click({ button: 'right' });
+  await expect(cell).toHaveClass(/board-cell-unset/);
+  await expect(page.locator('.board-message-text')).toHaveCount(0);
+});

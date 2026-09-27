@@ -128,6 +128,17 @@
       "titleKey": "boards.intro.aboutTitle",
       "buttons": [
         {
+          "id": "myname",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "introductions.my-name-is",
+            "fill": "name"
+          },
+          "colour": "stay",
+          "replySetId": "greeting"
+        },
+        {
           "id": "yourname",
           "kind": "message",
           "phraseRef": {
