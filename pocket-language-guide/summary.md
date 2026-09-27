@@ -687,8 +687,12 @@ grey is a number nobody finds. A part may not end in a space, because `measurer.
 drops a trailing one -- `"110 "` measures exactly as wide as `"110"` -- so the spaces
 are moved to the front of the following part, where they are counted.
 
-**The band is set in the reader's face, and never below the reader script's own
-floor.** `headSize` was the theme's smallest field size flat, which is 5.22pt where
+**The band is set in the reader's face, at the reader script's own floor or above,
+and a line that does not fit is set smaller, never shorter.** Every group on it scales
+by one factor until the line fits -- widths are linear in the size -- on the same
+baseline; below the floor the sheet raises `band-too-long`, which says to take an item
+out or use a wider card, rather than trimming the line with an ellipsis into a label
+that says something else. `headSize` was the theme's smallest field size flat, which is 5.22pt where
 `scripts.csv` asks 5.4 for Arabic, Devanagari, Thai and tengwar. That cost nothing
 while every slot that shipped was effectively ASCII -- a folio, an emergency number, a
 Latin exonym -- and the pronunciation key is the first one that sets reader-language
@@ -892,7 +896,12 @@ in the personal store, per `board/node`, carried in the backup — under the rea
 own buttons. **A tree is screens of the reader's own**: a screen is a personal entry
 marked `screen`, placed like a button, drawn as a submenu, and its buttons are placed
 under `board/<its id>`, so ordering, moving and pair filtering are the ones buttons
-already have; deleting one takes its contents except a button also placed elsewhere.
+already have; deleting one takes its contents except a button also placed elsewhere. A button of
+the reader's own can also carry the answers a stranger might give: the editor adds
+them one indented pair at a time (the answer in their language, its meaning in the
+reader's) with a minus beside each, they are stored as `replies` on the phrase, and
+the board builds a reply set `own/<id>` from them with "none of these" after, so Reply
+works on it exactly as on the board's own questions.
 What is on a screen saves as a small file (`buildButtons`/`readButtons` in
 `core/personal.js`, relative placement keys, the backup's own field checks) and loads
 onto any screen of the same pair under fresh ids, so a tree can be handed to someone
@@ -904,8 +913,11 @@ joined as two sentences, never a template — except on the emergency board. Tur
 applies to the whole tree: the owner's grid and the keypad turn with the sentence
 and the answers. `resolvePhrase` shows one reading of a slash gloss ("okay / can" →
 "okay") on a board; the printed sheet keeps the range. The answer that says none of
-these fit ends in a link that opens Google Translate from the listener's language to
-the owner's — a web address, which a phone with the app installed hands to the app.
+these fit ends in links that open a translator from the listener's language to the
+owner's: Google for every pair, DeepL where its published list has both languages,
+and Naver Papago where one side is Chinese, Japanese or Korean and it has the other.
+Each is a web address carrying the pair and no text, which a phone with the app
+installed hands to the app.
 Only a full-width mark hangs; a Latin `?` stays in its line.
 
 **It is a view over the corpus, not a small sheet.** No `SheetSpec`, no solver, no
@@ -2161,7 +2173,16 @@ carries the back button, the one-way hand-off of a sentence to the share sheet, 
 `deliver()`, which writes an export or backup to the app's cache directory and hands
 its URI to the share sheet; `download()` in `ui/app.js` tries it first and falls back
 to the anchor click only when it answers `false`, so every PDF, PNG, SVG, ZIP, CSV and
-backup takes the native route without any caller knowing. `ui/platform/beacon.js`
+backup takes the native route without any caller knowing. It also carries where a
+relaunch opens: each of the three screens a reader can be on -- the languages, a
+pair's contexts, a context -- records itself, and a fresh launch (marked in session
+storage, which lives as long as the WebView) goes back there no deeper than the
+reader's setting (Languages, Contexts by default, or Last context, in both settings
+dialogs and only in the apps), in place of the page it started on. Android's Back
+goes up where there is no page behind to go back to -- a context's root to the
+contexts, the contexts to the languages, the languages out of the app -- because
+Chromium skips history entries a page made without a gesture, so a relaunched
+screen has nothing behind it as far as Back can tell. `ui/platform/beacon.js`
 reaches the lamp through the camera where the platform lends it. What the emulator
 has shown, and what only a phone can, is in `docs/native.md`.
 

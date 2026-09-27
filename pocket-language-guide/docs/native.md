@@ -86,6 +86,29 @@ it is deliberately unconsumed, because the page behind it is the topic list. **T
 not permission to add a visible Back button to a message**; the tap-anywhere return is
 unchanged.
 
+**Relaunch.** A browser restores its tabs and an app starts at its first page, so the
+shell remembers which screen the reader was on -- the languages, a pair's contexts, or
+a context -- and a fresh launch goes back there, no deeper than the reader's setting
+(Languages, Contexts by default, or Last context). "Fresh" is a marker in session
+storage, which lives as long as the WebView, so returning to the languages later in
+the same session stays there. The launch replaces the first page with the restored
+one. Rebuilding the history a screen at a time was tried and does not work: Chromium
+skips history entries a page made without a gesture, so `canGoBack` is false on a
+restored screen and Capacitor's own Back handler then does nothing. Instead each
+screen names the one above it -- `onBack(handler, up)` -- and an unhandled Back with
+nothing behind it goes up: a context's root to the contexts, the contexts to the
+languages, and the languages out of the app, which is also what Back on the first
+screen now does rather than nothing.
+
+**The first plugin call a page makes is thrown away.** Capacitor 8.5.2's Android
+bridge dispatches a call before it records which page to answer (`MessageHandler`
+sets `javaScriptReplyProxy` after `postMessage`), so the first call from a page that
+has just replaced another can be answered into the old page and never resolve. It
+was every page's first call -- the store's hydration -- and on the emulator a board
+opened a second after launch stayed blank one time in four. `ready()` in
+`ui/platform/store.js` fires a throwaway `keys()` first; twelve launches in a row
+rendered after it.
+
 **Storage.** `ui/platform/store.js` mirrors `Preferences` into memory at start-up so
 every existing synchronous caller keeps working, and writes through behind them. A
 WKWebView's `localStorage` is evictable under storage pressure, which for a store

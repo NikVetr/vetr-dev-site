@@ -4986,3 +4986,103 @@ deliver it on return, when the page already reads visible, and the beacon's hand
 checked the state rather than the event. d878231b stops the beacon on any visibility
 change, with a browser test for the late delivery, and on a fresh build of it
 `check:ios` passed 15 of 15 on three consecutive runs, the first run included.
+
+## Batch AC — the landing bar holds still, the conversation screens drawn, buttons that expect an answer, and apps that remember
+
+**The landing page no longer moves under the reader.** Folding "…I want to speak"
+scrolled the page down, and unfolding it jumped to the top of the thumbnails. The
+toggle now anchors the view on the first card in sight, measures it before and after,
+and scrolls by the difference. On a phone, where the bar floats, the reopened grid
+drops down over the cards as a panel of its own instead of pushing them away, and it
+folds when the reader scrolls past. The header keeps to one line: the settings button
+is smaller, then the faded "I speak"s of the other languages go farthest first, then
+the label steps down in size, then the brand shows its mark alone, and only after all
+of that does the label wrap. The earlier languages' "I speak"s take a colour each as
+well as the fade.
+
+**Appearance is a light switch.** No Auto option: the page follows the device until
+the reader flips the switch, and then keeps their choice -- on every page that had
+the dropdown. The dialog's close control is a smaller circle with a drawn cross that
+sits in its centre. The landing settings hold appearance and, in the apps, where the
+app reopens. A backup and the speaker questions stay in the board's dialog, because
+both are about boards.
+
+**Passport is one card with Closed and Open under it**, not two cards in the list.
+
+**The context buttons are drawn.** Eleven marks in the speech bubbles' style (a
+siren, people, a signpost, a bus, a knife and fork, a bag, a clock, a lotus, a bed, a
+camera, a capsule), inline SVG with the front shape cut out of the back so they read
+as one silhouette, at 88% of the button. Emergency is red in both themes, and when
+the count is odd it takes the whole top row. A button that opens more buttons has a
+chevron as well as its dashed edge. Turn now turns the whole screen, the bar and the
+grid together, so the back arrow points the right way for whoever is reading, the
+contexts turn with the items, and the context's name is set vertically in the bar --
+tried, as asked, and kept: on a turned screen it reads like a spine label.
+
+**Reply sits with the sentence, with air around it.** The sentence's size and shape
+are settled first and never give way to Reply; the sentence is then moved into
+place, and Reply goes into the free corner beside it or a row below, with a margin
+of at least a third of the type size on every side and even padding inside. (The
+orange screenshot mentioned in the notes did not arrive; this was worked from the
+description.)
+
+**Morse has more speeds, and shows what it is sending.** Three to seven words a
+minute as before, and 10, 13, 16 and 20 in a group of their own labelled as faster
+than three flashes a second. Picking one asks first, in plain words, and declining
+goes back to seven. Three flashes a second is the threshold in WCAG 2.3.1 and in
+broadcast guidance such as Ofcom's; nothing makes a faster light illegal in a
+personal tool, so the default stays under it and the override is the reader's, with
+the risk named. While it signals, the whole message runs along the bottom in small
+type, grouped by word with each letter's code under it, and the letter being sent is
+highlighted.
+
+**None of these ends in the right translators.** Google for every pair, DeepL where
+its published list has both languages, Papago where one side is Chinese, Japanese or
+Korean and it has the other. Each link carries the pair and no text.
+
+**A button of your own can expect an answer.** The editor had screens of the
+reader's own but no way to say what a stranger might reply. A plus with the
+conversation mark adds one indented pair at a time -- the answer in their language,
+what it means in yours -- each with a minus to its right, so the form stays three
+boxes until asked for more. The board makes a reply set of them with "none of these"
+after, and a backup carries them.
+
+**The apps open where the reader left off.** Languages, Contexts or Last context, set
+in the apps' settings, Contexts by default. A launch replaces the first page with the
+restored one, and Android's Back goes up from there: a context's root to the contexts,
+the contexts to the languages, the languages out of the app. A history rebuilt a screen
+at a time was built first and failed on the emulator -- Chromium skips entries a page
+made without a gesture, so Back had nothing to go back to and did nothing -- which the
+browser test could not see, since Playwright's `goBack` does not apply that rule. The
+same fix gives Back on the first screen something to do: it leaves the app, where it
+used to do nothing. The context list's header bars had opened nothing; they open the
+settings now.
+
+**A board opened just after launch could stay blank.** Found by the new device check:
+Capacitor 8.5.2's Android bridge dispatches a plugin call before it records which page
+to answer, so a page's first call -- the store's hydration, on every page -- could be
+answered into the page before it and never resolve. One launch in four on the
+emulator when a context was opened within a second or two. The store now fires a
+throwaway call first; twelve launches in a row rendered after it.
+
+**The turn control is visible in the dark.** It was the muted grey on the page's
+surface, which sank on a dark page, most of all on a stranger's read-back. In the
+dark it is the accent blue: arrow, border and a soft fill.
+
+**The band sets a long line smaller instead of cutting it.** The last entry left this
+open: a furniture band too long for its line was trimmed with an ellipsis, which
+printed a different, wrong label. Every group on the line now scales by one factor
+until it fits, on the same baseline, and below the reader script's floor the sheet
+raises `band-too-long`, saying to take an item out or use a wider card. Measured on
+the reference card: an eight-word custom line keeps the band's 5.2pt, a forty-word one
+is set at 3.3pt with the warning.
+
+**Evidence, by kind.** Automated, on the pushed code: Chromium's full suite, 218
+passed and one skipped, after one flaky wait was replaced by a poll (the solid-tab
+test slept 2.5 seconds for a re-solve; it failed once on a loaded machine and passed
+fifteen times alone); the WebKit smoke set, 7 of 7, including the relaunch test; unit
+tests 693 of 693; and the ten-check gate. Emulator: `check:android` 9 of 9 on a build
+of this code, the three new checks included -- the relaunch goes back to the pair's
+contexts, Back from there goes up to the languages, and Back on the languages leaves
+the app. The simulator run is recorded in the entry after this one. Nothing here has
+been on a phone.
