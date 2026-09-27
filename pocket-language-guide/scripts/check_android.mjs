@@ -3,8 +3,8 @@
 //   npm run check:android             # AVD "phraselet" by default
 //
 // Drives the app over adb and the WebView's devtools socket: persistence across a
-// relaunch and an in-place reinstall, a cold start with the radios off, and a backup
-// through the share sheet, cancelled. The devtools socket exists because
+// relaunch and an in-place reinstall, a cold start with the radios off that goes back
+// to where the last session was, and a backup through the share sheet, cancelled. The devtools socket exists because
 // `scripts/build_android.sh` enables it in the generated (debug) project only.
 // Everything here is emulator evidence, not a phone's.
 import { execFileSync, spawn } from 'node:child_process';
@@ -135,8 +135,16 @@ p.close();
 await leave();
 try {
   p = await launch();
+  // The last screen was a board, so the launch goes back to that pair's contexts --
+  // and Back climbs to the languages rather than out of the app.
+  for (let i = 0; i < 30 && !(await p.evaluate("document.querySelectorAll('.board-grid-topics .board-cell').length")); i += 1) await sleep(1000);
+  const resumed = await p.evaluate('location.pathname + location.search');
+  check('resume-launch', resumed === '/conversation.html?target=zh-Hans&source=en', resumed);
+  adb('shell', 'input', 'keyevent', '4');
   for (let i = 0; i < 30 && !(await p.evaluate("document.querySelectorAll('.card').length")); i += 1) await sleep(1000);
   const cards = await p.evaluate("document.querySelectorAll('.card').length");
+  check('resume-back', focus().includes(APP) && await p.evaluate('location.pathname') === '/index.html',
+    'BACK from the restored contexts went to the languages, and stayed');
   await p.open(SPA, '.board-cell');
   const phrase = await p.evaluate(`!!document.querySelector('[data-button="p1"]')`);
   check('offline-start', cards > 50 && phrase, { cards, phrase });

@@ -232,6 +232,9 @@ await p.evaluate(`window.__set = null; Capacitor.Plugins.Preferences.set({ key: 
 await p.until("window.__set === 'done'");
 p.close();
 p = await launch();
+// The last screen was a board, so the launch goes back to that pair's contexts.
+const resumed = await p.evaluate('location.pathname + location.search');
+check('resume-launch', resumed === '/conversation.html?target=zh-Hans&source=en', resumed);
 await p.open(SPA, '.board-cell');
 check('persist-relaunch', await p.evaluate(`!!document.querySelector('[data-button="p1"]')`), 'a phrase written through Preferences, then terminate and launch');
 p.close();

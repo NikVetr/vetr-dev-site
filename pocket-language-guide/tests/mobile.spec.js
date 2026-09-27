@@ -592,7 +592,7 @@ test('the section picker is a phone control only', async ({ page }) => {
   await expect(page.locator('.tree summary input[type=checkbox]').first()).toBeVisible();
 });
 
-test('the app opens again where the reader left off, as deep as they allow', async ({ context }) => {
+test('the app opens again where the reader left off, as deep as they allow @smoke', async ({ context }) => {
   // A stand-in for the native shell: the pages only ask whether they are in one.
   await context.addInitScript(() => {
     /** @type {any} */ (globalThis).Capacitor = { isNativePlatform: () => true, Plugins: {} };
