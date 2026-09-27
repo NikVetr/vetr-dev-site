@@ -88,6 +88,8 @@ export function renderGrid(root, node, { label, available, onPick, lang, title, 
     else if (button.kind === 'beacon') cell.classList.add('board-cell-beacon');
     else if (button.replySetId) cell.classList.add('board-cell-asks');
     if (button.alert) cell.classList.add('board-cell-alert');
+    if (button.own) cell.classList.add('board-cell-own');
+    if (button.add) cell.classList.add('board-cell-add');
     // The label is its own element so the fitter can size the text without touching
     // the cell, whose height is the grid's to decide.
     const text = document.createElement('span');

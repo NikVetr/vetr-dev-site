@@ -32,6 +32,7 @@ const KEY = 'plg.board-display';
  * @property {number} rate    how fast Speak reads, as a multiplier of the voice's own pace
  * @property {boolean} turned the stranger's surfaces set sideways, kept from message to message
  * @property {boolean} polite "excuse me" said before every request, in both languages
+ * @property {boolean} siren  Attract attention sounds a siren as well as flashing
  */
 
 /** @type {BoardDisplay} */
@@ -45,6 +46,9 @@ export const DEFAULTS = {
   // some owners want the softening every time and others find it indirect, and the
   // corpus sentences are written to stand on their own.
   polite: false,
+  // A siren is loud and cannot be taken back once it has started in a quiet room, so
+  // it is the reader's to turn on.
+  siren: false,
 };
 
 /** The speeds Speak can be set to. Numerals, so no catalogue is involved. */
@@ -54,13 +58,14 @@ export const DEFAULTS = {
 export const RATES = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 2];
 
 /** The order they are offered in, which is the order they appear on screen. */
-export const OPTIONS = /** @type {{id:'owner'|'roman'|'ipa'|'speak'|'turn'|'polite', labelKey:string}[]} */ ([
+export const OPTIONS = /** @type {{id:'owner'|'roman'|'ipa'|'speak'|'turn'|'polite'|'siren', labelKey:string}[]} */ ([
   { id: 'owner', labelKey: 'display.owner' },
   { id: 'roman', labelKey: 'display.roman' },
   { id: 'ipa', labelKey: 'display.ipa' },
   { id: 'speak', labelKey: 'display.speak' },
   { id: 'turn', labelKey: 'display.turn' },
   { id: 'polite', labelKey: 'display.polite' },
+  { id: 'siren', labelKey: 'display.siren' },
 ]);
 
 /**

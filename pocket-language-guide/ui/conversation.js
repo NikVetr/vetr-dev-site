@@ -43,7 +43,8 @@ import { speech } from './platform/speech.js';
 import { keepAwake } from './platform/wake.js';
 import { startBeacon, stopBeacon } from './platform/beacon.js';
 import { notePlace, onBack } from './platform/shell.js';
-import { read as readPersonal, placedOn } from './board-store.js';
+import { read as readPersonal, placedOn, addPhrase, write as writePersonal } from './board-store.js';
+import { askText } from './board-menu.js';
 import {
   openSpeakerSettings, readProfile, noticeFor, personalSection,
 } from './speaker-settings.js';
@@ -79,6 +80,10 @@ const ENTRY_INVALID = /** @type {Record<string,string>} */ ({
  * detached element silently does nothing at all.
  */
 let openedFrom = /** @type {string|null} */ (null);
+
+/** Where the reader's own contexts are listed, and the board id one opens as. */
+const CONTEXTS = 'contexts';
+const OWN = 'own:';
 
 /** Drop back to the list of conversations, keeping the pair. */
 function toPicker() {
@@ -151,6 +156,59 @@ function candidates(index, boardId, side, fixed) {
     if (theirs.includes(fixed)) for (const code of mine) out.add(code);
   }
   return [...out];
+}
+
+/**
+ * A label's letters each turned a quarter in place, or put back.
+ *
+ * Turned, the label stays where it is and only its letters turn, to face whoever has
+ * turned the phone -- the one reading the grid, whose "up" is the screen's right edge.
+ * So the words and their letters are laid out from the right, which for that reader is
+ * down the page, and wrap between words as the upright label does; the size comes down
+ * only if the turned label would need more height than it had, so the bar and every
+ * control in it stay exactly where they were. A letter is a grapheme, so a vowel sign
+ * stays on its consonant. A joining script stays upright: a letter cut from its
+ * neighbours loses its joined form, and a whole word turned would be taller than the bar.
+ * @param {HTMLElement} el  an element holding only text
+ * @param {boolean} turned
+ */
+function turnLetters(el, turned) {
+  const text = el.dataset.text ?? el.textContent ?? '';
+  el.dataset.text = text;
+  el.textContent = text;
+  el.style.fontSize = '';
+  const box = /** @type {HTMLElement} */ (el.closest('.board-title') ?? el);
+  box.style.minBlockSize = '';
+  if (!turned || /[\p{Script=Arabic}\p{Script=Syriac}]/u.test(text)) return;
+  const upright = box.getBoundingClientRect().height;
+  // The room is the title's and the spacer's beside it, taken now: the title is sized
+  // by its content, so measured after the letters change it only reports itself.
+  const spacer = box.parentElement?.querySelector(':scope > .spacer');
+  const room = box.getBoundingClientRect().width + (spacer?.getBoundingClientRect().width ?? 0);
+  box.style.minBlockSize = `${upright}px`;
+  // One child, as the upright text was: the title's button is a flex box, and words as
+  // its children would be flex items on one row that never wraps.
+  const line = document.createElement('span');
+  line.className = 'board-letters';
+  const graphemes = new Intl.Segmenter(undefined, { granularity: 'grapheme' });
+  line.append(...text.split(/(\s+)/).filter(Boolean).map((word) => {
+    if (/^\s+$/.test(word)) return document.createTextNode(word);
+    const group = document.createElement('span');
+    group.className = 'board-word';
+    for (const { segment } of graphemes.segment(word)) {
+      const letter = document.createElement('span');
+      letter.className = 'board-letter';
+      letter.textContent = segment;
+      group.append(letter);
+    }
+    return group;
+  }));
+  el.replaceChildren(line);
+  for (let size = Number.parseFloat(getComputedStyle(el).fontSize);
+    (box.getBoundingClientRect().height > upright + 0.5 || el.scrollWidth > room + 2) && size > 8;
+    size *= 0.92) {
+    el.style.fontSize = `${size * 0.92}px`;
+  }
 }
 
 /**
@@ -230,29 +288,46 @@ async function showPicker(owner, listener, index) {
   out.title = t('board.toGallery');
   out.addEventListener('click', () => { location.href = './'; });
   onBack(() => false, './');
-  if (!topics.size) {
-    $('board-status').textContent = t('board.noBoards');
-    $('board-grid').removeAttribute('aria-busy');
-    return;
-  }
+  if (!topics.size) $('board-status').textContent = t('board.noBoards');
+  // **Contexts of the reader's own** after the board's, and a last cell that makes one:
+  // a hotel's check-in, a clinic, whatever the shipped contexts do not cover. Each is a
+  // screen of theirs kept for this pair, opened as a board of the buttons they put on it.
+  const pair = `${listener}__${owner}`;
+  const personal = readPersonal();
+  const mine = placedOn(personal.data, CONTEXTS, pair).filter((p) => p.screen);
+  /** @type {import('../core/conversation.js').BoardButton[]} */
+  const buttons = [
+    ...[...topics].map(([id, { icon, alert }]) => ({ id, kind: /** @type {const} */ ('submenu'), icon, alert })),
+    ...mine.map((p) => ({ id: `${OWN}${p.id}`, kind: /** @type {const} */ ('submenu'), own: /** @type {const} */ (true) })),
+    { id: 'add-context', kind: 'submenu', add: true },
+  ];
   // Every button here goes deeper, so the dash that says so on a mixed grid has
   // nothing to contrast with and is just twelve dashed boxes. They stay submenus --
   // that is what they do -- and the stylesheet drops the marking for this one grid.
   $('board-grid').classList.add('board-grid-topics');
-  renderGrid($('board-grid'), { buttons: [...topics].map(([id, { icon, alert }]) => ({
-    id, kind: /** @type {const} */ ('submenu'), icon, alert,
-  })) }, {
+  renderGrid($('board-grid'), { buttons }, {
     lang: owner,
-    label: (button) => topics.get(button.id)?.title ?? button.id,
+    label: (button) => topics.get(button.id)?.title
+      ?? mine.find((p) => `${OWN}${p.id}` === button.id)?.label ?? t('board.addContext'),
     available: () => true,
     onPick: (button) => {
-      const next = new URLSearchParams(location.search);
-      next.set('board', button.id);
-      location.search = next.toString();
+      if (!button.add) { goTo({ board: button.id }); return; }
+      askText({
+        label: t('board.contextName'),
+        save: t('editor.save'),
+        close: t('gallery.previewClose'),
+        kind: 'context-ask',
+        onSave: async (label) => {
+          if (!label) return;
+          const made = addPhrase(personal.data, { label, owner: '', listener: '', pair, screen: true }, CONTEXTS);
+          await writePersonal(made.data);
+          goTo({ board: `${OWN}${made.id}` });
+        },
+      });
     },
   });
   // The emergency topic across the top when an odd count would leave a gap at the foot.
-  if (topics.size % 2) $('board-grid').querySelector('.board-cell-alert')?.classList.add('board-cell-wide');
+  if (buttons.length % 2) $('board-grid').querySelector('.board-cell-alert')?.classList.add('board-cell-wide');
   // **Turned with the boards.** A phone laid on the counter for a conversation is still
   // laid there when the reader backs out to choose another, so the list turns too, and
   // can be turned from here.
@@ -264,6 +339,7 @@ async function showPicker(owner, listener, index) {
   const paintTurn = () => {
     turn.setAttribute('aria-pressed', String(display.turned));
     document.querySelector('.board-main')?.classList.toggle('board-main-turned', display.turned);
+    turnLetters($('board-title'), display.turned);
   };
   paintTurn();
   turn.addEventListener('click', () => {
@@ -328,8 +404,16 @@ async function main() {
 
   if (!boardId) { await showPicker(owner, listener, index); return; }
 
-  const board = JSON.parse(await loadText(`data/boards/${boardId}.json`));
-  const problems = validateBoard(board);
+  // **A context of the reader's own** opens as a board built here: one node, the screen
+  // they named, holding what they placed on it -- the path their screens inside a board
+  // already take. Deleted since it was last open, the list is where to be.
+  const own = boardId.startsWith(OWN) ? readPersonal().data.phrases[boardId.slice(OWN.length)] : null;
+  if (boardId.startsWith(OWN) && !own?.screen) { goTo({ board: null }); return; }
+  const board = own
+    ? { schemaVersion: 1, id: boardId, titleKey: '', rootNodeId: own.id, nodes: { [own.id]: { buttons: [] } } }
+    : JSON.parse(await loadText(`data/boards/${boardId}.json`));
+  const title = own ? own.label : t(board.titleKey);
+  const problems = own ? [] : validateBoard(board);
   // A malformed board is a loud failure, not a page that half works: it is authored
   // data, and the person who sees this is the one who can fix it.
   if (problems.length) throw new Error(`data/boards/${boardId}.json: ${problems.join('; ')}`);
@@ -426,7 +510,7 @@ async function main() {
   // button is unavailable, which is true and tells the reader nothing.
   const listed = JSON.parse(await loadText('data/boards/index.json'))
     .boards.find((/** @type {any} */ b) => b.id === boardId);
-  if (!listed || !serves(listed, listener, owner)) {
+  if (!own && (!listed || !serves(listed, listener, owner))) {
     // Naming the side that is short, rather than listing the pairs it does serve:
     // that list used to be one pair and is now most of a fifty-three-language
     // registry, which tells a reader nothing they can act on.
@@ -473,15 +557,15 @@ async function main() {
     .map((b) => ({ id: b.id, label: t(b.titleKey) }))
     .sort((a, b) => a.label.localeCompare(b.label));
   $('board-title').replaceChildren(
-    inlineControl(t(board.titleKey), t('board.switchTopic'), (button) => {
+    inlineControl(title, t('board.switchTopic'), (button) => {
       openBoardMenu(button, [
         ...others.map((o) => ({ label: o.label, run: () => goTo({ board: o.id }) })),
         { label: t('board.allTopics'), run: () => goTo({ board: null }) },
       ]);
     }),
   );
-  $('board-title').title = t(board.titleKey);
-  document.title = `${t(board.titleKey)} \u2014 ${t('nav.brand')}`;
+  $('board-title').title = title;
+  document.title = `${title} \u2014 ${t('nav.brand')}`;
 
   // **Replies are on unless a session says otherwise.** They were behind `?replies=1`
   // while the reply screen was being built, and the effect was that the "can be
@@ -637,6 +721,7 @@ async function main() {
     // way from the first tap to the last -- and the bar under it turns with it, so
     // its arrow points back and its topic reads the same way as the buttons.
     document.querySelector('.board-main')?.classList.toggle('board-main-turned', display.turned);
+    turnLetters(/** @type {HTMLElement} */ ($('board-title').firstElementChild ?? $('board-title')), display.turned);
     if (state.view === 'grid') {
       clearStage(stage);
       // At the root the parent is the topic list, not a node -- so the control stays
@@ -687,6 +772,7 @@ async function main() {
             const help = ctx.listenerRows['emergency-medical.help'];
             startBeacon({
               mode: button.beacon === 'sos' ? 'sos' : 'attention',
+              siren: display.siren,
               label: button.beacon === 'sos'
                 ? theirs.t('beacon.sos')
                 : (help?.text || theirs.t('beacon.help')),
@@ -958,6 +1044,8 @@ async function main() {
     state: personal,
     save: download,
     onChange: (next) => { personal = { ...personal, data: next }; paint(); },
+    // In a context of the reader's own, its editor is also where it is deleted.
+    context: own ? { id: own.id, onGone: () => goTo({ board: null }) } : undefined,
   });
 
   // The bars are Settings and the plus is the editor: two controls for two things,

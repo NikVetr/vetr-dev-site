@@ -68,6 +68,8 @@ const BLANK = '____';
  *   `ui/topic-marks.js`: the object that says what the board it opens is about
  * @property {true} [alert]    a topic that is an emergency: set in the alert colour,
  *   and across the top of the list when it would otherwise leave a gap
+ * @property {true} [own]    a context of the reader's own, on the list of contexts
+ * @property {true} [add]    the cell on that list that makes one
  * @property {ColourRole} [colour]  which of the sheet's five role colours it takes
  */
 

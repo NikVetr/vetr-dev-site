@@ -519,6 +519,7 @@
   "display.speak": "Speak, and the half-speed button beside it",
   "display.turn": "The control that turns the sentence sideways",
   "display.polite": "Say \u201cexcuse me\u201d first, before every request",
+  "display.siren": "Attract attention also sounds a siren",
   "display.politeCanada": "In Canada? You may want this on.",
   "display.voice": "Voice",
   "display.voiceAuto": "Chosen automatically",
@@ -614,5 +615,8 @@
   "board.openTranslator": "Open Google Translate",
   "board.openDeepL": "Open DeepL",
   "board.openPapago": "Open Papago",
-  "board.toGallery": "All languages"
+  "board.toGallery": "All languages",
+  "board.addContext": "Your own context",
+  "board.contextName": "What to call this context",
+  "board.deleteContext": "Delete this context"
 }

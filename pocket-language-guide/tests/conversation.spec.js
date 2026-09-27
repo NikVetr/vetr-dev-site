@@ -174,7 +174,10 @@ test('a board refuses a language it cannot say, and names it', async ({ page }) 
   // actually takes: a board they cannot use is absent rather than broken.
   await page.goto('/conversation.html?target=qya&source=en');
   await expect(page.locator('#board-title')).toHaveText('Context');
-  await expect(page.locator('.board-cell')).toHaveCount(0);
+  // The one cell left is the one that makes a context of the reader's own, which any
+  // pair can have: its sentences are theirs to write.
+  await expect(page.locator('.board-cell:not(.board-cell-add)')).toHaveCount(0);
+  await expect(page.locator('.board-cell-add')).toHaveCount(1);
   await expect(page.locator('#board-status')).not.toBeEmpty();
 });
 
@@ -1204,6 +1207,8 @@ test('converse opens the topics, not a board @smoke', async ({ page }) => {
     'Emergency', 'Meeting people', 'Directions', 'Getting around',
     'Eating out', 'Shopping', 'Time', 'Massage and spa',
     'Lodging', 'Sights and tickets', 'Pharmacy',
+    // And last, the cell that makes one of the reader's own.
+    'Your own context',
   ]);
   // Nothing on this screen is owner-only chrome: there is no board to edit yet.
   await expect(page.locator('#board-menu')).toBeHidden();
@@ -1927,21 +1932,31 @@ test('a board is a board at every size, not a window full of columns', async ({ 
 });
 
 test('the emergency topic is the red one, across the top when the count is odd', async ({ page }) => {
-  // The one topic that has to be found without reading. Eleven topics in two columns
-  // leave a gap at the foot; the emergency one takes the whole first row instead.
+  // The one topic that has to be found without reading. An odd number of cells in two
+  // columns leaves a gap at the foot; the emergency one takes the whole first row instead.
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/conversation.html?target=zh-Hans&source=en');
   const alarm = page.locator('[data-button="emergency"]');
   await expect(alarm).toBeVisible();
-  const look = await alarm.evaluate((el) => ({
+  const look = () => alarm.evaluate((el) => ({
     bg: getComputedStyle(el).backgroundColor, wide: el.getBoundingClientRect().width,
     grid: /** @type {HTMLElement} */ (el.parentElement).clientWidth, mark: Boolean(el.querySelector('.board-cell-topic')),
   }));
-  expect(look.bg).toBe('rgb(179, 38, 30)');
-  expect(look.wide).toBeGreaterThan(look.grid * 0.9);
+  const even = await look();
+  expect(even.bg).toBe('rgb(179, 38, 30)');
   // Every topic wears the silhouette of what it is about, drawn rather than fetched.
-  expect(look.mark).toBe(true);
+  expect(even.mark).toBe(true);
   await expect(page.locator('.board-cell .board-cell-topic')).toHaveCount(11);
+  // Eleven contexts and the cell that makes one: even, so there is no gap to fill.
+  expect(even.wide).toBeLessThan(even.grid * 0.6);
+  // One of the reader's own makes it odd, and the emergency one takes the first row.
+  await page.locator('[data-button="add-context"]').click();
+  await page.locator('dialog.context-ask input').fill('Hotel');
+  await page.locator('dialog.context-ask').getByRole('button', { name: 'Save' }).click();
+  await expect(page.locator('#board-title')).toHaveText('Hotel');
+  await page.locator('#board-up').click();
+  await expect(page.locator('.board-cell-own')).toBeVisible();
+  expect((await look()).wide).toBeGreaterThan(even.grid * 0.9);
 });
 
 test('a button that opens more buttons carries an arrow, and the list of contexts does not', async ({ page }) => {
@@ -1954,21 +1969,33 @@ test('a button that opens more buttons carries an arrow, and the list of context
   expect(await arrowOf(page.locator('[data-button="time"]'))).toBe('none');
 });
 
-test('turning turns the bar and the list of contexts with the buttons', async ({ page }) => {
-  // The bar's topic reads the way the buttons do and its back arrow points back for a
-  // reader who has turned the phone; and backing out to the contexts keeps the turn.
+test('turning turns what is on the bar in place, and moves nothing', async ({ page }) => {
+  // Turning the whole bar moved every control in it. Now the bar keeps its shape and
+  // each glyph turns where it stands -- the arrow, the icons, and the topic's letters,
+  // which run from the right, down the page for whoever has turned the phone -- while
+  // the grid turns as a whole. Backing out to the contexts keeps the turn.
+  await page.setViewportSize({ width: 390, height: 760 });
   await page.goto(BOARD);
   await expect(page.locator('.board-cell').first()).toBeVisible();
+  const places = () => page.evaluate(() => ['board-up', 'board-add-bar', 'board-turn-bar', 'board-menu']
+    .map((id) => { const r = /** @type {HTMLElement} */ (document.getElementById(id)).getBoundingClientRect(); return [r.x, r.y, r.width, r.height].map(Math.round).join(','); }));
+  const before = await places();
   await page.locator('#board-turn-bar').click();
   const main = page.locator('.board-main');
   await expect(main).toHaveClass(/board-main-turned/);
-  expect(await page.locator('.board-bar').evaluate((el) => getComputedStyle(el).writingMode)).toBe('vertical-rl');
+  expect(await places()).toEqual(before);
+  expect(await page.locator('.board-bar').evaluate((el) => getComputedStyle(el).writingMode)).toBe('horizontal-tb');
+  expect(await page.locator('.board-grid').evaluate((el) => getComputedStyle(el).writingMode)).toBe('vertical-rl');
+  expect(await page.locator('#board-title .board-letter').count()).toBeGreaterThan(5);
+  expect(await page.locator('.board-up-arrow').evaluate((el) => getComputedStyle(el).rotate)).toBe('90deg');
   await page.locator('#board-up').click();
+  // Still the word it was, for a screen reader: only the letters' drawing turned.
   await expect(page.locator('#board-title')).toHaveText('Context');
   await expect(main).toHaveClass(/board-main-turned/);
   await expect(page.locator('#board-turn-bar')).toHaveAttribute('aria-pressed', 'true');
   await page.locator('#board-turn-bar').click();
   await expect(main).not.toHaveClass(/board-main-turned/);
+  await expect(page.locator('#board-title .board-letter')).toHaveCount(0);
 });
 
 test('a message keeps white type on a dark fill in the dark', async ({ browser }) => {
@@ -2127,6 +2154,37 @@ test('Reply stays inside the frame when the sentence fills it', async ({ page })
   await expect.poll(inside).toBe(true);
 });
 
+test('Attract attention sounds a siren only when the reader has asked for one', async ({ page }) => {
+  // Counted rather than heard: every oscillator started and stopped is recorded.
+  await page.addInitScript(() => {
+    const log = /** @type {any} */ (globalThis).sirenLog = { started: 0, stopped: 0 };
+    const make = AudioContext.prototype.createOscillator;
+    AudioContext.prototype.createOscillator = function oscillator() {
+      const o = make.call(this);
+      const [start, stop] = [o.start.bind(o), o.stop.bind(o)];
+      o.start = (/** @type {any[]} */ ...a) => { log.started += 1; return start(...a); };
+      o.stop = (/** @type {any[]} */ ...a) => { log.stopped += 1; return stop(...a); };
+      return o;
+    };
+  });
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=emergency');
+  const log = () => page.evaluate(() => /** @type {any} */ (globalThis).sirenLog);
+  await page.locator('[data-button="attention"]').click();
+  await expect(page.locator('.beacon-attention')).toBeVisible();
+  expect((await log()).started).toBe(0);
+  await page.locator('.beacon').click();
+  // Turned on in the settings, it sounds -- and stops with the beacon.
+  await page.locator('#board-menu').click();
+  await page.getByRole('checkbox', { name: 'Attract attention also sounds a siren' }).check();
+  await page.keyboard.press('Escape');
+  await page.locator('[data-button="attention"]').click();
+  await expect(page.locator('.beacon-attention')).toBeVisible();
+  expect((await log()).started).toBe(2);
+  await page.locator('.beacon').click();
+  await expect(page.locator('.beacon')).toHaveCount(0);
+  expect((await log()).stopped).toBe(2);
+});
+
 test('turned, Reply keeps a size for its sentence, and stays inside the frame', async ({ page }) => {
   // Turned, Reply sat in a horizontal row that squeezed it narrower than its own line,
   // so its words ran into its padding, the fitter's test failed at every size, and it
@@ -2145,4 +2203,34 @@ test('turned, Reply keeps a size for its sentence, and stays inside the frame', 
   });
   await expect.poll(async () => (await sizes()).ratio).toBeGreaterThan(0.3);
   expect((await sizes()).inside).toBe(true);
+});
+
+test('a context of your own is made from the list, filled like a board, and deleted from inside', async ({ page }) => {
+  // For what the shipped contexts do not cover -- a hotel's check-in, a clinic -- the
+  // list ends in a cell that makes one: set apart by colour and, itself, by a dashed
+  // edge and a plus. It opens as a board of the reader's own buttons.
+  page.on('dialog', (d) => d.accept());
+  await page.goto('/conversation.html?target=zh-Hans&source=en');
+  const make = page.locator('[data-button="add-context"]');
+  await expect(make).toHaveClass(/board-cell-add/);
+  await make.click();
+  const ask = page.locator('dialog.context-ask');
+  await ask.locator('input').fill('Hotel check-in');
+  await ask.getByRole('button', { name: 'Save' }).click();
+  await expect(page).toHaveURL(/board=own%3A|board=own:/);
+  await expect(page.locator('#board-title')).toHaveText('Hotel check-in');
+  const box = await addOwn(page, 'breakfast', 'When is breakfast?', '早餐几点？');
+  await box.locator('.board-editor-close').click();
+  await expect(page.locator('.board-cell', { hasText: 'breakfast' })).toBeVisible();
+  // On the list, after the shipped ones, in its own colour.
+  await page.locator('#board-up').click();
+  const mine = page.locator('.board-cell-own', { hasText: 'Hotel check-in' });
+  await expect(mine).toBeVisible();
+  await mine.click();
+  await expect(page.locator('.board-cell', { hasText: 'breakfast' })).toBeVisible();
+  // Its editor is where it goes, with what is on it.
+  await fromMenu(page, 'Edit buttons');
+  await page.locator('.board-editor').getByRole('button', { name: 'Delete this context' }).click();
+  await expect(page.locator('#board-title')).toHaveText('Context');
+  await expect(page.locator('.board-cell-own')).toHaveCount(0);
 });

@@ -7,6 +7,7 @@
 
 import * as store from './platform/store.js';
 import { t } from './i18n.js';
+import { askText } from './board-menu.js';
 
 const KEY = 'plg.about';
 
@@ -54,34 +55,15 @@ function detailField(fact, onChange) {
  * @param {string} fact @param {() => void} onChange
  */
 export function askDetail(fact, onChange) {
-  const panel = document.createElement('dialog');
-  panel.className = 'speaker-settings about-ask';
-  const close = document.createElement('button');
-  close.type = 'button';
-  close.className = 'speaker-close';
-  close.setAttribute('aria-label', t('gallery.previewClose'));
-  close.addEventListener('click', () => panel.close());
-  const form = document.createElement('form');
-  // Saved by Save only: closing the dialog is changing one's mind.
-  const { label, input } = detailField(fact);
-  const kept = document.createElement('p');
-  kept.className = 'speaker-why';
-  kept.textContent = t('about.kept');
-  const save = document.createElement('button');
-  save.className = 'btn primary';
-  save.textContent = t('editor.save');
-  form.append(label, kept, save);
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    setDetail(fact, input.value);
-    onChange();
-    panel.close();
+  askText({
+    label: t(`about.${fact}`),
+    hint: t('about.kept'),
+    save: t('editor.save'),
+    close: t('gallery.previewClose'),
+    autocomplete: fact === 'name' ? 'name' : undefined,
+    kind: 'about-ask',
+    onSave: (value) => { setDetail(fact, value); onChange(); },
   });
-  panel.append(close, form);
-  panel.addEventListener('close', () => panel.remove());
-  document.body.append(panel);
-  panel.showModal();
-  input.focus();
 }
 
 /** The settings dialog's section: every detail, each changed where it stands. @param {() => void} onChange */

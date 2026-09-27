@@ -1252,14 +1252,28 @@ dialog.board-menu-panel::backdrop { background: rgb(17 24 32 / 25%); }
 
 /* --- the tree, turned ------------------------------------------------------- */
 /* The owner's grid turns with the sentence and the answers: one orientation from
-   the first tap to the last, for a phone laid on the counter. **The bar turns with
-   it**: its topic reads the way the buttons do, and its back arrow -- a glyph in the
-   turned line -- points back for the reader who has turned the phone to read them.
-   The grid's tracks follow the writing mode, so its columns run down the screen. */
-.board-main-turned { writing-mode: vertical-rl; text-orientation: sideways; }
+   the first tap to the last, for a phone laid on the counter. The grid's tracks
+   follow the writing mode, so its columns run down the screen. */
+.board-main-turned .board-grid { writing-mode: vertical-rl; text-orientation: sideways; }
+/* **The bar keeps its shape; what is on it turns in place.** Turning the whole bar
+   moved every control in it, and the thumb had learned where they were. So each
+   glyph turns a quarter where it stands -- the back arrow then points back for
+   whoever has turned the phone -- and the topic's letters each turn on their line
+   (`turnLetters` in `ui/conversation.js` splits them). */
+.board-main-turned .board-up-arrow, .board-main-turned .board-bar svg,
+.board-main-turned .board-menu-bars, .board-letter { display: inline-block; rotate: 90deg; }
+.board-letter { inline-size: 1em; text-align: center; }
+.board-word { white-space: nowrap; }
+/* Laid out from the right, which is down the page for whoever has turned the phone. */
+.board-letters { display: inline-block; direction: rtl; }
 /* The arrow's centring shift is physical, so it moves to the other axis; the glyph
    itself turns with the line and points down it. */
 .board-main-turned .board-cell-more::after { translate: 50% 0; }
+/* The reader's own contexts are set apart from the shipped ones by colour, and the
+   cell that makes one by a dashed edge and a plus as well: two signals, not one. */
+.board-grid-topics .board-cell.board-cell-own { background: var(--accent-soft); border-color: var(--accent); }
+.board-grid-topics .board-cell.board-cell-add { border: 2px dashed var(--accent); background: transparent; color: var(--accent); }
+.board-cell-add .board-cell-label::before { content: '+'; display: block; font-size: 1.6em; line-height: 1; font-weight: 700; }
 /* A topic's mark behind its word: most of the button, as the answer mark is. */
 .board-cell-topic { inline-size: 88%; block-size: 88%; opacity: 0.13; }
 /* The emergency topic is the one that has to be found without reading: the alert

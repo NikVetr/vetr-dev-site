@@ -102,3 +102,42 @@ export function openBoardMenu(anchor, items, aside) {
   /** @type {HTMLElement|null} */ (panel.querySelector('.board-menu-current') ?? panel.querySelector('button'))?.focus();
   return panel;
 }
+
+/**
+ * Ask for one line of text in a dialog of its own, and hand it back on Save.
+ *
+ * Saved by Save (or Enter) only: closing the dialog -- its corner, Escape, a press
+ * outside it -- is changing one's mind, and keeps nothing that was typed.
+ * @param {object} config
+ * @param {string} config.label  what the field is, above it
+ * @param {string} config.save   the button's word
+ * @param {string} config.close  the corner control's accessible name
+ * @param {(value:string) => void} config.onSave  given the text, trimmed
+ * @param {string} [config.value]  what is in the field to begin with
+ * @param {string} [config.hint]   a line under the field
+ * @param {string} [config.autocomplete]
+ * @param {string} [config.kind]   a class for the dialog, for tests and styles
+ */
+export function askText({ label, save, close, onSave, value = '', hint, autocomplete, kind = '' }) {
+  const panel = /** @type {HTMLDialogElement} */ (el('dialog', { class: `speaker-settings ${kind}` }));
+  const corner = el('button', { type: 'button', class: 'speaker-close', 'aria-label': close });
+  corner.addEventListener('click', () => panel.close());
+  const input = /** @type {HTMLInputElement} */ (el('input', { type: 'text' }));
+  input.value = value;
+  if (autocomplete) input.setAttribute('autocomplete', autocomplete);
+  const form = el('form', {}, [
+    el('label', { class: 'about-field' }, [el('span', { text: label }), input]),
+    ...(hint ? [el('p', { class: 'speaker-why', text: hint })] : []),
+    el('button', { class: 'btn primary', text: save }),
+  ]);
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    onSave(input.value.trim());
+    panel.close();
+  });
+  panel.append(corner, form);
+  panel.addEventListener('close', () => panel.remove());
+  document.body.append(panel);
+  panel.showModal();
+  input.focus();
+}

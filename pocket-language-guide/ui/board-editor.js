@@ -55,8 +55,10 @@ function el(tag, attrs = {}, kids = []) {
  * @param {(blob:Blob, name:string)=>void} config.save  hand a file to the reader
  * @param {{id:string, label:string}[]} [config.builtIn]  the board's own buttons on this
  *   screen, each offered with a switch to hide it here
+ * @param {{id:string, onGone:()=>void}} [config.context]  the reader's own context this
+ *   editor is in, which it can delete from its first screen
  */
-export function openBoardEditor({ at, pair, owner, listener, listenerDir, state: held, onChange, save: deliver, builtIn = [] }) {
+export function openBoardEditor({ at, pair, owner, listener, listenerDir, state: held, onChange, save: deliver, builtIn = [], context }) {
   const panel = /** @type {HTMLDialogElement} */ (el('dialog', { class: 'board-editor' }));
   // **Handed in, not read here.** Re-reading storage on every repaint meant the
   // board asked the disk what the reader had just typed while the write was still
@@ -311,6 +313,20 @@ export function openBoardEditor({ at, pair, owner, listener, listenerDir, state:
     ];
   };
 
+  /** Delete the context this is, with everything on it, and leave it. */
+  const deleteContext = () => {
+    const button = el('button', { type: 'button', class: 'ghost board-editor-delete', text: t('board.deleteContext') });
+    button.addEventListener('click', async () => {
+      if (!context) return;
+      const holds = (state.data.placements[at] ?? []).length;
+      if (!confirm(t('editor.confirmDeleteScreen', { count: String(holds) }))) return;
+      await commit(deletePhrase(state.data, context.id));
+      panel.close();
+      context.onGone();
+    });
+    return el('div', { class: 'board-editor-transfer' }, [button]);
+  };
+
   function draw() {
     const placed = (state.data.placements[at] ?? [])
       .map((/** @type {string} */ id) => state.data.phrases[id])
@@ -325,6 +341,7 @@ export function openBoardEditor({ at, pair, owner, listener, listenerDir, state:
       form(),
       screenForm(),
       transfer(),
+      ...(context && at.endsWith(`/${context.id}`) ? [deleteContext()] : []),
     );
   }
 

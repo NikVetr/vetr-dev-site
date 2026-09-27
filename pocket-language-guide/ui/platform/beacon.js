@@ -47,6 +47,36 @@ const SOS = [
 /** @type {{stop:()=>void}|null} the beacon now running, if any */
 let live = null;
 
+/**
+ * A siren, for Attention when the reader has asked for one: a wail sweeping between
+ * about 650 and 1500 Hz and back, drawn by an oscillator so there is no file to fetch
+ * or to have not arrived. Started inside the tap that raised the beacon, which is
+ * the gesture a browser asks for before it makes a sound, and played through the
+ * silent switch where Safari lets a page ask for that.
+ * @returns {{stop:()=>void}|null}
+ */
+function startSiren() {
+  const Audio = globalThis.AudioContext ?? /** @type {any} */ (globalThis).webkitAudioContext;
+  if (!Audio) return null;
+  const session = /** @type {any} */ (navigator).audioSession;
+  if (session) session.type = 'playback';
+  const ctx = new Audio();
+  const tone = ctx.createOscillator();
+  const sweep = ctx.createOscillator();
+  const depth = ctx.createGain();
+  const level = ctx.createGain();
+  tone.type = 'square';
+  tone.frequency.value = 1075;
+  sweep.frequency.value = 0.6;
+  depth.gain.value = 425;
+  level.gain.value = 0.25;
+  sweep.connect(depth).connect(tone.frequency);
+  tone.connect(level).connect(ctx.destination);
+  tone.start();
+  sweep.start();
+  return { stop: () => { tone.stop(); sweep.stop(); ctx.close(); } };
+}
+
 /** Stop whatever is running. Safe to call when nothing is. */
 export function stopBeacon() {
   live?.stop();
@@ -111,8 +141,9 @@ async function acquireTorch() {
  * @param {HTMLElement} [config.foot]  drawn at the foot, over the flash
  * @param {boolean} [config.fast]  the reader has been warned and has chosen a unit
  *   under the photosensitive ceiling; only then is it not clamped
+ * @param {boolean} [config.siren]  Attention sounds a siren too; the reader's choice
  */
-export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop, units, unitMs, onBeat, foot, fast }) {
+export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop, units, unitMs, onBeat, foot, fast, siren }) {
   // SOS is Morse with its pattern and speed fixed; the signaller supplies its own.
   const flashing = mode === 'sos' || mode === 'morse';
   const pattern = mode === 'morse' && units ? units : SOS;
@@ -242,12 +273,14 @@ export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop, unit
   // after a trip to Settings that way. A page cannot come back without having left.
   document.addEventListener('visibilitychange', stopBeacon);
   addEventListener('pagehide', stopBeacon);
+  const sound = siren && mode === 'attention' ? startSiren() : null;
 
   const stop = () => {
     stopped = true;
     clearTimeout(timer);
     torch?.release();
     torch = null;
+    sound?.stop();
     if (frame !== undefined) cancelAnimationFrame(frame);
     document.removeEventListener('visibilitychange', stopBeacon);
     removeEventListener('pagehide', stopBeacon);

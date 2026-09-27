@@ -235,6 +235,9 @@ export function readPackage(text, known = {}) {
     const phrases = held.phrases ?? {};
     checkButtons(phrases, held.placements ?? {}, (at) => {
       const [board, node] = at.split('/');
+      // The reader's own contexts -- the list of them, and each one's screens -- are
+      // boards no build ships, so there is nothing to check them against.
+      if (at === 'contexts' || board.startsWith('own:')) return null;
       if (!known.boards) return null;
       if (!known.boards[board]) return `this build has no board "${board}"`;
       // A screen of the reader's own is a node the board file does not have.
