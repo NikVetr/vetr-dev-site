@@ -330,6 +330,7 @@ async function main() {
     // Both of these follow the card, and the card is a control on this page.
     reserveField.hidden = !spec.geometry.screen;
     reserve.sync(spec.geometry);
+    card.sync(spec.geometry);
     await afterPaint();
     manifest = await ensureFontCss(ctx, spec.target, spec.source, spec.typeface, isElven(spec));
     let built = await buildSheet(ctx, spec);

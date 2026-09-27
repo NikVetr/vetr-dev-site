@@ -10,7 +10,8 @@ import * as store from './platform/store.js';
 import { t } from './i18n.js';
 
 const KEY = 'plg.theme';
-/** @typedef {'system'|'light'|'dark'} Theme */
+/** `system` is no choice at all: nothing stored, and the device decides.
+ * @typedef {'system'|'light'|'dark'} Theme */
 const THEMES = /** @type {Theme[]} */ (['system', 'light', 'dark']);
 
 /** @returns {Theme} */
@@ -31,29 +32,37 @@ export function writeTheme(theme) {
   applyTheme(theme);
 }
 
+/** Whether the page is dark now: the reader's choice if they made one, else the device's. */
+function isDark() {
+  const held = readTheme();
+  return held === 'system' ? matchMedia('(prefers-color-scheme: dark)').matches : held === 'dark';
+}
+
+const SUN = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/>'
+  + '<path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"'
+  + ' stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+const MOON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 14.6A8.5 8.5 0 0 1 9.4 3.8a8.5 8.5 0 1 0 10.8 10.8Z"'
+  + ' fill="currentColor"/></svg>';
+
 /**
- * The control: a labelled select with the three choices, applying as it changes.
- * One element, so the board's dialog and the studio's panel can each place it.
+ * The control: a light switch, light one way and dark the other.
+ *
+ * **No "match the device" position.** Until it is flipped the page follows the device
+ * and the switch shows where the device has it; the first flip is a choice, kept from
+ * then on. A three-way menu asked every reader to understand a setting most never
+ * need. One element, so the dialogs and the studio's panel can each place it.
  */
-export function themeControl(labelled = true) {
-  const label = document.createElement('label');
-  label.className = 'theme-control';
-  const name = document.createElement('span');
-  name.textContent = t('display.theme');
-  // Under a heading that already says Appearance the word is said once, by the
-  // heading; the label still names the control for a screen reader.
-  if (!labelled) { name.className = 'visually-hidden'; }
-  const select = document.createElement('select');
-  for (const theme of THEMES) {
-    const option = document.createElement('option');
-    option.value = theme;
-    option.textContent = t(`theme.${theme}`);
-    select.append(option);
-  }
-  select.value = readTheme();
-  select.addEventListener('change', () => writeTheme(/** @type {Theme} */ (select.value)));
-  label.append(name, select);
-  return label;
+export function themeControl() {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'theme-switch';
+  button.setAttribute('role', 'switch');
+  button.setAttribute('aria-label', t('theme.dark'));
+  button.innerHTML = `${SUN}<span class="theme-switch-track"><span class="theme-switch-knob"></span></span>${MOON}`;
+  const show = () => button.setAttribute('aria-checked', String(isDark()));
+  button.addEventListener('click', () => { writeTheme(isDark() ? 'light' : 'dark'); show(); });
+  show();
+  return button;
 }
 
 /** The board dialog's section: a heading and the control. */
@@ -62,6 +71,6 @@ export function themeSection() {
   box.className = 'display-section';
   const heading = document.createElement('h3');
   heading.textContent = t('display.theme');
-  box.append(heading, themeControl(false));
+  box.append(heading, themeControl());
   return box;
 }

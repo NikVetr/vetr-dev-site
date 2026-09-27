@@ -305,14 +305,92 @@ test('the collage names the language of the place, not whatever sorts first', as
     expect(wide.at(-1)).toMatchObject({ lang: 'en', lead: true });
     expect(wide.at(-2)?.lang).toBe('ja');
 
-    // **And it survives the phone**, where there is only room for the nearest two --
-    // which is the whole reason for choosing them by meaning rather than by sort.
-    await page.setViewportSize({ width: 390, height: 844 });
-    const narrow = (await chips()).filter((c) => c.shown);
-    expect(narrow.length).toBeLessThanOrEqual(3);
-    expect(narrow.map((c) => c.lang)).toContain('ja');
-    expect(narrow.at(-1)).toMatchObject({ lang: 'en', lead: true });
+    // **And it gives way from the far end.** The header is one line, so a narrower
+    // screen drops the farthest labels first and keeps the nearest -- which is the
+    // whole reason for ordering them by meaning rather than by sort.
+    await page.setViewportSize({ width: 500, height: 844 });
+    await expect.poll(async () => (await chips()).filter((c) => c.shown).length).toBeLessThan(wide.length);
+    const tablet = (await chips()).filter((c) => c.shown);
+    expect(tablet.map((c) => c.lang)).toContain('ja');
+    expect(tablet.at(-1)).toMatchObject({ lang: 'en', lead: true });
+    const order = wide.map((c) => c.lang);
+    expect(tablet.map((c) => c.lang)).toEqual(order.slice(order.length - tablet.length));
   } finally {
     await context.close();
   }
+});
+
+test('the site header stays one line, even with a whole sentence to say "I speak"', async ({ browser }) => {
+  // The settings button wrapped under the picker, and a long lead wrapped the collage
+  // onto two lines. Ukrainian's lead is a sentence -- `Я розмовляю українською` -- so
+  // it is the case that has to fit a small phone.
+  for (const [reader, width] of /** @type {const} */ ([['en', 390], ['uk', 390], ['uk', 320]])) {
+    const context = await browser.newContext({ viewport: { width, height: 700 } });
+    await context.addInitScript((code) => localStorage.setItem('plg.reader', code), reader);
+    const page = await context.newPage();
+    try {
+      await page.goto('/');
+      await expect(page.locator('#gallery')).toHaveAttribute('aria-busy', 'false');
+      const layout = await page.evaluate(() => {
+        const box = (/** @type {string} */ sel) => /** @type {HTMLElement} */ (document.querySelector(sel)).getBoundingClientRect();
+        const label = box('#reader-label');
+        const lead = box('#reader-label .speak.lead');
+        return {
+          menuTop: box('#site-menu').top, brandTop: box('.site-header .brand').top,
+          leadInside: lead.left >= label.left - 1 && lead.right <= label.right + 1,
+          leadLines: Math.round(lead.height / parseFloat(getComputedStyle(document.querySelector('#reader-label .speak.lead')).lineHeight || '16')),
+        };
+      });
+      expect(Math.abs(layout.menuTop - layout.brandTop), `${reader} at ${width}px`).toBeLessThan(16);
+      expect(layout.leadInside, `${reader} at ${width}px: the lead overran its box`).toBe(true);
+    } finally {
+      await context.close();
+    }
+  }
+});
+
+test('folding the picker leaves what the reader was looking at where it was', async ({ page }) => {
+  // Shutting the grid left the scroll position alone while everything under it moved
+  // up by the grid's height, so the cards the reader was looking at were thrown up
+  // the screen and the toggle went off the top of it.
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto('/');
+  await expect(page.locator('#gallery')).toHaveAttribute('aria-busy', 'false');
+  await page.evaluate(() => scrollTo(0, 400));
+  const firstCardTop = () => page.evaluate(() => {
+    const header = /** @type {HTMLElement} */ (document.querySelector('.site-header')).getBoundingClientRect().bottom;
+    const card = [...document.querySelectorAll('#gallery .card')]
+      .find((c) => c.getBoundingClientRect().bottom > header);
+    return { id: /** @type {HTMLElement} */ (card)?.dataset.lang, top: Math.round(/** @type {HTMLElement} */ (card).getBoundingClientRect().top) };
+  });
+  const before = await firstCardTop();
+  const toggle = await page.locator('#want-toggle').boundingBox();
+  if (!toggle) throw new Error('no toggle on screen');
+  // By coordinates: a locator click would scroll the toggle into view first.
+  await page.mouse.click(toggle.x + 20, toggle.y + toggle.height / 2);
+  await expect(page.locator('#want-toggle')).toHaveAttribute('aria-expanded', 'false');
+  const after = await firstCardTop();
+  expect(after.id).toBe(before.id);
+  expect(Math.abs(after.top - before.top)).toBeLessThanOrEqual(2);
+});
+
+test('on a phone the floating bar drops the grid down, without leaving the cards', async ({ page }) => {
+  // Opening it scrolled back up to where the grid lives, which lost the reader's
+  // place among the cards; it opens under the bar instead, and shuts where it opened.
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  await expect(page.locator('#gallery')).toHaveAttribute('aria-busy', 'false');
+  await page.evaluate(() => scrollTo(0, 1500));
+  await expect(page.locator('.want')).toHaveClass(/want-floating/);
+  const toggle = page.locator('#want-toggle');
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  const y = () => page.evaluate(() => Math.round(scrollY));
+  const at = await y();
+  await toggle.click();
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+  await expect(page.locator('#want')).toBeInViewport();
+  expect(await y()).toBe(at);
+  await toggle.click();
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  expect(await y()).toBe(at);
 });

@@ -29,7 +29,6 @@ function openAppearance() {
   close.type = 'button';
   close.className = 'speaker-close';
   close.setAttribute('aria-label', t('gallery.previewClose'));
-  close.textContent = '×';
   close.addEventListener('click', () => panel.close());
   panel.append(close, head, themeSection());
   panel.addEventListener('close', () => panel.remove());

@@ -159,7 +159,7 @@ export function openSpeakerSettings({ axes, languages, profile, onChange, extra 
   // -- so the heading is the general one and the voice part introduces itself.
   // Every change is committed as it is made, so closing is closing: the corner
   // control and Done do the same thing, and the corner is where a thumb looks for it.
-  const close = el('button', { type: 'button', class: 'speaker-close', 'aria-label': t('gallery.previewClose') }, ['\u00d7']);
+  const close = el('button', { type: 'button', class: 'speaker-close', 'aria-label': t('gallery.previewClose') });
   close.addEventListener('click', () => panel.close());
   panel.append(
     close,

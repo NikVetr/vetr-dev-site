@@ -906,20 +906,37 @@ export function cardSizeControl({ geometry, value, onChange }) {
       if (id) onChange({ geometry: foldedGeometry({ ...geometry[id] }, current.fold ?? 0) });
     },
   });
-  custom.hidden = presetOf() !== '';
-  width.set(panel().pageW);
-  height.set(current.pageH);
+
+  // **A passport is one card that opens**, so it is one choice with two positions
+  // under it rather than two cards in the ladder. Open is two covers side by side,
+  // folded down the spine -- a bifold of the closed card, crease gutter and all -- so
+  // that is what it sets.
+  const passport = segmented({
+    label: t('format.card.passport'),
+    value: current.fold === 2 ? 2 : 0,
+    options: /** @type {[number, string][]} */ ([[0, 'format.card.passportClosed'], [2, 'format.card.passportOpen']])
+      .map(([n, key]) => ({ value: n, caption: t(key), title: t(key), glyph: foldGlyph(Math.max(1, n)) })),
+    onChange: (n) => onChange({ geometry: foldedGeometry({ ...geometry.passport }, n) }),
+  });
+  const wrap = document.createElement('div');
+  wrap.append(group.group, passport.group);
+  const show = () => {
+    custom.hidden = presetOf() !== '';
+    passport.group.hidden = presetOf() !== 'passport';
+    passport.select(current.fold === 2 ? 2 : 0);
+    width.set(panel().pageW);
+    height.set(current.pageH);
+  };
+  show();
 
   return {
-    group: group.group,
+    group: wrap,
     custom,
     /** @param {import('../core/types.js').Geometry} next */
     sync(next) {
       current = next;
       group.select(presetOf());
-      custom.hidden = presetOf() !== '';
-      width.set(panel().pageW);
-      height.set(next.pageH);
+      show();
     },
   };
 }
@@ -2082,20 +2099,27 @@ export function foldedGeometry(g, n) {
 /**
  * Flat, bifold or trifold, offered whatever the column count: choosing a fold
  * multiplies the panel out into the sheet, so the columns are always in threes when
- * there are three panels.
+ * there are three panels. It folds the card as it is *now* -- `sync` keeps it told --
+ * not the card the panel was built with.
  * @param {{geometry: import('../core/types.js').Geometry, onChange:(patch:{geometry:import('../core/types.js').Geometry})=>void}} config
  */
 export function foldControl({ geometry, onChange }) {
+  let current = geometry;
   const options = [0, 2, 3].map((n) => ({
     value: n,
     caption: t(n === 0 ? 'format.fold.none' : n === 2 ? 'format.fold.bifold' : 'format.fold.trifold'),
     title: t(n === 0 ? 'format.fold.none' : n === 2 ? 'format.fold.bifold' : 'format.fold.trifold'),
     glyph: foldGlyph(Math.max(1, n)),
   }));
-  return segmented({
+  const control = segmented({
     label: t('format.fold'),
     value: geometry.fold ?? 0,
     options,
-    onChange: (n) => onChange({ geometry: foldedGeometry(geometry, n) }),
+    onChange: (n) => onChange({ geometry: foldedGeometry(current, n) }),
   });
+  return {
+    group: control.group,
+    /** @param {import('../core/types.js').Geometry} next */
+    sync(next) { current = next; control.select(next.fold ?? 0); },
+  };
 }

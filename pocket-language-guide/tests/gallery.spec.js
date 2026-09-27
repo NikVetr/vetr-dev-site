@@ -387,3 +387,30 @@ test('a sheet the reader has looked at is kept across visits', async ({ page }) 
       `card moved ${(after.height - before.height).toFixed(0)}px when the foot filled`)
       .toBeLessThan(2);
   });
+
+test('appearance is a light switch: the device decides until the reader does', async ({ browser }) => {
+  // No "match the device" position to choose: until it is flipped the page follows
+  // the device and the switch shows where the device has it; a flip is kept.
+  const context = await browser.newContext({ colorScheme: 'dark' });
+  const page = await context.newPage();
+  try {
+    await page.goto('/');
+    await page.locator('#site-menu').click();
+    const lamp = page.getByRole('switch');
+    await expect(lamp).toHaveAttribute('aria-checked', 'true');
+    expect(await page.evaluate(() => localStorage.getItem('plg.theme'))).toBeNull();
+    await lamp.click();
+    await expect(lamp).toHaveAttribute('aria-checked', 'false');
+    expect(await page.evaluate(() => document.documentElement.dataset.theme)).toBe('light');
+    await page.reload();
+    expect(await page.evaluate(() => document.documentElement.dataset.theme)).toBe('light');
+    // The cross that closes the dialog sits in the middle of its circle: it is drawn.
+    await page.locator('#site-menu').click();
+    const close = page.locator('dialog[open] .speaker-close');
+    await expect(close).toHaveText('');
+    await close.click();
+    await expect(page.locator('dialog[open]')).toHaveCount(0);
+  } finally {
+    await context.close();
+  }
+});

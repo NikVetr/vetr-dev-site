@@ -769,9 +769,9 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
   /* **The bar folds and floats.** Sticky was the first answer and iOS Chrome would
      not scroll back past it; so on a phone the toggle is not sticky at all.
      `ui/gallery.js` folds the grid once the reader has scrolled past it and pins the
-     toggle under the header as a bar; a tap on the bar scrolls back and opens the
-     grid, and scrolling on down folds it again. Near the top the bar sits in its
-     own place, folded or open as the reader last left it. */
+     toggle under the header as a bar; a tap on the bar drops the grid down under it,
+     and scrolling on folds it again. Near the top the bar sits in its own place,
+     folded or open as the reader last left it. */
   .want-toggle { position: static; }
   /* A card scrolled to from the language grid stops under the floating bar, not
      behind it. */
@@ -788,15 +788,15 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
     border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--space-1);
     mask-image: linear-gradient(to bottom, #000 calc(100% - 2rem), transparent);
   }
-  /* Folding and unfolding travel rather than blink: `display` transitions
-     discretely with `allow-discrete`, and `@starting-style` gives the unfold a
-     height to grow from. Browsers without either simply switch. */
-  .want-grid {
-    transition: max-block-size 0.25s ease, opacity 0.2s ease, display 0.25s allow-discrete;
-    opacity: 1;
+  /* **Opened from the floating bar, it drops down under the bar**, over the cards,
+     rather than opening in its own place -- which is above the screen, so opening it
+     meant scrolling back to it and losing the reader's place. Out of the flow, so the
+     page does not move under it; its own scroll ends at its own edge. */
+  .want-dropped .want-grid:not([hidden]) {
+    position: fixed; inset-inline: 1rem; top: calc(var(--header-h, 0px) + 2.2rem); z-index: 2;
+    max-block-size: min(60dvh, 30rem); overflow-y: auto; overscroll-behavior: contain;
+    background: var(--paper); box-shadow: 0 6px 18px rgb(0 0 0 / 18%);
   }
-  .want-grid[hidden] { max-block-size: 0; opacity: 0; padding-block: 0; }
-  @starting-style { .want-grid { max-block-size: 0; opacity: 0; } }
   /* Fifty-two language buttons are a compact block beside the heading on a desktop
      and 922pt of wall on a phone, which put the first card 1230pt down: a screen and
      a half of controls before any of the thing they control. Capped and scrolled,
@@ -1640,24 +1640,33 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
 .lang-picker-option.current { font-weight: 600; }
 .lang-picker-aside { color: var(--muted); font-size: var(--fs--1); text-align: end; }
 
-/* A static collage: the reader's own label leads, the rest recede. No motion. */
+/* A static collage: the reader's own label leads, the rest recede. No motion.
+   **One line, always**: the header does not wrap, and `ui/gallery.js` drops the
+   farthest labels until the row fits -- they repeat one idea, so fewer of them loses
+   nothing -- then eases the lead's size down if even it alone does not. */
 #reader-label {
-  display: flex; align-items: baseline; gap: 0.45em; flex-wrap: wrap;
-  justify-content: flex-end; row-gap: 0;
+  display: flex; align-items: baseline; gap: 0.45em; flex-wrap: nowrap;
+  justify-content: flex-end; min-inline-size: 0;
 }
 .speak { white-space: nowrap; color: var(--muted); }
 .speak.lead { color: var(--ink); font-weight: 600; }
-
-@media (max-width: 760px) {
-  /* **The nearest two, not all of them and not one.** Five labels push the picker off
-     a narrow screen, and the lead alone says nothing about the app being multilingual
-     -- but the two behind it are now the device's own language and the language of the
-     place the reader appears to be in, which is the pair worth the room. Counted from
-     the end because the lead is last in source order and the nearest guesses are
-     beside it. */
-  .speak:not(:nth-last-child(-n+3)) { display: none; }
-  .speak:not(.lead) { font-size: 0.72rem; }
-}
+/* Each receding label in a hue of its own as well as fainter, so they read as other
+   languages rather than as grey noise beside the lead. The section colours, lifted in
+   the dark. */
+.speak.hue-1 { color: var(--accent); }
+.speak.hue-2 { color: var(--ok); }
+.speak.hue-3 { color: light-dark(#b45100, #f0a15e); }
+.speak.hue-4 { color: light-dark(#6d3aa5, #b89cf0); }
+.speak.hue-5 { color: var(--alert); }
+.site-header .container-gallery { flex-wrap: nowrap; column-gap: var(--space-2); }
+.site-header .container-gallery .reader-picker { flex: 1 1 auto; justify-content: flex-end; }
+.site-header .container-gallery #reader { flex: none; }
+.site-header .container-gallery .lang-picker-button { min-width: 0; }
+/* The last things `fitHeader` gives up before letting the lead wrap: the brand's word,
+   keeping its mark, and then the lead's one line. */
+.brand.mark-only [data-i18n="nav.brand"] { display: none; }
+#reader-label.wraps { flex-wrap: wrap; }
+#reader-label.wraps .speak.lead { white-space: normal; text-align: end; line-height: 1.1; }
 
 /* --- glyph settings controls ---------------------------------------------- */
 
@@ -1670,6 +1679,7 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
 /* Segments hang from the top of their row, so a caption that wraps to two lines
    ("Credit-card size") cannot push its row-mates' glyphs down. */
 .segmented { display: flex; flex-wrap: wrap; align-items: start; gap: 4px; }
+.segmented[hidden] { display: none; }
 .segment {
   display: flex; flex-direction: column; align-items: center; gap: 2px;
   padding: 4px 5px 3px; min-width: 44px; border: 1px solid var(--line);
@@ -2075,11 +2085,20 @@ dialog.speaker-settings {
    dialog's; large enough for a thumb, quiet enough not to read as a control the
    form needs. */
 .speaker-settings { position: relative; }
+/* The cross is drawn, not typed: a × glyph sits on the font's math axis, below the
+   middle of the circle, and differently in every face. Two bars about the centre are
+   centred by construction. */
 .speaker-close {
   position: absolute; inset-block-start: var(--space-2); inset-inline-end: var(--space-2);
-  inline-size: 2.4rem; block-size: 2.4rem; border: 0; border-radius: 50%;
-  background: var(--surface); color: var(--ink); font-size: 1.5rem; line-height: 1; cursor: pointer;
+  inline-size: 2rem; block-size: 2rem; padding: 0; border: 0; border-radius: 50%;
+  background: var(--surface); color: var(--ink); cursor: pointer;
 }
+.speaker-close::before, .speaker-close::after {
+  content: ''; position: absolute; inset-block-start: 50%; inset-inline-start: 50%;
+  inline-size: 0.95rem; block-size: 2px; border-radius: 1px; background: currentColor;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.speaker-close::after { transform: translate(-50%, -50%) rotate(-45deg); }
 .speaker-close:hover, .speaker-close:focus-visible { background: var(--line); }
 dialog.speaker-settings::backdrop { background: rgb(17 24 32 / 45%); }
 dialog.speaker-settings h2 { margin: 0 0 var(--space-1); font-size: var(--fs-2); }
@@ -2128,24 +2147,41 @@ dialog.speaker-settings h2 { margin: 0 0 var(--space-1); font-size: var(--fs-2);
 .signal-sos { font-weight: 700; letter-spacing: 0.1em; border-color: #b3261e; color: #b3261e; }
 body.page-signal { --logo-hue: 195deg; }
 
-/* The appearance control: a word and a select, in the dialog and the studio alike. */
-.theme-control { display: flex; align-items: center; gap: var(--space-2); font-size: var(--fs-0); }
-.theme-control select { font: inherit; padding: 0.3em 0.5em; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--paper); color: var(--ink); }
+/* The appearance control: a light switch between a sun and a moon, in the dialogs and
+   the studio alike. It changes state without travelling, as nothing else here moves. */
+.theme-switch {
+  display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.3rem;
+  border: 0; border-radius: var(--radius-sm); background: none; color: var(--muted); cursor: pointer;
+}
+.theme-switch svg { inline-size: 1.15rem; block-size: 1.15rem; }
+.theme-switch-track {
+  position: relative; inline-size: 2.75rem; block-size: 1.5rem; border-radius: 999px;
+  background: var(--surface-2); border: 1px solid var(--line);
+}
+.theme-switch-knob {
+  position: absolute; inset-block-start: 50%; inset-inline-start: 0.15rem; transform: translateY(-50%);
+  inline-size: 1.15rem; block-size: 1.15rem; border-radius: 50%;
+  background: light-dark(#ffffff, #f2f5f8); box-shadow: 0 1px 3px rgb(0 0 0 / 35%);
+}
+.theme-switch[aria-checked="true"] .theme-switch-track { background: var(--accent); border-color: var(--accent); }
+.theme-switch[aria-checked="true"] .theme-switch-knob { inset-inline-start: calc(100% - 1.3rem); }
+.theme-switch[aria-checked="false"] svg:first-child, .theme-switch[aria-checked="true"] svg:last-child { color: var(--ink); }
+.theme-switch:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* --- the site menu ---------------------------------------------------------- */
 /* Three bars at the end of every header: Settings, wherever the reader is. Drawn
    the way the board's own bars are, so it is one control across the app. */
 .site-menu {
   flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
-  inline-size: 2.4rem; block-size: 2.4rem; padding: 0; border-radius: var(--radius-sm);
+  inline-size: 2rem; block-size: 2rem; padding: 0; border-radius: var(--radius-sm);
 }
 .site-menu .board-menu-bars, .site-menu .board-menu-bars::before, .site-menu .board-menu-bars::after {
-  display: block; inline-size: 1.05rem; block-size: 2px; background: currentColor; border-radius: 1px;
+  display: block; inline-size: 0.9rem; block-size: 2px; background: currentColor; border-radius: 1px;
 }
 .site-menu .board-menu-bars { position: relative; }
 .site-menu .board-menu-bars::before, .site-menu .board-menu-bars::after { content: ''; position: absolute; left: 0; }
-.site-menu .board-menu-bars::before { top: -6px; }
-.site-menu .board-menu-bars::after { top: 6px; }
+.site-menu .board-menu-bars::before { top: -5px; }
+.site-menu .board-menu-bars::after { top: 5px; }
 .site-settings { min-inline-size: min(92vw, 22rem); }
 
 /* --- text fields under a finger ------------------------------------------------ */

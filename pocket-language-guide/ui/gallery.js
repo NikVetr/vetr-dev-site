@@ -311,6 +311,7 @@ function setWantOpen(open, chosen) {
   if (!toggle || !grid) return;
   toggle.setAttribute('aria-expanded', String(open));
   grid.hidden = !open;
+  if (!open) want?.classList.remove('want-dropped');
   // The chosen language reads as the answer to the label's question, so it is shown
   // only while the question is folded up -- with the grid open it is already marked
   // on the button itself.
@@ -321,9 +322,9 @@ function setWantOpen(open, chosen) {
  * On a phone, the language grid folds away as the reader scrolls past it and its
  * toggle floats under the header as a bar -- fifty buttons are a screen and a half,
  * and the thing the page is for is below them. Scrolling back to the top puts the
- * bar back in its own place, still folded; a tap opens the grid again; scrolling on
- * down folds it again. Nothing of this on a desktop, where the grid sits beside the
- * sentence and there is room for all of it.
+ * bar back in its own place, still folded; a tap on the floating bar drops the grid
+ * down under it, over the cards; scrolling on folds it again. Nothing of this on a
+ * desktop, where the grid sits beside the sentence and there is room for all of it.
  * @param {HTMLElement} toggle
  */
 function foldOnScroll(toggle) {
@@ -340,8 +341,13 @@ function foldOnScroll(toggle) {
     // The bar floats the moment its own place goes under the header, so it is never
     // off the screen: it was scrolling away with the grid and reappearing only once
     // the whole grid had gone, which read as a bar that blinks.
-    want.classList.toggle('want-floating', scrollY > want.offsetTop - headerHeight());
+    const floating = scrollY > want.offsetTop - headerHeight();
+    want.classList.toggle('want-floating', floating);
     const open = toggle.getAttribute('aria-expanded') === 'true';
+    const dropped = want.classList.contains('want-dropped');
+    // A grid dropped down from the floating bar belongs to the bar: it shuts when the
+    // bar goes back to its place, and when the page scrolls under it.
+    if (dropped && (!floating || past)) { setWantOpen(false); return; }
     // What the scroll folded, the scroll back unfolds; what the reader folded, or a
     // choice folded, stays folded until they ask.
     if (past && open) { setWantOpen(false); foldedByScroll = true; }
@@ -465,8 +471,10 @@ function renderSpeakCollage(languages, reader, guessed) {
     // above made Hebrew, Persian and Urdu reachable.
     if (['Arab', 'Hebr', 'Thaa'].includes(lang.script)) span.dir = 'rtl';
     // Each step back is fainter and slightly smaller, so the eye lands on the
-    // reader's own first and reads the rest as context rather than as a list.
+    // reader's own first and reads the rest as context rather than as a list -- and
+    // in a hue of its own, so they read as other languages rather than grey noise.
     if (depth > 0) {
+      span.classList.add(`hue-${depth}`);
       span.style.opacity = String(Math.max(FAINTEST, NEAREST - (depth - 1) * fade));
       span.style.fontSize = `${Math.max(0.66, 0.86 - (depth - 1) * 0.04)}rem`;
       // The repetitions say "many languages" by repeating one idea, so they are
@@ -481,6 +489,47 @@ function renderSpeakCollage(languages, reader, guessed) {
     ...others.slice().reverse().map((lang, i) => chip(lang, others.length - i)),
     ...(mine ? [chip(mine, 0)] : []),
   );
+  fitHeader();
+}
+
+/**
+ * Keep the site header to one line: drop the farthest labels of the collage until the
+ * row fits, then ease the lead's size down if even it alone does not. The header does
+ * not wrap -- a second line pushed the settings button under the picker -- and the
+ * labels repeat one idea, so fewer of them loses nothing.
+ */
+function fitHeader() {
+  const label = document.getElementById('reader-label');
+  if (!label) return;
+  // The label's own content against its own box, on both sides: it is shrunk by the
+  // row and overflows towards the brand, where no scroll width counts it.
+  const over = () => {
+    const box = label.getBoundingClientRect();
+    const shown = [...label.children].filter((c) => !(/** @type {HTMLElement} */ (c).hidden));
+    if (!shown.length) return false;
+    const first = shown[0].getBoundingClientRect();
+    const last = shown[shown.length - 1].getBoundingClientRect();
+    return Math.min(first.left, last.left) < box.left - 1 || Math.max(first.right, last.right) > box.right + 1;
+  };
+  const chips = /** @type {HTMLElement[]} */ ([...label.querySelectorAll('.speak:not(.lead)')]);
+  const brand = document.querySelector('.site-header .brand');
+  for (const chip of chips) chip.hidden = false;
+  label.style.fontSize = '';
+  label.classList.remove('wraps');
+  brand?.classList.remove('mark-only');
+  for (const chip of chips) {
+    if (!over()) return;
+    chip.hidden = true;
+  }
+  for (const size of [0.9, 0.8, 0.75]) {
+    if (!over()) return;
+    label.style.fontSize = `${size}em`;
+  }
+  // A lead that is a whole sentence -- Ukrainian's, Malayalam's -- can still not fit a
+  // phone beside the brand. The brand's word goes before the lead is allowed a second
+  // line; never a word of the lead itself.
+  if (over()) brand?.classList.add('mark-only');
+  if (over()) label.classList.add('wraps');
 }
 
 async function main() {
@@ -509,6 +558,8 @@ async function main() {
   applyStatic();
   wireSiteMenu();
   trackHeaderHeight();
+  const headerRow = document.querySelector('.site-header .container');
+  if (headerRow) new ResizeObserver(fitHeader).observe(headerRow);
 
   // The face count and type scale the pre-render settled on, kept rather than
   // discarded: they are the answer to the expensive half of solving a sheet, and
@@ -664,13 +715,24 @@ async function main() {
     if (toggle && !toggle.dataset.wired) {
       toggle.dataset.wired = '1';
       toggle.addEventListener('click', () => {
+        // **What the reader was looking at stays where it was.** Shutting the grid
+        // left the scroll position alone while everything under it moved up by the
+        // grid's height, which read as the page throwing itself down; and opening it
+        // from the floating bar scrolled back to where the grid lives, which lost the
+        // reader's place among the cards. So the first card in view -- or the toggle,
+        // when no card is -- is held at its place on the screen, and from the floating
+        // bar the grid drops down under it instead (the stylesheet's `want-floating`).
+        const cards = [...document.querySelectorAll('#gallery .card')];
+        const anchor = cards.find((c) => {
+          const box = c.getBoundingClientRect();
+          return box.bottom > headerHeight() && box.top < innerHeight;
+        }) ?? toggle;
+        const before = anchor.getBoundingClientRect().top;
         const opening = toggle.getAttribute('aria-expanded') === 'false';
-        // Opening from the floating bar: back to where the grid lives first, or the
-        // grid would open somewhere above the viewport.
-        if (opening && want?.classList.contains('want-floating')) {
-          scrollTo({ top: Math.max(0, want.offsetTop - headerHeight()), behavior: 'instant' });
-        }
+        want?.classList.toggle('want-dropped', opening && want.classList.contains('want-floating'));
         setWantOpen(opening);
+        const moved = anchor.getBoundingClientRect().top - before;
+        if (moved) scrollBy({ top: moved, behavior: 'instant' });
       });
       foldOnScroll(toggle);
     }

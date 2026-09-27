@@ -63,8 +63,8 @@
       "faces": 6,
       "captionKey": "format.card.creditCard"
     },
-    "passport-closed": {
-      "name": "Passport, closed · 2 columns",
+    "passport": {
+      "name": "Passport · 2 columns",
       "pageW": 249.45,
       "pageH": 354.33,
       "marginTop": 5,
@@ -74,22 +74,8 @@
       "columns": 2,
       "columnGap": 3.5,
       "faces": 4,
-      "captionKey": "format.card.passportClosed",
-      "note": "88 x 125 mm, the ICAO passport cover: slips inside the cover or a passport wallet."
-    },
-    "passport-open": {
-      "name": "Passport, open · 4 columns",
-      "pageW": 498.9,
-      "pageH": 354.33,
-      "marginTop": 5,
-      "marginBottom": 6,
-      "marginLeft": 6,
-      "marginRight": 6,
-      "columns": 4,
-      "columnGap": 3.5,
-      "faces": 4,
-      "captionKey": "format.card.passportOpen",
-      "note": "176 x 125 mm, an open passport: folds once down the spine to the closed size."
+      "captionKey": "format.card.passport",
+      "note": "88 x 125 mm, the ICAO passport cover: slips inside the cover or a passport wallet. Open is this card as a bifold -- two covers side by side, folded down the spine -- chosen under the card size rather than kept as a second preset."
     },
     "phone-1col": {
       "name": "Phone screen · 1 column",

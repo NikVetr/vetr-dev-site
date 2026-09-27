@@ -561,6 +561,7 @@ export function createFormatPanel(input) {
   // Which phone, once "Phone screen" is chosen. Gated with the clock band, because
   // both exist only for a screen.
   const phone = phoneControl({ geometry: presets.geometry, value: spec.geometry, onChange: emit });
+  const fold = foldControl({ geometry: spec.geometry, onChange: emit });
   const phoneField = panelField(t('format.phone'), [phone.group]);
 
   const reserve = reserveControl({ value: spec.geometry, onChange: emit });
@@ -740,7 +741,7 @@ export function createFormatPanel(input) {
     reserveField,
     panelField(t('format.columns'), [columns.group]),
     // Where the card folds, if it does: a wider gutter and a dashed line there.
-    panelField(t('format.fold'), [foldControl({ geometry: spec.geometry, onChange: emit }).group]),
+    panelField(t('format.fold'), [fold.group]),
     panelField(t('format.faces'), [faces.group]),
     panelField(t('format.priority'), [priority.group]),
     panelField(t('format.typeface'), [typefaceControl.group]),
@@ -786,6 +787,7 @@ export function createFormatPanel(input) {
       size.sync(next.geometry);
       reserve.sync(next.geometry);
       phone.sync(next.geometry);
+      fold.sync(next.geometry);
       columns.select(next.geometry.columns);
       faces.select(next.autoFaces ? 0 : next.geometry.faces);
       priority.select(next.priority);

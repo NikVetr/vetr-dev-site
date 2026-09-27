@@ -271,6 +271,24 @@ test.describe('studio', () => {
     expect(all.included).toBeGreaterThan(included.included);
   });
 
+  test('a passport is one card, closed or open', async ({ page }) => {
+    // It was two cards in the ladder. Open is the closed card as a bifold -- two
+    // covers side by side, folded down the spine -- so it is a position under the one
+    // card, shown only when that card is chosen.
+    await page.goto(STUDIO);
+    await expect(page.locator('.face.focused')).toBeVisible();
+    const card = page.getByRole('radiogroup', { name: 'Card size' });
+    await expect(card.getByRole('radio', { name: /^Passport/ })).toHaveCount(1);
+    const sub = page.getByRole('radiogroup', { name: 'Passport' });
+    await expect(sub).toBeHidden();
+    await card.getByRole('radio', { name: 'Passport', exact: true }).click();
+    await expect(sub).toBeVisible();
+    await sub.getByRole('radio', { name: 'Passport, open' }).click();
+    await expect.poll(() => page.locator('.face.focused svg').getAttribute('width')).toBe('498.9pt');
+    await expect(page.getByRole('radiogroup', { name: 'Fold' }).getByRole('radio', { name: 'Bifold' }))
+      .toHaveAttribute('aria-checked', 'true');
+  });
+
   test('a CSV round trip merges by concept_id instead of duplicating', async ({ page }) => {
     await page.goto(STUDIO);
     const before = await counts(page);
