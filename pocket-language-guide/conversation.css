@@ -1272,4 +1272,12 @@ dialog.board-menu-panel::backdrop { background: rgb(17 24 32 / 25%); }
 .board-editor-shipped { list-style: none; margin: 0; padding: 0; }
 .board-editor-switch-row { padding: 0.45rem 0; border-bottom: 1px solid var(--line-soft); }
 .board-editor-screen { border-top: 1px solid var(--line-soft); padding-top: var(--space-2); }
+/* A button's possible answers, indented under it, each with its minus to the right. */
+.board-editor-answers { list-style: none; margin: 0; padding: 0 0 0 var(--space-3); border-inline-start: 2px solid var(--line); }
+.board-editor-answer { display: flex; align-items: center; gap: var(--space-2); padding-block: var(--space-2); }
+.board-editor-answer + .board-editor-answer { border-top: 1px solid var(--line-soft); }
+.board-editor-answer-fields { flex: 1 1 auto; display: grid; gap: var(--space-1); min-inline-size: 0; }
+.board-editor-minus { flex: none; inline-size: 2.25rem; block-size: 2.25rem; padding: 0; font-size: 1.3rem; line-height: 1; }
+.board-editor-add-answer { display: inline-flex; align-items: center; gap: 0.3em; }
+.board-editor-add-answer .board-cell-mark { position: static; translate: none; inline-size: 1.6em; block-size: 1.3em; opacity: 1; color: var(--accent); }
 .board-editor-transfer { border-top: 1px solid var(--line-soft); padding-top: var(--space-2); gap: var(--space-2); flex-wrap: wrap; }

@@ -2035,3 +2035,44 @@ test('Reply keeps even padding, a buffer, and sits with the sentence', async ({ 
   expect(m.toFrameSide).toBeGreaterThan(12);
   expect(Math.abs(m.above - m.below)).toBeLessThan(24);
 });
+
+test('a button of your own can carry the answers a stranger might give', async ({ page }) => {
+  // Trees were screens only; a button can now be a question too. Each answer is added
+  // with the plus, indented under the button, and taken away with its own minus --
+  // none shown until asked for, so the form stays three boxes by default.
+  await page.goto(BOARD);
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('#board-add-bar').click();
+  const box = page.locator('.board-editor');
+  const form = box.locator('.board-editor-form').first();
+  const fields = form.locator(':scope > .board-editor-field input');
+  await fields.nth(0).fill('water');
+  await fields.nth(1).fill('Is there water?');
+  await fields.nth(2).fill('有水吗？');
+  const rows = form.locator('.board-editor-answer');
+  await expect(rows).toHaveCount(0);
+  const add = form.getByRole('button', { name: 'Add an answer they might give' });
+  await add.click();
+  await add.click();
+  await rows.nth(0).locator('input').nth(0).fill('有');
+  await rows.nth(0).locator('input').nth(1).fill('Yes');
+  await rows.nth(1).locator('input').nth(0).fill('没有');
+  await rows.nth(1).locator('input').nth(1).fill('No');
+  await add.click();
+  await rows.nth(2).getByRole('button', { name: 'Remove this answer' }).click();
+  await expect(rows).toHaveCount(2);
+  await form.getByRole('button', { name: 'Save', exact: true }).click();
+  await box.locator('.board-editor-close').click();
+
+  await page.locator('.board-cell', { hasText: 'water' }).click();
+  await expect(page.locator('.board-message-text')).toHaveText('有水吗？');
+  await page.locator('.board-reply').click();
+  // Their answers, and "none of these" after them.
+  await expect(page.locator('.board-answer')).toHaveCount(3);
+  const said = await page.locator('.board-answer').allTextContents();
+  expect(said[0]).toContain('有');
+  expect(said[1]).toContain('没有');
+  await page.locator('.board-answer').first().click();
+  // Read back to the owner in their own words.
+  await expect(page.locator('.board-message-text')).toHaveText('Yes');
+});

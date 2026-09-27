@@ -190,3 +190,15 @@ test('a file of buttons is read for its own pair, and names only its own screens
   const backup = readButtons(JSON.stringify(buildPackage({ boards: SCREENED })), 'zh-Hans__en');
   assert.ok(!backup.ok && backup.problems[0] === 'not a file of buttons');
 });
+
+test('the answers a button carries travel with it, and must be pairs of text', () => {
+  const asks = { ...MINE, phrases: { p1: { ...MINE.phrases.p1, replies: [{ owner: 'Yes', listener: '有' }] } } };
+  const got = round({ boards: asks }, KNOWN);
+  assert.equal(got.ok, true);
+  assert.deepEqual(got.ok && got.data.boards?.phrases.p1.replies, [{ owner: 'Yes', listener: '有' }]);
+  // One side missing is not an answer; neither is a bare string where the list goes.
+  for (const replies of [[{ owner: 'Yes' }], 'Yes']) {
+    const bad = round({ boards: { ...MINE, phrases: { p1: { ...MINE.phrases.p1, replies } } } }, KNOWN);
+    assert.ok(!bad.ok && bad.problems.includes('phrase p1: replies are not a list of answers'));
+  }
+});

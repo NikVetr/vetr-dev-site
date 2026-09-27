@@ -118,6 +118,10 @@ function checkButtons(phrases, placements, where, problems) {
     }
     if (typeof p.id === 'string' && p.id !== id) problems.push(`phrase ${id}: its own id says ${p.id}`);
     if (p.screen !== undefined && p.screen !== true) problems.push(`phrase ${id}: screen is not true`);
+    if (p.replies !== undefined && (!Array.isArray(p.replies) || !p.replies.every(
+      (/** @type {any} */ r) => plain(r) && typeof r.owner === 'string' && typeof r.listener === 'string'))) {
+      problems.push(`phrase ${id}: replies are not a list of answers`);
+    }
     // A half-written phrase travels. It is a legitimate saved state -- the reader
     // may be coming back to it -- and `resolvePhrase` refuses to show one, so it
     // arrives exactly as it left: stored, on its screens, and not yet shown.

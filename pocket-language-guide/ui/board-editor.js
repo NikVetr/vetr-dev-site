@@ -24,6 +24,7 @@ import {
   placementsOf, movePlacement, showBuiltIn, placedOn, screenContents, graftContents,
 } from './board-store.js';
 import { buildButtons, readButtons } from '../core/personal.js';
+import { answerMark } from './conversation-view.js';
 import { t } from './i18n.js';
 
 /** @param {string} tag @param {Record<string,string>} attrs @param {(Node|string)[]} kids */
@@ -165,13 +166,46 @@ export function openBoardEditor({ at, pair, owner, listener, listenerDir, state:
     theirs.addEventListener('input', sync);
     sync();
 
+    // **What the stranger might answer, one at a time.** Each answer is a pair of
+    // sentences like the button's own, indented under it with a minus to take it away;
+    // none is shown until the plus asks for one, so the form a reader meets is still
+    // three boxes. A button with answers is a question they can reply to by tapping.
+    const answers = el('ol', { class: 'board-editor-answers' });
+    const answerRow = (/** @type {{owner:string, listener:string}} */ held = { owner: '', listener: '' }) => {
+      const said = /** @type {HTMLInputElement} */ (el('input', { type: 'text', lang: listener, dir: listenerDir }));
+      const meant = /** @type {HTMLInputElement} */ (el('input', { type: 'text' }));
+      said.value = held.listener;
+      meant.value = held.owner;
+      const drop = el('button', {
+        type: 'button', class: 'ghost board-editor-minus', text: '\u2212',
+        'aria-label': t('editor.removeAnswer'), title: t('editor.removeAnswer'),
+      });
+      const item = el('li', { class: 'board-editor-answer' },
+        [el('div', { class: 'board-editor-answer-fields' },
+          [field('editor.answerListener', said), field('editor.answerOwner', meant)]), drop]);
+      drop.addEventListener('click', () => item.remove());
+      answers.append(item);
+      return said;
+    };
+    for (const reply of existing?.replies ?? []) answerRow(reply);
+    const addAnswer = el('button', {
+      type: 'button', class: 'ghost board-editor-add-answer',
+      'aria-label': t('editor.addAnswer'), title: t('editor.addAnswer'),
+    }, [el('span', { text: '+', 'aria-hidden': 'true' }), answerMark()]);
+    addAnswer.addEventListener('click', () => answerRow().focus());
+
     const save = el('button', { type: 'button', class: 'primary', text: t('editor.save') });
     save.addEventListener('click', async () => {
+      const replies = [...answers.querySelectorAll('.board-editor-answer')].map((item) => {
+        const [said, meant] = /** @type {HTMLInputElement[]} */ ([...item.querySelectorAll('input')]);
+        return { owner: meant.value.trim(), listener: said.value.trim() };
+      }).filter((r) => r.owner || r.listener);
       const values = {
         label: /** @type {HTMLInputElement} */ (label).value.trim(),
         owner: /** @type {HTMLInputElement} */ (own).value.trim(),
         listener: /** @type {HTMLInputElement} */ (theirs).value.trim(),
         pair,
+        replies: replies.length ? replies : undefined,
       };
       if (!values.label && !values.owner) return;
       if (existing) {
@@ -193,7 +227,8 @@ export function openBoardEditor({ at, pair, owner, listener, listenerDir, state:
       el('p', { class: 'small muted', text: t('editor.noTranslation') }),
       el('div', { class: 'board-editor-previewed' },
         [el('span', { class: 'small muted', text: t('editor.preview') }), preview]),
-      el('div', { class: 'row' }, [save]),
+      answers,
+      el('div', { class: 'row' }, [addAnswer, el('span', { class: 'spacer' }), save]),
     ]);
   };
 

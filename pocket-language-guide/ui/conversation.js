@@ -484,6 +484,9 @@ async function main() {
   // Hydrated once. The page is authoritative from here; the editor hands back a new
   // value rather than the page asking the disk what was just written.
   let personal = readPersonal();
+  /** The reply sets the reader's own questions carry, rebuilt with the screen by `withOwn`.
+   * @type {Record<string, {buttons: import('../core/conversation.js').BoardButton[]}>} */
+  let ownSets = {};
   // Which screens a placement may name. Only this board's, because that is what is
   // loaded -- a package for another board is not refused, it simply has nothing here
   // to check against, which is the plain-backup case.
@@ -501,7 +504,27 @@ async function main() {
    */
   const withOwn = (node) => {
     const mine = placedOn(personal.data, `${boardId}/${state.path.at(-1)}`, pair);
-    ctx.custom = Object.fromEntries(mine.map((p) => [p.id, { owner: p.owner, listener: p.listener }]));
+    /** @type {Record<string, {owner:string, listener:string}>} */
+    const custom = Object.fromEntries(mine.map((p) => [p.id, { owner: p.owner, listener: p.listener }]));
+    // **A phrase of the reader's own with answers is a question** like the board's:
+    // its answers become a reply set of their own, each resolved from the store as the
+    // phrase itself is, and "none of these" after them -- so a stranger whose answer is
+    // not there can still say so, and be offered a translator.
+    ownSets = {};
+    for (const p of mine) {
+      const replies = (p.replies ?? []).filter((r) => r.owner && r.listener);
+      if (!replies.length) continue;
+      ownSets[`own/${p.id}`] = {
+        buttons: /** @type {import('../core/conversation.js').BoardButton[]} */ ([
+          ...replies.map((r, i) => {
+            custom[`${p.id}/${i}`] = r;
+            return { id: `${p.id}/${i}`, kind: 'message', phraseRef: { kind: 'custom', id: `${p.id}/${i}` } };
+          }),
+          { id: 'none-of-these', kind: 'message', phraseRef: { kind: 'corpus', id: 'board-answers.none-of-these' } },
+        ]),
+      };
+    }
+    ctx.custom = custom;
     const hidden = /** @type {import('./board-store.js').BoardPersonal} */ (personal.data).hidden?.[`${boardId}/${state.path.at(-1)}`] ?? [];
     return {
       ...node,
@@ -511,7 +534,8 @@ async function main() {
         // the node the path moves to, and what is on it is placed under that id.
         ...mine.map((p) => /** @type {import('../core/conversation.js').BoardButton} */ (p.screen
           ? { id: p.id, kind: 'submenu', nodeId: p.id, colour: 'stay' }
-          : { id: p.id, kind: 'message', colour: 'stay', phraseRef: { kind: 'custom', id: p.id } })),
+          : { id: p.id, kind: 'message', colour: 'stay', phraseRef: { kind: 'custom', id: p.id },
+            ...(ownSets[`own/${p.id}`] ? { replySetId: `own/${p.id}` } : {}) })),
       ],
     };
   };
@@ -679,7 +703,7 @@ async function main() {
     if (!phrase) { dispatch({ type: 'dismiss' }); return; }
 
     if (state.view === 'message') {
-      const set = button.replySetId ? board.replySets?.[button.replySetId] : null;
+      const set = button.replySetId ? board.replySets?.[button.replySetId] ?? ownSets[button.replySetId] : null;
       // **"Excuse me" first, when the owner wants it.** Both sides of the message
       // open with the corpus's own "excuse me" row for their language -- one
       // reviewed sentence in front of another, never a template -- except on the
@@ -723,7 +747,7 @@ async function main() {
       return;
     }
 
-    const set = button.replySetId ? board.replySets?.[button.replySetId] : null;
+    const set = button.replySetId ? board.replySets?.[button.replySetId] ?? ownSets[button.replySetId] : null;
     if (!set) { dispatch({ type: 'dismiss' }); return; }
 
     if (state.view === 'reply') {

@@ -37,6 +37,9 @@ const KEY = 'plg.boards';
  * @property {true} [screen]    a screen of the reader's own rather than a sentence: a
  *   button that opens its own grid, titled by `label`, whose buttons are placed at
  *   `board/<its id>`. `owner` and `listener` stay empty.
+ * @property {{owner:string, listener:string}[]} [replies]  what the stranger might
+ *   answer, each as the same pair of sentences a phrase is: a phrase that has them is
+ *   a question they can answer by tapping, as a board's own questions are
  */
 
 /**
@@ -147,7 +150,8 @@ const newId = () => `own-${Date.now().toString(36)}-${Math.random().toString(36)
  * A screen is added the same way, with `screen: true` and no sentences, and its own
  * buttons then go on `board/<its id>`.
  * @param {BoardPersonal} data
- * @param {{label:string, owner:string, listener:string, pair:string, screen?:true}} phrase
+ * @param {{label:string, owner:string, listener:string, pair:string, screen?:true,
+ *   replies?:{owner:string, listener:string}[]}} phrase
  * @param {string} at  `board/node`
  */
 export function addPhrase(data, phrase, at) {

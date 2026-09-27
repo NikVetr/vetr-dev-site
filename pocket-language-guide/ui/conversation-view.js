@@ -300,7 +300,7 @@ function lineRoom(el) {
  * Inline, and it is 500 bytes: a board is the one surface that has to work with no
  * preparation, and a sprite or an icon fetch is one more thing to have not arrived.
  */
-function answerMark() {
+export function answerMark() {
   const svg = document.createElementNS(SVG, 'svg');
   svg.setAttribute('class', 'board-cell-mark');
   svg.setAttribute('viewBox', '0 0 256 208');
