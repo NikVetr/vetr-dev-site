@@ -228,8 +228,12 @@ export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop, unit
   // so the pattern it would flash is not Morse any more; a page being left has no
   // screen to flash. Either way the lamp must not be left lit with nothing
   // watching it, so both are the same tap.
-  const onHide = () => { if (document.visibilityState === 'hidden') stopBeacon(); };
-  document.addEventListener('visibilitychange', onHide);
+  //
+  // Any change of visibility, not only one that reads `hidden`: WebKit can suspend
+  // the web process before it runs the hidden event and deliver it on return, when
+  // the page reads visible again -- the iOS simulator caught a beacon still flashing
+  // after a trip to Settings that way. A page cannot come back without having left.
+  document.addEventListener('visibilitychange', stopBeacon);
   addEventListener('pagehide', stopBeacon);
 
   const stop = () => {
@@ -238,7 +242,7 @@ export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop, unit
     torch?.release();
     torch = null;
     if (frame !== undefined) cancelAnimationFrame(frame);
-    document.removeEventListener('visibilitychange', onHide);
+    document.removeEventListener('visibilitychange', stopBeacon);
     removeEventListener('pagehide', stopBeacon);
     root.remove();
     onStop?.();

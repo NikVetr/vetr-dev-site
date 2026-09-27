@@ -130,4 +130,14 @@ test('a beacon stops when the page is hidden, and a lamp that answers late is re
   });
   await expect(beacon).toHaveCount(0);
   await expect(page.locator('#signal-start')).toHaveText(/signal/i);
+
+  // And when the event arrives late, on the way back, with the page already reading
+  // visible: WebKit can deliver the hidden event after it resumes the page.
+  await page.evaluate(() => {
+    Object.defineProperty(document, 'visibilityState', { value: 'visible', configurable: true });
+  });
+  await page.locator('#signal-start').click();
+  await expect(beacon).toBeVisible();
+  await page.evaluate(() => document.dispatchEvent(new Event('visibilitychange')));
+  await expect(beacon).toHaveCount(0);
 });
