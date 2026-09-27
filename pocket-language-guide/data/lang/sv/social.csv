@@ -98,6 +98,7 @@ children.car-seat,Vi behöver en bilbarnstol.,,viː bəhˈøːvər ɛn bˈɪlbɑ
 children.stroller,barnvagn,,bˈɑːrnvaŋn,,2,sv-agent-v1;ipa=espeak
 children.playground,Finns det en lekplats?,,fˈɪns deːt ɛn lˈɛkplats,,2,sv-agent-v1;ipa=espeak
 communication.please-write-it-in-roman-letters,Kan du skriva det med latinska bokstäver?,,kan dʉ skrˈiːva deːt meːd lˈɑːtɪnskˌa bˈuːkstɛːvər,,2,gloss-only;scoped-away;sv-agent-v1;ipa=espeak
+social-basics.politeness-particles,"Thailändsk artighet: avsluta nästan varje mening med khrap om du är man, kha om du är kvinna. Ställer en kvinna en fråga säger hon i stället kha med stigande ton. Raderna här utelämnar partikeln, så lägg till den själv.",,,,2,sv-notes-v1
 board-answers.there-is-no-wait,"Ingen väntetid, du kan gå in nu.",,"ˈɪŋən vˈɛntətˌiːd, dʉ kan ɡˈoː ˈɪn nˈʉ",,2,sv-agent-v1;board-answers-v1;ipa=espeak
 board-answers.none-of-these,Inget av det här är vad jag vill säga.,,ˈɪŋət ɑːv deːt hˈɛːr ɛːr vɑːd jɑːɡ vɪl sˈɛja,,2,sv-agent-v1;board-answers-v1;ipa=espeak
 board-answers.it-is-closed,Vi har stängt.,,viː hɑːr stˈɛŋt,,2,sv-agent-v1;board-answers-v1;ipa=espeak

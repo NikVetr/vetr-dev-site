@@ -557,7 +557,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -1820,11 +1820,11 @@
     {
       "target": "es",
       "source": "ur",
-      "scale": 0.67,
+      "scale": 0.69,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 628,
+      "items": 629,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -3107,7 +3107,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 621,
+      "items": 622,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -3304,7 +3304,7 @@
     {
       "target": "zh-Hans",
       "source": "cs",
-      "scale": 0.69,
+      "scale": 0.68,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -4382,7 +4382,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -4603,7 +4603,7 @@
     {
       "target": "ja",
       "source": "cs",
-      "scale": 0.73,
+      "scale": 0.72,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -5734,7 +5734,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 626,
+      "items": 627,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -7065,7 +7065,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 628,
+      "items": 629,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -8360,11 +8360,11 @@
     {
       "target": "de",
       "source": "ur",
-      "scale": 0.58,
+      "scale": 0.57,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 627,
+      "items": 628,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -9655,7 +9655,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -10930,7 +10930,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 622,
+      "items": 623,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -12222,11 +12222,11 @@
     {
       "target": "hi",
       "source": "ur",
-      "scale": 0.52,
+      "scale": 0.5,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 629,
+      "items": 630,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -12247,14 +12247,6 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 1
-          },
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -13722,7 +13714,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 627,
+      "items": 628,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -13975,7 +13967,7 @@
     {
       "target": "th",
       "source": "cs",
-      "scale": 0.86,
+      "scale": 0.83,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -14070,7 +14062,7 @@
     {
       "target": "th",
       "source": "sv",
-      "scale": 0.75,
+      "scale": 0.74,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
@@ -15229,7 +15221,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 627,
+      "items": 628,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -16544,7 +16536,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -17835,7 +17827,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 630,
+      "items": 631,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -18119,7 +18111,7 @@
     {
       "target": "sw",
       "source": "sv",
-      "scale": 0.52,
+      "scale": 0.51,
       "faces": 8,
       "pageW": 504,
       "pageH": 360,
@@ -19142,7 +19134,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 627,
+      "items": 628,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -20433,7 +20425,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 627,
+      "items": 628,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -21724,7 +21716,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 628,
+      "items": 629,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -23007,7 +22999,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 626,
+      "items": 627,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -24330,7 +24322,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -28336,7 +28328,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 624,
+      "items": 625,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -29648,7 +29640,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 629,
+      "items": 630,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -31004,11 +30996,11 @@
     {
       "target": "bn",
       "source": "ur",
-      "scale": 0.71,
+      "scale": 0.68,
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 629,
+      "items": 630,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -31849,11 +31841,11 @@
     {
       "target": "ur",
       "source": "en",
-      "scale": 0.54,
+      "scale": 0.52,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -31873,7 +31865,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -31893,7 +31885,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -31913,7 +31905,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -31937,11 +31929,11 @@
     {
       "target": "ur",
       "source": "ar",
-      "scale": 0.54,
+      "scale": 0.52,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -31972,7 +31964,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -31992,7 +31984,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -32008,11 +32000,11 @@
     {
       "target": "ur",
       "source": "pt",
-      "scale": 0.62,
+      "scale": 0.61,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -32028,11 +32020,11 @@
     {
       "target": "ur",
       "source": "ko",
-      "scale": 0.78,
+      "scale": 0.77,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -32052,7 +32044,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -32087,11 +32079,11 @@
     {
       "target": "ur",
       "source": "th",
-      "scale": 0.52,
+      "scale": 0.51,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -32122,7 +32114,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -32142,7 +32134,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -32162,7 +32154,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 624,
+      "items": 625,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -32182,7 +32174,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -32202,7 +32194,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -32222,7 +32214,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -32242,7 +32234,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -32266,11 +32258,11 @@
     {
       "target": "ur",
       "source": "hu",
-      "scale": 0.59,
+      "scale": 0.57,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -32341,7 +32333,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -32357,11 +32349,11 @@
     {
       "target": "ur",
       "source": "fa",
-      "scale": 0.49,
+      "scale": 0.48,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -32392,7 +32384,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -32431,7 +32423,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -32451,7 +32443,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -32471,7 +32463,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -32499,7 +32491,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -32519,7 +32511,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 624,
+      "items": 625,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -32558,7 +32550,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 624,
+      "items": 625,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -32584,9 +32576,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 2
+            "count": 1
           },
-          "message": "2 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -32597,7 +32589,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -32617,7 +32609,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -32637,7 +32629,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 624,
+      "items": 625,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -32668,7 +32660,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -32688,7 +32680,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -32708,7 +32700,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -32724,11 +32716,11 @@
     {
       "target": "ur",
       "source": "gu",
-      "scale": 0.86,
+      "scale": 0.84,
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 624,
+      "items": 625,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -32767,7 +32759,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 624,
+      "items": 625,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -32802,11 +32794,11 @@
     {
       "target": "ur",
       "source": "am",
-      "scale": 0.54,
+      "scale": 0.53,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 624,
+      "items": 625,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -32837,7 +32829,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 624,
+      "items": 625,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -32876,7 +32868,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 624,
+      "items": 625,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -32896,7 +32888,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 624,
+      "items": 625,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -32924,7 +32916,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 622,
+      "items": 623,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -32944,7 +32936,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 624,
+      "items": 625,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -32979,11 +32971,11 @@
     {
       "target": "ur",
       "source": "km",
-      "scale": 0.77,
+      "scale": 0.76,
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -33009,9 +33001,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 1
+            "count": 2
           },
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "2 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -33022,7 +33014,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -33042,7 +33034,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 624,
+      "items": 625,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -33062,7 +33054,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -33082,7 +33074,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -33110,7 +33102,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 624,
+      "items": 625,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -33130,7 +33122,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "margin-below-safe-area",
@@ -33150,7 +33142,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 624,
+      "items": 625,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -33735,7 +33727,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -35018,7 +35010,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 624,
+      "items": 625,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -36477,7 +36469,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 629,
+      "items": 630,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -37924,11 +37916,11 @@
     {
       "target": "uk",
       "source": "ur",
-      "scale": 0.55,
+      "scale": 0.54,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 626,
+      "items": 627,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -39359,11 +39351,11 @@
     {
       "target": "te",
       "source": "ur",
-      "scale": 0.84,
+      "scale": 0.83,
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 631,
+      "items": 632,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -39384,14 +39376,6 @@
             "preset": "et8550-5x7-photo-bordered"
           },
           "message": "Margins were widened to 8.5pt to stay inside the et8550-5x7-photo-bordered printable area."
-        },
-        {
-          "code": "loose-columns",
-          "severity": "info",
-          "params": {
-            "count": 1
-          },
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -40763,7 +40747,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 628,
+      "items": 629,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -42091,7 +42075,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -43366,7 +43350,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -44665,7 +44649,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -46009,7 +45993,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -47324,7 +47308,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -48639,7 +48623,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 624,
+      "items": 625,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -49906,7 +49890,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 629,
+      "items": 630,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -51226,7 +51210,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 627,
+      "items": 628,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -51252,9 +51236,9 @@
           "code": "loose-columns",
           "severity": "info",
           "params": {
-            "count": 1
+            "count": 2
           },
-          "message": "1 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
+          "message": "2 column(s) could not be filled evenly. Try \"Balance columns\" to propose items that would take up the space."
         }
       ]
     },
@@ -52562,7 +52546,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 626,
+      "items": 627,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -53930,7 +53914,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 629,
+      "items": 630,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -55310,11 +55294,11 @@
     {
       "target": "ha",
       "source": "ur",
-      "scale": 0.72,
+      "scale": 0.71,
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -56637,7 +56621,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 629,
+      "items": 630,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -58008,7 +57992,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 621,
+      "items": 622,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -59515,7 +59499,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 618,
+      "items": 619,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -61291,7 +61275,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 623,
+      "items": 624,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -62851,7 +62835,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -64142,7 +64126,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 624,
+      "items": 625,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -65449,7 +65433,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 625,
+      "items": 626,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -66780,7 +66764,7 @@
       "faces": 12,
       "pageW": 504,
       "pageH": 360,
-      "items": 626,
+      "items": 627,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -68103,7 +68087,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 622,
+      "items": 623,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -69442,7 +69426,7 @@
       "faces": 10,
       "pageW": 504,
       "pageH": 360,
-      "items": 621,
+      "items": 622,
       "warnings": [
         {
           "code": "paper-too-coarse",
@@ -70861,7 +70845,7 @@
       "faces": 14,
       "pageW": 504,
       "pageH": 360,
-      "items": 629,
+      "items": 630,
       "warnings": [
         {
           "code": "paper-too-coarse",

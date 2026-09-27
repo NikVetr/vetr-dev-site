@@ -4882,3 +4882,93 @@ with a key made for the purpose in `tmp/` and deleted after: `jarsigner -verify`
 reports "jar verified", signed by that key. The owner's Play steps are in
 docs/native.md, "An Android release".
 
+
+## Batch AB — three things from the printed sheet, counts that read at one, and the last language gaps
+
+**Essential was ten phrases; it is the everyday basics now, and Minimum is the lock
+screen.** Reported as "way too restrictive". The ten-phrase set was the phone
+wallpaper recipe, which was also a request, so it keeps its own rung: the ladder is
+Everything / Broad / Core / Essential / Minimum, with Minimum at the old 0.95 floor
+and Essential at 0.85 -- about 90 phrases on a default card: greetings, thanks and
+apology, yes and no, the questions a traveller asks, 0 to 9, and the emergency,
+pharmacy and police lines. It fills one sheet, two faces of the 7x5 card, at nominal
+type in every script measured but Tamil (0.61). 0.86 was tried first and left up to
+seven of the second face's columns loose; any floor between 0.86 and 0.90 cuts the
+number line in half. Four concepts were rescored so the cut is coherent: `no` to
+`yes`'s 0.863, `excuse me` to `thank you`'s 0.875, `how much` to 0.863, `she` to `he`'s
+0.872. `validate_data.py` holds currency pairs to the new step too.
+
+**An edge tab's rail takes a lane and moves the columns.** Reported as covering the
+text rather than displacing it. The rail was the margin alone, flush against the
+first and last columns' words -- and on a bordered printer the margin is the part the
+printer cannot reach, so the rail mostly fell off the paper. It is a band on its side
+now: the margin, a band's width more and a column gap of paper before the words,
+added to the margin in `contentBox` the way a band is. A wider margin still makes a
+wider rail. Corner and strip tabs still move nothing.
+
+**The mark in a band has air and sits on the capitals.** Reported as too close to the
+text and not aligned. It sat a word space from a following part and flush against a
+preceding one, with its bottom just under the baseline -- high, for a mark 1.15 times
+the type size. It is centred on the middle of the capitals now (Noto Sans's 0.714 em
+cap height), with half an em on each side that has a neighbour.
+
+Found while looking at those renders, and fixed:
+
+- **A right tab set the page number on the pair's last letter.** The pair label's
+  arrow is in no Latin face this project ships -- Noto Sans has none -- so it was
+  measured at the notdef's width and drawn from some system font at another. The label
+  is `Chinese (Simplified) – English` now, a spaced en dash, as a Chinese–English
+  dictionary is named.
+- **SVG dropped the space before a band's bullet.** A run's leading space is part of
+  its measured width and the PDF drew it; SVG collapsed it, so the bullet sat against
+  the word before it in the preview and every PNG. Text runs carry `xml:space`.
+- **Counts that read wrongly at one.** "1 buttons", "1 sheets", "1 faces at", "0.5
+  sheets" for a single printed face: thirteen English strings put a number in
+  agreement with a noun, against the catalogue's own rule. They are "Buttons: {count}"
+  and so on now, and every catalogue was reviewed against the same rule -- rewritten
+  where a noun, verb or adjective agreed with a number or offered `tlačítko/tlačítka`,
+  left where the language does not inflect after a numeral (the review found real
+  agreement bugs in about half the languages, none in the isolating and classifier
+  ones). The quick sheet counts a single face as one sheet.
+- **The fix buttons were English in every language.** A warning is looked up by code;
+  its proposed fixes carried English labels the UI printed as they were -- "Use 5
+  columns instead of 4" under a German warning, and the same English inside the quick
+  sheet's "we changed one thing" notice. A fix has a `code` and `params` now, read as
+  `fix.<code>`; `fix.dropSections` is new, and a unit test holds every offered fix to
+  having a catalogue entry.
+- **Screen files are walked once each.** A hand-written file of buttons can put two
+  screens inside each other; saving what is on a screen now visits each once.
+
+**Language gaps closed.** Eleven profanity rows were written by the research loop and
+ten kept -- Vietnamese's rested on Wiktionary alone, which is not on the source list,
+and is recorded as an absence -- with 34 documented no-row reasons folded into the
+concept notes, whose counts now describe fifty-two languages rather than twenty-three.
+Czech and Swedish readers get the five notes they lacked (number building, the
+politeness particles, the Swahili clock, Japanese register). The 55 Hebrew speaker
+variants that inherited the man's pointed spelling have their own, each checked to
+strip exactly to its unpointed text. Yoruba gains the four interface strings it had
+documented as unsourced, from its own Wikipedia (Kánádà, Ìyára). Where a catalogue had
+translated the old ten-phrase Essential as "minimum", both captions were redone.
+
+**Still open, and why.** The furniture band trims an overlong line with an ellipsis
+rather than wrapping it. It is already set at the reader script's legibility floor, so
+shrinking is not available, and wrapping means the band growing a line, which is a
+layout change of its own; it arises only when a phone card's band carries the pair,
+the emergency numbers and the folio together.
+
+**What stands between this checkout and a release now**, by kind of evidence:
+
+- **Automated, done:** Chromium 205 of 205, WebKit smoke 6 of 6, unit tests
+  691 of 691, and the ten-check gate on each of this batch's commits.
+- **Simulator and emulator:** `check:ios` and `check:android` are rerun on the pushed
+  commit and recorded in the entry after this one. Neither has a torch, a real hand
+  on the keyboard, or real share-sheet destinations; the owner's iPhone is the next
+  step, through `npm run ios -- --device`.
+- **Owner steps** are unchanged (docs/native.md): an Xcode account and the paid
+  developer programme, a settled bundle identifier and store records, Developer Mode on
+  the iPhone, keychain access over SSH, and a Play upload key.
+- **Language:** every real-language catalogue carries every key but the two dates the
+  browser formats; Klingon and Quenya are partial by policy; each language's corpus
+  holds every concept but its documented absences. None of it has had a fluent
+  reviewer, which the owner has forgone, and it should be read as subagent-sourced
+  against the reference lists in `content/PROMPTS/`.

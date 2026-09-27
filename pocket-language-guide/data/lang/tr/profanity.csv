@@ -2,6 +2,7 @@ concept_id,text,text_alt,ipa,literal,confidence,provenance
 profanity.oh-my-god,Aman Allahım!,,amˈan aɫɫˈahɯm,"mercy, my God -- mild",1,profanity-v1;src=TDK-GTS;ipa=espeak
 profanity.damn,Kahretsin!,,kahrɛtsˈɪn,may it crush -- mild oath,1,profanity-v1;src=TDK-GTS;ipa=espeak
 profanity.expletive,Sıçtık!,Bok!,sɯtʃtˈɯk,we have shat -- coarse; we are sunk,1,profanity-v1;src=TDK-GTS;ipa=espeak
+profanity.strong-expletive,Siktir et!,,sˈɪktɪr ˈɛt,"""do siktir"" -- said of a situation: don't mind it, the hell with it",2,tr-agent-v1;src=TDK-GTS;ipa=espeak
 profanity.intensifier,kahrolası,lanet olası,kahroɫasˈɯ,before a noun: damned; mild,1,profanity-v1;src=TDK-GTS;ipa=espeak
 profanity.frustration,Bu rezalet.,,bʊ rezalˈɛt,this is a disgrace -- mild,1,profanity-v1;src=TDK-GTS;ipa=espeak
 profanity.thats-rude,Bu ayıp.,,bʊ ajˈɯp,this is shameful,1,profanity-v1;src=TDK-GTS;ipa=espeak

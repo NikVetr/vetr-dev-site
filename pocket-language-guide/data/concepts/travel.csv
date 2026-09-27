@@ -93,7 +93,7 @@ rail-station-words.high-speed-rail,rail-station-words,ref,word,high-speed-rail,1
 rail-station-words.maglev,rail-station-words,ref,word,maglev,2,0.705,rail-station-words.maglev,0,0,neutral,zh-Hans;ja,
 rail-station-words.transfer,rail-station-words,ref,word,transfer,3,0.690,rail-station-words.transfer,0,0,neutral,,
 rail-station-words.ticket-gate,rail-station-words,ref,word,ticket-gate,4,0.675,rail-station-words.ticket-gate,0,0,neutral,,
-rail-station-words.platform,rail-station-words,ref,word,platform,5,0.660,rail-station-words.platform,0,0,neutral,,
+rail-station-words.platform,rail-station-words,ref,word,platform,5,0.660,rail-station-words.platform,0,0,neutral,,"Absent in Khmer, which has no word for a station platform -- the finding the Khmer pack records on transit-rides.which-platform."
 rail-station-words.ticket-office,rail-station-words,ref,word,ticket-office,6,0.645,rail-station-words.ticket-office,0,0,neutral,,
 rail-station-words.waiting-room,rail-station-words,ref,word,waiting-room,7,0.630,rail-station-words.waiting-room,0,0,neutral,,
 rail-station-words.train-number,rail-station-words,ref,word,train-number,8,0.615,rail-station-words.train-number,0,0,neutral,,

@@ -2,6 +2,7 @@ concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
 profanity.oh-my-god,ওরে বাবা!,হে ভগবান! / ইয়া আল্লাহ!,ore bābā!,ˈoɾe bˈaba,"literally 'oh father!' -- a mild exclamation of surprise, and religiously neutral, which the two in the variant are not",2,bn-agent-v1;ipa=espeak
 profanity.damn,ধুর!,,dhura!,dʰˈuɾ,an oath of annoyance -- mild,2,bn-agent-v1;ipa=espeak
 profanity.expletive,শালা!,,śālā!,ʃˈala,"literally 'brother-in-law'; coarse, and a real insult if aimed at anyone",2,bn-agent-v1;ipa=espeak
+profanity.strong-expletive,বাল!,,bāla!,bˈal,"pubic hair -- the strongest common exclamation, shouted at a situation and aimed at no one",2,bn-agent-v1;src=Sazzed-PeerJ-2021;ipa=espeak
 profanity.intensifier,বালের,হতভাগা,bālera,bˈaleɾ,"before a noun: 'fucking -'. Genuinely vulgar, and Bangladeshi usage; হতভাগা is the mild version, 'wretched -'",2,bn-agent-v1;ipa=espeak
 profanity.frustration,এটা বাজে,,eṭā bāje,ˌeʈa bˈaɟe,"this is rubbish -- mild, about a thing and not a person",2,bn-agent-v1;ipa=espeak
 profanity.thats-rude,এটা অভদ্রতা,,eṭā abhadratā,ˌeʈa ˈɔbʰɔdɾˌɔta,this is bad manners,2,bn-agent-v1;ipa=espeak

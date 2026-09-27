@@ -98,6 +98,7 @@ children.car-seat,Potřebujeme dětskou autosedačku,,pˈotr̝ebˌujeme ɟˈetsk
 children.stroller,kočárek,,kˈotʃaːrek,,2,cs-agent-v1;ipa=espeak
 children.playground,Je tu dětské hřiště?,,je tˈu ɟˈetskeː hr̝ˈiʃce,,2,cs-agent-v1;ipa=espeak
 communication.please-write-it-in-roman-letters,Napište to prosím latinkou,,nˈapiʃte tˈo prˈosiːm lˈaciŋkoʊ,,2,gloss-only;scoped-away;cs-agent-v1;ipa=espeak
+social-basics.politeness-particles,"Thajská zdvořilost: skoro každá věta se zakončí slovem khrap, pokud mluví muž, nebo kha, pokud mluví žena. V otázce žena říká kha se stoupavou intonací. Řádky v této příručce tuto částici vynechávají, doplňte si ji sami.",,,,2,cs-notes-v1
 board-answers.there-is-no-wait,"Není tu fronta, můžete jít hned dál",,"nˈeɲiː tˈu frˈonta, mˈuːʒete jˈiːt hnˈed dˈaːl",,2,cs-agent-v1;board-answers-v1;ipa=espeak
 board-answers.none-of-these,"Není tu to, co chci říct",,"nˈeɲiː tˈu tˈo, tsˈo xtsi r̝ˈiːtst",,2,cs-agent-v1;board-answers-v1;ipa=espeak
 board-answers.it-is-closed,Máme zavřeno,,mˌaːme zˈavr̝eno,"spoken register, distinct from the sign word zavřeno",2,cs-agent-v1;board-answers-v1;ipa=espeak

@@ -3,6 +3,8 @@ profanity.japanese-register,"Halos hindi ito ginagawa ng Hapon gamit ang bokabul
 profanity.oh-my-god,Diyos ko!,,dijos ko,,2,fil-agent-v1;ipa=fil-g2p
 profanity.damn,Lintik!,,lintik,,2,fil-agent-v1;ipa=fil-g2p
 profanity.expletive,Tae!,,taɛ,,2,fil-agent-v1;ipa=fil-g2p
+profanity.strong-expletive,Pakshet!,,pakshɛt,"portmanteau of English ""fuck"" and ""shit"", refit to Filipino phonology -- general exclamation, not aimed at anyone",1,fil-agent-v1;src=enwiki-Tagalog-profanity;ipa=fil-g2p
+profanity.intensifier,putang inang,putanginang,putaŋ inaŋ,"attributive form of ""putang ina"" plus linking particle -ng, used like English ""fucking"" directly before a noun",2,fil-agent-v1;src=enwiki-Tagalog-profanity;ipa=fil-g2p
 profanity.frustration,Kalokohan ito,,kalokohan ito,,2,fil-agent-v1;ipa=fil-g2p
 profanity.thats-rude,Bastos yan,,bastos jan,,2,fil-agent-v1;ipa=fil-g2p
 profanity.excuse-my-language,Pasensya na po sa masamang salita,,pasɛnsja na po sa masamaŋ salita,,2,fil-agent-v1;ipa=fil-g2p

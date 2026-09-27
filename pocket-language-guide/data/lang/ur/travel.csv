@@ -102,6 +102,7 @@ rail-station-words.seat,سیٹ,نشست,sīṭ,sˈeːʈ,نشست is what the res
 rail-station-words.last-train,آخری ٹرین,,ākhirī ṭren,ˈaːxɾˌiː ʈɾˈeːn,,2,ur-agent-v1;ipa=espeak
 rail-station-words.delayed,تاخیر سے,لیٹ,tākhīr se,taːxˈiːɾ seː,announcements say گاڑی تاخیر سے چل رہی ہے; passengers say لیٹ,2,ur-agent-v1;ipa=espeak
 rail-station-words.final-stop,آخری اسٹیشن,,ākhirī isṭeshan,ˈaːxɾˌiː ɪsʈˈiːʃən,,2,ur-agent-v1;ipa=espeak
+rail-station-words.ticket-validator,ٹکٹ چیکنگ مشین,,ṭikaṭ chekiṅg mashīn,ʈˈɪkɪʈ cˈeːkɪnɡ məʃˈiːn,Named for Lahore's Orange Line Metro card-tap turnstiles; Pakistan Railways intercity trains check tickets by hand instead (see this pack's ticket-gate row),2,ur-agent-v1;ipa=espeak
 common-signs.open-on,چالو,آن,chālū,cˈaːloː,"of a switch or a machine; switches in Pakistan are labelled ON, in English",2,ur-agent-v1;ipa=espeak
 common-signs.closed-off,بند,آف,band,bˈʌnd,"بند covers both senses; a switch is labelled OFF, in English",2,ur-agent-v1;ipa=espeak
 common-signs.occupied,مصروف,بھرا ہے,masrūf,mˌəsɾˈuːf,"the toilet or booth latch indicator in Pakistan reads OCCUPIED, in English; spoken Urdu is اندر کوئی ہے",2,ur-agent-v1;ipa=espeak

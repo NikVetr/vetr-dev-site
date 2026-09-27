@@ -2,6 +2,7 @@ concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
 profanity.oh-my-god,אלוהים אדירים!,אֱלוֹהִים אַדִּירִים!,elohim adirim!,elohˈim adiʁˈim,"mighty God -- shock, mild",1,profanity-v1;src=Rav-Milim;ipa=bgn
 profanity.damn,לעזאזל!,לַעֲזָאזֵל!,la‘azazel!,laazazˈel,"to Azazel -- damn it, mild",1,profanity-v1;src=Rav-Milim;ipa=bgn
 profanity.expletive,חרא!,חָרָא!,ẖara!,xaʁˈa,shit -- coarse but everyday,1,profanity-v1;src=Rav-Milim;ipa=bgn
+profanity.strong-expletive,זין!,זַיִן!,zayin!,zajˈin,"dick -- taboo register, a notch past the everyday-coarse expletive row; shouted at a situation, not a person",2,he-agent-v1;src=Rosenthal-2005;ipa=bgn
 profanity.intensifier,חרא של,חָרָא שֶׁל,ẖara shel,xaʁˈa ʃˈel,before a noun: shitty -; coarse,1,profanity-v1;src=Rav-Milim;ipa=bgn
 profanity.frustration,זה זבל,זֶה זֶבֶל,ze zével,zˈe zˈevel,this is garbage -- mild-coarse,1,profanity-v1;src=Rav-Milim;ipa=bgn
 profanity.thats-rude,זה דיבור גס,זֶה דִּיבּוּר גַּס,ze dibur gas,zˈe dibˈuʁ ɡˈas,that is coarse speech,1,profanity-v1;src=Rav-Milim;ipa=bgn

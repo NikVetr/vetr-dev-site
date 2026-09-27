@@ -2,6 +2,8 @@ concept_id,text,text_alt,ipa,literal,confidence,provenance
 profanity.oh-my-god,Ya Allah!,,ja allah,,1,ha-agent-v1;ipa=ha-g2p
 profanity.damn,Kaico!,,kaitʃo,"alas/what a pity -- a mild curse at a situation, never at a person",1,ha-agent-v1;ipa=ha-g2p
 profanity.expletive,Kashi!,,kaʃi,"scatological, like most packs in this section",1,ha-agent-v1;ipa=ha-g2p
+profanity.strong-expletive,Ƙasara!,,kʼasara,"anus/pudenda (indecent); under the same headword, a general exclamation of annoyance, astonishment or exasperation",2,ha-agent-v1;src=Bargery-1934;ipa=ha-g2p
+profanity.intensifier,ƙazamin,,kʼazamin,"filthy/vile -- pure emphasis before a noun, comprehension only",2,ha-agent-v1;src=Bargery-1934;ipa=ha-g2p
 profanity.frustration,Wannan banza ne,,wannan banza ne,this is worthless/nonsense,1,ha-agent-v1;ipa=ha-g2p
 profanity.thats-rude,Wannan rashin ladabi ne,,wannan raʃin ladabi ne,this is a lack of manners,1,ha-agent-v1;ipa=ha-g2p
 profanity.excuse-my-language,Yi haƙuri kan maganata,,ji hakʼuri kan maɡanata,forgive me regarding my words,1,ha-agent-v1;ipa=ha-g2p

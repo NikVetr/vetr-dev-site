@@ -44,9 +44,11 @@ numbers-money.koruna-symbol,Kč,,kˈaːtʃˌeː,"the sign on every Czech price t
 numbers-money.li-ng,2 + klasifikátor,,dvˈa,,2,gloss-only;scoped-away;cs-agent-v1;ipa=espeak
 numbers-money.yu-n,jüan,,jˈian,,2,gloss-only;scoped-away;cs-agent-v1;ipa=espeak
 numbers-money.ku-i,jüan (hovorově),,jˈian,,2,gloss-only;scoped-away;cs-agent-v1;ipa=espeak
+numbers-money.number-and-classifier-notes,"Stavba čísel: 11 = shi yi, 20 = er shi, 21 = er shi yi. V telefonním čísle se 1 často čte jako yao. Mezi číslovkou a podstatným jménem je klasifikátor povinný: ge (obecný), wei (osoby), zhang (jízdenky, ploché předměty), bei (šálky), ping (lahve). Před klasifikátorem se dvě říká liang, ne er: liang zhang piao, dvě jízdenky. jiao / mao = 0,1 jüanu; fen = 0,01 jüanu.",,,,2,cs-notes-v1
 numbers-money.2-items,2 kusy,,dvˈa kˈusi,,2,gloss-only;scoped-away;cs-agent-v1;ipa=espeak
 numbers-money.yen,jen,,jˈen,,2,gloss-only;scoped-away;cs-agent-v1;ipa=espeak
 numbers-money.yen-symbol,jen (symbol),,jˈen,,2,gloss-only;scoped-away;cs-agent-v1;ipa=espeak
+numbers-money.number-and-classifier-notes-2,"Stavba čísel: 11 = jūichi, 20 = nijū, 21 = nijūichi. Počítací přípona stojí za číslem: -tsu (věci), -mai (ploché věci), -hon (dlouhé věci), -nin (osoby), -hai (šálky). V telefonním čísle: 0 = zero nebo maru, 4 = yon, 7 = nana, 9 = kyū.",,,,2,cs-notes-v1
 numbers-money.won,won,,vˈon,,2,gloss-only;scoped-away;cs-agent-v1;ipa=espeak
 numbers-money.won-symbol,won (symbol),,vˈon,,2,gloss-only;scoped-away;cs-agent-v1;ipa=espeak
 numbers-money.euro,euro,,ˈeʊro,,2,gloss-only;scoped-away;cs-agent-v1;ipa=espeak
