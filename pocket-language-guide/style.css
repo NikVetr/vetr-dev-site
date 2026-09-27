@@ -1165,6 +1165,10 @@ dialog.drill .field { margin-bottom: var(--space-2); }
   border-inline-start: 4px solid var(--alert); color: var(--alert);
 }
 .drill-option:disabled { opacity: 1; cursor: default; }
+/* After a miss, what each wrong option does answer: its own prompt, pushed to the end of
+   the row and allowed to wrap under the option when the row is narrow. */
+.drill-option { flex-wrap: wrap; }
+.drill-answers { margin-inline-start: auto; display: inline-flex; gap: 0.5em; color: var(--muted); }
 
 /* Matching: one prompt, one menu, one verdict per row. */
 .drill-line {

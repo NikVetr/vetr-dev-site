@@ -67,6 +67,22 @@ test.describe('quiz mode', () => {
     await expect(asked.locator('input[value="gloss"]')).toBeChecked();
   });
 
+  test('a missed choice says what each wrong option does answer', async ({ page }) => {
+    // Jeopardy's way round: every wrong option is some other card's right answer, and
+    // after a miss it says which -- so a miss teaches four words rather than one.
+    await page.goto(STUDIO);
+    const drill = await openDrill(page, 'keys');
+    await drill.getByRole('button', { name: 'Start' }).click();
+    const options = drill.locator('.drill-option');
+    await expect(options).toHaveCount(4);
+    await expect(drill.locator('.drill-answers')).toHaveCount(0);
+    await drill.getByRole('button', { name: 'See answer' }).click();
+    await expect(drill.locator('.drill-option.right')).toHaveCount(1);
+    await expect(drill.locator('.drill-option.right .drill-answers')).toHaveCount(0);
+    await expect(drill.locator('.drill-option:not(.right) .drill-answers')).toHaveCount(3);
+    for (const text of await drill.locator('.drill-answers').allInnerTexts()) expect(text.trim()).not.toBe('');
+  });
+
   test('multiple choice is keyboard-only, from the digits to the verdict', async ({ page }) => {
     await page.goto(STUDIO);
     const drill = await openDrill(page, 'keys');

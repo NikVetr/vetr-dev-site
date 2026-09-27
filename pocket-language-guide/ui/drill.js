@@ -91,8 +91,10 @@ export function normalise(value) {
   // marked wrong, including the card's own wording, because the expected string
   // carried two braces in the middle of it. Nothing landed on such a row until the
   // bank grew past the seed that had been picking a different one.
+  // The blank a template is *shown* with, `____`, is the same slot, and a reader who
+  // types what they see must not be marked down for it.
   const nfc = value.normalize('NFC').toLowerCase()
-    .replace(/\{\}/gu, ' ')
+    .replace(/\{\}|_{2,}/gu, ' ')
     .replace(/\s+/gu, ' ')
     .trim();
   const stripped = nfc.replace(/^[\p{P}\p{S}\s]+|[\p{P}\p{S}\s]+$/gu, '');
@@ -319,9 +321,12 @@ export function drillPool(blocks, fields) {
  * collision `mergeIdenticalRows` folds inside a block. Marks-only variants are
  * deliberately *not* deduplicated: `nàlǐ` beside `nǎlǐ` is the best question this
  * corpus can ask.
+ * The cards, not only their values: each wrong answer is some other card's right
+ * one, which is what a reader who picked it wants to be told.
  * @param {Card} row @param {FieldId} field @param {Card[]} pool
  * @param {Record<string,Record<string,string>>} concepts  `corpus.concepts`
  * @param {() => number} rand @param {number} want
+ * @returns {Card[]}
  */
 function distractors(row, field, pool, concepts, rand, want) {
   const cluster = concepts[row.conceptId]?.cluster_id;
@@ -331,14 +336,14 @@ function distractors(row, field, pool, concepts, rand, want) {
     () => true,
   ];
   const seen = new Set([normalise(row.values[field] ?? '')]);
-  /** @type {string[]} */ const out = [];
+  /** @type {Card[]} */ const out = [];
   for (const rung of rungs) {
     for (const other of shuffled(pool.filter((c) => c !== row && rung(c)), rand)) {
       const value = other.values[field] ?? '';
       const key = normalise(value);
       if (!value || seen.has(key)) continue;
       seen.add(key);
-      out.push(value);
+      out.push(other);
       if (out.length === want) return out;
     }
   }
@@ -351,6 +356,8 @@ function distractors(row, field, pool, concepts, rand, want) {
  * @property {Card[]} rows        one row, except for matching
  * @property {FieldId[]} asks     the columns the reader supplies
  * @property {string[]} [options] multiple choice: the answers offered, in order
+ * @property {Card[]} [choices]   multiple choice: the card each option is the right
+ *   answer to, in the options' order -- the prompt a wrong one would have answered
  * @property {string[]} [labels]  matching: the answers to assign, shuffled
  */
 
@@ -414,17 +421,22 @@ export function buildDrill({ blocks, concepts, kind, prompt, answer, seed, count
     // Fewer than one wrong answer is not a question. Fewer than three is, and is
     // what a card with two rows in a column can honestly offer.
     if (wrong.length + 1 < MIN_OPTIONS) continue;
+    const choices = shuffled([row, ...wrong], rand);
     questions.push({
       kind,
       rows: [row],
       asks: [field],
-      options: shuffled([/** @type {string} */ (row.values[field]), ...wrong], rand),
+      options: choices.map((c) => /** @type {string} */ (c.values[field])),
+      choices,
     });
   }
   return questions;
 }
 
 // --- the dialog ------------------------------------------------------------
+
+/** A template's slot as the blank a reader fills, not the `{}` it is stored as. @param {string} text */
+const blank = (text) => text.replaceAll('{}', '____');
 
 /** @param {string} tag @param {Record<string,string>} attrs @param {(Node|string)[]} kids */
 function el(tag, attrs = {}, kids = []) {
@@ -661,7 +673,7 @@ export function openDrill({ blocks, corpus, spec }) {
       const cell = (/** @type {FieldId} */ field, /** @type {string} */ value) => el(
         'div', { class: 'drill-cell' }, [
           el('span', { class: 'small muted', text: labels[field].caption }),
-          el('span', { class: 'drill-value', lang: locale(field).lang, dir: locale(field).dir, text: value }),
+          el('span', { class: 'drill-value', lang: locale(field).lang, dir: locale(field).dir, text: blank(value) }),
         ]);
 
       /** Every shown column of a row. `drillPool` has already guaranteed all of
@@ -702,7 +714,7 @@ export function openDrill({ blocks, corpus, spec }) {
             tabindex: i ? '-1' : '0',
           }, [
             el('span', { class: 'drill-key small muted', text: String(i + 1) }),
-            el('span', { lang, dir, text: value }),
+            el('span', { lang, dir, text: blank(value) }),
           ]));
           button.addEventListener('click', () => choose(i));
           buttons.push(button);
@@ -737,16 +749,25 @@ export function openDrill({ blocks, corpus, spec }) {
             const right = !revealed && chosen >= 0 && normalise(options[chosen]) === normalise(want);
             tally[right ? 'right' : 'wrong'] += 1;
             buttons.forEach((button, k) => {
+              const correct = normalise(options[k]) === normalise(want);
               button.disabled = true;
-              button.classList.toggle('right', normalise(options[k]) === normalise(want));
+              button.classList.toggle('right', correct);
               button.classList.toggle('wrong', !revealed && k === chosen && !right);
+              // **Missed, every wrong option says what it does answer** -- the prompt
+              // it is the right answer to, Jeopardy's way round -- so a miss teaches
+              // four words rather than one.
+              const source = question.choices?.[k];
+              if (!right && !correct && source) {
+                button.append(el('span', { class: 'drill-answers small muted' },
+                  prompt.map((f) => el('span', { ...locale(f), text: blank(/** @type {string} */ (source.values[f])) }))));
+              }
             });
             mark.className = `drill-mark ${right ? 'right' : 'wrong'}`;
             // Revealed is not a miss and is not told it is one: it counts as wrong
             // in the tally, because the reader did not know it, and shows the answer.
             mark.textContent = right ? t('drill.right')
-              : revealed ? t('drill.expected', { answer: want })
-                : `${t('drill.wrong')} ${t('drill.expected', { answer: want })}`;
+              : revealed ? t('drill.expected', { answer: blank(want) })
+                : `${t('drill.wrong')} ${t('drill.expected', { answer: blank(want) })}`;
           },
         };
       }
@@ -768,7 +789,7 @@ export function openDrill({ blocks, corpus, spec }) {
           }));
           pick.append(new Option(t('drill.matchChoose'), ''));
           for (const label of /** @type {string[]} */ (question.labels)) {
-            pick.append(new Option(label, label));
+            pick.append(new Option(blank(label), label));
           }
           const mark = el('span', { class: 'drill-mark', role: 'status' });
           lines.push({ row, pick, mark });
@@ -789,8 +810,8 @@ export function openDrill({ blocks, corpus, spec }) {
               line.pick.disabled = true;
               line.mark.className = `drill-mark ${right ? 'right' : 'wrong'}`;
               line.mark.textContent = right ? t('drill.right')
-                : revealed ? t('drill.expected', { answer: want })
-                  : `${t('drill.wrong')} ${t('drill.expected', { answer: want })}`;
+                : revealed ? t('drill.expected', { answer: blank(want) })
+                  : `${t('drill.wrong')} ${t('drill.expected', { answer: blank(want) })}`;
             }
           },
         };
@@ -837,8 +858,8 @@ export function openDrill({ blocks, corpus, spec }) {
               // typo inside the budget is graded right, and the reader still has to
               // see the spelling they nearly had.
               entry.mark.textContent = revealed
-                ? t('drill.expected', { answer: want })
-                : `${verdictText(verdict)} ${t('drill.expected', { answer: want })}`;
+                ? t('drill.expected', { answer: blank(want) })
+                : `${verdictText(verdict)} ${t('drill.expected', { answer: blank(want) })}`;
             }
           },
         };

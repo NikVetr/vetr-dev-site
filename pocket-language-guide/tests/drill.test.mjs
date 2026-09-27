@@ -324,3 +324,23 @@ async function mandarinBlocks() {
   blockCache = [...bySection.values()];
   return blockCache;
 }
+
+test('each multiple-choice option carries the card it is the right answer to', async () => {
+  // So a missed question can say what every wrong option does answer.
+  const questions = buildDrill({
+    blocks: await mandarinBlocks(), concepts: await conceptTable(), kind: 'choice',
+    prompt: ['gloss'], answer: ['script'], seed: 'options', count: 40,
+  });
+  assert.equal(questions.length, 40);
+  for (const question of questions) {
+    const field = question.asks[0];
+    assert.deepEqual(question.choices?.map((c) => c.values[field]), question.options);
+    assert.equal(question.choices?.filter((c) => c === question.rows[0]).length, 1);
+  }
+});
+
+test('a template\'s blank, shown or stored, is never part of the answer', () => {
+  // The quiz shows a slot as `____`; a reader may type what they see, or nothing there.
+  assert.equal(grade('zhù ____ wǎn', 'zhù {} wǎn'), 'right');
+  assert.equal(grade('zhù wǎn', 'zhù {} wǎn'), 'right');
+});
