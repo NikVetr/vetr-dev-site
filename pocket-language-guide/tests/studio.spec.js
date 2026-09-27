@@ -891,3 +891,44 @@ test('an edit belongs to its pair, and a new column reaches the tree', async ({ 
   await page.locator('.items li').first().locator('.item-edit-open').click();
   await expect(page.locator('.item-edit input#edit-social-basics\\.hello-ipa')).toHaveCount(1);
 });
+
+test('the studio\'s light switch turns the card dark, not the app', async ({ page }) => {
+  // It was the app's own appearance switch, which darkened the panel around a white
+  // card. The app's appearance is in the settings; this one is the card's.
+  await page.goto('/customize.html?target=es&source=en');
+  const card = page.getByRole('switch', { name: 'Dark card' });
+  await expect(card).toHaveAttribute('aria-checked', 'false');
+  await card.click();
+  await expect(card).toHaveAttribute('aria-checked', 'true');
+  // The dark theme lays its own paper over the page, so its colour is on a page-sized rect.
+  const darkPaper = () => page.evaluate(() => {
+    const svg = document.querySelector('.face.focused svg') ?? document.querySelector('.face svg');
+    const width = svg?.getAttribute('viewBox')?.split(' ')[2];
+    return [...(svg?.querySelectorAll('rect') ?? [])]
+      .some((r) => r.getAttribute('fill')?.toLowerCase() === '#14191e' && r.getAttribute('width') === width);
+  });
+  await expect.poll(darkPaper).toBe(true);
+  expect(await page.evaluate(() => document.documentElement.dataset.theme ?? '')).toBe('');
+  // And the palette says so too: the switch is a shortcut to it, not a second setting.
+  await card.click();
+  await expect(card).toHaveAttribute('aria-checked', 'false');
+  await expect.poll(darkPaper).toBe(false);
+});
+
+test('a folded card\'s size can be the folded card or the unfolded sheet', async ({ page }) => {
+  // Bifold used to mean one thing: the size chosen is the folded card, and the sheet
+  // is twice as wide. The reader can now say the size is the unfolded sheet instead.
+  await page.goto('/customize.html?target=es&source=en');
+  const width = () => page.evaluate(() => Number(
+    (document.querySelector('.face.focused svg') ?? document.querySelector('.face svg'))?.getAttribute('viewBox')?.split(' ')[2]));
+  await expect.poll(width).toBe(504);
+  const basis = page.getByRole('radiogroup', { name: 'The size is' });
+  await expect(basis).toBeHidden();
+  await page.getByRole('radio', { name: 'Bifold' }).click();
+  await expect(basis).toBeVisible();
+  await expect.poll(width).toBe(1008);
+  await basis.getByRole('radio', { name: 'Unfolded sheet' }).click();
+  await expect.poll(width).toBe(504);
+  await basis.getByRole('radio', { name: 'Folded card' }).click();
+  await expect.poll(width).toBe(1008);
+});

@@ -876,8 +876,8 @@ export function cardSizeControl({ geometry, value, onChange }) {
   };
   custom.append(width.box, unit('×'), height.box, unit(t('format.inches')));
 
-  /** The panel: the sheet unfolded to the one card the reader chose. */
-  const panel = () => foldedGeometry(current, 0);
+  /** The card the reader chose: the folded panel, or the whole sheet (`foldSized`). */
+  const panel = () => chosenCard(current);
   /** Which preset the panel corresponds to, if any. */
   const presetOf = () => Object.entries(geometry).find(
     ([, g]) => Math.abs(g.pageW - panel().pageW) < 0.01 && g.pageH === current.pageH,
@@ -903,7 +903,7 @@ export function cardSizeControl({ geometry, value, onChange }) {
     onChange: (id) => {
       custom.hidden = id !== '';
       // A preset is a panel; the fold in force is kept and multiplied out.
-      if (id) onChange({ geometry: foldedGeometry({ ...geometry[id] }, current.fold ?? 0) });
+      if (id) onChange({ geometry: foldedGeometry({ ...geometry[id], foldSized: current.foldSized }, current.fold ?? 0) });
     },
   });
 
@@ -2079,20 +2079,41 @@ export function foldGlyph(panels) {
 }
 
 /**
- * A geometry refolded into `n` panels.
+ * The card the reader chose, as a flat sheet: the folded card by default, or the
+ * whole unfolded sheet when `foldSized` says the size is the sheet's.
+ * @param {import('../core/types.js').Geometry} g
+ * @returns {import('../core/types.js').Geometry}
+ */
+export function chosenCard(g) {
+  const n = g.fold ?? 1;
+  const sheet = g.foldSized === 'sheet';
+  const { fold, ...flat } = g;
+  return { ...flat, pageW: sheet ? g.pageW : g.pageW / n, columns: sheet ? g.columns : Math.max(1, Math.round(g.columns / n)) };
+}
+
+/**
+ * A geometry refolded into `n` panels, keeping the card the reader chose.
  *
- * **The size the reader chose is the folded size.** A passport-cover card that folds
- * in two is two passport covers of paper, not one cut in half: the panel keeps the
- * width and the columns the reader picked, and the sheet is `n` of them side by
- * side, with the solver widening the gutters at the creases. `n` of 0 is flat.
+ * **By default the size they chose is the folded size.** A passport-cover card that
+ * folds in two is two passport covers of paper, not one cut in half: the panel keeps
+ * the width and the columns the reader picked, and the sheet is `n` of them side by
+ * side, with the solver widening the gutters at the creases. With `foldSized: 'sheet'`
+ * the chosen size is the unfolded sheet instead, and each panel takes a share of its
+ * width and of its columns. `n` of 0 is flat.
  * @param {import('../core/types.js').Geometry} g @param {number} n
  * @returns {import('../core/types.js').Geometry}
  */
 export function foldedGeometry(g, n) {
-  const was = g.fold ?? 1;
+  const card = chosenCard(g);
   const to = n || 1;
-  const next = { ...g, pageW: (g.pageW / was) * to, columns: Math.max(1, Math.round(g.columns / was)) * to };
-  if (n) next.fold = n; else delete next.fold;
+  const sheet = g.foldSized === 'sheet';
+  /** @type {import('../core/types.js').Geometry} */
+  const next = {
+    ...card,
+    pageW: sheet ? card.pageW : card.pageW * to,
+    columns: (sheet ? Math.max(1, Math.round(card.columns / to)) : card.columns) * to,
+  };
+  if (n) next.fold = n;
   return next;
 }
 
@@ -2117,9 +2138,31 @@ export function foldControl({ geometry, onChange }) {
     options,
     onChange: (n) => onChange({ geometry: foldedGeometry(current, n) }),
   });
+  // **Which card the size is.** The folded card, with the sheet that many times wider,
+  // or the unfolded sheet, with each panel a share of it. Switching keeps the size the
+  // reader chose and refolds on the other reading of it.
+  const basis = segmented({
+    label: t('format.foldSize'),
+    value: geometry.foldSized ?? 'panel',
+    options: /** @type {['panel'|'sheet', string, number][]} */ ([
+      ['panel', 'format.foldSize.folded', 1], ['sheet', 'format.foldSize.unfolded', 2],
+    ]).map(([value, key, panels]) => ({ value, caption: t(key), title: t(key), glyph: foldGlyph(panels) })),
+    onChange: (value) => onChange({
+      geometry: foldedGeometry({ ...chosenCard(current), foldSized: value }, current.fold ?? 0),
+    }),
+  });
+  const wrap = document.createElement('div');
+  wrap.append(control.group, basis.group);
+  /** @param {import('../core/types.js').Geometry} next */
+  const show = (next) => {
+    control.select(next.fold ?? 0);
+    basis.select(next.foldSized ?? 'panel');
+    basis.group.hidden = !next.fold;
+  };
+  show(geometry);
   return {
-    group: control.group,
+    group: wrap,
     /** @param {import('../core/types.js').Geometry} next */
-    sync(next) { current = next; control.select(next.fold ?? 0); },
+    sync(next) { current = next; show(next); },
   };
 }

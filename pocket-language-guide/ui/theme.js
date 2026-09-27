@@ -53,16 +53,29 @@ const MOON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 14.6A8.
  * need. One element, so the dialogs and the studio's panel can each place it.
  */
 export function themeControl() {
+  return lightSwitch({
+    label: t('theme.dark'),
+    dark: isDark,
+    flip: () => writeTheme(isDark() ? 'light' : 'dark'),
+  }).button;
+}
+
+/**
+ * The switch itself, for whatever it turns dark: the app here, a card in the studio.
+ * `show` re-reads `dark` when something else has changed it.
+ * @param {{label:string, dark:() => boolean, flip:() => void}} config
+ */
+export function lightSwitch({ label, dark, flip }) {
   const button = document.createElement('button');
   button.type = 'button';
   button.className = 'theme-switch';
   button.setAttribute('role', 'switch');
-  button.setAttribute('aria-label', t('theme.dark'));
+  button.setAttribute('aria-label', label);
   button.innerHTML = `${SUN}<span class="theme-switch-track"><span class="theme-switch-knob"></span></span>${MOON}`;
-  const show = () => button.setAttribute('aria-checked', String(isDark()));
-  button.addEventListener('click', () => { writeTheme(isDark() ? 'light' : 'dark'); show(); });
+  const show = () => button.setAttribute('aria-checked', String(dark()));
+  button.addEventListener('click', () => { flip(); show(); });
   show();
-  return button;
+  return { button, show };
 }
 
 /** The board dialog's section: a heading and the control. */
