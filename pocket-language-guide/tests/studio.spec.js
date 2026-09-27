@@ -932,3 +932,20 @@ test('a folded card\'s size can be the folded card or the unfolded sheet', async
   await basis.getByRole('radio', { name: 'Folded card' }).click();
   await expect.poll(width).toBe(1008);
 });
+
+test('on a phone the studio\'s one menu holds its settings, not a door to them', async ({ page }) => {
+  // The header had two buttons of three bars, and folded together the settings became
+  // an item opening a dialog that held one switch. The menu carries the switch itself.
+  await page.setViewportSize({ width: 390, height: 760 });
+  await page.goto('/customize.html?target=es&source=en');
+  await expect(page.locator('#header-menu .header-settings')).toHaveCount(1);
+  await expect(page.locator('#site-menu')).toBeHidden();
+  await page.locator('#header-more').click();
+  const menu = page.locator('#header-menu');
+  const dark = menu.getByRole('switch', { name: 'Dark' });
+  await expect(dark).toBeVisible();
+  await dark.click();
+  // Flipped where it is: the menu stays open, and the page is dark.
+  await expect(menu).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.dataset.theme)).toBe('dark');
+});

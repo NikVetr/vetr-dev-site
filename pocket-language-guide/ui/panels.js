@@ -1,4 +1,6 @@
 import * as store from './platform/store.js';
+import { themeSection } from './theme.js';
+import { resumeSection } from './site-menu.js';
 // The studio's panel chrome: the seams between them on a desktop, and on a phone a
 // header that fits and a bar on each panel that folds it away.
 //
@@ -155,10 +157,8 @@ function headerMenu() {
   const menu = /** @type {HTMLElement|null} */ (document.getElementById('header-menu'));
   if (!toggle || !menu) return () => {};
 
-  // Settings too: its three bars beside the menu's own three lines were two buttons
-  // that looked the same, one of them a menu and the other not.
   const moved = [...document.querySelectorAll(
-    '.site-header #banner, .site-header #drill-open, .site-header #pdf, .site-header .back-link, .site-header #site-menu',
+    '.site-header #banner, .site-header #drill-open, .site-header #pdf, .site-header .back-link',
   )];
   // **PNG is the export that stays out on a phone, and PDF is the one that folds
   // away.** It is the other way round on a desktop and both are right: a PDF is what
@@ -178,6 +178,14 @@ function headerMenu() {
     return mark;
   });
   menu.append(...moved);
+  // **The settings themselves, not a door to them.** The header's own bars beside this
+  // menu's three lines were two buttons that looked the same, and moved in here they
+  // became an item opening a dialog that held one switch. So the menu carries what that
+  // dialog did, and the bars are hidden at this width (`style.css`).
+  const settings = document.createElement('div');
+  settings.className = 'header-settings';
+  settings.append(themeSection(), ...resumeSection());
+  menu.append(settings);
 
   /** @param {boolean} open */
   const show = (open) => {
@@ -195,9 +203,11 @@ function headerMenu() {
   };
   /** @param {KeyboardEvent} event */
   const onKey = (event) => { if (event.key === 'Escape' && !menu.hidden) show(false); };
-  /** An item that does something dismisses the menu it was in. @param {Event} event */
+  /** An item that does something dismisses the menu it was in -- not a setting, which
+   * is flipped and looked at where it is. @param {Event} event */
   const onPick = (event) => {
-    if (/** @type {Element} */ (event.target).closest('button, a')) show(false);
+    const target = /** @type {Element} */ (event.target);
+    if (target.closest('button, a') && !target.closest('.header-settings')) show(false);
   };
 
   toggle.addEventListener('click', onToggle);
@@ -214,6 +224,7 @@ function headerMenu() {
     removeEventListener('pointerdown', onDown, true);
     removeEventListener('keydown', onKey);
     marks.forEach((mark, i) => mark.replaceWith(moved[i]));
+    settings.remove();
     png?.classList.remove('primary');
     pdf?.classList.add('primary');
   };

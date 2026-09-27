@@ -964,9 +964,12 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
   .header-menu > button, .header-menu > .btn {
     justify-content: flex-start; padding: 0.5em 0.7em;
   }
-  /* Settings in the menu: its bars and its name, as a row like the others. */
-  .header-menu > .site-menu { inline-size: auto; block-size: auto; gap: 0.6em; }
-  .header-menu > .site-menu::after { content: attr(aria-label); }
+  /* The settings in the menu, as rows like its others: the header's own bars would be
+     a second menu button beside this one, so at this width they go. */
+  .studio-header #site-menu { display: none; }
+  .header-settings { border-top: 1px solid var(--line-soft); padding: var(--space-1) 0.7em 0; }
+  .header-settings .display-section { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); }
+  .header-settings h3 { font-size: inherit; font-weight: 400; margin: 0; }
   /* The banner is a bar of its own on a desktop; in the menu it is one item among
      the rest, so it loses the rule that separated it from them. */
   .header-menu > .banner {
