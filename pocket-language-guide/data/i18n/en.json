@@ -408,6 +408,7 @@
   "tree.saveEdit": "Save",
   "warn.break-failed": "At {scale}x the content does not fit. Columns in total: {columns}.",
   "warn.card-too-small": "Even {faces} faces of this card leave the type near its smallest readable size. A larger card, or fewer sections, would read better.",
+  "warn.band-too-long": "A header or footer is set at {size}pt to fit its line, under the {floor}pt this script reads at. Take an item out of it, or use a wider card.",
   "warn.emergency-unreviewed": "The emergency numbers on file for {region} have not been checked by a fluent speaker, so they are left off the sheet. Verify them and raise their confidence, or add your own with the CSV import.",
   "warn.empty-column": "The {field} column is switched on, but nothing on this sheet has one, so it prints nothing. Fill it in with the CSV import, or switch the column off.",
   "warn.hairline-too-thin": "The thinnest rule is {thinnest}pt, below the {minimum}pt this paper can hold. It may print as nothing. Try photo stock, or a theme with heavier rules.",

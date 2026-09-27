@@ -883,6 +883,7 @@ export function layout(input) {
   }
 
   /** @type {import('../types.js').Face[]} */ const faceList = [];
+  let bandSmallest = Infinity;
   /** @type {number[]} */ const looseness = [];
   for (let f = 0; f < faces; f += 1) {
     /** @type {import('../types.js').Face} */
@@ -1075,9 +1076,11 @@ export function layout(input) {
       const y = reach === 'band'
         ? baseline
         : (strip.top + strip.bottom) / 2 + size * 0.35;
-      /** @param {import('../types.js').HeadPart} part */
-      const styleOf = (part) => ({
+      /** @param {import('../types.js').HeadPart} part @param {number} [at] */
+      const styleOf = (part, at = size) => ({
         ...style,
+        size: at,
+        leading: at * 1.2,
         weight: /** @type {number} */ (part.bold ? 700 : 400),
         ...(part.latin ? {
           stack: registry.stackFor(latin.stack, spec.typeface),
@@ -1085,52 +1088,40 @@ export function layout(input) {
           wordBreak: /** @type {'space'|'any'|'dict'} */ (corpus.scripts[latin.iso].word_break),
         } : {}),
       });
-      /** @param {import('../types.js').HeadPart[]} parts */
-      const widthOf = (parts) => parts.reduce(
+      /** @param {import('../types.js').HeadPart[]} parts @param {number} [at] */
+      const widthOf = (parts, at = size) => parts.reduce(
         (sum, part, i) => sum + (part.logo
-          ? logoSize(size) * LOGO_ASPECT + logoAir(parts, i) * size
-          : measurer.width(part.text, styleOf(part))),
+          ? logoSize(at) * LOGO_ASPECT + logoAir(parts, i) * at
+          : measurer.width(part.text, styleOf(part, at))),
         0,
       );
-      /** @param {import('../types.js').HeadPart[]} parts @param {number} room */
-      const fit = (parts, room) => {
-        // Trimmed from the end rather than dropped, because half a label still says
-        // which sheet this is -- and a phone card is 180pt wide, where the emergency
-        // line alone is wider than the whole band.
-        const out = parts.map((part) => ({ ...part }));
-        while (out.length && widthOf(out) > room) {
-          const last = out[out.length - 1];
-          if (last.text.length > 2) last.text = last.text.slice(0, -2);
-          else out.pop();
-        }
-        if (out.length && widthOf(out) < widthOf(parts)) {
-          out[out.length - 1].text += '\u2026';
-        }
-        return out;
-      };
 
-      // The corners are folios and short labels; the middle is where the emergency
-      // line goes and is the one that gives way, because it is also the only one
-      // whose absence loses nothing a reader can see is missing. Sized in that
-      // order: corners first, then whatever is left over for the centre.
-      const gap = size;
       const span = bandSpec.span ?? 'full';
-      // The corners first, then the middle in what they leave. **In the middle of
-      // what they leave, not of the face**: the centre's budget was the leftover
-      // width but it was anchored at the page's midpoint, so on a phone card whose
-      // pair label ran past the middle the pronunciation key was set on top of it.
-      // Measured from the fitted corners, since a corner may itself have been trimmed.
-      const leftFit = fit(left, Math.max(0, box.width - widthOf(right) - gap));
-      const rightFit = fit(right, Math.max(0, box.width - widthOf(leftFit) - gap));
-      const leftW = widthOf(leftFit);
-      const rightW = widthOf(rightFit);
+      const groups = span === 'full' ? [left, center, right] : [joinParts([left, center, right])];
+      const inked = groups.filter((parts) => parts.length);
+      const natural = inked.reduce((sum, parts) => sum + widthOf(parts), 0)
+        + size * Math.max(0, inked.length - 1);
+      // **Smaller, never shorter.** A line that does not fit is set smaller, whole.
+      // It used to be trimmed from the end with an ellipsis, and a trimmed label says
+      // a different, wrong thing -- a pair missing its last letters, an emergency line
+      // missing its last number -- where a smaller one still says the right thing.
+      // Widths are linear in the size, so one factor fits the line exactly; below the
+      // reader's floor the sheet says so rather than printing it without a word.
+      const set = natural > box.width ? size * box.width / natural : size;
+      bandSmallest = Math.min(bandSmallest, set);
+      const gap = set;
+      // The corners at the edges, the middle in the middle of what they leave. **Of
+      // what they leave, not of the face**: anchored at the page's midpoint, a centre
+      // beside a long pair label on a phone card was set on top of it.
+      const leftW = widthOf(left, set);
+      const rightW = widthOf(right, set);
       const free = Math.max(0, box.width - leftW - rightW - gap * 2);
       /** @type {[import('../types.js').HeadPart[], number, 'start'|'end'|'mid'][]} */
       const placedHead = span === 'full'
         ? [
-          [leftFit, box.left, 'start'],
-          [rightFit, box.left + box.width, 'end'],
-          [fit(center, free), box.left + leftW + gap + free / 2, 'mid'],
+          [left, box.left, 'start'],
+          [right, box.left + box.width, 'end'],
+          [center, box.left + leftW + gap + free / 2, 'mid'],
         ]
         // **A tab rather than a rule across the face.** The three positions are
         // concatenated into one group at the chosen edge, bullet-joined as a single
@@ -1146,7 +1137,7 @@ export function layout(input) {
         // indistinguishable from `across` -- the owner reported it twice -- because
         // the reserved strip spanned the face even though the ink did not.
         : [[
-          fit(joinParts([left, center, right]), box.width),
+          groups[0],
           span === 'left' ? box.left
             : span === 'right' ? box.left + box.width
               : box.left + box.width / 2,
@@ -1171,7 +1162,7 @@ export function layout(input) {
         const ink = placedHead.filter(([parts]) => parts.length);
         if (ink.length) {
           const spans = ink.map(([parts, anchor, align]) => {
-            const total = widthOf(parts);
+            const total = widthOf(parts, set);
             const start = align === 'end' ? anchor - total
               : align === 'mid' ? anchor - total / 2 : anchor;
             return [start, start + total];
@@ -1222,18 +1213,18 @@ export function layout(input) {
 
       for (const [parts, anchor, align] of placedHead) {
         if (!parts.length) continue;
-        const total = widthOf(parts);
+        const total = widthOf(parts, set);
         let x = align === 'end' ? anchor - total : align === 'mid' ? anchor - total / 2 : anchor;
         for (const [i, part] of parts.entries()) {
           if (part.logo) {
-            const h = logoSize(size);
-            const before = i > 0 ? LOGO_AIR * size : 0;
-            (face.paths ??= []).push(...logoMarks(x + before, y - (CAP_HEIGHT * size + h) / 2, h,
+            const h = logoSize(set);
+            const before = i > 0 ? LOGO_AIR * set : 0;
+            (face.paths ??= []).push(...logoMarks(x + before, y - (CAP_HEIGHT * set + h) / 2, h,
               spec.inkMode === 'mono' ? theme.colors.ink : null));
-            x += h * LOGO_ASPECT + logoAir(parts, i) * size;
+            x += h * LOGO_ASPECT + logoAir(parts, i) * set;
             continue;
           }
-          const partStyle = styleOf(part);
+          const partStyle = styleOf(part, set);
           face.runs.push({
             text: part.text,
             x,
@@ -1241,7 +1232,7 @@ export function layout(input) {
             // The resolved face, not the stack: a run's `fontId` keys the renderer's
             // face table, and a stack name is not in it.
             fontId: measurer.faceKey(partStyle),
-            size,
+            size: set,
             // Emphasis is carried by weight *and* ink: the band is set in the muted
             // grey, and a bold grey number at 5.2pt is not much louder than a plain
             // one, so an emphasised part takes the body colour too.
@@ -1299,6 +1290,19 @@ export function layout(input) {
       languageRegions: (corpus.languages[spec.target]?.regions ?? '').split(';').filter(Boolean),
     }));
     faceList.push(face);
+  }
+
+  const bandFloor = Number(corpus.scripts[corpus.languages[spec.source].script].min_size_pt)
+    + Number(spec.paper.minSizeDelta);
+  if (bandSmallest < bandFloor - 1e-6) {
+    warnings.push({
+      code: 'band-too-long',
+      severity: 'warn',
+      params: { size: bandSmallest.toFixed(1), floor: bandFloor.toFixed(1) },
+      message: `A header or footer is set at ${bandSmallest.toFixed(1)}pt to fit its line, `
+        + `under the ${bandFloor.toFixed(1)}pt this script reads at. Take an item out of `
+        + 'it, or use a wider card.',
+    });
   }
 
   if (autoFaces && !noFit && scale < COMFORT - 1e-6 && faces >= MAX_AUTO_FACES) {

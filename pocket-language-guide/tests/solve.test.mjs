@@ -1021,6 +1021,37 @@ test('the head band is never set below the reader script’s own floor', async (
   }
 });
 
+test('a band too long for its line is set smaller and whole, never cut short', async () => {
+  // It was trimmed from the end with an ellipsis, which printed a different, wrong
+  // label -- a pair missing its last letters, an emergency line missing its last
+  // number. Smaller type still says the right thing, and under the reader's floor
+  // the sheet says that too, rather than printing it without a word.
+  const base = await referenceSpec('zh-Hans', 'en');
+  const bandOf = (/** @type {any} */ plan) => {
+    const runs = plan.faces[0].runs;
+    const highest = Math.min(...runs.map((/** @type {any} */ r) => r.y));
+    return runs.filter((/** @type {any} */ r) => Math.abs(r.y - highest) < 0.5);
+  };
+  const floor = Number(ctx.corpus.scripts[ctx.corpus.languages.en.script].min_size_pt)
+    + Number(base.paper.minSizeDelta);
+  const short = (await buildSheet(ctx, { ...base, head: { span: 'full', right: ['page'] } })).plan;
+  const size = bandOf(short)[0].size;
+  for (const words of [8, 40]) {
+    const text = Array.from({ length: words }, (_, i) => `word${i}`).join(' ');
+    const { plan } = await buildSheet(ctx, {
+      ...base, head: { span: 'full', left: ['custom'], right: ['page'], text },
+    });
+    const band = bandOf(plan);
+    const said = band.map((/** @type {any} */ r) => r.text).join('');
+    assert.ok(said.includes(text), `the whole line is there: ${said}`);
+    assert.ok(!said.includes('\u2026'), 'and nothing is cut short');
+    const set = band[0].size;
+    assert.ok(set <= size + 1e-6, `never larger than the band's own ${size}pt`);
+    assert.equal(plan.warnings.some((w) => w.code === 'band-too-long'), set < floor - 1e-6,
+      `warned exactly when under the ${floor}pt floor, at ${set}pt`);
+  }
+});
+
 test('the narrow face is a smaller sheet, not only a different one', async () => {
   // Four typefaces cost nothing new: `stackFor` resolves `<stack>-<typeface>` and
   // falls back per script, and the condensed Latin faces were already subset for
