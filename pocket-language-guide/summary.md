@@ -851,7 +851,14 @@ hanging mark counts as ink, a right-to-left sentence's corner is on its left, a
 turned one's is under the last column (a turned right-to-left one's above it, where
 its lines end), a buffer of three tenths of the type size keeps the two apart, and
 a sentence that scrolls lends no corner at all. Reply's label stays on one line and
-its type at no more than four fifths of the sentence's, whichever place it takes. The owner's gloss, how-to-say-it, Speak, speed and Turn are the owner's, so
+its type at no more than four fifths of the sentence's, whichever place it takes.
+**The pair always fits the frame.** Below is lifted out of its row and set under the
+sentence with a buffer of a third of the sentence's size, so the sentence is fitted
+with that buffer held open as the row's gap -- re-read as the sentence settles, since
+it depends on the size being fitted -- and the pair comes out exactly as tall as the
+row layout was. Held open only as the row's own small gap, the pair was taller than
+the frame, and Reply ran over its edge. `placeBelow` still shrinks Reply, and only then
+the buffer, if a pair would not fit. The owner's gloss, how-to-say-it, Speak, speed and Turn are the owner's, so
 they stay upright in one row at the foot and take as little as one line of small type
 and three buttons can; the sentence gets the rest. On the grid the same Turn sits in
 the bar that names the topic and the pair — a footer now rather than a sub-header,
@@ -911,7 +918,13 @@ name. `DETAILS` in `core/conversation.js` is the closed list (the name, for now)
 given the button is greyed with an empty box in its corner and its label has a blank;
 the first press asks for the detail rather than showing a sentence with a hole, and a
 given one shows a ticked box and the value, and is cleared by a hold (or a right
-click). The settings dialog has the same field under "About you".
+click). The settings dialog has the same field under "About you". **"My diet"** is the
+same idea for a list: a `diet` phrase reference says every one of the corpus's own
+dietary statements (`DIET`: vegetarian, vegan, no pork, no peanuts, not spicy and the
+rest) the reader has ticked, joined as two sentences are joined for "excuse me" --
+`joinSentences`, one function for both -- in the corpus's order, dropping any the pair
+cannot say. Its button is first on the food board's "none of this" screen, greyed and
+boxed until ticked; the first press opens the checklist, in the reader's own words.
 What is on a screen saves as a small file (`buildButtons`/`readButtons` in
 `core/personal.js`, relative placement keys, the backup's own field checks) and loads
 onto any screen of the same pair under fresh ids, so a tree can be handed to someone
@@ -921,7 +934,19 @@ dialog. A display setting prefixes every request on both sides with the corpus's
 own "excuse me" row for each language — one reviewed sentence before another,
 joined as two sentences, never a template — except on the emergency board. Turned
 applies to the whole tree: the owner's grid and the keypad turn with the sentence
-and the answers. `resolvePhrase` shows one reading of a slash gloss ("okay / can" →
+and the answers, and the bar under them **keeps its shape while what is on it turns in
+place** -- its arrow and icons a quarter each, and the topic's letters each on their line
+(`turnLetters`), laid out from the right so they read down the page for whoever has
+turned the phone, at no more height than the upright label took -- so no control moves.
+A joining script's label stays upright rather than lose its joined forms. Another
+display setting makes Attract attention sound a siren as it flashes: an oscillator wail
+between about 650 and 1500 Hz, started in the tap, played through the silent switch
+where Safari allows it, and stopped with the beacon. **The list of contexts ends in the
+reader's own**, each a screen of theirs kept for the pair and placed under `contexts`,
+opened as a board built on the spot (`own:<id>`, one node, the reader's buttons on it),
+and a dashed cell with a plus that makes one; a context is deleted from its own editor.
+A press outside any dialog closes it as its close control does (`ui/app.js`), if the
+press began outside it too. `resolvePhrase` shows one reading of a slash gloss ("okay / can" →
 "okay") on a board; the printed sheet keeps the range. The answer that says none of
 these fit ends in links that open a translator from the listener's language to the
 owner's: Google for every pair, DeepL where its published list has both languages,
@@ -1230,7 +1255,10 @@ every token in `style.css` is a `light-dark()` pair under `color-scheme: light d
 and `[data-theme]` on the root pins one side. A one-line script in each page's head
 sets that attribute before the stylesheet applies, so a reader who chose dark does
 not get a white flash on every load. The default is the device's setting, and the
-choice sits in the board's settings dialog and the studio's format panel.
+choice is a light switch in the settings dialogs, which every page's header opens. The
+studio's own switch is the card's: it sits under the palette, turns the card to the
+`dark` theme and back to the reference, and stays in step with the palette either way
+(`lightSwitch` in `ui/theme.js` draws both switches).
 
 `data/themes/parchment.json` is the reference scale on cream paper with navy ink,
 gold rules and the five roles pulled toward earth: the palette of the owner's
@@ -1617,7 +1645,11 @@ at the creases widen by `FOLD_GUTTER` (14pt) so no column is printed on the fold
 a dashed hairline in the rule colour runs down each on every face, front and back
 alike, because a fold is a fact about the paper and both sides have it. `contentBox`
 returns the per-gutter gaps and a `colX(c)` so the ornaments, the gutter handles and
-the frame all read the uneven gutters from one place. The passport presets are its
+the frame all read the uneven gutters from one place. **Which card the size is** is the
+reader's: by default the size chosen is the folded card and the sheet is that many
+times wider; with `foldSized: 'sheet'` it is the unfolded sheet, and each panel takes a
+share of its width and columns (`chosenCard` and `foldedGeometry` in `ui/glyphs.js`,
+offered under the fold as Folded card / Unfolded sheet). The passport presets are its
 natural companions: `passport-open` is two closed passports side by side, and a
 bifold on it folds to a card that fits the cover pocket. With the folded *finish*
 chosen as well on a four-column face, the midline it halves at is the bifold's

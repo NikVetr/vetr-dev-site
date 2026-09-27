@@ -5086,3 +5086,123 @@ of this code, the three new checks included -- the relaunch goes back to the pai
 contexts, Back from there goes up to the languages, and Back on the languages leaves
 the app. The simulator run is recorded in the entry after this one. Nothing here has
 been on a phone.
+
+## Native evidence for Batch AC
+
+Both apps were built from the pushed code and checked on it. **Android**, built from
+609de2e9 -- the two commits after it, to 4bb3aa8f, change a test and the docs -- on the
+emulator: `check:android` 9 of 9 -- launch, persistence across a
+relaunch and a reinstall, the relaunch back to the pair's contexts, Back from there up
+to the gallery, an offline start with the phrase on its board, the share sheet and its
+cancellation, and Back on the gallery leaving the app. The first run of the new checks
+is what found the bridge race: the board stayed blank on the first navigation after
+launch, and a reproduction showed it one launch in four before the fix and in none of
+twelve after it. **iOS**, from a clean checkout on the Mac with the generated project
+deleted first: `check:ios` 16 of 16, the relaunch check included. The simulator has no
+system Back, so Back as up is Android's evidence alone.
+
+## Batch AD — details the reader gives once, starting with their name
+
+The owner asked for introductions that say who they are, with the details entered
+once and remembered, the unfilled buttons greyed out *and* marked with an empty box
+("to double encode" it), a ticked box and the value in the label once given, and a
+long press to clear it for the next country. Most of the groundwork was already on
+disk: the "Meeting people" board has an About me screen, and the corpus has
+`introductions.my-name-is` as a template in all 53 languages, with `{}` in its script,
+romanisation and IPA cells, printed on the sheet as a blank rule.
+
+**The engine.** A board button's corpus reference may carry `fill`, naming one of
+`DETAILS` (the name, for now), and `resolvePhrase` puts the reader's detail where the
+row leaves its slot -- in the sentence, the IPA and the respelling. The respeller was
+checked first and passes `{}` through untouched (我叫{} respells as `waw jyaow {}` for an
+English reader, `mee-NYAH zuh-VOOT {}` for Russian), so the name goes into the owner's
+own letters as they wrote it, which is right: a person knows how to say their own name.
+A reference whose row has no slot is unavailable, never the bare template, and a board
+naming a detail that is not in `DETAILS` fails validation.
+
+**The button.** Unfilled, it is greyed, has an empty box in its corner, and says "My
+name is ____"; the first press opens a small dialog asking for the name (saved by Save
+only, so closing it is changing one's mind). Filled, it is a normal button with a
+ticked box saying "My name is Nikolai", and the stranger sees 我叫Nikolai. A hold of
+600ms -- or a right click, which is the same event -- clears it; filled buttons turn off
+text selection and the iOS callout so the hold is only a hold. The settings dialog has
+the same field under "About you", and a backup carries it.
+
+**Why only the name.** A country is the obvious next detail and needs two things the
+name does not: its name in every language with a romanisation and IPA (CLDR gives the
+written name only, and pinyin for 加拿大 cannot be computed in the browser), and frames
+that take it in the nominative -- the Russian row is `Я из {}.`, which wants the
+genitive (из России). Both are research-loop work, planned rather than improvised.
+
+**Reply no longer runs over the frame.** Reported as a Reply that, under a longer
+message, was very small and overlapped the message's white outline. Measured across
+1,248 answerable messages in eight languages at phone size in both orientations: the
+overlap was real and up to 20px, and it came from Reply *under* the sentence, not
+beside it. The sentence was fitted with Reply in its own row, then Reply was lifted out
+and set under the sentence with a buffer of a third of the sentence's size -- 49px for
+a 147px sentence -- so wherever the sentence filled the frame, the pair was taller than
+the row had been and Reply went past the frame's edge, over the outline and into the
+line beneath (这个我要了 on the shopping board is the case pinned by a test).
+
+The first fix made Reply shrink until the pair fitted, which cured the overlap and
+produced the other half of the report: in landscape, where the room under a two-line
+sentence is Reply's row and little more, Reply went down to its 16px floor beside a
+94px sentence -- "Antworten" under "Bitte etwas fester." -- and since the choice between
+beside and below was scored with Reply's size before that shrink, below kept winning
+with a Reply a sixth the sentence's size. The fix that holds is to fit the sentence with
+the buffer held open as the row's gap, re-read as the sentence settles because it is a
+third of the size being fitted: the sentence gives up the few percent the buffer costs,
+the pair is exactly as tall as the row layout, below is scored at the size it really
+gets, and Reply keeps a readable size and its margin. The shrink stays in `placeBelow`
+as the last resort. The new browser test fails on the old code and passes on the new.
+
+**Turned, Reply was a sliver -- which is how it "disappeared".** Reported as a Reply
+that sometimes vanished from a turned message. A sweep of 860 turned messages found
+none missing but many tiny: 18px beside a 150px sentence. Turned, Reply sits in a
+horizontal row, and as a flex item it was squeezed narrower than its own line, so its
+words spilled into its padding, the fitter's "words inside the padding" test failed at
+every size, and it shrank to the floor. It is `flex: none` now -- the fitter sizes it,
+the message box takes the squeeze -- and the same case comes out at 57px.
+
+**Eight notes from the phone.**
+
+- A press outside a dialog closes it as its corner does -- in `ui/app.js`, once for
+  every page, and only for a press that began outside it too, so dragging out of a
+  field loses nothing.
+- The studio's header on a phone had two identical three-bar buttons, a menu and
+  Settings. Settings is an item in the menu now, with its name beside its bars.
+- Turning left the bar where it was only in name: the whole bar was set vertical, so
+  every control in it moved. It keeps its shape now and what is on it turns in place --
+  the arrow and icons a quarter each, and the topic's letters each on its line, laid out
+  from the right so they read down the page for whoever has turned the phone, sized to
+  the height the upright label took. Measured: every control's box is identical before
+  and after.
+- The studio's light switch changed the app, not the card. It turns the card dark now
+  (the palette's `dark` theme, and back to the reference) and moved under the palette;
+  the app's appearance is in the settings, where every page's header reaches it.
+- A folded card's size can be the folded card (as before) or the unfolded sheet, chosen
+  under the fold. `chosenCard` reads the card the reader picked either way and
+  `foldedGeometry` folds it on that reading, so the columns stay a whole number per
+  panel in both.
+- Attract attention can sound a siren: a wail drawn by an oscillator, off by default,
+  started in the tap, played through the silent switch where Safari allows it, stopped
+  with the beacon.
+- The list of contexts ends in the reader's own and a dashed cell with a plus that makes
+  one -- for a hotel's check-in, say. A context is a screen of theirs kept for the pair,
+  opened as a board built on the spot, and deleted from its own editor.
+- The "About you" strings went into every catalogue through the research loop, and the
+  Hausa epilepsy row got the hooked letter its catalogue's note requires (`farfaɗiya`),
+  with its IPA regenerated; Yoruba leaves "hold to clear" out, having no sourced word for
+  a gesture nobody had named yet.
+
+**"My diet", chosen once.** The owner asked that the dietary preferences be chosen once
+and remembered rather than tapped through screen by screen each time. The food board
+already had the statements as separate buttons -- vegetarian, vegan, no meat, no pork,
+no seafood, no eggs, no peanuts, no nuts, no sesame, not spicy, less spicy -- and the
+corpus has "no onion or garlic" too. A `diet` phrase reference says every ticked one at
+once, joined by `joinSentences` (moved from the "excuse me" prefix, which now uses it
+too) in the corpus's order; one the pair cannot say is dropped rather than shown in the
+owner's language. The button is first on the "none of this" screen -- the main screen is
+at the twelve-button limit -- and behaves as the name does: greyed with an empty box
+until something is ticked, a checklist on the first press, a hold to clear. For a
+Mandarin listener, no pork, no peanuts and not spicy come out as 不要猪肉。不要花生。不要辣.

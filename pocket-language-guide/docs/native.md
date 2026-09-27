@@ -164,10 +164,11 @@ sync the project, assemble the debug APK. The gate's `publish` check keeps
 (`scripts/check_android.mjs`) drives the emulator over adb and the WebView's devtools
 socket and has shown, on Android 15 under KVM with Capacitor 8: a phrase written
 through `Preferences` survives HOME + force-stop + relaunch and an in-place
-`adb install -r`; a cold start with wifi and data off loads the gallery and the board
+`adb install -r`; a cold start with wifi and data off goes back to the pair's contexts,
+where the last session was, BACK there goes up to the gallery, and the board loads
 with the phrase on it; Save a copy opens the Android chooser through `deliver()`
 (Filesystem + Share), and BACK on it returns to the app with no browser download
-behind it. Emulator evidence, not a phone's.
+behind it; and BACK on the gallery leaves the app. Emulator evidence, not a phone's.
 
 ## iOS, built on the Mac over SSH
 
@@ -195,6 +196,7 @@ iPhone 17 simulator:
 | offline start | all 81 requests of a fresh start answered from the app bundle, no service worker |
 | safe areas | 62pt top and 34pt foot; header and board footer clear of both |
 | persistence | a phrase written through `Preferences` survives terminate + launch and a reinstall over itself |
+| relaunch | after a board, terminate + launch opens that pair's contexts |
 | speech | a touch on Speak fires `start` and `end`, 68 voices |
 | keyboard | a touched field takes typing and stays visible above the keyboard; after ✓ the page is back at full height, unscrolled |
 | backup | Save a copy writes the file and the system share sheet offers it (Copy, Save to Files) |
