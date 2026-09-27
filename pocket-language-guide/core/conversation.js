@@ -44,6 +44,29 @@ const UNITS = new Set(['minute', 'hour', 'day']);
 const ENTRIES = new Set(['duration', 'clock', 'count']);
 /** The reader's own details a button can say, in the slot its row leaves for one. */
 export const DETAILS = new Set(['name']);
+/**
+ * What a reader may say about what they eat, all at once: the corpus's own statements,
+ * each a reviewed sentence, joined rather than templated. Questions ("does it contain
+ * fish stock?") are left to the board; these are the things said about oneself.
+ */
+export const DIET = [
+  'dietary-needs.i-am-vegetarian', 'dietary-needs.i-am-vegan', 'dietary-needs.no-meat',
+  'dietary-needs.no-pork', 'dietary-needs.no-seafood', 'dietary-needs.no-eggs',
+  'dietary-needs.no-peanuts', 'dietary-needs.no-nuts', 'dietary-needs.no-sesame',
+  'dietary-needs.no-onion-garlic', 'dietary-needs.not-spicy', 'dietary-needs.less-spicy',
+];
+
+/**
+ * Two sentences as one message, as a person would write them: the second after the
+ * first's own stop, or a stop from the first's script when it has none -- a full stop,
+ * or 。 in Chinese and Japanese, which takes no space after it.
+ * @param {string} lead @param {string} text
+ */
+export function joinSentences(lead, text) {
+  if (!lead || text.startsWith(lead)) return text;
+  const stop = /[\p{P}]$/u.test(lead) ? '' : (/[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}]/u.test(lead) ? '\u3002' : '.');
+  return `${lead}${stop} ${text}`.replace('\u3002 ', '\u3002');
+}
 /** What an unfilled slot shows until the reader has said what goes in it. */
 const BLANK = '____';
 
@@ -89,8 +112,9 @@ const BLANK = '____';
  * `corpus` is a concept id and is the normal case. `custom` is one of the owner's
  * own phrases, which carries its text with it because no concept describes it.
  * `fill` names the reader's own detail -- one of `DETAILS` -- that goes in the slot a
- * template row leaves for it: "My name is {}" says the name they have given.
- * @typedef {{kind:'corpus', id:string, fill?:string} | {kind:'custom', id:string}} PhraseRef
+ * template row leaves for it: "My name is {}" says the name they have given. `diet` says
+ * every one of the `DIET` sentences the reader has ticked, joined.
+ * @typedef {{kind:'corpus', id:string, fill?:string} | {kind:'custom', id:string} | {kind:'diet', id:string}} PhraseRef
  */
 
 /**
@@ -235,7 +259,9 @@ export function validateBoard(board) {
         }
       } else if (button.kind === 'message') {
         const ref = button.phraseRef;
-        if (!ref || (ref.kind !== 'corpus' && ref.kind !== 'custom') || !ref.id) {
+        if (ref?.kind === 'diet') {
+          // Says what the reader ticked; there is no id to check.
+        } else if (!ref || (ref.kind !== 'corpus' && ref.kind !== 'custom') || !ref.id) {
           problems.push(`${key}: a message with no usable phraseRef`);
         } else if (ref.fill !== undefined && (ref.kind !== 'corpus' || !DETAILS.has(ref.fill))) {
           problems.push(`${key}: fill ${ref.fill} is not one of ${[...DETAILS].join(', ')} on a corpus phrase`);
@@ -299,7 +325,7 @@ export function phrasesOf(board) {
   /** @type {PhraseRef[]} */ const refs = [];
   const sets = Object.values(board.replySets ?? {});
   for (const node of [...Object.values(board.nodes), ...sets]) {
-    for (const button of node.buttons) if (button.phraseRef) refs.push(button.phraseRef);
+    for (const button of node.buttons) if (button.phraseRef && button.phraseRef.kind !== 'diet') refs.push(button.phraseRef);
   }
   // Deduplicated on the way out, because indexing the same term into two
   // subsections is the intended usage and must not look like two dependencies.
@@ -330,6 +356,32 @@ export function phrasesOf(board) {
  * @returns {ResolvedPhrase|null}
  */
 export function resolvePhrase(ref, ctx, incoming = false) {
+  if (ref.kind === 'diet') {
+    // The sentences the reader ticked, in the corpus's order, joined as a person would
+    // write them. Ticked and not sayable in this pair is dropped rather than shown in
+    // the wrong language; nothing ticked waits blank, as a fill-in does.
+    const ticked = (ctx.details?.diet ?? '').split(',').filter(Boolean);
+    const said = DIET.filter((id) => ticked.includes(id))
+      .map((id) => resolvePhrase({ kind: 'corpus', id }, ctx, incoming))
+      .filter((p) => p !== null);
+    if (!said.length) {
+      return {
+        id: 'diet', listener: { text: '', lang: ctx.listener, dir: ctx.listenerDir },
+        owner: { text: '', lang: ctx.owner, dir: ctx.ownerDir }, provenance: '', confidence: 0, custom: false, unfilled: 'diet',
+      };
+    }
+    return said.slice(1).reduce((all, p) => ({
+      ...all,
+      listener: {
+        ...all.listener,
+        text: joinSentences(all.listener.text, p.listener.text),
+        say: [all.listener.say, p.listener.say].filter(Boolean).join(' \u00b7 '),
+        ipa: [all.listener.ipa, p.listener.ipa].filter(Boolean).join(' | '),
+      },
+      owner: { ...all.owner, text: joinSentences(all.owner.text, p.owner.text) },
+      confidence: Math.min(all.confidence, p.confidence),
+    }), { ...said[0], id: 'diet' });
+  }
   if (ref.kind === 'custom') {
     const own = ctx.custom?.[ref.id];
     if (!own?.listener || !own?.owner) return null;

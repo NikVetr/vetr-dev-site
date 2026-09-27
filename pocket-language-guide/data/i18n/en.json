@@ -534,6 +534,8 @@
   "about.kept": "Kept on this device and in your backups, and nowhere else.",
   "about.unset": "Not filled in yet: tap to fill it in",
   "about.set": "Filled in: hold to clear it",
+  "about.diet": "My diet",
+  "about.dietHint": "Tick everything that applies to you. The button says all of it at once.",
   "board.noBoards": "No conversation boards have been written for this pair yet.",
   "boards.time.title": "Time",
   "boards.time.when": "When…",

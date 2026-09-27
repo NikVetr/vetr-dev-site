@@ -12,7 +12,7 @@
 // downloads is the corpus rows for two languages and a JSON file.
 
 import { resumeSection, wireSiteMenu } from './site-menu.js';
-import { aboutSection, askDetail, readAbout, setDetail } from './about.js';
+import { aboutSection, askDetail, askDiet, readAbout, setDetail } from './about.js';
 import {
   loadText, loadLanguages, readerLanguage, registerOffline, showFatal,
   deferUpdates, applyUpdateIfIdle, download, keepBoardOffline, accentFor,
@@ -24,7 +24,7 @@ import {
 import { createRespeller } from '../core/respell.js';
 import { variantKey } from '../core/speaker.js';
 import {
-  validateBoard, resolvePhrase, missingPhrases, reduce, openBoard, currentNode,
+  validateBoard, resolvePhrase, missingPhrases, reduce, openBoard, currentNode, DIET, joinSentences,
 } from '../core/conversation.js';
 import {
   renderGrid, renderMessage, renderReply, renderEntry, clearStage, fitMessage, translatorLinks,
@@ -464,7 +464,13 @@ async function main() {
   /** Re-read the reader's details after they change, and redraw with them. */
   const detailsChanged = () => { ctx.details = readAbout(); paint(); };
   /** @param {import('../core/conversation.js').BoardButton} button */
-  const fillOf = (button) => (button.phraseRef && 'fill' in button.phraseRef ? button.phraseRef.fill : undefined);
+  const fillOf = (button) => (button.phraseRef?.kind === 'diet' ? 'diet'
+    : button.phraseRef && 'fill' in button.phraseRef ? button.phraseRef.fill : undefined);
+  /** The diet sentences this pair can say, in the reader's own words, for the checklist. */
+  const dietChoices = () => DIET
+    .map((id) => ({ id, said: resolvePhrase({ kind: 'corpus', id }, ctx) }))
+    .filter(({ said }) => said)
+    .map(({ id, said }) => ({ value: id, label: /** @type {any} */ (said).owner.text }));
 
   // What the message screen carries, which is the reader's own choice. Re-read
   // rather than captured when it changes, so the dialog's checkbox and the screen
@@ -662,21 +668,15 @@ async function main() {
   const politely = (phrase) => {
     const excuse = resolvePhrase({ kind: 'corpus', id: 'social-basics.excuse-me-sorry' }, ctx);
     if (!excuse) return phrase;
-    /** @param {string} lead @param {string} text */
-    const join = (lead, text) => {
-      if (!lead || text.startsWith(lead)) return text;
-      const stop = /[\p{P}]$/u.test(lead) ? '' : (/[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}]/u.test(lead) ? '\u3002' : '.');
-      return `${lead}${stop} ${text}`.replace('\u3002 ', '\u3002');
-    };
     return {
       ...phrase,
       listener: {
         ...phrase.listener,
-        text: join(excuse.listener.text, phrase.listener.text),
+        text: joinSentences(excuse.listener.text, phrase.listener.text),
         say: [excuse.listener.say, phrase.listener.say].filter(Boolean).join(' \u00b7 '),
         ipa: [excuse.listener.ipa, phrase.listener.ipa].filter(Boolean).join(' | '),
       },
-      owner: { ...phrase.owner, text: join(excuse.owner.text, phrase.owner.text) },
+      owner: { ...phrase.owner, text: joinSentences(excuse.owner.text, phrase.owner.text) },
     };
   };
 
@@ -752,6 +752,7 @@ async function main() {
           // Not given yet: the first press asks for the detail rather than showing a
           // sentence with a hole in it.
           const unfilled = phraseOf(button)?.unfilled;
+          if (unfilled === 'diet') { askDiet(dietChoices(), detailsChanged); return; }
           if (unfilled) { askDetail(unfilled, detailsChanged); return; }
           // **Not a state change, and deliberately not part of the board's own
           // machine.** A beacon is not something being said -- there is no message,
@@ -1005,7 +1006,7 @@ async function main() {
     languages: [listener, owner],
     profile,
     onChange: (next) => { profile = next; voice(); sayStatus(); paint(); },
-    extra: [aboutSection(detailsChanged),
+    extra: [aboutSection(detailsChanged, dietChoices()),
       displaySection(display, (next) => { display = next; paint(); }),
       voiceSection({
         lang: listener,

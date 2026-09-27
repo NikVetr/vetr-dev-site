@@ -2234,3 +2234,23 @@ test('a context of your own is made from the list, filled like a board, and dele
   await expect(page.locator('#board-title')).toHaveText('Context');
   await expect(page.locator('.board-cell-own')).toHaveCount(0);
 });
+
+test('"My diet" is chosen once from a checklist, and says all of it at once', async ({ page }) => {
+  // The dietary sentences were one button each, pressed one after another every time.
+  // Chosen once, the button says every one of them, joined; a hold clears the choice.
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=food');
+  await page.locator('[data-button="avoid"]').click();
+  const cell = page.locator('[data-button="mydiet"]');
+  await expect(cell).toHaveClass(/board-cell-unset/);
+  await cell.click();
+  const ask = page.locator('dialog.about-diet');
+  await ask.getByRole('checkbox', { name: 'No pork' }).check();
+  await ask.getByRole('checkbox', { name: 'No peanuts' }).check();
+  await ask.getByRole('button', { name: 'Save' }).click();
+  await expect(cell).toHaveClass(/board-cell-set/);
+  await cell.click();
+  await expect(page.locator('.board-message-text')).toHaveText('不要猪肉。不要花生');
+  await dismiss(page);
+  await cell.click({ button: 'right' });
+  await expect(cell).toHaveClass(/board-cell-unset/);
+});

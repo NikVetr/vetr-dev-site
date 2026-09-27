@@ -125,6 +125,16 @@
       "titleKey": "boards.food.avoidTitle",
       "buttons": [
         {
+          "id": "mydiet",
+          "kind": "message",
+          "labelKey": "about.diet",
+          "phraseRef": {
+            "kind": "diet",
+            "id": "diet"
+          },
+          "colour": "alert"
+        },
+        {
           "id": "no-meat",
           "kind": "message",
           "phraseRef": {

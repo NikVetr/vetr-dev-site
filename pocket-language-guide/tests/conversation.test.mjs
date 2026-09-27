@@ -12,7 +12,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import {
   validateBoard, phrasesOf, resolvePhrase, missingPhrases,
-  reduce, openBoard, currentNode, resolveValue,
+  reduce, openBoard, currentNode, resolveValue, joinSentences,
 } from '../core/conversation.js';
 import { loadCorpus } from '../core/pack.js';
 
@@ -161,6 +161,29 @@ test('a fill-in says the reader\'s own detail in its slot, and waits blank witho
   const odd = structuredClone(board);
   odd.nodes.main.buttons.push({ id: 'age', kind: 'message', phraseRef: { kind: 'corpus', id: 'a.stop', fill: 'age' } });
   assert.ok(validateBoard(odd).some((p) => p.includes('fill age is not one of name')));
+});
+
+test('a diet says every ticked sentence at once, joined as a person writes them', () => {
+  const concepts = { ...ctx.corpus.concepts };
+  const listenerRows = { ...ctx.listenerRows };
+  const ownerRows = { ...ctx.ownerRows };
+  for (const [id, zh, en] of [['dietary-needs.no-pork', '不要猪肉', 'No pork'],
+    ['dietary-needs.no-peanuts', '不要花生', 'No peanuts'], ['dietary-needs.i-am-vegan', '', 'I am vegan']]) {
+    concepts[id] = { concept_id: id, applies_to: '' };
+    listenerRows[id] = { text: zh, confidence: '2' };
+    ownerRows[id] = { text: en };
+  }
+  const diet = { ...ctx, corpus: { concepts }, listenerRows, ownerRows };
+  const ref = { kind: /** @type {const} */ ('diet'), id: 'diet' };
+  assert.equal(resolvePhrase(ref, diet)?.unfilled, 'diet');
+  // In the corpus's order, whatever order they were ticked in; one the pair cannot say
+  // (vegan has no Mandarin row here) is dropped rather than shown in English.
+  const got = resolvePhrase(ref, { ...diet, details: { diet: 'dietary-needs.no-peanuts,dietary-needs.i-am-vegan,dietary-needs.no-pork' } });
+  assert.equal(got?.unfilled, undefined);
+  assert.equal(got?.listener.text, '不要猪肉。不要花生');
+  assert.equal(got?.owner.text, 'No pork. No peanuts');
+  // The join is the one "excuse me" uses: the lead's own stop, or its script's.
+  assert.equal(joinSentences('Excuse me!', 'No pork'), 'Excuse me! No pork');
 });
 
 test('a concept scoped away from this listener is not reachable through a board', () => {

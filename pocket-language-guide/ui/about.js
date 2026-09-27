@@ -7,7 +7,7 @@
 
 import * as store from './platform/store.js';
 import { t } from './i18n.js';
-import { askText } from './board-menu.js';
+import { askChoices, askText } from './board-menu.js';
 
 const KEY = 'plg.about';
 
@@ -66,8 +66,31 @@ export function askDetail(fact, onChange) {
   });
 }
 
-/** The settings dialog's section: every detail, each changed where it stands. @param {() => void} onChange */
-export function aboutSection(onChange) {
+/**
+ * Ask what the reader eats and does not, from the sentences this pair can say: the
+ * first press of the diet button opens this, and so does the settings section.
+ * @param {{value:string, label:string}[]} options  the `DIET` sentences, in the reader's words
+ * @param {() => void} onChange
+ */
+export function askDiet(options, onChange) {
+  askChoices({
+    label: t('about.diet'),
+    hint: t('about.dietHint'),
+    options,
+    chosen: (readAbout().diet ?? '').split(',').filter(Boolean),
+    save: t('editor.save'),
+    close: t('gallery.previewClose'),
+    kind: 'about-diet',
+    onSave: (values) => { setDetail('diet', values.join(',')); onChange(); },
+  });
+}
+
+/**
+ * The settings dialog's section: every detail, each changed where it stands.
+ * @param {() => void} onChange
+ * @param {{value:string, label:string}[]} [diet]  the diet choices, where a board can say them
+ */
+export function aboutSection(onChange, diet) {
   const box = document.createElement('section');
   box.className = 'speaker-block';
   const heading = document.createElement('h3');
@@ -76,6 +99,15 @@ export function aboutSection(onChange) {
   const kept = document.createElement('p');
   kept.className = 'speaker-why';
   kept.textContent = t('about.kept');
-  box.append(heading, detailField('name', onChange).label, kept);
+  box.append(heading, detailField('name', onChange).label);
+  if (diet?.length) {
+    const choose = document.createElement('button');
+    choose.type = 'button';
+    choose.className = 'chip';
+    choose.textContent = t('about.diet');
+    choose.addEventListener('click', () => askDiet(diet, onChange));
+    box.append(choose);
+  }
+  box.append(kept);
   return box;
 }

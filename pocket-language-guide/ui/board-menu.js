@@ -141,3 +141,40 @@ export function askText({ label, save, close, onSave, value = '', hint, autocomp
   panel.showModal();
   input.focus();
 }
+
+/**
+ * Ask which of several things apply, as checkboxes in a dialog of their own, and hand
+ * back the ones ticked on Save. As `askText`, closing it any other way keeps nothing.
+ * @param {object} config
+ * @param {string} config.label  what is being asked, above the boxes
+ * @param {{value:string, label:string}[]} config.options
+ * @param {string[]} config.chosen  ticked to begin with
+ * @param {string} config.save  @param {string} config.close
+ * @param {(values:string[]) => void} config.onSave
+ * @param {string} [config.hint]  @param {string} [config.kind]
+ */
+export function askChoices({ label, options, chosen, save, close, onSave, hint, kind = '' }) {
+  const panel = /** @type {HTMLDialogElement} */ (el('dialog', { class: `speaker-settings ${kind}` }));
+  const corner = el('button', { type: 'button', class: 'speaker-close', 'aria-label': close });
+  corner.addEventListener('click', () => panel.close());
+  const boxes = options.map((option) => {
+    const box = /** @type {HTMLInputElement} */ (el('input', { type: 'checkbox', value: option.value }));
+    box.checked = chosen.includes(option.value);
+    return { box, row: el('label', { class: 'speaker-option' }, [box, option.label]) };
+  });
+  const form = el('form', {}, [
+    el('fieldset', { class: 'speaker-block' }, [el('legend', { text: label }), ...boxes.map((b) => b.row)]),
+    ...(hint ? [el('p', { class: 'speaker-why', text: hint })] : []),
+    el('button', { class: 'btn primary', text: save }),
+  ]);
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    onSave(boxes.filter((b) => b.box.checked).map((b) => b.box.value));
+    panel.close();
+  });
+  panel.append(corner, form);
+  panel.addEventListener('close', () => panel.remove());
+  document.body.append(panel);
+  panel.showModal();
+  /** @type {HTMLElement|undefined} */ (boxes[0]?.box)?.focus();
+}
