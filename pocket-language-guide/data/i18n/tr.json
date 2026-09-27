@@ -589,5 +589,19 @@
   "signal.unsayable": "Mors alfabesinde olmayan karakterler: {chars}",
   "format.theme.parchment": "Parşömen",
   "personal.replace": "Bu kopyada {phrases} ifade ve {pairs} düzenlenmiş kart var. Bunu yüklemek bu cihazdaki {have} ifadenin yerini alır. Devam edilsin mi?",
-  "personal.failed": "Yüklenmedi — kendi verileriniz geri getirildi:"
+  "personal.failed": "Yüklenmedi — kendi verileriniz geri getirildi:",
+  "format.card.passport": "Pasaport",
+  "warn.band-too-long": "Bir üstbilgi veya altbilgi, satırına sığmak için {size}pt olarak ayarlanmış; bu yazının okunabildiği {floor}pt sınırının altında. İçinden bir öğeyi çıkarın, ya da daha geniş bir kart kullanın.",
+  "editor.addAnswer": "Onların verebileceği bir cevap ekle",
+  "editor.removeAnswer": "Bu cevabı kaldır",
+  "editor.answerListener": "Onların dilinde verebilecekleri bir cevap",
+  "editor.answerOwner": "Kendi dilinizde anlamı",
+  "resume.heading": "Uygulama yeniden açıldığında dönülecek yer",
+  "resume.start": "Diller",
+  "resume.topics": "Durumlar",
+  "resume.board": "Son durum",
+  "signal.fast": "Saniyede üç kez yanıp sönmeden hızlı",
+  "signal.fastWarning": "Bu hız, saniyede üç kezden daha hızlı yanıp söner; bu da fotosensitif epilepsisi olan birinde nöbeti tetikleyebilir. Bunu yalnızca, etkilenebilecek hiç kimsenin ışığı göremeyeceği bir yerde kullanın. Bu hızda yanıp sönsün mü?",
+  "board.openDeepL": "DeepL'i aç",
+  "board.openPapago": "Papago'yu aç"
 }

@@ -589,5 +589,19 @@
   "signal.unsayable": "摩尔斯电码中没有的字符：{chars}",
   "format.theme.parchment": "羊皮纸",
   "personal.replace": "此副本包含 {phrases} 条短语和 {pairs} 张已编辑的卡片。载入后将替换本设备上的 {have} 条短语。是否继续？",
-  "personal.failed": "未载入——已还原您自己的数据："
+  "personal.failed": "未载入——已还原您自己的数据：",
+  "format.card.passport": "护照",
+  "warn.band-too-long": "页眉或页脚设成了 {size}pt 才能容纳这一行，低于这种文字能保持可读的 {floor}pt。可以从中去掉一项内容，或改用更宽的卡片。",
+  "editor.addAnswer": "添加对方可能给出的答案",
+  "editor.removeAnswer": "移除这个答案",
+  "editor.answerListener": "用对方语言写出的答案",
+  "editor.answerOwner": "以您的语言给出的释义",
+  "resume.heading": "应用再次打开时，回到",
+  "resume.start": "语言",
+  "resume.topics": "情境",
+  "resume.board": "上一个情境",
+  "signal.fast": "每秒闪烁超过三次",
+  "signal.fastWarning": "这个速度每秒闪烁超过三次，可能诱发光敏性癫痫患者的癫痫发作。请只在没有可能受影响的人会看到这道光的地方使用。是否要以这个速度闪烁？",
+  "board.openDeepL": "打开DeepL",
+  "board.openPapago": "打开Papago"
 }

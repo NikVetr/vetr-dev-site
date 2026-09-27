@@ -589,5 +589,19 @@
   "signal.unsayable": "Znaki bez kodu Morse’a: {chars}",
   "format.theme.parchment": "Pergaminowy",
   "personal.replace": "Ta kopia zawiera zwrotów: {phrases}, a zmienionych kart: {pairs}. Wczytanie jej zastąpi zwroty na tym urządzeniu (obecnie: {have}). Kontynuować?",
-  "personal.failed": "Nie wczytano — przywrócono dane zapisane tu wcześniej:"
+  "personal.failed": "Nie wczytano — przywrócono dane zapisane tu wcześniej:",
+  "format.card.passport": "Paszport",
+  "warn.band-too-long": "Nagłówek lub stopka mają {size}pt, żeby zmieścić swój wiersz, poniżej {floor}pt, przy którym to pismo jest czytelne. Usuń z niego element, albo użyj szerszej karty.",
+  "editor.addAnswer": "Dodaj odpowiedź, którą mogą dać",
+  "editor.removeAnswer": "Usuń tę odpowiedź",
+  "editor.answerListener": "Odpowiedź, którą mogą dać, w ich języku",
+  "editor.answerOwner": "Co to znaczy, w twoim języku",
+  "resume.heading": "Przy ponownym otwarciu aplikacji, powrót do",
+  "resume.start": "Języków",
+  "resume.topics": "Sytuacji",
+  "resume.board": "Ostatniej sytuacji",
+  "signal.fast": "Szybciej niż trzy błyski na sekundę",
+  "signal.fastWarning": "Ta szybkość błyska częściej niż trzy razy na sekundę, co może wywołać atak u osoby z padaczką fotogenną. Używaj jej tylko tam, gdzie nikt, kogo mogłoby to dotknąć, nie zobaczy światła. Błyskać z tą szybkością?",
+  "board.openDeepL": "Otwórz DeepL",
+  "board.openPapago": "Otwórz Papago"
 }

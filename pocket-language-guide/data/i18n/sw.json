@@ -589,5 +589,19 @@
   "signal.unsayable": "Morse haina msimbo wa: {chars}",
   "format.theme.parchment": "Karatasi ya kale",
   "personal.replace": "Kuipakia nakala hii kutabadilisha kilichopo kwenye kifaa hiki. Nakala hii ina misemo: {phrases} · kadi zilizohaririwa: {pairs}. Kifaa hiki kina misemo: {have}. Je, uendelee?",
-  "personal.failed": "Haikupakiwa — data yako mwenyewe imerudishwa:"
+  "personal.failed": "Haikupakiwa — data yako mwenyewe imerudishwa:",
+  "format.card.passport": "Pasipoti",
+  "warn.band-too-long": "Sehemu ya kichwa au mguu imewekwa {size}pt ili itoshee mstari wake, chini ya {floor}pt ambapo maandishi haya bado yanasomeka. Toa kipengele kimoja kutoka humo, au tumia kadi pana zaidi.",
+  "editor.addAnswer": "Ongeza jibu ambalo wanaweza kutoa",
+  "editor.removeAnswer": "Ondoa jibu hili",
+  "editor.answerListener": "Jibu ambalo wanaweza kutoa, kwa lugha yao",
+  "editor.answerOwner": "Maana yake, kwa lugha yako",
+  "resume.heading": "Programu ikifunguka tena, rudi kwenye",
+  "resume.start": "Lugha",
+  "resume.topics": "Miktadha",
+  "resume.board": "Muktadha wa mwisho",
+  "signal.fast": "Kasi zaidi ya mimuliko mitatu kwa sekunde",
+  "signal.fastWarning": "Kasi hii inamulika zaidi ya mara tatu kwa sekunde, jambo ambalo linaweza kusababisha kifafa kwa mtu aliye na kifafa kinachosababishwa na mwanga. Itumie tu mahali ambapo hakuna mtu anayeweza kuathirika atakayeona mwanga huo. Je, umulike kwa kasi hii?",
+  "board.openDeepL": "Fungua DeepL",
+  "board.openPapago": "Fungua Papago"
 }

@@ -589,5 +589,19 @@
   "signal.speed": "מהירות",
   "signal.start": "איתות",
   "signal.stop": "עצירה",
-  "signal.unsayable": "תווים בלי קוד מורס: {chars}"
+  "signal.unsayable": "תווים בלי קוד מורס: {chars}",
+  "format.card.passport": "דרכון",
+  "warn.band-too-long": "כותרת עליונה או תחתונה נקבעת ל{size} נקודות כדי להתאים לשורה שלה, מתחת ל{floor} נקודות שהכתב הזה קריא בהן. כדאי להוציא ממנה פריט אחד, או להשתמש בכרטיס רחב יותר.",
+  "editor.addAnswer": "הוספת תשובה שהם עשויים לתת",
+  "editor.removeAnswer": "הסרת התשובה הזאת",
+  "editor.answerListener": "תשובה שהם עשויים לתת, בשפה שלהם",
+  "editor.answerOwner": "מה זה אומר, בשפה שלך",
+  "resume.heading": "כשהאפליקציה נפתחת מחדש, היא חוזרת אל",
+  "resume.start": "שפות",
+  "resume.topics": "נושאים",
+  "resume.board": "הנושא האחרון",
+  "signal.fast": "מהיר משלוש הבהובים בשנייה",
+  "signal.fastWarning": "המהירות הזאת מהבהבת יותר משלוש פעמים בשנייה, מה שיכול לגרום להתקף אצל מי שיש לו אפילפסיה פוטוסנסיטיבית. אפשר להשתמש בה רק במקום שאף אחד שעלול להיפגע לא יכול לראות את האור. להבהב במהירות הזאת?",
+  "board.openDeepL": "פתיחת DeepL",
+  "board.openPapago": "פתיחת Papago"
 }

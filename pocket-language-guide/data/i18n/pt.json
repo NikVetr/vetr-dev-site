@@ -589,5 +589,19 @@
   "signal.unsayable": "Caracteres sem código Morse: {chars}",
   "format.theme.parchment": "Pergaminho",
   "personal.replace": "Ao carregar esta cópia, substitui o que está neste dispositivo. A cópia contém frases: {phrases} · cartões editados: {pairs}. Este dispositivo contém frases: {have}. Continuar?",
-  "personal.failed": "Não foi carregado — os seus dados próprios foram repostos:"
+  "personal.failed": "Não foi carregado — os seus dados próprios foram repostos:",
+  "format.card.passport": "Passaporte",
+  "warn.band-too-long": "Um cabeçalho ou rodapé está definido em {size} pt para caber na linha, abaixo dos {floor} pt a que esta escrita ainda se lê. Retire um elemento dele, ou use um cartão mais largo.",
+  "editor.addAnswer": "Adicionar uma resposta que possam dar",
+  "editor.removeAnswer": "Remover esta resposta",
+  "editor.answerListener": "Uma resposta que possam dar, na outra",
+  "editor.answerOwner": "O que significa, na sua",
+  "resume.heading": "Ao voltar a abrir a aplicação, volte para",
+  "resume.start": "Línguas",
+  "resume.topics": "Contextos",
+  "resume.board": "Último contexto",
+  "signal.fast": "Mais rápido do que três piscadas por segundo",
+  "signal.fastWarning": "Esta velocidade pisca mais de três vezes por segundo, o que pode desencadear uma crise numa pessoa com epilepsia fotossensível. Utilize-a apenas onde ninguém que possa ser afetado veja a luz. Piscar a esta velocidade?",
+  "board.openDeepL": "Abrir o DeepL",
+  "board.openPapago": "Abrir o Papago"
 }

@@ -589,5 +589,19 @@
   "signal.unsayable": "Aksara tanpa kod Morse: {chars}",
   "format.theme.parchment": "Perkamen",
   "personal.replace": "Salinan ini mengandungi {phrases} frasa dan {pairs} kad yang disunting. Memuatkannya akan menggantikan {have} frasa pada peranti ini. Teruskan?",
-  "personal.failed": "Tidak dimuatkan — data anda sendiri dikembalikan:"
+  "personal.failed": "Tidak dimuatkan — data anda sendiri dikembalikan:",
+  "format.card.passport": "Pasport",
+  "warn.band-too-long": "Kepala atau kaki ditetapkan pada {size}pt untuk memenuhi barisnya, di bawah {floor}pt yang tulisan ini boleh dibaca. Keluarkan satu butir daripadanya, atau guna kad yang lebih lebar.",
+  "editor.addAnswer": "Tambah jawapan yang mungkin mereka berikan",
+  "editor.removeAnswer": "Buang jawapan ini",
+  "editor.answerListener": "Jawapan yang mungkin mereka berikan, dalam bahasa mereka",
+  "editor.answerOwner": "Ertinya, dalam bahasa anda",
+  "resume.heading": "Apabila aplikasi dibuka semula, kembali ke",
+  "resume.start": "Bahasa",
+  "resume.topics": "Konteks",
+  "resume.board": "Konteks terakhir",
+  "signal.fast": "Lebih laju daripada tiga kelipan dalam satu saat",
+  "signal.fastWarning": "Kelajuan ini berkelip lebih laju daripada tiga kali dalam satu saat. Ini boleh menyebabkan kejang pada orang yang ada epilepsi fotosensitif. Guna ia hanya di tempat yang tidak dilihat oleh sesiapa yang mungkin terjejas. Berkelip pada kelajuan ini?",
+  "board.openDeepL": "Buka DeepL",
+  "board.openPapago": "Buka Papago"
 }

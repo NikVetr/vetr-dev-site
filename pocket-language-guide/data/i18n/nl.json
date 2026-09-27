@@ -589,5 +589,19 @@
   "signal.unsayable": "Tekens zonder morsecode: {chars}",
   "format.theme.parchment": "Perkament",
   "personal.replace": "Als u deze kopie laadt, vervangt dat wat op dit apparaat staat. De kopie bevat zinnen: {phrases} · bewerkte kaarten: {pairs}. Dit apparaat bevat zinnen: {have}. Doorgaan?",
-  "personal.failed": "Niet geladen – uw eigen gegevens zijn teruggezet:"
+  "personal.failed": "Niet geladen – uw eigen gegevens zijn teruggezet:",
+  "format.card.passport": "Paspoort",
+  "warn.band-too-long": "Een kop- of voettekst is op {size} pt gezet om op de regel te passen, onder de {floor} pt waarop dit schrift leesbaar is. Haal er een item uit, of gebruik een bredere kaart.",
+  "editor.addAnswer": "Antwoord toevoegen dat zij zouden kunnen geven",
+  "editor.removeAnswer": "Dit antwoord weghalen",
+  "editor.answerListener": "Wat zij zouden kunnen zeggen, in de andere taal",
+  "editor.answerOwner": "Wat het betekent, in uw taal",
+  "resume.heading": "Wanneer de app opnieuw opent, terug naar",
+  "resume.start": "Talen",
+  "resume.topics": "Onderwerpen",
+  "resume.board": "Laatste onderwerp",
+  "signal.fast": "Sneller dan drie keer per seconde",
+  "signal.fastWarning": "Deze snelheid knippert sneller dan drie keer per seconde, wat bij iemand met lichtflitsgevoelige epilepsie een aanval kan veroorzaken. Gebruik dit alleen op een plek waar niemand die daardoor getroffen kan worden het licht kan zien. Op deze snelheid knipperen?",
+  "board.openDeepL": "DeepL openen",
+  "board.openPapago": "Papago openen"
 }

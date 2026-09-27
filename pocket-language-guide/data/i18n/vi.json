@@ -589,5 +589,19 @@
   "signal.unsayable": "Ký tự không có trong mã Morse: {chars}",
   "format.theme.parchment": "Giấy da",
   "personal.replace": "Bản sao này có {phrases} câu và {pairs} thẻ đã chỉnh sửa. Nạp nó sẽ thay thế {have} câu hiện có trên thiết bị này. Tiếp tục?",
-  "personal.failed": "Không nạp — dữ liệu của riêng bạn đã được khôi phục:"
+  "personal.failed": "Không nạp — dữ liệu của riêng bạn đã được khôi phục:",
+  "format.card.passport": "Hộ chiếu",
+  "warn.band-too-long": "Đầu trang hoặc chân trang được đặt ở {size}pt để vừa dòng của nó, thấp hơn mức {floor}pt mà loại chữ viết này còn đọc được. Hãy bỏ một mục ra khỏi đó, hoặc dùng thẻ rộng hơn.",
+  "editor.addAnswer": "Thêm một câu trả lời mà họ có thể đưa ra",
+  "editor.removeAnswer": "Bỏ câu trả lời này",
+  "editor.answerListener": "Một câu trả lời mà họ có thể đưa ra, bằng tiếng của họ",
+  "editor.answerOwner": "Nghĩa của nó, bằng tiếng của bạn",
+  "resume.heading": "Khi ứng dụng mở lại, quay về",
+  "resume.start": "Ngôn ngữ",
+  "resume.topics": "Chủ đề",
+  "resume.board": "Chủ đề gần nhất",
+  "signal.fast": "Nhanh hơn ba lần nháy mỗi giây",
+  "signal.fastWarning": "Tốc độ này nháy nhanh hơn ba lần mỗi giây, có thể gây co giật ở người bị động kinh cảm quang. Chỉ dùng tốc độ này ở nơi không ai có thể bị ảnh hưởng nhìn thấy ánh sáng. Nháy ở tốc độ này?",
+  "board.openDeepL": "Mở DeepL",
+  "board.openPapago": "Mở Papago"
 }

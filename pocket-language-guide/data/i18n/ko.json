@@ -589,5 +589,19 @@
   "signal.speed": "속도",
   "signal.start": "신호",
   "signal.stop": "정지",
-  "signal.unsayable": "모스 부호에 없는 문자: {chars}"
+  "signal.unsayable": "모스 부호에 없는 문자: {chars}",
+  "format.card.passport": "여권",
+  "warn.band-too-long": "머리글이나 바닥글이 줄에 맞춰 {size}pt로 설정됐는데, 이 문자가 읽히는 {floor}pt보다 작아요. 그 안에서 항목을 하나 빼거나, 더 넓은 카드를 써 보세요.",
+  "editor.addAnswer": "상대가 할 수 있는 답 추가",
+  "editor.removeAnswer": "이 답 제거",
+  "editor.answerListener": "상대 언어로 할 수 있는 답",
+  "editor.answerOwner": "내 언어로 된 뜻풀이",
+  "resume.heading": "앱을 다시 열 때 돌아갈 화면",
+  "resume.start": "언어",
+  "resume.topics": "주제",
+  "resume.board": "마지막 주제",
+  "signal.fast": "1초에 세 번보다 빠르게 깜빡임",
+  "signal.fastWarning": "이 속도는 1초에 세 번보다 빠르게 깜빡여요. 이렇게 빠른 깜빡임은 광과민성 발작을 일으킬 수 있어요. 영향을 받을 수 있는 사람이 빛을 볼 수 없는 곳에서만 쓰세요. 이 속도로 깜빡일까요?",
+  "board.openDeepL": "DeepL 열기",
+  "board.openPapago": "Papago 열기"
 }

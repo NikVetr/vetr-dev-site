@@ -589,5 +589,19 @@
   "signal.speed": "Sebesség",
   "signal.start": "Jelzés",
   "signal.stop": "Leállítás",
-  "signal.unsayable": "Morzekóddal nem leírható karakterek: {chars}"
+  "signal.unsayable": "Morzekóddal nem leírható karakterek: {chars}",
+  "format.card.passport": "Útlevél",
+  "warn.band-too-long": "Az élőfej vagy élőláb {size} pt-ra van állítva, hogy elférjen a sorában, a {floor} pt alatt, amit ez az írás még olvashatóan bír. Vegyen ki belőle egy elemet, vagy használjon szélesebb kártyát.",
+  "editor.addAnswer": "Egy lehetséges válasz hozzáadása",
+  "editor.removeAnswer": "Ez a válasz eltávolítása",
+  "editor.answerListener": "Milyen választ adhatnak, az ő nyelvükön",
+  "editor.answerOwner": "Mit jelent, az Ön nyelvén",
+  "resume.heading": "Amikor az alkalmazás újra megnyílik, visszatérés ide:",
+  "resume.start": "Nyelvek",
+  "resume.topics": "Helyzetek",
+  "resume.board": "Utolsó helyzet",
+  "signal.fast": "Gyorsabb, mint másodpercenként három villogás",
+  "signal.fastWarning": "Ez a sebesség másodpercenként háromnál gyakrabban villog, ami rohamot válthat ki fényérzékeny epilepsziával élő embereknél. Csak olyan helyen használja, ahol senki, akit ez érinthet, nem látja a fényt. Villogtatja ezen a sebességen?",
+  "board.openDeepL": "DeepL megnyitása",
+  "board.openPapago": "Papago megnyitása"
 }

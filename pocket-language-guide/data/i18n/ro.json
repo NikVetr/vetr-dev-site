@@ -589,5 +589,19 @@
   "signal.unsayable": "Caractere fără cod Morse: {chars}",
   "format.theme.parchment": "Pergament",
   "personal.replace": "Această copie conține fraze: {phrases} și carduri editate: {pairs}. Încărcarea ei va înlocui frazele de pe acest dispozitiv (acum: {have}). Continuați?",
-  "personal.failed": "Nu s-a încărcat — datele dumneavoastră proprii au fost restaurate:"
+  "personal.failed": "Nu s-a încărcat — datele dumneavoastră proprii au fost restaurate:",
+  "format.card.passport": "Pașaport",
+  "warn.band-too-long": "Antetul sau subsolul este fixat la {size}pt ca să încapă pe rândul lui, sub cele {floor}pt la care se mai poate citi această scriere. Scoateți un element din el, sau folosiți un card mai lat.",
+  "editor.addAnswer": "Adaugă un răspuns pe care l-ar putea da",
+  "editor.removeAnswer": "Elimină acest răspuns",
+  "editor.answerListener": "Un răspuns pe care l-ar putea da, în limba lor",
+  "editor.answerOwner": "Ce înseamnă, în limba dumneavoastră",
+  "resume.heading": "Când aplicația se deschide din nou, reveniți la",
+  "resume.start": "Limbi",
+  "resume.topics": "Subiecte",
+  "resume.board": "Ultimul subiect",
+  "signal.fast": "Mai rapid decât trei clipiri pe secundă",
+  "signal.fastWarning": "Această viteză clipește mai des decât de trei ori pe secundă, ceea ce poate declanșa o criză la o persoană cu epilepsie fotosensibilă. Folosiți-o doar unde nimeni care ar putea fi afectat nu poate vedea lumina. Clipiți la această viteză?",
+  "board.openDeepL": "Deschide DeepL",
+  "board.openPapago": "Deschide Papago"
 }

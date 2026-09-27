@@ -589,5 +589,19 @@
   "signal.unsayable": "Morze kodida yoʻq belgilar: {chars}",
   "format.theme.parchment": "Pergament",
   "personal.replace": "Bu nusxada {phrases} ta ibora va {pairs} ta tahrirlangan karta bor. Uni yuklash bu qurilmadagi {have} ta iborani almashtiradi. Davom etilsinmi?",
-  "personal.failed": "Yuklanmadi — oʻzingizning maʻlumotlaringiz qaytarildi:"
+  "personal.failed": "Yuklanmadi — oʻzingizning maʻlumotlaringiz qaytarildi:",
+  "format.card.passport": "Pasport",
+  "warn.band-too-long": "Yuqori yoki pastki kolontitul satriga sigʻishi uchun {size}pt qilib sozlangan, bu esa yozuv oʻqiladigan {floor}pt dan past. Undan bir unsurni olib tashlang, yoki kengroq karta ishlating.",
+  "editor.addAnswer": "Ular bera oladigan javobni qoʻshish",
+  "editor.removeAnswer": "Bu javobni olib tashlash",
+  "editor.answerListener": "Ular bera oladigan javob, ularning tilida",
+  "editor.answerOwner": "Maʼnosi, oʻz tilingizda",
+  "resume.heading": "Ilova qayta ochilganda qaytiladigan joy",
+  "resume.start": "Tillar",
+  "resume.topics": "Mavzular",
+  "resume.board": "Oxirgi mavzu",
+  "signal.fast": "Soniyada uch martadan koʻp yonib-oʻchish",
+  "signal.fastWarning": "Bu tezlik soniyada uch martadan koʻp yonib-oʻchadi, bu esa fotosensitiv epilepsiyasi bor odamda tutqanoqni keltirib chiqarishi mumkin. Undan faqat taʼsirlanishi mumkin boʻlgan hech kim yorugʻlikni koʻrmaydigan joyda foydalaning. Shu tezlikda yonib-oʻchilsinmi?",
+  "board.openDeepL": "DeepLni ochish",
+  "board.openPapago": "Papagoni ochish"
 }

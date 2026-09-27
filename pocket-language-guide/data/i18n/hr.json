@@ -589,5 +589,19 @@
   "signal.speed": "Brzina",
   "signal.start": "Signaliziraj",
   "signal.stop": "Zaustavi",
-  "signal.unsayable": "Znakovi bez Morseova koda: {chars}"
+  "signal.unsayable": "Znakovi bez Morseova koda: {chars}",
+  "format.card.passport": "Putovnica",
+  "warn.band-too-long": "Zaglavlje ili podnožje postavljeno je na {size}pt da stane u svoj redak, ispod {floor}pt na kojima je ovo pismo još čitljivo. Izbacite jednu stavku iz njega, ili upotrijebite širu karticu.",
+  "editor.addAnswer": "Dodaj odgovor koji bi mogli dati",
+  "editor.removeAnswer": "Ukloni ovaj odgovor",
+  "editor.answerListener": "Odgovor koji bi mogli dati, na njihovom",
+  "editor.answerOwner": "Što znači, na vašem jeziku",
+  "resume.heading": "Kad se aplikacija ponovno otvori, povratak na",
+  "resume.start": "Jezike",
+  "resume.topics": "Situacije",
+  "resume.board": "Posljednju situaciju",
+  "signal.fast": "Brže od tri bljeska u sekundi",
+  "signal.fastWarning": "Ova brzina bljeska brže od tri puta u sekundi, što može izazvati napadaj kod osobe s fotosenzitivnom epilepsijom. Koristite je samo tamo gdje nitko koga bi to mogao pogoditi ne može vidjeti svjetlo. Bljeskati ovom brzinom?",
+  "board.openDeepL": "Otvori DeepL",
+  "board.openPapago": "Otvori Papago"
 }

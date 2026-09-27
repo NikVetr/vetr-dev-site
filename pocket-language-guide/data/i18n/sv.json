@@ -589,5 +589,19 @@
   "signal.unsayable": "Morse saknar kod för: {chars}",
   "format.theme.parchment": "Pergament",
   "personal.replace": "Om du läser in den här kopian ersätts det som finns på den här enheten. Kopian innehåller fraser: {phrases} · redigerade kort: {pairs}. Den här enheten innehåller fraser: {have}. Fortsätta?",
-  "personal.failed": "Inte inläst – dina egna uppgifter har återställts:"
+  "personal.failed": "Inte inläst – dina egna uppgifter har återställts:",
+  "format.card.passport": "Pass",
+  "warn.band-too-long": "Ett sidhuvud eller en sidfot är satt till {size} pt för att få plats på sin rad, under den läsbara gränsen på {floor} pt för den här skriften. Ta bort ett objekt från det, eller använd ett bredare kort.",
+  "editor.addAnswer": "Lägg till ett svar de skulle kunna ge",
+  "editor.removeAnswer": "Ta bort det här svaret",
+  "editor.answerListener": "Ett svar de skulle kunna ge, på deras",
+  "editor.answerOwner": "Vad det betyder, på ditt",
+  "resume.heading": "När appen öppnas igen, gå tillbaka till",
+  "resume.start": "Språk",
+  "resume.topics": "Situationer",
+  "resume.board": "Senaste situationen",
+  "signal.fast": "Snabbare än tre blinkningar per sekund",
+  "signal.fastWarning": "Den här hastigheten blinkar snabbare än tre gånger per sekund, vilket kan utlösa ett anfall hos någon med ljuskänslig epilepsi. Använd den bara där ingen som skulle kunna påverkas ser ljuset. Blinka i den här hastigheten?",
+  "board.openDeepL": "Öppna DeepL",
+  "board.openPapago": "Öppna Papago"
 }
