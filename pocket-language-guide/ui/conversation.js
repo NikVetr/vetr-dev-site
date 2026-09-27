@@ -206,20 +206,14 @@ async function respellerFor(corpus, listener, owner, listenerRows) {
 
 /**
  * @param {string} owner @param {string} listener
- * @param {{boards:{id:string, titleKey:string, listeners:string[], owners:string[], icon?:string}[]}} index
+ * @param {{boards:{id:string, titleKey:string, listeners:string[], owners:string[], icon?:string, alert?:true}[]}} index
  */
 async function showPicker(owner, listener, index) {
-  /** @type {Map<string,string>} */ const titles = new Map();
-  /** @type {Map<string,string>} */ const icons = new Map();
+  /** @type {Map<string,{title:string, icon?:string, alert?:true}>} */ const topics = new Map();
   for (const board of index.boards) {
     if (!serves(board, listener, owner)) continue;
-    titles.set(board.id, t(board.titleKey));
-    if (board.icon) icons.set(board.id, board.icon);
+    topics.set(board.id, { title: t(board.titleKey), icon: board.icon, alert: board.alert });
   }
-  // The section icons the printed sheet uses, for the topic cells' watermarks.
-  const art = /** @type {{viewBox:number, strokeWidth:number, paths:Record<string,string>}} */ (
-    JSON.parse(await loadText('data/icons.json')));
-  const viewBox = `0 0 ${art.viewBox} ${art.viewBox}`;
   $('board-title').textContent = t('board.pickTopic');
   $('board-title').title = t('board.pickTopic');
   document.title = t('board.docTitle');
@@ -232,7 +226,7 @@ async function showPicker(owner, listener, index) {
   out.setAttribute('aria-label', t('board.toGallery'));
   out.title = t('board.toGallery');
   out.addEventListener('click', () => { location.href = './'; });
-  if (!titles.size) {
+  if (!topics.size) {
     $('board-status').textContent = t('board.noBoards');
     $('board-grid').removeAttribute('aria-busy');
     return;
@@ -241,19 +235,37 @@ async function showPicker(owner, listener, index) {
   // nothing to contrast with and is just twelve dashed boxes. They stay submenus --
   // that is what they do -- and the stylesheet drops the marking for this one grid.
   $('board-grid').classList.add('board-grid-topics');
-  renderGrid($('board-grid'), { buttons: [...titles.keys()].map((id) => ({
-    id, kind: 'submenu',
-    icon: icons.has(id) && art.paths[/** @type {string} */ (icons.get(id))]
-      ? { d: art.paths[/** @type {string} */ (icons.get(id))], viewBox, strokeWidth: art.strokeWidth } : undefined,
+  renderGrid($('board-grid'), { buttons: [...topics].map(([id, { icon, alert }]) => ({
+    id, kind: /** @type {const} */ ('submenu'), icon, alert,
   })) }, {
     lang: owner,
-    label: (button) => titles.get(button.id) ?? button.id,
+    label: (button) => topics.get(button.id)?.title ?? button.id,
     available: () => true,
     onPick: (button) => {
       const next = new URLSearchParams(location.search);
       next.set('board', button.id);
       location.search = next.toString();
     },
+  });
+  // The emergency topic across the top when an odd count would leave a gap at the foot.
+  if (topics.size % 2) $('board-grid').querySelector('.board-cell-alert')?.classList.add('board-cell-wide');
+  // **Turned with the boards.** A phone laid on the counter for a conversation is still
+  // laid there when the reader backs out to choose another, so the list turns too, and
+  // can be turned from here.
+  let display = readDisplay();
+  const turn = $('board-turn-bar');
+  turn.hidden = false;
+  turn.setAttribute('aria-label', t('board.turn'));
+  turn.title = t('board.turn');
+  const paintTurn = () => {
+    turn.setAttribute('aria-pressed', String(display.turned));
+    document.querySelector('.board-main')?.classList.toggle('board-main-turned', display.turned);
+  };
+  paintTurn();
+  turn.addEventListener('click', () => {
+    display = { ...display, turned: !display.turned };
+    writeDisplay(display);
+    paintTurn();
   });
   registerOffline();
 }
@@ -588,8 +600,9 @@ async function main() {
     if (state.view !== 'grid') { $('board-menu').hidden = true; $('board-turn-bar').hidden = true; $('board-add-bar').hidden = true; }
     // Turned is for the whole tree, not one screen of it: the owner's grid turns
     // with the sentence and the answers, so a phone laid on the counter reads one
-    // way from the first tap to the last.
-    $('board-grid').classList.toggle('board-grid-turned', display.turned);
+    // way from the first tap to the last -- and the bar under it turns with it, so
+    // its arrow points back and its topic reads the same way as the buttons.
+    document.querySelector('.board-main')?.classList.toggle('board-main-turned', display.turned);
     if (state.view === 'grid') {
       clearStage(stage);
       // At the root the parent is the topic list, not a node -- so the control stays

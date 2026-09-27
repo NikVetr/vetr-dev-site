@@ -60,8 +60,10 @@ const ENTRIES = new Set(['duration', 'clock', 'count']);
  * @property {PhraseRef} [phraseRef] for `message`: what it says
  * @property {string} [labelKey]    optional short interface wording, never spoken
  * @property {string} [replySetId]  for `message`: answers the listener may give
- * @property {{d:string, viewBox:string, strokeWidth:number}} [icon]  a topic cell's
- *   watermark: the section icon of the board it opens, drawn behind the title
+ * @property {string} [icon]  a topic cell's watermark, a key of `TOPIC_MARKS` in
+ *   `ui/topic-marks.js`: the object that says what the board it opens is about
+ * @property {true} [alert]    a topic that is an emergency: set in the alert colour,
+ *   and across the top of the list when it would otherwise leave a gap
  * @property {ColourRole} [colour]  which of the sheet's five role colours it takes
  */
 

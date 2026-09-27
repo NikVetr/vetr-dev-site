@@ -9,6 +9,11 @@ import { test, expect } from '@playwright/test';
 
 const BOARD = '/conversation.html?target=zh-Hans&source=en&board=spa';
 
+/** Dismiss a message by tapping its surface in a corner: Reply is drawn inside the surface
+ * now, grouped with the sentence at its middle, so a click at the centre can land on Reply.
+ * @param {import('@playwright/test').Page} page */
+const dismiss = (page) => page.locator('.board-message').click({ position: { x: 12, y: 12 } });
+
 /**
  * The controls that are part of the exchange, which is Speak and Reply.
  *
@@ -61,7 +66,7 @@ test('the opening tap cannot also dismiss the message', async ({ page }) => {
   for (let i = 0; i < 10; i += 1) {
     await page.locator('[data-button="pause"]').click();
     await expect(page.locator('.board-message')).toBeVisible();
-    await page.locator('.board-message').click();
+    await dismiss(page);
     await expect(page.locator('.board-message')).toHaveCount(0);
   }
 });
@@ -73,7 +78,7 @@ test('a message opened from a submenu returns to that submenu', async ({ page })
   await page.locator('[data-button="focus"]').click();
   await expect(page.locator('[data-button="shoulders"]')).toBeVisible();
   await page.locator('[data-button="shoulders"]').click();
-  await page.locator('.board-message').click();
+  await dismiss(page);
   // Back on the child grid, not the root: the body areas are still on screen.
   await expect(page.locator('[data-button="shoulders"]')).toBeVisible();
   await expect(page.locator('[data-button="hurts"]')).toHaveCount(0);
@@ -97,7 +102,7 @@ test('the buttons stay where they were put', async ({ page }) => {
   const before = await order();
   for (const id of ['hurts', 'stop', 'hurts', 'hurts', 'pause']) {
     await page.locator(`[data-button="${id}"]`).click();
-    await page.locator('.board-message').click();
+    await dismiss(page);
   }
   expect(await order()).toEqual(before);
 });
@@ -222,7 +227,7 @@ test('a reply is offered only where there are answers, and only when asked for',
   await page.locator('[data-button="stop"]').click();
   await expect(page.locator(EXCHANGE))
     .toHaveCount(0);
-  await page.locator('.board-message').click();
+  await dismiss(page);
 
   await page.locator('[data-button="avoid"]').click();
   const reply = page.locator(EXCHANGE);
@@ -278,7 +283,7 @@ test('an uncertain answer and a rejection are both reachable, and say what they 
   await page.locator('.board-answer').last().click();
   await expect(page.locator('.board-message-text')).toContainText(/none of these/i);
   // ...and it is an answer like any other: one tap returns to the owner's grid.
-  await page.locator('.board-message').click();
+  await dismiss(page);
   await expect(page.locator('[data-button="avoid"]')).toBeVisible();
 });
 
@@ -467,7 +472,7 @@ test('a message wears the colour of the button that opened it', async ({ page })
     const stage = page.locator('.board-stage');
     await expect(stage).toHaveClass(new RegExp(`board-role-${role}`));
     seen.add(await stage.evaluate((n) => getComputedStyle(n).backgroundColor));
-    await page.locator('.board-message').click();
+    await dismiss(page);
   }
   // Three roles, three different colours -- not one class applied three times.
   expect(seen.size).toBe(3);
@@ -579,7 +584,7 @@ test('a screen of your own holds buttons, and what is on it travels as a file', 
   await expect(page.locator('.board-cell')).toHaveCount(1);
   await page.locator('.board-cell').click();
   await expect(page.locator('.board-message-text')).toHaveText('请不要放花生');
-  await page.locator('.board-message').click();
+  await dismiss(page);
 
   // Up to the board, and the screen says what it holds.
   await page.locator('#board-up').click();
@@ -746,7 +751,7 @@ test('the editor is owner-only and cannot be reached from a message', async ({ p
   await page.locator(EXCHANGE).click();
   await expect(page.locator('#board-menu')).toBeHidden();
   await page.locator('.board-back').click();
-  await page.locator('.board-message').click();
+  await dismiss(page);
   await expect(page.locator('#board-menu')).toBeVisible();
 });
 
@@ -818,7 +823,7 @@ test('what the message screen carries is the reader’s choice, and it sticks', 
   await expect(page.locator('.board-turn')).toHaveCount(1);
   await expect(page.locator('.board-speak')).toHaveCount(1);
 
-  await page.locator('.board-message').click();
+  await dismiss(page);
   await fromMenu(page, 'Settings');
   const dialog = page.locator('dialog.speaker-settings');
   await expect(dialog).toBeVisible();
@@ -1064,7 +1069,7 @@ test('a tap reaches the message inside the frame budget', async ({ page }) => {
       /** @type {HTMLElement} */ (document.querySelector('[data-button="stop"]')).click();
       return new Promise((done) => requestAnimationFrame(() => done(performance.now() - t0)));
     }));
-    await page.locator('.board-message').click();
+    await dismiss(page);
   }
   times.sort((a, b) => a - b);
   const p95 = times[Math.floor(times.length * 0.95)];
@@ -1195,10 +1200,10 @@ test('converse opens the topics, not a board @smoke', async ({ page }) => {
   ]);
   // Nothing on this screen is owner-only chrome: there is no board to edit yet.
   await expect(page.locator('#board-menu')).toBeHidden();
-  // Nor to add to or turn -- a class's `display` once outranked their `hidden`, and
-  // the plus sat here doing nothing.
+  // Nor to add to -- a class's `display` once outranked its `hidden`, and the plus
+  // sat here doing nothing. Turn is here, because the list turns with the boards.
   await expect(page.locator('#board-add-bar')).toBeHidden();
-  await expect(page.locator('#board-turn-bar')).toBeHidden();
+  await expect(page.locator('#board-turn-bar')).toBeVisible();
 
   await page.locator('[data-button="time"]').click();
   await expect(page.locator('#board-title')).toHaveText('Time');
@@ -1912,4 +1917,114 @@ test('a board is a board at every size, not a window full of columns', async ({ 
   });
   expect(answers.aspect).toBeGreaterThan(0.5);
   expect(answers.backLeft).toBe(answers.gridLeft);
+});
+
+test('the emergency topic is the red one, across the top when the count is odd', async ({ page }) => {
+  // The one topic that has to be found without reading. Eleven topics in two columns
+  // leave a gap at the foot; the emergency one takes the whole first row instead.
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/conversation.html?target=zh-Hans&source=en');
+  const alarm = page.locator('[data-button="emergency"]');
+  await expect(alarm).toBeVisible();
+  const look = await alarm.evaluate((el) => ({
+    bg: getComputedStyle(el).backgroundColor, wide: el.getBoundingClientRect().width,
+    grid: /** @type {HTMLElement} */ (el.parentElement).clientWidth, mark: Boolean(el.querySelector('.board-cell-topic')),
+  }));
+  expect(look.bg).toBe('rgb(179, 38, 30)');
+  expect(look.wide).toBeGreaterThan(look.grid * 0.9);
+  // Every topic wears the silhouette of what it is about, drawn rather than fetched.
+  expect(look.mark).toBe(true);
+  await expect(page.locator('.board-cell .board-cell-topic')).toHaveCount(11);
+});
+
+test('a button that opens more buttons carries an arrow, and the list of contexts does not', async ({ page }) => {
+  const arrowOf = (/** @type {import('@playwright/test').Locator} */ cell) => cell.evaluate(
+    (el) => getComputedStyle(el, '::after').content);
+  await page.goto(BOARD);
+  await expect(arrowOf(page.locator('[data-button="focus"]'))).resolves.toContain('›');
+  await page.goto('/conversation.html?target=zh-Hans&source=en');
+  await expect(page.locator('[data-button="time"]')).toBeVisible();
+  expect(await arrowOf(page.locator('[data-button="time"]'))).toBe('none');
+});
+
+test('turning turns the bar and the list of contexts with the buttons', async ({ page }) => {
+  // The bar's topic reads the way the buttons do and its back arrow points back for a
+  // reader who has turned the phone; and backing out to the contexts keeps the turn.
+  await page.goto(BOARD);
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('#board-turn-bar').click();
+  const main = page.locator('.board-main');
+  await expect(main).toHaveClass(/board-main-turned/);
+  expect(await page.locator('.board-bar').evaluate((el) => getComputedStyle(el).writingMode)).toBe('vertical-rl');
+  await page.locator('#board-up').click();
+  await expect(page.locator('#board-title')).toHaveText('Context');
+  await expect(main).toHaveClass(/board-main-turned/);
+  await expect(page.locator('#board-turn-bar')).toHaveAttribute('aria-pressed', 'true');
+  await page.locator('#board-turn-bar').click();
+  await expect(main).not.toHaveClass(/board-main-turned/);
+});
+
+test('a message keeps white type on a dark fill in the dark', async ({ browser }) => {
+  // The theme's blue, red and green are lifted in the dark to read as text on a dark
+  // page; as a fill behind white type they washed the sentence and the Turn arrow out.
+  const context = await browser.newContext({ colorScheme: 'dark' });
+  const page = await context.newPage();
+  try {
+    await page.goto(BOARD);
+    await page.locator('[data-button="gentler"]').click();
+    const ratio = await page.locator('.board-stage').evaluate((el) => {
+      const lum = (/** @type {string} */ css) => {
+        const [r, g, b] = (css.match(/\d+/g) ?? []).slice(0, 3).map(Number).map((c) => {
+          const s = c / 255;
+          return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+        });
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+      };
+      return (1.05) / (lum(getComputedStyle(el).backgroundColor) + 0.05);
+    });
+    expect(ratio).toBeGreaterThan(4.5);
+  } finally {
+    await context.close();
+  }
+});
+
+test('Reply keeps even padding, a buffer, and sits with the sentence', async ({ page }) => {
+  // Reported: a band above and below its words, the far corner with a hand's width of
+  // nothing before it, and a gulf between it and a short sentence. Its words sit
+  // inside its padding with the space round them even, it keeps a buffer from the
+  // sentence and the frame, and the two are centred together in the frame.
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/conversation.html?target=en&source=es&board=food');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('.board-cell-asks:not([disabled])').first().click();
+  const reply = page.locator('.board-reply');
+  await expect(reply).toBeVisible();
+  await page.waitForTimeout(400);
+  const m = await page.evaluate(() => {
+    const r = /** @type {HTMLElement} */ (document.querySelector('.board-reply'));
+    const box = r.getBoundingClientRect();
+    const range = document.createRange();
+    range.selectNodeContents(r);
+    const ink = range.getBoundingClientRect();
+    const text = /** @type {HTMLElement} */ (document.querySelector('.board-message-text'));
+    const lines = [...(() => { const t = document.createRange(); t.selectNodeContents(text); return t.getClientRects(); })()].filter((l) => l.height);
+    const frame = /** @type {HTMLElement} */ (document.querySelector('.board-message')).getBoundingClientRect();
+    const textTop = Math.min(...lines.map((l) => l.top));
+    const textBottom = Math.max(...lines.map((l) => l.bottom));
+    return {
+      side: ink.left - box.left, top: ink.top - box.top,
+      inside: ink.left >= box.left && ink.right <= box.right,
+      gapToText: box.top - textBottom, toFrameSide: Math.min(box.left - frame.left, frame.right - box.right),
+      above: textTop - frame.top, below: frame.bottom - box.bottom,
+    };
+  });
+  expect(m.inside).toBe(true);
+  // A text range's box reaches the face's ascender, a third of an em above the
+  // capitals, so the band it measures above the words reads small; what was reported
+  // was a band *bigger* than the sides, and nothing wildly uneven either way.
+  expect(m.top).toBeLessThanOrEqual(m.side + 1);
+  expect(m.side).toBeLessThan(m.top * 3 + 4);
+  expect(m.gapToText).toBeGreaterThan(12);
+  expect(m.toFrameSide).toBeGreaterThan(12);
+  expect(Math.abs(m.above - m.below)).toBeLessThan(24);
 });

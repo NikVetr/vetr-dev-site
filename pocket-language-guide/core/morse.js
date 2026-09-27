@@ -79,28 +79,46 @@ export function decode(code) {
 }
 
 /**
- * The text as the beacon's unit list: `1` a dot lit, `3` a dash lit, `0` one unit
- * dark. One dark unit between symbols, three between letters, seven between words,
- * and seven after the whole message so a repeat reads as a repeat.
+ * The text as the beacon's unit list, and which letter each unit sends.
+ *
+ * `units`: `1` a dot lit, `3` a dash lit, `0` one unit dark -- one dark unit between
+ * symbols, three between letters, seven between words, and seven after the whole
+ * message so a repeat reads as a repeat. `letters` is what is sent, a word gap as a
+ * space; `letter[i]` is the index in it of the character unit `i` belongs to, or -1
+ * for a gap, so the signaller can show which letter is on the light.
  * @param {string} text
- * @returns {number[]}
+ * @returns {{units: number[], letter: number[], letters: {char: string, code: string}[]}}
  */
-export function toUnits(text) {
-  /** @type {number[]} */ const out = [];
+export function toTimeline(text) {
+  /** @type {number[]} */ const units = [];
+  /** @type {number[]} */ const letter = [];
+  /** @type {{char: string, code: string}[]} */ const sent = [];
+  const push = (/** @type {number} */ unit, /** @type {number} */ at, count = 1) => {
+    for (let n = 0; n < count; n += 1) { units.push(unit); letter.push(at); }
+  };
   const words = text.trim().split(/\s+/).filter(Boolean);
   words.forEach((word, w) => {
-    const codes = codesOf(word).filter((c) => c !== null);
-    codes.forEach((code, i) => {
-      [...code].forEach((symbol, k) => {
-        out.push(symbol === '-' ? 3 : 1);
-        if (k < code.length - 1) out.push(0);
+    const chars = [...letters(word)].filter((ch) => CODE[ch]);
+    chars.forEach((ch, i) => {
+      const at = sent.push({ char: ch, code: CODE[ch] }) - 1;
+      [...CODE[ch]].forEach((symbol, k) => {
+        push(symbol === '-' ? 3 : 1, at);
+        if (k < CODE[ch].length - 1) push(0, at);
       });
-      if (i < codes.length - 1) out.push(0, 0, 0);
+      if (i < chars.length - 1) push(0, -1, 3);
     });
-    if (w < words.length - 1) out.push(0, 0, 0, 0, 0, 0, 0);
+    if (w < words.length - 1) {
+      push(0, -1, 7);
+      if (chars.length) sent.push({ char: ' ', code: '' });
+    }
   });
-  if (out.length) out.push(0, 0, 0, 0, 0, 0, 0);
-  return out;
+  if (units.length) push(0, -1, 7);
+  return { units, letter, letters: sent };
+}
+
+/** The unit list alone. @param {string} text @returns {number[]} */
+export function toUnits(text) {
+  return toTimeline(text).units;
 }
 
 /**

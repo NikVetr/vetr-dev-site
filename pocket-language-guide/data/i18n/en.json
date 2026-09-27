@@ -588,6 +588,8 @@
   "signal.message": "Your message",
   "signal.received": "Code you received",
   "signal.speed": "Speed",
+  "signal.fast": "Faster than three flashes a second",
+  "signal.fastWarning": "This speed flashes faster than three times a second, which can trigger a seizure in someone with photosensitive epilepsy. Use it only where nobody who could be affected can see the light. Flash at this speed?",
   "signal.start": "Signal",
   "signal.stop": "Stop",
   "signal.unsayable": "Morse has no code for: {chars}",

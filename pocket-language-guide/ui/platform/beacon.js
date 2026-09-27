@@ -106,12 +106,17 @@ async function acquireTorch() {
  *   the beacon's promise that no word is ever broken in half, however long that
  *   language's word for help turns out to be.
  * @param {() => void} [config.onStop]
+ * @param {(index: number) => void} [config.onBeat]  told which unit of the pattern is
+ *   starting, so a caller can show which letter is on the light
+ * @param {HTMLElement} [config.foot]  drawn at the foot, over the flash
+ * @param {boolean} [config.fast]  the reader has been warned and has chosen a unit
+ *   under the photosensitive ceiling; only then is it not clamped
  */
-export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop, units, unitMs }) {
+export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop, units, unitMs, onBeat, foot, fast }) {
   // SOS is Morse with its pattern and speed fixed; the signaller supplies its own.
   const flashing = mode === 'sos' || mode === 'morse';
   const pattern = mode === 'morse' && units ? units : SOS;
-  const unit = mode === 'morse' && unitMs ? safeUnitMs(unitMs) : DOT;
+  const unit = mode === 'morse' && unitMs ? (fast ? unitMs : safeUnitMs(unitMs)) : DOT;
   stopBeacon();
   const root = document.createElement('div');
   root.className = `beacon beacon-${mode === 'morse' ? 'sos' : mode}`;
@@ -142,6 +147,7 @@ export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop, unit
   hint.textContent = dismiss;
 
   root.append(word, hint);
+  if (foot) root.append(foot);
   // One element travelling the perimeter. The four fixed bars this replaces could
   // only be switched on and off, which is a flash and not a travelling light.
   const light = document.createElement('span');
@@ -158,6 +164,7 @@ export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop, unit
   let at = 0;
   /** @type {{set:(on:boolean)=>void, release:()=>void}|null} */ let torch = null;
   const step = () => {
+    onBeat?.(at % pattern.length);
     const beat = pattern[at % pattern.length];
     root.classList.toggle('beacon-lit', beat > 0);
     torch?.set(beat > 0);

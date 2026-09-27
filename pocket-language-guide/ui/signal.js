@@ -13,7 +13,7 @@ import {
   loadText, loadLanguages, readerLanguage, registerOffline, showFatal,
 } from './app.js';
 import { loadUiLanguage, applyStatic, t } from './i18n.js';
-import { encode, decode, toUnits, unitMs } from '../core/morse.js';
+import { encode, decode, toTimeline, unitMs, MIN_UNIT_MS } from '../core/morse.js';
 import { startBeacon } from './platform/beacon.js';
 import { keepAwake } from './platform/wake.js';
 
@@ -36,6 +36,21 @@ async function main() {
   const start = /** @type {HTMLButtonElement} */ ($('signal-start'));
   const sos = /** @type {HTMLButtonElement} */ ($('signal-sos'));
 
+  // **Faster than three flashes a second is the reader's call, made once.** The
+  // beacon holds every speed under the photosensitive ceiling unless told the reader
+  // has been warned; choosing one of the fast speeds asks, and a no puts the speed
+  // back to the fastest safe one.
+  const fastGroup = /** @type {HTMLOptGroupElement} */ (speed.querySelector('optgroup'));
+  fastGroup.label = t('signal.fast');
+  const isFast = () => unitMs(Number(speed.value)) < MIN_UNIT_MS;
+  let warned = false;
+  speed.addEventListener('change', () => {
+    if (!isFast() || warned) return;
+    // eslint-disable-next-line no-alert
+    warned = confirm(t('signal.fastWarning'));
+    if (!warned) speed.value = '7';
+  });
+
   // **Shown as typed.** The code is the learning aid; a reader who has typed HELP
   // and seen `.... . .-.. .--.` a few times will know it before they need it.
   const show = () => {
@@ -54,22 +69,53 @@ async function main() {
    * @param {string} message
    */
   const signal = (message) => {
-    const units = toUnits(message);
+    const { units, letter, letters } = toTimeline(message);
     if (!units.length) return;
     start.textContent = t('signal.stop');
     // The screen is the signal, so it must not sleep while one is running.
     keepAwake(true);
+    // **The whole message at the foot, the letter on the light marked.** Each letter
+    // over its code, so the sender can follow where the light is and a reader nearby
+    // can learn it; small, because the middle of the screen is the light.
+    // Letters kept together by word, so a long message wraps between words.
+    const strip = document.createElement('p');
+    strip.className = 'beacon-sequence';
+    let word = document.createElement('span');
+    word.className = 'beacon-word-group';
+    strip.append(word);
+    const cells = letters.map(({ char, code }) => {
+      const cell = document.createElement('span');
+      if (char === ' ') {
+        word = document.createElement('span');
+        word.className = 'beacon-word-group';
+        strip.append(word);
+        return cell;
+      }
+      cell.className = 'beacon-letter';
+      cell.append(Object.assign(document.createElement('b'), { textContent: char }),
+        Object.assign(document.createElement('span'), { textContent: code }));
+      word.append(cell);
+      return cell;
+    });
+    let lit = -1;
     startBeacon({
       mode: message === 'SOS' ? 'sos' : 'morse',
       units,
       unitMs: unitMs(Number(speed.value)),
+      fast: warned && isFast(),
       // Nothing in the middle -- the middle of the screen is the light, as on the
-      // SOS screen -- and the code small at the foot, where the sender can follow
-      // along. A tap anywhere still stops it, which the Signal button also says.
+      // SOS screen. A tap anywhere still stops it, which the Signal button also says.
       label: '',
       lang: 'und',
       dir: 'ltr',
-      dismiss: encode(message).code,
+      dismiss: '',
+      foot: strip,
+      onBeat: (i) => {
+        if (letter[i] === lit) return;
+        cells[lit]?.classList.remove('beacon-current');
+        lit = letter[i];
+        cells[lit]?.classList.add('beacon-current');
+      },
       onStop: () => { start.textContent = t('signal.start'); keepAwake(false); },
     });
   };

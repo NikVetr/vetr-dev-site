@@ -315,7 +315,7 @@ test('a board works on a cold offline visit with nothing saved @smoke', async ({
   // that each read from a different part of the corpus.
   await page.locator('[data-button="stop"]').click();
   await expect(page.locator('.board-message-text')).toHaveText(/\p{Script=Han}/u);
-  await page.locator('.board-message').click();
+  await page.locator('.board-message').click({ position: { x: 12, y: 12 } });
 
   await page.locator('[data-button="focus"]').click();
   await expect(page.locator('[data-button="shoulders"]')).toBeVisible();
@@ -325,7 +325,7 @@ test('a board works on a cold offline visit with nothing saved @smoke', async ({
   await page.locator('.board-reply').click();
   await expect(page.locator('.board-answer')).toHaveCount(6);
   await page.locator('.board-back').click();
-  await page.locator('.board-message').click();
+  await page.locator('.board-message').click({ position: { x: 12, y: 12 } });
 
   // A duration reply, which reads from three different concept groups and from
   // CLDR -- none of which may need the network either. On the Time board, because

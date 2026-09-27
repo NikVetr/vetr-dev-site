@@ -38,11 +38,21 @@
       <label class="signal-speed">
         <span data-i18n="signal.speed">Speed</span>
         <select id="signal-speed">
-          <!-- Only speeds the beacon's flash ceiling allows: 7 wpm is a 171ms unit,
-               the floor is 170. Faster settings were offered and silently clamped,
-               which is a control that lies; these two are what it can do. -->
+          <!-- Up to 7 wpm is under the beacon's flash ceiling: a 171ms unit against a
+               170ms floor. The group after it is faster than three flashes a second,
+               and choosing one asks first (`ui/signal.js`); it is never clamped
+               silently, which would be a control that lies. -->
+          <option value="3">3 wpm</option>
+          <option value="4">4 wpm</option>
           <option value="5" selected>5 wpm</option>
+          <option value="6">6 wpm</option>
           <option value="7">7 wpm</option>
+          <optgroup>
+            <option value="10">10 wpm</option>
+            <option value="13">13 wpm</option>
+            <option value="16">16 wpm</option>
+            <option value="20">20 wpm</option>
+          </optgroup>
         </select>
       </label>
       <span class="spacer"></span>

@@ -38,10 +38,11 @@ test('Signal flashes the message as Morse, and Stop takes the screen back', asyn
   await start.click();
 
   // The beacon owns the screen: the same SOS surface the board's SOS uses, with the
-  // code at its foot for the sender and nothing in the middle where the light is.
+  // message at its foot for the sender -- each letter over its code -- and nothing in
+  // the middle where the light is.
   const beacon = page.locator('.beacon-sos');
   await expect(beacon).toBeVisible();
-  await expect(beacon.locator('.beacon-hint')).toContainText('... --- ...');
+  await expect(beacon.locator('.beacon-letter')).toHaveText(['S...', 'O---', 'S...']);
   await expect(start).toHaveText(/stop/i);
   // It flashes: lit and unlit both occur within one SOS at 8 wpm (150ms a unit).
   await expect(beacon).toHaveClass(/beacon-lit/, { timeout: 3000 });
@@ -71,10 +72,10 @@ test('Morse is a language to learn, not a language to speak', async ({ page }) =
   expect(offered.join(' ')).not.toMatch(/Morse/);
 });
 
-test('no speed setting can flash faster than the ceiling, and SOS keeps its own slow dot @smoke', async ({ page }) => {
-  // The ceiling is the beacon's, not the page's: a speed the select never offered is
-  // forced in here and still comes out at the floor. `data-unit` is the unit the
-  // beacon is actually running, in ms.
+test('no speed flashes faster than the ceiling unless the reader was warned, and SOS keeps its own slow dot @smoke', async ({ page }) => {
+  // The ceiling is the beacon's, not the page's: a fast speed forced in without the
+  // warning having been answered still comes out at the floor. `data-unit` is the
+  // unit the beacon is actually running, in ms.
   await page.goto(SIGNAL);
   await page.locator('#signal-text').fill('EEEE');
   await page.evaluate(() => {
@@ -94,6 +95,30 @@ test('no speed setting can flash faster than the ceiling, and SOS keeps its own 
   await expect(beacon).toBeVisible();
   await expect(beacon).toHaveAttribute('data-unit', '300');
   await beacon.click();
+});
+
+test('a speed past the ceiling asks first, and the message runs along the foot', async ({ page }) => {
+  // Faster than three flashes a second is the reader's call: declining puts the speed
+  // back to the fastest safe one, allowing runs exactly the unit asked for. And while
+  // it signals, the whole message sits at the foot, a letter over its code, with the
+  // letter on the light marked.
+  await page.goto(SIGNAL);
+  await page.locator('#signal-text').fill('EEEE');
+  const speed = page.locator('#signal-speed');
+  page.once('dialog', (dialog) => dialog.dismiss());
+  await speed.selectOption('13');
+  await expect(speed).toHaveValue('7');
+  page.once('dialog', (dialog) => dialog.accept());
+  await speed.selectOption('13');
+  await expect(speed).toHaveValue('13');
+  await page.locator('#signal-start').click();
+  const beacon = page.locator('.beacon');
+  await expect(beacon).toHaveAttribute('data-unit', String(Math.round(60000 / (50 * 13))));
+  await expect(beacon.locator('.beacon-letter')).toHaveCount(4);
+  await expect(beacon.locator('.beacon-letter').first()).toContainText('.');
+  await expect(beacon.locator('.beacon-current')).toHaveCount(1);
+  await beacon.click();
+  await expect(beacon).toHaveCount(0);
 });
 
 test('a beacon stops when the page is hidden, and a lamp that answers late is released', async ({ page }) => {

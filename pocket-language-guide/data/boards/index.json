@@ -3,7 +3,8 @@
     {
       "id": "emergency",
       "titleKey": "boards.emergency.title",
-      "icon": "shield-alert",
+      "icon": "siren",
+      "alert": true,
       "listeners": [
         "am",
         "ar",
@@ -114,7 +115,7 @@
     {
       "id": "intro",
       "titleKey": "boards.intro.title",
-      "icon": "circle-user",
+      "icon": "people",
       "listeners": [
         "am",
         "ar",
@@ -447,7 +448,7 @@
     {
       "id": "food",
       "titleKey": "boards.food.title",
-      "icon": "utensils",
+      "icon": "cutlery",
       "listeners": [
         "am",
         "ar",
@@ -558,7 +559,7 @@
     {
       "id": "shopping",
       "titleKey": "boards.shopping.title",
-      "icon": "shopping-bag",
+      "icon": "bag",
       "listeners": [
         "am",
         "ar",
@@ -780,7 +781,7 @@
     {
       "id": "spa",
       "titleKey": "boards.spa.title",
-      "icon": "leaf",
+      "icon": "lotus",
       "listeners": [
         "am",
         "ar",
@@ -891,7 +892,7 @@
     {
       "id": "lodging",
       "titleKey": "boards.lodging.title",
-      "icon": "hotel",
+      "icon": "bed",
       "listeners": [
         "am",
         "ar",
@@ -1002,7 +1003,7 @@
     {
       "id": "sights",
       "titleKey": "boards.sights.title",
-      "icon": "ticket",
+      "icon": "camera",
       "listeners": [
         "am",
         "ar",
@@ -1113,7 +1114,7 @@
     {
       "id": "pharmacy",
       "titleKey": "boards.pharmacy.title",
-      "icon": "pill",
+      "icon": "capsule",
       "listeners": [
         "am",
         "ar",

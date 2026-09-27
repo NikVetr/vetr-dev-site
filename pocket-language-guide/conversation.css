@@ -103,9 +103,13 @@
    alert is `alert`, the ok is `move` -- so only the other two are spelled out, from
    `data/themes/latex-reference.json`. Every one was chosen dark enough to carry
    white type on paper, which is what makes them usable filling a screen. */
-.board-role-comm  { --role: var(--accent); }
-.board-role-alert { --role: var(--alert); }
-.board-role-move  { --role: var(--ok); }
+/* Fixed, not the theme's tokens: those three are lifted in the dark so that they
+   read as text on a dark page, and as a fill behind white type the lifted blue,
+   pink and green washed the sentence -- and the Turn arrow -- out. A fill carries
+   white in both schemes at the paper-side values. */
+.board-role-comm  { --role: #0b67a3; }
+.board-role-alert { --role: #b3261e; }
+.board-role-move  { --role: #237547; }
 .board-role-money { --role: #b45100; }
 .board-role-stay  { --role: #6d3aa5; }
 
@@ -427,7 +431,7 @@
    list, where there is nothing else for it to contrast with. Twelve dashed boxes read
    as twelve provisional ones. */
 .board-grid-topics .board-cell-more {
-  background: var(--paper);
+  background: var(--control);
   border-style: solid;
 }
 /* The two buttons that are not something to say. They are about being seen, so they
@@ -676,8 +680,13 @@
   font-weight: 700;
   align-self: center;
   max-inline-size: 100%;
+  /* Its words plus the same margin on every side: the board controls' 3rem floor
+     stretched a small Reply taller than its words and left a band above and below
+     them, and the side padding was twice the top. With a line height of 1.15 a
+     quarter-em of it already sits above the capitals, so the block padding is that
+     much less than the inline. */
   min-block-size: 0;
-  padding: 0.35em 0.9em;
+  padding: 0.36em 0.6em;
   border-color: transparent;
   background: var(--accent);
   color: var(--paper);
@@ -918,7 +927,7 @@
   .board-cell { min-block-size: 3rem; font-size: var(--fs-0); }
   .board-message-text { font-size: clamp(1.6rem, 7vh, 3rem); }
   .board-control { min-block-size: 2.5rem; }
-  .board-reply { min-block-size: 2.8rem; font-size: var(--fs-1); padding-inline: var(--space-3); }
+  .board-reply { font-size: var(--fs-1); }
 }
 
 /* A voice that failed, said next to the button that promised it. White, because it
@@ -1008,6 +1017,20 @@
 /* The one thing that is not signal: how to stop it, at the very bottom edge and out
    of the way. Someone has to be able to put this down. */
 .beacon-sos .beacon-hint { font-size: var(--fs--1); opacity: 0.75; }
+.beacon-hint:empty { display: none; }
+/* The message being signalled, a letter over its code, the one on the light marked.
+   It wraps rather than running off a narrow screen, and inverts with the flash. */
+.beacon-sequence {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-end; gap: 0.3em 1.1em;
+  margin: 0; max-inline-size: 100%; font-size: var(--fs--1); color: rgb(255 255 255 / 0.72);
+}
+.beacon-letter { display: inline-flex; flex-direction: column; align-items: center; padding: 0.1em 0.3em; border-radius: 4px; }
+.beacon-letter b { font-size: 1.25em; line-height: 1.1; }
+.beacon-letter span { font-family: ui-monospace, monospace; letter-spacing: 0.08em; }
+.beacon-word-group { display: inline-flex; align-items: flex-end; gap: 0.2em; }
+.beacon-current { background: rgb(255 255 255 / 0.92); color: #000; }
+.beacon-lit .beacon-sequence { color: rgb(0 0 0 / 0.62); }
+.beacon-lit .beacon-current { background: #000; color: #fff; }
 
 /* Attention: a word held still, with one light travelling the edge of the display.
    The travelling light is what catches an eye that is not pointed at the screen; the
@@ -1206,11 +1229,38 @@ dialog.board-menu-panel::backdrop { background: rgb(17 24 32 / 25%); }
 
 /* --- the tree, turned ------------------------------------------------------- */
 /* The owner's grid turns with the sentence and the answers: one orientation from
-   the first tap to the last, for a phone laid on the counter. The grid's tracks
-   follow the writing mode, so its columns run down the screen. */
-.board-grid-turned { writing-mode: vertical-rl; text-orientation: sideways; }
-/* A topic's icon behind its word, a shade fainter than the answer mark. */
-.board-cell-icon { inline-size: 56%; block-size: 56%; opacity: 0.09; color: var(--ink); }
+   the first tap to the last, for a phone laid on the counter. **The bar turns with
+   it**: its topic reads the way the buttons do, and its back arrow -- a glyph in the
+   turned line -- points back for the reader who has turned the phone to read them.
+   The grid's tracks follow the writing mode, so its columns run down the screen. */
+.board-main-turned { writing-mode: vertical-rl; text-orientation: sideways; }
+/* The arrow's centring shift is physical, so it moves to the other axis; the glyph
+   itself turns with the line and points down it. */
+.board-main-turned .board-cell-more::after { translate: 50% 0; }
+/* A topic's mark behind its word: most of the button, as the answer mark is. */
+.board-cell-topic { inline-size: 88%; block-size: 88%; opacity: 0.13; }
+/* The emergency topic is the one that has to be found without reading: the alert
+   colour in both schemes, white type, and its mark in white. Across the top of the
+   list when the count is odd, so the gap is not left at the foot. */
+.board-cell-alert, .board-grid-topics .board-cell-alert {
+  background: #b3261e; border-color: #b3261e; color: #fff;
+}
+.board-cell-alert:hover { background: #b3261e; filter: brightness(0.93); }
+.board-cell-alert .board-cell-mark { color: #fff; opacity: 0.22; }
+.board-cell-wide { grid-column: 1 / -1; }
+/* **A button that opens more buttons says so twice**: the dashed edge, and an arrow
+   at its trailing end -- a dash alone reads as "provisional" to a reader who has not
+   been told what it means. Drawn, not written, so it is not part of the label, with
+   room kept for it on both sides so the centred label never runs under it. The
+   context list, where every button goes deeper, has neither. */
+.board-cell-more { padding-inline: 1.5em; }
+.board-cell-more::after {
+  content: '\203a' / ''; position: absolute; inset-inline-end: 0.4em; inset-block-start: 50%;
+  translate: 0 -50%; font-size: 1.6em; line-height: 1; color: var(--muted); pointer-events: none;
+}
+[dir="rtl"] .board-cell-more::after { transform: scaleX(-1); }
+.board-grid-topics .board-cell-more { padding-inline: var(--space-2); }
+.board-grid-topics .board-cell-more::after { content: none; }
 /* The link out to a translator, under the answer that had none. */
 .board-links { margin: 0; padding: var(--space-2); text-align: center; }
 .board-links .btn { font-weight: 600; }
