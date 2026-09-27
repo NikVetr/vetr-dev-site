@@ -148,7 +148,7 @@ test.describe('studio', () => {
     await page.getByRole('radio', { name: 'Small' }).click();
     // Whatever it settles on, it must have settled: the balance panel refuses to
     // propose anything while the sheet does not fit.
-    await expect(page.locator('#status')).toHaveText(/faces at \d/, { timeout: 90_000 });
+    await expect(page.locator('#status')).toHaveText(/Faces: \d+ · type \d/, { timeout: 90_000 });
     await expect(page.locator('#warnings li.error')).toHaveCount(0);
 
     // Work down the list the way a person would. Clicking rather than unchecking:
@@ -255,10 +255,10 @@ test.describe('studio', () => {
     await expect(finish).toBeHidden();
 
     // The whole corpus needs many wallpapers; the top priority step needs one.
-    await expect(page.locator('#status')).toHaveText(/\d+ faces at/, { timeout: 120_000 });
+    await expect(page.locator('#status')).toHaveText(/Faces: \d+ ·/, { timeout: 120_000 });
     const priorityField = field(page, 'Priority');
-    await priorityField.getByRole('radio', { name: 'Essential' }).click();
-    await expect(page.locator('#status')).toHaveText(/^1 faces at/, { timeout: 120_000 });
+    await priorityField.getByRole('radio', { name: 'Minimum' }).click();
+    await expect(page.locator('#status')).toHaveText(/^Faces: 1 ·/, { timeout: 120_000 });
     // One face means one image and no thumbnail strip to choose between them.
     await expect(page.locator('#face-area .face')).toHaveCount(1);
     await expect(page.locator('.face-strip')).toHaveCount(0);
@@ -665,7 +665,7 @@ test('a header or footer can carry a folio, the pair, or your own text', async (
 
   const texts = () => page.locator('.face.focused svg text')
     .evaluateAll((ns) => ns.map((n) => n.textContent));
-  await expect.poll(async () => (await texts()).some((s) => /→/.test(s)),
+  await expect.poll(async () => (await texts()).some((s) => / – /.test(s)),
     { timeout: 120_000 }).toBe(true);
   await expect.poll(async () => (await texts()).some((s) => /^\d+ \/ \d+$/.test(s)),
     { timeout: 120_000 }).toBe(true);

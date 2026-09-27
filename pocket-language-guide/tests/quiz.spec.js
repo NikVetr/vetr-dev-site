@@ -158,6 +158,6 @@ test.describe('drag handles', () => {
     await expect(page.locator('.face.focused')).toBeVisible();
     await expect.poll(leftOf).toBeGreaterThan(before + 0.5);
     // The sheet still lays out, just with a narrower content box.
-    await expect(page.locator('#status')).toContainText('faces at');
+    await expect(page.locator('#status')).toContainText('Faces:');
   });
 });

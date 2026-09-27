@@ -886,10 +886,10 @@ export const defaultFieldSet = (target) => (isSpoken(target)
  * of what fits, and `tests/solve.test.mjs` asserts them. The panel supplies the
  * captions.
  *
- * Each is the largest cut in the distribution that still fills a real card,
- * measured against every language in `data/coverage.json` at the default spacing:
+ * Each is a cut in the distribution that fills a real card, measured on the
+ * default selection at the default spacing:
  *
- *   - `essential` (10 concepts under 5 headings) fits **one phone face at full
+ *   - `minimum` (10 concepts under 5 headings) fits **one phone face at full
  *     nominal type** in every language. That is the whole point of the top step:
  *     one image, set as a lock screen. One phone face holds about 23 concepts with
  *     every field pushed to its script's floor, 18 at the comfort threshold and
@@ -897,10 +897,21 @@ export const defaultFieldSet = (target) => (isSpoken(target)
  *     concepts under 12 headings, which overflows one face by 20% even at the
  *     floor. So this is the only step in the distribution that fits one, and it
  *     fits with room rather than by a hair.
- *   - `core` (145) fits one sheet of photo paper: two faces of the 7x5in card.
- *   - `wide` (288) fits two sheets, four faces -- the count both hand-built
- *     reference sheets settled on.
- *   - `all` keeps everything, which is six to eight faces. The default: trimming
+ *   - `essential` (about 90) fills **one sheet** -- two faces of the 7x5in card --
+ *     at nominal type in every script measured but Tamil, which takes 0.61: the
+ *     greetings, thanks and apology, yes and no, the questions a traveller asks,
+ *     the number line from 0 to 9, and the emergency, pharmacy and police lines.
+ *     This was the lock-screen set until the owner found ten phrases "way too
+ *     restrictive" for a step called essential; that set is `minimum` now. Four
+ *     concepts were rescored so the cut is coherent rather than arbitrary: `no`
+ *     beside `yes`, `excuse me` beside `thank you`, `how much`, and `she` beside
+ *     `he`. 0.85 rather than 0.86 because the last few rows fill the second face:
+ *     at 0.86 up to seven of its columns were left loose.
+ *   - `core` (about 130) fits one sheet at about 0.8 of nominal in the denser
+ *     scripts and two sheets at nominal in the rest.
+ *   - `wide` (about 260) fits two sheets, four faces -- the count both hand-built
+ *     reference sheets settled on -- at 0.9 of nominal in Latin and Chinese.
+ *   - `all` keeps everything, which is eight faces or more. The default: trimming
  *     the corpus is for fitting a card the content will not fit, and the reference
  *     card is not that card.
  *
@@ -928,7 +939,7 @@ export const defaultFieldSet = (target) => (isSpoken(target)
  * than a fix: it trades `i-need-insulin`, `where-is` and `where-public-toilet` for
  * 36 rows of the number line.
  */
-export const PRIORITY_STEPS = { all: 0, wide: 0.74, core: 0.82, essential: 0.95 };
+export const PRIORITY_STEPS = { all: 0, wide: 0.74, core: 0.82, essential: 0.85, minimum: 0.95 };
 
 /**
  * Default selection: every section whose audience tags overlap the reader's

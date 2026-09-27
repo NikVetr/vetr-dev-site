@@ -26,7 +26,7 @@ import { regionRow } from './flags.js';
 import { speakerControl, personalSection } from './speaker-settings.js';
 import { personalWiring } from './personal-data.js';
 import {
-  warningText, applyStatic, languageName, loadUiLanguage, number, regionList, t,
+  warningText, fixText, applyStatic, languageName, loadUiLanguage, number, regionList, t,
 } from './i18n.js';
 
 // Module scope, so the words cannot be looked up here: the keys are, and the
@@ -354,7 +354,7 @@ async function main() {
       const keys = /** @type {(keyof import('../core/types.js').SheetSpec)[]} */
         (Object.keys(fix.patch));
       autoFix = {
-        label: fix.label,
+        label: fixText(fix),
         before: Object.fromEntries(keys.map((k) => [k, spec[k]])),
       };
       spec = { ...spec, ...fix.patch };
@@ -400,7 +400,7 @@ async function main() {
           const button = document.createElement('button');
           button.type = 'button';
           button.className = 'fix';
-          button.textContent = fix.label;
+          button.textContent = fixText(fix);
           button.addEventListener('click', () => {
             // Taking a fix by hand is not the automatic one, so it must not be
             // offered back as though it were.
@@ -441,7 +441,7 @@ async function main() {
     // computed key as two catalogue entries nobody uses.
     const counts = {
       faces: plan.faces.length,
-      sheets: plan.faces.length / 2,
+      sheets: Math.ceil(plan.faces.length / 2),
       scale: number(plan.scale, 2),
     };
     $('status').textContent = plan.faces.length

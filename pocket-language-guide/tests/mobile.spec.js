@@ -84,7 +84,7 @@ test.describe('a multi-page export', () => {
       [...document.querySelectorAll('#controls button')]
         .find((b) => /phone screen/i.test(b.textContent || ''))?.click();
     });
-    await expect(page.locator('#status')).toContainText('image(s)');
+    await expect(page.locator('#status')).toContainText('Images:');
     await page.locator('#png').click();
 
     const panel = page.locator('#saved-images');

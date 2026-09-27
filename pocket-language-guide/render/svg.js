@@ -108,10 +108,14 @@ export function faceToSvg(face, plan, opts) {
     // side of the word. The PDF path was already right, because fontkit reorders
     // per script run, so the two renderers disagreed. This changes no ink `x` and
     // no width, so nothing re-layouts.
+    // `xml:space="preserve"` because a run's leading space is part of its measured
+    // width -- the band joins its parts that way -- and SVG otherwise drops it, so
+    // the bullet between two band parts was drawn a space early, against the word
+    // before it, where the PDF drew it where the plan put it.
     out.push(
       `<text x="${num(run.x)}" y="${num(run.y)}" font-family="${esc(f.family)}" `
       + `font-size="${num(run.size)}" font-weight="${f.weight}"${italic} `
-      + `fill="${run.fill}" style="unicode-bidi:plaintext">${esc(run.text)}</text>`,
+      + `fill="${run.fill}" xml:space="preserve" style="unicode-bidi:plaintext">${esc(run.text)}</text>`,
     );
   }
 

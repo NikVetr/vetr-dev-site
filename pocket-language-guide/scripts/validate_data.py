@@ -834,10 +834,10 @@ def main():
         # was satisfied and each row's own importance is perfectly reasonable.
         #
         # The steps are duplicated from `PRIORITY_STEPS` in `core/pack.js` rather
-        # than parsed out of it: four numbers, and a regex over JavaScript to read
+        # than parsed out of it: five numbers, and a regex over JavaScript to read
         # them would be the more fragile of the two couplings.
         try:
-            above = {step for step in (0.74, 0.82, 0.95)
+            above = {step for step in (0.74, 0.82, 0.85, 0.95)
                      if (float(concept["importance"]) >= step)
                      != (float(sibling["importance"]) >= step)}
         except ValueError:

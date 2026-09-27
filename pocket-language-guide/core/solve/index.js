@@ -136,7 +136,8 @@ const HEAD_LINES = 1.5;
 /**
  * @param {import('../types.js').Geometry} g
  * @param {import('../types.js').PaperSpec} paper
- * @param {{top:number,bottom:number}} [bands] the two furniture bands' heights
+ * @param {{top:number, bottom:number, left?:number, right?:number}} [bands] the two
+ *   furniture bands' heights, and the lanes an edge tab's rail takes down either side
  * @param {number} [frame] space reserved for an ornamental frame
  */
 export function contentBox(g, paper, bands = { top: 0, bottom: 0 }, frame = 0) {
@@ -148,13 +149,14 @@ export function contentBox(g, paper, bands = { top: 0, bottom: 0 }, frame = 0) {
   // auto-fit, all three renderers -- needs no knowledge of them.
   const reserveTop = g.pageH * (g.reserve?.top ?? 0);
   const reserveBottom = g.pageH * (g.reserve?.bottom ?? 0);
-  const left = Math.max(g.marginLeft, insetX) + frame;
-  const right = Math.max(g.marginRight, insetX) + frame;
   // A band is *added* to the margin rather than max()ed into it: a printer's dead
   // zone and a lock screen's clock are areas the sheet may not use, where a running
   // head is area the sheet is using for something else. Taking the larger of the two
   // would let a wide margin swallow the head's own line. Two independent heights
-  // rather than one signed number, since a header and a footer can both be on.
+  // rather than one signed number, since a header and a footer can both be on -- and
+  // an edge tab's rail is the same kind of thing turned on its side.
+  const left = Math.max(g.marginLeft, insetX) + (bands.left ?? 0) + frame;
+  const right = Math.max(g.marginRight, insetX) + (bands.right ?? 0) + frame;
   const top = Math.max(g.marginTop, insetY, reserveTop) + (bands.top ?? 0) + frame * 1.5;
   const bottom = Math.max(g.marginBottom, insetY, reserveBottom) + (bands.bottom ?? 0) + frame * 1.5;
   const columnGap = g.columnGap + frame * 0.65;
@@ -332,15 +334,38 @@ function bandAsks(band) {
 }
 
 /**
- * How tall each band is for this spec, in points, zero where there is none.
+ * Whether a band's tab runs a rail down this side of the face: an `edge` tab over
+ * the columns on that side, which a centred one is not.
+ * @param {import('../types.js').HeadBand|null|undefined} band @param {'left'|'right'} side
+ */
+function railsOn(band, side) {
+  if (!bandAsks(band) || !band?.fill || band.fillReach !== 'edge') return false;
+  const span = band.span ?? 'full';
+  return span === 'full' || span === side;
+}
+
+/**
+ * How tall each band is for this spec, in points, zero where there is none -- and
+ * how wide a lane an edge tab's rail takes down either side.
+ *
+ * **The rail moves the columns rather than lying against them.** It used to be the
+ * margin alone, which put a saturated stripe flush against the first and last
+ * columns' words, and on a printer with an unprintable border left it mostly off
+ * the paper. So it is a band on its side: as wide as a band is tall, plus a column
+ * gap of paper before the words, added to the margin the way a band is -- and a
+ * wider margin still makes a wider rail.
  * @param {SolveInput} input
  */
 function headBandPt(input) {
   const bands = headBands(input.spec);
   const pt = headSize(input) * HEAD_LINES;
+  const lane = (/** @type {'left'|'right'} */ side) => (
+    railsOn(bands.top, side) || railsOn(bands.bottom, side) ? pt + input.spec.geometry.columnGap : 0);
   return {
     top: bandAsks(bands.top) ? pt : 0,
     bottom: bandAsks(bands.bottom) ? pt : 0,
+    left: lane('left'),
+    right: lane('right'),
   };
 }
 
@@ -361,10 +386,10 @@ function headBandPt(input) {
  * fitted to the content box, and the box is what this decides. It is also what a
  * reader expects a control called "left tab" to mean.
  *
- * `fillReach` is deliberately not read here. A corner or full-edge tab is a bigger
- * *mark* and not a bigger *ask*: it grows into the page's own margin and into the
- * strip this function has already charged, never into a column. So the three reaches
- * fit the same content, which is the only way furniture may behave.
+ * `fillReach` is deliberately not read here: no reach changes which columns pay for
+ * the band's line. A corner grows into the page's own margin and the strip already
+ * charged; an edge tab's rail does ask for room, but sideways, as a lane beside the
+ * outer columns that `headBandPt` reserves.
  * @param {import('../types.js').HeadBand|null|undefined} band
  * @param {number} columns
  * @returns {Set<number>} column indices, empty where the band asks for nothing
@@ -456,7 +481,11 @@ function headText(input, face, faces, band, theme) {
   const one = (slot) => {
     if (slot === 'page') return [{ text: `${face + 1} / ${faces}`, bold: false }];
     if (slot === 'pair') {
-      return [{ text: `${name(spec.target)} \u2192 ${name(spec.source)}`, bold: false }];
+      // A spaced en dash, as a Chinese–English dictionary is named: the Latin face has
+      // no arrow, and a glyph it lacks is measured as one width and drawn from some
+      // other font at another, which set the page number on top of the pair's last
+      // letter in a right tab.
+      return [{ text: `${name(spec.target)} \u2013 ${name(spec.source)}`, bold: false }];
     }
     if (slot === 'region') {
       const text = emergencyNote(
@@ -513,9 +542,9 @@ function headText(input, face, faces, band, theme) {
     }
     if (slot === 'custom') return [{ text: (band.text ?? '').trim(), bold: false }];
     // The mark. A word joiner for text: not whitespace, so `spaceParts` keeps it,
-    // and zero width, so nothing is drawn where the paths go. The trailing space
-    // becomes the gap before whatever follows, by the same rule as every other part.
-    if (slot === 'logo') return [{ text: '\u2060 ', bold: false, logo: true }];
+    // and zero width, so nothing is drawn where the paths go. No space either side:
+    // the mark's own air (`logoAir`) is the gap, on whichever side has a neighbour.
+    if (slot === 'logo') return [{ text: '\u2060', bold: false, logo: true }];
     return [];
   };
 
@@ -547,6 +576,20 @@ function headText(input, face, faces, band, theme) {
  * mark beside a line of type rather than as one more glyph in it.
  * @param {number} size */
 const logoSize = (size) => size * 1.15;
+
+/** Noto Sans's cap height, in ems: the mark is centred on the middle of the capitals,
+ * which is where a line of type visibly sits. Its bottom used to rest just under the
+ * baseline, which set a mark taller than the capitals high against the words. */
+const CAP_HEIGHT = 0.714;
+
+/** The air between the mark and a part beside it, in ems of the band's type: half an
+ * em rather than the word space it used to get, which set the mark against the first
+ * letter as though it were one more glyph -- and text *before* the mark got none. */
+const LOGO_AIR = 0.5;
+
+/** The mark's air in ems, on whichever sides have a neighbour.
+ * @param {import('../types.js').HeadPart[]} parts @param {number} i */
+const logoAir = (parts, i) => LOGO_AIR * ((i > 0 ? 1 : 0) + (i < parts.length - 1 ? 1 : 0));
 
 /**
  * The logo as path marks, `h` points tall with its top-left corner at (`x`, `y`).
@@ -835,7 +878,7 @@ export function layout(input) {
     }
     return {
       pageW: spec.geometry.pageW, pageH: spec.geometry.pageH,
-      faces: [], warnings, scale, looseness: [], geometry: { ...spec.geometry, faces },
+      faces: [], warnings, scale, looseness: [], geometry: { ...spec.geometry, faces }, bands: band,
     };
   }
 
@@ -862,7 +905,7 @@ export function layout(input) {
       // a short column whose first row no longer lines up with the column beside it
       // looks like a mistake rather than like whitespace. With no neighbour there is
       // nothing to line up with, so it splits above and below -- which is what the
-      // phone wallpaper needs: at the `essential` priority step the content is one
+      // phone wallpaper needs: at the `minimum` priority step the content is one
       // face and ends 19% early, and 71pt of blank under the last row reads as the
       // sheet having been cut off, between a reserved clock band above it and a
       // reserved widget band below.
@@ -1004,13 +1047,13 @@ export function layout(input) {
        * two sides and the corner is solid. `edge` keeps that corner and adds a rail
        * down the outer margin for the whole height of the face.
        *
-       * **The rail is the margin, not the column.** "The whole column" is what was
-       * asked for and it is not what can be printed: a column is full of black
-       * vocabulary at 5-9pt, and a saturated stripe behind it costs the card the one
-       * thing on it that has to be read. The margin beside the column is empty by
-       * construction -- `contentBox` starts the columns at `box.left` -- so a rail
-       * there is full-height colour that touches nothing. It is the thumb index a
-       * dictionary uses, and it identifies a fanned stack the way a corner tab
+       * **The rail is a lane beside the column, not a stripe behind it.** "The whole
+       * column" is what was asked for and it is not what can be printed: a column is
+       * full of black vocabulary at 5-9pt, and a saturated stripe behind it costs the
+       * card the one thing on it that has to be read. So the rail takes its own lane
+       * -- the margin, a band's width more, and a column gap of paper before the words
+       * (`headBandPt`) -- and the columns move in to make room. It is the thumb index
+       * a dictionary uses, and it identifies a fanned stack the way a corner tab
        * identifies an offset one.
        */
       const reach = fillColour ? (bandSpec.fillReach ?? 'band') : 'band';
@@ -1044,7 +1087,9 @@ export function layout(input) {
       });
       /** @param {import('../types.js').HeadPart[]} parts */
       const widthOf = (parts) => parts.reduce(
-        (sum, part) => sum + (part.logo ? logoSize(size) * LOGO_ASPECT : measurer.width(part.text, styleOf(part))),
+        (sum, part, i) => sum + (part.logo
+          ? logoSize(size) * LOGO_ASPECT + logoAir(parts, i) * size
+          : measurer.width(part.text, styleOf(part))),
         0,
       );
       /** @param {import('../types.js').HeadPart[]} parts @param {number} room */
@@ -1145,10 +1190,11 @@ export function layout(input) {
             h: strip.bottom - strip.top,
             fill: fillColour,
           });
-          // The rail, in the margin outside the columns the span covers: the left one
+          // The rail, in the lane outside the columns the span covers: the left one
           // for a left tab, the right one for a right tab, both for a bar across the
-          // face. A centred tab has no outer margin to run down -- the same reason it
-          // does not bleed sideways either -- so it keeps the corner and no rail.
+          // face, stopping a column gap short of the words. A centred tab has no outer
+          // margin to run down -- the same reason it does not bleed sideways either --
+          // so it keeps the corner and no rail.
           //
           // `frame` comes off each end, so the rail stops short of an ornamental
           // border rather than running under it: `contentBox` folds the frame's own
@@ -1156,9 +1202,10 @@ export function layout(input) {
           // drawn down the middle of a saturated blue stripe. Zero wherever there is
           // no frame, which is every sheet but the elven one.
           if (reach === 'edge') {
+            const gutter = geometry.columnGap;
             const rails = span === 'center' ? [] : [
-              ...(span === 'right' ? [] : [[0, box.left - frame]]),
-              ...(span === 'left' ? [] : [[box.left + box.width + frame, geometry.pageW]]),
+              ...(span === 'right' ? [] : [[0, box.left - frame - gutter]]),
+              ...(span === 'left' ? [] : [[box.left + box.width + frame + gutter, geometry.pageW]]),
             ];
             for (const [railFrom, railTo] of rails) {
               face.rects.unshift({
@@ -1177,12 +1224,13 @@ export function layout(input) {
         if (!parts.length) continue;
         const total = widthOf(parts);
         let x = align === 'end' ? anchor - total : align === 'mid' ? anchor - total / 2 : anchor;
-        for (const part of parts) {
+        for (const [i, part] of parts.entries()) {
           if (part.logo) {
             const h = logoSize(size);
-            (face.paths ??= []).push(...logoMarks(x, y - h + size * 0.12, h,
+            const before = i > 0 ? LOGO_AIR * size : 0;
+            (face.paths ??= []).push(...logoMarks(x + before, y - (CAP_HEIGHT * size + h) / 2, h,
               spec.inkMode === 'mono' ? theme.colors.ink : null));
-            x += h * LOGO_ASPECT;
+            x += h * LOGO_ASPECT + logoAir(parts, i) * size;
             continue;
           }
           const partStyle = styleOf(part);
@@ -1292,6 +1340,7 @@ export function layout(input) {
     scale,
     looseness,
     geometry,
+    bands: band,
   };
 }
 
@@ -1335,18 +1384,22 @@ function findFixes(input, box, scaleFloor) {
       const faces = spec.geometry.faces + extra;
       if (!fitsWith({ ...spec.geometry, faces })) continue;
       fixes.push({
+        code: 'useFaces',
+        params: { faces, current: spec.geometry.faces },
         label: `Use ${faces} faces instead of ${spec.geometry.faces}`,
         patch: { geometry: { ...spec.geometry, faces } },
       });
       break;
     }
-    fixes.push({ label: 'Let the page count follow the content', patch: { autoFaces: true } });
+    fixes.push({ code: 'autoFaces', label: 'Let the page count follow the content', patch: { autoFaces: true } });
   }
 
   for (let extra = 1; extra <= MAX_EXTRA_COLUMNS; extra += 1) {
     const columns = spec.geometry.columns + extra;
     if (!fitsWith({ ...spec.geometry, columns })) continue;
     fixes.push({
+      code: 'useColumns',
+      params: { columns, current: spec.geometry.columns },
       label: `Use ${columns} columns instead of ${spec.geometry.columns}`,
       patch: { geometry: { ...spec.geometry, columns } },
     });
@@ -1379,6 +1432,8 @@ function findFixes(input, box, scaleFloor) {
     if (breakColumns(atoms, shedHeights, bins).failure) continue;
     const count = Object.keys(dropped).length;
     fixes.push({
+      code: 'dropSections',
+      params: { count },
       label: `Drop the ${count} least important ${count === 1 ? 'section' : 'sections'}`,
       patch: {
         selection: {

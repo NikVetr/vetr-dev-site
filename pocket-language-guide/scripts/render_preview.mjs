@@ -2,7 +2,7 @@
 //
 //   node scripts/render_preview.mjs [--target zh-Hans] [--source en] [--scale auto]
 //                                   [--out tmp/preview] [--dpi 200]
-//                                   [--geometry phone-1col] [--priority essential]
+//                                   [--geometry phone-1col] [--priority minimum]
 //                                   [--head bottom:region,page]
 //
 // This is the same SVG the browser exports, rendered through the same engine, so

@@ -163,9 +163,10 @@
  *   column the tab sits over, from the top of the face to the bottom, for a stack
  *   fanned sideways rather than offset up the page -- except under `span: 'center'`,
  *   which has no outer margin to run down and keeps the corner alone, the same reason
- *   a centred tab does not bleed sideways either. None of the three costs a column
- *   anything: a tab is charged to the columns its `span` covers and no more, and the
- *   rail runs outside the content box, so `bandColumns` does not read this.
+ *   a centred tab does not bleed sideways either. A tab is charged to the columns its
+ *   `span` covers and no more, whatever its reach; the rail alone asks for room, as a
+ *   lane beside the outer columns -- a band's width and a column gap -- so the
+ *   columns move in to make room rather than having colour laid against their words.
  * @property {string} [colour]  a theme colour key -- `ink`, `muted`, or
  *   `roles.<role>` -- for every part in this band. Unset keeps the default, which is
  *   muted with emphasis promoted to ink; set, it colours the whole band and emphasis
@@ -306,7 +307,11 @@
 /**
  * A remedy the reader can apply with one click. `patch` is a shallow overlay on
  * the SheetSpec, so a warning can offer the fix rather than only describe it.
+ * Named the way a warning is: a stable `code` and its numbers, which the UI looks up
+ * as `fix.<code>`, and the English `label` that Node-side scripts print.
  * @typedef {Object} WarningFix
+ * @property {string} code
+ * @property {Record<string, number>} [params]
  * @property {string} label
  * @property {Partial<SheetSpec>} patch
  */
@@ -336,6 +341,9 @@
  * @property {number[]} looseness per-column residual slack, for diagnostics
  * @property {Geometry} geometry  as resolved: `faces` is a real count even when
  *   the spec asked for auto
+ * @property {{top:number, bottom:number, left:number, right:number}} bands  what the
+ *   furniture takes from the page beyond the margins: the bands' heights and an edge
+ *   tab's lanes, so the studio's handles put the columns where the solver did
  */
 
 /** @typedef {{conceptId:string, sectionId:string, label:string, reason:string}} DiffEntry */

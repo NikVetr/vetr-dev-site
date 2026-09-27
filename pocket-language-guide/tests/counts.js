@@ -77,9 +77,9 @@ export async function settledCounts(page) {
  */
 export async function faceCount(page) {
   const status = page.locator('#status');
-  await expect(status).toHaveText(/\d+ faces/, { timeout: 120_000 });
+  await expect(status).toHaveText(/Faces: \d+/, { timeout: 120_000 });
   const text = (await status.textContent()) ?? '';
-  const m = /(\d+) faces/.exec(text);
+  const m = /Faces: (\d+)/.exec(text);
   if (!m) throw new Error(`unreadable status: ${JSON.stringify(text)}`);
   const faces = Number(m[1]);
   expect(faces % 2).toBe(0);

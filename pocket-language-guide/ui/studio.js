@@ -30,7 +30,7 @@ import { attachPanelResizers, attachPhoneChrome, revealPanel } from './panels.js
 import { createAddTerm } from './add-term.js';
 import * as store from './platform/store.js';
 import {
-  warningText, applyStatic, languageName, loadUiLanguage, number, t,
+  warningText, fixText, applyStatic, languageName, loadUiLanguage, number, t,
 } from './i18n.js';
 
 const BANNER_KEY = 'plg.banner-hidden';
@@ -376,7 +376,7 @@ async function main() {
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'fix';
-      button.textContent = fix.label;
+      button.textContent = fixText(fix);
       button.addEventListener('click', () => {
         spec = { ...spec, ...fix.patch };
         schedule();
@@ -528,6 +528,7 @@ async function main() {
     detachHandles = attachHandles({
       face: focusedFace,
       spec,
+      bands: plan.bands,
       onCommit: (geometry) => {
         spec = { ...spec, geometry };
         schedule();
@@ -559,7 +560,7 @@ async function main() {
       });
       return;
     }
-    const box = contentBox(spec.geometry, spec.paper, undefined, elvenInset(spec));
+    const box = contentBox(spec.geometry, spec.paper, plan.bands, elvenInset(spec));
     showDiff(proposeBalance({
       corpus: ctx.corpus,
       spec,

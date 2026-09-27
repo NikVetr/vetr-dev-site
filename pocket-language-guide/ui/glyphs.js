@@ -188,6 +188,7 @@ const PRIORITY_CHOICES = [
   { value: PRIORITY_STEPS.wide, captionKey: 'format.priority.wide' },
   { value: PRIORITY_STEPS.core, captionKey: 'format.priority.core' },
   { value: PRIORITY_STEPS.essential, captionKey: 'format.priority.essential' },
+  { value: PRIORITY_STEPS.minimum, captionKey: 'format.priority.minimum' },
 ];
 
 /**
@@ -230,7 +231,7 @@ function priorityGlyph(level) {
   const box = 30;
   const svg = frame(box, box);
   const bars = 8;
-  const kept = [8, 5, 3, 1][level] ?? bars;
+  const kept = [8, 6, 4, 2, 1][level] ?? bars;
   svg.append(svgEl('rect', { x: 1, y: 2, width: box - 2, height: box - 4, rx: 1.5, class: 'g-page' }));
   const pitch = (box - 8) / bars;
   for (let i = 0; i < bars; i += 1) {
@@ -1967,8 +1968,9 @@ export function headControl({ spec, onChange, colours = () => [] }) {
  *
  * The first column starts lower than the other two in all three, which is true and is
  * the point: a tab is charged to the column it sits over, and no reach charges
- * anything on top of that. The rail runs in the margin, clear of the first column
- * rather than over it -- also true, and the reason `edge` is printable at all.
+ * anything on top of that. The rail takes a lane of its own and the columns move in
+ * beside it rather than lying under it -- also true, and the reason `edge` is
+ * printable at all.
  * @param {'band'|'corner'|'edge'} reach
  */
 export function headReachGlyph(reach) {
@@ -1978,10 +1980,12 @@ export function headReachGlyph(reach) {
   // The columns stop short of the page on all four sides, because the margin is
   // where the whole difference between these three options lives: without that
   // clearance the rail would read as a fourth column rather than as the edge.
+  const lane = reach === 'edge';
   for (let c = 0; c < 3; c += 1) {
     const top = c === 0 ? 11.8 : 7.5;
     svg.append(svgEl('rect', {
-      x: 7 + c * 6.4, y: top, width: 5.2, height: 21.5 - top, class: 'g-col',
+      x: (lane ? 8.2 : 7) + c * (lane ? 6 : 6.4), y: top, width: lane ? 4.8 : 5.2,
+      height: 21.5 - top, class: 'g-col',
     }));
   }
   // Down to 11 in all three: the tab's inner edge is the boundary with the columns,
@@ -1989,7 +1993,7 @@ export function headReachGlyph(reach) {
   const top = reach === 'band' ? 8 : 5;
   svg.append(svgEl('rect', { x: 3, y: top, width: 9.5, height: 11 - top, class: 'g-accent' }));
   if (reach === 'edge') {
-    svg.append(svgEl('rect', { x: 3, y: 5, width: 3, height: 18, class: 'g-accent' }));
+    svg.append(svgEl('rect', { x: 3, y: 5, width: 3.8, height: 18, class: 'g-accent' }));
   }
   return svg;
 }

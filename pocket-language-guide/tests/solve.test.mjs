@@ -230,7 +230,7 @@ test('a screen keeps its reserved bands clear of any ink', async () => {
   // And it holds through a real solve, which is the claim that matters: no run, no
   // rule and no shaded row may enter either band.
   const { plan } = await buildSheet(ctx, {
-    ...spec, geometry, autoFaces: true, scale: 0, priority: 0.95,
+    ...spec, geometry, autoFaces: true, scale: 0, priority: PRIORITY_STEPS.minimum,
   });
   assert.ok(plan.faces.length, 'the top priority step must still fit');
   const limitTop = geometry.pageH * reserve.top;
@@ -388,10 +388,14 @@ test('a pinned face count with too little room is reported, not truncated', asyn
   const codes = plan.warnings.map((w) => w.code);
   assert.ok(codes.some((c) => c.startsWith('no-fit')) || codes.includes('break-failed'),
     `expected a failure warning, got ${codes.join(', ')}`);
-  const fixes = plan.warnings.flatMap((w) => w.fixes ?? []).map((f) => f.label);
+  const offered = plan.warnings.flatMap((w) => w.fixes ?? []);
+  const fixes = offered.map((f) => f.label);
   assert.ok(fixes.length > 0, 'a failure should come with something to do about it');
   assert.ok(fixes.some((l) => /page count follow/.test(l)),
     `expected an auto-faces remedy, got ${fixes.join(' | ')}`);
+  // The button is labelled from the catalogue by code, as a warning is.
+  const english = JSON.parse(await readFile('data/i18n/en.json', 'utf8'));
+  for (const f of offered) assert.ok(`fix.${f.code}` in english, `no catalogue entry for fix ${f.code}`);
 });
 
 test('auto reproduces the hand-built originals at their own spacing', async () => {
@@ -614,7 +618,7 @@ test('the top priority step fits one phone face in every language', async () => 
   const langs = Object.keys(coverage.languages);
   assert.ok(langs.length >= 16, `only ${langs.length} languages have coverage`);
   // **The count of concepts is a claim about a complete pack, not about the
-  // engine.** The essential step is the top of the importance distribution, and a
+  // engine.** The minimum step is the top of the importance distribution, and a
   // language that covers a quarter of the bank has no top: four of the ten concepts
   // at or above 0.95 are `emergency-medical` phrases, which `validate_data.py`
   // refuses below confidence 2, so a pack with no fluent reviewer cannot have them
@@ -636,7 +640,7 @@ test('the top priority step fits one phone face in every language', async () => 
       geometry: { ...phoneGeometry },
       autoFaces: false,
       scale: 0,
-      priority: PRIORITY_STEPS.essential,
+      priority: PRIORITY_STEPS.minimum,
     });
     assert.equal(plan.faces.length, 1, `${target} needed ${plan.faces.length} phone faces`);
     assert.deepEqual(plan.warnings.filter((w) => w.severity === 'error'), [],
@@ -674,7 +678,7 @@ test('auto faces follows the card\'s own parity, so a screen can be one face', a
     geometry: { ...phoneGeometry },
     autoFaces: true,
     scale: 0,
-    priority: PRIORITY_STEPS.essential,
+    priority: PRIORITY_STEPS.minimum,
   });
   assert.equal(phone.plan.geometry.faces, 1, 'auto should not spend a second wallpaper');
   const paper = await buildSheet(ctx, { ...spec, priority: PRIORITY_STEPS.core });
@@ -696,7 +700,7 @@ test('a priority step nests, and never leaves a heading over nothing', async () 
   // rows and `hike` has none above 0.8, so a global threshold empties whole
   // sections. A heading whose rows have all gone must go with them.
   const steps = [PRIORITY_STEPS.all, PRIORITY_STEPS.wide, PRIORITY_STEPS.core,
-    PRIORITY_STEPS.essential];
+    PRIORITY_STEPS.essential, PRIORITY_STEPS.minimum];
   /** @type {Set<string>[]} */ const sets = [];
   for (const priority of steps) {
     const kept = buildBlocks({
@@ -723,6 +727,30 @@ test('a priority step nests, and never leaves a heading over nothing', async () 
       assert.ok(sets[i - 1].has(id), `${id} survives ${steps[i]} but not ${steps[i - 1]}`);
     }
   }
+});
+
+test('the essential step keeps the everyday basics and fills one sheet', async () => {
+  // Reported as "way too restrictive" when it was the ten-phrase lock-screen set,
+  // which is `minimum` now. What a traveller cannot do without has to survive it --
+  // and together, which is what the four rescored concepts are for: `no` with `yes`,
+  // `excuse me` with `thank you`, `how much`, `she` with `he` -- and so does the whole
+  // number line, which a floor between its digits would cut in half.
+  const kept = printed(buildBlocks({
+    corpus: ctx.corpus, targetRows, sourceRows, respell,
+    spec: { ...spec, priority: PRIORITY_STEPS.essential },
+  }));
+  const basics = ['social-basics.thank-you', 'social-basics.excuse-me-sorry',
+    'quick-responses.yes-right', 'quick-responses.no-not', 'question-words.how-much-many',
+    'pronouns-verbs.he-him', 'pronouns-verbs.she-her', 'emergency-medical.help'];
+  const digits = Object.entries(ctx.corpus.concepts)
+    .filter(([, c]) => c.cluster_id === 'numbers-money.misc' && Number(c.importance) >= 0.85)
+    .map(([id]) => id);
+  assert.equal(digits.length, 11, `0 to 9, with liǎng: got ${digits.join(' ')}`);
+  for (const id of [...basics, ...digits]) assert.ok(kept.has(id), `the essential step lost ${id}`);
+  // One sheet -- two faces of the reference card -- at nominal type.
+  const { plan } = await buildSheet(ctx, { ...spec, autoFaces: true, scale: 0, priority: PRIORITY_STEPS.essential });
+  assert.equal(plan.faces.length, 2, `the essential step took ${plan.faces.length} faces`);
+  assert.ok(plan.scale >= 0.99, `at ${plan.scale.toFixed(2)} of nominal`);
 });
 
 test('an item ticked by hand outranks the priority floor', async () => {
@@ -752,7 +780,7 @@ test('a column with no neighbour centres what the glue could not absorb', async 
   // beside it looks like a mistake rather than like whitespace. Alone it has
   // nothing to line up with.
   //
-  // The phone wallpaper is why this matters. At the `essential` priority step the
+  // The phone wallpaper is why this matters. At the `minimum` priority step the
   // content is a single face and ends about a fifth of the way early, so 71pt sat
   // under the last row -- between a band reserved for the clock above it and one
   // reserved for widgets below, which made the sheet look cut off.
@@ -760,12 +788,12 @@ test('a column with no neighbour centres what the glue could not absorb', async 
   const phone = {
     ...(await referenceSpec('zh-Hans', 'en')),
     geometry: { ...presets.geometry['phone-1col'] },
-    priority: PRIORITY_STEPS.essential,
+    priority: PRIORITY_STEPS.minimum,
     autoFaces: true,
   };
   const built = await buildSheet(ctx, phone);
   const box = contentBox(phone.geometry, phone.paper);
-  assert.equal(built.plan.faces.length, 1, 'the essential step is one wallpaper');
+  assert.equal(built.plan.faces.length, 1, 'the minimum step is one wallpaper');
   const ys = built.plan.faces[0].runs.map((r) => r.y);
   const above = Math.min(...ys) - box.top;
   const below = box.top + box.height - Math.max(...ys);
@@ -946,8 +974,17 @@ test('the logo slot draws the mark as paths and takes its width from the band', 
   assert.equal(marks.length, 1, 'the front bubble is drawn once, in its own green');
   const folio = face.runs.find((r) => /^\s?1 \/ \d+$/.test(r.text));
   assert.ok(folio, 'the folio still prints beside it');
-  const bubble = marks[0];
-  assert.ok(folio.x > bubble.x, 'and to the right of the mark');
+  // To the right of the mark with half an em of air, and the mark centred on the
+  // middle of the folio's capitals: it used to sit a word space from the text and
+  // rest on the baseline, which set it close and high.
+  const coords = (face.paths ?? []).flatMap((p) => (p.d.match(/-?[\d.]+/g) ?? []).map(Number));
+  const xs = coords.filter((_, i) => i % 2 === 0);
+  const ys = coords.filter((_, i) => i % 2 === 1);
+  assert.ok(folio.x - Math.max(...xs) >= 0.45 * folio.size,
+    `the folio starts ${(folio.x - Math.max(...xs)).toFixed(2)}pt after the mark`);
+  const middle = (Math.min(...ys) + Math.max(...ys)) / 2;
+  assert.ok(Math.abs(middle - (folio.y - 0.714 * folio.size / 2)) < 0.05 * folio.size,
+    `the mark's middle ${middle.toFixed(2)} should sit on the capitals' ${(folio.y - 0.357 * folio.size).toFixed(2)}`);
   // Nothing is set for the mark's own part: it is drawn, not typed.
   assert.ok(!face.runs.some((r) => r.text.includes('\u2060')));
 
@@ -1317,7 +1354,7 @@ test('a corner tab costs only the columns it covers', async () => {
     `the columns a right tab misses should be level, got ${right.join(' ')}`);
 });
 
-test('a tab may fill the corner or run the whole edge, and neither costs a column anything', async () => {
+test('a tab may fill the corner or run the whole edge, and an edge moves the columns rather than covering them', async () => {
   // Two more tabs, asked for in these words: one that "covers the entire corner
   // instead of just projecting in from the side (so it would be flush with the top of
   // the face)", and one that "can span the entire column it sits above or below".
@@ -1328,14 +1365,13 @@ test('a tab may fill the corner or run the whole edge, and neither costs a colum
   // apart is what lets the two be chosen independently, and what makes the last
   // assertion in this test true.
   //
-  // **The rail is the margin, not the column.** The literal request cannot be
-  // printed: a column is full of black vocabulary at 5-9pt, and a saturated stripe
-  // behind it costs the card the one thing on it that has to be read -- rendered and
-  // looked at, and it turns the first column into a broken venetian blind. The margin
-  // beside the column is empty by construction, since `contentBox` starts the columns
-  // at `box.left`, so full-height colour there is the thumb index a dictionary uses:
-  // it identifies a fanned stack the way a corner tab identifies an offset one, and it
-  // touches nothing.
+  // **The rail is a lane beside the column, not a stripe behind it.** The literal
+  // request cannot be printed: a column is full of black vocabulary at 5-9pt, and a
+  // saturated stripe behind it costs the card the one thing on it that has to be read
+  // -- rendered and looked at, it turns the first column into a broken venetian blind.
+  // Laid in the margin alone it sat flush against the words, which the owner reported
+  // as covering them, and on a bordered printer mostly fell off the paper. So it takes
+  // a lane of its own and the columns move in: the thumb index a dictionary uses.
   /** @param {Partial<import('../core/types.js').SheetSpec>} overrides */
   const solve = async (overrides) => {
     const one = await referenceSpec('es', 'en', overrides);
@@ -1371,14 +1407,20 @@ test('a tab may fill the corner or run the whole edge, and neither costs a colum
     `and down to the same inner edge, got ${cornerTab.h}`);
   assert.ok(cornerTab.h > fills(band)[0].h + 1, 'so it is taller than the strip it grew from');
 
-  // `edge` keeps that corner and adds a rail down the outer margin for the whole
-  // height of the face -- and the rail stops at the first column's own edge, which is
-  // the assertion that says it is furniture rather than a wash.
+  // `edge` keeps that corner and adds a rail down the outer side for the whole height
+  // of the face: wider than the margin, so it prints inside a printer's border too, and
+  // stopping a column gap short of the first column's words.
   const rail = fills(edge).find((/** @type {any} */ r) => near(r.h, edge.plan.pageH));
   assert.ok(rail, `an edge tab should carry a full-height rail, got ${JSON.stringify(fills(edge))}`);
   assert.equal(rail.y, 0, 'the rail runs from the top of the page');
-  assert.ok(rail.w > 0 && rail.w <= edge.geom.left + 1e-9,
-    `the rail must stop where the first column starts: ${rail.w} against ${edge.geom.left}`);
+  assert.ok(rail.w > edge.geom.left + 1,
+    `the rail has a lane beyond the margin: ${rail.w} against a ${edge.geom.left}pt margin`);
+  const gap = edge.plan.geometry.columnGap;
+  const minX = (/** @type {any} */ o) => Math.min(...o.plan.faces.flatMap(
+    (/** @type {any} */ f) => f.hits.map((/** @type {any} */ h) => h.x)));
+  assert.ok(minX(edge) >= rail.w + gap - 1e-9,
+    `no word may sit on the rail or its gutter: a row starts at ${minX(edge)}, the rail ends at ${rail.w}`);
+  assert.ok(minX(edge) > minX(band) + 1, 'so the columns have moved in to make room');
   assert.ok(fills(edge).some((/** @type {any} */ r) => r.y === 0 && r.h < edge.plan.pageH),
     'and it keeps the corner block the label sits on');
 
@@ -1404,17 +1446,14 @@ test('a tab may fill the corner or run the whole edge, and neither costs a colum
       `${name}: the label at ${label.y} must sit above its column's first row at ${firstInk}`);
   }
 
-  // **And not one of the three moves a single word.** The reach is charged to the
-  // page's own margin, which `contentBox` never gave a column, so all three fit the
-  // same vocabulary in the same places. `bandColumns` reads the `span` and not this,
-  // on purpose: a bigger mark is not a bigger ask. If this ever fails, a decoration
-  // has started editing the card.
+  // **A corner moves not a single word.** It grows into the page's own margin and
+  // the strip already charged, so it fits the same vocabulary in the same places;
+  // only the rail asks for room, and it asked above.
   const hitsOf = (/** @type {any} */ o) => o.plan.faces.flatMap(
     (/** @type {any} */ f, /** @type {number} */ i) => f.hits.map(
       (/** @type {any} */ h) => `${i} ${h.x.toFixed(4)} ${h.y.toFixed(4)}`),
   );
   assert.deepEqual(hitsOf(corner), hitsOf(band), 'a corner tab must not move the vocabulary');
-  assert.deepEqual(hitsOf(edge), hitsOf(band), 'and nor may an edge tab');
 
   // A right tab mirrors it, which catches the off-by-one a left-only test would pass.
   const right = await solve({ head: { ...tab, span: 'right', fillReach: 'edge' } });
@@ -1423,8 +1462,10 @@ test('a tab may fill the corner or run the whole edge, and neither costs a colum
   assert.ok(rightRail, 'a right edge tab carries a rail too');
   assert.ok(near(rightRail.x + rightRail.w, right.plan.pageW),
     `which reaches the right edge of the paper, got ${rightRail.x + rightRail.w}`);
-  assert.ok(rightRail.x >= right.geom.left + right.geom.width - 1e-9,
-    `and starts outside the last column, at ${rightRail.x}`);
+  const maxRight = Math.max(...right.plan.faces.flatMap(
+    (/** @type {any} */ f) => f.hits.map((/** @type {any} */ h) => h.x + h.w)));
+  assert.ok(maxRight <= rightRail.x - gap + 1e-9,
+    `and starts a column gap clear of the last column: rows end at ${maxRight}, the rail starts at ${rightRail.x}`);
 
   // A centred tab has no outer margin to run down -- the same reason it does not bleed
   // sideways either -- so `edge` gives it the flush corner and no rail.

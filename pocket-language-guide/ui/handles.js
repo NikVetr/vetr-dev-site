@@ -26,6 +26,7 @@ const MAX_GAP_PT = 24;
  * @typedef {Object} HandleInput
  * @property {HTMLElement} face      the focused `.face` element
  * @property {import('../core/types.js').SheetSpec} spec
+ * @property {import('../core/types.js').LayoutPlan['bands']} bands  the solve's own
  * @property {(geometry:import('../core/types.js').Geometry)=>void} onCommit
  */
 
@@ -33,7 +34,7 @@ const MAX_GAP_PT = 24;
  * Add margin and column-gap handles to a face. Returns a teardown function.
  * @param {HandleInput} input
  */
-export function attachHandles({ face, spec, onCommit }) {
+export function attachHandles({ face, spec, bands, onCommit }) {
   const g = spec.geometry;
   const layer = document.createElement('div');
   layer.className = 'handle-layer';
@@ -48,7 +49,7 @@ export function attachHandles({ face, spec, onCommit }) {
 
   /** Content box for a candidate geometry, so handle positions follow the value. */
   const boxFor = (/** @type {Partial<import('../core/types.js').Geometry>} */ over) => contentBox(
-    { ...g, ...over }, spec.paper, undefined, elvenInset({ ...spec, geometry: { ...g, ...over } }),
+    { ...g, ...over }, spec.paper, bands, elvenInset({ ...spec, geometry: { ...g, ...over } }),
   );
 
   /**

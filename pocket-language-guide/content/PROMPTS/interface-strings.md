@@ -72,6 +72,12 @@ written. The three dodges that worked, in order of preference:
    Bengali and Odia classifiers টি/ଟି, or a language that does not mark number at
    all.
 
+English is written to the same rule, because `{count}` is 1 often enough to matter
+("Buttons: {count}", not "{count} buttons"). A translation that re-inflects around
+the numeral — `{count} boutons`, `{count} przycisków`, `tlačítko/tlačítka` — is wrong
+at some count even where the English it came from was not; a slash offering two
+forms is never the answer.
+
 ## Verb-final languages break a heading that its buttons complete
 
 Several headings are sentence fragments finished by the grid beneath them: "Please

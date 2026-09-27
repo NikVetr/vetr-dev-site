@@ -1313,14 +1313,15 @@ Three decisions worth keeping:
 
 **Placeholders, never concatenation.** `t('studio.status', { faces, scale })`, not
 three fragments glued together. Word order is exactly what differs between
-languages, and `4 faces at 0.87x` cannot be reassembled correctly in Japanese or
-Arabic from parts chosen for English.
+languages, and `Faces: 4 · type 0.87x` cannot be reassembled correctly in Japanese
+or Arabic from parts chosen for English.
 
 **No plural machinery.** English switches `column`/`columns`; other languages have
 different rules, and CLDR plural categories are far more apparatus than this needs.
 So the strings are phrased to need no agreement -- "Some columns could not be filled
-evenly ({count})" rather than "{count} column(s)". That is a constraint on the
-English, and it is cheaper than the alternative.
+evenly ({count})" rather than "{count} column(s)", "Buttons: {count}" rather than
+"{count} buttons", since a count is 1 often enough to matter. That is a constraint on
+the English, it is cheaper than the alternative, and the translations follow it.
 
 **Language names come from the platform.** `Intl.DisplayNames` already knows every
 language's name in every locale, which is a better answer than carrying sixteen
@@ -1330,7 +1331,10 @@ The solver cannot translate -- it has no business knowing what language the
 interface is in -- so a `Warning` carries a stable `code`, the English `message`
 (which is also what the Node-side scripts print), and a `params` object. The UI
 looks up `warn.<code>` and interpolates. A code with no catalogue entry falls back
-to `message`, so a warning is never lost to a missing key.
+to `message`, so a warning is never lost to a missing key. A proposed fix is named
+the same way -- a `code`, its `params`, and an English `label` for the scripts -- and
+the button reads `fix.<code>`, so "Use 5 columns instead of 4" is in the reader's
+language like the warning above it.
 
 `npm run i18n` checks the catalogue against the code: a key referenced but not
 defined fails the build, because the reader would see the bare key. A key defined
@@ -1469,19 +1473,30 @@ cut already chosen: there is nothing to cut and no back. And auto faces can sett
 **one**, with parity carried by the card rather than imposed, so paper still comes in
 pairs while a screen does not.
 
-**`priority` is an importance floor** with four steps, each chosen as the largest cut
-in the distribution that still fills a real card:
+**`priority` is an importance floor** with five steps, each a cut in the distribution
+that fills a real card:
 
 | step | floor | phrases | fits |
 |---|---|---|---|
-| Everything | 0 | 864 | 6–8 faces of 7×5 |
-| Broad | 0.74 | 362 | four faces — what both hand-built originals settled on |
-| Core | 0.82 | 148 | one sheet |
-| Essential | 0.95 | 10 | **one phone face at full nominal type, in all twenty natural languages** |
+| Everything | 0 | 904 | eight faces of 7×5 or more |
+| Broad | 0.74 | 362 | four faces — what both hand-built originals settled on — at about 0.9 of nominal |
+| Core | 0.82 | 148 | one sheet at about 0.8 in the denser scripts, two at nominal in the rest |
+| Essential | 0.85 | 103 | **one sheet — two faces — at nominal type** in every script measured but Tamil |
+| Minimum | 0.95 | 10 | **one phone face at full nominal type, in every natural language** |
 
-Counts are corpus-wide; a given pair sees fewer, because a concept scoped to another
-language never reaches it — 288 at Broad and 145 at Core, averaged over the 53
-targets.
+Counts are corpus-wide; a given pair's default card sees fewer, because a concept
+scoped to another language never reaches it and the sections that are off by default
+are off — about 630, 260, 130, 90 and 10 for Chinese glossed in English.
+
+**Essential is the everyday basics, and Minimum is the lock screen.** Essential was the
+ten-phrase set until the owner found it "way too restrictive" for a step with that
+name; the ten are Minimum now, and Essential keeps the greetings, thanks and apology,
+yes and no, the questions a traveller asks, the number line from 0 to 9, and the
+emergency, pharmacy and police lines. Four concepts were rescored so the cut is
+coherent rather than arbitrary — `no` beside `yes`, `excuse me` beside `thank you`,
+`how much`, and `she` beside `he` — and the floor is 0.85 rather than 0.86 because
+the last rows fill the sheet's second face, which at 0.86 was left with loose
+columns.
 
 **The top step is the one place the two constructed languages fall short of a
 preset**, and it is worth stating plainly rather than leaving to the coverage table:
@@ -1956,12 +1971,14 @@ deliberately separate axes:
 
 - **`span`** — `full`/`left`/`center`/`right`: where the band's *content* sits, along
   the width. It is also what decides which columns pay for the band's height.
-- **`fillReach`** — `band`/`corner`/`edge`: how far the band's *colour* goes, into
-  the page's own margin. `band` is the strip with paper above it; `corner` runs it on
-  to the page edge, flush on two sides; `edge` adds a rail down the outer margin for
-  the whole height of the face. Reach deliberately does **not** feed `bandColumns`,
-  because a bigger mark is not a bigger ask — all three produce byte-identical hit
-  boxes.
+- **`fillReach`** — `band`/`corner`/`edge`: how far the band's *colour* goes. `band`
+  is the strip with paper above it; `corner` runs it on to the page edge, flush on two
+  sides, and moves no word; `edge` adds a rail down the outer side for the whole
+  height of the face. The rail takes a lane of its own — the margin, a band's width
+  more, and a column gap of paper before the words — added to the margin the way a
+  band is, so the columns move in rather than having colour laid against them, and it
+  still prints on a printer whose border would have swallowed a margin-only rail.
+  Reach never feeds `bandColumns`: it changes no column's share of a band's height.
 - **`fill`** — a theme colour key, or `section` for the face's own dominant colour
   role by placed height.
 
@@ -1987,9 +2004,14 @@ changes what the sheet means.
 The **`logo` slot** puts the mark on the band. It is the one head part that is not
 type: `one('logo')` yields a part whose text is a word joiner — not whitespace, so
 `spaceParts` keeps it; zero width, so nothing is set where the paths go — flagged
-`logo`, and `widthOf` charges it `1.15 × size × LOGO_ASPECT` while the run loop
-emits `PathMark`s from `core/logo-shapes.js` in its place. No bullet is set beside
-it; a mark is its own separator. The shapes are generated from `favicon.svg` by
+`logo`, and `widthOf` charges it `1.15 × size × LOGO_ASPECT` plus half an em of air
+on each side that has a neighbour, while the run loop emits `PathMark`s from
+`core/logo-shapes.js` in its place, centred on the middle of the capitals beside it.
+No bullet is set beside it; a mark is its own separator. The `pair` slot reads
+`Chinese (Simplified) – English`, with an en dash, because the Latin face has no
+arrow and a glyph a face lacks is measured at one width and drawn from another font
+at another; and SVG text keeps its spaces (`xml:space`), since a band part's leading
+space is part of its measured width. The shapes are generated from `favicon.svg` by
 `scripts/build_logo.mjs`, which flattens the favicon's rotated rounded rectangles
 into absolute cubic curves in a box one point tall, because neither renderer applies
 a transform to a path and pdf-lib's `drawSvgPath` would draw them unrotated. In mono

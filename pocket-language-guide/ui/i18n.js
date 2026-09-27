@@ -328,6 +328,9 @@ export function warningText(warning) {
   return t(key, params);
 }
 
+/** A proposed fix, in the interface language: `fix.<code>`, as a warning is looked up. @param {import('../core/types.js').WarningFix} fix */
+export const fixText = (fix) => t(`fix.${fix.code}`, fix.params);
+
 /**
  * A country's name in the interface language, or its code if we cannot.
  * @param {string} code ISO 3166-1 alpha-2

@@ -10,13 +10,13 @@ test.describe('the quick export page', () => {
     page.on('response', (r) => { if (r.status() >= 400) failures.push(`${r.status()} ${r.url()}`); });
 
     await page.goto(SHEET);
-    // However many faces the content needs, the sheet count must be half of them:
-    // a sheet is printed on both sides.
-    await expect(page.locator('#status')).toHaveText(/\d+ faces · \d+ sheets/, { timeout: 120_000 });
+    // However many faces the content needs, the sheet count must be half of them,
+    // rounded up: a sheet is printed on both sides, and a single face still takes one.
+    await expect(page.locator('#status')).toHaveText(/Faces: \d+ · sheets: \d+/, { timeout: 120_000 });
     const status = (await page.locator('#status').textContent()) ?? '';
-    const [, faces, sheets] = /(\d+) faces · (\d+) sheets/.exec(status) ?? [];
+    const [, faces, sheets] = /Faces: (\d+) · sheets: (\d+)/.exec(status) ?? [];
     await expect(page.locator('.face')).toHaveCount(Number(faces));
-    expect(Number(sheets)).toBe(Number(faces) / 2);
+    expect(Number(sheets)).toBe(Math.ceil(Number(faces) / 2));
 
     // A smaller card takes more faces.
     const wide = await page.locator('.face').count();
