@@ -865,6 +865,7 @@ function fitFoot(box) {
     reply.style.fontSize = '';
     reply.style.left = reply.style.top = '';
     reply.classList.remove('board-reply-beside');
+    /** @type {HTMLElement} */ (reply.parentElement).style.gap = '';
   }
   fitMessage(text, box);
   if (reply) {
@@ -911,8 +912,19 @@ function fitFoot(box) {
     if (reply[along] > room) reply.classList.remove('board-reply-line');
     // The sentence's box has just changed shape by however much Reply grew, so it
     // is fitted again -- now, not a frame later when the observer notices, or the
-    // text is drawn overflowing for that frame.
-    fitMessage(text, box);
+    // text is drawn overflowing for that frame. **With the buffer Reply will sit at
+    // held open between them**, which grows with the sentence: held open only as the
+    // row's own small gap, the pair came out taller than the frame, and Reply ran over
+    // its edge or shrank to a sliver once it was made to fit. The buffer is the
+    // sentence's size over three, so it is re-read as the sentence settles.
+    const buffer = () => Math.max(
+      Number.parseFloat(pad[vertical(reply) ? 'paddingLeft' : 'paddingTop']), textSize() / 3);
+    for (let k = 0; k < 3; k += 1) {
+      const held = buffer();
+      read.style.gap = `${held}px`;
+      fitMessage(text, box);
+      if (Math.abs(buffer() - held) < 1) break;
+    }
     const belowScore = below * textSize();
 
     // **Beside.** The sentence takes the whole box and Reply the corner its last
@@ -1047,17 +1059,37 @@ function freeCorner(text, box) {
  */
 function placeBelow(text, reply, box, read) {
   reply.classList.add('board-reply-beside');
-  const w = reply.offsetWidth;
-  const h = reply.offsetHeight;
   const lines = lineRects(text);
   const b = box.getBoundingClientRect();
   const pad = getComputedStyle(box);
   const size = Number.parseFloat(getComputedStyle(text).fontSize);
+  const turned = vertical(text);
+  // **The pair fits the frame, Reply giving way first.** The sentence was fitted with
+  // Reply in its own row, and lifting Reply out adds the buffer between them, which
+  // grows with the sentence -- so at poster sizes the pair ran up to twenty pixels
+  // past the frame, Reply over its edge. The sentence's size was settled first and is
+  // what the screen is for, so Reply shrinks until the pair fits, and only a Reply
+  // already at its least takes a smaller buffer.
+  const span = turned
+    ? Math.max(...lines.map((l) => l.right)) - Math.min(...lines.map((l) => l.left))
+    : Math.max(...lines.map((l) => l.bottom)) - Math.min(...lines.map((l) => l.top));
+  const room = turned
+    ? b.width - Number.parseFloat(pad.paddingLeft) - Number.parseFloat(pad.paddingRight) - span
+    : b.height - Number.parseFloat(pad.paddingTop) - Number.parseFloat(pad.paddingBottom) - span;
+  let gap = Math.max(Number.parseFloat(turned ? pad.paddingLeft : pad.paddingTop), size / 3);
+  const depth = () => (turned ? reply.offsetWidth : reply.offsetHeight);
+  let px = Number.parseFloat(getComputedStyle(reply).fontSize);
+  while (gap + depth() > room && px > 16) {
+    px = Math.max(16, px * 0.92);
+    reply.style.fontSize = `${px}px`;
+  }
+  gap = Math.max(0, Math.min(gap, room - depth()));
+  const w = reply.offsetWidth;
+  const h = reply.offsetHeight;
   let x;
   let y;
-  if (vertical(text)) {
+  if (turned) {
     // Turned, "under" is to the left of the last column, and the group runs across.
-    const gap = Math.max(Number.parseFloat(pad.paddingLeft), size / 3);
     const right = Math.max(...lines.map((l) => l.right));
     const left = Math.min(...lines.map((l) => l.left));
     const inner = { left: b.left + Number.parseFloat(pad.paddingLeft), right: b.right - Number.parseFloat(pad.paddingRight) };
@@ -1067,7 +1099,6 @@ function placeBelow(text, reply, box, read) {
     x = start - (right - left) - gap - w;
     y = b.top + (b.height - h) / 2;
   } else {
-    const gap = Math.max(Number.parseFloat(pad.paddingTop), size / 3);
     const top = Math.min(...lines.map((l) => l.top));
     const bottom = Math.max(...lines.map((l) => l.bottom));
     const inner = { top: b.top + Number.parseFloat(pad.paddingTop), bottom: b.bottom - Number.parseFloat(pad.paddingBottom) };

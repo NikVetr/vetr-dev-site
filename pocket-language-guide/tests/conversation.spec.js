@@ -2107,3 +2107,42 @@ test('a button that says your name asks for it once, says it, and a hold clears 
   await expect(cell).toHaveClass(/board-cell-unset/);
   await expect(page.locator('.board-message-text')).toHaveCount(0);
 });
+
+test('Reply stays inside the frame when the sentence fills it', async ({ page }) => {
+  // A short sentence at poster size fills three lines, and Reply under it, with the
+  // buffer between them, ran twenty pixels past the frame and over its white outline.
+  // The sentence keeps its size; Reply gives way.
+  await page.setViewportSize({ width: 390, height: 760 });
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=shopping');
+  await page.locator('[data-button="take"]').click();
+  await expect(page.locator('.board-reply')).toBeVisible();
+  const inside = () => page.evaluate(() => {
+    const box = /** @type {HTMLElement} */ (document.querySelector('.board-message'));
+    const b = box.getBoundingClientRect();
+    const pad = Number.parseFloat(getComputedStyle(box).paddingTop);
+    const r = /** @type {HTMLElement} */ (document.querySelector('.board-reply')).getBoundingClientRect();
+    return r.top >= b.top + pad - 1 && r.bottom <= b.bottom - pad + 1
+      && r.left >= b.left + pad - 1 && r.right <= b.right - pad + 1;
+  });
+  await expect.poll(inside).toBe(true);
+});
+
+test('turned, Reply keeps a size for its sentence, and stays inside the frame', async ({ page }) => {
+  // Turned, Reply sat in a horizontal row that squeezed it narrower than its own line,
+  // so its words ran into its padding, the fitter's test failed at every size, and it
+  // came out a 17px sliver beside a 150px sentence -- small enough to look gone.
+  await page.setViewportSize({ width: 390, height: 760 });
+  await page.goto(BOARD);
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('#board-turn-bar').click();
+  await page.locator('[data-button="gentler"]').click();
+  await expect(page.locator('.board-reply')).toBeVisible();
+  const sizes = () => page.evaluate(() => {
+    const px = (/** @type {string} */ sel) => Number.parseFloat(getComputedStyle(/** @type {HTMLElement} */ (document.querySelector(sel))).fontSize);
+    const box = /** @type {HTMLElement} */ (document.querySelector('.board-message')).getBoundingClientRect();
+    const r = /** @type {HTMLElement} */ (document.querySelector('.board-reply')).getBoundingClientRect();
+    return { ratio: px('.board-reply') / px('.board-message-text'), inside: r.left >= box.left && r.right <= box.right && r.top >= box.top && r.bottom <= box.bottom };
+  });
+  await expect.poll(async () => (await sizes()).ratio).toBeGreaterThan(0.3);
+  expect((await sizes()).inside).toBe(true);
+});

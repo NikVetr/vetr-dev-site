@@ -688,6 +688,11 @@
   align-items: center;
   justify-content: center;
   gap: 0.45em;
+  /* Sized by `fitFoot`, so never squeezed by the row it sits in: turned, the row is
+     horizontal, and a Reply shrunk narrower than its own line spilled its words into
+     its padding, failed the fitter's test at every size, and came out a sliver. The
+     message box takes the squeeze instead. */
+  flex: none;
   /* Sized by `fitFoot`: four fifths of the sentence, shrunk to fit on one line. No
      fixed height and no full width -- the button is its words plus a margin, and
      grows taller as its words do. */
