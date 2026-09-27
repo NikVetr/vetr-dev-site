@@ -736,7 +736,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--muted);
+  /* Grey sank into a dark page, so in the dark the control takes the accent. */
+  color: light-dark(var(--muted), var(--accent));
+  border-color: light-dark(var(--line), var(--accent));
 }
 .board-turn svg { inline-size: 1.5rem; block-size: auto; }
 .board-turn[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
@@ -752,9 +754,9 @@
 /* An incoming answer is on paper whatever its role colour is, so the white-on-white
    pair above has to be undone for it. */
 .board-stage-incoming[class*="board-role-"] .board-turn {
-  background: var(--surface);
-  border-color: var(--line);
-  color: var(--muted);
+  background: light-dark(var(--surface), var(--accent-soft));
+  border-color: light-dark(var(--line), var(--accent));
+  color: light-dark(var(--muted), var(--accent));
 }
 .board-stage-incoming[class*="board-role-"] .board-turn[aria-pressed="true"] {
   background: var(--ink);
