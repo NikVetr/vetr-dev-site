@@ -896,18 +896,23 @@ function fitFoot(box) {
     const most = Math.max(readAcross * 0.2, spare);
     // Its words inside its own padding, not only its box inside the room: a Reply whose
     // text had run into its side padding passed on its box and came out with a hair of
-    // space at the sides and a band above and below. Measured from the ink, because
-    // no scroll size counts an overflow that stays inside the padding.
+    // space at the sides and a band above and below. Measured from the text's own box,
+    // because no scroll size counts an overflow that stays inside the padding -- and
+    // **along the line only**. Across it a font's box is taller than its line in many
+    // faces (SF on an iPhone, the CJK and Indic faces on Android) and overhangs the
+    // padding where there is no ink, which failed every size on a phone and left every
+    // Reply at its floor.
     const inside = () => {
       const edge = reply.getBoundingClientRect();
       const own = getComputedStyle(reply);
       const range = document.createRange();
       range.selectNodeContents(reply);
       const ink = range.getBoundingClientRect();
-      return ink.left >= edge.left + Number.parseFloat(own.paddingLeft) - 1
-        && ink.right <= edge.right - Number.parseFloat(own.paddingRight) + 1
-        && ink.top >= edge.top + Number.parseFloat(own.paddingTop) - 1
-        && ink.bottom <= edge.bottom - Number.parseFloat(own.paddingBottom) + 1;
+      return vertical(reply)
+        ? ink.top >= edge.top + Number.parseFloat(own.paddingTop) - 1
+          && ink.bottom <= edge.bottom - Number.parseFloat(own.paddingBottom) + 1
+        : ink.left >= edge.left + Number.parseFloat(own.paddingLeft) - 1
+          && ink.right <= edge.right - Number.parseFloat(own.paddingRight) + 1;
     };
     const below = shrinkReply(reply, textSize(),
       () => reply[along] <= room && reply[across] <= most && inside());

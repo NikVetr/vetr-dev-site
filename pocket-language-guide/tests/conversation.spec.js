@@ -2166,6 +2166,29 @@ test('Reply stays inside the frame when the sentence fills it', async ({ page })
   await expect.poll(inside).toBe(true);
 });
 
+test('Reply keeps its size where the font is taller than its line, as on a phone', async ({ page }) => {
+  // SF on an iPhone and the CJK and Indic faces on Android draw a box taller than
+  // Reply's line. Asked for its words inside its padding above and below too, Reply
+  // failed at every size there and every one came out at its 16px floor -- tiny on the
+  // phone, fine here. Such a face is stood in for by a line shorter than the font.
+  await page.addInitScript(() => document.addEventListener('DOMContentLoaded', () => {
+    const style = document.createElement('style');
+    style.textContent = '.board-reply { line-height: 1 !important; }';
+    document.head.append(style);
+  }));
+  await page.setViewportSize({ width: 390, height: 760 });
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=food');
+  const sizes = () => page.evaluate(() => ['.board-reply', '.board-message-text'].map(
+    (sel) => Number.parseFloat(getComputedStyle(/** @type {HTMLElement} */ (document.querySelector(sel))).fontSize)));
+  for (const turned of [false, true]) {
+    if (turned) await page.locator('#board-turn-bar').click();
+    await page.locator('[data-button="table"]').click();
+    await expect(page.locator('.board-reply')).toBeVisible();
+    await expect.poll(async () => { const [reply, text] = await sizes(); return reply / text; }).toBeGreaterThan(0.3);
+    await dismiss(page);
+  }
+});
+
 test('Attract attention sounds a siren only when the reader has asked for one', async ({ page }) => {
   // Counted rather than heard: every oscillator started and stopped is recorded.
   await page.addInitScript(() => {
