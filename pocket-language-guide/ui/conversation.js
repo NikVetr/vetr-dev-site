@@ -41,7 +41,7 @@ import {
 import { speech } from './platform/speech.js';
 import { keepAwake } from './platform/wake.js';
 import { startBeacon, stopBeacon } from './platform/beacon.js';
-import { notePlace, onBack, takeOnward } from './platform/shell.js';
+import { notePlace, onBack } from './platform/shell.js';
 import { read as readPersonal, placedOn } from './board-store.js';
 import {
   openSpeakerSettings, readProfile, noticeFor, personalSection,
@@ -214,8 +214,6 @@ async function showPicker(owner, listener, index) {
     if (!serves(board, listener, owner)) continue;
     topics.set(board.id, { title: t(board.titleKey), icon: board.icon, alert: board.alert });
   }
-  const onward = takeOnward();
-  if (onward && topics.has(onward)) { goTo({ board: onward }); return; }
   $('board-title').textContent = t('board.pickTopic');
   $('board-title').title = t('board.pickTopic');
   document.title = t('board.docTitle');
@@ -230,6 +228,7 @@ async function showPicker(owner, listener, index) {
   out.setAttribute('aria-label', t('board.toGallery'));
   out.title = t('board.toGallery');
   out.addEventListener('click', () => { location.href = './'; });
+  onBack(() => false, './');
   if (!topics.size) {
     $('board-status').textContent = t('board.noBoards');
     $('board-grid').removeAttribute('aria-busy');
@@ -979,7 +978,9 @@ async function main() {
   // so a reader holding a sentence out to a stranger who presses it meaning "close
   // this" would quit the app instead. At a board's root it is unconsumed on purpose:
   // the page behind is the topic list, which is where Back should go.
-  onBack(unwind);
+  const contexts = new URLSearchParams(location.search);
+  contexts.delete('board');
+  onBack(unwind, `conversation.html?${contexts}`);
 
   // **A deploy must not take the sentence off the screen.** The default guard is
   // "no dialog is open"; the board adds the case the default cannot see, which is a

@@ -12,7 +12,7 @@
 // `ui/app.js` imports them on demand now, and this page is nine modules and 89KB.
 
 import { wireSiteMenu } from './site-menu.js';
-import { notePlace, resumeLaunch } from './platform/shell.js';
+import { notePlace, onBack, resumeLaunch } from './platform/shell.js';
 import {
   isSpoken, loadText, loadLanguages, readerLanguage,
   registerOffline, setReaderLanguage, showFatal,
@@ -538,6 +538,8 @@ async function main() {
   const { languages, coverage, names, regions } = await loadLanguages();
   if (resumeLaunch()) return;
   notePlace(null);
+  // The top: an unhandled Back leaves the app, where Capacitor alone would do nothing.
+  onBack(() => false);
   setFlagColours(regions);
   const reader = readerLanguage(languages, coverage);
   /**

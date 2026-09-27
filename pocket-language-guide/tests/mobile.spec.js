@@ -593,9 +593,20 @@ test('the section picker is a phone control only', async ({ page }) => {
 });
 
 test('the app opens again where the reader left off, as deep as they allow @smoke', async ({ context }) => {
-  // A stand-in for the native shell: the pages only ask whether they are in one.
+  // A stand-in for the native shell: the pages only ask whether they are in one, and
+  // register a Back handler. Back is delivered the way Android delivers it to a
+  // screen a launch opened -- with nothing behind it, because Chromium skips history
+  // entries a page made without a gesture.
   await context.addInitScript(() => {
-    /** @type {any} */ (globalThis).Capacitor = { isNativePlatform: () => true, Plugins: {} };
+    /** @type {Function[]} */ const back = [];
+    /** @type {any} */ (globalThis).Capacitor = {
+      isNativePlatform: () => true,
+      Plugins: { App: {
+        addListener: (/** @type {string} */ name, /** @type {Function} */ fn) => { if (name === 'backButton') back.push(fn); },
+        exitApp: () => { /** @type {any} */ (globalThis).exited = true; },
+      } },
+    };
+    /** @type {any} */ (globalThis).systemBack = () => back.forEach((fn) => fn({ canGoBack: false }));
   });
   // A new tab is a new WebView: the same store, and a session with nothing in it.
   const launch = async () => {
@@ -604,6 +615,7 @@ test('the app opens again where the reader left off, as deep as they allow @smok
     return page;
   };
   const TOPICS = /conversation\.html\?target=zh-Hans&source=en$/;
+  const LANGUAGES = /127\.0\.0\.1:\d+\/(index\.html)?$/;
   const first = await launch();
   await expect(first.locator('.card').first()).toBeVisible();
   await first.goto('/conversation.html?target=zh-Hans&source=en&board=spa');
@@ -614,8 +626,8 @@ test('the app opens again where the reader left off, as deep as they allow @smok
   await expect(second).toHaveURL(TOPICS);
   await expect(second.locator('.board-grid-topics')).toBeVisible();
 
-  // As deep as the last context, chosen in the settings; Back then climbs the way
-  // the reader would have come, rather than out of the app.
+  // As deep as the last context, chosen in the settings. Back then goes up a screen at
+  // a time, and out of the app only from the top.
   await second.locator('#site-menu').click();
   await second.getByRole('radio', { name: 'Last context' }).check();
   await second.keyboard.press('Escape');
@@ -624,13 +636,16 @@ test('the app opens again where the reader left off, as deep as they allow @smok
   const third = await launch();
   await expect(third).toHaveURL(/board=spa$/);
   await expect(third.locator('.board-cell').first()).toBeVisible();
-  await third.goBack();
+  await third.evaluate(() => /** @type {any} */ (globalThis).systemBack());
   await expect(third).toHaveURL(TOPICS);
-  await third.goBack();
-  await expect(third).toHaveURL(/index\.html$/);
+  await expect(third.locator('.board-grid-topics')).toBeVisible();
+  await third.evaluate(() => /** @type {any} */ (globalThis).systemBack());
+  await expect(third).toHaveURL(LANGUAGES);
   // And it stays: only a launch resumes.
   await expect(third.locator('.card').first()).toBeVisible();
-  expect(third.url()).toMatch(/index\.html$/);
+  expect(await third.evaluate(() => /** @type {any} */ (globalThis).exited)).toBeUndefined();
+  await third.evaluate(() => /** @type {any} */ (globalThis).systemBack());
+  expect(await third.evaluate(() => /** @type {any} */ (globalThis).exited)).toBe(true);
 
   // The languages, when that is all the reader wants back.
   await third.locator('#site-menu').click();

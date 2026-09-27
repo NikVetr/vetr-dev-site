@@ -4,7 +4,8 @@
 //
 // Drives the app over adb and the WebView's devtools socket: persistence across a
 // relaunch and an in-place reinstall, a cold start with the radios off that goes back
-// to where the last session was, and a backup through the share sheet, cancelled. The devtools socket exists because
+// to where the last session was, Back going up from there and out from the top, and a
+// backup through the share sheet, cancelled. The devtools socket exists because
 // `scripts/build_android.sh` enables it in the generated (debug) project only.
 // Everything here is emulator evidence, not a phone's.
 import { execFileSync, spawn } from 'node:child_process';
@@ -136,14 +137,15 @@ await leave();
 try {
   p = await launch();
   // The last screen was a board, so the launch goes back to that pair's contexts --
-  // and Back climbs to the languages rather than out of the app.
+  // and Back goes up to the languages rather than doing nothing, which is what
+  // Capacitor alone does on a screen whose history Chromium will not go back through.
   for (let i = 0; i < 30 && !(await p.evaluate("document.querySelectorAll('.board-grid-topics .board-cell').length")); i += 1) await sleep(1000);
   const resumed = await p.evaluate('location.pathname + location.search');
   check('resume-launch', resumed === '/conversation.html?target=zh-Hans&source=en', resumed);
   adb('shell', 'input', 'keyevent', '4');
   for (let i = 0; i < 30 && !(await p.evaluate("document.querySelectorAll('.card').length")); i += 1) await sleep(1000);
   const cards = await p.evaluate("document.querySelectorAll('.card').length");
-  check('resume-back', focus().includes(APP) && await p.evaluate('location.pathname') === '/index.html',
+  check('resume-back', focus().includes(APP) && /^\/(index\.html)?$/.test(await p.evaluate('location.pathname')),
     'BACK from the restored contexts went to the languages, and stayed');
   await p.open(SPA, '.board-cell');
   const phrase = await p.evaluate(`!!document.querySelector('[data-button="p1"]')`);
@@ -176,6 +178,16 @@ install();
 p = await launch();
 await p.open(SPA, '.board-cell');
 check('persist-reinstall', await p.evaluate(`!!document.querySelector('[data-button="p1"]')`), 'the same after adb install -r');
+
+// --- Back at the top leaves the app ---------------------------------------------------
+await p.evaluate("Capacitor.Plugins.Preferences.set({ key: 'plg.place', value: 'null' }).then(() => 0)");
+p.close();
+await leave();
+p = await launch();
+for (let i = 0; i < 30 && !(await p.evaluate("document.querySelectorAll('.card').length")); i += 1) await sleep(1000);
+adb('shell', 'input', 'keyevent', '4');
+await sleep(2500);
+check('back-at-top-leaves', !focus().includes(APP), focus().slice(0, 120));
 p.close();
 
 writeFileSync(`${OUT}/results.json`, `${JSON.stringify(results, null, 2)}\n`);

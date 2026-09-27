@@ -28,12 +28,16 @@ let consume = null;
 /**
  * Handle the system Back press before the app is allowed to exit.
  *
- * `handler` returns true when it dealt with the press. On the web this registers
- * nothing at all: a browser tab already has Back, and taking it over would break
- * the history a reader expects.
- * @param {() => boolean} handler
+ * `handler` returns true when it dealt with the press. `up` is the screen above this
+ * one, for when there is no page behind it to go back to -- which is not only the
+ * first screen: Chromium skips a history entry that a page made without a gesture, so
+ * the screens a relaunch opened (below) are behind nothing, as far as Back can tell.
+ * Without `up`, an unhandled press there did nothing at all. On the web this registers
+ * nothing: a browser tab already has Back, and taking it over would break the history
+ * a reader expects.
+ * @param {() => boolean} handler @param {string} [up]  a page URL
  */
-export function onBack(handler) {
+export function onBack(handler, up) {
   consume = handler;
   const app = /** @type {any} */ (globalThis).Capacitor?.Plugins?.App;
   if (!isNative() || !app?.addListener) return;
@@ -43,9 +47,10 @@ export function onBack(handler) {
     const open = /** @type {HTMLDialogElement|null} */ (document.querySelector('dialog[open]'));
     if (open) { open.close(); return; }
     if (consume?.()) return;
-    // Nothing left to unwind here. Go back a page if there is one, and otherwise
-    // let the shell exit -- which is what a reader at the first screen means.
+    // Nothing left to unwind here. Go back a page if there is one, else up a screen,
+    // and at the top let the shell exit -- which is what a reader there means.
     if (event.canGoBack) { history.back(); return; }
+    if (up) { location.replace(up); return; }
     app.exitApp?.();
   });
 }
@@ -57,8 +62,6 @@ const RESUME_KEY = 'plg.resume';
 const PLACE_KEY = 'plg.place';
 /** Lives as long as the WebView, so only a launch resumes: Back to the languages stays there. */
 const LAUNCHED = 'plg.launched';
-/** The context a resuming launch goes on to from the context list. */
-const ONWARD = 'plg.onward';
 
 /** How deep a relaunch goes: the reader's choice, else the context list. @returns {ResumeDepth} */
 export function readResume() {
@@ -82,11 +85,10 @@ export function notePlace(place) {
 /**
  * On a fresh launch, go back to where the reader was, as deep as they allow.
  *
- * **One screen at a time**, so the history behind them is the one they would have
- * made: the languages, then the contexts, then the context. Android's Back from a
- * restored context then goes up through the others instead of out of the app, which
- * is where a jump straight to the board would have left it. Returns whether the page
- * is leaving, in which case it should draw nothing.
+ * Straight there, in place of this page. A history rebuilt a screen at a time would
+ * not help: Chromium skips entries a page made without a gesture, so Android's Back
+ * could not reach them anyway. Back from a restored screen goes up instead (`onBack`).
+ * Returns whether the page is leaving, in which case it should draw nothing.
  */
 export function resumeLaunch() {
   if (!isNative() || sessionStorage.getItem(LAUNCHED)) return false;
@@ -94,16 +96,10 @@ export function resumeLaunch() {
   const place = JSON.parse(store.get(PLACE_KEY) ?? 'null');
   const depth = RESUME_DEPTHS.indexOf(readResume());
   if (!place || depth === 0) return false;
-  if (place.board && depth === 2) sessionStorage.setItem(ONWARD, place.board);
-  location.href = `conversation.html?${new URLSearchParams({ target: place.target, source: place.source })}`;
+  const params = new URLSearchParams({ target: place.target, source: place.source });
+  if (place.board && depth === 2) params.set('board', place.board);
+  location.replace(`conversation.html?${params}`);
   return true;
-}
-
-/** The context a resuming launch continues to from the context list, handed over once. */
-export function takeOnward() {
-  const board = sessionStorage.getItem(ONWARD);
-  sessionStorage.removeItem(ONWARD);
-  return board;
 }
 
 /**
