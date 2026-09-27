@@ -414,3 +414,16 @@ test('appearance is a light switch: the device decides until the reader does', a
     await context.close();
   }
 });
+
+test('a press outside a dialog closes it, as its close control does', async ({ page }) => {
+  await page.goto('/index.html');
+  await page.locator('#site-menu').click();
+  const dialog = page.locator('dialog[open]');
+  await expect(dialog).toBeVisible();
+  // Inside it, nothing happens.
+  await dialog.locator('h2').click();
+  await expect(dialog).toBeVisible();
+  // On the backdrop, it closes.
+  await page.mouse.click(5, 5);
+  await expect(page.locator('dialog[open]')).toHaveCount(0);
+});

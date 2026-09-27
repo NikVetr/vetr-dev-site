@@ -964,6 +964,9 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
   .header-menu > button, .header-menu > .btn {
     justify-content: flex-start; padding: 0.5em 0.7em;
   }
+  /* Settings in the menu: its bars and its name, as a row like the others. */
+  .header-menu > .site-menu { inline-size: auto; block-size: auto; gap: 0.6em; }
+  .header-menu > .site-menu::after { content: attr(aria-label); }
   /* The banner is a bar of its own on a desktop; in the menu it is one item among
      the rest, so it loses the rule that separated it from them. */
   .header-menu > .banner {

@@ -42,6 +42,26 @@ const fontsModule = () => import('../render/fonts.js');
 const READER_KEY = 'plg.reader';
 
 /**
+ * **Outside a dialog is the way out of it.** A press on the backdrop closes a modal as
+ * its close control does -- every modal here is a `<dialog>` -- but only a press that
+ * began outside it as well, so a drag that started in a field and ended past the
+ * dialog's edge does not throw away what was being typed.
+ */
+let pressedOutside = false;
+/** @param {EventTarget|null} target @param {MouseEvent} event */
+const outsideOf = (target, event) => {
+  if (!(target instanceof HTMLDialogElement) || !target.open) return false;
+  const box = target.getBoundingClientRect();
+  return event.clientX < box.left || event.clientX > box.right
+    || event.clientY < box.top || event.clientY > box.bottom;
+};
+document.addEventListener('pointerdown', (event) => { pressedOutside = outsideOf(event.target, event); });
+document.addEventListener('click', (event) => {
+  if (pressedOutside && outsideOf(event.target, event)) /** @type {HTMLDialogElement} */ (event.target).close();
+  pressedOutside = false;
+});
+
+/**
  * A fetch that failed, carrying the status so `isMissingFile` in core/pack.js can
  * tell "this file does not exist" from "we could not get a file that does".
  */

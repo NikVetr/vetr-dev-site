@@ -155,8 +155,10 @@ function headerMenu() {
   const menu = /** @type {HTMLElement|null} */ (document.getElementById('header-menu'));
   if (!toggle || !menu) return () => {};
 
+  // Settings too: its three bars beside the menu's own three lines were two buttons
+  // that looked the same, one of them a menu and the other not.
   const moved = [...document.querySelectorAll(
-    '.site-header #banner, .site-header #drill-open, .site-header #pdf, .site-header .back-link',
+    '.site-header #banner, .site-header #drill-open, .site-header #pdf, .site-header .back-link, .site-header #site-menu',
   )];
   // **PNG is the export that stays out on a phone, and PDF is the one that folds
   // away.** It is the other way round on a desktop and both are right: a PDF is what
