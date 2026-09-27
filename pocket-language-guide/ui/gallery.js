@@ -333,7 +333,11 @@ function foldOnScroll(toggle) {
   if (!want) return;
   let foldedByScroll = false;
   const check = () => {
-    if (!narrow.matches) { want.classList.remove('want-floating'); return; }
+    if (!narrow.matches) {
+      want.classList.remove('want-floating');
+      want.style.minHeight = '';
+      return;
+    }
     // Past the whole grid, not past its toggle: folding the grid the moment its
     // top went under the header folded it on the first nudge of a scroll. While any
     // of it is in view it stays as the reader left it; once it has all gone under
@@ -343,6 +347,13 @@ function foldOnScroll(toggle) {
     // off the screen: it was scrolling away with the grid and reappearing only once
     // the whole grid had gone, which read as a bar that blinks.
     const floating = scrollY > want.offsetTop - headerHeight();
+    // Its place is held at its own height, margin and all, measured as it leaves the
+    // flow: a fixed 2rem was 2px off, and a label that wraps is taller.
+    if (floating && !want.classList.contains('want-floating')) {
+      const room = toggle.getBoundingClientRect().height
+        + Number.parseFloat(getComputedStyle(toggle).marginBottom);
+      want.style.setProperty('--bar-room', `${room}px`);
+    }
     want.classList.toggle('want-floating', floating);
     const open = toggle.getAttribute('aria-expanded') === 'true';
     const dropped = want.classList.contains('want-dropped');
@@ -350,9 +361,22 @@ function foldOnScroll(toggle) {
     // bar goes back to its place, and when the page scrolls under it.
     if (dropped && (!floating || past)) { setWantOpen(false); return; }
     // What the scroll folded, the scroll back unfolds; what the reader folded, or a
-    // choice folded, stays folded until they ask.
-    if (past && open) { setWantOpen(false); foldedByScroll = true; }
-    else if (!past && foldedByScroll) { setWantOpen(true); foldedByScroll = false; }
+    // choice folded, stays folded until they ask. **A grid the scroll folded keeps its
+    // room** until the scroll unfolds it. Giving the room up moved everything under it
+    // up by the grid's height mid-scroll, which a phone without scroll anchoring showed
+    // as the page jumping; scrolling back by the difference would stop a flick dead.
+    // The room is never seen empty: the grid folds only once all of it is under the
+    // header, and unfolds -- in its place, not dropped -- as it comes back out.
+    if (past && open) {
+      want.style.minHeight = `${want.offsetHeight}px`;
+      setWantOpen(false);
+      foldedByScroll = true;
+    } else if (!past && foldedByScroll) {
+      want.classList.remove('want-dropped');
+      setWantOpen(true);
+      want.style.minHeight = '';
+      foldedByScroll = false;
+    }
   };
   addEventListener('scroll', check, { passive: true });
   narrow.addEventListener('change', check);

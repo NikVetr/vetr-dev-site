@@ -374,6 +374,32 @@ test('folding the picker leaves what the reader was looking at where it was', as
   expect(Math.abs(after.top - before.top)).toBeLessThanOrEqual(2);
 });
 
+test('on a phone, scrolling past the picker and back never moves the page under the reader', async ({ page }) => {
+  // The grid folds once the scroll has taken all of it under the header. Folding gave
+  // up its room, so everything under it moved up by the grid's height mid-scroll --
+  // the page jumping at the bottom of "I want to speak", and again on the way back.
+  // Scrolled a step at a time, as a finger does, the first card moves with every step.
+  await page.setViewportSize({ width: 390, height: 760 });
+  await page.goto('/');
+  await expect(page.locator('#gallery')).toHaveAttribute('aria-busy', 'false');
+  const toggle = page.locator('#want-toggle');
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+  const look = () => page.evaluate(() => ({
+    y: scrollY, card: /** @type {HTMLElement} */ (document.querySelector('#gallery .card')).getBoundingClientRect().top,
+  }));
+  let last = await look();
+  for (const step of [...Array(20).fill(40), ...Array(20).fill(-40)]) {
+    await page.evaluate((by) => scrollBy(0, by), step);
+    const now = await look();
+    expect(Math.abs((now.card - last.card) + (now.y - last.y))).toBeLessThanOrEqual(1);
+    last = now;
+    // Folded at the far end, and unfolded again by the way back.
+    if (now.y === 800) await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  }
+  expect(last.y).toBe(0);
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+});
+
 test('on a phone the floating bar drops the grid down, without leaving the cards', async ({ page }) => {
   // Opening it scrolled back up to where the grid lives, which lost the reader's
   // place among the cards; it opens under the bar instead, and shuts where it opened.

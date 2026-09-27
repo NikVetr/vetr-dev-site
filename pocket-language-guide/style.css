@@ -781,8 +781,9 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
     inline-size: auto; padding-inline: 1rem; border-bottom: 1px solid var(--line);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   }
-  /* Holds the bar's place in the flow while it floats, so nothing jumps. */
-  .want-floating::before { content: ''; display: block; block-size: 2rem; }
+  /* Holds the bar's place in the flow while it floats, so nothing jumps: the room is
+     the bar's own, measured by `ui/gallery.js` as it starts to float. */
+  .want-floating::before { content: ''; display: block; block-size: var(--bar-room); }
   /* A scrollable grid says so: a hairline round it and a fade where it continues. */
   .want-grid {
     border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--space-1);
