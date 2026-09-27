@@ -5206,3 +5206,15 @@ owner's language. The button is first on the "none of this" screen -- the main s
 at the twelve-button limit -- and behaves as the name does: greyed with an empty box
 until something is ticked, a checklist on the first press, a hold to clear. For a
 Mandarin listener, no pork, no peanuts and not spicy come out as 不要猪肉。不要花生。不要辣.
+
+## Native evidence for Batch AD
+
+Both apps were built from the pushed commit, 6b791b29, and checked on it. **Android**,
+on the emulator: `check:android` 9 of 9, the relaunch and Back-as-up checks included.
+**iOS**, from a clean checkout on the Mac with the generated project deleted first:
+`check:ios` 16 of 16. Neither script exercises this batch's new controls -- the fill-in
+buttons, the siren, contexts of the reader's own, the in-place turn -- whose evidence is
+the browser suites (Chromium 227 of 228 with one skipped, and the main specs 169 of 169
+on the final code; WebKit smoke 7 of 7; unit 696 of 696; the gate 10 of 10). The siren
+has been heard by no one: the browser test counts its oscillators, and only a phone can
+say how loud it is through the speaker and whether iOS honours the silent-switch request.
