@@ -603,5 +603,20 @@
   "signal.fastWarning": "ይህ ፍጥነት በሰከንድ ከሦስት ጊዜ በላይ ብልጭ ይላል፤ ይህም የብርሃን-ስሜት የሚጥል በሽታ ላለበት ሰው መናወጥ ሊያመጣ ይችላል። የሚጎዳ ሰው ብርሃኑን ማየት በማይችልበት ቦታ ብቻ ይጠቀሙበት። በዚህ ፍጥነት ብልጭ ይበል?",
   "signal.start": "ምልክት ያስተላልፉ",
   "signal.stop": "ያቁሙ",
-  "signal.unsayable": "ሞርስ ኮድ ምልክት የሌለው፦ {chars}"
+  "signal.unsayable": "ሞርስ ኮድ ምልክት የሌለው፦ {chars}",
+  "about.heading": "ስለ እርስዎ",
+  "about.name": "ስምዎ",
+  "about.kept": "በዚህ መሣሪያ እና በምትኬዎ ላይ ብቻ ነው የሚቀመጠው፤ በሌላ የትም ቦታ የለም።",
+  "about.unset": "ገና አልተሞላም፦ ለመሙላት ይንኩ",
+  "about.set": "ተሞልቷል፦ ለመሰረዝ ተጭነው ይቆዩ",
+  "format.darkCard": "ጨለማ ካርድ",
+  "format.foldSize": "የማጣጠፊያ መጠን",
+  "format.foldSize.folded": "የተጣጠፈ ካርድ",
+  "format.foldSize.unfolded": "ያልተጣጠፈ ወረቀት",
+  "display.siren": "ትኩረት ይሳቡ፣ ማንቂያውም ይሰማል",
+  "board.addContext": "የራስዎ ሁኔታ",
+  "board.contextName": "የዚህ ሁኔታ ስም",
+  "board.deleteContext": "ይህን ሁኔታ ይሰርዙ",
+  "about.diet": "የእኔ አመጋገብ",
+  "about.dietHint": "የሚመለክትዎትን ሁሉ ይምረጡ። አዝራሩ ሁሉንም በአንድ ላይ ይላል።"
 }

@@ -603,5 +603,20 @@
   "signal.fast": "Mai rapid decât trei clipiri pe secundă",
   "signal.fastWarning": "Această viteză clipește mai des decât de trei ori pe secundă, ceea ce poate declanșa o criză la o persoană cu epilepsie fotosensibilă. Folosiți-o doar unde nimeni care ar putea fi afectat nu poate vedea lumina. Clipiți la această viteză?",
   "board.openDeepL": "Deschide DeepL",
-  "board.openPapago": "Deschide Papago"
+  "board.openPapago": "Deschide Papago",
+  "about.heading": "Despre dumneavoastră",
+  "about.name": "Numele dumneavoastră",
+  "about.kept": "Rămâne pe acest dispozitiv și în copiile dumneavoastră de siguranță, și nicăieri altundeva.",
+  "about.unset": "Necompletat încă: atingeți pentru a-l completa",
+  "about.set": "Completat: țineți apăsat pentru a-l șterge",
+  "format.foldSize": "Dimensiunea este",
+  "format.foldSize.folded": "Card pliat",
+  "format.foldSize.unfolded": "Foaie nepliată",
+  "format.darkCard": "Card întunecat",
+  "display.siren": "Atrage atenția: sună și o sirenă",
+  "board.addContext": "Subiect propriu",
+  "board.contextName": "Cum se numește acest subiect",
+  "board.deleteContext": "Șterge acest subiect",
+  "about.diet": "Dieta mea",
+  "about.dietHint": "Atingeți tot ce se aplică dumneavoastră. Butonul spune totul dintr-o dată."
 }

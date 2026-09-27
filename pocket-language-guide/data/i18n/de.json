@@ -603,5 +603,20 @@
   "signal.fastWarning": "Diese Geschwindigkeit blinkt schneller als dreimal pro Sekunde, was bei jemandem mit photosensibler Epilepsie einen Anfall auslösen kann. Verwenden Sie sie nur dort, wo niemand, der davon betroffen sein könnte, das Licht sehen kann. Mit dieser Geschwindigkeit blinken?",
   "signal.start": "Signalisieren",
   "signal.stop": "Stopp",
-  "signal.unsayable": "Morsecode hat kein Zeichen für: {chars}"
+  "signal.unsayable": "Morsecode hat kein Zeichen für: {chars}",
+  "about.heading": "Über Sie",
+  "about.name": "Ihr Name",
+  "about.kept": "Liegt nur auf diesem Gerät und in Ihren Sicherungen, und nirgendwo sonst.",
+  "about.unset": "Noch nicht ausgefüllt: zum Ausfüllen tippen",
+  "about.set": "Ausgefüllt: zum Löschen gedrückt halten",
+  "format.darkCard": "Dunkle Karte",
+  "format.foldSize": "Falzgröße",
+  "format.foldSize.folded": "Gefaltete Karte",
+  "format.foldSize.unfolded": "Ungefaltetes Blatt",
+  "display.siren": "Aufmerksamkeit erregen, dabei ertönt auch eine Sirene",
+  "board.addContext": "Ihre eigene Situation",
+  "board.contextName": "Name dieser Situation",
+  "board.deleteContext": "Diese Situation löschen",
+  "about.diet": "Meine Ernährung",
+  "about.dietHint": "Kreuzen Sie alles an, was auf Sie zutrifft. Die Schaltfläche sagt dann alles auf einmal."
 }

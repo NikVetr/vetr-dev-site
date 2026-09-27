@@ -603,5 +603,20 @@
   "signal.fast": "Mais rápido do que três piscadas por segundo",
   "signal.fastWarning": "Esta velocidade pisca mais de três vezes por segundo, o que pode desencadear uma crise numa pessoa com epilepsia fotossensível. Utilize-a apenas onde ninguém que possa ser afetado veja a luz. Piscar a esta velocidade?",
   "board.openDeepL": "Abrir o DeepL",
-  "board.openPapago": "Abrir o Papago"
+  "board.openPapago": "Abrir o Papago",
+  "about.heading": "Sobre si",
+  "about.name": "O seu nome",
+  "about.kept": "Fica neste dispositivo e nas suas salvaguardas, e em mais lado nenhum.",
+  "about.unset": "Ainda não preenchido: toque para o preencher",
+  "about.set": "Preenchido: mantenha premido para o limpar",
+  "format.foldSize": "O tamanho é",
+  "format.foldSize.folded": "Cartão dobrado",
+  "format.foldSize.unfolded": "Folha desdobrada",
+  "format.darkCard": "Cartão escuro",
+  "display.siren": "Chamar a atenção: também toca uma sirene",
+  "board.addContext": "O seu próprio contexto",
+  "board.contextName": "Como chamar este contexto",
+  "board.deleteContext": "Eliminar este contexto",
+  "about.diet": "A minha dieta",
+  "about.dietHint": "Toque em tudo o que se aplica a si. O botão diz tudo de uma vez."
 }

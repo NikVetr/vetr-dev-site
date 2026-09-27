@@ -603,5 +603,20 @@
   "signal.fastWarning": "Esta velocidad destella más de tres veces por segundo, lo que puede provocar una crisis en alguien con epilepsia fotosensible. Úsela solo donde nadie que pudiera verse afectado pueda ver la luz. ¿Destellar a esta velocidad?",
   "signal.start": "Señalizar",
   "signal.stop": "Detener",
-  "signal.unsayable": "El código morse no tiene símbolo para: {chars}"
+  "signal.unsayable": "El código morse no tiene símbolo para: {chars}",
+  "about.heading": "Sobre usted",
+  "about.name": "Su nombre",
+  "about.kept": "Vive solo en este dispositivo y en sus respaldos, y en ningún otro sitio.",
+  "about.unset": "Aún no está completado: toque para completarlo",
+  "about.set": "Completado: mantenga pulsado para eliminarlo",
+  "format.darkCard": "Tarjeta oscura",
+  "format.foldSize": "Tamaño de pliegue",
+  "format.foldSize.folded": "Tarjeta plegada",
+  "format.foldSize.unfolded": "Hoja desplegada",
+  "display.siren": "Llamar la atención: también suena una sirena",
+  "board.addContext": "Su propio contexto",
+  "board.contextName": "Nombre de este contexto",
+  "board.deleteContext": "Eliminar este contexto",
+  "about.diet": "Mi dieta",
+  "about.dietHint": "Marque todo lo que se aplique a usted. El botón lo dice todo junto."
 }

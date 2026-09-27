@@ -603,5 +603,20 @@
   "signal.fast": "每秒闪烁超过三次",
   "signal.fastWarning": "这个速度每秒闪烁超过三次，可能诱发光敏性癫痫患者的癫痫发作。请只在没有可能受影响的人会看到这道光的地方使用。是否要以这个速度闪烁？",
   "board.openDeepL": "打开DeepL",
-  "board.openPapago": "打开Papago"
+  "board.openPapago": "打开Papago",
+  "about.heading": "关于您",
+  "about.name": "您的名字",
+  "about.kept": "只存在本设备和您的备份中，不在别的任何地方。",
+  "about.unset": "还没有填写：点按即可填写",
+  "about.set": "已填写：按住即可清除",
+  "format.foldSize": "尺寸是",
+  "format.foldSize.folded": "折叠后的卡片",
+  "format.foldSize.unfolded": "未折叠的纸",
+  "format.darkCard": "深色卡片",
+  "display.siren": "引起注意：也会响起警报声",
+  "board.addContext": "您自己的情境",
+  "board.contextName": "给这个情境起什么名字",
+  "board.deleteContext": "删除这个情境",
+  "about.diet": "我的饮食",
+  "about.dietHint": "点按所有符合您情况的选项。按钮会一次性说出全部内容。"
 }

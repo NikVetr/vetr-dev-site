@@ -603,5 +603,20 @@
   "signal.fast": "Lebih laju daripada tiga kelipan dalam satu saat",
   "signal.fastWarning": "Kelajuan ini berkelip lebih laju daripada tiga kali dalam satu saat. Ini boleh menyebabkan kejang pada orang yang ada epilepsi fotosensitif. Guna ia hanya di tempat yang tidak dilihat oleh sesiapa yang mungkin terjejas. Berkelip pada kelajuan ini?",
   "board.openDeepL": "Buka DeepL",
-  "board.openPapago": "Buka Papago"
+  "board.openPapago": "Buka Papago",
+  "about.heading": "Tentang anda",
+  "about.name": "Nama anda",
+  "about.kept": "Tinggal dalam peranti ini dan dalam sandaran anda sahaja, tidak di tempat lain.",
+  "about.unset": "Belum diisi: ketik untuk mengisinya",
+  "about.set": "Sudah diisi: tahan untuk memadamnya",
+  "format.foldSize": "Ukurannya adalah",
+  "format.foldSize.folded": "Kad terlipat",
+  "format.foldSize.unfolded": "Helai belum dilipat",
+  "format.darkCard": "Kad gelap",
+  "display.siren": "“Tarik perhatian” juga membunyikan siren",
+  "board.addContext": "Konteks anda sendiri",
+  "board.contextName": "Nama konteks ini",
+  "board.deleteContext": "Padam konteks ini",
+  "about.diet": "Pantangan makan anda",
+  "about.dietHint": "Tandakan semua yang berkaitan dengan anda. Butang itu menyebut semuanya sekali gus."
 }

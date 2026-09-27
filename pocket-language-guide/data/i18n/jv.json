@@ -603,5 +603,20 @@
   "signal.fastWarning": "Kacepetan menika ngedhap-edhap langkung saking tiga kedhap saben detik, ingkang saged njalari ayan tumrap tiyang ingkang sensitif dhateng cahya sumorot. Prayoginipun dipunginakaken namung wonten ing papan ingkang cahyanipun mboten saged katingal tiyang ingkang saged kadamel awon. Ngedhap-edhapaken ing kacepetan menika?",
   "signal.start": "Sinyal",
   "signal.stop": "Mandheg",
-  "signal.unsayable": "Aksara ingkang mboten wonten ing Sandi Morse: {chars}"
+  "signal.unsayable": "Aksara ingkang mboten wonten ing Sandi Morse: {chars}",
+  "about.heading": "Bab panjenengan",
+  "about.name": "Asma panjenengan",
+  "about.kept": "Namung manggèn ing pirantos menika lan ing cadhangan panjenengan, mboten wonten papan sanès.",
+  "about.unset": "Dèrèng dipunisi: menawi dipunpencet, saged dipunisi",
+  "about.set": "Sampun dipunisi: menawi dipunpencet dangu, saged dipunbucal",
+  "format.foldSize": "Ukuranipun",
+  "format.foldSize.folded": "Kertu lempit",
+  "format.foldSize.unfolded": "Lembar dèrèng lempit",
+  "format.darkCard": "Kertu peteng",
+  "display.siren": "“Narik kawigatosan” ugi wonten swara sirine",
+  "board.addContext": "Kawontenan panjenengan piyambak",
+  "board.contextName": "Asma kawontenan menika",
+  "board.deleteContext": "Busak kawontenan menika",
+  "about.diet": "Pantangan dhaharan panjenengan",
+  "about.dietHint": "Menapa kémawon ingkang trep kaliyan panjenengan, mangga dipuntandhani. Tombolipun badhé dipunwedharaken sedayanipun sepisan."
 }

@@ -603,5 +603,20 @@
   "signal.fast": "Sneller dan drie keer per seconde",
   "signal.fastWarning": "Deze snelheid knippert sneller dan drie keer per seconde, wat bij iemand met lichtflitsgevoelige epilepsie een aanval kan veroorzaken. Gebruik dit alleen op een plek waar niemand die daardoor getroffen kan worden het licht kan zien. Op deze snelheid knipperen?",
   "board.openDeepL": "DeepL openen",
-  "board.openPapago": "Papago openen"
+  "board.openPapago": "Papago openen",
+  "about.heading": "Over u",
+  "about.name": "Uw naam",
+  "about.kept": "Staat op dit apparaat en in uw back-ups, en nergens anders.",
+  "about.unset": "Nog niet ingevuld: tik om het in te vullen",
+  "about.set": "Ingevuld: houd ingedrukt om het te wissen",
+  "format.foldSize": "De maat is",
+  "format.foldSize.folded": "Gevouwen kaart",
+  "format.foldSize.unfolded": "Ongevouwen vel",
+  "format.darkCard": "Donkere kaart",
+  "display.siren": "“Aandacht trekken” laat ook een sirene afgaan",
+  "board.addContext": "Uw eigen onderwerp",
+  "board.contextName": "Naam van dit onderwerp",
+  "board.deleteContext": "Dit onderwerp verwijderen",
+  "about.diet": "Uw dieetwensen",
+  "about.dietHint": "Vink alles aan wat op u van toepassing is. De knop zegt het allemaal in één keer."
 }

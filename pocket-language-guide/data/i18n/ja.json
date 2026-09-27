@@ -603,5 +603,20 @@
   "signal.fastWarning": "この速さは1秒に3回より速く点滅するため、光過敏性発作を起こすことがあります。影響を受けるおそれのある人がその光を見ることができない場所でのみお使いください。この速さで点滅させますか？",
   "signal.start": "送信",
   "signal.stop": "停止",
-  "signal.unsayable": "モールス符号にない文字: {chars}"
+  "signal.unsayable": "モールス符号にない文字: {chars}",
+  "about.heading": "自分について",
+  "about.name": "名前",
+  "about.kept": "この端末の中と控えの中にだけあり、ほかにはありません。",
+  "about.unset": "未入力：タップすると入力できます",
+  "about.set": "入力済み：長押しすると消去できます",
+  "format.foldSize": "サイズ",
+  "format.foldSize.folded": "折ったカード",
+  "format.foldSize.unfolded": "折る前のシート",
+  "format.darkCard": "ダークカード",
+  "display.siren": "「注意を引く」はサイレンも鳴らします",
+  "board.addContext": "自分の場面",
+  "board.contextName": "この場面の名前",
+  "board.deleteContext": "この場面を削除",
+  "about.diet": "自分の食事制限",
+  "about.dietHint": "あてはまるものすべてにチェックしてください。ボタンがそれを一度にまとめて言います。"
 }

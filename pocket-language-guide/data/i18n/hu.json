@@ -603,5 +603,20 @@
   "signal.fast": "Gyorsabb, mint másodpercenként három villogás",
   "signal.fastWarning": "Ez a sebesség másodpercenként háromnál gyakrabban villog, ami rohamot válthat ki fényérzékeny epilepsziával élő embereknél. Csak olyan helyen használja, ahol senki, akit ez érinthet, nem látja a fényt. Villogtatja ezen a sebességen?",
   "board.openDeepL": "DeepL megnyitása",
-  "board.openPapago": "Papago megnyitása"
+  "board.openPapago": "Papago megnyitása",
+  "about.heading": "Önről",
+  "about.name": "Neve",
+  "about.kept": "Csak ezen az eszközön és a biztonsági mentéseiben marad meg, sehol máshol.",
+  "about.unset": "Még nincs kitöltve: kitöltés koppintással",
+  "about.set": "Kitöltve: törlés hosszan tartott érintéssel",
+  "format.darkCard": "Sötét kártya",
+  "format.foldSize": "Hajtásméret",
+  "format.foldSize.folded": "Hajtott kártya",
+  "format.foldSize.unfolded": "Hajtatlan lap",
+  "display.siren": "Figyelemfelkeltés: emellett sziréna is megszólal",
+  "board.addContext": "Saját helyzet",
+  "board.contextName": "Ennek a helyzetnek a neve",
+  "board.deleteContext": "A helyzet törlése",
+  "about.diet": "Étrendem",
+  "about.dietHint": "Jelölje be mindazt, ami Önre vonatkozik. A gomb ezt mind egyszerre mondja ki."
 }

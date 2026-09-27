@@ -603,5 +603,20 @@
   "signal.fastWarning": "تومض هذه السرعة أكثر من ثلاث مرات في الثانية، وهذا قد يسبب نوبة لمن يعاني من الصرع الحساس للضوء. استخدمها فقط حيث لا يمكن لأي شخص قد يتأثر أن يرى الضوء. أتومض بهذه السرعة؟",
   "signal.start": "إشارة",
   "signal.stop": "إيقاف",
-  "signal.unsayable": "لا يوجد رمز مورس لـ: {chars}"
+  "signal.unsayable": "لا يوجد رمز مورس لـ: {chars}",
+  "about.heading": "معلومات عنك",
+  "about.name": "اسمك",
+  "about.kept": "مخزَّن على هذا الجهاز وفي نسخك الاحتياطية فقط، وليس في أي مكان آخر.",
+  "about.unset": "غير معبأ بعد: يمكن تعبئته باللمس",
+  "about.set": "معبأ: يمكن حذفه بالضغط المطوَّل",
+  "format.darkCard": "بطاقة داكنة",
+  "format.foldSize": "مقاس الثني",
+  "format.foldSize.folded": "بطاقة مثنية",
+  "format.foldSize.unfolded": "ورقة غير مثنية",
+  "display.siren": "لفت الانتباه، وتنطلق صفارة الإنذار أيضًا",
+  "board.addContext": "موضوعك الخاص",
+  "board.contextName": "اسم هذا الموضوع",
+  "board.deleteContext": "حذف هذا الموضوع",
+  "about.diet": "نظامي الغذائي",
+  "about.dietHint": "اختر كل ما ينطبق عليك. يقول الزر كل ذلك دفعة واحدة."
 }

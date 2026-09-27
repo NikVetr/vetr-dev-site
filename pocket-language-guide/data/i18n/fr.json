@@ -603,5 +603,20 @@
   "signal.fastWarning": "Cette vitesse clignote plus de trois fois par seconde, ce qui peut déclencher une crise chez une personne souffrant d’épilepsie photosensible. Utilisez-la seulement là où personne pouvant être affecté ne peut voir la lumière. Clignoter à cette vitesse ?",
   "signal.start": "Signaler",
   "signal.stop": "Arrêter",
-  "signal.unsayable": "Le code Morse n’a pas de symbole pour : {chars}"
+  "signal.unsayable": "Le code Morse n’a pas de symbole pour : {chars}",
+  "about.heading": "À propos de vous",
+  "about.name": "Votre nom",
+  "about.kept": "Reste sur cet appareil et dans vos sauvegardes, et nulle part ailleurs.",
+  "about.unset": "Pas encore rempli : on peut le remplir d’un toucher",
+  "about.set": "Rempli : on peut le supprimer d’un appui long",
+  "format.darkCard": "Carte sombre",
+  "format.foldSize": "Format du pli",
+  "format.foldSize.folded": "Carte pliée",
+  "format.foldSize.unfolded": "Feuille dépliée",
+  "display.siren": "Attirer l’attention : une sirène sonne aussi",
+  "board.addContext": "Votre propre contexte",
+  "board.contextName": "Nom de ce contexte",
+  "board.deleteContext": "Supprimer ce contexte",
+  "about.diet": "Mon régime alimentaire",
+  "about.dietHint": "Cochez tout ce qui vous concerne. Le bouton dit alors tout à la fois."
 }

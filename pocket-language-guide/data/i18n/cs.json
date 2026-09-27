@@ -603,5 +603,20 @@
   "signal.fastWarning": "Tato rychlost blikne víckrát než třikrát za sekundu, což může u někoho s fotosenzitivní epilepsií vyvolat záchvat. Používejte ji jen tam, kde světlo nemůže vidět nikdo, koho by to mohlo ohrozit. Blikat touto rychlostí?",
   "signal.start": "Signalizovat",
   "signal.stop": "Zastavit",
-  "signal.unsayable": "Morseova abeceda nemá znak pro: {chars}"
+  "signal.unsayable": "Morseova abeceda nemá znak pro: {chars}",
+  "about.heading": "O vás",
+  "about.name": "Vaše jméno",
+  "about.kept": "Zůstává jen v tomto zařízení a ve vašich zálohách, a nikde jinde.",
+  "about.unset": "Ještě nevyplněno: dá se vyplnit klepnutím",
+  "about.set": "Vyplněno: dá se smazat podržením",
+  "format.darkCard": "Tmavá karta",
+  "format.foldSize": "Velikost skládání",
+  "format.foldSize.folded": "Přeložená karta",
+  "format.foldSize.unfolded": "Nepřeložený list",
+  "display.siren": "Upoutat pozornost, zazní i siréna",
+  "board.addContext": "Vlastní situace",
+  "board.contextName": "Název této situace",
+  "board.deleteContext": "Smazat tuto situaci",
+  "about.diet": "Vlastní strava",
+  "about.dietHint": "Lze zaškrtnout vše, co se vás týká. Tlačítko pak řekne všechno najednou."
 }

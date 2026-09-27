@@ -603,5 +603,20 @@
   "signal.fastWarning": "Kecepatan ini berkedip lebih dari tiga kali per detik, yang bisa memicu kejang pada orang dengan epilepsi fotosensitif. Gunakan hanya di tempat yang cahayanya tidak terlihat oleh siapa pun yang bisa terdampak. Kedipkan pada kecepatan ini?",
   "signal.start": "Sinyal",
   "signal.stop": "Berhenti",
-  "signal.unsayable": "Karakter yang tidak ada dalam Kode Morse: {chars}"
+  "signal.unsayable": "Karakter yang tidak ada dalam Kode Morse: {chars}",
+  "about.heading": "Tentang Anda",
+  "about.name": "Nama Anda",
+  "about.kept": "Tersimpan di perangkat ini dan di cadangan Anda saja, tidak di tempat lain.",
+  "about.unset": "Belum diisi: ketuk untuk mengisinya",
+  "about.set": "Sudah diisi: tahan untuk menghapusnya",
+  "format.foldSize": "Ukurannya adalah",
+  "format.foldSize.folded": "Kartu terlipat",
+  "format.foldSize.unfolded": "Lembar belum dilipat",
+  "format.darkCard": "Kartu gelap",
+  "display.siren": "“Tarik perhatian” juga membunyikan sirene",
+  "board.addContext": "Konteks Anda sendiri",
+  "board.contextName": "Nama konteks ini",
+  "board.deleteContext": "Hapus konteks ini",
+  "about.diet": "Pantangan makan Anda",
+  "about.dietHint": "Centang semua yang berlaku bagi Anda. Tombolnya akan menyebutkan semuanya sekaligus."
 }

@@ -603,5 +603,20 @@
   "signal.fast": "Szybciej niż trzy błyski na sekundę",
   "signal.fastWarning": "Ta szybkość błyska częściej niż trzy razy na sekundę, co może wywołać atak u osoby z padaczką fotogenną. Używaj jej tylko tam, gdzie nikt, kogo mogłoby to dotknąć, nie zobaczy światła. Błyskać z tą szybkością?",
   "board.openDeepL": "Otwórz DeepL",
-  "board.openPapago": "Otwórz Papago"
+  "board.openPapago": "Otwórz Papago",
+  "about.heading": "O tobie",
+  "about.name": "Twoje imię",
+  "about.kept": "Zostaje na tym urządzeniu i w twoich kopiach zapasowych, i nigdzie indziej.",
+  "about.unset": "Niewypełnione: dotknij, aby wypełnić",
+  "about.set": "Wypełnione: przytrzymaj, aby wyczyścić",
+  "format.foldSize": "Rozmiar to",
+  "format.foldSize.folded": "Złożona karta",
+  "format.foldSize.unfolded": "Niezłożony arkusz",
+  "format.darkCard": "Ciemna karta",
+  "display.siren": "Przycisk „Przyciągnij uwagę” włącza też syrenę",
+  "board.addContext": "Twoja własna sytuacja",
+  "board.contextName": "Nazwa tej sytuacji",
+  "board.deleteContext": "Usuń tę sytuację",
+  "about.diet": "Twoje potrzeby żywieniowe",
+  "about.dietHint": "Zaznacz wszystko, co cię dotyczy. Przycisk mówi to wszystko naraz."
 }

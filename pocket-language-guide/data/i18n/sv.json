@@ -603,5 +603,20 @@
   "signal.fast": "Snabbare än tre blinkningar per sekund",
   "signal.fastWarning": "Den här hastigheten blinkar snabbare än tre gånger per sekund, vilket kan utlösa ett anfall hos någon med ljuskänslig epilepsi. Använd den bara där ingen som skulle kunna påverkas ser ljuset. Blinka i den här hastigheten?",
   "board.openDeepL": "Öppna DeepL",
-  "board.openPapago": "Öppna Papago"
+  "board.openPapago": "Öppna Papago",
+  "about.heading": "Om dig",
+  "about.name": "Ditt namn",
+  "about.kept": "Finns på den här enheten och i dina säkerhetskopior, och ingen annanstans.",
+  "about.unset": "Inte ifyllt än: tryck för att fylla i",
+  "about.set": "Ifyllt: håll intryckt för att rensa",
+  "format.foldSize": "Storleken är",
+  "format.foldSize.folded": "Vikt kort",
+  "format.foldSize.unfolded": "Ovikt ark",
+  "format.darkCard": "Mörkt kort",
+  "display.siren": "Påkalla uppmärksamhet: även en siren ljuder",
+  "board.addContext": "Din egen situation",
+  "board.contextName": "Vad ska den här situationen heta",
+  "board.deleteContext": "Radera den här situationen",
+  "about.diet": "Min kost",
+  "about.dietHint": "Tryck på allt som gäller dig. Knappen säger allt på en gång."
 }

@@ -603,5 +603,20 @@
   "signal.fast": "Soniyada uch martadan koʻp yonib-oʻchish",
   "signal.fastWarning": "Bu tezlik soniyada uch martadan koʻp yonib-oʻchadi, bu esa fotosensitiv epilepsiyasi bor odamda tutqanoqni keltirib chiqarishi mumkin. Undan faqat taʼsirlanishi mumkin boʻlgan hech kim yorugʻlikni koʻrmaydigan joyda foydalaning. Shu tezlikda yonib-oʻchilsinmi?",
   "board.openDeepL": "DeepLni ochish",
-  "board.openPapago": "Papagoni ochish"
+  "board.openPapago": "Papagoni ochish",
+  "about.heading": "Siz haqingizda",
+  "about.name": "Sizning ismingiz",
+  "about.kept": "Faqat shu qurilmada va zaxiralaringizda turadi, boshqa hech qayerda emas.",
+  "about.unset": "Hali toʻldirilmagan: toʻldirish uchun teging",
+  "about.set": "Toʻldirilgan: tozalash uchun bosib turing",
+  "format.foldSize": "Oʻlchamning asosi",
+  "format.foldSize.folded": "Buklangan karta",
+  "format.foldSize.unfolded": "Buklanmagan varaq",
+  "format.darkCard": "Qorongʻi karta",
+  "display.siren": "Eʼtibor tortish: sirena ham chaladi",
+  "board.addContext": "Oʻz mavzuingiz",
+  "board.contextName": "Bu mavzuga qanday nom berilsin",
+  "board.deleteContext": "Bu mavzuni oʻchirish",
+  "about.diet": "Parhezim",
+  "about.dietHint": "Sizga tegishli hammasiga teging. Tugma hammasini bir yoʻla aytadi."
 }

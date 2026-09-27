@@ -603,5 +603,20 @@
   "signal.fast": "Fiye da haskakawa sau uku a dakika ɗaya",
   "signal.fastWarning": "Wannan saurin yana haskakawa fiye da sau uku a dakika ɗaya. Wannan na iya jawo wa mai fama da farfaɗiyar da haske mai walƙiya ke iya jawo ta hari. Ka yi amfani da wannan saurin kawai inda babu wani mai yiwuwar shan wahala da zai iya ganin hasken. A haskaka a wannan saurin?",
   "board.openDeepL": "Buɗe DeepL",
-  "board.openPapago": "Buɗe Papago"
+  "board.openPapago": "Buɗe Papago",
+  "about.heading": "Game da kai",
+  "about.name": "Sunanka",
+  "about.kept": "Yana kan wannan na'urar kaɗai da kwafin ajiyarka, ba a wani wuri ba.",
+  "about.unset": "Ba a cika shi ba tukuna: ana iya cika shi da taɓawa",
+  "about.set": "An cika shi: ana iya goge shi da riƙewa",
+  "format.darkCard": "Kati mai duhu",
+  "format.foldSize": "Girman naɗi",
+  "format.foldSize.folded": "Kati mai naɗi",
+  "format.foldSize.unfolded": "Takarda mara naɗi",
+  "display.siren": "Ja hankali, sirin ma yana kunna",
+  "board.addContext": "Jigon naka",
+  "board.contextName": "Sunan wannan jigo",
+  "board.deleteContext": "Goge wannan jigo",
+  "about.diet": "Abincina",
+  "about.dietHint": "Zaɓi duk abin da ya shafe ka. Maɓallin zai faɗi duka gaba ɗaya."
 }

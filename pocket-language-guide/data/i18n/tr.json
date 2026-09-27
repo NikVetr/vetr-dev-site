@@ -603,5 +603,20 @@
   "signal.fast": "Saniyede üç kez yanıp sönmeden hızlı",
   "signal.fastWarning": "Bu hız, saniyede üç kezden daha hızlı yanıp söner; bu da fotosensitif epilepsisi olan birinde nöbeti tetikleyebilir. Bunu yalnızca, etkilenebilecek hiç kimsenin ışığı göremeyeceği bir yerde kullanın. Bu hızda yanıp sönsün mü?",
   "board.openDeepL": "DeepL'i aç",
-  "board.openPapago": "Papago'yu aç"
+  "board.openPapago": "Papago'yu aç",
+  "about.heading": "Hakkınızda",
+  "about.name": "Sizin adınız",
+  "about.kept": "Yalnızca bu cihazda ve yedeklerinizde durur, başka hiçbir yerde değil.",
+  "about.unset": "Henüz doldurulmadı: doldurmak için dokunun",
+  "about.set": "Dolduruldu: silmek için basılı tutun",
+  "format.foldSize": "Boyutun temeli",
+  "format.foldSize.folded": "Katlanmış kart",
+  "format.foldSize.unfolded": "Katlanmamış kâğıt",
+  "format.darkCard": "Koyu kart",
+  "display.siren": "Dikkat çek: bir siren de çalar",
+  "board.addContext": "Kendi durumunuz",
+  "board.contextName": "Bu duruma ne ad verilsin",
+  "board.deleteContext": "Bu durumu sil",
+  "about.diet": "Beslenmem",
+  "about.dietHint": "Size uyan her şeye dokunun. Düğme hepsini bir kerede söyler."
 }

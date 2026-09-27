@@ -603,5 +603,20 @@
   "signal.fast": "Kasi zaidi ya mimuliko mitatu kwa sekunde",
   "signal.fastWarning": "Kasi hii inamulika zaidi ya mara tatu kwa sekunde, jambo ambalo linaweza kusababisha kifafa kwa mtu aliye na kifafa kinachosababishwa na mwanga. Itumie tu mahali ambapo hakuna mtu anayeweza kuathirika atakayeona mwanga huo. Je, umulike kwa kasi hii?",
   "board.openDeepL": "Fungua DeepL",
-  "board.openPapago": "Fungua Papago"
+  "board.openPapago": "Fungua Papago",
+  "about.heading": "Kuhusu wewe",
+  "about.name": "Jina lako",
+  "about.kept": "Linakaa kwenye kifaa hiki na katika akiba zako, na si mahali pengine popote.",
+  "about.unset": "Bado hujajaza: gusa ili kujaza",
+  "about.set": "Umejaza: shikilia ili ufute",
+  "format.foldSize": "Ukubwa ni",
+  "format.foldSize.folded": "Kadi iliyokunjwa",
+  "format.foldSize.unfolded": "Karatasi isiyokunjwa",
+  "format.darkCard": "Kadi ya giza",
+  "display.siren": "Vuta hisia za watu: kengele pia inalia",
+  "board.addContext": "Muktadha wako mwenyewe",
+  "board.contextName": "Muktadha huu utaitwaje",
+  "board.deleteContext": "Futa muktadha huu",
+  "about.diet": "Chakula changu",
+  "about.dietHint": "Gusa kila kinachokuhusu wewe. Kitufe husema yote kwa mara moja."
 }

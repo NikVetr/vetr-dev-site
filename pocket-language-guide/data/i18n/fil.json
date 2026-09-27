@@ -603,5 +603,20 @@
   "signal.fastWarning": "Kumikislap ang bilis na ito nang mahigit tatlong beses kada segundo, na maaaring magdulot ng seizure sa taong may epilepsiyang sensitibo sa liwanag. Gamitin lang ito kung saan walang taong maaapektuhan na makakakita ng liwanag. Mag-signal sa bilis na ito?",
   "signal.start": "Mag-signal",
   "signal.stop": "Ihinto",
-  "signal.unsayable": "Walang kodigong Morse para sa: {chars}"
+  "signal.unsayable": "Walang kodigong Morse para sa: {chars}",
+  "about.heading": "Tungkol sa inyo",
+  "about.name": "Pangalan ninyo",
+  "about.kept": "Nasa device na ito lamang at sa inyong mga backup, at wala nang iba.",
+  "about.unset": "Hindi pa napunan: pindutin para punan",
+  "about.set": "Napunan na: pindutin nang matagal para tanggalin",
+  "format.darkCard": "Madilim na Kard",
+  "format.foldSize": "Sukat ng Tiklop",
+  "format.foldSize.folded": "Nakatiklop na Kard",
+  "format.foldSize.unfolded": "Hindi Nakatiklop na Sheet",
+  "display.siren": "Humingi ng pansin, tumutunog din ang sirena",
+  "board.addContext": "Sariling Sitwasyon",
+  "board.contextName": "Pangalan ng sitwasyon na ito",
+  "board.deleteContext": "Tanggalin ang sitwasyon na ito",
+  "about.diet": "Diyeta ko",
+  "about.dietHint": "Markahan ninyo ang lahat na naaangkop sa inyo. Sinasabi ng buton ang lahat nang sabay-sabay."
 }

@@ -603,5 +603,20 @@
   "signal.fastWarning": "A questa velocità lampeggia più di tre volte al secondo, il che può scatenare una crisi in chi ha l’epilessia fotosensibile. La usi solo dove nessuno che potrebbe esserne colpito può vedere la luce. Lampeggiare a questa velocità?",
   "signal.start": "Segnala",
   "signal.stop": "Ferma",
-  "signal.unsayable": "Caratteri senza codice Morse: {chars}"
+  "signal.unsayable": "Caratteri senza codice Morse: {chars}",
+  "about.heading": "Informazioni su di lei",
+  "about.name": "Il suo nome",
+  "about.kept": "Resta su questo dispositivo e nei suoi backup, e in nessun altro posto.",
+  "about.unset": "Non ancora inserito: tocchi per inserirlo",
+  "about.set": "Inserito: tenga premuto per cancellarlo",
+  "format.foldSize": "La dimensione è",
+  "format.foldSize.folded": "Scheda piegata",
+  "format.foldSize.unfolded": "Foglio non piegato",
+  "format.darkCard": "Scheda scura",
+  "display.siren": "Il pulsante «Attira l’attenzione» fa suonare anche una sirena",
+  "board.addContext": "Il suo argomento",
+  "board.contextName": "Il nome di questo argomento",
+  "board.deleteContext": "Elimina questo argomento",
+  "about.diet": "Le sue esigenze alimentari",
+  "about.dietHint": "Spunti tutto ciò che la riguarda. Il pulsante dice tutto insieme."
 }

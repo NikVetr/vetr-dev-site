@@ -603,5 +603,20 @@
   "signal.fast": "Nhanh hơn ba lần nháy mỗi giây",
   "signal.fastWarning": "Tốc độ này nháy nhanh hơn ba lần mỗi giây, có thể gây co giật ở người bị động kinh cảm quang. Chỉ dùng tốc độ này ở nơi không ai có thể bị ảnh hưởng nhìn thấy ánh sáng. Nháy ở tốc độ này?",
   "board.openDeepL": "Mở DeepL",
-  "board.openPapago": "Mở Papago"
+  "board.openPapago": "Mở Papago",
+  "about.heading": "Về bạn",
+  "about.name": "Tên của bạn",
+  "about.kept": "Chỉ nằm trên thiết bị này và trong các bản dự phòng của bạn, không ở đâu khác.",
+  "about.unset": "Chưa điền: chạm để điền vào",
+  "about.set": "Đã điền: giữ để xóa",
+  "format.foldSize": "Kích thước là",
+  "format.foldSize.folded": "Thẻ đã gấp",
+  "format.foldSize.unfolded": "Tờ chưa gấp",
+  "format.darkCard": "Thẻ tối",
+  "display.siren": "Gây chú ý: còi báo động cũng kêu",
+  "board.addContext": "Chủ đề riêng của bạn",
+  "board.contextName": "Đặt tên gì cho chủ đề này",
+  "board.deleteContext": "Xóa chủ đề này",
+  "about.diet": "Ăn kiêng của tôi",
+  "about.dietHint": "Chạm vào mọi điều đúng với bạn. Nút sẽ nói hết một lần."
 }
