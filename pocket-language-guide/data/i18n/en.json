@@ -594,5 +594,7 @@
   "signal.stop": "Stop",
   "signal.unsayable": "Morse has no code for: {chars}",
   "board.openTranslator": "Open Google Translate",
+  "board.openDeepL": "Open DeepL",
+  "board.openPapago": "Open Papago",
   "board.toGallery": "All languages"
 }

@@ -834,7 +834,7 @@ async function main() {
     // hunt through the phone. In the reader's own language, because it is their hand
     // on the phone now.
     if (answer.id === 'board-answers.none-of-these') {
-      stage.append(translatorLinks(listener, owner, theirs.t('board.openTranslator')));
+      stage.append(translatorLinks(listener, owner, theirs.t));
     }
   }
 

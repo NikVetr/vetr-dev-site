@@ -282,6 +282,13 @@ test('an uncertain answer and a rejection are both reachable, and say what they 
 
   await page.locator('.board-answer').last().click();
   await expect(page.locator('.board-message-text')).toContainText(/none of these/i);
+  // The fuller translators, from the stranger's language into the owner's: Google for
+  // any pair, DeepL where it has both, Papago where one side is Chinese, Japanese or
+  // Korean and it has the other.
+  const links = page.locator('.board-links a');
+  await expect(links).toHaveCount(3);
+  expect(await links.evaluateAll((as) => as.map((a) => new URL(/** @type {HTMLAnchorElement} */ (a).href).hostname)))
+    .toEqual(['translate.google.com', 'www.deepl.com', 'papago.naver.com']);
   // ...and it is an answer like any other: one tap returns to the owner's grid.
   await dismiss(page);
   await expect(page.locator('[data-button="avoid"]')).toBeVisible();

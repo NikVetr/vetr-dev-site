@@ -1262,7 +1262,7 @@ dialog.board-menu-panel::backdrop { background: rgb(17 24 32 / 25%); }
 .board-grid-topics .board-cell-more { padding-inline: var(--space-2); }
 .board-grid-topics .board-cell-more::after { content: none; }
 /* The link out to a translator, under the answer that had none. */
-.board-links { margin: 0; padding: var(--space-2); text-align: center; }
+.board-links { margin: 0; padding: var(--space-2); display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-2); }
 .board-links .btn { font-weight: 600; }
 /* The editor's two lists: the board's own buttons with a switch each, then the
    reader's. */

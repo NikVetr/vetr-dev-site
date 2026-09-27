@@ -1095,27 +1095,54 @@ function placeBeside(text, reply, corner, box, read) {
 
 /** Google Translate's own codes where they differ from ours. */
 const GOOGLE = /** @type {Record<string,string>} */ ({ 'zh-Hans': 'zh-CN', fil: 'tl', jv: 'jw' });
+/** The languages DeepL translates, from its published list (developers.deepl.com,
+ * "Supported languages"), in our codes; and its codes where they differ. */
+const DEEPL = new Set(['ar', 'bn', 'cs', 'de', 'el', 'en', 'es', 'fa', 'fi', 'fil', 'fr', 'gu',
+  'ha', 'he', 'hi', 'hr', 'hu', 'hy', 'id', 'it', 'ja', 'jv', 'ka', 'ko', 'ml', 'mr', 'ms', 'ne',
+  'nl', 'pa', 'pl', 'pt', 'ro', 'ru', 'sv', 'sw', 'ta', 'te', 'th', 'tr', 'uk', 'ur', 'uz', 'vi',
+  'zh-Hans']);
+const DEEPL_CODE = /** @type {Record<string,string>} */ ({ 'zh-Hans': 'zh', fil: 'tl' });
+/** Naver Papago's sixteen languages, as its own codes, keyed by ours. */
+const PAPAGO = /** @type {Record<string,string>} */ ({
+  ar: 'ar', de: 'de', en: 'en', es: 'es', fr: 'fr', hi: 'hi', id: 'id', it: 'it', ja: 'ja',
+  ko: 'ko', pt: 'pt', ru: 'ru', th: 'th', vi: 'vi', 'zh-Hans': 'zh-CN',
+});
+const EAST_ASIAN = new Set(['ja', 'ko', 'zh-Hans']);
 
 /**
- * A link that opens Google Translate set from one language to the other.
+ * Links that open a translator set from one language to the other: Google's for any
+ * pair, DeepL's where it has both languages, and Papago's where one side is Chinese,
+ * Japanese or Korean -- the languages it is strongest in -- and it has the other.
  *
- * A web address, on purpose: on a phone with the app installed the system hands it
- * to the app, and everywhere else it is the site -- one link that does the right
- * thing on each platform without asking which it is on. Apple's Translate publishes
- * no address a page can open, so there is no second link; the share sheet on an
- * iPhone offers it for any text the reader copies.
- * @param {string} from @param {string} to @param {string} label
+ * Web addresses, on purpose: on a phone with the app installed the system hands one
+ * to the app, and everywhere else it is the site -- a link that does the right thing
+ * on each platform without asking which it is on. Apple's Translate publishes no
+ * address a page can open; the share sheet on an iPhone offers it for any text the
+ * reader copies.
+ * @param {string} from @param {string} to
+ * @param {(key: string) => string} say  the reader's own catalogue: it is their hand on the phone
  */
-export function translatorLinks(from, to, label) {
+export function translatorLinks(from, to, say) {
+  /** @type {[string, string][]} */ const links = [
+    ['board.openTranslator', `https://translate.google.com/?sl=${GOOGLE[from] ?? from}&tl=${GOOGLE[to] ?? to}&op=translate`],
+  ];
+  if (DEEPL.has(from) && DEEPL.has(to)) {
+    links.push(['board.openDeepL', `https://www.deepl.com/translator#${DEEPL_CODE[from] ?? from}/${DEEPL_CODE[to] ?? to}/`]);
+  }
+  if ((EAST_ASIAN.has(from) || EAST_ASIAN.has(to)) && PAPAGO[from] && PAPAGO[to]) {
+    links.push(['board.openPapago', `https://papago.naver.com/?sk=${PAPAGO[from]}&tk=${PAPAGO[to]}`]);
+  }
   const p = document.createElement('p');
   p.className = 'board-links';
-  const a = document.createElement('a');
-  a.className = 'btn';
-  a.href = `https://translate.google.com/?sl=${GOOGLE[from] ?? from}&tl=${GOOGLE[to] ?? to}&op=translate`;
-  a.target = '_blank';
-  a.rel = 'noopener';
-  a.textContent = `${label} \u2197`;
-  p.append(a);
+  for (const [key, href] of links) {
+    const a = document.createElement('a');
+    a.className = 'btn';
+    a.href = href;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.textContent = `${say(key)} \u2197`;
+    p.append(a);
+  }
   return p;
 }
 
