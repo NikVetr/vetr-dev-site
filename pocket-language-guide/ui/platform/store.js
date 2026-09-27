@@ -48,6 +48,14 @@ export function ready() {
   prefs = plugin();
   if (!prefs) { hydrating = Promise.resolve(); return hydrating; }
   hydrating = (async () => {
+    // **The first call a page makes is thrown away.** Capacitor 8's Android bridge
+    // dispatches a call before it records which page to answer, so the first call from
+    // a page that has just replaced another can be answered into the old page and never
+    // resolve -- measured on the emulator as a board that stayed blank, one launch in
+    // four, when a context was opened within a second or two of the app starting. Every
+    // later call is dispatched after the page is recorded, so a throwaway first call
+    // takes the slot, and this is every page's first call.
+    prefs.keys().catch(() => {});
     const held = new Map();
     const { keys } = await prefs.keys();
     for (const key of keys) {
