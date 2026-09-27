@@ -457,9 +457,10 @@
   position: absolute; inset-block-start: 0.4rem; inset-inline-end: 0.4rem;
   inline-size: 1rem; block-size: 1rem; border: 2px solid currentColor; border-radius: 3px;
 }
+/* The tick is a drawing, not text: physical sides, so a turned board draws it the same. */
 .board-cell-set .board-cell-box::after {
-  content: ''; position: absolute; inset-inline-start: 0.26rem; inset-block-start: 0.04rem;
-  inline-size: 0.28rem; block-size: 0.55rem; border: solid currentColor; border-width: 0 2px 2px 0;
+  content: ''; position: absolute; left: 0.26rem; top: 0.04rem;
+  width: 0.28rem; height: 0.55rem; border: solid currentColor; border-width: 0 2px 2px 0;
   rotate: 45deg;
 }
 .board-cell-unset { color: var(--muted); background: var(--surface); }
@@ -1263,6 +1264,10 @@ dialog.board-menu-panel::backdrop { background: rgb(17 24 32 / 25%); }
 .board-main-turned .board-up-arrow, .board-main-turned .board-bar svg,
 .board-main-turned .board-menu-bars, .board-letter { display: inline-block; rotate: 90deg; }
 .board-letter { inline-size: 1em; text-align: center; }
+/* The silhouettes behind the words, and the fill-in box, turn with the words: writing
+   mode turns text and not images, so they are turned the same quarter by hand. */
+.board-main-turned .board-cell-mark, .board-stage-turned .board-cell-mark,
+.board-main-turned .board-cell-box { rotate: 90deg; }
 .board-word { white-space: nowrap; }
 /* Laid out from the right, which is down the page for whoever has turned the phone. */
 .board-letters { display: inline-block; direction: rtl; }

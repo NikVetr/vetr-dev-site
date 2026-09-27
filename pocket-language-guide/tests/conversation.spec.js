@@ -1986,16 +1986,28 @@ test('turning turns what is on the bar in place, and moves nothing', async ({ pa
   expect(await places()).toEqual(before);
   expect(await page.locator('.board-bar').evaluate((el) => getComputedStyle(el).writingMode)).toBe('horizontal-tb');
   expect(await page.locator('.board-grid').evaluate((el) => getComputedStyle(el).writingMode)).toBe('vertical-rl');
-  expect(await page.locator('#board-title .board-letter').count()).toBeGreaterThan(5);
+  // An English label stays a plain line: a column of turned Latin letters is not how
+  // English is read. Only a script written a character at a time turns (below).
+  await expect(page.locator('#board-title .board-letter')).toHaveCount(0);
   expect(await page.locator('.board-up-arrow').evaluate((el) => getComputedStyle(el).rotate)).toBe('90deg');
   await page.locator('#board-up').click();
   // Still the word it was, for a screen reader: only the letters' drawing turned.
   await expect(page.locator('#board-title')).toHaveText('Context');
   await expect(main).toHaveClass(/board-main-turned/);
+  // The silhouettes behind the words turn with them: a writing mode turns only text.
+  expect(await page.locator('.board-cell-topic').first().evaluate((el) => getComputedStyle(el).rotate)).toBe('90deg');
   await expect(page.locator('#board-turn-bar')).toHaveAttribute('aria-pressed', 'true');
   await page.locator('#board-turn-bar').click();
   await expect(main).not.toHaveClass(/board-main-turned/);
   await expect(page.locator('#board-title .board-letter')).toHaveCount(0);
+  // A Chinese reader's topic is a column of characters, which is a way Chinese is read,
+  // so its letters turn -- and still nothing on the bar moves.
+  await page.goto('/conversation.html?target=en&source=zh-Hans&board=spa');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  const zhBefore = await places();
+  await page.locator('#board-turn-bar').click();
+  await expect(page.locator('#board-title .board-letter').first()).toBeVisible();
+  expect(await places()).toEqual(zhBefore);
 });
 
 test('a message keeps white type on a dark fill in the dark', async ({ browser }) => {

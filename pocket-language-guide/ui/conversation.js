@@ -166,9 +166,10 @@ function candidates(index, boardId, side, fixed) {
  * So the words and their letters are laid out from the right, which for that reader is
  * down the page, and wrap between words as the upright label does; the size comes down
  * only if the turned label would need more height than it had, so the bar and every
- * control in it stay exactly where they were. A letter is a grapheme, so a vowel sign
- * stays on its consonant. A joining script stays upright: a letter cut from its
- * neighbours loses its joined form, and a whole word turned would be taller than the bar.
+ * control in it stay exactly where they were. **Only a script written a character at a
+ * time turns** -- Chinese, Japanese kana, Korean Hangul -- because a column of those is a
+ * way the language is read. A column of turned Latin letters is not, and an alphabetic or
+ * joining label stays a plain line, turned with the phone like everything else.
  * @param {HTMLElement} el  an element holding only text
  * @param {boolean} turned
  */
@@ -179,7 +180,7 @@ function turnLetters(el, turned) {
   el.style.fontSize = '';
   const box = /** @type {HTMLElement} */ (el.closest('.board-title') ?? el);
   box.style.minBlockSize = '';
-  if (!turned || /[\p{Script=Arabic}\p{Script=Syriac}]/u.test(text)) return;
+  if (!turned || !/[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}]/u.test(text)) return;
   const upright = box.getBoundingClientRect().height;
   // The room is the title's and the spacer's beside it, taken now: the title is sized
   // by its content, so measured after the letters change it only reports itself.
