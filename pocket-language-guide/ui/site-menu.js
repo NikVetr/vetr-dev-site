@@ -11,6 +11,27 @@ import { t } from './i18n.js';
 import { themeSection } from './theme.js';
 import { isNative, readResume, RESUME_DEPTHS, writeResume } from './platform/shell.js';
 
+/**
+ * **Outside a dialog is the way out of it**, on every page, which is why it is here: every
+ * page loads this module for its header, and no unit test does. A press on the backdrop
+ * closes a modal as its close control does -- every modal here is a `<dialog>` -- but
+ * only a press that began outside it as well, so a drag that started in a field and
+ * ended past the dialog's edge does not throw away what was being typed.
+ */
+let pressedOutside = false;
+/** @param {EventTarget|null} target @param {MouseEvent} event */
+const outsideOf = (target, event) => {
+  if (!(target instanceof HTMLDialogElement) || !target.open) return false;
+  const box = target.getBoundingClientRect();
+  return event.clientX < box.left || event.clientX > box.right
+    || event.clientY < box.top || event.clientY > box.bottom;
+};
+document.addEventListener('pointerdown', (event) => { pressedOutside = outsideOf(event.target, event); });
+document.addEventListener('click', (event) => {
+  if (pressedOutside && outsideOf(event.target, event)) /** @type {HTMLDialogElement} */ (event.target).close();
+  pressedOutside = false;
+});
+
 /** @param {() => void} [open]  what the bars open; the appearance dialog by default */
 export function wireSiteMenu(open = openAppearance) {
   const bars = document.getElementById('site-menu');
