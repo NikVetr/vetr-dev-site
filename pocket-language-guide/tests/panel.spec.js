@@ -50,9 +50,6 @@ test('the header can be a solid tab, flush with the corner, in white', async ({ 
   // The fill is a glyph ladder now, not a `<select>`: `#head-fill` is the revealed
   // list of theme colour keys, and "by section" is a segment. Same idiom the header
   // test further down already uses.
-  await page.getByRole('radio', { name: 'By section' }).first().click();
-  await page.waitForTimeout(2500);
-
   /** The band's own rectangle: in the strip above the columns, a line or so tall. */
   const band = () => page.evaluate(() => {
     const svg = document.querySelector('.face.focused svg') ?? document.querySelector('svg');
@@ -69,6 +66,10 @@ test('the header can be a solid tab, flush with the corner, in white', async ({ 
     return { rect, white, page_w };
   });
 
+  await page.getByRole('radio', { name: 'By section' }).first().click();
+  // The re-solve is asynchronous: wait for the painted tab, not for a fixed time, which
+  // a loaded machine outran.
+  await expect.poll(async () => (await band()).white).toBeGreaterThan(0);
   const full = await band();
   expect(full.rect, 'the tab should be painted').not.toBe(null);
   // A theme role, not paper: `section` resolved to something.
@@ -83,7 +84,7 @@ test('the header can be a solid tab, flush with the corner, in white', async ({ 
   // you cannot see past the card in front is not a tab.
   // `Sits` is a segmented control of glyph buttons, not a select.
   await page.getByRole('radio', { name: 'Left tab' }).first().click();
-  await page.waitForTimeout(2500);
+  await expect.poll(async () => (await band()).rect?.w ?? Infinity).toBeLessThan(full.page_w * 0.8);
   const left = await band();
   expect(left.rect.x).toBeCloseTo(0, 1);
   expect(left.rect.w).toBeLessThan(left.page_w * 0.8);
