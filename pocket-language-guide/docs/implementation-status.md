@@ -4972,3 +4972,17 @@ the emergency numbers and the folio together.
   holds every concept but its documented absences. None of it has had a fluent
   reviewer, which the owner has forgone, and it should be read as subagent-sourced
   against the reference lists in `content/PROMPTS/`.
+
+## Native evidence for Batch AB
+
+Both apps were built from the pushed commit and checked on it. **Android**, from this
+checkout on the emulator: `check:android` 6 of 6, at 122eb3d5 and again at d878231b.
+**iOS**, from a clean clone on the Mac at the same commit, with the generated project
+deleted first (`rm -rf ios build/ios`, then `npm run ios -- --run`): the first run at
+122eb3d5 failed one check of fifteen, `background-stops-beacon` -- the SOS beacon was
+still flashing after a 2.5-second trip to Settings -- and passed on the three runs
+after it. WebKit can suspend the web process before it runs the hidden event and
+deliver it on return, when the page already reads visible, and the beacon's handler
+checked the state rather than the event. d878231b stops the beacon on any visibility
+change, with a browser test for the late delivery, and on a fresh build of it
+`check:ios` passed 15 of 15 on three consecutive runs, the first run included.
