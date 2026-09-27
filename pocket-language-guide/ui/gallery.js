@@ -12,6 +12,7 @@
 // `ui/app.js` imports them on demand now, and this page is nine modules and 89KB.
 
 import { wireSiteMenu } from './site-menu.js';
+import { notePlace, resumeLaunch } from './platform/shell.js';
 import {
   isSpoken, loadText, loadLanguages, readerLanguage,
   registerOffline, setReaderLanguage, showFatal,
@@ -535,6 +536,8 @@ function fitHeader() {
 async function main() {
   registerOffline();
   const { languages, coverage, names, regions } = await loadLanguages();
+  if (resumeLaunch()) return;
+  notePlace(null);
   setFlagColours(regions);
   const reader = readerLanguage(languages, coverage);
   /**

@@ -1,9 +1,11 @@
 // The native shell, where there is one.
 //
-// Two things the web gives for free and an app does not: a Back gesture that means
-// something, and a way to hand text to another application. Both are behind this
-// seam so the pages stay identical in a browser and in a WebView — there is no
-// second build of this app, only a `Capacitor` global that is either there or not.
+// Three things the web gives for free and an app does not: a Back gesture that
+// means something, a way to hand text to another application, and a return to where
+// the reader was -- a browser restores its tabs, an app starts at its first page.
+// All three are behind this seam so the pages stay identical in a browser and in a
+// WebView — there is no second build of this app, only a `Capacitor` global that is
+// either there or not.
 //
 // **Back is the one that has to be got right.** Android's system Back is not a
 // browser Back: in a WebView it fires an event, and if nobody handles it the app
@@ -12,6 +14,8 @@
 // return whether they consumed the press, and only an unconsumed one is allowed to
 // leave — which is also why an open `<dialog>` is handled here rather than by each
 // page, since every modal in this app is one.
+
+import * as store from './store.js';
 
 /** Whether this is running inside the native shell rather than a browser tab. */
 export function isNative() {
@@ -44,6 +48,62 @@ export function onBack(handler) {
     if (event.canGoBack) { history.back(); return; }
     app.exitApp?.();
   });
+}
+
+/** How far a relaunch returns, shallowest first: every language, a pair's contexts, the last context. */
+export const RESUME_DEPTHS = /** @type {const} */ (['start', 'topics', 'board']);
+/** @typedef {typeof RESUME_DEPTHS[number]} ResumeDepth */
+const RESUME_KEY = 'plg.resume';
+const PLACE_KEY = 'plg.place';
+/** Lives as long as the WebView, so only a launch resumes: Back to the languages stays there. */
+const LAUNCHED = 'plg.launched';
+/** The context a resuming launch goes on to from the context list. */
+const ONWARD = 'plg.onward';
+
+/** How deep a relaunch goes: the reader's choice, else the context list. @returns {ResumeDepth} */
+export function readResume() {
+  const held = store.get(RESUME_KEY);
+  return RESUME_DEPTHS.find((depth) => depth === held) ?? 'topics';
+}
+
+/** @param {ResumeDepth} depth */
+export function writeResume(depth) {
+  store.set(RESUME_KEY, depth);
+}
+
+/**
+ * Remember which screen the reader is on, for the next launch.
+ * @param {{target:string, source:string, board?:string}|null} place  null for every language
+ */
+export function notePlace(place) {
+  if (isNative()) store.set(PLACE_KEY, JSON.stringify(place));
+}
+
+/**
+ * On a fresh launch, go back to where the reader was, as deep as they allow.
+ *
+ * **One screen at a time**, so the history behind them is the one they would have
+ * made: the languages, then the contexts, then the context. Android's Back from a
+ * restored context then goes up through the others instead of out of the app, which
+ * is where a jump straight to the board would have left it. Returns whether the page
+ * is leaving, in which case it should draw nothing.
+ */
+export function resumeLaunch() {
+  if (!isNative() || sessionStorage.getItem(LAUNCHED)) return false;
+  sessionStorage.setItem(LAUNCHED, '1');
+  const place = JSON.parse(store.get(PLACE_KEY) ?? 'null');
+  const depth = RESUME_DEPTHS.indexOf(readResume());
+  if (!place || depth === 0) return false;
+  if (place.board && depth === 2) sessionStorage.setItem(ONWARD, place.board);
+  location.href = `conversation.html?${new URLSearchParams({ target: place.target, source: place.source })}`;
+  return true;
+}
+
+/** The context a resuming launch continues to from the context list, handed over once. */
+export function takeOnward() {
+  const board = sessionStorage.getItem(ONWARD);
+  sessionStorage.removeItem(ONWARD);
+  return board;
 }
 
 /**

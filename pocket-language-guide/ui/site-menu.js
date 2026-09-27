@@ -9,6 +9,7 @@
 
 import { t } from './i18n.js';
 import { themeSection } from './theme.js';
+import { isNative, readResume, RESUME_DEPTHS, writeResume } from './platform/shell.js';
 
 /** @param {() => void} [open]  what the bars open; the appearance dialog by default */
 export function wireSiteMenu(open = openAppearance) {
@@ -30,8 +31,34 @@ function openAppearance() {
   close.className = 'speaker-close';
   close.setAttribute('aria-label', t('gallery.previewClose'));
   close.addEventListener('click', () => panel.close());
-  panel.append(close, head, themeSection());
+  panel.append(close, head, themeSection(), ...resumeSection());
   panel.addEventListener('close', () => panel.remove());
   document.body.append(panel);
   panel.showModal();
+}
+
+/**
+ * Which screen the app opens on again, in the app only: a browser tab restores
+ * itself, and a web page that moved the reader somewhere on load would be a bug.
+ */
+export function resumeSection() {
+  if (!isNative()) return [];
+  const box = document.createElement('fieldset');
+  box.className = 'speaker-block';
+  const legend = document.createElement('legend');
+  legend.textContent = t('resume.heading');
+  box.append(legend);
+  const held = readResume();
+  for (const depth of RESUME_DEPTHS) {
+    const input = document.createElement('input');
+    input.type = 'radio';
+    input.name = 'resume';
+    input.checked = depth === held;
+    input.addEventListener('change', () => writeResume(depth));
+    const label = document.createElement('label');
+    label.className = 'speaker-option';
+    label.append(input, t(`resume.${depth}`));
+    box.append(label);
+  }
+  return [box];
 }

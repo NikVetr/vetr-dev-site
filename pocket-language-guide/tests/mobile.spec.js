@@ -591,3 +591,63 @@ test('the section picker is a phone control only', async ({ page }) => {
   await expect(page.locator('#section-picker')).toBeHidden();
   await expect(page.locator('.tree summary input[type=checkbox]').first()).toBeVisible();
 });
+
+test('the app opens again where the reader left off, as deep as they allow', async ({ context }) => {
+  // A stand-in for the native shell: the pages only ask whether they are in one.
+  await context.addInitScript(() => {
+    /** @type {any} */ (globalThis).Capacitor = { isNativePlatform: () => true, Plugins: {} };
+  });
+  // A new tab is a new WebView: the same store, and a session with nothing in it.
+  const launch = async () => {
+    const page = await context.newPage();
+    await page.goto('/index.html');
+    return page;
+  };
+  const TOPICS = /conversation\.html\?target=zh-Hans&source=en$/;
+  const first = await launch();
+  await expect(first.locator('.card').first()).toBeVisible();
+  await first.goto('/conversation.html?target=zh-Hans&source=en&board=spa');
+  await expect(first.locator('.board-cell').first()).toBeVisible();
+
+  // By default, the contexts of the pair it was on.
+  const second = await launch();
+  await expect(second).toHaveURL(TOPICS);
+  await expect(second.locator('.board-grid-topics')).toBeVisible();
+
+  // As deep as the last context, chosen in the settings; Back then climbs the way
+  // the reader would have come, rather than out of the app.
+  await second.locator('#site-menu').click();
+  await second.getByRole('radio', { name: 'Last context' }).check();
+  await second.keyboard.press('Escape');
+  await second.locator('.board-cell', { hasText: 'Massage' }).click();
+  await expect(second).toHaveURL(/board=spa$/);
+  const third = await launch();
+  await expect(third).toHaveURL(/board=spa$/);
+  await expect(third.locator('.board-cell').first()).toBeVisible();
+  await third.goBack();
+  await expect(third).toHaveURL(TOPICS);
+  await third.goBack();
+  await expect(third).toHaveURL(/index\.html$/);
+  // And it stays: only a launch resumes.
+  await expect(third.locator('.card').first()).toBeVisible();
+  expect(third.url()).toMatch(/index\.html$/);
+
+  // The languages, when that is all the reader wants back.
+  await third.locator('#site-menu').click();
+  await third.getByRole('radio', { name: 'Languages' }).check();
+  await third.keyboard.press('Escape');
+  const fourth = await launch();
+  await expect(fourth.locator('.card').first()).toBeVisible();
+  expect(fourth.url()).toMatch(/index\.html$/);
+});
+
+test('a web page never moves the reader on load, and has no such setting', async ({ page }) => {
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=spa');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.goto('/index.html');
+  await expect(page.locator('.card').first()).toBeVisible();
+  expect(page.url()).toMatch(/index\.html$/);
+  await page.locator('#site-menu').click();
+  await expect(page.locator('dialog[open]')).toBeVisible();
+  await expect(page.getByRole('radio', { name: 'Last context' })).toHaveCount(0);
+});

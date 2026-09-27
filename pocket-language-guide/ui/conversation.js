@@ -11,7 +11,7 @@
 // view over language content, and `core/pack.js` is a data-only join. What this page
 // downloads is the corpus rows for two languages and a JSON file.
 
-import { wireSiteMenu } from './site-menu.js';
+import { resumeSection, wireSiteMenu } from './site-menu.js';
 import {
   loadText, loadLanguages, readerLanguage, registerOffline, showFatal,
   deferUpdates, applyUpdateIfIdle, download, keepBoardOffline, accentFor,
@@ -41,7 +41,7 @@ import {
 import { speech } from './platform/speech.js';
 import { keepAwake } from './platform/wake.js';
 import { startBeacon, stopBeacon } from './platform/beacon.js';
-import { onBack } from './platform/shell.js';
+import { notePlace, onBack, takeOnward } from './platform/shell.js';
 import { read as readPersonal, placedOn } from './board-store.js';
 import {
   openSpeakerSettings, readProfile, noticeFor, personalSection,
@@ -214,9 +214,13 @@ async function showPicker(owner, listener, index) {
     if (!serves(board, listener, owner)) continue;
     topics.set(board.id, { title: t(board.titleKey), icon: board.icon, alert: board.alert });
   }
+  const onward = takeOnward();
+  if (onward && topics.has(onward)) { goTo({ board: onward }); return; }
   $('board-title').textContent = t('board.pickTopic');
   $('board-title').title = t('board.pickTopic');
   document.title = t('board.docTitle');
+  // The header's bars open the plain settings here: the board's fuller dialog needs a board.
+  wireSiteMenu();
   // **The context list has a parent too**, and it is the card this was opened from.
   // Without this the only way off the first screen of Converse was the browser's own
   // Back, which a reader who arrived from the app's own link does not think of as
@@ -276,6 +280,7 @@ async function main() {
   const owner = params.get('source') || readerLanguage(languages, coverage);
   const listener = params.get('target') || 'zh-Hans';
   const boardId = params.get('board');
+  notePlace({ target: listener, source: owner, ...(boardId ? { board: boardId } : {}) });
 
   await loadUiLanguage(owner, loadText);
   applyStatic();
@@ -908,6 +913,7 @@ async function main() {
         onChange: (id) => { chosenVoice = id; },
       }),
       themeSection(),
+      ...resumeSection(),
       personalSection(personalWiring({
       save: download,
       // **What this build can actually show**, so an import naming a screen that is
