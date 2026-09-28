@@ -618,5 +618,12 @@
   "board.contextName": "Đặt tên gì cho chủ đề này",
   "board.deleteContext": "Xóa chủ đề này",
   "about.diet": "Ăn kiêng của tôi",
-  "about.dietHint": "Chạm vào mọi điều đúng với bạn. Nút sẽ nói hết một lần."
+  "about.dietHint": "Chạm vào mọi điều đúng với bạn. Nút sẽ nói hết một lần.",
+  "about.country": "Quốc gia của bạn",
+  "about.sounds": "Âm thanh",
+  "about.soundsHint": "Chạm vào các âm theo thứ tự. Người đọc chữ viết khác sẽ thấy tên bạn bằng chữ của họ, và điện thoại của họ có thể đọc tên đó.",
+  "board.arrange": "Sắp xếp lại màn hình này",
+  "board.arrangeHint": "Kéo các nút vào thứ tự bạn muốn, sau đó nhấn Xong.",
+  "boards.intro.kindTitle": "Lời tử tế",
+  "editor.fromBoards": "Thêm nút từ các chủ đề"
 }

@@ -618,5 +618,12 @@
   "board.contextName": "Asma kawontenan menika",
   "board.deleteContext": "Busak kawontenan menika",
   "about.diet": "Pantangan dhaharan panjenengan",
-  "about.dietHint": "Menapa kémawon ingkang trep kaliyan panjenengan, mangga dipuntandhani. Tombolipun badhé dipunwedharaken sedayanipun sepisan."
+  "about.dietHint": "Menapa kémawon ingkang trep kaliyan panjenengan, mangga dipuntandhani. Tombolipun badhé dipunwedharaken sedayanipun sepisan.",
+  "about.country": "Negara panjenengan",
+  "about.sounds": "Swantenipun",
+  "about.soundsHint": "Dipunpencet swantenipun kanthi urut. Ingkang maos aksara sanès badhé ningali asma panjenengan ing aksaranipun piyambak, saha telepon panjenenganipun saged ngucapaken.",
+  "board.arrange": "Atur Malih Layar Menika",
+  "board.arrangeHint": "Mangga dipunsèrèt tombolipun dhateng urutan ingkang panjenengan kersakaken, lajeng dipunpencet Rampung.",
+  "boards.intro.kindTitle": "Tembung Sae",
+  "editor.fromBoards": "Tambah Tombol saking Papan-Papan"
 }

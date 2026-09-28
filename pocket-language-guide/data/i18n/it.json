@@ -618,5 +618,12 @@
   "board.contextName": "Il nome di questo argomento",
   "board.deleteContext": "Elimina questo argomento",
   "about.diet": "Le sue esigenze alimentari",
-  "about.dietHint": "Spunti tutto ciò che la riguarda. Il pulsante dice tutto insieme."
+  "about.dietHint": "Spunti tutto ciò che la riguarda. Il pulsante dice tutto insieme.",
+  "about.country": "Il suo paese di provenienza",
+  "about.sounds": "Come si pronuncia",
+  "about.soundsHint": "Tocchi i suoni del nome in ordine. Chi legge un’altra scrittura vedrà il suo nome nelle proprie lettere, e il suo telefono potrà pronunciarlo.",
+  "board.arrange": "Riorganizza questa schermata",
+  "board.arrangeHint": "Trascini i pulsanti nell’ordine che preferisce, poi prema Fatto.",
+  "boards.intro.kindTitle": "Parole gentili",
+  "editor.fromBoards": "Aggiungi pulsanti dagli argomenti"
 }

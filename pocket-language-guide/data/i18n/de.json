@@ -618,5 +618,12 @@
   "board.contextName": "Name dieser Situation",
   "board.deleteContext": "Diese Situation löschen",
   "about.diet": "Meine Ernährung",
-  "about.dietHint": "Kreuzen Sie alles an, was auf Sie zutrifft. Die Schaltfläche sagt dann alles auf einmal."
+  "about.dietHint": "Kreuzen Sie alles an, was auf Sie zutrifft. Die Schaltfläche sagt dann alles auf einmal.",
+  "about.country": "Ihr Land",
+  "about.sounds": "Aussprache",
+  "about.soundsHint": "Tippen Sie der Reihe nach auf seine Laute. Wer eine andere Schrift liest, sieht Ihren Namen dann in den eigenen Buchstaben, und das Telefon kann ihn aussprechen.",
+  "board.arrange": "Diesen Bildschirm neu anordnen",
+  "board.arrangeHint": "Ziehen Sie die Schaltflächen in die gewünschte Reihenfolge und tippen Sie dann auf Fertig.",
+  "boards.intro.kindTitle": "Freundliche Worte",
+  "editor.fromBoards": "Schaltflächen von den Tafeln hinzufügen"
 }

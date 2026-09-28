@@ -618,5 +618,12 @@
   "board.contextName": "Muktadha huu utaitwaje",
   "board.deleteContext": "Futa muktadha huu",
   "about.diet": "Chakula changu",
-  "about.dietHint": "Gusa kila kinachokuhusu wewe. Kitufe husema yote kwa mara moja."
+  "about.dietHint": "Gusa kila kinachokuhusu wewe. Kitufe husema yote kwa mara moja.",
+  "about.country": "Nchi yako",
+  "about.sounds": "Matamshi",
+  "about.soundsHint": "Gusa sauti zake kwa mpangilio. Anayesoma maandishi mengine ataona jina lako katika herufi zake mwenyewe, na simu yake itaweza kulitamka.",
+  "board.arrange": "Panga Upya Skrini Hii",
+  "board.arrangeHint": "Buruta vitufe kwenye mpangilio unaoutaka, kisha bonyeza Nimemaliza.",
+  "boards.intro.kindTitle": "Maneno Mema",
+  "editor.fromBoards": "Ongeza vitufe kutoka kwenye mbao"
 }

@@ -618,5 +618,12 @@
   "board.contextName": "Pangalan ng sitwasyon na ito",
   "board.deleteContext": "Tanggalin ang sitwasyon na ito",
   "about.diet": "Diyeta ko",
-  "about.dietHint": "Markahan ninyo ang lahat na naaangkop sa inyo. Sinasabi ng buton ang lahat nang sabay-sabay."
+  "about.dietHint": "Markahan ninyo ang lahat na naaangkop sa inyo. Sinasabi ng buton ang lahat nang sabay-sabay.",
+  "about.country": "Bansa ninyo",
+  "about.sounds": "Mga tunog nito",
+  "about.soundsHint": "Pindutin ang mga tunog nito nang sunod-sunod. Makikita ng sinumang nagbabasa ng ibang sulat ang pangalan ninyo sa kanilang mga letra, at masasabi ito ng kanilang telepono.",
+  "board.arrange": "Ayusin ang screen na ito",
+  "board.arrangeHint": "Hilahin ang mga buton sa pagkakasunod-sunod na nais ninyo, pagkatapos ay pindutin ang Tapos na.",
+  "boards.intro.kindTitle": "Magiliw na mga salita",
+  "editor.fromBoards": "Idagdag ang mga buton mula sa mga board"
 }

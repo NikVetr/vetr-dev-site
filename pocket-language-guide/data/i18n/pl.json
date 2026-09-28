@@ -618,5 +618,12 @@
   "board.contextName": "Nazwa tej sytuacji",
   "board.deleteContext": "Usuń tę sytuację",
   "about.diet": "Twoje potrzeby żywieniowe",
-  "about.dietHint": "Zaznacz wszystko, co cię dotyczy. Przycisk mówi to wszystko naraz."
+  "about.dietHint": "Zaznacz wszystko, co cię dotyczy. Przycisk mówi to wszystko naraz.",
+  "about.country": "Twój kraj",
+  "about.sounds": "Wymowa",
+  "about.soundsHint": "Dotknij jego głosek po kolei. Osoba czytająca inne pismo zobaczy twoje imię w swoich literach, a jej telefon będzie mógł je wypowiedzieć.",
+  "board.arrange": "Uporządkuj ten ekran",
+  "board.arrangeHint": "Przeciągnij przyciski w wybranej kolejności, a potem naciśnij Gotowe.",
+  "boards.intro.kindTitle": "Miłe słowa",
+  "editor.fromBoards": "Dodaj przyciski z tablic"
 }

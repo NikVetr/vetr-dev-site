@@ -618,5 +618,12 @@
   "board.contextName": "给这个情境起什么名字",
   "board.deleteContext": "删除这个情境",
   "about.diet": "我的饮食",
-  "about.dietHint": "点按所有符合您情况的选项。按钮会一次性说出全部内容。"
+  "about.dietHint": "点按所有符合您情况的选项。按钮会一次性说出全部内容。",
+  "about.country": "您的国家",
+  "about.sounds": "发音",
+  "about.soundsHint": "按顺序点按它的发音。使用其他文字的人会用自己的字母看到您的名字，他们的手机也能读出来。",
+  "board.arrange": "重新排列此页面",
+  "board.arrangeHint": "将按钮拖动到您想要的顺序，然后点按完成。",
+  "boards.intro.kindTitle": "友善的话",
+  "editor.fromBoards": "从对话板添加按钮"
 }

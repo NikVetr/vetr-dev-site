@@ -618,5 +618,12 @@
   "board.contextName": "اسم هذا الموضوع",
   "board.deleteContext": "حذف هذا الموضوع",
   "about.diet": "نظامي الغذائي",
-  "about.dietHint": "اختر كل ما ينطبق عليك. يقول الزر كل ذلك دفعة واحدة."
+  "about.dietHint": "اختر كل ما ينطبق عليك. يقول الزر كل ذلك دفعة واحدة.",
+  "about.country": "بلدك",
+  "about.sounds": "نُطقه",
+  "about.soundsHint": "المس أصواته بالترتيب. من يقرأ رسمًا آخر سيرى اسمك بحروفه هو، وسيتمكن هاتفه من نطقه.",
+  "board.arrange": "إعادة ترتيب هذه الشاشة",
+  "board.arrangeHint": "اسحب الأزرار إلى الترتيب الذي تريده، ثم اضغط تم.",
+  "boards.intro.kindTitle": "كلمات لطيفة",
+  "editor.fromBoards": "إضافة أزرار من اللوحات"
 }

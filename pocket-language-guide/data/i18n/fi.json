@@ -618,5 +618,12 @@
   "board.contextName": "Tämän tilanteen nimi",
   "board.deleteContext": "Poista tämä tilanne",
   "about.diet": "Ruokavalioni",
-  "about.dietHint": "Merkitse kaikki, mikä koskee sinua. Painike kertoo sen kaikki kerralla."
+  "about.dietHint": "Merkitse kaikki, mikä koskee sinua. Painike kertoo sen kaikki kerralla.",
+  "about.country": "Maasi",
+  "about.sounds": "Ääntäminen",
+  "about.soundsHint": "Napauta sen äänteet järjestyksessä. Toista kirjoitusjärjestelmää lukeva näkee nimesi omilla kirjaimillaan, ja hänen puhelimensa osaa sanoa sen.",
+  "board.arrange": "Järjestä tämä näkymä uudelleen",
+  "board.arrangeHint": "Raahaa painikkeet haluamaasi järjestykseen ja paina sitten Valmis.",
+  "boards.intro.kindTitle": "Ystävälliset sanat",
+  "editor.fromBoards": "Lisää painikkeita tauluilta"
 }

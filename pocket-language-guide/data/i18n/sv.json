@@ -618,5 +618,12 @@
   "board.contextName": "Vad ska den här situationen heta",
   "board.deleteContext": "Radera den här situationen",
   "about.diet": "Min kost",
-  "about.dietHint": "Tryck på allt som gäller dig. Knappen säger allt på en gång."
+  "about.dietHint": "Tryck på allt som gäller dig. Knappen säger allt på en gång.",
+  "about.country": "Ditt land",
+  "about.sounds": "Uttal",
+  "about.soundsHint": "Tryck på ljuden i ordning. Den som läser en annan skrift ser sedan ditt namn med sina egna bokstäver, och telefonen kan säga det.",
+  "board.arrange": "Ordna om den här skärmen",
+  "board.arrangeHint": "Dra knapparna till den ordning du vill ha, och tryck sedan på Klar.",
+  "boards.intro.kindTitle": "Vänliga ord",
+  "editor.fromBoards": "Lägg till knappar från tavlorna"
 }

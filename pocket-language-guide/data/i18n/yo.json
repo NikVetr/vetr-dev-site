@@ -616,5 +616,12 @@
   "board.contextName": "Kí ni orúkọ ipò yìí",
   "board.deleteContext": "Pa ipò yìí rẹ́",
   "about.diet": "Àìlò oúnjẹ mi",
-  "about.dietHint": "Tẹ ohun gbogbo tí ó jẹ́ tirẹ. Bọ́tìnì náà ń sọ gbogbo rẹ̀."
+  "about.dietHint": "Tẹ ohun gbogbo tí ó jẹ́ tirẹ. Bọ́tìnì náà ń sọ gbogbo rẹ̀.",
+  "about.country": "Orílẹ̀-èdè rẹ",
+  "about.sounds": "Àwọn ohùn rẹ̀",
+  "about.soundsHint": "Tẹ àwọn ohùn rẹ̀ ní ìtòsí. Ẹnikẹ́ni tí ó bá ka lẹ́tà mìíràn yóò rí orúkọ rẹ ní lẹ́tà tirẹ̀, ẹ̀rọ rẹ̀ yóò sì lè sọ ọ́.",
+  "board.arrange": "Tún ìboju yìí tò",
+  "board.arrangeHint": "Tún àwọn bọ́tìnì náà tò sí ìtòsí tí o fẹ́, lẹ́yìn náà tẹ Parí.",
+  "boards.intro.kindTitle": "Ọ̀rọ̀ inú rere",
+  "editor.fromBoards": "Fi bọ́tìnì kún láti àwọn ipò"
 }

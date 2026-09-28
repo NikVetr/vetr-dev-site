@@ -618,5 +618,12 @@
   "board.contextName": "Naziv ove situacije",
   "board.deleteContext": "Izbriši ovu situaciju",
   "about.diet": "Moja prehrana",
-  "about.dietHint": "Označite sve što se odnosi na vas. Gumb će odjednom reći sve to."
+  "about.dietHint": "Označite sve što se odnosi na vas. Gumb će odjednom reći sve to.",
+  "about.country": "Odakle ste",
+  "about.sounds": "Izgovor",
+  "about.soundsHint": "Dodirnite njegove glasove po redu. Tko čita drugo pismo, vidjet će vaše ime u svojim slovima, a telefon će ga moći izgovoriti.",
+  "board.arrange": "Posloži ovaj ekran",
+  "board.arrangeHint": "Povucite gumbe u redoslijed koji želite, a zatim pritisnite Gotovo.",
+  "boards.intro.kindTitle": "Ljubazne riječi",
+  "editor.fromBoards": "Dodaj gumbe s ploča"
 }

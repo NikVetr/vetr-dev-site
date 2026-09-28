@@ -618,5 +618,12 @@
   "board.contextName": "Como chamar este contexto",
   "board.deleteContext": "Eliminar este contexto",
   "about.diet": "A minha dieta",
-  "about.dietHint": "Toque em tudo o que se aplica a si. O botão diz tudo de uma vez."
+  "about.dietHint": "Toque em tudo o que se aplica a si. O botão diz tudo de uma vez.",
+  "about.country": "O seu país",
+  "about.sounds": "Pronúncia",
+  "about.soundsHint": "Toque nos sons dele por ordem. Quem lê outra escrita verá o seu nome nas próprias letras, e o telefone dele conseguirá dizê-lo.",
+  "board.arrange": "Reorganizar este ecrã",
+  "board.arrangeHint": "Arraste os botões para a ordem que quiser e depois toque em Concluído.",
+  "boards.intro.kindTitle": "Palavras amáveis",
+  "editor.fromBoards": "Adicionar botões dos quadros"
 }

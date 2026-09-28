@@ -618,5 +618,12 @@
   "board.contextName": "Nombre de este contexto",
   "board.deleteContext": "Eliminar este contexto",
   "about.diet": "Mi dieta",
-  "about.dietHint": "Marque todo lo que se aplique a usted. El botón lo dice todo junto."
+  "about.dietHint": "Marque todo lo que se aplique a usted. El botón lo dice todo junto.",
+  "about.country": "Su país",
+  "about.sounds": "Pronunciación",
+  "about.soundsHint": "Toque sus sonidos en orden. Quien lea otra escritura verá su nombre en sus propias letras, y su teléfono podrá pronunciarlo.",
+  "board.arrange": "Reorganizar esta pantalla",
+  "board.arrangeHint": "Arrastre los botones al orden que quiera y luego pulse Listo.",
+  "boards.intro.kindTitle": "Palabras amables",
+  "editor.fromBoards": "Agregar botones desde los tableros"
 }

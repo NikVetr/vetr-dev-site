@@ -618,5 +618,12 @@
   "board.contextName": "この場面の名前",
   "board.deleteContext": "この場面を削除",
   "about.diet": "自分の食事制限",
-  "about.dietHint": "あてはまるものすべてにチェックしてください。ボタンがそれを一度にまとめて言います。"
+  "about.dietHint": "あてはまるものすべてにチェックしてください。ボタンがそれを一度にまとめて言います。",
+  "about.country": "出身",
+  "about.sounds": "発音",
+  "about.soundsHint": "音を順番にタップしてください。別の文字を読む人にも、自分の文字であなたの名前が表示され、電話が発音できるようになります。",
+  "board.arrange": "この画面を並べ替え",
+  "board.arrangeHint": "ボタンを好きな順番にドラッグしてから、「完了」を押してください。",
+  "boards.intro.kindTitle": "やさしい言葉",
+  "editor.fromBoards": "ボードからボタンを追加"
 }

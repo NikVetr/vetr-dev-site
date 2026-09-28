@@ -618,5 +618,12 @@
   "board.contextName": "Nama konteks ini",
   "board.deleteContext": "Padam konteks ini",
   "about.diet": "Pantangan makan anda",
-  "about.dietHint": "Tandakan semua yang berkaitan dengan anda. Butang itu menyebut semuanya sekali gus."
+  "about.dietHint": "Tandakan semua yang berkaitan dengan anda. Butang itu menyebut semuanya sekali gus.",
+  "about.country": "Negara asal anda",
+  "about.sounds": "Bunyinya",
+  "about.soundsHint": "Ketik bunyinya mengikut urutan. Orang yang membaca tulisan lain akan melihat nama anda dalam huruf mereka sendiri, dan telefon mereka boleh menyebutnya.",
+  "board.arrange": "Susun Semula Skrin Ini",
+  "board.arrangeHint": "Seret butang ke susunan yang anda mahu, kemudian ketik Selesai.",
+  "boards.intro.kindTitle": "Kata-kata Baik",
+  "editor.fromBoards": "Tambah Butang daripada Papan"
 }

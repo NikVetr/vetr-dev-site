@@ -618,5 +618,12 @@
   "board.contextName": "Bu duruma ne ad verilsin",
   "board.deleteContext": "Bu durumu sil",
   "about.diet": "Beslenmem",
-  "about.dietHint": "Size uyan her şeye dokunun. Düğme hepsini bir kerede söyler."
+  "about.dietHint": "Size uyan her şeye dokunun. Düğme hepsini bir kerede söyler.",
+  "about.country": "Geldiğiniz ülke",
+  "about.sounds": "Nasıl söylendiği",
+  "about.soundsHint": "Seslerine sırayla dokunun. Başka bir yazı okuyan biri adınızı kendi harfleriyle görür, telefonu da bunu söyleyebilir.",
+  "board.arrange": "Bu ekranı yeniden düzenle",
+  "board.arrangeHint": "Düğmeleri istediğiniz sıraya sürükleyin, ardından Bitti’ye dokunun.",
+  "boards.intro.kindTitle": "Nazik sözler",
+  "editor.fromBoards": "Panolardan düğme ekle"
 }

@@ -618,5 +618,12 @@
   "board.contextName": "Ennek a helyzetnek a neve",
   "board.deleteContext": "A helyzet törlése",
   "about.diet": "Étrendem",
-  "about.dietHint": "Jelölje be mindazt, ami Önre vonatkozik. A gomb ezt mind egyszerre mondja ki."
+  "about.dietHint": "Jelölje be mindazt, ami Önre vonatkozik. A gomb ezt mind egyszerre mondja ki.",
+  "about.country": "Országa",
+  "about.sounds": "Kiejtés",
+  "about.soundsHint": "Koppintással állítsa össze a hangjait sorban. Aki más írást olvas, a saját betűivel látja majd a nevét, és a telefonja ki tudja mondani.",
+  "board.arrange": "Gombok újrarendezése ezen a képernyőn",
+  "board.arrangeHint": "Húzza a gombokat a kívánt sorrendbe, majd nyomja meg: Kész.",
+  "boards.intro.kindTitle": "Kedves szavak",
+  "editor.fromBoards": "Gombok hozzáadása a táblákról"
 }

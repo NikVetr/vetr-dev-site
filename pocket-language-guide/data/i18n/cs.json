@@ -618,5 +618,12 @@
   "board.contextName": "Název této situace",
   "board.deleteContext": "Smazat tuto situaci",
   "about.diet": "Vlastní strava",
-  "about.dietHint": "Lze zaškrtnout vše, co se vás týká. Tlačítko pak řekne všechno najednou."
+  "about.dietHint": "Lze zaškrtnout vše, co se vás týká. Tlačítko pak řekne všechno najednou.",
+  "about.country": "Odkud jste",
+  "about.sounds": "Výslovnost",
+  "about.soundsHint": "Klepnutím vyberte jeho hlásky v pořadí. Kdo čte jiné písmo, uvidí vaše jméno ve svých vlastních písmenech a telefon ho dokáže vyslovit.",
+  "board.arrange": "Uspořádat tuto obrazovku",
+  "board.arrangeHint": "Přetáhněte tlačítka do pořadí, které chcete, a pak stiskněte Hotovo.",
+  "boards.intro.kindTitle": "Milá slova",
+  "editor.fromBoards": "Přidat tlačítka z tabulí"
 }

@@ -618,5 +618,12 @@
   "board.contextName": "Nama konteks ini",
   "board.deleteContext": "Hapus konteks ini",
   "about.diet": "Pantangan makan Anda",
-  "about.dietHint": "Centang semua yang berlaku bagi Anda. Tombolnya akan menyebutkan semuanya sekaligus."
+  "about.dietHint": "Centang semua yang berlaku bagi Anda. Tombolnya akan menyebutkan semuanya sekaligus.",
+  "about.country": "Negara asal Anda",
+  "about.sounds": "Bunyinya",
+  "about.soundsHint": "Ketuk bunyinya secara berurutan. Orang yang membaca aksara lain akan melihat nama Anda dalam hurufnya sendiri, dan ponselnya bisa mengucapkannya.",
+  "board.arrange": "Susun Ulang Layar Ini",
+  "board.arrangeHint": "Seret tombol ke urutan yang Anda inginkan, lalu ketuk Selesai.",
+  "boards.intro.kindTitle": "Kata-kata Baik",
+  "editor.fromBoards": "Tambahkan Tombol dari Papan"
 }

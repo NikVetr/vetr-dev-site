@@ -618,5 +618,12 @@
   "board.contextName": "Naam van dit onderwerp",
   "board.deleteContext": "Dit onderwerp verwijderen",
   "about.diet": "Uw dieetwensen",
-  "about.dietHint": "Vink alles aan wat op u van toepassing is. De knop zegt het allemaal in één keer."
+  "about.dietHint": "Vink alles aan wat op u van toepassing is. De knop zegt het allemaal in één keer.",
+  "about.country": "Uw land",
+  "about.sounds": "Uitspraak",
+  "about.soundsHint": "Tik zijn klanken in volgorde aan. Wie een ander schrift leest, ziet uw naam dan in zijn eigen letters, en zijn telefoon kan het uitspreken.",
+  "board.arrange": "Dit scherm opnieuw indelen",
+  "board.arrangeHint": "Sleep de knoppen naar de volgorde die u wilt en tik dan op Klaar.",
+  "boards.intro.kindTitle": "Vriendelijke woorden",
+  "editor.fromBoards": "Knoppen toevoegen vanaf de borden"
 }

@@ -618,5 +618,12 @@
   "board.contextName": "Bu mavzuga qanday nom berilsin",
   "board.deleteContext": "Bu mavzuni oʻchirish",
   "about.diet": "Parhezim",
-  "about.dietHint": "Sizga tegishli hammasiga teging. Tugma hammasini bir yoʻla aytadi."
+  "about.dietHint": "Sizga tegishli hammasiga teging. Tugma hammasini bir yoʻla aytadi.",
+  "about.country": "Sizning mamlakatingiz",
+  "about.sounds": "Talaffuzi",
+  "about.soundsHint": "Uning tovushlariga tartib bilan teging. Boshqa yozuvni oʻqiydigan kishi ismingizni oʻz harflarida koʻradi, va uning telefoni buni ayta oladi.",
+  "board.arrange": "Bu ekranni qayta tartiblash",
+  "board.arrangeHint": "Tugmalarni xohlagan tartibingizga suring, keyin Tayyor tugmasini bosing.",
+  "boards.intro.kindTitle": "Mehribon soʻzlar",
+  "editor.fromBoards": "Taxtalardan tugmalar qoʻshish"
 }

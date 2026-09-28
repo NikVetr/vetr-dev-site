@@ -618,5 +618,12 @@
   "board.contextName": "Cum se numește acest subiect",
   "board.deleteContext": "Șterge acest subiect",
   "about.diet": "Dieta mea",
-  "about.dietHint": "Atingeți tot ce se aplică dumneavoastră. Butonul spune totul dintr-o dată."
+  "about.dietHint": "Atingeți tot ce se aplică dumneavoastră. Butonul spune totul dintr-o dată.",
+  "about.country": "Țara dumneavoastră",
+  "about.sounds": "Pronunție",
+  "about.soundsHint": "Atingeți sunetele lui în ordine. Cine citește un alt alfabet va vedea numele dumneavoastră în propriile litere, iar telefonul său îl va putea pronunța.",
+  "board.arrange": "Reorganizează acest ecran",
+  "board.arrangeHint": "Trageți butoanele în ordinea dorită, apoi apăsați Gata.",
+  "boards.intro.kindTitle": "Cuvinte amabile",
+  "editor.fromBoards": "Adaugă butoane din subiecte"
 }

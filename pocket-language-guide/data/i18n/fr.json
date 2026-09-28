@@ -618,5 +618,12 @@
   "board.contextName": "Nom de ce contexte",
   "board.deleteContext": "Supprimer ce contexte",
   "about.diet": "Mon régime alimentaire",
-  "about.dietHint": "Cochez tout ce qui vous concerne. Le bouton dit alors tout à la fois."
+  "about.dietHint": "Cochez tout ce qui vous concerne. Le bouton dit alors tout à la fois.",
+  "about.country": "Votre pays",
+  "about.sounds": "Prononciation",
+  "about.soundsHint": "Touchez ses sons dans l’ordre. Quelqu’un qui lit une autre écriture verra votre nom dans ses propres lettres, et son téléphone pourra le dire.",
+  "board.arrange": "Réorganiser cet écran",
+  "board.arrangeHint": "Faites glisser les boutons dans l’ordre voulu, puis appuyez sur Terminé.",
+  "boards.intro.kindTitle": "Mots gentils",
+  "editor.fromBoards": "Ajouter des boutons depuis les tableaux"
 }

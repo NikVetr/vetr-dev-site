@@ -618,5 +618,12 @@
   "board.contextName": "የዚህ ሁኔታ ስም",
   "board.deleteContext": "ይህን ሁኔታ ይሰርዙ",
   "about.diet": "የእኔ አመጋገብ",
-  "about.dietHint": "የሚመለክትዎትን ሁሉ ይምረጡ። አዝራሩ ሁሉንም በአንድ ላይ ይላል።"
+  "about.dietHint": "የሚመለክትዎትን ሁሉ ይምረጡ። አዝራሩ ሁሉንም በአንድ ላይ ይላል።",
+  "about.country": "የመጡበት አገር",
+  "about.sounds": "አጠራሩ",
+  "about.soundsHint": "ድምጾቹን በተራ ይንኩ። ሌላ ፊደል የሚያነብ ሰው ስምዎን በራሱ ፊደላት ያየዋል፣ ስልኩም ሊጠራው ይችላል።",
+  "board.arrange": "ይህን መስኮት እንደገና ያዘጋጁ",
+  "board.arrangeHint": "አዝራሮቹን በሚፈልጉት ተራ ይጎትቱ፣ ከዚያ ይጨርሱ የሚለውን ይጫኑ።",
+  "boards.intro.kindTitle": "ደግ ቃላት",
+  "editor.fromBoards": "ከሰሌዳዎቹ አዝራሮችን ይጨምሩ"
 }

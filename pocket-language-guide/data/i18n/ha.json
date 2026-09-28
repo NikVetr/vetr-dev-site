@@ -618,5 +618,12 @@
   "board.contextName": "Sunan wannan jigo",
   "board.deleteContext": "Goge wannan jigo",
   "about.diet": "Abincina",
-  "about.dietHint": "Zaɓi duk abin da ya shafe ka. Maɓallin zai faɗi duka gaba ɗaya."
+  "about.dietHint": "Zaɓi duk abin da ya shafe ka. Maɓallin zai faɗi duka gaba ɗaya.",
+  "about.country": "Ƙasarka",
+  "about.sounds": "Sautukansa",
+  "about.soundsHint": "Taɓa sautukansa bi da bi. Wanda ya karanta rubutu dabam zai ga sunanka a haruffansa, kuma wayarsa za ta iya faɗinsa.",
+  "board.arrange": "Sake Tsara Wannan Allon",
+  "board.arrangeHint": "Ja maɓallan zuwa jerin da kake so, sannan ka danna Gama.",
+  "boards.intro.kindTitle": "Kalmomin Alheri",
+  "editor.fromBoards": "Ƙara Maɓallai Daga Allunan"
 }
