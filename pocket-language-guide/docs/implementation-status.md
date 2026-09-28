@@ -5338,3 +5338,15 @@ in the romanised names, German's pattern-extended article forms, Montserrat's å¡
 two Khmer IPA cells, Persian's honorific pronoun with a singular verb in "This is my
 husband", Yoruba's "benne" for sesame, and about eight "drag" conjugations in the
 new interface strings (Georgian, Uzbek, Urdu, Hungarian, Armenian, Lao, Khmer).
+
+## Native evidence for Batch AE
+
+Both apps were built from the pushed commit, 8182680a, and checked on it. **Android**,
+on the emulator: `check:android` 9 of 9. **iOS**, from a clean checkout on the Mac with
+the generated project deleted first: `check:ios` 16 of 16, its offline start served
+entirely from the bundle -- which, until the last commit, lacked the country names and
+would have left the app asking for `data/countries/index.json` with nothing to answer;
+the bundle's own offline test caught it. The browser suites on the final code: Chromium
+242 of 243 with one skipped, WebKit smoke 7 of 7, unit 703 of 703, the gate 11 of 11.
+Neither native script drags a button, builds a name from its sounds or picks a country;
+the evidence for those is the browser tests, in Chromium and in WebKit.
