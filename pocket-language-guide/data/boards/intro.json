@@ -116,13 +116,13 @@
           "id": "about",
           "kind": "submenu",
           "nodeId": "about",
-          "labelKey": "boards.intro.aboutTitle",
+          "labelKey": "boards.intro.me",
           "colour": "stay"
         }
       ]
     },
     "about": {
-      "titleKey": "boards.intro.aboutTitle",
+      "titleKey": "boards.intro.me",
       "buttons": [
         {
           "id": "nice",
@@ -175,11 +175,134 @@
           "colour": "stay"
         },
         {
+          "id": "student",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "about-me.i-am-a-student"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "retired",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "about-me.i-am-retired"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "business",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "border-customs.i-am-here-for-business"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "family",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "border-customs.i-am-visiting-family"
+          },
+          "colour": "stay"
+        },
+        {
           "id": "alone",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
             "id": "introductions.i-am-traveling-alone"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "work",
+          "kind": "submenu",
+          "nodeId": "work",
+          "labelKey": "boards.intro.work",
+          "colour": "stay"
+        },
+        {
+          "id": "people",
+          "kind": "submenu",
+          "nodeId": "people",
+          "labelKey": "boards.intro.people",
+          "colour": "stay"
+        }
+      ]
+    },
+    "work": {
+      "titleKey": "boards.intro.work",
+      "buttons": [
+        {
+          "id": "teacher",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "about-me.i-am-a-teacher"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "doctor",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "about-me.i-am-a-doctor"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "nurse",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "about-me.i-am-a-nurse"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "engineer",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "about-me.i-am-an-engineer"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "office",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "about-me.i-work-in-an-office"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "ownbusiness",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "about-me.i-have-my-own-business"
+          },
+          "colour": "stay"
+        }
+      ]
+    },
+    "people": {
+      "titleKey": "boards.intro.people",
+      "buttons": [
+        {
+          "id": "together",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "introductions.we-are-traveling-together"
           },
           "colour": "stay"
         },
@@ -193,11 +316,11 @@
           "colour": "stay"
         },
         {
-          "id": "together",
+          "id": "partner",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "introductions.we-are-traveling-together"
+            "id": "family-intros.this-is-my-partner"
           },
           "colour": "stay"
         },
@@ -234,6 +357,51 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "family-intros.this-is-my-daughter"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "mother",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "family-intros.this-is-my-mother"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "father",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "family-intros.this-is-my-father"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "brother",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "family-intros.this-is-my-brother"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "sister",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "family-intros.this-is-my-sister"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "colleague",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "family-intros.this-is-my-colleague"
           },
           "colour": "stay"
         }

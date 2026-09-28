@@ -34,6 +34,16 @@
           "colour": "move"
         },
         {
+          "id": "subway",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "transit-rides.where-is-the-subway-station"
+          },
+          "colour": "move",
+          "replySetId": "point-it-out"
+        },
+        {
           "id": "taxi",
           "kind": "submenu",
           "nodeId": "taxi",
@@ -44,25 +54,22 @@
           "id": "station",
           "kind": "submenu",
           "nodeId": "station",
-          "labelKey": "boards.transport.station",
+          "labelKey": "boards.transport.transit",
           "colour": "move"
         },
         {
-          "id": "onboard",
+          "id": "air",
           "kind": "submenu",
-          "nodeId": "onboard",
-          "labelKey": "boards.transport.onboard",
+          "nodeId": "air",
+          "labelKey": "boards.transport.air",
           "colour": "move"
         },
         {
-          "id": "subway",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "transit-rides.where-is-the-subway-station"
-          },
-          "colour": "move",
-          "replySetId": "point-it-out"
+          "id": "hitch",
+          "kind": "submenu",
+          "nodeId": "hitch",
+          "labelKey": "boards.transport.hitch",
+          "colour": "move"
         }
       ]
     },
@@ -160,7 +167,7 @@
       ]
     },
     "station": {
-      "titleKey": "boards.transport.stationTitle",
+      "titleKey": "boards.transport.transitTitle",
       "buttons": [
         {
           "id": "tickets",
@@ -221,12 +228,17 @@
           },
           "colour": "money",
           "replySetId": "yes-no-fact"
-        }
-      ]
-    },
-    "onboard": {
-      "titleKey": "boards.transport.onboardTitle",
-      "buttons": [
+        },
+        {
+          "id": "canuse",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "transit-rides.can-i-use-this-ticket"
+          },
+          "colour": "money",
+          "replySetId": "yes-no-fact"
+        },
         {
           "id": "direct",
           "kind": "message",
@@ -275,6 +287,60 @@
           },
           "colour": "alert",
           "replySetId": "point-it-out"
+        }
+      ]
+    },
+    "air": {
+      "titleKey": "boards.transport.airTitle",
+      "buttons": [
+        {
+          "id": "checkin",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "air-travel.where-is-check-in"
+          },
+          "colour": "move",
+          "replySetId": "point-it-out"
+        },
+        {
+          "id": "gate",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "air-travel.which-gate"
+          },
+          "colour": "move",
+          "replySetId": "platform"
+        },
+        {
+          "id": "security",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "air-travel.where-is-the-security-check"
+          },
+          "colour": "move",
+          "replySetId": "point-it-out"
+        },
+        {
+          "id": "passport",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "border-customs.here-is-my-passport"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "connecting",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "border-customs.i-have-a-connecting-flight"
+          },
+          "colour": "move",
+          "replySetId": "point-it-out"
         },
         {
           "id": "delayed",
@@ -285,6 +351,119 @@
           },
           "colour": "stay",
           "replySetId": "yes-no-fact"
+        },
+        {
+          "id": "window",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "air-travel.i-would-like-a-window-seat"
+          },
+          "colour": "stay",
+          "replySetId": "acknowledge"
+        },
+        {
+          "id": "aisle",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "air-travel.i-would-like-an-aisle-seat"
+          },
+          "colour": "stay",
+          "replySetId": "acknowledge"
+        },
+        {
+          "id": "baggage",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "border-customs.where-do-i-collect-my-baggage"
+          },
+          "colour": "move",
+          "replySetId": "point-it-out"
+        },
+        {
+          "id": "lostbag",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "air-travel.my-luggage-did-not-arrive"
+          },
+          "colour": "alert",
+          "replySetId": "acknowledge"
+        }
+      ]
+    },
+    "hitch": {
+      "titleKey": "boards.transport.hitchTitle",
+      "buttons": [
+        {
+          "id": "ride",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hitchhiking.can-you-give-me-a-ride"
+          },
+          "colour": "move",
+          "replySetId": "yes-no-fact"
+        },
+        {
+          "id": "whereto",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hitchhiking.where-are-you-going"
+          },
+          "colour": "move",
+          "replySetId": "point-it-out"
+        },
+        {
+          "id": "nexttown",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hitchhiking.i-only-need-to-go-to-the-next-town"
+          },
+          "colour": "move",
+          "replySetId": "acknowledge"
+        },
+        {
+          "id": "two",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hitchhiking.is-there-room-for-two"
+          },
+          "colour": "move",
+          "replySetId": "yes-no-fact"
+        },
+        {
+          "id": "fuel",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hitchhiking.i-can-pay-for-fuel"
+          },
+          "colour": "money",
+          "replySetId": "acknowledge"
+        },
+        {
+          "id": "stophere",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "taxi.please-stop-here"
+          },
+          "colour": "alert"
+        },
+        {
+          "id": "thanks",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hitchhiking.thank-you-for-the-ride"
+          },
+          "colour": "stay"
         }
       ]
     }

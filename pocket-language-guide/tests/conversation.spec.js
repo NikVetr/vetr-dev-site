@@ -1208,7 +1208,7 @@ test('converse opens the topics, not a board @smoke', async ({ page }) => {
   expect(await topics.allTextContents()).toEqual([
     'Emergency', 'Meeting people', 'Directions', 'Getting around',
     'Eating out', 'Shopping', 'Time', 'Massage and spa',
-    'Lodging', 'Sights and tickets', 'Pharmacy',
+    'Lodging', 'Sights and tickets', 'Outdoors', 'Pharmacy',
     // And last, the cell that makes one of the reader's own: a plus, and its name
     // for a screen reader only.
     '',
@@ -1319,8 +1319,7 @@ test('the beacon is seen from across a road, and stays under the flash limit', a
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=emergency');
   await expect(page.locator('.board-cell').first()).toBeVisible();
-  // The signals are one screen together, a tap from the first.
-  await page.locator('[data-button="signals"]').click();
+  // The signals are on the first screen, together at its end, away from the sentences.
   await expect(page.locator('.board-cell-beacon')).toHaveCount(3);
 
   await page.locator('[data-button="sos"]').click();
@@ -1698,7 +1697,7 @@ test('characters in a square script line up, and the punctuation sits outside th
     };
   });
 
-  await page.goto('/conversation.html?target=zh-Hans&source=en&board=emergency');
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=emergency&screen=medical');
   await expect(page.locator('.board-cell').first()).toBeVisible();
   await page.locator('[data-button="hospital"]').click();
   const han = await lines();
@@ -1710,7 +1709,7 @@ test('characters in a square script line up, and the punctuation sits outside th
 
   // **Not for a proportional script.** Aligning Latin lines buys a ragged right edge
   // and no column, because the characters are not on an em square to begin with.
-  await page.goto('/conversation.html?target=de&source=en&board=emergency');
+  await page.goto('/conversation.html?target=de&source=en&board=emergency&screen=medical');
   await expect(page.locator('.board-cell').first()).toBeVisible();
   await page.locator('[data-button="hospital"]').click();
   const latin = await lines();
@@ -1726,7 +1725,6 @@ test('the SOS screen has nothing in the middle of it', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=emergency');
   await expect(page.locator('.board-cell').first()).toBeVisible();
-  await page.locator('[data-button="signals"]').click();
   await page.locator('[data-button="sos"]').click();
   await expect(page.locator('.beacon-sos')).toBeVisible();
   const shape = await page.evaluate(() => {
@@ -1975,21 +1973,22 @@ test('the emergency topic is the red one, across the top when the count is odd',
     bg: getComputedStyle(el).backgroundColor, wide: el.getBoundingClientRect().width,
     grid: /** @type {HTMLElement} */ (el.parentElement).clientWidth, mark: Boolean(el.querySelector('.board-cell-topic')),
   }));
-  const even = await look();
-  expect(even.bg).toBe('rgb(179, 38, 30)');
+  const odd = await look();
+  expect(odd.bg).toBe('rgb(179, 38, 30)');
   // Every topic wears the silhouette of what it is about, drawn rather than fetched.
-  expect(even.mark).toBe(true);
-  await expect(page.locator('.board-cell .board-cell-topic')).toHaveCount(11);
-  // Eleven contexts and the cell that makes one: even, so there is no gap to fill.
-  expect(even.wide).toBeLessThan(even.grid * 0.6);
-  // One of the reader's own makes it odd, and the emergency one takes the first row.
+  expect(odd.mark).toBe(true);
+  await expect(page.locator('.board-cell .board-cell-topic')).toHaveCount(12);
+  // Twelve contexts and the cell that makes one: odd, and the emergency one takes the
+  // first row rather than leaving a gap at the foot.
+  expect(odd.wide).toBeGreaterThan(odd.grid * 0.9);
+  // One of the reader's own makes it even, and the emergency one is a cell like the rest.
   await page.locator('[data-button="add-context"]').click();
   await page.locator('dialog.context-ask input').fill('Hotel');
   await page.locator('dialog.context-ask').getByRole('button', { name: 'Save' }).click();
   await expect(page.locator('#board-title')).toHaveText('Hotel');
   await page.locator('#board-up').click();
   await expect(page.locator('.board-cell-own')).toBeVisible();
-  expect((await look()).wide).toBeGreaterThan(even.grid * 0.9);
+  expect((await look()).wide).toBeLessThan(odd.grid * 0.6);
 });
 
 test('a button that opens more buttons carries an arrow, and the list of contexts does not', async ({ page }) => {
@@ -2394,10 +2393,10 @@ test('on a board the search goes deeper in place, and Escape closes only the sea
   expect(await page.locator('#board-grid .board-cell').allTextContents()).toEqual(before);
   // A submenu found on this board opens its screen without leaving the page.
   await page.locator('#board-search').click();
-  await page.getByRole('searchbox').fill('signal for');
+  await page.getByRole('searchbox').fill('lost or');
   await page.locator('#board-grid .board-cell').first().click();
-  await expect(page.locator('.board-cell-beacon')).toHaveCount(3);
-  await expect(page).toHaveURL(/screen=signals/);
+  await expect(page.locator('[data-button="passport"]')).toBeVisible();
+  await expect(page).toHaveURL(/screen=lost/);
 });
 
 test('the pre-travel check tries every part of the pair and marks each one', async ({ page }) => {
@@ -2446,7 +2445,6 @@ test('red and blue lights turn the screen from one to the other, slowly', async 
   // The colours a passer-by reads as "help is needed here" -- held long enough each
   // that the change is well under one a second, far from the three-per-second line.
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=emergency');
-  await page.locator('[data-button="signals"]').click();
   await page.locator('[data-button="lights"]').click();
   const lights = page.locator('.beacon-lights');
   await expect(lights).toBeVisible();
@@ -2524,7 +2522,6 @@ test('Attract attention sounds a siren only when the reader has asked for one', 
   });
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=emergency');
   const log = () => page.evaluate(() => /** @type {any} */ (globalThis).sirenLog);
-  await page.locator('[data-button="signals"]').click();
   await page.locator('[data-button="attention"]').click();
   await expect(page.locator('.beacon-attention')).toBeVisible();
   expect((await log()).started).toBe(0);

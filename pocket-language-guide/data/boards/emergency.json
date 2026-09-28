@@ -91,30 +91,24 @@
           "colour": "money"
         },
         {
-          "id": "hospital",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "emergency-medical.where-is-the-nearest-hospital"
-          },
-          "colour": "move",
-          "replySetId": "hospital-where"
+          "id": "sos",
+          "kind": "beacon",
+          "beacon": "sos",
+          "labelKey": "boards.emergency.sos",
+          "colour": "alert"
         },
         {
-          "id": "whereami",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "lost-rescue.i-do-not-know-where-i-am"
-          },
-          "colour": "move",
-          "replySetId": "where-am-i"
+          "id": "attention",
+          "kind": "beacon",
+          "beacon": "attention",
+          "labelKey": "boards.emergency.attention",
+          "colour": "alert"
         },
         {
-          "id": "signals",
-          "kind": "submenu",
-          "nodeId": "signals",
-          "labelKey": "boards.emergency.signals",
+          "id": "lights",
+          "kind": "beacon",
+          "beacon": "lights",
+          "labelKey": "boards.emergency.lights",
           "colour": "alert"
         }
       ]
@@ -193,25 +187,6 @@
           "replySetId": "hurt"
         },
         {
-          "id": "diabetic",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "medical-conditions.i-am-diabetic"
-          },
-          "colour": "alert"
-        },
-        {
-          "id": "insulin",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "medical-conditions.i-need-insulin"
-          },
-          "colour": "alert",
-          "replySetId": "will-you"
-        },
-        {
           "id": "hospital2",
           "kind": "message",
           "phraseRef": {
@@ -232,11 +207,165 @@
           "replySetId": "will-you"
         },
         {
+          "id": "hospital",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "emergency-medical.where-is-the-nearest-hospital"
+          },
+          "colour": "move",
+          "replySetId": "hospital-where"
+        },
+        {
+          "id": "diabetes",
+          "kind": "submenu",
+          "nodeId": "diabetes",
+          "labelKey": "boards.emergency.diabetes",
+          "colour": "alert"
+        },
+        {
           "id": "conditions",
           "kind": "submenu",
           "nodeId": "conditions",
           "labelKey": "boards.emergency.conditions",
           "colour": "alert"
+        }
+      ]
+    },
+    "diabetes": {
+      "titleKey": "boards.emergency.diabetesTitle",
+      "buttons": [
+        {
+          "id": "diabetic",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "medical-conditions.i-am-diabetic"
+          },
+          "colour": "alert"
+        },
+        {
+          "id": "insulin",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "medical-conditions.i-need-insulin"
+          },
+          "colour": "alert",
+          "replySetId": "will-you"
+        },
+        {
+          "id": "low-sugar",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "medical-conditions.my-blood-sugar-is-low"
+          },
+          "colour": "alert"
+        },
+        {
+          "id": "sugar-juice",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "medical-conditions.please-give-me-sugar-or-juice"
+          },
+          "colour": "alert"
+        }
+      ]
+    },
+    "conditions": {
+      "titleKey": "boards.emergency.conditionsTitle",
+      "buttons": [
+        {
+          "id": "penicillin",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "medical-conditions.i-am-allergic-to-penicillin"
+          },
+          "colour": "alert"
+        },
+        {
+          "id": "nsaid",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen"
+          },
+          "colour": "alert"
+        },
+        {
+          "id": "injector",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "medical-conditions.i-carry-an-adrenaline-injector"
+          },
+          "colour": "alert"
+        },
+        {
+          "id": "pregnant",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "medical-conditions.i-am-pregnant"
+          },
+          "colour": "alert"
+        },
+        {
+          "id": "inject-thigh",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "medical-conditions.inject-it-into-my-outer-thigh"
+          },
+          "colour": "alert"
+        },
+        {
+          "id": "inhaler",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "medical-conditions.i-need-my-inhaler"
+          },
+          "colour": "alert"
+        },
+        {
+          "id": "thinners",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "medical-conditions.i-take-blood-thinners"
+          },
+          "colour": "alert"
+        },
+        {
+          "id": "heart",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "medical-conditions.i-have-a-heart-condition"
+          },
+          "colour": "alert"
+        },
+        {
+          "id": "epilepsy",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "medical-conditions.i-have-epilepsy"
+          },
+          "colour": "alert"
+        },
+        {
+          "id": "insurance",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "emergency-medical.i-have-travel-insurance"
+          },
+          "colour": "money"
         }
       ]
     },
@@ -362,145 +491,6 @@
           },
           "colour": "comm",
           "replySetId": "will-you"
-        }
-      ]
-    },
-    "conditions": {
-      "titleKey": "boards.emergency.conditionsTitle",
-      "buttons": [
-        {
-          "id": "penicillin",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "medical-conditions.i-am-allergic-to-penicillin"
-          },
-          "colour": "alert"
-        },
-        {
-          "id": "nsaid",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen"
-          },
-          "colour": "alert"
-        },
-        {
-          "id": "injector",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "medical-conditions.i-carry-an-adrenaline-injector"
-          },
-          "colour": "alert"
-        },
-        {
-          "id": "pregnant",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "medical-conditions.i-am-pregnant"
-          },
-          "colour": "alert"
-        },
-        {
-          "id": "inject-thigh",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "medical-conditions.inject-it-into-my-outer-thigh"
-          },
-          "colour": "alert"
-        },
-        {
-          "id": "inhaler",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "medical-conditions.i-need-my-inhaler"
-          },
-          "colour": "alert"
-        },
-        {
-          "id": "thinners",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "medical-conditions.i-take-blood-thinners"
-          },
-          "colour": "alert"
-        },
-        {
-          "id": "heart",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "medical-conditions.i-have-a-heart-condition"
-          },
-          "colour": "alert"
-        },
-        {
-          "id": "epilepsy",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "medical-conditions.i-have-epilepsy"
-          },
-          "colour": "alert"
-        },
-        {
-          "id": "low-sugar",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "medical-conditions.my-blood-sugar-is-low"
-          },
-          "colour": "alert"
-        },
-        {
-          "id": "sugar-juice",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "medical-conditions.please-give-me-sugar-or-juice"
-          },
-          "colour": "alert"
-        },
-        {
-          "id": "insurance",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "emergency-medical.i-have-travel-insurance"
-          },
-          "colour": "money"
-        }
-      ]
-    },
-    "signals": {
-      "titleKey": "boards.emergency.signalsTitle",
-      "buttons": [
-        {
-          "id": "sos",
-          "kind": "beacon",
-          "beacon": "sos",
-          "labelKey": "boards.emergency.sos",
-          "colour": "alert"
-        },
-        {
-          "id": "attention",
-          "kind": "beacon",
-          "beacon": "attention",
-          "labelKey": "boards.emergency.attention",
-          "colour": "alert"
-        },
-        {
-          "id": "lights",
-          "kind": "beacon",
-          "beacon": "lights",
-          "labelKey": "boards.emergency.lights",
-          "colour": "alert"
         }
       ]
     }

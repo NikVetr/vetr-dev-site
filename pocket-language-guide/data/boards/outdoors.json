@@ -1,0 +1,615 @@
+{
+  "schemaVersion": 1,
+  "id": "outdoors",
+  "titleKey": "boards.outdoors.title",
+  "rootNodeId": "main",
+  "nodes": {
+    "main": {
+      "buttons": [
+        {
+          "id": "trailhead",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hiking-parks.where-is-the-trailhead"
+          },
+          "colour": "move",
+          "replySetId": "point-it-out"
+        },
+        {
+          "id": "open",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "trail-conditions.is-the-trail-open"
+          },
+          "colour": "move",
+          "replySetId": "yes-no-fact"
+        },
+        {
+          "id": "beginners",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hiking-parks.is-this-trail-suitable-for-beginners"
+          },
+          "colour": "move",
+          "replySetId": "yes-no-fact"
+        },
+        {
+          "id": "easier",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hiking-parks.which-route-is-easier"
+          },
+          "colour": "move",
+          "replySetId": "point-it-out"
+        },
+        {
+          "id": "summit",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hiking-parks.how-long-to-the-summit"
+          },
+          "colour": "stay",
+          "replySetId": "hike-time"
+        },
+        {
+          "id": "beforedark",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "trail-conditions.can-we-return-before-dark"
+          },
+          "colour": "stay",
+          "replySetId": "yes-no-fact"
+        },
+        {
+          "id": "safetoday",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "weather.is-it-safe-today"
+          },
+          "colour": "alert",
+          "replySetId": "yes-no-fact"
+        },
+        {
+          "id": "rain",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "weather.will-it-rain"
+          },
+          "colour": "stay",
+          "replySetId": "yes-no-fact"
+        },
+        {
+          "id": "camp",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "outdoors.can-we-camp-here"
+          },
+          "colour": "move",
+          "replySetId": "permission"
+        },
+        {
+          "id": "swim",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "outdoors.is-it-safe-to-swim-here"
+          },
+          "colour": "alert",
+          "replySetId": "yes-no-fact"
+        },
+        {
+          "id": "trail",
+          "kind": "submenu",
+          "nodeId": "trail",
+          "labelKey": "boards.outdoors.trail",
+          "colour": "move"
+        },
+        {
+          "id": "lifts",
+          "kind": "submenu",
+          "nodeId": "lifts",
+          "labelKey": "boards.outdoors.lifts",
+          "colour": "move"
+        }
+      ]
+    },
+    "trail": {
+      "titleKey": "boards.outdoors.trailTitle",
+      "buttons": [
+        {
+          "id": "fullroute",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "trail-conditions.how-long-is-the-full-route"
+          },
+          "colour": "stay",
+          "replySetId": "hike-time"
+        },
+        {
+          "id": "viewpoint",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "hiking-parks.how-long-to-the-viewpoint"
+          },
+          "colour": "stay",
+          "replySetId": "hike-time"
+        },
+        {
+          "id": "sameway",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "trail-conditions.can-we-return-the-same-way"
+          },
+          "colour": "move",
+          "replySetId": "yes-no-fact"
+        },
+        {
+          "id": "steep",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "trail-conditions.is-the-route-steep"
+          },
+          "colour": "move",
+          "replySetId": "yes-no-fact"
+        },
+        {
+          "id": "slippery",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "trail-conditions.is-the-path-slippery"
+          },
+          "colour": "alert",
+          "replySetId": "yes-no-fact"
+        },
+        {
+          "id": "animals",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "outdoors.are-there-dangerous-animals-here"
+          },
+          "colour": "alert",
+          "replySetId": "yes-no-fact"
+        },
+        {
+          "id": "signal",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "trail-transport.is-there-cell-signal-here"
+          },
+          "colour": "stay",
+          "replySetId": "yes-no-fact"
+        },
+        {
+          "id": "map",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "trail-transport.do-you-have-a-map"
+          },
+          "colour": "stay",
+          "replySetId": "stock"
+        },
+        {
+          "id": "refill",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "trail-transport.where-can-we-refill-water"
+          },
+          "colour": "move",
+          "replySetId": "point-it-out"
+        },
+        {
+          "id": "cold",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "weather.how-cold-at-night"
+          },
+          "colour": "stay"
+        }
+      ]
+    },
+    "lifts": {
+      "titleKey": "boards.outdoors.liftsTitle",
+      "buttons": [
+        {
+          "id": "lastshuttle",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "trail-transport.what-time-is-the-last-shuttle"
+          },
+          "colour": "stay",
+          "replySetId": "clock"
+        },
+        {
+          "id": "cableway",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "trail-transport.when-does-the-cableway-stop"
+          },
+          "colour": "stay",
+          "replySetId": "clock"
+        },
+        {
+          "id": "queue",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "trail-transport.how-long-is-the-queue"
+          },
+          "colour": "stay",
+          "replySetId": "hike-time"
+        },
+        {
+          "id": "wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "trail-transport.how-long-is-the-wait"
+          },
+          "colour": "stay",
+          "replySetId": "hike-time"
+        },
+        {
+          "id": "buywater",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "trail-transport.where-can-we-buy-water"
+          },
+          "colour": "money",
+          "replySetId": "point-it-out"
+        }
+      ]
+    }
+  },
+  "replySets": {
+    "point-it-out": {
+      "buttons": [
+        {
+          "id": "this-way",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.this-way"
+          }
+        },
+        {
+          "id": "that-way",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.that-way"
+          }
+        },
+        {
+          "id": "go-straight",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.go-straight"
+          }
+        },
+        {
+          "id": "on-the-left",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.on-the-left"
+          }
+        },
+        {
+          "id": "on-the-right",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-directions.on-the-right"
+          }
+        },
+        {
+          "id": "it-is-over-there",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.it-is-over-there"
+          }
+        },
+        {
+          "id": "i-will-write-it-down",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-write-it-down"
+          }
+        },
+        {
+          "id": "i-will-show-you",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-show-you"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "yes-no-fact": {
+      "buttons": [
+        {
+          "id": "yes-right",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.yes-right"
+          }
+        },
+        {
+          "id": "no-not",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.no-not"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "permission": {
+      "buttons": [
+        {
+          "id": "okay-can",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.okay-can"
+          }
+        },
+        {
+          "id": "not-possible",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.not-possible"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "stock": {
+      "buttons": [
+        {
+          "id": "okay-can",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "quick-responses.okay-can"
+          }
+        },
+        {
+          "id": "we-do-not-have-it",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.we-do-not-have-it"
+          }
+        },
+        {
+          "id": "please-wait",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.please-wait"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "clock": {
+      "buttons": [
+        {
+          "id": "at",
+          "kind": "entry",
+          "entry": "clock"
+        },
+        {
+          "id": "i-will-write-it-down",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.i-will-write-it-down"
+          }
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "hike-time": {
+      "buttons": [
+        {
+          "id": "d15m",
+          "kind": "value",
+          "value": {
+            "kind": "duration",
+            "amount": 15,
+            "unit": "minute"
+          }
+        },
+        {
+          "id": "d30m",
+          "kind": "value",
+          "value": {
+            "kind": "duration",
+            "amount": 30,
+            "unit": "minute"
+          }
+        },
+        {
+          "id": "d1h",
+          "kind": "value",
+          "value": {
+            "kind": "duration",
+            "amount": 1,
+            "unit": "hour"
+          }
+        },
+        {
+          "id": "d2h",
+          "kind": "value",
+          "value": {
+            "kind": "duration",
+            "amount": 2,
+            "unit": "hour"
+          }
+        },
+        {
+          "id": "d3h",
+          "kind": "value",
+          "value": {
+            "kind": "duration",
+            "amount": 3,
+            "unit": "hour"
+          }
+        },
+        {
+          "id": "d5h",
+          "kind": "value",
+          "value": {
+            "kind": "duration",
+            "amount": 5,
+            "unit": "hour"
+          }
+        },
+        {
+          "id": "other",
+          "kind": "entry",
+          "entry": "duration"
+        },
+        {
+          "id": "i-do-not-know",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    }
+  }
+}

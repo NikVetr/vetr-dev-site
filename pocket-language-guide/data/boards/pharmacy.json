@@ -387,16 +387,6 @@
           },
           "colour": "stay",
           "replySetId": "noted"
-        },
-        {
-          "id": "safe-pregnancy",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "pharmacy-symptoms.is-this-safe-during-pregnancy"
-          },
-          "colour": "stay",
-          "replySetId": "yes-no"
         }
       ]
     },
