@@ -15,7 +15,7 @@ import { openAppearance, resumeSection, wireSiteMenu } from './site-menu.js';
 import { aboutSection, askCountry, askDetail, askDiet, readAbout, setDetail } from './about.js';
 import {
   loadText, loadLanguages, readerLanguage, registerOffline, showFatal,
-  deferUpdates, applyUpdateIfIdle, download, keepBoardOffline, accentFor,
+  deferUpdates, applyUpdateIfIdle, download, keepBoardOffline, keepOffline, accentFor,
 } from './app.js';
 import {
   loadCorpus, loadLanguage, loadVariants, fillLanguageSlots,
@@ -42,12 +42,13 @@ import {
 import { speech } from './platform/speech.js';
 import { keepAwake } from './platform/wake.js';
 import { startBeacon, stopBeacon } from './platform/beacon.js';
-import { notePlace, onBack } from './platform/shell.js';
+import { isNative, notePlace, onBack } from './platform/shell.js';
 import {
   read as readPersonal, placedOn, addPhrase, write as writePersonal, setOrder, arranged,
 } from './board-store.js';
 import { arrange } from './arrange.js';
 import { find, openSearch, ownButton, reachable } from './board-search.js';
+import { openTravelCheck, undrawable } from './travel-check.js';
 import { askChoices, askText } from './board-menu.js';
 import {
   openSpeakerSettings, readProfile, noticeFor, personalSection,
@@ -250,15 +251,16 @@ function inlineControl(label, hint, onOpen) {
  * @param {Awaited<ReturnType<typeof loadCorpus>>} corpus
  * @param {string} listener @param {string} owner
  * @param {Record<string,Record<string,string>>} listenerRows
+ * @param {(rel: string) => Promise<string>} [load]
  * @returns {Promise<((conceptId:string, ipa:string)=>string)|undefined>}
  */
-async function respellerFor(corpus, listener, owner, listenerRows) {
+async function respellerFor(corpus, listener, owner, listenerRows, load = loadText) {
   const accent = accentFor(corpus, owner);
   if (!corpus.respellRules.has(`${owner}__${accent}`)) return undefined;
   const [rules, curated] = await Promise.all([
-    loadRespellRules(loadText, owner, accent),
+    loadRespellRules(load, owner, accent),
     corpus.respellOverrides.has(`${listener}__${owner}__${accent}`)
-      ? loadRespellOverrides(loadText, listener, owner, accent)
+      ? loadRespellOverrides(load, listener, owner, accent)
       : /** @type {Record<string,string>} */ ({}),
   ]);
   const respeller = createRespeller({
@@ -349,8 +351,9 @@ function detailsFor(about, spellListener) {
 /**
  * @param {string} owner @param {string} listener
  * @param {{boards:{id:string, titleKey:string, listeners:string[], owners:string[], icon?:string, alert?:true}[]}} index
+ * @param {(code: string) => string} nameOf
  */
-async function showPicker(owner, listener, index) {
+async function showPicker(owner, listener, index, nameOf) {
   /** @type {Map<string,{title:string, icon?:string, alert?:true}>} */ const topics = new Map();
   for (const board of index.boards) {
     if (!serves(board, listener, owner)) continue;
@@ -361,7 +364,8 @@ async function showPicker(owner, listener, index) {
   document.title = t('board.docTitle');
   // The header's bars open the plain settings here -- the board's fuller dialog needs a
   // board -- with the way into rearranging the contexts.
-  wireSiteMenu(() => openAppearance([arrangeRow(() => arrangeGrid(CONTEXTS, drawTopics))]));
+  wireSiteMenu(() => openAppearance([arrangeRow(() => arrangeGrid(CONTEXTS, drawTopics)),
+    travelSection(() => travelChecks(listener, owner, index, nameOf))]));
   // **The context list has a parent too**, and it is the card this was opened from.
   // Without this the only way off the first screen of Converse was the browser's own
   // Back, which a reader who arrived from the app's own link does not think of as
@@ -453,16 +457,17 @@ async function showPicker(owner, listener, index) {
  * Everything `resolvePhrase` reads for a pair: the corpus and only the rows two
  * languages need, their language slots filled, and the respeller.
  * @param {string} listener @param {string} owner
+ * @param {(rel: string) => Promise<string>} [load]
  */
-async function pairContext(listener, owner) {
+async function pairContext(listener, owner, load = loadText) {
   // `loadCorpus` reads the registries and the concept bank; `loadLanguage` reads one
   // pack. Both come from `core/pack.js`, which is a 44KB data-only module --
   // statically imported, because making it lazy would buy nothing and a board cannot
   // start without it.
-  const corpus = await loadCorpus(loadText);
+  const corpus = await loadCorpus(load);
   const [listenerRows, ownerRows] = await Promise.all([
-    loadLanguage(loadText, listener, corpus.groups),
-    loadLanguage(loadText, owner, corpus.groups),
+    loadLanguage(load, listener, corpus.groups),
+    loadLanguage(load, owner, corpus.groups),
   ]);
   // **Seven concepts name a language, and the name comes from the pair.** The sheet
   // has always filled these; the board never did, so `do-you-speak-english` would
@@ -487,7 +492,7 @@ async function pairContext(listener, owner) {
     owner,
     listenerDir: dirOf(listener),
     ownerDir: dirOf(owner),
-    respell: await respellerFor(corpus, listener, owner, listenerRows),
+    respell: await respellerFor(corpus, listener, owner, listenerRows, load),
   };
 }
 
@@ -505,6 +510,141 @@ function wording(button, ctx, phrases) {
   if (own?.label) return own.label;
   if (button.phraseRef?.kind === 'custom') return own?.owner || null;
   return button.phraseRef ? resolvePhrase(button.phraseRef, ctx)?.owner.text ?? null : null;
+}
+
+/**
+ * The pre-travel checks for a pair, fresh for each run. Every file is loaded the way a
+ * board loads it and noted, so the last check can ask whether each one is kept on the
+ * device -- which a load alone cannot tell while there is a connection.
+ * @param {string} listener @param {string} owner
+ * @param {{boards:{id:string, listeners:string[], owners:string[]}[]}} index
+ * @param {(code: string) => string} nameOf
+ * @returns {import('./travel-check.js').Check[]}
+ */
+function travelChecks(listener, owner, index, nameOf) {
+  /** @type {Set<string>} */ const used = new Set();
+  const load = (/** @type {string} */ rel) => { used.add(rel); return loadText(rel); };
+  /** @type {(Awaited<ReturnType<typeof pairContext>> & import('../core/conversation.js').ResolveContext)|undefined} */ let pairing;
+  /** @type {import('../core/conversation.js').ResolvedPhrase[]} */ let said = [];
+  const loaded = () => {
+    if (!pairing) throw new Error(t('check.notTried'));
+    return pairing;
+  };
+  const count = (/** @type {number} */ n) => String(n);
+  return [
+    {
+      label: t('check.phrases', { listener: nameOf(listener), owner: nameOf(owner) }),
+      run: async () => {
+        pairing = await pairContext(listener, owner, load);
+        const { corpus } = pairing;
+        await Promise.all([
+          loadCatalogue(listener, load), loadCatalogue(owner, load),
+          ...[listener, owner].filter((code) => corpus.speakerAxes[code]?.length).map((code) => loadVariants(load, code)),
+        ]);
+        // The country names, given to the sentences that say one as a board gives them.
+        if (corpus.countries.has(owner) && corpus.countries.has(listener)) {
+          const [mine, theirs] = await Promise.all([loadCountries(load, owner), loadCountries(load, listener)]);
+          pairing.choices = { country: { owner: mine, listener: theirs } };
+        }
+        return { state: 'pass', detail: t('check.phrasesDetail', { count: count(Object.keys(pairing.listenerRows).length) }) };
+      },
+    },
+    {
+      label: t('check.contexts'),
+      run: async () => {
+        const ctx = loaded();
+        const boards = await Promise.all(index.boards.filter((b) => serves(b, listener, owner))
+          .map(async (b) => JSON.parse(await load(`data/boards/${b.id}.json`))));
+        const broken = boards.flatMap((b) => validateBoard(b).map((problem) => `${b.id}: ${problem}`));
+        if (broken.length) throw new Error(broken.join('; '));
+        const gaps = boards.reduce((n, b) => n + missingPhrases(b, ctx).length, 0);
+        said = boards.flatMap((b) => Object.values(b.nodes).flatMap((node) => node.buttons))
+          .filter((b) => b.kind === 'message' && b.phraseRef)
+          .map((b) => resolvePhrase(b.phraseRef, ctx))
+          .filter((p) => p !== null)
+          // One waiting for the reader's own detail is not a sentence yet.
+          .filter((p) => !p.unfilled);
+        const words = { contexts: count(boards.length), buttons: count(said.length), gaps: count(gaps) };
+        return gaps ? { state: 'warn', detail: t('check.contextsGaps', words) }
+          : { state: 'pass', detail: t('check.contextsDetail', words) };
+      },
+    },
+    {
+      label: t('check.writing', { language: nameOf(listener) }),
+      run: async () => {
+        loaded();
+        const chars = [...new Set(said.map((p) => p.listener.text).join(''))].filter((c) => /[\p{L}\p{N}]/u.test(c));
+        const font = `32px ${getComputedStyle(document.body).fontFamily}`;
+        await document.fonts.load(font, chars.join(''));
+        const missing = undrawable(chars, font);
+        return missing.length
+          ? { state: 'fail', detail: t('check.writingMissing', { count: count(missing.length), letters: missing.slice(0, 8).join(' ') }) }
+          : { state: 'pass', detail: t('check.writingDetail', { count: count(chars.length) }) };
+      },
+    },
+    {
+      label: t('check.sayIt'),
+      run: async () => {
+        loaded();
+        const bare = said.filter((p) => !p.listener.ipa && !p.listener.say).length;
+        const words = { count: count(said.length - bare), total: count(said.length) };
+        return bare ? { state: 'warn', detail: t('check.sayItGaps', words) } : { state: 'pass', detail: t('check.sayItDetail', words) };
+      },
+    },
+    {
+      label: t('check.voice', { language: nameOf(listener) }),
+      run: async () => {
+        // A browser can list its voices a moment after it is first asked.
+        for (let i = 0; i < 10 && speech.getCapabilities(listener).reason === 'loading'; i += 1) {
+          await new Promise((resolve) => { setTimeout(resolve, 150); });
+        }
+        const { voices, offline } = speech.getCapabilities(listener);
+        if (!voices.length) return { state: 'warn', detail: t('check.voiceNone') };
+        if (offline === 'local') return { state: 'pass', detail: t('check.voiceHere') };
+        return { state: 'warn', detail: t(offline === 'remote' ? 'check.voiceOnline' : 'check.voiceUnknown') };
+      },
+    },
+    {
+      label: t('check.saved'),
+      run: async () => {
+        if (isNative()) return { state: 'pass', detail: t('check.bundled') };
+        if (!navigator.serviceWorker?.controller) return { state: 'fail', detail: t('check.noWorker') };
+        /** @type {string[]} */ const missing = [];
+        for (const url of used) if (!(await caches.match(url, { ignoreSearch: true }))) missing.push(url);
+        return missing.length
+          ? { state: 'fail', detail: t('check.unsaved', { count: count(missing.length) }),
+            action: { label: t('check.saveNow'), run: () => keepOffline(missing) } }
+          : { state: 'pass', detail: t('check.savedDetail', { count: count(used.size) }) };
+      },
+    },
+  ];
+}
+
+/**
+ * The settings' way into the pre-travel check for the pair on screen.
+ * @param {() => import('./travel-check.js').Check[]} checks
+ */
+function travelSection(checks) {
+  const box = document.createElement('fieldset');
+  box.className = 'speaker-block';
+  const legend = document.createElement('legend');
+  legend.textContent = t('check.title');
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'btn board-arrange';
+  button.textContent = t('check.open');
+  button.addEventListener('click', () => {
+    button.closest('dialog')?.close();
+    openTravelCheck({
+      title: t('check.title'),
+      intro: t('check.intro'),
+      close: t('gallery.previewClose'),
+      checks,
+      words: { running: t('check.running'), pass: t('check.pass'), warn: t('check.warn'), fail: t('check.fail') },
+    });
+  });
+  box.append(legend, button);
+  return box;
 }
 
 /** @typedef {import('./board-search.js').Reached & {label: string}} Findable */
@@ -671,7 +811,7 @@ async function main() {
     }));
   }
 
-  if (!boardId) { await showPicker(owner, listener, index); return; }
+  if (!boardId) { await showPicker(owner, listener, index, nameOf); return; }
 
   // **A context of the reader's own** opens as a board built here: one node, the screen
   // they named, holding what they placed on it -- the path their screens inside a board
@@ -1308,6 +1448,7 @@ async function main() {
       }),
       themeSection(),
       ...resumeSection(),
+      travelSection(() => travelChecks(listener, owner, index, nameOf)),
       personalSection(personalWiring({
       save: download,
       // **What this build can actually show**, so an import naming a screen that is

@@ -2374,6 +2374,31 @@ test('on a board the search goes deeper in place, and Escape closes only the sea
   await expect(page).toHaveURL(/screen=signals/);
 });
 
+test('the pre-travel check tries every part of the pair and marks each one', async ({ page }) => {
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=emergency');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('#board-menu').click();
+  await page.getByRole('button', { name: 'Check that everything works offline' }).click();
+  const rows = page.locator('.travel-check-row');
+  await expect(rows).toHaveCount(6);
+  await expect(page.locator('.travel-check-running')).toHaveCount(0);
+  // Files and writing are this device's to pass, and a voice may not be installed. A
+  // context may hold a sentence not written yet in these languages and still open.
+  for (const i of [0, 2]) await expect(rows.nth(i)).toHaveClass(/travel-check-pass/);
+  await expect(rows.nth(1)).not.toHaveClass(/travel-check-fail/);
+  await expect(rows.nth(0).locator('.travel-check-mark')).toHaveText('✓');
+  await expect(rows.nth(1)).toContainText(/\d+ contexts and \d+ buttons/);
+});
+
+test('a letter this device has no glyph for is told from one it can draw', async ({ page }) => {
+  await page.goto('/conversation.html?target=zh-Hans&source=en');
+  const missing = await page.evaluate(async () => {
+    const { undrawable } = await import('./ui/travel-check.js');
+    return undrawable(['a', '医', '\u{10FFFC}'], '32px sans-serif');
+  });
+  expect(missing).toEqual(['\u{10FFFC}']);
+});
+
 test('changing a language keeps the screen the reader was on', async ({ page }) => {
   // The switch reloads the page for the new pair, and it came back at the board's
   // first screen; the screen rides in the address now, and in a reload.

@@ -11,7 +11,7 @@
 // have to be written by hand for a bare `<div>` pretending to be a popup.
 
 /** @param {string} tag @param {Record<string,string>} attrs @param {(Node|string)[]} kids */
-function el(tag, attrs = {}, kids = []) {
+export function el(tag, attrs = {}, kids = []) {
   const node = document.createElement(tag);
   for (const [k, v] of Object.entries(attrs)) {
     if (k === 'class') node.className = v;

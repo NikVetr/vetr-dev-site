@@ -457,7 +457,7 @@ function registerWorker() {
  * @param {boolean} [onlyMissing] skip what is already kept, instead of refreshing it
  * @returns {Promise<{ok:boolean, failed:string[], total:number}>}
  */
-async function keepOffline(urls, onlyMissing = false) {
+export async function keepOffline(urls, onlyMissing = false) {
   if (!('serviceWorker' in navigator)) throw new Error('this browser cannot save for offline');
   const registration = await navigator.serviceWorker.ready;
   return new Promise((resolve, reject) => {
