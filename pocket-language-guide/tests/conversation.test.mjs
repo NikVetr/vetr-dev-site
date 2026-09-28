@@ -123,6 +123,21 @@ test('a phrase resolves to both languages, with the listener text first', () => 
   assert.equal(got?.confidence, 2);
 });
 
+test('a slashed row says one reading, and its pronunciation says the same one', () => {
+  // "yes / right" is the concept's range, for the printed sheet; a button says the
+  // head word. The IPA and the respelling were left whole, so the owner's line read
+  // both readings under a sentence that showed one.
+  const range = {
+    ...ctx,
+    listenerRows: { ...ctx.listenerRows, 'a.yes': { text: 'ja / richtig', ipa: 'jaː / ʁɪçtɪç', confidence: '2' } },
+    ownerRows: { ...ctx.ownerRows, 'a.yes': { text: 'yes / right' } },
+    respell: (/** @type {string} */ _id, /** @type {string} */ ipa) => `<${ipa}>`,
+  };
+  const got = resolvePhrase({ kind: 'corpus', id: 'a.yes' }, range);
+  assert.deepEqual([got?.listener.text, got?.listener.ipa, got?.listener.say, got?.owner.text],
+    ['ja', 'jaː', '<jaː>', 'yes']);
+});
+
 test('a missing translation is unavailable, never quietly English', () => {
   // The failure the specification names twice. A board showing the owner's own
   // language to the listener has not degraded gracefully.
@@ -154,6 +169,11 @@ test('a fill-in says the reader\'s own detail in its slot, and waits blank witho
   assert.equal(said?.listener.say, 'waw jyaow Nikolai');
   assert.equal(said?.listener.ipa, 'wɔ tɕjɑʊ Nikolai');
   assert.equal(said?.owner.text, 'My name is Nikolai');
+  // Built from its sounds, it is written in the listener's letters and said from its
+  // IPA, while the owner reads it as typed -- in their gloss and their respelling line.
+  const heard = resolvePhrase(ref, { ...named, details: { name: 'Nikolai', 'name:listener': '尼古拉', 'name:ipa': 'nikəlaɪ' } });
+  assert.deepEqual([heard?.listener.text, heard?.listener.ipa, heard?.listener.say, heard?.owner.text],
+    ['我叫尼古拉', 'wɔ tɕjɑʊ nikəlaɪ', 'waw jyaow Nikolai', 'My name is Nikolai']);
   // A row with no slot cannot take a detail: unavailable, not the bare template.
   const flat = { ...named, ownerRows: { ...named.ownerRows, 'i.name': { text: 'My name' } } };
   assert.equal(resolvePhrase(ref, flat), null);
@@ -161,6 +181,31 @@ test('a fill-in says the reader\'s own detail in its slot, and waits blank witho
   const odd = structuredClone(board);
   odd.nodes.main.buttons.push({ id: 'age', kind: 'message', phraseRef: { kind: 'corpus', id: 'a.stop', fill: 'age' } });
   assert.ok(validateBoard(odd).some((p) => p.includes('fill age is not one of name')));
+});
+
+test('a chosen country is said in each side\'s own word for it, or not at all', () => {
+  // Chosen from a list, never typed: the owner reads their word, the listener theirs,
+  // and the owner's respelling line spells the listener's -- the word to be said.
+  const from = {
+    ...ctx,
+    corpus: { concepts: { ...ctx.corpus.concepts, 'i.from': { concept_id: 'i.from', applies_to: '' } } },
+    listenerRows: { ...ctx.listenerRows, 'i.from': { text: '我来自{}', ipa: 'wɔ laɪtsɯ {}', confidence: '2' } },
+    ownerRows: { ...ctx.ownerRows, 'i.from': { text: 'I am from {}' } },
+    respell: (/** @type {string} */ _id, /** @type {string} */ ipa) => ipa.replace('wɔ laɪtsɯ', 'waw lye-dzuh').replace('tɕjanata', 'jyah-nah-dah'),
+    choices: { country: {
+      owner: new Map([['CA', { name: 'Canada', sentence: 'Canada', ipa: '' }]]),
+      listener: new Map([['CA', { name: '加拿大', sentence: '加拿大', ipa: 'tɕjanata' }]]),
+    } },
+  };
+  const ref = { kind: /** @type {const} */ ('corpus'), id: 'i.from', fill: 'country' };
+  assert.equal(resolvePhrase(ref, from)?.unfilled, 'country');
+  const said = resolvePhrase(ref, { ...from, details: { country: 'CA' } });
+  assert.deepEqual([said?.listener.text, said?.listener.ipa, said?.listener.say, said?.owner.text],
+    ['我来自加拿大', 'wɔ laɪtsɯ tɕjanata', 'waw lye-dzuh jyah-nah-dah', 'I am from Canada']);
+  // A pair without the words, or a country one side has no word for, cannot say it:
+  // the owner's "Canada" in a Chinese sentence would be English standing in.
+  assert.equal(resolvePhrase(ref, { ...from, choices: undefined, details: { country: 'CA' } }), null);
+  assert.equal(resolvePhrase(ref, { ...from, details: { country: 'XK' } }), null);
 });
 
 test('a diet says every ticked sentence at once, joined as a person writes them', () => {

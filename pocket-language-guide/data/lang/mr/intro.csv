@@ -4,7 +4,7 @@ introductions.nice-to-meet-you,तुम्हाला भेटून आन�
 introductions.what-is-your-name,तुमचे नाव काय आहे?,,tumacē nāva kāya āhē?,tˈʊmcˌeː nˈaːv kˈaːj ˈaːheː,,2,mr-agent-v1;ipa=espeak
 introductions.we-are-traveling-together,आम्ही एकत्र प्रवास करत आहोत,,āmhī ēkatra pravāsa karata āhōta,ˈaːmhi eːkˈʌtɾə pɾəvˈaːs kˈʌɾət aːhˈoːt,,2,mr-agent-v1;ipa=espeak
 introductions.this-is-my-friend,हे माझे मित्र आहेत,,hē mājhē mitra āhēta,hˈeː mˈaːɟʰeː mˈɪtɾə aːhˈeːt,,2,mr-agent-v1;ipa=espeak
-introductions.i-am-from,मी {} चा आहे,मी {} ची आहे,mī {} cā āhē,mˈi {} cˈaː ˈaːheː,,2,mr-agent-v1;ipa=espeak
+introductions.i-am-from,माझा देश {} आहे,,mājhā dēśa {} āhē,mˈaːɟʰaː dˈeːʃ {} ˈaːheː,my country [is] {},2,"mr-agent-v1;rewritten for fill-in: चा/ची (genitive) requires the sāmānya rūp (oblique) of a preceding ā-final noun, e.g. अमेरिकेचा not अमेरिकाचा -- mr.wikipedia.org's own article title 'अमेरिकेची संयुक्त संस्थाने' confirms the oblique -एची form -- which a bare inserted country name cannot supply for the ~33% of names ending in आ; rewritten to a predicate nominative so देश (masculine, consonant-final, invariant) carries no case at all. The old text_alt (मी {} ची आहे, the feminine speaker-gender form) is dropped: चा/ची here agreed with an elided role noun standing for the speaker, and the new frame has no such agreement site.;ipa=espeak"
 introductions.where-are-you-from,तुम्ही कुठून आहात?,,tumhī kuṭhūna āhāta?,tˈʊmhi kʊʈʰˈuːn aːhˈaːt,,2,mr-agent-v1;ipa=espeak
 introductions.how-are-you,तुम्ही कसे आहात?,तुम्ही कशा आहात?,tumhī kasē āhāta?,tˈʊmhi kˈʌseː aːhˈaːt,to a woman: kashā,2,mr-agent-v1;ipa=espeak
 introductions.i-am-a-tourist,मी पर्यटक आहे,मी टूरिस्ट आहे,mī paryaṭaka āhē,mˈi pˈʌrjəʈˌək ˈaːheː,,2,mr-agent-v1;ipa=espeak

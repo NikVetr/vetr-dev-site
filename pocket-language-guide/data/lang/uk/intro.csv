@@ -4,7 +4,7 @@ introductions.nice-to-meet-you,Дуже приємно.,,Duzhe pryiemno.,dˈuʒ�
 introductions.what-is-your-name,Як вас звати?,,Yak vas zvaty?,jˈaɡ ʋˈaz zʋˈatɪ,,2,uk-agent-v1;ipa=espeak
 introductions.we-are-traveling-together,Ми подорожуємо разом.,,My podorozhuiemo razom.,mˈɪ podorˈoʒujɛmo rˈazom,,2,uk-agent-v1;ipa=espeak
 introductions.this-is-my-friend,Це мій друг.,Це моя подруга.,Tse mii druh.,tsˈɛ mˈiːj drˈuh,,2,uk-agent-v1;ipa=espeak
-introductions.i-am-from,Я з {}.,,Ya z {}.,jˈa z {},,2,uk-agent-v1;ipa=espeak
+introductions.i-am-from,Моя країна — {}.,,Moya krayina — {}.,mˈoja krajˈiːna {},"'My country is {}'; predicate nominative (zero-copula), so the slot needs no case -- unlike з (+genitive), the same defect Russian's из has",2,"uk-agent-v1;rewritten-for-fill-in=z governs the genitive; predicate nominative with an em dash needs no case, the same repair as ru;ipa=espeak"
 introductions.where-are-you-from,Звідки ви?,,Zvidky vy?,zʋˈiːtkɪ ʋˈɪ,,2,uk-agent-v1;ipa=espeak
 introductions.how-are-you,Як справи?,,Yak spravy?,jˈak sprˈaʋɪ,,2,uk-agent-v1;ipa=espeak
 introductions.i-am-a-tourist,Я турист.,Я туристка.,Ya turyst.,jˈa turˈɪst,,2,uk-agent-v1;ipa=espeak

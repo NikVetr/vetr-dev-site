@@ -2151,6 +2151,61 @@ test('a button that says your name asks for it once, says it, and a hold clears 
   await expect(page.locator('.board-message-text')).toHaveCount(0);
 });
 
+test('a name built from its sounds is written in the listener\'s letters, and as typed for the owner', async ({ page }) => {
+  // "Nikolai" is a string of foreign letters to a Japanese listener, and their phone's
+  // voice spells it or guesses. Built from its sounds, it is written to them in their
+  // own letters -- by the respeller that writes their sentences in the owner's letters,
+  // run the other way -- while the owner's button still says it as they typed it.
+  await page.goto('/conversation.html?target=ja&source=en&board=intro');
+  await page.locator('[data-button="about"]').click();
+  await page.locator('[data-button="myname"]').click();
+  const ask = page.locator('dialog.about-ask');
+  await ask.locator('input').fill('Nikolai');
+  await ask.locator('summary').click();
+  const key = (/** @type {string} */ sound) => ask.locator('.sound-key').filter({ has: page.locator('small').getByText(sound, { exact: true }) });
+  for (const sound of ['n', 'i', 'k', 'ə', 'l', 'aɪ']) await key(sound).click();
+  await expect(ask.locator('.sound-heard')).toHaveText('ニカライ');
+  // A sound picked out is replaced by the next key; the delete key takes the last.
+  await ask.locator('.sound-chip').nth(3).click();
+  await key('o').click();
+  await key('s').click();
+  await ask.getByRole('button', { name: 'Delete' }).click();
+  await expect(ask.locator('.sound-chip')).toHaveText(['n', 'i', 'k', 'o', 'l', 'aɪ']);
+  await expect(ask.locator('.sound-heard')).toHaveText('ニコライ');
+  await ask.getByRole('button', { name: 'Save' }).click();
+  const cell = page.locator('[data-button="myname"]');
+  await expect(cell.locator('.board-cell-label')).toHaveText('My name is Nikolai');
+  await cell.click();
+  await expect(page.locator('.board-message-text')).toContainText('ニコライ');
+  // A listener who reads the letters it was typed in reads it as typed.
+  await page.goto('/conversation.html?target=de&source=en&board=intro');
+  await page.locator('[data-button="about"]').click();
+  await page.locator('[data-button="myname"]').click();
+  await expect(page.locator('.board-message-text')).toContainText('Nikolai');
+});
+
+test('where you are from is chosen from every country, and said in the listener\'s word for it', async ({ page }) => {
+  // Every country and the continents, in the owner's own words, sorted as their
+  // language sorts; the listener is told in theirs. Held, it clears like the name.
+  await page.goto('/conversation.html?target=ja&source=en&board=intro');
+  await page.locator('[data-button="about"]').click();
+  const cell = page.locator('[data-button="from"]');
+  await expect(cell).toHaveClass(/board-cell-unset/);
+  await cell.click();
+  const ask = page.locator('dialog.about-country');
+  const choices = ask.locator('option');
+  expect(await choices.count()).toBe(251);
+  await expect(choices.nth(1)).toHaveText('Africa');
+  await ask.locator('select').selectOption('CA');
+  await ask.getByRole('button', { name: 'Save' }).click();
+  await expect(cell.locator('.board-cell-label')).toHaveText('I am from Canada');
+  await cell.click();
+  await expect(page.locator('.board-message-text')).toHaveText('カナダから来ました');
+  await dismiss(page);
+  await cell.click({ button: 'right' });
+  await expect(cell).toHaveClass(/board-cell-unset/);
+});
+
 test('a screen is rearranged by dragging, from the settings, and keeps its order', async ({ page }) => {
   // The board's order is its author's; the reader's is theirs. Settings open the mode,
   // a button picked up lands where it is let go, the arrow keys move one a place, and

@@ -498,15 +498,17 @@ async function keepOffline(urls, onlyMissing = false) {
  * who is speaking, which is 22 of 53. Asking for one that does not exist would have
  * the worker report a failed save, and leaving one out cost the German board its
  * offline visit -- `LoadError: data/lang/de/variants.csv: HTTP 504`.
- * @param {{groups:string[], target:string, source:string, variants?:string[]}} pair
+ * `countries` likewise: the languages whose country names the page loaded.
+ * @param {{groups:string[], target:string, source:string, variants?:string[], countries?:string[]}} pair
  */
-export function keepBoardOffline({ groups, target, source, variants = [] }) {
+export function keepBoardOffline({ groups, target, source, variants = [], countries = [] }) {
   return keepOffline([
     ...groups.flatMap((group) => [
       `data/lang/${target}/${group}.csv`,
       `data/lang/${source}/${group}.csv`,
     ]),
     ...variants.map((code) => `data/lang/${code}/variants.csv`),
+    ...countries.map((code) => `data/countries/${code}.csv`),
   ], true);
 }
 

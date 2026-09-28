@@ -30,6 +30,7 @@
     "ipa": "python3 scripts/build_ipa.py",
     "native": "python3 scripts/transliterate_native.py",
     "boards": "node scripts/build_board_index.mjs",
+    "countries": "node scripts/build_countries.mjs",
     "timezones": "node scripts/build_timezones.mjs"
   },
   "devDependencies": {

@@ -7,7 +7,7 @@
 
 import * as store from './platform/store.js';
 import { t } from './i18n.js';
-import { askChoices, askText } from './board-menu.js';
+import { askChoices, askSelect, askText, soundGrid } from './board-menu.js';
 
 const KEY = 'plg.about';
 
@@ -22,13 +22,22 @@ export function writeAbout(about) {
   return store.set(KEY, JSON.stringify(about));
 }
 
-/** Set one detail, or clear it with an empty value. @param {string} fact @param {string} value */
+/**
+ * Set one detail, or clear it with an empty value -- and with it the sounds it was
+ * built from, which describe that name and no other.
+ * @param {string} fact @param {string} value
+ */
 export function setDetail(fact, value) {
   const about = readAbout();
   if (value.trim()) about[fact] = value.trim();
-  else delete about[fact];
+  else { delete about[fact]; delete about[`${fact}_ipa`]; }
   return writeAbout(about);
 }
+
+/**
+ * What the name's sounds are built with, from the page that knows both languages.
+ * @typedef {{spellOwner:(ipa:string)=>string, spellListener:(ipa:string)=>string, say?:(text:string)=>void}} Sounds
+ */
 
 /**
  * The text field for one detail, labelled -- committing as it changes when given
@@ -52,17 +61,42 @@ function detailField(fact, onChange) {
 /**
  * Ask for one detail in a dialog of its own: what the first press of a button that
  * says it opens, so the reader is asked for exactly the thing they reached for.
- * @param {string} fact @param {() => void} onChange
+ *
+ * A name can also be built from its sounds, folded away under the field until it is
+ * wanted: a listener who reads another script then sees it in their own letters.
+ * @param {string} fact @param {() => void} onChange @param {Sounds} [sounds]
  */
-export function askDetail(fact, onChange) {
+export function askDetail(fact, onChange, sounds) {
+  const about = readAbout();
+  const grid = fact === 'name' && sounds ? soundGrid({
+    ipa: about.name_ipa ?? '', ...sounds, speakLabel: t('board.speak'), deleteLabel: t('editor.delete'),
+  }) : null;
+  let more;
+  if (grid) {
+    more = document.createElement('details');
+    more.className = 'about-sounds';
+    more.open = Boolean(about.name_ipa);
+    const summary = document.createElement('summary');
+    summary.textContent = t('about.sounds');
+    const hint = document.createElement('p');
+    hint.className = 'speaker-why';
+    hint.textContent = t('about.soundsHint');
+    more.append(summary, hint, grid.element);
+  }
   askText({
     label: t(`about.${fact}`),
     hint: t('about.kept'),
+    value: about[fact] ?? '',
     save: t('editor.save'),
     close: t('gallery.previewClose'),
     autocomplete: fact === 'name' ? 'name' : undefined,
     kind: 'about-ask',
-    onSave: (value) => { setDetail(fact, value); onChange(); },
+    more,
+    onSave: (value) => {
+      setDetail(fact, value);
+      if (grid && value) setDetail(`${fact}_ipa`, grid.value());
+      onChange();
+    },
   });
 }
 
@@ -86,11 +120,36 @@ export function askDiet(options, onChange) {
 }
 
 /**
+ * Ask where the reader is from, in their own language's words: the continents first,
+ * then every country as their language sorts it.
+ * @param {Map<string, import('../core/conversation.js').Choice>} names  @param {string} lang
+ * @param {() => void} onChange
+ */
+export function askCountry(names, lang, onChange) {
+  const collator = new Intl.Collator(lang);
+  const options = [...names].map(([value, choice]) => ({ value, label: choice.name }));
+  const continent = (/** @type {{value:string}} */ o) => /^\d/.test(o.value);
+  askSelect({
+    label: t('about.country'),
+    options: [{ value: '', label: '' }, ...options.filter(continent),
+      ...options.filter((o) => !continent(o)).sort((a, b) => collator.compare(a.label, b.label))],
+    value: readAbout().country ?? '',
+    hint: t('about.kept'),
+    save: t('editor.save'),
+    close: t('gallery.previewClose'),
+    kind: 'about-country',
+    onSave: (value) => { setDetail('country', value); onChange(); },
+  });
+}
+
+/**
  * The settings dialog's section: every detail, each changed where it stands.
  * @param {() => void} onChange
  * @param {{value:string, label:string}[]} [diet]  the diet choices, where a board can say them
+ * @param {Sounds} [sounds]  where a board can build the name from its sounds
+ * @param {() => void} [askFrom]  where the pair can say which country
  */
-export function aboutSection(onChange, diet) {
+export function aboutSection(onChange, diet, sounds, askFrom) {
   const box = document.createElement('section');
   box.className = 'speaker-block';
   const heading = document.createElement('h3');
@@ -100,6 +159,22 @@ export function aboutSection(onChange, diet) {
   kept.className = 'speaker-why';
   kept.textContent = t('about.kept');
   box.append(heading, detailField('name', onChange).label);
+  if (sounds) {
+    const build = document.createElement('button');
+    build.type = 'button';
+    build.className = 'chip';
+    build.textContent = t('about.sounds');
+    build.addEventListener('click', () => askDetail('name', onChange, sounds));
+    box.append(build);
+  }
+  if (askFrom) {
+    const from = document.createElement('button');
+    from.type = 'button';
+    from.className = 'chip';
+    from.textContent = t('about.country');
+    from.addEventListener('click', askFrom);
+    box.append(from);
+  }
   if (diet?.length) {
     const choose = document.createElement('button');
     choose.type = 'button';

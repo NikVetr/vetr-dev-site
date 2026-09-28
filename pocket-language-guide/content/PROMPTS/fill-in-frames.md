@@ -36,12 +36,37 @@ brief uses for its placeholders:
 A frame must still be a sentence a person says. Prefer a natural nominative frame over
 a colon; use the colon only where there is no natural one, and say so.
 
+## The country's words
+
+A country arrives from `data/countries/<code>.csv`, one row per country, territory
+and continent (250), with five columns:
+
+- `region` -- ISO 3166-1, or UN M49 for the six continents. Never edit.
+- `name` -- CLDR's name, written by `scripts/build_countries.mjs` and shown in the
+  owner's list. Never edit; the builder rewrites it.
+- `insert` -- **the form your frame takes where it is not the bare `name`**, and
+  empty everywhere else. This is the one exception to "the insert cannot inflect",
+  and it is for a handful of names, not for a case: English *the* United States,
+  *the* Netherlands, *the* Philippines; a sentence form for a name CLDR writes for a
+  menu (`Congo - Kinshasa`, `Bosnia & Herzegovina`). If most names would need an
+  insert -- because the frame governs a case, like Russian *из* + genitive -- change
+  the frame instead, with the dodges above.
+- `romanization` -- only the romanised packs (`zh-Hans` pinyin, `ja` Hepburn, `ko`
+  RR, `he` BGN, `am`), for every row, because their IPA is read off it; the romanisation
+  of the `insert` where there is one. Everyone else leaves it empty.
+- `ipa` -- the builder's. Leave it.
+
+**Read every row against your frame**, not only the famous countries: the plural
+names, the ones that take an article, the continents, the names with a dash, a
+bracket or an ampersand. Keep the file's `\r\n` line endings.
+
 ## What to check and how to change a row
 
 For each language, every row a fill-in button uses: `introductions.my-name-is` (the
-name) and `introductions.i-am-from` (a country, once the country detail exists). For
-each, decide whether the slot takes a bare nominative. If it does, leave the row. If it
-does not, rewrite the row with one of the dodges above, keeping:
+name) and `introductions.i-am-from` (a country, from the file above). For each, decide
+whether the slot takes a bare nominative -- for the country, the `name`, or the
+`insert` you give it. If it does, leave the row. If it does not, rewrite the row with
+one of the dodges above, keeping:
 
 - `{}` exactly once in the script cell, the romanisation cell and the IPA cell, in the
   same position in the sentence;
@@ -55,5 +80,7 @@ name frame like the country frame.
 ## Report
 
 Per language: each row checked, whether it passed, and for each rewrite the old row,
-the new row, the grammatical reason and its source. Quote the output of the checks the
-add-a-language brief lists, plus `python3 scripts/build_ipa.py --check --only <codes>`.
+the new row, the grammatical reason and its source; then every `insert` you wrote and
+why. Quote the output of the checks the add-a-language brief lists, plus
+`python3 scripts/build_ipa.py --check --only <codes>` and
+`node scripts/build_countries.mjs --check`.

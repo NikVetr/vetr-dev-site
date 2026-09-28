@@ -760,6 +760,26 @@ function applySplits(syllables, splits) {
 }
 
 /**
+ * A respeller that writes a name as running text, for the name-by-its-sounds
+ * detail: no syllable breaks and no stress, which a name inside a sentence carries
+ * neither of -- ニカライ, not ニ・カ・ライ, and Hindi without its stress mark.
+ *
+ * Bound to the IPA of the language the name's sounds come from, which is the owner's:
+ * the inventory predicates read it, and bound to the name alone a Russian reader was
+ * given нигелай for /nikəlaɪ/, the rules taking a lone /k/ for a language with no /g/.
+ * @param {any} rules  the reader's `data/respell/rules/<code>__<accent>.json`
+ * @param {string[]} ownerIpa  every IPA string of the owner's language
+ * @returns {(ipa: string) => string}
+ */
+export function nameRespeller(rules, ownerIpa) {
+  const respeller = createRespeller({
+    rules: { ...rules, policy: { ...rules.policy, syllable_separator: '' } },
+    targetIpa: ownerIpa,
+  });
+  return (ipa) => respeller.respell(ipa.replace(/[ˈˌ]/gu, ''));
+}
+
+/**
  * A respeller for one reader's language, bound to one language being learned.
  *
  * The binding matters: the rule table is target-independent, but three of its

@@ -2541,11 +2541,17 @@ def _lao_parses(s, i):
                 # a unit rule in 43 of 43 reader tables and dropping it would merge
                 # ຈະ with ຈາ in every reader's respelling.
                 coda = ipa_f or ("ʔ" if not son and not long_v and not fin else "")
+                # A second consonant cancelled after a live final is silent too:
+                # ເຟຣນຊ໌ "French", where CLDR keeps the English -nch. Kept in the
+                # romanisation, as a cancelled final is.
+                after = t + len(fin) + (1 if killed else 0)
+                silent = (s[after] if fin and not killed and after + 1 < len(s)
+                          and s[after + 1] == "\u0ecc" and s[after] in LAO_INITIALS else "")
                 yield ({"init": k, "pre": pre, "comb": comb, "tail": tail,
                         "tone_mark": tone_mark, "fin": fin, "cls": cls,
                         "ipa": ipa_c + ipa_v + coda + tone,
-                        "bgn": bgn_c + bgn_v + bgn_f},
-                       t + len(fin) + (1 if killed else 0))
+                        "bgn": bgn_c + bgn_v + bgn_f + (LAO_INITIALS[silent][1] if silent else "")},
+                       after + (2 if silent else 0))
 
 
 def lao_parse_word(w):
@@ -5534,19 +5540,84 @@ def language_name_ipa(locales, subjects, rows):
                 # the `ng` is /ŋ/, while `hangugeo` is 한국어 and its `ng` is not.
                 name = ko_romanization(names[locale][subject], name) or ""
             text[subject] = name
-        # Keyed on what `pieces` produces and not on the name, because that is what
-        # `transcribe` will be asked for: `espeak_lexicon` is a dict, so a name
-        # `clean` trims would miss its own entry and come back empty.
-        parts = {subject: pieces(name) for subject, name in text.items() if name}
-        transcribe, method = route(locale, [v for one in parts.values()
-                                            for kind, v in one if kind == "text"])
-        for subject, one in parts.items():
+        written.update({(locale, subject): ipa
+                        for subject, ipa in phonemise_names(locale, text).items()})
+    return written
+
+
+def phonemise_names(locale, texts):
+    """{key: ipa} for short proper names in one language, through its own route, with
+    no entry for a name the route refuses. The language names and the country names
+    are the same problem, and this is it."""
+    # Keyed on what `pieces` produces and not on the name, because that is what
+    # `transcribe` will be asked for: `espeak_lexicon` is a dict, so a name
+    # `clean` trims would miss its own entry and come back empty.
+    parts = {key: pieces(name) for key, name in texts.items() if name}
+    transcribe, method = route(locale, [v for one in parts.values()
+                                        for kind, v in one if kind == "text"])
+    written = {}
+    for key, one in parts.items():
+        # A name this route cannot read is refused, not a crash: CLDR's names are not
+        # written for the Lao parser, and an authored row still fails loudly upstream.
+        try:
             ipa = assemble([(kind, normalise(transcribe(value) or "", locale, value)
                              if kind == "text" else value)
                             for kind, value in one])
-            ipa = unicodedata.normalize("NFC", re.sub(r"\s+", " ", ipa).strip())
-            if ipa and not check_alphabet(ipa) and not check_route(ipa, method):
-                written[(locale, subject)] = ipa
+        except ValueError:
+            continue
+        ipa = unicodedata.normalize("NFC", re.sub(r"\s+", " ", ipa).strip())
+        if ipa and not check_alphabet(ipa) and not check_route(ipa, method):
+            written[key] = ipa
+    return written
+
+
+COUNTRIES = DATA / "countries"
+
+
+def country_ipa(locale, rows):
+    """{region: ipa} for one language's country names -- the form its "I am from"
+    frame takes where the file gives one, else the name -- read as the language names
+    are: the romanised packs off their `romanization` cell, the rest off the script."""
+    text = {}
+    for row in rows:
+        said = row["insert"] or row["name"]
+        if locale in ROMANISED:
+            said = row["romanization"]
+            if said and locale == "ko":
+                said = ko_romanization(row["insert"] or row["name"], said) or ""
+        text[row["region"]] = said
+    return phonemise_names(locale, text)
+
+
+def build_countries(codes, check, stale):
+    """The `ipa` column of data/countries/<code>.csv for `codes`, owned the way the
+    corpus column is: a name the route stops reading loses what the last run wrote.
+    Returns the IPA written, for the font check."""
+    written = []
+    for code in codes:
+        path = COUNTRIES / f"{code}.csv"
+        if not path.exists():
+            continue                     # a language CLDR does not speak
+        header, rows = load_rows(path)
+        columns = header[1]
+        ipa = country_ipa(code, [dict(zip(columns, fields)) for _, fields in rows])
+        region, cell = columns.index("region"), columns.index("ipa")
+        for index, (line, fields) in enumerate(rows):
+            value = ipa.get(fields[region], "")
+            if fields[cell] != value:
+                fields[cell] = value
+                rows[index] = (None, fields)
+        written.extend(ipa.values())
+        refused = sorted(r for r, fields in ((f[region], f) for _, f in rows) if not fields[cell])
+        if refused:
+            print(f"{code}: no IPA for {len(refused)} country name(s): {' '.join(refused)}")
+        text = write_rows(header, rows)
+        if text == path.read_bytes().decode("utf-8"):
+            continue
+        if check:
+            stale.append(str(path.relative_to(ROOT)))
+        else:
+            path.write_bytes(text.encode("utf-8"))
     return written
 
 
@@ -6802,6 +6873,8 @@ def main():
         else:
             NAMES.write_text(text, encoding="utf-8")
     repertoire.update("".join(names_ipa.values()))
+    # The country names, the same way: only this run's locales.
+    repertoire.update("".join(build_countries(codes, args.check, stale)))
 
     undrawable = font_gap(repertoire)
     # `syl` is the headline quality number and the cheapest one available: how often

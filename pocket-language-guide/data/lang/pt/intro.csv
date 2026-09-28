@@ -4,7 +4,7 @@ introductions.nice-to-meet-you,Muito prazer,,mwˈiŋtʊ prazˈer,,2,pt-agent-v1;
 introductions.what-is-your-name,Como se chama?,,kˌomʊ sy ʃˈɐ̃mæ,,2,pt-agent-v1;ipa=espeak
 introductions.we-are-traveling-together,Viajamos juntos,,vˌiaʒˈɐ̃mʊz ʒˈũŋtʊs,,2,pt-agent-v1;ipa=espeak
 introductions.this-is-my-friend,Este é o meu amigo,Esta é a minha amiga,ˌestʃy ɛ ʊ meʊ ˌæmˈiɡʊ,,2,pt-agent-v1;ipa=espeak
-introductions.i-am-from,Sou de {},,sow dʒy {},,2,pt-agent-v1;ipa=espeak
+introductions.i-am-from,Venho deste país: {}.,,vˈeɲʊ dˈestʃy paˈis {},"'I come from this country: {}'; most country names take the article after de (do Brasil, da Espanha, dos Estados Unidos), so the case is fixed on 'deste país' and the name follows as a label",2,"pt-agent-v1;rewritten-for-fill-in=Ciberduvidas ('O artigo definido e o nome dos paises'): most Portuguese country names take the gendered article, a handful (Portugal, Mocambique, Cuba...) do not, so no single bare frame is safe; 'deste pais' fixes the preposition once;ipa=espeak"
 introductions.where-are-you-from,De onde é?,,dʒj ˌoŋdʒj ɛ,,2,pt-agent-v1;ipa=espeak
 introductions.how-are-you,Como está?,Tudo bem?,kˌomʊ estˌa,,2,pt-agent-v1;ipa=espeak
 introductions.i-am-a-tourist,Sou turista,,sow tˌuɾˈistæ,,2,pt-agent-v1;ipa=espeak

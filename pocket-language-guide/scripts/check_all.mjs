@@ -58,6 +58,7 @@ const checks = [
   { name: 'shell', cmd: 'node', args: ['scripts/build_shell.mjs', '--check'] },
   { name: 'publish', cmd: 'node', args: ['scripts/check_publish_boundary.mjs'] },
   { name: 'boards', cmd: 'node', args: ['scripts/build_board_index.mjs', '--check'] },
+  { name: 'countries', cmd: 'node', args: ['scripts/build_countries.mjs', '--check'] },
   { name: 'i18n', cmd: 'node', args: ['scripts/check_i18n.mjs', '--check'] },
   { name: 'native', cmd: 'python3', args: ['scripts/transliterate_native.py', '--check'] },
   { name: 'ipa', cmd: 'python3', args: ['scripts/build_ipa.py', '--check', '--only', systemVoices()] },

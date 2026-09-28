@@ -140,14 +140,16 @@ const hintLine = (hint) => (hint ? [el('p', { class: 'speaker-why', text: hint }
  * @param {string} [config.hint]   a line under the field
  * @param {string} [config.autocomplete]
  * @param {string} [config.kind]   a class for the dialog, for tests and styles
+ * @param {HTMLElement} [config.more]  more of the form, above Save
  */
-export function askText({ label, save, close, onSave, value = '', hint, autocomplete, kind = '' }) {
+export function askText({ label, save, close, onSave, value = '', hint, autocomplete, kind = '', more }) {
   const input = /** @type {HTMLInputElement} */ (el('input', { type: 'text' }));
   input.value = value;
   if (autocomplete) input.setAttribute('autocomplete', autocomplete);
   formDialog({
     kind, close, save, focus: input,
-    body: [el('label', { class: 'about-field' }, [el('span', { text: label }), input]), ...hintLine(hint)],
+    body: [el('label', { class: 'about-field' }, [el('span', { text: label }), input]), ...hintLine(hint),
+      ...(more ? [more] : [])],
     onSubmit: () => onSave(input.value.trim()),
   });
 }
@@ -183,3 +185,92 @@ export function askChoices({ label, options = [], groups, chosen, save, close, o
   });
 }
 
+/**
+ * Ask for one of a long list, in a dialog of its own: a native select, which a phone
+ * draws as its own scrolling picker and a keyboard can type its way down.
+ * @param {object} config
+ * @param {string} config.label  @param {{value:string, label:string}[]} config.options
+ * @param {string} [config.value]  chosen to begin with
+ * @param {string} config.save  @param {string} config.close
+ * @param {(value:string) => void} config.onSave
+ * @param {string} [config.hint]  @param {string} [config.kind]
+ */
+export function askSelect({ label, options, value = '', save, close, onSave, hint, kind = '' }) {
+  const select = /** @type {HTMLSelectElement} */ (el('select'));
+  select.append(...options.map((o) => new Option(o.label, o.value, false, o.value === value)));
+  formDialog({
+    kind, close, save, focus: select,
+    body: [el('label', { class: 'about-field' }, [el('span', { text: label }), select]), ...hintLine(hint)],
+    onSubmit: () => onSave(select.value),
+  });
+}
+
+/** The sounds a name is built from: most names' sounds in most languages, not IPA's whole chart. */
+const SOUNDS = ['p', 'b', 't', 'd', 'k', 'ɡ', 'm', 'n', 'ŋ', 'f', 'v', 's', 'z', 'ʃ', 'ʒ', 'x', 'h',
+  'tʃ', 'dʒ', 'ts', 'l', 'r', 'ɾ', 'j', 'w', 'θ', 'ð',
+  'i', 'ɪ', 'e', 'ɛ', 'a', 'ɑ', 'ɔ', 'o', 'ʊ', 'u', 'ə', 'y', 'ø', 'aɪ', 'aʊ', 'eɪ', 'oʊ', 'ɔɪ'];
+const VOWEL = /^[iɪeɛaɑɔoʊuəyø]/u;
+/** Longest first, so a kept name splits back into the keys it was built from. */
+const LONGEST = [...SOUNDS].sort((a, b) => b.length - a.length);
+
+/**
+ * A name built from its sounds, for a listener who reads another script.
+ *
+ * A key per sound, labelled in the owner's own letters -- the sound in a syllable,
+ * since a lone consonant spells as nothing -- with the IPA under it. The sounds so far
+ * sit above; one picked out is replaced by the next key or deleted. Under them, the
+ * name as the listener will read it, and every key and the whole name are said in the
+ * listener's voice: what the owner hears is what the listener's phone will say.
+ * @param {object} config
+ * @param {string} config.ipa  the sounds so far
+ * @param {(ipa:string) => string} config.spellOwner  @param {(ipa:string) => string} config.spellListener
+ * @param {(text:string) => void} [config.say]  the listener's voice, where this device has one
+ * @param {string} config.speakLabel  @param {string} config.deleteLabel
+ * @returns {{element: HTMLElement, value: () => string}}
+ */
+export function soundGrid({ ipa, spellOwner, spellListener, say, speakLabel, deleteLabel }) {
+  /** @type {string[]} */ const sounds = [];
+  for (let i = 0; i < ipa.length;) {
+    const sound = LONGEST.find((s) => ipa.startsWith(s, i)) ?? ipa[i];
+    sounds.push(sound);
+    i += sound.length;
+  }
+  let picked = -1;
+  const built = el('div', { class: 'sound-built' });
+  const heard = el('span', { class: 'sound-heard' });
+  const speak = /** @type {HTMLButtonElement} */ (el('button', { type: 'button', class: 'btn', text: speakLabel }));
+  speak.hidden = !say;
+  speak.addEventListener('click', () => say?.(heard.textContent ?? ''));
+  const erase = el('button', { type: 'button', class: 'btn sound-delete', 'aria-label': deleteLabel, text: '\u232b' });
+  const draw = () => {
+    built.replaceChildren(...sounds.map((sound, k) => {
+      const chip = el('button', { type: 'button', class: 'sound-chip', text: sound, 'aria-pressed': String(k === picked) });
+      chip.addEventListener('click', () => { picked = picked === k ? -1 : k; draw(); });
+      return chip;
+    }), erase);
+    heard.textContent = spellListener(sounds.join(''));
+    speak.disabled = !sounds.length;
+  };
+  erase.addEventListener('click', () => {
+    sounds.splice(picked >= 0 ? picked : sounds.length - 1, 1);
+    picked = -1;
+    draw();
+  });
+  const keys = SOUNDS.map((sound) => {
+    const sample = VOWEL.test(sound) ? sound : sound === 'ŋ' ? `a${sound}` : `${sound}a`;
+    const key = el('button', { type: 'button', class: 'sound-key' },
+      [el('span', { text: spellOwner(sample) || sound }), el('small', { text: sound })]);
+    key.addEventListener('click', () => {
+      if (picked >= 0) sounds[picked] = sound;
+      else sounds.push(sound);
+      picked = -1;
+      draw();
+      say?.(spellListener(sample));
+    });
+    return key;
+  });
+  draw();
+  const element = el('div', { class: 'sound-builder' }, [
+    built, el('p', { class: 'sound-line' }, [heard, speak]), el('div', { class: 'sound-keys' }, keys)]);
+  return { element, value: () => sounds.join('') };
+}

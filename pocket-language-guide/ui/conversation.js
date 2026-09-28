@@ -12,16 +12,16 @@
 // downloads is the corpus rows for two languages and a JSON file.
 
 import { openAppearance, resumeSection, wireSiteMenu } from './site-menu.js';
-import { aboutSection, askDetail, askDiet, readAbout, setDetail } from './about.js';
+import { aboutSection, askCountry, askDetail, askDiet, readAbout, setDetail } from './about.js';
 import {
   loadText, loadLanguages, readerLanguage, registerOffline, showFatal,
   deferUpdates, applyUpdateIfIdle, download, keepBoardOffline, accentFor,
 } from './app.js';
 import {
   loadCorpus, loadLanguage, loadVariants, fillLanguageSlots,
-  loadRespellRules, loadRespellOverrides,
+  loadRespellRules, loadRespellOverrides, loadCountries,
 } from '../core/pack.js';
-import { createRespeller } from '../core/respell.js';
+import { createRespeller, nameRespeller } from '../core/respell.js';
 import { variantKey } from '../core/speaker.js';
 import {
   validateBoard, resolvePhrase, missingPhrases, reduce, openBoard, currentNode, DIET, joinSentences,
@@ -300,6 +300,51 @@ function arrangeGrid(at, redraw) {
 }
 
 /**
+ * A name's sounds in each side's letters: the owner's, labelling the keys they build
+ * it with, and the listener's, writing it to them. Both bound to the owner's IPA,
+ * because the name's sounds are the owner's language's.
+ * @param {Awaited<ReturnType<typeof loadCorpus>>} corpus
+ * @param {string} listener @param {string} owner
+ * @param {Record<string,Record<string,string>>} ownerRows
+ */
+async function nameSpellers(corpus, listener, owner, ownerRows) {
+  const ownerIpa = Object.values(ownerRows).map((row) => (row.ipa ?? '').trim()).filter(Boolean);
+  const spell = async (/** @type {string} */ code) => {
+    const accent = accentFor(corpus, code);
+    return corpus.respellRules.has(`${code}__${accent}`)
+      ? nameRespeller(await loadRespellRules(loadText, code, accent), ownerIpa) : undefined;
+  };
+  const [spellOwner, spellListener] = await Promise.all([spell(owner), spell(listener)]);
+  return spellOwner && spellListener ? { spellOwner, spellListener } : undefined;
+}
+
+/** The scripts the languages here are written in, to tell whether two strings share one. */
+const SCRIPTS = ['Latin', 'Cyrillic', 'Greek', 'Armenian', 'Georgian', 'Hebrew', 'Arabic', 'Ethiopic',
+  'Devanagari', 'Bengali', 'Gurmukhi', 'Gujarati', 'Oriya', 'Tamil', 'Telugu', 'Kannada', 'Malayalam',
+  'Thai', 'Lao', 'Khmer', 'Hangul', 'Hiragana', 'Katakana', 'Han']
+  .map((name) => ({ name, test: new RegExp(`\\p{Script=${name}}`, 'u') }));
+const scriptOf = (/** @type {string} */ text) => SCRIPTS.find((s) => s.test.test(text))?.name ?? '';
+
+/**
+ * The reader's details as the listener reads and hears them. A name built from its
+ * sounds is said from its IPA, and written in the listener's letters where those are
+ * not the letters it was typed in: ニカライ for a Japanese listener, but "Nikolai"
+ * still for a German one, whose letters would only spell it worse.
+ * @param {Record<string,string>} about @param {((ipa:string) => string)|undefined} spellListener
+ * @returns {Record<string,string>}
+ */
+function detailsFor(about, spellListener) {
+  const ipa = about.name_ipa;
+  if (!about.name || !ipa || !spellListener) return about;
+  const written = spellListener(ipa);
+  return {
+    ...about,
+    'name:ipa': ipa,
+    ...(written && scriptOf(written) !== scriptOf(about.name) ? { 'name:listener': written } : {}),
+  };
+}
+
+/**
  * @param {string} owner @param {string} listener
  * @param {{boards:{id:string, titleKey:string, listeners:string[], owners:string[], icon?:string, alert?:true}[]}} index
  */
@@ -502,10 +547,26 @@ async function main() {
     listenerDir: dirOf(listener),
     ownerDir: dirOf(owner),
     respell: await respellerFor(corpus, listener, owner, listenerRows),
-    details: readAbout(),
   };
+  // Each side's word for every country, where both languages have them: the owner
+  // chooses from theirs and the listener is told in theirs.
+  // Asked for only where this board says it: the settings offer the detail on a board
+  // with a button that uses it, not on every one.
+  const saysCountry = Object.values(board.nodes).some((n) => n.buttons.some(
+    (/** @type {import('../core/conversation.js').BoardButton} */ b) => b.phraseRef
+      && 'fill' in b.phraseRef && b.phraseRef.fill === 'country'));
+  const worded = saysCountry && corpus.countries.has(owner) && corpus.countries.has(listener);
+  if (worded) {
+    const [mine, theirs] = await Promise.all([loadCountries(loadText, owner), loadCountries(loadText, listener)]);
+    ctx.choices = { country: { owner: mine, listener: theirs } };
+  }
+  const askFrom = worded
+    ? () => askCountry(/** @type {NonNullable<typeof ctx.choices>} */ (ctx.choices).country.owner, owner, detailsChanged)
+    : undefined;
+  const spellers = await nameSpellers(corpus, listener, owner, ownerRows);
+  ctx.details = detailsFor(readAbout(), spellers?.spellListener);
   /** Re-read the reader's details after they change, and redraw with them. */
-  const detailsChanged = () => { ctx.details = readAbout(); paint(); };
+  const detailsChanged = () => { ctx.details = detailsFor(readAbout(), spellers?.spellListener); paint(); };
   /** @param {import('../core/conversation.js').BoardButton} button */
   const fillOf = (button) => (button.phraseRef?.kind === 'diet' ? 'diet'
     : button.phraseRef && 'fill' in button.phraseRef ? button.phraseRef.fill : undefined);
@@ -521,6 +582,17 @@ async function main() {
   let display = readDisplay();
   // Which voice reads the listener's sentence, when the reader has opinions.
   let chosenVoice = readVoice(listener);
+  /**
+   * What the name's sounds are built with, asked for when a dialog opens: its keys and
+   * the whole name speak only where this device has a voice for the listener.
+   * @returns {import('./about.js').Sounds|undefined}
+   */
+  const sounds = () => spellers && {
+    ...spellers,
+    say: canSpeak ? (text) => {
+      speech.speak({ text, locale: listener, voiceId: chosenVoice || undefined }).catch((error) => console.warn(error));
+    } : undefined,
+  };
 
   // **Whose voice the outgoing messages are in.** Fetched for whichever of the two
   // languages declares an axis at all — usually neither, and never more than two
@@ -816,7 +888,8 @@ async function main() {
           // sentence with a hole in it.
           const unfilled = phraseOf(button)?.unfilled;
           if (unfilled === 'diet') { askDiet(dietChoices(), detailsChanged); return; }
-          if (unfilled) { askDetail(unfilled, detailsChanged); return; }
+          if (unfilled === 'country') { askFrom?.(); return; }
+          if (unfilled) { askDetail(unfilled, detailsChanged, sounds()); return; }
           // **Not a state change, and deliberately not part of the board's own
           // machine.** A beacon is not something being said -- there is no message,
           // no reply, nothing to return from -- so it takes over the screen and hands
@@ -1070,7 +1143,7 @@ async function main() {
     profile,
     onChange: (next) => { profile = next; voice(); sayStatus(); paint(); },
     extra: [arrangeRow(() => arrangeGrid(`${boardId}/${state.path.at(-1)}`, () => { personal = readPersonal(); paint(); })),
-      aboutSection(detailsChanged, dietChoices()),
+      aboutSection(detailsChanged, dietChoices(), sounds(), askFrom),
       displaySection(display, (next) => { display = next; paint(); }),
       voiceSection({
         lang: listener,
@@ -1213,6 +1286,7 @@ async function main() {
     // The keys of the table this page already built, so the list is the files that
     // were really fetched rather than a guess at which languages have one.
     variants: Object.keys(variants),
+    countries: worded ? [listener, owner] : [],
   }).catch(() => {});
 }
 

@@ -149,6 +149,16 @@
           "replySetId": "understood"
         },
         {
+          "id": "from",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "introductions.i-am-from",
+            "fill": "country"
+          },
+          "colour": "stay"
+        },
+        {
           "id": "tourist",
           "kind": "message",
           "phraseRef": {

@@ -89,6 +89,11 @@ export async function loadCorpus(loadText) {
   const respellRules = new Set(
     /** @type {string[]} */ (JSON.parse(await loadText('data/respell/rules/index.json'))),
   );
+  // Which languages can name every country, for the "I am from" detail: every one CLDR
+  // speaks, which leaves out the two constructed languages and Morse.
+  const countries = new Set(
+    /** @type {string[]} */ (JSON.parse(await loadText('data/countries/index.json'))),
+  );
   // The key to the *romanisation* column, one line per (target, system), for the
   // `legend` head slot. Keyed on the pair rather than on the system alone because
   // `bgn` names two different systems in `languages.csv`: Russian's ʼ ˮ ë
@@ -128,6 +133,7 @@ export async function loadCorpus(loadText) {
     coverage,
     respellOverrides,
     respellRules,
+    countries,
     languageNames,
     romanLegends,
     paper,
@@ -407,6 +413,18 @@ function regionName(code, locale, fallback) {
  */
 export async function loadRespellRules(loadText, source, accent) {
   return JSON.parse(await loadText(`data/respell/rules/${source}__${accent}.json`));
+}
+
+/**
+ * One language's word for every country and continent, by region code: CLDR's name
+ * for a list, the form its "I am from" frame takes, and that form's IPA.
+ * @param {LoadText} loadText @param {string} code
+ * @returns {Promise<Map<string, import('./conversation.js').Choice>>}
+ */
+export async function loadCountries(loadText, code) {
+  const file = `data/countries/${code}.csv`;
+  return new Map(parseTable(await loadText(file), file)
+    .map((row) => [row.region, { name: row.name, sentence: row.insert || row.name, ipa: row.ipa }]));
 }
 
 /**

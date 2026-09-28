@@ -4,7 +4,7 @@ introductions.nice-to-meet-you,Enchanté,Enchantée,ɑ̃ʃɑ̃tˈe,,2,fr-agent-v
 introductions.what-is-your-name,Comment vous appelez-vous ?,,kɔmɑ̃ vuz aplevˈu,,2,fr-agent-v1;ipa=espeak
 introductions.we-are-traveling-together,Nous voyageons ensemble,,nu vwajaʒɔ̃z ɑ̃sˈɑ̃bl,,2,fr-agent-v1;ipa=espeak
 introductions.this-is-my-friend,Voici mon ami,mon amie,vwasi mɔ̃n amˈi,,2,fr-agent-v1;ipa=espeak
-introductions.i-am-from,Je viens de {},,ʒə vjɛ̃ də {},,2,fr-agent-v1;ipa=espeak
+introductions.i-am-from,Je viens de ce pays : {}.,,ʒə vjɛ̃ də sə pɛˈi {},"'I come from this country: {}'; de contracts with a country's own gender/number (du Japon, des Pays-Bas, d'Italie), which would need most names inflected, so the case is fixed on 'pays' and the name follows as a label",2,"fr-agent-v1;rewritten-for-fill-in=de + country needs du/des/d' for most names depending on gender and number (Bescherelle: pays masculins/feminins/pluriels apres de), so the preposition is fixed on 'ce pays' and the bare name is given as an appositive after the colon;ipa=espeak"
 introductions.where-are-you-from,D'où venez-vous ?,,du vənevˈu,,2,fr-agent-v1;ipa=espeak
 introductions.how-are-you,Comment allez-vous ?,,kɔmɑ̃ alevˈu,,2,fr-agent-v1;ipa=espeak
 introductions.i-am-a-tourist,Je suis touriste,,ʒə syi tuʁˈist,,2,fr-agent-v1;ipa=espeak

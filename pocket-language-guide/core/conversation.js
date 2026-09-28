@@ -42,8 +42,16 @@ const COLOURS = new Set(['comm', 'money', 'move', 'stay', 'alert']);
 const UNITS = new Set(['minute', 'hour', 'day']);
 /** @type {Set<string>} The keypads a board may open. Each needs no translation. */
 const ENTRIES = new Set(['duration', 'clock', 'count']);
-/** The reader's own details a button can say, in the slot its row leaves for one. */
-export const DETAILS = new Set(['name']);
+/**
+ * The reader's own details a button can say, in the slot its row leaves for one, and
+ * how each reaches the listener. A name is `typed`: it goes in as written, since a
+ * person knows how to say their own name (or it is built from its sounds). A country
+ * is `chosen` from a list and said in each side's own word for it -- with no fallback,
+ * because the owner's word in the listener's sentence is the owner's language quietly
+ * standing in for the listener's.
+ * @type {Map<string, 'typed'|'chosen'>}
+ */
+export const DETAILS = new Map([['name', 'typed'], ['country', 'chosen']]);
 /**
  * What a reader may say about what they eat, all at once: the corpus's own statements,
  * each a reviewed sentence, joined rather than templated. Questions ("does it contain
@@ -264,7 +272,7 @@ export function validateBoard(board) {
         } else if (!ref || (ref.kind !== 'corpus' && ref.kind !== 'custom') || !ref.id) {
           problems.push(`${key}: a message with no usable phraseRef`);
         } else if (ref.fill !== undefined && (ref.kind !== 'corpus' || !DETAILS.has(ref.fill))) {
-          problems.push(`${key}: fill ${ref.fill} is not one of ${[...DETAILS].join(', ')} on a corpus phrase`);
+          problems.push(`${key}: fill ${ref.fill} is not one of ${[...DETAILS.keys()].join(', ')} on a corpus phrase`);
         }
       } else {
         // An enum, not an open set: the format carries no actions, no URLs and no
@@ -404,14 +412,36 @@ export function resolvePhrase(ref, ctx, incoming = false) {
   // slot cannot take one, and is unavailable rather than silently the template.
   const fill = 'fill' in ref ? ref.fill : undefined;
   if (fill && (!base.listener.text.includes('{}') || !base.owner.text.includes('{}'))) return null;
-  const detail = fill ? (ctx.details?.[fill] ?? '') : '';
-  const put = (/** @type {string} */ text) => (fill ? text.replace('{}', detail || BLANK) : text);
+  let detail = fill ? (ctx.details?.[fill] ?? '') : '';
+  // The listener may read and hear the slot differently from the owner: a name built
+  // from its sounds is written in the listener's own letters, and said from its IPA.
+  let heard = fill ? (ctx.details?.[`${fill}:listener`] || detail) : '';
+  let sound = fill ? (ctx.details?.[`${fill}:ipa`] || detail) : '';
+  let spoken = detail;
+  if (fill && DETAILS.get(fill) === 'chosen') {
+    // Looked up, each side in its own word; a pair without the words cannot say it.
+    // The owner's line spells the listener's word, which is the one to be said.
+    const words = ctx.choices?.[fill];
+    if (!words) return null;
+    if (detail) {
+      const mine = words.owner.get(detail);
+      const theirs = words.listener.get(detail);
+      if (!mine || !theirs) return null;
+      [detail, heard, sound] = [mine.sentence, theirs.sentence, theirs.ipa];
+      spoken = sound ? (ctx.respell?.('', sound) ?? '') : '';
+    }
+  }
+  const put = (/** @type {string} */ text, value = detail) => (fill ? text.replace('{}', value || BLANK) : text);
   const listener = say(ctx.listenerVoice, ref.id, base.listener, incoming);
   const owner = say(ctx.ownerVoice, ref.id, base.owner, incoming);
   // **One reading, not the concept's range.** A gloss like "okay / can" documents
   // what the concept covers, which is what a translator or the printed sheet wants;
   // a person handed a phone wants one word. The first alternative is the head one.
   const primary = (/** @type {string} */ text) => (text.includes(' / ') ? text.split(' / ')[0].trim() : text);
+  // The pronunciation is cut where the sentence is, or the owner's line reads both
+  // readings under a sentence that shows one.
+  const cut = listener.text.includes(' / ') ? primary : (/** @type {string} */ text) => text;
+  const ipa = cut(listener.ipa || '');
   return {
     id: ref.id,
     // **The pronunciation rides with the sentence, from the same row.** Taking it
@@ -422,11 +452,12 @@ export function resolvePhrase(ref, ctx, incoming = false) {
     // pronunciation is not. The respelling is derived from that same variant IPA
     // by the hook the page supplies, which is the sheet's own respeller.
     listener: {
-      text: put(primary(listener.text)),
+      text: put(primary(listener.text), heard),
       lang: ctx.listener,
       dir: ctx.listenerDir,
-      say: put(ctx.respell?.(ref.id, listener.ipa || '') || ''),
-      ipa: put(listener.ipa || ''),
+      // A slot with no pronunciation blanks the whole line rather than leaving a hole.
+      say: fill && !spoken ? '' : put(cut(ctx.respell?.(ref.id, ipa) || ''), spoken),
+      ipa: fill && !sound ? '' : put(ipa, sound),
     },
     owner: { text: put(primary(owner.text)), lang: ctx.owner, dir: ctx.ownerDir },
     provenance: listener.provenance ?? '',
@@ -459,6 +490,12 @@ function say(voice, conceptId, row, incoming) {
  */
 
 /**
+ * One choosable value in one language: its name for a list, the form a sentence's slot
+ * takes, and that form's IPA.
+ * @typedef {{name:string, sentence:string, ipa:string}} Choice
+ */
+
+/**
  * @typedef {Object} ResolveContext
  * @property {{concepts:Record<string,any>}} corpus
  * @property {Record<string,Record<string,string>>} listenerRows
@@ -468,7 +505,10 @@ function say(voice, conceptId, row, incoming) {
  * @property {'ltr'|'rtl'} listenerDir
  * @property {'ltr'|'rtl'} ownerDir
  * @property {Record<string,{owner:string, listener:string}>} [custom]
- * @property {Record<string,string>} [details]  the reader's own details, for `fill`
+ * @property {Record<string,string>} [details]  the reader's own details, for `fill`, with
+ *   `<fill>:listener` and `<fill>:ipa` where the listener reads or hears one differently
+ * @property {Record<string,{owner:Map<string,Choice>, listener:Map<string,Choice>}>} [choices]
+ *   each `chosen` detail's words, by the value chosen, where both languages have them
  * @property {(conceptId:string, ipa:string)=>string} [respell]  the reader's own
  *   respelling of a sentence's IPA, curated where a curated one exists; absent for
  *   a reader whose language has no rule table

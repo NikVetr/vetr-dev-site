@@ -4,7 +4,7 @@ introductions.nice-to-meet-you,Piacere,Molto piacere,pjatʃˈere,,2,it-agent-v1;
 introductions.what-is-your-name,Come si chiama?,,kˌome sɪ kjˈama,,2,it-agent-v1;ipa=espeak
 introductions.we-are-traveling-together,Viaggiamo insieme,,vjadʒdʒˈamo insɪˈɛme,,2,it-agent-v1;ipa=espeak
 introductions.this-is-my-friend,Questo è il mio amico,Questa è la mia amica,kwˈesto ˌɛ il mˌio amˈiko,,2,it-agent-v1;ipa=espeak
-introductions.i-am-from,Vengo da {},Sono di {},vˈeŋɡo dˈa {},,2,it-agent-v1;ipa=espeak
+introductions.i-am-from,Vengo da questo paese: {}.,,vˈeŋɡo da kwˌɛsto paˈeze {},"'I come from this country: {}'; da always contracts with the article for a nation (dall'Italia, dagli Stati Uniti, dalle Filippine -- never bare), so the preposition+article is fixed on 'questo paese' and the name is a label",2,"it-agent-v1;rewritten-for-fill-in=da requires the articulated preposition for every nation name regardless of gender (learn-italian-online.net, Zanichelli Aula di lingue: 'preposizioni articolate' for stati), so 'da questo paese' carries it and the bare name follows a colon;ipa=espeak"
 introductions.where-are-you-from,Di dov'è?,,dɪ dovˈɛ,,2,it-agent-v1;ipa=espeak
 introductions.how-are-you,Come sta?,,kˌome stˈa,,2,it-agent-v1;ipa=espeak
 introductions.i-am-a-tourist,Sono un turista,Sono una turista,sˌono ʊn tʊrˈista,,2,it-agent-v1;ipa=espeak

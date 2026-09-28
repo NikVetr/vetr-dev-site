@@ -46,6 +46,8 @@ const ENTRY_FILES = [
   'data/fonts/latin-400.woff2',
   'packs/index.json',
   'data/respell/overrides/index.json',
+  // Which languages name every country: `loadCorpus` reads it on every page.
+  'data/countries/index.json',
 ];
 
 /** Everything in these directories, non-recursively. */
@@ -125,6 +127,11 @@ async function boardCorpus() {
       await stat(join(ROOT, `data/lang/${code}/variants.csv`));
       out.push(`data/lang/${code}/variants.csv`);
     } catch { /* this language asks nothing about the speaker, or has no wordings yet */ }
+    // Its word for every country, for "I am from", where CLDR speaks the language.
+    try {
+      await stat(join(ROOT, `data/countries/${code}.csv`));
+      out.push(`data/countries/${code}.csv`);
+    } catch { /* a language CLDR does not speak */ }
   }
   return out;
 }

@@ -6,9 +6,9 @@
 // regression net for the parts of the engine that are not obvious.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import {
-  consonantRuns, createRespeller, onsetClusters, phonemeInventory, syllabify,
+  consonantRuns, createRespeller, nameRespeller, onsetClusters, phonemeInventory, syllabify,
 } from '../core/respell.js';
 import { parseTable } from '../core/csv.js';
 
@@ -618,4 +618,19 @@ test('German eu is one nucleus, so every reader gives heute two syllables', asyn
     const say = createRespeller({ rules: table, targetIpa: german, target: 'de' });
     assert.equal(say.respell(today), want, `${reader} reading heute`);
   }
+});
+
+test('a name is spelled as running text, bound to the sounds of the language it is from', async () => {
+  /** @type {string[]} */ const english = [];
+  for (const file of (await readdir('data/lang/en')).filter((f) => f.endsWith('.csv') && f !== 'variants.csv')) {
+    for (const row of parseTable(await readFile(`data/lang/en/${file}`, 'utf8'), file)) if (row.ipa) english.push(row.ipa);
+  }
+  const spell = async (/** @type {string} */ table) => nameRespeller(
+    JSON.parse(await readFile(`data/respell/rules/${table}.json`, 'utf8')), english);
+  // No syllable breaks and no stress, as a name is written in a sentence: ニカライ, not
+  // ニ・カ・ライ, and Hindi without its stress mark. Bound to English's sounds, /k/ is к --
+  // bound to the name alone, the rules took it for a language with no /g/ and wrote г.
+  assert.equal((await spell('ja__ja-JP'))('ˈnikəlaɪ'), 'ニカライ');
+  assert.equal((await spell('ru__ru-RU'))('ˈnikəlaɪ'), 'никелай');
+  assert.doesNotMatch((await spell('hi__hi-IN'))('ˈnikəlaɪ'), /[’-]/u);
 });
