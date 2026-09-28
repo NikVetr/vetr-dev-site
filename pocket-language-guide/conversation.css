@@ -1307,14 +1307,26 @@ body:has(.board-main-turned) :is(dialog.speaker-settings, dialog.board-editor) {
 .board-grid-topics .board-cell.board-cell-own { background: var(--accent-soft); border-color: var(--accent); }
 /* Rearranging: every button can be picked up -- a dashed outline says so, beside the
    hint under the grid and Done in the bar -- and the one in hand is lifted over the
-   rest. The bar holds only the topic and Done, since nothing else there means anything
+   rest. The bar holds only the bin and Done, since nothing else there means anything
    until the order is kept. */
 .board-grid-arranging .board-cell {
   cursor: grab; touch-action: none; -webkit-user-select: none; user-select: none;
   outline: 2px dashed var(--line); outline-offset: -5px;
 }
 .board-grid-arranging .board-cell-lifted { cursor: grabbing; z-index: 3; box-shadow: 0 10px 24px rgb(0 0 0 / 25%); }
-.board-bar-arranging > :not(.board-title, .spacer, .board-arrange-done) { display: none; }
+/* The bin takes the topic's place in the bar: a wide target at the thumb, dashed while
+   it waits and solid red with a button over it -- two cues, not a tint alone. */
+.board-bar-arranging > :not(.board-arrange-bin, .board-arrange-done) { display: none; }
+.board-arrange-bin {
+  flex: 1 1 auto; min-inline-size: 0; min-block-size: min(2.6rem, 48px);
+  display: flex; align-items: center; justify-content: center; gap: var(--space-2);
+  padding: 0 var(--space-2); border: 2px dashed var(--line); border-radius: var(--radius);
+  color: var(--muted); text-align: center; overflow-wrap: anywhere;
+}
+.board-arrange-bin svg { flex: 0 0 auto; }
+.board-arrange-bin.board-arrange-bin-over { border-style: solid; border-color: var(--alert); background: color-mix(in srgb, var(--alert) 14%, transparent); color: var(--alert); }
+/* A question with a box under it and its two answers, the safe one first. */
+.confirm-actions { display: flex; justify-content: flex-end; gap: var(--space-2); margin-block-start: var(--space-3); }
 
 /* A cell that makes something -- a context, or the first button on an empty screen --
    is a dashed outline and a plus, and says what it makes to a screen reader only. */

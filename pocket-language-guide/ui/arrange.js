@@ -5,7 +5,8 @@
 // means there is: picking a button up and putting it where it goes. The others move
 // aside to show where it will land, which is the one place motion here is the
 // feature; with reduced motion asked for, they jump. The arrow keys do the same for
-// a keyboard, one place at a time.
+// a keyboard, one place at a time. A button dropped on the bin in the bar, or given
+// Delete, is taken off the screen.
 
 /** @param {string} tag @param {Record<string,string>} attrs */
 function el(tag, attrs = {}) {
@@ -38,12 +39,15 @@ const STEP = /** @type {Record<string, number>} */ ({ ArrowLeft: -1, ArrowUp: -1
  * Let the reader rearrange a grid's buttons until they press Done, or Escape to leave it
  * as it was. The cell that makes something new is not moved and stays last. While
  * rearranging, a press only picks a button up: nothing is said, and a hold clears no
- * detail. The bar holds Done and the topic, and the status line says what to do.
+ * detail. The bar holds the bin and Done, and the status line says what to do. A
+ * button taken off is gone from the grid at once and from the screen on Done --
+ * Escape brings it back with the order -- once `onRemove` has agreed to it.
  * @param {HTMLElement} grid  its cells carry `data-button`
- * @param {{bar: HTMLElement, status: HTMLElement, done: string, hint: string,
- *   onDone: (ids: string[]) => void, onCancel: () => void}} config
+ * @param {{bar: HTMLElement, status: HTMLElement, done: string, hint: string, bin: string,
+ *   onRemove: (cell: HTMLElement) => Promise<boolean>,
+ *   onDone: (ids: string[], removed: string[]) => void, onCancel: () => void}} config
  */
-export function arrange(grid, { bar, status, done, hint, onDone, onCancel }) {
+export function arrange(grid, { bar, status, done, hint, bin, onRemove, onDone, onCancel }) {
   const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const cells = () => /** @type {HTMLElement[]} */ ([...grid.querySelectorAll('[data-button]:not(.board-cell-add)')]);
   const maker = grid.querySelector('.board-cell-add');
@@ -51,8 +55,24 @@ export function arrange(grid, { bar, status, done, hint, onDone, onCancel }) {
   status.textContent = hint;
   grid.classList.add('board-grid-arranging');
   bar.classList.add('board-bar-arranging');
+  const trash = el('div', { class: 'board-arrange-bin' });
+  trash.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 7h16M9 7V4.5h6V7M6.5 7l1 12.5h9l1-12.5M10 11v5M14 11v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  trash.append(el('span', { text: bin }));
   const finish = el('button', { type: 'button', class: 'btn primary board-arrange-done', text: done });
-  bar.append(finish);
+  bar.append(trash, finish);
+  /** @type {string[]} */ const removed = [];
+  /** @param {PointerEvent} event */
+  const onBin = (event) => {
+    const r = trash.getBoundingClientRect();
+    return event.clientX >= r.left && event.clientX < r.right && event.clientY >= r.top && event.clientY < r.bottom;
+  };
+  /** Off the grid if `onRemove` agrees, and whether it went. @param {HTMLElement} cell */
+  const take = async (cell) => {
+    if (!(await onRemove(cell))) return false;
+    removed.push(/** @type {string} */ (cell.dataset.button));
+    cell.remove();
+    return true;
+  };
 
   /**
    * Put `cell` before `before` -- or last among the movable ones -- and let the others
@@ -107,19 +127,31 @@ export function arrange(grid, { bar, status, done, hint, onDone, onCancel }) {
     if (under) place(cell, list.indexOf(under) > list.indexOf(cell) ? under.nextElementSibling : under);
     const home = cell.getBoundingClientRect();
     cell.style.translate = `${event.clientX - held.x - home.left}px ${event.clientY - held.y - home.top}px`;
+    trash.classList.toggle('board-arrange-bin-over', onBin(event));
   };
-  const up = () => {
+  /** @param {PointerEvent} [event] */
+  const up = async (event) => {
     if (!held) return;
     const { cell } = held;
     held = null;
+    trash.classList.remove('board-arrange-bin-over');
     cell.classList.remove('board-cell-lifted');
+    if (event && onBin(event) && await take(cell)) return;
     cell.style.transition = calm ? 'none' : 'translate 160ms ease-out';
     cell.style.translate = '';
   };
   /** @param {KeyboardEvent} event */
   const key = (event) => {
+    // A question about removing a button is answered in its own dialog, Escape included.
+    if (document.querySelector('dialog[open]')) return;
     if (event.key === 'Escape') { event.stopPropagation(); event.preventDefault(); end(false); return; }
     const cell = /** @type {HTMLElement|null} */ ((/** @type {Element} */ (event.target)).closest?.('[data-button]'));
+    if (cell && cell !== maker && (event.key === 'Delete' || event.key === 'Backspace')) {
+      event.preventDefault();
+      const next = /** @type {HTMLElement|null} */ (cell.nextElementSibling ?? cell.previousElementSibling);
+      take(cell).then((gone) => { if (gone) next?.focus(); else cell.focus(); });
+      return;
+    }
     const step = STEP[event.key];
     if (!cell || cell === maker || !step) return;
     event.preventDefault();
@@ -132,10 +164,11 @@ export function arrange(grid, { bar, status, done, hint, onDone, onCancel }) {
   /** A press only picks a button up here: nothing is said. @param {Event} event */
   const swallow = (event) => { event.stopPropagation(); event.preventDefault(); };
 
+  const cancel = () => up();
   grid.addEventListener('pointerdown', down, true);
   grid.addEventListener('pointermove', move);
   grid.addEventListener('pointerup', up);
-  grid.addEventListener('pointercancel', up);
+  grid.addEventListener('pointercancel', cancel);
   grid.addEventListener('click', swallow, true);
   grid.addEventListener('contextmenu', swallow, true);
   document.addEventListener('keydown', key, true);
@@ -145,16 +178,17 @@ export function arrange(grid, { bar, status, done, hint, onDone, onCancel }) {
     grid.removeEventListener('pointerdown', down, true);
     grid.removeEventListener('pointermove', move);
     grid.removeEventListener('pointerup', up);
-    grid.removeEventListener('pointercancel', up);
+    grid.removeEventListener('pointercancel', cancel);
     grid.removeEventListener('click', swallow, true);
     grid.removeEventListener('contextmenu', swallow, true);
     document.removeEventListener('keydown', key, true);
     grid.classList.remove('board-grid-arranging');
     bar.classList.remove('board-bar-arranging');
     finish.remove();
+    trash.remove();
     status.textContent = said;
     const ids = cells().map((c) => /** @type {string} */ (c.dataset.button));
-    if (keep) onDone(ids);
+    if (keep) onDone(ids, removed);
     else onCancel();
   }
   finish.addEventListener('click', () => end(true));

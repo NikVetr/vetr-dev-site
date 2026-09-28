@@ -44,12 +44,12 @@ import { keepAwake } from './platform/wake.js';
 import { startBeacon, stopBeacon } from './platform/beacon.js';
 import { isNative, notePlace, onBack } from './platform/shell.js';
 import {
-  read as readPersonal, placedOn, addPhrase, write as writePersonal, setOrder, arranged,
+  read as readPersonal, placedOn, addPhrase, write as writePersonal, setOrder, arranged, removePlacement, showBuiltIn,
 } from './board-store.js';
 import { arrange } from './arrange.js';
 import { find, openSearch, ownButton, reachable } from './board-search.js';
 import { openTravelCheck, undrawable } from './travel-check.js';
-import { askChoices, askText } from './board-menu.js';
+import { askChoices, askConfirm, askText } from './board-menu.js';
 import {
   openSpeakerSettings, readProfile, noticeFor, personalSection,
 } from './speaker-settings.js';
@@ -286,7 +286,10 @@ function arrangeRow(start) {
 }
 
 /**
- * Rearrange the grid now on screen, and keep the order under `at` when Done is pressed.
+ * Rearrange the grid now on screen, and keep the order under `at` when Done is pressed --
+ * with what was taken off it: a board's own button, or one of the list's own contexts,
+ * is switched off there, and one of the reader's is taken off the screen. Asked first,
+ * until the reader says it need not be.
  * @param {string} at @param {() => void} redraw
  */
 function arrangeGrid(at, redraw) {
@@ -295,12 +298,57 @@ function arrangeGrid(at, redraw) {
     status: $('board-status'),
     done: t('speaker.done'),
     hint: t('board.arrangeHint'),
-    onDone: async (ids) => {
-      await writePersonal(setOrder(readPersonal().data, at, ids));
+    bin: t('arrange.bin'),
+    onRemove: async (cell) => {
+      if (!readDisplay().askRemove) return true;
+      const { ok, askAgain } = await askConfirm({
+        title: t('arrange.removeTitle', { button: cell.textContent?.trim() ?? '' }),
+        body: t(at === CONTEXTS ? 'arrange.removeWhyContexts' : 'arrange.removeWhy'),
+        yes: t('arrange.removeYes'), no: t('arrange.removeNo'), again: t('arrange.removeAgain'),
+        close: t('gallery.previewClose'),
+      });
+      if (!askAgain) writeDisplay({ ...readDisplay(), askRemove: false });
+      return ok;
+    },
+    onDone: async (ids, removed) => {
+      /** @type {import('./board-store.js').BoardPersonal} */ let data = setOrder(readPersonal().data, at, ids);
+      for (const id of removed) {
+        const mine = at === CONTEXTS ? (id.startsWith(OWN) ? id.slice(OWN.length) : null) : (data.phrases[id] ? id : null);
+        data = mine ? removePlacement(data, mine, at) : showBuiltIn(data, at, id, false);
+      }
+      await writePersonal(data);
       redraw();
     },
     onCancel: redraw,
   });
+}
+
+/**
+ * The list's own contexts, a switch each: one taken off while rearranging comes back
+ * here, and one never wanted can go without rearranging anything.
+ * @param {Map<string, {title: string}>} topics @param {() => void} redraw
+ */
+function contextsSection(topics, redraw) {
+  const box = document.createElement('details');
+  box.className = 'speaker-block';
+  const summary = document.createElement('summary');
+  summary.textContent = t('contexts.shown');
+  box.append(summary);
+  const hidden = readPersonal().data.hidden?.[CONTEXTS] ?? [];
+  for (const [id, { title }] of topics) {
+    const input = document.createElement('input');
+    input.type = 'checkbox';
+    input.checked = !hidden.includes(id);
+    input.addEventListener('change', async () => {
+      await writePersonal(showBuiltIn(readPersonal().data, CONTEXTS, id, input.checked));
+      redraw();
+    });
+    const label = document.createElement('label');
+    label.className = 'speaker-option';
+    label.append(input, title);
+    box.append(label);
+  }
+  return box;
 }
 
 /**
@@ -365,7 +413,7 @@ async function showPicker(owner, listener, index, nameOf) {
   // The header's bars open the plain settings here -- the board's fuller dialog needs a
   // board -- with the way into rearranging the contexts.
   wireSiteMenu(() => openAppearance([arrangeRow(() => arrangeGrid(CONTEXTS, drawTopics)),
-    travelSection(() => travelChecks(listener, owner, index, nameOf))]));
+    contextsSection(topics, () => drawTopics()), travelSection(() => travelChecks(listener, owner, index, nameOf))]));
   // **The context list has a parent too**, and it is the card this was opened from.
   // Without this the only way off the first screen of Converse was the browser's own
   // Back, which a reader who arrived from the app's own link does not think of as
@@ -393,11 +441,13 @@ async function showPicker(owner, listener, index, nameOf) {
   function drawTopics() {
   const personal = readPersonal();
   const mine = placedOn(personal.data, CONTEXTS, pair).filter((p) => p.screen);
+  const off = personal.data.hidden?.[CONTEXTS] ?? [];
   /** @type {import('../core/conversation.js').BoardButton[]} */
   const buttons = [
     // In the reader's order where they have dragged one, the maker last whatever it is.
     ...arranged([
-      ...[...topics].map(([id, { icon, alert }]) => ({ id, kind: /** @type {const} */ ('submenu'), icon, alert })),
+      ...[...topics].filter(([id]) => !off.includes(id))
+        .map(([id, { icon, alert }]) => ({ id, kind: /** @type {const} */ ('submenu'), icon, alert })),
       ...mine.map((p) => ({ id: `${OWN}${p.id}`, kind: /** @type {const} */ ('submenu'), own: /** @type {const} */ (true) })),
     ], /** @type {import('./board-store.js').BoardPersonal} */ (personal.data).order?.[CONTEXTS]),
     { id: 'add-context', kind: 'submenu', add: true },
@@ -661,7 +711,8 @@ function travelSection(checks) {
 async function searchEntries(ctx, index, loaded) {
   const data = readPersonal().data;
   const pair = `${ctx.listener}__${ctx.owner}`;
-  const served = index.boards.filter((b) => serves(b, ctx.listener, ctx.owner));
+  const off = data.hidden?.[CONTEXTS] ?? [];
+  const served = index.boards.filter((b) => serves(b, ctx.listener, ctx.owner) && !off.includes(b.id));
   const boards = await Promise.all(served.map(async (b) => loaded[b.id]
     ?? JSON.parse(await loadText(`data/boards/${b.id}.json`))));
   const mine = placedOn(data, CONTEXTS, pair).filter((p) => p.screen);

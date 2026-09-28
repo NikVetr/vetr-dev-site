@@ -137,6 +137,32 @@ function formDialog({ kind, close, save, body, onSubmit, focus }) {
 const hintLine = (hint) => (hint ? [el('p', { class: 'speaker-why', text: hint })] : []);
 
 /**
+ * A yes-or-no question in a dialog of its own, with a box for not being asked it again.
+ * Closing it any other way is a no, and the safe answer has the focus.
+ * @param {{title: string, body: string, yes: string, no: string, again: string, close: string}} config
+ * @returns {Promise<{ok: boolean, askAgain: boolean}>}
+ */
+export function askConfirm({ title, body, yes, no, again, close }) {
+  const panel = /** @type {HTMLDialogElement} */ (el('dialog', { class: 'speaker-settings confirm-ask' }));
+  const corner = el('button', { type: 'button', class: 'speaker-close', 'aria-label': close });
+  const box = /** @type {HTMLInputElement} */ (el('input', { type: 'checkbox' }));
+  const accept = el('button', { type: 'button', class: 'btn primary', text: yes });
+  const keep = el('button', { type: 'button', class: 'btn', text: no });
+  panel.append(corner, el('p', { class: 'speaker-title', text: title }), el('p', { class: 'speaker-why', text: body }),
+    el('label', { class: 'speaker-option' }, [box, again]), el('div', { class: 'confirm-actions' }, [keep, accept]));
+  document.body.append(panel);
+  panel.showModal();
+  keep.focus();
+  let ok = false;
+  accept.addEventListener('click', () => { ok = true; panel.close(); });
+  keep.addEventListener('click', () => panel.close());
+  corner.addEventListener('click', () => panel.close());
+  return new Promise((resolve) => {
+    panel.addEventListener('close', () => { panel.remove(); resolve({ ok, askAgain: !box.checked }); });
+  });
+}
+
+/**
  * Ask for one line of text in a dialog of its own, and hand it back on Save.
  * @param {object} config
  * @param {string} config.label  what the field is, above it

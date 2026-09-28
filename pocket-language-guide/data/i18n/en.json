@@ -556,7 +556,7 @@
   "boards.transport.taxiTitle": "In a taxi",
   "boards.transport.title": "Getting around",
   "board.arrange": "Rearrange buttons",
-  "board.arrangeHint": "Drag the buttons into the order you want, then press Done.",
+  "board.arrangeHint": "Drag the buttons into the order you want, or onto the bin to take one off, then press Done.",
   "boards.intro.title": "Meeting people",
   "boards.intro.kindTitle": "Kind words",
   "boards.emergency.title": "Emergency",
@@ -674,5 +674,14 @@
   "boards.emergency.diabetes": "Diabetes…",
   "boards.emergency.diabetesTitle": "Diabetes",
   "boards.transport.transit": "Train and bus…",
-  "boards.transport.transitTitle": "By train or bus"
+  "boards.transport.transitTitle": "By train or bus",
+  "arrange.bin": "Drop here to remove",
+  "arrange.removeTitle": "Take “{button}” off this screen?",
+  "arrange.removeWhy": "A board’s own button can be switched back on in Edit buttons; one of your own is taken off this screen.",
+  "arrange.removeWhyContexts": "A context that comes with the app can be switched back on in the settings here; one of your own is taken off the list.",
+  "arrange.removeYes": "Take it off",
+  "arrange.removeNo": "Keep it",
+  "arrange.removeAgain": "Don’t ask again",
+  "display.askRemove": "Ask before rearranging takes a button off a screen",
+  "contexts.shown": "Contexts on the list"
 }

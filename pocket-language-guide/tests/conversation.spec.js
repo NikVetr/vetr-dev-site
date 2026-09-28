@@ -2284,6 +2284,79 @@ test('a screen is rearranged by dragging, from the settings, and keeps its order
   expect(keyed).not.toEqual(before);
 });
 
+test('a button dropped on the bin is taken off the screen, asked once, and comes back from the editor', async ({ page }) => {
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=intro');
+  const ids = () => page.$$eval('#board-grid [data-button]', (els) => els.map((e) => /** @type {HTMLElement} */ (e).dataset.button));
+  await expect(page.locator('#board-grid [data-button]').first()).toBeVisible();
+  const arrangeMode = async () => {
+    await page.locator('#site-menu').click();
+    await page.getByRole('button', { name: 'Rearrange buttons' }).click();
+  };
+  /** @param {string} id */
+  const toBin = async (id) => {
+    const from = /** @type {{x:number,y:number,width:number,height:number}} */ (await page.locator(`[data-button="${id}"]`).boundingBox());
+    const bin = /** @type {{x:number,y:number,width:number,height:number}} */ (await page.locator('.board-arrange-bin').boundingBox());
+    await page.mouse.move(from.x + from.width / 2, from.y + from.height / 2);
+    await page.mouse.down();
+    for (let k = 1; k <= 10; k += 1) {
+      await page.mouse.move(from.x + from.width / 2 + ((bin.x + bin.width / 2 - from.x - from.width / 2) * k) / 10,
+        from.y + from.height / 2 + ((bin.y + bin.height / 2 - from.y - from.height / 2) * k) / 10);
+    }
+    await expect(page.locator('.board-arrange-bin')).toHaveClass(/board-arrange-bin-over/);
+    await page.mouse.up();
+  };
+  await arrangeMode();
+  await expect(page.locator('.board-arrange-bin')).toHaveText('Drop here to remove');
+  // Asked first; kept, it stays.
+  await toBin('bye');
+  const ask = page.locator('dialog.confirm-ask');
+  await expect(ask).toContainText('Goodbye');
+  await ask.getByRole('button', { name: 'Keep it' }).click();
+  await expect(ask).toHaveCount(0);
+  expect(await ids()).toContain('bye');
+  // Taken off, and not asked again once the box is ticked.
+  await toBin('bye');
+  await ask.getByRole('checkbox', { name: 'Don’t ask again' }).check();
+  await ask.getByRole('button', { name: 'Take it off' }).click();
+  await expect(page.locator('[data-button="bye"]')).toHaveCount(0);
+  await toBin('thanks');
+  await expect(page.locator('[data-button="thanks"]')).toHaveCount(0);
+  await expect(ask).toHaveCount(0);
+  await page.getByRole('button', { name: 'Done' }).click();
+  await page.reload();
+  await expect(page.locator('#board-grid [data-button]').first()).toBeVisible();
+  expect(await ids()).not.toContain('bye');
+  // A board's own button is switched off, not deleted: the editor switches it back on.
+  await page.locator('#board-add-bar').click();
+  await page.locator('.board-editor-shipped label', { hasText: 'Goodbye' }).locator('input').check();
+  await page.locator('.board-editor-close').click();
+  await expect(page.locator('[data-button="bye"]')).toBeVisible();
+  // Escape leaves the screen as it was, a removal included.
+  await arrangeMode();
+  await toBin('hello');
+  await expect(page.locator('[data-button="hello"]')).toHaveCount(0);
+  await page.keyboard.press('Escape');
+  await expect(page.locator('[data-button="hello"]')).toBeVisible();
+});
+
+test('a context taken off the list comes back from the list\'s settings', async ({ page }) => {
+  await page.goto('/conversation.html?target=zh-Hans&source=en');
+  await expect(page.locator('[data-button="spa"]')).toBeVisible();
+  await page.locator('#site-menu').click();
+  await page.getByRole('button', { name: 'Rearrange buttons' }).click();
+  await page.locator('[data-button="spa"]').focus();
+  await page.keyboard.press('Delete');
+  await page.locator('dialog.confirm-ask').getByRole('button', { name: 'Take it off' }).click();
+  await page.getByRole('button', { name: 'Done' }).click();
+  await expect(page.locator('[data-button="spa"]')).toHaveCount(0);
+  await page.locator('#site-menu').click();
+  const settings = page.locator('dialog[open]');
+  await settings.getByText('Contexts on the list').click();
+  await settings.locator('label', { hasText: 'Massage and spa' }).locator('input').check();
+  await page.keyboard.press('Escape');
+  await expect(page.locator('[data-button="spa"]')).toBeVisible();
+});
+
 test('turned, the settings dialog turns with the board and fits the screen it lies across', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=food');
