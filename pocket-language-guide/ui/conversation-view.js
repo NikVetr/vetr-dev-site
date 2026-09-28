@@ -107,7 +107,7 @@ export function renderGrid(root, node, { label, available, onPick, lang, title, 
     }
     // A topic's mark, drawn as the answer mark is: a silhouette behind the word, for
     // the eye that has stopped reading eleven titles and is looking for a shape.
-    if (button.icon) cell.append(topicMark(button.icon, `plg-topic-${button.id}`));
+    if (button.icon) cell.append(topicMark(button.icon, `plg-topic-${button.id}`, lang));
     // **A fill-in button says whether the reader's detail is in it, twice**: a box in
     // the corner, empty or ticked, and an empty one greyed as well, because a tint alone
     // is easy to miss in sun. Holding a filled one clears it -- for the next country, or

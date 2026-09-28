@@ -9,9 +9,13 @@
 // strength behind a word there is no tonal difference to separate them, only space.
 //
 // `back` and `front` are SVG path elements; `front` is painted over `back` and cut
-// out of it with a margin. Strokes (the rays, the handle, the hands) are strokes.
+// out of it with a margin. `cut` is cut out of `back` and not painted at all: the
+// clock's hands are the face's own absence, the one mark here that is read by what
+// is missing from it. Strokes (the rays, the handle, the hands) are strokes.
 
 const R = 'stroke-linecap="round" stroke-linejoin="round"';
+/** The clean space a front shape keeps around itself, in the drawing's units. */
+const GAP = 16;
 /** @param {string} d @param {number} w */
 const stroke = (d, w) => `<path d="${d}" fill="none" stroke="currentColor" stroke-width="${w}" ${R}/>`;
 /** @param {string} d */
@@ -19,7 +23,13 @@ const fill = (d) => `<path d="${d}" fill="currentColor" fill-rule="evenodd"/>`;
 /** A filled shape with its corners rounded by a stroke of its own colour. @param {string} d @param {number} [r] */
 const soft = (d, r = 10) => `<path d="${d}" fill="currentColor" stroke="currentColor" stroke-width="${r}" ${R}/>`;
 
-/** @type {Record<string, {back?: string, front: string}>} */
+// A plate between the fork and the utensil the reader's part of the world lays
+// beside it, apart from both: touching, the three read as one blot.
+const PLATE = fill('M128 42a62 62 0 1 1 0 124a62 62 0 1 1 0-124Zm0 22a40 40 0 1 0 0 80a40 40 0 1 0 0-80Z');
+const FORK = stroke('M17 22v50M31.5 22v50M46 22v50', 8)
+  + soft('M13 70h37v8c0 14-8 24-18.5 24S13 92 13 78Z', 8) + soft('M26 100h11v90H26Z', 10);
+
+/** @type {Record<string, {back?: string, front: string, cut?: string}>} */
 export const TOPIC_MARKS = {
   // A siren: the dome, its base, and the light it throws.
   siren: {
@@ -32,10 +42,11 @@ export const TOPIC_MARKS = {
     back: fill('M92 42a30 30 0 1 1 0 60a30 30 0 1 1 0-60ZM34 176c0-44 26-66 58-66s58 22 58 66Z'),
     front: fill('M166 60a32 32 0 1 1 0 64a32 32 0 1 1 0-64ZM104 200c0-48 28-70 62-70s62 22 62 70Z'),
   },
-  // A signpost: two boards pointing opposite ways across the post.
+  // A signpost: two boards pointing opposite ways across the post, with the post
+  // showing between them.
   signpost: {
-    back: soft('M122 30h12v168h-12Z', 8),
-    front: soft('M58 48h118l24 22l-24 22H58Z') + soft('M198 108H80l-24 22l24 22h118Z'),
+    back: soft('M121 40h14v154h-14Z', 8),
+    front: soft('M52 30h118l26 25l-26 25H52Z') + soft('M204 120H86l-26 25l26 25h118Z'),
   },
   // A bus from the front: windscreen, lamps, wheels and mirrors.
   bus: {
@@ -44,12 +55,23 @@ export const TOPIC_MARKS = {
       + 'M80 44h96a8 8 0 0 1 8 8v48a8 8 0 0 1-8 8H80a8 8 0 0 1-8-8V52a8 8 0 0 1 8-8Z'
       + 'M86 128a11 11 0 1 1 0 22a11 11 0 1 1 0-22ZM170 128a11 11 0 1 1 0 22a11 11 0 1 1 0-22Z'),
   },
-  // A plate, with the fork and the knife laid either side of it.
+  // A plate, with the fork and the knife laid either side of it -- the international
+  // restaurant sign.
   cutlery: {
-    back: fill('M128 30a76 76 0 1 1 0 152a76 76 0 1 1 0-152Zm0 26a50 50 0 1 0 0 100a50 50 0 1 0 0-100Z'),
-    front: soft('M30 24h8v58h-8ZM48 24h8v58h-8ZM66 24h8v58h-8Z', 6)
-      + soft('M28 78h48v8c0 14-10 24-24 24s-24-10-24-24Z', 8) + soft('M46 104h12v86H46Z', 10)
-      + soft('M198 118V36c0-6 6-10 12-6c16 11 20 52 8 88Z', 8) + soft('M198 114h14v76h-14Z', 10),
+    back: PLATE,
+    front: FORK + soft('M206 116V36c0-6 6-10 12-6c16 11 20 52 8 88Z', 8) + soft('M206 112h14v78h-14Z', 10),
+  },
+  // Fork and spoon, as most of Southeast Asia eats.
+  spoon: {
+    back: PLATE,
+    front: FORK + fill('M218 26c11 0 19 17 19 38s-8 36-19 36s-19-15-19-36s8-38 19-38Z')
+      + soft('M212 96h12v94h-12Z', 10),
+  },
+  // A bowl, and chopsticks lifting from it -- slanted, never standing upright in it,
+  // which is how they are left for the dead.
+  chopsticks: {
+    back: stroke('M210 14l-82 82M240 32l-96 70', 13),
+    front: fill('M18 96h192c0 54-43 94-96 94S18 150 18 96Z') + fill('M82 182h64l-4 14H86Z'),
   },
   // A shopping bag and its handle.
   bag: {
@@ -57,10 +79,11 @@ export const TOPIC_MARKS = {
     front: fill('M54 78h148l-8 110c-.5 7-6 12-13 12H75c-7 0-12.5-5-13-12Z'
       + 'M92 94a8 8 0 1 1 0 16a8 8 0 1 1 0-16ZM164 94a8 8 0 1 1 0 16a8 8 0 1 1 0-16Z'),
   },
-  // A clock, its hands cut out of its face.
+  // A clock: its hands and the four quarters are cut out of its face.
   clock: {
-    back: fill('M128 16a88 88 0 1 1 0 176a88 88 0 1 1 0-176Z'),
-    front: stroke('M128 104V48M128 104l38 24', 14) + fill('M128 94a10 10 0 1 1 0 20a10 10 0 1 1 0-20Z'),
+    back: fill('M128 12a92 92 0 1 1 0 184a92 92 0 1 1 0-184Z'),
+    front: '',
+    cut: stroke('M128 104V56M128 104l33 19', 18) + stroke('M128 24v10M208 104h-10M128 184v-10M48 104h10', 10),
   },
   // A lotus: the middle petal and the low outer ones in front of the two beside it.
   lotus: {
@@ -71,13 +94,18 @@ export const TOPIC_MARKS = {
   // A bed: the frame, and the pillow on it.
   bed: {
     back: soft('M26 40h22v112h160v-44h22v88h-22v-18H48v18H26Z', 8) + soft('M48 124h160v28H48Z', 8),
-    front: soft('M62 96h54v20H62Z', 12) + soft('M126 94h82v26h-82Z', 10),
+    front: soft('M68 96h50v20H68Z', 12) + soft('M128 94h80v26h-80Z', 10),
   },
   // A camera: body, viewfinder hump and flash, the lens standing out of it.
   camera: {
     back: fill('M48 64h40l14-26h52l14 26h40a20 20 0 0 1 20 20v88a20 20 0 0 1-20 20H48a20 20 0 0 1-20-20V84a20 20 0 0 1 20-20Z'
       + 'M128 78a50 50 0 1 1 0 100a50 50 0 1 1 0-100Z' + 'M186 80h20v12h-20Z'),
     front: fill('M128 92a36 36 0 1 1 0 72a36 36 0 1 1 0-72Z'),
+  },
+  // Two peaks, the nearer one in front, and snow on the higher.
+  mountain: {
+    back: soft('M162 30L248 188H76Z', 10),
+    front: soft('M84 88L150 188H18Z', 10) + soft('M162 30L188 78L176 70L165 82L153 70L136 78Z', 6),
   },
   // A capsule in two halves, and a scored tablet beside it.
   capsule: {
@@ -88,22 +116,41 @@ export const TOPIC_MARKS = {
 };
 
 /**
+ * **The object the reader eats with**, where it is not the knife and fork: the mark
+ * is for the owner finding a topic in their own language, so it is keyed to that
+ * language rather than the one the board speaks. Chopsticks in China, Japan, Korea
+ * and Vietnam; fork and spoon across mainland and island Southeast Asia.
+ * @type {Record<string, Record<string, string>>}
+ */
+const LOCAL = {
+  cutlery: {
+    'zh-Hans': 'chopsticks', ja: 'chopsticks', ko: 'chopsticks', vi: 'chopsticks',
+    th: 'spoon', lo: 'spoon', km: 'spoon', fil: 'spoon', id: 'spoon', ms: 'spoon', jv: 'spoon',
+  },
+};
+
+/**
  * One topic's watermark as an SVG element. The front shapes are drawn twice: once in
  * black into a mask that cuts the gap out of the back ones, once for real.
  * @param {string} name  a key of TOPIC_MARKS
  * @param {string} id    unique on the page, for the mask
+ * @param {string} lang  the language the reader reads the topics in
  */
-export function topicMark(name, id) {
-  const mark = TOPIC_MARKS[name];
+export function topicMark(name, id, lang) {
+  const mark = TOPIC_MARKS[LOCAL[name]?.[lang] ?? name];
   if (!mark) throw new Error(`no topic mark named "${name}"`);
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('viewBox', '0 0 256 208');
   svg.setAttribute('class', 'board-cell-mark board-cell-topic');
   svg.setAttribute('aria-hidden', 'true');
-  const cut = mark.front.replaceAll('currentColor', 'black');
+  // A shape's own stroke width outranks the group's, so it is widened here -- or a
+  // stroked shape keeps no gap at all and merges into what is behind it.
+  const black = (/** @type {string} */ d) => d.replaceAll('currentColor', 'black');
+  const cut = black(mark.front).replace(/stroke-width="(\d+)"/g, (_, w) => `stroke-width="${Number(w) + GAP}"`);
   svg.innerHTML = mark.back
     ? `<defs><mask id="${id}" maskUnits="userSpaceOnUse" x="0" y="0" width="256" height="208">`
-      + `<rect width="256" height="208" fill="white"/><g stroke="black" stroke-width="16" ${R}>${cut}</g></mask></defs>`
+      + `<rect width="256" height="208" fill="white"/><g stroke="black" stroke-width="${GAP}" ${R}>${cut}</g>`
+      + `${black(mark.cut ?? '')}</mask></defs>`
       + `<g mask="url(#${id})">${mark.back}</g>${mark.front}`
     : mark.front;
   return svg;

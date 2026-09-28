@@ -1308,8 +1308,9 @@ body:has(.board-main-turned) .site-menu .board-menu-bars { rotate: 90deg; }
    is a dashed outline and a plus, and says what it makes to a screen reader only. */
 .board-cell.board-cell-add { border: 2px dashed var(--accent); background: transparent; color: var(--accent); }
 .board-cell-add .board-cell-label::before { content: '+'; display: block; font-size: 2.4em; line-height: 1; font-weight: 700; }
-/* A topic's mark behind its word: most of the button, as the answer mark is. */
-.board-cell-topic { inline-size: 88%; block-size: 88%; opacity: 0.13; }
+/* A topic's mark behind its word, filling the button: the drawings keep their own
+   margin, and one set smaller sat in the middle as an icon the word was printed over. */
+.board-cell-topic { inline-size: 100%; block-size: 100%; opacity: 0.13; }
 /* The emergency topic is the one that has to be found without reading: the alert
    colour in both schemes, white type, and its mark in white. Across the top of the
    list when the count is odd, so the gap is not left at the foot. */
