@@ -1274,6 +1274,23 @@ dialog.board-menu-panel::backdrop { background: rgb(17 24 32 / 25%); }
 .board-main-turned .board-menu-bars, .board-letter { display: inline-block; rotate: 90deg; }
 /* The header's own bars too, which sit outside the board. */
 body:has(.board-main-turned) .site-menu .board-menu-bars { rotate: 90deg; }
+/* **Turned, the dialogs turn too**: a phone laid on the counter is read from its side
+   for the whole conversation, the settings included. A quarter turn of the whole dialog
+   rather than a writing mode, so its fields and switches keep their own layout -- and
+   sized against the screen it now lies across, its width along the screen's height. */
+body:has(.board-main-turned) :is(dialog.speaker-settings, dialog.board-editor) {
+  /* Centred on the screen's middle rather than by margins: before the turn it can be
+     wider than the screen, and a box wider than its room cannot be centred by them. */
+  inset: 50% auto auto 50%;
+  margin: 0;
+  translate: -50% -50%;
+  rotate: 90deg;
+  width: min(34rem, calc(100dvh - 2rem));
+  inline-size: min(34rem, calc(100dvh - 2rem));
+  max-width: none;
+  max-height: calc(100dvw - 2rem);
+  max-block-size: calc(100dvw - 2rem);
+}
 .board-letter { inline-size: 1em; text-align: center; }
 /* The silhouettes behind the words, and the fill-in box, turn with the words: writing
    mode turns text and not images, so they are turned the same quarter by hand. */

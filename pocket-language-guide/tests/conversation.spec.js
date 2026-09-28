@@ -2284,6 +2284,25 @@ test('a screen is rearranged by dragging, from the settings, and keeps its order
   expect(keyed).not.toEqual(before);
 });
 
+test('turned, the settings dialog turns with the board and fits the screen it lies across', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=food');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('#board-turn-bar').click();
+  await page.locator('#site-menu').click();
+  const box = await page.locator('dialog[open]').evaluate((d) => {
+    const r = d.getBoundingClientRect();
+    return { rotate: getComputedStyle(d).rotate, left: r.left, right: r.right, top: r.top, bottom: r.bottom };
+  });
+  expect(box.rotate).toBe('90deg');
+  expect(box.left).toBeGreaterThanOrEqual(0);
+  expect(box.right).toBeLessThanOrEqual(390);
+  expect(box.top).toBeGreaterThanOrEqual(0);
+  expect(box.bottom).toBeLessThanOrEqual(844);
+  // Centred on the screen, so neither side is its edge.
+  expect(Math.abs(box.left - (390 - box.right))).toBeLessThanOrEqual(2);
+});
+
 test('the list of contexts is rearranged from the header\'s settings, the plus staying last', async ({ page }) => {
   await page.goto('/conversation.html?target=zh-Hans&source=en');
   const ids = () => page.$$eval('#board-grid [data-button]', (els) => els.map((e) => /** @type {HTMLElement} */ (e).dataset.button));
