@@ -2341,6 +2341,39 @@ test('kind words are a screen of their own, and their replies are the listener\'
   await expect(page.locator('[data-button="nice"]')).toBeVisible();
 });
 
+test('the search finds a button on any context, marks the match and opens it there', async ({ page }) => {
+  await page.goto('/conversation.html?target=zh-Hans&source=en');
+  await page.locator('#board-search').click();
+  await page.getByRole('searchbox', { name: 'Find a button' }).fill('need a doc');
+  const found = page.locator('#board-grid .board-cell');
+  await expect(found).toHaveCount(1);
+  await expect(found.locator('mark')).toHaveText('need a doc');
+  await found.click();
+  await expect(page).toHaveURL(/board=emergency/);
+  await expect(page.locator('#board-stage')).toContainText('我需要医生');
+  // Pressed once: the address forgets it, so a reload is the board and not the message.
+  expect(new URL(page.url()).searchParams.get('open')).toBeNull();
+});
+
+test('on a board the search goes deeper in place, and Escape closes only the search', async ({ page }) => {
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=emergency');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  const before = await page.locator('#board-grid .board-cell').allTextContents();
+  await page.locator('#board-search').click();
+  const field = page.getByRole('searchbox');
+  await field.fill('zzzz');
+  await expect(page.locator('#board-status')).toHaveText('No button says that.');
+  await page.keyboard.press('Escape');
+  await expect(field).toHaveCount(0);
+  expect(await page.locator('#board-grid .board-cell').allTextContents()).toEqual(before);
+  // A submenu found on this board opens its screen without leaving the page.
+  await page.locator('#board-search').click();
+  await page.getByRole('searchbox').fill('signal for');
+  await page.locator('#board-grid .board-cell').first().click();
+  await expect(page.locator('.board-cell-beacon')).toHaveCount(3);
+  await expect(page).toHaveURL(/screen=signals/);
+});
+
 test('changing a language keeps the screen the reader was on', async ({ page }) => {
   // The switch reloads the page for the new pair, and it came back at the board's
   // first screen; the screen rides in the address now, and in a reload.

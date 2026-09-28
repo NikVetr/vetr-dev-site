@@ -631,5 +631,9 @@
   "board.toGallery": "All languages",
   "board.addContext": "Your own context",
   "board.contextName": "What to call this context",
-  "board.deleteContext": "Delete this context"
+  "board.deleteContext": "Delete this context",
+  "search.open": "Find a button",
+  "search.close": "Close the search",
+  "search.none": "No button says that.",
+  "search.more": "Showing {shown} of {count}. Type more to narrow it down."
 }

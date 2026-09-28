@@ -491,6 +491,27 @@
 .board-turn-bar[hidden] { display: none; }
 .board-status:empty { display: none; }
 
+/* **Searching, the header is the field.** Everything else in it steps aside -- the
+   field's own close is the way out -- and comes back when it closes. */
+.board-searching > :not(.board-search) { display: none; }
+.board-search-open[hidden] { display: none; }
+.board-search { flex: 1 1 auto; display: flex; align-items: center; gap: var(--space-2); min-inline-size: 0; }
+/* 1rem at least, or iOS zooms the page in to type. The browser's own clear is
+   hidden: it sat beside the close, two crosses doing different things. */
+.board-search-input::-webkit-search-cancel-button { display: none; }
+.board-search-input {
+  flex: 1 1 auto; min-inline-size: 0; min-block-size: min(2.6rem, 48px);
+  padding: 0 var(--space-2); font: inherit; font-size: max(1rem, var(--fs-2));
+  border: 1px solid var(--accent); border-radius: var(--radius); background: var(--control); color: var(--ink);
+}
+/* **Found buttons scroll**: a search can find more than one screen holds. Rows as tall
+   as a phone's board gives its cells, so the fitter still has a box to fill. */
+.board-grid.board-grid-results { grid-auto-rows: 6.5rem; overflow-y: auto; align-content: start; }
+/* The letters that matched, marked twice -- heavier, and in another colour -- so the
+   mark survives a screen in sun and a reader who does not see the colour. */
+mark.board-cell-found { background: none; color: var(--accent); font-weight: 700; }
+:is(.board-cell-more, .board-cell-alert, .board-cell-beacon) mark.board-cell-found { color: #ffe08a; }
+
 /* --- the message ------------------------------------------------------------- */
 
 /* "Full-screen" means the app's viewport, not the Fullscreen API: that needs a

@@ -46,8 +46,10 @@ const TAP_SLOP_PX = 10;
  *   for a button that says one of the reader's details, whether they have given it
  * @param {(button:import('../core/conversation.js').BoardButton)=>void} [config.onHold]
  *   what holding a button whose detail is set does
+ * @param {(button:import('../core/conversation.js').BoardButton)=>[number, number]|undefined} [config.mark]
+ *   where in its label a search matched, for the found buttons
  */
-export function renderGrid(root, node, { label, available, onPick, lang, title, detail, onHold }) {
+export function renderGrid(root, node, { label, available, onPick, lang, title, detail, onHold, mark }) {
   root.replaceChildren();
   root.lang = lang;
   root.removeAttribute('aria-busy');
@@ -98,6 +100,15 @@ export function renderGrid(root, node, { label, available, onPick, lang, title, 
     const text = document.createElement('span');
     text.className = 'board-cell-label';
     text.textContent = button.add ? '' : label(button);
+    // The letters a search matched, marked where they are in the words.
+    const at = mark?.(button);
+    if (at) {
+      const said = label(button);
+      const found = document.createElement('mark');
+      found.className = 'board-cell-found';
+      found.textContent = said.slice(at[0], at[1]);
+      text.replaceChildren(said.slice(0, at[0]), found, said.slice(at[1]));
+    }
     if (button.add) {
       const plus = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
       plus.setAttribute('viewBox', '0 0 24 24');
@@ -219,7 +230,24 @@ function lineRects(el) {
   // and the column alignment has to count it.
   const hang = el.querySelector(':scope > .board-message-punct');
   if (hang && !el.classList.contains('board-punct-inline')) range.setEndBefore(hang);
-  return [...range.getClientRects()].filter((rect) => rect.height > 0);
+  // **One box per line, however many pieces it is set in.** A line with markup in it
+  // -- the letters a search matched -- comes back as a rect per piece, and measuring
+  // the pieces as lines set "afternoon" at a size where only "fternoon" fitted. Pieces
+  // whose middles are within half a line of each other are one line.
+  const across = vertical(el);
+  /** @type {DOMRect[]} */ const lines = [];
+  for (const rect of range.getClientRects()) {
+    if (!(rect.height > 0)) continue;
+    const mid = (/** @type {DOMRect} */ r) => (across ? r.left + r.width / 2 : r.top + r.height / 2);
+    const size = across ? rect.width : rect.height;
+    const i = lines.findIndex((line) => Math.abs(mid(line) - mid(rect)) < Math.min(size, across ? line.width : line.height) / 2);
+    if (i < 0) { lines.push(rect); continue; }
+    const line = lines[i];
+    const left = Math.min(line.left, rect.left);
+    const top = Math.min(line.top, rect.top);
+    lines[i] = new DOMRect(left, top, Math.max(line.right, rect.right) - left, Math.max(line.bottom, rect.bottom) - top);
+  }
+  return lines;
 }
 
 /**

@@ -47,6 +47,7 @@ import {
   read as readPersonal, placedOn, addPhrase, write as writePersonal, setOrder, arranged,
 } from './board-store.js';
 import { arrange } from './arrange.js';
+import { find, openSearch, ownButton, reachable } from './board-search.js';
 import { askChoices, askText } from './board-menu.js';
 import {
   openSpeakerSettings, readProfile, noticeFor, personalSection,
@@ -370,7 +371,16 @@ async function showPicker(owner, listener, index) {
   out.setAttribute('aria-label', t('board.toGallery'));
   out.title = t('board.toGallery');
   out.addEventListener('click', () => { location.href = './'; });
-  onBack(() => false, './');
+  /** @type {Promise<import('../core/conversation.js').ResolveContext>|undefined} */ let pairing;
+  const closeSearch = wireSearch({
+    owner,
+    // The corpus only when the search is opened: this list is the screen a reader
+    // lands on, and the one most likely to be opened with no signal.
+    entries: async () => searchEntries(await (pairing ??= pairContext(listener, owner)), index, {}),
+    pick: visit,
+    back: () => drawTopics(),
+  });
+  onBack(closeSearch, './');
   if (!topics.size) $('board-status').textContent = t('board.noBoards');
   // **Contexts of the reader's own** after the board's, and a last cell that makes one:
   // a hotel's check-in, a clinic, whatever the shipped contexts do not cover. Each is a
@@ -437,6 +447,173 @@ async function showPicker(owner, listener, index) {
     paintTurn();
   });
   registerOffline();
+}
+
+/**
+ * Everything `resolvePhrase` reads for a pair: the corpus and only the rows two
+ * languages need, their language slots filled, and the respeller.
+ * @param {string} listener @param {string} owner
+ */
+async function pairContext(listener, owner) {
+  // `loadCorpus` reads the registries and the concept bank; `loadLanguage` reads one
+  // pack. Both come from `core/pack.js`, which is a 44KB data-only module --
+  // statically imported, because making it lazy would buy nothing and a board cannot
+  // start without it.
+  const corpus = await loadCorpus(loadText);
+  const [listenerRows, ownerRows] = await Promise.all([
+    loadLanguage(loadText, listener, corpus.groups),
+    loadLanguage(loadText, owner, corpus.groups),
+  ]);
+  // **Seven concepts name a language, and the name comes from the pair.** The sheet
+  // has always filled these; the board never did, so `do-you-speak-english` would
+  // have shown a stranger the literal string `{source}`. They are exactly the phrases
+  // a board wants -- "I do not speak Chinese", "please write it down" -- so the fix is
+  // to fill them here too rather than to keep them off every board.
+  const slots = { target: listener, source: owner };
+  fillLanguageSlots(listenerRows, {
+    ...slots, locale: listener, names: corpus.languageNames[listener],
+  });
+  fillLanguageSlots(ownerRows, { ...slots, locale: owner, names: corpus.languageNames[owner] });
+  // Direction is a fact about a *script*, not about a language, which is why it
+  // takes two lookups: the registry says Urdu is written in Arabic script, and
+  // `scripts.csv` says Arabic script runs right to left.
+  const dirOf = (/** @type {string} */ code) => /** @type {'ltr'|'rtl'} */ (
+    corpus.scripts[corpus.languages[code]?.script]?.direction === 'rtl' ? 'rtl' : 'ltr');
+  return {
+    corpus,
+    listenerRows,
+    ownerRows,
+    listener,
+    owner,
+    listenerDir: dirOf(listener),
+    ownerDir: dirOf(owner),
+    respell: await respellerFor(corpus, listener, owner, listenerRows),
+  };
+}
+
+/**
+ * What a button says in the reader's language: its short label where it has one, the
+ * reader's own label for a button of theirs, and otherwise the sentence itself --
+ * or null, where this pair cannot say it.
+ * @param {import('../core/conversation.js').BoardButton} button
+ * @param {import('../core/conversation.js').ResolveContext} ctx
+ * @param {Record<string, import('./board-store.js').CustomPhrase>} phrases
+ */
+function wording(button, ctx, phrases) {
+  if (button.labelKey) return t(button.labelKey);
+  const own = phrases[button.id];
+  if (own?.label) return own.label;
+  if (button.phraseRef?.kind === 'custom') return own?.owner || null;
+  return button.phraseRef ? resolvePhrase(button.phraseRef, ctx)?.owner.text ?? null : null;
+}
+
+/** @typedef {import('./board-search.js').Reached & {label: string}} Findable */
+
+/**
+ * Everything the search can find for this pair: each context, and every button on
+ * every screen of every one -- the boards' and the reader's own -- that the pair can
+ * say, in the reader's words. A sentence on two screens is found once, on the first.
+ * @param {import('../core/conversation.js').ResolveContext} ctx
+ * @param {{boards:{id:string, titleKey:string, listeners:string[], owners:string[], icon?:string, alert?:true}[]}} index
+ * @param {Record<string, any>} loaded  boards already in memory, by id
+ * @returns {Promise<Findable[]>}
+ */
+async function searchEntries(ctx, index, loaded) {
+  const data = readPersonal().data;
+  const pair = `${ctx.listener}__${ctx.owner}`;
+  const served = index.boards.filter((b) => serves(b, ctx.listener, ctx.owner));
+  const boards = await Promise.all(served.map(async (b) => loaded[b.id]
+    ?? JSON.parse(await loadText(`data/boards/${b.id}.json`))));
+  const mine = placedOn(data, CONTEXTS, pair).filter((p) => p.screen);
+  /** @type {Findable[]} */
+  const contexts = [
+    ...served.map((b) => ({ board: b.id, path: [], label: t(b.titleKey),
+      button: /** @type {import('../core/conversation.js').BoardButton} */ ({ id: b.id, kind: 'submenu', icon: b.icon, alert: b.alert }) })),
+    ...mine.map((p) => ({ board: `${OWN}${p.id}`, path: [], label: p.label,
+      button: /** @type {import('../core/conversation.js').BoardButton} */ ({ id: `${OWN}${p.id}`, kind: 'submenu', own: true }) })),
+  ];
+  const sayable = (/** @type {import('../core/conversation.js').BoardButton} */ b) => (
+    b.kind === 'submenu' || b.kind === 'beacon'
+    || (b.kind === 'message' && Boolean(b.phraseRef?.kind === 'custom'
+      ? data.phrases[b.phraseRef.id] : b.phraseRef && resolvePhrase(b.phraseRef, ctx))));
+  const seen = new Set();
+  /** @type {Findable[]} */ const buttons = [];
+  for (const f of reachable([...boards, ...mine.map((p) => ({ id: `${OWN}${p.id}`, rootNodeId: p.id, nodes: {} }))], data, pair)) {
+    const said = f.button.kind === 'message' ? `${f.button.phraseRef?.kind}:${f.button.phraseRef?.id}` : `${f.board}/${f.button.id}`;
+    const label = sayable(f.button) && !seen.has(said) ? wording(f.button, ctx, data.phrases) : null;
+    if (!label) continue;
+    seen.add(said);
+    buttons.push({ ...f, label });
+  }
+  return [...contexts, ...buttons];
+}
+
+/** A found button, where it is: its context, its screen, and pressed there -- except a
+ * beacon, which is not started for anyone who has not pressed the beacon itself.
+ * @param {Findable} found */
+const visit = (found) => goTo({
+  board: found.board,
+  screen: found.path.slice(1).join('/') || null,
+  open: found.path.length && found.button.kind !== 'beacon' ? found.button.id : null,
+});
+
+/** How many found buttons are drawn at once; past this the reader is asked to type more. */
+const FOUND_MAX = 48;
+
+/**
+ * The header's search, on the context list and on every board: typing finds buttons on
+ * all of this pair's contexts, marked where they match, and pressing one goes there.
+ * @param {{owner: string, entries: () => Promise<Findable[]>, pick: (found: Findable) => void,
+ *   back: () => void}} config  `back` draws the screen the search was opened over
+ * @returns {() => boolean} closes an open search, and says whether one was open
+ */
+function wireSearch({ owner, entries, pick, back }) {
+  const open = $('board-search');
+  open.hidden = false;
+  open.setAttribute('aria-label', t('search.open'));
+  open.title = t('search.open');
+  const grid = $('board-grid');
+  const status = $('board-status');
+  /** @type {null | (() => void)} */ let close = null;
+  let said = '';
+  /** @param {(Findable & {at: [number, number]})[]} found */
+  const show = (found) => {
+    const byId = new Map(found.slice(0, FOUND_MAX).map((f, i) => [`found-${i}`, f]));
+    const of = (/** @type {{id:string}} */ b) => /** @type {Findable & {at: [number, number]}} */ (byId.get(b.id));
+    grid.classList.remove('board-grid-topics');
+    grid.classList.add('board-grid-results');
+    renderGrid(grid, { buttons: [...byId].map(([id, f]) => ({ ...f.button, id })) }, {
+      lang: owner,
+      label: (b) => of(b).label,
+      mark: (b) => of(b).at,
+      available: () => true,
+      onPick: (b) => { const f = of(b); close?.(); pick(f); },
+    });
+    status.textContent = !found.length ? t('search.none')
+      : found.length > FOUND_MAX ? t('search.more', { shown: String(FOUND_MAX), count: String(found.length) }) : '';
+  };
+  const restore = () => {
+    grid.classList.remove('board-grid-results');
+    status.textContent = said;
+    back();
+  };
+  open.addEventListener('click', async () => {
+    const all = await entries();
+    said = status.textContent ?? '';
+    close = openSearch({
+      bar: /** @type {HTMLElement} */ (open.parentElement),
+      lang: owner,
+      placeholder: t('search.open'),
+      closeLabel: t('search.close'),
+      onQuery: (query) => { if (query.trim()) show(find(all, query, owner)); else restore(); },
+      onClose: () => { close = null; restore(); open.focus(); },
+    });
+  });
+  return () => {
+    if (!close) return false;
+    close();
+    return true;
+  };
 }
 
 async function main() {
@@ -510,25 +687,10 @@ async function main() {
   // data, and the person who sees this is the one who can fix it.
   if (problems.length) throw new Error(`data/boards/${boardId}.json: ${problems.join('; ')}`);
 
-  // The corpus, and only the rows two languages need. `loadCorpus` reads the
-  // registries and the concept bank; `loadLanguage` reads one pack. Both come from
-  // `core/pack.js`, which is a 44KB data-only module -- statically imported, because
-  // making it lazy would buy nothing and this page cannot start without it.
-  const corpus = await loadCorpus(loadText);
-  const [listenerRows, ownerRows] = await Promise.all([
-    loadLanguage(loadText, listener, corpus.groups),
-    loadLanguage(loadText, owner, corpus.groups),
-  ]);
-  // **Seven concepts name a language, and the name comes from the pair.** The sheet
-  // has always filled these; the board never did, so `do-you-speak-english` would
-  // have shown a stranger the literal string `{source}`. They are exactly the phrases
-  // a board wants -- "I do not speak Chinese", "please write it down" -- so the fix is
-  // to fill them here too rather than to keep them off every board.
-  const slots = { target: listener, source: owner };
-  fillLanguageSlots(listenerRows, {
-    ...slots, locale: listener, names: corpus.languageNames[listener],
-  });
-  fillLanguageSlots(ownerRows, { ...slots, locale: owner, names: corpus.languageNames[owner] });
+  const pairing = await pairContext(listener, owner);
+  const { corpus, listenerRows, ownerRows } = pairing;
+  /** @type {import('../core/conversation.js').ResolveContext} */
+  const ctx = pairing;
 
   // **The listener's own catalogue, read without becoming the interface language.**
   // `loadUiLanguage` above set the owner's; calling it again for the listener would
@@ -536,22 +698,6 @@ async function main() {
   // is exactly what a Reply control must not do.
   const theirs = await loadCatalogue(listener, loadText);
 
-  // Direction is a fact about a *script*, not about a language, which is why it
-  // takes two lookups: the registry says Urdu is written in Arabic script, and
-  // `scripts.csv` says Arabic script runs right to left.
-  const dirOf = (/** @type {string} */ code) => /** @type {'ltr'|'rtl'} */ (
-    corpus.scripts[corpus.languages[code]?.script]?.direction === 'rtl' ? 'rtl' : 'ltr');
-  /** @type {import('../core/conversation.js').ResolveContext} */
-  const ctx = {
-    corpus,
-    listenerRows,
-    ownerRows,
-    listener,
-    owner,
-    listenerDir: dirOf(listener),
-    ownerDir: dirOf(owner),
-    respell: await respellerFor(corpus, listener, owner, listenerRows),
-  };
   // Each side's word for every country, where both languages have them: the owner
   // chooses from theirs and the listener is told in theirs.
   // Asked for only where this board says it: the settings offer the detail on a board
@@ -769,11 +915,7 @@ async function main() {
         // A screen of the reader's own opens like the board's submenus do; its id is
         // the node the path moves to, and what is on it is placed under that id. A
         // button taken from a board says its concept, as it did there.
-        ...mine.map((p) => /** @type {import('../core/conversation.js').BoardButton} */ (p.screen
-          ? { id: p.id, kind: 'submenu', nodeId: p.id, colour: 'stay' }
-          : { id: p.id, kind: 'message', colour: 'stay',
-            phraseRef: p.concept ? { kind: 'corpus', id: p.concept } : { kind: 'custom', id: p.id },
-            ...(ownSets[`own/${p.id}`] ? { replySetId: `own/${p.id}` } : {}) })),
+        ...mine.map((p) => ({ ...ownButton(p), ...(ownSets[`own/${p.id}`] ? { replySetId: `own/${p.id}` } : {}) })),
       ], held.order?.[at]),
     };
   };
@@ -819,18 +961,8 @@ async function main() {
   };
 
   /** @param {import('../core/conversation.js').BoardButton} button */
-  const labelOf = (button) => {
-    if (button.add) return t('editor.open');
-    if (button.labelKey) return t(button.labelKey);
-    // No short label written, so the owner's own full wording is the label. Better
-    // than the concept id, and it is the sentence they are about to show anyway.
-    const phrase = phraseOf(button);
-    // A phrase the reader wrote carries its own short label; theirs wins, because
-    // they chose it for this button.
-    const own = personal.data.phrases[button.id];
-    if (own?.label) return own.label;
-    return phrase?.owner.text ?? button.id;
-  };
+  const labelOf = (button) => (button.add ? t('editor.open')
+    : wording(button, ctx, personal.data.phrases) ?? button.id);
 
   /** @param {any} action */
   const dispatch = (action) => {
@@ -841,6 +973,59 @@ async function main() {
     speech.stop();
     state = next;
     paint();
+  };
+
+  /**
+   * What pressing a button on the grid does -- or pressing it in the search's results,
+   * which is the same press made from somewhere else.
+   * @param {import('../core/conversation.js').BoardButton} button
+   */
+  const pickButton = (button) => {
+    if (button.add) { openEditor(); return; }
+    // Not given yet: the first press asks for the detail rather than showing a
+    // sentence with a hole in it.
+    const unfilled = phraseOf(button)?.unfilled;
+    if (unfilled === 'diet') { askDiet(dietChoices(), detailsChanged); return; }
+    if (unfilled === 'country') { askFrom?.(); return; }
+    if (unfilled) { askDetail(unfilled, detailsChanged, sounds()); return; }
+    // **Not a state change, and deliberately not part of the board's own
+    // machine.** A beacon is not something being said -- there is no message,
+    // no reply, nothing to return from -- so it takes over the screen and hands
+    // it straight back. Leaving `state` alone means the grid is exactly where
+    // it was when the beacon stops, which is what someone who has just been
+    // found needs.
+    if (button.kind === 'beacon') {
+      speech.stop();
+      // **The word on it is the stranger's, not the reader's.** A beacon exists
+      // to be read by whoever is walking past, so the one thing on this screen
+      // that must not be in the reader's language is the word itself. The
+      // corpus already carries it -- reviewed, in the native script, for every
+      // pack that can be a listener -- so this is the same phrase the `Help`
+      // cell says, shown at the size of the display instead of spoken.
+      // `beacon.dismiss` stays the reader's, because it is the reader who has
+      // to know how to stop it.
+      const help = ctx.listenerRows['emergency-medical.help'];
+      startBeacon({
+        mode: button.beacon === 'sos' || button.beacon === 'lights' ? button.beacon : 'attention',
+        siren: display.siren,
+        label: button.beacon === 'sos'
+          ? theirs.t('beacon.sos')
+          : (help?.text || theirs.t('beacon.help')),
+        lang: listener,
+        dir: ctx.listenerDir,
+        dismiss: t('beacon.dismiss'),
+        fit: fitMessage,
+        // The screen is the signal, so it must not sleep while one is running
+        // -- and the lock goes back to following the message view afterwards.
+        onStop: () => keepAwake(state.view !== 'grid'),
+      });
+      keepAwake(true);
+      return;
+    }
+    openedFrom = button.id;
+    dispatch({
+      type: 'open', buttonId: button.id, kind: button.kind, nodeId: button.nodeId,
+    });
   };
 
   function paint() {
@@ -859,7 +1044,9 @@ async function main() {
     // A waiting deploy installs here, between things, and nowhere else.
     applyUpdateIfIdle();
 
-    if (state.view !== 'grid') { $('board-menu').hidden = true; $('board-turn-bar').hidden = true; $('board-add-bar').hidden = true; }
+    if (state.view !== 'grid') {
+      for (const id of ['board-menu', 'board-turn-bar', 'board-add-bar', 'board-search']) $(id).hidden = true;
+    }
     // Turned is for the whole tree, not one screen of it: the owner's grid turns
     // with the sentence and the answers, so a phone laid on the counter reads one
     // way from the first tap to the last -- and the bar under it turns with it, so
@@ -881,10 +1068,7 @@ async function main() {
       // The arrow says "out of here" wherever you are: up a submenu, or back to the
       // context list from a board's root. Its accessible name says which.
       const atRoot = state.path.length < 2;
-      $('board-up').hidden = false;
-      $('board-menu').hidden = false;
-      $('board-turn-bar').hidden = false;
-      $('board-add-bar').hidden = false;
+      for (const id of ['board-up', 'board-menu', 'board-turn-bar', 'board-add-bar', 'board-search']) $(id).hidden = false;
       $('board-up').setAttribute('aria-label', atRoot ? t('board.allTopics') : t('board.up'));
       renderGrid($('board-grid'), node, {
         lang: owner,
@@ -899,53 +1083,7 @@ async function main() {
           return fill ? (ctx.details?.[fill] ? 'set' : 'unset') : null;
         },
         onHold: (button) => { setDetail(/** @type {string} */ (fillOf(button)), ''); detailsChanged(); },
-        onPick: (button) => {
-          if (button.add) { openEditor(); return; }
-          // Not given yet: the first press asks for the detail rather than showing a
-          // sentence with a hole in it.
-          const unfilled = phraseOf(button)?.unfilled;
-          if (unfilled === 'diet') { askDiet(dietChoices(), detailsChanged); return; }
-          if (unfilled === 'country') { askFrom?.(); return; }
-          if (unfilled) { askDetail(unfilled, detailsChanged, sounds()); return; }
-          // **Not a state change, and deliberately not part of the board's own
-          // machine.** A beacon is not something being said -- there is no message,
-          // no reply, nothing to return from -- so it takes over the screen and hands
-          // it straight back. Leaving `state` alone means the grid is exactly where
-          // it was when the beacon stops, which is what someone who has just been
-          // found needs.
-          if (button.kind === 'beacon') {
-            speech.stop();
-            // **The word on it is the stranger's, not the reader's.** A beacon exists
-            // to be read by whoever is walking past, so the one thing on this screen
-            // that must not be in the reader's language is the word itself. The
-            // corpus already carries it -- reviewed, in the native script, for every
-            // pack that can be a listener -- so this is the same phrase the `Help`
-            // cell says, shown at the size of the display instead of spoken.
-            // `beacon.dismiss` stays the reader's, because it is the reader who has
-            // to know how to stop it.
-            const help = ctx.listenerRows['emergency-medical.help'];
-            startBeacon({
-              mode: button.beacon === 'sos' || button.beacon === 'lights' ? button.beacon : 'attention',
-              siren: display.siren,
-              label: button.beacon === 'sos'
-                ? theirs.t('beacon.sos')
-                : (help?.text || theirs.t('beacon.help')),
-              lang: listener,
-              dir: ctx.listenerDir,
-              dismiss: t('beacon.dismiss'),
-              fit: fitMessage,
-              // The screen is the signal, so it must not sleep while one is running
-              // -- and the lock goes back to following the message view afterwards.
-              onStop: () => keepAwake(state.view !== 'grid'),
-            });
-            keepAwake(true);
-            return;
-          }
-          openedFrom = button.id;
-          dispatch({
-            type: 'open', buttonId: button.id, kind: button.kind, nodeId: button.nodeId,
-          });
-        },
+        onPick: pickButton,
       });
       // Back to the cell that opened the message, for whoever is not using a finger.
       // Looked up after the render, against the node that now exists.
@@ -1243,6 +1381,19 @@ async function main() {
     },
   });
 
+  // Found on this board, the press is made here; on another, that board opens to it.
+  const closeSearch = wireSearch({
+    owner,
+    entries: () => searchEntries(ctx, index, { [boardId]: board }),
+    pick: (found) => {
+      if (found.board !== boardId || !found.path.length) { visit(found); return; }
+      state = { ...state, view: 'grid', path: found.path };
+      if (found.button.kind === 'beacon') paint();
+      else pickButton(found.button);
+    },
+    back: () => paint(),
+  });
+
   // The bars are Settings and the plus is the editor: two controls for two things,
   // rather than one control opening a menu of the two. The header's bars are the
   // same Settings, so a reader who looks up finds the same door.
@@ -1266,6 +1417,7 @@ async function main() {
     // A beacon first: it is over the whole screen, so it is what "back" means while
     // one is running, and it is not part of the board's own state.
     if (document.querySelector('.beacon')) { stopBeacon(); return true; }
+    if (closeSearch()) return true;
     if (state.view === 'reply') { dispatch({ type: 'cancelReply' }); return true; }
     if (state.view !== 'grid') { dispatch({ type: 'dismiss' }); return true; }
     if (state.path.length > 1) { dispatch({ type: 'up' }); return true; }
@@ -1291,6 +1443,16 @@ async function main() {
   deferUpdates(() => state.view === 'grid' && !document.querySelector('dialog[open]'));
 
   paint();
+  // **A button found by the search on another board**, pressed as it would have been
+  // on its own screen -- once: the address forgets it, so a reload does not press it again.
+  const opening = params.get('open');
+  if (opening) {
+    const here = new URL(location.href);
+    here.searchParams.delete('open');
+    history.replaceState(history.state, '', here);
+    const button = withOwn(nodeHere()).buttons.find((b) => b.id === opening);
+    if (button) pickButton(button);
+  }
   registerOffline();
   // **This pair now opens without a connection.** The shell ships the concept bank
   // and one pair's rows and no more, which is right -- fifty-one languages of rows is
