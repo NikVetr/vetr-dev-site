@@ -11,7 +11,10 @@ Optional profanity content is a separate section that starts disabled.
 `ui/drill.js` builds seeded practice sessions from the selected content, with multiple
 choice, matching and typed answers. Grading distinguishes correct answers, differences
 in diacritics and incorrect answers, with a length-dependent tolerance for typos.
-The same module supplies the practice dialog and its keyboard controls.
+A missed multiple-choice question shows, beside each wrong option, the prompt that option
+does answer, since each option keeps the card it came from; a template's slot is drawn as
+`____` and graded as the same slot as the stored `{}`. The same module supplies the
+practice dialog and its keyboard controls.
 
 Header and footer bands can be configured independently, with multiple information
 slots, custom text, colour and full-width or tab placement. The solver reserves their
@@ -532,7 +535,10 @@ and offline on a phone without paying for the solver, `pdf-lib` or a CJK font.
   its bar floats under the header, but not before: it folds only once the whole grid
   has gone under the header, not on the first nudge, and what the scroll folded the
   scroll back unfolds, while a grid the reader closed, or that closed because they
-  chose, stays closed until they tap it. The fold and unfold travel — `max-block-size`
+  chose, stays closed until they tap it. A grid the scroll folded keeps its room until
+  the scroll unfolds it, so nothing under it moves mid-scroll -- a phone without scroll
+  anchoring would otherwise show the page jumping by the grid's height -- and the floating
+  bar's placeholder is the bar's own measured height. The fold and unfold travel — `max-block-size`
   and opacity transition, `display` transitions discretely with `allow-discrete`, and
   `@starting-style` gives the unfold a height to grow from.
 
@@ -851,7 +857,9 @@ hanging mark counts as ink, a right-to-left sentence's corner is on its left, a
 turned one's is under the last column (a turned right-to-left one's above it, where
 its lines end), a buffer of three tenths of the type size keeps the two apart, and
 a sentence that scrolls lends no corner at all. Reply's label stays on one line and
-its type at no more than four fifths of the sentence's, whichever place it takes.
+its type at no more than four fifths of the sentence's, whichever place it takes, and
+its words are kept inside its padding along the line only: across it a font's box is
+taller than its line in many phone faces (SF, the CJK and Indic faces), with no ink there.
 **The pair always fits the frame.** Below is lifted out of its row and set under the
 sentence with a buffer of a third of the sentence's size, so the sentence is fitted
 with that buffer held open as the row's gap -- re-read as the sentence settles, since
@@ -913,19 +921,42 @@ reader's own details.** A corpus template leaves a `{}` in its script, romanisat
 IPA cells ("My name is {}" in every language), and a board button naming it with
 `fill: 'name'` puts the detail there -- in the sentence, the IPA and the respelling
 alike, since the respeller passes `{}` through and a person knows how to say their own
-name. `DETAILS` in `core/conversation.js` is the closed list (the name, for now), and
-`ui/about.js` keeps the details in `plg.about`, carried in a backup. Until the detail is
-given the button is greyed with an empty box in its corner and its label has a blank;
-the first press asks for the detail rather than showing a sentence with a hole, and a
-given one shows a ticked box and the value, and is cleared by a hold (or a right
-click). The settings dialog has the same field under "About you". **"My diet"** is the
+name. `DETAILS` in `core/conversation.js` is the closed list -- the name, `typed`, and the
+country, `chosen` -- and `ui/about.js` keeps the details in `plg.about`, carried in a
+backup. Until the detail is given the button is greyed with an empty box in its corner and
+its label has a blank; the first press asks for the detail rather than showing a sentence
+with a hole, and a given one shows a ticked box and the value, and is cleared by a hold
+(or a right click). The settings dialog has the same fields under "About you". **A name
+can be built from its sounds**, in a grid folded under the name field (`soundGrid` in
+`ui/board-menu.js`): a key per sound labelled in the owner's own letters over its IPA, the
+sounds so far, and the name as the listener will read it, every key and the whole name
+said in the listener's voice. It is the respeller run the other way -- `nameRespeller` in
+`core/respell.js`, the listener's rule table bound to the owner's IPA with no syllable
+breaks or stress -- and `detailsFor` in `ui/conversation.js` gives the listener that
+spelling (ニコライ) wherever it is in another script from the typed name, and its IPA; the
+owner's gloss and respelling line keep the name as typed. **The country is chosen**
+from every inhabited country and territory and the six continents, in
+`data/countries/<code>.csv` (CLDR's names, written by `scripts/build_countries.mjs`, with
+the form the language's "I am from" frame takes where it is not the bare name, the
+romanised packs' romanisation, and IPA from `build_ipa.py`), fetched for the pair's two
+languages. `resolvePhrase` looks a chosen detail up in `ctx.choices`, each side in its own
+word, and a pair without the words cannot say it: the owner's word never stands in for
+the listener's. **"My diet"** is the
 same idea for a list: a `diet` phrase reference says every one of the corpus's own
 dietary statements (`DIET`: vegetarian, vegan, no pork, no peanuts, not spicy and the
 rest) the reader has ticked, joined as two sentences are joined for "excuse me" --
 `joinSentences`, one function for both -- in the corpus's order, dropping any the pair
 cannot say. Its button is first on the food board's "none of this" screen, greyed and
 boxed until ticked; the first press opens the checklist, in the reader's own words.
-What is on a screen saves as a small file (`buildButtons`/`readButtons` in
+A screen can be rearranged from the settings: `ui/arrange.js` lets its buttons be
+dragged (or moved with the arrow keys) into the reader's order, kept as `order` per
+screen in the personal store and applied by `arranged` whenever the screen is drawn,
+the board's buttons and the reader's together. A context of the reader's own can be
+made of the boards' buttons: the editor's "Add buttons from the boards" places a
+corpus concept, with its answers' concepts, by reference (`concept`/`answers` on the
+stored phrase), so it keeps every translation and its Reply; an empty screen offers
+its first button as a dashed plus. The listener's answers are numbered in their own
+digits, so they can hold up fingers. What is on a screen saves as a small file (`buildButtons`/`readButtons` in
 `core/personal.js`, relative placement keys, the backup's own field checks) and loads
 onto any screen of the same pair under fresh ids, so a tree can be handed to someone
 or written by hand; the bars beside it open Settings, and the same bars sit in every page's
@@ -935,10 +966,12 @@ own "excuse me" row for each language — one reviewed sentence before another,
 joined as two sentences, never a template — except on the emergency board. Turned
 applies to the whole tree: the owner's grid and the keypad turn with the sentence
 and the answers, and the bar under them **keeps its shape while what is on it turns in
-place** -- its arrow and icons a quarter each, and the topic's letters each on their line
+place** -- its arrow and icons a quarter each, and, for a script read a character at a
+time (Chinese, Japanese kana, Korean Hangul), the topic's letters each on their line
 (`turnLetters`), laid out from the right so they read down the page for whoever has
 turned the phone, at no more height than the upright label took -- so no control moves.
-A joining script's label stays upright rather than lose its joined forms. Another
+Every other label stays one upright line. The silhouettes behind the words and a
+fill-in's box turn with the grid, since a writing mode turns only text. Another
 display setting makes Attract attention sound a siren as it flashes: an oscillator wail
 between about 650 and 1500 Hz, started in the tap, played through the silent switch
 where Safari allows it, and stopped with the beacon. **The list of contexts ends in the
@@ -976,6 +1009,15 @@ body-area submenu, because someone two taps deep must still be able to say stop.
 `it hurts here`, `another towel, please` and `thank you` are existing concepts from
 three other sections, on the board by reference. Sixteen `massage-spa` concepts were
 added only for meanings the corpus genuinely could not say.
+
+**A button says one reading.** A row may carry a concept's range for the printed sheet
+("yes / right", "This is my husband / wife", which a traveller points into); a board
+shows the part before ` / `, and its IPA and respelling are cut at the same place. Where
+one reading is not enough, the board has concepts of its own in a section that is off on
+the sheet -- `family-intros`, four sentences introducing a husband, wife, son or daughter
+one at a time. Meeting people also has **Kind words**, a screen of thanks and compliments
+to a stranger or a host (`kind-words`, off on the sheet unless turned on), whose replies index the
+corpus's own "thank you" and "you are welcome".
 
 - **`core/conversation.js`** is pure — no DOM, no fetch, no storage. Board typedefs,
   `validateBoard` (which reports every problem rather than the first), `resolvePhrase`,

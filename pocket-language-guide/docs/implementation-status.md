@@ -5218,3 +5218,123 @@ the browser suites (Chromium 227 of 228 with one skipped, and the main specs 169
 on the final code; WebKit smoke 7 of 7; unit 696 of 696; the gate 10 of 10). The siren
 has been heard by no one: the browser test counts its oscillators, and only a phone can
 say how loud it is through the speaker and whether iOS honours the silent-switch request.
+
+## Batch AE — the answers behind a missed choice, a menu that holds its settings, a page and a Reply that hold still, and details said in the listener's own words
+
+**The quiz says what each wrong option answers.** Multiple choice keeps the card behind
+every option, so a missed question shows, beside each other option, the prompt it is
+the right answer to -- the answers turned back into their questions. The options and
+their order are drawn exactly as before, so a seed asks the same quiz. A template's
+slot is drawn as `____` wherever it is shown, and grading treats it and the stored `{}`
+as the same slot.
+
+**The studio's phone menu holds its settings.** It had a Settings item opening a second
+menu with one switch in it; the owner asked for the two to be combined, not nested. The
+appearance switch and the resume choice sit at the foot of the menu, and flipping one
+leaves the menu open.
+
+**Turned, only a script read a character at a time turns its letters.** A column of
+sideways Latin letters is not how English is read, so a topic's label turns letter by
+letter only in Chinese, Japanese kana and Korean Hangul; everything else stays one line.
+The silhouettes behind the words and the fill-in box turn with them now (a writing mode
+turns only text), and the box's tick is drawn on physical sides so it stays upright.
+
+**The landing page no longer jumps at the bottom of "I want to speak".** On a phone the
+grid folds once the scroll has taken it all under the header, and folding gave up its
+room, so everything under it moved up 228px mid-scroll -- and back on the way up. Chrome's
+scroll anchoring anchored on the grid being hidden, and iOS has none. A grid the scroll
+folded now keeps its room until the scroll unfolds it, which is never seen empty; the
+floating bar's placeholder is measured from the bar (29.6px) instead of a fixed 2rem.
+A test scrolls a step at a time and holds the first card to every step.
+
+**Reply is no longer tiny on a phone.** Reply is shrunk until its words sit inside its
+padding, and that was measured on all four sides -- but across the line a font's box is
+taller than the line in SF on an iPhone and the CJK and Indic faces on Android, so it
+overhung the padding where there is no ink, failed at every size, and left every Reply
+at its 16px floor. Here it passed by less than a pixel, which is why it was never seen.
+The test is along the line only now; with a font box standing in for such a face, Reply
+goes from the floor to a median of 67px upright and 52px turned.
+
+**A board's slashed row says one reading, and its pronunciation says the same.** A board
+shows the part of a row before ` / `; the IPA and the respelling were left whole, so the
+owner's line read both readings under a sentence showing one. They are cut with it.
+
+**Family, one by one.** That same rule made "This is my wife" and "This is my son"
+impossible to say on any board -- the rows carry both people so a traveller can point
+into them on the sheet -- and in Indonesian, Malay, Swahili and Vietnamese the half
+shown was not a sentence (`Ini suami`, without *saya*). The board has four sentences of
+its own now, in a `family-intros` section that is off on the sheet, which keeps its two
+combined rows; `content/PROMPTS/family-intros.md` is the brief they were written from.
+
+**A name built from its sounds.** The name dialog folds away a grid of sounds: a key per
+sound, labelled in the owner's own letters (the respeller writing /ʃa/ as "shah" for an
+English reader, シャ for a Japanese one) over its IPA; the sounds so far, one of which
+can be picked out and replaced; and the name as the listener will read it. It is the
+respeller run the other way -- the listener's rule table bound to the owner's IPA, since
+the name's sounds are the owner's language's, with no syllable breaks or stress marks --
+so a Japanese listener reads ニコライ where they would have read "Nikolai", and every key
+and the whole name are said in the listener's voice, which is what the listener's phone
+will say. A listener who reads the letters it was typed in still reads it as typed.
+
+**Where you are from.** `data/countries/<code>.csv` holds every inhabited country and
+territory and the six continents -- 250 regions -- in each of the 51 languages CLDR speaks,
+written by `scripts/build_countries.mjs` from CLDR, with the columns a research pass and
+the IPA builder fill: the form the language's "I am from" frame takes where it is not the
+bare name, the romanisation the romanised packs read their IPA from, and the IPA. A
+language's file is about 4.5KB (2.4KB compressed) before IPA, and a page fetches only the
+pair's two. The country is a `chosen` detail: picked from the owner's own list, said in
+each side's own word, and a pair without the words cannot say it at all.
+
+**Native evidence for the pushed fixes.** Both apps were built from d7183544 -- the
+landing and Reply fixes -- and checked on it: Android on the emulator, `check:android`
+9 of 9; iOS from a clean checkout on the Mac with the generated project deleted first,
+`check:ios` 16 of 16. Neither script measures Reply's size or scrolls the landing page a
+step at a time; the evidence for those is the browser tests, and a phone is still the
+only judge of how large Reply looks in the hand.
+
+**Notes from the phone, second message.** A ticked fill-in box is filled in the
+message's blue with a white tick centred in it. Turned, the header's bars turn too. The
+cell that makes a context is a dashed plus with its name for a screen reader only, and
+an empty screen offers its first button the same way. The listener's answers are
+numbered in the corner they start reading from, in their own digits, so they can hold
+up fingers instead of reaching for the phone. The landing grid fades into its own
+background while more of it is below -- under the floating bar it had faded into the
+thumbnails -- and the dropped grid hangs from the bar's measured edge. Turned, Reply
+beside the last line was aligned to that line's box, whose edge is the line before's,
+and sat touching it: in a scan of turned messages 131 of 142 were nearer the line
+before than a third of the type, and none are now.
+
+**A screen in the reader's own order.** "Rearrange this screen", in the board's settings
+and the header's on the list of contexts, lets the buttons be dragged into place, the
+others sliding aside (motion that is the feature, and none with reduced motion asked
+for); the arrow keys move one a place, Done keeps the order and Escape leaves it. It is
+the personal store's `order`, per screen, the board's buttons and the reader's
+together, and the editor's up and down follow it. Writing it found an older fault: the
+store's reader rebuilt the record from its phrases and placements alone, so a board's
+button the reader had switched off came back on every reload. Both are kept now.
+
+**Contexts made of the boards' buttons.** The editor's "Add buttons from the boards"
+offers every sentence the pair can say, grouped by board, and puts the ticked ones on
+the screen by reference -- the concept and its answers' concepts -- so each keeps its
+translations, its pronunciation and its Reply, beside whatever the reader writes.
+
+**The research behind the details, and what wants a fluent reader.** Four agents
+worked through `content/PROMPTS/fill-in-frames.md` and `content/PROMPTS/kind-words.md`
+language by language, and a fifth the seven new interface strings. Thirteen "I am
+from" frames were rewritten where the slot did not take a bare nominative -- German
+and Czech first to "my country is", then to a colon once a source confirmed that the
+copula agrees with a plural predicate ("Mein Land sind die Niederlande"; Ústav pro
+jazyk český: "Čas jsou peníze") -- and every language's 250 names were read against
+its frame, giving articles and sentence forms where needed (38 in English, 23 in
+Dutch). All 250 names are romanised for the five romanised packs; the Lao parser
+learned a second cancelled consonant (ເຟຣນຊ໌); a name a route still cannot read is
+refused and reported rather than crashing the build -- three in Lao -- and Khmer's
+column, authored by hand everywhere else, is left empty. Kind words are eight
+sentences in all 51 languages in each pack's own polite register, with a speaker's
+variant where the grammar marks one; the section is off on the sheet unless turned
+on, since as a default it lengthened every card. Flagged for a fluent reader, in the
+agents' own words: the Amharic kind words' spelling, Amharic and Hebrew vowel choices
+in the romanised names, German's pattern-extended article forms, Montserrat's 塞,
+two Khmer IPA cells, Persian's honorific pronoun with a singular verb in "This is my
+husband", Yoruba's "benne" for sesame, and about eight "drag" conjugations in the
+new interface strings (Georgian, Uzbek, Urdu, Hungarian, Armenian, Lao, Khmer).
