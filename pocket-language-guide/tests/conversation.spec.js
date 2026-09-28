@@ -2154,6 +2154,20 @@ test('a button that says your name asks for it once, says it, and a hold clears 
   await expect(page.locator('.board-message-text')).toHaveCount(0);
 });
 
+test('a name built from its sounds goes into a button of the reader\'s own, in the listener\'s letters', async ({ page }) => {
+  // A hotel's or a street's name is sounds, which this app can write in any script
+  // without translating anything.
+  await page.goto('/conversation.html?target=ja&source=en&board=lodging');
+  await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('#board-add-bar').click();
+  const box = page.locator('.board-editor');
+  await box.getByText('A name, spelled by its sounds').click();
+  const key = (/** @type {string} */ sound) => box.locator('.sound-key').filter({ has: page.locator('small').getByText(sound, { exact: true }) });
+  for (const sound of ['n', 'i', 'k', 'ə', 'l', 'aɪ']) await key(sound).click();
+  await box.getByRole('button', { name: 'Add it to their sentence' }).click();
+  await expect(box.locator('.board-editor-field input').nth(2)).toHaveValue('ニカライ');
+});
+
 test('a name built from its sounds is written in the listener\'s letters, and as typed for the owner', async ({ page }) => {
   // "Nikolai" is a string of foreign letters to a Japanese listener, and their phone's
   // voice spells it or guesses. Built from its sounds, it is written to them in their

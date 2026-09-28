@@ -25,6 +25,7 @@ import {
 } from './board-store.js';
 import { buildButtons, readButtons } from '../core/personal.js';
 import { answerMark } from './conversation-view.js';
+import { soundGrid } from './board-menu.js';
 import { t } from './i18n.js';
 
 /** @param {string} tag @param {Record<string,string>} attrs @param {(Node|string)[]} kids */
@@ -61,8 +62,10 @@ function el(tag, attrs = {}, kids = []) {
  *   offer the boards' own sentences to put here, each by reference
  * @param {(phrase: import('./board-store.js').CustomPhrase) => {owner:string, listener:string}} [config.words]
  *   what a button taken from a board says, for its row
+ * @param {import('./about.js').Sounds} [config.sounds]  a name built from its sounds, for
+ *   the listener's side: a hotel's, a street's, anyone's
  */
-export function openBoardEditor({ at, pair, owner, listener, listenerDir, state: held, onChange, save: deliver, builtIn = [], context, fromBoards, words }) {
+export function openBoardEditor({ at, pair, owner, listener, listenerDir, state: held, onChange, save: deliver, builtIn = [], context, fromBoards, words, sounds }) {
   const panel = /** @type {HTMLDialogElement} */ (el('dialog', { class: 'board-editor' }));
   // **Handed in, not read here.** Re-reading storage on every repaint meant the
   // board asked the disk what the reader had just typed while the write was still
@@ -172,6 +175,23 @@ export function openBoardEditor({ at, pair, owner, listener, listenerDir, state:
     theirs.addEventListener('input', sync);
     sync();
 
+    // **A proper name in the listener's letters**, built from its sounds as the reader's
+    // own name is: this app does not translate, but a hotel's or a street's name is
+    // sounds, and those it can write in any script.
+    const spelled = sounds ? (() => {
+      const grid = soundGrid({ ipa: '', ...sounds, speakLabel: t('board.speak'), deleteLabel: t('editor.delete') });
+      const put = el('button', { type: 'button', class: 'ghost', text: t('editor.insertSounds') });
+      put.addEventListener('click', () => {
+        const field = /** @type {HTMLInputElement} */ (theirs);
+        const word = sounds.spellListener(grid.value());
+        if (!word) return;
+        const at = field.selectionStart ?? field.value.length;
+        field.value = `${field.value.slice(0, at)}${word}${field.value.slice(field.selectionEnd ?? at)}`;
+        sync();
+      });
+      return el('details', { class: 'about-sounds' }, [el('summary', { text: t('editor.byItsSounds') }), grid.element, put]);
+    })() : null;
+
     // **What the stranger might answer, one at a time.** Each answer is a pair of
     // sentences like the button's own, indented under it with a minus to take it away;
     // none is shown until the plus asks for one, so the form a reader meets is still
@@ -228,6 +248,7 @@ export function openBoardEditor({ at, pair, owner, listener, listenerDir, state:
       field('editor.label', label),
       field('editor.owner', own),
       field('editor.listener', theirs),
+      ...(spelled ? [spelled] : []),
       // Said once, plainly, where someone is about to wonder why the third box is
       // empty. Not an apology: it is the reason the box exists.
       el('p', { class: 'small muted', text: t('editor.noTranslation') }),

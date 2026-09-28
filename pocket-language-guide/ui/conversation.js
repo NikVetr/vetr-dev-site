@@ -1236,6 +1236,7 @@ async function main() {
     // In a context of the reader's own, its editor is also where it is deleted.
     context: own ? { id: own.id, onGone: () => goTo({ board: null, screen: null }) } : undefined,
     fromBoards,
+    sounds: sounds(),
     words: (phrase) => {
       const said = resolvePhrase({ kind: 'corpus', id: /** @type {string} */ (phrase.concept) }, ctx);
       return { owner: said?.owner.text ?? '', listener: said?.listener.text ?? '' };

@@ -460,6 +460,8 @@
   "editor.imported": "Buttons and screens added: {count}.",
   "editor.open": "Edit buttons",
   "editor.fromBoards": "Add buttons from the boards",
+  "editor.insertSounds": "Add it to their sentence",
+  "editor.byItsSounds": "A name, spelled by its sounds",
   "editor.label": "Short label, for the button",
   "editor.owner": "What it means, in your language",
   "editor.listener": "What it says, in theirs",
