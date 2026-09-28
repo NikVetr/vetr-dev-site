@@ -40,6 +40,10 @@ const KEY = 'plg.boards';
  * @property {{owner:string, listener:string}[]} [replies]  what the stranger might
  *   answer, each as the same pair of sentences a phrase is: a phrase that has them is
  *   a question they can answer by tapping, as a board's own questions are
+ * @property {string} [concept]  a button taken from a board rather than written: the
+ *   corpus concept it says, in both languages from the corpus, so `owner` and
+ *   `listener` stay empty and it keeps every translation, variant and pronunciation
+ * @property {string[]} [answers]  the concepts of the answers it had on its board
  */
 
 /**
@@ -50,6 +54,9 @@ const KEY = 'plg.boards';
  * @property {Record<string, string[]>} [hidden]  `board/node` -> the board's own button
  *   ids the reader has switched off there. Optional, so a store written before it
  *   existed reads as nothing hidden.
+ * @property {Record<string, string[]>} [order]  `board/node` -> the order the reader
+ *   dragged that screen into, the board's buttons and theirs together. Optional: without
+ *   it a screen is the board's buttons and then theirs.
  */
 
 /** @returns {BoardPersonal} */
@@ -68,10 +75,15 @@ const empty = () => ({ schemaVersion: VERSION, phrases: {}, placements: {} });
 function migrate(raw) {
   if (!raw || typeof raw !== 'object') return null;
   if (raw.schemaVersion === VERSION) {
+    // Every field kept: rebuilding the record from the first two dropped the buttons
+    // the reader had switched off, and the order they had dragged a screen into, on
+    // every reload.
     return {
       schemaVersion: VERSION,
       phrases: raw.phrases ?? {},
       placements: raw.placements ?? {},
+      ...(raw.hidden ? { hidden: raw.hidden } : {}),
+      ...(raw.order ? { order: raw.order } : {}),
     };
   }
   return null;
@@ -151,7 +163,7 @@ const newId = () => `own-${Date.now().toString(36)}-${Math.random().toString(36)
  * buttons then go on `board/<its id>`.
  * @param {BoardPersonal} data
  * @param {{label:string, owner:string, listener:string, pair:string, screen?:true,
- *   replies?:{owner:string, listener:string}[]}} phrase
+ *   replies?:{owner:string, listener:string}[], concept?:string, answers?:string[]}} phrase
  * @param {string} at  `board/node`
  */
 export function addPhrase(data, phrase, at) {
@@ -302,8 +314,40 @@ export function movePlacement(data, at, id, by) {
   const from = ids.indexOf(id);
   const to = from + by;
   if (from < 0 || to < 0 || to >= ids.length) return data;
+  const other = ids[to];
   ids.splice(to, 0, ...ids.splice(from, 1));
-  return { ...data, placements: { ...data.placements, [at]: ids } };
+  // A screen the reader has arranged shows its own order, so the two trade places
+  // there too -- or the move would change nothing they can see.
+  const arranged = data.order?.[at];
+  const order = arranged && arranged.includes(id) && arranged.includes(other)
+    ? { ...data.order, [at]: arranged.map((x) => (x === id ? other : x === other ? id : x)) } : data.order;
+  return { ...data, placements: { ...data.placements, [at]: ids }, ...(order ? { order } : {}) };
+}
+
+/**
+ * The order the reader dragged a screen into. Their own buttons' placements follow it,
+ * so the editor lists them as the screen shows them.
+ * @param {BoardPersonal} data @param {string} at @param {string[]} ids  every button shown there
+ */
+export function setOrder(data, at, ids) {
+  const own = data.placements[at] ?? [];
+  const placements = own.length
+    ? { ...data.placements, [at]: [...ids.filter((id) => own.includes(id)), ...own.filter((id) => !ids.includes(id))] }
+    : data.placements;
+  return { ...data, placements, order: { ...(data.order ?? {}), [at]: ids } };
+}
+
+/**
+ * A screen's buttons in the reader's order, where they have set one: a button it does
+ * not name -- added since -- comes after, in its own place among those.
+ * @template {{id:string}} B
+ * @param {B[]} buttons @param {string[]|undefined} order
+ * @returns {B[]}
+ */
+export function arranged(buttons, order) {
+  if (!order) return buttons;
+  const rank = new Map(order.map((id, i) => [id, i]));
+  return [...buttons].sort((a, b) => (rank.get(a.id) ?? order.length) - (rank.get(b.id) ?? order.length));
 }
 
 /** The phrases placed on one node, in the reader's own order.

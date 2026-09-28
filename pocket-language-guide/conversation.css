@@ -457,11 +457,15 @@
   position: absolute; inset-block-start: 0.4rem; inset-inline-end: 0.4rem;
   inline-size: 1rem; block-size: 1rem; border: 2px solid currentColor; border-radius: 3px;
 }
-/* The tick is a drawing, not text: physical sides, so a turned board draws it the same. */
+/* Ticked, the box is filled in the message's own blue -- dark in both themes -- with a
+   white tick centred in it. The tick is a drawing, not text: physical sides, so a
+   turned board draws it the same; it sits a little high of centre because an L
+   turned a quarter has its weight below its box's middle. */
+.board-cell-set .board-cell-box { background: #0b67a3; border-color: #0b67a3; }
 .board-cell-set .board-cell-box::after {
-  content: ''; position: absolute; left: 0.26rem; top: 0.04rem;
-  width: 0.28rem; height: 0.55rem; border: solid currentColor; border-width: 0 2px 2px 0;
-  rotate: 45deg;
+  content: ''; position: absolute; left: 50%; top: 50%;
+  width: 0.28rem; height: 0.55rem; border: solid #fff; border-width: 0 2px 2px 0;
+  translate: -50% -62%; rotate: 45deg;
 }
 .board-cell-unset { color: var(--muted); background: var(--surface); }
 /* Held to clear, so the hold must not start a text selection or the iOS magnifier. */
@@ -839,6 +843,13 @@
   overflow-wrap: break-word;
 }
 .board-answer-label { display: block; inline-size: 100%; }
+/* Numbered in the corner the listener starts reading from, so they can hold up
+   fingers rather than reach for the phone; room is kept above the words for it. */
+.board-answer { position: relative; padding-block-start: calc(var(--fs--1) + 0.6rem); }
+.board-answer-number {
+  position: absolute; inset-block-start: 0.35rem; inset-inline-start: 0.5rem;
+  font-size: var(--fs--1); line-height: 1; opacity: 0.7; pointer-events: none;
+}
 .board-answer:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* **A short screen is a different shape, not a smaller one.** Held sideways there is
@@ -1263,6 +1274,8 @@ dialog.board-menu-panel::backdrop { background: rgb(17 24 32 / 25%); }
    (`turnLetters` in `ui/conversation.js` splits them). */
 .board-main-turned .board-up-arrow, .board-main-turned .board-bar svg,
 .board-main-turned .board-menu-bars, .board-letter { display: inline-block; rotate: 90deg; }
+/* The header's own bars too, which sit outside the board. */
+body:has(.board-main-turned) .site-menu .board-menu-bars { rotate: 90deg; }
 .board-letter { inline-size: 1em; text-align: center; }
 /* The silhouettes behind the words, and the fill-in box, turn with the words: writing
    mode turns text and not images, so they are turned the same quarter by hand. */
@@ -1277,8 +1290,21 @@ dialog.board-menu-panel::backdrop { background: rgb(17 24 32 / 25%); }
 /* The reader's own contexts are set apart from the shipped ones by colour, and the
    cell that makes one by a dashed edge and a plus as well: two signals, not one. */
 .board-grid-topics .board-cell.board-cell-own { background: var(--accent-soft); border-color: var(--accent); }
-.board-grid-topics .board-cell.board-cell-add { border: 2px dashed var(--accent); background: transparent; color: var(--accent); }
-.board-cell-add .board-cell-label::before { content: '+'; display: block; font-size: 1.6em; line-height: 1; font-weight: 700; }
+/* Rearranging: every button can be picked up -- a dashed outline says so, beside the
+   hint under the grid and Done in the bar -- and the one in hand is lifted over the
+   rest. The bar holds only the topic and Done, since nothing else there means anything
+   until the order is kept. */
+.board-grid-arranging .board-cell {
+  cursor: grab; touch-action: none; -webkit-user-select: none; user-select: none;
+  outline: 2px dashed var(--line); outline-offset: -5px;
+}
+.board-grid-arranging .board-cell-lifted { cursor: grabbing; z-index: 3; box-shadow: 0 10px 24px rgb(0 0 0 / 25%); }
+.board-bar-arranging > :not(.board-title, .spacer, .board-arrange-done) { display: none; }
+
+/* A cell that makes something -- a context, or the first button on an empty screen --
+   is a dashed outline and a plus, and says what it makes to a screen reader only. */
+.board-cell.board-cell-add { border: 2px dashed var(--accent); background: transparent; color: var(--accent); }
+.board-cell-add .board-cell-label::before { content: '+'; display: block; font-size: 2.4em; line-height: 1; font-weight: 700; }
 /* A topic's mark behind its word: most of the button, as the answer mark is. */
 .board-cell-topic { inline-size: 88%; block-size: 88%; opacity: 0.13; }
 /* The emergency topic is the one that has to be found without reading: the alert

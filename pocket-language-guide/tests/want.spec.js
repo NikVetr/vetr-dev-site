@@ -400,6 +400,17 @@ test('on a phone, scrolling past the picker and back never moves the page under 
   await expect(toggle).toHaveAttribute('aria-expanded', 'true');
 });
 
+test('the grid fades into its own background while there is more of it, and not at its end', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 760 });
+  await page.goto('/');
+  await expect(page.locator('#gallery')).toHaveAttribute('aria-busy', 'false');
+  const grid = page.locator('#want');
+  await expect(grid).not.toHaveClass(/want-grid-end/);
+  expect(await grid.evaluate((el) => getComputedStyle(el, '::after').backgroundImage)).toContain('linear-gradient');
+  await grid.evaluate((el) => { el.scrollTop = el.scrollHeight; });
+  await expect(grid).toHaveClass(/want-grid-end/);
+});
+
 test('on a phone the floating bar drops the grid down, without leaving the cards', async ({ page }) => {
   // Opening it scrolled back up to where the grid lives, which lost the reader's
   // place among the cards; it opens under the bar instead, and shuts where it opened.

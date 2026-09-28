@@ -33,7 +33,7 @@ document.addEventListener('click', (event) => {
 });
 
 /** @param {() => void} [open]  what the bars open; the appearance dialog by default */
-export function wireSiteMenu(open = openAppearance) {
+export function wireSiteMenu(open = () => openAppearance()) {
   const bars = document.getElementById('site-menu');
   if (!bars) return;
   bars.setAttribute('aria-label', t('settings.open'));
@@ -41,7 +41,9 @@ export function wireSiteMenu(open = openAppearance) {
   bars.addEventListener('click', open);
 }
 
-function openAppearance() {
+/** The plain settings: appearance, where the app opens, and whatever the page adds.
+ * @param {HTMLElement[]} [extra] */
+export function openAppearance(extra = []) {
   const panel = document.createElement('dialog');
   panel.className = 'speaker-settings site-settings';
   const head = document.createElement('h2');
@@ -52,7 +54,7 @@ function openAppearance() {
   close.className = 'speaker-close';
   close.setAttribute('aria-label', t('gallery.previewClose'));
   close.addEventListener('click', () => panel.close());
-  panel.append(close, head, themeSection(), ...resumeSection());
+  panel.append(close, head, themeSection(), ...resumeSection(), ...extra);
   panel.addEventListener('close', () => panel.remove());
   document.body.append(panel);
   panel.showModal();

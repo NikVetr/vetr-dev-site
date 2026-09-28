@@ -89,12 +89,15 @@ export function renderGrid(root, node, { label, available, onPick, lang, title, 
     else if (button.replySetId) cell.classList.add('board-cell-asks');
     if (button.alert) cell.classList.add('board-cell-alert');
     if (button.own) cell.classList.add('board-cell-own');
-    if (button.add) cell.classList.add('board-cell-add');
+    if (button.add) {
+      cell.classList.add('board-cell-add');
+      cell.setAttribute('aria-label', label(button));
+    }
     // The label is its own element so the fitter can size the text without touching
     // the cell, whose height is the grid's to decide.
     const text = document.createElement('span');
     text.className = 'board-cell-label';
-    text.textContent = label(button);
+    text.textContent = button.add ? '' : label(button);
     cell.append(text);
     // Reinforced with a mark, because colour alone is not a signal: roughly one man
     // in twelve cannot use it, and a tinted cell in bright sun is a white cell.
@@ -1038,16 +1041,22 @@ function freeCorner(text, box) {
   const gapY = Math.max(Number.parseFloat(pad.paddingTop), size / 3);
   const edge = { left: b.left + gapX, right: b.right - gapX, top: b.top + gapY, bottom: b.bottom - gapY };
   const rtl = getComputedStyle(text).direction === 'rtl';
+  // **And from the line before the last**, which the corner abuts: a Reply taller
+  // than the last line was aligned to that line's box, whose edge is the line
+  // before's, and sat a third as far from it as the lines sit from each other.
+  const before = lines[lines.length - 2];
   let r;
   if (vertical(text)) {
     // Columns right to left; the line runs down (or, right-to-left, up).
+    const right = before ? Math.min(last.right, before.left - gapX) : last.right;
     r = rtl
-      ? { left: edge.left, right: last.right, top: edge.top, bottom: end.top - gapY }
-      : { left: edge.left, right: last.right, top: end.bottom + gapY, bottom: edge.bottom };
+      ? { left: edge.left, right, top: edge.top, bottom: end.top - gapY }
+      : { left: edge.left, right, top: end.bottom + gapY, bottom: edge.bottom };
   } else {
+    const top = before ? Math.max(last.top, before.bottom + gapY) : last.top;
     r = rtl
-      ? { left: edge.left, right: end.left - gapX, top: last.top, bottom: edge.bottom }
-      : { left: end.right + gapX, right: edge.right, top: last.top, bottom: edge.bottom };
+      ? { left: edge.left, right: end.left - gapX, top, bottom: edge.bottom }
+      : { left: end.right + gapX, right: edge.right, top, bottom: edge.bottom };
   }
   return { ...r, w: r.right - r.left, h: r.bottom - r.top };
 }
@@ -1126,7 +1135,9 @@ function placeBelow(text, reply, box, read) {
  * Along the line it is centred in the corner -- as far from the sentence's end as from
  * the edge -- where it used to sit hard in the far corner with a hand's width of
  * nothing between it and the last word. Across, it is level with the last line, or
- * starts with it when it is the taller. Then the sentence and Reply move together,
+ * starts with it when it is the taller -- but never nearer the line before than the
+ * corner lets it, which is the same buffer it keeps everywhere else. Then the sentence
+ * and Reply move together,
  * across the box, so the space before the sentence equals the space after Reply: the
  * sentence is moved, never resized, because its size was settled first and is the
  * thing the screen is for.
@@ -1146,8 +1157,10 @@ function placeBeside(text, reply, corner, box, read) {
   let y;
   if (vertical(text)) {
     y = corner.top + (corner.h - h) / 2;
-    const width = last.right - last.left;
-    x = w <= width ? last.left + (width - w) / 2 : last.right - w;
+    // Level with the last line within what the corner allows of it, or from the
+    // corner's edge when Reply is the wider.
+    const width = corner.right - last.left;
+    x = w <= width ? last.left + (width - w) / 2 : corner.right - w;
     // Columns stack leftward: the pair runs from the first column's right edge to
     // whichever of the last column and Reply reaches further left.
     const inner = { left: b.left + Number.parseFloat(pad.paddingLeft), right: b.right - Number.parseFloat(pad.paddingRight) };
@@ -1159,8 +1172,8 @@ function placeBeside(text, reply, corner, box, read) {
     x += shift;
   } else {
     x = corner.left + (corner.w - w) / 2;
-    const height = last.bottom - last.top;
-    y = h <= height ? last.top + (height - h) / 2 : last.top;
+    const height = last.bottom - corner.top;
+    y = h <= height ? corner.top + (height - h) / 2 : corner.top;
     const inner = { top: b.top + Number.parseFloat(pad.paddingTop), bottom: b.bottom - Number.parseFloat(pad.paddingBottom) };
     const to = Math.max(last.bottom, y + h);
     let shift = (inner.top + inner.bottom - (first.top + to)) / 2;
@@ -1266,10 +1279,17 @@ export function renderReply(stage, question, answers, { onAnswer, onCancel, clos
   list.className = 'board-answers';
   list.lang = question.listener.lang;
   list.dir = question.listener.dir;
-  for (const { id, phrase, entry } of answers) {
+  const count = new Intl.NumberFormat(question.listener.lang);
+  for (const [k, { id, phrase, entry }] of answers.entries()) {
     const choice = document.createElement('button');
     choice.type = 'button';
     choice.className = 'board-answer';
+    // In the listener's own digits, where their language has its own.
+    const number = document.createElement('span');
+    number.className = 'board-answer-number';
+    number.setAttribute('aria-hidden', 'true');
+    number.textContent = count.format(k + 1);
+    choice.append(number);
     // The one that opens a keypad is marked, because it is the only answer here
     // that does not answer anything by itself.
     if (entry) choice.classList.add('board-answer-entry');

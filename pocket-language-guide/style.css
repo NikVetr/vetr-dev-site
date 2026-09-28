@@ -784,17 +784,23 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
   /* Holds the bar's place in the flow while it floats, so nothing jumps: the room is
      the bar's own, measured by `ui/gallery.js` as it starts to float. */
   .want-floating::before { content: ''; display: block; block-size: var(--bar-room); }
-  /* A scrollable grid says so: a hairline round it and a fade where it continues. */
-  .want-grid {
-    border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--space-1);
-    mask-image: linear-gradient(to bottom, #000 calc(100% - 2rem), transparent);
+  /* A scrollable grid says so: a hairline round it and, while more of it is below, a
+     fade into its own background -- not into whatever is behind it, which under the
+     panel dropped from the floating bar was the thumbnails. `ui/gallery.js` marks the
+     end, where there is nothing more to fade to. */
+  .want-grid { border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--space-1); }
+  .want-grid::after {
+    content: ''; position: sticky; inset-block-end: calc(-1 * var(--space-1)); grid-column: 1 / -1;
+    block-size: 2rem; margin-block-start: -2rem; pointer-events: none;
+    background: linear-gradient(to bottom, transparent, var(--paper));
   }
+  .want-grid-end::after { visibility: hidden; }
   /* **Opened from the floating bar, it drops down under the bar**, over the cards,
      rather than opening in its own place -- which is above the screen, so opening it
      meant scrolling back to it and losing the reader's place. Out of the flow, so the
      page does not move under it; its own scroll ends at its own edge. */
   .want-dropped .want-grid:not([hidden]) {
-    position: fixed; inset-inline: 1rem; top: calc(var(--header-h, 0px) + 2.2rem); z-index: 2;
+    position: fixed; inset-inline: 1rem; top: calc(var(--header-h, 0px) + var(--bar-h)); z-index: 2;
     max-block-size: min(60dvh, 30rem); overflow-y: auto; overscroll-behavior: contain;
     background: var(--paper); box-shadow: 0 6px 18px rgb(0 0 0 / 18%);
   }
@@ -2130,6 +2136,9 @@ dialog.speaker-settings h2 { margin: 0 0 var(--space-1); font-size: var(--fs-2);
 }
 /* One of the reader's details: its name above a field the width of the dialog. */
 .about-field { display: grid; gap: 0.3em; margin-block: 0 var(--space-1); }
+/* A long checklist folds by group, each under its own heading. */
+.speaker-group { border-block-end: 1px solid var(--line-soft); padding-block: var(--space-1); }
+.speaker-group > summary { cursor: pointer; font-weight: 600; }
 .about-field input { inline-size: 100%; }
 .about-ask form { padding-inline-end: 2.5rem; }
 

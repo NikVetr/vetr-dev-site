@@ -588,7 +588,9 @@ test('a screen of your own holds buttons, and what is on it travels as a file', 
   await expect(opener).toHaveClass(/board-cell-more/);
   await opener.click();
   await expect(page.locator('.board-grid-title')).toHaveText('Allergies');
-  await expect(page.locator('.board-cell')).toHaveCount(0);
+  // Empty, it offers only its first button: the dashed plus that opens the editor.
+  await expect(page.locator('.board-cell')).toHaveCount(1);
+  await expect(page.locator('.board-cell-add')).toHaveCount(1);
   await addOwn(page, 'no peanuts', 'No peanuts, please', '请不要放花生');
   await page.locator('.board-editor-close').click();
   await expect(page.locator('.board-cell')).toHaveCount(1);
@@ -1104,7 +1106,7 @@ test('durations are offered in the listener’s language, from numbers', async (
   // No row in any language says "15 minutes". The value is `{15, minute}` and CLDR
   // does the rest, which is why this works in fifty-one languages at once.
   await openWaitAnswers(page);
-  const answers = await page.locator('.board-answer').allTextContents();
+  const answers = await page.locator('.board-answer-label').allTextContents();
   // "No wait" first, because it is the answer everyone hopes for; then the ladder.
   expect(answers[0]).toBe('不用等，现在就可以');
   expect(answers.slice(1, 7)).toEqual(['5分钟', '10分钟', '15分钟', '30分钟', '1小时', '2小时']);
@@ -1207,9 +1209,11 @@ test('converse opens the topics, not a board @smoke', async ({ page }) => {
     'Emergency', 'Meeting people', 'Directions', 'Getting around',
     'Eating out', 'Shopping', 'Time', 'Massage and spa',
     'Lodging', 'Sights and tickets', 'Pharmacy',
-    // And last, the cell that makes one of the reader's own.
-    'Your own context',
+    // And last, the cell that makes one of the reader's own: a plus, and its name
+    // for a screen reader only.
+    '',
   ]);
+  await expect(topics.last()).toHaveAccessibleName('Your own context');
   // Nothing on this screen is owner-only chrome: there is no board to edit yet.
   await expect(page.locator('#board-menu')).toBeHidden();
   // Nor to add to -- a class's `display` once outranked its `hidden`, and the plus
@@ -2147,6 +2151,108 @@ test('a button that says your name asks for it once, says it, and a hold clears 
   await expect(page.locator('.board-message-text')).toHaveCount(0);
 });
 
+test('a screen is rearranged by dragging, from the settings, and keeps its order', async ({ page }) => {
+  // The board's order is its author's; the reader's is theirs. Settings open the mode,
+  // a button picked up lands where it is let go, the arrow keys move one a place, and
+  // Done keeps the order across a reload.
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=intro');
+  const ids = () => page.$$eval('#board-grid [data-button]', (els) => els.map((e) => /** @type {HTMLElement} */ (e).dataset.button));
+  const before = await ids();
+  await page.locator('#board-menu').click();
+  await page.getByRole('button', { name: 'Rearrange this screen' }).click();
+  await expect(page.locator('#board-grid')).toHaveClass(/board-grid-arranging/);
+  // Picked up, a press says nothing.
+  const from = /** @type {{x:number,y:number,width:number,height:number}} */ (await page.locator('[data-button="hello"]').boundingBox());
+  const to = /** @type {{x:number,y:number,width:number,height:number}} */ (await page.locator('[data-button="write"]').boundingBox());
+  await page.mouse.move(from.x + from.width / 2, from.y + from.height / 2);
+  await page.mouse.down();
+  for (let k = 1; k <= 10; k += 1) {
+    await page.mouse.move(from.x + from.width / 2 + ((to.x - from.x) * k) / 10, from.y + from.height / 2 + ((to.y - from.y) * k) / 10);
+  }
+  await page.mouse.up();
+  await expect(page.locator('.board-message-text')).toHaveCount(0);
+  const dragged = await ids();
+  expect(dragged.indexOf('hello')).toBe(dragged.indexOf('write') + 1);
+  // One place later by the keyboard.
+  await page.locator('[data-button="hello"]').focus();
+  await page.keyboard.press('ArrowRight');
+  const keyed = await ids();
+  expect(keyed.indexOf('hello')).toBe(dragged.indexOf('hello') + 1);
+  await page.getByRole('button', { name: 'Done' }).click();
+  await expect(page.locator('#board-grid')).not.toHaveClass(/board-grid-arranging/);
+  await page.reload();
+  await expect(page.locator('#board-grid [data-button]').first()).toBeVisible();
+  expect(await ids()).toEqual(keyed);
+  expect(keyed).not.toEqual(before);
+});
+
+test('the list of contexts is rearranged from the header\'s settings, the plus staying last', async ({ page }) => {
+  await page.goto('/conversation.html?target=zh-Hans&source=en');
+  const ids = () => page.$$eval('#board-grid [data-button]', (els) => els.map((e) => /** @type {HTMLElement} */ (e).dataset.button));
+  await expect(page.locator('#board-grid [data-button]').first()).toBeVisible();
+  const first = (await ids())[0];
+  await page.locator('#site-menu').click();
+  await page.getByRole('button', { name: 'Rearrange this screen' }).click();
+  await page.locator(`[data-button="${first}"]`).focus();
+  await page.keyboard.press('ArrowRight');
+  await page.getByRole('button', { name: 'Done' }).click();
+  await page.reload();
+  await expect(page.locator('#board-grid [data-button]').first()).toBeVisible();
+  const after = await ids();
+  expect(after[1]).toBe(first);
+  expect(after.at(-1)).toBe('add-context');
+});
+
+test('a context of one\'s own starts as a plus, and can be made of the boards\' own buttons', async ({ page }) => {
+  // Mix and match: a new context can take any board's sentences, which keep their
+  // translations and the answers they had there, beside the reader's own.
+  await page.goto('/conversation.html?target=zh-Hans&source=en');
+  const maker = page.locator('[data-button="add-context"]');
+  await expect(maker.locator('.board-cell-label')).toHaveText('');
+  await expect(maker).toHaveAccessibleName('Your own context');
+  await maker.click();
+  await page.locator('dialog.context-ask input').fill('Hotel desk');
+  await page.locator('dialog.context-ask').getByRole('button', { name: 'Save' }).click();
+  // Empty, the screen offers its first button as a dashed plus.
+  const plus = page.locator('#board-grid .board-cell-add');
+  await expect(plus).toHaveAccessibleName('Edit buttons');
+  await plus.click();
+  await page.getByRole('button', { name: 'Add buttons from the boards' }).click();
+  const pick = page.locator('dialog.from-boards');
+  await pick.locator('summary', { hasText: 'Eating out' }).click();
+  await pick.locator('label', { hasText: 'Is a table available?' }).locator('input').check();
+  await pick.getByRole('button', { name: 'Save' }).click();
+  await expect(page.locator('dialog.board-editor .board-editor-row')).toContainText('Is a table available?');
+  await page.locator('dialog.board-editor .board-editor-close').click();
+  const taken = page.locator('#board-grid .board-cell').first();
+  await expect(taken.locator('.board-cell-label')).toHaveText('Is a table available?');
+  await taken.click();
+  await expect(page.locator('.board-message-text')).toHaveText('有位子吗？');
+  await page.locator('.board-reply').click();
+  await expect(page.locator('.board-answer').first()).toBeVisible();
+});
+
+test('the answers are numbered, so a listener can hold up fingers', async ({ page }) => {
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=food');
+  await page.locator('[data-button="table"]').click();
+  await page.locator('.board-reply').click();
+  const numbers = page.locator('.board-answer .board-answer-number');
+  await expect(numbers.first()).toHaveText('1');
+  expect(await numbers.count()).toBe(await page.locator('.board-answer').count());
+  await expect(numbers.last()).toHaveText(String(await numbers.count()));
+});
+
+test('a ticked box is filled, and the header\'s bars turn with the board', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('plg.about', JSON.stringify({ name: 'Nikolai' })));
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=intro');
+  await page.locator('[data-button="about"]').click();
+  const box = page.locator('[data-button="myname"] .board-cell-box');
+  expect(await box.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe('rgb(11, 103, 163)');
+  expect(await box.evaluate((el) => getComputedStyle(el, '::after').borderRightColor)).toBe('rgb(255, 255, 255)');
+  await page.locator('#board-turn-bar').click();
+  expect(await page.locator('.site-menu .board-menu-bars').evaluate((el) => getComputedStyle(el).rotate)).toBe('90deg');
+});
+
 test('Reply stays inside the frame when the sentence fills it', async ({ page }) => {
   // A short sentence at poster size fills three lines, and Reply under it, with the
   // buffer between them, ran twenty pixels past the frame and over its white outline.
@@ -2218,6 +2324,33 @@ test('Attract attention sounds a siren only when the reader has asked for one', 
   await page.locator('.beacon').click();
   await expect(page.locator('.beacon')).toHaveCount(0);
   expect((await log()).stopped).toBe(2);
+});
+
+test('turned, Reply beside the last line keeps its distance from the line before', async ({ page }) => {
+  // Reply wider than the last column was aligned to that column's box, whose edge is
+  // the column before's, and sat touching it -- a third as far from it as the
+  // columns sit from each other. It keeps the buffer it keeps from everything else.
+  await page.setViewportSize({ width: 360, height: 640 });
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=spa');
+  await page.locator('#board-turn-bar').click();
+  await page.locator('[data-button="avoid"]').dispatchEvent('click');
+  await expect(page.locator('.board-reply')).toBeVisible();
+  const gap = () => page.evaluate(() => {
+    const text = /** @type {HTMLElement} */ (document.querySelector('.board-message-text'));
+    const range = document.createRange();
+    range.selectNodeContents(text);
+    /** @type {{left:number, right:number}[]} */ const cols = [];
+    for (const r of [...range.getClientRects()].filter((q) => q.width > 0).sort((a, b) => b.right - a.right)) {
+      const col = cols.find((c) => r.left < c.right - 2 && r.right > c.left + 2);
+      if (col) { col.left = Math.min(col.left, r.left); col.right = Math.max(col.right, r.right); } else cols.push({ left: r.left, right: r.right });
+    }
+    const reply = /** @type {HTMLElement} */ (document.querySelector('.board-reply')).getBoundingClientRect();
+    return { cols: cols.length, gap: cols.at(-2) ? cols.at(-2).left - reply.right : Infinity,
+      third: Number.parseFloat(getComputedStyle(text).fontSize) / 3 };
+  });
+  await expect.poll(async () => (await gap()).cols).toBe(2);
+  const { gap: apart, third } = await gap();
+  expect(apart).toBeGreaterThanOrEqual(third - 2);
 });
 
 test('turned, Reply keeps a size for its sentence, and stays inside the frame', async ({ page }) => {

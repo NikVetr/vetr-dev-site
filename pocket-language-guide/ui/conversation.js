@@ -11,7 +11,7 @@
 // view over language content, and `core/pack.js` is a data-only join. What this page
 // downloads is the corpus rows for two languages and a JSON file.
 
-import { resumeSection, wireSiteMenu } from './site-menu.js';
+import { openAppearance, resumeSection, wireSiteMenu } from './site-menu.js';
 import { aboutSection, askDetail, askDiet, readAbout, setDetail } from './about.js';
 import {
   loadText, loadLanguages, readerLanguage, registerOffline, showFatal,
@@ -43,8 +43,11 @@ import { speech } from './platform/speech.js';
 import { keepAwake } from './platform/wake.js';
 import { startBeacon, stopBeacon } from './platform/beacon.js';
 import { notePlace, onBack } from './platform/shell.js';
-import { read as readPersonal, placedOn, addPhrase, write as writePersonal } from './board-store.js';
-import { askText } from './board-menu.js';
+import {
+  read as readPersonal, placedOn, addPhrase, write as writePersonal, setOrder, arranged,
+} from './board-store.js';
+import { arrange } from './arrange.js';
+import { askChoices, askText } from './board-menu.js';
 import {
   openSpeakerSettings, readProfile, noticeFor, personalSection,
 } from './speaker-settings.js';
@@ -265,6 +268,38 @@ async function respellerFor(corpus, listener, owner, listenerRows) {
 }
 
 /**
+ * The settings' way into rearranging the screen behind them: it closes the settings
+ * and hands the grid to `arrange`.
+ * @param {() => void} start
+ */
+function arrangeRow(start) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'btn board-arrange';
+  button.textContent = t('board.arrange');
+  button.addEventListener('click', () => { button.closest('dialog')?.close(); start(); });
+  return button;
+}
+
+/**
+ * Rearrange the grid now on screen, and keep the order under `at` when Done is pressed.
+ * @param {string} at @param {() => void} redraw
+ */
+function arrangeGrid(at, redraw) {
+  arrange($('board-grid'), {
+    bar: /** @type {HTMLElement} */ (document.querySelector('.board-bar')),
+    status: $('board-status'),
+    done: t('speaker.done'),
+    hint: t('board.arrangeHint'),
+    onDone: async (ids) => {
+      await writePersonal(setOrder(readPersonal().data, at, ids));
+      redraw();
+    },
+    onCancel: redraw,
+  });
+}
+
+/**
  * @param {string} owner @param {string} listener
  * @param {{boards:{id:string, titleKey:string, listeners:string[], owners:string[], icon?:string, alert?:true}[]}} index
  */
@@ -277,8 +312,9 @@ async function showPicker(owner, listener, index) {
   $('board-title').textContent = t('board.pickTopic');
   $('board-title').title = t('board.pickTopic');
   document.title = t('board.docTitle');
-  // The header's bars open the plain settings here: the board's fuller dialog needs a board.
-  wireSiteMenu();
+  // The header's bars open the plain settings here -- the board's fuller dialog needs a
+  // board -- with the way into rearranging the contexts.
+  wireSiteMenu(() => openAppearance([arrangeRow(() => arrangeGrid(CONTEXTS, drawTopics))]));
   // **The context list has a parent too**, and it is the card this was opened from.
   // Without this the only way off the first screen of Converse was the browser's own
   // Back, which a reader who arrived from the app's own link does not think of as
@@ -294,12 +330,16 @@ async function showPicker(owner, listener, index) {
   // a hotel's check-in, a clinic, whatever the shipped contexts do not cover. Each is a
   // screen of theirs kept for this pair, opened as a board of the buttons they put on it.
   const pair = `${listener}__${owner}`;
+  function drawTopics() {
   const personal = readPersonal();
   const mine = placedOn(personal.data, CONTEXTS, pair).filter((p) => p.screen);
   /** @type {import('../core/conversation.js').BoardButton[]} */
   const buttons = [
-    ...[...topics].map(([id, { icon, alert }]) => ({ id, kind: /** @type {const} */ ('submenu'), icon, alert })),
-    ...mine.map((p) => ({ id: `${OWN}${p.id}`, kind: /** @type {const} */ ('submenu'), own: /** @type {const} */ (true) })),
+    // In the reader's order where they have dragged one, the maker last whatever it is.
+    ...arranged([
+      ...[...topics].map(([id, { icon, alert }]) => ({ id, kind: /** @type {const} */ ('submenu'), icon, alert })),
+      ...mine.map((p) => ({ id: `${OWN}${p.id}`, kind: /** @type {const} */ ('submenu'), own: /** @type {const} */ (true) })),
+    ], /** @type {import('./board-store.js').BoardPersonal} */ (personal.data).order?.[CONTEXTS]),
     { id: 'add-context', kind: 'submenu', add: true },
   ];
   // Every button here goes deeper, so the dash that says so on a mixed grid has
@@ -329,6 +369,8 @@ async function showPicker(owner, listener, index) {
   });
   // The emergency topic across the top when an odd count would leave a gap at the foot.
   if (buttons.length % 2) $('board-grid').querySelector('.board-cell-alert')?.classList.add('board-cell-wide');
+  }
+  drawTopics();
   // **Turned with the boards.** A phone laid on the counter for a conversation is still
   // laid there when the reader backs out to choose another, so the list turns too, and
   // can be turned from here.
@@ -613,6 +655,14 @@ async function main() {
     // not there can still say so, and be offered a translator.
     ownSets = {};
     for (const p of mine) {
+      // A button taken from a board brings the answers it had there, from the corpus.
+      if (p.concept) {
+        if (!p.answers?.length) continue;
+        ownSets[`own/${p.id}`] = {
+          buttons: p.answers.map((id) => ({ id, kind: /** @type {const} */ ('message'), phraseRef: { kind: /** @type {const} */ ('corpus'), id } })),
+        };
+        continue;
+      }
       const replies = (p.replies ?? []).filter((r) => r.owner && r.listener);
       if (!replies.length) continue;
       ownSets[`own/${p.id}`] = {
@@ -626,18 +676,23 @@ async function main() {
       };
     }
     ctx.custom = custom;
-    const hidden = /** @type {import('./board-store.js').BoardPersonal} */ (personal.data).hidden?.[`${boardId}/${state.path.at(-1)}`] ?? [];
+    const held = /** @type {import('./board-store.js').BoardPersonal} */ (personal.data);
+    const at = `${boardId}/${state.path.at(-1)}`;
+    const hidden = held.hidden?.[at] ?? [];
     return {
       ...node,
-      buttons: [
+      // In the order the reader dragged this screen into, where they have.
+      buttons: arranged([
         ...node.buttons.filter((b) => !hidden.includes(b.id)),
         // A screen of the reader's own opens like the board's submenus do; its id is
-        // the node the path moves to, and what is on it is placed under that id.
+        // the node the path moves to, and what is on it is placed under that id. A
+        // button taken from a board says its concept, as it did there.
         ...mine.map((p) => /** @type {import('../core/conversation.js').BoardButton} */ (p.screen
           ? { id: p.id, kind: 'submenu', nodeId: p.id, colour: 'stay' }
-          : { id: p.id, kind: 'message', colour: 'stay', phraseRef: { kind: 'custom', id: p.id },
+          : { id: p.id, kind: 'message', colour: 'stay',
+            phraseRef: p.concept ? { kind: 'corpus', id: p.concept } : { kind: 'custom', id: p.id },
             ...(ownSets[`own/${p.id}`] ? { replySetId: `own/${p.id}` } : {}) })),
-      ],
+      ], held.order?.[at]),
     };
   };
 
@@ -683,6 +738,7 @@ async function main() {
 
   /** @param {import('../core/conversation.js').BoardButton} button */
   const labelOf = (button) => {
+    if (button.add) return t('editor.open');
     if (button.labelKey) return t(button.labelKey);
     // No short label written, so the owner's own full wording is the label. Better
     // than the concept id, and it is the sentence they are about to show anyway.
@@ -707,7 +763,12 @@ async function main() {
 
   function paint() {
     const stage = $('board-stage');
-    const node = withOwn(nodeHere());
+    const shown = withOwn(nodeHere());
+    // **An empty screen offers its first button** -- a context the reader has just
+    // made, or one whose buttons are all switched off -- as the dashed plus the list of
+    // contexts ends in, opening the editor the bar's plus opens.
+    const node = shown.buttons.length ? shown
+      : { ...shown, buttons: [{ id: 'add-button', kind: /** @type {const} */ ('submenu'), add: /** @type {const} */ (true) }] };
     // Held for exactly as long as a sentence is being read by someone else. A
     // stranger reading an unfamiliar script off a phone held at arm's length will
     // often take longer than the display timeout, and the screen going dark means
@@ -750,6 +811,7 @@ async function main() {
         },
         onHold: (button) => { setDetail(/** @type {string} */ (fillOf(button)), ''); detailsChanged(); },
         onPick: (button) => {
+          if (button.add) { openEditor(); return; }
           // Not given yet: the first press asks for the detail rather than showing a
           // sentence with a hole in it.
           const unfilled = phraseOf(button)?.unfilled;
@@ -1007,7 +1069,8 @@ async function main() {
     languages: [listener, owner],
     profile,
     onChange: (next) => { profile = next; voice(); sayStatus(); paint(); },
-    extra: [aboutSection(detailsChanged, dietChoices()),
+    extra: [arrangeRow(() => arrangeGrid(`${boardId}/${state.path.at(-1)}`, () => { personal = readPersonal(); paint(); })),
+      aboutSection(detailsChanged, dietChoices()),
       displaySection(display, (next) => { display = next; paint(); }),
       voiceSection({
         lang: listener,
@@ -1033,6 +1096,40 @@ async function main() {
       }))],
   });
 
+  /**
+   * Every board's sentences this pair can say, by board, for the editor to put on a
+   * screen by reference -- a context of the reader's own made of the boards' buttons --
+   * each with the answers it has on its board. A sentence on two boards is offered once.
+   * @param {(picked: {concept:string, answers:string[]}[]) => void} add
+   */
+  const fromBoards = async (add) => {
+    /** @type {Map<string, {concept:string, answers:string[]}>} */ const found = new Map();
+    /** @type {{label:string, options:{value:string, label:string}[]}[]} */ const groups = [];
+    for (const entry of index.boards.filter((b) => serves(b, listener, owner))) {
+      const source = entry.id === boardId ? board : JSON.parse(await loadText(`data/boards/${entry.id}.json`));
+      /** @type {{value:string, label:string}[]} */ const options = [];
+      for (const node of Object.values(source.nodes)) {
+        for (const button of /** @type {import('../core/conversation.js').BoardButton[]} */ (node.buttons)) {
+          const ref = button.phraseRef;
+          if (button.kind !== 'message' || ref?.kind !== 'corpus' || 'fill' in ref || found.has(ref.id)) continue;
+          const said = resolvePhrase(ref, ctx);
+          if (!said) continue;
+          const answers = (source.replySets?.[button.replySetId ?? '']?.buttons ?? [])
+            .filter((/** @type {any} */ a) => a.kind === 'message' && a.phraseRef?.kind === 'corpus')
+            .map((/** @type {any} */ a) => a.phraseRef.id);
+          found.set(ref.id, { concept: ref.id, answers });
+          options.push({ value: ref.id, label: said.owner.text });
+        }
+      }
+      if (options.length) groups.push({ label: t(entry.titleKey), options });
+    }
+    askChoices({
+      label: t('editor.fromBoards'), groups, chosen: [], save: t('editor.save'),
+      close: t('gallery.previewClose'), kind: 'from-boards',
+      onSave: (ids) => add(ids.map((id) => /** @type {{concept:string, answers:string[]}} */ (found.get(id)))),
+    });
+  };
+
   const openEditor = () => openBoardEditor({
     at: `${boardId}/${state.path.at(-1)}`,
     // The board's own buttons on this screen, so the reader can switch them off.
@@ -1048,6 +1145,11 @@ async function main() {
     onChange: (next) => { personal = { ...personal, data: next }; paint(); },
     // In a context of the reader's own, its editor is also where it is deleted.
     context: own ? { id: own.id, onGone: () => goTo({ board: null }) } : undefined,
+    fromBoards,
+    words: (phrase) => {
+      const said = resolvePhrase({ kind: 'corpus', id: /** @type {string} */ (phrase.concept) }, ctx);
+      return { owner: said?.owner.text ?? '', listener: said?.listener.text ?? '' };
+    },
   });
 
   // The bars are Settings and the plus is the editor: two controls for two things,

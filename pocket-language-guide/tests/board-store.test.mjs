@@ -6,6 +6,7 @@ import assert from 'node:assert/strict';
 import {
   read, write, addPhrase, editPhrase, removePlacement, deletePhrase,
   placementsOf, movePlacement, placedOn, fromSheetExtra, screenContents, graftContents,
+  showBuiltIn, setOrder, arranged,
 } from '../ui/board-store.js';
 
 /** A `localStorage` that behaves, and can be told to misbehave. */
@@ -138,6 +139,37 @@ test('order is the reader’s, and only an explicit move changes it', () => {
   // Off either end is a no-op rather than an error: it is a button, pressed twice.
   const same = movePlacement(d, AT, ids[0], -1);
   assert.deepEqual(placedOn(same, AT, PAIR).map((p) => p.label), ['a', 'c', 'b']);
+});
+
+test('what the reader switched off and the order they dragged a screen into survive a reload', async () => {
+  // The record was rebuilt from its phrases and placements alone, so a board's own
+  // button switched off came back on every reload.
+  install();
+  const { data, id } = addPhrase(read().data, sample, AT);
+  await write(setOrder(showBuiltIn(data, AT, 'stop', false), AT, [id, 'thanks', 'hurts']));
+  const back = read().data;
+  assert.deepEqual(back.hidden, { [AT]: ['stop'] });
+  assert.deepEqual(back.order, { [AT]: [id, 'thanks', 'hurts'] });
+});
+
+test('a dragged order puts the board\'s buttons and the reader\'s together, and a move follows it', () => {
+  install();
+  let d = read().data;
+  /** @type {string[]} */ const ids = [];
+  for (const n of ['a', 'b']) {
+    const added = addPhrase(d, { ...sample, label: n }, AT);
+    d = added.data; ids.push(added.id);
+  }
+  const shown = [{ id: 'stop' }, { id: 'thanks' }, { id: ids[0] }, { id: ids[1] }];
+  d = setOrder(d, AT, [ids[1], 'thanks', ids[0], 'stop']);
+  assert.deepEqual(arranged(shown, d.order?.[AT]).map((b) => b.id), [ids[1], 'thanks', ids[0], 'stop']);
+  // The reader's own follow it in their placements, so the editor lists them so.
+  assert.deepEqual(placedOn(d, AT, PAIR).map((p) => p.label), ['b', 'a']);
+  // A button added since comes after the ones the order names.
+  assert.deepEqual(arranged([...shown, { id: 'new' }], d.order?.[AT]).at(-1), { id: 'new' });
+  // The editor's move trades the two places in the dragged order too.
+  d = movePlacement(d, AT, ids[0], -1);
+  assert.deepEqual(arranged(shown, d.order?.[AT]).map((b) => b.id), [ids[0], 'thanks', ids[1], 'stop']);
 });
 
 test('a phrase written for another pair stays stored and stays off the board', () => {

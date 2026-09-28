@@ -288,6 +288,13 @@ function renderWantGrid(shown, coverage, readerCode, onPick) {
     button.addEventListener('click', () => onPick(l.bcp47));
     return button;
   }));
+  markGridEnd();
+}
+
+/** The grid fades where more of it is below, and not once its last row is in view. */
+function markGridEnd() {
+  const grid = document.getElementById('want');
+  grid?.classList.toggle('want-grid-end', grid.scrollTop + grid.clientHeight >= grid.scrollHeight - 1);
 }
 
 /**
@@ -312,6 +319,7 @@ function setWantOpen(open, chosen) {
   if (!toggle || !grid) return;
   toggle.setAttribute('aria-expanded', String(open));
   grid.hidden = !open;
+  markGridEnd();
   if (!open) want?.classList.remove('want-dropped');
   // The chosen language reads as the answer to the label's question, so it is shown
   // only while the question is folded up -- with the grid open it is already marked
@@ -355,6 +363,9 @@ function foldOnScroll(toggle) {
       want.style.setProperty('--bar-room', `${room}px`);
     }
     want.classList.toggle('want-floating', floating);
+    // A grid dropped from the bar hangs from its lower edge, not a guessed distance
+    // below it, which left a strip of the cards showing between the two.
+    if (floating) want.style.setProperty('--bar-h', `${toggle.getBoundingClientRect().height}px`);
     const open = toggle.getAttribute('aria-expanded') === 'true';
     const dropped = want.classList.contains('want-dropped');
     // A grid dropped down from the floating bar belongs to the bar: it shuts when the
@@ -382,6 +393,8 @@ function foldOnScroll(toggle) {
   narrow.addEventListener('change', check);
 }
 const want = /** @type {HTMLElement|null} */ (document.querySelector('.want'));
+document.getElementById('want')?.addEventListener('scroll', markGridEnd, { passive: true });
+addEventListener('resize', markGridEnd);
 const headerHeight = () => Number.parseFloat(
   getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 0;
 

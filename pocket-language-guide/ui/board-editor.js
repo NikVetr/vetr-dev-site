@@ -57,8 +57,12 @@ function el(tag, attrs = {}, kids = []) {
  *   screen, each offered with a switch to hide it here
  * @param {{id:string, onGone:()=>void}} [config.context]  the reader's own context this
  *   editor is in, which it can delete from its first screen
+ * @param {(add: (picked: {concept:string, answers:string[]}[]) => void) => void} [config.fromBoards]
+ *   offer the boards' own sentences to put here, each by reference
+ * @param {(phrase: import('./board-store.js').CustomPhrase) => {owner:string, listener:string}} [config.words]
+ *   what a button taken from a board says, for its row
  */
-export function openBoardEditor({ at, pair, owner, listener, listenerDir, state: held, onChange, save: deliver, builtIn = [], context }) {
+export function openBoardEditor({ at, pair, owner, listener, listenerDir, state: held, onChange, save: deliver, builtIn = [], context, fromBoards, words }) {
   const panel = /** @type {HTMLDialogElement} */ (el('dialog', { class: 'board-editor' }));
   // **Handed in, not read here.** Re-reading storage on every repaint meant the
   // board asked the disk what the reader had just typed while the write was still
@@ -275,17 +279,20 @@ export function openBoardEditor({ at, pair, owner, listener, listenerDir, state:
     edit.addEventListener('click', () => {
       body.replaceChildren(phrase.screen ? screenForm(phrase) : form(phrase));
     });
+    // A button taken from a board says what the corpus says: there is nothing of the
+    // reader's to edit, only to move or take off.
+    const said = phrase.concept && words ? words(phrase) : phrase;
 
     return el('li', { class: 'board-editor-row' }, [
       el('div', { class: 'board-editor-said' }, [
-        el('strong', { text: phrase.label || phrase.owner }),
+        el('strong', { text: phrase.label || said.owner }),
         el('span', { class: 'small muted', text: phrase.screen ? t('editor.screenHolds', { count: String(holds) })
-          : phrase.listener || t('editor.noListenerText') }),
+          : said.listener || t('editor.noListenerText') }),
       ]),
       // A screen is not taken off one screen and left somewhere else: what is on it
       // would have nowhere to be drawn. It is moved, renamed or deleted.
       el('div', { class: 'row' }, [move(-1, '↑', i === 0), move(1, '↓', i === total - 1),
-        edit, ...(phrase.screen ? [] : [off]), gone]),
+        ...(phrase.concept ? [] : [edit]), ...(phrase.screen ? [] : [off]), gone]),
     ]);
   };
 
@@ -311,6 +318,23 @@ export function openBoardEditor({ at, pair, owner, listener, listenerDir, state:
       })),
       el('h3', { class: 'board-editor-sub', text: t('editor.title') }),
     ];
+  };
+
+  /**
+   * The boards' own sentences, to put on this screen by reference: a context of the
+   * reader's own can be made of the boards' buttons, their own, or both.
+   */
+  const taken = () => {
+    const button = el('button', { type: 'button', class: 'ghost', text: t('editor.fromBoards') });
+    button.addEventListener('click', () => fromBoards?.(async (picked) => {
+      let next = state.data;
+      for (const { concept, answers } of picked) {
+        next = addPhrase(next, { label: '', owner: '', listener: '', pair, concept, answers }, at).data;
+      }
+      await commit(next);
+      draw();
+    }));
+    return el('div', { class: 'row board-editor-transfer' }, [button]);
   };
 
   /** Delete the context this is, with everything on it, and leave it. */
@@ -340,6 +364,7 @@ export function openBoardEditor({ at, pair, owner, listener, listenerDir, state:
         : el('p', { class: 'small muted', text: t('editor.none') }),
       form(),
       screenForm(),
+      ...(fromBoards ? [taken()] : []),
       transfer(),
       ...(context && at.endsWith(`/${context.id}`) ? [deleteContext()] : []),
     );

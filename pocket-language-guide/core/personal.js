@@ -120,6 +120,10 @@ function checkButtons(phrases, placements, where, problems) {
     }
     if (typeof p.id === 'string' && p.id !== id) problems.push(`phrase ${id}: its own id says ${p.id}`);
     if (p.screen !== undefined && p.screen !== true) problems.push(`phrase ${id}: screen is not true`);
+    if (p.concept !== undefined && typeof p.concept !== 'string') problems.push(`phrase ${id}: concept is not text`);
+    if (p.answers !== undefined && !(Array.isArray(p.answers) && p.answers.every((/** @type {unknown} */ a) => typeof a === 'string'))) {
+      problems.push(`phrase ${id}: answers are not a list of concepts`);
+    }
     if (p.replies !== undefined && (!Array.isArray(p.replies) || !p.replies.every(
       (/** @type {any} */ r) => plain(r) && typeof r.owner === 'string' && typeof r.listener === 'string'))) {
       problems.push(`phrase ${id}: replies are not a list of answers`);
@@ -244,8 +248,10 @@ export function readPackage(text, known = {}) {
       if (node && !known.boards[board].has(node) && !phrases[node]?.screen) return `board "${board}" has no screen "${node}"`;
       return null;
     }, problems);
-    for (const [at, ids] of Object.entries(held.hidden ?? {})) {
-      if (!Array.isArray(ids) || ids.some((id) => typeof id !== 'string')) problems.push(`hidden ${at}: not a list of button ids`);
+    for (const key of ['hidden', 'order']) {
+      for (const [at, ids] of Object.entries(held[key] ?? {})) {
+        if (!Array.isArray(ids) || ids.some((id) => typeof id !== 'string')) problems.push(`${key} ${at}: not a list of button ids`);
+      }
     }
   }
   if (raw.speaker !== undefined && !plain(raw.speaker)) problems.push('speaker: not a set of answers');
