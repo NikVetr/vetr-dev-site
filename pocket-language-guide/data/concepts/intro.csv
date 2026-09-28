@@ -15,3 +15,17 @@ family-intros.this-is-my-wife,family-intros,entry,phrase,this-is-my-wife,2,0.550
 family-intros.this-is-my-son,family-intros,entry,phrase,this-is-my-son,3,0.510,family-intros.child,0,0,neutral,,
 family-intros.this-is-my-daughter,family-intros,entry,phrase,this-is-my-daughter,4,0.510,family-intros.child,1,0,neutral,,
 introductions.i-am-traveling-alone,introductions,entry,phrase,i-am-traveling-alone,12,0.490,introductions.purpose,1,0,neutral,,"Needed at hotels, tours and border desks."
+about-me.i-am-a-student,about-me,entry,phrase,i-am-a-student,1,0.600,about-me.status,0,0,neutral,,content/PROMPTS/about-and-travel.md
+about-me.i-am-retired,about-me,entry,phrase,i-am-retired,2,0.500,about-me.status,0,0,neutral,,
+about-me.i-am-a-teacher,about-me,entry,phrase,i-am-a-teacher,3,0.450,about-me.work,0,0,neutral,,
+about-me.i-am-a-doctor,about-me,entry,phrase,i-am-a-doctor,4,0.500,about-me.work,0,0,neutral,,
+about-me.i-am-a-nurse,about-me,entry,phrase,i-am-a-nurse,5,0.450,about-me.work,0,0,neutral,,
+about-me.i-am-an-engineer,about-me,entry,phrase,i-am-an-engineer,6,0.450,about-me.work,0,0,neutral,,
+about-me.i-work-in-an-office,about-me,entry,phrase,i-work-in-an-office,7,0.400,about-me.work,0,0,neutral,,
+about-me.i-have-my-own-business,about-me,entry,phrase,i-have-my-own-business,8,0.400,about-me.work,0,0,neutral,,
+family-intros.this-is-my-mother,family-intros,entry,phrase,this-is-my-mother,9,0.500,family-intros.parent,0,0,neutral,,
+family-intros.this-is-my-father,family-intros,entry,phrase,this-is-my-father,10,0.500,family-intros.parent,0,0,neutral,,
+family-intros.this-is-my-brother,family-intros,entry,phrase,this-is-my-brother,11,0.450,family-intros.sibling,0,0,neutral,,
+family-intros.this-is-my-sister,family-intros,entry,phrase,this-is-my-sister,12,0.450,family-intros.sibling,0,0,neutral,,
+family-intros.this-is-my-partner,family-intros,entry,phrase,this-is-my-partner,13,0.500,family-intros.spouse,0,0,neutral,,
+family-intros.this-is-my-colleague,family-intros,entry,phrase,this-is-my-colleague,14,0.400,family-intros.colleague,0,0,neutral,,

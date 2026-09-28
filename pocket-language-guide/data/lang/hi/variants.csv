@@ -7,3 +7,8 @@ speaker_gender=feminine,dietary-needs.i-do-not-eat,मैं {} नहीं ख
 speaker_gender=feminine,lost-rescue.i-cannot-get-down,मैं नीचे नहीं उतर सकती,,maiṁ nīce nahīṁ utar saktī,mɛ̃ nˈiːceː nˈʌhĩ ˈʊtəɾ sˈʌktˌi,,2,hi-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
 speaker_gender=feminine,lost-rescue.i-cannot-walk,मैं चल नहीं सकती,,maiṁ cal nahīṁ saktī,mɛ̃ cˈʌl nˈʌhĩ sˈʌktˌi,,2,hi-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
 speaker_gender=feminine,utility-templates.may-i,क्या मैं {} सकती हूँ?,,kyā maiṁ {} saktī hūṁ?,kjaː mɛ̃ {} sˈʌktˌi hũ,,2,hi-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-student,मैं छात्रा हूँ,,maiṁ chātrā hūṁ,mɛ̃ cʰˈaːtɾaː hũ,,2,hi-variants-v1;rule=role-noun-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,about-me.i-am-retired,मैं सेवानिवृत्त हो गई हूँ,,maiṁ sevānivr̥tta ho gaī hūṁ,mɛ̃ sˌeːʋaːnɪʋɾˈɪtː hoː ɡˈʌi hũ,,2,hi-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-teacher,मैं शिक्षिका हूँ,,maiṁ śikṣikā hūṁ,mɛ̃ ʃˈɪkʃɪkˌaː hũ,,2,hi-variants-v1;rule=role-noun-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,about-me.i-work-in-an-office,मैं दफ़्तर में काम करती हूँ,,maiṁ daftar mēṁ kām kartī hūṁ,mɛ̃ dˈʌftəɾ mẽː kˈaːm kˈʌɾtˌi hũ,,2,hi-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,hitchhiking.i-can-pay-for-fuel,मैं पेट्रोल के लिए पैसे दे सकती हूँ,,maiṁ peṭrol ke lie paise de saktī hūṁ,mɛ̃ pˈeːʈɾoːl keː lˈɪeː pˈɛːseː dˈeː sˈʌktˌi hũ,,2,hi-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak

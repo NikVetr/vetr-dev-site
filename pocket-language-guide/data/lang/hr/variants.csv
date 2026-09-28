@@ -34,3 +34,10 @@ speaker_gender=feminine,border-customs.i-am-staying-at,Odsjela sam ovdje: {},,ot
 speaker_gender=feminine,sim-data.i-would-like-a-tourist-sim,Željela bih turističku SIM karticu,,ʒeʎela bˈix turistitʃku sˈim kartitsu,,2,hr-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak+loan
 speaker_gender=feminine,pronouns-verbs.would-like,htjela bih,,xtjˈela bˈix,,2,hr-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
 speaker_gender=feminine,kind-words.i-had-a-wonderful-time,Imala sam ovdje divno vrijeme.,,imala sam ˈovdje dˈivno vrijeme,,2,hr-kind-words-v1;rule=speaker-gender-agreement;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-student,Studentica sam,,studentitsa sam,,2,hr-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-teacher,Učiteljica sam,,utʃiteʎitsa sam,,2,hr-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-doctor,Liječnica sam,,lijetʃnitsa sam,,2,hr-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-nurse,Medicinska sestra sam,,meditsinska sˈestra sam,,2,hr-variants-v1;rule=role-noun-has-feminine-derivational-suffix;source=hzz.hr;ipa=espeak
+speaker_gender=feminine,about-me.i-am-an-engineer,Inženjerka sam,,inʒeɲerka sam,,2,hr-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,air-travel.i-would-like-a-window-seat,Željela bih mjesto uz prozor,,ʒeʎela bˈix mjˈesto ˈus prˈozor,,2,hr-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,air-travel.i-would-like-an-aisle-seat,Željela bih mjesto uz prolaz,,ʒeʎela bˈix mjˈesto ˈus prˈolaz,,2,hr-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak

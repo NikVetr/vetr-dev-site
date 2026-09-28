@@ -120,3 +120,15 @@ rail-station-words.ticket-validator,ਟਿਕਟ ਪੰਚ ਕਰਨ ਵਾਲ�
 common-signs.pork-code,B2 · BPK · bakso ਵਰਗੇ ਕੋਡ = ਸੂਰ ਦਾ ਮਾਸ,,B2 · BPK · bakso varagē kōḍ = sūr dā mās,,"codes like B2, BPK and bakso mean pork",2,pa-agent-v1
 rail-station-words.fare,ਕਿਰਾਇਆ,,kirāiā,kɪɾaɪa,,2,pa-agent-v1;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,ਕਿਰਾਇਆ ਕਿੱਥੇ ਦੇਣਾ ਹੈ?,,kirāiā kitthē dēṇā hai?,kɪɾaɪa kɪttʰe deɳa hɛ,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+air-travel.where-is-check-in,ਚੈੱਕ-ਇਨ ਕਿੱਥੇ ਹੈ?,,cêk-in kitthē hai?,cɛkɪn kɪttʰe hɛ,,2,pa-agent-v1;ipa=espeak
+air-travel.which-gate,ਕਿਹੜਾ ਗੇਟ ਹੈ?,,kihaṛā gēṭ hai?,kɪhəɽa ɡeʈ hɛ,"ਗੇਟ, the loanword this pack already uses in taxi.we-need-the-east-gate-not-the-south-gate",2,pa-agent-v1;ipa=espeak
+air-travel.where-is-the-security-check,ਸੁਰੱਖਿਆ ਜਾਂਚ ਕਿੱਥੇ ਹੈ?,,surakkhiā jāṁc kitthē hai?,sʊɾʌkkʰɪa ɟaɲc kɪttʰe hɛ,"ਜਾਂਚ, the same word this pack already uses for ਪਾਸਪੋਰਟ ਜਾਂਚ (border-customs.passport-control)",2,pa-agent-v1;ipa=espeak
+air-travel.my-luggage-did-not-arrive,ਮੇਰਾ ਸਮਾਨ ਨਹੀਂ ਆਇਆ,,mērā samān nahīṁ āiā,meɾa səman nʌhĩ aɪa,"ਆਇਆ agrees with ਸਮਾਨ (luggage, m), not the speaker",2,pa-agent-v1;ipa=espeak
+air-travel.i-would-like-a-window-seat,ਮੈਨੂੰ ਖਿੜਕੀ ਵਾਲੀ ਸੀਟ ਚਾਹੀਦੀ ਹੈ,,mainūṁ khiṛkī vālī sīṭ cāhīdī hai,mɛnũ kʰɪɽəki ʋali siʈ cahidi hɛ,"ਵਾਲੀ/ਚਾਹੀਦੀ agree with ਸੀਟ (f, the thing wanted) -- unlike Hindi's invariant चाहिए, Punjabi's ਚਾਹੀਦਾ does inflect, but by the object's gender, not the speaker's",2,pa-agent-v1;ipa=espeak
+air-travel.i-would-like-an-aisle-seat,ਮੈਨੂੰ ਆਇਲ ਸੀਟ ਚਾਹੀਦੀ ਹੈ,,mainūṁ āil sīṭ cāhīdī hai,mɛnũ aɪl siʈ cahidi hɛ,"no natural native calque for 'aisle' on a plane, unlike ਖਿੜਕੀ ਵਾਲੀ for window; loanword",2,pa-agent-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,ਕੀ ਤੁਸੀਂ ਮੈਨੂੰ ਲਿਫ਼ਟ ਦੇਵੋਗੇ?,,kī tusīṁ mainūṁ lifaṭ dēvōgē?,ki tʊsĩ mɛnũ lɪfəʈ deʋoɡe,"future tense, invariant for addressee gender",2,pa-agent-v1;ipa=espeak
+hitchhiking.where-are-you-going,ਤੁਸੀਂ ਕਿੱਥੇ ਜਾ ਰਹੇ ਹੋ?,ਤੁਸੀਂ ਕਿੱਥੇ ਜਾ ਰਹੀ ਹੋ?,tusīṁ kitthē jā rahē hō?,tʊsĩ kɪttʰe ɟa ɾəhe ho,to a woman driver: jā rahī hō (text_alt) -- ਰਹਿਆ/ਰਹੀ/ਰਹੇ is the same participle this pack's own ਜਾ ਰਹੀ ਹਾਂ (border-customs.i-am-in-transit) variant forks for the speaker; here it is the addressee,2,pa-agent-v1;ipa=espeak
+hitchhiking.i-only-need-to-go-to-the-next-town,ਮੈਨੂੰ ਸਿਰਫ਼ ਅਗਲੇ ਸ਼ਹਿਰ ਤੱਕ ਜਾਣਾ ਹੈ,,mainūṁ sirf aglē śahir takk jāṇā hai,mɛnũ sɪɾəf ʌɡəle ʃʌhɪɾ tək ɟaɳa hɛ,ਜਾਣਾ (infinitive) is invariant,2,pa-agent-v1;ipa=espeak
+hitchhiking.is-there-room-for-two,ਕੀ ਦੋ ਬੰਦਿਆਂ ਲਈ ਜਗ੍ਹਾ ਹੈ?,,kī dō baṁdiāṁ laī jaghā hai?,ki do bʌndɪã lʌi ɟʌɡha hɛ,,2,pa-agent-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,ਮੈਂ ਪੈਟਰੋਲ ਲਈ ਪੈਸੇ ਦੇ ਸਕਦਾ ਹਾਂ,,maiṁ paiṭarōl laī paisē dē sakadā hāṁ,mɛ̃ pɛʈəɾol lʌi pɛse de sʌkəda hã,"m; ਸਕਦੀ for a woman, see variants.csv; ਪੈਟਰੋਲ is the pump word across South Asia",2,pa-agent-v1;ipa=espeak
+hitchhiking.thank-you-for-the-ride,ਲਿਫ਼ਟ ਦੇਣ ਲਈ ਧੰਨਵਾਦ,,lifaṭ dēṇ laī dhannavād,lɪfəʈ deɳ lʌi tə˩nnəʋad,,2,pa-agent-v1;ipa=espeak

@@ -120,3 +120,15 @@ rail-station-words.ticket-validator,ẹ̀rọ ìdánilójú tikẹ́tì,,ɛ˩rɔ
 common-signs.pork-code,àmì ẹran ẹlẹ́dẹ̀ lórí àwọn àmì oúnjẹ,,a˩mi˩ ɛrã ɛlɛ˥dɛ˩ lo˥ri˥ a˩wɔ̃ a˩mi˩ oũ˥dʒɛ,,2,yo-agent-v1;ipa=yo-g2p
 rail-station-words.fare,owó ọkọ̀,,owo˥ ɔkɔ˩,,2,yo-agent-v1;ipa=yo-g2p
 transit-rides.where-do-i-pay-the-fare,Níbo ni mo máa san owó ọkọ̀?,,ni˥bo ni mo ma˥a sã owo˥ ɔkɔ˩,,2,translator-requests-v1;in-pack-neighbour;ipa=yo-g2p
+air-travel.where-is-check-in,Níbo ni ibùdó forúkọsílẹ̀ wà?,,ni˥bo ni ibu˩do˥ foru˥kɔsi˥lɛ˩ wa˩,forúkọsílẹ̀ = to register; parallel to transit-rides.where-is-the-subway-station's ibùdó (station) + Níbo ni...wà? frame,2,yo-agent-v1;in-pack-neighbour=transit-rides.where-is-the-subway-station;ipa=yo-g2p
+air-travel.which-gate,Ẹnu-ọ̀nà wo?,,ɛnuɔ˩na˩ wo,reuses taxi.we-need-the-east-gate-not-the-south-gate's ẹnu-ọ̀nà,2,yo-agent-v1;in-pack-neighbour=taxi.we-need-the-east-gate-not-the-south-gate;ipa=yo-g2p
+air-travel.where-is-the-security-check,Níbo ni ibi àyẹ̀wò ààbò wà?,,ni˥bo ni ibi a˩jɛ˩wo˩ a˩a˩bo˩ wa˩,"ààbò = security, as in Murtala Muhammed Airport's own signage; àyẹ̀wò = inspection/check",2,yo-agent-v1;src=MMIA signage ààbò;ipa=yo-g2p
+air-travel.my-luggage-did-not-arrive,Ẹrù mi kò dé,,ɛru˩ mi ko˩ de˥,ẹrù = load/luggage,2,yo-agent-v1;ipa=yo-g2p
+air-travel.i-would-like-a-window-seat,Mo fẹ́ ijoko tí ó súnmọ́ fèrèsé,,mo fɛ˥ idʒoko ti˥ o˥ sũ˥mɔ˥ fe˩re˩se˥,Mo fẹ́ matches this pack's own i-want construction; fèrèsé reused from taxi.may-i-open-the-window,2,yo-agent-v1;in-pack-neighbour=taxi.may-i-open-the-window;ipa=yo-g2p
+air-travel.i-would-like-an-aisle-seat,Mo fẹ́ ijoko tí ó súnmọ́ ọ̀nà,,mo fɛ˥ idʒoko ti˥ o˥ sũ˥mɔ˥ ɔ˩na˩,parallel to the window-seat row,2,yo-agent-v1;ipa=yo-g2p
+hitchhiking.can-you-give-me-a-ride,Ṣé ẹ lè gbé mi lọ?,,ʃe˥ ɛ le˩ ɡbe˥ mi lɔ,"ẹ, the polite/formal you this pack's taxi.* rows use for a stranger driver; gbé...lọ reused from taxi.please-take-me-here",2,yo-agent-v1;in-pack-neighbour=taxi.please-take-me-here;ipa=yo-g2p
+hitchhiking.where-are-you-going,Níbo ni ẹ ń lọ?,,ni˥bo ni ɛ n̩˥ lɔ,"formal ẹ, matching the ride request above",2,yo-agent-v1;ipa=yo-g2p
+hitchhiking.i-only-need-to-go-to-the-next-town,Mo nílò láti lọ sí ìlú tó kàn nìkan,,mo ni˥lo˩ la˥ti lɔ si˥ i˩lu˥ to˥ kã˩ ni˩kã,tó kàn reused from transit-rides.what-is-the-next-stop's ibùdókọ̀ tó kàn,2,yo-agent-v1;in-pack-neighbour=transit-rides.what-is-the-next-stop;ipa=yo-g2p
+hitchhiking.is-there-room-for-two,Ṣé àyè wà fún ẹ̀ni méjì?,,ʃe˥ a˩je˩ wa˩ fũ˥ ɛ˩ni me˥dʒi˩,,2,yo-agent-v1;ipa=yo-g2p
+hitchhiking.i-can-pay-for-fuel,Mo lè san owó epo,,mo le˩ sã owo˥ ekpo,san owó reused from transit-rides.where-do-i-pay-the-fare; epo = fuel/oil,2,yo-agent-v1;in-pack-neighbour=transit-rides.where-do-i-pay-the-fare;ipa=yo-g2p
+hitchhiking.thank-you-for-the-ride,Ẹ ṣé fún gbígbé mi lọ,,ɛ ʃe˥ fũ˥ ɡbi˥ɡbe˥ mi lɔ,reuses social-basics.thank-you's Ẹ ṣé and the ride row's gbé mi lọ,2,yo-agent-v1;in-pack-neighbour=social-basics.thank-you;ipa=yo-g2p

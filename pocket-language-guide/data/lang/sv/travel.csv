@@ -120,3 +120,15 @@ place-words.scenic-area,naturskönt område,,nˈatʉrsxœnt ˈɔmroːdə,,2,glos
 rail-station-words.maglev,maglev,,mˈaɡləv,,2,gloss-only;scoped-away;sv-agent-v1;ipa=espeak
 common-signs.pork-code,koder för fläskkött på skyltar,,kˈoːdər føːr fləskkˈœt poː sxˈyltar,,2,gloss-only;scoped-away;sv-agent-v1;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,Var betalar jag biljetten?,,vɑːr bətˈɑːlar jɑːɡ bˈɪljətːən,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+air-travel.where-is-check-in,Var är incheckningen?,,vɑːr ɛːr ˈɪnʃəknˌɪŋən,,2,sv-about-travel-v1;ipa=espeak
+air-travel.which-gate,Vilken gate?,,vˈɪlkən ɡˈɑːtə,,2,sv-about-travel-v1;ipa=espeak
+air-travel.where-is-the-security-check,Var är säkerhetskontrollen?,,vɑːr ɛːr sˈɛːkərhˌeːtskɔntrˌɔlən,,2,sv-about-travel-v1;ipa=espeak
+air-travel.my-luggage-did-not-arrive,Mitt bagage kom inte fram.,,mɪt bˈaɡaɡə kˈɔm ˈɪntɛ frˈam,,2,sv-about-travel-v1;ipa=espeak
+air-travel.i-would-like-a-window-seat,Jag skulle vilja ha en fönsterplats.,,jɑːɡ skˌɵlə vˈɪlja hˈɑː ɛn fˈœnstərplˌats,,2,sv-about-travel-v1;ipa=espeak
+air-travel.i-would-like-an-aisle-seat,Jag skulle vilja ha en gångplats.,,jɑːɡ skˌɵlə vˈɪlja hˈɑː ɛn ɡˈɔŋplats,,2,sv-about-travel-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,Kan du ge mig en skjuts?,,kan dʉ jˈeː mˈɛj ɛn ɕˈʉts,,2,sv-about-travel-v1;ipa=espeak
+hitchhiking.where-are-you-going,Vart ska du?,,vˈɑːt skɑː dʉ,,2,sv-about-travel-v1;ipa=espeak
+hitchhiking.i-only-need-to-go-to-the-next-town,Jag behöver bara komma till nästa ort.,,jɑːɡ bəhˈøːvər bˈɑːra kˈɔma tɪl nˈɛsta ˈuːt,,2,sv-about-travel-v1;ipa=espeak
+hitchhiking.is-there-room-for-two,Finns det plats för två?,,fˈɪns deːt plˈats føːr tvˈoː,,2,sv-about-travel-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,Jag kan betala för bensinen.,,jɑːɡ kan bətˈɑːla føːr bənsˈiːnən,,2,sv-about-travel-v1;ipa=espeak
+hitchhiking.thank-you-for-the-ride,Tack för skjutsen.,,tˈak føːr ɕˈʉtsən,,2,sv-about-travel-v1;ipa=espeak

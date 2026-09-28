@@ -64,3 +64,6 @@ trail-landmarks.end,vég,,vˈeːɡ,,2,hu-agent-v1;ipa=espeak
 trail-landmarks.elevation,tengerszint feletti magasság,,tˈɛnɡɛrsint fˈɛlɛtti mˈɑɡɑʃʃaːɡ,,2,hu-agent-v1;ipa=espeak
 trail-landmarks.sunset,napnyugta,,nˈɑpɲuɡtɑ,,2,hu-agent-v1;ipa=espeak
 trail-landmarks.water-point,vízvételi hely,,vˈiːzveːtɛli hˈɛj,,2,hu-agent-v1;ipa=espeak
+outdoors.can-we-camp-here,Kempingezhetünk itt?,,kˈɛmpinɡɛzhɛtynk ˈitt,,2,hu-agent-v1;ipa=espeak
+outdoors.is-it-safe-to-swim-here,Biztonságos itt úszni?,,bˈistonʃaːɡoʃ ˈitt ˈuːsni,,2,hu-agent-v1;ipa=espeak
+outdoors.are-there-dangerous-animals-here,Vannak itt veszélyes állatok?,,vˈɑnnɑk ˈitt vˈɛseːjɛʃ ˈaːllɑtok,,2,hu-agent-v1;ipa=espeak

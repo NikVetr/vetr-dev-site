@@ -120,3 +120,15 @@ rail-station-words.maglev,รถไฟแม่เหล็ก,,,rot˦˥faj˧ m�
 common-signs.pork-code,รหัสหมู,,rahat mu,ra˦˥hat˨˩ muː˩˩˦,,2,pork-code-agent-v1;lppom-mui;ipa=thaig2p
 rail-station-words.fare,ค่ารถ,ค่าโดยสาร,kha rot,kʰaː˥˩rot˦˥,,2,fare-agent-v1;in-pack-neighbour;ipa=thaig2p
 transit-rides.where-do-i-pay-the-fare,จ่ายค่ารถที่ไหน,,chai kha rot thi nai,tɕaːj˨˩ kʰaː˥˩rot˦˥ tʰiː˥˩naj˩˩˦,,2,translator-requests-v1;in-pack-neighbour;ipa=thaig2p
+air-travel.where-is-check-in,เช็คอินอยู่ไหน,,chek-in yu nai,tɕʰek˦˥ ʔin˧ juː˨˩ naj˩˩˦,,2,"Suvarnabhumi Airport / Bangkok Airways / Samui Airport passenger and security guidance (เช็คอิน, ประตูขึ้นเครื่อง, จุดตรวจค้น); th-agent-v1;ipa=thaig2p"
+air-travel.which-gate,ประตูไหน,,pratu nai,pra˨˩raʔ˨˩tuː˧ naj˩˩˦,,2,"Suvarnabhumi Airport / Bangkok Airways / Samui Airport passenger and security guidance (เช็คอิน, ประตูขึ้นเครื่อง, จุดตรวจค้น); th-agent-v1;ipa=thaig2p"
+air-travel.where-is-the-security-check,จุดตรวจค้นอยู่ไหน,,chut truat khon yu nai,tɕut˨˩ trua̯t˨˩kʰon˦˥ juː˨˩ naj˩˩˦,,2,"Suvarnabhumi Airport / Bangkok Airways / Samui Airport passenger and security guidance (เช็คอิน, ประตูขึ้นเครื่อง, จุดตรวจค้น); th-agent-v1;ipa=thaig2p"
+air-travel.my-luggage-did-not-arrive,กระเป๋าไม่มา,,krapao mai ma,kra˨˩raʔ˨˩paw˩˩˦ maj˥˩ maː˧,,2,th-agent-v1;ipa=thaig2p
+air-travel.i-would-like-a-window-seat,ขอที่นั่งริมหน้าต่าง,,kho thinang rim natang,kʰɔː˩˩˦ tʰiː˥˩naŋ˥˩ rim˧ naː˥˩taːŋ˨˩,,2,th-agent-v1;ipa=thaig2p
+air-travel.i-would-like-an-aisle-seat,ขอที่นั่งริมทางเดิน,,kho thinang rim thangdoen,kʰɔː˩˩˦ tʰiː˥˩naŋ˥˩ rim˧ tʰaːŋ˧dɤːn˧,,2,th-agent-v1;ipa=thaig2p
+hitchhiking.can-you-give-me-a-ride,ติดรถไปด้วยได้ไหม,,tid rot pai duai dai mai,tit˨˩ rot˦˥ paj˧ dua̯j˥˩ daːj˥˩ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+hitchhiking.where-are-you-going,คุณจะไปไหน,,khun cha pai nai,kʰun˧na˦˥ tɕaʔ˨˩ paj˧ naj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+hitchhiking.i-only-need-to-go-to-the-next-town,ไปแค่เมืองต่อไปก็พอ,,pai khae mueang topai ko pho,paj˧ kʰɛː˥˩ mɯa̯ŋ˧ tɔː˨˩paj˧ kɔː˥˩ pʰɔː˧,,2,th-agent-v1;ipa=thaig2p
+hitchhiking.is-there-room-for-two,มีที่ว่างสำหรับสองคนไหม,,mi thi wang samrap song khon mai,miː˧ tʰiː˥˩waːŋ˥˩ sam˩˩˦rap˨˩ sɔːŋ˩˩˦ kʰon˧ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+hitchhiking.i-can-pay-for-fuel,จ่ายค่าน้ำมันให้ได้,,chai kha namman hai dai,tɕaːj˨˩ kʰaː˥˩ naːm˦˥man˧ haj˥˩daːj˥˩,,2,th-agent-v1;ipa=thaig2p
+hitchhiking.thank-you-for-the-ride,ขอบคุณที่ให้ติดรถ,ขอบคุณที่ให้ติดรถครับ,khopkhun thi hai tid rot,kʰɔːp˨˩kʰun˧na˦˥ tʰiː˥˩ haj˥˩ tit˨˩ rot˦˥,,2,th-agent-v1;ipa=thaig2p

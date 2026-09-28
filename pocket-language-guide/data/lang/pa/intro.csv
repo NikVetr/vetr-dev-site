@@ -15,3 +15,17 @@ family-intros.this-is-my-husband,ਇਹ ਮੇਰਾ ਪਤੀ ਹੈ,,ih mērā
 family-intros.this-is-my-wife,ਇਹ ਮੇਰੀ ਪਤਨੀ ਹੈ,,ih mērī patanī hai,ɪ˥ meɾi pʌtəni hɛ,,2,pa-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
 family-intros.this-is-my-son,ਇਹ ਮੇਰਾ ਪੁੱਤਰ ਹੈ,,ih mērā puttar hai,ɪ˥ meɾa pʊttəɾ hɛ,,2,pa-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
 family-intros.this-is-my-daughter,ਇਹ ਮੇਰੀ ਧੀ ਹੈ,,ih mērī dhī hai,ɪ˥ meɾi ti˩ hɛ,,2,pa-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+about-me.i-am-a-student,ਮੈਂ ਵਿਦਿਆਰਥੀ ਹਾਂ,,maiṁ vidiārathī hāṁ,mɛ̃ ʋɪdɪaɾətʰi hã,"m; ਵਿਦਿਆਰਥਣ for a woman, see variants.csv",2,pa-agent-v1;ipa=espeak
+about-me.i-am-retired,ਮੈਂ ਸੇਵਾਮੁਕਤ ਹੋ ਗਿਆ ਹਾਂ,,maiṁ sēvāmukat hō giā hāṁ,mɛ̃ seʋamʊkət ho ɡɪa hã,"m; ਹੋ ਗਈ for a woman, see variants.csv",2,pa-agent-v1;ipa=espeak
+about-me.i-am-a-teacher,ਮੈਂ ਅਧਿਆਪਕ ਹਾਂ,,maiṁ adhiāpak hāṁ,mɛ̃ ə˥dɪapək hã,"m; ਅਧਿਆਪਿਕਾ for a woman, see variants.csv",2,pa-agent-v1;ipa=espeak
+about-me.i-am-a-doctor,ਮੈਂ ਡਾਕਟਰ ਹਾਂ,,maiṁ ḍākaṭar hāṁ,mɛ̃ ɖakəʈəɾ hã,ਡਾਕਟਰ is an invariant loanword,2,pa-agent-v1;ipa=espeak
+about-me.i-am-a-nurse,ਮੈਂ ਨਰਸ ਹਾਂ,,maiṁ naras hāṁ,mɛ̃ nʌɾəs hã,ਨਰਸ is an invariant loanword,2,pa-agent-v1;ipa=espeak
+about-me.i-am-an-engineer,ਮੈਂ ਇੰਜੀਨੀਅਰ ਹਾਂ,,maiṁ iṁjīnīar hāṁ,mɛ̃ ɪɲɟiniəɾ hã,ਇੰਜੀਨੀਅਰ is an invariant loanword,2,pa-agent-v1;ipa=espeak
+about-me.i-work-in-an-office,ਮੈਂ ਦਫ਼ਤਰ ਵਿੱਚ ਕੰਮ ਕਰਦਾ ਹਾਂ,,maiṁ dafatar vicc kaṁm karadā hāṁ,mɛ̃ dʌfətəɾ ʋɪc kʌnm kʌɾəda hã,"m; ਕਰਦੀ for a woman, see variants.csv -- ਕਰਦਾ/ਕਰਦੀ is the same habitual-participle pattern as this pack's existing ਲੈਂਦੀ ਹਾਂ variant",2,pa-agent-v1;ipa=espeak
+about-me.i-have-my-own-business,ਮੇਰਾ ਆਪਣਾ ਕਾਰੋਬਾਰ ਹੈ,,mērā āpaṇā kārōbār hai,meɾa apəɳa kaɾobaɾ hɛ,"ਮੇਰਾ agrees with ਕਾਰੋਬਾਰ (business, m), not the speaker",2,pa-agent-v1;ipa=espeak
+family-intros.this-is-my-mother,ਇਹ ਮੇਰੀ ਮਾਂ ਹੈ,,ih mērī māṁ hai,ɪ˥ meɾi mã hɛ,,2,pa-agent-v1;ipa=espeak
+family-intros.this-is-my-father,ਇਹ ਮੇਰਾ ਪਿਤਾ ਹੈ,,ih mērā pitā hai,ɪ˥ meɾa pɪta hɛ,,2,pa-agent-v1;ipa=espeak
+family-intros.this-is-my-brother,ਇਹ ਮੇਰਾ ਭਰਾ ਹੈ,,ih mērā bharā hai,ɪ˥ meɾa pʌ˩ɾa hɛ,,2,pa-agent-v1;ipa=espeak
+family-intros.this-is-my-sister,ਇਹ ਮੇਰੀ ਭੈਣ ਹੈ,,ih mērī bhaiṇ hai,ɪ˥ meɾi pɛ˩ɳ hɛ,,2,pa-agent-v1;ipa=espeak
+family-intros.this-is-my-partner,ਇਹ ਮੇਰਾ ਜੀਵਨ ਸਾਥੀ ਹੈ,,ih mērā jīvan sāthī hai,ɪ˥ meɾa ɟiʋən satʰi hɛ,"ਜੀਵਨ ਸਾਥੀ 'life companion', common-gender, matching this pack's own ਮੇਰਾ ਦੋਸਤ default rather than a referent-gender fork; kept clear of ਪਾਰਟਨਰ (business partner)",2,pa-agent-v1;ipa=espeak
+family-intros.this-is-my-colleague,ਇਹ ਮੇਰਾ ਸਹਿਕਰਮੀ ਹੈ,,ih mērā sahikaramī hai,ɪ˥ meɾa sʌhɪkəɾəmi hɛ,,2,pa-agent-v1;ipa=espeak

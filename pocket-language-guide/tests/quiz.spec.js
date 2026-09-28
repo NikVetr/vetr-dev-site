@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { counts, expectIncluded, expectIncludedNot } from './counts.js';
+import { counts, expectIncluded } from './counts.js';
 
 const STUDIO = '/customize.html?target=zh-Hans&source=en';
 
@@ -24,14 +24,19 @@ test.describe('help me decide', () => {
     await quiz.getByRole('button', { name: 'Build my sheet' }).click();
     await expect(quiz).toHaveCount(0);
 
-    // Fewer items than everything. **The banner does not step out of the way any
-    // more**, and that is the point of the change this assertion was updated for:
-    // hiding it once the quiz had been answered set a flag that never cleared, so a
-    // reader who answered it could never reach the questionnaire again -- and it is
-    // the one control that sets several others at once. It costs nothing to keep now
-    // that it is a line in the header rather than a bar of its own.
-    const narrowed = await expectIncludedNot(page, all.included);
-    expect(narrowed.included).toBeLessThan(all.included);
+    // The sheet is the answers': the sections the reader asked for and the core, and
+    // no others. Judged by section rather than by a count against the default sheet --
+    // the two counts met at 632 once the family sentences grew by six, and the quiz
+    // had not stopped working. A transit section is off (transit was unticked) and a
+    // health section the default leaves off is on. **The banner does not step out of
+    // the way any more**: hiding it once the quiz had been answered set a flag that
+    // never cleared, so a reader who answered it could never reach the questionnaire
+    // again -- and it is the one control that sets several others at once.
+    const narrowed = await counts(page);
+    expect(narrowed.included).toBeLessThan(all.total);
+    // The names come through the catalogue, which isolates the inserted title.
+    await expect(page.getByRole('checkbox', { name: /^Include\W+Taxi\W*$/ })).not.toBeChecked();
+    await expect(page.getByRole('checkbox', { name: /^Include\W+Conditions \+ medication\W*$/ })).toBeChecked();
     await expect(page.locator('.banner')).toBeVisible();
     await expect(page.locator('#quiz-open')).toBeEnabled();
     // Large print asked for bigger type, not the same content shrunk.

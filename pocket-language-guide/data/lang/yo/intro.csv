@@ -15,3 +15,17 @@ family-intros.this-is-my-husband,Èyí ni ọkọ mi,,e˩ji˥ ni ɔkɔ mi,husban
 family-intros.this-is-my-wife,Èyí ni aya mi,,e˩ji˥ ni aja mi,wife-my,2,yo-agent-v1;split-from=this-is-my-husband-wife;ipa=yo-g2p
 family-intros.this-is-my-son,Èyí ni ọmọkùnrin mi,,e˩ji˥ ni ɔmɔkũ˩rĩ mi,son-my,2,yo-agent-v1;split-from=this-is-my-daughter-son;ipa=yo-g2p
 family-intros.this-is-my-daughter,Èyí ni ọmọbìnrin mi,,e˩ji˥ ni ɔmɔbĩ˩rĩ mi,daughter-my,2,yo-agent-v1;split-from=this-is-my-daughter-son;ipa=yo-g2p
+about-me.i-am-a-student,Akẹ́kọ̀ọ́ ni mi,,akɛ˥kɔ˩ɔ˥ ni mi,matches introductions.i-am-a-tourist's X ni mi construction,2,yo-agent-v1;ipa=yo-g2p
+about-me.i-am-retired,Mo ti fẹ̀yìntì,,mo ti fɛ˩jĩ˩ti˩,"fẹ̀yìntì = to retire; no gender marking, Yoruba has none",2,yo-agent-v1;ipa=yo-g2p
+about-me.i-am-a-teacher,Olùkọ́ ni mi,,olu˩kɔ˥ ni mi,,2,yo-agent-v1;ipa=yo-g2p
+about-me.i-am-a-doctor,Dókítà ni mi,,do˥ki˥ta˩ ni mi,,2,yo-agent-v1;ipa=yo-g2p
+about-me.i-am-a-nurse,Nọ́ọ̀sì ni mi,,nɔ˥ɔ˩si˩ ni mi,loanword; no native word distinguishes the modern nursing profession,2,yo-agent-v1;ipa=yo-g2p
+about-me.i-am-an-engineer,Ẹlẹ́rọ̀ ni mi,,ɛlɛ˥rɔ˩ ni mi,"ẹlẹ́- agentive + ẹ̀rọ̀ machine, the same word-formation as olùkọ́/oníṣòwò",2,yo-agent-v1;ipa=yo-g2p
+about-me.i-work-in-an-office,Mo ń ṣiṣẹ́ ní ọ́fíìsì,,mo n̩˥ ʃiʃɛ˥ ni˥ ɔ˥fi˥i˩si˩,,2,yo-agent-v1;ipa=yo-g2p
+about-me.i-have-my-own-business,Mo ni òwò tèmi,,mo ni o˩wo˩ te˩mi,,2,yo-agent-v1;ipa=yo-g2p
+family-intros.this-is-my-mother,Èyí ni ìyá mi,,e˩ji˥ ni i˩ja˥ mi,,2,yo-agent-v1;ipa=yo-g2p
+family-intros.this-is-my-father,Èyí ni bàbá mi,,e˩ji˥ ni ba˩ba˥ mi,,2,yo-agent-v1;ipa=yo-g2p
+family-intros.this-is-my-brother,Èyí ni arákùnrin mi,,e˩ji˥ ni ara˥kũ˩rĩ mi,arákùnrin/arábìnrin name the sibling's sex directly; Yoruba's other kinship set (ẹ̀gbọ́n/àbúrò) sorts by relative age instead and has no age-neutral brother/sister,2,yo-agent-v1;ipa=yo-g2p
+family-intros.this-is-my-sister,Èyí ni arábìnrin mi,,e˩ji˥ ni ara˥bĩ˩rĩ mi,see this-is-my-brother,2,yo-agent-v1;ipa=yo-g2p
+family-intros.this-is-my-partner,Èyí ni olùfẹ́ mi,,e˩ji˥ ni olu˩fɛ˥ mi,"olùfẹ́ = beloved/sweetheart, the neutral word for a romantic partner, not a business partner (alábàáṣiṣẹ́owó); Yoruba has no grammatical gender so one form covers either partner",2,yo-agent-v1;ipa=yo-g2p
+family-intros.this-is-my-colleague,Èyí ni alábàáṣiṣẹ́ mi,,e˩ji˥ ni ala˥ba˩a˥ʃiʃɛ˥ mi,one who works together with me,2,yo-agent-v1;ipa=yo-g2p

@@ -64,3 +64,6 @@ trail-landmarks.end,Akhir,Selesai,ˈaxer,,2,ms-agent-v1;ipa=espeak
 trail-landmarks.elevation,Ketinggian,,kətiŋɡˈian,,2,ms-agent-v1;ipa=espeak
 trail-landmarks.sunset,Matahari terbenam,,mˌatahˈari təɾrbˈɛnam,,2,ms-agent-v1;ipa=espeak
 trail-landmarks.water-point,Titik air,Sumber air,tˈiteʔ ˈaɪr,,2,ms-agent-v1;ipa=espeak
+outdoors.can-we-camp-here,Kami boleh berkhemah di sini?,,kˈami bˈoleh bərxˈɛmah di sˈini,"berkhemah (PRPM), the Malaysian spelling, distinct from Indonesian berkemah; boleh matches taxi.may-i-open-the-window",2,ms-agent-v1;src=prpm.dbp.gov.my berkhemah;in-pack-neighbour=taxi.may-i-open-the-window;ipa=espeak
+outdoors.is-it-safe-to-swim-here,Selamat berenang di sini?,,səlˈamat bərˈɛnaŋ di sˈini,"selamat, the Malaysian word for physically safe, rather than aman (peaceful/secure)",2,ms-agent-v1;ipa=espeak
+outdoors.are-there-dangerous-animals-here,Ada haiwan berbahaya di sini?,,ˈadə hˈaɪwan bərbahˈajə di sˈini,"haiwan is the Malaysian spelling, distinct from Indonesian hewan",2,ms-agent-v1;ipa=espeak

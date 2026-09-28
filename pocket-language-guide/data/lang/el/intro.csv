@@ -15,3 +15,17 @@ family-intros.this-is-my-husband,Από εδώ ο άντρας μου,Από ε�
 family-intros.this-is-my-wife,Από εδώ η γυναίκα μου,Από εδώ η σύζυγός μου,Apo edo i gynaika mou,apˈo eðˈo i jinˈeka mu,,2,el-agent-v1;roman=elot743;split-from=this-is-my-husband-wife;ipa=espeak
 family-intros.this-is-my-son,Από εδώ ο γιος μου,,Apo edo o gios mou,apˈo eðˈo o jˈoz mu,,2,el-agent-v1;roman=elot743;split-from=this-is-my-daughter-son;ipa=espeak
 family-intros.this-is-my-daughter,Από εδώ η κόρη μου,,Apo edo i kori mou,apˈo eðˈo i kˈoɾi mu,,2,el-agent-v1;roman=elot743;split-from=this-is-my-daughter-son;ipa=espeak
+about-me.i-am-a-student,Είμαι φοιτητής.,,Eimai foititis.,ˈime fˌititˈis,masculine; a woman says Είμαι φοιτήτρια. (Eimai foititria.),2,el-agent-v1;roman=elot743;ipa=espeak
+about-me.i-am-retired,Είμαι συνταξιούχος.,,Eimai syntaxiouchos.,ˈime sˌidaksiˈuxos,"συνταξιούχος is grammatically common-gender (ο/η συνταξιούχος); invariant, no ending changes with the speaker's sex",2,el-agent-v1;roman=elot743;source=el.wiktionary.org;ipa=espeak
+about-me.i-am-a-teacher,Είμαι δάσκαλος.,,Eimai daskalos.,ˈime ðˈaskalˌos,masculine; a woman says Είμαι δασκάλα. (Eimai daskala.),2,el-agent-v1;roman=elot743;ipa=espeak
+about-me.i-am-a-doctor,Είμαι γιατρός.,,Eimai giatros.,ˈime jatɾˈos,"γιατρός is common-gender (ο/η γιατρός); invariant, no separate feminine noun",2,el-agent-v1;roman=elot743;ipa=espeak
+about-me.i-am-a-nurse,Είμαι νοσοκόμος.,,Eimai nosokomos.,ˈime nˌosokˈomos,masculine; a woman says Είμαι νοσοκόμα. (Eimai nosokoma.),2,el-agent-v1;roman=elot743;ipa=espeak
+about-me.i-am-an-engineer,Είμαι μηχανικός.,,Eimai michanikos.,ˈime mˌixanikˈos,"μηχανικός is common-gender (ο/η μηχανικός); invariant, no separate feminine noun",2,el-agent-v1;roman=elot743;ipa=espeak
+about-me.i-work-in-an-office,Δουλεύω σε γραφείο.,,Doulevo se grafeio.,ðulˈevo se ɣɾafˈio,,2,el-agent-v1;roman=elot743;ipa=espeak
+about-me.i-have-my-own-business,Έχω τη δική μου επιχείρηση.,,Echo ti diki mou epicheirisi.,ˈexo ti ðicˈi mu ˌepiçˈiɾisˌi,,2,el-agent-v1;roman=elot743;ipa=espeak
+family-intros.this-is-my-mother,Από εδώ η μαμά μου.,,Apo edo i mama mou.,apˈo eðˈo i mamˈa mu,,2,el-agent-v1;roman=elot743;ipa=espeak
+family-intros.this-is-my-father,Από εδώ ο μπαμπάς μου.,,Apo edo o babas mou.,apˈo eðˈo o babˈaz mu,,2,el-agent-v1;roman=elot743;ipa=espeak
+family-intros.this-is-my-brother,Από εδώ ο αδελφός μου.,,Apo edo o adelfos mou.,apˈo eðˈo o ˌaðelfˈoz mu,,2,el-agent-v1;roman=elot743;ipa=espeak
+family-intros.this-is-my-sister,Από εδώ η αδελφή μου.,,Apo edo i adelfi mou.,apˈo eðˈo i ˌaðelfˈi mu,,2,el-agent-v1;roman=elot743;ipa=espeak
+family-intros.this-is-my-partner,Από εδώ ο σύντροφός μου.,Από εδώ η σύντροφός μου.,Apo edo o syntrofos mou.,apˈo eðˈo o sˈidɾofoz mu,"male partner; a female partner is Από εδώ η σύντροφός μου. -- σύντροφος is the neutral, common-gender word for an unmarried life partner, not a business partner",2,el-agent-v1;roman=elot743;ipa=espeak
+family-intros.this-is-my-colleague,Από εδώ ο συνάδελφός μου.,Από εδώ η συνάδελφός μου.,Apo edo o synadelfos mou.,apˈo eðˈo o sinˈaðelfoz mu,συνάδελφος is common-gender; only the article ο/η changes for a female colleague,2,el-agent-v1;roman=elot743;ipa=espeak

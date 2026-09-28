@@ -64,3 +64,6 @@ trail-landmarks.end,el final,,el finˈal,,2,es-agent-v1;ipa=espeak
 trail-landmarks.elevation,la altitud,,la ˌaltitˈud,,2,es-agent-v1;ipa=espeak
 trail-landmarks.sunset,la puesta de sol,el atardecer,la pwˈesta de sˈol,,2,es-agent-v1;ipa=espeak
 trail-landmarks.water-point,punto de agua,fuente,pˈunto de ˈaɡwa,,2,es-agent-v1;ipa=espeak
+outdoors.can-we-camp-here,¿Podemos acampar aquí?,,podˈemos ˌakampˈaɾ akˈi,,2,es-about-travel-v1;ipa=espeak
+outdoors.is-it-safe-to-swim-here,¿Es seguro nadar aquí?,,ˈes seɡˈuɾo nadˈaɾ akˈi,,2,es-about-travel-v1;ipa=espeak
+outdoors.are-there-dangerous-animals-here,¿Hay animales peligrosos aquí?,,ˈaɪ ˌanimˈales pˌeliɡɾˈosos akˈi,,2,es-about-travel-v1;ipa=espeak

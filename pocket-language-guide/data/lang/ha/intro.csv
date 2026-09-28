@@ -15,3 +15,17 @@ family-intros.this-is-my-wife,Wannan matata ce,,wannan matata tʃe,,2,ha-agent-v
 family-intros.this-is-my-son,Wannan ɗana ne,,wannan ɗana ne,,2,ha-agent-v1;ipa=ha-g2p
 family-intros.this-is-my-daughter,Wannan ɗiyata ce,,wannan ɗijata tʃe,,2,ha-agent-v1;ipa=ha-g2p
 introductions.i-am-traveling-alone,Ina tafiya ni kaɗai,,ina tafija ni kaɗai,I-am traveling I alone,2,ha-agent-v1;ipa=ha-g2p
+about-me.i-am-a-student,Ni dalibi ne,,ni dalibi ne,,2,ha-agent-v1;ipa=ha-g2p
+about-me.i-am-retired,Na yi ritaya,,na ji ritaja,1st person na is ungendered in Hausa,2,ha-agent-v1;ipa=ha-g2p
+about-me.i-am-a-teacher,Ni malami ne,,ni malami ne,malami(m)/malama(f) alternate; masculine used as the base form since ha declares no speaker_gender axis,2,ha-agent-v1;ipa=ha-g2p
+about-me.i-am-a-doctor,Ni likita ne,,ni likita ne,likita is used for either sex; ne is the masculine-speaker default,2,ha-agent-v1;ipa=ha-g2p
+about-me.i-am-a-nurse,Ni ma'aikacin jinya ne,,ni maʔaikatʃin dʒinja ne,ma'aikacin jinya(m)/ma'aikaciyar jinya(f); masculine used as the base form; no axis declared,2,ha-agent-v1;src=dictionary.com.ng ma'aikacin_jinya;ipa=ha-g2p
+about-me.i-am-an-engineer,Ni injiniya ne,,ni indʒinija ne,injiniya is an unassimilated loanword and does not alternate for gender,2,ha-agent-v1;ipa=ha-g2p
+about-me.i-work-in-an-office,Ina aiki a ofis,,ina aiki a ofis,,2,ha-agent-v1;ipa=ha-g2p
+about-me.i-have-my-own-business,Ina da kasuwancin kaina,,ina da kasuwantʃin kaina,kasuwanci business; kaina my own self,2,ha-agent-v1;ipa=ha-g2p
+family-intros.this-is-my-mother,Wannan mahaifiyata ce,,wannan mahaifijata tʃe,mahaifiya(fem) + ta; ce agrees with the referent,2,ha-agent-v1;ipa=ha-g2p
+family-intros.this-is-my-father,Wannan mahaifina ne,,wannan mahaifina ne,mahaifi(masc) + na; ne agrees with the referent,2,ha-agent-v1;ipa=ha-g2p
+family-intros.this-is-my-brother,Wannan ɗan'uwana ne,,wannan ɗanʔuwana ne,"ɗan'uwa = son of (our) mother, i.e. brother; +na",2,ha-agent-v1;ipa=ha-g2p
+family-intros.this-is-my-sister,Wannan 'yar'uwata ce,,wannan ʔʲarʔuwata tʃe,"'yar'uwa = daughter of (our) mother, i.e. sister; +ta",2,ha-agent-v1;ipa=ha-g2p
+family-intros.this-is-my-partner,Wannan abokin zamana ne,Wannan abokiyar zamata ce,wannan abokin zamana ne,"abokin zama, the ordinary word for a life/romantic partner (not abokin kasuwanci, a business partner); abokiyar zamata (female partner) takes ce, matching this pack's own introductions.this-is-my-friend",2,ha-agent-v1;src=kamus.com.ng partner;ipa=ha-g2p
+family-intros.this-is-my-colleague,Wannan abokin aikina ne,Wannan abokiyar aikita ce,wannan abokin aikina ne,"abokin aiki = work-companion, colleague; abokiyar aikita (female colleague) takes ce, matching this-is-my-partner",2,ha-agent-v1;ipa=ha-g2p

@@ -64,3 +64,6 @@ trail-landmarks.end,ƙarshe,,kʼarʃe,,2,ha-agent-v1;ipa=ha-g2p
 trail-landmarks.elevation,tsawo,,tsʼawo,height,2,ha-agent-v1;ipa=ha-g2p
 trail-landmarks.sunset,faɗuwar rana,,faɗuwar rana,,2,ha-agent-v1;ipa=ha-g2p
 trail-landmarks.water-point,wurin ruwa,,wurin ruwa,,2,ha-agent-v1;ipa=ha-g2p
+outdoors.can-we-camp-here,Za mu iya kafa sansani a nan?,,za mu ija kafa sansani a nan,kafa sansani = set up camp,2,ha-agent-v1;ipa=ha-g2p
+outdoors.is-it-safe-to-swim-here,Yana da lafiya a yi iyo a nan?,,jana da lafija a ji ijo a nan,parallel to weather.is-it-safe-today's Yana da lafiya construction,2,ha-agent-v1;in-pack-neighbour=weather.is-it-safe-today;ipa=ha-g2p
+outdoors.are-there-dangerous-animals-here,Akwai dabbobi masu haɗari a nan?,,akwai dabbobi masu haɗari a nan,haɗari reused from trail-warnings.danger,2,ha-agent-v1;in-pack-neighbour=trail-warnings.danger;ipa=ha-g2p

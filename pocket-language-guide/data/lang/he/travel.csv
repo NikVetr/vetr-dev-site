@@ -120,3 +120,15 @@ place-words.scenic-area,אתר נוף,אֲתַר נוֹף,atar nof,atˈaʁ nˈof
 rail-station-words.maglev,רכבת מרחפת,רַכֶּבֶת מְרַחֶפֶת,rakévet meraẖefet,ʁakˈevet meʁaxefˈet,levitating train,2,he-gloss-v1;ipa=bgn
 common-signs.pork-code,קודים לחזיר על שלטים,קוֹדִים לְחֲזִיר עַל שְׁלָטִים,qodim leẖazir ‘al shelatim,kodˈim lexazˈiʁ ˈal ʃelatˈim,pork codes on signs,2,he-gloss-v1;ipa=bgn
 transit-rides.where-do-i-pay-the-fare,איפה משלמים את דמי הנסיעה?,אֵיפֹה מְשַׁלְּמִים אֶת דְּמֵי הַנְּסִיעָה?,éyfo meshalmim et demey hanesi‘a?,ˈejfo meʃalmˈim ˈet dˈemej hanesiˈa,where does one pay the travel fee?,2,translator-requests-v1;in-pack-neighbour;ipa=bgn
+air-travel.where-is-check-in,איפה הצ'ק-אין?,אֵיפֹה הַצֶ'ק-אִין?,éyfo ha-čeq-in?,ˈejfo hatʃekˈin,,2,he-agent-v1;ipa=bgn
+air-travel.which-gate,איזה שער?,אֵיזֶה שַׁעַר?,éyze sha‘ar?,ˈejze ʃaˈaʁ,,2,he-agent-v1;ipa=bgn
+air-travel.where-is-the-security-check,איפה הביקורת הביטחונית?,אֵיפֹה הַבִּיקוֹרֶת הַבִּיטְחוֹנִית?,éyfo habiqoret habitẖonit?,ˈejfo habikoʁˈet habitxonˈit,,2,he-agent-v1;ipa=bgn
+air-travel.my-luggage-did-not-arrive,המזוודה שלי לא הגיעה,הַמִּזְוָודָה שֶׁלִּי לֹא הִגִּיעָה,hamizvada sheli lo higi‘a,hamizvadˈa ʃelˈi lˈo hiɡiˈa,,2,he-agent-v1;ipa=bgn
+air-travel.i-would-like-a-window-seat,אפשר מקום ליד החלון?,אֶפְשָׁר מָקוֹם לְיַד הַחַלּוֹן?,efshar maqom leyad hakhalon?,efʃˈaʁ makˈom lejˈad haxalˈon,,2,he-agent-v1;ipa=bgn
+air-travel.i-would-like-an-aisle-seat,אפשר מקום ליד המעבר?,אֶפְשָׁר מָקוֹם לְיַד הַמַּעֲבָר?,efshar maqom leyad hama‘avar?,efʃˈaʁ makˈom lejˈad hamaavˈaʁ,,2,he-agent-v1;ipa=bgn
+hitchhiking.can-you-give-me-a-ride,אפשר לקבל טרמפ?,אֶפְשָׁר לְקַבֵּל טְרֶמְפּ?,efshar leqabel trempa?,efʃˈaʁ lekabˈel tʁempˈa,"trempa (loanword) is the ordinary Hebrew word for a hitchhiked ride; phrased impersonally (may [one] receive), so it does not address the driver directly and carries no speaker gender",2,he-agent-v1;ipa=bgn
+hitchhiking.where-are-you-going,לאן אתה נוסע?,לְאָן אַתָּה נוֹסֵעַ?,le’an ata nosea‘?,leˈan atˈa noseˈa,"addressed to the driver in the masculine, as the pack's own מאיפה אתה already is",2,he-agent-v1;ipa=bgn
+hitchhiking.i-only-need-to-go-to-the-next-town,אני צריך להגיע רק לעיר הבאה,אֲנִי צָרִיךְ לְהַגִּיעַ רַק לָעִיר הַבָּאָה,ani tsarikh lehagi‘a raq la‘ir haba’a,anˈi tsaʁˈix lehaɡiˈa ʁˈak laˈiʁ habaˈa,,2,he-agent-v1;ipa=bgn
+hitchhiking.is-there-room-for-two,יש מקום לשניים?,יֵשׁ מָקוֹם לִשְׁנַיִים?,yesh maqom lishnayim?,jˈeʃ makˈom liʃnajˈim,,2,he-agent-v1;ipa=bgn
+hitchhiking.i-can-pay-for-fuel,אני יכול לשלם על הדלק,אֲנִי יָכוֹל לְשַׁלֵּם עַל הַדֶּלֶק,ani yakhol leshalem al hadeleq,anˈi jaxˈol leʃalˈem ˈal hadelˈek,"deleq = fuel, the everyday word (also on every gas-station sign, תחנת דלק)",2,he-agent-v1;ipa=bgn
+hitchhiking.thank-you-for-the-ride,תודה על הטרמפ,תּוֹדָה עַל הַטְּרֶמְפּ,toda al hatrempa,todˈa ˈal hatʁempˈa,,2,he-agent-v1;ipa=bgn

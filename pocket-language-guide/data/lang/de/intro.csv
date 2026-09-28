@@ -15,3 +15,17 @@ family-intros.this-is-my-wife,Das ist meine Frau.,,das ɪst mˌaɪnə frˈaʊ,,2
 family-intros.this-is-my-son,Das ist mein Sohn.,,das ɪst maɪn zˈoːn,,2,de-agent-v1;ipa=espeak
 family-intros.this-is-my-daughter,Das ist meine Tochter.,,das ɪst mˌaɪnə tˈɔxtɜ,,2,de-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,Ich reise allein.,,ɪç rˈaɪzə alˈaɪn,,2,de-agent-v1;ipa=espeak
+about-me.i-am-a-student,Ich bin Student.,,ɪç bɪn ʃtuːdˈɛnt,,2,de-about-travel-v1;ipa=espeak
+about-me.i-am-retired,Ich bin Rentner.,,ɪç bɪn rˈɛntnɜ,,2,de-about-travel-v1;ipa=espeak
+about-me.i-am-a-teacher,Ich bin Lehrer.,,ɪç bɪn lˈeːrɜ,,2,de-about-travel-v1;ipa=espeak
+about-me.i-am-a-doctor,Ich bin Arzt.,,ɪç bɪn ˈaɾtst,,2,de-about-travel-v1;ipa=espeak
+about-me.i-am-a-nurse,Ich bin Krankenpfleger.,,ɪç bɪn kɾˌankənpflˈeːɡɜ,,2,de-about-travel-v1;ipa=espeak
+about-me.i-am-an-engineer,Ich bin Ingenieur.,,ɪç bɪn ˌɪndʒənjˈøːɾ,,2,de-about-travel-v1;ipa=espeak
+about-me.i-work-in-an-office,Ich arbeite in einem Büro.,,ɪç ˈaɾbaɪtə ɪn ˌaɪnəm bˈyːroː,,2,de-about-travel-v1;ipa=espeak
+about-me.i-have-my-own-business,Ich habe mein eigenes Unternehmen.,,ɪç hɑːbə maɪn ˈaɪɡənəs ˌʊntɜnˈeːmən,,2,de-about-travel-v1;ipa=espeak
+family-intros.this-is-my-mother,Das ist meine Mutter.,,das ɪst mˌaɪnə mˈʊtɜ,,2,de-about-travel-v1;ipa=espeak
+family-intros.this-is-my-father,Das ist mein Vater.,,das ɪst maɪn fˈɑːtɜ,,2,de-about-travel-v1;ipa=espeak
+family-intros.this-is-my-brother,Das ist mein Bruder.,,das ɪst maɪn bɾˈuːdɜ,,2,de-about-travel-v1;ipa=espeak
+family-intros.this-is-my-sister,Das ist meine Schwester.,,das ɪst mˌaɪnə ʃvˈɛstɜ,,2,de-about-travel-v1;ipa=espeak
+family-intros.this-is-my-partner,Das ist mein Partner.,Das ist meine Partnerin.,das ɪst maɪn pˈaɾtnɜ,,2,de-about-travel-v1;ipa=espeak
+family-intros.this-is-my-colleague,Das ist mein Kollege.,Das ist meine Kollegin.,das ɪst maɪn kɔlˈeːɡə,,2,de-about-travel-v1;ipa=espeak

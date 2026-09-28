@@ -120,3 +120,15 @@ rail-station-words.ticket-validator,तिकीट व्हॅलिडेट�
 common-signs.pork-code,डुकराचा कोड,,ḍukarācā kōḍa,ɖˌʊkɾˈaːcaː kˈoːɖ,Indonesian shops sign pork with a code rather than the word,2,mr-agent-v1;ipa=espeak
 rail-station-words.fare,भाडे,,bhāḍē,bʰˈaːɖeː,,2,mr-agent-v1;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,भाडे कुठे भरायचे?,,bhāḍē kuṭhē bharāyacē?,bʰˈaːɖeː kˈʊʈʰeː bʰəɾˈaːjcˌeː,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+air-travel.where-is-check-in,चेक-इन कुठे आहे?,,cek-in kuṭhē āhē?,cˈeːkɪn kˈʊʈʰeː ˈaːheː,,2,mr-agent-v1;ipa=espeak
+air-travel.which-gate,कोणतं गेट आहे?,,kōṇataṁ gēṭ āhē?,kˈoːɳətˌən ɡˈeːʈ ˈaːheː,"गेट, the loanword this pack already uses in taxi.we-need-the-east-gate-not-the-south-gate",2,mr-agent-v1;ipa=espeak
+air-travel.where-is-the-security-check,सुरक्षा तपासणी कुठे आहे?,,surakṣā tapāsaṇī kuṭhē āhē?,sʊɾˈʌkʃaː təpˈaːsɳˌi kˈʊʈʰeː ˈaːheː,"तपासणी, the same word this pack already uses for पासपोर्ट तपासणी (border-customs.passport-control)",2,mr-agent-v1;ipa=espeak
+air-travel.my-luggage-did-not-arrive,माझं सामान आलं नाही,,mājhaṁ sāmān ālaṁ nāhī,mˈaːɟʰən saːmˈaːn ˈaːlən nˈaːhi,"सामान is neuter in Marathi; माझं/आलं agree with it, not the speaker",2,mr-agent-v1;ipa=espeak
+air-travel.i-would-like-a-window-seat,मला खिडकीजवळची सीट हवी,,malā khiḍakījavaḷacī sīṭ havī,mˈʌlaː kʰˌɪɖkˈiːzəvˌəɭcˌi sˈiːʈ hˈʌvi,"हवी agrees with सीट (f), not the speaker",2,mr-agent-v1;ipa=espeak
+air-travel.i-would-like-an-aisle-seat,मला आईल सीट हवी,,malā āīl sīṭ havī,mˈʌlaː aːˈiːl sˈiːʈ hˈʌvi,"no natural native calque for 'aisle' on a plane, unlike खिडकीजवळची for window; loanword",2,mr-agent-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,तुम्ही मला लिफ्ट द्याल का?,,tumhī malā lifṭ dyāl kā?,tˈʊmhi mˈʌlaː lˈɪpʰʈ djˈaːl kˈaː,"future tense, invariant for addressee gender",2,mr-agent-v1;ipa=espeak
+hitchhiking.where-are-you-going,तुम्ही कुठे जात आहात?,,tumhī kuṭhē jāt āhāt?,tˈʊmhi kˈʊʈʰeː zˈaːt aːhˈaːt,"जात is the invariant gerund (like करत), आहात the invariant 2nd-person plural verb -- no addressee-gender fork needed, unlike Hindi's जा रहे/रही",2,mr-agent-v1;ipa=espeak
+hitchhiking.i-only-need-to-go-to-the-next-town,मला फक्त पुढच्या गावापर्यंत जायचं आहे,,malā phakt puḍhacyā gāvāparyanta jāyacaṁ āhē,mˈʌlaː pʰˈʌkt pʊɖʰˈʌcjaː ɡˌaːvaːpərjˈʌnt zˈaːjəcˌən ˈaːheː,जायचं (neuter infinitive-obligation) is invariant,2,mr-agent-v1;ipa=espeak
+hitchhiking.is-there-room-for-two,दोघांसाठी जागा आहे का?,,dōghānsāṭhī jāgā āhē kā?,dˌoːɡʰãsˈaːʈʰi zˈaːɡaː ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,मी पेट्रोलसाठी पैसे देऊ शकतो,,mī pēṭrōlasāṭhī paisē dēū śakatō,mˈi pˈeːʈɾoːlsaːʈʰˌi pˈaɪseː dˈeːu ʃˈʌktˌoː,"m; शकते for a woman, see variants.csv -- शकतो/शकते is the true finite simple present, which mr's own axis note says agrees with the speaker; पेट्रोल is the pump word across South Asia",2,mr-agent-v1;ipa=espeak
+hitchhiking.thank-you-for-the-ride,लिफ्ट दिल्याबद्दल धन्यवाद,,lifṭ dilyābaddal dhanyavād,lˈɪpʰʈ dˌɪljaːbˈʌdːəl dʰˌənjəvˈaːd,,2,mr-agent-v1;ipa=espeak

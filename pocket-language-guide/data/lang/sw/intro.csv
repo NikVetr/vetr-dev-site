@@ -15,3 +15,17 @@ family-intros.this-is-my-wife,Huyu ni mke wangu,,hˈuju ni ˈm̩ke wˈaŋɡu,,2,
 family-intros.this-is-my-son,Huyu ni mtoto wangu wa kiume,,hˈuju ni mtˈoto wˈaŋɡu wa kiˈume,my male child,2,sw-agent-v1;ipa=espeak
 family-intros.this-is-my-daughter,Huyu ni mtoto wangu wa kike,,hˈuju ni mtˈoto wˈaŋɡu wa kˈike,my female child,2,sw-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,Nasafiri peke yangu,,nˌasafˈiri pˈeke jˈaŋɡu,,2,sw-agent-v1;ipa=espeak
+about-me.i-am-a-student,Mimi ni mwanafunzi,,mˌimi ni mwˌanafˈunzi,,2,sw-agent-v1;ipa=espeak
+about-me.i-am-retired,Nimestaafu,,nˌimestaˈafu,"perfect tense of kustaafu, to retire; 1st person carries no gender",2,sw-agent-v1;ipa=espeak
+about-me.i-am-a-teacher,Mimi ni mwalimu,,mˌimi ni mwalˈimu,mwalimu is the same word for a male or female teacher,2,sw-agent-v1;ipa=espeak
+about-me.i-am-a-doctor,Mimi ni daktari,,mˌimi ni daktˈari,,2,sw-agent-v1;ipa=espeak
+about-me.i-am-a-nurse,Mimi ni muuguzi,,mˌimi ni mˌuuɡˈuzi,muuguzi is the same word for a male or female nurse,2,sw-agent-v1;ipa=espeak
+about-me.i-am-an-engineer,Mimi ni mhandisi,,mˌimi ni mhandˈisi,,2,sw-agent-v1;ipa=espeak
+about-me.i-work-in-an-office,Nafanya kazi ofisini,,nafˈaɲa kˈazi ˌofisˈini,"contracted na-, matching this pack's own Natoka/Nasafiri",2,sw-agent-v1;ipa=espeak
+about-me.i-have-my-own-business,Nina biashara yangu,,nˈina bˌiaʃˈara jˈaŋɡu,"nina = I have, matching transit-rides.i-am-in-a-hurry's Nina haraka",2,sw-agent-v1;ipa=espeak
+family-intros.this-is-my-mother,Huyu ni mama yangu,,hˈuju ni mˈama jˈaŋɡu,mama/baba take yangu rather than the regular class-1 wangu,2,sw-agent-v1;ipa=espeak
+family-intros.this-is-my-father,Huyu ni baba yangu,,hˈuju ni bˈaba jˈaŋɡu,,2,sw-agent-v1;ipa=espeak
+family-intros.this-is-my-brother,Huyu ni kaka yangu,,hˈuju ni kˈaka jˈaŋɡu,"kaka/dada, like mama/baba, take yangu not wangu",2,sw-agent-v1;ipa=espeak
+family-intros.this-is-my-sister,Huyu ni dada yangu,,hˈuju ni dˈada jˈaŋɡu,,2,sw-agent-v1;ipa=espeak
+family-intros.this-is-my-partner,Huyu ni mpenzi wangu,,hˈuju ni mpˈenzi wˈaŋɡu,"mpenzi is the ordinary word for a romantic partner of any gender, not a business partner (mshirika)",2,sw-agent-v1;ipa=espeak
+family-intros.this-is-my-colleague,Huyu ni mfanyakazi mwenzangu,,hˈuju ni mfˌaɲakˈazi mwenzˈaŋɡu,fellow worker of mine,2,sw-agent-v1;ipa=espeak

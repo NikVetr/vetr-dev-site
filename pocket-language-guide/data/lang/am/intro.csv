@@ -15,3 +15,17 @@ family-intros.this-is-my-wife,ዪህች ሚስቴ ናት,,yīhich mīstē nat,ji
 family-intros.this-is-my-son,ይህ ወንድ ልጄ ነው,,yih wend lijē new,jɨh wənd lɨdʒe nəw,boy child,2,am-agent-v1;ipa=bgn-am
 family-intros.this-is-my-daughter,ዪህች ሴት ልጄ ናት,,yīhich sēt lijē nat,jihɨtʃ set lɨdʒe nat,girl child,2,am-agent-v1;ipa=bgn-am
 introductions.i-am-traveling-alone,ብቻዬን እንጓዛለሁ,,bichayēn ingwazallehu,bɨtʃajen ʔɨnɡwazalːəhu,,2,am-agent-v1;ipa=bgn-am
+about-me.i-am-a-student,ተማሪ ነኝ,,temari neny,təmarɨ nəɲ,,2,am-agent-v1;ipa=bgn-am
+about-me.i-am-retired,ጡረተኛ ነኝ,,tʼuretenya neny,tʼurətəɲa nəɲ,,2,am-agent-v1;ipa=bgn-am
+about-me.i-am-a-teacher,አስተማሪ ነኝ,,āstemari neny,ʔastəmarɨ nəɲ,,2,am-agent-v1;ipa=bgn-am
+about-me.i-am-a-doctor,ሐኪም ነኝ,,hākīm neny,hakim nəɲ,,2,am-agent-v1;ipa=bgn-am
+about-me.i-am-a-nurse,ነርስ ነኝ,,ners neny,nərs nəɲ,,2,am-agent-v1;ipa=bgn-am
+about-me.i-am-an-engineer,መሀንዲስ ነኝ,,mehāndīs neny,məhandis nəɲ,,2,am-agent-v1;ipa=bgn-am
+about-me.i-work-in-an-office,ቢሮ ውስጥ እሰራለሁ,,biro wistʼ iserallehu,bɨro wɨstʼ ʔɨsəralːəhu,,2,am-agent-v1;ipa=bgn-am
+about-me.i-have-my-own-business,የግል ስራ አለኝ,,yegil sira āllegn,jəɡɨl sɨra ʔalːəɡn,,2,am-agent-v1;ipa=bgn-am
+family-intros.this-is-my-mother,ዪህች እናቴ ናት,,yīhich inatē nat,jihɨtʃ ʔɨnate nat,,2,am-agent-v1;ipa=bgn-am
+family-intros.this-is-my-father,ይህ አባቴ ነው,,yih ābatē new,jɨh ʔabate nəw,,2,am-agent-v1;ipa=bgn-am
+family-intros.this-is-my-brother,ይህ ወንድሜ ነው,,yih wendmē new,jɨh wəndme nəw,,2,am-agent-v1;ipa=bgn-am
+family-intros.this-is-my-sister,ዪህች እህቴ ናት,,yīhich ihitē nat,jihɨtʃ ʔɨhɨte nat,,2,am-agent-v1;ipa=bgn-am
+family-intros.this-is-my-partner,ይህ ፍቅረኛዬ ነው,ዪህች ፍቅረኛዬ ናት,yih fikʼrenyayē new,jɨh fɨkʼrəɲaje nəw,"fikʼrenya = sweetheart/partner, the ordinary word for a romantic partner regardless of marriage; the demonstrative and copula agree with the introduced partner's own gender (yih...new masc. / yīhich...nat fem. in text_alt), not the speaker's, exactly as this pack's own yih balē new / yīhich mīstē nat husband/wife rows already do",2,am-agent-v1;ipa=bgn-am
+family-intros.this-is-my-colleague,ይህ የስራ ባልደረባዬ ነው,ዪህች የስራ ባልደረባዬ ናት,yih yesira balderebayē new,jɨh jəsɨra baldərəbaje nəw,"text_alt is for a female colleague, agreeing on the demonstrative and copula as family-intros.this-is-my-partner does",2,am-agent-v1;ipa=bgn-am

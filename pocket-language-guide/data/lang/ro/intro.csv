@@ -15,3 +15,17 @@ family-intros.this-is-my-husband,El este soțul meu,,jel jˌeste sˈotsul mˈeu,
 family-intros.this-is-my-wife,Ea este soția mea,,ja jˌeste sˈotsja mˈea,,2,ro-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
 family-intros.this-is-my-son,El este fiul meu,,jel jˌeste fˈiʊl mˈeu,,2,ro-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
 family-intros.this-is-my-daughter,Ea este fiica mea,,ja jˌeste fˈiɪka mˈea,,2,ro-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+about-me.i-am-a-student,Sunt student,,sunt studˈent,,2,ro-about-travel-v1;ipa=espeak
+about-me.i-am-retired,Sunt pensionar,,sunt pˌensjonˈar,,2,ro-about-travel-v1;ipa=espeak
+about-me.i-am-a-teacher,Sunt profesor,,sunt profˈesor,,2,ro-about-travel-v1;ipa=espeak
+about-me.i-am-a-doctor,Sunt medic,,sunt mˈedik,,2,ro-about-travel-v1;ipa=espeak
+about-me.i-am-a-nurse,Sunt asistent medical,,sunt ˌasistˈent mˌedikˈal,,2,ro-about-travel-v1;ipa=espeak
+about-me.i-am-an-engineer,Sunt inginer,,sunt ˌiŋdʒinˈer,,2,ro-about-travel-v1;ipa=espeak
+about-me.i-work-in-an-office,Lucrez într-un birou,,lukrˈez ˈɨntrun biɾˈoʊ,,2,ro-about-travel-v1;ipa=espeak
+about-me.i-have-my-own-business,Am propria afacere,,am proprˈia ˌafatʃˈeɾe,,2,ro-about-travel-v1;ipa=espeak
+family-intros.this-is-my-mother,Ea este mama mea,,ja jˌeste mˈama mˈea,,2,ro-about-travel-v1;ipa=espeak
+family-intros.this-is-my-father,El este tatăl meu,,jel jˌeste tˈatəl mˈeu,,2,ro-about-travel-v1;ipa=espeak
+family-intros.this-is-my-brother,El este fratele meu,,jel jˌeste fratˈele mˈeu,,2,ro-about-travel-v1;ipa=espeak
+family-intros.this-is-my-sister,Ea este sora mea,,ja jˌeste sˈoɾa mˈea,,2,ro-about-travel-v1;ipa=espeak
+family-intros.this-is-my-partner,El este partenerul meu,Ea este partenera mea,jel jˌeste pˌartenˈerul mˈeu,,2,ro-about-travel-v1;ipa=espeak
+family-intros.this-is-my-colleague,El este colegul meu,Ea este colega mea,jel jˌeste kolˈeɡul mˈeu,,2,ro-about-travel-v1;ipa=espeak

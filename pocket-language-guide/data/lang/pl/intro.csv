@@ -15,3 +15,17 @@ family-intros.this-is-my-wife,To moja żona,,tɔ mˈɔja ʒˈɔna,,2,pl-agent-v1
 family-intros.this-is-my-son,To mój syn,,tɔ mˈuj sˈɨn,,2,pl-agent-v1;ipa=espeak
 family-intros.this-is-my-daughter,To moja córka,,tɔ mˈɔja tsˈurka,,2,pl-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,Podróżuję sam,Podróżuję sama,pˌɔdruʒˈujɛ sˈam,masculine; a woman says sama,2,pl-agent-v1;ipa=espeak
+about-me.i-am-a-student,Jestem studentem,,jˌɛstɛm studˈɛntɛm,masculine; a woman says Jestem studentką,2,pl-agent-v1;ipa=espeak
+about-me.i-am-retired,Jestem na emeryturze,,jˌɛstɛm na ˌɛmɛrɨtˈuʒɛ,"on pension -- invariant, no gender marking",2,pl-agent-v1;ipa=espeak
+about-me.i-am-a-teacher,Jestem nauczycielem,,jˌɛstɛm nˌautʃɨtɕˈɛlɛm,masculine; a woman says Jestem nauczycielką,2,pl-agent-v1;ipa=espeak
+about-me.i-am-a-doctor,Jestem lekarzem,,jˌɛstɛm lɛkˈaʒɛm,masculine; a woman says Jestem lekarką,2,pl-agent-v1;ipa=espeak
+about-me.i-am-a-nurse,Jestem pielęgniarzem,,jˌɛstɛm pʲˌɛlɛŋɡɲˈaʒɛm,masculine; a woman says Jestem pielęgniarką,2,pl-agent-v1;ipa=espeak
+about-me.i-am-an-engineer,Jestem inżynierem,,jˌɛstɛm ˌinʒɨɲˈɛrɛm,masculine; a woman says Jestem inżynierką -- a newer feminine form the Rada Języka Polskiego names as regular even though usage is still contested,2,pl-agent-v1;source=rjp-zenskie-nazwy-zawodow;ipa=espeak
+about-me.i-work-in-an-office,Pracuję w biurze,,pratsˈujɛ w bjˈuʒɛ,,2,pl-agent-v1;ipa=espeak
+about-me.i-have-my-own-business,Mam własną firmę,,mˈam vwˈasnɔ̃ fˈirmɛ,,2,pl-agent-v1;ipa=espeak
+family-intros.this-is-my-mother,To moja mama,,tɔ mˈɔja mˈama,,2,pl-agent-v1;ipa=espeak
+family-intros.this-is-my-father,To mój tata,,tɔ mˈuj tˈata,,2,pl-agent-v1;ipa=espeak
+family-intros.this-is-my-brother,To mój brat,,tɔ mˈuj brˈat,,2,pl-agent-v1;ipa=espeak
+family-intros.this-is-my-sister,To moja siostra,,tɔ mˈɔja ɕˈɔstra,,2,pl-agent-v1;ipa=espeak
+family-intros.this-is-my-partner,To mój partner,To moja partnerka,tɔ mˈuj pˈartnɛr,"male partner; a female partner is moja partnerka -- partner/partnerka is the neutral word for an unmarried life partner, not a business partner (wspólnik)",2,pl-agent-v1;ipa=espeak
+family-intros.this-is-my-colleague,To mój kolega z pracy,To moja koleżanka z pracy,tɔ mˈuj kɔlˈɛɡa s prˈatsɨ,male colleague; a female colleague is moja koleżanka z pracy,2,pl-agent-v1;ipa=espeak

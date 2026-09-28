@@ -17,3 +17,9 @@ speaker_gender=feminine,dietary-needs.i-am-vegan,Sou vegana,,sow vˌeɡˈɐ̃næ
 speaker_gender=feminine,kind-words.thank-you-for-your-help,Obrigada pela sua ajuda.,,ˌobriɡˈadæ pˈelæ sˌuæ ˌaʒˈudæ,,2,pt-kind-words-v1;rule=speaker-gender-agreement;ipa=espeak
 speaker_gender=feminine,kind-words.thank-you-for-everything,Obrigada por tudo.,,ˌobriɡˈadæ por tˈudʊ,,2,pt-kind-words-v1;rule=speaker-gender-agreement;ipa=espeak
 speaker_gender=feminine,kind-words.thank-you-for-your-hospitality,Obrigada pela hospitalidade.,,ˌobriɡˈadæ pˈelæ ˌospitˌalidˈadʒy,,2,pt-kind-words-v1;rule=speaker-gender-agreement;ipa=espeak
+speaker_gender=feminine,about-me.i-am-retired,Estou reformada,Estou aposentada,estˌow xˌefoɾəmˈadæ,,2,pt-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-teacher,Sou professora,,sow prˌofesˈoɾæ,,2,pt-variants-v1;rule=agent-noun-has-distinct-feminine-form;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-doctor,Sou médica,,sow mˈɛdʒikæ,,2,pt-variants-v1;rule=agent-noun-has-distinct-feminine-form;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-nurse,Sou enfermeira,,sow ˌeɪŋfeɾəmˈeɪɾæ,,2,pt-variants-v1;rule=agent-noun-has-distinct-feminine-form;ipa=espeak
+speaker_gender=feminine,about-me.i-am-an-engineer,Sou engenheira,,sow ˌeɪŋʒeɲˈeɪɾæ,,2,pt-variants-v1;rule=agent-noun-has-distinct-feminine-form;ipa=espeak
+speaker_gender=feminine,hitchhiking.thank-you-for-the-ride,Obrigada pela boleia,Obrigada pela carona,ˌobriɡˈadæ pˈelæ bˌolˈɛɪæ,,2,pt-variants-v1;rule=speaker-gender-agreement;ipa=espeak

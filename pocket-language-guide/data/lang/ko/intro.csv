@@ -15,3 +15,17 @@ family-intros.this-is-my-husband,남편이에요,,nampyeonieyo,nampʰjʌniejo,,2
 family-intros.this-is-my-wife,아내예요,,anaeyeyo,anɛjejo,,2,ko-agent-v1;split-from=this-is-my-husband-wife;ipa=rr
 family-intros.this-is-my-son,아들이에요,,adeurieyo,adɯɾiejo,,2,ko-agent-v1;split-from=this-is-my-daughter-son;ipa=rr
 family-intros.this-is-my-daughter,딸이에요,,ttarieyo,t͈aɾiejo,,2,ko-agent-v1;split-from=this-is-my-daughter-son;ipa=rr
+about-me.i-am-a-student,학생이에요,,haksaengieyo,haksɛŋiejo,,2,ko-agent-v1;ipa=rr
+about-me.i-am-retired,은퇴했어요,,euntoehaesseoyo,ɯntʰwehɛs͈ʌjo,,2,ko-agent-v1;ipa=rr
+about-me.i-am-a-teacher,선생님이에요,,seonsaengnimieyo,sʌnsɛŋnimiejo,"선생님, with the honorific -님, is the ordinary self-description for this profession in Korean, unlike Japanese's parallel case",2,ko-agent-v1;ipa=rr
+about-me.i-am-a-doctor,의사예요,,uisayeyo,ɰisajejo,,2,ko-agent-v1;ipa=rr
+about-me.i-am-a-nurse,간호사예요,,ganhosayeyo,kanhosajejo,간호사 is the modern gender-neutral term,2,ko-agent-v1;ipa=rr
+about-me.i-am-an-engineer,엔지니어예요,,enjinieoyeyo,endʑiniʌjejo,,2,ko-agent-v1;ipa=rr
+about-me.i-work-in-an-office,회사원이에요,,hoesawonieyo,hwesawʌniejo,'company employee' -- the ordinary Korean self-description for office/white-collar work,2,ko-agent-v1;ipa=rr
+about-me.i-have-my-own-business,자영업을 해요,,jayeongeobeul haeyo,tɕajʌŋʌbɯl hɛjo,'I do self-employment' -- the standard phrase,2,ko-agent-v1;ipa=rr
+family-intros.this-is-my-mother,어머니예요,,eomeoniyeyo,ʌmʌnijejo,,2,ko-agent-v1;ipa=rr
+family-intros.this-is-my-father,아버지예요,,abeojiyeyo,abʌdʑijejo,,2,ko-agent-v1;ipa=rr
+family-intros.this-is-my-brother,남동생이에요,,namdongsaengieyo,namdoŋsɛŋiejo,"younger-sibling terms (남동생/여동생) are unmarked for the speaker's own sex; the elder-sibling terms (형/오빠, 언니/누나) are each marked by the speaker's sex, which this job's instructions say not to declare as an axis, so I used the unmarked pair instead of this batch's usual elder default",2,ko-agent-v1;ipa=rr
+family-intros.this-is-my-sister,여동생이에요,,yeodongsaengieyo,jʌdoŋsɛŋiejo,"younger-sibling terms (남동생/여동생) are unmarked for the speaker's own sex; the elder-sibling terms (형/오빠, 언니/누나) are each marked by the speaker's sex, which this job's instructions say not to declare as an axis, so I used the unmarked pair instead of this batch's usual elder default",2,ko-agent-v1;ipa=rr
+family-intros.this-is-my-partner,애인이에요,,aeinieyo,ɛiniejo,"애인, the ordinary gender-neutral word for a romantic partner -- preferred over the loanword 파트너, which reads as a business/dance partner in everyday Korean",2,ko-agent-v1;ipa=rr
+family-intros.this-is-my-colleague,동료예요,,dongryoyeyo,toŋɾjojejo,,2,ko-agent-v1;ipa=rr

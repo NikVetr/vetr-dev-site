@@ -120,3 +120,15 @@ rail-station-words.maglev,Μαγνητικό τρένο,,,mˌaɣnitikˈo tɾˈen
 common-signs.pork-code,κωδικοί χοιρινού,,kodikoi choirinou,kˌoðicˈi çˌiɾinˈu,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
 rail-station-words.fare,Κόμιστρο,,Komistro,kˈomistɾˌo,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,Πού πληρώνω το κόμιστρο;,,Pou plirono to komistro;,pˈu pliɾˈono to kˈomistɾˌo,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+air-travel.where-is-check-in,Πού είναι ο έλεγχος εισιτηρίων;,,Pou einai o elenchos eisitirion;,pˈu ˈine o ˈeleŋxˌos ˌisitiɾˈion,the Athens airport's own page for this step is titled Έλεγχος Εισιτηρίων (Check in),2,el-agent-v1;roman=elot743;source=aia.gr;ipa=espeak
+air-travel.which-gate,Ποια πύλη;,,Poia pyli;,pˈia pˈili,,2,el-agent-v1;roman=elot743;source=aia.gr;ipa=espeak
+air-travel.where-is-the-security-check,Πού είναι ο έλεγχος ασφαλείας;,,Pou einai o elenchos asfaleias;,pˈu ˈine o ˈeleŋxˌos ˌasfalˈias,,2,el-agent-v1;roman=elot743;source=aia.gr;ipa=espeak
+air-travel.my-luggage-did-not-arrive,Οι αποσκευές μου δεν έφτασαν.,,Oi aposkeves mou den eftasan.,i ˌaposcevˈez mu ðˈen ˈeftasˌan,"αποσκευές, the word Athens airport's own baggage page uses",2,el-agent-v1;roman=elot743;ipa=espeak
+air-travel.i-would-like-a-window-seat,Θα ήθελα θέση δίπλα στο παράθυρο.,,Tha ithela thesi dipla sto parathyro.,θa ˈiθelˌa θˈesi ðˈipla sto paɾˈaθiɾˌo,θα ήθελα is a verb form and does not agree with the speaker's gender,2,el-agent-v1;roman=elot743;ipa=espeak
+air-travel.i-would-like-an-aisle-seat,Θα ήθελα θέση διάδρομο.,,Tha ithela thesi diadromo.,θa ˈiθelˌa θˈesi ðiˈaðɾomˌo,,2,el-agent-v1;roman=elot743;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,Μπορείτε να με πάρετε;,,Boreite na me parete;,boɾˈite na me pˈaɾetˌe,"formal, matching the pack's taxi register",2,el-agent-v1;roman=elot743;ipa=espeak
+hitchhiking.where-are-you-going,Πού πηγαίνετε;,,Pou pigainete;,pˈu pijˈenetˌe,,2,el-agent-v1;roman=elot743;ipa=espeak
+hitchhiking.i-only-need-to-go-to-the-next-town,Πρέπει να πάω μόνο μέχρι την επόμενη πόλη.,,Prepei na pao mono mechri tin epomeni poli.,pɾˈepi na pˈao mˈono mˈexɾi tin epˈomenˌi pˈoli,,2,el-agent-v1;roman=elot743;ipa=espeak
+hitchhiking.is-there-room-for-two,Υπάρχει χώρος για δύο;,,Yparchei choros gia dyo;,ipˈaɾçi xˈoɾoz jˈa ðˈio,,2,el-agent-v1;roman=elot743;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,Μπορώ να πληρώσω τη βενζίνη.,,Boro na pliroso ti venzini.,boɾˈo na pliɾˈoso ti venzˈini,"βενζίνη, the word drivers use",2,el-agent-v1;roman=elot743;ipa=espeak
+hitchhiking.thank-you-for-the-ride,Σας ευχαριστώ που με πήρατε.,,Sas efcharisto pou me pirate.,sas ˌefxaɾistˈo pu me pˈiɾatˌe,,2,el-agent-v1;roman=elot743;ipa=espeak

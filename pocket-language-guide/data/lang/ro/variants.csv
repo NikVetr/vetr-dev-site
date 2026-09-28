@@ -18,3 +18,9 @@ speaker_gender=feminine,police-consulate.i-was-robbed,Am fost jefuită,,am fost 
 speaker_gender=feminine,police-consulate.no-thank-you-i-am-not-interested,"Nu, mulțumesc, nu sunt interesată",,"nˈu, mˌultsumˈesk, nu sunt ˌinteɾesˈatə",,2,ro-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
 speaker_gender=feminine,police-consulate.someone-attacked-me,Am fost atacată,,am fost ˌatakˈatə,,2,ro-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
 speaker_gender=feminine,transit-rides.i-am-in-a-hurry,Sunt grăbită,,sunt ɡrəbˈitə,,2,ro-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-student,Sunt studentă,,sunt studˈentə,,2,ro-variants-v1;rule=agent-noun-has-distinct-feminine-form;ipa=espeak
+speaker_gender=feminine,about-me.i-am-retired,Sunt pensionară,,sunt pˌensjonˈaɾə,,2,ro-variants-v1;rule=agent-noun-has-distinct-feminine-form;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-teacher,Sunt profesoară,,sunt prˌofesˈɔaɾə,,2,ro-variants-v1;rule=agent-noun-has-distinct-feminine-form;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-doctor,Sunt medică,,sunt medˈikə,,2,ro-variants-v1;rule=agent-noun-has-distinct-feminine-form;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-nurse,Sunt asistentă medicală,,sunt ˌasistˈentə mˌedikˈalə,,2,ro-variants-v1;rule=agent-noun-has-distinct-feminine-form;ipa=espeak
+speaker_gender=feminine,about-me.i-am-an-engineer,Sunt ingineră,,sunt iŋdʒˈineɾˌə,,2,ro-variants-v1;rule=agent-noun-has-distinct-feminine-form;ipa=espeak

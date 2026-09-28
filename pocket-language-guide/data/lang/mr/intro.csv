@@ -15,3 +15,17 @@ family-intros.this-is-my-husband,हा माझा नवरा आहे,,hā
 family-intros.this-is-my-wife,ही माझी बायको आहे,,hī mājhī bāyakō āhē,hˈi mˈaːɟʰi bˈaːjkˌoː ˈaːheː,,2,mr-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
 family-intros.this-is-my-son,हा माझा मुलगा आहे,,hā mājhā mulagā āhē,hˈaː mˈaːɟʰaː mˈʊlɡˌaː ˈaːheː,,2,mr-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
 family-intros.this-is-my-daughter,ही माझी मुलगी आहे,,hī mājhī mulagī āhē,hˈi mˈaːɟʰi mˈʊlɡˌi ˈaːheː,,2,mr-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+about-me.i-am-a-student,मी विद्यार्थी आहे,,mī vidyārthī āhē,mˈi vɪdjˈaːɾtʰi ˈaːheː,"m; विद्यार्थिनी for a woman, see variants.csv",2,mr-agent-v1;ipa=espeak
+about-me.i-am-retired,मी सेवानिवृत्त झालो आहे,,mī sēvānivr̥tta jhālō āhē,mˈi sˌeːvaːnɪvɾˈʊtː ɟʰˈaːloː ˈaːheː,"m; झाले for a woman, see variants.csv",2,mr-agent-v1;ipa=espeak
+about-me.i-am-a-teacher,मी शिक्षक आहे,,mī śikṣak āhē,mˈi ʃˈɪkʃək ˈaːheː,"m; शिक्षिका for a woman, see variants.csv",2,mr-agent-v1;ipa=espeak
+about-me.i-am-a-doctor,मी डॉक्टर आहे,,mī ḍôkṭar āhē,mˈi ɖˈɔkʈəɾ ˈaːheː,डॉक्टर is an invariant loanword,2,mr-agent-v1;ipa=espeak
+about-me.i-am-a-nurse,मी नर्स आहे,,mī nars āhē,mˈi nˈʌrs ˈaːheː,नर्स is an invariant loanword,2,mr-agent-v1;ipa=espeak
+about-me.i-am-an-engineer,मी इंजिनिअर आहे,,mī iṁjiniar āhē,mˈi ˈĩɟɪˌɪnɪˌəɾ ˈaːheː,इंजिनिअर is an invariant loanword,2,mr-agent-v1;ipa=espeak
+about-me.i-work-in-an-office,मी ऑफिसमध्ये काम करतो,,mī ôphisamadhyē kām karatō,mˈi ˌɔpʰɪsəmˈʌdʰjeː kˈaːm kˈʌɾtˌoː,"m; करते for a woman, see variants.csv -- the true finite simple present (करतो/करते), not the periphrastic करत आहे, which this pack's own i-am-traveling-alone variant shows does NOT inflect (करत stays put; एकटा/एकटी does)",2,mr-agent-v1;ipa=espeak
+about-me.i-have-my-own-business,माझा स्वतःचा व्यवसाय आहे,,mājhā svataḥcā vyavasāya āhē,mˈaːɟʰaː svətˈʌhcaː vjˌəvsˈaːj ˈaːheː,"माझा agrees with व्यवसाय (business, m), not the speaker",2,mr-agent-v1;ipa=espeak
+family-intros.this-is-my-mother,ही माझी आई आहे,,hī mājhī āī āhē,hˈi mˈaːɟʰi ˈaːi ˈaːheː,,2,mr-agent-v1;ipa=espeak
+family-intros.this-is-my-father,हे माझे वडील आहेत,,hē mājhē vaḍīl āhēt,hˈeː mˈaːɟʰeː vəɖˈiːl aːhˈeːt,"वडील conventionally takes honorific-plural concord even for one father (Molesworth); हे, not हा, follows from that plural",2,mr-agent-v1;ipa=espeak
+family-intros.this-is-my-brother,हा माझा भाऊ आहे,,hā mājhā bhāū āhē,hˈaː mˈaːɟʰaː bʰˈaːu ˈaːheː,,2,mr-agent-v1;ipa=espeak
+family-intros.this-is-my-sister,ही माझी बहीण आहे,,hī mājhī bahīṇ āhē,hˈi mˈaːɟʰi bəhˈiːɳ ˈaːheː,,2,mr-agent-v1;ipa=espeak
+family-intros.this-is-my-partner,हे माझे जोडीदार आहेत,,hē mājhē jōḍīdār āhēt,hˈeː mˈaːɟʰeː zˌoːɖidˈaːɾ aːhˈeːt,"जोडीदार 'life companion/partner', common-gender; हे...आहेत matches this pack's own हे माझे मित्र आहेत (introductions.this-is-my-friend), the construction it already uses when a referent's gender is not given",2,mr-agent-v1;ipa=espeak
+family-intros.this-is-my-colleague,हे माझे सहकर्मी आहेत,,hē mājhē sahakarmī āhēt,hˈeː mˈaːɟʰeː sˌəhəkˈʌrmi aːhˈeːt,,2,mr-agent-v1;ipa=espeak

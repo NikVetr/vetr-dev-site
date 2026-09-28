@@ -15,3 +15,17 @@ family-intros.this-is-my-wife,Это моя жена.,,Eto moya zhena.,ˈɛtʌ m
 family-intros.this-is-my-son,Это мой сын.,,Eto moy syn.,ˈɛtʌ mˈoj sˈɨn,,2,ru-agent-v1;ipa=espeak
 family-intros.this-is-my-daughter,Это моя дочь.,,Eto moya dochʼ.,ˈɛtʌ mˈoja dˈotʃʲ,,2,ru-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,Я путешествую один.,Я путешествую одна.,Ya puteshestvuyu odin.,ˈja putʲiʃˈɛstvuju ʌdʲˈin,,2,ru-agent-v1;ipa=espeak
+about-me.i-am-a-student,Я студент.,,Ya student.,ˈja studʲˈent,masculine; a woman says Я студентка. (Ya studentka.),2,ru-agent-v1;ipa=espeak
+about-me.i-am-retired,Я на пенсии.,,Ya na pensii.,ˈja nə pʲˈensʲiɪ,"invariant, no gender marking",2,ru-agent-v1;ipa=espeak
+about-me.i-am-a-teacher,Я учитель.,,Ya uchitelʼ.,ˈja utʃʲˈitʲiɭ,masculine; a woman says Я учительница. (Ya uchitelʼnitsa.),2,ru-agent-v1;ipa=espeak
+about-me.i-am-a-doctor,Я врач.,,Ya vrach.,ˈja vrˈɑtʃʲ,врач is grammatically common-gender with no standard feminine noun; the predicate stays the same regardless of the speaker's sex (gramota.ru),2,ru-agent-v1;source=gramota.ru;ipa=espeak
+about-me.i-am-a-nurse,Я медбрат.,,Ya medbrat.,ˈja mʲidbrˈɑt,masculine; a woman says Я медсестра. (Ya medsestra.) -- the Russian health ministry's own staffing rule names медицинский брат/медбрат as the job title when the role is filled by a man,2,ru-agent-v1;source=garant.ru;ipa=espeak
+about-me.i-am-an-engineer,Я инженер.,,Ya inzhener.,ˈja ɪnʒɨnʲˈer,"инженер is grammatically common-gender; инженерка/инженерша exist but are informal/dated (Wiktionary), so the predicate is written invariant",2,ru-agent-v1;source=ru.wiktionary.org;ipa=espeak
+about-me.i-work-in-an-office,Я работаю в офисе.,,Ya rabotayu v ofise.,ˈja rabˈotʌju v ˈofʲisʲi,,2,ru-agent-v1;ipa=espeak
+about-me.i-have-my-own-business,У меня своё дело.,,U menya svoyë delo.,ˈu mʲinʲˈɑ svʌˈɵ dʲˈeɭʌ,,2,ru-agent-v1;ipa=espeak
+family-intros.this-is-my-mother,Это моя мама.,,Eto moya mama.,ˈɛtʌ mˈoja mˈɑma,,2,ru-agent-v1;ipa=espeak
+family-intros.this-is-my-father,Это мой папа.,,Eto moy papa.,ˈɛtʌ mˈoj pˈɑpa,,2,ru-agent-v1;ipa=espeak
+family-intros.this-is-my-brother,Это мой брат.,,Eto moy brat.,ˈɛtʌ mˈoj brˈɑt,,2,ru-agent-v1;ipa=espeak
+family-intros.this-is-my-sister,Это моя сестра.,,Eto moya sestra.,ˈɛtʌ mˈoja sʲistrˈɑ,,2,ru-agent-v1;ipa=espeak
+family-intros.this-is-my-partner,Это мой партнёр.,Это моя партнёрша.,Eto moy partnër.,ˈɛtʌ mˈoj partʲnʲˈɵr,"male partner; a female partner is Это моя партнёрша. -- the neutral word for an unmarried life partner, not a business partner",2,ru-agent-v1;ipa=espeak
+family-intros.this-is-my-colleague,Это мой коллега.,Это моя коллега.,Eto moy kollega.,ˈɛtʌ mˈoj kʌɭɭʲˈeɡa,коллега is common-gender; only the possessive мой/моя changes for a female colleague,2,ru-agent-v1;ipa=espeak

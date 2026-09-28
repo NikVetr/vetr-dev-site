@@ -15,3 +15,17 @@ family-intros.this-is-my-wife,Tämä on vaimoni.,,tˈæmæ ˈon vˈaimoni,,2,fi-
 family-intros.this-is-my-son,Tämä on poikani.,,tˈæmæ ˈom pˈoikani,,2,fi-agent-v1;ipa=espeak
 family-intros.this-is-my-daughter,Tämä on tyttäreni.,,tˈæmæ ˈon tˈyttærˌeni,,2,fi-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,Matkustan yksin.,,mˈatkustan ˈyksin,,2,fi-agent-v1;ipa=espeak
+about-me.i-am-a-student,Olen opiskelija.,,ˈolen ˈopiskˌelija,,2,fi-agent-v1;ipa=espeak
+about-me.i-am-retired,Olen eläkkeellä.,,ˈolen ˈelækkˌeːllæ,,2,fi-agent-v1;ipa=espeak
+about-me.i-am-a-teacher,Olen opettaja.,,ˈolen ˈopettˌaja,,2,fi-agent-v1;ipa=espeak
+about-me.i-am-a-doctor,Olen lääkäri.,,ˈolen lˈæːkæri,,2,fi-agent-v1;ipa=espeak
+about-me.i-am-a-nurse,Olen sairaanhoitaja.,,ˈolen sˈairaːnhˌoitaja,,2,fi-agent-v1;ipa=espeak
+about-me.i-am-an-engineer,Olen insinööri.,,ˈolen ˈinsinˌøːri,,2,fi-agent-v1;ipa=espeak
+about-me.i-work-in-an-office,Työskentelen toimistossa.,,tˈyøskentelen tˈoimistˌossa,,2,fi-agent-v1;ipa=espeak
+about-me.i-have-my-own-business,Minulla on oma yritys.,,mˈinulla ˈon ˈoma ˈyritys,same construction as the pack's own Minulla on kiire.,2,fi-agent-v1;ipa=espeak
+family-intros.this-is-my-mother,Tämä on äitini.,,tˈæmæ ˈon ˈæitini,,2,fi-agent-v1;ipa=espeak
+family-intros.this-is-my-father,Tämä on isäni.,,tˈæmæ ˈon ˈisæni,,2,fi-agent-v1;ipa=espeak
+family-intros.this-is-my-brother,Tämä on veljeni.,,tˈæmæ ˈon vˈeljeni,,2,fi-agent-v1;ipa=espeak
+family-intros.this-is-my-sister,Tämä on siskoni.,,tˈæmæ ˈon sˈiskoni,"the everyday word, matching mieheni/vaimoni's plain register over the more literary sisareni",2,fi-agent-v1;ipa=espeak
+family-intros.this-is-my-partner,Tämä on avopuolisoni.,,tˈæmæ ˈon ˈavopˌuolisˌoni,"avopuoliso, a cohabiting life partner -- the standard Finnish term for an unmarried partner, not a business partner",2,fi-agent-v1;ipa=espeak
+family-intros.this-is-my-colleague,Tämä on työkaverini.,,tˈæmæ ˈon tˈyøkavˌerini,"työkaveri, a work colleague specifically",2,fi-agent-v1;ipa=espeak

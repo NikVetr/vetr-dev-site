@@ -15,3 +15,17 @@ family-intros.this-is-my-husband,Es mi esposo,Es mi marido,ˈes mi espˈoso,,2,e
 family-intros.this-is-my-wife,Es mi esposa,Es mi mujer,ˈes mi espˈosa,,2,es-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
 family-intros.this-is-my-son,Es mi hijo,,ˈes mi ˈixo,,2,es-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
 family-intros.this-is-my-daughter,Es mi hija,,ˈes mi ˈixa,,2,es-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+about-me.i-am-a-student,Soy estudiante,,sˈoɪ ˌestudjˈante,,2,es-about-travel-v1;ipa=espeak
+about-me.i-am-retired,Estoy jubilado,,estˈoɪ xˌubilˈado,,2,es-about-travel-v1;ipa=espeak
+about-me.i-am-a-teacher,Soy profesor,,sˈoɪ pɾˌofesˈoɾ,,2,es-about-travel-v1;ipa=espeak
+about-me.i-am-a-doctor,Soy médico,,sˈoɪ mˈediko,,2,es-about-travel-v1;ipa=espeak
+about-me.i-am-a-nurse,Soy enfermero,,sˈoɪ ˌemfeɾmˈeɾo,,2,es-about-travel-v1;ipa=espeak
+about-me.i-am-an-engineer,Soy ingeniero,,sˈoɪ ˌiŋxenjˈeɾo,,2,es-about-travel-v1;ipa=espeak
+about-me.i-work-in-an-office,Trabajo en una oficina,,tɾabˈaxo en ˈuna ˌofisˈina,,2,es-about-travel-v1;ipa=espeak
+about-me.i-have-my-own-business,Tengo mi propio negocio,,tˈeŋɡo mi pɾˈopjo neɡˈosjo,,2,es-about-travel-v1;ipa=espeak
+family-intros.this-is-my-mother,Es mi madre,,ˈes mi mˈadɾe,,2,es-about-travel-v1;ipa=espeak
+family-intros.this-is-my-father,Es mi padre,,ˈes mi pˈadɾe,,2,es-about-travel-v1;ipa=espeak
+family-intros.this-is-my-brother,Es mi hermano,,ˈes mi eɾmˈano,,2,es-about-travel-v1;ipa=espeak
+family-intros.this-is-my-sister,Es mi hermana,,ˈes mi eɾmˈana,,2,es-about-travel-v1;ipa=espeak
+family-intros.this-is-my-partner,Es mi pareja,,ˈes mi paɾˈexa,,2,es-about-travel-v1;ipa=espeak
+family-intros.this-is-my-colleague,Es mi colega,,ˈes mi kolˈeɡa,,2,es-about-travel-v1;ipa=espeak

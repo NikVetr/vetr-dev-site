@@ -120,3 +120,15 @@ rail-station-words.ticket-validator,টিকিট পাঞ্চ মেশি
 common-signs.pork-code,শুকরের মাংসের সংকেত,,śukarera māṁsera saṁketa,ʃˈukɔɾˌeɾ mˈaŋʃeɾ ʃˈɔŋketˌo,,2,bn-gloss-v1;ipa=espeak
 rail-station-words.fare,ভাড়া,,bhāṛā,bʰˈaɽa,,2,bn-agent-v1;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,ভাড়া কোথায় দিতে হবে?,,bhāṛā kothāẏa dite habe?,bʰˈaɽa kˈotʰaj dˈite hˈɔbe,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+air-travel.where-is-check-in,চেক-ইন কোথায়?,,cek-ina kothāẏa?,tʃˈekɔin kˈotʰaj,,2,bn-agent-v1;ipa=espeak
+air-travel.which-gate,কোন গেট?,,kona geṭa?,kˈon ɡˈeʈ,"গেট, the loanword this pack already uses in taxi.we-need-the-east-gate-not-the-south-gate",2,bn-agent-v1;ipa=espeak
+air-travel.where-is-the-security-check,নিরাপত্তা তল্লাশি কোথায়?,,nirāpattā tallāśi kothāẏa?,nˈiɾapˌɔtta tˈɔllaʃˌi kˈotʰaj,"তল্লাশি, the everyday word for a security search/checkpoint",2,bn-agent-v1;ipa=espeak
+air-travel.my-luggage-did-not-arrive,আমার লাগেজ আসেনি,,āmāra lāgeja āseni,ˌamaɾ lˈaɡeɟ ˈaʃenˌi,"লাগেজ, already this pack's word in border-customs.baggage-claim",2,bn-agent-v1;ipa=espeak
+air-travel.i-would-like-a-window-seat,আমার জানালার পাশের সিট চাই,,āmāra jānālāra pāśera siṭa cāi,ˌamaɾ ɟˈanalˌaɾ pˈaʃeɾ ʃˈiʈ tʃˈai,,2,bn-agent-v1;ipa=espeak
+air-travel.i-would-like-an-aisle-seat,আমার আইল সিট চাই,,āmāra āila siṭa cāi,ˌamaɾ ˈail ʃˈiʈ tʃˈai,"no natural native calque for 'aisle' on a plane, unlike window; loanword",2,bn-agent-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,আপনি কি আমাকে একটা লিফট দিতে পারবেন?,,āpani ki āmāke ekaṭā lifaṭa dite pārabena?,ˌapɔnˌi ki ˈamakˌe ˈækʈa lˈifɔʈ dˈite pˈaɾɔbˌen,"লিফট, the pan-South Asian loanword for a ride; Bengali verbs carry no gender marking",2,bn-agent-v1;ipa=espeak
+hitchhiking.where-are-you-going,আপনি কোথায় যাচ্ছেন?,,āpani kothāẏa yācchena?,ˌapɔnˌi kˈotʰaj dʒˈatʃtʃʰen,,2,bn-agent-v1;ipa=espeak
+hitchhiking.i-only-need-to-go-to-the-next-town,আমার শুধু পরের শহর পর্যন্ত যেতে হবে,,āmāra śudhu parera śahara paryanta yete habe,ˌamaɾ ʃˈudʰu pˈɔɾeɾ ʃˈɔhɔɾ pˈɔɾæntˌo dʒˈete hˈɔbe,,2,bn-agent-v1;ipa=espeak
+hitchhiking.is-there-room-for-two,দুজনের জন্য জায়গা আছে কি?,,dujanera janya jāẏagā āche ki?,dˈuɟɔnˌeɾ ɟˈɔnnɔ ɟˈajɔɡˌa ˈatʃʰe ki,,2,bn-agent-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,আমি পেট্রলের জন্য টাকা দিতে পারি,,āmi peṭrolera janya ṭākā dite pāri,ˌami pˈeʈɾɔlˌeɾ ɟˈɔnnɔ ʈˈaka dˈite pˈaɾi,"পেট্রল, the pump word across South Asia, not 'gas'",2,bn-agent-v1;ipa=espeak
+hitchhiking.thank-you-for-the-ride,লিফট দেওয়ার জন্য ধন্যবাদ,,lifaṭa deoẏāra janya dhanyabāda,lˈifɔʈ dˈeoˌaɾ ɟˈɔnnɔ dʰˈɔnæbˌad,,2,bn-agent-v1;ipa=espeak

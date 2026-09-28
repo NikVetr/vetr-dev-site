@@ -15,3 +15,17 @@ family-intros.this-is-my-husband,Ito po ang asawa kong lalaki,,ito po aŋ asawa 
 family-intros.this-is-my-wife,Ito po ang asawa kong babae,,ito po aŋ asawa koŋ babaɛ,,2,fil-agent-v1;split-from=this-is-my-husband-wife;ipa=fil-g2p
 family-intros.this-is-my-son,Ito po ang anak kong lalaki,,ito po aŋ anak koŋ lalaki,,2,fil-agent-v1;split-from=this-is-my-daughter-son;ipa=fil-g2p
 family-intros.this-is-my-daughter,Ito po ang anak kong babae,,ito po aŋ anak koŋ babaɛ,,2,fil-agent-v1;split-from=this-is-my-daughter-son;ipa=fil-g2p
+about-me.i-am-a-student,Estudyante po ako,,ɛstudjantɛ po ako,estudyante does not alternate for sex (unlike titser's occasional gendered pairing),2,fil-agent-v1;ipa=fil-g2p
+about-me.i-am-retired,Nagretiro na po ako,,naɡɾɛtiɾo na po ako,the native verb nagretiro (from Spanish retirar) sidesteps retirado/retirada's gender alternation entirely,2,fil-agent-v1;ipa=fil-g2p
+about-me.i-am-a-teacher,Guro po ako,,ɡuɾo po ako,"guro (native, ungendered) rather than the loanword titser",2,fil-agent-v1;ipa=fil-g2p
+about-me.i-am-a-doctor,Doktor po ako,,doktoɾ po ako,doktor is used as the unmarked term for either sex; fil declares no speaker_gender axis,2,fil-agent-v1;ipa=fil-g2p
+about-me.i-am-a-nurse,Nurse po ako,,nuɾsɛ po ako,the English loanword is the ordinary Filipino word and does not take Spanish gender morphology,2,fil-agent-v1;ipa=fil-g2p
+about-me.i-am-an-engineer,Inhinyero po ako,,inhiɲɛɾo po ako,"inhinyero is used as the unmarked term for either sex, the way Engineer is used as a title in the Philippines regardless of the holder's sex",2,fil-agent-v1;ipa=fil-g2p
+about-me.i-work-in-an-office,Nagtatrabaho po ako sa opisina,,naɡtatɾabaho po ako sa opisina,,2,fil-agent-v1;ipa=fil-g2p
+about-me.i-have-my-own-business,May sariling negosyo po ako,,maj saɾiliŋ nɛɡosjo po ako,,2,fil-agent-v1;ipa=fil-g2p
+family-intros.this-is-my-mother,Ito po ang nanay ko,,ito po aŋ nanaj ko,,2,fil-agent-v1;ipa=fil-g2p
+family-intros.this-is-my-father,Ito po ang tatay ko,,ito po aŋ tataj ko,,2,fil-agent-v1;ipa=fil-g2p
+family-intros.this-is-my-brother,Ito po ang kapatid kong lalaki,,ito po aŋ kapatid koŋ lalaki,"kapatid (age-neutral sibling) + lalaki, matching this pack's own anak kong lalaki/babae pattern; unlike Indonesian/Javanese, Filipino's kapatid is already age-neutral, kuya/ate being separate address terms for an older sibling specifically",2,fil-agent-v1;ipa=fil-g2p
+family-intros.this-is-my-sister,Ito po ang kapatid kong babae,,ito po aŋ kapatid koŋ babaɛ,see this-is-my-brother,2,fil-agent-v1;ipa=fil-g2p
+family-intros.this-is-my-partner,Ito po ang kasintahan ko,,ito po aŋ kasintahan ko,"kasintahan (sweetheart/beloved) rather than the English loanword partner, which in English is exactly as ambiguous with a business partner as this row is trying to avoid",2,fil-agent-v1;ipa=fil-g2p
+family-intros.this-is-my-colleague,Ito po ang katrabaho ko,,ito po aŋ katɾabaho ko,"katrabaho (ka- fellow + trabaho work), the same ka- derivation this pack's own kaibigan (friend, introductions.this-is-my-friend) already uses",2,fil-agent-v1;in-pack-neighbour=introductions.this-is-my-friend;ipa=fil-g2p

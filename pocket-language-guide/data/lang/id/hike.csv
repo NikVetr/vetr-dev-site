@@ -64,3 +64,6 @@ trail-landmarks.end,Akhir,Selesai,ˈaxir,,2,id-agent-v1;ipa=espeak
 trail-landmarks.elevation,Ketinggian,,kətiŋɡˈian,,2,id-agent-v1;ipa=espeak
 trail-landmarks.sunset,Matahari terbenam,,mˌatahˈari tərbənam,,2,id-agent-v1;ipa=espeak
 trail-landmarks.water-point,Titik air,Sumber air,tˈitik ˈaɪr,,2,id-agent-v1;ipa=espeak
+outdoors.can-we-camp-here,Kami boleh berkemah di sini?,,kˈami bˈoləh bərkˈɛmah di sˈini,boleh (may/permission) matches taxi.may-i-open-the-window's Boleh saya buka jendela?,2,id-agent-v1;in-pack-neighbour=taxi.may-i-open-the-window;ipa=espeak
+outdoors.is-it-safe-to-swim-here,Aman berenang di sini?,,ˈaman bərˈɛnaŋ di sˈini,,2,id-agent-v1;ipa=espeak
+outdoors.are-there-dangerous-animals-here,Ada hewan berbahaya di sini?,,ˈada hˈɛwan bərbahˈaja di sˈini,,2,id-agent-v1;ipa=espeak

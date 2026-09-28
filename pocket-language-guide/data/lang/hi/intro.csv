@@ -15,3 +15,17 @@ family-intros.this-is-my-husband,ये मेरे पति हैं,,ye mer
 family-intros.this-is-my-wife,ये मेरी पत्नी हैं,,ye merī patnī haiṁ,jeː mˌeːɾi pˈʌtni hɛ̃,,2,hi-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
 family-intros.this-is-my-son,ये मेरा बेटा है,,ye merā beṭā hai,jeː mˌeːɾaː bˈeːʈaː hɛː,,2,hi-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
 family-intros.this-is-my-daughter,ये मेरी बेटी है,,ye merī beṭī hai,jeː mˌeːɾi bˈeːʈi hɛː,,2,hi-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+about-me.i-am-a-student,मैं छात्र हूँ,,maiṁ chātra hūṁ,mɛ̃ cʰˈaːtɾə hũ,"m; छात्रा for a woman, see variants.csv",2,hi-agent-v1;ipa=espeak
+about-me.i-am-retired,मैं सेवानिवृत्त हो गया हूँ,,maiṁ sevānivr̥tta ho gayā hūṁ,mɛ̃ sˌeːʋaːnɪʋɾˈɪtː hoː ɡˈʌjaː hũ,"m; हो गई for a woman, see variants.csv",2,hi-agent-v1;ipa=espeak
+about-me.i-am-a-teacher,मैं शिक्षक हूँ,,maiṁ śikṣak hūṁ,mɛ̃ ʃˈɪkʃək hũ,"m; शिक्षिका for a woman, see variants.csv",2,hi-agent-v1;ipa=espeak
+about-me.i-am-a-doctor,मैं डॉक्टर हूँ,,maiṁ ḍôkṭar hūṁ,mɛ̃ ɖˈɔkʈəɾ hũ,"डॉक्टर is an invariant loanword, same wording for any speaker",2,hi-agent-v1;ipa=espeak
+about-me.i-am-a-nurse,मैं नर्स हूँ,,maiṁ nars hūṁ,mɛ̃ nˈʌrs hũ,नर्स is an invariant loanword,2,hi-agent-v1;ipa=espeak
+about-me.i-am-an-engineer,मैं इंजीनियर हूँ,,maiṁ iṁjīniyar hūṁ,mɛ̃ ĩɟˈiːnɪjˌəɾ hũ,इंजीनियर is an invariant loanword,2,hi-agent-v1;ipa=espeak
+about-me.i-work-in-an-office,मैं दफ़्तर में काम करता हूँ,,maiṁ daftar mēṁ kām kartā hūṁ,mɛ̃ dˈʌftəɾ mẽː kˈaːm kˈʌɾtˌaː hũ,"m; करती for a woman, see variants.csv",2,hi-agent-v1;ipa=espeak
+about-me.i-have-my-own-business,मेरा अपना व्यापार है,,merā apnā vyāpār hai,mˌeːɾaː ˈʌpnˌaː ʋjaːpˈaːɾ hɛː,"मेरा agrees with व्यापार (business, m), not the speaker",2,hi-agent-v1;ipa=espeak
+family-intros.this-is-my-mother,ये मेरी माँ हैं,,ye merī māṁ haiṁ,jeː mˌeːɾi mˈã hɛ̃,,2,hi-agent-v1;ipa=espeak
+family-intros.this-is-my-father,ये मेरे पिता हैं,,ye mere pitā haiṁ,jeː mˌeːɾeː pˈɪtaː hɛ̃,,2,hi-agent-v1;ipa=espeak
+family-intros.this-is-my-brother,ये मेरे भाई हैं,,ye mere bhāī haiṁ,jeː mˌeːɾeː bʰˈaːi hɛ̃,,2,hi-agent-v1;ipa=espeak
+family-intros.this-is-my-sister,ये मेरी बहन हैं,,ye merī bahan haiṁ,jeː mˌeːɾi bˈʌhən hɛ̃,,2,hi-agent-v1;ipa=espeak
+family-intros.this-is-my-partner,ये मेरे जीवनसाथी हैं,,ye mere jīvansāthī haiṁ,jeː mˌeːɾeː ɟˌiːʋənsˈaːtʰi hɛ̃,"जीवनसाथी 'life companion' is a common-gender word for a romantic partner of any gender, not पार्टनर (business partner)",2,hi-agent-v1;ipa=espeak
+family-intros.this-is-my-colleague,ये मेरे सहकर्मी हैं,,ye mere sahakarmī haiṁ,jeː mˌeːɾeː sˌəhəkˈʌrmi hɛ̃,"सहकर्मी, common-gender 'fellow worker'",2,hi-agent-v1;ipa=espeak

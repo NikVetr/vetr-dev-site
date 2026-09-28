@@ -120,3 +120,15 @@ rail-station-words.ticket-validator,टिकट भ्यालिडेटर,
 common-signs.pork-code,सुँगुरको मासुको कोड,,sum̐gurakō māsukō kōḍa,sũɡˈuɾəkˌoː mˈaːsukˌoː kˈoːɖ,,2,ne-agent-v1;ipa=espeak
 rail-station-words.fare,भाडा,,bhāḍā,bʰˈaːɖaː,,2,ne-agent-v1;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,भाडा कहाँ तिर्ने?,,bhāḍā kahām̐ tirnē?,bʰˈaːɖaː kˈʌhã tˈɪrrneː,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+air-travel.where-is-check-in,चेक-इन कहाँ छ?,,cek-ina kahām̐ cha?,cˈeːkəɪn kˈʌhã cʰˈə,,2,ne-agent-v1;ipa=espeak
+air-travel.which-gate,कुन गेट हो?,,kuna gēṭa hō?,kˈun ɡˈeːʈ hoː,"गेट, the loanword this pack already uses in taxi.we-need-the-east-gate-not-the-south-gate",2,ne-agent-v1;ipa=espeak
+air-travel.where-is-the-security-check,सुरक्षा जाँच कहाँ छ?,,surakṣā jām̐c kahām̐ cha?,suɾˈʌkʂaː ɟˈãc kˈʌhã cʰˈə,"जाँच, the same word this pack already uses for राहदानी जाँच (border-customs.passport-control)",2,ne-agent-v1;ipa=espeak
+air-travel.my-luggage-did-not-arrive,मेरो सामान आइपुगेन,,mērō sāmān āipugēna,mˈeːɾoː saːmˈaːn ˌaːɪpuɡˈeːn,"आइपुगेन agrees with सामान (luggage, m), not the speaker",2,ne-agent-v1;ipa=espeak
+air-travel.i-would-like-a-window-seat,मलाई झ्यालको सिट चाहियो,,malāī jhyālakō sit cāhiyō,məlˈaːi ɟʰjˈaːləkˌoː sˈɪʈ cˈaːhɪjˌoː,"झ्याल, already this pack's word for window in taxi.may-i-open-the-window",2,ne-agent-v1;ipa=espeak
+air-travel.i-would-like-an-aisle-seat,मलाई आइल सिट चाहियो,,malāī āila sit cāhiyō,məlˈaːi ˈaːɪl sˈɪʈ cˈaːhɪjˌoː,"no natural native calque for 'aisle' on a plane, unlike झ्यालको for window; loanword",2,ne-agent-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,तपाईं मलाई लिफ्ट दिनुहुन्छ?,,tapāīṁ malāī lifṭa dinuhuncha?,tˌəpaːˈɪːn məlˈaːi lˈɪpʰʈə dˌɪnuhˈuncʰə,"honorific -हुन्छ form, invariant for addressee gender",2,ne-agent-v1;ipa=espeak
+hitchhiking.where-are-you-going,तपाईं कहाँ जानुहुन्छ?,,tapāīṁ kahām̐ jānuhuncha?,tˌəpaːˈɪːn kˈʌhã ɟˌaːnuhˈuncʰə,"honorific -हुन्छ form, invariant",2,ne-agent-v1;ipa=espeak
+hitchhiking.i-only-need-to-go-to-the-next-town,मलाई पछिल्लो सहरसम्म मात्र जानु छ,,malāī pachillō saharasamma mātra jānu cha,məlˈaːi pəcʰˈɪllloː sˌəhəɾəsˈʌmmˌə mˈaːtɾə ɟˈaːnuʲˌu cʰˈə,जानु छ (infinitive-obligation) is invariant,2,ne-agent-v1;ipa=espeak
+hitchhiking.is-there-room-for-two,दुई जनाको लागि ठाउँ छ?,,duī janākō lāgi ṭhāum̐ cha?,dˈui ɟənˈaːkoː lˈaːɡɪ ʈʰˈaːũ cʰˈə,"ठाउँ, already this pack's word for 'place' in border-customs.baggage-claim",2,ne-agent-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,म पेट्रोलको लागि पैसा तिर्न सक्छु,,ma pēṭrōlakō lāgi paisā tirna sakchu,mə pˈeːʈɾoːlˌəkoː lˈaːɡɪ pˈɛːsaː tˈɪrrnə sˈʌkcʰu,"सक्छु, simple present, invariant -- not the -एको/-एकी participle, so single form; पेट्रोल is the pump word across South Asia",2,ne-agent-v1;ipa=espeak
+hitchhiking.thank-you-for-the-ride,लिफ्ट दिनुभएकोमा धन्यवाद,,lifṭa dinubhaēkōmā dhanyavād,lˈɪpʰʈə dˌɪnubʰˌəeːkˈoːmaː dʰˌənjəwˈaːd,,2,ne-agent-v1;ipa=espeak

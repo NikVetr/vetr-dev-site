@@ -64,3 +64,6 @@ trail-landmarks.end,끝,도착점,kkeut,k͈ɯt,,2,ko-agent-v1;ipa=rr
 trail-landmarks.elevation,고도,해발,godo,kodo,,2,ko-agent-v1;ipa=rr
 trail-landmarks.sunset,일몰,해넘이,ilmol,ilmol,,2,ko-agent-v1;ipa=rr
 trail-landmarks.water-point,급수대,샘터,geupsudae,kɯpsudɛ,,2,ko-agent-v1;ipa=rr
+outdoors.can-we-camp-here,여기서 캠핑할 수 있어요?,,yeogiseo kaempinghal su isseoyo?,jʌɡisʌ kʰɛmpʰiŋhal su is͈ʌjo,,2,ko-agent-v1;ipa=rr
+outdoors.is-it-safe-to-swim-here,여기서 수영해도 안전해요?,,yeogiseo suyeonghaedo anjeonhaeyo?,jʌɡisʌ sujʌŋhɛdo andʑʌnhɛjo,,2,ko-agent-v1;ipa=rr
+outdoors.are-there-dangerous-animals-here,여기 위험한 동물이 있어요?,,yeogi wiheomhan dongmuli isseoyo?,jʌɡi wihʌmhan toŋmuli is͈ʌjo,,2,ko-agent-v1;ipa=rr

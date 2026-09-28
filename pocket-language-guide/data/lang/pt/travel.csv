@@ -120,3 +120,15 @@ rail-station-words.maglev,o maglev,o trem de levitação magnética,ʊ maɡlˈev
 common-signs.pork-code,códigos de porco,,kˈɔdʒiɡʊz dʒy pˈoɾəkʊ,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
 rail-station-words.fare,a tarifa,o preço do bilhete,a tˌaɾˈifæ,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,Onde pago a passagem?,Onde pago o bilhete?,ˌoŋdʒy pˈaɡw a pˌasˈaʒeɪŋ,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+air-travel.where-is-check-in,Onde é o check-in?,,ˌoŋdʒj ɛ ʊ ʃˈekin,,2,pt-about-travel-v1;ipa=espeak
+air-travel.which-gate,Qual é a porta de embarque?,,kwˈaʊ ɛ a pˈɔɾətæ dʒj ˌeɪmbˈaɾəky,,2,pt-about-travel-v1;ipa=espeak
+air-travel.where-is-the-security-check,Onde é o controlo de segurança?,Onde é o controle de segurança?,ˌoŋdʒj ɛ ʊ kˌoŋtrˈolʊ dʒy sˌeɡuɾˈɐ̃ŋsæ,,2,pt-about-travel-v1;ipa=espeak
+air-travel.my-luggage-did-not-arrive,A minha bagagem não chegou,,a mˌiɲæ bˌaɡˈaʒeɪŋ nˌɐ̃ʊ̃ ʃeɡˈow,,2,pt-about-travel-v1;ipa=espeak
+air-travel.i-would-like-a-window-seat,Queria um lugar à janela,Queria um assento na janela,kˌeɾˈiæ ũŋ luɡˈaɾ ˌaː ʒˌænˈɛlæ,,2,pt-about-travel-v1;ipa=espeak
+air-travel.i-would-like-an-aisle-seat,Queria um lugar à coxia,Queria um assento no corredor,kˌeɾˈiæ ũŋ luɡˈaɾ ˌaː kˌoʃˈiæ,,2,pt-about-travel-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,Pode dar-me uma boleia?,Pode me dar uma carona?,pˌɔdʒy dˈarmj ˌumæ bˌolˈɛɪæ,,2,pt-about-travel-v1;ipa=espeak
+hitchhiking.where-are-you-going,Para onde vai?,,pˌaɾæ ˌoŋdʒy vˈaɪ,,2,pt-about-travel-v1;ipa=espeak
+hitchhiking.i-only-need-to-go-to-the-next-town,Só preciso de ir até à próxima cidade,,sˈɔ prˌesˈizʊ dʒj ˈiɾ atˌɛ ˌaː prˈɔsimæ sˌidˈadʒy,,2,pt-about-travel-v1;ipa=espeak
+hitchhiking.is-there-room-for-two,Há lugar para dois?,,a luɡˈar pˌaɾæ dˈoɪs,,2,pt-about-travel-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,Posso pagar a gasolina,,pˌɔsʊ paɡˈaɾ a ɡˌazolˈinæ,,2,pt-about-travel-v1;ipa=espeak
+hitchhiking.thank-you-for-the-ride,Obrigado pela boleia,Obrigado pela carona,ˌobriɡˈadʊ pˈelæ bˌolˈɛɪæ,,2,pt-about-travel-v1;ipa=espeak

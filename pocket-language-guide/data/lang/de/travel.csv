@@ -120,3 +120,15 @@ rail-station-words.ticket-validator,Entwerter,Fahrscheinentwerter,ɛntvˈɛɾtɜ
 common-signs.pork-code,Schweinefleisch-Codes,,ʃvˈaɪnɛflˌaɪʃkoːts,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
 rail-station-words.fare,Fahrpreis,Fahrgeld,fˈɑːɾpɾaɪs,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,Wo bezahle ich den Fahrpreis?,,vˌoː bətsˈɑːlə ɪç deːn fˈɑːɾpɾaɪs,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+air-travel.where-is-check-in,Wo ist der Check-in?,,vˌoː ɪst dɛɾ çˈɛkɪn,,2,de-about-travel-v1;ipa=espeak
+air-travel.which-gate,Welcher Flugsteig?,Welches Gate?,vˈɛlçɜ flˈuːɡstaɪk,,2,de-about-travel-v1;ipa=espeak
+air-travel.where-is-the-security-check,Wo ist die Sicherheitskontrolle?,,vˌoː ɪst diː zˈɪçɜhˌaɪtskɔntɾˌɔlə,,2,de-about-travel-v1;ipa=espeak
+air-travel.my-luggage-did-not-arrive,Mein Gepäck ist nicht angekommen.,,maɪn ɡəpˈɛk ɪst nˈɪçt ˈanɡəkˌɔmən,,2,de-about-travel-v1;ipa=espeak
+air-travel.i-would-like-a-window-seat,Ich möchte einen Fensterplatz.,,ɪç mˈœçtə ˌaɪnən fˈɛnstɜplˌats,,2,de-about-travel-v1;ipa=espeak
+air-travel.i-would-like-an-aisle-seat,Ich möchte einen Gangplatz.,,ɪç mˈœçtə ˌaɪnən ɡˈaŋplats,,2,de-about-travel-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,Können Sie mich mitnehmen?,,kˌœnən ziː mɪç mˈɪtnˌeːmən,,2,de-about-travel-v1;ipa=espeak
+hitchhiking.where-are-you-going,Wohin fahren Sie?,,voːhˈiːn fˈɑːrən ziː,,2,de-about-travel-v1;ipa=espeak
+hitchhiking.i-only-need-to-go-to-the-next-town,Ich muss nur bis zur nächsten Stadt.,,ɪç mˈʊs nˈuːɾ bɪs tsuːɾ nˈɛçstən ʃtˈat,,2,de-about-travel-v1;ipa=espeak
+hitchhiking.is-there-room-for-two,Ist noch Platz für zwei?,,ɪst nɔx plˈats fyːɾ tsvˈaɪ,,2,de-about-travel-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,Ich kann fürs Benzin bezahlen.,,ɪç kˌan fˈyːɾs bɛntsˈiːn bətsˈɑːlən,,2,de-about-travel-v1;ipa=espeak
+hitchhiking.thank-you-for-the-ride,Danke fürs Mitnehmen.,,dˈaŋkə fˈyːɾs mˈɪtnˌeːmən,,2,de-about-travel-v1;ipa=espeak

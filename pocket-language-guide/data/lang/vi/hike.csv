@@ -64,3 +64,6 @@ trail-landmarks.end,Điểm kết thúc,,ɗiɛ̯m˧˩˧ ket̪˧˥ tuc˧˥,,2,vi-
 trail-landmarks.elevation,Độ cao,,ɗo˨˩ˀ kaːw˧,,2,vi-agent-v1;ipa=espeak
 trail-landmarks.sunset,Hoàng hôn,Mặt trời lặn,hwaːŋ˨˩ hon˧,,2,vi-agent-v1;ipa=espeak
 trail-landmarks.water-point,Điểm lấy nước,,ɗiɛ̯m˧˩˧ ləɪ˧˥ nyə̯c˧˥,,2,vi-agent-v1;ipa=espeak
+outdoors.can-we-camp-here,Chúng tôi có thể cắm trại ở đây được không ạ?,,tʃuŋ˧˥ t̪oj˧ kɔ˧˥ te˧˩˧ kam˧˥ tʃaːj˨˩ˀ əː˧˩˧ ɗəɪ˧ ɗyə̯c˨˩ˀ xoŋ˧ aː˨˩ˀ,chúng tôi reused from introductions.we-are-traveling-together,2,vi-agent-v1;in-pack-neighbour=introductions.we-are-traveling-together;ipa=espeak
+outdoors.is-it-safe-to-swim-here,Bơi ở đây có an toàn không ạ?,,bəːj˧ əː˧˩˧ ɗəɪ˧ kɔ˧˥ aːn˧ t̪waːn˨˩ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
+outdoors.are-there-dangerous-animals-here,Ở đây có động vật nguy hiểm không ạ?,,əː˧˩˧ ɗəɪ˧ kɔ˧˥ ɗoŋ˨˩ˀ vət̪˨˩ˀ ŋwi˧ hiɛ̯m˧˩˧ xoŋ˧ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak

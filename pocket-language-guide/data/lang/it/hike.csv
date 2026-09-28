@@ -64,3 +64,6 @@ weather.humid,umido,,ˈumido,,2,it-agent-v1;ipa=espeak
 weather.sunrise,l'alba,,lˈalba,,2,it-agent-v1;ipa=espeak
 weather.flood,l'alluvione,l'inondazione,lallʊvjˈone,,2,it-agent-v1;ipa=espeak
 weather.avalanche-risk,rischio valanghe,,rˈiskio valˈaŋɡe,,2,it-agent-v1;ipa=espeak
+outdoors.can-we-camp-here,Possiamo campeggiare qui?,,possjˈamo kampedʒdʒˈare kwˈi,,2,it-about-travel-v1;ipa=espeak
+outdoors.is-it-safe-to-swim-here,È sicuro nuotare qui?,,e sikˈuro nʊotˈare kwˈi,,2,it-about-travel-v1;ipa=espeak
+outdoors.are-there-dangerous-animals-here,Ci sono animali pericolosi qui?,,tʃɪ sˌono animˈalɪ perikolˈɔzɪ kwˈi,,2,it-about-travel-v1;ipa=espeak

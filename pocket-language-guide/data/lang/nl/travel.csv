@@ -120,3 +120,15 @@ taxi.could-you-make-it-warmer,Kunt u de airconditioning warmer zetten?,,kʏnt y 
 taxi.may-i-open-the-window,Mag ik het raam openen?,,mɑx ɪk hət rˈaːm ˈoːpənən,may I open the window?,2,nl-agent-v1;ipa=espeak
 common-signs.pork-code,varkensvleescodes op borden,B1 = hond,vˌɑrkənsfleːskˈoːdəs ɔ pˈɔrdən,,2,nl-agent-v1;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,Waar betaal ik voor de rit?,,ʋˈaːr bətˈaːl ɪk vɔːr də rˈɪt,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+air-travel.where-is-check-in,Waar is de incheckbalie?,,ʋˈaːr ɪs də ˈɪnʃˌɛkbaːlˌi,,2,nl-about-travel-v1;ipa=espeak
+air-travel.which-gate,Welke gate?,,ʋˈɛlkə ɣˈaːtə,,2,nl-about-travel-v1;ipa=espeak
+air-travel.where-is-the-security-check,Waar is de veiligheidscontrole?,Waar is de security?,ʋˈaːr ɪs də vˌɛɪlɪxhˌɛɪdskɔntrˈoːlə,,2,nl-about-travel-v1;ipa=espeak
+air-travel.my-luggage-did-not-arrive,Mijn bagage is niet aangekomen.,,mɛɪn baːɣˈaːʒə ɪs nˌit ˈaːnɣəkˌoːmən,,2,nl-about-travel-v1;ipa=espeak
+air-travel.i-would-like-a-window-seat,Ik wil graag een raamstoel.,,ɪk ʋɪl ɣrˈaːx ən raːmstˈul,,2,nl-about-travel-v1;ipa=espeak
+air-travel.i-would-like-an-aisle-seat,Ik wil graag een gangpadstoel.,,ɪk ʋɪl ɣrˈaːx ən ɣˌɑŋpɑtstˈul,,2,nl-about-travel-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,Kunt u mij een lift geven?,,kʏnt y mˈɛɪ ən lˈɪft ɣˈeːvən,,2,nl-about-travel-v1;ipa=espeak
+hitchhiking.where-are-you-going,Waar gaat u naartoe?,,ʋˈaːr ɣˈaːt y nˈaːrtu,,2,nl-about-travel-v1;ipa=espeak
+hitchhiking.i-only-need-to-go-to-the-next-town,Ik moet alleen naar de volgende plaats.,,ɪk mˈut ɑlˈeːn naːr də vˈɔlɣəndə plˈaːts,,2,nl-about-travel-v1;ipa=espeak
+hitchhiking.is-there-room-for-two,Is er plaats voor twee?,,ɪs ər plˈaːts vɔːr tʋˈeː,,2,nl-about-travel-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,Ik kan betalen voor de benzine.,,ɪk kɑn bətˈaːlən vɔːr də bənzˈinə,,2,nl-about-travel-v1;ipa=espeak
+hitchhiking.thank-you-for-the-ride,Bedankt voor de lift.,,bədˈɑŋkt vɔːr də lˈɪft,,2,nl-about-travel-v1;ipa=espeak

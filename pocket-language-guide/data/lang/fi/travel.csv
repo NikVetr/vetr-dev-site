@@ -120,3 +120,15 @@ common-signs.pork-code,sianlihan koodit kylteissä,,sˈianlihaŋ kˈoːdit kˈyl
 rail-station-words.maglev,magneettijuna,,mˈaɡneːttˌijuna,,2,fi-agent-v1;ipa=espeak
 place-words.scenic-area,nähtävyysalue,,nˈæhtævˌyːsalˌue,,2,fi-agent-v1;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,Missä matkalippu maksetaan?,,mˈissæ mˈatkalˌippu mˈaksetaːn,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+air-travel.where-is-check-in,Missä on lähtöselvitys?,,mˈissæ ˈon lˈæhtøsˌelvitys,,2,fi-agent-v1;source=finavia.fi;ipa=espeak
+air-travel.which-gate,Miltä portilta?,,mˈiltæ pˈortilta,matches Miltä laiturilta? already in the pack,2,fi-agent-v1;source=finavia.fi;ipa=espeak
+air-travel.where-is-the-security-check,Missä on turvatarkastus?,,mˈissæ ˈon tˈurvatˌarkastus,,2,fi-agent-v1;source=finavia.fi;ipa=espeak
+air-travel.my-luggage-did-not-arrive,Matkatavarani ei saapunut.,,mˈatkatˌavarˌani ˈei sˈaːpunut,"matkatavara, the term Finnish airlines use for luggage",2,fi-agent-v1;ipa=espeak
+air-travel.i-would-like-a-window-seat,Haluaisin ikkunapaikan.,,hˈaluˌaisin ˈikkunapˌaikan,,2,fi-agent-v1;ipa=espeak
+air-travel.i-would-like-an-aisle-seat,Haluaisin käytäväpaikan.,,hˈaluˌaisiŋ kˈæytævæpˌaikan,,2,fi-agent-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,Voitko antaa kyydin?,,vˈoitko ˈantaː kˈyːdin,"informal sinä -- hitchhiking is asking a favour of a stranger rather than a paid service, and Finnish informal address is now the ordinary register for this kind of roadside request",2,fi-agent-v1;ipa=espeak
+hitchhiking.where-are-you-going,Minne olet menossa?,,mˈinne ˈolet mˈenossa,"informal, for the same reason",2,fi-agent-v1;ipa=espeak
+hitchhiking.i-only-need-to-go-to-the-next-town,Minun täytyy päästä vain seuraavaan kaupunkiin.,,mˈinun tˈæytyː pˈæːstæ vˈain sˈeuraːvaːŋ kˈaupuŋkiːn,,2,fi-agent-v1;ipa=espeak
+hitchhiking.is-there-room-for-two,Onko tilaa kahdelle?,,ˈoŋko tˈilaː kˈahdelle,,2,fi-agent-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,Voin maksaa bensat.,,vˈoin mˈaksaː bˈensat,"bensat, the colloquial word drivers use for petrol money",2,fi-agent-v1;ipa=espeak
+hitchhiking.thank-you-for-the-ride,Kiitos kyydistä.,,kˈiːtos kˈyːdistæ,,2,fi-agent-v1;ipa=espeak

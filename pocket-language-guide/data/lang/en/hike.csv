@@ -64,3 +64,6 @@ weather.humid,humid,,hjˈuːmɪd,,2,expansion-v1;ipa=espeak
 weather.sunrise,sunrise,,sˈʌnɹaɪz,,2,expansion-v1;ipa=espeak
 weather.flood,flood,,flˈʌd,,2,expansion-v1;ipa=espeak
 weather.avalanche-risk,avalanche risk,,ˈævəlˌænʃ ɹˈɪsk,,2,expansion-v1;ipa=espeak
+outdoors.can-we-camp-here,Can we camp here?,,kæn wiː kˈæmp hˈɪɹ,,2,en-about-travel-v1;ipa=espeak
+outdoors.is-it-safe-to-swim-here,Is it safe to swim here?,,ɪz ɪt sˈeɪf tə swˈɪm hˈɪɹ,,2,en-about-travel-v1;ipa=espeak
+outdoors.are-there-dangerous-animals-here,Are there dangerous animals here?,,ɑːɹ ðɛɹ dˈeɪndʒɚɹəs ˈænɪməlz hˈɪɹ,,2,en-about-travel-v1;ipa=espeak

@@ -15,3 +15,17 @@ family-intros.this-is-my-wife,Ő a feleségem,,ˈøː ˈɑ fˈɛlɛʃeːɡɛm,,2
 family-intros.this-is-my-son,Ő a fiam,,ˈøː ˈɑ fˈiɑm,,2,hu-agent-v1;ipa=espeak
 family-intros.this-is-my-daughter,Ő a lányom,,ˈøː ˈɑ lˈaːɲom,,2,hu-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,Egyedül utazom,,ˈɛɟɛdyl ˈutɑzom,,2,hu-agent-v1;ipa=espeak
+about-me.i-am-a-student,Diák vagyok.,,dˈiaːk vˈɑɟok,,2,hu-agent-v1;ipa=espeak
+about-me.i-am-retired,Nyugdíjas vagyok.,,ɲˈuɡdiːjɑʃ vˈɑɟok,,2,hu-agent-v1;ipa=espeak
+about-me.i-am-a-teacher,Tanár vagyok.,,tˈɑnaːr vˈɑɟok,,2,hu-agent-v1;ipa=espeak
+about-me.i-am-a-doctor,Orvos vagyok.,,ˈorvoʃ vˈɑɟok,,2,hu-agent-v1;ipa=espeak
+about-me.i-am-a-nurse,Ápoló vagyok.,,ˈaːpoloː vˈɑɟok,"the job-title word; nővér ('sister') is the everyday address term but doubles as the kinship word, so ápoló was chosen to say the sentence unambiguously",2,hu-agent-v1;ipa=espeak
+about-me.i-am-an-engineer,Mérnök vagyok.,,mˈeːrnøk vˈɑɟok,,2,hu-agent-v1;ipa=espeak
+about-me.i-work-in-an-office,Irodában dolgozom.,,ˈirodaːbɑn dˈolɡozom,,2,hu-agent-v1;ipa=espeak
+about-me.i-have-my-own-business,Saját vállalkozásom van.,,ʃˈɑjaːt vˈaːllɑlkozaːʃom vˈɑn,,2,hu-agent-v1;ipa=espeak
+family-intros.this-is-my-mother,Ő az anyám.,,ˈøː ˈɑz ˈɑɲaːm,,2,hu-agent-v1;ipa=espeak
+family-intros.this-is-my-father,Ő az apám.,,ˈøː ˈɑz ˈɑpaːm,,2,hu-agent-v1;ipa=espeak
+family-intros.this-is-my-brother,Ő a fitestvérem.,,ˈøː ˈɑ fˈitɛʃtveːrɛm,Hungarian has no age-neutral everyday word for 'brother' (báty/öcs split on older/younger); fitestvér ('male sibling') is the established word that does not force a choice of relative age,2,hu-agent-v1;ipa=espeak
+family-intros.this-is-my-sister,Ő a nőtestvérem.,,ˈøː ˈɑ nˈøːtɛʃtveːrɛm,same reasoning as this-is-my-brother -- nőtestvér avoids the néni/húg older/younger split,2,hu-agent-v1;ipa=espeak
+family-intros.this-is-my-partner,Ő az élettársam.,,ˈøː ˈɑz ˈeːlɛttaːrʃɑm,"élettárs is the standard Hungarian word for an unmarried life partner (also the term used in family law), not a business partner",2,hu-agent-v1;ipa=espeak
+family-intros.this-is-my-colleague,Ő a munkatársam.,,ˈøː ˈɑ mˈunkɑtaːrʃɑm,"munkatárs, a work colleague specifically",2,hu-agent-v1;ipa=espeak

@@ -14,3 +14,8 @@ speaker_gender=feminine,etiquette.dressed-appropriately,Я нормально о
 speaker_gender=feminine,transit-rides.i-went-past-my-stop,Я проехала свою остановку.,,Ya proyekhala svoyu ostanovku.,ˈja prʌjˈexʌɭa svʌˈju ʌstanˈofku,,2,ru-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
 speaker_gender=feminine,pronouns-verbs.would-like,хотела бы,,khotela by,xʌtʲˈeɭa bˈɨ,,2,ru-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
 speaker_gender=feminine,kind-words.i-had-a-wonderful-time,Я прекрасно провела время.,,Ya prekrasno provela vremya.,ˈja prʲikrˈɑsnʌ prʌvʲiɭˈɑ vrʲˈemʲʌ,,2,ru-kind-words-v1;rule=speaker-gender-agreement;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-student,Я студентка.,,Ya studentka.,ˈja studʲˈentka,,2,ru-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-teacher,Я учительница.,,Ya uchitelʼnitsa.,ˈja utʃʲˈitʲiɭnʲitsa,,2,ru-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-nurse,Я медсестра.,,Ya medsestra.,ˈja mʲitʲsʲistrˈɑ,,2,ru-variants-v1;rule=role-noun-has-feminine-derivational-suffix;source=garant.ru;ipa=espeak
+speaker_gender=feminine,air-travel.i-would-like-a-window-seat,Я хотела бы место у окна.,,Ya khotela by mesto u okna.,ˈja xʌtʲˈeɭa bˈɨ mʲˈestʌ ˈu ˈokna,,2,ru-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,air-travel.i-would-like-an-aisle-seat,Я хотела бы место у прохода.,,Ya khotela by mesto u prokhoda.,ˈja xʌtʲˈeɭa bˈɨ mʲˈestʌ ˈu prʌxˈoda,,2,ru-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak

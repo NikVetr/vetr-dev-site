@@ -15,3 +15,17 @@ family-intros.this-is-my-husband,这是我丈夫,,zhè shì wǒ zhàngfu,ʈʂɤ�
 family-intros.this-is-my-wife,这是我妻子,,zhè shì wǒ qīzi,ʈʂɤ˥˩ ʂɨ˥˩ wɔ˧˩˧ tɕʰi˥tsɯ,,2,zh-Hans-agent-v1;split-from=this-is-my-husband-wife;ipa=pinyin
 family-intros.this-is-my-son,这是我儿子,,zhè shì wǒ érzi,ʈʂɤ˥˩ ʂɨ˥˩ wɔ˧˩˧ ɑɻ˧˥tsɯ,,2,zh-Hans-agent-v1;split-from=this-is-my-daughter-son;ipa=pinyin
 family-intros.this-is-my-daughter,这是我女儿,,zhè shì wǒ nǚ'ér,ʈʂɤ˥˩ ʂɨ˥˩ wɔ˧˩˧ ny˧˩˧ɑɻ˧˥,,2,zh-Hans-agent-v1;split-from=this-is-my-daughter-son;ipa=pinyin
+about-me.i-am-a-student,我是学生,,wǒ shì xuésheng,wɔ˧˩˧ ʂɨ˥˩ ɕɥœ˧˥ʂɤŋ,,2,zh-Hans-agent-v1;ipa=pinyin
+about-me.i-am-retired,我退休了,,wǒ tuìxiū le,wɔ˧˩˧ tʰweɪ˥˩ɕjoʊ˥ lɤ,,2,zh-Hans-agent-v1;ipa=pinyin
+about-me.i-am-a-teacher,我是老师,,wǒ shì lǎoshī,wɔ˧˩˧ ʂɨ˥˩ lɑʊ˧˩˧ʂɨ˥,,2,zh-Hans-agent-v1;ipa=pinyin
+about-me.i-am-a-doctor,我是医生,,wǒ shì yīshēng,wɔ˧˩˧ ʂɨ˥˩ i˥ʂɤŋ˥,,2,zh-Hans-agent-v1;ipa=pinyin
+about-me.i-am-a-nurse,我是护士,,wǒ shì hùshi,wɔ˧˩˧ ʂɨ˥˩ xu˥˩ʂɨ,,2,zh-Hans-agent-v1;ipa=pinyin
+about-me.i-am-an-engineer,我是工程师,,wǒ shì gōngchéngshī,wɔ˧˩˧ ʂɨ˥˩ kʊŋ˥ʈʂʰɤŋ˧˥ʂɨ˥,,2,zh-Hans-agent-v1;ipa=pinyin
+about-me.i-work-in-an-office,我在办公室工作,,wǒ zài bàngōngshì gōngzuò,wɔ˧˩˧ tsaɪ˥˩ pan˥˩kʊŋ˥ʂɨ˥˩ kʊŋ˥tswɔ˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
+about-me.i-have-my-own-business,我自己做生意,,wǒ zìjǐ zuò shēngyi,wɔ˧˩˧ tsɯ˥˩tɕi˧˩˧ tswɔ˥˩ ʂɤŋ˥i,,2,zh-Hans-agent-v1;ipa=pinyin
+family-intros.this-is-my-mother,这是我妈妈,,zhè shì wǒ māma,ʈʂɤ˥˩ ʂɨ˥˩ wɔ˧˩˧ ma˥ma,,2,zh-Hans-agent-v1;ipa=pinyin
+family-intros.this-is-my-father,这是我爸爸,,zhè shì wǒ bàba,ʈʂɤ˥˩ ʂɨ˥˩ wɔ˧˩˧ pa˥˩pa,,2,zh-Hans-agent-v1;ipa=pinyin
+family-intros.this-is-my-brother,这是我哥哥,这是我弟弟,zhè shì wǒ gēge,ʈʂɤ˥˩ ʂɨ˥˩ wɔ˧˩˧ kɤ˥kɤ,elder brother; text_alt is the younger-brother word -- Chinese marks relative age and has no sibling term unmarked for it,2,zh-Hans-agent-v1;ipa=pinyin
+family-intros.this-is-my-sister,这是我姐姐,这是我妹妹,zhè shì wǒ jiějie,ʈʂɤ˥˩ ʂɨ˥˩ wɔ˧˩˧ tɕjɛ˧˩˧tɕjɛ,elder sister; text_alt is the younger-sister word,2,zh-Hans-agent-v1;ipa=pinyin
+family-intros.this-is-my-partner,这是我的伴侣,,zhè shì wǒ de bànlǔ,ʈʂɤ˥˩ ʂɨ˥˩ wɔ˧˩˧ tɤ pan˥˩lu˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
+family-intros.this-is-my-colleague,这是我的同事,,zhè shì wǒ de tóngshì,ʈʂɤ˥˩ ʂɨ˥˩ wɔ˧˩˧ tɤ tʰʊŋ˧˥ʂɨ˥˩,,2,zh-Hans-agent-v1;ipa=pinyin

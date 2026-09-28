@@ -120,3 +120,15 @@ rail-station-words.ticket-validator,ટિકિટ પંચ મશીન,,ṭi
 common-signs.pork-code,B2 · BPK · bakso જેવા કોડ = ભૂંડનું માંસ,,B2 · BPK · bakso jēvā kōḍ = bhūṁḍanuṁ māṁs,,"codes like B2, BPK and bakso mean pork",2,gu-agent-v1
 rail-station-words.fare,ભાડું,,bhāḍuṁ,bʰaːɖũ,fare,2,gu-agent-v1;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,ભાડું ક્યાં આપવાનું છે?,,bhāḍuṁ kyāṁ āpavānuṁ chē?,bʰaːɖũ kjã aːpʋaːnũ cʰeː,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+air-travel.where-is-check-in,ચેક-ઇન ક્યાં છે?,,cek-in kyāṁ chē?,ceːkɪn kjã cʰeː,,2,gu-agent-v1;ipa=espeak
+air-travel.which-gate,કયો ગેટ છે?,,kayō geṭ chē?,kʌjoː ɡeːʈ cʰeː,"ગેટ, confirmed as the loanword Gujarati aviation media uses (TV9 Gujarati: 'ગેટ 12'), despite દરવાજો being the taxi.we-need-the-east-gate row's word for a station gate",2,gu-agent-v1;ipa=espeak
+air-travel.where-is-the-security-check,સુરક્ષા તપાસ ક્યાં છે?,,surakṣā tapās kyāṁ chē?,suɾʌkʃaː təpaːs kjã cʰeː,"તપાસ, the same 'check' word this pack already uses for પાસપોર્ટ તપાસ (border-customs.passport-control); સુરક્ષા confirmed against TV9 Gujarati wording ('ચેક-ઇનથી લઈને સુરક્ષા સુધી')",2,gu-agent-v1;ipa=espeak
+air-travel.my-luggage-did-not-arrive,મારો સામાન ન આવ્યો,,mārō sāmān na āvyō,maːɾoː saːmaːn nə aːʋjoː,"આવ્યો agrees with સામાન (luggage, m), not the speaker",2,gu-agent-v1;ipa=espeak
+air-travel.i-would-like-a-window-seat,મારે બારી પાસેની સીટ જોઈએ,,mārē bārī pāsēnī sīṭ jōīē,maːɾeː baːɾi paːseːni siːʈ ɟoːiːeː,,2,gu-agent-v1;ipa=espeak
+air-travel.i-would-like-an-aisle-seat,મારે આઇલ સીટ જોઈએ,,mārē āil sīṭ jōīē,maːɾeː aːɪl siːʈ ɟoːiːeː,"no natural native calque for 'aisle' on a plane, unlike બારી પાસેની for window; loanword",2,gu-agent-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,તમે મને લિફ્ટ આપશો?,,tamē manē lifṭ āpaśō?,tʌmeː mʌneː lɪpʰʈ aːpʌʃoː,"future tense, invariant for addressee gender",2,gu-agent-v1;ipa=espeak
+hitchhiking.where-are-you-going,તમે ક્યાં જાઓ છો?,,tamē kyāṁ jāō chō?,tʌmeː kjã ɟaːoː cʰoː,"simple present, invariant, matching કેમ છો's profile",2,gu-agent-v1;ipa=espeak
+hitchhiking.i-only-need-to-go-to-the-next-town,મારે તો ફક્ત પછીના શહેર સુધી જવું છે,,mārē tō phakt pachīnā śahēr sudhī javuṁ chē,maːɾeː toː pʰʌkt pəcʰiːnaː ʃʌheːɾ sudʰi ɟʌʋũ cʰeː,જવું (infinitive) is invariant,2,gu-agent-v1;ipa=espeak
+hitchhiking.is-there-room-for-two,બે માટે જગ્યા છે?,,bē māṭē jagyā chē?,beː maːʈeː ɟʌɡjaː cʰeː,,2,gu-agent-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,હું પેટ્રોલ માટે પૈસા આપી શકતો છું,,huṁ pēṭrōl māṭē paisā āpī śakatō chuṁ,hũ peːʈɾoːl maːʈeː pɛsaː aːpi ʃəkʌtoː cʰũ,"m; શકતી for a woman, see variants.csv -- the habitual participle શકતો/શકતી (matching this pack's existing શકતી નથી rows), not the invariant simple શકું; પેટ્રોલ is the pump word across South Asia",2,gu-agent-v1;ipa=espeak
+hitchhiking.thank-you-for-the-ride,લિફ્ટ આપવા બદલ આભાર,,lifṭ āpavā badal ābhār,lɪpʰʈ aːpʌʋaː bədʌl aːbʰaːɾ,,2,gu-agent-v1;ipa=espeak

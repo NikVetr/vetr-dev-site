@@ -120,3 +120,15 @@ taxi.could-you-make-it-colder,Можете зробити кондиціонер
 taxi.could-you-make-it-warmer,Можете зробити кондиціонер теплішим?,,Mozhete zrobyty kondytsioner teplishym?,moʒˈɛtɛ zrobˈɪtɪ kondɪtsˈiːonɛr tɛpʎˈiːʃɪm,can you make the air conditioner warmer?,2,uk-agent-v1;ipa=espeak
 taxi.may-i-open-the-window,Можна відкрити вікно?,,Mozhna vidkryty vikno?,mˈoʒna ʋiːtkrˈɪtɪ ʋˈiːkno,may [I] open the window? -- the ordinary way to ask permission for oneself,2,uk-agent-v1;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,Де оплатити проїзд?,,De oplatyty proizd?,dˈɛ oplˈatɪtɪ prˈojiːzd,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+air-travel.where-is-check-in,Де реєстрація на рейс?,,De reiestratsiia na reis?,dˈɛ rɛjɪstrˈatsiːja nˈa rˈɛjs,,2,uk-agent-v1;source=kbp.aero;ipa=espeak
+air-travel.which-gate,Який вихід?,,Yakyi vykhid?,jakˈɪj ʋˈɪxiːd,"matches ВИХІД, the departure-board column header",2,uk-agent-v1;source=kbp.aero;ipa=espeak
+air-travel.where-is-the-security-check,Де контроль безпеки?,,De kontrol bezpeky?,dˈɛ kˈontroʎ bɛspˈɛkɪ,,2,uk-agent-v1;source=kbp.aero;ipa=espeak
+air-travel.my-luggage-did-not-arrive,Мій багаж не прибув.,,Mii bahazh ne prybuv.,mˈiːj bˈahaʒ nˈɛ prˈɪbuʋ,,2,uk-agent-v1;ipa=espeak
+air-travel.i-would-like-a-window-seat,Я хотів би місце біля вікна.,,Ya khotiv by mistse bilia vikna.,jˈa xˈotiːʋ bˈɪ mˈiːstsɛ bˈiːʎa ʋˈiːkna,masculine; a woman says Я хотіла б... (Ya khotila b...),2,uk-agent-v1;ipa=espeak
+air-travel.i-would-like-an-aisle-seat,Я хотів би місце біля проходу.,,Ya khotiv by mistse bilia prokhodu.,jˈa xˈotiːʋ bˈɪ mˈiːstsɛ bˈiːʎa proxˈodu,masculine; a woman says Я хотіла б... (Ya khotila b...),2,uk-agent-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,Можете мене підвезти?,,Mozhete mene pidvezty?,moʒˈɛtɛ mˈɛnɛ piːdʋˈɛstɪ,"formal ви, matching the pack's taxi register",2,uk-agent-v1;ipa=espeak
+hitchhiking.where-are-you-going,Куди ви їдете?,,Kudy vy yidete?,kˈudɪ ʋˈɪ jiːdˈɛtɛ,,2,uk-agent-v1;ipa=espeak
+hitchhiking.i-only-need-to-go-to-the-next-town,Мені потрібно тільки до наступного міста.,,Meni potribno tilky do nastupnoho mista.,mˈɛɲiː potrˈiːbno tˈiːʎkɪ dˈo nastˈupnoho mˈiːsta,,2,uk-agent-v1;ipa=espeak
+hitchhiking.is-there-room-for-two,Є місце для двох?,,Ie mistse dlia dvokh?,jˈɛ mˈiːstsɛ dʎˈa dʋˈox,,2,uk-agent-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,Я можу заплатити за бензин.,,Ya mozhu zaplatyty za benzyn.,jˈa mˈoʒu zaplˈatɪtɪ zˈa bˈɛnzɪn,"бензин, the word drivers use",2,uk-agent-v1;ipa=espeak
+hitchhiking.thank-you-for-the-ride,"Дякую, що підвезли.",,"Diakuiu, shcho pidvezly.","djˈakuju, ʃtʃˈo piːdʋˈɛzlɪ",,2,uk-agent-v1;ipa=espeak

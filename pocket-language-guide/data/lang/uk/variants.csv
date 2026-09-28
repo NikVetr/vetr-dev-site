@@ -14,3 +14,10 @@ speaker_gender=feminine,etiquette.dressed-appropriately,Я нормально о
 speaker_gender=feminine,transit-rides.i-went-past-my-stop,Я проїхала свою зупинку.,,Ya proikhala svoiu zupynku.,jˈa projˈiːxala zʋˈoju zupˈɪnku,,2,uk-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
 speaker_gender=feminine,pronouns-verbs.would-like,хотіла б,,khotila b,xotˈiːla b,,2,uk-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
 speaker_gender=feminine,kind-words.i-had-a-wonderful-time,Я чудово провела час.,,Ya chudovo provela chas.,jˈa tʃudˈoʋo proʋˈɛla tʃˈas,,2,uk-kind-words-v1;rule=speaker-gender-agreement;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-student,Я студентка.,,Ya studentka.,jˈa studˈɛntka,,2,uk-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-teacher,Я вчителька.,,Ya vchytelka.,jˈa ftʃɪtˈɛʎka,,2,uk-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-doctor,Я лікарка.,,Ya likarka.,jˈa ʎiːkˈarka,,2,uk-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-nurse,Я медсестра.,,Ya medsestra.,jˈa mɛtsˈɛstra,,2,uk-variants-v1;rule=role-noun-has-feminine-derivational-suffix;source=mova.gov.ua;ipa=espeak
+speaker_gender=feminine,about-me.i-am-an-engineer,Я інженерка.,,Ya inzhenerka.,jˈa iːnʒˈɛnɛrka,,2,uk-variants-v1;rule=role-noun-has-feminine-derivational-suffix;source=mova.gov.ua;ipa=espeak
+speaker_gender=feminine,air-travel.i-would-like-a-window-seat,Я хотіла б місце біля вікна.,,Ya khotila b mistse bilia vikna.,jˈa xotˈiːla b mˈiːstsɛ bˈiːʎa ʋˈiːkna,,2,uk-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,air-travel.i-would-like-an-aisle-seat,Я хотіла б місце біля проходу.,,Ya khotila b mistse bilia prokhodu.,jˈa xotˈiːla b mˈiːstsɛ bˈiːʎa proxˈodu,,2,uk-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak

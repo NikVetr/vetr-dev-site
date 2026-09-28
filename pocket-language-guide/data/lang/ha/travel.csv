@@ -120,3 +120,15 @@ place-words.scenic-area,wurin shakatawa,,wurin ʃakatawa,,2,ha-notes-v1;ipa=ha-g
 rail-station-words.maglev,jirgin maglev,,dʒirɡin maɡlev,,2,ha-notes-v1;ipa=ha-g2p
 common-signs.pork-code,Alamomin naman alade,,alamomin naman alade,,2,ha-notes-v1;ipa=ha-g2p
 transit-rides.where-do-i-pay-the-fare,Ina ake biyan kuɗin sufuri?,,ina ake bijan kuɗin sufuri,where does one pay the fare?,2,translator-requests-v1;in-pack-neighbour;ipa=ha-g2p
+air-travel.where-is-check-in,Ina wurin shiga yake?,,ina wurin ʃiɡa jake,reuses hotel-words.check-in's shiga (entering),2,ha-agent-v1;in-pack-neighbour=hotel-words.check-in;ipa=ha-g2p
+air-travel.which-gate,Wace ƙofa?,,watʃe kʼofa,reuses taxi.we-need-the-east-gate-not-the-south-gate's ƙofa (gate),2,ha-agent-v1;in-pack-neighbour=taxi.we-need-the-east-gate-not-the-south-gate;ipa=ha-g2p
+air-travel.where-is-the-security-check,Ina wurin bincike na tsaro yake?,,ina wurin bintʃike na tsʼaro jake,place of security check; tsaro attested in ha.wikipedia.org's Filin jirgin sama article,2,ha-agent-v1;src=ha.wikipedia.org Filin_jirgin_sama;ipa=ha-g2p
+air-travel.my-luggage-did-not-arrive,Kayana bai zo ba,,kajana bai zo ba,reuses kayana from border-customs.where-do-i-collect-my-baggage,2,ha-agent-v1;in-pack-neighbour=border-customs.where-do-i-collect-my-baggage;ipa=ha-g2p
+air-travel.i-would-like-a-window-seat,Ina son wurin zama kusa da taga,,ina son wurin zama kusa da taɡa,seat near the window; taga reused from taxi.may-i-open-the-window,2,ha-agent-v1;in-pack-neighbour=taxi.may-i-open-the-window;ipa=ha-g2p
+air-travel.i-would-like-an-aisle-seat,Ina son wurin zama kusa da hanya,,ina son wurin zama kusa da hanja,"seat near the aisle/path, parallel to the window-seat row",2,ha-agent-v1;ipa=ha-g2p
+hitchhiking.can-you-give-me-a-ride,Za ka iya ɗauke ni?,Za ki iya ɗauke ni?,za ka ija ɗauke ni,ki to a woman driver,2,ha-agent-v1;ipa=ha-g2p
+hitchhiking.where-are-you-going,Ina za ka?,Ina za ki?,ina za ka,ki to a woman driver,2,ha-agent-v1;ipa=ha-g2p
+hitchhiking.i-only-need-to-go-to-the-next-town,Ina bukatar zuwa gari na gaba kawai,,ina bukatar zuwa ɡari na ɡaba kawai,,2,ha-agent-v1;ipa=ha-g2p
+hitchhiking.is-there-room-for-two,Akwai wuri don mutum biyu?,,akwai wuri don mutum biju,,2,ha-agent-v1;ipa=ha-g2p
+hitchhiking.i-can-pay-for-fuel,Zan iya biyan man fetur,,zan ija bijan man fetur,"man fetur = petrol, the word Hausa speakers use at the pump",2,ha-agent-v1;src=Newman A Hausa-English Dictionary 2007 fetur;ipa=ha-g2p
+hitchhiking.thank-you-for-the-ride,Na gode don ɗaukar ni,,na ɡode don ɗaukar ni,reuses social-basics.thank-you's Na gode,2,ha-agent-v1;in-pack-neighbour=social-basics.thank-you;ipa=ha-g2p

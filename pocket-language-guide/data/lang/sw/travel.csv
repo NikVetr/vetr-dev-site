@@ -120,3 +120,15 @@ rail-station-words.maglev,Treni ya sumaku,,trˈeni ja sumˈaku,,1,reader-gloss-v
 common-signs.pork-code,Misimbo ya nguruwe,,misˈimbo ja ŋɡurˈuwe,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
 rail-station-words.fare,Nauli,,naˈuli,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,Nalipa nauli wapi?,,nalˈipa naˈuli wˈapi,on a daladala or a matatu you hand it to the kondakta,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+air-travel.where-is-check-in,Sehemu ya kuandikishwa iko wapi?,,sehˈemu ja kˌuandikˈiʃwa ˈiko wˈapi,reuses sw.wikipedia.org Uwanja_wa_ndege's own sehemu/kuandikishwa for the check-in area,2,sw-agent-v1;src=sw.wikipedia.org Uwanja_wa_ndege;ipa=espeak
+air-travel.which-gate,Lango lipi?,,lˈaŋɡo lˈipi,reuses taxi.we-need-the-east-gate-not-the-south-gate's lango,2,sw-agent-v1;in-pack-neighbour=taxi.we-need-the-east-gate-not-the-south-gate;ipa=espeak
+air-travel.where-is-the-security-check,Ukaguzi wa usalama uko wapi?,,ˌukaɡˈuzi wa ˌusalˈama ˈuko wˈapi,security screening; sw.wikipedia.org's own article uses usalama for airport security,2,sw-agent-v1;src=sw.wikipedia.org Uwanja_wa_ndege;ipa=espeak
+air-travel.my-luggage-did-not-arrive,Mizigo yangu haijafika,,mizˈiɡo jˈaŋɡu hˌaiɟafˈika,mizigo reused from sw.wikipedia.org's own airport article,2,sw-agent-v1;src=sw.wikipedia.org Uwanja_wa_ndege;ipa=espeak
+air-travel.i-would-like-a-window-seat,Ningependa kiti karibu na dirisha,,nˌiŋɡepˈenda kˈiti karˈibu na dirˈiʃa,dirisha reused from taxi.may-i-open-the-window,2,sw-agent-v1;in-pack-neighbour=taxi.may-i-open-the-window;ipa=espeak
+air-travel.i-would-like-an-aisle-seat,Ningependa kiti karibu na njia,,nˌiŋɡepˈenda kˈiti karˈibu na ɲɟˈia,parallel to the window-seat row,2,sw-agent-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,Unaweza kunipa lifti?,,ˌunawˈeza kunˈipa lˈifti,"lifti, the everyday East African word for a ride; matches taxi.can-you-wait-for-me-here's Unaweza ku-...",2,sw-agent-v1;ipa=espeak
+hitchhiking.where-are-you-going,Unaenda wapi?,,ˌunaˈenda wˈapi,matches introductions.where-are-you-from's Unatoka wapi?,2,sw-agent-v1;in-pack-neighbour=introductions.where-are-you-from;ipa=espeak
+hitchhiking.i-only-need-to-go-to-the-next-town,Nahitaji kufika mji unaofuata tu,,nˌahitˈaɟi kufˈika ˈm̩ɟi ˌunaˌofuˈata tˈu,matches transit-rides.do-i-need-to-transfer's Nahitaji construction,2,sw-agent-v1;in-pack-neighbour=transit-rides.do-i-need-to-transfer;ipa=espeak
+hitchhiking.is-there-room-for-two,Kuna nafasi kwa watu wawili?,,kˈuna nafˈasi kwa wˈatu wawˈili,,2,sw-agent-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,Naweza kulipa mafuta,,nawˈeza kulˈipa mafˈuta,"mafuta, the general oil/fuel word this pack already uses for pork fat; contracted na-, matching taxi.may-i-open-the-window's Naweza",2,sw-agent-v1;in-pack-neighbour=taxi.may-i-open-the-window;ipa=espeak
+hitchhiking.thank-you-for-the-ride,Asante kwa lifti,,asˈante kwa lˈifti,reuses social-basics.thank-you's Asante,2,sw-agent-v1;in-pack-neighbour=social-basics.thank-you;ipa=espeak

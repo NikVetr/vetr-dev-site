@@ -15,3 +15,17 @@ family-intros.this-is-my-husband,આ મારા પતિ છે,,ā mārā pa
 family-intros.this-is-my-wife,આ મારી પત્ની છે,,ā mārī patnī chē,aː maːɾi pʌtni cʰeː,,2,gu-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
 family-intros.this-is-my-son,આ મારો દીકરો છે,,ā mārō dīkarō chē,aː maːɾoː dikʌɾoː cʰeː,,2,gu-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
 family-intros.this-is-my-daughter,આ મારી દીકરી છે,,ā mārī dīkarī chē,aː maːɾi dikʌɾi cʰeː,,2,gu-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+about-me.i-am-a-student,હું વિદ્યાર્થી છું,,huṁ vidyārthī chuṁ,hũ ʋɪdjaːɾtʰi cʰũ,"m; વિદ્યાર્થિની for a woman, see variants.csv",2,gu-agent-v1;ipa=espeak
+about-me.i-am-retired,હું નિવૃત્ત થયો છું,,huṁ nivr̥tta thayō chuṁ,hũ nɪʋɾutt tʰʌjoː cʰũ,"m; થઈ for a woman, see variants.csv",2,gu-agent-v1;ipa=espeak
+about-me.i-am-a-teacher,હું શિક્ષક છું,,huṁ śikṣak chuṁ,hũ ʃɪkʃʌk cʰũ,"m; શિક્ષિકા for a woman, see variants.csv",2,gu-agent-v1;ipa=espeak
+about-me.i-am-a-doctor,હું ડૉક્ટર છું,,huṁ ḍôkṭar chuṁ,hũ ɖɔkʈəɾ cʰũ,ડૉક્ટર is an invariant loanword,2,gu-agent-v1;ipa=espeak
+about-me.i-am-a-nurse,હું નર્સ છું,,huṁ nars chuṁ,hũ nʌɾs cʰũ,નર્સ is an invariant loanword,2,gu-agent-v1;ipa=espeak
+about-me.i-am-an-engineer,હું એન્જિનિયર છું,,huṁ ēnjiniyar chuṁ,hũ eːnɟɪnɪjɾ cʰũ,એન્જિનિયર is an invariant loanword,2,gu-agent-v1;ipa=espeak
+about-me.i-work-in-an-office,હું ઑફિસમાં કામ કરું છું,,huṁ ôphisamāṁ kām karuṁ chuṁ,hũ ɔpʰɪsʌmã kaːm kʌɾũ cʰũ,"કરું છું is the simple present, invariant for gender in Gujarati (unlike Hindi's करता/करती) -- only the habitual participle (-તો/-તી) inflects, so no variant here",2,gu-agent-v1;ipa=espeak
+about-me.i-have-my-own-business,મારો પોતાનો વ્યાપાર છે,,mārō pōtānō vyāpār chē,maːɾoː poːtaːnoː ʋjaːpaːɾ cʰeː,"મારો agrees with વ્યાપાર (business, m), not the speaker",2,gu-agent-v1;ipa=espeak
+family-intros.this-is-my-mother,આ મારી મા છે,,ā mārī mā chē,aː maːɾi maː cʰeː,,2,gu-agent-v1;ipa=espeak
+family-intros.this-is-my-father,આ મારા પિતા છે,,ā mārā pitā chē,aː maːɾaː pɪtaː cʰeː,,2,gu-agent-v1;ipa=espeak
+family-intros.this-is-my-brother,આ મારા ભાઈ છે,,ā mārā bhāī chē,aː maːɾaː bʰaːi cʰeː,,2,gu-agent-v1;ipa=espeak
+family-intros.this-is-my-sister,આ મારી બહેન છે,,ā mārī bahēn chē,aː maːɾi bəheːn cʰeː,,2,gu-agent-v1;ipa=espeak
+family-intros.this-is-my-partner,આ મારા જીવનસાથી છે,,ā mārā jīvansāthī chē,aː maːɾaː ɟiːʋənsaːtʰi cʰeː,"જીવનસાથી 'life companion', common-gender (no attested feminine derivational form, unlike મિત્ર/બહેનપણી for friend), kept clear of પાર્ટનર (business partner)",2,gu-agent-v1;ipa=espeak
+family-intros.this-is-my-colleague,આ મારા સહકર્મી છે,,ā mārā sahakarmī chē,aː maːɾaː səhəkʌɾmi cʰeː,,2,gu-agent-v1;ipa=espeak

@@ -13,3 +13,9 @@ speaker_gender=feminine,medical-conditions.i-am-diabetic,أنا مصابة با�
 speaker_gender=feminine,pharmacy-symptoms.i-think-i-have-dengue,أظنّ أنّني مصابة بحمّى الضنك,,aẓunn annanī muṣābah bi-ḥummá al-ḍank,ʔðnn ʔnnnˈiː ms̪ˈaːbt bħmma ʔadˤdˤˈank,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
 speaker_gender=feminine,pharmacy-symptoms.i-think-i-have-malaria,أظنّ أنّني مصابة بالملاريا,,aẓunn annanī muṣābah bi-al-malāriyā,ʔðnn ʔnnnˈiː ms̪ˈaːbt bilmalˈaːɹiːˌaː,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
 speaker_gender=feminine,police-consulate.am-i-under-arrest,هل أنا موقوفة؟,,hal anā mawqūfah?,hˈal ˈana mˈuːqwft,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-student,أنا طالبة,,anā ṭālibah,ˈana t̪ˈaːlbt,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,about-me.i-am-retired,أنا متقاعدة,,anā mutaqāʿidah,ˈana mtqˈaːʕdt,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-teacher,أنا معلّمة,,anā muʿallimah,ˈana mʕllmt,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-doctor,أنا طبيبة,,anā ṭabībah,ˈana t̪bˈiːbt,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-nurse,أنا ممرّضة,,anā mumarriḍah,ˈana mmrrdˤt,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,about-me.i-am-an-engineer,أنا مهندسة,,anā muhandisah,ˈana mhndst,,2,ar-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak

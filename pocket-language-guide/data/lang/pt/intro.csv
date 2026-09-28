@@ -15,3 +15,17 @@ family-intros.this-is-my-husband,Este é o meu marido,Este é o meu esposo,ˌest
 family-intros.this-is-my-wife,Esta é a minha mulher,Esta é a minha esposa,ˌɛstæ ɛ a mˌiɲæ muljˈɛr,,2,pt-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
 family-intros.this-is-my-son,Este é o meu filho,,ˌestʃy ɛ ʊ meʊ fˈiljʊ,,2,pt-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
 family-intros.this-is-my-daughter,Esta é a minha filha,,ˌɛstæ ɛ a mˌiɲæ fˈiljæ,,2,pt-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+about-me.i-am-a-student,Sou estudante,,sow ˌestudˈɐ̃ŋtʃy,,2,pt-about-travel-v1;ipa=espeak
+about-me.i-am-retired,Estou reformado,Estou aposentado,estˌow xˌefoɾəmˈadʊ,,2,pt-about-travel-v1;ipa=espeak
+about-me.i-am-a-teacher,Sou professor,,sow prˌofesˈor,,2,pt-about-travel-v1;ipa=espeak
+about-me.i-am-a-doctor,Sou médico,,sow mˈɛdʒikʊ,,2,pt-about-travel-v1;ipa=espeak
+about-me.i-am-a-nurse,Sou enfermeiro,,sow ˌeɪŋfeɾəmˈeɪɾʊ,,2,pt-about-travel-v1;ipa=espeak
+about-me.i-am-an-engineer,Sou engenheiro,,sow ˌeɪŋʒeɲˈeɪɾʊ,,2,pt-about-travel-v1;ipa=espeak
+about-me.i-work-in-an-office,Trabalho num escritório,,trˌabˈaljʊ nũŋ ˌeskritˈɔɾjʊ,,2,pt-about-travel-v1;ipa=espeak
+about-me.i-have-my-own-business,Tenho o meu próprio negócio,,tˌeɲʊ ʊ meʊ prˈɔprjʊ nˌeɡˈɔsjʊ,,2,pt-about-travel-v1;ipa=espeak
+family-intros.this-is-my-mother,Esta é a minha mãe,,ˌɛstæ ɛ a mˌiɲæ mˈɐ̃y,,2,pt-about-travel-v1;ipa=espeak
+family-intros.this-is-my-father,Este é o meu pai,,ˌestʃy ɛ ʊ meʊ pˈaɪ,,2,pt-about-travel-v1;ipa=espeak
+family-intros.this-is-my-brother,Este é o meu irmão,,ˌestʃy ɛ ʊ meʊ iɾəmˈɐ̃ʊ̃,,2,pt-about-travel-v1;ipa=espeak
+family-intros.this-is-my-sister,Esta é a minha irmã,,ˌɛstæ ɛ a mˌiɲæ iɾəmˈɐ̃,,2,pt-about-travel-v1;ipa=espeak
+family-intros.this-is-my-partner,Este é o meu companheiro,Esta é a minha companheira,ˌestʃy ɛ ʊ meʊ kˌompɐ̃ɲˈeɪɾʊ,,2,pt-about-travel-v1;ipa=espeak
+family-intros.this-is-my-colleague,Este é o meu colega,Esta é a minha colega,ˌestʃy ɛ ʊ meʊ kˌolˈɛɡæ,,2,pt-about-travel-v1;ipa=espeak

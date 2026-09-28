@@ -64,3 +64,6 @@ trail-landmarks.end,loppu,,lˈoppu,,2,fi-agent-v1;ipa=espeak
 trail-landmarks.elevation,korkeus merenpinnasta,,kˈorkeus mˈerempˌinnasta,,2,fi-agent-v1;ipa=espeak
 trail-landmarks.sunset,auringonlasku,,ˈauriŋŋˌonlasku,,2,fi-agent-v1;ipa=espeak
 trail-landmarks.water-point,vedenottopaikka,,vˈedenˌottopˌaikka,,2,fi-agent-v1;ipa=espeak
+outdoors.can-we-camp-here,Voimmeko leiriytyä tässä?,,vˈoimmeko lˈeiriytˌyæ tˈæssæ,,2,fi-agent-v1;ipa=espeak
+outdoors.is-it-safe-to-swim-here,Onko tässä turvallista uida?,,ˈoŋko tˈæssæ tˈurvallˌista ˈuida,,2,fi-agent-v1;ipa=espeak
+outdoors.are-there-dangerous-animals-here,Onko täällä vaarallisia eläimiä?,,ˈoŋko tˈæːllæ vˈaːrallˌisia ˈelæimˌiæ,,2,fi-agent-v1;ipa=espeak

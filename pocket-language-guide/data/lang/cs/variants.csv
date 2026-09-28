@@ -32,3 +32,10 @@ speaker_gender=feminine,transit-rides.i-went-past-my-stop,Přejela jsem svou zas
 speaker_gender=feminine,border-customs.i-am-a-tourist,Jsem turistka,,jsem tˈuristka,,2,cs-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
 speaker_gender=feminine,pronouns-verbs.would-like,chtěla bych,,xcˈela bix,,2,cs-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
 speaker_gender=feminine,kind-words.i-had-a-wonderful-time,Měla jsem se tu skvěle.,,mɲˈela jsem se tˈu skvjˈele,,2,cs-kind-words-v1;rule=speaker-gender-agreement;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-student,Jsem studentka,,jsem stˈudentka,,2,cs-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-teacher,Jsem učitelka,,jsem ˈutʃitˌelka,,2,cs-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-doctor,Jsem lékařka,,jsem lˈeːkar̝ka,,2,cs-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-nurse,Jsem zdravotní sestra,,jsem zdrˈavotɲiː sˈestra,,2,cs-variants-v1;rule=role-noun-has-feminine-derivational-suffix;source=ujc.cas.cz;ipa=espeak
+speaker_gender=feminine,about-me.i-am-an-engineer,Jsem inženýrka,,jsem ˈinʒenˌiːrka,,2,cs-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,air-travel.i-would-like-a-window-seat,Chtěla bych místo u okna,,xcˈela bix mˈiːsto ˈu ˈokna,,2,cs-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,air-travel.i-would-like-an-aisle-seat,Chtěla bych místo u uličky,,xcˈela bix mˈiːsto ˈu ˈulitʃki,,2,cs-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak

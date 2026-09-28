@@ -120,3 +120,15 @@ rail-station-words.ticket-validator,自動改札機,改札機,jidō kaisatsuki,d
 common-signs.pork-code,豚肉の隠語,,butaniku no ingo,bɯtaɲikɯ no iɴɡo,,2,pork-code-agent-v1;lppom-mui;ipa=hepburn
 rail-station-words.fare,運賃,,unchin,ɯɴtɕiɴ,,2,fare-agent-v1;in-pack-neighbour;ipa=hepburn
 transit-rides.where-do-i-pay-the-fare,運賃はどこで払いますか？,,unchin wa doko de haraimasu ka?,ɯɴtɕiɴ wa doko de haɾaimasɯ ka,,2,translator-requests-v1;in-pack-neighbour;ipa=hepburn
+air-travel.where-is-check-in,チェックインはどこですか？,,chekkuin wa doko desu ka?,tɕekkɯiɴ wa doko desɯ ka,,2,ANA (ana.co.jp) check-in guidance; Narita Airport (narita-airport.jp) 保安検査 guidance; AIRDO (airdo.jp) 搭乗口 guidance; ja-agent-v1;ipa=hepburn
+air-travel.which-gate,何番ゲートですか？,,nanban gēto desu ka?,naɴbaɴ ɡeːto desɯ ka,,2,ja-agent-v1;ipa=hepburn
+air-travel.where-is-the-security-check,保安検査場はどこですか？,,hoan kensajō wa doko desu ka?,hoaɴ keɴsadʑoː wa doko desɯ ka,,2,ANA (ana.co.jp) check-in guidance; Narita Airport (narita-airport.jp) 保安検査 guidance; AIRDO (airdo.jp) 搭乗口 guidance; ja-agent-v1;ipa=hepburn
+air-travel.my-luggage-did-not-arrive,荷物が届いていません,,nimotsu ga todoiteimasen,ɲimotsɯ ɡa todoiteimaseɴ,,2,ja-agent-v1;ipa=hepburn
+air-travel.i-would-like-a-window-seat,窓側の席をお願いします,,madogawa no seki o onegaishimasu,madoɡawa no seki o oneɡaiɕimasɯ,,2,ja-agent-v1;ipa=hepburn
+air-travel.i-would-like-an-aisle-seat,通路側の席をお願いします,,tsūrogawa no seki o onegaishimasu,tsɯːɾoɡawa no seki o oneɡaiɕimasɯ,,2,ja-agent-v1;ipa=hepburn
+hitchhiking.can-you-give-me-a-ride,乗せてもらえますか？,,nosete moraemasu ka?,nosete moɾaemasɯ ka,,2,ja-agent-v1;ipa=hepburn
+hitchhiking.where-are-you-going,どこまで行きますか？,,doko made ikimasu ka?,doko made ikimasɯ ka,,2,ja-agent-v1;ipa=hepburn
+hitchhiking.i-only-need-to-go-to-the-next-town,次の町まででいいです,,tsugi no machi made de ii desu,tsɯɡi no matɕi made de iː desɯ,,2,ja-agent-v1;ipa=hepburn
+hitchhiking.is-there-room-for-two,二人乗れますか？,,futari noremasu ka?,ɸɯtaɾi noɾemasɯ ka,,2,ja-agent-v1;ipa=hepburn
+hitchhiking.i-can-pay-for-fuel,ガソリン代は払います,,gasorindai wa haraimasu,ɡasoɾiɴdai wa haɾaimasɯ,,2,ja-agent-v1;ipa=hepburn
+hitchhiking.thank-you-for-the-ride,乗せてくれてありがとうございます,,nosete kurete arigatō gozaimasu,nosete kɯɾete aɾiɡatoː ɡozaimasɯ,,2,ja-agent-v1;ipa=hepburn

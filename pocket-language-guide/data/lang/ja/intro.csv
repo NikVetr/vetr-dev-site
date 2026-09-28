@@ -15,3 +15,17 @@ family-intros.this-is-my-husband,こちらは夫です,,kochira wa otto desu,kot
 family-intros.this-is-my-wife,こちらは妻です,,kochira wa tsuma desu,kotɕiɾa wa tsɯma desɯ,,2,ja-agent-v1;split-from=this-is-my-husband-wife;ipa=hepburn
 family-intros.this-is-my-son,こちらは息子です,,kochira wa musuko desu,kotɕiɾa wa mɯsɯko desɯ,,2,ja-agent-v1;split-from=this-is-my-daughter-son;ipa=hepburn
 family-intros.this-is-my-daughter,こちらは娘です,,kochira wa musume desu,kotɕiɾa wa mɯsɯme desɯ,,2,ja-agent-v1;split-from=this-is-my-daughter-son;ipa=hepburn
+about-me.i-am-a-student,学生です,,gakusei desu,ɡakɯsei desɯ,,2,ja-agent-v1;ipa=hepburn
+about-me.i-am-retired,退職しました,,taishoku shimashita,taiɕokɯ ɕimaɕita,,2,ja-agent-v1;ipa=hepburn
+about-me.i-am-a-teacher,教師です,,kyōshi desu,kjoːɕi desɯ,"教師 avoids self-describing with the honorific 先生, which is how a teacher is addressed by others, not how they refer to their own occupation",2,ja-agent-v1;ipa=hepburn
+about-me.i-am-a-doctor,医者です,,isha desu,iɕa desɯ,,2,ja-agent-v1;ipa=hepburn
+about-me.i-am-a-nurse,看護師です,,kangoshi desu,kaɴɡoɕi desɯ,看護師 is the gender-neutral term mandated since the 2002 renaming of 看護婦 (female-only),2,ja-agent-v1;ipa=hepburn
+about-me.i-am-an-engineer,エンジニアです,,enjinia desu,eɴdʑiɲia desɯ,,2,ja-agent-v1;ipa=hepburn
+about-me.i-work-in-an-office,会社員です,,kaishain desu,kaiɕaiɴ desɯ,"'company employee' -- the ordinary Japanese self-description for office/white-collar work, more idiomatic than a literal 'I work in an office'",2,ja-agent-v1;ipa=hepburn
+about-me.i-have-my-own-business,自営業です,,jieigyō desu,dʑieiɡjoː desɯ,'self-employed' -- the standard single-word self-description,2,ja-agent-v1;ipa=hepburn
+family-intros.this-is-my-mother,こちらは母です,,kochira wa haha desu,kotɕiɾa wa haha desɯ,"母, the humble word for one's own mother, not お母さん -- matching this pack's own this-is-my-husband row (夫, not ご主人)",2,ja-agent-v1;ipa=hepburn
+family-intros.this-is-my-father,こちらは父です,,kochira wa chichi desu,kotɕiɾa wa tɕitɕi desɯ,"父, the humble word for one's own father, not お父さん",2,ja-agent-v1;ipa=hepburn
+family-intros.this-is-my-brother,こちらは兄です,こちらは弟です,kochira wa ani desu,kotɕiɾa wa aɲi desɯ,elder brother (兄 is also the humble self-reference form); text_alt 弟 is the younger-brother word -- Japanese marks relative age and has no sibling term unmarked for it,2,ja-agent-v1;ipa=hepburn
+family-intros.this-is-my-sister,こちらは姉です,こちらは妹です,kochira wa ane desu,kotɕiɾa wa ane desɯ,elder sister (姉 is also the humble self-reference form); text_alt 妹 is the younger-sister word,2,ja-agent-v1;ipa=hepburn
+family-intros.this-is-my-partner,こちらはパートナーです,,kochira wa pātonā desu,kotɕiɾa wa paːtonaː desɯ,"パートナー is the gender-neutral term used in Japan's municipal partnership-registry systems (パートナーシップ制度), avoiding 恋人's romance-only reading and 主人/嫁's marriage-only one",2,ja-agent-v1;ipa=hepburn
+family-intros.this-is-my-colleague,こちらは同僚です,,kochira wa dōryō desu,kotɕiɾa wa doːɾjoː desɯ,,2,ja-agent-v1;ipa=hepburn

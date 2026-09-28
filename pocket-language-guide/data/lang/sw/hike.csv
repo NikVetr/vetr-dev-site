@@ -64,3 +64,6 @@ trail-landmarks.end,Mwisho,,mwˈiʃo,,2,sw-agent-v1;ipa=espeak
 trail-landmarks.elevation,Mwinuko,,mwinˈuko,,2,sw-agent-v1;ipa=espeak
 trail-landmarks.sunset,Machweo,,matʃwˈeo,,2,sw-agent-v1;ipa=espeak
 trail-landmarks.water-point,Mahali pa maji,Chemchemi,mahˈali pa mˈaɟi,,2,sw-agent-v1;ipa=espeak
+outdoors.can-we-camp-here,"Je, tunaweza kupiga kambi hapa?",,"ɟˈe, tˌunawˈeza kupˈiɡa kˈambi hˈapa",kupiga kambi = to pitch camp,2,sw-agent-v1;ipa=espeak
+outdoors.is-it-safe-to-swim-here,"Je, ni salama kuogelea hapa?",,"ɟˈe, ni salˈama kˌuoɡelˈea hˈapa",,2,sw-agent-v1;ipa=espeak
+outdoors.are-there-dangerous-animals-here,"Je, kuna wanyama hatari hapa?",,"ɟˈe, kˈuna waɲˈama hatˈari hˈapa",,2,sw-agent-v1;ipa=espeak

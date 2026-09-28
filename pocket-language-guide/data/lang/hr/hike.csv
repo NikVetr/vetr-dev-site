@@ -64,3 +64,6 @@ trail-landmarks.end,kraj,,krˈaj,,2,hr-agent-v1;ipa=espeak
 trail-landmarks.elevation,nadmorska visina,,nadmorska visina,,2,hr-agent-v1;ipa=espeak
 trail-landmarks.sunset,zalazak sunca,,zalazak sˈuntsa,,2,hr-agent-v1;ipa=espeak
 trail-landmarks.water-point,izvor vode,,ˈizvor vˈode,,2,hr-agent-v1;ipa=espeak
+outdoors.can-we-camp-here,Možemo li ovdje kampirati?,,moʒemo li ˈovdje kampirati,,2,hr-agent-v1;ipa=espeak
+outdoors.is-it-safe-to-swim-here,Je li ovdje sigurno za plivanje?,,je li ˈovdje siɡurno zˈa plivaɲe,,2,hr-agent-v1;ipa=espeak
+outdoors.are-there-dangerous-animals-here,Ima li ovdje opasnih životinja?,,ima li ˈovdje opasnix ʒivotiɲa,,2,hr-agent-v1;ipa=espeak

@@ -120,3 +120,15 @@ place-words.scenic-area,zonă panoramică,,zˈonə pˌanoɾamˈikə,,1,reader-gl
 rail-station-words.maglev,maglev,tren cu levitație magnetică,maɡlˈev,,1,reader-gloss-v1;ipa=espeak
 common-signs.pork-code,coduri pentru carne de porc,,kodˈurʲ pˌentru kˈarne de pˈork,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,Unde se plătește călătoria?,,ˈunde se plətˈeʃte kˌələtˈoɾja,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+air-travel.where-is-check-in,Unde este check-in-ul?,,ˈunde jˌeste kˈekkinul,,2,ro-about-travel-v1;ipa=espeak
+air-travel.which-gate,Care este poarta de îmbarcare?,,kˌaɾe jˌeste pˈɔarta de ˌɨmbarkˈaɾe,,2,ro-about-travel-v1;ipa=espeak
+air-travel.where-is-the-security-check,Unde este controlul de securitate?,,ˈunde jˌeste kontrˈolul de sˌekuɾitˈate,,2,ro-about-travel-v1;ipa=espeak
+air-travel.my-luggage-did-not-arrive,Bagajul meu nu a ajuns,,baɡˈaʒul mˌeu nu a aʒˈuns,,2,ro-about-travel-v1;ipa=espeak
+air-travel.i-would-like-a-window-seat,Aș vrea un loc la fereastră,,ˈaʃ vrˈea un lˈok la feɾˈeastrə,,2,ro-about-travel-v1;ipa=espeak
+air-travel.i-would-like-an-aisle-seat,Aș vrea un loc la culoar,,ˈaʃ vrˈea un lˈok la kulˈɔar,,2,ro-about-travel-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,Mă puteți duce?,,mə putˌetsʲ dˈutʃe,,2,ro-about-travel-v1;ipa=espeak
+hitchhiking.where-are-you-going,Unde vă duceți?,,ˈunde və dˈutʃetsʲ,,2,ro-about-travel-v1;ipa=espeak
+hitchhiking.i-only-need-to-go-to-the-next-town,Trebuie să ajung doar în orașul următor,,trˈebwiˌe sə aʒˈuŋɡ dˈɔar ɨn oɾˈaʃul ˌurmətˈor,,2,ro-about-travel-v1;ipa=espeak
+hitchhiking.is-there-room-for-two,Este loc pentru doi?,,jˌeste lˈok pˌentru dˈoj,,2,ro-about-travel-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,Pot plăti benzina,,pot plətʲˈi benzˈina,,2,ro-about-travel-v1;ipa=espeak
+hitchhiking.thank-you-for-the-ride,Mulțumesc pentru drum,,mˌultsumˈesk pˌentru drˈum,,2,ro-about-travel-v1;ipa=espeak

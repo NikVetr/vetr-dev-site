@@ -120,3 +120,15 @@ transit-rides.do-i-need-to-validate,کیا ٹکٹ پنچ کرانا پڑے گا�
 common-signs.pork-code,تختی پر سؤر کا کوڈ,,takhtī par su’ar kā koḍ,tˈʌxtˌiː pˈʌɾ səˈoːɾ kaː kˈoːɖ,,2,ur-agent-v1;ipa=espeak
 rail-station-words.fare,کرایہ,,kirāya,kˌəɾaːjˈaa,,2,ur-agent-v1;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,کرایہ کہاں دینا ہے؟,,kirāya kahāñ denā hai?,kˌəɾaːjˈaa kˈʌhãː dˈeːnaː hɛ,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+air-travel.where-is-check-in,چیک ان کہاں ہے؟,,chek in kahāñ hai?,cˈeːk ɪn kˈʌhãː hɛ,,2,ur-agent-v1;ipa=espeak
+air-travel.which-gate,کون سا گیٹ؟,,kaun sā geṭ?,kˈoːn sˈaː ɡˈeːʈ,,2,ur-agent-v1;ipa=espeak
+air-travel.where-is-the-security-check,سیکیورٹی چیک کہاں ہے؟,,sikyorṭī chek kahāñ hai?,sˌeːkeːˈoːɾʈi cˈeːk kˈʌhãː hɛ,,2,ur-agent-v1;ipa=espeak
+air-travel.my-luggage-did-not-arrive,میرا سامان نہیں پہنچا,,merā sāmān nahīñ pahuñcā,mˈeːɾaː saːmˈaːn nahˈĩː pahˈʊncaː,,2,ur-agent-v1;ipa=espeak
+air-travel.i-would-like-a-window-seat,مجھے کھڑکی والی سیٹ چاہیے,,mujhe khiṛkī wālī seat chāhiye,mˌʊɟʰeː kʰˈɪɽki ʋˈaːli sˈeːʈ cˈaːhjeː,"chāhiye (is wanted) does not inflect for the speaker's gender, unlike سکتا/سکتی",2,ur-agent-v1;ipa=espeak
+air-travel.i-would-like-an-aisle-seat,مجھے راستے والی سیٹ چاہیے,,mujhe rāste wālī seat chāhiye,mˌʊɟʰeː ɾˈaːstˌeː ʋˈaːli sˈeːʈ cˈaːhjeː,,2,ur-agent-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,کیا آپ مجھے لفٹ دے سکتے ہیں؟,,kyā āp mujhe lift de sakte haiñ?,kjˈaː ˌaːp mˌʊɟʰeː lˈɪfʈ dˈeː sˈʌktˌeː hẽ,"addressed to the driver in the masculine, as the pack's own taxi rows already are (سکتے ہیں)",2,ur-agent-v1;ipa=espeak
+hitchhiking.where-are-you-going,آپ کہاں جا رہے ہیں؟,,āp kahāñ jā rahe haiñ?,ˌaːp kˈʌhãː ɟˈaː ɾˈʌheː hẽ,,2,ur-agent-v1;ipa=espeak
+hitchhiking.i-only-need-to-go-to-the-next-town,مجھے صرف اگلے شہر تک جانا ہے,,mujhe sirf agle shahar tak jānā hai,mˌʊɟʰeː sˈɪɾf ˈaɡlˌeː ʃˈɛhɛɾ tˈʌk ɟˈaːnaː hɛ,jānā hai (need to go) does not inflect for the speaker's gender,2,ur-agent-v1;ipa=espeak
+hitchhiking.is-there-room-for-two,کیا دو لوگوں کے لیے جگہ ہے؟,,kyā do logoñ ke liye jagah hai?,kjˈaː dˈoː lˈoːɡõː keː lˈiːeː ɟˈʌɡˌa hɛ,,2,ur-agent-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,میں پیٹرول کے پیسے دے سکتا ہوں,,maiñ peṭrol ke paise de saktā hūñ,mˈẽ pˌeːʈɾˈoːl keː pˈeːseː dˈeː sˈʌktˌaː hũː,"peṭrol is the word Pakistani drivers use; masculine speaker, a woman says سکتی (saktī)",2,ur-agent-v1;ipa=espeak
+hitchhiking.thank-you-for-the-ride,لفٹ دینے کا شکریہ,,lift dene kā shukriya,lˈɪfʈ dˈeːneː kaː ʃʊkɾˈiːa,"thanks for the giving of a lift -- a nominal construction, so it carries no speaker gender",2,ur-agent-v1;ipa=espeak

@@ -15,3 +15,17 @@ family-intros.this-is-my-wife,Bu karım.,,bʊ kˈaɾɯm,,2,tr-agent-v1;ipa=espea
 family-intros.this-is-my-son,Bu oğlum.,,bʊ ˈoːlʊm,,2,tr-agent-v1;ipa=espeak
 family-intros.this-is-my-daughter,Bu kızım.,,bʊ kˈɯzɯm,,2,tr-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,Yalnız seyahat ediyorum.,,jˈaɫnɯz sejahˈat edˈijoɾʊm,,2,tr-agent-v1;ipa=espeak
+about-me.i-am-a-student,Öğrenciyim.,,œːɾændʒˈijɪm,,2,tr-agent-v1;ipa=espeak
+about-me.i-am-retired,Emekliyim.,,emɛklˈijɪm,,2,tr-agent-v1;ipa=espeak
+about-me.i-am-a-teacher,Öğretmenim.,,œːɾɛtmˈenɪm,,2,tr-agent-v1;ipa=espeak
+about-me.i-am-a-doctor,Doktorum.,,dɔktˈoɾʊm,,2,tr-agent-v1;ipa=espeak
+about-me.i-am-a-nurse,Hemşireyim.,,hæmʃiɾejˈɪm,,2,tr-agent-v1;ipa=espeak
+about-me.i-am-an-engineer,Mühendisim.,,myhændˈisɪm,,2,tr-agent-v1;ipa=espeak
+about-me.i-work-in-an-office,Ofiste çalışıyorum.,,ofɪstˈɛ tʃaɫɯʃˈɯjoɾʊm,,2,tr-agent-v1;ipa=espeak
+about-me.i-have-my-own-business,Kendi işim var.,,kændˈɪ ˈiʃɪm vˈar,,2,tr-agent-v1;ipa=espeak
+family-intros.this-is-my-mother,Bu annem.,,bʊ annˈæm,,2,tr-agent-v1;ipa=espeak
+family-intros.this-is-my-father,Bu babam.,,bʊ babˈam,,2,tr-agent-v1;ipa=espeak
+family-intros.this-is-my-brother,Bu erkek kardeşim.,,bʊ ɛrkˈɛk kardˈeʃɪm,erkek kardeş = brother; kardeş alone is gender-neutral sibling,2,tr-agent-v1;ipa=espeak
+family-intros.this-is-my-sister,Bu kız kardeşim.,,bʊ kˈɯz kardˈeʃɪm,kız kardeş = sister,2,tr-agent-v1;ipa=espeak
+family-intros.this-is-my-partner,Bu partnerim.,,bʊ partnˈeɾɪm,"partner (loanword, now standard in this sense): eşim already names the spouse in introductions.this-is-my-husband-wife, and sevgilim skews to boyfriend/girlfriend; partner is neutral about marital status",2,tr-agent-v1;ipa=espeak
+family-intros.this-is-my-colleague,Bu iş arkadaşım.,,bʊ ˈɪʃ arkadˈaʃɯm,"iş arkadaşım = work friend, distinct from arkadaşım already used for introductions.this-is-my-friend",2,tr-agent-v1;ipa=espeak

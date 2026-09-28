@@ -64,3 +64,6 @@ trail-landmarks.end,अंत,,aṁt,ˈʌnt,,2,hi-agent-v1;ipa=espeak
 trail-landmarks.elevation,ऊँचाई,,ūṁcāī,uncˈaːi,,2,hi-agent-v1;ipa=espeak
 trail-landmarks.sunset,सूर्यास्त,,sūryāst,suːrjˈaːst,,2,hi-agent-v1;ipa=espeak
 trail-landmarks.water-point,पेयजल,पानी की जगह,peyjal,pˈeːjəɟˌəl,,2,hi-agent-v1;ipa=espeak
+outdoors.can-we-camp-here,क्या हम यहाँ कैंप कर सकते हैं?,,kyā ham yahāṁ kaimp kar sakte haiṁ?,kjaː hˌəm jˈʌhã kˈɛ̃p kˈʌɾ sˈʌktˌeː hɛ̃,subject is 'we' -- no speaker_gender variant per speaker-variants.md,2,hi-agent-v1;ipa=espeak
+outdoors.is-it-safe-to-swim-here,क्या यहाँ तैरना सुरक्षित है?,,kyā yahāṁ tairnā surakṣit hai?,kjaː jˈʌhã tˈɛːɾnˌaː sʊɾˈʌkʃɪt hɛː,,2,hi-agent-v1;ipa=espeak
+outdoors.are-there-dangerous-animals-here,क्या यहाँ खतरनाक जानवर हैं?,,kyā yahāṁ khatarnāk jānvar haiṁ?,kjaː jˈʌhã kʰˌətəɾnˈaːk ɟˈaːnəʋˌəɾ hɛ̃,,2,hi-agent-v1;ipa=espeak

@@ -120,3 +120,15 @@ rail-station-words.ticket-validator,قارئ البطاقات,جهاز التأ�
 common-signs.pork-code,رموز لحم الخنزير,,rumūz laḥm al-khinzīr,rmˈuːz lˈaħm ʔalxˈinziːr,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
 rail-station-words.fare,أجرة,ثمن التذكرة,ujrah,ʔˈudʒɹa,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,أين أدفع الأجرة؟,,ayna adfaʿ al-ujrah?,ʔˈajna ʔdfʕ ʔalʔˈudʒɹa,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+air-travel.where-is-check-in,أين تسجيل الوصول؟,,ayna tasjīl al-wuṣūl?,ʔˈajna tˈasdʒiːl ʔalwˈus̪uːl,"tasjīl al-wuṣūl = check-in, the term Gulf carriers' own Arabic-language sites use",2,ar-agent-v1;ipa=espeak
+air-travel.which-gate,أي بوابة؟,,ayy bawwābah?,ʔˈajj bˈawwaːbˌa,"bawwābah = gate, already the pack's word (taxi.we-need-the-east-gate-not-the-south-gate)",2,ar-agent-v1;ipa=espeak
+air-travel.where-is-the-security-check,أين التفتيش الأمني؟,,ayna al-taftīsh al-amnī?,ʔˈajna ʔattˈaftiːʃ ʔalʔˈamniːj,,2,ar-agent-v1;ipa=espeak
+air-travel.my-luggage-did-not-arrive,حقيبتي لم تصل,,ḥaqībatī lam taṣil,ħqˈibtiː lˈam ts̪l,,2,ar-agent-v1;ipa=espeak
+air-travel.i-would-like-a-window-seat,أريد مقعدًا بجانب النافذة,,urīd maqʿadan bijānib al-nāfidhah,ʔɹˈiːd mˈaqʕadˌan bdʒaːmb ʔannˈaːfiðˌa,,2,ar-agent-v1;ipa=espeak
+air-travel.i-would-like-an-aisle-seat,أريد مقعدًا بجانب الممر,,urīd maqʿadan bijānib al-mamarr,ʔɹˈiːd mˈaqʕadˌan bdʒaːmb ʔalmˈamarr,,2,ar-agent-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,هل يمكن أن تأخذني معك؟,,hal yumkin an taʾkhudhanī maʿak?,hˈal jmkˈunna ʔn tʔxðnˈiː mˈaʕak,"addressed to the driver in the masculine, as the pack's own taxi.can-you-wait-for-me-here already is (hal tantaẓirunī huna)",2,ar-agent-v1;ipa=espeak
+hitchhiking.where-are-you-going,إلى أين أنت ذاهب؟,,ilā ayna anta dhāhib?,ʔˈilaː ʔˈajna ʔˈanta ðˈaːhib,,2,ar-agent-v1;ipa=espeak
+hitchhiking.i-only-need-to-go-to-the-next-town,أحتاج فقط الوصول إلى البلدة التالية,,aḥtāj faqaṭ al-wuṣūl ilā al-baldah al-tālīyah,ʔħtˈaːdʒ fˈaqat̪ ʔalwˈus̪uːl ʔˈilaː ʔalbˈalda ʔattaːlˈijjah,,2,ar-agent-v1;ipa=espeak
+hitchhiking.is-there-room-for-two,هل يوجد مكان لشخصين؟,,hal yūjad makān li-shakhṣayn?,hˈal jwdʒd mˈakaːn lʃxs̪ˈiːna,,2,ar-agent-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,يمكنني أن أدفع ثمن البنزين,,yumkinunī an adfaʿ thaman al-banzīn,jmknnˈiː ʔn ʔdfʕ θˈaman ʔalbˈinziːn,"banzīn = petrol, the word drivers use",2,ar-agent-v1;ipa=espeak
+hitchhiking.thank-you-for-the-ride,شكرًا على التوصيلة,,shukran ʿalā al-tawṣīlah,ʃˈukɹan ʕˈalaː ʔattˈuːs̪iːlt,,2,ar-agent-v1;ipa=espeak

@@ -15,3 +15,17 @@ family-intros.this-is-my-wife,זאת אשתי,זֹאת אִשְׁתִּי,zot is
 family-intros.this-is-my-son,זה הבן שלי,זֶה הַבֵּן שֶׁלִּי,ze háben sheli,zˈe hˈaben ʃelˈi,,2,he-agent-v1;ipa=bgn
 family-intros.this-is-my-daughter,זאת הבת שלי,זֹאת הַבַּת שֶׁלִּי,zot habat sheli,zˈot habˈat ʃelˈi,,2,he-agent-v1;ipa=bgn
 introductions.i-am-traveling-alone,אני מטייל לבד,אֲנִי מְטַיֵּיל לְבַד,ani metayel levad,anˈi metajˈel levˈad,a woman says metayelet,2,he-agent-v1;ipa=bgn
+about-me.i-am-a-student,אני סטודנט,אֲנִי סְטוּדֶנְט,ani student,anˈi studˈent,,2,he-agent-v1;ipa=bgn
+about-me.i-am-retired,אני גמלאי,אֲנִי גִּמְלָאִי,ani gimla’i,anˈi ɡimlaˈi,,2,he-agent-v1;ipa=bgn
+about-me.i-am-a-teacher,אני מורה,אֲנִי מוֹרֶה,ani moreh,anˈi moʁˈeh,,2,he-agent-v1;ipa=bgn
+about-me.i-am-a-doctor,אני רופא,אֲנִי רוֹפֵא,ani rofe,anˈi ʁofˈe,,2,he-agent-v1;ipa=bgn
+about-me.i-am-a-nurse,אני אח,אֲנִי אָח,ani aẖ,anˈi ˈax,"אח = male nurse, an extension of ""brother"" (the primary sense); a woman says אחות (achot)",2,he-agent-v1;ipa=bgn
+about-me.i-am-an-engineer,אני מהנדס,אֲנִי מְהַנְדֵּס,ani mehandes,anˈi mehandˈes,,2,he-agent-v1;ipa=bgn
+about-me.i-work-in-an-office,אני עובד במשרד,אֲנִי עוֹבֵד בְּמִשְׂרָד,ani oved bemisrad,anˈi ovˈed bemisʁˈad,,2,he-agent-v1;ipa=bgn
+about-me.i-have-my-own-business,יש לי עסק משלי,יֵשׁ לִי עֵסֶק מִשֶּׁלִּי,yesh li esek misheli,jˈeʃ lˈi esˈek miʃelˈi,,2,he-agent-v1;ipa=bgn
+family-intros.this-is-my-mother,זאת אמא שלי,זֹאת אִמָּא שֶׁלִּי,zot ima sheli,zˈot imˈa ʃelˈi,,2,he-agent-v1;ipa=bgn
+family-intros.this-is-my-father,זה אבא שלי,זֶה אַבָּא שֶׁלִּי,ze aba sheli,zˈe abˈa ʃelˈi,,2,he-agent-v1;ipa=bgn
+family-intros.this-is-my-brother,זה אח שלי,זֶה אָח שֶׁלִּי,ze aẖ sheli,zˈe ˈax ʃelˈi,,2,he-agent-v1;ipa=bgn
+family-intros.this-is-my-sister,זאת אחות שלי,זֹאת אָחוֹת שֶׁלִּי,zot aẖot sheli,zˈot axˈot ʃelˈi,,2,he-agent-v1;ipa=bgn
+family-intros.this-is-my-partner,זה בן הזוג שלי,זֶה בֶּן הַזּוּג שֶׁלִּי,ze ben hazug sheli,zˈe bˈen hazˈuɡ ʃelˈi,"ben/bat zug = partner, the neutral civil-status word for a spouse-or-partner regardless of marriage; of a woman, בת הזוג שלי (bat hazug sheli) -- text_alt here is this row's niqqud, not the third-party-gender alternative, so the feminine is noted here instead, matching introductions.this-is-my-friend's own precedent",2,he-agent-v1;ipa=bgn
+family-intros.this-is-my-colleague,זה עמית שלי,זֶה עָמִית שֶׁלִּי,ze amit sheli,zˈe amˈit ʃelˈi,"of a woman, עמיתה שלי (amita sheli)",2,he-agent-v1;ipa=bgn

@@ -15,3 +15,17 @@ family-intros.this-is-my-husband,นี่สามี,,ni sami,niː˥˩ saː˩�
 family-intros.this-is-my-wife,นี่ภรรยา,,ni phanraya,niː˥˩ pʰan˧jaː˧,,2,th-agent-v1;split-from=this-is-my-husband-wife;ipa=thaig2p
 family-intros.this-is-my-son,นี่ลูกชาย,,ni luk chai,niː˥˩ luːk˥˩tɕʰaːj˧,,2,th-agent-v1;split-from=this-is-my-daughter-son;ipa=thaig2p
 family-intros.this-is-my-daughter,นี่ลูกสาว,,ni luk sao,niː˥˩ luːk˥˩saːw˩˩˦,,2,th-agent-v1;split-from=this-is-my-daughter-son;ipa=thaig2p
+about-me.i-am-a-student,เป็นนักศึกษา,,pen naksueksa,pen˧ nak˦˥sɯk˨˩saː˩˩˦,,2,th-agent-v1;ipa=thaig2p
+about-me.i-am-retired,เกษียณแล้ว,,kasian laeo,ka˨˩sia̯n˩˩˦ lɛːw˦˥,,2,th-agent-v1;ipa=thaig2p
+about-me.i-am-a-teacher,เป็นครู,,pen khru,pen˧ kʰruː˧,,2,th-agent-v1;ipa=thaig2p
+about-me.i-am-a-doctor,เป็นหมอ,,pen mo,pen˧ mɔː˩˩˦,,2,th-agent-v1;ipa=thaig2p
+about-me.i-am-a-nurse,เป็นพยาบาล,,pen phayaban,pen˧ pʰa˦˥jaː˧baːn˧,,2,th-agent-v1;ipa=thaig2p
+about-me.i-am-an-engineer,เป็นวิศวกร,,pen witsawakon,pen˧ wi˦˥sa˨˩kɔː˧,,2,th-agent-v1;ipa=thaig2p
+about-me.i-work-in-an-office,ทำงานออฟฟิศ,,tham ngan opfit,tʰam˧ŋaːn˧ ʔɔːf˦˥fiːt˦˥,,2,th-agent-v1;ipa=thaig2p
+about-me.i-have-my-own-business,มีธุรกิจของตัวเอง,,mi thurakit khong tua-eng,miː˧ tʰu˦˥kit˨˩ kʰɔːŋ˩˩˦ tua̯˧ʔeːŋ˧,,2,th-agent-v1;ipa=thaig2p
+family-intros.this-is-my-mother,นี่แม่,,ni mae,niː˥˩ mɛː˥˩,,2,th-agent-v1;ipa=thaig2p
+family-intros.this-is-my-father,นี่พ่อ,,ni phor,niː˥˩ pʰɔː˥˩,,2,th-agent-v1;ipa=thaig2p
+family-intros.this-is-my-brother,นี่พี่ชาย,นี่น้องชาย,ni phi chai,niː˥˩ pʰiː˥˩tɕʰaːj˧,elder brother; text_alt is the younger-brother word -- Thai marks relative age and has no sibling term unmarked for it,2,th-agent-v1;ipa=thaig2p
+family-intros.this-is-my-sister,นี่พี่สาว,นี่น้องสาว,ni phi sao,niː˥˩ pʰiː˥˩saːw˩˩˦,elder sister; text_alt is the younger-sister word,2,th-agent-v1;ipa=thaig2p
+family-intros.this-is-my-partner,นี่แฟน,,ni faen,niː˥˩ fɛːn˧,,2,"Royal Institute Dictionary (พจนานุกรม ฉบับราชบัณฑิตยสถาน), entry แฟน: 'ผู้เป็นที่ชอบพอรักใคร่, คู่รัก'; th-agent-v1;ipa=thaig2p"
+family-intros.this-is-my-colleague,นี่เพื่อนร่วมงาน,,ni phuean ruam ngan,niː˥˩ pʰɯa̯n˥˩rua̯m˥˩ŋaːn˧,,2,th-agent-v1;ipa=thaig2p

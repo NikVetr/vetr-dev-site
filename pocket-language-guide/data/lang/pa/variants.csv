@@ -25,3 +25,8 @@ speaker_gender=feminine,shopping.i-am-just-looking,ਮੈਂ ਬੱਸ ਦੇਖ
 speaker_gender=feminine,shopping.i-will-take-this,ਮੈਂ ਇਹ ਲੈ ਲੈਂਦੀ ਹਾਂ,,maiṁ ih lai laiṁdī hāṁ,mɛ̃ ɪ˥ lɛ lɛndi hã,,2,pa-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
 speaker_gender=feminine,taxi.i-will-get-off-here,ਮੈਂ ਇੱਥੇ ਉੱਤਰਾਂਗੀ,,maiṁ itthē uttarāṁgī,mɛ̃ ɪttʰe ʊttəɾaŋɡi,,2,pa-variants-v1;rule=future-tense-agrees-with-subject;ipa=espeak
 speaker_gender=feminine,utility-templates.i-am-looking-for,ਮੈਂ {} ਲੱਭ ਰਹੀ ਹਾਂ,,maiṁ {} labbh rahī hāṁ,mɛ̃ {} lʌ˥b ɾəhi hã,,2,pa-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-student,ਮੈਂ ਵਿਦਿਆਰਥਣ ਹਾਂ,,maiṁ vidiārathaṇ hāṁ,mɛ̃ ʋɪdɪaɾətʰəɳ hã,,2,pa-variants-v1;rule=role-noun-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,about-me.i-am-retired,ਮੈਂ ਸੇਵਾਮੁਕਤ ਹੋ ਗਈ ਹਾਂ,,maiṁ sēvāmukat hō gaī hāṁ,mɛ̃ seʋamʊkət ho ɡʌi hã,,2,pa-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-teacher,ਮੈਂ ਅਧਿਆਪਿਕਾ ਹਾਂ,,maiṁ adhiāpikā hāṁ,mɛ̃ ə˥dɪapɪka hã,,2,pa-variants-v1;rule=role-noun-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,about-me.i-work-in-an-office,ਮੈਂ ਦਫ਼ਤਰ ਵਿੱਚ ਕੰਮ ਕਰਦੀ ਹਾਂ,,maiṁ dafatar vicc kaṁm karadī hāṁ,mɛ̃ dʌfətəɾ ʋɪc kʌnm kʌɾədi hã,,2,pa-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,hitchhiking.i-can-pay-for-fuel,ਮੈਂ ਪੈਟਰੋਲ ਲਈ ਪੈਸੇ ਦੇ ਸਕਦੀ ਹਾਂ,,maiṁ paiṭarōl laī paisē dē sakadī hāṁ,mɛ̃ pɛʈəɾol lʌi pɛse de sʌkədi hã,,2,pa-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak

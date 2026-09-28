@@ -15,3 +15,17 @@ family-intros.this-is-my-husband,Đây là chồng tôi,,ɗəɪ˧ laː˨˩ tʃo�
 family-intros.this-is-my-wife,Đây là vợ tôi,,ɗəɪ˧ laː˨˩ vəː˨˩ˀ t̪oj˧,,2,vi-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
 family-intros.this-is-my-son,Đây là con trai tôi,,ɗəɪ˧ laː˨˩ kɔn˧ tʃaːj˧ t̪oj˧,,2,vi-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
 family-intros.this-is-my-daughter,Đây là con gái tôi,,ɗəɪ˧ laː˨˩ kɔn˧ ɣaːj˧˥ t̪oj˧,,2,vi-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+about-me.i-am-a-student,Tôi là sinh viên,,t̪oj˧ laː˨˩ siɲ˧ viɛ̯n˧,"sinh viên (university/college student) rather than học sinh, which specifically means a K-12 pupil in Vietnamese",2,vi-agent-v1;ipa=espeak
+about-me.i-am-retired,Tôi đã nghỉ hưu,,t̪oj˧ ɗaː˧ˀ˥ ŋi˧˩˧ hiw˧,,2,vi-agent-v1;ipa=espeak
+about-me.i-am-a-teacher,Tôi là giáo viên,,t̪oj˧ laː˨˩ zaːw˧˥ viɛ̯n˧,,2,vi-agent-v1;ipa=espeak
+about-me.i-am-a-doctor,Tôi là bác sĩ,,t̪oj˧ laː˨˩ baːc˧˥ si˧ˀ˥,,2,vi-agent-v1;ipa=espeak
+about-me.i-am-a-nurse,Tôi là y tá,,t̪oj˧ laː˨˩ i˧ t̪aː˧˥,,2,vi-agent-v1;ipa=espeak
+about-me.i-am-an-engineer,Tôi là kỹ sư,,t̪oj˧ laː˨˩ ki˧ˀ˥ sy˧,,2,vi-agent-v1;ipa=espeak
+about-me.i-work-in-an-office,Tôi làm việc ở văn phòng,,t̪oj˧ laːm˨˩ viɛ̯c˨˩ˀ əː˧˩˧ van˧ fɔŋ˨˩,,2,vi-agent-v1;ipa=espeak
+about-me.i-have-my-own-business,Tôi tự kinh doanh,,t̪oj˧ t̪y˨˩ˀ kiɲ˧ zwaɲ˧,,2,vi-agent-v1;ipa=espeak
+family-intros.this-is-my-mother,Đây là mẹ tôi,,ɗəɪ˧ laː˨˩ mɛ˨˩ˀ t̪oj˧,"mẹ, the dictionary-standard word (má/mạ are regional)",2,vi-agent-v1;ipa=espeak
+family-intros.this-is-my-father,Đây là cha tôi,,ɗəɪ˧ laː˨˩ tʃaː˧ t̪oj˧,"cha, the dictionary-standard, pan-regional word (bố/ba are regional)",2,vi-agent-v1;ipa=espeak
+family-intros.this-is-my-brother,Đây là anh trai tôi,,ɗəɪ˧ laː˨˩ aɲ˧ tʃaːj˧ t̪oj˧,"Vietnamese has no age-neutral word for brother -- anh trai (older) is the default English-Vietnamese dictionary gloss for the bare word (translate.com, vndic), against em trai (younger); a traveler with a younger brother needs em trai instead",2,vi-agent-v1;src=translate.com brother=anh trai;ipa=espeak
+family-intros.this-is-my-sister,Đây là chị gái tôi,,ɗəɪ˧ laː˨˩ tʃi˨˩ˀ ɣaːj˧˥ t̪oj˧,"chị gái (older), the parallel choice to this-is-my-brother's anh trai; a traveler with a younger sister needs em gái instead",2,vi-agent-v1;ipa=espeak
+family-intros.this-is-my-partner,Đây là người yêu tôi,,ɗəɪ˧ laː˨˩ ŋyə̯j˨˩ iɛ̯w˧ t̪oj˧,người yêu (lit. person [I] love) is gender-neutral and not a business partner (đối tác),2,vi-agent-v1;ipa=espeak
+family-intros.this-is-my-colleague,Đây là đồng nghiệp tôi,,ɗəɪ˧ laː˨˩ ɗoŋ˨˩ ŋiɛ̯p˨˩ˀ t̪oj˧,,2,vi-agent-v1;ipa=espeak

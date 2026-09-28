@@ -8,3 +8,7 @@ speaker_gender=feminine,introductions.i-am-from,હું {} ની છું,,h
 speaker_gender=feminine,introductions.i-am-traveling-alone,હું એકલી પ્રવાસ કરું છું,,huṁ ēkalī pravās karuṁ chuṁ,hũ eːkʌli pɾəʋaːs kʌɾũ cʰũ,,2,gu-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
 speaker_gender=feminine,lost-rescue.i-cannot-get-down,હું નીચે ઊતરી શકતી નથી,,huṁ nīcē ūtarī śakatī nathī,hũ niːceː utʌɾi ʃəkʌti nʌtʰi,,2,gu-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
 speaker_gender=feminine,lost-rescue.i-cannot-walk,હું ચાલી શકતી નથી,,huṁ cālī śakatī nathī,hũ caːli ʃəkʌti nʌtʰi,,2,gu-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-student,હું વિદ્યાર્થિની છું,,huṁ vidyārthinī chuṁ,hũ ʋɪdjaːɾtʰɪni cʰũ,,2,gu-variants-v1;rule=role-noun-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,about-me.i-am-retired,હું નિવૃત્ત થઈ છું,,huṁ nivr̥tta thaī chuṁ,hũ nɪʋɾutt tʰʌi cʰũ,,2,gu-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-teacher,હું શિક્ષિકા છું,,huṁ śikṣikā chuṁ,hũ ʃɪkʃɪkaː cʰũ,,2,gu-variants-v1;rule=role-noun-agrees-with-nominative-subject;ipa=espeak
+speaker_gender=feminine,hitchhiking.i-can-pay-for-fuel,હું પેટ્રોલ માટે પૈસા આપી શકતી છું,,huṁ pēṭrōl māṭē paisā āpī śakatī chuṁ,hũ peːʈɾoːl maːʈeː pɛsaː aːpi ʃəkʌti cʰũ,,2,gu-variants-v1;rule=participle-agrees-with-nominative-subject;ipa=espeak

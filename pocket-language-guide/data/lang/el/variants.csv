@@ -1,3 +1,6 @@
 variant,concept_id,text,text_alt,romanization_elot,ipa,literal,confidence,provenance
 speaker_gender=feminine,emergency-medical.i-am-sick,Είμαι άρρωστη,,Eimai arrosti,ˈime ˈaɾostˌi,,2,el-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
 speaker_gender=feminine,introductions.i-am-traveling-alone,Ταξιδεύω μόνη,,Taxidevo moni,tˌaksiðˈevo mˈoni,,2,el-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-student,Είμαι φοιτήτρια.,,Eimai foititria.,ˈime fitˈitɾiˌa,,2,el-variants-v1;rule=predicate-noun-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-teacher,Είμαι δασκάλα.,,Eimai daskala.,ˈime ðaskˈala,,2,el-variants-v1;rule=predicate-noun-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-nurse,Είμαι νοσοκόμα.,,Eimai nosokoma.,ˈime nˌosokˈoma,,2,el-variants-v1;rule=predicate-noun-agrees-with-speaker;ipa=espeak

@@ -66,3 +66,12 @@ speaker_gender=feminine,sim-data.i-would-like-a-tourist-sim,אני רוצה כר
 speaker_gender=feminine,utility-templates.i-want-to-go-to,אני רוצה להגיע אל {},אֲנִי רוֹצָה לְהַגִּיעַ אֶל {},ani rotsa lehagía‘ el {},anˈi ʁotsˈa lehaɡˈia ˈel {},,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
 speaker_gender=feminine,children.cannot-find-my-child,אני לא מוצאת את הילד שלי,אֲנִי לֹא מוֹצֵאת אֶת הַיֶּלֶד שֶׁלִּי,ani lo motset et hayéled sheli,anˈi lˈo motsˈet ˈet hajˈeled ʃelˈi,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
 speaker_gender=feminine,slang.i-love-it,אני מתה על זה,אֲנִי מֵתָה עַל זֶה,ani meta ‘al ze,anˈi metˈa ˈal zˈe,,2,he-variants-v1;rule=stative-adjective-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,about-me.i-am-a-teacher,אני מורה,אֲנִי מוֹרָה,ani mora,anˈi moʁˈa,,2,he-variants-v1;rule=final-heh-benoni-shares-spelling-with-masculine;ipa=bgn
+speaker_gender=feminine,about-me.i-am-a-doctor,אני רופאה,אֲנִי רוֹפְאָה,ani rofa,anˈi ʁofˈa,,2,he-variants-v1;rule=nisba-adjective-or-role-noun-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,about-me.i-am-a-nurse,אני אחות,אֲנִי אָחוֹת,ani aẖot,anˈi axˈot,,2,he-variants-v1;rule=role-noun-is-a-different-word-for-each-sex;ipa=bgn
+speaker_gender=feminine,about-me.i-am-an-engineer,אני מהנדסת,אֲנִי מְהַנְדֶּסֶת,ani mehandéset,anˈi mehandˈeset,,2,he-variants-v1;rule=nisba-adjective-or-role-noun-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,about-me.i-work-in-an-office,אני עובדת במשרד,אֲנִי עוֹבֶדֶת בְּמִשְׂרָד,ani ovédet bemisrad,anˈi ovˈedet bemisʁˈad,,2,he-variants-v1;rule=benoni-verb-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,hitchhiking.i-only-need-to-go-to-the-next-town,אני צריכה להגיע רק לעיר הבאה,אֲנִי צְרִיכָה לְהַגִּיעַ רַק לָעִיר הַבָּאָה,ani tsrikha lehagi‘a raq la‘ir haba’a,anˈi tsʁixˈa lehaɡiˈa ʁˈak laˈiʁ habaˈa,,2,he-variants-v1;rule=stative-adjective-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,hitchhiking.i-can-pay-for-fuel,אני יכולה לשלם על הדלק,אֲנִי יְכוֹלָה לְשַׁלֵּם עַל הַדֶּלֶק,ani yekhola leshalem al hadeleq,anˈi jexolˈa leʃalˈem ˈal hadelˈek,,2,he-variants-v1;rule=stative-adjective-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,about-me.i-am-a-student,אני סטודנטית,אֲנִי סְטוּדֶנְטִית,ani studentit,anˈi studentˈit,,2,he-variants-v1;rule=nisba-adjective-or-role-noun-agrees-in-gender;ipa=bgn
+speaker_gender=feminine,about-me.i-am-retired,אני גמלאית,אֲנִי גִּמְלָאִית,ani gimla’it,anˈi ɡimlaˈit,,2,he-variants-v1;rule=nisba-adjective-or-role-noun-agrees-in-gender;ipa=bgn

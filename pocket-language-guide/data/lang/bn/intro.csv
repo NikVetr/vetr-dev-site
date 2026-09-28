@@ -15,3 +15,17 @@ family-intros.this-is-my-husband,ইনি আমার স্বামী,,ini 
 family-intros.this-is-my-wife,ইনি আমার স্ত্রী,,ini āmāra strī,ˌini ˌamaɾ stɾˈi,,2,bn-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
 family-intros.this-is-my-son,এ আমার ছেলে,,e āmāra chele,e ˌamaɾ tʃʰˈele,,2,bn-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
 family-intros.this-is-my-daughter,এ আমার মেয়ে,,e āmāra meẏe,e ˌamaɾ mˈee,,2,bn-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+about-me.i-am-a-student,আমি শিক্ষার্থী,,āmi śikṣārthī,ˌami ʃˈikʰkʰaɾtʰˌi,"শিক্ষার্থী is the common-gender word for student, used in preference to the ছাত্র/ছাত্রী pair since bn declares no speaker_gender axis",2,bn-agent-v1;ipa=espeak
+about-me.i-am-retired,আমি অবসরপ্রাপ্ত,,āmi abasaraprāpta,ˌami ˈɔbɔʃˌɔɾɔpɾˌapto,,2,bn-agent-v1;ipa=espeak
+about-me.i-am-a-teacher,আমি শিক্ষক,,āmi śikṣaka,ˌami ʃˈikʰkʰɔk,শিক্ষক used generically; Bengali has no obligatory agreement to violate,2,bn-agent-v1;ipa=espeak
+about-me.i-am-a-doctor,আমি ডাক্তার,,āmi ḍāktāra,ˌami ɖˈaktaɾ,,2,bn-agent-v1;ipa=espeak
+about-me.i-am-a-nurse,আমি নার্স,,āmi nārsa,ˌami nˈarʃɔ,,2,bn-agent-v1;ipa=espeak
+about-me.i-am-an-engineer,আমি ইঞ্জিনিয়ার,,āmi iñjiniẏāra,ˌami ˈinɟinˌiaɾ,,2,bn-agent-v1;ipa=espeak
+about-me.i-work-in-an-office,আমি অফিসে কাজ করি,,āmi aphise kāja kari,ˌami ˈofiʃˌe kˈaɟ kˈoɾi,,2,bn-agent-v1;ipa=espeak
+about-me.i-have-my-own-business,আমার নিজের ব্যবসা আছে,,āmāra nijera byabasā āche,ˌamaɾ nˈiɟeɾ bˈæbɔʃˌa ˈatʃʰe,,2,bn-agent-v1;ipa=espeak
+family-intros.this-is-my-mother,ইনি আমার মা,,ini āmāra mā,ˌini ˌamaɾ mˈa,,2,bn-agent-v1;ipa=espeak
+family-intros.this-is-my-father,ইনি আমার বাবা,,ini āmāra bābā,ˌini ˌamaɾ bˈaba,,2,bn-agent-v1;ipa=espeak
+family-intros.this-is-my-brother,ইনি আমার ভাই,,ini āmāra bhāi,ˌini ˌamaɾ bʰˈai,,2,bn-agent-v1;ipa=espeak
+family-intros.this-is-my-sister,ইনি আমার বোন,,ini āmāra bona,ˌini ˌamaɾ bˈon,,2,bn-agent-v1;ipa=espeak
+family-intros.this-is-my-partner,ইনি আমার জীবনসঙ্গী,,ini āmāra jībanasaṅgī,ˌini ˌamaɾ ɟˈibɔnˌɔʃɔŋɡˌi,"জীবনসঙ্গী 'life companion', common-gender, not পার্টনার (business partner)",2,bn-agent-v1;ipa=espeak
+family-intros.this-is-my-colleague,ইনি আমার সহকর্মী,,ini āmāra sahakarmī,ˌini ˌamaɾ ʃˈɔhɔkˌɔrmi,,2,bn-agent-v1;ipa=espeak

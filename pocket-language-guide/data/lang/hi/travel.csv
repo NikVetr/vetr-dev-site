@@ -120,3 +120,15 @@ rail-station-words.maglev,मैग्लेव,चुंबकीय रेल,
 common-signs.pork-code,सूअर के कोड,,sūar ke koḍ,sˈuːəɾ keː kˈoːɖ,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
 rail-station-words.fare,किराया,,kirāyā,kɪɾˈaːjaː,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,किराया कहाँ देना है?,,kirāyā kahāṁ denā hai?,kɪɾˈaːjaː kˈʌhã dˈeːnaː hɛː,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+air-travel.where-is-check-in,चेक-इन कहाँ है?,,cek-in kahāṁ hai?,cˈeːkɪn kˈʌhã hɛː,,2,hi-agent-v1;ipa=espeak
+air-travel.which-gate,कौन सा गेट है?,,kaun sā geṭ hai?,kˈɔːn sˈaː ɡˈeːʈ hɛː,,2,hi-agent-v1;ipa=espeak
+air-travel.where-is-the-security-check,सुरक्षा जाँच कहाँ है?,,surakṣā jāṁc kahāṁ hai?,sʊɾˈʌkʃaː ɟˈãnc kˈʌhã hɛː,"जाँच, the same 'check' word this pack already uses for पासपोर्ट जाँच (border-customs.passport-control)",2,hi-agent-v1;ipa=espeak
+air-travel.my-luggage-did-not-arrive,मेरा सामान नहीं आया,,merā sāmān nahīṁ āyā,mˌeːɾaː saːmˈaːn nˈʌhĩ ˈaːjaː,"आया agrees with सामान (luggage, m), not the speaker",2,hi-agent-v1;ipa=espeak
+air-travel.i-would-like-a-window-seat,मुझे खिड़की वाली सीट चाहिए,,mujhe khiṛkī vālī sīṭ cāhie,mˌʊɟʰeː kʰˈɪɽkˌi ʋˈaːli sˈiːʈ cˈaːhɪˌeː,,2,hi-agent-v1;ipa=espeak
+air-travel.i-would-like-an-aisle-seat,मुझे गलियारे वाली सीट चाहिए,,mujhe galiyāre vālī sīṭ cāhie,mˌʊɟʰeː ɡˌəlɪjˈaːɾeː ʋˈaːli sˈiːʈ cˈaːhɪˌeː,,2,hi-agent-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,क्या आप मुझे लिफ़्ट देंगे?,,kyā āp mujhe lifṭ deṁge?,kjaː ˌaːp mˌʊɟʰeː lˈɪfʈ dˈẽːɡeː,"invariant future तense, avoids the सकते/सकती addressee-gender fork",2,hi-agent-v1;ipa=espeak
+hitchhiking.where-are-you-going,आप कहाँ जा रहे हैं?,आप कहाँ जा रही हैं?,āp kahāṁ jā rahe haiṁ?,ˌaːp kˈʌhã ɟˈaː ɾˌəheː hɛ̃,to a woman driver: jā rahī haiṁ (text_alt) -- matches introductions.how-are-you's kaise/kaisi fork,2,hi-agent-v1;ipa=espeak
+hitchhiking.i-only-need-to-go-to-the-next-town,मुझे सिर्फ़ अगले शहर तक जाना है,,mujhe sirf agle śahar tak jānā hai,mˌʊɟʰeː sˈɪrf ˈʌɡlˌeː ʃˈʌhəɾ tˌək ɟˈaːnaː hɛː,जाना (infinitive) is invariant,2,hi-agent-v1;ipa=espeak
+hitchhiking.is-there-room-for-two,क्या दो लोगों के लिए जगह है?,,kyā do logoṁ ke lie jagah hai?,kjaː dˈoː lˈoːɡõ keː lˈɪeː ɟˈʌɡəh hɛː,,2,hi-agent-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,मैं पेट्रोल के लिए पैसे दे सकता हूँ,,maiṁ peṭrol ke lie paise de saktā hūṁ,mɛ̃ pˈeːʈɾoːl keː lˈɪeː pˈɛːseː dˈeː sˈʌktˌaː hũ,"m; सकती for a woman, see variants.csv; पेट्रोल is the word used at the pump across South Asia, not 'gas'",2,hi-agent-v1;ipa=espeak
+hitchhiking.thank-you-for-the-ride,लिफ़्ट देने के लिए धन्यवाद,,lifṭ dene ke lie dhanyavād,lˈɪfʈ dˈeːneː keː lˈɪeː dʰˌənjəʋˈaːd,,2,hi-agent-v1;ipa=espeak

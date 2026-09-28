@@ -120,3 +120,15 @@ rail-station-words.ticket-validator,poništavač karata,,poniʃtavatʃ karata,,2
 common-signs.pork-code,oznake za svinjetinu na natpisima,,oznake zˈa sviɲetinu nˈa natpisima,,2,gloss-only;scoped-away;hr-agent-v1;ipa=espeak
 rail-station-words.fare,cijena vožnje,,tsijena vˈoʒɲe,,2,hr-agent-v1;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,Gdje se plaća vožnja?,,ɡdjˈe sˈe plˈatɕa vˈoʒɲa,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+air-travel.where-is-check-in,Gdje je prijava na let?,,ɡdjˈe je prijava nˈa lˈet,,2,hr-agent-v1;source=zagreb-airport.hr;ipa=espeak
+air-travel.which-gate,Koji izlaz?,,kˈoji ˈizlaz,,2,hr-agent-v1;source=zagreb-airport.hr;ipa=espeak
+air-travel.where-is-the-security-check,Gdje je sigurnosna kontrola?,,ɡdjˈe je siɡurnosna kontrola,,2,hr-agent-v1;source=zagreb-airport.hr;ipa=espeak
+air-travel.my-luggage-did-not-arrive,Moja prtljaga nije stigla,,mˈoja prtʎaɡa nije stˈiɡla,,2,hr-agent-v1;ipa=espeak
+air-travel.i-would-like-a-window-seat,Želio bih mjesto uz prozor,,ʒˈelio bˈix mjˈesto ˈus prˈozor,masculine; a woman says Željela bih,2,hr-agent-v1;ipa=espeak
+air-travel.i-would-like-an-aisle-seat,Želio bih mjesto uz prolaz,,ʒˈelio bˈix mjˈesto ˈus prˈolaz,masculine; a woman says Željela bih,2,hr-agent-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,Možete li me povesti?,,moʒete li mˈe povesti,"formal Vi, matching the pack's taxi register",2,hr-agent-v1;ipa=espeak
+hitchhiking.where-are-you-going,Kamo idete?,,kˈamo idete,,2,hr-agent-v1;ipa=espeak
+hitchhiking.i-only-need-to-go-to-the-next-town,Trebam samo do sljedećeg grada,,trˈebam sˈamo dˈo sʎedetɕeɡ ɡrˈada,,2,hr-agent-v1;ipa=espeak
+hitchhiking.is-there-room-for-two,Ima li mjesta za dvoje?,,ima li mjˈesta zˈa dvˈoje,,2,hr-agent-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,Mogu platiti benzin,,mˈoɡu platiti bˈenzin,"benzin, the word drivers use",2,hr-agent-v1;ipa=espeak
+hitchhiking.thank-you-for-the-ride,Hvala na prijevozu,,xvˈala nˈa prijevozu,,2,hr-agent-v1;ipa=espeak

@@ -120,3 +120,15 @@ rail-station-words.ticket-validator,闸机,閘機,zhájī,ʈʂa˧˥tɕi˥,,2,zh-
 common-signs.pork-code,猪肉代号,,zhūròu dàihào,ʈʂu˥ʐoʊ˥˩ taɪ˥˩xɑʊ˥˩,,2,pork-code-agent-v1;lppom-mui;ipa=pinyin
 rail-station-words.fare,车费,票价,chēfèi,ʈʂʰɤ˥feɪ˥˩,,2,fare-agent-v1;in-pack-neighbour;ipa=pinyin
 transit-rides.where-do-i-pay-the-fare,车费在哪里付？,,chēfèi zài nǎlǐ fù?,ʈʂʰɤ˥feɪ˥˩ tsaɪ˥˩ na˧˩˧li˧˩˧ fu˥˩,,2,translator-requests-v1;in-pack-neighbour;ipa=pinyin
+air-travel.where-is-check-in,值机柜台在哪里？,,zhíjī guìtái zài nǎlǐ?,ʈʂɨ˧˥tɕi˥ kweɪ˥˩tʰaɪ˧˥ tsaɪ˥˩ na˧˩˧li˧˩˧,,2,zh.wikipedia.org 登机报到 / 登机闸口 / 机场 articles; zh-Hans-agent-v1;ipa=pinyin
+air-travel.which-gate,哪个登机口？,,nǎge dēngjīkǒu?,na˧˩˧kɤ tɤŋ˥tɕi˥kʰoʊ˧˩˧,,2,zh.wikipedia.org 登机报到 / 登机闸口 / 机场 articles; zh-Hans-agent-v1;ipa=pinyin
+air-travel.where-is-the-security-check,安检在哪里？,,ānjiǎn zài nǎlǐ?,an˥tɕjɛn˧˩˧ tsaɪ˥˩ na˧˩˧li˧˩˧,,2,zh.wikipedia.org 登机报到 / 登机闸口 / 机场 articles; zh-Hans-agent-v1;ipa=pinyin
+air-travel.my-luggage-did-not-arrive,我的行李没有到,,wǒ de xíngli méiyǒu dào,wɔ˧˩˧ tɤ ɕiŋ˧˥li meɪ˧˥joʊ˧˩˧ tɑʊ˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
+air-travel.i-would-like-a-window-seat,我要靠窗的座位,,wǒ yào kào chuāng de zuòwèi,wɔ˧˩˧ jɑʊ˥˩ kʰɑʊ˥˩ ʈʂʰwɑŋ˥ tɤ tswɔ˥˩weɪ˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
+air-travel.i-would-like-an-aisle-seat,我要靠走廊的座位,,wǒ yào kào zǒuláng de zuòwèi,wɔ˧˩˧ jɑʊ˥˩ kʰɑʊ˥˩ tsoʊ˧˩˧lɑŋ˧˥ tɤ tswɔ˥˩weɪ˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
+hitchhiking.can-you-give-me-a-ride,可以载我一段吗？,,kěyǐ zài wǒ yí duàn ma?,kʰɤ˧˩˧i˧˩˧ tsaɪ˥˩ wɔ˧˩˧ i˧˥ twan˥˩ ma,,2,zh-Hans-agent-v1;ipa=pinyin
+hitchhiking.where-are-you-going,你去哪里？,,nǐ qù nǎlǐ?,ni˧˩˧ tɕʰy˥˩ na˧˩˧li˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
+hitchhiking.i-only-need-to-go-to-the-next-town,我只需要到下一个镇,,wǒ zhǐ xūyào dào xià yí gè zhèn,wɔ˧˩˧ ʈʂɨ˧˩˧ ɕy˥jɑʊ˥˩ tɑʊ˥˩ ɕja˥˩ i˧˥ kɤ˥˩ ʈʂən˥˩,,2,zh-Hans-agent-v1;ipa=pinyin
+hitchhiking.is-there-room-for-two,有两个人的位置吗？,,yǒu liǎng gè rén de wèizhi ma?,joʊ˧˩˧ ljɑŋ˧˩˧ kɤ˥˩ ʐən˧˥ tɤ weɪ˥˩ʈʂɨ ma,,2,zh-Hans-agent-v1;ipa=pinyin
+hitchhiking.i-can-pay-for-fuel,我可以付油钱,,wǒ kěyǐ fù yóuqián,wɔ˧˩˧ kʰɤ˧˩˧i˧˩˧ fu˥˩ joʊ˧˥tɕʰjɛn˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
+hitchhiking.thank-you-for-the-ride,谢谢你载我,,xièxie nǐ zài wǒ,ɕjɛ˥˩ɕjɛ ni˧˩˧ tsaɪ˥˩ wɔ˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin

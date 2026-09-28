@@ -64,3 +64,6 @@ trail-landmarks.end,конец,,konets,kʌnʲˈets,,2,ru-agent-v1;ipa=espeak
 trail-landmarks.elevation,высота,,vysota,vɨsʌtˈɑ,,2,ru-agent-v1;ipa=espeak
 trail-landmarks.sunset,закат,,zakat,zakˈɑt,,2,ru-agent-v1;ipa=espeak
 trail-landmarks.water-point,источник воды,,istochnik vody,ɪstˈotʃʲnʲik vˈodɨ,,2,ru-agent-v1;ipa=espeak
+outdoors.can-we-camp-here,Можно здесь разбить лагерь?,,Mozhno zdesʼ razbitʼ lagerʼ?,mˈoʒnʌ ʑdʲˈesʲ razbʲˈitʲ ɭˈɑɡʲirʲ,,2,ru-agent-v1;ipa=espeak
+outdoors.is-it-safe-to-swim-here,Здесь безопасно плавать?,,Zdesʼ bezopasno plavatʼ?,ʑdʲˈesʲ bʲizʌpˈɑsnʌ pɭˈɑvʌtʲ,,2,ru-agent-v1;ipa=espeak
+outdoors.are-there-dangerous-animals-here,Здесь есть опасные животные?,,Zdesʼ yestʼ opasnyye zhivotnyye?,ʑdʲˈesʲ jestʲ ʌpˈɑsnɨjɪ ʒɨvˈotnɨjɪ,,2,ru-agent-v1;ipa=espeak

@@ -15,3 +15,17 @@ family-intros.this-is-my-wife,Це моя дружина.,,Tse moia druzhyna.,ts
 family-intros.this-is-my-son,Це мій син.,,Tse mii syn.,tsˈɛ mˈiːj sˈɪn,,2,uk-agent-v1;ipa=espeak
 family-intros.this-is-my-daughter,Це моя донька.,,Tse moia donka.,tsˈɛ mˈoja dˈoɲka,,2,uk-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,Я подорожую сам.,Я подорожую сама.,Ya podorozhuiu sam.,jˈa podorˈoʒuju sˈam,,2,uk-agent-v1;ipa=espeak
+about-me.i-am-a-student,Я студент.,,Ya student.,jˈa studˈɛnt,masculine; a woman says Я студентка. (Ya studentka.),2,uk-agent-v1;ipa=espeak
+about-me.i-am-retired,Я на пенсії.,,Ya na pensii.,jˈa nˈa pɛnsˈiːjiː,"invariant, no gender marking",2,uk-agent-v1;ipa=espeak
+about-me.i-am-a-teacher,Я вчитель.,,Ya vchytel.,jˈa ftʃˈɪtɛʎ,masculine; a woman says Я вчителька. (Ya vchytelka.),2,uk-agent-v1;ipa=espeak
+about-me.i-am-a-doctor,Я лікар.,,Ya likar.,jˈa ʎˈiːkar,masculine; a woman says Я лікарка. (Ya likarka.),2,uk-agent-v1;ipa=espeak
+about-me.i-am-a-nurse,Я медбрат.,,Ya medbrat.,jˈa mɛdbrˈat,masculine; a woman says Я медсестра. (Ya medsestra.) -- Ukraine's own professions classifier added медбрат as the male analogue of медсестра,2,uk-agent-v1;source=mova.gov.ua;ipa=espeak
+about-me.i-am-an-engineer,Я інженер.,,Ya inzhener.,jˈa iːnʒˈɛnɛr,masculine; a woman says Я інженерка. (Ya inzhenerka.) -- inzhenerka was added to Ukraine's national classifier of professions in 2020,2,uk-agent-v1;source=mova.gov.ua;ipa=espeak
+about-me.i-work-in-an-office,Я працюю в офісі.,,Ya pratsiuiu v ofisi.,jˈa pratsjˈuju ʋ ofˈiːsiː,,2,uk-agent-v1;ipa=espeak
+about-me.i-have-my-own-business,У мене своя справа.,,U mene svoia sprava.,ˈu mˈɛnɛ zʋˈoja sprˈaʋa,,2,uk-agent-v1;ipa=espeak
+family-intros.this-is-my-mother,Це моя мама.,,Tse moia mama.,tsˈɛ mˈoja mˈama,,2,uk-agent-v1;ipa=espeak
+family-intros.this-is-my-father,Це мій тато.,,Tse mii tato.,tsˈɛ mˈiːj tˈato,,2,uk-agent-v1;ipa=espeak
+family-intros.this-is-my-brother,Це мій брат.,,Tse mii brat.,tsˈɛ mˈiːj brˈat,,2,uk-agent-v1;ipa=espeak
+family-intros.this-is-my-sister,Це моя сестра.,,Tse moia sestra.,tsˈɛ mˈoja sˈɛstra,,2,uk-agent-v1;ipa=espeak
+family-intros.this-is-my-partner,Це мій партнер.,Це моя партнерка.,Tse mii partner.,tsˈɛ mˈiːj pˈartnɛr,"male partner; a female partner is Це моя партнерка. -- the neutral word for an unmarried life partner, not a business partner",2,uk-agent-v1;ipa=espeak
+family-intros.this-is-my-colleague,Це мій колега.,Це моя колега.,Tse mii koleha.,tsˈɛ mˈiːj kolˈɛha,колега is common-gender; only the possessive мій/моя changes for a female colleague,2,uk-agent-v1;ipa=espeak

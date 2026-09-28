@@ -15,3 +15,17 @@ family-intros.this-is-my-husband,Toto je můj manžel,,tˈoto je mˈuːj mˈanʒ
 family-intros.this-is-my-wife,Toto je moje manželka,,tˈoto je mˈoje mˈanʒelka,,2,cs-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
 family-intros.this-is-my-son,Toto je můj syn,,tˈoto je mˈuːj sˈin,,2,cs-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
 family-intros.this-is-my-daughter,Toto je moje dcera,,tˈoto je mˈoje ttsˈera,,2,cs-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+about-me.i-am-a-student,Jsem student,,jsem stˈudent,masculine; a woman says Jsem studentka,2,cs-agent-v1;ipa=espeak
+about-me.i-am-retired,Jsem v důchodu,,jsem v dˈuːxodu,"invariant, no gender marking",2,cs-agent-v1;ipa=espeak
+about-me.i-am-a-teacher,Jsem učitel,,jsem ˈutʃitel,masculine; a woman says Jsem učitelka,2,cs-agent-v1;ipa=espeak
+about-me.i-am-a-doctor,Jsem lékař,,jsem lˈeːkar̝,masculine; a woman says Jsem lékařka,2,cs-agent-v1;ipa=espeak
+about-me.i-am-a-nurse,Jsem zdravotní bratr,,jsem zdrˈavotɲiː brˈatr̩,"masculine; a woman says Jsem zdravotní sestra -- the law names všeobecná sestra/ošetřovatel for either sex, but bratr/sestra is the natural spoken pair the Ústav pro jazyk český itself gives",2,cs-agent-v1;source=ujc.cas.cz;ipa=espeak
+about-me.i-am-an-engineer,Jsem inženýr,,jsem ˈinʒeniːr,masculine; a woman says Jsem inženýrka,2,cs-agent-v1;ipa=espeak
+about-me.i-work-in-an-office,Pracuji v kanceláři,,prˈatsuji v kˈantselˌaːr̝i,,2,cs-agent-v1;ipa=espeak
+about-me.i-have-my-own-business,Mám vlastní firmu,,maːm vlˈastɲiː fˈirmu,,2,cs-agent-v1;ipa=espeak
+family-intros.this-is-my-mother,Toto je moje máma,,tˈoto je mˈoje mˈaːma,,2,cs-agent-v1;ipa=espeak
+family-intros.this-is-my-father,Toto je můj táta,,tˈoto je mˈuːj tˈaːta,,2,cs-agent-v1;ipa=espeak
+family-intros.this-is-my-brother,Toto je můj bratr,,tˈoto je mˈuːj brˈatr̩,,2,cs-agent-v1;ipa=espeak
+family-intros.this-is-my-sister,Toto je moje sestra,,tˈoto je mˈoje sˈestra,,2,cs-agent-v1;ipa=espeak
+family-intros.this-is-my-partner,Toto je můj partner,Toto je moje partnerka,tˈoto je mˈuːj pˈartner,"male partner; a female partner is moje partnerka -- the neutral word for an unmarried life partner, not a business partner",2,cs-agent-v1;ipa=espeak
+family-intros.this-is-my-colleague,Toto je můj kolega z práce,Toto je moje kolegyně z práce,tˈoto je mˈuːj kˈoleɡa s prˈaːtse,male colleague; a female colleague is moje kolegyně z práce,2,cs-agent-v1;ipa=espeak

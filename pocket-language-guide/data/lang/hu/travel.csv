@@ -120,3 +120,15 @@ rail-station-words.maglev,mágnesvasút,maglev,mˈaːɡnɛʃvɑʃuːt,,1,reader-
 common-signs.pork-code,sertéshús-kódok,,ʃˈɛrteːʃhuːʃkoːdok,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
 rail-station-words.fare,viteldíj,,vˈitɛldiːj,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,Hol fizetem a viteldíjat?,,hˈol fˈizɛtɛm ˈɑ vˈitɛldiːjɑt,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+air-travel.where-is-check-in,Hol van az utasfelvétel?,,hˈol vˈɑn ˈɑz ˈutɑʃfɛlveːtɛl,,2,hu-agent-v1;source=bud.hu;ipa=espeak
+air-travel.which-gate,Melyik kapu?,,mˈɛjik kˈɑpu,,2,hu-agent-v1;source=bud.hu;ipa=espeak
+air-travel.where-is-the-security-check,Hol van a biztonsági ellenőrzés?,,hˈol vˈɑn ˈɑ bˈistonʃaːɡi ˈɛllɛnøːrzeːʃ,,2,hu-agent-v1;source=bud.hu;ipa=espeak
+air-travel.my-luggage-did-not-arrive,Nem érkezett meg a csomagom.,,nˈɛm ˈeːrkɛzɛtt mˈɛɡ ˈɑ tʃˈomɑɡom,,2,hu-agent-v1;ipa=espeak
+air-travel.i-would-like-a-window-seat,Ablak melletti helyet szeretnék.,,ˈɑblɑk mˈɛllɛtti hˈɛjɛt sˈɛrɛtneːk,,2,hu-agent-v1;ipa=espeak
+air-travel.i-would-like-an-aisle-seat,Folyosó melletti helyet szeretnék.,,fˈojoʃoː mˈɛllɛtti hˈɛjɛt sˈɛrɛtneːk,,2,hu-agent-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,El tudna vinni?,,ˈɛl tˈudnɑ vˈinni,"formal, matching the pack's taxi register",2,hu-agent-v1;ipa=espeak
+hitchhiking.where-are-you-going,Hova megy?,,hˈovɑ mˈɛɟ,,2,hu-agent-v1;ipa=espeak
+hitchhiking.i-only-need-to-go-to-the-next-town,Csak a következő városig kell mennem.,,tʃˈɑk ˈɑ kˈøvɛtkɛzøː vˈaːroʃiɡ kˈɛll mˈɛnnɛm,,2,hu-agent-v1;ipa=espeak
+hitchhiking.is-there-room-for-two,Van hely kettőnknek?,,vˈɑn hˈɛj kˈɛttøːnknɛk,,2,hu-agent-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,Ki tudom fizetni a benzint.,,kˈi tˈudom fˈizɛtni ˈɑ bˈɛnzint,"benzin, the word drivers use",2,hu-agent-v1;ipa=espeak
+hitchhiking.thank-you-for-the-ride,"Köszönöm, hogy elvitt.",,"kˈøsønøm, hˈoɟ ˈɛlvitt",,2,hu-agent-v1;ipa=espeak

@@ -15,3 +15,17 @@ family-intros.this-is-my-wife,Ini isteri saya,,ˈini istˈəri sˈajə,,2,ms-age
 family-intros.this-is-my-son,Ini anak lelaki saya,,ˈini ˈanaʔ ləlˈaki sˈajə,,2,ms-agent-v1;ipa=espeak
 family-intros.this-is-my-daughter,Ini anak perempuan saya,,ˈini ˈanaʔ pərəmpˈuan sˈajə,,2,ms-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,Saya bepergian sendiri,,sˈajə bəpəɾrɡˈian səndˈiri,,2,ms-agent-v1;ipa=espeak
+about-me.i-am-a-student,Saya pelajar,,sˈajə pəlˈadʒar,,2,ms-agent-v1;ipa=espeak
+about-me.i-am-retired,Saya sudah bersara,,sˈajə sˈudah bərsˈarə,"bersara is the Malaysian word (ms.wikipedia.org/PRPM), distinct from Indonesian pensiun",2,ms-agent-v1;src=prpm.dbp.gov.my bersara;ipa=espeak
+about-me.i-am-a-teacher,Saya guru,,sˈajə ɡˈuru,,2,ms-agent-v1;ipa=espeak
+about-me.i-am-a-doctor,Saya doktor,,sˈajə dˈoktər,,2,ms-agent-v1;ipa=espeak
+about-me.i-am-a-nurse,Saya jururawat,,sˈajə dʒˌururˈawat,jururawat has its own ms.wikipedia.org article; distinct from Indonesian perawat,2,ms-agent-v1;src=ms.wikipedia.org Jururawat;ipa=espeak
+about-me.i-am-an-engineer,Saya jurutera,,sˈajə dʒˌurutˈɛrə,jurutera = juru- (skilled handler) + jentera (machinery); its own ms.wikipedia.org article; distinct from Indonesian insinyur,2,ms-agent-v1;src=ms.wikipedia.org Jurutera;ipa=espeak
+about-me.i-work-in-an-office,Saya kerja di pejabat,,sˈajə kˈərdʒə di pədʒˈabat,"pejabat is the Malaysian word for office, distinct from Indonesian kantor",2,ms-agent-v1;ipa=espeak
+about-me.i-have-my-own-business,Saya ada bisnis sendiri,,sˈajə ˈadə bˈisnes səndˈiri,bisnis reused from border-customs.i-am-here-for-business,2,ms-agent-v1;in-pack-neighbour=border-customs.i-am-here-for-business;ipa=espeak
+family-intros.this-is-my-mother,Ini ibu saya,,ˈini ˈibu sˈajə,,2,ms-agent-v1;ipa=espeak
+family-intros.this-is-my-father,Ini ayah saya,,ˈini ˈajah sˈajə,,2,ms-agent-v1;ipa=espeak
+family-intros.this-is-my-brother,Ini saudara lelaki saya,,ˈini saʊdˈarə ləlˈaki sˈajə,"saudara (age-neutral sibling) + lelaki, matching this pack's own anak lelaki/anak perempuan pattern rather than the age-graded abang/adik",2,ms-agent-v1;ipa=espeak
+family-intros.this-is-my-sister,Ini saudara perempuan saya,,ˈini saʊdˈarə pərəmpˈuan sˈajə,see this-is-my-brother,2,ms-agent-v1;ipa=espeak
+family-intros.this-is-my-partner,Ini pasangan saya,,ˈini pasˈaŋan sˈajə,"pasangan is the ordinary word for a romantic/life partner, not a business partner (rakan kongsi)",2,ms-agent-v1;ipa=espeak
+family-intros.this-is-my-colleague,Ini rakan sekerja saya,,ˈini rˈakan səkˈərdʒə sˈajə,"rakan is the Malaysian spelling, distinct from Indonesian rekan",2,ms-agent-v1;ipa=espeak

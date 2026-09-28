@@ -15,3 +15,17 @@ family-intros.this-is-my-husband,यो मेरो पति हो,,yō mēr�
 family-intros.this-is-my-wife,यो मेरी श्रीमती हो,,yō mērī śrīmatī hō,jˈoː mˈeːɾi ʃɾˈɪːmətˌiː hoː,,2,ne-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
 family-intros.this-is-my-son,यो मेरो छोरा हो,,yō mērō chōrā hō,jˈoː mˈeːɾoː cʰˈoːɾaː hoː,,2,ne-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
 family-intros.this-is-my-daughter,यो मेरी छोरी हो,,yō mērī chōrī hō,jˈoː mˈeːɾi cʰˈoːɾi hoː,,2,ne-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+about-me.i-am-a-student,म विद्यार्थी हुँ,,ma vidyārthī hum̐,mə wɪdjˈaːrrtʰi hˈũ,"single form -- ne's axis is narrowly the -eko/-eki participle, not role nouns, matching how म पर्यटक हुँ (introductions.i-am-a-tourist) is not forked either",2,ne-agent-v1;ipa=espeak
+about-me.i-am-retired,म सेवानिवृत्त भएको छु,,ma sēvānivr̥tta bhaēkō chu,mə seːwˈaːnɪwɾɪttˌə bʰəˈeːkoː cʰˈu,"m; भएकी for a woman, see variants.csv -- the same -एको/-एकी participle as introductions.i-am-traveling-alone",2,ne-agent-v1;ipa=espeak
+about-me.i-am-a-teacher,म शिक्षक हुँ,,ma śikṣak hum̐,mə ʃˈɪkʂəkˌə hˈũ,"single form, as i-am-a-student above",2,ne-agent-v1;ipa=espeak
+about-me.i-am-a-doctor,म डाक्टर हुँ,,ma ḍākṭar hum̐,mə ɖˈaːkʈəɾˌə hˈũ,डाक्टर is an invariant loanword,2,ne-agent-v1;ipa=espeak
+about-me.i-am-a-nurse,म नर्स हुँ,,ma nars hum̐,mə nˈʌrrsə hˈũ,नर्स is an invariant loanword,2,ne-agent-v1;ipa=espeak
+about-me.i-am-an-engineer,म इन्जिनियर हुँ,,ma injiniyar hum̐,mə ˈɪnɟɪnˌɪjəɾˌə hˈũ,इन्जिनियर is an invariant loanword,2,ne-agent-v1;ipa=espeak
+about-me.i-work-in-an-office,म अफिसमा काम गर्छु,,ma aphisamā kām garchu,mə ˈʌpʰɪsˌəmaː kˈaːmə ɡˈʌrrcʰu,"गर्छु, simple present, invariant -- ne's axis does not cover the simple present, only the -एको/-एकी participle",2,ne-agent-v1;ipa=espeak
+about-me.i-have-my-own-business,मेरो आफ्नै व्यापार छ,,mērō āphnai vyāpār cha,mˈeːɾoː ˈaːpʰːnɛː ʋjaːpˈaːɾə cʰˈə,"मेरो agrees with व्यापार (business, m), not the speaker",2,ne-agent-v1;ipa=espeak
+family-intros.this-is-my-mother,यो मेरी आमा हो,,yō mērī āmā hō,jˈoː mˈeːɾi ˈaːmaː hoː,,2,ne-agent-v1;ipa=espeak
+family-intros.this-is-my-father,यो मेरो बाबा हो,,yō mērō bābā hō,jˈoː mˈeːɾoː bˈaːbaː hoː,,2,ne-agent-v1;ipa=espeak
+family-intros.this-is-my-brother,यो मेरो भाई हो,,yō mērō bhāī hō,jˈoː mˈeːɾoː bʰˈaːi hoː,,2,ne-agent-v1;ipa=espeak
+family-intros.this-is-my-sister,यो मेरी बहिनी हो,,yō mērī bahinī hō,jˈoː mˈeːɾi bˈʌhɪnˌiː hoː,,2,ne-agent-v1;ipa=espeak
+family-intros.this-is-my-partner,यो मेरो जीवनसाथी हो,,yō mērō jīvansāthī hō,jˈoː mˈeːɾoː ɟˌɪːwənəsˈaːtʰi hoː,"जीवनसाथी, common-gender like साथी (this pack's own introductions.this-is-my-friend row notes साथी does not change for a male or female friend); मेरो is the default agreement साथी already takes",2,ne-agent-v1;ipa=espeak
+family-intros.this-is-my-colleague,यो मेरो सहकर्मी हो,,yō mērō sahakarmī hō,jˈoː mˈeːɾoː sˌəhəkˈʌrrmi hoː,,2,ne-agent-v1;ipa=espeak

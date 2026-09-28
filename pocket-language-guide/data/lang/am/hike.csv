@@ -64,3 +64,6 @@ weather.humid,እርጥበት,,irtʼibet,ʔɨrtʼɨbət,,2,am-agent-v1;ipa=bgn-a
 weather.sunrise,የፀሐይ መውጣት,,yetsʼehāy mewitʼat,jəsʼəhaj məwɨtʼat,,2,am-agent-v1;ipa=bgn-am
 weather.flood,ጎርፍ,,gorf,ɡorf,,2,am-agent-v1;ipa=bgn-am
 weather.avalanche-risk,የበረዶ መናድ አደጋ,,yeberedo menad ādega,jəbərədo mənad ʔadəɡa,,2,am-agent-v1;ipa=bgn-am
+outdoors.can-we-camp-here,እዚህ ካምፕ ማድረግ ይቻላል?,,izzīh kamp madireg yichalal?,ʔɨzːih kamp madɨrəɡ jɨtʃalal,,2,am-agent-v1;ipa=bgn-am
+outdoors.is-it-safe-to-swim-here,እዚህ መዋኘት ደህና ነው?,,izzīh mewanyet dehina new?,ʔɨzːih məwaɲət dəhɨna nəw,,2,am-agent-v1;ipa=bgn-am
+outdoors.are-there-dangerous-animals-here,እዚህ አደገኛ እንስሳት አሉ?,,izzīh ādegenya insisat ālu?,ʔɨzːih ʔadəɡəɲa ʔɨnsɨsat ʔalu,,2,am-agent-v1;ipa=bgn-am

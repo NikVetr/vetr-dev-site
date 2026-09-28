@@ -1,3 +1,9 @@
 variant,concept_id,text,text_alt,ipa,literal,confidence,provenance
 speaker_gender=feminine,introductions.i-am-a-tourist,Ich bin Touristin.,,ɪç bɪn tˈuːrɪstˌɪn,,2,de-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
 speaker_gender=feminine,border-customs.i-am-a-tourist,Ich bin Touristin.,,ɪç bɪn tˈuːrɪstˌɪn,,2,de-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-student,Ich bin Studentin.,,ɪç bɪn ʃtˈuːdəntˌɪn,,2,de-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,about-me.i-am-retired,Ich bin Rentnerin.,,ɪç bɪn rˈɛntnərˌɪn,,2,de-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-teacher,Ich bin Lehrerin.,,ɪç bɪn lˈeːrərˌɪn,,2,de-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-doctor,Ich bin Ärztin.,,ɪç bɪn ˈɛɾtstɪn,,2,de-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-nurse,Ich bin Krankenschwester.,,ɪç bɪn kɾˈankɛnʃvəstɜ,,2,de-variants-v1;rule=role-noun-is-a-different-word-for-each-sex;ipa=espeak
+speaker_gender=feminine,about-me.i-am-an-engineer,Ich bin Ingenieurin.,,ɪç bɪn ˈɪŋeːnˌiːuːrˌɪn,,2,de-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak

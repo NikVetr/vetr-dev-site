@@ -120,3 +120,15 @@ place-words.scenic-area,turistická oblast,,tˈuristˌitskaː ˈoblast,,2,gloss-
 rail-station-words.maglev,maglev,,mˈaɡlev,,2,gloss-only;scoped-away;cs-agent-v1;ipa=espeak
 common-signs.pork-code,kódy pro vepřové na cedulích,,kˈoːdi prˈovepr̝ˌoveː nˈatsedˌuliːx,B1 = pes,2,gloss-only;scoped-away;cs-agent-v1;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,Kde se platí jízdné?,,ɡdˈe se plˈaciː jˈiːzdneː,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+air-travel.where-is-check-in,Kde je odbavení?,,ɡdˈe je ˈodbavˌeɲiː,,2,cs-agent-v1;source=prg.aero;ipa=espeak
+air-travel.which-gate,Která brána?,,ktˈeraː brˈaːna,,2,cs-agent-v1;source=prg.aero;ipa=espeak
+air-travel.where-is-the-security-check,Kde je bezpečnostní kontrola?,,ɡdˈe je bˈespetʃnˌostɲiː kˈontrola,,2,cs-agent-v1;source=prg.aero;ipa=espeak
+air-travel.my-luggage-did-not-arrive,Moje zavazadlo nedorazilo,,mˈoje zˈavazˌadlo nˈedorˌazilo,,2,cs-agent-v1;ipa=espeak
+air-travel.i-would-like-a-window-seat,Chtěl bych místo u okna,,xcˈel bix mˈiːsto ˈu ˈokna,masculine; a woman says Chtěla bych,2,cs-agent-v1;ipa=espeak
+air-travel.i-would-like-an-aisle-seat,Chtěl bych místo u uličky,,xcˈel bix mˈiːsto ˈu ˈulitʃki,masculine; a woman says Chtěla bych,2,cs-agent-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,Můžete mě vzít?,,mˈuːʒete mɲˈe vzˈiːt,"formal vykání, matching the pack's taxi register; present tense, so unlike jsem+participle this carries no gender",2,cs-agent-v1;ipa=espeak
+hitchhiking.where-are-you-going,Kam jedete?,,kˈam jˈedete,,2,cs-agent-v1;ipa=espeak
+hitchhiking.i-only-need-to-go-to-the-next-town,Potřebuji jet jen do nejbližšího města,,pˈotr̝ebˌuji jˈet jˈen do nˈeɪbliʃʃˌiːho mɲˈesta,,2,cs-agent-v1;ipa=espeak
+hitchhiking.is-there-room-for-two,Je tu místo pro dva?,,je tˈu mˈiːsto prˈodva,,2,cs-agent-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,Mohu zaplatit za benzín,,mˈohu zˈaplacid zˈabenziːn,"benzín, the word drivers use",2,cs-agent-v1;ipa=espeak
+hitchhiking.thank-you-for-the-ride,Děkuji za svezení,,ɟˈekuji zˈasvezˌeɲiː,,2,cs-agent-v1;ipa=espeak

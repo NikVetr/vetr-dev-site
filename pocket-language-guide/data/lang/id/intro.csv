@@ -15,3 +15,17 @@ family-intros.this-is-my-wife,Ini istri saya,,ˈini ˈistri sˈaja,,2,id-agent-v
 family-intros.this-is-my-son,Ini anak laki-laki saya,,ˈini ˈanak lˈakilaki sˈaja,,2,id-agent-v1;ipa=espeak
 family-intros.this-is-my-daughter,Ini anak perempuan saya,,ˈini ˈanak pərəmpˈuan sˈaja,,2,id-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,Saya bepergian sendiri,,sˈaja bəpərɡˈian səndˈiri,,2,id-agent-v1;ipa=espeak
+about-me.i-am-a-student,Saya pelajar,,sˈaja pəlˈadʒar,,2,id-agent-v1;ipa=espeak
+about-me.i-am-retired,Saya sudah pensiun,,sˈaja sˈudah pənsˈiun,,2,id-agent-v1;ipa=espeak
+about-me.i-am-a-teacher,Saya guru,,sˈaja ɡˈuru,,2,id-agent-v1;ipa=espeak
+about-me.i-am-a-doctor,Saya dokter,,sˈaja dˈoktər,,2,id-agent-v1;ipa=espeak
+about-me.i-am-a-nurse,Saya perawat,,sˈaja pərˈawat,,2,id-agent-v1;ipa=espeak
+about-me.i-am-an-engineer,Saya insinyur,,sˈaja insˈiɲur,,2,id-agent-v1;ipa=espeak
+about-me.i-work-in-an-office,Saya kerja di kantor,,sˈaja kˈɛrdʒa di kˈantɔr,,2,id-agent-v1;ipa=espeak
+about-me.i-have-my-own-business,Saya punya bisnis sendiri,,sˈaja pˈuɲa bˈisnis səndˈiri,sendiri reused from introductions.i-am-traveling-alone,2,id-agent-v1;in-pack-neighbour=introductions.i-am-traveling-alone;ipa=espeak
+family-intros.this-is-my-mother,Ini ibu saya,,ˈini ˈibu sˈaja,,2,id-agent-v1;ipa=espeak
+family-intros.this-is-my-father,Ini ayah saya,,ˈini ˈajah sˈaja,,2,id-agent-v1;ipa=espeak
+family-intros.this-is-my-brother,Ini saudara laki-laki saya,,ˈini saʊdˈara lˈakilaki sˈaja,"saudara (age-neutral sibling) + laki-laki, matching this pack's own anak laki-laki/anak perempuan pattern rather than the age-graded kakak/adik",2,id-agent-v1;ipa=espeak
+family-intros.this-is-my-sister,Ini saudara perempuan saya,,ˈini saʊdˈara pərəmpˈuan sˈaja,see this-is-my-brother,2,id-agent-v1;ipa=espeak
+family-intros.this-is-my-partner,Ini pasangan saya,,ˈini pasˈaŋan sˈaja,"pasangan is the ordinary word for a romantic/life partner, not a business partner (rekan bisnis, mitra)",2,id-agent-v1;ipa=espeak
+family-intros.this-is-my-colleague,Ini rekan kerja saya,,ˈini rˈɛkan kˈɛrdʒa sˈaja,,2,id-agent-v1;ipa=espeak

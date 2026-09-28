@@ -64,3 +64,6 @@ trail-landmarks.end,final,,finˈal,,2,ro-agent-v1;ipa=espeak
 trail-landmarks.elevation,altitudine,,ˌaltitudʲˈine,,2,ro-agent-v1;ipa=espeak
 trail-landmarks.sunset,apus,,apˈus,,2,ro-agent-v1;ipa=espeak
 trail-landmarks.water-point,punct de apă,,pˈunkt de ˈapə,,2,ro-agent-v1;ipa=espeak
+outdoors.can-we-camp-here,Putem campa aici?,,putˌem kˈampa aˈitʃʲ,,2,ro-about-travel-v1;ipa=espeak
+outdoors.is-it-safe-to-swim-here,Este sigur să înoți aici?,,jˌeste sˈiɡur sə ɨnˈotsʲ aˈitʃʲ,,2,ro-about-travel-v1;ipa=espeak
+outdoors.are-there-dangerous-animals-here,Sunt animale periculoase aici?,,sunt ˌanimˈale pˌeɾikulˈɔase aˈitʃʲ,,2,ro-about-travel-v1;ipa=espeak

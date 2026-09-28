@@ -120,3 +120,15 @@ rail-station-words.ticket-validator,ticket validator,,tˈɪkɪt vˈælɪdˌeɪɾ
 common-signs.pork-code,pork codes on signs,B1 = dog,pˈoːɹk kˈoʊdz ˌɔn sˈaɪnz,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
 rail-station-words.fare,fare,,fˈɛɹ,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,Where do I pay the fare?,,wˌɛɹ dˈuː aɪ pˈeɪ ðə fˈɛɹ,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+air-travel.where-is-check-in,Where is check-in?,,wˌɛɹ ɪz tʃˈɛkɪn,,2,en-about-travel-v1;ipa=espeak
+air-travel.which-gate,Which gate?,,wˌɪtʃ ɡˈeɪt,,2,en-about-travel-v1;ipa=espeak
+air-travel.where-is-the-security-check,Where is the security check?,,wˌɛɹ ɪz ðə sɪkjˈʊɹɹɪɾi tʃˈɛk,,2,en-about-travel-v1;ipa=espeak
+air-travel.my-luggage-did-not-arrive,My luggage did not arrive,,maɪ lˈʌɡɪdʒ dɪdnˌɑːt ɚɹˈaɪv,,2,en-about-travel-v1;ipa=espeak
+air-travel.i-would-like-a-window-seat,I would like a window seat,,aɪ wʊd lˈaɪk ɐ wˈɪndoʊ sˈiːt,,2,en-about-travel-v1;ipa=espeak
+air-travel.i-would-like-an-aisle-seat,I would like an aisle seat,,aɪ wʊd lˈaɪk ɐn ˈaɪəl sˈiːt,,2,en-about-travel-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,Can you give me a ride?,,kæn juː ɡˈɪv mˌiː ɐ ɹˈaɪd,,2,en-about-travel-v1;ipa=espeak
+hitchhiking.where-are-you-going,Where are you going?,,wˌɛɹ ɑːɹ juː ɡˈoʊɪŋ,,2,en-about-travel-v1;ipa=espeak
+hitchhiking.i-only-need-to-go-to-the-next-town,I only need to go to the next town,,aɪ ˈoʊnli nˈiːd tə ɡˌoʊ tə ðə nˈɛkst tˈaʊn,,2,en-about-travel-v1;ipa=espeak
+hitchhiking.is-there-room-for-two,Is there room for two?,,ɪz ðɛɹ ɹˈuːm fɔːɹ tˈuː,,2,en-about-travel-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,I can pay for fuel,,aɪ kæn pˈeɪ fɔːɹ fjˈuːəl,,2,en-about-travel-v1;ipa=espeak
+hitchhiking.thank-you-for-the-ride,Thank you for the ride,,θˈæŋk juː fɚðə ɹˈaɪd,,2,en-about-travel-v1;ipa=espeak

@@ -15,3 +15,17 @@ family-intros.this-is-my-wife,ایشان خانمم است,,ishān khānomam ast
 family-intros.this-is-my-son,این پسرم است,,in pesaram ast,in pesaram ast,,2,fa-agent-v1;ipa=espeak
 family-intros.this-is-my-daughter,این دخترم است,,in dokhtaram ast,in doxtaram ast,,2,fa-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,من تنها سفر می‌کنم,,man tanhā safar mikonam,man tanhɑ safar mikonam,,2,fa-agent-v1;ipa=espeak
+about-me.i-am-a-student,من دانشجو هستم,,man dāneshju hastam,man dɑneʃdʒu hastam,,2,fa-agent-v1;ipa=espeak
+about-me.i-am-retired,من بازنشسته هستم,,man bāznešaste hastam,man bɑzneʃaste hastam,,2,fa-agent-v1;ipa=espeak
+about-me.i-am-a-teacher,من معلم هستم,,man mo‘allem hastam,man moʔallem hastam,,2,fa-agent-v1;ipa=espeak
+about-me.i-am-a-doctor,من پزشک هستم,,man pezeshk hastam,man pezeʃk hastam,,2,fa-agent-v1;ipa=espeak
+about-me.i-am-a-nurse,من پرستار هستم,,man parastār hastam,man parastɑr hastam,,2,fa-agent-v1;ipa=espeak
+about-me.i-am-an-engineer,من مهندس هستم,,man mohandes hastam,man mohandes hastam,,2,fa-agent-v1;ipa=espeak
+about-me.i-work-in-an-office,من در یک دفتر کار می‌کنم,,man dar yek daftar kār mi‌konam,man dar jek daftar kɑr mikonam,,2,fa-agent-v1;ipa=espeak
+about-me.i-have-my-own-business,من کسب و کار خودم را دارم,,man kasb o kār-e khodam rā dāram,man kasb va kɑr xodam rɑ dɑram,,2,fa-agent-v1;ipa=espeak
+family-intros.this-is-my-mother,ایشان مادرم است,,ishān mādaram ast,iʃɑn mɑdaram ast,,2,fa-agent-v1;ipa=espeak
+family-intros.this-is-my-father,ایشان پدرم است,,ishān pedaram ast,iʃɑn pedaram ast,,2,fa-agent-v1;ipa=espeak
+family-intros.this-is-my-brother,ایشان برادرم است,,ishān barādaram ast,iʃɑn barɑdaram ast,,2,fa-agent-v1;ipa=espeak
+family-intros.this-is-my-sister,ایشان خواهرم است,,ishān khāharam ast,iʃɑn xɑharam ast,,2,fa-agent-v1;ipa=espeak
+family-intros.this-is-my-partner,ایشان پارتنر من است,,ishān pārtner-e man ast,iʃɑn pɑrtner man ast,"pārtner (loanword) names a romantic/life partner regardless of marriage; sharik (native) skews to a business partner, which the brief asks to avoid",2,fa-agent-v1;ipa=espeak
+family-intros.this-is-my-colleague,ایشان همکار من است,,ishān hamkār-e man ast,iʃɑn hamkɑr man ast,,2,fa-agent-v1;ipa=espeak

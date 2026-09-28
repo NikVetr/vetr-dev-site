@@ -64,3 +64,6 @@ trail-landmarks.end,òpin,,o˩kpĩ,,2,yo-agent-v1;ipa=yo-g2p
 trail-landmarks.elevation,gíga,,ɡi˥ɡa,,2,yo-agent-v1;ipa=yo-g2p
 trail-landmarks.sunset,wíwọ̀ oòrùn,,wi˥wɔ˩ oo˩rũ˩,,2,yo-agent-v1;ipa=yo-g2p
 trail-landmarks.water-point,ibi omi,,ibi omi,,2,yo-agent-v1;ipa=yo-g2p
+outdoors.can-we-camp-here,Ṣé a lè pàgọ́ síbí?,,ʃe˥ a le˩ kpa˩ɡɔ˥ si˥bi˥,pa àgọ́ = pitch a tent/camp,2,yo-agent-v1;ipa=yo-g2p
+outdoors.is-it-safe-to-swim-here,Ṣé ó ní ààbò láti wẹ̀ nínú omi níbí?,,ʃe˥ o˥ ni˥ a˩a˩bo˩ la˥ti wɛ˩ ni˥nu˥ omi ni˥bi˥,nínú omi (in the water) added because this pack's own hotel-requests.no-housekeeping already uses wẹ̀ for cleaning a room,2,yo-agent-v1;ipa=yo-g2p
+outdoors.are-there-dangerous-animals-here,Ṣé àwọn ẹranko tí ó léwu wà níbí?,,ʃe˥ a˩wɔ̃ ɛrãko ti˥ o˥ le˥wu wa˩ ni˥bi˥,léwu (ní ewu) reuses trail-warnings.danger's ewu,2,yo-agent-v1;in-pack-neighbour=trail-warnings.danger;ipa=yo-g2p

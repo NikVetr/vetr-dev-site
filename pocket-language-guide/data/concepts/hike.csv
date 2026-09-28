@@ -64,3 +64,6 @@ trail-landmarks.end,trail-landmarks,ref,word,end,5,0.350,trail-landmarks.end,0,0
 trail-landmarks.elevation,trail-landmarks,ref,word,elevation,6,0.338,trail-landmarks.elevation,0,0,neutral,,
 trail-landmarks.sunset,trail-landmarks,ref,word,sunset,7,0.325,trail-landmarks.sunset,0,0,neutral,,
 trail-landmarks.water-point,trail-landmarks,ref,word,water-point,9,0.300,trail-landmarks.water-point,0,0,neutral,,
+outdoors.can-we-camp-here,outdoors,entry,phrase,can-we-camp-here,1,0.500,outdoors.can-we-camp-here,0,0,neutral,,content/PROMPTS/about-and-travel.md
+outdoors.is-it-safe-to-swim-here,outdoors,entry,phrase,is-it-safe-to-swim-here,2,0.500,outdoors.is-it-safe-to-swim-here,0,0,neutral,,
+outdoors.are-there-dangerous-animals-here,outdoors,entry,phrase,are-there-dangerous-animals-here,3,0.500,outdoors.are-there-dangerous-animals-here,0,0,neutral,,

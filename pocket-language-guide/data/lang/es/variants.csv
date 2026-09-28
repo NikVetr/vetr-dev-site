@@ -10,3 +10,8 @@ speaker_gender=feminine,medical-conditions.i-am-allergic-to-penicillin,Soy alér
 speaker_gender=feminine,medical-conditions.i-am-allergic-to-sulfa-drugs,Soy alérgica a las sulfamidas,Soy alérgica a las sulfas,sˈoɪ alˈeɾxika a las sˌulfamˈidas,,2,es-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
 speaker_gender=feminine,police-consulate.am-i-under-arrest,¿Estoy detenida?,,estˈoɪ dˌetenˈida,,2,es-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
 speaker_gender=feminine,etiquette.dressed-appropriately,¿Voy vestida apropiadamente?,,bˈoɪ bestˈida ˌapɾopjˈadamente,,2,es-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,about-me.i-am-retired,Estoy jubilada,,estˈoɪ xˌubilˈada,,2,es-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-teacher,Soy profesora,,sˈoɪ pɾˌofesˈoɾa,,2,es-variants-v1;rule=agent-noun-has-distinct-feminine-form;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-doctor,Soy médica,,sˈoɪ mˈedika,,2,es-variants-v1;rule=agent-noun-has-distinct-feminine-form;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-nurse,Soy enfermera,,sˈoɪ ˌemfeɾmˈeɾa,,2,es-variants-v1;rule=agent-noun-has-distinct-feminine-form;ipa=espeak
+speaker_gender=feminine,about-me.i-am-an-engineer,Soy ingeniera,,sˈoɪ ˌiŋxenjˈeɾa,,2,es-variants-v1;rule=agent-noun-has-distinct-feminine-form;ipa=espeak

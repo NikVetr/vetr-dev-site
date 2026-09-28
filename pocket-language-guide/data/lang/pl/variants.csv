@@ -12,3 +12,10 @@ speaker_gender=feminine,police-consulate.am-i-under-arrest,Czy jestem zatrzymana
 speaker_gender=feminine,sim-data.i-would-like-a-tourist-sim,Chciałabym kartę SIM dla turystów,,xtɕˈawabˌɨm kˈartɛ ˌɛsˌiˈɛm dla turˈɨstuf,,2,pl-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
 speaker_gender=feminine,transit-rides.i-went-past-my-stop,Przejechałam swój przystanek,,pʃˌɛjɛxˈawam sfˈuj pʃɨstˈanɛk,,2,pl-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
 speaker_gender=feminine,kind-words.i-had-a-wonderful-time,Miałam tu wspaniały czas.,,mʲˈawam tˈu fspaɲˈawɨ tʃˈas,,2,pl-kind-words-v1;rule=speaker-gender-agreement;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-student,Jestem studentką,,jˌɛstɛm studˈɛntkɔ̃,,2,pl-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-teacher,Jestem nauczycielką,,jˌɛstɛm nˌautʃɨtɕˈɛlkɔ̃,,2,pl-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-doctor,Jestem lekarką,,jˌɛstɛm lɛkˈarkɔ̃,,2,pl-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-nurse,Jestem pielęgniarką,,jˌɛstɛm pʲˌɛlɛŋɡɲˈarkɔ̃,,2,pl-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
+speaker_gender=feminine,about-me.i-am-an-engineer,Jestem inżynierką,,jˌɛstɛm ˌinʒɨɲˈɛrkɔ̃,newer feminine form; Rada Języka Polskiego names inżynier/inżynierka as a regular pair even while noting usage is contested,2,pl-variants-v1;rule=role-noun-has-feminine-derivational-suffix;source=rjp-zenskie-nazwy-zawodow;ipa=espeak
+speaker_gender=feminine,air-travel.i-would-like-a-window-seat,Chciałabym miejsce przy oknie,,xtɕˈawabˌɨm mʲˈɛjstsɛ pʃɨ ˈɔkɲɛ,,2,pl-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,air-travel.i-would-like-an-aisle-seat,Chciałabym miejsce przy przejściu,,xtɕˈawabˌɨm mʲˈɛjstsɛ pʃɨ pʃˈɛjɕtɕu,,2,pl-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak

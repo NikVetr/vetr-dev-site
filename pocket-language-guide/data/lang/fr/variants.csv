@@ -9,3 +9,9 @@ speaker_gender=feminine,introductions.i-am-traveling-alone,Je voyage seule,,ʒə
 speaker_gender=feminine,transit-rides.i-am-in-a-hurry,Je suis pressée,,ʒə syi pʁɛsˈe,,2,fr-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
 speaker_gender=feminine,police-consulate.i-was-robbed,J'ai été volée,,ʒe ete volˈe,,2,fr-variants-v1;rule=etre-passive-agrees-with-subject;ipa=espeak
 speaker_gender=feminine,police-consulate.someone-attacked-me,On m'a agressée,,ɔ̃ ma aɡʁɛsˈe,,2,fr-variants-v1;rule=avoir-agrees-with-preceding-object-clitic;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-student,Je suis étudiante,,ʒə syiz etydjˈɑ̃t,,2,fr-variants-v1;rule=agent-noun-has-distinct-feminine-form;ipa=espeak
+speaker_gender=feminine,about-me.i-am-retired,Je suis retraitée,,ʒə syi ʁətʁɛtˈe,,2,fr-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-teacher,Je suis professeure,,ʒə syi pʁofɛsˈœʁ,,2,fr-variants-v1;rule=agent-noun-has-distinct-feminine-form;ipa=espeak
+speaker_gender=feminine,about-me.i-am-a-nurse,Je suis infirmière,,ʒə syiz ɛ̃fiʁmjˈɛʁ,,2,fr-variants-v1;rule=agent-noun-has-distinct-feminine-form;ipa=espeak
+speaker_gender=feminine,about-me.i-am-an-engineer,Je suis ingénieure,,ʒə syiz ɛ̃ʒenjˈœʁ,,2,fr-variants-v1;rule=agent-noun-has-distinct-feminine-form;ipa=espeak
+speaker_gender=feminine,hitchhiking.thank-you-for-the-ride,Merci de m'avoir emmenée,,mɛʁsi də mavwaʁ ɑ̃mnˈe,,2,fr-variants-v1;rule=avoir-agrees-with-preceding-object-clitic;ipa=espeak

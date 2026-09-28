@@ -120,3 +120,15 @@ rail-station-words.ticket-validator,kasownik,,kasˈɔvɲik,the word printed on t
 common-signs.pork-code,kody wieprzowiny,,kˈɔdɨ vʲˌɛpʃɔvˈinɨ,,2,pl-gloss-v1;ipa=espeak
 rail-station-words.fare,opłata za przejazd,,ɔpwˈata za pʃˈɛjast,,2,pl-agent-v1;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,Gdzie płacę za przejazd?,,ɡdʑˈɛ pwˈatsɛ za pʃˈɛjast,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+air-travel.where-is-check-in,Gdzie jest odprawa?,,ɡdʑˈɛ jɛst ɔtprˈava,,2,pl-agent-v1;source=lotnisko-chopina.pl;ipa=espeak
+air-travel.which-gate,Która bramka?,,ktˌura brˈamka,,2,pl-agent-v1;source=lotnisko-chopina.pl;ipa=espeak
+air-travel.where-is-the-security-check,Gdzie jest kontrola bezpieczeństwa?,,ɡdʑˈɛ jɛst kɔntrˈɔla bˌɛspʲɛtʃˈɛɲstfa,,2,pl-agent-v1;source=lotnisko-chopina.pl;ipa=espeak
+air-travel.my-luggage-did-not-arrive,Mój bagaż nie dotarł,,mˈuj bˈaɡaʃ ɲɛ dˈɔtar,,2,pl-agent-v1;ipa=espeak
+air-travel.i-would-like-a-window-seat,Chciałbym miejsce przy oknie,,xtɕˈawbɨm mʲˈɛjstsɛ pʃɨ ˈɔkɲɛ,masculine; a woman says Chciałabym,2,pl-agent-v1;ipa=espeak
+air-travel.i-would-like-an-aisle-seat,Chciałbym miejsce przy przejściu,,xtɕˈawbɨm mʲˈɛjstsɛ pʃɨ pʃˈɛjɕtɕu,masculine; a woman says Chciałabym,2,pl-agent-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,Czy mogę prosić o podwiezienie?,,tʃɨ mˈɔɡɛ prˈɔɕitɕ ɔ pˌɔdvʲɛʑˈɛɲɛ,"matches taxi.may-i-open-the-window's 'Czy mogę + infinitive?' construction (already on disk), which needs no pan/pani address at all",2,pl-agent-v1;matches=taxi.may-i-open-the-window;ipa=espeak
+hitchhiking.where-are-you-going,Dokąd jedzie ten samochód?,,dˈɔkɔnt jˈɛdʑɛ tɛn samˈɔxut,"asks about the car rather than the driver, matching transit-rides.does-this-bus-train-go-to's vehicle-as-subject construction (already on disk); needs no pan/pani address",2,pl-agent-v1;matches=transit-rides.does-this-bus-train-go-to;ipa=espeak
+hitchhiking.i-only-need-to-go-to-the-next-town,Muszę dojechać tylko do następnego miasteczka,,mˈuʃɛ dɔjˈɛxatɕ tˌɨlkɔ dɔ nˌastɛmpnˈɛɡɔ mʲastˈɛtʃka,,2,pl-agent-v1;ipa=espeak
+hitchhiking.is-there-room-for-two,Czy jest miejsce dla dwóch?,,tʃɨ jɛst mʲˈɛjstsɛ dla dvˈux,,2,pl-agent-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,Mogę zapłacić za benzynę,,mˈɔɡɛ zapwˈatɕidʑ za bɛnzˈɨnɛ,"benzyna, the word drivers use",2,pl-agent-v1;ipa=espeak
+hitchhiking.thank-you-for-the-ride,Dziękuję za podwiezienie,,dʑɛŋkˈujɛ za pˌɔdvʲɛʑˈɛɲɛ,,2,pl-agent-v1;ipa=espeak

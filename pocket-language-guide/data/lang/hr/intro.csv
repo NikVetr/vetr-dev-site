@@ -15,3 +15,17 @@ family-intros.this-is-my-wife,Ovo je moja žena,,ˈovo je mˈoja ʒˈena,,2,hr-a
 family-intros.this-is-my-son,Ovo je moj sin,,ˈovo je mˈoj sˈin,,2,hr-agent-v1;ipa=espeak
 family-intros.this-is-my-daughter,Ovo je moja kći,,ˈovo je mˈoja ktɕˈi,,2,hr-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,Putujem sam,Putujem sama,putujem sam,,2,hr-agent-v1;ipa=espeak
+about-me.i-am-a-student,Student sam,,stˈudent sam,masculine; a woman says Studentica sam,2,hr-agent-v1;ipa=espeak
+about-me.i-am-retired,U penziji sam,,u penziji sam,"invariant, no gender marking",2,hr-agent-v1;ipa=espeak
+about-me.i-am-a-teacher,Učitelj sam,,utʃiteʎ sam,masculine; a woman says Učiteljica sam,2,hr-agent-v1;ipa=espeak
+about-me.i-am-a-doctor,Liječnik sam,,lijetʃnik sam,masculine; a woman says Liječnica sam,2,hr-agent-v1;ipa=espeak
+about-me.i-am-a-nurse,Medicinski tehničar sam,,meditsinski texnitʃar sam,masculine; a woman says Medicinska sestra sam -- the Croatian Employment Service (HZZ) lists these as the male/female job-title pair,2,hr-agent-v1;source=hzz.hr;ipa=espeak
+about-me.i-am-an-engineer,Inženjer sam,,inʒeɲer sam,masculine; a woman says Inženjerka sam,2,hr-agent-v1;ipa=espeak
+about-me.i-work-in-an-office,Radim u uredu,,rˈadim u uredu,,2,hr-agent-v1;ipa=espeak
+about-me.i-have-my-own-business,Imam svoju tvrtku,,imam svˈoju tvrtku,,2,hr-agent-v1;ipa=espeak
+family-intros.this-is-my-mother,Ovo je moja mama,,ˈovo je mˈoja mˈama,,2,hr-agent-v1;ipa=espeak
+family-intros.this-is-my-father,Ovo je moj tata,,ˈovo je mˈoj tˈata,,2,hr-agent-v1;ipa=espeak
+family-intros.this-is-my-brother,Ovo je moj brat,,ˈovo je mˈoj brˈat,,2,hr-agent-v1;ipa=espeak
+family-intros.this-is-my-sister,Ovo je moja sestra,,ˈovo je mˈoja sˈestra,,2,hr-agent-v1;ipa=espeak
+family-intros.this-is-my-partner,Ovo je moj partner,Ovo je moja partnerica,ˈovo je mˈoj pˈartner,"male partner; a female partner is moja partnerica -- the neutral word for an unmarried life partner, not a business partner",2,hr-agent-v1;ipa=espeak
+family-intros.this-is-my-colleague,Ovo je moj kolega s posla,Ovo je moja kolegica s posla,ˈovo je mˈoj koleɡa s pˈosla,male colleague; a female colleague is moja kolegica s posla,2,hr-agent-v1;ipa=espeak

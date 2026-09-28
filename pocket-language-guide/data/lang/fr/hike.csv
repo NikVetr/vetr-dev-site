@@ -64,3 +64,6 @@ trail-landmarks.end,Arrivée,,aʁivˈe,,2,fr-agent-v1;ipa=espeak
 trail-landmarks.elevation,altitude,,altitˈyd,,2,fr-agent-v1;ipa=espeak
 trail-landmarks.sunset,le coucher du soleil,,lə kuʃe dy solˈɛj,,2,fr-agent-v1;ipa=espeak
 trail-landmarks.water-point,point d'eau,,pwɛ̃ dˈo,,2,fr-agent-v1;ipa=espeak
+outdoors.can-we-camp-here,Pouvons-nous camper ici ?,,puvɔ̃nu kɑ̃pe isˈi,,2,fr-about-travel-v1;ipa=espeak
+outdoors.is-it-safe-to-swim-here,Est-ce sûr de se baigner ici ?,,ɛs syːʁ də sə bɛnje isˈi,,2,fr-about-travel-v1;ipa=espeak
+outdoors.are-there-dangerous-animals-here,Y a-t-il des animaux dangereux ici ?,,i atil dez animo dɑ̃ʒʁøz isˈi,,2,fr-about-travel-v1;ipa=espeak

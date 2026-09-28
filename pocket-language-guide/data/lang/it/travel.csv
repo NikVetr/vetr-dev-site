@@ -120,3 +120,15 @@ rail-station-words.maglev,maglev,treno a levitazione magnetica,mˈaɡlev,,1,read
 common-signs.pork-code,codici del maiale,,kˈɔditʃɪ del majˈale,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
 rail-station-words.fare,tariffa,prezzo del biglietto,tarˈiffa,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,Dove si paga il biglietto?,,dˈove sɪ pˈaɡa il biʎˈetto,Italy expects the ticket bought before boarding and validated on board,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+air-travel.where-is-check-in,Dov'è il check-in?,,dovˈɛ il tʃˈɛkkiːn,,2,it-about-travel-v1;ipa=espeak
+air-travel.which-gate,Qual è il gate?,,kwˈal e il ɡˈeɪt,,2,it-about-travel-v1;ipa=espeak
+air-travel.where-is-the-security-check,Dov'è il controllo di sicurezza?,,dovˈɛ il kontrˈɔllo dɪ sikʊrˈetstsa,,2,it-about-travel-v1;ipa=espeak
+air-travel.my-luggage-did-not-arrive,Il mio bagaglio non è arrivato,,il mˌio baɡˈaʎo non e arɾivˈato,,2,it-about-travel-v1;ipa=espeak
+air-travel.i-would-like-a-window-seat,Vorrei un posto finestrino,,vorɾˈɛi ʊn pˈosto finestrˈino,,2,it-about-travel-v1;ipa=espeak
+air-travel.i-would-like-an-aisle-seat,Vorrei un posto corridoio,,vorɾˈɛi ʊn pˈosto korɾidˈojo,,2,it-about-travel-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,Mi può dare un passaggio?,,mɪ pʊˈɔ dˈare ʊn passˈadʒdʒo,,2,it-about-travel-v1;ipa=espeak
+hitchhiking.where-are-you-going,Dove va?,,dˈove vˈa,,2,it-about-travel-v1;ipa=espeak
+hitchhiking.i-only-need-to-go-to-the-next-town,Devo solo arrivare al prossimo paese,,dˈɛvo sˈolo arɾivˈare al prˈɔssimo paˈeze,,2,it-about-travel-v1;ipa=espeak
+hitchhiking.is-there-room-for-two,C'è posto per due?,,tʃe pˈosto per dˈue,,2,it-about-travel-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,Posso pagare la benzina,,pˈɔsso paɡˈare la bendzˈɪna,,2,it-about-travel-v1;ipa=espeak
+hitchhiking.thank-you-for-the-ride,Grazie del passaggio,,ɡrˈatsje del passˈadʒdʒo,,2,it-about-travel-v1;ipa=espeak

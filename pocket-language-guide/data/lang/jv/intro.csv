@@ -15,3 +15,17 @@ family-intros.this-is-my-husband,Menika garwa kakung kula,,məˈnikɔ ˈɡɔrwɔ
 family-intros.this-is-my-wife,Menika garwa putri kula,,məˈnikɔ ˈɡɔrwɔ ˈputri ˈkulɔ,garwa putri -- putri 'female' marks the combined row's gender-neutral garwa,2,jv-agent-v1;split-from=this-is-my-husband-wife;ipa=jv-g2p
 family-intros.this-is-my-son,Menika laré jaler kula,,məˈnikɔ ˈlare ˈdʒalər ˈkulɔ,,2,jv-agent-v1;split-from=this-is-my-daughter-son;ipa=jv-g2p
 family-intros.this-is-my-daughter,Menika laré èstri kula,,məˈnikɔ ˈlare ˈɛstri ˈkulɔ,,2,jv-agent-v1;split-from=this-is-my-daughter-son;ipa=jv-g2p
+about-me.i-am-a-student,Kula siswa,,ˈkulɔ ˈsiswɔ,krama kula; siswa is a level-neutral modern loanword like this pack's own wisatawan,2,jv-agent-v1;ipa=jv-g2p
+about-me.i-am-retired,Kula sampun pènsiun,,ˈkulɔ ˈsampʊn pɛnˈsiʊn,"sampun (already), matching hotel-basics.i-have-a-reservation's Kula sampun pesen",2,jv-agent-v1;in-pack-neighbour=hotel-basics.i-have-a-reservation;ipa=jv-g2p
+about-me.i-am-a-teacher,Kula guru,,ˈkulɔ ˈɡuru,,2,jv-agent-v1;ipa=jv-g2p
+about-me.i-am-a-doctor,Kula dokter,,ˈkulɔ ˈdɔʔtər,,2,jv-agent-v1;ipa=jv-g2p
+about-me.i-am-a-nurse,Kula perawat,,ˈkulɔ pəˈrawat,,2,jv-agent-v1;ipa=jv-g2p
+about-me.i-am-an-engineer,Kula insinyur,,ˈkulɔ ɪnˈsiɲʊr,,2,jv-agent-v1;ipa=jv-g2p
+about-me.i-work-in-an-office,Kula nyambut damel wonten kantor,,ˈkulɔ ˈɲambʊt ˈdaməl ˈwɔntən ˈkantɔr,nyambut damel is krama halus for kerja/work,2,jv-agent-v1;src=kawruhbasa.com nyambut damel;ipa=jv-g2p
+about-me.i-have-my-own-business,Kula gadhah usaha piyambak,,ˈkulɔ ˈɡaɖah uˈsɔhɔ piˈjambaʔ,gadhah is this pack's own krama have (core.csv pronouns-verbs.have); piyambak reused from introductions.i-am-traveling-alone,2,jv-agent-v1;in-pack-neighbour=introductions.i-am-traveling-alone;ipa=jv-g2p
+family-intros.this-is-my-mother,Menika ibu kula,,məˈnikɔ ˈibu ˈkulɔ,"ibu, the krama word for mother (biyung/mak/mbok are ngoko)",2,jv-agent-v1;ipa=jv-g2p
+family-intros.this-is-my-father,Menika rama kula,,məˈnikɔ ˈrɔmɔ ˈkulɔ,"rama, the krama word for father (bapak/pak are the ngoko/general address form)",2,jv-agent-v1;ipa=jv-g2p
+family-intros.this-is-my-brother,Menika sedherek jaler kula,,məˈnikɔ səɖəˈrəʔ ˈdʒalər ˈkulɔ,"sedherek (krama for sedulur, age-neutral sibling) + jaler, matching this pack's own laré jaler/laré èstri pattern for children rather than the age-graded kakang/mbakyu/adik",2,jv-agent-v1;ipa=jv-g2p
+family-intros.this-is-my-sister,Menika sedherek èstri kula,,məˈnikɔ səɖəˈrəʔ ˈɛstri ˈkulɔ,see this-is-my-brother,2,jv-agent-v1;ipa=jv-g2p
+family-intros.this-is-my-partner,Menika pasangan kula,,məˈnikɔ paˈsaŋan ˈkulɔ,"pasangan (loanword) rather than reusing garwa (spouse) -- Javanese otherwise has no word for an unmarried romantic partner distinct from a spouse, and this concept is deliberately not this-is-my-husband/wife again",2,jv-agent-v1;ipa=jv-g2p
+family-intros.this-is-my-colleague,Menika mitra damel kula,,məˈnikɔ ˈmitrɔ ˈdaməl ˈkulɔ,"mitra (level-neutral partner/associate) + damel (work), avoiding kanca (friend), whose own register in this pack's introductions.this-is-my-friend is not clearly krama",2,jv-agent-v1;ipa=jv-g2p

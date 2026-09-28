@@ -64,3 +64,6 @@ trail-landmarks.end,ਅੰਤ,,aṁt,ʌnt,,2,pa-agent-v1;ipa=espeak
 trail-landmarks.elevation,ਉਚਾਈ,,ucāī,ʊcai,height,2,pa-agent-v1;ipa=espeak
 trail-landmarks.sunset,ਸੂਰਜ ਡੁੱਬਣਾ,,sūraj ḍubbaṇā,suɾəɟ ɖʊbbəɳa,the sun's setting,2,pa-agent-v1;ipa=espeak
 trail-landmarks.water-point,ਪਾਣੀ ਵਾਲੀ ਥਾਂ,,pāṇī vālī thāṁ,paɳi ʋali tʰã,place with water,2,pa-agent-v1;ipa=espeak
+outdoors.can-we-camp-here,ਕੀ ਅਸੀਂ ਇੱਥੇ ਕੈਂਪ ਕਰ ਸਕਦੇ ਹਾਂ?,,kī asīṁ itthē kêmp kar sakadē hāṁ?,ki əsĩ ɪttʰe kɛmp kʌɾ sʌkəde hã,subject is 'we' -- no speaker_gender variant per speaker-variants.md,2,pa-agent-v1;ipa=espeak
+outdoors.is-it-safe-to-swim-here,ਕੀ ਇੱਥੇ ਤਰਨਾ ਸੁਰੱਖਿਅਤ ਹੈ?,,kī itthē tarnā surakkhiat hai?,ki ɪttʰe tʌɾəna sʊɾʌkkʰɪət hɛ,,2,pa-agent-v1;ipa=espeak
+outdoors.are-there-dangerous-animals-here,ਕੀ ਇੱਥੇ ਖ਼ਤਰਨਾਕ ਜਾਨਵਰ ਹਨ?,,kī itthē k͟hatarnāk jānvar han?,ki ɪttʰe xətəɾənak ɟanəʋəɾ hən,,2,pa-agent-v1;ipa=espeak

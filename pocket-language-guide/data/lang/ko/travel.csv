@@ -120,3 +120,15 @@ rail-station-words.maglev,자기부상열차,,jagibusangyeolcha,tɕaɡibusaŋjʌ
 common-signs.pork-code,돼지고기 은어,,dwaejigogi euneo,twɛdʑiɡoɡi ɯnʌ,,2,pork-code-agent-v1;lppom-mui;ipa=rr
 rail-station-words.fare,요금,,yogeum,joɡɯm,,2,fare-agent-v1;in-pack-neighbour;ipa=rr
 transit-rides.where-do-i-pay-the-fare,요금은 어디서 내요?,,yogeumeun eodiseo naeyo?,joɡɯmɯn ʌdisʌ nɛjo,,2,translator-requests-v1;in-pack-neighbour;ipa=rr
+air-travel.where-is-check-in,체크인은 어디예요?,,chekeuineun eodiyeyo?,tɕʰekʰɯinɯn ʌdijejo,,2,Incheon International Airport (airport.kr) check-in/보안검색/탑승구 guidance; ko-agent-v1;ipa=rr
+air-travel.which-gate,몇 번 게이트예요?,,myeot beon geiteuyeyo?,mjʌt pʌn keitʰɯjejo,,2,ko-agent-v1;ipa=rr
+air-travel.where-is-the-security-check,보안 검색대는 어디예요?,,boan geomsaekdaeneun eodiyeyo?,poan kʌmsɛktɛnɯn ʌdijejo,,2,Incheon International Airport (airport.kr) check-in/보안검색/탑승구 guidance; ko-agent-v1;ipa=rr
+air-travel.my-luggage-did-not-arrive,짐이 안 왔어요,,jimi an wasseoyo,tɕimi an was͈ʌjo,,2,ko-agent-v1;ipa=rr
+air-travel.i-would-like-a-window-seat,창가 자리로 주세요,,changga jariro juseyo,tɕʰaŋɡa tɕaɾiɾo tɕusejo,,2,ko-agent-v1;ipa=rr
+air-travel.i-would-like-an-aisle-seat,통로 쪽 자리로 주세요,,tongno jjok jariro juseyo,tʰoŋno tɕ͈ok tɕaɾiɾo tɕusejo,,2,ko-agent-v1;ipa=rr
+hitchhiking.can-you-give-me-a-ride,태워 줄 수 있어요?,,taewo jul su isseoyo?,tʰɛwʌ tɕul su is͈ʌjo,,2,ko-agent-v1;ipa=rr
+hitchhiking.where-are-you-going,어디까지 가세요?,,eodikkaji gaseyo?,ʌdik͈adʑi kasejo,,2,ko-agent-v1;ipa=rr
+hitchhiking.i-only-need-to-go-to-the-next-town,다음 마을까지만 가면 돼요,,daeum maeulkkajiman gamyeon dwaeyo,taɯm maɯlk͈adʑiman kamjʌn twɛjo,,2,ko-agent-v1;ipa=rr
+hitchhiking.is-there-room-for-two,두 명 탈 수 있어요?,,du myeong tal su isseoyo?,tu mjʌŋ tʰal su is͈ʌjo,,2,ko-agent-v1;ipa=rr
+hitchhiking.i-can-pay-for-fuel,기름값은 낼 수 있어요,,gireumgapsseun nael su isseoyo,kiɾɯmɡaps͈ɯn nɛl su is͈ʌjo,"기름, the colloquial word Korean drivers use for fuel",2,ko-agent-v1;ipa=rr
+hitchhiking.thank-you-for-the-ride,태워 주셔서 감사합니다,,taewo jusyeoseo gamsahamnida,tʰɛwʌ tɕusjʌsʌ kamsahamnida,"감사합니다 matches this pack's own social-basics.thank-you base row, which is 합쇼체 where the rest of this pack is 해요체",2,ko-agent-v1;ipa=rr

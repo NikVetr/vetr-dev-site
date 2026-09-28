@@ -15,3 +15,17 @@ family-intros.this-is-my-wife,یہ میری بیوی ہیں,,yah merī bīwī ha
 family-intros.this-is-my-son,یہ میرا بیٹا ہے,,yah merā beṭā hai,jeːh mˈeːɾaː bˈeːʈaː hɛ,,2,"ur-agent-v1;note=combined row had no copula; demonstrative+copula added from this-is-my-friend/my-name-is patterns, honorific for spouse per Schmidt, R. L., Urdu: An Essential Grammar (Routledge, 1999);ipa=espeak"
 family-intros.this-is-my-daughter,یہ میری بیٹی ہے,,yah merī beṭī hai,jeːh mˈeːɾi bˈeːʈi hɛ,,2,"ur-agent-v1;note=combined row had no copula; demonstrative+copula added from this-is-my-friend/my-name-is patterns, honorific for spouse per Schmidt, R. L., Urdu: An Essential Grammar (Routledge, 1999);ipa=espeak"
 introductions.i-am-traveling-alone,میں اکیلا سفر کر رہا ہوں,,maiñ akelā safar kar rahā hūñ,mˈẽ akˈeːlaː safˈaɾ kaɾ ɾˈʌhaː hũː,masculine speaker; a woman says اکیلی … رہی,2,ur-agent-v1;ipa=espeak
+about-me.i-am-a-student,میں طالب علم ہوں,,maiñ tālib-e-ilm hūñ,mˈẽ tˌaːlɪbˈeː ɪlm hũː,"masculine speaker; a woman says طالبہ (tāliba), the standard word for a female student rather than a feminine of this compound",2,ur-agent-v1;ipa=espeak
+about-me.i-am-retired,میں ریٹائرڈ ہوں,,maiñ riṭāyarḍ hūñ,mˈẽ ɾeːʈˈaɪɾɖ hũː,riṭāyarḍ (loanword) does not inflect for gender,2,ur-agent-v1;ipa=espeak
+about-me.i-am-a-teacher,میں استاد ہوں,,maiñ ustād hūñ,mˈẽ ʊstˈaːd hũː,masculine speaker; a woman says استانی (ustānī),2,ur-agent-v1;ipa=espeak
+about-me.i-am-a-doctor,میں ڈاکٹر ہوں,,maiñ ḍākṭar hūñ,mˈẽ ɖˌaːkʈˈaɾ hũː,ḍākṭar (loanword) does not inflect for gender,2,ur-agent-v1;ipa=espeak
+about-me.i-am-a-nurse,میں نرس ہوں,,maiñ nars hūñ,mˈẽ nˈaɾs hũː,nars (loanword) does not inflect for gender,2,ur-agent-v1;ipa=espeak
+about-me.i-am-an-engineer,میں انجینئر ہوں,,maiñ injīniyar hūñ,mˈẽ ˈanɟinˌəɾ hũː,injīniyar (loanword) does not inflect for gender,2,ur-agent-v1;ipa=espeak
+about-me.i-work-in-an-office,میں دفتر میں کام کرتا ہوں,,maiñ daftar meñ kām kartā hūñ,mˈẽ dˌaftˈaɾ mˈẽ kˈaːm kˌaɾtaː hũː,masculine speaker; a woman says کرتی (kartī),2,ur-agent-v1;ipa=espeak
+about-me.i-have-my-own-business,میرا اپنا کاروبار ہے,,merā apnā kārobār hai,mˈeːɾaː ˈapnˌaː kˌaːɾoːbˈaːɾ hɛ,,2,ur-agent-v1;ipa=espeak
+family-intros.this-is-my-mother,یہ میری ماں ہیں,,yah merī māñ haiñ,jeːh mˈeːɾi mˈãː hẽ,,2,ur-agent-v1;ipa=espeak
+family-intros.this-is-my-father,یہ میرے والد ہیں,,yah mere wālid haiñ,jeːh mˈeːɾeː ʋˈaːlɪd hẽ,"wālid rather than the plainer bāp, matching the register recommended for a formal introduction",2,ur-agent-v1;ipa=espeak
+family-intros.this-is-my-brother,یہ میرے بھائی ہیں,,yah mere bhāī haiñ,jeːh mˈeːɾeː bʰˈaːi hẽ,,2,ur-agent-v1;ipa=espeak
+family-intros.this-is-my-sister,یہ میری بہن ہیں,,yah merī bahen haiñ,jeːh mˈeːɾi bˈɛhɛn hẽ,,2,ur-agent-v1;ipa=espeak
+family-intros.this-is-my-partner,یہ میرے پارٹنر ہیں,یہ میری پارٹنر ہیں,yah mere partner haiñ,jeːh mˈeːɾeː pˈaːɾʈənˌəɾ hẽ,"partner (loanword) names a romantic/life partner regardless of marriage, avoiding the marital overtone of شریکِ حیات; the possessive agrees with the introduced partner's own gender (mere/merī), not the speaker's -- text_alt is for a female partner",2,ur-agent-v1;ipa=espeak
+family-intros.this-is-my-colleague,یہ میرے ساتھی ہیں,یہ میری ساتھی ہیں,yah mere sāthī haiñ,jeːh mˈeːɾeː sˈaːtʰi hẽ,"text_alt is for a female colleague, agreeing on the possessive as family-intros.this-is-my-partner does",2,ur-agent-v1;ipa=espeak

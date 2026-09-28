@@ -120,3 +120,15 @@ rail-station-words.ticket-validator,validadora,canceladora · validador,bˌalida
 common-signs.pork-code,códigos de cerdo,,kˈodiɡos de sˈeɾdo,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
 rail-station-words.fare,tarifa,pasaje,taɾˈifa,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,¿Dónde se paga el pasaje?,,dˈonde se pˈaɡa el pasˈaxe,where is the fare paid?,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+air-travel.where-is-check-in,¿Dónde está la facturación?,¿Dónde está el check-in?,dˈonde estˈa la fˌaktuɾasjˈon,,2,es-about-travel-v1;ipa=espeak
+air-travel.which-gate,¿Qué puerta de embarque?,,kˈe pwˈeɾta de embˈaɾke,,2,es-about-travel-v1;ipa=espeak
+air-travel.where-is-the-security-check,¿Dónde está el control de seguridad?,,dˈonde estˈa el kontɾˈol de sˌeɡuɾidˈad,,2,es-about-travel-v1;ipa=espeak
+air-travel.my-luggage-did-not-arrive,Mi equipaje no llegó,,mi ˌekipˈaxe nˈo ʝeɡˈo,,2,es-about-travel-v1;ipa=espeak
+air-travel.i-would-like-a-window-seat,Quisiera un asiento de ventanilla,,kisjˈeɾa ˈun asjˈento de bˌentanˈiʝa,,2,es-about-travel-v1;ipa=espeak
+air-travel.i-would-like-an-aisle-seat,Quisiera un asiento de pasillo,,kisjˈeɾa ˈun asjˈento de pasˈiʝo,,2,es-about-travel-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,¿Me puede llevar?,,me pwˈede ʝebˈaɾ,,2,es-about-travel-v1;ipa=espeak
+hitchhiking.where-are-you-going,¿Adónde va?,,adˈonde bˈa,,2,es-about-travel-v1;ipa=espeak
+hitchhiking.i-only-need-to-go-to-the-next-town,Solo necesito llegar al próximo pueblo,,sˈolo nˌesesˈito ʝeɡˈaɾ al pɾˈoksimo pwˈeblo,,2,es-about-travel-v1;ipa=espeak
+hitchhiking.is-there-room-for-two,¿Hay lugar para dos?,,ˈaɪ luɡˈaɾ pˌaɾa dˈos,,2,es-about-travel-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,Puedo pagar la gasolina,,pwˈedo paɡˈaɾ la ɡˌasolˈina,,2,es-about-travel-v1;ipa=espeak
+hitchhiking.thank-you-for-the-ride,Gracias por llevarme,,ɡɾˈasjas poɾ ʝebˈaɾme,,2,es-about-travel-v1;ipa=espeak

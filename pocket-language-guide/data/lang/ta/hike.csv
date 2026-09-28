@@ -64,3 +64,6 @@ trail-landmarks.end,முடிவு,,muṭivu,muɖivɯ,,2,ta-agent-v1;ipa=esp
 trail-landmarks.elevation,உயரம்,,uyaram,ujʌɾʌm,,2,ta-agent-v1;ipa=espeak
 trail-landmarks.sunset,சூரிய அஸ்தமனம்,,cūriya astamaṉam,suːɾijʌ astʌmʌnʌm,,2,ta-agent-v1;ipa=espeak
 trail-landmarks.water-point,தண்ணீர் கிடைக்கும் இடம்,,taṇṇīr kiṭaikkum iṭam,tʌɳɳiːr kiɖaɪkkɯm iɖʌm,,2,ta-agent-v1;ipa=espeak
+outdoors.can-we-camp-here,நாங்கள் இங்கே முகாம் அமைக்கலாமா?,,nāṅkaḷ iṅkē mukām amaikkalāmā?,naːŋɡʌɭ iŋɡeː muɡaːm amaɪkkʌlaːmaː,,2,ta-agent-v1;ipa=espeak
+outdoors.is-it-safe-to-swim-here,இங்கே நீந்துவது பாதுகாப்பானதா?,,iṅkē nīntuvatu pātukāppāṉatā?,iŋɡeː niːndɯvʌdɯ paːdɯɡaːppaːnʌdaː,,2,ta-agent-v1;ipa=espeak
+outdoors.are-there-dangerous-animals-here,இங்கே ஆபத்தான விலங்குகள் இருக்கின்றனவா?,,iṅkē āpattāṉa vilaṅkukaḷ irukkiṉṟaṉavā?,iŋɡeː aːbʌttaːnʌ vilʌŋɡɯɡʌɭ iɾɯkkinrʌnʌvaː,,2,ta-agent-v1;ipa=espeak

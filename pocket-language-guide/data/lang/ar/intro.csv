@@ -15,3 +15,17 @@ family-intros.this-is-my-wife,هذه زوجتي,,hādhihi zawjatī,haˈaðihˌi 
 family-intros.this-is-my-son,هذا ابني,,hādhā ibnī,haˈaðaˌa ˈabniː,,2,ar-agent-v1;ipa=espeak
 family-intros.this-is-my-daughter,هذه ابنتي,,hādhihi ibnatī,haˈaðihˌi ˈabntiː,,2,ar-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,أسافر وحدي,,usāfir waḥdī,ʔsˈaːfr wħdiː,,2,ar-agent-v1;ipa=espeak
+about-me.i-am-a-student,أنا طالب,,anā ṭālib,ˈana t̪ˈaːlab,,2,ar-agent-v1;ipa=espeak
+about-me.i-am-retired,أنا متقاعد,,anā mutaqāʿid,ˈana mutˈaqaːʕˌid,,2,ar-agent-v1;ipa=espeak
+about-me.i-am-a-teacher,أنا معلّم,,anā muʿallim,ˈana mʕllm,,2,ar-agent-v1;ipa=espeak
+about-me.i-am-a-doctor,أنا طبيب,,anā ṭabīb,ˈana t̪ˈabiːb,,2,ar-agent-v1;ipa=espeak
+about-me.i-am-a-nurse,أنا ممرّض,,anā mumarriḍ,ˈana mmrrdˤ,,2,ar-agent-v1;ipa=espeak
+about-me.i-am-an-engineer,أنا مهندس,,anā muhandis,ˈana mˈuhandˌis,,2,ar-agent-v1;ipa=espeak
+about-me.i-work-in-an-office,أنا أعمل في مكتب,,anā aʿmal fī maktab,ˈana ʔˈaʕmal fˈiː mˈaktab,,2,ar-agent-v1;ipa=espeak
+about-me.i-have-my-own-business,لديّ مشروعي الخاص,,ladayya mashrūʿī al-khāṣṣ,ldiː mʃɹˈuːʕiː ʔalxˈaːs̪s̪,,2,ar-agent-v1;ipa=espeak
+family-intros.this-is-my-mother,هذه أمي,,hādhihi ummī,haˈaðihˌi ʔˈummiːj,,2,ar-agent-v1;ipa=espeak
+family-intros.this-is-my-father,هذا أبي,,hādhā abī,haˈaðaˌa ʔˈabiː,,2,ar-agent-v1;ipa=espeak
+family-intros.this-is-my-brother,هذا أخي,,hādhā akhī,haˈaðaˌa ʔxˈiː,,2,ar-agent-v1;ipa=espeak
+family-intros.this-is-my-sister,هذه أختي,,hādhihi ukhtī,haˈaðihˌi ʔxtˈiː,,2,ar-agent-v1;ipa=espeak
+family-intros.this-is-my-partner,هذا شريك حياتي,هذه شريكة حياتي,hādhā sharīk ḥayātī,haˈaðaˌa ʃˈaɹiːk ħˈajaːtˌiːj,"sharīk hayātī = life partner (masc.); the feminine in text_alt is for a female partner, not the speaker -- ""life"" avoids the business-partner reading bare sharīk risks",2,ar-agent-v1;ipa=espeak
+family-intros.this-is-my-colleague,هذا زميلي,هذه زميلتي,hādhā zamīlī,haˈaðaˌa zmˈiːliː,"feminine in text_alt is for a female colleague, not the speaker",2,ar-agent-v1;ipa=espeak

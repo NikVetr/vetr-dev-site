@@ -1,2 +1,3 @@
 variant,concept_id,text,text_alt,romanization_iso15919,ipa,literal,confidence,provenance
 speaker_gender=feminine,introductions.i-am-traveling-alone,म एक्लै यात्रा गरिरहेकी छु,,ma ēklai yātrā garirahēkī chu,mə ˈeːklɛː jˈaːtɾaː ɡˌəɾɪɾəhˈeːki cʰˈu,,2,ne-variants-v1;rule=participle-agrees-with-female-animate-subject;ipa=espeak
+speaker_gender=feminine,about-me.i-am-retired,म सेवानिवृत्त भएकी छु,,ma sēvānivr̥tta bhaēkī chu,mə seːwˈaːnɪwɾɪttˌə bʰəˈeːki cʰˈu,,2,ne-variants-v1;rule=participle-agrees-with-female-animate-subject;ipa=espeak

@@ -64,3 +64,6 @@ weather.flood,洪水,,hóngshuǐ,xʊŋ˧˥ʂweɪ˧˩˧,,2,zh-Hans-agent-v1;ipa=p
 weather.avalanche-risk,雪崩危险,雪崩危險,xuěbēng wēixiǎn,ɕɥœ˧˩˧pɤŋ˥ weɪ˥ɕjɛn˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
 trail-transport.how-long-is-the-wait,要等多久？,,yào děng duōjiǔ?,jɑʊ˥˩ tɤŋ˧˩˧ twɔ˥tɕjoʊ˧˩˧,,2,zh-Hans-agent-v1;ipa=pinyin
 hiking-parks.is-this-trail-suitable-for-beginners,这条路适合新手吗？,,zhè tiáo lù shìhé xīnshǒu ma?,ʈʂɤ˥˩ tʰjɑʊ˧˥ lu˥˩ ʂɨ˥˩xɤ˧˥ ɕin˥ʂoʊ˧˩˧ ma,,2,zh-Hans-agent-v1;ipa=pinyin
+outdoors.can-we-camp-here,这里可以露营吗？,,zhèlǐ kěyǐ lùyíng ma?,ʈʂɤ˥˩li˧˩˧ kʰɤ˧˩˧i˧˩˧ lu˥˩iŋ˧˥ ma,,2,zh-Hans-agent-v1;ipa=pinyin
+outdoors.is-it-safe-to-swim-here,这里游泳安全吗？,,zhèlǐ yóuyǒng ānquán ma?,ʈʂɤ˥˩li˧˩˧ joʊ˧˥jʊŋ˧˩˧ an˥tɕʰɥœn˧˥ ma,,2,zh-Hans-agent-v1;ipa=pinyin
+outdoors.are-there-dangerous-animals-here,这里有危险的动物吗？,,zhèlǐ yǒu wēixiǎn de dòngwù ma?,ʈʂɤ˥˩li˧˩˧ joʊ˧˩˧ weɪ˥ɕjɛn˧˩˧ tɤ tʊŋ˥˩u˥˩ ma,,2,zh-Hans-agent-v1;ipa=pinyin

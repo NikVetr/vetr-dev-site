@@ -64,3 +64,6 @@ weather.flood,洪水,,kōzui,koːzɯi,,2,ja-agent-v1;ipa=hepburn
 weather.avalanche-risk,雪崩注意,,nadare chūi,nadaɾe tɕɯːi,,2,ja-agent-v1;ipa=hepburn
 trail-transport.how-long-is-the-wait,待ち時間はどのくらいですか？,,machijikan wa dono kurai desu ka?,matɕidʑikaɴ wa dono kɯɾai desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
 hiking-parks.is-this-trail-suitable-for-beginners,この登山道は初心者向けですか？,,kono tozandō wa shoshinsha muke desu ka?,kono tozaɴdoː wa ɕoɕiɴɕa mɯke desɯ ka,,2,japanese-reviewed-v6;ipa=hepburn
+outdoors.can-we-camp-here,ここでキャンプできますか？,,koko de kyanpu dekimasu ka?,koko de kjaɴpɯ dekimasɯ ka,,2,ja-agent-v1;ipa=hepburn
+outdoors.is-it-safe-to-swim-here,ここで泳いでも安全ですか？,,koko de oyoide mo anzen desu ka?,koko de ojoide mo aɴzeɴ desɯ ka,,2,ja-agent-v1;ipa=hepburn
+outdoors.are-there-dangerous-animals-here,ここに危険な動物はいますか？,,koko ni kiken na dōbutsu wa imasu ka?,koko ɲi kikeɴ na doːbɯtsɯ wa imasɯ ka,,2,ja-agent-v1;ipa=hepburn

@@ -64,3 +64,6 @@ trail-landmarks.end,จุดสิ้นสุด,,chut sinsut,tɕut˨˩sin˥˩
 trail-landmarks.elevation,ความสูง,ระดับน้ำทะเล,khwam sung,kʰwaːm˧suːŋ˩˩˦,,2,th-agent-v1;ipa=thaig2p
 trail-landmarks.sunset,พระอาทิตย์ตก,,phra athit tok,pʰraʔ˦˥ʔaː˧tʰit˦˥ tok˨˩,,2,th-agent-v1;ipa=thaig2p
 trail-landmarks.water-point,จุดเติมน้ำ,,chut toem nam,tɕut˨˩ tɤːm˧ naːm˦˥,,2,th-agent-v1;ipa=thaig2p
+outdoors.can-we-camp-here,กางเต็นท์ที่นี่ได้ไหม,,kang ten thi ni dai mai,kaːŋ˧ ten˦˥ tʰiː˥˩niː˥˩ daːj˥˩ maj˩˩˦,,2,Dept. of National Parks (กรมอุทยานแห่งชาติ) camping guidance; th-agent-v1;ipa=thaig2p
+outdoors.is-it-safe-to-swim-here,ว่ายน้ำที่นี่ปลอดภัยไหม,,waai nam thi ni plotphai mai,waːj˥˩naːm˦˥ tʰiː˥˩niː˥˩ plɔːt˨˩pʰaj˧ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p
+outdoors.are-there-dangerous-animals-here,ที่นี่มีสัตว์อันตรายไหม,,thi ni mi sat antarai mai,tʰiː˥˩niː˥˩ miː˧ sat˨˩ ʔan˧traːj˧ maj˩˩˦,,2,th-agent-v1;ipa=thaig2p

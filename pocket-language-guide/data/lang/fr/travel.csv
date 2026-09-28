@@ -120,3 +120,15 @@ rail-station-words.ticket-validator,valideur,composteur,validˈœʁ,,2,coordinat
 common-signs.pork-code,codes pour le porc,,kod puʁ lə pˈɔʁk,,2,pork-code-agent-v1;lppom-mui;ipa=espeak
 rail-station-words.fare,tarif,prix du billet,taʁˈif,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak
 transit-rides.where-do-i-pay-the-fare,Où faut-il payer le trajet ?,,u fotil pɛje lə tʁaʒˈɛ,,2,translator-requests-v1;in-pack-neighbour;ipa=espeak
+air-travel.where-is-check-in,Où est l'enregistrement ?,,u ɛ lɑ̃ʁʒistʁəmˈɑ̃,,2,fr-about-travel-v1;ipa=espeak
+air-travel.which-gate,Quelle porte d'embarquement ?,,kɛl pɔʁt dɑ̃baʁkəmˈɑ̃,,2,fr-about-travel-v1;ipa=espeak
+air-travel.where-is-the-security-check,Où est le contrôle de sûreté ?,,u ɛ lə kɔ̃tʁoːl də syʁtˈe,,2,fr-about-travel-v1;ipa=espeak
+air-travel.my-luggage-did-not-arrive,Mes bagages ne sont pas arrivés,,me baɡaʒ nə sɔ̃ paz aʁivˈe,,2,fr-about-travel-v1;ipa=espeak
+air-travel.i-would-like-a-window-seat,Je voudrais une place côté hublot,,ʒə vudʁɛz yn plas kote yblˈo,,2,fr-about-travel-v1;ipa=espeak
+air-travel.i-would-like-an-aisle-seat,Je voudrais une place côté couloir,,ʒə vudʁɛz yn plas kote kulwˈaʁ,,2,fr-about-travel-v1;ipa=espeak
+hitchhiking.can-you-give-me-a-ride,Pouvez-vous m'emmener ?,,puvevu mɑ̃mnˈe,,2,fr-about-travel-v1;ipa=espeak
+hitchhiking.where-are-you-going,Où allez-vous ?,,u alevˈu,,2,fr-about-travel-v1;ipa=espeak
+hitchhiking.i-only-need-to-go-to-the-next-town,J'ai juste besoin d'aller jusqu'à la prochaine ville,,ʒe ʒyst bəzwɛ̃ dale ʒyska la pʁoʃɛn vˈil,,2,fr-about-travel-v1;ipa=espeak
+hitchhiking.is-there-room-for-two,Y a-t-il de la place pour deux ?,,i atil də la plas puʁ dˈø,,2,fr-about-travel-v1;ipa=espeak
+hitchhiking.i-can-pay-for-fuel,Je peux payer l'essence,,ʒə pø pɛje lesˈɑ̃s,,2,fr-about-travel-v1;ipa=espeak
+hitchhiking.thank-you-for-the-ride,Merci de m'avoir emmené,,mɛʁsi də mavwaʁ ɑ̃mnˈe,,2,fr-about-travel-v1;ipa=espeak
