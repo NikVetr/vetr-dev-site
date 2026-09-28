@@ -248,36 +248,45 @@ export function soundGrid({ ipa, spellOwner, spellListener, say, speakLabel, del
   const speak = /** @type {HTMLButtonElement} */ (el('button', { type: 'button', class: 'btn', text: speakLabel }));
   speak.hidden = !say;
   speak.addEventListener('click', () => say?.(heard.textContent ?? ''));
-  const erase = el('button', { type: 'button', class: 'btn sound-delete', 'aria-label': deleteLabel, text: '\u232b' });
+  // **Delete is a key of its own, and a large one**, beside what it deletes: it was a
+  // chip the size of a sound at the end of the row, the one key pressed most often.
+  const erase = /** @type {HTMLButtonElement} */ (el('button', { type: 'button', class: 'btn sound-delete', 'aria-label': deleteLabel, title: deleteLabel, text: '\u232b' }));
   const draw = () => {
     built.replaceChildren(...sounds.map((sound, k) => {
       const chip = el('button', { type: 'button', class: 'sound-chip', text: sound, 'aria-pressed': String(k === picked) });
       chip.addEventListener('click', () => { picked = picked === k ? -1 : k; draw(); });
       return chip;
-    }), erase);
+    }));
     heard.textContent = spellListener(sounds.join(''));
     speak.disabled = !sounds.length;
+    erase.disabled = !sounds.length;
   };
   erase.addEventListener('click', () => {
     sounds.splice(picked >= 0 ? picked : sounds.length - 1, 1);
     picked = -1;
     draw();
   });
-  const keys = SOUNDS.map((sound) => {
+  /** @param {string} sound */
+  const key = (sound) => {
     const sample = VOWEL.test(sound) ? sound : sound === 'ŋ' ? `a${sound}` : `${sound}a`;
-    const key = el('button', { type: 'button', class: 'sound-key' },
+    const button = el('button', { type: 'button', class: 'sound-key' },
       [el('span', { text: spellOwner(sample) || sound }), el('small', { text: sound })]);
-    key.addEventListener('click', () => {
+    button.addEventListener('click', () => {
       if (picked >= 0) sounds[picked] = sound;
       else sounds.push(sound);
       picked = -1;
       draw();
       say?.(spellListener(sample));
     });
-    return key;
-  });
+    return button;
+  };
   draw();
+  // The sounds so far and the name they spell stay in view while the keys scroll under
+  // them; the vowels are a block of their own, set apart and tinted.
   const element = el('div', { class: 'sound-builder' }, [
-    built, el('p', { class: 'sound-line' }, [heard, speak]), el('div', { class: 'sound-keys' }, keys)]);
+    el('div', { class: 'sound-head' }, [built, el('div', { class: 'sound-line' }, [heard, speak, erase])]),
+    el('div', { class: 'sound-keys' }, SOUNDS.filter((s) => !VOWEL.test(s)).map(key)),
+    el('div', { class: 'sound-keys sound-vowels' }, SOUNDS.filter((s) => VOWEL.test(s)).map(key)),
+  ]);
   return { element, value: () => sounds.join('') };
 }

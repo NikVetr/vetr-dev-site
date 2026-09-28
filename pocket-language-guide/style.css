@@ -2147,23 +2147,31 @@ dialog.speaker-settings h2 { margin: 0 0 var(--space-1); font-size: var(--fs-2);
    and a key per sound -- a syllable in the owner's letters over its IPA -- wrapping
    rather than clipping a long spelling. */
 .about-sounds summary { cursor: pointer; margin-block: var(--space-1); }
-.sound-built { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3em; min-block-size: 2.4em; }
+/* Pinned to the top of the dialog as it scrolls, on the dialog's own paper. */
+.sound-head {
+  position: sticky; inset-block-start: calc(-1 * var(--space-3)); z-index: 1;
+  background: var(--paper); padding-block: var(--space-2) var(--space-1); border-block-end: 1px solid var(--line-soft);
+}
+.sound-built { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3em; min-block-size: 2.6rem; }
 .sound-chip, .sound-key {
   font: inherit; color: inherit; background: var(--control);
   border: 1px solid var(--line); border-radius: var(--radius-sm);
 }
-.sound-chip { padding: 0.2em 0.5em; }
+.sound-chip { min-block-size: 2.4rem; min-inline-size: 2.4rem; padding: 0.2em 0.5em; }
 .sound-chip[aria-pressed="true"] { outline: 2px solid var(--accent); outline-offset: 1px; }
 .sound-line {
-  display: flex; align-items: center; justify-content: space-between; gap: var(--space-2);
-  margin-block: var(--space-1); font-size: var(--fs-1); overflow-wrap: anywhere;
+  display: flex; align-items: center; gap: var(--space-2);
+  margin-block: var(--space-1) 0; font-size: var(--fs-1); overflow-wrap: anywhere;
 }
+.sound-heard { flex: 1 1 auto; min-inline-size: 0; }
+.sound-delete { min-inline-size: 4rem; min-block-size: 3rem; font-size: 1.5em; line-height: 1; }
 .sound-keys {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(4rem, 1fr)); gap: 0.3em;
-  max-block-size: 40vh; overflow-y: auto; margin-block-end: var(--space-2);
+  margin-block: var(--space-2);
 }
-.sound-key { display: grid; justify-items: center; padding: 0.3em 0.2em; overflow-wrap: anywhere; }
+.sound-key { display: grid; justify-items: center; min-block-size: 3.2rem; padding: 0.3em 0.2em; overflow-wrap: anywhere; }
 .sound-key small { color: var(--muted); }
+.sound-vowels .sound-key { background: var(--accent-soft); border-color: var(--accent); }
 .about-ask form { padding-inline-end: 2.5rem; }
 
 /* The settings dialog's own action row: three chips that do different-sized things,
