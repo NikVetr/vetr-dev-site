@@ -11,3 +11,7 @@ introductions.i-am-a-tourist,আমি একজন পর্যটক,আমি
 introductions.this-is-my-husband-wife,ইনি আমার স্বামী / স্ত্রী,,ini āmāra sbāmī / strī,ˌini ˌamaɾ ʃˈami / stɾˈi,my husband / my wife,2,bn-agent-v1;ipa=espeak
 introductions.this-is-my-daughter-son,এ আমার মেয়ে / ছেলে,,e āmāra meẏe / chele,e ˌamaɾ mˈee / tʃʰˈele,"my daughter / my son; এ rather than ইনি, which is honorific",2,bn-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,আমি একা ভ্রমণ করছি,,āmi ekā bhramaṇa karachi,ˌami ˈeka bʰɾˈomɔn koɾcʰˈi,,2,bn-agent-v1;ipa=espeak
+family-intros.this-is-my-husband,ইনি আমার স্বামী,,ini āmāra sbāmī,ˌini ˌamaɾ ʃˈami,,2,bn-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-wife,ইনি আমার স্ত্রী,,ini āmāra strī,ˌini ˌamaɾ stɾˈi,,2,bn-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-son,এ আমার ছেলে,,e āmāra chele,e ˌamaɾ tʃʰˈele,,2,bn-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+family-intros.this-is-my-daughter,এ আমার মেয়ে,,e āmāra meẏe,e ˌamaɾ mˈee,,2,bn-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak

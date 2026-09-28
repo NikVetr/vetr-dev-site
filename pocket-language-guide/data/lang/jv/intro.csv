@@ -11,3 +11,7 @@ introductions.i-am-a-tourist,Kula wisatawan,Kula plancongan,ˈkulɔ wisaˈtawan,
 introductions.this-is-my-husband-wife,Menika garwa kula,,məˈnikɔ ˈɡɔrwɔ ˈkulɔ,garwa covers husband and wife,2,jv-agent-v1;ipa=jv-g2p
 introductions.this-is-my-daughter-son,Menika laré kula,Laré èstri · Laré jaler,məˈnikɔ ˈlare ˈkulɔ,"èstri = girl, jaler = boy",2,jv-agent-v1;ipa=jv-g2p
 introductions.i-am-traveling-alone,Kula késah piyambakan,,ˈkulɔ ˈkesah pijamˈbakan,,2,jv-agent-v1;ipa=jv-g2p
+family-intros.this-is-my-husband,Menika garwa kakung kula,,məˈnikɔ ˈɡɔrwɔ ˈkakʊŋ ˈkulɔ,garwa kakung -- kakung 'male' marks the combined row's gender-neutral garwa,2,jv-agent-v1;split-from=this-is-my-husband-wife;ipa=jv-g2p
+family-intros.this-is-my-wife,Menika garwa putri kula,,məˈnikɔ ˈɡɔrwɔ ˈputri ˈkulɔ,garwa putri -- putri 'female' marks the combined row's gender-neutral garwa,2,jv-agent-v1;split-from=this-is-my-husband-wife;ipa=jv-g2p
+family-intros.this-is-my-son,Menika laré jaler kula,,məˈnikɔ ˈlare ˈdʒalər ˈkulɔ,,2,jv-agent-v1;split-from=this-is-my-daughter-son;ipa=jv-g2p
+family-intros.this-is-my-daughter,Menika laré èstri kula,,məˈnikɔ ˈlare ˈɛstri ˈkulɔ,,2,jv-agent-v1;split-from=this-is-my-daughter-son;ipa=jv-g2p

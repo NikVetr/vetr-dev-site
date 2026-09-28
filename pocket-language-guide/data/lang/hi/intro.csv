@@ -11,3 +11,7 @@ introductions.i-am-a-tourist,मैं पर्यटक हूँ,मैं �
 introductions.this-is-my-husband-wife,मेरे पति / मेरी पत्नी,,mere pati / merī patnī,mˌeːɾeː pˈʌtɪ / mˌeːɾi pˈʌtni,my husband / my wife,2,hi-agent-v1;ipa=espeak
 introductions.this-is-my-daughter-son,मेरी बेटी / मेरा बेटा,,merī beṭī / merā beṭā,mˌeːɾi bˈeːʈi / mˌeːɾaː bˈeːʈaː,my daughter / my son,2,hi-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,मैं अकेले यात्रा पर हूँ,,maiṁ akele yātrā par hūṁ,mɛ̃ ʌkˈeːleː jˈaːtɾaː pˈʌɾ hũ,,2,hi-agent-v1;ipa=espeak
+family-intros.this-is-my-husband,ये मेरे पति हैं,,ye mere pati haiṁ,jeː mˌeːɾeː pˈʌtɪ hɛ̃,,2,hi-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-wife,ये मेरी पत्नी हैं,,ye merī patnī haiṁ,jeː mˌeːɾi pˈʌtni hɛ̃,,2,hi-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-son,ये मेरा बेटा है,,ye merā beṭā hai,jeː mˌeːɾaː bˈeːʈaː hɛː,,2,hi-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+family-intros.this-is-my-daughter,ये मेरी बेटी है,,ye merī beṭī hai,jeː mˌeːɾi bˈeːʈi hɛː,,2,hi-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak

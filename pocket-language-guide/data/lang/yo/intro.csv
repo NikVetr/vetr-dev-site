@@ -11,3 +11,7 @@ introductions.i-am-a-tourist,Arìnrìn-àjò afẹ́ ni mi,,arĩ˩rĩ˩a˩dʒo˩
 introductions.this-is-my-husband-wife,Èyí ni ọkọ mi / aya mi,,e˩ji˥ ni ɔkɔ mi / aja mi,husband-my / wife-my,2,yo-agent-v1;ipa=yo-g2p
 introductions.this-is-my-daughter-son,Èyí ni ọmọbìnrin mi / ọmọkùnrin mi,,e˩ji˥ ni ɔmɔbĩ˩rĩ mi / ɔmɔkũ˩rĩ mi,daughter-my / son-my,2,yo-agent-v1;ipa=yo-g2p
 introductions.i-am-traveling-alone,Mo ń rin ìrìn-àjò nìkan,,mo n̩˥ rĩ i˩rĩ˩a˩dʒo˩ ni˩kã,,2,yo-agent-v1;ipa=yo-g2p
+family-intros.this-is-my-husband,Èyí ni ọkọ mi,,e˩ji˥ ni ɔkɔ mi,husband-my,2,yo-agent-v1;split-from=this-is-my-husband-wife;ipa=yo-g2p
+family-intros.this-is-my-wife,Èyí ni aya mi,,e˩ji˥ ni aja mi,wife-my,2,yo-agent-v1;split-from=this-is-my-husband-wife;ipa=yo-g2p
+family-intros.this-is-my-son,Èyí ni ọmọkùnrin mi,,e˩ji˥ ni ɔmɔkũ˩rĩ mi,son-my,2,yo-agent-v1;split-from=this-is-my-daughter-son;ipa=yo-g2p
+family-intros.this-is-my-daughter,Èyí ni ọmọbìnrin mi,,e˩ji˥ ni ɔmɔbĩ˩rĩ mi,daughter-my,2,yo-agent-v1;split-from=this-is-my-daughter-son;ipa=yo-g2p

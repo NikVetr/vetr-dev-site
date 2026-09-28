@@ -11,3 +11,7 @@ introductions.i-am-a-tourist,Jsem turista,,jsem tˈurista,,2,cs-agent-v1;ipa=esp
 introductions.this-is-my-husband-wife,Toto je můj manžel / moje manželka,,tˈoto je mˈuːj mˈanʒel / mˈoje mˈanʒelka,,2,cs-agent-v1;ipa=espeak
 introductions.this-is-my-daughter-son,Toto je moje dcera / můj syn,,tˈoto je mˈoje ttsˈera / mˈuːj sˈin,,2,cs-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,Cestuji sám,,tsˈestuji sˈaːm,,2,cs-agent-v1;ipa=espeak
+family-intros.this-is-my-husband,Toto je můj manžel,,tˈoto je mˈuːj mˈanʒel,,2,cs-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-wife,Toto je moje manželka,,tˈoto je mˈoje mˈanʒelka,,2,cs-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-son,Toto je můj syn,,tˈoto je mˈuːj sˈin,,2,cs-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+family-intros.this-is-my-daughter,Toto je moje dcera,,tˈoto je mˈoje ttsˈera,,2,cs-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak

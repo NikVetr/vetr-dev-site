@@ -11,3 +11,7 @@ introductions.i-am-a-tourist,Soy turista,,sˈoɪ tuɾˈista,,2,es-agent-v1;ipa=e
 introductions.this-is-my-husband-wife,Es mi esposo / esposa,Es mi marido / mujer,ˈes mi espˈoso / espˈosa,,2,es-agent-v1;ipa=espeak
 introductions.this-is-my-daughter-son,Es mi hija / hijo,,ˈes mi ˈixa / ˈixo,,2,es-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,Viajo solo,,bjˈaxo sˈolo,,2,es-agent-v1;ipa=espeak
+family-intros.this-is-my-husband,Es mi esposo,Es mi marido,ˈes mi espˈoso,,2,es-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-wife,Es mi esposa,Es mi mujer,ˈes mi espˈosa,,2,es-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-son,Es mi hijo,,ˈes mi ˈixo,,2,es-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+family-intros.this-is-my-daughter,Es mi hija,,ˈes mi ˈixa,,2,es-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak

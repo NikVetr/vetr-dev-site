@@ -11,3 +11,7 @@ introductions.i-am-a-tourist,நான் ஒரு சுற்றுலாப�
 introductions.this-is-my-husband-wife,இவர் என் கணவர் / மனைவி,,ivar eṉ kaṇavar / maṉaivi,ivʌr en kʌɳʌvʌr / mʌnaɪvi,my husband / my wife,2,ta-agent-v1;ipa=espeak
 introductions.this-is-my-daughter-son,இவள் என் மகள் / இவன் என் மகன்,,ivaḷ eṉ makaḷ / ivaṉ eṉ makaṉ,ivʌɭ en mʌɡʌɭ / ivʌn en mʌɡʌn,my daughter / my son,2,ta-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,நான் தனியாகப் பயணம் செய்கிறேன்,,nāṉ taṉiyākap payaṇam ceykiṟēṉ,naːn tʌnijaːɡʌp pʌjʌɳʌm sejɡireːn,,2,ta-agent-v1;ipa=espeak
+family-intros.this-is-my-husband,இவர் என் கணவர்,,ivar eṉ kaṇavar,ivʌr en kʌɳʌvʌr,,2,ta-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-wife,இவர் என் மனைவி,,ivar eṉ maṉaivi,ivʌr en mʌnaɪvi,,2,ta-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-son,இவன் என் மகன்,,ivaṉ eṉ makaṉ,ivʌn en mʌɡʌn,,2,ta-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+family-intros.this-is-my-daughter,இவள் என் மகள்,,ivaḷ eṉ makaḷ,ivʌɭ en mʌɡʌɭ,,2,ta-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak

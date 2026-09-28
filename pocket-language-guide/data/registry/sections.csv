@@ -60,6 +60,7 @@ lost-rescue,emergency,alert,1,search,Lost items + rescue,58,universal,core;healt
 police-consulate,emergency,alert,1,shield-alert,"Police, theft + consulate",59,universal,core,0.88,1
 massage-spa,hotel,stay,3,leaf,Massage + spa,60,universal,lodging,0.38,0
 board-answers,social,comm,3,leaf,Answers they may give,61,universal,core,0.36,0
+family-intros,intro,stay,3,circle-user,"Family, one by one",65,universal,social;family,0.36,0
 morse-code,morse,comm,2,signal,Morse code,62,language,core,0.50,1
 morse-digits,morse,comm,2,arrow-down-0-1,Digits,63,language,core,0.50,1
 morse-marks,morse,comm,2,list,Punctuation + signals,64,language,core,0.50,1

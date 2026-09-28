@@ -11,3 +11,7 @@ introductions.i-am-a-tourist,เป็นนักท่องเที่ยว
 introductions.this-is-my-husband-wife,นี่สามี/ภรรยา,,ni sami / phanraya,niː˥˩ saː˩˩˦miː˧ / pʰan˧jaː˧,husband / wife,2,th-agent-v1;ipa=thaig2p
 introductions.this-is-my-daughter-son,นี่ลูกสาว/ลูกชาย,,ni luk sao / luk chai,niː˥˩ luːk˥˩saːw˩˩˦ / luːk˥˩tɕʰaːj˧,daughter / son,2,th-agent-v1;ipa=thaig2p
 introductions.i-am-traveling-alone,มาคนเดียว,,ma khon diao,maː˧ kʰon˧dia̯w˧,,2,th-agent-v1;ipa=thaig2p
+family-intros.this-is-my-husband,นี่สามี,,ni sami,niː˥˩ saː˩˩˦miː˧,,2,th-agent-v1;split-from=this-is-my-husband-wife;ipa=thaig2p
+family-intros.this-is-my-wife,นี่ภรรยา,,ni phanraya,niː˥˩ pʰan˧jaː˧,,2,th-agent-v1;split-from=this-is-my-husband-wife;ipa=thaig2p
+family-intros.this-is-my-son,นี่ลูกชาย,,ni luk chai,niː˥˩ luːk˥˩tɕʰaːj˧,,2,th-agent-v1;split-from=this-is-my-daughter-son;ipa=thaig2p
+family-intros.this-is-my-daughter,นี่ลูกสาว,,ni luk sao,niː˥˩ luːk˥˩saːw˩˩˦,,2,th-agent-v1;split-from=this-is-my-daughter-son;ipa=thaig2p

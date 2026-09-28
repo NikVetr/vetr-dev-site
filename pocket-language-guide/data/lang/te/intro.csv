@@ -11,3 +11,7 @@ introductions.i-am-a-tourist,నేను పర్యాటకుడిని,�
 introductions.this-is-my-husband-wife,ఇతను నా భర్త / ఈమె నా భార్య,,itanu nā bharta / īme nā bhārya,itanu naː bʰarta / iːme naː bʰaːrja,husband / wife,2,te-agent-v1;ipa=espeak
 introductions.this-is-my-daughter-son,ఈమె నా కూతురు / ఇతను నా కొడుకు,,īme nā kūturu / itanu nā koḍuku,iːme naː kuːturu / itanu naː koɖuku,daughter / son,2,te-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,నేను ఒంటరిగా ప్రయాణం చేస్తున్నాను,,nēnu oṁṭarigā prayāṇaṁ cēstunnānu,neːnu oɳʈariɡaː prajaːɳam tʃeːstunnaːnu,,2,te-agent-v1;ipa=espeak
+family-intros.this-is-my-husband,ఇతను నా భర్త,,itanu nā bharta,itanu naː bʰarta,,2,te-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-wife,ఈమె నా భార్య,,īme nā bhārya,iːme naː bʰaːrja,,2,te-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-son,ఇతను నా కొడుకు,,itanu nā koḍuku,itanu naː koɖuku,,2,te-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+family-intros.this-is-my-daughter,ఈమె నా కూతురు,,īme nā kūturu,iːme naː kuːturu,,2,te-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak

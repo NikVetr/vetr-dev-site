@@ -10,4 +10,8 @@ introductions.how-are-you,introductions,entry,phrase,how-are-you,8,0.600,introdu
 introductions.i-am-a-tourist,introductions,entry,phrase,i-am-a-tourist,9,0.580,introductions.purpose,0,0,neutral,,Explains the traveler's situation in one row.
 introductions.this-is-my-husband-wife,introductions,entry,phrase,this-is-my-husband-wife,10,0.550,introductions.family,0,0,neutral,,One row carrying both words so the traveler picks the right one; most languages need separate terms.
 introductions.this-is-my-daughter-son,introductions,entry,phrase,this-is-my-daughter-son,11,0.510,introductions.family,1,0,neutral,,
+family-intros.this-is-my-husband,family-intros,entry,phrase,this-is-my-husband,1,0.550,family-intros.spouse,0,0,neutral,,"One sentence per person for the conversation board, where a button says one thing; the sheet keeps introductions.this-is-my-husband-wife, a row the traveler points into."
+family-intros.this-is-my-wife,family-intros,entry,phrase,this-is-my-wife,2,0.550,family-intros.spouse,1,0,neutral,,
+family-intros.this-is-my-son,family-intros,entry,phrase,this-is-my-son,3,0.510,family-intros.child,0,0,neutral,,
+family-intros.this-is-my-daughter,family-intros,entry,phrase,this-is-my-daughter,4,0.510,family-intros.child,1,0,neutral,,
 introductions.i-am-traveling-alone,introductions,entry,phrase,i-am-traveling-alone,12,0.490,introductions.purpose,1,0,neutral,,"Needed at hotels, tours and border desks."

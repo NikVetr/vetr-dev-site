@@ -11,3 +11,7 @@ introductions.i-am-a-tourist,હું પ્રવાસી છું,,huṁ pr
 introductions.this-is-my-husband-wife,મારા પતિ / મારી પત્ની,,mārā pati / mārī patnī,maːɾaː pʌtɪ / maːɾi pʌtni,my husband / my wife,2,gu-agent-v1;ipa=espeak
 introductions.this-is-my-daughter-son,મારી દીકરી / મારો દીકરો,,mārī dīkarī / mārō dīkarō,maːɾi dikʌɾi / maːɾoː dikʌɾoː,my daughter / my son,2,gu-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,હું એકલો પ્રવાસ કરું છું,હું એકલી પ્રવાસ કરું છું,huṁ ēkalō pravās karuṁ chuṁ,hũ eːkʌloː pɾəʋaːs kʌɾũ cʰũ,I travel alone (m) — એકલી for a woman,2,gu-agent-v1;ipa=espeak
+family-intros.this-is-my-husband,આ મારા પતિ છે,,ā mārā pati chē,aː maːɾaː pʌtɪ cʰeː,,2,gu-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-wife,આ મારી પત્ની છે,,ā mārī patnī chē,aː maːɾi pʌtni cʰeː,,2,gu-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-son,આ મારો દીકરો છે,,ā mārō dīkarō chē,aː maːɾoː dikʌɾoː cʰeː,,2,gu-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+family-intros.this-is-my-daughter,આ મારી દીકરી છે,,ā mārī dīkarī chē,aː maːɾi dikʌɾi cʰeː,,2,gu-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak

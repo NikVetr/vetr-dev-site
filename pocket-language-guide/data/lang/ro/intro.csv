@@ -11,3 +11,7 @@ introductions.i-am-a-tourist,Sunt turist,Sunt turistă,sunt tuɾˈist,,2,ro-agen
 introductions.this-is-my-husband-wife,El este soțul meu / ea este soția mea,,jel jˌeste sˈotsul mˈeu / ja jˌeste sˈotsja mˈea,,2,ro-agent-v1;ipa=espeak
 introductions.this-is-my-daughter-son,Ea este fiica mea / el este fiul meu,,ja jˌeste fˈiɪka mˈea / jel jˌeste fˈiʊl mˈeu,,2,ro-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,Călătoresc singur,,kˌələtoɾˈesk sˈiŋɡur,,2,ro-agent-v1;ipa=espeak
+family-intros.this-is-my-husband,El este soțul meu,,jel jˌeste sˈotsul mˈeu,,2,ro-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-wife,Ea este soția mea,,ja jˌeste sˈotsja mˈea,,2,ro-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-son,El este fiul meu,,jel jˌeste fˈiʊl mˈeu,,2,ro-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+family-intros.this-is-my-daughter,Ea este fiica mea,,ja jˌeste fˈiɪka mˈea,,2,ro-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak

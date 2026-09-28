@@ -11,3 +11,7 @@ introductions.i-am-a-tourist,Tôi là khách du lịch,,t̪oj˧ laː˨˩ xac˧˥
 introductions.this-is-my-husband-wife,Đây là chồng / vợ tôi,,ɗəɪ˧ laː˨˩ tʃoŋ˨˩ / vəː˨˩ˀ t̪oj˧,"chồng = h., vợ = w.",2,vi-agent-v1;ipa=espeak
 introductions.this-is-my-daughter-son,Đây là con gái / con trai tôi,,ɗəɪ˧ laː˨˩ kɔn˧ ɣaːj˧˥ / kɔn˧ tʃaːj˧ t̪oj˧,,2,vi-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,Tôi đi du lịch một mình,,t̪oj˧ ɗi˧ zu˧ lic˨˩ˀ mot̪˨˩ˀ miɲ˨˩,,2,vi-agent-v1;ipa=espeak
+family-intros.this-is-my-husband,Đây là chồng tôi,,ɗəɪ˧ laː˨˩ tʃoŋ˨˩ t̪oj˧,,2,vi-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-wife,Đây là vợ tôi,,ɗəɪ˧ laː˨˩ vəː˨˩ˀ t̪oj˧,,2,vi-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-son,Đây là con trai tôi,,ɗəɪ˧ laː˨˩ kɔn˧ tʃaːj˧ t̪oj˧,,2,vi-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+family-intros.this-is-my-daughter,Đây là con gái tôi,,ɗəɪ˧ laː˨˩ kɔn˧ ɣaːj˧˥ t̪oj˧,,2,vi-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak

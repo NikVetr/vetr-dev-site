@@ -11,3 +11,7 @@ introductions.i-am-a-tourist,Είμαι εδώ για τουρισμό,Είμα�
 introductions.this-is-my-husband-wife,Από εδώ ο άντρας μου / η γυναίκα μου,Από εδώ ο σύζυγός μου / η σύζυγός μου,Apo edo o antras mou / i gynaika mou,apˈo eðˈo o ˈadɾaz mu / i jinˈeka mu,,2,el-agent-v1;roman=elot743;ipa=espeak
 introductions.this-is-my-daughter-son,Από εδώ η κόρη μου / ο γιος μου,,Apo edo i kori mou / o gios mou,apˈo eðˈo i kˈoɾi mu / o jˈoz mu,,2,el-agent-v1;roman=elot743;ipa=espeak
 introductions.i-am-traveling-alone,Ταξιδεύω μόνος,Ταξιδεύω χωρίς παρέα,Taxidevo monos,tˌaksiðˈevo mˈonos,,2,el-agent-v1;roman=elot743;ipa=espeak
+family-intros.this-is-my-husband,Από εδώ ο άντρας μου,Από εδώ ο σύζυγός μου,Apo edo o antras mou,apˈo eðˈo o ˈadɾaz mu,,2,el-agent-v1;roman=elot743;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-wife,Από εδώ η γυναίκα μου,Από εδώ η σύζυγός μου,Apo edo i gynaika mou,apˈo eðˈo i jinˈeka mu,,2,el-agent-v1;roman=elot743;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-son,Από εδώ ο γιος μου,,Apo edo o gios mou,apˈo eðˈo o jˈoz mu,,2,el-agent-v1;roman=elot743;split-from=this-is-my-daughter-son;ipa=espeak
+family-intros.this-is-my-daughter,Από εδώ η κόρη μου,,Apo edo i kori mou,apˈo eðˈo i kˈoɾi mu,,2,el-agent-v1;roman=elot743;split-from=this-is-my-daughter-son;ipa=espeak

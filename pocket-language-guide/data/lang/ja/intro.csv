@@ -11,3 +11,7 @@ introductions.i-am-a-tourist,観光客です,,kankōkyaku desu,kaɴkoːkjakɯ de
 introductions.this-is-my-husband-wife,こちらは夫／妻です,,kochira wa otto / tsuma desu,kotɕiɾa wa otto / tsɯma desɯ,,2,ja-agent-v1;ipa=hepburn
 introductions.this-is-my-daughter-son,こちらは娘／息子です,,kochira wa musume / musuko desu,kotɕiɾa wa mɯsɯme / mɯsɯko desɯ,,2,ja-agent-v1;ipa=hepburn
 introductions.i-am-traveling-alone,一人で旅行しています,,hitori de ryokō shiteimasu,çitoɾi de ɾjokoː ɕiteimasɯ,,2,ja-agent-v1;ipa=hepburn
+family-intros.this-is-my-husband,こちらは夫です,,kochira wa otto desu,kotɕiɾa wa otto desɯ,,2,ja-agent-v1;split-from=this-is-my-husband-wife;ipa=hepburn
+family-intros.this-is-my-wife,こちらは妻です,,kochira wa tsuma desu,kotɕiɾa wa tsɯma desɯ,,2,ja-agent-v1;split-from=this-is-my-husband-wife;ipa=hepburn
+family-intros.this-is-my-son,こちらは息子です,,kochira wa musuko desu,kotɕiɾa wa mɯsɯko desɯ,,2,ja-agent-v1;split-from=this-is-my-daughter-son;ipa=hepburn
+family-intros.this-is-my-daughter,こちらは娘です,,kochira wa musume desu,kotɕiɾa wa mɯsɯme desɯ,,2,ja-agent-v1;split-from=this-is-my-daughter-son;ipa=hepburn

@@ -10,4 +10,8 @@ introductions.how-are-you,מה המצב?,מָה הַמַּצָּב?,ma hamatsav?
 introductions.i-am-a-tourist,אני תייר,אֲנִי תַּיָּיר,ani tayar,anˈi tajˈaʁ,a woman says tayeret,2,he-agent-v1;ipa=bgn
 introductions.this-is-my-husband-wife,זה בעלי / זאת אשתי,זֶה בַּעֲלִי / זֹאת אִשְׁתִּי,ze ba‘ali / zot ishti,zˈe baalˈi / zˈot iʃtˈi,this is my husband / this is my wife,2,he-agent-v1;ipa=bgn
 introductions.this-is-my-daughter-son,זאת הבת שלי / זה הבן שלי,זֹאת הַבַּת שֶׁלִּי / זֶה הַבֵּן שֶׁלִּי,zot habat sheli / ze háben sheli,zˈot habˈat ʃelˈi / zˈe hˈaben ʃelˈi,this is my daughter / this is my son,2,he-agent-v1;ipa=bgn
+family-intros.this-is-my-husband,זה בעלי,זֶה בַּעֲלִי,ze ba‘ali,zˈe baalˈi,,2,he-agent-v1;ipa=bgn
+family-intros.this-is-my-wife,זאת אשתי,זֹאת אִשְׁתִּי,zot ishti,zˈot iʃtˈi,,2,he-agent-v1;ipa=bgn
+family-intros.this-is-my-son,זה הבן שלי,זֶה הַבֵּן שֶׁלִּי,ze háben sheli,zˈe hˈaben ʃelˈi,,2,he-agent-v1;ipa=bgn
+family-intros.this-is-my-daughter,זאת הבת שלי,זֹאת הַבַּת שֶׁלִּי,zot habat sheli,zˈot habˈat ʃelˈi,,2,he-agent-v1;ipa=bgn
 introductions.i-am-traveling-alone,אני מטייל לבד,אֲנִי מְטַיֵּיל לְבַד,ani metayel levad,anˈi metajˈel levˈad,a woman says metayelet,2,he-agent-v1;ipa=bgn

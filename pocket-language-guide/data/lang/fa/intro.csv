@@ -10,4 +10,8 @@ introductions.how-are-you,حالِ شما چطور است؟,حالتون چطو�
 introductions.i-am-a-tourist,من گردشگر هستم,من توریستم,man gardeshgar hastam,man ɡardeʃɡar hastam,turist is just as common,2,fa-agent-v1;ipa=espeak
 introductions.this-is-my-husband-wife,ایشان همسرِ من است,شوهرم / خانمم,ishān hamsar-e man ast,iʃɑn hamsare man ast,"hamsar is spouse of either sex, so Persian needs one word where most languages need two -- showhar is husband, khānom wife",2,fa-agent-v1;ipa=espeak
 introductions.this-is-my-daughter-son,این دخترم / پسرم است,,in dokhtaram / pesaram ast,in doxtaram / pesaram ast,,2,fa-agent-v1;ipa=espeak
+family-intros.this-is-my-husband,ایشان شوهرم است,,ishān showharam ast,iʃɑn ʃoharam ast,,2,"fa-agent-v1;note=copula+demonstrative carried from the combined row's primary sentence (text_alt gave bare nouns); showharam/khānomam romanised on the -am pattern of dokhtaram/pesaram, words per this row's own literal note;ipa=espeak"
+family-intros.this-is-my-wife,ایشان خانمم است,,ishān khānomam ast,iʃɑn xɑnomam ast,,2,"fa-agent-v1;note=copula+demonstrative carried from the combined row's primary sentence (text_alt gave bare nouns); showharam/khānomam romanised on the -am pattern of dokhtaram/pesaram, words per this row's own literal note;ipa=espeak"
+family-intros.this-is-my-son,این پسرم است,,in pesaram ast,in pesaram ast,,2,fa-agent-v1;ipa=espeak
+family-intros.this-is-my-daughter,این دخترم است,,in dokhtaram ast,in doxtaram ast,,2,fa-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,من تنها سفر می‌کنم,,man tanhā safar mikonam,man tanhɑ safar mikonam,,2,fa-agent-v1;ipa=espeak

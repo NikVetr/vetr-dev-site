@@ -9,3 +9,7 @@ introductions.this-is-my-daughter-son, ,,puqwI' ghaH,
 introductions.i-am-traveling-alone, ,,nIteb jIleng,nɪtʰɛb dʒɪlɛŋ,I travel alone,1,tlh-composed-v1;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
 introductions.i-am-from,{} ,,{}Daq jIboghpu',{} ɖɑqʰ dʒɪboɣpʰuʔ,I was born in {} -- Klingon expresses origin as birthplace,1,tlh-composed-v1;lex=msn 1996.12.12 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
 introductions.where-are-you-from, ,,nuqDaq bIboghpu',nuqʰɖɑqʰ bɪboɣpʰuʔ,where were you born?,1,tlh-composed-v1;lex=msn 1996.12.12 + TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+family-intros.this-is-my-husband, ,,loDnalwI' ghaH,loɖnɑlwɪʔ ɣɑx,"loDnal 'husband' (loD 'male' + -nal); the combined row uses gender-neutral 'Ipnal (qep'a' 27, 2020)",1,tlh-composed-v1;split-from=this-is-my-husband-wife;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+family-intros.this-is-my-wife, ,,be'nalwI' ghaH,bɛʔnɑlwɪʔ ɣɑx,"be'nal 'wife' (be' 'female' + -nal); the combined row uses gender-neutral 'Ipnal (qep'a' 27, 2020)",1,tlh-composed-v1;split-from=this-is-my-husband-wife;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+family-intros.this-is-my-son, ,,puqloDwI' ghaH,pʰuqʰloɖwɪʔ ɣɑx,,1,tlh-composed-v1;split-from=this-is-my-daughter-son;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand
+family-intros.this-is-my-daughter, ,,puqbe'wI' ghaH,pʰuqʰbɛʔwɪʔ ɣɑx,,1,tlh-composed-v1;split-from=this-is-my-daughter-son;lex=TKD;grammar=TKD;native=piqad-csur;ipa=okrand

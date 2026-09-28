@@ -11,3 +11,7 @@ introductions.i-am-a-tourist,Sono un turista,Sono una turista,sˌono ʊn tʊrˈi
 introductions.this-is-my-husband-wife,Lui è mio marito / lei è mia moglie,,lˌʊi e mˌio marˈito / lˌɛi e mˌia mˈoʎe,,2,it-agent-v1;ipa=espeak
 introductions.this-is-my-daughter-son,Lei è mia figlia / lui è mio figlio,,lˌɛi e mˌia fˈiʎa / lˌʊi e mˌio fˈiʎo,,2,it-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,Viaggio da solo,,vjˈadʒdʒo da sˈolo,,2,it-agent-v1;ipa=espeak
+family-intros.this-is-my-husband,Lui è mio marito,,lˌʊi e mˌio marˈito,,2,it-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-wife,Lei è mia moglie,,lˌɛi e mˌia mˈoʎe,,2,it-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-son,Lui è mio figlio,,lˌʊi e mˌio fˈiʎo,,2,it-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+family-intros.this-is-my-daughter,Lei è mia figlia,,lˌɛi e mˌia fˈiʎa,,2,it-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak

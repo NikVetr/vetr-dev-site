@@ -11,3 +11,7 @@ introductions.i-am-a-tourist,관광객이에요,,gwangwanggaegieyo,kwanɡwaŋɡ�
 introductions.this-is-my-husband-wife,남편이에요 / 아내예요,,nampyeonieyo / anaeyeyo,nampʰjʌniejo / anɛjejo,husband / wife,2,ko-agent-v1;ipa=rr
 introductions.this-is-my-daughter-son,딸이에요 / 아들이에요,,ttarieyo / adeurieyo,t͈aɾiejo / adɯɾiejo,daughter / son,2,ko-agent-v1;ipa=rr
 introductions.i-am-traveling-alone,혼자 여행해요,,honja yeohaenghaeyo,hondʑa jʌhɛŋhɛjo,,2,ko-agent-v1;ipa=rr
+family-intros.this-is-my-husband,남편이에요,,nampyeonieyo,nampʰjʌniejo,,2,ko-agent-v1;split-from=this-is-my-husband-wife;ipa=rr
+family-intros.this-is-my-wife,아내예요,,anaeyeyo,anɛjejo,,2,ko-agent-v1;split-from=this-is-my-husband-wife;ipa=rr
+family-intros.this-is-my-son,아들이에요,,adeurieyo,adɯɾiejo,,2,ko-agent-v1;split-from=this-is-my-daughter-son;ipa=rr
+family-intros.this-is-my-daughter,딸이에요,,ttarieyo,t͈aɾiejo,,2,ko-agent-v1;split-from=this-is-my-daughter-son;ipa=rr

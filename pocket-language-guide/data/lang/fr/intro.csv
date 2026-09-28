@@ -10,4 +10,8 @@ introductions.how-are-you,Comment allez-vous ?,,kɔmɑ̃ alevˈu,,2,fr-agent-v1
 introductions.i-am-a-tourist,Je suis touriste,,ʒə syi tuʁˈist,,2,fr-agent-v1;ipa=espeak
 introductions.this-is-my-husband-wife,Voici mon mari / ma femme,,vwasi mɔ̃ maʁˈi / ma fˈam,,2,fr-agent-v1;ipa=espeak
 introductions.this-is-my-daughter-son,Voici ma fille / mon fils,,vwasi ma fˈij / mɔ̃ fˈis,,2,fr-agent-v1;ipa=espeak
+family-intros.this-is-my-husband,Voici mon mari,,vwasi mɔ̃ maʁˈi,,2,fr-agent-v1;ipa=espeak
+family-intros.this-is-my-wife,Voici ma femme,,vwasi ma fˈam,,2,fr-agent-v1;ipa=espeak
+family-intros.this-is-my-son,Voici mon fils,,vwasi mɔ̃ fˈis,,2,fr-agent-v1;ipa=espeak
+family-intros.this-is-my-daughter,Voici ma fille,,vwasi ma fˈij,,2,fr-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,Je voyage seul,seule,ʒə vwajaʒ sˈœl,,2,fr-agent-v1;ipa=espeak

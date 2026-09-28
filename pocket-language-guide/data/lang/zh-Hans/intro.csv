@@ -11,3 +11,7 @@ introductions.i-am-a-tourist,我是游客,,wǒ shì yóukè,wɔ˧˩˧ ʂɨ˥˩ j
 introductions.this-is-my-husband-wife,这是我丈夫/妻子,,zhè shì wǒ zhàngfu / qīzi,ʈʂɤ˥˩ ʂɨ˥˩ wɔ˧˩˧ ʈʂɑŋ˥˩fu / tɕʰi˥tsɯ,,2,zh-Hans-agent-v1;ipa=pinyin
 introductions.this-is-my-daughter-son,这是我女儿/儿子,,zhè shì wǒ nǚ'ér / érzi,ʈʂɤ˥˩ ʂɨ˥˩ wɔ˧˩˧ ny˧˩˧ɑɻ˧˥ / ɑɻ˧˥tsɯ,,2,zh-Hans-agent-v1;ipa=pinyin
 introductions.i-am-traveling-alone,我一个人旅行,,wǒ yí gè rén lǚxíng,wɔ˧˩˧ i˧˥ kɤ˥˩ ʐən˧˥ ly˧˩˧ɕiŋ˧˥,,2,zh-Hans-agent-v1;ipa=pinyin
+family-intros.this-is-my-husband,这是我丈夫,,zhè shì wǒ zhàngfu,ʈʂɤ˥˩ ʂɨ˥˩ wɔ˧˩˧ ʈʂɑŋ˥˩fu,,2,zh-Hans-agent-v1;split-from=this-is-my-husband-wife;ipa=pinyin
+family-intros.this-is-my-wife,这是我妻子,,zhè shì wǒ qīzi,ʈʂɤ˥˩ ʂɨ˥˩ wɔ˧˩˧ tɕʰi˥tsɯ,,2,zh-Hans-agent-v1;split-from=this-is-my-husband-wife;ipa=pinyin
+family-intros.this-is-my-son,这是我儿子,,zhè shì wǒ érzi,ʈʂɤ˥˩ ʂɨ˥˩ wɔ˧˩˧ ɑɻ˧˥tsɯ,,2,zh-Hans-agent-v1;split-from=this-is-my-daughter-son;ipa=pinyin
+family-intros.this-is-my-daughter,这是我女儿,,zhè shì wǒ nǚ'ér,ʈʂɤ˥˩ ʂɨ˥˩ wɔ˧˩˧ ny˧˩˧ɑɻ˧˥,,2,zh-Hans-agent-v1;split-from=this-is-my-daughter-son;ipa=pinyin

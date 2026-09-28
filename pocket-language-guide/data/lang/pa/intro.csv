@@ -11,3 +11,7 @@ introductions.i-am-a-tourist,ਮੈਂ ਸੈਲਾਨੀ ਹਾਂ,,maiṁ sail
 introductions.this-is-my-husband-wife,ਇਹ ਮੇਰਾ ਪਤੀ / ਮੇਰੀ ਪਤਨੀ ਹੈ,,ih mērā patī / mērī patanī hai,ɪ˥ meɾa pʌti / meɾi pʌtəni hɛ,this is my husband / my wife,2,pa-agent-v1;ipa=espeak
 introductions.this-is-my-daughter-son,ਇਹ ਮੇਰੀ ਧੀ / ਮੇਰਾ ਪੁੱਤਰ ਹੈ,,ih mērī dhī / mērā puttar hai,ɪ˥ meɾi ti˩ / meɾa pʊttəɾ hɛ,this is my daughter / my son,2,pa-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,ਮੈਂ ਇਕੱਲਾ ਸਫ਼ਰ ਕਰ ਰਿਹਾ ਹਾਂ,,maiṁ ikallā safar kar rihā hāṁ,mɛ̃ ɪkʌlla sʌfəɾ kʌɾ ɾɪha hã,I am travelling alone,2,pa-agent-v1;ipa=espeak
+family-intros.this-is-my-husband,ਇਹ ਮੇਰਾ ਪਤੀ ਹੈ,,ih mērā patī hai,ɪ˥ meɾa pʌti hɛ,,2,pa-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-wife,ਇਹ ਮੇਰੀ ਪਤਨੀ ਹੈ,,ih mērī patanī hai,ɪ˥ meɾi pʌtəni hɛ,,2,pa-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-son,ਇਹ ਮੇਰਾ ਪੁੱਤਰ ਹੈ,,ih mērā puttar hai,ɪ˥ meɾa pʊttəɾ hɛ,,2,pa-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+family-intros.this-is-my-daughter,ਇਹ ਮੇਰੀ ਧੀ ਹੈ,,ih mērī dhī hai,ɪ˥ meɾi ti˩ hɛ,,2,pa-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak

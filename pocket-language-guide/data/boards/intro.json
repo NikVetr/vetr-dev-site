@@ -185,20 +185,38 @@
           "colour": "stay"
         },
         {
-          "id": "spouse",
+          "id": "husband",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "introductions.this-is-my-husband-wife"
+            "id": "family-intros.this-is-my-husband"
           },
           "colour": "stay"
         },
         {
-          "id": "child",
+          "id": "wife",
           "kind": "message",
           "phraseRef": {
             "kind": "corpus",
-            "id": "introductions.this-is-my-daughter-son"
+            "id": "family-intros.this-is-my-wife"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "son",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "family-intros.this-is-my-son"
+          },
+          "colour": "stay"
+        },
+        {
+          "id": "daughter",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "family-intros.this-is-my-daughter"
           },
           "colour": "stay"
         }

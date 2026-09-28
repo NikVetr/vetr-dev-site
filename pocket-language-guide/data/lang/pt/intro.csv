@@ -11,3 +11,7 @@ introductions.i-am-a-tourist,Sou turista,,sow tˌuɾˈistæ,,2,pt-agent-v1;ipa=e
 introductions.this-is-my-husband-wife,O meu marido / A minha mulher,o meu esposo / a minha esposa,ʊ meʊ mˌaɾˈidʊ / a mˌiɲæ muljˈɛr,,2,pt-agent-v1;ipa=espeak
 introductions.this-is-my-daughter-son,A minha filha / O meu filho,,a mˌiɲæ fˈiljæ / ʊ meʊ fˈiljʊ,,2,pt-agent-v1;ipa=espeak
 introductions.i-am-traveling-alone,Viajo sozinho,Viajo sozinha,vˌiˈaʒʊ sˌozˈiɲʊ,,2,pt-agent-v1;ipa=espeak
+family-intros.this-is-my-husband,Este é o meu marido,Este é o meu esposo,ˌestʃy ɛ ʊ meʊ mˌaɾˈidʊ,,2,pt-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-wife,Esta é a minha mulher,Esta é a minha esposa,ˌɛstæ ɛ a mˌiɲæ muljˈɛr,,2,pt-agent-v1;split-from=this-is-my-husband-wife;ipa=espeak
+family-intros.this-is-my-son,Este é o meu filho,,ˌestʃy ɛ ʊ meʊ fˈiljʊ,,2,pt-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
+family-intros.this-is-my-daughter,Esta é a minha filha,,ˌɛstæ ɛ a mˌiɲæ fˈiljæ,,2,pt-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
