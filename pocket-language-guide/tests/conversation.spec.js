@@ -1530,6 +1530,32 @@ test('end punctuation hangs after the last character and weighs nothing in the c
   }
 });
 
+test('a full-width mark stays inside the frame, judged by where its ink is', async ({ page }) => {
+  // A Chinese face keeps a full-width `？`'s ink in the left half of its em and a
+  // Japanese one centres it; judged by the left half, a Japanese question's mark hung
+  // over the frame and off a phone's edge. Hung or set in the line, the ink is inside.
+  await page.setViewportSize({ width: 390, height: 844 });
+  for (const [target, board, button] of [['ja', 'directions', 'toilet'], ['ja', 'directions', 'walk'], ['zh-Hans', 'emergency', 'help']]) {
+    await page.goto(`/conversation.html?target=${target}&source=en&board=${board}`);
+    await page.locator(`[data-button="${button}"]`).click();
+    const at = await page.locator('.board-message-text').evaluate((el) => {
+      const hang = /** @type {HTMLElement} */ (el.querySelector('.board-message-punct'));
+      const range = document.createRange();
+      range.selectNodeContents(hang);
+      const g = /** @type {any} */ (document.createElement('canvas').getContext('2d'));
+      g.lang = el.closest('[lang]')?.getAttribute('lang');
+      g.font = getComputedStyle(hang).font;
+      const surface = /** @type {HTMLElement} */ (el.closest('.board-message'));
+      const s = getComputedStyle(surface);
+      return {
+        ink: range.getBoundingClientRect().left + g.measureText(hang.textContent).actualBoundingBoxRight,
+        frame: surface.getBoundingClientRect().right + Number.parseFloat(s.outlineOffset) - Number.parseFloat(s.outlineWidth),
+      };
+    });
+    expect(at.ink, `${target}: the mark's ink is inside the frame`).toBeLessThan(at.frame);
+  }
+});
+
 test('no message is drawn wider than the screen it is on', async ({ page }) => {
   // **Reported as "the text pushes flush against the white outline". It was not
   // flush, it was off the edge**: `Извините` was drawn 810px wide in a 368px box and

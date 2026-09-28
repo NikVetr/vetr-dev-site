@@ -268,7 +268,7 @@ function lineRects(el) {
  * @param {HTMLElement} el
  */
 function hangFits(el) {
-  const hang = el.querySelector(':scope > .board-message-punct');
+  const hang = /** @type {HTMLElement|null} */ (el.querySelector(':scope > .board-message-punct'));
   if (!hang) return true;
   const range = document.createRange();
   range.selectNodeContents(hang);
@@ -279,15 +279,40 @@ function hangFits(el) {
   // held a six-character question to one line at 90px when three lines of two
   // characters fitted at 140 with the mark in the margin.
   // The padding box, because the padding is exactly where a hanging mark belongs.
-  const box = /** @type {HTMLElement} */ (el.parentElement).getBoundingClientRect();
-  // **A full-width mark is half empty.** `！` and `？` are a whole em in a CJK face
-  // with the ink in the left third, so a box that overhangs the surface by up to
-  // half of itself still has its ink on the screen -- and refusing that set `命！`
-  // inline as two glyphs, which put 命 a half-glyph left of the 救 above it.
+  const surface = /** @type {HTMLElement} */ (el.parentElement);
+  const box = surface.getBoundingClientRect();
+  // **A full-width mark is partly empty.** `！` and `？` are a whole em in a CJK face,
+  // so a box that overhangs the surface can still have its ink on the screen -- and
+  // refusing that set `命！` inline as two glyphs, which put 命 a half-glyph left of
+  // the 救 above it.
   const wide = /[\u3000-\u303f\uff01-\uff60]$/u.test(hang.textContent ?? '');
-  const slack = wide ? (vertical(el) ? ink.height : ink.width) / 2 : 0;
-  if (vertical(el)) return ink.bottom <= box.bottom + slack && ink.top >= box.top;
-  return ink.right <= box.right + slack && ink.left >= box.left;
+  if (vertical(el)) {
+    const slack = wide ? ink.height / 2 : 0;
+    return ink.bottom <= box.bottom + slack && ink.top >= box.top;
+  }
+  // **Where the ink is, measured.** A Chinese face keeps a full-width mark's ink in the
+  // left half of its em and a Japanese one centres it, so a half-em allowance hung
+  // Japanese questions' `？` over the frame and off a phone's edge. And inside the
+  // frame the surface draws around itself, by as much as the frame is inside the
+  // surface: a mark on that line reads as spilling out of it.
+  const s = getComputedStyle(surface);
+  const inset = Math.max(0, -Number.parseFloat(s.outlineOffset));
+  const frame = 2 * inset + Number.parseFloat(s.outlineWidth);
+  const { left, right } = wide ? markInk(hang) : { left: 0, right: ink.width };
+  return ink.left + right <= box.right - frame && ink.left + left >= box.left + frame;
+}
+
+/**
+ * A mark's ink either side of where its glyph starts, in its own face at its own size,
+ * as the language it is in draws it.
+ * @param {HTMLElement} hang
+ */
+function markInk(hang) {
+  const g = /** @type {CanvasRenderingContext2D} */ (document.createElement('canvas').getContext('2d'));
+  /** @type {any} */ (g).lang = hang.closest('[lang]')?.getAttribute('lang') ?? '';
+  g.font = getComputedStyle(hang).font;
+  const m = g.measureText(hang.textContent ?? '');
+  return { left: -m.actualBoundingBoxLeft, right: m.actualBoundingBoxRight };
 }
 
 /** Scripts whose characters are all one width, so that columns can be aligned. */
