@@ -7,6 +7,6 @@ speaker_gender=feminine,emergency-medical.i-am-sick,Estoy enferma,,estˈoɪ emf�
 speaker_gender=feminine,introductions.i-am-traveling-alone,Viajo sola,,bjˈaxo sˈola,,2,es-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
 speaker_gender=feminine,medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,Soy alérgica a la aspirina y al ibuprofeno,,sˈoɪ alˈeɾxika a la ˌaspiɾˈina i al ˌibupɾofˈeno,,2,es-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
 speaker_gender=feminine,medical-conditions.i-am-allergic-to-penicillin,Soy alérgica a la penicilina,,sˈoɪ alˈeɾxika a la pˌenisilˈina,,2,es-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
-speaker_gender=feminine,medical-conditions.i-am-allergic-to-sulfa-drugs,Soy alérgica a las sulfamidas,,sˈoɪ alˈeɾxika a las sˌulfamˈidas,,2,es-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,medical-conditions.i-am-allergic-to-sulfa-drugs,Soy alérgica a las sulfamidas,Soy alérgica a las sulfas,sˈoɪ alˈeɾxika a las sˌulfamˈidas,,2,es-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
 speaker_gender=feminine,police-consulate.am-i-under-arrest,¿Estoy detenida?,,estˈoɪ dˌetenˈida,,2,es-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
 speaker_gender=feminine,etiquette.dressed-appropriately,¿Voy vestida apropiadamente?,,bˈoɪ bestˈida ˌapɾopjˈadamente,,2,es-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak

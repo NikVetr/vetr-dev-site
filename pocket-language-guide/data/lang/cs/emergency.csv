@@ -101,11 +101,11 @@ lost-rescue.please-look-at-my-location-pin,Podívejte se prosím na moji polohu,
 lost-rescue.i-cannot-walk,Nemohu chodit,,nˈemohu xˈoɟit,,2,cs-agent-v1;ipa=espeak
 lost-rescue.i-sprained-my-ankle,Vymkl jsem si kotník,,vˈimkl̩ jsem si kˈotɲiːk,,2,cs-agent-v1;ipa=espeak
 lost-rescue.please-contact-rescue,Kontaktujte prosím záchrannou službu,,kˈontaktˌujte prˈosiːm zˈaːxranoʊ slˈuʒbu,,2,cs-agent-v1;ipa=espeak
-lost-rescue.my-companion-is-missing,Můj společník / moje společnice se pohřešuje,,mˈuːj spˈoletʃɲiːk / mˈoje spˈoletʃɲˌitse se pˈohr̝eʃˌuje,,2,cs-agent-v1;ipa=espeak
+lost-rescue.my-companion-is-missing,Můj společník se pohřešuje,,mˈuːj spˈoletʃɲiːk se pˈohr̝eʃˌuje,společník/společnice has no epicene form in Czech; masculine generic -- the companion's gender rather than the speaker's,2,cs-agent-v1;rule=no-neutral-noun-masculine-generic;ipa=espeak
 lost-rescue.please-look-at-my-current-location,Podívejte se prosím na moji aktuální polohu,,pˈoɟiːvˌeɪte se prˈosiːm nˈamoji ˈaktuˌaːlɲiː pˈolohu,,2,cs-agent-v1;ipa=espeak
 lost-rescue.my-child-is-missing,Moje dítě se pohřešuje,,mˈoje ɟˈiːce se pˈohr̝eʃˌuje,"SAFETY-CRITICAL, matching social.children.cannot-find-my-child's own caution. pohřešuje se is the official Czech term used in missing-person reports (pohřešovaná osoba) and carries no bereavement reading at all",2,cs-agent-v1;ipa=espeak
 lost-rescue.i-do-not-know-where-i-am,"Nevím, kde jsem",,"nˈeviːm, ɡdˈe jsem",,2,cs-agent-v1;ipa=espeak
-lost-rescue.my-friend-is-hurt,Můj kamarád je zraněný / moje kamarádka je zraněná,,mˈuːj kˈamaraːd je zrˈaɲeniː / mˈoje kˈamarˌaːtka je zrˈaɲenaː,,2,cs-agent-v1;ipa=espeak
+lost-rescue.my-friend-is-hurt,Můj kamarád je zraněný,,mˈuːj kˈamaraːd je zrˈaɲeniː,kamarád/kamarádka has no epicene form in Czech; masculine generic -- the friend's gender rather than the speaker's,2,cs-agent-v1;rule=no-neutral-noun-masculine-generic;ipa=espeak
 lost-rescue.i-lost-my-wallet,Ztratil jsem peněženku,,strˈacil jsem pˈeɲeʒˌeŋku,,2,cs-agent-v1;ipa=espeak
 lost-rescue.i-lost-my-bag,Ztratil jsem tašku,,strˈacil jsem tˈaʃku,,2,cs-agent-v1;ipa=espeak
 lost-rescue.where-is-lost-and-found,Kde je oddělení ztrát a nálezů?,,ɡdˈe je ˈodɟelˌeɲiː strˈaːt a nˈaːlezuː,,2,cs-agent-v1;ipa=espeak

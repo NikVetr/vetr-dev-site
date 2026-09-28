@@ -72,7 +72,7 @@ sim-data.signal,il segnale,il campo,il seɲˈale,,2,it-agent-v1;ipa=espeak
 sim-data.esim,la eSIM,,la e sˈim,,2,it-agent-v1;ipa=espeak
 sim-data.prepaid,prepagata,ricaricabile,prepaɡˈata,,2,it-agent-v1;ipa=espeak
 sim-data.roaming,il roaming,,il roˈamiŋɡ,,2,it-agent-v1;ipa=espeak
-children.cannot-find-my-child,Non trovo mio figlio / mia figlia,Ho perso di vista mio figlio,non trˈɔvo mˌio fˈiʎo / mˌia fˈiʎa,,2,it-agent-v1;ipa=espeak
+children.cannot-find-my-child,Non trovo mio figlio,Ho perso di vista mio figlio,non trˈɔvo mˌio fˈiʎo,figlio/a has no epicene form in Italian; masculine generic -- the child's gender rather than the speaker's,2,it-agent-v1;rule=no-neutral-noun-masculine-generic;ipa=espeak
 children.make-an-announcement,Può fare un annuncio all'altoparlante?,,pʊˈɔ fˈare ʊn annˈuntʃo allaltoparlˈante,,2,it-agent-v1;ipa=espeak
 children.child-age,Mio figlio ha {} anni,Mia figlia ha {} anni,mˌio fˈiʎo ˈa {} ˈannɪ,,2,it-agent-v1;ipa=espeak
 children.high-chair,Avete un seggiolone?,,avˌete ʊn sedʒdʒolˈone,,2,it-agent-v1;ipa=espeak

@@ -107,7 +107,7 @@ lost-rescue.my-companion-is-missing,Χάθηκε το άτομο που είνα
 lost-rescue.please-look-at-my-current-location,Δείτε πού βρίσκομαι τώρα,Δείτε την τρέχουσα τοποθεσία μου,Deite pou vriskomai tora,ðˈite pˈu vɾˈiskomˌe tˈoɾa,Look at where I am now,2,el-agent-v1;roman=elot743;ipa=espeak
 lost-rescue.my-child-is-missing,Χάθηκε το παιδί μου,Αγνοείται το παιδί μου,Chathike to paidi mou,xˈaθicˌe to peðˈi mu,,2,el-agent-v1;roman=elot743;ipa=espeak
 lost-rescue.i-do-not-know-where-i-am,Δεν ξέρω πού βρίσκομαι,,Den xero pou vriskomai,ðˈeŋ ɡzˈeɾo pˈu vɾˈiskomˌe,,2,el-agent-v1;roman=elot743;ipa=espeak
-lost-rescue.my-friend-is-hurt,Τραυματίστηκε ο φίλος μου / η φίλη μου,,Travmatistike o filos mou / i fili mou,tɾˌavmatˈisticˌe o fˈiloz mu / i fˈili mu,My friend is injured (male / female),2,el-agent-v1;roman=elot743;ipa=espeak
+lost-rescue.my-friend-is-hurt,Τραυματίστηκε ο φίλος μου,,Travmatistike o filos mou,tɾˌavmatˈisticˌe o fˈiloz mu,φίλος/φίλη has no epicene form in Greek; masculine generic -- the friend's gender rather than the speaker's,2,el-agent-v1;roman=elot743;rule=no-neutral-noun-masculine-generic;ipa=espeak
 lost-rescue.i-lost-my-wallet,Έχασα το πορτοφόλι μου,,Echasa to portofoli mou,ˈexasˌa to pˌoɾtofˈoli mu,,2,el-agent-v1;roman=elot743;ipa=espeak
 lost-rescue.i-lost-my-bag,Έχασα την τσάντα μου,,Echasa tin tsanta mou,ˈexasˌa tin dzˈada mu,,2,el-agent-v1;roman=elot743;ipa=espeak
 lost-rescue.where-is-lost-and-found,Πού είναι το γραφείο απολεσθέντων;,Πού είναι τα χαμένα αντικείμενα;,Pou einai to grafeio apolesthenton;,pˈu ˈine to ɣɾafˈio ˌapolesθˈedon,Where is the lost property office?,2,el-agent-v1;roman=elot743;ipa=espeak

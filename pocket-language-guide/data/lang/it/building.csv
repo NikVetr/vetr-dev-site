@@ -1,6 +1,6 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 building-help.what-room-number-is-this,Che numero di stanza è questo?,,ke nˈumero dɪ stˈantsa e kwˈesto,,2,it-agent-v1;ipa=espeak
-building-help.i-am-lost,Mi sono perso/a,,mɪ sˌono pˈɛrso,,2,it-agent-v1;ipa=espeak
+building-help.i-am-lost,Mi sono perso,,mɪ sˌono pˈɛrso,,2,it-agent-v1;ipa=espeak
 building-help.where-is-reception,Dov'è la reception?,,dovˈɛ la retʃˈeptjon,,2,it-agent-v1;ipa=espeak
 building-help.where-is-a-power-outlet,Dov'è una presa di corrente?,,dovˈɛ ˌʊna prˈeza dɪ korɾˈɛnte,,2,it-agent-v1;ipa=espeak
 in-a-building.is-this-the-correct-entrance,È questa l'entrata giusta?,,e kwˌɛsta lentrˈata dʒˈusta,,2,it-agent-v1;ipa=espeak

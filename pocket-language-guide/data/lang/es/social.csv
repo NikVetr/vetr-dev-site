@@ -1,6 +1,6 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 sim-data.i-would-like-a-tourist-sim,Quisiera una tarjeta SIM para turistas,,kisjˈeɾa ˈuna taɾxˈeta ˌeseˌiˈeme pˌaɾa tuɾˈistas,,2,es-agent-v1;ipa=espeak
-children.cannot-find-my-child,No encuentro a mi hijo/a,,nˈo enkwˈentɾo a mi ˈixo,,2,es-agent-v1;ipa=espeak
+children.cannot-find-my-child,No encuentro a mi hijo,,nˈo enkwˈentɾo a mi ˈixo,hijo/a has no epicene form in Spanish; masculine generic -- the child's gender rather than the speaker's,2,es-agent-v1;rule=no-neutral-noun-masculine-generic;ipa=espeak
 etiquette.is-this-allowed,¿Está permitido esto?,,estˈa pˌeɾmitˈido ˈesto,,2,es-agent-v1;ipa=espeak
 sim-data.may-i-use-your-wifi,¿Me permite usar su wifi?,,me peɾmˈite usˈaɾ su wˈifi,,2,es-agent-v1;ipa=espeak
 children.make-an-announcement,"Avise por el altavoz, por favor",por megafonía · por altoparlante,"abˈise poɾ el ˌaltabˈos, poɾ fabˈoɾ",,2,es-agent-v1;ipa=espeak
