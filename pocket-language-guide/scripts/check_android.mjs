@@ -159,7 +159,7 @@ try {
 // --- a backup through the share sheet, cancelled --------------------------------------
 await p.evaluate(`(() => { window.__blobs = 0; const c = URL.createObjectURL;
   URL.createObjectURL = (b) => { window.__blobs += 1; return c.call(URL, b); }; })()`);
-await p.evaluate("document.getElementById('board-menu').click()");
+await p.evaluate("document.getElementById('site-menu').click()");
 await sleep(1200);
 await p.evaluate("[...document.querySelectorAll('dialog button')].find((b) => /save a copy/i.test(b.textContent)).click()");
 await sleep(4000);

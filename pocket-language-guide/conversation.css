@@ -75,7 +75,9 @@
      the end stay on the row, where a menu control is looked for. */
   flex-wrap: nowrap;
 }
-.board-header .site-menu { flex: 0 0 auto; inline-size: 2rem; block-size: 2rem; }
+/* Capped in pixels, as the bar's buttons are: at 1.6x text the lens and the bars beside
+   the pair pushed the bars off a 390px screen. 40px is still a whole tap. */
+.board-header .site-menu { flex: 0 0 auto; inline-size: min(2rem, 40px); block-size: min(2rem, 40px); }
 .board-pair { flex: 0 1 auto; text-align: end; }
 /* The brand keeps its word; the pair is what gives way on a narrow screen. */
 .board-brand { flex: 0 0 auto; }
@@ -1145,37 +1147,6 @@ mark.board-cell-found { background: none; color: var(--accent); font-weight: 700
 }
 
 
-/* Three bars, drawn rather than typed: there is no glyph for this that every phone
-   has, and a missing one is tofu in the corner of the only row the bar gets. */
-.board-menu {
-  flex: 0 0 auto;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  inline-size: min(2.75rem, 48px);
-  block-size: min(2.75rem, 48px);
-  padding: 0;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: none;
-  cursor: pointer;
-}
-.board-menu[hidden] { display: none; }
-.board-menu:hover { background: var(--surface); }
-.board-menu-bars, .board-menu-bars::before, .board-menu-bars::after {
-  display: block;
-  inline-size: 1.05rem;
-  block-size: 2px;
-  border-radius: 2px;
-  background: var(--muted);
-}
-.board-menu-bars { position: relative; }
-.board-menu-bars::before, .board-menu-bars::after { content: ''; position: absolute; inset-inline: 0; }
-.board-menu-bars::before { inset-block-start: -0.33rem; }
-.board-menu-bars::after { inset-block-start: 0.33rem; }
-.board-menu:hover .board-menu-bars,
-.board-menu:hover .board-menu-bars::before,
-.board-menu:hover .board-menu-bars::after { background: var(--ink); }
 
 /* The menu itself: anchored at the top, because that is where the button is, and
    narrow, because it holds two words. */

@@ -27,7 +27,8 @@
   <!-- Find: every context's buttons, by what they say. The field opens across this
        header, which is orientation only -- the bar under the grid has no room left. -->
   <button type="button" id="board-search" class="site-menu board-search-open" hidden><svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path d="M10.5 4.5a6 6 0 1 1 0 12a6 6 0 1 1 0-12ZM15 15l5 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
-  <button type="button" id="site-menu" class="site-menu"><span class="board-menu-bars" aria-hidden="true"></span></button>
+  <!-- Hidden until the page has wired it: pressed before then, it did nothing. -->
+  <button type="button" id="site-menu" class="site-menu" hidden><span class="board-menu-bars" aria-hidden="true"></span></button>
 </header>
 
 <main class="board-main">
@@ -49,20 +50,16 @@
          brand line stays one quiet row. -->
     <h1 class="board-title" id="board-title"></h1>
     <div class="spacer"></div>
-    <!-- Owner-only, and one control rather than two. `ui/conversation.js` hides it
-         on every view but the grid: a menu is not part of a live conversation. -->
     <!-- Turn: the stranger's surfaces sideways for the whole conversation. Owner-only,
-         like the menu beside it; the message keeps its own Turn as well. -->
-    <!-- Add: the reader's own buttons and trees. Its own control, so the bars can go
-         straight to Settings rather than to a menu of two. -->
+         like the header's settings; the message keeps its own Turn as well. -->
+    <!-- Add: the reader's own buttons and trees. Its own control, so the header's bars
+         can go straight to Settings rather than to a menu of two. Settings is not here
+         as well: one door, in the header, where every page keeps it. -->
     <button type="button" id="board-add-bar" class="board-turn-bar board-add-bar" hidden>
       <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
     </button>
     <button type="button" id="board-turn-bar" class="board-turn-bar" hidden aria-pressed="false">
       <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path d="M5 11A7 7 0 1 1 13.4 17.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M13.6 14 13.6 21.2 7.2 17.6Z" fill="currentColor"/></svg>
-    </button>
-    <button type="button" id="board-menu" class="board-menu" hidden>
-      <span class="board-menu-bars" aria-hidden="true"></span>
     </button>
   </div>
   <div id="board-grid" class="board-grid" aria-busy="true"></div>

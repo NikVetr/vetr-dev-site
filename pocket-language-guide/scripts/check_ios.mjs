@@ -306,7 +306,7 @@ check('layout-after-keyboard', Math.abs(grid.bar - foot.bar) < 2 && grid.scrollY
 
 // --- 5. a backup through the share sheet, and cancelling it ----------------------
 await p.watchShare();
-await p.touch(`document.getElementById('board-menu')`);
+await p.touch(`document.getElementById('site-menu')`);
 await p.until("document.querySelector('dialog[open]')");
 await p.touch(`[...document.querySelectorAll('dialog[open] button')].find((b) => /save a copy/i.test(b.textContent))`);
 const scrim = await sheetUp();

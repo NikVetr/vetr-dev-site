@@ -546,7 +546,7 @@ test('the way back does not look like something you are saying', async ({ page }
 async function fromMenu(page, name) {
   // Two controls now, not a menu of two: the plus opens the editor, the bars open
   // Settings. The name says which.
-  await page.locator(name === 'Edit buttons' ? '#board-add-bar' : '#board-menu').click();
+  await page.locator(name === 'Edit buttons' ? '#board-add-bar' : '#site-menu').click();
 }
 
 /** @param {import('@playwright/test').Page} page */
@@ -716,7 +716,7 @@ test('the menu panels hold the longest language, not only English', async ({ pag
       await expect(page.locator('.board-cell').first()).toBeVisible();
       // The two panels have their own controls now -- the plus is the editor, the
       // bars are Settings -- so they are opened by control, not by menu position.
-      await page.locator(item === 0 ? '#board-add-bar' : '#board-menu').click();
+      await page.locator(item === 0 ? '#board-add-bar' : '#site-menu').click();
       const panel = page.locator('dialog[open]').last();
       await expect(panel).toBeVisible();
       const held = await panel.evaluate((d) => {
@@ -757,14 +757,14 @@ test('the editor is owner-only and cannot be reached from a message', async ({ p
   // The listener must not find it by tapping, and the owner must not open it while
   // holding the phone out to a stranger.
   await page.goto(`${BOARD}&replies=1`);
-  await expect(page.locator('#board-menu')).toBeVisible();
+  await expect(page.locator('#site-menu')).toBeVisible();
   await page.locator('[data-button="avoid"]').click();
-  await expect(page.locator('#board-menu')).toBeHidden();
+  await expect(page.locator('#site-menu')).toBeHidden();
   await page.locator(EXCHANGE).click();
-  await expect(page.locator('#board-menu')).toBeHidden();
+  await expect(page.locator('#site-menu')).toBeHidden();
   await page.locator('.board-back').click();
   await dismiss(page);
-  await expect(page.locator('#board-menu')).toBeVisible();
+  await expect(page.locator('#site-menu')).toBeVisible();
 });
 
 test('damaged storage is reported rather than presented as empty', async ({ page }) => {
@@ -1003,7 +1003,7 @@ async function noSpill(/** @type {import('@playwright/test').Page} */ page) {
     /** @type {string[]} */ const bad = [];
     const named = (/** @type {HTMLElement} */ n) => n.dataset.button || n.id || n.className;
     for (const n of document.querySelectorAll(
-      '.board-cell, .board-up, .board-menu, .board-pair, .board-brand,'
+      '.board-cell, .board-up, .site-menu, .board-pair, .board-brand,'
       + ' .board-grid-title, .board-title')) {
       const el = /** @type {HTMLElement} */ (n);
       const r = el.getBoundingClientRect();
@@ -1214,10 +1214,10 @@ test('converse opens the topics, not a board @smoke', async ({ page }) => {
     '',
   ]);
   await expect(topics.last()).toHaveAccessibleName('Your own context');
-  // Nothing on this screen is owner-only chrome: there is no board to edit yet.
-  await expect(page.locator('#board-menu')).toBeHidden();
-  // Nor to add to -- a class's `display` once outranked its `hidden`, and the plus
-  // sat here doing nothing. Turn is here, because the list turns with the boards.
+  // Nothing on this screen is a board's own chrome: there is no board to add to -- a
+  // class's `display` once outranked its `hidden`, and the plus sat here doing
+  // nothing. Settings is the header's, as on every page, and Turn is here, because
+  // the list turns with the boards.
   await expect(page.locator('#board-add-bar')).toBeHidden();
   await expect(page.locator('#board-turn-bar')).toBeVisible();
 
@@ -2010,7 +2010,7 @@ test('turning turns what is on the bar in place, and moves nothing', async ({ pa
   await page.setViewportSize({ width: 390, height: 760 });
   await page.goto(BOARD);
   await expect(page.locator('.board-cell').first()).toBeVisible();
-  const places = () => page.evaluate(() => ['board-up', 'board-add-bar', 'board-turn-bar', 'board-menu']
+  const places = () => page.evaluate(() => ['board-up', 'board-add-bar', 'board-turn-bar']
     .map((id) => { const r = /** @type {HTMLElement} */ (document.getElementById(id)).getBoundingClientRect(); return [r.x, r.y, r.width, r.height].map(Math.round).join(','); }));
   const before = await places();
   await page.locator('#board-turn-bar').click();
@@ -2257,7 +2257,7 @@ test('a screen is rearranged by dragging, from the settings, and keeps its order
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=intro');
   const ids = () => page.$$eval('#board-grid [data-button]', (els) => els.map((e) => /** @type {HTMLElement} */ (e).dataset.button));
   const before = await ids();
-  await page.locator('#board-menu').click();
+  await page.locator('#site-menu').click();
   await page.getByRole('button', { name: 'Rearrange buttons' }).click();
   await expect(page.locator('#board-grid')).toHaveClass(/board-grid-arranging/);
   // Picked up, a press says nothing.
@@ -2403,7 +2403,7 @@ test('on a board the search goes deeper in place, and Escape closes only the sea
 test('the pre-travel check tries every part of the pair and marks each one', async ({ page }) => {
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=emergency');
   await expect(page.locator('.board-cell').first()).toBeVisible();
-  await page.locator('#board-menu').click();
+  await page.locator('#site-menu').click();
   await page.getByRole('button', { name: 'Check that everything works offline' }).click();
   const rows = page.locator('.travel-check-row');
   await expect(rows).toHaveCount(6);
@@ -2530,7 +2530,7 @@ test('Attract attention sounds a siren only when the reader has asked for one', 
   expect((await log()).started).toBe(0);
   await page.locator('.beacon').click();
   // Turned on in the settings, it sounds -- and stops with the beacon.
-  await page.locator('#board-menu').click();
+  await page.locator('#site-menu').click();
   await page.getByRole('checkbox', { name: 'Attract attention also sounds a siren' }).check();
   await page.keyboard.press('Escape');
   await page.locator('[data-button="attention"]').click();

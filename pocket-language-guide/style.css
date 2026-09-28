@@ -2223,6 +2223,8 @@ body.page-signal { --logo-hue: 195deg; }
   flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
   inline-size: 2rem; block-size: 2rem; padding: 0; border-radius: var(--radius-sm);
 }
+/* Hidden while a board shows a message: `display` above outranks the attribute. */
+.site-menu[hidden] { display: none; }
 .site-menu .board-menu-bars, .site-menu .board-menu-bars::before, .site-menu .board-menu-bars::after {
   display: block; inline-size: 0.9rem; block-size: 2px; background: currentColor; border-radius: 1px;
 }

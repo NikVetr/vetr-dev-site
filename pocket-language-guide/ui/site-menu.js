@@ -39,6 +39,7 @@ export function wireSiteMenu(open = () => openAppearance()) {
   bars.setAttribute('aria-label', t('settings.open'));
   bars.title = t('settings.open');
   bars.addEventListener('click', open);
+  bars.hidden = false;
 }
 
 /** The plain settings: appearance, where the app opens, and whatever the page adds.

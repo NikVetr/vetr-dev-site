@@ -1185,7 +1185,7 @@ async function main() {
     applyUpdateIfIdle();
 
     if (state.view !== 'grid') {
-      for (const id of ['board-menu', 'board-turn-bar', 'board-add-bar', 'board-search']) $(id).hidden = true;
+      for (const id of ['site-menu', 'board-turn-bar', 'board-add-bar', 'board-search']) $(id).hidden = true;
     }
     // Turned is for the whole tree, not one screen of it: the owner's grid turns
     // with the sentence and the answers, so a phone laid on the counter reads one
@@ -1208,7 +1208,7 @@ async function main() {
       // The arrow says "out of here" wherever you are: up a submenu, or back to the
       // context list from a board's root. Its accessible name says which.
       const atRoot = state.path.length < 2;
-      for (const id of ['board-up', 'board-menu', 'board-turn-bar', 'board-add-bar', 'board-search']) $(id).hidden = false;
+      for (const id of ['board-up', 'site-menu', 'board-turn-bar', 'board-add-bar', 'board-search']) $(id).hidden = false;
       $('board-up').setAttribute('aria-label', atRoot ? t('board.allTopics') : t('board.up'));
       renderGrid($('board-grid'), node, {
         lang: owner,
@@ -1404,18 +1404,6 @@ async function main() {
     dispatch({ type: 'up' });
   });
 
-  // **One owner-only control, opening a menu.** It was two buttons reading `Settings`
-  // and `Edit buttons`, which on a phone wrapped the bar onto a second line -- and
-  // the topic, which is the thing worth reading, had to share the first one. Three
-  // bars is the icon every phone already means "menu" by, so the row fits and the
-  // topic gets the space.
-  //
-  // Owner-only and grid-only, like the editor it holds: the person being spoken to
-  // must not find the editor by tapping, and the owner must not open it while
-  // holding the phone out to a stranger.
-  const menuButton = $('board-menu');
-  menuButton.setAttribute('aria-label', t('settings.open'));
-  menuButton.title = t('settings.open');
   // **Turn, from the bar.** The same choice the message's own control makes, set
   // before a message is shown: a phone laid on the counter is turned for the whole
   // conversation, answers included, not one sentence at a time.
@@ -1535,10 +1523,11 @@ async function main() {
     back: () => paint(),
   });
 
-  // The bars are Settings and the plus is the editor: two controls for two things,
-  // rather than one control opening a menu of the two. The header's bars are the
-  // same Settings, so a reader who looks up finds the same door.
-  menuButton.addEventListener('click', openSettings);
+  // **Settings is the header's bars and the plus is the editor**: two controls for two
+  // things, rather than one control opening a menu of the two -- and one door to
+  // Settings, not a second in the bar that opened the same dialog. Both are owner-only
+  // and grid-only: the person being spoken to must not find the editor by tapping, and
+  // the owner must not open it while holding the phone out to a stranger.
   wireSiteMenu(openSettings);
   const addButton = $('board-add-bar');
   addButton.setAttribute('aria-label', t('editor.open'));
