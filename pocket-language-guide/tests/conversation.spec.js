@@ -2145,9 +2145,9 @@ test('a button that says your name asks for it once, says it, and a hold clears 
   // The owner's own letters carry the name as they wrote it: they know how to say it.
   await expect(page.locator('.gloss-say')).toContainText('Nikolai');
   await dismiss(page);
-  // It is kept, and a hold -- a right click here -- clears it for the next person.
+  // It is kept, and a hold -- a right click here -- clears it for the next person. The
+  // reload comes back to the same screen.
   await page.reload();
-  await page.locator('[data-button="about"]').click();
   await expect(cell).toHaveClass(/board-cell-set/);
   await cell.click({ button: 'right' });
   await expect(cell).toHaveClass(/board-cell-unset/);
@@ -2164,7 +2164,8 @@ test('a name built from its sounds is written in the listener\'s letters, and as
   await page.locator('[data-button="myname"]').click();
   const ask = page.locator('dialog.about-ask');
   await ask.locator('input').fill('Nikolai');
-  await ask.locator('summary').click();
+  // Open from the start: folded, it was not found.
+  await expect(ask.locator('.sound-key').first()).toBeVisible();
   const key = (/** @type {string} */ sound) => ask.locator('.sound-key').filter({ has: page.locator('small').getByText(sound, { exact: true }) });
   for (const sound of ['n', 'i', 'k', 'ə', 'l', 'aɪ']) await key(sound).click();
   await expect(ask.locator('.sound-heard')).toHaveText('ニカライ');
@@ -2217,7 +2218,7 @@ test('a screen is rearranged by dragging, from the settings, and keeps its order
   const ids = () => page.$$eval('#board-grid [data-button]', (els) => els.map((e) => /** @type {HTMLElement} */ (e).dataset.button));
   const before = await ids();
   await page.locator('#board-menu').click();
-  await page.getByRole('button', { name: 'Rearrange this screen' }).click();
+  await page.getByRole('button', { name: 'Rearrange buttons' }).click();
   await expect(page.locator('#board-grid')).toHaveClass(/board-grid-arranging/);
   // Picked up, a press says nothing.
   const from = /** @type {{x:number,y:number,width:number,height:number}} */ (await page.locator('[data-button="hello"]').boundingBox());
@@ -2250,7 +2251,7 @@ test('the list of contexts is rearranged from the header\'s settings, the plus s
   await expect(page.locator('#board-grid [data-button]').first()).toBeVisible();
   const first = (await ids())[0];
   await page.locator('#site-menu').click();
-  await page.getByRole('button', { name: 'Rearrange this screen' }).click();
+  await page.getByRole('button', { name: 'Rearrange buttons' }).click();
   await page.locator(`[data-button="${first}"]`).focus();
   await page.keyboard.press('ArrowRight');
   await page.getByRole('button', { name: 'Done' }).click();
@@ -2324,6 +2325,23 @@ test('kind words are a screen of their own, and their replies are the listener\'
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=intro');
   await page.locator('[data-button="about"]').click();
   await expect(page.locator('[data-button="nice"]')).toBeVisible();
+});
+
+test('changing a language keeps the screen the reader was on', async ({ page }) => {
+  // The switch reloads the page for the new pair, and it came back at the board's
+  // first screen; the screen rides in the address now, and in a reload.
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=intro');
+  await page.locator('[data-button="about"]').click();
+  await expect(page).toHaveURL(/screen=about/);
+  await page.locator('#board-pair button').last().click();
+  await page.locator('.board-menu-item', { hasText: 'Japanese' }).click();
+  await expect(page).toHaveURL(/target=ja/);
+  await expect(page.locator('[data-button="myname"]')).toBeVisible();
+  await page.reload();
+  await expect(page.locator('[data-button="myname"]')).toBeVisible();
+  // Up to the board's first screen forgets it again.
+  await page.locator('#board-up').click();
+  await expect(page).not.toHaveURL(/screen=/);
 });
 
 test('red and blue lights turn the screen from one to the other, slowly', async ({ page }) => {
@@ -2425,11 +2443,11 @@ test('Attract attention sounds a siren only when the reader has asked for one', 
   expect((await log()).stopped).toBe(2);
 });
 
-test('turned, Reply beside the last line keeps its distance from the line before', async ({ page }) => {
+test('turned, Reply beside the last line is as far from the line before as from the frame', async ({ page }) => {
   // Reply wider than the last column was aligned to that column's box, whose edge is
-  // the column before's, and sat touching it -- a third as far from it as the
-  // columns sit from each other. It keeps the buffer it keeps from everything else.
-  await page.setViewportSize({ width: 360, height: 640 });
+  // the column before's, and sat touching it; then, kept a buffer from it, it sat
+  // nearer the frame than the line. Centred between the two, the gaps match.
+  await page.setViewportSize({ width: 393, height: 659 });
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=spa');
   await page.locator('#board-turn-bar').click();
   await page.locator('[data-button="avoid"]').dispatchEvent('click');
@@ -2444,12 +2462,15 @@ test('turned, Reply beside the last line keeps its distance from the line before
       if (col) { col.left = Math.min(col.left, r.left); col.right = Math.max(col.right, r.right); } else cols.push({ left: r.left, right: r.right });
     }
     const reply = /** @type {HTMLElement} */ (document.querySelector('.board-reply')).getBoundingClientRect();
-    return { cols: cols.length, gap: cols.at(-2) ? cols.at(-2).left - reply.right : Infinity,
-      third: Number.parseFloat(getComputedStyle(text).fontSize) / 3 };
+    const box = /** @type {HTMLElement} */ (document.querySelector('.board-message'));
+    const pad = Number.parseFloat(getComputedStyle(box).paddingLeft);
+    return { cols: cols.length, toLine: cols.at(-2) ? cols.at(-2).left - reply.right : Infinity,
+      toFrame: reply.left - (box.getBoundingClientRect().left + pad), pad };
   });
   await expect.poll(async () => (await gap()).cols).toBe(2);
-  const { gap: apart, third } = await gap();
-  expect(apart).toBeGreaterThanOrEqual(third - 2);
+  const { toLine, toFrame, pad } = await gap();
+  expect(Math.abs(toLine - toFrame)).toBeLessThanOrEqual(3);
+  expect(toLine).toBeGreaterThanOrEqual(pad);
 });
 
 test('turned, Reply keeps a size for its sentence, and stays inside the frame', async ({ page }) => {

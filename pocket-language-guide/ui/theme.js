@@ -80,10 +80,9 @@ export function lightSwitch({ label, dark, flip }) {
 
 /** The board dialog's section: a heading and the control. */
 export function themeSection() {
+  // No heading: one switch, sun on one side and moon on the other, says what it is.
   const box = document.createElement('section');
   box.className = 'display-section';
-  const heading = document.createElement('h3');
-  heading.textContent = t('display.theme');
-  box.append(heading, themeControl());
+  box.append(themeControl());
   return box;
 }

@@ -26,16 +26,23 @@ function el(tag, attrs = {}, kids = []) {
  * Open the menu under the control that asked for it.
  *
  * @param {HTMLElement} anchor  the button pressed, so focus can go back to it
- * @param {{label:string, run:()=>void, current?:boolean}[]} items  `current` marks the
+ * @param {{label:string, run:()=>void, current?:boolean, own?:{text:string, lang:string}}[]} items  `current` marks the
  *   one in force, which is drawn as such and takes focus instead of the first
  * @param {{title:string, items:{label:string, run:()=>void, current?:boolean}[]}} [aside]
  *   a second column beside the first, under its own heading
  */
 export function openBoardMenu(anchor, items, aside) {
   const panel = /** @type {HTMLDialogElement} */ (el('dialog', { class: 'board-menu-panel' }));
-  /** @param {{label:string, run:()=>void, current?:boolean}} item */
+  /**
+   * An item may carry its name in its own language beside the reader's word for it --
+   * a language's endonym, so someone handed the phone can find their own.
+   * @param {{label:string, run:()=>void, current?:boolean, own?:{text:string, lang:string}}} item
+   */
   const entry = (item) => {
     const button = el('button', { type: 'button', class: 'board-menu-item', text: item.label });
+    if (item.own && item.own.text !== item.label) {
+      button.append(el('span', { class: 'board-menu-own', lang: item.own.lang, text: item.own.text }));
+    }
     if (item.current) {
       button.classList.add('board-menu-current');
       button.setAttribute('aria-current', 'true');
@@ -113,7 +120,7 @@ function formDialog({ kind, close, save, body, onSubmit, focus }) {
   const panel = /** @type {HTMLDialogElement} */ (el('dialog', { class: `speaker-settings ${kind}` }));
   const corner = el('button', { type: 'button', class: 'speaker-close', 'aria-label': close });
   corner.addEventListener('click', () => panel.close());
-  const form = el('form', {}, [...body, el('button', { class: 'btn primary', text: save })]);
+  const form = el('form', {}, [...body, el('button', { class: 'btn primary form-save', text: save })]);
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     onSubmit();

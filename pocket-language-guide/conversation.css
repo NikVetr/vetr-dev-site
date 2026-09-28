@@ -422,18 +422,19 @@
   pointer-events: none;
 }
 
-/* A submenu is a different kind of act from saying something: it says nothing at
-   all. Dashed and a shade back, which reads as "not yet" without a glyph eating
-   into a label that is already tight. */
-.board-cell-more { background: var(--surface); border-style: dashed; }
-/* **Except where every button is one.** The dash says "this goes deeper rather than
-   saying something", which is information on a mixed grid and noise on the context
-   list, where there is nothing else for it to contrast with. Twelve dashed boxes read
-   as twelve provisional ones. */
-.board-grid-topics .board-cell-more {
-  background: var(--control);
-  border-style: solid;
+/* **A button that opens more buttons is filled**, in the message's own blue with white
+   type -- dark in both themes -- and keeps its arrow: a different act from saying
+   something, and said with two cues. It was dashed, and a dashed outline is reserved
+   for what the reader has still to make: the plus that adds a context or a first
+   button. */
+.board-cell.board-cell-more { background: #0b67a3; border-color: #0b67a3; color: #fff; }
+.board-cell.board-cell-more:not(.board-cell-alert):hover { background: #0b67a3; filter: brightness(1.12); }
+/* **Except where every button is one**, on the list of contexts, where the fill has
+   nothing to contrast with and twelve blue boxes would say nothing. */
+.board-grid-topics .board-cell.board-cell-more:not(.board-cell-alert) {
+  background: var(--control); border-color: var(--line); color: inherit;
 }
+.board-grid-topics .board-cell.board-cell-more:not(.board-cell-alert):hover { background: var(--surface-2); filter: none; }
 /* The two buttons that are not something to say. They are about being seen, so they
    are the one place on the grid that keeps a solid fill -- and they are next to each
    other at the end, away from the phrases, so a thumb reaching for "it hurts here"
@@ -730,6 +731,8 @@
 .board-menu-column:last-child .board-menu-item { white-space: normal; overflow-wrap: break-word; }
 .board-menu-title { margin: 0 0 var(--space-1); padding-inline: var(--space-2); font-size: var(--fs--1); color: var(--muted); }
 .board-menu-current::after { content: ' \2713'; }
+/* A language's own name beside the reader's word for it, set apart in colour and face. */
+.board-menu-own { margin-inline-start: 0.6em; color: var(--accent); font-family: var(--serif, Georgia, serif); }
 .board-reply:hover { background: var(--accent); filter: brightness(1.08); }
 /* **Reply is drawn like the message, and the owner's controls are not.** Every
    other button on this row is the owner's -- Speak, the speed, the turn -- and they
@@ -1307,7 +1310,10 @@ body:has(.board-main-turned) .site-menu .board-menu-bars { rotate: 90deg; }
 /* A cell that makes something -- a context, or the first button on an empty screen --
    is a dashed outline and a plus, and says what it makes to a screen reader only. */
 .board-cell.board-cell-add { border: 2px dashed var(--accent); background: transparent; color: var(--accent); }
-.board-cell-add .board-cell-label::before { content: '+'; display: block; font-size: 2.4em; line-height: 1; font-weight: 700; }
+/* The plus is drawn, not a glyph: a font's "+" sits off its box's middle. */
+.board-cell-add .board-cell-label { display: grid; place-items: center; }
+.board-cell-add .board-cell-plus { inline-size: 2.4em; block-size: 2.4em; }
+.board-cell-add::after { content: none; }
 /* A topic's mark behind its word, filling the button: the drawings keep their own
    margin, and one set smaller sat in the middle as an icon the word was printed over. */
 .board-cell-topic { inline-size: 100%; block-size: 100%; opacity: 0.13; }

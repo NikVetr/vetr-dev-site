@@ -92,6 +92,7 @@ const OWN = 'own:';
 function toPicker() {
   const next = new URLSearchParams(location.search);
   next.delete('board');
+  next.delete('screen');
   location.search = next.toString();
 }
 
@@ -397,7 +398,7 @@ async function showPicker(owner, listener, index) {
       ?? mine.find((p) => `${OWN}${p.id}` === button.id)?.label ?? t('board.addContext'),
     available: () => true,
     onPick: (button) => {
-      if (!button.add) { goTo({ board: button.id }); return; }
+      if (!button.add) { goTo({ board: button.id, screen: null }); return; }
       askText({
         label: t('board.contextName'),
         save: t('editor.save'),
@@ -407,7 +408,7 @@ async function showPicker(owner, listener, index) {
           if (!label) return;
           const made = addPhrase(personal.data, { label, owner: '', listener: '', pair, screen: true }, CONTEXTS);
           await writePersonal(made.data);
-          goTo({ board: `${OWN}${made.id}` });
+          goTo({ board: `${OWN}${made.id}`, screen: null });
         },
       });
     },
@@ -483,8 +484,11 @@ async function main() {
         .filter((c) => c !== code)
         .map((c) => ({ code: c, label: nameOf(c) }))
         .sort((a, b) => a.label.localeCompare(b.label));
+      // Each also in its own name, for a phone handed to someone whose language the
+      // reader does not know: they cannot find it spelled in the reader's language.
       openBoardMenu(button, options.map((option) => ({
         label: option.label,
+        own: { text: named[option.code]?.endonym || named[option.code]?.endonym_roman || '', lang: option.code },
         run: () => goTo({ [side === 'owner' ? 'source' : 'target']: option.code }),
       })));
     }));
@@ -496,7 +500,7 @@ async function main() {
   // they named, holding what they placed on it -- the path their screens inside a board
   // already take. Deleted since it was last open, the list is where to be.
   const own = boardId.startsWith(OWN) ? readPersonal().data.phrases[boardId.slice(OWN.length)] : null;
-  if (boardId.startsWith(OWN) && !own?.screen) { goTo({ board: null }); return; }
+  if (boardId.startsWith(OWN) && !own?.screen) { goTo({ board: null, screen: null }); return; }
   const board = own
     ? { schemaVersion: 1, id: boardId, titleKey: '', rootNodeId: own.id, nodes: { [own.id]: { buttons: [] } } }
     : JSON.parse(await loadText(`data/boards/${boardId}.json`));
@@ -680,8 +684,8 @@ async function main() {
   $('board-title').replaceChildren(
     inlineControl(title, t('board.switchTopic'), (button) => {
       openBoardMenu(button, [
-        ...others.map((o) => ({ label: o.label, run: () => goTo({ board: o.id }) })),
-        { label: t('board.allTopics'), run: () => goTo({ board: null }) },
+        ...others.map((o) => ({ label: o.label, run: () => goTo({ board: o.id, screen: null }) })),
+        { label: t('board.allTopics'), run: () => goTo({ board: null, screen: null }) },
       ]);
     }),
   );
@@ -699,6 +703,12 @@ async function main() {
   // Hydrated once. The page is authoritative from here; the editor hands back a new
   // value rather than the page asking the disk what was just written.
   let personal = readPersonal();
+  // **The screen the reader was on**, from the address: changing a language reloads
+  // the page, and it came back at the board's first screen. Each step must still be a
+  // screen of this board, or of the reader's own, to be followed.
+  const deeper = (params.get('screen') ?? '').split('/')
+    .filter((id) => board.nodes[id] || personal.data.phrases[id]?.screen);
+  if (deeper.length) state = { ...state, path: [state.path[0], ...deeper] };
   /** The reply sets the reader's own questions carry, rebuilt with the screen by `withOwn`.
    * @type {Record<string, {buttons: import('../core/conversation.js').BoardButton[]}>} */
   let ownSets = {};
@@ -858,6 +868,13 @@ async function main() {
     turnLetters(/** @type {HTMLElement} */ ($('board-title').firstElementChild ?? $('board-title')), display.turned);
     if (state.view === 'grid') {
       clearStage(stage);
+      // Kept in the address, where a language switch, a reload and the app's own
+      // resume all find it.
+      const screen = state.path.slice(1).join('/');
+      const here = new URL(location.href);
+      if (screen) here.searchParams.set('screen', screen); else here.searchParams.delete('screen');
+      if (here.href !== location.href) history.replaceState(history.state, '', here);
+      notePlace({ target: listener, source: owner, ...(boardId ? { board: boardId } : {}), ...(screen ? { screen } : {}) });
       // At the root the parent is the topic list, not a node -- so the control stays
       // rather than vanishing, and says where it goes. Somewhere to go back *to* is
       // the difference between one board and the whole app.
@@ -1217,7 +1234,7 @@ async function main() {
     save: download,
     onChange: (next) => { personal = { ...personal, data: next }; paint(); },
     // In a context of the reader's own, its editor is also where it is deleted.
-    context: own ? { id: own.id, onGone: () => goTo({ board: null }) } : undefined,
+    context: own ? { id: own.id, onGone: () => goTo({ board: null, screen: null }) } : undefined,
     fromBoards,
     words: (phrase) => {
       const said = resolvePhrase({ kind: 'corpus', id: /** @type {string} */ (phrase.concept) }, ctx);

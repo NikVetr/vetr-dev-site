@@ -98,6 +98,14 @@ export function renderGrid(root, node, { label, available, onPick, lang, title, 
     const text = document.createElement('span');
     text.className = 'board-cell-label';
     text.textContent = button.add ? '' : label(button);
+    if (button.add) {
+      const plus = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      plus.setAttribute('viewBox', '0 0 24 24');
+      plus.setAttribute('class', 'board-cell-plus');
+      plus.setAttribute('aria-hidden', 'true');
+      plus.innerHTML = '<path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>';
+      text.append(plus);
+    }
     cell.append(text);
     // Reinforced with a mark, because colour alone is not a signal: roughly one man
     // in twelve cannot use it, and a tinted cell in bright sun is a white cell.
@@ -1170,6 +1178,15 @@ function placeBeside(text, reply, corner, box, read) {
     shift = Math.max(shift, inner.left - from);
     text.style.translate = `${shift}px 0`;
     x += shift;
+    // **Across, as far from the line before as from the frame.** Level with the last
+    // line put a Reply wider than it hard against the line before on one side and a
+    // wide margin on the other; centred between the two, the gaps match -- and never
+    // nearer either than the frame's own padding, or it stays where it was.
+    const before = lines[lines.length - 2];
+    if (before) {
+      const even = (inner.left + before.left + shift - w) / 2;
+      if (before.left + shift - (even + w) >= Number.parseFloat(pad.paddingLeft)) x = even;
+    }
   } else {
     x = corner.left + (corner.w - w) / 2;
     const height = last.bottom - corner.top;

@@ -75,7 +75,8 @@ export function askDetail(fact, onChange, sounds) {
   if (grid) {
     more = document.createElement('details');
     more.className = 'about-sounds';
-    more.open = Boolean(about.name_ipa);
+    // Open: folded, the keyboard was not found at all.
+    more.open = true;
     const summary = document.createElement('summary');
     summary.textContent = t('about.sounds');
     const hint = document.createElement('p');

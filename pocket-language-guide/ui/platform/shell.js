@@ -76,7 +76,7 @@ export function writeResume(depth) {
 
 /**
  * Remember which screen the reader is on, for the next launch.
- * @param {{target:string, source:string, board?:string}|null} place  null for every language
+ * @param {{target:string, source:string, board?:string, screen?:string}|null} place  null for every language
  */
 export function notePlace(place) {
   if (isNative()) store.set(PLACE_KEY, JSON.stringify(place));
@@ -97,7 +97,10 @@ export function resumeLaunch() {
   const depth = RESUME_DEPTHS.indexOf(readResume());
   if (!place || depth === 0) return false;
   const params = new URLSearchParams({ target: place.target, source: place.source });
-  if (place.board && depth === 2) params.set('board', place.board);
+  if (place.board && depth === 2) {
+    params.set('board', place.board);
+    if (place.screen) params.set('screen', place.screen);
+  }
   location.replace(`conversation.html?${params}`);
   return true;
 }

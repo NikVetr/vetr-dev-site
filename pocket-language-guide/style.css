@@ -975,8 +975,7 @@ body:has(> .studio) { display: flex; flex-direction: column; height: 100dvh; }
      a second menu button beside this one, so at this width they go. */
   .studio-header #site-menu { display: none; }
   .header-settings { border-top: 1px solid var(--line-soft); padding: var(--space-1) 0.7em 0; }
-  .header-settings .display-section { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); }
-  .header-settings h3 { font-size: inherit; font-weight: 400; margin: 0; }
+  .header-settings .display-section { display: flex; align-items: center; }
   /* The banner is a bar of its own on a desktop; in the menu it is one item among
      the rest, so it loses the rule that separated it from them. */
   .header-menu > .banner {
@@ -2136,6 +2135,10 @@ dialog.speaker-settings h2 { margin: 0 0 var(--space-1); font-size: var(--fs-2);
 }
 /* One of the reader's details: its name above a field the width of the dialog. */
 .about-field { display: grid; gap: 0.3em; margin-block: 0 var(--space-1); }
+/* The way into rearranging a screen, set apart from the settings around it. */
+.board-arrange { display: block; margin-block: var(--space-2) var(--space-3); }
+/* A small dialog's Save stands centred under what it saves, clear of the field. */
+.form-save { display: block; margin: var(--space-3) auto 0; min-inline-size: 8rem; }
 /* A long checklist folds by group, each under its own heading. */
 .speaker-group { border-block-end: 1px solid var(--line-soft); padding-block: var(--space-1); }
 .speaker-group > summary { cursor: pointer; font-weight: 600; }
