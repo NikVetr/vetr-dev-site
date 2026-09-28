@@ -121,3 +121,11 @@ board-answers.what-is-your-name,名前は何ですか？,,namae wa nan desu ka?,
 board-answers.the-hospital-is-close,病院はすぐ近くです,,byōin wa sugu chikaku desu,bjoːiɴ wa sɯɡɯ tɕikakɯ desɯ,,2,ja-agent-v1;board-answers-v1;ipa=hepburn
 board-answers.i-do-not-have-a-phone,スマホがありません,,sumaho ga arimasen,sɯmaho ɡa aɾimaseɴ,,2,ja-agent-v1;board-answers-v1;ipa=hepburn
 board-answers.i-will-find-someone,手伝える人を探します,,tetsudaeru hito o sagashimasu,tetsɯdaeɾɯ çito o saɡaɕimasɯ,,2,ja-agent-v1;board-answers-v1;ipa=hepburn
+kind-words.you-are-very-kind,とても親切ですね,,totemo shinsetsu desu ne,totemo ɕiɴsetsɯ desɯ ne,"[you are] very kind, aren't you",2,ja-agent-v1;ipa=hepburn
+kind-words.thank-you-for-your-help,助けていただきありがとうございます,,tasukete itadaki arigatō gozaimasu,tasɯkete itadaki aɾiɡatoː ɡozaimasɯ,thank you for having helped [me],2,ja-agent-v1;ipa=hepburn
+kind-words.this-is-delicious,これはおいしいです,,kore wa oishii desu,koɾe wa oiɕii desɯ,this is tasty,2,ja-agent-v1;ipa=hepburn
+kind-words.it-is-beautiful-here,ここはきれいですね,,koko wa kirei desu ne,koko wa kiɾei desɯ ne,"here is beautiful, isn't it — about the place",2,ja-agent-v1;ipa=hepburn
+kind-words.i-like-it-very-much,とても気に入りました,,totemo ki ni irimashita,totemo ki ɲi iɾimaɕita,[it] came to please me very much — about a thing or place shown,2,ja-agent-v1;ipa=hepburn
+kind-words.i-had-a-wonderful-time,素晴らしい時間を過ごせました,,subarashii jikan o sugosemashita,sɯbaɾaɕii dʑikaɴ o sɯɡosemaɕita,[I] was able to spend a wonderful time,2,ja-agent-v1;ipa=hepburn
+kind-words.thank-you-for-everything,いろいろとありがとうございました,,iroiro to arigatō gozaimashita,iɾoiɾo to aɾiɡatoː ɡozaimaɕita,thank you for various [things] — the idiomatic 'thank you for everything',2,ja-agent-v1;ipa=hepburn
+kind-words.thank-you-for-your-hospitality,おもてなしいただきありがとうございました,,omotenashi itadaki arigatō gozaimashita,omotenaɕi itadaki aɾiɡatoː ɡozaimaɕita,thank you for the hospitality [you gave me],2,ja-agent-v1;ipa=hepburn

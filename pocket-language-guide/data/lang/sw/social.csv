@@ -121,3 +121,11 @@ board-answers.what-is-your-name,Jina lako ni nani?,,ɟˈina lˈako ni nˈani,,2,
 board-answers.the-hospital-is-close,Hospitali iko karibu,,hˌospitˈali ˈiko karˈibu,,2,sw-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-do-not-have-a-phone,Sina simu,,sˈina sˈimu,,2,sw-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-will-find-someone,Nitatafuta mtu anayeweza kusaidia,,nˌitatafˈuta ˈm̩tu ˌanajewˈeza kˌusaidˈia,,2,sw-agent-v1;board-answers-v1;ipa=espeak
+kind-words.you-are-very-kind,Wewe ni mwema sana.,,wˌewe ni mwˈema sˈana,,2,"Taasisi ya Taaluma za Kiswahili (TATAKI), Kamusi ya Kiswahili Sanifu;sw-kind-words-v1;ipa=espeak"
+kind-words.thank-you-for-your-help,Asante kwa msaada wako.,,asˈante kwa msaˈada wˈako,,2,"Taasisi ya Taaluma za Kiswahili (TATAKI), Kamusi ya Kiswahili Sanifu;sw-kind-words-v1;ipa=espeak"
+kind-words.this-is-delicious,Hii ni tamu sana.,,hˌii ni tˈamu sˈana,,2,"Taasisi ya Taaluma za Kiswahili (TATAKI), Kamusi ya Kiswahili Sanifu;sw-kind-words-v1;ipa=espeak"
+kind-words.it-is-beautiful-here,Hapa ni pazuri sana.,,hˈapa ni pazˈuri sˈana,"class-16 locative concord (pa-zuri), agreeing with ""hapa""",2,"Taasisi ya Taaluma za Kiswahili (TATAKI), Kamusi ya Kiswahili Sanifu;sw-kind-words-v1;ipa=espeak"
+kind-words.i-like-it-very-much,Nimependa sana.,,nˌimepˈenda sˈana,,2,"Taasisi ya Taaluma za Kiswahili (TATAKI), Kamusi ya Kiswahili Sanifu;sw-kind-words-v1;ipa=espeak"
+kind-words.i-had-a-wonderful-time,Nimefurahia sana.,,nˌimefˌurahˈia sˈana,"lit. ""I have enjoyed [it] very much""",2,"Taasisi ya Taaluma za Kiswahili (TATAKI), Kamusi ya Kiswahili Sanifu;sw-kind-words-v1;ipa=espeak"
+kind-words.thank-you-for-everything,Asante kwa kila kitu.,,asˈante kwa kˈila kˈitu,,2,"Taasisi ya Taaluma za Kiswahili (TATAKI), Kamusi ya Kiswahili Sanifu;sw-kind-words-v1;ipa=espeak"
+kind-words.thank-you-for-your-hospitality,Asante kwa ukarimu wako.,,asˈante kwa ˌukarˈimu wˈako,,2,"Taasisi ya Taaluma za Kiswahili (TATAKI), Kamusi ya Kiswahili Sanifu;sw-kind-words-v1;ipa=espeak"

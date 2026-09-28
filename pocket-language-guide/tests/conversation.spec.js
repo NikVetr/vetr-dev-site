@@ -2308,6 +2308,21 @@ test('a ticked box is filled, and the header\'s bars turn with the board', async
   expect(await page.locator('.site-menu .board-menu-bars').evaluate((el) => getComputedStyle(el).rotate)).toBe('90deg');
 });
 
+test('kind words are a screen of their own, and their replies are the listener\'s thanks', async ({ page }) => {
+  // Thanks and compliments to a stranger or a host, off on the sheet but a screen on
+  // the board; "Nice to meet you" moved into "Who we are" to make the room.
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=intro');
+  await page.locator('[data-button="kind"]').click();
+  await expect(page.locator('#board-grid .board-cell')).toHaveCount(8);
+  await page.locator('[data-button="this-is-delicious"]').click();
+  await expect(page.locator('.board-message-text')).not.toBeEmpty();
+  await page.locator('.board-reply').click();
+  await expect(page.locator('.board-answer-label').first()).toHaveText('谢谢');
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=intro');
+  await page.locator('[data-button="about"]').click();
+  await expect(page.locator('[data-button="nice"]')).toBeVisible();
+});
+
 test('Reply stays inside the frame when the sentence fills it', async ({ page }) => {
   // A short sentence at poster size fills three lines, and Reply under it, with the
   // buffer between them, ran twenty pixels past the frame and over its white outline.

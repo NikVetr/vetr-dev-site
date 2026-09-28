@@ -121,3 +121,11 @@ board-answers.what-is-your-name,Care este numele?,,kˌaɾe jˌeste numˈele,,2,r
 board-answers.the-hospital-is-close,Spitalul este aproape,,spitˈalul jˌeste aprˈɔape,,2,ro-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-do-not-have-a-phone,Nu am telefon,,nu am tˌelefˈon,,2,ro-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-will-find-someone,Găsesc pe cineva care poate ajuta,,ɡəsˈesk pe tʃˌinevˈa kˌaɾe pˌɔate ˌaʒutˈa,,2,ro-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+kind-words.you-are-very-kind,Este foarte drăguț din partea dumneavoastră.,,jˌeste fˈɔarte drəɡˈuts din pˈartea dˈumneavˌɔastrə,"'that is very kind on your part' -- impersonal, so drăguț takes the masculine/default impersonal form rather than agreeing with the listener",2,ro-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-help,Vă mulțumesc pentru ajutor.,,və mˌultsumˈesk pˌentru ˌaʒutˈor,,2,ro-kind-words-v1;ipa=espeak
+kind-words.this-is-delicious,Este delicios.,,jˌeste dˌelitʃˈos,,2,ro-kind-words-v1;ipa=espeak
+kind-words.it-is-beautiful-here,Este foarte frumos aici.,,jˌeste fˈɔarte frumˈos aˈitʃʲ,,2,ro-kind-words-v1;ipa=espeak
+kind-words.i-like-it-very-much,Îmi place foarte mult.,,ˌɨmʲ plˈatʃe fˈɔarte mˈult,,2,ro-kind-words-v1;ipa=espeak
+kind-words.i-had-a-wonderful-time,Am avut parte de momente minunate.,,am avˈut pˈarte de momˈente mˌinunˈate,,2,ro-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-everything,Vă mulțumesc pentru tot.,,və mˌultsumˈesk pˌentru tˈot,,2,ro-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-hospitality,Vă mulțumesc pentru ospitalitate.,,və mˌultsumˈesk pˌentru ˌospitˌalitˈate,,2,ro-kind-words-v1;ipa=espeak

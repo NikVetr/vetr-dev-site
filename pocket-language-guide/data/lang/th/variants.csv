@@ -4,3 +4,11 @@ speaker_gender=feminine,pronouns-verbs.my-mine,ของดิฉัน,,khong d
 speaker_gender=feminine,social-basics.hello-polite,สวัสดีค่ะ,,sawatdi kha,sa˨˩wat˦˥diː˧ kʰaʔ˨˩,,2,th-variants-v1;rule=polite-particle-or-pronoun-selected-by-speaker-sex;ipa=thaig2p
 speaker_gender=feminine,social-basics.hello,สวัสดี,สวัสดีค่ะ,,sa˨˩wat˦˥diː˧,,2,th-variants-v1;rule=polite-particle-or-pronoun-selected-by-speaker-sex;ipa=thaig2p
 speaker_gender=feminine,social-basics.thank-you,ขอบคุณ,ขอบคุณค่ะ,,kʰɔːp˨˩kʰun˧na˦˥,,2,th-variants-v1;rule=polite-particle-or-pronoun-selected-by-speaker-sex;ipa=thaig2p
+speaker_gender=feminine,kind-words.you-are-very-kind,คุณใจดีมาก,คุณใจดีมากค่ะ,,kʰun˧na˦˥ tɕaj˧ diː˧maːk˥˩,,2,th-kind-words-v1;rule=polite-particle-selected-by-speaker-sex;ipa=thaig2p
+speaker_gender=feminine,kind-words.thank-you-for-your-help,ขอบคุณสำหรับความช่วยเหลือ,ขอบคุณสำหรับความช่วยเหลือค่ะ,,kʰɔːp˨˩kʰun˧na˦˥ sam˩˩˦rap˨˩ kʰwaːm˧tɕʰua̯j˥˩lɯa̯˩˩˦,,2,th-kind-words-v1;rule=polite-particle-selected-by-speaker-sex;ipa=thaig2p
+speaker_gender=feminine,kind-words.this-is-delicious,อร่อยมาก,อร่อยมากค่ะ,,ʔa˨˩rɔj˨˩ maːk˥˩,,2,th-kind-words-v1;rule=polite-particle-selected-by-speaker-sex;ipa=thaig2p
+speaker_gender=feminine,kind-words.it-is-beautiful-here,ที่นี่สวยมาก,ที่นี่สวยมากค่ะ,,tʰiː˥˩niː˥˩ sua̯j˩˩˦ maːk˥˩,,2,th-kind-words-v1;rule=polite-particle-selected-by-speaker-sex;ipa=thaig2p
+speaker_gender=feminine,kind-words.i-like-it-very-much,ชอบมาก,ชอบมากค่ะ,,tɕʰɔːp˥˩ maːk˥˩,,2,th-kind-words-v1;rule=polite-particle-selected-by-speaker-sex;ipa=thaig2p
+speaker_gender=feminine,kind-words.i-had-a-wonderful-time,มีความสุขมากที่ได้มาที่นี่,มีความสุขมากที่ได้มาที่นี่ค่ะ,,miː˧kʰwaːm˧suk˨˩ maːk˥˩ tʰiː˥˩ daːj˥˩maː˧ tʰiː˥˩niː˥˩,,2,th-kind-words-v1;rule=polite-particle-selected-by-speaker-sex;ipa=thaig2p
+speaker_gender=feminine,kind-words.thank-you-for-everything,ขอบคุณสำหรับทุกอย่าง,ขอบคุณสำหรับทุกอย่างค่ะ,,kʰɔːp˨˩kʰun˧na˦˥ sam˩˩˦rap˨˩ tʰuk˦˥jaːŋ˨˩,,2,th-kind-words-v1;rule=polite-particle-selected-by-speaker-sex;ipa=thaig2p
+speaker_gender=feminine,kind-words.thank-you-for-your-hospitality,ขอบคุณสำหรับการต้อนรับ,ขอบคุณสำหรับการต้อนรับค่ะ,,kʰɔːp˨˩kʰun˧na˦˥ sam˩˩˦rap˨˩ kaːn˧ tɔːn˥˩rap˦˥,,2,th-kind-words-v1;rule=polite-particle-selected-by-speaker-sex;ipa=thaig2p

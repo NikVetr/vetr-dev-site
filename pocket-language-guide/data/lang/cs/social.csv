@@ -121,3 +121,11 @@ board-answers.what-is-your-name,Jak se jmenujete?,,jˈak se jmˈenujˌete,,2,cs-
 board-answers.the-hospital-is-close,Nemocnice je blízko,,nˈemotsɲˌitse je blˈiːsko,,2,cs-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-do-not-have-a-phone,Nemám telefon,,nˈemaːm tˈelefon,,2,cs-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-will-find-someone,"Najdu někoho, kdo může pomoct",,"nˈajdu ɲˈekoho, ɡdˈo mˈuːʒe pˈomotst",,2,cs-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+kind-words.you-are-very-kind,To je od Vás velmi milé.,,tˈo je ˈodvaːs vˈelmi mˈileː,"'that's very kind of you' -- impersonal 'to', so 'milé' agrees with neuter 'to' rather than needing gendered milý/milá for the listener",2,cs-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-help,Děkuji za pomoc.,,ɟˈekuji zˈapomots,,2,cs-kind-words-v1;ipa=espeak
+kind-words.this-is-delicious,Je to velmi chutné.,,je tˈo vˈelmi xˈutneː,,2,cs-kind-words-v1;ipa=espeak
+kind-words.it-is-beautiful-here,Je tu velmi krásně.,,je tˈu vˈelmi krˈaːsɲe,,2,cs-kind-words-v1;ipa=espeak
+kind-words.i-like-it-very-much,Moc se mi to líbí.,,mˈots se mi tˈo lˈiːbiː,,2,cs-kind-words-v1;ipa=espeak
+kind-words.i-had-a-wonderful-time,Měl jsem se tu skvěle.,,mɲel jsem se tˈu skvjˈele,"masculine default; the l-participle with jsem marks the speaker's gender, feminine variant in variants.csv",2,cs-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-everything,Děkuji za všechno.,,ɟˈekuji zˈafʃexno,,2,cs-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-hospitality,Děkuji za pohostinnost.,,ɟˈekuji za pˈohoscˌinost,,2,cs-kind-words-v1;ipa=espeak

@@ -121,3 +121,11 @@ board-answers.there-is-no-wait,"ఆగాల్సిన అవసరం లే�
 board-answers.we-do-not-have-it,ఇది మా దగ్గర లేదు,,idi mā daggara lēdu,idi maː daɡɡara leːdu,,2,te-agent-v1;ipa=espeak
 board-answers.what-is-your-name,పేరు ఏమిటి?,,pēru ēmiṭi?,peːru eːmiʈi,bare 'name' -- no possessive marking whose,2,te-agent-v1;ipa=espeak
 board-answers.where-does-it-hurt,ఎక్కడ నొప్పిగా ఉంది?,,ekkaḍa noppigā uṁdi?,ekkaɖa noppiɡaː undi,,2,te-agent-v1;ipa=espeak
+kind-words.you-are-very-kind,మీరు చాలా దయగలవారు.,,mīru cālā dayagalavāru,miːru tʃaːlaː dajaɡalaʋaːru,,2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-help,మీ సహాయానికి ధన్యవాదాలు.,,mī sahāyāniki dhanyavādālu,miː sahaːjaːniki dʰanjaʋaːdaːlu,,2,kind-words-v1;ipa=espeak
+kind-words.this-is-delicious,ఇది చాలా రుచిగా ఉంది.,,idi cālā ruciga undi,idi tʃaːlaː rutʃiɡaː undi,,2,kind-words-v1;ipa=espeak
+kind-words.it-is-beautiful-here,ఇక్కడ చాలా అందంగా ఉంది.,,ikkaḍa cālā andaṅgā undi,ikkaɖa tʃaːlaː andaŋɡaː undi,,2,kind-words-v1;ipa=espeak
+kind-words.i-like-it-very-much,నాకు ఇది చాలా ఇష్టం.,,nāku idi cālā iṣṭaṁ,naːku idi tʃaːlaː iʂʈam,,2,kind-words-v1;ipa=espeak
+kind-words.i-had-a-wonderful-time,నేను ఇక్కడ చాలా బాగా సమయం గడిపాను.,,nēnu ikkaḍa cālā bāgā samayaṁ gaḍipānu,neːnu ikkaɖa tʃaːlaː baːɡaː samajam ɡaɖipaːnu,,2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-everything,అన్నింటికీ ధన్యవాదాలు.,,anniṇṭikī dhanyavādālu,anniɳʈikiː dʰanjaʋaːdaːlu,,2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-hospitality,మీ ఆతిథ్యానికి ధన్యవాదాలు.,,mī ātithyāniki dhanyavādālu,miː aːtitʰjaːniki dʰanjaʋaːdaːlu,,2,kind-words-v1;ipa=espeak

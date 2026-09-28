@@ -121,3 +121,11 @@ board-answers.there-is-no-wait,"पर्खन पर्दैन, अहिल
 board-answers.we-do-not-have-it,हामीसँग यो छैन,,hāmīsam̐ga yō chaina,hˌaːmɪːʃˈãɡ jˈoː cʰˈɛːnə,,2,ne-board-answers-v1;ipa=espeak
 board-answers.what-is-your-name,नाम के हो?,,nāma kē hō?,nˈaːmə kˈeː hoː,,2,ne-board-answers-v1;ipa=espeak
 board-answers.where-does-it-hurt,कहाँ दुख्छ?,,kahām̐ dukhcha?,kˈʌhã dˈukʰcʰə,,2,ne-board-answers-v1;ipa=espeak
+kind-words.you-are-very-kind,तपाईं धेरै दयालु हुनुहुन्छ.,,tapāīṁ dhērai dayālu hunuhuncha,tˌəpaːˈɪːn dʰˈeːɾɛː dəjˈaːlu hˌunuhˈuncʰə,,2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-help,तपाईंको मद्दतको लागि धन्यवाद.,,tapāīṁkō maddatakō lāgi dhanyavāda,tˌəpaːˈɪːŋkoː mˈʌddˌətəkˌoː lˈaːɡɪ dʰˌənjəwˈaːd,,2,kind-words-v1;ipa=espeak
+kind-words.this-is-delicious,यो धेरै स्वादिष्ट छ.,,yō dhērai svādiṣṭa cha,jˈoː dʰˈeːɾɛː swˌaːdˈɪʂʈˌə cʰˈə,,2,kind-words-v1;ipa=espeak
+kind-words.it-is-beautiful-here,यहाँ धेरै राम्रो छ.,,yahāṁ dhērai rāmrō cha,jˈʌhã dʰˈeːɾɛː ɾˈaːmɾoː cʰˈə,,2,kind-words-v1;ipa=espeak
+kind-words.i-like-it-very-much,मलाई यो धेरै मन पर्छ.,,malāī yō dhērai man parcha,məlˈaːi jˈoː dʰˈeːɾɛː mˈʌn pˈʌrrcʰə,,2,kind-words-v1;ipa=espeak
+kind-words.i-had-a-wonderful-time,मैले यहाँ धेरै राम्रो समय बिताएँ.,,mailē yahāṁ dhērai rāmrō samay bitāēṁ,mˈɛːleː jˈʌhã dʰˈeːɾɛː ɾˈaːmɾoː sˈʌməjˌə bɪtˈaːẽ,"simple past -एँ marks person only, not gender (that split is only in the -एको/-एकी participle), so this is invariant",2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-everything,सबैको लागि धन्यवाद.,,sabaikō lāgi dhanyavāda,səbˈɛːkoː lˈaːɡɪ dʰˌənjəwˈaːd,,2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-hospitality,तपाईंको अतिथि सत्कारको लागि धन्यवाद.,,tapāīṁkō atithi satkārakō lāgi dhanyavāda,tˌəpaːˈɪːŋkoː ˈʌtɪtʰˌɪ sətkˈaːɾəkˌoː lˈaːɡɪ dʰˌənjəwˈaːd,,2,kind-words-v1;ipa=espeak

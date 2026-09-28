@@ -121,3 +121,11 @@ board-answers.there-is-no-wait,"Mboten perlu ngentosi, sampun saged mlebet",,"ˈ
 board-answers.we-do-not-have-it,Kula mboten gadhah,,ˈkulɔ ˈmbɔtən ˈɡaɖah,"kula, not kita -- kula never includes the addressee, so it renders the exclusive reading without a dedicated kami/kita split",2,jv-agent-v1;ipa=jv-g2p
 board-answers.what-is-your-name,Asma panjenengan sinten?,,ˈasmɔ pandʒənəˈŋan ˈsɪntən,,2,jv-agent-v1;ipa=jv-g2p
 board-answers.where-does-it-hurt,Sakitipun wonten pundi?,,sakiˈtipʊn ˈwɔntən ˈpʊndi,,2,jv-agent-v1;ipa=jv-g2p
+kind-words.you-are-very-kind,Panjenengan sae sanget.,,pandʒənəˈŋan ˈsaə ˈsaŋət,"krama; sae = good/kind, matching Sugeng siyang / panjenengan already in this pack",2,"Poerwadarminta, W. J. S., Baoesastra Djawa (1939);jv-kind-words-v1;ipa=jv-g2p"
+kind-words.thank-you-for-your-help,Matur nuwun kagem tulungipun.,,ˈmatʊr ˈnuwʊn ˈkaɡəm tuluˈŋipʊn,,2,"Poerwadarminta, W. J. S., Baoesastra Djawa (1939);jv-kind-words-v1;ipa=jv-g2p"
+kind-words.this-is-delicious,Raosipun éca sanget.,,raoˈsipʊn ˈetʃɔ ˈsaŋət,"lit. ""its taste is very delicious"" -- the attested kramantara phrasing (raos + -ipun + éca)",2,"Poerwadarminta, W. J. S., Baoesastra Djawa (1939);jv-kind-words-v1;ipa=jv-g2p"
+kind-words.it-is-beautiful-here,Ing mriki endah sanget.,,ɪŋ ˈmriki ənˈdah ˈsaŋət,,2,"Poerwadarminta, W. J. S., Baoesastra Djawa (1939);jv-kind-words-v1;ipa=jv-g2p"
+kind-words.i-like-it-very-much,Kula remen sanget.,,ˈkulɔ rəˈmən ˈsaŋət,"remen already used for ""like"" in this pack's core.csv",2,"Poerwadarminta, W. J. S., Baoesastra Djawa (1939);jv-kind-words-v1;ipa=jv-g2p"
+kind-words.i-had-a-wonderful-time,Kula bingah sanget.,,ˈkulɔ ˈbiŋah ˈsaŋət,"lit. ""I am very happy/glad"" (krama bingah, ngoko bungah)",2,"Poerwadarminta, W. J. S., Baoesastra Djawa (1939);jv-kind-words-v1;ipa=jv-g2p"
+kind-words.thank-you-for-everything,Matur nuwun kagem sedayanipun.,,ˈmatʊr ˈnuwʊn ˈkaɡəm sədajaˈnipʊn,,2,"Poerwadarminta, W. J. S., Baoesastra Djawa (1939);jv-kind-words-v1;ipa=jv-g2p"
+kind-words.thank-you-for-your-hospitality,Matur nuwun sampun nampi kula kanthi sae.,,ˈmatʊr ˈnuwʊn ˈsampʊn ˈnampi ˈkulɔ ˈkanʈi ˈsaə,"lit. ""thank you for having received me so well"" -- no single krama noun for ""hospitality""",2,"Poerwadarminta, W. J. S., Baoesastra Djawa (1939);jv-kind-words-v1;ipa=jv-g2p"

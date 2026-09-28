@@ -121,3 +121,11 @@ board-answers.what-is-your-name,Как вас зовут?,,Kak vas zovut?,kˈɑk
 board-answers.the-hospital-is-close,Больница близко.,,Bolʼnitsa blizko.,bʌɭnʲˈitsa bɭʲˈiskʌ,,2,ru-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-do-not-have-a-phone,У меня нет телефона.,,U menya net telefona.,ˈu mʲinʲˈɑ nʲˈet tʲiɭʲifˈona,,2,ru-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-will-find-someone,"Я найду кого-нибудь, кто может помочь.",,"Ya naydu kogo-nibudʼ, kto mozhet pomochʼ.","ˈja najdˈu kʌvˈonʲibutʲ, ktˈo mˌoʒɨt pʌmˈotʃʲ",,2,ru-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+kind-words.you-are-very-kind,Вы очень добры.,,Vy ochenʼ dobry.,vˈɨ ˈotʃʲin dʌbrˈɨ,"formal Вы takes a short-form plural adjective, which is neutral regardless of the listener's gender (speaker-variants.md: low hazard)",2,ru-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-help,Спасибо за помощь.,,Spasibo za pomoshchʼ.,spasʲˈibʌ zˈɑ pˈomʌɕ,,2,ru-kind-words-v1;ipa=espeak
+kind-words.this-is-delicious,Это очень вкусно.,,Eto ochenʼ vkusno.,ˈɛtʌ ˈotʃʲin fkˈusnʌ,,2,ru-kind-words-v1;ipa=espeak
+kind-words.it-is-beautiful-here,Здесь очень красиво.,,Zdesʼ ochenʼ krasivo.,ʑdʲˈesʲ ˈotʃʲin krasʲˈivʌ,,2,ru-kind-words-v1;ipa=espeak
+kind-words.i-like-it-very-much,Мне это очень нравится.,,Mne eto ochenʼ nravitsya.,mnʲˈe ˈɛtʌ ˈotʃʲin nrˈɑvʲitsʌ,,2,ru-kind-words-v1;ipa=espeak
+kind-words.i-had-a-wonderful-time,Я прекрасно провёл время.,,Ya prekrasno provël vremya.,ˈja prʲikrˈɑsnʌ prʌvʲˈɵɭ vrʲˈemʲʌ,"masculine default; the past tense is an l-participle agreeing with the speaker's gender, feminine variant in variants.csv",2,ru-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-everything,Спасибо за всё.,,Spasibo za vsë.,spasʲˈibʌ zˈɑ fsʲˈɵ,,2,ru-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-hospitality,Спасибо за гостеприимство.,,Spasibo za gostepriimstvo.,spasʲˈibʌ zˈɑ ɡʌsʲtʲiprʲiˈimstvʌ,,2,ru-kind-words-v1;ipa=espeak

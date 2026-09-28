@@ -6,6 +6,7 @@ phone-translation,social,comm,1,smartphone,Phone translation,4,universal,core;so
 phone-text-power,social,comm,1,smartphone,"Phone, text + power",5,universal,core;social,0.72,1
 sim-data,social,comm,1,signal,"SIM, data + Wi-Fi",6,universal,core;social,0.76,0
 introductions,intro,stay,1,circle-user,Introductions,7,universal,social;family,0.70,1
+kind-words,social,comm,2,messages-square,Kind words,66,universal,social,0.55,0
 etiquette,social,comm,1,hand-coins,Tipping + etiquette,8,universal,core;social,0.62,1
 pronouns-verbs,core,comm,1,languages,Core words + patterns,9,universal,core,0.92,1
 question-words,core,comm,1,circle-help,Question + small words,10,universal,core,0.90,1

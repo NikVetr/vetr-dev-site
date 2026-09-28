@@ -13,3 +13,4 @@ speaker_gender=feminine,police-consulate.am-i-under-arrest,Я заарештов
 speaker_gender=feminine,etiquette.dressed-appropriately,Я нормально одягнена?,,Ya normalno odiahnena?,jˈa normˈaʎno odjˈahnɛna,,2,uk-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
 speaker_gender=feminine,transit-rides.i-went-past-my-stop,Я проїхала свою зупинку.,,Ya proikhala svoiu zupynku.,jˈa projˈiːxala zʋˈoju zupˈɪnku,,2,uk-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
 speaker_gender=feminine,pronouns-verbs.would-like,хотіла б,,khotila b,xotˈiːla b,,2,uk-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,kind-words.i-had-a-wonderful-time,Я чудово провела час.,,Ya chudovo provela chas.,jˈa tʃudˈoʋo proʋˈɛla tʃˈas,,2,uk-kind-words-v1;rule=speaker-gender-agreement;ipa=espeak

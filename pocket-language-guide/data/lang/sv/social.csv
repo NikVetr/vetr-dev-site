@@ -121,3 +121,11 @@ board-answers.what-is-your-name,Vad heter du?,,vɑːd hˈeːtər dʉ,,2,sv-agent
 board-answers.the-hospital-is-close,Sjukhuset ligger nära.,,sxˈʉkhʉsət lˈɪɡər nˈɛːra,,2,sv-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-do-not-have-a-phone,Jag har ingen telefon.,,jɑːɡ hɑːr ˈɪŋən tˌɛləfˈoːn,,2,sv-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-will-find-someone,Jag ska hitta någon som kan hjälpa.,,jɑːɡ skɑː hˈɪtːa nˌoːɡɔn sɔm kan jˈɛlpa,,2,sv-agent-v1;board-answers-v1;ipa=espeak
+kind-words.you-are-very-kind,Du är mycket vänlig.,,dʉ ɛːr mˈykət vˈɛnlɪɡ,,2,sv-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-help,Tack för din hjälp.,,tˈak føːr dɪn jˈɛlp,,2,sv-kind-words-v1;ipa=espeak
+kind-words.this-is-delicious,Det här är mycket gott.,,deːt hˈɛːr ɛːr mˈykət ɡˈɔt,,2,sv-kind-words-v1;ipa=espeak
+kind-words.it-is-beautiful-here,Det är vackert här.,,deːt ɛːr vˈakːət hˈɛːr,,2,sv-kind-words-v1;ipa=espeak
+kind-words.i-like-it-very-much,Jag tycker mycket om det.,,jɑːɡ tˈykːər mˈykət ɔm deːt,,2,sv-kind-words-v1;ipa=espeak
+kind-words.i-had-a-wonderful-time,Jag hade en fantastisk tid.,,jɑːɡ hˌadɛ ɛn fˈantastˌɪsk tˈiːd,,2,sv-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-everything,Tack för allt.,,tˈak føːr ˈalt,,2,sv-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-hospitality,Tack för din gästfrihet.,,tˈak føːr dɪn jˈɛstfriːhˌeːt,,2,sv-kind-words-v1;ipa=espeak

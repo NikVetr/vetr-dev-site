@@ -121,3 +121,11 @@ board-answers.there-is-no-wait,"אין תור, אפשר להכנס עכשיו","
 board-answers.we-do-not-have-it,אין לנו את זה,אֵין לָנוּ אֶת זֶה,eyn lanu et ze,ejn lanˈu ˈet zˈe,,2,he-agent-v1;ipa=bgn
 board-answers.what-is-your-name,מה השם?,מָה הַשֵּׁם?,ma hashem?,mˈa haʃˈem,,2,he-agent-v1;ipa=bgn
 board-answers.where-does-it-hurt,איפה כואב?,אֵיפֹה כּוֹאֵב?,eyfo ko’ev?,ejfˈo koˈev,,2,he-agent-v1;ipa=bgn
+kind-words.you-are-very-kind,זה אדיב מאוד!,,ze adiv meod!,zˈe adˈiv meˈod,"that [is] very kind! — 'ze' (that) is the grammatically fixed neuter subject describing the act, not the addressee, so nothing here conjugates for who it is said to; the earlier draft 'kaze adiv' still read as agreeing with an implied masculine referent rather than avoiding one",2,he-agent-v1;ipa=bgn
+kind-words.thank-you-for-your-help,תודה על העזרה,,toda al ha‘ezra,todˈa ˈal haezʁˈa,thanks for the help,2,he-agent-v1;ipa=bgn
+kind-words.this-is-delicious,זה טעים,,ze ta‘im,zˈe taˈim,this [is] tasty,2,he-agent-v1;ipa=bgn
+kind-words.it-is-beautiful-here,כאן יפה מאוד,,kan yafeh meod,kˈan jafˈeh meˈod,"here [is] very beautiful — impersonal, about the place",2,he-agent-v1;ipa=bgn
+kind-words.i-like-it-very-much,מצא חן בעיני מאוד,,matsa ẖen be‘einai meod,matsˈa xˈen beeinaˈi meˈod,"[it] found favour in my eyes very much — the idiom for 'I like it', and it agrees with the impersonal subject rather than the speaker, so it needs no speaker_gender variant",2,he-agent-v1;ipa=bgn
+kind-words.i-had-a-wonderful-time,היה לי זמן נהדר,,haya li zman nehedar,hajˈa lˈi zmˈan nehedˈaʁ,"there was to-me a wonderful time — existential dative, agrees with 'time' (masc.) rather than the speaker, so no speaker_gender variant either",2,he-agent-v1;ipa=bgn
+kind-words.thank-you-for-everything,תודה על הכל,,toda al ha-kol,todˈa ˈal hakˈol,thanks for everything,2,he-agent-v1;ipa=bgn
+kind-words.thank-you-for-your-hospitality,תודה על האירוח,,toda al ha-iruaẖ,todˈa ˈal haiʁuˈax,thanks for the hospitality,2,he-agent-v1;ipa=bgn

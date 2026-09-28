@@ -121,3 +121,11 @@ board-answers.what-is-your-name,board-answers,ref,phrase,what-is-your-name,1037,
 board-answers.the-hospital-is-close,board-answers,ref,phrase,the-hospital-is-close,1038,0.500,board-answers.the-hospital-is-close,0,0,neutral,,"A bystander's reassurance of proximity, distinct from emergency-medical.where-is-the-nearest-hospital, which is the traveller's own question."
 board-answers.i-do-not-have-a-phone,board-answers,ref,phrase,i-do-not-have-a-phone,1039,0.490,board-answers.i-do-not-have-a-phone,0,0,neutral,,"Explains why the other party cannot simply hand back a phone or read out a number, and why they may need to act themselves rather than direct the traveller to call."
 board-answers.i-will-find-someone,board-answers,ref,phrase,i-will-find-someone,1040,0.480,board-answers.i-will-find-someone,0,0,neutral,,"The bystander's fallback when they cannot help further themselves -- finding staff, a doctor or anyone else able to, rather than a specific promise like i-am-calling-an-ambulance or i-am-calling-the-police."
+kind-words.you-are-very-kind,kind-words,entry,phrase,you-are-very-kind,1,0.580,kind-words.you-are-very-kind,0,0,neutral,,"Neutral-polite, to a stranger or a host; content/PROMPTS/kind-words.md."
+kind-words.thank-you-for-your-help,kind-words,entry,phrase,thank-you-for-your-help,2,0.620,kind-words.thank-you-for-your-help,0,0,neutral,,
+kind-words.this-is-delicious,kind-words,entry,phrase,this-is-delicious,3,0.560,kind-words.this-is-delicious,0,0,neutral,,
+kind-words.it-is-beautiful-here,kind-words,entry,phrase,it-is-beautiful-here,4,0.500,kind-words.it-is-beautiful-here,0,0,neutral,,
+kind-words.i-like-it-very-much,kind-words,entry,phrase,i-like-it-very-much,5,0.520,kind-words.i-like-it-very-much,0,0,neutral,,
+kind-words.i-had-a-wonderful-time,kind-words,entry,phrase,i-had-a-wonderful-time,6,0.480,kind-words.i-had-a-wonderful-time,0,0,neutral,,
+kind-words.thank-you-for-everything,kind-words,entry,phrase,thank-you-for-everything,7,0.540,kind-words.thank-you-for-everything,0,0,neutral,,
+kind-words.thank-you-for-your-hospitality,kind-words,entry,phrase,thank-you-for-your-hospitality,8,0.500,kind-words.thank-you-for-your-hospitality,0,0,neutral,,

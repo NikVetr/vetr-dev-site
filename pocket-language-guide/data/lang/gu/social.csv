@@ -121,3 +121,11 @@ board-answers.there-is-no-wait,"કોઈ રાહ જોવાની નથી
 board-answers.we-do-not-have-it,અમારી પાસે આ નથી,,amārī pāsē ā nathī,ʌmaːɾi paːseː aː nʌtʰi,,2,gu-board-answers-v1;ipa=espeak
 board-answers.what-is-your-name,નામ શું છે?,,nām śuṁ chē?,naːm ʃũ cʰeː,,2,gu-board-answers-v1;ipa=espeak
 board-answers.where-does-it-hurt,ક્યાં દુખે છે?,,kyāṁ dukhē chē?,kjã dukʰeː cʰeː,,2,gu-board-answers-v1;ipa=espeak
+kind-words.you-are-very-kind,તમે બહુ દયાળુ છો.,,tamē bahu dayāḷu chō,tʌmeː bʌhu dəjaːɭu cʰoː,,2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-help,તમારી મદદ માટે આભાર.,,tamārī madad māṭē ābhār,təmaːɾi mədʌd maːʈeː aːbʰaːɾ,,2,kind-words-v1;ipa=espeak
+kind-words.this-is-delicious,આ બહુ સ્વાદિષ્ટ છે.,,ā bahu svādiṣṭ chē,aː bʌhu sʋaːdɪʂʈ cʰeː,,2,kind-words-v1;ipa=espeak
+kind-words.it-is-beautiful-here,અહીં બહુ સુંદર છે.,,ahīṁ bahu sundar chē,ɛhĩ bʌhu sundəɾ cʰeː,,2,kind-words-v1;ipa=espeak
+kind-words.i-like-it-very-much,મને આ બહુ ગમે છે.,,manē ā bahu gamē chē,mʌneː aː bʌhu ɡʌmeː cʰeː,,2,kind-words-v1;ipa=espeak
+kind-words.i-had-a-wonderful-time,મેં અહીં ખૂબ સરસ સમય પસાર કર્યો.,,mēṁ ahīṁ khūb saras samay pasār karyō,mẽː ɛhĩ kʰuːb səɾʌs səmɛj pʌsaːɾ kʌɾjoː,"perfective agrees with the object સમય (masc.), not the speaker, so invariant for speaker gender",2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-everything,બધા માટે આભાર.,,badhā māṭē ābhār,bʌdʰaː maːʈeː aːbʰaːɾ,,2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-hospitality,તમારા આતિથ્ય માટે આભાર.,,tamārā ātithya māṭē ābhār,təmaːɾaː aːtɪtʰjə maːʈeː aːbʰaːɾ,,2,kind-words-v1;ipa=espeak

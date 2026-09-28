@@ -121,3 +121,11 @@ board-answers.what-is-your-name,Mikä nimi on?,,mˈikæ nˈimi ˈon,"drops the i
 board-answers.the-hospital-is-close,Sairaala on lähellä.,,sˈairaːla ˈon lˈæhellæ,,2,fi-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-do-not-have-a-phone,Minulla ei ole puhelinta.,,mˈinulla ˈei ˈole pˈuhelˌinta,,2,fi-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-will-find-someone,"Etsin jonkun, joka voi auttaa.",,"ˈetsin jˈoŋkun, jˈoka vˈoi ˈauttaː",,2,fi-agent-v1;board-answers-v1;ipa=espeak
+kind-words.you-are-very-kind,Olet erittäin ystävällinen.,,ˈolet ˈerittæin ˈystævˌællinen,,2,fi-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-help,Kiitos avusta.,,kˈiːtos ˈavusta,,2,fi-kind-words-v1;ipa=espeak
+kind-words.this-is-delicious,Tämä on erittäin herkullista.,,tˈæmæ ˈon ˈerittæin hˈerkullˌista,,2,fi-kind-words-v1;ipa=espeak
+kind-words.it-is-beautiful-here,Täällä on kaunista.,,tˈæːllæ ˈoŋ kˈaunista,,2,fi-kind-words-v1;ipa=espeak
+kind-words.i-like-it-very-much,Pidän siitä kovasti.,,pˈidæn sˈiːtæ kˈovasti,,2,fi-kind-words-v1;ipa=espeak
+kind-words.i-had-a-wonderful-time,Minulla oli ihana aika.,,mˈinulla ˈoli ˈihana ˈaika,,2,fi-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-everything,Kiitos kaikesta.,,kˈiːtos kˈaikesta,,2,fi-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-hospitality,Kiitos vieraanvaraisuudesta.,,kˈiːtos vˈieraːnvarˌaisuːdˌesta,,2,fi-kind-words-v1;ipa=espeak

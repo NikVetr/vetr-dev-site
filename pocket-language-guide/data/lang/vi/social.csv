@@ -121,3 +121,11 @@ board-answers.there-is-no-wait,"Không cần chờ, vào được rồi",,"xoŋ�
 board-answers.we-do-not-have-it,Chúng tôi không có,,tʃuŋ˧˥ t̪oj˧ xoŋ˧ kɔ˧˥,,2,vi-agent-v1;ipa=espeak
 board-answers.what-is-your-name,Xin cho hỏi tên gì ạ?,,sin˧ tʃɔ˧ hɔj˧˩˧ t̪en˧ zi˨˩ aː˨˩ˀ,,2,vi-agent-v1;ipa=espeak
 board-answers.where-does-it-hurt,Đau ở đâu?,,ɗaw˧ əː˧˩˧ ɗəw˧,,2,vi-agent-v1;ipa=espeak
+kind-words.you-are-very-kind,Bạn rất tốt bụng ạ.,,baːn˨˩ˀ zət̪˧˥ t̪ot̪˧˥ buŋ˨˩ˀ aː˨˩ˀ,,2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-help,Cảm ơn bạn đã giúp đỡ.,,kaːm˧˩˧ əːn˧ baːn˨˩ˀ ɗaː˧ˀ˥ zup˧˥ ɗəː˧ˀ˥,,2,kind-words-v1;ipa=espeak
+kind-words.this-is-delicious,Món này rất ngon.,,mɔn˧˥ naj˨˩ zət̪˧˥ ŋɔn˧,,2,kind-words-v1;ipa=espeak
+kind-words.it-is-beautiful-here,Ở đây rất đẹp.,,əː˧˩˧ ɗəɪ˧ zət̪˧˥ ɗɛp˨˩ˀ,,2,kind-words-v1;ipa=espeak
+kind-words.i-like-it-very-much,Tôi rất thích.,,t̪oj˧ zət̪˧˥ tic˧˥,,2,kind-words-v1;ipa=espeak
+kind-words.i-had-a-wonderful-time,Tôi đã có thời gian rất vui ở đây.,,t̪oj˧ ɗaː˧ˀ˥ kɔ˧˥ təːj˨˩ zaːn˧ zət̪˧˥ vuj˧ əː˧˩˧ ɗəɪ˧,,2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-everything,Cảm ơn bạn về mọi thứ.,,kaːm˧˩˧ əːn˧ baːn˨˩ˀ ve˨˩ mɔj˨˩ˀ ty˧˥,,2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-hospitality,Cảm ơn bạn vì lòng mến khách của bạn.,,kaːm˧˩˧ əːn˧ baːn˨˩ˀ vi˨˩ lɔŋ˨˩ men˧˥ xac˧˥ kuə̯˧˩˧ baːn˨˩ˀ,,2,kind-words-v1;ipa=espeak

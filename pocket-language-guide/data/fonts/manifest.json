@@ -112,8 +112,8 @@
       "weight": 400,
       "italic": false,
       "file": "cjk-sc-400",
-      "glyphs": 4980,
-      "ttfBytes": 1331636,
+      "glyphs": 4981,
+      "ttfBytes": 1331800,
       "woff2Bytes": 606396,
       "source": "NotoSansSC-var.ttf"
     },
@@ -122,9 +122,9 @@
       "weight": 700,
       "italic": false,
       "file": "cjk-sc-700",
-      "glyphs": 4980,
-      "ttfBytes": 1331520,
-      "woff2Bytes": 620808,
+      "glyphs": 4981,
+      "ttfBytes": 1331684,
+      "woff2Bytes": 621132,
       "source": "NotoSansSC-var.ttf"
     },
     {
@@ -132,9 +132,9 @@
       "weight": 400,
       "italic": false,
       "file": "cjk-jp-400",
-      "glyphs": 5149,
-      "ttfBytes": 1419736,
-      "woff2Bytes": 600440,
+      "glyphs": 5150,
+      "ttfBytes": 1419900,
+      "woff2Bytes": 600232,
       "source": "NotoSansJP-var.ttf"
     },
     {
@@ -142,9 +142,9 @@
       "weight": 700,
       "italic": false,
       "file": "cjk-jp-700",
-      "glyphs": 5149,
-      "ttfBytes": 1421196,
-      "woff2Bytes": 613284,
+      "glyphs": 5150,
+      "ttfBytes": 1421360,
+      "woff2Bytes": 612940,
       "source": "NotoSansJP-var.ttf"
     },
     {
@@ -152,9 +152,9 @@
       "weight": 400,
       "italic": false,
       "file": "arabic-400",
-      "glyphs": 2860,
-      "ttfBytes": 267964,
-      "woff2Bytes": 100116,
+      "glyphs": 2861,
+      "ttfBytes": 268020,
+      "woff2Bytes": 100088,
       "source": "NotoSansArabic-Regular.ttf"
     },
     {
@@ -162,9 +162,9 @@
       "weight": 700,
       "italic": false,
       "file": "arabic-700",
-      "glyphs": 2860,
-      "ttfBytes": 269848,
-      "woff2Bytes": 103644,
+      "glyphs": 2861,
+      "ttfBytes": 269904,
+      "woff2Bytes": 103880,
       "source": "NotoSansArabic-Bold.ttf"
     },
     {
@@ -252,9 +252,9 @@
       "weight": 400,
       "italic": false,
       "file": "cjk-sc-serif-400",
-      "glyphs": 4970,
-      "ttfBytes": 1830584,
-      "woff2Bytes": 791448,
+      "glyphs": 4971,
+      "ttfBytes": 1830748,
+      "woff2Bytes": 792072,
       "source": "NotoSerifSC-var.ttf"
     },
     {
@@ -262,9 +262,9 @@
       "weight": 700,
       "italic": false,
       "file": "cjk-sc-serif-700",
-      "glyphs": 4970,
-      "ttfBytes": 1830528,
-      "woff2Bytes": 816232,
+      "glyphs": 4971,
+      "ttfBytes": 1830692,
+      "woff2Bytes": 816048,
       "source": "NotoSerifSC-var.ttf"
     },
     {
@@ -272,9 +272,9 @@
       "weight": 400,
       "italic": false,
       "file": "cjk-jp-serif-400",
-      "glyphs": 5149,
-      "ttfBytes": 2010616,
-      "woff2Bytes": 810012,
+      "glyphs": 5150,
+      "ttfBytes": 2010780,
+      "woff2Bytes": 810148,
       "source": "NotoSerifJP-var.ttf"
     },
     {
@@ -282,9 +282,9 @@
       "weight": 700,
       "italic": false,
       "file": "cjk-jp-serif-700",
-      "glyphs": 5149,
-      "ttfBytes": 2009784,
-      "woff2Bytes": 833500,
+      "glyphs": 5150,
+      "ttfBytes": 2009948,
+      "woff2Bytes": 833484,
       "source": "NotoSerifJP-var.ttf"
     },
     {
@@ -292,9 +292,9 @@
       "weight": 400,
       "italic": false,
       "file": "cjk-kr-400",
-      "glyphs": 5957,
-      "ttfBytes": 965436,
-      "woff2Bytes": 317788,
+      "glyphs": 5961,
+      "ttfBytes": 966272,
+      "woff2Bytes": 317896,
       "source": "NotoSansKR-var.ttf"
     },
     {
@@ -302,9 +302,9 @@
       "weight": 700,
       "italic": false,
       "file": "cjk-kr-700",
-      "glyphs": 5957,
-      "ttfBytes": 965676,
-      "woff2Bytes": 324552,
+      "glyphs": 5961,
+      "ttfBytes": 966512,
+      "woff2Bytes": 324704,
       "source": "NotoSansKR-var.ttf"
     },
     {
@@ -312,9 +312,9 @@
       "weight": 400,
       "italic": false,
       "file": "cjk-kr-serif-400",
-      "glyphs": 5958,
-      "ttfBytes": 2644604,
-      "woff2Bytes": 607632,
+      "glyphs": 5962,
+      "ttfBytes": 2646668,
+      "woff2Bytes": 606960,
       "source": "NotoSerifKR-var.ttf"
     },
     {
@@ -322,9 +322,9 @@
       "weight": 700,
       "italic": false,
       "file": "cjk-kr-serif-700",
-      "glyphs": 5958,
-      "ttfBytes": 2649160,
-      "woff2Bytes": 629460,
+      "glyphs": 5962,
+      "ttfBytes": 2651232,
+      "woff2Bytes": 630512,
       "source": "NotoSerifKR-var.ttf"
     },
     {
@@ -332,9 +332,9 @@
       "weight": 400,
       "italic": false,
       "file": "laoo-400",
-      "glyphs": 1689,
-      "ttfBytes": 180816,
-      "woff2Bytes": 75408,
+      "glyphs": 1690,
+      "ttfBytes": 180876,
+      "woff2Bytes": 75424,
       "source": "Phetsarath-Regular.ttf"
     },
     {
@@ -342,9 +342,9 @@
       "weight": 700,
       "italic": false,
       "file": "laoo-700",
-      "glyphs": 1689,
-      "ttfBytes": 182592,
-      "woff2Bytes": 77340,
+      "glyphs": 1690,
+      "ttfBytes": 182652,
+      "woff2Bytes": 77576,
       "source": "Phetsarath-Bold.ttf"
     },
     {
@@ -352,9 +352,9 @@
       "weight": 400,
       "italic": false,
       "file": "khmr-400",
-      "glyphs": 2235,
-      "ttfBytes": 432220,
-      "woff2Bytes": 96516,
+      "glyphs": 2236,
+      "ttfBytes": 432276,
+      "woff2Bytes": 96640,
       "source": "Content-Regular.ttf"
     },
     {
@@ -362,9 +362,9 @@
       "weight": 700,
       "italic": false,
       "file": "khmr-700",
-      "glyphs": 2235,
-      "ttfBytes": 428448,
-      "woff2Bytes": 99268,
+      "glyphs": 2236,
+      "ttfBytes": 428504,
+      "woff2Bytes": 99816,
       "source": "Content-Bold.ttf"
     },
     {
@@ -592,9 +592,9 @@
       "weight": 400,
       "italic": false,
       "file": "guru-400",
-      "glyphs": 2154,
-      "ttfBytes": 272152,
-      "woff2Bytes": 94288,
+      "glyphs": 2155,
+      "ttfBytes": 272208,
+      "woff2Bytes": 94368,
       "source": "NotoSansGurmukhiUI-var.ttf"
     },
     {
@@ -602,9 +602,9 @@
       "weight": 700,
       "italic": false,
       "file": "guru-700",
-      "glyphs": 2154,
-      "ttfBytes": 273092,
-      "woff2Bytes": 98704,
+      "glyphs": 2155,
+      "ttfBytes": 273148,
+      "woff2Bytes": 98884,
       "source": "NotoSansGurmukhiUI-var.ttf"
     },
     {

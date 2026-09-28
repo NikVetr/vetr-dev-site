@@ -33,3 +33,4 @@ speaker_gender=feminine,border-customs.i-am-a-tourist,Turistkinja sam,,turistki�
 speaker_gender=feminine,border-customs.i-am-staying-at,Odsjela sam ovdje: {},,otsjela sam ˈovdje {},,2,hr-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
 speaker_gender=feminine,sim-data.i-would-like-a-tourist-sim,Željela bih turističku SIM karticu,,ʒeʎela bˈix turistitʃku sˈim kartitsu,,2,hr-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak+loan
 speaker_gender=feminine,pronouns-verbs.would-like,htjela bih,,xtjˈela bˈix,,2,hr-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,kind-words.i-had-a-wonderful-time,Imala sam ovdje divno vrijeme.,,imala sam ˈovdje dˈivno vrijeme,,2,hr-kind-words-v1;rule=speaker-gender-agreement;ipa=espeak

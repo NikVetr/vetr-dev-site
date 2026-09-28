@@ -14,3 +14,6 @@ speaker_gender=feminine,police-consulate.someone-attacked-me,Fui agredida,,fuɪ 
 speaker_gender=feminine,social-basics.thank-you,Obrigada,,ˌobriɡˈadæ,,2,pt-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
 speaker_gender=feminine,etiquette.dressed-appropriately,Estou vestida adequadamente?,,estˌow vˌestʃˈidæ ˌadekwˌadæmˈeɪŋtʃy,,2,pt-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
 speaker_gender=feminine,dietary-needs.i-am-vegan,Sou vegana,,sow vˌeɡˈɐ̃næ,,2,pt-variants-v1;rule=predicative-adjective-agrees-with-speaker;ipa=espeak
+speaker_gender=feminine,kind-words.thank-you-for-your-help,Obrigada pela sua ajuda.,,ˌobriɡˈadæ pˈelæ sˌuæ ˌaʒˈudæ,,2,pt-kind-words-v1;rule=speaker-gender-agreement;ipa=espeak
+speaker_gender=feminine,kind-words.thank-you-for-everything,Obrigada por tudo.,,ˌobriɡˈadæ por tˈudʊ,,2,pt-kind-words-v1;rule=speaker-gender-agreement;ipa=espeak
+speaker_gender=feminine,kind-words.thank-you-for-your-hospitality,Obrigada pela hospitalidade.,,ˌobriɡˈadæ pˈelæ ˌospitˌalidˈadʒy,,2,pt-kind-words-v1;rule=speaker-gender-agreement;ipa=espeak

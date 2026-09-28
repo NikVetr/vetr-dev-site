@@ -121,3 +121,11 @@ board-answers.what-is-your-name,Kako se zovete?,,kˈako sˈe zovete,,2,hr-agent-
 board-answers.the-hospital-is-close,Bolnica je blizu,,bolnitsa je blˈizu,,2,hr-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-do-not-have-a-phone,Nemam telefon,,nemam telefon,,2,hr-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-will-find-someone,Pronaći ću nekoga tko može pomoći,,pronatɕi tɕˈu nekoɡa tko mˈoʒe pomotɕi,,2,hr-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+kind-words.you-are-very-kind,Vi ste vrlo ljubazni.,,vˈi ste vrlo ʎubazni,"formal Vi takes a plural adjective, which is neutral regardless of the listener's gender (speaker-variants.md: low hazard)",2,hr-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-help,Hvala na pomoći.,,xvˈala nˈa pomotɕi,,2,hr-kind-words-v1;ipa=espeak
+kind-words.this-is-delicious,Ovo je vrlo ukusno.,,ˈovo je vrlo ukusno,,2,hr-kind-words-v1;ipa=espeak
+kind-words.it-is-beautiful-here,Ovdje je vrlo lijepo.,,ˈovdje je vrlo lijepo,,2,hr-kind-words-v1;ipa=espeak
+kind-words.i-like-it-very-much,To mi se puno sviđa.,,tˈo mˈi sˈe pˈuno svˈidʑa,,2,hr-kind-words-v1;ipa=espeak
+kind-words.i-had-a-wonderful-time,Imao sam ovdje divno vrijeme.,,ˈimao sam ˈovdje dˈivno vrijeme,"masculine default; the l-participle marks the speaker's gender, feminine variant in variants.csv",2,hr-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-everything,Hvala na svemu.,,xvˈala nˈa svˈemu,,2,hr-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-hospitality,Hvala na gostoljubivosti.,,xvˈala nˈa ɡostoʎubivosti,,2,hr-kind-words-v1;ipa=espeak

@@ -121,3 +121,11 @@ board-answers.what-is-your-name,Πώς σας λένε;,,Pos sas lene;,pˈos saz
 board-answers.the-hospital-is-close,Το νοσοκομείο είναι κοντά.,,To nosokomeio einai konta.,to nˌosokomˈio ˈine kodˈa,,2,el-agent-v1;board-answers-v1;roman=elot743;ipa=espeak
 board-answers.i-do-not-have-a-phone,Δεν έχω κινητό.,,Den echo kinito.,ðˈen ˈexo cˌinitˈo,,2,el-agent-v1;board-answers-v1;roman=elot743;ipa=espeak
 board-answers.i-will-find-someone,Θα βρω κάποιον που μπορεί να βοηθήσει.,,Tha vro kapoion pou borei na voithisei.,θa vɾˈo kˈapiˌom bu boɾˈi na voɪθˈisi,,2,el-agent-v1;board-answers-v1;roman=elot743;ipa=espeak
+kind-words.you-are-very-kind,Είναι πολύ ευγενικό εκ μέρους σας.,,Einai poly evgeniko ek merous sas.,ˈine polˈi ˌevjenikˈo ek mˈeɾus sas,"'that is very kind on your part' -- impersonal, sidesteps whether an adjective on 'you' would need the listener's real gender",2,el-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-help,Ευχαριστώ για τη βοήθειά σας.,,Efcharisto gia ti voitheia sas.,ˌefxaɾistˈo jˈa ti voˈiθça sas,,2,el-kind-words-v1;ipa=espeak
+kind-words.this-is-delicious,Είναι πολύ νόστιμο.,,Einai poly nostimo.,ˈine polˈi nˈostimˌo,,2,el-kind-words-v1;ipa=espeak
+kind-words.it-is-beautiful-here,Εδώ είναι πολύ όμορφα.,,Edo einai poly omorfa.,eðˈo ˈine polˈi ˈomoɾfˌa,,2,el-kind-words-v1;ipa=espeak
+kind-words.i-like-it-very-much,Μου αρέσει πολύ.,,Mou aresei poly.,mu aɾˈesi polˈi,,2,el-kind-words-v1;ipa=espeak
+kind-words.i-had-a-wonderful-time,Πέρασα υπέροχα.,,Perasa yperocha.,pˈeɾasˌa ipˈeɾoxˌa,,2,el-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-everything,Ευχαριστώ για όλα.,,Efcharisto gia ola.,ˌefxaɾistˈo jˈa ˈola,,2,el-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-hospitality,Ευχαριστώ για τη φιλοξενία σας.,,Efcharisto gia ti filoxenia sas.,ˌefxaɾistˈo jˈa ti fˌiloksenˈia sas,,2,el-kind-words-v1;ipa=espeak

@@ -121,3 +121,11 @@ board-answers.there-is-no-wait,የመጠበቅ ጊዜ የለም፤ አሁን መ
 board-answers.we-do-not-have-it,ይህ የለንም,,yih yellenim,jɨh jəlːənɨm,,2,am-agent-v1;ipa=bgn-am
 board-answers.what-is-your-name,ስም ማን ነው?,,sim man new?,sɨm man nəw,,2,am-agent-v1;ipa=bgn-am
 board-answers.where-does-it-hurt,የት ያማል?,,yet yamal?,jət jamal,,2,am-agent-v1;ipa=bgn-am
+kind-words.you-are-very-kind,በጣም ደግ ነው,,betʼam deg new,bətʼam dəɡ nəw,"very kind [that] is! — impersonal, avoiding the gendered antā/anchi 2nd-person address the language has no axis for (this app has none for the listener either)",2,am-agent-v1;ipa=bgn-am
+kind-words.thank-you-for-your-help,ስለ እርዳታዎ አመሰግናለሁ,,sile irdatawo āmesegginallehu,sɨlə ʔɨrdatawo ʔaməsəɡːɨnalːəhu,for your help I thank [you],2,am-agent-v1;ipa=bgn-am
+kind-words.this-is-delicious,ይህ ጣዕሙ ጥሩ ነው,,yih tʼaʼimu tʼiru new,jɨh tʼaʔɨmu tʼɨru nəw,"this, its taste is good",2,am-agent-v1;ipa=bgn-am
+kind-words.it-is-beautiful-here,እዚህ በጣም ቆንጆ ነው,,izzīh betʼam konjo new,ʔɨzːih bətʼam kondʒo nəw,here [is] very beautiful — about the place,2,am-agent-v1;ipa=bgn-am
+kind-words.i-like-it-very-much,በጣም ደስ ብሎኛል,,betʼam des bilonnyal,bətʼam dəs bɨloɲːal,"[it] has very much pleased me — reusing introductions.nice-to-meet-you's own idiom, which is 1st person only in the ungendered sense (an impersonal subject 'pleased', not a gendered verb)",2,am-agent-v1;ipa=bgn-am
+kind-words.i-had-a-wonderful-time,ጊዜዬ በጣም ጥሩ ነበር,,gīzēyē betʼam tʼiru neber,ɡizeje bətʼam tʼɨru nəbər,my time was very good,2,am-agent-v1;ipa=bgn-am
+kind-words.thank-you-for-everything,ስለ ሁሉም ነገር አመሰግናለሁ,,sile hulum neger āmesegginallehu,sɨlə hulum nəɡər ʔaməsəɡːɨnalːəhu,for all things I thank [you],2,am-agent-v1;ipa=bgn-am
+kind-words.thank-you-for-your-hospitality,ስለ ግብዣዎ አመሰግናለሁ,,sile gibizhawo āmesegginallehu,sɨlə ɡɨbɨʒawo ʔaməsəɡːɨnalːəhu,for your hospitality I thank [you],2,am-agent-v1;ipa=bgn-am

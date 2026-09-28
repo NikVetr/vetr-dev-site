@@ -77,14 +77,11 @@
           "replySetId": "yes-no"
         },
         {
-          "id": "nice",
-          "kind": "message",
-          "phraseRef": {
-            "kind": "corpus",
-            "id": "introductions.nice-to-meet-you"
-          },
-          "colour": "stay",
-          "replySetId": "greeting"
+          "id": "kind",
+          "kind": "submenu",
+          "nodeId": "kind",
+          "labelKey": "boards.intro.kindTitle",
+          "colour": "stay"
         },
         {
           "id": "sorry",
@@ -127,6 +124,16 @@
     "about": {
       "titleKey": "boards.intro.aboutTitle",
       "buttons": [
+        {
+          "id": "nice",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "introductions.nice-to-meet-you"
+          },
+          "colour": "stay",
+          "replySetId": "greeting"
+        },
         {
           "id": "myname",
           "kind": "message",
@@ -229,6 +236,91 @@
             "id": "family-intros.this-is-my-daughter"
           },
           "colour": "stay"
+        }
+      ]
+    },
+    "kind": {
+      "titleKey": "boards.intro.kindTitle",
+      "buttons": [
+        {
+          "id": "you-are-very-kind",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "kind-words.you-are-very-kind"
+          },
+          "colour": "stay",
+          "replySetId": "thanks-back"
+        },
+        {
+          "id": "thank-you-for-your-help",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "kind-words.thank-you-for-your-help"
+          },
+          "colour": "stay",
+          "replySetId": "thanks-back"
+        },
+        {
+          "id": "this-is-delicious",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "kind-words.this-is-delicious"
+          },
+          "colour": "stay",
+          "replySetId": "thanks-back"
+        },
+        {
+          "id": "it-is-beautiful-here",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "kind-words.it-is-beautiful-here"
+          },
+          "colour": "stay",
+          "replySetId": "thanks-back"
+        },
+        {
+          "id": "i-like-it-very-much",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "kind-words.i-like-it-very-much"
+          },
+          "colour": "stay",
+          "replySetId": "thanks-back"
+        },
+        {
+          "id": "i-had-a-wonderful-time",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "kind-words.i-had-a-wonderful-time"
+          },
+          "colour": "stay",
+          "replySetId": "thanks-back"
+        },
+        {
+          "id": "thank-you-for-everything",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "kind-words.thank-you-for-everything"
+          },
+          "colour": "stay",
+          "replySetId": "thanks-back"
+        },
+        {
+          "id": "thank-you-for-your-hospitality",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "kind-words.thank-you-for-your-hospitality"
+          },
+          "colour": "stay",
+          "replySetId": "thanks-back"
         }
       ]
     }
@@ -482,6 +574,42 @@
           "phraseRef": {
             "kind": "corpus",
             "id": "social-basics.i-do-not-know"
+          }
+        },
+        {
+          "id": "none-of-these",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "board-answers.none-of-these"
+          }
+        }
+      ]
+    },
+    "thanks-back": {
+      "buttons": [
+        {
+          "id": "thank-you",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.thank-you"
+          }
+        },
+        {
+          "id": "you-are-welcome",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.you-are-welcome"
+          }
+        },
+        {
+          "id": "no-problem",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "social-basics.no-problem"
           }
         },
         {

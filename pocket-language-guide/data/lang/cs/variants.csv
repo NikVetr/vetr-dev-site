@@ -31,3 +31,4 @@ speaker_gender=feminine,etiquette.did-not-mean-to-offend,Nechtěla jsem nikoho u
 speaker_gender=feminine,transit-rides.i-went-past-my-stop,Přejela jsem svou zastávku,,pr̝ˈejela jsem svˈoʊ zˈastaːfku,,2,cs-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
 speaker_gender=feminine,border-customs.i-am-a-tourist,Jsem turistka,,jsem tˈuristka,,2,cs-variants-v1;rule=role-noun-has-feminine-derivational-suffix;ipa=espeak
 speaker_gender=feminine,pronouns-verbs.would-like,chtěla bych,,xcˈela bix,,2,cs-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,kind-words.i-had-a-wonderful-time,Měla jsem se tu skvěle.,,mɲˈela jsem se tˈu skvjˈele,,2,cs-kind-words-v1;rule=speaker-gender-agreement;ipa=espeak

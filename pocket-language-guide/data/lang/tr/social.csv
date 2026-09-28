@@ -121,3 +121,11 @@ board-answers.there-is-no-wait,"Sıra yok, şimdi girebilirsiniz.",,"sɯɾˈa j�
 board-answers.we-do-not-have-it,Bizde yok.,,bɪzdˈɛ jˈɔk,,2,tr-agent-v1;ipa=espeak
 board-answers.what-is-your-name,Adınız ne?,,adɯnˈɯz nˈɛ,,2,tr-agent-v1;ipa=espeak
 board-answers.where-does-it-hurt,Neresi ağrıyor?,,neɾesˈɪ aːɾˈɯjɔr,,2,tr-agent-v1;ipa=espeak
+kind-words.you-are-very-kind,Çok naziksiniz.,,tʃˈɔk nazˈɪksinɪz,,2,"Türk Dil Kurumu (TDK), Büyük Türkçe Sözlük;tr-kind-words-v1;ipa=espeak"
+kind-words.thank-you-for-your-help,Yardımınız için teşekkür ederim.,,jardˈɯmɯnɯz itʃˈɪn teʃekːˈør edˈeɾɪm,,2,"Türk Dil Kurumu (TDK), Büyük Türkçe Sözlük;tr-kind-words-v1;ipa=espeak"
+kind-words.this-is-delicious,Bu çok lezzetli.,,bʊ tʃˈɔk lɛzzɛtlˈɪ,,2,"Türk Dil Kurumu (TDK), Büyük Türkçe Sözlük;tr-kind-words-v1;ipa=espeak"
+kind-words.it-is-beautiful-here,Burası çok güzel.,,buɾasˈɯ tʃˈɔk ɟyzˈæl,,2,"Türk Dil Kurumu (TDK), Büyük Türkçe Sözlük;tr-kind-words-v1;ipa=espeak"
+kind-words.i-like-it-very-much,Çok beğendim.,,tʃˈɔk bejændˈɪm,"lit. ""I liked/approved very much"" -- the idiomatic way to say this",2,"Türk Dil Kurumu (TDK), Büyük Türkçe Sözlük;tr-kind-words-v1;ipa=espeak"
+kind-words.i-had-a-wonderful-time,Çok güzel zaman geçirdim.,,tʃˈɔk ɟyzˈæl zamˈan ɟetʃɪrdˈɪm,,2,"Türk Dil Kurumu (TDK), Büyük Türkçe Sözlük;tr-kind-words-v1;ipa=espeak"
+kind-words.thank-you-for-everything,Her şey için teşekkür ederim.,,hˈɛr ʃˈɛj itʃˈɪn teʃekːˈør edˈeɾɪm,,2,"Türk Dil Kurumu (TDK), Büyük Türkçe Sözlük;tr-kind-words-v1;ipa=espeak"
+kind-words.thank-you-for-your-hospitality,Misafirperverliğiniz için teşekkür ederim.,,misafɪrpɛrvɛrlˈijinɪz itʃˈɪn teʃekːˈør edˈeɾɪm,,2,"Türk Dil Kurumu (TDK), Büyük Türkçe Sözlük;tr-kind-words-v1;ipa=espeak"

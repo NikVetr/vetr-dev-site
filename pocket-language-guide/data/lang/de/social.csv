@@ -121,3 +121,11 @@ board-answers.what-is-your-name,Wie heißen Sie?,,viː hˈaɪsən ziː,,2,de-age
 board-answers.the-hospital-is-close,Das Krankenhaus ist ganz nah.,,das kɾˈankənhˌaʊs ɪst ɡˌants nˈɑː,,2,de-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-do-not-have-a-phone,Ich habe kein Handy.,,ɪç hɑːbə kˈaɪn hˈɛndiː,,2,de-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-will-find-someone,"Ich finde jemanden, der helfen kann.",,"ɪç fˈɪndə jˈeːmandən, dɛɾ hˈɛlfən kˌan",,2,de-agent-v1;board-answers-v1;ipa=espeak
+kind-words.you-are-very-kind,Sie sind sehr freundlich.,,ziː zɪnt zˈeːɾ frˈɔɪntlɪç,,2,de-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-help,Danke für Ihre Hilfe.,,dˈaŋkə fyːɾ ˌiːrə hˈɪlfə,,2,de-kind-words-v1;ipa=espeak
+kind-words.this-is-delicious,Das ist köstlich.,,das ɪst kˈœstlɪç,,2,de-kind-words-v1;ipa=espeak
+kind-words.it-is-beautiful-here,Es ist wunderschön hier.,,ɛsɪst vˈʊndɜʃˌøːn hˈiːɾ,,2,de-kind-words-v1;ipa=espeak
+kind-words.i-like-it-very-much,Es gefällt mir sehr.,,ɛs ɡəfˈɛlt miːɾ zˈeːɾ,,2,de-kind-words-v1;ipa=espeak
+kind-words.i-had-a-wonderful-time,Ich hatte eine wunderbare Zeit.,,ɪç hˌatə ˌaɪnə vˈʊndɜbˌɑːrə tsˈaɪt,,2,de-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-everything,Danke für alles.,,dˈaŋkə fyːɾ ˈaləs,,2,de-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-hospitality,Danke für Ihre Gastfreundschaft.,,dˈaŋkə fyːɾ ˌiːrə ɡˈastfrɔɪndʃˌaft,,2,de-kind-words-v1;ipa=espeak

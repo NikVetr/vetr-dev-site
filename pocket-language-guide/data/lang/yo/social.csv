@@ -121,3 +121,11 @@ board-answers.what-is-your-name,Kí ni orúkọ yín?,,ki˥ ni oru˥kɔ jĩ˥,fo
 board-answers.the-hospital-is-close,Ilé ìwòsàn wà nítòsí,,ile˥ i˩wo˩sã˩ wa˩ ni˥to˩si˥,,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
 board-answers.i-do-not-have-a-phone,Mi ò ní fóònù,,mi o˩ ni˥ fo˥o˩nu˩,,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
 board-answers.i-will-find-someone,Màá wá ẹnìkan tí ó lè ràn yín lọ́wọ́,,ma˩a˥ wa˥ ɛni˩kã ti˥ o˥ le˩ rã˩ jĩ˥ lɔ˥wɔ˥,,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
+kind-words.you-are-very-kind,Ẹ jẹ́ onínúure gan-an.,,ɛ dʒɛ˥ oni˥nu˥ure ɡãã,"ẹ = polite/plural you, matching this pack's other polite rows",2,"Abraham, R. C., Dictionary of Modern Yoruba (2nd ed., 1958);yo-kind-words-v1;ipa=yo-g2p"
+kind-words.thank-you-for-your-help,Ẹ ṣé fún ìrànlọ́wọ́ yín.,,ɛ ʃe˥ fũ˥ i˩rã˩lɔ˥wɔ˥ jĩ˥,,2,"Abraham, R. C., Dictionary of Modern Yoruba (2nd ed., 1958);yo-kind-words-v1;ipa=yo-g2p"
+kind-words.this-is-delicious,Ó dùn gan-an.,,o˥ dũ˩ ɡãã,,2,"Abraham, R. C., Dictionary of Modern Yoruba (2nd ed., 1958);yo-kind-words-v1;ipa=yo-g2p"
+kind-words.it-is-beautiful-here,Ó lẹ́wà níbí.,,o˥ lɛ˥wa˩ ni˥bi˥,,2,"Abraham, R. C., Dictionary of Modern Yoruba (2nd ed., 1958);yo-kind-words-v1;ipa=yo-g2p"
+kind-words.i-like-it-very-much,Mo nífẹ̀ẹ́ rẹ̀ gan-an.,,mo ni˥fɛ˩ɛ˥ rɛ˩ ɡãã,,2,"Abraham, R. C., Dictionary of Modern Yoruba (2nd ed., 1958);yo-kind-words-v1;ipa=yo-g2p"
+kind-words.i-had-a-wonderful-time,Mo ní ìgbà dídùn gan-an.,,mo ni˥ i˩ɡba˩ di˥dũ˩ ɡãã,"lit. ""I had a sweet/pleasant time, very""",2,"Abraham, R. C., Dictionary of Modern Yoruba (2nd ed., 1958);yo-kind-words-v1;ipa=yo-g2p"
+kind-words.thank-you-for-everything,Ẹ ṣé fún ohun gbogbo.,,ɛ ʃe˥ fũ˥ ohũ ɡboɡbo,,2,"Abraham, R. C., Dictionary of Modern Yoruba (2nd ed., 1958);yo-kind-words-v1;ipa=yo-g2p"
+kind-words.thank-you-for-your-hospitality,Ẹ ṣé fún bí ẹ ṣe tọ́jú mi.,,ɛ ʃe˥ fũ˥ bi˥ ɛ ʃe tɔ˥dʒu˥ mi,"lit. ""thank you for how you took care of me"" -- no single word for ""hospitality""",2,"Abraham, R. C., Dictionary of Modern Yoruba (2nd ed., 1958);yo-kind-words-v1;ipa=yo-g2p"

@@ -121,3 +121,11 @@ board-answers.what-is-your-name,이름이 뭐예요?,,ireumi mwoyeyo?,iɾɯmi mw
 board-answers.the-hospital-is-close,병원이 가까워요,,byeongwoni gakkawoyo,pjʌŋwʌni kak͈awʌjo,,2,ko-agent-v1;board-answers-v1;ipa=rr
 board-answers.i-do-not-have-a-phone,휴대폰이 없어요,,hyudaeponi eopseoyo,hjudɛpʰoni ʌpsʌjo,,2,ko-agent-v1;board-answers-v1;ipa=rr
 board-answers.i-will-find-someone,도와줄 사람을 찾을게요,,dowajul sarameul chajeulgeyo,towadʑul saɾamɯl tɕʰadʑɯlɡejo,,2,ko-agent-v1;board-answers-v1;ipa=rr
+kind-words.you-are-very-kind,정말 친절하시네요,,jeongmal chinjeolhasineyo,tɕʌŋmal tɕʰindʑʌlhasinejo,"[you] are really kind — honorific -시-, no 2nd-person pronoun needed or wanted",2,ko-agent-v1;ipa=rr
+kind-words.thank-you-for-your-help,도와주셔서 감사합니다,,dowajusyeoseo gamsahamnida,towadʑusjʌsʌ kamsahamnida,thank you for helping [me],2,ko-agent-v1;ipa=rr
+kind-words.this-is-delicious,이거 맛있어요,,igeo masisseoyo,iɡʌ masis͈ʌjo,this is tasty,2,ko-agent-v1;ipa=rr
+kind-words.it-is-beautiful-here,여기 정말 아름다워요,,yeogi jeongmal areumdawoyo,jʌɡi tɕʌŋmal aɾɯmdawʌjo,here is really beautiful — about the place,2,ko-agent-v1;ipa=rr
+kind-words.i-like-it-very-much,정말 마음에 들어요,,jeongmal maeume deureoyo,tɕʌŋmal maɯme tɯɾʌjo,[it] really comes into my heart/mind — idiomatic 'I like it very much',2,ko-agent-v1;ipa=rr
+kind-words.i-had-a-wonderful-time,정말 좋은 시간을 보냈어요,,jeongmal joeun siganeul bonaesseoyo,tɕʌŋmal tɕoɯn siɡanɯl ponɛs͈ʌjo,[I] spent a really good time,2,ko-agent-v1;ipa=rr
+kind-words.thank-you-for-everything,모든 것에 감사합니다,,modeun geose gamsahamnida,modɯn kʌse kamsahamnida,thank you for everything,2,ko-agent-v1;ipa=rr
+kind-words.thank-you-for-your-hospitality,환대해 주셔서 감사합니다,,hwandaehae jusyeoseo gamsahamnida,hwandɛhɛ tɕusjʌsʌ kamsahamnida,thank you for the hospitality [you gave me],2,ko-agent-v1;ipa=rr

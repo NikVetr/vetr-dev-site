@@ -121,3 +121,11 @@ board-answers.there-is-no-wait,"Tidak perlu menunggu, sudah bisa masuk",,"tˈida
 board-answers.we-do-not-have-it,Kami tidak punya,,kˈami tˈidak pˈuɲa,kami = exclusive we; the shop's kami excludes the customer being spoken to,2,id-agent-v1;ipa=espeak
 board-answers.what-is-your-name,Namanya siapa?,,namˈaɲa siˈapa,,2,id-agent-v1;ipa=espeak
 board-answers.where-does-it-hurt,Sakitnya di mana?,,sakˈitɲa di mˈana,,2,id-agent-v1;ipa=espeak
+kind-words.you-are-very-kind,Anda sangat baik.,,ˈanda sˈaŋat bˈaɪk,,2,"Kamus Besar Bahasa Indonesia (KBBI), Badan Pengembangan dan Pembinaan Bahasa;id-kind-words-v1;ipa=espeak"
+kind-words.thank-you-for-your-help,Terima kasih atas bantuan Anda.,,tərˈima kˈasih ˈatas bantˈuan ˈanda,,2,"Kamus Besar Bahasa Indonesia (KBBI), Badan Pengembangan dan Pembinaan Bahasa;id-kind-words-v1;ipa=espeak"
+kind-words.this-is-delicious,Ini sangat enak.,,ˈini sˈaŋat ˈɛnak,,2,"Kamus Besar Bahasa Indonesia (KBBI), Badan Pengembangan dan Pembinaan Bahasa;id-kind-words-v1;ipa=espeak"
+kind-words.it-is-beautiful-here,Di sini sangat indah.,,di sˈini sˈaŋat ˈindah,,2,"Kamus Besar Bahasa Indonesia (KBBI), Badan Pengembangan dan Pembinaan Bahasa;id-kind-words-v1;ipa=espeak"
+kind-words.i-like-it-very-much,Saya sangat suka ini.,,sˈaja sˈaŋat sˈuka ˈini,,2,"Kamus Besar Bahasa Indonesia (KBBI), Badan Pengembangan dan Pembinaan Bahasa;id-kind-words-v1;ipa=espeak"
+kind-words.i-had-a-wonderful-time,Saya sangat menikmati waktu saya di sini.,,sˈaja sˈaŋat mənikmˈati wˈaktu sˈaja di sˈini,,2,"Kamus Besar Bahasa Indonesia (KBBI), Badan Pengembangan dan Pembinaan Bahasa;id-kind-words-v1;ipa=espeak"
+kind-words.thank-you-for-everything,Terima kasih atas semuanya.,,tərˈima kˈasih ˈatas səmuˈaɲa,,2,"Kamus Besar Bahasa Indonesia (KBBI), Badan Pengembangan dan Pembinaan Bahasa;id-kind-words-v1;ipa=espeak"
+kind-words.thank-you-for-your-hospitality,Terima kasih atas keramahan Anda.,,tərˈima kˈasih ˈatas kəramˈahan ˈanda,,2,"Kamus Besar Bahasa Indonesia (KBBI), Badan Pengembangan dan Pembinaan Bahasa;id-kind-words-v1;ipa=espeak"

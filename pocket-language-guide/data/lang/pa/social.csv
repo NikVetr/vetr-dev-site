@@ -121,3 +121,11 @@ board-answers.there-is-no-wait,"ਇੰਤਜ਼ਾਰ ਨਹੀਂ ਹੈ, ਹ�
 board-answers.we-do-not-have-it,ਸਾਡੇ ਕੋਲ ਇਹ ਨਹੀਂ ਹੈ,,sāḍē kōl ih nahīṁ hai,saɖe kol ɪ˥ nʌhĩ hɛ,,2,pa-board-answers-v1;ipa=espeak
 board-answers.what-is-your-name,ਨਾਂ ਕੀ ਹੈ?,,nāṁ kī hai?,nã ki hɛ,,2,pa-board-answers-v1;ipa=espeak
 board-answers.where-does-it-hurt,ਕਿੱਥੇ ਦਰਦ ਹੈ?,,kitthē dard hai?,kɪttʰe dʌɾəd hɛ,,2,pa-board-answers-v1;ipa=espeak
+kind-words.you-are-very-kind,ਤੁਸੀਂ ਬਹੁਤ ਦਿਆਲੂ ਹੋ.,,tusīṁ bahut diālū hō,tʊsĩ bʌhʊt dɪalu ho,,2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-help,ਤੁਹਾਡੀ ਮਦਦ ਲਈ ਧੰਨਵਾਦ.,,tuhāḍī madad laī dhaṁnavād,tʊhaɖi mʌdəd lʌi tə˩nnəʋad,,2,kind-words-v1;ipa=espeak
+kind-words.this-is-delicious,ਇਹ ਬਹੁਤ ਸੁਆਦੀ ਹੈ.,,ih bahut suādī hai,ɪ˥ bʌhʊt sʊadi hɛ,,2,kind-words-v1;ipa=espeak
+kind-words.it-is-beautiful-here,ਇੱਥੇ ਬਹੁਤ ਸੋਹਣਾ ਹੈ.,,ithē bahut sōhaṇā hai,ɪttʰe bʌhʊt sohəɳa hɛ,,2,kind-words-v1;ipa=espeak
+kind-words.i-like-it-very-much,ਮੈਨੂੰ ਇਹ ਬਹੁਤ ਪਸੰਦ ਹੈ.,,mainūṁ ih bahut pasand hai,mɛnũ ɪ˥ bʌhʊt pʌsənd hɛ,,2,kind-words-v1;ipa=espeak
+kind-words.i-had-a-wonderful-time,ਮੈਂ ਇੱਥੇ ਬਹੁਤ ਵਧੀਆ ਸਮਾਂ ਬਿਤਾਇਆ.,,maiṁ ithē bahut vadhīā samāṁ bitāiā,mɛ̃ ɪttʰe bʌhʊt ʋə˥dia sʌmã bɪtaɪa,"ਨੇ-marked perfective agrees with the object ਸਮਾਂ (masc.), not the speaker, so invariant for speaker gender",2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-everything,ਸਭ ਕੁਝ ਲਈ ਧੰਨਵਾਦ.,,sabh kujh laī dhaṁnavād,sʌ˥b kʊ˥ɟ lʌi tə˩nnəʋad,,2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-hospitality,ਤੁਹਾਡੀ ਮਹਿਮਾਨ-ਨਵਾਜ਼ੀ ਲਈ ਧੰਨਵਾਦ.,,tuhāḍī mahimān-navāzī laī dhaṁnavād,tʊhaɖi məhɪmannəʋazi lʌi tə˩nnəʋad,,2,kind-words-v1;ipa=espeak

@@ -121,3 +121,11 @@ board-answers.there-is-no-wait,انتظار نہیں ہے، ابھی اندر آ
 board-answers.we-do-not-have-it,ہمارے پاس یہ نہیں ہے,,hamāre pās yah nahīñ hai,həmˈaːɾeː pˈaːs jeːh nahˈĩː hɛ,,2,ur-board-answers-v1;ipa=espeak
 board-answers.what-is-your-name,نام کیا ہے؟,,nām kyā hai?,nˈaːm kjˈaː hɛ,,2,ur-board-answers-v1;ipa=espeak
 board-answers.where-does-it-hurt,کہاں درد ہے؟,,kahāñ dard hai?,kˈʌhãː dˈʌɾd hɛ,,2,ur-board-answers-v1;ipa=espeak
+kind-words.you-are-very-kind,آپ بہت مہربان ہیں۔,,āp bahut mehrbān haiñ.,ˌaːp bˈahʊt mˈɛhɾəbˌaːn hẽ,,2,"Platts, J. T., A Dictionary of Urdu, Classical Hindi, and English (1884);ur-kind-words-v1;ipa=espeak"
+kind-words.thank-you-for-your-help,آپ کی مدد کا شکریہ۔,,āp kī madad kā shukriya.,ˌaːp ki mˈʌdəd kaː ʃʊkɾˈiːa,,2,"Platts, J. T., A Dictionary of Urdu, Classical Hindi, and English (1884);ur-kind-words-v1;ipa=espeak"
+kind-words.this-is-delicious,یہ بہت مزیدار ہے۔,,yih bahut mazedār hai.,jeːh bˈahʊt mˌəzidˈaːɾ hɛ,,2,"Platts, J. T., A Dictionary of Urdu, Classical Hindi, and English (1884);ur-kind-words-v1;ipa=espeak"
+kind-words.it-is-beautiful-here,یہاں بہت خوبصورت ہے۔,,yahāñ bahut khūbṣūrat hai.,jˈʌhãː bˈahʊt xˈuːbsuːɾˌat hɛ,,2,"Platts, J. T., A Dictionary of Urdu, Classical Hindi, and English (1884);ur-kind-words-v1;ipa=espeak"
+kind-words.i-like-it-very-much,مجھے یہ بہت پسند ہے۔,,mujhe yih bahut pasand hai.,mˌʊɟʰeː jeːh bˈahʊt pəsˈʌnd hɛ,"dative-experiencer ""mujhe...pasand"" -- invariant for the speaker's gender",2,"Platts, J. T., A Dictionary of Urdu, Classical Hindi, and English (1884);ur-kind-words-v1;ipa=espeak"
+kind-words.i-had-a-wonderful-time,میں نے بہت اچھا وقت گزارا۔,,maiñ ne bahut achhā waqt guzārā.,mˈẽ neː bˈahʊt ˈacʰaː ʋˈaqt ɡʊzˈaːɾaː,"ergative ""ne"" + perfective participle agrees with the object ""waqt"" (masc.), not with the speaker",2,"Platts, J. T., A Dictionary of Urdu, Classical Hindi, and English (1884);ur-kind-words-v1;ipa=espeak"
+kind-words.thank-you-for-everything,ہر چیز کا شکریہ۔,,har chīz kā shukriya.,hˈʌɾ cˈiːz kaː ʃʊkɾˈiːa,,2,"Platts, J. T., A Dictionary of Urdu, Classical Hindi, and English (1884);ur-kind-words-v1;ipa=espeak"
+kind-words.thank-you-for-your-hospitality,آپ کی مہمان نوازی کا شکریہ۔,,āp kī mehmān navāzī kā shukriya.,ˌaːp ki mˈɛhmaːn nˈaʋaːzˌiː kaː ʃʊkɾˈiːa,,2,"Platts, J. T., A Dictionary of Urdu, Classical Hindi, and English (1884);ur-kind-words-v1;ipa=espeak"

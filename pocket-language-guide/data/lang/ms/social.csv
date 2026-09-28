@@ -121,3 +121,11 @@ board-answers.there-is-no-wait,"Tidak perlu tunggu, sudah boleh masuk",,"tˈida�
 board-answers.we-do-not-have-it,Kami tidak punya,,kˈami tˈidaʔ pˈuɲə,kami = exclusive we; excludes the customer being spoken to,2,ms-agent-v1;ipa=espeak
 board-answers.what-is-your-name,Namanya siapa?,,namˈəɲə siˈapə,,2,ms-agent-v1;ipa=espeak
 board-answers.where-does-it-hurt,Sakitnya di mana?,,sakˈetɲə dimˈanə,,2,ms-agent-v1;ipa=espeak
+kind-words.you-are-very-kind,Anda sangat baik.,,ˈanda sˈaŋat bˈaɪʔ,,2,"Kamus Dewan (4th ed.), Dewan Bahasa dan Pustaka;ms-kind-words-v1;ipa=espeak"
+kind-words.thank-you-for-your-help,Terima kasih atas bantuan anda.,,təɾrˈimə kˈaseh ˈatas bantˈuan ˈanda,,2,"Kamus Dewan (4th ed.), Dewan Bahasa dan Pustaka;ms-kind-words-v1;ipa=espeak"
+kind-words.this-is-delicious,Ini sangat sedap.,,ˈini sˈaŋat sˈɛdap,,2,"Kamus Dewan (4th ed.), Dewan Bahasa dan Pustaka;ms-kind-words-v1;ipa=espeak"
+kind-words.it-is-beautiful-here,Di sini sangat cantik.,,di sˈini sˈaŋat tʃˈanteʔ,,2,"Kamus Dewan (4th ed.), Dewan Bahasa dan Pustaka;ms-kind-words-v1;ipa=espeak"
+kind-words.i-like-it-very-much,Saya sangat suka ini.,,sˈajə sˈaŋat sˈukə ˈini,,2,"Kamus Dewan (4th ed.), Dewan Bahasa dan Pustaka;ms-kind-words-v1;ipa=espeak"
+kind-words.i-had-a-wonderful-time,Saya sangat menikmati masa saya di sini.,,sˈajə sˈaŋat mənikmˈati mˈasə sˈajə di sˈini,,2,"Kamus Dewan (4th ed.), Dewan Bahasa dan Pustaka;ms-kind-words-v1;ipa=espeak"
+kind-words.thank-you-for-everything,Terima kasih atas semuanya.,,təɾrˈimə kˈaseh ˈatas səmuˈəɲə,,2,"Kamus Dewan (4th ed.), Dewan Bahasa dan Pustaka;ms-kind-words-v1;ipa=espeak"
+kind-words.thank-you-for-your-hospitality,Terima kasih atas keramahan anda.,,təɾrˈimə kˈaseh ˈatas kəramˈahan ˈanda,,2,"Kamus Dewan (4th ed.), Dewan Bahasa dan Pustaka;ms-kind-words-v1;ipa=espeak"

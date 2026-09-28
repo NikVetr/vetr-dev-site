@@ -121,3 +121,11 @@ board-answers.what-is-your-name,¿Cómo se llama?,,kˈomo se ʝˈama,,2,es-agent
 board-answers.the-hospital-is-close,El hospital está cerca,,el ˌospitˈal estˈa sˈeɾka,,2,es-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-do-not-have-a-phone,No tengo teléfono,,nˈo tˈeŋɡo telˈefono,,2,es-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-will-find-someone,Voy a buscar a alguien que pueda ayudar,,bˈoɪ a buskˈaɾ a ˈalɡjen ke pwˈeda ˌaʝudˈaɾ,,2,es-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+kind-words.you-are-very-kind,Usted es muy amable.,,ustˈed ˈes mˈuʝ amˈable,"'amable' does not inflect for gender, so the sentence needs no choice about the listener",2,es-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-help,Gracias por su ayuda.,,ɡɾˈasjas poɾ su aʝˈuda,,2,es-kind-words-v1;ipa=espeak
+kind-words.this-is-delicious,Esto está delicioso.,,ˈesto estˈa dˌelisjˈoso,,2,es-kind-words-v1;ipa=espeak
+kind-words.it-is-beautiful-here,Aquí es precioso.,,akˈi ˈes pɾesjˈoso,,2,es-kind-words-v1;ipa=espeak
+kind-words.i-like-it-very-much,Me gusta mucho.,,me ɡˈusta mˈutʃo,,2,es-kind-words-v1;ipa=espeak
+kind-words.i-had-a-wonderful-time,He pasado un rato maravilloso.,,ˈe pasˈado ˈun rˈato mˌaɾabiʝˈoso,,2,es-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-everything,Gracias por todo.,,ɡɾˈasjas poɾ tˈodo,,2,es-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-hospitality,Gracias por su hospitalidad.,,ɡɾˈasjas poɾ su ˌospitˌalidˈad,,2,es-kind-words-v1;ipa=espeak

@@ -121,3 +121,11 @@ board-answers.there-is-no-wait,"Hindi na po kailangang maghintay, puwede na puma
 board-answers.we-do-not-have-it,Wala po kami nito,,wala po kami nito,"kami (not tayo) = exclusive we, excludes the customer",2,fil-agent-v1;ipa=fil-g2p
 board-answers.what-is-your-name,Ano po ang pangalan niyo?,,ano po aŋ paŋalan nijo,,2,fil-agent-v1;ipa=fil-g2p
 board-answers.where-does-it-hurt,Saan po masakit?,,saan po masakit,,2,fil-agent-v1;ipa=fil-g2p
+kind-words.you-are-very-kind,Mabait po kayo.,,mabait po kajo,,2,kind-words-v1;ipa=fil-g2p
+kind-words.thank-you-for-your-help,Salamat po sa tulong ninyo.,,salamat po sa tuloŋ niɲo,,2,kind-words-v1;ipa=fil-g2p
+kind-words.this-is-delicious,Masarap po ito.,,masaɾap po ito,,2,kind-words-v1;ipa=fil-g2p
+kind-words.it-is-beautiful-here,Maganda po dito.,,maɡanda po dito,,2,kind-words-v1;ipa=fil-g2p
+kind-words.i-like-it-very-much,Gustong-gusto ko po ito.,,ɡustoŋɡusto ko po ito,,2,kind-words-v1;ipa=fil-g2p
+kind-words.i-had-a-wonderful-time,Naging maganda po ang karanasan ko dito.,,naɡiŋ maɡanda po aŋ kaɾanasan ko dito,,2,kind-words-v1;ipa=fil-g2p
+kind-words.thank-you-for-everything,Salamat po sa lahat.,,salamat po sa lahat,,2,kind-words-v1;ipa=fil-g2p
+kind-words.thank-you-for-your-hospitality,Salamat po sa inyong pagtanggap.,,salamat po sa iɲoŋ paɡtaŋɡap,,2,kind-words-v1;ipa=fil-g2p

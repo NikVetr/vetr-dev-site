@@ -11,3 +11,4 @@ speaker_gender=feminine,etiquette.dressed-appropriately,Czy jestem odpowiednio u
 speaker_gender=feminine,police-consulate.am-i-under-arrest,Czy jestem zatrzymana?,,tʃɨ jˌɛstɛm zˌatʃɨmˈana,,2,pl-variants-v1;rule=predicative-adjective-agrees-in-gender;ipa=espeak
 speaker_gender=feminine,sim-data.i-would-like-a-tourist-sim,Chciałabym kartę SIM dla turystów,,xtɕˈawabˌɨm kˈartɛ ˌɛsˌiˈɛm dla turˈɨstuf,,2,pl-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
 speaker_gender=feminine,transit-rides.i-went-past-my-stop,Przejechałam swój przystanek,,pʃˌɛjɛxˈawam sfˈuj pʃɨstˈanɛk,,2,pl-variants-v1;rule=past-tense-verb-agrees-in-gender;ipa=espeak
+speaker_gender=feminine,kind-words.i-had-a-wonderful-time,Miałam tu wspaniały czas.,,mʲˈawam tˈu fspaɲˈawɨ tʃˈas,,2,pl-kind-words-v1;rule=speaker-gender-agreement;ipa=espeak

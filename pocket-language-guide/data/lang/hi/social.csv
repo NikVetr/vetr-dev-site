@@ -121,3 +121,11 @@ board-answers.there-is-no-wait,"इंतज़ार नहीं है, अ�
 board-answers.we-do-not-have-it,हमारे पास यह नहीं है,,hamāre pās yah nahīṁ hai,həmˌaːɾeː pˈaːs jˌəh nˈʌhĩ hɛː,,2,hi-board-answers-v1;ipa=espeak
 board-answers.what-is-your-name,नाम क्या है?,,nām kyā hai?,nˈaːm kjaː hɛː,,2,hi-board-answers-v1;ipa=espeak
 board-answers.where-does-it-hurt,कहाँ दर्द है?,,kahāṁ dard hai?,kˈʌhã dˈʌɾd hɛː,,2,hi-board-answers-v1;ipa=espeak
+kind-words.you-are-very-kind,आप बहुत दयालु हैं।,,āp bahut dayālu haiṁ,ˌaːp bˈʌhʊt dəjˈaːlʊ hɛ̃,,2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-help,आपकी मदद के लिए धन्यवाद।,,āpkī madad ke lie dhanyavād,ˌaːpkˌi mˈʌdəd keː lˈɪeː dʰˌənjəʋˈaːd,,2,kind-words-v1;ipa=espeak
+kind-words.this-is-delicious,यह बहुत स्वादिष्ट है।,,yah bahut svādiṣṭ hai,jˌəh bˈʌhʊt sʋaːdˈɪʂʈ hɛː,,2,kind-words-v1;ipa=espeak
+kind-words.it-is-beautiful-here,यहाँ बहुत सुंदर है।,,yahāṁ bahut sundar hai,jˈʌhã bˈʌhʊt sˈũdəɾ hɛː,,2,kind-words-v1;ipa=espeak
+kind-words.i-like-it-very-much,मुझे यह बहुत पसंद है।,,mujhe yah bahut pasand hai,mˌʊɟʰeː jˌəh bˈʌhʊt pəsˈʌnd hɛː,,2,kind-words-v1;ipa=espeak
+kind-words.i-had-a-wonderful-time,मैंने यहाँ बहुत अच्छा समय बिताया।,,maiṁne yahāṁ bahut acchā samay bitāyā,mˈɛ̃neː jˈʌhã bˈʌhʊt ˈʌcʰcʰaː sˈʌmˌɛj bɪtˈaːjaː,"transitive perfective with ने agrees with the object समय (masc.), not the speaker, so this is invariant for speaker gender",2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-everything,सबके लिए धन्यवाद।,,sabke lie dhanyavād,sˈʌbkˌeː lˈɪeː dʰˌənjəʋˈaːd,,2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-hospitality,आपके आतिथ्य के लिए धन्यवाद।,,āpke ātithya ke lie dhanyavād,ˌaːpkˌeː aːtˈɪtʰjə keː lˈɪeː dʰˌənjəʋˈaːd,,2,kind-words-v1;ipa=espeak

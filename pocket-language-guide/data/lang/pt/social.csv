@@ -121,3 +121,11 @@ board-answers.what-is-your-name,Como se chama?,,kˌomʊ sy ʃˈɐ̃mæ,,2,pt-age
 board-answers.the-hospital-is-close,O hospital está perto,,ʊ ˌospitˈaʊ estˌa pˈɛɾətʊ,,2,pt-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-do-not-have-a-phone,Não tenho telemóvel,celular,nˌɐ̃ʊ̃ tˌeɲʊ tˌelemˈɔvɛʊ,,2,pt-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-will-find-someone,Vou procurar alguém que possa ajudar,,vow prˌokuɾˈaɾ aʊɡˈeɪŋ ky pˈɔsæ ˌaʒudˈar,,2,pt-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+kind-words.you-are-very-kind,É muito amável.,,ɛ mwˈiŋtw ˌæmˈaveʊ,"'amável' does not inflect for gender, so the sentence needs no choice about the listener",2,pt-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-help,Obrigado pela sua ajuda.,,ˌobriɡˈadʊ pˈelæ sˌuæ ˌaʒˈudæ,masculine default; Ciberduvidas: obrigado/obrigada agrees with the speaker's own sex,2,pt-kind-words-v1;ipa=espeak
+kind-words.this-is-delicious,Isto está delicioso.,,ˈistw estˌa dˌelisiˈozʊ,,2,pt-kind-words-v1;ipa=espeak
+kind-words.it-is-beautiful-here,É lindo aqui.,,ɛ lˈiŋdw akˈi,,2,pt-kind-words-v1;ipa=espeak
+kind-words.i-like-it-very-much,Gosto muito disto.,,ɡˈostʊ mwˈiŋtʊ dʒˈistʊ,,2,pt-kind-words-v1;ipa=espeak
+kind-words.i-had-a-wonderful-time,Passei momentos maravilhosos.,,pasˈeɪ mˌomˈeɪŋtʊz mˌaɾaviljˈɔzʊs,,2,pt-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-everything,Obrigado por tudo.,,ˌobriɡˈadʊ por tˈudʊ,masculine default; Ciberduvidas: obrigado/obrigada agrees with the speaker's own sex,2,pt-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-hospitality,Obrigado pela hospitalidade.,,ˌobriɡˈadʊ pˈelæ ˌospitˌalidˈadʒy,masculine default; Ciberduvidas: obrigado/obrigada agrees with the speaker's own sex,2,pt-kind-words-v1;ipa=espeak

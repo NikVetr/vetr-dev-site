@@ -121,3 +121,11 @@ board-answers.there-is-no-wait,"वाट पाहायची गरज ना
 board-answers.we-do-not-have-it,आमच्याकडे हे नाही,,āmacyākaḍē hē nāhī,ˌaːmcjˈaːkɖˌeː hˈeː nˈaːhi,,2,mr-board-answers-v1;ipa=espeak
 board-answers.what-is-your-name,नाव काय आहे?,,nāva kāya āhē?,nˈaːv kˈaːj ˈaːheː,,2,mr-board-answers-v1;ipa=espeak
 board-answers.where-does-it-hurt,कुठे दुखत आहे?,,kuṭhē dukhata āhē?,kˈʊʈʰeː dˈʊkʰət ˈaːheː,,2,mr-board-answers-v1;ipa=espeak
+kind-words.you-are-very-kind,तुम्ही खूप दयाळू आहात.,,tumhī khūp dayāḷū āhāt,tˈʊmhi kʰˈuːp dəjˈaːɭuː aːhˈaːt,,2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-help,तुमच्या मदतीसाठी धन्यवाद.,,tumacyā madatīsāṭhī dhanyavāda,tʊmˈʌcjaː mˌədtisˈaːʈʰi dʰˌənjəvˈaːd,,2,kind-words-v1;ipa=espeak
+kind-words.this-is-delicious,हे खूप चविष्ट आहे.,,hē khūp caviṣṭ āhē,hˈeː kʰˈuːp cəvˈɪʂʈ ˈaːheː,,2,kind-words-v1;ipa=espeak
+kind-words.it-is-beautiful-here,इथे खूप सुंदर आहे.,,ithē khūp sundar āhē,ˈɪtʰeː kʰˈuːp sˈũdəɾ ˈaːheː,,2,kind-words-v1;ipa=espeak
+kind-words.i-like-it-very-much,मला हे खूप आवडते.,,malā hē khūp āvaḍtē,mˈʌlaː hˈeː kʰˈuːp ˈaːvəɖteː,,2,kind-words-v1;ipa=espeak
+kind-words.i-had-a-wonderful-time,मी इथे खूप चांगला वेळ घालवला.,,mī ithē khūp cāṅgalā vēḻ ghālavalā,mˈi ˈɪtʰeː kʰˈuːp cˈãɡlˌaː vˈeːɭ ɡʰˈaːləvlaː,"घालवला agrees with the object वेळ (masc.), not the speaker, so invariant for speaker gender",2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-everything,सर्वांसाठी धन्यवाद.,,sarvāṁsāṭhī dhanyavāda,sˌərvãsˈaːʈʰi dʰˌənjəvˈaːd,,2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-hospitality,तुमच्या आदरातिथ्यासाठी धन्यवाद.,,tumacyā ādarātithyāsāṭhī dhanyavāda,tʊmˈʌcjaː ˌaːdɾˌaːtɪtʰjaːsˈaːʈʰi dʰˌənjəvˈaːd,,2,kind-words-v1;ipa=espeak

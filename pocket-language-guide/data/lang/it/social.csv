@@ -121,3 +121,11 @@ board-answers.what-is-your-name,Come si chiama?,,kˌome sɪ kjˈama,,2,it-agent-
 board-answers.the-hospital-is-close,L'ospedale è vicino,,lospedˈale e vitʃˈino,,2,it-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-do-not-have-a-phone,Non ho un telefono,,non o ʊn telˈɛfono,,2,it-agent-v1;board-answers-v1;ipa=espeak
 board-answers.i-will-find-someone,Vado a cercare qualcuno che possa aiutare,,vˈado a tʃerkˈare kwalkˈuno ke pˈɔssa ajʊtˈare,,2,it-agent-v1;board-answers-v1;reply-neutrality-rule;ipa=espeak
+kind-words.you-are-very-kind,Lei è molto gentile.,,lˌɛi e mˈolto dʒentˈile,"'gentile' does not inflect for gender, so the sentence needs no choice about the listener",2,it-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-help,Grazie per il suo aiuto.,,ɡrˈatsje per il sˌʊo ajˈuto,,2,it-kind-words-v1;ipa=espeak
+kind-words.this-is-delicious,È delizioso.,,e delitsjˈozo,,2,it-kind-words-v1;ipa=espeak
+kind-words.it-is-beautiful-here,È bellissimo qui.,,e bellˈissimo kwˈi,,2,it-kind-words-v1;ipa=espeak
+kind-words.i-like-it-very-much,Mi piace molto.,,mɪ pjˈatʃe mˈolto,,2,it-kind-words-v1;ipa=espeak
+kind-words.i-had-a-wonderful-time,Ho passato dei momenti fantastici.,,o passˈato dˌeɪ momˈentɪ fantˈastitʃɪ,,2,it-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-everything,Grazie di tutto.,,ɡrˈatsje dɪ tˈutto,,2,it-kind-words-v1;ipa=espeak
+kind-words.thank-you-for-your-hospitality,Grazie per la sua ospitalità.,,ɡrˈatsje per la sˌʊa ospitalitˈa,,2,it-kind-words-v1;ipa=espeak
