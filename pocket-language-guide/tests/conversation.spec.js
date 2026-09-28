@@ -1319,7 +1319,9 @@ test('the beacon is seen from across a road, and stays under the flash limit', a
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=emergency');
   await expect(page.locator('.board-cell').first()).toBeVisible();
-  await expect(page.locator('.board-cell-beacon')).toHaveCount(2);
+  // The signals are one screen together, a tap from the first.
+  await page.locator('[data-button="signals"]').click();
+  await expect(page.locator('.board-cell-beacon')).toHaveCount(3);
 
   await page.locator('[data-button="sos"]').click();
   await expect(page.locator('.beacon')).toBeVisible();
@@ -1698,6 +1700,7 @@ test('the SOS screen has nothing in the middle of it', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=emergency');
   await expect(page.locator('.board-cell').first()).toBeVisible();
+  await page.locator('[data-button="signals"]').click();
   await page.locator('[data-button="sos"]').click();
   await expect(page.locator('.beacon-sos')).toBeVisible();
   const shape = await page.evaluate(() => {
@@ -2323,6 +2326,31 @@ test('kind words are a screen of their own, and their replies are the listener\'
   await expect(page.locator('[data-button="nice"]')).toBeVisible();
 });
 
+test('red and blue lights turn the screen from one to the other, slowly', async ({ page }) => {
+  // The colours a passer-by reads as "help is needed here" -- held long enough each
+  // that the change is well under one a second, far from the three-per-second line.
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=emergency');
+  await page.locator('[data-button="signals"]').click();
+  await page.locator('[data-button="lights"]').click();
+  const lights = page.locator('.beacon-lights');
+  await expect(lights).toBeVisible();
+  const changes = await lights.evaluate(async (el) => {
+    let n = 0;
+    let was = el.classList.contains('beacon-blue');
+    const until = performance.now() + 2100;
+    while (performance.now() < until) {
+      await new Promise((r) => { setTimeout(r, 50); });
+      const now = el.classList.contains('beacon-blue');
+      if (now !== was) { n += 1; was = now; }
+    }
+    return n;
+  });
+  expect(changes).toBeGreaterThanOrEqual(2);
+  expect(changes).toBeLessThanOrEqual(3);
+  await lights.click();
+  await expect(lights).toHaveCount(0);
+});
+
 test('Reply stays inside the frame when the sentence fills it', async ({ page }) => {
   // A short sentence at poster size fills three lines, and Reply under it, with the
   // buffer between them, ran twenty pixels past the frame and over its white outline.
@@ -2380,6 +2408,7 @@ test('Attract attention sounds a siren only when the reader has asked for one', 
   });
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=emergency');
   const log = () => page.evaluate(() => /** @type {any} */ (globalThis).sirenLog);
+  await page.locator('[data-button="signals"]').click();
   await page.locator('[data-button="attention"]').click();
   await expect(page.locator('.beacon-attention')).toBeVisible();
   expect((await log()).started).toBe(0);

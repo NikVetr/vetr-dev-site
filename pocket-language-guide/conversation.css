@@ -1029,6 +1029,9 @@
   text-align: start;
 }
 
+/* Red and blue, the colours a stranger already reads as "help is needed here". */
+.beacon-lights { background: #d0021b; color: #fff; }
+.beacon-lights.beacon-blue { background: #0038c7; }
 /* SOS: the whole screen is the lamp. White on black at full area is the brightest
    thing a phone can do, and brightness is the only thing that carries at distance. */
 .beacon-sos { background: #000; justify-content: flex-end; }

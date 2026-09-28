@@ -101,17 +101,20 @@
           "replySetId": "hospital-where"
         },
         {
-          "id": "sos",
-          "kind": "beacon",
-          "beacon": "sos",
-          "labelKey": "boards.emergency.sos",
-          "colour": "alert"
+          "id": "whereami",
+          "kind": "message",
+          "phraseRef": {
+            "kind": "corpus",
+            "id": "lost-rescue.i-do-not-know-where-i-am"
+          },
+          "colour": "move",
+          "replySetId": "where-am-i"
         },
         {
-          "id": "attention",
-          "kind": "beacon",
-          "beacon": "attention",
-          "labelKey": "boards.emergency.attention",
+          "id": "signals",
+          "kind": "submenu",
+          "nodeId": "signals",
+          "labelKey": "boards.emergency.signals",
           "colour": "alert"
         }
       ]
@@ -472,6 +475,32 @@
             "id": "emergency-medical.i-have-travel-insurance"
           },
           "colour": "money"
+        }
+      ]
+    },
+    "signals": {
+      "titleKey": "boards.emergency.signalsTitle",
+      "buttons": [
+        {
+          "id": "sos",
+          "kind": "beacon",
+          "beacon": "sos",
+          "labelKey": "boards.emergency.sos",
+          "colour": "alert"
+        },
+        {
+          "id": "attention",
+          "kind": "beacon",
+          "beacon": "attention",
+          "labelKey": "boards.emergency.attention",
+          "colour": "alert"
+        },
+        {
+          "id": "lights",
+          "kind": "beacon",
+          "beacon": "lights",
+          "labelKey": "boards.emergency.lights",
+          "colour": "alert"
         }
       ]
     }

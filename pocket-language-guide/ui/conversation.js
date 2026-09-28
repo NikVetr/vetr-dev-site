@@ -908,7 +908,7 @@ async function main() {
             // to know how to stop it.
             const help = ctx.listenerRows['emergency-medical.help'];
             startBeacon({
-              mode: button.beacon === 'sos' ? 'sos' : 'attention',
+              mode: button.beacon === 'sos' || button.beacon === 'lights' ? button.beacon : 'attention',
               siren: display.siren,
               label: button.beacon === 'sos'
                 ? theirs.t('beacon.sos')
@@ -1254,7 +1254,10 @@ async function main() {
     return false;
   };
 
-  addEventListener('keydown', (event) => { if (event.key === 'Escape') unwind(); });
+  // An open dialog takes its own Escape; the screen behind it stays where it is.
+  addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !document.querySelector('dialog[open]')) unwind();
+  });
   // **Android Back is not browser Back.** Unhandled, it closes the application --
   // so a reader holding a sentence out to a stranger who presses it meaning "close
   // this" would quit the app instead. At a board's root it is unconsumed on purpose:

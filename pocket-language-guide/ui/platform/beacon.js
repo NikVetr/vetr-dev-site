@@ -114,6 +114,9 @@ async function acquireTorch() {
   }
 }
 
+/** How long each colour holds on the red-and-blue screen. */
+const LIGHTS_MS = 700;
+
 /**
  * Run a beacon over the whole screen until it is dismissed.
  *
@@ -122,7 +125,8 @@ async function acquireTorch() {
  * just been found should not have to hunt for a control.
  *
  * @param {object} config
- * @param {'sos'|'attention'|'morse'} config.mode  `morse` flashes `config.units`
+ * @param {'sos'|'attention'|'lights'|'morse'} config.mode  `morse` flashes `config.units`;
+ *   `lights` is the screen turning red and blue, as a police light does
  * @param {number[]} [config.units]  the unit list to flash: 1 and 3 lit, 0 dark
  * @param {number} [config.unitMs]   how long a unit lasts; SOS keeps its own
  * @param {string} config.label      the word to show, in the *listener's* language
@@ -250,7 +254,16 @@ export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop, unit
   fit?.(word, root);
 
   let stopped = false;
-  if (flashing) {
+  // **Red and blue, slowly.** A colour held for LIGHTS_MS before the other takes over is
+  // under one change of colour a second -- far below the three-per-second threshold at
+  // which a flash can bring on a seizure, the saturated-red one included.
+  if (mode === 'lights') {
+    const turn = () => {
+      root.classList.toggle('beacon-blue', !root.classList.contains('beacon-blue'));
+      timer = setTimeout(turn, LIGHTS_MS);
+    };
+    turn();
+  } else if (flashing) {
     step();
     // The screen starts at once; the lamp joins when the camera answers -- unless
     // the beacon has already been dismissed by then, when the camera is let go at
@@ -273,7 +286,7 @@ export function startBeacon({ mode, label, lang, dir, dismiss, fit, onStop, unit
   // after a trip to Settings that way. A page cannot come back without having left.
   document.addEventListener('visibilitychange', stopBeacon);
   addEventListener('pagehide', stopBeacon);
-  const sound = siren && mode === 'attention' ? startSiren() : null;
+  const sound = siren && (mode === 'attention' || mode === 'lights') ? startSiren() : null;
 
   const stop = () => {
     stopped = true;

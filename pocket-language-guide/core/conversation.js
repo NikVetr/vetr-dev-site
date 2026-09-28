@@ -82,7 +82,7 @@ const BLANK = '____';
  * @typedef {Object} BoardButton
  * @property {string} id            stable placement, not a label and not an index
  * @property {'message'|'submenu'|'value'|'entry'|'beacon'} kind
- * @property {'sos'|'attention'} [beacon]  for `beacon`: which signal it runs. Not a
+ * @property {'sos'|'attention'|'lights'} [beacon]  for `beacon`: which signal it runs. Not a
  *   phrase and not spoken -- the one button on a board that is about being *seen*
  *   rather than read, for when nobody is looking at the screen yet.
  * @property {import('./quantity.js').Quantity} [value]  for `value`: what it answers
@@ -262,7 +262,7 @@ export function validateBoard(board) {
         // Also an enum, and deliberately a short one. A board file naming its own
         // signal would be a board file describing behaviour, which is the line this
         // format does not cross.
-        if (button.beacon !== 'sos' && button.beacon !== 'attention') {
+        if (!['sos', 'attention', 'lights'].includes(/** @type {string} */ (button.beacon))) {
           problems.push(`${key}: unknown beacon ${button.beacon}`);
         }
       } else if (button.kind === 'message') {
