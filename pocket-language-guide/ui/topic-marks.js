@@ -42,11 +42,11 @@ export const TOPIC_MARKS = {
     back: fill('M92 42a30 30 0 1 1 0 60a30 30 0 1 1 0-60ZM34 176c0-44 26-66 58-66s58 22 58 66Z'),
     front: fill('M166 60a32 32 0 1 1 0 64a32 32 0 1 1 0-64ZM104 200c0-48 28-70 62-70s62 22 62 70Z'),
   },
-  // A signpost: two boards pointing opposite ways across the post, with the post
-  // showing between them.
+  // A signpost: two boards pointing opposite ways across the post, far enough apart
+  // that the post between them reads as a post.
   signpost: {
-    back: soft('M121 40h14v154h-14Z', 8),
-    front: soft('M52 30h118l26 25l-26 25H52Z') + soft('M204 120H86l-26 25l26 25h118Z'),
+    back: soft('M120 36h16v160h-16Z', 8),
+    front: soft('M52 26h118l24 23l-24 23H52Z') + soft('M204 128H86l-24 23l24 23h118Z'),
   },
   // A bus from the front: windscreen, lamps, wheels and mirrors.
   bus: {
@@ -151,7 +151,19 @@ export function topicMark(name, id, lang) {
     ? `<defs><mask id="${id}" maskUnits="userSpaceOnUse" x="0" y="0" width="256" height="208">`
       + `<rect width="256" height="208" fill="white"/><g stroke="black" stroke-width="${GAP}" ${R}>${cut}</g>`
       + `${black(mark.cut ?? '')}</mask></defs>`
-      + `<g mask="url(#${id})">${mark.back}</g>${mark.front}`
-    : mark.front;
+      + `<g class="topic-ink"><g mask="url(#${id})">${mark.back}</g>${mark.front}</g>`
+    : `<g class="topic-ink">${mark.front}</g>`;
   return svg;
+}
+
+/**
+ * **A mark centred on its ink, not on its box.** The drawings sit where they were
+ * drawn in a shared box, and the chopsticks' bowl and the people's pair sat off the
+ * button's middle; the box is moved to be centred on what is drawn, at the same scale
+ * for every mark. Measured, so it needs the mark in the document.
+ * @param {SVGSVGElement} svg  a mark from `topicMark`, attached
+ */
+export function centreMark(svg) {
+  const ink = /** @type {SVGGraphicsElement} */ (svg.querySelector('.topic-ink')).getBBox();
+  svg.setAttribute('viewBox', `${ink.x + ink.width / 2 - 128} ${ink.y + ink.height / 2 - 104} 256 208`);
 }

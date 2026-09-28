@@ -11,7 +11,7 @@
 
 import { t } from './i18n.js';
 import { openBoardMenu } from './board-menu.js';
-import { topicMark } from './topic-marks.js';
+import { centreMark, topicMark } from './topic-marks.js';
 import { RATES } from './board-display.js';
 
 /** Below this, stop shrinking and let the text scroll instead. */
@@ -156,6 +156,8 @@ export function renderGrid(root, node, { label, available, onPick, lang, title, 
     }
     cell.addEventListener('click', () => { if (!wasHeld()) onPick(button); });
     root.append(cell);
+    const silhouette = /** @type {SVGSVGElement|null} */ (cell.querySelector('svg.board-cell-topic'));
+    if (silhouette) centreMark(silhouette);
   }
   watchCells(root);
 }
