@@ -504,7 +504,11 @@ and offline on a phone without paying for the solver, `pdf-lib` or a CJK font.
 - **`index.html`** — gallery. Cards keep a fixed header: the flags sit in a grid to
   the right of the name, which is already two lines tall, and are capped at four
   cells so a language spoken in eight countries does not get a taller card than one
-  spoken in two. The action buttons stay on one row for the same reason. Reader
+  spoken in two. The action buttons stay on one row for the same reason. The header's
+  settings hold everything personal that holds in every language and on both the sheets
+  and the boards -- how the reader speaks, their name, country and diet, what a board's
+  message screen shows, where the app opens, and their saved copy -- with the sections'
+  modules fetched only when the settings open, so the grid stays small. Reader
   language auto-detected from
   `navigator.languages`, with the picker's label cycling through "I speak" in each
   language we can gloss into so a visitor who reads none of the others still finds
@@ -529,7 +533,10 @@ and offline on a phone without paying for the solver, `pdf-lib` or a CJK font.
   Both languages in the pair are controls and so is the mark between them, which
   grows a second head on hover because reversing the pair is what pressing it does.
   Changing the reader's language here changes it for the grid behind, so closing the
-  lightbox never lands on a gallery that disagrees with it.
+  lightbox never lands on a gallery that disagrees with it. The card's measured width
+  (`--card-w`) is also the pair's, the strip's and the middle column's, so the carets
+  sit on the paper's edges in WebKit too, which sizes an `auto` column before the row
+  has given the card its height.
 
   On a phone the "…and I want to speak" grid folds as the page scrolls past it and
   its bar floats under the header, but not before: it folds only once the whole grid
@@ -811,7 +818,10 @@ would cost more than the navigation saves. `ui/conversation.js` splits
 `t('board.pair')` by rendering it with two control characters in place of the names
 and slicing on them, because the order is the catalogue's business: Urdu writes the
 arrow the other way round, and `isolate` in `ui/i18n.js` leaves a letterless insert
-unwrapped, so the sentinels survive the substitution intact.
+unwrapped, so the sentinels survive the substitution intact. At an enlarged system text
+size the header wraps between its items and never inside a word: the pair takes the room
+the brand and the controls leave, down to its longest word or 8em, and below that starts
+a line of its own with the lens and the bars, one item, at its end.
 
 **Any button can be found by what it says.** A lens beside the header's settings
 opens a field across the header (`ui/board-search.js`). Typing looks through every
@@ -822,7 +832,8 @@ the reader's language's own collation, case and accents aside, and a label start
 with the query ranks first, then one with a word that does, shorter first; past 48 the
 grid asks for more letters. Pressing one does what it does on its own screen: in place
 on this board, and on another by opening it with the press in the address, forgotten
-once made. The context list loads the corpus only when the search opens.
+once made. The context list loads the corpus only when the search opens. The header
+keeps its height while the field is open, so the grid under it does not move.
 
 **What the message screen carries is a setting, not a decision.** The owner's own
 wording, Speak and its speed control, and the control that turns the sentence
@@ -838,7 +849,36 @@ control opens with every voice the device has beside it, the current one ticked
 that list opens *against the control*: `openBoardMenu` places its panel above an anchor in the
 lower half of the screen and below one in the upper half, its near edge on the
 anchor's, because the stylesheet's default hung every panel under the header's
-corner, a screen away from the thumb at the foot that asked for it.
+corner, a screen away from the thumb at the foot that asked for it. The same menu lists
+the languages from the header's pair: each row the reader's word for a language at its
+start and the language's own name at its end, always both, even where they match.
+
+**Speak on tap turns the grid into something to talk with.** A setting, and a switch in
+the bar beside Turn because the moment it is wanted is no moment for a dialog: a button
+says its sentence where it is and the grid stays, for a listener who cannot look -- a
+driver given one direction a tap. The button shows it is speaking twice, with a ring and a
+speaker in its corner, and the next tap cuts in rather than queueing. A question then opens
+its answers where the reader asks for that. It needs a voice for the listener's language
+on this device; where there is none the switch is not drawn and the setting says why.
+**A button can carry the other side's words**, under its own and smaller -- the other
+language's sentence, how to say it in the reader's letters, its IPA -- and an answer the
+reader's meaning, in any mode, for the reader who is learning them. The lines are set
+inside the label, so the grid's fitter sizes them with it and nothing is pushed out.
+
+**Most used learns from the reader, on one screen only.** Every other screen keeps its
+buttons where they were authored or arranged, because someone who has learned where
+"stop" is must find it there; so the learning lives in a context of its own, after the
+emergency one on the list. `ui/usage.js` counts each press by what was said -- a concept
+with the detail it fills, one of the reader's own phrases, the diet line, a beacon -- so a
+sentence pressed on three screens is one item, shown by the button it was last pressed on
+and copied with that board's answers. The record is sparse and richer than any view of it:
+for each listener language, an all-time count and a count for each day of the last year,
+so the settings' window (a week, a month, a year, all time) and scope (this language, or
+every language pooled) are read off the same data and switching loses nothing. The screen
+takes the first twelve this pair can say, can be rearranged or have buttons binned like any
+other, and names what it will hold while it is empty. The settings show the counts in a
+table and reset them after asking; the counts travel in the reader's backups and go with
+"Delete everything".
 
 **Two people, two sets of controls, and only the stranger's turn.** The sentence and
 Reply are for the person across the table, so they share a box (`.board-read`) that
@@ -850,34 +890,30 @@ someone reading the turned screen and the only place they can find the button to
 press it.
 
 **Reply is one rectangle in one of two places, and the sentence's whitespace decides
-which.** (Its three distances are one: the surface's own padding is the gap between
-Reply and the sentence on each axis, so Reply sits as far from the screen's edge as
-the sentence does and that far from the sentence.) A sentence is ragged in exactly one place — its last line ends short — so
-there are two rectangles Reply can have: its own row *below* the sentence, or the
-corner *beside* the last line, from where the ink ends to the surface's edge and
-from the last line's top to the bottom, which no earlier line can reach because
-every earlier line is at least as long. `fitFoot` tries both. Below is the row layout
-above; beside takes Reply out of the flow, gives the sentence the whole box, and
-walks the sentence's size down from its largest in eight steps — at its largest the
-last line runs to the edge and leaves no corner — keeping the size at which the two
-of them multiply out largest, then compares that against the row. A turned
-two-column question ends halfway down its second column and Reply takes the third
-of the screen under it at twice the size the row gave it, with the sentence larger
-too; a one-line sentence keeps the row, because beside it there is nothing. The
-hanging mark counts as ink, a right-to-left sentence's corner is on its left, a
-turned one's is under the last column (a turned right-to-left one's above it, where
-its lines end), a buffer of three tenths of the type size keeps the two apart, and
-a sentence that scrolls lends no corner at all. Reply's label stays on one line and
-its type at no more than four fifths of the sentence's, whichever place it takes, and
-its words are kept inside its padding along the line only: across it a font's box is
-taller than its line in many phone faces (SF, the CJK and Indic faces), with no ink there.
-**The pair always fits the frame.** Below is lifted out of its row and set under the
-sentence with a buffer of a third of the sentence's size, so the sentence is fitted
-with that buffer held open as the row's gap -- re-read as the sentence settles, since
-it depends on the size being fitted -- and the pair comes out exactly as tall as the
-row layout was. Held open only as the row's own small gap, the pair was taller than
-the frame, and Reply ran over its edge. `placeBelow` still shrinks Reply, and only then
-the buffer, if a pair would not fit. The owner's gloss, how-to-say-it, Speak, speed and Turn are the owner's, so
+which.** A sentence is ragged in exactly one place — its last line ends short — so
+there are two empty rectangles: the band *below* the last line, the frame's whole
+width, and the corner *beside* the last line, from where its ink ends to the frame and
+from the line before it down to the frame's foot, which no earlier line can reach
+because every earlier line is at least as long. `fitFoot` sizes Reply first in a row of
+its own under the sentence -- no wider than the frame, no taller than a fifth of it or
+the sentence's spare room -- and fits the sentence round it with the buffer between
+them held open; `placeReply` then sizes it for the corner too, at the same sentence
+size so the two are compared fairly, and keeps whichever lets Reply be larger (a tie
+goes to the band). Reply is centred in that rectangle: as far from the sentence as from
+the frame, along the line and across it. **Under the sentence the height left over is
+shared three ways** -- above the sentence, between the two, under Reply -- so each is
+centred in its own space; in the corner the sentence stays centred in the frame. The
+sentence is moved, never resized. Distances are to the frame's drawn line, and never
+less than the surface's padding from it or, from the sentence, a third of the
+sentence's size. The geometry is written once, along and across the sentence's lines,
+so it serves the sentence upright or turned and in either direction: a right-to-left
+sentence's corner is on its left, a turned one's under the last column (a turned
+right-to-left one's above it, where its lines end); the hanging mark counts as ink;
+and a sentence that scrolls keeps Reply in its row, where it cannot cover a word.
+Reply's label stays on one line and its type at no more than four fifths of the
+sentence's, and its words are kept inside its padding along the line only: across it a
+font's box is taller than its line in many phone faces (SF, the CJK and Indic faces),
+with no ink there. The owner's gloss, how-to-say-it, Speak, speed and Turn are the owner's, so
 they stay upright in one row at the foot and take as little as one line of small type
 and three buttons can; the sentence gets the rest. On the grid the same Turn sits in
 the bar that names the topic and the pair — a footer now rather than a sub-header,
@@ -939,9 +975,15 @@ its label has a blank; the first press asks for the detail rather than showing a
 with a hole, and a given one shows a ticked box and the value, and is cleared by a hold
 (or a right click). The settings dialog has the same fields under "About you". **A name
 can be built from its sounds**, in a grid folded under the name field (`soundGrid` in
-`ui/board-menu.js`): a key per sound labelled in the owner's own letters over its IPA, the
-sounds so far, and the name as the listener will read it, every key and the whole name
-said in the listener's voice. It is the respeller run the other way -- `nameRespeller` in
+`ui/board-menu.js`): a key per sound labelled in the owner's own letters over its IPA,
+the sounds so far as filled tiles, and under them the name as the listener will read it
+and as the owner's own letters say it, then Speak and Delete on a row of their own;
+every key and the whole name are said in the listener's voice. **The keys are the
+owner's**: sounds their letters write alike share one key, and it is the plain sound --
+/h/ and /x/ are one "ha" to an English reader but two keys to a German one, and a German
+"e" is /e/ rather than the /ə/ German says more often, because that is what someone
+spelling *Peter* means. The keys are sized as a phone sizes a keyboard's, seven to a
+row on a phone, and a label too wide for its key is set smaller rather than broken. It is the respeller run the other way -- `nameRespeller` in
 `core/respell.js`, the listener's rule table bound to the owner's IPA with no syllable
 breaks or stress -- and `detailsFor` in `ui/conversation.js` gives the listener that
 spelling (ニコライ) wherever it is in another script from the typed name, and its IPA; the
@@ -967,7 +1009,9 @@ the topic's place in the bar, or given Delete, is taken off the screen when Done
 pressed: a board's own button is switched off there (`hidden`, which Edit buttons
 switches back on), one of the reader's is taken off that screen, and one of the list's
 own contexts is switched off with switches in the list's settings to bring it back.
-It asks first, with "Don't ask again", a choice the settings keep as `askRemove`. A context of the reader's own can be
+It asks first, with "Don't ask again", a choice the settings keep as `askRemove`. The
+plus that makes a button is hidden while arranging, since it is not one of the buttons
+being arranged, and the line saying what to do is read to a screen reader only. A context of the reader's own can be
 made of the boards' buttons: the editor's "Add buttons from the boards" places a
 corpus concept, with its answers' concepts, by reference (`concept`/`answers` on the
 stored phrase), so it keeps every translation and its Reply; an empty screen offers
@@ -993,16 +1037,21 @@ between about 650 and 1500 Hz, started in the tap, played through the silent swi
 where Safari allows it, and stopped with the beacon. **The list of contexts ends in the
 reader's own**, each a screen of theirs kept for the pair and placed under `contexts`,
 opened as a board built on the spot (`own:<id>`, one node, the reader's buttons on it),
-and a dashed cell with a plus that makes one; a context is deleted from its own editor.
+and made with the small plus in the footer, as a button is made inside one; a context is
+deleted from its own editor.
 A press outside any dialog closes it as its close control does (`ui/app.js`), if the
-press began outside it too. `resolvePhrase` shows one reading of a slash gloss ("okay / can" →
+press began outside it too. Every dialog opens over the page where the reader is and
+never scrolls it: a modal dialog in the top layer given `position: relative` is laid
+out against the document instead of the screen, so none is. `resolvePhrase` shows one reading of a slash gloss ("okay / can" →
 "okay") on a board; the printed sheet keeps the range. The answer that says none of
 these fit ends in links that open a translator from the listener's language to the
 owner's: Google for every pair, DeepL where its published list has both languages,
 and Naver Papago where one side is Chinese, Japanese or Korean and it has the other.
 Each is a web address carrying the pair and no text, which a phone with the app
 installed hands to the app.
-Only a full-width mark hangs; a Latin `?` stays in its line.
+Only a full-width mark hangs; a Latin `?` stays in its line. Whether it can is a question
+of where its ink is, which is read from pixels once per mark, face and language:
+WebKit's canvas metrics report the advance box, which would refuse every hang on an iPhone.
 
 **It is a view over the corpus, not a small sheet.** No `SheetSpec`, no solver, no
 fontkit: `core/pack.js` is a 44KB data-only join, so showing a phrase costs a corpus
@@ -1059,10 +1108,14 @@ corpus's own "thank you" and "you are welcome".
 
 **Colour says what a button does.** Cells are neutral with dark type, so the contrast
 is spent on the words. A button that opens more buttons is filled in the message's
-blue with white type and an arrow; one the listener can answer is tinted and carries a
-faint pair of speech bubbles; the emergency context and the signals are red; and a
-dashed outline with a drawn plus is kept for what the reader has still to make -- a
-context, or a first button. The five role colours of the printed sheet stay where they
+blue with white type and a double chevron in that same white; one the listener can
+answer is tinted and carries a faint pair of speech bubbles; the emergency context and
+the signals are red, except the red and blue lights, which are red and blue either side
+of the diagonal, each half glowing from its middle; and a dashed outline with a drawn
+plus is kept for what the reader has still to make -- a first button on an empty
+screen. Every hover tint is scoped to `(hover: hover)`: a touch leaves `:hover` set, and
+the last button pressed came back highlighted from its message. A context's silhouette
+is centred on its own ink with one margin, so every mark fills its cell alike. The five role colours of the printed sheet stay where they
 count: the full-screen message takes its button's role colour, white on solid, so the
 owner can see they pressed the right one without reading their own language back.
 
@@ -1106,6 +1159,22 @@ against about thirty, and the whole batch cost one constructed language on one b
 every phrase it names was already in all fifty-one natural packs, because the answers
 were in the corpus and simply not indexed into the sets that needed them.
 
+**And every answer answers its own question, which took a second audit.** Sets had been
+shared by the kind of screen rather than the kind of question, so *What is your name?*
+offered yes, no and *One more time, please?*, and *I do not know* followed *Water,
+please*. Read again against one rule -- each answer is something a person would say back
+to *that* question -- yes and no answer yes/no questions only, a request gets *okay* or
+*That is not possible*, *I do not know* stays where a fact is asked, communication repair
+where a stranger might not follow, and a set points once, since *this way*, *that way* and
+*it is over there* are one hand. 111 questions moved to sets of their own kind, the 74
+sets became 115, 26 answers that repeated another went, and so did six buttons that said
+what a neighbour said. Eighteen answers nothing said were added in every language --
+*My name is ___*, whose blank the listener fills by saying or writing their name and
+which is drawn as a ruled space, never braces; *Understood* for an allergy, since *okay*
+reads *can* in Chinese and Thai; *We have it*, which many languages answer by echoing the
+verb; *Before food* and *After food* in a medicine label's words; *Please turn around* for
+the taxi, whose screen is now for someone already in one.
+
 **And there are three kinds of number, not one.** A duration answers *how long*, a
 clock answers *when*, and a bare count is a platform, a price, a how-many. Until the
 audits, only the first existed — which is how the answer space for "what time does it
@@ -1117,10 +1186,11 @@ the control their phone always shows them and one unambiguous `HH:MM` crosses ba
 
 **Replies are optional and one-directional per message.** A reply set offers the
 listener a few complete answers in their own language; the chosen one comes back in
-the owner's, on a paper-coloured surface so it reads as *incoming*. Every set carries
-an uncertain answer and a rejection, because a listener who will not use the board is
+the owner's, on a paper-coloured surface so it reads as *incoming*. Every set ends in a
+rejection, "none of these", and carries an uncertain answer wherever the question is one
+a person might not know the answer to, because a listener who will not use the board is
 not the same as one who is unsure, and neither may be forced into the nearest
-substantive answer. The listener's controls are drawn from `loadCatalogue`, a scoped
+substantive answer -- but nobody answers "Water, please" with "I do not know". The listener's controls are drawn from `loadCatalogue`, a scoped
 read that mutates none of the interface globals — showing a Reply button must never
 move the owner's own language or the document's direction.
 
@@ -1344,7 +1414,12 @@ every token in `style.css` is a `light-dark()` pair under `color-scheme: light d
 and `[data-theme]` on the root pins one side. A one-line script in each page's head
 sets that attribute before the stylesheet applies, so a reader who chose dark does
 not get a white flash on every load. The default is the device's setting, and the
-choice is a light switch in the settings dialogs, which every page's header opens. The
+choice is a light switch in the header of every settings dialog, beside the small cross
+that closes it, which every page's header opens. **Every dialog opens with that header**
+(`dialogHead` in `ui/dialog.js`): its name, the switch where it is a settings dialog, and
+the cross, held at the top while the body scrolls under it -- what the dialog is and the
+way out of it never scroll away, and anything else that sticks in a dialog (the keyboard
+of sounds' tiles) sits under it by the header's measured height. The
 studio's own switch is the card's: it sits under the palette, turns the card to the
 `dark` theme and back to the reference, and stays in step with the palette either way
 (`lightSwitch` in `ui/theme.js` draws both switches).
@@ -2195,7 +2270,10 @@ contents, which with an auto height is zero.
 which is right when both panes are in front of you and wrong when the list is a
 screen and a half below: `ui/item-popup.js` offers the four decisions the list
 offers for a row -- this row, its section, that section's colour, its text -- and
-keeps "show in list" as the way to what it does not do. The editor inside it is the
+keeps "show in list" as the way to what it does not do. It opens with the row's own
+words as its header, what they mean and the section under them beside a dot of the
+section's colour, then the two switches as rows of one group, each with a box that
+fills and ticks as its row tints, the colours, and the editor's fields one to a line. The editor inside it is the
 tree's own `itemEditForm`, extracted and shared rather than copied, so an edit made
 from the card lands in the same `edits.overrides` layer the CSV import writes. It is
 anchored to the row rather than docked, because which row you are editing is the one

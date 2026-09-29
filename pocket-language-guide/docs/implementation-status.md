@@ -5499,3 +5499,229 @@ away. The browser suites on the final code: Chromium 253 of 254 with one skipped
 smoke 7 of 7 and this batch's new specs 13 of 13 in WebKit, unit 708 of 708, the gate 11
 of 11. Neither native script searches, runs the pre-travel check or drags a button to the
 bin; the evidence for those is the browser tests, in Chromium and in WebKit.
+
+## Batch AG — answers that fit their question, a Reply in the larger space, a keyboard of the owner's own sounds, and settings that open where the reader is
+
+**Every answer answers its own question.** The owner found "What is your name?" offering
+yes, no and "One more time, please?" -- a set written for another question -- and asked
+how far the pattern went. Two research agents read all twelve boards against one rule:
+each answer is something a real person would say back to *that* question. Yes and no
+answer yes/no questions only; a request gets "okay" or "That is not possible"; "I do not
+know" stays only where a fact is asked; "I will write it down" only where the answer is a
+name, a number or an address; and one pointing answer per set, since "This way", "That
+way" and "It is over there" are one hand. 111 questions moved to sets of their own kind,
+43 sets were made and 53 changed, 2 emptied sets were deleted and 26 answers that
+repeated another were taken out. Six buttons went: the three the owner named on the taxi
+screen (call a taxi, use the meter, where is the pickup point), "How long is the queue?"
+beside "How long is the wait?", "Can a vegetarian eat this?" beside "Is this
+vegetarian?", and "Where is an all-night pharmacy?" beside "Which pharmacy is open now?".
+The taxi screen gained Go straight, Turn left, Turn right and Please turn around, in that
+order after "Please take me here". Of 336 message buttons, 268 can be answered, in 115
+sets where there were 74. The proposals were applied by one script from the
+pushed boards, so the half that waited on translation could be re-applied whole.
+
+**Eighteen concepts where nothing said it.** "My name is ___", whose blank the listener
+fills by saying or writing their name -- drawn as a ruled space in a softer tone, never as
+braces or underscores; "I would rather not say"; "What happened?"; "Understood", for an
+allergy told to a pharmacist, because "okay" reads *can* in Chinese and Thai; "I will
+check"; "We have it", which in many languages echoes the verb rather than saying yes;
+"We are full"; "It is free"; "It does not matter"; "It is only for customers"; "Where
+to?"; "At the next stop"; "You pay on board"; "It is better to see a doctor"; "Only with
+a prescription"; "Before food" and "After food" in a medicine label's words; and "Please
+turn around" for the taxi. Research agents wrote them into every natural-language pack
+from `content/PROMPTS/board-answers.md`, which now has their section.
+
+**Reply in the larger of two rectangles, centred in it.** The owner set out the rule:
+find which of the two empty rectangles -- under the last line, or beside it -- lets Reply
+be larger, with one buffer from the sentence and the frame; draw it at that size; centre
+it, left and right equal and top and bottom equal; and move the sentence if that evens
+the space out, without breaking the sentence's own symmetry. `placeReply` does exactly
+that, once, in the sentence's own along-and-across terms, so upright, turned and
+right-to-left sentences share it; it replaces `freeCorner`, `placeBelow`, `placeBeside`
+and the eight-step search that shrank the sentence to open a corner. Under the sentence
+the height left over is shared three ways, which is the one arrangement in which Reply is
+centred between the sentence and the frame and the sentence is centred between the frame
+and Reply. Distances are measured to the frame's drawn line. A turned two-column question
+still takes the corner under its last column.
+
+**A keyboard of the owner's own sounds.** The owner asked for the keyboard to use the
+how-to-say-it engine, for a calmer arrangement, and for keys sized as a phone's are. Its
+keys are now chosen by the owner's spelling: sounds their letters write alike share a key
+and the plain sound represents them, so English shows one "ha", one "ra" and one "oo" and
+German still has "cha" for /x/ beside "ha" -- and a German "e" is /e/, not the /ə/ German
+says more often, because that is what someone spelling *Peter* means. Under the entered
+sounds the name is shown twice, in the listener's letters and in the owner's own; Speak
+and Delete have their own row; the entered sounds are filled tiles with the sound centred;
+and seven keys fit a row on a phone where four did, a label too wide for its key set
+smaller rather than broken.
+
+**Settings that open where the reader is.** The settings dialog had `position: relative`
+for its close button's sake, and a modal dialog laid out that way is placed against the
+document: opening it on a scrolled page scrolled to the top or drew it off screen. It
+stays fixed now. The dark-mode switch moved to the dialog's corner, left of a smaller
+cross, which every dialog now has. The landing page's settings hold everything personal
+that applies in every language and to both sheets and boards -- how the reader speaks,
+their name, country and diet, what the message screen shows, where the app opens, and
+their saved copy -- fetched only when opened.
+
+**The owner's other notes.** Hover tints only where there is a pointer, which is what left
+the last button pressed highlighted on a phone; the spa's, pharmacy's and meeting people's
+marks sized by their own ink like the rest; a white double chevron twice the size on
+buttons that open more; the red and blue lights split on the diagonal with a glow in each
+half; the search field fitted into the header's height so no button changes size; the
+language menu with the reader's word at the start of each row and the language's own name
+always at its end; no plus and no instruction line while rearranging; the list of contexts
+made from the footer's small plus; and "Taxi…" for the button that opens the taxi screen,
+its heading still "In a taxi".
+
+**Rows the agents found wrong, corrected.** Reading their packs' neighbouring rows, the
+research agents reported what they saw and touched nothing; three correction passes then
+checked each finding against a source (`content/PROMPTS/row-corrections.md`). Nine
+questions offered as a listener's answers addressed a man by default and were reworded to
+address nobody -- "Where are you from?" in Arabic, Hebrew, Hausa and Gujarati, and "How are
+you?" in Arabic, Hausa, Urdu, Hindi and Marathi -- and Hindi's and Punjabi's "Where are you
+going?" to a driver likewise. Arabic's "One moment" and "Once more?" said *min faḍlak* to
+the traveller and now say the invariable `لطفًا`. Malay read as Indonesian in 98 rows.
+Amharic's "there is" was romanised as "he said" in 35 (*āle* for *ālle*). Yoruba's "is it
+free" and "I do not understand" were wrong and both ambulance rows had an untoned
+*aláìsàn*. Khmer's hand-written IPA came back inside its own spec and its empty cells were
+filled; its sulfa-allergy row now rests on a single Khmer Wikipedia sentence for the drug's
+name, which is thin for a safety row and first on the list for a fluent reader.
+Romanisations came back into their packs' own systems in Armenian -- one had spelled "here"
+for "over there" -- Georgian, Persian, Bengali, Tamil, Telugu and Malayalam, Nepali lost an
+ASCII colon standing in for a visarga, six Nepali massage rows that cited glosbe cite the
+Nepal Academy's dictionary, and thirteen Russian feminine alternatives that repeated the
+variant table went. Hebrew's IPA route never counted `ey`, `ay` and `oy` as a syllable's
+vowel, so *lifney* was stressed on its first syllable and *eyn* got no mark; counting them
+re-stressed 71 cells.
+
+**Two more builder fixes the new rows found.** `latin_survives` asked whether a Latin run of a
+row appeared anywhere in its romanisation, as a substring -- so the `U` of Japanese
+`Uターン`, romanised `yū`, "survived" in `kudasai` and the row was refused its IPA. It
+matches the run as a word now; every other cell in every language is unchanged. And
+Filipino's loan table gained `U-turn`, the driver's own word, said *yu-tern*.
+
+**A test that counted too much.** "Auto reproduces the hand-built originals" narrowed each
+sheet to rows no agent wrote, which let every later coordinator batch count as the
+original; seventeen answers pushed the English sheet off four faces. It selects the two
+references' own tags now. Four faces hold them with no error: 351 of Mandarin's 352 rows,
+358 of Japanese's 359 and 390 of English's 402 are placed. The other fourteen are notes and
+rows scoped to other pairs -- the yen for a Japanese target, "please write it in Roman
+letters" for a non-Latin one -- which no number of faces places.
+
+## Batch AH — Most used, speaking on tap, the other side's words on a button, and a header on every dialog
+
+**The owner's reason, in a taxi.** Helping a driver to a hotel, the owner wanted to give
+directions one after another; the driver could not look at the screen, so each direction
+meant opening the full-screen sentence, pressing Speak, and going back to the grid.
+**Speak on tap** does it in one: a button says its sentence where it is and the grid
+stays. It is a setting and a switch in the bar beside Turn -- a speaker, whose waves are
+drawn only while it is on as well as its fill -- shown only where the device has a voice
+for the listener's language. The button speaking wears a ring and a speaker in its corner
+until the sentence ends; the next tap cuts in. A question can open its answers after it is
+said, as a second setting under the first.
+
+**The other side's words on a button.** Under each button's own words, as the reader asks:
+the other language's sentence, how to say it in their letters, and its IPA -- and on the
+listener's answers, what each means in the reader's language. In any mode, for the reader
+who is learning; inside the label, so the fitter sizes the lines with it and nothing is
+pushed out of a cell. Their checkboxes carry the group's caption in their names, since two
+called "How to say it, in IPA" would be one question twice to a screen reader.
+
+**Most used.** A context after Emergency on the list gathers the buttons pressed most, from
+every context. The owner asked for it to learn, to be rearranged like the rest, to be kept
+sparse, to store more than any one view uses, to count by week, month, year and all time,
+to count one language or all of them, to show its statistics, and to reset only after a
+warning; all of that is `ui/usage.js`. Counts are by what was said, so one sentence pressed
+on three screens is one item, shown by the button last pressed and copied with its board's
+answers; each item keeps an all-time count and a count per day for a year, per listener
+language. The window and the scope live in the display record, so a reset cannot reset
+them, and the display section and the Most used section both merge into that record rather
+than writing their own copies of it. The counts go into the reader's backup and out with
+"Delete everything". Every other screen still keeps its order -- the grid's own contract
+says nothing reorders it -- so the learning stays on the one screen that is for it.
+
+**A header on every dialog.** The owner asked that the cross always sit in a floating header
+that names the dialog. `dialogHead` in `ui/dialog.js` is that header for the settings
+dialogs (with the light switch), the one-question dialogs (whose question is now the title),
+the confirmations, the check before travelling, the button editor, the drill and the quiz,
+held at the top while the body scrolls. The lightbox keeps its own floating pair and cross,
+which already are that. A settings section with nothing to offer on a device -- the voice
+list, with no voice -- is no longer drawn as an empty frame.
+
+**The studio's row popup, redrawn.** The owner found it plain. It opens with the row's own
+words as its header, their meaning and the section under them beside a dot of the section's
+colour, the two switches as rows of one group with a box that fills and ticks, the section's
+colours under their own caption, Edit text as the primary action, and the editor's fields
+one to a line inside the panel rather than in a box of their own.
+
+**Two fixes found on the way.** The language switcher offered no languages on a board that is
+not in the index -- a context of the reader's own, and now Most used -- because it looked the
+board up there; it offers every pair the list does. And the page's check that a board serves
+the pair looked for Most used in the index and would have refused it.
+
+**Twenty-six strings, and eighteen files' older ones.** Four research agents wrote the new
+keys into all fifty catalogues from `content/PROMPTS/usage-and-tap-strings.md`, and took the
+same decisions in every group: the mode named from each file's own Speak; the window a noun,
+because its options are also the counts table's headings; the spans the code counts, in
+numerals wherever a "last week" is the calendar's; "for the language" rather than "in" it,
+which reads as counting in it; and "the number of presses", because the corpus already spends
+each language's word for a counter on the taxi meter and for a count on the bill. Reading
+their files' neighbours, they listed defects in older keys, and a fix-up agent corrected all
+twelve items in eighteen files: the "I speak" half in Hindi, Urdu and Thai, which assumed a
+man or said "I"; a Speak button named, in Czech, Polish and Croatian, as no screen labels it;
+inserted language names that could not take the case or the article their frame needed, in
+Polish, Croatian, French, Italian, Kannada, Uzbek, Indonesian, Javanese, Khmer and Korean;
+eighteen French keys against the file's own punctuation rule; joiners in Nepali and Odia that
+their notes forbid; a Swahili slip; and a Malay title that was Indonesian. Klingon and Quenya
+fall back to English, as before.
+
+**A test that sat on a threshold.** "The divider is solved once per section" asserted that
+the even and the per-row divider land on the same auto face count for `es <- en`. The even one
+set 0.45 in eight faces -- `COMFORT` exactly -- and the rows this batch added took it to 0.44,
+so auto now prints the default Spanish sheet at 0.77 in ten, which is `COMFORT` doing its job.
+The test compares at the face count per-row needs now, where the divider's trade is type size
+alone: the even divider still fits there, at 0.44 against per-row's 0.61.
+
+## The whole browser suite in WebKit
+
+Every earlier batch ran WebKit on the smoke set and its own new specs. This one ran all 262
+specs in it, because WebKit is what every iPhone and the iOS app draw with: 250 passed and
+eleven failed, and each of the eleven fails the same way on the last pushed commit, so none
+came from this batch. Four of the failures were real:
+
+- **A full-width mark could never hang in WebKit.** The message screen hangs a `！` or `？`
+  after the last character where its ink stays inside the frame, and measured the ink with
+  canvas `actualBoundingBoxLeft` and `Right`, which WebKit reports as the advance box whenever
+  the ink lies inside it: a whole em of ink for every mark. An iPhone therefore set `救命！` at
+  150px as `救` over `命！`, left of the centre, where Chrome sets one line at 126. The ink is
+  read from pixels now, once per mark, face and language, with Chrome's numbers unchanged.
+- **The converse header at enlarged text**, in both engines: at 1.6x, which is what Android's
+  font-size setting does to a WebView, the pair was squeezed to nothing beside the brand and
+  the two controls and set a letter to a line, in a header 570px tall. The spill test had
+  skipped it because a box of no width looked hidden. The header wraps between its items now,
+  the controls as one item at the end of a line, and the test skips only what is not drawn.
+- **The gallery's lightbox on a short window**: WebKit sized the middle column from the card's
+  height before the row had given it one, 672px round a 531px sheet, and the right caret stood
+  147px off the paper. The column takes the card's measured width, which the pair and the
+  strip already did.
+- **Two Speak tests** patched a `speechSynthesis` that WebKit here does not have, so no Speak
+  button was drawn and both timed out. They use the whole-engine stand-in the owner's Speak
+  test already uses.
+
+The other seven are this host rather than the app. The four offline tests end in "WebKit
+encountered an internal error" on navigating after `setOffline(true)`, a Playwright WebKit
+limitation on Linux; the iOS app reads its files from its bundle and has no service worker to
+lean on. The tap budget measures 164ms at p95 against 100 in this WebKit build, the same before
+and after these changes, and passes in Chrome, the device it is written for. The hung-mark
+test still fails here because this host's WebKit falls back to a face that centres a Chinese
+`！`, as a Japanese face does, and a centred mark correctly cannot hang at that size. And
+WebKit's `Intl.DisplayNames` capitalises a Russian name standing alone (`Клингонский`), as
+CLDR prescribes for a heading, where Chrome's does not; the form is the nominative in both,
+which is what that test is about.
+
+On the committed code (bbc50431): the gate 11 of 11, unit 711 of 711, Chromium 261 of 262
+with one skipped, and WebKit 253 of 262 with one skipped -- the seven above, and "SVG and PDF
+put the same amount of ink", whose Latin face failed to load once under the whole suite's load
+and loaded in both of two runs of that spec alone. The Android and iOS apps are built from the
+pushed commit and recorded below.
