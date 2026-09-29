@@ -1304,8 +1304,12 @@ dialog.lightbox::backdrop { background: rgb(10 14 19 / 82%); }
   /* Three shrink-wrapped columns, centred as a group -- so each caret sits against
      the paper's edge rather than against the window's. With `minmax(0, 1fr)` in the
      middle the paper was centred inside a track far wider than itself, which left
-     the carets a hundred pixels out at the margins. */
-  display: grid; grid-template-columns: auto auto auto;
+     the carets a hundred pixels out at the margins.
+     The middle one is the paper's measured width once there is one: WebKit sizes an
+     `auto` column from the face's height before the row has given it one, so on a
+     short window the column was 672px round a 531px sheet and the right caret stood
+     147px off the paper. */
+  display: grid; grid-template-columns: auto var(--card-w, auto) auto;
   align-items: center; justify-content: center; column-gap: 0.4rem;
 }
 .lightbox-face { grid-column: 2; grid-row: 1; }
