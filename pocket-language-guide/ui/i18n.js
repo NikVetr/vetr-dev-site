@@ -272,7 +272,7 @@ export function setLanguageNames(rows) {
  * `quick.heading` on the page and again on the exported PDF, and both halves of
  * `studio.pair`. The remaining six are inserts into catalogue templates that were
  * translated to take the nominative and to carry the case themselves -- `На языке:
- * {language}`, `Jazykem {language} se mluví v`, `Kieltä {language} puhutaan` -- which
+ * {language}`, `Jazyk {language} se používá v`, `Kieltä {language} puhutaan` -- which
  * is why they read correctly for the fifty languages ICU names and read correctly
  * for these two only once the registry stops handing them a case form.
  *
