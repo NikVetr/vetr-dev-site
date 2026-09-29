@@ -20,15 +20,17 @@
 <!-- The owner's side. A header small enough that the grid is what the page is. -->
 <header class="board-header">
   <a class="brand board-brand" href="./"><img class="brand-mark" src="favicon.svg" alt="" width="20" height="20"><span data-i18n="nav.brand">Phraselet</span></a>
-  <div class="spacer"></div>
   <!-- Board title and the pair, as a statement of what is about to be shown to
        whom. Filled by `ui/conversation.js`. -->
   <p class="board-pair" id="board-pair"></p>
-  <!-- Find: every context's buttons, by what they say. The field opens across this
-       header, which is orientation only -- the bar under the grid has no room left. -->
-  <button type="button" id="board-search" class="site-menu board-search-open" hidden><svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path d="M10.5 4.5a6 6 0 1 1 0 12a6 6 0 1 1 0-12ZM15 15l5 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
-  <!-- Hidden until the page has wired it: pressed before then, it did nothing. -->
-  <button type="button" id="site-menu" class="site-menu" hidden><span class="board-menu-bars" aria-hidden="true"></span></button>
+  <!-- The two controls are one item, so a header that wraps cannot part them. -->
+  <div class="board-head-controls">
+    <!-- Find: every context's buttons, by what they say. The field opens across this
+         header, which is orientation only -- the bar under the grid has no room left. -->
+    <button type="button" id="board-search" class="site-menu board-search-open" hidden><svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path d="M10.5 4.5a6 6 0 1 1 0 12a6 6 0 1 1 0-12ZM15 15l5 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+    <!-- Hidden until the page has wired it: pressed before then, it did nothing. -->
+    <button type="button" id="site-menu" class="site-menu" hidden><span class="board-menu-bars" aria-hidden="true"></span></button>
+  </div>
 </header>
 
 <main class="board-main">

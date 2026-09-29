@@ -1143,7 +1143,9 @@ async function noSpill(/** @type {import('@playwright/test').Page} */ page) {
       + ' .board-grid-title, .board-title')) {
       const el = /** @type {HTMLElement} */ (n);
       const r = el.getBoundingClientRect();
-      if (r.width === 0) continue;
+      // Not drawn at all. A box squeezed to no width is drawn, and is the worst case:
+      // the pair once set a letter to a line at zero width, skipped as hidden.
+      if (!el.getClientRects().length) continue;
       // Past either edge of the viewport, or clipped inside its own box.
       if (r.right > innerWidth + 1 || r.left < -1) bad.push(`${named(el)} off-screen`);
       if (el.scrollWidth > el.clientWidth + 1) bad.push(`${named(el)} clipped`);
@@ -1182,6 +1184,9 @@ for (const [name, width, height, scale] of /** @type {[string,number,number,numb
       await page.goto(`/conversation.html?target=zh-Hans&source=en${at}`);
       await expect(page.locator('.board-cell').first()).toBeVisible();
       await noSpill(page);
+      // The header is orientation: a line more at enlarged text, never the screen.
+      const head = await page.locator('.board-header').boundingBox();
+      expect(head?.height ?? Infinity).toBeLessThan(height / 4);
     }
 
     await page.goto(`${BOARD}&replies=1`);

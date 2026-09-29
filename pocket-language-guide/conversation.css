@@ -66,26 +66,31 @@
   /* Quiet on purpose. The header is orientation, not a place to work, and every
      pixel it takes is a pixel off the buttons. */
   font-size: var(--fs--1);
-  /* **Wraps rather than clips at enlarged text.** At a 1.6x system text size the
-     pair ran off the right edge and read "Englis / Simpli / Chines" -- a flex item
-     will not shrink below its content unless it is told it may, and a long language
-     name has no break opportunity a browser will take on its own. Found by looking
-     at a screenshot at that setting, which is why §9.2 asks for one. The row itself
-     does not wrap: the pair may shrink and break inside its own box, and the bars at
-     the end stay on the row, where a menu control is looked for. */
-  flex-wrap: nowrap;
+  /* **Wraps between its items, never inside a word.** At a 1.6x system text size the
+     pair first ran off the right edge, and then, allowed to break anywhere, was
+     squeezed to nothing beside the brand and the two controls and set a letter to a
+     line -- "E / n / g / l / i / s / h" in a header 570px tall. So the row may wrap,
+     and the pair decides when: it takes the room the others leave and wraps between
+     its words there, and only when its floor does not fit beside them does it start
+     a line of its own, with the lens and the bars at its end. */
+  flex-wrap: wrap;
 }
 /* Capped in pixels, as the bar's buttons are: at 1.6x text the lens and the bars beside
    the pair pushed the bars off a 390px screen. 40px is still a whole tap. */
 .board-header .site-menu { flex: 0 0 auto; inline-size: min(2rem, 40px); block-size: min(2rem, 40px); }
-.board-pair { flex: 0 1 auto; text-align: end; }
+/* Wrapped onto a line without the pair, the controls still end the row. */
+.board-head-controls { flex: 0 0 auto; display: flex; gap: var(--space-2); margin-inline-start: auto; }
 /* The brand keeps its word; the pair is what gives way on a narrow screen. */
 .board-brand { flex: 0 0 auto; }
+/* The pair's floor is its longest word or 6em, whichever is wider: a short language
+   name, or two Chinese ones, which have no word to hold the box open. */
 .board-pair {
+  flex: 1 1 8em;
+  min-inline-size: min-content;
   margin: 0;
   color: var(--muted);
-  min-inline-size: 0;
-  overflow-wrap: anywhere;
+  text-align: end;
+  overflow-wrap: break-word;
 }
 
 .board-main {

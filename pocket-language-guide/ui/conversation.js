@@ -864,7 +864,7 @@ function wireSearch({ owner, entries, pick, back }) {
     const all = await entries();
     said = status.textContent ?? '';
     close = openSearch({
-      bar: /** @type {HTMLElement} */ (open.parentElement),
+      bar: /** @type {HTMLElement} */ (open.closest('.board-header')),
       lang: owner,
       placeholder: t('search.open'),
       closeLabel: t('search.close'),
