@@ -82,7 +82,7 @@
   "format.arrangement.one-row": "Satu baris",
   "format.arrangement.stacked": "Bertumpuk",
   "format.arrangement.two-column": "Berdampingan",
-  "format.arrangementTitle.mixed": "Frasa berdampingan, dan setiap tabel acuan tetap memakai kisinya sendiri",
+  "format.arrangementTitle.mixed": "Frasa berdampingan, dan setiap jadual rujukan mengekalkan gridnya sendiri",
   "format.arrangementTitle.one-row": "Semuanya dalam satu baris",
   "format.arrangementTitle.stacked": "Satu kolom isi per baris",
   "format.arrangementTitle.two-column": "Frasa di sebelah kiri, ertinya di sebelah kanan",

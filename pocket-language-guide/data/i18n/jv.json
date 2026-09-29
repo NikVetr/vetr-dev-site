@@ -659,7 +659,7 @@
   "check.sayIt": "Cara ngucapaken",
   "check.sayItDetail": "Cara ngucapaken kanggé sedaya {total} ukara.",
   "check.sayItGaps": "Cara ngucapaken kanggé {count} saking {total} ukara; sanèsipun namung katingal tembungipun.",
-  "check.voice": "Swanten kanggé {language}",
+  "check.voice": "Swanten kanggé basa {language}",
   "check.voiceHere": "Wonten pirantos menika: saged ngendika tanpa jaringan.",
   "check.voiceOnline": "Namung kanthi jaringan. Tembung tetep katingal tanpa jaringan.",
   "check.voiceUnknown": "Kepanggih, nanging pirantos menika mboten nyebataken menawi mlampah tanpa jaringan. Cobi Waosaken sapisan nalika jaringan dipunpejahi.",

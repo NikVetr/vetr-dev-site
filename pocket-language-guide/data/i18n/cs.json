@@ -662,7 +662,7 @@
   "check.voice": "Hlas pro jazyk {language}",
   "check.voiceHere": "V tomto zařízení: mluví bez připojení.",
   "check.voiceOnline": "Jen s připojením. Slova se ale zobrazí i bez něj.",
-  "check.voiceUnknown": "Nalezeno, ale toto zařízení neříká, jestli funguje bez připojení. Zkuste jednou stisknout Mluvit s vypnutým připojením.",
+  "check.voiceUnknown": "Nalezeno, ale toto zařízení neříká, jestli funguje bez připojení. Zkuste jednou stisknout Vyslovit s vypnutým připojením.",
   "check.voiceNone": "Žádný na tomto zařízení. Slova se i tak zobrazí; chcete-li je slyšet, přidejte hlas pro tento jazyk v nastavení řeči telefonu.",
   "check.saved": "Uloženo na tomto zařízení",
   "check.savedDetail": "Všechny soubory jsou tu uložené, k použití bez připojení: {count}.",

@@ -65,3 +65,32 @@ Per language: any key left out and why, any string reworded, and every choice a 
 reviewer might question. Write it to `tmp/agent-notes/strings-ah-<group>.md` after each
 language, not at the end.
 
+## Found while writing these: existing keys to fix
+
+The agents that wrote this batch read their files' neighbouring keys and found these
+wrong. Check each against the file's own words and rules, fix it in place (one line
+each, nothing re-serialised), and record old and new values in
+`tmp/agent-notes/strings-ah-fixes.md`. A finding is a lead, not an instruction: where
+it does not hold up, leave the key and say why.
+
+- **hi, ur `gallery.wantLabel`** ("…and I want to speak") is masculine (चाहता हूँ /
+  چاہتا ہوں), so it assumes a male reader; find a form that does not mark the reader's
+  gender, as `interface-strings.md` requires. ur also drops the leading ellipsis.
+- **cs, pl, hr `check.voiceUnknown`** tells the reader to press *Mluvit* / *Mów* /
+  *Govori*, but the Speak button (`board.speak`) says *Vyslovit* / *Odtwórz* / *Izgovori*:
+  name the button as it is labelled.
+- **pl `check.voice`** produces *dla języka angielski*; **hr `check.writing`** produces
+  *jezika engleski*; **fr, it `check.voice`** produce *pour anglais* / *per inglese*
+  without the article. Each file's own rule for an inserted language name (a fixed noun
+  carrying the case, or the colon form) says how to fix them.
+- **fr `check.*`** use a plain space before ":" and straight apostrophes, against the
+  file's rule of a non-breaking space and curly apostrophes.
+- **ne `check.voiceUnknown`** holds a zero-width joiner and **or `signal.lede`,
+  `check.noWorker`, `boards.transport.transitTitle`** zero-width non-joiners, though each
+  file's note says it uses none: remove them where the word is the same without.
+- **kn `check.voice`** attaches its suffix to the inserted name (`{language} ಗಾಗಿ`) rather
+  than to the word for "language", against the file's own rule.
+- **sw `signal.lede`** has *mgusa*, probably a slip for *mguso* ("a touch").
+- **uz**: the file's `{language} tilida` frame produces *inglizcha tilida* where Uzbek says
+  *ingliz tilida*, because ICU's name ends in *-cha*; say whether a frame fixes it, and fix
+  it only where one does without breaking the other keys.

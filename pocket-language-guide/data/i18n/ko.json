@@ -648,7 +648,7 @@
   "check.warn": "작동하지만 참고 사항 있음",
   "check.fail": "실패",
   "check.notTried": "시도하지 않음: 표현이 로드되지 않았어요.",
-  "check.phrases": "{listener}와 {owner}의 표현",
+  "check.phrases": "{listener}·{owner} 표현",
   "check.phrasesDetail": "두 언어 모두 {count}개예요.",
   "check.contexts": "모든 주제가 열려요",
   "check.contextsDetail": "주제 {contexts}개, 버튼 {buttons}개, 모두 있어요.",
