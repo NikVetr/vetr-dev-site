@@ -154,3 +154,10 @@ Same rules; the record goes to `tmp/agent-notes/strings-ah-fixes-3.md`.
    file's choice and say why correctly. And if the corpus pass changes the Malay section
    titles, `boards.lodging.laundry*` and `quiz.interest.transit.hint` follow them.
    The audit's record is `tmp/agent-notes/strings-ms-audit.md`.
+
+## A fourth list
+
+- cs `quick.heading` and `gallery.thumbAlt` have the shape the third list fixed in
+  `gallery.spokenIn`: *průvodce jazykem {language}*, an instrumental head noun before
+  ICU's nominative name ("průvodce jazykem angličtina"). Give them the file's corrected
+  frame. The record goes to `tmp/agent-notes/strings-ah-fixes-4.md`.
