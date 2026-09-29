@@ -95,24 +95,24 @@ body-parts.hand,кисть,рука,kistʼ,kʲˈistʲ,,2,ru-agent-v1;ipa=espeak
 body-parts.knee,колено,,koleno,kʌɭʲˈenʌ,,2,ru-agent-v1;ipa=espeak
 body-parts.ankle,щиколотка,голеностоп,shchikolotka,ɕˈikʌɭʌtka,,2,ru-agent-v1;ipa=espeak
 body-parts.skin,кожа,,kozha,kˈoʒa,,2,ru-agent-v1;ipa=espeak
-lost-rescue.i-lost-my-passport,У меня пропал паспорт.,Я потерял паспорт.,U menya propal pasport.,ˈu mʲinʲˈɑ prʌpˈɑɭ pˈɑspʌrt,my passport has gone,2,ru-agent-v1;ipa=espeak
+lost-rescue.i-lost-my-passport,У меня пропал паспорт.,,U menya propal pasport.,ˈu mʲinʲˈɑ prʌpˈɑɭ pˈɑspʌrt,my passport has gone,2,ru-agent-v1;fix=speaker-variants.md cleanup (a gender form parked in text_alt is cleared: the text is already neutral and a variant row cannot vary text_alt alone);row-corrections-v2;ipa=espeak
 lost-rescue.i-lost-my-phone,У меня пропал телефон.,,U menya propal telefon.,ˈu mʲinʲˈɑ prʌpˈɑɭ tʲiɭʲifˈon,,2,ru-agent-v1;ipa=espeak
 lost-rescue.please-call-the-police,"Вызовите полицию, пожалуйста.",,"Vyzovite politsiyu, pozhaluysta.","vˈɨzʌvʲitʲi pʌɭʲˈitsɨju, pʌʒˈɑɭujsta",,2,ru-agent-v1;ipa=espeak
 lost-rescue.we-are-here,Мы здесь.,,My zdesʼ.,mˈɨ ʑdʲˈesʲ,,2,ru-agent-v1;ipa=espeak
 lost-rescue.please-look-at-my-location-pin,Посмотрите мою метку на карте.,,Posmotrite moyu metku na karte.,pʌsmˈotrʲitʲi mˈoju mʲˈetku nə kˈɑrtʲi,,2,ru-agent-v1;ipa=espeak
 lost-rescue.i-cannot-walk,Я не могу идти.,,Ya ne mogu idti.,ˈja nʲe mʌɡˌu ɪtʲtʲˈi,,2,ru-agent-v1;ipa=espeak
-lost-rescue.i-sprained-my-ankle,У меня растяжение ноги.,Я подвернул ногу.,U menya rastyazheniye nogi.,ˈu mʲinʲˈɑ rʌsʲtʲaʒˈɛnʲijɪ nˈoɡʲɪ,,2,ru-agent-v1;ipa=espeak
+lost-rescue.i-sprained-my-ankle,У меня растяжение ноги.,,U menya rastyazheniye nogi.,ˈu mʲinʲˈɑ rʌsʲtʲaʒˈɛnʲijɪ nˈoɡʲɪ,,2,ru-agent-v1;fix=speaker-variants.md cleanup (a gender form parked in text_alt is cleared: the text is already neutral and a variant row cannot vary text_alt alone);row-corrections-v2;ipa=espeak
 lost-rescue.please-contact-rescue,Свяжитесь со спасателями.,,Svyazhitesʼ so spasatelyami.,svʲaʒˈɨtʲisʲ sˈo spʌsatʲˈeɭʲʌmʲɪ,,2,ru-agent-v1;ipa=espeak
 lost-rescue.my-companion-is-missing,Пропал мой спутник.,,Propal moy sputnik.,prʌpˈɑɭ mˈoj spˈutʲnʲik,,2,ru-agent-v1;ipa=espeak
 lost-rescue.please-look-at-my-current-location,"Посмотрите, где я нахожусь.",,"Posmotrite, gde ya nakhozhusʼ.","pʌsmˈotrʲitʲi, ɡdʲˈe ˈja nʌxʌʒˈusʲ",,2,ru-agent-v1;ipa=espeak
 lost-rescue.my-child-is-missing,Пропал мой ребёнок.,,Propal moy rebënok.,prʌpˈɑɭ mˈoj rʲibʲˈɵnʌk,,2,ru-agent-v1;ipa=espeak
 lost-rescue.i-do-not-know-where-i-am,"Я не знаю, где я.",,"Ya ne znayu, gde ya.","ˈja nʲe znˈɑju, ɡdʲˈe ˈja",,2,ru-agent-v1;ipa=espeak
-lost-rescue.my-friend-is-hurt,Мой друг ранен.,Моя подруга ранена.,Moy drug ranen.,mˈoj drˈuk rˈɑnʲin,,2,ru-agent-v1;ipa=espeak
+lost-rescue.my-friend-is-hurt,Мой друг ранен.,,Moy drug ranen.,mˈoj drˈuk rˈɑnʲin,,2,ru-agent-v1;fix=speaker-variants.md third-party gender (no companion axis: Russian has no sex-neutral word for a friend (друг or подруга) so the masculine stays and the doubled form goes);row-corrections-v2;ipa=espeak
 lost-rescue.i-lost-my-wallet,У меня пропал кошелёк.,,U menya propal koshelëk.,ˈu mʲinʲˈɑ prʌpˈɑɭ kʌʃɨɭʲˈɵk,,2,ru-agent-v1;ipa=espeak
 lost-rescue.i-lost-my-bag,У меня пропала сумка.,,U menya propala sumka.,ˈu mʲinʲˈɑ prʌpˈɑɭa sˈumka,,2,ru-agent-v1;ipa=espeak
 lost-rescue.where-is-lost-and-found,Где бюро находок?,Где стол находок?,Gde byuro nakhodok?,ɡdʲˈe bʲʉrˈo naxˈodʌk,,2,ru-agent-v1;ipa=espeak
 lost-rescue.i-cannot-find-my-hotel,Я не могу найти свой отель.,,Ya ne mogu nayti svoy otelʼ.,ˈja nʲe mʌɡˌu najtʲˈi svˈoj ʌtʲˈeɭ,,2,ru-agent-v1;ipa=espeak
-lost-rescue.i-left-it-on-the-train,Это осталось в поезде.,Я забыл это в поезде.,Eto ostalosʼ v poyezde.,ˈɛtʌ ʌstˈɑɭʌsʲ f pˈojiʑdʲi,,2,ru-agent-v1;ipa=espeak
+lost-rescue.i-left-it-on-the-train,Это осталось в поезде.,,Eto ostalosʼ v poyezde.,ˈɛtʌ ʌstˈɑɭʌsʲ f pˈojiʑdʲi,,2,ru-agent-v1;fix=speaker-variants.md cleanup (a gender form parked in text_alt is cleared: the text is already neutral and a variant row cannot vary text_alt alone);row-corrections-v2;ipa=espeak
 lost-rescue.i-cannot-get-down,Я не могу спуститься.,,Ya ne mogu spustitʼsya.,ˈja nʲe mʌɡˌu spusʲtʲˈitʲsʲʌ,,2,ru-agent-v1;ipa=espeak
 police-consulate.where-is-the-police-station,Где отделение полиции?,,Gde otdeleniye politsii?,ɡdʲˈe ʌdʲdʲiɭʲˈenʲijɪ pʌɭʲˈitsɨɪ,,2,ru-agent-v1;ipa=espeak
 police-consulate.i-want-to-report-a-theft,Я хочу заявить о краже.,,Ya khochu zayavitʼ o krazhe.,ˈja xʌtʃʲˈu zʌjavʲˈitʲ ˈo krˈɑʒɨ,,2,ru-agent-v1;ipa=espeak

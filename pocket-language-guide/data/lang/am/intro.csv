@@ -22,7 +22,7 @@ about-me.i-am-a-doctor,ሐኪም ነኝ,,hākīm neny,hakim nəɲ,,2,am-agent-v1
 about-me.i-am-a-nurse,ነርስ ነኝ,,ners neny,nərs nəɲ,,2,am-agent-v1;ipa=bgn-am
 about-me.i-am-an-engineer,መሀንዲስ ነኝ,,mehāndīs neny,məhandis nəɲ,,2,am-agent-v1;ipa=bgn-am
 about-me.i-work-in-an-office,ቢሮ ውስጥ እሰራለሁ,,biro wistʼ iserallehu,bɨro wɨstʼ ʔɨsəralːəhu,,2,am-agent-v1;ipa=bgn-am
-about-me.i-have-my-own-business,የግል ስራ አለኝ,,yegil sira āllegn,jəɡɨl sɨra ʔalːəɡn,,2,am-agent-v1;ipa=bgn-am
+about-me.i-have-my-own-business,የግል ስራ አለኝ,,yegil sira ālleny,jəɡɨl sɨra ʔalːəɲ,,2,am-agent-v1;fix=BGN/PCGN 1967 Amharic row 15 ኝ ny / nyi and ኛ nya (gn was read as g+n);fix=FSI Amharic Basic Course (1964) alleñ;row-corrections-v2;ipa=bgn-am
 family-intros.this-is-my-mother,ዪህች እናቴ ናት,,yīhich inatē nat,jihɨtʃ ʔɨnate nat,,2,am-agent-v1;ipa=bgn-am
 family-intros.this-is-my-father,ይህ አባቴ ነው,,yih ābatē new,jɨh ʔabate nəw,,2,am-agent-v1;ipa=bgn-am
 family-intros.this-is-my-brother,ይህ ወንድሜ ነው,,yih wendmē new,jɨh wəndme nəw,,2,am-agent-v1;ipa=bgn-am

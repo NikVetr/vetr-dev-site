@@ -3,7 +3,7 @@ introductions.my-name-is,Меня зовут {}.,,Menya zovut {}.,mʲinʲˈɑ z�
 introductions.nice-to-meet-you,Очень приятно.,,Ochenʼ priyatno.,ˈotʃʲin prʲiˈjatnʌ,,2,ru-agent-v1;ipa=espeak
 introductions.what-is-your-name,Как вас зовут?,,Kak vas zovut?,kˈɑk vˈɑs zʌvˈut,,2,ru-agent-v1;ipa=espeak
 introductions.we-are-traveling-together,Мы путешествуем вместе.,,My puteshestvuyem vmeste.,mˈɨ putʲiʃˈɛstvujim vmʲˈesʲtʲi,,2,ru-agent-v1;ipa=espeak
-introductions.this-is-my-friend,Это мой друг.,Это моя подруга.,Eto moy drug.,ˈɛtʌ mˈoj drˈuk,,2,ru-agent-v1;ipa=espeak
+introductions.this-is-my-friend,Это мой друг.,,Eto moy drug.,ˈɛtʌ mˈoj drˈuk,,2,ru-agent-v1;fix=speaker-variants.md third-party gender (no companion axis: Russian has no sex-neutral word for a friend (друг or подруга) so the masculine stays and the doubled form goes);row-corrections-v2;ipa=espeak
 introductions.i-am-from,Моя страна — {}.,,Moya strana — {}.,mˈoja stranˈɑ {},"'My country is {}'; predicate nominative (zero-copula), so the slot needs no case -- unlike из (+genitive), which из России shows and Я из Россия breaks",2,ru-agent-v1;rewritten-for-fill-in=iz governs the genitive; predicate nominative with an em dash needs no case (matches the pack's own medical-conditions.my-blood-type-is 'Moya gruppa krovi -- {}.' row);ipa=espeak
 introductions.where-are-you-from,Откуда вы?,,Otkuda vy?,ʌtkˈuda vˈɨ,,2,ru-agent-v1;ipa=espeak
 introductions.how-are-you,Как дела?,,Kak dela?,kˈɑk dʲˈeɭa,,2,ru-agent-v1;ipa=espeak
@@ -27,5 +27,5 @@ family-intros.this-is-my-mother,Это моя мама.,,Eto moya mama.,ˈɛtʌ 
 family-intros.this-is-my-father,Это мой папа.,,Eto moy papa.,ˈɛtʌ mˈoj pˈɑpa,,2,ru-agent-v1;ipa=espeak
 family-intros.this-is-my-brother,Это мой брат.,,Eto moy brat.,ˈɛtʌ mˈoj brˈɑt,,2,ru-agent-v1;ipa=espeak
 family-intros.this-is-my-sister,Это моя сестра.,,Eto moya sestra.,ˈɛtʌ mˈoja sʲistrˈɑ,,2,ru-agent-v1;ipa=espeak
-family-intros.this-is-my-partner,Это мой партнёр.,Это моя партнёрша.,Eto moy partnër.,ˈɛtʌ mˈoj partʲnʲˈɵr,"male partner; a female partner is Это моя партнёрша. -- the neutral word for an unmarried life partner, not a business partner",2,ru-agent-v1;ipa=espeak
-family-intros.this-is-my-colleague,Это мой коллега.,Это моя коллега.,Eto moy kollega.,ˈɛtʌ mˈoj kʌɭɭʲˈeɡa,коллега is common-gender; only the possessive мой/моя changes for a female colleague,2,ru-agent-v1;ipa=espeak
+family-intros.this-is-my-partner,Это мой партнёр.,,Eto moy partnër.,ˈɛtʌ mˈoj partʲnʲˈɵr,"the neutral word for an unmarried life partner, not a business partner",2,ru-agent-v1;fix=speaker-variants.md third-party gender (no companion axis: Russian has no sex-neutral word for a partner (партнёр or партнёрша) so the masculine stays and the doubled form goes);row-corrections-v2;ipa=espeak
+family-intros.this-is-my-colleague,Это коллега.,,Eto kollega.,ˈɛtʌ kʌɭɭʲˈeɡa,"this is a colleague -- коллега is common-gender, so with no possessive nothing in the sentence takes the colleague's sex",2,ru-agent-v1;fix=ru.wiktionary коллега rev 14390326 (род=общ);fix=ru.wikipedia Общий род rev 152310706 (согласуемые в зависимости от пола обозначаемого лица);fix=speaker-variants.md third-party gender (a grammatically fixed wording: the possessive dropped);row-corrections-v2;ipa=espeak

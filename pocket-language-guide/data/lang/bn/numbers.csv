@@ -84,25 +84,25 @@ numbers-money.shekel,শেকেল,,śekela,ʃˈekel,,2,bn-gloss-v1;cldr;ipa=e
 numbers-money.shekel-symbol,শেকেলের চিহ্ন,,śekelera cihna,ʃˈekelˌeɾ tʃˈihnɔ,,2,bn-gloss-v1;cldr;ipa=espeak
 numbers-money.rial,রিয়াল,,riẏāla,ɾˈial,,2,bn-gloss-v1;cldr;ipa=espeak
 numbers-money.toman,১০ রিয়াল,,10 riẏāla,dˈɔʃ ɾˈial,,2,bn-gloss-v1;cldr;ipa=espeak
-numbers-money.zloty,জ্লোটি,,,ɟlˈoʈi,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
-numbers-money.zloty-symbol,জ্লোটি (প্রতীক),,,ɟlˈoʈi,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
+numbers-money.zloty,জ্লোটি,,jloṭi,ɟlˈoʈi,,2,gloss-only;scoped-away;name of the currency in this language;fix=romanisation filled by the pack's romaniser tmp/bn/iso15919.py (the gloss sweep wrote only text);row-corrections-v2;ipa=espeak
+numbers-money.zloty-symbol,জ্লোটি (প্রতীক),,jloṭi (pratīka),ɟlˈoʈi,,2,gloss-only;scoped-away;name of the currency in this language;fix=romanisation filled by the pack's romaniser tmp/bn/iso15919.py (the gloss sweep wrote only text);row-corrections-v2;ipa=espeak
 numbers-money.hryvnia,হ্রিভনিয়া,,hribhaniẏā,hɾˈibʰɔnˌia,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
-numbers-money.hryvnia-symbol,হ্রিভনিয়া (প্রতীক),,hribhaniẏā,hɾˈibʰɔnˌia,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
-numbers-money.leu,লেয়ু,,,lˈeu,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
-numbers-money.leu-symbol,লেয়ু (প্রতীক),,,lˈeu,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
-numbers-money.koruna,কোরুনা,,,kˈoɾunˌa,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
-numbers-money.koruna-symbol,কোরুনা (প্রতীক),,,kˈoɾunˌa,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
-numbers-money.krona,ক্রোনা,,,kɾˈona,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
-numbers-money.krona-symbol,ক্রোনা (প্রতীক),,,kɾˈona,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
-numbers-money.ringgit,রিঙ্গিত,,,ɾˈiŋɡitˌo,,2,gloss-only;scoped-away;name of the currency in this language;mechanical-transliteration;flagged-for-review;ipa=espeak
-numbers-money.ringgit-symbol,রিঙ্গিত (প্রতীক),,,ɾˈiŋɡitˌo,,2,gloss-only;scoped-away;name of the currency in this language;mechanical-transliteration;flagged-for-review;ipa=espeak
-numbers-money.nepali-rupee,নেপালি রুপি,,,nˈepalˌi ɾˈupi,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
-numbers-money.nepali-rupee-symbol,নেপালি রুপি (প্রতীক),,,nˈepalˌi ɾˈupi,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
-numbers-money.birr,বির,,,bˈiɾ,,2,gloss-only;scoped-away;name of the currency in this language;ipa=espeak
-numbers-money.naira,নাইজেরিয়ান নায়রা,,,nˈaiɟˌeɾiˌan nˈajɔɾˌa,,2,naira-gloss-v1;cldr;ipa=espeak
-numbers-money.naira-symbol,নাইজেরিয়ান নায়রা (প্রতীক),,,nˈaiɟˌeɾiˌan nˈajɔɾˌa,,2,naira-gloss-v1;cldr;ipa=espeak
-numbers-money.riel,রিয়েল,,,ɾˈiel,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
-numbers-money.riel-symbol,রিয়েল (প্রতীক),,,ɾˈiel,,2,gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.hryvnia-symbol,হ্রিভনিয়া (প্রতীক),,hribhaniẏā (pratīka),hɾˈibʰɔnˌia,,2,gloss-only;scoped-away;name of the currency in this language;fix=ISO-15919 by the pack's romaniser tmp/bn/iso15919.py (the text's (প্রতীক) was missing);row-corrections-v2;ipa=espeak
+numbers-money.leu,লেয়ু,,leẏu,lˈeu,,2,gloss-only;scoped-away;name of the currency in this language;fix=romanisation filled by the pack's romaniser tmp/bn/iso15919.py (the gloss sweep wrote only text);row-corrections-v2;ipa=espeak
+numbers-money.leu-symbol,লেয়ু (প্রতীক),,leẏu (pratīka),lˈeu,,2,gloss-only;scoped-away;name of the currency in this language;fix=romanisation filled by the pack's romaniser tmp/bn/iso15919.py (the gloss sweep wrote only text);row-corrections-v2;ipa=espeak
+numbers-money.koruna,কোরুনা,,korunā,kˈoɾunˌa,,2,gloss-only;scoped-away;name of the currency in this language;fix=romanisation filled by the pack's romaniser tmp/bn/iso15919.py (the gloss sweep wrote only text);row-corrections-v2;ipa=espeak
+numbers-money.koruna-symbol,কোরুনা (প্রতীক),,korunā (pratīka),kˈoɾunˌa,,2,gloss-only;scoped-away;name of the currency in this language;fix=romanisation filled by the pack's romaniser tmp/bn/iso15919.py (the gloss sweep wrote only text);row-corrections-v2;ipa=espeak
+numbers-money.krona,ক্রোনা,,kronā,kɾˈona,,2,gloss-only;scoped-away;name of the currency in this language;fix=romanisation filled by the pack's romaniser tmp/bn/iso15919.py (the gloss sweep wrote only text);row-corrections-v2;ipa=espeak
+numbers-money.krona-symbol,ক্রোনা (প্রতীক),,kronā (pratīka),kɾˈona,,2,gloss-only;scoped-away;name of the currency in this language;fix=romanisation filled by the pack's romaniser tmp/bn/iso15919.py (the gloss sweep wrote only text);row-corrections-v2;ipa=espeak
+numbers-money.ringgit,রিঙ্গিত,,riṅgita,ɾˈiŋɡitˌo,,2,gloss-only;scoped-away;name of the currency in this language;mechanical-transliteration;flagged-for-review;fix=romanisation filled by the pack's romaniser tmp/bn/iso15919.py (the gloss sweep wrote only text);row-corrections-v2;ipa=espeak
+numbers-money.ringgit-symbol,রিঙ্গিত (প্রতীক),,riṅgita (pratīka),ɾˈiŋɡitˌo,,2,gloss-only;scoped-away;name of the currency in this language;mechanical-transliteration;flagged-for-review;fix=romanisation filled by the pack's romaniser tmp/bn/iso15919.py (the gloss sweep wrote only text);row-corrections-v2;ipa=espeak
+numbers-money.nepali-rupee,নেপালি রুপি,,nepāli rupi,nˈepalˌi ɾˈupi,,2,gloss-only;scoped-away;name of the currency in this language;fix=romanisation filled by the pack's romaniser tmp/bn/iso15919.py (the gloss sweep wrote only text);row-corrections-v2;ipa=espeak
+numbers-money.nepali-rupee-symbol,নেপালি রুপি (প্রতীক),,nepāli rupi (pratīka),nˈepalˌi ɾˈupi,,2,gloss-only;scoped-away;name of the currency in this language;fix=romanisation filled by the pack's romaniser tmp/bn/iso15919.py (the gloss sweep wrote only text);row-corrections-v2;ipa=espeak
+numbers-money.birr,বির,,bira,bˈiɾ,,2,gloss-only;scoped-away;name of the currency in this language;fix=romanisation filled by the pack's romaniser tmp/bn/iso15919.py (the gloss sweep wrote only text);row-corrections-v2;ipa=espeak
+numbers-money.naira,নাইজেরিয়ান নায়রা,,nāijeriẏāna nāẏarā,nˈaiɟˌeɾiˌan nˈajɔɾˌa,,2,naira-gloss-v1;cldr;fix=romanisation filled by the pack's romaniser tmp/bn/iso15919.py (the gloss sweep wrote only text);row-corrections-v2;ipa=espeak
+numbers-money.naira-symbol,নাইজেরিয়ান নায়রা (প্রতীক),,nāijeriẏāna nāẏarā (pratīka),nˈaiɟˌeɾiˌan nˈajɔɾˌa,,2,naira-gloss-v1;cldr;fix=romanisation filled by the pack's romaniser tmp/bn/iso15919.py (the gloss sweep wrote only text);row-corrections-v2;ipa=espeak
+numbers-money.riel,রিয়েল,,riẏela,ɾˈiel,,2,gloss-only;scoped-away;name of the currency in this language;cldr;fix=romanisation filled by the pack's romaniser tmp/bn/iso15919.py (the gloss sweep wrote only text);row-corrections-v2;ipa=espeak
+numbers-money.riel-symbol,রিয়েল (প্রতীক),,riẏela (pratīka),ɾˈiel,,2,gloss-only;scoped-away;name of the currency in this language;cldr;fix=romanisation filled by the pack's romaniser tmp/bn/iso15919.py (the gloss sweep wrote only text);row-corrections-v2;ipa=espeak
 numbers-money.taka,টাকা,,ṭākā,ʈˈaka,the currency of Bangladesh -- and the word West Bengal says for the rupee,2,Bangladesh Bank (bb.org.bd);cldr;ipa=espeak
 numbers-money.taka-symbol,৳,Tk,ṭākā,,the symbol on a price tag,2,Bangladesh Bank (bb.org.bd);cldr
 numbers-money.dram,দ্রাম,,drāma,dɾˈam,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
@@ -113,4 +113,4 @@ numbers-money.kip,কিপ,,kipa,kˈip,,2,currency-gap-v1;gloss-only;scoped-awa
 numbers-money.kip-symbol,কিপ (প্রতীক),,kipa (pratīka),kˈip,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
 numbers-money.pakistani-rupee,পাকিস্তানি রুপি,,pākistāni rupi,pˈakistˌani ɾˈupi,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
 numbers-money.pakistani-rupee-symbol,পাকিস্তানি রুপি (প্রতীক),,pākistāni rupi (pratīka),pˈakistˌani ɾˈupi,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
-numbers-money.som,সোম,,sōma,ʃˈom,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;ipa=espeak
+numbers-money.som,সোম,,soma,ʃˈom,,2,currency-gap-v1;gloss-only;scoped-away;name of the currency in this language;cldr;fix=ISO-15919 o for ও by the pack's romaniser tmp/bn/iso15919.py;row-corrections-v2;ipa=espeak

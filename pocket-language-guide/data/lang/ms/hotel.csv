@@ -26,7 +26,7 @@ hotel-requests.another-towel-please,Minta tuala lagi,,mˈintə tuˈalə lˈaɡi,
 hotel-requests.what-time-is-check-out,Check-out jam berapa?,,tʃˈɛtʃʔoot dʒˈam bərˈapə,,2,ms-agent-v1;ipa=espeak
 hotel-requests.can-i-check-in-early,Boleh early check-in?,Boleh check-in lebih awal?,bˈoleh ˈɛarlj tʃˈɛtʃʔin,,2,ms-agent-v1;ipa=espeak
 hotel-requests.another-night,Boleh tambah satu malam?,,bˈoleh tˈambah sˈatu mˈalam,,2,ms-agent-v1;ipa=espeak
-hotel-requests.is-there-a-safe,Ada safe deposit box?,Ada peti besi?,ˈadə sˈafe dəpˈoset bˈoks,,2,ms-agent-v1;fix=DBP peti besi;row-corrections-v1;ipa=espeak
+hotel-requests.is-there-a-safe,Ada peti besi?,,ˈadə pˈəti bˈəsi,,2,ms-agent-v1;fix=DBP peti besi;row-corrections-v1;fix=KIMD safe (n) peti besi;row-corrections-v2;ipa=espeak
 hotel-requests.another-blanket,Minta selimut lagi,,mˈintə səlˈimot lˈaɡi,,2,ms-agent-v1;ipa=espeak
 hotel-requests.wake-up-call,Tolong bangunkan saya jam {},,tˈoloŋ baŋˈunkan sˈajə dʒˈam {},,2,ms-agent-v1;ipa=espeak
 room-problems.there-is-a-problem-with-the-room,Ada masalah dengan biliknya,,ˈadə masˈalah dˈəŋan bilˈekɲə,,2,ms-agent-v1;ipa=espeak

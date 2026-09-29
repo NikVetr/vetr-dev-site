@@ -127,7 +127,7 @@ air-travel.my-luggage-did-not-arrive,Kayana bai zo ba,,kajana bai zo ba,reuses k
 air-travel.i-would-like-a-window-seat,Ina son wurin zama kusa da taga,,ina son wurin zama kusa da taɡa,seat near the window; taga reused from taxi.may-i-open-the-window,2,ha-agent-v1;in-pack-neighbour=taxi.may-i-open-the-window;ipa=ha-g2p
 air-travel.i-would-like-an-aisle-seat,Ina son wurin zama kusa da hanya,,ina son wurin zama kusa da hanja,"seat near the aisle/path, parallel to the window-seat row",2,ha-agent-v1;ipa=ha-g2p
 hitchhiking.can-you-give-me-a-ride,Za ka iya ɗauke ni?,Za ki iya ɗauke ni?,za ka ija ɗauke ni,ki to a woman driver,2,ha-agent-v1;ipa=ha-g2p
-hitchhiking.where-are-you-going,Ina za ka?,Ina za ki?,ina za ka,ki to a woman driver,2,ha-agent-v1;ipa=ha-g2p
+hitchhiking.where-are-you-going,Ina za a?,,ina za a,"where is one to go? -- Bargery's impersonal a after za, in place of ka or ki",2,ha-agent-v1;fix=Bargery a (impers. pron.) II.1 used after za without a verb: ina za a? where is one to go?;kai-ke-avoided;row-corrections-v2;ipa=ha-g2p
 hitchhiking.i-only-need-to-go-to-the-next-town,Ina bukatar zuwa gari na gaba kawai,,ina bukatar zuwa ɡari na ɡaba kawai,,2,ha-agent-v1;ipa=ha-g2p
 hitchhiking.is-there-room-for-two,Akwai wuri don mutum biyu?,,akwai wuri don mutum biju,,2,ha-agent-v1;ipa=ha-g2p
 hitchhiking.i-can-pay-for-fuel,Zan iya biyan man fetur,,zan ija bijan man fetur,"man fetur = petrol, the word Hausa speakers use at the pump",2,ha-agent-v1;src=Newman A Hausa-English Dictionary 2007 fetur;ipa=ha-g2p

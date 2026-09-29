@@ -31,7 +31,7 @@ taxi.we-need-the-east-gate-not-the-south-gate,"Gerbang Timur, bukan Gerbang Sela
 taxi.please-stop-here,Tolong berhenti di sini,,tˈoloŋ bərhˈənti di sˈini,,2,ms-agent-v1;ipa=espeak
 taxi.can-you-wait-for-me-here,Boleh tunggu saya di sini?,,bˈoleh tˈuŋɡu sˈajə di sˈini,,2,ms-agent-v1;ipa=espeak
 taxi.we-need-to-catch-the-high-speed-train,Kami harus naik keretapi laju,,kˈami hˈaros nˈaɪʔ kərətˈapi lˈadʒu,,2,ms-agent-v1;ipa=espeak
-taxi.please-use-the-meter,Tolong pakai argo,,tˈoloŋ pˈakaɪ ˈarɡo,argo = the taxi meter,2,ms-agent-v1;ipa=espeak
+taxi.please-use-the-meter,Tolong pakai meter,,tˈoloŋ pˈakaɪ mˈitər,meter = the taxi's fare meter,2,ms-agent-v1;fix=DBP argo absent;fix=DBP meter (4) alat pd teksi utk menunjukkan tambang;row-corrections-v2;ipa=espeak
 taxi.i-will-get-off-here,Saya turun di sini,,sˈajə tˈuron di sˈini,,2,ms-agent-v1;ipa=espeak
 taxi.please-get-me-there-in-time-for-the-shinkansen,Tolong tepat waktu untuk Shinkansen,,tˈoloŋ tˈəpat wˈaktu ˈuntoʔ ʃinkˈansən,,1,reader-gloss-v1;ipa=espeak
 taxi.could-you-make-it-colder,Boleh buat AC lebih sejuk?,,bˈoleh bˈuat ˌeːsˈiː lˈəbeh sˈədʒoʔ,could [you] make the AC colder?,2,ms-agent-v1;ipa=espeak
@@ -48,7 +48,7 @@ transit-rides.is-it-delayed,Terlambat?,,təɾrlˈambat,,2,ms-agent-v1;ipa=espeak
 transit-rides.i-am-in-a-hurry,Saya sedang buru-buru,,sˈajə sˈədaŋ bˈuruburu,,2,ms-agent-v1;ipa=espeak
 transit-rides.which-platform,Platform mana?,,plˈatfɔrm mˈanə,,2,ms-agent-v1;fix=DBP platform;row-corrections-v1;ipa=espeak
 transit-rides.what-time-is-the-next-one,Berikutnya jam berapa?,,bərikˈotɲə dʒˈam bərˈapə,,2,ms-agent-v1;ipa=espeak
-transit-rides.i-went-past-my-stop,Saya kelewatan,Saya terlewat,sˈajə kəlewˈatan,,2,ms-agent-v1;ipa=espeak
+transit-rides.i-went-past-my-stop,Saya sudah melewati perhentian saya,Saya terlajak,sˈajə sˈudah mələwˈati pəɾrhəntˈian sˈajə,I have already gone past my stop; the alt is I overshot -- terlajak is carrying on past the place one meant to stop at,2,ms-agent-v1;fix=DBP kelewatan (2) and terlewat (1) are being late;fix=DBP melewati (1) lalu di or melintasi;fix=KIMD overshoot melewati;fix=DBP terlajak (KP terlangsung dr tempat yg dituju);row-corrections-v2;ipa=espeak
 transit-rides.can-i-use-this-ticket,Tiket ini boleh dipakai?,,tˈikət ˈini bˈoleh dipˈakaɪ,,2,ms-agent-v1;ipa=espeak
 place-words.visitor-center,Pusat informasi,,pˈusat ˌinfɔrmˈasi,,2,ms-agent-v1;ipa=espeak
 place-words.railway-station,Stesen keretapi,,stˈesen kərətˈapi,,2,ms-agent-v1;ipa=espeak
