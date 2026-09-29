@@ -23,20 +23,20 @@ numbers-money.yen,येन,,yēna,jˈeːn,,2,ne-agent-v1;ipa=espeak
 numbers-money.yen-symbol,¥,,¥,,,2,ne-agent-v1
 numbers-money.number-and-classifier-notes-2,"संख्या जोडेर बनाइन्छ: 11 = juuichi, 20 = nijuu, 21 = nijuuichi। गन्ती गर्दा संख्यापछि एउटा प्रत्यय थपिन्छ, जुन वस्तुको आकारअनुसार फरक हुन्छ: -tsu (सामान्य वस्तु), -mai (चेप्टा), -hon (लामो), -nin (मानिस), -hai (कप)। फोन नम्बर भन्दा: 0 = zero वा maru, 4 = yon, 7 = nana, 9 = kyuu; बीचको हाइफन no भनी पढिन्छ।",,"saṁkhyā jōḍēra banāincha: 11 = juuichi, 20 = nijuu, 21 = nijuuichi. gantī gardā saṁkhyāpachi ēuṭā pratyaya thapincha, juna vastukō ākāraanusāra pharaka huncha: -tsu (sāmānya vastu), -mai (cēpṭā), -hon (lāmō), -nin (mānisa), -hai (kapa). phōna nambara bhandā: 0 = zero vā maru, 4 = yon, 7 = nana, 9 = kyuu; bīcakō hāiphana no bhanī paḍhincha.",,,2,ne-agent-v1
 atm-cash.where-is-an-atm,एटीएम कहाँ छ?,,ēṭīēma kahām̐ cha?,ˌeːʈɪːˈeːmə kˈʌhã cʰˈə,,2,ne-agent-v1;ipa=espeak
-atm-cash.does-this-atm-take-foreign-cards,के यो एटीएमले विदेशी कार्ड लिन्छ?,,kē yō ēṭīēmalē vidēśī kārḍa lincha?,kˈeː jˈoː ˌeːʈɪːˈeːməlˌeː wɪdˈeːʃi kˈaːrrɖə lˈɪncʰə,,2,ne-agent-v1;ipa=espeak
-atm-cash.the-atm-kept-my-card,एटीएमले मेरो कार्ड राख्यो,,ēṭīēmalē mērō kārḍa rākhyō,ˌeːʈɪːˈeːməlˌeː mˈeːɾoː kˈaːrrɖə ɾˈaːkʰjoː,,2,ne-agent-v1;ipa=espeak
+atm-cash.does-this-atm-take-foreign-cards,के यो एटीएमले विदेशी कार्ड लिन्छ?,,kē yō ēṭīēmalē vidēśī kārḍa lincha?,kˈeː jˈoː ˌeːʈɪːˈeːməlˌeː wɪdˈeːʃi kˈaːrɖə lˈɪncʰə,,2,ne-agent-v1;ipa=espeak
+atm-cash.the-atm-kept-my-card,एटीएमले मेरो कार्ड राख्यो,,ēṭīēmalē mērō kārḍa rākhyō,ˌeːʈɪːˈeːməlˌeː mˈeːɾoː kˈaːrɖə ɾˈaːkʰjoː,,2,ne-agent-v1;ipa=espeak
 atm-cash.is-there-a-fee,के शुल्क लाग्छ?,,kē śulka lāgcha?,kˈeː ʃˈulkə lˈaːɡcʰə,,2,ne-agent-v1;ipa=espeak
-atm-cash.the-card-was-declined,कार्ड चलेन,,kārḍa calēna,kˈaːrrɖə cəlˈeːn,,2,ne-agent-v1;ipa=espeak
+atm-cash.the-card-was-declined,कार्ड चलेन,,kārḍa calēna,kˈaːrɖə cəlˈeːn,,2,ne-agent-v1;ipa=espeak
 atm-cash.what-is-the-exchange-rate,विनिमय दर कति हो?,,vinimaya dara kati hō?,wˈɪnɪmˌəjə dˈʌɾə kˈʌtɪ hoː,,2,ne-agent-v1;ipa=espeak
 atm-cash.no-money-came-out,पैसा आएन,,paisā āēna,pˈɛːsaː aːˈeːnə,,2,ne-agent-v1;ipa=espeak
 atm-cash.where-can-i-change-money,पैसा साट्ने ठाउँ कहाँ छ?,,paisā sāṭnē ṭhāum̐ kahām̐ cha?,pˈɛːsaː sˈaːʈneː ʈʰˈaːũ kˈʌhã cʰˈə,,2,ne-agent-v1;ipa=espeak
 atm-cash.the-machine-is-out-of-service,मेसिन बिग्रिएको छ,,mēsina bigriēkō cha,mˈeːsɪn bˌɪɡɾɪˈeːkoː cʰˈə,,2,ne-agent-v1;ipa=espeak
 atm-cash.please-give-me-smaller-notes,सानो नोट दिनुहोस्,,sānō nōṭa dinuhōs,sˈaːnoː nˈoːʈ dˌɪnuhˈoːs,,2,ne-agent-v1;ipa=espeak
 atm-cash.do-you-have-change,के खुद्रा छ?,,kē khudrā cha?,kˈeː kʰˈudɾaː cʰˈə,,2,ne-agent-v1;ipa=espeak
-atm-cash.may-i-pay-in,के म {} मा तिर्न सक्छु?,,kē ma {} mā tirna sakchu?,kˈeː mə {} mˈaː tˈɪrrnə sˈʌkcʰu,,2,ne-agent-v1;ipa=espeak
+atm-cash.may-i-pay-in,के म {} मा तिर्न सक्छु?,,kē ma {} mā tirna sakchu?,kˈeː mə {} mˈaː tˈɪrnə sˈʌkcʰu,,2,ne-agent-v1;ipa=espeak
 atm-cash.please-charge-in-local-currency,कृपया स्थानीय मुद्रामा नै शुल्क लिनुहोस्,,kr̥payā sthānīya mudrāmā nai śulka linuhōs,kɾˈɪpəjˌaː stʰaːnˈɪːjə mudɾˈaːmaː nˈɛː ʃˈulkə lˌɪnuhˈoːs,,2,ne-agent-v1;ipa=espeak
 atm-cash.where-can-i-get-coins,सिक्का कहाँ पाइन्छ?,,sikkā kahām̐ pāincha?,sˈɪkkˌaː kˈʌhã paːˈɪncʰə,,2,ne-agent-v1;ipa=espeak
-atm-cash.is-there-a-minimum-for-cards,कार्डको लागि न्यूनतम रकम छ?,,kārḍakō lāgi nyūnatama rakama cha?,kˈaːrrɖəkˌoː lˈaːɡɪ njˈuːnətˌəmə ɾˈʌkəmˌə cʰˈə,,2,ne-agent-v1;ipa=espeak
+atm-cash.is-there-a-minimum-for-cards,कार्डको लागि न्यूनतम रकम छ?,,kārḍakō lāgi nyūnatama rakama cha?,kˈaːrɖəkˌoː lˈaːɡɪ njˈuːnətˌəmə ɾˈʌkəmˌə cʰˈə,,2,ne-agent-v1;ipa=espeak
 atm-cash.atm,एटीएम,,ēṭīēma,ˌeːʈɪːˈeːmə,,2,ne-agent-v1;ipa=espeak
 atm-cash.banknote,नोट,,nōṭa,nˈoːʈ,,2,ne-agent-v1;ipa=espeak
 atm-cash.coin,सिक्का,,sikkā,sˈɪkkˌaː,,2,ne-agent-v1;ipa=espeak

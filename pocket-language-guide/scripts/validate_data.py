@@ -387,6 +387,14 @@ def main():
                 if text.strip() and text.count("{}") != slots:
                     errors.append(f"{rel}: {cid} has {text.count('{}')} slots, "
                                   f"concept declares {slots}")
+                # The romanisation prints its own `{}` as the same ruled blank, so a
+                # stray one is a space to fill in a sentence that has none -- three
+                # Nepali cells carried one where the text has a zero-width joiner.
+                for column in (c for c in row if c.startswith("romanization_")):
+                    roman = row[column] or ""
+                    if roman.strip() and roman.count("{}") != slots:
+                        errors.append(f"{rel}: {cid} {column} has {roman.count('{}')} "
+                                      f"slots, concept declares {slots}")
                 # Seven concepts name a language, and `{target}` / `{source}` fill
                 # from the pair. Two rules the mechanism cannot enforce itself, both
                 # from `content/LANGUAGE-SLOTS.md`.

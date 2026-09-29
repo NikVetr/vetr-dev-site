@@ -115,3 +115,61 @@ Fix one item at a time and write it to disk before the next. Notes go to
 and anything left unchanged and why. Keep helper scripts in `scratchpad/corrections/`.
 Run `python3 scripts/validate_data.py` after each item. Touch only the rows named here
 (and the Hebrew route); do not edit boards, concepts or catalogues, and do not commit.
+
+## A second pass: what the first pass saw beside its items
+
+The first pass's agents did as asked: they fixed their items and reported what they saw
+next to them without touching it. These are those rows. Everything above holds -- the
+source policy, one item at a time, the notes, clearing a changed row's `ipa` -- and the
+notes go to `tmp/agent-notes/row-corrections-2.md`.
+
+- **Nepali (`ne`) romanisations that print a blank.** Three rows write the eyelash RA,
+  र + ् + U+200D + य, and their `romanization_iso15919` carries `{}` where the joiner is:
+  `slang.i-love-it` *mana par{}yō*, `police-consulate.someone-attacked-me` *gar{}yō* and
+  `taxi.please-get-me-there-in-time-for-the-shinkansen` *pur{}yāidinuhōs*. `{}` is the
+  engine's blank-slot marker, so the card's Latin line shows a space to fill in a
+  sentence that has none; `validate_data.py` now fails a romanisation whose `{}` count
+  differs from its concept's slots, and this item is done when it passes. Romanise the
+  eyelash form as ISO 15919 writes it. The three `ipa` cells double the r (`pˈʌrrjoː`):
+  `clean()` in `scripts/build_ipa.py` drops the joiner before espeak reads the word.
+  Establish from a source how र्‍य is said; if the build is wrong, make the smallest change
+  to the route that fixes it, run `python3 scripts/build_ipa.py --only ne`, and report
+  every cell it changed.
+- **Malay (`ms`), three more rows.** `transit-rides.i-went-past-my-stop` "Saya kelewatan"
+  -- Kamus Dewan's *kelewatan* is lateness, so the row says "I am late";
+  `hotel-requests.is-there-a-safe`, whose `text` is part English ("Ada safe deposit
+  box?"); and `taxi.please-use-the-meter` "Tolong pakai argo", where *argo* is the
+  Indonesian word for a taxi's meter.
+- **Rows that address a driver as a man.** Hindi `hitchhiking.can-you-give-me-a-ride`
+  (`देंगे`) and Punjabi (`ਦੇਵੋਗੇ`); and `hitchhiking.where-are-you-going` in Urdu (`آپ
+  کہاں جا رہے ہیں؟`), Hebrew (`לאן אתה נוסע?`), Arabic (`إلى أين أنت ذاهب؟`) and Hausa
+  (`Ina za ka?`, alt `Ina za ki?`). The traveller does not know who will stop. Reword
+  each so it addresses nobody's gender, as the first pass did for Hindi's and Punjabi's
+  `where-are-you-going`, and clear a `text_alt` that only carried the other gender.
+- **Russian (`ru`) alternatives that fork a gender with no variant row.** Four
+  `text_alt` cells are a masculine first-person past, so a woman who takes the
+  alternative says it as a man: `lost-rescue.i-lost-my-passport` `Я потерял паспорт.`,
+  `lost-rescue.i-sprained-my-ankle` `Я подвернул ногу.`, `lost-rescue.i-left-it-on-the-train`
+  `Я забыл это в поезде.` and `payment-receipt.i-already-paid` `Я уже заплатил.`; their
+  `text` is already neutral. Four more fork a third person:
+  `introductions.this-is-my-friend`, `lost-rescue.my-friend-is-hurt` (`Моя подруга
+  ранена.`), `family-intros.this-is-my-partner` and `family-intros.this-is-my-colleague`.
+  `content/PROMPTS/speaker-variants.md` decides both -- its cleanup table for the first
+  four, its rule that a companion has no axis for the rest.
+- **Bengali (`bn`) romanisations outside the board answers.** The first pass brought the
+  board answers into the pack's system and found 89 more cells the romaniser disagrees
+  with, among them the eight `kind-words.*` rows (`ē`/`ō`, `khub` for খুব, `jan'ya` for
+  জন্য, `y` for য়), `numbers-money.som` `sōma`, `dietary-needs.is-this-kosher` `eṭā kōśāra
+  ki?`, and hand spellings such as `cek-ina`, `lifaṭa` and `peṭrolera`. The notes are the
+  `bn` section of `tmp/agent-notes/row-corrections.md`. Run the romaniser, read every
+  row it would change, and correct those that are wrong, listing each -- a deliberate
+  spelling stays, with the reason.
+- **Amharic (`am`) ኝ written `gn`.** `about-me.i-have-my-own-business` `āllegn`,
+  `hitchhiking.i-only-need-to-go-to-the-next-town` `āllebign` and
+  `hitchhiking.thank-you-for-the-ride` `silasaferugn`; the pack writes ኝ `ny`, and the
+  build reads `gn` as /ɡ/ + /n/. `rail-station-words.maglev` `bemagnēt` is a true g + n,
+  ማግኔት, and stays.
+
+Not in this pass, because it is a design question rather than a wrong row: Arabic's 55
+traveller rows that say `من فضلك` to one person the traveller can see. The letters serve
+either listener; the romanisation and the IPA say *min faḍlak*, to a man.

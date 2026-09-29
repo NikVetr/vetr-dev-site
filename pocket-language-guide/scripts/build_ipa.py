@@ -2108,7 +2108,21 @@ REPAIR = {
     # and the seven rows that reach it were `en`'s only remaining gap: a bare U+0303
     # printed on the page because `ʌ` and `̃` each matched separately, which is the
     # decomposition fallback doing exactly what it is documented to do.
-    "ne": [("ʌ̃", "ã"), ("kːj", "kj"), ("tːj", "tj"), ("cːj", "cj")],
+    #
+    # **And every r before a consonant came back doubled**, which Hindi's and
+    # Marathi's voices do not do: this one emits two `r` phonemes for a coda र् (its
+    # own mnemonics give `गर्नु` `g'Vrrnu` and `कर्म` `k'Vrrm@`, where `hi` gives
+    # `k'Vrm`), on 203 cells of the pack, its country names and its language names.
+    # Nepali has no such geminate. Khatiwada's Illustration (JIPA 39(3), 2009, p.
+    # 377) gives /r/ as a short trill or a tap with geminates only between vowels,
+    # and transcribes the recorded गर्‍यो `ɡʌɾjo` and सूर्य `surjʌ`; Schmidt's
+    # pronunciations write one r throughout (`parnu`, `paryo`, `parcha`, `garnu`,
+    # `puryaaunu`, `bharyaang`) while writing a geminate where there is one (समस्या
+    # `samassyaa`). The eyelash र्‍य reaches the voice as र्य because `clean()` drops
+    # its joiner, and that is the input it needs: kept, the joiner reads as a word
+    # break (`pˈʌɾ jˈoː`). A written र्र (अन्डोर्रा) keeps its second r, as the `ɾ`
+    # before the vowel.
+    "ne": [("ʌ̃", "ã"), ("kːj", "kj"), ("tːj", "tj"), ("cːj", "cj"), ("rr", "r")],
     # Malayalam. Every entry was counted over the finished column first and audited
     # against all forty-one reader tables' rule keys (`tmp/ml/audit.py`), and **not
     # one adds a symbol the corpus did not already carry** -- which is Gujarati's and
@@ -3257,11 +3271,12 @@ def clean(chunk):
     lost a syllable boundary the same way. Wrong on 195 rows of the Persian pack,
     including `lost-rescue.my-child-is-missing`.
 
-    U+200D is deliberately not added beside it: nothing in the corpus uses the
-    joiner, and this is the character the data actually contains. Adding U+200C
-    changes no other language -- it appears in `fa` and in no other pack, in no
-    registry file and in no override, so `build_ipa.py --check` is unmoved for the
-    other twenty-two.
+    U+200D is deliberately not added beside it. Nepali writes its eyelash RA with
+    the joiner (र्‍य, in three rows), and espeak reads a kept joiner as a word break
+    -- `पर्‍यो` came back `pˈʌɾ jˈoː` -- where without it the voice reads the word.
+    Adding U+200C changed no other language -- it appeared in `fa` and in no other
+    pack, in no registry file and in no override, so `build_ipa.py --check` was
+    unmoved for the other twenty-two.
     """
     return "".join(c for c in chunk
                    if unicodedata.category(c)[0] in "LMN" or c.isspace()
