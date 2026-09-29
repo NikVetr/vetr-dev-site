@@ -299,7 +299,7 @@ for (let i = 0; i < 20; i += 1) {
 shot('04b-after-keyboard');
 check('keyboard-dismiss', settled.innerHeight === insets.innerHeight && settled.viewport === insets.innerHeight
   && settled.scrollY === 0 && settled.viewportTop === 0, { ...settled, before: insets.innerHeight });
-await p.touch(`document.querySelector('dialog[open] .board-editor-close')`);
+await p.touch(`document.querySelector('dialog[open] .dialog-head .speaker-close')`);
 await p.until("!document.querySelector('dialog[open]')", 5000);
 const grid = JSON.parse(await p.evaluate(`JSON.stringify({ bar: document.querySelector('.board-bar').getBoundingClientRect().bottom, innerHeight, scrollY })`));
 check('layout-after-keyboard', Math.abs(grid.bar - foot.bar) < 2 && grid.scrollY === 0, { ...grid, barBefore: foot.bar });
