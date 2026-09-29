@@ -126,3 +126,16 @@ After the first pass the boards were reworked, and these came with it. Same rule
 - Four keys from the first pass are gone and must not be added back:
   `boards.transport.train`, `boards.transport.trainTitle`, `boards.emergency.signals`
   and `boards.emergency.signalsTitle` -- they have already been taken out of every file.
+
+## A third pass: one key, shorter
+
+- `boards.transport.taxi` is now "Taxi…" (it was "In a taxi…"). It is the button on
+  Getting around that opens the taxi screen, and the owner wanted the one word: the
+  screen's own heading, `boards.transport.taxiTitle` "In a taxi", keeps the fuller
+  phrase and does not change. Replace each file's value with its everyday word for a
+  taxi, in the file's own form of the ellipsis as its current value has it. The word is
+  usually the one `data/registry/section-titles/<code>.csv` gives for `taxi` -- but that
+  row can name more than the button does (Bengali's is "taxi and auto-rickshaw"), so
+  take the noun for a taxi, not the whole title. Where a language's label needs a case
+  or a particle on the bare noun to read as a button that opens a screen, say so in the
+  report rather than adding one silently.
