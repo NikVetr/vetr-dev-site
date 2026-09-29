@@ -844,16 +844,31 @@ test('a board that cannot load says which file, instead of going blank', async (
   expect(where.y).toBeLessThan(100);
 });
 
+/**
+ * A voice that says nothing and keeps what it was asked to say, and how fast, in
+ * `window.said`. The whole engine rather than a patched `getVoices`: WebKit here has
+ * no `speechSynthesis` to patch, and a test that stubs half of one tests nothing there.
+ */
+const fakeVoice = (/** @type {import('@playwright/test').Page} */ page, /** @type {string} */ lang) => page.addInitScript((l) => {
+  class Utterance { constructor(/** @type {string} */ text) { Object.assign(this, { text, voice: null, lang: '', rate: 1 }); } }
+  /** @type {any} */ (window).said = [];
+  const synth = Object.assign(new EventTarget(), {
+    speaking: false, pending: false,
+    getVoices: () => [{ name: 'Fake', lang: l, localService: true, voiceURI: 'fake', default: true }],
+    cancel() {},
+    speak(/** @type {any} */ u) { /** @type {any} */ (window).said.push({ text: u.text, rate: u.rate }); setTimeout(() => u.onend?.({}), 300); },
+  });
+  Object.defineProperty(window, 'speechSynthesis', { value: synth, configurable: true });
+  Object.defineProperty(window, 'SpeechSynthesisUtterance', { value: Utterance, configurable: true });
+}, lang);
+
 test('what the message screen carries is the reader’s choice, and it sticks', async ({ page }) => {
   // Every part of that screen used to be a fixed decision, and a fixed decision is
   // wrong for somebody: a learner wants the pronunciation on it, someone handing the
   // phone over wants nothing but the sentence. The three that were always there stay
   // on by default; the two new ones are off, because a line of IPA under every
   // phrase is a change nobody asked for.
-  await page.addInitScript(() => {
-    const voice = { name: 'Test', lang: 'zh-CN', localService: true, default: true, voiceURI: 'test' };
-    Object.defineProperty(speechSynthesis, 'getVoices', { value: () => [voice] });
-  });
+  await fakeVoice(page, 'zh-CN');
   await page.goto(BOARD);
   await expect(page.locator('.board-cell').first()).toBeVisible();
   await page.locator('[data-button="stop"]').click();
@@ -951,20 +966,7 @@ test('the speed beside Speak is a setting on Speak, not a second Speak', async (
   // sentence needs it slower; a fluent one may want it at pace; neither wants two
   // buttons that both talk. So the control shows the multiplier Speak will use, opens
   // the list of others, and never speaks -- and the choice is a setting, so it holds.
-  await page.addInitScript(() => {
-    const voice = { name: 'Test', lang: 'zh-CN', localService: true, default: true, voiceURI: 'test' };
-    Object.defineProperty(speechSynthesis, 'getVoices', { value: () => [voice] });
-    /** @type {{rate:number, text:string}[]} */ (globalThis).__spoken = [];
-    class FakeUtterance { constructor(/** @type {string} */ text) { this.text = text; } }
-    Object.defineProperty(window, 'SpeechSynthesisUtterance', { value: FakeUtterance, configurable: true });
-    Object.defineProperty(speechSynthesis, 'speak', {
-      configurable: true,
-      value: (/** @type {any} */ u) => {
-        globalThis.__spoken.push({ rate: u.rate, text: u.text });
-        setTimeout(() => u.onend && u.onend(), 5);
-      },
-    });
-  });
+  await fakeVoice(page, 'zh-CN');
   await page.goto(BOARD);
   await expect(page.locator('.board-cell').first()).toBeVisible();
   await page.locator('[data-button="stop"]').click();
@@ -986,12 +988,12 @@ test('the speed beside Speak is a setting on Speak, not a second Speak', async (
   await expect(menu.locator('.board-menu-current')).toHaveText('1×');
   await menu.locator('button', { hasText: '0.5×' }).click();
   await expect(page.locator('.board-rate')).toHaveText('0.5×');
-  expect(await page.evaluate(() => globalThis.__spoken.length)).toBe(0);
+  expect(await page.evaluate(() => /** @type {any} */ (window).said.length)).toBe(0);
 
   // Speak now reads at that speed, and the same sentence.
   await page.locator('.board-speak').click();
-  await expect.poll(() => page.evaluate(() => globalThis.__spoken.length)).toBe(1);
-  expect(await page.evaluate(() => globalThis.__spoken[0].rate)).toBe(0.5);
+  await expect.poll(() => page.evaluate(() => /** @type {any} */ (window).said.length)).toBe(1);
+  expect(await page.evaluate(() => /** @type {any} */ (window).said[0].rate)).toBe(0.5);
 
   // A setting, so it survives the page going away.
   await page.reload();
@@ -999,20 +1001,6 @@ test('the speed beside Speak is a setting on Speak, not a second Speak', async (
   await page.locator('[data-button="stop"]').click();
   await expect(page.locator('.board-rate')).toHaveText('0.5×');
 });
-
-/** A voice that says nothing and keeps what it was asked to say, in `window.said`. */
-const fakeVoice = (/** @type {import('@playwright/test').Page} */ page, /** @type {string} */ lang) => page.addInitScript((l) => {
-  class Utterance { constructor(/** @type {string} */ text) { Object.assign(this, { text, voice: null, lang: '', rate: 1 }); } }
-  /** @type {any} */ (window).said = [];
-  const synth = Object.assign(new EventTarget(), {
-    speaking: false, pending: false,
-    getVoices: () => [{ name: 'Fake', lang: l, localService: true, voiceURI: 'fake', default: true }],
-    cancel() {},
-    speak(/** @type {any} */ u) { /** @type {any} */ (window).said.push(u.text); setTimeout(() => u.onend?.({}), 300); },
-  });
-  Object.defineProperty(window, 'speechSynthesis', { value: synth, configurable: true });
-  Object.defineProperty(window, 'SpeechSynthesisUtterance', { value: Utterance, configurable: true });
-}, lang);
 
 test('Most used gathers the buttons pressed most, from every context, most first', async ({ page }) => {
   // Counted by what was said, so a press anywhere counts; shown by the button it was
@@ -1085,7 +1073,7 @@ test('speaking on tap says the sentence where the button is, for a listener who 
   await expect(page.locator('[data-button="left"]')).toHaveClass(/board-cell-speaking/);
   await page.locator('[data-button="right"]').click();
   await expect(page.locator('.board-message')).toHaveCount(0);
-  expect(await page.evaluate(() => /** @type {any} */ (window).said)).toEqual(['左转', '右转']);
+  expect(await page.evaluate(() => /** @type {any} */ (window).said.map((/** @type {any} */ u) => u.text))).toEqual(['左转', '右转']);
   await expect(page.locator('.board-cell-speaking')).toHaveCount(0, { timeout: 2000 });
   // A question can open its answers after it is said, where the reader asks for that.
   await page.evaluate(() => {
