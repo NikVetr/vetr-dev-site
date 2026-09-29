@@ -1081,12 +1081,11 @@ test('a button can carry the other side\'s words under its own, and an answer th
 
 test('Speak is the owner’s control and Reply is the listener’s', async ({ page }) => {
   // They sit side by side and are labelled from different catalogues, because
-  // different people press them. Asserted through a stubbed voice list, since this
-  // machine has none — the point is which language each label is in, not audio.
-  await page.addInitScript(() => {
-    const voice = { name: 'Test', lang: 'zh-CN', localService: true, default: true, voiceURI: 'test' };
-    Object.defineProperty(speechSynthesis, 'getVoices', { value: () => [voice] });
-  });
+  // different people press them. Asserted through a stand-in voice, since this
+  // machine has none — the point is which language each label is in, not audio. The
+  // whole engine is replaced rather than its voice list patched: WebKit keeps the
+  // page's first engine across a navigation, and the patch never reached it.
+  await fakeVoice(page, 'zh-CN');
   await page.goto(`${BOARD}&replies=1`);
   await expect(page.locator('.board-cell').first()).toBeVisible();
   await page.locator('[data-button="avoid"]').click();
