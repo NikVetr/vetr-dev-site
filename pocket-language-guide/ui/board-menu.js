@@ -241,22 +241,54 @@ export function askSelect({ label, options, value = '', save, close, onSave, hin
   });
 }
 
-/** The sounds a name is built from: most names' sounds in most languages, not IPA's whole chart. */
-const SOUNDS = ['p', 'b', 't', 'd', 'k', 'ɡ', 'm', 'n', 'ŋ', 'f', 'v', 's', 'z', 'ʃ', 'ʒ', 'x', 'h',
+/** The sounds a name is built from: most names' sounds in most languages, not IPA's whole chart,
+ * each plain sound before the ones some languages' letters write the same way. */
+const SOUNDS = ['p', 'b', 't', 'd', 'k', 'ɡ', 'm', 'n', 'ŋ', 'f', 'v', 's', 'z', 'ʃ', 'ʒ', 'h', 'x',
   'tʃ', 'dʒ', 'ts', 'l', 'r', 'ɾ', 'j', 'w', 'θ', 'ð',
-  'i', 'ɪ', 'e', 'ɛ', 'a', 'ɑ', 'ɔ', 'o', 'ʊ', 'u', 'ə', 'y', 'ø', 'aɪ', 'aʊ', 'eɪ', 'oʊ', 'ɔɪ'];
+  'i', 'ɪ', 'e', 'ɛ', 'a', 'ɑ', 'o', 'ɔ', 'u', 'ʊ', 'ə', 'y', 'ø', 'aɪ', 'aʊ', 'eɪ', 'oʊ', 'ɔɪ'];
 const VOWEL = /^[iɪeɛaɑɔoʊuəyø]/u;
 /** Longest first, so a kept name splits back into the keys it was built from. */
 const LONGEST = [...SOUNDS].sort((a, b) => b.length - a.length);
 
+/** @param {string} ipa */
+function soundsOf(ipa) {
+  /** @type {string[]} */ const sounds = [];
+  for (let i = 0; i < ipa.length;) {
+    const sound = LONGEST.find((s) => ipa.startsWith(s, i)) ?? ipa[i];
+    sounds.push(sound);
+    i += sound.length;
+  }
+  return sounds;
+}
+
+/** A sound as a key says it: in a syllable, since a lone consonant spells as nothing. */
+const sampleOf = (/** @type {string} */ sound) => (VOWEL.test(sound) ? sound : sound === 'ŋ' ? `a${sound}` : `${sound}a`);
+
+/**
+ * The keys one owner is offered: a key per spelling in their own letters. Sounds those
+ * letters write alike -- /h/ and /x/ are both "ha" to an English reader, /e/, /ɛ/ and
+ * /ə/ all "e" to a German one -- are one key, and it is the plain one, listed first:
+ * the owner who presses "e" for Peter means /e/, however often German says /ə/.
+ * @param {(ipa:string) => string} spellOwner
+ */
+function keysFor(spellOwner) {
+  /** @type {Map<string, string>} */ const byLabel = new Map();
+  for (const sound of SOUNDS) {
+    const label = spellOwner(sampleOf(sound)) || sound;
+    if (!byLabel.has(label)) byLabel.set(label, sound);
+  }
+  return [...byLabel].map(([label, sound]) => ({ label, sound }));
+}
+
 /**
  * A name built from its sounds, for a listener who reads another script.
  *
- * A key per sound, labelled in the owner's own letters -- the sound in a syllable,
- * since a lone consonant spells as nothing -- with the IPA under it. The sounds so far
- * sit above; one picked out is replaced by the next key or deleted. Under them, the
- * name as the listener will read it, and every key and the whole name are said in the
- * listener's voice: what the owner hears is what the listener's phone will say.
+ * A key per sound, labelled in the owner's own letters with the IPA under it. The
+ * sounds so far sit above as tiles; one picked out is replaced by the next key or
+ * deleted. Under them, the name as the listener will read it and as the owner's own
+ * letters say it, then Speak and Delete on a row of their own. Every key and the whole
+ * name are said in the listener's voice: what the owner hears is what the listener's
+ * phone will say.
  * @param {object} config
  * @param {string} config.ipa  the sounds so far
  * @param {(ipa:string) => string} config.spellOwner  @param {(ipa:string) => string} config.spellListener
@@ -265,20 +297,14 @@ const LONGEST = [...SOUNDS].sort((a, b) => b.length - a.length);
  * @returns {{element: HTMLElement, value: () => string}}
  */
 export function soundGrid({ ipa, spellOwner, spellListener, say, speakLabel, deleteLabel }) {
-  /** @type {string[]} */ const sounds = [];
-  for (let i = 0; i < ipa.length;) {
-    const sound = LONGEST.find((s) => ipa.startsWith(s, i)) ?? ipa[i];
-    sounds.push(sound);
-    i += sound.length;
-  }
+  const sounds = soundsOf(ipa);
   let picked = -1;
   const built = el('div', { class: 'sound-built' });
   const heard = el('span', { class: 'sound-heard' });
-  const speak = /** @type {HTMLButtonElement} */ (el('button', { type: 'button', class: 'btn', text: speakLabel }));
+  const reading = el('span', { class: 'sound-reading' });
+  const speak = /** @type {HTMLButtonElement} */ (el('button', { type: 'button', class: 'btn sound-speak', text: speakLabel }));
   speak.hidden = !say;
   speak.addEventListener('click', () => say?.(heard.textContent ?? ''));
-  // **Delete is a key of its own, and a large one**, beside what it deletes: it was a
-  // chip the size of a sound at the end of the row, the one key pressed most often.
   const erase = /** @type {HTMLButtonElement} */ (el('button', { type: 'button', class: 'btn sound-delete', 'aria-label': deleteLabel, title: deleteLabel, text: '\u232b' }));
   const draw = () => {
     built.replaceChildren(...sounds.map((sound, k) => {
@@ -287,6 +313,7 @@ export function soundGrid({ ipa, spellOwner, spellListener, say, speakLabel, del
       return chip;
     }));
     heard.textContent = spellListener(sounds.join(''));
+    reading.textContent = spellOwner(sounds.join(''));
     speak.disabled = !sounds.length;
     erase.disabled = !sounds.length;
   };
@@ -295,27 +322,33 @@ export function soundGrid({ ipa, spellOwner, spellListener, say, speakLabel, del
     picked = -1;
     draw();
   });
-  /** @param {string} sound */
-  const key = (sound) => {
-    const sample = VOWEL.test(sound) ? sound : sound === 'ŋ' ? `a${sound}` : `${sound}a`;
-    const button = el('button', { type: 'button', class: 'sound-key' },
-      [el('span', { text: spellOwner(sample) || sound }), el('small', { text: sound })]);
+  const key = (/** @type {{label:string, sound:string}} */ { label, sound }) => {
+    const button = el('button', { type: 'button', class: 'sound-key' }, [el('span', { text: label }), el('small', { text: sound })]);
     button.addEventListener('click', () => {
       if (picked >= 0) sounds[picked] = sound;
       else sounds.push(sound);
       picked = -1;
       draw();
-      say?.(spellListener(sample));
+      say?.(spellListener(sampleOf(sound)));
     });
     return button;
   };
   draw();
+  const keys = keysFor(spellOwner);
   // The sounds so far and the name they spell stay in view while the keys scroll under
   // them; the vowels are a block of their own, set apart and tinted.
   const element = el('div', { class: 'sound-builder' }, [
-    el('div', { class: 'sound-head' }, [built, el('div', { class: 'sound-line' }, [heard, speak, erase])]),
-    el('div', { class: 'sound-keys' }, SOUNDS.filter((s) => !VOWEL.test(s)).map(key)),
-    el('div', { class: 'sound-keys sound-vowels' }, SOUNDS.filter((s) => VOWEL.test(s)).map(key)),
+    el('div', { class: 'sound-head' }, [built, el('p', { class: 'sound-line' }, [heard, reading]),
+      el('div', { class: 'sound-actions' }, [speak, erase])]),
+    el('div', { class: 'sound-keys' }, keys.filter((k) => !VOWEL.test(k.sound)).map(key)),
+    el('div', { class: 'sound-keys sound-vowels' }, keys.filter((k) => VOWEL.test(k.sound)).map(key)),
   ]);
+  // A label wider than its key -- German's "tscha" -- is set smaller rather than broken.
+  new ResizeObserver(() => {
+    const labels = /** @type {HTMLElement[]} */ ([...element.querySelectorAll('.sound-key > span')]);
+    for (const label of labels) label.style.fontSize = '';
+    const fits = labels.map((label) => (/** @type {HTMLElement} */ (label.parentElement).clientWidth - 4) / label.offsetWidth);
+    labels.forEach((label, k) => { if (fits[k] < 1) label.style.fontSize = `${fits[k]}em`; });
+  }).observe(element);
   return { element, value: () => sounds.join('') };
 }

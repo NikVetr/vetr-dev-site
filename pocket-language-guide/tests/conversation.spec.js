@@ -2222,6 +2222,31 @@ test('a name built from its sounds is written in the listener\'s letters, and as
   await expect(page.locator('.board-message-text')).toContainText('Nikolai');
 });
 
+test('the keyboard of sounds is the owner\'s: a key per spelling in their letters, sized as a phone\'s keys', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  for (const [source, reading, tellsHfromX] of [['en', 'neekolye', false], ['de', 'nikolaj', true]]) {
+    await page.goto(`/conversation.html?target=ja&source=${source}&board=intro&screen=about`);
+    await page.locator('[data-button="myname"]').click();
+    const ask = page.locator('dialog.about-ask');
+    const key = (/** @type {string} */ sound) => ask.locator('.sound-key').filter({ has: page.locator('small').getByText(sound, { exact: true }) });
+    // /h/ and /x/ are both "ha" to an English reader, so one key, the plain sound; a
+    // German reader writes them apart.
+    await expect(key('h')).toHaveCount(1);
+    await expect(key('x')).toHaveCount(tellsHfromX ? 1 : 0);
+    // Seven to a row on a phone, every key the same size: German's "tscha" is set
+    // smaller to fit its key rather than broken over two lines.
+    const boxes = await ask.locator('.sound-keys').first().locator('.sound-key')
+      .evaluateAll((keys) => keys.map((k) => { const r = k.getBoundingClientRect(); return { top: Math.round(r.top), height: Math.round(r.height) }; }));
+    expect(boxes.filter((b) => b.top === boxes[0].top).length).toBeGreaterThanOrEqual(7);
+    expect(new Set(boxes.map((b) => b.height)).size).toBe(1);
+    for (const sound of ['n', 'i', 'k', 'o', 'l', 'aɪ']) await key(sound).click();
+    // What was built, in the listener's letters and in the owner's own.
+    await expect(ask.locator('.sound-heard')).toHaveText('ニコライ');
+    await expect(ask.locator('.sound-reading')).toHaveText(reading);
+    await expect(ask.locator('.sound-actions').getByRole('button', { name: /Delete|Löschen/ })).toBeVisible();
+  }
+});
+
 test('where you are from is chosen from every country, and said in the listener\'s word for it', async ({ page }) => {
   // Every country and the continents, in the owner's own words, sorted as their
   // language sorts; the listener is told in theirs. Held, it clears like the name.

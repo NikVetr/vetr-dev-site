@@ -2156,36 +2156,49 @@ dialog.speaker-settings h2 { margin: 0 0 var(--space-1); font-size: var(--fs-2);
 .about-field input { inline-size: 100%; }
 /* The details asked in dialogs of their own: a row of chips that wraps, a gap apart. */
 .speaker-block > .chip { margin-inline-end: var(--space-1); margin-block-end: var(--space-1); }
-/* A name built from its sounds: the sounds so far, the name as the listener reads it,
-   and a key per sound -- a syllable in the owner's letters over its IPA -- wrapping
-   rather than clipping a long spelling. */
+/* A name built from its sounds: the sounds so far as tiles, the name as the listener
+   reads it and as the owner's letters say it, Speak and Delete on a row of their own,
+   then a key per sound -- a syllable in the owner's letters over its IPA -- sized as a
+   phone sizes its keyboard's keys. */
 .about-sounds summary { cursor: pointer; margin-block: var(--space-1); }
 /* Pinned to the top of the dialog as it scrolls, on the dialog's own paper. */
 .sound-head {
   position: sticky; inset-block-start: calc(-1 * var(--space-3)); z-index: 1;
   background: var(--paper); padding-block: var(--space-2) var(--space-1); border-block-end: 1px solid var(--line-soft);
 }
-.sound-built { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3em; min-block-size: 2.6rem; }
+.sound-built { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3em; min-block-size: 2.2rem; }
 .sound-chip, .sound-key {
   font: inherit; color: inherit; background: var(--control);
   border: 1px solid var(--line); border-radius: var(--radius-sm);
 }
-.sound-chip { min-block-size: 2.4rem; min-inline-size: 2.4rem; padding: 0.2em 0.5em; }
-.sound-chip[aria-pressed="true"] { outline: 2px solid var(--accent); outline-offset: 1px; }
-.sound-line {
-  display: flex; align-items: center; gap: var(--space-2);
-  margin-block: var(--space-1) 0; font-size: var(--fs-1); overflow-wrap: anywhere;
+/* What has been entered is filled, where a key is outlined; the one picked out to be
+   replaced turns back to paper and takes a ring. */
+.sound-chip {
+  display: inline-grid; place-items: center; min-block-size: 2.2rem; min-inline-size: 2.2rem; padding: 0 0.4em;
+  background: var(--accent); border-color: var(--accent); color: var(--paper); line-height: 1;
 }
-.sound-heard { flex: 1 1 auto; min-inline-size: 0; }
-.sound-delete { min-inline-size: 4rem; min-block-size: 3rem; font-size: 1.5em; line-height: 1; }
+.sound-chip[aria-pressed="true"] { background: var(--paper); color: var(--accent); outline: 2px solid var(--accent); outline-offset: 1px; }
+.sound-line { display: grid; margin-block: var(--space-1) 0; overflow-wrap: anywhere; }
+.sound-heard { font-size: var(--fs-2); }
+.sound-reading { font-size: var(--fs--1); color: var(--muted); }
+.sound-actions { display: flex; gap: var(--space-2); margin-block-start: var(--space-2); }
+.sound-actions > .btn { flex: 1 1 0; justify-content: center; min-block-size: 2.6rem; }
+.sound-speak { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+.sound-speak[hidden] { display: none; }
+.sound-delete { background: var(--surface-2); font-size: 1.4em; line-height: 1; }
 .sound-keys {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(4rem, 1fr)); gap: 0.3em;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(2.6rem, 1fr)); gap: 0.25rem;
   margin-block: var(--space-2);
 }
-.sound-key { display: grid; justify-items: center; min-block-size: 3.2rem; padding: 0.3em 0.2em; overflow-wrap: anywhere; }
-.sound-key small { color: var(--muted); }
+.sound-key {
+  display: grid; place-content: center; justify-items: center; min-block-size: 2.6rem;
+  padding: 0.15em 0.1em; line-height: 1.15;
+}
+.sound-key > span { white-space: nowrap; }
+.sound-key small { color: var(--muted); font-size: 0.72em; }
 .sound-vowels .sound-key { background: var(--accent-soft); border-color: var(--accent); }
-.about-ask form { padding-inline-end: 2.5rem; }
+/* Only the first row shares the dialog's corner with the cross. */
+.about-ask form > :first-child { padding-inline-end: 2.25rem; }
 
 /* The settings dialog's own action row: three chips that do different-sized things,
    so they wrap rather than squeeze on a phone. */
