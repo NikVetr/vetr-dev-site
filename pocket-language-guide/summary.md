@@ -1158,7 +1158,7 @@ an empty box is named -- boards draw in the system's fonts, so that is a fact ab
 phone, not the app; a pronunciation per sentence; a voice for the listener's language,
 and whether it is on the device; and every file the check read, kept on the device.
 Each row is marked with a glyph and a colour as it finishes. The installed apps carry
-everything -- 67MB of files, 44MB of them fonts, in a 43MB Android package -- so there
+everything -- 67MB of files, 45MB of them fonts, in a 44MB Android package -- so there
 only the voice can be missing, and a voice is the operating system's to install. A
 browser keeps what a pair has used, and the check offers to save anything it has not.
 

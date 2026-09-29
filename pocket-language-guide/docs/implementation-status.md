@@ -5374,7 +5374,7 @@ sentences resolved; the listener's writing, each letter the boards use drawn bes
 character no font has, so a letter this device would show as an empty box is named;
 a pronunciation for each sentence; a voice for the listener's language and whether it
 works without a connection; and every file it read, kept on the device. **The installed
-apps carry everything**: 67MB of files, 44MB of them fonts, in a 43MB Android package,
+apps carry everything**: 67MB of files, 45MB of them fonts, in a 44MB Android package,
 so only a voice -- the operating system's to install -- can be missing there. A browser
 keeps what a pair has used, and the check offers to save anything it has not.
 
@@ -5482,3 +5482,20 @@ hang half out of the surface on the grounds that its ink is in the left half -- 
 a Chinese face, not of a Japanese one, which centres the mark: "ここでキャンプできますか？"
 drew it fifteen pixels over the frame. The ink is measured now, in the mark's own face
 as its language draws it, and must fall inside the frame.
+
+## Native evidence for Batch AF
+
+Both apps were built from the pushed commit, cffb4f2a, and checked on it. **Android**, on
+the emulator: `check:android` 9 of 9, its share-sheet backup now reached through the
+header's settings, the one door left; the debug package is 44.0MB. **iOS**, from a clean
+checkout on the Mac with the generated project deleted first: the first `check:ios` after
+the rebuild failed `persist-reinstall` -- the phrase written through Preferences was gone
+after the build was installed over itself, so the backup that followed had nothing to
+share and the script stopped there -- and the next run, on the same build with nothing
+changed, passed 16 of 16, the reinstall and the share sheet included. The likeliest cause
+is the simulator not yet having flushed a setting written seconds before the reinstall;
+a real update comes long after the last write, but it is recorded here, not explained
+away. The browser suites on the final code: Chromium 253 of 254 with one skipped, WebKit
+smoke 7 of 7 and this batch's new specs 13 of 13 in WebKit, unit 708 of 708, the gate 11
+of 11. Neither native script searches, runs the pre-travel check or drags a button to the
+bin; the evidence for those is the browser tests, in Chromium and in WebKit.
