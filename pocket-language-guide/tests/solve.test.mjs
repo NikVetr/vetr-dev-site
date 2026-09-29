@@ -824,10 +824,18 @@ test('the divider is solved once per section unless asked for per row', async ()
   // original. There is no middle -- sharing the divider except where a row would
   // gain a line recovers 0.50 against 0.50, because the compromise width is itself
   // the cost.
+  //
+  // Compared at one face count, because that is where the divider's cost is type
+  // size and nothing else. Under auto it can also be paper, by way of `COMFORT`
+  // rather than the divider: `es <- en` sets its even divider at 0.44 in the eight
+  // faces per-row needs, just under the squeeze line, so auto prints it at 0.77 in
+  // ten.
   const base = await referenceSpec('es', 'en');
-  const even = await buildSheet(ctx, base);
   const perRow = await buildSheet(ctx, { ...base, split: 'adaptive' });
-  assert.equal(even.plan.faces.length, perRow.plan.faces.length,
+  const even = await buildSheet(ctx, {
+    ...base, autoFaces: false, geometry: { ...base.geometry, faces: perRow.plan.faces.length },
+  });
+  assert.ok(!even.plan.warnings.some((w) => w.code.startsWith('no-fit')),
     'the trade is type size at a fixed face count, not more faces');
   assert.ok(perRow.plan.scale > even.plan.scale + 0.05,
     `per-row should afford visibly more type, got ${perRow.plan.scale} against ${even.plan.scale}`);
