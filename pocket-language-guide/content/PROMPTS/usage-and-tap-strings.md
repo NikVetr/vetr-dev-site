@@ -94,3 +94,44 @@ it does not hold up, leave the key and say why.
 - **uz**: the file's `{language} tilida` frame produces *inglizcha tilida* where Uzbek says
   *ingliz tilida*, because ICU's name ends in *-cha*; say whether a frame fixes it, and fix
   it only where one does without breaking the other keys.
+
+## A second list: found while fixing those
+
+The agent that fixed the list above found more of the same kind, outside it, and left
+them. The same rules hold: check each against the file's own words and `_note` first,
+change only the named keys, one substring on one line, and record old, new and why in
+`tmp/agent-notes/strings-ah-fixes-2.md` as you go. Its notes, with proposed fixes, are
+`tmp/agent-notes/strings-ah-fixes.md`.
+
+1. **"I speak" in the registry.** The header's first half is `speak_label` in
+   `data/registry/languages.csv`, beside `gallery.wantLabel`. It assumes a man in Hindi
+   (*मैं बोलता हूँ*), Urdu (*میں بولتا ہوں*) and Marathi (*मी बोलतो*), and says the Thai
+   first person *ฉัน* (*ฉันพูด*), which the Thai note rules out because it marks the
+   reader's gender. Make each neutral in the way Punjabi (*ਮੈਨੂੰ ਆਉਂਦੀ ਹੈ*) and Gujarati
+   (*મને આવડે છે*) already are, keeping it a label that a language's name completes, and
+   matching the now-neutral `gallery.wantLabel` of the same file. Lao, Vietnamese and
+   Chinese carry a first person with no gender there; leave them. The file is a CSV that
+   other scripts read: change the one cell, and keep its quoting and line endings.
+2. **Thai *ฉัน* in eleven keys**, listed in item 11 of the notes. The Thai note rules out a
+   first-person pronoun file-wide; a possessive *ของฉัน* ("my") may be the neutral usage
+   of Thai software. Settle it from a source -- a Thai style guide of a platform, or the
+   Royal Institute -- and then either reword the keys or amend the note to say what the
+   rule covers.
+3. **Inserted language names in older keys**, the same defect as the list's item 3 and 6:
+   pl `field.title.roman` and `gallery.spokenIn`; fr `field.title.roman`; it
+   `field.title.roman` and `field.title.respell`; kn `addTerm.inLanguage`,
+   `field.title.gloss`, `field.title.literal`, `field.title.script`, `field.title.roman`
+   and `gallery.spokenIn`; and uz `gallery.spokenIn`, whose `da` is also detached from
+   `{regions}`. Render each with several of ICU's names in that locale before and after.
+4. **French punctuation in 32 more keys**, listed under item 4 of the notes: the same
+   mechanical swap to U+00A0 before `? ! : ;` and U+2019 for the apostrophe, nothing else.
+5. **Nepali `check.voiceNone`** opens *यो डिभाइसमा कोही छैन।*: *कोही* is a person, where the
+   sentence means that no voice is installed.
+6. **Yoruba "read"** is spelled both *ka* and *kà* in the file. Establish the tone from a
+   dictionary of record and make the file agree with it.
+7. **Malay values identical to Indonesian.** Seventy `ms` values of four or more words are
+   byte-identical to `id`, and some contradict the `ms` note itself -- it rules *helai* for a
+   sheet, yet `cut.hint.whole`, `gallery.previewFailed` and `quick.status` say *lembar*.
+   Other likely carry-overs are in the notes (*kolom*, *Pakai*, *meski*, *setidaknya*,
+   *Alfabet Fonetis*, *tabel*, *kode*, *acuan*). Check each value's words in Kamus Dewan
+   through DBP's PRPM and correct those that are not Malay; shared vocabulary stays.
