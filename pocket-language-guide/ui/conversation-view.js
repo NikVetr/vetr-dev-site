@@ -343,17 +343,57 @@ function hangFits(el) {
   return ink.left + right <= box.right - frame && ink.left + left >= box.left + frame;
 }
 
+/** The size a mark's ink is measured at; every other size is a multiple of it. */
+const INK_EM = 100;
+/** @type {Map<string, {left:number, right:number}>} */ const markInks = new Map();
+
 /**
  * A mark's ink either side of where its glyph starts, in its own face at its own size,
  * as the language it is in draws it.
+ *
+ * **Drawn and read back, because WebKit's metrics cannot say it.** Its
+ * `actualBoundingBoxLeft` and `Right` report the advance box whenever the ink lies
+ * inside it, so every full-width `！` measured a whole em of ink and none could hang:
+ * on an iPhone `救命！` was set inline at 150px, as `救` over `命！`, left of the
+ * centre. So the ink is found in pixels, once per mark, face and language, as a share
+ * of the em -- in the document and in the mark's language, which is how both engines
+ * choose the face a language draws it in.
  * @param {HTMLElement} hang
  */
 function markInk(hang) {
-  const g = /** @type {CanvasRenderingContext2D} */ (document.createElement('canvas').getContext('2d'));
-  /** @type {any} */ (g).lang = hang.closest('[lang]')?.getAttribute('lang') ?? '';
-  g.font = getComputedStyle(hang).font;
-  const m = g.measureText(hang.textContent ?? '');
-  return { left: -m.actualBoundingBoxLeft, right: m.actualBoundingBoxRight };
+  const style = getComputedStyle(hang);
+  const lang = hang.closest('[lang]')?.getAttribute('lang') ?? '';
+  const mark = hang.textContent ?? '';
+  const face = `${style.fontStyle} ${style.fontWeight} ${INK_EM}px ${style.fontFamily}`;
+  const key = `${lang} ${face} ${mark}`;
+  let ink = markInks.get(key);
+  if (!ink) {
+    const canvas = document.createElement('canvas');
+    canvas.width = canvas.height = 3 * INK_EM;
+    canvas.lang = lang;
+    canvas.style.cssText = 'position: fixed; visibility: hidden';
+    document.body.append(canvas);
+    const g = /** @type {CanvasRenderingContext2D} */ (canvas.getContext('2d', { willReadFrequently: true }));
+    g.font = face;
+    g.textBaseline = 'middle';
+    g.fillText(mark, INK_EM, 1.5 * INK_EM);
+    const { data } = g.getImageData(0, 0, canvas.width, canvas.height);
+    canvas.remove();
+    let lo = canvas.width;
+    let hi = -1;
+    for (let i = 3; i < data.length; i += 4) {
+      if (data[i] < 128) continue;
+      const x = ((i - 3) / 4) % canvas.width;
+      lo = Math.min(lo, x);
+      hi = Math.max(hi, x);
+    }
+    ink = { left: (lo - INK_EM) / INK_EM, right: (hi + 1 - INK_EM) / INK_EM };
+    // Not kept while the face is still arriving: the fit runs again when it lands,
+    // and must not reuse the fallback's ink.
+    if (document.fonts?.check(face, mark) !== false) markInks.set(key, ink);
+  }
+  const size = Number.parseFloat(style.fontSize);
+  return { left: ink.left * size, right: ink.right * size };
 }
 
 /** Scripts whose characters are all one width, so that columns can be aligned. */
