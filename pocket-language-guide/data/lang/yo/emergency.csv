@@ -1,6 +1,6 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 emergency-medical.help,Ẹ̀gbà mí!,,ɛ˩ɡba˩ mi˥,,2,yo-agent-v1;ipa=yo-g2p
-emergency-medical.please-call-an-ambulance,"Ẹ jọ̀wọ́, pe ọkọ̀ alaisan",,"ɛ dʒɔ˩wɔ˥, kpe ɔkɔ˩ alaisã",,2,yo-agent-v1;ipa=yo-g2p
+emergency-medical.please-call-an-ambulance,"Ẹ jọ̀wọ́, pe ọkọ̀ aláìsàn",,"ɛ dʒɔ˩wɔ˥, kpe ɔkɔ˩ ala˥i˩sã˩",,2,yo-agent-v1;fix=Yorùbá Yé Mi (COERLL) p. 187 'ìtọ́jú aláìsàn';row-corrections-v1;ipa=yo-g2p
 emergency-medical.i-need-a-doctor,Mo nílò dókítà,,mo ni˥lo˩ do˥ki˥ta˩,,2,yo-agent-v1;ipa=yo-g2p
 emergency-medical.i-am-sick,Mo ṣàìsàn,,mo ʃa˩i˩sã˩,,2,yo-agent-v1;ipa=yo-g2p
 emergency-medical.i-am-injured,Mo fara pa,,mo fara kpa,,2,yo-agent-v1;ipa=yo-g2p

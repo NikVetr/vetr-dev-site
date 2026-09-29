@@ -1,10 +1,10 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
 time-scheduling.what-time-is-it,Jam berapa sekarang?,,dʒˈam bərˈapə səkˈaraŋ,,2,ms-agent-v1;ipa=espeak
-time-scheduling.how-many-minutes,Berapa menit?,,bərˈapə mˈənet,,2,ms-agent-v1;ipa=espeak
+time-scheduling.how-many-minutes,Berapa minit?,,bərˈapə mˈinet,,2,ms-agent-v1;fix=DBP minit;row-corrections-v1;ipa=espeak
 time-scheduling.what-time-should-we-meet,Kita bertemu jam berapa?,,kˈitə bərtˈəmu dʒˈam bərˈapə,,2,ms-agent-v1;ipa=espeak
 time-scheduling.can-we-change-the-time,Boleh ganti jamnya?,,bˈoleh ɡˈanti dʒˈamɲə,,2,ms-agent-v1;ipa=espeak
-time-scheduling.when-is-convenient,Kapan waktunya sesuai?,,kˈapan waktˈuɲə səsˈuaɪ,,2,ms-agent-v1;ipa=espeak
-time-scheduling.what-is-today-s-date,Hari ini tanggal berapa?,,hˈari ˈini tˈaŋɡal bərˈapə,,2,ms-agent-v1;ipa=espeak
+time-scheduling.when-is-convenient,Bila waktunya sesuai?,,bˈilə waktˈuɲə səsˈuaɪ,,2,ms-agent-v1;fix=DBP bila;row-corrections-v1;ipa=espeak
+time-scheduling.what-is-today-s-date,Hari ini tarikh berapa?,,hˈari ˈini tˈarex bərˈapə,,2,ms-agent-v1;fix=DBP tarikh;row-corrections-v1;ipa=espeak
 time-scheduling.what-day-is-it-today,Hari ini hari apa?,,hˈari ˈini hˈari ˈapə,,2,ms-agent-v1;ipa=espeak
 time-scheduling.what-time-does-it-open,Buka jam berapa?,,bˈukə dʒˈam bərˈapə,,2,ms-agent-v1;ipa=espeak
 time-scheduling.what-time-does-it-close,Tutup jam berapa?,,tˈutop dʒˈam bərˈapə,,2,ms-agent-v1;ipa=espeak
@@ -20,7 +20,7 @@ time-words.evening,petang,malam,pˈətaŋ,,2,ms-agent-v1;ipa=espeak
 time-words.fall,musim gugur,,mˈusem ɡˈuɡor,Malaysia has only wet and dry,2,ms-agent-v1;ipa=espeak
 time-words.spring,musim semi,,mˈusem sˈəmi,,2,ms-agent-v1;ipa=espeak
 time-words.summer,musim panas,musim kemarau,mˈusem pˈanas,,2,ms-agent-v1;ipa=espeak
-time-words.winter,musim dingin,musim hujan,mˈusem dˈiŋen,,2,ms-agent-v1;ipa=espeak
+time-words.winter,musim sejuk,musim hujan,mˈusem sˈədʒoʔ,,2,ms-agent-v1;fix=MABBIM musim sejuk;row-corrections-v1;ipa=espeak
 time-words.night,malam,,mˈalam,,2,ms-agent-v1;ipa=espeak
 days-of-week.monday,Isnin,,ˈisnen,,2,ms-agent-v1;ipa=espeak
 days-of-week.tuesday,Selasa,,səlˈasə,,2,ms-agent-v1;ipa=espeak

@@ -30,7 +30,7 @@ toilets.where-public-toilet,Níbo ni ìgbọ̀nsẹ̀ gbogbogbò wà?,,ni˥bo ni
 toilets.may-i-use-the-toilet,Ṣé mo lè lo ìgbọ̀nsẹ̀?,,ʃe˥ mo le˩ lo i˩ɡbɔ̃˩sɛ˩,,2,yo-agent-v1;ipa=yo-g2p
 toilets.is-it-only-for-customers,Ṣé àwọn oníbàárà nìkan ni ó lè lò ó?,,ʃe˥ a˩wɔ̃ oni˥ba˩a˥ra˩ ni˩kã ni o˥ le˩ lo˩ o˥,,2,yo-agent-v1;ipa=yo-g2p
 toilets.toilet-wc,ìgbọ̀nsẹ̀,,i˩ɡbɔ̃˩sɛ˩,,2,yo-agent-v1;ipa=yo-g2p
-toilets.is-it-free,Ṣé ó fọ́fẹ́?,,ʃe˥ o˥ fɔ˥fɛ˥,,2,yo-agent-v1;ipa=yo-g2p
+toilets.is-it-free,Ṣé ọ̀fẹ́ ni?,,ʃe˥ ɔ˩fɛ˥ ni,,2,yo-agent-v1;fix=CMS Dictionary of the Yoruba Language (1913) 'Gratis adv. lọfẹ́';fix=yo.wikipedia MediaWiki:Tagline 'ìwé ìmọ̀ ọ̀fẹ́';in-pack-neighbour=hotel-basics.is-wi-fi-free;row-corrections-v1;ipa=yo-g2p
 toilets.do-i-need-a-coin,Ṣé mo nílò owó fàdákà tàbí àmì?,,ʃe˥ mo ni˥lo˩ owo˥ fa˩da˥ka˩ ta˩bi˥ a˩mi˩,,2,yo-agent-v1;ipa=yo-g2p
 toilets.is-the-tap-water-safe-to-drink,Ṣé omi tí ń jáde láti kòkò dára fún mímu?,,ʃe˥ omi ti˥ n̩˥ dʒa˥de la˥ti ko˩ko˩ da˥ra fũ˥ mi˥mu,,2,yo-agent-v1;ipa=yo-g2p
 toilets.it-is-urgent,Ó yára kánjú,,o˥ ja˥ra kã˥dʒu˥,,2,yo-agent-v1;ipa=yo-g2p

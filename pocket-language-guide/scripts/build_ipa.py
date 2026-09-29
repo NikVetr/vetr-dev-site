@@ -3960,7 +3960,11 @@ HE = {
 # is carried out and refused by `check_alphabet` rather than guessed at.
 # The five acute vowels the stress departure adds, and what they stand for.
 HE_STRESSED = {"á": "a", "é": "e", "í": "i", "ó": "o", "ú": "u"}
-HE_VOWELS = set("aeiou") | set(HE_STRESSED)
+# The diphthongs are nuclei too. Unmarked stress is final (the Academy of the Hebrew
+# Language, "מלעיל ומלרע": most words are milra, monosyllables included), and a final
+# syllable can be a diphthong -- Pealim stresses `lifnei`, `acharei`, `matay` on it --
+# so without these three `lifney` came out `lˈifnej`, `matay` `mˈataj`, and `eyn` bare.
+HE_VOWELS = set("aeiou") | set(HE_STRESSED) | {"ey", "ay", "oy"}
 
 
 def he_to_ipa(word):

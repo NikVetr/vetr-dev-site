@@ -11,14 +11,14 @@ trail-words.up-uphill,Naik,Tanjakan,nˈaɪʔ,,2,ms-agent-v1;ipa=espeak
 trail-words.down-downhill,Turun,Turunan,tˈuron,,2,ms-agent-v1;ipa=espeak
 trail-words.one-way,Sekali jalan,,səkˈali dʒˈalan,jalan sehala means a one-way street,2,ms-agent-v1;ipa=espeak
 trail-words.round-trip,Pulang-pergi,PP,pˈulaŋpəɾrɡi,,2,ms-agent-v1;ipa=espeak
-weather.forecast,Prakiraan cuacanya bagaimana?,,prˌakirˈaan tʃˌuatʃˈəɲə bˌaɡaɪmˈanə,,2,ms-agent-v1;ipa=espeak
+weather.forecast,Ramalan cuacanya bagaimana?,,ramˈalan tʃˌuatʃˈəɲə bˌaɡaɪmˈanə,,2,ms-agent-v1;fix=MABBIM ramalan cuaca;row-corrections-v1;ipa=espeak
 weather.will-it-rain,Hari ini akan hujan?,,hˈari ˈini ˈakan hˈudʒan,,2,ms-agent-v1;ipa=espeak
 weather.is-it-safe-today,Hari ini aman?,,hˈari ˈini ˈaman,,2,ms-agent-v1;ipa=espeak
 weather.how-cold-at-night,Seberapa dingin malam nanti?,,səbərˈapə dˈiŋen mˈalam nˈanti,,2,ms-agent-v1;ipa=espeak
 weather.rain,Hujan,,hˈudʒan,,2,ms-agent-v1;ipa=espeak
-weather.snow,Salju,,sˈaldʒu,,2,ms-agent-v1;ipa=espeak
+weather.snow,Salji,,sˈaldʒi,,2,ms-agent-v1;fix=MABBIM salji;row-corrections-v1;ipa=espeak
 weather.wind,Angin,,ˈaŋen,,2,ms-agent-v1;ipa=espeak
-weather.storm,Badai,,bˈadaɪ,,2,ms-agent-v1;ipa=espeak
+weather.storm,Ribut,,rˈibot,,2,ms-agent-v1;fix=MABBIM ribut;row-corrections-v1;ipa=espeak
 weather.ice,Lapisan es,,lapˈisan ˈɛs,"ice on the ground, not in a drink",2,ms-agent-v1;ipa=espeak
 weather.fog,Kabut,,kˈabot,,2,ms-agent-v1;ipa=espeak
 weather.heat,Panas,,pˈanas,,2,ms-agent-v1;ipa=espeak
@@ -26,7 +26,7 @@ weather.cold,Dingin,,dˈiŋen,,2,ms-agent-v1;ipa=espeak
 weather.humid,Lembap,Lembab,lˈɛmbap,,2,ms-agent-v1;ipa=espeak
 weather.sunrise,Matahari terbit,,mˌatahˈari tˈəɾrbet,,2,ms-agent-v1;ipa=espeak
 weather.flood,Banjir,,bˈandʒer,,2,ms-agent-v1;ipa=espeak
-weather.avalanche-risk,Rawan longsoran salju,,rˈawan loŋsˈɔran sˈaldʒu,no Malaysian signage uses this,1,ms-agent-v1;ipa=espeak
+weather.avalanche-risk,Risiko salji runtuh,,risˈiko sˈaldʒi rˈuntoh,no Malaysian signage uses this,1,ms-agent-v1;fix=MABBIM salji runtuh;fix=DBP risiko;row-corrections-v1;ipa=espeak
 hiking-parks.is-this-the-way-to,Ini jalan ke {}?,,ˈini dʒˈalan kə {},,2,ms-agent-v1;ipa=espeak
 hiking-parks.where-is-the-trailhead,Awal jalurnya di mana?,,ˈawal dʒalˈorɲə dimˈanə,,2,ms-agent-v1;ipa=espeak
 hiking-parks.how-long-to-the-summit,Berapa lama ke puncak?,,bərˈapə lˈamə kə pˈuntʃaʔ,,2,ms-agent-v1;ipa=espeak
@@ -44,16 +44,16 @@ trail-transport.what-time-is-the-last-shuttle,Shuttle terakhir jam berapa?,,ʃˈ
 trail-transport.when-does-the-cableway-stop,Kereta gantung tutup jam berapa?,,kərˈɛtə ɡˈantoŋ tˈutop dʒˈam bərˈapə,,2,ms-agent-v1;ipa=espeak
 trail-transport.where-can-we-buy-water,Di mana boleh beli air?,,dimˈanə bˈoleh bˈəli ˈaer,,2,ms-agent-v1;ipa=espeak
 trail-transport.where-can-we-refill-water,Di mana boleh isi ulang air?,,dimˈanə bˈoleh ˈisi ˈulaŋ ˈaɪr,,2,ms-agent-v1;ipa=espeak
-trail-transport.is-there-cell-signal-here,Ada sinyal di sini?,,ˈadə sˈiɲal di sˈini,,2,ms-agent-v1;ipa=espeak
+trail-transport.is-there-cell-signal-here,Ada isyarat di sini?,,ˈadə iʃˈarat di sˈini,,2,ms-agent-v1;fix=DBP isyarat;fix=MABBIM isyarat;row-corrections-v1;ipa=espeak
 trail-transport.do-you-have-a-map,Ada peta?,,ˈadə pˈɛtə,,2,ms-agent-v1;ipa=espeak
 trail-transport.how-long-is-the-wait,Berapa lama menunggu?,,bərˈapə lˈamə mənˈuŋɡu,,2,ms-agent-v1;ipa=espeak
 trail-warnings.open,Buka,,bˈukə,,2,ms-agent-v1;ipa=espeak
 trail-warnings.closed,Tutup,,tˈutop,,2,ms-agent-v1;ipa=espeak
-trail-warnings.maintenance,Perbaikan,Sedang dalam perbaikan,pəɾrbˈaɪkan,,2,ms-agent-v1;ipa=espeak
+trail-warnings.maintenance,Pembaikan,Sedang dalam pembaikan,pəmbˈaɪkan,,2,ms-agent-v1;fix=MABBIM pembaikan;row-corrections-v1;ipa=espeak
 trail-warnings.steep-slope,Tanjakan terjal,Turunan curam,tandʒˈəkan tˈəɾrdʒal,,2,ms-agent-v1;ipa=espeak
 trail-warnings.caution-slippery,Awas licin,Hati-hati licin,ˈawas lˈitʃen,,2,ms-agent-v1;ipa=espeak
 trail-warnings.danger,Bahaya,,bahˈajə,,2,ms-agent-v1;ipa=espeak
-trail-warnings.beware-falling-rocks,Awas batu jatuh,Rawan longsor,ˈawas bˈatu dʒˈatoh,,2,ms-agent-v1;ipa=espeak
+trail-warnings.beware-falling-rocks,Awas batu jatuh,Awas tanah runtuh,ˈawas bˈatu dʒˈatoh,,2,ms-agent-v1;fix=MABBIM tanah runtuh;row-corrections-v1;ipa=espeak
 trail-warnings.first-aid-station,Pusat bantuan kecemasan,,pˈusat bantˈuan kətʃəmˈasan,Malaysia has no fixed abbreviation the way Indonesia's P3K is; trail signage spells the words out,2,ms-agent-v1;ipa=espeak
 trail-warnings.service-suspended,Tidak beroperasi,Layanan dihentikan,tˈidaʔ bərˌopərˈasi,,2,ms-agent-v1;ipa=espeak
 trail-landmarks.trail-marker,Penanda jalur,,pənˈandə dʒˈalor,,2,ms-agent-v1;ipa=espeak

@@ -2,7 +2,7 @@ concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
 emergency-medical.help,Помогите!,,Pomogite!,pʌmʌɡʲˈitʲi,,2,ru-agent-v1;ipa=espeak
 emergency-medical.please-call-an-ambulance,Вызовите скорую!,Вызовите скорую помощь!,Vyzovite skoruyu!,vˈɨzʌvʲitʲi skˈoruju,,2,ru-agent-v1;ipa=espeak
 emergency-medical.i-need-a-doctor,Мне нужен врач.,,Mne nuzhen vrach.,mnʲˈe nˈuʒɨn vrˈɑtʃʲ,,2,ru-agent-v1;ipa=espeak
-emergency-medical.i-am-sick,Я болен,Я больна,Ya bolen,ˈja bˈoɭʲin,,2,ru-agent-v1;ipa=espeak
+emergency-medical.i-am-sick,Я болен,,Ya bolen,ˈja bˈoɭʲin,,2,ru-agent-v1;fix=speaker-variants.md (feminine parked in text_alt: clear it) -- variants.csv speaker_gender=feminine has the same text;row-corrections-v1;ipa=espeak
 emergency-medical.i-am-injured,У меня травма.,,U menya travma.,ˈu mʲinʲˈɑ trˈɑvma,I have an injury,2,ru-agent-v1;ipa=espeak
 emergency-medical.it-hurts-here,Болит здесь.,,Bolit zdesʼ.,bʌɭʲˈit ʑdʲˈesʲ,,2,ru-agent-v1;ipa=espeak
 emergency-medical.where-is-a-pharmacy,Где аптека?,,Gde apteka?,ɡdʲˈe aptʲˈeka,,2,ru-agent-v1;ipa=espeak
@@ -128,7 +128,7 @@ police-consulate.i-was-robbed,Меня ограбили.,,Menya ograbili.,mʲin�
 police-consulate.i-want-a-lawyer,Я хочу адвоката.,,Ya khochu advokata.,ˈja xʌtʃʲˈu advʌkˈɑta,,2,ru-agent-v1;ipa=espeak
 police-consulate.please-notify-my-consulate,Сообщите в моё консульство.,,Soobshchite v moyë konsulʼstvo.,sʌʌpɕˈitʲi v mʌˈɵ kˈonsuɭstvʌ,,2,ru-agent-v1;ipa=espeak
 police-consulate.i-am-calling-the-police,Я звоню в полицию.,,Ya zvonyu v politsiyu.,ˈja zvʌnʲˈʉ f pʌɭʲˈitsɨju,,2,ru-agent-v1;ipa=espeak
-police-consulate.am-i-under-arrest,Я задержан?,Я задержана?,Ya zaderzhan?,ˈja zadʲˈerʒʌn,,2,ru-agent-v1;ipa=espeak
+police-consulate.am-i-under-arrest,Я задержан?,,Ya zaderzhan?,ˈja zadʲˈerʒʌn,,2,ru-agent-v1;fix=speaker-variants.md (feminine parked in text_alt: clear it) -- variants.csv speaker_gender=feminine has the same text;row-corrections-v1;ipa=espeak
 police-consulate.no-thank-you-i-am-not-interested,"Нет, спасибо, мне не интересно.",,"Net, spasibo, mne ne interesno.","nʲˈet, spasʲˈibʌ, mnʲˈe nʲe ɪntʲɛrʲˈesnʌ",,2,ru-agent-v1;ipa=espeak
 police-consulate.someone-attacked-me,На меня напали.,,Na menya napali.,nə mʲinʲˈɑ napˈɑɭʲɪ,they attacked me,2,ru-agent-v1;ipa=espeak
 police-consulate.i-did-not-agree-to-this-price,Мы договаривались о другой цене.,,My dogovarivalisʼ o drugoy tsene.,mˈɨ dʌɡʌvˈɑrʲivʌɭʲisʲ ˈo druɡˈoj tsɨnʲˈe,we agreed a different price,2,ru-agent-v1;ipa=espeak

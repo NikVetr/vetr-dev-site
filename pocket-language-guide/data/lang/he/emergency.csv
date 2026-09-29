@@ -5,8 +5,8 @@ emergency-medical.i-need-a-doctor,אני צריך רופא,אֲנִי צָרִי
 emergency-medical.i-am-sick,אני חולה,אֲנִי חוֹלֶה,ani ẖole,anˈi xolˈe,,2,he-agent-v1;ipa=bgn
 emergency-medical.i-am-injured,נפצעתי,נִפְצַעְתִּי,niftsá‘ti,niftsˈati,I have been injured,2,he-agent-v1;ipa=bgn
 emergency-medical.it-hurts-here,כואב לי כאן,כּוֹאֵב לִי כָּאן,ko’ev li kan,koˈev lˈi kˈan,it hurts me here,2,he-agent-v1;ipa=bgn
-emergency-medical.where-is-a-pharmacy,איפה יש בית מרקחת?,אֵיפֹה יֵשׁ בֵּית מִרְקַחַת?,éyfo yesh beyt mirqáẖat?,ˈejfo jˈeʃ bejt miʁkˈaxat,,2,he-agent-v1;ipa=bgn
-emergency-medical.please-take-me-to-a-hospital,"קחו אותי לבית חולים, בבקשה","קְחוּ אוֹתִי לְבֵית חוֹלִים, בְּבַקָּשָׁה","qeẖu oti leveyt ẖolim, bevaqasha","kexˈu otˈi lˈevejt xolˈim, bevakaʃˈa","take me to a hospital, please",2,he-agent-v1;ipa=bgn
+emergency-medical.where-is-a-pharmacy,איפה יש בית מרקחת?,אֵיפֹה יֵשׁ בֵּית מִרְקַחַת?,éyfo yesh beyt mirqáẖat?,ˈejfo jˈeʃ bˈejt miʁkˈaxat,,2,he-agent-v1;ipa=bgn
+emergency-medical.please-take-me-to-a-hospital,"קחו אותי לבית חולים, בבקשה","קְחוּ אוֹתִי לְבֵית חוֹלִים, בְּבַקָּשָׁה","qeẖu oti leveyt ẖolim, bevaqasha","kexˈu otˈi levˈejt xolˈim, bevakaʃˈa","take me to a hospital, please",2,he-agent-v1;ipa=bgn
 emergency-medical.i-feel-unwell,אני לא מרגיש טוב,אֲנִי לֹא מַרְגִּישׁ טוֹב,ani lo margish tov,anˈi lˈo maʁɡˈiʃ tˈov,I do not feel well,2,he-agent-v1;ipa=bgn
 emergency-medical.this-is-an-emergency,זה מצב חרום,זֶה מַצַּב חֵרוּם,ze matsav ẖerum,zˈe matsˈav xeʁˈum,,2,he-agent-v1;ipa=bgn
 emergency-medical.i-am-having-a-severe-allergic-reaction,יש לי תגובה אנפילקטית,יֵשׁ לִי תְּגוּבָה אַנְפִילַקְטִית,yesh li teguva anfilaqtit,jˈeʃ lˈi teɡuvˈa anfilaktˈit,anaphylaxis -- a severe allergic reaction,2,he-moh-v1;ipa=bgn
@@ -14,7 +14,7 @@ emergency-medical.i-cannot-breathe,אני לא יכול לנשם,אֲנִי לֹ
 emergency-medical.i-am-bleeding-badly,יש לי דמום חזק,יֵשׁ לִי דִּמּוּם חָזָק,yesh li dimum ẖazaq,jˈeʃ lˈi dimˈum xazˈak,I have strong bleeding,2,he-agent-v1;ipa=bgn
 emergency-medical.i-have-chest-pain,יש לי כאבים בחזה,יֵשׁ לִי כְּאֵבִים בֶּחָזֶה,yesh li ke’evim beẖaze,jˈeʃ lˈi keevˈim bexazˈe,I have pains in the chest,2,he-agent-v1;ipa=bgn
 emergency-medical.this-person-is-unconscious,האדם הזה מחסר הכרה,הָאָדָם הַזֶּה מְחֻסָּר הַכָּרָה,ha’adam haze meẖusar hakara,haadˈam hazˈe mexusˈaʁ hakaʁˈa,this person is without consciousness,2,he-agent-v1;ipa=bgn
-emergency-medical.where-is-the-nearest-hospital,איפה יש בית חולים בסביבה?,אֵיפֹה יֵשׁ בֵּית חוֹלִים בַּסְּבִיבָה?,éyfo yesh beyt ẖolim basviva?,ˈejfo jˈeʃ bejt xolˈim basvivˈa,where is there a hospital nearby?,2,he-agent-v1;ipa=bgn
+emergency-medical.where-is-the-nearest-hospital,איפה יש בית חולים בסביבה?,אֵיפֹה יֵשׁ בֵּית חוֹלִים בַּסְּבִיבָה?,éyfo yesh beyt ẖolim basviva?,ˈejfo jˈeʃ bˈejt xolˈim basvivˈa,where is there a hospital nearby?,2,he-agent-v1;ipa=bgn
 emergency-medical.what-is-the-emergency-number,מה מספר החרום?,מָה מִסְפַּר הַחֵרוּם?,ma mispar haẖerum?,mˈa mispˈaʁ haxeʁˈum,,2,he-agent-v1;ipa=bgn
 emergency-medical.is-there-a-doctor-who-speaks-english,יש רופא שמדבר {source}?,יֵשׁ רוֹפֵא שֶׁמְּדַבֵּר {source}?,yesh rofe shemdaber {source}?,jˈeʃ ʁofˈe ʃemdabˈeʁ {source},,2,he-agent-v1;ipa=bgn
 emergency-medical.i-think-a-bone-is-broken,אני חושב שיש לי שבר,אֲנִי חוֹשֵׁב שֶׁיֵּשׁ לִי שֶׁבֶר,ani ẖoshev sheyesh li shéver,anˈi xoʃˈev ʃejˈeʃ lˈi ʃˈeveʁ,I think I have a fracture,2,he-agent-v1;ipa=bgn
@@ -31,7 +31,7 @@ medical-conditions.i-need-my-inhaler,אני צריך את המשאף שלי,אֲ
 medical-conditions.i-am-pregnant,אני בהריון,אֲנִי בְּהֵרָיוֹן,ani beherayon,anˈi beheʁajˈon,I am in pregnancy,2,he-agent-v1;ipa=bgn
 medical-conditions.i-carry-an-adrenaline-injector,יש איתי מזרק אדרנלין אוטומטי,יֵשׁ אִיתִּי מַזְרֵק אַדְרֶנָלִין אוֹטוֹמָטִי,yesh iti mazreq adrenálin otomáti,jˈeʃ itˈi mazʁˈek adʁenˈalin otomˈati,an automatic adrenaline injector -- EpiPen,2,he-moh-v1;ipa=bgn
 medical-conditions.i-take-medicine-for,אני לוקח תרופות נגד {},אֲנִי לוֹקֵחַ תְּרוּפוֹת נֶגֶד {},ani loqéaẖ terufot néged {},anˈi lokˈeax teʁufˈot nˈeɡed {},I take medicines against {},2,he-agent-v1;ipa=bgn
-medical-conditions.i-take-blood-thinners,אני לוקח מדללי דם,אֲנִי לוֹקֵחַ מְדַלְלֵי דָּם,ani loqéaẖ medalley dam,anˈi lokˈeax medˈallej dˈam,I take blood thinners,2,he-agent-v1;ipa=bgn
+medical-conditions.i-take-blood-thinners,אני לוקח מדללי דם,אֲנִי לוֹקֵחַ מְדַלְלֵי דָּם,ani loqéaẖ medalley dam,anˈi lokˈeax medallˈej dˈam,I take blood thinners,2,he-agent-v1;ipa=bgn
 medical-conditions.medicine-allergy,אלרגיה לתרופות: {},אַלֶּרְגְּיָה לִתְרוּפוֹת: {},alérgya litrufot: {},alˈeʁɡja litʁufˈot {},allergy to medicines: {},2,he-agent-v1;ipa=bgn
 medical-conditions.this-card-lists-my-conditions,בכרטיס הזה רשומות המחלות שלי,בַּכַּרְטִיס הַזֶּה רְשׁוּמוֹת הַמַּחֲלוֹת שֶׁלִּי,bakartis haze reshumot hamaẖalot sheli,bakaʁtˈis hazˈe ʁeʃumˈot hamaxalˈot ʃelˈi,my conditions are listed on this card,2,he-agent-v1;ipa=bgn
 medical-conditions.this-is-my-medicine,זאת התרופה שלי,זֹאת הַתְּרוּפָה שֶׁלִּי,zot hatrufa sheli,zˈot hatʁufˈa ʃelˈi,,2,he-agent-v1;ipa=bgn
@@ -42,11 +42,11 @@ medical-conditions.do-not-give-me,אסור לתת לי {},אָסוּר לָתֵ�
 medical-conditions.i-am-allergic-to-aspirin-and-ibuprofen,יש לי אלרגיה לאספירין ולאיבופרופן,יֵשׁ לִי אַלֶּרְגְּיָה לְאַסְפִּירִין וּלְאִיבּוּפְרוֹפֵן,yesh li alérgya le’aspírin ule’ibufrófen,jˈeʃ lˈi alˈeʁɡja leaspˈiʁin uleibufʁˈofen,allergy to aspirin and to ibuprofen,2,he-agent-v1;ipa=bgn
 medical-conditions.my-injector-is-in-my-bag,המזרק שלי בתיק,הַמַּזְרֵק שֶׁלִּי בַּתִּיק,hamazreq sheli batiq,hamazʁˈek ʃelˈi batˈik,my injector is in the bag,2,he-agent-v1;ipa=bgn
 medical-conditions.i-am-allergic-to-sulfa-drugs,יש לי אלרגיה לסולפה,יֵשׁ לִי אַלֶּרְגְּיָה לְסוּלְפָה,yesh li alérgya lesúlfa,jˈeʃ lˈi alˈeʁɡja lesˈulfa,allergy to sulfa,2,he-agent-v1;ipa=bgn
-pharmacy-symptoms.which-pharmacy-is-open-now,איזה בית מרקחת פתוח עכשיו?,אֵיזֶה בֵּית מִרְקַחַת פָּתוּחַ עַכְשָׁיו?,éyze beyt mirqáẖat patúaẖ ‘akhshav?,ˈejze bejt miʁkˈaxat patˈuax axʃˈav,,2,he-agent-v1;ipa=bgn
+pharmacy-symptoms.which-pharmacy-is-open-now,איזה בית מרקחת פתוח עכשיו?,אֵיזֶה בֵּית מִרְקַחַת פָּתוּחַ עַכְשָׁיו?,éyze beyt mirqáẖat patúaẖ ‘akhshav?,ˈejze bˈejt miʁkˈaxat patˈuax axʃˈav,,2,he-agent-v1;ipa=bgn
 pharmacy-symptoms.i-need-medicine-for,אני צריך תרופה נגד {},אֲנִי צָרִיךְ תְּרוּפָה נֶגֶד {},ani tsarikh terufa néged {},anˈi tsaʁˈix teʁufˈa nˈeɡed {},a medicine against {},2,he-agent-v1;ipa=bgn
 pharmacy-symptoms.i-have-a-fever,יש לי חום,יֵשׁ לִי חוֹם,yesh li ẖom,jˈeʃ lˈi xˈom,,2,he-agent-v1;ipa=bgn
 pharmacy-symptoms.i-have-diarrhea,יש לי שלשול,יֵשׁ לִי שִׁלְשׁוּל,yesh li shilshul,jˈeʃ lˈi ʃilʃˈul,,2,he-agent-v1;ipa=bgn
-pharmacy-symptoms.where-is-an-all-night-pharmacy,איפה יש בית מרקחת תורן?,אֵיפֹה יֵשׁ בֵּית מִרְקַחַת תּוֹרָן?,éyfo yesh beyt mirqáẖat toran?,ˈejfo jˈeʃ bejt miʁkˈaxat toʁˈan,a duty pharmacy -- Israel runs a rota,2,he-toran-v1;ipa=bgn
+pharmacy-symptoms.where-is-an-all-night-pharmacy,איפה יש בית מרקחת תורן?,אֵיפֹה יֵשׁ בֵּית מִרְקַחַת תּוֹרָן?,éyfo yesh beyt mirqáẖat toran?,ˈejfo jˈeʃ bˈejt miʁkˈaxat toʁˈan,a duty pharmacy -- Israel runs a rota,2,he-toran-v1;ipa=bgn
 pharmacy-symptoms.painkiller,משכך כאבים,מְשַׁכֵּךְ כְּאֵבִים,meshakekh ke’evim,meʃakˈex keevˈim,pain reliever,2,he-agent-v1;ipa=bgn
 pharmacy-symptoms.do-i-need-a-prescription,צריך מרשם?,צָרִיךְ מִרְשָׁם?,tsarikh mirsham?,tsaʁˈix miʁʃˈam,is a prescription needed?,2,he-agent-v1;ipa=bgn
 pharmacy-symptoms.i-have-a-headache,יש לי כאב ראש,יֵשׁ לִי כְּאֵב רֹאשׁ,yesh li ke’ev rosh,jˈeʃ lˈi keˈev ʁˈoʃ,I have head pain,2,he-agent-v1;ipa=bgn
@@ -69,13 +69,13 @@ pharmacy-symptoms.the-pain-is-severe,הכאב חזק מאוד,הַכְּאֵב �
 pharmacy-symptoms.antiseptic,חומר חיטוי,חוֹמֶר חִיטּוּי,ẖómer ẖituy,xˈomeʁ xitˈuj,disinfectant,2,he-agent-v1;ipa=bgn
 pharmacy-symptoms.i-feel-nauseous,יש לי בחילה,יֵשׁ לִי בְּחִילָה,yesh li beẖila,jˈeʃ lˈi bexilˈa,I have nausea,2,he-agent-v1;ipa=bgn
 pharmacy-symptoms.i-have-a-rash,יש לי פריחה,יֵשׁ לִי פְּרִיחָה,yesh li periẖa,jˈeʃ lˈi peʁixˈa,I have a rash,2,he-agent-v1;ipa=bgn
-pharmacy-symptoms.before-or-after-food,לפני האוכל או אחרי?,לִפְנֵי הָאוֹכֶל אוֹ אַחֲרֵי?,lifney haókhel o aẖarey?,lˈifnej haˈoxel ˈo axˈaʁej,before the food or after?,2,he-agent-v1;ipa=bgn
+pharmacy-symptoms.before-or-after-food,לפני האוכל או אחרי?,לִפְנֵי הָאוֹכֶל אוֹ אַחֲרֵי?,lifney haókhel o aẖarey?,lifnˈej haˈoxel ˈo axaʁˈej,before the food or after?,2,he-agent-v1;ipa=bgn
 pharmacy-symptoms.i-think-it-is-infected,אני חושב שזה נדבק,אֲנִי חוֹשֵׁב שֶׁזֶּה נִדְבַּק,ani ẖoshev sheze nidbaq,anˈi xoʃˈev ʃezˈe nidbˈak,I think it is infected,2,he-agent-v1;ipa=bgn
 pharmacy-symptoms.motion-sickness-tablets,כדורים נגד מחלת נסיעה,כַּדּוּרִים נֶגֶד מַחֲלַת נְסִיעָה,kadurim néged maẖalat nesi‘a,kaduʁˈim nˈeɡed maxalˈat nesiˈa,tablets against travel sickness,2,he-agent-v1;ipa=bgn
 pharmacy-symptoms.i-have-a-cut,יש לי חתך,יֵשׁ לִי חֲתָךְ,yesh li ẖatakh,jˈeʃ lˈi xatˈax,I have a cut,2,he-agent-v1;ipa=bgn
 pharmacy-symptoms.antacid,תרופה נגד צרבת,תְּרוּפָה נֶגֶד צָרֶבֶת,terufa néged tsárevet,teʁufˈa nˈeɡed tsˈaʁevet,medicine against heartburn,2,he-agent-v1;ipa=bgn
 pharmacy-symptoms.i-have-a-burn,יש לי כוויה,יֵשׁ לִי כְּוִויָּה,yesh li keviya,jˈeʃ lˈi kevijˈa,I have a burn,2,he-agent-v1;ipa=bgn
-pharmacy-symptoms.it-started-days-ago,זה התחיל לפני {} ימים,זֶה הִתְחִיל לִפְנֵי {} יָמִים,ze hitẖil lifney {} yamim,zˈe hitxˈil lˈifnej {} jamˈim,this began {} days ago,2,he-agent-v1;ipa=bgn
+pharmacy-symptoms.it-started-days-ago,זה התחיל לפני {} ימים,זֶה הִתְחִיל לִפְנֵי {} יָמִים,ze hitẖil lifney {} yamim,zˈe hitxˈil lifnˈej {} jamˈim,this began {} days ago,2,he-agent-v1;ipa=bgn
 pharmacy-symptoms.cough-medicine,תרופה נגד שיעול,תְּרוּפָה נֶגֶד שִׁיעוּל,terufa néged shi‘ul,teʁufˈa nˈeɡed ʃiˈul,medicine against cough,2,he-agent-v1;ipa=bgn
 pharmacy-symptoms.is-this-safe-during-pregnancy,זה בטוח בהריון?,זֶה בָּטוּח בְּהֵרָיוֹן?,ze batuẖ beherayon?,zˈe batˈux beheʁajˈon,is this safe in pregnancy?,2,he-agent-v1;ipa=bgn
 body-parts.head,ראש,רֹאשׁ,rosh,ʁˈoʃ,,2,he-agent-v1;ipa=bgn
@@ -116,7 +116,7 @@ police-consulate.where-is-the-police-station,איפה תחנת המשטרה?,א�
 police-consulate.i-want-to-report-a-theft,אני רוצה להגיש תלונה על גניבה,אֲנִי רוֹצֶה לְהַגִּישׁ תְּלוּנָה עַל גְּנֵיבָה,ani rotse lehagish teluna ‘al geneyva,anˈi ʁotsˈe lehaɡˈiʃ telunˈa ˈal ɡenejvˈa,I want to submit a complaint about a theft,2,he-agent-v1;ipa=bgn
 police-consulate.my-bag-was-stolen,גנבו לי את התיק,גָּנְבוּ לִי אֶת הַתִּיק,ganvu li et hatiq,ɡanvˈu lˈi ˈet hatˈik,they stole my bag,2,he-agent-v1;ipa=bgn
 police-consulate.my-passport-was-stolen,גנבו לי את הדרכון,גָּנְבוּ לִי אֶת הַדַּרְכּוֹן,ganvu li et hadarkon,ɡanvˈu lˈi ˈet hadaʁkˈon,,2,he-agent-v1;ipa=bgn
-police-consulate.someone-is-following-me,מישהו עוקב אחרי,מִישֶׁהוּ עוֹקֵב אַחֲרַי,míshehu ‘oqev aẖaray,mˈiʃehu okˈev axˈaʁaj,someone is following me,2,he-agent-v1;ipa=bgn
+police-consulate.someone-is-following-me,מישהו עוקב אחרי,מִישֶׁהוּ עוֹקֵב אַחֲרַי,míshehu ‘oqev aẖaray,mˈiʃehu okˈev axaʁˈaj,someone is following me,2,he-agent-v1;ipa=bgn
 police-consulate.i-need-a-written-police-report,אני צריך אישור בכתב על התלונה,אֲנִי צָרִיךְ אִישּׁוּר בִּכְתָב עַל הַתְּלוּנָה,ani tsarikh ishur bikhtav ‘al hatluna,anˈi tsaʁˈix iʃˈuʁ bixtˈav ˈal hatlunˈa,a written confirmation of the complaint,2,he-agent-v1;ipa=bgn
 police-consulate.i-want-to-contact-my-embassy,אני רוצה להתקשר לשגרירות שלי,אֲנִי רוֹצֶה לְהִתְקַשֵּׁר לַשַּׁגְרִירוּת שֶׁלִּי,ani rotse lehitqasher lashagrirut sheli,anˈi ʁotsˈe lehitkaʃˈeʁ laʃaɡʁiʁˈut ʃelˈi,I want to contact my embassy,2,he-agent-v1;ipa=bgn
 police-consulate.i-need-it-for-my-insurance,אני צריך את זה בשביל הביטוח,אֲנִי צָרִיךְ אֶת זֶה בִּשְׁבִיל הַבִּיטּוּחַ,ani tsarikh et ze bishvil habitúaẖ,anˈi tsaʁˈix ˈet zˈe biʃvˈil habitˈuax,I need it for the insurance,2,he-agent-v1;ipa=bgn

@@ -8,7 +8,7 @@ payment-receipt.how-much-in-total,Totalnya berapa?,,totˈalɲə bərˈapə,,2,ms
 payment-receipt.can-we-pay-separately,Boleh bayar terpisah?,,bˈoleh bˈajar təɾrpˈisah,,2,ms-agent-v1;ipa=espeak
 payment-receipt.is-tax-included,Sudah termasuk cukai?,,sˈudah təɾrmˈasoʔ tʃˈukaɪ,,2,ms-agent-v1;ipa=espeak
 payment-receipt.my-card-was-declined,Kad saya ditolak,,kˈad sˈajə ditˈolaʔ,,2,ms-agent-v1;ipa=espeak
-payment-receipt.the-bill-is-wrong,Sepertinya tagihannya keliru,,səpəɾrtˈiɲə tˌaɡihˈanɲə kəlˈiru,,2,ms-agent-v1;ipa=espeak
+payment-receipt.the-bill-is-wrong,Nampaknya bilnya keliru,,nampˈakɲə bˈilɲə kəlˈiru,,2,ms-agent-v1;fix=DBP nampaknya;fix=MABBIM bil;row-corrections-v1;ipa=espeak
 payment-receipt.i-already-paid,Saya sudah bayar,,sˈajə sˈudah bˈajar,,2,ms-agent-v1;ipa=espeak
 shopping.i-am-just-looking,Saya lihat-lihat dulu,,sˈajə lˈihatlihat dˈulu,,2,ms-agent-v1;ipa=espeak
 shopping.how-much-is-this,Ini berapa?,,ˈini bərˈapə,,2,ms-agent-v1;ipa=espeak
@@ -24,7 +24,7 @@ shopping.two-of-these,"Yang ini dua, ya",,"jaŋ ˈini dˈuə, jˈa",,2,ms-agent-
 shopping.what-is-it-made-of,Ini bahannya apa?,,ˈini bahˈanɲə ˈapə,bahan = material and ingredient,2,ms-agent-v1;ipa=espeak
 color-size-returns.do-you-have-another-color,Ada warna lain?,,ˈadə wˈarnə lˈaɪn,,2,ms-agent-v1;ipa=espeak
 color-size-returns.do-you-have-another-size,Ada ukuran lain?,,ˈadə ukˈuran lˈaɪn,,2,ms-agent-v1;ipa=espeak
-color-size-returns.may-i-try-it-on,Boleh dicoba?,,bˈoleh ditʃˈobə,,2,ms-agent-v1;ipa=espeak
+color-size-returns.may-i-try-it-on,Boleh dicuba?,,bˈoleh ditʃˈubə,,2,ms-agent-v1;fix=DBP mencuba;row-corrections-v1;ipa=espeak
 color-size-returns.can-i-return-it,Boleh dikembalikan?,,bˈoleh dˌikəmbalˈikan,,2,ms-agent-v1;ipa=espeak
 color-size-returns.can-i-exchange-it,Boleh ditukar?,,bˈoleh ditˈukar,,2,ms-agent-v1;ipa=espeak
 color-size-returns.do-you-have-a-bag,Ada beg plastik?,Plastik?,ˈadə bˈɛɡ plˈasteʔ,,2,ms-agent-v1;ipa=espeak

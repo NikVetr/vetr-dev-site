@@ -80,8 +80,8 @@ etiquette.remove-shoes,Нужно разуться?,,Nuzhno razutʼsya?,nˈuʒn�
 etiquette.photo-of-you,Можно вас сфотографировать?,,Mozhno vas sfotografirovatʼ?,mˈoʒnʌ vˈɑs sfʌtʌɡrafʲˈirʌvʌtʲ,,2,ru-agent-v1;ipa=espeak
 etiquette.may-i-sit-here,Можно здесь сесть?,,Mozhno zdesʼ sestʼ?,mˈoʒnʌ ʑdʲˈesʲ sʲˈestʲ,,2,ru-agent-v1;ipa=espeak
 etiquette.queue-for,Это очередь в {}?,,Eto ocheredʼ v {}?,ˈɛtʌ ˈotʃʲirʲitʲ vˈɛ {},,2,ru-agent-v1;ipa=espeak
-etiquette.dressed-appropriately,Я нормально одет?,Я нормально одета?,Ya normalʼno odet?,ˈja nʌrmˈɑɭnʌ ʌdʲˈet,,2,ru-agent-v1;ipa=espeak
-etiquette.did-not-mean-to-offend,Я не хотел вас обидеть.,Я не хотела вас обидеть.,Ya ne khotel vas obidetʼ.,ˈja nʲe xʌtʲˈeɭ vˈɑs ʌbʲˈidʲitʲ,,2,ru-agent-v1;ipa=espeak
+etiquette.dressed-appropriately,Я нормально одет?,,Ya normalʼno odet?,ˈja nʌrmˈɑɭnʌ ʌdʲˈet,,2,ru-agent-v1;fix=speaker-variants.md (feminine parked in text_alt: clear it) -- variants.csv speaker_gender=feminine has the same text;row-corrections-v1;ipa=espeak
+etiquette.did-not-mean-to-offend,Я не хотел вас обидеть.,,Ya ne khotel vas obidetʼ.,ˈja nʲe xʌtʲˈeɭ vˈɑs ʌbʲˈidʲitʲ,,2,ru-agent-v1;fix=speaker-variants.md (feminine parked in text_alt: clear it) -- variants.csv speaker_gender=feminine has the same text;row-corrections-v1;ipa=espeak
 etiquette.what-is-customary,Как здесь принято?,,Kak zdesʼ prinyato?,kˈɑk ʑdʲˈesʲ prʲˈinʲʌtʌ,,2,ru-agent-v1;ipa=espeak
 etiquette.keep-the-change,Сдачи не надо.,,Sdachi ne nado.,zdˈɑtʃʲɪ nʲe nˈɑdʌ,,2,ru-agent-v1;ipa=espeak
 children.cannot-find-my-child,Я не могу найти ребёнка.,,Ya ne mogu nayti rebënka.,ˈja nʲe mʌɡˌu najtʲˈi rʲibʲˈɵnka,,2,ru-agent-v1;ipa=espeak

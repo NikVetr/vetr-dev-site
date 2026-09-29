@@ -25,18 +25,18 @@ numbers-money.number-and-classifier-notes-2,ቁጥር አሰራር፦ 11 = ጁ�
 atm-cash.where-is-an-atm,ኤቲኤም የት ነው?,,ētīʼēm yet new?,ʔetiʔem jət nəw,,2,am-agent-v1;ipa=bgn-am
 atm-cash.does-this-atm-take-foreign-cards,ይህ ኤቲኤም የውጭ ካርድ ይቀበላል?,,yih ētīʼēm yewichʼ kard yikʼebbelal?,jɨh ʔetiʔem jəwɨtʃʼ kard jɨkʼəbːəlal,,2,am-agent-v1;ipa=bgn-am
 atm-cash.the-atm-kept-my-card,ኤቲኤሙ ካርዴን ወሰደ,,ētīʼēmu kardēn wesede,ʔetiʔemu karden wəsədə,the ATM took my card,2,am-agent-v1;ipa=bgn-am
-atm-cash.is-there-a-fee,ክፍያ አለ?,,kifiya āle?,kɨfɨja ʔalə,,2,am-agent-v1;ipa=bgn-am
+atm-cash.is-there-a-fee,ክፍያ አለ?,,kifiya ālle?,kɨfɨja ʔalːə,,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allə;row-corrections-v1;ipa=bgn-am
 atm-cash.the-card-was-declined,ካርዱ አልሰራም,,kardu ālseram,kardu ʔalsəram,the card did not work,2,am-agent-v1;ipa=bgn-am
 atm-cash.what-is-the-exchange-rate,የምንዛሬ ተመኑ ስንት ነው?,,yeminizarē temenu sint new?,jəmɨnɨzare təmənu sɨnt nəw,,2,am-agent-v1;ipa=bgn-am
 atm-cash.no-money-came-out,ገንዘብ አልወጣም,,genzeb ālwetʼam,ɡənzəb ʔalwətʼam,,2,am-agent-v1;ipa=bgn-am
 atm-cash.where-can-i-change-money,ገንዘብ የት መመንዘር እችላለሁ?,,genzeb yet memenzer ichilallehu?,ɡənzəb jət məmənzər ʔɨtʃɨlalːəhu,,2,am-agent-v1;ipa=bgn-am
 atm-cash.the-machine-is-out-of-service,ማሺኑ አይሰራም,,mashīnu āyiseram,maʃinu ʔajɨsəram,the machine does not work,2,am-agent-v1;ipa=bgn-am
 atm-cash.please-give-me-smaller-notes,እባክዎ ትንንሽ ብር ይስጡኝ,,ibakwo tininish bir yistʼunny,ʔɨbakwo tɨnɨnɨʃ bɨr jɨstʼuɲː,please give me small birr,2,am-agent-v1;ipa=bgn-am
-atm-cash.do-you-have-change,ዝርዝር አለ?,,zirizir āle?,zɨrɨzɨr ʔalə,,2,am-agent-v1;ipa=bgn-am
+atm-cash.do-you-have-change,ዝርዝር አለ?,,zirizir ālle?,zɨrɨzɨr ʔalːə,,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allə;row-corrections-v1;ipa=bgn-am
 atm-cash.may-i-pay-in,በ{} መክፈል ይቻላል?,,be{} mekfel yichalal?,bə {} məkfəl jɨtʃalal,,2,am-agent-v1;ipa=bgn-am
 atm-cash.please-charge-in-local-currency,እባክዎ በአካባቢው ገንዘብ ያስከፍሉኝ,,ibakwo beʼākababīw genzeb yaskeflunny,ʔɨbakwo bəʔakababiw ɡənzəb jaskəfluɲː,please charge me in the local money,2,am-agent-v1;ipa=bgn-am
 atm-cash.where-can-i-get-coins,ሳንቲም የት ማግኘት እችላለሁ?,,santīm yet magnyet ichilallehu?,santim jət maɡɲət ʔɨtʃɨlalːəhu,,2,am-agent-v1;ipa=bgn-am
-atm-cash.is-there-a-minimum-for-cards,ለካርድ ዝቅተኛ ገንዘብ አለ?,,lekard zikʼitenya genzeb āle?,ləkard zɨkʼɨtəɲa ɡənzəb ʔalə,,2,am-agent-v1;ipa=bgn-am
+atm-cash.is-there-a-minimum-for-cards,ለካርድ ዝቅተኛ ገንዘብ አለ?,,lekard zikʼitenya genzeb ālle?,ləkard zɨkʼɨtəɲa ɡənzəb ʔalːə,,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allə;row-corrections-v1;ipa=bgn-am
 atm-cash.atm,ኤቲኤም,,ētīʼēm,ʔetiʔem,,2,am-agent-v1;ipa=bgn-am
 atm-cash.banknote,ወረቀት ገንዘብ,,werekʼet genzeb,wərəkʼət ɡənzəb,paper money,2,am-agent-v1;ipa=bgn-am
 atm-cash.coin,ሳንቲም,,santīm,santim,,2,am-agent-v1;ipa=bgn-am

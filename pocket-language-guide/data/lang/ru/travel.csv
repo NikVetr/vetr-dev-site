@@ -48,7 +48,7 @@ transit-rides.is-it-delayed,Есть опоздание?,,Yestʼ opozdaniye?,jes
 transit-rides.i-am-in-a-hurry,Я спешу.,,Ya speshu.,ˈja spʲiʃˈu,,2,ru-agent-v1;ipa=espeak
 transit-rides.which-platform,С какой платформы?,,S kakoy platformy?,s kakˈoj pɭatfˈormɨ,,2,ru-agent-v1;ipa=espeak
 transit-rides.what-time-is-the-next-one,Когда следующий?,,Kogda sleduyushchiy?,kʌɡdˈɑ sɭʲˈedujuɕij,,2,ru-agent-v1;ipa=espeak
-transit-rides.i-went-past-my-stop,Я проехал свою остановку.,Я проехала свою остановку.,Ya proyekhal svoyu ostanovku.,ˈja prʌjˈexʌɭ svʌˈju ʌstanˈofku,,2,ru-agent-v1;ipa=espeak
+transit-rides.i-went-past-my-stop,Я проехал свою остановку.,,Ya proyekhal svoyu ostanovku.,ˈja prʌjˈexʌɭ svʌˈju ʌstanˈofku,,2,ru-agent-v1;fix=speaker-variants.md (feminine parked in text_alt: clear it) -- variants.csv speaker_gender=feminine has the same text;row-corrections-v1;ipa=espeak
 transit-rides.can-i-use-this-ticket,Этот билет подойдёт?,,Etot bilet podoydët?,ˈɛtʌt bʲiɭʲˈet pʌdʌjdʲˈɵt,,2,ru-agent-v1;ipa=espeak
 place-words.visitor-center,туристический центр,,turisticheskiy tsentr,turʲisʲtʲˈitʃʲiskʲij tsˈɛntr,,2,ru-agent-v1;ipa=espeak
 place-words.railway-station,вокзал,железнодорожный вокзал,vokzal,vʌɡzˈɑɭ,,2,ru-agent-v1;ipa=espeak

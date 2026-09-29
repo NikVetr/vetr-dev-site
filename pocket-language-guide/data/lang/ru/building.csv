@@ -1,6 +1,6 @@
 concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
 building-help.what-room-number-is-this,Какой номер комнаты?,,Kakoy nomer komnaty?,kakˈoj nˈomʲir kˈomnʌtɨ,,2,ru-agent-v1;ipa=espeak
-building-help.i-am-lost,Я заблудился,Я заблудилась,Ya zabludilsya,ˈja zʌbɭudʲˈiɭsʲʌ,,2,ru-agent-v1;ipa=espeak
+building-help.i-am-lost,Я заблудился,,Ya zabludilsya,ˈja zʌbɭudʲˈiɭsʲʌ,,2,ru-agent-v1;fix=speaker-variants.md (feminine parked in text_alt: clear it) -- variants.csv speaker_gender=feminine has the same text;row-corrections-v1;ipa=espeak
 building-help.where-is-reception,Где ресепшн?,Где администратор?,Gde resepshn?,ɡdʲˈe rʲisʲˈepʃn,,2,ru-agent-v1;ipa=espeak
 building-help.where-is-a-power-outlet,Где розетка?,,Gde rozetka?,ɡdʲˈe rʌʑˈetka,,2,ru-agent-v1;ipa=espeak
 accessibility.step-free,Есть вход без ступенек?,Есть безбарьерный вход?,Yestʼ vkhod bez stupenek?,jestʲ fxˈot bʲˈes stupʲˈenʲik,,2,ru-agent-v1;ipa=espeak
@@ -13,12 +13,12 @@ accessibility.need-to-sit-down,Мне надо сесть.,,Mne nado sestʼ.,mn�
 accessibility.accessible-restroom,Есть туалет для инвалидов?,,Yestʼ tualet dlya invalidov?,jestʲ tuaɭʲˈet dɭʲɑ ɪnvaɭʲˈidʌf,,2,ru-agent-v1;ipa=espeak
 accessibility.station-assistance,Есть сопровождение на станции?,,Yestʼ soprovozhdeniye na stantsii?,jestʲ sʌprʌvʌʒdʲˈenʲijɪ nə stˈɑntsɨɪ,,2,ru-agent-v1;ipa=espeak
 accessibility.help-me-carry,"Помогите донести, пожалуйста.",,"Pomogite donesti, pozhaluysta.","pʌmʌɡʲˈitʲi dʌnʲisʲtʲˈi, pʌʒˈɑɭujsta",,2,ru-agent-v1;ipa=espeak
-accessibility.board-first,Можно мне зайти первым?,Можно мне зайти первой?,Mozhno mne zayti pervym?,mˈoʒnʌ mnʲˈe zajtʲˈi pʲˈervɨm,,2,ru-agent-v1;ipa=espeak
+accessibility.board-first,Можно мне зайти первым?,,Mozhno mne zayti pervym?,mˈoʒnʌ mnʲˈe zajtʲˈi pʲˈervɨm,,2,ru-agent-v1;fix=speaker-variants.md (feminine parked in text_alt: clear it) -- variants.csv speaker_gender=feminine has the same text;row-corrections-v1;ipa=espeak
 accessibility.door-width,Какая ширина двери?,,Kakaya shirina dveri?,kakˈɑja ʃɨrʲinˈɑ dvʲˈerʲɪ,,2,ru-agent-v1;ipa=espeak
 accessibility.wheelchair-width,Ширина моей коляски {} см.,,Shirina moyey kolyaski {} sm.,ʃɨrʲinˈɑ mʌjˈej kʌɭʲˈɑskʲɪ {} sʌntʲimʲˈetrʌf,,2,ru-agent-v1;ipa=espeak
 accessibility.hard-of-hearing,Я плохо слышу.,,Ya plokho slyshu.,ˈja pɭˈoxʌ sɭˈɨʃu,,2,ru-agent-v1;ipa=espeak
 accessibility.speak-louder,"Говорите громче, пожалуйста.",,"Govorite gromche, pozhaluysta.","ɡʌvʌrʲˈitʲi ɡrˈomtʃʲi, pʌʒˈɑɭujsta",,2,ru-agent-v1;ipa=espeak
-accessibility.visually-impaired,Я слабовидящий,Я слабовидящая,Ya slabovidyashchiy,ˈja sɭʌbʌvʲˈidʲʌɕij,,2,ru-agent-v1;ipa=espeak
+accessibility.visually-impaired,Я слабовидящий,,Ya slabovidyashchiy,ˈja sɭʌbʌvʲˈidʲʌɕij,,2,ru-agent-v1;fix=speaker-variants.md (feminine parked in text_alt: clear it) -- variants.csv speaker_gender=feminine has the same text;row-corrections-v1;ipa=espeak
 accessibility.take-your-arm,Можно взять вас под руку?,,Mozhno vzyatʼ vas pod ^ruku?,mˈoʒnʌ vʑˈɑtʲ vˈɑs pˈot rˈuku,,2,ru-agent-v1;ipa=espeak
 accessibility.guide-dog,Это моя собака-поводырь.,,Eto moya sobaka-povodyrʼ.,ˈɛtʌ mˈoja sʌbˈɑkapʌvʌdɨrʲ,,2,ru-agent-v1;ipa=espeak
 in-a-building.is-this-the-correct-entrance,Это правильный вход?,,Eto pravilʼnyy vkhod?,ˈɛtʌ prˈɑvʲiɭnɨj fxˈot,,2,ru-agent-v1;ipa=espeak

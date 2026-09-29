@@ -3,13 +3,13 @@ hotel-words.passport,ፓስፖርት,,pasport,pasport,,2,am-agent-v1;ipa=bgn-am
 hotel-words.room-key-card,የክፍል ቁልፍ ካርድ,,yekifil kʼulif kard,jəkɨfɨl kʼulɨf kard,,2,am-agent-v1;ipa=bgn-am
 hotel-words.check-in,ቼክ ኢን,,chēk īn,tʃek ʔin,,2,am-agent-v1;ipa=bgn-am
 hotel-words.check-out,ቼክ አውት,,chēk āwt,tʃek ʔawt,,2,am-agent-v1;ipa=bgn-am
-hotel-basics.are-any-rooms-available,ክፍል አለ?,,kifil āle?,kɨfɨl ʔalə,is there a room?,2,am-agent-v1;ipa=bgn-am
+hotel-basics.are-any-rooms-available,ክፍል አለ?,,kifil ālle?,kɨfɨl ʔalːə,is there a room?,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allə;row-corrections-v1;ipa=bgn-am
 hotel-basics.there-are-two-of-us,ሁለት ነን,,hulett nen,hulətː nən,we are two,2,am-agent-v1;ipa=bgn-am
 hotel-basics.i-have-a-reservation,ቦታ ያዝኩ,,bota yazku,bota jazku,I booked a place,2,am-agent-v1;ipa=bgn-am
 hotel-basics.can-i-charge-my-phone,ስልኬን ቻርጅ ማድረግ ይቻላል?,,silikēn charj madireg yichalal?,sɨlɨken tʃardʒ madɨrəɡ jɨtʃalal,,2,am-agent-v1;ipa=bgn-am
 hotel-basics.i-would-like-a-non-smoking-room,ሲጋራ የማይጨስበት ክፍል እፈልጋለሁ,,sīgara yemayichʼesbet kifil ifelligallehu,siɡara jəmajɨtʃʼəsbət kɨfɨl ʔɨfəlːɨɡalːəhu,a room where cigarettes are not smoked,2,am-agent-v1;ipa=bgn-am
 hotel-basics.i-would-like-a-quiet-room,ጸጥ ያለ ክፍል እፈልጋለሁ,,tsʼetʼ yale kifil ifelligallehu,sʼətʼ jalə kɨfɨl ʔɨfəlːɨɡalːəhu,,2,am-agent-v1;ipa=bgn-am
-hotel-basics.is-there-a-washing-machine,ማጠቢያ ማሺን አለ?,,matʼebīya mashīn āle?,matʼəbija maʃin ʔalə,,2,am-agent-v1;ipa=bgn-am
+hotel-basics.is-there-a-washing-machine,ማጠቢያ ማሺን አለ?,,matʼebīya mashīn ālle?,matʼəbija maʃin ʔalːə,,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allə;row-corrections-v1;ipa=bgn-am
 hotel-requests.can-i-check-out-later,ዘግይቼ ቼክ አውት ማድረግ ይቻላል?,,zegyichē chēk āwt madireg yichalal?,zəɡjɨtʃe tʃek ʔawt madɨrəɡ jɨtʃalal,,2,am-agent-v1;ipa=bgn-am
 hotel-requests.what-time-does-breakfast-start,ቁርስ ስንት ሰዓት ይጀምራል?,,kʼurs sint seʽat yijemmiral?,kʼurs sɨnt səʔat jɨdʒəmːɨral,,2,am-agent-v1;ipa=bgn-am
 hotel-requests.can-i-store-my-luggage,ሻንጣዬን ማስቀመጥ ይቻላል?,,shantʼayēn maskʼemetʼ yichalal?,ʃantʼajen maskʼəmətʼ jɨtʃalal,,2,am-agent-v1;ipa=bgn-am
@@ -39,11 +39,11 @@ hotel-basics.is-breakfast-included,ቁርስ ተካትቷል?,,kʼurs tekatitwal
 hotel-basics.may-i-see-the-room,ክፍሉን ማየት ይቻላል?,,kifilun mayet yichalal?,kɨfɨlun majət jɨtʃalal,,2,am-agent-v1;ipa=bgn-am
 hotel-basics.for-nights,ለ{} ሌሊት,,le{} lēlīt,lə {} lelit,,2,am-agent-v1;ipa=bgn-am
 hotel-basics.two-beds,ሁለት አልጋ እባክዎ,,hulett ālga ibakwo,hulətː ʔalɡa ʔɨbakwo,,2,am-agent-v1;ipa=bgn-am
-hotel-basics.is-there-air-conditioning,ኤር ኮንዲሽን አለ?,,ēr kondīshin āle?,ʔer kondiʃɨn ʔalə,,2,am-agent-v1;ipa=bgn-am
+hotel-basics.is-there-air-conditioning,ኤር ኮንዲሽን አለ?,,ēr kondīshin ālle?,ʔer kondiʃɨn ʔalːə,,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allə;row-corrections-v1;ipa=bgn-am
 hotel-requests.what-time-is-check-out,ቼክ አውት ስንት ሰዓት ነው?,,chēk āwt sint seʽat new?,tʃek ʔawt sɨnt səʔat nəw,,2,am-agent-v1;ipa=bgn-am
 hotel-requests.can-i-check-in-early,ቀድሜ ቼክ ኢን ማድረግ ይቻላል?,,kʼedimē chēk īn madireg yichalal?,kʼədɨme tʃek ʔin madɨrəɡ jɨtʃalal,,2,am-agent-v1;ipa=bgn-am
 hotel-requests.another-night,ሌላ ሌሊት መቆየት ይቻላል?,,lēla lēlīt mekʼoyet yichalal?,lela lelit məkʼojət jɨtʃalal,,2,am-agent-v1;ipa=bgn-am
-hotel-requests.is-there-a-safe,ካዝና አለ?,,kazina āle?,kazɨna ʔalə,is there a strongbox?,2,am-agent-v1;ipa=bgn-am
+hotel-requests.is-there-a-safe,ካዝና አለ?,,kazina ālle?,kazɨna ʔalːə,is there a strongbox?,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allə;row-corrections-v1;ipa=bgn-am
 hotel-requests.another-blanket,ሌላ ብርድ ልብስ እባክዎ,,lēla bird libs ibakwo,lela bɨrd lɨbs ʔɨbakwo,,2,am-agent-v1;ipa=bgn-am
 hotel-requests.wake-up-call,እባክዎ በ{} ይቀስቅሱኝ,,ibakwo be{} yikʼeskʼisunny,ʔɨbakwo bə {} jɨkʼəskʼɨsuɲː,,2,am-agent-v1;ipa=bgn-am
 room-problems.the-key-does-not-work,ቁልፉ አይሰራም,,kʼulifu āyiseram,kʼulɨfu ʔajɨsəram,,2,am-agent-v1;ipa=bgn-am
@@ -65,4 +65,4 @@ massage-spa.reply-i-will-avoid-that-area,እሺ፤ ይህን ቦታ አልነካ
 massage-spa.reply-which-area-exactly,የትኛው ቦታ ነው?,,yetnyaw bota new?,jətɲaw bota nəw,"which place is it? -- impersonal, so it does not sex the listener either",2,am-agent-v1;spa-reply-v1;kane-amharic-english;abyssinica-dict;reply-neutrality-rule;ipa=bgn-am
 massage-spa.reply-cannot-avoid-this-treatment,በዚህ አገልግሎት ይህን ቦታ ማስቀረት አይቻልም,,bezzīh āgelgilot yihin bota maskʼeret āyichalim,bəzːih ʔaɡəlɡɨlot jɨhɨn bota maskʼərət ʔajɨtʃalɨm,in this service leaving this place out is not possible; not a refusal,2,am-agent-v1;spa-reply-v1;kane-amharic-english;abyssinica-dict;reply-neutrality-rule;ipa=bgn-am
 massage-spa.reply-does-it-hurt-there,ይህ ቦታ ያማል?,,yih bota yamal?,jɨh bota jamal,"does this place hurt? -- impersonal, as the pack's board-answers.where-does-it-hurt is",2,am-agent-v1;spa-reply-v1;kane-amharic-english;abyssinica-dict;reply-neutrality-rule;ipa=bgn-am
-massage-spa.reply-ask-supervisor,እርግጠኛ አይደለሁም፤ ስራ አስኪያጅ መጠየቅ አለብኝ,,"irgitʼenya āydellehum, sira āskīyaj metʼeyekʼ ālebbiny","ʔɨrɡɨtʼəɲa ʔajdəlːəhum, sɨra ʔaskijadʒ mətʼəjəkʼ ʔaləbːɨɲ","I am not sure; a manager has to be asked -- indefinite, because the definite -u would default the manager to masculine",2,am-agent-v1;spa-reply-v1;kane-amharic-english;abyssinica-dict;reply-neutrality-rule;ipa=bgn-am
+massage-spa.reply-ask-supervisor,እርግጠኛ አይደለሁም፤ ስራ አስኪያጅ መጠየቅ አለብኝ,,"irgitʼenya āydellehum, sira āskīyaj metʼeyekʼ āllebbiny","ʔɨrɡɨtʼəɲa ʔajdəlːəhum, sɨra ʔaskijadʒ mətʼəjəkʼ ʔalːəbːɨɲ","I am not sure; a manager has to be asked -- indefinite, because the definite -u would default the manager to masculine",2,am-agent-v1;spa-reply-v1;kane-amharic-english;abyssinica-dict;reply-neutrality-rule;fix=FSI Amharic Basic Course (1964) allebbɨñ;row-corrections-v1;ipa=bgn-am

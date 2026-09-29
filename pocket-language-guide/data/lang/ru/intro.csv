@@ -7,14 +7,14 @@ introductions.this-is-my-friend,Это мой друг.,Это моя подру
 introductions.i-am-from,Моя страна — {}.,,Moya strana — {}.,mˈoja stranˈɑ {},"'My country is {}'; predicate nominative (zero-copula), so the slot needs no case -- unlike из (+genitive), which из России shows and Я из Россия breaks",2,ru-agent-v1;rewritten-for-fill-in=iz governs the genitive; predicate nominative with an em dash needs no case (matches the pack's own medical-conditions.my-blood-type-is 'Moya gruppa krovi -- {}.' row);ipa=espeak
 introductions.where-are-you-from,Откуда вы?,,Otkuda vy?,ʌtkˈuda vˈɨ,,2,ru-agent-v1;ipa=espeak
 introductions.how-are-you,Как дела?,,Kak dela?,kˈɑk dʲˈeɭa,,2,ru-agent-v1;ipa=espeak
-introductions.i-am-a-tourist,Я турист.,Я туристка.,Ya turist.,ˈja turʲˈist,,2,ru-agent-v1;ipa=espeak
+introductions.i-am-a-tourist,Я турист.,,Ya turist.,ˈja turʲˈist,,2,ru-agent-v1;fix=speaker-variants.md (feminine parked in text_alt: clear it) -- variants.csv speaker_gender=feminine has the same text;row-corrections-v1;ipa=espeak
 introductions.this-is-my-husband-wife,Это мой муж / моя жена.,,Eto moy muzh / moya zhena.,ˈɛtʌ mˈoj mˈuʃ / mˈoja ʒɨnˈɑ,,2,ru-agent-v1;ipa=espeak
 introductions.this-is-my-daughter-son,Это моя дочь / мой сын.,,Eto moya dochʼ / moy syn.,ˈɛtʌ mˈoja dˈotʃʲ / mˈoj sˈɨn,,2,ru-agent-v1;ipa=espeak
 family-intros.this-is-my-husband,Это мой муж.,,Eto moy muzh.,ˈɛtʌ mˈoj mˈuʃ,,2,ru-agent-v1;ipa=espeak
 family-intros.this-is-my-wife,Это моя жена.,,Eto moya zhena.,ˈɛtʌ mˈoja ʒɨnˈɑ,,2,ru-agent-v1;ipa=espeak
 family-intros.this-is-my-son,Это мой сын.,,Eto moy syn.,ˈɛtʌ mˈoj sˈɨn,,2,ru-agent-v1;ipa=espeak
 family-intros.this-is-my-daughter,Это моя дочь.,,Eto moya dochʼ.,ˈɛtʌ mˈoja dˈotʃʲ,,2,ru-agent-v1;ipa=espeak
-introductions.i-am-traveling-alone,Я путешествую один.,Я путешествую одна.,Ya puteshestvuyu odin.,ˈja putʲiʃˈɛstvuju ʌdʲˈin,,2,ru-agent-v1;ipa=espeak
+introductions.i-am-traveling-alone,Я путешествую один.,,Ya puteshestvuyu odin.,ˈja putʲiʃˈɛstvuju ʌdʲˈin,,2,ru-agent-v1;fix=speaker-variants.md (feminine parked in text_alt: clear it) -- variants.csv speaker_gender=feminine has the same text;row-corrections-v1;ipa=espeak
 about-me.i-am-a-student,Я студент.,,Ya student.,ˈja studʲˈent,masculine; a woman says Я студентка. (Ya studentka.),2,ru-agent-v1;ipa=espeak
 about-me.i-am-retired,Я на пенсии.,,Ya na pensii.,ˈja nə pʲˈensʲiɪ,"invariant, no gender marking",2,ru-agent-v1;ipa=espeak
 about-me.i-am-a-teacher,Я учитель.,,Ya uchitelʼ.,ˈja utʃʲˈitʲiɭ,masculine; a woman says Я учительница. (Ya uchitelʼnitsa.),2,ru-agent-v1;ipa=espeak

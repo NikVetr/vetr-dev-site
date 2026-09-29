@@ -102,7 +102,7 @@ social-basics.politeness-particles,"தாய் மொழியில் மர
 board-answers.can-you-walk,உங்களால் நடக்க முடியுமா?,,uṅkaḷāl naṭakka muṭiyumā?,uŋɡʌɭaːl nʌɖʌkkʌ muɖijɯmaː,,2,ta-agent-v1;board-answers-v3;ipa=espeak
 board-answers.card-or-cash,"அட்டையா, பணமா?",,"aṭṭaiyā, paṇamā?","aʈʈaɪjaː, pʌɳʌmaː",,2,ta-agent-v1;ipa=espeak
 board-answers.help-is-coming,உதவி வருகிறது,,utavi varukiṟatu,udʌvi vʌɾɯɡirʌdɯ,,2,ta-agent-v1;ipa=espeak
-board-answers.how-many,எத்தனை வேண்டும்?,,etaṉai vēṇṭum?,ettʌnaɪ veːɳɖɯm,,2,ta-agent-v1;ipa=espeak
+board-answers.how-many,எத்தனை வேண்டும்?,,ettaṉai vēṇṭum?,ettʌnaɪ veːɳɖɯm,,2,"ta-agent-v1;fix=ISO 15919 as the pack writes it (tmp/ta/iso15919.py): எத்தனை has த்த, tt;row-corrections-v1;ipa=espeak"
 board-answers.i-am-calling-an-ambulance,நான் ஆம்புலன்ஸ் கூப்பிடுகிறேன்,,nāṉ āmpulaṉs kūppiṭukiṟēṉ,naːn aːmbɯlʌns kuːppiɖɯɡireːn,,2,ta-agent-v1;ipa=espeak
 board-answers.i-am-calling-the-police,நான் காவல்துறையை அழைக்கிறேன்,,nāṉ kāvaltuṟaiyai aḻaikkiṟēṉ,naːn kaːvʌʈtɯraɪjaɪ aɻaɪkkireːn,,2,ta-agent-v1;matches police-consulate.i-am-calling-the-police;ipa=espeak
 board-answers.i-do-not-have-a-phone,எனக்கு ஃபோன் இல்லை,,eṉakku ḥpōṉ illai,enʌkkɯ foːn illaɪ,,2,ta-agent-v1;ipa=espeak

@@ -3,7 +3,7 @@ time-scheduling.what-time-is-it,מה השעה?,מָה הַשָּׁעָה?,ma has
 time-scheduling.how-many-minutes,כמה דקות?,כַּמָּה דַּקּוֹת?,káma daqot?,kˈama dakˈot,how many minutes?,2,he-agent-v1;ipa=bgn
 time-scheduling.what-time-should-we-meet,באיזו שעה ניפגש?,בְּאֵיזוֹ שָׁעָה נִיפָּגֵשׁ?,be’éyzo sha‘a nipagesh?,beˈejzo ʃaˈa nipaɡˈeʃ,at what hour shall we meet?,2,he-agent-v1;ipa=bgn
 time-scheduling.can-we-change-the-time,אפשר לשנות את השעה?,אֶפְשָׁר לְשַׁנּוֹת אֶת הַשָּׁעָה?,efshar leshanot et hasha‘a?,efʃˈaʁ leʃanˈot ˈet haʃaˈa,can the hour be changed?,2,he-agent-v1;ipa=bgn
-time-scheduling.when-is-convenient,מתי נוח לך?,מָתַי נוֹחַ לְךָ?,matay nóaẖ lekha?,mˈataj nˈoax lexˈa,to a man; to a woman lakh,2,he-agent-v1;ipa=bgn
+time-scheduling.when-is-convenient,מתי נוח לך?,מָתַי נוֹחַ לְךָ?,matay nóaẖ lekha?,matˈaj nˈoax lexˈa,to a man; to a woman lakh,2,he-agent-v1;ipa=bgn
 time-scheduling.what-is-today-s-date,מה התאריך היום?,מָה הַתַּאֲרִיךְ הַיּוֹם?,ma hata’arikh hayom?,mˈa hataaʁˈix hajˈom,what is the date today?,2,he-agent-v1;ipa=bgn
 time-scheduling.what-day-is-it-today,איזה יום היום?,אֵיזֶה יוֹם הַיּוֹם?,éyze yom hayom?,ˈejze jˈom hajˈom,which day is it today?,2,he-agent-v1;ipa=bgn
 time-scheduling.what-time-does-it-open,באיזו שעה פותחים?,בְּאֵיזוֹ שָׁעָה פּוֹתְחִים?,be’éyzo sha‘a potẖim?,beˈejzo ʃaˈa potxˈim,at what hour do they open?,2,he-agent-v1;ipa=bgn
@@ -15,7 +15,7 @@ time-words.yesterday,אתמול,אֶתְמוֹל,etmol,etmˈol,,2,he-agent-v1;ip
 time-words.this-week,השבוע,הַשָּׁבוּעַ,hashavúa‘,haʃavˈua,,2,he-agent-v1;ipa=bgn
 time-words.next-week,שבוע הבא,שָׁבוּעַ הַבָּא,shavúa‘ haba,ʃavˈua habˈa,the coming week,2,he-agent-v1;ipa=bgn
 time-words.morning,בוקר,בּוֹקֶר,bóqer,bˈokeʁ,,2,he-agent-v1;ipa=bgn
-time-words.afternoon,אחרי הצהריים,אַחֲרֵי הַצׇּהֳרַיִים,aẖarey hatsohoráyim,axˈaʁej hatsohoʁˈajim,after noon,2,he-agent-v1;ipa=bgn
+time-words.afternoon,אחרי הצהריים,אַחֲרֵי הַצׇּהֳרַיִים,aẖarey hatsohoráyim,axaʁˈej hatsohoʁˈajim,after noon,2,he-agent-v1;ipa=bgn
 time-words.evening,ערב,עֶרֶב,‘érev,ˈeʁev,,2,he-agent-v1;ipa=bgn
 time-words.spring,אביב,אָבִיב,aviv,avˈiv,,2,he-agent-v1;ipa=bgn
 time-words.summer,קיץ,קַיִץ,qáyits,kˈajits,,2,he-agent-v1;ipa=bgn
@@ -33,7 +33,7 @@ months.january,ינואר,יָנוּאָר,yanú’ar,janˈuaʁ,,2,he-agent-v1;i
 months.february,פברואר,פֶבְּרוּאָר,febrú’ar,febʁˈuaʁ,,2,he-agent-v1;ipa=bgn
 months.march,מרץ,מֶרְץ,merts,mˈeʁts,,2,he-agent-v1;ipa=bgn
 months.april,אפריל,אַפְּרִיל,april,apʁˈil,,2,he-agent-v1;ipa=bgn
-months.may,מאי,מַאי,may,maj,,2,he-agent-v1;ipa=bgn
+months.may,מאי,מַאי,may,mˈaj,,2,he-agent-v1;ipa=bgn
 months.june,יוני,יוּנִי,yúni,jˈuni,,2,he-agent-v1;ipa=bgn
 months.july,יולי,יוּלִי,yúli,jˈuli,,2,he-agent-v1;ipa=bgn
 months.august,אוגוסט,אוֹגוּסְט,ógust,ˈoɡust,,2,he-agent-v1;ipa=bgn

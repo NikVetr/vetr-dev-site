@@ -6,8 +6,8 @@ dietary-needs.less-spicy,Менее острое.,,Meneye ostroye.,mʲˈenʲijɪ
 dietary-needs.no-peanuts,Без арахиса.,,Bez arakhisa.,bʲˈes arˈɑxisa,,2,ru-agent-v1;ipa=espeak
 dietary-needs.no-nuts,Без орехов.,,Bez orekhov.,bʲˈes ʌrʲˈexʌf,,2,ru-agent-v1;ipa=espeak
 dietary-needs.no-seafood,Без морепродуктов.,,Bez moreproduktov.,bʲˈes mʌrʲiprʌdˈuktʌf,,2,ru-agent-v1;ipa=espeak
-dietary-needs.i-am-vegetarian,Я вегетарианец,Я вегетарианка,Ya vegetarianets,ˈja vʲiɡʲitʌrʲiˈɑnʲits,,2,ru-agent-v1;ipa=espeak
-dietary-needs.i-am-vegan,Я веган,Я веганка,Ya vegan,ˈja vʲˈeɡʌn,,2,ru-agent-v1;ipa=espeak
+dietary-needs.i-am-vegetarian,Я вегетарианец,,Ya vegetarianets,ˈja vʲiɡʲitʌrʲiˈɑnʲits,,2,ru-agent-v1;fix=speaker-variants.md (feminine parked in text_alt: clear it) -- variants.csv speaker_gender=feminine has the same text;row-corrections-v1;ipa=espeak
+dietary-needs.i-am-vegan,Я веган,,Ya vegan,ˈja vʲˈeɡʌn,,2,ru-agent-v1;fix=speaker-variants.md (feminine parked in text_alt: clear it) -- variants.csv speaker_gender=feminine has the same text;row-corrections-v1;ipa=espeak
 dietary-needs.i-do-not-eat,Я не ем {}.,,Ya ne yem {}.,ˈja nʲe jˈem {},,2,ru-agent-v1;ipa=espeak
 dietary-needs.i-am-allergic-to,У меня аллергия на {}.,,U menya allergiya na {}.,ˈu mʲinʲˈɑ aɭɭʲirɡʲˈija nˈɑ {},,2,ru-agent-v1;ipa=espeak
 dietary-needs.does-it-contain-fish-stock,Здесь есть рыбный бульон?,,Zdesʼ yestʼ rybnyy bulʼon?,ʑdʲˈesʲ jestʲ rˈɨbnɨj buɭʲˈon,,2,ru-agent-v1;ipa=espeak

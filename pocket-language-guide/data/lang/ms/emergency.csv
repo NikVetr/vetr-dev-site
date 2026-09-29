@@ -6,19 +6,19 @@ emergency-medical.i-am-sick,Saya sakit,,sˈajə sˈaket,,2,ms-agent-v1;ipa=espea
 emergency-medical.i-am-injured,Saya terluka,,sˈajə təɾrlˈukə,,2,ms-agent-v1;ipa=espeak
 emergency-medical.it-hurts-here,Sakitnya di sini,,sakˈetɲə di sˈini,,2,ms-agent-v1;ipa=espeak
 emergency-medical.where-is-a-pharmacy,Farmasi di mana?,,farmˈasi dimˈanə,,2,ms-agent-v1;ipa=espeak
-emergency-medical.please-take-me-to-a-hospital,Tolong antar saya ke rumah sakit,,tˈoloŋ ˈantar sˈajə kə rˈumah sˈaket,,2,ms-agent-v1;ipa=espeak
+emergency-medical.please-take-me-to-a-hospital,Tolong hantar saya ke hospital,,tˈoloŋ hˈantar sˈajə kə hospˈital,,2,ms-agent-v1;fix=DBP hantar;fix=MABBIM hospital;row-corrections-v1;ipa=espeak
 emergency-medical.i-feel-unwell,Saya tidak enak badan,,sˈajə tˈidaʔ ˈɛnaʔ bˈadan,,2,ms-agent-v1;ipa=espeak
-emergency-medical.this-is-an-emergency,Ini darurat!,,ˈini darˈurat,,2,ms-agent-v1;ipa=espeak
+emergency-medical.this-is-an-emergency,Ini kecemasan!,,ˈini kətʃəmˈasan,,2,ms-agent-v1;fix=MABBIM kecemasan;row-corrections-v1;ipa=espeak
 emergency-medical.i-am-having-a-severe-allergic-reaction,Saya mengalami anafilaksis,Reaksi alergi berat,sˈajə məŋalˈami ˌanafilˈakses,,2,ms-agent-v1;ipa=espeak
 emergency-medical.i-cannot-breathe,Saya tidak boleh bernafas,Saya sesak nafas,sˈajə tˈidaʔ bˈoleh bərnˈafas,,2,ms-agent-v1;ipa=espeak
 emergency-medical.i-am-bleeding-badly,Perdarahan saya hebat,Saya berdarah banyak,pəɾrdarˈahan sˈajə hˈɛbat,,2,ms-agent-v1;ipa=espeak
 emergency-medical.i-have-chest-pain,Dada saya nyeri,Nyeri dada,dˈadə sˈajə ɲˈəri,,2,ms-agent-v1;ipa=espeak
 emergency-medical.this-person-is-unconscious,Orang ini tidak sedar,Orang ini pingsan,ˈɔraŋ ˈini tˈidaʔ sˈədar,,2,ms-agent-v1;ipa=espeak
-emergency-medical.where-is-the-nearest-hospital,Rumah sakit terdekat di mana?,,rˈumah sˈaket tərdˈəkat dimˈanə,,2,ms-agent-v1;ipa=espeak
-emergency-medical.what-is-the-emergency-number,Nombor daruratnya berapa?,,nˈombɔr dˌarurˈatɲə bərˈapə,,2,ms-agent-v1;ipa=espeak
+emergency-medical.where-is-the-nearest-hospital,Hospital terdekat di mana?,,hospˈital tərdˈəkat dimˈanə,,2,ms-agent-v1;fix=MABBIM hospital;row-corrections-v1;ipa=espeak
+emergency-medical.what-is-the-emergency-number,Nombor kecemasannya berapa?,,nˈombɔr kətʃˌɛmasˈanɲə bərˈapə,,2,ms-agent-v1;fix=MABBIM kecemasan;row-corrections-v1;ipa=espeak
 emergency-medical.is-there-a-doctor-who-speaks-english,Ada doktor yang boleh bahasa {source}?,,ˈadə dˈoktər jaŋ bˈoleh bahˈasə {source},,2,language-slots-v1;ipa=espeak
-emergency-medical.i-think-a-bone-is-broken,Sepertinya saya patah tulang,,səpəɾrtˈiɲə sˈajə pˈatah tˈulaŋ,,2,ms-agent-v1;ipa=espeak
-emergency-medical.please-call-my-emergency-contact,Tolong hubungi kontak darurat saya,,tˈoloŋ hubˈuŋi kˈontaʔ darˈurat sˈajə,,2,ms-agent-v1;ipa=espeak
+emergency-medical.i-think-a-bone-is-broken,Nampaknya saya patah tulang,,nampˈakɲə sˈajə pˈatah tˈulaŋ,,2,ms-agent-v1;fix=DBP nampaknya;row-corrections-v1;ipa=espeak
+emergency-medical.please-call-my-emergency-contact,Tolong hubungi kontak kecemasan saya,,tˈoloŋ hubˈuŋi kˈontaʔ kətʃəmˈasan sˈajə,,2,ms-agent-v1;fix=MABBIM kecemasan;row-corrections-v1;ipa=espeak
 emergency-medical.i-have-travel-insurance,Saya punya insurans perjalanan,,sˈajə pˈuɲə insˈurans pəɾrdʒalˈanan,,2,ms-agent-v1;ipa=espeak
 medical-conditions.i-am-diabetic,Saya punya diabetes,Saya kencing manis,sˈajə pˈuɲə dˌiabˈetes,older lay word for diabetes,2,ms-agent-v1;ipa=espeak
 medical-conditions.i-need-insulin,Saya perlu insulin,,sˈajə pˈəɾrlu insˈulen,,2,ms-agent-v1;ipa=espeak
@@ -31,7 +31,7 @@ medical-conditions.i-need-my-inhaler,Saya perlu inhaler saya,Saya perlu ubat asm
 medical-conditions.i-am-pregnant,Saya hamil,,sˈajə hˈamel,,2,ms-agent-v1;ipa=espeak
 medical-conditions.i-carry-an-adrenaline-injector,Saya bawa suntikan adrenalin,Saya bawa suntikan epinefrin,sˈajə bˈawə suntˈikan ˌadrənˈalen,EpiPen is unknown here; adrenalin is the word,2,ms-agent-v1;ipa=espeak
 medical-conditions.i-take-medicine-for,Saya minum ubat untuk {},,sˈajə mˈinom ˈubat ˈuntoʔ {},,2,ms-agent-v1;ipa=espeak
-medical-conditions.i-take-blood-thinners,Saya minum ubat pengencer darah,Saya minum antikoagulan,sˈajə mˈinom ˈubat pəŋˈɛntʃeɾr dˈarah,,2,ms-agent-v1;ipa=espeak
+medical-conditions.i-take-blood-thinners,Saya minum ubat pencair darah,Saya minum antikoagulan,sˈajə mˈinom ˈubat pˈɛntʃaɪr dˈarah,,2,ms-agent-v1;fix=DBP pencair;fix=KKM Buku Rawatan Antikoagulasi 2021 ubat cair darah;row-corrections-v1;ipa=espeak
 medical-conditions.medicine-allergy,Alergi ubat: {},,alˈəɾrɡi ˈubat {},,2,ms-agent-v1;ipa=espeak
 medical-conditions.this-card-lists-my-conditions,Ini senarai keadaan perubatan saya,,ˈini sənˈaraɪ kəadˈaan pərubˈatan sˈajə,,2,ms-agent-v1;ipa=espeak
 medical-conditions.this-is-my-medicine,Ini ubat saya,,ˈini ˈubat sˈajə,,2,ms-agent-v1;ipa=espeak
@@ -45,50 +45,50 @@ medical-conditions.i-am-allergic-to-sulfa-drugs,Saya alergi ubat sulfa,Saya aler
 pharmacy-symptoms.which-pharmacy-is-open-now,Farmasi mana yang buka sekarang?,,farmˈasi mˈanə jaŋ bˈukə səkˈaraŋ,,2,ms-agent-v1;ipa=espeak
 pharmacy-symptoms.i-need-medicine-for,Saya perlu ubat untuk {},,sˈajə pˈəɾrlu ˈubat ˈuntoʔ {},,2,ms-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-fever,Saya demam,,sˈajə dˈəmam,,2,ms-agent-v1;ipa=espeak
-pharmacy-symptoms.i-think-i-have-malaria,Sepertinya saya kena malaria,,səpəɾrtˈiɲə sˈajə kˈənə mˌalarˈiə,,2,malaria-v1;ipa=espeak
-pharmacy-symptoms.i-need-a-malaria-test,Saya perlu tes malaria,pemeriksaan darah malaria,sˈajə pˈəɾrlu tˈɛs mˌalarˈiə,,2,malaria-v1;ipa=espeak
-pharmacy-symptoms.i-have-diarrhea,Saya diare,Mencret,sˈajə diˈare,,2,ms-agent-v1;ipa=espeak
+pharmacy-symptoms.i-think-i-have-malaria,Nampaknya saya kena malaria,,nampˈakɲə sˈajə kˈənə mˌalarˈiə,,2,malaria-v1;fix=DBP nampaknya;row-corrections-v1;ipa=espeak
+pharmacy-symptoms.i-need-a-malaria-test,Saya perlu ujian malaria,pemeriksaan darah malaria,sˈajə pˈəɾrlu udʒˈian mˌalarˈiə,,2,malaria-v1;fix=MABBIM ujian;row-corrections-v1;ipa=espeak
+pharmacy-symptoms.i-have-diarrhea,Saya cirit-birit,,sˈajə tʃˈiretbiret,,2,ms-agent-v1;fix=DBP cirit-birit;row-corrections-v1;ipa=espeak
 pharmacy-symptoms.where-is-an-all-night-pharmacy,Farmasi 24 jam di mana?,,farmˈasi dˈuəpˌulohəmpat dʒˈam dimˈanə,Malaysia has no dedicated 24-hour chain the way Indonesia's K-24 is; some Guardian and Watsons outlets in cities open 24 hours,2,ms-agent-v1;ipa=espeak
 pharmacy-symptoms.painkiller,Ubat pereda nyeri,,ˈubat pərˈɛdə ɲˈəri,,2,ms-agent-v1;ipa=espeak
 pharmacy-symptoms.do-i-need-a-prescription,Perlu preskripsi doktor?,,pˈəɾrlu prəskrˈipsi dˈoktər,,2,ms-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-headache,Kepala saya sakit,Sakit kepala,kəpˈalə sˈajə sˈaket,,2,ms-agent-v1;ipa=espeak
 pharmacy-symptoms.paracetamol-acetaminophen,Parasetamol,Panadol · Uphamol,pˌarasətˈamol,,2,ms-agent-v1;ipa=espeak
-pharmacy-symptoms.how-much-should-i-take,Dosisnya berapa?,,dosˈesɲə bərˈapə,,2,ms-agent-v1;ipa=espeak
+pharmacy-symptoms.how-much-should-i-take,Dosnya berapa?,,dˈosɲə bərˈapə,,2,ms-agent-v1;fix=DBP dos;fix=MABBIM dos;row-corrections-v1;ipa=espeak
 pharmacy-symptoms.i-am-vomiting,Saya muntah,,sˈajə mˈuntah,,2,ms-agent-v1;ipa=espeak
-pharmacy-symptoms.rehydration-salts,Oralit,,ɔrˈalet,"the generic name here, not a brand",2,ms-agent-v1;ipa=espeak
+pharmacy-symptoms.rehydration-salts,Larutan rehidrasi oral,,larˈutan rˌɛhidrˈasi ˈoral,"oral rehydration solution, the generic term, not a brand",2,ms-agent-v1;fix=MABBIM larutan rehidrasi oral;row-corrections-v1;ipa=espeak
 pharmacy-symptoms.how-many-times-a-day,Berapa kali sehari?,,bərˈapə kˈali səhˈari,,2,ms-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-stomach-ache,Perut saya sakit,Sakit perut,pˈərot sˈajə sˈaket,,2,ms-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-cough,Saya batuk,,sˈajə bˈatoʔ,,2,ms-agent-v1;ipa=espeak
 pharmacy-symptoms.antihistamine,Antihistamin,Piriton · cetirizine,ˌantihistˈamen,CTM never needs a prescription,2,ms-agent-v1;ipa=espeak
-pharmacy-symptoms.anti-diarrhea-medicine,Ubat diare,Imodium,ˈubat diˈare,,2,ms-agent-v1;ipa=espeak
-pharmacy-symptoms.is-this-safe-to-take-with,Ini aman diminum bersama {}?,,ˈini ˈaman dimˈinom bərsˈamə {},,2,ms-agent-v1;ipa=espeak
-pharmacy-symptoms.i-feel-dizzy,Saya pusing,Kepala saya berputar,sˈajə pˈuseŋ,"pusing = lightheaded, not headache",2,ms-agent-v1;ipa=espeak
+pharmacy-symptoms.anti-diarrhea-medicine,Ubat cirit-birit,Imodium,ˈubat tʃˈiretbiret,,2,ms-agent-v1;fix=DBP cirit-birit;row-corrections-v1;ipa=espeak
+pharmacy-symptoms.is-this-safe-to-take-with,Ini selamat diminum bersama {}?,,ˈini səlˈamat dimˈinom bərsˈamə {},,2,ms-agent-v1;fix=MABBIM selamat;row-corrections-v1;ipa=espeak
+pharmacy-symptoms.i-feel-dizzy,Saya pening,Kepala saya berputar,sˈajə pˈəneŋ,"pening = dizzy, MABBIM's Malaysian term for dizziness",2,ms-agent-v1;fix=MABBIM pening;row-corrections-v1;ipa=espeak
 pharmacy-symptoms.ibuprofen,Ibuprofen,Nurofen,ˌibuprˈofen,,2,ms-agent-v1;ipa=espeak
-pharmacy-symptoms.i-have-a-sore-throat,Tenggorokan saya sakit,Radang tenggorokan,tˌɛŋɡɔrˈokan sˈajə sˈaket,,2,ms-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-sore-throat,Tekak saya sakit,Radang tekak,tˈəkak sˈajə sˈaket,,2,ms-agent-v1;fix=MABBIM tekak;row-corrections-v1;ipa=espeak
 pharmacy-symptoms.can-i-get-this-medicine-here,Ubat ini ada di sini?,,ˈubat ˈini ˈadə di sˈini,,2,ms-agent-v1;ipa=espeak
-pharmacy-symptoms.bandage,Plester,Kain kasa,plˈɛsteɾr,"not pembalut, which is a sanitary pad",2,ms-agent-v1;ipa=espeak
+pharmacy-symptoms.bandage,Plaster,Kain kasa,plˈastəɾr,"not pembalut, which is a sanitary pad",2,ms-agent-v1;fix=DBP plaster (3);row-corrections-v1;ipa=espeak
 pharmacy-symptoms.the-pain-is-severe,Sakitnya parah,,sakˈetɲə pˈarah,,2,ms-agent-v1;ipa=espeak
 pharmacy-symptoms.antiseptic,Antiseptik,Betadine,ˌantisˈəpteʔ,,2,ms-agent-v1;ipa=espeak
 pharmacy-symptoms.i-feel-nauseous,Saya mual,,sˈajə mˈual,,2,ms-agent-v1;ipa=espeak
-pharmacy-symptoms.i-have-a-rash,Kulit saya ruam,Biduran · gatal-gatal,kˈulet sˈajə rˈuam,,2,ms-agent-v1;ipa=espeak
+pharmacy-symptoms.i-have-a-rash,Kulit saya ruam,Gatal-gatal,kˈulet sˈajə rˈuam,,2,ms-agent-v1;fix=DBP biduran absent;row-corrections-v1;ipa=espeak
 pharmacy-symptoms.before-or-after-food,Sebelum atau sesudah makan?,,səbˈəlom ˈataʊ səsˈudah mˈakan,,2,ms-agent-v1;ipa=espeak
-pharmacy-symptoms.i-think-it-is-infected,Sepertinya infeksi,,səpəɾrtˈiɲə infˈəksi,,2,ms-agent-v1;ipa=espeak
+pharmacy-symptoms.i-think-it-is-infected,Nampaknya infeksi,,nampˈakɲə infˈəksi,,2,ms-agent-v1;fix=DBP nampaknya;row-corrections-v1;ipa=espeak
 pharmacy-symptoms.motion-sickness-tablets,Ubat mabuk perjalanan,Novomin,ˈubat mˈaboʔ pəɾrdʒalˈanan,,2,ms-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-cut,Saya ada luka sayat,,sˈajə ˈadə lˈukə sˈajat,,2,ms-agent-v1;ipa=espeak
 pharmacy-symptoms.antacid,Antasida,Gaviscon,ˌantasˈidə,gastrik = stomach acid trouble,2,ms-agent-v1;ipa=espeak
 pharmacy-symptoms.i-have-a-burn,Saya luka bakar,,sˈajə lˈukə bˈakar,,2,ms-agent-v1;ipa=espeak
 pharmacy-symptoms.it-started-days-ago,Mulai {} hari lalu,,mulˈai {} hˈari lˈalu,,2,ms-agent-v1;ipa=espeak
 pharmacy-symptoms.cough-medicine,Ubat batuk,,ˈubat bˈatoʔ,,2,ms-agent-v1;ipa=espeak
-pharmacy-symptoms.is-this-safe-during-pregnancy,Ini aman untuk ibu hamil?,,ˈini ˈaman ˈuntoʔ ˈibu hˈamel,,2,ms-agent-v1;ipa=espeak
+pharmacy-symptoms.is-this-safe-during-pregnancy,Ini selamat untuk ibu hamil?,,ˈini səlˈamat ˈuntoʔ ˈibu hˈamel,,2,ms-agent-v1;fix=MABBIM selamat;row-corrections-v1;ipa=espeak
 body-parts.head,Kepala,,kəpˈalə,,2,ms-agent-v1;ipa=espeak
 body-parts.stomach,Perut,,pˈərot,,2,ms-agent-v1;ipa=espeak
 body-parts.back,Belakang,,bəlˈakaŋ,,2,ms-agent-v1;fix=DBP-belakang;ipa=espeak
-body-parts.throat,Tenggorokan,,tˌɛŋɡɔrˈokan,,2,ms-agent-v1;ipa=espeak
+body-parts.throat,Tekak,,tˈəkak,,2,ms-agent-v1;fix=MABBIM tekak;row-corrections-v1;ipa=espeak
 body-parts.tooth,Gigi,,ɡˈiɡi,,2,ms-agent-v1;ipa=espeak
 body-parts.chest,Dada,,dˈadə,,2,ms-agent-v1;ipa=espeak
 body-parts.eye,Mata,,mˈatə,,2,ms-agent-v1;ipa=espeak
 body-parts.ear,Telinga,,təlˈiŋə,,2,ms-agent-v1;ipa=espeak
-body-parts.leg,Kaki,Tungkai,kˈaki,kaki covers leg and foot,2,ms-agent-v1;ipa=espeak
+body-parts.leg,Kaki,,kˈaki,kaki covers leg and foot,2,ms-agent-v1;fix=DBP tungkai is Mn;row-corrections-v1;ipa=espeak
 body-parts.arm,Lengan,,lˈəŋan,tangan can mean the whole arm,2,ms-agent-v1;ipa=espeak
 body-parts.foot,Kaki,Telapak kaki,kˈaki,,2,ms-agent-v1;ipa=espeak
 body-parts.hand,Tangan,,tˈaŋan,,2,ms-agent-v1;ipa=espeak
@@ -101,7 +101,7 @@ lost-rescue.please-call-the-police,Tolong panggil polis,,tˈoloŋ pˈaŋɡel pˈ
 lost-rescue.we-are-here,Kami di sini,,kˈami di sˈini,,2,ms-agent-v1;ipa=espeak
 lost-rescue.please-look-at-my-location-pin,Tolong lihat titik lokasi saya,,tˈoloŋ lˈihat tˈiteʔ lokˈasi sˈajə,,2,ms-agent-v1;ipa=espeak
 lost-rescue.i-cannot-walk,Saya tidak boleh jalan,,sˈajə tˈidaʔ bˈoleh dʒˈalan,,2,ms-agent-v1;ipa=espeak
-lost-rescue.i-sprained-my-ankle,Pergelangan kaki saya keseleo,Pergelangan kaki saya terkilir,pəɾrɡəlˈaŋan kˈaki sˈajə kəselˈɛo,,2,ms-agent-v1;ipa=espeak
+lost-rescue.i-sprained-my-ankle,Pergelangan kaki saya terseliuh,Pergelangan kaki saya terkilir,pəɾrɡəlˈaŋan kˈaki sˈajə təɾrsəlˈioh,,2,ms-agent-v1;fix=DBP terseliuh;row-corrections-v1;ipa=espeak
 lost-rescue.please-contact-rescue,Tolong hubungi Bomba,Tolong hubungi APM,tˈoloŋ hubˈuŋi bˈombə,"Bomba (Jabatan Bomba dan Penyelamat Malaysia) is Malaysia's fire and rescue department, the general rescue contact",2,ms-agent-v1;ipa=espeak
 lost-rescue.my-companion-is-missing,Teman saya hilang,,tˈəman sˈajə hˈilaŋ,,2,ms-agent-v1;ipa=espeak
 lost-rescue.please-look-at-my-current-location,Tolong lihat lokasi saya sekarang,,tˈoloŋ lˈihat lokˈasi sˈajə səkˈaraŋ,,2,ms-agent-v1;ipa=espeak
@@ -138,4 +138,4 @@ police-consulate.may-i-have-a-copy-of-the-report,Boleh minta salinan laporannya?
 police-consulate.i-will-not-sign-anything-i-cannot-read,Saya tidak tanda tangan yang tidak boleh saya baca,,sˈajə tˈidaʔ tˈandə tˈaŋan jaŋ tˈidaʔ bˈoleh sˈajə bˈatʃə,,2,ms-agent-v1;ipa=espeak
 police-consulate.am-i-free-to-go,Saya boleh pergi?,,sˈajə bˈoleh pˈəɾrɡi,,2,ms-agent-v1;ipa=espeak
 police-consulate.i-do-not-want-to-go-with-you,Saya tidak mahu ikut,Saya tidak mahu ikut dengan anda,sˈajə tˈidaʔ mˈahu ˈikot,,2,ms-agent-v1;ipa=espeak
-pharmacy-symptoms.i-think-i-have-dengue,Sepertinya saya kena demam denggi,,səpəɾrtˈiɲə sˈajə kˈənə dˈəmam dˈɛŋɡi,,2,dengue-agent-v1;in-pack-frame;ipa=espeak
+pharmacy-symptoms.i-think-i-have-dengue,Nampaknya saya kena demam denggi,,nampˈakɲə sˈajə kˈənə dˈəmam dˈɛŋɡi,,2,dengue-agent-v1;in-pack-frame;fix=DBP nampaknya;row-corrections-v1;ipa=espeak

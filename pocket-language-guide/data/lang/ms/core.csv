@@ -29,7 +29,7 @@ question-words.what,apa,,ˈapə,,2,ms-agent-v1;ipa=espeak
 question-words.where,di mana,,dimˈanə,,2,ms-agent-v1;ipa=espeak
 question-words.who,siapa,,siˈapə,,2,ms-agent-v1;ipa=espeak
 question-words.which-one,yang mana,,jaŋmˈanə,,2,ms-agent-v1;ipa=espeak
-question-words.when,kapan,,kˈapan,,2,ms-agent-v1;ipa=espeak
+question-words.when,bila,,bˈilə,,2,ms-agent-v1;fix=DBP bila;row-corrections-v1;ipa=espeak
 question-words.how,bagaimana,macam mana,bˌaɡaɪmˈanə,,2,ms-agent-v1;ipa=espeak
 question-words.how-much-many,berapa,,bərˈapə,,2,ms-agent-v1;ipa=espeak
 question-words.how-many,berapa banyak,,bərˈapə bˈaɲaʔ,,2,ms-agent-v1;ipa=espeak

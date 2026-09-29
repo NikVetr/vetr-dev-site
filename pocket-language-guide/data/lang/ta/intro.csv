@@ -16,7 +16,7 @@ family-intros.this-is-my-wife,இவர் என் மனைவி,,ivar eṉ 
 family-intros.this-is-my-son,இவன் என் மகன்,,ivaṉ eṉ makaṉ,ivʌn en mʌɡʌn,,2,ta-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
 family-intros.this-is-my-daughter,இவள் என் மகள்,,ivaḷ eṉ makaḷ,ivʌɭ en mʌɡʌɭ,,2,ta-agent-v1;split-from=this-is-my-daughter-son;ipa=espeak
 about-me.i-am-a-student,நான் மாணவர்,,nāṉ māṇavar,naːn maːɳʌvʌr,"மாணவர், the common-gender -ர் form, in preference to the sex-marked மாணவன்/மாணவி pair since ta declares no speaker_gender axis",2,ta-agent-v1;ipa=espeak
-about-me.i-am-retired,நான் பணி ஓய்வு பெற்றேன்,,nāṉ paṇi ōyvu peṭṟēṉ,naːn pʌɳi oːjvɯ peʈreːn,,2,ta-agent-v1;ipa=espeak
+about-me.i-am-retired,நான் பணி ஓய்வு பெற்றேன்,,nāṉ paṇi ōyvu peṟṟēṉ,naːn pʌɳi oːjvɯ peʈreːn,,2,"ta-agent-v1;fix=ISO 15919 as the pack writes it (tmp/ta/iso15919.py): பெற்றேன் has ற்ற, ṟṟ;row-corrections-v1;ipa=espeak"
 about-me.i-am-a-teacher,நான் ஆசிரியர்,,nāṉ āciriyar,naːn aːsiɾijʌr,ஆசிரியர் is already common-gender in standard Tamil,2,ta-agent-v1;ipa=espeak
 about-me.i-am-a-doctor,நான் மருத்துவர்,,nāṉ maruttuvar,naːn mʌɾɯttɯvʌr,"மருத்துவர், the common-gender native word, rather than டாக்டர்",2,ta-agent-v1;ipa=espeak
 about-me.i-am-a-nurse,நான் தாதி,,nāṉ tāti,naːn taːdi,"தாதி, the everyday word, used regardless of the speaker's own gender",2,ta-agent-v1;ipa=espeak
@@ -25,7 +25,7 @@ about-me.i-work-in-an-office,நான் அலுவலகத்தில் �
 about-me.i-have-my-own-business,எனக்கு என் சொந்த தொழில் இருக்கிறது,,eṉakku eṉ conta toḻil irukkiṟatu,enʌkkɯ en sondʌ toɻil iɾɯkkirʌdɯ,"இருக்கிறது agrees with தொழில் (business), a third-person thing, not the speaker",2,ta-agent-v1;ipa=espeak
 family-intros.this-is-my-mother,இவர் என் அம்மா,,ivar eṉ ammā,ivʌr en ammaː,,2,ta-agent-v1;ipa=espeak
 family-intros.this-is-my-father,இவர் என் அப்பா,,ivar eṉ appā,ivʌr en appaː,,2,ta-agent-v1;ipa=espeak
-family-intros.this-is-my-brother,இவர் என் சகோதரன்,,ivar eṉ sakōtaraṉ,ivʌr en sʌɡoːdʌɾʌn,"சகோதரன், the age-neutral formal word, since Tamil's everyday brother words (அண்ணன் elder / தம்பி younger) force an age choice the concept does not give",2,ta-agent-v1;ipa=espeak
-family-intros.this-is-my-sister,இவர் என் சகோதரி,,ivar eṉ sakōtari,ivʌr en sʌɡoːdʌɾi,"சகோதரி, the age-neutral counterpart to சகோதரன்",2,ta-agent-v1;ipa=espeak
+family-intros.this-is-my-brother,இவர் என் சகோதரன்,,ivar eṉ cakōtaraṉ,ivʌr en sʌɡoːdʌɾʌn,"சகோதரன், the age-neutral formal word, since Tamil's everyday brother words (அண்ணன் elder / தம்பி younger) force an age choice the concept does not give",2,"ta-agent-v1;fix=ISO 15919 as the pack writes it (tmp/ta/iso15919.py): ச is c, as in the pack's cari and celutta;row-corrections-v1;ipa=espeak"
+family-intros.this-is-my-sister,இவர் என் சகோதரி,,ivar eṉ cakōtari,ivʌr en sʌɡoːdʌɾi,"சகோதரி, the age-neutral counterpart to சகோதரன்",2,"ta-agent-v1;fix=ISO 15919 as the pack writes it (tmp/ta/iso15919.py): ச is c, as in the pack's cari and celutta;row-corrections-v1;ipa=espeak"
 family-intros.this-is-my-partner,இவர் என் துணை,,ivar eṉ tuṇai,ivʌr en tuɳaɪ,"துணை 'companion/spouse', common-gender and not கூட்டாளி (business partner)",2,ta-agent-v1;ipa=espeak
-family-intros.this-is-my-colleague,இவர் என் சக ஊழியர்,,ivar eṉ saka ūḻiyar,ivʌr en sʌɡʌ uːɻijʌr,"ஊழியர், common-gender -ர் form",2,ta-agent-v1;ipa=espeak
+family-intros.this-is-my-colleague,இவர் என் சக ஊழியர்,,ivar eṉ caka ūḻiyar,ivʌr en sʌɡʌ uːɻijʌr,"ஊழியர், common-gender -ர் form",2,"ta-agent-v1;fix=ISO 15919 as the pack writes it (tmp/ta/iso15919.py): ச is c, as in the pack's cari and celutta;row-corrections-v1;ipa=espeak"

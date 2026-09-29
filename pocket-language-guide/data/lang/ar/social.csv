@@ -113,8 +113,8 @@ board-answers.it-is-closed,مغلق,,mughlaq,mˈuɣlaq,,2,ar-agent-v1;ipa=espeak
 board-answers.it-is-over-there,هناك,,hunāk,hˈunaːkˌa,,2,ar-agent-v1;ipa=espeak
 board-answers.none-of-these,ليس هذا ما أريد أن أقوله,,laysa hādhā mā urīdu an aqūlahu,lˈajsa haˈaðaˌa mˈaː ʔɹˈiːd ʔn ʔqwlh,,2,ar-agent-v1;ipa=espeak
 board-answers.not-possible,هذا غير ممكن,,hādhā ghayr mumkin,haˈaðaˌa ɣˈajr mˈumkin,,2,ar-agent-v1;ipa=espeak
-board-answers.please-wait,لحظة من فضلك,,laḥẓah min faḍlak,lˈaħða mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
-board-answers.say-it-again,مرة أخرى، من فضلك؟,,"marrah ukhrā, min faḍlak?",mˈarɹa ʔˈuxɹaː mˈin fˈadˤlka,,2,ar-agent-v1;ipa=espeak
+board-answers.please-wait,لحظة لطفًا,,laḥẓah luṭfan,lˈaħða lˈut̪fan,,2,ar-agent-v1;fix=Mukhtar-Omar-2008 لطفًا;reply-neutrality-rule;row-corrections-v1;ipa=espeak
+board-answers.say-it-again,مرة أخرى، لطفًا؟,,"marrah ukhrá, luṭfan?",mˈarɹa ʔˈuxɹaː lˈut̪fan,,2,ar-agent-v1;fix=Mukhtar-Omar-2008 لطفًا;reply-neutrality-rule;row-corrections-v1;ipa=espeak
 board-answers.stay-here,البقاء هنا أفضل,,al-baqāʾ hunā afḍal,ʔalbˈaqaːʔ hˈunaː ʔˈafdˤal,,2,ar-agent-v1;ipa=espeak
 board-answers.the-hospital-is-close,المستشفى قريب,,al-mustashfá qarīb,ʔalmˈustaʃfˌaː qˈaɹiːb,,2,ar-agent-v1;ipa=espeak
 board-answers.there-is-no-wait,لا انتظار، يمكن الدخول الآن,,"lā intiẓār, yumkin al-dukhūl al-ān",lˈaː ˈintiðˌaːr jmkˈunna ʔaddˈuxuːl alʔˈaːn,,2,ar-agent-v1;ipa=espeak

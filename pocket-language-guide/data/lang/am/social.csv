@@ -67,7 +67,7 @@ sim-data.where-can-i-buy-a-plug-adapter,አዳፕተር የት መግዛት እ�
 sim-data.mobile-data,የሞባይል ዳታ,,yemobayil data,jəmobajɨl data,,2,am-agent-v1;ipa=bgn-am
 sim-data.can-i-top-up-this-sim,ይህን ሲም መሙላት ይቻላል?,,yihin sīm memulat yichalal?,jɨhɨn sim məmulat jɨtʃalal,,2,am-agent-v1;ipa=bgn-am
 sim-data.top-up,መሙላት,,memulat,məmulat,,2,am-agent-v1;ipa=bgn-am
-sim-data.is-there-coverage-in,በ{} ኔትወርክ አለ?,,be{} nētiwerk āle?,bə {} netɨwərk ʔalə,is there network in {}?,2,am-agent-v1;ipa=bgn-am
+sim-data.is-there-coverage-in,በ{} ኔትወርክ አለ?,,be{} nētiwerk ālle?,bə {} netɨwərk ʔalːə,is there network in {}?,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allə;row-corrections-v1;ipa=bgn-am
 sim-data.signal,ሲግናል,,sīginal,siɡɨnal,,2,am-agent-v1;ipa=bgn-am
 sim-data.esim,ኢ-ሲም,,ī-sīm,ʔisim,,2,am-agent-v1;ipa=bgn-am
 sim-data.prepaid,በቅድሚያ የተከፈለ,,bekʼidimīya yetekefele,bəkʼɨdɨmija jətəkəfələ,paid in advance,2,am-agent-v1;ipa=bgn-am
@@ -77,7 +77,7 @@ children.make-an-announcement,እባክዎ ማስታወቂያ ያስተላልፉ
 children.child-age,ልጄ {} ዓመቱ ነው,,lijē {} ʽametu new,lɨdʒe {} ʔamətu nəw,my child is {} years old,2,am-agent-v1;ipa=bgn-am
 children.high-chair,የልጅ ወንበር አለዎት?,,yelij wenber āllewot?,jəlɨdʒ wənbər ʔalːəwot,do you have a child chair?,2,am-agent-v1;ipa=bgn-am
 children.baby-changing-room,የልጅ መቀየሪያ ክፍል የት ነው?,,yelij mekʼeyerīya kifil yet new?,jəlɨdʒ məkʼəjərija kɨfɨl jət nəw,,2,am-agent-v1;ipa=bgn-am
-children.childrens-menu,የልጆች ሜኑ አለ?,,yelijoch mēnu āle?,jəlɨdʒotʃ menu ʔalə,,2,am-agent-v1;ipa=bgn-am
+children.childrens-menu,የልጆች ሜኑ አለ?,,yelijoch mēnu ālle?,jəlɨdʒotʃ menu ʔalːə,,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allə;row-corrections-v1;ipa=bgn-am
 children.suitable-for-children,ይህ ለልጆች ተስማሚ ነው?,,yih lelijoch tesmamī new?,jɨh ləlɨdʒotʃ təsmami nəw,,2,am-agent-v1;ipa=bgn-am
 children.minimum-age,ዝቅተኛው ዕድሜ ስንት ነው?,,zikʼitenyaw ʽidimē sint new?,zɨkʼɨtəɲaw ʔɨdɨme sɨnt nəw,,2,am-agent-v1;ipa=bgn-am
 children.do-children-pay,ልጆች ይከፍላሉ?,,lijoch yikeflallu?,lɨdʒotʃ jɨkəflalːu,,2,am-agent-v1;ipa=bgn-am
@@ -85,7 +85,7 @@ children.crib,የልጅ አልጋ አለዎት?,,yelij ālga āllewot?,jəlɨdʒ
 children.warm-this-bottle,እባክዎ ይህን ጠርሙስ ያሙቁት,,ibakwo yihin tʼermus yamukʼut,ʔɨbakwo jɨhɨn tʼərmus jamukʼut,,2,am-agent-v1;ipa=bgn-am
 children.car-seat,የልጅ የመኪና መቀመጫ እንፈልጋለን,,yelij yemekīna mekʼemechʼa infelligallen,jəlɨdʒ jəməkina məkʼəmətʃʼa ʔɨnfəlːɨɡalːən,,2,am-agent-v1;ipa=bgn-am
 children.stroller,የልጅ ጋሪ,,yelij garī,jəlɨdʒ ɡari,child cart,2,am-agent-v1;ipa=bgn-am
-children.playground,የመጫወቻ ስፍራ አለ?,,yemechʼawecha sifira āle?,jəmətʃʼawətʃa sɨfɨra ʔalə,,2,am-agent-v1;ipa=bgn-am
+children.playground,የመጫወቻ ስፍራ አለ?,,yemechʼawecha sifira ālle?,jəmətʃʼawətʃa sɨfɨra ʔalːə,,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allə;row-corrections-v1;ipa=bgn-am
 etiquette.is-this-allowed,ይህ ይፈቀዳል?,,yih yifekʼedal?,jɨh jɨfəkʼədal,,2,am-agent-v1;ipa=bgn-am
 etiquette.is-tipping-expected,ጉርሻ መስጠት የተለመደ ነው?,,gursha mestʼet yetelemede new?,ɡurʃa məstʼət jətələmədə nəw,is giving a tip customary?,2,am-agent-v1;ipa=bgn-am
 etiquette.is-service-included,የአገልግሎት ክፍያ ተካትቷል?,,yeʼāgeliglot kifiya tekatitwal?,jəʔaɡəlɨɡlot kɨfɨja təkatɨtwal,,2,am-agent-v1;ipa=bgn-am

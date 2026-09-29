@@ -16,7 +16,7 @@ communication.i-do-not-speak-this-language,مجھے {target} نہیں آتی,,mu
 communication.i-speak-only-a-little-of-this,مجھے {target} تھوڑی سی آتی ہے,,mujhe {target} thoṛī sī ātī hai,mˌʊɟʰeː {target} tʰˈoːɽi sˈiː ˈaːti hɛ,,2,ur-agent-v1;ipa=espeak
 communication.do-you-speak-english,کیا آپ کو {source} آتی ہے؟,,kyā āp ko {source} ātī hai?,kjˈaː ˌaːp kˈoː {source} ˈaːti hɛ,,2,ur-agent-v1;ipa=espeak
 communication.please-speak-more-slowly,ذرا آہستہ بولیے,,zarā āhista boliye,zˈʌɾaː aːhˈɪsta bˈoːljeː,,2,ur-agent-v1;ipa=espeak
-communication.i-do-not-understand-spoken,مجھے سمجھ نہیں آ رہا,,mujhe samajh nahīñ ā rahā,mˌʊɟʰeː sˈʌməɟʰ nahˈĩː ˈaː ɾˈʌhaː,masculine speaker; a woman says آ رہی,2,ur-agent-v1;ipa=espeak
+communication.i-do-not-understand-spoken,مجھے سمجھ نہیں آ رہا,,mujhe samajh nahīñ ā rahā,mˌʊɟʰeː sˈʌməɟʰ nahˈĩː ˈaː ɾˈʌhaː,"understanding is not coming to me -- the speaker is the dative mujhe, which the verb never agrees with, so a woman says the same; رہا is the impersonal default, and آ رہی, agreeing with samajh (fem.), is not a woman's form",2,"ur-agent-v1;fix=Glassman Spoken Urdu (1976) Lesson 8 p. 68 ānā with kO agrees with the thing known;fix=Platts سمجھ (p. 675, s.f., samajh ānā kisī-ko);row-corrections-v1;ipa=espeak"
 communication.i-cannot-read-understand,مجھے یہ پڑھنا نہیں آتا,,mujhe yah paṛhnā nahīñ ātā,mˌʊɟʰeː jeːh pˈʌɽʰənˌaː nahˈĩː ˈaːtaː,,2,ur-agent-v1;ipa=espeak
 communication.please-say-it-again,پھر سے کہیے,,phir se kahiye,pʰˈɪɾ seː kˈʌhjeː,,2,ur-agent-v1;ipa=espeak
 communication.please-write-it-down,لکھ دیجیے,,likh dījiye,lˈɪkʰ diɟˈiːeː,,2,ur-agent-v1;ipa=espeak

@@ -27,7 +27,7 @@ trail-transport.what-time-is-the-last-shuttle,የመጨረሻው አውቶቢስ
 trail-transport.when-does-the-cableway-stop,የገመድ መጓጓዣው መቼ ይቆማል?,,yegemed megwagwazhaw mechē yikʼomal?,jəɡəməd məɡwaɡwaʒaw mətʃe jɨkʼomal,,2,am-agent-v1;ipa=bgn-am
 trail-transport.where-can-we-buy-water,ውሃ የት መግዛት ይቻላል?,,wiha yet megzat yichalal?,wɨha jət məɡzat jɨtʃalal,,2,am-agent-v1;ipa=bgn-am
 trail-transport.where-can-we-refill-water,ውሃ የት መሙላት ይቻላል?,,wiha yet memulat yichalal?,wɨha jət məmulat jɨtʃalal,,2,am-agent-v1;ipa=bgn-am
-trail-transport.is-there-cell-signal-here,እዚህ ሲግናል አለ?,,izzīh sīginal āle?,ʔɨzːih siɡɨnal ʔalə,,2,am-agent-v1;ipa=bgn-am
+trail-transport.is-there-cell-signal-here,እዚህ ሲግናል አለ?,,izzīh sīginal ālle?,ʔɨzːih siɡɨnal ʔalːə,,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allə;row-corrections-v1;ipa=bgn-am
 trail-transport.do-you-have-a-map,ካርታ አለዎት?,,karta āllewot?,karta ʔalːəwot,,2,am-agent-v1;ipa=bgn-am
 trail-warnings.open,ክፍት,,kift,kɨft,,2,am-agent-v1;ipa=bgn-am
 trail-warnings.closed,ዝግ,,zig,zɨɡ,,2,am-agent-v1;ipa=bgn-am
@@ -66,4 +66,4 @@ weather.flood,ጎርፍ,,gorf,ɡorf,,2,am-agent-v1;ipa=bgn-am
 weather.avalanche-risk,የበረዶ መናድ አደጋ,,yeberedo menad ādega,jəbərədo mənad ʔadəɡa,,2,am-agent-v1;ipa=bgn-am
 outdoors.can-we-camp-here,እዚህ ካምፕ ማድረግ ይቻላል?,,izzīh kamp madireg yichalal?,ʔɨzːih kamp madɨrəɡ jɨtʃalal,,2,am-agent-v1;ipa=bgn-am
 outdoors.is-it-safe-to-swim-here,እዚህ መዋኘት ደህና ነው?,,izzīh mewanyet dehina new?,ʔɨzːih məwaɲət dəhɨna nəw,,2,am-agent-v1;ipa=bgn-am
-outdoors.are-there-dangerous-animals-here,እዚህ አደገኛ እንስሳት አሉ?,,izzīh ādegenya insisat ālu?,ʔɨzːih ʔadəɡəɲa ʔɨnsɨsat ʔalu,,2,am-agent-v1;ipa=bgn-am
+outdoors.are-there-dangerous-animals-here,እዚህ አደገኛ እንስሳት አሉ?,,izzīh ādegenya insisat āllu?,ʔɨzːih ʔadəɡəɲa ʔɨnsɨsat ʔalːu,,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allu;row-corrections-v1;ipa=bgn-am

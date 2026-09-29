@@ -115,7 +115,7 @@ board-answers.none-of-these,నేను చెప్పాలనుకున్
 board-answers.not-possible,అది సాధ్యం కాదు,,adi sādhyaṁ kādu,adi saːdʰjam kaːdu,,2,te-agent-v1;ipa=espeak
 board-answers.please-wait,ఒక నిమిషం ఆగండి,,oka nimiṣaṁ āgaṁḍi,oka nimiʂam aːɡaɳɖi,,2,te-agent-v1;ipa=espeak
 board-answers.say-it-again,మళ్ళీ చెప్తారా?,,maḷḷī ceptārā?,maɭɭiː tʃeptaːraː,will you say it again?,2,te-agent-v1;ipa=espeak
-board-answers.stay-here,ఇక్కడ ఉండటం మంచిది,,ikkaḍa uṇḍaṭaṁ mancidi,ikkaɖa uɳɖaʈam maɲtʃidi,,2,te-agent-v1;ipa=espeak
+board-answers.stay-here,ఇక్కడ ఉండటం మంచిది,,ikkaḍa uṁḍaṭaṁ maṁcidi,ikkaɖa uɳɖaʈam maɲtʃidi,,2,"te-agent-v1;fix=ISO 15919 as the pack writes it (tmp/te/iso15919.py): anusvara ం is ṁ, as in the pack's other 505 cells;row-corrections-v1;ipa=espeak"
 board-answers.the-hospital-is-close,ఆసుపత్రి దగ్గరగా ఉంది,,āsupatri daggaragā uṁdi,aːsupatri daɡɡaraɡaː undi,,2,te-agent-v1;ipa=espeak
 board-answers.there-is-no-wait,"ఆగాల్సిన అవసరం లేదు, ఇప్పుడే లోపలికి వెళ్ళవచ్చు",,"āgālsina avasaraṁ lēdu, ippuḍē lōpaliki veḷḷavaccu","aːɡaːlsina aʋasaram leːdu, ippuɖeː loːpaliki ʋeɭɭaʋatʃtʃu",no need to wait -- [one] may go in now,2,te-agent-v1;ipa=espeak
 board-answers.we-do-not-have-it,ఇది మా దగ్గర లేదు,,idi mā daggara lēdu,idi maː daɡɡara leːdu,,2,te-agent-v1;ipa=espeak
@@ -123,9 +123,9 @@ board-answers.what-is-your-name,పేరు ఏమిటి?,,pēru ēmiṭi?,p
 board-answers.where-does-it-hurt,ఎక్కడ నొప్పిగా ఉంది?,,ekkaḍa noppigā uṁdi?,ekkaɖa noppiɡaː undi,,2,te-agent-v1;ipa=espeak
 kind-words.you-are-very-kind,మీరు చాలా దయగలవారు.,,mīru cālā dayagalavāru,miːru tʃaːlaː dajaɡalaʋaːru,,2,kind-words-v1;ipa=espeak
 kind-words.thank-you-for-your-help,మీ సహాయానికి ధన్యవాదాలు.,,mī sahāyāniki dhanyavādālu,miː sahaːjaːniki dʰanjaʋaːdaːlu,,2,kind-words-v1;ipa=espeak
-kind-words.this-is-delicious,ఇది చాలా రుచిగా ఉంది.,,idi cālā ruciga undi,idi tʃaːlaː rutʃiɡaː undi,,2,kind-words-v1;ipa=espeak
-kind-words.it-is-beautiful-here,ఇక్కడ చాలా అందంగా ఉంది.,,ikkaḍa cālā andaṅgā undi,ikkaɖa tʃaːlaː andaŋɡaː undi,,2,kind-words-v1;ipa=espeak
+kind-words.this-is-delicious,ఇది చాలా రుచిగా ఉంది.,,idi cālā rucigā uṁdi,idi tʃaːlaː rutʃiɡaː undi,,2,kind-words-v1;fix=ISO 15919 as the pack writes it (tmp/te/iso15919.py): రుచిగా has long ā; anusvara ం is ṁ;row-corrections-v1;ipa=espeak
+kind-words.it-is-beautiful-here,ఇక్కడ చాలా అందంగా ఉంది.,,ikkaḍa cālā aṁdaṁgā uṁdi,ikkaɖa tʃaːlaː andaŋɡaː undi,,2,kind-words-v1;fix=ISO 15919 as the pack writes it (tmp/te/iso15919.py): anusvara ం is ṁ;row-corrections-v1;ipa=espeak
 kind-words.i-like-it-very-much,నాకు ఇది చాలా ఇష్టం.,,nāku idi cālā iṣṭaṁ,naːku idi tʃaːlaː iʂʈam,,2,kind-words-v1;ipa=espeak
 kind-words.i-had-a-wonderful-time,నేను ఇక్కడ చాలా బాగా సమయం గడిపాను.,,nēnu ikkaḍa cālā bāgā samayaṁ gaḍipānu,neːnu ikkaɖa tʃaːlaː baːɡaː samajam ɡaɖipaːnu,,2,kind-words-v1;ipa=espeak
-kind-words.thank-you-for-everything,అన్నింటికీ ధన్యవాదాలు.,,anniṇṭikī dhanyavādālu,anniɳʈikiː dʰanjaʋaːdaːlu,,2,kind-words-v1;ipa=espeak
+kind-words.thank-you-for-everything,అన్నింటికీ ధన్యవాదాలు.,,anniṁṭikī dhanyavādālu,anniɳʈikiː dʰanjaʋaːdaːlu,,2,kind-words-v1;fix=ISO 15919 as the pack writes it (tmp/te/iso15919.py): anusvara ం is ṁ;row-corrections-v1;ipa=espeak
 kind-words.thank-you-for-your-hospitality,మీ ఆతిథ్యానికి ధన్యవాదాలు.,,mī ātithyāniki dhanyavādālu,miː aːtitʰjaːniki dʰanjaʋaːdaːlu,,2,kind-words-v1;ipa=espeak

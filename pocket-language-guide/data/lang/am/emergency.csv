@@ -26,7 +26,7 @@ emergency-medical.i-have-chest-pain,ደረቴ ያመኛል,,deretē yamennyal,d�
 emergency-medical.this-person-is-unconscious,ይህ ሰው ራሱን አያውቅም,,yih sew rasun āyawikʼim,jɨh səw rasun ʔajawɨkʼɨm,this person does not know himself,2,am-agent-v1;ipa=bgn-am
 emergency-medical.where-is-the-nearest-hospital,በቅርብ ያለው ሆስፒታል የት ነው?,,bekʼirb yallew hospītal yet new?,bəkʼɨrb jalːəw hospital jət nəw,,2,am-agent-v1;ipa=bgn-am
 emergency-medical.what-is-the-emergency-number,የአስቸኳይ ጊዜ ቁጥር ምን ነው?,,yeʼāschekway gīzē kʼutʼir min new?,jəʔastʃəkwaj ɡize kʼutʼɨr mɨn nəw,,2,am-agent-v1;ipa=bgn-am
-emergency-medical.is-there-a-doctor-who-speaks-english,{source} የሚናገር ሐኪም አለ?,,{source} yemīnnager hākīm āle?,{source} jəminːaɡər hakim ʔalə,,2,am-agent-v1;ipa=bgn-am
+emergency-medical.is-there-a-doctor-who-speaks-english,{source} የሚናገር ሐኪም አለ?,,{source} yemīnnager hākīm ālle?,{source} jəminːaɡər hakim ʔalːə,,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allə;row-corrections-v1;ipa=bgn-am
 emergency-medical.i-think-a-bone-is-broken,አጥንት የተሰበረ ይመስለኛል,,ātʼint yetesebere yimeslennyal,ʔatʼɨnt jətəsəbərə jɨməsləɲːal,,2,am-agent-v1;ipa=bgn-am
 emergency-medical.please-call-my-emergency-contact,እባክዎ የአስቸኳይ ጊዜ ሰዌን ይደውሉ,,ibakwo yeʼāschekway gīzē sewēn yidewilu,ʔɨbakwo jəʔastʃəkwaj ɡize səwen jɨdəwɨlu,please ring my emergency person,2,am-agent-v1;ipa=bgn-am
 emergency-medical.i-have-travel-insurance,የጉዞ ኢንሹራንስ አለኝ,,yeguzo īnshurans āllenny,jəɡuzo ʔinʃurans ʔalːəɲː,,2,am-agent-v1;ipa=bgn-am

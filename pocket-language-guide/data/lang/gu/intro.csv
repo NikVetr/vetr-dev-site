@@ -5,7 +5,7 @@ introductions.what-is-your-name,તમારું નામ શું છે?,,
 introductions.we-are-traveling-together,અમે સાથે પ્રવાસ કરીએ છીએ,,amē sāthē pravās karīē chīē,ʌmeː saːtʰeː pɾəʋaːs kəɾiːeː cʰiːeː,we travel together,2,gu-agent-v1;ipa=espeak
 introductions.this-is-my-friend,આ મારો મિત્ર છે,આ મારી બહેનપણી છે,ā mārō mitr chē,aː maːɾoː mɪtɾə cʰeː,this is my friend (m) — બહેનપણી for a woman,2,gu-agent-v1;ipa=espeak
 introductions.i-am-from,હું {} નો છું,,huṁ {} nō chuṁ,hũ {} noː cʰũ,I am of {},2,gu-agent-v1;ipa=espeak
-introductions.where-are-you-from,તમે ક્યાંના છો?,,tamē kyāṁnā chō?,tʌmeː kjãnaː cʰoː,of where are you?,2,gu-agent-v1;ipa=espeak
+introductions.where-are-you-from,તમે ક્યાંથી આવો છો?,,tamē kyāṁthī āvō chō?,tʌmeː kjãtʰi aːʋoː cʰoː,where do you come from?,2,gu-agent-v1;src=Tisdall-1892 ch.IX §2 (a respectful predicate is masculine plural for a man and neuter plural for a woman);rule=present-tense-marks-person-and-number-only;in-pack-frame=hitchhiking.where-are-you-going;reply-neutrality-rule;answers-audit-v1;ipa=espeak
 introductions.how-are-you,કેમ છો?,મજામાં?,kēm chō?,keːm cʰoː,how are you? — the ordinary Gujarati greeting,2,gu-agent-v1;ipa=espeak
 introductions.i-am-a-tourist,હું પ્રવાસી છું,,huṁ pravāsī chuṁ,hũ pɾəʋaːsi cʰũ,I am a traveller,2,gu-agent-v1;ipa=espeak
 introductions.this-is-my-husband-wife,મારા પતિ / મારી પત્ની,,mārā pati / mārī patnī,maːɾaː pʌtɪ / maːɾi pʌtni,my husband / my wife,2,gu-agent-v1;ipa=espeak

@@ -1,6 +1,6 @@
 concept_id,text,text_alt,romanization_bgn,ipa,literal,confidence,provenance
 directions.where-is,איפה {}?,אֵיפֹה {}?,éyfo {}?,ˈejfo {},where is {}?,2,he-agent-v1;ipa=bgn
-directions.how-do-i-get-to,איך מגיעים אל {}?,אֵיךְ מַגִּיעִים אֶל {}?,eykh magi‘im el {}?,ejx maɡiˈim ˈel {},how does one get to {}?,2,he-agent-v1;ipa=bgn
+directions.how-do-i-get-to,איך מגיעים אל {}?,אֵיךְ מַגִּיעִים אֶל {}?,eykh magi‘im el {}?,ˈejx maɡiˈim ˈel {},how does one get to {}?,2,he-agent-v1;ipa=bgn
 directions.is-it-far,זה רחוק?,זֶה רָחוֹק?,ze raẖoq?,zˈe ʁaxˈok,is it far?,2,he-agent-v1;ipa=bgn
 directions.how-long-on-foot,כמה זמן ברגל?,כַּמָּה זְמַן בְּרֶגֶל?,káma zeman beregel?,kˈama zemˈan beʁeɡˈel,how much time on foot?,2,he-agent-v1;ipa=bgn
 directions.please-show-me-on-the-map,אפשר להראות לי במפה?,אֶפְשָׁר לְהַרְאוֹת לִי בַּמַּפָּה?,efshar leharot li bamapa?,efʃˈaʁ lehaʁˈot lˈi bamapˈa,can you show me on the map?,2,he-agent-v1;ipa=bgn
@@ -33,7 +33,7 @@ taxi.can-you-wait-for-me-here,אפשר לחכות לי כאן?,אֶפְשָׁר 
 taxi.we-need-to-catch-the-high-speed-train,אנחנו צריכים להספיק לרכבת המהירה,אֲנַחְנוּ צְרִיכִים לְהַסְפִּיק לָרַכֶּבֶת הַמְּהִירָה,anáẖnu tserikhim lehaspiq larakévet hamhira,anˈaxnu tseʁixˈim lehaspˈik laʁakˈevet hamhiʁˈa,we need to make the fast train,2,he-agent-v1;ipa=bgn
 taxi.please-use-the-meter,אפשר להפעיל את המונה?,אֶפְשָׁר לְהַפְעִיל אֶת הַמּוֹנֶה?,efshar lehaf‘il et hamone?,efʃˈaʁ lehafˈil ˈet hamonˈe,can you turn on the meter?,2,he-agent-v1;ipa=bgn
 taxi.i-will-get-off-here,אני יורד כאן,אֲנִי יוֹרֵד כָּאן,ani yored kan,anˈi joʁˈed kˈan,a woman says yoredet,2,he-agent-v1;ipa=bgn
-transit-rides.two-tickets,"שני כרטיסים, בבקשה","שְׁנֵי כַּרְטִיסִים, בְּבַקָּשָׁה","sheney kartisim, bevaqasha","ʃˈenej kaʁtisˈim, bevakaʃˈa","two tickets, please",2,he-agent-v1;ipa=bgn
+transit-rides.two-tickets,"שני כרטיסים, בבקשה","שְׁנֵי כַּרְטִיסִים, בְּבַקָּשָׁה","sheney kartisim, bevaqasha","ʃenˈej kaʁtisˈim, bevakaʃˈa","two tickets, please",2,he-agent-v1;ipa=bgn
 transit-rides.where-is-the-subway-station,איפה תחנת הרכבת הקלה?,אֵיפֹה תַּחֲנַת הָרַכֶּבֶת הַקַּלָּה?,éyfo taẖanat harakévet haqala?,ˈejfo taxanˈat haʁakˈevet hakalˈa,the light rail station -- Israel has no metro,2,he-agent-v1;ipa=bgn
 transit-rides.does-this-bus-train-go-to,זה נוסע אל {}?,זֶה נוֹסֵעַ אֶל {}?,ze noséa‘ el {}?,zˈe nosˈea ˈel {},does this travel to {}?,2,he-agent-v1;ipa=bgn
 transit-rides.what-is-the-next-stop,מה התחנה הבאה?,מָה הַתַּחֲנָה הַבָּאָה?,ma hataẖana haba’a?,mˈa hataxanˈa habaˈa,what is the next stop?,2,he-agent-v1;ipa=bgn
@@ -43,7 +43,7 @@ transit-rides.do-i-need-to-transfer,צריך להחליף?,צָרִיךְ לְה
 transit-rides.is-it-delayed,יש איחור?,יֵשׁ אִיחוּר?,yesh iẖur?,jˈeʃ ixˈuʁ,is there a delay?,2,he-agent-v1;ipa=bgn
 transit-rides.i-am-in-a-hurry,אני ממהר,אֲנִי מְמַהֵר,ani memaher,anˈi memahˈeʁ,a woman says memaheret,2,he-agent-v1;ipa=bgn
 transit-rides.which-platform,איזה רציף?,אֵיזֶה רָצִיף?,éyze ratsif?,ˈejze ʁatsˈif,which platform?,2,he-agent-v1;ipa=bgn
-transit-rides.what-time-is-the-next-one,מתי הבא?,מָתַי הַבָּא?,matay haba?,mˈataj habˈa,when is the next one?,2,he-agent-v1;ipa=bgn
+transit-rides.what-time-is-the-next-one,מתי הבא?,מָתַי הַבָּא?,matay haba?,matˈaj habˈa,when is the next one?,2,he-agent-v1;ipa=bgn
 transit-rides.i-went-past-my-stop,עברתי את התחנה שלי,עָבַרְתִּי אֶת הַתַּחֲנָה שֶׁלִּי,‘avárti et hataẖana sheli,avˈaʁti ˈet hataxanˈa ʃelˈi,I passed my stop,2,he-agent-v1;ipa=bgn
 transit-rides.can-i-use-this-ticket,אפשר להשתמש בכרטיס הזה?,אֶפְשָׁר לְהִשְׁתַּמֵּשׁ בַּכַּרְטִיס הַזֶּה?,efshar lehishtamesh bakartis haze?,efʃˈaʁ lehiʃtamˈeʃ bakaʁtˈis hazˈe,can this ticket be used?,2,he-agent-v1;ipa=bgn
 transit-rides.do-i-need-to-validate,צריך להעביר את הכרטיס במכשיר?,צָרִיךְ לְהַעֲבִיר אֶת הַכַּרְטִיס בַּמַּכְשִׁיר?,tsarikh leha‘avir et hakartis bamakhshir?,tsaʁˈix lehaavˈiʁ ˈet hakaʁtˈis bamaxʃˈiʁ,must the ticket be passed through the device?,2,he-agent-v1;ipa=bgn
@@ -57,7 +57,7 @@ place-words.tourist-spot-sightseeing-area,אתר תיירות,אֲתַר תַּ�
 border-customs.i-am-a-tourist,אני תייר,אֲנִי תַּיָּיר,ani tayar,anˈi tajˈaʁ,a woman says tayeret,2,he-agent-v1;ipa=bgn
 border-customs.here-is-my-passport,הדרכון שלי,הַדַּרְכּוֹן שֶׁלִּי,hadarkon sheli,hadaʁkˈon ʃelˈi,my passport,2,he-agent-v1;ipa=bgn
 border-customs.i-am-staying-for-days,אני נשאר {} ימים,אֲנִי נִשְׁאָר {} יָמִים,ani nish’ar {} yamim,anˈi niʃˈaʁ {} jamˈim,I am staying {} days,2,he-agent-v1;ipa=bgn
-border-customs.nothing-to-declare,אין לי מה להצהיר,אֵין לִי מָה לְהַצְהִיר,eyn li ma lehatshir,ejn lˈi mˈa lehatshˈiʁ,I have nothing to declare,2,he-agent-v1;ipa=bgn
+border-customs.nothing-to-declare,אין לי מה להצהיר,אֵין לִי מָה לְהַצְהִיר,eyn li ma lehatshir,ˈejn lˈi mˈa lehatshˈiʁ,I have nothing to declare,2,he-agent-v1;ipa=bgn
 border-customs.i-am-staying-at,אני מתאכסן ב{},אֲנִי מִתְאַכְסֵן בְּ{},ani mit’akhsen be{},anˈi mitaxsˈen bˈe {},I am lodging at {},2,he-agent-v1;ipa=bgn
 border-customs.i-am-here-for-business,אני כאן לעסקים,אֲנִי כָּאן לְעִסְקִים,ani kan le‘isqim,anˈi kˈan leiskˈim,I am here for business,2,he-agent-v1;ipa=bgn
 border-customs.i-have-a-return-ticket,יש לי כרטיס חזור,יֵשׁ לִי כַּרְטִיס חֲזוֹר,yesh li kartis ẖazor,jˈeʃ lˈi kaʁtˈis xazˈoʁ,I have a return ticket,2,he-agent-v1;ipa=bgn
@@ -71,7 +71,7 @@ border-customs.how-long-may-i-stay,כמה זמן מתר לי להישאר?,כַ�
 border-customs.i-have-a-connecting-flight,יש לי טיסת המשך,יֵשׁ לִי טִיסַת הֶמְשֵׁךְ,yesh li tisat hemshekh,jˈeʃ lˈi tisˈat hemʃˈex,I have a continuing flight,2,he-agent-v1;ipa=bgn
 border-customs.may-i-have-an-entry-stamp,אפשר לקבל חותמת כניסה?,אֶפְשָׁר לְקַבֵּל חוֹתֶמֶת כְּנִיסָה?,efshar leqabel ẖotémet kenisa?,efʃˈaʁ lekabˈel xotˈemet kenisˈa,may I have an entry stamp?,2,he-agent-v1;ipa=bgn
 border-customs.visa,ויזה,וִיזָה,víza,vˈiza,,2,he-agent-v1;ipa=bgn
-border-customs.i-have-no-food-or-plants,אין לי אוכל או צמחים,אֵין לִי אוֹכֶל אוֹ צְמָחִים,eyn li ókhel o tsemaẖim,ejn lˈi ˈoxel ˈo tsemaxˈim,I have no food or plants,2,he-agent-v1;ipa=bgn
+border-customs.i-have-no-food-or-plants,אין לי אוכל או צמחים,אֵין לִי אוֹכֶל אוֹ צְמָחִים,eyn li ókhel o tsemaẖim,ˈejn lˈi ˈoxel ˈo tsemaxˈim,I have no food or plants,2,he-agent-v1;ipa=bgn
 border-customs.passport-control,ביקורת דרכונים,בִּיקּוֹרֶת דַּרְכּוֹנִים,biqóret darkonim,bikˈoʁet daʁkonˈim,passport inspection,2,he-agent-v1;ipa=bgn
 border-customs.customs,מכס,מֶכֶס,mékhes,mˈexes,customs,2,he-agent-v1;ipa=bgn
 border-customs.baggage-claim,איסוף מזוודות,אִיסּוּף מִזְוָודוֹת,isuf mizvadot,isˈuf mizvadˈot,baggage collection,2,he-agent-v1;ipa=bgn
@@ -103,15 +103,15 @@ common-signs.closed-off,סגור,סָגוּר,sagur,saɡˈuʁ,closed,2,he-agent-
 common-signs.occupied,תפוס,תָּפוּס,tafus,tafˈus,taken,2,he-agent-v1;ipa=bgn
 common-signs.vacant,פנוי,פָּנוּי,panuy,panˈuj,free,2,he-agent-v1;ipa=bgn
 common-signs.caution,זהירות,זְהִירוּת,zehirut,zehiʁˈut,caution,2,he-agent-v1;ipa=bgn
-common-signs.no-entry,אין כניסה,אֵין כְּנִיסָה,eyn kenisa,ejn kenisˈa,no entry,2,he-agent-v1;ipa=bgn
-common-signs.no-smoking,אין לעשן,אֵין לְעַשֵּׁן,eyn le‘ashen,ejn leaʃˈen,no smoking,2,he-agent-v1;ipa=bgn
+common-signs.no-entry,אין כניסה,אֵין כְּנִיסָה,eyn kenisa,ˈejn kenisˈa,no entry,2,he-agent-v1;ipa=bgn
+common-signs.no-smoking,אין לעשן,אֵין לְעַשֵּׁן,eyn le‘ashen,ˈejn leaʃˈen,no smoking,2,he-agent-v1;ipa=bgn
 common-signs.no-photography,אסור לצלם,אָסוּר לְצַלֵּם,asur letsalem,asˈuʁ letsalˈem,photographing forbidden,2,he-agent-v1;ipa=bgn
 common-signs.do-not-touch,אסור לגעת,אָסוּר לָגַעַת,asur lagá‘at,asˈuʁ laɡˈaat,touching forbidden,2,he-agent-v1;ipa=bgn
 common-signs.temporarily-closed,סגור זמנית,סָגוּר זְמַנִּית,sagur zemanit,saɡˈuʁ zemanˈit,closed temporarily,2,he-agent-v1;ipa=bgn
 common-signs.open-operating,פעיל,פָּעִיל,pa‘il,paˈil,operating,2,he-agent-v1;ipa=bgn
 common-signs.closed,סגור,סָגוּר,sagur,saɡˈuʁ,closed,2,he-agent-v1;ipa=bgn
 common-signs.stopped-stop,עצור,עֲצוֹר,‘atsor,atsˈoʁ,stop,2,he-agent-v1;ipa=bgn
-rail-station-words.fare,דמי נסיעה,דְּמֵי נְסִיעָה,demey nesi‘a,dˈemej nesiˈa,travel fee,2,he-agent-v1;ipa=bgn
+rail-station-words.fare,דמי נסיעה,דְּמֵי נְסִיעָה,demey nesi‘a,demˈej nesiˈa,travel fee,2,he-agent-v1;ipa=bgn
 taxi.please-get-me-there-in-time-for-the-shinkansen,צריך להגיע בזמן לרכבת השינקנסן,צָרִיךְ לְהַגִּיעַ בִּזְמַן לְרַכֶּבֶת הַשִּׁינְקַנְסֶן,tsarikh lehagía‘ bizman lerakevet hashinqansen,tsaʁˈix lehaɡˈia bizmˈan leʁakevˈet haʃinkansˈen,in time for the Shinkansen,2,he-gloss-v1;ipa=bgn
 taxi.could-you-make-it-colder,אפשר להעלות את המזגן?,אֶפְשָׁר לְהַעֲלוֹת אֶת הַמַּזְגָּן?,efshar leha‘alot et hamazgan?,efʃˈaʁ lehaalˈot ˈet hamazɡˈan,turn up the air conditioning,2,he-agent-v1;ipa=bgn
 taxi.could-you-make-it-warmer,אפשר להוריד את המזגן?,אֶפְשָׁר לְהוֹרִיד אֶת הַמַּזְגָּן?,efshar lehorid et hamazgan?,efʃˈaʁ lehoʁˈid ˈet hamazɡˈan,turn down the air conditioning,2,he-agent-v1;ipa=bgn
@@ -119,7 +119,7 @@ taxi.may-i-open-the-window,אפשר לפתוח את החלון?,אֶפְשָׁר
 place-words.scenic-area,אתר נוף,אֲתַר נוֹף,atar nof,atˈaʁ nˈof,scenic site,2,he-gloss-v1;ipa=bgn
 rail-station-words.maglev,רכבת מרחפת,רַכֶּבֶת מְרַחֶפֶת,rakévet meraẖefet,ʁakˈevet meʁaxefˈet,levitating train,2,he-gloss-v1;ipa=bgn
 common-signs.pork-code,קודים לחזיר על שלטים,קוֹדִים לְחֲזִיר עַל שְׁלָטִים,qodim leẖazir ‘al shelatim,kodˈim lexazˈiʁ ˈal ʃelatˈim,pork codes on signs,2,he-gloss-v1;ipa=bgn
-transit-rides.where-do-i-pay-the-fare,איפה משלמים את דמי הנסיעה?,אֵיפֹה מְשַׁלְּמִים אֶת דְּמֵי הַנְּסִיעָה?,éyfo meshalmim et demey hanesi‘a?,ˈejfo meʃalmˈim ˈet dˈemej hanesiˈa,where does one pay the travel fee?,2,translator-requests-v1;in-pack-neighbour;ipa=bgn
+transit-rides.where-do-i-pay-the-fare,איפה משלמים את דמי הנסיעה?,אֵיפֹה מְשַׁלְּמִים אֶת דְּמֵי הַנְּסִיעָה?,éyfo meshalmim et demey hanesi‘a?,ˈejfo meʃalmˈim ˈet demˈej hanesiˈa,where does one pay the travel fee?,2,translator-requests-v1;in-pack-neighbour;ipa=bgn
 air-travel.where-is-check-in,איפה הצ'ק-אין?,אֵיפֹה הַצֶ'ק-אִין?,éyfo ha-čeq-in?,ˈejfo hatʃekˈin,,2,he-agent-v1;ipa=bgn
 air-travel.which-gate,איזה שער?,אֵיזֶה שַׁעַר?,éyze sha‘ar?,ˈejze ʃaˈaʁ,,2,he-agent-v1;ipa=bgn
 air-travel.where-is-the-security-check,איפה הביקורת הביטחונית?,אֵיפֹה הַבִּיקוֹרֶת הַבִּיטְחוֹנִית?,éyfo habiqoret habitẖonit?,ˈejfo habikoʁˈet habitxonˈit,,2,he-agent-v1;ipa=bgn

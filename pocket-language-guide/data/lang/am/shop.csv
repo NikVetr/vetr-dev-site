@@ -7,15 +7,15 @@ shopping.i-am-just-looking,እየተመለከትኩ ነው,,iyyetemelekketku new
 shopping.how-much-is-this,ይህ ስንት ነው?,,yih sint new?,jɨh sɨnt nəw,,2,am-agent-v1;ipa=bgn-am
 shopping.that-is-too-expensive,በጣም ውድ ነው,,betʼam wid new,bətʼam wɨd nəw,it is very expensive,2,am-agent-v1;ipa=bgn-am
 shopping.can-it-be-a-little-cheaper,ጥቂት ሊቀንስ ይችላል?,,tʼikʼīt līkʼenis yichilal?,tʼɨkʼit likʼənɨs jɨtʃɨlal,could it be reduced a little?,2,am-agent-v1;ipa=bgn-am
-color-size-returns.do-you-have-another-color,ሌላ ቀለም አለ?,,lēla kʼelem āle?,lela kʼələm ʔalə,,2,am-agent-v1;ipa=bgn-am
-color-size-returns.do-you-have-another-size,ሌላ ቁጥር አለ?,,lēla kʼutʼir āle?,lela kʼutʼɨr ʔalə,is there another number? — a size is a number in Amharic,2,am-agent-v1;ipa=bgn-am
+color-size-returns.do-you-have-another-color,ሌላ ቀለም አለ?,,lēla kʼelem ālle?,lela kʼələm ʔalːə,,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allə;row-corrections-v1;ipa=bgn-am
+color-size-returns.do-you-have-another-size,ሌላ ቁጥር አለ?,,lēla kʼutʼir ālle?,lela kʼutʼɨr ʔalːə,is there another number? — a size is a number in Amharic,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allə;row-corrections-v1;ipa=bgn-am
 color-size-returns.may-i-try-it-on,መልበስ ልሞክር?,,melbes limokir?,məlbəs lɨmokɨr,may I try wearing it?,2,am-agent-v1;ipa=bgn-am
 color-size-returns.can-i-return-it,መመለስ ይቻላል?,,memeles yichalal?,məmələs jɨtʃalal,is returning possible?,2,am-agent-v1;ipa=bgn-am
 color-size-returns.can-i-exchange-it,መቀየር ይቻላል?,,mekʼeyer yichalal?,məkʼəjər jɨtʃalal,is changing possible?,2,am-agent-v1;ipa=bgn-am
-color-size-returns.do-you-have-a-bag,ከረጢት አለ?,,keretʼīt āle?,kərətʼit ʔalə,is there a bag?,2,am-agent-v1;ipa=bgn-am
+color-size-returns.do-you-have-a-bag,ከረጢት አለ?,,keretʼīt ālle?,kərətʼit ʔalːə,is there a bag?,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allə;row-corrections-v1;ipa=bgn-am
 tax-refund.can-i-get-a-tax-refund,የታክስ ተመላሽ ማግኘት ይቻላል?,,yetaks temelash magnyet yichalal?,jətaks təməlaʃ maɡɲət jɨtʃalal,,2,am-agent-v1;ipa=bgn-am
-tax-refund.is-tax-free-shopping-available,ከታክስ ነጻ ግዢ አለ?,,ketaks netsʼa gizhī āle?,kətaks nəsʼa ɡɨʒi ʔalə,is there buying free of tax?,2,am-agent-v1;ipa=bgn-am
-shopping.is-there-a-discount,ቅናሽ አለ?,,kʼinash āle?,kʼɨnaʃ ʔalə,,2,am-agent-v1;ipa=bgn-am
+tax-refund.is-tax-free-shopping-available,ከታክስ ነጻ ግዢ አለ?,,ketaks netsʼa gizhī ālle?,kətaks nəsʼa ɡɨʒi ʔalːə,is there buying free of tax?,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allə;row-corrections-v1;ipa=bgn-am
+shopping.is-there-a-discount,ቅናሽ አለ?,,kʼinash ālle?,kʼɨnaʃ ʔalːə,,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allə;row-corrections-v1;ipa=bgn-am
 payment-receipt.please-write-the-number,ቁጥሩን ይጻፉት,,kʼutʼirun yitsʼafut,kʼutʼɨrun jɨsʼafut,,2,am-agent-v1;ipa=bgn-am
 payment-receipt.how-much-in-total,በጠቅላላው ስንት ነው?,,betʼekʼilalaw sint new?,bətʼəkʼɨlalaw sɨnt nəw,,2,am-agent-v1;ipa=bgn-am
 payment-receipt.can-we-pay-separately,ለየብቻ መክፈል ይቻላል?,,leyebicha mekfel yichalal?,ləjəbɨtʃa məkfəl jɨtʃalal,is paying each on its own possible?,2,am-agent-v1;ipa=bgn-am
@@ -27,7 +27,7 @@ shopping.where-do-i-pay,የት እከፍላለሁ?,,yet ikeflallehu?,jət ʔɨk�
 shopping.i-will-take-this,ይህን እወስዳለሁ,,yihin iwesdallehu,jɨhɨn ʔɨwəsdalːəhu,,2,am-agent-v1;ipa=bgn-am
 shopping.what-is-this,ይህ ምን ነው?,,yih min new?,jɨh mɨn nəw,,2,am-agent-v1;ipa=bgn-am
 shopping.where-can-i-buy,{} የት መግዛት እችላለሁ?,,{} yet megzat ichilallehu?,{} jət məɡzat ʔɨtʃɨlalːəhu,,2,am-agent-v1;ipa=bgn-am
-shopping.do-you-have-this-in-stock,ይህ በክምችት አለ?,,yih bekimichit āle?,jɨh bəkɨmɨtʃɨt ʔalə,is this in the store?,2,am-agent-v1;ipa=bgn-am
+shopping.do-you-have-this-in-stock,ይህ በክምችት አለ?,,yih bekimichit ālle?,jɨh bəkɨmɨtʃɨt ʔalːə,is this in the store?,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allə;row-corrections-v1;ipa=bgn-am
 shopping.two-of-these,ከዚህ ሁለት እባክዎ,,kezzīh hulett ibakwo,kəzːih hulətː ʔɨbakwo,two from this please,2,am-agent-v1;ipa=bgn-am
 shopping.what-is-it-made-of,ከምን የተሰራ ነው?,,kemin yeteserra new?,kəmɨn jətəsərːa nəw,from what is it made?,2,am-agent-v1;ipa=bgn-am
 payment-receipt.can-i-pay-by-mobile-money,በቴሌብር መክፈል?,በሞባይል ገንዘብ መክፈል?,betelebir mekfel?,bətələbɨr məkfəl,to pay by telebirr? -- Ethio telecom's wallet is the one a shop will have; M-PESA Ethiopia is the other,2,translator-requests-v1;in-pack-neighbour;src=Ethio telecom telebirr merchant-payment wording;ipa=bgn-am

@@ -64,6 +64,6 @@ trail-landmarks.end,చివర,,civara,tʃiʋara,,2,te-agent-v1;ipa=espeak
 trail-landmarks.elevation,ఎత్తు,,ettu,ettu,,2,te-agent-v1;ipa=espeak
 trail-landmarks.sunset,సూర్యాస్తమయం,,sūryāstamayaṁ,suːrjaːstamajam,,2,te-agent-v1;ipa=espeak
 trail-landmarks.water-point,నీళ్ళ చోటు,,nīḷḷa cōṭu,niːɭɭa tʃoːʈu,,2,te-agent-v1;ipa=espeak
-outdoors.can-we-camp-here,మేము ఇక్కడ క్యాంప్ చేయవచ్చా?,,mēmu ikkaḍa kyāmp cēyavaccā?,meːmu ikkaɖa kjaːmp tʃeːjaʋatʃtʃaː,,2,te-agent-v1;ipa=espeak
+outdoors.can-we-camp-here,మేము ఇక్కడ క్యాంప్ చేయవచ్చా?,,mēmu ikkaḍa kyāṁp cēyavaccā?,meːmu ikkaɖa kjaːmp tʃeːjaʋatʃtʃaː,,2,te-agent-v1;fix=ISO 15919 as the pack writes it (tmp/te/iso15919.py): anusvara ం is ṁ;row-corrections-v1;ipa=espeak
 outdoors.is-it-safe-to-swim-here,ఇక్కడ ఈత కొట్టడం సురక్షితమా?,,ikkaḍa īta koṭṭaḍaṁ surakṣitamā?,ikkaɖa iːta koʈʈaɖam surakʂitamaː,,2,te-agent-v1;ipa=espeak
-outdoors.are-there-dangerous-animals-here,ఇక్కడ ప్రమాదకరమైన జంతువులు ఉన్నాయా?,,ikkaḍa pramādakaramaina jantuvulu unnāyā?,ikkaɖa pramaːdakaramaɪna dʒantuʋulu unnaːjaː,,2,te-agent-v1;ipa=espeak
+outdoors.are-there-dangerous-animals-here,ఇక్కడ ప్రమాదకరమైన జంతువులు ఉన్నాయా?,,ikkaḍa pramādakaramaina jaṁtuvulu unnāyā?,ikkaɖa pramaːdakaramaɪna dʒantuʋulu unnaːjaː,,2,te-agent-v1;fix=ISO 15919 as the pack writes it (tmp/te/iso15919.py): anusvara ం is ṁ;row-corrections-v1;ipa=espeak

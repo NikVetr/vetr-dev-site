@@ -115,7 +115,7 @@ board-answers.none-of-these,यीमध्ये मेरो कुरा छ�
 board-answers.not-possible,त्यसो हुन सक्दैन,,tyasō huna sakdaina,tjˈʌsoː hˈunə səkdˈɛːnə,"that cannot happen -- habitual 'sak-', not the -eko/-eki participle",2,ne-board-answers-v1;ipa=espeak
 board-answers.please-wait,एक छिन,,ēka china,ˈeːkə cʰˈɪn,,2,ne-board-answers-v1;ipa=espeak
 board-answers.say-it-again,फेरि एकपल्ट?,,phēri ēkapalṭa?,pʰˈeːɾɪ ˌeːkəpˈʌlʈə,,2,ne-board-answers-v1;ipa=espeak
-board-answers.stay-here,यहीँ बस्नु राम्रो,,yahīm̐ basnu rāmrō,jˈʌhĩ bˈʌsnuʲˌu ɾˈaːmɾoː,'rāmrō' is an invariant Nepali adjective,2,ne-board-answers-v1;ipa=espeak
+board-answers.stay-here,यहीँ बस्नु राम्रो,,yahīm̐ basnu rāmrō,jˈʌhĩ bˈʌsnuʲˌu ɾˈaːmɾoː,"better to stay right here -- 'rāmrō' is Schmidt's 'better to (do X)' after the infinitive 'basnu', which is what it goes with; it has a feminine 'rāmrī', but no person in the sentence for it to agree with",2,ne-board-answers-v1;fix=Schmidt-PDMN राम्रो p.557 (sense 2b better to (do X); NOTE raamrii is the fem. of raamro);row-corrections-v1;ipa=espeak
 board-answers.the-hospital-is-close,अस्पताल नजिकै छ,,aspatāla najikai cha,ˌəspətˈaːl nˈʌɟɪkˌɛː cʰˈə,,2,ne-board-answers-v1;ipa=espeak
 board-answers.there-is-no-wait,"पर्खन पर्दैन, अहिले भित्र जानुहोस्",,"parkhana pardaina, ahilē bhitra jānuhōs","pˈʌrrkʰən pərrdˈɛːnə, ˈʌhɪlˌeː bʰˈɪtɾə ɟˌaːnuhˈoːs","-nuhos imperative, invariant for gender",2,ne-board-answers-v1;ipa=espeak
 board-answers.we-do-not-have-it,हामीसँग यो छैन,,hāmīsam̐ga yō chaina,hˌaːmɪːʃˈãɡ jˈoː cʰˈɛːnə,,2,ne-board-answers-v1;ipa=espeak

@@ -25,7 +25,7 @@ quick-directions.on-the-right,Di kanan,,di kˈanan,,2,ms-agent-v1;ipa=espeak
 quick-directions.across-from-here,Di seberang,,di səbˈɛraŋ,,2,ms-agent-v1;ipa=espeak
 quick-directions.in-front,Di depan,,di dˈəpan,,2,ms-agent-v1;ipa=espeak
 quick-directions.behind,Di belakang,,di bəlˈakaŋ,,2,ms-agent-v1;ipa=espeak
-taxi.please-take-me-here,Tolong antar ke sini,,tˈoloŋ ˈantar kə sˈini,,2,ms-agent-v1;ipa=espeak
+taxi.please-take-me-here,Tolong hantar ke sini,,tˈoloŋ hˈantar kə sˈini,,2,ms-agent-v1;fix=DBP hantar;row-corrections-v1;ipa=espeak
 taxi.please-send-me-the-address,Tolong kirim alamatnya,,tˈoloŋ kˈirem ˌalamˈatɲə,,2,ms-agent-v1;ipa=espeak
 taxi.we-need-the-east-gate-not-the-south-gate,"Gerbang Timur, bukan Gerbang Selatan",,"ɡˈɛɾrbaŋ tˈimor, bˈukan ɡˈɛɾrbaŋ səlˈatan",,2,ms-agent-v1;ipa=espeak
 taxi.please-stop-here,Tolong berhenti di sini,,tˈoloŋ bərhˈənti di sˈini,,2,ms-agent-v1;ipa=espeak
@@ -40,30 +40,30 @@ taxi.may-i-open-the-window,Boleh saya buka tingkap?,,bˈoleh sˈajə bˈukə tˈ
 transit-rides.two-tickets,Dua tiket,,dˈuə tˈikət,,2,ms-agent-v1;ipa=espeak
 transit-rides.where-is-the-subway-station,Stesen MRT di mana?,,stˈesen ˌɛmˌartˈiː dimˈanə,,2,ms-agent-v1;ipa=espeak
 transit-rides.does-this-bus-train-go-to,Bas / keretapi ini ke {}?,,bˈas / kərətˈapi ˈini kə {},,2,ms-agent-v1;ipa=espeak
-transit-rides.what-is-the-next-stop,Pemberhentian berikutnya apa?,,pəmbˌɛɾrhəntˈian bərikˈotɲə ˈapə,,2,ms-agent-v1;ipa=espeak
+transit-rides.what-is-the-next-stop,Perhentian berikutnya apa?,,pəɾrhəntˈian bərikˈotɲə ˈapə,,2,ms-agent-v1;fix=DBP perhentian;row-corrections-v1;ipa=espeak
 transit-rides.please-tell-me-where-to-get-off,Tolong beri tahu saya turun di mana,,tˈoloŋ bˈəri tˈahu sˈajə tˈuron dimˈanə,,2,ms-agent-v1;ipa=espeak
 transit-rides.is-this-direct,Ini langsung?,,ˈini lˈaŋsoŋ,,2,ms-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-transfer,Perlu transit?,,pˈəɾrlu trˈanset,,2,ms-agent-v1;ipa=espeak
 transit-rides.is-it-delayed,Terlambat?,,təɾrlˈambat,,2,ms-agent-v1;ipa=espeak
 transit-rides.i-am-in-a-hurry,Saya sedang buru-buru,,sˈajə sˈədaŋ bˈuruburu,,2,ms-agent-v1;ipa=espeak
-transit-rides.which-platform,Peron mana?,,pˈɛron mˈanə,,2,ms-agent-v1;ipa=espeak
+transit-rides.which-platform,Platform mana?,,plˈatfɔrm mˈanə,,2,ms-agent-v1;fix=DBP platform;row-corrections-v1;ipa=espeak
 transit-rides.what-time-is-the-next-one,Berikutnya jam berapa?,,bərikˈotɲə dʒˈam bərˈapə,,2,ms-agent-v1;ipa=espeak
 transit-rides.i-went-past-my-stop,Saya kelewatan,Saya terlewat,sˈajə kəlewˈatan,,2,ms-agent-v1;ipa=espeak
 transit-rides.can-i-use-this-ticket,Tiket ini boleh dipakai?,,tˈikət ˈini bˈoleh dipˈakaɪ,,2,ms-agent-v1;ipa=espeak
 place-words.visitor-center,Pusat informasi,,pˈusat ˌinfɔrmˈasi,,2,ms-agent-v1;ipa=espeak
 place-words.railway-station,Stesen keretapi,,stˈesen kərətˈapi,,2,ms-agent-v1;ipa=espeak
-place-words.airport,Bandara,,bandˈarə,,2,ms-agent-v1;ipa=espeak
+place-words.airport,Lapangan terbang,,lapˈaŋan tˈəɾrbaŋ,,2,ms-agent-v1;fix=DBP lapangan terbang;row-corrections-v1;ipa=espeak
 place-words.service-desk,Customer service,Layanan pelanggan,tʃustˈomeɾr sˈɜːvɪs,,2,ms-agent-v1;ipa=espeak
-place-words.bus-stop,Halte bas,,hˈalte bˈas,,2,ms-agent-v1;ipa=espeak
+place-words.bus-stop,Perhentian bas,,pəɾrhəntˈian bˈas,,2,ms-agent-v1;fix=DBP perhentian;row-corrections-v1;ipa=espeak
 place-words.luggage-storage,Penitipan barang,,pənitˈipan bˈaraŋ,,2,ms-agent-v1;ipa=espeak
 place-words.tourist-spot-sightseeing-area,Tempat pelancongan,,tˈəmpat pəlantʃˈoŋan,,2,ms-agent-v1;ipa=espeak
 place-words.scenic-area,Kawasan pelancongan,kawasan pelancongan alam,kawˈasan pəlantʃˈoŋan,,1,reader-gloss-v1;ipa=espeak
-border-customs.i-am-a-tourist,Saya turis,,sˈajə tˈures,,2,ms-agent-v1;ipa=espeak
+border-customs.i-am-a-tourist,Saya pelancong,,sˈajə pəlˈantʃoŋ,,2,ms-agent-v1;fix=DBP pelancong;row-corrections-v1;ipa=espeak
 border-customs.here-is-my-passport,Ini pasport saya,,ˈini pˈaspɔrt sˈajə,,2,ms-agent-v1;ipa=espeak
 border-customs.i-am-staying-for-days,Saya tinggal {} hari,,sˈajə tˈiŋɡal {} hˈari,,2,ms-agent-v1;ipa=espeak
 border-customs.nothing-to-declare,Tidak ada yang dilaporkan,Nothing to declare,tˈidaʔ ˈadə jaŋ dˌilapˈɔrkan,,2,ms-agent-v1;ipa=espeak
 border-customs.i-am-staying-at,Saya menginap di {},,sˈajə məŋˈinap di {},,2,ms-agent-v1;ipa=espeak
-border-customs.i-am-here-for-business,Saya di sini untuk bisnis,,sˈajə di sˈini ˈuntoʔ bˈisnes,,2,ms-agent-v1;ipa=espeak
+border-customs.i-am-here-for-business,Saya di sini untuk perniagaan,,sˈajə di sˈini ˈuntoʔ pəɾrnˌiaɡˈaan,,2,ms-agent-v1;fix=DBP perniagaan;row-corrections-v1;ipa=espeak
 border-customs.i-have-a-return-ticket,Saya punya tiket pulang,,sˈajə pˈuɲə tˈikət pˈulaŋ,,2,ms-agent-v1;ipa=espeak
 border-customs.i-am-visiting-family,Saya mengunjungi keluarga,,sˈajə məŋundʒˈuŋi kəluˈarɡə,,2,ms-agent-v1;ipa=espeak
 border-customs.this-is-for-personal-use,Ini untuk pemakaian peribadi,,ˈini ˈuntoʔ pəmakˈaɪan pəribˈadi,,2,ms-agent-v1;ipa=espeak
@@ -92,7 +92,7 @@ pickup-meeting.please-call-a-taxi,Tolong panggil teksi,,tˈoloŋ pˈaŋɡel tˈ�
 rail-station-words.high-speed-rail,Keretapi laju,,kərətˈapi lˈadʒu,,2,ms-agent-v1;ipa=espeak
 rail-station-words.transfer,Transit,Tukar keretapi,trˈanset,,2,ms-agent-v1;ipa=espeak
 rail-station-words.ticket-gate,Gate,Palang masuk,ɡˈate,"English word, used as-is",2,ms-agent-v1;ipa=espeak
-rail-station-words.platform,Peron,,pˈɛron,,2,ms-agent-v1;ipa=espeak
+rail-station-words.platform,Platform,,plˈatfɔrm,,2,ms-agent-v1;fix=DBP platform;row-corrections-v1;ipa=espeak
 rail-station-words.ticket-office,Kaunter tiket,,kˈaʊntəɾr tˈikət,,2,ms-agent-v1;ipa=espeak
 rail-station-words.waiting-room,Ruang tunggu,,rˈuaŋ tˈuŋɡu,,2,ms-agent-v1;ipa=espeak
 rail-station-words.train-number,Nombor keretapi,,nˈombɔr kərətˈapi,,2,ms-agent-v1;ipa=espeak
@@ -112,10 +112,10 @@ common-signs.no-photography,Dilarang memotret,Dilarang mengambil gambar,dilˈara
 common-signs.do-not-touch,Dilarang menyentuh,Jangan disentuh,dilˈaraŋ məɲˈəntoh,,2,ms-agent-v1;ipa=espeak
 common-signs.temporarily-closed,Tutup sementara,,tˈutop səməntˈarə,,2,ms-agent-v1;ipa=espeak
 common-signs.open-operating,Beroperasi,Sedang buka,bərˌopərˈasi,,2,ms-agent-v1;ipa=espeak
-common-signs.closed,Tutup,Libur,tˈutop,,2,ms-agent-v1;ipa=espeak
+common-signs.closed,Tutup,Cuti,tˈutop,,2,ms-agent-v1;fix=DBP cuti;row-corrections-v1;ipa=espeak
 common-signs.stopped-stop,Berhenti,Stop,bərhˈənti,,2,ms-agent-v1;ipa=espeak
 transit-rides.do-i-need-to-validate,Ini perlu tap in dulu?,,ˈini pˈəɾrlu tˈap ˈin dˈulu,"tap in / tap out, not a stamp",2,ms-agent-v1;ipa=espeak
-rail-station-words.ticket-validator,Mesin validasi,Gate,mˈəsen vˌalidˈasi,bas: mesin validasi; rail: gate,2,ms-agent-v1;ipa=espeak
+rail-station-words.ticket-validator,Mesin pengesahan,Gate,mˈəsen pəŋəsˈahan,bas: mesin pengesahan; rail: gate,2,ms-agent-v1;fix=MABBIM pengesahan;row-corrections-v1;ipa=espeak
 rail-station-words.maglev,Maglev,kereta magnet,mˈaɡləv,,1,reader-gloss-v1;ipa=espeak
 common-signs.pork-code,Tiada logo Halal JAKIM · bak kut teh · char siu,siu yuk · sio bak,tiˈadə lˈoɡo hˈalal dʒˈakem bˈaʔ kˈut tˈɛh tʃˈar sˈiu,"the JAKIM Halal logo's absence is the main signal in Malaysia (""no pork no lard"" signage is not itself a halal certificate); bak kut teh and char siu are pork dishes by name",2,pork-code-agent-v1;jakim;ipa=espeak
 rail-station-words.fare,Tambang,Tarif,tˈambaŋ,,2,fare-agent-v1;in-pack-neighbour;ipa=espeak

@@ -5,8 +5,8 @@ introductions.what-is-your-name,ما اسمك؟,,mā ismak?,mˈaː ˈismka,,2,ar
 introductions.we-are-traveling-together,نحن نسافر معاً,,naḥnu nusāfir maʿan,nˈaħnu nsˈaːfr mʕˈaː,,2,ar-agent-v1;ipa=espeak
 introductions.this-is-my-friend,هذا صديقي,هذه صديقتي,hādhā ṣadīqī,haˈaðaˌa s̪ˈidːiːqˌiː,,2,ar-agent-v1;ipa=espeak
 introductions.i-am-from,أنا من {},,anā min {},ˈana mˈin {},,2,ar-agent-v1;ipa=espeak
-introductions.where-are-you-from,من أين أنت؟,,min ayna anta?,mˈin ʔˈajna ʔˈanta,,2,ar-agent-v1;ipa=espeak
-introductions.how-are-you,كيف حالك؟,,kayf ḥālak?,kˈajfa ħˈaːlik,,2,ar-agent-v1;ipa=espeak
+introductions.where-are-you-from,من أي بلد؟,,min ayy balad?,mˈin ʔˈajj bˈalad,from which country?,2,ar-agent-v1;src=Wehr-1976 بلد;reply-neutrality-rule;rule=verbless-question-drops-gendered-pronoun;answers-audit-v1;ipa=espeak
+introductions.how-are-you,كيف الحال؟,,kayf al-ḥāl?,kˈajfa ʔalħˈaːl,how are things?,2,ar-agent-v1;src=Wehr-1976 حال;reply-neutrality-rule;rule=definite-article-replaces-gendered-possessive;answers-audit-v1;ipa=espeak
 introductions.i-am-a-tourist,أنا سائح,,anā sāʾiḥ,ˈana sˈaːʔiħ,,2,ar-agent-v1;ipa=espeak
 introductions.this-is-my-husband-wife,هذا زوجي / هذه زوجتي,,hādhā zawjī / hādhihi zawjatī,haˈaðaˌa zˈawdʒiːj / haˈaðihˌi zˈuːdʒtiː,,2,ar-agent-v1;ipa=espeak
 introductions.this-is-my-daughter-son,هذه ابنتي / هذا ابني,,hādhihi ibnatī / hādhā ibnī,haˈaðihˌi ˈabntiː / haˈaðaˌa ˈabniː,,2,ar-agent-v1;ipa=espeak

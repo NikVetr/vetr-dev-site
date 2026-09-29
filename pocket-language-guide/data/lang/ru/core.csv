@@ -13,7 +13,7 @@ pronouns-verbs.have,у меня есть,,u menya yestʼ,ˈu mʲinʲˈɑ jestʲ,
 pronouns-verbs.do-not-have,у меня нет,,u menya net,ˈu mʲinʲˈɑ nʲˈet,,2,ru-agent-v1;ipa=espeak
 pronouns-verbs.go,идти / ехать,,idti / yekhatʼ,ɪtʲtʲˈi / jˈexʌtʲ,on foot / by vehicle,2,ru-agent-v1;ipa=espeak
 pronouns-verbs.come,прийти,,priyti,prʲijtʲˈi,,2,ru-agent-v1;ipa=espeak
-pronouns-verbs.would-like,хотел бы,хотела бы,khotel by,xʌtʲˈeɭ bˈɨ,,2,ru-agent-v1;ipa=espeak
+pronouns-verbs.would-like,хотел бы,,khotel by,xʌtʲˈeɭ bˈɨ,,2,ru-agent-v1;fix=speaker-variants.md (feminine parked in text_alt: clear it) -- variants.csv speaker_gender=feminine has the same text;row-corrections-v1;ipa=espeak
 pronouns-verbs.want,хочу,,khochu,xʌtʃʲˈu,,2,ru-agent-v1;ipa=espeak
 pronouns-verbs.look-for,искать,,iskatʼ,ɪskˈɑtʲ,,2,ru-agent-v1;ipa=espeak
 pronouns-verbs.buy,купить,,kupitʼ,kupʲˈitʲ,,2,ru-agent-v1;ipa=espeak

@@ -11,10 +11,10 @@ dietary-needs.i-am-vegan,ስጋ ወተትና እንቁላል አልበላም,የ
 dietary-needs.i-do-not-eat,{} አልበላም,,{} ālbelam,{} ʔalbəlam,,2,am-agent-v1;ipa=bgn-am
 dietary-needs.i-am-allergic-to,ለ{} አለርጂ አለብኝ,,le{} ālerjī āllebbinny,lə {} ʔalərdʒi ʔalːəbːɨɲː,I have allergy to {},2,am-agent-v1;ipa=bgn-am
 food-ordering.table-for-two,ለሁለት ሰው ጠረጴዛ,,lehulett sew tʼerepʼēza,ləhulətː səw tʼərəpʼeza,a table for two people,2,am-agent-v1;ipa=bgn-am
-food-ordering.is-a-table-available,ጠረጴዛ አለ?,,tʼerepʼēza āle?,tʼərəpʼeza ʔalə,is there a table?,2,am-agent-v1;ipa=bgn-am
+food-ordering.is-a-table-available,ጠረጴዛ አለ?,,tʼerepʼēza ālle?,tʼərəpʼeza ʔalːə,is there a table?,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allə;row-corrections-v1;ipa=bgn-am
 food-ordering.menu-please,ሜኑ እባክዎ,,mēnu ibakwo,menu ʔɨbakwo,,2,am-agent-v1;ipa=bgn-am
 food-ordering.i-want-this,ይህን እፈልጋለሁ,,yihin ifelligallehu,jɨhɨn ʔɨfəlːɨɡalːəhu,,2,am-agent-v1;ipa=bgn-am
-food-ordering.do-you-have-drinking-water,የመጠጥ ውሃ አለ?,,yemetʼetʼ wiha āle?,jəmətʼətʼ wɨha ʔalə,is there drinking water?,2,am-agent-v1;ipa=bgn-am
+food-ordering.do-you-have-drinking-water,የመጠጥ ውሃ አለ?,,yemetʼetʼ wiha ālle?,jəmətʼətʼ wɨha ʔalːə,is there drinking water?,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allə;row-corrections-v1;ipa=bgn-am
 food-ordering.to-go-please,ጥቅል ያድርጉልኝ,,tʼikʼil yadirgulinny,tʼɨkʼɨl jadɨrɡulɨɲː,please make it a parcel,2,am-agent-v1;ipa=bgn-am
 food-ordering.check-please,ሂሳብ እባክዎ,,hīsab ibakwo,hisab ʔɨbakwo,the bill please,2,am-agent-v1;ipa=bgn-am
 food-ordering.does-it-contain,{} አለበት?,,{} āllebet?,{} ʔalːəbət,does it have {} in it?,2,am-agent-v1;ipa=bgn-am

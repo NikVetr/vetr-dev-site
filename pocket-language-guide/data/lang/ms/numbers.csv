@@ -1,5 +1,5 @@
 concept_id,text,text_alt,ipa,literal,confidence,provenance
-numbers-money.l-ng,nol,0,nˈol,,2,ms-agent-v1;ipa=espeak
+numbers-money.l-ng,sifar,0,sˈifar,,2,ms-agent-v1;fix=DBP sifar;row-corrections-v1;ipa=espeak
 numbers-money.y,satu,1,sˈatu,,2,ms-agent-v1;ipa=espeak
 numbers-money.r,dua,2,dˈuə,,2,ms-agent-v1;ipa=espeak
 numbers-money.s-n,tiga,3,tˈiɡə,,2,ms-agent-v1;ipa=espeak
@@ -21,23 +21,23 @@ atm-cash.does-this-atm-take-foreign-cards,ATM ini terima kad luar negeri?,,ˌeː
 atm-cash.the-atm-kept-my-card,Kad saya tertelan ATM,,kˈad sˈajə təɾrtˈɛlan ˌeːtˌiːˈɛm,tertelan = swallowed,2,ms-agent-v1;ipa=espeak
 atm-cash.is-there-a-fee,Ada bayaran?,,ˈadə bajˈaran,,2,ms-agent-v1;ipa=espeak
 atm-cash.the-card-was-declined,Kadnya ditolak,,kˈadɲə ditˈolaʔ,,2,ms-agent-v1;ipa=espeak
-atm-cash.what-is-the-exchange-rate,Kursnya berapa?,,kˈursɲə bərˈapə,,2,ms-agent-v1;ipa=espeak
+atm-cash.what-is-the-exchange-rate,Kadar pertukarannya berapa?,,kˈadar pəɾrtˌukarˈanɲə bərˈapə,,2,ms-agent-v1;fix=MABBIM kadar pertukaran;row-corrections-v1;ipa=espeak
 atm-cash.no-money-came-out,Wangnya tidak keluar,,wˈaŋɲə tˈidaʔ kəlˈuar,,2,ms-agent-v1;ipa=espeak
 atm-cash.where-can-i-change-money,Di mana boleh tukar wang?,,dimˈanə bˈoleh tˈukar wˈaŋ,,2,ms-agent-v1;ipa=espeak
-atm-cash.the-machine-is-out-of-service,Mesinnya tidak berfungsi,Mesinnya rusak,məsˈenɲə tˈidaʔ bərfˈuŋsi,,2,ms-agent-v1;ipa=espeak
+atm-cash.the-machine-is-out-of-service,Mesinnya tidak berfungsi,Mesinnya rosak,məsˈenɲə tˈidaʔ bərfˈuŋsi,,2,ms-agent-v1;fix=DBP rosak;row-corrections-v1;ipa=espeak
 atm-cash.please-give-me-smaller-notes,Minta pecahan yang lebih kecil,,mˈintə pətʃˈahan jaŋ lˈəbeh kˈətʃel,,2,ms-agent-v1;ipa=espeak
 atm-cash.do-you-have-change,Ada wang kecil?,,ˈadə wˈaŋ kˈətʃel,,2,ms-agent-v1;ipa=espeak
 atm-cash.may-i-pay-in,Boleh bayar pakai {}?,,bˈoleh bˈajar pˈakaɪ {},,2,ms-agent-v1;ipa=espeak
 atm-cash.please-charge-in-local-currency,Tolong caj dalam ringgit,,tˈoloŋ tʃˈadʒ dˈalam rˈiŋɡet,,2,ms-agent-v1;ipa=espeak
-atm-cash.where-can-i-get-coins,Di mana boleh dapat koin?,,dimˈanə bˈoleh dˈapat kˈoen,,2,ms-agent-v1;ipa=espeak
+atm-cash.where-can-i-get-coins,Di mana boleh dapat syiling?,,dimˈanə bˈoleh dˈapat ʃˈileŋ,,2,ms-agent-v1;fix=DBP syiling;row-corrections-v1;ipa=espeak
 atm-cash.is-there-a-minimum-for-cards,Ada minimum untuk kad?,,ˈadə minˈimom ˈuntoʔ kˈad,,2,ms-agent-v1;ipa=espeak
 atm-cash.atm,ATM,Mesin ATM,ˌeːtˌiːˈɛm,,2,ms-agent-v1;ipa=espeak
 atm-cash.banknote,Wang kertas,,wˈaŋ kˈərtas,,2,ms-agent-v1;ipa=espeak
-atm-cash.coin,Koin,Wang logam,kˈoen,,2,ms-agent-v1;ipa=espeak
+atm-cash.coin,Syiling,Wang logam,ʃˈileŋ,,2,ms-agent-v1;fix=DBP syiling;row-corrections-v1;ipa=espeak
 atm-cash.cash-only,Tunai saja,Hanya tunai,tˈunaɪ sˈadʒə,,2,ms-agent-v1;ipa=espeak
 atm-cash.fee,Bayaran,Komisen,bajˈaran,,2,ms-agent-v1;ipa=espeak
-atm-cash.change,Kembalian,,kəmbalˈian,,2,ms-agent-v1;ipa=espeak
-atm-cash.exchange-rate,Kurs,,kˈurs,,2,ms-agent-v1;ipa=espeak
+atm-cash.change,Baki,,bˈaki,,2,ms-agent-v1;fix=DBP baki;row-corrections-v1;ipa=espeak
+atm-cash.exchange-rate,Kadar pertukaran,,kˈadar pəɾrtukˈaran,,2,ms-agent-v1;fix=MABBIM kadar pertukaran;row-corrections-v1;ipa=espeak
 atm-cash.bank,Bank,,bˈɛnk,,2,ms-agent-v1;ipa=espeak
 atm-cash.money-exchange,Money changer,Penukaran wang,mˈonəj tʃˈaŋəɾr,what the sign actually says,2,ms-agent-v1;ipa=espeak
 atm-cash.pin,PIN,,pˈin,,2,ms-agent-v1;ipa=espeak

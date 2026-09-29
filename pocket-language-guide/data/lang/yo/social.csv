@@ -17,14 +17,14 @@ communication.i-speak-only-a-little-of-this,Mo lè sọ {target} díẹ̀ nìkan
 communication.do-you-speak-english,Ṣé o lè sọ {source}?,,ʃe˥ o le˩ sɔ {source},,2,yo-agent-v1;ipa=yo-g2p
 communication.please-speak-more-slowly,"Ẹ jọ̀wọ́, ẹ sọ̀rọ̀ jẹ́ẹ́jẹ́",,"ɛ dʒɔ˩wɔ˥, ɛ sɔ˩rɔ˩ dʒɛ˥ɛ˥dʒɛ˥",,2,yo-agent-v1;ipa=yo-g2p
 communication.i-do-not-understand-spoken,Mi ò gbọ́ ohun tí o sọ,,mi o˩ ɡbɔ˥ ohũ ti˥ o sɔ,,2,yo-agent-v1;ipa=yo-g2p
-communication.i-cannot-read-understand,Mi ò lè kà á tàbí yé mi,,mi o˩ le˩ ka˩ a˥ ta˩bi˥ je˥ mi,,2,yo-agent-v1;ipa=yo-g2p
+communication.i-cannot-read-understand,"Mi ò lè kà á, kò yé mi",,"mi o˩ le˩ ka˩ a˥, ko˩ je˥ mi",I cannot read it; it is not clear to me,2,yo-agent-v1;fix=en.wiktionary ye 'Kò yé mi';fix=Yorùbá Yé Mi (COERLL) p. 21 'ó yé mi' and pp. 76 218 third-person negative 'kò';row-corrections-v1;ipa=yo-g2p
 communication.please-say-it-again,"Ẹ jọ̀wọ́, ẹ tún un sọ",,"ɛ dʒɔ˩wɔ˥, ɛ tũ˥ ũ sɔ",,2,yo-agent-v1;ipa=yo-g2p
 communication.please-write-it-down,"Ẹ jọ̀wọ́, ẹ kọ ọ́ sílẹ̀",,"ɛ dʒɔ˩wɔ˥, ɛ kɔ ɔ˥ si˥lɛ˩",,2,yo-agent-v1;ipa=yo-g2p
 communication.please-wait-a-moment,"Ẹ jọ̀wọ́, ẹ dúró díẹ̀",,"ɛ dʒɔ˩wɔ˥, ɛ du˥ro˥ di˥ɛ˩",,2,yo-agent-v1;ipa=yo-g2p
 communication.can-you-help-me,Ṣé o lè ràn mí lọ́wọ́?,,ʃe˥ o le˩ rã˩ mi˥ lɔ˥wɔ˥,,2,yo-agent-v1;ipa=yo-g2p
 communication.please-show-me-the-text,"Ẹ jọ̀wọ́, fi ọ̀rọ̀ náà hàn mí ní {target}",,"ɛ dʒɔ˩wɔ˥, fi ɔ˩rɔ˩ na˥a˩ hã˩ mi˥ ni˥ {target}",,2,yo-agent-v1;ipa=yo-g2p
 communication.i-cannot-make-out-what-you-are-saying,Mi ò gbọ́ ohun tí o ń sọ dáadáa,,mi o˩ ɡbɔ˥ ohũ ti˥ o n̩˥ sɔ da˥ada˥a,,2,yo-agent-v1;ipa=yo-g2p
-communication.i-do-not-understand,Mi ò yé mi,,mi o˩ je˥ mi,,2,yo-agent-v1;ipa=yo-g2p
+communication.i-do-not-understand,Kò yé mi,,ko˩ je˥ mi,it is not clear to me,2,yo-agent-v1;fix=en.wiktionary ye 'Kò yé mi';fix=Yorùbá Yé Mi (COERLL) p. 21 'ó yé mi' and pp. 76 218 third-person negative 'kò';row-corrections-v1;ipa=yo-g2p
 communication.i-cannot-read-it,Mi ò lè kà á,,mi o˩ le˩ ka˩ a˥,,2,yo-agent-v1;ipa=yo-g2p
 communication.please-write-it-in-roman-letters,"Ẹ jọ̀wọ́, kọ ọ́ ní lẹ́tà Roman",,"ɛ dʒɔ˩wɔ˥, kɔ ɔ˥ ni˥ lɛ˥ta˩ romã",,2,yo-agent-v1;ipa=yo-g2p
 quick-responses.please-go-ahead,Ẹ jọ̀wọ́,,ɛ dʒɔ˩wɔ˥,,2,yo-agent-v1;ipa=yo-g2p
@@ -111,7 +111,7 @@ board-answers.how-many,Mélòó ni ẹ fẹ́?,,me˥lo˩o˥ ni ɛ fɛ˥,how many
 board-answers.not-possible,Èyí kò ṣeéṣe,,e˩ji˥ ko˩ ʃee˥ʃe,,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
 board-answers.say-it-again,"Ẹ jọ̀wọ́, ẹ tún sọ ọ́",,"ɛ dʒɔ˩wɔ˥, ɛ tũ˥ sɔ ɔ˥",,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
 board-answers.i-will-write-it-down,Mo máa kọ ọ́ sílẹ̀,,mo ma˥a kɔ ɔ˥ si˥lɛ˩,,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
-board-answers.i-am-calling-an-ambulance,Mo ń pe ọkọ̀ alaisan,,mo n̩˥ kpe ɔkɔ˩ alaisã,,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
+board-answers.i-am-calling-an-ambulance,Mo ń pe ọkọ̀ aláìsàn,,mo n̩˥ kpe ɔkɔ˩ ala˥i˩sã˩,,2,yo-agent-v1;board-answers-v1;fix=Yorùbá Yé Mi (COERLL) p. 187 'ìtọ́jú aláìsàn';row-corrections-v1;ipa=yo-g2p
 board-answers.i-am-calling-the-police,Mo ń pe ọlọ́pàá,,mo n̩˥ kpe ɔlɔ˥kpa˩a˥,,2,yo-agent-v1;board-answers-v1;matches police-consulate.i-am-calling-the-police;ipa=yo-g2p
 board-answers.help-is-coming,Ìrànlọ́wọ́ ń bọ̀,,i˩rã˩lɔ˥wɔ˥ n̩˥ bɔ˩,,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p
 board-answers.where-does-it-hurt,Níbo ni ó ń dùn ẹ?,,ni˥bo ni o˥ n̩˥ dũ˩ ɛ,,2,yo-agent-v1;board-answers-v1;ipa=yo-g2p

@@ -21,7 +21,7 @@ about-me.i-am-a-teacher,من معلم هستم,,man mo‘allem hastam,man moʔal
 about-me.i-am-a-doctor,من پزشک هستم,,man pezeshk hastam,man pezeʃk hastam,,2,fa-agent-v1;ipa=espeak
 about-me.i-am-a-nurse,من پرستار هستم,,man parastār hastam,man parastɑr hastam,,2,fa-agent-v1;ipa=espeak
 about-me.i-am-an-engineer,من مهندس هستم,,man mohandes hastam,man mohandes hastam,,2,fa-agent-v1;ipa=espeak
-about-me.i-work-in-an-office,من در یک دفتر کار می‌کنم,,man dar yek daftar kār mi‌konam,man dar jek daftar kɑr mikonam,,2,fa-agent-v1;ipa=espeak
+about-me.i-work-in-an-office,من در یک دفتر کار می‌کنم,,man dar yek daftar kār mikonam,man dar jek daftar kɑr mikonam,,2,"fa-agent-v1;fix=U+200C removed from the Latin: it is the Persian script's joiner, and the pack's 119 other mi- romanisations write the prefix joined;row-corrections-v1;ipa=espeak"
 about-me.i-have-my-own-business,من کسب و کار خودم را دارم,,man kasb o kār-e khodam rā dāram,man kasb va kɑr xodam rɑ dɑram,,2,fa-agent-v1;ipa=espeak
 family-intros.this-is-my-mother,ایشان مادرم است,,ishān mādaram ast,iʃɑn mɑdaram ast,,2,fa-agent-v1;ipa=espeak
 family-intros.this-is-my-father,ایشان پدرم است,,ishān pedaram ast,iʃɑn pedaram ast,,2,fa-agent-v1;ipa=espeak
