@@ -407,7 +407,9 @@ test('auto reproduces the hand-built originals at their own spacing', async () =
   // the default sheet currently holds: the corpus went from 413 concepts to 755,
   // so the default legitimately needs six faces now, and asserting four on it
   // would only be measuring the corpus size. The reviewed rows are identifiable by
-  // provenance, so the selection is narrowed to exactly the hand-built sheet.
+  // provenance, so the selection is narrowed to exactly the hand-built sheet: the two
+  // references' own tags. "Anything no agent wrote" was the test once, and it let every
+  // later coordinator batch -- board answers, about-me rows -- count as the original.
   for (const [target, source] of [['zh-Hans', 'en'], ['ja', 'en'], ['en', 'ja']]) {
     // `split: 'adaptive'` is part of what is being reproduced: the reference's own
     // 27-candidate per-row split search is why four faces are reachable at all, and
@@ -420,7 +422,7 @@ test('auto reproduces the hand-built originals at their own spacing', async () =
     /** @type {Record<string, boolean>} */ const items = {};
     let original = 0;
     for (const [cid, row] of Object.entries(rows)) {
-      const reviewed = !/agent|expansion/.test(row.provenance ?? '');
+      const reviewed = /^(latex-reference|japanese-reviewed)/.test(row.provenance ?? '');
       if (reviewed) original += 1;
       else items[cid] = false;
     }
