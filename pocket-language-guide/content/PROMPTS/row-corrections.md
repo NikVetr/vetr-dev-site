@@ -203,3 +203,23 @@ Same rules as both passes above; notes go to `tmp/agent-notes/row-corrections-3.
 - **Marathi (`mr`) writes the eyelash RA `ṟ`**, where ISO 15919:2001 has `r̆` (letter 048a,
   "used in Marathi and Nepali") and Nepali now follows it. Check which system the pack's
   column claims and bring the cells into it.
+
+## A fourth pass: the rest of the driver's rows
+
+The third pass fixed the rows its brief named and found more of the same on the transport
+board, all said to a driver the traveller cannot choose. Same rules; notes to
+`tmp/agent-notes/row-corrections-4.md`.
+
+- **Arabic** addresses the driver with a masculine imperative in `taxi.please-stop-here`
+  (توقّف), `taxi.please-take-me-here` (خذني), `taxi.could-you-make-it-colder` and
+  `-warmer`, `taxi.can-you-wait-for-me-here` and `transit-rides.please-tell-me-where-to-get-off`.
+  The pack's own neutral request is أرجو with a verbal noun (`أرجو التأكيد`), and a
+  first-person "I want to get off here" carries no gender either.
+- **Hausa**: `taxi.please-take-me-here`, `taxi.can-you-wait-for-me-here`,
+  `taxi.could-you-make-it-colder` and `-warmer`, and
+  `transit-rides.please-tell-me-where-to-get-off`. The third pass used the bare imperative
+  (UCLA's Hausa grammar: said to a man or a woman, no less polite) and Bargery's impersonal
+  *a*.
+- **Urdu**: `taxi.could-you-make-it-colder` and `-warmer`.
+
+Each row keeps the kind of answer its reply set expects: a request stays a request.
