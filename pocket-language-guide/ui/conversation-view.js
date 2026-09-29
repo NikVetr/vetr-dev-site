@@ -904,16 +904,14 @@ function watchMessage(text, box) {
 /**
  * Size what sits around the sentence to the sentence.
  *
- * **Reply is as large as the sentence's whitespace lets it be, and it is one of two
- * rectangles.** The sentence's shape is ragged in exactly one place -- its last line
- * ends short -- so there are two places Reply can stand: *below* the last line, in
- * its own row with the whole width, or *beside* it, in the corner the short line
- * leaves empty, with the sentence given the whole box. Both are tried and the one
- * that leaves the two of them larger together is kept. Beside is what a turned
- * sentence of two columns wants, where the second column ends halfway down and the
- * corner under it is a third of the screen; below is what a one-line sentence wants,
- * where beside it there is nothing. Reply's type is capped at four fifths of the
- * sentence's either way and its label stays on one line.
+ * **Reply is as large as the sentence's whitespace lets it be, in one of two
+ * rectangles.** It is sized first in a row of its own under the sentence, with the
+ * sentence fitted round it; `placeReply` then takes it out of the row into whichever
+ * empty rectangle -- the band under the last line, or the corner the last line's short
+ * end leaves -- lets it be larger, and centres it there. The corner is what a turned
+ * sentence of two columns wants, where the second column ends halfway down; the band is
+ * what a one-line sentence wants, where beside it there is nothing. Reply's type is
+ * capped at four fifths of the sentence's either way and its label stays on one line.
  *
  * **The gloss takes the room the row gives it**, from the body size down to the
  * small one, at no more than two lines: the row's other half is three buttons, and
@@ -998,41 +996,7 @@ function fitFoot(box) {
       fitMessage(text, box);
       if (Math.abs(buffer() - held) < 1) break;
     }
-    const belowScore = below * textSize();
-
-    // **Beside.** The sentence takes the whole box and Reply the corner its last
-    // line leaves. Not at the sentence's largest size only: fitted to the whole box
-    // the last line runs nearly to the edge and leaves no corner at all, so the
-    // sizes below it are walked -- eight steps, to about half -- and the one that
-    // leaves the two of them largest together is the one kept.
-    reply.classList.add('board-reply-beside');
-    reply.style.fontSize = '';
-    fitMessage(text, box);
-    const largest = textSize();
-    let best = { score: 0, size: largest, reply: 0, corner: /** @type {ReturnType<typeof freeCorner>} */ (null) };
-    for (let k = 0, size = largest; k < 9 && size >= MIN_MESSAGE_PX; k += 1, size *= 0.92) {
-      text.style.fontSize = `${size}px`;
-      if (!settle(text, box)) continue;
-      const corner = freeCorner(text, box);
-      if (!corner) continue;
-      const fitsCorner = () => reply.offsetWidth <= corner.w && reply.offsetHeight <= corner.h && inside();
-      const px = shrinkReply(reply, size, fitsCorner);
-      if (!fitsCorner() || px * size <= best.score) continue;
-      best = { score: px * size, size, reply: px, corner };
-    }
-    if (best.corner && best.score >= belowScore) {
-      text.style.fontSize = `${best.size}px`;
-      settle(text, box);
-      reply.style.fontSize = `${best.reply}px`;
-      placeBeside(text, reply, best.corner, box, read);
-    } else {
-      reply.classList.remove('board-reply-beside');
-      reply.classList.add('board-reply-line');
-      reply.style.fontSize = `${below}px`;
-      if (reply[along] > room) reply.classList.remove('board-reply-line');
-      fitMessage(text, box);
-      if (!box.classList.contains('board-message-scrolls')) placeBelow(text, reply, box, read);
-    }
+    if (!box.classList.contains('board-message-scrolls')) placeReply(text, reply, box, read, below);
   }
   const gloss = /** @type {HTMLElement|null} */ (stage.querySelector('.board-message-gloss'));
   if (gloss) {
@@ -1061,202 +1025,119 @@ function shrinkReply(reply, textPx, fits) {
 }
 
 /**
- * The empty rectangle the sentence's last line leaves in the surface, in screen
- * coordinates, and which of its corners Reply sits in.
- *
- * Along the line's own direction it runs from where the last line's ink ends -- the
- * hanging mark included, which `lineRects` leaves out on purpose -- plus a buffer, to
- * the surface's edge less the same buffer; across, from the last line's leading edge
- * to the surface's far edge less it again, because nothing is written after the last
- * line. Every line above it is at least as long, so a rectangle that starts level
- * with the last line cannot touch them. A right-to-left sentence ends on the left and
- * the corner is on that side; a turned one ends at the bottom and the corner is under
- * it.
- *
- * **The buffer grows with the sentence**: a third of its size, and never less than
- * the surface's padding. At a poster size the padding alone put Reply a finger's
- * width from a word the height of a hand.
- *
- * Nothing at all when the sentence scrolls: there is no whitespace to lend.
- * @param {HTMLElement} text @param {HTMLElement} box
- * @returns {{left:number, top:number, right:number, bottom:number, w:number, h:number}|null}
+ * The message in the sentence's own terms: `u` runs along its lines and `v` across them,
+ * in the order they are read, so one placement serves a sentence upright or turned and
+ * written either way. Turned, the lines run down the screen and stack leftward; right to
+ * left, they run the other way along.
+ * @param {HTMLElement} text
  */
-function freeCorner(text, box) {
-  if (box.classList.contains('board-message-scrolls')) return null;
-  const lines = lineRects(text);
-  if (!lines.length) return null;
-  const last = lines[lines.length - 1];
-  let end = { left: last.left, top: last.top, right: last.right, bottom: last.bottom };
+function axes(text) {
+  const turned = vertical(text);
+  const su = getComputedStyle(text).direction === 'rtl' ? -1 : 1;
+  const sv = turned ? -1 : 1;
+  /** @param {{left:number, right:number, top:number, bottom:number}} r */
+  const uv = (r) => {
+    const [a0, a1] = turned ? [r.top, r.bottom] : [r.left, r.right];
+    const [b0, b1] = turned ? [r.left, r.right] : [r.top, r.bottom];
+    return { u0: su > 0 ? a0 : -a1, u1: su > 0 ? a1 : -a0, v0: sv > 0 ? b0 : -b1, v1: sv > 0 ? b1 : -b0 };
+  };
+  /** Where a box given in those terms starts on the screen. @param {{u0:number, u1:number, v0:number, v1:number}} b */
+  const screen = (b) => {
+    const x = turned ? [b.v0 * sv, b.v1 * sv] : [b.u0 * su, b.u1 * su];
+    const y = turned ? [b.u0 * su, b.u1 * su] : [b.v0 * sv, b.v1 * sv];
+    return { left: Math.min(...x), top: Math.min(...y) };
+  };
+  return { turned, uv, screen, sv };
+}
+
+/**
+ * Reply in whichever of the sentence's two empty rectangles lets it be larger, and in
+ * the middle of it: as far from the sentence as from the frame, along the line and
+ * across it alike.
+ *
+ * The two rectangles are the band under the last line, the frame's whole width, and the
+ * corner beside the last line's end, from the line before it down to the frame. Reply
+ * already has its size in the band -- the one it was given in its row, with the sentence
+ * fitted round it -- and is sized again for the corner, with the sentence at the same
+ * size, so the two are compared fairly; the larger wins and a tie goes to the band.
+ *
+ * **Under the sentence, the height left over is shared three ways**: above the sentence,
+ * between the two, and under Reply. Reply is then centred between the sentence and the
+ * frame, and the sentence between the frame and Reply -- rather than the two standing as
+ * a pair in the middle, with Reply much nearer the sentence above it than the frame
+ * below. In the corner the sentence stays centred in the frame. It is moved, never
+ * resized: its size was settled first and is the thing the screen is for.
+ *
+ * Distances are to the frame's drawn line, which is what the eye measures them against,
+ * and never less than the surface's padding from it -- or, from the sentence, than a
+ * third of the sentence's size, which grows with it: at a poster size the padding alone
+ * put Reply a finger's width from a word the height of a hand.
+ * @param {HTMLElement} text @param {HTMLElement} reply @param {HTMLElement} box @param {HTMLElement} read
+ * @param {number} below  Reply's size in the band
+ */
+function placeReply(text, reply, box, read, below) {
+  const size = Number.parseFloat(getComputedStyle(text).fontSize);
+  // Out of the flow: the frame is the whole read area now, the sentence centred in it.
+  reply.classList.add('board-reply-beside');
+  read.style.gap = '';
+  const { turned, uv, screen, sv } = axes(text);
+  const style = getComputedStyle(box);
+  const pad = {
+    u: Number.parseFloat(turned ? style.paddingTop : style.paddingLeft),
+    v: Number.parseFloat(turned ? style.paddingLeft : style.paddingTop),
+  };
+  const gap = { u: Math.max(pad.u, size / 3), v: Math.max(pad.v, size / 3) };
+  const line = Math.max(0, -Number.parseFloat(style.outlineOffset) || 0);
+  const edge = uv(box.getBoundingClientRect());
+  const frame = { u0: edge.u0 + line, u1: edge.u1 - line, v0: edge.v0 + line, v1: edge.v1 - line };
+  const lines = lineRects(text).map(uv).sort((m, n) => m.v0 - n.v0);
+  let last = lines[lines.length - 1];
+  const before = lines[lines.length - 2];
+  // The last line ends where its ink does, the hanging mark included.
   const hang = text.querySelector(':scope > .board-message-punct');
   if (hang && !text.classList.contains('board-punct-inline')) {
     const range = document.createRange();
     range.selectNodeContents(hang);
-    const ink = range.getBoundingClientRect();
-    end = { left: Math.min(end.left, ink.left), top: Math.min(end.top, ink.top),
-      right: Math.max(end.right, ink.right), bottom: Math.max(end.bottom, ink.bottom) };
+    last = { ...last, u1: Math.max(last.u1, uv(range.getBoundingClientRect()).u1) };
   }
-  const b = box.getBoundingClientRect();
-  const pad = getComputedStyle(box);
-  // One distance three times over, along each axis: Reply sits it from the sentence's
-  // end, from the surface's edge, and from its far side.
-  const size = Number.parseFloat(getComputedStyle(text).fontSize);
-  const gapX = Math.max(Number.parseFloat(pad.paddingLeft), size / 3);
-  const gapY = Math.max(Number.parseFloat(pad.paddingTop), size / 3);
-  const edge = { left: b.left + gapX, right: b.right - gapX, top: b.top + gapY, bottom: b.bottom - gapY };
-  const rtl = getComputedStyle(text).direction === 'rtl';
-  // **And from the line before the last**, which the corner abuts: a Reply taller
-  // than the last line was aligned to that line's box, whose edge is the line
-  // before's, and sat a third as far from it as the lines sit from each other.
-  const before = lines[lines.length - 2];
-  let r;
-  if (vertical(text)) {
-    // Columns right to left; the line runs down (or, right-to-left, up).
-    const right = before ? Math.min(last.right, before.left - gapX) : last.right;
-    r = rtl
-      ? { left: edge.left, right, top: edge.top, bottom: end.top - gapY }
-      : { left: edge.left, right, top: end.bottom + gapY, bottom: edge.bottom };
-  } else {
-    const top = before ? Math.max(last.top, before.bottom + gapY) : last.top;
-    r = rtl
-      ? { left: edge.left, right: end.left - gapX, top, bottom: edge.bottom }
-      : { left: end.right + gapX, right: edge.right, top, bottom: edge.bottom };
-  }
-  return { ...r, w: r.right - r.left, h: r.bottom - r.top };
-}
+  const block = { v0: lines[0].v0, v1: Math.max(...lines.map((l) => l.v1)) };
+  const extent = () => (turned ? { u: reply.offsetHeight, v: reply.offsetWidth } : { u: reply.offsetWidth, v: reply.offsetHeight });
 
-/**
- * Reply under the sentence as one group with it, centred in the box.
- *
- * In its own row at the foot, Reply stood a screen's height from a short sentence
- * centred in the frame above it: two islands with a gulf between. Sized in that row
- * and then lifted out of it, it sits a buffer under the sentence's last line -- a
- * third of the sentence's size, never less than the padding -- and the two move
- * together until the space above the sentence equals the space below Reply. The
- * sentence keeps the size it was fitted at. A sentence long enough to scroll keeps
- * Reply in its row, where it cannot cover a word.
- * @param {HTMLElement} text @param {HTMLElement} reply @param {HTMLElement} box @param {HTMLElement} read
- */
-function placeBelow(text, reply, box, read) {
-  reply.classList.add('board-reply-beside');
-  const lines = lineRects(text);
-  const b = box.getBoundingClientRect();
-  const pad = getComputedStyle(box);
-  const size = Number.parseFloat(getComputedStyle(text).fontSize);
-  const turned = vertical(text);
-  // **The pair fits the frame, Reply giving way first.** The sentence was fitted with
-  // Reply in its own row, and lifting Reply out adds the buffer between them, which
-  // grows with the sentence -- so at poster sizes the pair ran up to twenty pixels
-  // past the frame, Reply over its edge. The sentence's size was settled first and is
-  // what the screen is for, so Reply shrinks until the pair fits, and only a Reply
-  // already at its least takes a smaller buffer.
-  const span = turned
-    ? Math.max(...lines.map((l) => l.right)) - Math.min(...lines.map((l) => l.left))
-    : Math.max(...lines.map((l) => l.bottom)) - Math.min(...lines.map((l) => l.top));
-  const room = turned
-    ? b.width - Number.parseFloat(pad.paddingLeft) - Number.parseFloat(pad.paddingRight) - span
-    : b.height - Number.parseFloat(pad.paddingTop) - Number.parseFloat(pad.paddingBottom) - span;
-  let gap = Math.max(Number.parseFloat(turned ? pad.paddingLeft : pad.paddingTop), size / 3);
-  const depth = () => (turned ? reply.offsetWidth : reply.offsetHeight);
-  let px = Number.parseFloat(getComputedStyle(reply).fontSize);
-  while (gap + depth() > room && px > 16) {
-    px = Math.max(16, px * 0.92);
+  // The corner: from the last line's end to the frame, and from the line before (or the
+  // frame's top) to the frame's foot.
+  const top = before ? before.v1 : frame.v0;
+  const room = { u: frame.u1 - pad.u - (last.u1 + gap.u), v: frame.v1 - pad.v - (top + (before ? gap.v : pad.v)) };
+  let beside = 0;
+  if (room.u > 0 && room.v > 0) {
+    let px = size * 0.8;
     reply.style.fontSize = `${px}px`;
-  }
-  gap = Math.max(0, Math.min(gap, room - depth()));
-  const w = reply.offsetWidth;
-  const h = reply.offsetHeight;
-  let x;
-  let y;
-  if (turned) {
-    // Turned, "under" is to the left of the last column, and the group runs across.
-    const right = Math.max(...lines.map((l) => l.right));
-    const left = Math.min(...lines.map((l) => l.left));
-    const inner = { left: b.left + Number.parseFloat(pad.paddingLeft), right: b.right - Number.parseFloat(pad.paddingRight) };
-    const span = right - left + gap + w;
-    const start = Math.min(inner.right, (inner.left + inner.right + span) / 2);
-    text.style.translate = `${start - right}px 0`;
-    x = start - (right - left) - gap - w;
-    y = b.top + (b.height - h) / 2;
-  } else {
-    const top = Math.min(...lines.map((l) => l.top));
-    const bottom = Math.max(...lines.map((l) => l.bottom));
-    const inner = { top: b.top + Number.parseFloat(pad.paddingTop), bottom: b.bottom - Number.parseFloat(pad.paddingBottom) };
-    const span = bottom - top + gap + h;
-    const start = Math.max(inner.top, (inner.top + inner.bottom - span) / 2);
-    text.style.translate = `0 ${start - top}px`;
-    x = b.left + (b.width - w) / 2;
-    y = start + (bottom - top) + gap;
-  }
-  const at = read.getBoundingClientRect();
-  reply.style.left = `${x - at.left}px`;
-  reply.style.top = `${y - at.top}px`;
-}
-
-/**
- * Reply in its corner, and the two of them set so the whitespace is even.
- *
- * Along the line it is centred in the corner -- as far from the sentence's end as from
- * the edge -- where it used to sit hard in the far corner with a hand's width of
- * nothing between it and the last word. Across, it is level with the last line, or
- * starts with it when it is the taller -- but never nearer the line before than the
- * corner lets it, which is the same buffer it keeps everywhere else. Then the sentence
- * and Reply move together,
- * across the box, so the space before the sentence equals the space after Reply: the
- * sentence is moved, never resized, because its size was settled first and is the
- * thing the screen is for.
- * @param {HTMLElement} text @param {HTMLElement} reply
- * @param {NonNullable<ReturnType<typeof freeCorner>>} corner
- * @param {HTMLElement} box @param {HTMLElement} read
- */
-function placeBeside(text, reply, corner, box, read) {
-  const lines = lineRects(text);
-  const first = lines[0];
-  const last = lines[lines.length - 1];
-  const w = reply.offsetWidth;
-  const h = reply.offsetHeight;
-  const b = box.getBoundingClientRect();
-  const pad = getComputedStyle(box);
-  let x;
-  let y;
-  if (vertical(text)) {
-    y = corner.top + (corner.h - h) / 2;
-    // Level with the last line within what the corner allows of it, or from the
-    // corner's edge when Reply is the wider.
-    const width = corner.right - last.left;
-    x = w <= width ? last.left + (width - w) / 2 : corner.right - w;
-    // Columns stack leftward: the pair runs from the first column's right edge to
-    // whichever of the last column and Reply reaches further left.
-    const inner = { left: b.left + Number.parseFloat(pad.paddingLeft), right: b.right - Number.parseFloat(pad.paddingRight) };
-    const from = Math.min(last.left, x);
-    let shift = (inner.left + inner.right - (from + first.right)) / 2;
-    shift = Math.min(shift, inner.right - first.right);
-    shift = Math.max(shift, inner.left - from);
-    text.style.translate = `${shift}px 0`;
-    x += shift;
-    // **Across, as far from the line before as from the frame.** Level with the last
-    // line put a Reply wider than it hard against the line before on one side and a
-    // wide margin on the other; centred between the two, the gaps match -- and never
-    // nearer either than the frame's own padding, or it stays where it was.
-    const before = lines[lines.length - 2];
-    if (before) {
-      const even = (inner.left + before.left + shift - w) / 2;
-      if (before.left + shift - (even + w) >= Number.parseFloat(pad.paddingLeft)) x = even;
+    const at = extent();
+    px = Math.min(px, (px * room.u) / at.u, (px * room.v) / at.v);
+    for (let k = 0; k < 8 && px >= 16; k += 1, px *= 0.96) {
+      reply.style.fontSize = `${px}px`;
+      const e = extent();
+      if (e.u <= room.u + 0.5 && e.v <= room.v + 0.5) { beside = px; break; }
     }
-  } else {
-    x = corner.left + (corner.w - w) / 2;
-    const height = last.bottom - corner.top;
-    y = h <= height ? corner.top + (height - h) / 2 : corner.top;
-    const inner = { top: b.top + Number.parseFloat(pad.paddingTop), bottom: b.bottom - Number.parseFloat(pad.paddingBottom) };
-    const to = Math.max(last.bottom, y + h);
-    let shift = (inner.top + inner.bottom - (first.top + to)) / 2;
-    shift = Math.max(shift, inner.top - first.top);
-    shift = Math.min(shift, inner.bottom - to);
-    text.style.translate = `0 ${shift}px`;
-    y += shift;
   }
-  const at = read.getBoundingClientRect();
-  reply.style.left = `${x - at.left}px`;
-  reply.style.top = `${y - at.top}px`;
+  reply.style.fontSize = `${beside > below ? beside : below}px`;
+  const r = extent();
+  let u0;
+  let v0;
+  if (beside > below) {
+    u0 = (last.u1 + frame.u1 - r.u) / 2;
+    v0 = (top + frame.v1 - r.v) / 2;
+  } else {
+    const free = frame.v1 - frame.v0 - (block.v1 - block.v0) - r.v;
+    const between = Math.max(free / 3, Math.min(gap.v, free));
+    const shift = frame.v0 + (free - between) / 2 - block.v0;
+    text.style.translate = turned ? `${shift * sv}px 0` : `0 ${shift * sv}px`;
+    u0 = (frame.u0 + frame.u1 - r.u) / 2;
+    v0 = block.v1 + shift + between;
+  }
+  const at = screen({ u0, u1: u0 + r.u, v0, v1: v0 + r.v });
+  const origin = read.getBoundingClientRect();
+  reply.style.left = `${at.left - origin.left}px`;
+  reply.style.top = `${at.top - origin.top}px`;
 }
 /** @type {ResizeObserver|null} */ let shape = null;
 

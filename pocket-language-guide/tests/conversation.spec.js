@@ -2065,7 +2065,8 @@ test('Reply keeps even padding, a buffer, and sits with the sentence', async ({ 
   // Reported: a band above and below its words, the far corner with a hand's width of
   // nothing before it, and a gulf between it and a short sentence. Its words sit
   // inside its padding with the space round them even, it keeps a buffer from the
-  // sentence and the frame, and the two are centred together in the frame.
+  // sentence and the frame, and the height left over is shared evenly: above the
+  // sentence, between the two, and under Reply.
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/conversation.html?target=en&source=es&board=food');
   await expect(page.locator('.board-cell').first()).toBeVisible();
@@ -2081,14 +2082,17 @@ test('Reply keeps even padding, a buffer, and sits with the sentence', async ({ 
     const ink = range.getBoundingClientRect();
     const text = /** @type {HTMLElement} */ (document.querySelector('.board-message-text'));
     const lines = [...(() => { const t = document.createRange(); t.selectNodeContents(text); return t.getClientRects(); })()].filter((l) => l.height);
-    const frame = /** @type {HTMLElement} */ (document.querySelector('.board-message')).getBoundingClientRect();
+    const surface = /** @type {HTMLElement} */ (document.querySelector('.board-message'));
+    const frame = surface.getBoundingClientRect();
+    // Distances to the frame's drawn line, which sits inside the surface's edge.
+    const line = -Number.parseFloat(getComputedStyle(surface).outlineOffset);
     const textTop = Math.min(...lines.map((l) => l.top));
     const textBottom = Math.max(...lines.map((l) => l.bottom));
     return {
       side: ink.left - box.left, top: ink.top - box.top,
       inside: ink.left >= box.left && ink.right <= box.right,
       gapToText: box.top - textBottom, toFrameSide: Math.min(box.left - frame.left, frame.right - box.right),
-      above: textTop - frame.top, below: frame.bottom - box.bottom,
+      above: textTop - (frame.top + line), below: frame.bottom - line - box.bottom,
     };
   });
   expect(m.inside).toBe(true);
@@ -2099,7 +2103,8 @@ test('Reply keeps even padding, a buffer, and sits with the sentence', async ({ 
   expect(m.side).toBeLessThan(m.top * 3 + 4);
   expect(m.gapToText).toBeGreaterThan(12);
   expect(m.toFrameSide).toBeGreaterThan(12);
-  expect(Math.abs(m.above - m.below)).toBeLessThan(24);
+  expect(Math.abs(m.above - m.below)).toBeLessThan(2);
+  expect(Math.abs(m.gapToText - m.below)).toBeLessThan(2);
 });
 
 test('a button of your own can carry the answers a stranger might give', async ({ page }) => {
@@ -2647,33 +2652,42 @@ test('Attract attention sounds a siren only when the reader has asked for one', 
 });
 
 test('turned, Reply beside the last line is as far from the line before as from the frame', async ({ page }) => {
-  // Reply wider than the last column was aligned to that column's box, whose edge is
-  // the column before's, and sat touching it; then, kept a buffer from it, it sat
-  // nearer the frame than the line. Centred between the two, the gaps match.
+  // Reply wider than the last column was aligned to that column's box and sat touching
+  // the column before it. In the corner the last column leaves, it is centred both
+  // ways: between the column before and the frame's line, and between the last column's
+  // end and the frame's foot.
   await page.setViewportSize({ width: 393, height: 659 });
   await page.goto('/conversation.html?target=zh-Hans&source=en&board=spa');
   await page.locator('#board-turn-bar').click();
   await page.locator('[data-button="avoid"]').dispatchEvent('click');
   await expect(page.locator('.board-reply')).toBeVisible();
-  const gap = () => page.evaluate(() => {
+  const gaps = () => page.evaluate(() => {
     const text = /** @type {HTMLElement} */ (document.querySelector('.board-message-text'));
     const range = document.createRange();
     range.selectNodeContents(text);
-    /** @type {{left:number, right:number}[]} */ const cols = [];
-    for (const r of [...range.getClientRects()].filter((q) => q.width > 0).sort((a, b) => b.right - a.right)) {
-      const col = cols.find((c) => r.left < c.right - 2 && r.right > c.left + 2);
-      if (col) { col.left = Math.min(col.left, r.left); col.right = Math.max(col.right, r.right); } else cols.push({ left: r.left, right: r.right });
+    // Columns grouped by their middles, as the fitter groups lines: a CJK face's boxes
+    // are wider than the column pitch, so neighbouring columns' boxes overlap.
+    /** @type {{left:number, right:number, bottom:number}[]} */ const cols = [];
+    for (const r of [...range.getClientRects()].filter((q) => q.width > 0)) {
+      const col = cols.find((c) => Math.abs((c.left + c.right) / 2 - (r.left + r.right) / 2) < r.width / 2);
+      if (col) Object.assign(col, { left: Math.min(col.left, r.left), right: Math.max(col.right, r.right), bottom: Math.max(col.bottom, r.bottom) });
+      else cols.push({ left: r.left, right: r.right, bottom: r.bottom });
     }
+    cols.sort((a, b) => b.right - a.right);
     const reply = /** @type {HTMLElement} */ (document.querySelector('.board-reply')).getBoundingClientRect();
     const box = /** @type {HTMLElement} */ (document.querySelector('.board-message'));
-    const pad = Number.parseFloat(getComputedStyle(box).paddingLeft);
-    return { cols: cols.length, toLine: cols.at(-2) ? cols.at(-2).left - reply.right : Infinity,
-      toFrame: reply.left - (box.getBoundingClientRect().left + pad), pad };
+    const frame = box.getBoundingClientRect();
+    const line = -Number.parseFloat(getComputedStyle(box).outlineOffset);
+    const [before, last] = cols.slice(-2);
+    return { cols: cols.length, toLine: before.left - reply.right, toFrame: reply.left - (frame.left + line),
+      toEnd: reply.top - last.bottom, toFoot: frame.bottom - line - reply.bottom,
+      pad: Number.parseFloat(getComputedStyle(box).paddingLeft) };
   });
-  await expect.poll(async () => (await gap()).cols).toBe(2);
-  const { toLine, toFrame, pad } = await gap();
-  expect(Math.abs(toLine - toFrame)).toBeLessThanOrEqual(3);
-  expect(toLine).toBeGreaterThanOrEqual(pad);
+  await expect.poll(async () => (await gaps()).cols).toBe(2);
+  const g = await gaps();
+  expect(Math.abs(g.toLine - g.toFrame)).toBeLessThanOrEqual(3);
+  expect(Math.abs(g.toEnd - g.toFoot)).toBeLessThanOrEqual(3);
+  expect(g.toLine).toBeGreaterThanOrEqual(g.pad);
 });
 
 test('turned, Reply keeps a size for its sentence, and stays inside the frame', async ({ page }) => {
