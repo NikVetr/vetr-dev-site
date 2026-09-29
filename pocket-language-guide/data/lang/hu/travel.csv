@@ -132,3 +132,4 @@ hitchhiking.i-only-need-to-go-to-the-next-town,Csak a következő városig kell 
 hitchhiking.is-there-room-for-two,Van hely kettőnknek?,,vˈɑn hˈɛj kˈɛttøːnknɛk,,2,hu-agent-v1;ipa=espeak
 hitchhiking.i-can-pay-for-fuel,Ki tudom fizetni a benzint.,,kˈi tˈudom fˈizɛtni ˈɑ bˈɛnzint,"benzin, the word drivers use",2,hu-agent-v1;ipa=espeak
 hitchhiking.thank-you-for-the-ride,"Köszönöm, hogy elvitt.",,"kˈøsønøm, hˈoɟ ˈɛlvitt",,2,hu-agent-v1;ipa=espeak
+taxi.please-turn-around,"Kérem, forduljon meg",,"kˈeːrɛm, fˈordujjon mˈɛɡ",,2,hu-agent-v1;src=ÉrtSz megfordul 2;src=KRESZ 14. § Megfordulni tilos;in-pack-frame;answers-audit-v1;ipa=espeak

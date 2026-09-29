@@ -129,3 +129,20 @@ kind-words.i-like-it-very-much,정말 마음에 들어요,,jeongmal maeume deure
 kind-words.i-had-a-wonderful-time,정말 좋은 시간을 보냈어요,,jeongmal joeun siganeul bonaesseoyo,tɕʌŋmal tɕoɯn siɡanɯl ponɛs͈ʌjo,[I] spent a really good time,2,ko-agent-v1;ipa=rr
 kind-words.thank-you-for-everything,모든 것에 감사합니다,,modeun geose gamsahamnida,modɯn kʌse kamsahamnida,thank you for everything,2,ko-agent-v1;ipa=rr
 kind-words.thank-you-for-your-hospitality,환대해 주셔서 감사합니다,,hwandaehae jusyeoseo gamsahamnida,hwandɛhɛ tɕusjʌsʌ kamsahamnida,thank you for the hospitality [you gave me],2,ko-agent-v1;ipa=rr
+board-answers.my-name-is-blank,{}입니다,,{}imnida,{} imnida,"[I] am {}: 입니다 follows a name ending in a consonant or a vowel alike, where 이에요 or 예요 would have to know which",2,ko-agent-v1;in-pack-neighbour=introductions.my-name-is;answers-audit-v1;ipa=rr
+board-answers.i-would-rather-not-say,말씀드리기 어려워요,,malsseumdeurigi eoryeowoyo,mals͈ɯmdɯɾiɡi ʌɾjʌwʌjo,it is hard to tell [you],2,ko-agent-v1;src=NIKL-StdKor 말씀드리다;answers-audit-v1;ipa=rr
+board-answers.what-happened,무슨 일이에요?,,museun irieyo?,musɯn iɾiejo,what matter is it?,2,ko-agent-v1;src=NIKL-StdKor 무슨;answers-audit-v1;ipa=rr
+board-answers.understood,알겠습니다,,algetseumnida,alɡetsɯmnida,"understood: the fixed acknowledgement, in 합쇼체 as staff say it",2,ko-agent-v1;src=NIKL-StdKor 알다;answers-audit-v1;ipa=rr
+board-answers.i-will-check,확인해 볼게요,,hwaginhae bolgeyo,hwaɡinhɛ polɡejo,"I will check and see: -ㄹ게요, the pack's form for the responder's own next action",2,ko-agent-v1;in-pack-neighbour=phone-text-power.please-confirm;in-pack-neighbour=massage-spa.reply-ask-supervisor;answers-audit-v1;ipa=rr
+board-answers.we-have-it,있어요,,isseoyo,is͈ʌjo,[it] exists: the question's own verb echoed,2,ko-agent-v1;in-pack-neighbour=shopping.do-you-have-this-in-stock;answers-audit-v1;ipa=rr
+board-answers.we-are-full,다 찼어요,,da chasseoyo,ta tɕʰas͈ʌjo,"it is all filled up: venue-neutral, where 만석 is seats and 만실 rooms",2,ko-agent-v1;src=NIKL-StdKor 차다;answers-audit-v1;ipa=rr
+board-answers.it-is-free,무료예요,,muryoyeyo,muɾjojejo,,2,ko-agent-v1;in-pack-neighbour=toilets.is-it-free;answers-audit-v1;ipa=rr
+board-answers.it-does-not-matter,상관없어요,,sanggwaneopseoyo,saŋɡwanʌpsʌjo,it makes no difference,2,ko-agent-v1;src=NIKL-Urimalsaem 상관없다;answers-audit-v1;ipa=rr
+board-answers.only-for-customers,손님만 쓸 수 있어요,,sonnimman sseul su isseoyo,sonnimman s͈ɯl su is͈ʌjo,only customers can use it,2,ko-agent-v1;in-pack-neighbour=toilets.is-it-only-for-customers;answers-audit-v1;ipa=rr
+board-answers.where-to,어디까지요?,,eodikkajiyo?,ʌdik͈adʑijo,as far as where?,2,ko-agent-v1;in-pack-neighbour=hitchhiking.where-are-you-going;answers-audit-v1;ipa=rr
+board-answers.at-the-next-stop,다음 정거장에서요,,daeum jeonggeojangeseoyo,taɯm tɕʌŋɡʌdʑaŋesʌjo,at the next stop: 정거장 is a bus or a train stop,2,ko-agent-v1;src=NIKL-StdKor 정거장;in-pack-neighbour=transit-rides.what-is-the-next-stop;answers-audit-v1;ipa=rr
+board-answers.pay-on-board,차 안에서 내요,,cha aneseo naeyo,tɕʰa anesʌ nɛjo,[it is] paid inside the vehicle,2,ko-agent-v1;in-pack-neighbour=transit-rides.where-do-i-pay-the-fare;in-pack-neighbour=toilets.is-there-a-toilet-on-board;answers-audit-v1;ipa=rr
+board-answers.see-a-doctor,병원에 가 보시는 게 좋겠어요,,byeongwone ga bosineun ge jokesseoyo,pjʌŋwʌne ka posinɯn ke tɕokʰes͈ʌjo,it would be good to go to a clinic: 병원 is where a doctor is seen,2,ko-agent-v1;in-pack-neighbour=board-answers.stay-here;in-pack-neighbour=board-answers.the-hospital-is-close;answers-audit-v1;ipa=rr
+board-answers.prescription-only,처방전이 필요해요,,cheobangjeoni piryohaeyo,tɕʰʌbaŋdʑʌni pʰiɾjohɛjo,a prescription is needed,2,ko-agent-v1;in-pack-neighbour=pharmacy-symptoms.do-i-need-a-prescription;answers-audit-v1;ipa=rr
+board-answers.before-food,식전이에요,,sikjeonieyo,siktɕʌniejo,[it is] before meals,2,ko-agent-v1;src=NIKL-StdKor 식전;in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=rr
+board-answers.after-food,식후예요,,sikhuyeyo,sikhujejo,[it is] after meals,2,ko-agent-v1;src=MFDS 꼭 식후 30분에 약 먹어야 하나요;in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=rr

@@ -129,3 +129,20 @@ kind-words.i-like-it-very-much,Mi piace molto.,,mɪ pjˈatʃe mˈolto,,2,it-kind
 kind-words.i-had-a-wonderful-time,Ho passato dei momenti fantastici.,,o passˈato dˌeɪ momˈentɪ fantˈastitʃɪ,,2,it-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-everything,Grazie di tutto.,,ɡrˈatsje dɪ tˈutto,,2,it-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-your-hospitality,Grazie per la sua ospitalità.,,ɡrˈatsje per la sˌʊa ospitalitˈa,,2,it-kind-words-v1;ipa=espeak
+board-answers.my-name-is-blank,Mi chiamo {},,mɪ kjˈamo {},,2,it-agent-v1;reply-neutrality-rule;matches introductions.my-name-is;answers-audit-v1;ipa=espeak
+board-answers.i-would-rather-not-say,Preferisco non dirlo,,preferˈisko non dˈirlo,,2,it-agent-v1;src=Treccani;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.what-happened,Cos'è successo?,,kozˈɛ sʊtʃtʃˈɛsso,,2,it-agent-v1;src=Treccani;answers-audit-v1;ipa=espeak
+board-answers.understood,Ho capito,,o kapˈito,,2,it-agent-v1;src=Treccani;reply-neutrality-rule;rule=avere-participle-invariant;answers-audit-v1;ipa=espeak
+board-answers.i-will-check,Vado a controllare,,vˈado a kontrollˈare,,2,it-agent-v1;src=Treccani;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.we-have-it,"Sì, ne abbiamo",,"sˈiː, ne abbjˈamo",,2,it-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.we-are-full,Siamo al completo,,sjˌamo al komplˈɛto,,2,it-agent-v1;src=Treccani;rule=invariable-locution;answers-audit-v1;ipa=espeak
+board-answers.it-is-free,È gratis,,e ɡrˈatis,,2,it-agent-v1;src=Treccani;answers-audit-v1;ipa=espeak
+board-answers.it-does-not-matter,È lo stesso,,e lo stˈesso,,2,it-agent-v1;src=Treccani;answers-audit-v1;ipa=espeak
+board-answers.only-for-customers,È solo per i clienti,,e sˈolo per i kliˈɛntɪ,,2,it-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.where-to,Per dove?,,per dˈove,,2,it-agent-v1;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.at-the-next-stop,Alla prossima fermata,,ˌalla prˈɔssima fermˈata,,2,it-agent-v1;src=Treccani;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.pay-on-board,Si paga a bordo,,sɪ pˈaɡa a bˈɔrdo,,2,it-agent-v1;src=Treccani;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.see-a-doctor,È meglio andare dal medico,,e mˈɛʎo andˈare dal mˈɛdiko,,2,it-agent-v1;reply-neutrality-rule;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.prescription-only,Solo con ricetta medica,,sˈolo kon ritʃˈɛtta mˈɛdika,,2,it-agent-v1;src=Treccani;answers-audit-v1;ipa=espeak
+board-answers.before-food,Prima dei pasti,,prˈima dˌeɪ pˈastɪ,,2,it-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.after-food,Dopo i pasti,,dˈopo i pˈastɪ,,2,it-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak

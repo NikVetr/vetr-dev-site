@@ -129,3 +129,20 @@ kind-words.i-like-it-very-much,Me gusta mucho.,,me ɡˈusta mˈutʃo,,2,es-kind-
 kind-words.i-had-a-wonderful-time,He pasado un rato maravilloso.,,ˈe pasˈado ˈun rˈato mˌaɾabiʝˈoso,,2,es-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-everything,Gracias por todo.,,ɡɾˈasjas poɾ tˈodo,,2,es-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-your-hospitality,Gracias por su hospitalidad.,,ɡɾˈasjas poɾ su ˌospitˌalidˈad,,2,es-kind-words-v1;ipa=espeak
+board-answers.my-name-is-blank,Me llamo {},,me ʝˈamo {},,2,es-agent-v1;src=DEM;reply-neutrality-rule;matches introductions.my-name-is;answers-audit-v1;ipa=espeak
+board-answers.i-would-rather-not-say,Prefiero no decirlo,,pɾefjˈeɾo nˈo desˈiɾlo,,2,es-agent-v1;src=DEM;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.what-happened,¿Qué pasó?,¿Qué ha pasado?,kˈe pasˈo,,2,es-agent-v1;src=DEM;answers-audit-v1;ipa=espeak
+board-answers.understood,Entendido,,ˌentendˈido,,2,es-agent-v1;src=RAE-NGLE;reply-neutrality-rule;rule=participle-as-interjection-invariant;answers-audit-v1;ipa=espeak
+board-answers.i-will-check,Voy a comprobarlo,,bˈoɪ a kˌompɾobˈaɾlo,,2,es-agent-v1;src=DEM;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.we-have-it,"Sí, tenemos",,"sˈi, tenˈemos",,2,es-agent-v1;src=DEM;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.we-are-full,Estamos llenos,,estˈamos ʝˈenos,,2,es-agent-v1;src=DEM;rule=we-plural-agrees-with-the-group;answers-audit-v1;ipa=espeak
+board-answers.it-is-free,Es gratis,,ˈes ɡɾˈatis,,2,es-agent-v1;src=DEM;answers-audit-v1;ipa=espeak
+board-answers.it-does-not-matter,Da igual,,dˈa iɡwˈal,,2,es-agent-v1;src=DEM;answers-audit-v1;ipa=espeak
+board-answers.only-for-customers,Es solo para clientes,,ˈes sˈolo pˌaɾa kliˈentes,,2,es-agent-v1;src=DEM;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.where-to,¿Adónde?,,adˈonde,,2,es-agent-v1;src=DEM;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.at-the-next-stop,En la próxima parada,,en la pɾˈoksima paɾˈada,,2,es-agent-v1;src=DEM;answers-audit-v1;ipa=espeak
+board-answers.pay-on-board,Se paga a bordo,,se pˈaɡa a bˈoɾdo,,2,es-agent-v1;src=DEM;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.see-a-doctor,Es mejor ir al médico,,ˈes mexˈoɾ ˈiɾ al mˈediko,,2,es-agent-v1;src=DEM;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.prescription-only,Solo con receta,,sˈolo kon resˈeta,,2,es-agent-v1;src=DEM;answers-audit-v1;ipa=espeak
+board-answers.before-food,Antes de las comidas,,ˈantes de las komˈidas,,2,es-agent-v1;src=DEM;answers-audit-v1;ipa=espeak
+board-answers.after-food,Después de las comidas,,despwˈes de las komˈidas,,2,es-agent-v1;src=DEM;answers-audit-v1;ipa=espeak

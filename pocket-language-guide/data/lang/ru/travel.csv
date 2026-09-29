@@ -132,3 +132,4 @@ hitchhiking.i-only-need-to-go-to-the-next-town,Мне нужно только д
 hitchhiking.is-there-room-for-two,Есть место для двоих?,,Yestʼ mesto dlya dvoikh?,jestʲ mʲˈestʌ dɭʲɑ dvʌˈix,,2,ru-agent-v1;ipa=espeak
 hitchhiking.i-can-pay-for-fuel,Я могу заплатить за бензин.,,Ya mogu zaplatitʼ za benzin.,ˈja mʌɡˌu zʌpɭatʲˈitʲ zˈɑ bʲinʑˈin,"бензин, the word drivers use",2,ru-agent-v1;ipa=espeak
 hitchhiking.thank-you-for-the-ride,"Спасибо, что подвезли.",,"Spasibo, chto podvezli.","spasʲˈibʌ, ʃto pʌdvʲizɭʲˈi",,2,ru-agent-v1;ipa=espeak
+taxi.please-turn-around,"Развернитесь, пожалуйста.",,"Razvernitesʼ, pozhaluysta.","rʌzvʲirnʲˈitʲisʲ, pʌʒˈɑɭujsta",,2,ru-agent-v1;src=Ozhegov-Shvedova развернуться 5 (Грузовик развернулся);src=ru.wikipedia Разворот (манёвр) rev 148087155;in-pack-frame=taxi.please-stop-here;answers-audit-v1;ipa=espeak

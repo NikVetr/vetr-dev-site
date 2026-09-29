@@ -129,3 +129,20 @@ kind-words.i-like-it-very-much,Jag tycker mycket om det.,,jɑːɡ tˈykːər mˈ
 kind-words.i-had-a-wonderful-time,Jag hade en fantastisk tid.,,jɑːɡ hˌadɛ ɛn fˈantastˌɪsk tˈiːd,,2,sv-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-everything,Tack för allt.,,tˈak føːr ˈalt,,2,sv-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-your-hospitality,Tack för din gästfrihet.,,tˈak føːr dɪn jˈɛstfriːhˌeːt,,2,sv-kind-words-v1;ipa=espeak
+board-answers.my-name-is-blank,Jag heter {}.,,jɑːɡ hˈeːtər {},,2,sv-agent-v1;matches introductions.my-name-is;answers-audit-v1;ipa=espeak
+board-answers.i-would-rather-not-say,Det vill jag helst inte säga.,,deːt vɪl jɑːɡ hˈɛlst ˈɪntɛ sˈɛja,,2,sv-agent-v1;src=Svensk ordbok helst;answers-audit-v1;ipa=espeak
+board-answers.what-happened,Vad har hänt?,,vɑːd hɑːr hˈɛnt,,2,sv-agent-v1;src=Svensk ordbok hända;answers-audit-v1;ipa=espeak
+board-answers.understood,Uppfattat.,,ˈɵpfatːˌat,,2,sv-agent-v1;src=Svensk ordbok uppfatta;rule=participle-as-interjection-invariant;answers-audit-v1;ipa=espeak
+board-answers.i-will-check,Jag ska kolla.,,jɑːɡ skɑː kˈɔla,,2,sv-agent-v1;src=Svensk ordbok kolla;answers-audit-v1;ipa=espeak
+board-answers.we-have-it,"Ja, det har vi.",,"jˈɑː, deːt hɑːr viː",,2,sv-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.we-are-full,Det är fullt.,,deːt ɛːr fˈɵlt,,2,sv-agent-v1;src=Svensk ordbok full;answers-audit-v1;ipa=espeak
+board-answers.it-is-free,Det är gratis.,,deːt ɛːr ɡrˈɑːtɪs,,2,sv-agent-v1;src=Svensk ordbok gratis;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.it-does-not-matter,Det spelar ingen roll.,,deːt spˈeːlar ˈɪŋən rˈɔl,,2,sv-agent-v1;src=Svensk ordbok roll;src=FASS Mat och läkemedel;answers-audit-v1;ipa=espeak
+board-answers.only-for-customers,Det är bara för kunder.,,deːt ɛːr bˈɑːra føːr kˈɵndər,,2,sv-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.where-to,Vart då?,,vˈɑːt doː,,2,sv-agent-v1;src=Svensk ordbok då;answers-audit-v1;ipa=espeak
+board-answers.at-the-next-stop,Vid nästa hållplats.,,viːd nˈɛsta hˈɔlplats,,2,sv-agent-v1;src=Svensk ordbok hållplats;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.pay-on-board,Du betalar ombord.,,dʉ bətˈɑːlar ˈɔmbuːrd,,2,sv-agent-v1;src=Svensk ordbok ombord;src=vasttrafik.se Köpa biljett ombord på bussen och tåget;answers-audit-v1;ipa=espeak
+board-answers.see-a-doctor,Det är bäst att du går till läkare.,,deːt ɛːr bˈɛst at dʉ ɡˈoːr tɪl lˈɛːkarə,,2,sv-agent-v1;src=Svensk ordbok läkare;answers-audit-v1;ipa=espeak
+board-answers.prescription-only,Det är receptbelagt.,,deːt ɛːr rˈɛsəptbəlˌɑːkt,,2,sv-agent-v1;src=Svensk ordbok receptbelagd;answers-audit-v1;ipa=espeak
+board-answers.before-food,Före maten.,,fˈøːrə mˈɑːtən,,2,sv-agent-v1;src=FASS Mat och läkemedel;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.after-food,Efter maten.,,ˈɛftər mˈɑːtən,,2,sv-agent-v1;src=FASS Mat och läkemedel;in-pack-neighbour;answers-audit-v1;ipa=espeak

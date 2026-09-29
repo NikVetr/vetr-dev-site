@@ -132,3 +132,4 @@ hitchhiking.i-only-need-to-go-to-the-next-town,मला फक्त पुढ�
 hitchhiking.is-there-room-for-two,दोघांसाठी जागा आहे का?,,dōghānsāṭhī jāgā āhē kā?,dˌoːɡʰãsˈaːʈʰi zˈaːɡaː ˈaːheː kˈaː,,2,mr-agent-v1;ipa=espeak
 hitchhiking.i-can-pay-for-fuel,मी पेट्रोलसाठी पैसे देऊ शकतो,,mī pēṭrōlasāṭhī paisē dēū śakatō,mˈi pˈeːʈɾoːlsaːʈʰˌi pˈaɪseː dˈeːu ʃˈʌktˌoː,"m; शकते for a woman, see variants.csv -- शकतो/शकते is the true finite simple present, which mr's own axis note says agrees with the speaker; पेट्रोल is the pump word across South Asia",2,mr-agent-v1;ipa=espeak
 hitchhiking.thank-you-for-the-ride,लिफ्ट दिल्याबद्दल धन्यवाद,,lifṭ dilyābaddal dhanyavād,lˈɪpʰʈ dˌɪljaːbˈʌdːəl dʰˌənjəvˈaːd,,2,mr-agent-v1;ipa=espeak
+taxi.please-turn-around,यू टर्न घ्या,,yū ṭarna ghyā,jˈuː ʈˈʌrn ɡʰjˈaː,please take a U-turn,2,mr.wikipedia=कमळगड (यू टर्न घेतला);in-pack-frame=taxi.please-stop-here;rule=tumhi-imperative-invariant-for-gender;answers-audit-v1;ipa=espeak

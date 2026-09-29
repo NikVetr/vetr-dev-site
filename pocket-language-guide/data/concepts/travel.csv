@@ -132,3 +132,4 @@ hitchhiking.i-only-need-to-go-to-the-next-town,hitchhiking,entry,phrase,i-only-n
 hitchhiking.is-there-room-for-two,hitchhiking,entry,phrase,is-there-room-for-two,10,0.400,hitchhiking.is-there-room-for-two,0,0,neutral,,
 hitchhiking.i-can-pay-for-fuel,hitchhiking,entry,phrase,i-can-pay-for-fuel,11,0.400,hitchhiking.i-can-pay-for-fuel,0,0,neutral,,
 hitchhiking.thank-you-for-the-ride,hitchhiking,entry,phrase,thank-you-for-the-ride,12,0.450,hitchhiking.thank-you-for-the-ride,0,0,neutral,,
+taxi.please-turn-around,taxi,entry,phrase,please-turn-around,1008,0.690,taxi.please-turn-around,0,0,neutral,,"To a driver: turn the car round and go back the way we came (a U-turn). A polite request, like taxi.please-stop-here, not an instruction to a person on foot. Where the everyday word is the U-turn word (掉头, Uターン, 유턴), use it."

@@ -129,3 +129,20 @@ kind-words.i-like-it-very-much,Moc se mi to líbí.,,mˈots se mi tˈo lˈiːbi�
 kind-words.i-had-a-wonderful-time,Měl jsem se tu skvěle.,,mɲel jsem se tˈu skvjˈele,"masculine default; the l-participle with jsem marks the speaker's gender, feminine variant in variants.csv",2,cs-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-everything,Děkuji za všechno.,,ɟˈekuji zˈafʃexno,,2,cs-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-your-hospitality,Děkuji za pohostinnost.,,ɟˈekuji za pˈohoscˌinost,,2,cs-kind-words-v1;ipa=espeak
+board-answers.my-name-is-blank,Jmenuji se {},,jmˈenuji se {},,2,cs-agent-v1;matches introductions.my-name-is;answers-audit-v1;ipa=espeak
+board-answers.i-would-rather-not-say,To si raději nechám pro sebe,,tˈo si rˈaɟeji nˈexaːm prˈosebe,,2,cs-agent-v1;src=SSČ nechat 9 (nech si to pro sebe);reply-neutrality-rule;rule=present-tense-invariant-for-gender;answers-audit-v1;ipa=espeak
+board-answers.what-happened,Co se stalo?,,tsˈo se stˈalo,,2,cs-agent-v1;src=SSJČ státi se (co se stalo?);answers-audit-v1;ipa=espeak
+board-answers.understood,Rozumím,,rˈozumiːm,,2,cs-agent-v1;src=SSČ rozumět 1;reply-neutrality-rule;rule=present-tense-invariant-for-gender;answers-audit-v1;ipa=espeak
+board-answers.i-will-check,Podívám se,,pˈoɟiːvaːm se,,2,cs-agent-v1;src=SSČ podívat se 2 + 4;reply-neutrality-rule;rule=present-tense-invariant-for-gender;answers-audit-v1;ipa=espeak
+board-answers.we-have-it,"Ano, máme",,"ˈano, mˈaːme",,2,cs-agent-v1;rule=verb-echo-reply;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.we-are-full,Máme plno,,mˌaːme pˈl̩no,,2,cs-agent-v1;src=SSČ plno;in-pack-frame;answers-audit-v1;ipa=espeak
+board-answers.it-is-free,Je to zdarma,,je tˈo zdˈarma,,2,cs-agent-v1;src=SSČ zdarma;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.it-does-not-matter,Na tom nezáleží,,nˈatom nˈezaːlˌeʒiː,,2,cs-agent-v1;src=SSČ záležet;src=IJP záležet (To na nás nezáleží);answers-audit-v1;ipa=espeak
+board-answers.only-for-customers,Je to jen pro zákazníky,,je tˈo jˈen pro zˈaːkazɲˌiːki,,2,cs-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.where-to,Kam jedete?,,kˈam jˈedete,,2,cs-agent-v1;src=SSČ kam 1;reply-neutrality-rule;rule=present-tense-invariant-for-gender;matches hitchhiking.where-are-you-going;answers-audit-v1;ipa=espeak
+board-answers.at-the-next-stop,Na příští zastávce,,nˈapr̝iːʃciː zˈastaːftse,,2,cs-agent-v1;src=SSČ zastávka 3;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.pay-on-board,Platí se ve vozidle,,plˈaciː se vˈe vˈozidle,,2,cs-agent-v1;src=SSČ vozidlo;src=dpp.cz Jízdenku pořídíte bezkontaktně v každém voze;reply-neutrality-rule;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.see-a-doctor,Lepší je zajít k lékaři,,lˈepʃiː je zˈajiːt k lˈeːkar̝i,,2,cs-agent-v1;src=SSČ zajít 4;reply-neutrality-rule;in-pack-frame;answers-audit-v1;ipa=espeak
+board-answers.prescription-only,Jen na předpis,,jˈen nˈapr̝etpis,,2,cs-agent-v1;src=IJP předpis (výdej léků na předpis);src=OPUS-EMEA-cs (Kielipankki-Korp) na předpis 324 / na recept 0;answers-audit-v1;ipa=espeak
+board-answers.before-food,Před jídlem,,pr̝ˈedjiːdlem,,2,cs-agent-v1;src=OPUS-EMEA-cs (Kielipankki-Korp) před jídlem 550;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.after-food,Po jídle,,pˈojiːdle,,2,cs-agent-v1;src=OPUS-EMEA-cs (Kielipankki-Korp) po jídle 577;in-pack-neighbour;answers-audit-v1;ipa=espeak

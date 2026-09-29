@@ -132,3 +132,4 @@ hitchhiking.i-only-need-to-go-to-the-next-town,Trebam samo do sljedećeg grada,,
 hitchhiking.is-there-room-for-two,Ima li mjesta za dvoje?,,ima li mjˈesta zˈa dvˈoje,,2,hr-agent-v1;ipa=espeak
 hitchhiking.i-can-pay-for-fuel,Mogu platiti benzin,,mˈoɡu platiti bˈenzin,"benzin, the word drivers use",2,hr-agent-v1;ipa=espeak
 hitchhiking.thank-you-for-the-ride,Hvala na prijevozu,,xvˈala nˈa prijevozu,,2,hr-agent-v1;ipa=espeak
+taxi.please-turn-around,"Molim vas, okrenite se",,"mˈolim vˈas, okrenite sˈe",,2,hr-agent-v1;src=HJP okrenuti 2a;src=Zakon o sigurnosti prometa na cestama čl. 43 (okretati se polukružno);in-pack-frame;answers-audit-v1;ipa=espeak

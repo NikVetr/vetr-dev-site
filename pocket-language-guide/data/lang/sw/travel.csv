@@ -132,3 +132,4 @@ hitchhiking.i-only-need-to-go-to-the-next-town,Nahitaji kufika mji unaofuata tu,
 hitchhiking.is-there-room-for-two,Kuna nafasi kwa watu wawili?,,kˈuna nafˈasi kwa wˈatu wawˈili,,2,sw-agent-v1;ipa=espeak
 hitchhiking.i-can-pay-for-fuel,Naweza kulipa mafuta,,nawˈeza kulˈipa mafˈuta,"mafuta, the general oil/fuel word this pack already uses for pork fat; contracted na-, matching taxi.may-i-open-the-window's Naweza",2,sw-agent-v1;in-pack-neighbour=taxi.may-i-open-the-window;ipa=espeak
 hitchhiking.thank-you-for-the-ride,Asante kwa lifti,,asˈante kwa lˈifti,reuses social-basics.thank-you's Asante,2,sw-agent-v1;in-pack-neighbour=social-basics.thank-you;ipa=espeak
+taxi.please-turn-around,Tafadhali geuza gari,,tˌafaðˈali ɡeˈuza ɡˈari,please turn the vehicle round,2,sw-agent-v1;src=TUKI-KKK geuza (bring round);in-pack-frame=taxi.please-stop-here;answers-audit-v1;ipa=espeak

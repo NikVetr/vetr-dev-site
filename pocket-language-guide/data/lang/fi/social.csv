@@ -129,3 +129,20 @@ kind-words.i-like-it-very-much,Pidän siitä kovasti.,,pˈidæn sˈiːtæ kˈova
 kind-words.i-had-a-wonderful-time,Minulla oli ihana aika.,,mˈinulla ˈoli ˈihana ˈaika,,2,fi-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-everything,Kiitos kaikesta.,,kˈiːtos kˈaikesta,,2,fi-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-your-hospitality,Kiitos vieraanvaraisuudesta.,,kˈiːtos vˈieraːnvarˌaisuːdˌesta,,2,fi-kind-words-v1;ipa=espeak
+board-answers.my-name-is-blank,Nimeni on {}.,,nˈimeni ˈon {},,2,fi-agent-v1;matches introductions.my-name-is;answers-audit-v1;ipa=espeak
+board-answers.i-would-rather-not-say,En haluaisi sanoa.,,ˈen hˈaluˌaisi sˈanoa,,2,fi-agent-v1;src=Kielipankki-Korp en haluaisi sanoa 303 / en haluaisi kertoa 119;answers-audit-v1;ipa=espeak
+board-answers.what-happened,Mitä tapahtui?,,mˈitæ tˈapahtui,,2,fi-agent-v1;src=Kielitoimiston-sanakirja tapahtua;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.understood,Selvä.,,sˈelvæ,,2,fi-agent-v1;src=Kielitoimiston-sanakirja selvä 1b;answers-audit-v1;ipa=espeak
+board-answers.i-will-check,Tarkistan.,,tˈarkistan,,2,fi-agent-v1;src=Kielitoimiston-sanakirja tarkistaa 1;answers-audit-v1;ipa=espeak
+board-answers.we-have-it,Kyllä on.,,kˈyllæ ˈon,,2,fi-agent-v1;src=Kielitoimiston-sanakirja kyllä 1;rule=verb-echo-reply;answers-audit-v1;ipa=espeak
+board-answers.we-are-full,Meillä on täyttä.,,mˈeillæ ˈon tˈæyttæ,,2,fi-agent-v1;src=Kielipankki-Korp meillä on täyttä 107 / meillä on täynnä 0;answers-audit-v1;ipa=espeak
+board-answers.it-is-free,Se on ilmainen.,,sˈe ˈon ˈilmainen,,2,fi-agent-v1;src=Kielitoimiston-sanakirja ilmainen;answers-audit-v1;ipa=espeak
+board-answers.it-does-not-matter,Sillä ei ole väliä.,,sˈillæ ˈei ˈole vˈæliæ,,2,fi-agent-v1;src=Kielitoimiston-sanakirja väli 6;answers-audit-v1;ipa=espeak
+board-answers.only-for-customers,Se on vain asiakkaille.,,sˈe ˈon vˈain ˈasiˌakkaille,,2,fi-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.where-to,Minne matka?,,mˈinne mˈatka,,2,fi-agent-v1;src=Kielitoimiston-sanakirja matka 1;answers-audit-v1;ipa=espeak
+board-answers.at-the-next-stop,Seuraavalla pysäkillä.,,sˈeuraːvalla pˈysækˌillæ,,2,fi-agent-v1;src=Kielitoimiston-sanakirja kyyti 1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.pay-on-board,Voitte maksaa kyydissä.,,vˈoitte mˈaksaː kˈyːdissæ,,2,fi-agent-v1;src=Kielitoimiston-sanakirja kyyti 1;answers-audit-v1;ipa=espeak
+board-answers.see-a-doctor,Kannattaa käydä lääkärissä.,,kˈannattaː kˈæydæ lˈæːkærˌissæ,,2,fi-agent-v1;src=Kielitoimiston-sanakirja kannattaa 4;answers-audit-v1;ipa=espeak
+board-answers.prescription-only,Vain reseptillä.,,vˈain rˈeseptˌillæ,,2,fi-agent-v1;src=Kielitoimiston-sanakirja resepti 1;answers-audit-v1;ipa=espeak
+board-answers.before-food,Ennen ruokaa.,,ˈennen rˈuokaː,,2,fi-agent-v1;src=avainapteekit.fi Lääke ja ruoka yhdessä vai erikseen;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.after-food,Ruoan jälkeen.,,rˈuːan jˈælkeːn,,2,fi-agent-v1;src=avainapteekit.fi Lääke ja ruoka yhdessä vai erikseen;in-pack-neighbour;answers-audit-v1;ipa=espeak

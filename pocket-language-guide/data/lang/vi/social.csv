@@ -129,3 +129,20 @@ kind-words.i-like-it-very-much,Tôi rất thích.,,t̪oj˧ zət̪˧˥ tic˧˥,,2
 kind-words.i-had-a-wonderful-time,Tôi đã có thời gian rất vui ở đây.,,t̪oj˧ ɗaː˧ˀ˥ kɔ˧˥ təːj˨˩ zaːn˧ zət̪˧˥ vuj˧ əː˧˩˧ ɗəɪ˧,,2,kind-words-v1;ipa=espeak
 kind-words.thank-you-for-everything,Cảm ơn bạn về mọi thứ.,,kaːm˧˩˧ əːn˧ baːn˨˩ˀ ve˨˩ mɔj˨˩ˀ ty˧˥,,2,kind-words-v1;ipa=espeak
 kind-words.thank-you-for-your-hospitality,Cảm ơn bạn vì lòng mến khách của bạn.,,kaːm˧˩˧ əːn˧ baːn˨˩ˀ vi˨˩ lɔŋ˨˩ men˧˥ xac˧˥ kuə̯˧˩˧ baːn˨˩ˀ,,2,kind-words-v1;ipa=espeak
+board-answers.my-name-is-blank,Tôi tên là {},,t̪oj˧ t̪en˧ laː˨˩ {},"I am named {}: tôi, not a kin term, so neither age nor sex shows",2,vi-agent-v1;in-pack-neighbour=introductions.my-name-is;vi-neutral-reply;answers-audit-v1;ipa=espeak
+board-answers.i-would-rather-not-say,Tôi không tiện nói,,t̪oj˧ xoŋ˧ t̪iɛ̯n˨˩ˀ nɔj˧˥,it is not convenient for me to say,2,vi-agent-v1;vi.wiktionary=tiện;vi-neutral-reply;answers-audit-v1;ipa=espeak
+board-answers.what-happened,Có chuyện gì vậy?,,kɔ˧˥ tʃwiɛ̯n˨˩ˀ zi˨˩ vəɪ˨˩ˀ,what matter is there?,2,vi-agent-v1;vi.wiktionary=chuyện;answers-audit-v1;ipa=espeak
+board-answers.understood,"Vâng, tôi hiểu rồi",,"vəŋ˧, t̪oj˧ hiɛ̯w˧˩˧ zoj˨˩","yes, I have understood",2,vi-agent-v1;in-pack-neighbour=massage-spa.reply-i-will-avoid-that-area;in-pack-neighbour=communication.i-do-not-understand;vi-neutral-reply;answers-audit-v1;ipa=espeak
+board-answers.i-will-check,Để tôi kiểm tra,,ɗe˧˩˧ t̪oj˧ kiɛ̯m˧˩˧ tʃaː˧,let me check,2,vi-agent-v1;vi.wiktionary=kiểm tra;in-pack-neighbour=massage-spa.reply-ask-supervisor;vi-neutral-reply;answers-audit-v1;ipa=espeak
+board-answers.we-have-it,Có,,kɔ˧˥,"[there] is: the Có of the pack's Có ... không ạ? questions, echoed",2,vi-agent-v1;in-pack-neighbour=utility-templates.do-you-have;answers-audit-v1;ipa=espeak
+board-answers.we-are-full,Hết chỗ rồi,,het̪˧˥ tʃo˧ˀ˥ zoj˨˩,no places are left,2,vi-agent-v1;vi.wiktionary=hết;answers-audit-v1;ipa=espeak
+board-answers.it-is-free,Miễn phí,,miɛ̯n˧ˀ˥ fi˧˥,free of charge,2,vi-agent-v1;in-pack-neighbour=toilets.is-it-free;answers-audit-v1;ipa=espeak
+board-answers.it-does-not-matter,Đều được cả,,ɗew˨˩ ɗyə̯c˨˩ˀ kaː˧˩˧,both are fine,2,vi-agent-v1;vi.wiktionary=đều;in-pack-neighbour=quick-responses.okay-can;answers-audit-v1;ipa=espeak
+board-answers.only-for-customers,Chỉ dành cho khách hàng,,tʃi˧˩˧ zaɲ˨˩ tʃɔ˧ xac˧˥ haːŋ˨˩,only for customers,2,vi-agent-v1;in-pack-neighbour=toilets.is-it-only-for-customers;answers-audit-v1;ipa=espeak
+board-answers.where-to,Đi đâu ạ?,,ɗi˧ ɗəw˧ aː˨˩ˀ,going where?,2,vi-agent-v1;in-pack-neighbour=hitchhiking.where-are-you-going;answers-audit-v1;ipa=espeak
+board-answers.at-the-next-stop,Ở trạm sau,,əː˧˩˧ tʃaːm˨˩ˀ saw˧,at the next stop,2,vi-agent-v1;in-pack-neighbour=transit-rides.what-is-the-next-stop;answers-audit-v1;ipa=espeak
+board-answers.pay-on-board,Trả tiền trên xe,,tʃaː˧˩˧ t̪iɛ̯n˨˩ tʃen˧ sɛ˧,paying [is] on the vehicle,2,vi-agent-v1;in-pack-neighbour=transit-rides.where-do-i-pay-the-fare;in-pack-neighbour=toilets.is-there-a-toilet-on-board;answers-audit-v1;ipa=espeak
+board-answers.see-a-doctor,Nên đi khám bác sĩ,,nen˧ ɗi˧ xaːm˧˥ baːc˧˥ si˧ˀ˥,[it is] advisable to go and see a doctor,2,vi-agent-v1;vi.wiktionary=khám;in-pack-neighbour=emergency-medical.i-need-a-doctor;answers-audit-v1;ipa=espeak
+board-answers.prescription-only,Phải có đơn thuốc,Phải có toa thuốc,faːj˧˩˧ kɔ˧˥ ɗəːn˧ tuə̯c˧˥,"a prescription is required; toa is the southern word, as in the pack's question",2,vi-agent-v1;in-pack-neighbour=pharmacy-symptoms.do-i-need-a-prescription;answers-audit-v1;ipa=espeak
+board-answers.before-food,Trước khi ăn,,tʃyə̯c˧˥ xi˧ an˧,before eating,2,vi-agent-v1;src=bvnguyentriphuong.com.vn Dùng thuốc trước trong hay sau bữa ăn;in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=espeak
+board-answers.after-food,Sau khi ăn,,saw˧ xi˧ an˧,after eating,2,vi-agent-v1;src=bvnguyentriphuong.com.vn Dùng thuốc trước trong hay sau bữa ăn;in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=espeak

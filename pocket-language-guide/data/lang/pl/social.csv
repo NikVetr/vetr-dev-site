@@ -129,3 +129,20 @@ kind-words.i-like-it-very-much,Bardzo mi się to podoba.,,bˈardʑɔ mi ɕɛ tɔ
 kind-words.i-had-a-wonderful-time,Miałem tu wspaniały czas.,,mʲˌawɛm tˈu fspaɲˈawɨ tʃˈas,"masculine default; the past tense marks the speaker's gender (-łem/-łam), feminine variant in variants.csv",2,pl-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-everything,Dziękuję za wszystko.,,dʑɛŋkˈujɛ za fʃˈɨstkɔ,,2,pl-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-your-hospitality,Dziękuję za gościnność.,,dʑɛŋkˈujɛ za ɡɔɕtɕˈinnɔɕtɕ,,2,pl-kind-words-v1;ipa=espeak
+board-answers.my-name-is-blank,Nazywam się {},,nazˈɨvam ɕɛ {},,2,pl-agent-v1;matches introductions.my-name-is;answers-audit-v1;ipa=espeak
+board-answers.i-would-rather-not-say,Wolę nie mówić,,vˈɔlɛ ɲɛ mˈuvitɕ,,2,pl-agent-v1;src=SJP-PWN woleć;reply-neutrality-rule;rule=present-tense-invariant-for-gender;answers-audit-v1;ipa=espeak
+board-answers.what-happened,Co się stało?,,tsˈɔ ɕɛ stˈawɔ,,2,pl-agent-v1;src=SJP-PWN stać się 2;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.understood,Rozumiem,,rɔzˈumjɛm,,2,pl-agent-v1;src=SJP-PWN rozumieć 1;reply-neutrality-rule;rule=present-tense-invariant-for-gender;answers-audit-v1;ipa=espeak
+board-answers.i-will-check,Sprawdzę,,sprˈavdʑɛ,,2,pl-agent-v1;src=SJP-PWN sprawdzić;reply-neutrality-rule;rule=present-tense-invariant-for-gender;answers-audit-v1;ipa=espeak
+board-answers.we-have-it,"Tak, mamy",,"tˈak, mˈamɨ",,2,pl-agent-v1;rule=verb-echo-reply;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.we-are-full,Mamy komplet,,mˌamɨ kˈɔmplɛt,,2,pl-agent-v1;src=SJP-PWN komplet 2;answers-audit-v1;ipa=espeak
+board-answers.it-is-free,To jest bezpłatne,,tɔ jɛzd bɛspwˈatnɛ,,2,pl-agent-v1;src=SJP-PWN bezpłatny;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.it-does-not-matter,Nie ma znaczenia,,ɲˈɛma znatʃˈɛɲa,,2,pl-agent-v1;src=SJP-PWN znaczenie 2;answers-audit-v1;ipa=espeak
+board-answers.only-for-customers,Tylko dla klientów,,tˌɨlkɔ dla kljˈɛntuf,,2,pl-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.where-to,Dokąd?,,dˈɔkɔnt,,2,pl-agent-v1;src=SJP-PWN dokąd 1;reply-neutrality-rule;pan-pani-avoided;answers-audit-v1;ipa=espeak
+board-answers.at-the-next-stop,Na następnym przystanku,,na nastˈɛmpnɨm pʃɨstˈaŋku,,2,pl-agent-v1;in-pack-neighbour;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.pay-on-board,Płaci się w pojeździe,,pwˈatɕi ɕɛ f pɔjˈɛʑdʑɛ,,2,pl-agent-v1;src=SJP-PWN pojazd;src=metropoliaztm.pl Płatność kartą już we wszystkich pojazdach;reply-neutrality-rule;pan-pani-avoided;answers-audit-v1;ipa=espeak
+board-answers.see-a-doctor,Lepiej skonsultować się z lekarzem,,lˈɛpʲɛj skˌɔnsultˈɔvatɕ ɕɛ z lɛkˈaʒɛm,,2,pl-agent-v1;src=OPUS-EMEA-pl (Kielipankki-Korp) skonsultować się z lekarzem 1030;reply-neutrality-rule;pan-pani-avoided;in-pack-frame;answers-audit-v1;ipa=espeak
+board-answers.prescription-only,Tylko na receptę,,tˌɨlkɔ na rɛtsˈɛptɛ,,2,pl-agent-v1;src=SJP-PWN recepta 1;src=OPUS-EMEA-pl (Kielipankki-Korp) na receptę 2736;answers-audit-v1;ipa=espeak
+board-answers.before-food,Przed posiłkiem,,pʃɛt pɔɕˈiwkʲɛm,,2,pl-agent-v1;src=OPUS-EMEA-pl (Kielipankki-Korp) przed posiłkiem 507 / przed jedzeniem 8;answers-audit-v1;ipa=espeak
+board-answers.after-food,Po posiłku,,pɔ pɔɕˈiwku,,2,pl-agent-v1;src=OPUS-EMEA-pl (Kielipankki-Korp) po posiłku 571 / po jedzeniu 41;answers-audit-v1;ipa=espeak

@@ -129,3 +129,20 @@ kind-words.i-like-it-very-much,Ça me plaît beaucoup.,,sa mə plɛ bokˈu,,2,fr
 kind-words.i-had-a-wonderful-time,J'ai passé un moment merveilleux.,,ʒe pase œ̃ momɑ̃ mɛʁvɛjˈø,,2,fr-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-everything,Merci pour tout.,,mɛʁsi puʁ tˈu,,2,fr-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-your-hospitality,Merci pour votre hospitalité.,,mɛʁsi puʁ votʁ ɔspitalitˈe,,2,fr-kind-words-v1;ipa=espeak
+board-answers.my-name-is-blank,Je m'appelle {},,ʒə mapˈɛl {},,2,fr-agent-v1;reply-neutrality-rule;matches introductions.my-name-is;answers-audit-v1;ipa=espeak
+board-answers.i-would-rather-not-say,Je préfère ne pas le dire,,ʒə pʁefɛʁ nə pa lə dˈiʁ,,2,fr-agent-v1;src=TLFi;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.what-happened,Qu'est-ce qui s'est passé ?,,kɛs ki sɛ pasˈe,,2,fr-agent-v1;src=TLFi;answers-audit-v1;ipa=espeak
+board-answers.understood,C'est noté,,sɛ notˈe,,2,fr-agent-v1;src=TLFi;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.i-will-check,Je vais vérifier,,ʒə vɛ veʁifjˈe,,2,fr-agent-v1;src=TLFi;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.we-have-it,"Oui, nous en avons",,"wˈi, nuz ɑ̃n avˈɔ̃",,2,fr-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.we-are-full,C'est complet,,sɛ kɔ̃plˈɛ,,2,fr-agent-v1;src=TLFi;answers-audit-v1;ipa=espeak
+board-answers.it-is-free,C'est gratuit,,sɛ ɡʁatyˈi,,2,fr-agent-v1;src=TLFi;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.it-does-not-matter,Ça n'a pas d'importance,,sa na pa dɛ̃pɔʁtˈɑ̃s,,2,fr-agent-v1;src=TLFi;answers-audit-v1;ipa=espeak
+board-answers.only-for-customers,C'est réservé aux clients,,sɛ ʁezɛʁve o kliˈɑ̃,,2,fr-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.where-to,Pour aller où ?,,puʁ ale ˈu,,2,fr-agent-v1;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.at-the-next-stop,Au prochain arrêt,,o pʁoʃɛ̃n aʁˈɛ,,2,fr-agent-v1;src=TLFi;answers-audit-v1;ipa=espeak
+board-answers.pay-on-board,On paie à bord,,ɔ̃ pɛ a bˈɔʁ,,2,fr-agent-v1;src=Larousse;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.see-a-doctor,Il vaut mieux consulter un médecin,,il vo mjø kɔ̃sylte œ̃ medəsˈɛ̃,,2,fr-agent-v1;src=TLFi;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.prescription-only,Uniquement sur ordonnance,,ynikmɑ̃ syʁ ɔʁdɔnˈɑ̃s,,2,fr-agent-v1;src=TLFi;answers-audit-v1;ipa=espeak
+board-answers.before-food,Avant les repas,,avɑ̃ le ʁəpˈa,,2,fr-agent-v1;src=TLFi;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.after-food,Après les repas,,apʁɛ le ʁəpˈa,,2,fr-agent-v1;src=TLFi;in-pack-neighbour;answers-audit-v1;ipa=espeak

@@ -129,3 +129,20 @@ kind-words.i-like-it-very-much,我很喜欢,,wǒ hěn xǐhuān,wɔ˧˩˧ xən˧�
 kind-words.i-had-a-wonderful-time,我玩得很开心,,wǒ wán de hěn kāixīn,wɔ˧˩˧ wan˧˥ tɤ xən˧˩˧ kʰaɪ˥ɕin˥,I played to-the-point-of very happy,2,zh-Hans-agent-v1;ipa=pinyin
 kind-words.thank-you-for-everything,谢谢您为我做的一切,,xièxie nín wèi wǒ zuò de yíqiè,ɕjɛ˥˩ɕjɛ nin˧˥ weɪ˥˩ wɔ˧˩˧ tswɔ˥˩ tɤ i˧˥tɕʰjɛ˥˩,thanks [for] everything you did for me,2,zh-Hans-agent-v1;ipa=pinyin
 kind-words.thank-you-for-your-hospitality,谢谢您的款待,,xièxie nín de kuǎndài,ɕjɛ˥˩ɕjɛ nin˧˥ tɤ kʰwan˧˩˧taɪ˥˩,thanks [for] your hospitality,2,zh-Hans-agent-v1;ipa=pinyin
+board-answers.my-name-is-blank,我叫{},,wǒ jiào {},wɔ˧˩˧ tɕjɑʊ˥˩ {},I am called {},2,in-pack-neighbour=introductions.my-name-is;answers-audit-v1;ipa=pinyin
+board-answers.i-would-rather-not-say,不太方便说,,bú tài fāngbiàn shuō,pu˧˥ tʰaɪ˥˩ fɑŋ˥pjɛn˥˩ ʂwɔ˥,it is not very convenient to say,2,moe-dict=不方便;answers-audit-v1;ipa=pinyin
+board-answers.what-happened,怎么了？,,zěnme le?,tsən˧˩˧mɤ lɤ,what is the matter,2,zh-wiktionary=怎么了;answers-audit-v1;ipa=pinyin
+board-answers.understood,明白了,,míngbai le,miŋ˧˥paɪ lɤ,understood (now),2,moe-dict=明白;answers-audit-v1;ipa=pinyin
+board-answers.i-will-check,我去问一下,,wǒ qù wèn yíxià,wɔ˧˩˧ tɕʰy˥˩ wən˥˩ i˧˥ɕja˥˩,I will go and ask,2,in-pack-neighbour=communication.please-wait-a-moment;answers-audit-v1;ipa=pinyin
+board-answers.we-have-it,有,,yǒu,joʊ˧˩˧,[we] have [it]: the question's own verb echoed,2,in-pack-neighbour=shopping.do-you-have-this-in-stock;answers-audit-v1;ipa=pinyin
+board-answers.we-are-full,客满了,,kèmǎn le,kʰɤ˥˩man˧˩˧ lɤ,the guests are full,2,moe-dict=客滿;answers-audit-v1;ipa=pinyin
+board-answers.it-is-free,免费的,,miǎnfèi de,mjɛn˧˩˧feɪ˥˩ tɤ,it is free of charge,2,moe-dict=免費;in-pack-neighbour=toilets.is-it-free;answers-audit-v1;ipa=pinyin
+board-answers.it-does-not-matter,都可以,,dōu kěyǐ,toʊ˥ kʰɤ˧˩˧i˧˩˧,either is fine,2,in-pack-neighbour=quick-responses.okay-can;answers-audit-v1;ipa=pinyin
+board-answers.only-for-customers,只给顾客用,,zhǐ gěi gùkè yòng,ʈʂɨ˧˩˧ keɪ˧˩˧ ku˥˩kʰɤ˥˩ jʊŋ˥˩,only for customers to use,2,in-pack-neighbour=toilets.is-it-only-for-customers;answers-audit-v1;ipa=pinyin
+board-answers.where-to,去哪里？,,qù nǎlǐ?,tɕʰy˥˩ na˧˩˧li˧˩˧,going where?,2,in-pack-neighbour=transit-rides.does-this-bus-train-go-to;answers-audit-v1;ipa=pinyin
+board-answers.at-the-next-stop,下一站,,xià yí zhàn,ɕja˥˩ i˧˥ ʈʂan˥˩,the next stop,2,in-pack-neighbour=transit-rides.what-is-the-next-stop;answers-audit-v1;ipa=pinyin
+board-answers.pay-on-board,在车上付,,zài chē shang fù,tsaɪ˥˩ ʈʂʰɤ˥ ʂɑŋ fu˥˩,paid on the vehicle,2,in-pack-neighbour=transit-rides.where-do-i-pay-the-fare;answers-audit-v1;ipa=pinyin
+board-answers.see-a-doctor,最好去看医生,,zuìhǎo qù kàn yīshēng,tsweɪ˥˩xɑʊ˧˩˧ tɕʰy˥˩ kʰan˥˩ i˥ʂɤŋ˥,it is best to go and see a doctor,2,in-pack-neighbour=board-answers.stay-here;in-pack-neighbour=emergency-medical.i-need-a-doctor;answers-audit-v1;ipa=pinyin
+board-answers.prescription-only,要处方,,yào chǔfāng,jɑʊ˥˩ ʈʂʰu˧˩˧fɑŋ˥,a prescription is needed,2,in-pack-neighbour=pharmacy-symptoms.do-i-need-a-prescription;answers-audit-v1;ipa=pinyin
+board-answers.before-food,饭前,,fàn qián,fan˥˩ tɕʰjɛn˧˥,before meals,2,src=福建省药品监督管理局 饭前服药还是饭后服药 (2025);in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=pinyin
+board-answers.after-food,饭后,,fàn hòu,fan˥˩ xoʊ˥˩,after meals; a label's 餐时 (with meals) is read as this too,2,src=福建省药品监督管理局 饭前服药还是饭后服药 (2025);in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=pinyin

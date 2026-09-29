@@ -132,3 +132,4 @@ hitchhiking.i-only-need-to-go-to-the-next-town,Mo nílò láti lọ sí ìlú t�
 hitchhiking.is-there-room-for-two,Ṣé àyè wà fún ẹ̀ni méjì?,,ʃe˥ a˩je˩ wa˩ fũ˥ ɛ˩ni me˥dʒi˩,,2,yo-agent-v1;ipa=yo-g2p
 hitchhiking.i-can-pay-for-fuel,Mo lè san owó epo,,mo le˩ sã owo˥ ekpo,san owó reused from transit-rides.where-do-i-pay-the-fare; epo = fuel/oil,2,yo-agent-v1;in-pack-neighbour=transit-rides.where-do-i-pay-the-fare;ipa=yo-g2p
 hitchhiking.thank-you-for-the-ride,Ẹ ṣé fún gbígbé mi lọ,,ɛ ʃe˥ fũ˥ ɡbi˥ɡbe˥ mi lɔ,reuses social-basics.thank-you's Ẹ ṣé and the ride row's gbé mi lọ,2,yo-agent-v1;in-pack-neighbour=social-basics.thank-you;ipa=yo-g2p
+taxi.please-turn-around,"Ẹ jọ̀wọ́, ẹ padà",,"ɛ dʒɔ˩wɔ˥, ɛ kpada˩","please, turn back",2,"yo-agent-v1;src=en.wiktionary pada (padà 'to return, to turn back');in-pack-frame=taxi.please-stop-here;answers-audit-v1;ipa=yo-g2p"

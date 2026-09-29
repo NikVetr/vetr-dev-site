@@ -132,3 +132,4 @@ hitchhiking.i-only-need-to-go-to-the-next-town,אני צריך להגיע רק �
 hitchhiking.is-there-room-for-two,יש מקום לשניים?,יֵשׁ מָקוֹם לִשְׁנַיִים?,yesh maqom lishnayim?,jˈeʃ makˈom liʃnajˈim,,2,he-agent-v1;ipa=bgn
 hitchhiking.i-can-pay-for-fuel,אני יכול לשלם על הדלק,אֲנִי יָכוֹל לְשַׁלֵּם עַל הַדֶּלֶק,ani yakhol leshalem al hadeleq,anˈi jaxˈol leʃalˈem ˈal hadelˈek,"deleq = fuel, the everyday word (also on every gas-station sign, תחנת דלק)",2,he-agent-v1;ipa=bgn
 hitchhiking.thank-you-for-the-ride,תודה על הטרמפ,תּוֹדָה עַל הַטְּרֶמְפּ,toda al hatrempa,todˈa ˈal hatʁempˈa,,2,he-agent-v1;ipa=bgn
+taxi.please-turn-around,אפשר לעשות פרסה?,אֶפְשָׁר לַעֲשׂוֹת פַּרְסָה?,efshar la‘asot parsa?,efʃˈaʁ laasˈot paʁsˈa,is it possible to make a U-turn?,2,he-agent-v1;src=Milog פרסה;in-pack-frame=taxi.please-use-the-meter;answers-audit-v1;ipa=bgn

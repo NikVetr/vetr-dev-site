@@ -132,3 +132,4 @@ hitchhiking.i-only-need-to-go-to-the-next-town,ወደ የሚቀጥለው ከተ�
 hitchhiking.is-there-room-for-two,ለሁለት ሰው ቦታ አለ?,,lehulet sew bota ālle?,ləhulət səw bota ʔalːə,,2,am-agent-v1;fix=FSI Amharic Basic Course (1964) allə;row-corrections-v1;ipa=bgn-am
 hitchhiking.i-can-pay-for-fuel,የነዳጅ ገንዘብ መክፈል እችላለሁ,,yenedaj genzeb mekfel ichilallehu,jənədadʒ ɡənzəb məkfəl ʔɨtʃɨlalːəhu,"nedaj = fuel/petrol, the everyday word",2,am-agent-v1;ipa=bgn-am
 hitchhiking.thank-you-for-the-ride,ስላሳፈሩኝ አመሰግናለሁ,,silasaferugn āmeseginallehu,sɨlasafəruɡn ʔaməsəɡɨnalːəhu,,2,am-agent-v1;ipa=bgn-am
+taxi.please-turn-around,እባክዎ ወደ ኋላ ይዙሩ,,ibakwo wede hwala yizuru,ʔɨbakwo wədə hwala jɨzuru,please turn back,2,am-agent-v1;abyssinica-dict=ወደ ኋላ ዞረ (turn around);src=PennDOT PUB 95 Amharic ወደ ተቃራኒ አቅጣጫ ይዙሩ (U-turn);in-pack-frame=taxi.please-stop-here;answers-audit-v1;ipa=bgn-am

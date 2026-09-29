@@ -129,3 +129,20 @@ kind-words.i-like-it-very-much,Îmi place foarte mult.,,ˌɨmʲ plˈatʃe fˈɔa
 kind-words.i-had-a-wonderful-time,Am avut parte de momente minunate.,,am avˈut pˈarte de momˈente mˌinunˈate,,2,ro-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-everything,Vă mulțumesc pentru tot.,,və mˌultsumˈesk pˌentru tˈot,,2,ro-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-your-hospitality,Vă mulțumesc pentru ospitalitate.,,və mˌultsumˈesk pˌentru ˌospitˌalitˈate,,2,ro-kind-words-v1;ipa=espeak
+board-answers.my-name-is-blank,Mă numesc {},,mə numˈesk {},,2,ro-agent-v1;reply-neutrality-rule;matches introductions.my-name-is;answers-audit-v1;ipa=espeak
+board-answers.i-would-rather-not-say,Prefer să nu spun,,prefˈer sə nu spˈun,,2,ro-agent-v1;src=DEX;reply-neutrality-rule;rule=present-tense-invariant-for-gender;answers-audit-v1;ipa=espeak
+board-answers.what-happened,Ce s-a întâmplat?,,tʃe sa ˌɨntɨmplˈat,,2,ro-agent-v1;src=DEX;answers-audit-v1;ipa=espeak
+board-answers.understood,Am înțeles,,am ˌɨntselˈes,,2,ro-agent-v1;src=DEX;reply-neutrality-rule;rule=perfect-compus-participle-invariant;answers-audit-v1;ipa=espeak
+board-answers.i-will-check,Verific imediat,,veɾˈifik ˌimedjˈat,,2,ro-agent-v1;src=DEX;reply-neutrality-rule;rule=present-tense-invariant-for-gender;answers-audit-v1;ipa=espeak
+board-answers.we-have-it,"Da, avem",,"dˈa, avˈem",,2,ro-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.we-are-full,Nu mai avem locuri,,nu maɪ avˌem lokˈurʲ,,2,ro-agent-v1;src=DEX;answers-audit-v1;ipa=espeak
+board-answers.it-is-free,Este gratuit,,jˌeste ɡratwˈit,,2,ro-agent-v1;src=DEX;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.it-does-not-matter,Nu contează,,nu kontˈeazə,,2,ro-agent-v1;src=DEX;answers-audit-v1;ipa=espeak
+board-answers.only-for-customers,Este doar pentru clienți,,jˌeste dˈɔar pˌentru kljˈentsʲ,,2,ro-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.where-to,Până unde?,,pˈɨnə ˈunde,,2,ro-agent-v1;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.at-the-next-stop,La următoarea stație,,la ˌurmətˈɔaɾea stˈatsje,,2,ro-agent-v1;src=DEX;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.pay-on-board,Se plătește la urcare,,se plətˈeʃte la urkˈaɾe,,2,ro-agent-v1;src=DEX;reply-neutrality-rule;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.see-a-doctor,Este mai bine să mergeți la medic,,jˌeste maɪ bˈine sə mˈerdʒetsʲ la mˈedik,,2,ro-agent-v1;reply-neutrality-rule;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.prescription-only,Doar cu rețetă,,dˈɔar ku retsˈetə,,2,ro-agent-v1;src=DEX;answers-audit-v1;ipa=espeak
+board-answers.before-food,Înainte de masă,,ˌɨnaˈinte de mˈasə,,2,ro-agent-v1;src=DEX;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.after-food,După masă,,dˈupə mˈasə,,2,ro-agent-v1;src=DEX;in-pack-neighbour;answers-audit-v1;ipa=espeak

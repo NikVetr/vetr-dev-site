@@ -129,3 +129,20 @@ kind-words.i-like-it-very-much,Мені це дуже подобається.,,M
 kind-words.i-had-a-wonderful-time,Я чудово провів час.,,Ya chudovo proviv chas.,jˈa tʃudˈoʋo prˈoʋiːf tʃˈas,"masculine default; the past tense is a participle agreeing with the speaker's gender, feminine variant in variants.csv",2,uk-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-everything,Дякую за все.,,Diakuiu za vse.,djˈakuju zˈa fsˈɛ,,2,uk-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-your-hospitality,Дякую за гостинність.,,Diakuiu za hostynnist.,djˈakuju zˈa hostˈɪnɲiːst,,2,uk-kind-words-v1;ipa=espeak
+board-answers.my-name-is-blank,Мене звати {}.,,Mene zvaty {}.,mˈɛnɛ zʋˈatɪ {},,2,uk-agent-v1;matches introductions.my-name-is;answers-audit-v1;ipa=espeak
+board-answers.i-would-rather-not-say,Волію не казати.,,Voliiu ne kazaty.,ʋoʎˈiːju nˈɛ kazˈatɪ,,2,uk-agent-v1;src=СУМ-20 воліти 1;reply-neutrality-rule;rule=present-tense-invariant-for-gender;answers-audit-v1;ipa=espeak
+board-answers.what-happened,Що сталося?,,Shcho stalosia?,ʃtʃˈo stalˈosja,,2,uk-agent-v1;src=СУМ-11 (slovnyk.ua) ставатися 1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.understood,Зрозуміло.,,Zrozumilo.,zrozˈumiːlo,,2,uk-agent-v1;src=СУМ-20 зрозуміло 4 (уживається як відповідь);reply-neutrality-rule;rule=impersonal-predicative-invariant;answers-audit-v1;ipa=espeak
+board-answers.i-will-check,Я перевірю.,,Ya pereviriu.,jˈa pɛrˈɛʋiːrju,,2,uk-agent-v1;src=СУМ-20 перевіряти 1;reply-neutrality-rule;rule=present-tense-invariant-for-gender;answers-audit-v1;ipa=espeak
+board-answers.we-have-it,"Так, є.",,"Tak, ye.","tˈak, jˈɛ",,2,uk-agent-v1;rule=verb-echo-reply;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.we-are-full,Вільних місць немає.,,Vilnykh mists nemaie.,ʋˈiːʎnɪx mˈiːsts nɛmˈajɛ,,2,uk-agent-v1;src=СУМ-20 місце + вільний;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.it-is-free,Це безкоштовно.,,Tse bezkoshtovno.,tsˈɛ bɛskˈoʃtoʋno,,2,uk-agent-v1;src=СУМ-20 безкоштовно;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.it-does-not-matter,Неважливо.,,Nevazhlyvo.,nɛʋˈaʒlɪʋo,,2,uk-agent-v1;src=СУМ-20 неважливо (Не має значення);answers-audit-v1;ipa=espeak
+board-answers.only-for-customers,Тільки для клієнтів.,,Tilky dlia kliientiv.,tˈiːʎkɪ dʎˈa kʎiːjˈɛntiːʋ,,2,uk-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.where-to,Куди?,,Kudy?,kˈudɪ,,2,uk-agent-v1;src=СУМ-20 куди 1;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.at-the-next-stop,На наступній зупинці.,,Na nastupnii zupyntsi.,nˈa nastˈupɲiːj zupˈɪntsiː,,2,uk-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.pay-on-board,Оплата в салоні.,,Oplata v saloni.,oplˈata f salˈoɲiː,,2,uk-agent-v1;src=СУМ-11 (slovnyk.ua) салон 3;src=ПДР України п. 21.2 (салон маршрутного транспортного засобу);reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.see-a-doctor,Краще звернутися до лікаря.,,Krashche zvernutysia do likaria.,krˈaʃtʃɛ zʋɛrnˈutɪsja dˈo ʎiːkˈarja,,2,uk-agent-v1;src=СУМ-20 звертатися (Звернутися до лікаря);reply-neutrality-rule;in-pack-frame;answers-audit-v1;ipa=espeak
+board-answers.prescription-only,Тільки за рецептом.,,Tilky za retseptom.,tˈiːʎkɪ zˈa rɛtsˈɛptom,,2,uk-agent-v1;src=СУМ-20 рецепт 1;src=kmu.gov.ua МОЗ умови відпуску за рецептом;answers-audit-v1;ipa=espeak
+board-answers.before-food,Перед їжею.,,Pered yizheiu.,pˈɛrɛd jiːʒˈɛju,,2,uk-agent-v1;src=dls.gov.ua Як правильно приймати ліки (перед їжею);answers-audit-v1;ipa=espeak
+board-answers.after-food,Після їжі.,,Pislia yizhi.,pˈiːsʎa jˈiːʒiː,,2,uk-agent-v1;src=dls.gov.ua Як правильно приймати ліки (після їжі);in-pack-neighbour;answers-audit-v1;ipa=espeak

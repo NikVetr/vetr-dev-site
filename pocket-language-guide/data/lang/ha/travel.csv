@@ -132,3 +132,4 @@ hitchhiking.i-only-need-to-go-to-the-next-town,Ina bukatar zuwa gari na gaba kaw
 hitchhiking.is-there-room-for-two,Akwai wuri don mutum biyu?,,akwai wuri don mutum biju,,2,ha-agent-v1;ipa=ha-g2p
 hitchhiking.i-can-pay-for-fuel,Zan iya biyan man fetur,,zan ija bijan man fetur,"man fetur = petrol, the word Hausa speakers use at the pump",2,ha-agent-v1;src=Newman A Hausa-English Dictionary 2007 fetur;ipa=ha-g2p
 hitchhiking.thank-you-for-the-ride,Na gode don ɗaukar ni,,na ɡode don ɗaukar ni,reuses social-basics.thank-you's Na gode,2,ha-agent-v1;in-pack-neighbour=social-basics.thank-you;ipa=ha-g2p
+taxi.please-turn-around,Don Allah ka juya,,don allah ka dʒuja,"please turn round -- ka to the driver, as in taxi.please-stop-here",2,"ha-agent-v1;src=Bargery juya 2 (turn round, changing one's direction);in-pack-frame=taxi.please-stop-here;answers-audit-v1;ipa=ha-g2p"

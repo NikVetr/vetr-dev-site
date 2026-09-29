@@ -129,3 +129,20 @@ kind-words.i-like-it-very-much,Es gefällt mir sehr.,,ɛs ɡəfˈɛlt miːɾ zˈ
 kind-words.i-had-a-wonderful-time,Ich hatte eine wunderbare Zeit.,,ɪç hˌatə ˌaɪnə vˈʊndɜbˌɑːrə tsˈaɪt,,2,de-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-everything,Danke für alles.,,dˈaŋkə fyːɾ ˈaləs,,2,de-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-your-hospitality,Danke für Ihre Gastfreundschaft.,,dˈaŋkə fyːɾ ˌiːrə ɡˈastfrɔɪndʃˌaft,,2,de-kind-words-v1;ipa=espeak
+board-answers.my-name-is-blank,Ich heiße {}.,,ɪç hˈaɪsə {},,2,de-agent-v1;matches introductions.my-name-is;answers-audit-v1;ipa=espeak
+board-answers.i-would-rather-not-say,Das möchte ich lieber nicht sagen.,,das mˈœçtə ɪç lˈiːbɜ nˈɪçt zˈɑːɡən,,2,de-agent-v1;src=Duden;answers-audit-v1;ipa=espeak
+board-answers.what-happened,Was ist passiert?,,vˈas ɪst pasˈiːɾt,,2,de-agent-v1;src=Duden;answers-audit-v1;ipa=espeak
+board-answers.understood,Verstanden.,,fɛɾʃtˈandən,,2,de-agent-v1;src=Duden;rule=participle-as-interjection-invariant;answers-audit-v1;ipa=espeak
+board-answers.i-will-check,Ich schaue nach.,,ɪç ʃˈaʊə nˈɑːx,,2,de-agent-v1;src=Duden;answers-audit-v1;ipa=espeak
+board-answers.we-have-it,"Ja, das haben wir.",,"jˈɑː, das hˈɑːbən viːɾ",,2,de-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.we-are-full,Wir sind ausgebucht.,,viːɾ zɪnt ˈaʊsɡəbˌuːxt,,2,de-agent-v1;src=Duden;answers-audit-v1;ipa=espeak
+board-answers.it-is-free,Das ist kostenlos.,,das ɪst kˈɔstənlˌoːs,,2,de-agent-v1;src=Duden;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.it-does-not-matter,Das ist egal.,,das ɪst eːɡˈɑːl,,2,de-agent-v1;src=Duden;answers-audit-v1;ipa=espeak
+board-answers.only-for-customers,Nur für Kunden.,,nˈuːɾ fyːɾ kˈʊndən,,2,de-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.where-to,Wohin?,,voːhˈiːn,,2,de-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.at-the-next-stop,An der nächsten Haltestelle.,,an dɛɾ nˈɛçstən hˈaltɛʃtˌɛlə,,2,de-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.pay-on-board,Sie zahlen an Bord.,,ziː tsˈɑːlən an bˈɔɾt,,2,de-agent-v1;src=Duden;answers-audit-v1;ipa=espeak
+board-answers.see-a-doctor,Sie sollten besser zum Arzt gehen.,,ziː zˌɔltən bˈɛsɜ tsʊm ˈaɾtst ɡˈeːən,,2,de-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.prescription-only,Nur auf Rezept.,,nˈuːɾ aʊf reːtsˈɛpt,,2,de-agent-v1;src=Duden;answers-audit-v1;ipa=espeak
+board-answers.before-food,Vor dem Essen.,,fˌɔɾ deːm ˈɛsən,,2,de-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.after-food,Nach dem Essen.,,nɑːx deːm ˈɛsən,,2,de-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak

@@ -132,3 +132,4 @@ hitchhiking.i-only-need-to-go-to-the-next-town,Saya hanya perlu ke kota berikutn
 hitchhiking.is-there-room-for-two,Ada tempat untuk dua orang?,,ˈada tˈɛmpat ˌuntuk dˈua ˈoraŋ,,2,id-agent-v1;ipa=espeak
 hitchhiking.i-can-pay-for-fuel,Saya bisa bayar bensin,,sˈaja bˈisa bˈajar bənsˈin,bensin (KBBI); bayar reused from transit-rides.where-do-i-pay-the-fare,2,id-agent-v1;src=kbbi.web.id bensin;in-pack-neighbour=transit-rides.where-do-i-pay-the-fare;ipa=espeak
 hitchhiking.thank-you-for-the-ride,Terima kasih atas tumpangannya,,tərˈima kˈasih ˈatas tˌumpaŋˈanɲa,reuses tumpangan from the ride-request row,2,id-agent-v1;ipa=espeak
+taxi.please-turn-around,Tolong putar balik,,tˈoloŋ pˈutar bˈalik,please make a U-turn,2,id-agent-v1;id.wikipedia=Putar balik;in-pack-neighbour=taxi.please-stop-here;answers-audit-v1;ipa=espeak

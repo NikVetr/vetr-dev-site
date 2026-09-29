@@ -132,3 +132,4 @@ hitchhiking.i-only-need-to-go-to-the-next-town,Saya hanya perlu ke bandar beriku
 hitchhiking.is-there-room-for-two,Ada tempat untuk dua orang?,,ˈadə tˈəmpat ˈuntoʔ dˈuə ˈoraŋ,,2,ms-agent-v1;ipa=espeak
 hitchhiking.i-can-pay-for-fuel,Saya boleh bayar minyak,,sˈajə bˈoleh bˈajar mˈiɲaʔ,"minyak, the everyday Malaysian pump word (petrol is also said, but minyak is what a driver being asked for a lift would say); boleh matches taxi.can-you-wait-for-me-here",2,ms-agent-v1;in-pack-neighbour=taxi.can-you-wait-for-me-here;ipa=espeak
 hitchhiking.thank-you-for-the-ride,Terima kasih atas tumpangan,,təɾrˈimə kˈaseh ˈatas tumpˈaŋan,reuses tumpang from the ride-request row,2,ms-agent-v1;ipa=espeak
+taxi.please-turn-around,Tolong buat pusingan-U,,tˈoloŋ bˈuat pusˈiŋanjuː,please make a U-turn,2,ms-agent-v1;ms.wikipedia=Papan tanda di Malaysia (Dilarang pusingan-U);in-pack-neighbour=taxi.please-stop-here;answers-audit-v1;ipa=espeak

@@ -132,3 +132,4 @@ hitchhiking.i-only-need-to-go-to-the-next-town,次の町まででいいです,,t
 hitchhiking.is-there-room-for-two,二人乗れますか？,,futari noremasu ka?,ɸɯtaɾi noɾemasɯ ka,,2,ja-agent-v1;ipa=hepburn
 hitchhiking.i-can-pay-for-fuel,ガソリン代は払います,,gasorindai wa haraimasu,ɡasoɾiɴdai wa haɾaimasɯ,,2,ja-agent-v1;ipa=hepburn
 hitchhiking.thank-you-for-the-ride,乗せてくれてありがとうございます,,nosete kurete arigatō gozaimasu,nosete kɯɾete aɾiɡatoː ɡozaimasɯ,,2,ja-agent-v1;ipa=hepburn
+taxi.please-turn-around,Uターンしてください,,yūtān shite kudasai,jɯːtaːɴ ɕite kɯdasai,please make a U-turn,2,ja-agent-v1;src=デジタル大辞泉 ユーターン;in-pack-neighbour=taxi.please-stop-here;answers-audit-v1;ipa=hepburn

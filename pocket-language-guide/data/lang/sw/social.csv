@@ -129,3 +129,20 @@ kind-words.i-like-it-very-much,Nimependa sana.,,nˌimepˈenda sˈana,,2,"Taasisi
 kind-words.i-had-a-wonderful-time,Nimefurahia sana.,,nˌimefˌurahˈia sˈana,"lit. ""I have enjoyed [it] very much""",2,"Taasisi ya Taaluma za Kiswahili (TATAKI), Kamusi ya Kiswahili Sanifu;sw-kind-words-v1;ipa=espeak"
 kind-words.thank-you-for-everything,Asante kwa kila kitu.,,asˈante kwa kˈila kˈitu,,2,"Taasisi ya Taaluma za Kiswahili (TATAKI), Kamusi ya Kiswahili Sanifu;sw-kind-words-v1;ipa=espeak"
 kind-words.thank-you-for-your-hospitality,Asante kwa ukarimu wako.,,asˈante kwa ˌukarˈimu wˈako,,2,"Taasisi ya Taaluma za Kiswahili (TATAKI), Kamusi ya Kiswahili Sanifu;sw-kind-words-v1;ipa=espeak"
+board-answers.my-name-is-blank,Naitwa {},,naˈitwa {},I am called {},2,sw-agent-v1;src=TUKI-KKK itwa;sw.wikipedia=Wazigula (rev 1317019) naitwa;in-pack-frame=introductions.i-am-from;answers-audit-v1;ipa=espeak
+board-answers.i-would-rather-not-say,"Samahani, afadhali nisiseme",,"sˌamahˈani, ˌafaðˈali nˌisisˈeme","sorry, better that I not say",2,sw-agent-v1;src=TUKI-KKK afadhali;src=TUKI-KKK sema;in-pack-neighbour=social-basics.excuse-me-sorry;answers-audit-v1;ipa=espeak
+board-answers.what-happened,Kuna nini?,,kˈuna nˈini,there is what? -- what is the matter,2,sw-agent-v1;sw.wikipedia=Mtume Petro (rev 1573448) Kuna nini;src=TUKI-KKK nini;answers-audit-v1;ipa=espeak
+board-answers.understood,Nimeelewa,,nˌimeelˈewa,I have understood,2,sw-agent-v1;src=TUKI-KKK elewa;in-pack-neighbour=communication.i-do-not-understand-spoken;answers-audit-v1;ipa=espeak
+board-answers.i-will-check,Nitaangalia,,nˌitaˌaŋɡalˈia,I will look [into it],2,sw-agent-v1;src=TUKI-KKK angalia;in-pack-frame=board-answers.i-will-write-it-down;answers-audit-v1;ipa=espeak
+board-answers.we-have-it,"Ndiyo, tunayo",,"n̩dˈijo, tunˈajo","yes, we have it",2,sw-agent-v1;in-pack-neighbour=board-answers.we-do-not-have-it;answers-audit-v1;ipa=espeak
+board-answers.we-are-full,Hakuna nafasi,,hakˈuna nafˈasi,there is no room,2,sw-agent-v1;src=TUKI-KKK nafasi;in-pack-neighbour=hitchhiking.is-there-room-for-two;answers-audit-v1;ipa=espeak
+board-answers.it-is-free,Ni bure,,ni bˈure,,2,sw-agent-v1;src=TUKI-KKK bure;in-pack-neighbour=toilets.is-it-free;answers-audit-v1;ipa=espeak
+board-answers.it-does-not-matter,Haidhuru,,hˌaiðˈuru,it does no harm -- no matter,2,sw-agent-v1;src=TUKI-KKK dhuru (hai~ it does not matter);sw.wikipedia=Karne (rev 1151042) haidhuru;answers-audit-v1;ipa=espeak
+board-answers.only-for-customers,Ni kwa wateja tu,,ni kwa watˈeɟa tˈu,,2,sw-agent-v1;src=TUKI-KKK mteja;in-pack-neighbour=toilets.is-it-only-for-customers;answers-audit-v1;ipa=espeak
+board-answers.where-to,Unaenda wapi?,,ˌunaˈenda wˈapi,,2,sw-agent-v1;in-pack-neighbour=hitchhiking.where-are-you-going;rule=second-person-has-no-gender;answers-audit-v1;ipa=espeak
+board-answers.at-the-next-stop,Kituo kijacho,,kitˈuo kiɟˈatʃo,the next stop,2,sw-agent-v1;src=TUKI-KKK kituo;in-pack-neighbour=transit-rides.what-is-the-next-stop;answers-audit-v1;ipa=espeak
+board-answers.pay-on-board,Unalipa ndani ya gari,,ˌunalˈipa ndˈani ja ɡˈari,you pay inside the vehicle,2,sw-agent-v1;src=TUKI-KKK lipa;src=TUKI-KKK gari;in-pack-neighbour=transit-rides.where-do-i-pay-the-fare;rule=second-person-has-no-gender;answers-audit-v1;ipa=espeak
+board-answers.see-a-doctor,Ni bora umwone daktari,,ni bˈora umwˈone daktˈari,it is better that you see a doctor,2,sw-agent-v1;src=TUKI-KKK ona;in-pack-frame=board-answers.stay-here;rule=second-person-has-no-gender;answers-audit-v1;ipa=espeak
+board-answers.prescription-only,Kwa agizo la daktari tu,,kwa aɡˈizo la daktˈari tˈu,only with a doctor's order,2,sw-agent-v1;src=TUKI-KKK agizo;in-pack-neighbour=pharmacy-symptoms.do-i-need-a-prescription;answers-audit-v1;ipa=espeak
+board-answers.before-food,Kabla ya chakula,,kˈabla ja tʃakˈula,,2,sw-agent-v1;src=TUKI-KKK chakula;in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=espeak
+board-answers.after-food,Baada ya chakula,,baˌada ja tʃakˈula,,2,sw-agent-v1;src=TUKI-KKK baada;in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=espeak

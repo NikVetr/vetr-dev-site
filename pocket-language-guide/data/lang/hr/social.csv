@@ -129,3 +129,20 @@ kind-words.i-like-it-very-much,To mi se puno sviđa.,,tˈo mˈi sˈe pˈuno svˈ
 kind-words.i-had-a-wonderful-time,Imao sam ovdje divno vrijeme.,,ˈimao sam ˈovdje dˈivno vrijeme,"masculine default; the l-participle marks the speaker's gender, feminine variant in variants.csv",2,hr-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-everything,Hvala na svemu.,,xvˈala nˈa svˈemu,,2,hr-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-your-hospitality,Hvala na gostoljubivosti.,,xvˈala nˈa ɡostoʎubivosti,,2,hr-kind-words-v1;ipa=espeak
+board-answers.my-name-is-blank,Zovem se {},,zˈovem sˈe {},,2,hr-agent-v1;matches introductions.my-name-is;answers-audit-v1;ipa=espeak
+board-answers.i-would-rather-not-say,Radije to neću reći,,radije tˈo nˈetɕu rˈetɕi,,2,hr-agent-v1;src=HJP rado (komp. radije);reply-neutrality-rule;rule=future-with-cu-invariant-for-gender;answers-audit-v1;ipa=espeak
+board-answers.what-happened,Što se dogodilo?,,ʃto sˈe doɡodilo,,2,hr-agent-v1;src=HJP dogoditi se;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.understood,Razumijem,,razumijem,,2,hr-agent-v1;src=HJP razumjeti 1a;reply-neutrality-rule;rule=present-tense-invariant-for-gender;answers-audit-v1;ipa=espeak
+board-answers.i-will-check,Provjerit ću,,provjerit tɕˈu,,2,hr-agent-v1;src=HJP provjeriti 1;reply-neutrality-rule;rule=future-with-cu-invariant-for-gender;answers-audit-v1;ipa=espeak
+board-answers.we-have-it,"Da, imamo",,"dˈa, imamo",,2,hr-agent-v1;rule=verb-echo-reply;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.we-are-full,Sve je popunjeno,,svˈe je popuɲeno,,2,hr-agent-v1;src=HJP popuniti 1 (prid. trp. popunjen);reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.it-is-free,Besplatno je,,besplatno je,,2,hr-agent-v1;src=HJP besplatno;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.it-does-not-matter,Svejedno je,,svejedno je,,2,hr-agent-v1;src=HJP svejedno 1;answers-audit-v1;ipa=espeak
+board-answers.only-for-customers,Samo za goste,,sˈamo zˈa ɡˈoste,,2,hr-agent-v1;src=HJP gost 2;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.where-to,Kamo putujete?,,kˈamo putujete,,2,hr-agent-v1;src=HJP kamo 1 + putovati 1;rule=present-tense-invariant-for-gender;answers-audit-v1;ipa=espeak
+board-answers.at-the-next-stop,Na sljedećoj stanici,,nˈa sʎedetɕoj stanitsi,,2,hr-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.pay-on-board,Plaća se u vozilu,,plˈatɕa sˈe u vozilu,,2,hr-agent-v1;src=HJP vozilo;src=zet.hr karte kupljene u vozilu;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.see-a-doctor,Bolje je otići liječniku,,bˈoʎe je otitɕi lijetʃniku,,2,hr-agent-v1;src=HJP liječnik 1;reply-neutrality-rule;in-pack-frame;answers-audit-v1;ipa=espeak
+board-answers.prescription-only,Samo na recept,,sˈamo nˈa rˈetsept,,2,hr-agent-v1;src=HJP recept 1;src=halmed.hr način izdavanja lijeka na recept;answers-audit-v1;ipa=espeak
+board-answers.before-food,Prije jela,,prˈije jˈela,,2,hr-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.after-food,Poslije jela,,poslije jˈela,,2,hr-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak

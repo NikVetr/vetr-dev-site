@@ -129,3 +129,20 @@ kind-words.i-like-it-very-much,Nagyon tetszik nekem.,,nˈɑɟon tˈɛtstsik nˈ�
 kind-words.i-had-a-wonderful-time,Csodálatosan éreztem magam.,,tʃˈodaːlɑtoʃɑn ˈeːrɛstɛm mˈɑɡɑm,,2,hu-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-everything,Köszönöm mindent.,,kˈøsønøm mˈindɛnt,,2,hu-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-your-hospitality,Köszönöm a vendégszeretetet.,,kˈøsønøm ˈɑ vˈɛndeːɡsɛrɛtɛtɛt,,2,hu-kind-words-v1;ipa=espeak
+board-answers.my-name-is-blank,A nevem: {},,ˈɑ nˈɛvɛm {},,2,hu-agent-v1;matches introductions.my-name-is;answers-audit-v1;ipa=espeak
+board-answers.i-would-rather-not-say,Inkább nem mondanám meg,,ˈinkaːbb nˈɛm mˈondɑnaːm mˈɛɡ,,2,hu-agent-v1;src=ÉrtSz inkább + megmond;answers-audit-v1;ipa=espeak
+board-answers.what-happened,Mi történt?,,mˈi tˈørteːnt,,2,hu-agent-v1;src=ÉrtSz történik 2;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.understood,Értem,,ˈeːrtɛm,,2,hu-agent-v1;src=ÉrtSz ért [1] (értem feleletként);answers-audit-v1;ipa=espeak
+board-answers.i-will-check,Megnézem,,mˈɛɡneːzɛm,,2,hu-agent-v1;src=ÉrtSz megnéz 2;answers-audit-v1;ipa=espeak
+board-answers.we-have-it,"Igen, van",,"ˈiɡɛn, vˈɑn",,2,hu-agent-v1;src=ÉrtSz van [1] (Van-e tinta? – Van.);rule=verb-echo-reply;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.we-are-full,Tele vagyunk,,tˈɛlɛ vˈɑɟunk,,2,hu-agent-v1;src=ÉrtSz tele I.3;in-pack-frame;answers-audit-v1;ipa=espeak
+board-answers.it-is-free,Ingyenes,,ˈinɟɛnɛʃ,,2,hu-agent-v1;src=ÉrtSz ingyenes I.1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.it-does-not-matter,Mindegy,,mˈindɛɟ,,2,hu-agent-v1;src=ÉrtSz mindegy 1a;answers-audit-v1;ipa=espeak
+board-answers.only-for-customers,Csak vendégeknek,,tʃˈɑk vˈɛndeːɡɛknɛk,,2,hu-agent-v1;src=ÉrtSz vendég;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.where-to,Hova?,,hˈovɑ,,2,hu-agent-v1;src=ÉrtSz hova;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.at-the-next-stop,A következő megállónál,,ˈɑ kˈøvɛtkɛzøː mˈɛɡaːlloːnaːl,,2,hu-agent-v1;src=ÉrtSz leszáll (A következő megállónál leszállok.);answers-audit-v1;ipa=espeak
+board-answers.pay-on-board,A járművön lehet fizetni,,ˈɑ jˈaːrmyːvøn lˈɛhɛt fˈizɛtni,,2,hu-agent-v1;src=ÉrtSz jármű;in-pack-frame;answers-audit-v1;ipa=espeak
+board-answers.see-a-doctor,Érdemes orvoshoz fordulni,,ˈeːrdɛmɛʃ ˈorvoʃhoz fˈordulni,,2,hu-agent-v1;src=ÉrtSz érdemes;src=OPUS-EMEA-hu (Kielipankki-Korp) orvoshoz kell fordulni 217;answers-audit-v1;ipa=espeak
+board-answers.prescription-only,Csak receptre kapható,,tʃˈɑk rˈɛtsɛptrɛ kˈɑphɑtoː,,2,hu-agent-v1;src=OPUS-EMEA-hu (Kielipankki-Korp) csak receptre 420;answers-audit-v1;ipa=espeak
+board-answers.before-food,Étkezés előtt,,ˈeːtkɛzeːʃ ˈɛløːtt,,2,hu-agent-v1;src=ÉrtSz étkezés;src=OPUS-EMEA-hu (Kielipankki-Korp) étkezés előtt 473;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.after-food,Étkezés után,,ˈeːtkɛzeːʃ ˈutaːn,,2,hu-agent-v1;src=OPUS-EMEA-hu (Kielipankki-Korp) étkezés után 255;in-pack-neighbour;answers-audit-v1;ipa=espeak

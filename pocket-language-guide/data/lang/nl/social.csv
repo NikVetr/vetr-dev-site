@@ -129,3 +129,20 @@ kind-words.i-like-it-very-much,Ik vind het erg leuk.,,ɪk vˈɪnt hət ˈɛrx l�
 kind-words.i-had-a-wonderful-time,Ik heb een fantastische tijd gehad.,,ɪk hɛp ən fɑntˈɑstisə tˈɛɪt ɣəhˌɑt,,2,nl-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-everything,Bedankt voor alles.,,bədˈɑŋkt vɔːr ˈɑləs,,2,nl-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-your-hospitality,Bedankt voor uw gastvrijheid.,,bədˈɑŋkt vɔːr yʊ ɣˈɑstvrˌɛɪhɛɪt,,2,nl-kind-words-v1;ipa=espeak
+board-answers.my-name-is-blank,Ik heet {}.,,ɪk hˈeːt {},,2,nl-agent-v1;matches introductions.my-name-is;answers-audit-v1;ipa=espeak
+board-answers.i-would-rather-not-say,Dat zeg ik liever niet.,,dɑt zˈɛx ɪk lˈivər nˈit,,2,nl-agent-v1;src=WNT;answers-audit-v1;ipa=espeak
+board-answers.what-happened,Wat is er gebeurd?,,ʋɑt ɪs ər ɣəbˈøːrt,,2,nl-agent-v1;src=WNT;answers-audit-v1;ipa=espeak
+board-answers.understood,Begrepen.,,bəɣrˈeːpən,,2,nl-agent-v1;src=WNT;rule=participle-as-interjection-invariant;answers-audit-v1;ipa=espeak
+board-answers.i-will-check,Ik kijk het even na.,,ɪk kˈɛɪk hət ˈeːvən nˈaː,,2,nl-agent-v1;src=WNT;answers-audit-v1;ipa=espeak
+board-answers.we-have-it,"Ja, dat hebben we.",,"jˈaː, dɑt hˌɛbən ʋə",,2,nl-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.we-are-full,We zitten vol.,,ʋə zˈɪtən vˈɔl,,2,nl-agent-v1;src=WNT;answers-audit-v1;ipa=espeak
+board-answers.it-is-free,Het is gratis.,,hət ɪs ɣrˈaːtɪs,,2,nl-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.it-does-not-matter,Dat maakt niet uit.,,dɑt mˈaːkt nˌit ˈœyt,,2,nl-agent-v1;src=Taaladvies;answers-audit-v1;ipa=espeak
+board-answers.only-for-customers,Het is alleen voor klanten.,,hət ɪs ɑlˈeːn vɔːr klˈɑntən,,2,nl-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.where-to,Waar moet u naartoe?,,ʋˈaːr mˈut y nˈaːrtu,,2,nl-agent-v1;src=Taaladvies;answers-audit-v1;ipa=espeak
+board-answers.at-the-next-stop,Bij de volgende halte.,,bɛɪ də vˈɔlɣəndə hˈɑltə,,2,nl-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.pay-on-board,U betaalt aan boord.,,y bətˈaːlt aːn bˈɔːrt,,2,nl-agent-v1;src=ANW;answers-audit-v1;ipa=espeak
+board-answers.see-a-doctor,U kunt beter naar de dokter gaan.,,y kʏnt bˈeːtər naːr də dˈɔktər ɣˈaːn,,2,nl-agent-v1;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.prescription-only,Alleen op recept.,,ɑlˈeːn ɔp rəsˈɛpt,,2,nl-agent-v1;src=cbg-meb.nl;answers-audit-v1;ipa=espeak
+board-answers.before-food,Vóór het eten.,,vˈɔːr hət ˈeːtən,,2,nl-agent-v1;src=apotheek.nl;answers-audit-v1;ipa=espeak
+board-answers.after-food,Na het eten.,,naː hət ˈeːtən,,2,nl-agent-v1;src=apotheek.nl;answers-audit-v1;ipa=espeak

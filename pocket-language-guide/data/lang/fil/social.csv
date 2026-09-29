@@ -129,3 +129,20 @@ kind-words.i-like-it-very-much,Gustong-gusto ko po ito.,,ɡustoŋɡusto ko po it
 kind-words.i-had-a-wonderful-time,Naging maganda po ang karanasan ko dito.,,naɡiŋ maɡanda po aŋ kaɾanasan ko dito,,2,kind-words-v1;ipa=fil-g2p
 kind-words.thank-you-for-everything,Salamat po sa lahat.,,salamat po sa lahat,,2,kind-words-v1;ipa=fil-g2p
 kind-words.thank-you-for-your-hospitality,Salamat po sa inyong pagtanggap.,,salamat po sa iɲoŋ paɡtaŋɡap,,2,kind-words-v1;ipa=fil-g2p
+board-answers.my-name-is-blank,Ako po si {},,ako po si {},I [am] {}: si marks a personal name; po is respect for the listener and marks no one's sex,2,fil-agent-v1;in-pack-neighbour=introductions.my-name-is;reply-neutrality-rule;answers-audit-v1;ipa=fil-g2p
+board-answers.i-would-rather-not-say,Hindi ko na lang po sasabihin,,hindi ko na laŋ po sasabihin,I will just not say it,2,fil-agent-v1;in-pack-neighbour=board-answers.none-of-these;reply-neutrality-rule;answers-audit-v1;ipa=fil-g2p
+board-answers.what-happened,Ano po ang nangyari?,,ano po aŋ naŋjaɾi,what happened?,2,fil-agent-v1;src=KWF Diksiyonaryo mangyári;answers-audit-v1;ipa=fil-g2p
+board-answers.understood,"Sige po, naiintindihan ko",,"siɡɛ po, naiintindihan ko","all right, I understand",2,fil-agent-v1;in-pack-neighbour=communication.i-do-not-understand;in-pack-neighbour=massage-spa.reply-i-will-avoid-that-area;reply-neutrality-rule;answers-audit-v1;ipa=fil-g2p
+board-answers.i-will-check,Titingnan ko po muna,,titiŋnan ko po muna,I will look first,2,fil-agent-v1;src=KWF Diksiyonaryo tingín (tingnán);reply-neutrality-rule;answers-audit-v1;ipa=fil-g2p
+board-answers.we-have-it,Meron po,,mɛɾon po,there is: the question's own Meron echoed,2,fil-agent-v1;in-pack-neighbour=utility-templates.do-you-have;answers-audit-v1;ipa=fil-g2p
+board-answers.we-are-full,Puno na po,,puno na po,already full,2,fil-agent-v1;src=KWF Diksiyonaryo punô (2);answers-audit-v1;ipa=fil-g2p
+board-answers.it-is-free,Libre po,,libɾɛ po,,2,fil-agent-v1;in-pack-neighbour=toilets.is-it-free;answers-audit-v1;ipa=fil-g2p
+board-answers.it-does-not-matter,Kahit alin po,,kahit alin po,whichever one,2,fil-agent-v1;src=KWF Diksiyonaryo kahit;answers-audit-v1;ipa=fil-g2p
+board-answers.only-for-customers,Para lang po sa mga customer,,paɾa laŋ po sa maŋa kustomɛɾ,only for customers,2,fil-agent-v1;in-pack-neighbour=toilets.is-it-only-for-customers;answers-audit-v1;ipa=fil-g2p
+board-answers.where-to,Saan po ang punta?,,saan po aŋ punta,where is the going?,2,fil-agent-v1;in-pack-neighbour=hitchhiking.where-are-you-going;answers-audit-v1;ipa=fil-g2p
+board-answers.at-the-next-stop,Sa susunod na hintuan po,,sa susunod na hintuan po,at the next stop,2,fil-agent-v1;in-pack-neighbour=transit-rides.what-is-the-next-stop;answers-audit-v1;ipa=fil-g2p
+board-answers.pay-on-board,Sa sasakyan na po ang bayad,,sa sasakjan na po aŋ bajad,the payment is on the vehicle,2,fil-agent-v1;in-pack-neighbour=transit-rides.where-do-i-pay-the-fare;in-pack-neighbour=toilets.is-there-a-toilet-on-board;answers-audit-v1;ipa=fil-g2p
+board-answers.see-a-doctor,Mas mabuti pong magpatingin sa doktor,,mas mabuti poŋ maɡpatiŋin sa doktoɾ,it is better to have [it] checked by a doctor,2,fil-agent-v1;src=KWF Diksiyonaryo tingín (magpatingín);in-pack-neighbour=emergency-medical.i-need-a-doctor;answers-audit-v1;ipa=fil-g2p
+board-answers.prescription-only,Kailangan po ng reseta,,kailaŋan po naŋ ɾɛsɛta,a prescription is needed,2,fil-agent-v1;in-pack-neighbour=pharmacy-symptoms.do-i-need-a-prescription;answers-audit-v1;ipa=fil-g2p
+board-answers.before-food,Bago po kumain,,baɡo po kumain,before eating,2,fil-agent-v1;in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=fil-g2p
+board-answers.after-food,Pagkatapos po kumain,,paɡkatapos po kumain,after eating,2,fil-agent-v1;in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=fil-g2p

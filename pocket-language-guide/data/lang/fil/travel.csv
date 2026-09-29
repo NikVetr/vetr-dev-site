@@ -132,3 +132,4 @@ hitchhiking.i-only-need-to-go-to-the-next-town,Kailangan ko lang pong pumunta sa
 hitchhiking.is-there-room-for-two,May puwang po ba para sa dalawa?,,maj puwaŋ po ba paɾa sa dalawa,,2,fil-agent-v1;ipa=fil-g2p
 hitchhiking.i-can-pay-for-fuel,Kaya ko pong bayaran ang gasolina,,kaja ko poŋ bajaɾan aŋ ɡasolina,"gasolina (UP Diksiyonaryong Filipino), the everyday Filipino word for fuel",2,fil-agent-v1;src=tagalog.com gasolina;ipa=fil-g2p
 hitchhiking.thank-you-for-the-ride,Salamat po sa pagsakay,,salamat po sa paɡsakaj,reuses social-basics.thank-you's Salamat po and the sakay root from the ride-request row,2,fil-agent-v1;in-pack-neighbour=social-basics.thank-you;ipa=fil-g2p
+taxi.please-turn-around,Paki-U-turn po,,paki jutɛɾn po,"please U-turn: paki- is the polite request prefix, U-turn the everyday word",2,fil-agent-v1;src=MMDA advisory (Mag-U-U-turn? … no U-turn sign);in-pack-neighbour=taxi.please-take-me-here;answers-audit-v1;ipa=fil-g2p+loan

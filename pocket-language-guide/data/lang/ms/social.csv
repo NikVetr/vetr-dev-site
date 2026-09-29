@@ -129,3 +129,20 @@ kind-words.i-like-it-very-much,Saya sangat suka ini.,,sˈajə sˈaŋat sˈukə �
 kind-words.i-had-a-wonderful-time,Saya sangat menikmati masa saya di sini.,,sˈajə sˈaŋat mənikmˈati mˈasə sˈajə di sˈini,,2,"Kamus Dewan (4th ed.), Dewan Bahasa dan Pustaka;ms-kind-words-v1;ipa=espeak"
 kind-words.thank-you-for-everything,Terima kasih atas semuanya.,,təɾrˈimə kˈaseh ˈatas səmuˈəɲə,,2,"Kamus Dewan (4th ed.), Dewan Bahasa dan Pustaka;ms-kind-words-v1;ipa=espeak"
 kind-words.thank-you-for-your-hospitality,Terima kasih atas keramahan anda.,,təɾrˈimə kˈaseh ˈatas kəramˈahan ˈanda,,2,"Kamus Dewan (4th ed.), Dewan Bahasa dan Pustaka;ms-kind-words-v1;ipa=espeak"
+board-answers.my-name-is-blank,Nama saya {},,nˈamə sˈajə {},my name [is] {},2,ms-agent-v1;in-pack-neighbour=introductions.my-name-is;answers-audit-v1;ipa=espeak
+board-answers.i-would-rather-not-say,"Maaf, saya kurang selesa untuk memberitahu",,"mˈaaf, sˈajə kˈuraŋ səlˈɛsə ˈuntoʔ məmbˌəritˈahu","sorry, I am not comfortable telling",2,ms-agent-v1;src=DBP selesa;answers-audit-v1;ipa=espeak
+board-answers.what-happened,Apa yang berlaku?,,ˈapə jaŋ bərlˈaku,what has happened?,2,ms-agent-v1;src=DBP berlaku;answers-audit-v1;ipa=espeak
+board-answers.understood,"Baik, saya faham",,"bˈaɪʔ, sˈajə fˈaham","all right, I understand",2,ms-agent-v1;src=DBP faham;in-pack-neighbour=quick-responses.okay-fine;answers-audit-v1;ipa=espeak
+board-answers.i-will-check,Saya semak dulu,,sˈajə sˈɛmaʔ dˈulu,I will check first,2,ms-agent-v1;src=DBP semak (3);answers-audit-v1;ipa=espeak
+board-answers.we-have-it,Ada,,ˈadə,[it] is there: the question's own Ada echoed,2,ms-agent-v1;in-pack-neighbour=utility-templates.do-you-have;answers-audit-v1;ipa=espeak
+board-answers.we-are-full,Sudah penuh,,sˈudah pˈənoh,already full,2,ms-agent-v1;src=DBP penuh (1);answers-audit-v1;ipa=espeak
+board-answers.it-is-free,Percuma,,pəɾrtʃˈumə,,2,ms-agent-v1;in-pack-neighbour=toilets.is-it-free;answers-audit-v1;ipa=espeak
+board-answers.it-does-not-matter,Mana-mana pun boleh,,mˈanəmanə pˈun bˈoleh,either one is fine,2,ms-agent-v1;src=DBP mana-mana;in-pack-neighbour=quick-responses.okay-can;answers-audit-v1;ipa=espeak
+board-answers.only-for-customers,Untuk pelanggan saja,,ˈuntoʔ pəlˈaŋɡan sˈadʒə,for customers only,2,ms-agent-v1;src=DBP pelanggan;in-pack-neighbour=toilets.is-it-only-for-customers;answers-audit-v1;ipa=espeak
+board-answers.where-to,Mahu ke mana?,,mˈahu kə mˈanə,wanting [to go] where?,2,ms-agent-v1;in-pack-neighbour=hitchhiking.where-are-you-going;answers-audit-v1;ipa=espeak
+board-answers.at-the-next-stop,Di perhentian seterusnya,,di pəɾrhəntˈian sətərˈosɲə,at the next stop,2,ms-agent-v1;src=DBP perhentian;src=DBP seterusnya;answers-audit-v1;ipa=espeak
+board-answers.pay-on-board,Bayar selepas naik,,bˈajar səlˈəpas nˈaɪʔ,pay after boarding,2,ms-agent-v1;in-pack-neighbour=transit-rides.where-do-i-pay-the-fare;answers-audit-v1;ipa=espeak
+board-answers.see-a-doctor,Lebih baik berjumpa doktor,,lˈəbeh bˈaɪʔ bərdʒˈumpə dˈoktər,it is better to see a doctor,2,ms-agent-v1;in-pack-neighbour=emergency-medical.i-need-a-doctor;answers-audit-v1;ipa=espeak
+board-answers.prescription-only,Perlu preskripsi doktor,,pˈəɾrlu prəskrˈipsi dˈoktər,a doctor's prescription is needed,2,ms-agent-v1;in-pack-neighbour=pharmacy-symptoms.do-i-need-a-prescription;answers-audit-v1;ipa=espeak
+board-answers.before-food,Sebelum makan,,səbˈəlom mˈakan,before eating,2,ms-agent-v1;src=mmgazette.com Waktu Terbaik Pengambilan Ubat-ubatan (Pegawai Farmasi);in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=espeak
+board-answers.after-food,Selepas makan,,səlˈəpas mˈakan,"after eating: selepas as Malaysian labels write it, where the pack's question has sesudah",2,ms-agent-v1;src=mmgazette.com Waktu Terbaik Pengambilan Ubat-ubatan (Pegawai Farmasi);in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=espeak

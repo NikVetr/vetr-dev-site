@@ -129,3 +129,20 @@ kind-words.i-like-it-very-much,Saya sangat suka ini.,,sˈaja sˈaŋat sˈuka ˈi
 kind-words.i-had-a-wonderful-time,Saya sangat menikmati waktu saya di sini.,,sˈaja sˈaŋat mənikmˈati wˈaktu sˈaja di sˈini,,2,"Kamus Besar Bahasa Indonesia (KBBI), Badan Pengembangan dan Pembinaan Bahasa;id-kind-words-v1;ipa=espeak"
 kind-words.thank-you-for-everything,Terima kasih atas semuanya.,,tərˈima kˈasih ˈatas səmuˈaɲa,,2,"Kamus Besar Bahasa Indonesia (KBBI), Badan Pengembangan dan Pembinaan Bahasa;id-kind-words-v1;ipa=espeak"
 kind-words.thank-you-for-your-hospitality,Terima kasih atas keramahan Anda.,,tərˈima kˈasih ˈatas kəramˈahan ˈanda,,2,"Kamus Besar Bahasa Indonesia (KBBI), Badan Pengembangan dan Pembinaan Bahasa;id-kind-words-v1;ipa=espeak"
+board-answers.my-name-is-blank,Nama saya {},,nˈama sˈaja {},my name [is] {},2,id-agent-v1;in-pack-neighbour=introductions.my-name-is;answers-audit-v1;ipa=espeak
+board-answers.i-would-rather-not-say,"Maaf, saya tidak ingin menyebutkannya",,"mˈaaf, sˈaja tˈidak ˈiŋin məɲˌɛbutkˈanɲa","sorry, I do not wish to mention it",2,id-agent-v1;src=KBBI menyebutkan;answers-audit-v1;ipa=espeak
+board-answers.what-happened,Ada apa?,,ˈada ˈapa,what is there? -- what is the matter,2,id-agent-v1;src=KBBI ada + apa;answers-audit-v1;ipa=espeak
+board-answers.understood,"Baik, saya mengerti",,"bˈaɪk, sˈaja məŋˈɛrti","all right, I understand",2,id-agent-v1;in-pack-neighbour=quick-responses.okay-fine;in-pack-neighbour=communication.i-do-not-understand;answers-audit-v1;ipa=espeak
+board-answers.i-will-check,Saya cek dulu,,sˈaja tʃˈɛk dˈulu,I will check first,2,id-agent-v1;src=KBBI cek (3);in-pack-neighbour=massage-spa.reply-ask-supervisor;answers-audit-v1;ipa=espeak
+board-answers.we-have-it,Ada,,ˈada,[it] is there: the question's own Ada echoed,2,id-agent-v1;in-pack-neighbour=utility-templates.do-you-have;answers-audit-v1;ipa=espeak
+board-answers.we-are-full,Sudah penuh,,sˈudah pˈɛnuh,already full,2,id-agent-v1;src=KBBI penuh (1);answers-audit-v1;ipa=espeak
+board-answers.it-is-free,Gratis,,ɡrˈatis,,2,id-agent-v1;in-pack-neighbour=toilets.is-it-free;answers-audit-v1;ipa=espeak
+board-answers.it-does-not-matter,Sama saja,,sˈama sˈadʒa,it is all the same,2,id-agent-v1;src=KBBI sama (1);answers-audit-v1;ipa=espeak
+board-answers.only-for-customers,Hanya untuk pembeli,,hˈaɲa ˌuntuk pəmbˈɛli,only for buyers,2,id-agent-v1;in-pack-neighbour=toilets.is-it-only-for-customers;answers-audit-v1;ipa=espeak
+board-answers.where-to,Mau ke mana?,,mˈaʊ kə mˈana,wanting [to go] where?,2,id-agent-v1;in-pack-neighbour=hitchhiking.where-are-you-going;answers-audit-v1;ipa=espeak
+board-answers.at-the-next-stop,Di pemberhentian berikutnya,,di pəmbˌɛrhəntˈian bərikˈutɲa,at the next stop,2,id-agent-v1;in-pack-neighbour=transit-rides.what-is-the-next-stop;answers-audit-v1;ipa=espeak
+board-answers.pay-on-board,Bayarnya setelah naik,,bajˈarɲa sətˈɛlah nˈaɪk,the paying [is] after boarding,2,id-agent-v1;src=KBBI naik (5);in-pack-neighbour=transit-rides.where-do-i-pay-the-fare;answers-audit-v1;ipa=espeak
+board-answers.see-a-doctor,Sebaiknya diperiksakan ke dokter,,səbˈaɪkɲa dˌipəriksˈakan kə dˈoktər,it had better be examined by a doctor,2,id-agent-v1;src=KBBI memeriksakan (2);in-pack-neighbour=board-answers.stay-here;answers-audit-v1;ipa=espeak
+board-answers.prescription-only,Harus pakai resep dokter,,hˈarus pˈakaɪ rˈɛsəp dˈoktər,a doctor's prescription is required,2,id-agent-v1;src=kemkes.go.id Yuk Kenali Logo pada Obat;in-pack-neighbour=pharmacy-symptoms.do-i-need-a-prescription;answers-audit-v1;ipa=espeak
+board-answers.before-food,Sebelum makan,,səbˈɛlum mˈakan,before eating,2,id-agent-v1;src=kemkes.go.id Mengapa Ada Obat yang Diminum Sebelum Saat dan Sesudah Makan;in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=espeak
+board-answers.after-food,Sesudah makan,,səsˈudah mˈakan,after eating,2,id-agent-v1;src=kemkes.go.id Mengapa Ada Obat yang Diminum Sebelum Saat dan Sesudah Makan;in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=espeak

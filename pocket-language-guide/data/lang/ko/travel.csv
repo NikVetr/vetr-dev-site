@@ -132,3 +132,4 @@ hitchhiking.i-only-need-to-go-to-the-next-town,다음 마을까지만 가면 돼
 hitchhiking.is-there-room-for-two,두 명 탈 수 있어요?,,du myeong tal su isseoyo?,tu mjʌŋ tʰal su is͈ʌjo,,2,ko-agent-v1;ipa=rr
 hitchhiking.i-can-pay-for-fuel,기름값은 낼 수 있어요,,gireumgapsseun nael su isseoyo,kiɾɯmɡaps͈ɯn nɛl su is͈ʌjo,"기름, the colloquial word Korean drivers use for fuel",2,ko-agent-v1;ipa=rr
 hitchhiking.thank-you-for-the-ride,태워 주셔서 감사합니다,,taewo jusyeoseo gamsahamnida,tʰɛwʌ tɕusjʌsʌ kamsahamnida,"감사합니다 matches this pack's own social-basics.thank-you base row, which is 합쇼체 where the rest of this pack is 해요체",2,ko-agent-v1;ipa=rr
+taxi.please-turn-around,유턴해 주세요,,yuteonhae juseyo,jutʰʌnhɛ tɕusejo,please make a U-turn,2,ko-agent-v1;src=NIKL-StdKor 유턴;in-pack-neighbour=taxi.please-stop-here;answers-audit-v1;ipa=rr

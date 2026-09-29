@@ -129,3 +129,20 @@ kind-words.i-like-it-very-much,Gosto muito disto.,,ɡˈostʊ mwˈiŋtʊ dʒˈist
 kind-words.i-had-a-wonderful-time,Passei momentos maravilhosos.,,pasˈeɪ mˌomˈeɪŋtʊz mˌaɾaviljˈɔzʊs,,2,pt-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-everything,Obrigado por tudo.,,ˌobriɡˈadʊ por tˈudʊ,masculine default; Ciberduvidas: obrigado/obrigada agrees with the speaker's own sex,2,pt-kind-words-v1;ipa=espeak
 kind-words.thank-you-for-your-hospitality,Obrigado pela hospitalidade.,,ˌobriɡˈadʊ pˈelæ ˌospitˌalidˈadʒy,masculine default; Ciberduvidas: obrigado/obrigada agrees with the speaker's own sex,2,pt-kind-words-v1;ipa=espeak
+board-answers.my-name-is-blank,Chamo-me {},Meu nome é {},ʃˈɐ̃mʊmy {},,2,pt-agent-v1;src=Priberam;reply-neutrality-rule;matches introductions.my-name-is;answers-audit-v1;ipa=espeak
+board-answers.i-would-rather-not-say,Prefiro não dizer,,prˌefˈiɾʊ nˌɐ̃ʊ̃ dʒizˈer,,2,pt-agent-v1;src=Priberam;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.what-happened,O que aconteceu?,,ʊ ky ˌakoŋtesˈeʊ,,2,pt-agent-v1;src=Priberam;answers-audit-v1;ipa=espeak
+board-answers.understood,Entendido,,ˌeɪŋteɪŋdʒˈidʊ,,2,pt-agent-v1;src=Priberam;reply-neutrality-rule;rule=participle-as-interjection-invariant;answers-audit-v1;ipa=espeak
+board-answers.i-will-check,Vou verificar,,vow vˌeɾifikˈar,,2,pt-agent-v1;src=Priberam;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.we-have-it,"Temos, sim",,"tˌemʊs, sˈiŋ",,2,pt-agent-v1;rule=verb-echo-reply;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.we-are-full,Está cheio,Está lotado,estˌa ʃˈeɪʊ,,2,pt-agent-v1;src=Priberam;answers-audit-v1;ipa=espeak
+board-answers.it-is-free,É grátis,,ɛ ɡrˈatʃis,,2,pt-agent-v1;src=Priberam;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.it-does-not-matter,Tanto faz,,tˈɐ̃ŋtʊ fˈas,,2,pt-agent-v1;src=Priberam;answers-audit-v1;ipa=espeak
+board-answers.only-for-customers,É só para clientes,,ɛ sˈɔ pˌaɾæ klˌiˈeɪŋtʃys,,2,pt-agent-v1;src=Priberam;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.where-to,Para onde?,,pˌaɾæ ˌoŋdʒy,,2,pt-agent-v1;reply-neutrality-rule;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.at-the-next-stop,Na próxima paragem,Na próxima parada,na prˈɔsimæ pˌaɾˈaʒeɪŋ,,2,pt-agent-v1;src=Priberam;answers-audit-v1;ipa=espeak
+board-answers.pay-on-board,Paga-se a bordo,,pˈaɡæsj a bˈɔɾədʊ,,2,pt-agent-v1;src=Michaelis;src=carris.pt;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.see-a-doctor,É melhor ir ao médico,,ɛ meljˈɔɾ ˈiɾ aʊ mˈɛdʒikʊ,,2,pt-agent-v1;src=Priberam;reply-neutrality-rule;answers-audit-v1;ipa=espeak
+board-answers.prescription-only,Só com receita médica,,sˈɔ koŋ xˌesˈeɪtæ mˈɛdʒikæ,,2,pt-agent-v1;src=Priberam;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.before-food,Antes das refeições,,ˈɐ̃ŋtʃyz daz xˌefeɪsˈõjs,,2,pt-agent-v1;src=Priberam;in-pack-neighbour;answers-audit-v1;ipa=espeak
+board-answers.after-food,Depois das refeições,,depˈoɪz daz xˌefeɪsˈõjs,,2,pt-agent-v1;src=Priberam;in-pack-neighbour;answers-audit-v1;ipa=espeak

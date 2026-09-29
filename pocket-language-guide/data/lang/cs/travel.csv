@@ -132,3 +132,4 @@ hitchhiking.i-only-need-to-go-to-the-next-town,Potřebuji jet jen do nejbližš�
 hitchhiking.is-there-room-for-two,Je tu místo pro dva?,,je tˈu mˈiːsto prˈodva,,2,cs-agent-v1;ipa=espeak
 hitchhiking.i-can-pay-for-fuel,Mohu zaplatit za benzín,,mˈohu zˈaplacid zˈabenziːn,"benzín, the word drivers use",2,cs-agent-v1;ipa=espeak
 hitchhiking.thank-you-for-the-ride,Děkuji za svezení,,ɟˈekuji zˈasvezˌeɲiː,,2,cs-agent-v1;ipa=espeak
+taxi.please-turn-around,"Otočte, prosím",,"ˈototʃte, prˈosiːm",,2,cs-agent-v1;src=SSČ otočit 3 (otočil s vozem a jede zpět);src=zákon 361/2000 Sb. § 24 (řidič nesmí otáčet);in-pack-frame;answers-audit-v1;ipa=espeak

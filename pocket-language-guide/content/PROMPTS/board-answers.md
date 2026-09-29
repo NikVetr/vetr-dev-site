@@ -116,3 +116,73 @@ npx tsc -p jsconfig.json
 
 The index is the scoreboard: a language that gains all twenty-two moves from serving
 no board to serving seven.
+
+## Eighteen more, from the answers audit
+
+An audit of every reply set found answers offered to questions they do not answer --
+*yes* and *no* to "What is your name?", *I do not know* to "Water, please" -- and
+questions a listener could not answer at all. Most of the fix reuses concepts the
+corpus has. These eighteen are what nothing said. Everything above binds them: they
+are the other person's words, in their ordinary spoken register, gender-neutral about
+the traveller *and* about the speaker.
+
+Each concept's `notes` in `data/concepts/social.csv` (and, for the taxi row,
+`data/concepts/travel.csv`) says what it means, when it is said and which forms to
+avoid, often with the word a counter or a label actually uses in a few languages.
+**Read the note before writing the row** -- several of these are one everyday word in
+most languages (満席です, 免费, 饭后), and the English is only a gloss for it.
+
+| concept_id | English | file |
+|---|---|---|
+| `board-answers.my-name-is-blank` | My name is {} | social.csv |
+| `board-answers.i-would-rather-not-say` | I would rather not say | social.csv |
+| `board-answers.what-happened` | What happened? | social.csv |
+| `board-answers.understood` | Understood | social.csv |
+| `board-answers.i-will-check` | I will check | social.csv |
+| `board-answers.we-have-it` | We have it | social.csv |
+| `board-answers.we-are-full` | We are full | social.csv |
+| `board-answers.it-is-free` | It is free | social.csv |
+| `board-answers.it-does-not-matter` | It does not matter | social.csv |
+| `board-answers.only-for-customers` | It is only for customers | social.csv |
+| `board-answers.where-to` | Where to? | social.csv |
+| `board-answers.at-the-next-stop` | At the next stop | social.csv |
+| `board-answers.pay-on-board` | You pay on board | social.csv |
+| `board-answers.see-a-doctor` | It is better to see a doctor | social.csv |
+| `board-answers.prescription-only` | Only with a prescription | social.csv |
+| `board-answers.before-food` | Before food | social.csv |
+| `board-answers.after-food` | After food | social.csv |
+| `taxi.please-turn-around` | Please turn around | travel.csv |
+
+Particular to these:
+
+- **`my-name-is-blank` has a blank.** `{}` is where the listener's own name goes; the
+  screen draws it as a space to fill, and they say it or write it. Keep exactly one
+  `{}`, where your language puts a name, and in the romanisation too. It is the
+  listener introducing themselves, so no gendered first-person pronoun or polite
+  particle: Thai `ชื่อ {}`, not ผม/ดิฉัน or ครับ/ค่ะ.
+- **`understood`, `we-have-it`, `i-will-check`** are first person or first plural:
+  choose the form that does not show the speaker's gender (a nominal, an impersonal,
+  a present). Hindi `समझ गया/गई` is the trap the note names.
+- **`taxi.please-turn-around`** is the traveller's own request to a driver, like
+  `taxi.please-stop-here` beside it -- the one row here in the traveller's voice. Use
+  the everyday U-turn word where there is one.
+- **`before-food` / `after-food`** are the words on a medicine label, verbless.
+
+**Two existing rows address a man by default** in some languages and are offered as a
+listener's answers now: `introductions.where-are-you-from` (Hebrew, Arabic) and
+`introductions.how-are-you` (Hindi, Urdu). If your group has any language where either
+row carries the addressee's gender, reword that row in place so it does not -- Polish
+"Z jakiego kraju?" and Hebrew "מה המצב?" show the kind of form -- keeping its meaning
+and register, and say what you changed and why in your notes. Touch no other existing
+row.
+
+**Mechanics.** Append each language's seventeen `board-answers.*` rows to
+`data/lang/<code>/social.csv` and its taxi row to `data/lang/<code>/travel.csv`, as
+"Where the rows go" above says: the file's exact header, its romanisation column in its
+own system, `ipa` blank, `confidence` 2, CRLF. Provenance as the pack's neighbouring rows
+do it, ending in this batch's tag `answers-audit-v1`. A row you cannot source is left
+out and reported, never guessed. Do not run the builders; run
+`python3 scripts/validate_data.py` after each language and fix what it reports about
+your rows. Write each language's rows as you finish it, and add its notes -- choices a
+native reviewer might question, forms avoided and why, anything left out -- to
+`tmp/agent-notes/answers-concepts-<group>.md` then, not at the end.

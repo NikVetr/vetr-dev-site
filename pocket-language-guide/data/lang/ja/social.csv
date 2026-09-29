@@ -129,3 +129,20 @@ kind-words.i-like-it-very-much,とても気に入りました,,totemo ki ni irim
 kind-words.i-had-a-wonderful-time,素晴らしい時間を過ごせました,,subarashii jikan o sugosemashita,sɯbaɾaɕii dʑikaɴ o sɯɡosemaɕita,[I] was able to spend a wonderful time,2,ja-agent-v1;ipa=hepburn
 kind-words.thank-you-for-everything,いろいろとありがとうございました,,iroiro to arigatō gozaimashita,iɾoiɾo to aɾiɡatoː ɡozaimaɕita,thank you for various [things] — the idiomatic 'thank you for everything',2,ja-agent-v1;ipa=hepburn
 kind-words.thank-you-for-your-hospitality,おもてなしいただきありがとうございました,,omotenashi itadaki arigatō gozaimashita,omotenaɕi itadaki aɾiɡatoː ɡozaimaɕita,thank you for the hospitality [you gave me],2,ja-agent-v1;ipa=hepburn
+board-answers.my-name-is-blank,{}です,,{} desu,{} desɯ,"[it is] {}: the ordinary reply, dropping introductions.my-name-is's 名前は",2,ja-agent-v1;in-pack-neighbour=introductions.my-name-is;answers-audit-v1;ipa=hepburn
+board-answers.i-would-rather-not-say,言わないでおきます,,iwanaide okimasu,iwanaide okimasɯ,I will leave it unsaid,2,ja-agent-v1;src=デジタル大辞泉 置く (言わずに置く);answers-audit-v1;ipa=hepburn
+board-answers.what-happened,どうしましたか？,,dō shimashita ka?,doː ɕimaɕita ka,what is the matter,2,ja-agent-v1;src=デジタル大辞泉 どうした;answers-audit-v1;ipa=hepburn
+board-answers.understood,承知しました,,shōchi shimashita,ɕoːtɕi ɕimaɕita,"noted, understood",2,ja-agent-v1;src=デジタル大辞泉 承知;answers-audit-v1;ipa=hepburn
+board-answers.i-will-check,確認します,,kakunin shimasu,kakɯɲiɴ ɕimasɯ,I will confirm [it],2,ja-agent-v1;in-pack-neighbour=massage-spa.reply-ask-supervisor;answers-audit-v1;ipa=hepburn
+board-answers.we-have-it,あります,,arimasu,aɾimasɯ,[it] exists: the question's own verb echoed,2,ja-agent-v1;in-pack-neighbour=shopping.do-you-have-this-in-stock;answers-audit-v1;ipa=hepburn
+board-answers.we-are-full,いっぱいです,,ippai desu,ippai desɯ,"[it is] full: venue-neutral, where 満席 is seats and 満室 rooms",2,ja-agent-v1;src=デジタル大辞泉 一杯;answers-audit-v1;ipa=hepburn
+board-answers.it-is-free,無料です,,muryō desu,mɯɾjoː desɯ,,2,ja-agent-v1;in-pack-neighbour=toilets.is-it-free;answers-audit-v1;ipa=hepburn
+board-answers.it-does-not-matter,どちらでもいいです,,dochira demo ii desu,dotɕiɾa demo iː desɯ,either one is fine,2,ja-agent-v1;src=デジタル大辞泉 どちら;in-pack-neighbour=quick-responses.okay-can;answers-audit-v1;ipa=hepburn
+board-answers.only-for-customers,お客様専用です,,okyakusama sen'yō desu,okjakɯsama seɴjoː desɯ,[it is] for customers' use only,2,ja-agent-v1;in-pack-neighbour=toilets.is-it-only-for-customers;answers-audit-v1;ipa=hepburn
+board-answers.where-to,どちらまでですか？,,dochira made desu ka?,dotɕiɾa made desɯ ka,as far as where?,2,ja-agent-v1;src=デジタル大辞泉 どちら;answers-audit-v1;ipa=hepburn
+board-answers.at-the-next-stop,次です,,tsugi desu,tsɯɡi desɯ,[it is] the next one: neutral between a station (駅) and a bus stop (停留所),2,ja-agent-v1;in-pack-neighbour=transit-rides.what-is-the-next-stop;answers-audit-v1;ipa=hepburn
+board-answers.pay-on-board,車内で払います,,shanai de haraimasu,ɕanai de haɾaimasɯ,[it is] paid inside the vehicle,2,ja-agent-v1;in-pack-neighbour=transit-rides.where-do-i-pay-the-fare;in-pack-neighbour=toilets.is-there-a-toilet-on-board;answers-audit-v1;ipa=hepburn
+board-answers.see-a-doctor,医者に診てもらったほうがいいです,,isha ni mite moratta hō ga ii desu,iɕa ɲi mite moɾatta hoː ɡa iː desɯ,it would be better to have a doctor examine [it],2,ja-agent-v1;src=デジタル大辞泉 診る;in-pack-neighbour=emergency-medical.i-need-a-doctor;answers-audit-v1;ipa=hepburn
+board-answers.prescription-only,処方箋が必要です,,shohōsen ga hitsuyō desu,ɕohoːseɴ ɡa çitsɯjoː desɯ,a prescription is needed,2,ja-agent-v1;in-pack-neighbour=pharmacy-symptoms.do-i-need-a-prescription;answers-audit-v1;ipa=hepburn
+board-answers.before-food,食前です,,shokuzen desu,ɕokɯzeɴ desɯ,"before meals: the label word, with です for speech",2,ja-agent-v1;src=秋田県薬剤師会 薬の服用時間;in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=hepburn
+board-answers.after-food,食後です,,shokugo desu,ɕokɯɡo desɯ,"after meals: the label word, with です for speech",2,ja-agent-v1;src=秋田県薬剤師会 薬の服用時間;in-pack-neighbour=pharmacy-symptoms.before-or-after-food;answers-audit-v1;ipa=hepburn

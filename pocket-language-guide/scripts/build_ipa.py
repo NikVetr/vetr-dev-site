@@ -3043,8 +3043,11 @@ LOANWORDS = {
     # Letter names (`ATM`, `WC`) follow DepEd's own Alpabetong Filipino names for
     # the Latin letters, which is where a Filipino schoolchild is taught to read
     # an acronym aloud -- `ATM` is `ey-ti-em`, not `a-t-m`.
+    # `U-turn` is the driver's own word, on the MMDA's "U-TURN SLOT" signs as in speech,
+    # said "yu-tern" with the tap `card` has.
     "fil": {"Wi-Fi": "wajfaj", "eSIM": "isim", "SIM": "sim", "PIN": "pin",
-            "QR": "kjuar", "ATM": "eitiɛm", "WC": "dobolyusi", "CR": "siar", "card": "kaɾd"},
+            "QR": "kjuar", "ATM": "eitiɛm", "WC": "dobolyusi", "CR": "siar", "card": "kaɾd",
+            "U-turn": "jutɛɾn"},
     # Hausa keeps these in Latin letters exactly as Hebrew's and Filipino's press
     # and routers do, for the same reason: a Nigerian speaker says them with
     # English letter-names or the English word, not by reading `ha_to_ipa`'s
@@ -3223,8 +3226,10 @@ def latin_survives(text, source, loans=()):
     pattern = loan_pattern(loans)
     if pattern:
         text = pattern.sub(" ", text)
+    # As a word of the source, not a string inside one: the `U` of `Uターン` is `yū`
+    # in the Hepburn column, and read as a substring it "survived" in `kudasai`.
     lower = source.lower()
-    return any(run.lower() in lower
+    return any(re.search(rf"(?<![^\W\d_]){re.escape(run.lower())}(?![^\W\d_])", lower)
                for run in LATIN_RUN.findall(LANGUAGE_SLOT.sub("", text)))
 
 
