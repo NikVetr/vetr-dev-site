@@ -42,6 +42,7 @@ const MAX_DEPTH = 8;
  * @property {Record<string,string>} [speaker]  how they speak
  * @property {Record<string,unknown>} [edits]  per-pair sheet edits, keyed by pair
  * @property {Record<string,string>} [about]  details a button says, such as their name
+ * @property {{items: Record<string, unknown>}} [usage]  how often they pressed each button
  */
 
 /**
@@ -51,7 +52,8 @@ const MAX_DEPTH = 8;
  * banner is dismissed are this device's preferences, not the reader's work, and
  * carrying them to another phone would be presumptuous rather than helpful.
  * @param {{boards?:BoardPersonal, speaker?:Record<string,string>,
- *          edits?:Record<string,unknown>, about?:Record<string,string>}} parts
+ *          edits?:Record<string,unknown>, about?:Record<string,string>,
+ *          usage?:{items: Record<string, unknown>}}} parts
  * @returns {PersonalPackage}
  */
 export function buildPackage(parts) {
@@ -61,6 +63,9 @@ export function buildPackage(parts) {
   if (parts.speaker && Object.keys(parts.speaker).length) out.speaker = parts.speaker;
   if (parts.edits && Object.keys(parts.edits).length) out.edits = parts.edits;
   if (parts.about && Object.keys(parts.about).length) out.about = parts.about;
+  // The counts behind Most used travel with the rest: on a new phone it should know
+  // what the reader reaches for, not start again.
+  if (parts.usage && Object.keys(parts.usage.items ?? {}).length) out.usage = parts.usage;
   return out;
 }
 
@@ -266,6 +271,7 @@ export function readPackage(text, known = {}) {
       if (typeof value !== 'string') problems.push(`about ${fact}: not text`);
     }
   }
+  if (raw.usage !== undefined && !(plain(raw.usage) && plain(raw.usage.items))) problems.push('usage: not a set of counts');
   if (raw.edits !== undefined && !plain(raw.edits)) problems.push('edits: not a set of pairs');
   else if (raw.edits) {
     for (const [pair, value] of Object.entries(raw.edits)) {

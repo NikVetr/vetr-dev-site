@@ -55,6 +55,12 @@
     <!-- Add: the reader's own buttons and trees. Its own control, so the header's bars
          can go straight to Settings rather than to a menu of two. Settings is not here
          as well: one door, in the header, where every page keeps it. -->
+    <!-- Speak on tap: a button says its sentence where it is, for a listener who cannot
+         look -- a driver, given one direction a tap. The waves are drawn only while it
+         is on, as well as the fill. -->
+    <button type="button" id="board-tap-bar" class="board-turn-bar board-tap-bar" hidden aria-pressed="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4Z" fill="currentColor"/><path class="tap-waves" d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>
+    </button>
     <button type="button" id="board-add-bar" class="board-turn-bar board-add-bar" hidden>
       <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
     </button>

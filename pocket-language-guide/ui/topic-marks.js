@@ -31,6 +31,11 @@ const FORK = stroke('M17 22v50M31.5 22v50M46 22v50', 8)
 
 /** @type {Record<string, {back?: string, front: string, cut?: string}>} */
 export const TOPIC_MARKS = {
+  // Most used: two stars, the nearer one cutting into the smaller one behind it.
+  'most-used': {
+    back: soft('M64 24L75.2 52.6L105.8 54.4L82.1 73.9L89.9 103.6L64 87L38.1 103.6L45.9 73.9L22.2 54.4L52.8 52.6Z', 8),
+    front: soft('M150 26L171.7 82.1L231.8 85.4L185.2 123.4L200.5 181.6L150 149L99.5 181.6L114.8 123.4L68.2 85.4L128.3 82.1Z'),
+  },
   // A siren: the dome, its base, and the light it throws.
   siren: {
     back: fill('M76 150V116a52 52 0 0 1 104 0v34Z')

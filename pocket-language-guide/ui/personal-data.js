@@ -14,6 +14,7 @@ import { read as readPersonal, replaceAll, forgetAll } from './board-store.js';
 import { allEdits, restoreEdits, forgetEdits } from './io.js';
 import { readProfile, writeProfile } from './speaker-settings.js';
 import { readAbout, writeAbout } from './about.js';
+import { readUsage, writeUsage, forgetUsage } from './usage.js';
 import { buildPackage, readPackage } from '../core/personal.js';
 
 /**
@@ -33,17 +34,18 @@ export function personalWiring({ onChanged, save, boards }) {
       speaker: readProfile(),
       edits: allEdits(),
       about: readAbout(),
+      usage: readUsage(),
     }),
     read: (/** @type {string} */ text) => readPackage(text, boards ? { boards } : {}),
     apply: async (/** @type {import('../core/personal.js').PersonalPackage} */ data) => {
-      // **Whole, or undone whole.** The four stores are written together and every
+      // **Whole, or undone whole.** The five stores are written together and every
       // write is awaited; if any is refused, what was on the device before is put
       // back -- every part, so a package that carried no speaker answers cannot
       // leave the device with the file's phrases and its own old answers half-mixed
       // -- and the refusal is what the reader is told. `onChanged` runs either way,
       // because the screen has to show whichever state actually stands.
       const before = buildPackage({
-        boards: readPersonal().data, speaker: readProfile(), edits: allEdits(), about: readAbout(),
+        boards: readPersonal().data, speaker: readProfile(), edits: allEdits(), about: readAbout(), usage: readUsage(),
       });
       try {
         await put(data, false);
@@ -57,7 +59,7 @@ export function personalWiring({ onChanged, save, boards }) {
     },
     forget: async () => {
       try {
-        await Promise.all([forgetEdits(), writeProfile({}), writeAbout({}), forgetAll()]);
+        await Promise.all([forgetEdits(), writeProfile({}), writeAbout({}), forgetAll(), forgetUsage()]);
       } finally {
         onChanged();
       }
@@ -66,11 +68,11 @@ export function personalWiring({ onChanged, save, boards }) {
 }
 
 /**
- * Write a package's parts to the four stores.
+ * Write a package's parts to the five stores.
  *
  * Loading a copy writes only the parts it carries -- a file with phrases and no
  * speaker answers leaves the device's answers alone, which is what a plain backup
- * restore wants. Putting things *back* after a failure writes all four, with an
+ * restore wants. Putting things *back* after a failure writes all five, with an
  * absent part meaning empty, because the copy taken beforehand is the whole state.
  * @param {import('../core/personal.js').PersonalPackage} pkg
  * @param {boolean} whole
@@ -85,5 +87,6 @@ async function put(pkg, whole) {
       : restoreEdits(pkg.edits ?? {}));
   }
   if (pkg.boards || whole) jobs.push(pkg.boards ? replaceAll(pkg.boards) : forgetAll());
+  if (pkg.usage || whole) jobs.push(pkg.usage ? writeUsage(/** @type {any} */ (pkg.usage)) : forgetUsage());
   await Promise.all(jobs);
 }

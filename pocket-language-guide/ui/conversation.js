@@ -24,7 +24,7 @@ import {
 import { createRespeller, nameRespeller } from '../core/respell.js';
 import { variantKey } from '../core/speaker.js';
 import {
-  validateBoard, resolvePhrase, missingPhrases, reduce, openBoard, currentNode, DIET, joinSentences,
+  validateBoard, resolvePhrase, missingPhrases, reduce, openBoard, currentNode, DIET, joinSentences, MAX_BUTTONS,
 } from '../core/conversation.js';
 import {
   renderGrid, renderMessage, renderReply, renderEntry, clearStage, fitMessage, translatorLinks,
@@ -53,6 +53,7 @@ import {
   openSpeakerSettings, readProfile, noticeFor, personalSection,
 } from './speaker-settings.js';
 import { personalWiring } from './personal-data.js';
+import { readUsage, recordUse, ranked, usageSection } from './usage.js';
 import { applyStatic, loadCatalogue, loadUiLanguage, languageName, t } from './i18n.js';
 
 const $ = (/** @type {string} */ id) => /** @type {HTMLElement} */ (document.getElementById(id));
@@ -88,6 +89,8 @@ let openedFrom = /** @type {string|null} */ (null);
 /** Where the reader's own contexts are listed, and the board id one opens as. */
 const CONTEXTS = 'contexts';
 const OWN = 'own:';
+/** The context the reader's own presses build: the buttons they use most. */
+const MOST_USED = 'most-used';
 
 /** Drop back to the list of conversations, keeping the pair. */
 function toPicker() {
@@ -396,23 +399,93 @@ function detailsFor(about, spellListener) {
 }
 
 /**
+ * The Most used section of a Converse settings dialog, wired to the display record that
+ * holds its window and scope.
+ * @param {string} listener @param {string} owner @param {(code: string) => string} nameOf
+ * @param {() => void} redraw  after a change, or a reset
+ */
+function mostUsedSection(listener, owner, nameOf, redraw) {
+  const held = readDisplay();
+  return usageSection({
+    current: { usedOver: held.usedOver, usedPooled: held.usedPooled },
+    onChange: (next) => { writeDisplay({ ...readDisplay(), ...next }); redraw(); },
+    language: nameOf(listener),
+    lang: listener,
+    label: (key, item) => item.said?.[owner] ?? Object.values(item.said ?? {})[0] ?? key,
+    onReset: redraw,
+  });
+}
+
+/**
+ * The Most used screen as a board built on the spot, from what the reader has pressed:
+ * each item the button it was last pressed on -- copied from its board with that
+ * board's answers, or one of the reader's own -- in order of use. Twice a screen's worth
+ * is copied, because the page drops what this pair cannot say and what the reader has
+ * taken off the screen before it keeps the first twelve.
+ * @param {string} listener @param {string} pair
+ * @param {import('./board-display.js').BoardDisplay} display
+ * @param {{data: import('./board-store.js').BoardPersonal}} personal
+ */
+async function mostUsedBoard(listener, pair, display, personal) {
+  const picked = ranked(readUsage(), display.usedOver, display.usedPooled ? null : listener);
+  /** @type {Map<string, any>} */ const boards = new Map();
+  /** @type {any[]} */ const buttons = [];
+  /** @type {Record<string, any>} */ const replySets = {};
+  for (const { key, item } of picked) {
+    if (buttons.length >= 2 * MAX_BUTTONS) break;
+    const { board: from, node, button: id, phrase } = item.at;
+    if (phrase) {
+      const p = personal.data.phrases[phrase];
+      if (!p || p.pair !== pair || p.screen) continue;
+      buttons.push({ ...ownButton(p), id: key, origin: item.at, mine: p.id });
+      continue;
+    }
+    // A board that has since been taken out of the app leaves its presses behind; they
+    // are passed over, and said so, rather than stopping the screen from opening.
+    if (!boards.has(from)) {
+      boards.set(from, await loadText(`data/boards/${from}.json`).then(JSON.parse, (err) => {
+        console.warn(`[plg] most used: ${from} is not a board any more:`, err.message);
+        return null;
+      }));
+    }
+    const source = boards.get(from);
+    const found = source?.nodes[node]?.buttons.find((/** @type {any} */ b) => b.id === id);
+    if (!found) continue;
+    const set = found.replySetId ? `${from}~${found.replySetId}` : null;
+    if (set) replySets[set] = source.replySets[found.replySetId];
+    buttons.push({ ...found, id: key, origin: item.at, ...(set ? { replySetId: set } : {}) });
+  }
+  return {
+    schemaVersion: 1, id: MOST_USED, titleKey: 'boards.mostUsed.title', rootNodeId: 'used',
+    nodes: { used: { buttons } }, replySets,
+  };
+}
+
+/**
  * @param {string} owner @param {string} listener
  * @param {{boards:{id:string, titleKey:string, listeners:string[], owners:string[], icon?:string, alert?:true}[]}} index
  * @param {(code: string) => string} nameOf
  */
 async function showPicker(owner, listener, index, nameOf) {
-  /** @type {Map<string,{title:string, icon?:string, alert?:true}>} */ const topics = new Map();
+  /** @type {[string, {title:string, icon?:string, alert?:true}][]} */ const served = [];
   for (const board of index.boards) {
     if (!serves(board, listener, owner)) continue;
-    topics.set(board.id, { title: t(board.titleKey), icon: board.icon, alert: board.alert });
+    served.push([board.id, { title: t(board.titleKey), icon: board.icon, alert: board.alert }]);
   }
+  // **Most used, near the top**: the buttons the reader keeps reaching for, gathered from
+  // every context, so the next time they are one tap away. After the emergency context,
+  // which the list keeps across its top; moved or taken off the list like any other.
+  // A pair with no board to press has nothing to gather either.
+  if (served.length) served.splice(served[0][1].alert ? 1 : 0, 0, [MOST_USED, { title: t('boards.mostUsed.title'), icon: 'most-used' }]);
+  const topics = new Map(served);
   $('board-title').textContent = t('board.pickTopic');
   $('board-title').title = t('board.pickTopic');
   document.title = t('board.docTitle');
   // The header's bars open the plain settings here -- the board's fuller dialog needs a
   // board -- with the way into rearranging the contexts.
   wireSiteMenu(() => openAppearance([arrangeRow(() => arrangeGrid(CONTEXTS, drawTopics)),
-    contextsSection(topics, () => drawTopics()), travelSection(() => travelChecks(listener, owner, index, nameOf))]));
+    contextsSection(topics, () => drawTopics()), mostUsedSection(listener, owner, nameOf, () => {}),
+    travelSection(() => travelChecks(listener, owner, index, nameOf))]));
   // **The context list has a parent too**, and it is the card this was opened from.
   // Without this the only way off the first screen of Converse was the browser's own
   // Back, which a reader who arrived from the app's own link does not think of as
@@ -847,7 +920,8 @@ async function main() {
     const side = piece === '\u0001' ? 'owner' : 'listener';
     const code = side === 'owner' ? owner : listener;
     pairLine.append(inlineControl(nameOf(code), t('board.switchLanguage'), (button) => {
-      const options = candidates(index, boardId, side, side === 'owner' ? listener : owner)
+      const indexed = index.boards.some((b) => b.id === boardId) ? boardId : null;
+      const options = candidates(index, indexed, side, side === 'owner' ? listener : owner)
         .filter((c) => c !== code)
         .map((c) => ({ code: c, label: nameOf(c) }))
         .sort((a, b) => a.label.localeCompare(b.label));
@@ -870,9 +944,13 @@ async function main() {
   if (boardId.startsWith(OWN) && !own?.screen) { goTo({ board: null, screen: null }); return; }
   const board = own
     ? { schemaVersion: 1, id: boardId, titleKey: '', rootNodeId: own.id, nodes: { [own.id]: { buttons: [] } } }
-    : JSON.parse(await loadText(`data/boards/${boardId}.json`));
+    : boardId === MOST_USED
+      ? await mostUsedBoard(listener, `${listener}__${owner}`, readDisplay(), readPersonal())
+      : JSON.parse(await loadText(`data/boards/${boardId}.json`));
   const title = own ? own.label : t(board.titleKey);
-  const problems = own ? [] : validateBoard(board);
+  // Built here from the reader's own presses rather than authored, like a context of
+  // their own, so there is no file to hold to the board format.
+  const problems = own || boardId === MOST_USED ? [] : validateBoard(board);
   // A malformed board is a loud failure, not a page that half works: it is authored
   // data, and the person who sees this is the one who can fix it.
   if (problems.length) throw new Error(`data/boards/${boardId}.json: ${problems.join('; ')}`);
@@ -971,7 +1049,8 @@ async function main() {
   // button is unavailable, which is true and tells the reader nothing.
   const listed = JSON.parse(await loadText('data/boards/index.json'))
     .boards.find((/** @type {any} */ b) => b.id === boardId);
-  if (!own && (!listed || !serves(listed, listener, owner))) {
+  // Most used is made of buttons this pair was pressing, from boards that serve it.
+  if (!own && boardId !== MOST_USED && (!listed || !serves(listed, listener, owner))) {
     // Naming the side that is short, rather than listing the pairs it does serve:
     // that list used to be one pair and is now most of a fifty-three-language
     // registry, which tells a reader nothing they can act on.
@@ -999,8 +1078,11 @@ async function main() {
    * not a modal — somebody who opened this to show a stranger a sentence should not
    * first have to answer a question about themselves.
    */
+  /** Whether Most used has nothing yet, for the status line. */
+  let usedEmpty = false;
   const sayStatus = () => {
     $('board-status').textContent = [
+      usedEmpty ? t('mostUsed.empty') : '',
       gaps.size ? t('board.someMissing', { count: String(gaps.size) }) : '',
       noticeFor(corpus.speakerAxes, [listener, owner], profile) ?? '',
     ].filter(Boolean).join(' ');
@@ -1065,14 +1147,18 @@ async function main() {
    */
   const withOwn = (node) => {
     const mine = placedOn(personal.data, `${boardId}/${state.path.at(-1)}`, pair);
+    // On Most used the reader's own phrases arrive as copies of the button they were
+    // pressed as, and need their words and answers like the ones placed on a screen.
+    const copied = /** @type {typeof mine} */ (node.buttons.filter((b) => b.mine)
+      .map((b) => personal.data.phrases[/** @type {string} */ (b.mine)]).filter(Boolean));
     /** @type {Record<string, {owner:string, listener:string}>} */
-    const custom = Object.fromEntries(mine.map((p) => [p.id, { owner: p.owner, listener: p.listener }]));
+    const custom = Object.fromEntries([...mine, ...copied].map((p) => [p.id, { owner: p.owner, listener: p.listener }]));
     // **A phrase of the reader's own with answers is a question** like the board's:
     // its answers become a reply set of their own, each resolved from the store as the
     // phrase itself is, and "none of these" after them -- so a stranger whose answer is
     // not there can still say so, and be offered a translator.
     ownSets = {};
-    for (const p of mine) {
+    for (const p of [...mine, ...copied]) {
       // A button taken from a board brings the answers it had there, from the corpus.
       if (p.concept) {
         if (!p.answers?.length) continue;
@@ -1097,16 +1183,21 @@ async function main() {
     const held = /** @type {import('./board-store.js').BoardPersonal} */ (personal.data);
     const at = `${boardId}/${state.path.at(-1)}`;
     const hidden = held.hidden?.[at] ?? [];
+    // In the order the reader dragged this screen into, where they have.
+    const buttons = arranged([
+      ...node.buttons.filter((b) => !hidden.includes(b.id))
+        .map((b) => (b.mine && ownSets[`own/${b.mine}`] ? { ...b, replySetId: `own/${b.mine}` } : b)),
+      // A screen of the reader's own opens like the board's submenus do; its id is
+      // the node the path moves to, and what is on it is placed under that id. A
+      // button taken from a board says its concept, as it did there.
+      ...mine.map((p) => ({ ...ownButton(p), ...(ownSets[`own/${p.id}`] ? { replySetId: `own/${p.id}` } : {}) })),
+    ], held.order?.[at]);
+    // Most used keeps a screen's worth of what this pair can say, after the reader's
+    // own arrangement and whatever they took off it.
     return {
       ...node,
-      // In the order the reader dragged this screen into, where they have.
-      buttons: arranged([
-        ...node.buttons.filter((b) => !hidden.includes(b.id)),
-        // A screen of the reader's own opens like the board's submenus do; its id is
-        // the node the path moves to, and what is on it is placed under that id. A
-        // button taken from a board says its concept, as it did there.
-        ...mine.map((p) => ({ ...ownButton(p), ...(ownSets[`own/${p.id}`] ? { replySetId: `own/${p.id}` } : {}) })),
-      ], held.order?.[at]),
+      buttons: boardId === MOST_USED
+        ? buttons.filter((b) => b.kind === 'beacon' || phraseOf(b)).slice(0, MAX_BUTTONS) : buttons,
     };
   };
 
@@ -1125,6 +1216,22 @@ async function main() {
    */
   const phraseOf = (button, incoming) => (button.phraseRef
     ? resolvePhrase(button.phraseRef, ctx, incoming) : null);
+
+  /**
+   * The lines a button carries under its own words, as the settings ask: the other
+   * side's words, then how to say the listener's sentence in the reader's letters and in
+   * IPA. `other` is the side the button is not labelled in -- the listener's on the
+   * reader's grid, the reader's on the listener's answers.
+   * @param {{text:string, lang:string, dir?:string}} other
+   * @param {{say?:string, ipa?:string}} spoken  the listener's side, whose sound it is
+   * @returns {import('./conversation-view.js').SubLine[]}
+   */
+  const linesOf = (other, spoken) => /** @type {import('./conversation-view.js').SubLine[]} */ ([
+    display.cellWords && { text: other.text, lang: other.lang, dir: other.dir, kind: 'words' },
+    display.cellSay && spoken.say && { text: spoken.say, lang: owner, kind: 'say' },
+    display.cellIpa && spoken.ipa && { text: `/${spoken.ipa}/`, lang: 'und-fonipa', dir: 'ltr', kind: 'ipa' },
+  ].filter(Boolean));
+
 
   /**
    * The phrase with the language's "excuse me" in front of it, on both sides.
@@ -1154,6 +1261,16 @@ async function main() {
   const labelOf = (button) => (button.add ? t('editor.open')
     : wording(button, ctx, personal.data.phrases) ?? button.id);
 
+  /**
+   * What the reader is told when the voice fails, in their language. An unfamiliar
+   * reason is still a failure worth reporting; a bare key is not what to report it with.
+   * @param {string} reason
+   */
+  const speechTrouble = (reason) => {
+    const said = t(`speech.${reason}`);
+    return said === `speech.${reason}` ? t('speech.synthesis-failed') : said;
+  };
+
   /** @param {any} action */
   const dispatch = (action) => {
     const next = reduce(state, action);
@@ -1163,6 +1280,62 @@ async function main() {
     speech.stop();
     state = next;
     paint();
+  };
+
+  /**
+   * What a press said, for the Most used screen: the concept (with the detail it fills),
+   * the reader's own phrase, the diet line, or the beacon.
+   * @param {import('../core/conversation.js').BoardButton} button
+   */
+  const usageKey = (button) => {
+    if (button.kind === 'beacon') return `beacon:${button.beacon}`;
+    const ref = button.phraseRef;
+    if (!ref) return null;
+    if (ref.kind === 'corpus') return `c:${ref.id}${'fill' in ref && ref.fill ? `:${ref.fill}` : ''}`;
+    return ref.kind === 'custom' ? `own:${ref.id}` : ref.kind;
+  };
+  /** Count a press, against the button it was made on -- or, on Most used, the one copied.
+   * @param {import('../core/conversation.js').BoardButton} button */
+  const countPress = (button) => {
+    const key = usageKey(button);
+    if (!key) return;
+    const at = button.origin ?? {
+      board: boardId, node: /** @type {string} */ (state.path.at(-1)), button: button.id,
+      ...(personal.data.phrases[button.id] ? { phrase: button.id } : {}),
+    };
+    recordUse(key, at, listener, { [owner]: labelOf(button) })
+      .catch((err) => console.warn('[plg] a press was not counted:', err.message));
+  };
+
+  /**
+   * Speak on tap: the button says its sentence where it is and the grid stays, for a
+   * listener who cannot look at the screen -- a driver given one direction a tap. The
+   * button shows it is speaking, with a ring and a speaker, until the sentence ends;
+   * the next tap cuts in rather than waiting. A question then opens its answers, where
+   * the reader asked for that.
+   * @param {import('../core/conversation.js').BoardButton} button
+   */
+  const sayOnTap = (button) => {
+    const phrase = phraseOf(button);
+    if (!phrase) return;
+    const shown = display.polite && boardId !== 'emergency' && !phrase.custom ? politely(phrase) : phrase;
+    const answers = Boolean(button.replySetId && display.tapAnswers && state.replies);
+    if (answers) {
+      openedFrom = button.id;
+      dispatch({ type: 'open', buttonId: button.id, kind: button.kind, nodeId: button.nodeId });
+      dispatch({ type: 'reply' });
+    } else {
+      speech.stop();
+    }
+    const grid = $('board-grid');
+    for (const lit of grid.querySelectorAll('.board-cell-speaking')) lit.classList.remove('board-cell-speaking');
+    const cell = answers ? null : grid.querySelector(`[data-button="${CSS.escape(button.id)}"]`);
+    cell?.classList.add('board-cell-speaking');
+    const done = () => cell?.classList.remove('board-cell-speaking');
+    speech.speakPhrase(shown, { rate: display.rate, voiceId: chosenVoice || undefined }).then(done, (err) => {
+      done();
+      $('board-status').textContent = speechTrouble(err?.reason ?? 'synthesis-failed');
+    });
   };
 
   /**
@@ -1185,6 +1358,7 @@ async function main() {
     // it was when the beacon stops, which is what someone who has just been
     // found needs.
     if (button.kind === 'beacon') {
+      countPress(button);
       speech.stop();
       // **The word on it is the stranger's, not the reader's.** A beacon exists
       // to be read by whoever is walking past, so the one thing on this screen
@@ -1212,6 +1386,8 @@ async function main() {
       keepAwake(true);
       return;
     }
+    if (button.kind !== 'submenu') countPress(button);
+    if (button.kind !== 'submenu' && display.tapSpeaks && canSpeak) { sayOnTap(button); return; }
     openedFrom = button.id;
     dispatch({
       type: 'open', buttonId: button.id, kind: button.kind, nodeId: button.nodeId,
@@ -1223,9 +1399,12 @@ async function main() {
     const shown = withOwn(nodeHere());
     // **An empty screen offers its first button** -- a context the reader has just
     // made, or one whose buttons are all switched off -- as the dashed plus the list of
-    // contexts ends in, opening the editor the bar's plus opens.
-    const node = shown.buttons.length ? shown
+    // contexts ends in, opening the editor the bar's plus opens. Most used is filled by
+    // pressing buttons elsewhere, so it says that instead.
+    const node = shown.buttons.length || boardId === MOST_USED ? shown
       : { ...shown, buttons: [{ id: 'add-button', kind: /** @type {const} */ ('submenu'), add: /** @type {const} */ (true) }] };
+    usedEmpty = boardId === MOST_USED && !shown.buttons.length;
+    sayStatus();
     // Held for exactly as long as a sentence is being read by someone else. A
     // stranger reading an unfamiliar script off a phone held at arm's length will
     // often take longer than the display timeout, and the screen going dark means
@@ -1235,7 +1414,7 @@ async function main() {
     applyUpdateIfIdle();
 
     if (state.view !== 'grid') {
-      for (const id of ['site-menu', 'board-turn-bar', 'board-add-bar', 'board-search']) $(id).hidden = true;
+      for (const id of ['site-menu', 'board-turn-bar', 'board-add-bar', 'board-search', 'board-tap-bar']) $(id).hidden = true;
     }
     // Turned is for the whole tree, not one screen of it: the owner's grid turns
     // with the sentence and the answers, so a phone laid on the counter reads one
@@ -1259,6 +1438,9 @@ async function main() {
       // context list from a board's root. Its accessible name says which.
       const atRoot = state.path.length < 2;
       for (const id of ['board-up', 'site-menu', 'board-turn-bar', 'board-add-bar', 'board-search']) $(id).hidden = false;
+      // Nothing is made on Most used; it is what the other screens' presses make.
+      if (boardId === MOST_USED) $('board-add-bar').hidden = true;
+      paintTap();
       $('board-up').setAttribute('aria-label', atRoot ? t('board.allTopics') : t('board.up'));
       renderGrid($('board-grid'), node, {
         lang: owner,
@@ -1274,6 +1456,10 @@ async function main() {
         },
         onHold: (button) => { setDetail(/** @type {string} */ (fillOf(button)), ''); detailsChanged(); },
         onPick: pickButton,
+        sub: (display.cellWords || display.cellSay || display.cellIpa) ? (button) => {
+          const phrase = button.kind === 'message' ? phraseOf(button) : null;
+          return phrase ? linesOf(phrase.listener, phrase.listener) : [];
+        } : undefined,
       });
       // Back to the cell that opened the message, for whoever is not using a finger.
       // Looked up after the render, against the node that now exists.
@@ -1324,12 +1510,7 @@ async function main() {
         show: display,
         speakLabel: t('board.speak'),
         rateLabel: t('board.rate'),
-        speakError: (/** @type {string} */ reason) => {
-          const said = t(`speech.${reason}`);
-          // An unfamiliar reason is still a failure worth reporting; a bare key is
-          // not what to report it with.
-          return said === `speech.${reason}` ? t('speech.synthesis-failed') : said;
-        },
+        speakError: speechTrouble,
       });
       return;
     }
@@ -1372,6 +1553,9 @@ async function main() {
         closeLabel: theirs.t('board.close'),
         colour: button.colour,
         turned: display.turned,
+        // An answer carries the other side too: what it means in the reader's words.
+        sub: (display.cellWords || display.cellSay || display.cellIpa)
+          ? (answer) => linesOf(answer.owner, answer.listener) : undefined,
       });
       return;
     }
@@ -1457,6 +1641,22 @@ async function main() {
   // **Turn, from the bar.** The same choice the message's own control makes, set
   // before a message is shown: a phone laid on the counter is turned for the whole
   // conversation, answers included, not one sentence at a time.
+  // **Speak on tap, one tap away**: the setting has a switch in the bar as well, because
+  // the moment it is wanted -- a driver who cannot look -- is not a moment for a dialog.
+  // Drawn only where this device can speak the listener's language.
+  const tapButton = $('board-tap-bar');
+  tapButton.setAttribute('aria-label', t('board.tapSpeaks'));
+  tapButton.title = t('board.tapSpeaks');
+  function paintTap() {
+    tapButton.setAttribute('aria-pressed', String(display.tapSpeaks));
+    tapButton.hidden = !canSpeak || state.view !== 'grid';
+  }
+  tapButton.addEventListener('click', () => {
+    display = { ...display, tapSpeaks: !display.tapSpeaks };
+    writeDisplay(display);
+    paintTap();
+  });
+
   const turnButton = $('board-turn-bar');
   turnButton.setAttribute('aria-label', t('board.turn'));
   turnButton.title = t('board.turn');
@@ -1477,7 +1677,13 @@ async function main() {
     onChange: (next) => { profile = next; voice(); sayStatus(); paint(); },
     extra: [arrangeRow(() => arrangeGrid(`${boardId}/${state.path.at(-1)}`, () => { personal = readPersonal(); paint(); })),
       aboutSection(detailsChanged, dietChoices(), sounds(), askFrom),
-      displaySection(display, (next) => { display = next; paint(); }),
+      displaySection(display, (next) => { display = next; paint(); }, { canSpeak, language: nameOf(listener) }),
+      // Most used is built from these choices when it opens, so on that screen a change
+      // is a fresh build; anywhere else it only has to be remembered.
+      mostUsedSection(listener, owner, nameOf, () => {
+        display = readDisplay();
+        if (boardId === MOST_USED) location.reload();
+      }),
       voiceSection({
         lang: listener,
         voices: speech.getCapabilities(listener).voices,

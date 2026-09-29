@@ -35,7 +35,7 @@ import { variantOf } from './speaker.js';
 /** How many levels of submenu a board may nest. Deeper is a menu tree, not a board. */
 const MAX_DEPTH = 3;
 /** Buttons per node. Twelve is the specification's upper bound for one screen. */
-const MAX_BUTTONS = 12;
+export const MAX_BUTTONS = 12;
 /** @type {Set<string>} The sheet's five section-role colours, and no others. */
 const COLOURS = new Set(['comm', 'money', 'move', 'stay', 'alert']);
 /** @type {Set<string>} Units a structured answer may be counted in. */
@@ -100,6 +100,9 @@ const BLANK = '____';
  * @property {true} [alert]    a topic that is an emergency: set in the alert colour,
  *   and across the top of the list when it would otherwise leave a gap
  * @property {true} [own]    a context of the reader's own, on the list of contexts
+ * @property {{board:string, node:string, button:string, phrase?:string}} [origin]  on the
+ *   Most used screen: the button this one is a copy of, where its presses are counted
+ * @property {string} [mine]  on the Most used screen: the reader's own phrase it says
  * @property {true} [add]    the cell on that list that makes one
  * @property {ColourRole} [colour]  which of the sheet's five role colours it takes
  */

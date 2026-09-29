@@ -34,6 +34,13 @@ const KEY = 'plg.board-display';
  * @property {boolean} polite "excuse me" said before every request, in both languages
  * @property {boolean} siren  Attract attention sounds a siren as well as flashing
  * @property {boolean} askRemove  rearranging asks before it takes a button off a screen
+ * @property {boolean} tapSpeaks  a button says its sentence where it is, without opening it
+ * @property {boolean} tapAnswers  ...and a question then opens its answers
+ * @property {boolean} cellWords  under each button's words, the other language's
+ * @property {boolean} cellSay    ...how to say them, in the reader's own letters
+ * @property {boolean} cellIpa    ...and in IPA
+ * @property {string} usedOver    the window the Most used screen counts over
+ * @property {boolean} usedPooled ...and whether it counts every language or this one
  */
 
 /** @type {BoardDisplay} */
@@ -53,6 +60,17 @@ export const DEFAULTS = {
   // Taking a button off a screen while rearranging asks first, until the reader says
   // it need not: they know by then where to bring one back from.
   askRemove: true,
+  // **Speak on tap**, for a listener who cannot look: directions to a driver, one tap
+  // each, the grid staying where it is. Off by default, because the full-screen
+  // sentence is what most exchanges need, and the bar's own switch turns it on in one tap.
+  tapSpeaks: false,
+  tapAnswers: false,
+  // The other side's words under each button, for the reader who is learning them.
+  cellWords: false,
+  cellSay: false,
+  cellIpa: false,
+  usedOver: 'month',
+  usedPooled: false,
 };
 
 /** The speeds Speak can be set to. Numerals, so no catalogue is involved. */
@@ -62,16 +80,27 @@ export const DEFAULTS = {
 export const RATES = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 2];
 
 /** The order they are offered in, which is the order they appear on screen. */
-export const OPTIONS = /** @type {{id:'owner'|'roman'|'ipa'|'speak'|'turn'|'polite'|'siren'|'askRemove', labelKey:string}[]} */ ([
-  { id: 'owner', labelKey: 'display.owner' },
-  { id: 'roman', labelKey: 'display.roman' },
-  { id: 'ipa', labelKey: 'display.ipa' },
-  { id: 'speak', labelKey: 'display.speak' },
-  { id: 'turn', labelKey: 'display.turn' },
-  { id: 'polite', labelKey: 'display.polite' },
-  { id: 'siren', labelKey: 'display.siren' },
-  { id: 'askRemove', labelKey: 'display.askRemove' },
+export const OPTIONS = /** @type {{id:'owner'|'roman'|'ipa'|'speak'|'turn'|'polite'|'siren'|'askRemove'|'tapSpeaks'|'tapAnswers'|'cellWords'|'cellSay'|'cellIpa', labelKey:string, group:'message'|'buttons'}[]} */ ([
+  { id: 'owner', labelKey: 'display.owner', group: 'message' },
+  { id: 'roman', labelKey: 'display.roman', group: 'message' },
+  { id: 'ipa', labelKey: 'display.ipa', group: 'message' },
+  { id: 'speak', labelKey: 'display.speak', group: 'message' },
+  { id: 'turn', labelKey: 'display.turn', group: 'message' },
+  { id: 'polite', labelKey: 'display.polite', group: 'message' },
+  { id: 'siren', labelKey: 'display.siren', group: 'message' },
+  { id: 'askRemove', labelKey: 'display.askRemove', group: 'message' },
+  { id: 'tapSpeaks', labelKey: 'display.tapSpeaks', group: 'buttons' },
+  { id: 'tapAnswers', labelKey: 'display.tapAnswers', group: 'buttons' },
+  { id: 'cellWords', labelKey: 'display.cellWords', group: 'buttons' },
+  { id: 'cellSay', labelKey: 'display.roman', group: 'buttons' },
+  { id: 'cellIpa', labelKey: 'display.ipa', group: 'buttons' },
 ]);
+
+/** The lines a button can carry under its words. */
+const CELL_LINES = new Set(['cellWords', 'cellSay', 'cellIpa']);
+
+/** The windows the Most used screen can count over, as `ui/usage.js` defines them. */
+const USED_OVER = ['week', 'month', 'year', 'all'];
 
 /**
  * The reader's choices, with the defaults under them.
@@ -90,6 +119,8 @@ export function readDisplay() {
     for (const { id } of OPTIONS) if (typeof held?.[id] === 'boolean') out[id] = held[id];
     if (typeof held?.turned === 'boolean') out.turned = held.turned;
     if (RATES.includes(held?.rate)) out.rate = held.rate;
+    if (USED_OVER.includes(held?.usedOver)) out.usedOver = held.usedOver;
+    if (typeof held?.usedPooled === 'boolean') out.usedPooled = held.usedPooled;
     return out;
   } catch {
     return { ...DEFAULTS };
@@ -102,51 +133,96 @@ export function writeDisplay(next) {
 }
 
 /**
- * The settings section, a checkbox each.
+ * The settings section, a checkbox each, in two groups: what the message screen shows,
+ * and how the buttons behave and what they carry.
  *
- * Checkboxes rather than a row of chips: these are five independent yes/no answers
- * about one screen, which is the control the platform already has and the one a
- * screen reader announces without being told how.
+ * Checkboxes rather than a row of chips: these are independent yes/no answers, which
+ * is the control the platform already has and the one a screen reader announces
+ * without being told how.
  * @param {BoardDisplay} current
  * @param {(next:BoardDisplay)=>void} onChange
+ * @param {{canSpeak:boolean, language:string}} [voice]  the listener's voice on this
+ *   device, where a board knows it: speaking on tap needs one
  */
-export function displaySection(current, onChange) {
+export function displaySection(current, onChange, voice) {
   const held = { ...current };
   const box = document.createElement('section');
   box.className = 'speaker-block';
+  /** @type {Partial<Record<keyof BoardDisplay, HTMLInputElement>>} */ const inputs = {};
+  /** @param {string} key */
+  const heading = (key) => {
+    const h = document.createElement('h3');
+    h.className = 'speaker-heading';
+    h.textContent = t(key);
+    return h;
+  };
+  /** Only while speaking on tap is on can a question open its answers from it. */
+  const follow = () => {
+    const answers = inputs.tapAnswers;
+    if (!answers) return;
+    answers.disabled = !held.tapSpeaks;
+    answers.closest('label')?.classList.toggle('display-option-off', !held.tapSpeaks);
+  };
 
-  const heading = document.createElement('h3');
-  heading.className = 'speaker-heading';
-  heading.textContent = t('display.heading');
-  box.append(heading);
-
-  for (const option of OPTIONS) {
-    const row = document.createElement('label');
-    row.className = 'display-option';
-    const input = document.createElement('input');
-    input.type = 'checkbox';
-    input.checked = held[option.id];
-    input.addEventListener('change', () => {
-      held[option.id] = input.checked;
-      writeDisplay(held);
-      onChange({ ...held });
-    });
-    const text = document.createElement('span');
-    text.textContent = t(option.labelKey);
-    row.append(input, text);
-    box.append(row);
-    // A wink for one country, from the device's own locale rather than a question
-    // nobody was asked: a Canadian phone with the softening off is told, once, that
-    // it might want it on.
-    if (option.id === 'polite' && /-CA$/i.test(navigator.language ?? '')) {
-      const hint = document.createElement('p');
-      hint.className = 'speaker-why display-hint';
-      hint.textContent = t('display.politeCanada');
-      hint.hidden = held.polite;
-      input.addEventListener('change', () => { hint.hidden = input.checked; });
-      box.append(hint);
+  for (const group of /** @type {const} */ (['message', 'buttons'])) {
+    box.append(heading(group === 'message' ? 'display.heading' : 'display.buttonsHeading'));
+    for (const option of OPTIONS.filter((o) => o.group === group)) {
+      // The three lines a button can carry are introduced once, rather than each
+      // label saying "under each button".
+      if (option.id === 'cellWords') {
+        const caption = document.createElement('p');
+        caption.className = 'speaker-why display-caption';
+        caption.textContent = t('display.cellsCaption');
+        box.append(caption);
+      }
+      const row = document.createElement('label');
+      row.className = 'display-option';
+      if (option.id === 'tapAnswers') row.classList.add('display-option-sub');
+      const input = document.createElement('input');
+      input.type = 'checkbox';
+      input.checked = held[option.id];
+      inputs[option.id] = input;
+      // The lines under the buttons share their words with the message screen's own
+      // lines, so their names carry the caption too: two checkboxes both called "How to
+      // say it, in IPA" would be one question twice to a screen reader.
+      if (CELL_LINES.has(option.id)) {
+        row.classList.add('display-option-cell');
+        input.setAttribute('aria-label', `${t('display.cellsCaption')} ${t(option.labelKey)}`);
+      }
+      // Merged into what is stored rather than written from this dialog's copy: the
+      // Most used section writes the same record, and neither may undo the other.
+      input.addEventListener('change', () => {
+        held[option.id] = input.checked;
+        const next = { ...readDisplay(), [option.id]: input.checked };
+        writeDisplay(next);
+        follow();
+        onChange(next);
+      });
+      const text = document.createElement('span');
+      text.textContent = t(option.labelKey);
+      row.append(input, text);
+      box.append(row);
+      // A wink for one country, from the device's own locale rather than a question
+      // nobody was asked: a Canadian phone with the softening off is told, once, that
+      // it might want it on.
+      if (option.id === 'polite' && /-CA$/i.test(navigator.language ?? '')) {
+        const hint = document.createElement('p');
+        hint.className = 'speaker-why display-hint';
+        hint.textContent = t('display.politeCanada');
+        hint.hidden = held.polite;
+        input.addEventListener('change', () => { hint.hidden = input.checked; });
+        box.append(hint);
+      }
+      // Said where it applies, not left to a tap that silently opens the sentence.
+      if (option.id === 'tapSpeaks' && voice && !voice.canSpeak) {
+        const hint = document.createElement('p');
+        hint.className = 'speaker-why display-hint';
+        hint.textContent = t('display.tapNoVoice', { language: voice.language });
+        box.append(hint);
+      }
     }
   }
+  follow();
   return box;
 }
 

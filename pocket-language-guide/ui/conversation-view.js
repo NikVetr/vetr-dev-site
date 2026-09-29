@@ -48,8 +48,10 @@ const TAP_SLOP_PX = 10;
  *   what holding a button whose detail is set does
  * @param {(button:import('../core/conversation.js').BoardButton)=>[number, number]|undefined} [config.mark]
  *   where in its label a search matched, for the found buttons
+ * @param {(button:import('../core/conversation.js').BoardButton)=>SubLine[]} [config.sub]
+ *   the lines a button carries under its words, where the settings ask for them
  */
-export function renderGrid(root, node, { label, available, onPick, lang, title, detail, onHold, mark }) {
+export function renderGrid(root, node, { label, available, onPick, lang, title, detail, onHold, mark, sub }) {
   root.replaceChildren();
   root.lang = lang;
   root.removeAttribute('aria-busy');
@@ -117,6 +119,7 @@ export function renderGrid(root, node, { label, available, onPick, lang, title, 
       plus.innerHTML = '<path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>';
       text.append(plus);
     }
+    if (sub && !button.add) text.append(...subLines(sub(button)));
     cell.append(text);
     // Reinforced with a mark, because colour alone is not a signal: roughly one man
     // in twelve cannot use it, and a tinted cell in bright sun is a white cell.
@@ -160,6 +163,27 @@ export function renderGrid(root, node, { label, available, onPick, lang, title, 
     if (silhouette) centreMark(silhouette);
   }
   watchCells(root);
+}
+
+/**
+ * @typedef {{text:string, lang:string, dir?:string, kind:'words'|'say'|'ipa'}} SubLine
+ */
+
+/**
+ * The lines a button can carry under its own words -- the other side's words, how to
+ * say them, their IPA -- set inside the label, so the fitter sizes them with it and
+ * nothing is pushed out of the cell: smaller type, never a clipped line.
+ * @param {SubLine[]} lines
+ */
+function subLines(lines) {
+  return lines.map(({ text, lang, dir, kind }) => {
+    const line = document.createElement('span');
+    line.className = `board-cell-sub board-cell-sub-${kind}`;
+    line.lang = lang;
+    if (dir) line.dir = dir;
+    line.append(...blanked(text));
+    return line;
+  });
 }
 
 /** How long a press has to last to be a hold rather than a tap. */
@@ -250,6 +274,21 @@ function lineRects(el) {
     lines[i] = new DOMRect(left, top, Math.max(line.right, rect.right) - left, Math.max(line.bottom, rect.bottom) - top);
   }
   return lines;
+}
+
+/**
+ * A sentence with its blank -- `{}`, where a listener's own name goes -- drawn as a space
+ * to fill in, since they say it or write it: never printed as braces or as underscores.
+ * @param {string} text
+ * @returns {(string|HTMLElement)[]}
+ */
+function blanked(text) {
+  return text.split('{}').flatMap((piece, k) => {
+    if (!k) return [piece];
+    const blank = document.createElement('span');
+    blank.className = 'board-blank';
+    return [blank, piece];
+  });
 }
 
 /**
@@ -1211,8 +1250,10 @@ export function translatorLinks(from, to, say) {
  * @param {string} config.closeLabel  in the listener's language
  * @param {import('../core/conversation.js').ColourRole} [config.colour]
  * @param {boolean} [config.turned]  the answers set sideways, as the sentence was
+ * @param {(phrase:import('../core/conversation.js').ResolvedPhrase)=>SubLine[]} [config.sub]
+ *   the lines each answer carries under its words, where the settings ask for them
  */
-export function renderReply(stage, question, answers, { onAnswer, onCancel, closeLabel, colour, turned = false }) {
+export function renderReply(stage, question, answers, { onAnswer, onCancel, closeLabel, colour, turned = false, sub }) {
   stage.replaceChildren();
   stage.hidden = false;
   stage.className = 'board-stage';
@@ -1260,7 +1301,7 @@ export function renderReply(stage, question, answers, { onAnswer, onCancel, clos
     // surface still guessing.
     const label = document.createElement('span');
     label.className = 'board-answer-label';
-    label.textContent = phrase.listener.text;
+    label.append(...blanked(phrase.listener.text), ...(sub ? subLines(sub(phrase)) : []));
     choice.append(label);
     choice.addEventListener('click', () => onAnswer(id));
     list.append(choice);

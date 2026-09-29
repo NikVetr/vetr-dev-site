@@ -840,7 +840,7 @@ test('what the message screen carries is the reader’s choice, and it sticks', 
   const dialog = page.locator('dialog.speaker-settings');
   await expect(dialog).toBeVisible();
   const option = (/** @type {string} */ text) =>
-    dialog.locator('.display-option', { hasText: text }).locator('input');
+    dialog.locator('.display-option:not(.display-option-cell)', { hasText: text }).locator('input');
   await option('IPA').check();
   await option('sideways').uncheck();
   await option('half-speed').uncheck();
@@ -969,6 +969,114 @@ test('the speed beside Speak is a setting on Speak, not a second Speak', async (
   await expect(page.locator('.board-cell').first()).toBeVisible();
   await page.locator('[data-button="stop"]').click();
   await expect(page.locator('.board-rate')).toHaveText('0.5×');
+});
+
+/** A voice that says nothing and keeps what it was asked to say, in `window.said`. */
+const fakeVoice = (/** @type {import('@playwright/test').Page} */ page, /** @type {string} */ lang) => page.addInitScript((l) => {
+  class Utterance { constructor(/** @type {string} */ text) { Object.assign(this, { text, voice: null, lang: '', rate: 1 }); } }
+  /** @type {any} */ (window).said = [];
+  const synth = Object.assign(new EventTarget(), {
+    speaking: false, pending: false,
+    getVoices: () => [{ name: 'Fake', lang: l, localService: true, voiceURI: 'fake', default: true }],
+    cancel() {},
+    speak(/** @type {any} */ u) { /** @type {any} */ (window).said.push(u.text); setTimeout(() => u.onend?.({}), 300); },
+  });
+  Object.defineProperty(window, 'speechSynthesis', { value: synth, configurable: true });
+  Object.defineProperty(window, 'SpeechSynthesisUtterance', { value: Utterance, configurable: true });
+}, lang);
+
+test('Most used gathers the buttons pressed most, from every context, most first', async ({ page }) => {
+  // Counted by what was said, so a press anywhere counts; shown by the button it was
+  // last pressed on. Empty, the screen says how it fills.
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=most-used');
+  await expect(page.locator('#board-status')).toContainText('press most');
+  await expect(page.locator('.board-cell')).toHaveCount(0);
+  await expect(page.locator('#board-add-bar')).toBeHidden();
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=transport&screen=taxi');
+  for (const [id, n] of /** @type {[string, number][]} */ ([['left', 1], ['stophere', 3], ['straight', 2]])) {
+    for (let k = 0; k < n; k += 1) {
+      await page.locator(`[data-button="${id}"]`).click();
+      await page.locator('.board-message').click();
+    }
+  }
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=food');
+  await page.locator('[data-button="water"]').click();
+  await page.locator('.board-message').click();
+  // On the list, after the emergency context its top keeps.
+  await page.goto('/conversation.html?target=zh-Hans&source=en');
+  const cells = page.locator('.board-cell');
+  await expect(cells.nth(1)).toHaveAttribute('data-button', 'most-used');
+  await cells.nth(1).click();
+  await expect(page.locator('.board-cell .board-cell-label'))
+    .toHaveText(['Please stop here', 'Go straight', 'Turn left', 'Water, please']);
+  // A press here counts for the phrase, and opens it as its own board would.
+  await page.locator('.board-cell').first().click();
+  await expect(page.locator('.board-message-text')).toHaveText('请在这里停');
+  // Another language keeps its own counts unless every language is pooled.
+  await page.goto('/conversation.html?target=ja&source=en&board=most-used');
+  await expect(page.locator('.board-cell')).toHaveCount(0);
+  await page.evaluate(() => {
+    const d = JSON.parse(localStorage.getItem('plg.board-display') ?? '{}');
+    localStorage.setItem('plg.board-display', JSON.stringify({ ...d, usedPooled: true }));
+  });
+  await page.reload();
+  await expect(page.locator('.board-cell').first().locator('.board-cell-label')).toHaveText('Please stop here');
+});
+
+test('the counts are shown, and reset only after asking', async ({ page }) => {
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=transport&screen=taxi');
+  await page.locator('[data-button="stophere"]').click();
+  await page.locator('.board-message').click();
+  await page.locator('#site-menu').click();
+  const settings = page.locator('dialog[open]');
+  await settings.getByRole('button', { name: 'See the counts' }).click();
+  const counts = page.locator('dialog.usage-stats');
+  await expect(counts.locator('tbody tr')).toHaveCount(1);
+  await expect(counts.locator('tbody tr')).toContainText('Please stop here');
+  await counts.locator('.dialog-head .speaker-close').click();
+  await settings.getByRole('button', { name: 'Reset the counts' }).click();
+  const ask = page.locator('dialog.confirm-ask');
+  await expect(ask.locator('.dialog-title')).toHaveText('Reset the counts?');
+  await ask.getByRole('button', { name: 'Keep them' }).click();
+  expect(await page.evaluate(() => localStorage.getItem('plg.usage'))).not.toBeNull();
+  await settings.getByRole('button', { name: 'Reset the counts' }).click();
+  await page.locator('dialog.confirm-ask').getByRole('button', { name: 'Reset', exact: true }).click();
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('plg.usage'))).toBeNull();
+});
+
+test('speaking on tap says the sentence where the button is, for a listener who cannot look', async ({ page }) => {
+  await fakeVoice(page, 'zh-CN');
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=transport&screen=taxi');
+  const tap = page.locator('#board-tap-bar');
+  await expect(tap).toHaveAttribute('aria-pressed', 'false');
+  await tap.click();
+  await expect(tap).toHaveAttribute('aria-pressed', 'true');
+  // One direction a tap, the grid staying, and the button saying it is speaking.
+  await page.locator('[data-button="left"]').click();
+  await expect(page.locator('[data-button="left"]')).toHaveClass(/board-cell-speaking/);
+  await page.locator('[data-button="right"]').click();
+  await expect(page.locator('.board-message')).toHaveCount(0);
+  expect(await page.evaluate(() => /** @type {any} */ (window).said)).toEqual(['左转', '右转']);
+  await expect(page.locator('.board-cell-speaking')).toHaveCount(0, { timeout: 2000 });
+  // A question can open its answers after it is said, where the reader asks for that.
+  await page.evaluate(() => {
+    const d = JSON.parse(localStorage.getItem('plg.board-display') ?? '{}');
+    localStorage.setItem('plg.board-display', JSON.stringify({ ...d, tapAnswers: true }));
+  });
+  await page.reload();
+  await page.locator('[data-button="takeme"]').click();
+  await expect(page.locator('.board-answers')).toBeVisible();
+});
+
+test('a button can carry the other side\'s words under its own, and an answer the reader\'s', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('plg.board-display', JSON.stringify({ cellWords: true, cellSay: true })));
+  await page.goto('/conversation.html?target=zh-Hans&source=en&board=transport&screen=taxi');
+  const left = page.locator('[data-button="left"]');
+  await expect(left.locator('.board-cell-sub-words')).toHaveText('左转');
+  await expect(left.locator('.board-cell-sub-say')).not.toBeEmpty();
+  await page.locator('[data-button="takeme"]').click();
+  await page.locator('.board-reply').click();
+  await expect(page.locator('.board-answer').first().locator('.board-cell-sub-words')).not.toBeEmpty();
 });
 
 test('Speak is the owner’s control and Reply is the listener’s', async ({ page }) => {
@@ -1206,7 +1314,7 @@ test('converse opens the topics, not a board @smoke', async ({ page }) => {
   // Emergency first, and in the authored order throughout -- nothing here sorts by
   // use or by name. Someone who has learned where a topic is must find it there.
   expect(await topics.allTextContents()).toEqual([
-    'Emergency', 'Meeting people', 'Directions', 'Getting around',
+    'Emergency', 'Most used', 'Meeting people', 'Directions', 'Getting around',
     'Eating out', 'Shopping', 'Time', 'Massage and spa',
     'Lodging', 'Sights and tickets', 'Outdoors', 'Pharmacy',
   ]);
@@ -1972,18 +2080,18 @@ test('the emergency topic is the red one, across the top when the count is odd',
   expect(odd.bg).toBe('rgb(179, 38, 30)');
   // Every topic wears the silhouette of what it is about, drawn rather than fetched.
   expect(odd.mark).toBe(true);
-  await expect(page.locator('.board-cell .board-cell-topic')).toHaveCount(12);
-  // Twelve contexts: even, so the emergency one is a cell like the rest.
-  expect(odd.wide).toBeLessThan(odd.grid * 0.6);
-  // One of the reader's own makes it odd, and the emergency one takes the first row
-  // rather than leaving a gap at the foot.
+  await expect(page.locator('.board-cell .board-cell-topic')).toHaveCount(13);
+  // Thirteen contexts, Most used among them: odd, so the emergency one takes the first
+  // row rather than leaving a gap at the foot.
+  expect(odd.wide).toBeGreaterThan(odd.grid * 0.9);
+  // One of the reader's own makes it even, and the emergency one is a cell like the rest.
   await page.locator('#board-add-bar').click();
   await page.locator('dialog.context-ask input').fill('Hotel');
   await page.locator('dialog.context-ask').getByRole('button', { name: 'Save' }).click();
   await expect(page.locator('#board-title')).toHaveText('Hotel');
   await page.locator('#board-up').click();
   await expect(page.locator('.board-cell-own')).toBeVisible();
-  expect((await look()).wide).toBeGreaterThan(odd.grid * 0.9);
+  expect((await look()).wide).toBeLessThan(odd.grid * 0.6);
 });
 
 test('a button that opens more buttons carries an arrow, and the list of contexts does not', async ({ page }) => {
