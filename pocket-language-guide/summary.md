@@ -813,6 +813,17 @@ and slicing on them, because the order is the catalogue's business: Urdu writes 
 arrow the other way round, and `isolate` in `ui/i18n.js` leaves a letterless insert
 unwrapped, so the sentinels survive the substitution intact.
 
+**Any button can be found by what it says.** A lens beside the header's settings
+opens a field across the header (`ui/board-search.js`). Typing looks through every
+context the pair can use and every screen of each -- the boards' own buttons, less
+those the reader switched off, and the reader's own among them -- and shows those
+whose words contain it, the matched letters heavier and in another colour. Matching is
+the reader's language's own collation, case and accents aside, and a label starting
+with the query ranks first, then one with a word that does, shorter first; past 48 the
+grid asks for more letters. Pressing one does what it does on its own screen: in place
+on this board, and on another by opening it with the press in the address, forgotten
+once made. The context list loads the corpus only when the search opens.
+
 **What the message screen carries is a setting, not a decision.** The owner's own
 wording, Speak and its speed control, and the control that turns the sentence
 sideways can each be switched off; how to say it in the reader's own letters, and the
@@ -951,7 +962,12 @@ boxed until ticked; the first press opens the checklist, in the reader's own wor
 A screen can be rearranged from the settings: `ui/arrange.js` lets its buttons be
 dragged (or moved with the arrow keys) into the reader's order, kept as `order` per
 screen in the personal store and applied by `arranged` whenever the screen is drawn,
-the board's buttons and the reader's together. A context of the reader's own can be
+the board's buttons and the reader's together. A button dropped on the bin that takes
+the topic's place in the bar, or given Delete, is taken off the screen when Done is
+pressed: a board's own button is switched off there (`hidden`, which Edit buttons
+switches back on), one of the reader's is taken off that screen, and one of the list's
+own contexts is switched off with switches in the list's settings to bring it back.
+It asks first, with "Don't ask again", a choice the settings keep as `askRemove`. A context of the reader's own can be
 made of the boards' buttons: the editor's "Add buttons from the boards" places a
 corpus concept, with its answers' concepts, by reference (`concept`/`answers` on the
 stored phrase), so it keeps every translation and its Reply; an empty screen offers
@@ -995,16 +1011,23 @@ one counting network requests while a message is on screen. Measured, a tap reac
 the screen in a median 11ms.
 
 **A board is a situation, and the first screen is which one.** Converse opens a grid
-of topics -- Meeting people, Directions, Getting around, Eating out, Shopping, Time,
-Massage and spa -- because what someone needs face down on a massage table and what
-they need in a taxi have almost nothing in common, and one grid holding both is a grid
-you have to read rather than glance at. That screen loads one small JSON file and no
-corpus at all, which matters: it is where someone lands, and the most likely place to
-be with no signal. Each board names itself in the bar and the root Back says **All
-topics**.
+of twelve contexts -- Emergency, Meeting people, Directions, Getting around, Eating out,
+Shopping, Time, Massage and spa, Lodging, Sights and tickets, Outdoors, Pharmacy -- and
+any the reader has made, because what someone needs face down on a massage table and
+what they need in a taxi have almost nothing in common, and one grid holding both is a
+grid you have to read rather than glance at. That screen loads one small JSON file and
+no corpus at all, which matters: it is where someone lands, and the most likely place
+to be with no signal. Each board names itself in the bar and the root Back says **All
+topics**. Each context wears a silhouette of the one object that says it best, filling
+its button at a tenth of the ink (`ui/topic-marks.js`), and the meal is the owner's:
+a bowl with chopsticks for a Chinese, Japanese, Korean or Vietnamese reader, fork and
+spoon across Southeast Asia, the international knife and fork elsewhere.
 
 **Terms are indexed, never copied.** A board node is a subsection and nodes overlap
-freely: `please stop` and `more gently` sit on the root grid *and* inside the
+freely -- deliberately, and audited: a sentence is on two screens only where someone
+on the second would otherwise have to go back for it, as "Is it delayed?" is for a
+train and a plane, while Meeting people's About me holds the reader's name, country,
+work and status once, with the people travelling with them a screen deeper; `please stop` and `more gently` sit on the root grid *and* inside the
 body-area submenu, because someone two taps deep must still be able to say stop.
 `it hurts here`, `another towel, please` and `thank you` are existing concepts from
 three other sections, on the board by reference. Sixteen `massage-spa` concepts were
@@ -1034,13 +1057,14 @@ corpus's own "thank you" and "you are welcome".
   and a direct URL for an uncovered pair is a plain refusal naming the ones it does.
   `spa` serves `zh-Hans__en` and no others until a gloss sweep runs.
 
-**Colour is the coding.** The five role colours a printed sheet uses for its
-sections: red for stop, pause and *it hurts*; blue for the pressure axis; orange for
-*avoid*; green for *focus on*; purple for comfort. Solid on the grid, and the
-full-screen message takes the colour of the button that opened it, white on solid —
-so the owner can see they pressed the right one without reading their own language
-back. Someone face down on a massage table reaching for *stop* is looking for a red
-rectangle, not reading.
+**Colour says what a button does.** Cells are neutral with dark type, so the contrast
+is spent on the words. A button that opens more buttons is filled in the message's
+blue with white type and an arrow; one the listener can answer is tinted and carries a
+faint pair of speech bubbles; the emergency context and the signals are red; and a
+dashed outline with a drawn plus is kept for what the reader has still to make -- a
+context, or a first button. The five role colours of the printed sheet stay where they
+count: the full-screen message takes its button's role colour, white on solid, so the
+owner can see they pressed the right one without reading their own language back.
 
 **A submenu says its prompt once.** "Please focus on…" is a heading over four body
 parts rather than four cells repeating five words. That is owner-language
@@ -1125,6 +1149,19 @@ side is free and why this cannot shadow a shipped file. It includes the speaker-
 where the language has one, which is the file whose absence cost the German board its
 offline visit.
 
+**And it can be checked before leaving.** "Check that everything works offline", in the
+settings, loads what the pair needs the way a board does and tries each part
+(`ui/travel-check.js`): the sentences with their variants and country names; every
+context, validated, with its sentences resolved; the listener's writing, each letter
+the boards use drawn beside a character no font has, so any this device would show as
+an empty box is named -- boards draw in the system's fonts, so that is a fact about the
+phone, not the app; a pronunciation per sentence; a voice for the listener's language,
+and whether it is on the device; and every file the check read, kept on the device.
+Each row is marked with a glyph and a colour as it finishes. The installed apps carry
+everything -- 67MB of files, 44MB of them fonts, in a 43MB Android package -- so there
+only the voice can be missing, and a voice is the operating system's to install. A
+browser keeps what a pair has used, and the check offers to save anything it has not.
+
 **Speech refuses to guess.** `ui/platform/speech.js` maps `zh-Hans` to `zh-CN` and
 excludes Cantonese outright; Klingon and Quenya map to no voice at all rather than
 being read aloud in English. Matching is on subtag boundaries, because a prefix test
@@ -1195,6 +1232,16 @@ to be seen. **And the word on it is the listener's**, taken from
 "Help" in the interface catalogue: a beacon exists to be read by whoever walks past.
 Only "tap anywhere to stop" stays in the reader's language, because the reader is the
 one who has to stop it.
+
+**Red and blue lights** are the third signal: the screen turning between the colours an
+emergency vehicle's lights use, each held 700ms -- under one change a second -- with
+the siren where the reader has turned it on. The three are on the emergency board's
+first screen, together at its end, away from the sentences a thumb reaches for.
+
+**Turned, the dialogs turn too**: a phone laid on the counter is read from its side for
+the whole conversation, settings included, so a board's dialogs take a quarter turn
+of their own -- the whole dialog, not a writing mode, so its fields keep their layout
+-- centred on the screen and sized against the one it lies across.
 
 **The message screen can be turned sideways.** Nothing here breaks a word in half, so
 a long word sets the type size — eleven characters of Russian hold a message to 42px
@@ -1747,8 +1794,8 @@ normalised English gloss, against the exact section first and then its group,
 because two sheets can file the same phrase under different panels ("Can I charge
 my phone?" is hotel basics in one and hotel requests in the other).
 
-The bank is now **829 concepts across 59 sections in twenty-eight languages**, which
-is **756 ordered pairs** — every one of which renders, and two of which anyone wrote a
+The bank is now **994 concepts across 70 sections in fifty-three languages**, which
+is **2,756 ordered pairs** — every one of which renders, and two of which anyone wrote a
 sheet for. That ratio is the whole argument for joining on `concept_id` instead of
 storing pairs: the sixteenth language added 745 rows and 30 new pairs, and the
 twenty-first added 40 more pairs on its own.

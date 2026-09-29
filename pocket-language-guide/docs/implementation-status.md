@@ -5350,3 +5350,135 @@ the bundle's own offline test caught it. The browser suites on the final code: C
 242 of 243 with one skipped, WebKit smoke 7 of 7, unit 703 of 703, the gate 11 of 11.
 Neither native script drags a button, builds a name from its sounds or picks a country;
 the evidence for those is the browser tests, in Chromium and in WebKit.
+
+## Batch AF — find a button, check before travelling, three new ways of getting around, and a context for the outdoors
+
+**Find a button.** A lens beside the header's settings opens a field across the header.
+Typing looks through every context the pair can use, every screen of each and every
+button on them -- the boards' own, less any the reader switched off, and the reader's
+own -- and shows the buttons whose words contain it, the letters that matched heavier
+and in another colour. Matching is the reader's language's own collation, case and
+accents aside; a label starting with the query ranks first, then a word that does. A
+found button does what it does on its own screen: in place on the board in front of
+the reader, and on another board by opening that board with the press in the address,
+which forgets it once made. A beacon found is shown and not started. The grid's fitter
+had measured a label set in pieces -- the marked letters -- as that many lines, and
+set "afternoon" at a size where only "fternoon" fitted; pieces on one line are one line
+now.
+
+**Before you travel.** "Check that everything works offline", in the settings of the
+context list and every board, loads what the pair needs the way a board does and tries
+each part, marking each row with a glyph and a colour as it finishes: the sentences in
+both languages with their variants and country names; every context, validated, its
+sentences resolved; the listener's writing, each letter the boards use drawn beside a
+character no font has, so a letter this device would show as an empty box is named;
+a pronunciation for each sentence; a voice for the listener's language and whether it
+works without a connection; and every file it read, kept on the device. **The installed
+apps carry everything**: 67MB of files, 44MB of them fonts, in a 43MB Android package,
+so only a voice -- the operating system's to install -- can be missing there. A browser
+keeps what a pair has used, and the check offers to save anything it has not.
+
+**Signals for help, on the first screen.** A third signal joins Flash SOS and Attract
+attention: red and blue lights, the screen turning between the two, each colour held
+700ms, under one change a second. The three are on the emergency board's first screen,
+together at its end away from the sentences, as the owner asked -- they were first put
+a tap in, which the owner did not want. The room came from a screen of its own for the
+four diabetes sentences inside "Hurt or ill…", where "Where is the nearest hospital?"
+moved too.
+
+**The contexts' marks.** Each silhouette fills its button. The clock's hands had been
+drawn in the face's own tone over a cut exactly their width and read as a plain disc;
+they and the quarters are cut out of the face now, and a front shape's own stroke no
+longer overrides the gap it keeps from what is behind it -- which had left the fork,
+knife, signboards and pillows touching. The fork and knife stand clear of the plate,
+and the signpost's boards have the post between them. The meal is the owner's: a bowl
+with chopsticks for Chinese, Japanese, Korean and Vietnamese readers (slanted, never
+standing in the bowl), fork and spoon across Southeast Asia, knife and fork elsewhere.
+
+**Getting around, Meeting people and the outdoors.** Getting around has screens for
+the taxi, trains and buses, air travel and hitchhiking, and a twelfth context, Outdoors,
+is for hiking: trailheads and routes, the weather and the dark, shuttles and cableways,
+camping, swimming and animals. Meeting people's "Who we are" is "About me" -- name,
+country, tourist, student, retired, here on business or visiting family, travelling
+alone -- with "My work" and "People with me" (a partner, parents, siblings, children,
+a colleague) a screen deeper. The screen keeps its id, so whatever a reader placed on
+it or reordered there stays. Twenty-nine sentences were new to the corpus -- six for
+airports, six for hitchhiking, three outdoors, eight about the reader's work and
+status, six more family and company -- written in every language by research agents
+from `content/PROMPTS/about-and-travel.md`; the rest are existing concepts, indexed.
+
+**Every button on two screens is there on purpose.** The search showed the owner the
+same sentence in several places, and an audit of all 316 found 31 on more than one
+screen. The deliberate ones stay: "Please stop" two taps deep on the massage board,
+"It hurts here" there and in an emergency, the allergies under both Emergency and
+Pharmacy, "Thank you" wherever someone is being thanked for a service, "Is it
+delayed?" for a train and a plane. The accidental ones went: the station and on-board
+screens and a Train screen that repeated them are one "Train and bus…" screen; student
+and retired are on About me only; hitchhiking no longer repeats the taxi's "Please take
+me here"; "I do not know where I am" is on the lost screen only; and the pharmacy asks
+about pregnancy once, on its first screen.
+
+**Notes from the phone, fourth message.** A board has one door to Settings, the
+header's bars; the second set in the bar opened the same dialog, and is gone. Turned,
+the dialogs turn with the board, a quarter turn of the whole dialog sized against the
+screen it lies across. Rearranging has a bin in the bar: a button dropped on it, or
+given Delete, is taken off the screen -- a board's own button switched off, to come back
+from Edit buttons, one of the reader's taken off that screen, a context of the list's
+switched back on from its settings -- after a question with "Don't ask again", which the
+settings can also turn back on. The contexts' marks are centred on their ink rather
+than their drawing's box, and the signpost's post shows between its boards. The
+keyboard of sounds has a large Delete beside the name it spells, keeps both in view as
+its keys scroll, and sets the vowels apart.
+
+**Notes from the phone, third message.** Beside the last line, Reply sits as far from
+the line before as from the frame. The plus that makes something is drawn and centred.
+A button that opens more buttons is filled in the message's blue with white type; the
+dashed outline is kept for what the reader has still to make. Changing a language keeps
+the reader's screen, and the language menu names each language in its own words too,
+for a phone handed to someone whose language is not known. "Rearrange this screen" is
+"Rearrange buttons" and stands clear of the settings around it; the dark-mode switch
+has no heading of its own; a small dialog's Save is centred and clear of its field.
+The name dialog's keyboard of sounds starts open -- folded, it was not found -- and the
+editor for the reader's own buttons has one too, for a hotel's or a street's name,
+written into what the listener reads in the listener's letters. Escape pressed to close
+a dialog no longer also steps back out of the screen behind it.
+
+**The research behind the new rows, and what wants a fluent reader.** Six agents wrote
+the twenty-nine sentences into all fifty-one packs -- 1,479 rows and 110 speaker
+variants across 21 languages, none left out -- each in the pack's own register and
+construction, with the airport words each language's own airports and airlines sign
+(Flugsteig, *facturación*, *sûreté*, 值机, チェックイン, 체크인). Polish hitchhiking was
+first written with the informal *ty*, since formal address needs the sexed *pan*/*pani*;
+it now asks with no address at all, as the pack's taxi rows do ("Czy mogę prosić o
+podwiezienie?", "Dokąd jedzie ten samochód?"). Finnish hitchhiking keeps *sinä*
+deliberately, as a roadside favour takes it where a paid ride does not. Flagged for a
+fluent reader, in the agents' own words: every profession's variant (the forms most
+likely to carry a register judgement); siblings in Thai, Lao, Khmer, Chinese, Kannada,
+Malayalam and Vietnamese, which name an elder or a younger one because the language has
+no word for neither -- the button says the elder, and most packs give the younger as
+the row's alternative -- and Korean, whose elder words follow the speaker's sex, so its
+buttons say the younger; "partner" wherever the neutral word is also a business
+partner; Lao's five rows with no signage or park source; Uzbek's and Armenian's
+check-in; Hausa's airport words, built from the pack's own vocabulary since its
+airports sign in English; Georgian's camping and swimming verbs; Amharic's epenthetic
+vowels in romanisation; Odia's gate; and Telugu's existing "I am a tourist", which
+parks a feminine form in `text_alt` where no axis is declared.
+
+**Sixty-six interface strings, in two passes.** Research agents wrote this batch's
+interface into every catalogue but Klingon's and Quenya's from
+`content/PROMPTS/search-and-travel-strings.md`: fifty-three keys for the search, the
+check and the new screens, then thirteen more once the boards were reworked, reusing
+each file's own words, quotation marks and numeral dodges and the section titles the
+corpus agents had just written. Nothing was left out but Yoruba's two words with no
+sourced tone. Flagged for a fluent reader: every word for the bin, which no catalogue
+had before; "Train and bus" kept in English's order where most packs' own row names the
+bus first; German's red-and-blue "Blinklicht" over the one-word *Blaulicht*; Yoruba's
+bin and lights, reworded to the action for want of a sourced noun; Amharic's pass and
+fail, a succeeded/did-not-succeed paraphrase; and the placeholder handling in Armenian,
+Georgian and Hebrew, which never suffix a language's name.
+
+**A Japanese question's mark stays in its frame.** The fitter let a full-width "？"
+hang half out of the surface on the grounds that its ink is in the left half -- true of
+a Chinese face, not of a Japanese one, which centres the mark: "ここでキャンプできますか？"
+drew it fifteen pixels over the frame. The ink is measured now, in the mark's own face
+as its language draws it, and must fall inside the frame.
