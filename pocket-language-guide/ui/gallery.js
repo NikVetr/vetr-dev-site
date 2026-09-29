@@ -11,12 +11,16 @@
 // fontkit arrived on this page anyway, before the reader had touched anything.
 // `ui/app.js` imports them on demand now, and this page is nine modules and 89KB.
 
-import { wireSiteMenu } from './site-menu.js';
+import { resumeSection, wireSiteMenu } from './site-menu.js';
 import { notePlace, onBack, resumeLaunch } from './platform/shell.js';
 import {
-  isSpoken, loadText, loadLanguages, readerLanguage,
+  download, isSpoken, loadText, loadLanguages, readerLanguage,
   registerOffline, setReaderLanguage, showFatal,
 } from './app.js';
+import { openSpeakerSettings, personalSection, readProfile } from './speaker-settings.js';
+import { readAxes } from '../core/speaker.js';
+import { parseTable } from '../core/csv.js';
+import { loadCountries } from '../core/pack.js';
 import { regionRow, setFlagColours } from './flags.js';
 import { languagePicker } from './language-picker.js';
 import { openLightbox } from './lightbox.js';
@@ -570,6 +574,43 @@ function fitHeader() {
   if (over()) label.classList.add('wraps');
 }
 
+/**
+ * The settings the bars open here: everything personal that holds in every language
+ * and on both the sheets and the boards -- how the reader speaks, their own details,
+ * what a board's message screen shows, and their saved copy. A board's or a sheet's
+ * own settings add what only its pair needs. The sections' modules arrive when the
+ * bars are pressed, as the lightbox's engine does, so the grid stays the small page
+ * the note above describes.
+ * @param {string} reader
+ */
+async function openSettings(reader) {
+  const read = async (/** @type {string} */ rel) => parseTable(await loadText(rel), rel);
+  const [[{ personalWiring }, { aboutSection, askCountry }, { displaySection, readDisplay }, { DIET }],
+    [axes, food, listed]] = await Promise.all([
+    Promise.all([import('./personal-data.js'), import('./about.js'), import('./board-display.js'),
+      import('../core/conversation.js')]),
+    Promise.all([read('data/registry/speaker-axes.csv').then(readAxes), read(`data/lang/${reader}/food.csv`),
+      loadText('data/countries/index.json').then((text) => JSON.parse(text))]),
+  ]);
+  const said = new Map(food.map((row) => [row.concept_id, row.text]));
+  const diet = DIET.filter((id) => said.has(id)).map((id) => ({ value: id, label: /** @type {string} */ (said.get(id)) }));
+  const countries = listed.includes(reader) ? await loadCountries(loadText, reader) : undefined;
+  // Nothing on this page shows what these change; the boards and sheets read them when opened.
+  const nothing = () => {};
+  openSpeakerSettings({
+    axes,
+    languages: Object.keys(axes),
+    profile: readProfile(),
+    onChange: nothing,
+    extra: [
+      aboutSection(nothing, diet, undefined, countries && (() => askCountry(countries, reader, nothing))),
+      displaySection(readDisplay(), nothing),
+      ...resumeSection(),
+      personalSection(personalWiring({ save: download, onChanged: nothing })),
+    ],
+  });
+}
+
 async function main() {
   registerOffline();
   const { languages, coverage, names, regions } = await loadLanguages();
@@ -598,7 +639,7 @@ async function main() {
   // anything is drawn -- including the static markup.
   await loadUiLanguage(reader, loadText);
   applyStatic();
-  wireSiteMenu();
+  wireSiteMenu(() => { openSettings(readerLanguage(languages, coverage)).catch(showFatal); });
   trackHeaderHeight();
   const headerRow = document.querySelector('.site-header .container');
   if (headerRow) new ResizeObserver(fitHeader).observe(headerRow);

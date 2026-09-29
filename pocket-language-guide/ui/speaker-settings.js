@@ -26,6 +26,7 @@
 import { axesFor, unanswered } from '../core/speaker.js';
 import { t } from './i18n.js';
 import * as store from './platform/store.js';
+import { settingsCorner } from './site-menu.js';
 
 const KEY = 'plg.speaker';
 
@@ -159,10 +160,8 @@ export function openSpeakerSettings({ axes, languages, profile, onChange, extra 
   // -- so the heading is the general one and the voice part introduces itself.
   // Every change is committed as it is made, so closing is closing: the corner
   // control and Done do the same thing, and the corner is where a thumb looks for it.
-  const close = el('button', { type: 'button', class: 'speaker-close', 'aria-label': t('gallery.previewClose') });
-  close.addEventListener('click', () => panel.close());
   panel.append(
-    close,
+    settingsCorner(panel),
     el('h2', { text: t('settings.title') }),
     ...(fields.length
       ? [el('p', { class: 'speaker-lede', text: t('speaker.lede') }), ...fields]

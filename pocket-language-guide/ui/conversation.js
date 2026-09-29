@@ -35,7 +35,6 @@ import {
 } from '../core/quantity.js';
 import { openBoardEditor } from './board-editor.js';
 import { openBoardMenu } from './board-menu.js';
-import { themeSection } from './theme.js';
 import {
   readDisplay, writeDisplay, displaySection, readVoice, writeVoice, voiceSection,
 } from './board-display.js';
@@ -1485,7 +1484,6 @@ async function main() {
         current: chosenVoice,
         onChange: (id) => { chosenVoice = id; },
       }),
-      themeSection(),
       ...resumeSection(),
       travelSection(() => travelChecks(listener, owner, index, nameOf)),
       personalSection(personalWiring({

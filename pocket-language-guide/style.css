@@ -2099,21 +2099,30 @@ dialog.speaker-settings {
   font: inherit; color: var(--ink); background: var(--paper);
   max-height: calc(100dvh - 4rem); overflow: auto;
 }
-/* Closing from the corner. `position: relative` on the dialog so the corner is the
-   dialog's; large enough for a thumb, quiet enough not to read as a control the
-   form needs. */
-.speaker-settings { position: relative; }
+/* Closing from the corner, which is placed against the dialog because a modal dialog
+   is fixed to the screen -- and must stay so: given `position: relative` for the corner's
+   sake, a dialog in the top layer is laid out against the document instead, and opening
+   one on a scrolled page scrolled it back to the top, or drew it off the screen. Small
+   and quiet, so as not to read as a control the form needs. */
 /* The cross is drawn, not typed: a × glyph sits on the font's math axis, below the
    middle of the circle, and differently in every face. Two bars about the centre are
    centred by construction. */
 .speaker-close {
   position: absolute; inset-block-start: var(--space-2); inset-inline-end: var(--space-2);
-  inline-size: 2rem; block-size: 2rem; padding: 0; border: 0; border-radius: 50%;
+  inline-size: 1.6rem; block-size: 1.6rem; padding: 0; border: 0; border-radius: 50%;
   background: var(--surface); color: var(--ink); cursor: pointer;
 }
+/* A settings dialog's corner: the dark-mode switch, then the cross. The title under it
+   leaves the corner its room. */
+.speaker-corner {
+  position: absolute; inset-block-start: var(--space-2); inset-inline-end: var(--space-2);
+  display: flex; align-items: center; gap: var(--space-1);
+}
+.speaker-corner .speaker-close { position: relative; inset: auto; }
+dialog.speaker-settings:has(> .speaker-corner) > h2 { padding-inline-end: 8.5rem; }
 .speaker-close::before, .speaker-close::after {
   content: ''; position: absolute; inset-block-start: 50%; inset-inline-start: 50%;
-  inline-size: 0.95rem; block-size: 2px; border-radius: 1px; background: currentColor;
+  inline-size: 0.75rem; block-size: 2px; border-radius: 1px; background: currentColor;
   transform: translate(-50%, -50%) rotate(45deg);
 }
 .speaker-close::after { transform: translate(-50%, -50%) rotate(-45deg); }
@@ -2145,6 +2154,8 @@ dialog.speaker-settings h2 { margin: 0 0 var(--space-1); font-size: var(--fs-2);
 .speaker-group { border-block-end: 1px solid var(--line-soft); padding-block: var(--space-1); }
 .speaker-group > summary { cursor: pointer; font-weight: 600; }
 .about-field input { inline-size: 100%; }
+/* The details asked in dialogs of their own: a row of chips that wraps, a gap apart. */
+.speaker-block > .chip { margin-inline-end: var(--space-1); margin-block-end: var(--space-1); }
 /* A name built from its sounds: the sounds so far, the name as the listener reads it,
    and a key per sound -- a syllable in the owner's letters over its IPA -- wrapping
    rather than clipping a long spelling. */

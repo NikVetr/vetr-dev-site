@@ -415,6 +415,33 @@ test('appearance is a light switch: the device decides until the reader does', a
   }
 });
 
+test('the landing page settings hold what is personal in every language, over the grid where it was', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('.card').nth(20)).toBeVisible();
+  await page.evaluate(() => scrollTo(0, 900));
+  await page.locator('#site-menu').click();
+  const dialog = page.locator('dialog[open]');
+  // How the reader speaks is asked across every language that inflects for it.
+  await expect(dialog.getByRole('radio', { name: 'A woman' })).toBeVisible();
+  // Opened over the grid rather than at the top of the page: nothing scrolled.
+  expect(await page.evaluate(() => scrollY)).toBe(900);
+  const box = /** @type {{y:number, height:number}} */ (await dialog.boundingBox());
+  expect(box.y).toBeGreaterThanOrEqual(0);
+  expect(box.y + box.height).toBeLessThanOrEqual(/** @type {{height:number}} */ (page.viewportSize()).height);
+  await dialog.getByRole('radio', { name: 'A woman' }).check();
+  await dialog.getByRole('textbox', { name: 'Your name' }).fill('Ana');
+  await dialog.getByRole('button', { name: 'My diet' }).click();
+  const diet = page.locator('dialog[open]').last();
+  await diet.getByRole('checkbox', { name: 'I am vegetarian' }).check();
+  await diet.getByRole('button', { name: 'Save' }).click();
+  await expect(dialog.getByRole('checkbox', { name: 'Your own wording, under the sentence' })).toBeChecked();
+  await expect(dialog.getByRole('button', { name: 'Save a copy' })).toBeVisible();
+  expect(JSON.parse(await page.evaluate(() => localStorage.getItem('plg.speaker') ?? '')))
+    .toEqual({ speaker_gender: 'feminine' });
+  expect(JSON.parse(await page.evaluate(() => localStorage.getItem('plg.about') ?? '')))
+    .toEqual({ name: 'Ana', diet: 'dietary-needs.i-am-vegetarian' });
+});
+
 test('a press outside a dialog closes it, as its close control does', async ({ page }) => {
   await page.goto('/index.html');
   await page.locator('#site-menu').click();
