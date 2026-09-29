@@ -1995,7 +1995,7 @@ test('a button that opens more buttons carries an arrow, and the list of context
   const arrowOf = (/** @type {import('@playwright/test').Locator} */ cell) => cell.evaluate(
     (el) => getComputedStyle(el, '::after').content);
   await page.goto(BOARD);
-  await expect(arrowOf(page.locator('[data-button="focus"]'))).resolves.toContain('›');
+  await expect(arrowOf(page.locator('[data-button="focus"]'))).resolves.toContain('»');
   await page.goto('/conversation.html?target=zh-Hans&source=en');
   await expect(page.locator('[data-button="time"]')).toBeVisible();
   expect(await arrowOf(page.locator('[data-button="time"]'))).toBe('none');

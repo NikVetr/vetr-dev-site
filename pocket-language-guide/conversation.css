@@ -430,13 +430,13 @@
    for what the reader has still to make: the plus that adds a context or a first
    button. */
 .board-cell.board-cell-more { background: #0b67a3; border-color: #0b67a3; color: #fff; }
-.board-cell.board-cell-more:not(.board-cell-alert):hover { background: #0b67a3; filter: brightness(1.12); }
+@media (hover: hover) { .board-cell.board-cell-more:not(.board-cell-alert):hover { background: #0b67a3; filter: brightness(1.12); } }
 /* **Except where every button is one**, on the list of contexts, where the fill has
    nothing to contrast with and twelve blue boxes would say nothing. */
 .board-grid-topics .board-cell.board-cell-more:not(.board-cell-alert) {
   background: var(--control); border-color: var(--line); color: inherit;
 }
-.board-grid-topics .board-cell.board-cell-more:not(.board-cell-alert):hover { background: var(--surface-2); filter: none; }
+@media (hover: hover) { .board-grid-topics .board-cell.board-cell-more:not(.board-cell-alert):hover { background: var(--surface-2); filter: none; } }
 /* The two buttons that are not something to say. They are about being seen, so they
    are the one place on the grid that keeps a solid fill -- and they are next to each
    other at the end, away from the phrases, so a thumb reaching for "it hurts here"
@@ -446,10 +446,22 @@
   border-color: var(--alert);
   color: #fff;
 }
-.board-cell-beacon:hover { background: var(--alert); filter: brightness(0.93); }
+@media (hover: hover) { .board-cell-beacon:hover { background: var(--alert); filter: brightness(0.93); } }
+/* **The red and blue lights look like lights.** Red and blue either side of the
+   diagonal, each half glowing from its middle, as a lamp does -- so the button is read
+   as the signal it starts before its words are. */
+.board-cell.board-cell-beacon-lights,
+.board-cell.board-cell-beacon-lights:hover {
+  background:
+    radial-gradient(circle at 28% 30%, rgb(255 140 140 / 0.85), transparent 42%),
+    radial-gradient(circle at 72% 70%, rgb(140 175 255 / 0.85), transparent 42%),
+    linear-gradient(135deg, #d0021b 50%, #0038c7 50%);
+  border-color: transparent;
+  text-shadow: 0 1px 3px rgb(0 0 0 / 55%);
+}
 
-.board-cell:hover { background: var(--surface-2); }
-.board-cell-asks:hover { background: var(--accent-soft); filter: brightness(0.97); }
+@media (hover: hover) { .board-cell:hover { background: var(--surface-2); } }
+@media (hover: hover) { .board-cell-asks:hover { background: var(--accent-soft); filter: brightness(0.97); } }
 .board-cell:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 /* Drawn, not removed: a grid that closes a gap is a grid whose buttons have moved. */
 .board-cell-off { opacity: 0.45; cursor: not-allowed; }
@@ -1344,7 +1356,7 @@ body:has(.board-main-turned) :is(dialog.speaker-settings, dialog.board-editor) {
 .board-cell-alert, .board-grid-topics .board-cell-alert {
   background: #b3261e; border-color: #b3261e; color: #fff;
 }
-.board-cell-alert:hover { background: #b3261e; filter: brightness(0.93); }
+@media (hover: hover) { .board-cell-alert:hover { background: #b3261e; filter: brightness(0.93); } }
 .board-cell-alert .board-cell-mark { color: #fff; opacity: 0.22; }
 .board-cell-wide { grid-column: 1 / -1; }
 /* **A button that opens more buttons says so twice**: the dashed edge, and an arrow
@@ -1353,9 +1365,13 @@ body:has(.board-main-turned) :is(dialog.speaker-settings, dialog.board-editor) {
    room kept for it on both sides so the centred label never runs under it. The
    context list, where every button goes deeper, has neither. */
 .board-cell-more { padding-inline: 1.5em; }
+/* A double chevron in the button's own type colour -- white on the filled blue and the
+   alert red, where a muted grey was dark on dark -- and large enough to read as the
+   way in. The cell keeps room for it, so the fitted label never runs under it. */
+.board-cell-more { padding-inline-end: calc(var(--space-2) + 1.5em); }
 .board-cell-more::after {
-  content: '\203a' / ''; position: absolute; inset-inline-end: 0.4em; inset-block-start: 50%;
-  translate: 0 -50%; font-size: 1.6em; line-height: 1; color: var(--muted); pointer-events: none;
+  content: '\00bb' / ''; position: absolute; inset-inline-end: 0.35em; inset-block-start: 50%;
+  translate: 0 -50%; font-size: 3.2em; line-height: 1; color: inherit; opacity: 0.9; pointer-events: none;
 }
 [dir="rtl"] .board-cell-more::after { transform: scaleX(-1); }
 .board-grid-topics .board-cell-more { padding-inline: var(--space-2); }

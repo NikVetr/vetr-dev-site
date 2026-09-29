@@ -87,7 +87,7 @@ export function renderGrid(root, node, { label, available, onPick, lang, title, 
     // drawing is the one that changes what happens next: whether this message can be
     // answered, or only shown.
     if (button.kind === 'submenu') cell.classList.add('board-cell-more');
-    else if (button.kind === 'beacon') cell.classList.add('board-cell-beacon');
+    else if (button.kind === 'beacon') cell.classList.add('board-cell-beacon', `board-cell-beacon-${button.beacon}`);
     else if (button.replySetId) cell.classList.add('board-cell-asks');
     if (button.alert) cell.classList.add('board-cell-alert');
     if (button.own) cell.classList.add('board-cell-own');

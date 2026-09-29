@@ -201,16 +201,18 @@ button, .btn {
   align-items: center;
   gap: 0.45em;
 }
-button:hover, .btn:hover { background: var(--surface-2); }
+/* Hover only where there is a pointer to hover with: a phone keeps the last-tapped
+   button "hovered", which left it highlighted after the screen it opened was closed. */
+@media (hover: hover) { button:hover, .btn:hover { background: var(--surface-2); } }
 button:disabled { opacity: 0.5; cursor: not-allowed; }
 button.primary, .btn.primary {
   background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600;
 }
-button.primary:hover, .btn.primary:hover { filter: brightness(1.08); }
+@media (hover: hover) { button.primary:hover, .btn.primary:hover { filter: brightness(1.08); } }
 /* Subdued, but still a button: a transparent border and no fill read as plain
    text, so "All on / All off / Balance columns" looked like a sentence. */
 button.ghost { border-color: var(--line-soft); background: var(--surface); color: var(--muted); }
-button.ghost:hover { background: var(--surface-2); border-color: var(--line); color: var(--ink); }
+@media (hover: hover) { button.ghost:hover { background: var(--surface-2); border-color: var(--line); color: var(--ink); } }
 
 /* --- the chip toggle ----------------------------------------------------- */
 

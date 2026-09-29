@@ -156,14 +156,21 @@ export function topicMark(name, id, lang) {
   return svg;
 }
 
+/** The margin round a mark's ink, as a share of its height: the same above and below
+ * every mark, so a short drawing is drawn as tall as a tall one. */
+const MARGIN = 0.07;
+
 /**
- * **A mark centred on its ink, not on its box.** The drawings sit where they were
- * drawn in a shared box, and the chopsticks' bowl and the people's pair sat off the
- * button's middle; the box is moved to be centred on what is drawn, at the same scale
- * for every mark. Measured, so it needs the mark in the document.
+ * **A mark fitted to its ink, not to its box.** The drawings sit where they were drawn
+ * in a shared box, so the chopsticks' bowl sat off the button's middle and a short
+ * drawing -- the lotus, the capsule, the two people -- had more room above and below
+ * it than the rest. The box is its ink with the same margin all round, so every mark is
+ * centred and, where the button's height is what binds, stands as tall as the others.
+ * Measured, so it needs the mark in the document.
  * @param {SVGSVGElement} svg  a mark from `topicMark`, attached
  */
 export function centreMark(svg) {
   const ink = /** @type {SVGGraphicsElement} */ (svg.querySelector('.topic-ink')).getBBox();
-  svg.setAttribute('viewBox', `${ink.x + ink.width / 2 - 128} ${ink.y + ink.height / 2 - 104} 256 208`);
+  const m = ink.height * MARGIN;
+  svg.setAttribute('viewBox', `${ink.x - m} ${ink.y - m} ${ink.width + 2 * m} ${ink.height + 2 * m}`);
 }
