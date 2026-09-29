@@ -8,7 +8,7 @@
 // bars open it instead, so there is never a second settings screen beside the first.
 
 import { t } from './i18n.js';
-import { themeControl } from './theme.js';
+import { settingsCorner } from './speaker-settings.js';
 import { isNative, readResume, RESUME_DEPTHS, writeResume } from './platform/shell.js';
 
 /**
@@ -54,24 +54,6 @@ export function openAppearance(extra = []) {
   panel.addEventListener('close', () => panel.remove());
   document.body.append(panel);
   panel.showModal();
-}
-
-/**
- * A settings dialog's top corner: the dark-mode switch, then the small cross that
- * closes it. The switch is a setting of the whole app, the one every page's settings
- * share, so it sits with the dialog's own chrome rather than as a section of its own.
- * @param {HTMLDialogElement} panel
- */
-export function settingsCorner(panel) {
-  const close = document.createElement('button');
-  close.type = 'button';
-  close.className = 'speaker-close';
-  close.setAttribute('aria-label', t('gallery.previewClose'));
-  close.addEventListener('click', () => panel.close());
-  const corner = document.createElement('div');
-  corner.className = 'speaker-corner';
-  corner.append(themeControl(), close);
-  return corner;
 }
 
 /**
